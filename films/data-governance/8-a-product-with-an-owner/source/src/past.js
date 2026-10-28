@@ -201,8 +201,8 @@ function po_capPaint(cx,c,o){o=o||{};const sq=Math.cos(o.turn||0),w=58,h=72;cx.s
   cx.beginPath();cx.moveTo(-w,0);cx.bezierCurveTo(-w*0.96,-h*0.8,-w*0.42,-h*1.1,0,-h*1.08);cx.bezierCurveTo(w*0.42,-h*1.1,w*0.96,-h*0.8,w,0);cx.closePath();litFill(cx,c,-w,-h,w,0);seam(cx,c,0.5);
   // its felt: a soft nap, and the stitched seam up the middle, turning with it
   cx.strokeStyle=rgba(darken(c,0.3),0.5);cx.lineWidth=2.4;const sx=w*0.6*Math.sin(o.turn||0);cx.setLineDash([5,5]);cx.beginPath();cx.moveTo(sx,-4);cx.quadraticCurveTo(sx*0.8,-h*0.6,sx*0.3,-h*1.04);cx.stroke();cx.setLineDash([]);
-  if(o.seam>0){const a=o.seam;cx.fillStyle=rgba(darken(c,0.55),0.9*a);cx.beginPath();cx.moveTo(sx-3,-10);cx.quadraticCurveTo(sx-10*a,-30,sx-2,-50);cx.quadraticCurveTo(sx+8*a,-30,sx+3,-10);cx.closePath();cx.fill();
-    cx.strokeStyle=rgba([236,226,200],0.9*a);cx.lineWidth=1.6;for(const [dx,dy,ex,ey] of [[-2,-14,-14,-6],[2,-24,14,-28],[-1,-40,-12,-46]]){cx.beginPath();cx.moveTo(sx+dx,dy);cx.quadraticCurveTo(sx+(dx+ex)/2,dy+6,sx+ex,ey);cx.stroke();}}
+  if(o.seam>0){const a=o.seam;cx.fillStyle=rgba(darken(c,0.62),0.95*a);cx.beginPath();cx.moveTo(sx-3,-6);cx.quadraticCurveTo(sx-17*a,-34,sx-2,-62);cx.quadraticCurveTo(sx+14*a,-34,sx+3,-6);cx.closePath();cx.fill();
+    cx.strokeStyle=rgba(darken(c,0.5),0.95*a);cx.lineWidth=2.6;cx.lineCap="round";for(const [dx,dy,ex,ey] of [[-4,-14,-22,-4],[4,-26,22,-32],[-3,-44,-20,-54],[3,-52,18,-60]]){cx.beginPath();cx.moveTo(sx+dx,dy);cx.quadraticCurveTo(sx+(dx+ex)/2,dy+8,sx+ex,ey);cx.stroke();}}
   // the rolled brim
   cx.beginPath();cx.ellipse(0,-2,w+6,15*Math.max(0.5,sq),0,0,TAU);litFill(cx,darken(c,0.08),-w-6,-16,w+6,12);seam(cx,c,0.55);
   cx.strokeStyle=rgba(lighten(c,0.25),0.5);cx.lineWidth=2;cx.beginPath();cx.ellipse(0,-6,w,9,0,Math.PI*1.1,Math.PI*1.9);cx.stroke();cx.restore();}
@@ -443,7 +443,7 @@ function po_paintAirCrowd(ctx){wc_prep();const P=po_air,Zc=PO_AIR.Zc,R=wc_rng(51
 // trade's colour runs down the street. [street, colour, goods]
 const PO_TRADES=[[3,[232,184,64],"gold"],[0,[188,74,58],"caps"],[2,[96,104,176],"quilts"]];
 function po_paintAirTrade(ctx,i){wc_prep();const [si,col,kind]=PO_TRADES[i],[x0,z0,x1,z1,w]=PO_STREETS[si],Zc=PO_AIR.Zc,dx=x1-x0,dz=z1-z0,l=Math.hypot(dx,dz),N=[-dz/l,dx/l];
-  const band=[[x0+N[0]*w,z0+N[1]*w],[x1+N[0]*w,z1+N[1]*w],[x1-N[0]*w,z1-N[1]*w],[x0-N[0]*w,z0-N[1]*w]].map(p=>po_air(p[0],0.05,p[1]+Zc));po_fill(ctx,band,col,0.35,700+i);
+  const band=[[x0+N[0]*w,z0+N[1]*w],[x1+N[0]*w,z1+N[1]*w],[x1-N[0]*w,z1-N[1]*w],[x0-N[0]*w,z0-N[1]*w]].map(p=>po_air(p[0],0.05,p[1]+Zc));po_fill(ctx,band,col,0.6,700+i);
   for(const s of po_airShops()){if(s.si!==si)continue;const p=s.pts,R=wc_rng(s.seed+5),q=(u,v)=>[lerp(lerp(p.e[0],p.f[0],u),lerp(p.a0[0],p.b0[0],u),v),lerp(lerp(p.e[1],p.f[1],u),lerp(p.a0[1],p.b0[1],u),v)];
     // the goods laid out at the shop's front, under its awning
     for(let k=0;k<4;k++){const [gx,gy]=q(0.18+k*0.21,0.55),sz=Math.max(2.4,Math.hypot(p.b0[0]-p.a0[0],p.b0[1]-p.a0[1])*0.11);
@@ -580,7 +580,12 @@ Object.assign(POSE,{
   po_holdA:{L:[0.16,-2.05],R:[0.16,-2.05],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   po_holdB:{L:[0.16,-2.05],R:[0.16,-2.05],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0},
   po_poleA:{L:[0.34,0.3],R:[0.55,3.0],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
-  po_poleB:{L:[-0.26,-0.32],R:[0.55,3.0],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
+  po_poleB:{L:[-0.26,-0.32],R:[0.55,3.0],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0},
+  // sitting at work, stitching felt in the lap; the hand that pulls the thread up
+  po_stitch:{L:[0.22,-1.3],R:[0.3,-1.36],feet:20,shift:0,tilt:0.08,turn:0.05,gaze:[0.2,1.2],look:1},
+  po_stitchUp:{L:[0.22,-1.3],R:[0.58,-2.6],feet:20,shift:0,tilt:0.05,turn:0.05,gaze:[0.4,0.8],look:1},
+  // holding something up to look at it, then a nod over it
+  po_holdNod:{L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0.1,turn:0.06,gaze:[0.3,1.3],look:1}
 });
 // someone walking on the ground of a level camera C, from (X0, Z0) to (X1, Z1), from t0, at v metres a second: where their feet are on
 // the frame and how big they are, the step's bob and swing, when they arrive, which way they face
@@ -691,15 +696,16 @@ function po_strShops(era){const R=wc_rng(era==="1600"?911:913),L=[];
 function po_goods(ctx,kind,x,y,k,w,R){const n=Math.max(2,Math.round(w/0.34));
   for(let i=0;i<n;i++){const gx=x+(i+0.5)*w*k/n,c=PO.felt[i%5];
     if(kind==="caps"){const st=0.16*k;ctx.fillStyle=rgba(PO.woodDk,1);ctx.fillRect(gx-st*0.08,y-st,st*0.16,st);ctx.save();ctx.translate(gx,y-st);ctx.scale(k/420,k/420);po_capPaint(ctx,PO.felt[[2,0,4,2,1,3][(i+(R()*3|0))%6]],{turn:R()-0.5});ctx.restore();}
-    else if(kind==="cloth"){if(i%2)continue;const h=0.06*k;for(let j=0;j<3;j++){const cc=mix(PO.silk[(i+j*2+(R()*6|0))%6],[226,214,196],0.25),y0=y-j*h;
+    else if(kind==="cloth"){if(i%2)continue;const h=0.06*k;for(let j=0;j<3;j++){const cc=mix(PO_CLOTH[(i+j*2+(R()*6|0))%6],[226,214,196],0.3),y0=y-j*h;
         po_fill(ctx,[[gx-0.16*k,y0],[gx+0.16*k,y0],[gx+0.16*k,y0-h+1],[gx-0.16*k,y0-h+1]],cc,1,(gx*7+j)|0);ctx.strokeStyle=rgba(wc_dim(cc,0.3),0.6);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(gx-0.16*k,y0-h*0.5);ctx.lineTo(gx+0.12*k,y0-h*0.5);ctx.stroke();}}
     else if(kind==="copper"){const r=(0.1+R()*0.05)*k;ctx.fillStyle=rgba([196,118,70],1);ctx.beginPath();ctx.ellipse(gx,y-r,r,r*0.9,0,0,TAU);ctx.fill();ctx.fillStyle=rgba([170,96,56],1);ctx.fillRect(gx-r*0.7,y-r*2.1,r*1.4,r*0.4);
       ctx.fillStyle="rgba(255,236,200,0.7)";ctx.beginPath();ctx.ellipse(gx-r*0.35,y-r*1.25,r*0.2,r*0.35,0.4,0,TAU);ctx.fill();}
     else if(kind==="slippers"){const cc=[[214,170,62],[176,52,48],[200,190,170]][i%3];ctx.fillStyle=rgba(cc,1);ctx.beginPath();ctx.moveTo(gx-0.12*k,y);ctx.quadraticCurveTo(gx-0.1*k,y-0.08*k,gx+0.06*k,y-0.07*k);ctx.quadraticCurveTo(gx+0.16*k,y-0.08*k,gx+0.14*k,y-0.12*k);
       ctx.quadraticCurveTo(gx+0.18*k,y-0.02*k,gx+0.1*k,y);ctx.closePath();ctx.fill();}
     else if(kind==="spice"){const cc=[[200,120,40],[176,60,40],[214,180,60],[120,110,60]][i%4],r=0.13*k;ctx.fillStyle=rgba([206,184,140],1);ctx.fillRect(gx-r,y-r*1.3,r*2,r*1.3);ctx.fillStyle=rgba(cc,1);ctx.beginPath();ctx.ellipse(gx,y-r*1.3,r*1.05,r*0.45,0,Math.PI,TAU);ctx.fill();}
-    else if(kind==="quilts"){if(i%2)continue;const h=0.07*k;for(let j=0;j<3;j++){const cc=mix([[200,70,70],[70,110,170],[220,180,70],[60,140,110]][(i+j)%4],[226,214,196],0.35),y0=y-j*h;
-        po_fill(ctx,[[gx-0.17*k,y0],[gx+0.17*k,y0],[gx+0.17*k,y0-h+1],[gx-0.17*k,y0-h+1]],cc,1,(gx*5+j)|0);ctx.strokeStyle=rgba([250,244,230],0.6);ctx.lineWidth=1;ctx.strokeRect(gx-0.12*k,y0-h*0.8,0.24*k,h*0.6);}}
+    else if(kind==="quilts"){if(i%2)continue;const h=0.07*k;for(let j=0;j<3;j++){const cc=mix([[176,84,74],[84,104,140],[196,166,96],[96,128,104]][(i+j)%4],[226,214,196],0.45),y0=y-j*h;
+        po_fill(ctx,[[gx-0.17*k,y0],[gx+0.17*k,y0],[gx+0.18*k,y0-h*0.5],[gx+0.16*k,y0-h+1],[gx-0.16*k,y0-h+1],[gx-0.18*k,y0-h*0.5]],cc,1,(gx*5+j)|0);ctx.strokeStyle=rgba(wc_dim(cc,0.3),0.45);ctx.lineWidth=1;ctx.setLineDash([3,3]);
+        ctx.beginPath();ctx.moveTo(gx-0.13*k,y0-h*0.5);ctx.lineTo(gx+0.13*k,y0-h*0.5);ctx.stroke();ctx.setLineDash([]);}}
     else if(kind==="pots"){const r=(0.09+R()*0.04)*k;ctx.fillStyle=rgba([186,110,74],1);ctx.beginPath();ctx.moveTo(gx-r*0.4,y);ctx.quadraticCurveTo(gx-r*1.2,y-r,gx-r*0.5,y-r*1.9);ctx.lineTo(gx+r*0.5,y-r*1.9);ctx.quadraticCurveTo(gx+r*1.2,y-r,gx+r*0.4,y);ctx.closePath();ctx.fill();
       ctx.fillStyle="rgba(255,230,200,0.4)";ctx.fillRect(gx-r*0.55,y-r*1.2,r*0.18,r*0.7);}}}
 // one shop: inside, its back wall, ceiling and raised floor, dim, and its far side wall facing us with shelves of goods; then its front:
@@ -782,7 +788,8 @@ function po_strGround(ctx){const C=PO_STR,P=po_st;wc_wash(ctx,[[-60,C.hz-4],[W+6
 // the crowd in a street, still, far to near: walking to and fro, a few stopped at the stalls. n: how many; seen from behind or in front
 function po_strCrowd(ctx,n,seed,zmin){const C=PO_STR,R=wc_rng(seed),L=[];for(let i=0;i<n;i++){const Z=(zmin||10)+Math.pow(R(),0.8)*40,stall=R()<0.3,sd=R()<0.5?-1:1,
     X=stall?sd*(C.half-0.85-R()*0.25):(R()-0.5)*2*(C.half-1.2);L.push({X,Z,id:"po_c"+(i%16),back:stall?true:R()<0.5,ph:R()*TAU,flip:R()<0.5,walk:!stall});}
-  L.sort((a,b)=>b.Z-a.Z).forEach(p=>{const a=po_at(C,p.X,p.Z);if(p.back)po_back(ctx,p.id,a.x,a.y,a.s,{ph:p.walk?p.ph:0});
+  // people near each other in depth are never the same person
+  L.sort((a,b)=>b.Z-a.Z).forEach((p,i)=>{p.id="po_c"+((i*7)%16);const a=po_at(C,p.X,p.Z);if(p.back)po_back(ctx,p.id,a.x,a.y,a.s,{ph:p.walk?p.ph:0});
     else person(ctx,p.id,a.x,a.y,a.s,{pose:"stand",pose2:p.ph>Math.PI?"walkA":"walkB",mix:0.8,flip:p.flip,t:p.ph*3});});}
 // the street, painted once: sky, the ground, the end, the houses, the shops and the canvases far to near, the crowd
 function po_paintStreet(ctx,era){const C=PO_STR;wc_sky(ctx,C.hz-60,era==="1600"?1203:1205,{cx:500,cw:900,cy:40,ch:120,clouds:3});wc_prep();
@@ -790,7 +797,103 @@ function po_paintStreet(ctx,era){const C=PO_STR;wc_sky(ctx,C.hz-60,era==="1600"?
   const items=po_strShops(era).map((sh,i,L)=>({z:sh.z0,f:()=>po_strShop(ctx,sh,!L.some(o=>o.s===sh.s&&o.z0<sh.z0))}));
   (era==="1600"?[[14,[230,218,190]],[30,[218,196,158]]]:[[12,[218,200,164]],[26,[230,218,190]],[40,[206,182,146]]]).forEach(([z,c])=>items.push({z:z+1.6,f:()=>po_strCanvas(ctx,z,c)}));
   items.sort((a,b)=>b.z-a.z).forEach(it=>it.f());po_grain(ctx,0.35);
-  po_strCrowd(ctx,era==="1600"?18:44,era==="1600"?1207:1209,era==="1600"?12:9.5);
+  po_strCrowd(ctx,era==="1600"?18:70,era==="1600"?1207:1209,era==="1600"?12:8.0);
   // the shade of the canvases on the ground, soft
   ctx.save();ctx.filter="blur(8px)";for(const z of era==="1600"?[14,30]:[12,26,40]){const pts=[po_st(-C.half+0.6,0,z+1.4),po_st(C.half-0.6,0,z+1.4),po_st(C.half-0.4,0,z+4.6),po_st(-C.half+0.4,0,z+4.6)];
     ctx.fillStyle="rgba(110,90,70,0.16)";wc_tr(ctx,pts);ctx.fill();}ctx.filter="none";ctx.restore();}
+
+/* ---------- the 1600s, close: the cloth seller's counter ---------- */
+// at the counter, a little above it: the stall's back wall of boards and two shelves of folded cloth in its shade, then the counter's
+// top in the light and its front of boards. The seller stands behind it (gv_behind, cut at its back edge, top); the bolt and the length
+// unrolled from it lie on it (po_paintClothFront); the inspector's man lays the market's rod along the length, step by step, and the
+// inspector's back is at the right edge, in the street. roll: the bolt's front face (x, y, r); cloth: where the length runs; rod: where
+// its first step starts and how long it is; y: where it lies on the cloth; seller: where he stands and his scale
+const PO_CC={top:600,front:720,roll:[322,626,76],cloth:[398,1530],rod:[410,400],y:688,seller:[760,1.05]};
+// cloth of the time, dyed and undyed: madder, indigo, saffron, undyed wool, olive, plum
+const PO_CLOTH=[[164,74,64],[70,84,132],[196,156,86],[226,212,184],[108,116,86],[140,96,120]];
+function po_paintClothClose(ctx){const C=PO_CC,R=wc_rng(1401);ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_prep();
+  // the back wall: boards, a knot here and there
+  wc_wash(ctx,wc_rect(-40,-40,W+80,C.top+60),[140,104,76],{kind:"plaster",seed:1402,line:false});
+  ctx.save();ctx.lineCap="round";for(let x=30;x<W;x+=104+R()*40){ctx.strokeStyle=rgba([70,50,38],0.32);ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(x,-10);ctx.lineTo(x+(R()-0.5)*4,C.top);ctx.stroke();
+    ctx.strokeStyle=rgba([206,170,128],0.16);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+4,-10);ctx.lineTo(x+4,C.top);ctx.stroke();}
+  for(let i=0;i<14;i++){const kx=R()*W,ky=R()*C.top;ctx.strokeStyle=rgba([80,58,42],0.25);ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(kx,ky,7+R()*5,3+R()*2,0,0,TAU);ctx.stroke();}ctx.restore();
+  // two shelves, and folded cloth on them in stacks
+  for(const [sy,n0] of [[214,0],[420,3]]){wc_wash(ctx,wc_rect(-40,sy,W+80,20),[156,116,82],{kind:"trim",seed:1403+sy,lw:1.2});
+    ctx.save();ctx.filter="blur(5px)";ctx.fillStyle="rgba(50,34,26,0.35)";ctx.fillRect(-40,sy+20,W+80,16);ctx.filter="none";ctx.restore();
+    for(let k=0,x=90+n0*24;x<W-150;k++,x+=200+R()*44){const n=2+Math.floor(R()*3);for(let j=0;j<n;j++){const c=mix(PO_CLOTH[(k*2+j+n0)%PO_CLOTH.length],[150,120,96],0.28),w=150+R()*10,h=30,y0=sy-(j+1)*h+2;
+        const pts=[[x,y0+h],[x+w,y0+h],[x+w+2,y0+5],[x+w-6,y0],[x+6,y0],[x-2,y0+5]];po_fill(ctx,pts,c,1,1410+k*7+j);
+        ctx.strokeStyle=rgba(wc_dim(c,0.35),0.6);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x+4,y0+h*0.56);ctx.lineTo(x+w-4,y0+h*0.56);ctx.stroke();
+        ctx.strokeStyle=rgba(wc_lit(c,0.3),0.5);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+8,y0+2.5);ctx.lineTo(x+w-8,y0+2.5);ctx.stroke();po_line(ctx,pts,1,0.35);}}}
+  // the shade: deeper high up and at the left, where the light off the street doesn't reach
+  ctx.save();ctx.globalCompositeOperation="multiply";let g=ctx.createLinearGradient(0,0,0,C.top);g.addColorStop(0,"rgba(112,92,82,0.85)");g.addColorStop(1,"rgba(236,220,200,0.35)");ctx.fillStyle=g;ctx.fillRect(0,0,W,C.top);
+  g=ctx.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(150,130,120,0.55)");g.addColorStop(0.55,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,C.top);ctx.restore();
+  // the stall's corner post at the left
+  wc_wash(ctx,[[0,-20],[66,-20],[70,C.top],[0,C.top]],PO.woodDk,{kind:"build",seed:1406,lw:1.2});
+  // the counter: its top in the light, then its front of boards
+  const top=[[90,C.top],[1830,C.top],[W+40,C.front],[-40,C.front]];wc_wash(ctx,top,[216,176,128],{kind:"build",seed:1407,lw:1.4});
+  ctx.save();wc_tr(ctx,top);ctx.clip();ctx.strokeStyle=rgba([150,110,76],0.3);ctx.lineWidth=1.6;for(const v of [0.3,0.62]){const y=lerp(C.top,C.front,v);ctx.beginPath();ctx.moveTo(-40,y);ctx.lineTo(W+40,y);ctx.stroke();}
+    g=ctx.createLinearGradient(0,C.top,0,C.front);g.addColorStop(0,"rgba(120,90,70,0.28)");g.addColorStop(1,"rgba(255,240,210,0)");ctx.fillStyle=g;ctx.fillRect(0,C.top,W,C.front-C.top);ctx.restore();
+  const fr=wc_rect(-40,C.front,W+80,H-C.front+40);wc_wash(ctx,fr,[158,114,80],{kind:"build",seed:1408,lw:1.4});
+  ctx.save();wc_tr(ctx,fr);ctx.clip();ctx.strokeStyle=rgba([96,66,46],0.4);ctx.lineWidth=2.2;for(let y=C.front+74;y<H;y+=80){ctx.beginPath();ctx.moveTo(-40,y);ctx.lineTo(W+40,y+(R()-0.5)*3);ctx.stroke();}
+    g=ctx.createLinearGradient(0,C.front,0,C.front+44);g.addColorStop(0,"rgba(60,40,30,0.38)");g.addColorStop(1,"rgba(60,40,30,0)");ctx.fillStyle=g;ctx.fillRect(0,C.front,W,44);ctx.restore();
+  po_grain(ctx,0.5);}
+// the bolt and the length unrolled from it, on the counter: indigo wool, a pale selvedge along its near edge, cut straight at its end;
+// the bolt's far end showing over it, and its front face, the cloth wound round and round
+function po_paintClothFront(ctx){const C=PO_CC,[rx,ry,rr]=C.roll,[c0,c1]=C.cloth,col=PO_CLOTH[1];wc_prep();
+  const yb=C.top+16,yf=C.front-18,L=[[c0,yb],[c1,yb+1],[c1+4,yf],[c0,yf]];wc_wash(ctx,L,col,{kind:"thing",seed:1411,lw:1.3});
+  ctx.save();wc_tr(ctx,L);ctx.clip();ctx.strokeStyle=rgba(wc_lit(col,0.22),0.35);ctx.lineWidth=1.2;for(let y=yb+6;y<yf;y+=7){ctx.beginPath();ctx.moveTo(c0,y);ctx.lineTo(c1+4,y);ctx.stroke();}
+    ctx.fillStyle=rgba([206,196,168],0.85);ctx.fillRect(c0,yf-11,c1-c0+6,7);ctx.restore();
+  const bk=[rx,ry-64];ctx.fillStyle=rgba(wc_dim(col,0.22),1);ctx.beginPath();ctx.ellipse(bk[0],bk[1],rr*0.92,rr*0.92,0,0,TAU);ctx.fill();
+  ctx.beginPath();ctx.moveTo(rx-rr,ry);ctx.lineTo(bk[0]-rr*0.92,bk[1]);ctx.lineTo(bk[0]+rr*0.92,bk[1]);ctx.lineTo(rx+rr,ry);ctx.closePath();ctx.fill();
+  wc_wash(ctx,wc_ell(rx,ry,rr,rr,28),wc_lit(col,0.06),{kind:"thing",seed:1412,lw:1.4});
+  ctx.strokeStyle=rgba(wc_dim(col,0.38),0.6);ctx.lineWidth=1.6;ctx.beginPath();for(let a=0;a<TAU*6;a+=0.08){const r=rr*0.12+rr*0.84*a/(TAU*6),x=rx+Math.cos(a)*r,y=ry+Math.sin(a)*r;a?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();
+  ctx.fillStyle=rgba(wc_dim(col,0.5),1);ctx.beginPath();ctx.arc(rx,ry,rr*0.12,0,TAU);ctx.fill();po_grain(ctx,0.6);}
+// the market's rod lying on the cloth from x, lifted by lift pixels: its top face and front, its red marks, its darker ends; its shadow
+function po_rodFlat(ctx,x,y,L,lift){const c=[222,184,126];
+  ctx.save();ctx.filter="blur(4px)";ctx.fillStyle=`rgba(30,30,50,${0.3*(1-clamp(lift/40,0,0.8))})`;ctx.fillRect(x+4+lift*0.3,y+2,L,8+lift*0.15);ctx.filter="none";ctx.restore();
+  y-=lift;po_fill(ctx,[[x,y-16],[x+L,y-16],[x+L+4,y-6],[x+4,y-6]],wc_lit(c,0.14),1,1421);po_fill(ctx,[[x+4,y-6],[x+L+4,y-6],[x+L+4,y+6],[x+4,y+6]],wc_dim(c,0.2),1,1422);
+  ctx.fillStyle=rgba([176,50,40],0.95);for(let i=0;i<=8;i++){const mx=x+3+i*(L-3)/8;ctx.fillRect(mx-2.2,y-16,4.4,i%4===0?22:12);}
+  ctx.fillStyle=rgba([120,92,60],1);ctx.fillRect(x,y-16,8,22);ctx.fillRect(x+L-4,y-16,8,22);po_line(ctx,[[x,y-16],[x+L,y-16],[x+L+4,y+6],[x+4,y+6]],1,0.5);}
+// the inspector's man's hand on the rod, his sleeve coming up from the street below the frame: a tapering sleeve, its cuff, the hand
+// round the rod, its thumb along it
+function po_rodHand(ctx,hx,hy){const P_=PEOPLE.po_rodman,sl=P_.top.c,cuff=P_.top.inner,sk=P_.skin,b0=[hx+230,H+60],b1=[hx+46,hy+40];
+  const dx=b1[0]-b0[0],dy=b1[1]-b0[1],l=Math.hypot(dx,dy),nx=-dy/l,ny=dx/l,sh=(p,q,r)=>[[p[0]+nx*r,p[1]+ny*r],[q[0]+nx*r*0.62,q[1]+ny*r*0.62],[q[0]-nx*r*0.62,q[1]-ny*r*0.62],[p[0]-nx*r,p[1]-ny*r]];
+  wc_wash(ctx,sh(b0,b1,64),sl,{kind:"thing",seed:1431,lw:1.3});const cf=[b1[0]-dx/l*16,b1[1]-dy/l*16];wc_wash(ctx,sh(cf,b1,44),cuff,{kind:"thing",seed:1432,lw:1.1});
+  // the hand: the back of it over the rod, the fingers round its far side, the thumb along it
+  const hp=[[hx-30,hy-4],[hx-24,hy-30],[hx+2,hy-40],[hx+34,hy-34],[hx+56,hy-12],[hx+60,hy+24],[hx+40,hy+42],[hx+8,hy+30]];wc_wash(ctx,hp,sk,{kind:"thing",seed:1433,lw:1.2});
+  ctx.save();ctx.strokeStyle=rgba(wc_dim(sk,0.3),0.6);ctx.lineWidth=2;ctx.lineCap="round";for(const k of [0,1,2]){const fx=hx-20+k*18;ctx.beginPath();ctx.moveTo(fx,hy-30+k*3);ctx.quadraticCurveTo(fx-4,hy-12,fx-2,hy+2);ctx.stroke();}
+  ctx.beginPath();ctx.moveTo(hx+42,hy+18);ctx.quadraticCurveTo(hx+10,hy+10,hx-12,hy+12);ctx.stroke();ctx.restore();}
+// sold short: a red bracket over the gap between the cloth's end and the rod's last mark, drawn out from its middle
+function po_shortMark(ctx,x0,x1,y,p){if(p<=0)return;const e=easeCam(clamp(p,0,1)),xm=(x0+x1)/2,w=(x1-x0)/2*e;ctx.save();ctx.strokeStyle=rgba(GV.redInk,0.92);ctx.lineWidth=5;ctx.lineCap="round";ctx.lineJoin="round";
+  ctx.beginPath();ctx.moveTo(xm-w,y+20);ctx.lineTo(xm-w,y);ctx.lineTo(xm+w,y);ctx.lineTo(xm+w,y+20);ctx.stroke();ctx.restore();}
+// the rod at a moment: laid at step k0 when the shot starts, and stepped along to the next at each time in steps (each step 0.85 s:
+// lifted, carried, laid down); a pale chalk tick on the cloth where each step ended. Returns where its far end is
+function po_rodAt(ctx,tt,k0,steps){const C=PO_CC,[x0,L]=C.rod;let k=k0,u=0;steps.forEach(ts=>{if(tt>=ts+0.85)k++;else if(tt>ts)u=easeCam((tt-ts)/0.85);});
+  for(let i=1;i<=k;i++){const cx=x0+i*L;if(cx>C.cloth[1])continue;ctx.fillStyle=rgba([236,232,220],0.85);ctx.fillRect(cx-2,C.front-36,4,22);}
+  const x=x0+(k+u)*L,lift=Math.sin(Math.PI*u)*26;po_rodFlat(ctx,x,C.y,L,lift);po_rodHand(ctx,x+150,C.y-6-lift);return x+L;}
+
+/* ---------- the light of another hour, and plain paper ---------- */
+// laid over everything in a street: "next", the next morning, cooler and brighter from the left; "eve", the evening, warm and low, a glow
+// at the street's end
+function po_light(ctx,kind,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha=a;let g;
+  if(kind==="eve"){ctx.globalCompositeOperation="multiply";g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgb(232,170,124)");g.addColorStop(0.5,"rgb(246,208,166)");g.addColorStop(1,"rgb(212,168,150)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation="screen";g=ctx.createRadialGradient(960,430,40,960,430,760);g.addColorStop(0,"rgba(255,186,116,0.5)");g.addColorStop(1,"rgba(255,186,116,0)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+  else{ctx.globalCompositeOperation="screen";g=ctx.createRadialGradient(240,60,60,240,60,1400);g.addColorStop(0,"rgba(255,246,222,0.36)");g.addColorStop(1,"rgba(214,228,250,0.06)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+  ctx.restore();}
+// a plain sheet of the series' paper, for the cards that come out of the story
+function po_paintPlain(ctx){ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_prep();wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),[244,236,220],{kind:"plaster",seed:1451,line:false});
+  const g=ctx.createRadialGradient(960,500,300,960,540,1200);g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(1,"rgba(150,130,110,0.16)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}
+// a length of cloth just bought, held along the outstretched arm to see its length: over the arm from the shoulder to the hand, hanging
+// below it in a soft fold; past the hand, a dashed outline where the length paid for would end, and a red tick there
+function po_heldClothArm(cx,P_,hands){const r=hands[1],sd=Math.sign(r[0])||1,sh=[sd*P_.build.sh*0.5,-424],c=PO_CLOTH[2],l=Math.hypot(r[0]-sh[0],r[1]-sh[1]),
+    dx=(r[0]-sh[0])/l,dy=(r[1]-sh[1])/l,nx=-dy*sd,ny=dx*sd,q=(u,v)=>[sh[0]+dx*u*l+nx*v,sh[1]+dy*u*l+ny*v],ext=96,pts=a=>{cx.beginPath();a.forEach((p,i)=>i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]));cx.closePath();};
+  // where it should have ended, a hand further on: a pale ghost of the cloth that isn't there, its dashed edge, and a red tick at its end
+  const g=[q(1,-14),[r[0]+dx*ext-nx*14,r[1]+dy*ext-ny*14],[r[0]+dx*ext+nx*40,r[1]+dy*ext+ny*40],q(1,40)];pts(g);cx.fillStyle=rgba([252,248,238],0.8);cx.fill();
+  cx.save();cx.setLineDash([11,8]);cx.strokeStyle=rgba(WC_INK,0.85);cx.lineWidth=4;cx.lineJoin="round";cx.stroke();cx.restore();
+  const e1=[r[0]+dx*ext,r[1]+dy*ext];cx.strokeStyle=rgba(GV.redInk,0.95);cx.lineWidth=8;cx.lineCap="round";cx.beginPath();cx.moveTo(e1[0]-nx*30,e1[1]-ny*30);cx.lineTo(e1[0]+nx*56,e1[1]+ny*56);cx.stroke();
+  // the cloth: over the arm, hanging below it in a soft fold, its end falling from the hand
+  const top=[],bot=[];for(let i=0;i<=8;i++){const u=i/8;top.push(q(u,-14));bot.push(q(u,38+8*Math.sin(Math.PI*u)));}
+  pts(top.concat(bot.reverse()));litFill(cx,c,Math.min(sh[0],r[0]),sh[1]-20,Math.max(sh[0],r[0]),r[1]+60);seam(cx,c,0.55);
+  pts([q(0.9,30),q(1.0,-12),[r[0]+dx*4+nx*86,r[1]+dy*4+ny*86],[r[0]-dx*26+nx*80,r[1]-dy*26+ny*80]]);litFill(cx,wc_dim(c,0.1),r[0]-40,r[1],r[0]+40,r[1]+90);seam(cx,c,0.5);
+  cx.lineCap="round";cx.strokeStyle=rgba(darken(c,0.3),0.45);cx.lineWidth=2;for(const v of [6,20,32]){cx.beginPath();for(let i=0;i<=8;i++){const p=q(i/8,v+5*Math.sin(Math.PI*i/8));i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1]);}cx.stroke();}
+  fingers(cx,P_,[r]);}

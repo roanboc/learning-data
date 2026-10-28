@@ -216,5 +216,27 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
       po_planTable(x,tt,{out:["clara"],pose:{noor:{pose:"listen",pose2:"po_lookUpR",mix:look,flip:false,expr:"smile"},yusuf:{pose:"listen",pose2:"po_lookUpR",mix:look,flip:false,carry:heldNotebook}}});}}]);
   setScreen(ctx,S);wc_paperOver(ctx,S);});
 
+// ---- 4 · Who answers for what: the product's owner and the meaning's owner, two jobs, as in the bazaar ----
+// the floor, close on Planning's office and the registrar's: the people, then the cards on the glass, then (o.gold) a gold tag over each
+function po_whoFloor(x,tt,P,o){o=o||{};const G=PO_GC,nod=o.nod||0;
+  po_floor(x,tt,{pose:{clara:{pose:"listen",expr:o.smile?"smile":"calm",nod:0.06*nod},mei:{pose:"hold",carry:heldNotebook,expr:o.smile?"smile":"calm",nod:0.06*nod},yusuf:{pose:"write",carry:heldNotebook}}});
+  po_glassCard(x,G.clara,G.y,"Clara","answers for the product",fin(tt,P.card,0.5));G.jobs.forEach((s_,i)=>po_tagAt(x,tt,P.jobs[i],null,G.clara,G.jy+i*G.jgap,s_,{size:20}));
+  po_glassCard(x,G.mei,G.y,"Mei","decides what award means",fin(tt,P.mei,0.5));
+  if(o.gold){po_tagAt(x,tt,P.meaning,null,G.mei,G.y-34,"the meaning",{size:22,wash:GV.gold,washA:0.4});po_tagAt(x,tt,P.product,null,G.clara,G.y-34,"the product",{size:22,wash:GV.gold,washA:0.4});}}
+scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{card:c.clara+0.2,jobs:[w("clara","on time"),w("clara","keeps its"),w("clara","users are")],mei:w("mei","Mei")-0.2,baz:c.guild-0.3,gd:w("guild","guild's"),ms:w("guild","each master"),
+      fl:c.two-0.4,meaning:w("two","meaning"),product:w("two","product"),diff:w("two","different")};});
+  const G=PO_GC.cam;
+  gv_shots(ctx,S,t,sc.dur,[
+    // the floor: on Planning's glass, Clara's card, and what she answers for, one by one; on the registrar's, Mei's
+    {at:0,place:"floor",keys:[[0,G[0],G[1],G[2]],[0.1,G[0],G[1]-6,G[2]+0.03]],d:6,draw:(x,tt)=>po_whoFloor(x,tt,P)},
+    // the cap makers' street again: the guild says what the goods must be; the master answers for his stall
+    {at:P.baz,place:"st1600",keys:[[P.baz,711,560,1.35],[P.baz+0.1,700,560,1.38]],d:5,draw:(x,tt)=>{po_appr(x,tt);po_master(x,tt,{expr:tt>P.ms+0.4?"smile":"calm"});po_officer(x,tt,P.gd+0.3);
+      po_tagAt(x,tt,P.gd,null,607,404,"the guild · what the goods must be",{size:30});po_tagAt(x,tt,P.ms,null,300,316,"the master · answers for his stall",{size:30});}},
+    // the floor again: the two cards side by side, the meaning's owner and the product's; two people, two jobs
+    {at:P.fl,place:"floor",keys:[[P.fl,G[0],G[1],G[2]],[P.fl+0.1,G[0],G[1]-6,G[2]+0.03]],d:5,draw:(x,tt)=>po_whoFloor(x,tt,P,{gold:true,smile:tt>P.diff,nod:Math.max(0,Math.sin(Math.PI*clamp((tt-P.diff)/1.2,0,1)))})}]);
+  setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1600s"]],gv_io(t,P.baz+0.2,P.fl,0.4));
+  wc_paperOver(ctx,S);});
+
 /* scaffold */
-["answers","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["job","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

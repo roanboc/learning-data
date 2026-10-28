@@ -47,7 +47,7 @@ Then, if you like:
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class, and masks direct personal data for everyone outside the group. One policy by tag instead, and Ontos: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, and Ontos: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -180,6 +180,7 @@ project/
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
+│   ├── governance/           on Databricks: each column's class and each table's area as tags, the policy
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
@@ -190,8 +191,9 @@ project/
 │   ├── profiling/            evidence about the sources and the core: keys, nulls, orphans, emails,
 │   │                         late changes, credit counted towards several awards
 │   ├── design/               evidence for a modelling choice: fan-out without point in time
-│   └── validation/           checking the result: reconcile with the census and tuition reports,
-│                             as-was and as-is
+│   ├── validation/           checking the result: reconcile with the census and tuition reports,
+│   │                         as-was and as-is
+│   └── governance/           on Databricks: who read a table, and the access review
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.

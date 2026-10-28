@@ -189,3 +189,20 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-12]
     implemented_in: [governance.py]
+
+  - id: DEC-PRJ-15
+    step: operate_and_evolve
+    title: Each table's area becomes a tag on Databricks, so the Discover page lays tables out by area
+    text: 'On Databricks, every table other teams read gets a key-only Unity Catalog tag named after its
+      model''s domain (meta.domain): student, course, learning, planning, finance or wallet. Each area is
+      created once on the Discover page as a domain, on a governed tag of its name, and the page lays the
+      tables out by area. The catalog and its schemas stay as dbt builds them, a schema for each layer. On
+      DuckDB, nothing: it has no tags.'
+    why: People look for data by area, not by layer. The domain is decided once, where the model is, and
+      checked on every pull request (DEC-PRJ-12); pushed to the platform from there, the platform's areas
+      and the project's can't drift.
+    decided_by: Noor, data architect, with Sam Okafor, who runs the data platform
+    decided_on: 2026-10-28
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-PRJ-13]
+    implemented_in: [domain_tag.sql, dbt_project.yml]

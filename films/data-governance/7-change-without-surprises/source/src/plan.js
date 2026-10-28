@@ -171,8 +171,9 @@ function cw_calendar(ctx,o){o=o||{};const {w,h}=CW_CAL;ctx.save();ctx.filter="bl
   for(let r=0;r<5;r++)for(let c=0;c<7;c++){const n=r*7+c+1;if(n>31)continue;cw_T(ctx,String(n),60+c*112+14,236+r*100+38,{w:600,size:28,col:c>4?[160,150,140]:WC_INK});}
   // the board's day, ringed in red, and next month's, at the foot; they fade when the board meets only when a change needs it
   const fade=1-(o.fade||0),[bx,by]=cw_calCell(...CW_CAL.board);if(o.ring>0)withA(ctx,fade,()=>wc_ring(ctx,bx,by,46,38,o.ring,{col:GV.redInk,lw:5,seed:13}));
-  if(o.draft>0){const e=easeCam(clamp(o.draft,0,1)),[dx,dy]=cw_calCell(...CW_CAL.day);ctx.save();ctx.translate(lerp(dx+260,dx,e),lerp(dy-90,dy,e));ctx.rotate(-0.05*(1-e));
-    withA(ctx,clamp(o.draft*2,0,1),()=>{wc_panel(ctx,-100,-36,200,72,{kind:"card",wash:GV.gold,washA:0.55,seed:51});cw_T(ctx,"draft",0,-4,{w:800,size:28,align:"center",col:GV.goldInk});cw_T(ctx,"submission",0,26,{w:700,size:28,align:"center",col:GV.goldInk});});ctx.restore();}
+  // (the card lands under the day's number, so the number still says which day it is)
+  if(o.draft>0){const e=easeCam(clamp(o.draft,0,1)),[dx,dy0]=cw_calCell(...CW_CAL.day),dy=dy0+26;ctx.save();ctx.translate(lerp(dx+260,dx,e),lerp(dy-90,dy,e));ctx.rotate(-0.05*(1-e));
+    withA(ctx,clamp(o.draft*2,0,1),()=>{wc_panel(ctx,-100,-30,200,60,{kind:"card",wash:GV.gold,washA:0.55,seed:51});cw_T(ctx,"draft",0,-7,{w:800,size:28,align:"center",col:GV.goldInk});cw_T(ctx,"submission",0,20,{w:700,size:28,align:"center",col:GV.goldInk});});ctx.restore();}
   if(o.today>0){const [tx,ty]=cw_calCell(...CW_CAL.today);wc_ring(ctx,tx,ty,48,40,o.today,{col:GV.goldInk,lw:6,seed:17});}
   // the note that goes over "once a month" in its name: the board meets for a change that needs it
   if(o.note>0){const k=0.9+0.1*spring(fin(o.note,0,1));ctx.save();ctx.translate(664,64);ctx.rotate(-0.025);ctx.scale(k,k);withA(ctx,clamp(o.note*2,0,1),()=>wc_tag(ctx,0,0,"for a change that needs it",{align:"center",size:32,wash:GV.gold,washA:0.55}));ctx.restore();}}

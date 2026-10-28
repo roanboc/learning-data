@@ -324,8 +324,12 @@ function rr_paintTomDesk(ctx){const X=RR_TX,top=X.top;gv_deskFront(ctx,top,[214,
   for(let i=0;i<5;i++)wc_flat(ctx,wc_rect(1200+i*3,top-8-i*8,220,10),[[236,170,34],[250,250,246],[96,160,176],[250,250,246],[200,110,90]][i],1,"leaflet");gv_mug(ctx,250,top+10,[96,160,176]);}
 // the poster's heading, drawn every frame so it reads
 function rr_tomPoster(ctx){const [px,py,pw]=RR_TX.poster;wc_T(ctx,"Short courses",px+30,py+74,{w:800,size:40,col:WC_DARK});wc_T(ctx,"this term",px+pw-30,py+74,{w:600,size:30,align:"right",col:WC_MUTED});}
-// what his screen shows, small, in the desk's view: the follow-up list's lines (n of them), too small to read
-function rr_tomScreenList(ctx,n){const [x,y,w,h]=RR_TX.screen;gv_screen(ctx,x,y,w,h,null,q=>{for(let i=0;i<n;i++){q.fillStyle=rgba(i===0?[214,190,150]:[200,204,216],0.9);q.fillRect(x+30,y+70+i*40,w-60,24);}},{barH:30});}
+// what his screen shows in the desk's view: the follow-up list, its title, its columns and n rows (too small to read), the first,
+// February's walk-in, lit gold and its days open amber
+function rr_tomScreenList(ctx,n){const [x,y,w,h]=RR_TX.screen,C=[[0.05,0.13],[0.21,0.26],[0.51,0.15],[0.69,0.16],[0.89,0.06]];
+  gv_screen(ctx,x,y,w,h,"Enrolments to follow up",q=>{q.fillStyle=rgba(WC_MUTED,0.35);C.forEach(([a,b])=>q.fillRect(x+w*a,y+74,w*b*0.7,10));
+    for(let i=0;i<n;i++){const yy=y+106+i*40;if(i===0)gv_tint(q,x+14,yy-11,w-28,36,GV.gold,0.45);
+      C.forEach(([a,b],j)=>{q.fillStyle=rgba(j===4&&i===0?GV.amberInk:[176,182,196],0.85);q.fillRect(x+w*a,yy,w*b*(j===1?0.9:0.8),14);});}},{barH:48,titleSize:28});}
 // the learning team's desk from above, for the papers on it: pale beech with its grain, Tom's blue mug, a pencil, the edge of his
 // keyboard and a fan of this term's leaflets
 const RR_TT={wood:[214,178,138],log:[310,176,1300],card:[460,150,1000]};
@@ -338,12 +342,12 @@ function rr_paintTomTop(ctx){const col=RR_TT.wood;ctx.fillStyle=rgba(WC_PAPER,1)
   wc_part(ctx,[[60,980],[330,900],[336,912],[66,994]],[244,196,80],1);wc_flat(ctx,[[330,900],[360,892],[336,912]],[60,54,58],1,"tip");
   [[1690,900,-0.18,[236,170,34]],[1720,930,-0.05,[96,160,176]],[1745,960,0.1,[200,110,90]]].forEach(([lx,ly,r,c])=>{ctx.save();ctx.translate(lx,ly);ctx.rotate(r);
     gv_sheet(ctx,-120,-150,240,300,{col:[251,250,245]});wc_flat(ctx,wc_rect(-104,-134,208,90),c,0.7,"leaflet");ctx.restore();});}
-// Planning's desk from above: light oak, a sage folder, a calculator's corner, a mug
+// Planning's desk from above: light oak, a sage folder in the corner under a mug, a calculator's corner
 function rr_paintPlanTop(ctx){const col=[226,204,168];ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),col,{kind:"plaster",line:false,seed:131});
   ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(14);for(let i=0;i<46;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(col,0.16+R()*0.1),0.14+R()*0.1);ctx.lineWidth=1+R()*2;
     ctx.beginPath();ctx.moveTo(-20,y);for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+4*Math.sin(x/290+i)+3*Math.sin(x/88+i*2));ctx.stroke();}ctx.restore();
   ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,1500,-120,1300,[255,250,236],0.3);ctx.restore();
-  ctx.save();ctx.translate(1720,300);ctx.rotate(0.12);wc_wash(ctx,wc_rect(-200,-260,400,520),[150,176,140],{kind:"cover",lw:1.4,seed:132});ctx.restore();
+  ctx.save();ctx.translate(1560,900);ctx.rotate(0.12);wc_wash(ctx,wc_rect(-200,-260,400,520),[150,176,140],{kind:"cover",lw:1.4,seed:132});ctx.restore();
   wc_part(ctx,wc_rect(-40,860,300,260),[70,74,84],1);for(let i=0;i<4;i++)for(let j=0;j<2;j++)wc_flat(ctx,wc_rect(20+i*56,900+j*56,44,40),[110,114,126],1,"key");
   wc_wash(ctx,wc_ell(1800,960,76,76,40),[226,160,70],{kind:"thing",lw:1.6,seed:133});wc_wash(ctx,wc_ell(1800,960,56,56,40),[150,104,70],{kind:"thing",line:false,seed:134});}
 
@@ -361,14 +365,14 @@ const RR_RLT={kicker:"Quality rule",title:"Every short-course enrolment has an e
 function rr_pen(ctx,x,y,rot){ctx.save();ctx.translate(x,y);ctx.rotate(rot==null?-0.75:rot);ctx.fillStyle="rgba(40,30,20,0.22)";ctx.fillRect(14,12,220,12);
   wc_part(ctx,[[0,0],[26,-8],[26,8]],[200,200,206],1,{lw:1});wc_part(ctx,wc_rrPts(26,-9,210,18,8),[34,44,92],1,{kind:"thing",lw:1.1,seed:115});ctx.restore();}
 // a card at (x,y), w wide: its rows coming in (p), the owner's signature written in as a pen moves along it (sign), the stamp (stamp);
-// o.lit {row: 0 to 1} washes a row gold as it's read; o.card the card (RR_RLT...), o.signer
+// o.lit {row: 0 to 1} washes a row gold as it's read; o.card the card (RR_RLT...), o.signer; o.pen false for a card signed before
 function rr_rule(ctx,x,y,w,card,o){o=o||{};const sign=o.sign||0,stamp=o.stamp||0,tl=card.title||"",fit=Math.min(42,42*890/Math.max(1,tw(ctx,tl,42,800))),
     r=gv_signoff(ctx,x,y,w,Object.assign({p:o.p==null?1:o.p,missA:o.missA,signer:o.signer,signP:sign,
     stamp:o.stampKind||(o.signer!=null?"signed":null),stampP:stamp,ask:o.ask,askP:o.askP,rot:o.rot},card,fit<42?{title:" "}:{}));
   if(fit<42){ctx.save();ctx.translate(x,y);ctx.scale(w/1000,w/1000);wc_T(ctx,tl,48,124,{w:800,size:fit,col:WC_DARK});ctx.restore();}
   if(o.lit)for(const i in o.lit){const a=o.lit[i];if(a>0.01)gv_tint(ctx,x+30*w/1000,r.rows[i]-28*w/1000,w-60*w/1000,56*w/1000,GV.gold,0.6*a);}
-  if(sign>0&&o.signer){const k=w/1000,n=Math.ceil(o.signer.length*clamp(sign,0,1)),sx=r.x+(12+tw(ctx,o.signer.slice(0,n),38,600))*k,sy=r.rows[r.rows.length-1]+105*k,
-      dn=clamp(stamp*3,0,1);rr_pen(ctx,lerp(sx,x+w+110,dn),lerp(sy,y+r.h*0.62,dn),lerp(-0.75,-1.25,dn));}
+  if(sign>0&&o.signer&&o.pen!==false){const k=w/1000,n=Math.ceil(o.signer.length*clamp(sign,0,1)),sx=r.x+(12+tw(ctx,o.signer.slice(0,n),38,600))*k,sy=r.rows[r.rows.length-1]+105*k,
+      dn=clamp(stamp*3,0,1);rr_pen(ctx,lerp(sx,x+w+110,dn),lerp(sy,y+r.h+40*k,dn),lerp(-0.75,-0.35,dn));}
   return r;}
 // the level, beside an owner's card: what the night does at each count (a: all but the last, b: the stop), under a heading (head), and a
 // marker that runs along them (m, 0 to 6). Tom's: enrolments with no email, 0 passes, 1 to 5 warn, 6 stops; Planning's: differences
@@ -424,17 +428,19 @@ function rr_list(ctx,rows,o){o=o||{};const [x,y,w,h]=GV_SC,z=o.cam&&o.cam.z?o.ca
   if(o.empty>0)wc_T(q,"Nobody to follow up.",x+40,y+186,{w:700,size:32,col:GV.greenInk,a:clamp(o.empty,0,1)});},{titleSize:32,barH:54});}
 // two cards side by side: what a check is, and what a list is (a, b: each 0 to 1)
 function rr_twoCards(ctx,a,b,hiA,hiB){[[a,560,"a check",["about the data","can stop the update"],GV.green,hiA||0],[b,1360,"a list",["about what people do","a case to work through"],GV_ROOM.learn,hiB||0]].forEach(([u,x,t,L,col,hi],i)=>{
-  if(u<=0.01)return;const e=easeCam(clamp(u,0,1));ctx.save();ctx.translate(x,440-20*(1-e));ctx.rotate(i?0.015:-0.015);gv_halo(ctx,-360,-260,720,520,GV.gold,0.8*hi*clamp(u*2,0,1));withA(ctx,clamp(u*2,0,1),()=>{
+  if(u<=0.01)return;const e=easeCam(clamp(u,0,1));ctx.save();ctx.translate(x,440-20*(1-e));ctx.rotate(i?0.015:-0.015);rr_glow(ctx,-330,-230,660,460,GV.gold,0.9*hi*clamp(u*2,0,1),22);withA(ctx,clamp(u*2,0,1),()=>{
     wc_panel(ctx,-330,-230,660,460,{kind:"card",wash:col,washA:i?0.5:0.22,seed:170+i});wc_T(ctx,t,-280,-120,{w:800,size:64,col:WC_DARK});
     L.forEach((s,j)=>wc_T(ctx,s,-280,10+j*76,{w:600,size:40,col:WC_INK}));});ctx.restore();});}
 
 /* ---------- the red night ---------- */
-// the four reports built from the short courses, as covers pinned on the data team's board, each stamped "HELD · yesterday's
-// numbers" one after another (held[i], 0 to 1); lifted again the next night (lift, 0 to 1)
+// the four reports built from the short courses, as covers pinned on the data team's board, each with its name on a label and a
+// pale slip for its state, stamped "HELD · yesterday's numbers" one after another (held[i], 0 to 1); lifted again the next night
+// (lift, 0 to 1). The slip keeps the red stamp readable on the dark covers at night
 const RR_CV=[["Student records",[96,118,150]],["Planning's numbers",[120,140,104]],["Finance",[150,90,80]],["Wallet",[110,96,130]]];
 function rr_covers(ctx,held,lift){RR_CV.forEach(([s,col],i)=>{const x=290+(i%2)*700,y=110+Math.floor(i/2)*380,h=held[i]||0;ctx.save();ctx.translate(x+310,y+170);ctx.rotate([-0.02,0.015,0.01,-0.015][i]);
   ctx.drawImage(wc_kept("rrCover"+i,680,380,q=>{q.translate(30,20);q.save();q.filter="blur(8px)";q.fillStyle="rgba(50,40,30,0.3)";q.fillRect(8,12,620,330);q.restore();
-    wc_wash(q,wc_rect(0,0,620,330),col,{kind:"cover",lw:1.4,seed:181+i});wc_flat(q,wc_rect(0,0,56,330),wc_dim(col,0.3),1,"spine");wc_flat(q,wc_rect(100,60,460,120),WC_CARD,1,"label");}),-340,-190);
+    wc_wash(q,wc_rect(0,0,620,330),col,{kind:"cover",lw:1.4,seed:181+i});wc_flat(q,wc_rect(0,0,56,330),wc_dim(col,0.3),1,"spine");wc_flat(q,wc_rect(100,60,460,120),WC_CARD,1,"label");
+    wc_flat(q,wc_rect(66,202,528,96),WC_CARD,1,"label");}),-340,-190);
   gv_pin(ctx,0,-150,GV.red,1.2);wc_T(ctx,s,-30+50,-60,{w:800,size:40,align:"center",col:WC_DARK});wc_T(ctx,"report",-30+50,-16,{w:600,size:28,align:"center",col:WC_MUTED});
   if(h>0)gv_stamp(ctx,10,80,"HELD · yesterday's numbers",h,{size:32,col:GV.redInk,rot:-0.05,a:1-clamp(lift||0,0,1)});ctx.restore();});}
 // a desk clock at noon (a, 0 to 1)

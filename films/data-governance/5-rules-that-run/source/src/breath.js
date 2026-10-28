@@ -11,5 +11,5 @@ const BREATH={
 "row":{"hold":{"knows":0.6,"never":0.3,"cleans":0.6,"now":0.8}},
 "list":{"hold":{"not":0.3,"people":1.0}},
 "night":{"hold":{"six":0.6,"stops":0.8,"morning":0.6,"list":0.6,"noon":0.8,"green":1.0}},
-"measured":{"hold":{"runs":0.6,"back":0.8,"like":0.4,"knows":0.8,"next":0.6},"breathe":5.4}
+"measured":{"hold":{"runs":0.6,"back":1.3,"like":0.4,"knows":0.8,"next":0.6},"breathe":5.4}
 };

@@ -107,7 +107,7 @@ scene("river",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({flood:c.floo
       rr_tagAt(x,tt,P.m2,P.title-0.3,640,rr_waterY(C,rr_cub(16)),"a level set in advance",{size:30,wash:GV.gold,washA:0.35});
       rr_tagAt(x,tt,P.m3,P.title-0.3,s.x-190,s.y-s.s*560*0.66,"a record for those who decide",{size:30,wash:GV.gold,washA:0.25});}}]);
   rr_pill(ctx,t,[[0,"Fustat · in today's Cairo · 861"]],fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Rules that run","quality measured, not surveyed","Film 5 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Rules that run","quality measured, not surveyed","Film 5 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · A survey: binder 9 says data quality is monitored; here, that means a survey once a year; its chart, David's question, and a
@@ -458,5 +458,5 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
       rr_binders(x,{gone9:true,gone15:got,out15:fin(tt,P.film-0.2,0.5)});rr_officeChart(x,1);rr_officeQ(x,1);
       person(x,"yusuf",1620,905,0.8,got?{pose:"reach",pose2:"hold",mix:fin(tt,P.film+0.5,0.5),t:tt,carry:rr_heldBinder(["Fixed","where it","starts"],RR_B15)}:
         {pose:"listen",pose2:"reach",mix:fin(tt,P.film-0.4,0.5),t:tt});}}]);
-  gv_end(ctx,S,t,P.end,"Rules that run","A quality rule is a check with an owner.","Film 5 of 19");
+  gv_end(ctx,S,t,P.end,"Rules that run","A quality rule is a check with an owner.","Film 5 of 10");
   wc_paperOver(ctx,S);});

@@ -406,7 +406,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// Rules that run, film 5 of 19 of the data governance series. One line per id; the film re-times itself to the voice.
+// Rules that run, film 5 of 10 of Governance principles, the first series on data governance. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "river":{"name":"The measured river","lead":1.4,"tail":1.0,"vo":[
@@ -3671,7 +3671,7 @@ scene("river",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({flood:c.floo
       rr_tagAt(x,tt,P.m2,P.title-0.3,640,rr_waterY(C,rr_cub(16)),"a level set in advance",{size:30,wash:GV.gold,washA:0.35});
       rr_tagAt(x,tt,P.m3,P.title-0.3,s.x-190,s.y-s.s*560*0.66,"a record for those who decide",{size:30,wash:GV.gold,washA:0.25});}}]);
   rr_pill(ctx,t,[[0,"Fustat · in today's Cairo · 861"]],fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Rules that run","quality measured, not surveyed","Film 5 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Rules that run","quality measured, not surveyed","Film 5 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · A survey: binder 9 says data quality is monitored; here, that means a survey once a year; its chart, David's question, and a
@@ -4022,7 +4022,7 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
       rr_binders(x,{gone9:true,gone15:got,out15:fin(tt,P.film-0.2,0.5)});rr_officeChart(x,1);rr_officeQ(x,1);
       person(x,"yusuf",1620,905,0.8,got?{pose:"reach",pose2:"hold",mix:fin(tt,P.film+0.5,0.5),t:tt,carry:rr_heldBinder(["Fixed","where it","starts"],RR_B15)}:
         {pose:"listen",pose2:"reach",mix:fin(tt,P.film-0.4,0.5),t:tt});}}]);
-  gv_end(ctx,S,t,P.end,"Rules that run","A quality rule is a check with an owner.","Film 5 of 19");
+  gv_end(ctx,S,t,P.end,"Rules that run","A quality rule is a check with an owner.","Film 5 of 10");
   wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

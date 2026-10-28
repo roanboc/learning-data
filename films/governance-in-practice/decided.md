@@ -1,0 +1,7 @@
+# Decided: Governance you can use
+
+The series' own decisions. With each film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row. A decision a film's thread makes, even one for the whole series, goes in that film's file, so threads never edit the same lines. Decisions for all three series of data governance go in [`../data-governance/decided.md`](../data-governance/decided.md).
+
+| Date | Decision |
+|---|---|
+| 28 October 2026 | A series of its own, the third of data governance's three, as the author asked: making governance operational and useful, beyond the policies. It holds films 14 to 19 of the plan in [`../data-governance/proposal.md`](../data-governance/proposal.md) as its films 1 to 6 of 6: *Governed in dbt*, *Governed in Unity Catalog*, *Meaning on the platform*, *Quality on the platform*, *Products in open formats* and *The marketplace*. It takes the name the whole series had, *Governance you can use* (*Gobernanza que puedes usar*), and lives in `governance-in-practice/`, in the repository and on the site, with its page once its opening film is out. It follows *Governance on the map*. Its films show the example dbt project where it is, in [`../analytics-engineering/project/`](../analytics-engineering/project/), with the additions the plan gave it for governance, so no cited line moves; the films' pages link to it there. The plan's brief, foundations, world, people and shared facts stay in the first series' proposal. |

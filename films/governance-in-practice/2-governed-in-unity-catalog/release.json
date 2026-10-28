@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Governed in Unity Catalog",
+    "key": "governed-in-unity-catalog-en",
+    "dir": "films/governance-in-practice/2-governed-in-unity-catalog/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/governed-in-unity-catalog/film.js",
+    "video": "dist/governed-in-unity-catalog.mp4",
+    "file": "governed-in-unity-catalog.mp4",
+    "captions": [
+      [
+        "films/governance-in-practice/2-governed-in-unity-catalog/captions/en.srt",
+        "governed-in-unity-catalog.en.srt"
+      ],
+      [
+        "films/governance-in-practice/2-governed-in-unity-catalog/captions/es.srt",
+        "governed-in-unity-catalog.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-in-practice/2-governed-in-unity-catalog/source",
+      ":(exclude)films/governance-in-practice/2-governed-in-unity-catalog/source/src/i18n/es/captions.js",
+      "films/governance-in-practice/shared",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 572,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

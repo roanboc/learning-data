@@ -201,8 +201,8 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({nb:c.two+0.5
 function rr_planScreen(ctx,hiA){const [sx,sy,sw]=GV_PL.screen,k=sw/GV_SC[2];ctx.save();ctx.translate(sx,sy);ctx.scale(k,k);ctx.translate(-GV_SC[0],-GV_SC[1]);
   rr_asDeco(true,()=>gv_scorecard(ctx,{z:k},{rows:RR_SK15,date:"15 October 2026",sections:RR_SEC15,hi:5,hiA}));ctx.restore();}
 // a check named under a cell of the scorecard: its words and its owner, on a card (in the screen's units)
-function rr_cellCard(ctx,x,y,u,lines){if(u<=0.01)return;const w=Math.round(Math.max(tw(ctx,lines[0],22,600),tw(ctx,lines[1],22,700))+40),k=0.9+0.1*spring(clamp(u,0,1));
-  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{wc_panel(ctx,-w/2,-38,w,76,{kind:"card",wash:GV.gold,washA:0.25,seed:w});
+function rr_cellCard(ctx,x,y,u,lines,h){if(u<=0.01)return;h=h||76;const w=Math.round(Math.max(tw(ctx,lines[0],22,600),tw(ctx,lines[1],22,700))+40),k=0.9+0.1*spring(clamp(u,0,1));
+  ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",wash:GV.gold,washA:0.25,seed:w});
     wc_T(ctx,lines[0],-w/2+20,-6,{w:600,size:22,col:WC_DARK});wc_T(ctx,lines[1],-w/2+20,24,{w:700,size:22,col:GV.goldInk});});ctx.restore();}
 scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:0.9,fill:1.4,
     area:wAt(sc,"row","area"),dimW:wAt(sc,"row","dimension"),cell:wAt(sc,"row","in each cell"),under:c.under-0.3,whose:wAt(sc,"under","whose"),door:c.answer-0.3,
@@ -227,9 +227,11 @@ scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:0.9,
       person(x,"david",165,905,0.8,{pose:"listen",t:tt});person(x,"yusuf",1080,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.door+0.6,0.5),t:tt,flip:true});
       rr_say(x,tt,P.door+0.2,9e9,110,140,RR_Q,250,410);}},
     // close on Planning's row: its accuracy cell lights, with its check and its owner
-    {at:P.plan,place:"screenGov",keys:[[P.plan,...P.rowCam]],d:2,push:0.01,draw:(x,tt,cam)=>{const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:5,hiA:fin(tt,P.plan+0.3,0.5)}),r=L.rows[5];
-      rr_glow(x,L.cx[5]+6,r.top+2,L.cw[5]-12,r.h-5,GV.green,0.9*fin(tt,P.acc-0.2,0.5),14);
-      rr_cellCard(x,Math.min(L.cx[5]+L.cw[5]/2,1560-260),r.top+r.h+60,fin(tt,P.acc,0.5),["Planning's number matches the census report","owner: Planning"]);}},
+    // (the card lies over three whole rows, and the rest of the page goes pale under it)
+    {at:P.plan,place:"screenGov",keys:[[P.plan,...P.rowCam]],d:2,push:0.01,draw:(x,tt,cam)=>{const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:5,hiA:fin(tt,P.plan+0.3,0.5)}),r=L.rows[5],
+        u=fin(tt,P.acc,0.5),t6=L.rows[6].top-3,b8=L.rows[8].top+L.rows[8].h+3;
+      rr_veil(x,[[L.cx[5],r.top,L.cw[5],r.h]],u);rr_glow(x,L.cx[5]+6,r.top+2,L.cw[5]-12,r.h-5,GV.green,0.9*fin(tt,P.acc-0.2,0.5),14);
+      rr_cellCard(x,Math.min(L.cx[5]+L.cw[5]/2,1560-260),(t6+b8)/2,u,["Planning's number matches the census report","owner: Planning"],b8-t6);}},
     // Planning's room: Clara at her wall screen sees the same row, and nods
     {at:P.room,place:"planning",keys:[[P.room,1000,520,1.12]],d:2,draw:(x,tt)=>{rr_planScreen(x,1);
       person(x,"clara",1400,905,0.8,{pose:"listen",t:tt,flip:true,nod:rr_nod(tt,P.nod)});rr_plate(x,tt,P.room+0.4,null,1400,250,["Clara Jensen","Planning"]);}},
@@ -267,9 +269,10 @@ function rr_miniCard(ctx,x,y,w,o){o=o||{};const k=w/1000,h=(o.signed?610:518)*k,
 scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,"cubits","sixteen cubits"),card:c.who-0.3,lvQ:wAt(sc,"who","the level"),own:wAt(sc,"not","its owner"),
     desk:c.email-0.3,walk:wAt(sc,"email","one or two"),follow:wAt(sc,"email","follows them up"),chose:c.chose-0.3,warn:wAt(sc,"chose","warn on any"),stop:wAt(sc,"chose","stop"),
     five:wAt(sc,"chose","above five"),plan:c.planning-0.3,any:c.any,stops:wAt(sc,"any","stops it"),gov:wAt(sc,"any","because"),pcard:wAt(sc,"any","because")-0.4,
-    csign:wAt(sc,"signs","with its level"),page:wAt(sc,"signs","writes it")-0.1,
+    csign:wAt(sc,"signs","with its level"),page:wAt(sc,"signs","into the check")-0.1,
     lone:c.ignored-0.3,ign:wAt(sc,"ignored","gets ignored"),off:wAt(sc,"ignored","switched off")}));
-  const CX=300,CY=150,LX=1450,LY=200,TS=P.csign-0.1;
+  // Clara's card signed and stamped as the line begins and held; Tom's comes in after "with its level", and holds till the check
+  const CX=300,CY=150,LX=1450,LY=200,TS=P.csign+0.3;
   gv_shots(ctx,S,t,sc.dur,[
     // for a moment, the Nilometer's column, as in the opening: the water reaches its sixteenth mark, which lights gold
     {at:0,place:"column",keys:[[0,960,560,1.04]],d:2,push:0.012,draw:(x,tt)=>{const L=rr_cub(lerp(15.6,15.95,easeCam(clamp((tt-0.3)/Math.max(0.6,P.at16-0.3),0,1))));
@@ -278,7 +281,7 @@ scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,
     {at:P.card,place:"tomTop",keys:[[P.card,960,540,1]],d:3,push:0.01,draw:(x,tt)=>
       rr_rule(x,CX,CY,1000,rr_tomCard(0,0),{p:clamp((tt-P.card-0.1)/1.0,0,1),signer:"",lit:{2:gv_io(tt,P.lvQ-0.1,P.own-0.3,0.4),0:fin(tt,P.own-0.1,0.4)}})},
     // Tom at his desk, the learning team's: one or two walk-ins a term; more means something broke. His screen shows the team's list
-    {at:P.desk,place:"tom",keys:[[P.desk,960,540,1],[P.desk+0.1,900,500,1.08]],d:3,push:0.01,draw:(x,tt)=>{
+    {at:P.desk,place:"tom",keys:[[P.desk,960,540,1],[P.desk+0.1,1000,500,1.08]],d:3,push:0.01,draw:(x,tt)=>{
       rr_tomDesk(x,tt,{pose:"listen",t:tt,nod:rr_nod(tt,P.walk+0.2),expr:"smile"},q=>rr_tomScreenList(q,1));
       rr_plate(x,tt,P.desk+0.4,null,1680,470,["Tom Whitfield","learning team"]);
       rr_say(x,tt,P.walk-0.1,9e9,560,140,["One or two walk-ins a term.","More means something broke."],1290,450);}},
@@ -293,12 +296,12 @@ scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,
       rr_plate(x,tt,P.plan+0.5,P.any-0.1,1640,330,["Clara Jensen","Planning"]);rr_say(x,tt,P.any,9e9,1440,190,["Any difference,","and nobody ships."],1410,470);}},
     // her card, on Planning's desk: the opposite level, stop on any difference, because that number goes to the government; each owner
     // signs: Clara first, and her card is stamped
-    {at:P.pcard,place:"planTop",keys:[[P.pcard,960,540,1]],d:3,push:0.01,draw:(x,tt)=>withA(x,1-fin(tt,TS-0.3,0.25),()=>{
-      rr_rule(x,CX,CY,1000,RR_RLC,{signer:"Clara Jensen",sign:clamp((tt-c.signs-0.05)/0.75,0,1),stamp:fin(tt,c.signs+0.85,0.3),lit:{2:gv_io(tt,P.pcard+0.2,P.gov+0.1,0.4),3:gv_io(tt,P.gov,c.signs-0.2,0.4)}});
+    {at:P.pcard,place:"planTop",keys:[[P.pcard,960,540,1]],d:3,push:0.01,draw:(x,tt)=>withA(x,1-fin(tt,TS-0.25,0.25),()=>{
+      rr_rule(x,CX,CY,1000,RR_RLC,{signer:"Clara Jensen",sign:clamp((tt-c.signs+0.15)/0.65,0,1),stamp:fin(tt,c.signs+0.55,0.3),lit:{2:gv_io(tt,P.pcard+0.2,P.gov+0.1,0.4),3:gv_io(tt,P.gov,c.signs-0.2,0.4)}});
       rr_level(x,LX,LY,1,1,6*fin(tt,P.pcard+0.3,0.8),RR_LVC,"differences from the census");})},
     // then Tom, on his desk: his card comes in, he signs, and it's stamped
-    {at:TS,place:"tomTop",keys:[[TS,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{const e=easeCam(clamp((tt-TS-0.15)/0.6,0,1));withA(x,clamp(e*1.6,0,1),()=>{
-      rr_rule(x,lerp(CX+500,CX,e),CY,1000,RR_RLT,{signer:"Tom Whitfield",sign:clamp((tt-TS-0.75)/0.65,0,1),stamp:fin(tt,TS+1.45,0.3)});rr_level(x,LX,LY,1,1,null,RR_LV,"enrolments with no email");});}},
+    {at:TS,place:"tomTop",keys:[[TS,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{const e=easeCam(clamp((tt-TS-0.1)/0.5,0,1));withA(x,clamp(e*1.6,0,1),()=>{
+      rr_rule(x,lerp(CX+500,CX,e),CY,1000,RR_RLT,{signer:"Tom Whitfield",sign:clamp((tt-TS-0.6)/0.6,0,1),stamp:fin(tt,TS+1.2,0.3)});rr_level(x,LX,LY,1,1,null,RR_LV,"enrolments with no email");});}},
     // Jun's screen: the page of the night's checks; the two rules' lines light gold as the data team writes them into the checks
     {at:P.page,place:"screenData",keys:[[P.page,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>
       rr_checks(x,{n:160,legend:1,lit:{5:fin(tt,P.page+0.4,0.5),6:fin(tt,P.page+0.7,0.5)},cam})},
@@ -328,10 +331,13 @@ scene("row",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({walk:0.3,reads
     // the scorecard on his screen, close on the learning row; the amber cell he knows lights, and an enrolment comes out of it: a
     // walk-in from February, whose certificate can't find an address; then the one he's never seen, and its two lines under Warnings
     {at:P.reads,place:"screenGov",keys:[[P.reads,...GV_SKV.all],[P.reads+0.2,...P.rowCam]],d:1.6,push:0,draw:(x,tt,cam)=>{
-      const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:4,hiA:fin(tt,P.row,0.5)}),r=L.rows[4],cell=j=>[L.cx[j]+L.cw[j]/2,r.top+r.h/2];
+      const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:4,hiA:fin(tt,P.row,0.5)}),r=L.rows[4],cell=j=>[L.cx[j]+L.cw[j]/2,r.top+r.h/2],
+        ue=clamp((tt-P.walkin+0.3)/0.9,0,1),go=1-fin(tt,P.never-0.5,0.4);
+      // while the enrolment is out of its cell, the rest of the page goes pale under it
+      rr_veil(x,[[L.cx[1],r.top,L.cw[1],r.h]],clamp(ue*2,0,1)*go);
       rr_glow(x,L.cx[1]+6,r.top+2,L.cw[1]-12,r.h-5,GV.amber,0.9*gv_io(tt,P.knows-0.1,P.never-0.3,0.4),14);
       rr_glow(x,L.cx[3]+6,r.top+2,L.cw[3]-12,r.h-5,GV.amber,0.9*fin(tt,P.never,0.4),14);
-      rr_inFrame(x,cam,q=>{const ue=clamp((tt-P.walkin+0.3)/0.9,0,1),go=1-fin(tt,P.never-0.5,0.4);
+      rr_inFrame(x,cam,q=>{
         if(ue>0&&go>0.01){const [ax,ay]=rr_toFrame(cam,...cell(1)),e=easeCam(ue);withA(q,go,()=>rr_enrolCard(q,lerp(ax,500,e),lerp(ay,640,e),ue,{cert:fin(tt,P.cert,0.6)}));}});
       const s0=L.sec[0];[1,2].forEach(k=>gv_tint(x,GV_SK.x,s0.rows[k]-GV_SK.rh*0.74,GV_SK.w,GV_SK.rh,GV.amber,0.7*fin(tt,P.typed+0.25*k,0.4)));}},
     // one of those emails as it was typed, on the data team's board, close: spaces at each end, capitals; then wider, as the night's
@@ -393,7 +399,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:1.4,more
       rr_say(x,tt,P.tom+0.4,9e9,700,170,["Six. Something broke."],1290,450);}},
     // his team's card: the level they chose, and its reason
     {at:P.chose,place:"tomTop",keys:[[P.chose,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{const e=easeCam(clamp((tt-P.chose-0.1)/0.9,0,1));
-      withA(x,clamp(e*1.6,0,1),()=>rr_rule(x,lerp(1100,460,e),150,1000,RR_RLT,{signer:"Tom Whitfield",stamp:1,rot:0.015,lit:{2:fin(tt,P.chose+0.7,0.5),3:fin(tt,P.chose+1.2,0.5)}}));}},
+      withA(x,clamp(e*1.6,0,1),()=>rr_rule(x,lerp(1100,460,e),150,1000,RR_RLT,{signer:"Tom Whitfield",sign:1,pen:false,stamp:1,rot:0.015,lit:{2:fin(tt,P.chose+0.7,0.5),3:fin(tt,P.chose+1.2,0.5)}}));}},
     // the team's list now holds six: the walk-in from February, and five First Aid enrolments from last night
     {at:P.list,place:"screenLearn",keys:[[P.list,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>rr_list(x,RR_L6,{cam,rowA:RR_L6.map((r,i)=>i?fin(tt,P.list+0.4+0.22*i,0.35):1)})},
     // by noon: each enrolment gets its email, and a learner registered
@@ -410,6 +416,9 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:1.4,more
 // guess: each morning, what to trust, what's held back and who fixes it; binder 15 next; the lesson ----
 // Mei's card, sent back without an owner, and back again with one
 const RR_RLM={kicker:"Quality rule",title:"Every award has a date",rows:[["Owner","Mei Tanaka, registrar's office"],RR_RLA.rows[1],RR_RLA.rows[2],RR_RLA.rows[3]]};
+// on the screen's page: a pale veil (a, 0 to 1) over all but the boxes given ([x, y, w, h]), while a card is out of one of them
+function rr_veil(ctx,holes,a){if(a<=0.01)return;const [x,y,w,h]=GV_SC;ctx.save();ctx.fillStyle=rgba(GV.screen,1);ctx.globalAlpha=0.72*a;ctx.beginPath();
+  ctx.rect(x,y+54,w,h-54);holes.forEach(b=>ctx.rect(...b));ctx.fill("evenodd");ctx.restore();}
 // on the printout, drawn in its own coordinates: a pale veil over the table (a, 0 to 1), but not over the cells lit (lit(cell, row,
 // column), 0 to 1): the green ones, then the grey ones, then the one red cell stand out in turn
 function rr_prFocus(ctx,L,rows,lit,a){if(a<=0.01)return;const K=GV_SK,box=(i,j)=>{const r=L.rows[i];return[L.cx[j]+6,r.top+2,L.cw[j]-12,r.h-5];};ctx.save();ctx.fillStyle=rgba(GV.screen,1);
@@ -429,7 +438,7 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
     {at:P.back,place:"junTop",keys:[[P.back,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{const sw=easeCam(clamp((tt-P.swap)/0.5,0,1)),cin=easeCam(clamp((tt-P.back-0.1)/0.8,0,1));
       if(sw<1)withA(x,clamp(cin*1.6,0,1)*clamp((1-sw)*1.6,0,1),()=>rr_rule(x,lerp(lerp(1100,460,cin),-200,sw),110,1000,RR_RLA,{missA:fin(tt,P.own-0.1,0.4),ask:{0:"needs an owner"},
         askP:clamp((tt-P.own-0.2)/0.8,0,1),stampKind:"sent back",stamp:fin(tt,P.sent,0.3)}));
-      if(sw>0)withA(x,clamp(sw*1.6,0,1),()=>rr_rule(x,lerp(1100,460,sw),130,1000,RR_RLM,{signer:"Mei Tanaka",sign:clamp((tt-P.swap-0.45)/0.45,0,1),stamp:fin(tt,P.swap+0.95,0.25)}));}},
+      if(sw>0)withA(x,clamp(sw*1.6,0,1),()=>rr_rule(x,lerp(1100,460,sw),130,1000,RR_RLM,{signer:"Mei Tanaka",sign:clamp((tt-P.swap-0.35)/0.45,0,1),stamp:fin(tt,P.swap+0.85,0.25)}));}},
     // Yusuf's board: the survey's chart on the left, the red morning's scorecard printed on the right; between them, for a moment, the
     // column with its gold mark. Then close on the printout: what it can trust, what's held back, and who fixes it
     {at:P.board,place:"boardGov",keys:[[P.board,950,460,1.15],[P.knows-0.3,1260,455,1.5]],d:1.8,push:0,draw:(x,tt,cam)=>{

@@ -1,0 +1,303 @@
+1
+00:00:01,600 --> 00:00:03,585
+Bogotá, 1995.
+
+2
+00:00:04,285 --> 00:00:10,657
+In the city centre, drivers stop on the zebra crossings, so people on foot have to weave between the cars.
+
+3
+00:00:11,957 --> 00:00:16,276
+It's dangerous: more than a thousand people a year die on the city's roads.
+
+4
+00:00:17,576 --> 00:00:21,622
+Fines alone haven't changed the habit. The city needs another way.
+
+5
+00:00:22,822 --> 00:00:26,536
+The new mayor, Antanas Mockus, sends mimes into the streets.
+
+6
+00:00:28,136 --> 00:00:31,377
+When a car stops on a crossing, the people around it whistle.
+
+7
+00:00:32,477 --> 00:00:36,590
+A mime steps in and, without a word, invites the driver to back up.
+
+8
+00:00:38,690 --> 00:00:44,040
+If the driver still won't, a traffic officer writes a fine, and the people watching applaud.
+
+9
+00:00:45,640 --> 00:00:49,607
+The fine still came. But it came last, in an order meant to teach.
+
+10
+00:00:50,907 --> 00:00:51,685
+It worked.
+
+11
+00:00:52,385 --> 00:00:56,885
+By 1996, three drivers in four were keeping the crossings clear.
+
+12
+00:00:57,985 --> 00:01:01,605
+People on foot could cross in front of the cars, not between them.
+
+13
+00:01:02,805 --> 00:01:07,912
+Most people keep a rule because they understand it, and because the people around them keep it.
+
+14
+00:01:09,012 --> 00:01:10,401
+The fine is for the few.
+
+15
+00:01:11,501 --> 00:01:17,406
+It's the same with data. When most people keep the rules, everyone who uses the data can trust it.
+
+16
+00:01:24,706 --> 00:01:27,915
+Today, the university sends its awards to the government.
+
+17
+00:01:29,015 --> 00:01:37,424
+The submission and Planning's census report agree: 4,867 awards, counted by the glossary's meaning.
+
+18
+00:01:38,724 --> 00:01:43,928
+How that maps to the government's definition is a decision Mei owns, and has written down.
+
+19
+00:01:45,528 --> 00:01:50,542
+The glossary's meaning wasn't written at a desk: Mei and the faculties argued it out.
+
+20
+00:01:51,642 --> 00:01:59,510
+Agreeing is hard. It's one part of the key challenge in data governance, and its first priority: getting people to take part.
+
+21
+00:02:00,810 --> 00:02:05,697
+To understand the data and its rules. To look after their data, and answer for it.
+
+22
+00:02:06,997 --> 00:02:12,867
+To make the decisions that are theirs, and respect the ones that aren't. And to do what their role asks.
+
+23
+00:02:14,167 --> 00:02:19,468
+All of it is harder without tools that guide people, and show them what their work changes.
+
+24
+00:02:20,768 --> 00:02:24,154
+Governance has its fines too: the checks that stop the work.
+
+25
+00:02:25,254 --> 00:02:27,185
+Most of its work comes before them.
+
+26
+00:02:30,285 --> 00:02:33,038
+Anil is an analyst in the Faculty of Health.
+
+27
+00:02:34,138 --> 00:02:39,893
+He adds a column to the call list he made for the faculty's advisers, and the governance check stops him.
+
+28
+00:02:41,593 --> 00:02:42,964
+But it doesn't just say no.
+
+29
+00:02:44,064 --> 00:02:47,581
+Its message says what's missing, and links a page written for him:
+
+30
+00:02:47,781 --> 00:02:50,923
+what the rule asks, and why, how to fix it, and who to ask.
+
+31
+00:02:53,223 --> 00:02:55,006
+Anil fixes it in two minutes.
+
+32
+00:02:57,106 --> 00:03:00,185
+A check that only says no is a fine with no mime.
+
+33
+00:03:02,285 --> 00:03:04,519
+Governance used to be a queue of approvals.
+
+34
+00:03:05,819 --> 00:03:10,983
+Now it keeps office hours, every Thursday afternoon, for anyone a check has stopped.
+
+35
+00:03:15,283 --> 00:03:20,858
+Once a month, the stewards meet: the people who look after the data in each office and faculty.
+
+36
+00:03:22,458 --> 00:03:24,133
+They don't meet to approve anything.
+
+37
+00:03:25,633 --> 00:03:30,282
+They bring what broke, and what helped, so nobody has to learn it the hard way twice.
+
+38
+00:03:32,082 --> 00:03:34,532
+Yusuf started with the few who wanted to come.
+
+39
+00:03:35,632 --> 00:03:37,662
+Others joined once they saw it working.
+
+40
+00:03:39,262 --> 00:03:44,331
+Like the people at the crossing, colleagues remind each other, long before a check has to.
+
+41
+00:03:47,931 --> 00:03:49,496
+A new rule starts here too.
+
+42
+00:03:50,196 --> 00:03:56,053
+At October's meeting, Yusuf brings one: every column other teams read says what it holds.
+
+43
+00:03:57,353 --> 00:04:03,459
+First, why. A reader who can't tell what a column holds will guess, and two guesses make two numbers.
+
+44
+00:04:04,959 --> 00:04:06,998
+The stewards agree it, and set a date.
+
+45
+00:04:08,298 --> 00:04:10,378
+Until then, the check only warns.
+
+46
+00:04:11,078 --> 00:04:16,092
+Each warning links its page, and names the day it's required: the first of December.
+
+47
+00:04:17,292 --> 00:04:19,350
+Four weeks in, the warnings are gone.
+
+48
+00:04:20,050 --> 00:04:22,078
+There's nothing left for the date to stop.
+
+49
+00:04:25,778 --> 00:04:27,391
+The mime came before the fine.
+
+50
+00:04:31,291 --> 00:04:33,475
+And the maturity score of 2.1?
+
+51
+00:04:34,175 --> 00:04:40,474
+Yusuf opens binder 29. Its policy says governance maturity is assessed every year.
+
+52
+00:04:41,774 --> 00:04:43,400
+Nobody assesses it again.
+
+53
+00:04:45,000 --> 00:04:48,083
+Governance is measured from the work instead, every day.
+
+54
+00:04:49,183 --> 00:04:56,197
+From each night's checks: how much of what other teams read has an owner, a glossary term, a class and a description.
+
+55
+00:04:57,497 --> 00:05:00,028
+Which checks failed last night, and whose they are.
+
+56
+00:05:01,128 --> 00:05:04,621
+And from people: who came to office hours, and who came back.
+
+57
+00:05:05,721 --> 00:05:09,884
+A score said how governance looked on paper. These say whether it's used.
+
+58
+00:05:11,184 --> 00:05:15,982
+Bogotá measured its crossings the same way: by how many drivers kept them clear.
+
+59
+00:05:19,082 --> 00:05:22,979
+So what does a governance team do all day? Like the mimes, it teaches.
+
+60
+00:05:24,679 --> 00:05:28,803
+Governance sits at the centre of data work, where every other part of it meets.
+
+61
+00:05:30,403 --> 00:05:35,716
+As those parts get easier to run, the centre matters more, and the people in it most of all.
+
+62
+00:05:37,716 --> 00:05:39,798
+Someone has to show how the pieces fit.
+
+63
+00:05:42,098 --> 00:05:47,140
+So every new analyst starts with a path: short films, and labs to practise on.
+
+64
+00:05:49,140 --> 00:05:53,884
+And the stewards pass it on. Anil shows a new colleague the page that helped him.
+
+65
+00:05:57,984 --> 00:06:07,117
+And the binder? Of its 215 lines, 92 now run in the work, 64 are decisions someone owns, and 59 are gone.
+
+66
+00:06:08,717 --> 00:06:13,502
+Change models, from Kotter's eight steps to ADKAR, agree on what people need:
+
+67
+00:06:13,702 --> 00:06:17,933
+to know why, to want it, to know how, to be able to, and to see it last.
+
+68
+00:06:19,233 --> 00:06:20,724
+The last is the hardest.
+
+69
+00:06:22,024 --> 00:06:27,278
+In Bogotá, within about ten years, the habits had faded: the campaigns weren't kept up.
+
+70
+00:06:28,978 --> 00:06:34,631
+So governance can't be a project that ends. It has to be something the university can always do.
+
+71
+00:06:35,731 --> 00:06:43,543
+Scattered tools have long made governance hard to organise, and hard to see. That's changing, as the rest of the series shows.
+
+72
+00:06:44,843 --> 00:06:48,866
+Kept up, governance does for data what the mimes did for the crossings.
+
+73
+00:06:49,966 --> 00:06:53,411
+Most people keep the rules before a check has to stop them.
+
+74
+00:06:54,111 --> 00:06:57,760
+Nobody has to guess what the data means, so the numbers agree.
+
+75
+00:06:58,460 --> 00:07:01,483
+And a check stops only the few, who fix it in minutes.
+
+76
+00:07:02,783 --> 00:07:06,621
+Governance is people's work. Tools remember what people agreed.

@@ -1,0 +1,27 @@
+{
+  "kicker": "Getting people to take part",
+  "kicker_es": "Lograr que la gente participe",
+  "title_es": "Docentes de datos",
+  "h1": "Teachers of data: teach first, check last",
+  "h1_es": "Docentes de datos: enseñar primero, controlar al final",
+  "lead": "The university's two reports agree, by a meaning Mei and the faculties argued out. Getting people to take part is the key challenge. When a check stops Anil, an analyst, its page says why and how to fix it. Stewards share what broke, and a new rule only warns until a date everyone knows.",
+  "lead_es": "Los dos informes de la universidad coinciden, con un significado que Mei y las facultades discutieron hasta acordar. Lograr que la gente participe es el reto clave. Si un control detiene a Anil, un analista, su página dice por qué y cómo arreglarlo; los responsables de datos comparten lo que falló, y una regla nueva solo advierte hasta una fecha conocida.",
+  "description": "A film about the people side of data governance: Antanas Mockus's mimes at Bogotá's crossings in 1995, and why most people keep a rule; getting people to take part, the key challenge in data governance and its first priority; checks as governance's fines, and the work that comes before them; a page beside every check, written for the person it stops; office hours in place of a queue of approvals; stewards who meet to share what broke and what helped; a new rule agreed, explained, and a warning first, until a date everyone knows; governance measured from the work, not by a maturity score; a governance team that teaches how the pieces fit; and what change needs to last.",
+  "description_es": "Una película sobre el lado humano de la gobernanza de datos: los mimos de Antanas Mockus en los cruces de Bogotá en 1995, y por qué la mayoría cumple una regla; lograr que la gente participe, el reto clave de la gobernanza de datos y su primera prioridad; los controles como las multas de la gobernanza, y el trabajo que viene antes; una página junto a cada control, escrita para quien detiene; un horario de atención en lugar de una fila de aprobaciones; responsables de datos que se reúnen a compartir lo que falló y lo que ayudó; una regla nueva acordada, explicada, y primero una advertencia, hasta una fecha que todos conocen; la gobernanza medida desde el trabajo, no con una puntuación de madurez; un equipo de gobernanza que enseña cómo encajan las piezas; y lo que necesita un cambio para durar.",
+  "card": "A check stops an analyst, and its page says why and how to fix it. Teach first, so a check stops only the few.",
+  "card_es": "Un control detiene a un analista, y su página dice por qué y cómo arreglarlo. Enseña primero, para que un control detenga solo a unos pocos.",
+  "chapters_es": {
+    "crossing": "El mimo antes de la multa",
+    "today": "El día de la entrega",
+    "beside": "Una página junto al control",
+    "each": "Entre colegas",
+    "warn": "Primero, advertir",
+    "measured": "Medida por el uso",
+    "teach": "Docentes de datos",
+    "lasts": "Lo que dura"
+  },
+  "past": ["Bogotá, the mimes at the crossings in 1995", "Most people keep a rule because they understand it, and the fine is for the few."],
+  "past_es": ["Bogotá, los mimos en los cruces en 1995", "La mayoría cumple una regla porque la entiende, y la multa es para unos pocos."],
+  "next_h": "You've seen why most people keep a rule, and how governance teaches before a check has to stop anyone. More films in the series are on the way.",
+  "next_h_es": "Viste por qué la mayoría cumple una regla, y cómo la gobernanza enseña antes de que un control tenga que detener a alguien. Vienen más películas de la serie."
+}

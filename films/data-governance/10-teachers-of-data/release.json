@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Teachers of data",
+    "key": "teachers-of-data-en",
+    "dir": "films/data-governance/10-teachers-of-data/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/teachers-of-data/film.js",
+    "video": "dist/teachers-of-data.mp4",
+    "file": "teachers-of-data.mp4",
+    "captions": [
+      [
+        "films/data-governance/10-teachers-of-data/captions/en.srt",
+        "teachers-of-data.en.srt"
+      ],
+      [
+        "films/data-governance/10-teachers-of-data/captions/es.srt",
+        "teachers-of-data.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/10-teachers-of-data/source",
+      ":(exclude)films/data-governance/10-teachers-of-data/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 372,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 32.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

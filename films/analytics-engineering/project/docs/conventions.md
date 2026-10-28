@@ -282,7 +282,7 @@ with where their reviews go, or the script stops.
 
 The tests' owners and dimensions make the scorecard: `scripts/generate/scorecard.py` reads the last
 run and writes `docs/scorecard.md`, every test by the domain of the data it checks and its quality
-dimension, and what didn't pass, with its owner. It's read from what ran, never from a survey.
+dimension, and what didn't pass, with its owner. It's read from what ran, never from a survey. On Databricks, the platform's checks join it with `--platform`: the loading pipeline's expectations and the monitors (`analyses/quality/platform_results.sql`), each given its table's owner and domain from its source.
 
 Every pull request says what it touches. `scripts/check/impact.py` compares the branch with its
 base: the models, seeds and tests that changed, what's downstream, each public model's and mart's

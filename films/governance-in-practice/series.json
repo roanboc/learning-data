@@ -1,0 +1,53 @@
+{
+  "title": "Governance you can use",
+  "title_es": "Gobernanza que puedes usar",
+  "planned": 6,
+  "lead": "The third series on data governance. What the university decided, and what Noor's map drew, is built where the work happens, in dbt and on Databricks: owners and checks in the project, access on the platform, one meaning, quality you can see, products with contracts, and a place to find them.",
+  "lead_es": "La tercera serie sobre gobernanza de datos. Lo que la universidad decidió, y lo que dibujó el mapa de Noor, se construye donde ocurre el trabajo, en dbt y en Databricks: dueños y controles en el proyecto, accesos en la plataforma, un solo significado, una calidad que se ve, productos con contrato, y un lugar para encontrarlos.",
+  "description": "Short films on making data governance work with dbt and Databricks: owners, contracts and checks in the dbt project; access, tags, masks, lineage and audit in Unity Catalog; one meaning on the platform; quality rules and monitoring that tell each owner; data products and contracts in open formats; and a marketplace.",
+  "description_es": "Películas cortas sobre cómo hacer que la gobernanza de datos funcione con dbt y Databricks: dueños, contratos y controles en el proyecto de dbt; accesos, etiquetas, máscaras, linaje y auditoría en Unity Catalog; un solo significado en la plataforma; reglas de calidad y monitoreo que avisan a cada dueño; productos y contratos de datos en formatos abiertos; y un mercado de datos.",
+  "card": "Every decision and every flow on the map, built in dbt and on Databricks, so governance runs in the work.",
+  "card_es": "Cada decisión y cada flujo del mapa, construidos en dbt y en Databricks, para que la gobernanza funcione en el trabajo.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: from the map to the tools",
+  "thread_h_es": "Un hilo: del mapa a las herramientas",
+  "thread": "Each film builds one of the flows on Noor's map, in the example dbt project and on Databricks, and names the films of the first two series it expands. Every file and screen is a real one: what a practitioner opens to make governance run.",
+  "thread_es": "Cada película construye uno de los flujos del mapa de Noor, en el proyecto de dbt de ejemplo y en Databricks, y nombra las películas de las dos primeras series que amplía. Cada archivo y cada pantalla son reales: lo que abre quien practica para que la gobernanza funcione.",
+  "coming_h": "Still to come",
+  "coming_h_es": "Lo que viene",
+  "coming_p": "Six films. They follow Governance principles and Governance on the map, and build what those set out.",
+  "coming_p_es": "Seis películas. Siguen a Principios de gobernanza y La gobernanza en el mapa, y construyen lo que esas series plantean.",
+  "coming": [
+    [1, "Governed in dbt", "owners, access, contracts, versions and checks in the project"],
+    [2, "Governed in Unity Catalog", "grants, governed tags, policies, masks, lineage and audit"],
+    [3, "Meaning on the platform", "one meaning, read by people, reports and agents"],
+    [4, "Quality on the platform", "tests, expectations and monitoring, with alerts sent to owners"],
+    [5, "Products in open formats", "domains, data products and contracts, written in open formats"],
+    [6, "The marketplace", "find data, ask for it, and get access that ends on a date"]
+  ],
+  "coming_es": [
+    [1, "Gobernanza en dbt", "dueños, acceso, contratos, versiones y controles en el proyecto"],
+    [2, "Gobernanza en Unity Catalog", "permisos, etiquetas gobernadas, políticas, máscaras, linaje y auditoría"],
+    [3, "El significado en la plataforma", "un solo significado, que leen personas, informes y agentes"],
+    [4, "La calidad en la plataforma", "pruebas, expectativas y monitoreo, con alertas que llegan a los dueños"],
+    [5, "Productos en formatos abiertos", "dominios, productos de datos y contratos, escritos en formatos abiertos"],
+    [6, "El mercado de datos", "encontrar datos, pedirlos, y recibir un acceso que termina en una fecha"]
+  ],
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    ["tech", "Builds the project", "Jun, who puts owners, terms and classes in the dbt project, and a check that won't let a model in without them"],
+    ["tech", "Runs the platform", "Sam, who turns the project's classes into tags, masks and access that ends on a date"],
+    ["biz", "Owns a meaning", "Mei, whose term award is published once, and read alike by people, reports and agents"],
+    ["tech", "Designs the products", "Noor, who writes each product's contract in an open format, beside the model it matches"],
+    ["biz", "Looks for data", "Anil, a faculty analyst, who finds a product, reads its promise, and asks for access with a purpose"]
+  ],
+  "people_es": [
+    ["tech", "Construye el proyecto", "Jun, que pone dueños, términos y clases en el proyecto de dbt, y un control que no deja entrar un modelo sin ellos"],
+    ["tech", "Opera la plataforma", "Sam, que convierte las clases del proyecto en etiquetas, máscaras y accesos que terminan en una fecha"],
+    ["biz", "Es dueña de un significado", "Mei, cuyo término título se publica una vez, y lo leen por igual personas, informes y agentes"],
+    ["tech", "Diseña los productos", "Noor, que escribe el contrato de cada producto en un formato abierto, junto al modelo con el que coincide"],
+    ["biz", "Busca datos", "Anil, analista de una facultad, que encuentra un producto, lee su promesa, y pide acceso con un propósito"]
+  ]
+}

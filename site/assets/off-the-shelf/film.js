@@ -3390,7 +3390,7 @@ scene("checklist",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({right:wA
     {at:c.breath-0.25,place:"clip",keys:[[c.breath-0.25,1080,520,1.1],[c.breath,1140,520,1.18]],d:2.6,push:0,draw:(x,tt)=>{const b=c.breath;
       withA(x,1-fin(tt,P.title,0.8),()=>os_page(x,[1,1,1,1,1,1,fin(tt,b+0.25,0.45),fin(tt,b+0.7,0.45),fin(tt,b+1.15,0.45)],{lit:2}));}}]);
   os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · The shelf: Yusuf's first day, and what he inherits ----
@@ -3691,7 +3691,7 @@ scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,
     // the floor: he takes the binder to where the work is done; Jun looks up
     {at:P.f,place:"floor",keys:[[P.f,1000,560,1.2],[P.f+0.1,1100,555,1.22]],d:4,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.f+0.2,880,1400,150);
       os_floor(x,tt,{pose:{jun:{pose2:"listen",mix:fin(tt,wk.end-0.8,0.6)}}});os_carrier(x,"yusuf",wk,F.walk,0.62,held,{t:tt});}}]);
-  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 19");
+  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 10");
   wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

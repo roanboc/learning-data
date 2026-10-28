@@ -112,7 +112,7 @@ scene("checklist",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({right:wA
     {at:c.breath-0.25,place:"clip",keys:[[c.breath-0.25,1080,520,1.1],[c.breath,1140,520,1.18]],d:2.6,push:0,draw:(x,tt)=>{const b=c.breath;
       withA(x,1-fin(tt,P.title,0.8),()=>os_page(x,[1,1,1,1,1,1,fin(tt,b+0.25,0.45),fin(tt,b+0.7,0.45),fin(tt,b+1.15,0.45)],{lit:2}));}}]);
   os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
-  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · The shelf: Yusuf's first day, and what he inherits ----
@@ -387,8 +387,8 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,
       os_glassCard(x,tt,2,P.gov-0.1,["governance","checks it's kept"],{wash:GV.gold,washA:0.32});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 9 · The series: nine binders for the films on why governance, three cards on Noor's architecture map for the films that draw it
-//     as one model, six on the data team's board for the films that build it ----
+// ---- 9 · The series: nine binders for this series' films on why governance; then the two series that follow, each named on a card:
+//     three cards on Noor's architecture map for the films that draw it as one model, six on the data team's board for those that build it ----
 scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{nine:w("next","nine",-0.1),take:w("next","follows"),ml:c.map-0.6,mc:w("map","as one",-0.2),three:w("map","on the"),tl:c.tools-0.6,six:w("tools","six",-0.1),
       f:c.wish-0.6,end:c.breath-0.2};});
@@ -405,13 +405,13 @@ scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,
     {at:P.ml,place:"noor",keys:[[P.ml,860,500,1.1],[P.ml+0.1,800,470,1.16]],d:2,draw:(x,tt)=>{
       person(x,"noor",1250,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.ml+0.5,0.6),t:tt,flip:true});
       os_nameCard(x,1330,236,"Noor Rahman","data architect",gv_io(tt,P.ml+0.4,P.mc,0.4));}},
-    // the map, close: three cards, one in each layer the films add to
-    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
-    // the data team's board, close: six cards, one for each film that builds it with the tools
+    // the map, close: the series' name, and three cards, one in each layer the films add to
+    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_mapHead(x,fin(tt,P.mc+0.3,0.6));for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
+    // the data team's board, close: the series' name, and six cards, one for each film that builds it with the tools
     {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
       for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
     // the floor: he takes the binder to where the work is done; Jun looks up
     {at:P.f,place:"floor",keys:[[P.f,1000,560,1.2],[P.f+0.1,1100,555,1.22]],d:4,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.f+0.2,880,1400,150);
       os_floor(x,tt,{pose:{jun:{pose2:"listen",mix:fin(tt,wk.end-0.8,0.6)}}});os_carrier(x,"yusuf",wk,F.walk,0.62,held,{t:tt});}}]);
-  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 19");
+  gv_end(ctx,S,t,P.end,"Off the shelf","A policy that doesn't run anywhere is a wish.","Film 1 of 10");
   wc_paperOver(ctx,S);});

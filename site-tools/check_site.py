@@ -22,6 +22,8 @@ What it checks, page by page (every .html under site/):
 - a series' own labs and scenarios (build_series.series_learn): the same in both languages, each lab on one of its film's
   chapters, each scenario numbered by its film and pointing to a lab; its films' "Pause and think" questions stop at its labs.
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
+- opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
+  problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
 """
 import html.parser
 import json
@@ -169,6 +171,13 @@ BLOCK = {"address", "article", "aside", "blockquote", "br", "dd", "details", "di
          "summary", "table", "td", "th", "tr", "ul"}
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
+
+# every opening story's beats, said outright in the narration (AGENTS.md, Story and world): a film that opens on a story (a "past"
+# row in its site.json) has a table under "## Opening story" in its script.md, a row for each beat, quoting the narration's words
+BEATS = ["Scenario", "Problem", "Solution", "Benefits", "Back to the story"]
+# the films made before the rule (28 October 2026), by series folder and number; a film that changes its opening adds its table
+BEATS_BEFORE = {"analytics-engineering": range(1, 11), "enterprise-architecture": range(1, 12), "from-words-to-data": range(1, 8),
+                "master-and-reference-data": range(1, 10), "data-governance": (0, 2, 3)}
 
 # ---------------------------------------------------------------- a small DOM, from the standard library's parser
 class Node:
@@ -414,6 +423,42 @@ def js_comment_spans(src):
             prev = c
         i += 1
     return spans
+
+
+# ---------------------------------------------------------------- opening stories
+def plain_words(t):
+    """Text as it's said: JS escapes undone, curly quotes straightened, spaces collapsed."""
+    t = re.sub(r"\\u([0-9a-fA-F]{4})", lambda m: chr(int(m.group(1), 16)), t)
+    t = re.sub(r"\\(.)", r"\1", t)
+    t = t.translate(str.maketrans({"\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "\u00a0": " "}))
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def opening_beats(film):
+    """What's missing from a film's Opening story table (in its script.md): a row for each beat, each quoting words its narration says."""
+    script, narr = film / "script.md", film / "source/src/narration.js"
+    if not script.exists() or not narr.exists():
+        return [f"{film.relative_to(ROOT)}: no script.md or source/src/narration.js to find its opening story's beats in"]
+    m = re.search(r"^## Opening story\n(.*?)(?=^## |\Z)", script.read_text(), re.M | re.S)
+    if not m:
+        return [f"{script.relative_to(ROOT)}: no \"## Opening story\" table quoting the line that says each beat "
+                f"({', '.join(BEATS)}): see AGENTS.md, Story and world"]
+    said = plain_words(" ".join(re.findall(r'"text":"((?:[^"\\]|\\.)*)"', narr.read_text())))
+    rows = {}
+    for line in m.group(1).splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if line.startswith("|") and len(cells) > 1:
+            rows[cells[0].strip("* ").lower()] = " | ".join(cells[1:])
+    out = []
+    for beat in BEATS:
+        quotes = re.findall(r'["\u201c]([^"\u201c\u201d]+)["\u201d]', rows.get(beat.lower(), ""))
+        if not quotes:
+            out.append(f"{script.relative_to(ROOT)}: its Opening story table has no row \"{beat}\" quoting the line that says it")
+        for q in quotes:
+            for part in re.split(r"\s*(?:\u2026|\.\.\.)\s*", plain_words(q)):
+                if part and part not in said:
+                    out.append(f"{script.relative_to(ROOT)}: {beat}: \"{part[:70]}\" isn't in source/src/narration.js as it's said")
+    return out
 
 
 # ---------------------------------------------------------------- the checks
@@ -757,6 +802,16 @@ def main():
             for m in NUMBERING.finditer(line):
                 s["fails"].append(f"{md.relative_to(ROOT)}:{i}: \"{m.group(0)}\"")
     s["notes"].append(f"{docs} Markdown files")
+
+    s = rep.check("Opening stories: each beat said outright (scenario, problem, solution, benefits, back to the story), quoted in the script")
+    films = 0
+    for site in sorted(ROOT.glob("films/*/*/site.json")):
+        film, m = site.parent, re.match(r"(\d+)-", site.parent.name)
+        if not m or not json.loads(site.read_text()).get("past") or int(m.group(1)) in BEATS_BEFORE.get(film.parent.name, ()):
+            continue
+        films += 1
+        s["fails"] += opening_beats(film)
+    s["notes"].append(f"{films} films; the {sum(len(v) for v in BEATS_BEFORE.values())} made before the rule (28 October 2026) are left as they are")
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

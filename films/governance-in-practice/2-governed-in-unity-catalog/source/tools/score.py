@@ -88,19 +88,13 @@ def line(inst, segs, g=1.0, soft=1.0, att=0.15, rel=0.3, room=0.18, pan=None, ti
         else:
             run.append(s)
 def _line(inst, segs, g, soft, att, rel, room, pan, tie, dyn):
-    T0, T1 = segs[0][0], segs[-1][1]; gl = 0.05
+    T0, T1 = segs[0][0], segs[-1][1]; xf = 0.04
     n = int((T1 - T0 + rel + 0.05) * SR); x = np.arange(n, dtype=np.float64) / SR
-    fs = [hz(m) for _, _, m, _ in segs]; A = [_harm(inst, f, soft) for f in fs]; K = max(len(a) for a in A)
-    A = [np.pad(a, (0, K - len(a))) for a in A]
-    kx, kf, ka, kv = [], [], [], []
-    for i, (a, b, m, v) in enumerate(segs):  # each note steady between short slurs, its harmonics' weights with it
-        for t in ((a - T0 + gl / 2 if i else 0.0), (b - T0 - gl / 2 if i < len(segs) - 1 else n / SR)):
-            kx.append(t); kf.append(np.log2(fs[i])); ka.append(A[i]); kv.append(v)
     tg = [0.0] + [segs[i][0] - T0 for i in range(1, len(segs)) if segs[i][2] == segs[i - 1][2] and not tie]  # where the tongue starts a note
-    lf = np.interp(x, kx, kf)
+    flat = np.ones(n)
     for t0 in tg:  # the lips settle: a tongued note starts a few cents flat
-        lf = lf - 0.006 * np.exp(-np.maximum(x - t0, 0) / 0.035) * (x >= t0)
-    ph = 2 * np.pi * np.cumsum(2 ** lf) / SR
+        flat = flat * 2 ** (-0.006 * np.exp(-np.maximum(x - t0, 0) / 0.035) * (x >= t0))
+    cf = np.cumsum(flat) / SR  # time as the lips keep it: a note's phase is its pitch times this, so a note held on stays one tone
     e = np.sin(0.5 * np.pi * np.minimum(x / att, 1)) ** 2
     e = e * np.where(x > T1 - T0, np.cos(0.5 * np.pi * np.minimum((x - (T1 - T0)) / rel, 1)) ** 2, 1.0)
     for i in range(1, len(segs)):  # a slur dips for a moment as the valves change; the same note tongued again dips more
@@ -109,17 +103,24 @@ def _line(inst, segs, g, soft, att, rel, room, pan, tie, dyn):
             e = e * (1 - d * np.exp(-((x - (segs[i][0] - T0)) / 0.04) ** 2))
     fq = R1.uniform(0.08, 0.28, 3); fp = R1.uniform(0, 2 * np.pi, 3)
     air = 1 + 0.012 * sum(np.sin(2 * np.pi * a * x + b) for a, b in zip(fq, fp)) / 3  # the breath's support, drifting slowly
-    lev = np.interp(x, kx, kv) * air
-    if dyn:
-        lev = lev * np.interp(x + T0, [d[0] for d in dyn], [d[1] for d in dyn])
-    ka = np.array(ka); s = np.zeros(n)
-    for j in range(K):  # the upper harmonics bloom a moment after the lower: a brass note warms as it speaks
-        aj = np.interp(x, kx, ka[:, j])
-        if aj.max() > 1e-4:
-            s += aj * e ** (1 + 0.3 * j) * np.sin((j + 1) * ph + 0.7 * j * j)
+    s = np.zeros(n); lev = np.zeros(n)
+    for i, (a, b, m, v) in enumerate(segs):  # a slur is the valves changing: the note stops as the next begins, in 40 ms, with no
+        # slide (a slide's pitch, sweeping through the room's echo, smears across every note between)
+        p0 = 0 if i == 0 else max(0, int((a - T0 - xf / 2) * SR)); p1 = n if i == len(segs) - 1 else min(n, int((b - T0 + xf / 2) * SR))
+        f = hz(m); w = np.full(p1 - p0, float(v)); xs = x[p0:p1]
+        if i:
+            w *= np.sin(0.5 * np.pi * np.clip((xs - (a - T0 - xf / 2)) / xf, 0, 1)) ** 2
+        if i < len(segs) - 1:
+            w *= np.cos(0.5 * np.pi * np.clip((xs - (b - T0 - xf / 2)) / xf, 0, 1)) ** 2
+        lev[p0:p1] += w; es = e[p0:p1]; ph = 2 * np.pi * f * cf[p0:p1]
+        for j, aj in enumerate(_harm(inst, f, soft)):  # the upper harmonics bloom a moment after the lower: a brass note warms as it speaks
+            if aj > 1e-4:
+                s[p0:p1] += aj * w * es ** (1 + 0.3 * j) * np.sin((j + 1) * ph + 0.7 * j * j)
+    dl = air * (np.interp(x + T0, [d[0] for d in dyn], [d[1] for d in dyn]) if dyn else 1.0)
+    lev = lev * dl
     lo, hi = BRASS[inst][2]
     br = filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)); puff = sum(np.exp(-np.maximum(x - t0, 0) / 0.03) * (x >= t0) for t0 in tg)
-    s = s * lev + (0.004 * e + 0.03 * puff) * br * lev  # a breath under the note, and the tongue's puff at its start
+    s = s * dl + (0.004 * e + 0.03 * puff) * br * lev  # a breath under the note, and the tongue's puff at its start
     s = filt(s.astype(np.float32), 'low', 2400)
     if room:
         s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)

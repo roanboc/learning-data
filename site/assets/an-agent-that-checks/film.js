@@ -3387,7 +3387,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
   // imagined, and said so; and who Anil is
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.5,0.5)*(1-fin(t,P.title,0.4)));
   ac_nameCard(ctx,1250,170,"Anil Kurian","analyst, Faculty of Health",gv_io(t,P.anil-0.1,P.col+0.3,0.4));
-  gv_title(ctx,S,t,P.title,"An agent that checks","governance's rules, on every change","Film 9 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"An agent that checks","governance's rules, on every change","Film 9 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · Sent back: today, Anil's first change, the list itself; the checks send it back with four gaps; he asks Jun, and waits ----
@@ -3601,7 +3601,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       const cl=fin(tt,P.end-0.6,0.6);gv_halo(x,AC_F.cls-40,AC_F.y0+4*AC_F.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6)*(1-cl));
       ac_form(x,tt,{clsAt:-99,ok:1,fade:1.25*cl});ac_note(x,tt,{res:1,a:1-cl});}}]);
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.4,0.5)*(1-fin(t,P.dawn,0.4))+fin(t,P.last,0.5)*(1-fin(t,P.end,0.4)));
-  gv_end(ctx,S,t,P.end,"An agent that checks","An agent checks what's written. People decide.","Film 9 of 19");
+  gv_end(ctx,S,t,P.end,"An agent that checks","An agent checks what's written. People decide.","Film 9 of 10");
   wc_paperOver(ctx,S);});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

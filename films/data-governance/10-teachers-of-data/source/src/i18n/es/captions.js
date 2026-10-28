@@ -8,8 +8,8 @@
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Bogotá, 1995.":
 "Bogotá, 1995.",
-"In the city centre, drivers stop on the zebra crossings, and people on foot weave between the cars.":
-"En el centro de la ciudad, los conductores paran sobre las cebras, y los peatones se cuelan entre los carros.",
+"In the city centre, drivers stop on the zebra crossings, so people on foot have to weave between the cars.":
+"En el centro de la ciudad, los conductores paran sobre las cebras, así que los peatones tienen que colarse entre los carros.",
 "It's dangerous: more than a thousand people a year die on the city's roads.":
 "Es peligroso: más de mil personas al año mueren en las vías de la ciudad.",
 "Fines alone haven't changed the habit. The city needs another way.":
@@ -34,6 +34,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La mayoría cumple una regla porque la entiende, y porque la gente a su alrededor la cumple.",
 "The fine is for the few.":
 "La multa es para unos pocos.",
+"It's the same with data. When most people keep the rules, everyone who uses the data can trust it.":
+"Con los datos pasa lo mismo. Cuando la mayoría cumple las reglas, todos los que usan los datos pueden confiar en ellos.",
 
 "Today, the university sends its awards to the government.":
 "Hoy, la universidad envía sus títulos al gobierno.",

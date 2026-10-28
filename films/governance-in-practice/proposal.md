@@ -30,7 +30,7 @@ The plan's, with the rule every series keeps: tools show, they don't lead. Each 
 
 ## Rules from the plan
 
-- Every file on screen is a real one, from the example dbt project, which stays in [`../data-governance/project/`](../data-governance/project/), or from Databricks.
+- Every file on screen is a real one, from the example dbt project, [`../analytics-engineering/project/`](../analytics-engineering/project/), with the additions the plan gave it for governance, or from Databricks.
 - Each film names the films it expands, recaps them in a line, and goes straight to how it's built.
 - Product names change often: they're kept to labels, checked in each film's rigour sheet on the day it's made, and a feature in preview is called one.
 - Each film's title and end cards say "Film 1 of 6 · data governance" and "Film 1 of 6", and so on.

@@ -177,7 +177,7 @@ SERIES = [
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, DCAM de la EDM Association, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento y esa notación; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="governance-in-practice", dir="governance-in-practice", slug="governance-in-practice",
          name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_use_builds_on,
-         place={"en": "university", "es": "universidad"}, blocks=[], project="data-governance"),
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]

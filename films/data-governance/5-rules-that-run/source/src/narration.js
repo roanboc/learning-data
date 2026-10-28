@@ -1,4 +1,4 @@
-// Rules that run, film 5 of 19 of the data governance series. One line per id; the film re-times itself to the voice.
+// Rules that run, film 5 of 10 of Governance principles, the first series on data governance. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "river":{"name":"The measured river","lead":1.4,"tail":1.0,"vo":[

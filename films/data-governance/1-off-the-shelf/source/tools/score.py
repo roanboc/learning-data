@@ -1,57 +1,142 @@
 # Off the shelf: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
 # A new palette for a new series (PLAYBOOK.md: vary the sound itself): a soft brass choir, warm and unhurried, holds the
-# chords; a low music box, small and close, marks the moments that land; and the series' own mark, four
-# notes, 1-5-4-8, on one horn with the music box an octave above, plays at the title and the end. D dorian, in open fifths, for the
-# market town from 1215 to 1871; F major once the measures finally hold, and for the university today.
+# chords; a low music box, small and close, marks the moments that land; and the series' own mark, four notes, 1-5-4-8, on one
+# horn with the music box an octave above, plays at the title and the end. D, in open fifths, for the operating room before 2008;
+# F major once the checklist holds, and for the university today.
+# The sound since the author's review of the master data films (20 October 2026; PLAYBOOK.md §5): music plays under the opening,
+# where the story from history is told, then comes in from time to time, at a chapter's turn, under a moment on screen or in a pause
+# without words, never as a constant bed under the voice; and nothing in it trembles or pulses.
+#  - The horns hold the chords all through the operating room's story, until the title; after that, only at each chapter's turn,
+#    swelling in the pause between two chapters and let go as the new one's voice begins, under a few moments on screen, and from
+#    the film's last line to the end card. One player to a note, held straight, without vibrato, and a note the next chord keeps is
+#    held through the change: two players on one note would beat against each other, a slow pulse on a phone's speaker. The chords
+#    are voiced with no two notes a semitone apart, and tuned pure over F.
+#  - The music box has one tooth to a note, tuned as the horns are, and never sounds two notes a semitone apart.
+#  - There's no pulse, even when the two reports disagree: each number has its note, and when both turn out right, their two
+#    notes sound together, a third apart.
 # The rules from In the weeds of data crafting hold:
-#  - Nothing loops. The music is a bed of sustained chords that change with the chapters; nothing repeats in the background.
-#  - The one exception is feeling: when the two reports disagree, a low, muted pulse (music.py's urgent()) rises under the scene,
-#    leans on the semitone, and fades out once Yusuf finds that both are right. It stays below about 1 kHz.
+#  - Nothing loops. The music is sustained chords that come and go with the narration; nothing repeats in the background.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed. Things
 #    that drop into place (a card, a pin, a stamp) land about 0.1 s after they start to move, so their sound comes then.
 # The music box means the same thing all through: three notes rising, 1-3-5, for a rule, a copy where the work happens and someone
-# who checks; two notes a semitone apart for a question no one can answer yet; a note that's a little out of tune for each bushel.
-# And everything stays low and soft: wooden knocks, paper, cork pins, rubber stamps and a mallet's thud, filtered below about 2.5 kHz.
+# who checks; two notes rising a step, to the note just under home, for a question no one can answer yet; and two notes rising
+# a third, A to C, when a check holds.
+# And everything stays low and soft: wooden knocks, paper, pencils, cork pins and rubber stamps, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads
-import json as _json, pathlib as _pl
+import itertools, json as _json, pathlib as _pl
 _obj = lambda f: (lambda s: _json.loads(s[s.index('{'):s.rindex('}') + 1]))((_pl.Path('src') / f).read_text())
 _NARR, _DUR = _obj('narration.js'), _obj('vodur.js')
 def W(sid, lid, word, off=0):
     ln = next(v for v in _NARR[sid]['vo'] if v['id'] == lid); s = ln.get('say') or ln['text']; i = max(0, s.find(word))
     return G(sid, lid) + _DUR[sid + '/' + lid] * i / len(s) + off
-def rel(sid, t):
-    """a moment in the film, as seconds into its chapter"""
-    return t - S0(sid)
+P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is across the frame, as a pan
 
 # ---- this film's instruments ----
-HORN = (1.0, 0.62, 0.36, 0.2, 0.1, 0.05)  # a horn's harmonics, the lowest strongest
-def _harm(ph, w):
-    """the sum of w[k-1] sin(k ph), k = 1, 2, ...: one sine and one cosine for every harmonic, by sin((k+1)p) = 2cos(p)sin(kp) - sin((k-1)p)"""
-    c2 = 2 * np.cos(ph); s0 = np.zeros_like(ph); s1 = np.sin(ph); out = w[0] * s1
-    for a in w[1:]:
-        s0, s1 = s1, c2 * s1 - s0; out = out + a * s1
-    return out
-def horns(ch, start, sec, g=0.036):
-    """the bed: a soft brass choir, each chord held by three players a little apart across the stereo field, each breathing on their own,
-    with a little of the air through their horns"""
-    x = np.arange(max(1, int(sec * SR))) / SR; e = env(sec, 1.8, 3.0)
-    for j, (pan, det) in enumerate(((-0.7, 0.9976), (0.7, 1.0024), (0.0, 1.0))):
-        sw = 1 + 0.07 * np.sin(2 * np.pi * (0.05 + 0.013 * j) * x + j)
-        s = filt((sum(_harm(2 * np.pi * mf(m) * det * x, HORN) for m in ch) / len(ch)).astype(np.float32), 'low', 1500)
-        s = s + 0.006 * filt(noise(sec), 'band', (1200, 6000))[:len(x)]
-        put((s * e * sw).astype(np.float32), start, g * (0.7 if pan == 0 else 1), pan)
+# the music's levels against the voice: the horns' chords as loud as the brass choir that held them under every chapter before
+# the author's review (three players to a note, each at 0.036), one player to a note now
+BED = 2.6
+# the tuning: every note pure over F, the film's home. In equal temperament a held major third beats four to eight times a second, a
+# tremble that a phone's speaker brings out, so, as in Which value wins, each pitch takes a just ratio over F. G, B, D and E flat can
+# each take either of two (D is 5/3 over F, a fourth over A, but 27/16 a fifth over G at 9/8), and each chord takes, of its notes'
+# ratios, the set whose partials beat least; a note held into the next chord keeps its tuning
+RATIO = {0: (1,), 2: (9 / 8, 10 / 9), 4: (5 / 4,), 5: (4 / 3,), 6: (45 / 32, 25 / 18), 7: (3 / 2,), 9: (5 / 3, 27 / 16), 10: (16 / 9, 9 / 5), 11: (15 / 8,)}
+def hz(m, r=None):
+    """a note's frequency, tuned over F: r is the ratio its pitch takes, by default the first (and equal temperament for a pitch
+    the film doesn't play)"""
+    pc = (m - 65) % 12
+    return mf(65) * (r or RATIO.get(pc, (2 ** (pc / 12),))[0]) * 2 ** ((m - 65) // 12)
+def _bell(F):
+    """how loud a horn's harmonic at F Hz is, played softly: round and dark, strongest below about 500 Hz, almost nothing above
+    about 1.3 kHz"""
+    return 1 / (1 + (F / 480) ** 2)
+def rough(fs):
+    """how much held horns at these frequencies beat against each other: each pair of partials a few hertz apart counts, most at
+    six beats a second, by the softer of the two"""
+    ps = [(h * f, h ** -0.6 * _bell(h * f)) for f in fs for h in range(1, 12) if h * f < 1400]; d = 0.0
+    for i, (f1, a1) in enumerate(ps):
+        for f2, a2 in ps[i + 1:]:
+            df = abs(f2 - f1)
+            if 0 < df < 40:
+                d += min(a1, a2) * df / 6 * np.exp(1 - df / 6)
+    return d
+def player(m, sec, seed, f0=None):
+    """one horn, played softly, holding note m (at f0 Hz, if given): it speaks with a breath of air and a slight rise into its
+    pitch, its upper harmonics opening a moment after the lower; then held steady, without vibrato"""
+    R = np.random.default_rng(seed); f0 = f0 or hz(m); x = tt(sec).astype(np.float64)
+    ph = 2 * np.pi * np.cumsum(f0 * (1 - 0.004 * np.exp(-x / 0.05))) / SR
+    s = np.zeros_like(x)
+    for h in range(1, 12):
+        F = h * f0
+        if F > 1400:
+            break
+        s += np.sin(h * ph + R.uniform(0, 6.3)) * h ** -0.6 * _bell(F) * np.clip((x - 0.012 * h) / (0.07 + 0.02 * h), 0, 1)
+    air = filt(noise(sec), 'band', (250, 1200)) * (0.012 + 0.05 * np.exp(-x / 0.08))
+    return (s + air) * (1 + 0.03 * np.sin(2 * np.pi * R.uniform(0.05, 0.1) * x + R.uniform(0, 6.3)))
+def hold(m, start, sec, n, g=0.03, rel=2.8, a=1.2, f=None):
+    """note m held on a horn from start (at f Hz, if given), one of n in its chord: it swells in over a seconds, and is let go over
+    rel seconds; low notes to the left and high to the right, as the players sit. One player to a note: two on one note beat against
+    each other, and a phone's one speaker turns that into a slow pulse"""
+    x = tt(sec); e = (np.clip(x / a, 0, 1) ** 1.5 * np.clip((sec - x) / rel, 0, 1)).astype(np.float32)
+    put(filt((player(m, sec, m * 31 + int(start * 7), f) * e / n).astype(np.float32), 'low', 1300), start, g * BED, max(-0.5, min(0.5, (m - 52) / 26)))
+_BED = []
+def bed(keys, end, g=0.03, a=1.2, rel=2.8):
+    """chords, each from its moment, until end: kept, so play_bed() plays the whole film's at once. Their notes swell in over a
+    seconds and are let go over rel"""
+    _BED.append((sorted(keys), end, g, a, rel))
+def play_bed():
+    """the film's chords on the horns, as Which value wins plays its sackbuts: a player whose note the next chord keeps holds it
+    through the change, the others let go just after it, and the new notes come in a little before it, so they have spoken by
+    then. A note a semitone from one that's let go comes in at the change itself, and the other is let go quickly, as one player
+    moving a step would: the two never sound together, where they would rub. So does a note whose overtones would beat against one
+    that's let go, where the next chord tunes a G or a D the other way. A note that leaves for a passing chord and comes straight
+    back is let go quickly enough to come back in, so it never sounds twice at once. A note too low for the horns is played an
+    octave up. Each chord is tuned pure (rough()), around the notes it keeps from the chord before"""
+    K = [(t, sorted(set(m + 12 if m < 38 else m for m in ch)), end, g, a, rel) for keys, end, g, a, rel in _BED for t, ch in keys]
+    K.sort(key=lambda k: k[0])
+    on = lambda j: j + 1 < len(K) and K[j + 1][0] <= K[j][2]  # the next chord comes while this one still sounds
+    H = []  # each note held: its pitch, when it comes in, when it is let go, its chord's size and level, how long letting go takes,
+    # how long swelling in takes, and its frequency
+    F = []  # each chord's notes, tuned
+    for i, (t0, ch, end, g, a, rel) in enumerate(K):
+        prev = K[i - 1][1] if i and on(i - 1) else []
+        keep = {m: F[i - 1][m] for m in ch if m in prev}; new = [m for m in ch if m not in prev]
+        rs = min(itertools.product(*[RATIO.get((m - 65) % 12, (None,)) for m in new]),
+                 key=lambda rs: rough(list(keep.values()) + [hz(m, r) for m, r in zip(new, rs)]))
+        F.append({**keep, **{m: hz(m, r) for m, r in zip(new, rs)}})
+        for m in ch:
+            if m in prev:
+                continue
+            j = i
+            while on(j) and m in K[j + 1][1]:
+                j += 1
+            H.append([m, t0 - 0.6, K[j + 1][0] if on(j) else K[j][2], len(ch), g, K[j][5], a, F[i][m]])
+    def clash(f1, f2):
+        """two notes whose overtones, up to the sixth, almost meet: a few hertz and under 3% apart, so they would beat"""
+        return any(0.3 <= abs(a * f1 - b * f2) <= min(12, 0.03 * min(a * f1, b * f2))
+                   for a in range(1, 7) for b in range(1, 7) if max(a * f1, b * f2) < 1400)
+    for o in H:
+        for i in H:
+            if o[1] < i[1] < o[2] + o[5] and (abs(o[0] - i[0]) == 1 or i[1] > o[2] - 0.61 and clash(o[7], i[7])):
+                if i[1] < o[2]:  # it comes in at a change: a step, or a retuning
+                    i[1], i[6], o[5] = o[2] - 0.15, min(i[6], 0.45), 0.35
+                else:  # it comes in as the other is let go
+                    o[5] = max(0.25, i[1] + 0.3 - o[2])
+    for h in H:
+        back = [b[1] for b in H if b[0] == h[0] and h[2] <= b[1] < h[2] + h[5]]
+        if back:
+            h[5] = max(0.25, min(back) - h[2])
+    for m, s, t1, n, g, rel, a, f in H:
+        hold(m, s, t1 - s + rel, n, g, rel, a, f)
 def horn(m, start, sec, g=0.05, pan=0.0):
-    """one horn, for the mark: a breath in, round and warm, and a slow vibrato once the note is held"""
-    f = mf(m); x = np.arange(max(1, int(sec * SR))) / SR; vib = 1 + 0.0035 * np.sin(2 * np.pi * 4.8 * x) * np.clip((x - 0.25) / 0.6, 0, 1)
-    ph = 2 * np.pi * np.cumsum(f * vib) / SR
-    s = _harm(ph, HORN) + 0.03 * filt(noise(sec), 'band', (f, min(3 * f, 1800)))[:len(x)] * np.exp(-x * 18)
-    put(norm(filt((s * env(sec, 0.09, min(0.6, sec * 0.45))).astype(np.float32), 'low', 1500)), start, g, pan)
+    """one horn, for the mark: a breath in, round and warm, held straight"""
+    s = player(m, sec, m * 17 + int(start * 5)) * env(sec, 0.09, min(0.6, sec * 0.45))
+    put(norm(filt(s.astype(np.float32), 'low', 1500)), start, g, pan)
 def comb(m, start, g=0.05, pan=0.0, sec=2.6):
-    """the music box, low: a steel tooth plucked, tuned in a pair a hair apart, its high partial gone at once"""
-    f = mf(m); x = np.arange(max(1, int(sec * SR))) / SR
-    s = (np.sin(2 * np.pi * f * x) + 0.5 * np.sin(2 * np.pi * f * 1.0023 * x + 0.7)) * np.exp(-x * 1.25)
+    """the music box, low: one steel tooth to a note, plucked, its high partial gone at once"""
+    f = hz(m); x = tt(sec).astype(np.float64)
+    s = np.sin(2 * np.pi * f * x) * np.exp(-x * 1.25)
     s = s + 0.22 * np.sin(2 * np.pi * f * 5.93 * x) * np.exp(-x * 16) + 0.08 * np.sin(2 * np.pi * f * 2 * x) * np.exp(-x * 4)
     s = s * np.minimum(1, x / 0.002) + 0.06 * filt(noise(sec), 'band', (700, 2000))[:len(x)] * np.exp(-x * 260)
     put(norm(filt(s.astype(np.float32), 'low', 2400)), start, g, pan)
@@ -60,16 +145,13 @@ def mark(start, root=53, g=0.07):
     for i, iv in enumerate([0, 7, 5, 12]):
         horn(root + iv, start + i * 0.45, 1.0 if i < 3 else 2.8, g * 0.75, (i - 1.5) * 0.12)
         comb(root + 12 + iv, start + i * 0.45, g * 0.6, (i - 1.5) * 0.15, sec=3.2 if i == 3 else 2.4)
-def bed(sid, chords, a=None, b=None, g=0.036, bassg=0.016):
-    """the chapter's chords on the brass choir, from a to b seconds into it, each starting 2 s early and lasting 4 s longer"""
-    s0, s1 = span(sid, a, b); d = (s1 - s0) / len(chords)
-    for i, ch in enumerate(chords):
-        horns(ch, s0 + i * d - 2.0, d + 4.0, g)
-        if bassg:
-            drone(ch[0] - 12, s0 + i * d - 2.0, d + 4.0, bassg, 'warm')
-def swell(ch, s, sec=3.0, g=0.018):
-    """the brass choir swelling for a moment, as something lights up"""
-    horns(ch, s, sec, g)
+def three(times, g=0.05, pans=(-0.4, 0.4, 0.0)):
+    """a rule, a copy where the work happens, someone who checks: 1-3-5, rising"""
+    for k, t in enumerate(times):
+        comb([65, 69, 72][k], t, g, pans[k])
+def ask(s, g=0.04):
+    """a question no one can answer yet: two notes rising a step, to the E just under home, and left there"""
+    comb(62, s, g, -0.3); comb(64, s + 0.3, g, 0.3)
 
 # ---- soft sounds, all low-passed ----
 def knock(s, g=0.03, pan=0.0, f=240):
@@ -81,10 +163,6 @@ def tap(s, g=0.016, pan=0.0):
 def paper(s, g=0.03, pan=0.0, sec=0.45):
     """paper, softly: filtered noise with a swell"""
     x = tt(sec); X(filt(noise(sec), 'band', (250, 2000))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g, pan)
-def press(s, g=0.07, pan=0.0):
-    """a mallet on a steel punch: a low thud and a dull knock, nothing bright"""
-    x = tt(0.5); X(norm((np.sin(2 * np.pi * 72 * x) * np.exp(-x * 10) + 0.35 * filt(noise(0.5), 'band', (120, 800))[:len(x)] * np.exp(-x * 40)).astype(np.float32)), s, g, pan)
-    s_knock(s + 0.005, g * 0.45, pan, 170)
 def rubber(s, g=0.045, pan=0.0):
     """a rubber stamp on paper: a padded thump, and the paper under it"""
     x = tt(0.25); X(norm((np.sin(2 * np.pi * 120 * x) * np.exp(-x * 22) + 0.5 * filt(noise(0.25), 'band', (200, 1200))[:len(x)] * np.exp(-x * 45)).astype(np.float32)), s, g, pan)
@@ -95,160 +173,183 @@ def slide(s, g=0.022, pan=0.0, sec=0.42):
     """a binder drawn forward along a wooden shelf: a low, rough slide, and a soft stop"""
     x = tt(sec); X(filt(noise(sec), 'band', (140, 900))[:len(x)] * np.sin(np.pi * x / sec) ** 1.5 * (1 + 0.4 * np.sin(2 * np.pi * 31 * x)), s, g, pan)
     s_knock(s + sec * 0.92, g * 0.5, pan, 200)
-def clink(s, g=0.03, pan=0.0):
-    """a brass weight set down in a scale's pan: a short, low ring, darkened"""
-    x = tt(0.6); f = 410
-    X(norm(filt((np.sin(2 * np.pi * f * x) * np.exp(-x * 7) + 0.4 * np.sin(2 * np.pi * f * 2.32 * x) * np.exp(-x * 11) + 0.2 * np.sin(2 * np.pi * f * 4.1 * x) * np.exp(-x * 18)).astype(np.float32), 'low', 1800, 4)), s, g, pan)
 def air(s, sec=0.9, g=0.02, pan=0.0):
     """a breath of air, for an arc drawn or a ring going round"""
     s_air(s, sec, g, pan)
-def three(times, g=0.05, pans=(-0.4, 0.4, 0.0)):
-    """a rule, a copy where the work happens, someone who checks: 1-3-5, rising"""
-    for k, t in enumerate(times):
-        comb([65, 69, 72][k], t, g, pans[k])
-def ask(s, g=0.04):
-    """a question no one can answer yet: two notes a semitone apart"""
-    comb(64, s, g, -0.3); comb(65, s, g, 0.3)
 
-# chords (MIDI note numbers): D dorian in open fifths for the market town; F major for the measures that hold, and for today
+# chords (MIDI note numbers), low to high: D in open fifths for the operating room before 2008; F major for the checklist that
+# holds, and for today. No two notes a semitone apart, where they would rub
 D5 = [38, 45, 50, 57]; DM = [38, 45, 50, 53, 57]; C5 = [36, 43, 48, 55]; GADD = [43, 50, 55, 59, 62]; ASUS = [45, 52, 57, 62]
 FMAJ9 = [41, 48, 52, 55, 57]; BBMAJ9 = [46, 53, 57, 60, 62]; DM9 = [38, 45, 53, 60, 64]; CSUS = [36, 43, 48, 53, 55]
-GM7 = [43, 50, 53, 58]; AM7 = [45, 52, 55, 60]; BBMAJ7 = [46, 53, 57, 62]; A7SUS = [45, 52, 55, 62]
+GM7 = [43, 50, 53, 58]; A7SUS = [45, 52, 55, 62]
+# under the mark, F in open fifths with the D above: the mark's F, C, B flat and F, on the horn and the music box, never a
+# semitone from a note held under them, as they would be from an A or an E
+FOPEN = [41, 48, 53, 60, 62]
 
-# 1. One measure: open fifths in D for 1215, the charter read again as each year turns; a major chord for the king's standards;
-#    a music box out of tune for each bushel; F major once it all works together, 1-3-5 for the law, the copy and the inspector;
-#    a weight set in the pan, the mallet on the punch twice, the last mark close; the mark under the title
-yrs = [G('measure', 'repeat', 0.2 + 1.3 * i) for i in range(4)]
-hall, y1871, shop, close = G('measure', 'kings', -0.4), W('measure', 'county', 'In eighteen', -0.5), G('measure', 'worked', -0.4), G('measure', 'breath', -1.8)
-bed('measure', [D5, DM], 0, rel('measure', yrs[0]))
-bed('measure', [C5, DM], rel('measure', yrs[0]), rel('measure', hall))
-bed('measure', [GADD], rel('measure', hall), rel('measure', y1871))
-bed('measure', [DM, ASUS], rel('measure', y1871), rel('measure', shop))
-bed('measure', [FMAJ9, BBMAJ9], rel('measure', shop), rel('measure', close))
-bed('measure', [FMAJ9], rel('measure', close), None, g=0.04)
-paper(G('measure', 'quote', -0.1), 0.03, -0.1, 0.6)
-for y in yrs:
-    paper(y, 0.028, -0.3, 0.45)
-comb(62, W('measure', 'kings', 'standards'), 0.05, 0.2)
-for i, m in enumerate([62, 62.7, 61.4, 63.5, 61.8, 64.2]):
-    comb(m, W('measure', 'county', 'bushel', -0.3 + 2.2 * i / 7), 0.045, -0.4 + i * 0.16)
-knock(W('measure', 'county', 'thirty'), 0.03, 0.0, 220)
-three([G('measure', 'three'), W('measure', 'three', 'a copy'), W('measure', 'three', 'an inspector')])
-clink(W('measure', 'three', 'checked', 0.5), 0.03, 0.1)
-for off in [0.19, 0.79]:
-    press(W('measure', 'three', 'again and', off), 0.06, 0.1)
-press(G('measure', 'breath', -0.555), 0.085)
-mark(G('measure', 'breath', 1.0))
-# 2. The shelf: a music box note for Yusuf's name; a knock for the shelf's sign; a low note for the score; a pen for each TBC;
-#    the rubber stamp on the minutes; a knock for David's question
-bed('shelf', [FMAJ9, BBMAJ9, DM9, CSUS])
-comb(65, G('shelf', 'starts', 0.3), 0.045, 0.0)
-knock(W('shelf', 'shelf', 'thirty', -0.2), 0.03, -0.3)
-comb(57, W('shelf', 'shelf', 'maturity'), 0.04, 0.2)
-for n in range(8):
-    tap(W('shelf', 'chart', 'half', -0.2 + 2.2 * n / 8), 0.016, -0.3 + 0.08 * n)
-rubber(W('shelf', 'council', 'once', 0.005), 0.045)
-knock(G('shelf', 'brief', 0.1), 0.026, 0.4, 300)
-# 3. Two numbers: a pulse under the disagreement, leaning on the semitone, until both turn out right; a music box note for each
-#    number, a semitone apart; both together for the question
-bed('numbers', [DM, BBMAJ7, GM7, A7SUS])
-urgent(G('numbers', 'week', -0.2), W('decides', 'both', 'right', 0.3), bpm=96, root=38, g=0.05, steps=(0, 0, 1, 0))
-comb(64, W('numbers', 'census', 'four', -0.1), 0.05, -0.3)
-comb(65, W('numbers', 'draft', 'four', -0.1), 0.05, 0.3)
-ask(G('numbers', 'which')); knock(G('numbers', 'which'), 0.026, 0.0, 200)
-# 4. Who decides? Two ticks, a third apart, as both are right; the chip and the new row on the glossary; a pin for Monday's card;
-#    knocks for the two definitions; air as the arc is drawn, and the question; three notes that don't resolve for three answers;
-#    a swell as the chart's row lights; the TBC stamp
-right = W('decides', 'both', 'right')
-bed('decides', [DM9], 0, rel('decides', right))
-bed('decides', [FMAJ9, CSUS, DM9, BBMAJ9, GM7, CSUS], rel('decides', right), None)
-comb(65, right, 0.045, -0.2); comb(69, right + 0.08, 0.045, 0.3)
-knock(W('decides', 'monday', 'the word', 0.08), 0.024, 0.3, 320)
-tap(W('decides', 'monday', 'microcredentials', 0.0), 0.02, 0.2)
-pin(G('decides', 'before', 0.0), 0.03, 0.0)
-knock(G('decides', 'gov', 0.2), 0.026, -0.3); knock(W('decides', 'gov', 'ours', 0.0), 0.026, 0.3, 280)
-air(W('decides', 'gov', 'Who'), 0.9, 0.018, 0.0); ask(W('decides', 'gov', 'Who', 0.6))
-for k, word in enumerate(['Mei', 'Jun', 'Planning']):
-    comb([69, 67, 64][k], W('decides', 'answers', word, -0.1), 0.045, [-0.5, 0.5, 0.0][k])
-swell([53, 60, 65], G('decides', 'tbc', -0.1), 2.4, 0.016)
-rubber(W('decides', 'tbc', 'to be', -0.07), 0.05)
-# 5. What governance is for: paper as each note is stuck beside policy 12; a knock for "deciding who decides"; the choir swells as
-#    each decision goes out to an office, and a note as they land; 1-3-5 in the shop again, and the brass weight set in the pan; a
-#    knock as governance's card goes up, a pen for each tick on the decisions; a chord as the four offices get on with the work
-bed('for', [DM9, BBMAJ9, FMAJ9, CSUS, FMAJ9])
-for word in ['who', 'how']:
-    paper(W('for', 'doesnt', word, -0.1), 0.022, 0.2, 0.3)
-knock(W('for', 'for', 'deciding', -0.1), 0.028, 0.0)
-swell([53, 60, 65, 69], W('for', 'for', 'making', -0.2), 3.4, 0.02)
-comb(72, W('for', 'for', 'making', 0.6), 0.04, 0.2)
-three([W('for', 'like', 'a rule'), W('for', 'like', 'a copy'), W('for', 'like', 'someone')])
-clink(W('for', 'like', 'someone', 0.3), 0.026, 0.1)
-knock(W('for', 'mgmt', 'Governance', -0.1), 0.028, -0.2)
-for k in range(4):
-    tap(W('for', 'mgmt', 'checks', 0.12 * k + 0.1), 0.014, [-0.6, -0.3, 0.3, 0.6][k])
-for k, m in enumerate([60, 64, 67]):
-    comb(m, W('for', 'mgmt', 'Management', -0.2 + 0.06 * k), 0.035, -0.3 + 0.3 * k)
-# 6. Governance at the centre: a knock as DAMA's book is set down; a music box note as each area of its wheel springs in, rising; a
-#    horn as governance lights at the centre; the choir as gold joins them; air as the ring goes round for DCAM; knocks for the
-#    standards; the choir again as the offices light round the governance office
-bed('wheel', [BBMAJ9, FMAJ9, GM7, CSUS])
-knock(W('wheel', 'body', 'body', -0.2), 0.03, 0.0)
-for k, m in enumerate([60, 62, 65, 67, 69, 72, 74, 77, 79, 81]):
-    comb(m, W('wheel', 'wheel', 'eleven', k * 0.24), 0.042 - 0.0015 * k, -0.5 + 0.11 * k)
-horn(53, W('wheel', 'wheel', 'governance', -0.1), 1.8, 0.03)
-swell([53, 60, 65, 69], W('wheel', 'wheel', 'where', -0.2), 3.0, 0.018)
-air(W('wheel', 'others', 'Dee', -0.2), 1.4, 0.018, 0.3); knock(W('wheel', 'others', 'Dee', -0.1), 0.026, 0.4)
-knock(W('wheel', 'others', 'eight thousand', -0.1), 0.026, 0.4, 260)
-knock(W('wheel', 'others', 'thirty', -0.1), 0.026, 0.0, 280)
-swell([53, 60, 65, 69], W('wheel', 'takes', 'shows', -0.2), 3.0, 0.016)
-# 7. Listen first: the blank page turned over; a knock as his question goes up on the floor, and as each answer comes in its office;
-#    a pin for each answer on his board; the choir as the shelf lights; a key as the test runs, two notes rising as it passes, and
-#    the question no one can answer yet where no rule has been agreed
-bed('listen', [DM9, BBMAJ9, GM7, CSUS, FMAJ9, BBMAJ9, FMAJ9])
-paper(W('listen', 'ask', "doesn't", 0.3), 0.03, 0.1, 1.0)
-knock(W('listen', 'ask', 'what slows', -0.1), 0.026, 0.0, 300)
-for lid, off, pan in [('jun', 0.2, 0.1), ('mei', 0.2, -0.35), ('sam', 0.2, -0.4), ('plan', 0.1, -0.4)]:
-    knock(G('listen', lid, off), 0.024, pan, 300)
-for k in range(4):
-    pin(G('listen', 'binder', -0.2 + 0.45 * k + 0.08), 0.03, [-0.5, -0.18, 0.19, 0.55][k])
-swell([53, 60, 65, 69], W('listen', 'binder', 'They', -0.3), 3.0, 0.018)
-tap(W('listen', 'tools', 'carry', -0.3), 0.018, 0.1)
-comb(69, W('listen', 'tools', 'carry', 0.25), 0.045, -0.3); comb(72, W('listen', 'tools', 'carry', 0.39), 0.045, -0.2)
-ask(W('listen', 'tools', "can't", -0.15), 0.035)
-# 8. Where does it run? The binder's cover swung over and laid down; the note pressed on; a highlighter's stroke along each line as
-#    it's sorted, and a short one for each colour of his key; the pencil through the line that can go
-bed('runs', [FMAJ9, DM9, BBMAJ9, CSUS])
-opens = W('runs', 'takes', 'opens', -0.2)
-paper(opens, 0.028, 0.2, 0.8); knock(opens + 0.85, 0.02, -0.1, 200)
-paper(W('runs', 'takes', 'where', -0.35), 0.022, -0.4, 0.3); tap(W('runs', 'takes', 'where', -0.12), 0.016, -0.4)
-for lid, word, off in [('runs', 'run in', -0.1), ('owned', 'decisions', -0.1), ('go', 'go', -0.2)]:
-    paper(W('runs', lid, word, off), 0.014, 0.5, 0.3)
-for k, (lid, word) in enumerate([('runs', 'required'), ('runs', 'a check'), ('runs', 'a tag'), ('runs', 'a test'), ('owned', 'owns'), ('owned', 'writes'), ('go', 'go')]):
-    paper(W('runs', lid, word, -0.45), 0.02, -0.2, 0.8 if k == 4 else 0.45)
-paper(W('runs', 'go', 'go', 0.35), 0.02, -0.3, 0.35)
-# 9. Where decisions enter: the choir as the poster catches the light; air as the loop goes round; a knock for Jun's question, and
-#    the box of pins lifted; a pin at each step where a decision enters, with a music box note rising for each
-bed('enter', [FMAJ9, AM7, BBMAJ9, CSUS], 0, cq('enter', 'breath'))
-bed('enter', [FMAJ9], cq('enter', 'breath'), None)
-swell([53, 60, 65, 69], W('enter', 'places', 'places', -0.4), 3.0, 0.016)
-air(W('enter', 'loop', 'loop', -0.1), 2.8, 0.02, 0.0)
-knock(W('enter', 'pin', 'another meeting', -0.15), 0.026, 0.5, 300)
-tap(W('enter', 'pin', 'It needs', -0.1), 0.016, -0.3); tap(W('enter', 'pin', 'It needs', -0.04), 0.012, -0.3)
-for k, (lab, pan) in enumerate([('a term', 0.0), ('a classification', 0.2), ('an owner', 0.33), ('a rule', 0.2), ('an approval', -0.33), ('a version', -0.2)]):
-    lid = 'pins' if k < 3 else 'pins2'
-    pin(W('enter', lid, lab, -0.15 + 0.09), 0.032, pan)
-    comb([65, 67, 69, 72, 74, 77][k], W('enter', lid, lab, -0.15 + 0.09), 0.045, pan)
-# 10. The series: a music box note rising as each of the nine binders lights; the first slid off the shelf; a knock for each board's
-#     heading, and a pin for each film on governance as a capability and each film on the tools; the mark under the end card
-bed('series', [BBMAJ9, FMAJ9, DM9, CSUS], 0, cq('series', 'breath'))
-bed('series', [FMAJ9], cq('series', 'breath'), None, g=0.04)
-for k, m in enumerate([60, 62, 64, 65, 67, 69, 70, 72, 74]):
-    comb(m, W('series', 'next', 'nine', -0.1 + k * 0.12 + 0.05), 0.036, 0.3 + 0.05 * k)
-slide(W('series', 'next', 'takes', 0.1), 0.026, 0.4, 0.45)
-knock(G('series', 'map', -0.25), 0.028, 0.0)
+# the voice's lines, chapter by chapter: when each starts and ends
+_V = {s: [(G(s, v['id']), G(s, v['id']) + _DUR[s + '/' + v['id']]) for v in _NARR[s]['vo']] for s in _NARR}
+_ORDER = list(_NARR)
+def first(J):
+    """when a chapter's voice begins"""
+    return _V[J][0][0]
+def turn(J, chord, g=0.03):
+    """a chapter's turn: its chord comes in as the chapter before falls silent, swells in the pause between them, and is let go as
+    the new chapter's voice begins, so the voice goes on alone"""
+    bed([(_V[_ORDER[_ORDER.index(J) - 1]][-1][1] + 0.9, chord)], first(J), g)
+def moment(t0, t1, chord, g=0.03):
+    """a chord under a moment on screen, or in a pause without words: it comes in at t0 and is let go at t1"""
+    bed([(t0, chord)], t1, g)
+def even(a, b, chords):
+    """chords one after another, from a to b, each as long"""
+    return [(a + (b - a) * i / len(chords), ch) for i, ch in enumerate(chords)]
+
+# 1. The checklist: the opening, with the horns all through it. D in open fifths for the operating room before 2008, D minor as the
+#    steps are named, darkening to G minor as they're skipped; D minor again for what patients paid, and A, suspended, with its
+#    seventh, as something had to change; C, open, for the study in 2008; D again, bare, as the team pauses,
+#    and A, suspended, while the nurse holds them; F major once deaths fall, B flat as it all works together, F again for the one who
+#    checks; the mark under the title, over F in open fifths, held until the next chapter's voice. A pencil's tap as each step is
+#    named, and a soft stroke as each is struck through; a binder drawn from the guidelines' shelf; a tap as each harm is named;
+#    paper as the year turns; a pin as
+#    each hospital drops onto the map; a knock as each pause lights, and for each of the nurse's words; a pen's tap for each step
+#    confirmed, and two notes rising as the antibiotic is given; the card, and a music box note for each number; 1-3-5 for the
+#    list, the copy and the one who checks; a pen's tap as the nurse ticks, and for each box of the sign out
+J = 'checklist'
+close = G(J, 'breath', -0.7)
+bed([(S0(J), D5), (G(J, 'steps', -0.4), DM), (G(J, 'skipped', -0.4), GM7), (G(J, 'paid', -0.4), DM), (G(J, 'change', -0.4), A7SUS),
+     (G(J, 'y2008', -0.4), CSUS), (G(J, 'pause', -0.4), D5),
+     (G(J, 'hold', -0.4), ASUS), (G(J, 'fell', -0.4), FMAJ9), (G(J, 'worked', -0.4), BBMAJ9), (W(J, 'three', 'someone', -0.3), FMAJ9),
+     (close, FOPEN)], first('shelf'), 0.03, 1.5, 3.0)
+KNEW = [700, 580, 1450]  # where each step's note is, across the frame (OS_KNEW)
+for word, off, x in zip(['right', 'antibiotic', 'sponge'], [-0.1, -0.15, -0.15], KNEW):
+    tap(W(J, 'steps', word, off + 0.1), 0.016, P(x))
+slide(W(J, 'skipped', 'written', -0.2), 0.022, P(650), 0.6)
+for k, x in enumerate(KNEW):
+    paper(W(J, 'skipped', 'often', -0.05 + 0.32 * k), 0.016, P(x), 0.35)
+for word, x in [('infections', 752), ('mistakes', 1116), ('deaths', 1532)]:  # each harm's tag, where it is in the frame
+    tap(W(J, 'paid', word, -0.1 + 0.1), 0.016, P(x))
+paper(G(J, 'y2008', -0.35), 0.022, -0.7, 0.45)
+for k, x in enumerate([254, 483, 906, 1098, 1318, 1102, 1552, 1839]):  # the eight hospitals' cities, west to east as they drop
+    pin(W(J, 'y2008', 'study', -0.1 + 0.26 * k + 0.1), 0.024 + 0.004 * (k % 3), P(x))
+for k, x in enumerate([560, 960, 1360]):
+    knock(G(J, 'pause', -0.05 + 0.62 * k), 0.022, P(x), 300)
+knock(W(J, 'pause', 'read', 0.0), 0.026, P(1240))
+for word, off in [('step', -0.1), ('confirmed', -0.05)]:
+    tap(W(J, 'hold', word, off + 0.15), 0.018, 0.0)
+knock(W(J, 'hold', 'hold', -0.1), 0.028, P(1300))
+comb(69, W(J, 'hold', 'done', -0.1), 0.04, -0.4); comb(72, W(J, 'hold', 'done', 0.04), 0.04, -0.3)
+paper(G(J, 'fell', -0.2), 0.026, 0.0, 0.5)
+comb(60, W(J, 'fell', 'one point', -0.1), 0.045, -0.2); comb(67, W(J, 'fell', 'zero point', -0.1), 0.045, 0.2)
+three([W(J, 'three', 'one agreed'), W(J, 'three', 'a copy'), W(J, 'three', 'someone')])
+tap(G(J, 'breath', -1.05), 0.014, P(1676))
 for k in range(3):
-    pin(W('series', 'map', 'three', -0.1 + 0.3 * k + 0.08), 0.028, [-0.47, 0.0, 0.47][k])
-knock(G('series', 'tools', -0.25), 0.028, 0.0)
+    tap(G(J, 'breath', 0.25 + 0.45 * k + 0.15), 0.02, -0.2 + 0.2 * k)
+mark(G(J, 'breath', 2.1))
+# 2. The shelf: the opening's last chord let go as the voice begins. A music box note for Yusuf's name; a knock for the shelf's sign;
+#    a low note for the score; a pen for each TBC; the rubber stamp on the minutes; a knock for David's question
+J = 'shelf'
+comb(65, G(J, 'starts', 0.3), 0.045, 0.0)
+knock(W(J, 'shelf', 'thirty', -0.2), 0.03, -0.3)
+comb(57, W(J, 'shelf', 'maturity'), 0.04, 0.2)
+for n in range(8):
+    tap(W(J, 'chart', 'half', -0.2 + 2.2 * n / 8), 0.016, -0.3 + 0.08 * n)
+rubber(W(J, 'council', 'once', 0.005), 0.045)
+knock(G(J, 'brief', 0.1), 0.026, 0.4, 300)
+# 3. Two numbers: no chord at the turn, in so short a chapter. A music box note for each number, F for the census and A for the
+#    draft, apart; and the question, with a knock as it goes up, ringing into the pause
+J = 'numbers'
+comb(65, W(J, 'census', 'four', -0.1), 0.05, -0.3)
+comb(69, W(J, 'draft', 'four', -0.1), 0.05, 0.3)
+ask(G(J, 'which')); knock(G(J, 'which'), 0.026, 0.0, 200)
+# 4. Who decides? The turn on C, open, as the question rings. The two numbers' notes together, a third apart, as both are right; the chip and the new row on
+#    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn; a knock as Jun reaches Yusuf's
+#    office, and the question; three notes that don't resolve for three answers; the TBC stamp; and the operating room before the
+#    checklist, a pencil's tap as each one's step is named, and the question no one can answer yet, where no one checks them all
+J = 'decides'
+turn(J, CSUS)
+right = W(J, 'both', 'right')
+comb(65, right, 0.045, -0.2); comb(69, right + 0.08, 0.045, 0.3)
+knock(W(J, 'monday', 'the word', 0.08), 0.024, 0.3, 320)
+tap(W(J, 'monday', 'microcredentials', 0.0), 0.02, 0.2)
+pin(G(J, 'before', 0.0), 0.03, 0.0)
+knock(G(J, 'gov', 0.2), 0.026, -0.3); knock(W(J, 'gov', 'which', 0.0), 0.026, 0.3, 280)
+air(W(J, 'gov', 'which'), 0.9, 0.018, 0.0)
+knock(W(J, 'ask', 'takes', 0.5), 0.024, 0.15, 260); ask(W(J, 'ask', 'who', 0.05))
+for k, word in enumerate(['Mei', 'Jun', 'Planning']):
+    comb([69, 67, 64][k], W(J, 'answers', word, -0.1), 0.045, [-0.5, 0.5, 0.0][k])
+rubber(W(J, 'tbc', 'to be', -0.07), 0.05)
+for k, x in enumerate([360, 930, 1180]):
+    tap(W(J, 'room', 'everyone', 0.32 * k + 0.1), 0.014, P(x))
+ask(W(J, 'room', 'no one'), 0.035)
+# 5. What governance is for: the turn on B flat. Paper as each note is stuck beside policy 12; a knock for "deciding who decides"; the
+#    horns as each decision goes out to an office and lands; 1-3-5 for the checklist again, the page, the copy in the room and the
+#    nurse; a knock as governance's card goes up, and a pen for each tick on the decisions
+J = 'for'
+turn(J, BBMAJ9)
+for word in ['who', 'how']:
+    paper(W(J, 'doesnt', word, -0.1), 0.022, 0.2, 0.3)
+knock(W(J, 'for', 'deciding', -0.1), 0.028, 0.0)
+moment(W(J, 'for', 'making', -0.2), W(J, 'for', 'making', 1.0), [53, 60, 65, 69], 0.024)
+three([W(J, 'like', 'a rule'), W(J, 'like', 'a copy'), W(J, 'like', 'someone')])
+knock(W(J, 'mgmt', 'Governance', -0.1), 0.028, -0.2)
+for k in range(4):
+    tap(W(J, 'mgmt', 'checks', 0.12 * k + 0.1), 0.014, [-0.6, -0.3, 0.3, 0.6][k])
+# 6. Listen first: the turn on G minor. The blank page turned over; a knock as his question goes up on the floor, and as each
+#    answer comes in its office; a pin for each answer on his board; the horns as the shelf lights; a key as the rule is checked,
+#    two notes rising as it holds, and the question no one can answer yet where no rule has been agreed
+J = 'listen'
+turn(J, GM7)
+paper(W(J, 'ask', "doesn't", 0.3), 0.03, 0.1, 1.0)
+knock(W(J, 'ask', 'what slows', -0.1), 0.026, 0.0, 300)
+for lid, off, pan in [('jun', 0.2, 0.1), ('mei', 0.2, -0.35), ('sam', 0.2, -0.4), ('plan', 0.1, -0.4)]:
+    knock(G(J, lid, off), 0.024, pan, 300)
+for k in range(4):
+    pin(G(J, 'binder', -0.2 + 0.45 * k + 0.08), 0.03, [-0.5, -0.18, 0.19, 0.55][k])
+moment(W(J, 'binder', 'They', -0.3), W(J, 'binder', 'They', 1.5), [53, 60, 65, 69], 0.024)
+tap(W(J, 'tools', 'carry', -0.3), 0.018, 0.1)
+comb(69, W(J, 'tools', 'carry', 0.25), 0.045, -0.3); comb(72, W(J, 'tools', 'carry', 0.39), 0.045, -0.2)
+ask(W(J, 'tools', "can't", -0.15), 0.035)
+# 7. Where does it run? The turn on A, suspended. The binder's cover swung over and laid down; the note pressed on; a highlighter's
+#    stroke along each line as it's sorted, and a short one for each colour of his key; the pencil through the line that can go
+J = 'runs'
+turn(J, A7SUS)
+opens = W(J, 'takes', 'opens', -0.2)
+paper(opens, 0.028, 0.2, 0.8); knock(opens + 0.85, 0.02, -0.1, 200)
+paper(W(J, 'takes', 'where', -0.35), 0.022, -0.4, 0.3); tap(W(J, 'takes', 'where', -0.12), 0.016, -0.4)
+for lid, word, off in [('runs', 'run in', -0.1), ('owned', 'decisions', -0.1), ('go', 'go', -0.2)]:
+    paper(W(J, lid, word, off), 0.014, 0.5, 0.3)
+for k, (lid, word) in enumerate([('runs', 'a field'), ('runs', 'a check'), ('runs', 'every night'), ('runs', 'a label'), ('owned', 'owns'), ('owned', 'writes'), ('go', 'go')]):
+    paper(W(J, lid, word, -0.45), 0.02, -0.2, 0.8 if k == 4 else 0.45)
+paper(W(J, 'go', 'go', 0.35), 0.02, -0.3, 0.35)
+# 8. What's worth keeping: the turn on F, fading as his board catches the light; a pin as each gold card goes up under an answer, with
+#    a music box note rising for each; on the floor, a knock as the owners decide, paper as a copy lands with each team, and a tap
+#    for each tick as governance checks
+J = 'keep'
+turn(J, FMAJ9)
+for k, (lid, word) in enumerate([('rules', 'Rules'), ('words', 'One'), ('classes', 'A class'), ('owners', 'a list')]):
+    pin(W(J, lid, word, 0.08), 0.032, [-0.5, -0.18, 0.19, 0.55][k])
+    comb([65, 69, 72, 77][k], W(J, lid, word, 0.08), 0.045, [-0.5, -0.18, 0.19, 0.55][k])
+knock(W(J, 'decide', 'Owners', -0.05), 0.026, -0.5, 300)
+for k in range(2):
+    paper(W(J, 'act', 'use it', 0.2 + 0.14 * k), 0.016, 0.3 + 0.3 * k, 0.3)
+for k in range(4):
+    tap(W(J, 'act', 'kept', -0.1 + 0.12 * k), 0.014, [-0.6, -0.3, 0.3, 0.6][k])
+# 9. The series: the turn on B flat, swelling in the wordless pause after the floor. A music box note rising as each of the nine
+#    binders lights; the first slid off the shelf; a knock as Noor's room comes in, a pin for each film on her map, a knock for the
+#    data team's board and a pin for each film on the tools; after the last line, F in open fifths under the end card, and the
+#    mark
+J = 'series'
+turn(J, BBMAJ9)
+for k, m in enumerate([60, 62, 65, 67, 69, 72, 74, 77, 79]):
+    comb(m, W(J, 'next', 'nine', -0.1 + k * 0.12 + 0.05), 0.036, 0.3 + 0.05 * k)
+slide(W(J, 'next', 'follows', 0.1), 0.026, 0.4, 0.45)
+knock(G(J, 'map', -0.25), 0.028, 0.0)
+for k in range(3):
+    pin(W(J, 'map', 'on the', 0.3 * k + 0.08), 0.028, 0.3)
+knock(G(J, 'tools', -0.25), 0.028, 0.0)
 for k in range(6):
-    pin(W('series', 'tools', 'six', -0.1 + 0.3 * k + 0.08), 0.028, [-0.47, 0.0, 0.47][k % 3])
-mark(G('series', 'breath', 0.5))
+    pin(W(J, 'tools', 'six', -0.1 + 0.3 * k + 0.08), 0.028, [-0.47, 0.0, 0.47][k % 3])
+bed([(_V[J][-1][1] + 0.2, FOPEN)], TOT + 1.0, 0.032, 1.5, 3.0)
+mark(G(J, 'breath', 0.5))
+
+# and the chords, where they come in
+play_bed()

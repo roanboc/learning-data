@@ -29,29 +29,35 @@ models:
         data_type: string
         constraints: [{type: not_null}]
         config:
-          meta: {glossary_term: award}
+          meta: {glossary_term: award, personal_data: none}
       - name: award_bk
         description: '{{ doc("award_bk") }}'
         data_type: string
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: valid_from
         description: '{{ doc("valid_from") }}'
         data_type: date
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: valid_to
         description: '{{ doc("valid_to") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: is_current
         description: '{{ doc("is_current") }}'
         data_type: boolean
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: award_code
         description: '{{ doc("award_code") }}'
         data_type: string
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: award_name
         description: '{{ doc("award_name") }} As it stood in this version.'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: award_type
         description: '{{ doc("award_type") }}'
         data_type: string
@@ -59,6 +65,7 @@ models:
           - accepted_values:
               arguments:
                 values: [graduate certificate, master]
+        config: {meta: {personal_data: none}}
       - name: credit_points_required
         description: '{{ doc("credit_points_required") }}'
         data_type: int
@@ -66,12 +73,15 @@ models:
           - type: check
             name: ck_core_award_credit_points_required
             expression: "credit_points_required > 0"
+        config: {meta: {personal_data: none}}
       - name: faculty_code
         description: '{{ doc("faculty_code") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: faculty_name
         description: '{{ doc("faculty_name") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
     versions:
       - v: 1
         defined_in: core_award

@@ -388,7 +388,25 @@ const PIX={
     withA(ctx,A(2),()=>P.tests.forEach((t,i)=>{const y=362+i*48;tx(ctx,t,px+76,y+8,{size:22,w:700});if(s>=2)tick(ctx,px+46,y,26,s===2?k:1);}));
     const rx=px+pw+24,rw2=w-rx-24;
     withA(ctx,A(3),()=>{card(ctx,rx,110,rw2,116,{kind:"card",wash:s>=3?"ok":null,washA:0.22,seed:233});lines(ctx,P.approved,rx+22,152,rw2-80,{size:22,w:700,max:2});if(s>=3)tick(ctx,rx+rw2-34,150,28,s===3?k:1);});
-    withA(ctx,A(4),()=>{card(ctx,rx,256,rw2,116,{kind:"card",wash:s>=4?"amber":null,washA:0.22,seed:234});lines(ctx,P.from,rx+22,298,rw2-44,{size:22,w:700,max:2});});}
+    withA(ctx,A(4),()=>{card(ctx,rx,256,rw2,116,{kind:"card",wash:s>=4?"amber":null,washA:0.22,seed:234});lines(ctx,P.from,rx+22,298,rw2-44,{size:22,w:700,max:2});});},
+  /* One person, many roles: an actor stays the same; its roles start and end, each with its own dates */
+  actor(ctx,w,hh,st,Lb){const lw=w*0.34,rx=24+lw+24,rw=w-rx-24,fx=24+lw/2,fy=hh/2+20;
+    card(ctx,24,20,lw,hh-40,{kind:"sheet",seed:21});
+    tx(ctx,"An actor",24+lw/2,80,{size:fit(ctx,"An actor",lw-40,44,800,null,26),w:800,align:"center",col:WC_DARK});
+    tx(ctx,"stays the same",24+lw/2,124,{size:fit(ctx,"stays the same",lw-50,28,600,null,20),align:"center",col:WC_MUTED});
+    ctx.fillStyle="#3f7fd6";ctx.beginPath();ctx.arc(fx,fy-96,44,0,Math.PI*2);ctx.fill();
+    wash(ctx,fx-74,fy-40,148,170,"#3f7fd6",0.45,22);
+    card(ctx,rx,20,rw,hh-40,{kind:"sheet",seed:22});
+    tx(ctx,"Roles",rx+rw/2,80,{size:fit(ctx,"Roles",rw-40,44,800,null,26),w:800,align:"center",col:WC_DARK});
+    tx(ctx,"each with a start and an end",rx+rw/2,124,{size:fit(ctx,"each with a start and an end",rw-50,28,600,null,20),align:"center",col:WC_MUTED});
+    const bx=rx+250,bw=rw-290,rows=[["Student","#0e9692",0,1],["Tutor","#8e6be0",0.1,0.2],["Tutor","#8e6be0",0.4,0.5],["Alumna","#26a060",0.6,1]];
+    rows.forEach(([name,col,a,b],i)=>{const y=206+i*84;
+      ctx.strokeStyle="#7a8190";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(fx+46,fy-96);ctx.lineTo(rx+24,y+8);ctx.stroke();
+      tx(ctx,name,rx+24,y+10,{size:fit(ctx,name,200,26,700,null,20),w:700,col:WC_DARK});
+      wash(ctx,bx+bw*a,y-6,bw*(b-a),34,col,0.6,30+i);});
+    tx(ctx,"2022 to 2026",bx,hh-60,{size:fit(ctx,"2022 to 2026",bw,22,600,null,18),w:600,col:WC_MUTED});
+    tx(ctx,"today",bx+bw,hh-60,{size:fit(ctx,"today",bw,22,600,null,18),w:600,align:"right",col:WC_MUTED});
+  },
 };
 
 /* ---------- the lab's parts ---------- */

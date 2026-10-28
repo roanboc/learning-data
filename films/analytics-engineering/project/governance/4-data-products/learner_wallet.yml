@@ -1,0 +1,22 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: learner_wallet
+title: Learner wallet
+owner: Wallet app team
+domain: wallet
+status: active
+version: 1.0.0
+description:
+  purpose: What the learner's wallet app shows a learner today, the credentials they hold and how
+    close they are to their award.
+  usage: For the wallet app only. One learner's rows at a time, as things are now.
+outputs:
+  - {model: mart_wallet__learners}
+  - {model: mart_wallet__credentials}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+  - {property: timeOfAvailability, value: "07:00", description: "Ready by 7 a.m., university time."}
+support:
+  - {channel: wallet-data, tool: email, url: "mailto:wallet@uni.example", scope: issues}

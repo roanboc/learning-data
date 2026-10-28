@@ -223,5 +223,14 @@ const po_penAt=(ctx,s,x,y,sz,p)=>[x+tw(ctx,s.slice(0,Math.ceil(s.length*clamp(p,
 function po_wallCard(ctx,x,y,a){if(a<=0.01)return;const w=150,h=120;withA(ctx,a,()=>{ctx.save();ctx.translate(x,y);ctx.rotate(-0.02);wc_panel(ctx,-w/2,0,w,h,{kind:"card",seed:441});
   ctx.strokeStyle=rgba(GV.gold,0.95);ctx.lineWidth=4;rr(ctx,-w/2-3,-3,w+6,h+6,10);ctx.stroke();gv_lines(ctx,-w/2+16,26,w-40,5,18,1);gv_pin(ctx,0,8,[60,110,170],0.8);ctx.restore();});}
 
+/* ---------- the floor: who answers for what ---------- */
+// a card on an office's glass, centred on cx with its top at y: a name, and a job. Its words are sized for the floor seen at 1.45, where
+// they're at least 29 px. a: 0 to 1, as it goes up
+function po_glassCard(ctx,cx,y,name,role,a){if(a<=0.01)return;const w=Math.round(Math.max(tw(ctx,name,26,800),tw(ctx,role,22,600))+44),h=84,k=0.9+0.1*spring(a);
+  ctx.save();ctx.translate(cx,y+h/2);ctx.scale(k,k);withA(ctx,clamp(a*1.6,0,1),()=>{wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:451});gv_pin(ctx,0,-h/2+8,[60,110,170],0.7);
+    wc_T(ctx,name,0,-h/2+38,{w:800,size:26,align:"center",col:WC_DARK});wc_T(ctx,role,0,-h/2+70,{w:600,size:22,align:"center",col:WC_INK});});ctx.restore();}
+// where the two cards go: Clara's on Planning's glass, Mei's on the registrar's, and the three things Clara answers for, under hers
+const PO_GC={y:292,clara:GV_FL.x(0)+GV_FL.w/2,mei:GV_FL.x(1)+GV_FL.w/2,jobs:["on time","keeps its promise","its users heard"],jy:404,jgap:44,cam:[600,400,1.45]};
+
 const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

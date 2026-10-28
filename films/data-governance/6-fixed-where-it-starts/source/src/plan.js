@@ -621,15 +621,27 @@ function fw_screen(ctx,x,y,w,h,title,fn,o){o=o||{};gv_screen(ctx,x,y,w,h,null,q=
 // Sam's desk at night: the room dark blue, only the screens lit; in the morning, the room as it is
 function fw_night(ctx,a){if(a<=0.01)return;ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(mix([255,255,255],[52,62,104],a),1);ctx.fillRect(-W,-H,3*W,3*H);ctx.restore();
   ctx.save();ctx.globalCompositeOperation="screen";for(const [sx,sy,sw,sh] of GV_PX.screens){wc_glowAt(ctx,sx+sw/2,sy+sh/2,sw*0.75,[150,180,230],0.5*a);}ctx.restore();}
+// fn draws with each word fading as the frame comes to cut it, from 30 px inside the frame's edge to gone at it, so the frame never cuts
+// a word (as Who decides fades its register). spans: a table's columns, [x0, x1] where ctx is now; a word that starts in one fades with
+// the whole column, so a column goes together
+function fw_fadeCut(ctx,fn,spans){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.height,r=30*cw/1920,M=ctx.getTransform(),S=(spans||[]).map(([a,b])=>[M.a*a+M.e,M.a*b+M.e]);
+  T=(c,s2,x,y,o)=>{o=o||{};const sz=o.size||24,w=tw(c,String(s2),sz,o.w,o.f),al=o.align||"left",x0=al==="center"?x-w/2:al==="right"?x-w:x,m=c.getTransform();
+    let l=1e9,rt=-1e9,tp=1e9,bt=-1e9;for(const [px,py] of [[x0,y-0.75*sz],[x0+w,y-0.75*sz],[x0,y+0.2*sz],[x0+w,y+0.2*sz]]){const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;
+      l=Math.min(l,X);rt=Math.max(rt,X);tp=Math.min(tp,Y);bt=Math.max(bt,Y);}
+    const sp=S.find(([a,b])=>l>=a-2&&l<=b);if(sp){l=Math.min(l,sp[0]);rt=Math.max(rt,sp[1]);}
+    const a=clamp(Math.min(l/r,(cw-rt)/r,tp/r,(ch-bt)/r),0,1);if(a>=0.99)return T0(c,s2,x,y,o);if(a>0.01)withA(c,a,()=>T0(c,s2,x,y,o));};
+  try{return fn();}finally{T=T0;}}
 // the badges the platform sent last night, on the left screen: arriving one by one (n, how many), half with no credit (glow lights them);
 // each with its name, its kind (a microcredential, or a plain badge, as the welcome badge is) and its credit
 const FW_BG=[["SQL for Analysis","microcredential",5],["Python Foundations","microcredential",0],["Welcome to Online Learning","badge",0],["Data Visualisation","microcredential",0],
   ["Statistics Refresher","microcredential",5],["Leading Teams","microcredential",0],["Health Data Essentials","microcredential",5],["Security Fundamentals","microcredential",5]];
-function fw_badges(ctx,n,glow,deco){const [x,y,w,h]=GV_PX.screens[0];fw_screen(ctx,x,y,w,h,"Badges · last night",q=>{
+// The camera moves in past this screen to the checks beside it, so the frame cuts its columns: each column fades as the frame comes to
+// it (fw_fadeCut), the badges' names with the screen's title, then the kinds, then the credits, and no cut word is ever seen
+function fw_badges(ctx,n,glow,deco){const [x,y,w,h]=GV_PX.screens[0];fw_fadeCut(ctx,()=>fw_screen(ctx,x,y,w,h,"Badges · last night",q=>{
   [["badge",x+18,"left"],["kind",x+276,"left"],["credit",x+w-40,"center"]].forEach(([s,hx,al])=>wc_T(q,s,hx,y+64,{w:700,size:18,align:al,col:WC_MUTED,deco}));
   FW_BG.forEach(([s,kd,c],i)=>{const u=clamp(n-i,0,1);if(u<=0)return;const yy=y+94+i*28;withA(q,u,()=>{if(c===0&&glow>0)gv_tint(q,x+12,yy-20,w-24,26,FW.amber,0.6*glow);
     wc_T(q,s,x+18,yy,{w:600,size:18,col:WC_INK,deco});wc_T(q,kd,x+276,yy,{w:600,size:18,col:WC_MUTED,deco});wc_T(q,String(c),x+w-40,yy,{w:800,size:20,align:"center",col:c?WC_DARK:FW.amberInk,deco});});});
-},{titleSize:20,barH:30,deco});}
+},{titleSize:20,barH:30,deco}),[[x+16,x+270],[x+274,x+w-71],[x+w-70,x+w]]);}
 // what was checked, on the right screen: the credit is there, and it's a number (p, 0 to 1, ticks them)
 function fw_checks(ctx,p,deco){const [x,y,w,h]=GV_PX.screens[1];fw_screen(ctx,x,y,w,h,"Checks · last night",q=>{wc_T(q,"credit",x+30,y+84,{w:700,size:20,col:WC_MUTED,deco});
   [["filled in",0],["a number",1]].forEach(([s,i])=>{const yy=y+150+i*70;wc_panel(q,x+30,yy-44,w-60,58,{kind:"card",wash:GV.green,washA:0.2,seed:201+i});

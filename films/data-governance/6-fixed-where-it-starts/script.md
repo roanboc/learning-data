@@ -1,60 +1,6 @@
 # Data governance · Fixed where it starts: script
 
-*The script of film 6 of 19 in the data governance series, *Governance you can use*: about 5:55, in eight chapters, in English, painted in watercolour. Revised for the series' part one on 27 October 2026, for the author's review: as the plan in three parts that he approved on 23 October asks, the film shows no code, settings files, check names or tool screens, only the university's own papers, and says "check" for "test". Ten lines change for part one; on 27 October the opening gained three, so that it says the problem, the need for a fix and the relief, as he asked of every film's opening; the same day, as he asked of every script, the story came back to Vienna along the way and closed with what the fixes bring, in six new lines and a change to one of the ten; and on 28 October, as his four beats for every opening ask (scenario, problem, solution, benefits, each said outright, every loaded word explained), two of the opening's lines say what the autopsy room and chlorinated lime are. The twenty-one are recorded after his yes, and nothing is rendered before it. The narration lives in [`source/src/narration.js`](source/src/narration.js), the pauses in [`source/src/breath.js`](source/src/breath.js) and the pictures in [`source/src/scenes.js`](source/src/scenes.js) and [`source/src/plan.js`](source/src/plan.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 8. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
-
-## What changes
-
-The story and most of the pictures stay. Twenty-one lines change or are new, and are recorded after the author's yes.
-
-**The opening's four beats.** On 28 October the author set one rule for every film's opening: scenario, problem, solution and benefits, each said outright, with every loaded word explained, so that a viewer who never heard of the event can say, from the narration alone, why it was a problem and what the fix gave them. Checked against it, Vienna says each beat, but its solution used two words a newcomer may not know, so why the washing worked was left to guess. Two lines change:
-
-| Was | Now | Why |
-|---|---|---|
-| The doctors and students come to the ward from the autopsy room. The midwives don't. | The doctors and students come to the ward from the autopsy room, with traces of the dead on their hands. The midwives don't. | Says what the autopsy room is, and what the doctors carry from it to the mothers |
-| So he has everyone wash their hands in chlorinated lime before they examine a mother. | So he has everyone wash their hands in chlorinated lime, a bleach, before they examine a mother. | Says what chlorinated lime is |
-
-The four beats, as the opening now says them: the scenario, Vienna's general hospital in 1847 and its two maternity clinics; the problem, about one mother in ten dying of fever in the doctors' clinic against one in thirty in the midwives', women begging not to be sent to the first, and nobody able to explain it; the solution, the doctors' hands, carrying traces of the dead from the autopsy room, washed in a bleach before they examine a mother; the benefits, deaths falling to the second clinic's level and hundreds of mothers going home. The same benefits for data follow, in chapter 4 ("No system cleans them again, and every learner keeps one wallet") and at the end ("less cleaning, data everyone can trust, and an owner who hears first"). The pictures stay; the film grows by about 3 seconds, to about 5:55.
-
-**The story closes: back to Vienna, and what each fix brings.** As the author asked of every script on 27 October, the film says what each fix brings, comes back to the opening story now and then to keep the analogy, and ends on what data governance brings. One line changes and six are new:
-
-| Chapter | After | Line | What it does |
-|---|---|---|---|
-| 3 · Follow it back | More than one email in three arrives that way. | Nobody typed anything wrong. As in Vienna, it shows downstream, but it starts here, at the form. (One of part one's ten, changed again: "As in Vienna" is new.) | Back to Vienna: where it shows isn't where it starts |
-| 4 · Fixed where it's typed | Nobody has to type more carefully. The form does the work. | Like the basin in Vienna, the form stops the problem on its way in. | Back to Vienna: the fix at the door |
-| 4 · Fixed where it's typed | Tom's team corrects the old emails in their platform. Then the data team's clean-up can go. | No system cleans them again, and every learner keeps one wallet. | What the fix brings |
-| 6 · What no rule names | Usually, one badge in twelve has no credit. Last night, one in two. | As in Vienna, the numbers show something's wrong before anyone knows why. | Back to Vienna: the numbers come before the cause |
-| 7 · A surprise becomes a rule | Then the surprise becomes a rule: a microcredential carries credit. A check, with an owner. | Next time, it's stopped before it reaches a wallet. | What the rule brings |
-| 8 · Nobody to blame | Washing became the rule only after his death, once germs were known. | It's basic hygiene now, and it saves mothers and babies every day. | Vienna's story closes on what the washing brings to this day |
-| 8 · Nobody to blame | Fix the cause. Then make the fix a check. | That's what data governance brings: less cleaning, data everyone can trust, and an owner who hears first. | The film closes on what data governance brings |
-
-Six moments come with them: a doctor's hands in the basin again, as in the opening, then the doctor going in at the first clinic's door; one wallet for Daniel Kim, ticked; the two clinics' doors, their numbers glowing; a badge with no credit sliding up to the signed rule card and stamped "STOPPED"; the mother going home again, past the basin; and on Yusuf's board, under prevent, check and watch, a gold note for what each brings. Chapter 3 gets 0.3 s more after the trail of cards, to keep its pace. The film grows by about 30 seconds, to about 5:52, inside the series' four to six minutes.
-
-**The opening says the problem, the need and the relief.** As the author asked of every film's opening story on 27 October, Vienna now says plainly why the two clinics were a problem, that something had to change, and what the fix gave back. Three lines are new:
-
-| After | New line | What it says |
-|---|---|---|
-| In the second, where midwives work, about one in thirty. | Women in labour beg not to be sent to the first clinic. | The pain behind the numbers |
-| Women in labour beg not to be sent to the first clinic. | Nobody can explain the difference. Something has to change. | The need for a fix, as a question Semmelweis takes up |
-| Within months, deaths in the first clinic fall to the level of the second. | Hundreds of mothers who would have died go home. | The relief |
-
-Two moments come with them: a woman in labour begging the porter at the first clinic's door not to be sent in, and, after the register, a mother coming out of that door with her baby, past the basin. The chapter grows by about 12 seconds.
-
-**Part one.** Ten lines change, all in chapters 2 to 7:
-
-| Chapter | Was | Now |
-|---|---|---|
-| 2 · Still amber | The issue goes to their owner, Tom's learning team. The first answer is the old one: it's cleaned in staging. | The issue goes to their owner, Tom's learning team. The first answer is the old one: it's cleaned downstream. |
-| 2 · Still amber | Every night for a year, staging has trimmed each email and written it in lower case. | Every night for a year, the data team has trimmed each email and written it in lower case. |
-| 3 · Follow it back | From the wallet, through staging, to the short-course sign-up form. | From the wallet, through the data team's clean-up, to the short-course sign-up form. |
-| 3 · Follow it back | Nobody typed anything wrong. It shows in staging, but it starts here, at the form. | Nobody typed anything wrong. It shows downstream, but it starts here, at the form. |
-| 4 · Fixed where it's typed | Tom's team corrects the old emails in their platform. Then the clean-up in staging can go. | Tom's team corrects the old emails in their platform. Then the data team's clean-up can go. |
-| 5 · Should never fail | The rule stays, as a test that should never fail: a promise to everyone who reads them. | The rule stays, as a check that should never fail: a promise to everyone who reads them. |
-| 6 · What no rule names | Every test passes. The value is there, and it's a number. | Every check passes. The value is there, and it's a number. |
-| 6 · What no rule names | It tells the owner the metadata names: the learning team. | It tells the owner on record: the learning team. |
-| 7 · A surprise becomes a rule | Then the surprise becomes a rule: a microcredential carries credit. A test, with an owner. | Then the surprise becomes a rule: a microcredential carries credit. A check, with an owner. |
-| 7 · A surprise becomes a rule | Prevent what you can, where it starts. Test what you know. Watch for what you don't. | Prevent what you can, where it starts. Check what you know. Watch for what you don't. |
-
-The pictures that change: the scorecard in plain words, with no check names, and the issue log on Tom's desk, as *Rules that run* keeps it, the night's failure closed for good and under it the emails' line, in place of the first issue card; a card for the data team's clean-up, an email as typed and after, in place of its code; a trail of cards on the data team's board, each with a small picture of its place, in place of the lineage screen; a tag on the form, "a plain text box", in place of its setting; the badges by name and kind, not by code; Sam at his desk with his plate, "platform team"; a rule card on the series' sign-off sheet, signed by Tom, in place of the rule's file; and "check" for "test" on every tag and stamp. The plan counted five changed lines; "staging" and "test" turned out to be in ten.
+*The script of *Fixed where it starts*, film 6 of 19 of the data governance series, *Governance you can use*: 5:59 (target 4 to 6 minutes), in eight chapters, in English, painted in watercolour. Written on 20 and 21 October 2026, with every chapter drawn in stills and the sound made before anything was rendered; revised on 27 October 2026 for the series' first pack (the three packs, approved on 23 October 2026), so it shows no code, settings file, check name or tool screen, only the university's own papers, in plain words, and says "check" for "test"; the same day its opening came to say the problem, the need for a fix and the relief outright, and the story came back to Vienna along the way and closed on what the fixes bring, as the author asked of every script; and on 28 October, as his four beats for every opening ask, two of the opening's lines came to say what the autopsy room and chlorinated lime are. The author approved it on 28 October 2026, and it was recorded and rendered the same day. The narration lives in [`source/src/narration.js`](source/src/narration.js), the pauses in [`source/src/breath.js`](source/src/breath.js) and the pictures in [`source/src/scenes.js`](source/src/scenes.js) and [`source/src/plan.js`](source/src/plan.js); this page and those files say the same thing, and where they differ, the source wins. The times are the voiced narration's (800 words), from the pacing report below; the pictures follow the voice. The title card follows chapter 1; the end card follows chapter 8. The film's decisions, with their dates, are in [`decided.md`](decided.md). Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## The promise
 
@@ -134,9 +80,9 @@ Each beat of the opening, said outright in the narration (AGENTS.md, *Story and 
 
 ## Script
 
-The times are an estimate (28 October 2026): the recorded voice, with the twenty-one lines to record timed at its pace; recording them will move the times a little. Words on screen are on paper, screens, boards, tags and speech bubbles.
+The times are the recorded voice's (28 October 2026). Words on screen are on paper, screens, boards, tags and speech bubbles.
 
-### 1 · Two clinics · 0:00–1:10
+### 1 · Two clinics · 0:00–1:11
 
 **Narration.** Vienna, 1847. The city's general hospital has two maternity clinics. In the first, where doctors and their students work, about one mother in ten dies of fever. In the second, where midwives work, about one in thirty. Women in labour beg not to be sent to the first clinic. Nobody can explain the difference. Something has to change. Ignaz Semmelweis, a young doctor in the first clinic, looks for what's different. The doctors and students come to the ward from the autopsy room, with traces of the dead on their hands. The midwives don't. So he has everyone wash their hands in chlorinated lime, a bleach, before they examine a mother. Within months, deaths in the first clinic fall to the level of the second. Hundreds of mothers who would have died go home. The fever showed in the beds. It started on the doctors' hands, on their way in. Where a problem shows is often not where it starts.
 
@@ -144,7 +90,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** Vienna · 1847 · first clinic · doctors and students · second clinic · midwives · about 1 mother in 10 · about 1 in 30 · Ignaz Semmelweis · first clinic · autopsy room · chlorinated lime · First clinic · deaths of mothers · 1847 · April · 18.3% · mid-May · chlorinated lime · June · 2.2% · July · 1.2% · August · 1.9% · second clinic: about 1 in 30 · where it shows · where it starts · Fixed where it starts · where a problem begins · Film 6 of 19 · data governance
 
-### 2 · Still amber · 1:10–1:57
+### 2 · Still amber · 1:11–1:58
 
 **Narration.** Today, Yusuf opens binder 15. Its policy says the root causes of data quality issues are addressed. But on the quality scorecard, one cell is still amber. Short-course emails, with spaces and capitals. The issue goes to their owner, Tom's learning team. The first answer is the old one: it's cleaned downstream. Every night for a year, the data team has trimmed each email and written it in lower case. Without it, one learner could end up with two wallets. And every system that reads these emails cleans them again. It's a mop under a leak. It works every night, and the leak never stops.
 
@@ -152,7 +98,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** Today · Fixed where it starts · Data policies · Policy 15 · Data quality issues · Root causes of data quality issues are addressed. · Data quality scorecard · last night's checks · Area · Completeness · Uniqueness · Validity · Consistency · Accuracy · All · Learning · 7 of 7 · 5 of 5 · 7 of 7 · 2 warnings · 3 of 3 · 22 of 22 · 160 of 160 · Warnings · Check · Owner · Rows · Short-course enrolments: emails as typed · Short-course learners: emails as typed · Learning team · 6 · 3 · Issue log · Data quality · Opened · Issue · Owner · Due · 19 Oct · Enrolments with no email, 6 · Learning team · 20 Oct · CLOSED: the check passes · Short-course emails as typed · 26 Oct · CLOSED: cleaned downstream · The data team's clean-up · every night · as typed · trimmed · lower case · after · DanielKim.Work@mail.example · danielkim.work@mail.example · Wallet · Daniel Kim · data team · finance · mailing list · the clean-up
 
-### 3 · Follow it back · 1:57–2:31
+### 3 · Follow it back · 1:58–2:33
 
 **Narration.** Yusuf follows one email back to where it's made. From the wallet, through the data team's clean-up, to the short-course sign-up form. The form keeps each email as it's typed, in a plain text box, so phones start it with a capital. And picking a suggestion can leave a space at the end. More than one email in three arrives that way. Nobody typed anything wrong. As in Vienna, it shows downstream, but it starts here, at the form.
 
@@ -160,7 +106,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** wallet · the data team's clean-up · short-course platform · sign-up form · seen here · made here · Tom Whitfield · learning team · Short courses · this term · Sign-up form · preview · Sign up for a short course · Name · Daniel Kim · Email · a plain text box · D · Da · Dan · DanielKim.Work@mail.example · Short-course learners · Aisha.K@Mail.example · aisha.r@mail.example · DanielKim.Work@mail.example · Nguyen.Family@mail.example · tom.becker@mail.example · omar.haddad@mail.example · grace.okafor@mail.example · peter.novak@mail.example · 3 of 8 as typed · where it shows · where it starts
 
-### 4 · Fixed where it's typed · 2:31–3:16
+### 4 · Fixed where it's typed · 2:33–3:18
 
 **Narration.** This time, the issue has an owner, a cause, a date, and a check that proves it's closed. Tom's team makes the box an email box, so phones stop adding the capital. And the form trims each email, writes it in lower case and checks its shape, before it's saved. Nobody has to type more carefully. The form does the work. Like the basin in Vienna, the form stops the problem on its way in. Tom's team corrects the old emails in their platform. Then the data team's clean-up can go. No system cleans them again, and every learner keeps one wallet.
 
@@ -168,7 +114,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** Issue · short-course emails as typed · Owner: · Learning team · Cause: · the form keeps each email as typed · Due: · 2 November · Closed when: · the check passes with no clean-up · Sign-up form · preview · Sign up for a short course · Name · Daniel Kim · Email · a plain text box · an email box · d · da · dan · DanielKim.Work@mail.example · danielkim.work@mail.example · Sign up · Grace Okafor · Paste · Grace.Okafor@Mail.example · grace.okafor@mail.example · Vienna · 1847 · first clinic · doctors and students · Short-course learners · aisha.k@mail.example · danielkim.work@mail.example · nguyen.family@mail.example · The data team's clean-up · every night · RETIRED · Wallet · Daniel Kim · danielkim.work@mail.example
 
-### 5 · Should never fail · 3:16–3:37
+### 5 · Should never fail · 3:18–3:40
 
 **Narration.** The rule stays, as a check that should never fail: a promise to everyone who reads them. If it ever fails, the form has broken, and its owner hears first. The cell turns green: not because the emails were cleaned, but because they were right where they were typed.
 
@@ -176,7 +122,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** a check that should never fail · tells: Learning team · 7 of 7 · 22 of 22 · 28 of 28 · 160 of 160 · CLOSED: the check passes
 
-### 6 · What no rule names · 3:37–4:23
+### 6 · What no rule names · 3:40–4:26
 
 **Narration.** One night, the learning platform sends something no rule names. Half the new badges arrive with zero credit. Most are microcredentials that should carry five. Every check passes. The value is there, and it's a number. But the wallet shows them as plain badges, with no credit. Monitoring knows each table's usual shape: when it arrives, how many rows, how many empty, how the values spread. Usually, one badge in twelve has no credit. Last night, one in two. As in Vienna, the numbers show something's wrong before anyone knows why. It tells the owner on record: the learning team.
 
@@ -184,7 +130,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** Badges · last night · badge · kind · credit · SQL for Analysis · Python Foundations · Welcome to Online Learning · Data Visualisation · Statistics Refresher · Leading Teams · Health Data Essentials · Security Fundamentals · microcredential · badge · 5 · 0 · Checks · last night · credit · filled in · a number · Wallet · Python Foundations · badge · no credit · Sam Okafor · platform team · Badges · usual shape · arrived · 02:00 · rows · as usual · empty · 0% · no credit, night by night · usually 1 in 12 · last night 1 in 2 · Vienna · 1847 · first clinic · doctors and students · second clinic · midwives · about 1 mother in 10 · about 1 in 30 · owner on record: Learning team · Notice · the learning platform's badges · to: Learning team, the owner · Badges with no credit: · 1 in 2 last night · (usually 1 in 12)
 
-### 7 · A surprise becomes a rule · 4:23–4:53
+### 7 · A surprise becomes a rule · 4:26–4:56
 
 **Narration.** The cause is last week's update to the learning platform. Tom's team fixes it there, and sends the badges again. Then the surprise becomes a rule: a microcredential carries credit. A check, with an owner. Next time, it's stopped before it reaches a wallet. Prevent what you can, where it starts. Check what you know. Watch for what you don't. And every surprise you confirm becomes a rule.
 
@@ -192,7 +138,7 @@ The times are an estimate (28 October 2026): the recorded voice, with the twenty
 
 **On screen.** Learning platform · microcredentials · credit points · Data Visualisation · Designing Digital Learning · Finance for Managers · Health Data Essentials · Leading Teams · Machine Learning Basics · Python Foundations · Security Fundamentals · SQL for Analysis · Statistics Refresher · 5 · 0 · badges sent again · Quality rule · A microcredential carries credit · Owner · Learning team · Dimension · validity · Level · stop on any · Why · the wallet shows it as a plain badge · Signed · Tom Whitfield · SIGNED · Python Foundations · microcredential · credit 0 · STOPPED · prevent · where it starts · check · what you know · watch · what you don't · a microcredential · carries credit
 
-### 8 · Nobody to blame · 4:53–5:55
+### 8 · Nobody to blame · 4:56–5:59
 
 **Narration.** Nobody blamed Tom's team. The form did what it was built to do. They got the evidence, and help to change it. Back in Vienna, Semmelweis was right. But the washing was slow, and it hurt the skin. Germs weren't known yet, so his only proof was his numbers. He waited years to publish them. And when doctors doubted him, he blamed them, in angry open letters. Washing became the rule only after his death, once germs were known. It's basic hygiene now, and it saves mothers and babies every day. A fix at the start lasts when it's easy to keep, and when people get the evidence, not the blame. Fix the cause. Then make the fix a check. That's what data governance brings: less cleaning, data everyone can trust, and an owner who hears first.
 
@@ -212,7 +158,7 @@ The film can stop at the end of three chapters, with one question each (`site/as
 |---|---|---|
 | Follow it back | The data team cleaned the emails every night, and nothing broke. Why wasn't that enough? | The clean-up treated what showed, not the cause. The form kept making new ones, and every other system that read the emails had to clean them again. |
 | Should never fail | The form now trims and checks every email. Why keep a check that should never fail? | It's a promise to everyone who reads the emails, and if the form ever breaks, after an update say, its owner hears first, before anyone downstream. |
-| A surprise becomes a rule | Rule or monitoring? "A microcredential carries credit points." "Last night's badges don't look like other nights'." | The first is something you know: write it as a check with an owner. The second is what monitoring catches; once you confirm what it found, it becomes a rule. |
+| A surprise becomes a rule | Rule or monitoring? "A microcredential carries credit." "Last night's badges don't look like other nights'." | The first is something you know: write it as a check with an owner. The second is what monitoring catches; once you confirm what it found, it becomes a rule. |
 
 ## Labs (candidates)
 
@@ -279,45 +225,20 @@ Checked on 20 and 21 October 2026; the sources are listed below. In part one the
 
 **Sources (20, 21, 27 and 28 October 2026).** Wikipedia, Ignaz Semmelweis (revision 1374734853): https://en.wikipedia.org/wiki/Ignaz_Semmelweis · Loudon I, *Ignaz Phillip Semmelweis' studies of death in childbirth*, James Lind Library, 2013: https://www.jameslindlibrary.org/illustrating/articles/ignaz-phillip-semmelweis-studies-of-death-in-childbirth · Carson EA, Toodayan N, *Ignaz Philipp Semmelweis (1818–1865): herald of hygienic medicine*, Med J Aust 2018;209(11):480–482: https://www.mja.com.au/journal/2018/209/11/ignaz-philipp-semmelweis-1818-1865-herald-hygienic-medicine · Kölnei L, *One semi-true and one false myth about Ignác Semmelweis*, Képmás, 24 January 2024: https://kepmas.hu/en/one-semi-true-and-one-false-myth-about-ignac-semmelweis · Semmelweis University, *Ignác Fülöp Semmelweis (1818–1865)*: https://semmelweis.hu/english/2018/02/his-death/ · MDN, *autocapitalize* (last modified 17 April 2026): https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/autocapitalize · HTML Living Standard, the email state (updated 20 October 2026): https://html.spec.whatwg.org/multipage/input.html#email-state-(type=email) · Apple Developer Forums, *Predictive Text Bug?*: https://developer.apple.com/forums/thread/90186 · Stack Overflow, *iOS textfield autocomplete adds blank character* (question 51252525) · RFC 5321, section 2.4: https://www.rfc-editor.org/rfc/rfc5321 · Mailchimp, *Are email addresses case sensitive?*: https://mailchimp.com/en/resources/are-email-addresses-case-sensitive/ · Deming's 14 points, point 3, from *Out of the Crisis* (1982), pp. 23–24, as the Institute for Manufacturing (Cambridge) gives them: https://www.ifm.eng.cam.ac.uk/research/dstools/demings-14-points/ · Google, *Site Reliability Engineering*, chapter 15, *Postmortem Culture: Learning from Failure* (2017): https://sre.google/sre-book/postmortem-culture/ ("people will not bring issues to light for fear of punishment") · Lean Enterprise Institute, *poka-yoke*: https://www.lean.org/lexicon-terms/poka-yoke/ ("finding defects at their source"); Shigeo Shingo, *Zero Quality Control: Source Inspection and the Poka-yoke System* (1986) · Thomas C. Redman, *Bad Data Costs the U.S. $3 Trillion Per Year*, Harvard Business Review, 22 September 2016 · ITIL 4's problem, known error and workaround, as Cornell University's IT service gives them: https://tdx.cornell.edu/TDClient/189/Portal/KB/ArticleDet?ID=7719 · The example project, on pull request #53's branch (`claude/project-thread-ltr3tq`; the cited lines checked at commit 8e70ba2 on 21 October 2026) · *Rules that run*'s scorecards, written by the generator on 21 October 2026 · The series' shared facts, in its proposal (*The facts the films share*), 21 October 2026 · Science History Institute, *Ignaz Semmelweis* (15 September 2025; checked 27 October 2026): https://www.sciencehistory.org/education/scientific-biographies/ignaz-semmelweis/ · World Health Organization, *Forgetting to wash your hands can cost lives* (9 May 2017; checked 27 October 2026): https://www.who.int/news-room/feature-stories/detail/forgetting-to-wash-your-hands-can-cost-lives · Wikipedia, Calcium hypochlorite (checked 28 October 2026): https://en.wikipedia.org/wiki/Calcium_hypochlorite
 
-## Decided
-
-| Date | Decision |
-|---|---|
-| 20 October 2026 | The opening is Vienna in 1847, as the plan has it, told from the English and Hungarian sources above; the film gives the two clinics' rates, not a ratio, and avoids the martyr myth. |
-| 20 October 2026 | The badges arrive with zero credit, not without a value: not_null passes, and only monitoring sees the change. The rule it becomes is DEC-LMS-03, in pull request #53. |
-| 21 October 2026 | With *Rules that run*: the scorecard is drawn as that film draws it, and film 6's cell is amber, a warning, because a failure would stop the build every night and no practitioner would believe it lasted a year. |
-| 21 October 2026 | The cause of the emails is the form's plain text box (phones add the capital, a suggestion leaves a space), so nobody typed anything wrong. |
-| 21 October 2026 | The metaphor is a drip, a bucket and a mop in the data team's room, said once in the narration; when the cause is fixed, a small leak sensor stays, the test that should never fail. |
-| 21 October 2026 | The wallet is what the clean-up protects (one learner, two wallets), and what the zero-credit badges harm (plain badges), not Planning's count of awards: a microcredential badge carries 5 credit points, below the 6 that make a microcredential an award; the 55 that count as awards this year carry 6 or more (the series' facts). |
-| 21 October 2026 | Binder 15, policy *Data quality issues*, opens today's story ("Its policy says the root causes of data quality issues are addressed"), and in the last wordless moment Yusuf marks its line green. The film opens on *Rules that run*'s last scorecard, "7/7 (2 warn)", shown in turns as that film shows it. The badge night is told after the green cell and not dated. |
-| 21 October 2026 | With *Rules that run* and the series: chapter 2 is *Still amber*. The film opens on that film's last scorecard, the run of Tuesday 20 October 2026 (learning 22/22 (2 warn), all tests 160/160 (2 warn)), and the issue's first answer is the old one, "cleaned in staging": one issue card, not a stack of Mondays. |
-| 21 October 2026 | As the series' binder rule sets, binder 15's label is the film's title, *Fixed where it starts*, and the shelf shows gaps for binders 2, 12, 6 and 9. |
-| 21 October 2026 | The repair is shown: a green clamp closes on each of the pipe's joints as the drips stop, and the next chapter tilts from the first clamp down to the sensor where the bucket stood. The gold card is closed by a green stamp, "CLOSED: the test passes", answering its own "Closed when"; no decision card is pinned beside the screen. |
-| 21 October 2026 | The learning team's office uses the series' apricot walls (`GV_ROOM.learn`), as *Rules that run* does, so Tom's screen looks the same in both films. |
-| 21 October 2026 | The phone is laid out close and seen a little wider, so every key the thumb presses, and the "Paste" bubble, stay above the captions. |
-| 21 October 2026 | The sound is a glass harmonica and handbells. The oboe first planned plays in *Teachers of data*'s double-reed trio, so it's left to that film; the glass harmonica is new to the series (master data's *Roles come and go* gives one a single role). Music comes only now and then, and every chord is tuned pure. |
-| 21 October 2026 | No words in another language on screen, as the playbook's checklist asks: the journal of 1858, the book of 1861 and the open letters keep their years and their tags, and their Hungarian and German titles are drawn as bars and strokes without letters. |
-| 23 October 2026 | The author approved the series' plan in three parts. *Fixed where it starts* is in part one, which shows no code, settings files, check names or tool screens, only the university's own papers, in plain words: "check" for "test", "downstream" for "in staging", "the owner on record" for "the owner the metadata names". Its technical scenes (the clean-up and its retirement, the check that should never fail, lineage, the profiling, monitoring) are for *Quality on the platform*, film 17. |
-| 27 October 2026 | The revision for part one, for the author's yes: the scorecard in plain words, "7 of 7 · 2 warnings", with a list of warnings and no check names, as *Rules that run* draws it, but with no date, as the series has film 6 draw none for its day; the first issue is the issue log's two lines for the emails, from 19 October and due 26 October, as *Rules that run* keeps it; "CLOSED: cleaned downstream"; the clean-up's code becomes a card by Jun's desk, an email as typed and after, stamped "RETIRED" when the form is fixed; the lineage screen becomes a trail of cards on the data team's board; the form's setting becomes a tag, "a plain text box", then "an email box"; emails are written in the normal type; the badges show their names and kinds, not their codes; Sam's desk gets his plate, "platform team", since the platform team watches; the rule's file becomes a rule card on the series' sign-off sheet, signed by Tom, with its owner, dimension, level and reason, as *Rules that run*'s rule cards have them. Ten lines are recorded again. |
-| 27 October 2026 | Drawn for part one, while the script waits: the issue log lies on Tom's desk, the page *Rules that run* keeps, with that film's failure, "Enrolments with no email, 6", closed with its green stamp, and the emails' warnings as one line, "Short-course emails as typed", stamped red under it, as the register's page has room for names that short at the size a phone needs; the trail's cards each carry a small picture of the place, the thread runs over them, and the camera comes close; the scorecard's old words go before the new ones come, so they never sit on each other; in the morning the camera moves over to Sam, at his desk with his plate. |
-| 27 October 2026 | As the author asked of every film's opening that day, Vienna says the problem, the need for a fix and the relief outright, in three new lines: "Women in labour beg not to be sent to the first clinic." "Nobody can explain the difference. Something has to change." "Hundreds of mothers who would have died go home." Two moments come with them: a woman in labour begging the porter at the first clinic's door, and a mother coming out of it with her baby, past the basin. The chapter grows by about 12 seconds; the three lines are recorded with the ten. |
-| 27 October 2026 | As the author asked of every script that day, the story closes: each fix's good is said, the story comes back to Vienna now and then, and the film ends on what data governance brings. One line changes and six are new: "As in Vienna, it shows downstream, but it starts here, at the form." "Like the basin in Vienna, the form stops the problem on its way in." "No system cleans them again, and every learner keeps one wallet." "As in Vienna, the numbers show something's wrong before anyone knows why." "Next time, it's stopped before it reaches a wallet." "It's basic hygiene now, and it saves mothers and babies every day." "That's what data governance brings: less cleaning, data everyone can trust, and an owner who hears first." Six moments come with them; "basic hygiene now" is told with the opening's mother going home, without a year, since today's scenes show only the university's places. Chapter 3 gets 0.3 s more after the trail of cards. The film is about 5:52, and the nineteen lines are recorded after his yes. |
-| 28 October 2026 | The author's four beats for every opening (scenario, problem, solution, benefits, each said outright, every loaded word explained): Vienna says all four, but "autopsy room" and "chlorinated lime" went unexplained, so two lines change: "The doctors and students come to the ward from the autopsy room, with traces of the dead on their hands. The midwives don't." "So he has everyone wash their hands in chlorinated lime, a bleach, before they examine a mother." The pictures stay. The film is about 5:55, and the twenty-one lines are recorded after his yes. The script's *Opening story* table quotes the line that says each beat, and each return to Vienna, as the series' check asks of every film that opens on a story. |
-
 ## Pacing report
 
-An estimate, 28 October 2026: the recorded voice, with the twenty-one lines to record timed at its pace (about 3.2 words a second while it speaks; a changed line at its old length, scaled by its words). `source/tools/pace.py` runs again once they're recorded. Before then it counts chapter 3's two changed lines at their old, shorter lengths, and puts the chapter at 146 words a minute; at the voice's pace their new words take about 1.6 s more, so about 138, under the 140 a chapter may have.
+From `source/tools/pace.py`, 28 October 2026, with the recorded voice. It speaks at about 190 words a minute, faster than the estimate, so a few holds after lines that need a moment are a little longer than the estimate had them: after the women begging, "Something has to change", the mothers going home, the plain text box, where it starts, the email box, the form's work, the basin, one wallet, the rule that stays and the rule card.
 
 | Chapter | Length | Words a minute | Voice | Longest quiet |
 |---|---|---|---|---|
-| 1 · Two clinics | 70.4 s | 136 | 72% | 6.4 s (the basin, then the title, wordless) |
-| 2 · Still amber | 46.7 s | 135 | 74% | 2.4 s |
-| 3 · Follow it back | 34.2 s | 138 | 71% | 1.8 s |
-| 4 · Fixed where it's typed | 44.4 s | 138 | 71% | 3.8 s (the clamps, the mop put away, wordless) |
-| 5 · Should never fail | 21.7 s | 136 | 67% | 2.8 s |
+| 1 · Two clinics | 71.2 s | 135 | 70% | 6.4 s (the basin, then the title, wordless) |
+| 2 · Still amber | 46.8 s | 134 | 74% | 2.4 s |
+| 3 · Follow it back | 35.1 s | 135 | 69% | 2.2 s |
+| 4 · Fixed where it's typed | 45.3 s | 135 | 69% | 3.8 s (the clamps, the mop put away, wordless) |
+| 5 · Should never fail | 21.8 s | 135 | 67% | 2.8 s |
 | 6 · What no rule names | 45.5 s | 132 | 74% | 1.8 s |
-| 7 · A surprise becomes a rule | 30.3 s | 135 | 73% | 1.8 s |
-| 8 · Nobody to blame | 62.2 s | 132 | 67% | 8.8 s (policy 15 marked green, then the end card, wordless) |
-| **Film** | **5:55** | **135** | **71%** | |
+| 7 · A surprise becomes a rule | 30.3 s | 135 | 72% | 1.8 s |
+| 8 · Nobody to blame | 63.1 s | 130 | 68% | 8.8 s (policy 15 marked green, then the end card, wordless) |
+| **Film** | **5:59** | **134** | **70%** | |
 
-800 words. Every sentence has at least 0.5 s after it, and no stop inside a chapter lasts 2.5 s or more, apart from the three wordless moments. `tools/legible.py --overlaps`: 404 pieces of text, all at least 28 px as seen or decoration on purpose; none runs off the frame or over other text. `tools/quiet.py`: after the opening, no chapter has music for more than 38% of it, or for more than 9.1 s without a break, and nothing beats or pulses.
+800 words. Every sentence has at least 0.5 s after it, and no stop inside a chapter lasts 2.5 s or more, apart from the three wordless moments. `tools/legible.py --overlaps`: 410 pieces of text, all at least 28 px as seen or decoration on purpose; none runs off the frame or over other text, and the badges' table fades a column at a time as the camera passes it. `tools/quiet.py`: after the opening, no chapter has music for more than 39% of it, or for more than 7.3 s without a break, and nothing beats or pulses. The mix is -16.5 LUFS, the effects soft and low: where the voice is silent, what's above 2.5 kHz is under 0.0001 of full scale.

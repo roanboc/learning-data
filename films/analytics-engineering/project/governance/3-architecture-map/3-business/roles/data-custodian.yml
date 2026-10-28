@@ -1,0 +1,5 @@
+name: data custodian
+kind: business role
+definition: 'Runs where the data is kept: the platform, its tags, access rules and logs.'
+owner: Yusuf Demir, data governance lead
+status: confirmed

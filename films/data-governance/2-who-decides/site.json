@@ -1,0 +1,29 @@
+{
+  "kicker": "Data governance, and the right to decide",
+  "kicker_es": "Gobernanza de datos, y el derecho a decidir",
+  "title_es": "Quién decide",
+  "h1": "Who decides: a register still to be confirmed, twenty-three replies and no decision, and an owner every change asks by name",
+  "h1_es": "Quién decide: un registro por confirmar, veintitrés respuestas y ninguna decisión, y un dueño al que cada cambio le pregunta por nombre",
+  "lead": "The binder called Who decides says every area of data has an owner and a steward. But three owners, and half the stewards, are still to be confirmed, so decisions are made in email, or not at all. Yet the data team already knows who they ask, area by area. Yusuf confirms each name with its office, sorts out three roles, and says who decides what. Then anything new that other teams will read needs a named owner before it's signed off, and every change request goes, by name, to the person who decides. And Mei, who owns what award means, gets the time to answer.",
+  "lead_es": "La carpeta llamada Quién decide dice que cada área de datos tiene un dueño y un responsable de datos. Pero tres dueños, y la mitad de los responsables, siguen por confirmar, así que las decisiones se toman por correo, o no se toman. Aun así, el equipo de datos ya sabe a quién pregunta, área por área. Yusuf confirma cada nombre con su oficina, aclara tres roles y dice quién decide qué. Luego, todo lo nuevo que leerán otros equipos necesita un dueño con nombre antes de aprobarse, y cada solicitud de cambio va, por nombre, a quien decide. Y Mei, dueña de lo que significa título, recibe el tiempo para responder.",
+  "description": "A film about decision rights in data governance: a cord within reach on a car maker's engine line in 1960s Japan; a register of owners still to be confirmed, and decisions lost in email; the names the data team had already written down; three roles, the owner, the steward and the custodian; who decides what, from each area to the council; an owner required before anything new is signed off; change requests sent to their owner by name; decisions written down where the work is; the time an owner needs to answer; and a question nobody expected.",
+  "description_es": "Una película sobre los derechos de decisión en la gobernanza de datos: una cuerda al alcance en la línea de motores de una automotriz del Japón de los años sesenta; un registro de dueños por confirmar, y decisiones perdidas en el correo; los nombres que el equipo de datos ya había anotado; tres roles, el dueño, el responsable de datos y el custodio; quién decide qué, de cada área al consejo; un dueño obligatorio antes de aprobar algo nuevo; solicitudes de cambio enviadas a su dueño por nombre; decisiones anotadas donde está el trabajo; el tiempo que necesita un dueño para responder; y una pregunta que nadie esperaba.",
+  "card": "Eight areas, three owners still to be confirmed, and decisions lost in email. Make the work ask its owner, by name.",
+  "card_es": "Ocho áreas, tres dueños por confirmar, y decisiones perdidas en el correo. Haz que el trabajo le pregunte a su dueño, por nombre.",
+  "past": ["Japan, a car maker's engine line in the 1960s", "A right to decide works when it's within reach of the work, and brings someone who can decide, at once."],
+  "past_es": ["Japón, la línea de motores de una automotriz en los años sesenta", "Un derecho a decidir funciona cuando está al alcance del trabajo, y trae enseguida a alguien que puede decidir."],
+  "chapters_es": {
+    "cord": "La cuerda",
+    "tbc": "Por confirmar",
+    "written": "Ya anotado",
+    "roles": "Tres roles",
+    "domains": "Quién decide qué",
+    "required": "Obligatorio",
+    "asked": "Llamado por nombre",
+    "logged": "Donde está el trabajo",
+    "time": "Tiempo para responder",
+    "which": "¿Qué título?"
+  },
+  "next_h": "You've seen the work ask its owner, by name. More films in the series are on the way.",
+  "next_h_es": "Viste cómo el trabajo le pregunta a su dueño, por nombre. Vienen más películas de la serie."
+}

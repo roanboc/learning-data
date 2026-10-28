@@ -1,0 +1,3 @@
+/* scaffold */
+const WC_PLACES={air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facultyDesk:gv_paintFacultyDesk,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
+  regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

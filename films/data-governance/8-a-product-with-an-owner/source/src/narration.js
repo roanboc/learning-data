@@ -60,7 +60,7 @@ const NARR={
  {"id":"draft","gap":0.8,"text":"It's a draft until its owner says it's ready, and active while people rely on it."},
  {"id":"dep","gap":0.8,"text":"When it's no longer needed, it's deprecated: it gets a date to go, and its users are asked to move."},
  {"id":"old","gap":0.8,"text":"An old edition goes the same way."},
-    {"id":"first","gap":0.8,"text":"The first edition of the registrar's credentials has no users now, so at the end of March 2027 it's retired.","say":"The first edition of the registrar's credentials has no users now, so at the end of March twenty twenty-seven it's retired."}]},
+ {"id":"first","gap":0.8,"text":"The first edition of the registrar's credentials has no users now, so at the end of March 2027 it's retired.","say":"The first edition of the registrar's credentials has no users now, so at the end of March twenty twenty-seven it's retired."}]},
 "found":{"name":"Found, and trusted","lead":1.0,"tail":1.0,"vo":[
  {"id":"finds","gap":0.8,"text":"Now Anil finds Planning's product in the catalogue, among the others: its promise, its owner, and where to ask."},
  {"id":"like","gap":0.8,"text":"Like a buyer in the bazaar, he knows where to find it, what it will be, and who stands behind it."},

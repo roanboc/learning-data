@@ -28,6 +28,18 @@
     [
       "\\bYusuf\\b",
       "Yoosoof"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
     ]
   ]
 }

@@ -156,7 +156,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 
 | On screen | In the example project |
 |---|---|
-| One order for every field: "the student system first, then the learning platform, then short courses" | `models/intermediate/student/int_learner_timeline.sql`, lines 166, 173 and 174; `models/core/student/_core_student__models.yml`, line 71 (`full_name`'s description) |
+| One order for every field: "the student system first, then the learning platform, then short courses" | `models/intermediate/student/int_learner_timeline.sql`, lines 166, 173 and 174; `models/core/student/_core_student__models.yml`, line 75 (`full_name`'s description) |
 | A system's version recorded last wins | `models/core/student/_core_student__models.yml`, `LIM-STU-03`; and `LIM-STU-07`: platform dates are the day a change was recorded, not the day it happened |
 | Linh, `S-20436`, from July 2025 | `data/student_system/learners.csv`, line 50. There her course is the Graduate Certificate in Health Informatics (`GCHI`), and her email the family one the films never show; the film keeps her master's, as the series does |
 | Her bachelor's, `S-17142`, 2019 to 2022, and the alumni office's record of it: "Nguyen Thi Linh" and her 2019 personal email | `data/student_system/past_learners.csv`, lines 4 and 5; `data/alumni_system/alumni.csv`, line 3 |

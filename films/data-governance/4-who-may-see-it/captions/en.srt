@@ -1,0 +1,271 @@
+1
+00:00:01,000 --> 00:00:03,622
+West Germany, April 1983.
+
+2
+00:00:04,322 --> 00:00:10,092
+Every resident is to answer the census, so the country can plan housing, schools and transport.
+
+3
+00:00:10,792 --> 00:00:16,543
+But the same law lets each town hall add the answers, by name, to its records on each resident.
+
+4
+00:00:17,243 --> 00:00:24,300
+With computers, answers like these add up to a picture of each person, and nobody knows who will see it, or what for.
+
+5
+00:00:25,400 --> 00:00:27,520
+Hundreds of groups call for a boycott.
+
+6
+00:00:28,820 --> 00:00:31,061
+The Constitutional Court stops the count.
+
+7
+00:00:31,961 --> 00:00:35,723
+The country still needs a way to count, without knowing who said what.
+
+8
+00:00:36,423 --> 00:00:42,689
+The court rules that, in principle, each person decides what is disclosed about them, and how it's used.
+
+9
+00:00:43,789 --> 00:00:45,519
+The court doesn't forbid counting.
+
+10
+00:00:46,019 --> 00:00:47,117
+It draws a line.
+
+11
+00:00:48,817 --> 00:00:54,022
+Names and addresses are kept apart from the answers, and removed as soon as possible.
+
+12
+00:00:54,722 --> 00:00:58,798
+And answers given to be counted never go into the town hall's records.
+
+13
+00:00:59,498 --> 00:01:07,427
+In 1987, the count goes ahead that way: the country counts its 61 million people, and they keep their privacy.
+
+14
+00:01:08,327 --> 00:01:10,319
+Counting people is one permission.
+
+15
+00:01:10,819 --> 00:01:12,415
+Knowing who they are is another.
+
+16
+00:01:13,715 --> 00:01:20,685
+In a university's data, the court's line runs between columns: who may see each one, for what, and until when.
+
+17
+00:01:27,585 --> 00:01:29,681
+The university has a census too.
+
+18
+00:01:30,881 --> 00:01:37,184
+Planning counts its learners, and its list of those near an award has no names: counting doesn't need them.
+
+19
+00:01:38,584 --> 00:01:44,218
+Clara, in Planning, wants to know which of them are still studying, to plan next term's places.
+
+20
+00:01:45,418 --> 00:01:48,956
+For that, she needs each learner's status, from the learner table.
+
+21
+00:01:52,056 --> 00:01:53,869
+Yusuf opens the next binder.
+
+22
+00:01:54,569 --> 00:01:59,721
+Policy 6, Data protection, says personal data is classified and protected.
+
+23
+00:02:00,421 --> 00:02:02,330
+It doesn't say which data, or how.
+
+24
+00:02:03,430 --> 00:02:06,406
+Until now, a request like Clara's went one way.
+
+25
+00:02:07,106 --> 00:02:07,799
+A form.
+
+26
+00:02:08,199 --> 00:02:09,701
+An approval, by email.
+
+27
+00:02:10,201 --> 00:02:15,988
+Three weeks later, the whole learner table, names and emails included, granted to her by name.
+
+28
+00:02:16,688 --> 00:02:18,146
+And nothing ever ended it.
+
+29
+00:02:19,346 --> 00:02:23,619
+The platform team checks who can read that table today: forty-one people.
+
+30
+00:02:24,319 --> 00:02:28,721
+Nine have moved to other jobs, and still see every learner's name and email.
+
+31
+00:02:29,821 --> 00:02:31,390
+Nobody did anything wrong.
+
+32
+00:02:31,890 --> 00:02:33,368
+The path just had no end.
+
+33
+00:02:36,568 --> 00:02:39,211
+Now the path starts somewhere else: at the column.
+
+34
+00:02:40,411 --> 00:02:44,919
+Every column other teams read carries a class: what it tells about a person.
+
+35
+00:02:46,019 --> 00:02:50,524
+Direct, if it identifies someone by itself, like a name or an email.
+
+36
+00:02:51,224 --> 00:02:54,477
+Pseudonymous, if it only can with something kept elsewhere.
+
+37
+00:02:55,177 --> 00:02:55,841
+Or none.
+
+38
+00:02:57,041 --> 00:03:00,849
+Each owner writes the classes in a register, column by column.
+
+39
+00:03:01,549 --> 00:03:06,703
+And every change is checked: a column with no class goes to its owner, with a question.
+
+40
+00:03:08,003 --> 00:03:10,386
+One reached Mei: a credential's code.
+
+41
+00:03:11,486 --> 00:03:13,268
+It looks harmless, and most are.
+
+42
+00:03:13,968 --> 00:03:16,414
+But an award's code holds the student number.
+
+43
+00:03:17,714 --> 00:03:19,851
+Nothing can be assumed insignificant.
+
+44
+00:03:20,951 --> 00:03:24,344
+Mei classed it direct: the court's line, drawn at the column.
+
+45
+00:03:27,744 --> 00:03:32,954
+The class travels with its column, as a label, into every table the column reaches.
+
+46
+00:03:34,254 --> 00:03:41,041
+One rule reads the label: the registrar's office sees direct personal data, and everyone else sees stars.
+
+47
+00:03:42,241 --> 00:03:45,940
+The platform team applies it by label, not table by table.
+
+48
+00:03:47,040 --> 00:03:51,811
+So the email is masked in every table it reaches, and in tables built tomorrow.
+
+49
+00:03:55,911 --> 00:04:00,497
+Clara's request goes to the registrar's office, which owns the learner table.
+
+50
+00:04:01,697 --> 00:04:07,323
+Mei says yes, for her office: to plan next term's places, until 15 December.
+
+51
+00:04:08,623 --> 00:04:14,320
+The access goes to a Planning group, not to Clara by name, and ends by itself on that date.
+
+52
+00:04:15,620 --> 00:04:18,191
+Clara sees each learner's code and status.
+
+53
+00:04:18,891 --> 00:04:21,781
+Student numbers, names and emails are stars.
+
+54
+00:04:22,881 --> 00:04:25,350
+The learner code names no one by itself.
+
+55
+00:04:26,550 --> 00:04:29,799
+But with the registrar's list, it leads back to a person.
+
+56
+00:04:30,499 --> 00:04:34,964
+So it's still personal data: even codes come with a purpose and an end date.
+
+57
+00:04:36,264 --> 00:04:40,999
+The data team's AI agent sees stars too, and works from counts and samples.
+
+58
+00:04:44,099 --> 00:04:46,723
+Clara asks Yusuf why the names are stars.
+
+59
+00:04:48,223 --> 00:04:53,844
+He tells her why, as the court did: Planning counts learners; it doesn't need to know who they are.
+
+60
+00:04:55,544 --> 00:05:02,404
+And he shows her the way to more: if a purpose needs names, she asks the registrar's office, and says what it's for.
+
+61
+00:05:03,904 --> 00:05:08,327
+A no without a way forward is how tables end up copied into spreadsheets.
+
+62
+00:05:12,027 --> 00:05:17,803
+Clara's plan goes to the faculties, and on 15 December her access ends by itself.
+
+63
+00:05:18,503 --> 00:05:23,380
+Later that month, Yusuf's review takes minutes: he reads the access list itself.
+
+64
+00:05:24,080 --> 00:05:28,089
+The forty-one names are two groups now, each with a reason to be there.
+
+65
+00:05:29,289 --> 00:05:36,966
+Policy 6 now says which data, and how: owners class each column, and decide who may see it, for what, and until when.
+
+66
+00:05:37,666 --> 00:05:41,990
+The platform team protects each class, and Yusuf reviews who has access.
+
+67
+00:05:43,190 --> 00:05:49,224
+Like the census of 1987, Planning gets its numbers, and learners keep their privacy.
+
+68
+00:05:50,124 --> 00:05:53,405
+Classify once, at the column, and protect it everywhere.

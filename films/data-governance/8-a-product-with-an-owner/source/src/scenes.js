@@ -238,5 +238,54 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1600s"]],gv_io(t,P.baz+0.2,P.fl,0.4));
   wc_paperOver(ctx,S);});
 
+// ---- 5 · Wanting the job: Clara didn't ask for it; who depends on it, what it's worth to them, and what comes with it ----
+// arms folded: each forearm across the body to the other elbow, in front
+POSE.po_fold={L:[0.04,-1.85],R:[0.04,-1.85],feet:26,shift:3,tilt:0.03,turn:0.1,gaze:[0.4,0],look:0};
+// reaching down to the table at her side, for the pen
+POSE.po_reachDown={L:[0.12,-0.08],R:[0.32,0.42],feet:30,shift:4,tilt:-0.06,turn:0.2,gaze:[0.5,0.6],look:1};
+// Planning's room: Yusuf at the table's end, turned to Clara, who stands by the window (o.clara, o.yusuf: their options; o.book: his
+// notebook on the table)
+function po_jobRoom(x,tt,o){o=o||{};po_planScreen(x,tt,1,1);po_wallCard(x,1372,412,1);
+  po_planTable(x,tt,{out:["noor","clara"],pose:{yusuf:Object.assign({pose:"listen",flip:false},o.yusuf||{})}});if(o.book)gv_book(x,1110,780,150,GV_HOLD.teal);
+  person(x,"clara",1600,905,0.8,Object.assign({pose:"po_fold",flip:true,t:tt},o.clara||{}));}
+// where Yusuf's pen is in his notebook (its units), and how much of it shows: at the stall's counter as he says who depends on it, then
+// round each thing in the line as he draws it
+function po_jobPen(tt,P){const a=gv_io(tt,P.book+0.9,P.fac+2.5,0.35);if(a<=0.01)return null;const [dx,dy,dw,dh]=PO_NQ.dash,F=PO_NQ.fac,fy=PO_NQ.fy;
+  const rect=u=>{const d=clamp(u,0,1)*2*(dw+dh);return d<dw?[dx+d,dy]:d<dw+dh?[dx+dw,dy+d-dw]:d<2*dw+dh?[dx+dw-(d-dw-dh),dy+dh]:[dx,dy+dh-(d-2*dw-dh)];};
+  const mv=(p0,p1,u)=>{const e=easeCam(clamp(u,0,1));return[lerp(p0[0],p1[0],e),lerp(p0[1],p1[1],e)];},t1=P.dash,t2=P.dash+0.8,t3=P.fac;let p;
+  if(tt<t1-0.6)p=[-300+4*Math.sin(tt*6),424];else if(tt<t1)p=mv([-300,424],[dx,dy],(tt-t1+0.6)/0.6);else if(tt<t2)p=rect((tt-t1)/0.8);
+  else if(tt<t3)p=mv([dx,dy],[F[0]+50,fy+18],(tt-t2)/Math.max(0.3,t3-t2));else if(tt<t3+0.6){const an=(tt-t3)/0.6*TAU;p=[F[0]+50*Math.cos(an),fy+18+50*Math.sin(an)];}
+  else{const k=Math.max(1,Math.min(5,Math.floor((tt-t3-0.35)/0.3))),u=clamp((tt-t3-0.35-k*0.3)/0.3,0,1);p=[F[k]+22*Math.sin(u*TAU),fy-20+u*60];}
+  if(tt>t3+2.0){const u=easeCam(clamp((tt-t3-2.0)/0.5,0,1));p=[p[0]+120*u,p[1]+60*u];}return[p[0],p[1],a];}
+// the table from above: the product's card, smaller now, the three cards that go down by it, and the change request that slides in
+function po_jobTable(x,tt,P,o){o=o||{};po_cardSmall(x,{sign:o.sign||0,pen:o.pen||0});
+  [["jun","Jun","builds it",P.jun,-0.03],["noor","Noor","designs it",P.noor,0.02],["sam","Sam","runs it",P.sam,-0.015]].forEach(([id,n,r,t0,rot],i)=>{const [cx,cy]=PO_JB.cards[i];po_jobCard(x,cx,cy,id,n,r,clamp((tt-t0)/0.6,0,1),rot);});
+  const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",rows:[{l:"needs:",v:"Clara's yes"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
+scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{im:w("didnt","I'm")-0.15,book:c.depends-0.4,dep:w("depends","who depends"),dash:w("depends","near-award")-0.1,fac:w("depends","every faculty")-0.1,
+      worth:c.worth-0.3,num:w("worth","a number"),ask:w("worth","someone"),comes:c.comes-0.3,jun:w("comes","Jun")-0.1,noor:w("comes","Noor")-0.1,sam:w("comes","Sam")-0.1,
+      chg:w("comes","any change")-0.1,yes:w("comes","her yes"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
+  gv_shots(ctx,S,t,sc.dur,[
+    // Planning's room: Clara stands by the window, arms folded: "I'm not technical"
+    {at:0,place:"planning",keys:[[0,1224,520,1.38],[0.1,1214,520,1.42]],d:5,draw:(x,tt)=>{po_jobRoom(x,tt,{yusuf:{carry:heldNotebook},clara:{expr:"concerned"}});
+      gv_say(x,1150,286,["I'm not technical."],1572,546,{a:gv_io(tt,P.im,P.book+0.2,0.3),k:0.92+0.08*spring(fin(tt,P.im,0.5))});}},
+    // Yusuf's notebook, open on the table: he turns to the page where he's drawn the card as a stall, and draws who queues at it
+    {at:P.book,place:"planTop",keys:[[P.book,700,470,1.5],[P.fac-0.5,1110,470,1.5],[P.worth,960,500,1.12],[P.worth+2.4,960,500,1.15]],d:1.8,draw:(x,tt)=>{
+      po_notebook(x,{flip:easeCam(clamp((tt-P.book-0.3)/0.75,0,1))});
+      po_nbIn(x,q=>{po_nbQueue(q,{dash:clamp((tt-P.dash)/0.8,0,1),fac:PO_NQ.fac.map((_,i)=>clamp((tt-P.fac-(i?0.35+i*0.3:0))/(i?0.45:0.6),0,1))});
+        const pt=po_jobPen(tt,P);if(pt)po_pen(q,pt[0],pt[1],pt[2]);
+        po_tagAt(q,tt,P.dash+0.1,null,-195,470,"the near-award dashboard",{size:30});po_tagAt(q,tt,P.fac+0.1,null,356,196,"every faculty that plans from it",{size:30});
+        po_tagAt(q,tt,P.num,null,-195,546,"a number on time",{size:30});po_tagAt(q,tt,P.ask,null,356,546,"someone to ask",{size:30});});}},
+
+    // the product's card again, and what comes with it: three cards go down by it as each is named, then a change request
+    {at:P.comes,place:"planTop",keys:[[P.comes,835,432,1.26],[P.comes+0.1,835,430,1.29]],d:6,draw:(x,tt)=>po_jobTable(x,tt,P)},
+    // Planning's room: Clara unfolds her arms, and reaches for the pen
+    {at:P.room,place:"planning",keys:[[P.room,1214,520,1.42],[P.room+0.1,1230,524,1.46]],d:3,draw:(x,tt)=>{const u1=easeCam(clamp((tt-P.room-0.25)/0.6,0,1)),u2=easeCam(clamp((tt-P.room-0.85)/0.6,0,1));
+      po_jobRoom(x,tt,{book:true,yusuf:{expr:"smile"},clara:u2>0?{pose:"listen",pose2:"po_reachDown",mix:u2,E:EXPR.smile}:{pose:"po_fold",pose2:"listen",mix:u1,E:po_exprMix("concerned","smile",u1)}});}},
+    // the table from above: she signs the owner's line on the card; the promise is hers to keep, the code is Jun's
+    {at:P.sign,place:"planTop",keys:[[P.sign,835,430,1.29],[P.sign+0.1,830,428,1.31]],d:5,draw:(x,tt)=>{po_jobTable(x,tt,P,{sign:clamp((tt-P.sign-0.3)/1.2,0,1),pen:gv_io(tt,P.sign-0.1,P.sign+1.9,0.3)});
+      po_tagAt(x,tt,P.prom,null,700,100,"the promise",{size:32,wash:GV.gold,washA:0.5});po_tagAt(x,tt,P.not,null,1040,392,"not the code",{size:30,col:WC_MUTED,wash:[196,196,196],washA:0.35});}}]);
+  wc_paperOver(ctx,S);});
+
 /* scaffold */
-["job","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

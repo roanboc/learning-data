@@ -1,0 +1,29 @@
+$ python scripts/check/governance.py
+Governance's rules are met: every owner, glossary term, column class, test and description is in place.
+[exit 0]
+$ python scripts/check/impact.py --base before-completions
+# What this change touches
+
+10 file(s) changed in the project since `before-completions`; 1 model(s), seed(s) or source(s) changed, 1 test(s) changed, 0 downstream model(s), 1 test(s), 0 exposure(s).
+
+## Changed
+
+- `mart_planning__completions` (model): changed in `models/marts/planning/_planning__models.yml`
+
+## Contracts
+
+- `mart_planning__completions`: new
+
+## Tests changed
+
+- `unique_combination_mart_planning__completions_faculty_code__award_type`, owned by Planning
+
+## Tests
+
+1 test(s) on it and downstream. `dbt build --select mart_planning__completions+ --profiles-dir .` runs them.
+
+## Who to ask
+
+Planning
+
+[exit 0]

@@ -208,7 +208,9 @@ project/
 │   │                         request touches, and who to tell; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks
-├── examples/planning/        Planning's own project, refing the core across projects (dbt Cloud only)
+├── examples/                 planning/: Planning's own project, refing the core across projects
+│                             (dbt Cloud only); completions/ and counts-as-award/: two pull
+│                             requests, as patches, with what the checks said on each
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Governed in dbt, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (access, impact, agent), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "access":{q:"Alguien de Planificación no puede construir sobre un paso intermedio del proyecto del equipo de datos, pero podría leer su tabla en la plataforma. ¿Por qué?",
+    opts:[{t:"El acceso de dbt solo oculta el nombre de un modelo, así que su tabla es pública de todos modos."},{t:"Los grupos y el acceso de dbt deciden quién puede construir sobre un modelo en el proyecto. Quién puede leer una tabla lo decide la plataforma, con sus permisos.",ok:true},{t:"Porque esa persona es parte del grupo del equipo de datos."}],
+    why:"dbt revisa cada ref() cuando lee el proyecto, así que un modelo fuera del grupo del equipo de datos no puede construirse sobre uno de sus pasos privados: dbt se detiene antes de ejecutar nada. Leer una tabla es otra pregunta, que se responde donde vive la tabla, en la plataforma, como muestra la próxima película. En tu trabajo, ¿quién decide quién puede construir sobre una tabla, y quién decide quién puede leerla?"},
+  "impact":{q:"La primera versión de Jun no cambió ninguna columna, y aun así Mei dijo que rompe. ¿Por qué el control no lo detecta?",
+    opts:[{t:"El control solo mira las tablas nuevas."},{t:"El control compara las columnas y sus tipos. Un cambio de significado, la misma columna guardando otra cosa, lo decide la dueña del significado, y Mei decidió que rompe.",ok:true},{t:"Las microcredenciales no están en ningún contrato."}],
+    why:"El control de impacto puede decir a qué llega un cambio, cinco informes y apps y cuatro dueños a consultar, porque el proyecto los nombra. No puede decir qué significa una columna: eso es del glosario, y de su dueña. Por eso consulta a los dueños, y la respuesta de Mei hizo que Jun agregara una columna en su lugar, sin que nadie que la lee tuviera que cambiar. ¿Algún cambio en tu trabajo mantuvo todas las columnas, pero cambió lo que significaba una cifra?"},
+  "agent":{q:"El agente propone la clase pseudonymous para award_key, y dice que no está seguro. ¿Quién decide su clase, y por qué no el agente?",
+    opts:[{t:"El agente, porque contó las filas."},{t:"La Facultad de Salud, dueña de la tabla: una clase es una afirmación sobre los datos, y su dueño responde por ella. El agente la propone, con conteos como evidencia, y la señala.",ok:true},{t:"Nadie: el control decide cuando se fusiona la solicitud de cambio."}],
+    why:"Siete filas con solo dos valores distintos pueden ser claves de títulos, no de personas. El agente puede contar, proponer y señalar, y nunca ve un valor; su revisión es un comentario, no una aprobación. Decide la Facultad, como dueña, y cada aprobación es de una persona. ¿Qué decisiones de tu trabajo dejarías que un agente redacte, y cuáles guardarías para las personas?"}
+  }}};

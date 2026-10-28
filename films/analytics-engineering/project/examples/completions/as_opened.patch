@@ -1,0 +1,325 @@
+From 7e9b09d606a1a86909a5d53f0074d4fcabbed903 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:45 +0000
+Subject: [PATCH] Planning: completions, the awards conferred in the census
+ year, by faculty and award type, for the census report
+
+---
+ .../analytics-engineering/project/CODEOWNERS  |  1 +
+ .../4-data-products/completions.yml           | 22 ++++++
+ .../5-data-contracts/core_award_v1.yaml       |  1 +
+ .../5-data-contracts/core_credential_v2.yaml  |  1 +
+ .../mart_planning__completions.yaml           | 77 +++++++++++++++++++
+ .../6-product-descriptors/awards.yaml         |  1 +
+ .../6-product-descriptors/completions.yaml    | 42 ++++++++++
+ .../learner_records.yaml                      |  1 +
+ .../marts/planning/_planning__models.yml      | 30 ++++++++
+ .../planning/mart_planning__completions.sql   | 38 +++++++++
+ 10 files changed, 214 insertions(+)
+ create mode 100644 films/analytics-engineering/project/governance/4-data-products/completions.yml
+ create mode 100644 films/analytics-engineering/project/governance/5-data-contracts/mart_planning__completions.yaml
+ create mode 100644 films/analytics-engineering/project/governance/6-product-descriptors/completions.yaml
+ create mode 100644 films/analytics-engineering/project/models/marts/planning/mart_planning__completions.sql
+
+diff --git a/films/analytics-engineering/project/CODEOWNERS b/films/analytics-engineering/project/CODEOWNERS
+index f1e0466c..d98549ea 100644
+--- a/films/analytics-engineering/project/CODEOWNERS
++++ b/films/analytics-engineering/project/CODEOWNERS
+@@ -55,6 +55,7 @@
+ 
+ # Data products: each product's owner
+ /governance/4-data-products/awards.yml                   mei.tanaka@uni.example
++/governance/4-data-products/completions.yml              clara.jensen@uni.example
+ /governance/4-data-products/learner_records.yml          mei.tanaka@uni.example
+ /governance/4-data-products/learner_wallet.yml           wallet@uni.example
+ /governance/4-data-products/learners_near_an_award.yml   clara.jensen@uni.example
+diff --git a/films/analytics-engineering/project/governance/4-data-products/completions.yml b/films/analytics-engineering/project/governance/4-data-products/completions.yml
+new file mode 100644
+index 00000000..1c1539b9
+--- /dev/null
++++ b/films/analytics-engineering/project/governance/4-data-products/completions.yml
+@@ -0,0 +1,22 @@
++# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
++# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
++# for each output, from this file and the dbt contracts. The product's owner answers for the product;
++# the owners in the models' meta answer for what the data means.
++
++name: completions
++title: Completions
++owner: "Clara Jensen, Planning"
++domain: planning
++status: draft
++version: 0.1.0
++description:
++  purpose: The awards conferred in the census year, by faculty and award type. Planning's
++    completions, for the census report.
++  usage: Sum awards_conferred by faculty or award type. An award counts once it's conferred,
++    unless it's been revoked.
++outputs:
++  - {model: mart_planning__completions}
++service_levels:
++  - {property: latency, value: 1, unit: d, description: Built every night.}
++support:
++  - {channel: planning-data, tool: email, url: "mailto:planning@uni.example", scope: issues}
+diff --git a/films/analytics-engineering/project/governance/5-data-contracts/core_award_v1.yaml b/films/analytics-engineering/project/governance/5-data-contracts/core_award_v1.yaml
+index 165a1938..1ab9a08d 100644
+--- a/films/analytics-engineering/project/governance/5-data-contracts/core_award_v1.yaml
++++ b/films/analytics-engineering/project/governance/5-data-contracts/core_award_v1.yaml
+@@ -147,6 +147,7 @@ customProperties:
+   value: core_award_v1
+ - property: consumers
+   value:
++  - product completions
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+index e0875e89..d7132e06 100644
+--- a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
++++ b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+@@ -214,4 +214,5 @@ customProperties:
+   value: core_credential_v2
+ - property: consumers
+   value:
++  - product completions
+   - product learner_wallet
+diff --git a/films/analytics-engineering/project/governance/5-data-contracts/mart_planning__completions.yaml b/films/analytics-engineering/project/governance/5-data-contracts/mart_planning__completions.yaml
+new file mode 100644
+index 00000000..4796f972
+--- /dev/null
++++ b/films/analytics-engineering/project/governance/5-data-contracts/mart_planning__completions.yaml
+@@ -0,0 +1,77 @@
++# Generated by scripts/generate/products.py from governance/4-data-products/completions.yml and the dbt contracts. Don't edit it:
++# change those, then run the script. CI fails if it's out of date.
++apiVersion: v3.1.0
++kind: DataContract
++id: 72a3bc8b-bdb5-5946-9914-13b737c57c56
++name: mart_planning__completions
++version: 1.0.0
++status: draft
++domain: planning
++dataProduct: completions
++description:
++  purpose: The awards conferred in the census year, by faculty and award type. Planning's completions,
++    for the census report.
++  usage: Sum awards_conferred by faculty or award type. An award counts once it's conferred, unless it's
++    been revoked.
++schema:
++- name: mart_planning__completions
++  physicalName: mart_planning__completions
++  logicalType: object
++  physicalType: table
++  description: 'The awards conferred in the census year, by faculty and award type: Planning''s completions,
++    for its census report. An award counts once it''s conferred, unless it''s been revoked.'
++  properties:
++  - name: faculty_code
++    logicalType: string
++    physicalType: string
++    required: true
++    classification: none
++    description: The code of the faculty that offers the award, like `EIT`.
++  - name: faculty_name
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: The name of the faculty that offers the award.
++  - name: award_type
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: 'The kind of award: `graduate certificate` or `master`.'
++  - name: awards_conferred
++    logicalType: integer
++    physicalType: int
++    required: false
++    classification: none
++    description: How many awards of this type the faculty conferred in the census year.
++  quality:
++  - id: unique_combination_mart_planning__completions_faculty_code__award_type
++    type: custom
++    engine: dbt
++    implementation: 'unique_combination: unique_combination_mart_planning__completions_faculty_code__award_type'
++    dimension: uniqueness
++    severity: error
++slaProperties:
++- property: latency
++  value: 1
++  unit: d
++  description: Built every night.
++team:
++  name: Clara Jensen, Planning
++  members:
++  - username: clara.jensen@uni.example
++    name: Clara Jensen, Planning
++    role: owner
++support:
++- channel: planning-data
++  tool: email
++  url: mailto:planning@uni.example
++  scope: issues
++customProperties:
++- property: grain
++  value: One row per faculty per award type
++- property: dbtModel
++  value: mart_planning__completions
++- property: consumers
++  value: []
+diff --git a/films/analytics-engineering/project/governance/6-product-descriptors/awards.yaml b/films/analytics-engineering/project/governance/6-product-descriptors/awards.yaml
+index cd52ee5e..ebdc514d 100644
+--- a/films/analytics-engineering/project/governance/6-product-descriptors/awards.yaml
++++ b/films/analytics-engineering/project/governance/6-product-descriptors/awards.yaml
+@@ -31,6 +31,7 @@ support:
+ customProperties:
+ - property: consumers
+   value:
++  - product completions
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/governance/6-product-descriptors/completions.yaml b/films/analytics-engineering/project/governance/6-product-descriptors/completions.yaml
+new file mode 100644
+index 00000000..eac8c64a
+--- /dev/null
++++ b/films/analytics-engineering/project/governance/6-product-descriptors/completions.yaml
+@@ -0,0 +1,42 @@
++# Generated by scripts/generate/products.py from governance/4-data-products/completions.yml and the dbt contracts. Don't edit it:
++# change those, then run the script. CI fails if it's out of date.
++apiVersion: v1.0.0
++kind: DataProduct
++id: e0765418-1950-5187-8c8b-9734e227b0af
++name: Completions
++version: 0.1.0
++status: draft
++domain: planning
++description:
++  purpose: The awards conferred in the census year, by faculty and award type. Planning's completions,
++    for the census report.
++  usage: Sum awards_conferred by faculty or award type. An award counts once it's conferred, unless it's
++    been revoked.
++inputPorts:
++- name: core_credential_v2
++  version: 2.0.0
++  contractId: 61f58329-b063-5f08-bee1-c95f6718c0fe
++- name: core_award_v1
++  version: 1.0.0
++  contractId: fab34f97-92b9-5722-b517-8d61b24e5e23
++outputPorts:
++- name: mart_planning__completions
++  description: 'The awards conferred in the census year, by faculty and award type: Planning''s completions,
++    for its census report.'
++  type: table
++  version: 1.0.0
++  contractId: 72a3bc8b-bdb5-5946-9914-13b737c57c56
++team:
++  name: Clara Jensen, Planning
++  members:
++  - username: clara.jensen@uni.example
++    name: Clara Jensen, Planning
++    role: owner
++support:
++- channel: planning-data
++  tool: email
++  url: mailto:planning@uni.example
++  scope: issues
++customProperties:
++- property: consumers
++  value: []
+diff --git a/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml b/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
+index ed562170..75cd952c 100644
+--- a/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
++++ b/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
+@@ -50,6 +50,7 @@ support:
+ customProperties:
+ - property: consumers
+   value:
++  - product completions
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/models/marts/planning/_planning__models.yml b/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
+index 4c7cca9a..ebba7d88 100644
+--- a/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
++++ b/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
+@@ -127,3 +127,33 @@ models:
+         config:
+           meta: {glossary_term: near_award, personal_data: none}
+         constraints: [{type: not_null}]
++
++  - name: mart_planning__completions
++    description: >
++      The awards conferred in the census year, by faculty and award type: Planning's completions,
++      for its census report. An award counts once it's conferred, unless it's been revoked.
++    config:
++      meta:
++        grain: One row per faculty per award type
++    data_tests:
++      - unique_combination:
++          arguments:
++            columns: [faculty_code, award_type]
++    columns:
++      - name: faculty_code
++        description: '{{ doc("faculty_code") }}'
++        data_type: string
++        constraints: [{type: not_null}]
++        config: {meta: {personal_data: none}}
++      - name: faculty_name
++        description: '{{ doc("faculty_name") }}'
++        data_type: string
++        config: {meta: {personal_data: none}}
++      - name: award_type
++        description: '{{ doc("award_type") }}'
++        data_type: string
++        config: {meta: {personal_data: none}}
++      - name: awards_conferred
++        description: How many awards of this type the faculty conferred in the census year.
++        data_type: int
++        config: {meta: {personal_data: none}}
+diff --git a/films/analytics-engineering/project/models/marts/planning/mart_planning__completions.sql b/films/analytics-engineering/project/models/marts/planning/mart_planning__completions.sql
+new file mode 100644
+index 00000000..c0602e87
+--- /dev/null
++++ b/films/analytics-engineering/project/models/marts/planning/mart_planning__completions.sql
+@@ -0,0 +1,38 @@
++-- The awards conferred in the census year, by faculty and award type: Planning's completions, for
++-- its census report. It reads only the core's public models.
++with
++
++credentials as (
++
++    select * from {{ ref('core_credential', v=2) }}
++
++),
++
++awards as (
++
++    select * from {{ ref('core_award') }}
++    where is_current
++
++),
++
++conferred as (
++
++    select
++        awards.faculty_code,
++        awards.faculty_name,
++        awards.award_type
++    from credentials
++    inner join awards on credentials.credential_code = awards.award_code
++    where credentials.credential_kind = 'award'
++        and credentials.status != 'revoked'
++        and extract(year from credentials.issued_on) = extract(year from {{ census_date() }})
++
++)
++
++select
++    faculty_code,
++    faculty_name,
++    award_type,
++    cast(count(*) as int) as awards_conferred
++from conferred
++group by faculty_code, faculty_name, award_type
+-- 
+2.43.0
+

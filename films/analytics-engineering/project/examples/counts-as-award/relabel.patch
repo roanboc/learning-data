@@ -1,0 +1,39 @@
+From 7585545703f55a7d1ac7cd2d3eeaf438bbbf0a29 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:46 +0000
+Subject: [PATCH] Credentials: count microcredentials of 6 credit points or
+ more as awards
+
+---
+ .../intermediate/student/int_credentials_unioned.sql      | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql b/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
+index 12e0a918..b8d9aa58 100644
+--- a/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
++++ b/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
+@@ -57,7 +57,11 @@ platform_credentials as (
+         latest_badges.badge_bk as credential_bk,
+         latest_badges.user_bk as holder_bk,
+         'LMS' as key_set,
+-        case when latest_badges.credit_points > 0 then 'microcredential' else 'badge' end as credential_kind,
++        case
++            when latest_badges.credit_points >= 6 then 'award'
++            when latest_badges.credit_points > 0 then 'microcredential'
++            else 'badge'
++        end as credential_kind,
+         latest_badges.badge_code as credential_code,
+         latest_badges.badge_name as credential_name,
+         latest_badges.credit_points,
+@@ -107,7 +111,7 @@ course_credentials as (
+         latest_certificates.certificate_bk as credential_bk,
+         latest_certificates.customer_bk as holder_bk,
+         'SC' as key_set,
+-        'microcredential' as credential_kind,
++        case when latest_certificates.credit_points >= 6 then 'award' else 'microcredential' end as credential_kind,
+         latest_certificates.course_code as credential_code,
+         latest_certificates.course_name as credential_name,
+         latest_certificates.credit_points,
+-- 
+2.43.0
+

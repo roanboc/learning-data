@@ -1,0 +1,25 @@
+From a01e215431f99388fa40a0430972290ec61469e1 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:46 +0000
+Subject: [PATCH] Planning: completions' owner and domain
+
+---
+ .../project/models/marts/planning/_planning__models.yml         | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/films/analytics-engineering/project/models/marts/planning/_planning__models.yml b/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
+index ebba7d88..00cf7d6f 100644
+--- a/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
++++ b/films/analytics-engineering/project/models/marts/planning/_planning__models.yml
+@@ -135,6 +135,8 @@ models:
+     config:
+       meta:
+         grain: One row per faculty per award type
++        owner: Planning
++        domain: planning
+     data_tests:
+       - unique_combination:
+           arguments:
+-- 
+2.43.0
+

@@ -1,0 +1,36 @@
+$ python scripts/check/governance.py
+owner: models/marts/planning/_planning__models.yml: mart_planning__completions has no meta.owner or meta.domain (how to: docs/how-to/add-an-owner.md)
+1 problem(s): governance's rules aren't met
+[exit 1]
+$ python scripts/generate/products.py --check
+18 files are up to date and valid: 7 products (product standard v1.0.0), 11 contracts (contract standard v3.1.0)
+[exit 0]
+$ python scripts/generate/codeowners.py --check
+CODEOWNERS is up to date
+[exit 0]
+$ python scripts/check/impact.py --base before-completions
+# What this change touches
+
+10 file(s) changed in the project since `before-completions`; 1 model(s), seed(s) or source(s) changed, 1 test(s) changed, 0 downstream model(s), 1 test(s), 0 exposure(s).
+
+## Changed
+
+- `mart_planning__completions` (model): changed in `models/marts/planning/_planning__models.yml`
+
+## Contracts
+
+- `mart_planning__completions`: new
+
+## Tests changed
+
+- `unique_combination_mart_planning__completions_faculty_code__award_type`, owned by Planning
+
+## Tests
+
+1 test(s) on it and downstream. `dbt build --select mart_planning__completions+ --profiles-dir .` runs them.
+
+## Who to ask
+
+Nobody named: a change to code only, reviewed by the analytics engineer.
+
+[exit 0]

@@ -1,0 +1,239 @@
+1
+00:00:01,200 --> 00:00:03,121
+Hoy, en la sala del equipo de datos.
+
+2
+00:00:04,421 --> 00:00:10,972
+Jun Park construye en diez pasos, en un ciclo, de una pregunta a una nueva versión, como muestra el póster del equipo.
+
+3
+00:00:12,872 --> 00:00:21,208
+Ahora abre una solicitud de cambio, un cambio para revisar: una tabla nueva para Planificación, los títulos de este año, por facultad.
+
+4
+00:00:23,108 --> 00:00:28,344
+Cuando Yusuf le preguntó qué lo frenaba, Jun dijo: las reglas llegan cuando ya lo construí.
+
+5
+00:00:30,044 --> 00:00:35,668
+Una regla es que toda tabla que usan otros equipos tiene un dueño, alguien que responde por lo que significa.
+
+6
+00:00:37,368 --> 00:00:42,238
+Durante cuatro meses, las actas del consejo arrastraron la misma acción: nombrar a los dueños de datos.
+
+7
+00:00:44,138 --> 00:00:46,799
+Sin un dueño, nadie responde por una cifra.
+
+8
+00:00:48,099 --> 00:00:56,072
+El día del censo, la Facultad de Salud no pudo planificar sus cupos: mandaron a Anil de Jun a Noor, a Planificación, y de vuelta a Jun.
+
+9
+00:00:57,972 --> 00:00:59,360
+Algo tenía que cambiar.
+
+10
+00:01:00,860 --> 00:01:06,632
+Ahora las reglas viven en el proyecto, junto al código, y un control las ejecuta en cada solicitud de cambio.
+
+11
+00:01:08,132 --> 00:01:11,770
+En un minuto, le responde a Jun: no hay dueño, y cómo agregar uno.
+
+12
+00:01:13,670 --> 00:01:16,316
+Agrega dos líneas, y el control se pone en verde.
+
+13
+00:01:18,016 --> 00:01:20,879
+El cambio va solo a Planificación, para su revisión.
+
+14
+00:01:22,379 --> 00:01:26,814
+Una acción que el consejo arrastró cuatro meses es ahora un control que tarda un minuto.
+
+15
+00:01:28,314 --> 00:01:32,001
+Y para Jun, las reglas llegan primero, mientras todavía puede corregir lo que piden.
+
+16
+00:01:39,701 --> 00:01:42,965
+La gobernanza pone una chinche donde cada decisión entra en el ciclo:
+
+17
+00:01:43,565 --> 00:01:49,663
+un término en la pregunta, una clase de dato personal en las fuentes, un dueño y un contrato en los vacíos,
+
+18
+00:01:50,863 --> 00:01:55,061
+una regla en las pruebas, una aprobación en la revisión, una versión cuando cambia.
+
+19
+00:01:57,161 --> 00:02:00,899
+En dbt, cada chinche es una línea junto al código del modelo.
+
+20
+00:02:02,599 --> 00:02:06,022
+La tabla de estudiantes nombra a su dueña, Mei, y el término que guarda.
+
+21
+00:02:07,922 --> 00:02:12,513
+Cada columna dice si identifica a una persona, y cada prueba tiene un dueño.
+
+22
+00:02:14,613 --> 00:02:16,507
+Todo se revisa junto con el código.
+
+23
+00:02:20,207 --> 00:02:23,045
+Los grupos y el acceso deciden quién puede construir sobre qué.
+
+24
+00:02:24,345 --> 00:02:27,309
+Las primeras capas del equipo de datos son privadas de su grupo.
+
+25
+00:02:28,409 --> 00:02:33,849
+Sus tablas del núcleo son públicas, para cualquier equipo, y los marts, protegidos, solo para este proyecto.
+
+26
+00:02:35,349 --> 00:02:39,385
+Si construyes sobre una privada, dbt se detiene antes de ejecutar nada.
+
+27
+00:02:41,085 --> 00:02:44,585
+La tabla nueva de Jun solo lee tablas públicas, así que se construye.
+
+28
+00:02:45,885 --> 00:02:49,596
+Pero quién puede leerla lo decide la plataforma, en la próxima película.
+
+29
+00:02:52,696 --> 00:02:57,159
+Toda tabla que usan otros equipos tiene un contrato: estas columnas, estos tipos.
+
+30
+00:02:58,459 --> 00:03:02,311
+Cada construcción lo verifica, y una diferencia impide que la tabla se reemplace.
+
+31
+00:03:04,211 --> 00:03:09,776
+Un cambio que rompería a quien la lee se vuelve una versión nueva, junto a la anterior, con fecha de retiro:
+
+32
+00:03:09,976 --> 00:03:14,630
+la primera versión de credenciales se retira el 31 de marzo de 2027.
+
+33
+00:03:15,930 --> 00:03:20,281
+Y las exposiciones nombran quién usa cada tabla, y quién responde por cada uso.
+
+34
+00:03:23,581 --> 00:03:26,368
+Cada solicitud de cambio también dice a qué afecta.
+
+35
+00:03:27,268 --> 00:03:33,863
+El martes, la primera versión de Jun reetiquetaba como títulos las microcredenciales de 6 créditos o más.
+
+36
+00:03:35,163 --> 00:03:41,686
+El control de impacto lo escribió en la solicitud de cambio: cinco informes y apps dependen de ella, cuatro dueños a consultar.
+
+37
+00:03:43,386 --> 00:03:46,935
+Mei dijo que un cambio de significado rompe, aunque las columnas no se rompan.
+
+38
+00:03:48,235 --> 00:03:51,654
+Así que Jun agregó una columna en su lugar: cuenta como título.
+
+39
+00:03:52,754 --> 00:03:55,636
+El control lo llamó aditivo, con tres dueños a quienes avisar.
+
+40
+00:03:56,936 --> 00:04:00,944
+Una columna renombrada fallaría: un cambio que rompe necesita una versión nueva.
+
+41
+00:04:04,244 --> 00:04:06,770
+Quién revisa qué sale de los mismos dueños.
+
+42
+00:04:07,670 --> 00:04:15,138
+Un script escribe el archivo de revisores: la oficina de registro para credenciales, Planificación para sus tablas, Clara para su producto.
+
+43
+00:04:16,638 --> 00:04:21,938
+GitHub se lo pide en cada solicitud de cambio, y un control falla si el archivo se queda atrás.
+
+44
+00:04:23,238 --> 00:04:26,612
+Las decisiones también son archivos, con quién decidió, cuándo y por qué.
+
+45
+00:04:29,712 --> 00:04:34,539
+Cada mensaje dice qué agregar, y dónde, y enlaza una página sobre cómo hacerlo, con a quién preguntar.
+
+46
+00:04:36,039 --> 00:04:37,546
+Una regla nueva primero advierte.
+
+47
+00:04:38,846 --> 00:04:46,286
+Toda columna que leen otros equipos debe decir qué guarda: hasta el primero de diciembre es una advertencia con su fecha, y luego un error.
+
+48
+00:04:48,186 --> 00:04:51,252
+Semana a semana, las advertencias bajaron de cuarenta y una a ninguna.
+
+49
+00:04:53,352 --> 00:04:57,124
+Cuando Anil agregó una columna, el control le mostró cómo clasificarla.
+
+50
+00:05:01,024 --> 00:05:04,883
+Y un agente revisa cada solicitud de cambio, con las mismas reglas.
+
+51
+00:05:05,783 --> 00:05:11,168
+Sigue una skill que escribió el equipo: ejecutar los controles, leer lo que ellos no pueden, y redactar lo que falta.
+
+52
+00:05:12,668 --> 00:05:21,092
+En la primera solicitud de Anil, la lista de llamadas de su facultad, encontró: sin dueño, diez columnas sin clase, y una regla sin prueba.
+
+53
+00:05:22,592 --> 00:05:27,273
+Redactó cada uno, con conteos como evidencia, nunca valores, y dijo quién decide.
+
+54
+00:05:28,773 --> 00:05:31,551
+El agente nunca aprueba. Deciden las personas.
+
+55
+00:05:34,651 --> 00:05:39,958
+La tabla de Jun entra, con su dueño, sus clases, su contrato y el sí de Planificación.
+
+56
+00:05:41,258 --> 00:05:46,989
+En el mapa de Noor, el proyecto es la casa de dueños, clases, contratos, pruebas y decisiones,
+
+57
+00:05:47,189 --> 00:05:50,716
+y sus copias van en un solo sentido, a la plataforma y al catálogo.
+
+58
+00:05:52,216 --> 00:05:55,064
+Las reglas ya no llegan cuando él ya lo construyó.
+
+59
+00:05:56,164 --> 00:05:57,862
+Llegan con cada cambio.
+
+60
+00:05:58,962 --> 00:06:01,184
+El proyecto lleva la gobernanza junto con el código.

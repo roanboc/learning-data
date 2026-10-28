@@ -157,7 +157,7 @@ FADD9 = [41, 48, 55, 57, 60]; CE = [40, 48, 55, 60, 64]; CADD9 = [36, 43, 50, 52
 #    rolled as it decides, a lift for 1987, E and C for the two permissions; the court's line in two notes each time it's drawn; and
 #    the paper of 1983 at the counter, on the column, at the table: a bundle's string, a pencil, the tin box, the shredder. The mark
 #    under the title, in C, where the story arrives in a university's data
-lift, down, tie = G('counted', 'answer', 0.2), W('counted', 'stops', 'stops'), W('counted', 'stops', 'stops', 0.9)
+lift, down, knot = G('counted', 'answer', 0.2), W('counted', 'stops', 'stops'), W('counted', 'stops', 'stops', 0.9)
 dec, slip, who, count = W('counted', 'rules', 'decides'), W('counted', 'picture', 'answers'), W('counted', 'picture', 'nobody'), W('counted', 'forbid', 'counting')
 line, split, rem = G('counted', 'line', 0.05), W('counted', 'apart', 'kept'), W('counted', 'apart', 'removed')
 th, arrow, cross, y87 = G('counted', 'back', -0.2), W('counted', 'back', 'given'), W('counted', 'back', 'never'), G('counted', 'y1987', -0.1)
@@ -174,7 +174,7 @@ paper(G('counted', 'correct', -0.2), 0.018, 0.0, 0.4); pencil(W('counted', 'corr
 pencil(W('counted', 'need', 'without', -0.1), 1.0, 0.018, -0.35)
 for i in range(3):
     paper(G('counted', 'boycott', 0.15 + 0.6 * i), 0.022, -0.15 + 0.12 * i, 0.7)
-piano(45, down, 0.03, 0.0); paper(down, 0.022, -0.1, 0.4); twine(tie, 0.026, -0.1, 0.5); knock(down + 0.1, 0.016, 0.2, 300)
+piano(45, down, 0.03, 0.0); paper(down, 0.022, -0.1, 0.4); twine(knot, 0.026, -0.1, 0.5); knock(down + 0.1, 0.016, 0.2, 300)
 paper(dec - 0.2, 0.024, 0.0, 0.8); rolled([60, 64, 67], dec, 0.028)
 for k in range(4):
     paper(slip + 0.08 * k, 0.01, -0.1 - 0.15 * (k % 2), 0.2)

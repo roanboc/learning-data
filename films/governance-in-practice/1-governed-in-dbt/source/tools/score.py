@@ -88,15 +88,8 @@ def line(inst, segs, g=1.0, soft=1.0, att=0.25, rel=0.35, room=0.25, pan=None, t
         else:
             run.append(s)
 def _line(inst, segs, g, soft, att, rel, room, pan, tie):
-    T0, T1 = segs[0][0], segs[-1][1]; gl = 0.06
+    T0, T1 = segs[0][0], segs[-1][1]; xf = 0.04
     n = int((T1 - T0 + rel + 0.05) * SR); x = np.arange(n, dtype=np.float64) / SR
-    fs = [hz(m) for _, _, m, _ in segs]; A = [_harm(inst, f, soft) for f in fs]; K = max(len(a) for a in A)
-    A = [np.pad(a, (0, K - len(a))) for a in A]
-    kx, kf, ka, kv = [], [], [], []
-    for i, (a, b, m, v) in enumerate(segs):  # each note steady between short slurs, its harmonics' weights with it
-        for t in ((a - T0 + gl / 2 if i else 0.0), (b - T0 - gl / 2 if i < len(segs) - 1 else n / SR)):
-            kx.append(t); kf.append(np.log2(fs[i])); ka.append(A[i]); kv.append(v)
-    ph = 2 * np.pi * np.cumsum(2 ** np.interp(x, kx, kf)) / SR
     e = np.sin(0.5 * np.pi * np.minimum(x / att, 1)) ** 2
     e = e * np.where(x > T1 - T0, np.cos(0.5 * np.pi * np.minimum((x - (T1 - T0)) / rel, 1)) ** 2, 1.0)
     for i in range(1, len(segs)):  # the same note again is a new bow: it dips for a moment
@@ -104,13 +97,21 @@ def _line(inst, segs, g, soft, att, rel, room, pan, tie):
             e = e * (1 - 0.75 * np.exp(-((x - (segs[i][0] - T0)) / 0.05) ** 2))
     fq = R1.uniform(0.11, 0.37, 3); fp = R1.uniform(0, 2 * np.pi, 3)
     bow = 1 + 0.015 * sum(np.sin(2 * np.pi * a * x + b) for a, b in zip(fq, fp)) / 3  # the bow's weight, drifting slowly
-    lev = np.interp(x, kx, kv) * bow; ka = np.array(ka); s = np.zeros(n)
-    for j in range(K):  # the higher harmonics come in a little after the lower: a bow takes a moment to catch the string
-        aj = np.interp(x, kx, ka[:, j])
-        if aj.max() > 1e-4:
-            s += aj * e ** (1 + 0.12 * j) * np.sin((j + 1) * ph + 0.9 * j * j)
-    lo, hi = BODY[inst][2]
-    s = s * lev + 0.012 * filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)) * e * lev * (1 + 2.0 * np.exp(-x / 0.06))
+    s = np.zeros(n); lev = np.zeros(n)
+    for i, (a, b, m, v) in enumerate(segs):  # a slur is a finger on the next note: the note stops as the next begins, in 40 ms, with
+        # no slide (a slide's pitch, sweeping through the room's echo, smears across every note between)
+        p0 = 0 if i == 0 else max(0, int((a - T0 - xf / 2) * SR)); p1 = n if i == len(segs) - 1 else min(n, int((b - T0 + xf / 2) * SR))
+        xs, f = x[p0:p1], hz(m); w = np.full(p1 - p0, float(v))
+        if i:
+            w *= np.sin(0.5 * np.pi * np.clip((xs - (a - T0 - xf / 2)) / xf, 0, 1)) ** 2
+        if i < len(segs) - 1:
+            w *= np.cos(0.5 * np.pi * np.clip((xs - (b - T0 - xf / 2)) / xf, 0, 1)) ** 2
+        lev[p0:p1] += w; es = e[p0:p1]
+        for j, aj in enumerate(_harm(inst, f, soft)):  # the higher harmonics come in a little after the lower: a bow takes a moment to catch the string
+            if aj > 1e-4:
+                s[p0:p1] += aj * w * es ** (1 + 0.12 * j) * np.sin(2 * np.pi * f * (j + 1) * xs + 0.9 * j * j)
+    lev = lev * bow; lo, hi = BODY[inst][2]
+    s = s * bow + 0.012 * filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)) * e * lev * (1 + 2.0 * np.exp(-x / 0.06))
     s = filt(s.astype(np.float32), 'low', 2400)
     if room:
         s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)

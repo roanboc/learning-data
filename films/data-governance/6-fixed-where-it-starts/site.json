@@ -1,0 +1,27 @@
+{
+  "kicker": "Fixing data at the source",
+  "kicker_es": "Arreglar los datos en el origen",
+  "title_es": "Arreglado en el origen",
+  "h1": "Fixed where it starts: fix the form, not the copy",
+  "h1_es": "Arreglado en el origen: se arregla el formulario, no la copia",
+  "lead": "One cell on the university's quality scorecard is still amber, and the first answer is the old one: it's cleaned downstream. Yusuf follows one email back to where it's typed, a sign-up form on a phone. Tom's team fixes the form, the clean-up can go, and its rule stays as a check.",
+  "lead_es": "Una celda del tablero de calidad de la universidad sigue en ámbar, y la primera respuesta es la de siempre: se limpia aguas abajo. Yusuf sigue un correo hasta donde se escribe, un formulario de inscripción en un teléfono. El equipo de Tom arregla el formulario, la limpieza se puede quitar, y su regla se queda como un control.",
+  "description": "A film about data quality fixed at the source: Semmelweis and the two maternity clinics of Vienna in 1847; where a problem shows and where it starts; an issue closed by a clean-up downstream, and one closed for good, with an owner, a cause, a date and a check; one email followed back, card by card, to the form where it's typed; prevention where the data is entered, and the old records corrected; the rule kept as a check that should never fail; monitoring for what no rule names, told to the owner on record; a confirmed surprise that becomes a rule; and evidence, not blame.",
+  "description_es": "Una película sobre la calidad de datos arreglada en el origen: Semmelweis y las dos clínicas de maternidad de Viena en 1847; dónde se ve un problema y dónde empieza; una incidencia cerrada con una limpieza aguas abajo, y otra cerrada para siempre, con dueño, causa, fecha y un control; un correo seguido hacia atrás, tarjeta por tarjeta, hasta el formulario donde se escribe; la prevención donde se ingresan los datos, y los registros antiguos corregidos; la regla guardada como un control que nunca debería fallar; el monitoreo de lo que ninguna regla nombra, que avisa al dueño registrado; una sorpresa confirmada que se vuelve regla; y evidencia, no culpa.",
+  "card": "One cell stays amber because emails are cleaned downstream. Follow the problem back to where it starts, fix it there, and keep the fix as a check.",
+  "card_es": "Una celda sigue en ámbar porque los correos se limpian aguas abajo. Sigue el problema hasta su origen, arréglalo ahí, y guarda el arreglo como un control.",
+  "chapters_es": {
+    "clinics": "Dos clínicas",
+    "monday": "Sigue en ámbar",
+    "back": "Seguir el rastro",
+    "entry": "Arreglado donde se escribe",
+    "never": "Nunca debería fallar",
+    "unknown": "Lo que ninguna regla nombra",
+    "rule": "Una sorpresa se vuelve regla",
+    "blame": "Nadie a quien culpar"
+  },
+  "past": ["Vienna, the maternity clinics of 1847", "Where a problem shows is often not where it starts."],
+  "past_es": ["Viena, las clínicas de maternidad de 1847", "Donde un problema se ve no suele ser donde empieza."],
+  "next_h": "You've seen a problem followed back to where it starts, fixed there, and kept as a check. More films in the series are on the way.",
+  "next_h_es": "Viste un problema seguido hasta su origen, arreglado ahí y guardado como un control. Vienen más películas de la serie."
+}

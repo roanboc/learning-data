@@ -171,7 +171,7 @@ Four questions, one at the end of each of four chapters, as the site shows them 
 | Mei's links (the registry the university already has) | `seeds/reference/student/learner_identity_decisions.csv`: decisions such as D-001, each with who decided, when and why. None links Linh's two student numbers before *Who is it?* does, on 8 October 2026 |
 | The copy in the lakehouse | `models/core/student/core_learner.sql`: the learner, a consolidated copy for analysis, with keys from three systems |
 | A product that others read, with an enforced contract | `dbt_project.yml` lines 46 to 52: core models are `access: public`, with `contract: enforced: true` |
-| Version 1 | `models/core/student/_core_student__models.yml` lines 7 and 107 to 109: `latest_version: 1`, `versions: - v: 1` |
+| Version 1 | `models/core/student/_core_student__models.yml` lines 7 and 117 to 119: `latest_version: 1`, `versions: - v: 1` |
 | Owned by Mei's office | `models/core/student/_core_student__models.yml` line 11, and the groups' owners in `models/_groups.yml` |
 | Who may read it | `dbt_project.yml` line 64: `+grants`, Unity Catalog's `select`, for named groups |
 | The person, the search at the application, the synced table | The person domain is in the project as a draft for its owners (`models/core/person/_person__conceptual.yml`, with DEC-PER-01 to 03 proposed). The person model, the search the application calls and the synced table are new, this film's own addition, with *Who is it?*'s links and *Which value wins*'s rules |

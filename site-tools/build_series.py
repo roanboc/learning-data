@@ -422,16 +422,55 @@ def head(lg, path, title, desc, og, img, twin=True):
             f'{alt}<link rel="icon" href="{R}assets/favicon.svg" type="image/svg+xml">\n{FONTS}\n<link rel="stylesheet" href="{R}assets/site.css">\n'), R
 
 
-def header(lg, path, R, cur="true"):
-    """The site's header; Topics is marked as the current page on the Topics page (cur="page"), and as its section elsewhere."""
-    if lg == "en":
-        return (f'<header class="top"><div class="top-in"><a class="brand" href="{R}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site">'
-                f'<a href="{R}">Start here</a><a href="{R}topics/" aria-current="{cur}">Topics</a><a href="{R}journey/">Making of</a><span class="lang" role="group" aria-label="Language">'
-                f'<a href="./" aria-current="true" lang="en">EN</a><a href="{R}es/{path}" lang="es" hreflang="es">ES</a></span></nav></div></header>')
-    RE = R[3:]
-    return (f'<header class="top"><div class="top-in"><a class="brand" href="{RE}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio">'
-            f'<a href="{RE}">Empieza aquí</a><a href="{RE}topics/" aria-current="{cur}">Temas</a><a href="{RE}journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma">'
-            f'<a href="{R}{path}" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>')
+def header(lg, path, R, cur="true", item="topics", other=None, here=None):
+    """The site's header, on every page: the brand, Start here, Topics and Making of, the EN/ES toggle, and the links to
+    learn-all.org and to Rodrigo. path: the page's folder from its language's root ("" for the home page); R: the way from the
+    page to the site's root. item is marked as the current page (cur="page") or as its section (cur="true"); None marks none.
+    other: where the toggle leads, for a page without a twin in the other language (then without hreflang); here: the toggle's link to this page, if not "./"
+    (then it isn't marked as the current one)."""
+    base = R if lg == "en" else R[3:]
+    home = base or "./"
+    twin = "" if other else f' hreflang="{"es" if lg == "en" else "en"}"'
+    other = other or (f"{R}es/{path}" if lg == "en" else f"{R}{path}")
+    names = (("start", "Start here", ""), ("topics", "Topics", "topics/"), ("journey", "Making of", "journey/")) if lg == "en" else \
+            (("start", "Empieza aquí", ""), ("topics", "Temas", "topics/"), ("journey", "Cómo se hizo", "journey/"))
+    nav = "".join(f'<a href="{base + to or "./"}"' + (f' aria-current="{cur}"' if key == item else "") + f">{name}</a>" for key, name, to in names)
+    own = f'<a href="{here}" lang="{lg}">' if here else f'<a href="./" aria-current="true" lang="{lg}">'
+    en, es = (f'{own}EN</a>', f'<a href="{other}" lang="es"{twin}>ES</a>') if lg == "en" else \
+             (f'<a href="{other}" lang="en"{twin}>EN</a>', f'{own}ES</a>')
+    site, language = ("Site", "Language") if lg == "en" else ("Sitio", "Idioma")
+    return (f'<header class="top"><div class="top-in"><a class="brand" href="{home}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a>'
+            f'<nav aria-label="{site}">{nav}<span class="lang" role="group" aria-label="{language}">{en}{es}</span></nav>{external_nav(lg)}</div></header>')
+
+
+# The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
+HAND_PAGES = ["404.html", "index.html", "labs/index.html", "scenarios/index.html", "sketch/index.html", "sketch/labs/index.html",
+              "sketch/scenarios/index.html", "when-things-go-wrong/index.html", "when-things-go-wrong/silent-change/index.html",
+              "when-things-go-wrong/too-good-to-be-true/index.html", "when-things-go-wrong/too-good-to-be-true/labs/index.html",
+              "when-things-go-wrong/too-good-to-be-true/scenarios/index.html"]
+HAND_PAGES += ["es/" + p for p in HAND_PAGES if (WEB / "es" / p).exists()]
+
+
+def hand_header(rel):
+    """The header of a hand-written page (its path under site/). The home page and the intro's labs and scenarios belong to
+    Start here, the rest to Topics; A Sharper Sketch's labs and scenarios, in English only, toggle to es/sketch/; the 404 page,
+    served at any address, links from the root."""
+    if rel == "404.html":
+        return header("en", "", "/", item=None, here="/")
+    lg = "es" if rel.startswith("es/") else "en"
+    path = rel[3 if lg == "es" else 0:].removesuffix("index.html")
+    R = "../" * rel.count("/")
+    other = f"{R}es/sketch/" if path in ("sketch/labs/", "sketch/scenarios/") else None
+    return header(lg, path, R, cur="page" if path == "" else "true", item="start" if path in ("", "labs/", "scenarios/") else "topics", other=other)
+
+
+def external_nav(lg):
+    home, contact = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn") if lg == "es"
+                     else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn"))
+    return (f'<div class="nav-tools"><a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a>'
+            f'<a href="https://www.linkedin.com/in/roanboc" aria-label="{contact}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div>')
 
 
 def SN(lg, S):
@@ -877,8 +916,8 @@ def block(lg, what, R, rel, films_, S=FW):
 
 
 def blocks():
-    """The hand-written pages, with every series' blocks and the topics' tiles filled in: (path under site/, html). A page with
-    several blocks is listed once, with all of them filled."""
+    """The hand-written pages, with every series' blocks, the topics' tiles and their header filled in: (path under site/, html).
+    A page with several blocks is listed once, with all of them filled."""
     texts = {}
 
     def fill(rel_path, o, c, inner):
@@ -890,6 +929,9 @@ def blocks():
             fill(rel_path, o, c, block(lg, what, R, rel, films_, S))
     for rel_path, lg, R in TILES:
         fill(rel_path, *TILE_MARKS, tiles(lg, R))
+    for rel_path in HAND_PAGES:
+        src = texts.get(rel_path) or (WEB / rel_path).read_text()
+        texts[rel_path] = re.sub(r'<header class="top">.*?</header>', lambda m: hand_header(rel_path), src, count=1)
     return list(texts.items())
 
 

@@ -1,5 +1,6 @@
 """Turn the Markdown pages in site/ into site pages. Run: python site-tools/build_pages.py (needs: pip install markdown)."""
 import pathlib,re,markdown
+from build_series import header
 ROOT=pathlib.Path(__file__).resolve().parents[1];WEB=ROOT/'site';SITE='https://data.learn-all.org/'
 TPL={'en':(ROOT/'site-tools/page.html').read_text(),'es':(ROOT/'site-tools/page.es.html').read_text()}
 for md in sorted(p for d in ['journey','paths','es/journey','es/paths'] for p in WEB.glob(d+'/**/*.md')):
@@ -30,4 +31,4 @@ for md in sorted(p for d in ['journey','paths','es/journey','es/paths'] for p in
              '<div class="doc-toc" id="doc-toc">%s</div></nav>')%(L[0],L[0],''.join(parts))
     # the language toggle links each page to the same page in the other language: journey/ and es/journey/
     here=rel.parent.as_posix()+'/';en=here[3:] if lang=='es' else here
-    out.write_text(TPL[lang].replace('{{base}}',base).replace('{{site}}',SITE).replace('{{en}}',en).replace('{{es}}','es/'+en).replace('{{h1}}',h1).replace('{{lead}}',lead).replace('{{description}}',desc).replace('{{nav}}',nav).replace('{{body}}',body));print('built',out.relative_to(ROOT))
+    out.write_text(TPL[lang].replace('{{base}}',base).replace('{{site}}',SITE).replace('{{en}}',en).replace('{{es}}','es/'+en).replace('{{h1}}',h1).replace('{{lead}}',lead).replace('{{description}}',desc).replace('{{nav}}',nav).replace('{{header}}',header(lang,en,base,cur='page',item='journey')).replace('{{body}}',body));print('built',out.relative_to(ROOT))

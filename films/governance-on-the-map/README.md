@@ -1,0 +1,18 @@
+# Governance on the map
+
+*The second series on data governance.*
+
+The submission to the government is in, and the project that paid for Yusuf Demir's team ends in June. The deputy vice-chancellor asks what the university would lose without it. Yusuf and Noor Rahman, the data architect, answer on the university's architecture map, one layer a film: governance as a capability, with the services people can ask it for; one of those services followed end to end, with its roles and the information each step needs; and where each piece of governance lives, with every copy synced one way. It follows *Governance principles* ([`../data-governance/`](../data-governance/)), whose ten films found what's worth keeping and who decides, and it draws with the ideas of *The map before the data*. *Governance you can use* ([`../governance-in-practice/`](../governance-in-practice/)) then builds what it draws.
+
+**Status:** planned on 28 October 2026, from films 11 to 13 of the plan for data governance; its three scripts are being written. On the site, it sits under the topic *Data governance*, after *Governance principles*, and gets its page at `governance-on-the-map/` when its opening film is out. The plan is in the [proposal](proposal.md).
+
+## The films
+
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+<!-- /films -->
+
+## How the films are made
+
+Like *Governance principles*, in its watercolour and its university, with its people and places: each film bundles that series' shared code, [`../data-governance/shared/`](../data-governance/shared/), as it is, and keeps what's its own in its own folder. Its films show no code, settings files or tool screens, and name applications for what they do (the glossary, the catalogue, the data platform); product names wait for *Governance you can use*.

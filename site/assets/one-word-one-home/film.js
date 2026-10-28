@@ -3594,7 +3594,7 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
       withA(x,1-fin(tt,P.one-0.1,0.4),()=>gv_qmark(x,960,330,120,clamp((tt-P.diff-0.3)/0.9,0,1)));
       ow_oneWay(x,960,300,clamp((tt-P.every+0.2)/1.4,0,1)*1.32,1,null,{col:GV.goldInk,ey:OW_POP.dy+OW_POP.h/2+4});ow_needCard(x,960,300,fin(tt,P.one,0.5));}}]);
   ow_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.bridge,0.4)));
-  gv_title(ctx,S,t,P.title,"One word, one home","one glossary everyone trusts, and every tool synced from it","Film 3 of 19 · data governance");
+  gv_title(ctx,S,t,P.title,"One word, one home","one glossary everyone trusts, and every tool synced from it","Film 3 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- 2 · Five glossaries: Mei's desk, where Who decides left her ----
@@ -3770,7 +3770,7 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({tick:wAt(sc,"
       gv_halo(x,OW_BD.x-40,OW_BD.y-40,OW_BD.w+80,OW_BD.h+80,GV.gold,0.55*fin(tt,P.used+0.3,0.6));}},
     {at:P.gain,place:"floor",keys:[[P.gain,960,540,1.0]],d:2,push:0.02,draw:(x,tt)=>floor(x,tt,true)}]);
   ow_pill(ctx,t,[[0,"Liye · 2002"]],gv_io(t,P.used+0.2,P.gain-0.1,0.35));
-  const a=fin(t,P.end+0.6,0.9);if(a>0){gv_end(ctx,S,t,P.end,"One word, one home","Keep one, and sync every tool from it.","Film 3 of 19");setScreen(ctx,S);
+  const a=fin(t,P.end+0.6,0.9);if(a>0){gv_end(ctx,S,t,P.end,"One word, one home","Keep one, and sync every tool from it.","Film 3 of 10");setScreen(ctx,S);
     withA(ctx,a,()=>wc_T(ctx,"Many glossaries are no glossary.",960,352,{w:700,size:48,align:"center",col:WC_DARK}));}
   wc_paperOver(ctx,S);});
 

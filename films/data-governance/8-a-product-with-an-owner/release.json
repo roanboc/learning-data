@@ -1,0 +1,45 @@
+[
+  {
+    "name": "A product with an owner",
+    "key": "a-product-with-an-owner-en",
+    "dir": "films/data-governance/8-a-product-with-an-owner/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/a-product-with-an-owner/film.js",
+    "video": "dist/a-product-with-an-owner.mp4",
+    "file": "a-product-with-an-owner.mp4",
+    "captions": [
+      [
+        "films/data-governance/8-a-product-with-an-owner/captions/en.srt",
+        "a-product-with-an-owner.en.srt"
+      ],
+      [
+        "films/data-governance/8-a-product-with-an-owner/captions/es.srt",
+        "a-product-with-an-owner.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/8-a-product-with-an-owner/source",
+      ":(exclude)films/data-governance/8-a-product-with-an-owner/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 264,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 33.8,
+      "status": "Drawn to the rule"
+    }
+  }
+]

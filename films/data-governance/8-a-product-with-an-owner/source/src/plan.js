@@ -8,6 +8,18 @@ function po_nameCard(ctx,x,y,name,role,a){if(a<=0.01)return;const w=Math.round(M
   withA(ctx,a,()=>{ctx.save();ctx.translate(0,12*(1-a));wc_panel(ctx,x,y,w,112,{kind:"card",seed:3});wc_T(ctx,name,x+30,y+48,{w:800,size:32,col:WC_DARK});
     wc_T(ctx,role,x+30,y+90,{w:600,size:28,col:WC_MUTED});ctx.restore();});}
 
+// fn draws with each word fading as the frame comes to cut it, from 30 px inside the frame's edge to gone at it, so the frame never cuts
+// a word, as the playbook asks (Fixed where it starts' fw_fadeCut): the camera pulls back past the corridor's calendar and the board's
+// four steps, and a card or a page slides in past the frame's edge. spans: a table's columns, [x0, x1] where ctx is now; a word that
+// starts in one fades with the whole column, so a column goes together
+function po_fadeCut(ctx,fn,spans){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.height,r=30*cw/1920,M=ctx.getTransform(),S=(spans||[]).map(([a,b])=>[M.a*a+M.e,M.a*b+M.e]);
+  T=(c,s2,x,y,o)=>{o=o||{};const sz=o.size||24,w=tw(c,String(s2),sz,o.w,o.f),al=o.align||"left",x0=al==="center"?x-w/2:al==="right"?x-w:x,m=c.getTransform();
+    let l=1e9,rt=-1e9,tp=1e9,bt=-1e9;for(const [px,py] of [[x0,y-0.75*sz],[x0+w,y-0.75*sz],[x0,y+0.2*sz],[x0+w,y+0.2*sz]]){const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;
+      l=Math.min(l,X);rt=Math.max(rt,X);tp=Math.min(tp,Y);bt=Math.max(bt,Y);}
+    const sp=S.find(([a,b])=>l>=a-2&&l<=b);if(sp){l=Math.min(l,sp[0]);rt=Math.max(rt,sp[1]);}
+    const a=clamp(Math.min(l/r,(cw-rt)/r,tp/r,(ch-bt)/r),0,1);if(a>=0.99)return T0(c,s2,x,y,o);if(a>0.01)withA(c,a,()=>T0(c,s2,x,y,o));};
+  try{return fn();}finally{T=T0;}}
+
 /* ---------- Yusuf's shelf, and binder 22 ---------- */
 // the shelf's 34 binders, numbered as Off the shelf numbered them (binder n is the n-th along the rows, from the left). The films before
 // took theirs to the work (binders 2, 12, 6, 9, 15 and 19), so their places stay empty. Binder 22 is this film's: o.out slides it
@@ -439,18 +451,18 @@ function po_dateTag(ctx,x,y,s,a,o){o=o||{};if(a<=0.01)return;const sw=Math.sin(a
   withA(ctx,clamp(a*2.2,0,1),()=>{ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,len);ctx.stroke();
     const tw_=tw(ctx,s,o.size||28,600)+44,h=(o.size||28)+24;wc_panel(ctx,-tw_/2,len,tw_,h,{kind:"tag",wash:o.wash||GV.grey,washA:o.washA||0.22,seed:660+s.length});
     ctx.fillStyle=rgba(WC_PENCIL,0.9);ctx.beginPath();ctx.arc(0,len+9,3.2,0,TAU);ctx.fill();wc_T(ctx,s,0,len+h/2+(o.size||28)*0.36+2,{w:600,size:o.size||28,align:"center",col:o.col||WC_INK});});ctx.restore();}
-// a small slip, one line: an edition of a table the product holds (cx its middle, y its top)
+// a small slip, one line: an edition of a table the product holds (cx its middle, y its top); o.ta: its words' opacity
 function po_slip(ctx,cx,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const w=o.w||324,h=60,lf=clamp(o.lift||0,0,1),g=clamp(o.grey||0,0,1),x=cx-w/2,yy=y-8*lf;
   withA(ctx,a,()=>{if(lf>0.01){ctx.save();ctx.filter="blur(10px)";ctx.fillStyle=`rgba(60,44,30,${0.2*lf})`;ctx.fillRect(x+10,yy+14,w,h);ctx.restore();}
     wc_panel(ctx,x,yy,w,h,{kind:"card",seed:670+s.length});if(o.lit>0.01)withA(ctx,clamp(o.lit,0,1)*(1-g),()=>{ctx.save();ctx.strokeStyle=rgba(GV.gold,0.9);ctx.lineWidth=4;rr(ctx,x-5,yy-5,w+10,h+10,12);ctx.stroke();ctx.restore();});
-    wc_T(ctx,s,x+18,yy+44,{w:600,size:28,col:mix(WC_DARK,WC_MUTED,g)});if(g>0.01){ctx.save();ctx.fillStyle=rgba([232,232,236],0.5*g);rr(ctx,x+2,yy+2,w-4,h-4,8);ctx.fill();ctx.restore();}
+    withA(ctx,o.ta==null?1:o.ta,()=>wc_T(ctx,s,x+18,yy+44,{w:600,size:28,col:mix(WC_DARK,WC_MUTED,g)}));if(g>0.01){ctx.save();ctx.fillStyle=rgba([232,232,236],0.5*g);rr(ctx,x+2,yy+2,w-4,h-4,8);ctx.fill();ctx.restore();}
     if(o.pin!==false)gv_pin(ctx,cx-4*lf,yy+10-14*lf,o.pinCol||[60,110,170],0.7);});}
 // the registrar's learner records' card, opening (op, 0 to 1) to show what it holds: the two editions of its credentials, edition 1
-// drawn only while it's still inside (o.out: it has left)
+// drawn only while it's still inside (o.out: it has left); each edition's words come in once they have cleared the card, so none shows half hidden under it
 function po_holds(ctx,cx,y,op,o){o=o||{};const w=PO_LF.cw,top=po_lifeCard(ctx,cx,y,{name:"Learner records",owner:"owner: Mei Tanaka",gold:1,a:o.a}),u=easeCam(clamp(op,0,1));
-  if(u<=0.01)return;const fh=PO_FOLD,fy=y+top+6,f0=fy-fh*(1-u);withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.beginPath();ctx.rect(cx-w/2-12,fy-4,w+24,fh*u+12);ctx.clip();
+  if(u<=0.01)return;const fh=PO_FOLD,fy=y+top+6,f0=fy-fh*(1-u),em=dy=>clamp((f0+dy+28-fy)/16,0,1);withA(ctx,o.a==null?1:o.a,()=>{ctx.save();ctx.beginPath();ctx.rect(cx-w/2-12,fy-4,w+24,fh*u+12);ctx.clip();
     wc_panel(ctx,cx-w/2,f0,w,fh,{kind:"card",fill:[244,240,230],seed:681});ctx.save();ctx.strokeStyle=rgba(GV.gold,0.6);ctx.lineWidth=3;rr(ctx,cx-w/2-4,f0-4,w+8,fh+8,12);ctx.stroke();ctx.restore();
-    po_slip(ctx,cx,f0+14,"credentials · edition 2",{pin:false});if(!o.out)po_slip(ctx,cx,f0+82,"credentials · edition 1",{pin:false});
+    po_slip(ctx,cx,f0+14,"credentials · edition 2",{pin:false,ta:em(14)});if(!o.out)po_slip(ctx,cx,f0+82,"credentials · edition 1",{pin:false,ta:em(82)});
     else{ctx.save();ctx.setLineDash([8,8]);ctx.lineWidth=2;ctx.strokeStyle=rgba(WC_PENCIL,0.45);rr(ctx,cx-162,f0+82,324,60,8);ctx.stroke();ctx.restore();}ctx.restore();});}
 const PO_FOLD=156;
 // the board's calendar, a page a month, pinned in the retired column (film 4's, as in chapter 2, smaller)

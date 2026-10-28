@@ -172,8 +172,9 @@ scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
       po_tableCard(x,960,232,{hang:true,a:fin(tt,P.fl+0.2,0.5),q:fin(tt,P.nobody,0.5)});}},
     // today again, the corridor's wall: the same card, pinned, the red question under it; the calendar turns to the next census day
     {at:P.again,place:"corridor",keys:[[P.again,640,480,1.5],[P.again+0.4,1000,470,1.04]],d:2.6,draw:(x,tt)=>{po_tableCard(x,640,250,{q:1});
-      const f=clamp((tt-P.again-1.4)/2.6,0,1)*5,i=Math.min(4,Math.floor(f));po_calendar(x,PO_CW.cal[0],PO_CW.cal[1],PO_CAL[i],PO_CAL[i+1],f-i);
-      po_tagAt(x,tt,P.again+4.2,null,PO_CW.cal[0],PO_CW.cal[1]+250,"next census day",{size:30});}}]);
+      const f=clamp((tt-P.again-1.4)/2.6,0,1)*5,i=Math.min(4,Math.floor(f));
+      // the camera pulls back past the calendar, so its words fade as the frame comes to them
+      po_fadeCut(x,()=>{po_calendar(x,PO_CW.cal[0],PO_CW.cal[1],PO_CAL[i],PO_CAL[i+1],f-i);po_tagAt(x,tt,P.again+4.2,null,PO_CW.cal[0],PO_CW.cal[1]+250,"next census day",{size:30});});}}]);
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Today"],[P.cen,"Last March · census day"],[P.again,"Today"]],fin(t,0.4,0.5));
   po_tagAt(ctx,t,P.built,P.noor,R.jun,R.y,"Jun · built it",{size:30});po_tagAt(ctx,t,P.noorSaid,P.pl,R.noor,R.y,"Noor · designed it",{size:30});
   po_tagAt(ctx,t,P.plan,P.juns-0.4,R.plan,R.y,"Planning · asked for it",{size:30});
@@ -200,12 +201,13 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
       po_planTable(x,tt,{dy:-70*(1-easeCam(clamp((tt-P.sat)/0.7,0,1))),pose:{yusuf:{pose:"listen",carry:heldNotebook}}});}},
     // the table from above: Yusuf writes the question on a small card; then the card that answers it, still blank
     {at:P.qc,place:"planTop",keys:[[P.qc,1355,318,1.7],[P.card,960,540,1.0]],d:1.8,draw:(x,tt)=>{const p1=clamp((tt-P.q1)/0.9,0,1),p2=clamp((tt-P.q2)/0.6,0,1);po_qCard(x,[p1,p2]);
-      const u=easeCam(fin(tt,P.card+0.2,0.7));po_card(x,{a:u});
+      const u=easeCam(fin(tt,P.card+0.2,0.7));po_fadeCut(x,()=>po_card(x,{a:u}));
       if(tt<P.q2+1.0){const writing=tt<P.q2?[PO_QL[0],0,p1]:[PO_QL[1],1,p2],[px,py]=po_penAt(x,writing[0],PO_QC.x+44,PO_QC.y+86+writing[1]*70,40,writing[2]);po_pen(x,px,py,gv_io(tt,P.q1-0.4,P.q2+0.8,0.3));}}},
     // Planning's screen: the university's catalogue of data products, and an empty place where the card will go
     {at:P.cat,place:"planning",keys:[[P.cat,910,320,2.0],[P.cat+0.1,910,310,2.1]],d:3,draw:(x,tt)=>{po_planScreen(x,tt,easeCam(fin(tt,P.lit,0.6)),0);po_planTable(x,tt);}},
-    // the card again: each line written in as it's named; then the gold frame, the ring round its owner, and what it is
-    {at:P.back,place:"planTop",keys:[[P.back,857,482,1.12],[P.prod+0.1,960,540,1.0]],d:1.8,draw:(x,tt)=>{po_qCard(x,[1,1]);const ws=wr(tt);
+    // the card again: each line written in as it's named; then the gold frame, the ring round its owner, and what it is. Framed so the
+    // question card's first line keeps about 40 px from the frame's right edge
+    {at:P.back,place:"planTop",keys:[[P.back,890,482,1.12],[P.prod+0.1,960,540,1.0]],d:1.8,draw:(x,tt)=>{po_qCard(x,[1,1]);const ws=wr(tt);
       po_card(x,{w:ws,frame:clamp((tt-P.frame)/1.1,0,1),ring:clamp((tt-P.own)/0.8,0,1)});const k=pen(tt);
       if(k>=0){const [px,py]=po_cardPen(x,k,ws[k]);po_pen(x,px,py,gv_io(tt,P.wr[k][0]-0.4,P.wr[k][0]+P.wr[k][1]+0.3,0.25));}
       [[P.data,"data"],[P.prom,"a promise"],[P.own,"an owner who keeps it"]].forEach(([t0,s],i)=>po_tagAt(x,tt,t0,null,1268,388+i*82,s,{size:32,align:"left",wash:GV.gold,washA:0.3}));}},
@@ -217,9 +219,10 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
   setScreen(ctx,S);wc_paperOver(ctx,S);});
 
 // ---- 4 · Who answers for what: the product's owner and the meaning's owner, two jobs, as in the bazaar ----
-// the floor, close on Planning's office and the registrar's: the people, then the cards on the glass, then (o.gold) a gold tag over each
+// the floor, close on Planning's office and the registrar's: the people, then the cards on the glass, then (o.gold) a gold tag over each.
+// The frame cuts the data team's office, so Jun and Sam stay out of it: a person is wholly in the frame or out of it
 function po_whoFloor(x,tt,P,o){o=o||{};const G=PO_GC,nod=o.nod||0;
-  po_floor(x,tt,{pose:{clara:{pose:"listen",expr:o.smile?"smile":"calm",nod:0.06*nod},mei:{pose:"hold",carry:heldNotebook,expr:o.smile?"smile":"calm",nod:0.06*nod},yusuf:{pose:"write",carry:heldNotebook}}});
+  po_floor(x,tt,{out:["jun","sam"],pose:{clara:{pose:"listen",expr:o.smile?"smile":"calm",nod:0.06*nod},mei:{pose:"hold",carry:heldNotebook,expr:o.smile?"smile":"calm",nod:0.06*nod},yusuf:{pose:"write",carry:heldNotebook}}});
   po_glassCard(x,G.clara,G.y,"Clara","answers for the product",fin(tt,P.card,0.5));G.jobs.forEach((s_,i)=>po_tagAt(x,tt,P.jobs[i],null,G.clara,G.jy+i*G.jgap,s_,{size:20}));
   po_glassCard(x,G.mei,G.y,"Mei","decides what award means",fin(tt,P.mei,0.5));
   if(o.gold){po_tagAt(x,tt,P.meaning,null,G.mei,G.y-34,"the meaning",{size:22,wash:GV.gold,washA:0.4});po_tagAt(x,tt,P.product,null,G.clara,G.y-34,"the product",{size:22,wash:GV.gold,washA:0.4});}}
@@ -232,7 +235,7 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
     {at:0,place:"floor",keys:[[0,G[0],G[1],G[2]],[0.1,G[0],G[1]-6,G[2]+0.03]],d:6,draw:(x,tt)=>po_whoFloor(x,tt,P)},
     // the cap makers' street again: the guild says what the goods must be; the master answers for his stall
     {at:P.baz,place:"st1600",keys:[[P.baz,711,560,1.35],[P.baz+0.1,700,560,1.38]],d:5,draw:(x,tt)=>{po_appr(x,tt);po_master(x,tt,{expr:tt>P.ms+0.4?"smile":"calm"});po_officer(x,tt,P.gd+0.3);
-      po_tagAt(x,tt,P.gd,null,607,404,"the guild · what the goods must be",{size:30});po_tagAt(x,tt,P.ms,null,300,316,"the master · answers for his stall",{size:30});}},
+      po_tagAt(x,tt,P.gd,null,607,404,"the guild · what the goods must be",{size:30});po_tagAt(x,tt,P.ms,null,318,316,"the master · answers for his stall",{size:30});}},
     // the floor again: the two cards side by side, the meaning's owner and the product's; two people, two jobs
     {at:P.fl,place:"floor",keys:[[P.fl,G[0],G[1],G[2]],[P.fl+0.1,G[0],G[1]-6,G[2]+0.03]],d:5,draw:(x,tt)=>po_whoFloor(x,tt,P,{gold:true,smile:tt>P.diff,nod:Math.max(0,Math.sin(Math.PI*clamp((tt-P.diff)/1.2,0,1)))})}]);
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1600s"]],gv_io(t,P.baz+0.2,P.fl,0.4));
@@ -277,13 +280,14 @@ scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o
         po_tagAt(q,tt,P.dash+0.1,null,-195,470,"the near-award dashboard",{size:30});po_tagAt(q,tt,P.fac+0.1,null,356,196,"every faculty that plans from it",{size:30});
         po_tagAt(q,tt,P.num,null,-195,546,"a number on time",{size:30});po_tagAt(q,tt,P.ask,null,356,546,"someone to ask",{size:30});});}},
 
-    // the product's card again, and what comes with it: three cards go down by it as each is named, then a change request
-    {at:P.comes,place:"planTop",keys:[[P.comes,835,432,1.26],[P.comes+0.1,835,430,1.29]],d:6,draw:(x,tt)=>po_jobTable(x,tt,P)},
+    // the product's card again, and what comes with it: three cards go down by it as each is named, then a change request. The camera
+    // holds its zoom (no push), at the least that keeps the card's words at 28 px, so the card and the three beside it keep clear of the edges
+    {at:P.comes,place:"planTop",keys:[[P.comes,838,432,1.252],[P.comes+0.1,838,430,1.252]],d:6,push:0,draw:(x,tt)=>po_jobTable(x,tt,P)},
     // Planning's room: Clara unfolds her arms, and reaches for the pen
     {at:P.room,place:"planning",keys:[[P.room,1214,520,1.42],[P.room+0.1,1230,524,1.46]],d:3,draw:(x,tt)=>{const u1=easeCam(clamp((tt-P.room-0.25)/0.6,0,1)),u2=easeCam(clamp((tt-P.room-0.85)/0.6,0,1));
       po_jobRoom(x,tt,{book:true,yusuf:{expr:"smile"},clara:u2>0?{pose:"listen",pose2:"po_reachDown",mix:u2,E:EXPR.smile}:{pose:"po_fold",pose2:"listen",mix:u1,E:po_exprMix("concerned","smile",u1)}});}},
     // the table from above: she signs the owner's line on the card; the promise is hers to keep, the code is Jun's
-    {at:P.sign,place:"planTop",keys:[[P.sign,835,430,1.29],[P.sign+0.1,830,428,1.31]],d:5,draw:(x,tt)=>{po_jobTable(x,tt,P,{sign:clamp((tt-P.sign-0.3)/1.2,0,1),pen:gv_io(tt,P.sign-0.1,P.sign+1.9,0.3)});
+    {at:P.sign,place:"planTop",keys:[[P.sign,838,430,1.252],[P.sign+0.1,838,428,1.252]],d:5,push:0,draw:(x,tt)=>{po_jobTable(x,tt,P,{sign:clamp((tt-P.sign-0.3)/1.2,0,1),pen:gv_io(tt,P.sign-0.1,P.sign+1.9,0.3)});
       po_tagAt(x,tt,P.prom,null,700,100,"the promise",{size:32,wash:GV.gold,washA:0.5});po_tagAt(x,tt,P.not,null,1040,392,"not the code",{size:30,col:WC_MUTED,wash:[196,196,196],washA:0.35});}}]);
   wc_paperOver(ctx,S);});
 
@@ -330,7 +334,7 @@ scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
     {at:0,place:"regClose",keys:[[0,880,540,1.0],[0.1,850,520,1.05]],d:4,draw:(x,tt)=>po_meiDesk(x,tt,{pose:"po_lookR"})},
     // her desk from above: the mailing list she kept, greyed; the record of who uses what slides over it, close on its first row
     {at:P.top,place:"regTop",keys:[[P.top,960,520,1.12],[P.row1,840,400,1.35]],d:1.6,draw:(x,tt)=>{po_mailList(x,easeCam(clamp((tt-P.mail)/0.6,0,1)));
-      const u=easeCam(clamp((tt-P.rec)/0.7,0,1));if(u>0)po_whoUses(x,{dx:(1-u)*1300,dy:(1-u)*-60,row1:1,card2:0});}},
+      const u=easeCam(clamp((tt-P.rec)/0.7,0,1));if(u>0)po_fadeCut(x,()=>po_whoUses(x,{dx:(1-u)*1300,dy:(1-u)*-60,row1:1,card2:0}));}},
     // the learner records' row: the card, and the three products that use them, each coming in as it's named
     {at:P.lr,place:"regTop",keys:[[P.lr,1047,500,1.1],[P.lr+0.1,1040,500,1.12]],d:4,draw:(x,tt)=>{po_whoUses(x,{row1:1,card2:easeCam(clamp((tt-P.lr-0.3)/0.6,0,1)),users:i=>clamp((tt-P.us[i])/0.6,0,1)});}},
     // Mei looks up from it, and nods
@@ -351,7 +355,7 @@ scene("life",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
       cal:w("first","so at")-0.15,ret:w("first","retired")-0.3};});
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"boardData",keys:[[0,960,540,1.0],[0.1,960,520,1.03],[P.card-0.9,680,380,1.45],[P.no-0.5,940,480,1.3],[P.old-0.35,1060,500,1.2],[P.ret+0.5,1110,500,1.25]],d:1.8,push:0.004,draw:(x,tt)=>{
-      const L=PO_LF,[A,B]=L.rows;po_lifeStrip(x,i=>clamp((tt-P.st[i])/0.6,0,1));
+      const L=PO_LF,[A,B]=L.rows;po_fadeCut(x,()=>po_lifeStrip(x,i=>clamp((tt-P.st[i])/0.6,0,1)));
       // the calendar, pinned up at today as the old edition comes; it turns, a page a month, to the day edition 1 goes
       const cf=clamp((tt-P.cal)/2.1,0,1)*5,ci=Math.min(4,Math.floor(cf));po_lifeCal(x,PO_LCAL[ci],PO_LCAL[ci+1],cf-ci,fin(tt,P.old+0.3,0.5));
       // Planning's card: a draft until Clara ticks it, then active, and the people who rely on it
@@ -401,7 +405,7 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
       const lit=i=>i===2?fin(tt,P.find+0.75,0.4):0.55*gv_io(tt,P.among+i*0.12,P.among+i*0.12+0.7,0.25)*(i===2?0:1);
       po_catPage(x,{lit,open:clamp((tt-P.open)/0.6,0,1),rows:k=>fin(tt,P.rows[k],0.4)});
       const [gx,gy,gw,gh]=po_cgRect(2),mv=easeCam(clamp((tt-P.find)/0.7,0,1));
-      po_cursor(x,lerp(1420,gx+gw*0.62,mv),lerp(700,gy+gh*0.58,mv),fin(tt,P.scr+0.2,0.3)*(1-fin(tt,P.open+0.3,0.3)),clamp((tt-P.open+0.25)/0.5,0,1));}},
+      po_cursor(x,lerp(1420,gx+gw*0.72,mv),lerp(700,gy+gh*0.84,mv),fin(tt,P.scr+0.2,0.3)*(1-fin(tt,P.open+0.3,0.3)),clamp((tt-P.open+0.25)/0.5,0,1));}},
     // like a buyer in the bazaar: the woman at the master's stall, and what she knows there, as in the first chapter
     {at:P.bz,place:"st1600",keys:[[P.bz,760,560,1.16],[P.bz+0.1,740,560,1.22]],d:3,draw:(x,tt)=>{const w_=po_stroll(PO_STR,tt,-100,0.3,11.5,-2.0,6.3,1.3);
       po_master(x,tt,{pose:"po_offer",expr:"smile"});po_walker(x,"po_woman",w_,{t:tt,flip:true,expr:"smile"});po_knows(x,tt,P.kn,null);}},

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Fixed where it starts",
+    "key": "fixed-where-it-starts-en",
+    "dir": "films/data-governance/6-fixed-where-it-starts/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/fixed-where-it-starts/film.js",
+    "video": "dist/fixed-where-it-starts.mp4",
+    "file": "fixed-where-it-starts.mp4",
+    "captions": [
+      [
+        "films/data-governance/6-fixed-where-it-starts/captions/en.srt",
+        "fixed-where-it-starts.en.srt"
+      ],
+      [
+        "films/data-governance/6-fixed-where-it-starts/captions/es.srt",
+        "fixed-where-it-starts.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/6-fixed-where-it-starts/source",
+      ":(exclude)films/data-governance/6-fixed-where-it-starts/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 399,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 31.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

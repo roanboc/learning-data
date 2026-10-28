@@ -1072,16 +1072,20 @@ const TT_FB={seat:590,screen:[820,300,540,330]};
 const tt_turned=fn=>c=>{c.translate(W,0);c.scale(-1,1);fn(c);};
 
 /* ---------- Noor's map ---------- */
-// on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next part's
-// three films go up beside it, from just after it to the band's end. st: gov (0 to 1), next(j)
-const TT_NEXT=[["11","A capability,","not a project"],["12","Who does what,","end to end"],["13","Where each","piece lives"]];
+// on Noor's map, close (GV_MC): "Govern data" lights gold in the strategy band, over one of the cards already there, and the next
+// series' three films go up beside it, from just after it to the band's end, each with its number in that series, under a card with
+// the series' name in the band above. st: gov (0 to 1), next(j), head (0 to 1)
+const TT_NEXT=[["1","A capability,","not a project"],["2","Who does what,","end to end"],["3","Where each","piece lives"]],TT_NEXT_SERIES="Governance on the map";
 function tt_mapCards(x,st){const [mx,my,mw,mh]=GV_MC,[bx,by,bw,bh]=gv_mapBand(mx,my,mw,mh,1),cw=bw*0.1,ch=bh*0.58,gx=bx+bw*0.17+2*(cw+bw*0.035),gy=by+(bh-ch)/2;
   if(st.gov>0.01){const g=st.gov,k=1+0.06*Math.sin(Math.PI*clamp(g,0,1));x.save();x.translate(gx+cw/2,gy+ch/2);x.scale(k,k);x.save();x.globalCompositeOperation="screen";wc_glowAt(x,0,0,cw*1.1,[255,214,120],0.55*g);x.restore();
     withA(x,clamp(g*2,0,1),()=>{wc_panel(x,-cw/2-6,-ch/2-6,cw+12,ch+12,{kind:"card",wash:GV.gold,washA:0.6,seed:90});gv_pin(x,0,-ch/2,wc_dim(GV.gold,0.3),0.8);
       wc_T(x,"Govern",0,-2,{w:800,size:27,align:"center",col:GV.goldInk});wc_T(x,"data",0,28,{w:800,size:27,align:"center",col:GV.goldInk});});x.restore();}
   const fx=gx+cw+18,fw=bx+bw-6-fx,w=(fw-20)/3,h=bh+26;TT_NEXT.forEach((L,j)=>{const u=st.next?st.next(j):0;if(u<=0.01)return;const cx=fx+j*(w+10)+w/2,cy=by+bh/2,e=easeCam(clamp(u,0,1));
     x.save();x.translate(cx,cy-16*(1-e));x.rotate([0.014,-0.012,0.01][j]);withA(x,clamp(u*3,0,1),()=>{wc_panel(x,-w/2,-h/2,w,h,{kind:"card",seed:94+j});gv_pin(x,0,-h/2+10,GV.red,0.8);
-      wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});}
+      wc_T(x,L[0],-w/2+16,-h/2+40,{w:800,size:28,col:GV.goldInk});wc_T(x,L[1],-w/2+16,-h/2+80,{w:700,size:26,col:WC_DARK});wc_T(x,L[2],-w/2+16,-h/2+112,{w:700,size:26,col:WC_DARK});});x.restore();});
+  const hu=st.head||0;if(hu<=0.01)return;const [,ty,,th]=gv_mapBand(mx,my,mw,mh,0),s=TT_NEXT_SERIES,hw=Math.min(fw-40,tw(x,s,40,700)+84),hh=Math.min(th-30,82),e=easeCam(clamp(hu,0,1));
+  x.save();x.translate(fx+fw/2,ty+th/2-12*(1-e));x.rotate(-0.008);withA(x,clamp(hu*2.5,0,1),()=>{wc_panel(x,-hw/2,-hh/2,hw,hh,{kind:"card",seed:97});
+    gv_pin(x,0,-hh/2+12,GV.red,0.9);wc_hand(x,s,0,14,{size:40,w:700,align:"center",col:WC_INK,p:clamp(hu*1.6-0.3,0,1)});});x.restore();}
 
 // the tools on Noor's map: small cards scattered over the application and technology bands, askew, none pinned, none joined, under a
 // grey haze (st.show, st.haze, 0 to 1); as that changes (st.order), each settles into a row in its band and is pinned, the haze lifts,

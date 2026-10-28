@@ -468,8 +468,8 @@ def head(lg, path, title, desc, og, img, twin=True):
 
 
 def header(lg, path, R, cur="true", item="topics", other=None, here=None):
-    """The site's header, on every page: the brand, Start here, Topics and Making of, the EN/ES toggle, and the links to
-    learn-all.org and to Rodrigo. path: the page's folder from its language's root ("" for the home page); R: the way from the
+    """The site's header, on every page: the brand, Start here, Topics and Making of, then the EN/ES toggle, the dark mode switch
+    and the links to learn-all.org and to Rodrigo (in a "More" menu on phones). path: the page's folder from its language's root ("" for the home page); R: the way from the
     page to the site's root. item is marked as the current page (cur="page") or as its section (cur="true"); None marks none.
     other: where the toggle leads, for a page without a twin in the other language (then without hreflang); here: the toggle's link to this page, if not "./"
     (then it isn't marked as the current one)."""
@@ -483,9 +483,21 @@ def header(lg, path, R, cur="true", item="topics", other=None, here=None):
     own = f'<a href="{here}" lang="{lg}">' if here else f'<a href="./" aria-current="true" lang="{lg}">'
     en, es = (f'{own}EN</a>', f'<a href="{other}" lang="es"{twin}>ES</a>') if lg == "en" else \
              (f'<a href="{other}" lang="en"{twin}>EN</a>', f'{own}ES</a>')
-    site, language = ("Site", "Language") if lg == "en" else ("Sitio", "Idioma")
+    site, language, more = ("Site", "Language", "More options") if lg == "en" else ("Sitio", "Idioma", "Más opciones")
+    # On phones the language, the theme and the two icon links fold into one "More" menu (a popover), so the header keeps one row.
     return (f'<header class="top"><div class="top-in"><a class="brand" href="{home}"><img src="{R}assets/favicon.svg" alt=""><span>Learning Data</span></a>'
-            f'<nav aria-label="{site}">{nav}<span class="lang" role="group" aria-label="{language}">{en}{es}</span></nav>{external_nav(lg)}</div></header>')
+            f'<nav aria-label="{site}">{nav}</nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="{more}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button>'
+            f'<div class="more" id="top-more" popover><span class="lang" role="group" aria-label="{language}">{en}{es}</span>{external_nav(lg)}</div>'
+            f'<script>{THEME_JS}</script></div></header>')
+
+
+# The theme switch: the visitor's choice, kept in this browser, else the device's setting. Run inside the header, before the page is drawn.
+THEME_JS = ('(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),'
+            'm=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}'
+            'function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}'
+            'show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";'
+            'try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()')
 
 
 # The hand-written pages: their header is made by header() too, and written over theirs by blocks() below.
@@ -510,9 +522,11 @@ def hand_header(rel):
 
 
 def external_nav(lg):
-    home, contact = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn") if lg == "es"
-                     else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn"))
-    return (f'<div class="nav-tools"><a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
+    home, contact, theme = (("Ir a learn-all.org", "Contactar a Rodrigo en LinkedIn", "Modo oscuro") if lg == "es"
+                            else ("Go to learn-all.org", "Contact Rodrigo on LinkedIn", "Dark mode"))
+    return (f'<div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="{theme}">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>'
+            f'<a class="parent-site" href="https://learn-all.org" aria-label="{home}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a>'
             f'<a href="https://www.linkedin.com/in/roanboc" aria-label="{contact}">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div>')

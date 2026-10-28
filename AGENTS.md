@@ -20,6 +20,15 @@ Go through the stages in order. The concept is settled before anything is drawn.
 
 Follow PLAYBOOK §1, §2, §8 and §9: the two-audience promise, one thing followed from where it's born to a human outcome, a metaphor tested against the hardest mechanism, openings varied across cultures and eras, people on every side of the problem, blameless and believable numbers, wrong drafts corrected by the people who know, and a rigour sheet for every scene.
 
+**Every opening story has four beats, each said outright in the narration, in this order:**
+
+1. **Scenario:** who, where, when, and what was happening.
+2. **Problem:** what went wrong or what people feared, for whom, and why it mattered to them, as a harm a viewer can picture. Explain every word the story leans on (if a law lets town halls "check up on" residents: check what, and what could happen to them?), and say that something had to change.
+3. **Solution:** what was done, and by whom.
+4. **Benefits:** what got better, and for whom, with a number where the sources give one; then the same problem and benefit in the film's own data story.
+
+The film comes back to the story along the way, and at the end to close on its benefit for data. Test it before the script goes to the author: someone who has never heard of the event can answer, from the narration alone, "why was that a problem?" and "what did the fix give people?". Each script has an *Opening story* table, a row for each beat and one for where the film comes back to the story, quoting the line that says it; `site-tools/check_site.py` fails a film whose table misses a row or quotes words its narration doesn't say. Films made before 28 October 2026 add theirs when their opening changes.
+
 ### 3. Video craft, at the highest effort
 
 Run film and visual style work at the highest reasoning or effort setting your tool offers. Draft style frames, compare options, review full-size stills, and iterate until the result is the best you can make, not the first that passes. Apply PLAYBOOK §4 to §6 and its checklists, in particular:

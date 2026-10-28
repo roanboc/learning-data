@@ -16,20 +16,6 @@
   "thread_es": "Cada película agrega una capa de gobernanza al mapa de la universidad que dibuja Noor: lo que la gobernanza debe poder hacer, y los servicios que ofrece; quién hace qué para prestar uno de ellos; y dónde vive cada pieza, con sus copias al día. Al final, el mapa es el encargo para la serie que lo construye.",
   "past_h": "Every film opens somewhere else, at another time",
   "past_h_es": "Cada película empieza en otro lugar, en otra época",
-  "coming_h": "Still to come",
-  "coming_h_es": "Lo que viene",
-  "coming_p": "Three films. They follow Governance principles, and Governance you can use builds what they draw, with dbt and Databricks.",
-  "coming_p_es": "Tres películas. Siguen a Principios de gobernanza, y Gobernanza que puedes usar construye lo que dibujan, con dbt y Databricks.",
-  "coming": [
-    [1, "A capability, not a project", "governance as a capability: services people can ask for, each with a promise"],
-    [2, "Who does what, end to end", "one service followed end to end, and the glossary run as a product"],
-    [3, "Where each piece lives", "one home for every governance artifact, and copies synced one way"]
-  ],
-  "coming_es": [
-    [1, "Una capacidad, no un proyecto", "la gobernanza como capacidad: servicios que la gente puede pedir, cada uno con una promesa"],
-    [2, "Quién hace qué, de principio a fin", "un servicio seguido de principio a fin, y el glosario gestionado como un producto"],
-    [3, "Dónde vive cada pieza", "un solo lugar para cada artefacto de gobernanza, y copias sincronizadas en un sentido"]
-  ],
   "people_h": "Who's at the table",
   "people_h_es": "Quiénes están en la mesa",
   "people": [
@@ -37,13 +23,13 @@
     ["tech", "Draws the map", "Noor Rahman, the data architect, who puts governance on the university's architecture map"],
     ["biz", "Funds it", "The deputy vice-chancellor, who asks what the university would lose without governance"],
     ["biz", "Asks for a meaning", "Clara, in Planning, who asks for completion to be defined, because three faculties count it three ways"],
-    ["tech", "Plans the platform", "Sam, who plans the platform's next year, and asks where each piece of governance lives"]
+    ["tech", "Runs the platform", "Sam Okafor, who runs the data platform, wants its pages to name the right owner, and asks where each piece of governance lives"]
   ],
   "people_es": [
     ["biz", "Lidera la gobernanza", "Yusuf Demir, que debe mostrar lo que hace la gobernanza, ahora que termina el proyecto que la pagaba"],
     ["tech", "Dibuja el mapa", "Noor Rahman, la arquitecta de datos, que pone la gobernanza en el mapa de arquitectura de la universidad"],
     ["biz", "La financia", "La vicerrectoría, que pregunta qué perdería la universidad sin la gobernanza"],
     ["biz", "Pide un significado", "Clara, de Planificación, que pide definir la finalización, porque tres facultades la cuentan de tres maneras"],
-    ["tech", "Planifica la plataforma", "Sam, que planifica el próximo año de la plataforma, y pregunta dónde vive cada pieza de la gobernanza"]
+    ["tech", "Lleva la plataforma", "Sam Okafor, que lleva la plataforma de datos, quiere que sus páginas nombren al dueño correcto, y pregunta dónde vive cada pieza de la gobernanza"]
   ]
 }

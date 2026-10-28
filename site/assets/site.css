@@ -2,8 +2,11 @@
 :root{--bg:#f3f5f9;--fg:#121826;--muted:#566174;--card:#fff;--card2:#f8f9fc;--line:rgba(15,25,45,.1);--accent:#2a64c4;--glow:rgba(42,100,196,.18);--good:#157347;--bad:#d33a2c;--warn:#b7791f;--on-accent:#fff;
   --stage:#070b17;--stage2:#03050b;--sfg:#ecf3ff;--smuted:#a0b2cd;--sline:rgba(170,200,245,.22);--mono:"IBM Plex Mono",Menlo,Consolas,monospace;
   --top-h:56px;--course-h:58px;--radius:16px;--shadow:0 1px 2px rgba(15,25,45,.06),0 8px 24px rgba(15,25,45,.06);--shadow-hi:0 2px 4px rgba(15,25,45,.08),0 18px 40px rgba(15,25,45,.14);color-scheme:light dark}
-@media (prefers-color-scheme:dark){:root{--bg:#060910;--fg:#eef3fb;--muted:#9aa6b8;--card:#0e1422;--card2:#0b101b;--line:rgba(255,255,255,.1);--accent:#6aa8ff;--glow:rgba(77,163,255,.3);--good:#5fe0a0;--bad:#ff7a6e;--warn:#ffc860;--on-accent:#06101f;
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#060910;--fg:#eef3fb;--muted:#9aa6b8;--card:#0e1422;--card2:#0b101b;--line:rgba(255,255,255,.1);--accent:#6aa8ff;--glow:rgba(77,163,255,.3);--good:#5fe0a0;--bad:#ff7a6e;--warn:#ffc860;--on-accent:#06101f;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--shadow-hi:0 2px 4px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.45)}}
+/* a theme the visitor chose in the header (data-theme, set by its script) wins over the device's */
+:root[data-theme=dark]{--bg:#060910;--fg:#eef3fb;--muted:#9aa6b8;--card:#0e1422;--card2:#0b101b;--line:rgba(255,255,255,.1);--accent:#6aa8ff;--glow:rgba(77,163,255,.3);--good:#5fe0a0;--bad:#ff7a6e;--warn:#ffc860;--on-accent:#06101f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);--shadow-hi:0 2px 4px rgba(0,0,0,.4),0 18px 44px rgba(0,0,0,.45);color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}[hidden]{display:none!important}html{scroll-behavior:smooth;scroll-padding-top:calc(var(--top-h) + 12px)}html:has(.course){scroll-padding-top:calc(var(--top-h) + var(--course-h) + 12px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}
@@ -21,21 +24,37 @@ button{font:inherit;color:inherit}
 .top nav>a:hover{color:#fff;background:rgba(255,255,255,.08)}
 .top nav{margin-left:auto}
 .nav-tools{display:flex;align-items:center;gap:4px}
-.nav-tools a{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;border:1px solid rgba(170,200,245,.45);border-radius:999px;color:#ecf3ff;text-decoration:none;font-size:13px;font-weight:700}
+.nav-tools :is(a,button){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;border:1px solid rgba(170,200,245,.45);border-radius:999px;background:none;color:#ecf3ff;text-decoration:none;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
 .nav-tools .parent-site{padding:0 12px}
-.nav-tools a:hover,.nav-tools a:focus-visible{background:rgba(106,168,255,.18);color:#fff}
-.nav-tools a{position:relative}
-.nav-tools a::after{content:attr(aria-label);position:absolute;top:calc(100% + 6px);right:0;width:max-content;max-width:280px;padding:6px 10px;border:1px solid #566174;border-radius:8px;background:#0e1422;color:#ecf3ff;font-size:12px;pointer-events:none;opacity:0}
-.nav-tools a:hover::after,.nav-tools a:focus-visible::after{opacity:1}
+.nav-tools :is(a,button):hover,.nav-tools :is(a,button):focus-visible{background:rgba(106,168,255,.18);color:#fff}
+.nav-tools .theme[aria-pressed="true"]{background:rgba(106,168,255,.18);border-color:#6aa8ff}
+.nav-tools :is(a,button){position:relative}
+.nav-tools :is(a,button)::after{content:attr(aria-label);position:absolute;top:calc(100% + 6px);right:0;width:max-content;max-width:280px;padding:6px 10px;border:1px solid #566174;border-radius:8px;background:#0e1422;color:#ecf3ff;font-size:12px;font-weight:700;pointer-events:none;opacity:0}
+.nav-tools :is(a,button):hover::after,.nav-tools :is(a,button):focus-visible::after{opacity:1}
 .top :focus-visible{outline-color:#6aa8ff}
-.nav-tools svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-tools svg,.more-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 /* the current page, or the section it belongs to; ">" keeps the language toggle out */
 .top nav>a[aria-current]{color:#fff;background:rgba(106,168,255,.18);box-shadow:inset 0 0 0 1px rgba(106,168,255,.45)}
 .lang{display:inline-flex;margin-left:8px;border:1px solid rgba(170,200,245,.3);border-radius:999px;overflow:hidden}.lang a{padding:4px 10px;font-size:12px;font-weight:800;color:#b8c5da;text-decoration:none}.lang a:hover{color:#fff}.lang a[aria-current]{background:#6aa8ff;color:#06101f}
+/* "More": on wide screens its contents sit in the row (the popover's own box undone); on phones they fold into the menu below */
+.more-btn{display:none}
+.more{display:flex;align-items:center;gap:4px;position:static;inset:auto;width:auto;height:auto;margin:0;padding:0;border:0;background:none;color:inherit;overflow:visible}
 @media (max-width:640px){.top-in{padding:0 12px;gap:6px}.top nav{gap:0}.top nav>a{font-size:14px;padding:6px 8px}.lang{margin-left:4px}.lang a{padding:3px 7px}footer{padding:22px 16px 40px}}
 @media (max-width:900px){.nav-tools .parent-site{padding:0;width:44px}.parent-site span{display:none}}
-@media (max-width:720px){:root{--top-h:100px}.top-in{display:grid;grid-template-columns:1fr auto;grid-template-rows:48px 48px;gap:0 8px}.top nav{grid-column:1 / -1;grid-row:2;margin:0;justify-content:center}.top nav>a,.lang a{min-height:44px;display:inline-flex;align-items:center}.nav-tools{grid-column:2;grid-row:1}}
+@supports selector(:popover-open){@media (max-width:720px){
+  .top-in{gap:2px}.top nav{gap:0}.top nav>a{min-height:44px;display:inline-flex;align-items:center}
+  .more-btn{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;padding:0;border:1px solid rgba(170,200,245,.45);border-radius:999px;background:none;color:#ecf3ff;cursor:pointer}
+  .more-btn:hover,.more-btn:focus-visible{background:rgba(106,168,255,.18)}
+  .more:not(:popover-open){display:none}
+  .more:popover-open{position:fixed;inset:calc(var(--top-h) + 6px) 8px auto auto;display:grid;gap:6px;width:min(280px,calc(100vw - 16px));padding:10px;border:1px solid rgba(170,200,245,.3);border-radius:14px;background:#0e1422;color:#ecf3ff;box-shadow:0 18px 44px rgba(0,0,0,.45)}
+  .more .lang{margin:0;justify-self:start}.more .lang a{min-height:44px;min-width:56px;display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+  .more .nav-tools{display:grid;gap:6px}
+  .more .nav-tools :is(a,button),.more .nav-tools .parent-site{width:100%;justify-content:flex-start;gap:12px;padding:0 14px;border-color:transparent;border-radius:10px;font-size:15px}
+  .more .nav-tools :is(a,button)::after{position:static;opacity:1;padding:0;border:0;background:none;font-size:15px;color:inherit;max-width:none}
+}}
 @media (max-width:440px){.top nav>a{font-size:13.5px;padding:6px 7px}}
+/* the smallest phones keep the logo; its words stay as the link's name for screen readers */
+@supports selector(:popover-open){@media (max-width:460px){.brand span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.brand img{width:28px;height:28px}.top-in{gap:4px}}}
 @media (max-width:360px){.top-in{padding:0 8px;gap:4px}.brand img{width:22px;height:22px}.top nav>a{font-size:12.5px;padding:5px 5px}.lang a{padding:3px 5px;font-size:11px}}
 
 main{max-width:1160px;margin:0 auto;padding:0 20px 40px}
@@ -194,7 +213,7 @@ details.howto .notes{padding:0 16px 14px;color:var(--muted);font-size:15px}detai
 @media (max-width:920px){.stop{grid-template-columns:1fr;gap:18px}}
 .stop-text .kicker{margin:0;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .stop-text .kicker b{color:color-mix(in srgb,var(--c) 50%,#000)}
-@media (prefers-color-scheme:dark){.stop-text .kicker b{color:var(--c)}}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .stop-text .kicker b{color:var(--c)}}[data-theme=dark] .stop-text .kicker b{color:var(--c)}
 .stop-text h3{font-size:clamp(24px,2.6vw,30px);margin:4px 0 8px}
 .stop-text .idea{font-size:18px;margin:0 0 14px}
 .stop-text ul{padding-left:0;list-style:none;margin:0 0 14px}
@@ -380,7 +399,7 @@ details.real summary{cursor:pointer;font-weight:700}details.real p{margin:8px 0 
 .four{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}@media (max-width:560px){.four{grid-template-columns:1fr}}
 /* the four sides, outlined as in the films: cyan for technical, gold for business */
 .four .card{border-width:2px}.four .tech{border-color:#2a9fd8}.four .biz{border-color:#d9a21b}
-@media (prefers-color-scheme:dark){.four .tech{border-color:#78c8ff}.four .biz{border-color:#ffd166}}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .four .tech{border-color:#78c8ff}:root:not([data-theme=light]) .four .biz{border-color:#ffd166}}[data-theme=dark] .four .tech{border-color:#78c8ff}[data-theme=dark] .four .biz{border-color:#ffd166}
 /* "Think it through": the Pause and think questions as a list, answers folded */
 .tq{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:10px 14px;margin-top:10px;max-width:860px}
 .tq summary{cursor:pointer;font-weight:700;list-style:none;position:relative;padding-right:30px}.tq summary::-webkit-details-marker{display:none}

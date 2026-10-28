@@ -11,7 +11,7 @@ What it checks, page by page (every .html under site/):
   https://data.learn-all.org/... map to site/), every #id exists on its target page (except #t=,
   and the lab and old home hashes that scripts read), GitHub blob/tree links name a file in this repo, and
   download links name a file the release workflow publishes. Links inside the "Pause and think" packs count too.
-- header: Start here, Topics, Making of, then EN and ES, with the right targets and the right current page.
+- header: Start here, Topics, Making of, then EN and ES (in the "More" menu), with the right targets and the right current page.
 - no leftover labels in the nav (Watch, Take it apart, Sharpen it, All films, Mira, Desarma).
 - hreflang: exactly the pairs of real twins, each pointing back.
 - the footer's one link (the source on GitHub), breadcrumbs, and the course bar (the sticky Watch · Labs · Scenarios steps).
@@ -594,10 +594,12 @@ def main():
             continue
         kids = nav.elements()
         links = [k for k in kids if k.tag == "a"]
-        lang_box = [k for k in kids if k.tag == "span" and "lang" in k.cls]
+        # the language toggle sits in the header's "More" menu (folded on phones), after the nav
+        more = head.all(cls="more")
+        lang_box = [k for k in more[0].elements() if k.tag == "span" and "lang" in k.cls] if len(more) == 1 else []
         labels = [a.text() for a in links]
         want = NAV[lang]
-        if labels != want or [k.tag for k in kids] != ["a"] * 3 + ["span"] or not lang_box:
+        if labels != want or [k.tag for k in kids] != ["a"] * 3 or not lang_box:
             s["fails"].append(f"{pg.file}: nav reads {labels + ['EN/ES' if lang_box else '(no .lang)']}, expected {want + ['EN/ES']}")
             continue
         home = "es/" if pg.es else ""

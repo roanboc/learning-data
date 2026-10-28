@@ -3245,12 +3245,19 @@ function os_heldTitled(lines,col){return(cx,P_,hands)=>{const [l,r]=hands,mx=(l[
   cx.fillStyle="rgba(255,252,242,0.97)";rr(cx,-w/2+16,-h/2+26,w-32,112,10);cx.fill();
   cx.fillStyle=rgba(mix(col,[0,0,0],0.5),1);cx.textAlign="center";cx.font=font(800,32);lines.forEach((s,i)=>cx.fillText(s,0,-h/2+74+i*38-(lines.length-1)*6));cx.restore();
   fingers(cx,P_,[[mx-w/2+4,my+30],[mx+w/2-2,my+24]]);};}
-// the films on the tools, on the data team's board: a card each, with its number, the tools' logos and its title
+// the films on the tools, on the data team's board: a card each, with its number in its series, the tools' logos and its title
 const OS_TOOLS=[["Governed in dbt",["dbt"]],["Governed in Unity Catalog",["databricks"]],["Meaning on the platform",["databricks"]],
   ["Quality on the platform",["dbt","databricks"]],["Products in open formats",["databricks"]],["The marketplace",["databricks"]]];
 const OS_TC={w:410,h:236,x:[505,960,1415],y:[440,712],rot:[-0.018,0.012,-0.008,0.016,-0.012,0.008]};
-function os_toolsHead(ctx,u){if(u<=0)return;ctx.save();ctx.translate(960,192);ctx.rotate(0.01);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-250,-60,500,120,{kind:"card",seed:63});
-  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,"With the tools",0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
+// the names of the two series that follow this one, each on a card over its films: the map's, and the tools'
+const OS_SERIES={map:"Governance on the map",tools:"Governance you can use"};
+function os_toolsHead(ctx,u){if(u<=0)return;const s=OS_SERIES.tools,hw=Math.max(250,tw(ctx,s,52,700)/2+60);ctx.save();ctx.translate(960,192);ctx.rotate(0.01);
+  withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-hw,-60,hw*2,120,{kind:"card",seed:63});
+  gv_pin(ctx,0,-46,GV.red,1.2);wc_hand(ctx,s,0,20,{size:52,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
+// the map's: a card in the free part of its top layer, over the three films' cards
+function os_mapHead(ctx,u){if(u<=0)return;const s=OS_SERIES.map,[x,y,w,h]=GV_MC,[fx,fy,fw,fh]=gv_mapFree(x,y,w,h,0),cw=Math.min(fw-44,tw(ctx,s,44,700)+96),ch=Math.min(fh-18,98);
+  ctx.save();ctx.translate(fx+fw/2,fy+fh/2);ctx.rotate(-0.008);withA(ctx,clamp(u*2.5,0,1),()=>{wc_panel(ctx,-cw/2,-ch/2,cw,ch,{kind:"card",seed:64});
+    gv_pin(ctx,0,-ch/2+14,GV.red,1);wc_hand(ctx,s,0,16,{size:44,w:700,align:"center",col:WC_INK,p:clamp(u*1.6-0.3,0,1)});});ctx.restore();}
 // a title in up to two lines no wider than mw, the break at the last space that fits
 function os_wrap(ctx,s,size,mw){if(tw(ctx,s,size,800)<=mw)return[s];const ws=s.split(" ");for(let i=ws.length-1;i>0;i--){const a=ws.slice(0,i).join(" ");
   if(tw(ctx,a,size,800)<=mw)return[a,ws.slice(i).join(" ")];}return[s];}
@@ -3258,18 +3265,18 @@ function os_toolCard(ctx,k,u){if(u<=0)return;const T=OS_TC,[s,tools]=OS_TOOLS[k]
   ctx.save();ctx.translate(T.x[k%3],T.y[Math.floor(k/3)]-14*(1-e));ctx.rotate(T.rot[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
     wc_panel(ctx,-w/2,-h/2,w,h,{kind:"card",seed:110+k});gv_pin(ctx,0,-h/2+18,GV.red,1.1);
     wc_wash(ctx,wc_ell(-w/2+56,-h/2+72,28,28,24),wc_lit(GV.cyanInk,0.25),{kind:"thing",lw:1.2,seed:120+k});
-    wc_T(ctx,String(k+14),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
+    wc_T(ctx,String(k+1),-w/2+56,-h/2+83,{w:800,size:28,align:"center",col:[255,255,255]});
     let lx=-w/2+104;tools.forEach(id=>{lx+=logo(ctx,id,lx,-h/2+48,48)+18;});
     os_wrap(ctx,s,36,w-64).forEach((l,i,a)=>wc_T(ctx,l,-w/2+32,-h/2+(a.length>1?160:178)+i*46,{w:800,size:36,col:WC_DARK}));});ctx.restore();}
 // the films that draw governance as one model, on Noor's architecture map, close: a card each, pinned in the free part of the layer it
-// adds to (strategy, business, application), with its number in gold and its title
+// adds to (strategy, business, application), with its number in its series, in gold, and its title
 const OS_MAPF=[[1,"A capability, not a project"],[2,"Who does what, end to end"],[4,"Where each piece lives"]],OS_MROT=[0.008,-0.01,0.012];
 function os_mapCard(ctx,k,u){if(u<=0)return;const [i,s]=OS_MAPF[k],[x,y,w,h]=GV_MC,[fx,fy,fw,fh]=gv_mapFree(x,y,w,h,i),e=easeCam(clamp(u,0,1)),sc=lerp(1.12,1,e),
     cw=fw-44,ch=Math.min(fh-18,98);
   ctx.save();ctx.translate(fx+fw/2,fy+fh/2-10*(1-e));ctx.rotate(OS_MROT[k]);ctx.scale(sc,sc);withA(ctx,clamp(u*2.5,0,1),()=>{
     wc_panel(ctx,-cw/2,-ch/2,cw,ch,{kind:"card",seed:170+k});gv_pin(ctx,0,-ch/2+14,GV.red,1);
     wc_wash(ctx,wc_ell(-cw/2+48,4,27,27,24),wc_lit(GV.goldInk,0.1),{kind:"thing",lw:1.2,seed:180+k});
-    wc_T(ctx,String(k+11),-cw/2+48,15,{w:800,size:28,align:"center",col:[255,255,255]});wc_T(ctx,s,-cw/2+94,16,{w:800,size:34,col:WC_DARK});});ctx.restore();}
+    wc_T(ctx,String(k+1),-cw/2+48,15,{w:800,size:28,align:"center",col:[255,255,255]});wc_T(ctx,s,-cw/2+94,16,{w:800,size:34,col:WC_DARK});});ctx.restore();}
 
 const WC_PLACES={theatre:os_paintTheatre,guides:os_paintGuides,worldmap:os_paintMap,clip:os_paintClip,campus:gv_paintCampus,office:gv_paintOffice,
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),desk:gv_paintDesk,floor:gv_paintFloor,planning:gv_paintPlanning,registrar:gv_paintRegistrar,data:gv_paintData,
@@ -3665,8 +3672,8 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,
       os_glassCard(x,tt,2,P.gov-0.1,["governance","checks it's kept"],{wash:GV.gold,washA:0.32});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 9 · The series: nine binders for the films on why governance, three cards on Noor's architecture map for the films that draw it
-//     as one model, six on the data team's board for the films that build it ----
+// ---- 9 · The series: nine binders for this series' films on why governance; then the two series that follow, each named on a card:
+//     three cards on Noor's architecture map for the films that draw it as one model, six on the data team's board for those that build it ----
 scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{nine:w("next","nine",-0.1),take:w("next","follows"),ml:c.map-0.6,mc:w("map","as one",-0.2),three:w("map","on the"),tl:c.tools-0.6,six:w("tools","six",-0.1),
       f:c.wish-0.6,end:c.breath-0.2};});
@@ -3683,9 +3690,9 @@ scene("series",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const w=(id,
     {at:P.ml,place:"noor",keys:[[P.ml,860,500,1.1],[P.ml+0.1,800,470,1.16]],d:2,draw:(x,tt)=>{
       person(x,"noor",1250,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.ml+0.5,0.6),t:tt,flip:true});
       os_nameCard(x,1330,236,"Noor Rahman","data architect",gv_io(tt,P.ml+0.4,P.mc,0.4));}},
-    // the map, close: three cards, one in each layer the films add to
-    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
-    // the data team's board, close: six cards, one for each film that builds it with the tools
+    // the map, close: the series' name, and three cards, one in each layer the films add to
+    {at:P.mc,place:"mapClose",keys:[[P.mc,960,520,1.03],[P.mc+0.1,960,510,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_mapHead(x,fin(tt,P.mc+0.3,0.6));for(let k=0;k<3;k++)os_mapCard(x,k,fin(tt,P.three+0.3*k,0.35));}},
+    // the data team's board, close: the series' name, and six cards, one for each film that builds it with the tools
     {at:P.tl,place:"boardData",keys:[[P.tl,960,500,1.04],[P.tl+0.1,960,490,1]],d:2.4,push:0.02,draw:(x,tt)=>{os_toolsHead(x,fin(tt,P.tl+0.3,0.6));
       for(let k=0;k<6;k++)os_toolCard(x,k,fin(tt,P.six+0.3*k,0.35));}},
     // the floor: he takes the binder to where the work is done; Jun looks up

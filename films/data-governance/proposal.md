@@ -1,6 +1,6 @@
 # Data governance, off the shelf
 
-*Proposal for a series on data governance that works where data work happens, v0.5: *Governance you can use* (*Gobernanza que puedes usar*), named on 20 October 2026; the folder is named after the topic. Status: proposed, 16 October 2026; the opening film, *Off the shelf*, made 17 October 2026; the plan for films 2 to 19 approved by the author on 20 October 2026, with a new part on governance as a capability: nineteen films in three parts. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
+*Proposal for data governance that works where data work happens, v0.6: three series since 28 October 2026, one for each pack. *Governance principles* (*Principios de gobernanza*), in this folder, holds the prologue and films 1 to 10; *Governance on the map* (*La gobernanza en el mapa*), in [`../governance-on-the-map/`](../governance-on-the-map/), films 11 to 13; and *Governance you can use* (*Gobernanza que puedes usar*), the name the whole series had from 20 October 2026, in [`../governance-in-practice/`](../governance-in-practice/), films 14 to 19. This plan stays the one for all three: the films keep their numbers here, and each series numbers its own. Status: proposed, 16 October 2026; the opening film, *Off the shelf*, made 17 October 2026; the plan for films 2 to 19 approved by the author on 20 October 2026, with a new part on governance as a capability. A companion series on master and reference data is proposed beside it, in [`../master-and-reference-data/proposal.md`](../master-and-reference-data/proposal.md).*
 
 ## Decided
 
@@ -139,6 +139,8 @@ On 27 October 2026, after watching *One word, one home*: "It reminds me of how d
 
 Later the same evening: "challenge is people engagement in general, not only agreement. Everything from communicating (data and data governance literacy), engagement, responsibility and accountability, willing to decide and to respect the other authorities, willingness to perform the duties of the role. And all of these is even more difficult if they don't have the right and practical tools that give them guidance, visibility and feedback around the impact of their work. Data governance has generally been a hard topic in part because technology was always desintegrated and in multiple places, leading to disorganization and low visibility, now that's changing with technologies that will be introduced later in the series, but people remain as the core and will take even more importance moving forward, in the same way governance remains at the core of data management and will become more relevant as data management activities become easier to run."
 
+On 28 October 2026: "Also, for data governance we should have 3 series in the data governance pack, the first one for data governance principles, the second one to architect it within the organizational map, and the third one making it operational and useful (beyond the policies)". The three packs became three series, as *The series at a glance* says.
+
 ## Analysis
 
 **What works**
@@ -262,6 +264,16 @@ The story's numbers and dates, in one place, so no two films choose differently.
 ## The series at a glance
 
 Nineteen films of 4 to 6 minutes, in three packs (decided 21 October 2026). Pack 1, *Why governance* (films 1 to 10), shows why the university needs governance: each film starts from a symptom of its absence, finds what's worth keeping so it stops, and names who decides and who acts. Pack 2, *The map of governance* (11 to 13), draws all of that as one model on Noor's architecture map. Pack 3, *With the tools* (14 to 19), builds it in dbt and Databricks, along the flows pack 2's map gives it; each film names the films it expands, and between them they take every technical scene packs 1 and 2 don't show.
+
+Since 28 October 2026, at the author's request, each pack is a series of its own, with its own page, and the next series follows from the last film of the one before:
+
+| Pack | Series | Folder and page | Films in this plan | Their cards |
+|---|---|---|---|---|
+| Why governance | *Governance principles* (*Principios de gobernanza*): the principles of data governance | `data-governance/` | The prologue, and 1 to 10 | Film 1 of 10 to Film 10 of 10 |
+| The map of governance | *Governance on the map* (*La gobernanza en el mapa*): governance designed into the university's architecture map | `governance-on-the-map/` | 11 to 13 | Film 1 of 3 to Film 3 of 3 |
+| With the tools | *Governance you can use* (*Gobernanza que puedes usar*): governance made operational and useful, beyond the policies, with dbt and Databricks | `governance-in-practice/` | 14 to 19 | Film 1 of 6 to Film 6 of 6 |
+
+The films keep their numbers in this plan, so its links and the scripts' references stay as they are. A new series' page appears with its opening film. The example dbt project stays where it is, in [`../analytics-engineering/project/`](../analytics-engineering/project/), with the additions in *What the example project gains*, and the third series' pages link to it there.
 
 | Pack | # | Working title | What it puts in place | The idea to take away |
 |---|---|---|---|---|

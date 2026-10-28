@@ -204,29 +204,31 @@ function rr_planScreen(ctx,hiA){const [sx,sy,sw]=GV_PL.screen,k=sw/GV_SC[2];ctx.
 function rr_cellCard(ctx,x,y,u,lines){if(u<=0.01)return;const w=Math.round(Math.max(tw(ctx,lines[0],22,600),tw(ctx,lines[1],22,700))+40),k=0.9+0.1*spring(clamp(u,0,1));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(u*2,0,1),()=>{wc_panel(ctx,-w/2,-38,w,76,{kind:"card",wash:GV.gold,washA:0.25,seed:w});
     wc_T(ctx,lines[0],-w/2+20,-6,{w:600,size:22,col:WC_DARK});wc_T(ctx,lines[1],-w/2+20,24,{w:700,size:22,col:GV.goldInk});});ctx.restore();}
-scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>{const L=gv_skLay(ctx,[RR_SK15,RR_SK15]);return{scr:0.9,fill:1.4,
+scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:0.9,fill:1.4,
     area:wAt(sc,"row","area"),dimW:wAt(sc,"row","dimension"),cell:wAt(sc,"row","in each cell"),under:c.under-0.3,whose:wAt(sc,"under","whose"),door:c.answer-0.3,
-    plan:c.census-0.3,acc:wAt(sc,"census","census"),room:c.passed-0.3,nod:wAt(sc,"passed","it passed"),tick:sc.ends.passed+0.1,rowCam:[960,L.rows[5].top+178,1.55]};});
+    plan:c.census-0.3,acc:wAt(sc,"census","census"),room:c.passed-0.3,nod:wAt(sc,"passed","it passed"),tick:sc.ends.passed+0.1,
+    // close: the whole table and the warnings under it, the headings near the top of the frame, the words seen at 28.5 px
+    rowCam:[960,528,1.5]}));
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's office, morning: the scorecard on his screen
     {at:0,place:"office",keys:[[0,1000,560,1.25]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"score");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);
       person(x,"yusuf",1110,905,0.8,{pose:"listen",t:tt,flip:true});}},
     // the scorecard fills in, wide: a wash in each cell as its count arrives; the rows, the columns and a cell lit as they're named;
-    // then down to what didn't pass, and whose it is
-    {at:P.scr,place:"screenGov",keys:[[P.scr,...GV_SKV.all],[P.under+0.1,960,520,1.38]],d:1.6,push:0,draw:(x,tt,cam)=>{const sec=fin(tt,P.under,0.8),
-        L=gv_scorecard(x,cam,{rows:RR_SK15,after:RR_SK15,mx:sec,sections:[],afterSections:RR_SEC15,clear:" ",date:"15 October 2026",p:clamp((tt-P.fill)/3.4,0,1),scroll:240*easeCam(fin(tt,P.under,1.4))});
-      const top=L.rows[0].top-L.scroll,bot=L.rows[11].top+L.rows[11].h-L.scroll,r5=L.rows[5];
-      gv_halo(x,GV_SK.x-10,top-10,L.cw[0]+20,bot-top+20,GV.gold,0.75*gv_io(tt,P.area-0.1,P.dimW-0.2,0.3));
-      gv_halo(x,L.cx[1],GV_SK.y-36-L.scroll,L.cx[7]-L.cx[1],50,GV.gold,0.75*gv_io(tt,P.dimW-0.1,P.cell-0.2,0.3));
-      gv_halo(x,L.cx[2]-16,r5.top-16-L.scroll,L.cw[2]+32,r5.h+32,GV.gold,0.85*gv_io(tt,P.cell-0.1,P.under,0.3));
-      if(L.secB&&L.secB[0]){const s0=L.secB[0];gv_tint(x,s0.cols[1]-10,s0.rows[0]-GV_SK.rh*0.74-L.scroll,tw(x,"Learning team",GV_SK.sz,600)+20,3*GV_SK.rh,GV.gold,0.7*fin(tt,P.whose,0.4));}}},
+    // then closer, as what didn't pass comes in under it, and whose it is
+    {at:P.scr,place:"screenGov",keys:[[P.scr,...GV_SKV.all],[P.under+0.1,...P.rowCam]],d:1.6,push:0,draw:(x,tt,cam)=>{const sec=fin(tt,P.under,0.8),
+        L=gv_scorecard(x,cam,{rows:RR_SK15,after:RR_SK15,mx:sec,sections:[],afterSections:RR_SEC15,clear:" ",date:"15 October 2026",p:clamp((tt-P.fill)/3.4,0,1)});
+      const top=L.rows[0].top,bot=L.rows[11].top+L.rows[11].h,r5=L.rows[5];
+      gv_tint(x,GV_SK.x,top,L.cw[0],bot-top,GV.gold,0.75*gv_io(tt,P.area-0.1,P.dimW-0.2,0.3));
+      gv_tint(x,L.cx[1],GV_SK.y-26,L.cx[7]-L.cx[1],36,GV.gold,0.75*gv_io(tt,P.dimW-0.1,P.cell-0.2,0.3));
+      rr_glow(x,L.cx[2]+6,r5.top+2,L.cw[2]-12,r5.h-5,GV.gold,0.85*gv_io(tt,P.cell-0.1,P.under,0.3),12);
+      if(L.secB&&L.secB[0]){const s0=L.secB[0];gv_tint(x,s0.cols[1]-10,s0.rows[0]-GV_SK.rh*0.74,tw(x,"Learning team",GV_SK.sz,600)+20,3*GV_SK.rh,GV.gold,0.7*fin(tt,P.whose,0.4));}}},
     // David at the door again: Yusuf turns to the screen and points at Planning's row
     {at:P.door,place:"office",keys:[[P.door,760,540,1.2]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"score");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);
       person(x,"david",165,905,0.8,{pose:"listen",t:tt});person(x,"yusuf",1080,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,P.door+0.6,0.5),t:tt,flip:true});
       rr_say(x,tt,P.door+0.2,9e9,110,140,RR_Q,250,410);}},
     // close on Planning's row: its accuracy cell lights, with its check and its owner
     {at:P.plan,place:"screenGov",keys:[[P.plan,...P.rowCam]],d:2,push:0.01,draw:(x,tt,cam)=>{const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:5,hiA:fin(tt,P.plan+0.3,0.5)}),r=L.rows[5];
-      gv_halo(x,L.cx[5]-26,r.top-26,L.cw[5]+52,r.h+52,GV.green,0.9*fin(tt,P.acc-0.2,0.5));
+      rr_glow(x,L.cx[5]+6,r.top+2,L.cw[5]-12,r.h-5,GV.green,0.9*fin(tt,P.acc-0.2,0.5),14);
       rr_cellCard(x,Math.min(L.cx[5]+L.cw[5]/2,1560-260),r.top+r.h+60,fin(tt,P.acc,0.5),["Planning's number matches the census report","owner: Planning"]);}},
     // Planning's room: Clara at her wall screen sees the same row, and nods
     {at:P.room,place:"planning",keys:[[P.room,1000,520,1.12]],d:2,draw:(x,tt)=>{rr_planScreen(x,1);
@@ -315,10 +317,10 @@ scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,
 // (emails as typed, cleaned every night downstream); nobody owned the warning; now it's his team's ----
 // Yusuf's office with its things, as the earlier chapters left it
 function rr_office(x){rr_officeScreen(x,"score");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);}
-scene("row",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>{const L=gv_skLay(ctx,[RR_SK15]);return{walk:0.3,reads:wAt(sc,"hours","Tom reads")-0.3,row:wAt(sc,"hours","the learning row"),
+scene("row",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({walk:0.3,reads:wAt(sc,"hours","Tom reads")-0.3,row:wAt(sc,"hours","the learning row"),
     knows:wAt(sc,"knows","he knows"),walkin:wAt(sc,"knows","a walk-in"),cert:wAt(sc,"knows","certificate"),never:wAt(sc,"never","never seen"),typed:wAt(sc,"never","emails typed"),
     spaces:wAt(sc,"never","spaces"),clean:c.cleans-0.3,cl:wAt(sc,"cleans","cleans them"),broke:wAt(sc,"cleans","nothing broke"),nobody:c.nobody-0.3,read:wAt(sc,"nobody","nobody read"),
-    now:c.now,look:sc.ends.now+0.3,rowCam:[960,L.rows[4].top+178,1.55]};});
+    now:c.now,look:sc.ends.now+0.3,rowCam:[960,528,1.5]}));
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's office, a Thursday afternoon: a card on the open door, his office hours; Tom comes in and stands beside him at the screen
     {at:0,place:"office",keys:[[0,600,470,1.6],[0.6,800,540,1.15]],d:1.6,draw:(x,tt,cam)=>{rr_office(x);rr_hoursCard(x,1,cam.z);
@@ -327,17 +329,17 @@ scene("row",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>{const L=gv_skLa
     // walk-in from February, whose certificate can't find an address; then the one he's never seen, and its two lines under Warnings
     {at:P.reads,place:"screenGov",keys:[[P.reads,...GV_SKV.all],[P.reads+0.2,...P.rowCam]],d:1.6,push:0,draw:(x,tt,cam)=>{
       const L=gv_scorecard(x,cam,{rows:RR_SK15,sections:RR_SEC15,date:"15 October 2026",hi:4,hiA:fin(tt,P.row,0.5)}),r=L.rows[4],cell=j=>[L.cx[j]+L.cw[j]/2,r.top+r.h/2];
-      gv_halo(x,L.cx[1]-26,r.top-26,L.cw[1]+52,r.h+52,GV.amber,0.9*gv_io(tt,P.knows-0.1,P.never-0.3,0.4));
-      gv_halo(x,L.cx[3]-26,r.top-26,L.cw[3]+52,r.h+52,GV.amber,0.9*fin(tt,P.never,0.4));
+      rr_glow(x,L.cx[1]+6,r.top+2,L.cw[1]-12,r.h-5,GV.amber,0.9*gv_io(tt,P.knows-0.1,P.never-0.3,0.4),14);
+      rr_glow(x,L.cx[3]+6,r.top+2,L.cw[3]-12,r.h-5,GV.amber,0.9*fin(tt,P.never,0.4),14);
       rr_inFrame(x,cam,q=>{const ue=clamp((tt-P.walkin+0.3)/0.9,0,1),go=1-fin(tt,P.never-0.5,0.4);
         if(ue>0&&go>0.01){const [ax,ay]=rr_toFrame(cam,...cell(1)),e=easeCam(ue);withA(q,go,()=>rr_enrolCard(q,lerp(ax,500,e),lerp(ay,640,e),ue,{cert:fin(tt,P.cert,0.6)}));}});
       const s0=L.sec[0];[1,2].forEach(k=>gv_tint(x,GV_SK.x,s0.rows[k]-GV_SK.rh*0.74,GV_SK.w,GV_SK.rh,GV.amber,0.7*fin(tt,P.typed+0.25*k,0.4)));}},
-    // one of those emails as it was typed, on the data team's board: spaces at each end, capitals; the night's clean-up passes it
-    // through a sieve and it comes out tidy
-    {at:P.spaces-0.4,place:"boardData",keys:[[P.spaces-0.4,960,470,1.0]],d:2,push:0.01,draw:(x,tt)=>{const dr=easeCam(clamp((tt-P.cl+0.2)/0.9,0,1));
-      x.save();x.translate(0,170*dr);x.translate(960,240);x.scale(1-0.5*dr,1-0.5*dr);x.translate(-960,-240);rr_typed(x,707,250,fin(tt,P.spaces-0.2,0.4)*(1-fin(tt,P.cl+0.5,0.3)));x.restore();
-      x.save();x.translate(960,470);x.scale(1.6,1.6);rr_sieve(x,0,0,fin(tt,P.clean,0.4));x.restore();rr_clean(x,730,720,fin(tt,P.cl+0.6,0.5));
-      rr_tagAt(x,tt,P.broke,null,960,820,"cleaned downstream, every night",{size:32,wash:GV.green,washA:0.25});}},
+    // one of those emails as it was typed, on the data team's board, close: spaces at each end, capitals; then wider, as the night's
+    // clean-up passes it through a sieve and it comes out tidy
+    {at:P.spaces-0.4,place:"boardData",keys:[[P.spaces-0.4,960,320,1.6],[P.clean-0.4,960,545,1.35]],d:1.6,push:0.01,draw:(x,tt)=>{const dr=easeCam(clamp((tt-P.cl+0.2)/0.9,0,1));
+      x.save();x.translate(0,110*dr);x.translate(960,290);x.scale(1-0.5*dr,1-0.5*dr);x.translate(-960,-290);rr_typed(x,707,300,fin(tt,P.spaces-0.2,0.4)*(1-fin(tt,P.cl+0.5,0.3)));x.restore();
+      x.save();x.translate(960,450);x.scale(1.6,1.6);rr_sieve(x,0,0,fin(tt,P.clean,0.4));x.restore();rr_clean(x,730,660,fin(tt,P.cl+0.6,0.5));
+      rr_tagAt(x,tt,P.broke,null,960,750,"cleaned downstream, every night",{size:32,wash:GV.green,washA:0.25});}},
     // old warning slips on the data team's desk, one for every night, each with nobody's name; then the learning team's on the stack
     {at:P.nobody,place:"junTop",keys:[[P.nobody,960,560,1.45]],d:3,push:0.01,draw:(x,tt)=>rr_slips(x,960,720,clamp((tt-P.nobody)/1.6,0,1)*30,{owner:1,mine:fin(tt,P.now,0.5)})},
     // the office again: Tom looks up at Yusuf

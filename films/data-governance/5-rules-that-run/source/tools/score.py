@@ -44,7 +44,8 @@ seen = lambda x, cx, z: 960 + (x - cx) * z
 # ---- the film's tuning: one scale, pure on D ----
 # every note the film plays takes its pitch from here: the ratio of each step to D (just intonation), D2 at its usual pitch. A note
 # that two chords share is then the same pitch in both, so nothing beats as one chord gives way to the next, and the chords below
-# are chosen so each of their notes is pure against the root (no chord holds C and G together, the one fifth this scale leaves narrow)
+# are chosen so each of their notes is pure against the root (no chord holds C and G, or E and B, together: the fifths this scale
+# leaves a comma narrow; G-sharp to E-flat, a comma wide, isn't used)
 JUST = (1, 16 / 15, 9 / 8, 6 / 5, 5 / 4, 4 / 3, 45 / 32, 3 / 2, 8 / 5, 5 / 3, 9 / 5, 15 / 8)
 def fq(m):
     """a note's pitch in the film's scale (m: its MIDI number)"""

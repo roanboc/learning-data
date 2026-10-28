@@ -1,0 +1,28 @@
+{
+  "kicker": "Glossary and metrics",
+  "kicker_es": "Glosario y métricas",
+  "title_es": "El significado en la plataforma",
+  "h1": "Meaning on the platform: one page, one count, one number",
+  "h1_es": "El significado en la plataforma: una página, un conteo, una cifra",
+  "lead": "At the university, award was kept in five glossaries with three meanings, and two reports counted it two ways, 4,812 and 4,867. Now award has one page on the platform, every copy is checked against it each night, and awards conferred is counted once, for people, reports and agents.",
+  "lead_es": "En la universidad, título estaba en cinco glosarios con tres significados, y dos informes lo contaban de dos maneras, 4,812 y 4,867. Ahora título tiene una sola página en la plataforma, cada copia se compara con ella cada noche, y los títulos otorgados se cuentan una sola vez, para personas, informes y agentes.",
+  "description": "A film about one meaning on the platform, the third of Governance you can use: Mei's Monday change of award, and two reports that counted it two ways; award's page on the platform, in beta, with its owner and the tables that hold it, published from Noor's map; the data team's copy, which names its source, and the descriptions each build sends on to the catalog; the nightly sync, which finds Monday's change and proposes it in a pull request, with everything it touches; the 6 credit points, kept once as a setting; awards conferred, counted once as a metric view the project builds; Genie One and the data team's agent, which read the same meaning; three layers of meaning, each with one home; and submission day, when both reports say 4,867.",
+  "description_es": "Una película sobre un solo significado en la plataforma, la tercera de Gobernanza que puedes usar: el cambio de título que hace Mei un lunes, y dos informes que lo contaban de dos maneras; la página de título en la plataforma, en beta, con su dueña y las tablas que lo contienen, publicada desde el mapa de Noor; la copia del equipo de datos, que nombra su fuente, y las descripciones que cada construcción manda al catálogo; la sincronización nocturna, que encuentra el cambio del lunes y lo propone en una solicitud de cambio, con todo lo que toca; los 6 créditos, guardados una vez como parámetro; los títulos otorgados, contados una vez en una vista de métricas que construye el proyecto; Genie One y el agente del equipo de datos, que leen el mismo significado; tres capas de significado, cada una con un solo lugar; y el día de la entrega, cuando los dos informes dicen 4,867.",
+  "card": "One page for each term, copies checked against it, and a count defined once, so people, reports and agents get one number.",
+  "card_es": "Una página por término, copias que se comparan con ella, y un conteo definido una vez: una sola cifra para personas, informes y agentes.",
+  "chapters_es": {
+    "words": "Palabras que llegan al trabajo",
+    "page": "Un término, una página",
+    "copy": "Una copia que dice de dónde viene",
+    "sync": "La sincronización nocturna",
+    "setting": "Un número es un parámetro",
+    "count": "Contado una vez",
+    "agents": "Los agentes leen el mismo significado",
+    "layers": "Tres capas, un lugar cada una",
+    "close": "Un solo significado"
+  },
+  "past": ["Monday, in the registrar's office: award's new words", "One meaning, read by people, reports and agents."],
+  "past_es": ["Lunes, en la oficina de registro: las palabras nuevas de título", "Un solo significado, leído por personas, informes y agentes."],
+  "next_h": "You've seen one meaning reach the work: one page, copies checked against it, one setting and one count. More films in the series are on the way.",
+  "next_h_es": "Viste un solo significado llegar al trabajo: una página, copias que se comparan con ella, un parámetro y un conteo. Vienen más películas de la serie."
+}

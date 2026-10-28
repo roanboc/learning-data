@@ -1,0 +1,30 @@
+{
+  "key": "meaning-on-the-platform",
+  "title": "Meaning on the platform",
+  "sub": "Film 3 of 6 of Governance you can use: one meaning on the platform. Each term has one page, every copy is checked against it each night, a number in a meaning is kept as one setting, and a count is defined once, for people, reports and agents.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. The meanings of award keep their colours: violet for the glossary's words, rose for the old words, olive for degrees only. A copy in step with its home has a violet thread to it, and one that's behind turns rose. The platform's pages are drawn as forms; files are paper sheets, copied from the example project. The count, defined once, is a ledger with its rule at the top.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "close",
+    "day",
+    10.4
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

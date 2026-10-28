@@ -1,0 +1,219 @@
+1
+00:00:01,200 --> 00:00:03,344
+Monday, in the registrar's office.
+
+2
+00:00:04,644 --> 00:00:09,970
+Mei Tanaka owns what award means: the qualifications the university confers.
+
+3
+00:00:11,270 --> 00:00:18,655
+Today, the meaning changes: microcredentials, the certificates of short courses, count too, from 6 credit points.
+
+4
+00:00:20,355 --> 00:00:25,796
+When Yusuf asked what slowed her down, Mei said: I approve the words, then never see them used.
+
+5
+00:00:27,696 --> 00:00:34,201
+Until now, award was kept in five glossaries, lists of what words mean, with three meanings between them.
+
+6
+00:00:35,701 --> 00:00:47,653
+So two reports counted awards two ways: Planning's census report said 4,812, the draft submission to the government 4,867.
+
+7
+00:00:49,353 --> 00:00:52,896
+The university could have sent the government a number it couldn't explain.
+
+8
+00:00:54,596 --> 00:00:55,984
+Something had to change.
+
+9
+00:00:57,484 --> 00:01:02,777
+Now award has one page, on the platform, and every copy is checked against it each night.
+
+10
+00:01:04,277 --> 00:01:07,092
+The 6 credit points are kept once, as a setting.
+
+11
+00:01:08,392 --> 00:01:12,900
+And awards conferred is counted once, for every report and every agent.
+
+12
+00:01:14,400 --> 00:01:20,212
+That night, the check finds Monday's change, and on Tuesday morning, Mei sees everything her words touch.
+
+13
+00:01:21,712 --> 00:01:26,765
+On submission day, both reports say 4,867.
+
+14
+00:01:28,265 --> 00:01:31,950
+Her words reach the work, and the university sends one number.
+
+15
+00:01:39,450 --> 00:01:43,212
+On the platform, each term of the glossary is a page, in beta.
+
+16
+00:01:44,712 --> 00:01:48,994
+Award's page has its words, its owner, Mei, and its domain, course.
+
+17
+00:01:50,494 --> 00:01:53,780
+It lists the tables that hold it, and where its words come from.
+
+18
+00:01:55,480 --> 00:02:01,186
+It's published from Noor's map, where each term is kept, so a change is made there, never on the page.
+
+19
+00:02:03,086 --> 00:02:04,788
+People read it beside the data.
+
+20
+00:02:05,888 --> 00:02:09,778
+So does the platform's assistant, and it cites the page when it answers.
+
+21
+00:02:12,678 --> 00:02:20,666
+The data team keeps its own copy of each term, beside the models, so the tables that hold award describe it in the same words.
+
+22
+00:02:22,366 --> 00:02:26,515
+The copy names its source: the glossary's term, and the day it was synced.
+
+23
+00:02:28,415 --> 00:02:33,076
+Each build then sends the descriptions on to the catalog, one way, never back.
+
+24
+00:02:36,176 --> 00:02:40,222
+Every night, a check compares each copy with its term in the glossary.
+
+25
+00:02:42,522 --> 00:02:44,554
+On Monday night, award had changed.
+
+26
+00:02:45,854 --> 00:02:52,022
+So the check proposed the change, in a pull request: the old words and the new, and what the new words touch.
+
+27
+00:02:53,722 --> 00:03:00,089
+Three tables, eight definitions that name award, the code that builds them, and three reports and apps to tell.
+
+28
+00:03:01,989 --> 00:03:06,678
+On Tuesday morning, Mei approved the meaning, and data governance confirmed the term.
+
+29
+00:03:08,178 --> 00:03:10,552
+This time, she saw where her words are used.
+
+30
+00:03:13,452 --> 00:03:16,190
+The new words hold a number: 6 credit points.
+
+31
+00:03:17,490 --> 00:03:21,835
+So it's kept in one place, as a setting: min award credit points, 6.
+
+32
+00:03:23,535 --> 00:03:29,471
+Jun's new column, counts as an award, reads it, and every count of awards reads the column.
+
+33
+00:03:31,171 --> 00:03:37,722
+If Mei and the faculties ever agree on another number, one line changes, in a reviewed pull request.
+
+34
+00:03:42,422 --> 00:03:46,302
+A count is a meaning too: which credentials count, and in which year.
+
+35
+00:03:47,802 --> 00:03:55,297
+So awards conferred is counted once, as a metric view: a count the platform defines once, for every tool that asks.
+
+36
+00:03:56,997 --> 00:04:01,199
+It counts the credentials that count as an award, by the year they were issued.
+
+37
+00:04:02,699 --> 00:04:06,873
+The project builds it like its models, so every change to it is reviewed.
+
+38
+00:04:08,373 --> 00:04:12,124
+The draft submission reads it, and so does Planning's census report.
+
+39
+00:04:13,824 --> 00:04:16,324
+Neither counts awards its own way any more.
+
+40
+00:04:19,224 --> 00:04:21,751
+And the platform's agents read the same meaning.
+
+41
+00:04:22,851 --> 00:04:29,004
+Clara asks Genie One, the platform's assistant, how many awards the university conferred this year.
+
+42
+00:04:30,704 --> 00:04:37,956
+It answers 4,867, from the metric, and cites award's page for what an award is.
+
+43
+00:04:39,856 --> 00:04:43,967
+It prefers the page to its own guess, and shows where its answer came from.
+
+44
+00:04:45,467 --> 00:04:49,355
+An agent the data team builds on the metric gives the same answer.
+
+45
+00:04:50,855 --> 00:04:54,131
+People and agents read one meaning, so they get one number.
+
+46
+00:04:57,031 --> 00:05:02,678
+Meaning comes in three layers: what a word means, how a number is counted, and how things relate.
+
+47
+00:05:04,178 --> 00:05:05,387
+Each has one home.
+
+48
+00:05:06,687 --> 00:05:10,104
+The words live on Noor's map, and the glossary copies them.
+
+49
+00:05:11,604 --> 00:05:15,142
+How things relate lives there too, copied into the project.
+
+50
+00:05:16,642 --> 00:05:21,007
+And the counts live in the project, which the platform serves as metric views.
+
+51
+00:05:22,507 --> 00:05:25,697
+Every copy is checked against its home, or built from it.
+
+52
+00:05:29,397 --> 00:05:34,186
+Mei sees her words used now, in every table, count and answer that holds them.
+
+53
+00:05:35,686 --> 00:05:40,434
+She decides what award means, once, and the platform carries it everywhere it's read.
+
+54
+00:05:42,134 --> 00:05:52,189
+On submission day, the draft and Planning's census report both say 4,867, counted by the same metric, with the same words.
+
+55
+00:05:53,889 --> 00:05:57,075
+One meaning, read by people, reports and agents.

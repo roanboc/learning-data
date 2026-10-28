@@ -13,6 +13,16 @@
 // which this series doesn't bundle) counts what's drawn inside rr_asDeco
 let PH_OFF=0;
 function rr_asDeco(on,fn){if(!on)return fn();PH_OFF++;try{return fn();}finally{PH_OFF--;}}
+// fn draws with each word fading as the frame's edge comes to it (within 30 px), so the frame never cuts a word: a sheet sliding in, or
+// one beside the page the camera closes on (spans: [x0, x1] columns, in ctx's units now, whose words fade together). A copy of
+// Fixed where it starts' fw_fadeCut, as the playbook's lesson on cut columns asks
+function rr_fadeCut(ctx,fn,spans){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.height,r=30*cw/1920,M=ctx.getTransform(),S=(spans||[]).map(([a,b])=>[M.a*a+M.e,M.a*b+M.e]);
+  T=(c,s2,x,y,o)=>{o=o||{};const sz=o.size||24,w=tw(c,String(s2),sz,o.w,o.f),al=o.align||"left",x0=al==="center"?x-w/2:al==="right"?x-w:x,m=c.getTransform();
+    let l=1e9,rt=-1e9,tp=1e9,bt=-1e9;for(const [px,py] of [[x0,y-0.75*sz],[x0+w,y-0.75*sz],[x0,y+0.2*sz],[x0+w,y+0.2*sz]]){const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;
+      l=Math.min(l,X);rt=Math.max(rt,X);tp=Math.min(tp,Y);bt=Math.max(bt,Y);}
+    const sp=S.find(([a,b])=>l>=a-2&&l<=b);if(sp){l=Math.min(l,sp[0]);rt=Math.max(rt,sp[1]);}
+    const a=clamp(Math.min(l/r,(cw-rt)/r,tp/r,(ch-bt)/r),0,1);if(a>=0.99)return T0(c,s2,x,y,o);if(a>0.01)withA(c,a,()=>T0(c,s2,x,y,o));};
+  try{return fn();}finally{T=T0;}}
 
 /* ---------- Yusuf's office ---------- */
 // the shelf's binders, the two middle rows: binders 2, 12 and 6 are out with the earlier films, so their places are gaps (the

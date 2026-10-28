@@ -126,7 +126,7 @@ scene("survey",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({take:wAt(sc
       person(x,"yusuf",1460,905,0.8,got?{pose:"reach",pose2:"hold",mix:fin(tt,P.take+0.1,0.5),t:tt,carry:rr_heldBinder(["Rules","that run"],RR_B9)}:{pose:"listen",pose2:"reach",mix:fin(tt,P.take-0.8,0.5),t:tt});}},
     // binder 9's page: its policy and its line, "monitored" underlined as it's read; then the survey's form laid on top of it
     {at:P.page,place:"policy",keys:[[P.page,960,500,1],[P.page+0.1,900,460,1.08],[P.form,960,520,1]],d:1.6,push:0.01,draw:(x,tt)=>{
-      rr_policy9(x,{under:fin(tt,P.mon,0.7)});rr_survey(x,fin(tt,P.form,0.9),{nums:clamp((tt-P.nums)/1.2,0,1),ring:clamp((tt-P.ring)/0.7,0,1)});}},
+      rr_policy9(x,{under:fin(tt,P.mon,0.7)});rr_fadeCut(x,()=>rr_survey(x,fin(tt,P.form,0.9),{nums:clamp((tt-P.nums)/1.2,0,1),ring:clamp((tt-P.ring)/0.7,0,1)}));}},
     // his board, close: the chart he pins up from the answers; the short-course platform's bar lights; the average written under it
     {at:P.board,place:"boardGov",keys:[[P.board,800,470,1.04],[P.board+0.1,780,470,1.06]],d:3,push:0.01,draw:(x,tt)=>
       rr_chart(x,290,96-18*(1-fin(tt,P.board+0.1,0.6)),1,{bars:clamp((tt-P.board-0.4)/1.4,0,1),lit:gv_io(tt,P.shortW-0.1,P.avg+0.8,0.4),avg:clamp((tt-P.avg)/1.1,0,1)})},
@@ -293,7 +293,7 @@ scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,
     // Planning's room: Clara at her wall screen; any difference, and nobody ships
     {at:P.plan,place:"planning",keys:[[P.plan,1000,520,1.12],[P.plan+0.1,1250,560,1.35]],d:2.2,push:0,draw:(x,tt)=>{rr_planScreen(x,0);
       person(x,"clara",1400,905,0.8,{pose:"listen",pose2:"explain",mix:gv_io(tt,P.any-0.2,P.pcard,0.5),t:tt,flip:true});
-      rr_plate(x,tt,P.plan+0.5,P.any-0.1,1640,330,["Clara Jensen","Planning"]);rr_say(x,tt,P.any,9e9,1440,190,["Any difference,","and nobody ships."],1410,470);}},
+      rr_plate(x,tt,P.plan+0.5,P.any-0.1,1640,330,["Clara Jensen","Planning"]);rr_say(x,tt,P.any,9e9,1440,215,["Any difference,","and nobody ships."],1410,470);}},
     // her card, on Planning's desk: the opposite level, stop on any difference, because that number goes to the government; each owner
     // signs: Clara first, and her card is stamped
     {at:P.pcard,place:"planTop",keys:[[P.pcard,960,540,1]],d:3,push:0.01,draw:(x,tt)=>withA(x,1-fin(tt,TS-0.25,0.25),()=>{
@@ -442,7 +442,8 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
     // Yusuf's board: the survey's chart on the left, the red morning's scorecard printed on the right; between them, for a moment, the
     // column with its gold mark. Then close on the printout: what it can trust, what's held back, and who fixes it
     {at:P.board,place:"boardGov",keys:[[P.board,950,460,1.15],[P.knows-0.3,1260,455,1.5]],d:1.8,push:0,draw:(x,tt,cam)=>{
-      rr_chart(x,250,273,0.52,{bars:1,avg:1,z:cam.z,pencil:fin(tt,P.guess,0.7)});
+      // (as the camera closes on the printout, the frame comes to the chart: its words fade as it does, and none is ever cut)
+      rr_fadeCut(x,()=>rr_chart(x,250,273,0.52,{bars:1,avg:1,z:cam.z,pencil:fin(tt,P.guess,0.7)}));
       const wT=gv_io(tt,P.trust-0.1,P.held,0.4),wH=gv_io(tt,P.held-0.1,P.fix,0.4),wF=fin(tt,P.fix-0.1,0.4),
         L=rr_printout(x,cam,{fn:(q,L)=>{rr_prFocus(q,L,RR_SK19,(c,i,j)=>(c.state==="pass"?wT:0)+(c.state==="skip"?wH:0)+(i===4&&j===1?wF:0),fin(tt,P.trust-0.1,0.4));
           const r=L.rows[4];rr_glow(q,L.cx[1]+6,r.top+2,L.cw[1]-12,r.h-5,GV.red,wF,16);}});

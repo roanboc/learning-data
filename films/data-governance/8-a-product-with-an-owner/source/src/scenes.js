@@ -123,5 +123,61 @@ scene("bazaar",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,
   gv_title(ctx,S,t,P.title,"A product with an owner","data with a promise, and someone who keeps it","Film 8 of 19 · data governance");
   wc_paperOver(ctx,S);});
 
+// ---- 2 · Nobody's table: last March, Planning's count of learners near an award wasn't ready, and nobody answered for it ----
+// reaching for a binder on the lower shelf, at chest height
+POSE.po_reachLow={L:[0.12,-0.08],R:[1.0,1.45],feet:30,shift:5,tilt:-0.02,turn:0.18,gaze:[0.5,0.3],look:0};
+// the round of pointing, in the frame itself rather than in a room, so each name stays put across the cut to the person it names: where
+// each name hangs, and where the rooms' camera puts each person under it (the three rooms are framed alike, at 1.1, no push)
+const PO_RND={cam:[960,500,1.1],y:410,jun:674,noor:1380,plan:540},po_rndX=sx=>(sx-960)/PO_RND.cam[2]+960;
+scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{take:c.policy+0.2,desk:w("policy","data is")-0.15,fac:c.anil-0.3,tells:w("anil","tells"),cen:c.census-0.3,seven:w("census","seven"),sheet:c.needed-0.3,
+      phone:c.asked-0.8,jun:c.asked+0.8,built:w("asked","built"),noorSaid:w("round","Noor designed"),noor:w("round","Noor said")-0.15,plan:w("round","Planning asked"),
+      pl:w("round","And Planning")-0.15,juns:w("round","Jun builds"),fl:c.nobody-0.4,nobody:w("nobody","nobody"),again:c.again-0.3};});
+  const R=PO_RND,rk=[[0,R.cam[0],R.cam[1],R.cam[2]]];
+  gv_shots(ctx,S,t,sc.dur,[
+    // today, in his office: Yusuf takes the next binder off the shelf, its label the film's title; six gaps where the films before took theirs
+    {at:0,place:"office",keys:[[0,1230,560,1.3],[0.2,1250,540,1.36]],d:3,draw:(x,tt)=>{const out=fin(tt,P.take,0.5),has=tt>=P.take+0.55;
+      po_binders(x,{out,taken:has});gv_deskBook(x);
+      person(x,"yusuf",1290,905,0.8,{pose:has?"hold":"listen",pose2:has?null:"po_reachLow",mix:has?0:gv_io(tt,P.take-0.6,P.take+0.6,0.4),t:tt,
+        carry:has?po_heldTitled(["A product","with","an owner"],po_bindCol(PO_BIND.mine)):null});}},
+    // binder 22 open on his desk: policy 22, and its line
+    {at:P.desk,place:"desk",keys:[[P.desk,1152,432,1.25],[P.desk+0.1,1130,440,1.3]],d:4,draw:(x,tt)=>po_openBinder(x,1)},
+    // Anil's office in the old building: he has turned from his desk to Yusuf, who sits beside him with his notebook
+    {at:P.fac,place:"faculty",keys:[[P.fac,1152,560,1.25],[P.fac+0.1,1152,550,1.28]],d:4,draw:(x,tt)=>{
+      gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"listen",pose2:"explain",mix:gv_io(tt,P.tells-0.3,c.anil+5.4,0.5),t:tt});
+      gv_behind(x,"yusuf",1730,GV_FX.top,1.6,{pose:"write",carry:heldNotebook,t:tt+1,flip:true});x.drawImage(gv_place("facDesk"),0,0,W,H);
+      po_nameCard(x,700,580,"Anil Kurian","Faculty of Health",gv_io(tt,P.fac+0.5,P.cen-0.3,0.4));}},
+    // last March, census day: his screen, close, at seven: Planning's dashboard, empty, and the clock on the wall
+    {at:P.cen,place:"screenFac",keys:[[P.cen,960,500,1.0],[P.cen+0.1,1000,510,1.06]],d:5,draw:(x,tt)=>{po_dash(x);
+      po_clock(x,1760,214,92,lerp(57.5,60,easeCam(clamp((tt-P.seven+1.2)/1.2,0,1))),tt);}},
+    // on his desk, the sheet he plans next semester's places with, its cells empty
+    {at:P.sheet,place:"facTop",keys:[[P.sheet,960,520,1.0],[P.sheet+0.1,960,500,1.05]],d:4,draw:(x,tt)=>po_placesSheet(x)},
+    // he asks the data team, on his phone
+    {at:P.phone,place:"faculty",keys:[[P.phone,1152,560,1.25]],d:2,push:0.02,draw:(x,tt)=>{
+      gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"phone",expr:"concerned",t:tt});x.drawImage(gv_place("facDesk"),0,0,W,H);}},
+    // the data team's room: Jun reads it, and points the way, to Noor
+    {at:P.jun,place:"data",keys:rk,push:0,draw:(x,tt)=>{const p=fin(tt,P.noorSaid-0.35,0.5);
+      person(x,"jun",po_rndX(R.jun),905,0.8,{pose:p<0.5?"phone":"listen",pose2:"point",mix:p,t:tt});}},
+    // Noor's room, by her map: she points on, to Planning
+    {at:P.noor,place:"noor",keys:rk,push:0,draw:(x,tt)=>{const p=fin(tt,P.plan-0.35,0.5);
+      person(x,"noor",po_rndX(R.noor),905,0.8,{pose:"listen",pose2:"point",mix:p,t:tt,flip:true});}},
+    // Planning's room: Clara points back, to Jun
+    {at:P.pl,place:"planning",keys:rk,push:0,draw:(x,tt)=>{const p=fin(tt,P.juns-0.3,0.5);
+      person(x,"clara",po_rndX(R.plan),905,0.8,{pose:"listen",pose2:"point",mix:p,t:tt});
+      gv_say(x,po_rndX(R.plan)-122,328,["Jun builds it"],po_rndX(R.plan)+8,466,{a:fin(tt,P.juns,0.3),k:0.9+0.1*spring(fin(tt,P.juns,0.5))});}},
+    // the floor: three people in three places, each pointing to the next, and over the corridor, the table nobody answers for
+    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1.0],[P.fl+0.1,960,520,1.04]],d:3,draw:(x,tt)=>{const pt=k=>fin(tt,P.fl+0.3+k*0.35,0.5);
+      po_floor(x,tt,{out:["yusuf"],pose:{clara:{pose:"listen",pose2:"point",mix:pt(2),flip:false},jun:{pose:"listen",pose2:"point",mix:pt(0),flip:true},
+        mei:{pose:"hold",carry:heldNotebook},sam:{pose:"phone"}},front:x=>person(x,"noor",776,872,0.56,{pose:"listen",pose2:"point",mix:pt(1),t:tt,flip:true})});
+      po_tableCard(x,960,232,{hang:true,a:fin(tt,P.fl+0.2,0.5),q:fin(tt,P.nobody,0.5)});}},
+    // today again, the corridor's wall: the same card, pinned, the red question under it; the calendar turns to the next census day
+    {at:P.again,place:"corridor",keys:[[P.again,640,480,1.5],[P.again+0.4,1000,470,1.04]],d:2.6,draw:(x,tt)=>{po_tableCard(x,640,250,{q:1});
+      const f=clamp((tt-P.again-1.4)/2.6,0,1)*5,i=Math.min(4,Math.floor(f));po_calendar(x,PO_CW.cal[0],PO_CW.cal[1],PO_CAL[i],PO_CAL[i+1],f-i);
+      po_tagAt(x,tt,P.again+4.2,null,PO_CW.cal[0],PO_CW.cal[1]+250,"next census day",{size:30});}}]);
+  setScreen(ctx,S);po_pill(ctx,t,[[0,"Today"],[P.cen,"Last March · census day"],[P.again,"Today"]],fin(t,0.4,0.5));
+  po_tagAt(ctx,t,P.built,P.noor,R.jun,R.y,"Jun · built it",{size:30});po_tagAt(ctx,t,P.noorSaid,P.pl,R.noor,R.y,"Noor · designed it",{size:30});
+  po_tagAt(ctx,t,P.plan,P.juns-0.4,R.plan,R.y,"Planning · asked for it",{size:30});
+  wc_paperOver(ctx,S);});
+
 /* scaffold */
-["late","promise","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));
+["promise","answers","job","steps","readers","life","found"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"office",keys:[[0,960,540,1]]}]);wc_paperOver(ctx,S);}));

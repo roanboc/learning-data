@@ -299,9 +299,11 @@ function po_changeReq(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)
     ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(36,124,w-72,2);gv_lines(ctx,36,154,w-140,o.lines||2,28,0.9);
     const rows=o.rows||[];let ex=36;rows.forEach((r,i)=>{const ry=h-38-(rows.length-1-i)*50,lw=tw(ctx,r.l,30,600);wc_T(ctx,r.l,36,ry,{w:600,size:30,col:WC_MUTED});const vx=36+lw+14;
       if(r.v&&!r.hand){wc_T(ctx,r.v,vx,ry,{w:700,size:30,col:WC_DARK});ex=vx+tw(ctx,r.v,30,700);}
-      else{ctx.fillStyle=rgba(WC_MUTED,0.45);ctx.fillRect(vx,ry+8,Math.max(220,r.v?tw(ctx,r.v,30,600)+20:0),2);if(r.v)wc_hand(ctx,r.v,vx+4,ry,{size:30,col:GV_SIGN.ink,p:r.p==null?1:r.p});ex=vx+240;}});
+      else{const lw2=Math.max(220,r.v?tw(ctx,r.v,30,600)+20:0),wn=clamp(r.warn||0,0,1);if(wn>0){ctx.save();ctx.globalCompositeOperation="multiply";wc_glowAt(ctx,vx+lw2/2,ry-4,lw2*0.6,[240,150,130],0.5*wn);ctx.restore();}
+        ctx.fillStyle=rgba(mix(WC_MUTED,GV.redInk,wn),0.45+0.4*wn);ctx.fillRect(vx,ry+8,lw2,2+wn);if(r.v)wc_hand(ctx,r.v,vx+4,ry,{size:30,col:GV_SIGN.ink,p:r.p==null?1:r.p});ex=vx+240;}});
     if(o.box){const bx=ex+22,by=h-38-28,lit=clamp(o.boxLit||0,0,1);if(lit>0){ctx.save();ctx.globalCompositeOperation="multiply";wc_glowAt(ctx,bx+19,by+19,46,[255,214,120],0.7*lit);ctx.restore();}
-      ctx.save();ctx.strokeStyle=rgba(lit>0?mix(WC_INK,GV.goldInk,lit):WC_INK,0.8);ctx.lineWidth=2.6;ctx.strokeRect(bx,by,38,38);ctx.restore();}});ctx.restore();}
+      ctx.save();ctx.strokeStyle=rgba(lit>0?mix(WC_INK,GV.goldInk,lit):WC_INK,0.8);ctx.lineWidth=2.6;ctx.strokeRect(bx,by,38,38);ctx.restore();}
+    if(o.after)o.after(ctx);});ctx.restore();}
 // Clara's signature: one pen line, looped as a hand's is, its start at (0,0) on the line it sits on; po_sig draws it as far as p, and
 // po_sigAt says where the pen is then
 const PO_SIG=(()=>{const P=[];for(let i=0;i<=26;i++){const a=Math.PI*0.3+i/26*TAU*0.82;P.push([30+22*Math.cos(a),-20-24*Math.sin(a)]);}
@@ -314,5 +316,48 @@ const PO_JB={k:0.8,cards:[[940,400],[1150,400],[1360,400]],cr:[940,64,620,296],s
 function po_cardSmall(ctx,o){const k=PO_JB.k,P=PO_PC;ctx.save();ctx.translate(P.x,P.y);ctx.scale(k,k);ctx.translate(-P.x,-P.y);po_card(ctx,Object.assign({w:[1,1,1,1,1,1,1],frame:1,ring:1},o||{}));
   const s=o&&o.sign;if(s>0){const [sx,sy]=PO_JB.sig;po_sig(ctx,P.x+sx,P.y+sy,s);}if(o&&o.pen>0.01){const [sx,sy]=PO_JB.sig,[px,py]=po_sigAt(P.x+sx,P.y+sy,s||0);po_pen(ctx,px,py,o.pen);}ctx.restore();}
 
-const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
+/* ---------- 6 · Products and steps: the register of tables, the check that sends a change back, three kinds of product ---------- */
+// the data team's register of tables, pinned to their board (in its close-up): 33 rows, the shape of writing only. PO_RG: where it hangs,
+// its rows, and which rows are in which product (by the tags that hang at its side, each with how many of its tables)
+const PO_RG={x:280,y:86,w:580,h:780,r0:190,dy:17.8,col:676,tx:902,
+  prods:[["Learner records · 4",[1,4,6,9]],["Awards · 1",[12]],["Learners near an award · 1",[15]],["Learner wallet · 2",[19,22]],["Tuition forgone · 1",[26]],["Short-course follow-ups · 1",[30]]]};
+const po_rgY=i=>PO_RG.y+PO_RG.r0+i*PO_RG.dy,PO_RGP=(()=>{const m={};PO_RG.prods.forEach(([,rs],k)=>rs.forEach(r=>{m[r]=k;}));return m;})();
+const po_rgTagY=k=>340+k*92;
+// o.lit(i): how lit product row i is, 0 to 1; o.grey: the steps greyed; o.pulse, o.tick: the follow-up list's row lit again, and ticked
+function po_register(ctx,o){o=o||{};const R=PO_RG,grey=clamp(o.grey||0,0,1),Rn=wc_rng(733);gv_sheet(ctx,R.x,R.y,R.w,R.h);gv_pin(ctx,R.x+46,R.y+22,[60,110,170],0.9);gv_pin(ctx,R.x+R.w-46,R.y+22,[60,110,170],0.9);
+  wc_T(ctx,"Register of tables · 33",R.x+36,R.y+76,{w:800,size:36,col:WC_DARK});ctx.fillStyle=rgba(WC_MUTED,0.45);ctx.fillRect(R.x+36,R.y+100,R.w-72,2);
+  gv_wordBars(ctx,"table",R.x+36,R.y+142,22,"left");gv_wordBars(ctx,"product",R.col,R.y+142,22,"left");
+  for(let i=0;i<33;i++){const y=po_rgY(i),k=PO_RGP[i],len=130+Rn()*190,pl=50+Rn()*80;
+    if(k!=null){const l=clamp(o.lit?o.lit(i):0,0,1),pu=k===5?clamp(o.pulse||0,0,1):0;if(l>0){ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(mix([255,255,255],[246,214,130],l),1);
+        ctx.fillRect(R.x+22,y-15,R.w-44,18);if(pu>0){wc_glowAt(ctx,R.x+R.w/2,y-6,R.w*0.55,[255,206,96],0.55*pu);}ctx.restore();}
+      ctx.save();ctx.strokeStyle=rgba(WC_INK,0.42);ctx.lineCap="round";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(R.x+40,y-6);ctx.lineTo(R.x+40+len,y-6);ctx.stroke();
+      if(l>0){ctx.strokeStyle=rgba(GV.goldInk,0.75*l);ctx.beginPath();ctx.moveTo(R.col,y-6);ctx.lineTo(R.col+pl+40,y-6);ctx.stroke();}ctx.restore();
+      const tk=k===5?clamp(o.tick||0,0,1):0;if(tk>0)wc_pencil(ctx,[[R.x+R.w-50,y-8],[R.x+R.w-40,y+2],[R.x+R.w-20,y-22]],tk,{col:GV.greenInk,a:1,lw:5,seed:91});}
+    else{const g=mix(WC_INK,[196,198,204],grey);ctx.save();ctx.strokeStyle=rgba(g,0.42-0.12*grey);ctx.lineCap="round";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(R.x+40,y-6);ctx.lineTo(R.x+40+len,y-6);ctx.stroke();
+      if(grey>0){ctx.strokeStyle=rgba([170,174,182],0.5*grey);ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(R.col,y-6);ctx.lineTo(R.col+46,y-6);ctx.stroke();}ctx.restore();}}}
+// the six gold tags at the register's side, each with gold threads to its rows (a(k), 0 to 1, as each comes in)
+function po_rgTags(ctx,a){PO_RG.prods.forEach(([s,rs],k)=>{const u=clamp(a(k),0,1);if(u<=0)return;const ty=po_rgTagY(k);ctx.save();ctx.strokeStyle=rgba(GV.gold,0.85);ctx.lineWidth=2.4;ctx.lineCap="round";
+    rs.forEach(r=>{const y=po_rgY(r)-6,x0=PO_RG.x+PO_RG.w-26,x1=PO_RG.tx-6,e=easeCam(clamp(u*1.4,0,1));ctx.beginPath();ctx.moveTo(x1,ty);ctx.lineTo(lerp(x1,x0,e),lerp(ty,y,e));ctx.stroke();});ctx.restore();
+    const k2=0.9+0.1*spring(u);ctx.save();ctx.translate(PO_RG.tx,ty);ctx.scale(k2,k2);withA(ctx,clamp(u*2,0,1),()=>wc_tag(ctx,0,0,s,{size:30,wash:GV.gold,washA:0.42}));ctx.restore();});}
+// the register on the data room's board, as the room sees it: small, its writing only the shape of writing
+function po_registerRoom(ctx){gv_sheet(ctx,574,176,196,306);gv_pin(ctx,600,190,[60,110,170],0.6);gv_pin(ctx,744,190,[60,110,170],0.6);ctx.save();ctx.fillStyle=rgba(WC_DARK,0.5);ctx.fillRect(592,206,120,9);ctx.restore();
+  gv_lines(ctx,592,236,160,12,19,0.9);}
+// Tom's desk, from above: lighter wood, his keyboard's edge, a teal mug, a pot of pens
+function po_paintTomTop(ctx){const col=[214,180,140];ctx.fillStyle=rgba(WC_PAPER,1);ctx.fillRect(0,0,W,H);wc_wash(ctx,wc_rect(-40,-40,W+80,H+80),col,{kind:"plaster",line:false,seed:481});
+  ctx.save();ctx.globalCompositeOperation="multiply";const R=wc_rng(29);for(let i=0;i<56;i++){const y=R()*H;ctx.strokeStyle=rgba(wc_dim(col,0.16+R()*0.12),0.14+R()*0.12);ctx.lineWidth=1+R()*2.2;ctx.beginPath();ctx.moveTo(-20,y);
+    for(let x=0;x<=W+40;x+=80)ctx.lineTo(x,y+5*Math.sin(x/260+i)+3*Math.sin(x/100+i*2));ctx.stroke();}ctx.restore();
+  wc_part(ctx,wc_rect(-40,-40,420,104),[226,228,234],1);for(let i=0;i<8;i++)for(let j=0;j<2;j++)wc_flat(ctx,wc_rect(-26+i*46,-28+j*40,38,32),[244,245,248],1,"key");
+  wc_wash(ctx,wc_ell(1730,250,80,80,40),[74,150,150],{kind:"thing",lw:1.6,seed:483});wc_wash(ctx,wc_ell(1730,250,60,60,40),[112,76,52],{kind:"thing",line:false,seed:484});
+  wc_wash(ctx,[[1806,236],[1846,230],[1850,272],[1808,266]],[74,150,150],{kind:"thing",lw:1.2,seed:485});
+  wc_wash(ctx,wc_ell(190,860,62,62,36),[196,120,90],{kind:"thing",lw:1.4,seed:486});[[170,848,[230,190,60]],[196,872,[70,100,170]],[212,846,[200,70,60]]].forEach(([px,py,c])=>wc_wash(ctx,wc_ell(px,py,9,9,12),c,{kind:"thing",lw:1,seed:px}));}
+// where a change request's row r writes its value (in the paper's units), for the pen
+function po_crRowAt(ctx,h,rows,i){return[36+tw(ctx,rows[i].l,30,600)+18,h-38-(rows.length-1-i)*50];}
+// a data product's card, pinned up: its name, and what it's made from or what it's for, line by line, with a thin gold edge
+function po_prodCard(ctx,x,y,w,h,name,label,lines,a){if(a<=0.01)return;const k=0.92+0.08*spring(a);ctx.save();ctx.translate(x+w/2,y+h/2-30*(1-easeCam(clamp(a,0,1))));ctx.scale(k,k);ctx.translate(-w/2,-h/2);
+  withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,0,0,w,h,{kind:"card",seed:471+name.length});ctx.save();ctx.strokeStyle=rgba(GV.gold,0.9);ctx.lineWidth=4;rr(ctx,-5,-5,w+10,h+10,14);ctx.stroke();ctx.restore();
+    gv_pin(ctx,w/2,18,[60,110,170],0.85);wc_T(ctx,name,30,82,{w:800,size:34,col:WC_DARK});ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(30,104,w-60,2);
+    wc_T(ctx,label,30,154,{w:600,size:30,col:WC_MUTED});lines.forEach((l,i)=>wc_T(ctx,l,30,204+i*46,{w:600,size:32,col:WC_INK}));});ctx.restore();}
+const PO_KC=[[225,"Awards","made from:",["the student system"]],[725,"Learner records","made from:",["the student system","the learning platform","short courses"]],[1225,"Learners near an award","for:",["the near-award dashboard"]]];
+
+const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,tomTop:po_paintTomTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

@@ -1,0 +1,8 @@
+name: what does this change touch
+kind: business service
+promise: Every pull request says what it touches and who to tell, before it merges.
+how_to_ask: automatic, on every pull request
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: change without surprises
+status: confirmed

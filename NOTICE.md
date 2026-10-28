@@ -13,11 +13,12 @@ TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is 
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.
 
-DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same problem, everywhere* and *Off the shelf*, from the series on data governance, name DAMA-DMBOK and DCAM, and draw their own pictures of DAMA's knowledge areas and of the DMBOK's covers, only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
+DCAM is a trademark of the EDM Association (formerly the EDM Council). *The same problem, everywhere*, the prologue of the series on data governance, names DAMA-DMBOK and DCAM, and draws its own pictures of DAMA's knowledge areas and of the DMBOK's covers; *Off the shelf*, the film after it, draws its own picture of the newest DMBOK's cover, on a desk. Both do so only to identify those bodies of knowledge; this project is not affiliated with or endorsed by DAMA International or the EDM Association.
 
 ## Third-party components
 
 - **Narration:** a synthetic voice generated with [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) (Apache License 2.0), run through [kokoro-onnx](https://github.com/thewh1teagle/kokoro-onnx). The model is not included in this repository.
+- **Open standards' schemas:** the JSON schemas of the Open Data Contract Standard and the Open Data Product Standard, Bitol projects at the Linux Foundation, under the Apache License 2.0, copied unchanged into `films/analytics-engineering/project/governance/7-standards/` (its README says from where).
 - **Fonts:** Manrope and IBM Plex Mono, under the SIL Open Font License 1.1, loaded from Google Fonts by the web pages. Copies for rendering the film, with their licences, are in `films/inner-life-of-data/source/fonts/`. *Who is it?* also carries their Vietnamese subsets, from Google Fonts under the same licence, in `films/master-and-reference-data/2-who-is-it/source/src/fonts.js`.
 
 ## Content

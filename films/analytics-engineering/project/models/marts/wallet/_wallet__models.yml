@@ -38,38 +38,49 @@ models:
       - name: status
         description: '{{ doc("learner_status") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: enrolled_award_name
         description: The award the learner is enrolled in now, by its current name.
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: enrolled_award_type
         description: The kind of that award.
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: credit_points_required
         description: '{{ doc("credit_points_required") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credit_points_earned
         description: '{{ doc("credit_points_earned") }} Now, towards the award the learner is enrolled in.'
         data_type: int
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: credit_points_remaining
         description: '{{ doc("credit_points_remaining") }}'
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credentials_held
         description: Valid credentials the learner holds, of any kind.
         data_type: int
         constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
       - name: awards_held
         description: Valid awards conferred on the learner.
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: microcredentials_held
         description: Valid microcredentials the learner holds.
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: badges_held
         description: Valid badges the learner holds.
         data_type: int
+        config: {meta: {personal_data: none}}
       - name: credentials_revoked
         description: Credentials issued to the learner and later revoked.
         data_type: int
+        config: {meta: {personal_data: none}}
 
   - name: mart_wallet__credentials
     description: >
@@ -92,6 +103,7 @@ models:
         data_type: string
         constraints: [{type: not_null}]
         data_tests: [unique]
+        config: {meta: {personal_data: pseudonymous}}
       - name: learner_key
         description: '{{ doc("learner_key") }}'
         data_type: string
@@ -112,15 +124,19 @@ models:
       - name: credential_kind
         description: '{{ doc("credential_kind") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: credential_name
         description: '{{ doc("credential_name") }}'
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: issued_by
         description: The system that issued it, from seeds/reference/shared/key_sets.csv.
         data_type: string
+        config: {meta: {personal_data: none}}
       - name: issued_on
         description: '{{ doc("issued_on") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: status
         description: '{{ doc("credential_status") }}'
         data_type: string
@@ -129,9 +145,12 @@ models:
           - accepted_values:
               arguments:
                 values: [valid, expired, revoked]
+        config: {meta: {personal_data: none}}
       - name: revoked_on
         description: '{{ doc("revoked_on") }}'
         data_type: date
+        config: {meta: {personal_data: none}}
       - name: credit_points
         description: '{{ doc("credential_credit_points") }}'
         data_type: int
+        config: {meta: {personal_data: none}}

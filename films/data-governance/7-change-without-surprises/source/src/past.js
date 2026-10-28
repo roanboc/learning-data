@@ -46,8 +46,18 @@ const cw_path=(q,pts)=>{q.beginPath();pts.forEach((v,i)=>i?q.lineTo(v[0],v[1]):q
 
 /* ---------- something painted every frame, the way people are ---------- */
 // drawn flat into a spare canvas, then given the paper's grain, an uneven dry and a pencil line round it; box is [x, y, w, h] on the
-// place. Its sizes are rounded up, so the canvases it keeps stay few as a thing moves
-function cw_paint(ctx,box,draw,o){o=o||{};const [bx,by,bw,bh]=box,pad=10,w=Math.max(32,Math.ceil((bw+pad*2)/32)*32),h=Math.max(32,Math.ceil((bh+pad*2)/32)*32);
+// place. Its sizes go up to the next step of a short ladder (each about 1.4 times the last), so a thing that moves or grows reuses
+// a few kept canvases. Nothing is painted that the frame can't see, and a thing far bigger than the frame (a car passing the camera)
+// only where it can be seen: kept at every size it passed, a car driving out under the frame once filled the memory with canvases of
+// 12,000 px
+const CW_RUNGS=[64,96,128,176,240,320,448,640,896,1280,1792,2560],cw_rung=v=>CW_RUNGS.find(s=>s>=v)||Math.ceil(v/512)*512;
+// what the frame shows, in the units being drawn in, and a little more, so no edge cut there is seen: [x0, y0, x1, y1]
+function cw_seen(ctx){const m=ctx.getTransform().inverse(),cw=ctx.canvas.width,ch=ctx.canvas.height;let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+  for(const [px,py] of [[0,0],[cw,0],[0,ch],[cw,ch]]){const q=m.transformPoint({x:px,y:py});x0=Math.min(x0,q.x);y0=Math.min(y0,q.y);x1=Math.max(x1,q.x);y1=Math.max(y1,q.y);}
+  const g=(x1-x0)*0.03;return[x0-g,y0-g,x1+g,y1+g];}
+function cw_paint(ctx,box,draw,o){o=o||{};const pad=10,V=cw_seen(ctx);let [bx,by,bw,bh]=box;if(bx-pad>V[2]||by-pad>V[3]||bx+bw+pad<V[0]||by+bh+pad<V[1])return;
+  if(bw>2*(V[2]-V[0])||bh>2*(V[3]-V[1])){const x0=Math.max(bx,V[0]),y0=Math.max(by,V[1]);bw=Math.min(bx+bw,V[2])-x0;bh=Math.min(by+bh,V[3])-y0;bx=x0;by=y0;}
+  const w=cw_rung(bw+pad*2),h=cw_rung(bh+pad*2);
   const [c,cx]=pcanvas("cw",w,h);cx.translate(pad-bx,pad-by);draw(cx);wc_prep();const [fc]=wc_wpaint(c,w,h),ox=bx-pad,oy=by-pad;
   if(o.line!==false){const [tc,tx]=wc_buf("cwT"+w+"x"+h,w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,w,h);
     ctx.save();ctx.globalAlpha*=0.7*(o.lineA==null?1:o.lineA);for(const [dx,dy] of [[1.2,0.3],[-1,0.9],[0.3,-1.1]])ctx.drawImage(tc,ox+dx,oy+dy);ctx.restore();}

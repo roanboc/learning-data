@@ -15,6 +15,7 @@
 - Identity: A learner with no student ID keeps the key of the first system that recorded them, whatever keys join them later.
 - Identity: A recorded decision beats every rule; a decision that two keys are different people stops any rule from matching them.
 - History: Every version, dated when it took effect where the source says so, and when it was recorded otherwise.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}
 
 {% docs credential %}
@@ -26,6 +27,7 @@
 - Kind: microcredential. A credential for a small, assessed piece of learning, which can carry credit points towards an award. Owner: Learning team.
 - Kind: badge. A credential with no credit points. Owner: Learning team.
 - History: Issued on a date; revoked on a date, if it is. A revoked credential never counts.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}
 
 {% docs credit_towards_award %}
@@ -38,4 +40,5 @@
 - Rule: An award accepts a limited number of microcredentials towards its credit, the first ones issued (var microcredentials_per_award).
 - Rule: A revoked credential never counts, from the day it's revoked.
 - Rule: Credit changes over time, and every change is a new version.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}

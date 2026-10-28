@@ -1,0 +1,199 @@
+1
+00:00:01,400 --> 00:00:07,390
+Japón, años sesenta. La línea de motores de una automotriz avanza ante una fila de obreros.
+
+2
+00:00:08,090 --> 00:00:12,915
+Cualquier obrero que halla un problema tira de una cuerda, o aprieta un botón, a su alcance.
+
+3
+00:00:14,015 --> 00:00:19,650
+Se enciende una lámpara en el andon, el tablero sobre la línea, y el supervisor llega enseguida, a ayudar.
+
+4
+00:00:20,950 --> 00:00:26,331
+Si no se puede arreglar antes de terminar la tarea, la línea se detiene, y el equipo lo arregla entre todos.
+
+5
+00:00:27,831 --> 00:00:30,384
+Todos los obreros podían detener la línea, y lo hacían.
+
+6
+00:00:31,484 --> 00:00:35,059
+Estaba a su alcance, y traía enseguida a alguien que podía decidir.
+
+7
+00:00:36,359 --> 00:00:38,719
+Un derecho a decidir sobre los datos necesita lo mismo.
+
+8
+00:00:45,819 --> 00:00:48,916
+Hoy, Yusuf abre la carpeta llamada Quién decide.
+
+9
+00:00:49,616 --> 00:00:55,307
+Su política dice que cada área de datos, como estudiantes o cursos, tiene un dueño y un responsable de datos.
+
+10
+00:00:56,007 --> 00:01:01,674
+Su registro enumera ocho áreas. Tres dueños, y la mitad de los responsables, siguen por confirmar.
+
+11
+00:01:03,174 --> 00:01:05,949
+Así que las decisiones se toman por correo, o no se toman.
+
+12
+00:01:06,949 --> 00:01:14,092
+Cómo se mapea título a la definición del gobierno ha dado vueltas en un hilo de veintitrés respuestas. Nadie ha decidido.
+
+13
+00:01:17,792 --> 00:01:21,646
+Luego pregunta al equipo de datos a quién consultan si un significado no está claro.
+
+14
+00:01:22,846 --> 00:01:29,882
+Noor, la arquitecta de datos, le muestra la lista de su tablero: a quién preguntamos, área por área. Cada área tiene un nombre.
+
+15
+00:01:31,182 --> 00:01:34,991
+Por título, le preguntan a Mei Tanaka, en la oficina de registro.
+
+16
+00:01:36,691 --> 00:01:40,211
+Lo anotaron mientras construían, porque necesitaban a alguien a quien preguntar.
+
+17
+00:01:41,911 --> 00:01:46,894
+Yusuf lleva cada nombre a su oficina para confirmarlo, y pide los nombres que aún faltan.
+
+18
+00:01:51,794 --> 00:01:55,706
+En el camino, aclara tres roles, como sea que los llame una política.
+
+19
+00:01:57,106 --> 00:02:01,455
+El dueño responde por lo que significan los datos. Mei decide qué es un título.
+
+20
+00:02:02,955 --> 00:02:09,994
+El responsable de datos los cuida día a día. Mei también decide si dos registros son el mismo estudiante, y anota por qué.
+
+21
+00:02:11,594 --> 00:02:13,654
+Una persona puede tener ambos roles.
+
+22
+00:02:15,054 --> 00:02:22,714
+El custodio opera la plataforma donde están los datos. El equipo de Sam puede cambiar cualquier tabla, pero no decide qué es un título.
+
+23
+00:02:26,014 --> 00:02:28,482
+Cada área decide qué significan sus propias palabras.
+
+24
+00:02:29,582 --> 00:02:36,041
+La gobernanza fija solo las pocas reglas que todas comparten, como un solo glosario y una sola forma de clasificar los datos.
+
+25
+00:02:37,341 --> 00:02:43,300
+Cuando dos áreas no coinciden, o alguien necesita una excepción, el consejo decide en su próxima reunión.
+
+26
+00:02:44,400 --> 00:02:47,723
+Si no se pone de acuerdo, decide el vicerrector.
+
+27
+00:02:49,023 --> 00:02:51,982
+Todo lo demás lo decide el dueño, donde está el trabajo.
+
+28
+00:02:54,682 --> 00:02:57,470
+Luego Yusuf y Noor vuelven obligatorio nombrar un dueño.
+
+29
+00:02:58,170 --> 00:03:05,985
+Todo lo nuevo que leerán otros equipos lleva una hoja de aprobación. Una línea nunca queda vacía: quién responde por lo que significa.
+
+30
+00:03:07,085 --> 00:03:12,366
+El nuevo informe de Jun para Planificación vuelve con esa línea vacía, y una nota que dice qué agregar.
+
+31
+00:03:14,466 --> 00:03:18,227
+Le pregunta a Planificación. Clara Jensen responderá por él, y firma.
+
+32
+00:03:20,127 --> 00:03:23,847
+La acción más antigua del consejo, nombrar a los dueños de datos, se cierra.
+
+33
+00:03:27,147 --> 00:03:31,718
+Después, cada solicitud de cambio recibe una hoja de ruta, llenada a partir del registro.
+
+34
+00:03:33,418 --> 00:03:37,685
+Yusuf lleva el registro: si cambia un nombre ahí, todas las hojas de ruta lo siguen.
+
+35
+00:03:39,185 --> 00:03:43,605
+La siguiente solicitud de cambio de Jun mapea título a la definición del gobierno.
+
+36
+00:03:44,705 --> 00:03:50,121
+Su hoja de ruta la envía a Mei, por nombre, y luego a Noor y a Yusuf. Nadie tuvo que acordarse.
+
+37
+00:03:51,621 --> 00:03:56,827
+Como la cuerda en la línea: el trabajo llama a quien decide, en el momento en que importa.
+
+38
+00:04:00,527 --> 00:04:05,834
+Cuando Mei decide, su decisión queda anotada donde está el trabajo: qué, quién, cuándo y por qué.
+
+39
+00:04:07,434 --> 00:04:14,348
+Ya lleva una bitácora de qué registros son el mismo estudiante. El mapeo irá al libro de decisiones del área de cursos.
+
+40
+00:04:16,048 --> 00:04:19,549
+Cada área lleva el suyo, para que la próxima persona encuentre el porqué.
+
+41
+00:04:21,149 --> 00:04:23,766
+No en un hilo de correo que nadie encuentra.
+
+42
+00:04:27,466 --> 00:04:31,301
+Mei no pidió ser dueña. La nombraron porque siempre respondía.
+
+43
+00:04:32,901 --> 00:04:36,998
+Así que Yusuf le pide a su jefa el tiempo que hace falta: dos horas a la semana.
+
+44
+00:04:38,498 --> 00:04:43,290
+Mantiene su alcance pequeño y claro: título, no cada palabra que usa su oficina.
+
+45
+00:04:44,690 --> 00:04:49,064
+Y tiene a quién preguntar: a Yusuf, o al consejo, cuando los dueños no coinciden.
+
+46
+00:04:50,464 --> 00:04:53,213
+Un rol sin tiempo es un nombre en una hoja de cálculo.
+
+47
+00:04:56,913 --> 00:05:02,308
+En la línea, la cuerda traía a alguien que podía decidir. Aquí, cada cambio le pregunta a su dueño.
+
+48
+00:05:03,008 --> 00:05:05,816
+Un derecho a decidir es real cuando el trabajo lo pide.
+
+49
+00:05:07,416 --> 00:05:12,219
+Entonces Mei abre la solicitud de cambio de Jun, y hace una pregunta que nadie esperaba.
+
+50
+00:05:13,319 --> 00:05:18,277
+¿De qué título es dueña? Lo encontró definido en cinco lugares, y no coinciden.

@@ -1,12 +1,12 @@
 # Off the shelf: the music and sounds, played by tools/audio.py with From words to data's instruments (shared/tools/music.py).
 # A new palette for a new series (PLAYBOOK.md: vary the sound itself): a soft brass choir, warm and unhurried, holds the
 # chords; a low music box, small and close, marks the moments that land; and the series' own mark, four notes, 1-5-4-8, on one
-# horn with the music box an octave above, plays at the title and the end. D dorian, in open fifths, for the market town from 1215
-# to 1871; F major once the measures finally hold, and for the university today.
+# horn with the music box an octave above, plays at the title and the end. D, in open fifths, for the operating room before 2008;
+# F major once the checklist holds, and for the university today.
 # The sound since the author's review of the master data films (20 October 2026; PLAYBOOK.md §5): music plays under the opening,
 # where the story from history is told, then comes in from time to time, at a chapter's turn, under a moment on screen or in a pause
 # without words, never as a constant bed under the voice; and nothing in it trembles or pulses.
-#  - The horns hold the chords all through the market town's story, until the title; after that, only at each chapter's turn,
+#  - The horns hold the chords all through the operating room's story, until the title; after that, only at each chapter's turn,
 #    swelling in the pause between two chapters and let go as the new one's voice begins, under a few moments on screen, and from
 #    the film's last line to the end card. One player to a note, held straight, without vibrato, and a note the next chord keeps is
 #    held through the change: two players on one note would beat against each other, a slow pulse on a phone's speaker. The chords
@@ -18,10 +18,11 @@
 #  - Nothing loops. The music is sustained chords that come and go with the narration; nothing repeats in the background.
 #  - Every sound is an event on screen, at the moment it appears. Each effect below uses the same timing as the picture in
 #    src/scenes.js (the same word, and the same offset), so sound and picture stay together when the voice is re-timed. Things
-#    that drop into place (a card, a pin, a stamp, a bushel) land about 0.1 s after they start to move, so their sound comes then.
+#    that drop into place (a card, a pin, a stamp) land about 0.1 s after they start to move, so their sound comes then.
 # The music box means the same thing all through: three notes rising, 1-3-5, for a rule, a copy where the work happens and someone
-# who checks; two notes rising a step, to the note just under home, for a question no one can answer yet.
-# And everything stays low and soft: wooden knocks, paper, cork pins, rubber stamps and a mallet's thud, filtered below about 2.5 kHz.
+# who checks; two notes rising a step, to the note just under home, for a question no one can answer yet; and two notes rising
+# a third, A to C, when a check holds.
+# And everything stays low and soft: wooden knocks, paper, pencils, cork pins and rubber stamps, filtered below about 2.5 kHz.
 
 # when a word of a line is spoken, as the film's own wAt() estimates it: along the line's voiced length, from the words the voice reads
 import itertools, json as _json, pathlib as _pl
@@ -162,10 +163,6 @@ def tap(s, g=0.016, pan=0.0):
 def paper(s, g=0.03, pan=0.0, sec=0.45):
     """paper, softly: filtered noise with a swell"""
     x = tt(sec); X(filt(noise(sec), 'band', (250, 2000))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g, pan)
-def press(s, g=0.07, pan=0.0):
-    """a mallet on a steel punch: a low thud and a dull knock, nothing bright"""
-    x = tt(0.5); X(norm((np.sin(2 * np.pi * 72 * x) * np.exp(-x * 10) + 0.35 * filt(noise(0.5), 'band', (120, 800))[:len(x)] * np.exp(-x * 40)).astype(np.float32)), s, g, pan)
-    s_knock(s + 0.005, g * 0.45, pan, 170)
 def rubber(s, g=0.045, pan=0.0):
     """a rubber stamp on paper: a padded thump, and the paper under it"""
     x = tt(0.25); X(norm((np.sin(2 * np.pi * 120 * x) * np.exp(-x * 22) + 0.5 * filt(noise(0.25), 'band', (200, 1200))[:len(x)] * np.exp(-x * 45)).astype(np.float32)), s, g, pan)
@@ -176,21 +173,12 @@ def slide(s, g=0.022, pan=0.0, sec=0.42):
     """a binder drawn forward along a wooden shelf: a low, rough slide, and a soft stop"""
     x = tt(sec); X(filt(noise(sec), 'band', (140, 900))[:len(x)] * np.sin(np.pi * x / sec) ** 1.5 * (1 + 0.4 * np.sin(2 * np.pi * 31 * x)), s, g, pan)
     s_knock(s + sec * 0.92, g * 0.5, pan, 200)
-def clink(s, g=0.03, pan=0.0):
-    """a brass weight set down in a scale's pan: a short, low ring, darkened"""
-    x = tt(0.6); f = 410
-    X(norm(filt((np.sin(2 * np.pi * f * x) * np.exp(-x * 7) + 0.4 * np.sin(2 * np.pi * f * 2.32 * x) * np.exp(-x * 11) + 0.2 * np.sin(2 * np.pi * f * 4.1 * x) * np.exp(-x * 18)).astype(np.float32), 'low', 1800, 4)), s, g, pan)
 def air(s, sec=0.9, g=0.02, pan=0.0):
     """a breath of air, for an arc drawn or a ring going round"""
     s_air(s, sec, g, pan)
-def bushel(s, h, g=0.03, pan=0.0):
-    """a wooden measure set down on the exchange's table: a hollow knock, lower the bigger it is, and a little grain settling in it"""
-    f = 230 * (130 / h) ** 0.5; x = tt(0.35)
-    X(norm(filt((np.sin(2 * np.pi * f * x) * np.exp(-x * 26) + 0.5 * np.sin(2 * np.pi * f * 1.62 * x) * np.exp(-x * 40)).astype(np.float32), 'low', 1200)), s, g, pan)
-    X(filt(noise(0.35), 'band', (300, 1500))[:len(x)] * np.exp(-x * 14) * np.minimum(1, x / 0.03), s + 0.02, g * 0.12, pan)
 
-# chords (MIDI note numbers), low to high: D dorian in open fifths for the market town; F major for the measures that hold, and for
-# today. No two notes a semitone apart, where they would rub
+# chords (MIDI note numbers), low to high: D in open fifths for the operating room before 2008; F major for the checklist that
+# holds, and for today. No two notes a semitone apart, where they would rub
 D5 = [38, 45, 50, 57]; DM = [38, 45, 50, 53, 57]; C5 = [36, 43, 48, 55]; GADD = [43, 50, 55, 59, 62]; ASUS = [45, 52, 57, 62]
 FMAJ9 = [41, 48, 52, 55, 57]; BBMAJ9 = [46, 53, 57, 60, 62]; DM9 = [38, 45, 53, 60, 64]; CSUS = [36, 43, 48, 53, 55]
 GM7 = [43, 50, 53, 58]; A7SUS = [45, 52, 55, 62]
@@ -215,28 +203,47 @@ def even(a, b, chords):
     """chords one after another, from a to b, each as long"""
     return [(a + (b - a) * i / len(chords), ch) for i, ch in enumerate(chords)]
 
-# 1. One measure: the opening, with the horns all through it. Open fifths in D for 1215, the charter read again as each year turns;
-#    a major chord for the king's standards; a wooden knock for each bushel, each a different size; F major once it all works
-#    together, 1-3-5 for the law, the copy and the inspector; a weight set in the pan, the mallet on the punch twice, the last mark
-#    close; the mark under the title, over F in open fifths, held until the next chapter's voice
-J = 'measure'
-yrs = [G(J, 'repeat', 0.2 + 1.3 * i) for i in range(4)]
-hall, y1871, shop, close = G(J, 'kings', -0.4), W(J, 'county', 'In eighteen', -0.5), G(J, 'worked', -0.4), G(J, 'breath', -1.8)
-bed(even(S0(J), yrs[0], [D5, DM]) + even(yrs[0], hall, [C5, DM]) + [(hall, GADD)] + even(y1871, shop, [DM, ASUS])
-    + even(shop, close, [FMAJ9, BBMAJ9]) + [(close, FOPEN)], first('shelf'), 0.03, 1.5, 3.0)
-paper(G(J, 'quote', -0.1), 0.03, -0.1, 0.6)
-for y in yrs:
-    paper(y, 0.028, -0.3, 0.45)
-comb(62, W(J, 'kings', 'standards'), 0.05, 0.2)
-for i, h in enumerate([124, 150, 96, 170, 112, 140]):
-    bushel(W(J, 'county', 'bushel', -0.3 + 2.2 * i / 7 + 0.1), h, 0.03, P(330 + i * 250))
-knock(W(J, 'county', 'thirty'), 0.03, 0.0, 220)
-three([G(J, 'three'), W(J, 'three', 'a copy'), W(J, 'three', 'an inspector')])
-clink(W(J, 'three', 'checked', 0.5), 0.03, 0.1)
-for off in [0.19, 0.79]:
-    press(W(J, 'three', 'again and', off), 0.06, 0.1)
-press(G(J, 'breath', -0.555), 0.085)
-mark(G(J, 'breath', 1.0))
+# 1. The checklist: the opening, with the horns all through it. D in open fifths for the operating room before 2008, D minor as the
+#    steps are named, darkening to G minor as they're skipped; D minor again for what patients paid, and A, suspended, with its
+#    seventh, as something had to change; C, open, for the study in 2008; D again, bare, as the team pauses,
+#    and A, suspended, while the nurse holds them; F major once deaths fall, B flat as it all works together, F again for the one who
+#    checks; the mark under the title, over F in open fifths, held until the next chapter's voice. A pencil's tap as each step is
+#    named, and a soft stroke as each is struck through; a binder drawn from the guidelines' shelf; a tap as each harm is named;
+#    paper as the year turns; a pin as
+#    each hospital drops onto the map; a knock as each pause lights, and for each of the nurse's words; a pen's tap for each step
+#    confirmed, and two notes rising as the antibiotic is given; the card, and a music box note for each number; 1-3-5 for the
+#    list, the copy and the one who checks; a pen's tap as the nurse ticks, and for each box of the sign out
+J = 'checklist'
+close = G(J, 'breath', -0.7)
+bed([(S0(J), D5), (G(J, 'steps', -0.4), DM), (G(J, 'skipped', -0.4), GM7), (G(J, 'paid', -0.4), DM), (G(J, 'change', -0.4), A7SUS),
+     (G(J, 'y2008', -0.4), CSUS), (G(J, 'pause', -0.4), D5),
+     (G(J, 'hold', -0.4), ASUS), (G(J, 'fell', -0.4), FMAJ9), (G(J, 'worked', -0.4), BBMAJ9), (W(J, 'three', 'someone', -0.3), FMAJ9),
+     (close, FOPEN)], first('shelf'), 0.03, 1.5, 3.0)
+KNEW = [700, 580, 1450]  # where each step's note is, across the frame (OS_KNEW)
+for word, off, x in zip(['right', 'antibiotic', 'sponge'], [-0.1, -0.15, -0.15], KNEW):
+    tap(W(J, 'steps', word, off + 0.1), 0.016, P(x))
+slide(W(J, 'skipped', 'written', -0.2), 0.022, P(650), 0.6)
+for k, x in enumerate(KNEW):
+    paper(W(J, 'skipped', 'often', -0.05 + 0.32 * k), 0.016, P(x), 0.35)
+for word, x in [('infections', 752), ('mistakes', 1116), ('deaths', 1532)]:  # each harm's tag, where it is in the frame
+    tap(W(J, 'paid', word, -0.1 + 0.1), 0.016, P(x))
+paper(G(J, 'y2008', -0.35), 0.022, -0.7, 0.45)
+for k, x in enumerate([254, 483, 906, 1098, 1318, 1102, 1552, 1839]):  # the eight hospitals' cities, west to east as they drop
+    pin(W(J, 'y2008', 'study', -0.1 + 0.26 * k + 0.1), 0.024 + 0.004 * (k % 3), P(x))
+for k, x in enumerate([560, 960, 1360]):
+    knock(G(J, 'pause', -0.05 + 0.62 * k), 0.022, P(x), 300)
+knock(W(J, 'pause', 'read', 0.0), 0.026, P(1240))
+for word, off in [('step', -0.1), ('confirmed', -0.05)]:
+    tap(W(J, 'hold', word, off + 0.15), 0.018, 0.0)
+knock(W(J, 'hold', 'hold', -0.1), 0.028, P(1300))
+comb(69, W(J, 'hold', 'done', -0.1), 0.04, -0.4); comb(72, W(J, 'hold', 'done', 0.04), 0.04, -0.3)
+paper(G(J, 'fell', -0.2), 0.026, 0.0, 0.5)
+comb(60, W(J, 'fell', 'one point', -0.1), 0.045, -0.2); comb(67, W(J, 'fell', 'zero point', -0.1), 0.045, 0.2)
+three([W(J, 'three', 'one agreed'), W(J, 'three', 'a copy'), W(J, 'three', 'someone')])
+tap(G(J, 'breath', -1.05), 0.014, P(1676))
+for k in range(3):
+    tap(G(J, 'breath', 0.25 + 0.45 * k + 0.15), 0.02, -0.2 + 0.2 * k)
+mark(G(J, 'breath', 2.1))
 # 2. The shelf: the opening's last chord let go as the voice begins. A music box note for Yusuf's name; a knock for the shelf's sign;
 #    a low note for the score; a pen for each TBC; the rubber stamp on the minutes; a knock for David's question
 J = 'shelf'
@@ -254,8 +261,9 @@ comb(65, W(J, 'census', 'four', -0.1), 0.05, -0.3)
 comb(69, W(J, 'draft', 'four', -0.1), 0.05, 0.3)
 ask(G(J, 'which')); knock(G(J, 'which'), 0.026, 0.0, 200)
 # 4. Who decides? The turn on C, open, as the question rings. The two numbers' notes together, a third apart, as both are right; the chip and the new row on
-#    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn, and the question; three notes
-#    that don't resolve for three answers; the TBC stamp
+#    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn; a knock as Jun reaches Yusuf's
+#    office, and the question; three notes that don't resolve for three answers; the TBC stamp; and the operating room before the
+#    checklist, a pencil's tap as each one's step is named, and the question no one can answer yet, where no one checks them all
 J = 'decides'
 turn(J, CSUS)
 right = W(J, 'both', 'right')
@@ -263,14 +271,18 @@ comb(65, right, 0.045, -0.2); comb(69, right + 0.08, 0.045, 0.3)
 knock(W(J, 'monday', 'the word', 0.08), 0.024, 0.3, 320)
 tap(W(J, 'monday', 'microcredentials', 0.0), 0.02, 0.2)
 pin(G(J, 'before', 0.0), 0.03, 0.0)
-knock(G(J, 'gov', 0.2), 0.026, -0.3); knock(W(J, 'gov', 'ours', 0.0), 0.026, 0.3, 280)
-air(W(J, 'gov', 'Who'), 0.9, 0.018, 0.0); ask(W(J, 'gov', 'Who', 0.6))
+knock(G(J, 'gov', 0.2), 0.026, -0.3); knock(W(J, 'gov', 'which', 0.0), 0.026, 0.3, 280)
+air(W(J, 'gov', 'which'), 0.9, 0.018, 0.0)
+knock(W(J, 'ask', 'takes', 0.5), 0.024, 0.15, 260); ask(W(J, 'ask', 'who', 0.05))
 for k, word in enumerate(['Mei', 'Jun', 'Planning']):
     comb([69, 67, 64][k], W(J, 'answers', word, -0.1), 0.045, [-0.5, 0.5, 0.0][k])
 rubber(W(J, 'tbc', 'to be', -0.07), 0.05)
+for k, x in enumerate([360, 930, 1180]):
+    tap(W(J, 'room', 'everyone', 0.32 * k + 0.1), 0.014, P(x))
+ask(W(J, 'room', 'no one'), 0.035)
 # 5. What governance is for: the turn on B flat. Paper as each note is stuck beside policy 12; a knock for "deciding who decides"; the
-#    horns as each decision goes out to an office and lands; 1-3-5 in the shop again, and the brass weight set in the pan; a knock
-#    as governance's card goes up, and a pen for each tick on the decisions
+#    horns as each decision goes out to an office and lands; 1-3-5 for the checklist again, the page, the copy in the room and the
+#    nurse; a knock as governance's card goes up, and a pen for each tick on the decisions
 J = 'for'
 turn(J, BBMAJ9)
 for word in ['who', 'how']:
@@ -278,7 +290,6 @@ for word in ['who', 'how']:
 knock(W(J, 'for', 'deciding', -0.1), 0.028, 0.0)
 moment(W(J, 'for', 'making', -0.2), W(J, 'for', 'making', 1.0), [53, 60, 65, 69], 0.024)
 three([W(J, 'like', 'a rule'), W(J, 'like', 'a copy'), W(J, 'like', 'someone')])
-clink(W(J, 'like', 'someone', 0.3), 0.026, 0.1)
 knock(W(J, 'mgmt', 'Governance', -0.1), 0.028, -0.2)
 for k in range(4):
     tap(W(J, 'mgmt', 'checks', 0.12 * k + 0.1), 0.014, [-0.6, -0.3, 0.3, 0.6][k])

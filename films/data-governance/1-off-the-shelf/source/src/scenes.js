@@ -15,71 +15,103 @@ function os_pill(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k
 function os_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
 
-// ---- 1 · One measure: from a market in 1215 to an inspector in the 1880s ----
-// the wine stall's three measures, era by era: never the same three
-const OS_JUGS=[[0.32,0.24,0.4],[0.26,0.38,0.3],[0.4,0.28,0.22],[0.3,0.34,0.26],[0.24,0.42,0.33]];
-function os_jugs(ctx,era,a,k){[230,330,440].forEach((x,j)=>{const h=OS_JUGS[era][j]*200;withA(ctx,a,()=>{ctx.save();ctx.translate(x,OS_MK.wine[2]+4);ctx.scale(k,k);os_jugAt(ctx,0,0,h*0.62,h);ctx.restore();});});}
-// the clerk's gallon, carried in both hands
-function os_heldGallon(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.drawImage(os_gallonC(),mx-60,my-112);fingers(cx,P_,[[mx-36,my-26],[mx+36,my-26]]);}
-// a hand set level with the scale's pan, holding the weight out over it
-POSE.os_place={L:[0.14,-0.06],R:[1.2,-4.38],hand:"open",feet:30,shift:4,tilt:-0.03,turn:0.22,gaze:[0.7,0.3],look:1};
+// ---- 1 · The checklist: the steps everyone knew, often skipped, and what patients paid; then, in 2008, a checklist read aloud in the room ----
+// where each of the team stands, [x, feet, size]: the anaesthetist at the table's head, the surgeon and the scrub nurse behind the
+// table, and the nurse who has the checklist in front of the door
+const OS_TEAM={anaes:[360,890,0.8],surgeon:[930,890,0.8],scrub:[1180,890,0.78],nurse:[1716,936,0.84]};
+// the team in the operating room. o gives each one's pose and what they hold ({x:...} moves them, false leaves them out, a function
+// draws them its own way); the table, the patient and the trolley are in front of the three behind the table, the nurse in front of all
+function os_team(x,tt,o){o=o||{};const one=(id,k,d)=>{const v=o[k];if(v===false)return;if(typeof v==="function")return v(x,tt);
+    const [px,py,s]=OS_TEAM[k],q=Object.assign({t:tt},d,v);person(x,id,q.x==null?px:q.x,py,s,q);};
+  one("os_anaes","anaes",{pose:"stand"});one("os_surgeon","surgeon",{pose:"os_sterile"});one("os_scrub","scrub",{pose:"os_sterile"});
+  os_counts(x,[7,3,9],1);os_orFront(x);os_patientHead(x,tt,o.awake);one("os_nurse","nurse",{pose:"os_read",carry:os_heldClip,flip:true});}
+// the nurse walking with a tray, on a gv_walk
+function os_trayWalk(x,tt,w){const [,y,s]=OS_TEAM.nurse;person(x,"os_nurse",w.x,y-w.bob,s,{pose:"os_tray",pose2:w.moving?(w.swing>0?"os_trayA":"os_trayB"):null,
+  mix:Math.abs(w.swing),flip:w.flip,carry:os_heldTray,t:tt});}
+// the steps everyone knew, each a tag by its own thing (the wristband, the antibiotic, the sponges on the trolley), with a pencil line
+// to it; a (0 to 1) as it comes in, k (0 to 1) as it's struck through in red pencil
+const OS_KNEW=[["the right patient",700,500,[700,596]],["the antibiotic",580,300,[552,534]],["every sponge counted",1450,560,[1506,602]]];
+function os_knew(x,i,a,k){if(a<=0.01)return;const [s,tx,ty,[px,py]]=OS_KNEW[i];withA(x,a,()=>{wc_pencil(x,[[tx+(px-tx)*0.2,ty+26],[px,py]],1,{seed:40+i,lw:2.4});
+  const w=wc_tag(x,tx,ty,s,{align:"center"});if(k>0)wc_pencil(x,[[tx-w/2-10,ty+6],[tx+w/2+10,ty-4]],k,{col:GV.redInk,lw:5,seed:50+i});});}
+// a paper veil over the room but not the patient: the room fades back (a, 0 to 1), and the patient, asleep on the table, stays clear
+function os_veil(x,a){if(a<=0.01)return;x.save();x.translate(600,600);x.scale(1,0.5);const g=x.createRadialGradient(0,0,200,0,0,640);
+  g.addColorStop(0,rgba(WC_PAPER,0));g.addColorStop(1,rgba(WC_PAPER,0.55*a));x.fillStyle=g;x.fillRect(-2400,-2400,4800,4800);x.restore();}
+// the checklist's three pauses across the top, joined by a pencil line: each lights gold as it's named; keep stays lit
+const OS_PAUSES=[["Sign in",560],["Time out",960],["Sign out",1360]];
+function os_pauses(x,tt,t0,keep,a){if(a<=0.01)return;withA(x,a,()=>{wc_pencil(x,[[600,92],[1320,92]],fin(tt,t0-0.2,0.8),{seed:60,lw:2.4});
+  OS_PAUSES.forEach(([s,px],i)=>{const t1=t0+0.62*i,on=fin(tt,t1,0.3),lit=i===keep?on:on*(1-fin(tt,t1+0.7,0.4));os_tagAt(x,tt,t1-0.2,null,px,92,s,{size:32});
+    if(lit>0.01)withA(x,lit,()=>os_tagAt(x,tt,t1-0.2,null,px,92,s,{size:32,wash:GV.gold,washA:0.55}));});});}
+// the study's result on a card: deaths after surgery, in every 100 patients, before the checklist and with it; each bar grows in turn
+function os_result(x,u1,u2,a){if(a<=0.01)return;const cx=960,top=150,w=820,h=640,base=top+h-120,unit=200;withA(x,a,()=>{
+  wc_panel(x,cx-w/2,top,w,h,{kind:"card",seed:77});wc_T(x,"Deaths after surgery",cx,top+80,{w:800,size:46,align:"center",col:WC_DARK});
+  wc_T(x,"in every 100 patients",cx,top+128,{w:500,size:30,align:"center",col:WC_MUTED});
+  [[1.5,"1.5","before",GV_PAST,u1,-170],[0.8,"0.8","with the checklist",GV.green,u2,170]].forEach(([v,s,l,col,u,dx])=>{const e=easeCam(clamp(u,0,1)),bh=v*unit;
+    if(e>0){x.save();x.beginPath();x.rect(cx+dx-90,base-bh*e,180,bh*e+2);x.clip();wc_flat(x,wc_rect(cx+dx-74,base-bh,148,bh),col,1,"bar");x.restore();}
+    withA(x,clamp(u*2-0.6,0,1),()=>wc_T(x,s,cx+dx,base-bh*e-26,{w:800,size:60,align:"center",col:WC_DARK}));wc_T(x,l,cx+dx,base+52,{w:600,size:32,align:"center",col:WC_INK});});
+  wc_pencil(x,[[cx-320,base],[cx+320,base]],1,{seed:78,lw:3});});}
 
-scene("measure",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>{const again=wAt(sc,"three","again and");
-    return{years:[0,1,2,3].map(i=>c.repeat+0.2+1.3*i),hall:c.kings-0.4,y1871:wAt(sc,"county","In eighteen")-0.5,shop:c.worked-0.4,close:again-0.3,
-      hits:[again+0.19,again+0.79,c.breath-0.555],title:c.breath+0.7,magna:wAt(sc,"m1215","Magna"),stds:wAt(sc,"kings","standards"),officers:wAt(sc,"kings","Officers"),
-      now:wAt(sc,"kings","now and"),bushel:wAt(sc,"county","bushel"),thirty:wAt(sc,"county","thirty"),copy:wAt(sc,"three","a copy"),insp:wAt(sc,"three","an inspector"),
-      chk:wAt(sc,"three","checked"),law:wAt(sc,"three","with the law")};});
-  const mk=[[0,"England · 1215"],...P.years.map((y,i)=>[y,["England · 1225","England · 1297","England · 1640","England · 1824"][i]]),[P.hall,"England · 1497"],[P.y1871,"England · 1871"],[P.shop,"England · 1880s"]];
+scene("checklist",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({right:wAt(sc,"steps","right"),give:wAt(sc,"steps","Give"),anti:wAt(sc,"steps","antibiotic"),
+    sponge:wAt(sc,"steps","sponge"),gd:c.skipped-0.3,written:wAt(sc,"skipped","written"),busy:wAt(sc,"skipped","but")-0.2,often:wAt(sc,"skipped","often"),
+    pd:c.paid-0.4,inf:wAt(sc,"paid","infections"),mis:wAt(sc,"paid","mistakes"),dea:wAt(sc,"paid","deaths"),
+    map:c.y2008-0.35,study:wAt(sc,"y2008","study"),op:c.pause-0.45,paused:wAt(sc,"pause","paused"),read:wAt(sc,"pause","read"),clip:c.hold-0.35,
+    step:wAt(sc,"hold","step"),conf:wAt(sc,"hold","confirmed"),hl:wAt(sc,"hold","and the")-0.25,hold:wAt(sc,"hold","hold"),done:wAt(sc,"hold","done"),
+    fell:c.fell-0.4,from:wAt(sc,"fell","one point"),to:wAt(sc,"fell","zero point"),wk:c.worked-0.4,list:wAt(sc,"three","one agreed"),
+    copy:wAt(sc,"three","a copy"),who:wAt(sc,"three","someone"),title:c.breath+1.8}));
+  const mk=[[0,"Before 2008"],[P.map,"2008"]],stepsA=tt=>[fin(tt,P.right-0.1,0.4),fin(tt,P.anti-0.15,0.4),fin(tt,P.sponge-0.15,0.4)];
   gv_shots(ctx,S,t,sc.dur,[
-    // 1215: the sheriff's crier reads the charter at the market cross; the stalls listen
-    {at:0,place:"market",keys:[[0,960,540,1],[c.quote-0.8,940,480,1.16]],d:3.4,draw:(x,tt)=>{const M=OS_MK;
-      person(x,"miller",1460,880,0.64,{pose:"listen",t:tt,flip:true});os_jugs(x,0,1,1);os_proclaim(x,M.wine[1]-14,470,0,1);
-      person(x,"vintner",650,872,0.6,{pose:"listen",t:tt,flip:true});person(x,"crier",M.crier,M.step+4,0.58,{pose:"hold",t:tt,carry:heldScroll});
-      person(x,"buyer",1130,915,0.64,{pose:"listen",t:tt});person(x,"alewife",760,940,0.66,{pose:"hold",t:tt,carry:heldJug,flip:true});
-      os_tagAt(x,tt,P.magna-0.1,P.years[0]-0.6,620,250,"Magna Carta");
-      const q=gv_io(tt,c.quote-0.1,P.years[0]-0.5,0.35);gv_say(x,1000,150,["One measure of wine","throughout our kingdom."],934,360,{a:q,k:0.92+0.08*spring(fin(tt,c.quote-0.1,0.5))});}},
-    // the centuries pass at the wine stall: the charter read again, the measures still not the same
-    {at:P.years[0]-0.3,place:"market",keys:[[P.years[0]-0.3,500,560,1.9],[P.years[3]+0.4,470,580,1.98]],d:2.6,push:0,draw:(x,tt)=>{let e=0;P.years.forEach((y,i)=>{if(tt>=y)e=i+1;});
-      const u=e>0?fin(tt,P.years[e-1],0.45):1;if(u<1)os_jugs(x,e-1,1-u,1);os_jugs(x,e,u,0.6+0.4*spring(u));
-      let f=1,seal=1;P.years.forEach(y=>{const v=(tt-(y-0.3))/0.6;if(v>0&&v<1){f=v;seal=0;}else if(v>=1&&v<1.8)seal=spring(clamp((v-1)/0.6,0,1));});
-      os_proclaim(x,OS_MK.wine[1]-14,470,f>=1?0:f,seal);}},
-    // 1497: the king's standards in the market hall's cupboard; the clerk of the market takes the gallon to a trader's jug
-    {at:P.hall,place:"hall",keys:[[P.hall,960,560,1.04],[P.officers,1060,590,1.12]],d:2.6,draw:(x,tt)=>{const [cx,cy,cw]=OS_HL.cup,take=P.officers-0.6,
-        g=fin(tt,P.stds-0.3,0.6),u=clamp((tt-take)/0.55,0,1),w=gv_walk(tt,P.officers+0.1,860,1150,260),near=fin(tt,P.now-0.4,0.5);
-      os_standards(x,u>0,g);os_tagAt(x,tt,P.stds-0.3,P.officers-0.3,cx+cw/2,cy-62,"the king's standards");
-      person(x,"trader",1390,930,0.78,{pose:"hold",t:tt,carry:heldJug,flip:true});
-      if(u>0&&u<1){const a=easeCam(u),gx=lerp(cx+215+60,w.x-22,a),gy=lerp(cy+120+70,700,a)-90*Math.sin(Math.PI*a);x.drawImage(os_gallonC(),gx-60,gy-70);}
-      if(tt<P.officers+0.1)person(x,"clerk",860,960,0.8,{pose:"stand",pose2:"reach",mix:clamp((tt-take)/0.4,0,1)*(1-fin(tt,take+0.55,0.3)),t:tt,flip:true,carry:u>=1?os_heldGallon:null});
-      else gv_walker(x,"clerk",w,960,0.8,{t:tt,carry:os_heldGallon,pose:near>0?"hold":null});
-      os_tagAt(x,tt,P.now-0.3,null,1270,250,"checked now and then");}},
-    // 1871: a corn exchange, and one county's bushels, every one a different size
-    {at:P.y1871,place:"exchange",keys:[[P.y1871,960,540,1],[P.thirty,960,520,1.06]],d:2.4,draw:(x,tt)=>{
-      person(x,"grocer",1640,880,0.74,{pose:"listen",t:tt,flip:true});os_exTable(x);
-      [124,150,96,170,112,140].forEach((h,i)=>{const t0=P.bushel-0.3+2.2*i/7,u=fin(tt,t0,0.5),bx=330+i*250;if(u<=0)return;const k=spring(u);
-        x.save();x.translate(bx,OS_EX.table[2]+4);x.scale(k,k);os_measureAt(x,0,0,h*1.1,h*0.8);x.restore();
-        os_tagAt(x,tt,t0+0.15,null,bx,OS_EX.table[2]-h*0.8-52,"bushel",{size:28});});
-      os_tagAt(x,tt,P.thirty-0.15,null,960,190,"32 measures in one county",{size:34});}},
-    // the 1880s: a grocer's shop: the law on the counter, a copy in the inspector's case, the inspector checking the shop's weight
-    {at:P.shop,place:"shop",keys:[[P.shop,960,540,1],[P.insp,1060,520,1.06]],d:2.4,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.5,
-        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
-      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
-      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,0),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);
-      os_case(x,1712,905,fin(tt,P.copy-0.3,0.6));
-      const m=clamp((tt-(P.chk-0.4))/0.5,0,1),back=fin(tt,land+0.3,0.5);
-      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
-      os_tagAt(x,tt,c.three,null,650,500,"one definition, in law");os_tagAt(x,tt,P.copy-0.05,null,1712,652,"a copy in every county");
-      os_tagAt(x,tt,P.insp-0.05,null,1380,186,"an inspector who checks");}},
-    // close: his mark on each weight, again and again, with the law beside him
-    {at:P.close,place:"stamp",keys:[[P.close,960,540,1]],push:0.03,draw:(x,tt)=>{const s=OS_ST.s,ws=OS_ST.weights,y=OS_ST.base,h=P.hits,[ax,ay,as]=OS_ST.act;
-      gv_halo(x,ax-200*as,ay-150*as,400*as,170*as,GV.gold,0.9*fin(tt,P.law-0.1,0.8));
-      ws.forEach((wx,i)=>os_iron(x,wx,y,fin(tt,h[i],0.25),s));
-      // the tools go from weight to weight between the blows, lifting as they go
-      const leg=(a,b,t0,t1)=>{const v=clamp((tt-t0)/(t1-t0),0,1);return[lerp(a,b,easeCam(v)),80*Math.sin(Math.PI*v)];},
-        [tx,lift]=tt<h[1]-0.2?leg(ws[0],ws[1],h[0]+0.08,h[1]-0.16):leg(ws[1],ws[2],h[1]+0.25,h[2]-0.55),u=Math.max(...h.map(hh=>os_strike(tt,hh-0.21,0.6))),
-        away=easeCam(clamp((tt-h[2]-0.35)/1.1,0,1));
-      // done: the hands go, and the last mark shows
-      x.save();x.translate(300*away,860*away);os_markTools(x,tx,y,s,u,lift);x.restore();}}]);
-  os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.close,0.4)));
+    // an operating room: the team, and the patient, awake; the steps everyone knew, each by its own thing as it's named
+    {at:0,place:"theatre",keys:[[0,960,540,1],[4.4,920,560,1.07]],d:2.6,draw:(x,tt)=>{const a=stepsA(tt),inj=fin(tt,P.give,0.6);
+      gv_halo(x,712,604,110,70,GV.gold,0.8*a[0]);gv_halo(x,530,510,100,100,GV.gold,0.8*a[1]);gv_halo(x,1456,580,110,80,GV.gold,0.8*a[2]);
+      os_team(x,tt,{awake:true,anaes:{pose:"stand",pose2:"os_inject",mix:inj,carry:inj>0.5?os_heldSyringe:null},nurse:false});
+      [0,1,2].forEach(i=>os_knew(x,i,a[i],0));}},
+    // the steps were written down: the guidelines on a shelf down the corridor
+    {at:P.gd,place:"guides",keys:[[P.gd,900,520,1.08],[P.gd+0.2,780,440,1.5]],d:2.2,push:0.02,draw:(x,tt)=>{const u=fin(tt,P.written-0.2,0.6);
+      gv_halo(x,650,270,130,240,GV.gold,0.85*u);os_guideBinder(x,easeCam(u));os_tagAt(x,tt,P.written,null,714,214,"written in guidelines");}},
+    // but in a busy room: the nurse hurries in with a tray, the anaesthetist turns to the screen; the steps are skipped, struck through
+    {at:P.busy,place:"theatre",keys:[[P.busy,960,540,1.02],[P.busy+0.1,940,550,1.06]],d:2.4,draw:(x,tt)=>{
+      os_team(x,tt,{anaes:{pose:"os_screen",flip:true},surgeon:{pose:"os_sterileUp"},scrub:{pose:"os_tray",carry:os_heldTray},
+        nurse:(q,tt)=>os_trayWalk(q,tt,gv_walk(tt,P.busy+0.3,1800,1716,160))});
+      [0,1,2].forEach(i=>os_knew(x,i,1,clamp((tt-(P.often-0.05+0.32*i))/0.4,0,1)));}},
+    // what patients paid for it: the camera goes on from there to the patient, asleep, as the room fades back; a red tag for each harm as it's named
+    {at:P.pd,place:"theatre",keys:[[P.pd,940,550,1.0865],[P.pd+0.1,760,566,1.28]],d:3.0,push:0.015,draw:(x,tt)=>{
+      os_team(x,tt,{anaes:{pose:"os_screen",flip:true},surgeon:{pose:"os_sterileUp"},scrub:{pose:"os_tray",carry:os_heldTray},
+        nurse:(q,tt)=>os_trayWalk(q,tt,gv_walk(tt,P.busy+0.3,1800,1716,160))});
+      [0,1,2].forEach(i=>os_knew(x,i,1-fin(tt,P.pd+0.3,0.8),1));os_veil(x,fin(tt,P.pd+0.3,1.4));
+      [[P.inf,600,"infections"],[P.mis,880,"mistakes"],[P.dea,1190,"avoidable deaths"]].forEach(([t0,px,s])=>os_tagAt(x,tt,t0-0.1,null,px,330,s,{wash:GV.red,washA:0.3}));}},
+    // 2008: eight hospitals in eight countries, rich and poor
+    {at:P.map,place:"worldmap",keys:[[P.map,960,480,1.0],[P.study,960,470,1.05]],d:2.6,draw:(x,tt)=>{
+      OS_CITY.forEach((_,i)=>os_cityPin(x,i,fin(tt,P.study-0.1+0.26*i,0.5)));}},
+    // three pauses in every operation; at the time out the team stops, and the nurse reads the checklist aloud
+    {at:P.op,place:"theatre",keys:[[P.op,960,540,1],[P.op+0.1,980,530,1.04]],d:2.6,draw:(x,tt)=>{const p=fin(tt,P.paused-0.2,0.5);
+      os_team(x,tt,{anaes:{pose:"stand",pose2:"listen",mix:p},surgeon:{pose:"os_sterile",pose2:"os_sterileUp",mix:p*0.6,carry:os_heldScalpel},scrub:{pose:"os_sterile"}});
+      os_pauses(x,tt,c.pause+0.05,1,1);gv_halo(x,1590,420,250,540,GV.gold,0.6*fin(tt,P.read-0.6,0.6));
+      gv_say(x,1240,262,["Time out.","Antibiotic given?"],1688,500,{a:fin(tt,P.read-0.1,0.3),k:0.92+0.08*spring(fin(tt,P.read-0.1,0.5))});}},
+    // each step confirmed: the time out's boxes ticked in turn; the antibiotic's still open
+    {at:P.clip,place:"clip",keys:[[P.clip,960,540,1],[P.clip+0.1,900,520,1.08]],d:2.4,push:0.02,draw:(x,tt)=>{
+      os_page(x,[1,1,1,fin(tt,P.step-0.1,0.5),fin(tt,P.conf-0.05,0.5),0],{lit:1,halo:5,haloA:fin(tt,P.conf+0.4,0.5)});}},
+    // and the nurse can hold the team: "Wait." The surgeon waits, scalpel up, until the anaesthetist has given the antibiotic
+    {at:P.hl,place:"theatre",keys:[[P.hl,1234,520,1.4],[P.hold+0.45,960,540,1.0]],d:1.8,push:0,draw:(x,tt)=>{const st=fin(tt,P.hold-0.4,0.4)*(1-fin(tt,P.done+0.3,0.5)),
+        inj=fin(tt,P.hold+0.3,0.6);
+      os_team(x,tt,{anaes:{pose:"stand",pose2:"os_inject",mix:inj,carry:inj>0.5?os_heldSyringe:null},surgeon:{pose:"os_sterileUp",carry:os_heldScalpel},
+        nurse:{pose:"os_read",pose2:"os_stop",mix:st,carry:st>0.5?os_heldClipL:os_heldClip,flip:true}});
+      gv_say(x,1300,286,["Wait."],1660,470,{a:fin(tt,P.hold-0.2,0.3)*(1-fin(tt,P.done+0.2,0.3)),k:0.92+0.08*spring(fin(tt,P.hold-0.2,0.5))});
+      gv_halo(x,530,510,100,100,GV.gold,0.8*fin(tt,P.done-0.3,0.5));os_tagAt(x,tt,P.done-0.1,null,580,300,"antibiotic given",{wash:GV.green,washA:0.3});}},
+    // what changed: deaths after surgery nearly halved
+    {at:P.fell,place:"worldmap",keys:[[P.fell,980,470,1.02]],push:0.01,draw:(x,tt)=>{OS_CITY.forEach((_,i)=>os_cityPin(x,i,1,true));
+      x.fillStyle=rgba(WC_PAPER,0.6*fin(tt,P.fell+0.1,0.6));x.fillRect(0,0,W,H);os_result(x,fin(tt,P.from-0.2,0.9),fin(tt,P.to-0.2,0.9),fin(tt,P.fell+0.2,0.5));}},
+    // all of it together: one agreed list,
+    {at:P.wk,place:"clip",keys:[[P.wk,960,520,1.06],[P.wk+0.1,960,540,1.0]],d:2.6,push:0.02,draw:(x,tt)=>{os_page(x,[1,1,1,1,1,1],{lit:1,litA:1-fin(tt,P.list-0.3,0.5)});
+      os_tagAt(x,tt,P.list-0.1,null,1440,800,"one agreed list",{size:34,wash:GV.gold,washA:0.35});}},
+    // a copy in the room where the work happens, and someone who checks every step, every time
+    {at:P.copy-0.3,place:"theatre",keys:[[P.copy-0.3,960,540,1],[P.copy,1080,540,1.06]],d:2.8,draw:(x,tt)=>{const tk=fin(tt,c.breath-1.4,0.5);
+      gv_halo(x,1640,590,150,130,GV.gold,0.8*fin(tt,P.copy-0.1,0.5)*(1-fin(tt,P.who-0.2,0.5)));gv_halo(x,1580,410,270,540,GV.gold,0.7*fin(tt,P.who-0.1,0.6));
+      os_team(x,tt,{surgeon:{pose:"os_sterile",pose2:"stand",mix:tk},nurse:{pose:"os_read",pose2:"os_tick",mix:tk,carry:tk>0.5?os_heldClipPen:os_heldClip,flip:true}});
+      wc_pencil(x,[[1590,486],[1676,600]],fin(tt,P.copy,0.4),{seed:66,lw:2.4});os_tagAt(x,tt,P.copy,null,1410,470,"a copy in the room",{size:32});
+      os_tagAt(x,tt,P.who,null,1690,380,"someone who checks",{size:32,wash:GV.gold,washA:0.35});}},
+    // and at the end, before anyone leaves the room, the sign out: its three boxes ticked
+    {at:c.breath-0.25,place:"clip",keys:[[c.breath-0.25,1080,520,1.1],[c.breath,1140,520,1.18]],d:2.6,push:0,draw:(x,tt)=>{const b=c.breath;
+      withA(x,1-fin(tt,P.title,0.8),()=>os_page(x,[1,1,1,1,1,1,fin(tt,b+0.25,0.45),fin(tt,b+0.7,0.45),fin(tt,b+1.15,0.45)],{lit:2}));}}]);
+  os_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.title,0.4)));
   gv_title(ctx,S,t,P.title,"Off the shelf","where a policy meets the work","Film 1 of 19 · data governance");
   wc_paperOver(ctx,S);});
 
@@ -124,6 +156,8 @@ scene("shelf",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.shelf-0.
 // the floor: the people at work behind the glass (o.out leaves someone out), then the glass, then the offices' names (a name the
 // frame would cut fades out)
 const OS_AT={clara:0,mei:1,yusuf:2,jun:3,sam:4},OS_WORK={clara:{pose:"reach"},mei:{pose:"hold",carry:heldNotebook},jun:{pose:"reach"},sam:{pose:"phone"}};
+// Yusuf at work in his office, writing in his notebook, while the data team looks into the two numbers
+const OS_YUSUF={pose:"write",carry:heldNotebook};
 function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{const i=OS_AT[id];if(id==="yusuf"?!o.yusufIn:(o.out||[]).includes(id))return;
     person(x,id,F.spot(i),806,0.5,Object.assign({pose:"stand",t:tt,flip:i%2===1},OS_WORK[id]||{},(o.pose||{})[id]||{}));});
   gv_floorGlass(x);const m=x.getTransform(),vl=-m.e/m.a,vr=(x.canvas.width-m.e)/m.a,a=o.names==null?1:o.names;
@@ -132,24 +166,25 @@ function os_floor(x,tt,o){o=o||{};const F=GV_FL;Object.keys(OS_AT).forEach(id=>{
 scene("numbers",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({pl:c.census-0.6,rg:c.draft-0.6,wh:c.which-0.6,
     four1:wAt(sc,"census","four"),four2:wAt(sc,"draft","four")}));
   gv_shots(ctx,S,t,sc.dur,[
-    // the same week: Yusuf walks down the floor, past the offices where the work is done
-    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1180,640,190);
-      os_floor(x,tt,{names:fin(tt,0.4,0.6)});gv_walker(x,"yusuf",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
+    // the same week: Jun, from the data team, walks down the floor, past the offices where the work is done; Yusuf is at his desk
+    {at:0,place:"floor",keys:[[0,1080,560,1.14],[0.3,760,560,1.14]],d:3.0,draw:(x,tt)=>{const w=gv_walk(tt,0.3,1250,640,210);
+      os_floor(x,tt,{names:fin(tt,0.4,0.6),out:["jun"],yusufIn:true,pose:{yusuf:OS_YUSUF}});gv_walker(x,"jun",w,GV_FL.walk,0.62,{t:tt,flip:true});}},
     // Planning: Clara shows him the census report
     {at:P.pl,place:"planning",keys:[[P.pl,900,540,1.1],[P.pl+0.1,880,520,1.16]],d:5,draw:(x,tt)=>{os_census(x,fin(tt,P.four1-0.1,0.5));
-      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"yusuf",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
+      person(x,"clara",440,905,0.8,{pose:"point",t:tt});person(x,"jun",1270,905,0.8,{pose:"listen",t:tt,flip:true});}},
     // the registrar's office: Mei holds up the draft submission
     {at:P.rg,place:"registrar",keys:[[P.rg,1180,540,1.12],[P.rg+0.1,1200,520,1.18]],d:5,draw:(x,tt)=>{
-      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"yusuf",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
-    // the floor again: two reports, two numbers, and Yusuf between them
+      person(x,"mei",1000,905,0.84,{pose:"hold",t:tt,carry:os_draft(fin(tt,P.four2-0.1,0.5))});person(x,"jun",1290,905,0.8,{pose:"listen",t:tt,flip:true});}},
+    // the floor again: two reports, two numbers, and Jun between them
     {at:P.wh,place:"floor",keys:[[P.wh,700,540,1.22],[P.wh+0.1,690,530,1.28]],d:4,draw:(x,tt)=>{const F=GV_FL;
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"}}});
-      person(x,"yusuf",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});
+      person(x,"jun",F.x(1)-16,F.walk,0.62,{pose:"stand",expr:"concerned",t:tt});
       [[0,"census report","4,812 awards"],[1,"draft submission","4,867 awards"]].forEach(([i,a,b],k)=>os_glassCard(x,tt,i,P.wh+0.1+0.15*k,[a,b]));
       gv_qmark(x,F.x(1)-16,F.walk-0.62*560-50,96,fin(tt,c.which+0.1,0.6));}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 4 · Who decides? Both numbers are right; no one has decided how ours maps to the government's ----
+// ---- 4 · Who decides? The data team finds both numbers right; no one agrees which matches the government's definition, so they
+//      take it to data governance ----
 // something carried in both hands while walking: the arms stay, the legs step
 POSE.os_carry=Object.assign({},POSE.os_box,{gaze:[0.3,0.1],turn:0.06});
 function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign({pose:"os_carry",pose2:w.moving?(w.swing>0?"os_boxA":"os_boxB"):null,mix:Math.abs(w.swing),flip:w.flip,carry},o||{}));}
@@ -157,17 +192,19 @@ function os_carrier(x,id,w,y,s,carry,o){person(x,id,w.x,y-w.bob,s,Object.assign(
 function os_glassCard(x,tt,i,t0,lines,o){o=o||{};const u=fin(tt,t0,0.45);if(u<=0)return;const F=GV_FL,k=0.92+0.08*spring(u),sz=o.size||30,h=82+(lines.length-1)*(sz+12);
   x.save();x.translate(F.x(i)+F.w/2,F.top+(o.top||250)+h/2);x.scale(k,k);withA(x,u,()=>gv_card(x,-F.w/2+(o.pad||22),-h/2,F.w-2*(o.pad||22),h,lines,{size:sz,align:"center",pin:false,y0:52,wash:o.wash||OS_NUM,washA:o.washA||0.14}));x.restore();}
 
-scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,d:c.answers-0.6,e:c.tbc-0.6,
+scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-0.5,s:c.monday-0.6,b3:c.before-0.6,cc:c.gov-0.6,k:c.ask-0.6,d:c.answers-0.6,e:c.tbc-0.6,
     right:wAt(sc,"both","right"),word:wAt(sc,"monday","the word"),micro:wAt(sc,"monday","microcredentials"),bef:wAt(sc,"before","before"),aft:wAt(sc,"before","after"),
-    ours:wAt(sc,"gov","ours"),who:wAt(sc,"gov","Who"),mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be")}));
+    ours:wAt(sc,"gov","which"),who:wAt(sc,"gov","matches"),takes:wAt(sc,"ask","takes"),ask:wAt(sc,"ask","who"),
+    mei:wAt(sc,"answers","Mei"),jun:wAt(sc,"answers","Jun"),plan:wAt(sc,"answers","Planning"),tobe:wAt(sc,"tbc","to be"),
+    rm:c.room-0.5,own:wAt(sc,"room","everyone"),none:wAt(sc,"room","no one")}));
   const board=(x,tt,mon)=>{os_reportCard(x,OS_RC.census,"census report","ran Friday","4,812",fin(tt,P.right-0.1,0.35));
     os_reportCard(x,OS_RC.draft,"draft submission","ran Wednesday","4,867",fin(tt,P.right-0.02,0.35));
     if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
   gv_shots(ctx,S,t,sc.dur,[
-    // Yusuf follows the numbers back, down the floor to the data team; it starts as the last chapter left the floor, so nothing doubles
-    // as the two dissolve
-    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.2,368,1090,300);
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},jun:{pose:"wave"}}});os_carrier(x,"yusuf",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // the data team checks both numbers: Jun takes them back down the floor to his team; it starts as the last chapter left the floor,
+    // so nothing doubles as the two dissolve
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.1,368,1250,380);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});os_carrier(x,"jun",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
     // the data team's board: both reports are right, each by its own meaning of award
     {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
     // Jun's screen: the glossary's term, and the row added on Monday
@@ -179,14 +216,24 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
     {at:P.cc,place:"registrar",keys:[[P.cc,1000,560,1.22],[P.cc+0.1,1010,540,1.26]],d:5,draw:(x,tt)=>{const [mx,my,mw]=OS_RD.manual,[tx,ty,tw_]=OS_RD.tent;
       withA(x,fin(tt,c.gov+0.1,0.3),()=>os_manual(x));withA(x,fin(tt,P.ours-0.1,0.3),()=>os_tent(x));
       os_tagAt(x,tt,c.gov+0.2,null,mx+mw/2,770,"the government's definition",{size:26});os_tagAt(x,tt,P.ours,null,tx+tw_/2,770,"ours",{size:26});
-      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.who-0.1,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who+0.5,0.6));
-      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who+0.3,0.5),expr:"concerned",t:tt});}},
-    // the floor: who does what with the word, as each is named
-    {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0,draw:(x,tt)=>{os_floor(x,tt,{});person(x,"yusuf",GV_FL.x(2)+176,GV_FL.walk,0.62,{pose:"listen",t:tt});
+      const top=os_arc(x,tx+tw_/2,ty-14,mx+mw/2,my-14,200,fin(tt,P.ours,0.9));if(top)gv_qmark(x,top[0],top[1]-14,84,fin(tt,P.who,0.6));
+      person(x,"mei",560,905,0.8,{pose:"listen",pose2:"shrug",mix:fin(tt,P.who-0.1,0.5),expr:"concerned",t:tt});}},
+    // so the data team takes it to data governance: Jun walks to Yusuf's office, and Yusuf looks up; the question, over them both. Then
+    // the floor, as each is named: who does what with the word
+    {at:P.k,place:"floor",keys:[[P.k,1120,600,1.22],[P.d-0.2,960,540,1]],d:1.8,push:0,draw:(x,tt)=>{const w=gv_walk(tt,P.k+0.1,1330,1170,150),
+        up=fin(tt,P.takes+0.5,0.5);
+      os_floor(x,tt,{out:["jun"],yusufIn:true,pose:{yusuf:Object.assign({pose2:"listen",mix:up},OS_YUSUF)}});gv_walker(x,"jun",w,GV_FL.walk,0.62,{t:tt,flip:true});
+      withA(x,1-fin(tt,P.mei-0.5,0.4),()=>gv_qmark(x,1094,GV_FL.walk-0.62*560-30,90,fin(tt,P.ask-0.05,0.6)));
       os_glassCard(x,tt,1,P.mei-0.1,["Mei","owns the meaning"]);os_glassCard(x,tt,3,P.jun-0.1,["Jun","builds the model"]);os_glassCard(x,tt,0,P.plan-0.1,["Planning","reports what","it's given"]);}},
     // and the chart, close: the government submission's row lights; the one accountable is still to be confirmed
     {at:P.e,place:"boardGov",keys:[[P.e,960,520,1],[P.e+0.1,960,540,1.06]],d:3,push:0,draw:(x,tt)=>{const st=fin(tt,P.tobe-0.2,0.3);os_chart(x,()=>1,{light:2,lightA:fin(tt,c.tbc-0.1,0.8),hide:st>0.4?[2,1]:null});
-      const [sx,sy]=os_cellAt(2,1);gv_stamp(x,sx,sy+4,"TBC",st,{size:44,rot:-0.1});}}]);
+      const [sx,sy]=os_cellAt(2,1);gv_stamp(x,sx,sy+4,"TBC",st,{size:44,rot:-0.1});}},
+    // like the operating room before the checklist: each of the team knows their own step, and where someone would check them all,
+    // nobody stands
+    {at:P.rm,place:"theatre",keys:[[P.rm,960,540,1],[P.rm+0.1,960,530,1.04]],d:2.6,draw:(x,tt)=>{os_team(x,tt,{nurse:false});
+      [["the antibiotic",360,340],["the operation",930,360],["the sponges",1180,372]].forEach(([s,px,py],i)=>os_tagAt(x,tt,P.own+0.32*i,null,px,py,s));
+      gv_qmark(x,1716,560,120,fin(tt,P.none,0.6));}}]);
+  wc_year(ctx,56,72,"Before 2008",gv_io(t,P.rm+0.2,sc.dur+1,0.4));
   wc_paperOver(ctx,S);});
 
 // ---- 5 · What governance is for: deciding who decides, and making sure each decision reaches the work ----
@@ -227,17 +274,14 @@ scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc
       os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.dd-0.1,["deciding","who decides"],{wash:GV.gold,washA:0.32});
       WORK.forEach(i=>os_decFly(x,i,clamp((tt-go(i))/0.85,0,1),0));
       os_tagAt(x,tt,P.mk+0.6,null,960,66,"each decision reaches the work",{size:32,wash:GV.gold,washA:0.3});}},
-    // the 1880s shop again, on the market square: the Act, the inspector's case of brass copies, and the inspector, who checks the shop's
-    // weight against his
-    {at:P.cc,place:"shop",keys:[[P.cc,960,540,1],[P.cc+0.1,980,530,1.04]],d:5,draw:(x,tt)=>{const top=OS_SH.counter[2],land=P.chk+0.3,
-        tilt=tt<land?-0.2:-0.2*Math.exp(-(tt-land)*3)*Math.cos((tt-land)*9);
-      gv_halo(x,500,top-130,300,150,GV.gold,0.85*fin(tt,P.rule-0.1,0.6));gv_halo(x,1540,700,340,220,GV.gold,0.85*fin(tt,P.copy-0.1,0.6));
-      gv_halo(x,1250,380,260,540,GV.gold,0.6*fin(tt,P.chk-0.1,0.6));
-      person(x,"grocer",440,860,0.78,{pose:"listen",t:tt});os_counter(x);os_act(x,650,top+6);
-      os_scaleAt(x,OS_SH.scale,top+4,tilt,(q,ex,ey)=>os_iron(q,ex,ey,1),tt>=land?(q,ex,ey)=>os_brass(q,ex,ey):null);os_case(x,1712,905,1);
-      const m=clamp((tt-(P.chk-0.4))/0.45,0,1),back=fin(tt,land+0.3,0.5);
-      person(x,"inspector",1380,905,0.86,{pose:"hold",pose2:"os_place",mix:m*(1-back),t:tt,flip:true,wide:true,carry:tt<land?heldWeight:null});
-      os_tagAt(x,tt,P.rule,null,650,500,"a rule");os_note(x,tt,P.copy,1690,630,["a copy where","the work happens"]);os_tagAt(x,tt,P.chk,null,1380,186,"someone who checks");}},
+    // the surgical checklist again: a rule, the page itself; then in the room, a copy where the work happens, on the nurse's clipboard,
+    // and the nurse, someone who checks
+    {at:P.cc,place:"clip",keys:[[P.cc,960,540,1],[P.cc+0.1,960,520,1.04]],d:2.4,draw:(x,tt)=>{os_page(x,[1,1,1,1,1,1,1,1,1],{});
+      os_tagAt(x,tt,P.rule-0.1,null,1440,800,"a rule",{size:34,wash:GV.gold,washA:0.35});}},
+    {at:P.copy-0.35,place:"theatre",keys:[[P.copy-0.35,1182,540,1.3],[P.copy,1182,530,1.36]],d:2.4,draw:(x,tt)=>{
+      gv_halo(x,1640,590,150,130,GV.gold,0.85*fin(tt,P.copy-0.1,0.5)*(1-fin(tt,P.chk-0.2,0.5)));gv_halo(x,1580,410,270,540,GV.gold,0.7*fin(tt,P.chk-0.1,0.6));
+      os_team(x,tt,{});wc_pencil(x,[[1236,300],[1676,604]],fin(tt,P.copy,0.4),{seed:67,lw:2.4});os_note(x,tt,P.copy,1060,290,["a copy where","the work happens"]);
+      os_tagAt(x,tt,P.chk,null,1640,380,"someone who checks",{size:32,wash:GV.gold,washA:0.35});}},
     // the floor again: governance sets the rules and checks they're kept, a tick on each decision; management does the work
     {at:P.d,place:"floor",keys:[[P.d,960,540,1]],push:0.02,draw:(x,tt)=>{const F=GV_FL;
       os_roomLit(x,2,GV.gold,0.14+0.22*fin(tt,P.gv-0.1,0.5));WORK.forEach((i,k)=>{os_roomLit(x,i,GV.gold,0.14);os_roomGlow(x,i,fin(tt,P.mg-0.2+0.06*Math.min(k,2),0.5));});
@@ -245,7 +289,7 @@ scene("for",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b:c.for-0.6,cc
       os_floor(x,tt,{yusufIn:true,pose});os_glassCard(x,tt,2,P.gv-0.1,["governance","sets the rules,","checks they're kept"],{wash:GV.gold,washA:0.32,top:196,pad:8});
       WORK.forEach((i,k)=>os_decision(x,F.x(i)+F.w/2,OS_DEC_Y,1,fin(tt,P.kept+0.12*k,0.4)));
       os_overRooms(x,tt,P.mg-0.2,0,1,"management · does the work");os_overRooms(x,tt,P.mg-0.14,3,4,"management · does the work");}}]);
-  wc_year(ctx,56,72,"England · 1880s",gv_io(t,P.cc+0.2,P.d,0.4));
+  wc_year(ctx,56,72,"2008",gv_io(t,P.cc+0.2,P.d,0.4));
   wc_paperOver(ctx,S);});
 
 // ---- 6 · Listen first: no thirty-fifth policy; one question in every office, and what slows each one down ----

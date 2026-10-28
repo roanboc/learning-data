@@ -1,0 +1,30 @@
+{
+  "key": "change-without-surprises",
+  "title": "Change without surprises",
+  "sub": "Film 7 of 19 of a series on data governance: Sweden switched sides of the road in one morning, and surprised no one. A change to data can do the same, if everyone it reaches knows what changes, when, and what to do.",
+  "howto": "The film is painted in watercolour, in the university's own rooms and in Sweden in 1967. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions and what a change reaches; green is adding, and ready; red is breaking; violet is the glossary's meaning of award.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "ready",
+    "wait",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bDagen H\\b",
+      "Dahgen Hoh"
+    ]
+  ]
+}

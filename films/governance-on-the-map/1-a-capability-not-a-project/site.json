@@ -1,0 +1,33 @@
+{
+  "kicker": "Governance that lasts",
+  "kicker_es": "Una gobernanza que perdura",
+  "title_es": "Una capacidad, no un proyecto",
+  "h1": "A capability, not a project: governance every year",
+  "h1_es": "Una capacidad, no un proyecto: gobernanza cada año",
+  "lead": "The project that paid for the university's data governance ends in June, and the deputy vice-chancellor can't see what it does. Yusuf and Noor put governance on the architecture map: one capability, eight beneath it coloured by evidence, and seven services people can ask for, each with a promise.",
+  "lead_es": "El proyecto que pagaba la gobernanza de datos de la universidad termina en junio, y el vicerrector no ve qué hace. Yusuf y Noor ponen la gobernanza en el mapa de arquitectura: una capacidad, ocho debajo coloreadas según la evidencia, y siete servicios que la gente puede pedir, cada uno con una promesa.",
+  "description": "A film about data governance as a capability: Holland's water boards around 1300, where each landowner kept a stretch of dike and the board walked the dikes every year; a governance project that ends in June, and a deputy vice-chancellor who can't see what governance does; the capability test, on the architecture map; govern data, and eight capabilities under it in the university's words, one of them found by two frameworks used as checklists; a heat map coloured by evidence from the work; seven services people can ask for, named the way they ask, each with a promise its users review; a line in the budget every year, the capability's, not the project's; and what a project leaves when something keeps it.",
+  "description_es": "Una película sobre la gobernanza de datos como capacidad: las juntas de agua de Holanda hacia 1300, donde cada propietario mantenía un tramo del dique y la junta recorría los diques cada año; un proyecto de gobernanza que termina en junio, y un vicerrector que no ve qué hace la gobernanza; la prueba de la capacidad, en el mapa de arquitectura; gobernar los datos, y ocho capacidades debajo, con las palabras de la universidad, una de ellas encontrada por dos marcos usados como listas de verificación; un mapa de calor coloreado con evidencia del trabajo; siete servicios que la gente puede pedir, nombrados como los pide, cada uno con una promesa que sus usuarios revisan; una línea en el presupuesto cada año, la de la capacidad, no la del proyecto; y lo que deja un proyecto cuando algo lo mantiene.",
+  "card": "A project ends, and the deputy vice-chancellor asks what governance does. Draw it as a capability, with services and promises.",
+  "card_es": "Un proyecto termina, y el vicerrector pregunta qué hace la gobernanza. Dibújala como una capacidad, con servicios y promesas.",
+  "chapters_es": {
+    "dike": "Detrás del dique",
+    "ends": "Cuando termina el proyecto",
+    "what": "Qué, no quién",
+    "seven": "Siete, y una más",
+    "colour": "Coloreadas según la evidencia",
+    "ask": "Lo que la gente puede pedir",
+    "line": "Una línea cada año",
+    "keeps": "Lo que mantiene"
+  },
+  "past": [
+    "Holland, the water boards around 1300",
+    "A dike is never finished: whoever relies on it keeps it up, every year."
+  ],
+  "past_es": [
+    "Holanda, las juntas de agua hacia 1300",
+    "Un dique nunca está terminado: quien depende de él lo mantiene, cada año."
+  ],
+  "next_h": "You've seen governance drawn as a capability, coloured by evidence, with services people can ask for. Next: who does what, end to end.",
+  "next_h_es": "Viste la gobernanza dibujada como una capacidad, coloreada según la evidencia, con servicios que la gente puede pedir. Después: quién hace qué, de principio a fin."
+}

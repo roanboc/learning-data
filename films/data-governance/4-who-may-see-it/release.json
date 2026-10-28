@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Who may see it",
+    "key": "who-may-see-it-en",
+    "dir": "films/data-governance/4-who-may-see-it/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/who-may-see-it/film.js",
+    "video": "dist/who-may-see-it.mp4",
+    "file": "who-may-see-it.mp4",
+    "captions": [
+      [
+        "films/data-governance/4-who-may-see-it/captions/en.srt",
+        "who-may-see-it.en.srt"
+      ],
+      [
+        "films/data-governance/4-who-may-see-it/captions/es.srt",
+        "who-may-see-it.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/4-who-may-see-it/source",
+      ":(exclude)films/data-governance/4-who-may-see-it/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 349,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

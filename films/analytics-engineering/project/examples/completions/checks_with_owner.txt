@@ -4,7 +4,7 @@ Governance's rules are met: every owner, glossary term, column class, test and d
 $ python scripts/check/impact.py --base before-completions
 # What this change touches
 
-10 file(s) changed in the project since `before-completions`; 1 model(s), seed(s) or source(s) changed, 1 test(s) changed, 0 downstream model(s), 1 test(s), 0 exposure(s).
+11 file(s) changed in the project since `before-completions`; 1 model(s), seed(s) or source(s) changed, 1 test(s) changed, 0 downstream model(s), 1 test(s), 0 exposure(s).
 
 ## Changed
 

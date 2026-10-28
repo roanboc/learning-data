@@ -1,4 +1,4 @@
-From 8ffdec5122e97d714984431048d414e83382f4f1 Mon Sep 17 00:00:00 2001
+From 058e7e513a0f8b84de541309e382927582e193c0 Mon Sep 17 00:00:00 2001
 From: "Jun Park (scratch)" <jun.park@uni.example>
 Date: Wed, 28 Oct 2026 13:00:46 +0000
 Subject: [PATCH] Credentials: rename counts_as_award to is_award (a sketch: it
@@ -6,8 +6,9 @@ Subject: [PATCH] Credentials: rename counts_as_award to is_award (a sketch: it
 
 ---
  .../project/models/core/student/_core_student__models.yml     | 4 ++--
+ .../project/models/core/student/_student__physical.md         | 2 +-
  .../project/models/core/student/core_credential_v2.sql        | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/films/analytics-engineering/project/models/core/student/_core_student__models.yml b/films/analytics-engineering/project/models/core/student/_core_student__models.yml
 index 2f0e4ee7..6c92b3b1 100644
@@ -31,6 +32,19 @@ index 2f0e4ee7..6c92b3b1 100644
            - name: is_revoked
              description: True when the credential was revoked. Replaced by status in version 2.
              data_type: boolean
+diff --git a/films/analytics-engineering/project/models/core/student/_student__physical.md b/films/analytics-engineering/project/models/core/student/_student__physical.md
+index c0b6a620..21b0e7ee 100644
+--- a/films/analytics-engineering/project/models/core/student/_student__physical.md
++++ b/films/analytics-engineering/project/models/core/student/_student__physical.md
+@@ -16,7 +16,7 @@ erDiagram
+         string credential_code
+         string credential_name
+         int credit_points
+-        boolean counts_as_award
++        boolean is_award
+         date issued_on
+         string status
+         date revoked_on
 diff --git a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
 index f94ada27..ccfab6e2 100644
 --- a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql

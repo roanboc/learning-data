@@ -42,12 +42,12 @@ function gd_bubble(ctx,a,k,lines,mix,lines2){if(a<=0.01)return;const tx=1290,ty=
 // o.tab 1, the files changed instead. Words are 28 px or more at the screen's own size.
 const GD_PR={title:"Completions for Planning",sub:"Jun Park wants to merge into main",desc:"The awards conferred this year, by faculty.",
   files:["models/marts/planning/mart_planning__completions.sql","models/marts/planning/_planning__models.yml","governance/4-data-products/completions.yml"],
-  more:"and 7 more, written by the project's scripts",ck:["build","governance","products","reviewers","impact"],
+  more:"and 8 more, written by the project's scripts",ck:["build","governance","products","reviewers","impact"],
   m1:"owner: models/marts/planning/_planning__models.yml: mart_planning__completions has no",m2a:"meta.owner or meta.domain ",m2b:"(how to: docs/how-to/add-an-owner.md)",
   g1:"Governance's rules are met: every owner, glossary term, column class, test and",g2:"description is in place."};
 const GD_LB=[150,336,1000,256],GD_RB=[1190,336,580,256],GD_CK=[150,612,1620,240];
 function gd_prHead(ctx,o){const [x,y,w,h]=GU_BIG;return gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:o.title||GD_PR.title,titleSize:o.titleSize,
-  state:o.state||["Open",GV.green],sub:o.sub||GD_PR.sub,tabs:o.tabs||["Conversation","Files changed · 10","Checks · 5"],tab:o.tab||0});}
+  state:o.state||["Open",GV.green],sub:o.sub||GD_PR.sub,tabs:o.tabs||["Conversation","Files changed · 11","Checks · 5"],tab:o.tab||0});}
 // who reviews it: the code owners of the files it changes, asked by themselves as it opens (o.rev, 0 to 1): Planning, gold, for its
 // table, and the owners of the product and of governance's files; o.appr (0 to 1), Planning's yes
 const GD_REV=[["Planning",1],["Clara Jensen"],["data governance"],["Noor"]];

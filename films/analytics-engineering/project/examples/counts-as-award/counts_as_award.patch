@@ -1,4 +1,4 @@
-From 74c63517798bd1b809584ba62d15e8015c2826e1 Mon Sep 17 00:00:00 2001
+From 141bb0001838985c25946528d8ad1902bf5eb02d Mon Sep 17 00:00:00 2001
 From: "Jun Park (scratch)" <jun.park@uni.example>
 Date: Wed, 28 Oct 2026 13:00:46 +0000
 Subject: [PATCH] Credentials: say whether a credential counts as an award,
@@ -8,9 +8,10 @@ Subject: [PATCH] Credentials: say whether a credential counts as an award,
  films/analytics-engineering/project/dbt_project.yml       | 1 +
  .../governance/5-data-contracts/core_credential_v2.yaml   | 7 +++++++
  .../project/models/core/student/_core_student__models.yml | 8 +++++++-
+ .../project/models/core/student/_student__physical.md     | 1 +
  .../project/models/core/student/core_credential_v2.sql    | 3 +++
  .../intermediate/student/int_credentials_unioned.sql      | 8 ++------
- 5 files changed, 20 insertions(+), 7 deletions(-)
+ 6 files changed, 21 insertions(+), 7 deletions(-)
 
 diff --git a/films/analytics-engineering/project/dbt_project.yml b/films/analytics-engineering/project/dbt_project.yml
 index 2e0c057f..f1b76fdc 100644
@@ -68,6 +69,18 @@ index 6001d02e..2f0e4ee7 100644
            - name: is_revoked
              description: True when the credential was revoked. Replaced by status in version 2.
              data_type: boolean
+diff --git a/films/analytics-engineering/project/models/core/student/_student__physical.md b/films/analytics-engineering/project/models/core/student/_student__physical.md
+index 12b06c50..c0b6a620 100644
+--- a/films/analytics-engineering/project/models/core/student/_student__physical.md
++++ b/films/analytics-engineering/project/models/core/student/_student__physical.md
+@@ -16,6 +16,7 @@ erDiagram
+         string credential_code
+         string credential_name
+         int credit_points
++        boolean counts_as_award
+         date issued_on
+         string status
+         date revoked_on
 diff --git a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
 index 0874f515..f94ada27 100644
 --- a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql

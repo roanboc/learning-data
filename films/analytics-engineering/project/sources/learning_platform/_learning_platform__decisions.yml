@@ -30,3 +30,18 @@ decisions:
     evidence: [analyses/profiling/profile_null_keys.sql]
     implemented_in: [int_learner_key_candidates]
     relates_to: [DEC-STU-04, GAP-LMS-02]
+
+  - id: DEC-LMS-03
+    step: operate_and_evolve
+    title: A microcredential badge carries credit points
+    text: Every microcredential badge (badge_code starting MC-) carries more than 0 credit points. A test
+      stops the build when one doesn't.
+    why: 'A platform update once sent half the new badges with zero credit, and every test passed:
+      not_null on credit_points was satisfied. Monitoring on the platform saw the share of badges with no
+      credit jump from about 1 in 12 (the welcome badges) to 1 in 2, and told the learning team, the
+      owner in the metadata. They fixed it at the platform and sent the badges again. Once confirmed,
+      the surprise became a rule.'
+    decided_by: Learning team, with data governance
+    decided_on: 2026-10-20
+    status: agreed
+    implemented_in: [stg_learning_platform__badges, positive]

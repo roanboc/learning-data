@@ -60,6 +60,12 @@
 | One person, many systems | 193 | 0% | 0 | 29.1 | Drawn to the rule |
 | A hub at work | 239 | 0% | 0 | 30 | Drawn to the rule |
 | Kept, not cleaned | 287 | 0% | 0 | 30 | Drawn to the rule |
+| The same problem, everywhere | 237 | 0% | 0 | 32.5 | Drawn to the rule |
+| Off the shelf | 317 | 0% | 0 | 34.0 | Drawn to the rule |
+| Who decides | 346 | 0% | 0 | 32.7 | Drawn to the rule |
+| One word, one home | 333 | 0% | 0 | 30.0 | Drawn to the rule |
+| Who may see it | 349 | 0% | 0 | 30.3 | Drawn to the rule |
+| Fixed where it starts | 399 | 0% | 0 | 31.1 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quién puede verlo · Gobernanza que puedes usar · Learning Data</title>
+<meta name="description" content="Una película sobre el acceso a datos personales: el censo de 1983 en Alemania Occidental y la línea del tribunal entre contar personas y saber quiénes son; el pedido de una planificadora, y el camino de antes, con formularios, aprobaciones por correo y accesos a nombre de alguien que nunca terminan; una clase para cada columna que leen otros equipos (directa, seudónima o ninguna), escrita por su dueño, sin dejar pasar ningún cambio mientras falte una; la clase viajando con su columna como una etiqueta, y una regla que enmascara los datos personales directos en cada tabla; acceso para un propósito, a un grupo, hasta una fecha; por qué hasta un código de estudiante es un dato personal; explicar por qué está la máscara y cómo obtener más; y una revisión de accesos que se lee de la propia lista de accesos.">
+<meta property="og:title" content="Quién puede verlo · Gobernanza que puedes usar · Learning Data"><meta property="og:description" content="Contar personas es un permiso; saber quiénes son es otro. Clasifica una vez; protégelo en todas partes."><meta property="og:image" content="https://data.learn-all.org/assets/who-may-see-it-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/data-governance/who-may-see-it/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/data-governance/who-may-see-it/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a><span class="lang" role="group" aria-label="Idioma"><a href="../../../data-governance/who-may-see-it/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span></nav></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/who-may-see-it-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#data-governance">Gobernanza de datos</a> › <a href="../">Gobernanza que puedes usar</a></p>
+<h1>Quién puede verlo: una línea que un tribunal trazó en 1983, el pedido de una planificadora, y una clase escrita una vez, en la columna</h1>
+<p class="lead">En 1983, el Tribunal Constitucional de Alemania Occidental detuvo un censo y trazó una línea: contar personas es un permiso, y saber quiénes son es otro. En la universidad, Clara, de Planificación, necesita el estado de cada estudiante para planificar los cupos del próximo periodo. El camino de antes le habría dado la tabla de estudiantes entera, con nombres y correos, a su nombre y sin fin. El nuevo empieza en la columna: el dueño de cada columna anota si identifica a una persona, la clase viaja con la columna como una etiqueta, y una regla muestra los datos personales directos a la oficina de registro y asteriscos a todos los demás. El acceso de Clara llega para un propósito, por un grupo, hasta una fecha, y Yusuf le explica por qué están los asteriscos y cómo pedir más.</p>
+<p class="meta-row"><span>6 min</span><span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>
+<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos y las preguntas están en español.</p>
+<p class="builds-on">Amplía <a href="../one-word-one-home/"><i>Una palabra, un solo lugar</i></a></p>
+</section>
+<section class="module" id="watch" data-store="ld-who-may-see-it" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p>Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../../assets/who-may-see-it/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/who-may-see-it-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button><button type="button" class="think-badge" data-think>Ver con pausas para pensar</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Who may see it"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de tres capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/who-may-see-it.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/data-governance/4-who-may-see-it/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/data-governance/4-who-may-see-it/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste cómo una clase escrita una vez, en la columna, la protege en todas partes. Vienen más películas de la serie.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../">Toda la serie: Gobernanza que puedes usar</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las tres preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">Gobernanza que puedes usar</a></h2><p>Película 4 de 19.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/one-word-one-home-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 3 de 19</p>
+<h3><a href="../one-word-one-home/">Una palabra, un solo lugar</a></h3>
+<p>Cinco glosarios, tres sentidos de una palabra. Quédate con uno en el que todos confíen, y sincroniza cada herramienta con él.</p>
+<p class="meta">6 min · Pausa para pensar · Gobernanza que puedes usar · En inglés</p>
+<p class="tc-progress" data-progress="ld-one-word-one-home" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../the-same-problem-everywhere/"><span class="n">0</span>El mismo problema, en todas partes</a></li>
+<li><a href="../off-the-shelf/"><span class="n">1</span>Fuera del estante</a></li>
+<li><a href="../who-decides/"><span class="n">2</span>Quién decide</a></li>
+<li><a href="../one-word-one-home/"><span class="n">3</span>Una palabra, un solo lugar</a></li>
+<li><a href="../who-may-see-it/" aria-current="page"><span class="n">4</span>Quién puede verlo</a></li>
+<li><a href="../fixed-where-it-starts/"><span class="n">6</span>Arreglado en el origen</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/who-may-see-it/captions.es.js"></script>
+<script src="../../../assets/who-may-see-it/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"counted": "Contados, no conocidos", "census": "La lista del censo", "path": "El camino de antes", "column": "En la columna", "mask": "La máscara sigue", "purpose": "Un propósito y una fecha", "stars": "Por qué los asteriscos", "grants": "Leído de la lista de accesos"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/who-may-see-it/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

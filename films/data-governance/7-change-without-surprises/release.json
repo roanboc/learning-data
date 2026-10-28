@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Change without surprises",
+    "key": "change-without-surprises-en",
+    "dir": "films/data-governance/7-change-without-surprises/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/change-without-surprises/film.js",
+    "video": "dist/change-without-surprises.mp4",
+    "file": "change-without-surprises.mp4",
+    "captions": [
+      [
+        "films/data-governance/7-change-without-surprises/captions/en.srt",
+        "change-without-surprises.en.srt"
+      ],
+      [
+        "films/data-governance/7-change-without-surprises/captions/es.srt",
+        "change-without-surprises.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/7-change-without-surprises/source",
+      ":(exclude)films/data-governance/7-change-without-surprises/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 489,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 32.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -4,6 +4,7 @@
     Fails with one row per version that breaks the rule.
 -#}
 {% test versions_do_not_overlap(model, key_columns, valid_from='valid_from', valid_to='valid_to') %}
+    {{ config(meta={'dimension': 'consistency'}) }}
 
 with
 

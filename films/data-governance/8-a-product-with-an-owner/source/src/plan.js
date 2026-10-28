@@ -232,5 +232,87 @@ function po_glassCard(ctx,cx,y,name,role,a){if(a<=0.01)return;const w=Math.round
 // where the two cards go: Clara's on Planning's glass, Mei's on the registrar's, and the three things Clara answers for, under hers
 const PO_GC={y:292,clara:GV_FL.x(0)+GV_FL.w/2,mei:GV_FL.x(1)+GV_FL.w/2,jobs:["on time","keeps its promise","its users heard"],jy:404,jgap:44,cam:[600,400,1.45]};
 
+/* ---------- 5 · Wanting the job: Yusuf's notebook, the cards that go down by the product's, the change request, the signature ---------- */
+// someone's face in a small round frame, on a card or a page: head and shoulders on a pale wash, and a thin ring round it
+function po_face(ctx,id,cx,cy,r,o){o=o||{};const k=r/96,s=k/PEOPLE[id].build.h;ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.clip();
+  ctx.fillStyle=rgba(o.bg||[226,232,236],1);ctx.fillRect(cx-r,cy-r,2*r,2*r);person(ctx,id,cx,cy-0.12*r+502*k,s,{pose:"stand",expr:o.expr||"smile",t:o.t||0,shadow:false});ctx.restore();
+  ctx.save();ctx.strokeStyle=rgba(o.ring||WC_PENCIL,o.ringA==null?0.75:o.ringA);ctx.lineWidth=o.lw||2.4;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();ctx.restore();}
+// an expression between two (u, 0 to 1), for a face that changes its mind slowly
+function po_exprMix(a,b,u){const A=EXPR[a],B=EXPR[b],o={};new Set([...Object.keys(A),...Object.keys(B)]).forEach(k=>{o[k]=lerp(A[k]||0,B[k]||0,clamp(u,0,1));});return o;}
+// Yusuf's notebook, open on Planning's table, from above. PO_NB: its spine's top, a page's size and its slight turn. Things on its pages
+// are drawn in its own units (po_nbIn): from the spine's top, a left page running to -w and a right one to w
+const PO_NB={sx:960,y:166,w:700,h:600,rot:-0.012};
+function po_nbIn(ctx,fn){ctx.save();ctx.translate(PO_NB.sx,PO_NB.y);ctx.rotate(PO_NB.rot);fn(ctx);ctx.restore();}
+// a line of handwriting too small to read, on purpose: word-long strokes of ink
+function po_inkBars(q,x,y,w,seed,a){const R=wc_rng(seed);let cx=x;q.save();q.strokeStyle=rgba(GV_SIGN.ink,a==null?0.32:a);q.lineCap="round";q.lineWidth=7;
+  while(cx<x+w-30){const l=24+R()*70;if(cx+l>x+w)break;q.beginPath();q.moveTo(cx,y);for(let u=0;u<=l;u+=6)q.lineTo(cx+u,y+1.6*Math.sin(u*0.4+seed));q.stroke();cx+=l+14+R()*8;}q.restore();}
+// a page: cream paper, faint blue rules, what's on it (paint, in the page's own units), and the shade in its gutter (side -1: a left page)
+function po_nbPageC(side,key,paint){const {w,h}=PO_NB;return wc_kept("poNb|"+key,w,h,q=>{wc_wash(q,wc_rect(0,0,w,h),[252,250,242],{kind:"page",line:false,seed:side<0?611:617});
+  q.fillStyle="rgba(120,130,170,0.3)";for(let y=92;y<h-24;y+=44)q.fillRect(side<0?36:30,y,w-66,2);if(paint)paint(q);
+  const gx=side<0?w:0,g=q.createLinearGradient(gx,0,gx+(side<0?-80:80),0);g.addColorStop(0,"rgba(110,96,80,0.3)");g.addColorStop(0.4,"rgba(110,96,80,0.08)");g.addColorStop(1,"rgba(110,96,80,0)");
+  q.fillStyle=g;q.fillRect(side<0?w-80:0,0,80,PO_NB.h);});}
+// the notes on the pages before: a few lines of Yusuf's writing
+const po_nbOld=side=>q=>{[[136,0.9],[180,0.7],[224,0.95],[312,0.8],[356,0.6],[444,0.85],[488,0.5]].forEach(([y,f],i)=>po_inkBars(q,side<0?60:56,y-6,(PO_NB.w-130)*f,side*31+i*7));};
+// the sketch on the left page: the product's card drawn as a stall, under an awning, on a counter (in the page's units; the stall at
+// x 40 to 400 is -660 to -300 in the notebook's)
+function po_nbStall(q){const ink=GV_SIGN.ink,pen=(pts,o)=>wc_pencil(q,pts,1,Object.assign({col:ink,a:0.66,lw:2.8,seed:7+(pts[0][0]|0)+(pts[0][1]|0)},o||{}));
+  pen([[64,192],[112,142],[328,142],[376,192]]);const sc=[];for(let i=0;i<8;i++)for(let j=0;j<=5;j++){const u=j/5;sc.push([64+i*39+u*39,192+15*Math.sin(Math.PI*u)]);}pen(sc,{seed:41});
+  pen([[70,200],[72,432]]);pen([[370,200],[368,432]]);pen([[40,434],[400,432]]);
+  pen([[106,236],[334,232],[336,404],[104,406]],{closed:true,seed:43});
+  q.save();q.strokeStyle=rgba(ink,0.5);q.lineCap="round";q.lineWidth=9;q.beginPath();q.moveTo(126,268);q.lineTo(270,266);q.stroke();q.lineWidth=6;
+  [[302,0.8],[330,0.62],[358,0.74],[384,0.5]].forEach(([y,f])=>{q.beginPath();q.moveTo(126,y);q.lineTo(126+180*f,y);q.stroke();});q.restore();
+  pen(Array.from({length:30},(_,i)=>{const a=i/29*TAU*1.05;return[188+80*Math.cos(a),356+15*Math.sin(a)];}),{seed:47,lw:2.2});}
+// the notebook: its shadow, its teal cover and the pages' edges, then the pages. o.flip (0 to 1) turns a page from right to left: before
+// it, the notes; after it, the stall on the left page (painted on the turning page's back) and a blank right page
+function po_notebook(ctx,o){o=o||{};const {w,h}=PO_NB,f=clamp(o.flip==null?1:o.flip,0,1);po_nbIn(ctx,q=>{
+  q.save();q.filter="blur(14px)";q.fillStyle="rgba(70,50,30,0.3)";q.fillRect(-w-6,24,2*w+30,h+6);q.restore();
+  wc_part(q,wc_rrPts(-w-16,-12,2*w+32,h+26,10),GV_HOLD.teal,1,{kind:"cover",lw:1.2,seed:621});
+  for(const s of [-1,1])for(let k=3;k>=1;k--){const x0=s<0?-w-k*3:0;wc_flat(q,wc_rect(x0,k*2,w+k*3,h-k*2),[240-k*7,238-k*7,230-k*7],1,"page");}
+  const L0=po_nbPageC(-1,"old",po_nbOld(-1)),R0=po_nbPageC(1,"oldR",po_nbOld(1)),L1=po_nbPageC(-1,"stall",po_nbStall),R1=po_nbPageC(1,"blank");
+  q.drawImage(f<1?L0:L1,-w,0);q.drawImage(f>0?R1:R0,0,0);
+  if(f>0&&f<1){const back=f>=0.5,k=Math.max(0.02,back?(f-0.5)*2:1-f*2);q.save();q.fillStyle="rgba(60,44,30,"+(0.22*(1-k)).toFixed(3)+")";q.fillRect(back?-w:0,0,w,h);
+    q.scale(k,1);q.drawImage(back?L1:R0,back?-w:0,0);q.fillStyle="rgba(60,50,40,"+(0.28*(1-k)).toFixed(3)+")";q.fillRect(back?-w:0,0,w,h);q.restore();}
+  wc_flat(q,wc_rect(w+4,-12,10,h+26),wc_dim(GV_HOLD.teal,0.45),1,"band");});}
+// the line of users behind the stall, as Yusuf draws them (in the notebook's units): the near-award dashboard first, then the faculties,
+// Health first, with Anil's face. o.dash, o.fac[i]: how far each is drawn, 0 to 1
+const PO_NQ={dash:[-240,286,130,90],fac:[96,200,304,408,512,616],fy:300};
+function po_nbQueue(q,o){o=o||{};const ink=GV_SIGN.ink,pen=(pts,p,o2)=>wc_pencil(q,pts,p,Object.assign({col:ink,a:0.7,lw:2.8,seed:9+(pts[0][0]|0)},o2||{}));
+  const d=clamp(o.dash||0,0,1);if(d>0){const [x,y,w,h]=PO_NQ.dash;pen([[x,y],[x+w,y],[x+w,y+h],[x,y+h]],clamp(d*1.6,0,1),{closed:true});
+    pen([[x+w/2-6,y+h],[x+w/2-6,y+h+22]],clamp(d*3-1.6,0,1));pen([[x+w/2-36,y+h+24],[x+w/2+24,y+h+24]],clamp(d*3-1.9,0,1));
+    q.save();q.fillStyle=rgba(ink,0.4*clamp(d*2.5-1.4,0,1));[[0.18,0.5],[0.36,0.75],[0.54,0.4],[0.72,0.62]].forEach(([u,f])=>q.fillRect(x+w*u,y+h-12-(h-30)*f,14,(h-30)*f));q.restore();}
+  PO_NQ.fac.forEach((x,i)=>{const p=clamp((o.fac||[])[i]||0,0,1);if(p<=0)return;const y=PO_NQ.fy;
+    if(i===0){withA(q,clamp(p*2,0,1),()=>po_face(q,"anil",x,y+18,46,{expr:"calm",ring:ink,ringA:0.7,bg:[236,232,222]}));
+      wc_hand(q,"Health",x,y+112,{size:30,align:"center",col:ink,p:clamp(p*2-0.6,0,1)});return;}
+    pen(Array.from({length:22},(_,j)=>{const a=-Math.PI/2+j/21*TAU;return[x+24*Math.cos(a),y-2+24*Math.sin(a)];}),clamp(p*2,0,1));
+    pen([[x-42,y+66],[x-30,y+40],[x,y+30],[x+30,y+40],[x+42,y+66]],clamp(p*2-0.8,0,1));
+    if(p>0.6){q.save();q.globalAlpha*=clamp((p-0.6)*2.5,0,1);q.strokeStyle=rgba(ink,0.34);q.lineCap="round";q.lineWidth=7;q.beginPath();q.moveTo(x-30,y+100);q.lineTo(x+24-6*(i%2),y+100);q.stroke();q.restore();}});}
+// a small card with someone's face, their name and their part, as the ones that go down by the product's card (x,y its top left, 200 by
+// 200); a (0 to 1) as it goes down, settling with a turn
+function po_jobCard(ctx,x,y,id,name,role,a,rot){if(a<=0.01)return;const u=easeCam(clamp(a,0,1)),k=0.94+0.06*spring(a);ctx.save();ctx.translate(x+100,y+100-46*(1-u));ctx.rotate((rot||0)*(0.4+0.6*u));ctx.scale(k,k);
+  withA(ctx,clamp(a*2.2,0,1),()=>{wc_panel(ctx,-100,-100,200,200,{kind:"card",seed:461+name.length*7});po_face(ctx,id,0,-38,44,{t:2});
+    wc_T(ctx,name,0,40,{w:800,size:32,align:"center",col:WC_DARK});wc_T(ctx,role,0,78,{w:600,size:28,align:"center",col:WC_INK});});ctx.restore();}
+// a change request on paper (x,y its top left, w by h): its title, what it's for, lines of what changes (too small to read, on purpose),
+// and its rows at the foot, each {l, v, hand, p}: a label, and what's written by it (printed, or handwritten as far as p); a row with
+// no value keeps an empty line. o.box: an empty box after the last row, lit gold by o.boxLit
+function po_changeReq(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;ctx.save();ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot||0);ctx.translate(-w/2,-h/2);
+  withA(ctx,a,()=>{gv_sheet(ctx,0,0,w,h);wc_T(ctx,"Change request",36,58,{w:800,size:34,col:WC_DARK});wc_T(ctx,o.name||"",36,102,{w:600,size:30,col:WC_INK});
+    ctx.fillStyle=rgba(WC_MUTED,0.4);ctx.fillRect(36,124,w-72,2);gv_lines(ctx,36,154,w-140,o.lines||2,28,0.9);
+    const rows=o.rows||[];let ex=36;rows.forEach((r,i)=>{const ry=h-38-(rows.length-1-i)*50,lw=tw(ctx,r.l,30,600);wc_T(ctx,r.l,36,ry,{w:600,size:30,col:WC_MUTED});const vx=36+lw+14;
+      if(r.v&&!r.hand){wc_T(ctx,r.v,vx,ry,{w:700,size:30,col:WC_DARK});ex=vx+tw(ctx,r.v,30,700);}
+      else{ctx.fillStyle=rgba(WC_MUTED,0.45);ctx.fillRect(vx,ry+8,Math.max(220,r.v?tw(ctx,r.v,30,600)+20:0),2);if(r.v)wc_hand(ctx,r.v,vx+4,ry,{size:30,col:GV_SIGN.ink,p:r.p==null?1:r.p});ex=vx+240;}});
+    if(o.box){const bx=ex+22,by=h-38-28,lit=clamp(o.boxLit||0,0,1);if(lit>0){ctx.save();ctx.globalCompositeOperation="multiply";wc_glowAt(ctx,bx+19,by+19,46,[255,214,120],0.7*lit);ctx.restore();}
+      ctx.save();ctx.strokeStyle=rgba(lit>0?mix(WC_INK,GV.goldInk,lit):WC_INK,0.8);ctx.lineWidth=2.6;ctx.strokeRect(bx,by,38,38);ctx.restore();}});ctx.restore();}
+// Clara's signature: one pen line, looped as a hand's is, its start at (0,0) on the line it sits on; po_sig draws it as far as p, and
+// po_sigAt says where the pen is then
+const PO_SIG=(()=>{const P=[];for(let i=0;i<=26;i++){const a=Math.PI*0.3+i/26*TAU*0.82;P.push([30+22*Math.cos(a),-20-24*Math.sin(a)]);}
+  for(let i=0;i<=140;i++){const u=i/140,t_=u*8*TAU;P.push([36+u*238-10*Math.sin(t_),-6-(12+9*Math.sin(u*11))*(1-Math.cos(t_))/2]);}
+  for(let i=1;i<=34;i++){const u=i/34;P.push([274-u*262,8+12*Math.sin(u*Math.PI)-u*2]);}return P;})();
+function po_sig(ctx,x,y,p,o){o=o||{};wc_pencil(ctx,PO_SIG.map(([a,b])=>[x+a,y+b]),p,{col:GV_SIGN.ink,a:0.95,lw:o.lw||3.4,amp:0.25,seed:57});}
+function po_sigAt(x,y,p){const i=Math.min(PO_SIG.length-1,Math.max(0,Math.round(clamp(p,0,1)*(PO_SIG.length-1))));return[x+PO_SIG[i][0],y+PO_SIG[i][1]];}
+// the product's card in chapter 5, where it lies (at 0.8 of its size, its corner where it was) with the cards and the change request by it
+const PO_JB={k:0.8,cards:[[940,400],[1150,400],[1360,400]],cr:[940,64,620,296],sig:[650,402]};
+function po_cardSmall(ctx,o){const k=PO_JB.k,P=PO_PC;ctx.save();ctx.translate(P.x,P.y);ctx.scale(k,k);ctx.translate(-P.x,-P.y);po_card(ctx,Object.assign({w:[1,1,1,1,1,1,1],frame:1,ring:1},o||{}));
+  const s=o&&o.sign;if(s>0){const [sx,sy]=PO_JB.sig;po_sig(ctx,P.x+sx,P.y+sy,s);}if(o&&o.pen>0.01){const [sx,sy]=PO_JB.sig,[px,py]=po_sigAt(P.x+sx,P.y+sy,s||0);po_pen(ctx,px,py,o.pen);}ctx.restore();}
+
 const WC_PLACES={st1520:c=>po_paintStreet(c,"1520"),st1600:c=>po_paintStreet(c,"1600"),gate:po_paintGate,hallIn:po_paintHallIn,hallInFront:po_paintHallInFront,clothClose:po_paintClothClose,clothFront:po_paintClothFront,plain:po_paintPlain,air:po_paintAir,airShops:po_paintAirShops,airCrowd:po_paintAirCrowd,airHall:po_paintAirHall,airTrade0:c=>po_paintAirTrade(c,0),airTrade1:c=>po_paintAirTrade(c,1),airTrade2:c=>po_paintAirTrade(c,2),office:gv_paintOffice,faculty:gv_paintFaculty,facDesk:po_paintFacDesk,facTop:po_paintFacTop,corridor:po_paintCorridor,planTable:po_paintPlanTable,planTop:po_paintPlanTop,data:gv_paintData,noor:gv_paintNoor,planning:gv_paintPlanning,floor:gv_paintFloor,
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),meeting:gv_paintMeeting,desk:gv_paintDesk,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),platform:gv_paintPlatform};

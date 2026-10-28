@@ -1,0 +1,27 @@
+{
+  "kicker": "AI for governance",
+  "kicker_es": "IA para la gobernanza",
+  "title_es": "Un agente que revisa",
+  "h1": "An agent that checks: it finds and flags, people decide",
+  "h1_es": "Un agente que revisa: encuentra y señala, las personas deciden",
+  "lead": "Anil's first change, a list for the faculty's advisers, comes back with four gaps and waits for Jun, the one person who knows the rules. So Yusuf and Noor write the rules as a checklist an AI agent follows on every change: it finds, drafts and flags, and the owners decide. The agent is governed too.",
+  "lead_es": "El primer cambio de Anil, una lista para los asesores de la facultad, vuelve con cuatro vacíos y espera a Jun, la única persona que conoce las reglas. Así que Yusuf y Noor escriben las reglas como una lista de verificación que un agente de IA sigue en cada cambio: encuentra, propone y señala, y los dueños deciden. El agente también está gobernado.",
+  "description": "A film about data governance and AI agents: an imagined night when an agent checks a change and a person decides; today's change, sent back with four gaps, and one person to ask; governance's rules written as a checklist, step by step; the agent's review, each finding with where it is, the rule, a draft and who decides; what it wasn't sure of, and the owners' approvals; the agent governed too, by rules for AI helpers and a register of who signs off what; why it can only check what's written plainly; and what data governance gains.",
+  "description_es": "Una película sobre gobernanza de datos y agentes de IA: una noche imaginada en la que un agente revisa un cambio y una persona decide; el cambio de hoy, devuelto con cuatro vacíos, y una sola persona a quien preguntar; las reglas de gobernanza escritas como una lista de verificación, paso a paso; la revisión del agente, cada hallazgo con dónde está, la regla, un borrador y quién decide; lo que no sabía con certeza, y las aprobaciones de los dueños; el agente también gobernado, por reglas para asistentes de IA y un registro de quién firma qué; por qué solo puede revisar lo que está escrito con claridad; y lo que gana la gobernanza de datos.",
+  "card": "Every change waits for the one person who knows the rules. Write them down so an agent can check them, and let people decide.",
+  "card_es": "Cada cambio espera a la única persona que conoce las reglas. Escríbelas para que un agente las revise, y deja que las personas decidan.",
+  "chapters_es": {
+    "night": "Una noche, imaginada",
+    "today": "Devuelto",
+    "skill": "Reglas que un agente puede seguir",
+    "review": "Tres hallazgos",
+    "decides": "Las personas deciden",
+    "agent": "También gobernado",
+    "written": "Solo lo que está escrito",
+    "close": "Esa noche"
+  },
+  "next_h": "You've seen an agent check every change while people decide. More films in the series are on the way.",
+  "next_h_es": "Viste a un agente revisar cada cambio mientras las personas deciden. Vienen más películas de la serie.",
+  "past": ["An imagined night at the university, a few years from now", "Rules reach every change, at any hour, when they're written plainly enough for an agent to check, and a person still decides."],
+  "past_es": ["Una noche imaginada en la universidad, dentro de unos años", "Las reglas llegan a cada cambio, a toda hora, cuando están escritas con la claridad suficiente para que un agente las verifique, y una persona sigue decidiendo."]
+}

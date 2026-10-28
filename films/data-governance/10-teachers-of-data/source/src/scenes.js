@@ -307,8 +307,9 @@ scene("each",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,
   const named=j=>P.t0+j*P.dt;
   gv_shots(ctx,S,t,sc.dur,[
     // the meeting room: the stewards at the table, each named as the camera comes to them; then, on the windowsill, the box Yusuf's
-    // stamp lives in, shut (the names are read until the camera leaves them, the stamp's label once the camera is on it)
-    {at:0,place:"meeting",keys:[[0,960,540,1],[1.8,960,575,1.5],[P.ap,1240,545,1.5]],d:2.2,push:0,draw:(x,tt)=>tt_meeting(x,tt,{read:tt<P.ap?["tents"]:tt>=P.ap+1.6?["stamp"]:[],tent:j=>fin(tt,named(j),0.45),
+    // stamp lives in, shut (the names are read until the camera leaves them, the stamp's label once the camera is on it); the camera is
+    // at the table by the time the first name comes, so the names read as they arrive
+    {at:0,place:"meeting",keys:[[0,960,540,1],[clamp(P.t0-2.2,0.6,1.8),960,575,1.5],[P.ap,1240,545,1.5]],d:2.2,push:0,draw:(x,tt)=>tt_meeting(x,tt,{read:tt<P.ap?["tents"]:tt>=P.ap+1.6?["stamp"]:[],tent:j=>fin(tt,named(j),0.45),
       pose:j=>({expr:tt>named(j)?"smile":"calm",nod:tt_nodAt(tt,named(j),named(j)+1.1,0)})})},
     // the whiteboard, close: what broke, what helped; a note under one or the other as each of them speaks
     {at:P.bz,place:"meetZ",keys:[[P.bz,700,388,1.4]],push:0.02,draw:(x,tt)=>tt_inZ(x,TT_Z.board,q=>{
@@ -473,8 +474,9 @@ scene("teach",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
       tt_office(x,tt,{board:Object.assign({},TT_BRD6,{lit:k=>k===1?gv_io(tt,P.mimes-0.2,P.teach+1.0,0.4):0,litW:18}),frame:0,ghost:1,ms:{row:()=>1},tip:1,box:{forms:1,frame:1},door:1,read:["door"]});
       person(x,"tom",790,905,0.8,{pose:"tt_lookIn",t:tt,expr:tt>P.teach?"smile":"calm",nod:tt_nodAt(tt,P.teach+0.05,P.mt+1,0)});
       tt_sketcher(x,tt,1020,sk(tt),fin(tt,P.teach-0.35,0.5));}},
-    // the stewards' meeting room: Yusuf at the whiteboard, and round the table, the stewards turned to it
-    {at:P.mt,place:"meeting",keys:[[P.mt,900,560,1.2],[P.mt+0.1,640,520,1.45]],d:1.5,push:0,draw:(x,tt)=>tt_meeting(x,tt,{board:{wheel:tt_wheelAt(tt,P)},cal:TT_CAL7,
+    // the stewards' meeting room: Yusuf at the whiteboard, and round the table, the stewards turned to it (all five of them, their name
+    // cards above the captions)
+    {at:P.mt,place:"meeting",keys:[[P.mt,900,560,1.2],[P.mt+0.1,850,555,1.38]],d:1.5,push:0,draw:(x,tt)=>tt_meeting(x,tt,{board:{wheel:tt_wheelAt(tt,P)},cal:TT_CAL7,
       faces:()=>1,title:"Stewards, November",yx:260,yusuf:{pose2:"tt_board",mix:fin(tt,P.mt+0.5,0.6)},pose:()=>({flip:true})})},
     // the whiteboard, close: the wheel he once found in a book, governance at its centre, the ten other parts round it, each named as it's
     // drawn, gold lines to the centre; as those parts get easier to run, a light runs in along each line, and the centre glows

@@ -1,6 +1,6 @@
 # Data governance · Teachers of data: script
 
-*The script of the tenth film of the data governance series, *Governance you can use*, the last of its first part, drafted for the author's review on 21 October 2026 and revised on 27 October 2026 for the series' plan in three parts, approved on 23 October 2026: the first part shows no files, code or tool screens, so chapters 3 to 6 now show the university's own papers. The same day, after the author's note on the films' opening stories, its opening was revised to say plainly why the crossings were a problem, that the city needed another way, and the relief; and after the author's note on closing the story, it says the mimes' way worked, comes back to Bogotá in chapters 6 and 7 too, and ends on what governance gives when it's kept up. That evening, after the author's notes on people, chapter 2 says that agreeing is one part of the key challenge in data governance, and its first priority, getting people to take part; what taking part asks of people; and that all of it is harder without tools that guide them and show them what their work changes. Chapter 7 adds that as the other parts of data work get easier to run, the centre matters more, and the people in it most of all; chapter 8, that scattered tools have long made governance hard to organise and to see, and that's changing. On 28 October 2026, after the author's rule for every opening story (scenario, problem, solution and benefits, each said outright), the opening says plainly who the stopped cars put in danger, "so people on foot have to weave between the cars", and after Bogotá's benefits, says the same benefit for data: "It's the same with data. When most people keep the rules, everyone who uses the data can trust it." Nothing is recorded before the author's yes. About 7:40, in eight chapters, in English, painted in watercolour. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 8. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
+*The script of the tenth film of the data governance series, *Governance you can use*, the last of its first part, drafted for the author's review on 21 October 2026 and revised on 27 October 2026 for the series' plan in three parts, approved on 23 October 2026: the first part shows no files, code or tool screens, so chapters 3 to 6 now show the university's own papers. The same day, after the author's note on the films' opening stories, its opening was revised to say plainly why the crossings were a problem, that the city needed another way, and the relief; and after the author's note on closing the story, it says the mimes' way worked, comes back to Bogotá in chapters 6 and 7 too, and ends on what governance gives when it's kept up. That evening, after the author's notes on people, chapter 2 says that agreeing is one part of the key challenge in data governance, and its first priority, getting people to take part; what taking part asks of people; and that all of it is harder without tools that guide them and show them what their work changes. Chapter 7 adds that as the other parts of data work get easier to run, the centre matters more, and the people in it most of all; chapter 8, that scattered tools have long made governance hard to organise and to see, and that's changing. On 28 October 2026, after the author's rule for every opening story (scenario, problem, solution and benefits, each said outright), the opening says plainly who the stopped cars put in danger, "so people on foot have to weave between the cars", and after Bogotá's benefits, says the same benefit for data: "It's the same with data. When most people keep the rules, everyone who uses the data can trust it." The author said yes the same day, and it was voiced: the recorded voice is quicker than the estimate, so the film runs 7:14, and some lines in chapters 2, 3, 4 and 7 hold a little longer, so no chapter runs over 135 words a minute. In eight chapters, in English, painted in watercolour. The narration lives in [`source/src/narration.js`](source/src/narration.js) and the pauses in [`source/src/breath.js`](source/src/breath.js); this page and those files say the same thing, and where they differ, the source wins. The title card follows chapter 1; the end card follows chapter 8. Made to read on a phone: on-screen text is at least 28 px in the frame, nothing sits under the captions, and no caption runs to three lines.*
 
 ## The promise
 
@@ -97,7 +97,7 @@ The series' reference is DAMA-DMBOK, named once, in *Off the shelf*; this film c
 
 The times are estimates, from the draft; the film's timeline replaces them once the voice is recorded. Words on screen are on paper, screens, boards, tags and speech bubbles.
 
-### 1 · The mime before the fine · 0:00–1:32
+### 1 · The mime before the fine · 0:00–1:24
 
 **Narration.** Bogotá, 1995. In the city centre, drivers stop on the zebra crossings, so people on foot have to weave between the cars. It's dangerous: more than a thousand people a year die on the city's roads. Fines alone haven't changed the habit. The city needs another way. The new mayor, Antanas Mockus, sends mimes into the streets. When a car stops on a crossing, the people around it whistle. A mime steps in and, without a word, invites the driver to back up. If the driver still won't, a traffic officer writes a fine, and the people watching applaud. The fine still came. But it came last, in an order meant to teach. It worked. By 1996, three drivers in four were keeping the crossings clear. People on foot could cross in front of the cars, not between them. Most people keep a rule because they understand it, and because the people around them keep it. The fine is for the few. It's the same with data. When most people keep the rules, everyone who uses the data can trust it.
 
@@ -105,7 +105,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** Bogotá · 1995 · 1995 · more than 1,000 road deaths a year · 1 · the people around · 2 · the mime · 3 · the fine, last · 1996 · three drivers in four keep the crossing clear · they understand it · the people around keep it · the fine is for the few · Teachers of data · why people keep a rule · Film 10 of 19 · data governance
 
-### 2 · Submission day · 1:32–2:37
+### 2 · Submission day · 1:24–2:29
 
 **Narration.** Today, the university sends its awards to the government. The submission and Planning's census report agree: 4,867 awards, counted by the glossary's meaning. How that maps to the government's definition is a decision Mei owns, and has written down. The glossary's meaning wasn't written at a desk: Mei and the faculties argued it out. Agreeing is hard. It's one part of the key challenge in data governance, and its first priority: getting people to take part. To understand the data and its rules. To look after their data, and answer for it. To make the decisions that are theirs, and respect the ones that aren't. And to do what their role asks. All of it is harder without tools that guide people, and show them what their work changes. Governance has its fines too: the checks that stop the work. Most of its work comes before them.
 
@@ -113,7 +113,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** Today · Planning · Registrar's office · Data governance · Data team · Platform team · census report · 4,812 awards · 4,867 awards · submission · Government submission · awards · 4,867 · counted by: award, in the glossary · mapped to the government's definition: decided by Mei Tanaka · decided · written down · Send · Sent · Weeks before · Workshop · What counts as an award? · a micro- credential? · 3 points? · 6 points? · at least 6 · Today · getting people to take part · – understand the data and its rules · – look after it, and answer for it · – decide what's theirs, respect what isn't · – do what their role asks · 1 · the people around · 2 · the mime · 3 · the fine, last · the checks · ?
 
-### 3 · A page beside the check · 2:37–3:25
+### 3 · A page beside the check · 2:29–3:14
 
 **Narration.** Anil is an analyst in the Faculty of Health. He adds a column to the call list he made for the faculty's advisers, and the governance check stops him. But it doesn't just say no. Its message says what's missing, and links a page written for him: what the rule asks, and why, how to fix it, and who to ask. Anil fixes it in two minutes. A check that only says no is a fine with no mime. Governance used to be a queue of approvals. Now it keeps office hours, every Thursday afternoon, for anyone a check has stopped.
 
@@ -121,7 +121,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** Anil Kurian · Faculty of Health · which school? · The faculty's call list · Learner · Programme · Adviser · + School · Sign-off · Change: the faculty's call list · column · School · owner · Faculty of Health · class · this column doesn't say whether it identifies a person · how to: Classify a column · SENT BACK · Classify a column · What the rule asks · Each column says whether it identifies a person. · Why · So who may see it follows the column, wherever it's read. · How · 1 · Ask: could it tell who someone is? · 2 · Choose direct, pseudonymous or none · 3 · Send the change again · Who to ask · Data governance's office hours, Thursdays from 2 to 3 pm · none · SIGNED · 2 · the mime · a page beside every check · awaiting approval · retired · Office hours · Thursdays, 2 to 3 pm
 
-### 4 · Each other · 3:25–4:01
+### 4 · Each other · 3:14–3:47
 
 **Narration.** Once a month, the stewards meet: the people who look after the data in each office and faculty. They don't meet to approve anything. They bring what broke, and what helped, so nobody has to learn it the hard way twice. Yusuf started with the few who wanted to come. Others joined once they saw it working. Like the people at the crossing, colleagues remind each other, long before a check has to.
 
@@ -129,7 +129,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** Stewards, October · Mei · registrar's office · Leila · admissions · Tom · short courses · Clara · Planning · Anil · Faculty of Health · APPROVED · what broke · what helped · a check nobody owned · emails typed with spaces · a page beside the check · office hours · asked by name · who's coming · Mei · Anil · Leila · Tom · Clara · + 3 faculties · 1 · the people around · the stewards
 
-### 5 · Warn first · 4:01–4:49
+### 5 · Warn first · 3:47–4:30
 
 **Narration.** A new rule starts here too. At October's meeting, Yusuf brings one: every column other teams read says what it holds. First, why. A reader who can't tell what a column holds will guess, and two guesses make two numbers. The stewards agree it, and set a date. Until then, the check only warns. Each warning links its page, and names the day it's required: the first of December. Four weeks in, the warnings are gone. There's nothing left for the date to stop. The mime came before the fine.
 
@@ -137,7 +137,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** new rule · Every column other teams read says what it holds. · Awards held · Clara · with microcredentials? 2 · Anil · without? 1 · 1 December · Jun Park · data team · The wallet · Learner · Credentials · Awards held · Sign-off · Change: the wallet · column · Awards held · description · required from 1 December · how to: Describe a column · SIGNED · Valid awards conferred on the learner. · warnings · October · 20 · 41 · 27 · 23 · November · 3 · 9 · 10 · 2 · 17 · 0 · 24 · December · 1 · 1 · the people around · 2 · the mime · 3 · the fine, last · agreed with the stewards · warns, with its page · required from 1 December · Bogotá · 1995
 
-### 6 · Measured by use · 4:49–5:38
+### 6 · Measured by use · 4:30–5:18
 
 **Narration.** And the maturity score of 2.1? Yusuf opens binder 29. Its policy says governance maturity is assessed every year. Nobody assesses it again. Governance is measured from the work instead, every day. From each night's checks: how much of what other teams read has an owner, a glossary term, a class and a description. Which checks failed last night, and whose they are. And from people: who came to office hours, and who came back. A score said how governance looked on paper. These say whether it's used. Bogotá measured its crossings the same way: by how many drivers kept them clear.
 
@@ -145,7 +145,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** 2.1 out of 5 · Data policies · Policy 29 · Maturity assessment · Governance maturity is assessed annually. · measured from the work, every day · retired · Governance's measures · an owner · 37 of 37 · a glossary term · 13 of 13 · a class · 119 of 119 · a description · 119 of 119 · Quality scorecard · 160 checks · 160 passed · 1 warning · owner: Learning team · Office hours · came: 31 · came back: 12 · Bogotá · 1996 · 1996 · three drivers in four keep the crossing clear
 
-### 7 · Teachers of data · 5:38–6:18
+### 7 · Teachers of data · 5:18–5:57
 
 **Narration.** So what does a governance team do all day? Like the mimes, it teaches. Governance sits at the centre of data work, where every other part of it meets. As those parts get easier to run, the centre matters more, and the people in it most of all. Someone has to show how the pieces fit. So every new analyst starts with a path: short films, and labs to practise on. And the stewards pass it on. Anil shows a new colleague the page that helped him.
 
@@ -153,7 +153,7 @@ The times are estimates, from the draft; the film's timeline replaces them once 
 
 **On screen.** Office hours · Thursdays, 2 to 3 pm · Stewards, November · Mei · registrar's office · Leila · admissions · Tom · short courses · Clara · Planning · Anil · Faculty of Health · data governance · architecture · modelling · storage · security · integration · documents · master data · warehousing · metadata · quality · New analyst · Faculty of Health, week 1 · Your first weeks · week 1 · week 2 · week 3 · week 4 · films · labs · Classify a column · What the rule asks · Why · How · Who to ask
 
-### 8 · What lasts · 6:18–7:40
+### 8 · What lasts · 5:57–7:14
 
 **Narration.** And the binder? Of its 215 lines, 92 now run in the work, 64 are decisions someone owns, and 59 are gone. Change models, from Kotter's eight steps to ADKAR, agree on what people need: to know why, to want it, to know how, to be able to, and to see it last. The last is the hardest. In Bogotá, within about ten years, the habits had faded: the campaigns weren't kept up. So governance can't be a project that ends. It has to be something the university can always do. Scattered tools have long made governance hard to organise, and hard to see. That's changing, as the rest of the series shows. Kept up, governance does for data what the mimes did for the crossings. Most people keep the rules before a check has to stop them. Nobody has to guess what the data means, so the numbers agree. And a check stops only the few, who fix it in minutes. Governance is people's work. Tools remember what people agreed.
 
@@ -218,18 +218,18 @@ Checked on 20 and 21 October 2026, and the plain words of the series' first part
 
 ## Pacing report
 
-Estimated by `source/tools/pace.py` on 27 October 2026, before the voice is recorded: each line timed at 171 words a minute while the voice speaks, with 0.8 s after each sentence and the holds in `source/src/breath.js`. The recorded voice replaces it.
+Measured by `source/tools/pace.py` on 28 October 2026, from the recorded voice: 192 words a minute while it speaks, with 0.8 s after each sentence and the holds in `source/src/breath.js`.
 
 | Chapter | Words | Length | Words a minute |
 |---|---|---|---|
-| 1 · The mime before the fine | 181 | 92 s, with the title card | 119 |
+| 1 · The mime before the fine | 181 | 84 s, with the title card | 130 |
 | 2 · Submission day | 147 | 66 s | 134 |
-| 3 · A page beside the check | 101 | 48 s | 127 |
-| 4 · Each other | 73 | 36 s | 122 |
-| 5 · Warn first | 90 | 48 s | 114 |
-| 6 · Measured by use | 102 | 49 s | 124 |
-| 7 · Teachers of data | 87 | 40 s | 129 |
-| 8 · What lasts | 171 | 81 s, with the end card | 126 |
-| **Film** | **952** | **about 7:40** | **124** |
+| 3 · A page beside the check | 101 | 45 s | 135 |
+| 4 · Each other | 73 | 33 s | 134 |
+| 5 · Warn first | 90 | 43 s | 125 |
+| 6 · Measured by use | 102 | 48 s | 128 |
+| 7 · Teachers of data | 87 | 39 s | 134 |
+| 8 · What lasts | 171 | 77 s, with the end card | 134 |
+| **Film** | **952** | **7:14** | **132** |
 
-Three wordless moments: the title card after the crossing, the calendar's weeks in *Warn first* (3.8 s after "nothing"), and the end card. Each chapter also holds for a moment where the picture needs it (a bow, a guide opening, a stamp, a frame coming down), so every chapter stays under 140 words a minute, and the voice fills 73% of the film and at most 78% of any chapter.
+Three wordless moments: the title card after the crossing, the calendar's weeks in *Warn first* (3.8 s after "nothing"), and the end card. Each chapter also holds for a moment where the picture needs it (a bow, a guide opening, a stamp, a frame coming down), so no chapter runs over 135 words a minute, and the voice fills 69% of the film and at most 76% of any chapter.

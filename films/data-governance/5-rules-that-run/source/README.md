@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Fustat, Yusuf, Mei and Jun), and the moment its poster shows (the water at the Nilometer's sixteenth mark). |
+| `film.json` | The film's key, title, subtitle, its own source files, the words the voice respells (Fustat, Yusuf, Mei and Jun), and the moment its poster shows (the Nilometer's well, its sixteenth mark lit gold and the water a cubit under it). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines (the longest on the survey's numbers and the scorecard's last cell), and two wordless moments (the water settling at the mark, then the title; and the end card). |

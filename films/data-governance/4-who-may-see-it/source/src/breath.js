@@ -9,5 +9,5 @@ const BREATH={
 "mask":{"hold":{"travels":0.6,"rule":0.5,"bylabel":0.4,"every":1.4}},
 "purpose":{"hold":{"goes":0.5,"yes":0.6,"group":0.6,"stars":0.4,"code":0.5,"personal":0.6,"agent":0.4}},
 "stars":{"hold":{"asks":0.8,"why":1.0,"more":0.8,"no":1.0}},
-"grants":{"hold":{"two":0.5,"platform":0.5,"like":0.2},"breathe":4.6}
+"grants":{"hold":{"two":0.5,"platform":0.5,"like":0.2},"breathe":4.4}
 };

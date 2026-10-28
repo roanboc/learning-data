@@ -10,16 +10,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada residente debe responder el censo, para que el país planifique vivienda, escuelas y transporte.",
 "But the same law lets each town hall add the answers, by name, to its records on each resident.":
 "Pero la misma ley deja que cada municipio agregue las respuestas, con nombre, a sus registros de cada residente.",
-"With computers, answers like these add up to a picture of each person, and nobody knows who will see it.":
-"Con computadoras, respuestas como estas forman un retrato de cada persona, y nadie sabe quién lo verá.",
+"With computers, answers like these add up to a picture of each person, and nobody knows who will see it, or what for.":
+"Con computadoras, respuestas como estas forman un retrato de cada persona, y nadie sabe quién lo verá, ni para qué.",
 "Hundreds of groups call for a boycott.":
 "Cientos de grupos llaman al boicot.",
 "The Constitutional Court stops the count.":
 "El Tribunal Constitucional detiene el conteo.",
 "The country still needs a way to count, without knowing who said what.":
 "El país aún necesita una forma de contar, sin saber quién dijo qué.",
-"In December, the court rules that, in principle, each person decides what is disclosed about them, and how it's used.":
-"En diciembre, el tribunal falla que, en principio, cada persona decide qué se revela sobre ella y cómo se usa.",
+"The court rules that, in principle, each person decides what is disclosed about them, and how it's used.":
+"El tribunal falla que, en principio, cada persona decide qué se revela sobre ella y cómo se usa.",
 "The court doesn't forbid counting.":
 "El tribunal no prohíbe contar.",
 "It draws a line.":
@@ -28,8 +28,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Los nombres y las direcciones se guardan aparte de las respuestas, y se eliminan lo antes posible.",
 "And answers given to be counted never go into the town hall's records.":
 "Y las respuestas dadas para contar nunca entran en los registros del municipio.",
-"In 1987, the count goes ahead that way: the country gets its numbers, and people keep their privacy.":
-"En 1987, el censo se hace así: el país obtiene sus cifras, y las personas conservan su privacidad.",
+"In 1987, the count goes ahead that way: the country counts its 61 million people, and they keep their privacy.":
+"En 1987, el censo se hace así: el país cuenta a sus 61 millones de personas, y ellas conservan su privacidad.",
 "Counting people is one permission.":
 "Contar personas es un permiso.",
 "Knowing who they are is another.":
@@ -40,8 +40,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La universidad también tiene un censo.",
 "Planning counts its learners, and its list of those near an award has no names: counting doesn't need them.":
 "Planificación cuenta a sus estudiantes, y su lista de quienes están cerca de un título no tiene nombres: contar no los necesita.",
-"This term, Clara, in Planning, wants to know which of them are still studying, to plan next term's places.":
-"Este periodo, Clara, de Planificación, quiere saber cuáles siguen estudiando, para planificar los cupos del próximo.",
+"Clara, in Planning, wants to know which of them are still studying, to plan next term's places.":
+"Clara, de Planificación, quiere saber cuáles siguen estudiando, para planificar los cupos del próximo periodo.",
 "For that, she needs each learner's status, from the learner table.":
 "Para eso necesita el estado de cada estudiante, de la tabla de estudiantes.",
 "Yusuf opens the next binder.":

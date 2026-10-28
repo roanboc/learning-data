@@ -73,7 +73,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","name",-0.2),
       reg:w("correct","town"),slip:w("picture","answers"),ring:w("picture","picture"),who:w("picture","nobody"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),need:w("need","still",-0.1),q:w("need","without",-0.1),ct:c.rules-0.4,dec:w("rules","decides"),
       tbl:c.forbid-0.4,count:w("forbid","counting"),line:c.line+0.05,split:w("apart","kept"),rem:w("apart","removed"),
-      th:c.back-0.2,arrow:w("back","given"),cross:w("back","never"),y87:c.y1987-0.1,num:w("y1987","country"),priv:w("y1987","privacy"),one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
+      th:c.back-0.2,arrow:w("back","given"),cross:w("back","never"),y87:c.y1987-0.1,num:w("y1987","country"),mil:w("y1987","sixty-one"),priv:w("y1987","privacy"),one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
       morph:w("between","between"),title:c.breath+0.7};});
   const mk=[[0,"West Germany · 1983"],[P.ct,"Karlsruhe · 1983"],[P.tbl,"West Germany · 1983"],[P.y87,"West Germany · 1987"]];
   gv_shots(ctx,S,t,sc.dur,[
@@ -125,8 +125,8 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       // the question asked before the court ruled, until the line answers it
       ws_question(x,1,1-fin(tt,P.line-0.2,0.4));
       ws_townHall(x,gv_io(tt,P.th,P.y87,0.4),fin(tt,P.arrow,0.7),fin(tt,P.cross,0.5));
-      // 1987: a new form slides in over the old, the same line, the same split, its strip into the box; the country gets its numbers, the
-      // tally filling, and people keep their privacy, the box shut and locked
+      // 1987: a new form slides in over the old, the same line, the same split, its strip into the box; the country counts its 61 million
+      // people, the tally filling, and they keep their privacy, the box shut and locked
       if(y87){const dy=(1-nf)*760,fade=1-fin(tt,P.morph+0.6,0.9);
         if(fade>0.01)withA(x,fade,()=>{x.save();x.translate(0,dy);ws_form(x,fx,fy,fw,fh,{cut:true,ticks:true});if(box87<=0)ws_stripWay(x,sp87,0,0);x.restore();});
         if(box87>0&&(box87<1||open>0.5))ws_stripWay(x,0.5,box87,0);
@@ -135,7 +135,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
         if(gone>0){const [a,b]=ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.12,fw,fh]);if(fin(tt,P.morph+0.4,1.0)>0)ws_line(x,a,b,1);}}
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.line,0.9))),ws_cutY(0),gv_io(tt,P.line-0.4,P.line+1.3,0.3));
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.y87+0.9,0.6))),ws_cutY(0),gv_io(tt,P.y87+0.6,P.y87+1.7,0.25));
-      ws_tagAt(x,tt,P.one+0.1,P.betw,WS_TAL[0]+180,WS_TAL[1]-40,"counting",{size:32});ws_tagAt(x,tt,P.two+0.1,P.betw,WS_BOX[0],WS_BOX[1]+150,"knowing who",{size:32});}}]);
+      ws_tagAt(x,tt,P.mil,P.betw,WS_TAL[0]+180,WS_TAL[1]+350,"61 million people",{size:32});ws_tagAt(x,tt,P.one+0.1,P.betw,WS_TAL[0]+180,WS_TAL[1]-40,"counting",{size:32});ws_tagAt(x,tt,P.two+0.1,P.betw,WS_BOX[0],WS_BOX[1]+150,"knowing who",{size:32});}}]);
   ws_pill(ctx,t,mk,fin(t,0.6,0.5)*(1-fin(t,P.betw,0.5)));
   gv_title(ctx,S,t,P.title,"Who may see it","classify once, protect it everywhere","Film 4 of 19 · data governance");
   wc_paperOver(ctx,S);});

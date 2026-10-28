@@ -8,26 +8,26 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Alemania Occidental, abril de 1983.",
 "Every resident is to answer the census, so the country can plan housing, schools and transport.":
 "Cada residente debe responder el censo, para que el país planifique vivienda, escuelas y transporte.",
-"But the same law lets each town hall use the answers to check up on its residents, by name.":
-"Pero la misma ley deja que cada municipio use las respuestas para controlar a sus residentes, por nombre.",
+"But the same law lets each town hall add the answers, by name, to its records on each resident.":
+"Pero la misma ley deja que cada municipio agregue las respuestas, con nombre, a sus registros de cada residente.",
+"With computers, answers like these add up to a picture of each person, and nobody knows who will see it.":
+"Con computadoras, respuestas como estas forman un retrato de cada persona, y nadie sabe quién lo verá.",
 "Hundreds of groups call for a boycott.":
 "Cientos de grupos llaman al boicot.",
-"Two weeks before census day, the Constitutional Court stops the count.":
-"Dos semanas antes del día del censo, el Tribunal Constitucional detiene el conteo.",
+"The Constitutional Court stops the count.":
+"El Tribunal Constitucional detiene el conteo.",
 "The country still needs a way to count, without knowing who said what.":
 "El país aún necesita una forma de contar, sin saber quién dijo qué.",
 "In December, the court rules that, in principle, each person decides what is disclosed about them, and how it's used.":
 "En diciembre, el tribunal falla que, en principio, cada persona decide qué se revela sobre ella y cómo se usa.",
-"With computers, no data can be assumed insignificant.":
-"Con computadoras, ningún dato puede darse por insignificante.",
 "The court doesn't forbid counting.":
 "El tribunal no prohíbe contar.",
 "It draws a line.":
 "Traza una línea.",
 "Names and addresses are kept apart from the answers, and removed as soon as possible.":
 "Los nombres y las direcciones se guardan aparte de las respuestas, y se eliminan lo antes posible.",
-"And answers given to be counted don't go back to the town hall to check up on anyone.":
-"Y las respuestas dadas para contar no vuelven al municipio para controlar a nadie.",
+"And answers given to be counted never go into the town hall's records.":
+"Y las respuestas dadas para contar nunca entran en los registros del municipio.",
 "In 1987, the count goes ahead that way: the country gets its numbers, and people keep their privacy.":
 "En 1987, el censo se hace así: el país obtiene sus cifras, y las personas conservan su privacidad.",
 "Counting people is one permission.":
@@ -38,8 +38,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En los datos de una universidad, la línea del tribunal pasa entre columnas: quién puede ver cada una, para qué y hasta cuándo.",
 "The university has a census too.":
 "La universidad también tiene un censo.",
-"Planning counts its learners every year, and its list of those near an award has no names: counting doesn't need them.":
-"Planificación cuenta a sus estudiantes cada año, y su lista de quienes están cerca de un título no tiene nombres: contar no los necesita.",
+"Planning counts its learners, and its list of those near an award has no names: counting doesn't need them.":
+"Planificación cuenta a sus estudiantes, y su lista de quienes están cerca de un título no tiene nombres: contar no los necesita.",
 "This term, Clara, in Planning, wants to know which of them are still studying, to plan next term's places.":
 "Este periodo, Clara, de Planificación, quiere saber cuáles siguen estudiando, para planificar los cupos del próximo.",
 "For that, she needs each learner's status, from the learner table.":
@@ -50,7 +50,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La política 6, Protección de datos, dice que los datos personales se clasifican y protegen.",
 "It doesn't say which data, or how.":
 "No dice qué datos, ni cómo.",
-"So until now, a request like Clara's went one way.":
+"Until now, a request like Clara's went one way.":
 "Hasta ahora, una solicitud como la de Clara seguía un camino.",
 "A form.":
 "Un formulario.",
@@ -62,8 +62,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y nada le puso fin.",
 "The platform team checks who can read that table today: forty-one people.":
 "El equipo de plataforma revisa quién puede leer esa tabla hoy: cuarenta y una personas.",
-"Nine have moved to other jobs.":
-"Nueve ya están en otros puestos.",
+"Nine have moved to other jobs, and still see every learner's name and email.":
+"Nueve ya están en otros puestos, y aún ven el nombre y el correo de cada estudiante.",
 "Nobody did anything wrong.":
 "Nadie hizo nada mal.",
 "The path just had no end.":
@@ -92,12 +92,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nada puede darse por insignificante.",
 "Mei classed it direct: the court's line, drawn at the column.":
 "Mei la clasificó directa: la línea del tribunal, trazada en la columna.",
-"The class doesn't stay in the register.":
-"La clase no se queda en el registro.",
-"It travels with its column, as a label, into every table the column reaches.":
-"Viaja con su columna, como etiqueta, a cada tabla a la que llega la columna.",
-"And one rule reads the label: direct personal data shows its values to the registrar's office, and stars to everyone else.":
-"Y una regla lee la etiqueta: los datos personales directos muestran sus valores a la oficina de registro, y asteriscos a los demás.",
+"The class travels with its column, as a label, into every table the column reaches.":
+"La clase viaja con su columna, como etiqueta, a cada tabla a la que llega la columna.",
+"One rule reads the label: the registrar's office sees direct personal data, and everyone else sees stars.":
+"Una regla lee la etiqueta: la oficina de registro ve los datos personales directos, y los demás ven asteriscos.",
 "The platform team applies it by label, not table by table.":
 "El equipo de plataforma la aplica por etiqueta, no tabla por tabla.",
 "So the email is masked in every table it reaches, and in tables built tomorrow.":

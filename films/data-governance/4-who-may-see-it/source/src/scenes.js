@@ -44,10 +44,12 @@ function ws_stripWay(ctx,split,box,shred){const [fx,fy,fw,fh]=WS_F,sy=fy-fh/2+fh
   if(box<=0)return ws_strip(ctx,fx,sy,1,1);const e=easeCam(clamp(box,0,1)),k=lerp(1,0.42,e);
   if(shred<=0)return ws_strip(ctx,lerp(fx,WS_BOX[0],e),lerp(sy,WS_BOX[1],e)+30*Math.sin(Math.PI*e),k,1);
   const v=easeCam(clamp(shred/0.6,0,1));ws_strip(ctx,WS_BOX[0],lerp(WS_BOX[1],WS_SHR[1]-90,v),0.42,1-clamp((shred-0.6)/0.4,0,1));}
-// four answers lift off the form and come together round the outline of a person (u 0 to 1); ring draws the outline
-const WS_SLIPF=[[1050,370],[1070,470],[1035,575],[1060,680]],WS_SLIPT=[[1440,400],[1700,410],[1450,566],[1690,580]],WS_OUT=[1570,480];
-function ws_slipsMove(ctx,u,ring){const e=easeCam(clamp(u,0,1));if(ring>0)withA(ctx,clamp(ring,0,1),()=>{const [cx,cy]=WS_OUT;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=5;ctx.setLineDash([4,12]);
-    ctx.lineCap="round";ctx.beginPath();ctx.arc(cx,cy-200,78,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(cx-240,cy+300);ctx.quadraticCurveTo(cx-240,cy-90,cx,cy-100);ctx.quadraticCurveTo(cx+240,cy-90,cx+240,cy+300);ctx.stroke();ctx.restore();});
+// four answers lift off the form beside the register's card and come together round the outline of a person, on its left (u 0 to 1);
+// ring draws the outline. WS_QMS: where the question marks come up round it, nobody knowing who will see it
+const WS_SLIPF=[[976,408],[993,494],[963,584],[984,674]],WS_SLIPT=[[226,424],[434,431],[234,556],[426,566]],WS_OUT=[330,480],WS_OUTK=0.8,WS_QMS=[[180,262],[330,168],[480,262]];
+function ws_slipsMove(ctx,u,ring){const e=easeCam(clamp(u,0,1)),K=WS_OUTK;if(ring>0)withA(ctx,clamp(ring,0,1),()=>{const [cx,cy]=WS_OUT;ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=5;ctx.setLineDash([4,12]);
+    ctx.lineCap="round";ctx.beginPath();ctx.arc(cx,cy-200*K,78*K,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(cx-240*K,cy+300*K);ctx.quadraticCurveTo(cx-240*K,cy-90*K,cx,cy-100*K);
+    ctx.quadraticCurveTo(cx+240*K,cy-90*K,cx+240*K,cy+300*K);ctx.stroke();ctx.restore();});
   WS_SLIPS.forEach(([s],i)=>{if(u<=0)return;const [x0,y0]=WS_SLIPF[i],[x1,y1]=WS_SLIPT[i],x=lerp(x0,x1,e),y=lerp(y0,y1,e)-80*Math.sin(Math.PI*e),r=(i%2?0.05:-0.04)*(1-e);
     ctx.save();ctx.translate(x,y);ctx.rotate(r);withA(ctx,clamp(u*4,0,1),()=>{const w=Math.round(tw(ctx,s,34,700)+60);wc_panel(ctx,-w/2,-36,w,72,{kind:"card",seed:80+i});wc_T(ctx,s,0,12,{w:700,size:34,align:"center",col:WC_DARK});});ctx.restore();});}
 // the town hall's card, its tag, and the arrow from the answers to it (p), crossed out (x)
@@ -68,10 +70,10 @@ function ws_question(ctx,p,a){if(p<=0||a<=0.01)return;withA(ctx,a,()=>{wc_pencil
   const d=clamp((p-0.9)/0.1,0,1);if(d>0){ctx.fillStyle=rgba(WC_PENCIL,0.9*d);ctx.beginPath();ctx.arc(WS_QX,ws_cutY(0)+47,6.5,0,TAU);ctx.fill();}});}
 
 scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","check"),
-      reg:w("correct","town"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),need:w("need","still",-0.1),q:w("need","without",-0.1),ct:c.rules-0.4,dec:w("rules","decides"),
-      tbl:c.insig-0.4,slip:w("insig","computers"),slipBack:c.forbid+0.1,count:w("forbid","counting"),line:c.line+0.05,split:w("apart","kept"),rem:w("apart","removed"),
-      th:c.back-0.2,arrow:w("back","given"),cross:w("back","don't"),y87:c.y1987-0.1,num:w("y1987","country"),priv:w("y1987","privacy"),one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
+    return{lift:c.answer+0.2,plan:[w("answer","housing"),w("answer","schools"),w("answer","transport")],tb:c.correct-0.3,link:w("correct","name",-0.2),
+      reg:w("correct","town"),slip:w("picture","answers"),ring:w("picture","picture"),who:w("picture","nobody"),st:c.boycott-0.4,hl:c.stops-0.5,down:w("stops","stops"),tie:w("stops","stops",0.9),need:w("need","still",-0.1),q:w("need","without",-0.1),ct:c.rules-0.4,dec:w("rules","decides"),
+      tbl:c.forbid-0.4,count:w("forbid","counting"),line:c.line+0.05,split:w("apart","kept"),rem:w("apart","removed"),
+      th:c.back-0.2,arrow:w("back","given"),cross:w("back","never"),y87:c.y1987-0.1,num:w("y1987","country"),priv:w("y1987","privacy"),one:c.one,two:c.another,betw:c.between-0.2,uni:w("between","university's"),
       morph:w("between","between"),title:c.breath+0.7};});
   const mk=[[0,"West Germany · 1983"],[P.ct,"Karlsruhe · 1983"],[P.tbl,"West Germany · 1983"],[P.y87,"West Germany · 1987"]];
   gv_shots(ctx,S,t,sc.dur,[
@@ -82,11 +84,13 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       // housing, schools, transport: each card lifts off the form and flies to the town's map
       P.plan.forEach((t0,k)=>{const u=clamp((tt-t0+0.15)/0.9,0,1);if(u<=0)return;const e=easeCam(u),[mx,my]=WS_PLAN[k],px=lerp(800,mx,e),py=lerp(585,my,e)-110*Math.sin(Math.PI*e);
         ws_planCard(x,k,px,py,lerp(0.4,0.6,e));});}},
-    // the same law lets the town hall use the answers to check up on its residents, by name: the form beside a card from the register,
-    // the names linked
-    {at:P.tb,place:"table83",keys:[[P.tb,960,540,1],[P.tb+0.1,980,520,1.06]],d:3,draw:(x,tt)=>{ws_form(x,790,520,440,600,{rot:-0.03,ticks:true});ws_regCard(x,1250,400,360,220,0.04);
-      wc_link(x,860,262,1170,314,WC_PENCIL,{p:fin(tt,P.link-0.1,0.8),lw:4,a:0.85});ws_tagAt(x,tt,P.tb+0.4,null,790,170,"census form");
-      ws_tagAt(x,tt,P.reg-0.1,null,1250,236,"register of residents");}},
+    // the same law lets the town hall add the answers, by name, to its records on each resident: the form beside a card from the register,
+    // the names linked. With computers, answers like these add up to a picture of a person, and nobody knows who will see it: the answers
+    // lift off and come together round the outline of a person, and question marks come up round it
+    {at:P.tb,place:"table83",keys:[[P.tb,1060,540,1],[P.tb+0.1,1090,520,1.06],[P.slip-0.8,960,520,1.02]],d:3,draw:(x,tt)=>{ws_form(x,900,520,440,600,{rot:-0.03,ticks:true});ws_regCard(x,1400,400,360,220,0.04);
+      wc_link(x,970,262,1320,314,WC_PENCIL,{p:fin(tt,P.link-0.1,0.8),lw:4,a:0.85});ws_tagAt(x,tt,P.tb+0.4,null,900,170,"census form");
+      ws_tagAt(x,tt,P.reg-0.1,null,1400,236,"register of residents");
+      ws_slipsMove(x,clamp((tt-P.slip)/1.3,0,1),clamp((tt-P.ring)/0.7,0,1));WS_QMS.forEach(([qx,qy],i)=>gv_qmark(x,qx,qy,56,fin(tt,P.who+0.3*i,0.6)));}},
     // hundreds of groups call for a boycott: poster after poster goes up on the column; people stop to look
     {at:P.st,place:"street83",keys:[[P.st,960,560,1],[P.st+0.1,980,530,1.07]],d:3.2,draw:(x,tt)=>{const w=gv_walk(tt,P.st+0.2,180,640,280);
       WS_PST.forEach(([k,px,py,pw,ph],i)=>ws_poster(x,k,px,py,pw,ph,(tt-(c.boycott+0.15+0.6*i))/0.7));
@@ -104,9 +108,9 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     {at:P.ct,place:"court",keys:[[P.ct,960,500,1.1],[P.ct+0.1,960,470,1.16]],d:4,draw:(x,tt)=>{const C=WS_CT;
       C.judges.forEach((jx,i)=>gv_behind(x,"ws_judge"+i,jx,C.top,C.s,{pose:"listen",t:tt+i*0.7,flip:jx>960}));x.drawImage(gv_place("bench"),0,0,W,H);
       ws_judgment(x,960,110,(tt-P.dec+0.2)/0.9);}},
-    // the table: no answer is insignificant once answers are put together; counting is allowed; the court's line across the form; names
-    // kept apart and removed, answers counted, and none sent back to the town hall; 1987, counted that way; then the line, between columns
-    {at:P.tbl,place:"table83",keys:[[P.tbl,960,540,1],[P.slip+0.4,1040,520,1.04],[P.slipBack,1040,520,1.04],[P.line-0.6,960,440,1.2],[P.split+0.3,960,540,1],[P.uni,960,520,1.05]],d:1.8,push:0.02,draw:(x,tt)=>{
+    // the table: counting is allowed; the court's line across the form; names kept apart and removed, answers counted, and none put into
+    // the town hall's records; 1987, counted that way; then the line, between columns
+    {at:P.tbl,place:"table83",keys:[[P.tbl,960,540,1],[P.line-0.6,960,440,1.2],[P.split+0.3,960,540,1],[P.uni,960,520,1.05]],d:1.8,push:0.02,draw:(x,tt)=>{
       const [fx,fy,fw,fh]=WS_F,y87=tt>=P.y87,gone=fin(tt,P.morph-0.2,0.8),nf=y87?easeCam(fin(tt,P.y87,0.8)):0;
       // the box, the shredder and the tally come when they're needed; the box opens for each strip
       const sp83=0.5*easeCam(fin(tt,P.split,0.6)),box83=fin(tt,P.split+0.6,1.3),shred83=clamp((tt-P.rem)/1.2,0,1);
@@ -129,8 +133,6 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
         const lp=fin(tt,P.y87+0.9,0.6);if(lp>0&&nf>=1){const [a,b]=gone>0?ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.12,fw,fh]):[[fx-fw/2-30,ws_cutY(sp87)],[fx+fw/2+30,ws_cutY(sp87)]];ws_line(x,a,b,lp);}
         ws_colsTable(x,fin(tt,P.morph+0.4,1.0),0);
         if(gone>0){const [a,b]=ws_lineAt(fin(tt,P.morph,1.6),[fx,fy-sp87*fh*0.12,fw,fh]);if(fin(tt,P.morph+0.4,1.0)>0)ws_line(x,a,b,1);}}
-      // the four answers, put together, are someone
-      const su=clamp((tt-P.slip)/1.3,0,1)*(1-clamp((tt-P.slipBack)/1.0,0,1));ws_slipsMove(x,su,clamp((tt-P.slip-1.1)/0.7,0,1)*(1-fin(tt,P.slipBack,0.5)));
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.line,0.9))),ws_cutY(0),gv_io(tt,P.line-0.4,P.line+1.3,0.3));
       ws_pencil(x,lerp(fx-fw/2-30,fx+fw/2+30,easeCam(fin(tt,P.y87+0.9,0.6))),ws_cutY(0),gv_io(tt,P.y87+0.6,P.y87+1.7,0.25));
       ws_tagAt(x,tt,P.one+0.1,P.betw,WS_TAL[0]+180,WS_TAL[1]-40,"counting",{size:32});ws_tagAt(x,tt,P.two+0.1,P.betw,WS_BOX[0],WS_BOX[1]+150,"knowing who",{size:32});}}]);
@@ -273,7 +275,7 @@ function ws_board(x,o){const B=WS_BD,lt=ws_bdAnchor(B.lt,-1),ltR=ws_bdAnchor(B.l
   ws_bdCard(x,B.near);if(o.near>0.01)gv_tint(x,B.near.x+8,B.near.y+8,B.near.w-16,ws_bdH(B.near)-16,WS_HI,0.5*o.near);
   if(T.a>0.01){x.save();x.translate(0,(1-easeCam(T.a))*-40);withA(x,clamp(T.a*2,0,1),()=>ws_bdCard(x,B.tom,{label:r=>r===1?T.label||0:0,mask:r=>r===1?T.mask||0:0}));x.restore();}}
 scene("mask",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
-    return{lift:w("stay","stay"),board:c.travels-0.4,tie:w("travels","label"),every:w("travels","every"),plat:c.rule-0.3,one:w("rule","one"),stars:w("rule","stars"),
+    return{lift:c.travels-0.3,board:c.travels+1.0,tie:w("travels","label",0.3),every:w("travels","every"),plat:c.rule-0.3,one:w("rule","One"),stars:w("rule","stars"),
       board2:c.bylabel-0.3,by:w("bylabel","by"),tom:w("every","tables")-0.2,near:sc.ends.every+0.6};});
   const B=WS_BD;
   gv_shots(ctx,S,t,sc.dur,[

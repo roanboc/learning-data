@@ -158,27 +158,27 @@ FADD9 = [41, 48, 55, 57, 60]; CE = [40, 48, 55, 60, 64]; CADD9 = [36, 43, 50, 52
 #    the paper of 1983 at the counter, on the column, at the table: a bundle's string, a pencil, the tin box, the shredder. The mark
 #    under the title, in C, where the story arrives in a university's data
 lift, down, tie = G('counted', 'answer', 0.2), W('counted', 'stops', 'stops'), W('counted', 'stops', 'stops', 0.9)
-dec, slip, slipBack, count = W('counted', 'rules', 'decides'), W('counted', 'insig', 'computers'), G('counted', 'forbid', 0.1), W('counted', 'forbid', 'counting')
+dec, slip, who, count = W('counted', 'rules', 'decides'), W('counted', 'picture', 'answers'), W('counted', 'picture', 'nobody'), W('counted', 'forbid', 'counting')
 line, split, rem = G('counted', 'line', 0.05), W('counted', 'apart', 'kept'), W('counted', 'apart', 'removed')
-th, arrow, cross, y87 = G('counted', 'back', -0.2), W('counted', 'back', 'given'), W('counted', 'back', "don't"), G('counted', 'y1987', -0.1)
+th, arrow, cross, y87 = G('counted', 'back', -0.2), W('counted', 'back', 'given'), W('counted', 'back', 'never'), G('counted', 'y1987', -0.1)
 morph, title = W('counted', 'between', 'between'), G('counted', 'breath', 0.7)
 bed([(S0('counted'), AM9), (G('counted', 'correct', -0.3), FMAJ7), (G('counted', 'boycott', -0.4), DM9), (G('counted', 'stops', -0.5), ESUS),
-     (G('counted', 'rules', -0.4), FADD9), (dec, CE), (G('counted', 'insig', -0.4), AM7), (G('counted', 'line'), FMAJ7), (th, DM9), (y87, CADD9),
+     (G('counted', 'rules', -0.4), FADD9), (dec, CE), (G('counted', 'forbid', -0.4), AM7), (G('counted', 'line'), FMAJ7), (th, DM9), (y87, CADD9),
      (G('counted', 'one'), AM9), (G('counted', 'another'), FMAJ7), (morph, CMAJ9)], E('counted') + 1.5)
 for k, m in enumerate([64, 60, 57]):
     piano(m, S0('counted') + 0.4 + 0.6 * k, 0.034, 0.2 - 0.2 * k)
 twine(lift - 0.5, 0.024, -0.1, 0.45); paper(lift, 0.022, -0.1, 0.4)
 for k, word in enumerate(['housing', 'schools', 'transport']):
     t0 = W('counted', 'answer', word); air(t0 - 0.15, 0.9, 0.01, 0.1 + 0.1 * k); pin(t0 + 0.75, 0.018, 0.1 + 0.1 * k)
-paper(G('counted', 'correct', -0.2), 0.018, 0.0, 0.4); pencil(W('counted', 'correct', 'check', -0.1), 0.8, 0.018, 0.1)
+paper(G('counted', 'correct', -0.2), 0.018, 0.0, 0.4); pencil(W('counted', 'correct', 'name', -0.3), 0.8, 0.018, 0.1)
 pencil(W('counted', 'need', 'without', -0.1), 1.0, 0.018, -0.35)
 for i in range(3):
     paper(G('counted', 'boycott', 0.15 + 0.6 * i), 0.022, -0.15 + 0.12 * i, 0.7)
 piano(45, down, 0.03, 0.0); paper(down, 0.022, -0.1, 0.4); twine(tie, 0.026, -0.1, 0.5); knock(down + 0.1, 0.016, 0.2, 300)
 paper(dec - 0.2, 0.024, 0.0, 0.8); rolled([60, 64, 67], dec, 0.028)
 for k in range(4):
-    paper(slip + 0.08 * k, 0.01, 0.2 + 0.15 * (k % 2), 0.2)
-air(slip + 1.1, 0.8, 0.012, 0.5); paper(slipBack, 0.012, 0.3, 0.3)
+    paper(slip + 0.08 * k, 0.01, -0.1 - 0.15 * (k % 2), 0.2)
+air(slip + 1.1, 0.8, 0.012, -0.5); piano(64, who, 0.024, -0.4)
 paper(count - 0.3, 0.018, 0.5, 0.4)
 for k in range(5):
     tick(count + 0.16 * k, 0.012, 0.5)
@@ -249,10 +249,10 @@ dr = W('column', 'mei', 'drawn'); chip(dr + 0.2, 0.016, -0.3); pencil(dr + 0.3, 
 #    tomorrow, after its card is pinned and the label runs along its string; the near-award list, which never had the email, a chord
 #    rolled
 turn(FMAJ7, S0('mask'), (65, 69))
-lift = W('mask', 'stay', 'stay'); paper(lift - 0.15, 0.01, 0.2, 0.2); air(lift, 1.4, 0.014, 0.4)
-lab = W('mask', 'travels', 'label'); air(lab - 1.5, 1.4, 0.012, -0.5); tie(lab, 0.02, -0.1)
+lift = G('mask', 'travels', -0.3); paper(lift - 0.15, 0.01, 0.2, 0.2); air(lift, 1.4, 0.014, 0.4)
+lab = W('mask', 'travels', 'label', 0.3); air(lab - 1.5, 1.4, 0.012, -0.5); tie(lab, 0.02, -0.1)
 ev = W('mask', 'travels', 'every'); air(ev, 0.9, 0.01, 0.2); tie(ev + 0.9, 0.02, 0.3)
-pin(W('mask', 'rule', 'one', 0.2), 0.022, 0.4); air(W('mask', 'rule', 'stars'), 0.8, 0.01, 0.4)
+pin(W('mask', 'rule', 'One', 0.2), 0.022, 0.4); air(W('mask', 'rule', 'stars'), 0.8, 0.01, 0.4)
 by = W('mask', 'bylabel', 'by'); air(by, 0.8, 0.01, 0.0); masked(by + 0.5, 0.036, 0.1)
 tom = W('mask', 'every', 'tables', -0.2); pin(tom + 0.3, 0.022, 0.3); air(tom + 0.4, 0.9, 0.01, 0.3); tie(tom + 1.3, 0.018, 0.35); masked(tom + 1.9, 0.034, 0.35)
 rolled([48, 55, 60, 64], G('mask', 'every') + _DUR['mask/every'] + 0.6, 0.026)

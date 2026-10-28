@@ -16,6 +16,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [Who decides](https://data.learn-all.org/data-governance/who-decides/) | Data governance, and the right to decide | 5½ min | 10 | 3 questions | [script](2-who-decides/script.md) · [source](2-who-decides/source/README.md) |
 | [One word, one home](https://data.learn-all.org/data-governance/one-word-one-home/) | Data governance, and one meaning for each word | 6 min | 8 | 4 questions | [script](3-one-word-one-home/script.md) · [source](3-one-word-one-home/source/README.md) |
 | [Who may see it](https://data.learn-all.org/data-governance/who-may-see-it/) | Data governance, and who may see each column | 6 min | 8 | 3 questions | [script](4-who-may-see-it/script.md) · [source](4-who-may-see-it/source/README.md) |
+| [Rules that run](https://data.learn-all.org/data-governance/rules-that-run/) | Data quality rules | 6 min | 10 | 3 questions | [script](5-rules-that-run/script.md) · [source](5-rules-that-run/source/README.md) |
 | [Fixed where it starts](https://data.learn-all.org/data-governance/fixed-where-it-starts/) | Data governance, and fixing problems where they start | 6 min | 8 | 3 questions | [script](6-fixed-where-it-starts/script.md) · [source](6-fixed-where-it-starts/source/README.md) |
 | [An agent that checks](https://data.learn-all.org/data-governance/an-agent-that-checks/) | AI for governance | 6½ min | 8 | 3 questions | [script](9-an-agent-that-checks/script.md) · [source](9-an-agent-that-checks/source/README.md) |
 <!-- /films -->

@@ -1,0 +1,35 @@
+{
+  "kicker": "Change control",
+  "kicker_es": "Control de cambios",
+  "title_es": "Cambios sin sorpresas",
+  "h1": "Change without surprises: a step, not a meeting",
+  "h1_es": "Cambios sin sorpresas: un paso, no una reunión",
+  "lead": "The word award has just changed, and Jun must change what the reports count. The university's change board meets once a month, after the draft submission, and answers its form from memory. Jun's team starts a record of who uses what, and his change request carries an impact note the owners fill in.",
+  "lead_es": "La palabra título acaba de cambiar, y Jun debe cambiar lo que cuentan los informes. El comité de cambios de la universidad se reúne una vez al mes, después del borrador de la entrega, y responde su formulario de memoria. El equipo de Jun empieza un registro de quién usa qué, y su solicitud de cambio lleva una nota de impacto que llenan los dueños.",
+  "description": "A film about change control: Dagen H, the morning of 3 September 1967, when Sweden switched to driving on the right and the change surprised no one; a change board that meets once a month and answers its form from memory; a record of who uses what, each line written by its owner; an impact note on every change request: what it reaches, whether it breaks, and who must be told; a change of meaning that breaks though the table looks the same, and the data's owner who decides; a new mark added instead; a new edition beside the old one, kept until a date everyone knows, as the last resort; a notice in each team's own words, with a date and help; a change that waits until everyone it reaches is ready; and a policy that runs as a step in every change, not a meeting.",
+  "description_es": "Una película sobre el control de cambios: Dagen H, la mañana del 3 de septiembre de 1967, cuando Suecia pasó a circular por la derecha y el cambio no sorprendió a nadie; un comité de cambios que se reúne una vez al mes y responde su formulario de memoria; un registro de quién usa qué, cada línea escrita por su dueño; una nota de impacto en cada solicitud de cambio: a qué alcanza, si rompe algo, y a quién hay que avisar; un cambio de significado que rompe aunque la tabla se vea igual, y el dueño de los datos, que lo decide; una marca nueva agregada en su lugar; una edición nueva junto a la vieja, guardada hasta una fecha que todos saben, como último recurso; un aviso con las palabras de cada equipo, con una fecha y ayuda; un cambio que espera hasta que todos a quienes alcanza están listos; y una política que funciona como un paso de cada cambio, no como una reunión.",
+  "card": "A monthly board answers from memory. Keep a record of who uses what, and give every change an impact note the owners fill in.",
+  "card_es": "Un comité mensual responde de memoria. Registra quién usa qué, y dale a cada cambio una nota de impacto que llenen los dueños.",
+  "chapters_es": {
+    "dawn": "Las cinco de la mañana",
+    "board": "El comité de cambios",
+    "uses": "Quién usa qué",
+    "note": "La nota de impacto",
+    "breaks": "¿Rompe o no?",
+    "adds": "Agregar, no romper",
+    "edition": "La edición vieja",
+    "words": "Con sus palabras",
+    "ready": "Listos",
+    "step": "Un paso, no una reunión"
+  },
+  "past": [
+    "Sweden, the morning of 3 September 1967",
+    "A huge change surprises no one when everyone knows what will change, when, and what to do."
+  ],
+  "past_es": [
+    "Suecia, la mañana del 3 de septiembre de 1967",
+    "Un cambio enorme no sorprende a nadie cuando todos saben qué va a cambiar, cuándo y qué hacer."
+  ],
+  "next_h": "You've seen a change go in the same day, told to everyone it reaches, and surprise no one. More films in the series are on the way.",
+  "next_h_es": "Viste un cambio entrar el mismo día, avisado a todos a quienes alcanza, sin sorprender a nadie. Vienen más películas de la serie."
+}

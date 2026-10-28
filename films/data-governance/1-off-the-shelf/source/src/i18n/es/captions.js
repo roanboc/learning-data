@@ -3,20 +3,28 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the other series: Planificación, informe, dueño, título for an award. Governance is "gobernanza", because this film also speaks of the government (el gobierno). */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
-"In 1215, Magna Carta made a promise.":
-"En 1215, la Carta Magna hizo una promesa.",
-"“There is to be one measure of wine throughout our kingdom, and one measure of ale, and one measure of corn.”":
-"“Habrá una sola medida de vino en todo nuestro reino, una sola medida de cerveza y una sola medida de grano.”",
-"For six hundred years, the promise was repeated, and measures still differed from town to town.":
-"Durante seiscientos años, la promesa se repitió, y las medidas seguían cambiando de un pueblo a otro.",
-"Kings sent standards to the towns. Officers checked them now and then.":
-"Los reyes enviaban patrones a los pueblos. Unos oficiales los revisaban a veces.",
-"It wasn't enough. In 1871, a member of Parliament said that in his county alone, a bushel meant thirty-two different measures.":
-"No bastó. En 1871, un diputado dijo que, solo en su condado, un bushel equivalía a treinta y dos medidas distintas.",
-"What finally worked was all of it together:":
-"Lo que por fin funcionó fue todo junto:",
-"one definition in law, a copy in every county, and an inspector who checked against it, again and again, with the law behind him.":
-"una definición en la ley, una copia en cada condado y un inspector que comparaba con ella, una y otra vez, con la ley detrás.",
+"Surgical teams have long known the steps that keep patients safe.":
+"Los equipos de cirugía saben desde hace mucho qué pasos protegen al paciente.",
+"Check it's the right patient. Give the antibiotic before the first cut. Count every sponge before closing.":
+"Comprobar que es el paciente correcto. Dar el antibiótico antes del primer corte. Contar cada gasa antes de cerrar.",
+"The steps were written in guidelines, but in a busy operating room, they were often skipped.":
+"Los pasos estaban escritos en guías, pero en un quirófano ajetreado, a menudo se saltaban.",
+"Patients paid for it: infections, mistakes, and deaths that could have been avoided.":
+"Los pacientes lo pagaban: infecciones, errores y muertes que se podían evitar.",
+"Something had to change.":
+"Algo tenía que cambiar.",
+"In 2008, a study in eight hospitals, in eight countries, tried one change.":
+"En 2008, un estudio en ocho hospitales, de ocho países, probó un solo cambio.",
+"Three times in every operation, the team paused, and a nurse read a short checklist out loud.":
+"Tres veces en cada operación, el equipo se detenía y un enfermero leía en voz alta una lista breve.",
+"Each step was confirmed, and the nurse could hold the team until it was done.":
+"Cada paso se confirmaba, y el enfermero podía parar al equipo hasta que se hiciera.",
+"Deaths after surgery nearly halved, from 1.5 to 0.8 in every hundred patients.":
+"Las muertes tras la cirugía bajaron casi a la mitad: de 1.5 a 0.8 de cada cien pacientes.",
+"What worked was all of it together:":
+"Lo que funcionó fue todo junto:",
+"one agreed list, a copy in the room where the work happens, and someone who checks every step, every time.":
+"una lista acordada, una copia en la sala donde se hace el trabajo y alguien que verifica cada paso, cada vez.",
 "Today, Yusuf Demir starts as the university's data governance lead.":
 "Hoy, Yusuf Demir empieza como líder de gobernanza de datos de la universidad.",
 "He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5.":
@@ -35,28 +43,32 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El borrador de la entrega al gobierno dice 4,867.",
 "Which number is right?":
 "¿Cuál número es el correcto?",
-"Yusuf follows the numbers back.":
-"Yusuf sigue el rastro de los números.",
+"The data team checks both numbers.":
+"El equipo de datos revisa los dos números.",
 "Both are right, each by its own meaning of award.":
 "Ambos son correctos, cada uno con su sentido de título.",
 "On Monday, the word changed: microcredentials of at least six credit points now count.":
 "El lunes, la palabra cambió: ahora cuentan las microcredenciales de al menos seis créditos.",
 "One report ran before the change, the other after.":
 "Un informe se generó antes del cambio; el otro, después.",
-"But the government counts awards by its own definition. Who decides how ours maps to it?":
-"Pero el gobierno cuenta los títulos con su propia definición. ¿Quién decide cómo se mapea la nuestra a la suya?",
+"But the government counts awards by its own definition, and no one agrees which number matches it.":
+"Pero el gobierno cuenta los títulos con su propia definición, y nadie se pone de acuerdo en cuál número coincide con ella.",
+"So the data team takes it to Yusuf, in data governance: who decides?":
+"Así que el equipo de datos se lo lleva a Yusuf, en gobernanza de datos: ¿quién decide?",
 "Mei owns what award means here. Jun builds what the model says. Planning reports what it's given.":
 "Mei es dueña de lo que significa título aquí. Jun construye lo que dice el modelo. Planificación informa lo que recibe.",
 "And the chart says: to be confirmed.":
 "Y el cuadro dice: por confirmar.",
+"Like an operating room before the checklist: everyone knows their own step, and no one checks them all.":
+"Como un quirófano antes de la lista: cada uno conoce su paso, y nadie los verifica todos.",
 "Policy 12 says that business terms are defined consistently.":
 "La política 12 pide definir los términos de negocio de forma consistente.",
 "It doesn't say who decides, or how a decision reaches the work.":
 "No dice quién decide, ni cómo una decisión llega al trabajo.",
 "That's what governance is for: deciding who decides, and making sure each decision reaches the work.":
 "Para eso es la gobernanza: para decidir quién decide y asegurar que cada decisión llegue al trabajo.",
-"Like the inspector at the market: a rule, a copy where the work happens, and someone who checks.":
-"Como el inspector del mercado: una regla, una copia donde se hace el trabajo y alguien que verifica.",
+"Like the surgical checklist: a rule, a copy where the work happens, and someone who checks.":
+"Como la lista de verificación quirúrgica: una regla, una copia donde se hace el trabajo y alguien que verifica.",
 "Governance sets the rules and checks they're kept. Management does the work.":
 "La gobernanza fija las reglas y verifica que se cumplan. La gestión hace el trabajo.",
 "Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?":

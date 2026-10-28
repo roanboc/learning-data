@@ -1,0 +1,7 @@
+name: Jun Park
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: analytics engineer
+status: confirmed

@@ -2797,12 +2797,12 @@ function gd_bubble(ctx,a,k,lines,mix,lines2){if(a<=0.01)return;const tx=1290,ty=
 // o.tab 1, the files changed instead. Words are 28 px or more at the screen's own size.
 const GD_PR={title:"Completions for Planning",sub:"Jun Park wants to merge into main",desc:"The awards conferred this year, by faculty.",
   files:["models/marts/planning/mart_planning__completions.sql","models/marts/planning/_planning__models.yml","governance/4-data-products/completions.yml"],
-  more:"and 7 more, written by the project's scripts",ck:["build","governance","products","reviewers","impact"],
+  more:"and 8 more, written by the project's scripts",ck:["build","governance","products","reviewers","impact"],
   m1:"owner: models/marts/planning/_planning__models.yml: mart_planning__completions has no",m2a:"meta.owner or meta.domain ",m2b:"(how to: docs/how-to/add-an-owner.md)",
   g1:"Governance's rules are met: every owner, glossary term, column class, test and",g2:"description is in place."};
 const GD_LB=[150,336,1000,256],GD_RB=[1190,336,580,256],GD_CK=[150,612,1620,240];
 function gd_prHead(ctx,o){const [x,y,w,h]=GU_BIG;return gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:o.title||GD_PR.title,titleSize:o.titleSize,
-  state:o.state||["Open",GV.green],sub:o.sub||GD_PR.sub,tabs:o.tabs||["Conversation","Files changed · 10","Checks · 5"],tab:o.tab||0});}
+  state:o.state||["Open",GV.green],sub:o.sub||GD_PR.sub,tabs:o.tabs||["Conversation","Files changed · 11","Checks · 5"],tab:o.tab||0});}
 // who reviews it: the code owners of the files it changes, asked by themselves as it opens (o.rev, 0 to 1): Planning, gold, for its
 // table, and the owners of the product and of governance's files; o.appr (0 to 1), Planning's yes
 const GD_REV=[["Planning",1],["Clara Jensen"],["data governance"],["Noor"]];
@@ -3344,12 +3344,12 @@ scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touch
         {h:484,lit:[0,0,0,...[0,1,2,3,4].map(k=>0.45*fin(tt,P.five+0.18*k,0.35)),0,fin(tt,P.four,0.4)]});
       gv_stamp(x,1500,520,"breaks",fin(tt,P.breaks-0.1,0.45),{col:GV.goldInk,size:52,rot:-0.08});gu_nameCard(x,1320,640,"Mei Tanaka","registrar's office",fin(tt,P.mei-0.1,0.5));}},
     // the second draft: a column added to version 2, its SQL and its YAML
-    {at:P.col,place:"big",keys:[[P.col,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,4);gd_column(x,{lit:fin(tt,P.counts,0.5),cls:fin(tt,P.counts+0.6,0.5)});}},
+    {at:P.col,place:"big",keys:[[P.col,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,5);gd_column(x,{lit:fin(tt,P.counts,0.5),cls:fin(tt,P.counts+0.6,0.5)});}},
     // the report again: additive, and three owners to tell
-    {at:P.add,place:"big",keys:[[P.add,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,4);
+    {at:P.add,place:"big",keys:[[P.add,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,5);
       gd_report(x,tt,GD_R2,null,{h:470,lit:[0,0,0,fin(tt,P.addv,0.5),0,0,0,0,0,fin(tt,P.three,0.4)]});}},
     // a sketch: the column renamed; the report calls it breaking, and the impact check fails
-    {at:P.ren,place:"big",keys:[[P.ren,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,4);const f=fin(tt,P.fail,0.3);
+    {at:P.ren,place:"big",keys:[[P.ren,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,5);const f=fin(tt,P.fail,0.3);
       gd_report(x,tt,GD_R3,null,{h:290,lit:[0,0,0,f,f]});
       gu_checks(x,150,640,1620,{h:200,items:[{name:"impact",st:f>0.5?"fail":"run"}],t:tt,summary:false,msgGap:70,
         msg:[{s:"breaking change to core_credential v2 with no new version",col:GV.redInk,p:clamp((tt-P.fail)/1.0,0,1)}],pop:[f*(1-fin(tt,P.fail+1.2,0.6))]});}}]);});

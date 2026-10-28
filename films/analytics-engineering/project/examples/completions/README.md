@@ -2,10 +2,10 @@
 
 Jun Park opens a pull request that adds a mart for Planning, `mart_planning__completions`: the
 awards conferred in the census year, by faculty and award type, for the census report. He adds it
-to a product, `completions`, and runs the scripts that write the product's open-standard files and
-`CODEOWNERS`. He forgets the mart's owner. The governance check stops it, and says how to add one;
-he adds two lines, and every check passes. *Governance you can use* film 1 of 6, *Governed in dbt*,
-shows it.
+to a product, `completions`, and runs the scripts that write the product's open-standard files,
+`CODEOWNERS` and the physical diagram. He forgets the mart's owner. The governance check stops it,
+and says how; he adds two lines, and every check passes. *Governance you can use* film 1 of 6,
+*Governed in dbt*, shows it.
 
 | File | What it is |
 |---|---|

@@ -1,6 +1,6 @@
 # What this change touches
 
-4 file(s) changed in the project since `before-tuesday`; 1 model(s), seed(s) or source(s) changed, 0 test(s) changed, 3 downstream model(s), 15 test(s), 3 exposure(s).
+5 file(s) changed in the project since `before-tuesday`; 1 model(s), seed(s) or source(s) changed, 0 test(s) changed, 3 downstream model(s), 15 test(s), 3 exposure(s).
 
 ## Changed
 

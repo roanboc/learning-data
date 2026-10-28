@@ -1,6 +1,6 @@
 # What this change touches
 
-2 file(s) changed in the project since `column-added`; 1 model(s), seed(s) or source(s) changed, 0 test(s) changed, 3 downstream model(s), 15 test(s), 3 exposure(s).
+3 file(s) changed in the project since `column-added`; 1 model(s), seed(s) or source(s) changed, 0 test(s) changed, 3 downstream model(s), 15 test(s), 3 exposure(s).
 
 ## Changed
 

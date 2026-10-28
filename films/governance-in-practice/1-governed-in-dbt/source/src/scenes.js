@@ -137,12 +137,12 @@ scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touch
         {h:484,lit:[0,0,0,...[0,1,2,3,4].map(k=>0.45*fin(tt,P.five+0.18*k,0.35)),0,fin(tt,P.four,0.4)]});
       gv_stamp(x,1500,520,"breaks",fin(tt,P.breaks-0.1,0.45),{col:GV.goldInk,size:52,rot:-0.08});gu_nameCard(x,1320,640,"Mei Tanaka","registrar's office",fin(tt,P.mei-0.1,0.5));}},
     // the second draft: a column added to version 2, its SQL and its YAML
-    {at:P.col,place:"big",keys:[[P.col,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,4);gd_column(x,{lit:fin(tt,P.counts,0.5),cls:fin(tt,P.counts+0.6,0.5)});}},
+    {at:P.col,place:"big",keys:[[P.col,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,5);gd_column(x,{lit:fin(tt,P.counts,0.5),cls:fin(tt,P.counts+0.6,0.5)});}},
     // the report again: additive, and three owners to tell
-    {at:P.add,place:"big",keys:[[P.add,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,4);
+    {at:P.add,place:"big",keys:[[P.add,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,5);
       gd_report(x,tt,GD_R2,null,{h:470,lit:[0,0,0,fin(tt,P.addv,0.5),0,0,0,0,0,fin(tt,P.three,0.4)]});}},
     // a sketch: the column renamed; the report calls it breaking, and the impact check fails
-    {at:P.ren,place:"big",keys:[[P.ren,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,4);const f=fin(tt,P.fail,0.3);
+    {at:P.ren,place:"big",keys:[[P.ren,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,5);const f=fin(tt,P.fail,0.3);
       gd_report(x,tt,GD_R3,null,{h:290,lit:[0,0,0,f,f]});
       gu_checks(x,150,640,1620,{h:200,items:[{name:"impact",st:f>0.5?"fail":"run"}],t:tt,summary:false,msgGap:70,
         msg:[{s:"breaking change to core_credential v2 with no new version",col:GV.redInk,p:clamp((tt-P.fail)/1.0,0,1)}],pop:[f*(1-fin(tt,P.fail+1.2,0.6))]});}}]);});

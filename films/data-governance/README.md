@@ -19,6 +19,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [Rules that run](https://data.learn-all.org/data-governance/rules-that-run/) | Data quality rules | 6 min | 10 | 3 questions | [script](5-rules-that-run/script.md) · [source](5-rules-that-run/source/README.md) |
 | [Fixed where it starts](https://data.learn-all.org/data-governance/fixed-where-it-starts/) | Fixing data at the source | 6 min | 8 | 3 questions | [script](6-fixed-where-it-starts/script.md) · [source](6-fixed-where-it-starts/source/README.md) |
 | [A product with an owner](https://data.learn-all.org/data-governance/a-product-with-an-owner/) | Data products | 6 min | 9 | 3 questions | [script](8-a-product-with-an-owner/script.md) · [source](8-a-product-with-an-owner/source/README.md) |
+| [Teachers of data](https://data.learn-all.org/data-governance/teachers-of-data/) | Getting people to take part | 7 min | 8 | 3 questions | [script](10-teachers-of-data/script.md) · [source](10-teachers-of-data/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

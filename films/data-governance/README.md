@@ -15,6 +15,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [Off the shelf](https://data.learn-all.org/data-governance/off-the-shelf/) | Data governance, and where each policy runs | 5½ min | 9 | 4 questions | [script](1-off-the-shelf/script.md) · [source](1-off-the-shelf/source/README.md) |
 | [Who decides](https://data.learn-all.org/data-governance/who-decides/) | Data governance, and the right to decide | 5½ min | 10 | 3 questions | [script](2-who-decides/script.md) · [source](2-who-decides/source/README.md) |
 | [One word, one home](https://data.learn-all.org/data-governance/one-word-one-home/) | Data governance, and one meaning for each word | 6 min | 8 | 4 questions | [script](3-one-word-one-home/script.md) · [source](3-one-word-one-home/source/README.md) |
+| [Who may see it](https://data.learn-all.org/data-governance/who-may-see-it/) | Data governance, and who may see each column | 6 min | 8 | 3 questions | [script](4-who-may-see-it/script.md) · [source](4-who-may-see-it/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

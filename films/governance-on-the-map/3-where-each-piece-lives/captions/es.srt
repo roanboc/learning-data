@@ -1,0 +1,271 @@
+1
+00:00:01,600 --> 00:00:03,534
+Corea, bajo los reyes de Joseon.
+
+2
+00:00:04,834 --> 00:00:08,364
+Cada día, los historiadores de la corte anotan lo que se dice y se hace.
+
+3
+00:00:09,664 --> 00:00:15,645
+Cuando muere un rey, una oficina hace el registro de su reinado, sus anales, a partir de esas notas, y los imprime.
+
+4
+00:00:17,145 --> 00:00:22,827
+Todas las copias son iguales, se guardan en cuatro archivos, y nadie puede cambiar ninguna, ni siquiera un rey.
+
+5
+00:00:24,327 --> 00:00:29,287
+En 1592, la guerra sube por los caminos, y tres de los cuatro archivos arden.
+
+6
+00:00:31,187 --> 00:00:33,113
+Solo queda la copia de Jeonju.
+
+7
+00:00:34,613 --> 00:00:42,094
+Si también arde, se pierden 175 años de la memoria del reino: qué se decidió, quién lo decidió y por qué.
+
+8
+00:00:43,794 --> 00:00:45,234
+Algo tiene que cambiar.
+
+9
+00:00:46,934 --> 00:00:52,224
+Dos eruditos del lugar la llevan a las montañas, y la cuidan, por turnos, durante más de un año.
+
+10
+00:00:54,524 --> 00:00:58,391
+Después de la guerra, la corte vuelve a imprimir los anales, a partir de esa única copia.
+
+11
+00:00:59,691 --> 00:01:03,791
+Cinco juegos, lejos unos de otros: uno en la capital, cuatro en lo alto de las montañas.
+
+12
+00:01:05,291 --> 00:01:11,433
+Cada pocos años, un historiador sube a cada archivo, airea los libros y anota lo que encuentra.
+
+13
+00:01:13,133 --> 00:01:20,160
+Los anales sobreviven, completos: 472 años, veinticinco reyes, 888 libros.
+
+14
+00:01:21,660 --> 00:01:24,101
+Hoy, cualquiera puede leerlos en línea, gratis.
+
+15
+00:01:25,401 --> 00:01:32,411
+La copia de Jeonju pudo rehacer las demás porque todas salieron de una sola fuente, en un solo sentido, y nadie escribió en ninguna.
+
+16
+00:01:33,711 --> 00:01:35,085
+Con los datos pasa lo mismo.
+
+17
+00:01:36,085 --> 00:01:40,094
+Se puede confiar en una copia cuando sale de su hogar, en un solo sentido, y se controla.
+
+18
+00:01:48,394 --> 00:01:49,190
+Febrero.
+
+19
+00:01:50,190 --> 00:01:57,326
+Una planificadora de la Facultad de Negocios pide leer la lista de Planificación de estudiantes cerca de un título, para planear cursos.
+
+20
+00:01:58,626 --> 00:02:02,559
+En la plataforma de datos, la página de la tabla nombra a su dueño: Jun.
+
+21
+00:02:03,859 --> 00:02:06,211
+Así que su solicitud va a Jun, y espera.
+
+22
+00:02:07,911 --> 00:02:09,378
+Pero Jun solo la construyó.
+
+23
+00:02:10,378 --> 00:02:13,244
+Desde octubre, su dueña es Clara, de Planificación.
+
+24
+00:02:14,544 --> 00:02:18,006
+Nueve días después, Jun ve la solicitud, y la reenvía.
+
+25
+00:02:19,706 --> 00:02:23,757
+Si hubiera dicho que sí, alguien que no es el dueño habría decidido quién puede verla.
+
+26
+00:02:25,257 --> 00:02:29,817
+La página se escribió a mano cuando se construyó la tabla, y nadie la mantuvo al día.
+
+27
+00:02:32,517 --> 00:02:36,893
+Sam lleva la plataforma de datos, y quiere que sus páginas nombren al dueño correcto.
+
+28
+00:02:37,993 --> 00:02:41,231
+Sam le pregunta a Yusuf dónde viven las piezas de la gobernanza.
+
+29
+00:02:42,531 --> 00:02:44,357
+Yusuf cuenta siete lugares.
+
+30
+00:02:45,657 --> 00:02:48,357
+La herramienta de arquitectura, que guarda el mapa de Noor.
+
+31
+00:02:49,357 --> 00:02:50,173
+El glosario.
+
+32
+00:02:51,173 --> 00:02:54,824
+La biblioteca de documentos, con las políticas y las actas del consejo.
+
+33
+00:02:55,824 --> 00:03:02,439
+El repositorio del equipo de datos: dueños, clases, tablas, controles, decisiones y la promesa de cada producto.
+
+34
+00:03:03,539 --> 00:03:07,393
+La plataforma de datos: quién puede leer qué, y el registro de quién lo leyó.
+
+35
+00:03:08,393 --> 00:03:10,731
+El catálogo, donde la gente encuentra productos.
+
+36
+00:03:11,731 --> 00:03:14,083
+Y el gestor de incidencias, para problemas y solicitudes.
+
+37
+00:03:15,383 --> 00:03:17,528
+Algunas piezas están en más de un lugar.
+
+38
+00:03:19,028 --> 00:03:22,213
+Una copia ya no coincidía con las otras: se había desviado.
+
+39
+00:03:24,913 --> 00:03:29,139
+Noor pone cada lugar en su mapa, como una aplicación, con lo que guarda.
+
+40
+00:03:30,639 --> 00:03:32,015
+Luego fija una regla.
+
+41
+00:03:33,115 --> 00:03:37,335
+Cada pieza tiene un solo hogar, donde se cambia, y un dueño, que la decide.
+
+42
+00:03:38,835 --> 00:03:42,622
+Los demás lugares guardan una copia, y dicen de dónde vino, y cuándo.
+
+43
+00:03:44,122 --> 00:03:48,207
+El dueño de un producto, por ejemplo, vive en el repositorio del equipo de datos.
+
+44
+00:03:49,307 --> 00:03:51,842
+El catálogo y la página de la plataforma lo copian.
+
+45
+00:03:53,342 --> 00:03:55,980
+Como con los anales, nadie escribe en una copia.
+
+46
+00:03:57,480 --> 00:04:00,479
+Una corrección va a su hogar, y cada copia la sigue.
+
+47
+00:04:03,179 --> 00:04:05,492
+Luego, los flujos entre ellos, cada uno en un solo sentido.
+
+48
+00:04:06,792 --> 00:04:09,278
+Las definiciones van del mapa al glosario.
+
+49
+00:04:10,578 --> 00:04:17,280
+Del glosario, van a cada herramienta que las lee: la copia del equipo de datos, los tableros y el asistente.
+
+50
+00:04:18,580 --> 00:04:23,157
+Los conceptos del mapa, un estudiante o un título, van a las tablas del equipo de datos.
+
+51
+00:04:24,457 --> 00:04:29,653
+La clase de cada columna va del repositorio a la plataforma, donde fija quién puede leerla.
+
+52
+00:04:30,953 --> 00:04:34,876
+La promesa de cada producto va del repositorio al catálogo.
+
+53
+00:04:36,176 --> 00:04:37,460
+Nada fluye hacia atrás.
+
+54
+00:04:38,960 --> 00:04:40,436
+Una copia nunca es un hogar.
+
+55
+00:04:43,136 --> 00:04:48,189
+Pero una copia aún puede desviarse de su hogar, si alguien escribe en ella, o si se detiene una sincronización.
+
+56
+00:04:49,689 --> 00:04:53,116
+Así que cada noche, un control compara cada copia con su hogar.
+
+57
+00:04:54,816 --> 00:05:02,777
+La primera noche, halla al antiguo dueño en la página de la tabla, y nombres errados en otras dos, escritos a mano el año pasado.
+
+58
+00:05:04,677 --> 00:05:09,027
+La sincronización los corrige antes de la mañana, y el control le avisa a cada dueño qué cambió.
+
+59
+00:05:10,727 --> 00:05:14,663
+El desvío es algo que encuentra un control, no algo que una persona recuerda.
+
+60
+00:05:16,363 --> 00:05:20,299
+Los historiadores subían a cada archivo, y anotaban lo que encontraban.
+
+61
+00:05:21,799 --> 00:05:23,731
+Aquí, lo hace un control cada noche.
+
+62
+00:05:26,431 --> 00:05:28,405
+Cada equipo sigue en su propia herramienta.
+
+63
+00:05:29,705 --> 00:05:35,245
+Lo que cambia es que todos saben qué copia les toca cambiar, y cuál solo leer.
+
+64
+00:05:36,745 --> 00:05:40,754
+La siguiente solicitud de la planificadora va directo a Clara, que la decide en un día.
+
+65
+00:05:42,454 --> 00:05:50,103
+Y el mapa de Noor se vuelve el plan de la próxima serie, Gobernanza que puedes usar: cada película arma una parte, en las herramientas.
+
+66
+00:05:51,803 --> 00:05:56,870
+Los anales duraron porque cada copia salió de una sola fuente, en un solo sentido, y se controlaba.
+
+67
+00:05:58,370 --> 00:06:02,507
+Da a cada pieza de la gobernanza un solo hogar, y se podrá confiar en cada copia.
+
+68
+00:06:03,807 --> 00:06:08,586
+Todos leen lo mismo, y cada solicitud llega a la persona que decide.

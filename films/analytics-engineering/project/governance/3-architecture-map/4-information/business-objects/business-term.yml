@@ -1,0 +1,15 @@
+name: business term
+kind: business object
+owner: Mei Tanaka, registrar's office
+home: architecture map
+copies:
+- in: business glossary
+  synced from: architecture map
+  drift check: 'yes'
+- in: dbt project
+  synced from: business glossary
+  drift check: 'yes'
+- in: data platform
+  synced from: business glossary
+  drift check: 'yes'
+status: confirmed

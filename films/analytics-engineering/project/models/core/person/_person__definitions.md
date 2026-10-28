@@ -16,6 +16,7 @@
 - Rule: Preferred name and home address: set by the person, through self-service.
 - Rule: Work details: from the HR system. Kept by HR.
 - History: Every version of every record is kept. Joining two records into one person, or parting them, is dated and recorded.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}
 
 {% docs role %}
@@ -32,6 +33,7 @@
 - Rule: Each role relates to what it's for: a student role to an award, a tutor role to a unit in a teaching period, a researcher role to a project.
 - Rule: The owner of each kind of role decides what it means and who holds it. The registrar's office decides who the person is.
 - History: Every role keeps its dates, and every change to them is a new version.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}
 
 {% docs contact_point %}
@@ -43,6 +45,7 @@
 - Rule: A contact point can reach more than one person. A shared home address is one contact point, for each person who lives there.
 - Rule: A contact point is never the person. Two records that share one aren't one person for that alone.
 - History: Every contact point keeps when it was added, last confirmed and closed.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}
 
 {% docs identifier %}
@@ -55,4 +58,5 @@
 - Rule: When two records turn out to be one person, both identifiers stay. The issuing system says which one it keeps as its main one.
 - Rule: A number one system holds for another (a staff ID in the research system) is the issuer's identifier, not a new one.
 - History: An identifier is kept for good, with the day it was issued and, if it's retired, the day it was retired.
+- Not in the business glossary: data governance confirmed there's no term for it, on 2026-10-20.
 {% enddocs %}

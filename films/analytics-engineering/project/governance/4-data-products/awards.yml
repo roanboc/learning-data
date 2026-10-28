@@ -1,0 +1,21 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: awards
+title: Awards
+owner: "Mei Tanaka, registrar's office"
+domain: course
+status: active
+version: 1.0.0
+description:
+  purpose: The awards the university confers, with the credit points each requires and the faculty
+    that offers it, version by version.
+  usage: Pin the version you read. Join on award_key; read as at a date with valid_from and valid_to.
+outputs:
+  - {model: core_award, version: 1}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night from the night's loads.}
+  - {property: timeOfAvailability, value: "07:00", description: "Ready by 7 a.m., university time."}
+support:
+  - {channel: registrar-data, tool: email, url: "mailto:registrar@uni.example", scope: issues}

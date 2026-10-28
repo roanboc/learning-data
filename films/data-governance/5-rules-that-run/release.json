@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Rules that run",
+    "key": "rules-that-run-en",
+    "dir": "films/data-governance/5-rules-that-run/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/rules-that-run/film.js",
+    "video": "dist/rules-that-run.mp4",
+    "file": "rules-that-run.mp4",
+    "captions": [
+      [
+        "films/data-governance/5-rules-that-run/captions/en.srt",
+        "rules-that-run.en.srt"
+      ],
+      [
+        "films/data-governance/5-rules-that-run/captions/es.srt",
+        "rules-that-run.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/5-rules-that-run/source",
+      ":(exclude)films/data-governance/5-rules-that-run/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 539,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

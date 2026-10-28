@@ -72,6 +72,7 @@
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | A capability, not a project | 400 | 0% | 0 | 30.0 | Drawn to the rule |
+| Who does what, end to end | 496 | 0% | 0 | 30.0 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

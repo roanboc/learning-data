@@ -1,0 +1,33 @@
+{
+  "kicker": "One service, end to end",
+  "kicker_es": "Un servicio, de principio a fin",
+  "title_es": "Quién hace qué, de principio a fin",
+  "h1": "Who does what, end to end: follow one request",
+  "h1_es": "Quién hace qué, de principio a fin: seguir una solicitud",
+  "lead": "Three faculties count a completion three ways, so Health looks nine points behind. Clara, in Planning, asks for the term to be defined, and Noor and Yusuf follow her request: each step done by a role, each role filled by a person or an agent, and the glossary run as a product.",
+  "lead_es": "Tres facultades cuentan una finalización de tres maneras, y Salud parece nueve puntos por detrás. Clara, de Planificación, pide que se defina el término, y Noor y Yusuf siguen su solicitud: cada paso lo hace un rol, cada rol lo ocupa una persona o un agente, y el glosario se gestiona como un producto.",
+  "description": "A film about one governance service followed end to end: Madrid in 1892, where Ricardo Palma brought the Royal Spanish Academy more than three hundred words used every day in the Americas and most were turned down, and the twenty-three academies that make the dictionary together today, each change proposed, drafted, approved and reviewed, and listed in each year's update; three faculties counting a completion three ways; the service Define or change a term, followed from Clara's request to every copy: ask, draft, check, decide, publish, follow; roles and the actors who fill them, people and an agent with its rights written down; what each step reads and writes, each with a home of its own; a chart of who does what, drawn from the map, that follows when someone is on leave; and the glossary run as a product, with an owner, users, a promise, a list of what changed each week, and the terms nobody reads retired.",
+  "description_es": "Una película sobre un servicio de gobernanza seguido de principio a fin: Madrid en 1892, donde Ricardo Palma llevó a la Real Academia Española más de trescientas palabras de uso diario en América y la mayoría fueron rechazadas, y las veintitrés academias que hoy hacen juntas el diccionario, cada cambio propuesto, redactado, aprobado y revisado, y enumerado en la actualización de cada año; tres facultades que cuentan una finalización de tres maneras; el servicio Definir o cambiar un término, seguido desde la solicitud de Clara hasta cada copia: pedir, redactar, revisar, decidir, publicar, seguir; los roles y los actores que los ocupan, personas y un agente con sus atribuciones por escrito; lo que cada paso lee y escribe, cada cosa con su propio lugar; un cuadro de quién hace qué, sacado del mapa, que cambia cuando alguien está de licencia; y el glosario gestionado como un producto, con un dueño, usuarios, una promesa, una lista de lo que cambió cada semana, y los términos que nadie lee retirados.",
+  "card": "Three faculties count a completion three ways. Follow one request end to end, and run the glossary as a product.",
+  "card_es": "Tres facultades cuentan una finalización de tres maneras. Sigue una solicitud de principio a fin, y gestiona el glosario como un producto.",
+  "chapters_es": {
+    "words": "Las palabras que no estaban",
+    "three": "Tres maneras de contar",
+    "request": "Una solicitud, paso a paso",
+    "roles": "Roles, no personas",
+    "needs": "Lo que necesita cada paso",
+    "chart": "Un cuadro que sigue al mapa",
+    "product": "El glosario, como producto",
+    "where": "Dónde está"
+  },
+  "past": [
+    "Madrid, the words the dictionary turned down in 1892",
+    "When anyone can ask for a word, and every step has someone to do it, everyone can use the same words."
+  ],
+  "past_es": [
+    "Madrid, las palabras que el diccionario rechazó en 1892",
+    "Cuando cualquiera puede pedir una palabra, y cada paso tiene a alguien que lo haga, todos pueden usar las mismas palabras."
+  ],
+  "next_h": "You've seen one service followed end to end, its roles filled by people and an agent, and the glossary run as a product. Next: where each piece lives.",
+  "next_h_es": "Viste un servicio seguido de principio a fin, sus roles ocupados por personas y un agente, y el glosario gestionado como un producto. Después: dónde vive cada pieza."
+}

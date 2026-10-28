@@ -1,0 +1,10 @@
+name: decide
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data owner
+- access (reads): term draft
+- access (writes): term decision
+- realization: define or change a term
+- triggering: publish in the glossary
+status: confirmed

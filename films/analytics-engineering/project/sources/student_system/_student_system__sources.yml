@@ -23,6 +23,7 @@ sources:
             - {key: award_code, case: upper, example: GCDA}
             - {key: result_id, case: upper}
           example: SIS|S-20417
+        domain: registrar
     tables:
       - name: learners
         description: One row per version of a student record. The system key is the student ID.

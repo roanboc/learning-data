@@ -81,6 +81,8 @@ function cw_three(ctx,t,t0,t1,y,o){o=o||{};["what would change","when","what to 
 
 // the university's own poses: reaching down to a tray on a desk
 Object.assign(POSE,{cw_reachLow:{L:[0.12,-0.08],R:[0.62,1.22],feet:30,shift:5,tilt:-0.02,turn:0.2,gaze:[0.5,0.45],look:1}});
+// reaching up to pin something on a board above the head, the right hand high
+Object.assign(POSE,{cw_pin:{L:[0.12,-0.08],R:[2.25,2.8],feet:30,shift:5,tilt:-0.03,turn:0.2,gaze:[0.35,-0.8],look:0}});
 
 /* ---------- the university's desks, from above, for the papers on them ---------- */
 // its wood and grain, and what's at its edges: a mug [x, y, colour], the keyboard's edge, a pencil [x, y, angle], the registrar's red
@@ -132,11 +134,14 @@ function cw_request(ctx,o){o=o||{};const {w,h}=CW_RQ;gv_sheet(ctx,0,0,w,h);let p
       if(e>0.5){const f2=(e-0.5)*2;ctx.beginPath();ctx.moveTo(70,580);ctx.lineTo(70+(w-140)*f2,580-90*f2);ctx.stroke();}ctx.restore();pen=[70+(w-140)*e,490+90*e];}
     if(o.box2>0)pen=cw_hand(ctx,"add a mark: counts as an award, yes or no",86,688,{size:36,p:o.box2});
     if(o.stamp>0)gv_stamp(ctx,w-230,h-92,"in · today",o.stamp,{col:GV.greenInk,size:46,rot:-0.08});}
+  // another request, on another day: its title and who asked, already written
+  else if(o.other){cw_hand(ctx,o.other[0],66,240,{size:38});cw_hand(ctx,o.other[1],236,370,{size:38});}
   // the box the policy adds to every request: gold, its headings, and each owner's ready
-  const nb=o.newBox||0;if(nb>0.01){const k=lerp(1.12,1,easeCam(clamp(nb,0,1)));ctx.save();ctx.translate(w/2,800);ctx.scale(k,k);ctx.translate(-w/2,-800);withA(ctx,clamp(nb*1.5,0,1),()=>{
-      ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV.gold,0.62),1);ctx.fillRect(56,748,w-112,136);ctx.restore();ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.9);ctx.lineWidth=3;ctx.strokeRect(56,748,w-112,136);ctx.restore();
-      cw_T(ctx,"Impact note",80,796,{w:800,size:34,col:WC_DARK});cw_T(ctx,"what it reaches · does it break? · who must be told",80,840,{w:600,size:30,col:WC_INK,max:w-160});
-      cw_T(ctx,"each owner: ready",80,876,{w:700,size:30,col:GV.greenInk});});ctx.restore();}
+  // (the box comes first, as the card that becomes it goes, then its words)
+  const nb=o.newBox||0;if(nb>0.01){const k=lerp(1.12,1,easeCam(clamp(nb,0,1)));ctx.save();ctx.translate(w/2,800);ctx.scale(k,k);ctx.translate(-w/2,-800);withA(ctx,clamp(nb*2,0,1),()=>{
+      ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_lit(GV.gold,0.62),1);ctx.fillRect(56,748,w-112,136);ctx.restore();ctx.save();ctx.strokeStyle=rgba(GV.goldInk,0.9);ctx.lineWidth=3;ctx.strokeRect(56,748,w-112,136);ctx.restore();});
+    withA(ctx,clamp((nb-0.45)*2.2,0,1),()=>{cw_T(ctx,"Impact note",80,800,{w:800,size:34,col:WC_DARK});cw_T(ctx,"each owner: ready",w-80,800,{w:700,size:30,col:GV.greenInk,align:"right"});
+      cw_T(ctx,"what it reaches · does it break? · who must be told",80,852,{w:600,size:30,col:WC_INK,max:w-160});});ctx.restore();}
   return pen;}
 
 // The change board's form, on the meeting room's table (1000 wide at (0, 0)): its name; the question, and the box under it where the
@@ -169,7 +174,8 @@ function cw_calendar(ctx,o){o=o||{};const {w,h}=CW_CAL;ctx.save();ctx.filter="bl
   if(o.draft>0){const e=easeCam(clamp(o.draft,0,1)),[dx,dy]=cw_calCell(...CW_CAL.day);ctx.save();ctx.translate(lerp(dx+260,dx,e),lerp(dy-90,dy,e));ctx.rotate(-0.05*(1-e));
     withA(ctx,clamp(o.draft*2,0,1),()=>{wc_panel(ctx,-100,-36,200,72,{kind:"card",wash:GV.gold,washA:0.55,seed:51});cw_T(ctx,"draft",0,-4,{w:800,size:28,align:"center",col:GV.goldInk});cw_T(ctx,"submission",0,26,{w:700,size:28,align:"center",col:GV.goldInk});});ctx.restore();}
   if(o.today>0){const [tx,ty]=cw_calCell(...CW_CAL.today);wc_ring(ctx,tx,ty,48,40,o.today,{col:GV.goldInk,lw:6,seed:17});}
-  if(o.note>0){const k=0.9+0.1*spring(fin(o.note,0,1));ctx.save();ctx.translate(w/2,h+6);ctx.scale(k,k);withA(ctx,clamp(o.note*2,0,1),()=>wc_tag(ctx,0,0,"for a change that needs it",{align:"center",size:34,wash:GV.gold,washA:0.4}));ctx.restore();}}
+  // the note that goes over "once a month" in its name: the board meets for a change that needs it
+  if(o.note>0){const k=0.9+0.1*spring(fin(o.note,0,1));ctx.save();ctx.translate(664,64);ctx.rotate(-0.025);ctx.scale(k,k);withA(ctx,clamp(o.note*2,0,1),()=>wc_tag(ctx,0,0,"for a change that needs it",{align:"center",size:32,wash:GV.gold,washA:0.55}));ctx.restore();}}
 // the meeting room's wall close, for its calendar, which hangs between the whiteboard and the screen: plaster, the whiteboard's edge
 // and a corner of its notes on the left, the screen's bezel on the right. CW_CW: where the calendar hangs, and its scale
 const CW_CW={x:510,y:64,k:1};
@@ -235,17 +241,18 @@ function cw_credCard(ctx,x,y,a){if(a<=0.01)return;withA(ctx,a,()=>{wc_panel(ctx,
   cw_T(ctx,"and badge learners hold",x+30,y+192,{w:600,size:30,col:WC_INK,max:392});});}
 const CW_CARD=[60,220],CW_PAGE=[540,100,1000];
 // the register's page "Who uses what" (the series' gv_register), each line written by hand by its owner: pr[i] (0 to 1) writes line i,
-// its three cells in turn, each in a size that fits its column; o.foot (0 to 1) writes "kept by the data team" at its foot. Returns
-// where the pen is, while a line or the foot is being written
+// its three cells in turn, each in a size that fits its column; o.foot (0 to 1) writes "kept by the data team" at its foot; o.rows, its
+// lines when a team has added one (CW_WHO6), o.inks a line's own ink. Returns where the pen is, while a line or the foot is being written
 const CW_WHO=[["draft submission","credentials","Mei Tanaka"],["census report","credentials","Clara Jensen"],["near-award dashboard","learners near an award","Clara Jensen"],
-  ["wallet app","credentials","Marta Nowak"],["forecast","credit towards an award","Finance"]],CW_WHOC=[["report or app",0.355],["uses",0.39],["owner",0.255]];
-function cw_who(ctx,x,y,w,pr,o){o=o||{};const k=w/1000;gv_register(ctx,x,y,w,Object.assign({kicker:"University register",title:"Who uses what",cols:CW_WHOC,rows:CW_WHO.map(()=>["","",""]),
+  ["wallet app","credentials","Marta Nowak"],["forecast","credit towards an award","Finance"]],CW_WHOC=[["report or app",0.355],["uses",0.39],["owner",0.255]],
+  CW_WHO6=CW_WHO.concat([["faculty dashboard","credentials","Anil Kurian"]]),CW_INK6=[null,null,null,null,null,[58,48,44]];
+function cw_who(ctx,x,y,w,pr,o){o=o||{};const k=w/1000,rows=o.rows||CW_WHO;gv_register(ctx,x,y,w,Object.assign({kicker:"University register",title:"Who uses what",cols:CW_WHOC,rows:rows.map(()=>["","",""]),
     foot:" ",footP:0},o.reg||{}));const cx=[48];CW_WHOC.forEach(([,sh],i)=>cx.push(cx[i]+904*sh));let pen=null;
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);
-  CW_WHO.forEach((r,i)=>{const p=pr[i]==null?1:pr[i];if(p<=0)return;const L=r.map(s=>s.length),T=L[0]+L[1]+L[2],ty=GV_REG.head+22+GV_REG.row*i+44;let acc=0;
+  rows.forEach((r,i)=>{const p=pr[i]==null?1:pr[i];if(p<=0)return;const L=r.map(s=>s.length),T=L[0]+L[1]+L[2],ty=GV_REG.head+22+GV_REG.row*i+44;let acc=0;
     r.forEach((s,j)=>{const q=clamp((p*T-acc)/L[j],0,1);acc+=L[j];if(q<=0)return;const x0=(j?cx[j]+16:48)+4,room=cx[j+1]-x0-12,sz=Math.min(30,30*room/tw(ctx,s,30,600));
-      const e=cw_hand(ctx,s,x0,ty,{size:sz,p:q});if(q<1)pen=e;});});
-  const fp=o.foot||0;if(fp>0){const e=cw_hand(ctx,"kept by the data team",56,GV_REG.head+22+GV_REG.row*5+64,{size:32,p:fp});if(fp<1)pen=e;}
+      const e=cw_hand(ctx,s,x0,ty,{size:sz,p:q,col:o.inks&&o.inks[i]});if(q<1)pen=e;});});
+  const fp=o.foot||0;if(fp>0){const e=cw_hand(ctx,"kept by the data team",56,GV_REG.head+22+GV_REG.row*rows.length+64,{size:32,p:fp});if(fp<1)pen=e;}
   ctx.restore();return pen?[x+pen[0]*k,y+pen[1]*k]:null;}
 // the same page, seen across the room: paper, its name as a bar, its lines as bars (n written), the foot
 function cw_pageSmall(ctx,x,y,w,n,foot){const h=w*0.674;gv_sheet(ctx,x,y,w,h);ctx.save();ctx.fillStyle=rgba(WC_DARK,0.6);ctx.fillRect(x+w*0.05,y+h*0.12,w*0.42,h*0.05);
@@ -289,17 +296,19 @@ function cw_impact(ctx,o){o=o||{};const {w,h}=CW_IN;gv_sheet(ctx,0,0,w,h,{rot:0.
   const list=(L,P_,y0,gap,sz)=>{const T=L.reduce((a,l)=>a+l.length,0);let acc=0;L.forEach((l,i)=>{const q=clamp(((P_==null?1:P_)*T-acc)/l.length,0,1);acc+=l.length;if(q<=0)return;
     const e=cw_hand(ctx,l,72,y0+i*gap,{size:sz||32,p:q});if(q<1)pen=e;});};
   if(o.reach)list(o.reach,o.reachP,240,44);if(o.names)list(o.names,o.namesP,656,44);
+  // a note for another change, its lines too small to read, as on an ordinary day
+  if(o.bars){ctx.save();ctx.fillStyle=rgba(GV_SIGN.ink,0.42);[[240,0.62],[284,0.4],[656,0.5],[700,0.34]].forEach(([y,f])=>ctx.fillRect(72,y-14,(w-150)*f,6));ctx.restore();}
   if(o.no>0){const e=cw_hand(ctx,"no",72,486,{size:44,p:clamp(o.no*2,0,1),col:GV.greenInk});if(o.no<0.5)pen=e;wc_tick(ctx,160,470,56,GV.greenInk,clamp(o.no*2-1,0,1),7);}
   if(o.stampP>0){gv_stamp(ctx,250,484,"breaks",o.stampP,{col:GV.redInk,size:44,rot:-0.07});}
   if(o.mt>0){const e=cw_hand(ctx,"MT",420,500,{size:40,p:o.mt,col:GV_SIGN.ink});if(o.mt<1)pen=e;}
   if(o.clip!==false){ctx.save();ctx.strokeStyle="rgba(150,154,166,1)";ctx.lineWidth=7;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(-14,-30);ctx.lineTo(-14,60);ctx.lineTo(16,60);ctx.lineTo(16,-14);ctx.lineTo(0,-14);ctx.lineTo(0,40);ctx.stroke();ctx.restore();}
   return pen;}
 const CW_REACH1=["draft submission · census report","near-award dashboard · forecast","wallet app"],CW_NAMES1=["Mei Tanaka · Clara Jensen","Finance · Marta Nowak"];
-// a quick look at an owner: a round window on them (r its radius), their room's wall behind; a word in place of a person for Finance
+// a quick look at an owner: a round window on them (r its radius), their room's wall behind; a word in place of a person for Finance (o.nod: their nod)
 function cw_cameo(ctx,x,y,r,id,a,o){if(a<=0.01)return;o=o||{};const k=0.86+0.14*spring(clamp(a,0,1));ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(a*1.6,0,1),()=>{
   ctx.save();ctx.filter="blur(8px)";ctx.fillStyle="rgba(50,40,30,0.3)";ctx.beginPath();ctx.arc(4,8,r,0,TAU);ctx.fill();ctx.restore();
   ctx.save();ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.clip();ctx.fillStyle=rgba(o.wall||GV_ROOM.reg,1);ctx.fillRect(-r,-r,2*r,2*r);
-  if(id){const k=r/78;person(ctx,id,0,476*k,k,{pose:"listen",t:o.t||0,expr:"calm"});}else{ctx.fillStyle=rgba(GV.paper,1);ctx.fillRect(-r,-r,2*r,2*r);wc_T(ctx,o.word||"",0,12,{w:800,size:o.size||30,align:"center",col:WC_DARK});}
+  if(id){const k=r/78;person(ctx,id,0,476*k,k,{pose:"listen",t:o.t||0,expr:"calm",nod:o.nod||0});}else{ctx.fillStyle=rgba(GV.paper,1);ctx.fillRect(-r,-r,2*r,2*r);wc_T(ctx,o.word||"",0,12,{w:800,size:o.size||30,align:"center",col:WC_DARK});}
   ctx.restore();ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.8);ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,r,0,TAU);ctx.stroke();ctx.restore();});ctx.restore();}
 // a small tag beside a line of the register: green "asked for it", grey "didn't ask", springing in as it lands (a: 0 to 1)
 function cw_lineTag(ctx,x,y,s,col,ink,a){if(a<=0.01)return;const k=0.8+0.2*spring(clamp(a,0,1));ctx.save();ctx.translate(x,y);ctx.scale(k,k);
@@ -409,6 +418,136 @@ function cw_ruleCard(ctx,x,y,o){o=o||{};const w=460,h=330,lit=o.lit||0;wc_panel(
   cw_T(ctx,"owner · Mei Tanaka",x+28,y+290,{w:600,size:30,col:WC_INK});}
 const CW_REACH2=["draft submission · census report","wallet app"],CW_NAMES2=["Mei Tanaka · Clara Jensen","Marta Nowak"];
 
+/* ---------- 7 · The old edition ---------- */
+// the shelf by the data team's board, from above: darker wood than a desk, and along the top the wall it stands against
+function cw_paintShelf(ctx){cw_paintTop(ctx,{seed:69,wood:[176,128,92]});wc_wash(ctx,wc_rect(-40,-40,W+80,124),GV_ROOM.data,{kind:"plaster",line:false,seed:71});
+  ctx.save();const g=ctx.createLinearGradient(0,84,0,150);g.addColorStop(0,"rgba(50,36,24,0.34)");g.addColorStop(1,"rgba(50,36,24,0)");ctx.fillStyle=g;ctx.fillRect(0,84,W,66);ctx.restore();}
+// a ledger of the data team's table, open (760 by 720 at (x, y)): its cloth boards under the page, the table's name, its edition on a
+// label in the cloth's colour, and what each line holds. o.lines: the lines (all five by default); o.rub (0 to 1) rubs the last one
+// out, o.rubA fading the rubbing away again; o.cross (0 to 1) draws a red cross beside it, then "can't be added", o.crossA fading it; o.tag (0 to 1) lays the tag "retires 31 March 2027" on the
+// page, tied to the spine, and o.swing (0 to 1) swings it once about its hole and lets it settle
+const CW_LG={w:760,h:720,cloth:[[58,82,118],[44,104,112]]},CW_FIELDS=["learner","credential","kind","credit points","date of birth"];
+function cw_ledger(ctx,x,y,ed,o){o=o||{};const {w,h}=CW_LG,col=CW_LG.cloth[ed-1],L=o.lines||CW_FIELDS,rule=(x0,x1,ly,a,lw)=>{ctx.save();ctx.strokeStyle=rgba(WC_MUTED,a);ctx.lineWidth=lw;
+    ctx.beginPath();ctx.moveTo(x0,ly);ctx.lineTo(x1,ly);ctx.stroke();ctx.restore();};
+  ctx.save();ctx.filter="blur(12px)";ctx.fillStyle="rgba(50,36,24,0.3)";ctx.fillRect(x-14,y-8,w+44,h+48);ctx.restore();
+  wc_wash(ctx,wc_rect(x-22,y-22,w+44,h+44),col,{kind:"cover",lw:1.4,seed:310+ed});wc_flat(ctx,wc_rect(x-22,y-22,42,h+44),wc_dim(col,0.35),1,"spine");
+  gv_sheet(ctx,x+16,y,w-16,h);const g=ctx.createLinearGradient(x+16,0,x+86,0);g.addColorStop(0,"rgba(70,60,50,0.26)");g.addColorStop(1,"rgba(70,60,50,0)");ctx.fillStyle=g;ctx.fillRect(x+16,y,70,h);
+  cw_T(ctx,"The data team's table",x+66,y+72,{w:600,size:28,col:WC_MUTED});cw_T(ctx,"Credentials",x+66,y+132,{w:800,size:46,col:WC_DARK});
+  const lab="edition "+ed,lw=tw(ctx,lab,34,800)+44,lx=x+w-lw-36;ctx.save();ctx.fillStyle=rgba(wc_lit(col,0.8),1);rr(ctx,lx,y+90,lw,60,12);ctx.fill();ctx.restore();
+  cw_T(ctx,lab,lx+22,y+132,{w:800,size:34,col:wc_dim(col,0.25)});rule(x+66,x+w-36,y+176,0.45,2);
+  cw_T(ctx,"what each line holds",x+66,y+234,{w:600,size:28,col:WC_MUTED});
+  L.forEach((s,i)=>{const ly=y+300+i*66;cw_T(ctx,s,x+66,ly,{w:600,size:38,col:WC_DARK});rule(x+66,x+w-36,ly+22,0.22,1.6);});
+  const ly=y+300+(L.length-1)*66,sw=tw(ctx,L[L.length-1],38,600);
+  // rubbed out: a smear of graphite, the paper rubbed pale over the words, and crumbs of the rubber below
+  if(o.rub>0.01&&(o.rubA==null||o.rubA>0.01))withA(ctx,o.rubA==null?1:o.rubA,()=>{const e=easeCam(clamp(o.rub,0,1)),full=sw+36,rw=full*e,R=wc_rng(77);
+    ctx.save();ctx.filter="blur(5px)";ctx.fillStyle="rgba(120,112,112,0.2)";wc_tr(ctx,wc_rrPts(x+46,ly-44,rw+10,62,20));ctx.fill();
+    if(rw>16){ctx.filter="blur(3px)";ctx.fillStyle="rgba(238,233,222,0.9)";wc_tr(ctx,wc_rrPts(x+54,ly-37,rw-6,48,16));ctx.fill();}ctx.restore();
+    ctx.save();ctx.fillStyle="rgba(190,150,150,0.75)";for(let i=0;i<16;i++){const u=R(),cx_=x+60+u*full,cy_=ly+18+R()*26,rx=3+R()*4,ry=2+R()*2,an=R()*3;
+      if(u>e)continue;ctx.beginPath();ctx.ellipse(cx_,cy_,rx,ry,an,0,TAU);ctx.fill();}ctx.restore();});
+  // a red cross beside it, in two strokes, then the words
+  if(o.cross>0.01&&(o.crossA==null||o.crossA>0.01))withA(ctx,o.crossA==null?1:o.crossA,()=>{const cx0=x+66+sw+70,cy0=ly-13,s=30,a1=easeCam(clamp(o.cross*2.2,0,1)),a2=easeCam(clamp(o.cross*2.2-0.8,0,1)),ta=clamp(o.cross*2-1,0,1);
+    ctx.save();ctx.strokeStyle=rgba(GV.redInk,0.92);ctx.lineWidth=8;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx0-s,cy0-s);ctx.lineTo(cx0-s+2*s*a1,cy0-s+2*s*a1);ctx.stroke();
+    if(a2>0){ctx.beginPath();ctx.moveTo(cx0+s,cy0-s);ctx.lineTo(cx0+s-2*s*a2,cy0-s+2*s*a2);ctx.stroke();}ctx.restore();
+    if(ta>0)withA(ctx,ta,()=>cw_T(ctx,"can't be added",cx0+s+26,ly,{w:700,size:34,col:GV.redInk}));});
+  // the tag, tied to the spine with a string; it turns about its hole
+  if(o.tag>0.01){const a=easeCam(clamp(o.tag,0,1)),q=clamp(o.swing||0,0,1),rot=-0.05+(q>0&&q<1?0.24*Math.sin(q*TAU*1.5)*Math.exp(-3.2*q):0),hx=x+110,hy=y+h-82,k=lerp(1.12,1,a);
+    withA(ctx,a,()=>{ctx.save();ctx.strokeStyle="rgba(236,228,210,0.95)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-4,y+h-170);ctx.quadraticCurveTo(x+24,y+h-60,hx,hy);ctx.stroke();ctx.restore();
+      ctx.save();ctx.translate(hx,hy);ctx.rotate(rot);ctx.scale(k,k);const tl=450,th=96;ctx.save();ctx.filter="blur(6px)";ctx.fillStyle="rgba(50,36,24,0.3)";ctx.fillRect(-24,-th/2+10,tl+10,th);ctx.restore();
+        wc_part(ctx,[[-32,-th/2+24],[-8,-th/2],[tl-20,-th/2],[tl-20,th/2],[-8,th/2],[-32,th/2-24]],[228,200,146],1);
+        ctx.fillStyle="rgb(250,246,236)";ctx.beginPath();ctx.arc(0,0,13,0,TAU);ctx.fill();ctx.fillStyle="rgba(60,50,40,0.5)";ctx.beginPath();ctx.arc(0,0,6,0,TAU);ctx.fill();
+        cw_T(ctx,"retires 31 March 2027",32,12,{w:700,size:34,col:WC_DARK});ctx.restore();});}}
+
+/* ---------- 8 · In their words ---------- */
+// Jun's note in the data team's words (700 by 380 at (0, 0)), "in our words"; o.strike (0 to 1) strikes its lines through in pencil,
+// one after another
+const CW_OURS=["Additive change to credentials,","edition 2: new yes-or-no mark,","counts as an award."];
+function cw_ourNote(ctx,o){o=o||{};gv_sheet(ctx,0,0,700,380,{rot:-0.01});cw_T(ctx,"in our words",56,72,{w:600,size:30,col:WC_MUTED});
+  CW_OURS.forEach((s,i)=>cw_hand(ctx,s,56,160+i*60,{size:36}));const st=clamp(o.strike||0,0,1);if(st<=0)return;
+  ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=3.5;ctx.lineCap="round";CW_OURS.forEach((s,i)=>{const q=easeCam(clamp(st*CW_OURS.length-i,0,1));if(q<=0)return;
+    const L=tw(ctx,s,36,600)+20,y=148+i*60;ctx.beginPath();ctx.moveTo(44,y+3);ctx.lineTo(44+L*q,y+3-6*q);ctx.stroke();});ctx.restore();}
+// the same news in the wallet team's words (860 by 600), "in theirs", written row by row: o.p (0 to 1) the first four rows, o.p2 the
+// offer of help and Jun's name. Each row's words and where it sits; returns where the pen is
+const CW_THEIRS=[["From Wednesday, a microcredential of",160],["6 credit points or more counts as an award.",220],["Nothing in your app changes.",300],
+  ["To show it: one new mark, yes or no.",380],["I'll work on it with you on Thursday.",460],["Jun",530]];
+function cw_theirNote(ctx,o){o=o||{};gv_sheet(ctx,0,0,860,600,{rot:0.008});cw_T(ctx,"in theirs",56,72,{w:600,size:30,col:WC_MUTED});let pen=null;
+  const write=(rows,P_)=>{const T=rows.reduce((a,r)=>a+r[0].length,0);let acc=0;rows.forEach(([s,y])=>{const q=clamp(((P_==null?1:P_)*T-acc)/s.length,0,1);acc+=s.length;if(q<=0)return;
+    const e=cw_hand(ctx,s,56,y,{size:s==="Jun"?42:36,p:q});if(q<1)pen=e;});};
+  write(CW_THEIRS.slice(0,4),o.p);if(o.p2>0)write(CW_THEIRS.slice(4),o.p2);return pen;}
+// the booklet that reached every home in 1967, open (560 by 400 at (x, y)): its H on the left page; on the right, three pictures with no
+// words, one under another, for what would change (a car crosses to the right of the road), when (a clock at ten to five) and what to
+// do (stop at the line, and wait). CW_BKP: each picture's middle, from (x, y)
+const CW_BKP=[[420,78],[420,200],[420,322]];
+function cw_bookletOpen(ctx,x,y){const w=560,h=400,ink=CW.navy;ctx.save();ctx.filter="blur(10px)";ctx.fillStyle="rgba(50,36,24,0.3)";ctx.fillRect(x+8,y+12,w,h);ctx.restore();
+  [[x,0],[x+w/2,1]].forEach(([px,i])=>{ctx.fillStyle=rgba(i?[250,248,242]:[246,243,234],1);ctx.fillRect(px,y,w/2,h);});ctx.strokeStyle=rgba(WC_PENCIL,0.5);ctx.lineWidth=1.4;ctx.strokeRect(x,y,w,h);
+  const g=ctx.createLinearGradient(x+w/2-30,0,x+w/2+30,0);g.addColorStop(0,"rgba(70,60,50,0)");g.addColorStop(0.5,"rgba(70,60,50,0.22)");g.addColorStop(1,"rgba(70,60,50,0)");ctx.fillStyle=g;ctx.fillRect(x+w/2-30,y,60,h);
+  cw_H(ctx,x+w/4,y+h*0.44,150,ink,0);ctx.fillStyle=rgba(CW.gold,1);ctx.fillRect(x,y+h-56,w/2,18);
+  ctx.save();ctx.strokeStyle=rgba(ink,0.9);ctx.fillStyle=rgba(ink,0.9);ctx.lineWidth=5;ctx.lineCap="round";ctx.lineJoin="round";
+  // what would change: a road, its middle line dashed, a car on the left and an arrow across to the right
+  {const [cx,cy]=[x+CW_BKP[0][0],y+CW_BKP[0][1]];ctx.strokeRect(cx-96,cy-46,192,92);ctx.save();ctx.setLineDash([12,10]);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(cx,cy-46);ctx.lineTo(cx,cy+46);ctx.stroke();ctx.restore();
+    rr(ctx,cx-62,cy+2,26,40,6);ctx.fill();ctx.beginPath();ctx.moveTo(cx-49,cy-6);ctx.quadraticCurveTo(cx-40,cy-34,cx+34,cy-28);ctx.stroke();ctx.beginPath();ctx.moveTo(cx+22,cy-40);ctx.lineTo(cx+38,cy-28);ctx.lineTo(cx+22,cy-16);ctx.stroke();}
+  // when: a clock at ten to five
+  {const [cx,cy]=[x+CW_BKP[1][0],y+CW_BKP[1][1]],r=46;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();for(let i=0;i<12;i++){const a=i/12*TAU;ctx.beginPath();ctx.moveTo(cx+Math.sin(a)*r*0.8,cy-Math.cos(a)*r*0.8);ctx.lineTo(cx+Math.sin(a)*r*0.92,cy-Math.cos(a)*r*0.92);ctx.stroke();}
+    const ha=(4+50/60)/12*TAU,ma=50/60*TAU;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ha)*r*0.5,cy-Math.cos(ha)*r*0.5);ctx.stroke();ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(ma)*r*0.78,cy-Math.cos(ma)*r*0.78);ctx.stroke();}
+  // what to do: a car stopped at a line, and two bars: wait
+  {const [cx,cy]=[x+CW_BKP[2][0],y+CW_BKP[2][1]];ctx.beginPath();ctx.moveTo(cx-96,cy-14);ctx.lineTo(cx+10,cy-14);ctx.stroke();rr(ctx,cx-70,cy-2,26,40,6);ctx.fill();
+    ctx.fillRect(cx+40,cy-36,14,56);ctx.fillRect(cx+66,cy-36,14,56);}
+  ctx.restore();}
+// the note in Marta's hands, as she reads it: a sheet with Jun's lines and his name at its foot (in the figure's units)
+function cw_heldLetter(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+44);cx.rotate(0.04);const w=160,h=210;
+  cx.fillStyle="rgba(60,50,40,0.22)";cx.fillRect(-w/2+5,-h/2+6,w,h);cx.fillStyle="rgb(252,250,244)";cx.fillRect(-w/2,-h/2,w,h);cx.fillStyle=rgba(WC_MUTED,0.45);cx.fillRect(-w/2+14,-h/2+16,56,6);
+  cx.fillStyle="rgba(40,52,100,0.7)";[0.86,0.92,0.6,0.8,0.74].forEach((f,i)=>cx.fillRect(-w/2+14,-h/2+40+i*26+(i>1?10:0),(w-28)*f,4));cx.fillRect(-w/2+14,h/2-34,30,6);cx.restore();
+  fingers(cx,P_,[[mx-w/2+6,my+54],[mx+w/2-6,my+50]]);}
+// Marta's notebook, open on the meeting table (520 by 680 at (0, 0)): a ruled page with her earlier notes, and "Thursday" written as
+// o.p goes 0 to 1. Returns where the pen is
+function cw_notebook(ctx,o){o=o||{};const w=520,h=680;ctx.save();ctx.filter="blur(10px)";ctx.fillStyle="rgba(50,36,24,0.3)";ctx.fillRect(10,14,w,h);ctx.restore();
+  wc_wash(ctx,wc_rect(-14,-10,w+28,h+20),[64,96,132],{kind:"cover",lw:1.3,seed:521});gv_sheet(ctx,0,0,w,h);
+  ctx.save();ctx.strokeStyle="rgba(120,140,180,0.35)";ctx.lineWidth=1.6;for(let i=0;i<11;i++){ctx.beginPath();ctx.moveTo(30,120+i*52);ctx.lineTo(w-30,120+i*52);ctx.stroke();}
+  ctx.fillStyle="rgba(150,154,166,1)";for(let i=0;i<12;i++){ctx.beginPath();ctx.arc(-4,40+i*54,9,0,TAU);ctx.fill();}ctx.restore();
+  ctx.fillStyle="rgba(40,52,100,0.55)";[[0.7,0],[0.45,1],[0.62,2],[0.3,4]].forEach(([f,i])=>ctx.fillRect(46,100+i*52,(w-92)*f,5));
+  return o.p>0?cw_hand(ctx,"Thursday",50,370,{size:64,p:o.p}):null;}
+
+/* ---------- 9 · Ready ---------- */
+// the card that goes on a report: "counts as an award", in the glossary's violet, and from when (w by 128, its words 34 px, at (x, y));
+// a (0 to 1) drops it on, with a paper clip at its top
+function cw_whenCard(ctx,x,y,w,when,a){if(a<=0.01)return;const e=easeCam(clamp(a,0,1)),k=lerp(1.18,1,e);ctx.save();ctx.translate(x+w/2,y+64);ctx.scale(k,k);ctx.translate(-w/2,-64);
+  withA(ctx,clamp(a*1.8,0,1),()=>{ctx.save();ctx.filter="blur("+(4+10*(1-e)).toFixed(0)+"px)";ctx.fillStyle="rgba(50,36,24,0.28)";ctx.fillRect(8+16*(1-e),12+16*(1-e),w,128);ctx.restore();
+    wc_panel(ctx,0,0,w,128,{kind:"card",wash:GV_MEAN.violet,washA:0.3,seed:530});cw_T(ctx,"counts as an award",26,52,{w:800,size:34,col:GV_MEANINK.violet});cw_T(ctx,when,26,100,{w:600,size:32,col:WC_DARK});
+    ctx.save();ctx.strokeStyle="rgba(150,154,166,1)";ctx.lineWidth=6;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(w-70,-26);ctx.lineTo(w-70,40);ctx.lineTo(w-46,40);ctx.lineTo(w-46,-14);ctx.lineTo(w-58,-14);ctx.lineTo(w-58,26);ctx.stroke();ctx.restore();});ctx.restore();}
+// the draft submission in Mei's hands, held up to show (in the figure's units): a band in her office's colour, its name, its lines
+function cw_heldDraft(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my+86);cx.rotate(-0.03);const w=230,h=290;
+  cx.fillStyle="rgba(60,50,40,0.22)";cx.fillRect(-w/2+6,-h/2+8,w,h);cx.fillStyle="rgb(252,250,244)";cx.fillRect(-w/2,-h/2,w,h);cx.fillStyle=rgba(wc_dim(GV_ROOM.reg,0.08),1);cx.fillRect(-w/2+6,-h/2+6,w-12,44);
+  cw_T(cx,"Draft submission",-w/2+16,-h/2+36,{w:800,size:19,col:WC_DARK});cx.fillStyle=rgba(WC_MUTED,0.38);for(let i=0;i<7;i++)cx.fillRect(-w/2+16,-h/2+76+i*28,(w-32)*(i%3===2?0.6:0.9),4);
+  cx.restore();fingers(cx,P_,[[mx-w/2+4,my+90],[mx+w/2-4,my+84]]);}
+// a report on a desk (700 by 860 at (0, 0)): a band in its office's colour, its name and whose it is, and its table of counts as ruled bars:
+// the draft submission, from the registrar's office, or Planning's census report
+function cw_report(ctx,name,office,col){gv_sheet(ctx,0,0,700,860,{rot:-0.012});ctx.save();ctx.globalCompositeOperation="multiply";ctx.fillStyle=rgba(wc_dim(col,0.04),1);ctx.fillRect(16,16,668,96);ctx.restore();
+  cw_T(ctx,name,48,80,{w:800,size:46,col:WC_DARK});cw_T(ctx,office,48,160,{w:600,size:30,col:WC_MUTED});
+  ctx.fillStyle=rgba(WC_MUTED,0.3);for(let i=0;i<9;i++){ctx.fillRect(48,220+i*64,300,6);ctx.fillRect(420,220+i*64,90+((i*53)%120),6);}}
+// a laptop on the meeting table, its lid towards us, so its screen faces away: centred on x, standing on the table at y
+function cw_laptopBack(ctx,x,y){ctx.save();ctx.filter="blur(6px)";ctx.fillStyle="rgba(50,40,30,0.25)";ctx.fillRect(x-100,y-8,200,14);ctx.restore();
+  wc_part(ctx,wc_rrPts(x-92,y-122,184,118,10),[196,200,208],1,{kind:"thing",lw:1.3});wc_flat(ctx,wc_rect(x-100,y-8,200,9),[150,154,162],1,"base");}
+
+/* ---------- 10 · A step, not a meeting ---------- */
+// binder 19 open on Yusuf's desk, seen from the front: its covers flat on the desk top at y, its pages, centred on x
+function cw_binderFlat(ctx,x,y){wc_part(ctx,[[x-150,y],[x+150,y],[x+136,y-18],[x-136,y-18]],[120,52,46],1,{kind:"thing",lw:1.2});
+  wc_flat(ctx,[[x-128,y-14],[x-6,y-14],[x-8,y-26],[x-120,y-26]],[246,242,232],1,"pages");wc_flat(ctx,[[x+6,y-14],[x+128,y-14],[x+120,y-26],[x+8,y-26]],[250,246,238],1,"pages");}
+// the gold card from binder 19 in a hand, small, as Yusuf pins it to the board (in the figure's units)
+function cw_heldGold(cx,P_,hands){const r=hands[1];cx.save();cx.translate(r[0]+10,r[1]-30);cx.rotate(-0.1);cx.fillStyle="rgba(60,50,40,0.2)";cx.fillRect(-36,-18,80,44);
+  cx.fillStyle=rgba(wc_lit(GV.gold,0.45),1);cx.fillRect(-40,-22,80,44);cx.fillStyle=rgba(WC_DARK,0.45);for(let i=0;i<2;i++)cx.fillRect(-30,-10+i*14,56-i*14,4);cx.restore();}
+// the card for the table Planning's dashboard uses, on the board (450 by 300 at (x, y)): its name, what it is, and "owner:" with
+// nothing after it (o.owner, 0 to 1, writes "owner:" and draws the empty line)
+function cw_nearCard(ctx,x,y,a,o){if(a<=0.01)return;o=o||{};const k=0.9+0.1*spring(clamp(a,0,1));ctx.save();ctx.translate(x+225,y+150);ctx.scale(k,k);ctx.translate(-x-225,-y-150);
+  withA(ctx,clamp(a*1.6,0,1),()=>{wc_panel(ctx,x,y,450,300,{kind:"card",seed:73});gv_pin(ctx,x+225,y+14,GV.red,1.3);
+    cw_T(ctx,"Learners near",x+30,y+80,{w:800,size:42,col:WC_DARK});cw_T(ctx,"an award",x+30,y+128,{w:800,size:42,col:WC_DARK});
+    cw_T(ctx,"the table Planning's",x+30,y+180,{w:600,size:30,col:WC_INK});cw_T(ctx,"dashboard uses",x+30,y+218,{w:600,size:30,col:WC_INK});
+    const ow=o.owner||0;if(ow>0){cw_hand(ctx,"owner:",x+30,y+272,{size:32,p:clamp(ow*1.6,0,1)});const e=easeCam(clamp(ow*1.6-0.6,0,1));
+      ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=2;ctx.setLineDash([8,8]);ctx.beginPath();ctx.moveTo(x+150,y+278);ctx.lineTo(x+150+260*e,y+278);ctx.stroke();ctx.restore();}});ctx.restore();}
+// a clock on the wall above the board, its hands at hh:mm
+function cw_boardClock(ctx,x,y,r,hh,mm){wc_wash(ctx,wc_ell(x,y,r+8,r+8,30),[88,82,78],{kind:"clock",lw:1.2,seed:811});wc_flat(ctx,wc_ell(x,y,r,r,30),[250,246,232],1,"face");
+  ctx.save();ctx.strokeStyle="rgba(60,56,60,0.9)";ctx.lineCap="round";for(let i=0;i<12;i++){const a=i/12*TAU;ctx.lineWidth=i%3?2:4;ctx.beginPath();ctx.moveTo(x+Math.sin(a)*r*0.8,y-Math.cos(a)*r*0.8);ctx.lineTo(x+Math.sin(a)*r*0.92,y-Math.cos(a)*r*0.92);ctx.stroke();}
+  const ha=((hh%12)+mm/60)/12*TAU,ma=mm/60*TAU;ctx.lineWidth=6;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(ha)*r*0.5,y-Math.cos(ha)*r*0.5);ctx.stroke();
+  ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.sin(ma)*r*0.78,y-Math.cos(ma)*r*0.78);ctx.stroke();ctx.restore();}
+
 // lines of words wrapped to a width, at a size
 function cw_wrap(ctx,s,size,maxW,wt){const words=s.split(" "),out=[];let cur="";words.forEach(w_=>{const t_=cur?cur+" "+w_:w_;if(tw(ctx,t_,size,wt||600)>maxW&&cur){out.push(cur);cur=w_;}else cur=t_;});if(cur)out.push(cur);return out;}
 
@@ -417,4 +556,4 @@ const WC_PLACES={x67dawn:c=>cw_paintStreet(c,"dawn"),x67night:c=>cw_paintStreet(
   x67post:cw_paintPost,x67postT:cw_paintPostT,x67grocer:cw_paintGrocer,x67grocerT:cw_paintGrocerT,x67desk:cw_paintDesk67,x67deskT:cw_paintDesk67T,
   campus:gv_paintCampus,regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,data:gv_paintData,boardData:c=>gv_paintBoardClose(c,GV_ROOM.data),
   office:cw_paintOffice,desk:gv_paintDesk,meeting:gv_paintMeeting,meetingTable:gv_paintMeetingTable,planning:gv_paintPlanning,floor:gv_paintFloor,calWall:cw_paintCalWall,boardWide:cw_paintBoardWide,planScreen:cw_paintPlanScreen,phoneBg:cw_paintPhoneBg,registrar:gv_paintRegistrar,
-  topJun:c=>cw_paintTop(c,CW_TOPS.topJun),topMei:c=>cw_paintTop(c,CW_TOPS.topMei),topPlan:c=>cw_paintTop(c,CW_TOPS.topPlan),topMeet:c=>cw_paintTop(c,CW_TOPS.topMeet)};
+  shelf:cw_paintShelf,topJun:c=>cw_paintTop(c,CW_TOPS.topJun),topMei:c=>cw_paintTop(c,CW_TOPS.topMei),topPlan:c=>cw_paintTop(c,CW_TOPS.topPlan),topMeet:c=>cw_paintTop(c,CW_TOPS.topMeet)};

@@ -22,6 +22,7 @@ sources:
             - {key: user_id, case: lower, example: u-88213}
             - {key: badge_id, case: upper, example: B-5010}
           example: LMS|u-88213
+        domain: learning
     tables:
       - name: users
         description: One row per version of a platform account. The system key is the user ID.

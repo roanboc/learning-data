@@ -23,6 +23,7 @@ sources:
           system_keys:
             - {key: alumni_id, case: upper, example: A-61207}
           example: ALU|A-61207
+        domain: alumni
     tables:
       - name: alumni
         description: One row per version of a graduate's record. The system key is the alumni ID.

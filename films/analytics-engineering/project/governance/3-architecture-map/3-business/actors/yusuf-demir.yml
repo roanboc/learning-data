@@ -1,0 +1,7 @@
+name: Yusuf Demir
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data governance lead
+status: confirmed

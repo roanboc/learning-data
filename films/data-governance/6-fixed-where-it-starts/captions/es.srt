@@ -1,0 +1,231 @@
+1
+00:00:01,400 --> 00:00:06,600
+Viena, 1847. El hospital general de la ciudad tiene dos clínicas de maternidad.
+
+2
+00:00:07,300 --> 00:00:12,597
+En la primera, donde trabajan los médicos y sus estudiantes, muere de fiebre cerca de una madre de cada diez.
+
+3
+00:00:13,697 --> 00:00:16,763
+En la segunda, con parteras, cerca de una de cada treinta.
+
+4
+00:00:18,063 --> 00:00:21,262
+Las parturientas ruegan que no las manden a la primera clínica.
+
+5
+00:00:22,362 --> 00:00:25,793
+Nadie puede explicar la diferencia. Algo tiene que cambiar.
+
+6
+00:00:26,993 --> 00:00:31,423
+Ignaz Semmelweis, un médico joven de la primera clínica, busca qué es distinto.
+
+7
+00:00:32,123 --> 00:00:39,162
+Los médicos y los estudiantes llegan a la sala desde la de autopsias, con rastros de los muertos en las manos. Las parteras, no.
+
+8
+00:00:40,362 --> 00:00:46,285
+Así que hace que todos se laven las manos con cal clorada, un blanqueador, antes de examinar a una madre.
+
+9
+00:00:47,385 --> 00:00:51,315
+En pocos meses, las muertes en la primera clínica bajan al nivel de la segunda.
+
+10
+00:00:52,615 --> 00:00:55,116
+Cientos de madres que habrían muerto vuelven a casa.
+
+11
+00:00:56,316 --> 00:01:00,939
+La fiebre se veía en las camas. Empezaba en las manos de los médicos, al entrar.
+
+12
+00:01:02,239 --> 00:01:04,918
+Donde un problema se ve no suele ser donde empieza.
+
+13
+00:01:12,218 --> 00:01:19,183
+Hoy, Yusuf abre la carpeta 15. Su política dice que se atienden las causas raíz de los problemas de calidad de datos.
+
+14
+00:01:20,383 --> 00:01:23,399
+Pero en el tablero de calidad, una celda sigue en ámbar.
+
+15
+00:01:24,599 --> 00:01:27,578
+Correos de cursos cortos, con espacios y mayúsculas.
+
+16
+00:01:28,678 --> 00:01:35,361
+La incidencia va a su dueño, el equipo de aprendizaje de Tom. La primera respuesta es la de siempre: se limpia aguas abajo.
+
+17
+00:01:36,661 --> 00:01:41,947
+Cada noche, desde hace un año, el equipo de datos recorta cada correo y lo escribe en minúsculas.
+
+18
+00:01:43,047 --> 00:01:45,894
+Sin eso, un estudiante podría terminar con dos billeteras.
+
+19
+00:01:46,994 --> 00:01:50,451
+Y cada sistema que lee estos correos los vuelve a limpiar.
+
+20
+00:01:51,551 --> 00:01:55,762
+Es un trapeador bajo una gotera. Trabaja cada noche, y la gotera nunca para.
+
+21
+00:01:59,462 --> 00:02:02,134
+Yusuf sigue un correo hacia atrás, hasta donde se crea.
+
+22
+00:02:03,134 --> 00:02:07,437
+De la billetera, por la limpieza del equipo de datos, al formulario de cursos cortos.
+
+23
+00:02:09,037 --> 00:02:15,005
+El formulario guarda cada correo como se escribe, en un campo de texto simple, así que el teléfono lo empieza con mayúscula.
+
+24
+00:02:16,405 --> 00:02:19,465
+Y elegir una sugerencia puede dejar un espacio al final.
+
+25
+00:02:20,765 --> 00:02:23,494
+Más de un correo de cada tres llega así.
+
+26
+00:02:24,994 --> 00:02:31,063
+Nadie escribió nada mal. Como en Viena, se ve aguas abajo, pero empieza aquí, en el formulario.
+
+27
+00:02:34,163 --> 00:02:39,395
+Esta vez, la incidencia tiene un dueño, una causa, una fecha y un control que demuestra que está cerrada.
+
+28
+00:02:40,595 --> 00:02:45,309
+El equipo de Tom hace del campo un campo de correo, y el teléfono ya no pone la mayúscula.
+
+29
+00:02:46,509 --> 00:02:51,941
+Y el formulario recorta cada correo, lo escribe en minúsculas y verifica su forma, antes de guardarlo.
+
+30
+00:02:53,241 --> 00:02:56,732
+Nadie tiene que escribir con más cuidado. El formulario hace el trabajo.
+
+31
+00:02:57,932 --> 00:03:01,814
+Como la palangana en Viena, el formulario detiene el problema al entrar.
+
+32
+00:03:03,314 --> 00:03:08,827
+El equipo de Tom corrige los correos antiguos en su plataforma. Luego, la limpieza del equipo de datos puede irse.
+
+33
+00:03:12,527 --> 00:03:16,231
+Ningún sistema los limpia de nuevo, y cada estudiante tiene una sola billetera.
+
+34
+00:03:19,831 --> 00:03:25,101
+La regla se queda, como un control que nunca debería fallar: una promesa a todos los que los leen.
+
+35
+00:03:26,601 --> 00:03:30,349
+Si alguna vez falla, el formulario se rompió, y su dueño se entera primero.
+
+36
+00:03:31,749 --> 00:03:37,565
+La celda se pone verde: no porque se limpiaron los correos, sino porque ya estaban bien donde se escribieron.
+
+37
+00:03:41,265 --> 00:03:44,623
+Una noche, la plataforma de aprendizaje envía lo que ninguna regla nombra.
+
+38
+00:03:45,923 --> 00:03:51,896
+La mitad de las insignias nuevas llega con cero créditos. La mayoría son microcredenciales que deberían llevar cinco.
+
+39
+00:03:52,996 --> 00:03:56,324
+Todos los controles pasan. El valor está ahí, y es un número.
+
+40
+00:03:57,524 --> 00:04:00,936
+Pero la billetera las muestra como insignias simples, sin créditos.
+
+41
+00:04:02,036 --> 00:04:09,239
+El monitoreo conoce la forma habitual de cada tabla: cuándo llega, cuántas filas, cuántos vacíos, cómo se reparten los valores.
+
+42
+00:04:10,339 --> 00:04:14,773
+Normalmente, una insignia de cada doce no tiene créditos. Anoche, una de cada dos.
+
+43
+00:04:16,073 --> 00:04:20,164
+Como en Viena, los números muestran que algo anda mal antes de saber por qué.
+
+44
+00:04:21,364 --> 00:04:24,075
+Avisa al dueño registrado: el equipo de aprendizaje.
+
+45
+00:04:26,775 --> 00:04:33,514
+La causa: la actualización de la semana pasada en la plataforma de aprendizaje. El equipo de Tom la arregla ahí y reenvía las insignias.
+
+46
+00:04:34,814 --> 00:04:40,423
+Entonces la sorpresa se vuelve una regla: una microcredencial lleva créditos. Un control, con dueño.
+
+47
+00:04:41,823 --> 00:04:44,656
+La próxima vez, se detiene antes de llegar a una billetera.
+
+48
+00:04:45,756 --> 00:04:50,226
+Prevén lo que puedas, en su origen. Verifica lo que sabes. Vigila lo que no sabes.
+
+49
+00:04:51,726 --> 00:04:54,336
+Y cada sorpresa que confirmas se vuelve una regla.
+
+50
+00:04:57,036 --> 00:05:03,793
+Nadie culpó al equipo de Tom. El formulario funcionaba como se diseñó. Recibieron la evidencia, y ayuda para cambiarlo.
+
+51
+00:05:05,093 --> 00:05:10,034
+De vuelta en Viena, Semmelweis tenía razón. Pero el lavado era lento, y dañaba la piel.
+
+52
+00:05:11,134 --> 00:05:16,694
+Aún no se conocían los gérmenes: su única evidencia eran sus números. Esperó años para publicarlos.
+
+53
+00:05:17,794 --> 00:05:21,873
+Y cuando los médicos dudaron de él, los culpó en furiosas cartas abiertas.
+
+54
+00:05:23,073 --> 00:05:27,179
+El lavado se volvió regla solo tras su muerte, cuando ya se conocían los gérmenes.
+
+55
+00:05:28,379 --> 00:05:32,445
+Hoy es higiene básica, y salva a madres y bebés todos los días.
+
+56
+00:05:33,945 --> 00:05:39,500
+Un arreglo en el origen dura cuando es fácil de mantener, y cuando la gente recibe la evidencia, no la culpa.
+
+57
+00:05:40,800 --> 00:05:43,169
+Arregla la causa. Luego haz del arreglo un control.
+
+58
+00:05:44,269 --> 00:05:50,413
+Eso trae la gobernanza de datos: menos limpieza, datos confiables para todos, y un dueño que se entera primero.

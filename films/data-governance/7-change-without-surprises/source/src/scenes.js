@@ -325,4 +325,153 @@ scene("adds",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
       cw_at(x,CW_N2,q=>cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:clamp((tt-P.no+0.1)/0.8,0,1),clip:false}));}}]);
   wc_paperOver(ctx,S);});
 
-["edition","words","ready","step"].forEach(id=>scene(id,(ctx,S,t,sc)=>{cw_shots(ctx,S,t,sc.dur,[{at:0,place:"x67day",keys:[[0,960,540,1]],push:0}]);wc_paperOver(ctx,S);}));
+// ---- 7 · The old edition: some changes can't be added; a new edition goes beside the old one, like the new signs beside the old, and the
+// old one stays until a date everyone knows ----
+scene("edition",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{rub:w("cant","taking"),cross:w("cant","away")-0.3,ed2:w("beside","new edition")-0.15,pole:w("beside","like")-0.2,back:w("beside","and the old")+0.1,
+      tag:w("beside","until")-0.1,push:c.retires-0.4,swing:w("last","last resort")-0.25};});
+  const L1=[140,120],L0=[330,120],L2=[1020,120],ed2=CW_FIELDS.slice(0,4);
+  // the pole in Sweden in the days before: the old sign open, and the new one beside it in its black cover
+  const signs=x=>{const O=CW_PO,[so,sn]=O.signs,r=O.r;cw_sign(x,so[0],so[1],r,-1);cw_sign(x,sn[0],sn[1],r,1);cw_cover(x,sn[0],sn[1],r,1);};
+  cw_shots(ctx,S,t,sc.dur,[
+    // the shelf by the data team's board: edition 1, open. A line rubbed out, and a red cross beside it; then edition 2 slides in beside
+    // it, without that line, and the first is as it was
+    {at:0,place:"shelf",keys:[[0,740,500,1.3],[P.ed2,960,540,1.0]],d:1.8,push:0.01,draw:(x,tt)=>{const s=easeCam(fin(tt,P.ed2,1.5)),back=fin(tt,P.ed2,0.7);
+      cw_ledger(x,lerp(L0[0],L1[0],s),L1[1],1,{rub:fin(tt,P.rub,0.9),rubA:1-back,cross:fin(tt,P.cross,0.7),crossA:1-back});if(s>0.001)cw_ledger(x,lerp(1980,L2[0],s),L2[1],2,{lines:ed2});}},
+    {at:P.pole,place:"x67pole",keys:[[P.pole,1100,470,1.35]],d:2,push:0.02,draw:(x,tt)=>signs(x)},
+    // the two editions side by side; a tag on edition 1, "retires 31 March 2027", that swings once on "the last resort"
+    {at:P.back,place:"shelf",keys:[[P.back,960,540,1.0],[P.push,700,520,1.25]],d:2.2,push:0.01,draw:(x,tt)=>{
+      cw_ledger(x,...L1,1,{tag:fin(tt,P.tag,0.6),swing:clamp((tt-P.swing)/2.4,0,1)});cw_ledger(x,...L2,2,{lines:ed2});}}]);
+  setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 1967",gv_io(t,P.pole+0.3,P.back,0.4));wc_paperOver(ctx,S);});
+
+// ---- 8 · In their words: the note says who must be told; Jun writes to the wallet team in their words, not his; like Sweden's
+// booklet, what changes, from when and what to do; he adds who will help, and Marta reads it ----
+scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{hi:w("told","who must")-0.1,ask:w("told","didn't")-0.1,desk:c.writes-0.4,write:w("writes","writes to")+0.2,strike:w("writes","not his")-0.1,
+      book:c.booklet-0.3,t0:w("booklet","what changes")-0.2,t1:w("booklet","from when")-0.2,t2:w("booklet","what to do")-0.2,help:c.help,
+      room:c.half-0.5,nod:w("half","telling")-0.2,pad:c.half+(sc.ends.half-c.half)+0.5};});
+  const NT=[520,120,1],OU=[110,300],TH=[940,160],TH3=[80,170],BK=[1300,200];
+  // a tag from 1967 lifts off the booklet's picture and lands at the end of the note's row
+  const tag=(x,tt,i,s,row)=>{const t0=[P.t0,P.t1,P.t2][i],a=fin(tt,t0,0.25);if(a<=0.01)return;const f=easeCam(fin(tt,t0+0.3,0.7)),
+      [sx,sy]=[BK[0]+CW_BKP[i][0]-60,BK[1]+CW_BKP[i][1]],[ex,ey]=[TH3[0]+830,TH3[1]+CW_THEIRS[row][1]-12],k=lerp(1.15,1,spring(a));
+    x.save();x.translate(lerp(sx,ex,f),lerp(sy,ey,f)-60*Math.sin(f*Math.PI));x.scale(k,k);withA(x,clamp(a*2,0,1),()=>wc_tag(x,0,0,s,{align:"left",size:34}));x.restore();};
+  cw_shots(ctx,S,t,sc.dur,[
+    // the second impact note, close: who must be told; Marta's name lights gold, and "didn't ask" lands beside it
+    {at:0,place:"topJun",keys:[[0,960,640,1.4]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,NT,q=>{cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:1,clip:false});
+        const hA=fin(tt,P.hi,0.6);if(hA>0.01){q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(GV.gold,0.6),hA);wc_tr(q,wc_rrPts(60,668,tw(q,"Marta Nowak",32,600)+28,46,8));q.fill();q.restore();}
+        cw_lineTag(q,96+tw(q,"Marta Nowak",32,600)+20,690,"didn't ask",GV.grey,WC_INK,fin(tt,P.ask,0.45));});}},
+    // Jun's desk: his first try, in the data team's words, and the note he writes in the wallet team's; the first is struck through
+    {at:P.desk,place:"topJun",keys:[[P.desk,955,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[...OU,1],q=>cw_ourNote(q,{strike:clamp((tt-P.strike)/0.9,0,1)}));
+      const pen=cw_at(x,[...TH,1],q=>cw_theirNote(q,{p:clamp((tt-P.write)/4.4,0,1)}));if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.write,P.write+4.4));}},
+    // the note and Sweden's booklet beside it: what would change, when and what to do, lifted off its pictures onto the note's rows;
+    // then Jun adds who will help, and his name
+    {at:P.book,place:"topJun",keys:[[P.book,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const b=easeCam(fin(tt,P.book+0.2,0.9));
+      const pen=cw_at(x,[...TH3,1],q=>cw_theirNote(q,{p:1,p2:clamp((tt-P.help)/1.3,0,1)}));if(b>0.001)cw_bookletOpen(x,BK[0]+(1-b)*700,BK[1]);
+      tag(x,tt,0,"what would change",1);tag(x,tt,1,"when",0);tag(x,tt,2,"what to do",3);if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.help,P.help+1.3));}},
+    // the meeting room: Marta reads the note across the table from Jun, and nods
+    {at:P.room,place:"meeting",keys:[[P.room,960,680,1.66],[P.room+0.1,960,676,1.72]],d:3,draw:(x,tt)=>{
+      gv_behind(x,"jun",720,GV_MT.top,GV_MT.s,{pose:"listen",t:tt});gv_behind(x,"marta",1200,GV_MT.top,GV_MT.s,{pose:"hold",t:tt,flip:true,carry:cw_heldLetter,nod:cw_nod(tt,P.nod)});
+      x.drawImage(gv_place("meetingTable"),0,0,W,H);}},
+    // without words: in her notebook, she writes "Thursday"
+    {at:P.pad,place:"topMeet",keys:[[P.pad,900,520,1.2]],d:2,push:0.012,draw:(x,tt)=>{const pen=cw_at(x,[640,140,1],q=>cw_notebook(q,{p:clamp((tt-P.pad-0.4)/1.1,0,1)}));
+      if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.pad+0.4,P.pad+1.5));}}]);
+  wc_paperOver(ctx,S);});
+
+// ---- 9 · Ready: from Wednesday the draft submission counts with the new mark, the census report from its next run; like the cars at
+// ten to five, the change waits until each owner it reaches is ready; it goes in today ----
+scene("ready",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{ins:w("wed","draft")+0.1,card1:w("wed","counts")-0.2,plan:w("wed","and Planning")-0.3,card2:w("wed","next run")-0.6,cars:c.wait-0.25,board:w("wait","the change")-0.2,
+      mei:w("wait","Mei")-0.15,stamp:c.goes-0.35,press:w("goes","goes in")+0.15,thu:w("goes","today")+0.2};});
+  const dawnP={cross:-10,drove:1e9,name:1e9,raise:-10,waited:1e9},[px,py,pw]=CW_PAGE,own=[[0,"mei",GV_ROOM.reg],[3,"marta",GV_ROOM.meet],[1,"clara",GV_ROOM.plan]];
+  cw_shots(ctx,S,t,sc.dur,[
+    // the registrar's office: Mei holds up the draft submission
+    {at:0,place:"registrar",keys:[[0,930,560,1.42],[0.1,936,556,1.46]],d:3,draw:(x,tt)=>person(x,"mei",900,905,0.8,{pose:"hold",t:tt,carry:cw_heldDraft})},
+    // on her desk, its card goes on: "counts as an award · from Wednesday"
+    {at:P.ins,place:"topMei",keys:[[P.ins,960,560,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[560,110,1],q=>{cw_report(q,"Draft submission","Registrar's office",GV_ROOM.reg);
+      cw_whenCard(q,150,330,520,"from Wednesday",fin(tt,P.card1,0.6));});}},
+    // Planning: the census report on Clara's desk, and its card, "counts as an award · from its next run"
+    {at:P.plan,place:"topPlan",keys:[[P.plan,960,560,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[560,110,1],q=>{cw_report(q,"Census report","Planning",GV_ROOM.plan);
+      cw_whenCard(q,150,330,520,"from its next run",fin(tt,P.card2,0.6));});}},
+    // Sweden, ten to five: the cars on the right, stopped, waiting
+    {at:P.cars,place:"x67dawn",keys:[[P.cars,960,560,1.0]],d:2,push:0.02,draw:(x,tt)=>cw_dawn(x,tt,dawnP)},
+    // the register on the board: the three lines that use credentials light gold one by one; each owner nods, and "ready" lands
+    {at:P.board,place:"boardWide",keys:[[P.board,900,450,1.08],[P.board+0.1,901,450,1.1]],d:2,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);cw_who(x,px,py,pw,[1,1,1,1,1],{foot:1});
+      gv_pin(x,px+pw/2,py+16,GV.red,1.6);own.forEach(([i,id,wall],j)=>{const t0=P.mei+1.0*j,ry=cw_rowY(py,pw,i);cw_lineGold(x,px,py,pw,i,fin(tt,t0-0.2,0.35));
+        cw_cameo(x,px+pw+92,ry,40,id,gv_io(tt,t0,t0+1.0,0.3),{wall,t:tt,nod:cw_nod(tt,t0+0.3)});
+        wc_tick(x,px+pw-58,ry-2,40,GV.greenInk,clamp((tt-t0-0.75)/0.35,0,1),6);cw_lineTag(x,px+pw+22,ry,"ready",GV.green,GV.greenInk,fin(tt,t0+0.85,0.45));});}},
+    // the change request, close: Jun stamps it, "in · today"
+    {at:P.stamp,place:"topJun",keys:[[P.stamp,560,540,1.15]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:1,box2:1,stamp:clamp((tt-P.press)/0.4,0,1)}));
+      cw_at(x,CW_IN4,q=>cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:1}));cw_stamper(x,110+0.84*770,90+0.84*808,clamp((tt-P.press+0.5)/1.0,0,1),[62,120,112],[226,186,150]);}},
+    // Thursday: in the meeting room, Jun and Marta side by side at a laptop that faces away, working
+    {at:P.thu,place:"meeting",keys:[[P.thu,1080,660,1.62],[P.thu+0.1,1080,656,1.68]],d:3,draw:(x,tt)=>{
+      gv_behind(x,"jun",960,GV_MT.top,GV_MT.s,{pose:"write",t:tt,gaze:[0.6,0.7]});gv_behind(x,"marta",1200,GV_MT.top,GV_MT.s,{pose:"write",t:tt,flip:true,gaze:[0.6,0.7]});
+      x.drawImage(gv_place("meetingTable"),0,0,W,H);cw_laptopBack(x,1080,GV_MT.top+26);}}]);
+  setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 3 September 1967",gv_io(t,P.cars+0.3,P.board,0.4));cw_pill(ctx,t,[[0,"Thursday"]],gv_io(t,P.thu+0.3,sc.dur-0.5,0.5));wc_paperOver(ctx,S);});
+
+// ---- 10 · A step, not a meeting: the policy's line leaves the shelf and becomes a box on every change request; every team adds its
+// line to the record; the board meets only when a change needs it. It paid off: in today, nothing broke, the two reports agree, and,
+// like Sweden's morning, no one was surprised. One question is left ----
+// Sweden, the morning after: the traffic flows on the right, and the officer, his glove down, walks off the road to the pavement
+function cw_after(x,tt,t0){const C=CW_ST,u=tt-t0,items=[];CW_LIT=[];
+  items.push([16+5*u,()=>cw_bus(x,C,{x:1.9,z:16+5*u})]);items.push([38+6*u,()=>cw_car(x,C,{x:1.9,z:38+6*u,col:CW_PAINT[4]})]);
+  items.push([72-11*u,()=>cw_car(x,C,{x:-1.9,z:72-11*u,h:Math.PI,col:CW_PAINT[2]})]);items.push([120-10*u,()=>cw_car(x,C,{x:-1.9,z:120-10*u,h:Math.PI,col:CW_PAINT[0]})]);
+  const g=easeCam(clamp((u-0.5)/3.4,0,1)),X=lerp(0.3,5.2,g),walking=g>0&&g<1,ph=(u-0.5)*Math.PI*2.2,sw=walking?Math.sin(ph):0,k=cw_ppm(C,22.5),[ox,oy]=cw_pj(C,X,0,22.5);
+  items.push([22.5,()=>person(x,"cw_officer",ox,oy-Math.abs(sw)*0.02*k,1.8*k/560,{pose:"stand",pose2:sw>0?"walkA":"walkB",mix:Math.min(1,Math.abs(sw)*1.2),t:tt})]);
+  cw_depth(items);cw_lights();}
+scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
+    return{close:w("shelf","the line")-0.3,lift:w("shelf","leaves")-0.3,yus:c.every-0.6,form:w("every","carries")-0.2,land:w("every","impact")-0.3,own:w("every","owners")-0.2,
+      reg:c.team-0.5,six:w("team","adds")-0.1,cal:c.board-0.5,fade:w("board","only"),note:w("board","when")-0.1,pays:c.pays-0.4,today:c.today-0.4,ring:w("today","today")-0.1,
+      month:w("today","month")-0.2,broke:c.broke-0.7,agree:w("broke","and the two")-0.2,line:w("broke","agree")-0.3,morn:c.morning-0.4,idea:c.idea-0.4,clip:c.idea+0.2,
+      late:c.late-0.4,near:w("late","a table")-0.2,owner:w("late","who answers")-0.1,end:c.breath-0.2};});
+  const [px,py,pw]=CW_PAGE,RQB=[560,60,0.9],NT6=[44,176,0.7],PG6=[688,100,1000];
+  cw_shots(ctx,S,t,sc.dur,[
+    // Yusuf's office: binder 19 open on his desk, beside the newest DMBOK
+    {at:0,place:"office",keys:[[0,940,500,1.36],[0.1,944,496,1.4]],d:3,draw:(x,tt)=>{gv_behind(x,"yusuf",860,GV_OFF.desk[1],0.8,{standing:true,pose:"listen",t:tt,gaze:[0.3,0.9]});
+      cw_binderFlat(x,860,GV_OFF.desk[1]+4);}},
+    // the binder, close: its line about change lifts off the page as a gold card, and goes
+    {at:P.close,place:"desk",keys:[[P.close,1240,420,1.3]],d:2,push:0.012,draw:(x,tt)=>cw_binder19(x,{lit:1,lift:fin(tt,P.lift,0.8),go:fin(tt,P.lift+0.9,1.0)})},
+    // the data team's room: Yusuf reaches up with the card to a blank change request form on the board, and puts it at its foot
+    {at:P.yus,place:"data",keys:[[P.yus,760,460,1.42],[P.yus+0.1,770,456,1.46]],d:3,draw:(x,tt)=>{cw_tray(x,CW_TRAY[0],CW_TRAY[1]);cw_boardSmall(x);
+      const [fx,fy]=[742,381];x.save();x.fillStyle="rgba(60,50,40,0.2)";x.fillRect(fx-34,fy-44,72,94);x.fillStyle="rgb(250,248,242)";x.fillRect(fx-38,fy-48,72,94);x.fillStyle=rgba(wc_lit(GV.cyanInk,0.8),1);x.fillRect(fx-34,fy-44,64,10);x.restore();
+      const h=cw_handAt("yusuf",0,905,0.8,"cw_pin",1);
+      person(x,"yusuf",fx-10-h[0],905,0.8,{pose:"listen",pose2:"cw_pin",mix:fin(tt,P.form-1.0,1.0),t:tt,flip:false,carry:cw_heldGold});}},
+    // the form, close: the card lands on it, and becomes the box every request now has; each owner's ready, in green
+    {at:P.form,place:"boardWide",keys:[[P.form,960,550,1.06]],d:2,push:0.012,draw:(x,tt)=>{const g=easeCam(fin(tt,P.form+0.1,0.7)),nb=fin(tt,P.land+0.2,0.8);
+      cw_at(x,RQB,q=>{cw_request(q,{blank:1,newBox:nb});gv_pin(q,500,16,GV.red,1.6);});
+      if(nb<1){const [tx,ty]=[RQB[0]+500*RQB[2],RQB[1]+816*RQB[2]];x.save();x.translate(lerp(tx-1250,tx,g),lerp(ty+180,ty,g));x.scale(0.9,0.9);withA(x,1-clamp(nb*2,0,1),()=>{
+        wc_panel(x,-320,-72,640,150,{kind:"card",wash:GV.gold,washA:0.5,seed:57});cw_T(x,"19.1",-290,-16,{w:800,size:30,col:GV.goldInk});
+        CW_OBL.forEach((l,j)=>cw_T(x,l,-210,-16+j*44,{w:600,size:30,col:WC_DARK}));});x.restore();}
+      const og=fin(tt,P.own,0.5);if(og>0.01)cw_at(x,RQB,q=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(GV.green,0.6),og);q.fillRect(644,772,286,38);q.restore();});}},
+    // the register: a team that starts using credentials writes its own line, in its own hand
+    {at:P.reg,place:"boardWide",keys:[[P.reg,900,470,1.04],[P.reg+0.1,902,468,1.06]],d:3,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
+      const p6=clamp((tt-P.six)/1.5,0,1),pen=cw_who(x,px,py,pw,[1,1,1,1,1,p6],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,px+pw/2,py+16,GV.red,1.6);
+      if(pen&&p6<1)cw_pen(x,pen[0],pen[1]);cw_cameo(x,px+pw+92,cw_rowY(py,pw,5),44,"anil",gv_io(tt,P.six-0.3,P.six+1.9,0.35),{wall:GV_ROOM.fac,t:tt});}},
+    // the meeting room's calendar: the monthly circles fade; one note stays, "for a change that needs it"
+    {at:P.cal,place:"calWall",keys:[[P.cal,960,470,1.0],[P.cal+0.1,960,466,1.03]],d:3,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:1,fade:0.75*fin(tt,P.fade,0.9),note:fin(tt,P.note,0.6)}))},
+    // the change request, close: in, today
+    {at:P.pays,place:"topJun",keys:[[P.pays,560,540,1.15],[P.pays+0.1,566,536,1.19]],d:3,draw:(x,tt)=>{cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:1,box2:1,stamp:1}));
+      cw_at(x,CW_IN4,q=>cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:1}));}},
+    // the calendar: today ringed in gold, weeks before the board's faded circle
+    {at:P.today,place:"calWall",keys:[[P.today,960,470,1.0],[P.today+0.1,960,466,1.03]],d:3,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>{
+      cw_calendar(q,{ring:1,fade:0.75-0.45*gv_io(tt,P.month,P.month+1.1,0.35),note:1,today:fin(tt,P.ring,0.8)});})},
+    // nothing broke: the register, every line as it was, beside the second note's green tick
+    {at:P.broke,place:"boardWide",keys:[[P.broke,960,470,1.0]],d:2,push:0.01,draw:(x,tt)=>{cw_at(x,NT6,q=>{cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:1,clip:false});gv_pin(q,440,12,GV.red,2);});
+      cw_who(x,...PG6,[1,1,1,1,1,1],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,PG6[0]+PG6[2]/2,PG6[1]+16,GV.red,1.6);}},
+    // the two reports will agree: the draft submission's card and the census report's, side by side, joined by a gold line
+    {at:P.agree,place:"topMeet",keys:[[P.agree,960,500,1.0],[P.agree+0.1,960,496,1.03]],d:3,draw:(x,tt)=>{
+      cw_at(x,[180,150,0.8],q=>{cw_report(q,"Draft submission","Registrar's office",GV_ROOM.reg);cw_whenCard(q,150,330,520,"from Wednesday",1);});
+      cw_at(x,[1180,150,0.8],q=>{cw_report(q,"Census report","Planning",GV_ROOM.plan);cw_whenCard(q,150,330,520,"from its next run",1);});
+      const e=easeCam(fin(tt,P.line,0.9));if(e>0.01){const y0=150+0.8*394,x0=180+0.8*670,x1=1180+0.8*150;x.save();x.strokeStyle=rgba(GV.goldInk,0.9);x.lineWidth=7;x.lineCap="round";
+        x.beginPath();x.moveTo(x0,y0);x.lineTo(lerp(x0,x1,e),y0);x.stroke();[x0,lerp(x0,x1,e)].forEach(xx=>{x.fillStyle=rgba(GV.goldInk,0.95);x.beginPath();x.arc(xx,y0,9,0,TAU);x.fill();});x.restore();}}},
+    // Sweden's morning
+    {at:P.morn,place:"x67day",keys:[[P.morn,960,540,1.0],[P.morn+0.1,964,536,1.03]],d:4,draw:(x,tt)=>cw_after(x,tt,P.morn)},
+    // an ordinary day: Jun clips an impact note to another change request
+    {at:P.idea,place:"topJun",keys:[[P.idea,860,500,1.0],[P.idea+0.1,864,496,1.03]],d:3,draw:(x,tt)=>{const sl=easeCam(fin(tt,P.clip,0.8));
+      cw_at(x,[110,90,0.84],q=>cw_request(q,{blank:1,newBox:1,other:["Add the date each award was given","Mei Tanaka"]}));
+      x.save();x.translate(700*(1-sl),-40*(1-sl));cw_at(x,CW_IN4,q=>cw_impact(q,{bars:1,no:1,clip:sl>0.96}));x.restore();}},
+    // one question: the register, every line with its owner; and the table Planning's dashboard uses, a clock above it, and no owner
+    {at:P.late,place:"boardWide",keys:[[P.late,960,470,1.0],[P.late+0.1,962,468,1.03]],d:3,draw:(x,tt)=>{const a=fin(tt,P.near,0.6);
+      cw_who(x,...PG6,[1,1,1,1,1,1],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,PG6[0]+PG6[2]/2,PG6[1]+16,GV.red,1.6);
+      if(a>0.01)withA(x,a,()=>cw_boardClock(x,300,190,70,4,50));cw_nearCard(x,90,330,a,{owner:fin(tt,P.owner,1.0)});}}]);
+  gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 19");
+  setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 3 September 1967",gv_io(t,P.morn+0.3,P.idea,0.4));wc_paperOver(ctx,S);});

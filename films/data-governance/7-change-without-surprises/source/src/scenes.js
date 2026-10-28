@@ -1,0 +1,10 @@
+const cw_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+scene("dawn",(ctx,S,t,sc)=>{const C=CW_ST;
+  gv_shots(ctx,S,t,sc.dur,[{at:0,place:"x67dawn",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>{CW_LIT=[];
+    cw_car(x,C,{x:-1.9,z:28+2.15,col:CW_PAINT[1],tail:1,head:1,driver:[0,[60,48,40],[70,74,90]]});
+    cw_car(x,C,{x:1.9,z:46,h:Math.PI,col:CW_PAINT[3],head:1});
+    person(x,"cw_officer",cw_pj(C,0.3,0,22.5)[0],cw_pj(C,0.3,0,22.5)[1],1400/22.5*1.8/560,{pose:"cw_halt",t:tt});
+    cw_car(x,C,{x:-1.9,z:10.6+2.15,col:CW_PAINT[0],tail:1,head:1,driver:[0,[60,48,40],[70,74,90]]});
+    cw_clockHands(x,C,50);cw_streetLight(x,"dawn");}}]);
+  wc_paperOver(ctx,S);});
+["board","uses","note","breaks","adds","edition","words","ready","step"].forEach(id=>scene(id,(ctx,S,t,sc)=>{gv_shots(ctx,S,t,sc.dur,[{at:0,place:"x67day",keys:[[0,960,540,1]],push:0}]);wc_paperOver(ctx,S);}));

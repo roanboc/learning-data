@@ -1,0 +1,40 @@
+{
+  "key": "where-each-piece-lives",
+  "title": "Where each piece lives",
+  "sub": "Film 3 of 3 of Governance on the map, the second series on data governance: every piece of governance given one home, where it's changed, and an owner, who decides it; every other place a copy, made from its home one way, and checked every night.",
+  "howto": "The film is painted in watercolour, in the university's own rooms, and in Korea under the Joseon kings, from the 1500s to today. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions; on Noor's map a home is drawn solid and a copy dashed, and every flow has one arrowhead; amber is what a check has found, and green what's been put right.",
+  "src": [
+    "plan.js",
+    "past.js",
+    "annals.js",
+    "uni.js",
+    "map.js",
+    "scenes.js"
+  ],
+  "story": [
+    "copy"
+  ],
+  "poster": [
+    "copy",
+    "scholars",
+    6.7
+  ],
+  "say": [
+    [
+      "\\bJoseon\\b",
+      "Joesun"
+    ],
+    [
+      "\\bJeonju\\b",
+      "Junjoo"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

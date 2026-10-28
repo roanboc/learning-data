@@ -1,4 +1,4 @@
-// Teachers of data, film 10 of the data governance series. One line per id; the film re-times itself to the voice.
+// Teachers of data, film 10 of 10 of Governance principles, the first series on data governance. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "crossing":{"name":"The mime before the fine","lead":1.6,"tail":1.0,"vo":[

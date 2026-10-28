@@ -148,7 +148,7 @@ scene("crossing",(ctx,S,t,sc)=>{const P=tt_once(sc,"P",()=>tt_crossCues(sc)),cut
   if(i===4){tt_tagAt(ctx,t,P.understand,null,1340,250,"they understand it",{size:32});tt_tagAt(ctx,t,P.around2,null,560,250,"the people around keep it",{size:32});
     tt_tagAt(ctx,t,P.few-0.2,null,960,340,"the fine is for the few",{size:32,role:"amber"});}
   tt_pill(ctx,t,[[0,"Bogotá · 1995"],[P.y96-0.3,"Bogotá · 1996"]],(1-gv_io(t,P.last-0.3,P.y96-0.3,0.4))*(1-fin(t,P.breath+1.0,0.6)));
-  gv_title(ctx,S,t,P.breath+1.2,"Teachers of data","why people keep a rule","Film 10 of 19 · data governance");
+  gv_title(ctx,S,t,P.breath+1.2,"Teachers of data","why people keep a rule","Film 10 of 10 · data governance");
   wc_paperOver(ctx,S);});
 
 // ---- the university: what the chapters share ----
@@ -570,7 +570,7 @@ scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
     // joined by a gold thread, the haze lifts, and the camera goes back up to the next films
     {at:P.mp,place:"mapClose",keys:[[P.mp,960,540,1],[P.mp+0.6,960,470,1.15],[P.sc,960,600,1.2],[P.rest-0.2,960,470,1.15]],d:2.4,push:0.02,draw:(x,tt)=>{
       tt_mapTools(x,{show:clamp((tt-P.tl+0.2)/1.2,0,1),haze:fin(tt,P.see-0.2,0.7),order:clamp((tt-P.chg)/1.1,0,1),join:clamp((tt-P.chg-0.8)/0.9,0,1)});
-      tt_mapCards(x,{gov:fin(tt,P.gov,0.8),next:j=>fin(tt,P.nx+0.35*j,0.5)});}},
+      tt_mapCards(x,{gov:fin(tt,P.gov,0.8),next:j=>fin(tt,P.nx+0.35*j,0.5),head:fin(tt,P.nx-0.25,0.6)});}},
     // Bogotá in 1996 again, what the mimes did for the crossings: people on foot cross in front of the cars
     {at:P.kz,place:"bogota",keys:[[P.kz,960,530,1.04],[P.kz+0.1,920,600,1.14]],d:3.2,push:0,draw:(x,tt)=>{const P0=tt_P();
       tt_drawWorld(x,TT_CAM.wide,tt_world96(P0.safe+1.6+Math.max(0,tt-P.kz),P0));}},
@@ -588,5 +588,5 @@ scene("lasts",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s
       more:q=>{tt_chairAt(q,TT_NEWX);gv_behind(q,"ttNew",TT_NEWX,GV_MT.top,GV_MT.s,{pose:"listen",t:tt,flip:true,expr:"smile",nod:tt_nodAt(tt,P.mt+1.2,P.end+1,2.2)});}})}]);
   wc_year(ctx,56,72,"Bogotá · 2012",fin(t,P.bo+0.3,0.4)*(1-fin(t,P.mp-0.25,0.3)));
   wc_year(ctx,56,72,"Bogotá · 1996",fin(t,P.kz+0.3,0.4)*(1-fin(t,P.fl-0.25,0.3)));
-  tt_end(ctx,S,t,P.end,"Teachers of data",["Governance is people's work.","Tools remember what people agreed."],"Film 10 of 19");
+  tt_end(ctx,S,t,P.end,"Teachers of data",["Governance is people's work.","Tools remember what people agreed."],"Film 10 of 10");
   wc_paperOver(ctx,S);});

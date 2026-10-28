@@ -1,0 +1,35 @@
+{
+  "kicker": "Data quality rules",
+  "kicker_es": "Reglas de calidad de datos",
+  "title_es": "Reglas que se ejecutan",
+  "h1": "Rules that run: measure quality from what ran",
+  "h1_es": "Reglas que se ejecutan: medir la calidad con lo que se ejecutó",
+  "lead": "The university's policy says data quality is monitored, but monitored means a yearly survey of how each owner feels about their data. Yet the data team already runs 160 checks every night. Yusuf gives each check an owner and a dimension, each owner sets its level, and the scorecard is read from what ran.",
+  "lead_es": "La política de la universidad dice que la calidad de datos se monitorea, pero monitorear significa una encuesta anual sobre cómo se siente cada dueño con sus datos. Y el equipo de datos ya ejecuta 160 controles cada noche. Yusuf le da a cada control un dueño y una dimensión, cada dueño fija su nivel, y el tablero se lee de lo que se ejecutó.",
+  "description": "A film about data quality rules: the Nilometer of 861 and the land tax set by its daily reading against sixteen cubits, not by guess; a policy that says quality is monitored, and a yearly survey of how owners feel about their data; the checks the night's update already runs, each given an owner and one of six common dimensions in a rule register; a scorecard written from last night's checks, by area and dimension, with what didn't pass and whose it is; levels set and signed by each owner, with a reason, from warn on any to stop on any difference; a warning nobody owned, unread for a year; the line between a check about the data and a list of what people do; one red night, what's held back, an issue with a date, and the cell green again the next night.",
+  "description_es": "Una película sobre las reglas de calidad de datos: el nilómetro de 861 y el impuesto sobre la tierra fijado por su lectura diaria frente a dieciséis codos, sin adivinar; una política que dice que la calidad se monitorea, y una encuesta anual de cómo se sienten los dueños con sus datos; los controles que la actualización nocturna ya ejecuta, cada uno con un dueño y una de seis dimensiones comunes en un registro de reglas; un tablero de calidad escrito con los controles de anoche, por área y dimensión, con lo que no pasó y de quién es; niveles que cada dueño fija y firma, con un motivo, desde advertir ante cualquiera hasta detenerse ante cualquier diferencia; una advertencia sin dueño, sin leer durante un año; la línea entre un control sobre los datos y una lista de lo que hace la gente; una noche roja, lo que se retiene, una incidencia con fecha, y la celda verde otra vez la noche siguiente.",
+  "card": "Monitored means a yearly survey. Give every check an owner, a level and a reason, and read the scorecard from what ran.",
+  "card_es": "Monitorear significa una encuesta anual. Dale a cada control un dueño, un nivel y un motivo, y lee el tablero de lo que se ejecutó.",
+  "chapters_es": {
+    "river": "El río medido",
+    "survey": "Una encuesta",
+    "runs": "Lo que ya se ejecuta",
+    "owner": "Un dueño y una dimensión",
+    "scorecard": "El tablero de calidad",
+    "level": "¿De quién es el nivel?",
+    "row": "Tom lee su fila",
+    "list": "¿Un control, o una lista?",
+    "night": "Una noche roja",
+    "measured": "Medido, no encuestado"
+  },
+  "past": [
+    "Fustat, 861: the Nilometer on Roda Island",
+    "A measure works when it's read every day against a level set in advance, and its reading reaches those who decide."
+  ],
+  "past_es": [
+    "Fustat, 861: el nilómetro de la isla de Roda",
+    "Una medida funciona cuando se lee cada día frente a un nivel fijado de antemano, y su lectura llega a quienes deciden."
+  ],
+  "next_h": "You've seen quality rules become checks with owners, read on a scorecard each morning. More films in the series are on the way.",
+  "next_h_es": "Viste cómo las reglas de calidad se vuelven controles con dueño, leídos en un tablero cada mañana. Vienen más películas de la serie."
+}

@@ -1,0 +1,34 @@
+{
+  "key": "rules-that-run",
+  "title": "Rules that run",
+  "sub": "Film 5 of 19 of a series on data governance: binder 9 says data quality is monitored, but monitored means a survey; the university gives every check it already runs an owner and a dimension, reads a scorecard from last night's checks, and lets each owner set the level.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions and a level set in advance; green is what runs and passes; amber is a warning its owner agreed to watch; red is a failure that stops what's built on it; grey hatching is what wasn't checked. Every colour is also said in words.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "river",
+    "score",
+    0.8
+  ],
+  "say": [
+    [
+      "\\bFustat\\b",
+      "Fus-taat"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ]
+  ]
+}

@@ -45,3 +45,4 @@ customProperties:
 - property: consumers
   value:
   - exposure census_dashboard
+  - exposure health_placements_plan

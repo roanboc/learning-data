@@ -16,32 +16,6 @@
   "thread_es": "Cada año, la universidad informa sus títulos al gobierno. Este año, el informe del censo dice 4,812 y el borrador de la entrega dice 4,867, y esa misma semana cambia el significado de título. Ninguna de las treinta y cuatro políticas lo habría detectado. Película a película, Yusuf pone una pieza de gobernanza donde ocurre el trabajo, para que el número sea confiable el día en que se envía, y muestra lo que queda en el estante.",
   "past_h": "Every film opens somewhere else, at another time",
   "past_h_es": "Cada película empieza en otro lugar, en otra época",
-  "coming_h": "Still to come",
-  "coming_h_es": "Lo que viene",
-  "coming_p": "Ten films, after the prologue. Then two more series: Governance on the map draws it all as one model on the university's architecture map, and Governance you can use builds it with dbt and Databricks.",
-  "coming_p_es": "Diez películas, después del prólogo. Luego, dos series más: La gobernanza en el mapa lo dibuja todo como un solo modelo en el mapa de arquitectura de la universidad, y Gobernanza que puedes usar lo construye con dbt y Databricks.",
-  "coming": [
-    [2, "Who decides", "a register of who owns each area and who keeps it, and decisions written down"],
-    [3, "One word, one home", "one glossary in place of many, and every tool reads from it"],
-    [4, "Who may see it", "a classification on each column, and protection that follows it everywhere"],
-    [5, "Rules that run", "quality rules as checks with owners, and a scorecard"],
-    [6, "Fixed where it starts", "problems traced to their source, checks at entry, and watching for the unknown"],
-    [7, "Change without surprises", "the impact of every change shown before it's made, and the old edition kept until a date"],
-    [8, "A product with an owner", "data products with an owner, a contract and service levels"],
-    [9, "An agent that checks", "the university's rules for AI helpers: the agent drafts and flags, and people decide"],
-    [10, "Teachers of data", "the people side: stewards, guidance beside every check, and measures read from the work"]
-  ],
-  "coming_es": [
-    [2, "Quién decide", "un registro de quién es dueño de cada área y quién la mantiene, y decisiones anotadas"],
-    [3, "Una palabra, un solo lugar", "un solo glosario en lugar de muchos, y cada herramienta lee de él"],
-    [4, "Quién puede verlo", "una clasificación en cada columna, y una protección que la sigue a todas partes"],
-    [5, "Reglas que se ejecutan", "reglas de calidad como controles con dueño, y un tablero"],
-    [6, "Arreglado en el origen", "problemas rastreados hasta su origen, controles al ingresar los datos, y vigilancia para lo desconocido"],
-    [7, "Cambios sin sorpresas", "el impacto de cada cambio, visible antes de hacerlo, y la edición anterior hasta una fecha"],
-    [8, "Un producto con dueño", "productos de datos con dueño, contrato y niveles de servicio"],
-    [9, "Un agente que revisa", "las reglas de la universidad para los asistentes de IA: el agente propone y señala, y las personas deciden"],
-    [10, "Docentes de datos", "el lado humano: responsables de datos, una guía junto a cada control, y medidas que salen del trabajo"]
-  ],
   "people_h": "Who's at the table",
   "people_h_es": "Quiénes están en la mesa",
   "people": [

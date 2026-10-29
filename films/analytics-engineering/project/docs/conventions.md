@@ -99,8 +99,8 @@ then by domain:
 |---|---|
 | `seeds/` | `reference/` (models read it), `expected/` (tests reconcile against it) |
 | `tests/` | `generic/` (custom generic tests), `rules/` (business rules that must hold), `reconciliation/` (a result against an expected seed), `governance/` (rules about the project itself) |
-| `analyses/` | `profiling/` (evidence about the sources), `design/` (evidence for a modelling choice), `validation/` (checking the result) |
-| `macros/` | `shared/` (conventions every domain uses), `<domain>/` (one domain's rule), `adapters/` (engine workarounds) |
+| `analyses/` | `profiling/` (evidence about the sources), `design/` (evidence for a modelling choice), `validation/` (checking the result), `governance/` (who can read a table, and who did, on the platform) |
+| `macros/` | `shared/` (conventions every domain uses), `<domain>/` (one domain's rule), `governance/` (what the platform is told: classes, areas, the policy), `adapters/` (engine workarounds) |
 | `scripts/` | `generate/` (write committed files), `check/` (CI checks), `tools/` (for people, on demand), `setup/` (one-off platform setup) |
 
 The governance test does the job of a dbt v2 check. When the project moves to dbt v2 (the Fusion
@@ -304,4 +304,5 @@ after each table builds, every classified column gets a Unity Catalog tag, `pers
 class; and when the var `personal_data_readers` names a group, each column of direct personal data
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
-with one policy by tag instead of a mask per column, and the product catalogue: `docs/databricks-governance.md`.
+with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
+read a table, the access review, and the product catalogue: `docs/databricks-governance.md`.

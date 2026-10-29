@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00:01.200 --> 00:00:03.206
+Today, in the platform team's room.
+
+00:00:04.506 --> 00:00:09.920
+Sam Okafor runs the data platform, where the university's tables are kept and read.
+
+00:00:11.220 --> 00:00:16.996
+Yusuf asks him who can read the learner table, with every learner's name, email and student number.
+
+00:00:18.496 --> 00:00:24.521
+When Yusuf first asked what slowed him down, Sam said: tell me which column, I'll protect it in minutes.
+
+00:00:26.421 --> 00:00:30.706
+Nobody could tell him, so access was all or nothing, given by hand:
+
+00:00:30.906 --> 00:00:37.119
+a form, an emailed approval, and three weeks later, the whole table, to one person, with no end date.
+
+00:00:39.019 --> 00:00:41.615
+Sam finds forty-one people who can read it.
+
+00:00:43.115 --> 00:00:47.517
+Nine have moved to other jobs, and still see every learner's name and email.
+
+00:00:49.417 --> 00:00:50.805
+Something had to change.
+
+00:00:52.305 --> 00:00:58.473
+Now each build tells the platform which columns identify a person, from the classes in the project.
+
+00:00:59.973 --> 00:01:08.235
+One policy shows stars in those columns to everyone outside the registrar's office, on every table, even tables not built yet.
+
+00:01:09.935 --> 00:01:12.255
+And access goes to groups, until a date.
+
+00:01:13.555 --> 00:01:18.183
+By the end of December, two groups can read the learner table, not forty-one people.
+
+00:01:19.683 --> 00:01:22.134
+Each new table is protected as it's built.
+
+00:01:23.434 --> 00:01:27.533
+And Sam protects a column in minutes, because the project tells him which.
+
+00:01:35.233 --> 00:01:42.266
+On the platform, the project's tables sit in the university's catalog, a schema for each layer the project builds.
+
+00:01:43.966 --> 00:01:46.934
+But people look for data by area, not by layer.
+
+00:01:48.234 --> 00:01:52.903
+So each table carries its area as a tag, from the domain its model names,
+
+00:01:53.103 --> 00:01:59.348
+and the Discover page lays the tables out by area: student, course, planning, finance, and more.
+
+00:02:01.248 --> 00:02:05.890
+Who may read a table is a grant, and a grant goes to a group, never to a person.
+
+00:02:09.790 --> 00:02:16.327
+In the project, each column's class says whether it identifies a person: direct, pseudonymous or none.
+
+00:02:17.627 --> 00:02:23.558
+After each table builds, dbt writes the class to the platform, as a tag on the column.
+
+00:02:25.258 --> 00:02:32.622
+The tag is governed: an admin created it once, with only those three values, so nobody can tag a column "maybe".
+
+00:02:34.322 --> 00:02:38.138
+Change a class in the project, and the next build changes the tag.
+
+00:02:39.638 --> 00:02:47.038
+For tables the project doesn't build, the platform's classifier finds columns that look personal, for their owner to class.
+
+00:02:50.738 --> 00:02:58.029
+Then one policy masks every column tagged direct, in the whole catalog, for everyone but the registrar's office.
+
+00:02:59.529 --> 00:03:06.237
+It isn't set table by table: a table built tomorrow, with an email in it, is masked as soon as it's tagged.
+
+00:03:08.337 --> 00:03:11.779
+A policy can filter rows the same way; this one masks.
+
+00:03:12.879 --> 00:03:19.007
+Clara reads the learner table, and sees each learner's status, and stars where the names and emails are.
+
+00:03:20.707 --> 00:03:25.739
+The registrar's office sees the values, and so does the identity that runs the build.
+
+00:03:29.239 --> 00:03:37.237
+The learner code is pseudonymous: the student number, scrambled the same way in every table, so tables can be joined without names.
+
+00:03:38.737 --> 00:03:40.457
+Scrambled isn't anonymous.
+
+00:03:41.757 --> 00:03:46.319
+With the registrar's list, anyone can scramble every number on it and match them.
+
+00:03:48.419 --> 00:03:55.789
+So the code is still personal: the policy leaves it readable, for counting, and reading it takes a purpose and an end date.
+
+00:03:59.489 --> 00:04:01.934
+Access goes to groups, never to people.
+
+00:04:03.034 --> 00:04:09.922
+Mei, for the registrar's office, said yes to Clara: to plan next term's places, until 15 December.
+
+00:04:11.422 --> 00:04:13.816
+So Sam doesn't grant the table to Clara.
+
+00:04:14.916 --> 00:04:21.084
+He grants it to a Planning group, and Clara joins the group in the university's directory, until that date.
+
+00:04:22.584 --> 00:04:24.662
+The platform reads its groups from there.
+
+00:04:25.962 --> 00:04:30.425
+When someone changes jobs, the directory moves them, and their access follows.
+
+00:04:31.925 --> 00:04:35.295
+On 15 December, her access ends by itself.
+
+00:04:39.595 --> 00:04:42.431
+The platform also draws each column's lineage.
+
+00:04:43.531 --> 00:04:48.377
+Pick the learner's email, and it shows every table it flows into, down to the column.
+
+00:04:50.077 --> 00:04:53.116
+Tags can follow lineage by themselves, in beta.
+
+00:04:54.416 --> 00:05:00.784
+Here they don't need to: every table the email reaches is built by the project, which classes it there too,
+
+00:05:00.984 --> 00:05:02.951
+and the check stops a table that doesn't.
+
+00:05:06.651 --> 00:05:10.861
+And the platform keeps a log, in preview, of who read each table, and when.
+
+00:05:12.361 --> 00:05:17.098
+So Sam can answer what Yusuf wanted to know: who read the learner table this month.
+
+00:05:18.998 --> 00:05:26.110
+Each December, the access review reads the grants themselves: who can read each table, through which group, and who's in it.
+
+00:05:27.810 --> 00:05:30.178
+Forty-one people gave way to two groups:
+
+00:05:30.378 --> 00:05:36.047
+the registrar's office, which keeps the learners' records, and the data team, which builds the tables.
+
+00:05:39.947 --> 00:05:45.040
+Clara plans next term's places with the statuses she needs, and stars where the names are.
+
+00:05:46.540 --> 00:05:51.626
+On Noor's map, the project says what each column is, and the platform holds the line:
+
+00:05:51.826 --> 00:05:56.349
+classes become tags, tags meet one policy, and groups carry the dates.
+
+00:05:58.049 --> 00:06:02.219
+Sam protects a column in minutes now, because the project tells him which.
+
+00:06:03.719 --> 00:06:06.464
+The platform enforces what the metadata says.

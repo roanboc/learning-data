@@ -4,7 +4,7 @@
 
 What the university decided in *Governance principles* ([`../data-governance/`](../data-governance/)), and what Noor's map drew in *Governance on the map* ([`../governance-on-the-map/`](../governance-on-the-map/)), is built here, where the work happens, with dbt and Databricks. Each film builds one of the map's flows, names the films it expands, and shows the files and screens a practitioner uses: owners, contracts and checks in the dbt project; access, tags, masks, lineage and audit on the platform; one meaning, read by people, reports and agents; quality rules and monitoring that tell each owner; data products and contracts in open formats; and a marketplace where people find data and ask for it.
 
-**Status:** planned on 28 October 2026, from films 14 to 19 of the plan for data governance, with its six scripts written the same day. Its opening film, *Governed in dbt*, was made on 28 October 2026; the other five are made one after another. On the site, it sits under the topic *Data governance*, after *Governance on the map*, at `governance-in-practice/`. The plan is in the [proposal](proposal.md).
+**Status:** planned on 28 October 2026, from films 14 to 19 of the plan for data governance, with its six scripts written the same day. Its opening film, *Governed in dbt*, and film 2 of 6, *Governed in Unity Catalog*, were made on 28 October 2026; the other four are made one after another. On the site, it sits under the topic *Data governance*, after *Governance on the map*, at `governance-in-practice/`. The plan is in the [proposal](proposal.md).
 
 ## The films
 
@@ -12,6 +12,7 @@ What the university decided in *Governance principles* ([`../data-governance/`](
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Governed in dbt](https://data.learn-all.org/governance-in-practice/governed-in-dbt/) | Governance in the code | 6 min | 9 | 3 questions | [script](1-governed-in-dbt/script.md) · [source](1-governed-in-dbt/source/README.md) |
+| [Governed in Unity Catalog](https://data.learn-all.org/governance-in-practice/governed-in-unity-catalog/) | Access, masks and audit | 6 min | 9 | 3 questions | [script](2-governed-in-unity-catalog/script.md) · [source](2-governed-in-unity-catalog/source/README.md) |
 <!-- /films -->
 
 ## How the films are made

@@ -1,0 +1,247 @@
+1
+00:00:01,200 --> 00:00:05,849
+Today, in the Faculty of Health, Anil Kurian plans the faculty's places.
+
+2
+00:00:07,149 --> 00:00:12,593
+Its health informatics certificate ends with a hospital placement, arranged months ahead.
+
+3
+00:00:14,293 --> 00:00:19,107
+So Anil works out how many to offer: one for each learner a unit from finishing.
+
+4
+00:00:20,807 --> 00:00:25,690
+In September, nobody owned the table with that number, and he didn't know whom to ask.
+
+5
+00:00:26,390 --> 00:00:29,413
+So he asked around, and a colleague sent him a copy.
+
+6
+00:00:30,913 --> 00:00:33,264
+It counted one learner near the certificate.
+
+7
+00:00:33,964 --> 00:00:40,463
+Planning's census report, the university's official count, said two, and nobody could say which was right.
+
+8
+00:00:42,163 --> 00:00:47,529
+So the faculty offered one place, and a learner a unit from finishing would have waited a semester.
+
+9
+00:00:49,229 --> 00:00:57,447
+And the copy stayed in his inbox: a code for every learner, which can lead back to their name, sent with nobody's yes, and no end date.
+
+10
+00:00:59,347 --> 00:01:00,735
+Something had to change.
+
+11
+00:01:02,435 --> 00:01:09,538
+Now the university's data products sit in one catalogue, like a shop window, each with its promise and its owner.
+
+12
+00:01:11,238 --> 00:01:16,585
+You find what you need, read what it promises, and ask its owner, saying why, and until when.
+
+13
+00:01:18,085 --> 00:01:21,971
+This morning, Anil found Planning's product in a minute, and asked.
+
+14
+00:01:22,671 --> 00:01:27,238
+Clara, its owner, said yes by the afternoon, until the end of January.
+
+15
+00:01:28,938 --> 00:01:31,757
+Her table agrees with the census report: two.
+
+16
+00:01:32,457 --> 00:01:36,325
+So the faculty offers a second place, and no one waits a semester.
+
+17
+00:01:37,825 --> 00:01:39,584
+Anil deleted the old copy.
+
+18
+00:01:47,084 --> 00:01:51,877
+The catalogue is Ontos, the Databricks Labs project the platform team runs.
+
+19
+00:01:52,977 --> 00:01:57,915
+Its marketplace shows every product that's live, each with its domain and its owner.
+
+20
+00:01:59,615 --> 00:02:03,150
+The university calls it the marketplace, though nothing is sold.
+
+21
+00:02:04,450 --> 00:02:07,518
+Anil types near award, an idea on Noor's map.
+
+22
+00:02:09,018 --> 00:02:14,975
+The catalogue finds the product linked to it: Learners near an award, owned by Clara, in Planning.
+
+23
+00:02:18,075 --> 00:02:22,679
+Before he asks, Anil reads its promise, from the files kept in the project.
+
+24
+00:02:23,979 --> 00:02:27,138
+What it's for: planning support for learners near an award.
+
+25
+00:02:28,438 --> 00:02:32,410
+How it counts them, as at census day, matching the census report.
+
+26
+00:02:33,910 --> 00:02:35,655
+When it's ready, and where to ask.
+
+27
+00:02:36,955 --> 00:02:39,164
+And its contract, column by column.
+
+28
+00:02:40,464 --> 00:02:43,763
+Two columns hold codes that can lead back to a learner.
+
+29
+00:02:45,463 --> 00:02:48,080
+So reading it takes a purpose, and an end date.
+
+30
+00:02:51,380 --> 00:02:53,396
+So he asks, on the product's page.
+
+31
+00:02:54,496 --> 00:02:57,600
+The form wants two things: why, and for how long.
+
+32
+00:02:58,900 --> 00:03:03,125
+He writes: to plan next semester's places in the certificate's last unit.
+
+33
+00:03:04,825 --> 00:03:06,476
+And he asks for ninety days.
+
+34
+00:03:07,776 --> 00:03:12,759
+Had he started on the platform, its request button, in preview, would have brought him here too.
+
+35
+00:03:14,459 --> 00:03:16,393
+Every request comes to one place.
+
+36
+00:03:19,893 --> 00:03:24,419
+The request goes to Clara, the product's owner, not to whoever built the table.
+
+37
+00:03:25,919 --> 00:03:29,384
+Governance promises an answer within five working days.
+
+38
+00:03:30,884 --> 00:03:32,567
+She answers by the afternoon.
+
+39
+00:03:33,867 --> 00:03:40,366
+His reason is what the product is for, so she says yes, for ninety days, until the 31st of January.
+
+40
+00:03:42,066 --> 00:03:45,311
+She could have given fewer days, or said no, with her reason.
+
+41
+00:03:46,811 --> 00:03:51,702
+Either way, the request is the record: who asked, why, who said yes, and until when.
+
+42
+00:03:55,202 --> 00:03:58,025
+Access goes to a group, never to one person.
+
+43
+00:03:59,325 --> 00:04:05,945
+Clara's yes puts Anil in the product's readers' group, in the university's directory of accounts, until his date.
+
+44
+00:04:07,845 --> 00:04:12,267
+On the platform, that group was given the table once, when the product went live.
+
+45
+00:04:13,967 --> 00:04:16,778
+A week before the date, the catalogue reminds him.
+
+46
+00:04:18,478 --> 00:04:22,615
+On the date, the directory takes him out of the group, and his access ends.
+
+47
+00:04:24,715 --> 00:04:27,872
+Clara can see every reader, why, and until when.
+
+48
+00:04:31,172 --> 00:04:36,989
+Anil also adds the faculty's placements plan to the record of who uses what, in the project.
+
+49
+00:04:38,689 --> 00:04:46,253
+So when someone next changes Clara's table, the impact check names the Faculty of Health beside Planning's census dashboard.
+
+50
+00:04:47,953 --> 00:04:50,023
+Both are asked before the change ships.
+
+51
+00:04:51,523 --> 00:04:54,021
+A reader who's known is a reader who's told.
+
+52
+00:04:56,921 --> 00:04:59,771
+Outside the university, the same rules hold.
+
+53
+00:05:01,071 --> 00:05:07,495
+A partner university counts the faculty's certificate towards its degrees, so it asks for Mei's Awards:
+
+54
+00:05:07,995 --> 00:05:12,557
+each award, its credit points and its faculty, and no one's personal data.
+
+55
+00:05:14,057 --> 00:05:22,327
+Mei says yes, and Sam shares it through OpenSharing, an open way to share tables with another organisation, on any platform.
+
+56
+00:05:24,027 --> 00:05:30,281
+The partner reads the table itself, not a copy, with a key that ends on a date, and the same contract.
+
+57
+00:05:32,181 --> 00:05:39,909
+Partners on Databricks can also find it in a private exchange of the Databricks Marketplace: a shop window only they see.
+
+58
+00:05:43,209 --> 00:05:47,573
+This morning, Anil asked in a minute, and Clara answered by the afternoon.
+
+59
+00:05:48,873 --> 00:05:54,727
+The faculty offers a place to each learner a unit from the certificate, so no one waits a semester.
+
+60
+00:05:56,227 --> 00:06:01,707
+The old copy is gone, and on the 31st of January, his access ends by itself.
+
+61
+00:06:03,207 --> 00:06:06,720
+And Clara knows who reads her table, why, and until when.
+
+62
+00:06:08,220 --> 00:06:11,030
+Finding and getting data is part of governance.

@@ -1,0 +1,34 @@
+{
+  "kicker": "Finding and asking for data",
+  "kicker_es": "Encontrar y pedir datos",
+  "title_es": "El mercado de datos",
+  "h1": "The marketplace: finding data, and asking for it",
+  "h1_es": "El mercado de datos: encontrar datos y pedirlos",
+  "lead": "At the university, people asked around for data and passed copies by email, with nobody's yes and no end date. Now every product sits in one catalogue: you read its promise, ask its owner with a reason and an end date, get access that ends by itself, and partners read shared tables without copies.",
+  "lead_es": "En la universidad, la gente preguntaba por ahí por los datos y se pasaba copias por correo, sin el sí de nadie ni fecha de fin. Ahora cada producto está en un catálogo: lees su promesa, se lo pides a su dueño con un motivo y una fecha de fin, recibes un acceso que termina solo, y los socios leen tablas compartidas sin copias.",
+  "description": "A film about finding data and asking for it, the last of Governance you can use: why a copy passed by email, with nobody's yes and no end date, is a problem; the catalogue's marketplace, where every live product is found by its domain, its owner or an idea on the map; its promise and its contract, read before asking; a request with a reason and a number of days, and the platform's own request button, in preview, which sends people to the same place; the owner's yes, and the request kept as the record; access through a readers' group in the directory, until a date, with a reminder a week before; a reader the impact check names; and sharing outside the university through OpenSharing, read where it lives, with a key that ends and the same contract.",
+  "description_es": "Una película sobre encontrar datos y pedirlos, la última de Gobernanza que puedes usar: por qué es un problema una copia que pasa por correo, sin el sí de nadie y sin fecha de fin; el mercado del catálogo, donde cada producto activo se encuentra por su dominio, su dueño o una idea del mapa; su promesa y su contrato, que se leen antes de pedir; una solicitud con un motivo y un número de días, y el botón de solicitud de la plataforma, en versión preliminar, que lleva al mismo lugar; el sí del dueño, y la solicitud guardada como registro; el acceso por un grupo de lectores en el directorio de cuentas, hasta una fecha, con un aviso una semana antes; un lector que el control de impacto nombra; y compartir fuera de la universidad con OpenSharing, donde la tabla se lee en su lugar, con una llave que vence y el mismo contrato.",
+  "card": "A catalogue of products, requests with a purpose and an end date, the owner's yes, and sharing outside without copies.",
+  "card_es": "Un catálogo de productos, solicitudes con un propósito y una fecha de fin, el sí del dueño, y compartir fuera sin copias.",
+  "chapters_es": {
+    "asking": "Preguntar por ahí",
+    "window": "Un escaparate",
+    "read": "Leer antes de pedir",
+    "ask": "Pedir, con un propósito",
+    "owner": "Decide la dueña",
+    "key": "Una llave con fecha",
+    "reader": "Un lector conocido",
+    "outside": "Fuera de la universidad",
+    "close": "Parte de la gobernanza de datos"
+  },
+  "past": [
+    "Today, in the Faculty of Health: Anil's request for Planning's product",
+    "Finding and getting data is part of governance."
+  ],
+  "past_es": [
+    "Hoy, en la Facultad de Salud: la solicitud de Anil del producto de Planificación",
+    "Encontrar y obtener datos es parte de la gobernanza de datos."
+  ],
+  "next_h": "You've seen data governance from its principles to the tools, across all three series. Where you work, find a product, read its promise, and ask its owner, saying why and until when.",
+  "next_h_es": "Viste la gobernanza de datos desde sus principios hasta las herramientas, en las tres series. Donde trabajas, encuentra un producto, lee su promesa y pídeselo a su dueño, diciendo por qué y hasta cuándo."
+}

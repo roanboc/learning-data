@@ -1,1 +1,1 @@
-*Governance you can use*, the third of three series on data governance, which builds what the first two set out where the work happens, with dbt and Databricks: six films coming out one by one, {files} (English, with English and Spanish captions).
+*Governance you can use*, the third of three series on data governance, which builds what the first two set out where the work happens, with dbt and Databricks: six films, {files} (English, with English and Spanish captions).

@@ -1,0 +1,75 @@
+// The marketplace, film 6 of 6 of Governance you can use, the third series on data governance. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"asking":{"name":"Asking around","lead":1.2,"tail":1.0,"vo":[
+ {"id":"today","gap":0.8,"text":"Today, in the Faculty of Health, Anil Kurian plans the faculty's places."},
+ {"id":"cert","gap":0.8,"text":"Its health informatics certificate ends with a hospital placement, arranged months ahead."},
+ {"id":"count","gap":0.8,"text":"So Anil works out how many to offer: one for each learner a unit from finishing."},
+ {"id":"sept","gap":0.8,"text":"In September, nobody owned the table with that number, and he didn't know whom to ask."},
+ {"id":"around","gap":0.8,"text":"So he asked around, and a colleague sent him a copy."},
+ {"id":"one","gap":0.8,"text":"It counted one learner near the certificate."},
+ {"id":"two","gap":0.8,"text":"Planning's census report, the university's official count, said two, and nobody could say which was right."},
+ {"id":"offered","gap":0.8,"text":"So the faculty offered one place, and a learner a unit from finishing would have waited a semester."},
+ {"id":"inbox","gap":0.8,"text":"And the copy stayed in his inbox: a code for every learner, which can lead back to their name, sent with nobody's yes, and no end date."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"now","gap":0.8,"text":"Now the university's data products sit in one catalogue, like a shop window, each with its promise and its owner."},
+ {"id":"find","gap":0.8,"text":"You find what you need, read what it promises, and ask its owner, saying why, and until when."},
+ {"id":"morning","gap":0.8,"text":"This morning, Anil found Planning's product in a minute, and asked."},
+ {"id":"yes","gap":0.8,"text":"Clara, its owner, said yes by the afternoon, until the end of January."},
+ {"id":"agrees","gap":0.8,"text":"Her table agrees with the census report: two."},
+ {"id":"second","gap":0.8,"text":"So the faculty offers a second place, and no one waits a semester."},
+ {"id":"deleted","gap":0.8,"text":"Anil deleted the old copy."}]},
+"window":{"name":"A shop window","lead":0.8,"tail":0.8,"vo":[
+ {"id":"ontos","gap":0.8,"text":"The catalogue is Ontos, the Databricks Labs project the platform team runs."},
+ {"id":"shows","gap":0.8,"text":"Its marketplace shows every product that's live, each with its domain and its owner."},
+ {"id":"sold","gap":0.8,"text":"The university calls it the marketplace, though nothing is sold."},
+ {"id":"types","gap":0.8,"text":"Anil types near award, an idea on Noor's map."},
+ {"id":"finds","gap":0.8,"text":"The catalogue finds the product linked to it: Learners near an award, owned by Clara, in Planning."}]},
+"read":{"name":"Read before you ask","lead":0.8,"tail":0.8,"vo":[
+ {"id":"before","gap":0.8,"text":"Before he asks, Anil reads its promise, from the files kept in the project."},
+ {"id":"for","gap":0.8,"text":"What it's for: planning support for learners near an award."},
+ {"id":"counts","gap":0.8,"text":"How it counts them, as at census day, matching the census report."},
+ {"id":"ready","gap":0.8,"text":"When it's ready, and where to ask."},
+ {"id":"contract","gap":0.8,"text":"And its contract, column by column."},
+ {"id":"two","gap":0.8,"text":"Two columns hold codes that can lead back to a learner."},
+ {"id":"purpose","gap":0.8,"text":"So reading it takes a purpose, and an end date."}]},
+"ask":{"name":"Ask, with a purpose","lead":0.8,"tail":0.8,"vo":[
+ {"id":"asks","gap":0.8,"text":"So he asks, on the product's page."},
+ {"id":"form","gap":0.8,"text":"The form wants two things: why, and for how long."},
+ {"id":"writes","gap":0.8,"text":"He writes: to plan next semester's places in the certificate's last unit."},
+ {"id":"ninety","gap":0.8,"text":"And he asks for ninety days."},
+ {"id":"platform","gap":0.8,"text":"Had he started on the platform, its request button, in preview, would have brought him here too."},
+ {"id":"one","gap":0.8,"text":"Every request comes to one place."}]},
+"owner":{"name":"The owner decides","lead":0.8,"tail":0.8,"vo":[
+ {"id":"clara","gap":0.8,"text":"The request goes to Clara, the product's owner, not to whoever built the table."},
+ {"id":"five","gap":0.8,"text":"Governance promises an answer within five working days."},
+ {"id":"afternoon","gap":0.8,"text":"She answers by the afternoon."},
+ {"id":"reason","gap":0.8,"text":"His reason is what the product is for, so she says yes, for ninety days, until the 31st of January.","say":"His reason is what the product is for, so she says yes, for ninety days, until the thirty-first of January."},
+ {"id":"fewer","gap":0.8,"text":"She could have given fewer days, or said no, with her reason."},
+ {"id":"record","gap":0.8,"text":"Either way, the request is the record: who asked, why, who said yes, and until when."}]},
+"key":{"name":"A key with a date","lead":0.8,"tail":0.8,"vo":[
+ {"id":"group","gap":0.8,"text":"Access goes to a group, never to one person."},
+ {"id":"readers","gap":0.8,"text":"Clara's yes puts Anil in the product's readers' group, in the university's directory of accounts, until his date."},
+ {"id":"once","gap":0.8,"text":"On the platform, that group was given the table once, when the product went live."},
+ {"id":"week","gap":0.8,"text":"A week before the date, the catalogue reminds him."},
+ {"id":"date","gap":0.8,"text":"On the date, the directory takes him out of the group, and his access ends."},
+ {"id":"every","gap":0.8,"text":"Clara can see every reader, why, and until when."}]},
+"reader":{"name":"A known reader","lead":0.8,"tail":0.8,"vo":[
+ {"id":"adds","gap":0.8,"text":"Anil also adds the faculty's placements plan to the record of who uses what, in the project."},
+ {"id":"next","gap":0.8,"text":"So when someone next changes Clara's table, the impact check names the Faculty of Health beside Planning's census dashboard."},
+ {"id":"both","gap":0.8,"text":"Both are asked before the change ships."},
+ {"id":"known","gap":0.8,"text":"A reader who's known is a reader who's told."}]},
+"outside":{"name":"Outside the university","lead":0.8,"tail":0.8,"vo":[
+ {"id":"same","gap":0.8,"text":"Outside the university, the same rules hold."},
+ {"id":"partner","gap":0.6,"text":"A partner university counts the faculty's certificate towards its degrees, so it asks for Mei's Awards:"},
+ {"id":"holds","gap":0.8,"text":"each award, its credit points and its faculty, and no one's personal data."},
+ {"id":"share","gap":0.8,"text":"Mei says yes, and Sam shares it through OpenSharing, an open way to share tables with another organisation, on any platform."},
+ {"id":"reads","gap":0.8,"text":"The partner reads the table itself, not a copy, with a key that ends on a date, and the same contract."},
+ {"id":"exchange","gap":0.8,"text":"Partners on Databricks can also find it in a private exchange of the Databricks Marketplace: a shop window only they see."}]},
+"close":{"name":"Part of governance","lead":0.8,"tail":0.8,"vo":[
+ {"id":"morning","gap":0.8,"text":"This morning, Anil asked in a minute, and Clara answered by the afternoon."},
+ {"id":"offers","gap":0.8,"text":"The faculty offers a place to each learner a unit from the certificate, so no one waits a semester."},
+ {"id":"gone","gap":0.8,"text":"The old copy is gone, and on the 31st of January, his access ends by itself.","say":"The old copy is gone, and on the thirty-first of January, his access ends by itself."},
+ {"id":"seen","gap":0.8,"text":"And Clara knows who reads her table, why, and until when."},
+ {"id":"last","gap":0.8,"text":"Finding and getting data is part of governance."}]}
+};

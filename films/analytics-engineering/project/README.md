@@ -175,7 +175,7 @@ project/
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan
 ├── governance/               what isn't dbt's, and could live in another tool or repository:
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go

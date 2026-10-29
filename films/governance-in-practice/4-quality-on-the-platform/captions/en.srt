@@ -1,0 +1,243 @@
+1
+00:00:01,200 --> 00:00:05,319
+In Planning's room, Clara Jensen checks the numbers before they leave.
+
+2
+00:00:06,019 --> 00:00:09,944
+The census numbers go to the government, and the lists to the faculties.
+
+3
+00:00:11,244 --> 00:00:15,851
+When Yusuf asked what slowed her down, Clara said: which number do I trust?
+
+4
+00:00:17,751 --> 00:00:22,865
+Checks ran every night, but a failed one said only its name, not whose data it was.
+
+5
+00:00:24,565 --> 00:00:30,460
+A warning that emails were typed with spaces and capitals had run for a year, and nobody owned it.
+
+6
+00:00:32,160 --> 00:00:37,514
+And data quality was a survey: people rated their data, 3.9 out of 5.
+
+7
+00:00:39,014 --> 00:00:44,603
+So a broken night could change a number on its way to the government, and nobody knew whose it was to fix.
+
+8
+00:00:46,303 --> 00:00:47,691
+Something had to change.
+
+9
+00:00:49,191 --> 00:00:54,520
+Now every check names its owner, the kind of quality it checks, and the level its owner chose.
+
+10
+00:00:56,220 --> 00:00:58,658
+Monitoring watches for what no rule names.
+
+11
+00:00:59,958 --> 00:01:05,120
+And each morning, every result goes into one scorecard, with an issue for each owner.
+
+12
+00:01:06,620 --> 00:01:10,959
+On the 19th of October, five more enrolments arrived with no email.
+
+13
+00:01:12,059 --> 00:01:15,222
+That made six, more than the five the learning team allows.
+
+14
+00:01:16,722 --> 00:01:22,353
+Everything built from them stopped, so nothing wrong went out: Planning kept the day before's numbers.
+
+15
+00:01:24,053 --> 00:01:30,404
+By noon, the learning team had added the six emails, and that night, all 160 checks passed.
+
+16
+00:01:32,104 --> 00:01:36,678
+Now Clara knows each morning which numbers to trust, and who answers for each.
+
+17
+00:01:44,378 --> 00:01:52,291
+In the project, each check is a dbt test, and each test names its owner and the kind of quality it checks, its dimension.
+
+18
+00:01:53,591 --> 00:01:58,850
+The owner comes from the folder: every test on the short-course data is the learning team's.
+
+19
+00:02:00,550 --> 00:02:05,698
+The dimension comes from the kind of test: a test for empty values checks completeness.
+
+20
+00:02:07,398 --> 00:02:14,113
+The level is in the test, as its owner chose: warn on one enrolment with no email, stop above five.
+
+21
+00:02:16,013 --> 00:02:18,537
+The decision log says who chose it, and why.
+
+22
+00:02:20,437 --> 00:02:23,820
+And a test without an owner or a dimension doesn't get in.
+
+23
+00:02:28,720 --> 00:02:32,440
+After each night's build, two scripts read dbt's results.
+
+24
+00:02:33,940 --> 00:02:38,954
+One writes the scorecard: for each area and each dimension, how many tests passed.
+
+25
+00:02:40,254 --> 00:02:43,555
+On the 19th, learning's completeness was six of seven.
+
+26
+00:02:45,255 --> 00:02:50,804
+The tests on what was built from the stopped data didn't run: they count as not run, not as failed.
+
+27
+00:02:52,704 --> 00:02:58,423
+The other script writes each owner an issue to answer: what didn't pass, and why the level is there.
+
+28
+00:03:00,123 --> 00:03:02,744
+A cause to fill in, and a date to answer by.
+
+29
+00:03:05,644 --> 00:03:10,095
+A dbt test, on what the data team builds, is one place to check.
+
+30
+00:03:11,195 --> 00:03:18,149
+There are three more along the data's way: where it's typed, where it's loaded, and on the platform's tables, as monitoring.
+
+31
+00:03:20,249 --> 00:03:23,986
+Each catches what the others can't, and each tells the data's owner.
+
+32
+00:03:25,886 --> 00:03:27,869
+Prevent what you can, where it starts.
+
+33
+00:03:29,169 --> 00:03:30,152
+Check what you know.
+
+34
+00:03:31,452 --> 00:03:32,820
+Watch for what you don't.
+
+35
+00:03:36,920 --> 00:03:43,165
+Emails used to arrive as typed, with spaces and capitals, and every night the data team cleaned them.
+
+36
+00:03:44,865 --> 00:03:49,292
+From the 2nd of November, the sign-up form checks each email as it's typed.
+
+37
+00:03:50,992 --> 00:03:58,808
+A test on the source, as the data team reads it in, checks every email recorded since, and stops the build if one isn't clean.
+
+38
+00:04:00,708 --> 00:04:03,723
+It should never fail: if it does, the form has broken.
+
+39
+00:04:05,623 --> 00:04:10,701
+Once the old emails are corrected, the clean-up goes, and the test checks every row.
+
+40
+00:04:13,601 --> 00:04:17,400
+Each night, the platform team's pipeline loads each system's files.
+
+41
+00:04:19,100 --> 00:04:23,839
+Its expectations, rules on each table, check that a row can be loaded at all.
+
+42
+00:04:25,339 --> 00:04:30,614
+An enrolment with no ID can't be told apart from another, so it's kept out, and counted.
+
+43
+00:04:32,514 --> 00:04:39,320
+The count reaches its owner like any other result, and the row is fixed where it's kept, in the short-course platform.
+
+44
+00:04:42,220 --> 00:04:45,340
+One night, half the new badges arrived with no credit.
+
+45
+00:04:47,040 --> 00:04:51,225
+Every test passed: no rule said a microcredential carries credit.
+
+46
+00:04:52,725 --> 00:04:53,883
+Monitoring caught it.
+
+47
+00:04:55,183 --> 00:05:02,734
+The platform learns when each table usually arrives, and how many rows it brings, with no rule to write; that's in preview.
+
+48
+00:05:04,634 --> 00:05:10,673
+And a profile of the badges counts, each night, how many carry no credit: usually one in twelve.
+
+49
+00:05:11,973 --> 00:05:13,340
+That night, one in two.
+
+50
+00:05:15,040 --> 00:05:18,006
+An alert went to the owner on record, the learning team.
+
+51
+00:05:21,706 --> 00:05:24,773
+Once they'd confirmed it, the surprise became a test.
+
+52
+00:05:27,673 --> 00:05:32,393
+The pipeline's counts and the monitors' results land on the platform, by table.
+
+53
+00:05:34,093 --> 00:05:40,000
+Each table's owner is in the project, so the scorecard reads them too, in a table under the tests'.
+
+54
+00:05:41,700 --> 00:05:44,938
+Every result reaches one owner, not a shared inbox.
+
+55
+00:05:46,638 --> 00:05:54,564
+And quality is measured, not surveyed: last night, 160 of 160 tests passed, one with a warning.
+
+56
+00:05:56,064 --> 00:06:00,833
+So did the platform's 22 checks, and every test had an owner and a dimension.
+
+57
+00:06:03,933 --> 00:06:07,789
+This morning, Clara opens the scorecard before the numbers leave.
+
+58
+00:06:09,089 --> 00:06:14,023
+One amber cell: an enrolment with no email, that the learning team is following up.
+
+59
+00:06:15,723 --> 00:06:18,521
+Everything else passed, and every cell has an owner.
+
+60
+00:06:20,021 --> 00:06:23,549
+Clara knows which numbers to trust, and who answers for each.
+
+61
+00:06:25,249 --> 00:06:27,779
+Rules you write, and monitoring for the rest.

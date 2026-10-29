@@ -12,9 +12,15 @@ At the university, a failure goes to its owner that morning, and warnings in one
 Monday. Here it's a dry run: the owners are fictional, so the issues are written to target/issues/,
 one Markdown file per owner, and CI adds them to the run's summary.
 
+On Databricks, the platform's checks that didn't pass go to their tables' owners too, with
+--platform: rows kept out at loading, and tables the monitors found unusual (the scorecard's
+platform_results, from analyses/quality/platform_results.sql). They're warnings: nothing stopped.
+
     dbt build --profiles-dir . --no-partial-parse
     python scripts/generate/issues.py
+    python scripts/generate/issues.py --platform platform_results.csv
 """
+import argparse
 import json
 import re
 import shutil
@@ -30,8 +36,8 @@ RESULTS = ROOT / "target" / "run_results.json"
 REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
 TARGET = ROOT / "target" / "issues"
 
-# The scorecard's way of finding a test's domain.
-from scorecard import domain_of  # noqa: E402
+# The scorecard's way of finding a test's domain, and of reading the platform's results.
+from scorecard import domain_of, platform_results  # noqa: E402
 
 
 def next_working_day(day):
@@ -52,6 +58,9 @@ def why(test, nodes):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--platform", type=Path, help="the platform's results too: a CSV of analyses/quality/platform_results.sql")
+    args = parser.parse_args()
     for path in (MANIFEST, RESULTS):
         if not path.exists():
             raise SystemExit(f"{path.relative_to(ROOT)} is missing: run dbt build --profiles-dir . first")
@@ -73,22 +82,29 @@ def main():
             "status": result["status"], "name": test["name"], "domain": domain_of(test, nodes),
             "dimension": meta.get("dimension", "unknown"), "rows": result.get("failures"),
             "why": " ".join(why(test, nodes).split()), "due": due})
+    for check in platform_results(args.platform, manifest) if args.platform else []:
+        if check["status"] == "warn":
+            by_owner[check["owner"]].append({**check, "due": ran_on + timedelta(days=7), "platform": True})
 
     if TARGET.exists():
         shutil.rmtree(TARGET)
     TARGET.mkdir(parents=True)
     for owner, tests in sorted(by_owner.items()):
         due = min(t["due"] for t in tests)
-        lines = [f"# Data quality: {len(tests)} test{'s' if len(tests) > 1 else ''} to answer, by {due:%-d %B %Y}", "",
+        n, m = sum(not t.get("platform") for t in tests), sum(bool(t.get("platform")) for t in tests)
+        what = " and ".join(f"{k} {w}{'s' if k > 1 else ''}" for k, w in ((n, "test"), (m, "check")) if k)
+        lines = [f"# Data quality: {what} to answer, by {due:%-d %B %Y}", "",
                  f"**Owner:** {owner} · **To:** {emails.get(owner, 'not in the owners register')} · "
                  f"**From the run of** {ran_on:%-d %B %Y}", ""]
         for t in sorted(tests, key=lambda t: (t["due"], t["name"])):
-            lines += [f"## `{t['name']}`", "",
-                      f"- **Status:** {t['status']}, {t['rows']} row{'s' if t['rows'] != 1 else ''}",
+            rows = "" if t["rows"] is None else f", {t['rows']} row{'s' if t['rows'] != 1 else ''}"
+            lines += [f"## {t['name']}" if t.get("platform") else f"## `{t['name']}`", "",
+                      f"- **Status:** {t['status']}{rows}" + (f" · **Checked by** the platform's {t['kind']}" if t.get("platform") else ""),
                       f"- **Domain:** `{t['domain']}` · **Dimension:** {t['dimension']}",
                       f"- **Why the limit is there:** {t['why'] or 'the test has no description: say why, in its YAML'}",
                       "- **Cause:** *(the owner writes it in)*",
                       f"- **Due:** {t['due']:%-d %B %Y}",
+                      "- **Closed when:** the platform's check passes, on the next night's results" if t.get("platform") else
                       f"- **Closed when:** `{t['name']}` passes "
                       f"(`dbt build --select {t['name']} --profiles-dir .`)", ""]
         slug = re.sub(r"[^a-z0-9]+", "-", owner.lower()).strip("-")

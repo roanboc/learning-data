@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Quality on the platform, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (owner, where, watch), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "owner":{q:"Jun agrega una prueba de que cada insignia tiene nombre, y el control de gobernanza detiene su solicitud de cambio. ¿Qué falta, y quién elige el nivel de la prueba?",
+    opts:[{t:"Su dimensión: Jun elige una, y el equipo de datos fija el nivel."},{t:"Su dueño: una línea en dbt_project.yml se lo da a las pruebas de la fuente de la plataforma de aprendizaje. La dimensión viene del tipo de prueba, y el nivel lo elige el equipo de aprendizaje.",ok:true},{t:"Nada: el control detiene toda prueba nueva hasta que gobernanza de datos la apruebe."}],
+    why:"Las pruebas de la fuente de la plataforma de aprendizaje todavía no tienen dueño por carpeta, así que el control detiene una nueva hasta que una línea le da uno. La dimensión viene del tipo de prueba: una prueba de valores vacíos verifica la completitud. El nivel lo elige su dueño, con la razón en su registro de decisiones, porque sabe lo que cuesta un nombre vacío. Donde trabajas, ¿quién decide qué tan estricto es un control?"},
+  "where":{q:"¿Dónde revisarías que un correo de cursos cortos tenga una @, y por qué ahí?",
+    opts:[{t:"Donde se escribe: el formulario puede volver a preguntar mientras la persona sigue ahí. Luego, una prueba en la fuente revisa que no llegue ningún correo sin ella, y nunca debería fallar.",ok:true},{t:"En el monitoreo: la plataforma aprende cuántos correos suelen tener una @."},{t:"En los modelos del equipo de datos: pueden limpiar cada correo cada noche."}],
+    why:"Prevén lo que puedas, donde empieza: un error que se atrapa mientras se escribe lo corrige la única persona que sabe la respuesta, mientras sigue ahí. La prueba en la fuente revisa que el formulario siga haciendo su trabajo, así que nunca debería fallar; si falla, el formulario se rompió. Limpiarlo cada noche, más adelante, le esconde el problema a su dueño. Donde trabajas, ¿qué controles podrían pasar a donde se escriben los datos?"},
+  "watch":{q:"El monitoreo dice que las insignias de anoche llegaron cuatro horas tarde. Ninguna regla dice cuándo deberían llegar. ¿Qué pasa ahora?",
+    opts:[{t:"El equipo de datos agrega de inmediato una prueba de cuándo llegan."},{t:"El equipo de aprendizaje, el dueño registrado, se entera primero y busca la causa con el equipo de plataforma. Si el retraso importa, la sorpresa se vuelve una regla suya, con el nivel que elija.",ok:true},{t:"Nada: sin una regla, no es una falla."}],
+    why:"El monitoreo vigila lo que ninguna regla nombra, y avisa al dueño de la tabla, como la noche en que la mitad de las insignias nuevas llegó sin créditos. El dueño decide si importa: si importa, se vuelve una regla, una prueba con su nivel y la razón en su registro de decisiones; si no, el monitoreo sigue vigilando. Donde trabajas, ¿quién se entera primero cuando una tabla llega tarde?"}
+  }}};

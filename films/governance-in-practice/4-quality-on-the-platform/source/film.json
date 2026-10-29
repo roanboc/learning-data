@@ -1,0 +1,22 @@
+{
+  "key": "quality-on-the-platform",
+  "title": "Quality on the platform",
+  "sub": "Film 4 of 6 of Governance you can use: quality on the platform. Every check names its owner, its dimension and its level; a scorecard and an issue for each owner are written from every run; checks run where data is typed, loaded and built, and monitoring watches for what no rule names.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. Status keeps its colours: green for passed, amber for a warning, red for a failure, grey for not run. An owner's name card is gold, a dimension's chip cyan. Files are paper sheets, copied from the example project; the platform's pages are drawn as forms. Four pins along the data's way are the four places to check.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "close",
+    "opens",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ]
+  ]
+}

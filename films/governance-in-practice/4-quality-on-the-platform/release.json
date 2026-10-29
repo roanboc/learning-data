@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Quality on the platform",
+    "key": "quality-on-the-platform-en",
+    "dir": "films/governance-in-practice/4-quality-on-the-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/quality-on-the-platform/film.js",
+    "video": "dist/quality-on-the-platform.mp4",
+    "file": "quality-on-the-platform.mp4",
+    "captions": [
+      [
+        "films/governance-in-practice/4-quality-on-the-platform/captions/en.srt",
+        "quality-on-the-platform.en.srt"
+      ],
+      [
+        "films/governance-in-practice/4-quality-on-the-platform/captions/es.srt",
+        "quality-on-the-platform.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-in-practice/4-quality-on-the-platform/source",
+      ":(exclude)films/governance-in-practice/4-quality-on-the-platform/source/src/i18n/es/captions.js",
+      "films/governance-in-practice/shared",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 892,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

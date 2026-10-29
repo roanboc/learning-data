@@ -1,0 +1,28 @@
+{
+  "kicker": "Quality checks and monitoring",
+  "kicker_es": "Controles y monitoreo de calidad",
+  "title_es": "La calidad en la plataforma",
+  "h1": "Quality on the platform: checks that tell the owner",
+  "h1_es": "La calidad en la plataforma: controles que avisan al dueño",
+  "lead": "At the university, a failed check named no owner, a warning ran for a year unread, and data quality was a survey, 3.9 out of 5. Now each check names its owner and its level, checks run where data is typed and loaded, monitoring watches the rest, and every result lands in one scorecard.",
+  "lead_es": "En la universidad, un control fallido no nombraba dueño, una advertencia corrió un año sin leerse, y la calidad de datos era una encuesta, 3.9 de 5. Ahora cada control nombra a su dueño y su nivel, hay controles donde los datos se escriben y se cargan, el monitoreo vigila el resto, y todo llega a un solo tablero.",
+  "description": "A film about data quality on the platform, the fourth of Governance you can use: the night six enrolments with no email stopped what was built from them; each dbt test's owner, from its folder, its dimension, from its kind, and its level, as its owner chose it, and the governance check that stops a test without them; the scorecard and an issue for each owner, written from every run; four places to check along the data's way; a test on the source that should never fail; the loading pipeline's expectations, which keep out a row with no ID, and count it; monitoring, which learns each table's usual shape (in preview); and one scorecard for every result, measured, not surveyed.",
+  "description_es": "Una película sobre la calidad de datos en la plataforma, la cuarta de Gobernanza que puedes usar: la noche en que seis inscripciones sin correo detuvieron lo construido con ellas; el dueño de cada prueba de dbt, por su carpeta, su dimensión, por su tipo, y su nivel, como lo eligió su dueño, y el control de gobernanza que detiene una prueba sin ellos; el tablero de calidad y una incidencia para cada dueño, escritos a partir de cada ejecución; cuatro lugares de control en el camino de los datos; una prueba en la fuente que nunca debería fallar; las expectativas del pipeline de carga, que dejan fuera una fila sin ID, y la cuentan; el monitoreo, que aprende la forma habitual de cada tabla (en versión preliminar); y un solo tablero para cada resultado, medido, no encuestado.",
+  "card": "Tests with an owner and a level, checks where data is typed and loaded, monitoring for the rest, and one scorecard.",
+  "card_es": "Pruebas con dueño y nivel, controles donde los datos se escriben y se cargan, monitoreo para el resto y un solo tablero.",
+  "chapters_es": {
+    "trust": "Qué número creer",
+    "owner": "Un dueño, una dimensión, un nivel",
+    "run": "Escrito a partir de la ejecución",
+    "where": "Qué control va dónde",
+    "typed": "Donde se escribe",
+    "loaded": "Donde se carga",
+    "watch": "Lo que ninguna regla nombra",
+    "card": "Un solo tablero",
+    "close": "Reglas, y monitoreo para el resto"
+  },
+  "past": ["The 19th of October, in Planning's room: which number to trust", "Rules you write, and monitoring for the rest."],
+  "past_es": ["El 19 de octubre, en la sala de Planificación: en qué número confiar", "Reglas que escribes, y monitoreo para el resto."],
+  "next_h": "You've seen quality where it runs: checks with an owner, four places to check, monitoring for the rest, and one scorecard. More films in the series are on the way.",
+  "next_h_es": "Viste la calidad donde se ejecuta: controles con dueño, cuatro lugares de control, monitoreo para el resto y un solo tablero. Vienen más películas de la serie."
+}

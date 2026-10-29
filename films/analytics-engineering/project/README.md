@@ -42,7 +42,7 @@ Then, if you like:
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
 | `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
-| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
@@ -74,6 +74,14 @@ ingestion lands them in three schemas named after the systems: `student_system`,
 2. Run `scripts/setup/load_databricks.sql` in the SQL editor, with two parameters: `catalog`, the
    catalog the three schemas go in, and `data`, the folder you uploaded
    (`/Volumes/<catalog>/<schema>/<volume>/data`). It creates the schemas and the seven tables.
+
+Or load them as the platform team does each night: `scripts/setup/loading_pipeline.sql` is a
+Lakeflow pipeline that checks each row has its system key as it's loaded, and keeps out and counts
+those that don't; its header says how to set it up. Then `scripts/setup/monitoring.py` sets up the
+monitors that watch the tables for what no rule names, and tell each table's owner: anomaly
+detection on the three schemas (in Public Preview), a profile of the badges, and an alert on it.
+Their results and the pipeline's counts join the scorecard (`analyses/quality/platform_results.sql`;
+`examples/platform-results/` shows a night's).
 
 The sources are read from the catalog in `DBT_SOURCES_CATALOG`, or the target's catalog if it's
 not set. If ingestion prefixes the schema names (say, `raw_student_system`), set
@@ -193,7 +201,9 @@ project/
 │   ├── design/               evidence for a modelling choice: fan-out without point in time
 │   ├── validation/           checking the result: reconcile with the census and tuition reports,
 │   │                         as-was and as-is
-│   └── governance/           on Databricks: who read a table, and the access review
+│   ├── governance/           on Databricks: who read a table, and the access review
+│   └── quality/              on Databricks: the platform's checks for the scorecard, and the
+│                             badges' alert
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
@@ -209,10 +219,13 @@ project/
 │   │                         data governance's rules, and their measures; impact.py: what a pull
 │   │                         request touches, and who to tell; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
-│   └── setup/                load_databricks.sql: loads the sample sources into Databricks
+│   └── setup/                load_databricks.sql: loads the sample sources into Databricks; or
+│                             loading_pipeline.sql, each night, with a check on each row; and
+│                             monitoring.py: the monitors on the platform
 ├── examples/                 planning/: Planning's own project, refing the core across projects
 │                             (dbt Cloud only); completions/, counts-as-award/ and award-redefined/:
-│                             pull requests as patches, with what the checks and the sync said
+│                             pull requests as patches, with what the checks and the sync said;
+│                             platform-results/: a night's checks on the platform, in the scorecard
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

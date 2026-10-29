@@ -2769,6 +2769,17 @@ function gu_pinAt(i,x,y,w,h){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h);return
 /* ---------- helpers ---------- */
 // made once per chapter, the first time it draws: its cues are known by then
 const gq_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// shots in a row in the same place share one camera, so a dissolve between them never lays the place over itself at another size or
+// framing: if each holds still, one slow push over the whole run; if one moves, all follow the same keys. hold: no push on the last
+// run, when the next chapter opens in the same place
+function gq_run(shots,end,hold){const out=shots.map(s=>Object.assign({},s));
+  for(let i=0;i<out.length;){let j=i;while(j+1<out.length&&out[j+1].place===out[i].place)j++;const R=out.slice(i,j+1),last=j===out.length-1;
+    if(j>i||(hold&&last)){const t1=last?end:out[j+1].at,keys=[].concat(...R.map(s=>s.keys)).sort((a,b)=>a[0]-b[0]),k0=keys[0],
+        still=keys.every(k=>k[1]===k0[1]&&k[2]===k0[2]&&k[3]===k0[3]),push=hold&&last?0:R[0].push==null?0.025:R[0].push;
+      const cam=still?{keys:[k0,[k0[0]+0.01,k0[1],k0[2],k0[3]*(1+push)]],d:Math.max(1.4,t1-k0[0]),push:0}:{keys,d:Math.max(...R.map(s=>s.d||1.6)),push:0};
+      R.forEach(s=>Object.assign(s,cam));}
+    i=j+1;}
+  return out;}
 // a pencil arrow along a curve from a to b, bowed by bend (px, up when negative; o.bx bows it sideways), drawn on as p goes 0 to 1
 function gq_arrow(ctx,a,b,bend,p,o){o=o||{};if(p<=0)return;const c=[(a[0]+b[0])/2+(o.bx||0),(a[1]+b[1])/2+bend],n=28,m=Math.max(2,Math.round(n*clamp(p,0,1))),pt=u=>{const v=1-u;
     return[v*v*a[0]+2*v*u*c[0]+u*u*b[0],v*v*a[1]+2*v*u*c[1]+u*u*b[1]];};
@@ -3456,7 +3467,7 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({clara:wAt(sc
     noon:c.noon-0.3,added:wAt(sc,"noon","added the six emails"),night:wAt(sc,"noon","that night"),all:wAt(sc,"noon","all a hundred and sixty"),
     tr:c.trust-0.3,num:wAt(sc,"trust","which numbers to trust"),who:wAt(sc,"trust","who answers for each"),
     board:c.breath-0.3,title:c.breath+1.2}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // Planning's office, close: Clara at her desk, checking the census numbers before they leave; where they go, a tag each
     {at:0,place:"planClose",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gq_planDesk(x,tt,{draw:gq_census({lit:gv_io(tt,P.chk,P.sl,0.5)})});
       gq_tags(x,GQ_GO,{u:[fin(tt,P.cen,0.9),fin(tt,P.lists,0.9)]});gu_nameCard(x,1610,420,"Clara Jensen","Planning",gv_io(tt,P.clara-0.1,P.sl-0.4,0.4));}},
@@ -3494,7 +3505,7 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({clara:wAt(sc
     {at:P.tr,place:"planClose",keys:[[P.tr,960,540,1]],push:0.02,draw:(x,tt)=>{gq_planDesk(x,tt,{clara:{expr:"smile"},draw:gq_census({tick:[0,1,2,3].map(i=>fin(tt,P.num+0.25*i,0.5))})});
       gq_tags(x,GQ_WHO,{u:[0,1,2].map(i=>fin(tt,P.who+0.3*i,0.9)),wash:GV.gold});}},
     // the data team's board, close: the series' six cards; the fourth lights and lifts, and becomes the title
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,0,0,fin(tt,P.board+0.3,0.8)],lift:[0,0,0,fin(tt,P.board+1.0,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,0,0,fin(tt,P.board+0.3,0.8)],lift:[0,0,0,fin(tt,P.board+1.0,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Until now",gv_io(t,P.sl+0.4,P.now-0.2,0.4));wc_year(ctx,56,72,"Monday 19 October 2026",gv_io(t,P.oct+0.3,P.night-0.6,0.4));
   wc_year(ctx,56,72,"That night",gv_io(t,P.night,P.tr-0.2,0.4));
   gv_title(ctx,S,t,P.title,"Quality on the platform","rules you write, and monitoring for the rest","Film 4 of 6 · data governance");});
@@ -3507,7 +3518,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({dbt:wAt(sc,"
     l:c.level-0.3,lt:wAt(sc,"level","in the test"),warn:wAt(sc,"level","warn on one"),stop:wAt(sc,"level","stop above five"),
     lg:c.log-0.3,who:wAt(sc,"log","who chose it"),why:wAt(sc,"log","and why"),
     pr:c.in-0.3,wo:wAt(sc,"in","without an owner"),get:wAt(sc,"in","get in"),fx:wAt(sc,"in","get in",0.5)}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // the test, on a sheet: the not_null on customer_bk, lit; its owner and its dimension, on pills threaded to it
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{const f=gq_nnSheet(x,{u:clamp((tt-0.1)/0.9,0,1),test:fin(tt,P.dbt,0.5)});
       gq_meta(x,f,{own:fin(tt,P.own,0.9),dim:fin(tt,P.dim,0.9)});}},
@@ -3530,7 +3541,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({dbt:wAt(sc,"
         items=GQ_PR.ck.map((n,i)=>({name:n,st:i===1?g:tt>P.pr+0.8+0.35*i?"pass":"run"}));
       gq_pr(x,tt,{items,msg:g==="pass"?GQ_PR.g.map((s,i)=>({s,col:GV.greenInk,p:clamp((tt-P.fx-1.8-0.3*i)/0.6,0,1)})):
           g==="fail"?GQ_PR.m.map((s,i)=>({s,col:i===3?GV.redInk:WC_INK,p:clamp((tt-P.wo-0.4-0.25*i)/0.6,0,1)})):[],
-        pop:[0,Math.max(gv_io(tt,P.wo+0.3,P.wo+1.3,0.3),gv_io(tt,P.fx+1.7,P.fx+2.7,0.3)),0,0,0],fix:clamp((tt-P.fx)/1.0,0,1)});}}]);});
+        pop:[0,Math.max(gv_io(tt,P.wo+0.3,P.wo+1.3,0.3),gv_io(tt,P.fx+1.7,P.fx+2.7,0.3)),0,0,0],fix:clamp((tt-P.fx)/1.0,0,1)});}}],sc.dur,1));});
 
 // ---- 3 · Written from the run: the red night's build, and the two scripts that read its results; the scorecard, learning's
 // completeness six of seven, and the tests that didn't run, in grey; the learning team's issue, with a cause to fill in and a date ----
@@ -3538,7 +3549,7 @@ scene("run",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({two:wAt(sc,"re
     sc:c.scorecard-0.3,lr:c.learning,six:wAt(sc,"learning","six of seven"),nr:c.notrun-0.3,nrw:wAt(sc,"notrun","not run"),
     is:c.issue-0.3,iw:wAt(sc,"issue","an issue to answer"),wd:wAt(sc,"issue","what didn't pass"),why:wAt(sc,"issue","why the level is there"),
     cause:wAt(sc,"due","A cause"),date:wAt(sc,"due","a date to answer by")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // after the night's build: dbt's results, and the two scripts that read them
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_term(x,{res:fin(tt,0.5,0.6),ar:fin(tt,P.res,0.9),c:[clamp((tt-P.two)/0.9,0,1),clamp((tt-P.two-0.7)/0.9,0,1)],
       out:[fin(tt,P.res+0.6,0.4),fin(tt,P.res+1.2,0.4)]})},
@@ -3549,15 +3560,15 @@ scene("run",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({two:wAt(sc,"re
       wc_hand(x,"grey: not run, not failed",150,850,{size:32,w:700,col:GV.greyInk,p:fin(tt,P.nrw,0.8)});}},
     // the issue the second writes, to the learning team: what didn't pass, why the level is there, a cause to fill in, a date
     {at:P.is,place:"bigLearn",keys:[[P.is,960,540,1]],push:0.02,draw:(x,tt)=>gq_issue(x,GQ_ISSUE,{u:GQ_ISSUE.map((_,i)=>fin(tt,P.is+0.2+0.08*i,0.5)),
-      lit:[gv_io(tt,P.iw,P.wd,0.4),0,0,gv_io(tt,P.wd,P.why,0.4),0,gv_io(tt,P.why,P.cause-0.4,0.4),gv_io(tt,P.cause,P.date,0.4),fin(tt,P.date,0.5)],litCol:[0,0,0,GV.red]})}]);});
+      lit:[gv_io(tt,P.iw,P.wd,0.4),0,0,gv_io(tt,P.wd,P.why,0.4),0,gv_io(tt,P.why,P.cause-0.4,0.4),gv_io(tt,P.cause,P.date,0.4),fin(tt,P.date,0.5)],litCol:[0,0,0,GV.red]})}],sc.dur));});
 
 // ---- 4 · Which check goes where: the data's way, on a sheet on Yusuf's board; a pin at each of the four places to check, what each
 // catches, a thread from each to the data's owner; prevent, check, watch; then the four together ----
 scene("where",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({dbt:wAt(sc,"one","A dbt test"),ty:wAt(sc,"more","where it's typed"),ld:wAt(sc,"more","where it's loaded"),
     tb:wAt(sc,"more","the platform's tables"),ea:wAt(sc,"each","Each catches"),ow:wAt(sc,"each","each tells the data's owner"),pv:c.prevent,ck:c.check,wt:c.watch,br:c.breath}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     {at:0,place:"boardGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_way(x,tt,{pin:[fin(tt,P.dbt,0.8),fin(tt,P.ty,0.8),fin(tt,P.ld,0.8),fin(tt,P.tb,0.8)],
-      cat:[0,1,2,3].map(i=>fin(tt,P.ea+0.3*i,0.7)),own:fin(tt,P.ow,1.0),w:[fin(tt,P.pv,0.8),fin(tt,P.ck,0.8),fin(tt,P.wt,0.8)],all:fin(tt,P.br,0.8),tag:fin(tt,P.pv,0.5)})}]);});
+      cat:[0,1,2,3].map(i=>fin(tt,P.ea+0.3*i,0.7)),own:fin(tt,P.ow,1.0),w:[fin(tt,P.pv,0.8),fin(tt,P.ck,0.8),fin(tt,P.wt,0.8)],all:fin(tt,P.br,0.8),tag:fin(tt,P.pv,0.5)})}],sc.dur));});
 
 // ---- 5 · Where it's typed: the email as typed, and the clean-up every night; from 2 November, the sign-up form checks it; a test on
 // the source for every email since, that should never fail; and once the old emails are corrected, the clean-up goes ----
@@ -3565,7 +3576,7 @@ scene("typed",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ev:wAt(sc,"c
     fm:c.form-0.3,ck:wAt(sc,"form","checks each email"),src:c.source-0.3,tst:wAt(sc,"source","A test on the source"),since:wAt(sc,"source","recorded since"),
     stp:wAt(sc,"source","stops the build"),nv:wAt(sc,"never","should never fail"),brk:wAt(sc,"never","the form has broken"),
     gs:c.goes-0.3,cu:wAt(sc,"goes","the clean-up goes"),row:wAt(sc,"goes","checks every row")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // the email as typed, on a card, and the clean-up the data team ran on it every night, on a sheet
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{gq_clSheet(x,90,80,1740,{lit:fin(tt,P.ev,0.5)});gq_emailCard(x,{u:fin(tt,P.cl,0.8),night:fin(tt,P.ev,0.9)});}},
     // from 2 November: the sign-up form, on Tom's screen, checks each email as it's typed
@@ -3575,14 +3586,14 @@ scene("typed",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ev:wAt(sc,"c
       gq_never(x,f,{stop:fin(tt,P.stp,0.6),never:fin(tt,P.nv,0.8),broke:fin(tt,P.brk,0.6)});}},
     // once the old emails are corrected at the source: the clean-up struck through, and the test's since, so it checks every row
     {at:P.gs,place:"desk",keys:[[P.gs,960,500,1]],push:0.02,draw:(x,tt)=>{gq_req(x,1260,60,fin(tt,P.gs+0.2,0.6));gq_clSheet(x,80,90,1150,{go:fin(tt,P.cu,0.9)});
-      gq_ecSheet(x,80,330,1600,{gone:fin(tt,P.row,0.9)});}}]);
+      gq_ecSheet(x,80,330,1600,{gone:fin(tt,P.row,0.9)});}}],sc.dur));
   wc_year(ctx,56,72,"From 2 November 2026",gv_io(t,P.fm+0.3,P.src-0.2,0.4));});
 
 // ---- 6 · Where it's loaded: the platform team's pipeline; its expectations, one on each table; two enrolments with no ID kept out at
 // the door, and counted; the count, in the learning team's issue; and the two fixed where they're kept ----
 scene("loaded",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({fl:wAt(sc,"loads","each system's files"),ex:c.expect-0.3,rl:wAt(sc,"expect","rules on each table"),
     ap:c.apart-0.3,kept:wAt(sc,"apart","kept out"),re:c.reaches-0.3,own:wAt(sc,"reaches","reaches its owner"),fx:wAt(sc,"reaches","fixed where it's kept")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // the platform team's loading pipeline: each system's files, into its tables
     {at:0,place:"bigPlat",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_pipe(x,tt,{u:clamp((tt-P.fl+0.3)/2.0,0,1)})},
     // the pipeline's file: an expectation on each table, lit as they're named
@@ -3593,7 +3604,7 @@ scene("loaded",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({fl:wAt(sc,"
     {at:P.re,place:"bigLearn",keys:[[P.re,960,540,1]],push:0.02,draw:(x,tt)=>gq_issue(x,GQ_ISSUE2,{u:GQ_ISSUE2.map((_,i)=>fin(tt,P.re+0.2+0.08*i,0.5)),
       lit:[gv_io(tt,P.own,P.fx,0.4),0,0,fin(tt,P.own+0.3,0.5)],litCol:[0,0,0,GV.amber]})},
     // and fixed where it's kept: Tom gives the two their IDs, in the short-course platform
-    {at:P.fx-0.3,place:"tom",keys:[[P.fx-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{},q=>gq_tomScreen(q,"two",{fix:clamp((tt-P.fx-0.2)/2.0,0,1)*2}))}]);});
+    {at:P.fx-0.3,place:"tom",keys:[[P.fx-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{},q=>gq_tomScreen(q,"two",{fix:clamp((tt-P.fx-0.2)/2.0,0,1)*2}))}],sc.dur));});
 
 // ---- 7 · What no rule names: one night, half the new badges with no credit; every test passed; monitoring caught it, by what it
 // learned and by a profile; the alert, across the campus to the learning team; and the surprise, become a test ----
@@ -3601,7 +3612,7 @@ scene("watch",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({nc:wAt(sc,"h
     cg:c.caught-0.3,ct:wAt(sc,"caught","caught it"),ln:wAt(sc,"learns","learns when"),pr:wAt(sc,"profile","a profile"),cn:wAt(sc,"profile","counts, each night"),
     us:wAt(sc,"profile","usually one in twelve"),tw:wAt(sc,"two","one in two"),al:c.alert-0.3,lt:wAt(sc,"alert","the learning team"),
     bc:c.became-0.3,cf:wAt(sc,"became","confirmed it"),bt:wAt(sc,"became","became a test")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // one night, on the data team's big screen: the badges that arrived, half with no credit
     {at:0,place:"bigNight",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_badges(x,{u:clamp((tt-0.3)/1.2,0,1),lit:fin(tt,P.nc,0.6)})},
     // credit_points' tests: not null, and 0 isn't empty, so it passes; no rule for a microcredential's credit
@@ -3616,7 +3627,7 @@ scene("watch",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({nc:wAt(sc,"h
     {at:P.bc-2.4,place:"tom",keys:[[P.bc-2.4,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{tom:{expr:"concerned"},clock:9.1},q=>gq_tomScreen(q,"alert",{u:fin(tt,P.bc-2.1,0.5)}))},
     // once confirmed, the rule it became: a test on credit_points, and the decision
     {at:P.bc,place:"desk",keys:[[P.bc,960,500,1]],push:0.02,draw:(x,tt)=>{gq_cpSheet(x,{add:clamp((tt-P.bt)/1.2,0,1)});gq_lmsDec(x,1300,100,fin(tt,P.cf,0.6));
-      gu_filmTag(x,1300,500,"Fixed where it starts",fin(tt,P.cf+0.4,0.5));}}]);
+      gu_filmTag(x,1300,500,"Fixed where it starts",fin(tt,P.cf+0.4,0.5));}}],sc.dur));
   wc_year(ctx,56,72,"The next morning",gv_io(t,P.bc-2.1,P.bc-0.2,0.4));});
 
 // ---- 8 · One scorecard: the platform's results, by table; the scorecard reading them under the tests', each table's owner from the
@@ -3626,7 +3637,7 @@ scene("card",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ld:wAt(sc,"la
     ib:c.inbox-0.3,one:wAt(sc,"inbox","reaches one owner"),sh:wAt(sc,"inbox","not a shared inbox"),
     ms:c.measured-0.3,ns:wAt(sc,"measured","not surveyed"),t160:wAt(sc,"measured","a hundred and sixty of"),
     t22:wAt(sc,"platform","twenty-two checks"),od:wAt(sc,"platform","every test had an owner")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // what the platform found last night, a row for each check on each table, in the SQL editor
     {at:0,place:"bigPlat",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_results(x,tt,{u:clamp((tt-P.ld+0.4)/1.6,0,1),tab:gv_io(tt,P.bt,sc.dur,0.5)})},
     // the scorecard, the platform's table under the tests'; each table's owner, from the project
@@ -3636,7 +3647,7 @@ scene("card",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ld:wAt(sc,"la
     // measured, not surveyed: last night's totals, the tests' and the platform's
     {at:P.ms,place:"deskGov",keys:[[P.ms,960,540,1]],push:0.02,draw:(x,tt)=>gq_measured(x,{x:fin(tt,P.ns,0.6),tag:fin(tt,P.ns,0.5),tests:fin(tt,P.t160,0.6),plat:fin(tt,P.t22,0.6)})},
     // and the governance check's measures: every test with an owner and a dimension
-    {at:P.od-0.3,place:"big",keys:[[P.od-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_measures(x,{u:clamp((tt-P.od+0.1)/1.0,0,1),lit:fin(tt,P.od+0.6,0.5),tag:fin(tt,P.od+0.3,0.5)})}]);});
+    {at:P.od-0.3,place:"big",keys:[[P.od-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_measures(x,{u:clamp((tt-P.od+0.1)/1.0,0,1),lit:fin(tt,P.od+0.6,0.5),tag:fin(tt,P.od+0.3,0.5)})}],sc.dur));});
 
 // ---- 9 · Rules, and monitoring for the rest: this morning, Clara opens the scorecard; one amber cell, on the learning team's list to
 // follow up; every cell has an owner; Clara's numbers ticked, and who answers for each; the data's way; the next film; the end card ----
@@ -3644,7 +3655,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({op:wAt(sc,"o
     ne:wAt(sc,"amber","no email"),lt:wAt(sc,"amber","the learning team"),el:c.else-0.3,ow:wAt(sc,"else","every cell has an owner"),
     kn:c.knows-0.3,nm:wAt(sc,"knows","which numbers to trust"),who:wAt(sc,"knows","who answers for each"),
     ls:c.last-0.3,rw:wAt(sc,"last","Rules you write"),mn:wAt(sc,"last","monitoring for the rest"),board:c.breath-0.3,end:c.breath+1.6}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gq_run([
     // this morning: Clara opens the scorecard before the numbers leave; one amber cell
     {at:0,place:"planClose",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_planDesk(x,tt,{bar:"docs/scorecard.md",draw:gq_cardSmall({lit:fin(tt,P.op+0.8,0.6)})})},
     // the scorecard: learning's completeness amber, and its one row under Not passed
@@ -3659,7 +3670,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({op:wAt(sc,"o
     // the data's way again: rules you write, and monitoring for the rest
     {at:P.ls,place:"boardGov",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gq_way(x,tt,{pin:[1,1,1,1],cat:[1,1,1,1],own:1,w:[fin(tt,P.rw,0.8),fin(tt,P.rw+0.3,0.8),fin(tt,P.mn,0.8)]})},
     // the data team's board: the next film's card lifts
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,0,1],lift:[0,0,0,0,fin(tt,P.board+0.5,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,0,1],lift:[0,0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"This morning",gv_io(t,0.3,P.am-0.6,0.4));
   gv_end(ctx,S,t,P.end,"Quality on the platform","Rules you write, and monitoring for the rest.","Film 4 of 6");});
 

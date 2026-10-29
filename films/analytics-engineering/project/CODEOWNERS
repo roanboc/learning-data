@@ -63,6 +63,7 @@
 
 # Who uses it: each consumer
 /exposures/finance/                                      finance@uni.example
+/exposures/health/                                       health.data@uni.example
 /exposures/planning/                                     planning@uni.example
 /exposures/wallet/                                       wallet@uni.example
 

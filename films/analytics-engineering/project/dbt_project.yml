@@ -75,9 +75,9 @@ models:
       +group: credential_model
       +access: protected
 
-    # Databricks only: each column's class (meta.personal_data) as a Unity Catalog tag, and a mask
-    # on direct personal data when the var personal_data_readers names a group (DEC-PRJ-13).
-    +post-hook: "{{ apply_personal_data() }}"
+    # Databricks only: each column's class as a Unity Catalog tag, a mask on direct personal data
+    # when the var personal_data_readers names a group (DEC-PRJ-13), and each table's area (DEC-PRJ-15).
+    +post-hook: ["{{ apply_personal_data() }}", "{{ apply_domain_tag() }}"]
 
 # Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:

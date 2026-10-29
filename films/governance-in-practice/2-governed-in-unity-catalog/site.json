@@ -1,0 +1,28 @@
+{
+  "kicker": "Access, masks and audit",
+  "kicker_es": "Acceso, máscaras y auditoría",
+  "title_es": "Gobernanza en Unity Catalog",
+  "h1": "Governed in Unity Catalog: the platform holds the line",
+  "h1_es": "Gobernanza en Unity Catalog: la plataforma pone el límite",
+  "lead": "At the university, access to the learner table was given by hand, to people, with no end date: forty-one could read every name and email. Sam shows how the platform now tags each column from the project's classes, masks them with one policy, and gives access to groups, until a date.",
+  "lead_es": "En la universidad, el acceso a la tabla de estudiantes se daba a mano, a personas y sin fecha de fin: cuarenta y una podían leer cada nombre y correo. Sam muestra cómo la plataforma ahora etiqueta cada columna con las clases del proyecto, las enmascara con una sola política y da acceso a grupos, hasta una fecha.",
+  "description": "A film about governance on the platform, the second of Governance you can use: Sam, and the forty-one people who could read the learner table; the catalog, laid out by area; each column's class, written by the build as a governed tag; one policy that masks every column tagged direct, on every table, even tables built later; the learner code, scrambled but still personal; access for groups, with end dates kept in the university's directory; lineage down to the column; a log of who read each table, in preview; and the access review, read from the grants.",
+  "description_es": "Una película sobre la gobernanza en la plataforma, la segunda de Gobernanza que puedes usar: Sam, y las cuarenta y una personas que podían leer la tabla de estudiantes; el catálogo, ordenado por área; la clase de cada columna, escrita por la construcción como una etiqueta gobernada; una política que enmascara cada columna etiquetada directa, en cada tabla, aun las que se construyan después; el código de estudiante, codificado pero todavía personal; acceso para grupos, con fechas de fin guardadas en el directorio de la universidad; el linaje hasta la columna; una bitácora de quién leyó cada tabla, en versión preliminar; y la revisión de accesos, leída de los permisos.",
+  "card": "Tags from the project's classes, one policy that masks, groups with end dates, and a log of who read what.",
+  "card_es": "Etiquetas desde las clases del proyecto, una política que enmascara, grupos con fecha de fin, y una bitácora de quién leyó qué.",
+  "chapters_es": {
+    "which": "Qué columna",
+    "area": "Ordenado por área",
+    "tag": "Una etiqueta desde la clase",
+    "policy": "Una política, por etiqueta",
+    "key": "La clave codificada",
+    "groups": "Grupos, con fecha de fin",
+    "lineage": "Hasta la columna",
+    "audit": "Quién lo leyó, y cuándo",
+    "close": "Lo que dicen los metadatos"
+  },
+  "past": ["Today, in the platform team's room: who can read the learner table", "The platform enforces what the metadata says."],
+  "past_es": ["Hoy, en la sala del equipo de plataforma: quién puede leer la tabla de estudiantes", "La plataforma hace cumplir lo que dicen los metadatos."],
+  "next_h": "You've seen the platform enforce what the project says: tags from its classes, one policy, and groups with end dates. More films in the series are on the way.",
+  "next_h_es": "Viste a la plataforma hacer cumplir lo que dice el proyecto: etiquetas desde sus clases, una sola política, y grupos con fecha de fin. Vienen más películas de la serie."
+}

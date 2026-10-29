@@ -1,0 +1,126 @@
+From 141bb0001838985c25946528d8ad1902bf5eb02d Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:46 +0000
+Subject: [PATCH] Credentials: say whether a credential counts as an award,
+ instead of relabelling it
+
+---
+ films/analytics-engineering/project/dbt_project.yml       | 1 +
+ .../governance/5-data-contracts/core_credential_v2.yaml   | 7 +++++++
+ .../project/models/core/student/_core_student__models.yml | 8 +++++++-
+ .../project/models/core/student/_student__physical.md     | 1 +
+ .../project/models/core/student/core_credential_v2.sql    | 3 +++
+ .../intermediate/student/int_credentials_unioned.sql      | 8 ++------
+ 6 files changed, 21 insertions(+), 7 deletions(-)
+
+diff --git a/films/analytics-engineering/project/dbt_project.yml b/films/analytics-engineering/project/dbt_project.yml
+index 2e0c057f..f1b76fdc 100644
+--- a/films/analytics-engineering/project/dbt_project.yml
++++ b/films/analytics-engineering/project/dbt_project.yml
+@@ -20,6 +20,7 @@ vars:
+   as_is_date: null                   # the "now" of the wallet marts; null means the day of the build
+   near_award_credit_points: 15       # "within 15 credit points" of an award
+   microcredentials_per_award: 4      # an award accepts up to four microcredentials towards its credit
++  min_award_credit_points: 6         # a microcredential of 6 credit points or more counts as an award
+   passing_grades: ["P", "C", "D", "HD"]
+ 
+ models:
+diff --git a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+index dfab6d7c..b3810490 100644
+--- a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
++++ b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+@@ -144,6 +144,13 @@ schema:
+     classification: none
+     description: 'The credit points the credential carries: zero for a badge; for an award, the points
+       it requires.'
++  - name: counts_as_award
++    logicalType: boolean
++    physicalType: boolean
++    required: false
++    classification: none
++    description: 'True when the credential counts as an award: an award, or a microcredential of at least
++      min_award_credit_points (a var, 6 credit points).'
+   - name: issued_on
+     logicalType: date
+     physicalType: date
+diff --git a/films/analytics-engineering/project/models/core/student/_core_student__models.yml b/films/analytics-engineering/project/models/core/student/_core_student__models.yml
+index 6001d02e..2f0e4ee7 100644
+--- a/films/analytics-engineering/project/models/core/student/_core_student__models.yml
++++ b/films/analytics-engineering/project/models/core/student/_core_student__models.yml
+@@ -207,6 +207,12 @@ models:
+         description: '{{ doc("credential_credit_points") }}'
+         data_type: int
+         config: {meta: {personal_data: none}}
++      - name: counts_as_award
++        description: >
++          True when the credential counts as an award: an award, or a microcredential of at least
++          min_award_credit_points (a var, 6 credit points).
++        data_type: boolean
++        config: {meta: {personal_data: none}}
+       - name: issued_on
+         description: '{{ doc("issued_on") }}'
+         data_type: date
+@@ -252,7 +258,7 @@ models:
+             warn_unenforced: false
+         columns:
+           - include: all
+-            exclude: [learner_bk, status, revoked_on, loaded_at]
++            exclude: [learner_bk, status, revoked_on, loaded_at, counts_as_award]
+           - name: is_revoked
+             description: True when the credential was revoked. Replaced by status in version 2.
+             data_type: boolean
+diff --git a/films/analytics-engineering/project/models/core/student/_student__physical.md b/films/analytics-engineering/project/models/core/student/_student__physical.md
+index 12b06c50..c0b6a620 100644
+--- a/films/analytics-engineering/project/models/core/student/_student__physical.md
++++ b/films/analytics-engineering/project/models/core/student/_student__physical.md
+@@ -16,6 +16,7 @@ erDiagram
+         string credential_code
+         string credential_name
+         int credit_points
++        boolean counts_as_award
+         date issued_on
+         string status
+         date revoked_on
+diff --git a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
+index 0874f515..f94ada27 100644
+--- a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
++++ b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
+@@ -43,6 +43,9 @@ select
+     credential_code,
+     credential_name,
+     credit_points,
++    credential_kind = 'award'
++        or (credential_kind = 'microcredential' and credit_points >= {{ var('min_award_credit_points') }})
++        as counts_as_award,
+     issued_on,
+     status,
+     revoked_on,
+diff --git a/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql b/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
+index b8d9aa58..12e0a918 100644
+--- a/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
++++ b/films/analytics-engineering/project/models/intermediate/student/int_credentials_unioned.sql
+@@ -57,11 +57,7 @@ platform_credentials as (
+         latest_badges.badge_bk as credential_bk,
+         latest_badges.user_bk as holder_bk,
+         'LMS' as key_set,
+-        case
+-            when latest_badges.credit_points >= 6 then 'award'
+-            when latest_badges.credit_points > 0 then 'microcredential'
+-            else 'badge'
+-        end as credential_kind,
++        case when latest_badges.credit_points > 0 then 'microcredential' else 'badge' end as credential_kind,
+         latest_badges.badge_code as credential_code,
+         latest_badges.badge_name as credential_name,
+         latest_badges.credit_points,
+@@ -111,7 +107,7 @@ course_credentials as (
+         latest_certificates.certificate_bk as credential_bk,
+         latest_certificates.customer_bk as holder_bk,
+         'SC' as key_set,
+-        case when latest_certificates.credit_points >= 6 then 'award' else 'microcredential' end as credential_kind,
++        'microcredential' as credential_kind,
+         latest_certificates.course_code as credential_code,
+         latest_certificates.course_name as credential_name,
+         latest_certificates.credit_points,
+-- 
+2.43.0
+

@@ -1,0 +1,38 @@
+{
+  "key": "governed-in-dbt",
+  "title": "Governed in dbt",
+  "sub": "The opening film of Governance you can use, a series on making data governance work with the tools: owners, classes, contracts, tests and decisions, kept in the dbt project beside the code, and checks that hold every pull request to them.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. Files are paper sheets, copied from the example project; a governance line lights gold as it's named. A check is red when it fails, amber when it warns and green when it passes. The agent is a small turning star on a dashed cyan card, never a person.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "rules",
+    "first",
+    3.4
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ]
+  ]
+}

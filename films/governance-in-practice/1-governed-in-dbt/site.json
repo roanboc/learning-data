@@ -1,0 +1,28 @@
+{
+  "kicker": "Governance in the code",
+  "kicker_es": "Gobernanza en el código",
+  "title_es": "Gobernanza en dbt",
+  "h1": "Governed in dbt: the rules arrive with every change",
+  "h1_es": "Gobernanza en dbt: las reglas llegan con cada cambio",
+  "lead": "At the university, the rules used to arrive after a table was built, and a table could reach other teams with no owner. Jun shows where the data team's dbt project keeps owners, classes, contracts, tests and decisions, and the checks that hold every pull request to them.",
+  "lead_es": "En la universidad, las reglas llegaban cuando una tabla ya estaba construida, y una tabla podía llegar a otros equipos sin dueño. Jun muestra dónde guarda el proyecto de dbt del equipo de datos los dueños, las clases, los contratos, las pruebas y las decisiones, y los controles que revisan cada solicitud de cambio.",
+  "description": "A film about governance kept in the code, the first of Governance you can use: Jun's pull request, and a rule that used to arrive after he'd built it; a check that answers in a minute, and says how to add an owner; a pin at each step of the team's loop, each kept as a line beside the model's code; groups and access that decide who may build on what; contracts the build keeps, versions with a date to go, and exposures that name who uses each table; what a change touches, written into its pull request; reviewers made from the owners, and decisions kept as files; check messages that teach, and a new rule that warns first; and an agent that reviews every pull request while people decide.",
+  "description_es": "Una película sobre la gobernanza guardada en el código, la primera de Gobernanza que puedes usar: la solicitud de cambio de Jun, y una regla que antes llegaba cuando él ya lo había construido; un control que responde en un minuto, y dice cómo agregar un dueño; una chinche en cada paso del ciclo del equipo, cada una guardada como una línea junto al código del modelo; grupos y accesos que deciden quién puede construir sobre qué; contratos que cumple cada construcción, versiones con fecha de retiro, y exposiciones que nombran quién usa cada tabla; a qué afecta un cambio, escrito en su solicitud de cambio; revisores que salen de los dueños, y decisiones guardadas como archivos; mensajes de control que enseñan, y una regla nueva que primero advierte; y un agente que revisa cada solicitud de cambio mientras las personas deciden.",
+  "card": "Owners, classes, contracts and decisions kept beside the code in dbt, and checks that hold every pull request to them.",
+  "card_es": "Dueños, clases, contratos y decisiones junto al código en dbt, y controles que revisan cada solicitud de cambio.",
+  "chapters_es": {
+    "rules": "Las reglas llegan primero",
+    "pins": "Una chinche en cada paso",
+    "access": "Quién puede construir sobre qué",
+    "contract": "Una promesa que cumple la construcción",
+    "impact": "A qué afecta este cambio",
+    "owners": "Las revisiones van a los dueños",
+    "teach": "Un control que enseña",
+    "agent": "Un agente en cada solicitud de cambio",
+    "close": "Junto con el código"
+  },
+  "past": ["Today, in the data team's room: Jun's pull request for Planning", "Rules that run with every change arrive while the work can still change."],
+  "past_es": ["Hoy, en la sala del equipo de datos: la solicitud de cambio de Jun para Planificación", "Las reglas que corren con cada cambio llegan mientras el trabajo todavía puede cambiar."],
+  "next_h": "You've seen governance kept in the dbt project, beside the code, and checked on every pull request. More films in the series are on the way.",
+  "next_h_es": "Viste la gobernanza guardada en el proyecto de dbt, junto al código, y revisada en cada solicitud de cambio. Vienen más películas de la serie."
+}

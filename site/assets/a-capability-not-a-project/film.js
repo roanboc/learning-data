@@ -3893,6 +3893,10 @@ function cp_fadeCut(ctx,fn,blocks){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.
 function cp_block(ctx,L,cx,y,lh,sz,w){const m=Math.max(...L.map(l=>tw(ctx,l,sz,w)));return[cx-m/2,y-0.75*sz,cx+m/2,y+(L.length-1)*lh+0.2*sz];}
 // made once per chapter, the first time it draws: its cues are known by then
 const cp_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// a chapter's shots, as the series' gv_shots, except that a shot marked cut comes in on a cut: two framings of one place at one moment,
+// which a dissolve would lay over each other, a little apart, so the people and the cards in it showed twice
+function cp_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
+  if(!shots[i].cut)return gv_shots(ctx,S,t,end,shots);gv_shot(ctx,S,t,shots[i],shots[i+1]?shots[i+1].at:end);return i;}
 // a tag that springs in at t0 and goes at t1 (or stays)
 function cp_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
@@ -4386,15 +4390,17 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
       lists:w("report","lists"),nothing:w("report","nothing after"),likeD:w("drift","like a dike"),notWhat:w("needs","not what")};});
   const dv=c.budget-0.4,yk=c.cant-0.3,rp=c.report-0.3,dr=c.drift-0.3,lk=P.likeD-0.3,ag=c.again-0.3,nd=c.needs-0.3;
   gv_shots(ctx,S,t,sc.dur,[
-    // December: the two reports' cards on Planning's glass and the registrar's, the same number, joined; "sent" on the registrar's
-    {at:0,place:"floor",keys:[[0,738,470,1.3],[0.1,750,465,1.32]],d:5,draw:(x,tt)=>{cp_floor(x,tt);
+    // December: the two reports' cards on Planning's glass and the registrar's, the same number, joined; "sent" on the registrar's. The
+    // camera starts where the last chapter left the floor, so the title card lifts off one floor, not two a little apart
+    {at:0,place:"floor",keys:[[0,760,465,1.32*1.025]],push:0.015,draw:(x,tt)=>{cp_floor(x,tt);
       cp_reports(x,{tick:fin(tt,P.same,0.5),join:clamp((tt-P.same-0.1)/0.8,0,1),sent:clamp((tt-P.wentIn)/0.5,0,1)});}},
     // the deputy vice-chancellor's office, in winter: David at his desk; on "ends in June", the wall planner, its card and its flag
     {at:dv,place:"dvc",keys:[[dv,960,540,1.0],[P.endsJ-0.8,1160,300,1.55]],d:1.8,push:0,draw:(x,tt)=>{cp_dvc(x,tt,{david:{pose:"write",flip:false},plan:{card:1,flag:fin(tt,P.endsJ,0.5)}});
       cp_nameCard(x,1580,540,"Prof. David Mensah","deputy vice-chancellor",gv_io(tt,P.deputy-0.2,P.endsJ-0.9,0.4));}},
-    // Yusuf knocks at the open door; David waves him in, then spreads his hands: what does it do? Yusuf comes to the desk with his report
-    {at:yk,place:"dvc",keys:[[yk,1150,520,1.25]],push:0.02,draw:(x,tt)=>{const wk=gv_walk(tt,c.lose,1766,1560,260),inn=tt>=c.lose;
-      cp_dvc(x,tt,{david:tt<P.isnt+0.2?{pose:"listen",flip:false}:tt<P.cantSee-0.2?{pose:"wave",expr:"smile",flip:false}:{pose:"cp_spread",expr:"concerned",flip:false}});
+    // Yusuf knocks at the open door; David waves him in, then spreads his hands: what does it do? Yusuf comes to the desk with his report.
+    // The shot starts on the planner, as the last one ends, David still writing, and the camera comes back to the room
+    {at:yk,place:"dvc",keys:[[yk,1160,300,1.55],[yk+0.5,1150,520,1.25]],d:1.8,push:0.02,draw:(x,tt)=>{const wk=gv_walk(tt,c.lose,1766,1560,260),inn=tt>=c.lose;
+      cp_dvc(x,tt,{david:tt<P.isnt+0.2?{pose:"write",flip:false}:tt<P.cantSee-0.2?{pose:"wave",expr:"smile",flip:false}:{pose:"cp_spread",expr:"concerned",flip:false}});
       if(!inn)person(x,"yusuf",1766,CP_DV.fy+6,0.74,{pose:"cp_knock",t:tt,flip:true,carry:cp_heldReportL});
       else gv_walker(x,"yusuf",wk,CP_DV.fy+30,0.8,{t:tt,carry:cp_heldReport,flip:true});
       gv_say(x,560,330,["what does it do?"],1050,520,{a:gv_io(tt,P.cantSee,c.report,0.3),k:0.9+0.1*spring(fin(tt,P.cantSee,0.5))});}},
@@ -4418,18 +4424,18 @@ scene("what",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
       capW:w("whoever","A capability"),restr:w("test","a restructure"),sys:w("test","a new system"),proc:w("test","a new process"),reorg:w("fail","reorganised"),glossR:w("fail","a glossary"),
       meet:w("fail","a meeting"),govD:w("govern","govern data")};});
   const mc=P.top-0.4,ts=c.tests-0.3,m2=c.whoever-0.3,wb=c.board-0.3,wd=c.dry-0.4,wg=c.govern-0.3,fails=[P.reorg,P.glossR,P.meet];
-  gv_shots(ctx,S,t,sc.dur,[
-    // Noor's room: Noor at her map; Yusuf comes in with three cards
+  cp_shots(ctx,S,t,sc.dur,[
+    // Noor's room: Noor at her map; Yusuf comes in with three cards. Between the room and the map, close, the shots cut
     {at:0,place:"noor",keys:[[0,1000,520,1.06],[0.1,1040,510,1.1]],d:4,draw:(x,tt)=>{const wk=gv_walk(tt,0.4,2020,1580,300);
       person(x,"noor",1250,905,0.8,{pose:"listen",t:tt,flip:wk.moving});gv_walker(x,"yusuf",wk,905,0.8,{t:tt,carry:cp_heldCards,flip:true});
       cp_nameCard(x,1330,236,"Noor Rahman","data architect",gv_io(tt,P.noorW-0.2,mc-0.2,0.4));}},
     // the map, close: he pins his three cards at the top, in the strategy band, as each is named
-    {at:mc,keys:[[mc,1152,432,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("mapClose"),0,0,W,H);cp_map3(x,{pin:j=>fin(tt,[P.gteam,P.gloss,P.stew][j]-0.1,0.4)});}},
+    {at:mc,cut:true,keys:[[mc,1152,432,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("mapClose"),0,0,W,H);cp_map3(x,{pin:j=>fin(tt,[P.gteam,P.gloss,P.stew][j]-0.1,0.4)});}},
     // Noor tests each one: she takes up a marker; his three cards are on her map now
-    {at:ts,place:"noor",keys:[[ts,1260,470,1.3]],push:0.02,draw:(x,tt)=>{cp_roomCards(x,{pin:()=>1});person(x,"yusuf",1580,905,0.8,{pose:"listen",t:tt,flip:true});
+    {at:ts,cut:true,place:"noor",keys:[[ts,1260,470,1.3]],push:0.02,draw:(x,tt)=>{cp_roomCards(x,{pin:()=>1});person(x,"yusuf",1580,905,0.8,{pose:"listen",t:tt,flip:true});
       person(x,"noor",1250,905,0.8,{pose:"listen",pose2:"point",mix:fin(tt,ts+0.5,0.6),t:tt,flip:true,carry:cp_heldMarker});}},
     // a team is who; a capability is what: the test, three chips; each card fails it, and moves down the map to its band
-    {at:m2,keys:[[m2,1152,432,1.25],[c.down-0.3,1031,470,1.08]],d:1.8,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("mapClose"),0,0,W,H);
+    {at:m2,cut:true,keys:[[m2,1152,432,1.25],[c.down-0.3,1031,470,1.08]],d:1.8,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("mapClose"),0,0,W,H);
       const out=1-fin(tt,c.down-0.2,0.5);cp_map3(x,{pin:()=>1,lit:j=>j===0?gv_io(tt,c.whoever,P.capW,0.4):0,q:fin(tt,P.must,0.5),
         chip:j=>fin(tt,[P.restr,P.sys,P.proc][j]-0.1,0.4)*out,chipLit:j=>fin(tt,fails[j],0.4),tip:j=>fin(tt,fails[j],0.6),down:j=>clamp((tt-c.down-0.1-0.3*j)/1.1,0,1)});}},
     // a water board isn't its members, or its spades
@@ -4470,8 +4476,9 @@ scene("colour",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,
   gv_shots(ctx,S,t,sc.dur,[
     // each card washed in its colour as its note of evidence is pinned under it; the key; then, back to the whole band, gold rings round
     // the red card and the two amber ones: where the money should go. For the red one, the camera moves in on the corner it shares with
-    // its neighbour, the frame's right edge held on the band's (a key past it keeps it there), and the words it leaves fade as it goes
-    {at:0,place:"band",keys:[[0,960,540,1.0],[c.red-0.5,W,658,2.47],[P.hurts-0.6,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>cp_fadeCut(x,()=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,
+    // its neighbour, the frame's right edge held on the band's (a key past it keeps it there), and the words it leaves fade as it goes.
+    // It opens on the eighth card, framed as the last chapter left it, and comes back to the whole band once that chapter has faded
+    {at:0,place:"band",keys:[[0,W,586,2.47],[0.8,960,540,1.0],[c.red-0.5,W,658,2.47],[P.hurts-0.6,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>cp_fadeCut(x,()=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,
       wash:j=>fin(tt,when(j)+0.2,0.7),note:j=>fin(tt,when(j),0.5),key:fin(tt,c.key-0.1,0.6),ring:j=>j===7||j===2||j===4?clamp((tt-P.moneyW-0.1-(j===7?0:0.4+0.2*(j===4)))/0.8,0,1):0}),cp_bandBlocks(x))},
     // the water boards walk their dikes every year: the staff on the bare clay, the clerk's notch
     {at:cw,place:"bankWalk",keys:[[cw,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_boardWalk(x,tt,cw-2.0)},
@@ -4514,8 +4521,8 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
   gv_shots(ctx,S,t,sc.dur,[
     // one page on David's desk: seven services, their promises, and what it costs to keep them, its three lines lit
     {at:0,place:"desk",keys:[[0,960,540,1.0],[c.time-0.6,889,580,1.08]],d:1.8,push:0,draw:(x,tt)=>cp_servicePage(x,{keep:j=>fin(tt,j<2?P.ptime+j*0.5:P.tools,0.5)})},
-    // a new line in Budget 2027, in pen
-    {at:bd,place:"desk",keys:[[bd,960,500,1.0],[P.aLine-0.4,1250,620,1.35]],d:1.6,push:0,draw:(x,tt)=>cp_budget(x,{write:clamp((tt-P.aLine)/1.6,0,1)})},
+    // a new line in Budget 2027, in pen, on the desk as the page left it
+    {at:bd,place:"desk",keys:[[bd,889,580,1.08],[P.aLine-0.4,1250,620,1.35]],d:1.6,push:0,draw:(x,tt)=>cp_budget(x,{write:clamp((tt-P.aLine)/1.6,0,1)})},
     // the planner: the project's card still ends on 30 June; the new line runs on past it, off the planner's edge
     {at:pl,place:"dvc",keys:[[pl,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:clamp((tt-pl-0.3)/1.8,0,1)}})},
     // the money goes to one capability: a gold thread from the budget's line to govern data, and on along the dotted lines to the services

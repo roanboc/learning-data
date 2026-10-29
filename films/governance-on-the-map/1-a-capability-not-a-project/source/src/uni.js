@@ -25,6 +25,10 @@ function cp_fadeCut(ctx,fn,blocks){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.
 function cp_block(ctx,L,cx,y,lh,sz,w){const m=Math.max(...L.map(l=>tw(ctx,l,sz,w)));return[cx-m/2,y-0.75*sz,cx+m/2,y+(L.length-1)*lh+0.2*sz];}
 // made once per chapter, the first time it draws: its cues are known by then
 const cp_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// a chapter's shots, as the series' gv_shots, except that a shot marked cut comes in on a cut: two framings of one place at one moment,
+// which a dissolve would lay over each other, a little apart, so the people and the cards in it showed twice
+function cp_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
+  if(!shots[i].cut)return gv_shots(ctx,S,t,end,shots);gv_shot(ctx,S,t,shots[i],shots[i+1]?shots[i+1].at:end);return i;}
 // a tag that springs in at t0 and goes at t1 (or stays)
 function cp_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}

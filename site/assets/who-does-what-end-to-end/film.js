@@ -3151,6 +3151,10 @@ function ee_fadeCut(ctx,fn,blocks){const T0=T,cw=ctx.canvas.width,ch=ctx.canvas.
 function ee_block(ctx,L,cx,y,lh,sz,w){const m=Math.max(...L.map(l=>tw(ctx,l,sz,w)));return[cx-m/2,y-0.75*sz,cx+m/2,y+(L.length-1)*lh+0.2*sz];}
 // made once per chapter, the first time it draws: its cues are known by then
 const ee_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// a chapter's shots, as the series' gv_shots, except that a shot marked cut comes in on a cut: two framings of one place at one moment,
+// which a dissolve would lay over each other, a little apart, so the people and the cards in it showed twice
+function ee_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
+  if(!shots[i].cut)return gv_shots(ctx,S,t,end,shots);gv_shot(ctx,S,t,shots[i],shots[i+1]?shots[i+1].at:end);return i;}
 // a tag that springs in at t0 and goes at t1 (or stays)
 function ee_tagAt(ctx,t,t0,t1,x,y,s,o){const a=t1==null?fin(t,t0,0.35):gv_io(t,t0,t1,0.35);if(a<=0.01)return;const k=0.9+0.1*spring(fin(t,t0,0.5));
   ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,a,()=>wc_tag(ctx,0,0,s,Object.assign({align:"center"},o||{})));ctx.restore();}
@@ -3768,18 +3772,18 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     s10=c.today-0.3,s11=c.drafts-0.3,s12=P.approves-0.4,s13=P.view-0.4,s14=P.free-0.4,s15=c.update-0.3,s16=c.same-0.3;
   // Palma's slips: up the table one after another, then most of them back to his elbow; the last one back, he picks up
   const up0=P.more+0.9,dn0=c.down+0.15,pick=P.among-0.2,slipUp=i=>clamp((t-up0-i*0.42)/1.5,0,1),slipBack=i=>clamp((t-dn0-i*0.16)/0.9,0,1);
-  gv_shots(ctx,S,t,sc.dur,[
+  ee_shots(ctx,S,t,sc.dur,[
     // the academy at night; Palma stands at his place near the table's end, his bundle of slips in his hands, and sits as he joins them
     {at:0,keys:[[0,960,540,1.0],[P.ricardo-0.2,1290,500,1.3]],d:2.4,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
       pose:id=>id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:id==="eeHead"?{pose:"listen",flip:false}:null,
       stand:id=>id==="eePalma"?1-clamp((tt-P.joins)/1.2,0,1):0,
       after:q=>ee_nameCard(q,1660,380,"Ricardo Palma","writer, from Lima",gv_io(tt,P.ricardo+0.1,s1b-0.1,0.4))})},
-    // the head of the table: the director lays a hand on the thick dictionary
-    {at:s1b,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
+    // the head of the table: the director lays a hand on the thick dictionary. The shots in the academy at night cut, as one moment
+    {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
       pose:id=>id==="eeHead"?{pose:"listen",pose2:"ee_hand",mix:clamp((tt-P.dict+0.2)/0.7,0,1),flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
       on:q=>{if(tt>P.dict+0.35)ee_handOn(q,368,692,0.9,PEOPLE.eeHead.skin,EE_FROCK[0],0.1);}})},
     // Palma unties the bundle and passes the slips up the table; they go back down, most to a pile at his elbow; he holds one up to the lamp
-    {at:s2,keys:[[s2,1450,560,1.7],[P.more+0.3,960,540,1.0],[c.down-0.3,1330,520,1.45]],d:2.4,push:0,draw:(x,tt)=>{const op=clamp((tt-c.brings-0.3)/0.8,0,1),hold=tt<up0-0.3,
+    {at:s2,cut:true,keys:[[s2,1450,560,1.7],[P.more+0.3,960,540,1.0],[c.down-0.3,1330,520,1.45]],d:2.4,push:0,draw:(x,tt)=>{const op=clamp((tt-c.brings-0.3)/0.8,0,1),hold=tt<up0-0.3,
       lamp=clamp((tt-pick)/0.7,0,1);
       ee_acadNight(x,tt,{pose:id=>{if(id==="eePalma")return hold?{pose:"ee_bundle",carry:ee_heldBundle({open:op})}:tt<pick?{pose:"listen"}:{pose:"listen",pose2:"ee_toLamp",mix:lamp,carry:lamp>0.45?ee_heldSlip:null,expr:"concerned"};
           if(id==="eeHead")return{pose:"listen",flip:false};return null;},
@@ -3824,8 +3828,9 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       pose:id=>id==="eeC2"?{pose:"listen",pose2:"ee_explain",mix:gv_io(tt,s11+0.6,c.drafts+3.2,0.6),expr:"smile",flip:false}:id==="eeC3"?{pose:"ee_down",flip:true}:
         {pose:"ee_read",carry:ee_heldCardLow,flip:id==="eeC4"},
       on:q=>{ee_slipAt(q,752,708,92,0.06,{col:[255,253,246]});ee_slipAt(q,640,714,80,-0.1,{col:[255,253,246]});}})},
-    // the Spanish Academy approves it: a show of hands
-    {at:s12,keys:[[s12,960,540,1.0]],push:0.02,draw:(x,tt)=>ee_acadDay(x,tt,[["eeC5",0],["eeC1",1],["eeC2",2],["eeC6",3],["eeC3",4],["eeC4",5],["eeC7",6]],{
+    // the Spanish Academy approves it: a show of hands. It starts framed as the commission's shot, so the room stays put while the people
+    // change, and draws back to the whole table
+    {at:s12,keys:[[s12,620,560,1.5*1.03],[s12+0.45,960,540,1.0]],d:1.6,push:0,draw:(x,tt)=>ee_acadDay(x,tt,[["eeC5",0],["eeC1",1],["eeC2",2],["eeC6",3],["eeC3",4],["eeC4",5],["eeC7",6]],{
       pose:id=>{const i=["eeC5","eeC1","eeC2","eeC6","eeC3","eeC4","eeC7"].indexOf(id),v=ease(clamp((tt-P.approves-0.1-((i*3)%7)*0.1)/0.8,0,1));
         return v<0.5?{pose:"listen",pose2:"ee_voteUp",mix:v*2}:{pose:"ee_voteUp",pose2:"ee_vote",mix:(v-0.5)*2};}})},
     // every other academy gives its view: the change goes out to twenty-two cards in a ring, and comes back ticked; then all twenty-three
@@ -3867,8 +3872,8 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     {at:rp,place:"desk",keys:[[rp,960,540,1.0]],push:0.02,draw:(x,tt)=>{ee_report(x,{row:i=>clamp((tt-P.fac+0.1-i*0.35)/0.6,0,1),note:i=>fin(tt,[c.business,c.science,c.health][i]-0.1,0.45),
         ring:clamp((tt-P.less)/0.9,0,1)});
       ee_yearStrip(x,clamp((tt-c.nine+0.2)/0.9,0,1),{dot:i=>fin(tt,P.nineW-0.4+i*0.3,0.4),amber:fin(tt,P.less,0.4)});}},
-    // before: the emails that went round, on the shelf, dusty; 23 replies, and no decision
-    {at:em,place:"desk",keys:[[em,960,500,1.0],[em+0.1,960,520,1.06]],d:4,draw:(x,tt)=>ee_emails(x,fin(tt,P.nobody-0.2,0.5))},
+    // before: the emails that went round, on the shelf, dusty; 23 replies, and no decision (on the desk as the report left it)
+    {at:em,place:"desk",keys:[[em,960,540,1.02],[em+0.1,960,520,1.06]],d:4,draw:(x,tt)=>ee_emails(x,fin(tt,P.nobody-0.2,0.5))},
     // now: the page pinned on her board, what you can ask data governance for; one line lights
     {at:sv,place:"boardPlan",keys:[[sv,960,500,1.0],[P.define-0.4,900,380,1.25]],d:1.8,push:0,draw:(x,tt)=>ee_servicePage(x,fin(tt,P.define,0.6))},
     // she asks: her request card, written as she says it; the date; and it goes
@@ -3889,7 +3894,7 @@ scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
     gTo=i=>{const pts=ee_goldPath();let L=0,at=0;for(let k=1;k<pts.length;k++){L+=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);if(k===i)at=L;}return at/L;},
     gold=tt=>{const G=[[P.pub-0.1,0],[P.gloss,gTo(2)],[P.dt-0.7,gTo(2)],[P.dt,gTo(5)],[P.dash-0.5,gTo(5)],[P.dash,gTo(8)],[P.asst-0.5,gTo(8)],[P.asst,gTo(11)]];
       if(tt<=G[0][0])return 0;for(let k=1;k<G.length;k++)if(tt<G[k][0])return lerp(G[k-1][1],G[k][1],easeCam((tt-G[k-1][0])/(G[k][0]-G[k-1][0])));return 1;};
-  gv_shots(ctx,S,t,sc.dur,[
+  ee_shots(ctx,S,t,sc.dur,[
     // the floor: Clara's request leaves her hands, small and bright, and goes along to Mei's room; Noor and Yusuf walk behind it
     {at:0,keys:[[0,768,560,1.25],[1.4,640,600,1.5]],d:5.2,draw:(x,tt)=>{x.drawImage(ee_placeHi("floor"),0,0,W,H);const fly=clamp((tt-1.0)/2.6,0,1),got=fly>=1,
         nw=gv_walk(tt,0.6,-120,676,230),yw=gv_walk(tt,0.8,-220,812,230);
@@ -3918,8 +3923,9 @@ scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
     {at:s7,place:"noor",keys:[[s7,900,520,1.04]],push:0.015,draw:(x,tt)=>{const pin=fin(tt,P.once-0.1,0.5);
       ee_roomTerm(x,pin);person(x,"noor",1420,905,0.8,{pose:"hold",carry:heldNotebook,t:tt,flip:true});
       person(x,"mei",1090,905,0.8,{pose:"hold",pose2:"ee_pin",mix:pin,carry:pin<0.5?ee_heldReq:null,t:tt,flip:true});}},
-    // the map, close: the map publishes the term to the glossary, a gold line from it; and on along it, every copy, each from the glossary
-    {at:s8,place:"eeMap",keys:[[s8,960,600,1.08],[P.dt-1.6,815,650,1.35]],d:2.0,push:0,draw:(x,tt)=>ee_fadeCut(x,()=>ee_map(x,{term:1,
+    // the map, close: the map publishes the term to the glossary, a gold line from it; and on along it, every copy, each from the glossary.
+    // From the room to the map, close, the shot cuts
+    {at:s8,cut:true,place:"eeMap",keys:[[s8,960,600,1.08],[P.dt-1.6,815,650,1.35]],d:2.0,push:0,draw:(x,tt)=>ee_fadeCut(x,()=>ee_map(x,{term:1,
       app:i=>i===4?fin(tt,P.pub-0.45,0.5):fin(tt,P.gloss-0.55,0.5),glossLit:fin(tt,P.gloss,0.5),gold:gold(tt),copy:j=>fin(tt,[P.dt,P.dash,P.asst][j]-0.08,0.5),t:tt}))},
     // the floor again, the camera drawing back: the request's path through the rooms, a tag at each step as it's said
     {at:s9,keys:[[s9,540,560,1.45],[P.st[0]+0.1,960,540,1.0]],d:2.4,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("floor"),0,0,W,H);
@@ -3991,7 +3997,7 @@ const ee_mapSoFar=tt=>({service:1,step:1,role:1,chip:1,team:1,app:1,term:1,gold:
 scene("needs",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{writes:w("reads","writes"),term:w("term","the term"),copies:w("term","its copies"),each:w("term","each saying"),info:w("home","information"),home:w("home","a home")};});
   const drop=[c.req,c.draft,c.note,c.decision,null,P.copies].map(v=>v==null?null:v-0.1),s2=P.home+1.35;
-  gv_shots(ctx,S,t,sc.dur,[
+  ee_shots(ctx,S,t,sc.dur,[
     // the map: a light along the steps; what each reads and writes drops into the information band as it's named, and the definition is
     // named the term; the copies' card opens: each copy, from the glossary, on 21 January; then a home marked at each card's corner
     {at:0,keys:[[0,906,527,1.14],[0.01,924,527,1.14]],d:26,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("eeMap"),0,0,W,H);
@@ -3999,8 +4005,9 @@ scene("needs",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
         termHead:fin(tt,P.term-0.05,0.6),termLit:0.35+0.55*gv_io(tt,P.term-0.1,P.term+2.0,0.4),infoLit:i=>0.9*gv_io(tt,P.info-0.2+i*0.12,P.info+1.6,0.35),
         house:i=>fin(tt,P.home+0.1+i*0.15,0.4)}));
         ee_copiesBig(x,clamp((tt-P.each+0.3)/0.6,0,1)*(1-clamp((tt-c.home+0.5)/0.5,0,1)),j=>fin(tt,P.each+0.25+j*0.4,0.4),1-clamp((tt-c.home+0.7)/0.2,0,1));});}},
-    // Noor's room: Noor and Yusuf at her map; at its top corner, the next film's card, and its pin goes in
-    {at:s2,place:"noor",keys:[[s2,900,520,1.04]],push:0.015,draw:(x,tt)=>{ee_roomTerm(x,1);
+    // Noor's room: Noor and Yusuf at her map; at its top corner, the next film's card, and its pin goes in. From the map, close, the shot
+    // cuts back to the room
+    {at:s2,cut:true,place:"noor",keys:[[s2,900,520,1.04]],push:0.015,draw:(x,tt)=>{ee_roomTerm(x,1);
       person(x,"noor",1420,905,0.8,{pose:"hold",carry:heldNotebook,t:tt,flip:true});person(x,"yusuf",1130,905,0.8,{pose:"listen",t:tt,flip:true});
       ee_roomNext(x,fin(tt,s2+0.5,0.5),clamp((tt-s2-1.0)/0.4,0,1));}}]);
   setScreen(ctx,S);wc_paperOver(ctx,S);});

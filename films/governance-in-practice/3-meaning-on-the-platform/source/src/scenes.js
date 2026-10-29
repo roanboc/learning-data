@@ -31,7 +31,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({mei:wAt(sc,"
     nt:c.night-0.3,finds:wAt(sc,"night","the check finds"),tue:wAt(sc,"night","on Tuesday morning")-0.3,sees:wAt(sc,"night","Mei sees"),touch:wAt(sc,"night","everything her words touch"),
     day:c.day-0.3,both:wAt(sc,"day","both reports"),num:wAt(sc,"day","four thousand"),reach:c.reach-0.3,rw:wAt(sc,"reach","reach the work"),
     board:c.breath-0.3,title:c.breath+1.2}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // the registrar's office, Monday: Mei at her desk, award's page on her screen, with her name as its owner
     {at:0,place:"registrar",keys:[[0,900,540,1],[0.1,940,520,1.06]],d:3,draw:(x,tt)=>{gm_regDesk(x,tt,{draw:gm_meiTerm(fin(tt,P.own,0.5),0)});
       gu_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,P.mei-0.1,P.ch-0.2,0.4));}},
@@ -69,7 +69,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({mei:wAt(sc,"
     {at:P.reach,place:"regRoom",keys:[[P.reach,1080,520,1.12],[P.reach+0.1,1080,510,1.16]],d:4,draw:(x,tt)=>{gm_meiYusuf(x,tt,{mei:{expr:"smile"},yusuf:{expr:"smile"}});
       gm_meiLine(x,fin(tt,P.reach+0.3,0.35),0.92+0.08*spring(fin(tt,P.reach+0.3,0.5)),GM_NOW,fin(tt,P.rw+0.3,0.8));}},
     // the data team's board, close: the series' six cards; the third lights and lifts, and becomes the title
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,0,fin(tt,P.board+0.3,0.8)],lift:[0,0,fin(tt,P.board+1.0,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,0,fin(tt,P.board+0.3,0.8)],lift:[0,0,fin(tt,P.board+1.0,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Monday",gv_io(t,0.3,P.sl-0.2,0.4));wc_year(ctx,56,72,"Until now",gv_io(t,P.sl+0.4,P.now-0.2,0.4));
   wc_year(ctx,56,72,"Monday night",gv_io(t,P.nt+0.3,P.tue-0.2,0.4));wc_year(ctx,56,72,"Tuesday morning",gv_io(t,P.tue+0.3,P.day-0.2,0.4));
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.day+0.3,P.reach-0.2,0.4));
@@ -81,7 +81,7 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({beta:wAt(sc,"
     dom:wAt(sc,"has","its domain"),tab:wAt(sc,"lists","the tables"),from:wAt(sc,"lists","where its words come from"),
     mp:c.map-0.3,pub:wAt(sc,"map","published"),kept:wAt(sc,"map","where each term is kept"),made:wAt(sc,"map","a change is made"),never:wAt(sc,"map","never on the page"),
     rd:c.read-0.3,ci:c.cites-0.3,ans:wAt(sc,"cites","it cites")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // award's page on the platform, drawn as a form, in beta: its words, its owner and its domain; the tables that hold it, and where its
     // words come from, lit as they're said
     {at:0,place:"bigReg",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_awardPage(x,{beta:fin(tt,P.beta,0.5),lit:[gv_io(tt,P.words,P.owner,0.4),gv_io(tt,P.owner,P.dom,0.4),
@@ -95,14 +95,14 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({beta:wAt(sc,"
       gu_nameCard(x,120,330,"Clara Jensen","Planning",gv_io(tt,P.rd+0.3,P.ci-0.2,0.4));}},
     // Genie One, the platform's assistant: what counts as an award? It answers in the page's words, and cites the page
     {at:P.ci,place:"bigPlan",keys:[[P.ci,960,540,1]],push:0.02,draw:(x,tt)=>gm_genie(x,tt,{question:"What counts as an award?",q:clamp((tt-P.ci-0.1)/1.0,0,1),
-      a:fin(tt,P.ans-0.4,0.6),words:GM_ANS,wordsCol:GM_VI,cites:[["page","Award"]],ci:[fin(tt,P.ans,0.6)],cl:[gv_io(tt,P.ans+0.4,sc.dur,0.5)],violet:0})}]);});
+      a:fin(tt,P.ans-0.4,0.6),words:GM_ANS,wordsCol:GM_VI,cites:[["page","Award"]],ci:[fin(tt,P.ans,0.6)],cl:[gv_io(tt,P.ans+0.4,sc.dur,0.5)],violet:0})}],sc.dur));});
 
 // ---- 3 · A copy that says where it came from: the data team's copy of award, beside the models, and the table's description written
 // from it; its source, named; and each build writing the descriptions on to the catalog, one way ----
 scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({own:wAt(sc,"keeps","its own copy"),tab:wAt(sc,"keeps","the tables that hold award"),
     same:wAt(sc,"keeps","in the same words"),nm:c.names-0.3,src:wAt(sc,"names","names its source"),term:wAt(sc,"names","the glossary's term"),
     day:wAt(sc,"names","the day it was synced"),sd:c.sends-0.3,build:wAt(sc,"sends","Each build"),desc:wAt(sc,"sends","sends the descriptions"),back:wAt(sc,"sends","never back")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // the course domain's conceptual model, as the project keeps it: award, in the copy's words; under it, the table's model, whose
     // description is written from them, lit in the same colour
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{gm_copySheet(x,{rows:5,y:50,u:clamp((tt-0.2)/0.9,0,1),def:fin(tt,P.own,0.5)});
@@ -111,7 +111,7 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({own:wAt(sc,"k
     {at:P.nm,place:"desk",keys:[[P.nm,960,500,1]],push:0.02,draw:(x,tt)=>{gm_copySheet(x,{y:60,def:1,src:[fin(tt,P.src,0.5),fin(tt,P.src+0.3,0.5),fin(tt,P.term,0.5),0,fin(tt,P.day,0.5)]});
       gu_filmTag(x,1830,740,"One word, one home",fin(tt,P.nm+0.6,0.5),{align:"right"});}},
     // core_award in the catalog: each build writes its comment from the project's words, one way, never back
-    {at:P.sd,place:"big",keys:[[P.sd,960,540,1]],push:0.02,draw:(x,tt)=>gm_comment(x,tt,{ar:clamp((tt-P.build)/0.9,0,1),c:clamp((tt-P.desc)/1.0,0,1),back:clamp((tt-P.back+0.2)/1.0,0,1)})}]);});
+    {at:P.sd,place:"big",keys:[[P.sd,960,540,1]],push:0.02,draw:(x,tt)=>gm_comment(x,tt,{ar:clamp((tt-P.build)/0.9,0,1),c:clamp((tt-P.desc)/1.0,0,1),back:clamp((tt-P.back+0.2)/1.0,0,1)})}],sc.dur));});
 
 // ---- 4 · The nightly sync: the data team's room at night; the check comparing the copy with the glossary, and Monday's change found;
 // the pull request it opens, with the old words and the new and what they touch; Tuesday's reviews; Mei seeing where her words are used ----
@@ -119,7 +119,7 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
     op:c.opened-0.3,on:wAt(sc,"opened","the old words"),wt:wAt(sc,"opened","what the new words touch"),
     th:c.three-0.3,t1:wAt(sc,"three","Three tables"),t2:wAt(sc,"three","eight definitions"),t3:wAt(sc,"three","the code"),t4:wAt(sc,"three","three reports"),
     tu:c.tuesday-0.3,ap:wAt(sc,"tuesday","Mei approved"),cf:wAt(sc,"tuesday","data governance confirmed"),sw:c.saw-0.3,used:wAt(sc,"saw","where her words are used")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // every night, in the data team's room: nobody there, the screens lit
     {at:0,place:"dataNight",keys:[[0,1100,520,1.1],[0.1,1200,520,1.2]],d:3,draw:(x,tt)=>gm_nightMon(x,0)},
     // the check, on Jun's screen: award in the glossary beside the data team's copy, read line by line; on Monday night they differ
@@ -134,7 +134,7 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
       gu_filmTag(x,1770,170,"Who does what, end to end",fin(tt,P.tu+0.6,0.5),{align:"right"});}},
     // the registrar's office: Mei at her desk, and a thread from her screen to each place her words are used
     {at:P.sw,place:"registrar",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},bar:"GitHub · pull request",draw:gm_prSmall});
-      gm_touchTags(x,{u:[0,1,2,3].map(i=>fin(tt,P.used-0.4+0.25*i,0.9))});}}]);
+      gm_touchTags(x,{u:[0,1,2,3].map(i=>fin(tt,P.used-0.4+0.25*i,0.9))});}}],sc.dur));
   // the day, in the corner, only where no screen's bar is under it
   wc_year(ctx,56,72,"Tuesday morning",gv_io(t,P.sw+0.3,sc.dur,0.4));});
 
@@ -144,7 +144,7 @@ scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc
     kp:c.kept-0.3,set:wAt(sc,"kept","as a setting"),min:wAt(sc,"kept","min award credit points"),
     rd:c.reads-0.3,jun:wAt(sc,"reads","Jun's new column"),it:wAt(sc,"reads","reads it"),every:wAt(sc,"reads","every count of awards"),
     ag:c.agree-0.3,another:wAt(sc,"agree","another number"),line:wAt(sc,"agree","one line changes"),rev:wAt(sc,"agree","a reviewed pull request"),turn:sc.ends.agree+0.2}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // the sync's report again, on Jun's screen by day: the number in the new words, and its line on vars: a number may belong in one
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_varsReport(x,{six:fin(tt,P.six,0.5),vars:fin(tt,P.vars,0.6)})},
     // dbt_project.yml's vars: the setting the new words need, lit; under it, the setting as a dial at 6, on a thread from its line
@@ -161,7 +161,7 @@ scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc
     // request they review; then, without words, the needle turns to it and back
     {at:P.ag,place:"desk",keys:[[P.ag,960,500,1]],push:0.02,draw:(x,tt)=>{const b=Math.sin(Math.PI*easeCam(clamp((tt-P.turn)/2.4,0,1)));
       gm_dial(x,560,470,170,6+2*b,{label:"min_award_credit_points",mono:true,ghost:8,ga:fin(tt,P.another,0.6)*(1-b)});
-      gm_maybe(x,{a:fin(tt,P.line-0.2,0.6),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}]);});
+      gm_maybe(x,{a:fin(tt,P.line-0.2,0.6),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}],sc.dur));});
 
 // ---- 6 · Counted once: a count is a meaning too, a ledger with its rule; awards conferred, a metric view the project builds; its pull
 // request, tested and reviewed; the two reports that read it; and Planning's report giving up its own count ----
@@ -170,7 +170,7 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
     aw:wAt(sc,"what","count as an award"),by:wAt(sc,"what","by the year"),bd:wAt(sc,"builds","builds it"),rv:wAt(sc,"builds","is reviewed"),
     rd:c.reads-0.3,dr:wAt(sc,"reads","The draft submission"),cen:wAt(sc,"reads","Planning's census report"),
     ow:c.own-0.3,nei:wAt(sc,"own","Neither counts"),way:wAt(sc,"own","its own way")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // a ledger on Yusuf's desk: awards conferred, and its rule, a line at a time; this year's line
     {at:0,place:"deskGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_ledger(x,{r1:clamp((tt-P.which)/1.2,0,1),r2:clamp((tt-P.yr)/1.2,0,1),yr:clamp((tt-P.once)/1.2,0,1)})},
     // the metric view, as the project builds it: what it counts, lit as it's said; beside it, its pull request, tested and approved by
@@ -181,14 +181,14 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
     // the metric view's page in the catalog: its owner, and what reads it: the draft submission and Planning's census report
     {at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gm_lineage(x,tt,{own:gv_io(tt,P.rd+0.4,P.dr,0.4),r:[clamp((tt-P.dr)/1.0,0,1),clamp((tt-P.cen)/1.0,0,1)]})},
     // Planning's census report: its own count, struck through; the metric's, in its place
-    {at:P.ow,place:"bigPlan",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>gm_census(x,{x:clamp((tt-P.nei)/1.0,0,1),nw:fin(tt,P.way,0.7),lit:gv_io(tt,P.way+0.4,sc.dur,0.5)})}]);});
+    {at:P.ow,place:"bigPlan",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>gm_census(x,{x:clamp((tt-P.nei)/1.0,0,1),nw:fin(tt,P.way,0.7),lit:gv_io(tt,P.way+0.4,sc.dur,0.5)})}],sc.dur));});
 
 // ---- 7 · Agents read the same meaning: Clara asking Genie One how many awards; its answer, from the metric, citing award's page and
 // preferring it to its own guess; an agent the data team builds on the metric, with the same answer; one meaning, one number ----
 scene("agents",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cl:wAt(sc,"asks","Clara"),gq:wAt(sc,"asks","how many awards")-0.3,
     ans:c.answers,met:wAt(sc,"answers","from the metric"),cite:wAt(sc,"answers","cites award's page"),guess:wAt(sc,"prefers","its own guess"),shows:wAt(sc,"prefers","shows where"),
     bt:c.built-0.3,on:wAt(sc,"built","on the metric"),same:wAt(sc,"built","gives the same answer"),one:c.one-0.3,ppl:wAt(sc,"one","People"),ag:wAt(sc,"one","agents read")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // Planning: Clara at her wall screen, Genie One open on it, her question typed in
     {at:0,place:"planning",keys:[[0,900,480,1.08],[0.1,900,450,1.14]],d:4,draw:(x,tt)=>{gm_planWall(x,tt,{bar:"Databricks · Genie One",genie:gm_genieAsk(clamp((tt-P.cl-0.6)/1.6,0,1)),
       clara:{mix:fin(tt,P.cl+0.6,0.6)}});gu_nameCard(x,120,330,"Clara Jensen","Planning",gv_io(tt,P.cl-0.1,P.gq-0.2,0.4));}},
@@ -201,25 +201,25 @@ scene("agents",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cl:wAt(sc,"
     // the data team's agent: its data source is the metric; the same question, the same answer
     {at:P.bt,place:"big",keys:[[P.bt,960,540,1]],push:0.02,draw:(x,tt)=>gm_agent(x,tt,{src:gv_io(tt,P.on,P.same+1.0,0.5),q:clamp((tt-P.bt-0.2)/1.2,0,1),a:fin(tt,P.same,0.6)})},
     // on Yusuf's board: the page and the metric, and the three that read them, each saying 4,867
-    {at:P.one,place:"boardGov",keys:[[P.one,960,500,1]],push:0.02,draw:(x,tt)=>gm_oneNumber(x,tt,{u:[fin(tt,P.ppl,0.9),fin(tt,P.ag,0.9),fin(tt,P.ag+0.4,0.9)]})}]);});
+    {at:P.one,place:"boardGov",keys:[[P.one,960,500,1]],push:0.02,draw:(x,tt)=>gm_oneNumber(x,tt,{u:[fin(tt,P.ppl,0.9),fin(tt,P.ag,0.9),fin(tt,P.ag+0.4,0.9)]})}],sc.dur));});
 
 // ---- 8 · Three layers, one home each: on Noor's map, what a word means, how a number is counted and how things relate; each one's home,
 // and its copies, checked against it each night or built from it ----
 scene("layers",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({w:wAt(sc,"three","what a word means"),n:wAt(sc,"three","how a number is counted"),
     r:wAt(sc,"three","how things relate"),home:c.home,wl:c.words,gc:wAt(sc,"words","the glossary copies"),rl:c.relate,cp:wAt(sc,"relate","copied into the project"),
     ct:c.counts,mv:wAt(sc,"counts","serves as metric views"),ck:c.checked}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // the sheet pinned over Noor's map: a row for each layer; its home, lit as it's named, and its copies, threaded to it; then the ticks
     {at:0,place:"mapClose",keys:[[0,960,500,1]],push:0.03,draw:(x,tt)=>{const all=Math.max(1-fin(tt,P.wl,0.4),fin(tt,P.ck,0.4)),on=(a,b)=>0.3+0.7*Math.max(all,gv_io(tt,a,b,0.4));
       gm_layers(x,tt,{row:[fin(tt,P.w,0.6),fin(tt,P.n,0.6),fin(tt,P.r,0.6)],home:fin(tt,P.home,0.6),hw:[on(P.wl,P.rl),on(P.ct,P.ck),on(P.rl,P.ct)],
-        c:[clamp((tt-P.gc)/1.4,0,1),clamp((tt-P.mv)/0.9,0,1),clamp((tt-P.cp)/0.9,0,1)],ck:fin(tt,P.ck+0.3,0.8),tag:fin(tt,P.home+0.4,0.5)});}}]);});
+        c:[clamp((tt-P.gc)/1.4,0,1),clamp((tt-P.mv)/0.9,0,1),clamp((tt-P.cp)/0.9,0,1)],ck:fin(tt,P.ck+0.3,0.8),tag:fin(tt,P.home+0.4,0.5)});}}],sc.dur));});
 
 // ---- 9 · One meaning: Mei's words, used in every table, count and answer; the floor of offices, each reading what she decides;
 // submission day, both reports counted by the same metric with the same words; Yusuf's board again; the next film; the end card ----
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({tb:wAt(sc,"sees","every table"),ct:wAt(sc,"sees","count"),an:wAt(sc,"sees","answer"),
     dc:c.decides-0.3,once:wAt(sc,"decides","once"),car:wAt(sc,"decides","carries it everywhere"),dy:c.day-0.3,both:wAt(sc,"day","both say"),
     met:wAt(sc,"day","the same metric"),wd:wAt(sc,"day","the same words"),ls:c.last-0.3,board:c.breath-0.3,end:c.breath+1.6}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gm_run([
     // the registrar's office: Mei at her desk, award's page on her screen, and a thread to each table, count and answer her words reach
     {at:0,place:"registrar",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},draw:gm_meiTerm(0,0)});
       gm_used(x,tt,{u:[fin(tt,P.tb,0.9),fin(tt,P.ct,0.9),fin(tt,P.an,0.9),fin(tt,P.an+0.3,0.9)]});}},
@@ -232,6 +232,6 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({tb:wAt(sc,"s
     // Yusuf's board, as the film began it: one page, a setting and one count, read by people, reports and agents
     {at:P.ls,place:"boardGov",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gm_nowBoard(x,tt,{page:1,copy:1,check:1,cat:1,dial:1,book:1,read:[1,1,1],lit:gv_io(tt,P.ls+0.3,P.board,0.5)})},
     // the data team's board: the next film's card lifts
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,1],lift:[0,0,0,fin(tt,P.board+0.5,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,1],lift:[0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.dy+0.3,P.ls-0.2,0.4));
   gv_end(ctx,S,t,P.end,"Meaning on the platform","One meaning, read by people, reports and agents.","Film 3 of 6");});

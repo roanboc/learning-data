@@ -1,0 +1,187 @@
+WEBVTT
+
+00:00:01.200 --> 00:00:05.849
+Hoy, en la Facultad de Salud, Anil Kurian planea los cupos de la facultad.
+
+00:00:07.149 --> 00:00:12.593
+Su certificado de informática en salud termina con una práctica en un hospital, que se organiza con meses de antelación.
+
+00:00:14.293 --> 00:00:19.107
+Así que Anil calcula cuántos ofrecer: uno por cada estudiante a una unidad de terminar.
+
+00:00:20.807 --> 00:00:25.690
+En septiembre, la tabla con ese número no tenía dueño, y él no sabía a quién preguntar.
+
+00:00:26.390 --> 00:00:29.413
+Así que preguntó por ahí, y un colega le mandó una copia.
+
+00:00:30.913 --> 00:00:33.264
+Contaba un estudiante cerca del certificado.
+
+00:00:33.964 --> 00:00:40.463
+El informe del censo de Planificación, el conteo oficial de la universidad, decía dos, y nadie sabía cuál era el correcto.
+
+00:00:42.163 --> 00:00:47.529
+Así que la facultad ofreció un cupo, y un estudiante a una unidad de terminar habría esperado un semestre.
+
+00:00:49.229 --> 00:00:57.447
+Y la copia se quedó en su correo: un código por estudiante, que puede llevar a su nombre, enviada sin el sí de nadie y sin fecha de fin.
+
+00:00:59.347 --> 00:01:00.735
+Algo tenía que cambiar.
+
+00:01:02.435 --> 00:01:09.538
+Ahora los productos de datos de la universidad están en un solo catálogo, como un escaparate, cada uno con su promesa y su dueño.
+
+00:01:11.238 --> 00:01:16.585
+Encuentras lo que necesitas, lees lo que promete, y se lo pides a su dueño, diciendo por qué, y hasta cuándo.
+
+00:01:18.085 --> 00:01:21.971
+Esta mañana, Anil encontró el producto de Planificación en un minuto, y lo pidió.
+
+00:01:22.671 --> 00:01:27.238
+Clara, su dueña, dijo que sí esa misma tarde, hasta fines de enero.
+
+00:01:28.938 --> 00:01:31.757
+Su tabla coincide con el informe del censo: dos.
+
+00:01:32.457 --> 00:01:36.325
+Así que la facultad ofrece un segundo cupo, y nadie espera un semestre.
+
+00:01:37.825 --> 00:01:39.584
+Anil borró la copia vieja.
+
+00:01:47.084 --> 00:01:51.877
+El catálogo es Ontos, el proyecto de Databricks Labs que opera el equipo de plataforma.
+
+00:01:52.977 --> 00:01:57.915
+Su mercado muestra cada producto activo, cada uno con su dominio y su dueño.
+
+00:01:59.615 --> 00:02:03.150
+La universidad lo llama el mercado, aunque nada se vende.
+
+00:02:04.450 --> 00:02:07.518
+Anil escribe near award, una idea del mapa de Noor.
+
+00:02:09.018 --> 00:02:14.975
+El catálogo encuentra el producto enlazado a ella: Estudiantes cerca de un título, de Clara, en Planificación.
+
+00:02:18.075 --> 00:02:22.679
+Antes de pedirlo, Anil lee su promesa, de los archivos guardados en el proyecto.
+
+00:02:23.979 --> 00:02:27.138
+Para qué es: planear el apoyo a estudiantes cerca de un título.
+
+00:02:28.438 --> 00:02:32.410
+Cómo los cuenta, al día del censo, igual que el informe del censo.
+
+00:02:33.910 --> 00:02:35.655
+Cuándo está listo, y dónde preguntar.
+
+00:02:36.955 --> 00:02:39.164
+Y su contrato, columna por columna.
+
+00:02:40.464 --> 00:02:43.763
+Dos columnas tienen códigos que pueden llevar a un estudiante.
+
+00:02:45.463 --> 00:02:48.080
+Así que leerlo requiere un propósito, y una fecha de fin.
+
+00:02:51.380 --> 00:02:53.396
+Así que lo pide, en la página del producto.
+
+00:02:54.496 --> 00:02:57.600
+El formulario pide dos cosas: por qué, y por cuánto tiempo.
+
+00:02:58.900 --> 00:03:03.125
+Escribe: para planear los cupos del próximo semestre en la última unidad del certificado.
+
+00:03:04.825 --> 00:03:06.476
+Y pide noventa días.
+
+00:03:07.776 --> 00:03:12.759
+Si hubiera empezado en la plataforma, su botón de solicitud, en versión preliminar, también lo habría traído aquí.
+
+00:03:14.459 --> 00:03:16.393
+Cada solicitud llega a un solo lugar.
+
+00:03:19.893 --> 00:03:24.419
+La solicitud va a Clara, la dueña del producto, no a quien construyó la tabla.
+
+00:03:25.919 --> 00:03:29.384
+La gobernanza de datos promete una respuesta en cinco días hábiles.
+
+00:03:30.884 --> 00:03:32.567
+Ella responde esa misma tarde.
+
+00:03:33.867 --> 00:03:40.366
+Su razón es justo para lo que es el producto, así que dice que sí, por noventa días, hasta el 31 de enero.
+
+00:03:42.066 --> 00:03:45.311
+Podría haber dado menos días, o decir que no, con su razón.
+
+00:03:46.811 --> 00:03:51.702
+En cualquier caso, la solicitud es el registro: quién pidió, por qué, quién dijo que sí, y hasta cuándo.
+
+00:03:55.202 --> 00:03:58.025
+El acceso se da a un grupo, nunca a una persona.
+
+00:03:59.325 --> 00:04:05.945
+El sí de Clara pone a Anil en el grupo de lectores del producto, en el directorio de cuentas de la universidad, hasta su fecha.
+
+00:04:07.845 --> 00:04:12.267
+En la plataforma, ese grupo recibió la tabla una sola vez, cuando el producto se publicó.
+
+00:04:13.967 --> 00:04:16.778
+Una semana antes de la fecha, el catálogo se lo recuerda.
+
+00:04:18.478 --> 00:04:22.615
+En la fecha, el directorio lo saca del grupo, y su acceso termina.
+
+00:04:24.715 --> 00:04:27.872
+Clara puede ver a cada lector, por qué, y hasta cuándo.
+
+00:04:31.172 --> 00:04:36.989
+Anil también agrega el plan de prácticas de la facultad al registro de quién usa qué, en el proyecto.
+
+00:04:38.689 --> 00:04:46.253
+Así, cuando alguien cambie la tabla de Clara, el control de impacto nombra a la Facultad de Salud junto al tablero del censo.
+
+00:04:47.953 --> 00:04:50.023
+A los dos se les pregunta antes de que el cambio salga.
+
+00:04:51.523 --> 00:04:54.021
+Un lector conocido es un lector avisado.
+
+00:04:56.921 --> 00:04:59.771
+Fuera de la universidad, rigen las mismas reglas.
+
+00:05:01.071 --> 00:05:07.495
+Una universidad socia reconoce el certificado de la facultad en sus carreras, así que pide los Títulos de Mei:
+
+00:05:07.995 --> 00:05:12.557
+cada título, sus créditos y su facultad, y ningún dato personal de nadie.
+
+00:05:14.057 --> 00:05:22.327
+Mei dice que sí, y Sam lo comparte con OpenSharing, una forma abierta de compartir tablas con otra organización, en cualquier plataforma.
+
+00:05:24.027 --> 00:05:30.281
+La socia lee la tabla misma, no una copia, con una llave que vence en una fecha, y el mismo contrato.
+
+00:05:32.181 --> 00:05:39.909
+Las socias en Databricks también pueden encontrarlo en un intercambio privado del Databricks Marketplace: un escaparate solo para ellas.
+
+00:05:43.209 --> 00:05:47.573
+Esta mañana, Anil pidió en un minuto, y Clara respondió esa misma tarde.
+
+00:05:48.873 --> 00:05:54.727
+La facultad ofrece un cupo a cada estudiante a una unidad del certificado, así que nadie espera un semestre.
+
+00:05:56.227 --> 00:06:01.707
+La copia vieja ya no está, y el 31 de enero, su acceso termina solo.
+
+00:06:03.207 --> 00:06:06.720
+Y Clara sabe quién lee su tabla, por qué, y hasta cuándo.
+
+00:06:08.220 --> 00:06:11.030
+Encontrar y obtener datos es parte de la gobernanza de datos.

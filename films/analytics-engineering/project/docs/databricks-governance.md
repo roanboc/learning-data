@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -114,7 +114,43 @@ dbt compile --target databricks --profiles-dir . --select access_review
 The information schema shows someone with only `MANAGE` on a table just their own grants on it.
 If a grant you expect is missing, check the table with `SHOW GRANTS ON TABLE`.
 
-## Sources (checked 20 October 2026; the last six on 28 October 2026)
+## 8. Asking for a product
+
+How someone gets a product other teams read, as the university sets it up. Nothing here runs in the
+build: the catalogue keeps its own workflows, and the directory its groups (Noor's map: each piece
+where it lives).
+
+1. **A readers' group for each product.** Each product has a group in the university's directory,
+   named after it: `learners_near_an_award_readers`. The group holds `SELECT` on the product's output
+   tables from the day the product goes live, so access is granted once, to the group, never to a
+   person. For Planning's marts, the project grants it when the `planning_readers` var names the group:
+
+   ```bash
+   dbt build --target databricks --profiles-dir . --vars '{planning_readers: [learners_near_an_award_readers]}'
+   ```
+
+2. **One place to ask.** On the platform, the catalog's access request destination is a redirect URL
+   to the catalogue: someone who asks for a table on the platform goes to the catalogue's form instead
+   of the platform's. Unity Catalog's access requests are in Public Preview.
+3. **A request with a reason and an end.** In the catalogue, a request says why, and for how long:
+   30, 60 or 90 days, never without a date. It goes to the owners of the product's domain: for
+   *Learners near an award*, Clara Jensen, Planning (`governance/4-data-products/learners_near_an_award.yml`),
+   not whoever built the table. The owner decides the days, or says no, with a reason. The catalogue
+   keeps the request as the record: who asked, why, who decided, and until when.
+4. **Access until a date.** On a yes, the catalogue's workflow adds the requester to the product's
+   readers' group in the directory, until the date. It reminds them a week before, and on the date
+   the directory ends the membership: Unity Catalog's grants have no end date of their own.
+5. **A known reader.** A team that keeps using a product adds what it builds from it to `exposures/`,
+   in its own folder, as the Faculty of Health's placements plan is (`exposures/health/`). The impact
+   check then names it among who to tell, and `CODEOWNERS` asks it to review a change to its file.
+
+Outside the university, a product that holds no one's personal data, such as *Awards*, can be
+shared with a partner through OpenSharing: a share of its output tables, which the partner reads
+where they are, on any platform, with a recipient token that ends within a year, and its contract
+sent with it. A product that holds personal data isn't shared outside without an agreement that
+allows it.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; the last four on 29 October 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -131,3 +167,9 @@ If a grant you expect is missing, check the table with `SHOW GRANTS ON TABLE`.
 - Databricks Knowledge Base, *List users who executed SELECT command against a list of schemas using
   system access table* (a read is `getTable`): https://kb.databricks.com/en_US/unity-catalog/list-users-who-executed-select-command-against-a-list-of-schemas-using-system-access-table
 - Databricks, *TABLE_PRIVILEGES*: https://docs.databricks.com/aws/en/sql/language-manual/information-schema/table_privileges
+- Databricks, *Configure access request destinations* (Public Preview; a redirect URL):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/manage-privileges/access-request-destinations
+- Databricks, *What is OpenSharing?*: https://docs.databricks.com/aws/en/opensharing/
+- Databricks, *Create a recipient object for non-Databricks users using bearer tokens* (tokens valid for at most a year):
+  https://docs.databricks.com/aws/en/delta-sharing/create-recipient-token
+- Databricks Labs, Ontos, its access request workflows and their defaults: https://github.com/databrickslabs/ontos

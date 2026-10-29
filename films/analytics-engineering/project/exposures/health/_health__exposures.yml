@@ -1,0 +1,16 @@
+exposures:
+
+  - name: health_placements_plan
+    label: Health placements plan
+    type: analysis
+    maturity: medium
+    description: >
+      The Faculty of Health's plan of placements for next semester: how many hospital places to offer
+      in the last unit of each graduate certificate, one for each learner a unit from finishing, as at
+      census date. The faculty reads the mart through its product's readers' group, until a date; this
+      makes the faculty a known reader, so the lineage names it among who to tell.
+    owner:
+      name: Faculty of Health
+      email: health.data@uni.example
+    depends_on:
+      - ref('mart_planning__near_award')

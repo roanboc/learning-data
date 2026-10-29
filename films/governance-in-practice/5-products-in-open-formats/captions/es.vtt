@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00:01.200 --> 00:00:05.178
+Hoy, en la sala de Noor, Noor y Clara revisan el producto de Clara.
+
+00:00:06.478 --> 00:00:13.206
+Noor diseña los datos de la universidad y sus seis productos de datos: datos con una promesa, y un dueño que la cumple.
+
+00:00:14.906 --> 00:00:19.710
+El de Clara es el conteo de estudiantes cerca de un título, listo a las siete el día del censo.
+
+00:00:21.210 --> 00:00:27.969
+Pero las promesas se escribían a mano en un catálogo, donde la gente busca datos, y las tablas cambiaban cada semana.
+
+00:00:29.669 --> 00:00:33.503
+Así, el catálogo podía prometer una columna que la tabla ya no tenía.
+
+00:00:35.203 --> 00:00:41.620
+Y el día del censo, el informe de una facultad podía fallar cuando hace falta para planear los cupos del próximo semestre.
+
+00:00:43.520 --> 00:00:50.336
+Y cada catálogo guardaba sus promesas en su propio formato: cambia el catálogo, y cada promesa se escribe otra vez.
+
+00:00:52.036 --> 00:00:53.424
+Algo tenía que cambiar.
+
+00:00:55.124 --> 00:01:01.157
+Ahora cada promesa es un archivo, guardado con el código, en dos estándares abiertos que lee cualquier herramienta:
+
+00:01:01.357 --> 00:01:04.398
+uno para el producto, y otro para el contrato de su tabla.
+
+00:01:06.098 --> 00:01:12.858
+El contrato se escribe desde el propio código de la tabla, así que no pueden diferir, y un cambio que lo rompería se detiene.
+
+00:01:14.358 --> 00:01:21.038
+Cuando Jun agregó una columna a las credenciales, su contrato creció una línea, solo, y ningún informe se rompió.
+
+00:01:22.538 --> 00:01:27.140
+Las diez tablas que leen otros equipos tienen una promesa que se controla en cada cambio.
+
+00:01:28.440 --> 00:01:32.540
+Y sea cual sea el catálogo que las muestre, las promesas siguen siendo de la universidad.
+
+00:01:40.240 --> 00:01:43.261
+Cada producto empieza como un archivo corto que escribe su dueño.
+
+00:01:44.761 --> 00:01:47.799
+El de Clara dice para qué es el producto, y cómo usarlo.
+
+00:01:49.499 --> 00:01:57.392
+Nombra a Clara como dueña, la tabla que ofrece y sus niveles de servicio: construida cada noche, y lista a las siete el día del censo.
+
+00:01:59.292 --> 00:02:00.629
+Y dice dónde preguntar.
+
+00:02:02.129 --> 00:02:05.480
+El equipo de datos construye la tabla. Clara cumple la promesa.
+
+00:02:08.980 --> 00:02:12.038
+El contrato es la promesa sobre la tabla misma:
+
+00:02:12.238 --> 00:02:18.982
+cada columna, su tipo, si siempre está, si puede identificar a una persona, y las pruebas que debe pasar.
+
+00:02:21.082 --> 00:02:22.288
+Nadie lo escribe a mano.
+
+00:02:23.988 --> 00:02:31.544
+Lo escribe un script, desde el modelo, el código que construye la tabla, y el archivo del producto, en el Open Data Contract Standard.
+
+00:02:33.444 --> 00:02:37.498
+Lado a lado, cada línea del modelo tiene su línea en el contrato.
+
+00:02:39.598 --> 00:02:46.122
+En cada solicitud de cambio, un control falla si se han desviado, o si el contrato rompe las reglas del estándar.
+
+00:02:49.122 --> 00:02:50.966
+No toda tabla es un producto.
+
+00:02:52.266 --> 00:02:59.277
+De las treinta y tres tablas del equipo de datos, otros equipos leen diez, y cada una está en uno solo de seis productos.
+
+00:03:01.177 --> 00:03:02.935
+El mismo script también lo controla.
+
+00:03:04.035 --> 00:03:10.122
+Una tabla nueva que leen otros equipos, sin producto, detiene su solicitud de cambio hasta que un producto la incluya.
+
+00:03:13.222 --> 00:03:16.723
+Cuando un modelo cambia, su contrato lo sigue, solo.
+
+00:03:17.823 --> 00:03:19.822
+Pero algunos cambios rompen a sus lectores.
+
+00:03:20.922 --> 00:03:27.259
+Renombra una columna de la tabla de Clara, y el control de impacto falla: rompe, así que necesita una versión nueva.
+
+00:03:28.759 --> 00:03:33.130
+Así, la versión vieja se queda, con una fecha de retiro, y la nueva va a su lado.
+
+00:03:34.430 --> 00:03:43.933
+Las credenciales ya tienen dos: la primera se retira el 31 de marzo de 2027, y su contrato dice que es obsoleta, de salida.
+
+00:03:45.033 --> 00:03:47.972
+Mejor aún, agrega: una columna nueva no rompe a nadie.
+
+00:03:50.672 --> 00:03:58.437
+Cada producto dice también quién lo lee, del registro de quién usa qué: el tablero del censo de Planificación lee la tabla de Clara.
+
+00:04:00.337 --> 00:04:05.316
+Y nombra de qué está hecho: dos productos de Mei, los expedientes de estudiantes y los títulos.
+
+00:04:07.016 --> 00:04:11.078
+Así, cuando uno de ellos cambia, Mei sabe a quién avisar, antes de que salga nada.
+
+00:04:14.578 --> 00:04:20.423
+Los dos archivos usan estándares abiertos: uno para productos de datos, otro para contratos de datos.
+
+00:04:21.723 --> 00:04:27.061
+Los mantiene Bitol, en la Linux Foundation: libres para que cualquiera los use, y con versiones.
+
+00:04:28.561 --> 00:04:34.026
+Las herramientas que los conocen leen los archivos, y un control exige a cada archivo las reglas del estándar.
+
+00:04:35.526 --> 00:04:40.738
+El proyecto guarda las versiones que su catálogo lee hoy, y cambia cuando cambia el catálogo.
+
+00:04:43.638 --> 00:04:48.379
+En la plataforma, el catálogo de la universidad es Ontos, de Databricks Labs.
+
+00:04:49.879 --> 00:04:55.701
+Importa cada contrato desde su archivo, y ordena los productos por dominio, cada uno con su equipo.
+
+00:04:57.401 --> 00:05:00.100
+Un responsable de datos revisa un producto antes de que se publique.
+
+00:05:01.600 --> 00:05:08.008
+Cada noche, una política revisa cada producto: a uno activo sin dueño se le pone una etiqueta, y se avisa a gobernanza.
+
+00:05:09.708 --> 00:05:13.044
+Y puede enlazar cada columna con el término de negocio que contiene.
+
+00:05:14.544 --> 00:05:18.324
+Pero un proyecto de Labs viene tal como es, sin soporte formal.
+
+00:05:19.824 --> 00:05:24.243
+Por eso los archivos se quedan en su hogar, en el proyecto, y el catálogo guarda una copia.
+
+00:05:27.343 --> 00:05:35.305
+En el censo del próximo marzo, una facultad abrirá el producto de Clara en el catálogo, leerá su promesa y planeará con él a las siete.
+
+00:05:37.005 --> 00:05:40.195
+Si para entonces el catálogo cambió, la promesa no:
+
+00:05:40.395 --> 00:05:46.415
+es un archivo, en un formato abierto, guardado con el código, y cualquier herramienta que conozca el estándar lo lee.
+
+00:05:48.315 --> 00:05:51.074
+Un contrato en un formato abierto dura más que la herramienta.

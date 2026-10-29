@@ -1,0 +1,34 @@
+{
+  "kicker": "Open standards",
+  "kicker_es": "Estándares abiertos",
+  "title_es": "Productos en formatos abiertos",
+  "h1": "Products in open formats: promises that outlive tools",
+  "h1_es": "Productos en formatos abiertos: promesas que perduran",
+  "lead": "At the university, product promises were typed by hand into a catalogue, so they could drift from their tables and break a faculty's report on census day. Now each promise is a file in an open standard, its contract written from the model's code and checked on every change; the catalogue reads a copy.",
+  "lead_es": "En la universidad, las promesas se escribían a mano en un catálogo, así que podían alejarse de sus tablas y romper el informe de una facultad el día del censo. Ahora cada promesa es un archivo en un estándar abierto, con su contrato escrito desde el código del modelo y controlado en cada cambio; el catálogo lee una copia.",
+  "description": "A film about data products in open formats, the fifth of Governance you can use: why a promise typed by hand into a catalogue drifts from its table; the product's file, which its owner writes, with what it's for, the table it offers and its service levels; the contract, written by a script from the model and the product's file in the Open Data Contract Standard, and the check that stops the two drifting apart; every table other teams read, in exactly one product; a breaking change stopped, and a new version beside the old one, with a date to go; who reads each product, and what it's built from; the two open standards, kept by Bitol at the Linux Foundation; and Ontos, a catalogue on the platform from Databricks Labs, which holds a copy while the files stay in the project.",
+  "description_es": "Una película sobre productos de datos en formatos abiertos, la quinta de Gobernanza que puedes usar: por qué una promesa escrita a mano en un catálogo se aleja de su tabla; el archivo del producto, que escribe su dueño, con para qué es, la tabla que ofrece y sus niveles de servicio; el contrato, escrito por un script desde el modelo y el archivo del producto en el Open Data Contract Standard, y el control que impide que se desvíen; cada tabla que leen otros equipos, en un solo producto; un cambio que rompe, detenido, y una versión nueva junto a la vieja, con una fecha de retiro; quién lee cada producto, y de qué está hecho; los dos estándares abiertos, que mantiene Bitol en la Linux Foundation; y Ontos, un catálogo en la plataforma de Databricks Labs, que guarda una copia mientras los archivos se quedan en el proyecto.",
+  "card": "Product files written by their owners, contracts written from the models, a check on every change, and open standards.",
+  "card_es": "Archivos de producto escritos por sus dueños, contratos escritos desde los modelos, un control en cada cambio y estándares abiertos.",
+  "chapters_es": {
+    "promise": "Una promesa en un archivo",
+    "owner": "Escrito por su dueña",
+    "contract": "El contrato, a partir del modelo",
+    "shared": "Cada tabla compartida, en un producto",
+    "break": "Un cambio que lo rompería",
+    "readers": "Quién lo lee",
+    "open": "Estándares abiertos",
+    "catalogue": "Un catálogo sobre la plataforma",
+    "close": "Dura más que la herramienta"
+  },
+  "past": [
+    "Today, in Noor's room: Clara's product and its promise",
+    "A contract in an open format outlives the tool."
+  ],
+  "past_es": [
+    "Hoy, en la sala de Noor: el producto de Clara y su promesa",
+    "Un contrato en un formato abierto dura más que la herramienta."
+  ],
+  "next_h": "You've seen products in open formats: files their owners write, contracts written from the models, open standards, and a catalogue that holds a copy. More films in the series are on the way.",
+  "next_h_es": "Viste los productos en formatos abiertos: archivos que escriben sus dueños, contratos escritos desde los modelos, estándares abiertos y un catálogo que guarda una copia. Vienen más películas de la serie."
+}

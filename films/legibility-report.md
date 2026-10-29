@@ -73,6 +73,7 @@
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
+| Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
 | A capability, not a project | 400 | 0% | 0 | 30.0 | Drawn to the rule |
 | Who does what, end to end | 496 | 0% | 0 | 30.0 | Drawn to the rule |
 | Where each piece lives | 327 | 0% | 0 | 30.1 | Drawn to the rule |

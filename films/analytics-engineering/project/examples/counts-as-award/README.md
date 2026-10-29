@@ -43,3 +43,6 @@ python scripts/check/impact.py --base before-tuesday --base-manifest base/manife
 Then `git am "$example/counts_as_award.patch"`, parse, and run the impact check the same way. For
 the sketch, tag the second draft `column-added`, parse it into `base` again, apply
 `renamed.patch`, parse, and run the check with `--base column-added`: it exits with 1.
+
+*Meaning on the platform* goes on from here, with the glossary sync and a metric view that reads
+`counts_as_award`: `../award-redefined/`.

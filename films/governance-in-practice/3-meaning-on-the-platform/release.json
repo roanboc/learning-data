@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Meaning on the platform",
+    "key": "meaning-on-the-platform-en",
+    "dir": "films/governance-in-practice/3-meaning-on-the-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/meaning-on-the-platform/film.js",
+    "video": "dist/meaning-on-the-platform.mp4",
+    "file": "meaning-on-the-platform.mp4",
+    "captions": [
+      [
+        "films/governance-in-practice/3-meaning-on-the-platform/captions/en.srt",
+        "meaning-on-the-platform.en.srt"
+      ],
+      [
+        "films/governance-in-practice/3-meaning-on-the-platform/captions/es.srt",
+        "meaning-on-the-platform.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-in-practice/3-meaning-on-the-platform/source",
+      ":(exclude)films/governance-in-practice/3-meaning-on-the-platform/source/src/i18n/es/captions.js",
+      "films/governance-in-practice/shared",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 592,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.6,
+      "status": "Drawn to the rule"
+    }
+  }
+]

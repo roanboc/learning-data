@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Meaning on the platform, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (copy, sync, agents), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "copy":{q:"La descripción de una tabla en el catálogo no coincide con la página de título. ¿Dónde se corrige?",
+    opts:[{t:"En el catálogo, editando la descripción de la tabla."},{t:"En la página de título en la plataforma, donde la gente la lee."},{t:"En su lugar de origen, el término en el mapa de Noor. La página, la copia del equipo de datos y las descripciones del catálogo lo siguen, en un solo sentido.",ok:true}],
+    why:"Cada copia fluye en un solo sentido desde su lugar: el mapa publica el término en el glosario, la sincronización nocturna pone al día la copia del equipo de datos, y cada construcción escribe las descripciones en el catálogo. Un cambio hecho en el catálogo se pierde en la siguiente construcción, y uno hecho en la página, en la siguiente publicación. Donde trabajas, ¿dónde se cambia una definición, y hasta dónde llega el cambio por sí solo?"},
+  "sync":{q:"El lunes por la noche, la sincronización encuentra que las palabras de título cambiaron. ¿Por qué propone el cambio en una solicitud de cambio, en vez de actualizar la copia por sí sola?",
+    opts:[{t:"Porque un significado nuevo puede cambiar lo que se cuenta: Mei lo aprueba y gobernanza de datos confirma el término, con todo lo que tocan las palabras nuevas a la vista.",ok:true},{t:"Porque la sincronización no tiene permiso para escribir archivos."},{t:"Porque cada ejecución nocturna necesita una solicitud de cambio."}],
+    why:"Las palabras nuevas tienen un número y nombran otro tipo de credencial, así que pueden mover cifras que van al gobierno. La solicitud de cambio pone las palabras viejas y las nuevas junto a lo que tocan, tres tablas, ocho definiciones, el código y tres informes, para que la dueña decida viendo las consecuencias, y se avise a quienes los usan. Donde trabajas, ¿quién ve un cambio de significado antes de que llegue a las cifras?"},
+  "agents":{q:"Genie One dice que este año se otorgaron 4,867 títulos. ¿Por qué es la misma cifra que la del informe del censo?",
+    opts:[{t:"Aprendió la cifra de los documentos de la universidad."},{t:"Lee la misma vista de métricas, títulos otorgados, y cita la página de título para decir qué es un título, en vez de adivinar a partir de las tablas.",ok:true},{t:"Clara compara cada respuesta con el informe del censo."}],
+    why:"Un asistente que adivina a partir de las tablas y los nombres de las columnas elige un significado propio, como hacían los informes de antes. Aquí el conteo se define una vez, como vista de métricas, y el significado tiene una sola página, así que personas, informes y agentes leen la misma regla y obtienen la misma cifra, y la respuesta muestra de dónde salió. Donde trabajas, ¿qué leería un asistente para responder \"cuántos\"?"}
+  }}};

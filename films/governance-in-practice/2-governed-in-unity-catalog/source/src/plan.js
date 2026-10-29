@@ -11,6 +11,17 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const gc_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// shots in a row in the same place share one camera, so a dissolve between them never lays the place over itself at another size or
+// framing: if each holds still, one slow push over the whole run; if one moves, all follow the same keys. hold: no push on the last
+// run, when the next chapter opens in the same place
+function gc_run(shots,end,hold){const out=shots.map(s=>Object.assign({},s));
+  for(let i=0;i<out.length;){let j=i;while(j+1<out.length&&out[j+1].place===out[i].place)j++;const R=out.slice(i,j+1),last=j===out.length-1;
+    if(j>i||(hold&&last)){const t1=last?end:out[j+1].at,keys=[].concat(...R.map(s=>s.keys)).sort((a,b)=>a[0]-b[0]),k0=keys[0],
+        still=keys.every(k=>k[1]===k0[1]&&k[2]===k0[2]&&k[3]===k0[3]),push=hold&&last?0:R[0].push==null?0.025:R[0].push;
+      const cam=still?{keys:[k0,[k0[0]+0.01,k0[1],k0[2],k0[3]*(1+push)]],d:Math.max(1.4,t1-k0[0]),push:0}:{keys,d:Math.max(...R.map(s=>s.d||1.6)),push:0};
+      R.forEach(s=>Object.assign(s,cam));}
+    i=j+1;}
+  return out;}
 // a pencil line under words, drawn on as p goes 0 to 1
 function gc_under(ctx,x,y,w,p,col){if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(col||WC_PENCIL,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x,y);
   const n=16,e=easeCam(clamp(p,0,1));for(let i=1;i<=n;i++){const u=i/n*e;ctx.lineTo(x+w*u,y+2*Math.sin(u*9));}ctx.stroke();ctx.restore();}

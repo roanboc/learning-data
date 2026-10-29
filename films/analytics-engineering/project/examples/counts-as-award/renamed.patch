@@ -1,0 +1,63 @@
+From 058e7e513a0f8b84de541309e382927582e193c0 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:46 +0000
+Subject: [PATCH] Credentials: rename counts_as_award to is_award (a sketch: it
+ breaks the contract)
+
+---
+ .../project/models/core/student/_core_student__models.yml     | 4 ++--
+ .../project/models/core/student/_student__physical.md         | 2 +-
+ .../project/models/core/student/core_credential_v2.sql        | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/films/analytics-engineering/project/models/core/student/_core_student__models.yml b/films/analytics-engineering/project/models/core/student/_core_student__models.yml
+index 2f0e4ee7..6c92b3b1 100644
+--- a/films/analytics-engineering/project/models/core/student/_core_student__models.yml
++++ b/films/analytics-engineering/project/models/core/student/_core_student__models.yml
+@@ -207,7 +207,7 @@ models:
+         description: '{{ doc("credential_credit_points") }}'
+         data_type: int
+         config: {meta: {personal_data: none}}
+-      - name: counts_as_award
++      - name: is_award
+         description: >
+           True when the credential counts as an award: an award, or a microcredential of at least
+           min_award_credit_points (a var, 6 credit points).
+@@ -258,7 +258,7 @@ models:
+             warn_unenforced: false
+         columns:
+           - include: all
+-            exclude: [learner_bk, status, revoked_on, loaded_at, counts_as_award]
++            exclude: [learner_bk, status, revoked_on, loaded_at, is_award]
+           - name: is_revoked
+             description: True when the credential was revoked. Replaced by status in version 2.
+             data_type: boolean
+diff --git a/films/analytics-engineering/project/models/core/student/_student__physical.md b/films/analytics-engineering/project/models/core/student/_student__physical.md
+index c0b6a620..21b0e7ee 100644
+--- a/films/analytics-engineering/project/models/core/student/_student__physical.md
++++ b/films/analytics-engineering/project/models/core/student/_student__physical.md
+@@ -16,7 +16,7 @@ erDiagram
+         string credential_code
+         string credential_name
+         int credit_points
+-        boolean counts_as_award
++        boolean is_award
+         date issued_on
+         string status
+         date revoked_on
+diff --git a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
+index f94ada27..ccfab6e2 100644
+--- a/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
++++ b/films/analytics-engineering/project/models/core/student/core_credential_v2.sql
+@@ -45,7 +45,7 @@ select
+     credit_points,
+     credential_kind = 'award'
+         or (credential_kind = 'microcredential' and credit_points >= {{ var('min_award_credit_points') }})
+-        as counts_as_award,
++        as is_award,
+     issued_on,
+     status,
+     revoked_on,
+-- 
+2.43.0
+

@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for The marketplace, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (read, key, outside), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  "read":{q:"Two of the product's columns hold codes that can lead back to a learner. Why does that change how Anil gets it?",
+    opts:[{t:"It doesn't: the codes aren't names, so anyone at the university can read the table."},{t:"Codes that can lead back to a person are still personal data: reading them takes a purpose, an end date and the owner's yes. A product with no such columns could be open to everyone at the university.",ok:true},{t:"He can't have it at all: no table with personal data is ever shared outside the team that owns it."}],
+    why:"A code isn't a name, but with the registrar's list anyone can match it to one, so it's personal data, and the rule holds: a purpose, an end date, and the owner's yes. That's why the product's page shows each column's class before anyone asks. A product with no such columns, such as Mei's Awards, needs less. Where you work, can someone tell, before they ask, which columns can lead back to a person?"},
+  "key":{q:"The faculty's plan still needs the table after the 31st of January. What happens?",
+    opts:[{t:"Nothing: once he's in the readers' group, Anil stays in it until someone takes him out."},{t:"A week before, the catalogue reminds Anil. He asks again, saying why, and Clara decides again. Access never runs on by itself.",ok:true},{t:"The platform team moves the date on the table's grant to the end of the semester."}],
+    why:"Access goes to a group, and Anil's place in it has an end date, kept in the directory, which takes him out on the day. The grant on the table doesn't change: it belongs to the group. So a longer need is a new request, with its reason, and the owner decides again, as she did the first time. Where you work, what happens to someone's access when the work it was for is over?"},
+  "outside":{q:"A partner asks for Clara's product, not Mei's. What changes?",
+    opts:[{t:"Nothing: OpenSharing works the same for every table, so Sam shares it as he shared Awards."},{t:"Clara's holds codes that can lead back to a learner, so sharing it outside would need an agreement that allows it, for a purpose and until a date, and often less data: counts, not codes. Mei's holds no one's personal data.",ok:true},{t:"The partner gets a copy by email instead, so the university's table stays inside."}],
+    why:"OpenSharing changes how a table is shared, not what may be shared. Mei's Awards holds each award, its credit points and its faculty: no one's personal data. Clara's holds codes that can lead back to a learner, so the same rules as inside apply, with an agreement between the two universities, and the smallest data that answers the question, often counts by faculty. And never a copy by email. Where you work, what would you share with a partner, and what would you send as counts instead?"}
+  }}};

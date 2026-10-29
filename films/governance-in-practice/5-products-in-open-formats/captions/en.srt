@@ -1,0 +1,211 @@
+1
+00:00:01,200 --> 00:00:05,178
+Today, in Noor's room, Noor and Clara go over Clara's product.
+
+2
+00:00:06,478 --> 00:00:13,206
+Noor designs the university's data and its six data products: data with a promise, and an owner who keeps it.
+
+3
+00:00:14,906 --> 00:00:19,710
+Clara's is the count of learners near an award, ready by seven on census day.
+
+4
+00:00:21,210 --> 00:00:27,969
+But the promises were typed by hand into a catalogue, where people look for data, and the tables changed every week.
+
+5
+00:00:29,669 --> 00:00:33,503
+So the catalogue could promise a column the table no longer had.
+
+6
+00:00:35,203 --> 00:00:41,620
+And on census day, a faculty's report could break, just when it's needed to plan next semester's places.
+
+7
+00:00:43,520 --> 00:00:50,336
+And each catalogue kept its promises in its own format: change the catalogue, and every promise is typed again.
+
+8
+00:00:52,036 --> 00:00:53,424
+Something had to change.
+
+9
+00:00:55,124 --> 00:01:01,157
+Now each promise is a file, kept with the code, in two open standards that any tool can read:
+
+10
+00:01:01,357 --> 00:01:04,398
+one for the product, and one for its table's contract.
+
+11
+00:01:06,098 --> 00:01:12,858
+The contract is written from the table's own code, so the two can't disagree, and a change that would break it stops.
+
+12
+00:01:14,358 --> 00:01:21,038
+When Jun added a column to credentials, its contract grew by a line, by itself, and no report broke.
+
+13
+00:01:22,538 --> 00:01:27,140
+All ten tables other teams read have a promise that's checked on every change.
+
+14
+00:01:28,440 --> 00:01:32,540
+And whichever catalogue shows them, the promises stay the university's.
+
+15
+00:01:40,240 --> 00:01:43,261
+Each product starts as a short file its owner writes.
+
+16
+00:01:44,761 --> 00:01:47,799
+Clara's says what the product is for, and how to use it.
+
+17
+00:01:49,499 --> 00:01:57,392
+It names her as its owner, the table it offers, and its service levels: built every night, and ready by seven on census day.
+
+18
+00:01:59,292 --> 00:02:00,629
+And it says where to ask.
+
+19
+00:02:02,129 --> 00:02:05,480
+The data team builds the table. Clara keeps the promise.
+
+20
+00:02:08,980 --> 00:02:12,038
+The contract is the promise about the table itself:
+
+21
+00:02:12,238 --> 00:02:18,982
+each column, its type, whether it's always there, whether it can identify a person, and the tests it must pass.
+
+22
+00:02:21,082 --> 00:02:22,288
+Nobody types it.
+
+23
+00:02:23,988 --> 00:02:31,544
+A script writes it from the model, the code that builds the table, and from the product's file, in the Open Data Contract Standard.
+
+24
+00:02:33,444 --> 00:02:37,498
+Side by side, each line of the model has its line in the contract.
+
+25
+00:02:39,598 --> 00:02:46,122
+On every pull request, a check fails if they've drifted apart, or if the contract breaks the standard's rules.
+
+26
+00:02:49,122 --> 00:02:50,966
+Not every table is a product.
+
+27
+00:02:52,266 --> 00:02:59,277
+Of the data team's thirty-three tables, ten are read by other teams, and each is in exactly one of six products.
+
+28
+00:03:01,177 --> 00:03:02,935
+The same script checks that too.
+
+29
+00:03:04,035 --> 00:03:10,122
+A new table other teams read, in no product, stops its pull request until a product takes it in.
+
+30
+00:03:13,222 --> 00:03:16,723
+When a model changes, its contract follows, by itself.
+
+31
+00:03:17,823 --> 00:03:19,822
+But some changes break the readers.
+
+32
+00:03:20,922 --> 00:03:27,259
+Rename a column in Clara's table, and the impact check fails: it's breaking, so it needs a new version.
+
+33
+00:03:28,759 --> 00:03:33,130
+So the old version stays, with a date to go, and the new one goes beside it.
+
+34
+00:03:34,430 --> 00:03:43,933
+Credentials already has two: the first retires on the 31st of March 2027, and its contract says it's deprecated, on its way out.
+
+35
+00:03:45,033 --> 00:03:47,972
+Better still, add: a new column breaks nobody.
+
+36
+00:03:50,672 --> 00:03:58,437
+Each product also says who reads it, from the record of who uses what: Planning's census dashboard reads Clara's table.
+
+37
+00:04:00,337 --> 00:04:05,316
+And it names what it's built from: two of Mei's products, the learner records and the awards.
+
+38
+00:04:07,016 --> 00:04:11,078
+So when one of them changes, Mei knows who to tell, before anything ships.
+
+39
+00:04:14,578 --> 00:04:20,423
+Both files are written in open standards: one for data products, one for data contracts.
+
+40
+00:04:21,723 --> 00:04:27,061
+They're kept by Bitol, at the Linux Foundation: free for anyone to use, and versioned.
+
+41
+00:04:28,561 --> 00:04:34,026
+Tools that know them can read the files, and a check holds every file to the standard's rules.
+
+42
+00:04:35,526 --> 00:04:40,738
+The project keeps the versions its catalogue reads today, and moves when the catalogue does.
+
+43
+00:04:43,638 --> 00:04:48,379
+On the platform, the university's catalogue is Ontos, from Databricks Labs.
+
+44
+00:04:49,879 --> 00:04:55,701
+It imports each contract from its file, and lays the products out by domain, each with its team.
+
+45
+00:04:57,401 --> 00:05:00,100
+A steward reviews a product before it's published.
+
+46
+00:05:01,600 --> 00:05:08,008
+Each night, a policy checks every product: an active one with no owner is tagged, and governance is told.
+
+47
+00:05:09,708 --> 00:05:13,044
+And it can link each column to the business term it holds.
+
+48
+00:05:14,544 --> 00:05:18,324
+But a Labs project comes as it is, with no formal support.
+
+49
+00:05:19,824 --> 00:05:24,243
+So the files stay at home, in the project, and the catalogue holds a copy.
+
+50
+00:05:27,343 --> 00:05:35,305
+On census day next March, a faculty will open Clara's product in the catalogue, read its promise, and plan from it by seven.
+
+51
+00:05:37,005 --> 00:05:40,195
+If the catalogue has changed by then, the promise hasn't:
+
+52
+00:05:40,395 --> 00:05:46,415
+it's a file, in an open format, kept with the code, and any tool that knows the standard can read it.
+
+53
+00:05:48,315 --> 00:05:51,074
+A contract in an open format outlives the tool.

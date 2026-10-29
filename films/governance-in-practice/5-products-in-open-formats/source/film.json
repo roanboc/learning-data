@@ -1,0 +1,26 @@
+{
+  "key": "products-in-open-formats",
+  "title": "Products in open formats",
+  "sub": "Film 5 of 6 of Governance you can use: products in open formats. Each product's promise is a file its owner writes; its contract is written from the model's code, in an open standard; a check stops a change that would break it; and a catalogue on the platform reads a copy.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. Each product keeps one colour on every card, bundle and file, and its owner's chip is gold. Files are paper sheets, copied from the example project: a pencil marks a file written by hand, a small tag one a script writes. The catalogue's pages are drawn as forms.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "close",
+    "march",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bBitol\\b",
+      "Bee-toll"
+    ],
+    [
+      "\\bOntos\\b",
+      "Ontoss"
+    ]
+  ]
+}

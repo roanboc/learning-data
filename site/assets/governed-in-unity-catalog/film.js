@@ -2762,6 +2762,17 @@ function gu_pinAt(i,x,y,w,h){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h);return
 
 // made once per chapter, the first time it draws: its cues are known by then
 const gc_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+// shots in a row in the same place share one camera, so a dissolve between them never lays the place over itself at another size or
+// framing: if each holds still, one slow push over the whole run; if one moves, all follow the same keys. hold: no push on the last
+// run, when the next chapter opens in the same place
+function gc_run(shots,end,hold){const out=shots.map(s=>Object.assign({},s));
+  for(let i=0;i<out.length;){let j=i;while(j+1<out.length&&out[j+1].place===out[i].place)j++;const R=out.slice(i,j+1),last=j===out.length-1;
+    if(j>i||(hold&&last)){const t1=last?end:out[j+1].at,keys=[].concat(...R.map(s=>s.keys)).sort((a,b)=>a[0]-b[0]),k0=keys[0],
+        still=keys.every(k=>k[1]===k0[1]&&k[2]===k0[2]&&k[3]===k0[3]),push=hold&&last?0:R[0].push==null?0.025:R[0].push;
+      const cam=still?{keys:[k0,[k0[0]+0.01,k0[1],k0[2],k0[3]*(1+push)]],d:Math.max(1.4,t1-k0[0]),push:0}:{keys,d:Math.max(...R.map(s=>s.d||1.6)),push:0};
+      R.forEach(s=>Object.assign(s,cam));}
+    i=j+1;}
+  return out;}
 // a pencil line under words, drawn on as p goes 0 to 1
 function gc_under(ctx,x,y,w,p,col){if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(col||WC_PENCIL,0.9);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x,y);
   const n=16,e=easeCam(clamp(p,0,1));for(let i=1;i<=n;i++){const u=i/n*e;ctx.lineTo(x+w*u,y+2*Math.sin(u*9));}ctx.stroke();ctx.restore();}
@@ -3297,7 +3308,7 @@ scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({sam:wAt(sc,"
     board:c.breath-0.3,title:c.breath+1.2})),
     // the order the tags land in: the three direct columns as "identify a person" is said, then the code, then the status
     LAND=[0.8,0.4,0.2,0,1.2];
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the platform team's room, today: Sam at his desk, Yusuf standing behind him; Yusuf asks who can read the learner table
     {at:0,place:"platform",keys:[[0,960,540,1],[0.1,1000,530,1.05]],d:4,draw:(x,tt)=>{gc_room(x,tt);
       gu_nameCard(x,1000,676,"Sam Okafor","data platform",gv_io(tt,P.sam,P.yus-0.2,0.4));gu_nameCard(x,980,110,"Yusuf Demir","data governance lead",gv_io(tt,P.yus+0.1,P.tab+0.4,0.4));
@@ -3335,7 +3346,7 @@ scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({sam:wAt(sc,"
     {at:P.min,place:"platform",keys:[[P.min,1000,500,1.06]],push:0.02,draw:(x,tt)=>{gc_room(x,tt,{sam:{expr:"smile"},yusuf:{expr:tt>P.which?"smile":"calm"}});
       gc_bubble(x,fin(tt,P.min+0.2,0.35),0.92+0.08*spring(fin(tt,P.min+0.2,0.5)),fin(tt,P.which,0.8));}},
     // the board, close: the series' six cards; the second lights and lifts, and becomes the title
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,fin(tt,P.board+0.3,0.8)],lift:[0,fin(tt,P.board+1.0,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.title+0.8)gu_board(x,{lit:[0,fin(tt,P.board+0.3,0.8)],lift:[0,fin(tt,P.board+1.0,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Today",gv_io(t,0.3,P.tab-0.3,0.4));wc_year(ctx,56,72,"Until now",gv_io(t,P.hand+0.4,P.forty-0.2,0.4));
   gv_title(ctx,S,t,P.title,"Governed in Unity Catalog","access, masks and audit on the platform","Film 2 of 6 · data governance");});
 
@@ -3345,7 +3356,7 @@ scene("area",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({tabs:wAt(sc,"
     tag:c.tag,as:wAt(sc,"tag","as a tag"),dom:wAt(sc,"tag","from the domain"),names:wAt(sc,"tag","names"),
     disc:c.discover-0.3,lays:wAt(sc,"discover","lays the tables"),ar:["student","course","planning","finance"].map(s=>wAt(sc,"discover",s)),more:wAt(sc,"discover","and more"),
     gr:c.grant-0.3,grp:wAt(sc,"grant","goes to a group"),nv:wAt(sc,"grant","never to a person")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the university's catalog, as a cabinet: a drawer for each layer the project builds; but people don't look by layer; the learner
     // table lifts, its area on a tag beside it, from the domain its model names
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const lift=fin(tt,P.tag,0.8);gc_cabinet(x,tt,{dr:[0,1,2,3,4].map(i=>fin(tt,P.tabs+0.25*i,0.6)),lab:gv_io(tt,P.sch,c.people,0.5),learner:lift});
@@ -3357,7 +3368,7 @@ scene("area",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({tabs:wAt(sc,"
       gc_discover(x,tt,{tile:[0,1,2,3,4,5].map(k=>fin(tt,P.lays+0.12*k,0.5)),fill:[0,1,2,3,4,5].map(k=>clamp((tt-on(k)+0.1)/0.7,0,1)),
         lit:[0,1,2,3,4,5].map(k=>gv_io(tt,on(k)-0.1,on(k)+1.0,0.3))});}},
     // the learner table's grants: each to a group; never to a person
-    {at:P.gr,place:"big",keys:[[P.gr,960,540,1]],push:0.02,draw:(x,tt)=>gc_perms(x,tt,{rows:[fin(tt,P.grp,0.5),fin(tt,P.grp+0.3,0.5),0],clara:fin(tt,P.nv-0.2,0.6),off:clamp((tt-P.nv-1.4)/1.0,0,1),claraAt:2})}]);});
+    {at:P.gr,place:"big",keys:[[P.gr,960,540,1]],push:0.02,draw:(x,tt)=>gc_perms(x,tt,{rows:[fin(tt,P.grp,0.5),fin(tt,P.grp+0.3,0.5),0],clara:fin(tt,P.nv-0.2,0.6),off:clamp((tt-P.nv-1.4)/1.0,0,1),claraAt:2})}],sc.dur));});
 
 // ---- 3 · A tag from the class: the classes in the project; dbt writing each as a tag; the governed tag, with its three values; a class
 // changed, and the next build; and, for tables the project doesn't build, the classifier ----
@@ -3367,7 +3378,7 @@ scene("tag",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({cs:wAt(sc,"cla
     nx:c.next-0.3,chg:wAt(sc,"next","Change a class"),nb:wAt(sc,"next","the next build"),ct:wAt(sc,"next","changes the tag"),
     cl:c.classifier-0.3,finds:wAt(sc,"classifier","finds columns"),owner:wAt(sc,"classifier","their owner"),toClass:wAt(sc,"classifier","to class")})),
     LAND=[0.6,0.3,0.15,0,0.9];
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the learner table's columns in the project, each with its class (Who may see it's)
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{gc_classSheet(x,tt,clamp((tt-0.2)/0.9,0,1),[fin(tt,P.d,0.5),fin(tt,P.p,0.5),fin(tt,P.n,0.5)],[P.d,P.p,P.n]);
       gu_filmTag(x,1840,846,"Who may see it",fin(tt,P.cs,0.5),{align:"right"});}},
@@ -3382,7 +3393,7 @@ scene("tag",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({cs:wAt(sc,"cla
     // a class changed in the project, and the next build changes the tag
     {at:P.nx,place:"desk",keys:[[P.nx,960,500,1]],push:0.02,draw:(x,tt)=>{x.save();x.translate(0,110);gc_change(x,tt,{ch:clamp((tt-P.chg)/1.0,0,1),arrow:clamp((tt-P.nb)/0.8,0,1),next:clamp((tt-P.ct)/1.0,0,1)});x.restore();}},
     // a table the project doesn't build: the classifier's suggestion, for its owner to class
-    {at:P.cl,place:"big",keys:[[P.cl,960,540,1]],push:0.02,draw:(x,tt)=>gc_survey(x,tt,{sug:fin(tt,P.finds,0.6),own:fin(tt,P.owner,0.6),cls:clamp((tt-P.toClass-0.2)/0.8,0,1)})}]);});
+    {at:P.cl,place:"big",keys:[[P.cl,960,540,1]],push:0.02,draw:(x,tt)=>gc_survey(x,tt,{sug:fin(tt,P.finds,0.6),own:fin(tt,P.owner,0.6),cls:clamp((tt-P.toClass-0.2)/0.8,0,1)})}],sc.dur,1));});
 
 // ---- 4 · One policy, by tag: the policy's page; every table, even tomorrow's; a row filter, the other kind; Clara's stars; and who sees
 // the values ----
@@ -3392,7 +3403,7 @@ scene("policy",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({masks:wAt(s
     rw:c.rows-0.3,filter:wAt(sc,"rows","filter rows"),one:wAt(sc,"rows","this one masks"),
     cl:c.clara-0.3,sees:wAt(sc,"clara","and sees")-0.3,status:wAt(sc,"clara","status"),stars:wAt(sc,"clara","stars"),
     val:c.values-0.3,sv:wAt(sc,"values","sees the values"),ident:wAt(sc,"values","the identity")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the policy's page: what it masks, when, in the whole catalog, for everyone but the registrar's office
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_policy(x,tt,{lit:[fin(tt,P.every,0.5),fin(tt,P.but,0.5),fin(tt,P.tagged,0.5),fin(tt,P.masks,0.5)],sub:fin(tt,P.whole,0.5)})},
     // not table by table: a lock on each table gives way to the one policy; a table built tomorrow is masked as soon as it's tagged
@@ -3408,21 +3419,21 @@ scene("policy",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({masks:wAt(s
       masked:true,mask:1,lit:[0,fin(tt,P.status,0.5),fin(tt,P.stars,0.5),fin(tt,P.stars+0.2,0.5)]})},
     // the registrar's office sees the values, and so does the build's identity
     {at:P.val,place:"bigReg",keys:[[P.val,960,540,1]],push:0.02,draw:(x,tt)=>{gc_query(x,tt,{title:"Mei's query",sub:"Mei Tanaka · registrar's office",lit:[0,0,fin(tt,P.sv,0.5),fin(tt,P.sv+0.2,0.5)]});
-      gc_buildCard(x,1200,112,fin(tt,P.ident,0.6));}}]);});
+      gc_buildCard(x,1200,112,fin(tt,P.ident,0.6));}}],sc.dur));});
 
 // ---- 5 · The scrambled key: the student number through sha-256; the same code in every table; scrambled isn't anonymous; the registrar's
 // list matched; still personal, readable for counting, with a purpose and an end date ----
 scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({sn:wAt(sc,"code","the student number"),scr:wAt(sc,"code","scrambled"),every:wAt(sc,"code","in every table"),
     join:wAt(sc,"code","joined"),anon:wAt(sc,"anon","anonymous"),ls:c.list-0.3,run:wAt(sc,"list","scramble every number"),match:wAt(sc,"list","match them"),
     st:c.still-0.3,still:wAt(sc,"still","still personal"),count:wAt(sc,"still","for counting"),purpose:wAt(sc,"still","a purpose")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the machine: the student number in, the code out, the same in three tables, joined without names; "anonymous" struck through
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gc_scramble(x,tt,{in:clamp((tt-P.sn+0.2)/1.2,0,1),out:clamp((tt-P.scr)/1.0,0,1),tables:clamp((tt-P.every)/1.2,0,1),
       same:fin(tt,P.join-0.4,0.6),join:clamp((tt-P.join)/1.2,0,1),anon:clamp((tt-P.anon)/1.2,0,1)})},
     // the registrar's list through the same machine: one code matches a row Clara sees, and says who that is
     {at:P.ls,place:"desk",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gc_regList(x,tt,{run:clamp((tt-P.run)/2.0,0,1),match:clamp((tt-P.match+0.3)/0.6,0,1),who:clamp((tt-P.match-0.2)/0.8,0,1)})},
     // Planning's list: still personal; counted; and what reading it takes
-    {at:P.st,place:"bigPlan",keys:[[P.st,960,540,1]],push:0.02,draw:(x,tt)=>gc_nearList(x,tt,{still:fin(tt,P.still,0.6),count:clamp((tt-P.count)/1.2,0,1),card:fin(tt,P.purpose,0.6)})}]);});
+    {at:P.st,place:"bigPlan",keys:[[P.st,960,540,1]],push:0.02,draw:(x,tt)=>gc_nearList(x,tt,{still:fin(tt,P.still,0.6),count:clamp((tt-P.count)/1.2,0,1),card:fin(tt,P.purpose,0.6)})}],sc.dur));});
 
 // ---- 6 · Groups, with an end date: Mei's yes, on the form; a grant to the Planning group, not to Clara; the directory, its drawers,
 // and its sync; someone changing jobs; and Clara's card leaving on 15 December ----
@@ -3431,7 +3442,7 @@ scene("groups",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({top:c.yes-0
     join:wAt(sc,"joins","and Clara joins")-0.3,dir:wAt(sc,"joins","the university's directory"),date:wAt(sc,"joins","until that date"),
     reads:wAt(sc,"reads","reads its groups"),jobs:wAt(sc,"jobs","changes jobs"),moves:wAt(sc,"jobs","moves them"),follows:wAt(sc,"jobs","access follows"),
     ends:wAt(sc,"ends","ends by itself")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the registrar's office: Mei, with Clara's request
     {at:0,place:"registrar",keys:[[0,900,540,1],[0.1,940,520,1.06]],d:3,draw:(x,tt)=>{gc_regRoom(x,tt);gu_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,0.4,P.top-0.3,0.4));}},
     // the request, on the university's form: Mei's yes, for a purpose, until a date (Who may see it's form)
@@ -3445,7 +3456,7 @@ scene("groups",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({top:c.yes-0
     {at:P.join,place:"index",keys:[[P.join,960,540,1]],push:0.02,draw:(x,tt)=>{const sy=clamp((tt-P.reads)/0.9,0,1),pu=clamp((tt-P.follows)/1.2,0,1);
       gc_index(x,tt,{lit:[gv_io(tt,P.moves,P.follows+0.8,0.4),0,gv_io(tt,P.join+0.4,P.reads,0.5)+gv_io(tt,P.ends-0.2,P.ends+2.2,0.4),gv_io(tt,P.moves+0.6,P.follows+0.8,0.4)],sync:sy,pulse:pu});
       gc_card(x,2,"Clara Jensen",clamp((tt-P.join-0.4)/1.0,0,1)*(1-clamp((tt-P.ends)/1.2,0,1)),{date:"until 15 Dec",wash:GV.gold});
-      gc_card(x,0,"A. Moreau",gv_io(tt,P.jobs-0.4,P.moves,0.6));gc_card(x,3,"A. Moreau",fin(tt,P.moves+0.6,0.9),{dx:80});}}]);
+      gc_card(x,0,"A. Moreau",gv_io(tt,P.jobs-0.4,P.moves,0.6));gc_card(x,3,"A. Moreau",fin(tt,P.moves+0.6,0.9),{dx:80});}}],sc.dur));
   wc_year(ctx,56,72,"15 December 2026",gv_io(t,P.ends-0.6,sc.dur,0.4));});
 
 // ---- 7 · Down to the column: the learner's email, picked, and every table it flows into; tags following lineage, in beta; each table
@@ -3453,21 +3464,21 @@ scene("groups",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({top:c.yes-0
 scene("lineage",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({email:wAt(sc,"pick","email"),every:wAt(sc,"pick","every table"),beta:wAt(sc,"beta","follow lineage"),
     nd:wAt(sc,"need","every table")-0.3,built:wAt(sc,"need","built by the project"),classes:wAt(sc,"need","classes it there"),
     stp:c.stops-0.3,check:wAt(sc,"stops","the check"),stops:wAt(sc,"stops","stops")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the lineage view: the email, and the column it flows into; Planning's and Finance's lists get no names or emails
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_lineage(x,tt,{pick:clamp((tt-P.email)/1.4,0,1),none:fin(tt,P.every+0.6,0.6),beta:clamp((tt-P.beta)/2.4,0,1)})},
     // the wallet's learners in the project: the email, classed there too (the opening film's check)
     {at:P.nd,place:"desk",keys:[[P.nd,960,500,1]],push:0.02,draw:(x,tt)=>{gc_walletSheet(x,clamp((tt-P.nd)/0.8,0,1),fin(tt,P.classes,0.5));
       gu_filmTag(x,1840,846,"Governed in dbt",fin(tt,P.built,0.5),{align:"right"});}},
     // a table with an email nobody classed, stopped by the check
-    {at:P.stp,place:"desk",keys:[[P.stp,960,500,1]],push:0.02,draw:(x,tt)=>gc_unclassed(x,tt,{u:clamp((tt-P.stp)/0.6,0,1),q:fin(tt,P.check,0.5),err:clamp((tt-P.stops)/1.6,0,1)})}]);});
+    {at:P.stp,place:"desk",keys:[[P.stp,960,500,1]],push:0.02,draw:(x,tt)=>gc_unclassed(x,tt,{u:clamp((tt-P.stp)/0.6,0,1),q:fin(tt,P.check,0.5),err:clamp((tt-P.stops)/1.6,0,1)})}],sc.dur));});
 
 // ---- 8 · Who read this, and when: the audit log, in preview; who read the learner table this month; December's access review; forty-one
 // names folded away; two groups ----
 scene("audit",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({who:wAt(sc,"log","who read"),who2:wAt(sc,"answer","who read"),rv:c.review-0.3,dec:wAt(sc,"review","Each December"),
     reads:wAt(sc,"review","reads the grants"),whos:wAt(sc,"review","who's in it"),gave:c.gave,gw:wAt(sc,"gave","gave way"),two:wAt(sc,"gave","two groups"),
     reg:wAt(sc,"two","the registrar's office"),data:wAt(sc,"two","the data team")}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // the audit log: who read the learner table this month, and when
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_sql(x,tt,GC_AUD,{rows:clamp((tt-P.who)/1.2,0,1),lit:[0,1,2].map(i=>gv_io(tt,P.who2+0.3*i,c.review-0.4,0.5))})},
     // the access review: which groups can read it, and who's in each; the forty-one names folded away; two groups stay
@@ -3476,13 +3487,13 @@ scene("audit",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({who:wAt(sc,"
       gc_sql(x,tt,GC_REV,{rows:clamp((tt-P.reads)/1.2,0,1),notes:[fin(tt,P.whos,0.5)*cn,fin(tt,P.whos+0.3,0.5)*cn,fin(tt,P.whos+0.15,0.5)*cn],
         strike:[0,clamp((tt-P.two)/1.0,0,1),0],lit:[fin(tt,P.data,0.5),0,fin(tt,P.reg,0.5)]});
       withA(x,cd,()=>wc_hand(x,"December 2026",1762,180,{size:32,w:700,align:"right",col:GV.goldInk,p:clamp((tt-P.dec)/0.8,0,1)}));
-      gc_print41(x,{a:fin(tt,P.gave-0.6,0.5),fold:clamp((tt-P.gw)/1.6,0,1)});}}]);});
+      gc_print41(x,{a:fin(tt,P.gave-0.6,0.5),fold:clamp((tt-P.gw)/1.6,0,1)});}}],sc.dur));});
 
 // ---- 9 · What the metadata says: Clara's plan, with stars; where each piece lives, on Noor's map; Sam's line, ticked; the next film; the
 // end card ----
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({mp:c.map-0.3,says:wAt(sc,"map","the project says"),tags:wAt(sc,"flow","become tags"),pol:wAt(sc,"flow","one policy"),
     grp:wAt(sc,"flow","groups carry"),dates:wAt(sc,"flow","the dates"),sm:c.sam-0.3,which:wAt(sc,"sam","tells him which"),board:c.breath-0.3,end:c.breath+1.6}));
-  gv_shots(ctx,S,t,sc.dur,[
+  gv_shots(ctx,S,t,sc.dur,gc_run([
     // Planning: Clara at her wall screen, next term's places by faculty, with stars where the names are
     {at:0,place:"planning",keys:[[0,900,470,1.08],[0.1,880,430,1.2]],d:4,draw:(x,tt)=>{gc_planWall(x,tt);person(x,"clara",440,905,0.8,{pose:"point",pose2:"ease",mix:fin(tt,2.4,0.8),expr:"smile",t:tt});}},
     // Noor's map: where each piece lives; classes become tags, tags meet one policy, and groups carry the dates
@@ -3492,7 +3503,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({mp:c.map-0.3
     {at:P.sm,place:"platform",keys:[[P.sm,1000,500,1.06]],push:0.03,draw:(x,tt)=>{gc_room(x,tt,{sam:{expr:"smile"},yusuf:{expr:"smile",pose2:"ease",mix:fin(tt,P.which,0.8)},s1:"columns",
         draw1:gc_mobile(clamp((tt-P.sm-0.6)/1.0,0,1))});gc_bubble(x,fin(tt,P.sm+0.2,0.35),0.92+0.08*spring(fin(tt,P.sm+0.2,0.5)),fin(tt,P.which,0.8));}},
     // the board: the next film's card lifts
-    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,1],lift:[0,0,fin(tt,P.board+0.5,1.0)]});}}]);
+    {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,1],lift:[0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   gv_end(ctx,S,t,P.end,"Governed in Unity Catalog","The platform enforces what the metadata says.","Film 2 of 6");});
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

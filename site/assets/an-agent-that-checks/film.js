@@ -3678,13 +3678,19 @@ window.addEventListener("DOMContentLoaded",async()=>{
    others one by one while the film plays, so it starts quickly. The same as the master data series' post.js, with the logos, but
    each of the others waits until the page is idle (or a second has passed): back to back, the prologue's 38 places held the
    page for seconds at a time on a slow machine, so a click on "Watch again" landed late and the film had run on.
+   And none of the others is painted before the visitor starts the film (Play, a chapter or the bar). A place takes 0.1 to 0.4 s
+   on a fast machine and several times that on a laptop or phone, and keeps a full-size picture (8 MB) in memory: these films have
+   10 to 38 places, against master data's 5 to 8, so painting them all as the page opened froze the page again and again while
+   the visitor was only reading it (2 November 2026).
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
    of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
    the grain. */
 async function prepAssets(){await fontsReady3();await loadLogos();wc_prep();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(gv_place);return;}
   if(ks.length)gv_place(ks[0]);let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
-  const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);};setTimeout(()=>idle(next),200);}
+  const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
+  const cv=document.getElementById("film"),box=cv&&cv.closest(".player");if(!box||box.classList.contains("started")){go();return;}
+  const mo=new MutationObserver(()=>{if(box.classList.contains("started")){mo.disconnect();go();}});mo.observe(box,{attributes:true,attributeFilter:["class"]});}
 if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
     M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d");
   window.renderAt=function(t,q){

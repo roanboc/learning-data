@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Decades in the making](https://data.learn-all.org/what-an-agent-is/decades-in-the-making/) | How we got here | 6½ min | 8 | 3 questions | [script](1-decades-in-the-making/script.md) · [source](1-decades-in-the-making/source/README.md) |
 | [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 7½ min | 7 | 0 questions | [script](6-ethics-and-accountability/script.md) · [source](6-ethics-and-accountability/source/README.md) |
 <!-- /films -->
 

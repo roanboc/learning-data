@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Decades in the making",
+    "key": "decades-in-the-making-en",
+    "dir": "films/what-an-agent-is/1-decades-in-the-making/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/decades-in-the-making/film.js",
+    "video": "dist/decades-in-the-making.mp4",
+    "file": "decades-in-the-making.mp4",
+    "captions": [
+      [
+        "films/what-an-agent-is/1-decades-in-the-making/captions/en.srt",
+        "decades-in-the-making.en.srt"
+      ],
+      [
+        "films/what-an-agent-is/1-decades-in-the-making/captions/es.srt",
+        "decades-in-the-making.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/what-an-agent-is/1-decades-in-the-making/source",
+      ":(exclude)films/what-an-agent-is/1-decades-in-the-making/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 226,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 32.6,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -117,7 +117,7 @@ function ml_boxRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;ag_roomLight(x,1);
     if(drop>0){const y0=ry-560,fall=ag_eo(clamp(drop*1.25,0,1)),settle=drop>=0.8?Math.sin((drop-0.8)/0.2*Math.PI)*-10:0;
       ag_model(x,rx,lerp(y0,ry,fall)+settle,b.r,{t:tt,core:0.5});}}
   else{const ti=1-ag_in(tt,P.title,0.5);ag_loop(x,rx,ry,{t:tt,R,r:lerp(b.r,88,grow),label:grow>0.6&&ti>0.5?"Model":null,core:lerp(0.5,1,grow),
-    stepA:[ag_in(tt,P.agent-0.2,0.4)*ti,ag_in(tt,P.agent,0.4)*ti,ag_in(tt,P.agent+0.2,0.4)*ti]});}}
+    stepA:[ag_in(tt,P.agent-0.2,0.4)*ti,ag_in(tt,P.agent+0.3,0.4)*ti,ag_in(tt,P.agent+0.8,0.4)*ti]});}}
 
 /* ---------------------------------------------------------------- the room, today
    Chapters 2 to 8 share one room (the style prototype's layout, ML_ROOM): Jun at his desk on the left, the agent's ring right of
@@ -265,7 +265,8 @@ scene("loop",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({loopW:wAt(sc,
 function ml_loopRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;
   // where the agent is in its loop: once round, Plan, Act, Check and back, then each round's steps
   const keys=[[P.planW,-120],[P.act,0],[P.checkW,120],[P.round+0.4,240],[P.catalog-0.3,360],[P.chk,480],[P.rule-0.3,600],[P.again-0.2,720],[P.matches-0.3,840]];
-  let deg=-120,pa=0;for(let i=0;i<keys.length;i++){if(tt<keys[i][0])break;const nx=keys[i+1],u=nx?ag_sine(clamp((tt-keys[i][0])/Math.min(1.2,nx[0]-keys[i][0]),0,1)):1;
+  // the light arrives at each key's step at the key's time, moving there over the 1.2 s before (less when the keys are closer)
+  let deg=-120,pa=0;for(let i=0;i<keys.length;i++){if(tt<keys[i][0])break;const nx=keys[i+1],d=nx?Math.min(1.2,nx[0]-keys[i][0]):1,u=nx?ag_sine(clamp((tt-nx[0]+d)/d,0,1)):1;
     deg=nx?lerp(keys[i][1],nx[1],u):keys[i][1];pa=1;}
   pa*=1-ag_in(tt,P.unlike-0.4,0.6)+ag_in(tt,P.stops,0.6)*0;
   const step=((Math.round((deg+120)/120)%3)+3)%3,lit=tt<P.planW||tt>P.unlike-0.4?(tt>P.pass?2:null):step,okC=tt>P.pass;
@@ -346,7 +347,7 @@ function ml_answerRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,R=ML_REST,W=A
 //      every census day, like Sperry's box; the agent took four minutes; once, the long way; plain scripts for known steps, agents for the rest ----
 scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(sc,"march","March"),steps:wAt(sc,"march","steps"),
     project:wAt(sc,"recipe","project"),test:wAt(sc,"recipe","test"),noor:wAt(sc,"recipe","Noor"),approves:wAt(sc,"recipe","approves"),
-    runs:c.runs,rIn:wAt(sc,"runs","runs"),seconds:wAt(sc,"runs","seconds"),same:wAt(sc,"runs","same"),like:wAt(sc,"runs","like"),
+    runs:c.runs,rIn:wAt(sc,"runs","runs"),like:wAt(sc,"runs","like"),
     took:c.took,four:wAt(sc,"took","four"),plain:wAt(sc,"took","plain"),needs:wAt(sc,"took","needs"),
     web:c.web,searched:wAt(sc,"web","searched"),webW:wAt(sc,"web","web"),docs:wAt(sc,"docs","Docs"),plan:wAt(sc,"docs","plan"),
     names:c.names,namesW:wAt(sc,"names","names"),gives:wAt(sc,"names","gives"),only:wAt(sc,"names","only"),
@@ -362,7 +363,7 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(s
       al:ag_in(tt,P.agents+0.6,0.4)})}]);
   ml_kick(ctx,t,[[0,"Today"],[P.web-0.2,"Once"],[P.names-0.1,"Today"]],1);});
 function ml_recipeRoom(x,tt,P){const R=ML_REST,EP=ml_evPlaces(x),RC={x:860,y:232,w:560},RB=ml_recipe(x,RC.x,RC.y,RC.w,{a:0,foot:"x"}),
-    YR=[["2027",680],["2028",1000],["2029",1320]],runAt=[P.rIn,P.seconds,P.same];
+    YR=[["2027",680],["2028",1000],["2029",1320]],runAt=[P.rIn,P.rIn+1.6,P.rIn+3.2];
   // the agent, resting small at the top right; "four minutes and twelve steps"; and as a plain rerun needs no agent, its band dims
   const dim=ag_in(tt,P.needs-0.1,0.9);ml_small(x,tt,R[0],R[1],R[2],R[3],{stepA:0,core:lerp(1,0.12,dim)});
   ml_jun(x,tt,{pose:"desk",gaze:[3,ml_pw(tt,[[0,0.2],[P.March-0.4,0.2],[P.March,-0.45],[P.steps,-0.45],[P.steps+0.6,-0.3],[P.noor,-0.3],[P.noor+0.4,0.3],

@@ -29,5 +29,11 @@
     ["biz", "Es dueña de un significado", "Mei, cuyo término título se publica una vez, y lo leen por igual personas, informes y agentes"],
     ["tech", "Diseña los productos", "Noor, que escribe el contrato de cada producto en un formato abierto, junto al modelo con el que coincide"],
     ["biz", "Busca datos", "Anil, analista de una facultad, que encuentra un producto, lee su promesa, y pide acceso con un propósito"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, film by film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, película por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, film by film. Each puts one idea from a film in your hands: change a file, run a check, and see what happens.",
+  "labs_lead_es": "{Labs} labs interactivos, película por película. Cada uno pone en tus manos una idea de una película: cambia un archivo, ejecuta un control y mira qué pasa.",
+  "quiz_lead": "{quiz} situations that the people who govern data in its tools really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes gobiernan los datos en sus herramientas, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

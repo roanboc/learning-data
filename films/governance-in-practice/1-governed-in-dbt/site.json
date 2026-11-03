@@ -23,6 +23,6 @@
   },
   "past": ["Today, in the data team's room: Jun's pull request for Planning", "Rules that run with every change arrive while the work can still change."],
   "past_es": ["Hoy, en la sala del equipo de datos: la solicitud de cambio de Jun para Planificación", "Las reglas que corren con cada cambio llegan mientras el trabajo todavía puede cambiar."],
-  "next_h": "You've seen governance kept in the dbt project, beside the code, and checked on every pull request. More films in the series are on the way.",
-  "next_h_es": "Viste la gobernanza guardada en el proyecto de dbt, junto al código, y revisada en cada solicitud de cambio. Vienen más películas de la serie."
+  "next_h": "You've seen governance kept in the dbt project, beside the code, and checked on every pull request.",
+  "next_h_es": "Viste la gobernanza guardada en el proyecto de dbt, junto al código, y revisada en cada solicitud de cambio."
 }

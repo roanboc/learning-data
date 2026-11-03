@@ -20,8 +20,8 @@
     "written": "Solo lo que está escrito",
     "close": "Esa noche"
   },
-  "next_h": "You've seen an agent check every change while people decide. More films in the series are on the way.",
-  "next_h_es": "Viste a un agente revisar cada cambio mientras las personas deciden. Vienen más películas de la serie.",
+  "next_h": "You've seen an agent check every change while people decide.",
+  "next_h_es": "Viste a un agente revisar cada cambio mientras las personas deciden.",
   "past": ["An imagined night at the university, a few years from now", "Rules reach every change, at any hour, when they're written plainly enough for an agent to check, and a person still decides."],
   "past_es": ["Una noche imaginada en la universidad, dentro de unos años", "Las reglas llegan a cada cambio, a toda hora, cuando están escritas con la claridad suficiente para que un agente las verifique, y una persona sigue decidiendo."]
 }

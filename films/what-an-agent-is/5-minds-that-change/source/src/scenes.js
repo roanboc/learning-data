@@ -135,7 +135,8 @@ scene("three",(ctx,S,t,sc)=>{const C=sc.cues;
   // the cards: where each is, and when it comes out
   const L=mc_lineup(ctx),line=ag_in(t,tEach-0.1,1.6),cx=o=>960-mc_answerW(ctx,o)/2,go=(a,b,u)=>[lerp(a[0],b[0],ag_sine(u)),lerp(a[1],b[1],ag_sine(u))];
   let p1=go([cx(MC_A1),540],[280,130],ag_in(t,tTue+0.3,1.4));p1=go(p1,[L[0],470],line);
-  let p2=go([cx(MC_A2),540],[cx(MC_A2)-70,440],ag_in(t,tApol,0.9));  // up and back, so the third answer covers none of its wordsp2=go(p2,[L[1],470],line);
+  // the second answer moves up and back as the third comes, so the third covers none of its words
+  let p2=go([cx(MC_A2),540],[cx(MC_A2)-70,440],ag_in(t,tApol,0.9));p2=go(p2,[L[1],470],line);
   const p3=go([cx(MC_A3)+130,612],[L[2],470],line);
   const slot=ag_io(t,tNone-0.1,tNone+1.6,0.5)*Math.sin(Math.PI*clamp((t-tNone)/1.2,0,1));
   const cards=ctx=>{const kx=MC_AG[0],ky=MC_AG[1],jp=ag_io(t,tJuns-0.2,tSure,0.4);
@@ -181,12 +182,13 @@ scene("ours",(ctx,S,t,sc)=>{const C=sc.cues;
   const join=ag_in(t,tTwo-0.3,0.9)*(1-ag_in(t,tSureOf+0.7,1.0)),laugh=ag_in(t,tSureOf+0.9,0.6);
   const shots=[
     // it's easy to say the agent makes things up: Tuesday's answer, its source struck; our memories do it too: Clara's memory, her papers
-    {at:0,place:"mcLab",keys:[[0,960,500,1.2],[tToo-0.2,1300,470,1.3]],d:1.8,push:0.02,draw(ctx,t){
-      // the agent's name goes before last year's record covers it
-      mc_agent(ctx,MC_AG[0],MC_AG[1],{t,core:0.6,label:null});ag_T(ctx,"Agent",MC_AG[0],MC_AG[1]+118,{w:700,size:28,align:"center",col:AG.label,a:1-ag_in(t,tPaperL-0.6,0.4)});mc_jun(ctx,t,{});
+    // it opens as Three answers ended (the same camera, Tuesday's answer still in the line), then closes in on it
+    {at:0,place:"mcLab",keys:[[0,960,540,1.015],[0.6,960,500,1.2],[tToo-0.2,1300,470,1.3]],d:1.8,push:0.02,draw(ctx,t){
+      // no name for the agent here: Three answers ended without it, and last year's record will cover where it goes
+      mc_agent(ctx,MC_AG[0],MC_AG[1],{t,core:0.6,label:null});mc_jun(ctx,t,{});
       mc_clara(ctx,t,{pose:"hang",pose2:"chin",mix:laugh,smile:laugh,nod:laugh>0?Math.sin((t-tSureOf-0.9)*7)*0.03*(1-ag_in(t,tSureOf+2,0.8)):0,gaze:t>tPaperL&&t<tCent?[-5,1]:null});
       ag_roomLight(ctx,1);mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{});
-      const w2=mc_answerW(ctx,MC_A2);mc_answer(ctx,960-w2/2,540,Object.assign({a:1-ag_in(t,tToo-0.4,0.8),false:1},MC_A2));
+      const w2=mc_answerW(ctx,MC_A2),mv=ag_sine(ag_in(t,0.2,1.6));mc_answer(ctx,lerp(mc_lineup(ctx)[1],960-w2/2,mv),lerp(470,540,mv),Object.assign({a:1-ag_in(t,tToo-0.4,0.8),false:1},MC_A2));
       // her memory, rising again; then the two records under it
       mc_memory(ctx,1110,300,"last year: Health",{a:ag_in(t,tToo+0.2,0.6),k:ag_spr(t,tToo+0.2,0.6),tail:[MC_CMOUTH[0]-30,MC_CMOUTH[1]-110]});
       const y1=lerp(430,520,ag_sine(join)),y2=lerp(600,520,ag_sine(join)),a1=ag_in(t,tPaperL-0.1,0.5),a2=ag_in(t,tBefore-0.1,0.5),edge=join>0.3?AG.amber:AG.blue;
@@ -272,14 +274,15 @@ scene("rebuilt",(ctx,S,t,sc)=>{const C=sc.cues;
   const shots=[{at:0,place:"mcLab",keys:[[0,520,470,1.42],[tModel-0.5,960,500,1.0],[tReason-0.8,960,540,1.0]],d:2.2,push:0.015,draw(ctx,t){
     const page=ag_in(t,tOne-1.0,0.5)*(1-ag_in(t,tBend-0.4,0.6)),grow=ag_sine(ag_in(t,tNeither-0.3,0.6));
     // the agent: answers once; a new chat empties it, and the second time its light goes round the other way
-    mc_agent(ctx,AX,AY,{t,a:ag_in(t,tModel-0.4,0.8),core:0.7,clear:ag_io(t,tNewc-0.1,tNewc+0.9,0.3),
+    const home=ag_sine(ag_in(t,tTrouble,1.6));  // as the three answers come back, the agent goes back to its place in the room
+    mc_agent(ctx,lerp(AX,MC_AG[0],home),lerp(AY,MC_AG[1],home),{t,a:ag_in(t,tModel-0.4,0.8),core:0.7,clear:ag_io(t,tNewc-0.1,tNewc+0.9,0.3),
       think:ag_io(t,tOne-0.5,ts1[3]+0.4,0.3)+ag_io(t,tRoute-0.4,ts2[3]+0.4,0.3)+ag_io(t,tLikely-0.2,tsG[0]+0.5,0.3),
       spin:t<tNewc?ag_in(t,tOne-0.6,3.2):ag_in(t,tRoute-0.5,2.8),dir:t<tNewc?1:-1});
     ag_roomLight(ctx,1);
     // a head of light: a few details, the rest filled in; a gap, filled with something likely, as bright as the rest; it leans to the question too
     const sure=ag_in(t,tSure,0.8),lean=ag_in(t,tBend+0.5,0.6)*(1-ag_in(t,tLying-0.6,1.0));
     ctx.save();ctx.translate(HX,HY+230);ctx.rotate(0.05*ag_sine(lean));ctx.translate(-HX,-(HY+230));
-    mc_head(ctx,HX,HY,0.95,{a:ag_in(t,0.4,1.0)*(1-0.35*ag_in(t,tTrouble-0.4,0.8)),pts:ag_in(t,tFew-0.1,1.4),fill:ag_in(t,tFill,2.4),gap:ag_in(t,tNeither,0.8),likely:ag_in(t,tLikely+0.2,1.0),sure});
+    mc_head(ctx,HX,HY,0.95,{a:ag_in(t,0.4,1.0)*(1-0.75*ag_in(t,tTrouble-0.4,1.2)),pts:ag_in(t,tFew-0.1,1.4),fill:ag_in(t,tFill,2.4),gap:ag_in(t,tNeither,0.8),likely:ag_in(t,tLikely+0.2,1.0),sure});
     ctx.restore();
     // the page the agent writes on
     if(page>0){withA(ctx,page,()=>{ag_box(ctx,PX,PY,PW,lerp(LY+58,LY2+58,grow)-PY,26,{});
@@ -337,7 +340,7 @@ scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
       ag_verdict(ctx,960,MC_VY,"3 apart","fail",ag_in(t,t131+0.6,0.4)*(1-fx));ag_verdict(ctx,960,MC_VY,"agrees two ways","pass",ag_in(t,tBoth+0.4,0.5));});};
   const shots=[
     // nobody is blamed: the three answers go to the wall; the team checks the work instead; every answer shows where it came from
-    {at:0,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){agent(ctx,{think:ag_io(t,tCame-0.8,tQuery,0.3),spin:ag_in(t,tCame-0.9,1.0)});people(ctx);ag_roomLight(ctx,1);
+    {at:0,place:"mcLab",keys:[[0,960,540,1.015]],push:0.02,draw(ctx,t){agent(ctx,{think:ag_io(t,tCame-0.8,tQuery,0.3),spin:ag_in(t,tCame-0.9,1.0)});people(ctx);ag_roomLight(ctx,1);
       const aside=ag_sine(ag_in(t,C.blamed+0.2,1.6)),L=mc_lineup(ctx);
       [MC_A1,MC_A2,MC_A3].forEach((o,i)=>{const x=lerp(L[i],120+i*70,aside),y=lerp(600,150+i*48,aside),k=lerp(1,0.66,aside);ctx.save();ctx.translate(x,y);ctx.scale(k,k);
         mc_deco(aside>0,()=>mc_answer(ctx,0,0,Object.assign({a:lerp(1,0.2,aside)*(1-ag_in(t,tCame-0.6,0.5)),false:i===1?1:0},o)));ctx.restore();});

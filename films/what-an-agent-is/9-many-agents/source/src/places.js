@@ -509,11 +509,14 @@ AG_PLACES.maPlant=c=>{let g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,rgb
   for(let k=0;k<6;k++){const x=980+k*120;c.fillStyle=rgba([62,64,70],1);rr(c,x,860,44,64,6);c.fill();c.fillStyle="rgba(255,255,255,0.2)";c.fillRect(x+4,862,36,5);}
   g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(40,34,28,0.12)");g.addColorStop(1,"rgba(255,246,230,0.08)");c.fillStyle=g;c.fillRect(0,0,W,H);};
 /* the chart, live: the comfort line (dashed), and the pen's trace of the offices' warmth up to u (0..1): it climbs over the line as
-   the offices run warm, and settles back under it after fix (the u at which the controls were tuned), or never if fix is null */
-function ma_chart(ctx,u,fix,a){const C=MA_PL.chart,lim=C.y+C.h*0.42;a=a==null?1:a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+   the offices run warm, and settles back under it after fix (the u at which the controls were tuned), or never if fix is null;
+   hot (0..1) shades in amber where the trace runs over the line */
+function ma_chart(ctx,u,fix,a,hot){const C=MA_PL.chart,lim=C.y+C.h*0.42;a=a==null?1:a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
   ctx.setLineDash([12,10]);ctx.strokeStyle="rgba(70,80,90,0.7)";ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(C.x,lim);ctx.lineTo(C.x+C.w,lim);ctx.stroke();ctx.setLineDash([]);
   const v=x=>{const day=Math.sin(x*TAU*3-1.2)*0.13,warm=fix==null?sstep(0.25,0.7,x)*0.3:sstep(0.25,0.5,x)*0.3*(1-sstep(fix,fix+0.2,x));return C.y+C.h*(0.62-day-warm);};
-  const n=Math.max(1,Math.floor(140*clamp(u,0,1)));ctx.strokeStyle="#33363C";ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();for(let i=0;i<=n;i++){const x=i/140;ctx.lineTo(C.x+C.w*x,v(x));}ctx.stroke();
+  const n=Math.max(1,Math.floor(140*clamp(u,0,1)));
+  if(hot>0){ctx.fillStyle=rgba(AG.amber,0.36*hot);ctx.beginPath();ctx.moveTo(C.x,lim);for(let i=0;i<=n;i++){const x=i/140;ctx.lineTo(C.x+C.w*x,Math.min(lim,v(x)));}ctx.lineTo(C.x+C.w*n/140,lim);ctx.closePath();ctx.fill();}
+  ctx.strokeStyle="#33363C";ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();for(let i=0;i<=n;i++){const x=i/140;ctx.lineTo(C.x+C.w*x,v(x));}ctx.stroke();
   const px=C.x+C.w*n/140,py=v(n/140);ctx.fillStyle="#33363C";ctx.beginPath();ctx.arc(px,py,5,0,TAU);ctx.fill();ctx.restore();return [px,py];}
 // a dial's pointer (k: which dial, v 0..1 its setting)
 function ma_dial(ctx,k,v){const [x,y]=MA_PL.dials[k],a=Math.PI*0.75+clamp(v,0,1)*Math.PI*1.5;ctx.save();ctx.strokeStyle="#E8E4DA";ctx.lineWidth=6;ctx.lineCap="round";

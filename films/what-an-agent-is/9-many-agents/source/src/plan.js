@@ -37,12 +37,12 @@ function ma_papers(ctx,x,y,n,t,o){o=o||{};const a=o.a==null?1:o.a,t0=o.t0||0,tak
 function ma_draft(ctx,x,y,w,a,k){if(a<=0)return;ma_sprung(ctx,x+w/2,y+60,k==null?1:k,a,()=>{ag_box(ctx,x,y,w,120,16,{edge:AG.violet,edgeA:0.6});ag_T(ctx,"DRAFT",x+24,y+46,{w:700,size:28,ls:4,col:AG.violet});
   ctx.fillStyle=rgba(AG.mut,0.3);rr(ctx,x+24,y+68,w-64,10,5);ctx.fill();rr(ctx,x+24,y+90,w-120,10,5);ctx.fill();});}
 /* a desk calendar: a card of 170 by 186 with rings, showing "day" of 14; as day rises, each page lifts over the rings and the next
-   shows under it */
+   shows under it (the lifting page's number is decoration, squashed as it turns) */
 function ma_calendar(ctx,x,y,day,a){if(a<=0)return;const d=clamp(Math.floor(day),1,14),f=day-Math.floor(day),flip=d<14?sstep(0.55,1,f):0;ctx.save();ctx.globalAlpha*=a;
   ag_box(ctx,x,y,170,186,16,{});ctx.fillStyle=rgba(AG.mut,0.18);rr(ctx,x,y,170,48,16);ctx.fill();ag_T(ctx,"DAY",x+85,y+36,{w:700,size:28,ls:4,align:"center",col:AG.mut});
   ag_T(ctx,String(flip>0?d+1:d),x+85,y+140,{w:800,size:64,align:"center"});
   if(flip>0){const k=1-flip;ctx.save();ctx.translate(x,y+50);ctx.scale(1,k);ctx.fillStyle="#F1EFEA";rr(ctx,2,0,166,134,14);ctx.fill();ctx.fillStyle="rgba(46,38,28,"+(0.12*flip)+")";rr(ctx,2,0,166,134,14);ctx.fill();
-    ag_T(ctx,String(d),85,90,{w:800,size:64,align:"center"});ctx.restore();
+    ag_T(ctx,String(d),85,90,{w:800,size:64,align:"center",deco:1});ctx.restore();
     ctx.fillStyle="rgba(46,38,28,"+(0.18*(1-flip))+")";ctx.fillRect(x+6,y+50+134*k,158,4);}
   for(const rx of [x+44,x+126]){ctx.fillStyle="#7C7A76";ctx.beginPath();ctx.arc(rx,y+6,7,0,TAU);ctx.fill();}ctx.restore();}
 /* a card with a word stamped across it in ink: the budget card, "Budgets" and the stamp "set" (k: how far the stamp has come down) */

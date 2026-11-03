@@ -80,7 +80,9 @@ scene("breathes",(ctx,S,t,sc)=>{
           L.forEach((l,i)=>{const a=ag_in(tt,l[1],0.4),y=372+i*80;if(a<=0)return;c.save();c.globalAlpha*=a;c.translate(-16*(1-ag_eo(clamp((tt-l[1])/0.5,0,1))),0);
             c.fillStyle=rgba(AG.ink,0.5);c.beginPath();c.arc(104,y-10,6,0,TAU);c.fill();ag_T(c,l[0],128,y,{w:700,size:32});c.restore();});}});}},
     // the university, April 2026: census day, the council's question, four faculties' counts
-    {at:tUni,place:"lab",keys:[[0,960,500,1.06],[tYear-0.3,960,540,1.0]],d:2.2,draw:(c,tt)=>ma_census(c,S,tt,{tUni,tCensus,tAsks,tFac,tNotes,tWeeks,tBudget,tYear,tMany,tWork,tDrafts,tNoon,tMistake})}
+    // (under the title card's veil the scene fades, so only the title's words show)
+    {at:tUni,place:"lab",keys:[[0,960,500,1.06],[tYear-0.3,960,540,1.0]],d:2.2,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath+0.5,0.8);if(f<=0)return;c.save();c.globalAlpha*=f;
+      ma_census(c,S,tt,{tUni,tCensus,tAsks,tFac,tNotes,tWeeks,tBudget,tYear,tMany,tWork,tDrafts,tNoon,tMistake});c.restore();}}
   ],0.8);
   ag_title(ctx,S,t,sc.cues.breath,"Many agents, and what emerges",null,"FILM 9 OF 9 · WHAT AN AGENT IS");
 });
@@ -294,19 +296,19 @@ function mb_board(c,a){if(a<=0)return;const [x,y,w,h]=MB.board;c.save();c.global
 function mb_pin(c,x,y){c.fillStyle="#8A847A";c.beginPath();c.arc(x,y,8,0,TAU);c.fill();c.fillStyle="rgba(255,255,255,0.6)";c.beginPath();c.arc(x+2,y-2,3,0,TAU);c.fill();}
 // a helper's draft on the board, 368 wide from (x, y): its faculty, its reason, an orange chip naming its source. st.src (0..1) the chip;
 // st.tick a green tick; st.edge; st.line {text, a, col, dots, dotsA, strike, fix, fixA, warn}: a line under them, with a dot for each
-// student, struck through and replaced by st.line.fix; returns where its dots are
-function mb_draft(c,x,y,i,st){const a=st.a==null?1:st.a,w=368,L=st.line||{a:0},la=clamp(L.a||0,0,1),h=154+46*sstep(0,0.5,la)+24*(L.dotsA||0);if(a<=0)return;
+// student, struck through and replaced by st.line.fix; st.deco while it flies to the board, small (its words are decoration until it lands)
+function mb_draft(c,x,y,i,st){const a=st.a==null?1:st.a,w=368,L=st.line||{a:0},la=clamp(L.a||0,0,1),h=154+46*sstep(0,0.5,la)+24*(L.dotsA||0),dc=st.deco?1:0;if(a<=0)return;
   ma_sprung(c,x+w/2,y+h/2,st.k==null?1:st.k,a,()=>{ag_box(c,x,y,w,h,18,{edge:st.edge||null,edgeA:st.edgeA==null?0.9:st.edgeA});mb_pin(c,x+w/2,y+12);
-    ag_T(c,MA_FAC[i][0],x+24,y+48,{w:700,size:30});ag_T(c,MB_REASON[i][0],x+24,y+86,{w:500,size:28});
+    ag_T(c,MA_FAC[i][0],x+24,y+48,{w:700,size:30,deco:dc});ag_T(c,MB_REASON[i][0],x+24,y+86,{w:500,size:28,deco:dc});
     const src=MB_REASON[i][1],sa=st.src==null?1:st.src;if(sa>0){const sw=ag_tw(c,src,{w:600,size:28})+40;c.save();c.globalAlpha*=sa;c.fillStyle=rgba(AG.orange,0.12);rr(c,x+24,y+102,sw,40,20);c.fill();
-      c.strokeStyle=rgba(AG.orange,0.8);c.lineWidth=2;rr(c,x+24,y+102,sw,40,20);c.stroke();ag_T(c,src,x+44,y+132,{w:600,size:28,col:AG.orange});c.restore();}
+      c.strokeStyle=rgba(AG.orange,0.8);c.lineWidth=2;rr(c,x+24,y+102,sw,40,20);c.stroke();ag_T(c,src,x+44,y+132,{w:600,size:28,col:AG.orange,deco:dc});c.restore();}
     if(st.tick>0)ag_tick(c,x+w-42,y+122,26,rgba(AG.green,st.tick),4.5);
     if(la>0){const ly=y+184,fa=clamp(L.fixA||0,0,1),u1=sstep(0,0.55,fa),u2=sstep(0.35,1,fa),oy=ly-26*u1;c.save();c.globalAlpha*=sstep(0.3,1,la);
       // the struck line rises out of its place as the fix rises in, one after the other, so they never sit on each other
       c.save();if(fa>0){c.beginPath();c.rect(x+8,ly-38,w-16,52);c.clip();}
-      ag_T(c,L.text,x+24,oy,{w:700,size:28,col:L.col||AG.amber,a:1-u1});
+      ag_T(c,L.text,x+24,oy,{w:700,size:28,col:L.col||AG.amber,a:1-u1,deco:dc});
       if(L.strike>0){const tw=ag_tw(c,L.text,{w:700,size:28});c.strokeStyle=rgba(AG.ink,0.85*(1-u1));c.lineWidth=4;c.beginPath();c.moveTo(x+20,oy-10);c.lineTo(x+28+tw*clamp(L.strike,0,1),oy-11);c.stroke();}
-      if(u2>0)ag_T(c,L.fix,x+24,ly+26*(1-u2),{w:700,size:28,col:AG.green,a:u2});
+      if(u2>0)ag_T(c,L.fix,x+24,ly+26*(1-u2),{w:700,size:28,col:AG.green,a:u2,deco:dc});
       if(L.warn>0)ag_warn(c,x+w-42,oy-10,30,rgba(AG.amber,L.warn*(1-u1)));c.restore();c.restore();
       if(L.dotsA>0){c.save();c.globalAlpha*=L.dotsA;c.fillStyle=rgba(AG.amber,0.9);for(let j=0;j<L.dots;j++){if(L.gone&&L.gone(j))continue;c.beginPath();c.arc(x+32+j*18,y+212,6,0,TAU);c.fill();}c.restore();}}});}
 const mb_dotAt=(i,j)=>[MB.slot[i][0]+32+j*18,MB.slot[i][1]+212];
@@ -353,7 +355,7 @@ function mb_room(c,S,tt,T){const H=MB.help;
   MA_FAC.forEach((f,i)=>{const t0=T.tPins+i*0.4,u=ag_sine((tt-t0)/0.9);if(u<=0)return;const [sx,sy]=MB.slot[i],R=rows[i],cmp=hi[i];
     const st={k:u<1?1:Math.min(1,ag_spr(tt,t0+0.9,0.5)*0.15+0.85),src:ag_in(tt,T.tSrc+i*0.15,0.3),tick:ag_in(tt,T.tComp+i*0.45+0.35,0.3),line:R.L,
       edge:R.lit>0?AG.amber:cmp>0?AG.blue:null,edgeA:R.lit>0?0.9*R.lit:0.9*cmp};
-    if(u<1){const fx=H[i][0]-184,fy=H[i][1]-120,x=lerp(fx,sx,u),y=lerp(fy,sy,u)-Math.sin(Math.PI*u)*90,k=lerp(0.3,1,u);c.save();ag_about(c,x+184,y+80,k);mb_draft(c,x,y,i,st);c.restore();}
+    if(u<1){const fx=H[i][0]-184,fy=H[i][1]-120,x=lerp(fx,sx,u),y=lerp(fy,sy,u)-Math.sin(Math.PI*u)*90,k=lerp(0.3,1,u);c.save();ag_about(c,x+184,y+80,k);mb_draft(c,x,y,i,Object.assign(st,{deco:1}));c.restore();}
     else mb_draft(c,sx,sy,i,st);});
   ma_pillAt(c,1258,612,"the board",tt,T.tBoard,T.tTwo-0.6);
   // the dots: each drop's students leave their draft and become the 31
@@ -491,7 +493,109 @@ scene("alive",(ctx,S,t,sc)=>{
       ma_scr(c,S,()=>ma_pillAt(c,1100,300,"they run because we run them",tt,T.tWe+0.2,null));}}],0.8);
 });
 
-/* ---------------------------------------------------------------- the last chapter (a draft, being drawn) */
-scene("close",(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);
-  ag_T(ctx,sc.name,960,540,{w:800,size:60,align:"center"});
-  ag_end(ctx,S,t,sc.cues.breath,"Many agents, and what emerges","Next: Agents at work on data","Film 9 of 9");});
+/* ---------------------------------------------------------------- 7 · What we don't know */
+// the imagined night: the agent that starts the others, and the three it starts (x, y, r) on the floor; three drafts pinned to the wall
+// (the middle one mended); the clock that turns through the night
+const MC={par:[880,792,60],kids:[[600,810,48],[1150,804,52],[1400,818,44]],drafts:[[500,340],[810,340],[1120,340]],dw:280,clock:[1556,286,68]};
+// the agents' state at tt: where each is, its size, and how its band glows; drawn twice, the body under the night and the light over it
+function mc_agents(tt,T){const P=MC.par,out=[{x:P[0],y:P[1],r:P[2],at:-9,from:null,ph:0.3,core:0.7,think:Math.max(0.25,ag_io(tt,T.tAgents-0.3,T.tStart+1.4,0.4))}];
+  MC.kids.forEach((k,i)=>{const at=T.tStart+0.15+i*0.32;if(tt<at)return;const g=ag_sine((tt-at)/0.9),r=k[2]*lerp(0.35,1,g);
+    out.push({x:k[0],y:k[1]+k[2]-r,r,at,from:[P[0]-k[0],0],ph:1+i*1.3,core:0.65,think:0.3+0.15*Math.sin(tt*0.9+i*2)});});return out;}
+// the night room: drafts on the wall, a clock turning through the night, agents starting agents, one mending another's draft
+function mc_night(c,S,tt,T){const A=mc_agents(tt,T),mend=ag_in(tt,T.tMend+0.8,0.6);
+  MC.drafts.forEach(([x,y],i)=>{ma_draft(c,x,y,MC.dw,1,1);mb_pin(c,x+MC.dw/2,y+12);
+    if(i===1){c.fillStyle=rgba(mix(AG.amber,AG.green,mend),0.95);rr(c,x+24,y+90,MC.dw-120,10,5);c.fill();
+      if(mend<1)ag_warn(c,x+MC.dw-40,y+94,28,rgba(AG.amber,1-mend));if(mend>0)ag_tick(c,x+MC.dw-40,y+92,26,rgba(AG.green,mend),4.5);}});
+  const [cx,cy,cr]=MC.clock;ma_clock(c,cx,cy,cr,23+7*ag_sine((tt-T.tKeep+0.2)/(T.tMight-T.tKeep+0.6)),1);
+  const P=A.map(a=>Object.assign(a,{p:ma_agent(c,a.x,a.y,a.r,tt,{at:a.at,from:a.from,d:0.9,ph:a.ph,core:a.core,think:a.think})}));
+  ag_roomLight(c,1,{night:true});
+  // the bands' light over the night; a violet pulse from the parent as each new agent starts
+  P.forEach(a=>ag_model(c,a.p[0],a.p[1],a.r,{t:tt+a.ph,core:a.core,think:a.think,only:"light"}));
+  MC.kids.forEach((k,i)=>{const t0=T.tStart+0.05+i*0.32,u=(tt-t0)/0.9;if(u<=0||u>=1)return;const [x,y,r]=MC.par;
+    c.save();c.strokeStyle=rgba(AG.violet,0.55*(1-u));c.lineWidth=4;c.beginPath();c.arc(x,y,r*lerp(1.15,2.6,ag_eo(u)),0,TAU);c.stroke();c.restore();});
+  // one agent mends another's draft: a thin violet line to it, and the wrong line turns green
+  const la=ag_io(tt,T.tMend,T.tMend+2.0,0.35),k=P[2];if(la>0&&k){const [dx,dy]=MC.drafts[1];c.save();c.strokeStyle=rgba(AG.violet,0.7*la);c.lineWidth=3;c.setLineDash([10,9]);
+    c.beginPath();c.moveTo(k.p[0]-8,k.p[1]-k.r*1.05);c.quadraticCurveTo(k.p[0]-40,dy+260,dx+MC.dw*0.62,dy+124);c.stroke();c.restore();}
+  // what they might do: one good, one not; neither known
+  ma_cardAt(c,370,150,480,{kick:"They might find",title:"what no person could"},tt,T.tFind-0.1,T.tKnow+0.2,{edge:AG.green,kickCol:AG.green});
+  ma_cardAt(c,920,150,480,{kick:"Or settle on",title:"habits no person chose"},tt,T.tHabits-0.1,T.tKnow+0.2,{edge:AG.amber,kickCol:AG.amber});
+  ma_scr(c,S,()=>{const g=c.createRadialGradient(960,540,420,960,540,1180);g.addColorStop(0,"rgba(16,18,32,0)");g.addColorStop(1,"rgba(16,18,32,0.38)");c.fillStyle=g;c.fillRect(0,0,W,H);
+    ma_tag(c,"Imagined",ag_in(tt,T.tOnly-0.2,0.5),{dashed:true});});}
+// the mound again: the idea then (a chimney), then what sensors showed years later (a lung: the day's warmth and the night's cool push
+// the air one way, then the other), the mound swelling a little like a chest
+function mc_mound(c,S,tt,T){const idea=ag_in(tt,T.sMound+0.2,1.2)*(1-ag_in(tt,T.tChim,0.9)),lung=ag_in(tt,T.tLungW-0.15,1.0),n=ag_sine((tt-T.tCool+0.1)/1.5),
+    br=lung*(0.5-0.5*Math.cos(TAU*Math.max(0,tt-T.tLungW)/4.2)),M=MA_MD;
+  const swell=fn=>{c.save();ag_about(c,M.cx,M.base,1+0.012*br);fn();c.restore();};
+  if(br>0)swell(()=>{ma_poly(c,MA_MP);c.clip();c.drawImage(ag_place("maMoundCut"),0,0);});
+  ma_moundNight(c,n);
+  swell(()=>{if(idea>0){c.save();c.globalAlpha*=idea;ma_moundIdea(c,tt,1,1);c.restore();}ma_moundLung(c,tt,n,lung);
+    [[898,420,0.3],[806,640,2.75],[1036,630,0.42]].forEach(([x,y,ang],i)=>{const t0=T.tSensors-0.1+i*0.25,u=ag_eo(clamp((tt-t0)/0.6,0,1));if(u<=0)return;
+      c.save();c.translate(Math.cos(ang)*60*(1-u),Math.sin(ang)*60*(1-u));ma_sensor(c,x,y,ang,u);
+      const bl=ag_in(tt,t0+0.7,0.3)*(0.5+0.5*Math.sin((tt-t0)*4.4+i));c.fillStyle=rgba(AG.blue,0.85*bl);c.beginPath();c.arc(x+Math.cos(ang)*30,y+Math.sin(ang)*30,4.5,0,TAU);c.fill();c.restore();});});
+  const ta=ag_in(tt,T.sMound+0.9,0.5)*(1-ag_in(tt,T.tChim+0.2,0.5));if(ta>0)ma_tag(c,"the idea, then",ta,{x:1260,y:300,dashed:true});
+  const sa=ag_in(tt,T.tLungW-0.1,0.5);if(sa>0)ma_tag(c,"what sensors showed",sa,{x:1260,y:300});
+  ma_pillAt(c,1360,200,"day's warmth",tt,T.tWarmth-0.1,null,{col:[176,96,62]});ma_pillAt(c,1400,700,"night's cool",tt,T.tCool-0.1,null,{col:[96,112,124]});
+  ma_scr(c,S,()=>ma_tag(c,"India and Namibia · 2015 and 2017",ag_in(tt,T.tYears-0.2,0.5)));}
+// Eastgate late in the afternoon: the idea it was built on, dashed, struck through; and still, it works
+function mc_eastgate(c,S,tt,T){ma_eastgateLife(c,tt);
+  const g=c.createLinearGradient(W,0,0,H*0.8);g.addColorStop(0,"rgba(255,176,104,0.34)");g.addColorStop(0.55,"rgba(255,176,104,0.1)");g.addColorStop(1,"rgba(70,44,34,0.14)");c.fillStyle=g;c.fillRect(0,0,W,H);
+  const ta=ag_in(tt,T.tEGwas+0.2,0.5);if(ta>0){const x=470,y=130;ma_tag(c,"the idea, then",ta,{x,y,dashed:true});const w=ag_tw(c,"the idea, then",{w:500,size:28,f:"mono"})+48,k=ag_sine((tt-T.tWrongI-0.1)/0.5);
+    if(k>0){c.save();c.globalAlpha*=ta;c.strokeStyle=rgba(AG.amber,0.95);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(x-10,y+34);c.lineTo(x-10+(w+20)*k,y+24);c.stroke();c.restore();}}
+  ma_pillAt(c,1470,170,"it works",tt,T.tWorks-0.05,null,{icon:"tick",col:AG.green});
+  ma_scr(c,S,()=>ma_tag(c,"Harare · after 1996",ag_in(tt,T.sEG+0.5,0.5)));}
+// the plant room: the pen draws the offices' warmth; it runs over the comfort line, in amber; the engineer turns a dial, and it settles
+function mc_plant(c,S,tt,T){const tp=T.tTuned,u=tt<tp?lerp(0.3,0.5,clamp((tt-T.sPlant)/(tp-T.sPlant),0,1)):lerp(0.5,0.98,clamp((tt-tp)/(T.sTeam+0.8-tp),0,1));
+  ma_chart(c,u,0.52,1,1);const turn=ag_sine((tt-tp-0.05)/1.0);ma_dial(c,0,lerp(0.3,0.62,turn));ma_dial(c,1,0.46);ma_dial(c,2,0.55);ma_dial(c,3,0.4);
+  const reach=ag_in(tt,tp-0.6,0.7);
+  ag_person(c,MA_ENGINEER,800,640,0.98,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[64,113,"hold"]},mix:reach,gaze:[5,-4]});
+  ma_pillAt(c,1092,252,"ran warm",tt,T.tRanWarm-0.1,null,{icon:"warn",col:AG.amber});
+  ma_scr(c,S,()=>ma_tag(c,"Harare · after 1996",1));}
+// a small gauge: an arc with its needle
+function mc_gauge(c,x,y,s,col){const cy=y+s*0.2;c.save();c.strokeStyle=col;c.fillStyle=col;c.lineWidth=s*0.12;c.lineCap="round";c.beginPath();c.arc(x,cy,s*0.48,Math.PI*1.08,Math.PI*1.92);c.stroke();
+  const a=Math.PI*1.66;c.beginPath();c.moveTo(x,cy);c.lineTo(x+Math.cos(a)*s*0.42,cy+Math.sin(a)*s*0.42);c.stroke();c.beginPath();c.arc(x,cy,s*0.09,0,TAU);c.fill();c.restore();}
+// how Jun's team keeps its agents: measured, read-only, a person decides, each row as it is said
+function mc_kept(c,tt,T,a){if(a<=0)return;const x=56,y=150,w=520,h=320,R=[["measured",T.tMeasured],["read-only",T.tRead],["a person decides",T.tPerson]];
+  ma_sprung(c,x+w/2,y+h/2,Math.min(1,ag_spr(tt,T.tSameWay-0.2,0.5)),a,()=>{ag_box(c,x,y,w,h,22,{});ag_T(c,"JUN'S TEAM",x+32,y+56,{w:700,size:28,ls:4,col:AG.mut});
+    R.forEach(([s,t0],i)=>{const ra=ag_in(tt,t0-0.1,0.35);if(ra<=0)return;const yy=y+134+i*68,ix=x+58,iy=yy-12;c.save();c.globalAlpha*=ra;c.translate(-16*(1-ag_eo(clamp((tt-t0+0.1)/0.45,0,1))),0);
+      if(i===0)mc_gauge(c,ix,iy,40,rgba(AG.blue,1));else if(i===1)ag_lock(c,ix,iy+6,40,rgba(AG.blue,1));else ag_tick(c,ix,iy,30,rgba(AG.green,1),5);
+      ag_T(c,s,x+102,yy,{w:700,size:36});c.restore();});});}
+// the university's board as Clara left it, the team on the floor: measured (the checking agent), read-only (the helpers' locks), a person
+// decides (the stamp); together, the 31 they found
+function mc_board(c,S,tt,T){mb_final(c,1);
+  const pr=ag_in(tt,T.tPerson,0.35);if(pr>0)ma_stamp(c,1060,318,"approved",pr,{col:AG.green,rot:-0.04,size:32,a:0.7*(1-ag_in(tt,T.tPerson+0.45,0.6))});
+  const gl=ag_in(tt,T.tTogether,1.0);if(gl>0){const [x,y]=MB.c31;c.save();c.shadowColor=rgba(AG.green,0.8*gl);c.shadowBlur=34;c.strokeStyle=rgba(AG.green,0.75*gl);c.lineWidth=5;rr(c,x-6,y-6,402,252,22);c.stroke();c.restore();}
+  const L=MB.lead;ma_agent(c,L[0],L[1],L[2],tt,{ph:0.4,core:0.75,think:0.25});
+  MB.help.forEach((h,i)=>{ag_sandbox(c,h[0],872,150,{depth:50,label:null});const p=ma_agent(c,h[0],h[1]+6,42,tt,{ph:1+i,lock:1,core:0.75,think:0.2+0.2*Math.sin(tt*0.8+i*1.7)});
+    const u=(tt-T.tRead+0.05-i*0.08)/0.8;if(u>0&&u<1){c.save();c.strokeStyle=rgba(AG.blue,0.7*(1-u));c.lineWidth=3;c.beginPath();c.arc(p[0]+42*0.78,p[1]-42*0.72,lerp(18,46,ag_eo(u)),0,TAU);c.stroke();c.restore();}});
+  const K=MB.check,ms=ag_io(tt,T.tMeasured-0.1,T.tMeasured+1.3,0.3);ma_agent(c,K[0],K[1],K[2],tt,{ph:2.2,ring:1,think:0.2+0.6*ms,core:0.75+0.25*ms});
+  if(ms>0){c.save();c.shadowColor=rgba(AG.green,0.9*ms);c.shadowBlur=24;c.strokeStyle=rgba(AG.green,0.6*ms);c.lineWidth=4;c.beginPath();c.arc(K[0],K[1],K[2]*1.22,0,TAU);c.stroke();c.restore();}
+  ag_roomLight(c,1);
+  mc_kept(c,tt,T,ag_in(tt,T.tSameWay-0.2,0.4)*(1-ag_in(tt,T.tTogether-0.1,0.6)));
+  ma_scr(c,S,()=>ma_tag(c,MA_UNI,ag_in(tt,T.sTeam+0.5,0.5)*(1-ag_in(tt,T.tTogether-0.1,0.6))));}
+scene("close",(ctx,S,t,sc)=>{
+  const T={tOnly:wAt(sc,"imagine","only imagined"),tAgents:wAt(sc,"imagine","agents that"),tStart:wAt(sc,"imagine","start other"),tMend:wAt(sc,"imagine","mend each"),
+    tKeep:wAt(sc,"imagine","keep systems"),tMight:wAt(sc,"might","They might"),tFind:wAt(sc,"might","find what"),tHabits:wAt(sc,"might","or settle"),tKnow:wAt(sc,"might","We don't know"),
+    tNeither:wAt(sc,"neither","Neither"),tYears:wAt(sc,"lung","Years later"),tSensors:wAt(sc,"lung","sensors"),tChim:wAt(sc,"lung","chimney"),tLungW:wAt(sc,"lung","a lung"),
+    tWarmth:wAt(sc,"pushed","day's warmth"),tCool:wAt(sc,"pushed","night's cool"),tEGwas:wAt(sc,"wrong","Eastgate was"),tWrongI:wAt(sc,"wrong","wrong idea"),tWorks:wAt(sc,"wrong","it works"),
+    tMeasuring:wAt(sc,"measuring","measuring"),tTuned:wAt(sc,"measuring","tuned"),tRanWarm:wAt(sc,"measuring","ran warm"),
+    tTeam:wAt(sc,"same","Jun's team"),tSameWay:wAt(sc,"same","the same way"),tMeasured:wAt(sc,"same","measured"),tRead:wAt(sc,"same","read-only"),tPerson:wAt(sc,"same","with a person"),tTogether:wAt(sc,"same","so together"),
+    tTake:wAt(sc,"takeaway","When many"),tYet:wAt(sc,"takeaway","and we don't"),tNext:wAt(sc,"next","Next")};
+  T.sMound=T.tNeither-0.7;T.sEG=T.tEGwas-0.6;T.sPlant=T.tMeasuring-0.1;T.sTeam=T.tTeam-0.6;
+  ag_shots(ctx,S,t,sc.dur,[
+    // imagined: the room at night, agents starting agents, mending each other's work, a clock turning through the night
+    {at:0,place:"labNight",keys:[[0,900,560,1.2],[T.tMight-0.6,900,530,1.26]],d:2.4,push:0,draw:(c,tt)=>mc_night(c,S,tt,T)},
+    // the mound: the idea then, then sensors, a lung, the day and the night
+    {at:T.sMound,place:"maMoundCut",keys:[[0,900,520,1.06],[T.tLungW-0.4,900,500,1.14]],d:1.8,push:0,draw:(c,tt)=>mc_mound(c,S,tt,T)},
+    // Eastgate, later: built on the wrong idea, and still it works
+    {at:T.sEG,place:"maEastgate",keys:[[0,960,540,1.0]],push:0.04,draw:(c,tt)=>mc_eastgate(c,S,tt,T)},
+    // its plant room: measured, and tuned when the offices ran warm
+    {at:T.sPlant,place:"maPlant",keys:[[0,1000,540,1.04]],push:0.04,draw:(c,tt)=>mc_plant(c,S,tt,T)},
+    // the university: Jun's team keeps its agents the same way; together they found the 31
+    {at:T.sTeam,place:"lab",keys:[[0,960,540,1],[T.tTogether-0.2,1180,430,1.22]],d:1.8,push:0,draw:(c,tt)=>{const f=1-ag_in(tt,T.tTake+0.1,0.8);if(f<=0)return;
+      c.save();c.globalAlpha*=f;mc_board(c,S,tt,T);c.restore();}}],0.8);
+  // the takeaway, then the end card; the next series named as the voice says it
+  const t0=T.tTake-0.4;ag_veil(ctx,S,0.5*ag_in(t,t0,1.0));ag_end(ctx,S,t,t0,"Many agents, and what emerges",null,"Film 9 of 9");
+  const a1=ag_in(t,t0+0.6,0.9),a2=ag_in(t,T.tYet-0.3,0.7);if(a1>0){setScreen(ctx,S);ag_T(ctx,"When many work together, something new appears,",960,296,{w:700,size:48,align:"center",a:a1});
+    if(a2>0)ag_T(ctx,"and we don't yet know what.",960,364,{w:700,size:48,align:"center",a:a2});}
+  const na=ag_in(t,T.tNext-0.1,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: Agents at work on data",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}
+});

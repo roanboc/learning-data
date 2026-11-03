@@ -67,7 +67,7 @@ function ma_table(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,k=o.k==null?1:o.k,w
     MA_FAC.forEach((f,i)=>{const ra=clamp(rows*4-i,0,1);if(ra<=0)return;const yy=y+112+i*62;ctx.save();ctx.globalAlpha*=ra;ag_T(ctx,f[0],x+30,yy,{w:600,size:30});
       ag_T(ctx,ma_n(f[1]),x+440,yy,{w:700,size:30,align:"right"});ag_T(ctx,ma_sgn(f[2]),x+w-30,yy,{w:500,size:30,align:"right",col:AG.mut});ctx.restore();});
     ctx.strokeStyle=rgba(AG.blue,0.4);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+30,y+352);ctx.lineTo(x+w-30,y+352);ctx.stroke();
-    if(rows>=1){ag_T(ctx,"Total",x+30,y+404,{w:700,size:32});ag_T(ctx,"18,412",x+440,y+404,{w:800,size:32,align:"right"});ag_T(ctx,"+423",x+w-30,y+404,{w:500,size:30,align:"right",col:AG.mut});}});}
+    if(rows>=1){ag_T(ctx,"Total",x+30,y+404,{w:700,size:32});ag_T(ctx,"18,412",x+440,y+404,{w:800,size:32,align:"right"});ag_T(ctx,"+454",x+w-30,y+404,{w:500,size:30,align:"right",col:AG.mut});}});}
 // a gear: teeth round a ring, turning
 function ma_gear(ctx,x,y,r,ang,col){ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.fillStyle=rgba(col,1);ctx.beginPath();for(let i=0;i<16;i++){const a=i/16*TAU,rr0=i%2?r*0.78:r;ctx.lineTo(Math.cos(a-0.12)*rr0,Math.sin(a-0.12)*rr0);ctx.lineTo(Math.cos(a+0.12)*rr0,Math.sin(a+0.12)*rr0);}
   ctx.closePath();ctx.fill();ctx.fillStyle="#EEECE7";ctx.beginPath();ctx.arc(0,0,r*0.36,0,TAU);ctx.fill();ctx.restore();}
@@ -96,12 +96,11 @@ function ma_bars(ctx,x,y,w,h,vals,labels,o){o=o||{};const a=o.a==null?1:o.a,u=o.
   ctx.strokeStyle=rgba(AG.ink,0.3);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x+w+6,y);ctx.stroke();
   vals.forEach((v,i)=>{const bh=h*v*ag_eo(clamp(u*1.4-i*0.08,0,1)),bx=x+i*bw+bw*0.18;ctx.fillStyle=rgba(o.col||AG.violet,o.alpha||0.7);rr(ctx,bx,y-bh,bw*0.64,Math.max(0.1,bh),6);ctx.fill();
     if(labels)ag_T(ctx,labels[i],bx+bw*0.32,y+38,{w:700,size:o.size||28,align:"center",col:AG.mut});});ctx.restore();}
-/* a meter that fills many times over: v how many times it has filled (1 is one agent's computing), w wide from (x, y); each full
-   pass leaves a darker layer, and its name, "computing", sits above it */
-function ma_meter(ctx,x,y,w,v,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_T(ctx,"computing",x,y-16,{w:700,size:28,col:AG.mut});
-  ctx.fillStyle=rgba(AG.mut,0.14);rr(ctx,x,y,w,30,15);ctx.fill();const full=Math.floor(v),f=v-full;
-  for(let i=0;i<Math.min(full,9);i++){ctx.fillStyle=rgba(AG.blue,0.14+i*0.08);rr(ctx,x,y,w,30,15);ctx.fill();}
-  if(f>0){ctx.fillStyle=rgba(AG.blue,0.22+Math.min(full,9)*0.08);rr(ctx,x,y,Math.max(30,w*f),30,15);ctx.fill();}ctx.restore();}
+/* computing, one agent beside a team: two bars under the name "computing", w wide from (x, y); as u goes 0..1 the team's bar grows
+   to many times the agent's */
+function ma_meter(ctx,x,y,w,u,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_T(ctx,"computing",x,y-16,{w:700,size:28,col:AG.mut});
+  const lw=170,bw=w-lw,one=bw/8;[["one agent",one],["a team",lerp(one,bw,ag_eo(clamp(u,0,1)))]].forEach(([s,l],i)=>{const yy=y+i*46;ag_T(ctx,s,x,yy+26,{w:600,size:28});
+    ctx.fillStyle=rgba(AG.mut,0.12);rr(ctx,x+lw,yy+2,bw,28,14);ctx.fill();ctx.fillStyle=rgba(AG.blue,i?0.85:0.5);rr(ctx,x+lw,yy+2,Math.max(28,l),28,14);ctx.fill();});ctx.restore();}
 /* a range from lo% to hi% on a 0 to 100 line, w wide from (x, y); u 0..1 how far it has spread */
 function ma_range(ctx,x,y,w,lo,hi,u,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(AG.ink,0.35);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.stroke();
   for(const p of [0,50,100]){ctx.beginPath();ctx.moveTo(x+w*p/100,y-10);ctx.lineTo(x+w*p/100,y+10);ctx.stroke();}const m=(lo+hi)/2,l=lerp(m,lo,ag_eo(u)),r=lerp(m,hi,ag_eo(u));
@@ -124,11 +123,15 @@ function ma_frame(ctx,x,y,w,h,p,col){if(p<=0)return;const L=2*(w+h);ctx.save();c
 const MA_UNI="The university · April 2026";
 
 /* ---------------------------------------------------------------- many agents: a crowd, a team, a naming game */
-// 24 agents scattered on the floor, smaller further back (where each settles as the crowd gathers), and the same 24 in two staggered
-// rows for the naming game, each with its name tile above it
-const MA_CROWD=(()=>{const R=ag_rnd(924),P=[];for(let i=0;i<24;i++){const row=i%3,col=Math.floor(i/3),y=702+row*70+(R()-0.5)*18,x=200+col*205+(row===1?100:0)+(R()-0.5)*70;
-  P.push({x,y,r:26+(y-690)*0.12,ph:R()*6,from:x<960?-1:1,at:Math.sqrt(R()*0.9+0.1)});}return P;})();
-const MA_ROWS=Array.from({length:24},(_,i)=>{const back=i<12,k=back?i:i-12;return{x:(back?170:242)+k*145,y:back?726:846,r:back?32:38};});
+// the crowd that gathers at the start: about ninety agents in seven uneven rows, smaller further back, the nearest cut by the frame's
+// foot. k is the order each arrives in: the first near the front and the middle, then more and more from everywhere. Drawn back to front
+const MA_MOB=(()=>{const R=ag_rnd(318),P=[];
+  [680,708,744,790,846,912,990].forEach((g,row)=>{const r0=16.5+(g-676)*0.13,s=r0*4.6;let x=-40+R()*s*0.6;
+    while(x<1960){if(R()>0.12){const gy=g+(R()-0.5)*(8+row*3),r=16.5+(gy-676)*0.13;P.push({x:x+(R()-0.5)*s*0.35,y:gy-r,r,ph:R()*6});}x+=s*(0.82+R()*0.36);}});
+  P.map((p,i)=>[Math.hypot((p.x-960)/900,(p.y+p.r-930)/260)*0.6+R()*0.7,i]).sort((a,b)=>a[0]-b[0]).forEach(([_,i],k)=>{P[i].k=k;});
+  return P.sort((a,b)=>a.y+a.r-(b.y+b.r));})();
+// the 24 agents of the naming game in two staggered rows, each with its name tile above it
+const MA_ROWS=Array.from({length:24},(_,i)=>{const back=i<12,k=back?i:i-12;return{x:(back?929:985)+(k-5.5)*112,y:back?718:852,r:back?32:38};});
 /* the naming game, run once: each agent starts with a name from the pool; each round they meet in random pairs, the speaker says a
    name it knows, and if the listener knows it too both keep only that name; if not, the listener learns it. No agent prefers a name;
    in this run, one name has taken over after eight rounds. st[r][i]: the name agent i shows after round r; pairs[r]: who met */

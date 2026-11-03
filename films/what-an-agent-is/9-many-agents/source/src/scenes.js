@@ -174,62 +174,73 @@ scene("trace",(ctx,S,t,sc)=>{
 
 /* ---------------------------------------------------------------- 4 · Many agents */
 scene("many",(ctx,S,t,sc)=>{
-  const T={tFast:wAt(sc,"crowds","coming fast"),tLead:wAt(sc,"lead","a lead agent"),tSplit:wAt(sc,"lead","splits"),tHelp:wAt(sc,"lead","helpers"),tOwn:wAt(sc,"lead","own instructions"),
+  const T={tLead:wAt(sc,"lead","a lead agent"),tSplit:wAt(sc,"lead","splits"),tHelp:wAt(sc,"lead","helpers"),tOwn:wAt(sc,"lead","own instructions"),
     tAnother:wAt(sc,"lead","another agent"),tChecks:wAt(sc,"lead","checks"),tBeat:wAt(sc,"beat","Such teams"),tTimes:wAt(sc,"beat","many times"),tStudy:wAt(sc,"study","Yet a"),
-    tFail:wAt(sc,"study","failing"),tTog:wAt(sc,"together","together"),tPaired:wAt(sc,"name","paired"),tSettled:wAt(sc,"name","settled"),tLeaned:wAt(sc,"leaned","the group leaned"),
-    tAlone:wAt(sc,"leaned","no agent"),tGroup:wAt(sc,"group","So testing"),tTest:wAt(sc,"group","test the group")};
-  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,640,1.14],[2.0,960,560,1.04],[T.tLead-0.8,960,540,1.0]],d:3.2,draw:(c,tt)=>ma_many(c,S,tt,T)}],0.8);
+    tFail:wAt(sc,"study","failing"),tTog:wAt(sc,"together","together"),tIn:wAt(sc,"name","In"),tPaired:wAt(sc,"name","paired"),tLeaned:wAt(sc,"leaned","the group leaned"),
+    tAlone:wAt(sc,"leaned","no agent"),tGroup:wAt(sc,"group","So testing"),tEnough:wAt(sc,"group","enough"),tTest:wAt(sc,"group","test the group")};
+  ag_shots(ctx,S,t,sc.dur,[
+    // crowds of a new kind, coming fast: more and more agents gather, and the camera draws back as the crowd grows
+    {at:0,place:"lab",keys:[[0,960,720,1.5]],push:-0.2,draw:(c,tt)=>ma_mob(c,tt)},
+    // a lead agent splits the job among helpers, and a checking agent checks what they find; then back to the whole wall for two findings
+    {at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
+    // together: the naming game, the group's lean, and the test of the group
+    {at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)}],0.8);
 });
-// the order the crowd arrives in: one, then more and more, faster
-const MA_ARRIVE=(()=>{const o=MA_CROWD.map((p,i)=>[p.at,i]).sort((a,b)=>a[0]-b[0]),T=[];o.forEach(([_,i],k)=>{T[i]=1.2+5.2*Math.pow(k/23,0.7);});return T;})();
-const MA_BYDEPTH=MA_CROWD.map((p,i)=>i).sort((a,b)=>MA_CROWD[a].y-MA_CROWD[b].y);
-const MA_TEAM={lead:[330,782,60],helpers:[[760,806],[1010,806],[1260,806]],check:[1620,786,48]};
-function ma_many(c,S,tt,T){
-  // the crowd: rolling in, then gone while the team works, then back and into two rows for the naming game
-  const away=ag_in(tt,T.tLead-0.5,0.7)*(1-ag_in(tt,T.tTog+0.2,0.6)),rows=ag_sine((tt-T.tTog-0.7)/1.8),D=0.8,T0=T.tPaired-0.3;
-  const rk=Math.floor((tt-T0)/D),inRound=rk>=0&&rk<8,ph=inRound?(tt-T0-rk*D)/D:0,meet=inRound?Math.sin(Math.PI*clamp(ph,0,1)):0,partner={};
-  if(inRound)for(const [a,b] of MA_GAME.pairs[rk]){partner[a]=b;partner[b]=a;}
-  const pos=i=>{const p=MA_CROWD[i],q=MA_ROWS[i];let x=lerp(p.x,q.x,rows),y=lerp(p.y,q.y,rows),r=lerp(p.r,q.r,rows);
-    if(partner[i]!=null){const o=partner[i],ox=lerp(MA_CROWD[o].x,MA_ROWS[o].x,rows),oy=lerp(MA_CROWD[o].y,MA_ROWS[o].y,rows),d=Math.hypot(ox-x,oy-y)||1;x+=(ox-x)/d*14*meet;y+=(oy-y)/d*14*meet;}return[x,y,r];};
-  // pairs meeting: a thin line between them while they talk
-  if(meet>0){c.save();c.strokeStyle=rgba(AG.mut,0.5*meet);c.lineWidth=2.5;for(const [a,b] of MA_GAME.pairs[rk]){const A=pos(a),B=pos(b),mx=(A[0]+B[0])/2,my=Math.min(A[1],B[1])-60-Math.abs(A[0]-B[0])*0.08;
-    c.beginPath();c.moveTo(A[0],A[1]-A[2]);c.quadraticCurveTo(mx,my,B[0],B[1]-B[2]);c.stroke();}c.restore();}
-  if(away<1)MA_BYDEPTH.forEach(i=>{const p=MA_CROWD[i],[x,y,r]=pos(i),at=MA_ARRIVE[i];ma_agent(c,x,y,r,tt,{at,from:[p.from*(560+i*12),0],d:0.75,ph:p.ph,a:1-away,think:inRound&&partner[i]!=null?meet*0.6:0});});
-  // the team: a lead agent splits the job among helpers, each with its own instructions; a checking agent checks what they find
-  const team=ag_in(tt,T.tLead-0.4,0.5)*(1-ag_in(tt,T.tTog,0.6));
-  if(team>0){c.save();c.globalAlpha*=team;const L=MA_TEAM.lead;ma_agent(c,L[0],L[1],L[2],tt,{at:T.tLead-0.4,from:[-420,0],d:0.8,ph:0.4,think:ag_io(tt,T.tSplit-0.3,T.tHelp+0.8,0.4)});
-    MA_TEAM.helpers.forEach((h,i)=>ma_agent(c,h[0],h[1],40,tt,{at:T.tHelp-0.4+i*0.16,from:[-180,60],d:0.7,ph:1+i,think:ag_io(tt,T.tOwn+0.2,T.tChecks+0.4,0.4)}));
-    const K=MA_TEAM.check;ma_agent(c,K[0],K[1],K[2],tt,{at:T.tAnother-0.3,from:[300,0],d:0.8,ph:2.2,ring:ag_sine((tt-T.tAnother)/0.9)});c.restore();
-    ma_pillAt(c,L[0],664,"lead agent",tt,T.tLead+0.1,T.tTog);ma_pillAt(c,1010,700,"helper",tt,T.tHelp+0.4,T.tTog);ma_pillAt(c,K[0],664,"checking agent",tt,T.tAnother+0.3,T.tTog);
-    // the job card, cut in three; each part flies to a helper as its own instructions
-    const jc=ag_in(tt,T.tLead+0.2,0.4)*(1-ag_in(tt,T.tTog,0.6));if(jc>0){c.save();c.globalAlpha*=jc;
-      if(tt<T.tSplit+0.2){ag_textCard(c,170,420,330,{kick:"The job",title:"three parts"},{kickCol:AG.mut,k:Math.min(1,ag_spr(tt,T.tLead+0.2,0.5))});}
-      else MA_TEAM.helpers.forEach((h,i)=>{const u=ag_sine((tt-T.tSplit-0.2-i*0.18)/1.1),x=lerp(170+i*110,h[0]-80,u),y=lerp(420,560,u),w=lerp(110,160,u),sep=ag_in(tt,T.tSplit,0.25)*(1-u);
-        ag_box(c,x+sep*(i-1)*10,y,w,82,14,{edge:AG.violet,edgeA:0.5*u});c.fillStyle=rgba(AG.mut,0.32);rr(c,x+sep*(i-1)*10+18,y+26,w-44,9,4.5);c.fill();rr(c,x+sep*(i-1)*10+18,y+48,w-70,9,4.5);c.fill();});
-      c.restore();}
-    // what they find goes to the checking agent: two ticks in green, one in amber
-    MA_TEAM.helpers.forEach((h,i)=>{const u=ag_sine((tt-T.tChecks+0.3-i*0.22)/1.0);if(u<=0)return;const x=lerp(h[0],K[0]-90,u),y=lerp(h[1]-70,420+i*72,u)-Math.sin(Math.PI*u)*60;
-      c.save();c.globalAlpha*=(1-ag_in(tt,T.tTog,0.6));ag_box(c,x,y,180,60,14,{});c.fillStyle=rgba(AG.mut,0.32);rr(c,x+18,y+25,96,9,4.5);c.fill();
-      const v=ag_in(tt,T.tChecks+0.9+i*0.3,0.3);if(v>0){if(i===1)ag_warn(c,x+146,y+30,30,rgba(AG.amber,v));else ag_tick(c,x+146,y+30,26,rgba(AG.green,v),4.5);}c.restore();});}
+// the crowd being built: the k-th agent appears at 1.0 + 6.0 (k / n)^0.55 s, growing from the floor where it stands with a small
+// bounce, faster and faster; once there, a wave of work passes through the crowd, each band brightening, with a faint violet light
+// round it, as the wave goes by
+function ma_mob(c,tt){const n=MA_MOB.length-1;
+  MA_MOB.forEach(p=>{const at=1.0+6.0*Math.pow(p.k/n,0.55),k=ag_spr(tt,at,0.9);if(k<=0)return;const r=p.r*k,y=p.y+p.r-r,w=Math.pow(Math.max(0,Math.sin(p.x/260+p.y/70-tt*2.6)),6)*ag_in(tt,at+0.6,0.8);
+    if(w>0.03){const g=c.createRadialGradient(p.x,y,r*0.6,p.x,y,r*2.4);g.addColorStop(0,rgba(AG.violet,0.16*w));g.addColorStop(1,rgba(AG.violet,0));
+      c.fillStyle=g;c.fillRect(p.x-r*2.4,y-r*2.4,r*4.8,r*4.8);}
+    ma_agent(c,p.x,y,r,tt,{at:at-0.3,ph:p.ph,core:0.45+0.55*w,think:w*0.8});});}
+// the team: where the lead agent, the three helpers and the checking agent stand
+const MA_TEAM={lead:[420,782,60],helpers:[[760,806],[960,806],[1160,806]],check:[1500,786,48]};
+function ma_team(c,tt,T){const L=MA_TEAM.lead,K=MA_TEAM.check;
+  ma_agent(c,L[0],L[1],L[2],tt,{at:T.tLead-0.4,from:[-420,0],d:0.8,ph:0.4,think:ag_io(tt,T.tSplit-0.3,T.tHelp+0.8,0.4)});
+  MA_TEAM.helpers.forEach((h,i)=>ma_agent(c,h[0],h[1],44,tt,{at:T.tHelp-0.4+i*0.16,from:[-180,60],d:0.7,ph:1+i,think:ag_io(tt,T.tOwn+0.2,T.tChecks+0.4,0.4)}));
+  ma_agent(c,K[0],K[1],K[2],tt,{at:T.tAnother-0.3,from:[300,0],d:0.8,ph:2.2,ring:ag_sine((tt-T.tAnother)/0.9)});
+  ma_pillAt(c,L[0],664,"lead agent",tt,T.tLead+0.1);ma_pillAt(c,960,700,"helper",tt,T.tHelp+0.4);ma_pillAt(c,K[0],664,"checking agent",tt,T.tAnother+0.3);
+  // the job card, cut in three; each part flies to a helper as its own instructions
+  if(tt<T.tSplit+0.2)ma_cardAt(c,280,420,280,{kick:"The job",title:"three parts"},tt,T.tLead+0.2,null,{kickCol:AG.mut});
+  else MA_TEAM.helpers.forEach((h,i)=>{const u=ag_sine((tt-T.tSplit-0.2-i*0.18)/1.1),sep=ag_in(tt,T.tSplit,0.25)*(1-u),x=lerp(280+i*90,h[0]-80,u)+sep*(i-1)*10,y=lerp(420,560,u),w=lerp(100,160,u);
+    ag_box(c,x,y,w,82,14,{edge:AG.violet,edgeA:0.5*u});c.fillStyle=rgba(AG.mut,0.32);rr(c,x+18,y+26,w-44,9,4.5);c.fill();rr(c,x+18,y+48,w-70,9,4.5);c.fill();});
+  // what they find goes to the checking agent: two ticks in green, one in amber
+  MA_TEAM.helpers.forEach((h,i)=>{const u=ag_sine((tt-T.tChecks+0.3-i*0.22)/1.0);if(u<=0)return;const x=lerp(h[0],K[0]-90,u),y=lerp(h[1]-70,436+i*66,u)-Math.sin(Math.PI*u)*60;
+    ag_box(c,x,y,180,60,14,{});c.fillStyle=rgba(AG.mut,0.32);rr(c,x+18,y+25,96,9,4.5);c.fill();
+    const v=ag_in(tt,T.tChecks+0.9+i*0.3,0.3);if(v>0){if(i===1)ag_warn(c,x+146,y+30,30,rgba(AG.amber,v));else ag_tick(c,x+146,y+30,26,rgba(AG.green,v),4.5);}});
   // better on hard research, at many times the computing; yet failing often
-  const cards=1-ag_in(tt,T.tTog-0.1,0.6),slide=-40*ag_in(tt,T.tTog-0.1,0.6);
-  const ca=ag_in(tt,T.tBeat,0.45)*cards;if(ca>0){c.save();c.globalAlpha*=ca;c.translate(0,slide);ag_box(c,110,120,780,260,22,{});ag_T(c,"TEAMS OF AGENTS",140,172,{w:700,size:28,ls:4,col:AG.mut});
-    ag_T(c,"Hard research: better than one agent",140,226,{w:700,size:36});ma_meter(c,140,312,600,1+7*ag_sine((tt-T.tTimes+0.2)/2.2),1);c.restore();}
-  const cb=ag_in(tt,T.tStudy,0.45)*cards;if(cb>0){c.save();c.globalAlpha*=cb;c.translate(0,slide);ag_box(c,1000,120,800,260,22,{edge:AG.amber,edgeA:0.7});ag_T(c,"2025 · 7 SYSTEMS",1030,172,{w:700,size:28,ls:4,col:AG.mut});
-    ag_T(c,"failed on 41% to 87% of tasks",1030,226,{w:700,size:36});ma_range(c,1040,290,720,41,87,ag_sine((tt-T.tFail)/1.4),1);c.restore();}
-  // the naming game: each agent's name tile; pairs meet, round after round, until the whole group shows one name
-  const ta=ag_in(tt,T.tPaired-1.4,0.6);if(ta>0)MA_ROWS.forEach((q,i)=>{const [x,y,r]=pos(i);let k=clamp(rk,-1,8),f=1;const sw=T0+k*D+0.55*D;
-    let name=MA_GAME.st[Math.max(0,Math.min(8,tt<sw?k:k+1))][i];if(rk>=8)name=MA_GAME.st[8][i];
+  const ca=ag_in(tt,T.tBeat,0.45);if(ca>0){c.save();c.globalAlpha*=ca;ag_box(c,110,120,780,290,22,{});ag_T(c,"TEAMS OF AGENTS",140,172,{w:700,size:28,ls:4,col:AG.mut});
+    ag_T(c,"Hard research: better than one agent",140,226,{w:700,size:36});ma_meter(c,140,298,700,ag_sine((tt-T.tTimes+0.1)/1.6),1);c.restore();}
+  const cb=ag_in(tt,T.tStudy,0.45);if(cb>0){c.save();c.globalAlpha*=cb;ag_box(c,1000,120,800,290,22,{edge:AG.amber,edgeA:0.7});ag_T(c,"2025 · 7 SYSTEMS",1030,172,{w:700,size:28,ls:4,col:AG.mut});
+    ag_T(c,"failed on 41% to 87% of tasks",1030,226,{w:700,size:36});ma_range(c,1040,306,720,41,87,ag_sine((tt-T.tFail)/1.4),1);c.restore();}}
+// the naming game: the 24 grow into two rows; each round they meet in random pairs (an arc between partners, a nudge towards each
+// other) and a tile turns when an agent's name changes, until the whole group shows one name. Then the group's lean, and the test
+function ma_game(c,S,tt,T){const D=0.8,T0=T.tPaired-0.3,rk=Math.floor((tt-T0)/D),inRound=rk>=0&&rk<8,ph=inRound?(tt-T0-rk*D)/D:0,meet=inRound?Math.sin(Math.PI*clamp(ph,0,1)):0,partner={};
+  if(inRound)for(const [a,b] of MA_GAME.pairs[rk]){partner[a]=b;partner[b]=a;}
+  const pos=i=>{const q=MA_ROWS[i];let x=q.x,y=q.y;if(partner[i]!=null){const o=MA_ROWS[partner[i]],d=Math.hypot(o.x-x,o.y-y)||1;x+=(o.x-x)/d*14*meet;y+=(o.y-y)/d*14*meet;}return[x,y,q.r];};
+  if(meet>0){c.save();c.strokeStyle=rgba(AG.violet,0.6*meet);c.lineWidth=3.5;for(const [a,b] of MA_GAME.pairs[rk]){const A=pos(a),B=pos(b),ay=A[1]-A[2]-76,by=B[1]-B[2]-76,mx=(A[0]+B[0])/2,my=Math.min(ay,by)-90-Math.abs(A[0]-B[0])*0.24;
+    c.beginPath();c.moveTo(A[0],ay);c.quadraticCurveTo(mx,my,B[0],by);c.stroke();}c.restore();}
+  // the agents, back row first, each rolling in from its nearer side
+  MA_ROWS.forEach((q,i)=>{const [x,y,r0]=pos(i),k=ag_spr(tt,T.tTog-0.5+Math.abs(q.x-960)/700*0.9+(i<12?0:0.08),0.9);if(k<=0)return;const r=r0*k;
+    ma_agent(c,x,y+r0-r,r,tt,{at:T.tTog-1.5,ph:i*0.7,think:partner[i]!=null?meet*0.6:0});});
+  // each agent's name tile, turning when its name changes; dimmed while the charts speak
+  const ta=ag_in(tt,T.tPaired-1.4,0.6)*(1-0.55*ag_io(tt,T.tLeaned-0.3,T.tGroup-0.2,0.5));if(ta>0)MA_ROWS.forEach((q,i)=>{const [x,y,r]=pos(i),k=clamp(rk,-1,8),sw=T0+k*D+0.55*D;
+    let f=1,name=MA_GAME.st[Math.max(0,Math.min(8,tt<sw?k:k+1))][i];if(rk>=8)name=MA_GAME.st[8][i];
     if(rk>=0&&rk<8){const prev=MA_GAME.st[k][i],next=MA_GAME.st[k+1][i];if(prev!==next){f=Math.abs(Math.cos(Math.PI*clamp((tt-sw+0.12)/0.24,0,1)));name=tt<sw?prev:next;}}
-    c.save();c.translate(x,y-r-46);c.scale(Math.max(0.05,f),1);ma_tile(c,0,0,MA_NAMES[name],ta*(1-0.7*ag_io(tt,T.tLeaned-0.3,T.tGroup-0.2,0.5)),null);c.restore();});
-  // the group leaned towards some names; no agent did alone
-  const ga=ag_in(tt,T.tLeaned-0.2,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(ga>0){c.save();c.globalAlpha*=ga;ag_box(c,150,130,700,420,22,{});ag_T(c,"THE GROUP",182,182,{w:700,size:28,ls:4,col:AG.mut});
-    ma_nameChart(c,200,470,600,230,[0.58,0.12,0.9,0.16,0.1],1,{labels:true,u:ag_sine((tt-T.tLeaned)/1.2)});c.restore();}
-  const sa=ag_in(tt,T.tAlone-0.4,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(sa>0){c.save();c.globalAlpha*=sa;ag_box(c,1000,130,780,420,22,{});ag_T(c,"EACH AGENT ALONE",1032,182,{w:700,size:28,ls:4,col:AG.mut});
-    for(let k=0;k<6;k++){const x=1050+(k%3)*240,y=330+Math.floor(k/3)*170;ma_nameChart(c,x,y,190,90,[0.5,0.5,0.5,0.5,0.5],1,{alpha:0.45,u:ag_sine((tt-T.tAlone+0.2-k*0.06)/0.8)});}c.restore();}
-  // so test the group: a frame round the whole crowd, and the test
-  ma_frame(c,96,620,1728,262,ag_sine((tt-T.tGroup-0.2)/1.6),AG.blue);
-  ma_cardAt(c,690,380,540,{kick:"Test",title:"test the group"},tt,T.tTest-0.2,null,{edge:AG.blue,kickCol:AG.blue});}
+    c.save();c.translate(x,y-r-42);c.scale(Math.max(0.05,f),1);ma_tile(c,0,0,MA_NAMES[name],ta,null);c.restore();});
+  // so testing each agent alone isn't enough: a frame round one agent, then round the whole group
+  const one=MA_ROWS[17],oa=1-ag_in(tt,T.tEnough+0.3,0.5);if(oa>0){c.save();c.globalAlpha*=oa;ma_frame(c,one.x-62,736,124,170,ag_sine((tt-T.tGroup-0.1)/0.9),AG.blue);c.restore();}
+  ma_frame(c,250,592,1420,318,ag_sine((tt-T.tEnough-0.4)/1.5),AG.blue);
+  ma_scr(c,S,()=>{
+    // the study: 24 agents, paired at random to agree on a name
+    ma_cardAt(c,560,96,800,{kick:"2025 · 24 agents",title:"paired at random, to agree on a name"},tt,T.tIn,T.tLeaned-0.5,{kickCol:AG.mut});
+    // the group leaned towards some names; no agent did alone
+    const ga=ag_in(tt,T.tLeaned-0.2,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(ga>0){c.save();c.globalAlpha*=ga;ag_box(c,150,60,700,380,22,{});ag_T(c,"THE GROUP",182,112,{w:700,size:28,ls:4,col:AG.mut});
+      ma_nameChart(c,200,370,600,200,[0.58,0.12,0.9,0.16,0.1],1,{labels:true,u:ag_sine((tt-T.tLeaned)/1.2)});c.restore();}
+    const sa=ag_in(tt,T.tAlone-0.4,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(sa>0){c.save();c.globalAlpha*=sa;ag_box(c,1000,60,780,380,22,{});ag_T(c,"EACH AGENT ALONE",1032,112,{w:700,size:28,ls:4,col:AG.mut});
+      for(let k=0;k<6;k++)ma_nameChart(c,1050+(k%3)*240,262+Math.floor(k/3)*140,190,80,[0.5,0.5,0.5,0.5,0.5],1,{alpha:0.45,u:ag_sine((tt-T.tAlone+0.2-k*0.06)/0.8)});c.restore();}
+    ma_cardAt(c,660,290,600,{kick:"Test",title:"the whole group"},tt,T.tTest-0.1,null,{edge:AG.blue,kickCol:AG.blue});});}
 
 /* ---------------------------------------------------------------- the other chapters (drafts, being drawn) */
 for(const id of ["board","alive","close"])scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);

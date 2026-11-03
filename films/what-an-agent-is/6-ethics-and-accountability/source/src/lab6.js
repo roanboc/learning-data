@@ -32,7 +32,7 @@ function ox_count(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return{x,
   ag_T(ctx,"students",x+AG_PAD+ag_tw(ctx,ox_fmt(n),{w:800,size:68})+18,y+AG_PAD+104,{w:500,size:30,col:AG.mut});
   if(o.state){const pass=o.state==="pass",re=o.state==="rerun",txt=pass?"checks pass":re?"rerunning":o.state==="again"?"failed again":"check failed";
     ag_pill(ctx,x+AG_PAD+(ag_tw(ctx,txt,{w:700,size:30})+96)/2,y+h-AG_PAD-29,txt,{icon:pass?"tick":"loop",col:pass?AG.green:re?AG.blue:AG.amber,a:o.stateA==null?1:o.stateA});}
-  if(o.tag){const ta=o.tagA==null?1:o.tagA;ag_pill(ctx,x+w-(ag_tw(ctx,o.tag,{w:700,size:28})+56)/2-16,y-6,o.tag,{size:28,col:AG.blue,a:ta});}
+  if(o.tag){const ta=o.tagA==null?1:o.tagA;ag_pill(ctx,x+w-(ag_tw(ctx,o.tag,{w:700,size:28})+56)/2-16,y-20,o.tag,{size:28,col:AG.blue,a:ta});}
   ctx.restore();return{x,y,w,h};}
 // a clock card: a small clock face and the time
 function ox_clock(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=ag_tw(ctx,text,{w:700,size:44,f:"mono"})+120,h=84;
@@ -95,7 +95,7 @@ function ox_lens(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx
   // the handle, down and right
   ctx.save();ctx.translate(x,y);ctx.rotate(0.75);ag_soft(ctx,c=>ag_rect(c,r*0.96,-r*0.14,r*1.1,r*0.28,r*0.12),AG_OAK.base,AG_OAK.hi,r*1.5,-r*0.1,r,"rgba(46,38,28,0.3)",6);ctx.restore();
   ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();ctx.fillStyle="rgba(250,249,255,0.92)";ctx.fillRect(x-r,y-r,2*r,2*r);
-  const R=ag_rnd(5+Math.floor(o.seed||0));ctx.font="600 26px 'JetBrains Mono', monospace";for(let yy=y-r+30;yy<y+r;yy+=34)for(let xx=x-r-((o.seed||0)*40%70);xx<x+r;xx+=78){ctx.fillStyle=rgba(AG.violet,0.55);ctx.fillText((R()*2-1).toFixed(2),xx,yy);}
+  const R=ag_rnd(5+Math.floor(o.seed||0));ctx.font="600 30px 'JetBrains Mono', monospace";for(let yy=y-r+32;yy<y+r;yy+=40)for(let xx=x-r-((o.seed||0)*40%80);xx<x+r;xx+=96){ctx.fillStyle=rgba(AG.violet,0.55);ctx.fillText((R()*2-1).toFixed(2),xx,yy);}
   const g=ctx.createRadialGradient(x-r*0.4,y-r*0.4,2,x,y,r);g.addColorStop(0,"rgba(255,255,255,0.5)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);ctx.restore();
   ctx.strokeStyle=rgba(AG_OAK.dark,1);ctx.lineWidth=10;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.stroke();ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,r-4,-2.6,-0.9);ctx.stroke();
   ctx.restore();}

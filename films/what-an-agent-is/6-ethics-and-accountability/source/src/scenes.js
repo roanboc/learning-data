@@ -116,7 +116,8 @@ scene("ox",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({carts:wAt(sc,"h
     // the same with an agent: the field becomes a picture on the lab's wall; under it the agent in its ring; Jun beside it; then the team
     {at:c.same-0.3,place:"lab",keys:[[c.same-0.3,OX_PICC[0],OX_PICC[1],OX_PICZ],[c.same+0.5,960,540,1]],d:3.8,push:0,draw:(x,tt)=>{
       ox_frame(x,"field",tt-(c.still-0.3));const R=OX_LAB.ring;ag_modelLight(x,R[0],R[1],88,1,760);
-      ag_loop(x,R[0],R[1],{t:tt,core:0.55,p:1});
+      const ti=1-0.7*ag_in(tt,c.breath,0.8);  // under the title, the lab's words fade with the veil
+      ag_loop(x,R[0],R[1],{t:tt,core:0.55,p:1,a:ti});
       const ja=ag_in(tt,P.must-0.2,0.6),tm=ag_in(tt,P.team-0.3,1.2),jx=lerp(OX_LAB.jun[0],420,tm),jy=lerp(OX_LAB.jun[1],660,tm),js=lerp(1,0.84,tm);
       const ta=i=>ag_in(tt,P.team-0.2+i*0.3,0.6);
       ox_layerA(x,ta(0),c=>ag_person(c,"yusuf",170-40*(1-ta(0)),690,0.78,{t:tt}));
@@ -124,7 +125,7 @@ scene("ox",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({carts:wAt(sc,"h
       ox_layerA(x,ta(1),c=>ag_person(c,"mei",650,700,0.76,{t:tt}));
       ox_layerA(x,ta(2),c=>ag_person(c,"noor",860,704,0.76,{t:tt}));
       ag_roomLight(x,1);
-      ox_count(x,1300,590,420,{state:"pass",a:ag_in(tt,P.stand,0.5),k:ag_spr(tt,P.stand,0.6)});}}
+      ox_count(x,1300,590,420,{state:"pass",a:ag_in(tt,P.stand,0.5)*ti,k:ag_spr(tt,P.stand,0.6)});}}
   ],0.5);
   ox_place(ctx,S,"Babylon · about 1750 BC",ag_io(t,c.bab-0.2,c.gore-0.8,0.6));
   ox_title(ctx,S,t,c.breath,"Ethics we can't read,","accountability it can't hold","FILM 6 OF 9 · WHAT AN AGENT IS");});
@@ -312,7 +313,11 @@ scene("rope",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({holds:wAt(sc,
     {at:P.agent-0.3,place:"lab",keys:[[P.agent-0.3,960,540,1]],draw:(x,tt)=>{const go=ox_u(tt,P.words,1.2);
       ox_room(x,tt,{jun:1,tools:1,reach:0.5,junO:{gaze:[3,-1]},ring:{core:0.5+0.4*go,lit:go>0.9?Math.floor(tt*1.6)%3:null,think:go*0.4}});
       const na=ag_in(tt,P.agent,0.4)*(1-ag_in(tt,P.words+1.0,0.3));
-      if(na>0){x.save();ag_about(x,lerp(700,1080,go),lerp(470,470,go),lerp(1,0.35,go));ox_note(x,lerp(480,860,go),lerp(380,380,go),440,"Jun","Check the Faculty of Health's count.",{a:na});x.restore();}
+      // once it's sent, its words have been read: it goes into the ring as a plain card, too small to read
+      if(na>0){x.save();ag_about(x,lerp(700,1080,go),470,lerp(1,0.35,go));const nx=lerp(480,860,go),pl=ag_in(go,0,0.1),wd={kick:"Jun",title:"Check the Faculty of Health's count."};
+        ox_note(x,nx,380,440,wd.kick,wd.title,{a:na*(1-pl)});
+        if(pl>0){const bb=ag_textCard(x,nx,380,440,wd,{measure:true});x.save();x.globalAlpha*=na*pl;ag_card(x,c=>ag_cardPath(c,bb.x,bb.y,bb.w,bb.h,22,null),bb,{edgeA:0.75});x.restore();}
+        x.restore();}
       ag_pill(x,1124,736,"Jun",{col:AG.blue,a:ag_in(tt,c.jun+0.3,0.5)});}},
     // a line hidden in a message it reads can steer it: its light picks the line out; its hand moves toward it, and stops; then the
     // lines run together, one block of the same colour
@@ -343,7 +348,7 @@ scene("rope",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({holds:wAt(sc,
       ox_room(x,tt,{tools:1,reach:1,touch:[0,1,2].map(i=>fz*(0.5+0.5*Math.sin(tt*14+i*2))),data:fz>0?(tt*2.2)%1:0,
         ring:{core:0.5+0.5*fz*(0.6+0.4*Math.sin(tt*23)),think:fz,lit:fz>0.5?Math.floor(tt*8)%3:null,col:AG.amber}});
       ox_key(x,KEY[0],KEY[1],{take:1,glove:1,out:ag_in(tt,P.shut,0.9),a:1});
-      ag_T(x,"helpful · honest · harmless",1124,250,{w:700,size:36,align:"center",col:mix(AG.violet,AG.amber,ag_in(tt,c.tricked+0.6,0.6)),a:ag_io(tt,c.tricked-0.2,P.speed,0.4)});
+      ag_T(x,"helpful · honest · harmless",1190,250,{w:700,size:36,align:"center",col:mix(AG.violet,AG.amber,ag_in(tt,c.tricked+0.6,0.6)),a:ag_io(tt,c.tricked-0.2,P.speed,0.4)});
       ox_counter(x,380,650,{n,note:ag_in(tt,P.often,0.5),stop,a:ag_in(tt,P.speed-0.3,0.5)});
       ag_pill(x,660,600,"attackers shut out",{icon:"lock",col:AG.green,a:ag_in(tt,P.shut+0.3,0.5)});}},
     // in the wrong hands: the stranger leads the ox away down the street, its owner left behind
@@ -379,7 +384,8 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
       ox_names(x,lerp(96,470,mv),390,{a:nm,mask:clamp((tt-P.names)/1.4,0,1)});}},
     // it stays tied up: an oak rail rises round the test copy; at night, in test, it may do the agreed job alone, and report
     {at:c.tied-0.3,place:"lab",keys:[[c.tied-0.3,960,540,1]],draw:(x,tt)=>{const n=ag_in(tt,P.night-0.2,1.0),jb=ag_in(tt,P.agreed-0.2,0.5),wk=n>0.5?1:0;
-      ox_room(x,tt,{tools:1,reach:0.5,tray:1,rail:ag_in(tt,P.tiedU-0.1,1.0),ring:{core:0.6,lit:wk?Math.floor(tt*1.4)%3:null,think:0.3*n},inTray:(cc,b)=>ox_draft(cc,b,1)});
+      const tl=1-ag_in(tt,P.tiedU-0.4,0.6);  // the tools step back as the rail rises, so it stands clear of them
+      ox_room(x,tt,{tools:tl,reach:0.5*tl,tray:1,rail:ag_in(tt,P.tiedU-0.1,1.0),ring:{core:0.6,lit:wk?Math.floor(tt*1.4)%3:null,think:0.3*n},inTray:(cc,b)=>ox_draft(cc,b,1)});
       ox_nightOver(x,tt,0.8*n,0.6,0.3*n);
       ox_listCard(x,96,380,640,"The agreed job",null,[["tick","find out why a check fails",AG.ink,AG.green],["tick","fix it in the test copy",AG.ink,AG.green],["tick","report, and ask",AG.ink,AG.green]],
         {a:jb,k:ag_spr(tt,P.agreed-0.2,0.6),items:[1,1,ag_in(tt,P.report,0.4)]});}},
@@ -450,11 +456,12 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(
       ox_gateRoom(x,tt,{night:true,s1:0,s2:0,who2:"approved|a second person",state:"pass",core:0.8,think:0.5,lit:Math.floor(tt*1.4)%3,inTray:(cc,b)=>ox_draft(cc,b,1)});}},
     // and stand behind the result: morning light; the team, and the count
     {at:P.stand-0.7,place:"lab",keys:[[P.stand-0.7,960,540,1]],draw:(x,tt)=>{const day=ag_in(tt,P.stand-0.6,1.6),ta=i=>ag_in(tt,P.stand-0.2+i*0.2,0.6);
-      ox_frame(x,"field",3);ag_modelLight(x,R[0],R[1],88,1,760);ag_loop(x,R[0],R[1],{t:tt,core:0.6,p:1});
+      const ti=1-0.7*ag_in(tt,c.breath,1.0);  // under the end card, the lab's words fade with the veil
+      ox_frame(x,"field",3);ag_modelLight(x,R[0],R[1],88,1,760);ag_loop(x,R[0],R[1],{t:tt,core:0.6,p:1,a:ti});
       ox_layerA(x,ta(0),cc=>ag_person(cc,"yusuf",170,690,0.78,{t:tt}));ox_layerA(x,ta(1),cc=>ag_person(cc,"jun",420,660,0.84,{t:tt}));
       ox_layerA(x,ta(2),cc=>ag_person(cc,"mei",650,700,0.76,{t:tt}));ox_layerA(x,ta(3),cc=>ag_person(cc,"noor",860,704,0.76,{t:tt}));
       ag_roomLight(x,1);ox_nightOver(x,tt,0.85*(1-day),0.6);
-      ox_count(x,1300,590,420,{state:"pass",a:ag_in(tt,P.stand,0.5),k:ag_spr(tt,P.stand,0.6)});}}
+      ox_count(x,1300,590,420,{state:"pass",a:ag_in(tt,P.stand,0.5)*ti,k:ag_spr(tt,P.stand,0.6)});}}
   ],0.5);
   if(t>c.mei-0.3&&t<c.approve){setScreen(ctx,S);const ma=ag_io(t,c.mei,c.approve-0.5,0.4);
     ag_pill(ctx,953,600,"Mei · registrar's office",{col:AG.blue,a:ma});ox_say(ctx,1290,250,340,"They count.",1060,420,ag_io(t,P.they-0.1,c.approve-0.5,0.4),{side:"left",at:0.6,kick:"Mei"});}

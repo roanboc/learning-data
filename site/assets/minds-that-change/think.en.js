@@ -8,7 +8,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   "three":{q:"The agent gave Clara three answers in two days, each as sure as the last. What was missing from all three?",
     opts:[{t:"A score for how sure it was, to show which answer to pick."},{t:"Where each answer came from: the query it ran and the rows it counted.",ok:true},{t:"Nothing: the latest answer is the one to use."}],
     why:"Without evidence, nobody could tell which answer was right, and Monday's, it turned out, was. A score for how sure it was wouldn't help: each answer was already as sure as the last, and the 2025 review it cited doesn't exist. Where you work, which answers arrive without saying where they came from?"},
-  "ours":{q:"Clara was sure Health lost the most first-years last year, but it was Science. Was she careless, or lying?",
+  "ours":{q:"Clara was sure Health lost the most first-years last year, but it was Engineering and IT. Was she careless, or lying?",
     opts:[{t:"Careless: she should have remembered."},{t:"Lying, to back the agent's answer."},{t:"Neither: memory rebuilds itself each time we remember, and hers had joined two years into one.",ok:true}],
     why:"Bartlett's retellings and Loftus and Palmer's question show memory filling its gaps with what seems likely, and being sure of it. Her own paper from last year settled it, and nobody was blamed. When did you last find that a memory you were sure of was wrong?"},
   "check":{q:"Counted two ways, the number disagreed by three: 134 and 131. Why is that good news?",

@@ -2,7 +2,7 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the governance films: Planificación, el sistema de estudiantes, la plataforma de datos, inscripciones, evidencia, verificación for a check,
-   and "revisa" for checking the work; Ciencias, Salud and Negocios for the faculties; asesores for the advisers; un error for a slip in a hymn; los
+   and "revisa" for checking the work; Ingeniería y TI, Salud and Negocios for the faculties; asesores for the advisers; un error for a slip in a hymn; los
    recitadores for the reciters; and tú, as the film's last line speaks to the viewer. "It's the same with data." is said twice, so it has one caption. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Northern India, about three thousand years ago.":
@@ -53,8 +53,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Necesita saber qué facultad perdió más estudiantes de primer año en el primer semestre.",
 "On Monday, Jun asks the agent for her.":
 "El lunes, Jun le pregunta al agente por ella.",
-"It answers: Science, 131.":
-"Responde: Ciencias, 131.",
+"It answers: Engineering and IT, 131.":
+"Responde: Ingeniería y TI, 131.",
 "On Tuesday, Clara asks it herself, in a new chat.":
 "El martes, Clara le pregunta ella misma, en un chat nuevo.",
 "It answers: Health, 126, as the university's 2025 retention review shows.":
@@ -63,8 +63,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Tiene sentido, piensa Clara.",
 "Health lost the most last year too.":
 "Salud también perdió más el año pasado.",
-"But Jun's answer said Science.":
-"Pero a Jun le dijo Ciencias.",
+"But Jun's answer said Engineering and IT.":
+"Pero a Jun le dijo Ingeniería y TI.",
 "So she asks: are you sure?":
 "Así que pregunta: ¿estás seguro?",
 "The agent apologises, and gives a third answer: Business, 140.":
@@ -77,8 +77,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Es fácil decir que el agente inventa cosas.",
 "Our memories do it too.":
 "Nuestra memoria también.",
-"Clara's own paper from last year says Science, not Health.":
-"El propio informe de Clara del año pasado dice Ciencias, no Salud.",
+"Clara's own paper from last year says Engineering and IT, not Health.":
+"El propio informe de Clara del año pasado dice Ingeniería y TI, no Salud.",
 "Health was the year before.":
 "Salud fue el año anterior.",
 "Her memory had joined two years into one, and she was sure of it.":
@@ -161,8 +161,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y una persona aprueba: Clara lee la evidencia y firma.",
 "The agent never approves.":
 "El agente nunca aprueba.",
-"Next semester, the two new advisers start in Science, where the most first-years left.":
-"El próximo semestre, los dos nuevos asesores empiezan en Ciencias, donde más alumnos de primer año se fueron.",
+"Next semester, the two new advisers start in Engineering and IT, where the most first-years left.":
+"El próximo semestre, los dos nuevos asesores empiezan en Ingeniería y TI, donde más alumnos de primer año se fueron.",
 "The reciters never asked whose memory was best.":
 "Los recitadores nunca preguntaron quién recordaba mejor.",
 "Every hymn was checked, in every pattern, every time, and its words have lasted three thousand years.":

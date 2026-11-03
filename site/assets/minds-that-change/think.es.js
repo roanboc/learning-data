@@ -8,7 +8,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "three":{q:"El agente le dio a Clara tres respuestas en dos días, cada una tan segura como la anterior. ¿Qué les faltaba a las tres?",
     opts:[{t:"Una puntuación de cuán seguro estaba, para saber cuál elegir."},{t:"De dónde salió cada respuesta: la consulta que hizo y las filas que contó.",ok:true},{t:"Nada: la última respuesta es la que vale."}],
     why:"Sin evidencia, nadie podía saber qué respuesta era correcta, y resultó que la del lunes lo era. Una puntuación de cuán seguro estaba no ayudaría: cada respuesta ya era tan segura como la anterior, y la revisión 2025 que citó no existe. Donde trabajas, ¿qué respuestas llegan sin decir de dónde salieron?"},
-  "ours":{q:"Clara estaba segura de que Salud perdió más estudiantes de primer año el año pasado, pero fue Ciencias. ¿Fue descuidada, o mintió?",
+  "ours":{q:"Clara estaba segura de que Salud perdió más estudiantes de primer año el año pasado, pero fue Ingeniería y TI. ¿Fue descuidada, o mintió?",
     opts:[{t:"Descuidada: debió acordarse."},{t:"Mintió, para respaldar la respuesta del agente."},{t:"Ninguna de las dos: la memoria se reconstruye cada vez que recordamos, y la suya había unido dos años en uno.",ok:true}],
     why:"Las versiones del cuento de Bartlett y la pregunta de Loftus y Palmer muestran que la memoria llena sus vacíos con lo que parece probable, y está segura de ello. Su propio informe del año pasado lo resolvió, sin culpar a nadie. ¿Cuándo descubriste por última vez que un recuerdo del que estabas seguro era falso?"},
   "check":{q:"Contado de dos formas, el número no coincidía por tres: 134 y 131. ¿Por qué es una buena noticia?",

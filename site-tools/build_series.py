@@ -3,14 +3,15 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Seven series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Eight series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
-governance-in-practice/). A series with no film on the site yet has no pages, and the topics leave it out until its first
-film is out. Each is described once, in SERIES below: its folder, its place on the site, its names, the
+governance-in-practice/); and What an agent is (films/what-an-agent-is/, at what-an-agent-is/), the first series of the
+module on AI agents in data work. A series with no film on the site yet has no pages, and the topics leave it out until its first
+film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
 For each series: its page (site/<slug>/) and, for each film, its Watch page (site/<slug>/<film>/) and, if it has them, its
@@ -92,6 +93,11 @@ def mr_builds_on(lg, f, all_films, R):
     return after_previous(lg, f, all_films)
 
 
+def ag_builds_on(lg, f, all_films, R):
+    """What an agent is: the first film opens the module on agents and needs nothing before it; each later film builds on the one before."""
+    return after_previous(lg, f, all_films)
+
+
 def gov_builds_on(lg, f, all_films, R):
     """Governance principles: the first film builds on Declare it, then build it (In the weeds of data crafting), where the data
     team's loop of ten steps is drawn, which it pins governance to, and on Who owns what, where each fact's meaning has an owner;
@@ -144,7 +150,8 @@ def gov_use_builds_on(lg, f, all_films, R):
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder);
 # project: the folder under films/ whose example project its films show (its own folder if not given).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
-# governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before.
+# governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
+# agent is opens the module AI agents in data work.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"}, builds_on=fw_builds_on,
@@ -178,6 +185,9 @@ SERIES = [
     dict(id="governance-in-practice", dir="governance-in-practice", slug="governance-in-practice",
          name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_use_builds_on,
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
+    dict(id="what-an-agent-is", dir="what-an-agent-is", slug="what-an-agent-is",
+         name={"en": "What an agent is", "es": "Qué es un agente"}, builds_on=ag_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[]),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -377,6 +387,11 @@ TOPICS = [
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
                "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
+    dict(id="ai-agents", items=["what-an-agent-is"],
+         name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
+         who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
+         line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",
+               "es": "La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos."}),
 ]
 
 
@@ -388,6 +403,20 @@ def topic_of(item_id):
 def shown(t):
     """The films and series a topic's cards show: all of them, but a series with no film on the site yet."""
     return [i for i in t["items"] if all(S["id"] != i or films(S)[1] for S in SERIES)]
+
+
+def live():
+    """The topics the site shows: those with a film or a series on the site (a new topic waits for its first film, as its series does)."""
+    return [t for t in TOPICS if shown(t)]
+
+
+def topic_words(lg):
+    """The topics the site shows, how many and which, for the Topics page's words: {n} "seven", {N} "Seven", {list} "data platforms,
+    data modelling, …, and data governance"."""
+    ns = [t["name"][lg] for t in live()]; ns = [x if x[1:2].isupper() else x[0].lower() + x[1:] for x in ns]  # "AI agents" keeps its capitals
+    n = say_n(lg, len(ns))
+    last = ", e " if lg == "es" and re.match(r"h?i(?!e)", ns[-1]) else T(lg, ", and ", ", y ")  # "y" becomes "e" before an i sound
+    return dict(n=n, N=n[0].upper() + n[1:], list=", ".join(ns[:-1]) + last + ns[-1])
 
 
 def entry(lg, item_id):
@@ -902,12 +931,13 @@ def topic_card(lg, e, RL, R):
             f'<h3><a href="{RL}{e["href"]}"{lang}>{E(e["title"])}</a></h3>\n<p>{E(e["card"])}</p>\n<p class="meta">{e["meta"]}</p>\n{progress(e)}\n</div>\n</article>')
 
 
+# the Topics page's words; {n}, {N} and {list} say how many topics the site shows, and which (topic_words())
 TOPICS_PAGE = {
     "title": {"en": "Topics · Learning Data", "es": "Temas · Learning Data"},
-    "desc": {"en": "Short films on data, in seven topics: data platforms, data modelling, analytics engineering, data quality and change, enterprise architecture, master and reference data, and data governance. Start with how a data platform works, then pick the topic you need.",
-             "es": "Películas cortas sobre datos, en siete temas: plataformas de datos, modelado de datos, ingeniería analítica, calidad de datos y cambios, arquitectura empresarial, datos maestros y de referencia, y gobernanza de datos. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
-    "lead": {"en": "Seven topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
-             "es": "Siete temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
+    "desc": {"en": "Short films on data, in {n} topics: {list}. Start with how a data platform works, then pick the topic you need.",
+             "es": "Películas cortas sobre datos, en {n} temas: {list}. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas."},
+    "lead": {"en": "{N} topics, each with its films and series. Start with how a data platform works, then pick the topic you need. Your progress stays in this browser.",
+             "es": "{N} temas, cada uno con sus películas y series. Empieza por cómo funciona una plataforma de datos y luego elige el tema que necesitas. Tu progreso se guarda en este navegador."},
     "foot": {"en": "The university, the utility, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Films, scripts, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them.",
              "es": "La universidad, la empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Películas, guiones, subtítulos, imágenes y texto: CC BY 4.0. Los logotipos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo."},
 }
@@ -916,17 +946,18 @@ TOPICS_PAGE = {
 def topics_page(lg):
     """The Topics page: every topic, who it's for and what it covers, with a card for each of its films and series."""
     path = "topics/"
-    h, R = head(lg, path, TOPICS_PAGE["title"][lg], TOPICS_PAGE["desc"][lg], TOPICS_PAGE["desc"][lg], "poster.jpg")
+    TW = topic_words(lg); desc = TOPICS_PAGE["desc"][lg].format(**TW); TL = live()
+    h, R = head(lg, path, TOPICS_PAGE["title"][lg], desc, desc, "poster.jpg")
     RL = R if lg == "en" else R[3:]
-    es = {t["id"]: [entry(lg, i) for i in shown(t)] for t in TOPICS}
-    firsts = [e["posters"][0] for t in TOPICS for e in es[t["id"]]]
-    seconds = [p for t in TOPICS for e in es[t["id"]] for p in e["posters"][1:2]]
+    es = {t["id"]: [entry(lg, i) for i in shown(t)] for t in TL}
+    firsts = [e["posters"][0] for t in TL for e in es[t["id"]]]
+    seconds = [p for t in TL for e in es[t["id"]] for p in e["posters"][1:2]]
     mosaic = "".join(f'<img src="{R}assets/{p}" alt="">' for p in (firsts + seconds)[:8])
-    jump = "".join(f'<a href="#{t["id"]}">{E(t["name"][lg])}</a>' for t in TOPICS)
+    jump = "".join(f'<a href="#{t["id"]}">{E(t["name"][lg])}</a>' for t in TL)
     body = (f'<body>\n{header(lg, path, R, cur="page")}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">{mosaic}</div><canvas class="fx" aria-hidden="true"></canvas>\n'
-            f'<p class="eyebrow">Learning Data</p>\n<h1>{T(lg, "Topics", "Temas")}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg]}</p>\n'
-            f'<nav class="topic-jump" aria-label="{T(lg, f"The {NUM['en'][len(TOPICS) - 1]} topics", f"Los {NUM['es'][len(TOPICS) - 1]} temas")}">{jump}</nav>\n</section>\n')
-    for t in TOPICS:
+            f'<p class="eyebrow">Learning Data</p>\n<h1>{T(lg, "Topics", "Temas")}</h1>\n<p class="lead">{TOPICS_PAGE["lead"][lg].format(**TW)}</p>\n'
+            f'<nav class="topic-jump" aria-label="{T(lg, f"The {NUM['en'][len(TL) - 1]} topics", f"Los {NUM['es'][len(TL) - 1]} temas")}">{jump}</nav>\n</section>\n')
+    for t in TL:
         cards = "\n".join(topic_card(lg, e, RL, R) for e in es[t["id"]])
         body += (f'\n<section class="module topic" id="{t["id"]}" aria-labelledby="{t["id"]}-h">\n'
                  f'<div class="mhead"><div><p class="step">{E(t["who"][lg])}</p><h2 id="{t["id"]}-h">{E(t["name"][lg])}</h2><p>{E(t["line"][lg])}</p></div></div>\n'
@@ -941,7 +972,7 @@ def tiles(lg, R):
     series, each a link. For the home page and the intro's scenarios page, whose path to the site's root is R."""
     RL = R if lg == "en" else R[3:]
     out = []
-    for t in TOPICS[1:]:
+    for t in live()[1:]:
         rows = []
         for i in shown(t):
             e = entry(lg, i)

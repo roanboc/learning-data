@@ -168,6 +168,7 @@ SERIES = [
     dict(id="data-governance", dir="data-governance", slug="data-governance",
          name={"en": "Governance principles", "es": "Principios de gobernanza"}, builds_on=gov_builds_on,
          place={"en": "university", "es": "universidad"}, blocks=[], next="governance-on-the-map",
+         learn=dict(dir="data-governance", bundle="off-the-shelf"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and DCAM of the EDM Association, named or drawn only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="governance-on-the-map", dir="governance-on-the-map", slug="governance-on-the-map",

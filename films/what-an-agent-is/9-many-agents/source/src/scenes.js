@@ -28,8 +28,9 @@ scene("breathes",(ctx,S,t,sc)=>{
     // Harare, 1992: the street in the heart of the city, an empty plot behind a fence
     {at:0,place:"maHarare",keys:[[0,960,540,1],[0.3,1000,556,1.05]],d:5.6,draw:(c,tt)=>{ma_harareLife(c,tt,1.8);
       ma_scr(c,S,()=>ma_tag(c,"Harare, Zimbabwe · 1992",ag_in(tt,0.6,0.6)));}},
-    // the drawing board: two blocks of offices over shops; then the usual way, pencilled onto it, and what it costs
-    {at:tPearce,place:"maDesk",keys:[[0,880,470,1.24],[tAC-1.4,900,490,1.16],[tOwners-1.0,920,480,1.12]],d:2.0,draw:(c,tt)=>{
+    // the drawing board: two blocks of offices over shops; then the usual way, pencilled onto it, and what it costs. The camera
+    // stays back far enough that the sheet's foot (the shops, the bills, the title block) sits above the captions
+    {at:tPearce,place:"maDesk",keys:[[0,880,560,1.16],[tAC-1.4,900,565,1.12],[tOwners-1.0,920,560,1.1]],d:2.0,draw:(c,tt)=>{
       const gone=ag_in(tt,tChange,1.2),body=MA_SKL.slice(0,-8),shops=MA_SKL.slice(-8);
       ma_sketch(c,body,tt,tPearce+0.1,2.6);
       const ush=clamp((tt-(tPearce+1.2))/2.4,0,1),tip=ma_pencil(c,shops,ush);
@@ -160,7 +161,7 @@ scene("trace",(ctx,S,t,sc)=>{
         c.fillStyle=G;c.fillRect(1060-r,470-r,r*2,r*2);ag_T(c,"?",1060,494,{w:800,size:64,align:"center",col:[250,246,236],a:g});}
       ma_pillAt(c,960,170,"86 billion",tt,t86,null,{size:36});}},
     // 6 May 2010: a calm line of prices; one program sells a huge order, whatever the price; fast programs pass contracts back and forth
-    {at:tMk,place:"maTrading",keys:[[0,960,540,1.0],[tMin-0.8,960,480,1.05],[tMonths-1.2,960,540,1.0]],d:2.0,draw:(c,tt)=>{
+    {at:tMk,place:"maTrading",keys:[[0,960,540,1.0],[tMin-0.8,908,480,1.05],[tMonths-1.2,960,540,1.0]],d:2.0,draw:(c,tt)=>{
       const u=lerp(0.02,0.775,sstep(tMk,tMin,tt))+0.04*ag_sine((tt-tFell+0.4)/1.4)+0.045*ag_sine((tt-tSix)/1.6)+0.14*sstep(tBack+0.4,tMonths,tt);
       ma_index(c,u,1);
       const pa=1-ag_in(tt,tMonths-0.6,0.6);ma_programs(c,tt,{seller:ag_in(tt,tSold,0.5)*pa,fast:ag_in(tt,tFast-0.6,0.8)*pa,heat:sstep(tFast,tPotato+1.2,tt)*(1-sstep(tBack,tBack+1.5,tt))});

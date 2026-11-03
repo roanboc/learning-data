@@ -11,7 +11,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Buildings that size were usually cooled by air conditioning: imported, expensive, and running all day.":
 "Los edificios de ese tamaño solían enfriarse con aire acondicionado: importado, caro y encendido todo el día.",
 "That meant high bills, and high rents for the shops and offices inside.":
-"Eso significaba facturas altas, y alquileres altos para las tiendas y oficinas del edificio.",
+"Eso significaba facturas altas y alquileres altos para las tiendas y oficinas.",
 "Something had to change. The owners asked for a building that would cool itself.":
 "Algo tenía que cambiar. Los dueños pidieron un edificio que se enfriara solo.",
 "Pearce looked to termite mounds, which were thought then to breathe like chimneys,":
@@ -21,13 +21,13 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "So he built Eastgate to breathe that way, with many simple parts instead of one big machine.":
 "Así que construyó Eastgate para que respirara así, con muchas piezas simples en vez de una gran máquina.",
 "On Harare's cool nights, fans pull air in, and concrete under the floors stores the cool.":
-"En las noches frescas de Harare, los ventiladores hacen entrar aire, y el concreto bajo los pisos guarda el fresco.",
+"En las noches frescas de Harare, los ventiladores meten aire y el concreto bajo los pisos guarda el fresco.",
 "By day, warm air rises out through forty-eight brick chimneys.":
-"De día, el aire caliente sube y sale por cuarenta y ocho chimeneas de ladrillo.",
+"De día, el aire caliente sale por cuarenta y ocho chimeneas de ladrillo.",
 "Eastgate opened in 1996, with no air conditioning.":
 "Eastgate abrió en 1996, sin aire acondicionado.",
 "It cost about a tenth less to build, and used far less energy.":
-"Construirlo costó cerca de una décima parte menos, y usaba mucha menos energía.",
+"Costó cerca de un décimo menos construirlo, y usaba mucha menos energía.",
 "Rents could be lower, and its shops and offices were let before it was finished.":
 "Los alquileres podían bajar, y sus tiendas y oficinas se alquilaron antes de terminarlo.",
 "At the university, after each census day, the council asks why each faculty's count changed.":
@@ -41,7 +41,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Each drops its mud where its nestmates' scent is strongest, so pillars rise, then arches. The work itself tells the next worker what to do.":
 "Cada una deja su barro donde más huelen sus compañeras, y se alzan pilares, luego arcos. La obra le dice a la siguiente qué hacer.",
 "Ants leave scent too. Given two bridges to food, most soon take the shorter,":
-"Las hormigas también dejan olor. Ante dos puentes a la comida, casi todas toman pronto el más corto,",
+"Las hormigas también dejan rastro. Con dos puentes a la comida, pronto casi todas usan el más corto,",
 "where scent builds up faster, and their trails become the colony's shared memory.":
 "donde el olor se acumula más rápido, y sus rastros se vuelven la memoria compartida de la colonia.",
 "Starlings over Rome turn together in flocks of thousands, each bird watching only six or seven neighbours. No bird leads.":
@@ -63,7 +63,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Often, a lead agent splits the job among helpers, each with its own instructions, and another agent checks what they find.":
 "A menudo, un agente principal reparte el trabajo entre ayudantes, cada uno con sus instrucciones, y otro agente revisa lo que encuentran.",
 "Such teams can beat one agent on hard research, at many times the computing.":
-"Estos equipos pueden superar a un solo agente en investigaciones difíciles, con mucho más cómputo.",
+"Estos equipos pueden superar a un agente en investigación difícil, con mucho más cómputo.",
 "Yet a 2025 study of seven such systems found them failing on forty-one to eighty-seven percent of tasks.":
 "Pero un estudio de 2025 sobre siete sistemas así halló que fallaban en cuarenta y uno a ochenta y siete de cada cien tareas.",
 "And together, they do things no one planned.":
@@ -101,17 +101,17 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Around 1950, near Bristol, Grey Walter built a robot tortoise that kept itself going: when its battery ran low, it went home to recharge.":
 "Hacia 1950, cerca de Bristol, Grey Walter construyó una tortuga robot que se mantenía sola: con la batería baja, volvía a casa a recargarse.",
 "In 2020, American scientists shaped frog cells, to a computer's design, into tiny bodies that swim and heal.":
-"En 2020, científicos estadounidenses dieron forma a células de rana, según un diseño de computadora, en cuerpos diminutos que nadan y sanan.",
+"En 2020, científicos estadounidenses moldearon células de rana, con un diseño de computadora, en cuerpos diminutos que nadan y sanan.",
 "A year later, some gathered loose cells into new ones.":
 "Un año después, algunos juntaron células sueltas en otros nuevos.",
 "Today's agents do none of this: they don't make themselves, and they run only because we run them.":
-"Los agentes de hoy no hacen nada de esto: no se hacen a sí mismos, y funcionan solo porque nosotros los hacemos funcionar.",
+"Los agentes de hoy no hacen nada de esto: no se hacen a sí mismos, y solo funcionan porque los ponemos a funcionar.",
 "Imagine, and this is only imagined, agents that start other agents, mend each other's work, and keep systems running through the night.":
 "Imagina, y es solo imaginado, agentes que inician otros agentes, corrigen el trabajo ajeno y mantienen sistemas en marcha toda la noche.",
 "They might find what no person could, or settle on habits no person chose. We don't know.":
 "Podrían encontrar lo que ninguna persona podría, o adoptar hábitos que nadie eligió. No lo sabemos.",
 "Neither did Eastgate's builders.":
-"Tampoco lo sabían los constructores de Eastgate.",
+"Tampoco los constructores de Eastgate.",
 "Years later, sensors in real mounds showed the air moves less like a chimney than a lung,":
 "Años después, sensores en termiteros reales mostraron que el aire se mueve menos como chimenea que como pulmón,",
 "pushed by the day's warmth and the night's cool.":

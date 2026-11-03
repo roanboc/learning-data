@@ -1,0 +1,165 @@
+/* ===== A model, reasoning, hands and a loop: the room's own pieces =====
+   Everything this film puts in the series' room (the lab, the agent, the cards) that the shared code doesn't have (prefix ml_):
+     ML_ROOM      where things stand: Jun, his goal card, the agent's ring, its three tools (the style prototype's layout)
+     ml_parts     the four parts in a row under the kicker, model, reasoning, hands, loop, each lighting in its colour
+     ml_cal       a calendar card: a day, or a year
+     ml_byHand    the five small cards of the afternoon by hand, find the tables to fix, with an amber arrow from fix back to query
+     ml_clock     a clock on a card, its hands moving through the afternoon
+     ml_pages     pale pages without words, streaming into the model
+     ml_written   a card the model writes on, letter by letter, with the words that could come next
+     ml_cabinet   a cabinet of drawers, "Student records", behind glass
+     ml_plan      the model's plan, written line by line, a tick by each line that meets the team's rules
+     ml_server    a tool server: a small matte box behind a tool, its cable, and the same plug as every arm (the open standard)
+     ml_thought   a violet thought from the model
+     ml_globe     a pale globe, "the web"
+     ml_columns   two columns on the wall: steps known (a plain script) and steps nobody can write in advance (an agent)
+   Words are drawn live with ag_T, at least 28 px, above y 890. */
+
+const ML_ROOM={jun:[300,600,1],ring:[1124,476],tools:[["Catalog",264],["Query",422],["Docs",580]],tx:1605,tw:256,th:116,
+  goal:[452,212,384],parts:[96,148]};
+const ML_COL={model:AG.violet,reasoning:AG.violet,hands:AG.blue,loop:AG.amber};
+// the arm from Act to a tool's card (the prototype's three curves)
+const ml_arm=i=>{const y=ML_ROOM.tools[i][1]+58;return[1360,476,1450,476,1500,y,ML_ROOM.tx-4,y];};
+
+/* ---------------------------------------------------------------- the four parts, under the kicker
+   ml_parts(ctx, on, o): on[i] (0 to 1) lights part i in its colour; o.a; o.gather (0 to 1) carries them into the ring at o.to
+   ([x, y]), each to its place: the model to the middle, reasoning to the band, hands to Act, the loop to the ring. Returns the chips. */
+const ML_PARTS=[["model",AG.violet],["reasoning",AG.violet],["hands",AG.blue],["loop",AG.amber]];
+function ml_parts(ctx,on,o){o=o||{};const a=o.a==null?1:o.a,[x0,y0]=ML_ROOM.parts,h=48,out=[];let x=x0;
+  const to=o.to||ML_ROOM.ring,dest=[[to[0],to[1]+40],[to[0],to[1]-12],[to[0]+180,to[1]],[to[0]-180,to[1]]],g=ag_sine(o.gather||0);
+  ML_PARTS.forEach(([s,col],i)=>{const w=ag_tw(ctx,s,{w:700,size:28})+44,b={x,y:y0,w,h};out.push(b);x+=w+14;if(a<=0)return;
+    const cx=lerp(b.x+w/2,dest[i][0],g),cy=lerp(b.y+h/2,dest[i][1],g),k=lerp(1,0.6,g),l=clamp(on[i]||0,0,1),fa=a*(1-sstep(0.75,1,g));if(fa<=0.01)return;
+    ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);
+    ag_box(ctx,-w/2,-h/2,w,h,h/2,{a:fa,edge:l>0.05?col:null,edgeA:0.9*l,glow:l>0.05?col:null,glowA:l});
+    ctx.save();ctx.globalAlpha*=fa;if(l>0.01){ctx.fillStyle=rgba(col,0.12*l);ctx.beginPath();ag_rect(ctx,-w/2,-h/2,w,h,h/2);ctx.fill();}
+    ag_T(ctx,s,0,10,{w:700,size:28,align:"center",col:mix(AG.mut,col,l)});ctx.restore();ctx.restore();});
+  return out;}
+
+/* ---------------------------------------------------------------- a calendar card
+   ml_cal(ctx, x, y, w, head, big, o): two rings on top, a strip with head (the month, or the day), big words under it; o.sub a
+   quieter line, o.col the strip's colour (oak), o.tick a green tick, o.a, o.k (springs in). Returns its box. */
+function ml_cal(ctx,x,y,w,head,big,o){o=o||{};const a=o.a==null?1:o.a,h=o.sub?196:156,b={x,y,w,h};if(a<=0)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
+  ag_box(ctx,x,y,w,h,18,{});const col=o.col||AG_OAK.dark;
+  ctx.save();ctx.beginPath();ag_rect(ctx,x,y,w,h,18);ctx.clip();ctx.fillStyle=rgba(col,0.9);ctx.fillRect(x,y,w,54);ctx.restore();
+  for(const rx of [x+w*0.28,x+w*0.72]){ctx.fillStyle="#5A564F";ctx.beginPath();ag_rect(ctx,rx-5,y-14,10,30,5);ctx.fill();}
+  ag_T(ctx,head,x+w/2,y+38,{w:700,size:28,align:"center",col:[255,255,255]});
+  ag_T(ctx,big,x+w/2,y+112,{w:800,size:44,align:"center"});
+  if(o.sub)ag_T(ctx,o.sub,x+w/2,y+160,{w:600,size:28,align:"center",col:AG.mut});
+  if(o.tick)ag_tick(ctx,x+w-34,y+h-34,26,rgba(AG.green,clamp(o.tick,0,1)),4);
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the afternoon by hand
+   ml_byHand(ctx, t, k, o): five small cards along the wall from (o.x, o.y), each in as k[i] (0 to 1) says; o.loop (0 to 1) draws
+   the amber arrow from "fix" back to "query" and sends a light round it; o.into (0 to 1) carries them into the ring at o.to. */
+const ML_HAND=["find the tables","read the rules","query","check","fix"];
+function ml_byHand(ctx,t,k,o){o=o||{};const a=o.a==null?1:o.a,x0=o.x||560,y0=o.y||600,h=56,gap=26,out=[];let x=x0;
+  for(const s of ML_HAND){const w=ag_tw(ctx,s,{w:700,size:28})+44;out.push({x,y:y0,w,h,s});x+=w+gap;}
+  if(a<=0)return out;const into=ag_sine(o.into||0),to=o.to||ML_ROOM.ring;ctx.save();ctx.globalAlpha*=a;
+  // the arrow: from fix's top, over check, back down to query
+  const L=clamp(o.loop||0,0,1);if(L>0&&into<0.3){const f=out[4],q=out[2],p=[f.x+f.w/2,f.y-6,f.x+f.w/2,f.y-110,q.x+q.w/2,q.y-110,q.x+q.w/2,q.y-10];
+    ctx.save();ctx.globalAlpha*=1-into/0.3;ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=5;ctx.lineCap="round";ag_bzPath(ctx,p,0,ag_sine(L));ctx.stroke();
+    if(L>0.98){const e=ag_bz(p,1),e0=ag_bz(p,0.96);ag_arrowHead(ctx,e[0],e[1],Math.atan2(e[1]-e0[1],e[0]-e0[0]),14,rgba(AG.amber,0.95));
+      const u=(t*0.6)%1,q2=ag_bz(p,u);ctx.shadowColor=rgba(AG.amber,0.7);ctx.shadowBlur=14;ctx.fillStyle=rgba(AG.amber,1);ctx.beginPath();ctx.arc(q2[0],q2[1],8,0,TAU);ctx.fill();}
+    ctx.restore();}
+  out.forEach((b,i)=>{const ki=clamp(k[i]||0,0,1);if(ki<=0)return;const sp=ag_spr(ki,0,1),cx=lerp(b.x+b.w/2,to[0]+(i-2)*14,into),cy=lerp(b.y+h/2,to[1],into),
+      s=lerp(1,0.3,into)*lerp(0.6,1,clamp(sp,0,1.2)),fa=ki*(1-sstep(0.7,1,into));if(fa<=0.01)return;
+    ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);ag_box(ctx,-b.w/2,-h/2,b.w,h,16,{a:fa,edge:i===4&&L>0?AG.amber:null,edgeA:0.6});
+    ag_T(ctx,b.s,0,10,{w:700,size:28,align:"center",a:fa});ctx.restore();});
+  ctx.restore();return out;}
+
+/* ---------------------------------------------------------------- a clock on a card: hour (1 to 5 through the afternoon), a label under the face */
+function ml_clock(ctx,x,y,hour,label,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||260,h=270;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{});const cx=x+w/2,cy=y+104,r=74;
+  ctx.fillStyle="#F8F6F2";ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fill();ctx.strokeStyle="rgba(60,56,50,0.5)";ctx.lineWidth=3;ctx.stroke();
+  for(let i=0;i<12;i++){const an=i/12*TAU;ctx.strokeStyle="rgba(60,56,50,0.55)";ctx.lineWidth=i%3?2:4;ctx.beginPath();ctx.moveTo(cx+Math.sin(an)*(r-12),cy-Math.cos(an)*(r-12));ctx.lineTo(cx+Math.sin(an)*(r-4),cy-Math.cos(an)*(r-4));ctx.stroke();}
+  const hA=hour/12*TAU,mA=(hour%1)*TAU;ctx.lineCap="round";
+  ctx.strokeStyle="#3A3733";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(hA)*r*0.5,cy-Math.cos(hA)*r*0.5);ctx.stroke();
+  ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.sin(mA)*r*0.78,cy-Math.cos(mA)*r*0.78);ctx.stroke();
+  ctx.fillStyle=rgba(AG.amber,1);ctx.beginPath();ctx.arc(cx,cy,6,0,TAU);ctx.fill();
+  ag_T(ctx,label,cx,y+h-34,{w:700,size:30,align:"center"});ctx.restore();return{x,y,w,h};}
+
+/* ---------------------------------------------------------------- pages without words, streaming into the model at (x, y), r its size; a (0 to 1) */
+function ml_pages(ctx,t,x,y,r,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;
+  for(let i=0;i<14;i++){const u=((t*0.32+i/14)%1),sy=170+((i*137)%560),p=[-80,sy,420,sy,x-420,y+(sy-y)*0.25,x-r*0.4,y],q=ag_bz(p,ag_sine(u)),q0=ag_bz(p,ag_sine(Math.max(0,u-0.01)));
+    const s=lerp(1,0.25,sstep(0.6,1,u)),fa=sstep(0,0.12,u)*(1-sstep(0.88,1,u));if(fa<=0.01)continue;
+    ctx.save();ctx.translate(q[0],q[1]);ctx.rotate(Math.atan2(q[1]-q0[1],q[0]-q0[0])*0.3+Math.sin(i*1.7)*0.12);ctx.scale(s,s);
+    ag_box(ctx,-34,-44,68,88,6,{a:fa*0.92});ctx.strokeStyle="rgba(140,132,120,"+(0.25*fa)+")";ctx.lineWidth=3;
+    for(let l=0;l<5;l++){ctx.beginPath();ctx.moveTo(-22,-28+l*13);ctx.lineTo(l===4?4:22,-28+l*13);ctx.stroke();}ctx.restore();}
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- a card the model writes on
+   ml_written(ctx, x, y, w, text, k, o): the text in violet, letter by letter as k goes 0 to 1, a caret while it writes; o.cands,
+   the words that could come next, wait one under another after the text, faint (o.candA[i], 0 to 1, as each comes), and as o.pick
+   goes 0 to 1 the first darkens in its place and the others go; o.kick; o.h; o.ka springs it in; o.a. */
+function ml_written(ctx,x,y,w,text,k,o){o=o||{};const a=o.a==null?1:o.a,h=o.h||((o.kick?150:112)+(o.cands?(o.cands.length-1)*48:0));if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+  if(o.ka!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.ka));ag_box(ctx,x,y,w,h,20,{edge:AG.violet,edgeA:0.45});let yy=y+68;
+  if(o.kick){ag_T(ctx,String(o.kick).toUpperCase(),x+28,y+50,{w:700,size:28,ls:4,col:AG.mut});yy=y+108;}
+  const n=Math.round(clamp(k,0,1)*text.length),s=text.slice(0,n),sz=o.size||34;ag_T(ctx,s,x+28,yy,{w:700,size:sz,col:AG.violet});
+  const ex=x+28+ag_tw(ctx,s,{w:700,size:sz});if(k>0&&k<1){ctx.fillStyle=rgba(AG.violet,0.8);ctx.fillRect(ex+4,yy-sz*0.78,3,sz*0.9);}
+  // the words that could come next, faint, one under another; the picked one moves up into its place and darkens, the others go
+  if(o.cands){const pk=clamp(o.pick||0,0,1),sp=ag_tw(ctx," ",{w:700,size:sz});o.cands.forEach((wd,i)=>{const ca=clamp((o.candA||[])[i]==null?1:o.candA[i],0,1)*(i===0?1:1-pk);if(ca<=0.01)return;
+    const ty=i===0?lerp(yy,yy,pk):yy+i*48;ag_T(ctx,wd,ex+sp,ty,{w:700,size:sz,col:AG.violet,a:ca*(i===0?lerp(0.32,1,pk):0.32)});});}
+  ctx.restore();return{x,y,w,h,ex};}
+
+/* ---------------------------------------------------------------- a cabinet of drawers, behind glass: "Student records"; o.lit (0 to 1) */
+function ml_cabinet(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+  ag_floorShadow(ctx,x+w/2+AG.sdx*2,y+h+10,w*0.6,18,0.22);
+  ag_soft(ctx,c=>ag_rect(c,x,y,w,h,10),[176,172,164],[226,224,218],x+w*0.75,y+40,w*1.1,"rgba(46,38,28,0.35)",18,0.6);
+  const n=4,dh=(h-40)/n;for(let i=0;i<n;i++){const dy=y+20+i*dh;ag_soft(ctx,c=>ag_rect(c,x+16,dy+6,w-32,dh-12,6),[196,192,184],[236,234,230],x+w*0.7,dy+10,w,"rgba(46,38,28,0.3)",8,0.6);
+    ctx.fillStyle="#6A665F";ctx.beginPath();ag_rect(ctx,x+w/2-30,dy+dh/2-6,60,12,6);ctx.fill();}
+  ag_glass(ctx,x-40,y-40,w+80,h+40,{label:""});
+  ag_T(ctx,o.label||"Student records",x+w/2,y+h+56,{w:700,size:30,align:"center",col:AG.ink});
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- the model's plan
+   ml_plan(ctx, x, y, w, lines, o): a card with a violet edge, "Plan", and lines, each written in as o.k[i] (0 to 1) says, in ink,
+   or in violet when o.fresh[i]; o.tick[i] (0 to 1) a green tick by line i; o.amber[i] marks a line amber (with a warning). Returns
+   the card and each line's y. */
+function ml_plan(ctx,x,y,w,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=44,gap=10,inner=w-56-50;
+  // each line wrapped to the card, its second part indented under the words after its number
+  const L=lines.map(l=>{const m=l.match(/^(\d+) /),pre=m?m[0]:"",ind=m?ag_tw(ctx,pre,{w:600,size:30}):0,ws=ag_wrap(ctx,l.slice(pre.length),inner-ind,{w:600,size:30});return{pre,ind,ws};});
+  let yy=y+96;const ys=L.map(e=>{const r=yy;yy+=e.ws.length*lh+gap;return r;}),h=yy-y+12,out={x,y,w,h,ys};if(a<=0)return out;ctx.save();ctx.globalAlpha*=a;
+  if(o.ka!=null)ag_about(ctx,x+w/2,y,lerp(0.4,1,o.ka));
+  ag_box(ctx,x,y,w,h,22,{edge:AG.violet,edgeA:0.8});ag_T(ctx,o.title||"Plan",x+28,y+52,{w:800,size:34,col:AG.violet});
+  L.forEach((e,i)=>{const k=clamp((o.k||[])[i]==null?1:o.k[i],0,1);if(k<=0)return;const fresh=o.fresh&&o.fresh[i],am=o.amber&&o.amber[i],col=am?AG.amber:fresh?AG.violet:AG.ink;
+    const full=e.pre+e.ws.join(" "),n=Math.round(k*full.length);let used=0;
+    const parts=[e.pre+e.ws[0]].concat(e.ws.slice(1));parts.forEach((pt,j)=>{const take=clamp(n-used,0,pt.length);used+=pt.length+(j?1:0);if(take<=0)return;
+      ag_T(ctx,pt.slice(0,take),x+28+(j?e.ind:0),ys[i]+10+j*lh,{w:600,size:30,col});});
+    const tk=(o.tick||[])[i]||0;if(tk>0)ag_tick(ctx,x+w-40,ys[i],26,rgba(AG.green,tk),4);if(am)ag_warn(ctx,x+w-40,ys[i],28,rgba(AG.amber,1));});
+  ctx.restore();return out;}
+
+/* ---------------------------------------------------------------- a tool server and the open standard's plug
+   ml_server(ctx, x, y, o): a small matte box whose left side meets a tool's card at (x, y): a cable running right out of the frame;
+   o.label ("tool server"), o.a. ml_plug(ctx, x, y, ang, s, col, a): the plug every arm ends in and every server takes. */
+function ml_server(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const w=110,h=86;
+  ctx.strokeStyle="#4C4C52";ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x+w-8,y+h*0.6);ctx.bezierCurveTo(x+w+40,y+h*0.6,x+w+20,y+h+40,x+w+80,y+h+60);ctx.stroke();
+  ag_soft(ctx,c=>ag_rect(c,x,y,w,h,12),[200,200,204],[240,240,244],x+w*0.7,y+16,120,"rgba(46,38,28,0.35)",12,0.7);
+  ctx.fillStyle=rgba(AG.blue,0.85);for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(x+w-22,y+20+i*16,4,0,TAU);ctx.fill();}
+  ctx.restore();}
+function ml_plug(ctx,x,y,ang,s,col,a){a=a==null?1:a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(ang);ctx.scale(s,s);
+  ctx.fillStyle=col||"#3E3F45";ctx.beginPath();ag_rect(ctx,-14,-13,22,26,6);ctx.fill();ctx.fillStyle="#B8B2A6";ctx.fillRect(8,-8,10,4);ctx.fillRect(8,4,10,4);ctx.restore();}
+
+/* ---------------------------------------------------------------- a violet thought from the model: a cloud of a card with small dots down to (px, py) */
+function ml_thought(ctx,x,y,text,a,o){o=o||{};if(a<=0.01)return null;const w=ag_tw(ctx,text,{w:700,size:32})+64,h=80;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h,lerp(0.5,1,o.k));
+  if(o.px!=null){for(let i=0;i<3;i++){const u=(i+1)/4,cx=lerp(x+w*0.25,o.px,u),cy=lerp(y+h,o.py,u),r=lerp(12,6,u);ag_box(ctx,cx-r,cy-r,2*r,2*r,r,{edge:AG.violet,edgeA:0.5});}}
+  ag_box(ctx,x,y,w,h,40,{edge:AG.violet,edgeA:0.8});ag_T(ctx,text,x+w/2,y+h/2+11,{w:700,size:32,align:"center",col:AG.violet});ctx.restore();return{x,y,w,h};}
+
+/* ---------------------------------------------------------------- a pale globe, "the web" (meridians and parallels on a matte sphere) */
+function ml_globe(ctx,x,y,r,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;
+  ag_soft(ctx,c=>c.arc(x,y,r,0,TAU),[214,222,228],[250,252,254],x+r*0.35,y-r*0.4,r*1.2,"rgba(46,38,28,0.25)",14,0.9);
+  ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();ctx.strokeStyle="rgba(90,110,128,0.45)";ctx.lineWidth=2;
+  for(const k of [-0.6,-0.2,0.2,0.6]){ctx.beginPath();ctx.ellipse(x,y+k*r,r*Math.sqrt(1-k*k),r*0.12*Math.sqrt(1-k*k),0,0,TAU);ctx.stroke();}
+  for(const k of [0.25,0.6,0.92]){ctx.beginPath();ctx.ellipse(x,y,r*k,r,0,0,TAU);ctx.stroke();}ctx.restore();
+  ag_T(ctx,"the web",x,y+r+46,{w:700,size:30,align:"center",col:AG.mut});ctx.restore();}
+
+/* ---------------------------------------------------------------- two columns on the wall
+   ml_columns(ctx, a, o): "Steps known" (blue) on the left, "Steps nobody can write in advance" (violet) on the right; o.x0, o.x1 their
+   middles, o.y their heads' top. Returns where each column's contents go. */
+function ml_columns(ctx,a,o){o=o||{};const x0=o.x0||620,x1=o.x1||1300,y=o.y||170,w0=440,w1=560,h=640,out={left:[x0,y+260],right:[x1,y+260]};if(a<=0.01)return out;
+  ctx.save();ctx.globalAlpha*=a;
+  for(const [cx,w,col,s] of [[x0,w0,AG.blue,"Steps known"],[x1,w1,AG.violet,"Steps nobody can write in advance"]]){
+    ctx.fillStyle=rgba(col,0.06);ctx.beginPath();ag_rect(ctx,cx-w/2,y,w,h,26);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=2;ctx.setLineDash([10,10]);ctx.stroke();ctx.setLineDash([]);
+    const lines=ag_wrap(ctx,s,w-60,{w:800,size:34});lines.forEach((l,i)=>ag_T(ctx,l,cx,y+62+i*44,{w:800,size:34,align:"center",col}));}
+  ctx.restore();return out;}

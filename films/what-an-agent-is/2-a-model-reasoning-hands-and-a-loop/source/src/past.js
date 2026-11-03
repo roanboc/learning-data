@@ -259,7 +259,7 @@ function ml_boatBack(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return
   ag_soft(ctx,c=>ag_rect(c,-30,-104,60,40,6),P.engine,[150,150,156],14,-100,40,"rgba(0,0,0,0.45)",6);
   ctx.strokeStyle="rgba(58,56,56,0.9)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-22,-66);ctx.lineTo(-34,0);ctx.moveTo(22,-66);ctx.lineTo(34,0);ctx.stroke();
   // two heads in the cockpit, far off beyond the engine, over the hull's deck
-  if(o.heads){for(const hx of [-16,16]){ctx.fillStyle=rgba([84,60,42],1);ctx.beginPath();ctx.ellipse(hx,-14,8,9,0,0,TAU);ctx.fill();ctx.fillStyle=rgba(ML_P.suit,1);ctx.beginPath();ctx.ellipse(hx,-2,12,7,0,Math.PI,TAU);ctx.fill();}}
+  const side=o.out&&o.out.side||1;if(o.heads){for(const hx of [-16,16]){if(o.out&&hx*side>0)continue;ctx.fillStyle=rgba([84,60,42],1);ctx.beginPath();ctx.ellipse(hx,-14,8,9,0,0,TAU);ctx.fill();ctx.fillStyle=rgba(ML_P.suit,1);ctx.beginPath();ctx.ellipse(hx,-2,12,7,0,Math.PI,TAU);ctx.fill();}}
   slab(-400,400,-4,10,P.linen);
   // the floats under the wings' tips
   for(const sd of [-1,1]){ctx.strokeStyle=wood;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(sd*372,6);ctx.lineTo(sd*380,22);ctx.moveTo(sd*392,6);ctx.lineTo(sd*384,22);ctx.stroke();
@@ -273,13 +273,13 @@ function ml_boatBack(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return
   ag_soft(ctx,c=>{c.moveTo(-6,40);c.lineTo(-4,-54);c.quadraticCurveTo(0,-60,4,-54);c.lineTo(6,40);c.closePath();},P.linen,[255,255,250],4,-30,40,"rgba(80,70,50,0.35)",4);
   slab(-118,118,-22,8,P.linen);
   ctx.strokeStyle=wood;ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(-70,-14);ctx.lineTo(-10,34);ctx.moveTo(70,-14);ctx.lineTo(10,34);ctx.stroke();
-  // someone out on the right lower wing, from behind, a hand on the strut
-  if(o.out){const u=34,px=lerp(54,168,o.out.u||0),py=-104,sp=o.out.spec||{},tr=rgba(ag_dk(sp.coat||P.suit,0.2),1),step=Math.sin((o.out.u||0)*TAU*3)*4;
+  // someone out on a lower wing (the right; o.out.side -1 the left), from behind, a hand on the strut
+  if(o.out){ctx.save();ctx.scale(side,1);const u=34,px=lerp(54,168,o.out.u||0),py=-104,sp=o.out.spec||{},tr=rgba(ag_dk(sp.coat||P.suit,0.2),1),step=Math.sin((o.out.u||0)*TAU*3)*4;
     ctx.strokeStyle=tr;ctx.lineWidth=11;ctx.beginPath();ctx.moveTo(px-7,py+u*1.5);ctx.lineTo(px-9-step,-4);ctx.moveTo(px+7,py+u*1.5);ctx.lineTo(px+9+step,-4);ctx.stroke();
     ctx.fillStyle=rgba([40,34,30],1);for(const fx of [px-10-step,px+10+step]){ctx.beginPath();ctx.ellipse(fx,-4,8,4,0,0,TAU);ctx.fill();}
     ml_backFig(ctx,px,py,u,Object.assign({len:1.62},sp));
     ctx.strokeStyle=rgba(ag_dk((o.out.spec&&o.out.spec.coat)||P.suit,0.1),1);ctx.lineWidth=9;ctx.beginPath();ctx.moveTo(px-u*0.42,py+u*0.25);ctx.lineTo(130+2,py+u*0.1);ctx.stroke();
-    ctx.fillStyle=rgba((o.out.spec&&o.out.spec.skin)||[214,176,146],1);ctx.beginPath();ctx.arc(132,py+u*0.1,5,0,TAU);ctx.fill();}
+    ctx.fillStyle=rgba((o.out.spec&&o.out.spec.skin)||[214,176,146],1);ctx.beginPath();ctx.arc(132,py+u*0.1,5,0,TAU);ctx.fill();ctx.restore();}
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the people, for ag_person (dressed from photographs of the day, never likenesses) */
@@ -472,12 +472,13 @@ function ml_timeline(ctx,x,y,w,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0||k<=
    upper wing's edge and two struts, the pilot with both hands on the wheel (o.turn, radians, turns it, and his hands go with it; o.lift
    straightens his back, 0 to 1; o.nod), the hull's edge in front; o.gust (0 to 1) blows wind lines in from the left. o.who (a spec
    from ML_PEOPLE, the pilot of 1914 by default) and o.rest (0 to 1: the hands leave the wheel and rest on the hull's edge). */
-const ML_PIT={x:840,y:612,s:1.15,wheel:[566,730,118],edge:900};
-// the two-jointed arm's angles (degrees, from straight down, forwards positive) that put a wrist at T, the elbow below: figure space;
+const ML_PIT={x:840,y:612,s:1.15,wheel:[566,730,118],edge:900,mate:[1460,596,0.92]};
+// the two-jointed arm's angles (degrees, from straight down, forwards positive) that put a wrist at T, the elbow below (up: the elbow
+// on the other side, out behind a raised hand): figure space;
 // ml_grip puts the fist there instead (the wrist a little short of it, along the forearm)
 function ml_grip(J,T){const a=ml_ik(J,T),r=a[1]*Math.PI/180,f=AG_FIG.fore;return ml_ik(J,[T[0]-Math.sin(r)*58*f,T[1]-Math.cos(r)*58]);}
-function ml_ik(J,T){const f=AG_FIG.fore,L1=AG_FIG.L1,L2=AG_FIG.L2,jx=J[0]/f,tx=T[0]/f,dx=tx-jx,dy=T[1]-J[1],d=clamp(Math.hypot(dx,dy),Math.abs(L1-L2)+1,L1+L2-1);
-  const ph=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),a1=ph-al,ex=jx+Math.sin(a1)*L1,ey=J[1]+Math.cos(a1)*L1;
+function ml_ik(J,T,up){const f=AG_FIG.fore,L1=AG_FIG.L1,L2=AG_FIG.L2,jx=J[0]/f,tx=T[0]/f,dx=tx-jx,dy=T[1]-J[1],d=clamp(Math.hypot(dx,dy),Math.abs(L1-L2)+1,L1+L2-1);
+  const ph=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),a1=up?ph+al:ph-al,ex=jx+Math.sin(a1)*L1,ey=J[1]+Math.cos(a1)*L1;
   return[a1*180/Math.PI,Math.atan2(tx-ex,T[1]-ey)*180/Math.PI];}
 function ml_cockpit(ctx,t,o){o=o||{};const P=ML_P,roll=o.roll||0,turn=o.turn||0,[wx,wy,wr]=ML_PIT.wheel;
   // the world beyond, tipping about the frame's middle
@@ -489,14 +490,22 @@ function ml_cockpit(ctx,t,o){o=o||{};const P=ML_P,roll=o.roll||0,turn=o.turn||0,
   const wing=c=>{c.moveTo(-20,0);c.lineTo(1940,0);c.lineTo(1940,56);c.bezierCurveTo(1300,72,620,72,-20,62);c.closePath();};
   ag_soft(ctx,wing,P.linenDk,[255,250,236],1500,40,700,"rgba(80,70,50,0.35)",14,0.6);
   ctx.strokeStyle="rgba(140,128,100,0.4)";ctx.lineWidth=2;for(let k=0;k<12;k++){const x=40+k*170;ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+(x-960)*0.04,64);ctx.stroke();}
-  for(const [x0,x1] of [[150,110],[1760,1810]]){const st=c=>{c.moveTo(x0-12,60);c.lineTo(x0+12,60);c.lineTo(x1+16,1080);c.lineTo(x1-16,1080);c.closePath();};
+  for(const [x0,x1] of [[64,30],[1760,1810]]){const st=c=>{c.moveTo(x0-12,60);c.lineTo(x0+12,60);c.lineTo(x1+16,1080);c.lineTo(x1-16,1080);c.closePath();};
     ag_soft(ctx,st,P.strut,ag_lt(P.strut,0.4),x0+20,300,400,"rgba(40,24,10,0.4)",8,0.5);}
-  ctx.strokeStyle="rgba(70,64,58,0.5)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(150,110);ctx.lineTo(-40,700);ctx.moveTo(1760,110);ctx.lineTo(1960,640);ctx.stroke();
+  ctx.strokeStyle="rgba(70,64,58,0.5)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(64,110);ctx.lineTo(-60,640);ctx.moveTo(1760,110);ctx.lineTo(1960,640);ctx.stroke();
   // the pilot, his hands on the wheel's rim, wherever it has turned
   const J=AG_FIG.shoulder,rim=a=>[wx+Math.cos(a)*wr*0.7,wy+Math.sin(a)*wr],lift=o.lift||0,rest=ag_sine(clamp(o.rest||0,0,1)),edgeF=596+(ML_PIT.edge-6-ML_PIT.y)/ML_PIT.s;
   const nT=rim(Math.PI-0.12+turn),fT=rim(0.22+turn),nG=ml_grip(J.near,nT),fG=ml_grip(J.far,fT),nR=ml_ik(J.near,[372,edgeF]),fR=ml_ik(J.far,[640,edgeF+4]);
-  const pose={near:[lerp(nG[0],nR[0],rest),lerp(nG[1],nR[1],rest),rest>0.5?"rest":"hold"],far:[lerp(fG[0],fR[0],rest),lerp(fG[1],fR[1],rest),rest>0.5?"rest":"hold"]};
-  ag_person(ctx,o.who||ML_PEOPLE.pilot,ML_PIT.x,ML_PIT.y-lift*10,ML_PIT.s,{t,pose,covered:true,nod:(o.nod||0)-lift*0.04,gaze:[2,-1],smile:0.05,
+  // beside him and a little further off, his mechanic, his hands on the cockpit's edge (drawn first: he's further away)
+  if(o.mate){const [mx,my,ms]=ML_PIT.mate,eM=596+(ML_PIT.edge-6-my)/ms,mn=ml_ik(J.near,[372,eM]),mf=ml_ik(J.far,[640,eM+4]);
+    ag_person(ctx,o.mate,mx,my,ms,{t,pose:{near:[mn[0],mn[1],"rest"],far:[mf[0],mf[1],"rest"]},covered:true,gaze:o.mateGaze||[2,-0.6],smile:0.12});}
+  // his hands: on the wheel, resting on the edge, or (o.raise 0 to 1) let go, open in front of him (to 0.3), then raised beside his
+  // head, the near elbow out behind him
+  const rr=clamp(o.raise||0,0,1),r1=ag_sine(clamp(rr/0.3,0,1)),r2=ag_sine(clamp((rr-0.3)/0.7,0,1)),wrap=(a,b)=>b-a>180?b-360:b-a<-180?b+360:b;
+  const go=(S,F,U)=>{const m=[lerp(S[0],wrap(S[0],F[0]),r1),lerp(S[1],wrap(S[1],F[1]),r1)];return[lerp(m[0],wrap(m[0],U[0]),r2),lerp(m[1],wrap(m[1],U[1]),r2)];};
+  const nH=go([lerp(nG[0],nR[0],rest),lerp(nG[1],nR[1],rest)],[30,150],ml_ik(J.near,[80,360],true)),fH=go([lerp(fG[0],fR[0],rest),lerp(fG[1],fR[1],rest)],[40,150],ml_ik(J.far,[520,330]));
+  const kind=r1>0.5?"open":rest>0.5?"rest":"hold",pose={near:[nH[0],nH[1],kind],far:[fH[0],fH[1],kind]};
+  ag_person(ctx,o.who||ML_PEOPLE.sperry,ML_PIT.x,ML_PIT.y-lift*10,ML_PIT.s,{t,pose,covered:true,nod:(o.nod||0)-lift*0.04,gaze:[2,-1],smile:0.05,
     holdBack:(c,h)=>{c.save();c.translate(0,lift*10/ML_PIT.s);
       // the wheel's column, then the wheel seen at a slant: a wooden rim, three spokes, a brass hub
       c.strokeStyle="rgba(60,52,46,1)";c.lineWidth=22;c.lineCap="round";c.beginPath();c.moveTo(wx+10,wy+20);c.lineTo(wx+40,wy+420);c.stroke();
@@ -537,16 +546,16 @@ function ml_tableFront(ctx){const y=ML_TABLE.top,cloth=c=>{c.moveTo(-20,y);c.lin
   ctx.strokeStyle="rgba(170,160,140,0.35)";ctx.lineWidth=3;for(const x of [240,700,1180,1640]){ctx.beginPath();ctx.moveTo(x,y+40);ctx.bezierCurveTo(x+8,y+120,x-6,y+200,x+4,H);ctx.stroke();}
   ctx.fillStyle="rgba(255,255,255,0.6)";ctx.fillRect(-20,y-4,1960,8);}
 
-/* ---------------------------------------------------------------- the danger, without a crash: an aeroplane from behind, tipped, and the path it would take
-   ml_slip(ctx, x, y, w, h, k, o): a diagram inside the box (x, y, w, h): the water along its foot, the aeroplane from behind near its
-   top left, tipped by o.roll, and a dotted path sliding sideways and down from it, drawn on as k goes 0 to 1, fading out well before
-   the water. */
+/* ---------------------------------------------------------------- the danger, without a crash: an aeroplane from behind, tipped, slipping away
+   ml_slip(ctx, x, y, w, h, k, o): a diagram inside the box (x, y, w, h): the water along its foot, and the aeroplane from behind (o.s,
+   0.6 by default), tipped by o.roll, sliding sideways and down as k goes 0 to 1, tipping further, a dotted path behind it; it fades out
+   well before the water, and so does the path. */
 function ml_slip(ctx,x,y,w,h,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
   const wy=y+h-56;let g=ctx.createLinearGradient(0,wy,0,y+h);g.addColorStop(0,rgba(ML_P.water0,1));g.addColorStop(1,rgba(ML_P.water1,1));
   ctx.fillStyle=g;ctx.beginPath();ag_rect(ctx,x+30,wy,w-60,40,20);ctx.fill();
   ctx.strokeStyle="rgba(255,255,255,0.6)";ctx.lineWidth=2;for(let i=0;i<5;i++){const xx=x+80+i*(w-160)/4;ctx.beginPath();ctx.moveTo(xx,wy+14);ctx.lineTo(xx+40,wy+14);ctx.stroke();}
-  const px=x+w*0.3,py=y+h*0.32,path=[px+14,py+64,px+w*0.2,py+96,px+w*0.4,py+h*0.26,px+w*0.5,wy-30];
-  const n=26;for(let i=0;i<n;i++){const u=i/(n-1);if(u>k)break;const q=ag_bz(path,u),fade=1-sstep(0.45,0.9,u);if(fade<=0.02)continue;
-    ctx.fillStyle=rgba(AG.ink,0.85*fade);ctx.beginPath();ctx.arc(q[0],q[1],6,0,TAU);ctx.fill();}
-  ml_boatBack(ctx,px,py,o.s||0.42,{roll:o.roll==null?0.36:o.roll,t:o.t||0,heads:true});
+  const px=x+w*0.3,py=y+h*0.3,path=[px,py,px+w*0.16,py+30,px+w*0.34,py+h*0.2,px+w*0.44,wy-40],e=0.8*clamp(k,0,1);
+  const n=30;for(let i=0;i<n;i++){const u=i/(n-1)*0.8;if(u>e-0.04)break;const q=ag_bz(path,u),fade=1-sstep(0.45,0.78,u);if(fade<=0.02)continue;
+    ctx.fillStyle=rgba(AG.ink,0.7*fade);ctx.beginPath();ctx.arc(q[0],q[1]+40,6,0,TAU);ctx.fill();}
+  const q=ag_bz(path,e);ml_boatBack(ctx,q[0],q[1],o.s||0.6,{roll:(o.roll==null?0.36:o.roll)+0.5*e,t:o.t||0,heads:true,a:1-sstep(0.52,0.76,e)});
   ctx.restore();}

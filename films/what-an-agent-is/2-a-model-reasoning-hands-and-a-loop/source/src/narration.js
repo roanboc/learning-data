@@ -34,7 +34,8 @@ const NARR={
 ]},
 "reasons":{"name":"Reasoning","lead":1.0,"tail":1.0,"vo":[
  {"id":"second","gap":0.8,"text":"The second part is reasoning."},
- {"id":"plan","gap":0.8,"text":"Before it acts, the model writes out a plan: find the tables, count the students, and check the total against the census report, the university's official count."},
+ {"id":"plan","gap":0.3,"text":"Before it acts, the model writes out a plan: find the tables, count the students,"},
+ {"id":"report","gap":0.8,"text":"and check the total against the census report, the university's official count."},
  {"id":"rules","gap":0.8,"text":"It checks the plan against the rules Jun's team gave it: only the university's tools, only reading, and evidence for every answer."},
  {"id":"result","gap":0.8,"text":"It reads each result as feedback, and changes the plan if it must."},
  {"id":"is","gap":0.8,"text":"Reasoning is feedback, and checks against rules."}
@@ -67,7 +68,8 @@ const NARR={
  {"id":"recipe","gap":0.8,"text":"So Jun saves the query as a recipe in the project, with a test against the census report, and Noor approves it."},
  {"id":"runs","gap":0.8,"text":"Every census day, it runs in seconds, for almost nothing, the same way every time, like Sperry's box."},
  {"id":"took","gap":0.8,"text":"The agent took four minutes and twelve steps. A plain rerun needs no agent."},
- {"id":"web","gap":0.8,"text":"An agent can also take the long way: one of the team's agents once searched the web for the census rules, though Docs had them, because its plan didn't name its tools."},
+ {"id":"web","gap":0.3,"text":"An agent can also take the long way: one of the team's agents once searched the web for the census rules,"},
+ {"id":"docs","gap":0.8,"text":"though Docs had them, because its plan didn't name its tools."},
  {"id":"names","gap":0.8,"text":"Now each plan names its tools, and gives the agent only those the job needs."},
  {"id":"known","gap":0.8,"text":"Where the steps can be written down, let a plain script run them."},
  {"id":"keep","gap":0.8,"text":"Keep agents for the work whose steps nobody can write in advance."}

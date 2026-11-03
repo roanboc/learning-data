@@ -242,7 +242,166 @@ function ma_game(c,S,tt,T){const D=0.8,T0=T.tPaired-0.3,rk=Math.floor((tt-T0)/D)
       for(let k=0;k<6;k++)ma_nameChart(c,1050+(k%3)*240,262+Math.floor(k/3)*140,190,80,[0.5,0.5,0.5,0.5,0.5],1,{alpha:0.45,u:ag_sine((tt-T.tAlone+0.2-k*0.06)/0.8)});c.restore();}
     ma_cardAt(c,660,290,600,{kick:"Test",title:"the whole group"},tt,T.tTest-0.1,null,{edge:AG.blue,kickCol:AG.blue});});}
 
+/* ---------------------------------------------------------------- 5 · Agents on one board */
+scene("board",(ctx,S,t,sc)=>{
+  const T={tCounts:wAt(sc,"platform","counts come"),tSame:wAt(sc,"platform","the same way"),tReasons:wAt(sc,"platform","The reasons"),tWork:wAt(sc,"platform","work for agents"),
+    tLead:wAt(sc,"helper","A lead agent"),tEach:wAt(sc,"helper","each faculty"),tRead:wAt(sc,"helper","read but not"),tBox:wAt(sc,"helper","sandbox"),
+    tPins:wAt(sc,"pins","Each pins"),tSrc:wAt(sc,"pins","with its source"),tBoard:wAt(sc,"pins","shared board"),tReads:wAt(sc,"pins","reads what"),
+    tCheck:wAt(sc,"checking","A checking"),tComp:wAt(sc,"checking","compares"),tTwo:wAt(sc,"pattern","Two things"),tThree:wAt(sc,"pattern","three faculties"),
+    tSide:wAt(sc,"side","Side by side"),tSame31:wAt(sc,"side","the same thirty-one"),tMoved:wAt(sc,"side","moved"),tNoFac:wAt(sc,"side","no faculty"),
+    tDrop:wAt(sc,"word","dropouts"),tOthers:wAt(sc,"word","The others"),tEvery:wAt(sc,"word","every draft"),
+    tNone:wAt(sc,"left","None had left"),tFlag:wAt(sc,"left","checking agent flagged"),tStill:wAt(sc,"left","still studying"),
+    tDrafted:wAt(sc,"decided","The agents drafted"),tClara:wAt(sc,"decided","Clara"),tFixed:wAt(sc,"decided","fixed the word"),tAppr:wAt(sc,"decided","approved"),
+    tGot:wAt(sc,"faculty","got its faculty"),tTest:wAt(sc,"faculty","a new test"),tWithout:wAt(sc,"faculty","without an agent")};
+  ag_shots(ctx,S,t,sc.dur,[
+    // the table, then the room: helpers in their sandboxes, the board; close on the board for what emerged; Clara; the faculty fixed
+    {at:0,place:"lab",keys:[[0,960,348,1.55],[T.tWork-0.9,960,540,1],[T.tTwo-0.6,1258,372,1.45],[T.tDrafted-0.5,1110,432,1.25]],d:1.8,push:0,
+      draw:(c,tt)=>mb_room(c,S,tt,T)},
+    // Jun at his desk: the new test, which needs no agent
+    {at:T.tTest-0.6,place:"lab",keys:[[0,760,640,1.3]],push:0.03,draw:(c,tt)=>mb_jun(c,S,tt,T)}],0.8);
+});
+// where things are in the room for this chapter: the table of counts on the left of the wall, the reasons beside it, the board on the
+// right; on the floor the lead agent, four helpers in their sandboxes and the checking agent. Slots are the drafts' places on the board
+// (Arts and Education, Business, Engineering and IT, Health); c31 and flag the two cards that came from no one's job
+const MB={tab:[56,110],tab0:[700,120],board:[660,58,1196,524],slot:[[684,84],[1068,84],[684,336],[1068,336]],c31:[1452,84],flag:[1452,336],
+  lead:[260,806,58],help:[[560,812],[800,812],[1040,812],[1280,812]],check:[1660,806,50]};
+// each faculty's reason, as its helper drafts it, and where it came from; how many left each faculty with no reason in the notes
+const MB_REASON=[["more teacher trainees","notes"],["a new online MBA","email"],["more first-years","notes"],["fewer nursing places","email"]];
+const MB_GONE=[0,9,13,9];
+const mb_row=i=>MB.tab[1]+100+i*50;
+// where the table is: in the middle of the wall at first, then on its left as the room opens
+const mb_tab=(tt,T)=>{const u=ag_sine((tt-T.tWork+0.1)/1.4);return[lerp(MB.tab0[0],MB.tab[0],u),lerp(MB.tab0[1],MB.tab[1],u)];};
+// the platform's table of counts, compact: 520 by 336 from (x, y), in blue, its gear turning; o.rows (0..1) how many rows show,
+// o.hi[i] a soft blue band on row i (the checking agent comparing)
+function mb_counts(c,x,y,t,o){o=o||{};const a=o.a==null?1:o.a,w=520;if(a<=0)return;ma_sprung(c,x+w/2,y+168,o.k==null?1:o.k,a,()=>{
+  ag_box(c,x,y,w,336,20,{edge:AG.blue,edgeA:0.9});ag_T(c,"CENSUS COUNT",x+24,y+46,{w:700,size:28,ls:4,col:AG.blue});ma_gear(c,x+w-40,y+38,18,t*0.8,AG.blue);
+  const rows=o.rows==null?1:o.rows;MA_FAC.forEach((f,i)=>{const ra=clamp(rows*4-i,0,1);if(ra<=0)return;const yy=y+100+i*50;c.save();c.globalAlpha*=ra;
+    const hi=o.hi?o.hi[i]:0;if(hi>0){c.fillStyle=rgba(AG.blue,0.12*hi);rr(c,x+10,yy-34,w-20,46,10);c.fill();}
+    ag_T(c,f[0],x+24,yy,{w:600,size:28});ag_T(c,ma_n(f[1]),x+404,yy,{w:800,size:28,align:"right"});ag_T(c,ma_sgn(f[2]),x+w-24,yy,{w:500,size:28,align:"right",col:AG.mut});c.restore();});
+  c.strokeStyle=rgba(AG.blue,0.4);c.lineWidth=2;c.beginPath();c.moveTo(x+24,y+282);c.lineTo(x+w-24,y+282);c.stroke();
+  if(rows>=1){ag_T(c,"Total",x+24,y+318,{w:700,size:28});ag_T(c,"18,412",x+404,y+318,{w:800,size:28,align:"right"});ag_T(c,"+454",x+w-24,y+318,{w:500,size:28,align:"right",col:AG.mut});}});}
+// a sheet of notes or an email, small, at (x, y), scale s, turned rot
+function mb_sheet(c,x,y,s,email,rot,a){if(a<=0)return;c.save();c.globalAlpha*=a;c.translate(x,y);c.rotate(rot);c.scale(s,s);
+  c.save();c.shadowColor="rgba(46,38,28,0.2)";c.shadowBlur=8;c.shadowOffsetX=-2;c.shadowOffsetY=3;c.fillStyle=email?"#F4F3F0":"#F1EBDA";c.fillRect(-38,-48,76,96);c.restore();
+  if(email){c.fillStyle="rgba(60,70,80,0.18)";c.fillRect(-38,-48,76,18);c.strokeStyle="rgba(60,70,80,0.45)";c.lineWidth=2;c.beginPath();c.moveTo(-30,-44);c.lineTo(0,-34);c.lineTo(30,-44);c.stroke();}
+  c.strokeStyle="rgba(70,70,76,0.35)";c.lineWidth=2.4;for(let l=0;l<5;l++){const ly=-24+l*13,lw=40+((l*11)%22);c.beginPath();c.moveTo(-28,ly);c.lineTo(-28+lw,ly);c.stroke();}c.restore();}
+// the board: a pale linen panel in a thin oak edge, on the wall
+function mb_board(c,a){if(a<=0)return;const [x,y,w,h]=MB.board;c.save();c.globalAlpha*=a;
+  c.save();c.shadowColor="rgba(46,38,28,0.24)";c.shadowBlur=26;c.shadowOffsetX=AG.sdx;c.shadowOffsetY=12;c.fillStyle=rgba(AG_OAK.base,1);c.fillRect(x-8,y-8,w+16,h+16);c.restore();
+  const g=c.createLinearGradient(x,y-8,x+w,y+h+8);g.addColorStop(0,rgba(AG_OAK.hi,1));g.addColorStop(1,rgba(AG_OAK.dark,1));c.fillStyle=g;c.fillRect(x-8,y-8,w+16,h+16);
+  c.fillStyle="#ECE8E0";c.fillRect(x,y,w,h);ag_grain(c,x,y,w,h,2.2,909);c.restore();}
+// a pin at (x, y)
+function mb_pin(c,x,y){c.fillStyle="#8A847A";c.beginPath();c.arc(x,y,8,0,TAU);c.fill();c.fillStyle="rgba(255,255,255,0.6)";c.beginPath();c.arc(x+2,y-2,3,0,TAU);c.fill();}
+// a helper's draft on the board, 368 wide from (x, y): its faculty, its reason, an orange chip naming its source. st.src (0..1) the chip;
+// st.tick a green tick; st.edge; st.line {text, a, col, dots, dotsA, strike, fix, fixA, warn}: a line under them, with a dot for each
+// student, struck through and replaced by st.line.fix; returns where its dots are
+function mb_draft(c,x,y,i,st){const a=st.a==null?1:st.a,w=368,L=st.line||{a:0},la=clamp(L.a||0,0,1),h=154+46*sstep(0,0.5,la)+24*(L.dotsA||0);if(a<=0)return;
+  ma_sprung(c,x+w/2,y+h/2,st.k==null?1:st.k,a,()=>{ag_box(c,x,y,w,h,18,{edge:st.edge||null,edgeA:st.edgeA==null?0.9:st.edgeA});mb_pin(c,x+w/2,y+12);
+    ag_T(c,MA_FAC[i][0],x+24,y+48,{w:700,size:30});ag_T(c,MB_REASON[i][0],x+24,y+86,{w:500,size:28});
+    const src=MB_REASON[i][1],sa=st.src==null?1:st.src;if(sa>0){const sw=ag_tw(c,src,{w:600,size:28})+40;c.save();c.globalAlpha*=sa;c.fillStyle=rgba(AG.orange,0.12);rr(c,x+24,y+102,sw,40,20);c.fill();
+      c.strokeStyle=rgba(AG.orange,0.8);c.lineWidth=2;rr(c,x+24,y+102,sw,40,20);c.stroke();ag_T(c,src,x+44,y+132,{w:600,size:28,col:AG.orange});c.restore();}
+    if(st.tick>0)ag_tick(c,x+w-42,y+122,26,rgba(AG.green,st.tick),4.5);
+    if(la>0){const ly=y+184,fa=clamp(L.fixA||0,0,1),u1=sstep(0,0.55,fa),u2=sstep(0.35,1,fa),oy=ly-26*u1;c.save();c.globalAlpha*=sstep(0.3,1,la);
+      // the struck line rises out of its place as the fix rises in, one after the other, so they never sit on each other
+      c.save();if(fa>0){c.beginPath();c.rect(x+8,ly-38,w-16,52);c.clip();}
+      ag_T(c,L.text,x+24,oy,{w:700,size:28,col:L.col||AG.amber,a:1-u1});
+      if(L.strike>0){const tw=ag_tw(c,L.text,{w:700,size:28});c.strokeStyle=rgba(AG.ink,0.85*(1-u1));c.lineWidth=4;c.beginPath();c.moveTo(x+20,oy-10);c.lineTo(x+28+tw*clamp(L.strike,0,1),oy-11);c.stroke();}
+      if(u2>0)ag_T(c,L.fix,x+24,ly+26*(1-u2),{w:700,size:28,col:AG.green,a:u2});
+      if(L.warn>0)ag_warn(c,x+w-42,oy-10,30,rgba(AG.amber,L.warn*(1-u1)));c.restore();c.restore();
+      if(L.dotsA>0){c.save();c.globalAlpha*=L.dotsA;c.fillStyle=rgba(AG.amber,0.9);for(let j=0;j<L.dots;j++){if(L.gone&&L.gone(j))continue;c.beginPath();c.arc(x+32+j*18,y+212,6,0,TAU);c.fill();}c.restore();}}});}
+const mb_dotAt=(i,j)=>[MB.slot[i][0]+32+j*18,MB.slot[i][1]+212];
+const mb_dot31=k=>[MB.c31[0]+32+(k%11)*18,MB.c31[1]+78+Math.floor(k/11)*18];
+// the card that rose from the three drops: "31 STUDENTS", their dots, the joint degree, its faculty: none, and then Health
+function mb_c31(c,x,y,st){const a=st.a==null?1:st.a;if(a<=0)return;const w=390,h=240,fx=clamp(st.fix||0,0,1),col=mix(AG.amber,AG.green,fx);
+  ma_sprung(c,x+w/2,y+h/2,st.k==null?1:st.k,a,()=>{ag_box(c,x,y,w,h,18,{edge:col,edgeA:0.9});mb_pin(c,x+w/2,y+12);ag_T(c,"31 STUDENTS",x+24,y+52,{w:700,size:28,ls:4,col:col});
+    if(st.deg>0)ag_T(c,"Health data (joint degree)",x+24,y+170,{w:700,size:28,a:st.deg});
+    if(st.fac>0){const f={w:500,size:28},px=x+24+ag_tw(c,"faculty: ",f);ag_T(c,"faculty:",x+24,y+214,{w:500,size:28,col:AG.mut,a:st.fac});
+      const u1=sstep(0,0.5,fx),u2=sstep(0.3,0.85,fx);c.save();c.beginPath();c.rect(px-4,y+180,w-(px-x)-10,46);c.clip();
+      ag_T(c,"none",px,y+214-26*u1,{w:700,size:28,col:AG.amber,a:st.fac*(1-u1)});ag_T(c,"Health",px,y+214+26*(1-u2),{w:700,size:28,col:AG.green,a:st.fac*u2});c.restore();}});}
+// the checking agent's flag: the 31's status, "studying" ticked green beside all of them; 390 wide
+function mb_flag(c,x,y,st){const a=st.a==null?1:st.a;if(a<=0)return;const w=390,h=226,hi=st.hi||0;ma_sprung(c,x+w/2,y+h/2,st.k==null?1:st.k,a,()=>{ag_box(c,x,y,w,h,18,{edge:AG.green,edgeA:0.9});mb_pin(c,x+w/2,y+12);
+  ag_T(c,"THE 31, NOW",x+24,y+50,{w:700,size:28,ls:4,col:AG.green});
+  ["studying","inactive","withdrawn","completed"].forEach((s,i)=>{const yy=y+94+i*38,on=i===0;ag_T(c,s,x+62,yy,{w:on?700:500,size:28,col:on?AG.ink:AG.mut});
+    if(on){if(hi>0)ag_tick(c,x+36,yy-9,24,rgba(AG.green,hi),4.5);ag_T(c,"31",x+w-24,yy,{w:800,size:28,align:"right",col:hi>0.5?AG.green:AG.ink});}
+    else{c.fillStyle=rgba(AG.mut,0.4);c.beginPath();c.arc(x+36,yy-9,5,0,TAU);c.fill();ag_T(c,"0",x+w-24,yy,{w:500,size:28,align:"right",col:AG.mut});}});});}
+// what a draft's line says at time tt: the drop with no reason (three faculties), then the copied word, struck and fixed
+function mb_line(i,tt,T){const n=MB_GONE[i],src=3,order=[0,1,2],k=i===src?-1:order.indexOf(i===0?2:i===1?0:1);
+  const tGone=T.tThree+[0,0,0.45,0.9][i],tWord=i===src?T.tDrop-0.25:T.tOthers+0.75+k*0.55,tFix=T.tFixed+0.15+[0.22,0.5,0,0.36][i];
+  const word=ag_in(tt,tWord,0.35),gA=n?ag_in(tt,tGone,0.5):0,L={a:Math.max(gA,word),text:word>0.5?"31 dropouts":n+" gone, no reason",col:AG.amber,dots:n};
+  if(n){const sw=ag_io(tt,tWord-0.35,tWord+0.35,0.35);L.a=Math.max(gA*(1-sw*0.9),word);}
+  L.dotsA=n?ag_in(tt,tGone+0.2,0.4)*(1-ag_in(tt,T.tSame31+0.4,0.6)):0;
+  L.gone=j=>tt>T.tSame31+mb_dotDelay(i,j);L.warn=ag_in(tt,T.tNone+i*0.12,0.3);L.strike=ag_sine((tt-tFix)/0.4);L.fix="moved to a joint degree";L.fixA=ag_in(tt,tFix+0.45,0.6);
+  return{L,tGone,tWord,lit:n?ag_io(tt,tGone,T.tSame31+1.6,0.5):0};}
+// when a dot leaves its draft for the 31 card, and which of the 31 it becomes
+const mb_dotDelay=(i,j)=>(i===1?0:i===2?9:22)*0.035+j*0.035;
+const mb_dotK=(i,j)=>(i===1?0:i===2?9:22)+j;
+function mb_room(c,S,tt,T){const H=MB.help;
+  // the table of counts, the same way every time; the reasons beside it, in words
+  const hi=MA_FAC.map((f,i)=>ag_io(tt,T.tComp+i*0.45,T.tComp+i*0.45+1.0,0.2));
+  const [tx,ty0]=mb_tab(tt,T);
+  // the board on the wall, empty until the helpers pin their drafts
+  mb_board(c,ag_in(tt,T.tWork+0.9,0.8));
+  // (the table has done its part once the camera closes on the board, and is gone when it opens again)
+  mb_counts(c,tx,ty0,tt,{k:Math.min(1,ag_spr(tt,0.5,0.6)),a:ag_in(tt,0.4,0.4)*(1-ag_in(tt,T.tTwo+0.3,0.7)),rows:ag_sine((tt-T.tCounts+1.0)/1.6),hi});
+  ma_pillAt(c,tx+260,ty0+400,"the same way every time",tt,T.tSame,T.tWork-0.6,{col:AG.blue});
+  MA_FAC.forEach((f,i)=>{const email=MB_REASON[i][1]==="email",t0=T.tReasons+i*0.22,go=ag_sine((tt-T.tEach-i*0.3)/0.9);if(go>=1)return;const py=ty0+90+i*50;
+    for(let k=0;k<3;k++){const u=ag_spr(tt,t0+k*0.12,0.45);if(u<=0)continue;const bx=tx+560+k*8,by=py-k*3-(1-Math.min(1,u))*24,x=lerp(bx,H[i][0]+(k-1)*14,go),y=lerp(by,H[i][1]-80,go)-Math.sin(Math.PI*go)*140;
+      mb_sheet(c,x,y,lerp(0.42,0.6,Math.sin(Math.PI*go))*(1-0.4*sstep(0.6,1,go)),k===1?!email:email,(k-1)*0.12*(1-go),1-sstep(0.75,1,go));}});
+  ma_pillAt(c,tx+680,ty0+90-2,"notes",tt,T.tReasons+0.5,T.tWork+0.3);ma_pillAt(c,tx+692,ty0+240-2,"emails",tt,T.tReasons+0.9,T.tWork+0.3);
+  // the drafts pinned to the board
+  const rows=MA_FAC.map((f,i)=>mb_line(i,tt,T));
+  MA_FAC.forEach((f,i)=>{const t0=T.tPins+i*0.4,u=ag_sine((tt-t0)/0.9);if(u<=0)return;const [sx,sy]=MB.slot[i],R=rows[i],cmp=hi[i];
+    const st={k:u<1?1:Math.min(1,ag_spr(tt,t0+0.9,0.5)*0.15+0.85),src:ag_in(tt,T.tSrc+i*0.15,0.3),tick:ag_in(tt,T.tComp+i*0.45+0.35,0.3),line:R.L,
+      edge:R.lit>0?AG.amber:cmp>0?AG.blue:null,edgeA:R.lit>0?0.9*R.lit:0.9*cmp};
+    if(u<1){const fx=H[i][0]-184,fy=H[i][1]-120,x=lerp(fx,sx,u),y=lerp(fy,sy,u)-Math.sin(Math.PI*u)*90,k=lerp(0.3,1,u);c.save();ag_about(c,x+184,y+80,k);mb_draft(c,x,y,i,st);c.restore();}
+    else mb_draft(c,sx,sy,i,st);});
+  ma_pillAt(c,1258,612,"the board",tt,T.tBoard,T.tTwo-0.6);
+  // the dots: each drop's students leave their draft and become the 31
+  const c31a=ag_in(tt,T.tSame31-0.4,0.4);mb_c31(c,MB.c31[0],MB.c31[1],{a:c31a,k:Math.min(1,ag_spr(tt,T.tSame31-0.4,0.5)),deg:ag_in(tt,T.tMoved,0.5),fac:ag_in(tt,T.tNoFac,0.5),fix:ag_in(tt,T.tGot-0.1,0.8)});
+  for(const i of [1,2,3])for(let j=0;j<MB_GONE[i];j++){const d0=T.tSame31+mb_dotDelay(i,j),u=ag_sine((tt-d0)/0.8);if(u<=0)continue;const A=mb_dotAt(i,j),B=mb_dot31(mb_dotK(i,j)),x=lerp(A[0],B[0],u),y=lerp(A[1],B[1],u)-Math.sin(Math.PI*u)*60;
+    c.fillStyle=rgba(AG.amber,0.9*c31a);c.beginPath();c.arc(x,y,6,0,TAU);c.fill();}
+  // the word flying from one draft to the others
+  for(const i of [1,2,0]){const R=rows[i],t0=R.tWord-0.75,u=ag_sine((tt-t0)/0.75);if(u<=0||u>=1)continue;const A=[MB.slot[3][0]+24,MB.slot[3][1]+174],B=[MB.slot[i][0]+24,MB.slot[i][1]+174],x=lerp(A[0],B[0],u),y=lerp(A[1],B[1],u)-Math.sin(Math.PI*u)*80;
+    c.save();c.globalAlpha*=sstep(0,0.15,u);ag_box(c,x-12,y-34,ag_tw(c,"31 dropouts",{w:700,size:28})+24,48,12,{edge:AG.amber,edgeA:0.8});ag_T(c,"31 dropouts",x,y,{w:700,size:28,col:AG.amber});c.restore();}
+  // the checking agent's flag: none of them had left
+  mb_flag(c,MB.flag[0],MB.flag[1],{a:ag_in(tt,T.tFlag-0.1,0.4),k:Math.min(1,ag_spr(tt,T.tFlag-0.1,0.5)),hi:ag_in(tt,T.tStill-0.2,0.4)});
+  // approved: Clara's stamp across the drafts
+  ma_stamp(c,1060,318,"approved",ag_in(tt,T.tAppr-0.05,0.35),{col:AG.green,rot:-0.04,size:32});
+  // the floor: the lead agent hands each faculty to one helper; each helper is read-only, in a sandbox; the checking agent compares.
+  // They leave the picture as the camera closes on the board, and fade as they go, so no edge of them shows at the frame's foot
+  const fl=1-ag_in(tt,T.tTwo+0.3,0.7);if(fl>0){c.save();c.globalAlpha*=fl;
+  const L=MB.lead;ma_agent(c,L[0],L[1],L[2],tt,{at:T.tWork-0.3,from:[-420,0],d:0.8,ph:0.4,think:ag_io(tt,T.tLead,T.tEach+1.6,0.4)});
+  H.forEach((h,i)=>{const la=ag_io(tt,T.tEach+i*0.3-0.1,T.tEach+i*0.3+1.0,0.3);if(la<=0)return;c.save();c.strokeStyle=rgba(AG.violet,0.5*la);c.lineWidth=3;c.setLineDash([10,9]);
+    c.beginPath();c.moveTo(L[0]+40,L[1]-50);c.quadraticCurveTo((L[0]+h[0])/2,Math.min(L[1],h[1])-170,h[0],h[1]-50);c.stroke();c.restore();});
+  H.forEach((h,i)=>{const ta=ag_in(tt,T.tBox-0.3+i*0.1,0.4),drop=6*ag_sine((tt-T.tBox-i*0.1)/0.5);ag_sandbox(c,h[0],872,150,{depth:50,label:null,a:ta});
+    ma_agent(c,h[0],h[1]+drop,42,tt,{at:T.tLead-0.2+i*0.18,from:[-160,40],d:0.7,ph:1+i,lock:ag_in(tt,T.tRead+i*0.15,0.3),
+      think:Math.max(ag_io(tt,T.tEach+i*0.3+0.6,T.tPins+i*0.4,0.4),ag_io(tt,T.tReads+i*0.3,T.tReads+i*0.3+1.6,0.3))});});
+  ma_pillAt(c,920,708,"read-only · sandbox",tt,T.tBox+0.1,T.tTwo-0.6,{icon:"lock",col:AG.blue});
+  // each helper reads what the others pinned: a thin violet line from a helper to another's draft
+  for(let k=0;k<8;k++){const hk=k%4,ck=(hk+1+(k>>2))%4,t0=T.tReads+k*0.3,la=ag_io(tt,t0,t0+1.3,0.25);if(la<=0)continue;const h=H[hk],[sx,sy]=MB.slot[ck];
+    c.save();c.strokeStyle=rgba(AG.violet,0.45*la);c.lineWidth=2.5;c.setLineDash([8,8]);c.beginPath();c.moveTo(h[0],h[1]-48);c.lineTo(sx+184,sy+168);c.stroke();c.restore();}
+  const K=MB.check;ma_agent(c,K[0],K[1],K[2],tt,{at:T.tCheck-0.3,from:[340,0],d:0.8,ph:2.2,ring:ag_sine((tt-T.tCheck)/0.9),think:ag_io(tt,T.tComp,T.tComp+2.6,0.3)});
+  ma_pillAt(c,K[0],K[1]-96,"checking agent",tt,T.tCheck+0.2,T.tTwo-0.6);c.restore();}
+  // Clara, in Planning: she reaches to the drafts, strikes the word, and approves
+  const ca=ag_in(tt,T.tDrafted+0.2,0.6);if(ca>0){c.save();c.globalAlpha*=ca;const reach=ag_io(tt,T.tFixed-0.7,T.tAppr+0.9,0.6);
+    ag_person(c,"clara",560,510,0.72,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[33,130,"point"]},mix:reach,gaze:[4,-1]});c.restore();}
+  ma_scr(c,S,()=>{ma_tag(c,MA_UNI,ag_in(tt,0.6,0.6)*(1-ag_in(tt,T.tWork-0.6,0.6)));
+    ma_cardAt(c,36,96,320,{kick:"Planning",title:"Clara Jensen"},tt,T.tClara-0.1,T.tGot-2.2,{kickCol:AG.mut});});}
+// Jun at his desk, as the series draws it (the desk across the bottom left, his screen on it): the new test, "every degree has a
+// faculty", typed on his screen and run by the platform, passes; and it runs the same way every time, with no agent
+const MB_JUN={card:[880,300],pill:[1110,586]};
+function mb_jun(c,S,tt,T){const a=ag_in(tt,T.tTest-0.2,0.4),pass=ag_in(tt,T.tTest+1.2,0.5),[cx,cy]=MB_JUN.card;
+  ag_desk(c,-60,1040,720,{depth:150});
+  ag_person(c,"jun",250,720,0.76,{t:tt,cut:890,pose:"desk",gaze:[5,-2],smile:0.3+0.35*pass,nod:-0.035*ag_io(tt,T.tTest+1.2,T.tTest+2.6,0.4)});
+  ag_screen(c,430,770,190,116,{stand:12,draw:(x,X,Y,W,H)=>{
+    [0.5,0.72,0.46,0.64,0.38].forEach((l,k)=>{const u=clamp((tt-(T.tTest-0.9)-k*0.16)/0.3,0,1);if(u<=0)return;
+      x.fillStyle=k===0?rgba(AG.blue,0.6):rgba(AG.ink,0.26);rr(x,X+14+(k?16:0),Y+16+k*17,(W-48)*l*u,8,4);x.fill();});
+    if(pass>0)ag_tick(x,X+W-26,Y+H-24,22,rgba(AG.green,pass),4);}});
+  ma_test(c,cx,cy,a,pass,Math.min(1,ag_spr(tt,T.tTest-0.2,0.5)));
+  if(a>0){c.save();c.globalAlpha*=a;ma_gear(c,cx+460-40,cy+40,16,tt*0.8,AG.blue);c.restore();}
+  ma_pillAt(c,MB_JUN.pill[0],MB_JUN.pill[1],"the same way every time",tt,T.tWithout-0.3,null,{col:AG.blue});}
+
 /* ---------------------------------------------------------------- the other chapters (drafts, being drawn) */
-for(const id of ["board","alive","close"])scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);
+for(const id of ["alive","close"])scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);
   ag_T(ctx,sc.name,960,540,{w:800,size:60,align:"center"});
   if(id==="close")ag_end(ctx,S,t,sc.cues.breath,"Many agents, and what emerges","Next: Agents at work on data","Film 9 of 9");});

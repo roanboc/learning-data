@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](7-why-we-govern-them/script.md) · [source](7-why-we-govern-them/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

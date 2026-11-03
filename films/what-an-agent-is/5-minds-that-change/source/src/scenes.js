@@ -80,8 +80,8 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
       // a recording: one steady line of light under the rows
       const rl=ag_in(t,tRec,1.4);if(rl>0){ctx.save();ctx.globalCompositeOperation="lighter";ctx.fillStyle="rgba(255,240,206,"+(0.5*rl)+")";rr(ctx,RX-430*ag_sine(rl),RY+3*RDY*RS+40,860*ag_sine(rl),5,3);ctx.fill();ctx.restore();}}},
     // no single memory was trusted: the teacher's raised hand, close, and the students listening; the work was checked
-    {at:tSingle-0.2,place:"mcDusk",keys:[[0,780,560,1.7],[tChecked-0.2,880,520,1.45]],d:2.2,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
-      withA(ctx,ag_in(t,tChecked,0.8),()=>patterns(ctx,1,{glow:1,slip:0,thr:1,labelA:0}));}},
+    {at:tSingle-0.2,place:"mcDusk",keys:[[0,780,560,1.7],[tChecked-0.5,960,540,1.0]],d:2.4,push:0,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
+      withA(ctx,ag_in(t,tChecked+0.4,1.0),()=>patterns(ctx,1,{glow:1,slip:0,thr:1}));}},
     // it's the same with data: dusk, the four rows glowing green over the water; then they fold into one green tick, for the title
     {at:tData-0.2,place:"mcDusk",keys:[[0,960,540,1.0]],d:2,push:0.03,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
       const fold=ag_in(t,br-0.2,1.0);patterns(ctx,1-fold,{glow:1,slip:0,thr:1});
@@ -96,10 +96,10 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
 /* ---------------------------------------------------------------- the university's room
    One room for chapters 2 to 6 (mcLab): the agent in its ring in the middle; Jun at his desk on the left, facing it; Clara standing
    on the right, facing it; her draft on the wall at the top right; the answers come out of the agent between them. */
-const MC_AG=[960,330],MC_JUN=[250,720,0.76],MC_CL=[1660,700,0.78],MC_PAPER=[1470,130],MC_CUT=890;
+const MC_AG=[960,330],MC_JUN=[250,720,0.76],MC_CL=[1660,700,0.78],MC_PAPER=[1420,130],MC_CUT=890;
 const MC_JMOUTH=[MC_JUN[0]+70*MC_JUN[2],MC_JUN[1]-112*MC_JUN[2]],MC_CMOUTH=[MC_CL[0]-70*MC_CL[2],MC_CL[1]-112*MC_CL[2]];
-// Jun at his desk: the desk, Jun cut at its back edge, his screen (o.screen draws on it); o as ag_person's, o.a
-function mc_jun(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const J=MC_JUN;ctx.save();ctx.globalAlpha*=a;
+// Jun at his desk: the desk, Jun cut at its back edge, his screen (o.screen draws on it); o as ag_person's, o.a, o.dx moves them all
+function mc_jun(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const J=MC_JUN;ctx.save();ctx.globalAlpha*=a;if(o.dx)ctx.translate(o.dx,0);
   ag_desk(ctx,-60,1040,720,{depth:150});
   ag_person(ctx,"jun",J[0],J[1],J[2],{t,pose:o.pose||"desk",pose2:o.pose2,mix:o.mix,talk:o.talk||0,gaze:o.gaze,nod:o.nod||0,smile:o.smile||0,cut:MC_CUT});
   ag_screen(ctx,430,770,190,116,{stand:12,draw:o.screen});ctx.restore();}
@@ -130,7 +130,7 @@ scene("three",(ctx,S,t,sc)=>{const C=sc.cues;
   const L=mc_lineup(ctx),line=ag_in(t,tEach-0.1,1.6),cx=o=>960-mc_answerW(ctx,o)/2,go=(a,b,u)=>[lerp(a[0],b[0],ag_sine(u)),lerp(a[1],b[1],ag_sine(u))];
   let p1=go([cx(MC_A1),540],[280,130],ag_in(t,tTue+0.3,1.4));p1=go(p1,[L[0],470],line);
   let p2=go([cx(MC_A2),540],[cx(MC_A2)-70,500],ag_in(t,tApol,0.9));p2=go(p2,[L[1],470],line);
-  const p3=go([cx(MC_A3)+60,590],[L[2],470],line);
+  const p3=go([cx(MC_A3)+130,612],[L[2],470],line);
   const slot=ag_io(t,tNone-0.1,tNone+1.6,0.5)*Math.sin(Math.PI*clamp((t-tNone)/1.2,0,1));
   const cards=ctx=>{const kx=MC_AG[0],ky=MC_AG[1],jp=ag_io(t,tJuns-0.2,tSure,0.4);
     mc_answer(ctx,p1[0],p1[1],Object.assign({a:ag_in(t,tEng-0.25,0.35),k:t<tEng+1?ag_spr(t,tEng-0.25,0.5):1+0.06*jp,kx:t<tEng+1?kx:null,ky:t<tEng+1?ky:null,edge:jp>0.05?AG.violet:null,edgeA:jp,pulse:slot},MC_A1));
@@ -150,7 +150,7 @@ scene("three",(ctx,S,t,sc)=>{const C=sc.cues;
     talk:mc_talkAt(t,tAsks,tAsks+1.6),gaze:t>tTue+0.3&&t<tJuns?[-2,-3]:null});
   const shots=[
     // today: Clara comes in and pins her draft to the wall: two new advisers, and where they go is still blank
-    {at:0,place:"mcLab",keys:[[0,1400,470,1.34]],push:0.03,draw(ctx,t){agent(ctx);jun(ctx);
+    {at:0,place:"mcLab",keys:[[0,1400,430,1.34]],push:0.03,draw(ctx,t){agent(ctx);jun(ctx);
       const w=mc_walkIn(t,C.today-0.6,1.6);mc_clara(ctx,t,{x:w.x,walk:w.walk,a:w.a,pose:"hang",pose2:{near:[150,172,"open"],far:[0,6,"rest"]},mix:ag_io(t,tWrite-0.5,tAdv+0.2,0.5)});
       ag_roomLight(ctx,1);const pu=ag_in(t,tWrite-0.1,0.9),px=lerp(1330,MC_PAPER[0],ag_sine(pu)),py=lerp(560,MC_PAPER[1],ag_sine(pu));
       mc_draft(ctx,px,py,{a:ag_in(t,tWrite-0.1,0.25),k:lerp(0.35,1,ag_sine(pu)),glow:ag_io(t,tGo-0.2,tMon,0.5)+ag_io(t,tLost-0.1,tMon,0.5)});}},
@@ -229,3 +229,152 @@ scene("ours",(ctx,S,t,sc)=>{const C=sc.cues;
   withA(ctx,ag_in(t,tCent-0.2,0.6)*(1-ag_in(t,tAdded-0.6,0.4)),()=>mc_tag(ctx,96,100,"Cambridge · about 1920"));
   withA(ctx,ag_in(t,tAdded-0.2,0.6)*(1-ag_in(t,tSea-0.6,0.4)),()=>mc_tag(ctx,96,100,"Cambridge · six and a half years later"));
   withA(ctx,ag_in(t,tSea-0.2,0.6)*(1-ag_io(t,tNone-0.7,tQ+0.4,0.5)),()=>mc_tag(ctx,96,100,"Seattle · 1974"));});
+
+/* ================================================================ 4 · Rebuilt, not replayed */
+// the agent's two answers to one question, word by word: each word taken from a small stack of likely ones, the top one
+const MC_LINE1=[["Health","Business","Engineering"],["lost","had","kept"],["the","its","a"],["most","more","fewest"]],
+  MC_LINE2=[["Engineering and IT","Health","Business"],["lost","had","saw"],["the","its","a"],["most","more","fewest"]],
+  MC_GAP=[["university's 2025 retention review","data platform's","student system's"]];
+const MC_Q="Which faculty lost the most first-years this semester?";
+// a line of words at (x, y), each taken from its stack at ts[i]; returns where the line ends
+function mc_written(ctx,x,y,line,ts,t,o){o=o||{};let xx=x;line.forEach((st,i)=>{mc_pick(ctx,xx,y,st,t,ts[i],o);xx+=ag_tw(ctx,st[0],{w:700,size:34})+22;});return xx;}
+scene("rebuilt",(ctx,S,t,sc)=>{const C=sc.cues;
+  const tFew=wAt(sc,"details","a few details"),tFill=wAt(sc,"details","fill the rest"),tModel=C.model,tOne=wAt(sc,"writes","one at a time"),tNewc=wAt(sc,"again","in a new chat"),tRoute=wAt(sc,"again","another route");
+  const tNeither=wAt(sc,"gap","Where neither knows"),tLikely=wAt(sc,"gap","something likely"),tSure=wAt(sc,"gap","as sure as a fact"),tBend=C.bend,tStudy=C.study,tAsked=wAt(sc,"study","are you sure"),tHalf=wAt(sc,"study","almost half");
+  const tLying=C.lying,tTrouble=C.trouble,tReason=wAt(sc,"reason","the reason");
+  // the head on the left; the agent up on the right, and under it the page it writes on: one line, and a second for the gap
+  const HX=420,HY=470,AX=1500,AY=226,PX=900,PW=880,LX=PX+56,LY=598,LY2=788,PY=LY-190;
+  const ts1=[0,1,2,3].map(i=>tOne-0.1+i*0.75),ts2=[0,1,2,3].map(i=>tRoute-0.2+i*0.75),tsG=[tLikely+0.2];
+  // the question, as it's given: a bubble that goes into the ring, once, and again in the new chat
+  const qs=[[tModel+0.6,tOne-1.3],[tNewc+0.15,tRoute-0.75]];
+  const shots=[{at:0,place:"mcLab",keys:[[0,520,470,1.42],[tModel-0.5,960,500,1.0],[tReason-0.8,960,540,1.0]],d:2.2,push:0.015,draw(ctx,t){
+    const page=ag_in(t,tOne-1.0,0.5)*(1-ag_in(t,tBend-0.4,0.6)),grow=ag_sine(ag_in(t,tNeither-0.3,0.6));
+    // the agent: answers once; a new chat empties it, and the second time its light goes round the other way
+    mc_agent(ctx,AX,AY,{t,a:ag_in(t,tModel-0.4,0.8),core:0.7,clear:ag_io(t,tNewc-0.1,tNewc+0.9,0.3),
+      think:ag_io(t,tOne-0.5,ts1[3]+0.4,0.3)+ag_io(t,tRoute-0.4,ts2[3]+0.4,0.3)+ag_io(t,tLikely-0.2,tsG[0]+0.5,0.3),
+      spin:t<tNewc?ag_in(t,tOne-0.6,3.2):ag_in(t,tRoute-0.5,2.8),dir:t<tNewc?1:-1});
+    ag_roomLight(ctx,1);
+    // a head of light: a few details, the rest filled in; a gap, filled with something likely, as bright as the rest; it leans to the question too
+    const sure=ag_in(t,tSure,0.8),lean=ag_in(t,tBend+0.5,0.6)*(1-ag_in(t,tLying-0.6,1.0));
+    ctx.save();ctx.translate(HX,HY+230);ctx.rotate(0.05*ag_sine(lean));ctx.translate(-HX,-(HY+230));
+    mc_head(ctx,HX,HY,0.95,{a:ag_in(t,0.4,1.0)*(1-0.35*ag_in(t,tTrouble-0.4,0.8)),pts:ag_in(t,tFew-0.1,1.4),fill:ag_in(t,tFill,2.4),gap:ag_in(t,tNeither,0.8),likely:ag_in(t,tLikely+0.2,1.0),sure});
+    ctx.restore();
+    // the page the agent writes on
+    if(page>0){withA(ctx,page,()=>{ag_box(ctx,PX,PY,PW,lerp(LY+58,LY2+58,grow)-PY,26,{});
+      // the first line; in a new chat it goes, and another comes; then a gap after "as the", filled with something likely
+      const l1=1-ag_in(t,tNewc-0.2,0.5);if(l1>0)withA(ctx,l1,()=>mc_written(ctx,LX,LY,MC_LINE1,ts1,t));
+      if(t>tNewc){mc_written(ctx,LX,LY,MC_LINE2,ts2,t);
+        const g=ag_in(t,tNeither,0.5);if(g>0)withA(ctx,g,()=>{ag_T(ctx,"as the",LX,LY2,{w:700,size:34,col:AG.violet});
+          const bx=LX+ag_tw(ctx,"as the",{w:700,size:34})+22,fl=ag_in(t,tsG[0],0.3);
+          if(fl<1){ctx.save();ctx.globalAlpha*=1-fl;ctx.setLineDash([8,7]);ctx.strokeStyle=rgba(AG.mut,0.75);ctx.lineWidth=2.4;rr(ctx,bx-14,LY2-33,330,46,12);ctx.stroke();ctx.restore();}
+          mc_written(ctx,bx,LY2,MC_GAP,tsG,t,{a:lerp(0.6,1,sure)});});}});}
+    // the question goes in
+    qs.forEach(([q0,q1])=>{const a=ag_in(t,q0,0.35)*(1-ag_in(t,q1,0.45));if(a<=0)return;const g=ag_sine(ag_in(t,q1,0.45)),px=AX-160,py=AY;
+      ctx.save();ag_about(ctx,px,py,1-0.5*g);mc_bubble(ctx,690,AY-70,600,MC_Q,px,py,{a,k:ag_spr(t,q0,0.5),side:"right",at:0.5});ctx.restore();});
+    // both bend to the question: "Are you sure?" leans on an answer until it turns over
+    const ca=ag_io(t,tBend-0.3,tLying-0.2,0.5),bub=ag_io(t,tBend+0.1,tAsked+0.6,0.4),push=ag_in(t,tBend+0.5,0.6),turn=ag_in(t,tBend+1.0,0.9);
+    if(ca>0){const w=Math.max(mc_answerW(ctx,MC_A1),mc_answerW(ctx,MC_A3)),x0=AX-w/2,y0=470;
+      ctx.save();ctx.translate(x0,y0+60);ctx.rotate(0.035*push*(1-turn));ctx.translate(-x0,-(y0+60));
+      mc_answer(ctx,x0,y0,Object.assign({a:ca,w,turn,back:MC_A3},MC_A1));ctx.restore();
+      mc_bubble(ctx,x0-350+24*push*(1-turn),y0+10,320,"Are you sure?",x0+12,y0+60,{a:bub,k:ag_spr(t,tBend+0.1,0.5),side:"right",at:0.5});}
+    // the 2023 study
+    ag_textCard(ctx,690,110,560,{kick:"2023 study",title:"asked “Are you sure?”",sub:"answers changed 46% of the time"},{a:ag_io(t,tStudy+0.2,tLying,0.5),k:ag_spr(t,tStudy+0.2,0.5),edge:AG.blue,kickCol:AG.blue});
+    // a change we can't see the reason for: the three answers again, their slots empty, pulsing once
+    const ra=ag_in(t,tTrouble+0.6,0.8),L=mc_lineup(ctx),pl=Math.sin(Math.PI*clamp((t-tReason)/1.4,0,1));
+    [MC_A1,MC_A2,MC_A3].forEach((o,i)=>mc_answer(ctx,L[i],600,Object.assign({a:ra,k:ag_spr(t,tTrouble+0.6+i*0.15,0.5),pulse:pl,false:i===1?1:0},o)));}}];
+  ag_shots(ctx,S,t,sc.dur,shots,0.6);ag_kicker(ctx,"1.5","Minds that change",{a:ag_in(t,0.3,0.8)});});
+
+/* ================================================================ 5 · Check the work */
+// the two routes to the number, read only, either side of the agent; Jun and Clara a little further out, to leave them room
+const MC_R1=[290,530,520],MC_R2=[1110,530,520],MC_JDX=-60,MC_CX=1760,MC_CY=738,MC_VY=595,MC_REC=[120,150,560],MC_ANX=1140,MC_ANY=128;
+scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
+  const tInstead=C.instead,tCame=wAt(sc,"shows","where it came from"),tQuery=wAt(sc,"shows","the query"),tRows=wAt(sc,"shows","the rows"),tLYP=wAt(sc,"shows","last year's paper");
+  const tSecond=wAt(sc,"second","a second way"),tPat=wAt(sc,"second","reciters' patterns"),tPlat=wAt(sc,"counts","data platform"),tSys=wAt(sc,"counts","student system");
+  const t134=wAt(sc,"disagree","a hundred and thirty-four"),t131=wAt(sc,"disagree","a hundred and thirty-one"),tTwice=wAt(sc,"twice","counted twice"),tSays=wAt(sc,"says","says so");
+  const tFixed=wAt(sc,"fixed","fixed"),tBoth=wAt(sc,"fixed","both say"),tChanges=wAt(sc,"fixed","changes its answer"),tReasonW=wAt(sc,"fixed","with the reason"),tJob=C.job;
+  const tMon=C.monday,tWithout=wAt(sc,"monday","without its evidence"),tPlain=wAt(sc,"nightly","A plain check"),tNight=wAt(sc,"nightly","every night");
+  const tDown=wAt(sc,"written","written down"),tTeam=wAt(sc,"written","the whole team"),tNext=wAt(sc,"written","the next chat"),tApp=wAt(sc,"person","a person approves"),tReads=wAt(sc,"person","reads the evidence"),tSigns=wAt(sc,"person","signs");
+  const tNever=C.never,tSem=C.next,tStart=wAt(sc,"next","start in");
+  // the answer as the agent first gives it (from the platform alone), then "the two ways disagree", then the checked answer, with its reason
+  const ANS0={kick:"answer",title:"Engineering and IT · 134"},ANSD={kick:"answer",title:"the two ways disagree",why:"3 students counted twice",whyCol:AG.amber},
+    ANSF={kick:"answer · checked two ways",title:"Engineering and IT · 131",why:"reason: 3 students counted twice",whyCol:AG.ink};
+  const people=(ctx,o)=>{o=o||{};mc_jun(ctx,t,{dx:MC_JDX,pose:"desk",talk:0,a:o.ja});
+    mc_clara(ctx,t,{x:MC_CX,pose:"hang",pose2:{near:[44,88,"open"],far:[0,6,"rest"]},mix:ag_io(t,tSigns-1.0,tNever,0.6),gaze:o.cg,smile:ag_in(t,tStart,0.8)*0.7,a:o.ca});};
+  const agent=(ctx,o)=>{o=o||{};mc_agent(ctx,MC_AG[0],MC_AG[1],{t,core:lerp(0.8,0.4,ag_in(t,tNever,1.0)),think:o.think||0,spin:o.spin,clear:o.clear||0});};
+  // the routes, the hands reaching to them, the counts and the verdict
+  const routes=(ctx,a)=>{if(a<=0)return;const r1=ag_in(t,tSecond-0.2,0.6),r2=ag_in(t,tSecond+0.3,0.6),u1=ag_in(t,tPlat-0.5,1.0),u2=ag_in(t,tSys-0.5,1.0);
+    withA(ctx,a,()=>{
+      ag_reach(ctx,[930,380,880,470,840,520,MC_R1[0]+MC_R1[2]-40,MC_R1[1]+6],u1,{data:ag_in(t,tPlat+0.5,1.6)});
+      ag_reach(ctx,[990,380,1040,470,1080,520,MC_R2[0]+40,MC_R2[1]+6],u2,{data:ag_in(t,tSys+0.5,1.6)});
+      ag_tool(ctx,MC_R1[0],MC_R1[1],MC_R1[2],130,"the data platform's enrolments",{a:r1,touch:ag_in(t,tPlat+0.2,0.4)});
+      ag_tool(ctx,MC_R2[0],MC_R2[1],MC_R2[2],130,"the student system's report",{a:r2,touch:ag_in(t,tSys+0.2,0.4)});
+      const fx=ag_in(t,tBoth-0.3,0.6),c1=MC_R1[0]+MC_R1[2]/2,c2=MC_R2[0]+MC_R2[2]/2;
+      mc_count(ctx,c1,MC_CY,"134",{a:ag_in(t,t134-0.1,0.4)*(1-fx),k:ag_spr(t,t134-0.1,0.5),col:AG.amber});
+      mc_count(ctx,c1,MC_CY,"131",{a:fx,k:ag_spr(t,tBoth-0.3,0.5),col:AG.green});
+      mc_count(ctx,c2,MC_CY,"131",{a:ag_in(t,t131-0.1,0.4),k:ag_spr(t,t131-0.1,0.5),col:mix(AG.amber,AG.green,fx)});
+      ag_verdict(ctx,960,MC_VY,"3 apart","fail",ag_in(t,t131+0.6,0.4)*(1-fx));ag_verdict(ctx,960,MC_VY,"agrees two ways","pass",ag_in(t,tBoth+0.4,0.5));});};
+  const shots=[
+    // nobody is blamed: the three answers go to the wall; the team checks the work instead; every answer shows where it came from
+    {at:0,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){agent(ctx,{think:ag_io(t,tCame-0.8,tQuery,0.3),spin:ag_in(t,tCame-0.9,1.0)});people(ctx);ag_roomLight(ctx,1);
+      const aside=ag_sine(ag_in(t,C.blamed+0.2,1.6)),L=mc_lineup(ctx);
+      [MC_A1,MC_A2,MC_A3].forEach((o,i)=>{const x=lerp(L[i],120+i*70,aside),y=lerp(600,150+i*48,aside),k=lerp(1,0.66,aside);ctx.save();ctx.translate(x,y);ctx.scale(k,k);
+        mc_answer(ctx,0,0,Object.assign({a:lerp(1,0.2,aside)*(1-ag_in(t,tCame-0.6,0.5)),false:i===1?1:0},o));ctx.restore();});
+      const w=mc_answerW(ctx,ANS0);mc_answer(ctx,960-w/2,520,Object.assign({a:ag_in(t,tCame,0.35),k:ag_spr(t,tCame,0.5),kx:MC_AG[0],ky:MC_AG[1],fill:ag_in(t,tQuery-0.2,(tRows-tQuery)+1.0)},ANS0));
+      // or last year's paper: Clara's, signed
+      mc_paper(ctx,1300,160,440,250,{kick:"Planning · last year",title:"First-years who left",sub:"Engineering and IT · signed",lines:1,a:ag_in(t,tLYP-0.1,0.4),rot:0.02*ag_spr(t,tLYP-0.1,0.5),seed:9});}},
+    // a second way: the platform's enrolments and the student system's report, read only; they disagree; three counted twice; fixed
+    {at:tSecond-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
+      agent(ctx,{think:ag_io(t,tPlat-0.6,t131,0.4)+ag_io(t,tSays-0.4,tSays+0.8,0.3)+ag_io(t,tChanges-0.4,tChanges+0.8,0.3),spin:t<tChanges-1?ag_in(t,tPlat-0.6,1.6):ag_in(t,tChanges-0.6,1.0)});
+      people(ctx,{cg:[-3,0]});ag_roomLight(ctx,1);
+      // the reciters' patterns, faint, behind the two routes for a moment
+      withA(ctx,0.34*ag_io(t,tPat-0.2,tPlat-0.4,0.6),()=>mc_rows(ctx,360,176,{s:0.56,dy:96,glow:1,labelA:0}));
+      routes(ctx,1);
+      // counted twice: the platform's rows open over its card, three pairs lit; struck out once it's fixed
+      const ro=ag_io(t,tTwice-0.5,tMon-0.6,0.6);mc_rows2(ctx,MC_R1[0]+40,150,420,{a:ro,hi:ag_in(t,tTwice,0.6),fixed:ag_in(t,tFixed,0.9)});
+      withA(ctx,ro*ag_in(t,tTwice+0.2,0.5)*(1-ag_in(t,tFixed+0.6,0.5)),()=>mc_tag(ctx,MC_R1[0]+40-16,326,"counted twice",{align:"right",col:AG.amber}));
+      // the agent says so, rather than picking one; once fixed, its answer changes, with the reason
+      const ans=ag_in(t,tSays-0.3,0.4),tn=ag_in(t,tChanges-0.2,0.9),wd=Math.max(mc_answerW(ctx,ANSD),mc_answerW(ctx,ANSF)),fl=ag_in(t,tReasonW,1.2);
+      mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({a:ans,k:ag_spr(t,tSays-0.3,0.5),kx:MC_AG[0],ky:MC_AG[1],w:wd,turn:tn,back:Object.assign({fill:fl},ANSF),edge:tn>0.5?AG.green:null,edgeA:ag_in(t,tJob,0.8)},ANSD));}},
+    // Monday's answer was right after all, but without its evidence nobody could tell; a plain check, every night
+    {at:tMon-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){agent(ctx);people(ctx);ag_roomLight(ctx,1);routes(ctx,1-ag_in(t,tDown-0.6,0.6));
+      const wd=mc_answerW(ctx,ANSF);mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({w:wd,fill:1,edge:AG.green,edgeA:1,a:1-ag_in(t,tDown-0.6,0.6)},ANSF));
+      mc_answer(ctx,lerp(-560,262,ag_eo(ag_in(t,tMon,1.2))),150,Object.assign({a:ag_in(t,tMon,0.3)*(1-ag_in(t,tPlain-0.4,0.5)),pulse:Math.sin(Math.PI*clamp((t-tWithout)/1.4,0,1))},MC_A1));
+      mc_nightly(ctx,MC_R1[0]+6,384,{w:470,a:ag_in(t,tPlain,0.4)*(1-ag_in(t,tDown-0.6,0.6)),k:ag_spr(t,tPlain,0.5),moon:clamp((t-tNight)/1.4,0,2)*TAU,tick:ag_in(t,tNight+1.4,0.5)});}},
+    // written down for the whole team, outside any one chat or head; Wednesday, a new chat starts from it; a person approves and signs
+    {at:tDown-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){const cl=ag_io(t,tNext-0.2,tNext+0.9,0.3);
+      agent(ctx,{clear:cl,think:ag_io(t,tNext+0.6,tNext+2.0,0.3)});people(ctx,{cg:t>tReads?[-2,3]:null});ag_roomLight(ctx,1);
+      mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{a:ag_in(t,tDown,0.4),k:ag_spr(t,tDown,0.5),row:ag_in(t,tTeam-0.4,1.4)});
+      // the next chat starts from it: a thread of light from the card on the wall into the ring
+      const th=ag_in(t,tNext+0.5,1.0);mc_ribbon(ctx,[690,250,740,244,786,272,816,306],0,ag_sine(th),ag_io(t,tNext+0.5,tApp,0.4),4);
+      // drafted by the agent; Clara reads the evidence and signs
+      const wd=mc_answerW(ctx,ANSF),b=mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({w:wd,fill:1,a:ag_in(t,tApp-0.4,0.5),edge:AG.green,edgeA:0.8},ANSF));
+      mc_signoff(ctx,MC_ANX,MC_ANY+mc_answerH(Object.assign({fill:1},ANSF))-20,wd,{a:ag_in(t,tApp,0.5),k:ag_spr(t,tApp,0.5),sign:ag_in(t,tSigns-0.2,1.2)});}},
+    // next semester: Clara's draft on the wall, its blank filled at last: the two new advisers start in Engineering and IT
+    {at:tSem-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.03,draw(ctx,t){agent(ctx);people(ctx,{cg:[2,-4]});ag_roomLight(ctx,1);
+      mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{fill:ag_in(t,tStart+0.2,1.2)});
+      mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{row:1});}}];
+  ag_shots(ctx,S,t,sc.dur,shots,0.6);
+  ag_kicker(ctx,"1.5","Minds that change");
+  mc_corner(ctx,"Wednesday",ag_io(t,tNext-0.3,tSem-0.4,0.4));mc_corner(ctx,"Next semester",ag_in(t,tSem-0.2,0.5));});
+
+/* ================================================================ 6 · Every pattern, every time */
+scene("every",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath,T=MC_AT;
+  const tPat=wAt(sc,"hymn","every pattern"),tTime=wAt(sc,"hymn","every time"),tYears=wAt(sc,"hymn","three thousand years"),tData=C.data,tWay=wAt(sc,"holds","more than one way"),tHolds=wAt(sc,"holds","the work holds"),tTrust=C.trust;
+  const RX=1350,RY=168,RS=0.84,RDY=92;
+  const shots=[
+    // the riverbank at dusk: the teacher and the two students, the four rows green over them, lighting one after another
+    {at:0,place:"mcDusk",keys:[[0,1000,520,1.08],[tData-1.5,1150,420,1.18]],d:3,push:0.02,draw(ctx,t){mc_bank(ctx,t,"dusk");
+      const talk={teacher:mc_recite(t,C.asked+0.2,C.asked+1.6),boy1:mc_recite(t,tTime-0.3,tTime+1.4),boy2:mc_recite(t,tTime-0.3,tTime+1.4)};
+      mc_reciters(ctx,t,{pose:MC_POSE.sit,talk});mc_leaves(ctx,t,"dusk");
+      const rows=mc_rows(ctx,RX,RY,{s:RS,dy:RDY,tiles:false,labelA:1});mc_threads(ctx,rows,1,{s:RS});
+      const glowR=r=>0.55+0.45*Math.sin(Math.PI*clamp((t-tTime-r*0.35)/0.9,0,1))+0.45*ag_in(t,tYears,1.0);
+      for(let r=0;r<4;r++){ctx.save();const op=[0,0,0,0];op[r]=1;mc_rows(ctx,RX,RY,{s:RS,dy:RDY,open:op,labelA:0,glow:Math.min(1,glowR(r))});ctx.restore();}}},
+    // the same with data: the room, the two routes agreeing, the team's card on the wall; the camera eases back for the end card
+    {at:tData-0.3,place:"mcLab",keys:[[0,955,585,1.06],[tWay-0.4,960,540,1.0]],d:3.2,push:0,draw(ctx,t){
+      mc_agent(ctx,MC_AG[0],MC_AG[1],{t,core:0.55});mc_jun(ctx,t,{dx:MC_JDX});mc_clara(ctx,t,{x:MC_CX,smile:0.5});ag_roomLight(ctx,1);
+      ag_tool(ctx,MC_R1[0],MC_R1[1],MC_R1[2],130,"the data platform's enrolments",{touch:0.5});ag_tool(ctx,MC_R2[0],MC_R2[1],MC_R2[2],130,"the student system's report",{touch:0.5});
+      mc_count(ctx,MC_R1[0]+MC_R1[2]/2,MC_CY,"131",{col:AG.green});mc_count(ctx,MC_R2[0]+MC_R2[2]/2,MC_CY,"131",{col:AG.green});
+      ag_verdict(ctx,960,MC_VY,"agrees two ways","pass",1);mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{row:1});mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{fill:1});
+      const g=ag_io(t,tHolds-0.2,tHolds+1.6,0.5);if(g>0)glow(ctx,960,MC_VY,180,[110,190,140],0.35*g);}}];
+  ag_shots(ctx,S,t,sc.dur,shots,0.8);
+  ag_end(ctx,S,t,tTrust-0.1,"Minds that change","Trust no mind blindly. Check the work.","Film 5 of 9");});

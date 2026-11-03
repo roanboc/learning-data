@@ -335,14 +335,19 @@ function mc_paper(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.005)ret
   ctx.restore();}
 // a speech-free card on the wall or the floor: words on a card, as ag_textCard, with a coloured edge where the colour means something
 function mc_card(ctx,x,y,w,words,o){return ag_textCard(ctx,x,y,w,words,o||{});}
-// the agent's words, chosen one at a time: a stack of likely words over the place where the next goes, the chosen one on top (violet)
-function mc_stack(ctx,x,y,words,u,o){o=o||{};if(u<=0)return;const a=ag_in(u,0,0.25)*(1-ag_in(u,0.7,0.3));if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
-  words.forEach((wd,i)=>{const yy=y-60-i*50,pick=i===0,pw=ag_tw(ctx,wd,{w:700,size:28})+40;ag_box(ctx,x-pw/2,yy-22,pw,44,22,{edge:pick?AG.violet:null,edgeA:pick?0.9:0.3,a:pick?1:0.75-0.15*i});
-    ag_T(ctx,wd,x,yy+10,{w:700,size:28,align:"center",col:pick?AG.violet:AG.mut});});
+// one word the agent writes, at (x, y), taken at T from a small stack of three likely words over its place, the most likely on top
+// (violet) and all left-aligned with the word: the stack rises in, the other two fade, and the top one drops into the line, growing
+// to the line's size. MC_STK: the top word's height over the line, and the step between the three
+const MC_STK={top:150,step:48};
+function mc_pick(ctx,x,y,words,t,T,o){o=o||{};const s={w:700,size:28},a=o.a==null?1:o.a;
+  const sIn=ag_in(t,T-0.48,0.22);if(sIn<=0||a<=0)return;const rise=1-ag_eo(ag_in(t,T-0.48,0.3)),rest=1-ag_in(t,T-0.14,0.2),e=ag_eo(ag_in(t,T,0.34));
+  ctx.save();ctx.globalAlpha*=a;
+  if(rest>0)for(let i=words.length-1;i>0;i--){const yy=y-MC_STK.top+i*MC_STK.step+rise*16,pw=ag_tw(ctx,words[i],s)+36;
+    withA(ctx,sIn*rest,()=>{ag_box(ctx,x-18,yy-21,pw,42,21,{edgeA:0.3});ag_T(ctx,words[i],x,yy+10,Object.assign({},s,{col:AG.mut,a:0.95-0.15*i}));});}
+  const y0=y-MC_STK.top+rise*16,yy=lerp(y0,y-12,e),box=1-ag_in(t,T+0.04,0.26),sz=lerp(28,34,e),pw=ag_tw(ctx,words[0],{w:700,size:sz})+36;
+  if(box>0)withA(ctx,sIn*box,()=>ag_box(ctx,x-18,yy-21,pw,42,21,{edge:AG.violet,edgeA:0.9}));
+  ag_T(ctx,words[0],x,lerp(y0+10,y,e),{w:700,size:sz,col:o.col||AG.violet,a:sIn});
   ctx.restore();}
-// a line of words the agent writes: each word lands at its moment (ts[i]), violet; returns the end x
-function mc_words(ctx,x,y,words,ts,t,o){o=o||{};let xx=x;words.forEach((wd,i)=>{const u=ag_in(t,ts[i],0.35);const w=ag_tw(ctx,wd,{w:700,size:o.size||34});
-  if(u>0)ag_T(ctx,wd,xx,y-(1-ag_eo(u))*30,{w:700,size:o.size||34,col:o.col||AG.violet,a:u});xx+=w+(o.gap||18);});return xx;}
 // the agent: the sphere in its oak ring, without the steps (this film doesn't follow its loop); o.spin turns the ring's light once
 // round (0 to 1) as it answers, the other way round with o.dir -1; o.clear 0 to 1 empties it (a new chat: the band dims and the ring's light goes); o.label
 function mc_agent(ctx,x,y,o){o=o||{};const R=o.R||150,r=o.r||74,a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const cl=clamp(o.clear||0,0,1);
@@ -492,7 +497,7 @@ function mc_head(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.005)return
    by a person; mc_screenSearch: Jun's search for the review */
 function mc_count(ctx,x,y,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y-20,lerp(0.5,1,o.k));
   ag_T(ctx,String(n),x,y,{w:800,size:64,align:"center",col:o.col||AG.ink});ctx.restore();}
-function mc_rows2(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const n=10,rh=34,hi=clamp(o.hi||0,0,1),fx=clamp(o.fixed||0,0,1),pairs=[[1,2],[4,5],[7,8]];
+function mc_rows2(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const n=10,rh=32,hi=clamp(o.hi||0,0,1),fx=clamp(o.fixed||0,0,1),pairs=[[1,2],[4,5],[7,8]];
   ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,n*rh+30,16,{});
   for(let i=0;i<n;i++){const yy=y+15+i*rh,lit=pairs.some(p=>p.includes(i)),u=lit?hi:0,gone=lit&&i===pairs.find(p=>p.includes(i))[1]?fx:0;
     ctx.save();ctx.globalAlpha*=1-gone*0.75;ctx.fillStyle=rgba(mix(i%2?[238,236,232]:[230,228,224],[246,226,196],u),1);ctx.fillRect(x+12,yy,w-24,rh-4);
@@ -501,7 +506,7 @@ function mc_rows2(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;co
   for(const p of pairs){if(hi<=0)continue;const yy=y+15+p[0]*rh;ctx.save();ctx.globalAlpha*=hi;ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=3;rr(ctx,x+6,yy-4,w-12,rh*2+4,10);ctx.stroke();ctx.restore();}
   ctx.restore();}
 function mc_moon(ctx,x,y,r,t,col){ctx.save();ctx.translate(x,y);ctx.rotate(t);ctx.fillStyle=col;ctx.beginPath();ctx.arc(0,0,r,0.6,TAU-0.6+Math.PI*0.0);ctx.arc(r*0.45,-r*0.1,r*0.78,TAU-0.9,0.9,true);ctx.closePath();ctx.fill();ctx.restore();}
-function mc_nightly(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=540,b=ag_textCard(ctx,x,y,w,{kick:"every night",title:"nobody counted twice"},{edge:AG.blue,kickCol:AG.blue,a,k:o.k});
+function mc_nightly(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=o.w||540,b=ag_textCard(ctx,x,y,w,{kick:"every night",title:"nobody counted twice"},{edge:AG.blue,kickCol:AG.blue,a,k:o.k});
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+b.h/2,lerp(0.5,1,o.k));mc_moon(ctx,x+w-56,y+46,16,o.moon||0,rgba(AG.blue,0.85));
   if(o.tick>0)ag_tick(ctx,x+w-54,y+b.h-44,28,rgba(AG.green,o.tick),5);ctx.restore();return b;}
 function mc_record(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y,lerp(0.6,1,o.k));

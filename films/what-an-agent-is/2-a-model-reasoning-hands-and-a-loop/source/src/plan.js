@@ -5,7 +5,7 @@
      ml_jun       Jun at his desk on the left
      ml_tool      a tool's card: its name, what it does, read only by a lock, and its tool server behind it
      ml_parts     the four parts in a row under the kicker, model, reasoning, hands, loop, each lighting in its colour
-     ml_cal       a calendar card: a day, or a year
+     ml_cal       a calendar card: a day, or a year; o.from rolls its big words up from the ones before
      ml_byHand    the five small cards of the afternoon by hand, find the tables to fix, with an amber arrow from fix back to query
      ml_clock     a clock on a card, its hands moving through the afternoon
      ml_pages     pale pages without words, streaming into the model
@@ -14,6 +14,11 @@
      ml_plan      the model's plan, written line by line, a tick by each line that meets the team's rules
      ml_rules     the team's rules, on a card from Jun's side
      ml_query     a query on its card, and the number it brings back
+     ml_recipe    the recipe the steps become, with its test; o.fold folds its steps away
+     ML_ANS       the agent's answer by Jun, with its five pieces of evidence (ML_EV) and where each rests once fanned out (ml_evPlaces)
+     ml_evItem    one piece of evidence, drawn as the shared answer card draws it, for when it stays behind without the answer
+     ml_approve   the line at an answer's foot, "Approved by:", and the name a person signs after it
+     ml_small     the agent at any place and size, its steps only at full size
      ml_server    a tool server: a small matte box behind a tool, its cable, and the same plug as every arm (the open standard)
      ml_thought   a violet thought from the model
      ml_globe     a pale globe, "the web"
@@ -53,7 +58,8 @@ function ml_tool(ctx,i,o){o=o||{};const a=o.a==null?1:o.a,x=ML_ROOM.tx+(o.dx||0)
 
 /* ---------------------------------------------------------------- the four parts, under the kicker
    ml_parts(ctx, on, o): on[i] (0 to 1) lights part i in its colour; o.a; o.gather (0 to 1) carries them into the ring at o.to
-   ([x, y]), each to its place: the model to the middle, reasoning to the band, hands to Act, the loop to the ring. Returns the chips. */
+   ([x, y]), each to its place: the model to the middle, reasoning to the band, hands to Act, the loop to the ring; their words go as
+   they leave, already read, so nothing small is left to read. Returns the chips. */
 const ML_PARTS=[["model",AG.violet],["reasoning",AG.violet],["hands",AG.blue],["loop",AG.amber]];
 function ml_parts(ctx,on,o){o=o||{};const a=o.a==null?1:o.a,[x0,y0]=ML_ROOM.parts,h=48,out=[];let x=x0;
   const to=o.to||ML_ROOM.ring,dest=[[to[0],to[1]+40],[to[0],to[1]-12],[to[0]+180,to[1]],[to[0]-180,to[1]]],g=ag_sine(o.gather||0);
@@ -62,19 +68,23 @@ function ml_parts(ctx,on,o){o=o||{};const a=o.a==null?1:o.a,[x0,y0]=ML_ROOM.part
     ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);
     ag_box(ctx,-w/2,-h/2,w,h,h/2,{a:fa,edge:l>0.05?col:null,edgeA:0.9*l,glow:l>0.05?col:null,glowA:l});
     ctx.save();ctx.globalAlpha*=fa;if(l>0.01){ctx.fillStyle=rgba(col,0.12*l);ctx.beginPath();ag_rect(ctx,-w/2,-h/2,w,h,h/2);ctx.fill();}
-    ag_T(ctx,s,0,10,{w:700,size:28,align:"center",col:mix(AG.mut,col,l)});ctx.restore();ctx.restore();});
+    ag_T(ctx,s,0,10,{w:700,size:28,align:"center",col:mix(AG.mut,col,l),a:1-sstep(0.02,0.11,g)});ctx.restore();ctx.restore();});
   return out;}
 
 /* ---------------------------------------------------------------- a calendar card
    ml_cal(ctx, x, y, w, head, big, o): two rings on top, a strip with head (the month, or the day), big words under it; o.sub a
-   quieter line, o.col the strip's colour (oak), o.tick a green tick, o.a, o.k (springs in). Returns its box. */
+   quieter line, o.col the strip's colour (oak), o.tick a green tick, o.a, o.k (springs in); o.from (the big words before) rolls up
+   and out as o.roll goes 0 to 1, and big rolls in under it. Returns its box. */
 function ml_cal(ctx,x,y,w,head,big,o){o=o||{};const a=o.a==null?1:o.a,h=o.sub?196:156,b={x,y,w,h};if(a<=0)return b;ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
   ag_box(ctx,x,y,w,h,18,{});const col=o.col||AG_OAK.dark;
   ctx.save();ctx.beginPath();ag_rect(ctx,x,y,w,h,18);ctx.clip();ctx.fillStyle=rgba(col,0.9);ctx.fillRect(x,y,w,54);ctx.restore();
   for(const rx of [x+w*0.28,x+w*0.72]){ctx.fillStyle="#5A564F";ctx.beginPath();ag_rect(ctx,rx-5,y-14,10,30,5);ctx.fill();}
   ag_T(ctx,head,x+w/2,y+38,{w:700,size:28,align:"center",col:[255,255,255]});
-  ag_T(ctx,big,x+w/2,y+112,{w:800,size:44,align:"center"});
+  const ru=o.from==null?1:ag_sine(clamp(o.roll||0,0,1));
+  if(ru<1){ctx.save();ctx.beginPath();ctx.rect(x,y+56,w,h-56);ctx.clip();ag_T(ctx,o.from,x+w/2,y+112-72*ru,{w:800,size:44,align:"center",a:1-ru});
+    ag_T(ctx,big,x+w/2,y+112+72*(1-ru),{w:800,size:44,align:"center",a:ru});ctx.restore();}
+  else ag_T(ctx,big,x+w/2,y+112,{w:800,size:44,align:"center"});
   if(o.sub)ag_T(ctx,o.sub,x+w/2,y+160,{w:600,size:28,align:"center",col:AG.mut});
   if(o.tick)ag_tick(ctx,x+w-34,y+h-34,26,rgba(AG.green,clamp(o.tick,0,1)),4);
   ctx.restore();return b;}
@@ -178,6 +188,62 @@ function ml_query(ctx,x,y,w,kick,text,num,o){o=o||{};const a=o.a==null?1:o.a,ls=
     if(o.note)ag_T(ctx,o.note,x+w-28,y+h-36,{w:700,size:30,col:AG.amber,align:"right",a:o.noteA==null?1:o.noteA});}
   ctx.restore();return b;}
 
+/* ---------------------------------------------------------------- the recipe: the steps, once they're known
+   ml_recipe(ctx, x, y, w, o): a card with a blue edge, "Recipe" and "Census-day count", then its steps, each in as o.k[i] (0 to 1)
+   says, the test in green with a tick by it as o.tick (0 to 1) says; o.fold (0 to 1) folds the steps away and the card closes up to
+   its title; o.foot a line at its foot (o.footA); o.ka springs it in; o.a. Returns its box, and ly(i), the baseline of step i. */
+const ML_RECIPE=["1 Students' table","2 Rule: as on census day","3 Count","Test: total = census report"];
+function ml_recipe(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,fold=ag_sine(clamp(o.fold||0,0,1)),n=ML_RECIPE.length,fh=o.foot?44:0,
+    h=136+(n*42+10)*(1-fold)+fh,b={x,y,w,h,ly:i=>y+150+i*42};if(a<=0)return b;
+  ctx.save();ctx.globalAlpha*=a;if(o.ka!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.ka));
+  ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.85});ag_T(ctx,"RECIPE",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"Census-day count",x+28,y+100,{w:700,size:36});
+  const la=1-clamp(fold*2.5,0,1);if(la>0.01){ctx.save();ctx.beginPath();ctx.rect(x,y+110,w,h-110-fh);ctx.clip();
+    for(let i=0;i<n;i++){const k=clamp((o.k||[])[i]==null?1:o.k[i],0,1)*la;if(k>0.01)ag_T(ctx,ML_RECIPE[i],x+28,y+150+i*42,{w:600,size:30,a:k,col:i===3?AG.green:AG.ink});}
+    const tk=(o.tick||0)*la;if(tk>0.01)ag_tick(ctx,x+w-46,y+150+3*42-10,26,rgba(AG.green,tk),4);ctx.restore();}
+  if(o.foot)ag_T(ctx,o.foot,x+28,y+h-28,{w:600,size:28,col:AG.mut,a:o.footA==null?1:o.footA});
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the answer by Jun, and its evidence
+   The agent's answer rests by Jun (ML_ANS), its five pieces of evidence (ML_EV) clipped behind it until they fan out to its right,
+   one under another: the tables it read and the rule (blue, its tools), both queries (the first amber: its round fell short), and the
+   check (green). ml_evPlaces(ctx) gives where each rests once out, {x, y, w, h, r}; ml_evItem(ctx, e, o) draws one there as the shared
+   card draws it (o.dx, o.dy move it; o.a), for once the answer has gone and its evidence stays. */
+const ML_ANS={x:452,y:232,w:560,ew:460,gap:16};
+const ML_ANSW={kick:"Answer",title:"18,412 students",sub:"454 more than last year's 17,958"};
+const ML_EV=[{kick:"Tables read",title:"Students",col:AG.blue},{kick:"Rule",title:"Docs · census day",col:AG.blue},
+  {kick:"Query 1",title:"as they are today · 17,936",col:AG.amber},{kick:"Query 2",title:"on 31 March · 18,412",col:AG.green},
+  {kick:"Check",title:"failed, then passed",col:AG.green}];
+function ml_evPlaces(ctx){const A=ML_ANS,r=ag_evidence(ctx,A.x,A.y,A.w,ML_ANSW,ML_EV,{side:"right",ew:A.ew,gap:A.gap,open:1,a:0});
+  return{card:r.card,items:r.items.map((e,i)=>({x:e.to.x,y:e.to.y,w:e.to.w,h:e.to.h,r:(i%2?1:-1)*0.02}))};}
+function ml_evItem(ctx,e,it,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const c=it.col||AG.mut,lines=ag_wrap(ctx,it.title||"",e.w-48,{w:600,size:28}).slice(0,3);
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(e.x+(o.dx||0)+e.w/2,e.y+(o.dy||0)+e.h/2);ctx.rotate(e.r);ctx.translate(-e.w/2,-e.h/2);
+  ag_box(ctx,0,0,e.w,e.h,16,{edge:c,edgeA:0.55,lw:2});let yy=24;
+  if(it.kick){ag_T(ctx,String(it.kick).toUpperCase(),24,yy+22,{w:700,size:28,ls:3,col:c});yy+=36;}
+  for(const l of lines){ag_T(ctx,l,24,yy+26,{w:600,size:28});yy+=36;}ctx.restore();}
+// piecewise straight: the value at t of [[t0, v0], [t1, v1], ...]
+function ml_pw(t,pts){if(t<=pts[0][0])return pts[0][1];for(let i=1;i<pts.length;i++)if(t<pts[i][0]){const [a0,v0]=pts[i-1],[a1,v1]=pts[i];return lerp(v0,v1,(t-a0)/(a1-a0));}return pts[pts.length-1][1];}
+
+/* ---------------------------------------------------------------- "Approved by:", and a name signed after it
+   ml_approve(ctx, x, y, w, name, k, o): a slim card, "Approved by:" and a dotted line; as k goes 0 to 1 the name is signed on the
+   line, letter by letter, a pen at its end while it writes; o.k springs it in, o.a. */
+function ml_approve(ctx,x,y,w,name,k,o){o=o||{};const a=o.a==null?1:o.a,h=78,b={x,y,w,h};if(a<=0)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,20,{});
+  const lx=x+28+ag_tw(ctx,"Approved by:",{w:700,size:30})+18;ag_T(ctx,"Approved by:",x+28,y+50,{w:700,size:30,col:AG.mut});
+  ctx.strokeStyle="rgba(60,50,40,0.28)";ctx.lineWidth=2;ctx.setLineDash([4,7]);ctx.beginPath();ctx.moveTo(lx,y+58);ctx.lineTo(x+w-28,y+58);ctx.stroke();ctx.setLineDash([]);
+  const n=Math.round(clamp(k,0,1)*name.length),s=name.slice(0,n);if(n>0)ag_T(ctx,s,lx+8,y+50,{w:800,size:34});
+  if(k>0&&k<1)ag_pen(ctx,lx+8+ag_tw(ctx,s,{w:800,size:34})+14,y+34,30,rgba(AG.ink,0.85));
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the agent at any place and size
+   ml_small(ctx, t, cx, cy, R, r, o): its ring (R) round the sphere (r), as ag_loop draws them; its steps (o.stepA) and "Model" on the
+   band (o.label, 0 to 1) only at full size; o.core, o.think, o.lit, o.col, o.pulse, o.a. ML_REST: where it rests, small, at the top
+   right, once it has brought its answer. */
+const ML_REST=[1720,300,100,48];
+function ml_small(ctx,t,cx,cy,R,r,o){o=o||{};const a=o.a==null?1:o.a,sa=o.stepA==null?1:o.stepA;if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;
+  ag_loop(ctx,cx,cy,{t,R,r,core:o.core,think:o.think,label:null,stepA:[sa,sa,sa],lit:o.lit,col:o.col,pulse:o.pulse});
+  const la=o.label||0;if(la>0.01)ag_T(ctx,"Model",cx,cy+r*0.6,{w:700,size:28,align:"center",col:AG.label,a:la});
+  ctx.restore();}
+
 /* ---------------------------------------------------------------- a tool server and the open standard's plug
    ml_server(ctx, x, y, o): a small matte box whose left side meets a tool's card at (x, y): a cable running right out of the frame;
    o.label ("tool server"), o.a. ml_plug(ctx, x, y, ang, s, col, a): the plug every arm ends in and every server takes. */
@@ -195,20 +261,21 @@ function ml_thought(ctx,x,y,text,a,o){o=o||{};if(a<=0.01)return null;const w=ag_
   if(o.px!=null){for(let i=0;i<3;i++){const u=(i+1)/4,cx=lerp(x+w*0.25,o.px,u),cy=lerp(y+h,o.py,u),r=lerp(12,6,u);ag_box(ctx,cx-r,cy-r,2*r,2*r,r,{edge:AG.violet,edgeA:0.5});}}
   ag_box(ctx,x,y,w,h,40,{edge:AG.violet,edgeA:0.8});ag_T(ctx,text,x+w/2,y+h/2+11,{w:700,size:32,align:"center",col:AG.violet});ctx.restore();return{x,y,w,h};}
 
-/* ---------------------------------------------------------------- a pale globe, "the web" (meridians and parallels on a matte sphere) */
-function ml_globe(ctx,x,y,r,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;
+/* ---------------------------------------------------------------- a pale globe, "the web" (meridians and parallels on a matte sphere): its
+   words under it, or at its left (o.side "left") */
+function ml_globe(ctx,x,y,r,a,o){o=o||{};if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;
   ag_soft(ctx,c=>c.arc(x,y,r,0,TAU),[214,222,228],[250,252,254],x+r*0.35,y-r*0.4,r*1.2,"rgba(46,38,28,0.25)",14,0.9);
   ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();ctx.strokeStyle="rgba(90,110,128,0.45)";ctx.lineWidth=2;
   for(const k of [-0.6,-0.2,0.2,0.6]){ctx.beginPath();ctx.ellipse(x,y+k*r,r*Math.sqrt(1-k*k),r*0.12*Math.sqrt(1-k*k),0,0,TAU);ctx.stroke();}
   for(const k of [0.25,0.6,0.92]){ctx.beginPath();ctx.ellipse(x,y,r*k,r,0,0,TAU);ctx.stroke();}ctx.restore();
-  ag_T(ctx,"the web",x,y+r+46,{w:700,size:30,align:"center",col:AG.mut});ctx.restore();}
+  if(o.side==="left")ag_T(ctx,"the web",x-r-22,y+11,{w:700,size:30,align:"right",col:AG.mut});else ag_T(ctx,"the web",x,y+r+46,{w:700,size:30,align:"center",col:AG.mut});ctx.restore();}
 
 /* ---------------------------------------------------------------- two columns on the wall
    ml_columns(ctx, a, o): "Steps known" (blue) on the left, "Steps nobody can write in advance" (violet) on the right; o.x0, o.x1 their
-   middles, o.y their heads' top. Returns where each column's contents go. */
-function ml_columns(ctx,a,o){o=o||{};const x0=o.x0||620,x1=o.x1||1300,y=o.y||170,w0=440,w1=560,h=640,out={left:[x0,y+260],right:[x1,y+260]};if(a<=0.01)return out;
-  ctx.save();ctx.globalAlpha*=a;
-  for(const [cx,w,col,s] of [[x0,w0,AG.blue,"Steps known"],[x1,w1,AG.violet,"Steps nobody can write in advance"]]){
+   middles, o.y their heads' top, o.h their height, o.aL and o.aR each one's own fade. Returns where each column's contents go. */
+function ml_columns(ctx,a,o){o=o||{};const x0=o.x0||620,x1=o.x1||1300,y=o.y||170,w0=440,w1=560,h=o.h||640,out={left:[x0,y+260],right:[x1,y+260]};if(a<=0.01)return out;
+  ctx.save();ctx.globalAlpha*=a;const aL=o.aL==null?1:o.aL,aR=o.aR==null?1:o.aR;
+  for(const [cx,w,col,s,ca] of [[x0,w0,AG.blue,"Steps known",aL],[x1,w1,AG.violet,"Steps nobody can write in advance",aR]]){if(ca<=0.01)continue;ctx.save();ctx.globalAlpha*=ca;
     ctx.fillStyle=rgba(col,0.06);ctx.beginPath();ag_rect(ctx,cx-w/2,y,w,h,26);ctx.fill();ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=2;ctx.setLineDash([10,10]);ctx.stroke();ctx.setLineDash([]);
-    const lines=ag_wrap(ctx,s,w-60,{w:800,size:34});lines.forEach((l,i)=>ag_T(ctx,l,cx,y+62+i*44,{w:800,size:34,align:"center",col}));}
+    const lines=ag_wrap(ctx,s,w-60,{w:800,size:34});lines.forEach((l,i)=>ag_T(ctx,l,cx,y+62+i*44,{w:800,size:34,align:"center",col}));ctx.restore();}
   ctx.restore();return out;}

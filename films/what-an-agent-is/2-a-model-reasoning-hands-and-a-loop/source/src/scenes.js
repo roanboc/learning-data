@@ -116,7 +116,8 @@ function ml_boxRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;ag_roomLight(x,1);
   if(grow<=0){ag_ring(x,rx,ry,R,{p:ringP,from:-120,arrows:[-30]});
     if(drop>0){const y0=ry-560,fall=ag_eo(clamp(drop*1.25,0,1)),settle=drop>=0.8?Math.sin((drop-0.8)/0.2*Math.PI)*-10:0;
       ag_model(x,rx,lerp(y0,ry,fall)+settle,b.r,{t:tt,core:0.5});}}
-  else ag_loop(x,rx,ry,{t:tt,R,r:lerp(b.r,88,grow),label:grow>0.6?"Model":null,core:lerp(0.5,1,grow),stepA:[ag_in(tt,P.agent-0.2,0.4),ag_in(tt,P.agent,0.4),ag_in(tt,P.agent+0.2,0.4)]});}
+  else{const ti=1-ag_in(tt,P.title,0.5);ag_loop(x,rx,ry,{t:tt,R,r:lerp(b.r,88,grow),label:grow>0.6&&ti>0.5?"Model":null,core:lerp(0.5,1,grow),
+    stepA:[ag_in(tt,P.agent-0.2,0.4)*ti,ag_in(tt,P.agent,0.4)*ti,ag_in(tt,P.agent+0.2,0.4)*ti]});}}
 
 /* ---------------------------------------------------------------- the room, today
    Chapters 2 to 8 share one room (the style prototype's layout, ML_ROOM): Jun at his desk on the left, the agent's ring right of
@@ -137,7 +138,7 @@ function ml_question(x,tt,P){const [rx,ry]=ML_ROOM.ring,into=ag_in(tt,P.gives+0.
   ml_jun(x,tt,{pose:"desk",pose2:"chin",mix:rev,gaze:tt<P.gives?[2,-1.2]:[3,-0.2],nod:0.06*ag_io(tt,P.decides-0.1,P.decides+0.7,0.3)});
   ag_roomLight(x,1);
   // Planning's question, beside him; it becomes the agent's goal
-  const m=ml_pop(tt,P.asks-0.1,P.gives+0.5);ag_textCard(x,452,196,600,{kick:"From Planning",title:"How has the census-day count changed since last year?",sub:"for next year's classes"},
+  const m=ml_pop(tt,P.asks-0.1,P.gives+0.1);ag_textCard(x,452,196,600,{kick:"From Planning",title:"How has the census-day count changed since last year?",sub:"for next year's classes"},
     {tail:{side:"left",at:0.8,px:418,py:468},k:m.k,a:m.a});
   const g=ml_pop(tt,P.gives+0.3,null),[gx,gy,gw]=ML_ROOM.goal;ag_textCard(x,gx,gy,gw,{kick:"Goal",title:"Census-day count",sub:"Compare it with last year"},{tail:{side:"bottom",at:0.1,px:430,py:436},k:g.k,a:g.a});
   // census day, on its calendar card, and what it is
@@ -188,6 +189,9 @@ function ml_ride(x,u,d0,d1){if(u<=0||u>=1)return;const [rx,ry]=ML_ROOM.ring;let 
   if(u<0.7){const d=lerp(d0,d1,u/0.7)*Math.PI/180;px=rx+Math.cos(d)*180;py=ry+Math.sin(d)*180;}
   else{const d=d1*Math.PI/180,v=(u-0.7)/0.3;px=lerp(rx+Math.cos(d)*180,rx,v);py=lerp(ry+Math.sin(d)*180,ry,v);}
   ag_pellet(x,px,py,1-sstep(0.9,1,u));}
+// a card's flight out of the sphere (u 0 to 1) along a curve from (x0, y0) by (x1, y1) to (x2, y2): where its middle is, and its size,
+// full by halfway, so its words can come while it's still on its way
+function ml_fly(u,x0,y0,x1,y1,x2,y2){const e=ag_eo(u),q=(a0,a1,a2)=>(1-e)*(1-e)*a0+2*(1-e)*e*a1+e*e*a2;return{x:q(x0,x1,x2),y:q(y0,y1,y2),s:lerp(0.3,1,ag_eo(clamp(u/0.55,0,1)))};}
 // the parts row: those already met stay lit, softer
 const ml_partsOn=(t,i,ti)=>[0,1,2,3].map(k=>k<i?0.45:k===i?ag_in(t,ti-0.1,0.5):0);
 
@@ -280,7 +284,7 @@ function ml_loopRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;
   const off=1-ag_in(tt,P.unlike-0.4,0.6),A=(t0,t1)=>ml_pop(tt,t0,t1);
   let a=A(P.catalog+0.7,P.short-0.2);ag_textCard(x,480,388,450,{kick:"Catalog · a table",title:"Students",sub:"one row for each version of a record, with the dates it was true"},{k:a.k,a:a.a*off,kickCol:AG.blue});
   a=A(P.short,P.rule-0.2);ml_query(x,480,388,450,"Census report","31 March 2026 · students studying","18,412",{col:AG.ink,kickCol:AG.mut,ka:a.k,a:a.a*off});
-  a=A(P.stood-0.8,P.passes-0.2);ag_textCard(x,480,388,450,{kick:"Docs · the census rule",title:"Count each student as their record stood that day"},{k:a.k,a:a.a*off,kickCol:AG.blue});
+  a=A(P.stood-0.8,P.passes-0.2);ag_textCard(x,480,388,450,{kick:"Docs · census day",title:"Count each student as their record stood that day"},{k:a.k,a:a.a*off,kickCol:AG.blue});
   a=A(P.passes,null);ml_query(x,480,388,450,"Census report","31 March 2026 · students studying","18,412",{col:AG.ink,kickCol:AG.mut,ka:a.k,a:a.a*off});
   // slot B, the query and what comes back
   a=A(P.query+0.3,P.again-0.2);ml_query(x,480,630,450,"Query 1","Count students who are studying","17,936",{numA:ag_in(tt,P.query+1.6,0.4),note:"476 short",noteA:ag_in(tt,P.n476,0.4),ka:a.k,a:a.a*off});
@@ -296,8 +300,167 @@ function ml_loopRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;
   const un=ag_io(tt,P.unlike-0.2,P.stops-0.2,0.5);if(un>0.01){x.save();x.globalAlpha*=un;ag_box(x,480,380,440,330,24,{});
     ml_box(x,700,520,0.36,{t:tt,tilt:0.1*Math.sin(tt*2),push:0.5+0.5*Math.sin(tt*2),level:1,chain:1});
     ag_T(x,"Sperry's box",700,428,{w:700,size:30,align:"center"});ag_T(x,"push back",700,668,{w:700,size:30,align:"center",col:AG.amber});x.restore();}
-  const nx=[["read Docs",rx-250,250],["ask Jun",rx,214],["query again",rx+250,250]],pick=ag_in(tt,P.decides,0.4);
+  const nx=[["read Docs",rx-150,206],["ask Jun",rx+60,206],["query again",rx+270,206]],pick=ag_in(tt,P.decides,0.4);
   nx.forEach(([s,px,py],i)=>{const a2=ag_io(tt,P.unlike+0.6+i*0.15,P.stops-0.2,0.4);if(a2<=0.01)return;ag_pill(x,px,py,s,{a:a2*(i===0?lerp(0.55,1,pick):lerp(0.55,0.35,pick)),col:i===0&&pick>0.5?AG.violet:null});});
   // the loop stops: when the checks pass, at its limit of tries, or when it needs a person
   const st=[["checks pass",rx-300,P.cks],["limit: 10 rounds",rx,P.limit],["a person: ask Jun",rx+330,P.person]];
   st.forEach(([s,px,t0],i)=>{const a2=ag_in(tt,t0-0.1,0.4);if(a2>0.01)ag_pill(x,px,806,s,{a:a2,col:i===0?AG.green:null});});}
+
+// ---- 7 · The answer, with its evidence: the agent brings it to Jun and draws back; the evidence fans out; Jun reads it, signs, and it goes to Planning ----
+scene("answer",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({brings:wAt(sc,"brings","brings"),evid:wAt(sc,"evid","evidence"),tables:wAt(sc,"evid","tables"),
+    rule:wAt(sc,"evid","rule"),both:wAt(sc,"evid","both"),check:wAt(sc,"evid","check"),cev:wAt(sc,"decides","evidence"),appr:wAt(sc,"decides","approval"),
+    reads:wAt(sc,"decides","reads"),decides:wAt(sc,"decides","decides"),planning:wAt(sc,"decides","Planning")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,990,530,1.03],[0.1,980,530,1.02]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_answerRoom(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],1);ml_parts(ctx,[0.45,0.45,0.45,1],{a:1-ag_in(t,0.3,0.8)});});
+function ml_answerRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,R=ML_REST,W=A.w,EP=ml_evPlaces(x),h=EP.card.h;
+  // the agent lets go of its tools, which slide away to the right; its steps go quiet, and it draws back, smaller, to the top right
+  const hold=1-ag_sine(ag_in(tt,P.brings-0.2,0.8)),away=ag_eo(ag_in(tt,P.brings+0.4,1.0)),sa=1-ag_in(tt,P.brings+0.9,0.4),mv=ag_sine(ag_in(tt,P.brings+1.3,1.6));
+  ml_small(x,tt,lerp(rx,R[0],mv),lerp(ry,R[1],mv),lerp(180,R[2],mv),lerp(88,R[3],mv),{stepA:sa,label:sa,core:1,lit:tt<P.brings-0.2?2:null,col:AG.green});
+  if(away<1)ML_ROOM.tools.forEach((tl,i)=>{ml_tool(x,i,{dx:560*away,a:1-away,server:1,plug:1});ag_reach(x,ml_arm(i),hold,{grip:hold>0.95?1:0});
+    const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",clamp((hold-0.85)/0.15,0,1)*(1-away));});
+  // Jun watches it come, reads the evidence as it fans out, then again from the top; nods, signs, and watches it go
+  const gy=ml_pw(tt,[[0,-0.5],[P.brings+0.6,-0.5],[P.brings+1.4,-0.35],[P.tables-0.2,-0.35],[P.tables+0.3,-0.75],[P.rule+0.3,-0.4],[P.both+0.5,0.1],[P.check+0.4,0.55],
+    [P.cev,0.55],[P.cev+0.4,-0.35],[P.appr+0.3,0.3],[P.reads-0.2,-0.75],[P.decides-0.1,0.5],[P.decides+0.2,0.3],[P.planning+0.2,0.3],[P.planning+0.8,-1.2]]);
+  ml_jun(x,tt,{pose:"desk",gaze:[3,gy],nod:0.07*ag_io(tt,P.decides-0.3,P.decides+0.5,0.3),smile:0.25*ag_in(tt,P.decides+0.4,0.8)});
+  ag_roomLight(x,1);
+  // the goal, met: it goes as the answer comes to rest where it was
+  const [gx,gy0,gw]=ML_ROOM.goal,ga=1-ag_in(tt,P.brings+0.7,0.5);
+  if(ga>0.01)ag_textCard(x,gx,gy0,gw,{kick:"Goal",title:"Census-day count",sub:"Compare it with last year"},{tail:{side:"bottom",at:0.1,px:430,py:436},a:ga});
+  // the answer leaves the sphere as a small blank card and flies to Jun, full size halfway; its words come while it's still on its way
+  const fl=clamp((tt-P.brings)/1.3,0,1),F=ml_fly(fl,rx,ry,880,250,A.x+W/2,A.y+h/2),wa=ag_in(tt,P.brings+0.7,0.3),ox=F.x-(A.x+W/2),oy=F.y-(A.y+h/2);
+  if(fl>0&&wa<1){x.save();x.translate(F.x,F.y);x.scale(F.s,F.s);ag_box(x,-W/2,-h/2,W,h,22,{a:(1-wa)*ag_in(tt,P.brings,0.2)});x.restore();}
+  // it goes up to Planning once Jun has signed: the answer, its check and his name; the evidence stays with him
+  const lu=clamp((tt-P.planning-0.2)/1.1,0,1),dy=-820*lu*lu,la=1-sstep(0.6,1,lu);
+  // the evidence fans out, each piece as it's named: the tables, the rule, both queries, the check
+  const op=ml_pw(tt,[[P.tables-0.25,0],[P.rule-0.25,0.161],[P.both-0.25,0.321],[P.both+0.1,0.482],[P.check-0.25,0.643],[P.check+0.75,1]]);
+  if(op<1){x.save();x.translate(ox,oy);ag_evidence(x,A.x,A.y,W,ML_ANSW,ML_EV,{side:"right",ew:A.ew,gap:A.gap,open:op,a:wa});x.restore();}
+  else{if(la>0.01)ag_evidence(x,A.x,A.y+dy,W,ML_ANSW,[],{side:"right",ew:A.ew,gap:A.gap,a:wa*la});EP.items.forEach((e,i)=>ml_evItem(x,e,ML_EV[i]));}
+  // the check comes with it, under the answer: evidence, not approval
+  const vm=ag_sine(ag_in(tt,P.brings+1.0,1.0)),gl=ag_io(tt,P.cev-0.2,P.cev+0.9,0.3);if(la>0.01){x.save();if(gl>0.01){x.shadowColor=rgba(AG.green,0.8*gl);x.shadowBlur=26*gl;}
+    ag_verdict(x,lerp(rx,A.x+W/2,vm),lerp(724,A.y+h+46,vm)+dy,"Matches the source","pass",la);x.restore();}
+  // "Approved by:", with nothing after it, until Jun signs
+  const ap=ml_pop(tt,P.appr-0.1,null);ml_approve(x,A.x,A.y+h+92+dy,W,"Jun",clamp((tt-P.decides-0.05)/0.7,0,1),{k:ap.k,a:ap.a*la});
+  const tp=ag_in(tt,P.planning-0.15,0.35);ag_pill(x,A.x+W/2,A.y-44+dy,"To Planning",{a:tp*la});}
+
+// ---- 8 · A plain script: next March the steps are known; the evidence becomes a recipe with a test, and Noor approves it; it runs in seconds
+//      every census day, like Sperry's box; the agent took four minutes; once, the long way; plain scripts for known steps, agents for the rest ----
+scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(sc,"march","March"),steps:wAt(sc,"march","steps"),
+    project:wAt(sc,"recipe","project"),test:wAt(sc,"recipe","test"),noor:wAt(sc,"recipe","Noor"),approves:wAt(sc,"recipe","approves"),
+    runs:c.runs,rIn:wAt(sc,"runs","runs"),seconds:wAt(sc,"runs","seconds"),same:wAt(sc,"runs","same"),like:wAt(sc,"runs","like"),
+    took:c.took,four:wAt(sc,"took","four"),plain:wAt(sc,"took","plain"),needs:wAt(sc,"took","needs"),
+    web:c.web,searched:wAt(sc,"web","searched"),webW:wAt(sc,"web","web"),docs:wAt(sc,"docs","Docs"),plan:wAt(sc,"docs","plan"),
+    names:c.names,namesW:wAt(sc,"names","names"),gives:wAt(sc,"names","gives"),only:wAt(sc,"names","only"),
+    known:c.known,plainS:wAt(sc,"known","plain"),keep:c.keep,agents:wAt(sc,"keep","agents")}));
+  ml_shots(ctx,S,t,sc.dur,[
+    // Jun's room: next March's calendar; the evidence lines up into a recipe, with its test; Noor approves it; it runs each census day; the agent rests
+    {at:0,place:"lab",keys:[[0,980,530,1.02],[0.1,990,530,1.03]],d:P.web,push:0.01,draw:(x,tt)=>ml_recipeRoom(x,tt,P)},
+    // once: an agent whose plan named no tools took the long way, out to the web, though Docs had the rules; now each plan names them
+    {at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
+    // two columns on the wall: a plain script for the steps that are known, an agent for the steps nobody can write in advance
+    {at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
+      aL:ag_in(tt,P.known-0.3,0.6),rm:ag_sine(ag_in(tt,P.plainS-0.7,0.9)),rl:ag_in(tt,P.plainS,0.4),aR:ag_in(tt,P.keep-0.4,0.6),am:ag_sine(ag_in(tt,P.agents-0.3,1.1)),
+      al:ag_in(tt,P.agents+0.6,0.4)})}]);
+  ml_kick(ctx,t,[[0,"Today"],[P.web-0.2,"Once"],[P.names-0.1,"Today"]],1);});
+function ml_recipeRoom(x,tt,P){const R=ML_REST,EP=ml_evPlaces(x),RC={x:860,y:232,w:560},RB=ml_recipe(x,RC.x,RC.y,RC.w,{a:0,foot:"x"}),
+    YR=[["2027",680],["2028",1000],["2029",1320]],runAt=[P.rIn,P.seconds,P.same];
+  // the agent, resting small at the top right; "four minutes and twelve steps"; and as a plain rerun needs no agent, its band dims
+  const dim=ag_in(tt,P.needs-0.1,0.9);ml_small(x,tt,R[0],R[1],R[2],R[3],{stepA:0,core:lerp(1,0.12,dim)});
+  ml_jun(x,tt,{pose:"desk",gaze:[3,ml_pw(tt,[[0,0.2],[P.March-0.4,0.2],[P.March,-0.45],[P.steps,-0.45],[P.steps+0.6,-0.3],[P.noor,-0.3],[P.noor+0.4,0.3],
+    [P.runs,0.3],[P.runs+0.5,0.35],[P.four-0.2,0.35],[P.four+0.3,-0.9]])],nod:0.05*ag_io(tt,P.approves,P.approves+0.7,0.3)});
+  ag_roomLight(x,1);
+  // each census day the recipe runs: a light from it down to that year's card
+  const fold=ag_in(tt,P.runs-0.3,0.9),yA=1-ag_in(tt,P.plain-0.3,0.6),rb=RC.y+136+44;
+  for(let i=0;i<3;i++){const a=ag_in(tt,runAt[i]-0.3,0.4)*yA;if(a<=0.01)continue;const cx=YR[i][1]+140,p=[RC.x+RC.w/2,rb+4,RC.x+RC.w/2,rb+40,cx,440,cx,474];
+    x.save();x.globalAlpha*=a;x.strokeStyle=rgba(AG.blue,0.5);x.lineWidth=3;x.setLineDash([6,8]);ag_bzPath(x,p,0,1);x.stroke();x.setLineDash([]);
+    const u=clamp((tt-runAt[i]+0.2)/0.6,0,1);if(u>0&&u<1){const q=ag_bz(p,ag_sine(u));x.shadowColor=rgba(AG.blue,0.7);x.shadowBlur=14;x.fillStyle=rgba(AG.blue,1);x.beginPath();x.arc(q[0],q[1],8,0,TAU);x.fill();}
+    x.restore();}
+  // the recipe: it comes as the steps are known; the steps that worked fly into it and become its lines, the test in green; saved in the project
+  const rc=ml_pop(tt,P.steps-0.35,null),dest=[0,1,null,2,3],arr=i=>P.steps+0.2+i*0.15;
+  ml_recipe(x,RC.x,RC.y,RC.w,{ka:rc.k,a:rc.a,k:[0,1,3,4].map(i=>ag_in(tt,arr(i)+0.6,0.4)),tick:ag_in(tt,P.test,0.4),fold,foot:"Saved in the project",footA:ag_in(tt,P.project-0.1,0.4)});
+  // the evidence from the answer: the first query, which fell short, is left out
+  EP.items.forEach((e,i)=>{const d=dest[i];if(d==null){const u=ag_in(tt,P.steps,0.7);ml_evItem(x,e,ML_EV[i],{a:1-u,dy:30*u});return;}
+    const u=clamp((tt-arr(i))/0.9,0,1),v=ag_sine(u);ml_evItem(x,e,ML_EV[i],{dx:(RC.x+12-e.x)*v,dy:(RB.ly(d)-56-e.y)*v,a:1-sstep(0.55,1,u)});});
+  // Noor's review: she approves it
+  const rv=ml_pop(tt,P.noor-0.25,P.runs-0.3),ry=RC.y+RB.h+36;ag_textCard(x,RC.x,ry,RC.w,{kick:"Review",title:"Noor",sub:"data architect"},{k:rv.k,a:rv.a,kickCol:AG.mut});
+  const ok=ag_in(tt,P.approves,0.4)*rv.a;if(ok>0.01)ag_pill(x,RC.x+RC.w-150,ry+88,"approved",{a:ok,col:AG.green,icon:"tick"});
+  // next March: a calendar where the answer was, rolling from 2026 to 2027; it becomes the first census day the recipe runs on, then 2028, 2029
+  const cm=ag_sine(ag_in(tt,P.runs-0.3,0.9)),cl=ml_pop(tt,P.March-0.3,null);
+  ml_cal(x,lerp(452,YR[0][1],cm),lerp(232,480,cm),280,"31 March","2027",{from:"2026",roll:clamp((tt-P.March-0.2)/0.7,0,1),k:cl.k,a:cl.a*yA,tick:ag_in(tt,runAt[0]+0.4,0.4)});
+  for(let i=1;i<3;i++){const p=ml_pop(tt,runAt[i]-0.3,null);ml_cal(x,YR[i][1],480,280,"31 March",YR[i][0],{k:p.k,a:p.a*yA,tick:ag_in(tt,runAt[i]+0.4,0.4)});}
+  for(let i=0;i<3;i++)ag_T(x,"3 s",YR[i][1]+140,684,{w:700,size:30,align:"center",col:AG.blue,a:ag_in(tt,runAt[i]+0.2,0.4)*yA});
+  // the same way every time, like Sperry's box: small, its wheels turning
+  const bx=ag_io(tt,P.like-0.2,P.took-0.2,0.5);if(bx>0.01){ml_box(x,1744,600,0.38,{t:tt,tilt:0.06*Math.sin(tt*1.7),push:0.5+0.5*Math.sin(tt*1.7),level:1,chain:0,a:bx});
+    ag_T(x,"Sperry's box",1744,722,{w:700,size:28,align:"center",a:bx});}
+  // the agent took four minutes and twelve steps
+  const ac=ml_pop(tt,P.four-0.1,P.needs+0.6);ag_textCard(x,1620,440,260,{kick:"Agent",title:"4 min",sub:"12 steps"},{k:ac.k,a:ac.a});}
+// once: the long way out to the web, a plan that named no tools; now the plan names them, and the agent has only those
+function ml_longWay(x,tt,P){const [rx,ry]=ML_ROOM.ring,fold=ag_in(tt,P.namesW-0.1,1.0),reach=ag_sine(ag_in(tt,P.searched-0.3,1.4))*(1-ag_sine(fold)),
+    give=[0,1,2].map(i=>ag_sine(ag_in(tt,P.gives+0.1+i*0.18,0.8))),lit=tt<P.searched-0.3?0:tt<P.namesW-0.1?1:tt<P.gives?0:1;
+  ml_agent(x,tt,{core:1,lit,col:lit===0?AG.violet:AG.blue,think:ag_io(tt,P.namesW-0.2,P.namesW+1.2,0.4)});
+  // its three tools, and the arms that reach them once the plan names them; Docs had the census rules all along
+  const dg=ag_io(tt,P.docs-0.2,P.docs+1.4,0.3);
+  ML_ROOM.tools.forEach((tl,i)=>{const u=give[i],dt=i===2?Math.max(dg*(0.6+0.4*Math.sin((tt-P.docs)*7)),ag_io(tt,P.only,P.only+1.8,0.3)):0;
+    ml_tool(x,i,{touch:Math.max(u>0.95?0.4:0,dt),server:1,plug:1});
+    if(u>0.002){ag_reach(x,ml_arm(i),u,{grip:u>0.95?1:0,data:i===2?clamp((tt-P.only-0.2)/1.4,0,1):0});if(u>0.95){const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",1);}}});
+  // the long way: one long arm up to the web, and data coming back along it, slowly
+  const GL=[1420,160,56],ga=ag_io(tt,P.searched-0.5,P.namesW+0.9,0.5);ml_globe(x,GL[0],GL[1],GL[2],ga,{side:"left"});
+  ag_reach(x,[1360,476,1460,470,1470,300,GL[0]+8,GL[1]+GL[2]+14],reach,{grip:reach>0.95?1:0,data:reach>0.95?((tt-P.webW)*0.4)%1:0});
+  ag_roomLight(x,1);
+  // its plan: find the census rules; "Tools:" with nothing after it, marked amber once we see why; then filled in, and ticked
+  const pk=ml_pop(tt,P.web-0.25,null),fill=clamp((tt-P.namesW)/1.0,0,1),k0=6/27;
+  const pl=ml_plan(x,160,250,640,["1 Find the census rules","Tools: Catalog, Query, Docs"],{a:pk.a,ka:pk.k,amber:[false,tt>P.plan-0.1&&fill<=0],
+    k:[1,lerp(k0,1,fill)],tick:[0,ag_in(tt,P.namesW+1.0,0.4)]});
+  if(pk.a>0.01){x.save();x.globalAlpha*=pk.a;x.strokeStyle=rgba(AG.violet,0.45);x.lineWidth=3;x.setLineDash([6,8]);x.beginPath();x.moveTo(pl.x+pl.w+6,pl.y+52);
+    x.lineTo(rx-150,ry-176);x.stroke();x.setLineDash([]);x.restore();}}
+// two columns on the wall, a plain script under the first and the agent under the second: o.aL, o.aR (each column), o.rm and o.rl (the
+// recipe coming in, its label), o.am and o.al (the agent coming in, its label), o.a (all of it)
+function ml_twoCols(x,tt,o){const X0=640,X1=1220,Y=200,a=o.a==null?1:o.a;ag_roomLight(x,1);if(a<=0.01)return;x.save();x.globalAlpha*=a;
+  const out=ml_columns(x,1,{x0:X0,x1:X1,y:Y,h:560,aL:o.aL,aR:o.aR}),rm=o.rm||0,am=o.am||0;
+  ml_recipe(x,lerp(X0-200-420,X0-200,rm),out.left[1]-40,400,{fold:1,a:rm});
+  ag_label(x,X0,out.left[1]+170,"plain script",{col:AG.blue,align:"center",a:o.rl||0});
+  ml_small(x,tt,lerp(X1+420,X1,am),out.right[1]+60,100,48,{stepA:0,a:am});
+  ag_label(x,X1,out.right[1]+230,"agent",{col:AG.violet,align:"center",a:o.al||0});x.restore();}
+
+// ---- 9 · Back in the seat: Sperry's box held the aeroplane level while he stayed in his seat; Jun's agent brought him the evidence to decide;
+//      an agent is its four parts; use one only where a plain script can't do the job ----
+const ML_BOATWHO=[{who:{skin:[232,198,170],top:{c:[70,62,56]},cap:[104,72,48],goggles:true}},{who:{skin:[220,182,150],top:{c:[104,100,96]},cap:[84,82,80]}}];
+scene("seat",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({job:wAt(sc,"held","one"),while_:wAt(sc,"held","while"),seat:wAt(sc,"held","seat"),
+    took:c.took,steps:wAt(sc,"took","steps"),brought:wAt(sc,"took","brought"),evid:wAt(sc,"took","evidence"),decide:wAt(sc,"took","decide"),
+    is:c.is,model:wAt(sc,"is","model"),reasons:wAt(sc,"is","reasons"),hands:wAt(sc,"is","hands"),loop:wAt(sc,"is","loop"),only:c.only,end:c.breath}));
+  ml_shots(ctx,S,t,sc.dur,[
+    // 1914: the flying boat over the Seine, level, and Sperry's box at work, its one job
+    {at:0,place:"mlSeine",keys:[[0,900,560,1.12],[0.1,940,560,1.14]],d:P.while_,push:0.01,draw:(x,tt)=>{const bx=lerp(560,1160,clamp(tt/(P.while_+0.4),0,1));
+      ml_boat(x,bx,540,0.95,{t:tt,shadow:600,who:ML_BOATWHO});ml_crowd(x,tt,{turn:0.2+0.3*clamp(tt/P.while_,0,1)});
+      const ia=ag_in(tt,P.job-0.3,0.5);if(ia>0.01){x.save();x.globalAlpha*=ia;ag_box(x,1240,124,440,300,24,{});
+        ml_box(x,1460,250,0.3,{t:tt,tilt:0.05*Math.sin(tt*1.6),push:0.5+0.5*Math.sin(tt*1.6),level:1,chain:0});
+        ag_T(x,"one job: hold it level",1460,396,{w:700,size:28,align:"center"});x.restore();}}},
+    // Sperry back in his seat, his hands resting by the controls; the camera settles on his face
+    {at:P.while_-0.3,place:null,keys:[[P.while_-0.3,960,540,1],[P.while_-0.2,ML_FACE[0],ML_FACE[1],1.5]],d:2.4,push:0.01,draw:(x,tt)=>
+      ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,rest:1,mateGaze:[-1,-0.4],roll:0.006*Math.sin(tt*0.8)})},
+    // today: the agent takes the steps of the new question, and brings Jun its answer with the evidence; he decides; its four parts gather in its ring
+    {at:P.took-0.4,dis:1.0,place:"lab",keys:[[P.took-0.4,960,540,1],[P.took-0.3,960,540,1]],d:6,push:0.01,draw:(x,tt)=>ml_recap(x,tt,P)},
+    // the two columns again: the agent settles under the steps nobody can write in advance
+    {at:P.only-0.3,dis:0.7,place:"lab",keys:[[P.only-0.3,960,530,1.0],[P.only-0.2,960,520,1.02]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{aL:1,aR:1,rm:1,rl:1,
+      am:ag_sine(ag_in(tt,P.only,1.1)),al:ag_in(tt,P.only+0.9,0.4),a:1-ag_in(tt,P.end,0.6)})}]);
+  ml_kick(ctx,t,[[0,"1914"],[P.took-0.2,"Today"],[P.end,null]],1);
+  // the four parts, lighting in turn as they're named, then into the ring, each to its place
+  const pa=ag_io(t,P.is-0.4,P.only-0.3,0.5);if(pa>0.01)ml_parts(ctx,[ag_in(t,P.model-0.1,0.4),ag_in(t,P.reasons-0.1,0.4),ag_in(t,P.hands-0.1,0.4),ag_in(t,P.loop-0.1,0.4)],
+    {a:pa,gather:ag_in(t,P.loop+0.25,1.0)});
+  ag_end(ctx,S,t,P.end,ML_TITLE,null,"Film 2 of 9");});
+const ML_FACE=[880,440];   // Sperry's face in the cockpit, for the camera
+function ml_recap(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,W=500;
+  // it takes the steps: its light goes once round the ring, data back along the arms
+  const pu=clamp((tt-P.steps+0.4)/2.4,0,1),deg=-120+360*ag_sine(pu),pa=ag_io(tt,P.steps-0.4,P.brought+0.2,0.3),
+    glow=ag_io(tt,P.loop+0.95,P.only-0.1,0.35),lit=pa>0.5?(((Math.round((deg+120)/120)%3)+3)%3):null;
+  ml_agent(x,tt,{core:1+0.4*glow,think:glow,pulse:{deg:pa>0.01?deg:-120+360*ag_sine(clamp((tt-P.loop-0.95)/1.3,0,1)),a:Math.max(pa,glow)},lit,col:AG.violet});
+  ML_ROOM.tools.forEach((tl,i)=>{const d=clamp((tt-P.steps-0.2-i*0.5)/1.4,0,1);ml_tool(x,i,{touch:d>0&&d<1?1:0,server:1,plug:1});
+    ag_reach(x,ml_arm(i),1,{grip:1,data:d});const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",1);});
+  ml_jun(x,tt,{pose:"desk",gaze:[3,ml_pw(tt,[[0,-0.5],[P.brought+0.4,-0.5],[P.brought+1.0,-0.35],[P.is,-0.35],[P.is+0.4,-0.9]])],
+    nod:0.07*ag_io(tt,P.decide-0.2,P.decide+0.6,0.3),smile:0.2*ag_in(tt,P.decide,0.8)});
+  ag_roomLight(x,1);
+  // its answer, brought to Jun with the evidence clipped to it; he signs it; it goes as the four parts come
+  const out=1-ag_in(tt,P.is-0.4,0.5);if(out<=0.01)return;const h=ag_evidence(x,A.x,A.y,W,ML_ANSW,ML_EV,{a:0}).card.h,fl=clamp((tt-P.brought)/1.1,0,1),
+    F=ml_fly(fl,rx,ry,860,260,A.x+W/2,A.y+h/2),wa=ag_in(tt,P.brought+0.6,0.3);
+  if(fl>0&&wa<1){x.save();x.globalAlpha*=out;x.translate(F.x,F.y);x.scale(F.s,F.s);ag_box(x,-W/2,-h/2,W,h,22,{a:(1-wa)*ag_in(tt,P.brought,0.2)});x.restore();}
+  x.save();x.translate(F.x-(A.x+W/2),F.y-(A.y+h/2));ag_evidence(x,A.x,A.y,W,ML_ANSW,ML_EV,{a:wa*out});x.restore();
+  const ap=ml_pop(tt,P.evid,null);ml_approve(x,A.x,A.y+h+22,W,"Jun",clamp((tt-P.decide+0.1)/0.6,0,1),{k:ap.k,a:ap.a*out});}

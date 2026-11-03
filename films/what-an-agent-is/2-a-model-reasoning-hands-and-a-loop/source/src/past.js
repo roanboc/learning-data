@@ -8,7 +8,7 @@
                  photographs of the Curtiss flying boats of 1914; ml_boatBack the same from behind, for a wing that tips and comes back
      ml_crowd    spectators of 1914 seen from behind, along the near bank: boaters, dark suits, pale blouses, wide hats, two parasols
      ml_box      Sperry's stabiliser cut open: four gyroscopes, a valve, a piston, a lever to the wing's hinged edge; ml_level a spirit level
-     ML_PEOPLE   the people of 1914 and today, for ag_person: Sperry, Cachin, a pilot of 1914, a judge, two airline pilots
+     ML_PEOPLE   the people of 1914 and today, for ag_person: Sperry, Cachin, a judge, two airline pilots
    Nobody's face is a likeness: the people of 1914 are dressed from photographs of the day, with the module's proportions. */
 
 const ML_P={sky0:[192,208,220],sky1:[236,233,224],haze:[222,226,222],tree:[118,136,120],poplar:[104,124,108],stone:[204,196,180],stoneDk:[150,142,128],
@@ -308,7 +308,6 @@ function ml_epaulettes(c,P){for(const [x,y,w,r] of [[150,604,74,-0.42],[396,622,
 const ML_PEOPLE={
   sperry:{name:"Lawrence Sperry",key:"ml-sperry",skin:[232,198,170],hair:{style:"side",c:[74,52,36]},top:{kind:"suit",c:[70,62,56],inner:[236,232,222],tie:[60,54,62]},hat:{paint:ml_flyingCap([104,72,48],true)},breath:0.3},
   cachin:{name:"Emil Cachin",key:"ml-cachin",skin:[220,182,150],hair:{style:"cropped",c:[60,46,38]},top:{kind:"overshirt",c:[104,100,96],inner:[220,214,200]},hat:{paint:ml_flatCap([84,82,80])},breath:0.27},
-  pilot:{name:"A pilot of 1914",key:"ml-pilot",skin:[226,190,158],hair:{style:"side",c:[58,44,34]},top:{kind:"blazer",c:[110,80,56],inner:[232,228,218]},hat:{paint:ml_flyingCap([92,64,44],true)},breath:0.34},
   judge:{name:"A judge",key:"ml-judge",skin:[230,196,170],hair:{style:"cropped",c:[150,146,140]},beard:[156,150,146],top:{kind:"suit",c:[46,46,52],inner:[240,240,236],tie:[40,40,46]},hat:{paint:ml_bowler([36,36,40])},breath:0.24},
   captain:{name:"Captain",key:"ml-captain",skin:[176,124,92],hair:{style:"bun",c:[30,24,24]},top:{kind:"shirt",c:[240,242,244],paint:ml_epaulettes},breath:0.28},
   officer:{name:"First officer",key:"ml-officer",skin:[232,198,170],hair:{style:"cropped",c:[120,112,108]},top:{kind:"shirt",c:[238,240,242],paint:ml_epaulettes},breath:0.3}
@@ -467,11 +466,12 @@ function ml_timeline(ctx,x,y,w,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0||k<=
       ag_T(ctx,"by hand",sx+(al==="left"?-10:10),y-h/2-50,{w:700,size:30,col:dk,a:la,align:al});}}
   ctx.restore();}
 
-/* ---------------------------------------------------------------- a pilot of 1914 at the controls, close up
+/* ---------------------------------------------------------------- Sperry at the controls, close up
    ml_cockpit(ctx, t, o): the sky and the river beyond, tipping by o.roll (radians: when the aeroplane tips, the world does), the
    upper wing's edge and two struts, the pilot with both hands on the wheel (o.turn, radians, turns it, and his hands go with it; o.lift
    straightens his back, 0 to 1; o.nod), the hull's edge in front; o.gust (0 to 1) blows wind lines in from the left. o.who (a spec
-   from ML_PEOPLE, the pilot of 1914 by default) and o.rest (0 to 1: the hands leave the wheel and rest on the hull's edge). */
+   from ML_PEOPLE, Sperry by default), o.rest (0 to 1: the hands leave the wheel and rest on the hull's edge), o.raise (0 to 1: they
+   let go and rise, open), o.mate (his mechanic beside him, o.mateGaze). */
 const ML_PIT={x:840,y:612,s:1.15,wheel:[566,730,118],edge:900,mate:[1460,596,0.92]};
 // the two-jointed arm's angles (degrees, from straight down, forwards positive) that put a wrist at T, the elbow below (up: the elbow
 // on the other side, out behind a raised hand): figure space;

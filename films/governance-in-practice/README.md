@@ -17,6 +17,8 @@ What the university decided in *Governance principles* ([`../data-governance/`](
 | [Quality on the platform](https://data.learn-all.org/governance-in-practice/quality-on-the-platform/) | Quality checks and monitoring | 6½ min | 9 | 3 questions | [script](4-quality-on-the-platform/script.md) · [source](4-quality-on-the-platform/source/README.md) |
 | [Products in open formats](https://data.learn-all.org/governance-in-practice/products-in-open-formats/) | Open standards | 6 min | 9 | 3 questions | [script](5-products-in-open-formats/script.md) · [source](5-products-in-open-formats/source/README.md) |
 | [The marketplace](https://data.learn-all.org/governance-in-practice/the-marketplace/) | Finding and asking for data | 6½ min | 9 | 3 questions | [script](6-the-marketplace/script.md) · [source](6-the-marketplace/source/README.md) |
+
+For the whole series, on the site: [18 labs](https://data.learn-all.org/governance-in-practice/labs/) and [42 scenarios](https://data.learn-all.org/governance-in-practice/scenarios/), in English and Spanish, from the words in [site/assets/governance-in-practice/](../../site/assets/governance-in-practice/).
 <!-- /films -->
 
 ## How the films are made

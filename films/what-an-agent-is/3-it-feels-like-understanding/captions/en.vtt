@@ -1,0 +1,223 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:07.782
+In December 1998, NASA launched the Mars Climate Orbiter, to study the weather on Mars.
+
+00:00:09.082 --> 00:00:15.105
+On the way, small thrusters kept it pointing the right way, and each firing pushed it slightly off course.
+
+00:00:16.405 --> 00:00:20.681
+The builders' software, in Colorado, worked out the size of every push.
+
+00:00:21.381 --> 00:00:26.401
+It sent the numbers in a file to NASA's navigators in California, who steer the craft.
+
+00:00:27.701 --> 00:00:30.853
+The teams had agreed on newton-seconds, the metric unit.
+
+00:00:31.553 --> 00:00:35.467
+But the file gave pound-seconds, each about four and a half times bigger.
+
+00:00:36.967 --> 00:00:41.017
+So the navigators counted every push at less than a quarter of its size.
+
+00:00:42.517 --> 00:00:45.288
+Each team was sure the numbers meant the same to both.
+
+00:00:46.988 --> 00:00:49.270
+For nine months, small errors added up.
+
+00:00:50.770 --> 00:00:57.219
+From April, the navigators saw that something didn't fit; they raised it in emails, but it was never settled.
+
+00:00:58.719 --> 00:01:02.307
+After thirty years of success, orbiting Mars felt routine.
+
+00:01:03.807 --> 00:01:08.840
+On the 23rd of September 1999, it fired its engine to enter orbit,
+
+00:01:09.040 --> 00:01:13.486
+and passed behind Mars, 170 kilometres lower than planned.
+
+00:01:14.786 --> 00:01:16.352
+It was never heard from again.
+
+00:01:18.652 --> 00:01:23.029
+Years of work, and the first weather satellite at another planet, were lost.
+
+00:01:24.529 --> 00:01:25.917
+Something had to change.
+
+00:01:27.217 --> 00:01:32.250
+So on the next orbiter, Mars Odyssey, the team wrote both units on every hand-off,
+
+00:01:32.450 --> 00:01:34.976
+had every critical number checked independently,
+
+00:01:35.176 --> 00:01:37.489
+and added a second way to find the craft.
+
+00:01:38.789 --> 00:01:47.595
+In October 2001, Odyssey went into orbit, and twenty years later it was still at work, the longest-lived spacecraft at Mars.
+
+00:01:49.295 --> 00:01:55.522
+Agents bring the same risk to data work: a person and an agent, each sure the other means the same thing.
+
+00:01:56.822 --> 00:02:01.138
+Say what a number means, check it against something else, and you can rely on it.
+
+00:02:08.238 --> 00:02:13.660
+Today, at the university, Anil Kurian plans the Faculty of Health's student advisers.
+
+00:02:14.760 --> 00:02:19.661
+Each adviser calls 240 students once a term, to see how they're doing.
+
+00:02:20.961 --> 00:02:26.080
+So Anil asks Jun, in the data team, how many students the faculty has this term.
+
+00:02:27.180 --> 00:02:28.630
+Jun asks the agent.
+
+00:02:29.330 --> 00:02:34.141
+Its hands read the catalog and run a query, and it checks the count against the source.
+
+00:02:35.641 --> 00:02:42.916
+Seconds later: 2,160 students, 63 more than last year, with its evidence attached.
+
+00:02:44.616 --> 00:02:53.475
+In a 2025 study, longer explanations made people more confident in an AI's answers, even when the answers were no more accurate.
+
+00:02:54.975 --> 00:02:57.585
+It feels like understanding, and it feels safe.
+
+00:03:00.285 --> 00:03:04.473
+Try this: how well do you understand how a zip works, from one to seven?
+
+00:03:06.773 --> 00:03:10.290
+Now explain, step by step, how it closes and opens.
+
+00:03:12.390 --> 00:03:20.730
+In 2002, at Yale, Leonid Rozenblit and Frank Keil asked people to do just that, with everyday things like a zip.
+
+00:03:21.430 --> 00:03:23.969
+After trying, they rated themselves lower.
+
+00:03:25.469 --> 00:03:28.975
+Jun would give his understanding of the agent's answer a six.
+
+00:03:30.275 --> 00:03:31.656
+Which table did it read?
+
+00:03:32.156 --> 00:03:33.688
+What counted as a student?
+
+00:03:34.188 --> 00:03:35.502
+What did its check compare?
+
+00:03:36.602 --> 00:03:38.530
+He can't say, not even roughly.
+
+00:03:40.230 --> 00:03:43.582
+The feeling came from the answer, not from knowing what happened.
+
+00:03:46.282 --> 00:03:50.667
+For months, the agent had been right, so Jun had stopped opening the evidence.
+
+00:03:52.167 --> 00:03:56.577
+Early in the term, Anil wrote in a chat that the advisers' lists looked long.
+
+00:03:57.277 --> 00:04:01.552
+Jun replied that the agent had checked its source, and they both let it go.
+
+00:04:03.252 --> 00:04:09.588
+In 2010, Raja Parasuraman and Dietrich Manzey reviewed the research on automated aids.
+
+00:04:10.288 --> 00:04:15.409
+When an aid has been right for a long time, people stop checking it, above all when they're busy.
+
+00:04:16.709 --> 00:04:20.348
+It happens to experts too, and training alone doesn't prevent it.
+
+00:04:21.648 --> 00:04:25.693
+Like orbiting Mars, the agent's answers had come to feel routine.
+
+00:04:27.193 --> 00:04:29.212
+The faculty planned nine advisers.
+
+00:04:30.312 --> 00:04:34.506
+It needed twelve, and 720 students never had their call.
+
+00:04:37.206 --> 00:04:43.524
+At the end of the term, Anil counted the advisers' lists: 2,880 students.
+
+00:04:44.824 --> 00:04:50.213
+The agent had counted from student load, the table the university reports to the government.
+
+00:04:50.913 --> 00:04:55.730
+There, two half-time students count as one, and half the faculty studies half-time.
+
+00:04:57.430 --> 00:05:02.697
+So the table said 2,160: full-time equivalents, not people.
+
+00:05:04.197 --> 00:05:07.294
+Jun meant people; the agent took the table's meaning.
+
+00:05:07.994 --> 00:05:09.008
+Neither asked.
+
+00:05:10.708 --> 00:05:14.517
+People check they've understood each other: they say it back, or ask.
+
+00:05:15.617 --> 00:05:21.527
+A 2024 study found that language models do this less, and presume we already agree.
+
+00:05:22.827 --> 00:05:27.092
+The agent's check had compared its total with that same table, so it passed.
+
+00:05:28.392 --> 00:05:33.487
+And the record of what its hands did showed it all along: it added up full-time equivalents.
+
+00:05:36.187 --> 00:05:41.247
+NASA's review board put it plainly: mistakes happen, and checks are there to catch them.
+
+00:05:43.147 --> 00:05:46.741
+So Jun's team changed three things, as Odyssey's team did.
+
+00:05:48.241 --> 00:05:55.671
+Say what you mean, and hear it said back: every count names its unit, and the agent reads the question back before it counts.
+
+00:05:57.771 --> 00:06:02.376
+Check against something the agent didn't make, like the faculty's own list of students,
+
+00:06:02.576 --> 00:06:05.432
+and read what its hands did, not only what it says.
+
+00:06:07.532 --> 00:06:11.336
+Write every doubt in the team's log, with an owner, until it's answered.
+
+00:06:13.236 --> 00:06:17.158
+And a person decides; the agent's tick is only for reference.
+
+00:06:20.458 --> 00:06:27.654
+This term, Jun asks again, and the agent reads it back: students in the Faculty of Health, each person counted once?
+
+00:06:28.354 --> 00:06:29.481
+Jun says yes.
+
+00:06:30.581 --> 00:06:35.313
+It counts 2,880, and the faculty's own list agrees.
+
+00:06:36.813 --> 00:06:41.125
+So the faculty plans twelve advisers, and every student gets their call.
+
+00:06:42.825 --> 00:06:48.187
+A fluent answer, a green tick and a long run of success all make us feel we understand.
+
+00:06:49.487 --> 00:06:54.191
+Odyssey's team checked anyway, and their orbiter was still at work twenty years later.
+
+00:06:55.491 --> 00:06:58.759
+Checked like that, an agent's answer is one you can plan on.
+
+00:07:00.259 --> 00:07:01.790
+Feeling sure is not knowing.

@@ -1,0 +1,37 @@
+{
+  "kicker": "How we got here",
+  "kicker_es": "Cómo llegamos aquí",
+  "title_es": "Décadas en gestación",
+  "h1": "Decades in the making: how today's AI models came about",
+  "h1_es": "Décadas en gestación: de dónde vienen los modelos de IA",
+  "lead": "This term, an AI agent joins Jun Park's data team. To some it seems to have come from nowhere: some fear it, some expect magic. Before they work with it, the team learns where it came from: decades of slow work, from a machine that learned in 1958 to models that reason and use tools.",
+  "lead_es": "Este semestre, un agente de IA se suma al equipo de datos de Jun Park. Para algunos salió de la nada: unos le temen, otros esperan magia. Antes de trabajar con él, el equipo ve de dónde vino: décadas de trabajo lento, de una máquina que aprendía en 1958 a modelos que razonan y usan herramientas.",
+  "description": "A film about where today's AI models came from: books copied by hand in Europe in the 1440s, slow to make, rare and full of new mistakes; printing's pieces, made far apart over four hundred years, from Bi Sheng's clay type in China in the 1040s and the metal type of Korea in 1377 to Gutenberg's press in Mainz, with a lender's money; presses in more than two hundred towns by 1500, and cheaper books for far more readers; an AI agent that joins Jun's data team and seems to have come from nowhere; the perceptron, shown to reporters in 1958, which learned to tell cards marked on the left from the right, and the limit of a single layer; learning from mistakes in many layers, in 1986, and twenty years of small networks; 2012, when old ideas met more than a million labelled photos and two graphics chips; attention, and the transformer, in 2017; models trained on text from the web and books, fluent but not trying to help; a model trained on the answers people preferred, in 2022; models that work step by step and use tools, in a loop: an agent; and why it seemed so sudden, as computing power, data and money arrived together.",
+  "description_es": "Una película sobre de dónde vienen los modelos de IA de hoy: libros copiados a mano en la Europa de la década de 1440, lentos de hacer, escasos y llenos de errores nuevos; las piezas de la imprenta, hechas lejos unas de otras a lo largo de cuatrocientos años, de los tipos de arcilla de Bi Sheng en la China de la década de 1040 y los tipos de metal de Corea en 1377 a la prensa de Gutenberg en Maguncia, con el dinero de un prestamista; imprentas en más de doscientas ciudades hacia 1500, y libros más baratos para muchos más lectores; un agente de IA que se suma al equipo de datos de Jun y parece salir de la nada; el perceptrón, mostrado a la prensa en 1958, que aprendió a distinguir tarjetas marcadas a la izquierda de las marcadas a la derecha, y el límite de una sola capa; aprender de los errores en muchas capas, en 1986, y veinte años de redes pequeñas; 2012, cuando ideas viejas se encontraron con más de un millón de fotos etiquetadas y dos chips gráficos; la atención, y el transformer, en 2017; modelos entrenados con texto de la web y de libros, fluidos pero sin intentar ayudar; un modelo entrenado con las respuestas que la gente prefería, en 2022; modelos que trabajan paso a paso y usan herramientas, en un ciclo: un agente; y por qué pareció tan repentino, cuando la potencia de cómputo, los datos y el dinero llegaron a la vez.",
+  "card": "An AI agent joins Jun's team, and seems to come from nowhere. Its ideas took decades: see where today's models came from.",
+  "card_es": "Un agente de IA se suma al equipo de Jun, y parece salir de la nada. Sus ideas tardaron décadas: mira de dónde vienen los modelos.",
+  "fiction": "The university, Jun's team and their numbers are invented, and so is the remedy copied in the opening; the history, its people, dates and figures are real, with their sources in the script.",
+  "fiction_es": "La universidad, el equipo de Jun y sus cifras son inventados, y también el remedio copiado al inicio; la historia, sus personas, fechas y cifras son reales, con sus fuentes en el guion.",
+  "fiction_series": "In Decades in the making, the history, its people, dates and figures are real, with their sources in its script.",
+  "fiction_series_es": "En Décadas en gestación, la historia, sus personas, fechas y cifras son reales, con sus fuentes en su guion.",
+  "chapters_es": {
+    "story": "Una idea que esperó",
+    "learns": "Una máquina que aprende",
+    "mistakes": "Aprender de los errores",
+    "power": "La potencia para funcionar",
+    "attention": "Atención",
+    "web": "La web escrita",
+    "helpful": "Útil, con manos",
+    "sudden": "Por qué pareció repentino"
+  },
+  "past": [
+    "China, Korea and Mainz, printing's pieces from the 1040s to 1450",
+    "It wasn't a sudden discovery; it was long work that finally had the power to run."
+  ],
+  "past_es": [
+    "China, Corea y Maguncia, las piezas de la imprenta de la década de 1040 a 1450",
+    "No fue un descubrimiento repentino; fue un largo trabajo que por fin tuvo la potencia para funcionar."
+  ],
+  "next_h": "You've seen how today's models took decades, then seemed to arrive at once. Next, the series asks what an agent is: a model that reasons, with hands, in a loop.",
+  "next_h_es": "Viste cómo los modelos de hoy tardaron décadas, y luego parecieron llegar de golpe. Ahora, la serie pregunta qué es un agente: un modelo que razona, con manos, en un ciclo."
+}

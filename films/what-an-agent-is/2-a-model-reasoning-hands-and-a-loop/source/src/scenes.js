@@ -117,3 +117,187 @@ function ml_boxRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;ag_roomLight(x,1);
     if(drop>0){const y0=ry-560,fall=ag_eo(clamp(drop*1.25,0,1)),settle=drop>=0.8?Math.sin((drop-0.8)/0.2*Math.PI)*-10:0;
       ag_model(x,rx,lerp(y0,ry,fall)+settle,b.r,{t:tt,core:0.5});}}
   else ag_loop(x,rx,ry,{t:tt,R,r:lerp(b.r,88,grow),label:grow>0.6?"Model":null,core:lerp(0.5,1,grow),stepA:[ag_in(tt,P.agent-0.2,0.4),ag_in(tt,P.agent,0.4),ag_in(tt,P.agent+0.2,0.4)]});}
+
+/* ---------------------------------------------------------------- the room, today
+   Chapters 2 to 8 share one room (the style prototype's layout, ML_ROOM): Jun at his desk on the left, the agent's ring right of
+   centre, its tools down the right; the cards each chapter needs come and go between them. Things first, then the room's light,
+   then cards and words. */
+const ml_steps=(tt,t0,d)=>t0==null||tt<t0?-1:Math.floor((tt-t0)/d)%3;   // the lit step while the agent works round its ring
+
+// ---- 2 · Jun's question: Planning asks; census day; the afternoon by hand; Jun gives it to an agent, and reviews and decides ----
+scene("question",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({asks:wAt(sc,"today","asks"),cen:c.census,counts:wAt(sc,"census","counts"),hand:c.byhand,
+    find:wAt(sc,"byhand","find"),read:wAt(sc,"byhand","read"),query:wAt(sc,"byhand","query"),check:wAt(sc,"byhand","check"),fix:wAt(sc,"byhand","fix"),
+    gives:wAt(sc,"gives","gives"),agent:wAt(sc,"gives","agent"),takes:wAt(sc,"gives","takes"),checks:wAt(sc,"gives","checks"),reviews:wAt(sc,"gives","reviews"),
+    decides:wAt(sc,"gives","decides")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1],[0.1,950,530,1.03]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_question(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],ag_in(t,0.2,0.6));});
+function ml_question(x,tt,P){const [rx,ry]=ML_ROOM.ring,into=ag_in(tt,P.gives+0.1,1.3),ring=ag_in(tt,P.agent-0.3,1.2),rev=ag_io(tt,P.reviews-0.3,P.decides+0.6,0.6);
+  // the agent, once Jun gives it the job: its ring draws itself, the five cards slide in, and it works round its steps
+  if(ring>0){const lit=ml_steps(tt,P.takes,0.55);ag_loop(x,rx,ry,{t:tt,p:ring,core:ring,a:ring,lit:tt>=P.checks?2:lit,col:tt>=P.checks?AG.green:AG.violet,stepA:[ring,ring,ring]});}
+  ml_jun(x,tt,{pose:"desk",pose2:"chin",mix:rev,gaze:tt<P.gives?[2,-1.2]:[3,-0.2],nod:0.06*ag_io(tt,P.decides-0.1,P.decides+0.7,0.3)});
+  ag_roomLight(x,1);
+  // Planning's question, beside him; it becomes the agent's goal
+  const m=ml_pop(tt,P.asks-0.1,P.gives+0.5);ag_textCard(x,452,196,600,{kick:"From Planning",title:"How has the census-day count changed since last year?",sub:"for next year's classes"},
+    {tail:{side:"left",at:0.8,px:418,py:468},k:m.k,a:m.a});
+  const g=ml_pop(tt,P.gives+0.3,null),[gx,gy,gw]=ML_ROOM.goal;ag_textCard(x,gx,gy,gw,{kick:"Goal",title:"Census-day count",sub:"Compare it with last year"},{tail:{side:"bottom",at:0.1,px:430,py:436},k:g.k,a:g.a});
+  // census day, on its calendar card, and what it is
+  const off=1-ag_in(tt,P.gives,0.6),cl=ml_pop(tt,P.cen,null);ml_cal(x,1150,184,300,"31 March","census day",{k:cl.k,a:cl.a*off});
+  const la=ag_in(tt,P.counts,0.5)*off;ag_T(x,"the day the university counts",1300,394,{w:600,size:28,align:"center",col:AG.mut,a:la});ag_T(x,"who is studying",1300,430,{w:600,size:28,align:"center",col:AG.mut,a:la});
+  // by hand: an afternoon, and the five small steps, round and round from fix back to query
+  const ck=ml_pop(tt,P.hand,null);ml_clock(x,1580,500,lerp(1,5,clamp((tt-P.hand)/7,0,1)),"an afternoon",{w:260,k:ck.k,a:ck.a*off});
+  ml_byHand(x,tt,[ag_in(tt,P.find-0.1,0.4),ag_in(tt,P.read-0.1,0.4),ag_in(tt,P.query-0.1,0.4),ag_in(tt,P.check-0.1,0.4),ag_in(tt,P.fix-0.1,0.4)],
+    {x:540,y:494,loop:ag_in(tt,P.fix+0.3,0.9),into,to:[rx,ry]});
+  // while he reviews and decides
+  const rv=ml_pop(tt,P.reviews,null);ag_pill(x,700,760,"review · decide",{a:rv.a});}
+
+// ---- 3 · A model writes: four parts, the first a model; it writes what's likely to come next; a guess; it can't look up or check ----
+scene("writes",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({four:c.four,model:wAt(sc,"four","model"),learned:c.learned,likely:wAt(sc,"learned","likely"),
+    next:wAt(sc,"learned","next"),ask:c.guess,best:wAt(sc,"guess","best"),never:wAt(sc,"guess","never"),alone:c.alone,look:wAt(sc,"alone","look"),check:wAt(sc,"alone","check")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,950,530,1.03],[0.1,980,520,1.04]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_writes(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],1);
+  ml_parts(ctx,[ag_in(t,P.model-0.1,0.5)],{a:ag_in(t,P.four,0.6)});});
+function ml_writes(x,tt,P){const [rx,ry]=ML_ROOM.ring,pale=ag_in(tt,0.2,1.2);
+  // the ring fades to a pale outline; the sphere alone, its label
+  ml_pages(x,tt,rx,ry,88,ag_io(tt,P.learned,P.likely+0.6,0.6));
+  ag_modelLight(x,rx,ry,88,1);ag_ring(x,rx,ry,180,{p:1,from:-120,a:lerp(1,0.22,pale)});
+  for(const [s,d] of AG_LOOP.steps){const r=d*Math.PI/180;ag_step(x,rx+Math.cos(r)*180,ry+Math.sin(r)*180,s,{a:1-pale});}
+  ag_model(x,rx,ry,88,{t:tt,core:1,think:ag_io(tt,P.likely,P.best+1.5,0.5),label:"Model"});
+  ml_jun(x,tt,{pose:"desk",gaze:[3,-0.4]});
+  // the student records, shut behind glass, out of the sphere's reach
+  const cb=ml_pop(tt,P.never-0.1,null);ml_cabinet(x,1520,560,260,230,{a:cb.a});
+  ag_roomLight(x,1);
+  const g=1-ag_in(tt,0.1,0.6),[gx,gy,gw]=ML_ROOM.goal;ag_textCard(x,gx,gy,gw,{kick:"Goal",title:"Census-day count",sub:"Compare it with last year"},{tail:{side:"bottom",at:0.1,px:430,py:436},a:g});
+  // it writes what's likely to come next: "The university has about", three words waiting, and the first is picked
+  const w1=ag_io(tt,P.likely-0.4,P.ask+0.2,0.4),k1=clamp((tt-P.likely+0.3)/1.3,0,1);
+  ml_written(x,1240,196,620,"The university has about",k1,{a:w1,ka:ag_spr(tt,P.likely-0.4,0.8),cands:["18,000","20,000","15,000"],
+    candA:[ag_in(tt,P.likely+1.0,0.3),ag_in(tt,P.likely+1.15,0.3),ag_in(tt,P.likely+1.3,0.3)],pick:ag_in(tt,P.likely+2.2,0.6)});
+  // asked for the census-day count, the best it can write is a guess
+  const q=ml_pop(tt,P.ask,null);ag_textCard(x,gx,gy,520,{title:"How many students on census day?"},{tail:{side:"bottom",at:0.1,px:430,py:436},k:q.k,a:q.a});
+  const w2=ag_in(tt,P.best-0.3,0.4),ans=ml_written(x,1240,196,620,"About 18,000, probably.",clamp((tt-P.best)/1.2,0,1),{a:w2});
+  // on its own it can't look anything up, or check what it wrote
+  const p1=ml_pop(tt,P.look,null),p2=ml_pop(tt,P.check,null);
+  ag_pill(x,1400,ans.y+ans.h+50,"looked up: nothing",{a:p1.a*w2});ag_pill(x,1712,ans.y+ans.h+50,"checked: no",{a:p2.a*w2});}
+
+// the agent in its ring, drawn piece by piece so each can fade: o.ringA, o.stepA, o.core, o.think, o.lit (the lit step) and o.col, o.pulse
+function ml_agent(x,tt,o){o=o||{};const [rx,ry]=ML_ROOM.ring,R=180,r=88,ra=o.ringA==null?1:o.ringA,sa=o.stepA==null?1:o.stepA;
+  ag_modelLight(x,rx,ry,r,o.core==null?1:o.core);if(ra>0.01)ag_ring(x,rx,ry,R,{p:1,from:-120,pulse:o.pulse,a:ra});
+  ag_model(x,rx,ry,r,{t:tt,core:o.core,think:o.think,label:"Model"});
+  return AG_LOOP.steps.map(([s,d],i)=>{const q=d*Math.PI/180;return ag_step(x,rx+Math.cos(q)*R,ry+Math.sin(q)*R,s,{on:o.lit===i?(o.col||AG.violet):null,a:sa});});}
+// a pellet riding along the ring from degrees d0 to d1, then into the sphere (u 0 to 1)
+function ml_ride(x,u,d0,d1){if(u<=0||u>=1)return;const [rx,ry]=ML_ROOM.ring;let px,py;
+  if(u<0.7){const d=lerp(d0,d1,u/0.7)*Math.PI/180;px=rx+Math.cos(d)*180;py=ry+Math.sin(d)*180;}
+  else{const d=d1*Math.PI/180,v=(u-0.7)/0.3;px=lerp(rx+Math.cos(d)*180,rx,v);py=lerp(ry+Math.sin(d)*180,ry,v);}
+  ag_pellet(x,px,py,1-sstep(0.9,1,u));}
+// the parts row: those already met stay lit, softer
+const ml_partsOn=(t,i,ti)=>[0,1,2,3].map(k=>k<i?0.45:k===i?ag_in(t,ti-0.1,0.5):0);
+
+// ---- 4 · Reasoning: a plan, checked against the team's rules; each result read as feedback ----
+scene("reasons",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({reason:wAt(sc,"second","reasoning"),plan:c.plan,writes:wAt(sc,"plan","writes"),
+    find:wAt(sc,"plan","find"),count:wAt(sc,"plan","count"),report:c.report,check3:wAt(sc,"report","check"),census:wAt(sc,"report","census"),
+    rules:c.rules,tools:wAt(sc,"rules","tools"),reading:wAt(sc,"rules","reading"),evidence:wAt(sc,"rules","evidence"),
+    result:c.result,feedback:wAt(sc,"result","feedback"),changes:wAt(sc,"result","changes"),is:c.is,fb2:wAt(sc,"is","feedback"),cks:wAt(sc,"is","checks")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,980,520,1.04],[0.1,990,520,1.05]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_reasons(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],1);ml_parts(ctx,ml_partsOn(t,1,P.reason));});
+function ml_reasons(x,tt,P){const back=ag_in(tt,0.2,1.2),fb=[P.feedback,P.feedback+1.6],ride=fb.reduce((m,f)=>Math.max(m,ag_io(tt,f-0.2,f+1.5,0.3)),0);
+  ml_agent(x,tt,{ringA:lerp(0.22,1,back),stepA:back,core:1+0.4*ride,think:ag_io(tt,P.writes,P.check3+2,0.5)+ag_io(tt,P.evidence+0.6,P.evidence+2.4,0.4)});
+  for(const f of fb)ml_ride(x,clamp((tt-f)/1.3,0,1),0,120);
+  ml_jun(x,tt,{pose:"desk",gaze:[3,-0.6]});
+  ag_roomLight(x,1);
+  // the plan, written out line by line; the sphere's light runs down it, and each line meets the rules
+  const ka=ag_spr(tt,P.writes-0.2,0.8),tk=i=>ag_in(tt,P.evidence+0.8+i*0.35,0.3);
+  const pl=ml_plan(x,1350,150,500,["1 Find the tables","2 Count the students","3 Check the total against the census report"],{a:ag_in(tt,P.writes-0.2,0.4),ka,
+    k:[clamp((tt-P.find)/0.8,0,1),clamp((tt-P.count)/0.8,0,1),clamp((tt-P.check3)/1.4,0,1)],tick:[tk(0),tk(1),tk(2)]});
+  const sw=ag_io(tt,P.evidence+0.6,P.evidence+2.0,0.2),sy=lerp(pl.y+70,pl.y+pl.h-20,clamp((tt-P.evidence-0.6)/1.3,0,1));
+  if(sw>0.01){x.save();x.globalAlpha*=sw;const g=x.createLinearGradient(pl.x,sy,pl.x+pl.w,sy);g.addColorStop(0,rgba(AG.violet,0));g.addColorStop(0.5,rgba(AG.violet,0.5));g.addColorStop(1,rgba(AG.violet,0));
+    x.fillStyle=g;x.fillRect(pl.x+10,sy-3,pl.w-20,6);x.restore();}
+  // the census report, the university's official count
+  const cr=ml_pop(tt,P.census-0.1,null);ag_textCard(x,500,560,410,{kick:"Census report",title:"31 March 2026",sub:"the university's official count"},{k:cr.k,a:cr.a});
+  // the rules Jun's team gave it, from his side
+  const rl=ag_spr(tt,P.rules-0.1,0.8);ml_rules(x,452,214,470,{a:ag_in(tt,P.rules-0.1,0.4),ka:rl,tail:{side:"bottom",at:0.08,px:430,py:430},
+    k:[ag_in(tt,P.tools-0.4,0.4),ag_in(tt,P.reading-0.2,0.4),ag_in(tt,P.evidence-0.2,0.4)]});
+  // reasoning is feedback, and checks against rules
+  ag_label(x,1290,650,"feedback",{col:AG.orange,a:ag_in(tt,P.fb2,0.4)});
+  ag_label(x,pl.x+pl.w/2,pl.y+pl.h+50,"checks against rules",{col:AG.green,align:"center",a:ag_in(tt,P.cks,0.4)});}
+
+// ---- 5 · Hands: tools, each from a tool server, plugged in through an open standard; these three can only read ----
+scene("hands",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({hands:wAt(sc,"third","hands"),open:wAt(sc,"third","open"),tools:wAt(sc,"third","tools"),three:c.three,
+    catalog:wAt(sc,"three","Catalog"),query:wAt(sc,"three","Query"),docs:wAt(sc,"three","Docs"),server:c.server,tsrv:wAt(sc,"server","server"),
+    std:wAt(sc,"mcp","standard"),proto:wAt(sc,"mcp","Protocol"),any:wAt(sc,"mcp","any"),use:wAt(sc,"mcp","use"),read:c.read,only:wAt(sc,"read","only"),
+    account:wAt(sc,"read","account"),row:wAt(sc,"read","row")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,990,520,1.05],[0.1,1000,520,1.04]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_hands(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],1);ml_parts(ctx,ml_partsOn(t,2,P.hands));});
+function ml_hands(x,tt,P){const [rx,ry]=ML_ROOM.ring,arr=[P.catalog,P.query,P.docs],plug=ag_in(tt,P.std-0.2,0.5),lock=ag_io(tt,P.only-0.1,P.account+1.2,0.4);
+  ml_agent(x,tt,{core:1,lit:tt>P.tools-0.3&&tt<P.docs+1.5?1:null,col:AG.blue});ml_jun(x,tt,{pose:"desk",gaze:[3,-0.5]});
+  // a model can't open a table: the sphere's light touches a closed card, and nothing opens
+  const tb=ag_io(tt,P.open-0.6,P.tools+0.3,0.3),sh=Math.sin((tt-P.open)*30)*6*ag_io(tt,P.open,P.open+0.5,0.1);
+  if(tb>0.01){const bx=1440+sh;x.save();x.globalAlpha*=tb;x.strokeStyle=rgba(AG.violet,0.5*ag_in(tt,P.open-0.3,0.3));x.lineWidth=4;x.setLineDash([8,10]);
+      x.beginPath();x.moveTo(rx+96,ry);x.lineTo(bx-6,ry);x.stroke();x.setLineDash([]);
+    ag_box(x,bx,ry-56,220,112,20,{});ag_T(x,"Students",bx+28,ry-6,{w:700,size:32});ag_lock(x,bx+40,ry+26,28,rgba(AG.blue,1));ag_T(x,"a table",bx+64,ry+34,{w:600,size:28,col:AG.mut});x.restore();}
+  // but tools can: three arms unfold from Act, and the three tools come in from the right, each from its server
+  ML_ROOM.tools.forEach((tl,i)=>{const t0=arr[i],dx=lerp(420,0,ag_eo(ag_in(tt,t0-0.5,0.8))),ta=ag_in(tt,t0-0.5,0.5);
+    const u=0.6*ag_sine(ag_in(tt,P.tools-0.1,1.0))+0.4*ag_sine(ag_in(tt,t0+0.1,0.6));
+    ml_tool(x,i,{dx,a:ta,touch:u>0.95?1:0,lock,server:ag_in(tt,P.tsrv-0.2+i*0.25,0.5),plug});
+    ag_reach(x,ml_arm(i),u,{grip:u>0.95?1:0});if(plug>0.01&&u>0.95){const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",plug);}});
+  ag_T(x,"tool server",ML_ROOM.tx+ML_ROOM.tw-76,ML_ROOM.tools[0][1]-50,{w:600,size:28,col:AG.mut,align:"right",a:ag_io(tt,P.tsrv,P.std+0.6,0.4)});
+  // any agent that follows the standard can use them: a second sphere, grey, plugs into Catalog's server from above, and leaves
+  const g2=ag_io(tt,P.any-0.4,P.use+1.4,0.7),gy=lerp(-120,96,ag_eo(ag_in(tt,P.any-0.4,0.9)))-lerp(0,260,ag_in(tt,P.use+0.9,0.8)),gx=ML_ROOM.tx+ML_ROOM.tw-5;
+  if(g2>0.01){x.save();x.globalAlpha*=g2;x.strokeStyle="#8C8A86";x.lineWidth=9;x.lineCap="round";x.beginPath();x.moveTo(gx,gy+40);x.lineTo(gx,gy+70);x.stroke();
+    ml_plug(x,gx,gy+82,Math.PI/2,1,"#3E3F45",1);ag_soft(x,c=>c.arc(gx,gy,42,0,TAU),[176,176,178],[236,236,238],gx+14,gy-16,56,"rgba(46,38,28,0.3)",10,0.8);
+    x.fillStyle=rgba([120,120,124],0.9);x.beginPath();ag_rect(x,gx-26,gy-8,52,14,7);x.fill();x.restore();}
+  ag_roomLight(x,1);
+  // the open standard, under the ring; then what their account can do
+  const mp=ag_io(tt,P.proto-0.3,P.read,0.4);ag_T(x,"Model Context Protocol",rx,742,{w:700,size:30,align:"center",a:mp});ag_T(x,"an open standard",rx,780,{w:500,size:28,align:"center",col:AG.mut,a:mp});
+  ag_pill(x,rx,766,"Account: read only · can't change a row",{a:ag_in(tt,P.account-0.1,0.4),col:AG.blue,icon:"lock"});}
+
+// ---- 6 · A loop: plan, act, check, round again; round one falls short of the census report; the model reads the rule; round two matches ----
+scene("loop",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({loopW:wAt(sc,"fourth","loop"),planW:wAt(sc,"fourth","plan"),act:wAt(sc,"fourth","act"),
+    checkW:wAt(sc,"fourth","check"),round:wAt(sc,"fourth","round"),goal:wAt(sc,"fourth","goal"),counts:c.counts,catalog:wAt(sc,"counts","Catalog"),query:wAt(sc,"counts","Query"),
+    short:c.short,chk:wAt(sc,"short","check"),n476:wAt(sc,"short","476"),today:c.today,asare:wAt(sc,"today","count"),rule:c.rule,docs:wAt(sc,"rule","Docs"),
+    stood:wAt(sc,"rule","stood"),again:c.again,date:wAt(sc,"again","date"),gives:wAt(sc,"again","gives"),passes:c.passes,matches:wAt(sc,"passes","matches"),
+    pass:wAt(sc,"passes","passes"),unlike:c.unlike,push:wAt(sc,"unlike","push"),decides:wAt(sc,"unlike","decides"),stops:c.stops,cks:wAt(sc,"stops","checks"),
+    limit:wAt(sc,"stops","limit"),person:wAt(sc,"stops","person")}));
+  ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,1000,520,1.04],[0.1,990,530,1.03]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_loopRoom(x,tt,P)}]);
+  ml_kick(ctx,t,[[0,"Today"]],1);ml_parts(ctx,ml_partsOn(t,3,P.loopW));});
+function ml_loopRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;
+  // where the agent is in its loop: once round, Plan, Act, Check and back, then each round's steps
+  const keys=[[P.planW,-120],[P.act,0],[P.checkW,120],[P.round+0.4,240],[P.catalog-0.3,360],[P.chk,480],[P.rule-0.3,600],[P.again-0.2,720],[P.matches-0.3,840]];
+  let deg=-120,pa=0;for(let i=0;i<keys.length;i++){if(tt<keys[i][0])break;const nx=keys[i+1],u=nx?ag_sine(clamp((tt-keys[i][0])/Math.min(1.2,nx[0]-keys[i][0]),0,1)):1;
+    deg=nx?lerp(keys[i][1],nx[1],u):keys[i][1];pa=1;}
+  pa*=1-ag_in(tt,P.unlike-0.4,0.6)+ag_in(tt,P.stops,0.6)*0;
+  const step=((Math.round((deg+120)/120)%3)+3)%3,lit=tt<P.planW||tt>P.unlike-0.4?(tt>P.pass?2:null):step,okC=tt>P.pass;
+  ml_agent(x,tt,{core:1,think:ag_io(tt,P.today,P.rule+1,0.5)+ag_io(tt,P.unlike,P.decides+1.2,0.5),lit,col:okC&&lit===2?AG.green:lit===2&&tt>P.chk-0.3?AG.amber:AG.amber,pulse:{deg,a:pa}});
+  // the arms rest on the tools; one takes hold as the agent uses its tool, and orange pellets ride back
+  const use=[[P.catalog-0.3],[P.query-0.3,P.again+0.2],[P.docs-0.3]];
+  ML_ROOM.tools.forEach((tl,i)=>{let on=0,d=0;for(const u0 of use[i]){on=Math.max(on,ag_io(tt,u0,u0+2.2,0.3));const v=clamp((tt-u0-0.4)/1.4,0,1);if(v>0&&v<1)d=v;}
+    ml_tool(x,i,{touch:on,server:1,plug:1});ag_reach(x,ml_arm(i),1,{grip:1,data:d});const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",1);});
+  ml_jun(x,tt,{pose:"desk",gaze:tt>P.person-0.3?[3,-1.4]:[3,-0.5],nod:0.06*ag_io(tt,P.person,P.person+0.8,0.3)});
+  ag_roomLight(x,1);
+  // the goal, above Jun: it glows on "until the goal is met"
+  const [gx,gy,gw]=ML_ROOM.goal,gg=ag_io(tt,P.goal-0.1,P.goal+1.6,0.4);
+  ag_textCard(x,gx,gy,gw,{kick:"Goal",title:"Census-day count",sub:"Compare it with last year"},{tail:{side:"bottom",at:0.1,px:430,py:436},edge:gg>0.05?AG.amber:null,a:ag_in(tt,0,0.6)});
+  if(gg>0.01){x.save();x.globalAlpha*=gg*0.5;x.shadowColor=rgba(AG.amber,0.9);x.shadowBlur=30;x.strokeStyle=rgba(AG.amber,0.8);x.lineWidth=3;x.beginPath();ag_rect(x,gx,gy,gw,136,22);x.stroke();x.restore();}
+  // slot A, what the agent is looking at: the students' table, the census report, the census rule, the census report again
+  const off=1-ag_in(tt,P.unlike-0.4,0.6),A=(t0,t1)=>ml_pop(tt,t0,t1);
+  let a=A(P.catalog+0.7,P.short-0.2);ag_textCard(x,480,388,450,{kick:"Catalog · a table",title:"Students",sub:"one row for each version of a record, with the dates it was true"},{k:a.k,a:a.a*off,kickCol:AG.blue});
+  a=A(P.short,P.rule-0.2);ml_query(x,480,388,450,"Census report","31 March 2026 · students studying","18,412",{col:AG.ink,kickCol:AG.mut,ka:a.k,a:a.a*off});
+  a=A(P.stood-0.8,P.passes-0.2);ag_textCard(x,480,388,450,{kick:"Docs · the census rule",title:"Count each student as their record stood that day"},{k:a.k,a:a.a*off,kickCol:AG.blue});
+  a=A(P.passes,null);ml_query(x,480,388,450,"Census report","31 March 2026 · students studying","18,412",{col:AG.ink,kickCol:AG.mut,ka:a.k,a:a.a*off});
+  // slot B, the query and what comes back
+  a=A(P.query+0.3,P.again-0.2);ml_query(x,480,630,450,"Query 1","Count students who are studying","17,936",{numA:ag_in(tt,P.query+1.6,0.4),note:"476 short",noteA:ag_in(tt,P.n476,0.4),ka:a.k,a:a.a*off});
+  a=A(P.again+0.1,null);ml_query(x,480,630,450,"Query 2","Count students who were studying on 31 March 2026","18,412",{numA:ag_in(tt,P.gives+0.4,0.4),col:tt>P.matches?AG.green:AG.orange,
+    note:"= census report",noteA:0,ka:a.k,a:a.a*off});
+  if(tt>P.matches-0.2){const eq=ag_in(tt,P.matches-0.2,0.4)*off;ag_T(x,"= 18,412",900,836,{w:700,size:30,col:AG.green,align:"right",a:eq});}
+  // slot C, its thinking: did it count them as they are today? then a fourth line in its plan
+  const th=ag_io(tt,P.asare-0.6,P.rule-0.1,0.4);ml_thought(x,900,150,"Counted as they are today?",th,{k:ag_spr(tt,P.asare-0.6,0.8),px:rx-60,py:ry-80});
+  const pl=ag_io(tt,P.rule-0.2,P.again+0.4,0.4);ml_plan(x,900,112,560,["4 Read the census rule (Docs)"],{a:pl,ka:ag_spr(tt,P.rule-0.2,0.8),fresh:[1],k:[clamp((tt-P.rule)/1.0,0,1)]});
+  // the check: amber while it doesn't match, green when it does
+  const vA=ag_in(tt,P.chk+0.2,0.4);if(tt<P.matches)ag_verdict(x,rx,724,"Doesn't match yet","loop",vA);else ag_verdict(x,rx,724,"Matches the source","pass",1);
+  // unlike Sperry's box, which can only push back: the model decides what to try next
+  const un=ag_io(tt,P.unlike-0.2,P.stops-0.2,0.5);if(un>0.01){x.save();x.globalAlpha*=un;ag_box(x,480,380,440,330,24,{});
+    ml_box(x,700,520,0.36,{t:tt,tilt:0.1*Math.sin(tt*2),push:0.5+0.5*Math.sin(tt*2),level:1,chain:1});
+    ag_T(x,"Sperry's box",700,428,{w:700,size:30,align:"center"});ag_T(x,"push back",700,668,{w:700,size:30,align:"center",col:AG.amber});x.restore();}
+  const nx=[["read Docs",rx-250,250],["ask Jun",rx,214],["query again",rx+250,250]],pick=ag_in(tt,P.decides,0.4);
+  nx.forEach(([s,px,py],i)=>{const a2=ag_io(tt,P.unlike+0.6+i*0.15,P.stops-0.2,0.4);if(a2<=0.01)return;ag_pill(x,px,py,s,{a:a2*(i===0?lerp(0.55,1,pick):lerp(0.55,0.35,pick)),col:i===0&&pick>0.5?AG.violet:null});});
+  // the loop stops: when the checks pass, at its limit of tries, or when it needs a person
+  const st=[["checks pass",rx-300,P.cks],["limit: 10 rounds",rx,P.limit],["a person: ask Jun",rx+330,P.person]];
+  st.forEach(([s,px,t0],i)=>{const a2=ag_in(tt,t0-0.1,0.4);if(a2>0.01)ag_pill(x,px,806,s,{a:a2,col:i===0?AG.green:null});});}

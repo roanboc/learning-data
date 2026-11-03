@@ -1,6 +1,9 @@
 /* ===== A model, reasoning, hands and a loop: the room's own pieces =====
    Everything this film puts in the series' room (the lab, the agent, the cards) that the shared code doesn't have (prefix ml_):
-     ML_ROOM      where things stand: Jun, his goal card, the agent's ring, its three tools (the style prototype's layout)
+     ML_ROOM      where things stand: Jun, his goal card, the agent's ring, its three tools (the style prototype's layout, the tools
+                  a little to the left so their servers fit behind them)
+     ml_jun       Jun at his desk on the left
+     ml_tool      a tool's card: its name, what it does, read only by a lock, and its tool server behind it
      ml_parts     the four parts in a row under the kicker, model, reasoning, hands, loop, each lighting in its colour
      ml_cal       a calendar card: a day, or a year
      ml_byHand    the five small cards of the afternoon by hand, find the tables to fix, with an amber arrow from fix back to query
@@ -9,17 +12,44 @@
      ml_written   a card the model writes on, letter by letter, with the words that could come next
      ml_cabinet   a cabinet of drawers, "Student records", behind glass
      ml_plan      the model's plan, written line by line, a tick by each line that meets the team's rules
+     ml_rules     the team's rules, on a card from Jun's side
+     ml_query     a query on its card, and the number it brings back
      ml_server    a tool server: a small matte box behind a tool, its cable, and the same plug as every arm (the open standard)
      ml_thought   a violet thought from the model
      ml_globe     a pale globe, "the web"
      ml_columns   two columns on the wall: steps known (a plain script) and steps nobody can write in advance (an agent)
    Words are drawn live with ag_T, at least 28 px, above y 890. */
 
-const ML_ROOM={jun:[300,600,1],ring:[1124,476],tools:[["Catalog",264],["Query",422],["Docs",580]],tx:1605,tw:256,th:116,
+const ML_ROOM={jun:[300,600,1],ring:[1124,476],tools:[["Catalog",236],["Query",404],["Docs",572]],tx:1520,tw:280,th:[148,148,184],
   goal:[452,212,384],parts:[96,148]};
 const ML_COL={model:AG.violet,reasoning:AG.violet,hands:AG.blue,loop:AG.amber};
 // the arm from Act to a tool's card (the prototype's three curves)
-const ml_arm=i=>{const y=ML_ROOM.tools[i][1]+58;return[1360,476,1450,476,1500,y,ML_ROOM.tx-4,y];};
+const ml_arm=i=>{const y=ML_ROOM.tools[i][1]+ML_ROOM.th[i]/2;return[1360,476,1430,476,1470,y,ML_ROOM.tx-4,y];};
+
+/* ---------------------------------------------------------------- Jun at his desk
+   ml_jun(ctx, t, o): the oak desk across the bottom left, Jun behind it, cut at its back edge; o.pose (desk), pose2, mix, gaze, nod,
+   talk, smile; o.a. */
+const ML_DESK={x:-80,y:1000,w:800,depth:150};
+function ml_jun(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const [jx,jy,js]=ML_ROOM.jun,D=ML_DESK;ctx.save();ctx.globalAlpha*=a;
+  ag_desk(ctx,D.x,D.y,D.w,{depth:D.depth});
+  ag_person(ctx,"jun",jx,jy,js,{t,pose:o.pose||"desk",pose2:o.pose2,mix:o.mix,gaze:o.gaze,nod:o.nod||0,talk:o.talk||0,smile:o.smile||0,cut:D.y-D.depth});
+  ctx.restore();}
+
+/* ---------------------------------------------------------------- a tool's card, and its server behind it
+   ml_tool(ctx, i, o): tool i of ML_ROOM.tools: its name, what it does (ML_TOOLDO), and at its foot a lock and "read only"; o.touch
+   (0 to 1) its blue edge while an arm holds it, o.lock (0 to 1) the lock glows, o.server (0 to 1) its tool server, a small matte box
+   behind its top right corner with a cable out of the frame, o.plug (0 to 1) the server's top socket shows the open standard's plug,
+   o.dx (slides it in from the right), o.a. Returns the card. */
+const ML_TOOLDO=["lists the tables","reads the data","the university's definitions"];
+function ml_tool(ctx,i,o){o=o||{};const a=o.a==null?1:o.a,x=ML_ROOM.tx+(o.dx||0),y=ML_ROOM.tools[i][1],w=ML_ROOM.tw,h=ML_ROOM.th[i],b={x,y,w,h};if(a<=0)return b;
+  ctx.save();ctx.globalAlpha*=a;const sv=o.server||0;
+  if(sv>0.01){ctx.save();ctx.globalAlpha*=sv;ml_server(ctx,x+w-60,y-40,{});if((o.plug||0)>0.01)ml_plug(ctx,x+w-5,y-52,Math.PI/2,1,"#3E3F45",o.plug);ctx.restore();}
+  const on=o.touch||0;ag_box(ctx,x,y,w,h,20,{edge:on>0.1?AG.blue:null,edgeA:0.9*on,glow:on>0.1?AG.blue:null,glowA:on});
+  ag_T(ctx,ML_ROOM.tools[i][0],x+28,y+48,{w:700,size:32});
+  const ls=ag_wrap(ctx,ML_TOOLDO[i],w-56,{w:500,size:28});ls.forEach((l,j)=>ag_T(ctx,l,x+28,y+86+j*36,{w:500,size:28,col:AG.mut}));
+  const lk=o.lock||0,ly=y+h-34;if(lk>0.01){ctx.save();ctx.shadowColor=rgba(AG.blue,0.8);ctx.shadowBlur=18*lk;ag_lock(ctx,x+42,ly,28,rgba(AG.blue,1));ctx.restore();}else ag_lock(ctx,x+42,ly,28,rgba(AG.blue,1));
+  ag_T(ctx,"read only",x+66,ly+8,{w:600,size:28,col:AG.blue});
+  ctx.restore();return b;}
 
 /* ---------------------------------------------------------------- the four parts, under the kicker
    ml_parts(ctx, on, o): on[i] (0 to 1) lights part i in its colour; o.a; o.gather (0 to 1) carries them into the ring at o.to
@@ -51,13 +81,13 @@ function ml_cal(ctx,x,y,w,head,big,o){o=o||{};const a=o.a==null?1:o.a,h=o.sub?19
 
 /* ---------------------------------------------------------------- the afternoon by hand
    ml_byHand(ctx, t, k, o): five small cards along the wall from (o.x, o.y), each in as k[i] (0 to 1) says; o.loop (0 to 1) draws
-   the amber arrow from "fix" back to "query" and sends a light round it; o.into (0 to 1) carries them into the ring at o.to. */
+   the amber arrow under them from "fix" back to "query" and sends a light round it; o.into (0 to 1) carries them into the ring at o.to. */
 const ML_HAND=["find the tables","read the rules","query","check","fix"];
 function ml_byHand(ctx,t,k,o){o=o||{};const a=o.a==null?1:o.a,x0=o.x||560,y0=o.y||600,h=56,gap=26,out=[];let x=x0;
   for(const s of ML_HAND){const w=ag_tw(ctx,s,{w:700,size:28})+44;out.push({x,y:y0,w,h,s});x+=w+gap;}
   if(a<=0)return out;const into=ag_sine(o.into||0),to=o.to||ML_ROOM.ring;ctx.save();ctx.globalAlpha*=a;
-  // the arrow: from fix's top, over check, back down to query
-  const L=clamp(o.loop||0,0,1);if(L>0&&into<0.3){const f=out[4],q=out[2],p=[f.x+f.w/2,f.y-6,f.x+f.w/2,f.y-110,q.x+q.w/2,q.y-110,q.x+q.w/2,q.y-10];
+  // the arrow: from fix's foot, under check, back up to query
+  const L=clamp(o.loop||0,0,1);if(L>0&&into<0.3){const f=out[4],q=out[2],p=[f.x+f.w/2,f.y+h+6,f.x+f.w/2,f.y+h+110,q.x+q.w/2,q.y+h+110,q.x+q.w/2,q.y+h+10];
     ctx.save();ctx.globalAlpha*=1-into/0.3;ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=5;ctx.lineCap="round";ag_bzPath(ctx,p,0,ag_sine(L));ctx.stroke();
     if(L>0.98){const e=ag_bz(p,1),e0=ag_bz(p,0.96);ag_arrowHead(ctx,e[0],e[1],Math.atan2(e[1]-e0[1],e[0]-e0[0]),14,rgba(AG.amber,0.95));
       const u=(t*0.6)%1,q2=ag_bz(p,u);ctx.shadowColor=rgba(AG.amber,0.7);ctx.shadowBlur=14;ctx.fillStyle=rgba(AG.amber,1);ctx.beginPath();ctx.arc(q2[0],q2[1],8,0,TAU);ctx.fill();}
@@ -128,6 +158,25 @@ function ml_plan(ctx,x,y,w,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=44,gap=10
       ag_T(ctx,pt.slice(0,take),x+28+(j?e.ind:0),ys[i]+10+j*lh,{w:600,size:30,col});});
     const tk=(o.tick||[])[i]||0;if(tk>0)ag_tick(ctx,x+w-40,ys[i],26,rgba(AG.green,tk),4);if(am)ag_warn(ctx,x+w-40,ys[i],28,rgba(AG.amber,1));});
   ctx.restore();return out;}
+
+/* ---------------------------------------------------------------- the team's rules, and a query with its number
+   ml_rules(ctx, x, y, w, o): "Team rules" and its three lines, each in as o.k[i] (0 to 1) says; o.tail (as ag_textCard's), o.ka, o.a.
+   ml_query(ctx, x, y, w, kick, text, num, o): a card with a kick (o.kickCol), the words, and a number under them in o.col (orange:
+   data come back), o.numA; o.note (amber, at the right of the number), o.noteA; o.edge; o.ka; o.a. Both return their box. */
+const ML_RULES=["only the university's tools","only reading","evidence for every answer"];
+function ml_rules(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=88+ML_RULES.length*44,b={x,y,w,h};if(a<=0)return b;ctx.save();ctx.globalAlpha*=a;
+  let tail=null;if(o.tail){const T_=o.tail,m=x+28+(w-56)*(T_.at==null?0.2:T_.at);tail={side:T_.side||"bottom",a:m-24,b:m+24,px:T_.px,py:T_.py};}
+  if(o.ka!=null)ag_about(ctx,tail?tail.px:x+w/2,tail?tail.py:y+h/2,lerp(0.5,1,o.ka));
+  ag_card(ctx,c=>ag_cardPath(c,x,y,w,h,22,tail),b,{});ag_T(ctx,"TEAM RULES",x+28,y+50,{w:700,size:28,ls:4,col:AG.mut});
+  ML_RULES.forEach((r,i)=>{const k=clamp((o.k||[])[i]==null?1:o.k[i],0,1);if(k>0)ag_T(ctx,"· "+r,x+28,y+96+i*44,{w:600,size:30,a:k});});
+  ctx.restore();return b;}
+function ml_query(ctx,x,y,w,kick,text,num,o){o=o||{};const a=o.a==null?1:o.a,ls=ag_wrap(ctx,text,w-56,{w:600,size:30}),h=92+ls.length*40+(num?64:0),b={x,y,w,h};if(a<=0)return b;
+  ctx.save();ctx.globalAlpha*=a;if(o.ka!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.ka));
+  ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:0.8});ag_T(ctx,String(kick).toUpperCase(),x+28,y+50,{w:700,size:28,ls:4,col:o.kickCol||AG.blue});
+  ls.forEach((l,i)=>ag_T(ctx,l,x+28,y+92+i*40,{w:600,size:30}));
+  if(num){ag_T(ctx,num,x+28,y+h-30,{w:800,size:44,col:o.col||AG.orange,a:o.numA==null?1:o.numA});
+    if(o.note)ag_T(ctx,o.note,x+w-28,y+h-36,{w:700,size:30,col:AG.amber,align:"right",a:o.noteA==null?1:o.noteA});}
+  ctx.restore();return b;}
 
 /* ---------------------------------------------------------------- a tool server and the open standard's plug
    ml_server(ctx, x, y, o): a small matte box whose left side meets a tool's card at (x, y): a cable running right out of the frame;

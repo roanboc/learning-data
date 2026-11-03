@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A model, reasoning, hands and a loop](https://data.learn-all.org/what-an-agent-is/a-model-reasoning-hands-and-a-loop/) | An agent, part by part | 7 min | 9 | 3 questions | [script](2-a-model-reasoning-hands-and-a-loop/script.md) · [source](2-a-model-reasoning-hands-and-a-loop/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

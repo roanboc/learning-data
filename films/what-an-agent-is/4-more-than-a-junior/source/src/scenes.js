@@ -125,7 +125,7 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
 /* ---------------------------------------------------------------- the room's shared moves */
 // a veil over the room, so a card in front of it reads; the two-column card's place; the paper junior's and its ladder's
 const mj_veil=(x,a)=>{if(a>0){x.fillStyle="rgba(240,238,233,"+(0.66*clamp(a,0,1))+")";x.fillRect(0,0,W,H);}};
-const MJ_TWO_AT=[480,110],MJ_JR={x:660,y:860,h:460},MJ_LAD={x:890,y:860,h:360};
+const MJ_TWO_AT=[480,130],MJ_JR={x:660,y:860,h:460},MJ_LAD={x:890,y:860,h:360};
 // a quick wobble that settles, from t0
 const mj_wob=(t,t0,amp)=>{const w=t-t0;return w>0?amp*Math.exp(-2.4*w)*Math.sin(w*6.5):0;};
 // a value that steps from 0 to n as times pass, each step eased over d
@@ -206,7 +206,7 @@ scene("more",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.week-0.5,tC=c.undersells-0.5,tD
     {at:tD,place:"lab",keys:[[tD,560,600,1.5]],push:0.02,draw:(x,tt)=>{tables(x,tt);agent(x,tt);
       mj_junior(x,360,880,500,{t:tt,badge:1,cards:1,amber:ag_in(tt,c.pace+0.4,0.5)});ag_roomLight(x,1);}},
     // the two-column card: the first two rows
-    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);tables(x,tt);agent(x,tt,{textA:1-ag_in(tt,tE,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);tables(x,tt,{a:1-ag_in(tt,tE+0.2,0.8)});agent(x,tt,{textA:1-ag_in(tt,tE,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
       mj_veil(x,ag_in(tt,tE,0.5));const f0=mj_steps(tt,[tE+0.4,tE+0.9]),f1=mj_steps(tt,[tE+1.4,tE+1.9]),l=ag_in(tt,tE+2.4,0.6);
       mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[f0,f1],lit:[l,l],more:l,less:1,k:ag_spr(tt,tE,0.5),a:ag_in(tt,tE,0.3)});}}
   ];
@@ -298,8 +298,7 @@ scene("lose",(ctx,S,t,sc)=>{const c=sc.cues,tN=wAt(sc,"faster","the nightly run"
         const tu=ag_in(tt,tOnce-0.2,0.5),bb=mj_tableCard(x,at[k][0],at[k][1],450,name,{sub:"no reads in 90 days",next:"read once a year, for the report to the government",turn:yr?tu:0,edge:yr?AG.green:AG.blue,edgeA:yr?0.45+0.45*tu:0.45,a:1-fade});
         // a small calendar in its corner, one day ringed
         if(yr){const ca=ag_in(tt,tOne,0.4),r=clamp((tt-tOne-0.3)/0.9,0,1);if(ca>0)withA(x,ca,()=>{const gx=at[k][0]+450-110,gy=at[k][1]+14;
-          x.fillStyle="rgba(86,92,100,0.14)";rr(x,gx,gy,86,46,10);x.fill();for(let j=0;j<10;j++){x.fillStyle="rgba(86,92,100,0.42)";x.beginPath();x.arc(gx+13+(j%5)*15,gy+15+Math.floor(j/5)*16,3,0,TAU);x.fill();}
-          if(r>0){x.strokeStyle=rgba(AG.ink,0.85);x.lineWidth=3;x.lineCap="round";x.beginPath();x.ellipse(gx+13+3*15,gy+31,11,9,-0.2,-1.6,-1.6+r*TAU*1.05);x.stroke();}});}});}},
+          mj_cal(x,gx,gy,1,{ring:r});});}});}},
     // the change goes ahead with two: Jun reviews it, Noor approves it for production
     {at:tD2,place:"lab",keys:[[tD2,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{gaze:[3,-1]});agent(x,tt);
       const na=ag_in(tt,tApp-0.9,0.6);if(na>0)withA(x,na,()=>ag_person(x,"noor",1660,690,0.8,{t:tt,flip:true,gaze:[3,0],smile:0.35}));ag_roomLight(x,1);
@@ -373,30 +372,36 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB1=c.ju
       if(mv>0&&mv<1){const h0=mj_hook(),hx=lerp(h0[0],nk.x,mv),hy=lerp(h0[1],nk.y,mv)-150*Math.sin(mv*Math.PI);ag_badge(x,hx,hy,"Junior",{t:tt,drop:86});}
       ag_roomLight(x,1);}},
     // more, and less: the card full; its caution in its rights, its memory in the team's notes, every yes with a person
-    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,tB2,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,tB2,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1,a:1-ag_in(tt,tB2+0.2,0.8)});ag_roomLight(x,1);
       mj_veil(x,ag_in(tt,tB2,0.5));const mk=[ag_io(tt,wAt(sc,"less","no memory")-0.1,c.lives-0.3,0.3),0,0];
-      mj_two(x,MJ_TWO_AT[0],80,{fill:[2,2,2,2,2],lit:[1,1],mark:[0,0,mk[0],ag_io(tt,wAt(sc,"less","no career")-0.1,c.lives-0.3,0.3),ag_io(tt,wAt(sc,"less","nothing to lose")-0.1,c.lives-0.3,0.3)],more:1,less:1,k:ag_spr(tt,tB2,0.5),a:ag_in(tt,tB2,0.3)});
+      mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[2,2,2,2,2],lit:[1,1],mark:[0,0,mk[0],ag_io(tt,wAt(sc,"less","no career")-0.1,c.lives-0.3,0.3),ag_io(tt,wAt(sc,"less","nothing to lose")-0.1,c.lives-0.3,0.3)],more:1,less:1,k:ag_spr(tt,tB2,0.5),a:ag_in(tt,tB2,0.3)});
       const r1=mj_card(tt,wAt(sc,"lives","its rights")-0.2,null),r2=mj_card(tt,wAt(sc,"lives","the team's notes")-0.2,null),r3=mj_card(tt,wAt(sc,"lives","with a person")-0.2,null);
-      if(r1.a>0)withA(x,r1.a,()=>{ag_glass(x,540,592,200,150,{label:null});ag_lock(x,640,676,58,rgba(AG.blue,1));ag_pill(x,640,800,"Rights",{col:AG.blue});});
-      if(r2.a>0)withA(x,r2.a,()=>{x.save();x.translate(950,600);x.rotate(-0.03);x.fillStyle="#F6F3EA";x.shadowColor="rgba(46,38,28,0.24)";x.shadowBlur=22;x.shadowOffsetY=10;x.fillRect(-110,0,220,150);x.restore();
-        x.save();x.translate(950,600);x.rotate(-0.03);x.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)x.fillRect(-80,40+k*26,k===3?90:160,8);x.restore();mj_pin(x,950,612);ag_pill(x,950,800,"Team notes",{});});
-      if(r3.a>0)withA(x,r3.a,()=>{mj_stamp(x,1300,640,"Reviewed",AG.green,{rot:-0.06});mj_stamp(x,1300,712,"Approved",AG.green,{rot:0.04});ag_pill(x,1300,800,"A person says yes",{col:AG.green});});}},
+      const Y0=612,note=(px,py,w,h,rot)=>{x.save();x.translate(px,py);x.rotate(rot);x.fillStyle="#F6F3EA";x.shadowColor="rgba(46,38,28,0.24)";x.shadowBlur=22;x.shadowOffsetY=10;x.fillRect(-w/2,0,w,h);x.restore();};
+      if(r1.a>0)withA(x,r1.a,()=>{ag_glass(x,540,Y0,200,150,{label:null});ag_lock(x,640,Y0+84,58,rgba(AG.blue,1));ag_pill(x,640,830,"Rights",{col:AG.blue});});
+      if(r2.a>0)withA(x,r2.a,()=>{note(960,Y0+6,220,150,-0.03);
+        x.save();x.translate(960,Y0+6);x.rotate(-0.03);x.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)x.fillRect(-80,40+k*26,k===3?90:160,8);x.restore();mj_pin(x,960,Y0+18);ag_pill(x,960,830,"Team notes",{});});
+      // a slip of paper with its two stamps, so nothing behind shows through them
+      if(r3.a>0)withA(x,r3.a,()=>{note(1280,Y0-8,270,172,0.015);mj_stamp(x,1280,Y0+40,"Reviewed",AG.green,{rot:-0.06});mj_stamp(x,1280,Y0+108,"Approved",AG.green,{rot:0.04});ag_pill(x,1280,830,"A person says yes",{col:AG.green});});}},
     // this week: a path in a minute, a count checked twice, a yearly table kept, a lesson for every session
-    {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:0});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);mj_veil(x,1);
+    {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);ag_roomLight(x,1);mj_veil(x,1);
       const ws=["a path in a minute","a count checked twice","a yearly table kept","a lesson for every session"].map(w=>wAt(sc,"week",w)-0.15);
       const pics=[
-        (xx,X,Y,w,h)=>{for(let i=0;i<20;i++){const cx=X+40+(i%5)*64,cy=Y+30+Math.floor(i/5)*44;ag_box(xx,cx,cy,52,30,8,{edge:AG.blue,edgeA:0.5,lw:1.5});}
-          xx.strokeStyle=rgba(AG.orange,0.85);xx.lineWidth=4;xx.lineCap="round";xx.beginPath();[[0,0],[1,1],[3,1],[2,2],[4,3]].forEach(([i,j],k)=>{const px=X+66+i*64,py=Y+45+j*44;k?xx.lineTo(px,py):xx.moveTo(px,py);});xx.stroke();},
-        (xx,X,Y,w,h)=>{ag_T(xx,"4,867",X+w/2-40,Y+h/2+24,{w:800,size:64,align:"center"});ag_tick(xx,X+w-96,Y+h/2-6,34,rgba(AG.green,1),5);ag_tick(xx,X+w-56,Y+h/2-6,34,rgba(AG.green,1),5);},
-        (xx,X,Y,w,h)=>{ag_box(xx,X+40,Y+40,w-80,h-80,16,{edge:AG.green,edgeA:0.6,lw:2});xx.fillStyle=rgba(AG.blue,0.3);xx.fillRect(X+66,Y+70,w*0.4,10);xx.fillRect(X+66,Y+94,w*0.26,10);
-          const gx=X+w-150,gy=Y+60;for(let j=0;j<12;j++){xx.fillStyle="rgba(86,92,100,0.4)";xx.beginPath();xx.arc(gx+16+(j%4)*21,gy+22+Math.floor(j/4)*17,3.5,0,TAU);xx.fill();}
-          xx.strokeStyle=rgba(AG.ink,0.85);xx.lineWidth=3.5;xx.beginPath();xx.ellipse(gx+58,gy+39,13,11,-0.2,0,TAU);xx.stroke();},
-        (xx,X,Y,w,h)=>{xx.save();xx.translate(X+w/2,Y+24);xx.rotate(-0.02);xx.fillStyle="#F6F3EA";xx.shadowColor="rgba(46,38,28,0.2)";xx.shadowBlur=16;xx.shadowOffsetY=8;xx.fillRect(-130,0,260,h-44);xx.restore();
-          xx.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)xx.fillRect(X+w/2-100,Y+66+k*30,k===3?100:200,8);mj_pin(xx,X+w/2,Y+34);}];
-      ["A path in a minute","A count checked twice","A yearly table kept","A lesson for every session"].forEach((cap,i)=>{const cd=mj_card(tt,ws[i],null);if(cd.a>0)mj_win(x,110+i*435,210,395,420,cap,{draw:pics[i],k:cd.k,a:cd.a});});}},
+        (xx,X,Y,w,h)=>{const ox=X+(w-308)/2,oy=Y+(h-162)/2;for(let i=0;i<20;i++)ag_box(xx,ox+(i%5)*64,oy+Math.floor(i/5)*44,52,30,8,{edge:AG.blue,edgeA:0.5,lw:1.5});
+          xx.strokeStyle=rgba(AG.orange,0.85);xx.lineWidth=4;xx.lineCap="round";xx.lineJoin="round";xx.beginPath();[[0,0],[1,1],[3,1],[2,2],[4,3]].forEach(([i,j],k)=>{const px=ox+26+i*64,py=oy+15+j*44;k?xx.lineTo(px,py):xx.moveTo(px,py);});xx.stroke();},
+        (xx,X,Y,w,h)=>{ag_T(xx,"4,867",X+w/2-50,Y+h/2+24,{w:800,size:64,align:"center"});ag_tick(xx,X+w/2+78,Y+h/2-6,34,rgba(AG.green,1),5);ag_tick(xx,X+w/2+118,Y+h/2-6,34,rgba(AG.green,1),5);},
+        // the yearly table, kept: its card edged green, and chapter 5's small calendar in its corner, one day ringed
+        (xx,X,Y,w,h)=>{const bw=380,bh=150,bx=X+(w-bw)/2,by=Y+(h-bh)/2,s=1.2,gx=bx+bw-130,gy=by+22;ag_box(xx,bx,by,bw,bh,16,{edge:AG.green,edgeA:0.6,lw:2});
+          xx.fillStyle=rgba(AG.blue,0.3);xx.fillRect(bx+26,by+30,150,10);xx.fillRect(bx+26,by+54,96,10);xx.fillRect(bx+26,by+96,200,8);xx.fillRect(bx+26,by+116,140,8);
+          mj_cal(xx,gx,gy,s,{});},
+        (xx,X,Y,w,h)=>{xx.save();xx.translate(X+w/2,Y+16);xx.rotate(-0.02);xx.fillStyle="#F6F3EA";xx.shadowColor="rgba(46,38,28,0.2)";xx.shadowBlur=16;xx.shadowOffsetY=8;xx.fillRect(-150,0,300,h-34);xx.restore();
+          xx.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)xx.fillRect(X+w/2-110,Y+62+k*30,k===3?110:220,8);mj_pin(xx,X+w/2,Y+30);}];
+      // two by two, to Jun's right, so no card cuts across a person
+      const G=[[540,130],[1216,130],[540,514],[1216,514]];
+      ["A path in a minute","A count checked twice","A yearly table kept","A lesson for every session"].forEach((cap,i)=>{const cd=mj_card(tt,ws[i],null);if(cd.a>0)mj_win(x,G[i][0],G[i][1],640,348,cap,{draw:pics[i],k:cd.k,a:cd.a,size:36});});}},
     // supervise it for what it is, not for what it looks like
-    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,c.breath,0.6)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
-      const cd=mj_card(tt,c.takeaway-0.2,null);if(cd.a>0)mj_say(x,960,120,["Supervise it for what it is,","not for what it looks like."],{k:cd.k,a:cd.a});}}
+    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.02,draw:(x,tt)=>{const out=1-ag_in(tt,c.breath,0.8);jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,c.breath,0.6),a:out});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+      // the card gives its words to the end card, and the agent its place to the end card's mark
+      const cd=mj_card(tt,c.takeaway-0.2,null);if(cd.a>0)mj_say(x,960,120,["Supervise it for what it is,","not for what it looks like."],{k:cd.k,a:cd.a*out});}}
   ];
   ag_shots(ctx,S,t,sc.dur,shots,0.7);mj_kick(ctx,S,ag_in(t,tB1,0.6));
   ag_end(ctx,S,t,c.breath,"More than a junior","Supervise it for what it is, not for what it looks like.","Film 4 of 9");});

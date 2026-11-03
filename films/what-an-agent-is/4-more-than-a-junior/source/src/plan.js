@@ -12,7 +12,7 @@ const MJ_ROOM={agent:{x:1124,y:476,r:88,R:180},jun:{x:296,y:596,s:1.0}};
 // own), o.a; and its light on the wall and its shadow on the floor
 function mj_agent(ctx,o){o=o||{};const A=MJ_ROOM.agent,x=o.x||A.x,y=o.y||A.y,t=o.t||0,a=o.a==null?1:o.a;if(a<=0)return;
   ctx.save();ctx.globalAlpha*=a;
-  const pulse=o.pulse==null?{deg:(t*36)%360-120,a:0.7}:o.pulse,ta=o.textA==null?1:clamp(o.textA,0,1),lab=o.label===undefined?"Model":o.label;
+  const ta=o.textA==null?1:clamp(o.textA,0,1),p0=o.pulse==null?{deg:(t*36)%360-120,a:0.7}:o.pulse,pulse=ta<1&&p0?Object.assign({},p0,{a:(p0.a==null?0.7:p0.a)*ta}):p0,lab=o.label===undefined?"Model":o.label;
   ag_loop(ctx,x,y,{t,core:o.core==null?0.8:o.core,think:o.think||0,pulse,lit:o.lit,col:o.col,steps:o.steps,R:o.R,r:o.r,floor:o.floor===undefined?y+330:o.floor,
     label:ta<1?null:lab,stepA:ta<1?[ta,ta,ta]:undefined});
   if(ta<1&&ta>0&&lab)ag_T(ctx,lab,x,y+(o.r||A.r)*0.6,{w:700,size:28,align:"center",col:AG.label,a:ta});
@@ -180,6 +180,14 @@ function mj_ringCal(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;co
   const r=clamp(o.ring||0,0,1);if(r>0){const cx=x+34+4*39,cy=y+86+2*40;ctx.strokeStyle=rgba(AG.ink,0.85);ctx.lineWidth=4;ctx.lineCap="round";ctx.beginPath();ctx.ellipse(cx,cy,24,20,-0.2,-1.6,-1.6+r*TAU*1.05);ctx.stroke();}
   ctx.restore();if(o.label)ag_pill(ctx,x+w/2,y+h+44,o.label,{a});}
 
+// a small calendar: (x, y) its top left, s its scale (86 x 46 at 1), two binder rings, a header and two weeks of days; o.ring (0 to 1) draws the ring round one day
+function mj_cal(ctx,x,y,s,o){o=o||{};const w=86*s,h=46*s;ctx.save();ctx.fillStyle="rgba(86,92,100,0.12)";rr(ctx,x,y,w,h,9*s);ctx.fill();
+  ctx.save();rr(ctx,x,y,w,h,9*s);ctx.clip();ctx.fillStyle="rgba(86,92,100,0.28)";ctx.fillRect(x,y,w,11*s);ctx.restore();
+  ctx.strokeStyle="rgba(60,64,70,0.7)";ctx.lineWidth=2.6*s;ctx.lineCap="round";for(const bx of [24,62]){ctx.beginPath();ctx.moveTo(x+bx*s,y-4*s);ctx.lineTo(x+bx*s,y+5*s);ctx.stroke();}
+  ctx.fillStyle="rgba(86,92,100,0.42)";for(let j=0;j<10;j++){rr(ctx,x+(10.5+(j%5)*14)*s,y+(17+Math.floor(j/5)*13)*s,9*s,8*s,2*s);ctx.fill();}
+  const r=clamp(o.ring==null?1:o.ring,0,1);if(r>0){ctx.strokeStyle=rgba(AG.ink,0.85);ctx.lineWidth=3*s;ctx.beginPath();ctx.ellipse(x+57*s,y+34*s,11*s,9*s,-0.2,-1.6,-1.6+r*TAU*1.05);ctx.stroke();}
+  ctx.restore();}
+
 /* ---------------------------------------------------------------- cards of the room's stories */
 // a pin, holding a card to the marble
 function mj_pin(ctx,x,y){ag_soft(ctx,c=>c.arc(x,y,11,0,TAU),[70,74,82],[200,206,214],x+3,y-4,10,null);}
@@ -243,7 +251,7 @@ function mj_run(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;cons
 function mj_win(ctx,x,y,w,h,caption,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
   ag_box(ctx,x,y,w,h,24,{});if(o.draw){ctx.save();ctx.beginPath();ctx.rect(x+8,y+8,w-16,h-120);ctx.clip();o.draw(ctx,x,y+8,w,h-120);ctx.restore();}
   ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,y+h-112);ctx.lineTo(x+w-24,y+h-112);ctx.stroke();
-  const ls=ag_wrap(ctx,caption,w-56,{w:700,size:32});ls.forEach((l,i)=>ag_T(ctx,l,x+28,y+h-64+i*40-(ls.length-1)*20,{w:700,size:32}));ctx.restore();}
+  const f={w:700,size:o.size||32},ls=ag_wrap(ctx,caption,w-56,f);ls.forEach((l,i)=>ag_T(ctx,l,x+28,y+h-64+i*40-(ls.length-1)*20,f));ctx.restore();}
 // the film's last words on a card: lines given (so it breaks where the sense does), centred on x, its top at y; o.k, o.a
 function mj_say(ctx,x,y,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const f={w:700,size:40},w=Math.max(...lines.map(l=>ag_tw(ctx,l,f)))+AG_PAD*2+16,h=AG_PAD*2+lines.length*52-4;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x-w/2,y,w,h,24,{});

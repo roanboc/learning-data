@@ -4,7 +4,7 @@
    Words as in the series and the governance films: la Facultad de Salud, los asesores, el semestre, el equipo de datos; la carga estudiantil
    for student load and equivalentes a tiempo completo for full-time equivalents; la evidencia adjunta; una verificación for a check and
    una marca for a tick; los navegantes for NASA's navigators, newton-segundos and libras-segundo for the units; un cierre for a zip; and
-   tú, as "Prueba esto" and "Ahora explica" speak to the viewer. Numbers keep the picture's comma (2,880), as the site's other Spanish
+   tú, as "Prueba esto" and "Ahora explica" speak to the viewer. Numbers keep the picture's comma (2,880), as most of the site's Spanish
    captions do, so a viewer reads the same number in the caption and on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "In December 1998, NASA launched the Mars Climate Orbiter, to study the weather on Mars.":

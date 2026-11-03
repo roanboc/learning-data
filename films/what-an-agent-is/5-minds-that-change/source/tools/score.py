@@ -215,69 +215,80 @@ agree(kc('breath', 0.4), VERSE, 0.2, 3.2, 0.75, 0.7)
 tw = lambda lid, word, off=0: W('three', lid, word, off)
 tc = lambda lid, off=0: G('three', lid, off)
 chord(Dm, S0('three') + 0.2, tc('paper', 0.6), 0.75, att=0.9, rel=1.6)
-pin(tw('paper', 'two new advisers'), 0.016, px(560))
-for lid, word, end in (('science', 'Engineering', 65), ('health', 'Health', 69), ('third', 'Business', 74)):
-    tap(tc(lid, 0.15), 0.014, px(1180))
+pin(tw('paper', 'is writing', 0.8), 0.016, px(1620))
+for lid, word, off, end in (('science', 'Engineering', -0.25, 65), ('health', 'Health', -0.2, 69), ('third', 'Business', -0.35, 74)):
+    tap(tw(lid, word, off), 0.014, px(960))
     figure(tw(lid, word), (72, end), 0.24, 0.6, last=1.2)
-plk(SLIP, tw('sure', 'sure'), 0.55, ring=1.4)
-keys(tc('review', -0.9), 5, 0.010, px(1200))
-knock(tw('review', 'no', 0.1), 0.022, px(1200), 150)
+plk(SLIP, tw('sure', 'are you sure'), 0.55, ring=1.4)
+keys(tc('review', 0.2), 5, 0.010, px(960), 0.2)
+knock(tw('review', "there's no", 0.5), 0.022, px(960), 150)
 
-# 3. Ours change too: A minor at the turn. Clara's paper opened; the two year cards sliding into one. Cambridge: a page laid down; the
-#    retellings, a figure that grows shorter, A C E D, then A C E, then A C; "canoe" struck through. The two things he added: G and B
+# 3. Ours change too: A minor at the turn. Clara's paper opened; the two year cards sliding into one. Cambridge: a page laid down and
+#    slid across the desk; the retellings, a figure that grows shorter, A C E D, then A C E, then A C; one line rising out of the last
+#    retelling, a breath of air; "canoe" struck through. The two things he added: G and B
 #    flat, two notes the figure never had; surest of exactly those, the same two, firmer. Seattle: each bar rises with a soft tap; "The
 #    question had changed the memory": A minor again, a moment
 ow = lambda lid, word, off=0: W('ours', lid, word, off)
 oc = lambda lid, off=0: G('ours', lid, off)
 chord(Am, S0('ours') + 0.2, oc('too', 0.4), 0.7, att=0.9, rel=1.6)
-paper(ow('own', 'paper'), 0.016, px(760))
-air(ow('joined', 'joined'), 0.9, 0.010, px(960))
-paper(ow('century', 'Cambridge'), 0.014, px(960))
-figure(ow('shorter', 'Each retelling'), (69, 72, 76, 74), 0.2, 0.5)
-figure(ow('shorter', 'shorter'), (69, 72, 76), 0.2, 0.45)
-figure(ow('shorter', 'more like'), (69, 72), 0.2, 0.42)
-strike(ow('shorter', 'a canoe became'), 0.011, px(1100), 0.5)
+paper(ow('own', 'paper from last year', -0.1), 0.016, px(1120))
+air(ow('joined', 'two years into one', -0.3), 0.9, 0.010, px(1120))
+paper(ow('century', 'Frederic Bartlett'), 0.014, px(665))
+paper(ow('century', 'retell'), 0.010, px(1000))
+figure(ow('far', 'again and again', -0.1), (69, 72, 76, 74), 0.2, 0.5)
+figure(ow('far', 'again and again', 0.5), (69, 72, 76), 0.2, 0.45)
+figure(ow('far', 'over years', 0.15), (69, 72), 0.2, 0.42)
+air(ow('shorter', 'their own world', -0.15), 0.7, 0.008, px(1100))
+strike(ow('shorter', 'a canoe became', 0.5), 0.011, px(960), 0.5)
 plk(67, ow('added', 'totem'), 0.55, ring=0.7); plk(70, ow('added', 'pilgrimage'), 0.55, ring=0.7)
 plk(67, ow('surest', 'surest'), 0.75, ring=0.6); plk(70, ow('surest', 'surest', 0.22), 0.75, ring=0.9)
-tap(ow('hit', 'hit', 0.2), 0.012, px(700)); tap(ow('smashed', 'smashed', 0.2), 0.012, px(1220))
+tap(ow('hit', 'hit each other', -0.6), 0.012, px(290)); tap(ow('smashed', 'smashed', -0.4), 0.012, px(1630))
 chord(Am, oc('question', -0.1), END('ours', 'question') + 1.2, 0.6, att=0.8, rel=1.4)
 
 # 4. Rebuilt, not replayed: D minor at the turn. A memory rebuilt from a few details: three notes, D F A. The model writes one word at a
-#    time: a plucked note for each word as it lands; asked again, another route: the same start, another end
+#    time: a plucked note for each word as it drops into the line; asked again in a new chat, another first word, another first note;
+#    the gap's word is picked the same way, one more note like the others. "Are you sure?" leaves the G hanging, as in Three answers,
+#    and the answer turns over to Business with the same ending it had there
 rw = lambda lid, word, off=0: W('rebuilt', lid, word, off)
 chord(Dm, S0('rebuilt') + 0.2, G('rebuilt', 'details', 0.3), 0.7, att=0.9, rel=1.6)
 figure(rw('details', 'a few details'), (62, 65, 69), 0.3, 0.45)
-figure(rw('writes', 'one at a time'), (65, 69, 72, 74), 0.34, 0.45)
-figure(rw('again', 'another route'), (65, 69, 74, 77), 0.34, 0.45)
+figure(rw('writes', 'one at a time', -0.1), (65, 69, 72, 74), 0.75, 0.45)
+figure(rw('again', 'another route', -0.2), (62, 69, 72, 74), 0.75, 0.45)
+plk(74, rw('gap', 'something likely', 0.2), 0.45, ring=0.8)
+plk(SLIP, G('rebuilt', 'bend', 0.1), 0.5, ring=1.2)
+figure(G('rebuilt', 'bend', 1.45), (72, 74), 0.24, 0.5, last=1.0)
 
 # 5. Check the work: B flat at the turn. Every answer shows where it came from: keys for the query, paper for last year's. "Like the
 #    reciters' patterns": the verse in pairs, softly. The two routes: a click as each lights; they don't agree: D for 134, C for 131;
 #    three students counted twice: the slip's G. Fixed: both routes end on C, and the bow takes it up with F and A under it, held while
-#    the agent changes its answer and "a mind that changes with the evidence is doing its job". Every night: one soft F as the moon
-#    turns, twice. The team's record pinned; Clara signs. The advisers start: F major, and it carries into the last chapter
+#    the agent changes its answer and "a mind that changes with the evidence is doing its job". Monday's card slides back in. Every
+#    night: one soft F as the moon turns, twice. The team's record pinned; the next chat starts from it, a soft F as its thread reaches
+#    the ring; Clara signs. The advisers start: F major, and it carries into the last chapter
 cw = lambda lid, word, off=0: W('check', lid, word, off)
 cc = lambda lid, off=0: G('check', lid, off)
 chord(Bb, S0('check') + 0.2, cc('instead', 0.5), 0.75, att=0.9, rel=1.6)
-keys(cw('shows', 'the query'), 6, 0.010, px(1180))
-paper(cw('shows', "last year's paper"), 0.014, px(760))
+keys(cw('shows', 'the query', -0.2), 6, 0.010, px(960))
+paper(cw('shows', "last year's paper", -0.1), 0.014, px(1520))
 pairs(cw('second', "reciters' patterns"), VERSE, 0.13, 0.3, 0.5)
-tap(cw('counts', 'data platform'), 0.012, px(700)); tap(cw('counts', 'student system'), 0.012, px(1220))
-plk(74, cw('disagree', 'a hundred and thirty-four'), 0.6, ring=1.1, pan=px(700))
-plk(72, cw('disagree', 'a hundred and thirty-one'), 0.6, ring=1.1, pan=px(1220))
+tap(cw('counts', 'data platform', 0.2), 0.012, px(550)); tap(cw('counts', 'student system', 0.2), 0.012, px(1370))
+plk(74, cw('disagree', 'a hundred and thirty-four'), 0.6, ring=1.1, pan=px(550))
+plk(72, cw('disagree', 'a hundred and thirty-one'), 0.6, ring=1.1, pan=px(1370))
 plk(SLIP, cw('twice', 'counted twice'), 0.6, ring=0.35)
 both = cw('fixed', 'both say')
-plk(72, both, 0.6, ring=0.8, pan=px(700)); plk(72, both + 0.14, 0.6, ring=0.8, pan=px(1220))
+plk(72, both, 0.6, ring=0.8, pan=px(550)); plk(72, both + 0.14, 0.6, ring=0.8, pan=px(1370))
 for i, m in enumerate((65, 69, 72)):
     bow(m, both + 0.2 + 0.04 * i, END('check', 'job') + 0.3, 0.75 if m == 72 else 0.6, att=0.5, rel=1.4)
 for k in range(2):
     plk(65, cw('nightly', 'every night', 0.7 * k), 0.4, ring=0.6)
-pin(cw('written', 'written down'), 0.016, px(1380))
-pencil(cw('person', 'signs'), 0.012, px(760), 0.8)
+air(cc('monday'), 1.0, 0.010, px(300))
+pin(cw('written', 'written down'), 0.016, px(400))
+plk(65, cw('written', 'the next chat', 0.5), 0.4, ring=0.8, pan=px(750))
+pencil(cw('person', 'signs', -0.2), 0.012, px(1300), 1.0)
 chord(F_, cw('next', 'start in'), E('check') + 2.0, 0.8, att=1.2, rel=1.8)
 
-# 6. Every pattern, every time: back by the river. The verse once, joined, as every pattern is checked; "the work holds": the mark, the
+# 6. Every pattern, every time: back by the river. The verse once, a note to each row as it lights; "the work holds": the mark, the
 #    verse plucked and taken up by the bow; the end card on F
 ew = lambda lid, word, off=0: W('every', lid, word, off)
-figure(ew('hymn', 'every pattern'), VERSE, 0.15, 0.45)
+figure(ew('hymn', 'every time'), VERSE, 0.35, 0.45)
 agree(ew('holds', 'the work holds'), VERSE, 0.18, 2.6, 0.7, 0.65)
 chord(F_, G('every', 'breath', -0.2), E('every') - 0.2, 0.8, att=1.0, rel=2.2)

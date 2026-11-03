@@ -287,12 +287,16 @@ function mc_corner(ctx,text,a,o){o=o||{};if(a<=0)return;ag_T(ctx,String(text).to
    answer, and at its foot the evidence slot, grey and empty ("evidence: —") until the answer shows where it came from (o.fill 0 to 1:
    the query, then the rows, in orange, data coming back). o.source: a source it cites (orange, as real as any; o.false 0 to 1 turns it
    amber, struck through; o.srcA its opacity, as it's written in). o.sorry: a line above the answer. o.turn 0 to 1 turns the card over to o.back (another answer's words). */
+// text drawn too small to read on purpose (a card turning over, a paper in flight, cards set aside), which the phone check skips: its
+// hook is PH_OFF, as From words to data's tools name it
+let PH_OFF=0;
+function mc_deco(on,fn){if(!on)return fn();PH_OFF++;try{return fn();}finally{PH_OFF--;}}
 const MC_ANS_W=520;
-function mc_answerW(ctx,o){let w=MC_ANS_W;for(const [t,f] of [[o.title,{w:800,size:40}],[o.source,{w:600,size:28}],[o.sorry,{w:600,size:28}],[o.why,{w:600,size:28}]])if(t)w=Math.max(w,ag_tw(ctx,t,f)+64);return Math.ceil(w);}
+function mc_answerW(ctx,o){let w=MC_ANS_W;for(const [t,f] of [[(o.kick||"answer").toUpperCase(),{w:700,size:28,ls:4}],[o.title,{w:800,size:40}],[o.source,{w:600,size:28}],[o.sorry,{w:600,size:28}],[o.why,{w:600,size:28}]])if(t)w=Math.max(w,ag_tw(ctx,t,f)+64);return Math.ceil(w);}
 function mc_answerH(o){return 28+38+56+(o.sorry?42:0)+(o.source?42:0)+(o.why?42:0)+18+(o.fill>0?170:62)+28;}
 function mc_answer(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.005)return{x,y,w:MC_ANS_W,h:0};const tn=clamp(o.turn||0,0,1);
   if(tn>0&&o.back){const sx=Math.abs(Math.cos(tn*Math.PI)),q=tn<0.5?o:Object.assign({},o,o.back,{turn:0,back:null});
-    const cw=Math.max(mc_answerW(ctx,o),mc_answerW(ctx,Object.assign({},o,o.back)));ctx.save();ctx.translate(x+cw/2,y);ctx.scale(Math.max(0.02,sx),1);ctx.translate(-(x+cw/2),-y);const r=mc_answer(ctx,x,y,Object.assign({},q,{turn:0,back:null}));ctx.restore();return r;}
+    const cw=Math.max(mc_answerW(ctx,o),mc_answerW(ctx,Object.assign({},o,o.back)));ctx.save();ctx.translate(x+cw/2,y);ctx.scale(Math.max(0.02,sx),1);ctx.translate(-(x+cw/2),-y);const r=mc_deco(sx<0.95,()=>mc_answer(ctx,x,y,Object.assign({},q,{turn:0,back:null})));ctx.restore();return r;}
   const w=o.w||mc_answerW(ctx,o),h=mc_answerH(o);ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,o.kx||x+w/2,o.ky||y+h/2,lerp(0.55,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:o.edgeA,glow:o.glowC||null,glowA:o.glowA});
   let yy=y+28+22;ag_T(ctx,(o.kick||"answer").toUpperCase(),x+30,yy,{w:700,size:28,ls:4,col:AG.violet});
@@ -521,7 +525,7 @@ function mc_signoff(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
   ctx.strokeStyle="rgba(60,50,40,0.25)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+28,y+112);ctx.lineTo(x+w-28,y+112);ctx.stroke();
   // the signature: a quick pen line, drawn as she signs
   if(sg>0){ctx.save();ctx.strokeStyle="rgba(40,44,60,0.9)";ctx.lineWidth=3.2;ctx.lineCap="round";ctx.lineJoin="round";ctx.setLineDash([sg*900,2000]);ctx.beginPath();
-    const sx=x+40,sy=y+100;ctx.moveTo(sx,sy);ctx.bezierCurveTo(sx+10,sy-40,sx+30,sy-40,sx+26,sy);ctx.bezierCurveTo(sx+24,sy+10,sx+50,sy-26,sx+70,sy-6);ctx.bezierCurveTo(sx+84,sy+6,sx+96,sy-30,sx+120,sy-10);
+    const sx=x+w-310,sy=y+100;ctx.moveTo(sx,sy);ctx.bezierCurveTo(sx+10,sy-40,sx+30,sy-40,sx+26,sy);ctx.bezierCurveTo(sx+24,sy+10,sx+50,sy-26,sx+70,sy-6);ctx.bezierCurveTo(sx+84,sy+6,sx+96,sy-30,sx+120,sy-10);
     ctx.bezierCurveTo(sx+140,sy+6,sx+150,sy-24,sx+176,sy-8);ctx.bezierCurveTo(sx+200,sy+4,sx+220,sy-14,sx+260,sy-12);ctx.stroke();ctx.restore();}
   withA(ctx,ag_in(sg,0.8,0.2),()=>{ag_tick(ctx,x+44,y+146,24,rgba(AG.green,1),4);ag_T(ctx,"approved · Clara Jensen",x+72,y+156,{w:700,size:28,col:AG.green});});
   ctx.restore();return{x,y,w,h};}
@@ -555,10 +559,11 @@ function mc_strip(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.005)retur
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ctx.save();ctx.shadowColor="rgba(46,38,28,0.24)";ctx.shadowBlur=22;ctx.shadowOffsetX=AG.sdx*0.8;ctx.shadowOffsetY=10;ctx.fillStyle="#FBF8F0";ctx.fillRect(x,y,w,h);ctx.restore();
   ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.lineWidth=1.2;ctx.strokeRect(x,y,w,h);
-  // a ruled line, the words before as grey bars, "canoe", then more bars
-  const by=y+138;ctx.fillStyle="rgba(60,56,52,0.16)";for(const [bx,bw] of [[40,120],[176,70],[262,150]])rr(ctx,x+bx,by-14,bw,14,7),ctx.fill();
-  const cw=ag_tw(ctx,"canoe",{w:700,size:44}),cx=x+430;ag_T(ctx,"canoe",cx,by,{w:700,size:44,col:mix(AG.ink,AG.amber,st)});
-  for(const [bx,bw] of [[cx-x+cw+24,96],[cx-x+cw+136,140]])if(bx+bw<w-30){ctx.fillStyle="rgba(60,56,52,0.16)";rr(ctx,x+bx,by-14,bw,14,7);ctx.fill();}
+  // a ruled line: "canoe" in the middle, the words before and after it as grey bars that fill the strip
+  const by=y+138,cw=ag_tw(ctx,"canoe",{w:700,size:44}),cx=x+Math.round(w/2-cw/2),bar=(bx,bw)=>{ctx.fillStyle="rgba(60,56,52,0.16)";rr(ctx,x+bx,by-14,bw,14,7);ctx.fill();};
+  let bx=40;for(const bw of [120,70,150,90]){const end=cx-x-26;if(bx>=end-40)break;bar(bx,Math.min(bw,end-bx));bx+=bw+16;}
+  bx=cx-x+cw+26;for(const bw of [96,140,80]){const end=w-40;if(bx>=end-40)break;bar(bx,Math.min(bw,end-bx));bx+=bw+16;}
+  ag_T(ctx,"canoe",cx,by,{w:700,size:44,col:mix(AG.ink,AG.amber,st)});
   if(st>0){ctx.strokeStyle=rgba(AG.amber,0.95);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx-6,by-15);ctx.lineTo(cx-6+(cw+12)*ag_sine(st),by-15);ctx.stroke();}
   if(nw>0){ctx.save();ctx.beginPath();ctx.rect(cx-10,y,(cw+40)*ag_sine(nw),by-46-y+8);ctx.clip();ag_T(ctx,"boat",cx+8,by-58,{w:700,size:44,col:[40,52,92]});ctx.restore();
     ctx.strokeStyle="rgba(40,52,92,0.7)";ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx+cw/2-14,by-48);ctx.lineTo(cx+cw/2,by-36);ctx.lineTo(cx+cw/2+14,by-48);ctx.stroke();}

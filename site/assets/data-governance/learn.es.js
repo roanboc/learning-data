@@ -671,7 +671,7 @@ qs:[
   why:"Donde se ve un problema a menudo no es donde empieza. Síguelo hacia atrás, arréglalo donde se crea, y la limpieza puede irse."},
 {type:"choice",n:62,lab:"back",film:6,title:"Donde empieza",vis:"scene",
   alt:"El formulario de inscripción: un cuadro de texto simple, una mayúscula al inicio desde el teléfono, y un espacio que deja una sugerencia.",
-  st:{who:"tom",kicker:"El formulario de inscripción",rows:[["Cuadro","texto simple: el teléfono pone mayúscula","no"],["Sugerencia","puede dejar un espacio","no"],["Correos que llegan así","más de uno de cada tres"]]},
+  st:{who:"tom",kicker:"El formulario de inscripción",rows:[["Cuadro","texto simple: el teléfono pone mayúscula","no"],["Sugerencia","puede dejar un espacio","no"],["Correos así","más de uno de cada tres"]]},
   sit:"Yusuf sigue un correo hacia atrás hasta el formulario de inscripción de cursos cortos. ¿Cuál es el arreglo?",
   opts:[{t:"Pedir a los estudiantes que escriban con más cuidado.",why:"Nadie escribió nada mal. El formulario hizo lo que se construyó para hacer."},
     {t:"Un cuadro de correo, y el formulario recorta, pasa a minúsculas y revisa cada correo antes de guardarlo.",ok:true},

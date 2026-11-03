@@ -163,9 +163,11 @@ const PIX={
     if(st.kicker){wash(ctx,x0+26,top+26,Math.min(pw-52,tw(ctx,st.kicker,24,800)+44),44,st.c||Lq.c||"gold",0.4,81);tx(ctx,st.kicker,x0+48,top+58,{size:fit(ctx,st.kicker,pw-96,24,800,null,17),w:800,col:WC_DARK});}
     let y=top+(st.title?120:110);if(st.title){lines(ctx,st.title,x0+30,y,pw-60,{size:32,w:800,max:2,col:WC_DARK});y+=st.title&&wrap(ctx,st.title,pw-60,32,800).length>1?96:56;}
     const rows=st.rows||[],rh=Math.min(92,(top+ph-40-y)/Math.max(1,rows.length));
-    rows.forEach((r,i)=>{const [a,b,m]=Array.isArray(r)?r:[r,null,null],yy=y+i*rh;pencil(ctx,[[x0+26,yy+rh-26],[x0+pw-26,yy+rh-26]],{a:0.22,lw:1.6,seed:82+i});
+    // the label column grows to its widest label (up to half the sheet), so a browser that draws text a little wider cuts nothing
+    const lw=Math.max(pw*0.36,Math.min(pw*0.5,Math.max(0,...rows.map(r=>Array.isArray(r)&&r[1]!=null&&r[1]!==""?tw(ctx,String(r[0]),22,700)+40:0))));
+    rows.forEach((r,i)=>{const [a,b0,m]=Array.isArray(r)?r:[r,null,null],b=b0===""?null:b0,yy=y+i*rh;pencil(ctx,[[x0+26,yy+rh-26],[x0+pw-26,yy+rh-26]],{a:0.22,lw:1.6,seed:82+i});
       const mx=m?58:0;
-      if(b!=null){const lw=pw*0.36;tx(ctx,a,x0+30,yy+22,{size:fit(ctx,a,lw-16,22,700,null,16),w:700,col:WC_MUTED});lines(ctx,b,x0+30+lw,yy+22,pw-lw-60-mx,{size:24,w:600,max:Math.max(1,Math.floor((rh-24)/30)),col:m==="no"?CI("no"):WC_INK});}
+      if(b!=null){tx(ctx,a,x0+30,yy+22,{size:fit(ctx,a,lw-16,22,700,null,16),w:700,col:WC_MUTED});lines(ctx,b,x0+30+lw,yy+22,pw-lw-60-mx,{size:24,w:600,max:Math.max(1,Math.floor((rh-24)/30)),col:m==="no"?CI("no"):WC_INK});}
       else lines(ctx,a,x0+30,yy+22,pw-60-mx,{size:24,w:600,max:Math.max(1,Math.floor((rh-24)/30)),col:m==="no"?CI("no"):WC_INK});
       if(m)rowMark(ctx,x0+pw-46,yy+14,m,1);});
     if(st.stamp&&typeof gv_stamp==="function")gv_stamp(ctx,x0+pw-170,top+ph-70,st.stamp[0],1,{size:28,col:CI(st.stamp[1]||"red"),rot:-0.07});},

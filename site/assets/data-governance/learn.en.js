@@ -670,7 +670,7 @@ qs:[
   why:"Where a problem shows is often not where it starts. Follow it back, fix it where it's made, and the clean-up can go."},
 {type:"choice",n:62,lab:"back",film:6,title:"Where it starts",vis:"scene",
   alt:"The sign-up form: a plain text box, a capital at the start from the phone, and a space left by a suggestion.",
-  st:{who:"tom",kicker:"The sign-up form",rows:[["Box","plain text, so phones add a capital","no"],["Suggestion","can leave a space","no"],["Emails that arrive that way","more than one in three"]]},
+  st:{who:"tom",kicker:"The sign-up form",rows:[["Box","plain text, so phones add a capital","no"],["Suggestion","can leave a space","no"],["Emails like that","more than one in three"]]},
   sit:"Yusuf follows one email back to the short-course sign-up form. What's the fix?",
   opts:[{t:"Ask learners to type more carefully.",why:"Nobody typed anything wrong. The form did what it was built to do."},
     {t:"An email box, and the form trims, lowers and checks each email before it's saved.",ok:true},

@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Minds that change](https://data.learn-all.org/what-an-agent-is/minds-that-change/) | Memory and evidence | 7 min | 6 | 3 questions | [script](5-minds-that-change/script.md) · [source](5-minds-that-change/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

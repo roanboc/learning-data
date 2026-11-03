@@ -84,6 +84,7 @@
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |
 | It feels like understanding | 265 | 0% | 0 | 30.7 | Drawn to the rule |
 | More than a junior | 263 | 0% | 0 | 30.0 | Drawn to the rule |
+| Minds that change | 190 | 0% | 0 | 30.0 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

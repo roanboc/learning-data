@@ -153,8 +153,8 @@ function ox_room(x,tt,o){o=o||{};const R=OX_LAB.ring,T=OX_LAB.tools,Y=OX_LAB.tra
 function ox_say(x,bx,by,w,text,px,py,a,o){o=o||{};if(a<=0)return;const side=o.side||(py>by+60?"bottom":"left");
   ag_textCard(x,bx,by,w,{kick:o.kick,title:text},{a,k:ag_eo(a),tail:{side,at:o.at==null?0.2:o.at,px,py},edge:o.edge,kickCol:o.kickCol});}
 // night falling over a lab drawn by day (n 0 to 1), its lamp out of sight, and the agent's band glowing through it
-function ctx_night(x,n){if(n<=0)return;ag_night(x,n,[-900,760],null,false);}
-function ox_nightOver(x,tt,n,core,think){if(n<=0)return;ctx_night(x,n);const R=OX_LAB.ring;ag_model(x,R[0],R[1],88,{only:"light",t:tt,core:core==null?0.55:core,think:think||0,a:n});}
+function ox_night(x,n){if(n<=0)return;ag_night(x,n,[-900,760],null,false);}
+function ox_nightOver(x,tt,n,core,think){if(n<=0)return;ox_night(x,n);const R=OX_LAB.ring;ag_model(x,R[0],R[1],88,{only:"light",t:tt,core:core==null?0.55:core,think:think||0,a:n});}
 // a draft lying in the test copy: a small sheet with two lines and a pen; a its alpha
 function ox_draft(c,b,a){if(a<=0)return;const w=150,h=Math.max(30,Math.min(46,b.h-8)),x0=b.x+b.w*0.5-w/2,y0=b.y+(b.h-h)/2;ag_box(c,x0,y0,w,h,8,{a,edge:AG.blue,edgeA:0.5});
   c.save();c.globalAlpha*=a;c.strokeStyle=rgba(AG.mut,0.55);c.lineWidth=2.5;for(let k=0;k<2;k++){c.beginPath();c.moveTo(x0+16,y0+h*0.36+k*h*0.3);c.lineTo(x0+w-48,y0+h*0.36+k*h*0.3);c.stroke();}
@@ -399,7 +399,7 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
       if(r>0)ag_reach(x,[696,320,850,230,1050,280,1182,420],r);}},
     // Europe's AI law: for high-risk systems, people who understand them, watch them at work, and can stop them
     {at:c.europe-0.3,place:"lab",keys:[[c.europe-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
-      ox_listCard(x,560,280,800,"Europe's AI law","For high-risk systems, people who",[["book","understand them",AG.ink,AG.blue],["eye","watch them at work",AG.ink,AG.blue],["stop","can stop them",AG.ink,[176,64,52]]],
+      ox_listCard(x,560,280,800,"Europe's AI law","For high-risk systems, people who",[["book","understand them",AG.ink,AG.blue],["eye","watch them at work",AG.ink,AG.blue],["stop","can stop them",AG.ink,AG.ink]],
         {a:ag_in(tt,c.europe,0.5),k:ag_spr(tt,c.europe,0.6),items:[ag_in(tt,P.understand,0.4),ag_in(tt,P.watch,0.4),ag_in(tt,P.stop,0.4)]});}},
     // the team asks the same: Jun sees what it read and did; anyone on the team can stop it, a Stop button on each one's screen
     {at:c.team-0.3,place:"lab",keys:[[c.team-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
@@ -426,7 +426,7 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(
       ox_count(x,N.count[0],N.count[1],N.count[2],{state:tt<P.fails?"pass":"fail",edge:tt<P.fails?null:AG.amber,a:ag_in(tt,0.4,0.5)});}},
     // in the morning, its report is waiting: the cause, a fix in test, the checks it ran, and a question
     {at:c.report-0.3,place:"lab",keys:[[c.report-0.3,960,540,1]],draw:(x,tt)=>{const dawn=1-ag_in(tt,c.report-0.2,2.0);
-      ox_room(x,tt,{noRing:true,tray:1,rail:1,inTray:(cc,b)=>ox_draft(cc,b,1),jun:ag_in(tt,c.report+0.4,0.6),junO:{gaze:[3,-1]}});ctx_night(x,0.6*dawn);
+      ox_room(x,tt,{noRing:true,tray:1,rail:1,inTray:(cc,b)=>ox_draft(cc,b,1),jun:ag_in(tt,c.report+0.4,0.6),junO:{gaze:[3,-1]}});ox_night(x,0.6*dawn);
       ox_report(x,900,110,720,{a:ag_in(tt,c.report+0.3,0.5),p:ag_keys(tt,[[P.cause-0.2,0],[P.cause+0.3,0.25],[P.fix+0.3,0.5],[P.checks+0.3,0.75],[P.question+0.3,1]])});}},
     // Mei, in the registrar's office, answers: the frame on the wall shows her at her desk; they count
     {at:c.mei-0.3,place:"lab",keys:[[c.mei-0.3,700,340,1.6]],push:0.02,draw:(x,tt)=>{

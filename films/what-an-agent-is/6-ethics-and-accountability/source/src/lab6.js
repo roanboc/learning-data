@@ -134,8 +134,8 @@ function ox_message(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return 
   ctx.restore();return{x,y,w,h,hy};}
 
 /* a key card on the desk ("Jun's key"), and a hand in a dark glove that takes it: o.take (0 to 1) moves the card from (x, y) to the
-   hand at the frame's left edge; o.glove (0 to 1) brings the hand in, and takes it out again past 1 (o.out) */
-function ox_key(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const tk=ag_sine(clamp(o.take||0,0,1)),gx=lerp(-260,40,ag_eo(clamp(o.glove||0,0,1)))-lerp(0,340,ag_sine(clamp(o.out||0,0,1)));
+   hand at the frame's left edge; o.glove (0 to 1) brings the hand in, and o.out (0 to 1) takes the hand and the card out of the frame */
+function ox_key(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const tk=ag_sine(clamp(o.take||0,0,1)),gx=lerp(-260,40,ag_eo(clamp(o.glove||0,0,1)))-lerp(0,560,ag_sine(clamp(o.out||0,0,1)));
   const kx=lerp(x,gx+210,tk),ky=lerp(y,y-20,tk)-Math.sin(Math.PI*tk)*60,w=ag_tw(ctx,"Jun's key",{w:700,size:30})+110;
   ag_box(ctx,kx,ky,w,72,18,{a,edge:AG.amber,edgeA:0.5*tk});ctx.save();ctx.globalAlpha*=a;
   // a small key: a ring and a bit
@@ -228,8 +228,8 @@ function ox_logScreen(ctx,x,y,w,h,o){o=o||{};const lines=o.lines||[],p=o.p||0;
   ag_screen(ctx,x,y,w,h,{a:o.a,draw:(c,X,Y,Wd,Hd)=>{ag_T(c,o.title||"WHAT THE AGENT DID",X+26,Y+48,{w:700,size:28,ls:3,col:AG.mut});
     lines.forEach((l,i)=>{const la=clamp(p*lines.length-i,0,1);if(la<=0)return;ag_T(c,l,X+26,Y+100+i*44,{w:500,size:30,f:"mono",a:la});});
     if(o.stop!=null)ox_stopBtn(c,X+Wd-150,Y+Hd-82,o.stop);}});}
-function ox_stopBtn(ctx,x,y,on){const w=124,h=56;ctx.save();ctx.fillStyle=rgba(mix([226,222,216],[176,64,52],on),1);rr(ctx,x,y,w,h,14);ctx.fill();
-  if(on>0.01){ctx.shadowColor=rgba([200,70,56],0.6*on);ctx.shadowBlur=18;ctx.fill();ctx.shadowBlur=0;}
+function ox_stopBtn(ctx,x,y,on){const w=124,h=56;ctx.save();ctx.fillStyle=rgba(mix([226,222,216],AG.ink,on),1);rr(ctx,x,y,w,h,14);ctx.fill();
+  if(on>0.01){ctx.shadowColor=rgba(AG.ink,0.35*on);ctx.shadowBlur=18;ctx.fill();ctx.shadowBlur=0;}
   ctx.fillStyle=on>0.5?"#FFFFFF":rgba(AG.ink,1);rr(ctx,x+20,y+h/2-9,18,18,3);ctx.fill();ag_T(ctx,"Stop",x+48,y+h/2+11,{w:700,size:30,color:on>0.5?"#FFFFFF":rgba(AG.ink,1)});ctx.restore();}
 
 /* the agent's report on Jun's desk: the cause, the fix, the checks, and a question in amber; o.p (0 to 1) its lines appearing */

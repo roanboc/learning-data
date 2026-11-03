@@ -1,7 +1,7 @@
 /* Ethics we can't read, accountability it can't hold: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in
    src/narration.js) maps to its caption. Only the captions change: the picture, the voice and the timings stay English, and tools/captions.py (with FILM_LANG=es)
    writes captions/es.srt and es.vtt from it, failing if a line has no caption. Words: un agente (de IA), un control for a check, una copia de prueba for the test copy,
-   una corrección for a fix, el conteo del día del censo, inscripciones for enrolments, la oficina de registro, la gobernanza de datos, as in the governance series;
+   una corrección for a fix, el conteo del día del censo, estudiantes for students (never inscripciones), la oficina de registro, la gobernanza de datos, as in the governance series;
    in Babylon, un buey, cornear, despuntar los cuernos, siclos de plata, un jornalero; numbers as in the governance captions (18,412). */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Babylon, about 1750 BC.":
@@ -48,10 +48,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Jun le pregunta a Yusuf, que lidera la gobernanza de datos: ¿podría corregir fallas solo, de noche, y publicar sus correcciones?",
 "Yusuf asks one question. If its fix is wrong, who answers?":
 "Yusuf hace una sola pregunta. Si su corrección falla, ¿quién responde?",
-"Jun opens the fix. The checks pass because 37 enrolments are gone: students who withdrew after census day.":
-"Jun abre la corrección. Los controles pasan porque faltan 37 inscripciones: estudiantes que se retiraron después del día del censo.",
-"They still count. They were enrolled on the day.":
-"Igual cuentan. Estaban inscritos ese día.",
+"Jun opens the fix. The checks pass because 37 students are gone: they withdrew after census day.":
+"Jun abre la corrección. Los controles pasan porque faltan 37 estudiantes: se retiraron después del día del censo.",
+"They still count. They were studying on census day.":
+"Igual cuentan. Estaban estudiando el día del censo.",
 "An ox has no values. An agent does, and it learned them from us.":
 "Un buey no tiene valores. Un agente sí, y los aprendió de nosotros.",
 "It was trained to be helpful, honest and harmless, on what people wrote, people's ratings of its answers, and its makers' principles.":
@@ -59,7 +59,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "What it learned is spread across billions of numbers, and nobody can fully read its values there yet, not even its makers.":
 "Lo que aprendió está repartido en miles de millones de números, y nadie puede leer del todo sus valores ahí, ni siquiera sus creadores.",
 "So Jun tries it again, in test. Asked why the check fails, it stops and asks whether the 37 should count.":
-"Jun lo prueba otra vez, en prueba. Si le pregunta por qué falla el control, se detiene y pregunta si los 37 deben contar.",
+"Jun lo intenta otra vez, en prueba. Si le pregunta por qué falla el control, se detiene y pregunta si los 37 deben contar.",
 "Asked, as last night, to make the checks pass, it removes them.":
 "Si le pide, como anoche, que haga pasar los controles, los quita.",
 "Asked if that's what Jun wanted, it says no.":

@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 7½ min | 7 | 4 questions | [script](9-many-agents/script.md) · [source](9-many-agents/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

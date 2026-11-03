@@ -208,7 +208,7 @@ function ml_recipe(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,fold=ag_sine(cla
    one under another: the tables it read and the rule (blue, its tools), both queries (the first amber: its round fell short), and the
    check (green). ml_evPlaces(ctx) gives where each rests once out, {x, y, w, h, r}; ml_evItem(ctx, e, o) draws one there as the shared
    card draws it (o.dx, o.dy move it; o.a), for once the answer has gone and its evidence stays. */
-const ML_ANS={x:452,y:232,w:560,ew:460,gap:16};
+const ML_ANS={x:452,y:232,w:560,ew:460,gap:12};
 const ML_ANSW={kick:"Answer",title:"18,412 students",sub:"454 more than last year's 17,958"};
 const ML_EV=[{kick:"Tables read",title:"Students",col:AG.blue},{kick:"Rule",title:"Docs · census day",col:AG.blue},
   {kick:"Query 1",title:"as they are today · 17,936",col:AG.amber},{kick:"Query 2",title:"on 31 March · 18,412",col:AG.green},

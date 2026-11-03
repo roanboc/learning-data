@@ -1,4 +1,4 @@
-/* Spanish captions for More than a junior: the English line, and its Spanish, about as long. Numbers in Spanish style (4.812);
+/* Spanish captions for More than a junior: the English line, and its Spanish, about as long. Numbers as the picture shows them (4,812), as the series' other Spanish captions do;
    "Hans el Listo" is the usual Spanish name in psychology. The film's pictures and voice stay in English. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "Berlin, 1904.": "Berlín, 1904.",
@@ -38,11 +38,11 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "Given free rein, it could change every table in a minute: the wrong way, as fast as the right one.": "Con las riendas sueltas, podría cambiar todas las tablas en un minuto: mal, tan rápido como bien.",
  "A junior's pace keeps their mistakes small. The agent's pace doesn't, so something else must.": "El ritmo de un junior hace pequeños sus errores. El del agente no, así que algo más debe hacerlo.",
  "Later, Jun asks it for this year's count of awards.": "Más tarde, Jun le pide el conteo de títulos de este año.",
- "It counts 4,812, and shows how.": "Cuenta 4.812, y muestra cómo.",
+ "It counts 4,812, and shows how.": "Cuenta 4,812, y muestra cómo.",
  "Jun points it to the glossary: here, microcredentials of six credit points or more count too.": "Jun le señala el glosario: aquí, las microcredenciales de seis créditos o más también cuentan.",
- "It counts again: 4,867.": "Vuelve a contar: 4.867.",
+ "It counts again: 4,867.": "Vuelve a contar: 4,867.",
  "The next morning, Jun starts a new session and asks for awards by faculty.": "A la mañana siguiente, Jun abre una sesión nueva y pide los títulos por facultad.",
- "Its faculties add up to 4,812 again: it has left the microcredentials out.": "Sus facultades vuelven a sumar 4.812: ha dejado fuera las microcredenciales.",
+ "Its faculties add up to 4,812 again: it has left the microcredentials out.": "Sus facultades vuelven a sumar 4,812: ha dejado fuera las microcredenciales.",
  "A junior, told once, would remember.": "Un junior, con decírselo una vez, lo recordaría.",
  "The agent has no memory of yesterday, unless we give it one.": "El agente no tiene memoria de ayer, a menos que se la demos.",
  "So Jun adds the lesson to the team's notes for agents, which every session starts by reading.": "Así que Jun añade la lección a las notas del equipo para agentes, que cada sesión lee al empezar.",
@@ -65,7 +65,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
  "In tests since 2023, a hint like 'I think it's B' pulled models to B, and their reasoning rarely mentioned it.": "En pruebas desde 2023, una pista como «creo que es la B» inclinó a los modelos hacia la B, y su razonamiento casi nunca lo dijo.",
  "So Jun asks the way Pfungst asked: without the answer in the question.": "Así que Jun pregunta como preguntaba Pfungst: sin la respuesta en la pregunta.",
  "He looks at how it got there: the query, and the rows it read.": "Mira cómo llegó al resultado: la consulta, y las filas que leyó.",
- "And he checks a count it didn't make: the draft for the government says 4,867 too.": "Y lo compara con un conteo que no hizo: el borrador para el gobierno también dice 4.867.",
+ "And he checks a count it didn't make: the draft for the government says 4,867 too.": "Y lo compara con un conteo que no hizo: el borrador para el gobierno también dice 4,867.",
  "Hans was never a pupil: he was a horse, with a gift nobody had looked for.": "Hans nunca fue un alumno: era un caballo, con un don que nadie había buscado.",
  "The agent isn't a junior. It knows more, and works faster.": "El agente no es un junior. Sabe más, y trabaja más rápido.",
  "And it's less than a person: no career, nothing to lose, no memory of yesterday.": "Y es menos que una persona: sin carrera, sin nada que perder, sin memoria de ayer.",

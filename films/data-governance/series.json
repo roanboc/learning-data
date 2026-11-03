@@ -31,5 +31,11 @@
     ["tech", "Construye el modelo", "Jun, que construye lo que dice el modelo, y recibe las reglas cuando el trabajo ya está hecho"],
     ["tech", "Opera la plataforma", "Sam, que podría proteger una columna en minutos, si alguien le dijera cuál"],
     ["biz", "Informa el número", "Clara, de Planificación, que informa lo que recibe, y necesita saber en qué número confiar"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, film by film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, película por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, film by film. Each puts one idea from a film in your hands: sort a binder's lines, write a rule, follow a change.",
+  "labs_lead_es": "{Labs} labs interactivos, película por película. Cada uno pone en tus manos una idea de una película: ordena las líneas de una carpeta, escribe una regla, sigue un cambio.",
+  "quiz_lead": "{quiz} situations that the people who govern data really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes gobiernan los datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

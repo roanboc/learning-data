@@ -7,6 +7,8 @@
 /* ---------------------------------------------------------------- Jun's desk: the desk first, Jun behind it (cut at its back edge, his
    forearms on it when he types), then his screen, its lines decoration only (what's on it is never read there). FU_JUN: where he
    sits, his size, the desk, the screen. o.folder: the evidence folder on the desk's front corner ({dust, open}) */
+// gestures from the desk that keep the far forearm on it, for pose2 over pose "desk": a hand to the chin, thinking; an open hand
+const FU_CHIN={near:[40,160,"rest"],far:[-6,84,"rest"]},FU_OPEN={near:[24,100,"open"],far:[-6,84,"rest"]};
 const FU_JUN={x:300,neck:582,s:0.66,desk:[20,850,900],screen:[452,652,240,136]};
 function fu_junDesk(ctx,t,o){o=o||{};const J=FU_JUN,[dx,dy,dw]=J.desk;
   ag_desk(ctx,dx,dy,dw,{});

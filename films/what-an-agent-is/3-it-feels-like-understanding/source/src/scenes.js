@@ -16,7 +16,7 @@ function fu_push(ctx,x,y,ang,len,a,o){o=o||{};if(a<=0.01)return;ctx.save();ctx.g
 /* ---------------------------------------------------------------- 1999's room: the drawing of space on the wall, then the two desks.
    o: space {earth, mars, path, labels, swirl}, craft {u, on, puff, burn, orbitTh, orb (which orbit), behind}, real (the real path's
    alpha), orbits (the orbits' alpha), radio (the radio line's alpha), odyssey {u, th, a}, second (Odyssey's second line), pushes [[u, a]],
-   people {lean, nod, pointB, pointN}, crt {L, R} (what each monitor shows), dim (the light of the night it was lost) */
+   people {lean, nod}, crt {L, R} (what each monitor shows), dim (the light of the night it was lost) */
 function fu_room99(ctx,t,o){const S=FU_SPACE,M=S.mars,E=S.earth,sp=o.space||{};
   // Earth, the way there, the labels
   fu_pencilDisc(ctx,E[0],E[1],E[2],sp.earth==null?1:sp.earth,FU.earth,{});
@@ -45,10 +45,10 @@ function fu_room99(ctx,t,o){const S=FU_SPACE,M=S.mars,E=S.earth,sp=o.space||{};
   // the desks of 1999, and the people at them (o.empty: the wall alone, for a close-up of the drawing)
   const F=FU99,pe=o.people||{},[lx,ly,lw]=F.deskL,[rx,ry,rw]=F.deskR;if(o.empty){ag_roomLight(ctx,1);return;}
   ag_desk(ctx,lx,ly,lw,{});ag_desk(ctx,rx,ry,rw,{});
-  ag_person(ctx,FU_PEOPLE.builderB,F.bB[0],F.bB[1],F.bB[2],{t,cut:ly-70,pose:pe.pointB?"point":"hang",mix:0,gaze:[3,1],nod:pe.nodL||0});
+  ag_person(ctx,FU_PEOPLE.builderB,F.bB[0],F.bB[1],F.bB[2],{t,cut:ly-70,pose:"hang",gaze:[3,1],nod:pe.nodL||0});
   ag_person(ctx,FU_PEOPLE.builderA,F.bA[0],F.bA[1],F.bA[2],{t:t+1.3,cut:ly-70,pose:"desk",gaze:[4,1],nod:pe.nodL||0});
-  ag_person(ctx,FU_PEOPLE.navA,F.nA[0]+(pe.lean||0)*12,F.nA[1]+(pe.lean||0)*4,F.nA[2],{t:t+2.1,flip:true,cut:ry-70,pose:pe.lean>0.5?"hang":"desk",gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.04,smile:0.3+0.2*(pe.lean||0)});
-  ag_person(ctx,FU_PEOPLE.navB,F.nB[0]+(pe.lean||0)*8,F.nB[1],F.nB[2],{t:t+0.7,flip:true,cut:ry-70,pose:"hang",pose2:"point",mix:pe.pointN||0,gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.03});
+  ag_person(ctx,FU_PEOPLE.navA,F.nA[0]+(pe.lean||0)*12,F.nA[1]+(pe.lean||0)*4,F.nA[2],{t:t+2.1,flip:true,cut:ry-70,pose:"desk",gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.04,smile:0.3+0.2*(pe.lean||0)});
+  ag_person(ctx,FU_PEOPLE.navB,F.nB[0]+(pe.lean||0)*8,F.nB[1],F.nB[2],{t:t+0.7,flip:true,cut:ry-70,pose:"hang",gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.03});
   const crt=o.crt||{};fu_crt(ctx,F.crtL[0],F.crtL[1],F.crtL[2],{on:crt.onL,draw:(c,x,y,w,h)=>fu_screen99(c,x,y,w,h,crt.L||{})});
   fu_crt(ctx,F.crtR[0],F.crtR[1],F.crtR[2],{on:crt.onR,draw:(c,x,y,w,h)=>fu_screen99(c,x,y,w,h,crt.R||{})});
   fu_phone(ctx,96,812,0.7,{ring:0});fu_binders(ctx,1846,808,2,0.74);
@@ -91,8 +91,8 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   // the navigators' monitor: the plotted way; each push drawn small, and its real size, pale, behind it
   const crt={L:{p:clamp((t-P.worked)/1.4,0,1)},R:{p:fu_fin(t,P.steer-0.2,1.2),arrows:[[0.2,fu_fin(t,P.counted,0.4)],[0.5,fu_fin(t,P.counted+0.4,0.4)],[0.8,fu_fin(t,P.counted+0.8,0.4)]],ghost:fu_fin(t,P.less,0.5)}};
   const room=(x,tt,o)=>fu_room99(x,tt,Object.assign({space,craft,pushes,crt,real:fu_fin(tt,P.nine,1.2)*1,realP:clamp((tt-P.nine)/2.6,0,1)},o||{}));
-  const nav={lean:ag_in(t,P.routine,1.2)*(1-fu_fin(t,P.burn,0.8)),nodL:t>P.same-0.3&&t<P.same+1.2?0.06*Math.sin((t-P.same+0.3)*8)*ag_io(t,P.same-0.3,P.same+1.0,0.2):0,
-    pointB:t>P.worked-0.3&&t<P.file,pointN:ag_io(t,P.steer-0.3,P.agr,0.5)};nav.nodR=nav.nodL;
+  const nav={lean:ag_in(t,P.routine,1.2)*(1-fu_fin(t,P.burn,0.8)),nodL:t>P.same-0.3&&t<P.same+1.2?0.06*Math.sin((t-P.same+0.3)*8)*ag_io(t,P.same-0.3,P.same+1.0,0.2):0};
+  nav.nodR=nav.nodL;
   // the file of numbers, the units' bubbles, the bars, the envelopes, the thirty ticks, Odyssey's cards: what's drawn over the room
   const over=(x,tt)=>{
     // the file: its numbers fill at the builders' desk, it slides along the floor to the navigators', into their monitor; back to say its tag stays blank; filled by Odyssey's team
@@ -299,7 +299,7 @@ scene("right",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // Jun's desk: the calendar turning, a tick on every month; the evidence folder, closed, gathering dust; the chat, and the doubt let go
     {at:0,place:"fuData",keys:[[0,960,520,1.04]],push:0.03,draw:(x,tt)=>{
       cal(x,tt);fu_agent(x,tt,{core:0.75,think:0.1});const typing=tt<P.chat-0.3||tt>P.go+0.4;
-      fu_junDesk(x,tt,{pose:typing?"desk":"hang",gaze:typing?[3,2]:[5,-2],folder:{dust:fu_fin(tt,P.stopped,2.2)},smile:0.35});ag_roomLight(x,1);
+      fu_junDesk(x,tt,{pose:"desk",pose2:FU_CHIN,mix:ag_io(tt,P.wrote+0.2,P.replied-0.6,0.5),gaze:typing?[3,2]:[5,-2],folder:{dust:fu_fin(tt,P.stopped,2.2)},smile:0.35});ag_roomLight(x,1);
       const up=ag_sine((tt-P.go)/1.6),ca=1-up;
       fu_chat(x,720,630-up*44,440,"Anil Kurian","The advisers' lists look long this term.",{a:fu_fin(tt,P.wrote,0.5)*ca,k:ag_spr(tt,P.wrote,0.7)});
       fu_chat(x,1190,650-up*44,420,"Jun","The agent checked its source",{tick:true,a:fu_fin(tt,P.replied,0.5)*ca,k:ag_spr(tt,P.replied,0.7)});}},
@@ -351,7 +351,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       for(let i=0;i<12;i++){const ax=70+i*112,hl=ag_io(tt,P.lists+i*0.18,P.lists+i*0.18+0.5,0.2);
         if(i<9)fu_adviser(x,ax,150,{label:null,list:{n:8,done:6,amber:2}});else fu_adviser(x,ax,150,{dashed:true});
         if(i<9&&hl>0)withA(x,hl*0.6,()=>{x.strokeStyle=rgba([74,80,92],0.9);x.lineWidth=3;rr(x,ax-4,146,108,266,16);x.stroke();});}
-      fu_anilDesk(x,tt,{value:"9",unit:"advisers",t:tt,gaze:[1,-3],pose:tt>P.lists?"desk":"hang"});ag_roomLight(x,1);
+      fu_anilDesk(x,tt,{value:"9",unit:"advisers",t:tt,gaze:[1,-3],pose:"desk"});ag_roomLight(x,1);
       fu_gapBars(x,140,560,{a:fu_fin(tt,P.n2880-0.5,0.5),p1:clamp((tt-P.n2880+0.3)/1.0,0,1),p2:clamp((tt-P.n2880-0.9)/1.0,0,1),gap:fu_fin(tt,P.n2880+1.9,0.6)});}},
     // student load, the table the agent read: its column, "students"; full-time and half-time students; each half-time pair counts as one
     {at:P.load-0.4,place:"fuQuiet",keys:[[P.load-0.4,960,470,1.04],[P.load-0.3,960,470,1.0]],d:14,draw:(x,tt)=>{
@@ -387,7 +387,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_check(x,950,450,fu_fin(tt,P.passed-0.2,0.5));}},
     // Jun opens the evidence at last: what the agent's hands did, line by line; "full-time equivalents" washes amber
     {at:P.record-0.4,place:"fuData",keys:[[P.record-0.4,900,500,1.08],[P.record-0.3,900,498,1.1]],d:6,draw:(x,tt)=>{
-      const op=ag_sine((tt-P.record+0.1)/0.9);fu_junDesk(x,tt,{pose:op>0.2&&op<0.95?"explain":"hang",gaze:[5,-3],folder:{dust:1-op,open:op},smile:0.2});ag_roomLight(x,1);
+      const op=ag_sine((tt-P.record+0.1)/0.9);fu_junDesk(x,tt,{pose:"desk",pose2:FU_OPEN,mix:ag_io(tt,P.record-0.15,P.record+0.6,0.35),gaze:[5,-3],folder:{dust:1-op,open:op},smile:0.2});ag_roomLight(x,1);
       const rise=ag_sine((tt-P.hands+0.3)/1.0),am=fu_fin(tt,P.added-0.2,0.8);
       x.save();x.translate(0,(1-rise)*500);const r=fu_answer(x,520,110,{a:fu_fin(tt,P.hands-0.3,0.4),open:clamp((tt-P.hands-0.6)/1.4,0,1),side:"right",ew:400,amber:am});x.restore();
       ag_label(x,1000,82,"What its hands did",{col:AG.kick,a:fu_fin(tt,P.hands+0.6,0.5)});

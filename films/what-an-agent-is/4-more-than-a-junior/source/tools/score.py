@@ -374,10 +374,10 @@ for i, m in enumerate((D4, F4)):
 for i, m in enumerate((F4, D4, Bb3)):
     zit(m, jw('ways', 'in three', 0.25 * i), 0.5, px(1500), until=E('junior') + 0.3)
 
-# 3. More than a junior: Jun's question; the agent reads the 33 tables, card after card, the zither rising through them; the path drawn,
-#    its chord; the pills; the clock's hand. A new junior's week, a note for each day, the count landing on Friday. The shelves, a long
+# 3. More than a junior: Jun's question; the agent reads the 33 tables, card after card, the zither rising through them; the path drawn
+#    and its pills; the clock's hand. A new junior's week, a note for each day, the count landing on Friday. The shelves, a long
 #    soft slide of books. The danger: the tables ripple amber, G minor, low; free rein, the ripple again, and its knock. A junior's pace:
-#    the amber card; the two-column card, its two rows rising
+#    the paper junior slides in beside Jun, its one card turns amber; the two-column card, its two rows rising
 mw = lambda lid, word, off=0: W('more', lid, word, off)
 mc = lambda lid, off=0: G('more', lid, off)
 card(mc('asks', 0.3), 0.006, px(640))
@@ -394,15 +394,15 @@ for t, x in ((mw('undersells', 'a danger', -0.1), 1300), (mw('rein', 'change eve
     amber(t, 0.008, px(x))
 roll((G2, D3, Bb3), mw('undersells', 'a danger', 0.1), 0.14, 0.5)
 tap(mc('rein', -0.1), 0.005, px(1600))
-amber(mc('pace', 0.4), 0.007, px(560))
+slide(mc('pace', -0.5), 0.8, 0.005, px(600)); amber(mc('pace', 0.4), 0.007, px(660))
 tE3 = mw('pace', "The agent's", -0.4)
 card(tE3, 0.006, px(960))
 for i, m in enumerate((D4, F4)):
     zit(m, tE3 + 2.4 + 0.25 * i, 0.5, px(1500), until=E('more') + 0.3)
 
 # 4. No memory of yesterday: a session, a question; the count, stopping a semitone short at 4,812; the glossary's card, Jun's pointing
-#    hand, the arm and the data; the count again, landing on 4,867. The next morning: its light, E flat; the sessions slide; the faculty
-#    bars, a note each, the total short again, amber. The two-column card: memory, a falling third. The team's notes, pinned; the lesson
+#    hand, the arm and the data; the count again, landing on 4,867. The next morning: the sessions slide; the faculty bars, a
+#    note each, the total short again, amber. The paper junior slides in beside Jun. The two-column card: memory, a falling third. The team's notes, pinned; the lesson
 #    written, on the heckelphone's home note; and every session after, a green tick each, the zither rising to the answer
 yw = lambda lid, word, off=0: W('memory', lid, word, off)
 yc = lambda lid, off=0: G('memory', lid, off)
@@ -417,6 +417,7 @@ card(yw('next', 'asks for', -0.1), 0.005, px(1500))
 for i, m in enumerate((Bb3, D4, F4)):
     zit(m, yc('out', -0.3 + 0.564 + 0.2 * i), 0.4, px(1500), True)
 zit(SHORT, yw('out', 'add up'), 0.5, px(1500), until=yc('told', -0.4)); amber(yw('out', 'left the', -0.1), 0.008, px(1560))
+slide(yc('told', -0.5), 0.8, 0.005, px(600))
 card(yc('none', -0.4), 0.006, px(960))
 zit(F4, yc('none', 0.1), 0.45, px(1500)); zit(D4, yw('none', 'no memory'), 0.45, px(1500))
 pin(yc('notes', -0.2), 0.008, px(810))
@@ -499,7 +500,7 @@ tick(tOk, Bb3, 0.007, px(1600)); tick(tOk + 0.12, F4, 0.006, px(1830))
 home(tOk - 0.1, ((Bb3, 2.0),), 0.65); roll((Bb2, F3, Bb3, D4), tOk, 0.09, 0.5, until=E('asked'))
 
 # 7. For what it is: noon in the courtyard again, the opening's chord and the heckelphone's line, the close: Hans was never a pupil. The
-#    badge flies back to the paper junior and clips on. Less than a person: the card, three notes falling. Its caution, its memory and its
+#    badge flies back to the paper junior and clips on. Less than a person: the card. Its caution, its memory and its
 #    yes: the lock, the pinned notes, two stamps, the heckelphone rising by thirds, a note for each. This week: four cards, the zither
 #    climbing to the answer on the fourth. The takeaway card; and the end card on the film's mark
 cw = lambda lid, word, off=0: W('close', lid, word, off)

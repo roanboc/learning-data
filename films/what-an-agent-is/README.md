@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [More than a junior](https://data.learn-all.org/what-an-agent-is/more-than-a-junior/) | Supervising agents | 7 min | 7 | 3 questions | [script](4-more-than-a-junior/script.md) · [source](4-more-than-a-junior/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

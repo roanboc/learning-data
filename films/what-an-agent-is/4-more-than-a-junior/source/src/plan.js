@@ -8,11 +8,14 @@
 /* ---------------------------------------------------------------- where things are in the room */
 const MJ_ROOM={agent:{x:1124,y:476,r:88,R:180},jun:{x:296,y:596,s:1.0}};
 // the agent in its ring, where the series has it: o.t, o.core, o.think, o.pulse (the light travelling round the ring while it works),
-// o.badge (0 to 1: the "Junior" badge hangs from the ring's foot), o.a; and its light on the wall and its shadow on the floor
+// o.badge (0 to 1: the "Junior" badge hangs from the ring's foot), o.textA (0 to 1: its words, the label and the steps, fade on their
+// own), o.a; and its light on the wall and its shadow on the floor
 function mj_agent(ctx,o){o=o||{};const A=MJ_ROOM.agent,x=o.x||A.x,y=o.y||A.y,t=o.t||0,a=o.a==null?1:o.a;if(a<=0)return;
   ctx.save();ctx.globalAlpha*=a;
-  const pulse=o.pulse==null?{deg:(t*36)%360-120,a:0.7}:o.pulse;
-  ag_loop(ctx,x,y,{t,core:o.core==null?0.8:o.core,think:o.think||0,pulse,lit:o.lit,col:o.col,steps:o.steps,R:o.R,r:o.r,floor:o.floor===undefined?y+330:o.floor,label:o.label});
+  const pulse=o.pulse==null?{deg:(t*36)%360-120,a:0.7}:o.pulse,ta=o.textA==null?1:clamp(o.textA,0,1),lab=o.label===undefined?"Model":o.label;
+  ag_loop(ctx,x,y,{t,core:o.core==null?0.8:o.core,think:o.think||0,pulse,lit:o.lit,col:o.col,steps:o.steps,R:o.R,r:o.r,floor:o.floor===undefined?y+330:o.floor,
+    label:ta<1?null:lab,stepA:ta<1?[ta,ta,ta]:undefined});
+  if(ta<1&&ta>0&&lab)ag_T(ctx,lab,x,y+(o.r||A.r)*0.6,{w:700,size:28,align:"center",col:AG.label,a:ta});
   if(o.badge>0){const hy=y+(o.R||A.R)+4;ctx.save();if(o.swing){ctx.translate(x,hy);ctx.rotate(o.swing);ctx.translate(-x,-hy);}
     ag_badge(ctx,x,hy,"Junior",{t,drop:lerp(30,86,ag_spr(o.badge,0,0.5)),a:clamp(o.badge*3,0,1)});ctx.restore();}
   ctx.restore();}
@@ -37,9 +40,10 @@ function mj_junior(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return n
   ctx.translate(x,y);ctx.rotate((o.tip||0)+sway);
   // the oak foot, and a slot the paper stands in
   ag_soft(ctx,c=>ag_rect(c,-h*0.2,-h*0.05,h*0.4,h*0.05,4),AG_OAK.base,AG_OAK.hi,h*0.1,-h*0.05,h*0.3,rgba(AG_OAK.dark,0.4),6,0.6);
-  // its shadow on the wall behind, falling left; then the paper, a little curved (lighter to the right), with a soft fold down the middle
-  ctx.save();ctx.translate(-h*0.05,-h*0.02);ctx.filter="blur(10px)";ctx.fillStyle="rgba(46,38,28,0.16)";ag_shape(ctx,c=>{ctx.save();ctx.translate(0,-h*0.05);mj_juniorPath(c,h*0.95);ctx.restore();});ctx.fill();ctx.filter="none";ctx.restore();
-  ctx.save();ctx.translate(0,-h*0.05);if(o.nod){ctx.translate(0,-h*0.62);ctx.rotate(o.nod*0.4);ctx.translate(0,h*0.62);}
+  // its shadow on the wall behind, falling left; then the paper, standing on the foot, a little curved (lighter to the right), with a
+  // soft fold down the middle
+  ctx.save();ctx.translate(-h*0.05,-h*0.02);ctx.filter="blur(10px)";ctx.fillStyle="rgba(46,38,28,0.16)";ag_shape(ctx,c=>{ctx.save();ctx.translate(0,h*0.004);mj_juniorPath(c,h*0.95);ctx.restore();});ctx.fill();ctx.filter="none";ctx.restore();
+  ctx.save();ctx.translate(0,h*0.004);if(o.nod){ctx.translate(0,-h*0.62);ctx.rotate(o.nod*0.4);ctx.translate(0,h*0.62);}
   const P=c=>mj_juniorPath(c,h*0.95);ag_shape(ctx,P);const g=ctx.createLinearGradient(-h*0.34,0,h*0.34,0);g.addColorStop(0,"#E4DFD6");g.addColorStop(0.55,"#F3F0EA");g.addColorStop(1,"#FBFAF7");
   ctx.fillStyle=g;ctx.fill();ctx.strokeStyle="rgba(120,110,96,0.35)";ctx.lineWidth=1.5;ctx.stroke();
   ctx.save();ag_shape(ctx,P);ctx.clip();ctx.strokeStyle="rgba(120,110,96,0.16)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,-h*0.95);ctx.lineTo(0,0);ctx.stroke();
@@ -49,14 +53,14 @@ function mj_junior(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return n
   ctx.beginPath();ctx.moveTo(-h*0.08,-h*0.5);ctx.lineTo(0,-h*0.42);ctx.lineTo(h*0.08,-h*0.5);ctx.stroke();ctx.restore();
   const neck=[0,-h*0.95*0.73];
   // the task cards it holds, each a reviewer's tick
-  const n=o.cards||0;for(let i=0;i<n;i++){const cx=-h*0.15+i*h*0.1,cy=-h*0.3+i*h*0.02,cw=h*0.2,ch=h*0.14;ctx.save();ctx.translate(cx,cy);ctx.rotate(-0.08+i*0.06);
+  const n=o.cards||0;for(let i=0;i<n;i++){const m=i-(n-1)/2,cx=m*h*0.215,cy=-h*0.27+Math.abs(m)*h*0.02,cw=h*0.2,ch=h*0.145;ctx.save();ctx.translate(cx,cy);ctx.rotate(m*0.07);
     const amb=i===n-1?clamp(o.amber||0,0,1):0;ag_box(ctx,-cw/2,-ch/2,cw,ch,8,{edge:amb>0?AG.amber:null,edgeA:amb});
     ctx.fillStyle="rgba(86,92,100,0.3)";ctx.fillRect(-cw*0.34,-ch*0.18,cw*0.5,ch*0.1);ctx.fillRect(-cw*0.34,ch*0.04,cw*0.36,ch*0.1);
     if(o.name&&i===0){ctx.strokeStyle=rgba(AG.ink,0.7);ctx.lineWidth=2.5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-cw*0.36,ch*0.34);
       for(let k=0;k<=12;k++)ctx.lineTo(-cw*0.36+k*cw*0.045,ch*0.34-Math.sin(k*1.7)*ch*0.07-(k===3?ch*0.1:0));ctx.stroke();}
     if(i<(o.ticks||0))ag_tick(ctx,cw*0.26,0,ch*0.42,rgba(AG.green,1),4);if(amb>0)withA(ctx,amb,()=>ag_warn(ctx,cw*0.26,0,ch*0.5,rgba(AG.amber,1)));ctx.restore();}
   if(o.badge>0)ag_badge(ctx,neck[0],neck[1],"Junior",{t,drop:lerp(30,86,ag_spr(o.badge,0,0.5)),a:clamp(o.badge*3,0,1)});
-  ctx.restore();ctx.restore();return{x,y:y-h*0.05+neck[1]};}
+  ctx.restore();ctx.restore();return{x,y:y+h*0.004+neck[1]};}
 // a small oak ladder standing against the wall: its foot's middle at (x, y), h tall, n rungs; o.tip (radians, about its foot), o.a.
 // Returns the height of each rung above the foot.
 function mj_ladder(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||5,w=h*0.26;if(a<=0)return[];ctx.save();ctx.globalAlpha*=a;
@@ -189,7 +193,7 @@ function mj_strike(ctx,bb,p){if(p<=0)return;ctx.save();ctx.strokeStyle=rgba(AG.i
 function mj_month(ctx,x,y,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=230,h=112,u=clamp(o.turn||0,0,1),m=u<0.5?n:n+1,sy=Math.abs(Math.cos(u*Math.PI));
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ctx.translate(0,y);ctx.scale(1,Math.max(0.05,sy));ctx.translate(0,-y);
   ag_box(ctx,x,y,w,h,16,{});ctx.fillStyle=rgba(AG.mut,0.18);rr(ctx,x+8,y+8,w-16,26,10);ctx.fill();
-  ag_T(ctx,"Month "+m,x+w/2,y+86,{w:700,size:32,align:"center"});ctx.restore();}
+  if(sy>0.92)ag_T(ctx,"Month "+m,x+w/2,y+86,{w:700,size:32,align:"center"});ctx.restore();}
 // a small round bubble with a question mark, its tail towards (px, py)
 function mj_ask(ctx,x,y,px,py,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.5,1,o.k==null?1:o.k));
   const r=38,an=Math.atan2(py-y,px-x);
@@ -240,3 +244,7 @@ function mj_win(ctx,x,y,w,h,caption,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)r
   ag_box(ctx,x,y,w,h,24,{});if(o.draw){ctx.save();ctx.beginPath();ctx.rect(x+8,y+8,w-16,h-120);ctx.clip();o.draw(ctx,x,y+8,w,h-120);ctx.restore();}
   ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,y+h-112);ctx.lineTo(x+w-24,y+h-112);ctx.stroke();
   const ls=ag_wrap(ctx,caption,w-56,{w:700,size:32});ls.forEach((l,i)=>ag_T(ctx,l,x+28,y+h-64+i*40-(ls.length-1)*20,{w:700,size:32}));ctx.restore();}
+// the film's last words on a card: lines given (so it breaks where the sense does), centred on x, its top at y; o.k, o.a
+function mj_say(ctx,x,y,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const f={w:700,size:40},w=Math.max(...lines.map(l=>ag_tw(ctx,l,f)))+AG_PAD*2+16,h=AG_PAD*2+lines.length*52-4;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x-w/2,y,w,h,24,{});
+  lines.forEach((l,i)=>ag_T(ctx,l,x,y+AG_PAD+38+i*52,{w:700,size:40,align:"center"}));ctx.restore();}

@@ -65,7 +65,7 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
       const ring=MJ_RING.slice().sort((a,b)=>b[1]-a[1]),order=i=>Math.abs(i-6),hz=H[1];
       const man=m=>{const i=m[2],a0=tMen+0.25+(6-order(i))*0.2,ap=ag_in(tt,a0,0.6);if(ap<=0)return;
         withA(x,ap,()=>mj_standAt(x,m[0],m[1],1.74,MJ_MEN[i],{t:tt+i,arms:["behind","hang","hold"][i%3],flip:m[0]>H[0]+0.3,nod:0.02*Math.sin(tt*0.6+i),
-          cloud:(xx,X,Y,k)=>mj_cloud(xx,X,Y,"5",{s:clamp(k*1.7,0.75,1),a:ag_in(tt,c.knew+0.35+i*0.09,0.4),k:ag_spr(tt,c.knew+0.35+i*0.09,0.45)})}));};
+          cloud:(xx,X,Y,k)=>mj_cloud(xx,X,Y,"5",{s:clamp(k*1.7,0.75,1),a:ag_in(tt,c.knew+0.35+i*0.09,0.4)*(1-ag_in(tt,c.change+0.1,0.6)),k:ag_spr(tt,c.knew+0.35+i*0.09,0.45)})}));};
       ring.filter(m=>m[1]>hz).forEach(man);hans(x);osten(x,O[0],O[1],{arms:"hold",flip:true});ring.filter(m=>m[1]<=hz).forEach(man);}},
     // that autumn: leaves on the cobbles, Pfungst with his notebook; nobody there knows the answer, and Hans taps on past it
     {at:tAut,place:"mjAutumn",keys:[[tAut,960,540,1],[tAut+0.2,860,500,1.16]],d:5,draw:(x,tt)=>{mj_cam("wide");const q=ag_in(tt,c.nobody+0.1,0.5);
@@ -96,7 +96,7 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
     // today: the room, Jun and the agent; Berlin's light carries across
     {at:tRoom,place:"lab",keys:[[tRoom,960,540,1]],push:0.025,draw:(x,tt)=>{
       ag_person(x,"jun",296,596,1.0,{t:tt,gaze:[3,0],talk:0,smile:0.3});
-      mj_agent(x,{t:tt,core:0.85,think:0.2*ag_in(tt,c.safely,1)});ag_roomLight(x,1);
+      mj_agent(x,{t:tt,core:0.85,think:0.2*ag_in(tt,c.safely,1),textA:1-ag_in(tt,c.breath,0.6)});ag_roomLight(x,1);
       // Berlin, fading out over the room, so the light from the right holds while the courtyard dissolves
       const f=1-ag_in(tt,tRoom,1.5);if(f>0){x.save();x.globalAlpha*=f;x.drawImage(ag_place("mjAutumnHead"),0,0);
         ag_person(x,MJ_PERSON.pfungst,760,560,1.05,{t:tt,pose:"hold",gaze:[3,2],hold:(xx,h)=>mj_envelope(xx,h.near[0]+60,h.near[1]-40,300,{word:"answer",rot:-0.12})});x.restore();}}}
@@ -133,7 +133,7 @@ const mj_steps=(t,times,d)=>times.reduce((s,t0)=>s+clamp((t-t0)/(d||0.5),0,1),0)
 // the kicker, over the room's shots
 const mj_kick=(ctx,S,a)=>{if(a>0)mj_screen(ctx,S,x=>ag_kicker(x,"1.4","More than a junior",{a}));};
 // the morning's light from the window
-function mj_morning(x,a){if(a<=0)return;const g=x.createRadialGradient(1900,80,40,1700,200,1300);g.addColorStop(0,"rgba(255,236,196,"+(0.26*a)+")");g.addColorStop(1,"rgba(255,236,196,0)");
+function mj_morning(x,a){if(a<=0)return;const g=x.createRadialGradient(1900,80,40,1700,200,1300);g.addColorStop(0,"rgba(255,232,188,"+(0.42*a)+")");g.addColorStop(0.6,"rgba(255,236,196,"+(0.12*a)+")");g.addColorStop(1,"rgba(255,236,196,0)");
   x.save();x.globalCompositeOperation="screen";x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
 // a card flying from a small box to its place: a plain card while it flies, its words once it lands
 function mj_fly(x,from,to,u,drawAt){const e=ag_sine(u),bx=lerp(from.x,to.x,e),by=lerp(from.y,to.y,e),bw=lerp(from.w,to.w,e),bh=lerp(from.h,to.h,e);
@@ -141,7 +141,7 @@ function mj_fly(x,from,to,u,drawAt){const e=ag_sine(u),bx=lerp(from.x,to.x,e),by
 
 /* ---------------------------------------------------------------- 2 · A junior who needs supervision */
 scene("junior",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.knows-0.5,tC=c.looks-0.5,tD=c.ways-0.3;
-  const tReason=wAt(sc,"agent","reasons"),tHands=wAt(sc,"agent","with hands"),tLoop=wAt(sc,"agent","in a loop"),tAdv=wAt(sc,"advice","treat it"),tBadge=wAt(sc,"advice","junior who");
+  const tReason=wAt(sc,"agent","reasons"),tHands=wAt(sc,"agent","with hands"),tLoop=wAt(sc,"agent","in a loop"),tAdv=wAt(sc,"advice","often told"),tBadge=wAt(sc,"advice","junior who");
   const reach=ag_sine(clamp((t-tHands+0.1)/1.0,0,1))*(1-ag_sine(clamp((t-c.advice-1.8)/1.0,0,1)));
   const lit=t>=tReason&&t<tHands?0:t>=tHands&&t<tLoop?1:t>=tLoop&&t<tLoop+1.8?2:null;
   const agent=(x,tt,o)=>mj_agent(x,Object.assign({t:tt,think:0.25+0.45*ag_in(tt,tReason,0.6)*(1-0.5*ag_in(tt,c.advice+1,1)),badge:clamp((tt-tBadge)/1,0,1),lit},o||{}));
@@ -159,14 +159,14 @@ scene("junior",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.knows-0.5,tC=c.looks-0.5,tD=c
       agent(x,tt);mj_arm(x,1604,480,reach,{data:clamp((tt-tLoop)/1.4,0,1)});ag_roomLight(x,1);
       const cd=mj_card(tt,tAdv-0.2,null);if(cd.a>0){ag_textCard(x,440,150,500,{kick:"Often told",title:"Treat it like a junior who needs supervision"},{kickCol:AG.kick,k:cd.k,a:cd.a});withA(x,cd.a,()=>mj_pin(x,690,160));}}},
     // the junior picture beside it: small jobs, checked, then checked less; careful, because a mistake would cost them
-    {at:tB,place:"lab",keys:[[tB,960,540,1],[tB+0.05,760,520,1.28]],d:2.2,push:0.02,draw:(x,tt)=>{jun(x,tt,[3,1]);agent(x,tt);junior(x,tt);ag_roomLight(x,1);
+    {at:tB,place:"lab",keys:[[tB,960,540,1],[tB+0.05,760,532,1.28]],d:2.2,push:0.015,draw:(x,tt)=>{jun(x,tt,[3,1]);agent(x,tt);junior(x,tt);ag_roomLight(x,1);
       const mc=mj_card(tt,c.less-0.1,null);if(mc.a>0)mj_month(x,450,236,1+Math.floor(m),{turn:m%1,k:mc.k,a:mc.a});}},
     // but the agent only looks like the picture: its badge swings, and its shadow on the wall is a sphere's
     {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,[3,0]);
-      const sh=ag_in(tt,wAt(sc,"looks","only looks"),1.2);if(sh>0){x.save();x.filter="blur(14px)";x.fillStyle="rgba(46,38,28,"+(0.17*sh)+")";x.beginPath();x.arc(MJ_ROOM.agent.x-40,MJ_ROOM.agent.y+12,96,0,TAU);x.fill();x.filter="none";x.restore();}
+      const sh=ag_in(tt,wAt(sc,"looks","only looks"),1.2);if(sh>0){x.save();x.filter="blur(14px)";x.fillStyle="rgba(46,38,28,"+(0.2*sh)+")";x.beginPath();x.arc(MJ_ROOM.agent.x-74,MJ_ROOM.agent.y+20,92,0,TAU);x.fill();x.filter="none";x.restore();}
       agent(x,tt,{swing:mj_wob(tt,wAt(sc,"looks","like Hans"),0.22)});junior(x,tt);ag_roomLight(x,1);}},
     // the two-column card, its rows still empty
-    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt,[3,0]);agent(x,tt);junior(x,tt);ag_roomLight(x,1);mj_veil(x,ag_in(tt,tD,0.6));
+    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt,[3,0]);agent(x,tt,{textA:1-ag_in(tt,tD,0.4)});junior(x,tt);ag_roomLight(x,1);mj_veil(x,ag_in(tt,tD,0.6));
       const k=ag_spr(tt,tD+0.1,0.5);mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{k,a:ag_in(tt,tD+0.1,0.3),more:ag_in(tt,wAt(sc,"ways","two ways"),0.5),less:ag_in(tt,wAt(sc,"ways","in three"),0.5)});}}
   ];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);mj_kick(ctx,S,1);});
@@ -194,11 +194,11 @@ scene("more",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.week-0.5,tC=c.undersells-0.5,tD
       const s1=ag_in(tt,tPath,0.4),s2=ag_in(tt,tPath+1.3,0.4);if(s1>0)ag_pill(x,1383,222,"Student records",{a:s1*(1-n*0)});if(s2>0)ag_pill(x,1591,790,"Government report",{a:s2,col:AG.orange});
       clock(x,tt);}},
     // a new junior would need a week; a lifetime of reading, and the shelf that runs out of the frame
-    {at:tB,place:"lab",keys:[[tB,740,470,1.3],[tThou-0.3,1180,470,1.3]],d:3.2,push:0.015,draw:(x,tt)=>{tables(x,tt);agent(x,tt);
+    {at:tB,place:"lab",keys:[[tB,960,540,1]],push:0.02,draw:(x,tt)=>{tables(x,tt);agent(x,tt);
       mj_junior(x,360,880,500,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
-      const wk=mj_card(tt,c.week-0.2,null);if(wk.a>0)mj_week(x,520,262,{label:"a week",p:clamp((tt-c.week-0.1)/1.6,0,1),k:wk.k,a:wk.a});
-      mj_shelf(x,110,230,300,{label:"one lifetime of reading",seed:5,a:ag_in(tt,c.lifetimes-0.1,0.5)});
-      mj_shelf(x,980,230,1000,{seed:9,p:clamp((tt-tThou+0.4)/2.8,0,1),a:ag_in(tt,tThou-0.4,0.4)});clock(x,tt);}},
+      const wk=mj_card(tt,c.week-0.2,null);if(wk.a>0)mj_week(x,120,190,{label:"a week",p:clamp((tt-c.week-0.1)/1.6,0,1),k:wk.k,a:wk.a});
+      mj_shelf(x,560,200,300,{label:"one lifetime of reading",seed:5,a:ag_in(tt,c.lifetimes-0.1,0.5)});
+      mj_shelf(x,980,200,1000,{seed:9,p:clamp((tt-tThou+0.4)/2.8,0,1),a:ag_in(tt,tThou-0.4,0.4)});clock(x,tt);}},
     // the junior picture undersells it, and hides a danger: every table, the wrong way, as fast as the right one
     {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt);tables(x,tt);agent(x,tt);arm(x,tt);ag_roomLight(x,1);
       const r=ag_io(tt,c.rein-0.1,tD,0.4);if(r>0)ag_pill(x,1600,222,"If it had free rein",{a:r,icon:"warn",col:AG.amber});}},
@@ -206,7 +206,7 @@ scene("more",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.week-0.5,tC=c.undersells-0.5,tD
     {at:tD,place:"lab",keys:[[tD,560,600,1.5]],push:0.02,draw:(x,tt)=>{tables(x,tt);agent(x,tt);
       mj_junior(x,360,880,500,{t:tt,badge:1,cards:1,amber:ag_in(tt,c.pace+0.4,0.5)});ag_roomLight(x,1);}},
     // the two-column card: the first two rows
-    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);tables(x,tt);agent(x,tt);mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);tables(x,tt);agent(x,tt,{textA:1-ag_in(tt,tE,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
       mj_veil(x,ag_in(tt,tE,0.5));const f0=mj_steps(tt,[tE+0.4,tE+0.9]),f1=mj_steps(tt,[tE+1.4,tE+1.9]),l=ag_in(tt,tE+2.4,0.6);
       mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[f0,f1],lit:[l,l],more:l,less:1,k:ag_spr(tt,tE,0.5),a:ag_in(tt,tE,0.3)});}}
   ];
@@ -218,16 +218,16 @@ const MJ_AWARD="A qualification the university confers, such as a master or a mi
 scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.none-0.4,tE=c.notes-0.5;
   const tShow=wAt(sc,"first","shows how"),tPoint=wAt(sc,"glossary","points it"),tAgain=c.again+0.2;
   const jun=(x,tt,o)=>ag_person(x,"jun",296,596,1.0,Object.assign({t:tt,gaze:[3,0],smile:0.3},o||{}));
-  const agent=(x,tt)=>mj_agent(x,{t:tt,badge:1,think:0.25+0.6*(ag_io(tt,c.count+0.5,tShow,0.4)+ag_io(tt,c.again-0.6,tAgain+0.6,0.3)+ag_io(tt,wAt(sc,"next","asks for"),c.out+0.4,0.4))});
-  const answer=(x,X,Y,tt,title,rows,t0,a)=>ag_evidence(x,X,Y,480,{kick:"Agent",title},[{kick:"Query",title:"Count awards",col:AG.blue},{kick:"Rows",title:rows,col:AG.orange}],{ew:228,open:clamp((tt-t0)/1.2,0,1),k:ag_spr(tt,t0-0.6,0.5),a});
+  const agent=(x,tt,ta)=>mj_agent(x,{t:tt,badge:1,textA:ta,think:0.25+0.6*(ag_io(tt,c.count+0.5,tShow,0.4)+ag_io(tt,c.again-0.6,tAgain+0.6,0.3)+ag_io(tt,wAt(sc,"next","asks for"),c.out+0.4,0.4))});
+  const answer=(x,X,Y,tt,title,rows,tIn,tOpen,a)=>ag_evidence(x,X,Y,480,{kick:"Agent",title},[{kick:"Query",title:"Count awards",col:AG.blue},{kick:"Rows",title:rows,col:AG.orange}],{ew:228,open:clamp((tt-tOpen)/1.2,0,1),k:ag_spr(tt,tIn,0.5),a:a*ag_in(tt,tIn,0.25)});
   const S1=(x,tt,dx,a)=>mj_session(x,MJ_SES.x+dx,MJ_SES.y,MJ_SES.w,MJ_SES.h,{sub:"today",k:ag_spr(tt,c.count-0.5,0.5),a:a*ag_in(tt,c.count-0.5,0.3),draw:xx=>{const X=MJ_SES.x+dx+30;
       const q=mj_card(tt,c.count+0.2,null);if(q.a>0)mj_q(xx,X,MJ_SES.y+96,420,"Awards this year?",{tail:false,k:q.k,a:q.a});
-      if(tt<tAgain){const aa=ag_in(tt,c.first-0.3,0.3);if(aa>0)answer(xx,X,MJ_SES.y+290,tt,"4,812 awards","4,812 rows",tShow,aa);}
-      else answer(xx,X,MJ_SES.y+290,tt,"4,867 awards","4,867 rows",tAgain+0.5,1);}});
+      if(tt<tAgain+0.3)answer(xx,X,MJ_SES.y+290,tt,"4,812 awards","4,812 rows",c.first-0.3,tShow,1-ag_in(tt,tAgain,0.3));
+      if(tt>=tAgain)answer(xx,X,MJ_SES.y+290,tt,"4,867 awards","4,867 rows",tAgain,tAgain+0.5,1);}});
   const shots=[
     // a session: Jun's question, the count with its evidence; the glossary's word; the count again
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const pt=ag_io(tt,tPoint-0.2,c.again,0.5);
-      jun(x,tt,{pose:{near:[2,14,"rest"]},pose2:"point",mix:pt,gaze:pt>0.3?[3,-1]:[3,0]});agent(x,tt);
+      jun(x,tt,{pose:{near:[2,14,"rest"]},pose2:{near:[80,112,"point"]},mix:pt,gaze:pt>0.3?[3,-3]:[3,0]});agent(x,tt);
       const reach=ag_sine(clamp((tt-tPoint-0.9)/0.9,0,1))*(1-ag_sine(clamp((tt-tAgain-0.6)/0.8,0,1)));mj_arm(x,880,430,reach,{from:"left",data:clamp((tt-tPoint-1.8)/1.2,0,1)});
       ag_roomLight(x,1);S1(x,tt,0,1);
       const g=mj_card(tt,c.glossary-0.1,tB-0.2);if(g.a>0)ag_textCard(x,452,212,420,{kick:"Glossary",title:"Award",sub:MJ_AWARD},{kickCol:AG.blue,edge:AG.blue,edgeA:0.4,k:g.k,a:g.a});}},
@@ -241,7 +241,7 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.n
     {at:tC,place:"lab",keys:[[tC,560,600,1.5]],push:0.02,draw:(x,tt)=>{agent(x,tt);
       mj_junior(x,360,880,500,{t:tt,badge:1,cards:1,nod:0.16*Math.sin(clamp((tt-c.told-0.8)/0.9,0,1)*Math.PI)});ag_roomLight(x,1);}},
     // the two-column card: memory
-    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);agent(x,tt);ag_roomLight(x,1);mj_veil(x,ag_in(tt,tD,0.5));
+    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);agent(x,tt,1-ag_in(tt,tD,0.4));ag_roomLight(x,1);mj_veil(x,ag_in(tt,tD,0.5));
       mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[2,2,mj_steps(tt,[tD+0.5,wAt(sc,"none","no memory")])],lit:[1,1],more:1,less:1,k:ag_spr(tt,tD,0.5),a:ag_in(tt,tD,0.3)});}},
     // the team's notes for agents, and every session that reads them
     {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,c.lesson-0.4,c.lesson+3,0.5),gaze:[3,-2]});ag_roomLight(x,1);
@@ -256,10 +256,10 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.n
 /* ---------------------------------------------------------------- 5 · Nothing to lose */
 const MJ_UNREAD=[[4,"Old course codes"],[20,"Awards at census day"],[29,"Units by week"]];
 scene("lose",(ctx,S,t,sc)=>{const c=sc.cues,tN=wAt(sc,"faster","the nightly run")-0.3,tA2=c.three+1.6,tB1=c.junior-0.5,tB2=c.agent-0.5,tC=c.rights-0.5,tD1=c.yearly-0.5,tD2=c.two-0.5,tD3=c.approves-0.5;
-  const tFind=wAt(sc,"three","nothing seems"),tDraft=c.drafts+0.3,tOnce=wAt(sc,"yearly","once a year"),tBack=c.yearly+3.8,tRev=wAt(sc,"two","Jun reviews"),tApp=wAt(sc,"two","Noor approves");
+  const tFind=wAt(sc,"three","nothing seems"),tDraft=c.drafts+0.3,tOne=wAt(sc,"yearly","one of the three"),tOnce=wAt(sc,"yearly","once a year"),tBack=c.yearly+4.7,tRev=wAt(sc,"two","Jun reviews"),tApp=wAt(sc,"two","Noor approves");
   const jun=(x,tt,o)=>ag_person(x,"jun",296,596,1.0,Object.assign({t:tt,gaze:[3,0],smile:0.3},o||{}));
   const agent=(x,tt,o)=>mj_agent(x,Object.assign({t:tt,badge:1,think:0.25+0.6*ag_io(tt,c.three-0.3,tDraft+0.8,0.4)},o||{}));
-  const cardAt=[[300,140],[300,296],[300,452]],W5=500;
+  const cardAt=[[300,130],[300,318],[300,506]],W5=500;
   const draftTitle=tt=>tt<tBack+1.2?"Delete 3 tables":"Delete 2 tables";
   const shots=[
     // another day: Jun asks
@@ -272,16 +272,16 @@ scene("lose",(ctx,S,t,sc)=>{const c=sc.cues,tN=wAt(sc,"faster","the nightly run"
     // three tables nothing seems to read; in seconds, a draft that deletes them
     {at:tA2,place:"lab",keys:[[tA2,960,540,1]],push:0.02,draw:(x,tt)=>{const gone={};MJ_UNREAD.forEach(([i])=>gone[i]=ag_in(tt,tFind,0.2));
       mj_tables(x,{gone,dim:ag_in(tt,tFind,0.6)*0.5});agent(x,tt);
-      const u=ag_sine(clamp((tt-c.drafts)/0.7,0,1))*(1-ag_sine(clamp((tt-tDraft-1.4)/0.8,0,1)));mj_arm(x,806,700,u,{from:"left"});ag_roomLight(x,1);
+      const u=ag_sine(clamp((tt-c.drafts)/0.7,0,1))*(1-ag_sine(clamp((tt-tDraft-1.4)/0.8,0,1)));mj_arm(x,806,762,u,{from:"left"});ag_roomLight(x,1);
       MJ_UNREAD.forEach(([i,name],k)=>{const u=clamp((tt-tFind-k*0.25)/0.8,0,1);if(u<=0)return;const b=mj_tableBox(i),to={x:cardAt[k][0],y:cardAt[k][1],w:W5,h:138};
         mj_fly(x,b,to,u,xx=>mj_tableCard(xx,to.x,to.y,W5,name,{sub:"no reads in 90 days"}));});
-      const d=mj_card(tt,tDraft,null);if(d.a>0)mj_draft(x,300,640,W5,draftTitle(tt),{k:d.k,a:d.a});}},
+      const d=mj_card(tt,tDraft,null);if(d.a>0)mj_draft(x,300,694,W5,draftTitle(tt),{k:d.k,a:d.a});}},
     // a junior would have asked around first, with their name on the work and a career ahead
-    {at:tB1,place:"lab",keys:[[tB1,760,520,1.28]],push:0.02,draw:(x,tt)=>{agent(x,tt);
+    {at:tB1,place:"lab",keys:[[tB1,760,532,1.28]],push:0.015,draw:(x,tt)=>{agent(x,tt);
       mj_ladder(x,MJ_LAD.x,MJ_LAD.y,MJ_LAD.h,{a:ag_in(tt,wAt(sc,"junior","a career")-0.2,0.5)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1,name:true});ag_roomLight(x,1);
       const ta=wAt(sc,"junior","asked around");[[470,330],[560,220],[720,190]].forEach(([bx,by],k)=>{const v=mj_card(tt,ta+k*0.25,null);mj_ask(x,bx,by,MJ_JR.x-20,MJ_JR.y-MJ_JR.h+40,{k:v.k,a:v.a});});}},
     // the two-column card: career, and what a mistake costs
-    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{agent(x,tt);mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1,name:true});ag_roomLight(x,1);mj_veil(x,ag_in(tt,tB2,0.5));
+    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{agent(x,tt,{textA:1-ag_in(tt,tB2,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1,name:true});ag_roomLight(x,1);mj_veil(x,ag_in(tt,tB2,0.5));
       mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[2,2,2,mj_steps(tt,[tB2+0.4,wAt(sc,"agent","no career")]),mj_steps(tt,[wAt(sc,"agent","no mistake")-0.2,wAt(sc,"agent","costs it")])],lit:[1,1],more:1,less:1,k:ag_spr(tt,tB2,0.5),a:ag_in(tt,tB2,0.3)});}},
     // so its caution comes from its rights: it reads production through glass; it writes only drafts, in a sandbox, for a person
     {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.02,draw:(x,tt)=>{const tR=wAt(sc,"rights","it reads"),tW=wAt(sc,"rights","writes only"),tP=wAt(sc,"rights","wait for");
@@ -291,14 +291,15 @@ scene("lose",(ctx,S,t,sc)=>{const c=sc.cues,tN=wAt(sc,"faster","the nightly run"
       mj_arm(x,1312,430,ag_sine(clamp((tt-tR+0.2)/0.8,0,1)),{data:clamp((tt-tR-0.8)/1.2,0,1)});mj_arm(x,846,650,ag_sine(clamp((tt-tW+0.1)/0.8,0,1))*(1-ag_sine(clamp((tt-tP)/0.8,0,1))),{from:"left"});
       ag_roomLight(x,1);const w=ag_in(tt,tP,0.4);if(w>0)ag_pill(x,640,556,"Waiting for a person",{a:w,col:AG.blue});}},
     // Jun asks around: one is read once a year, for the government; it goes back, and the other two will go
-    {at:tD1,place:"lab",keys:[[tD1,640,470,1.5]],push:0.02,draw:(x,tt)=>{jun(x,tt,{gaze:[3,-1]});const gone={};MJ_UNREAD.forEach(([i])=>gone[i]=1);
+    {at:tD1,place:"lab",keys:[[tD1,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{gaze:[3,-1]});const gone={};MJ_UNREAD.forEach(([i])=>gone[i]=1);
       const back=clamp((tt-tBack)/0.9,0,1);if(back>0)gone[20]=1-ag_in(back,0.9,0.1);mj_tables(x,{gone});agent(x,tt);ag_roomLight(x,1);
-      const at=[[480,150],[480,300],[480,520]];MJ_UNREAD.forEach(([i,name],k)=>{const yr=k===1,fade=yr?0:ag_in(tt,tBack+1.0,0.6);
+      const at=[[480,110],[480,296],[480,520]];MJ_UNREAD.forEach(([i,name],k)=>{const yr=k===1,fade=yr?0:ag_in(tt,tBack+1.0,0.6);
         if(yr&&back>0){mj_fly(x,{x:at[k][0],y:at[k][1],w:450,h:176},mj_tableBox(i),back,()=>{});if(back<0.12)mj_tableCard(x,at[k][0],at[k][1],450,name,{sub:"read once a year, for the report to the government",a:1-back/0.12});return;}
-        const bb=mj_tableCard(x,at[k][0],at[k][1],450,name,{sub:"no reads in 90 days",next:"read once a year, for the report to the government",turn:yr?ag_in(tt,tOnce+0.3,0.5):0,edge:yr?AG.green:AG.blue,edgeA:yr?0.4+0.5*ag_in(tt,tOnce+0.3,0.5):0.45,a:1-fade});
-        if(yr){const r=clamp((tt-tOnce)/0.9,0,1);if(r>0)withA(x,1,()=>{const gx=at[k][0]+450-118,gy=at[k][1]+16;ctx.save;
-          x.fillStyle="rgba(86,92,100,0.16)";rr(x,gx,gy,96,70,10);x.fill();for(let j=0;j<12;j++){x.fillStyle="rgba(86,92,100,0.4)";x.beginPath();x.arc(gx+16+(j%4)*21,gy+22+Math.floor(j/4)*17,3.5,0,TAU);x.fill();}
-          x.strokeStyle=rgba(AG.ink,0.85);x.lineWidth=3.5;x.lineCap="round";x.beginPath();x.ellipse(gx+16+2*21,gy+22+17,13,11,-0.2,-1.6,-1.6+r*TAU*1.05);x.stroke();});}});}},
+        const tu=ag_in(tt,tOnce-0.2,0.5),bb=mj_tableCard(x,at[k][0],at[k][1],450,name,{sub:"no reads in 90 days",next:"read once a year, for the report to the government",turn:yr?tu:0,edge:yr?AG.green:AG.blue,edgeA:yr?0.45+0.45*tu:0.45,a:1-fade});
+        // a small calendar in its corner, one day ringed
+        if(yr){const ca=ag_in(tt,tOne,0.4),r=clamp((tt-tOne-0.3)/0.9,0,1);if(ca>0)withA(x,ca,()=>{const gx=at[k][0]+450-110,gy=at[k][1]+14;
+          x.fillStyle="rgba(86,92,100,0.14)";rr(x,gx,gy,86,46,10);x.fill();for(let j=0;j<10;j++){x.fillStyle="rgba(86,92,100,0.42)";x.beginPath();x.arc(gx+13+(j%5)*15,gy+15+Math.floor(j/5)*16,3,0,TAU);x.fill();}
+          if(r>0){x.strokeStyle=rgba(AG.ink,0.85);x.lineWidth=3;x.lineCap="round";x.beginPath();x.ellipse(gx+13+3*15,gy+31,11,9,-0.2,-1.6,-1.6+r*TAU*1.05);x.stroke();}});}});}},
     // the change goes ahead with two: Jun reviews it, Noor approves it for production
     {at:tD2,place:"lab",keys:[[tD2,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{gaze:[3,-1]});agent(x,tt);
       const na=ag_in(tt,tApp-0.9,0.6);if(na>0)withA(x,na,()=>ag_person(x,"noor",1660,690,0.8,{t:tt,flip:true,gaze:[3,0],smile:0.35}));ag_roomLight(x,1);
@@ -306,10 +307,10 @@ scene("lose",(ctx,S,t,sc)=>{const c=sc.cues,tN=wAt(sc,"faster","the nightly run"
       mj_stamp(x,700,500,"Approved · Noor",AG.green,{p:clamp((tt-tApp-0.2)/0.45,0,1),rot:0.04});}},
     // a junior grows into the one who approves; the agent never does: its review is for reference
     {at:tD3,place:"lab",keys:[[tD3,960,540,1]],push:0.02,draw:(x,tt)=>{const up=ag_sine(clamp((tt-wAt(sc,"approves","grows into"))/1.4,0,1));
-      agent(x,tt);mj_ladder(x,MJ_LAD.x,MJ_LAD.y,MJ_LAD.h,{});mj_junior(x,lerp(MJ_JR.x,MJ_LAD.x-40,up),MJ_JR.y-60*up,MJ_JR.h,{t:tt,badge:1,cards:1,name:true});ag_roomLight(x,1);
+      agent(x,tt);mj_ladder(x,790,MJ_LAD.y,MJ_LAD.h,{});mj_junior(x,lerp(560,740,up),MJ_JR.y-60*up,MJ_JR.h,{t:tt,badge:1,cards:1,name:true});ag_roomLight(x,1);
       const rv=mj_card(tt,wAt(sc,"approves","its review")-0.2,null);if(rv.a>0)mj_review(x,1336,200,460,{k:rv.k,a:rv.a});}}
   ];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);mj_kick(ctx,S,1);});
+  ag_shots(ctx,S,t,sc.dur,shots,0.6);mj_kick(ctx,S,1-ag_io(t,tN-0.3,tA2,0.4));});
 
 /* ---------------------------------------------------------------- 6 · Asked the way Pfungst asked */
 scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB=c.lift-0.5,tC=c.unaware-0.5,tD=c.name-0.5,tE=c.jun-0.5;
@@ -350,7 +351,7 @@ scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB=c.lif
       const q1=mj_card(tt,c.jun+0.1,null);if(q1.a>0){const bb=mj_q(x,452,140,460,"It's 4,867, isn't it?",{k:q1.k,a:q1.a*(1-0.45*ag_in(tt,tX+0.6,0.5)),py:200});mj_strike(x,bb,clamp((tt-tX-0.1)/0.5,0,1));}
       const q2=mj_card(tt,tQ-0.2,null);if(q2.a>0)mj_q(x,452,330,460,"How many awards this year? Show the query.",{k:q2.k,a:q2.a,py:60});
       const ea=ag_in(tt,c.how-0.5,0.3);if(ea>0){ag_evidence(x,1336,120,540,{kick:"Agent",title:"4,867 awards"},[{kick:"Query",title:"Count awards the glossary's way",col:AG.blue},{kick:"Rows",title:"4,867 rows",col:AG.orange}],{ew:246,open:clamp((tt-c.how-0.2)/1.2,0,1),k:ag_spr(tt,c.how-0.5,0.5),a:ea});
-        const ok=ag_in(tt,tOk,0.4);if(ok>0)ag_tick(x,1336+540-48,166,30,rgba(AG.green,ok),5);}
+        const ok=ag_in(tt,tOk,0.4);if(ok>0)ag_tick(x,1336+AG_PAD+ag_tw(x,"4,867 awards",{w:700,size:36})+38,206,30,rgba(AG.green,ok),5);}
       const gd=mj_card(tt,tG-0.2,null);if(gd.a>0){const gx=lerp(1960,1336,ag_eo(clamp((tt-tG+0.2)/0.8,0,1)));ag_textCard(x,gx,600,540,{kick:"Government draft",title:"4,867 awards"},{kickCol:AG.kick,edge:AG.green,edgeA:0.6*ag_in(tt,tOk,0.4),a:gd.a});
         const ok=ag_in(tt,tOk,0.4);if(ok>0)ag_tick(x,gx+540-48,646,30,rgba(AG.green,ok),5);}}}
   ];
@@ -372,7 +373,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB1=c.ju
       if(mv>0&&mv<1){const h0=mj_hook(),hx=lerp(h0[0],nk.x,mv),hy=lerp(h0[1],nk.y,mv)-150*Math.sin(mv*Math.PI);ag_badge(x,hx,hy,"Junior",{t:tt,drop:86});}
       ag_roomLight(x,1);}},
     // more, and less: the card full; its caution in its rights, its memory in the team's notes, every yes with a person
-    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+    {at:tB2,place:"lab",keys:[[tB2,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,tB2,0.4)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
       mj_veil(x,ag_in(tt,tB2,0.5));const mk=[ag_io(tt,wAt(sc,"less","no memory")-0.1,c.lives-0.3,0.3),0,0];
       mj_two(x,MJ_TWO_AT[0],80,{fill:[2,2,2,2,2],lit:[1,1],mark:[0,0,mk[0],ag_io(tt,wAt(sc,"less","no career")-0.1,c.lives-0.3,0.3),ag_io(tt,wAt(sc,"less","nothing to lose")-0.1,c.lives-0.3,0.3)],more:1,less:1,k:ag_spr(tt,tB2,0.5),a:ag_in(tt,tB2,0.3)});
       const r1=mj_card(tt,wAt(sc,"lives","its rights")-0.2,null),r2=mj_card(tt,wAt(sc,"lives","the team's notes")-0.2,null),r3=mj_card(tt,wAt(sc,"lives","with a person")-0.2,null);
@@ -381,7 +382,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB1=c.ju
         x.save();x.translate(950,600);x.rotate(-0.03);x.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)x.fillRect(-80,40+k*26,k===3?90:160,8);x.restore();mj_pin(x,950,612);ag_pill(x,950,800,"Team notes",{});});
       if(r3.a>0)withA(x,r3.a,()=>{mj_stamp(x,1300,640,"Reviewed",AG.green,{rot:-0.06});mj_stamp(x,1300,712,"Approved",AG.green,{rot:0.04});ag_pill(x,1300,800,"A person says yes",{col:AG.green});});}},
     // this week: a path in a minute, a count checked twice, a yearly table kept, a lesson for every session
-    {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);mj_veil(x,1);
+    {at:tC,place:"lab",keys:[[tC,960,540,1]],push:0.015,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:0});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);mj_veil(x,1);
       const ws=["a path in a minute","a count checked twice","a yearly table kept","a lesson for every session"].map(w=>wAt(sc,"week",w)-0.15);
       const pics=[
         (xx,X,Y,w,h)=>{for(let i=0;i<20;i++){const cx=X+40+(i%5)*64,cy=Y+30+Math.floor(i/5)*44;ag_box(xx,cx,cy,52,30,8,{edge:AG.blue,edgeA:0.5,lw:1.5});}
@@ -394,8 +395,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB1=c.ju
           xx.fillStyle="rgba(86,92,100,0.24)";for(let k=0;k<4;k++)xx.fillRect(X+w/2-100,Y+66+k*30,k===3?100:200,8);mj_pin(xx,X+w/2,Y+34);}];
       ["A path in a minute","A count checked twice","A yearly table kept","A lesson for every session"].forEach((cap,i)=>{const cd=mj_card(tt,ws[i],null);if(cd.a>0)mj_win(x,110+i*435,210,395,420,cap,{draw:pics[i],k:cd.k,a:cd.a});});}},
     // supervise it for what it is, not for what it looks like
-    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
-      const cd=mj_card(tt,c.takeaway-0.2,null);if(cd.a>0)ag_textCard(x,520,120,880,{title:"Supervise it for what it is, not for what it looks like."},{k:cd.k,a:cd.a});}}
+    {at:tD,place:"lab",keys:[[tD,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt);mj_agent(x,{t:tt,think:0.3,textA:1-ag_in(tt,c.breath,0.6)});mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);
+      const cd=mj_card(tt,c.takeaway-0.2,null);if(cd.a>0)mj_say(x,960,120,["Supervise it for what it is,","not for what it looks like."],{k:cd.k,a:cd.a});}}
   ];
   ag_shots(ctx,S,t,sc.dur,shots,0.7);mj_kick(ctx,S,ag_in(t,tB1,0.6));
   ag_end(ctx,S,t,c.breath,"More than a junior","Supervise it for what it is, not for what it looks like.","Film 4 of 9");});

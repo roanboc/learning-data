@@ -31,6 +31,6 @@ Like the other series, each film is generated from code, with the engine, compon
 | `shared/src/room.js` | The lab: the marble wall, the oak floor, the window's light, by day and by night (with a floor lamp); a desk, a screen and a framed picture on the wall |
 | `shared/src/people.js` | The cast of eight, with an adult's proportions: their poses (pointing, explaining, holding, at a desk, thinking), breathing, blinking and talking; and people of other times, in their own clothes |
 | `shared/src/agent.js` | The model, its ring and the steps of its loop, its hands, the tools they reach, the data that comes back, and a check's verdict |
-| `shared/src/cards.js` | Cards with and without a tail, pills, labels, icons, the kicker, the series' mark, and the title and end cards |
+| `shared/src/cards.js` | Cards with and without a tail, an answer with its evidence attached, pills, labels, icons, the kicker, the series' mark, and the title and end cards |
 | `shared/src/finish.js`, `page.html` | What a film needs before it starts (the fonts, each place painted once), the video's finishing pass (motion blur, no grain), and the standalone player page |
 | `shared/tools/` | Where everything lives (`lang.py`), what a film is made of (`build.py`), its checks (`check.py`, and `quiet.py` for the sound), `run.py`, which runs these and *From words to data*'s other tools on a film, and `sketch.py`, to try a frame before a film exists |

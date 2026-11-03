@@ -6,6 +6,7 @@
      ma_programs(ctx, t, o)           trading programs on the desks: a big seller, and fast programs passing contracts back and forth
      ma_cellLive(ctx, t, o)           the cell at work: parts made inside, worn parts of its skin replaced, food coming in
      ma_tortoise(ctx, x, y, ang, o)   the tortoise, a clear shell over its works, a light sensor on top; ma_tortoisePath its trip home
+     ma_battery(ctx, x, y, level, o)  a small gauge, centred at (x, y): a battery filled to level (0..1) and the word "battery"
      ma_xeno(ctx, x, y, r, ang, o)    a tiny body of frog cells (o.c: C-shaped); ma_scopeLive the view at work */
 
 /* ---------------------------------------------------------------- a trading room, 6 May 2010: the wall's big screen shows the day */
@@ -114,6 +115,11 @@ function ma_tortoise(ctx,x,y,ang,o){o=o||{};const t=o.t||0,s=o.s||1.35;ctx.save(
 // its trip, at time k (0..1): wandering on the floor, then, battery low, it turns to the hutch's light and goes in; returns [x, y, ang]
 const MA_TRIP=[[260,820],[520,700],[700,820],[920,640],[860,460],[1060,380],[1280,470],[1420,560]];
 function ma_tortoisePath(k){const S=ma_smooth(MA_TRIP,16),p=ma_along(S,clamp(k,0,1));return [p[0],p[1],p[2]];}
+// the tortoise's battery: a pale card with a battery filled to level, in o.col (a neutral grey by default), and the word; o.a
+function ma_battery(ctx,x,y,level,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const f={w:600,size:28},tw=ag_tw(ctx,"battery",f),w=24+64+16+tw+28,h=56,x0=x-w/2,y0=y-h/2,col=o.col||[92,94,100];
+  ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x0,y0,w,h,h/2,{});const bx=x0+24,by=y-15;ctx.strokeStyle=rgba(AG.ink,0.8);ctx.lineWidth=3;rr(ctx,bx,by,58,30,6);ctx.stroke();
+  ctx.fillStyle=rgba(AG.ink,0.8);rr(ctx,bx+59,by+9,6,12,2);ctx.fill();const lv=clamp(level,0,1);if(lv>0.01){ctx.fillStyle=rgba(col,1);rr(ctx,bx+5,by+5,48*lv,20,3);ctx.fill();}
+  ag_T(ctx,"battery",bx+64+16,y+10,f);ctx.restore();}
 
 /* ---------------------------------------------------------------- a microscope's view: a bright round field in the dark eyepiece */
 const MA_SC={cx:960,cy:540,r:470};
@@ -133,11 +139,14 @@ function ma_xeno(ctx,x,y,r,ang,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rota
   ctx.restore();}
 // a loose cell: a small pale sphere
 function ma_looseCell(ctx,x,y,r){ctx.fillStyle=rgba([222,194,176],1);ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,248,240,0.5)";ctx.beginPath();ctx.arc(x+r*0.3,y-r*0.3,r*0.4,0,TAU);ctx.fill();}
-/* the view at work, live. mode 0: bodies swimming, one cut that heals (heal 0..1); mode 1: C-shaped bodies sweeping loose cells into
-   piles, one pile rounding into a new body (grow 0..1) */
+/* the bodies swimming, each round its own small loop in its own part of the view: [centre x, centre y, size, loop radius, speed, phase];
+   ma_swimAt(i, t) is where body i is and which way it heads */
+const MA_SWIM=[[800,470,120,60,0.32,0],[1150,330,92,46,-0.4,1.4],[1130,740,82,52,0.36,3.1]];
+function ma_swimAt(i,t){const [cx,cy,r,R,sp,ph]=MA_SWIM[i],a=ph+t*sp;return [cx+Math.cos(a)*R,cy+Math.sin(a)*R*0.7,a+(sp>0?Math.PI/2:-Math.PI/2)];}
+/* the view at work, live. mode 0: bodies swimming, one cut (o.cut 0..1, the notch; it heals as cut falls back to 0); mode 1:
+   C-shaped bodies sweeping loose cells into piles, one pile rounding into a new body (grow 0..1) */
 function ma_scopeLive(ctx,t,o){o=o||{};const S=MA_SC;ctx.save();ctx.beginPath();ctx.arc(S.cx,S.cy,S.r-4,0,TAU);ctx.clip();
-  if(!o.mode){const B=[[0,0.06,150],[2.1,0.05,110],[4.2,0.07,96]];B.forEach(([a0,sp,r],i)=>{const a=a0+t*sp,x=S.cx+Math.cos(a)*(170+i*40),y=S.cy+Math.sin(a*1.3)*(130+i*30),dir=a+Math.PI/2;
-      ma_xeno(ctx,x,y,r,dir,{t,cut:i===0?1-(o.heal||0):0});});}
+  if(!o.mode){MA_SWIM.forEach((b,i)=>{const p=ma_swimAt(i,t);ma_xeno(ctx,p[0],p[1],b[2],p[2],{t,cut:i===0?(o.cut||0):0});});}
   else{const R=ag_rnd(4);for(let i=0;i<90;i++){const x=S.cx+(R()-0.5)*820,y=S.cy+(R()-0.5)*820,swept=R()<0.5&&o.grow>0;if(Math.hypot(x-S.cx,y-S.cy)>S.r-20)continue;
       const tx=S.cx+150+(R()-0.5)*60,ty=S.cy+60+(R()-0.5)*60,k=swept?sstep(0,0.7,o.grow):0;ma_looseCell(ctx,lerp(x,tx,k),lerp(y,ty,k),8);}
     ma_xeno(ctx,S.cx-120+Math.cos(t*0.3)*60,S.cy-80+Math.sin(t*0.4)*40,110,0.4+t*0.08,{t,c:true});ma_xeno(ctx,S.cx+260-Math.sin(t*0.25)*50,S.cy-200,90,2.6-t*0.06,{t,c:true});

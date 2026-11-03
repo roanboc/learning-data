@@ -359,7 +359,7 @@ function mb_room(c,S,tt,T){const H=MB.help;
   // the dots: each drop's students leave their draft and become the 31
   const c31a=ag_in(tt,T.tSame31-0.4,0.4);mb_c31(c,MB.c31[0],MB.c31[1],{a:c31a,k:Math.min(1,ag_spr(tt,T.tSame31-0.4,0.5)),deg:ag_in(tt,T.tMoved,0.5),fac:ag_in(tt,T.tNoFac,0.5),fix:ag_in(tt,T.tGot-0.1,0.8)});
   for(const i of [1,2,3])for(let j=0;j<MB_GONE[i];j++){const d0=T.tSame31+mb_dotDelay(i,j),u=ag_sine((tt-d0)/0.8);if(u<=0)continue;const A=mb_dotAt(i,j),B=mb_dot31(mb_dotK(i,j)),x=lerp(A[0],B[0],u),y=lerp(A[1],B[1],u)-Math.sin(Math.PI*u)*60;
-    c.fillStyle=rgba(AG.amber,0.9*c31a);c.beginPath();c.arc(x,y,6,0,TAU);c.fill();}
+    c.fillStyle=rgba(mix(AG.amber,AG.green,ag_in(tt,T.tGot-0.1,0.8)),0.9*c31a);c.beginPath();c.arc(x,y,6,0,TAU);c.fill();}
   // the word flying from one draft to the others
   for(const i of [1,2,0]){const R=rows[i],t0=R.tWord-0.75,u=ag_sine((tt-t0)/0.75);if(u<=0||u>=1)continue;const A=[MB.slot[3][0]+24,MB.slot[3][1]+174],B=[MB.slot[i][0]+24,MB.slot[i][1]+174],x=lerp(A[0],B[0],u),y=lerp(A[1],B[1],u)-Math.sin(Math.PI*u)*80;
     c.save();c.globalAlpha*=sstep(0,0.15,u);ag_box(c,x-12,y-34,ag_tw(c,"31 dropouts",{w:700,size:28})+24,48,12,{edge:AG.amber,edgeA:0.8});ag_T(c,"31 dropouts",x,y,{w:700,size:28,col:AG.amber});c.restore();}
@@ -401,7 +401,97 @@ function mb_jun(c,S,tt,T){const a=ag_in(tt,T.tTest-0.2,0.4),pass=ag_in(tt,T.tTes
   if(a>0){c.save();c.globalAlpha*=a;ma_gear(c,cx+460-40,cy+40,16,tt*0.8,AG.blue);c.restore();}
   ma_pillAt(c,MB_JUN.pill[0],MB_JUN.pill[1],"the same way every time",tt,T.tWithout-0.3,null,{col:AG.blue});}
 
-/* ---------------------------------------------------------------- the other chapters (drafts, being drawn) */
-for(const id of ["alive","close"])scene(id,(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);
+// the board as Clara left it: every draft fixed, the 31 in Health, their status flagged, the reasons approved
+function mb_final(c,a){if(a<=0)return;c.save();c.globalAlpha*=a;mb_board(c,1);
+  const L={a:1,text:"31 dropouts",fix:"moved to a joint degree",fixA:1,strike:1,dots:0,dotsA:0,warn:0};
+  MA_FAC.forEach((f,i)=>mb_draft(c,MB.slot[i][0],MB.slot[i][1],i,{tick:1,line:L}));
+  mb_c31(c,MB.c31[0],MB.c31[1],{deg:1,fac:1,fix:1});c.fillStyle=rgba(AG.green,0.9);for(let k=0;k<31;k++){const [x,y]=mb_dot31(k);c.beginPath();c.arc(x,y,6,0,TAU);c.fill();}
+  mb_flag(c,MB.flag[0],MB.flag[1],{hi:1});ma_stamp(c,1060,318,"approved",1,{col:AG.green,rot:-0.04,size:32});c.restore();}
+
+/* ---------------------------------------------------------------- 6 · Is it alive? */
+// the crowd of "Many agents", every agent there, breathing: a slow wave runs through them, each band brightening and dimming, each body
+// swelling a little and glowing as it passes; off(p) (0..1) stills an agent, its band dark
+function ms_crowd(c,tt,off){MA_MOB.forEach(p=>{const o=off?clamp(off(p),0,1):0,b=0.5+0.5*Math.sin(TAU*tt/3.6-p.x/420-p.y/260),w=Math.pow(b,3)*(1-o),r=p.r*(1+0.035*b*(1-o)),y=p.y+p.r-r;
+  if(w>0.03){const g=c.createRadialGradient(p.x,y,r*0.6,p.x,y,r*2.4);g.addColorStop(0,rgba(AG.violet,0.14*w));g.addColorStop(1,rgba(AG.violet,0));c.fillStyle=g;c.fillRect(p.x-r*2.4,y-r*2.4,r*4.8,r*4.8);}
+  ma_agent(c,p.x,y,r,tt,{ph:p.ph,core:(0.2+0.7*b)*(1-o),think:0.1*(1-o)});ms_dark(c,p.x,y,r,o);});}
+// an agent's band gone dark: its light covered by the band's own matte black
+function ms_dark(c,x,y,r,o){if(o<=0)return;const bw=r*1.3,bh=r*0.32,by=y-r*0.11,ih=bh-r*0.11;c.fillStyle=rgba(ms_hex(AG.visor),o);rr(c,x-bw/2+r*0.045,by-ih/2,bw-r*0.09,ih,ih/2);c.fill();}
+const ms_hex=h=>typeof h==="string"&&h[0]==="#"?[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]:h;
+// the cell's part being replaced while the camera watches: ma_cellLive's own cycle (3.2 s), timed so a worn part at the top right starts
+// to fade at t0 and the new part, made inside, reaches its place 3.2 s later
+function ms_cellPart(tt,t0){const C=MA_CELL,tc=tt-t0+32,cyc=Math.floor(tc/3.2),ph=(tc-cyc*3.2)/3.2,slot=(cyc*29)%C.n,an=slot/C.n*TAU,sx=C.cx+Math.cos(an)*C.r,sy=C.cy+Math.sin(an)*C.r,u=sstep(0.4,1,ph);
+  return{tc,cyc,ph,sx,sy,nx:lerp(C.cx-30,sx,u),ny:lerp(C.cy+20,sy,u)};}
+// soft arrows turning round the cell's middle, where parts are made: the making never stops
+function ms_making(c,tt,a){if(a<=0)return;const C=MA_CELL,cx=C.cx-30,cy=C.cy+20,R=176;c.save();c.globalAlpha*=a;c.strokeStyle="rgba(150,116,86,0.55)";c.fillStyle="rgba(150,116,86,0.55)";c.lineWidth=7;c.lineCap="round";
+  for(let k=0;k<3;k++){const a0=tt*0.35+k*TAU/3,a1=a0+1.25;c.beginPath();c.arc(cx,cy,R,a0,a1);c.stroke();const hx=cx+Math.cos(a1)*R,hy=cy+Math.sin(a1)*R,d=a1+Math.PI/2;
+    c.beginPath();c.moveTo(hx+Math.cos(d)*20,hy+Math.sin(d)*20);c.lineTo(hx+Math.cos(d+2.4)*16,hy+Math.sin(d+2.4)*16);c.lineTo(hx+Math.cos(d-2.4)*16,hy+Math.sin(d-2.4)*16);c.closePath();c.fill();}c.restore();}
+// a ring round a small thing being watched, in the cell's own brown
+function ms_ring(c,x,y,r,a){if(a<=0)return;c.save();c.strokeStyle="rgba(120,88,60,"+(0.75*a)+")";c.lineWidth=4;c.beginPath();c.arc(x,y,r,0,TAU);c.stroke();c.restore();}
+// the tortoise's trip, timed: it wanders from t0, slowing as its battery falls, until tLow; then it turns to the hutch's light and runs home
+// by tHome. Returns [x, y, heading]
+function ms_trip(tt,t0,tLow,tHome){const k=tt<tLow?0.747*ag_eo((tt-t0)/(tLow-t0)):lerp(0.747,1,ag_sine((tt-tLow-0.25)/(tHome-tLow-0.25)));return ma_tortoisePath(k);}
+// the computer's design, as a small card: a rounded body of cells, skin cells pale and heart cells rose, laid out on a grid
+const MS_DESIGN=["...XXXX...",".XXXXXXXX.","XXXXXXXXXX","XXXXXXHHHX",".XXXXHHHH.","...XXHH..."];
+function ms_design(c,x,y,a,k){if(a<=0)return;const w=420,h=330;ma_sprung(c,x+w/2,y+h/2,k==null?1:k,a,()=>{ag_box(c,x,y,w,h,22,{});
+  ag_T(c,"to a computer's",x+32,y+62,{w:700,size:36});ag_T(c,"design",x+32,y+106,{w:700,size:36});
+  const cs=30,gx=x+(w-10*cs)/2,gy=y+142;MS_DESIGN.forEach((row,j)=>[...row].forEach((ch,i)=>{if(ch===".")return;c.fillStyle=ch==="H"?"rgb(200,128,116)":"rgb(228,204,186)";
+    c.fillRect(gx+i*cs+1.5,gy+j*cs+1.5,cs-3,cs-3);}));});}
+// a scale for the microscope's view: "under a millimetre", over a bar a millimetre long at the view's scale
+function ms_scale(c,x,y,a,k){if(a<=0)return;const w=420,h=196,L=340;ma_sprung(c,x+w/2,y+h/2,k==null?1:k,a,()=>{ag_box(c,x,y,w,h,22,{});
+  ag_T(c,"under a millimetre",x+32,y+62,{w:700,size:36});c.strokeStyle=rgba(AG.ink,0.85);c.lineWidth=4;c.beginPath();c.moveTo(x+40,y+112);c.lineTo(x+40+L,y+112);
+  c.moveTo(x+40,y+98);c.lineTo(x+40,y+126);c.moveTo(x+40+L,y+98);c.lineTo(x+40+L,y+126);c.stroke();ag_T(c,"1 mm",x+40+L/2,y+164,{w:600,size:28,align:"center",col:AG.mut});});}
+
+// the plain switch on the wall, where the hand turns the crowd off
+const MS_SW=[420,470];
+scene("alive",(ctx,S,t,sc)=>{
+  const T={tAre:wAt(sc,"seem","Are they"),tChile:wAt(sc,"chile","In Chile"),tSaid:wAt(sc,"chile","said a living"),tKeeps:wAt(sc,"chile","a cell keeps"),
+    tAround:wAt(sc,"tortoise","Around"),tKept:wAt(sc,"tortoise","kept itself going"),tLow:wAt(sc,"tortoise","ran low"),tHomeW:wAt(sc,"tortoise","went home"),tRe:wAt(sc,"tortoise","recharge"),
+    tFrog:wAt(sc,"frog","In twenty"),tComp:wAt(sc,"frog","a computer"),tTiny:wAt(sc,"frog","tiny bodies"),tSwim:wAt(sc,"frog","swim"),tHeal:wAt(sc,"frog","heal"),
+    tYear:wAt(sc,"later","A year later"),tGath:wAt(sc,"later","gathered"),tNew:wAt(sc,"later","new ones"),
+    tToday:wAt(sc,"none","Today"),tSelf:wAt(sc,"none","make themselves"),tRun:wAt(sc,"none","run only"),tWe:wAt(sc,"none","we run them")};
+  const sCell=T.tChile-0.85,sTort=T.tAround-0.8,sScope=T.tFrog-0.75,sRoom=T.tToday-0.8;
+  ag_shots(ctx,S,t,sc.dur,[
+    // the room, and a crowd of agents breathing as one
+    {at:0,place:"lab",keys:[[0,960,694,1.4]],push:0.04,draw:(c,tt)=>{ma_switch(c,MS_SW[0],MS_SW[1],1,1);ms_crowd(c,tt);}},
+    // a cell, as a biology book draws it: it keeps making the parts that make it; the camera closes on one part being replaced
+    {at:sCell,place:"maCell",keys:[[0,960,540,1],[T.tKeeps-0.4,1040,415,1.3]],d:1.6,push:0,draw:(c,tt)=>{
+      const P=ms_cellPart(tt,T.tKeeps);ma_cellLive(c,P.tc,{});ms_making(c,tt,ag_in(tt,T.tKeeps-0.3,0.6));
+      if(P.cyc===10){ms_ring(c,P.sx,P.sy,34,P.ph<0.45?ag_io(P.ph*3.2,0.05,1.3,0.25):0);if(P.ph>=0.4){c.save();const g=c.createRadialGradient(P.nx,P.ny,4,P.nx,P.ny,46);g.addColorStop(0,"rgba(255,246,228,0.9)");g.addColorStop(1,"rgba(255,246,228,0)");
+        c.fillStyle=g;c.fillRect(P.nx-50,P.ny-50,100,100);c.restore();ms_ring(c,P.nx,P.ny,32,sstep(0.4,0.5,P.ph));}}
+      ma_scr(c,S,()=>{ma_tag(c,"Santiago, Chile · 1972",ag_in(tt,T.tChile-0.2,0.5));
+        ma_cardAt(c,1370,300,520,{kick:"Maturana and Varela",title:"a living thing makes itself"},tt,T.tSaid-0.1,null,{kickCol:AG.mut});});}},
+    // near Bristol: the robot tortoise wanders, its battery falls, and it runs home to the hutch's light to recharge
+    {at:sTort,place:"maBristol",keys:[[0,960,540,1]],push:0.03,draw:(c,tt)=>{
+      const [x,y,ang]=ms_trip(tt,sTort,T.tLow,T.tRe-0.1),home=tt>T.tLow,dock=ag_in(tt,T.tRe,0.6),
+        look=home?lerp(Math.sin(tt*2.2)*1.2,Math.atan2(MA_BR.hutch[1]-y,MA_BR.hutch[0]-x),ag_in(tt,T.tLow-0.2,0.5)):Math.sin(tt*2.2)*1.2;
+      ma_tortoise(c,x,y,ang,{t:tt,look,charge:dock});
+      const lv=tt<T.tRe?lerp(1,0.12,clamp((tt-sTort-0.4)/(T.tLow-sTort-0.4),0,1)):0.12+0.88*ag_in(tt,T.tRe+0.2,1.3),amb=1-sstep(0.3,0.45,lv),chg=ag_in(tt,T.tRe+0.2,0.4);
+      ma_battery(c,x,y-214,lv,{col:mix(mix([92,94,100],AG.green,chg),AG.amber,chg>0.5?0:amb),a:ag_in(tt,sTort+0.5,0.5)});
+      ma_scr(c,S,()=>{ma_tag(c,"Near Bristol · about 1950",ag_in(tt,T.tAround-0.2,0.5));
+        ma_cardAt(c,64,140,460,{kick:"Grey Walter",title:"it kept itself going"},tt,T.tKept-0.1,null,{kickCol:AG.mut});});}},
+    // a microscope's view: tiny bodies of frog cells, made to a computer's design, swim, and one heals; a year later, some gather
+    // loose cells into new bodies
+    {at:sScope,place:"maScope",keys:[[0,960,540,1]],push:0.03,draw:(c,tt)=>{
+      const m1=ag_in(tt,T.tYear-0.3,0.8),cut=ag_in(tt,T.tSwim-0.1,0.25)*(1-ag_in(tt,T.tHeal,1.3));
+      if(m1<1){c.save();c.globalAlpha*=1-m1;ma_scopeLive(c,tt,{cut});c.restore();}
+      if(m1>0){c.save();c.globalAlpha*=m1;ma_scopeLive(c,tt,{mode:1,grow:clamp((tt-T.tGath+0.3)/(T.tNew+0.9-T.tGath+0.3),0,1)});c.restore();}
+      // a thin line from the design to the body made to it
+      const da=ag_in(tt,T.tComp,0.5)*(1-m1);if(da>0){const p=ma_swimAt(1,tt);c.save();c.strokeStyle=rgba(AG.ink,0.5*da);c.lineWidth=2.5;c.setLineDash([10,9]);
+        c.beginPath();c.moveTo(1466,470);c.lineTo(p[0]+MA_SWIM[1][2]*0.95,p[1]);c.stroke();c.restore();}
+      ma_scr(c,S,()=>{ma_tag(c,"United States · 2020 and 2021",ag_in(tt,T.tFrog-0.2,0.5));
+        ms_design(c,1466,300,ag_in(tt,T.tComp-0.2,0.4)*(1-m1),Math.min(1,ag_spr(tt,T.tComp-0.2,0.5)));
+        ms_scale(c,40,380,ag_in(tt,T.tTiny-0.1,0.4)*(1-m1),Math.min(1,ag_spr(tt,T.tTiny-0.1,0.5)));});}},
+    // back in the room, the crowd breathing; the camera closes on a plain switch, a hand turns it off, and as the camera opens again the
+    // crowd goes still, the dark spreading from the switch; the hand stays on it
+    {at:sRoom,place:"lab",keys:[[0,960,694,1.4],[T.tSelf,560,470,2.2],[T.tWe+0.4,960,694,1.4]],d:1.4,push:0,draw:(c,tt)=>{
+      const reach=ag_in(tt,T.tRun-0.35,0.9),press=ag_io(tt,T.tWe-0.14,T.tWe+0.1,0.12);
+      ma_switch(c,MS_SW[0],MS_SW[1],1-ag_in(tt,T.tWe,0.12),1);
+      ms_crowd(c,tt,p=>ag_in(tt,T.tWe+0.5+Math.max(0,p.x-MS_SW[0])/1500+(p.y-680)/900,0.3));
+      ag_person(c,"jun",-170,432,1.5,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[88+2*press,96,"point"]},mix:reach});
+      ma_scr(c,S,()=>ma_pillAt(c,1100,300,"they run because we run them",tt,T.tWe+0.2,null));}}],0.8);
+});
+
+/* ---------------------------------------------------------------- the last chapter (a draft, being drawn) */
+scene("close",(ctx,S,t,sc)=>{setScreen(ctx,S);ctx.drawImage(ag_place("lab"),0,0);ag_roomLight(ctx,1);
   ag_T(ctx,sc.name,960,540,{w:800,size:60,align:"center"});
-  if(id==="close")ag_end(ctx,S,t,sc.cues.breath,"Many agents, and what emerges","Next: Agents at work on data","Film 9 of 9");});
+  ag_end(ctx,S,t,sc.cues.breath,"Many agents, and what emerges","Next: Agents at work on data","Film 9 of 9");});

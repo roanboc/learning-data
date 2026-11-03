@@ -30,10 +30,10 @@ function fu_when(ctx,when,where,a){if(a<=0.01)return;const x=72,y=52,h=62,w1=ag_
   ag_box(ctx,x,y,w,h,h/2,{a});withA(ctx,a,()=>{ag_T(ctx,when,x+28,y+42,{w:800,size:30,col:AG.violet});
     if(cap){ctx.fillStyle=rgba(AG.mut,0.55);ctx.beginPath();ctx.arc(x+28+w1+22,y+h/2,3.2,0,TAU);ctx.fill();ag_T(ctx,cap,x+28+w1+44,y+41,{w:700,size:28,ls:3.5,col:AG.kick});}});}
 // a desk's sign on the wall above it: the place, and who works there
-function fu_sign(ctx,x,y,place,who,a,k){if(a<=0.01)return;const w1=ag_tw(ctx,place,{w:700,size:30}),w2=ag_tw(ctx,who,{w:500,size:30}),w=w1+w2+92,h=60;
-  ctx.save();if(k!=null)ag_about(ctx,x,y,lerp(0.6,1,k));ag_box(ctx,x-w/2,y-h/2,w,h,h/2,{a});
-  withA(ctx,a,()=>{ag_T(ctx,place,x-w/2+30,y+11,{w:700,size:30});ctx.fillStyle=rgba(AG.mut,0.55);ctx.beginPath();ctx.arc(x-w/2+30+w1+16,y,3.2,0,TAU);ctx.fill();
-    ag_T(ctx,who,x-w/2+30+w1+32,y+11,{w:500,size:30,col:AG.mut});});ctx.restore();}
+// two lines, as a name card: the place, and who works there; narrow, so it keeps clear of the drawing's names on the wall
+function fu_sign(ctx,x,y,place,who,a,k){if(a<=0.01)return;const w=Math.max(ag_tw(ctx,place,{w:700,size:30}),ag_tw(ctx,who,{w:500,size:28}))+56,h=96;
+  ctx.save();if(k!=null)ag_about(ctx,x,y,lerp(0.6,1,k));ag_box(ctx,x-w/2,y-h/2,w,h,16,{a});
+  withA(ctx,a,()=>{ag_T(ctx,place,x-w/2+28,y-h/2+42,{w:700,size:30});ag_T(ctx,who,x-w/2+28,y-h/2+78,{w:500,size:28,col:AG.mut});});ctx.restore();}
 // a name card under a person: the name, and a line under it
 function fu_nameCard(ctx,x,y,name,line,a){if(a<=0.01)return;const w=Math.max(ag_tw(ctx,name,{w:700,size:32}),ag_tw(ctx,line,{w:500,size:28}))+56;
   ag_box(ctx,x,y,w,96,16,{a});withA(ctx,a,()=>{ag_T(ctx,name,x+28,y+42,{w:700,size:32});ag_T(ctx,line,x+28,y+78,{w:500,size:28,col:AG.mut});});}
@@ -130,8 +130,8 @@ function fu_bubble(ctx,cx,cy,text,o){o=o||{};const a=o.a==null?1:o.a,size=o.size
 /* ---------------------------------------------------------------- an envelope, its question mark amber: a doubt sent by email, never answered */
 function fu_envelope(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.scale(s,s);
   ag_box(ctx,-60,-38,120,76,6,{});ctx.strokeStyle="rgba(86,92,100,0.45)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-58,-34);ctx.lineTo(0,6);ctx.lineTo(58,-34);ctx.stroke();
-  ctx.fillStyle=rgba(AG.amber,1);ctx.beginPath();ctx.arc(40,22,15,0,TAU);ctx.fill();ag_T(ctx,"?",40,32,{w:800,size:28,align:"center",col:[255,255,255]});
-  if(o.label)ag_T(ctx,o.label,0,-52,{w:700,size:28,align:"center",col:AG.mut});ctx.restore();}
+  ctx.fillStyle=rgba(AG.amber,1);ctx.beginPath();ctx.arc(40,22,15,0,TAU);ctx.fill();ag_T(ctx,"?",40,32,{w:800,size:28,align:"center",col:[255,255,255],deco:1});
+  if(o.label)ag_T(ctx,o.label,0,-52,{w:700,size:28,align:"center",col:AG.mut,deco:o.deco?1:0});ctx.restore();}
 
 /* ---------------------------------------------------------------- the drawing in graphite on the wall: Earth, Mars, and the paths between,
    as navigators draw them; o.p draws each part on (0 to 1) */
@@ -147,7 +147,7 @@ function fu_orbit(ctx,o,which,a,col,dash){if(a<=0.01)return;ctx.save();ctx.globa
   ctx.beginPath();const k0=which==="back"?0:Math.PI,k1=k0+Math.PI;for(let i=0;i<=48;i++){const q=fu_orbitAt(o,lerp(k0,k1,i/48));i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}ctx.stroke();ctx.restore();}
 // where each desk, person, monitor and sign stands in 1999: the builders' desk on the left, the navigators' on the right
 const FU99={deskL:[10,842,580],deskR:[1330,842,580],crtL:[488,800,184],crtR:[1432,800,184],
-  bA:[330,566,0.64],bB:[148,548,0.6],nA:[1590,566,0.64],nB:[1772,548,0.6],pillL:[300,262],pillR:[1620,262],bubL:[300,330],bubR:[1620,330]};
+  bA:[330,566,0.64],bB:[148,548,0.6],nA:[1590,566,0.64],nB:[1772,548,0.6],pillL:[360,262],pillR:[1530,262],bubL:[360,356],bubR:[1530,356]};
 // a blue card: one of Odyssey's changes, and later Jun's team's; o.k springs it in, o.size
 function fu_blueCard(ctx,cx,cy,text,o){o=o||{};const a=o.a==null?1:o.a,size=o.size||30,w=ag_tw(ctx,text,{w:700,size})+64,h=size+34;if(a<=0)return{x:cx-w/2,y:cy-h/2,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,cx,cy,lerp(0.5,1,o.k));ag_box(ctx,cx-w/2,cy-h/2,w,h,14,{edge:o.col||AG.blue,edgeA:0.85});

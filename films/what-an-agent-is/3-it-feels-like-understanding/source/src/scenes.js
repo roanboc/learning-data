@@ -87,7 +87,7 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     pushes=fires.map(f=>[ag_keys(f,[[P.launched,0.04],[P.thr+6,0.3],[P.mon-0.4,0.34],[P.mon+3.6,0.97]]),ag_io(t,f,f+1.1,0.2)]);
   const craft={u:cu,on:fu_fin(t,P.launched-0.2,0.4),puff:clamp((t-P.firing)/1.0,0,1)<1&&t>P.firing?(t-P.firing)/1.0:(t>P.pushed&&t<P.pushed+1?(t-P.pushed):0),
     burn:ag_io(t,P.fired,P.behind+0.6,0.3)*(0.75+0.25*Math.sin(t*23)),orbitTh:th,orb:S9.low,s:0.62};
-  const space={earth:clamp((t-P.dec+0.6)/1.3,0,1),mars:clamp((t-P.dec-0.2)/1.3,0,1),path:clamp((t-P.launched+0.3)/1.6,0,1),labels:fu_fin(t,P.dec+0.4,0.6),swirl:ag_io(t,P.weather,P.thr+2,0.6)};
+  const space={earth:clamp((t-P.dec+0.6)/1.3,0,1),mars:clamp((t-P.dec-0.2)/1.3,0,1),path:clamp((t-P.launched+0.3)/1.6,0,1),labels:fu_fin(t,P.dec+0.4,0.6)*(1-ag_io(t,P.apr-0.5,P.rou-0.3,0.4)),swirl:ag_io(t,P.weather,P.thr+2,0.6)};
   // the navigators' monitor: the plotted way; each push drawn small, and its real size, pale, behind it
   const crt={L:{p:clamp((t-P.worked)/1.4,0,1)},R:{p:fu_fin(t,P.steer-0.2,1.2),arrows:[[0.2,fu_fin(t,P.counted,0.4)],[0.5,fu_fin(t,P.counted+0.4,0.4)],[0.8,fu_fin(t,P.counted+0.8,0.4)]],ghost:fu_fin(t,P.less,0.5)}};
   const room=(x,tt,o)=>fu_room99(x,tt,Object.assign({space,craft,pushes,crt,real:fu_fin(tt,P.nine,1.2)*1,realP:clamp((tt-P.nine)/2.6,0,1)},o||{}));
@@ -102,7 +102,7 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     if(back>0)fu_fileCard(x,810,350,{rows:1,a:back,ask:fu_fin(tt,P.same,0.6),k:ag_spr(tt,P.sure-0.2,0.7)});
     if(ody>0&&tt<P.orb)fu_fileCard(x,810,262,{rows:1,a:ody*(1-fu_fin(tt,P.orb-0.6,0.4)),unit:clamp((tt-P.hand+0.2)/0.8,0,1),k:ag_spr(tt,P.units-0.3,0.7)});
     // the desks' signs: who sits where
-    const sg=1-fu_fin(tt,P.burn-0.6,0.6);fu_sign(x,F.pillL[0],F.pillL[1],"Colorado","the builders",fu_fin(tt,P.colo-0.2,0.5)*sg,ag_spr(tt,P.colo-0.2,0.7));
+    const sg=(1-fu_fin(tt,P.burn-0.6,0.6))*(1-ag_io(tt,P.mon-0.6,P.rou+1.2,0.4));fu_sign(x,F.pillL[0],F.pillL[1],"Colorado","the builders",fu_fin(tt,P.colo-0.2,0.5)*sg,ag_spr(tt,P.colo-0.2,0.7));
     fu_sign(x,F.pillR[0],F.pillR[1],"California","NASA's navigators",fu_fin(tt,P.cal-0.2,0.5)*sg,ag_spr(tt,P.cal-0.2,0.7));
     // the two units' agreement, and each team's own meaning
     const ag=fu_fin(tt,P.agreed-0.1,0.5)*(1-fu_fin(tt,P.four-0.2,0.5));if(ag>0)fu_blueCard(x,960,590,"agreed: newton-seconds",{a:ag,k:ag_spr(tt,P.agreed-0.1,0.7),col:AG.mut});
@@ -164,12 +164,12 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_junDesk(x,tt,{pose:"hang",gaze:[4,0],smile:0.3});
       ag_loop(x,1440,400,{R:150,r:72,label:null,core:0.7,think:0.2+0.3*ag_io(tt,P.eachSure-0.6,P.say,0.5),t:tt,a:fu_fin(tt,P.agents-0.2,0.6),floor:null});
       ag_roomLight(x,1);
-      const say=fu_fin(tt,P.say,0.8),tag=say>0.5?"people":"";
-      fu_numberCard(x,560,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6),k:ag_spr(tt,P.agents,0.7),fill:say});
+      const say=fu_fin(tt,P.say,0.8),tag=say>0.5?"people":"",out=1-fu_fin(tt,P.br-0.3,0.7);
+      fu_numberCard(x,560,330,"2,880",tag,{a:fu_fin(tt,P.agents,0.6)*out,k:ag_spr(tt,P.agents,0.7),fill:say});
       const turn=lerp(0.12,1,ag_sine((tt-P.say)/0.8));
-      fu_bubble(x,330,292,"people",{a:fu_fin(tt,P.person-0.1,0.5),k:ag_spr(tt,P.person-0.1,0.7),px:322,py:378,blank:tt<P.say+0.4,turn,w:230});
-      fu_bubble(x,1440,152,"people",{a:fu_fin(tt,P.eachSure-0.6,0.5),k:ag_spr(tt,P.eachSure-0.6,0.7),px:1440,py:238,blank:tt<P.say+0.4,turn,w:230,edge:AG.violet});
-      const ck=fu_fin(tt,P.check,0.6);if(ck>0){fu_facList(x,lerp(1300,940,ag_sine((tt-P.check)/1.0)),316,{a:ck,w:300,h:200});
+      fu_bubble(x,330,292,"people",{a:fu_fin(tt,P.person-0.1,0.5)*out,k:ag_spr(tt,P.person-0.1,0.7),px:322,py:378,blank:tt<P.say+0.4,turn,w:230});
+      fu_bubble(x,1440,152,"people",{a:fu_fin(tt,P.eachSure-0.6,0.5)*out,k:ag_spr(tt,P.eachSure-0.6,0.7),px:1440,py:238,blank:tt<P.say+0.4,turn,w:230,edge:AG.violet});
+      const ck=fu_fin(tt,P.check,0.6)*out;if(ck>0){fu_facList(x,lerp(1300,940,ag_sine((tt-P.check)/1.0)),316,{a:ck,w:300,h:200});
         if(tt>P.check+1.1)ag_tick(x,1206,474,34*ag_eo(clamp((tt-P.check-1.1)/0.4,0,1)),rgba(AG.green,1),5);}}}
   ];
   ag_shots(ctx,S,t,sc.dur,sh,0.5);
@@ -191,7 +191,7 @@ function fu_agentAt(x,tt,T,o){o=o||{};const back=ag_sine((tt-T.check-0.4)/1.2),h
     touch=[ag_io(tt,T.read+0.4,T.check,0.3),ag_io(tt,T.query+0.5,T.check+0.3,0.3),0],
     think=(o.think==null?0.15:o.think)+0.6*ag_io(tt,T.ask,T.done+0.6,0.6),pulse=tt>T.check-0.1&&tt<T.check+1.5?(tt-T.check+0.1)/1.4*360-90:null,
     lit=tt>T.check&&tt<T.done?2:(tt>T.read-0.3&&tt<T.check?1:(tt>T.ask+0.3&&tt<T.read-0.3?0:null));
-  fu_agent(x,tt,{core:0.7+0.3*think,think,lit,col:lit===2?AG.green:AG.violet,pulse,reach,data,touch,a:o.a,frost:o.frost});}
+  fu_agent(x,tt,{core:0.7+0.3*think,think,lit,col:lit===2?AG.green:AG.violet,pulse,reach,data,touch,a:o.a,frost:o.frost,toolsA:o.toolsA});}
 // a card carried across a cut, in the frame's own coordinates: from a to b (each [x, y, scale]) as u runs 0 to 1, with a soft arc
 function fu_carry(ctx,S,u,a,b,draw){if(u<=0||u>=1)return;setScreen(ctx,S);const k=ag_sine(u),x=lerp(a[0],b[0],k),y=lerp(a[1],b[1],k)-Math.sin(Math.PI*k)*60,s=lerp(a[2],b[2],k);
   ctx.save();ctx.translate(x,y);ctx.scale(s,s);draw(ctx);ctx.restore();}
@@ -207,9 +207,9 @@ scene("fluent",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     conf:wAt(sc,"study","more confident"),acc:wAt(sc,"study","no more accurate"),feels:c.feels,safe:wAt(sc,"feels","feels safe")}));
   const T={ask:P.ag,read:P.read,query:P.query,check:P.checks,done:P.ans};
   // the advisers along the faculty's wall: each with a phone and a list, "240"; a soft ring on one phone
-  const adv=(x,tt)=>{x.save();ag_about(x,200,170,1.15);fu_advisers(x,200,170,4,36,i=>({a:fu_fin(tt,P.each-0.3+i*0.16,0.4),list:{n:6,done:6,p:clamp((tt-P.once+0.2)/1.4-i*0.12,0,1)},ring:i===1?clamp((tt-P.see+0.5)/1.6,0,1):0}));x.restore();};
+  const adv=(x,tt)=>{x.save();ag_about(x,200,170,1.15);fu_advisers(x,200,170,4,36,i=>({a:fu_fin(tt,P.each+0.7+i*0.16,0.4),list:{n:6,done:6,p:clamp((tt-P.once+0.2)/1.4-i*0.12,0,1)},ring:i===1?clamp((tt-P.see+0.5)/1.6,0,1):0}));x.restore();};
   const jun=(x,tt,o)=>fu_junDesk(x,tt,Object.assign({pose:"hang",gaze:tt<P.ag-0.3?[4,-1]:(tt<P.ans?[6,-1]:[4,-3]),smile:0.3+0.4*fu_fin(tt,P.two,0.8),nod:-0.03*fu_fin(tt,P.ag-0.2,0.5)*(1-fu_fin(tt,P.ans,0.6))},o||{}));
-  const SC={x:960,y:520,z:1.08};
+  const SC={x:960,y:520,z:1.04};
   const sh=[
     // the Faculty of Health: Anil at his desk, his screen, "Advisers next term"; out to the wall and its advisers
     {at:0,place:"fuFaculty",d:1.8,keys:[[0,1152,560,1.25],[P.calls-0.6,960,540,1.0]],draw:(x,tt)=>{
@@ -234,8 +234,8 @@ scene("fluent",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_bar(x,250,654,"confidence",0.42,{a:ba,col:AG_OAK.dark});fu_bar(x,250,722,"accuracy",0.5,{a:ba,hi});
       fu_bar(x,1110,654,"confidence",cf,{a:ba,col:AG_OAK.dark});fu_bar(x,1110,722,"accuracy",0.5,{a:ba,hi});}},
     // back at Jun's desk: the answer glows softly, and Jun leans back
-    {at:P.feels-0.5,place:"fuData",keys:[[P.feels-0.5,700,500,1.2],[P.feels-0.4,690,500,1.24]],d:3,draw:(x,tt)=>{
-      fu_agentAt(x,tt,T,{think:0});jun(x,tt,{lean:fu_fin(tt,P.feels,1.4),smile:0.75,gaze:[4,-3]});ag_roomLight(x,1);
+    {at:P.feels-0.5,place:"fuData",keys:[[P.feels-0.5,690,500,1.25],[P.feels-0.4,686,500,1.28]],d:3,draw:(x,tt)=>{
+      fu_agentAt(x,tt,T,{think:0,toolsA:0});jun(x,tt,{lean:fu_fin(tt,P.feels,1.4),smile:0.75,gaze:[4,-3]});ag_roomLight(x,1);
       fu_check(x,1150,640,1);const b=fu_answer(x,520,150,{a:0});fu_glow(x,b.card,fu_fin(tt,P.feels-0.2,1.2));fu_answer(x,520,150,{});}},
     // across the campus, Anil nods
     {at:P.safe-0.2,place:"fuFaculty",keys:[[P.safe-0.2,1371,600,1.75],[P.safe-0.1,1371,598,1.78]],d:3,draw:(x,tt)=>{
@@ -245,7 +245,8 @@ scene("fluent",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   // Anil's question, carried across the cut to Jun's desk; Jun passes it to the agent
   const sz=(z,wx,wy)=>[(wx-SC.x)*z+960,(wy-SC.y)*z+540];
   fu_carry(ctx,S,clamp((t-P.team+0.25)/1.45,0,1),[820+220,150+63,1],[...sz(SC.z,520+220,150+63),SC.z],c=>fu_say(c,-220,-63,440,"How many students does the faculty have this term?",{}));
-  const into=clamp((t-P.ag+0.1)/0.9,0,1);if(into>0&&into<1){const s0=sz(SC.z,520+220,213),s1=sz(SC.z,1150,400);fu_carry(ctx,S,into,[...s0,SC.z],[...s1,0.12],c=>fu_say(c,-220,-63,440,"How many students does the faculty have this term?",{a:1-0.6*into}));}
+  const into=clamp((t-P.ag+0.1)/0.9,0,1);if(into>0&&into<1){const s0=sz(SC.z,520+220,213),s1=sz(SC.z,1150,400),sc=lerp(SC.z,0.12,ag_sine(into));
+    fu_carry(ctx,S,into,[...s0,SC.z],[...s1,0.12],c=>fu_say(c,-220,-63,440,"How many students does the faculty have this term?",{a:Math.pow(clamp((sc-0.12)/(SC.z-0.12),0,1),6)}));}
   // the number, carried back to Anil
   fu_carry(ctx,S,clamp((t-P.evid-0.1)/1.3,0,1),[...sz(SC.z,660,226),1],[(1290-1371)*1.75+960,(690-600)*1.75+540,1.4],c=>ag_pill(c,0,0,"2,160 students",{size:30}));
   fu_when(ctx,"Today","Faculty of Health",fu_fin(t,0.5,0.6)*(1-fu_fin(t,P.team-0.5,0.4)));
@@ -437,7 +438,7 @@ scene("knowing",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
         fu_notEquals(x,L[1]+231,425,fu_fin(tt,P.list+0.6,0.4));ag_T(x,"720",L[1]+231,536,{w:800,size:32,align:"center",col:AG.amber,a:fu_fin(tt,P.list+0.9,0.4)});
         fu_recordMini(x,COL[1]-280,560,560,{a:fu_fin(tt,P.read-0.3,0.5),amber:fu_fin(tt,P.read+0.4,0.6),finger:clamp((tt-P.read)/2.2,0,1)});});
       // 3 · the emails of 1999, gathered at last into one page: every doubt has an owner. The team's log; a person decides
-      withA(x,lit(2,tt),()=>{const gather=ag_sine((tt-P.write)/1.2);for(let i=0;i<4;i++){const ex=lerp(COL[2]-195+i*130,COL[2],gather);fu_envelope(x,ex,150,0.62,{a:oa(2)*(1-gather),rot:(i%2?0.05:-0.05),label:["Apr","May","Jun","Jul"][i]});}
+      withA(x,lit(2,tt),()=>{const gather=ag_sine((tt-P.write)/1.2);for(let i=0;i<4;i++){const ex=lerp(COL[2]-195+i*130,COL[2],gather);fu_envelope(x,ex,150,0.62,{a:oa(2)*(1-gather),rot:(i%2?0.05:-0.05),label:["Apr","May","Jun","Jul"][i],deco:true});}
         if(gather>0)fu_sheet(x,COL[2]-70,104,140,92,{a:gather,draw:(c,sx,sy,sw,sh)=>{for(let k=0;k<4;k++){c.fillStyle=rgba(AG.mut,0.35);c.fillRect(sx+16,sy+16+k*17,(sw-32)*(k===3?0.5:0.9),6);}}});
         fu_changeCard(x,COL[2],CY[2],CH[2],{a:fu_fin(tt,P.log-0.1,0.5),k:ag_spr(tt,P.log-0.1,0.7)});
         fu_log(x,L[2],330,520,{a:fu_fin(tt,P.write-0.2,0.5),row:fu_fin(tt,P.owner-0.5,0.5),answered:fu_fin(tt,P.answered,0.5)});
@@ -476,7 +477,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // what makes us feel we understand: a fluent answer, a green tick, a long run of success; a soft glow round them
     {at:P.fluent-0.5,place:"fuQuiet",keys:[[P.fluent-0.5,960,500,1.04],[P.fluent-0.4,960,500,1.0]],d:5,draw:(x,tt)=>{
       const up=(t0)=>[fu_fin(tt,t0-0.2,0.6),(1-ag_eo(clamp((tt-t0+0.2)/1.0,0,1)))*70];const gl=fu_fin(tt,P.feel,1.2);ag_about(x,960,420,1.18);
-      let [a1,d1]=up(P.fa);x.save();x.translate(0,d1);const b=fu_answer(x,200,300,{a:0});fu_glow(x,b.card,gl*a1);fu_answer(x,200,300,{a:a1});x.restore();
+      let [a1,d1]=up(P.fa);x.save();x.translate(0,d1);const b=fu_answer(x,236,300,{a:0});fu_glow(x,b.card,gl*a1);fu_answer(x,236,300,{a:a1});x.restore();
       let [a2,d2]=up(P.tick);x.save();x.translate(0,d2);if(a2>0)withA(x,a2,()=>{fu_glow(x,{x:790,y:390,w:340,h:76},gl);fu_check(x,960,428,1);});x.restore();
       let [a3,d3]=up(P.run);x.save();x.translate(0,d3);if(a3>0)withA(x,a3,()=>{const cb=fu_calendar(x,1290,290,{w:400,ticks:10,a:0});fu_glow(x,cb,gl);fu_calendar(x,1290,290,{w:400,ticks:10});});x.restore();}},
     // Odyssey's team checked anyway: Odyssey in its ring round Mars, 2001 turning to 2021

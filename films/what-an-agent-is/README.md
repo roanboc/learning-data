@@ -11,6 +11,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [It feels like understanding](https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/) | Trusting an agent | 7 min | 7 | 3 questions | [script](3-it-feels-like-understanding/script.md) · [source](3-it-feels-like-understanding/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

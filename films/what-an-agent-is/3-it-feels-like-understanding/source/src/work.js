@@ -49,9 +49,11 @@ function fu_answer(ctx,x,y,o){o=o||{};const v=o.v||"fte",w=o.w||440,words=v==="f
 // the check's verdict, as a pill: "Matches the source"
 function fu_check(ctx,x,y,a,o){o=o||{};if(a<=0.01)return;ag_pill(ctx,x,y,o.text||"Matches the source",{icon:"tick",col:o.col||AG.green,a});}
 // a soft glow behind a card: the feeling an answer gives
+// an ellipse round the card, fading to nothing 150 px past its edges on every side, so no edge of the glow shows
 function fu_glow(ctx,b,a,col){if(a<=0.01)return;col=col||[248,210,140];ctx.save();ctx.globalAlpha*=a;
-  const g=ctx.createRadialGradient(b.x+b.w/2,b.y+b.h/2,Math.min(b.w,b.h)*0.3,b.x+b.w/2,b.y+b.h/2,Math.max(b.w,b.h)*0.85);g.addColorStop(0,rgba(col,0.55));g.addColorStop(1,rgba(col,0));
-  ctx.fillStyle=g;ctx.fillRect(b.x-b.w*0.4,b.y-b.h*0.6,b.w*1.8,b.h*2.2);ctx.shadowColor=rgba(col,0.9);ctx.shadowBlur=50;ctx.fillStyle=rgba(col,0.6);rr(ctx,b.x+6,b.y+6,b.w-12,b.h-12,22);ctx.fill();ctx.restore();}
+  const rx=b.w/2+150,ry=b.h/2+150,g=ctx.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,rgba(col,0.55));g.addColorStop(b.w/2/rx,rgba(col,0.4));g.addColorStop(1,rgba(col,0));
+  ctx.save();ctx.translate(b.x+b.w/2,b.y+b.h/2);ctx.scale(1,ry/rx);ctx.fillStyle=g;ctx.fillRect(-rx,-rx,2*rx,2*rx);ctx.restore();
+  ctx.shadowColor=rgba(col,0.9);ctx.shadowBlur=50;ctx.fillStyle=rgba(col,0.6);rr(ctx,b.x+6,b.y+6,b.w-12,b.h-12,22);ctx.fill();ctx.restore();}
 
 /* ---------------------------------------------------------------- Anil's desk in the Faculty of Health: he faces left, his screen in front of
    him with "Advisers next term" and the number he types in (o.typed, o.value); the advisers' row along the wall is fu_advisers */
@@ -148,7 +150,7 @@ function fu_gauge(ctx,x,y,h,v,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)r
 /* ---------------------------------------------------------------- the calendar on the wall: a month a row, a green tick on each month the
    agent was right (o.ticks), the months turning (o.turn) */
 const FU_MONTHS=["Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov"];
-function fu_calendar(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=o.w||430,n=FU_MONTHS.length,cw=(w-48)/5,h=64+2*92;ctx.save();ctx.globalAlpha*=a;
+function fu_calendar(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||430,n=FU_MONTHS.length,cw=(w-48)/5,h=64+2*92;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
   ag_box(ctx,x,y,w,h,16,{});ctx.fillStyle="rgba(60,50,40,0.07)";ctx.fillRect(x+12,y+12,w-24,30);for(const k of [0.3,0.7]){ctx.fillStyle="#7A7670";ctx.beginPath();ctx.arc(x+w*k,y+8,6,0,TAU);ctx.fill();}
   for(let i=0;i<n;i++){const cx=x+24+(i%5)*cw+cw/2,cy=y+70+Math.floor(i/5)*92,on=clamp((o.ticks||0)-i,0,1);
     ag_T(ctx,FU_MONTHS[i],cx,cy+12,{w:600,size:28,align:"center",col:AG.mut,a:0.5+0.5*clamp((o.turn==null?n:o.turn)-i,0,1)});

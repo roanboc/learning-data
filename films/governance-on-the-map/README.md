@@ -14,6 +14,8 @@ The submission to the government is in, and the project that paid for Yusuf Demi
 | [A capability, not a project](https://data.learn-all.org/governance-on-the-map/a-capability-not-a-project/) | Governance that lasts | 6½ min | 8 | 3 questions | [script](1-a-capability-not-a-project/script.md) · [source](1-a-capability-not-a-project/source/README.md) |
 | [Who does what, end to end](https://data.learn-all.org/governance-on-the-map/who-does-what-end-to-end/) | One service, end to end | 6½ min | 8 | 3 questions | [script](2-who-does-what-end-to-end/script.md) · [source](2-who-does-what-end-to-end/source/README.md) |
 | [Where each piece lives](https://data.learn-all.org/governance-on-the-map/where-each-piece-lives/) | One home for every piece | 6½ min | 7 | 3 questions | [script](3-where-each-piece-lives/script.md) · [source](3-where-each-piece-lives/source/README.md) |
+
+For the whole series, on the site: [12 labs](https://data.learn-all.org/governance-on-the-map/labs/) and [24 scenarios](https://data.learn-all.org/governance-on-the-map/scenarios/), in English and Spanish, from the words in [site/assets/governance-on-the-map/](../../site/assets/governance-on-the-map/).
 <!-- /films -->
 
 ## How the films are made

@@ -173,6 +173,7 @@ SERIES = [
     dict(id="governance-on-the-map", dir="governance-on-the-map", slug="governance-on-the-map",
          name={"en": "Governance on the map", "es": "La gobernanza en el mapa"}, builds_on=gov_map_builds_on,
          place={"en": "university", "es": "universidad"}, blocks=[], next="governance-in-practice",
+         learn=dict(dir="governance-on-the-map", bundle="a-capability-not-a-project"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, DCAM of the EDM Association, and ArchiMate of The Open Group, named or drawn only to identify those bodies of knowledge and that notation; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, DCAM de la EDM Association, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento y esa notación; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="governance-in-practice", dir="governance-in-practice", slug="governance-in-practice",

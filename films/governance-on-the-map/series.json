@@ -31,5 +31,11 @@
     ["biz", "La financia", "La vicerrectoría, que pregunta qué perdería la universidad sin la gobernanza"],
     ["biz", "Pide un significado", "Clara, de Planificación, que pide definir la finalización, porque tres facultades la cuentan de tres maneras"],
     ["tech", "Lleva la plataforma", "Sam Okafor, que lleva la plataforma de datos, quiere que sus páginas nombren al dueño correcto, y pregunta dónde vive cada pieza de la gobernanza"]
-  ]
+  ],
+  "learn_p": "{Labs} hands-on labs, film by film, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos, película por película, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs, film by film. Each puts one idea from a film in your hands: change things and see what happens.",
+  "labs_lead_es": "{Labs} labs interactivos, película por película. Cada uno pone en tus manos una idea de una película: cambia cosas y mira qué pasa.",
+  "quiz_lead": "{quiz} situations that people who design data governance really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
+  "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes diseñan la gobernanza de datos, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

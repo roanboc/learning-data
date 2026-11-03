@@ -110,16 +110,16 @@ function ox_memory(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c
 
 /* a card: "In law: a person", with Jun's outline inside a dashed line, and the agent outside it; o.tag (0 to 1): "can't be sued or
    fined" under the agent */
-function ox_law(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=640,h=340;ag_box(ctx,x,y,w,h,24,{a});ctx.save();ctx.globalAlpha*=a;
+function ox_law(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=760,h=360;ag_box(ctx,x,y,w,h,24,{a});ctx.save();ctx.globalAlpha*=a;
   ag_T(ctx,"IN LAW: A PERSON",x+AG_PAD,y+AG_PAD+22,{w:700,size:28,ls:4,col:AG.blue});
-  ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(AG.blue,0.8);ctx.lineWidth=3;rr(ctx,x+AG_PAD,y+90,260,220,18);ctx.stroke();ctx.setLineDash([]);
-  // Jun's outline: head and shoulders, plain
-  const jx=x+AG_PAD+130,jy=y+90+150;ctx.fillStyle=rgba(AG.ink,0.16);ctx.strokeStyle=rgba(AG.ink,0.6);ctx.lineWidth=3;
-  ctx.beginPath();ctx.arc(jx,jy-62,34,0,TAU);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(jx-70,jy+68);ctx.bezierCurveTo(jx-66,jy+6,jx-40,jy-18,jx,jy-18);ctx.bezierCurveTo(jx+40,jy-18,jx+66,jy+6,jx+70,jy+68);ctx.closePath();ctx.fill();ctx.stroke();
-  ag_T(ctx,"Jun",jx,y+90+214-14,{w:700,size:28,align:"center",col:AG.ink,deco:1});
+  ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(AG.blue,0.8);ctx.lineWidth=3;rr(ctx,x+AG_PAD,y+88,280,244,18);ctx.stroke();ctx.setLineDash([]);
+  // Jun's outline: head and shoulders, plain, and his name under it
+  const jx=x+AG_PAD+140,jy=y+88+140;ctx.fillStyle=rgba(AG.ink,0.16);ctx.strokeStyle=rgba(AG.ink,0.6);ctx.lineWidth=3;
+  ctx.beginPath();ctx.arc(jx,jy-58,32,0,TAU);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(jx-66,jy+52);ctx.bezierCurveTo(jx-62,jy-2,jx-38,jy-20,jx,jy-20);ctx.bezierCurveTo(jx+38,jy-20,jx+62,jy-2,jx+66,jy+52);ctx.closePath();ctx.fill();ctx.stroke();
+  ag_T(ctx,"Jun",jx,y+88+214,{w:700,size:30,align:"center",col:AG.ink});
   ctx.restore();
-  ag_model(ctx,x+w-150,y+180,58,{core:0.6,t:o.t||0,a});
-  if(o.tag)ag_T(ctx,"can't be sued or fined",x+w-150,y+h-34,{w:700,size:28,align:"center",col:AG.amber,a:a*o.tag});}
+  const mx=x+w-190;ag_model(ctx,mx,y+190,64,{core:0.6,t:o.t||0,a});
+  if(o.tag)ag_T(ctx,"can't be sued or fined",mx,y+h-36,{w:700,size:28,align:"center",col:AG.amber,a:a*o.tag});}
 
 /* a message, with a line hidden in it: o.find (0 to 1) the agent's light picks the hidden line out in amber; o.merge (0 to 1) every
    line runs together into one block of the same colour */
@@ -184,20 +184,22 @@ function ox_gate(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;con
   ag_floorShadow(ctx,x+AG.sdx*2,y+6,w*0.7,18,0.22);
   const post=xx=>ag_soft(ctx,c=>ag_rect(c,xx-14,y-h,28,h,8),AG_OAK.base,AG_OAK.hi,xx+6,y-h*0.6,h*0.5,"rgba(46,38,28,0.3)",6);
   // the leaves: each swings open towards us, so it narrows
-  for(const sd of [-1,1]){const lw=(w/2-16)*(1-op*0.82),lx=sd<0?x-w/2+14:x+w/2-14-lw;
-    ag_soft(ctx,c=>ag_rect(c,lx,y-h*0.62,lw,h*0.58,6),mix(AG_OAK.base,[255,255,255],0.15),AG_OAK.hi,lx+lw*0.7,y-h*0.5,h*0.4,"rgba(46,38,28,0.22)",6);
-    ctx.strokeStyle=rgba(AG_OAK.dark,0.35);ctx.lineWidth=2;for(let k=1;k<3;k++){ctx.beginPath();ctx.moveTo(lx+4,y-h*0.62+h*0.58*k/3);ctx.lineTo(lx+lw-4,y-h*0.62+h*0.58*k/3);ctx.stroke();}}
+  const lt=y-h+34,lh=h-40;
+  for(const sd of [-1,1]){const lw=(w/2-17)*(1-op*0.84),lx=sd<0?x-w/2+14:x+w/2-14-lw;if(lw<2)continue;
+    ag_soft(ctx,c=>ag_rect(c,lx,lt,lw,lh,5),mix(AG_OAK.base,[255,255,255],0.12),AG_OAK.hi,lx+lw*0.7,lt+lh*0.3,h*0.5,"rgba(46,38,28,0.22)",6);
+    ctx.strokeStyle=rgba(AG_OAK.dark,0.32);ctx.lineWidth=2;for(let k=1;k<3;k++){const bx=lx+lw*k/3;ctx.beginPath();ctx.moveTo(bx,lt+6);ctx.lineTo(bx,lt+lh-6);ctx.stroke();}
+    ctx.strokeStyle=rgba(AG_OAK.dark,0.4);ctx.lineWidth=3;for(const ry of [0.22,0.78]){ctx.beginPath();ctx.moveTo(lx+3,lt+lh*ry);ctx.lineTo(lx+lw-3,lt+lh*ry);ctx.stroke();}}
   post(x-w/2);post(x+w/2);
   ctx.restore();}
   if(o.part==="stand")return{x,y,w,h,ly};
   // the lintel: a card across the top with the two places for a stamp
-  const lw2=Math.max(w+80,560),lx2=x-lw2/2;ag_box(ctx,lx2,ly,lw2,150,20,{a});
+  const lw2=Math.max(w+80,660),lx2=x-lw2/2;ag_box(ctx,lx2,ly,lw2,150,20,{a});
   const slot=(i,txt,s,grey)=>{const sx=lx2+24+i*(lw2-48)/2,sw=(lw2-48)/2-12,sy=ly+24,sh=102;ctx.save();ctx.globalAlpha*=a;
     ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(grey>0?[150,146,140]:AG.mut,0.7);ctx.lineWidth=2.5;rr(ctx,sx,sy,sw,sh,14);ctx.stroke();ctx.setLineDash([]);
     if(grey>0){ctx.fillStyle=rgba([150,146,140],0.18*grey);rr(ctx,sx,sy,sw,sh,14);ctx.fill();ag_T(ctx,"people only",sx+sw/2,sy+sh/2+11,{w:700,size:30,align:"center",col:AG.mut,a:grey*(1-(s||0))});}
     if(s>0){const k=1+0.3*(1-ag_spr(s,0,0.5));ctx.save();ag_about(ctx,sx+sw/2,sy+sh/2,k);ctx.globalAlpha*=clamp(s*3,0,1);ctx.fillStyle=rgba(AG.green,0.1);rr(ctx,sx+4,sy+4,sw-8,sh-8,12);ctx.fill();
-      ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=3.5;rr(ctx,sx+4,sy+4,sw-8,sh-8,12);ctx.stroke();ag_tick(ctx,sx+40,sy+sh/2,26,rgba(AG.green,1),4.5);
-      const ls=txt.split("|");ag_T(ctx,ls[0],sx+68,sy+sh/2-4,{w:700,size:30,col:AG.green});if(ls[1])ag_T(ctx,ls[1],sx+68,sy+sh/2+32,{w:600,size:28,col:AG.green});ctx.restore();}
+      ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=3.5;rr(ctx,sx+4,sy+4,sw-8,sh-8,12);ctx.stroke();ag_tick(ctx,sx+32,sy+sh/2,26,rgba(AG.green,1),4.5);
+      const ls=txt.split("|");ag_T(ctx,ls[0],sx+58,sy+sh/2-4,{w:700,size:30,col:AG.green});if(ls[1])ag_T(ctx,ls[1],sx+58,sy+sh/2+32,{w:600,size:28,col:AG.green});ctx.restore();}
     else if(!(grey>0)){const ls=txt.split("|");ag_T(ctx,ls[0],sx+sw/2,sy+sh/2-4,{w:600,size:28,align:"center",col:AG.mut});if(ls[1])ag_T(ctx,ls[1],sx+sw/2,sy+sh/2+30,{w:600,size:28,align:"center",col:AG.mut});}
     ctx.restore();};
   slot(0,o.who1||"reviewed|Jun",o.s1||0,0);slot(1,o.who2||"approved|a second person",o.s2||0,o.grey||0);
@@ -248,8 +250,8 @@ function ox_title(ctx,S,t,t0,a1,a2,line){const oA=ag_in(t,t0,0.8),tA=ag_in(t,t0+
 /* ---------------------------------------------------------------- chapters 4 to 7
    the three parts of answering for something, each a card with a small picture: i 0 explain (a speech bubble), 1 be questioned and
    judged (a balance), 2 face what follows (an arrow on to what comes next); o.on (0 to 1) lights its edge in o.col (blue) */
-const OX_ANSWER=["Explain what you did, and why","Be questioned and judged","Face what follows"];
-function ox_answerCard(ctx,x,y,w,i,o){o=o||{};const a=o.a==null?1:o.a,tl=ag_wrap(ctx,OX_ANSWER[i],w-AG_PAD*2,{w:700,size:36}),h=AG_PAD*2+70+tl.length*46;if(a<=0)return{x,y,w,h};
+const OX_ANSWER=["Explain what you did, and\u00a0why","Be questioned and judged","Face what follows"];
+function ox_answerCard(ctx,x,y,w,i,o){o=o||{};const a=o.a==null?1:o.a,tl=ag_wrap(ctx,OX_ANSWER[i],w-AG_PAD*2,{w:700,size:36}),h=AG_PAD*2+70+2*46;if(a<=0)return{x,y,w,h};
   const on=clamp(o.on||0,0,1),cl=o.col||AG.blue;ctx.save();if(o.k!=null)ag_about(ctx,x+w/2,y,lerp(0.7,1,o.k));
   ag_box(ctx,x,y,w,h,22,{a,edge:on>0.02?cl:null,edgeA:0.9*on,lw:3});ctx.globalAlpha*=a;
   const ix=x+AG_PAD+30,iy=y+AG_PAD+30,col=rgba(mix(AG.mut,cl,on),1);ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=3.5;ctx.lineCap="round";ctx.lineJoin="round";
@@ -259,7 +261,7 @@ function ox_answerCard(ctx,x,y,w,i,o){o=o||{};const a=o.a==null?1:o.a,tl=ag_wrap
   else{ctx.beginPath();ctx.moveTo(ix-28,iy);ctx.lineTo(ix+20,iy);ctx.stroke();ag_arrowHead(ctx,ix+28,iy,0,16,col);}
   tl.forEach((l,k)=>ag_T(ctx,l,x+AG_PAD,y+AG_PAD+70+34+k*46,{w:700,size:36}));ctx.restore();return{x,y,w,h};}
 // an empty place, a pale dashed outline with nothing in it, its word under it: what an agent hasn't got to lose; o.k springs it in
-function ox_hollow(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=150,h=116;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.7,1,o.k));
+function ox_hollow(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=190,h=150;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.7,1,o.k));
   ctx.fillStyle="rgba(255,255,255,0.3)";rr(ctx,x-w/2,y-h/2,w,h,18);ctx.fill();
   ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(AG.mut,0.75);ctx.lineWidth=3;rr(ctx,x-w/2,y-h/2,w,h,18);ctx.stroke();ctx.setLineDash([]);
   ag_T(ctx,text,x,y+h/2+44,{w:600,size:30,align:"center",col:AG.mut});ctx.restore();}

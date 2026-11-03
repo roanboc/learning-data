@@ -106,13 +106,10 @@ function mc_jun(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const J=
   ag_desk(ctx,-60,1040,720,{depth:150});
   ag_person(ctx,"jun",J[0],J[1],J[2],{t,pose:o.pose||"desk",pose2:o.pose2,mix:o.mix,talk:o.talk||0,gaze:o.gaze,nod:o.nod||0,smile:o.smile||0,cut:MC_CUT});
   ag_screen(ctx,430,770,190,116,{stand:12,draw:o.screen});ctx.restore();}
-// Clara standing on the right, facing the agent: o.x where she stands, o.walk (0 to 1) a step's bob as she comes in, o.a
-// the module's people have no "hang" in their poses (hanging arms are painted, not posed): to move from hanging arms into a pose, start
-// from the same arms, posed
-const MC_HANG={near:[2,14,"rest"],far:[0,6,"rest"]};
+// Clara standing on the right, facing the agent: o.x where she stands, o.walk (0 to 1) a step's bob as she comes in, o.a; her arms
+// move from hanging into o.pose2 as o.mix rises
 function mc_clara(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const C=MC_CL,x=o.x==null?C[0]:o.x,bob=(o.walk||0)*Math.abs(Math.sin(t*5.4))*7;
-  const pose=(o.pose||"hang")==="hang"&&o.pose2&&(o.mix||0)>0?MC_HANG:(o.pose||"hang");
-  ctx.save();ctx.globalAlpha*=a;ag_person(ctx,"clara",x,C[1]-bob,C[2],{t,flip:true,pose,pose2:o.pose2,mix:o.mix,talk:o.talk||0,gaze:o.gaze,nod:o.nod||0,smile:o.smile||0});ctx.restore();}
+  ctx.save();ctx.globalAlpha*=a;ag_person(ctx,"clara",x,C[1]-bob,C[2],{t,flip:true,pose:o.pose||"hang",pose2:o.pose2,mix:o.mix,talk:o.talk||0,gaze:o.gaze,nod:o.nod||0,smile:o.smile||0});ctx.restore();}
 // Clara walking in from the right edge, from t0 over d seconds: where she is, and how much she bobs
 const mc_walkIn=(t,t0,d)=>{const u=ag_in(t,t0,d||1.5);return{x:lerp(2180,MC_CL[0],ag_eo(u)),walk:u>0&&u<1?1-u:0,a:t<t0?0:1};};
 // the agent's three answers, the same shape and the same type

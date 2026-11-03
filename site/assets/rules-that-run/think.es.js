@@ -1,7 +1,7 @@
 /* Learning Data: "Pausa para pensar" de Rules that run, en español. Mantén las claves iguales a think.en.js.
    La película se detiene al final de tres capítulos (runs, level, list), con una pregunta cada vez. think.js las muestra,
-   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
-   y el .player data-labs de la página está vacío. Palabras como en los subtítulos: control, dueño, nivel, la actualización
+   y las lista otra vez en "Piénsalo" (#think-list). Los labs y situaciones de la serie son suyos, para todas sus películas
+   (assets/data-governance/), así que ninguna pregunta tiene "stop"; el .player data-labs de la página lleva a ellos. Palabras como en los subtítulos: control, dueño, nivel, la actualización
    nocturna, una inscripción en persona, el equipo de aprendizaje, Planificación, el tablero de calidad. */
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},

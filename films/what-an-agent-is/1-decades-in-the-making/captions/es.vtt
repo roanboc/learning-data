@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:06.434
+Europa, en la década de 1440. Cada libro se copia a mano, letra por letra.
+
+00:00:07.534 --> 00:00:09.511
+Así, los libros tardan en hacerse, y son escasos.
+
+00:00:10.211 --> 00:00:16.546
+En 1424, la biblioteca de la Universidad de Cambridge tenía 122 libros.
+
+00:00:17.846 --> 00:00:20.223
+Y cada copia nueva puede sumar errores nuevos.
+
+00:00:21.523 --> 00:00:22.963
+Algo tiene que cambiar.
+
+00:00:24.663 --> 00:00:28.046
+La idea que lo cambiará ya tiene cuatrocientos años.
+
+00:00:29.346 --> 00:00:34.384
+En China, en la década de 1040, Bi Sheng hizo una pieza de arcilla cocida para cada carácter.
+
+00:00:35.084 --> 00:00:38.992
+Las puso en un marco de hierro, imprimió una página, y las volvió a usar.
+
+00:00:40.192 --> 00:00:47.391
+En Corea, en 1377, unos monjes imprimieron un libro con caracteres fundidos en metal: el más antiguo que se conserva.
+
+00:00:48.691 --> 00:00:54.976
+En Maguncia, hacia 1450, un artesano del metal, Johannes Gutenberg, reunió las demás piezas.
+
+00:00:55.676 --> 00:01:03.477
+Letras fundidas en metal, todas iguales; una tinta que se les adhiere; una prensa, como la del vino; y papel, que ya se hacía en Alemania.
+
+00:01:04.777 --> 00:01:08.628
+Y un prestamista, Johann Fust, puso el dinero para años de intentos.
+
+00:01:10.128 --> 00:01:16.454
+Hacia 1500, imprentas en más de doscientas ciudades habían impreso unos treinta mil libros distintos.
+
+00:01:18.154 --> 00:01:20.894
+Y los libros se abarataron, y llegaron a muchos más lectores.
+
+00:01:22.194 --> 00:01:26.349
+La imprenta pareció llegar de golpe. Le había llevado cuatrocientos años.
+
+00:01:28.049 --> 00:01:34.872
+Este semestre, un agente de IA se suma al equipo de datos de Jun Park: un software que resuelve tareas, paso a paso.
+
+00:01:35.572 --> 00:01:39.591
+Para algunos, salió de la nada. Unos le temen; otros esperan magia.
+
+00:01:40.891 --> 00:01:46.107
+Pero sus ideas tienen décadas, y visto como un largo trabajo, es algo que pueden entender.
+
+00:01:53.407 --> 00:01:56.211
+Nuestro camino empieza en julio de 1958.
+
+00:01:56.911 --> 00:02:04.705
+La Marina de Estados Unidos mostró a la prensa un perceptrón, un programa del psicólogo Frank Rosenblatt que aprende de ejemplos.
+
+00:02:05.805 --> 00:02:11.187
+Ante tarjetas marcadas a la izquierda o a la derecha, adivinaba, y cada error ajustaba un poco sus números.
+
+00:02:13.487 --> 00:02:16.768
+Tras cincuenta intentos, podía distinguirlas por sí solo.
+
+00:02:18.268 --> 00:02:23.824
+Un periódico dijo que la Marina esperaba que caminara, hablara y fuera consciente de su existencia.
+
+00:02:25.124 --> 00:02:31.945
+Pero una sola capa no puede aprender algunos patrones, como mostró un libro en 1969, y el dinero se fue a otra parte.
+
+00:02:34.845 --> 00:02:39.929
+En 1986, tres investigadores mostraron cómo puede aprender una red de varias capas.
+
+00:02:40.629 --> 00:02:43.073
+Hace una suposición, y mide cuánto se equivoca.
+
+00:02:44.173 --> 00:02:49.442
+El error vuelve hacia atrás, capa por capa, y cada conexión se ajusta un poco para reducirlo.
+
+00:02:51.342 --> 00:02:56.588
+Con muchos ejemplos, las capas intermedias encuentran patrones que nadie les dijo que buscaran.
+
+00:02:58.088 --> 00:03:03.450
+Pero las computadoras eran lentas y los ejemplos pocos, y durante veinte años estas redes siguieron pequeñas.
+
+00:03:06.350 --> 00:03:08.792
+En 2012, las piezas se juntaron.
+
+00:03:09.492 --> 00:03:14.843
+Un equipo en Toronto entrenó una red mucho más grande con más de un millón de fotos etiquetadas.
+
+00:03:16.143 --> 00:03:22.023
+Funcionaba en dos chips gráficos, hechos para videojuegos, que hacen cientos de sumas pequeñas a la vez.
+
+00:03:23.523 --> 00:03:28.844
+En un concurso de imágenes, sus cinco mejores respuestas fallaron 15 veces de cada cien.
+
+00:03:30.144 --> 00:03:32.167
+La siguiente mejor propuesta falló 26.
+
+00:03:33.667 --> 00:03:37.077
+Las ideas eran viejas. Lo nuevo era la potencia para ejecutarlas.
+
+00:03:39.977 --> 00:03:45.742
+En 2017, un artículo llamado Attention Is All You Need cambió cómo leen estas redes.
+
+00:03:47.242 --> 00:03:49.939
+Antes, leían una oración palabra por palabra.
+
+00:03:51.239 --> 00:03:56.836
+Su diseño, el transformer, toma todas las palabras a la vez, y aprende cuáles importan entre sí.
+
+00:03:58.836 --> 00:04:03.906
+En «The team fixed the report because it was wrong», aprende que «it» es el informe.
+
+00:04:05.606 --> 00:04:10.652
+Leer todo a la vez reparte el trabajo entre muchos chips, así que los modelos pudieron crecer mucho más.
+
+00:04:13.552 --> 00:04:20.634
+De 2018 a 2020, unos investigadores entrenaron transformers con enormes colecciones de texto de la web y de libros.
+
+00:04:21.334 --> 00:04:24.823
+La tarea era simple: adivinar la palabra siguiente, comprobarla, y ajustar.
+
+00:04:26.523 --> 00:04:31.162
+Miles de millones de veces, un modelo fue aprendiendo gramática, hechos y formas de escribir.
+
+00:04:32.262 --> 00:04:37.505
+El más grande, en 2020, tenía 175 mil millones de números que ajustar.
+
+00:04:38.205 --> 00:04:42.395
+Escribía con fluidez, pero no intentaba ayudar: solo continuaba el texto.
+
+00:04:46.095 --> 00:04:51.786
+En 2022, unos investigadores pidieron a personas que ordenaran las respuestas de un modelo, de mejor a peor.
+
+00:04:53.086 --> 00:04:56.583
+Luego lo entrenaron para dar el tipo de respuestas que la gente prefería.
+
+00:04:57.283 --> 00:05:01.404
+La gente prefirió sus respuestas a las de un modelo cien veces más grande.
+
+00:05:02.904 --> 00:05:09.337
+Desde 2024, los modelos también se entrenan para resolver un problema paso a paso antes de responder.
+
+00:05:10.837 --> 00:05:15.787
+Y pueden usar herramientas: buscar, ejecutar una consulta, leer un archivo, y trabajar con lo que vuelve.
+
+00:05:17.287 --> 00:05:21.494
+Un modelo que razona, con manos para las herramientas, en un ciclo: eso es un agente.
+
+00:05:25.394 --> 00:05:27.083
+Entonces, ¿por qué pareció tan repentino?
+
+00:05:27.783 --> 00:05:29.660
+Porque llegaron tres cosas a la vez.
+
+00:05:30.760 --> 00:05:38.107
+Potencia de cómputo: desde 2010, el cómputo usado para entrenar los modelos más grandes se ha duplicado más o menos cada seis meses.
+
+00:05:39.407 --> 00:05:42.614
+Datos: la web, y millones de ejemplos etiquetados.
+
+00:05:43.314 --> 00:05:52.025
+Y dinero: entrenar el primer transformer costó unos novecientos dólares; en 2023, los más grandes costaban decenas de millones o más.
+
+00:05:53.525 --> 00:05:58.286
+No fue un descubrimiento repentino. Fue un largo trabajo que por fin tuvo la potencia para funcionar.
+
+00:06:00.386 --> 00:06:05.356
+La imprenta esperó cuatrocientos años a las letras de metal, el papel, una prensa y un prestamista.
+
+00:06:06.456 --> 00:06:09.809
+Estas ideas esperaron décadas a los chips, los datos y el dinero.
+
+00:06:11.309 --> 00:06:17.882
+Por eso nadie en el equipo de Jun espera magia del agente, ni necesita temerle: saben de dónde vino.

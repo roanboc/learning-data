@@ -45,11 +45,20 @@ const TT_ENG1={key:"tt_eng1",name:"Engineer",skin:[214,170,136],hair:{style:"sid
 const TT_ENG2={key:"tt_eng2",name:"Engineer two",skin:[232,196,168],hair:{style:"cropped",c:[60,52,46]},glasses:[60,56,52],top:{kind:"shirt",c:[150,158,150]},breath:0.25};
 const TT_AUD={key:"tt_aud",name:"Audiologist",skin:[238,206,180],hair:{style:"bob",c:[92,70,52]},top:{kind:"cardigan",c:[150,148,132],inner:[232,228,216]},breath:0.31};
 const TT_PHARM={key:"tt_pharm",name:"Pharmacist",skin:[226,186,156],hair:{style:"side",c:[150,142,134]},glasses:[70,64,58],top:{kind:"blazer",c:[236,234,228],inner:[222,222,216],tie:[90,72,62]},breath:0.24};
-const TT_CUST={key:"tt_cust",name:"Customer",skin:[214,172,140],hair:{style:"bob",c:[108,82,60]},top:{kind:"cardigan",c:[124,116,104],inner:[228,222,210]},breath:0.3};
+// a brimmed hat of the 1950s, over short grey hair
+function tt_hat(c,P){const col=P.hatC||[84,78,70];ag_soft(c,cc=>{cc.moveTo(196,352);cc.bezierCurveTo(230,330,330,322,412,340);cc.bezierCurveTo(420,348,410,356,396,354);cc.bezierCurveTo(320,346,250,352,206,366);cc.bezierCurveTo(192,368,188,358,196,352);cc.closePath();},
+    ag_dk(col,0.1),ag_lt(col,0.3),340,336,120,"rgba(20,16,12,0.4)",6);
+  ag_soft(c,cc=>{cc.moveTo(228,346);cc.bezierCurveTo(226,300,250,270,300,266);cc.bezierCurveTo(350,262,382,290,384,338);cc.bezierCurveTo(330,330,270,334,228,346);cc.closePath();},col,ag_lt(col,0.32),340,280,90,"rgba(20,16,12,0.4)",8);
+  c.fillStyle=rgba(ag_dk(col,0.4),1);c.beginPath();c.moveTo(229,338);c.bezierCurveTo(270,326,330,322,383,330);c.lineTo(384,340);c.bezierCurveTo(330,332,270,336,229,348);c.closePath();c.fill();}
+const TT_CUST={key:"tt_cust",name:"Customer",skin:[218,176,146],hair:{style:"cropped",c:[170,164,156]},hatC:[96,86,74],hat:{paint:tt_hat},top:{kind:"suit",c:[110,104,96],inner:[220,218,210],tie:[120,90,70]},breath:0.3};
 const TT_BOY={key:"tt_boy",name:"Boy",skin:[234,196,168],hair:{style:"side",c:[110,84,60]},top:{kind:"shirt",c:[196,190,174]},breath:0.33};
 const TT_ROSEN={key:"tt_rosen",name:"Psychologist",skin:[230,192,162],hair:{style:"side",c:[40,34,30]},top:{kind:"suit",c:[98,96,92],inner:[236,236,232],tie:[78,70,84]},breath:0.27};
 const TT_LISTEN={key:"tt_listen",name:"Listener",skin:[176,128,98],hair:{style:"cropped",c:[36,30,28]},top:{kind:"sweater",c:[150,140,124]},hat:{paint:tt_phones},breath:0.29};
-const TT_ADA={key:"tt_ada",name:"Writer",skin:[238,212,194],hair:{style:"bun",c:[52,40,34]},top:{kind:"tunic",c:[72,66,76],paint:tt_lace},breath:0.3};
+// hair of the 1840s: parted in the middle, smoothed down over the ears, gathered in a low bun at the back
+function tt_victorian(c,P){const hc=P.hair.c;ag_soft(c,cc=>cc.ellipse(206,468,36,31,0.35,0,TAU),hc,ag_lt(hc,0.3),196,452,40,"rgba(0,0,0,0.45)",8);
+  c.strokeStyle=rgba(ag_lt(hc,0.4),0.25);c.lineWidth=2;c.beginPath();c.arc(206,468,20,0.6,2.6);c.stroke();
+  c.strokeStyle=rgba(mix(P.skin,[210,170,150],0.5),0.5);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(334,300);c.quadraticCurveTo(300,292,262,302);c.stroke();}
+const TT_ADA={key:"tt_ada",name:"Writer",skin:[238,212,194],hair:{style:"bob",c:[52,40,34]},hat:{paint:tt_victorian},top:{kind:"tunic",c:[72,66,76],paint:tt_lace},breath:0.3};
 const TT_DESC={key:"tt_desc",name:"Philosopher",skin:[226,190,162],hair:{style:"long",c:[52,42,36]},stache:[58,46,40],hat:{paint:tt_moustache},top:{kind:"tunic",c:[48,46,50],paint:tt_band},breath:0.26};
 const TT_SEARLE={key:"tt_searle",name:"Philosopher of 1980",skin:[230,194,166],hair:{style:"cropped",c:[150,140,132]},top:{kind:"blazer",c:[112,98,82],inner:[230,228,220]},breath:0.27};
 
@@ -81,7 +90,7 @@ function tt_floorFlat(c,hz,col,o){o=o||{};let g=c.createLinearGradient(0,hz,0,H)
 // the soft shade on the left and the window's warmth on the right, over a whole place
 function tt_light(c,warm){let g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(30,24,18,0.2)");g.addColorStop(0.45,"rgba(30,24,18,0.02)");g.addColorStop(1,"rgba(255,246,226,"+(warm||0.08)+")");c.fillStyle=g;c.fillRect(0,0,W,H);}
 
-const TT_HOME={hz:700,table:[520,880,880],y:568,s:0.8,rod:1230,mag:690,phone:[1576,646]};   // the living room: the carpet's edge, the table's front edge [x, y, w], where Rod and Margaret sit, the telephone
+const TT_HOME={hz:700,table:[500,900,920,110],y:574,s:0.8,rod:1250,mag:670,phone:[1576,646]};   // the living room: the carpet's edge, the table's front edge [x, y, w], where Rod and Margaret sit, the telephone
 AG_PLACES.tt_home=c=>{const hz=TT_HOME.hz;
   // a warm cream wallpaper of the seventies, its soft pattern of rounded lozenges barely darker than the paper
   tt_wall(c,hz,[222,206,176],{pattern:cc=>{cc.fillStyle="rgba(150,118,80,0.06)";for(let y=-30;y<hz;y+=96)for(let x=-40+(Math.round(y/96)%2)*60;x<W;x+=120){cc.beginPath();cc.ellipse(x,y,34,44,0,0,TAU);cc.fill();}
@@ -113,8 +122,8 @@ AG_PLACES.tt_home=c=>{const hz=TT_HOME.hz;
   tt_floorFlat(c,hz,[146,118,92],{weave:true});
   tt_light(c,0.1);};
 // the table, drawn live before the people (they sit behind it, their forearms on it): laminate on a wooden frame
-function tt_table(ctx){const T_=TT_HOME.table,x=T_[0],y=T_[1],w=T_[2],d=86;ctx.save();ag_floorShadow(ctx,x+w/2-20,y+150,w*0.56,30,0.3);
-  let g=ctx.createLinearGradient(0,y-d,0,y);g.addColorStop(0,"#ECE6D9");g.addColorStop(1,"#DDD4C2");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x+40,y-d);ctx.lineTo(x+w-40,y-d);ctx.lineTo(x+w,y);ctx.lineTo(x,y);ctx.closePath();ctx.fill();
+function tt_table(ctx){const T_=TT_HOME.table,x=T_[0],y=T_[1],w=T_[2],d=T_[3];ctx.save();ag_floorShadow(ctx,x+w/2-20,y+150,w*0.56,30,0.3);
+  let g=ctx.createLinearGradient(0,y-d,0,y);g.addColorStop(0,"#ECE6D9");g.addColorStop(1,"#DDD4C2");ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x+50,y-d);ctx.lineTo(x+w-50,y-d);ctx.lineTo(x+w,y);ctx.lineTo(x,y);ctx.closePath();ctx.fill();
   g=ctx.createLinearGradient(x,0,x+w,0);g.addColorStop(0,"rgba(40,30,20,0.08)");g.addColorStop(1,"rgba(255,250,236,0.12)");ctx.fillStyle=g;ctx.fill();
   ctx.fillStyle="#B9AE96";ctx.fillRect(x,y,w,18);ctx.fillStyle="rgba(60,50,40,0.2)";ctx.fillRect(x,y+18,w,8);ctx.fillStyle="#9C9078";ctx.fillRect(x+30,y+18,16,170);ctx.fillRect(x+w-46,y+18,16,170);
   ctx.restore();}
@@ -128,7 +137,7 @@ function tt_tableThings(ctx,o){o=o||{};const T_=TT_HOME.table,x=T_[0],y=T_[1],w=
   ctx.restore();}
 // Rod and Margaret at their table: Margaret on the left, facing him; Rod on the right, facing her, so his left ear (the implant's) is ours to see.
 // o: rod {talk, smile, gaze, nod, pose, pose2, mix, flip}, mag {...}; drawn with the table (before) and what's on it (after)
-function tt_couple(ctx,t,o){o=o||{};const H_=TT_HOME,cut=H_.table[1]-86,r=o.rod||{},m=o.mag||{};tt_table(ctx);
+function tt_couple(ctx,t,o){o=o||{};const H_=TT_HOME,cut=H_.table[1]-H_.table[3],r=o.rod||{},m=o.mag||{};tt_table(ctx);
   ag_person(ctx,TT_MARGARET,H_.mag,H_.y,H_.s,Object.assign({t:t+1.3,pose:"desk",cut,gaze:[3,0]},m));
   ag_person(ctx,TT_ROD,H_.rod,H_.y,H_.s,Object.assign({t,flip:true,pose:"desk",cut,gaze:[3,0]},r));
   tt_tableThings(ctx);}
@@ -155,6 +164,9 @@ AG_PLACES.tt_lab78=c=>{const hz=690;
   c.fillStyle="#F4F1EA";c.beginPath();c.arc(760,150,52,0,TAU);c.fill();c.strokeStyle="#4A4640";c.lineWidth=5;c.stroke();c.lineWidth=4;c.beginPath();c.moveTo(760,150);c.lineTo(760,112);c.moveTo(760,150);c.lineTo(786,164);c.stroke();
   tt_floorFlat(c,hz,[176,170,156],{tiles:true});
   tt_light(c,0.08);};
+// a plain wooden chair's back, behind someone seated facing left at (x, y, s): it shows beside their back
+function tt_chair(ctx,x,y,s){ctx.save();const cx=x+150*s,top=y-40*s;ag_soft(ctx,cc=>ag_rect(cc,cx-14*s,top,28*s,360*s,8*s),[120,96,72],[176,150,116],cx+8*s,top+20*s,120*s,"rgba(30,20,10,0.35)",8);
+  ag_soft(ctx,cc=>ag_rect(cc,cx-110*s,top+6*s,124*s,30*s,10*s),[132,106,80],[186,160,126],cx-20*s,top+10*s,120*s,"rgba(30,20,10,0.35)",6);ctx.restore();}
 // the implant's speech processor on its trolley, and the reel-to-reel tape recorder on top (o.reel: the reels' turn in radians)
 function tt_trolley(ctx,x,y,o){o=o||{};ctx.save();ag_floorShadow(ctx,x+150,y+300,210,26,0.28);
   ctx.fillStyle="#8B8F94";ctx.fillRect(x+10,y+150,12,150);ctx.fillRect(x+278,y+150,12,150);ctx.fillRect(x,y+250,300,10);
@@ -200,9 +212,9 @@ function tt_oldDesk(ctx,x,y,w,o){o=o||{};const d=70;ctx.save();ag_floorShadow(ct
 AG_PLACES.tt_room1843=c=>{const hz=700;
   // a sage damask, a tall window with heavy curtains on the right, a dado and a dark floor
   tt_wall(c,hz,[176,182,160],{dado:500,pattern:cc=>{cc.fillStyle="rgba(70,80,60,0.09)";for(let y=-40;y<500;y+=120)for(let x=-40+(Math.round(y/120)%2)*70;x<W;x+=140){cc.beginPath();cc.moveTo(x,y-38);cc.bezierCurveTo(x+30,y-10,x+30,y+10,x,y+38);cc.bezierCurveTo(x-30,y+10,x-30,y-10,x,y-38);cc.fill();}}});
-  tt_window(c,1450,90,300,470,{panes:[2,4],frame:[220,214,200]});
-  for(const s of [-1,1]){const cx=s<0?1400:1800;ag_soft(c,cc=>{cc.moveTo(cx-60,60);cc.bezierCurveTo(cx-40,300,cx-70,500,cx-50,hz);cc.lineTo(cx+60,hz);cc.bezierCurveTo(cx+70,500,cx+40,300,cx+60,60);cc.closePath();},[108,92,86],[150,132,124],cx+20,200,260,"rgba(30,20,10,0.4)",18);}
-  c.fillStyle="#7A6656";c.fillRect(1360,50,480,18);
+  tt_window(c,1450,150,300,440,{panes:[2,4],frame:[220,214,200]});
+  for(const s of [-1,1]){const cx=s<0?1400:1800;ag_soft(c,cc=>{cc.moveTo(cx-60,124);cc.bezierCurveTo(cx-40,330,cx-70,520,cx-50,hz);cc.lineTo(cx+60,hz);cc.bezierCurveTo(cx+70,520,cx+40,330,cx+60,124);cc.closePath();},[108,92,86],[150,132,124],cx+20,240,260,"rgba(30,20,10,0.4)",18);}
+  c.fillStyle="#7A6656";c.fillRect(1360,114,480,18);
   // a framed print on the wall, and a small table with books
   ag_soft(c,cc=>ag_rect(cc,180,170,300,230,4),[150,120,80],[200,170,120],420,180,200,"rgba(30,20,10,0.35)",8);c.fillStyle="#EFE8D6";c.fillRect(200,190,260,190);c.strokeStyle="rgba(90,80,60,0.45)";c.lineWidth=2;
   c.beginPath();c.moveTo(220,350);c.bezierCurveTo(280,280,330,330,440,250);c.stroke();

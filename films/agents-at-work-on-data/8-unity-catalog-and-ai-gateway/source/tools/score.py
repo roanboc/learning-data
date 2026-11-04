@@ -51,14 +51,29 @@ FIG = (58, 63, 61, 66)  # the mark: B flat 3, E flat 4, D flat 4, G flat 4
 
 # ---- the levels: the clavichord as loud as the module's other music after the author's review of 4 November 2026 (its loud moments
 # about -28 dB of full scale as one speaker plays the score, tools/quiet.py), the crumhorn a little under it; the effects about 16 dB
-# under the music, as low as the governance films' (FX scales them all)
-CVL, CRL, FX = 0.060, 0.032, 1.35
+# under the music, as low as the governance films' (FX scales them all). Raised 3 and 3.6 dB when the room stopped adding its own
+# (see _held), so each plays as loud as before
+CVL, CRL, FX = 0.084, 0.049, 1.35
 
-# a room round the players: a small, dry hall, ringing on for about a second, and nothing much above 1.6 kHz
+# a room round the players: a small, dry hall, ringing on for about a second, and nothing much above 1.6 kHz. Its level is set by what
+# it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), so a held note keeps its level, as the video guidelines ask:
+# scaled by all it rang, as at first, the room rang about 10 dB louder there than its share said
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.2)).astype(np.float32))(np.arange(int(1.2 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0
+_IR /= np.sqrt((np.abs(np.fft.rfft(_IR.astype(np.float64), 1 << 17))[(lambda f: (f > 100) & (f < 1500))(np.fft.rfftfreq(1 << 17, 1 / SR))] ** 2).mean())
 def _room(s, room):
     return (np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)) if room else s
+def _held(s, room):
+    """a note in the room, at its own level: even at a gain of one, the room moves a pure note's level up or down by where its
+    reflections meet it, so the note is set back to the level it had before the room, measured over its body (from a quarter of a
+    second in to 0.3 s before its end; a short note, over all of it)"""
+    r = _room(s, room)
+    if not room:
+        return r
+    a, b = int(0.25 * SR), len(s) - int(0.3 * SR)
+    if b - a < int(0.1 * SR):
+        a, b = 0, len(s)
+    return r * float(np.sqrt((s[a:b].astype(np.float64) ** 2).mean() / max(1e-12, (r[a:b].astype(np.float64) ** 2).mean())))
 
 # ---- the electric clavichord: a string struck by a rubber tip and heard through a pickup near its end, damped. Its partials are
 # harmonic (a light string, no stiffness to speak of), shaped by where the pickup sits (a comb of the string's modes) and softened by the
@@ -79,7 +94,7 @@ def clav(m, a, b=None, g=1.0, pan=0.0, room=0.22):
     s *= np.where(x > held, np.cos(0.5 * np.pi * np.minimum((x - held) / rel, 1)) ** 2, 1.0)
     th = int(0.03 * SR); s[:th] += filt(noise(0.03), 'low', 600)[:th] * np.exp(-np.arange(th) / SR / 0.006) * 0.06
     s = filt((s / max(1e-9, float(np.abs(s).max()))).astype(np.float32), 'low', 2400)
-    put(_room(s, room).astype(np.float32), a, g * CVL, pan)
+    put(_held(s, room).astype(np.float32), a, g * CVL, pan)
 
 def roll(ch, a, g=1.0, spread=0.055, b=None, pan=(-0.2, 0.2)):
     """a chord, the keys struck from the lowest up, a moment apart, held to b (or until they ring out)"""
@@ -107,7 +122,7 @@ def crum(m, a, b, g=1.0, pan=-0.1, room=0.3):
     s *= np.where(x > sec, np.cos(0.5 * np.pi * np.minimum((x - sec) / rel, 1)) ** 2, 1.0)
     br = int(0.08 * SR); s[:br] += filt(noise(0.08), 'band', (400, 1500))[:br] * np.exp(-np.arange(br) / SR / 0.02) * 0.05
     s = filt((s / max(1e-9, float(np.abs(s).max()))).astype(np.float32), 'low', 2300)
-    put(_room(s, room).astype(np.float32), a, g * CRL, pan)
+    put(_held(s, room).astype(np.float32), a, g * CRL, pan)
 
 def cfigure(a, g=1.0, step=0.36, last=2.2, pan=-0.15):
     """the mark on the crumhorn, an octave under the clavichord's"""

@@ -127,3 +127,53 @@ models:
         config:
           meta: {glossary_term: near_award, personal_data: none}
         constraints: [{type: not_null}]
+      - name: is_commencing
+        description: >
+          True when the learner was a commencing student in this award on the census date.
+          {{ doc("commencing_student") }}
+        data_type: boolean
+        constraints: [{type: not_null}]
+        config:
+          meta: {glossary_term: commencing_student, personal_data: none}
+
+unit_tests:
+
+  - name: commencing_means_started_for_the_first_time_this_year
+    description: >
+      Four learners studying the same graduate certificate on census day, 31 March 2026. One
+      started it this year: commencing. One came back to it after leave: not commencing. One
+      finished a master last year and started the certificate this year: commencing, in the
+      certificate. One started it last year: not commencing.
+    model: mart_planning__near_award
+    given:
+      - input: ref('core_learner')
+        format: csv
+        rows: |
+          learner_key,learner_bk,status,enrolled_award_key,valid_from,valid_to
+          L1,SIS|S-1,studying,A1,2026-02-23,
+          L2,SIS|S-2,studying,A1,2025-02-24,2025-08-01
+          L2,SIS|S-2,inactive,A1,2025-08-01,2026-02-23
+          L2,SIS|S-2,studying,A1,2026-02-23,
+          L3,SIS|S-3,studying,A2,2024-02-26,2025-12-10
+          L3,SIS|S-3,completed,A2,2025-12-10,2026-02-23
+          L3,SIS|S-3,studying,A1,2026-02-23,
+          L4,SIS|S-4,studying,A1,2025-02-24,
+      - input: ref('core_award')
+        format: csv
+        rows: |
+          award_key,award_bk,award_code,award_name,award_type,faculty_code,faculty_name,credit_points_required,valid_from,valid_to
+          A1,SIS|GC,GC,A graduate certificate,graduate certificate,EIT,Faculty of Engineering and IT,60,2024-01-01,
+          A2,SIS|M,M,A master,master,EIT,Faculty of Engineering and IT,120,2024-01-01,
+      - input: ref('core_credit_towards_award')
+        format: csv
+        rows: |
+          learner_key,award_key,credit_points_from_units,credit_points_from_microcredentials,credit_points_earned,valid_from,valid_to
+          L4,A1,30,0,30,2025-12-01,
+    expect:
+      format: csv
+      rows: |
+        learner_key,award_key,is_commencing
+        L1,A1,true
+        L2,A1,false
+        L3,A1,true
+        L4,A1,false

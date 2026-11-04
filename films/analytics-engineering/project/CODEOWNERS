@@ -30,8 +30,8 @@
 /models/marts/finance/_finance__decisions.yml            finance@uni.example noor@uni.example
 /models/marts/finance/_finance__models.yml               finance@uni.example jun.park@uni.example
 /models/marts/learning/_learning__models.yml             learning@uni.example jun.park@uni.example
-/models/marts/planning/_planning__conceptual.yml         planning@uni.example noor@uni.example
-/models/marts/planning/_planning__decisions.yml          planning@uni.example noor@uni.example
+/models/marts/planning/_planning__conceptual.yml         planning@uni.example mei.tanaka@uni.example noor@uni.example
+/models/marts/planning/_planning__decisions.yml          planning@uni.example mei.tanaka@uni.example noor@uni.example
 /models/marts/planning/_planning__models.yml             planning@uni.example jun.park@uni.example
 /models/marts/wallet/_wallet__conceptual.yml             wallet@uni.example noor@uni.example
 /models/marts/wallet/_wallet__decisions.yml              wallet@uni.example noor@uni.example

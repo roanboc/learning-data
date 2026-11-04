@@ -1,0 +1,32 @@
+{
+  "kicker": "What an agent reads",
+  "kicker_es": "Lo que lee un agente",
+  "title_es": "Ingeniería de contexto",
+  "h1": "Context engineering: what an agent reads, and who writes it",
+  "h1_es": "Ingeniería de contexto: qué lee un agente y quién lo escribe",
+  "lead": "Planning asks how many of the 18,412 students on census day were commencing. Nothing Jun's agent reads says what the word means, so it guesses from the names and counts 6,931. Mei knows: a student back from leave isn't new. She writes the meaning down once, and the agent counts 6,212.",
+  "lead_es": "Planificación pregunta cuántos de los 18,412 estudiantes del día del censo eran de nuevo ingreso. Nada de lo que lee el agente de Jun dice qué significa: adivina por los nombres y cuenta 6,931. Mei lo sabe: quien vuelve de una licencia no es nuevo. Lo escribe una vez, y el agente cuenta 6,212.",
+  "description": "A film about context engineering, the opening of Agents at work on data: Guido of Arezzo's lines, about 1025, which put on the page what had lived in each master's head, so boys could sing chants they had never heard; Planning's question about commencing students, and Jun's agent, which reads tables, columns, code and docs, finds no meaning for the word, and counts 6,931 as sure as if it knew; Mei's meaning, the government's rule too, which makes it 6,212; the four kinds of context an agent reads, code, metadata, skills and tools; the meaning written once in the business glossary by its owner, copied into the project with its source, tested, promised in the contract and named in the notes for agents; and one context for the whole team, which people and agents both read.",
+  "description_es": "Una película sobre la ingeniería de contexto, la que abre Agentes trabajando con datos: las líneas de Guido de Arezzo, hacia 1025, que pusieron en la página lo que vivía en la cabeza de cada maestro, para que los niños cantaran cantos que nunca habían oído; la pregunta de Planificación sobre los estudiantes de nuevo ingreso, y el agente de Jun, que lee tablas, columnas, código y documentos, no halla qué significa la palabra y cuenta 6,931 tan seguro como si lo supiera; el significado de Mei, que también es la regla del gobierno, y da 6,212; los cuatro tipos de contexto que lee un agente, código, metadatos, habilidades y herramientas; el significado escrito una vez por su dueña en el glosario de negocio, copiado en el proyecto con su fuente, probado, prometido en el contrato y nombrado en las notas para agentes; y un solo contexto para todo el equipo, que leen tanto las personas como los agentes.",
+  "card": "Jun's agent guesses what a word means and counts 6,931. Written down once by its owner, the meaning gives 6,212, for everyone.",
+  "card_es": "El agente de Jun adivina qué significa una palabra y cuenta 6,931. Escrito una vez por su dueña, el significado da 6,212.",
+  "chapters_es": {
+    "lines": "Las líneas",
+    "word": "Una palabra que nadie escribió",
+    "inbox": "En una cabeza, y en un buzón",
+    "reads": "Lo que lee un agente",
+    "page": "En la página",
+    "team": "Un contexto para el equipo",
+    "verse": "Un verso nunca oído"
+  },
+  "past": [
+    "Arezzo, Italy, about 1025: lines on the page",
+    "What lived in each master's head went onto the page, and boys sang chants they had never heard."
+  ],
+  "past_es": [
+    "Arezzo, Italia, hacia 1025: líneas en la página",
+    "Lo que vivía en la cabeza de cada maestro pasó a la página, y los niños cantaron cantos que nunca habían oído."
+  ],
+  "next_h": "You've seen what an agent reads, and who has to write it. Next: skills and workflows, so a job solved once stays solved.",
+  "next_h_es": "Viste lo que lee un agente, y quién tiene que escribirlo. Después: habilidades y flujos de trabajo, para que un trabajo resuelto una vez siga resuelto."
+}

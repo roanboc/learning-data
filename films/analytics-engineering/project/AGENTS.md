@@ -85,6 +85,14 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 `CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
 The agent recommends; people approve.
 
+## What words mean
+
+Before you count by a word, look up what it means: in the business glossary, and in the
+conceptual model that copies its term with `source:` (decision DEC-PRJ-11). A column's name is a
+hint, not a meaning. If the word isn't there, don't guess: ask its owner (*Who approves what*).
+Once they've decided, the meaning goes into the glossary first, then into the project, for every
+person and every agent to read.
+
 ## The team's memory
 
 What you learn in a session ends with it, unless the team keeps it. The team's memory holds the

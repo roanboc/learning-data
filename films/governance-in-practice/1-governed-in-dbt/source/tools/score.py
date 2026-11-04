@@ -53,8 +53,10 @@ def hz(m):
     return KEY[1] * 2 ** o * _JI[pc]
 
 # ---- the levels: a string sits about as far under the voice as the series' other films' music (matched by loudness, not by
-# peak); the xylophone a little under it, as it's struck; the effects about 12 dB under the music (FX scales them all)
-QL, XL_, FX = 0.03, 0.05, 1.3
+# peak); the xylophone a little under it, as it's struck; the effects about 12 dB under the music (FX scales them all). Since the
+# author's review of What an agent is (4 November 2026) the strings and the xylophone are 3 dB lower, as low as in the governance
+# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
+QL, XL_, FX = 0.021, 0.035, 0.91
 LEVEL = {'vn1': 1.0, 'vn2': 0.95, 'va': 1.05, 'vc': 1.1}
 PAN = {'vn1': -0.35, 'vn2': -0.12, 'va': 0.14, 'vc': 0.32}  # as a quartet sits: first violin left, cello right
 
@@ -268,8 +270,9 @@ chord({'vc': 46, 'va': 53, 'vn2': 58, 'vn1': 62}, board + 0.4, E('rules') + 0.3,
 mark(title + 0.3)
 
 # 2. A pin at each step: a chord at the turn; each pin goes in with a note of its own, up the scale, as the loop fills; the learner
-#    table's sheet, its owner's pin and its term's; the columns' sheet, their classes and the pin; the tests' sheets and the rule's
-#    pin; and the pull request's files, the governance lines in the same change as the code, on the home chord
+#    table's sheet, its owner's pin and its term's, a note each; the columns' sheet, their classes and the pin; the tests' sheets and
+#    the rule's pin (since 4 November 2026 these two pins go in without a note: the music came in six times in 29 seconds); and the
+#    pull request's files, the governance lines in the same change as the code, on the home chord
 pw = lambda lid, word, off=0: W('pins', lid, word, off)
 pc = lambda lid, off=0: G('pins', lid, off)
 p0 = S0('pins')
@@ -285,9 +288,9 @@ cl_, ident, test, tOwn = pc('columns', -0.4), pw('columns', 'identifies a person
 paper(cl_ + 0.1, 0.016, px(900), 0.4)
 for k in range(3):
     tap(ident + 0.2 + 0.25 * k, 0.008, px(1600))
-pin(ident + 0.8, 0.016, px(1650)); xyl(74, ident + 0.8, 0.45)
+pin(ident + 0.8, 0.016, px(1650))
 paper(test - 0.2, 0.014, px(700), 0.35); paper(tOwn + 0.6, 0.012, px(1400), 0.35)
-pin(tOwn + 0.8, 0.016, px(1150)); xyl(75, tOwn + 0.8, 0.45)
+pin(tOwn + 0.8, 0.016, px(1150))
 rv, wc_ = pc('reviewed', -0.4), pw('reviewed', 'with the code')
 tap(rv + 0.2, 0.010, 0.0)
 chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, wc_ - 0.1, E('pins') + 0.2, 0.55, step=0.12, att=0.5, rel=0.8)
@@ -426,7 +429,8 @@ for k in range(3):
     knock(ppl + 0.1 + 0.35 * k + 0.5, 0.012, px(1500), 280)
 chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, ppl, E('agent') + 0.4, 0.55, step=0.15, att=0.6, rel=0.9)
 
-# 9. Carried with the code: Planning's yes, and the pull request merged, on the home chord; Noor's map, the project the home of five
+# 9. Carried with the code: Planning's yes, and the pull request merged (since 4 November 2026 without the home chord, nine seconds
+#    after People decide's); Noor's map, the project the home of five
 #    things, and their copies flowing one way, each drift check green; Jun's old line struck through, and his new words; the
 #    poster's pins, each giving way to its line in the project, a note each, up the scale; the next film's card lifts; and the end
 #    card, on the mark, the chord held to the end
@@ -435,7 +439,6 @@ cc = lambda lid, off=0: G('close', lid, off)
 c0 = S0('close')
 yes = cw('goes', "Planning's yes")
 knock(yes + 0.05, 0.012, px(1600), 300)
-chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, yes + 0.6, yes + 3.2, 0.55, step=0.12, att=0.5, rel=0.9)
 tap(yes + 0.7, 0.010, px(700))  # Open becomes Merged
 hm = [cw('home', w_) for w_ in ('owners', 'classes', 'contracts', 'tests', 'decisions')]
 for k, t in enumerate(hm):

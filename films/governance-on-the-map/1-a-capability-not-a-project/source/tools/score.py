@@ -63,8 +63,10 @@ def hz(m, k='Db'):
     return f * 2 ** o * _JI[pc]
 
 # ---- the levels: a saxophone sits about as far under the voice as the series' other films' music (each matched by loudness, not by
-# peak); the effects about 12 dB under the music (FX scales them all)
-RL, FX = 0.03, 1.3
+# peak); the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is (4 November 2026)
+# the saxophones are 1 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them), and the
+# effects as much, so they stay about 12 dB under the music
+RL, FX = 0.0265, 1.15
 LEVEL = {'sop': 0.95, 'alto': 1.15, 'ten': 1.1, 'bari': 1.05}
 PAN = {'sop': -0.3, 'alto': -0.1, 'ten': 0.12, 'bari': 0.28}  # as a quartet sits: soprano on the left, baritone on the right
 
@@ -488,7 +490,8 @@ chord({'bari': 37, 'ten': 44, 'alto': 53, 'sop': 61}, govD - 0.15, govD + 2.8, 0
 marker(govD + 0.5, 0.012, px(1123), 0.8)
 
 # 4. Seven, and one more: a pin for each card as it's named (the first few, then softer); a token from each film, a knock each, and a
-#    chord for this term; two sheets slid onto the desk, the wheel's parts lit, the list ticked, and the one it finds, ringed, with
+#    chord for this term; two sheets slid onto the desk, the wheel's parts lit (a key for every other part since 4 November 2026: with
+#    the ticks, a key for each made 15 sounds begin in one second), the list ticked, and the one it finds, ringed, with
 #    the alto's question; the eighth card pinned, its empty corner dashed in, and the baritone's low D-flat alone: nobody does it yet
 sw_ = lambda lid, word, off=0: W('seven', lid, word, off)
 sc_ = lambda lid, off=0: G('seven', lid, off)
@@ -500,9 +503,8 @@ for j in range(7):
     knock(sc_('term') + 0.45 + 0.2 * j, 0.010 if j < 2 else 0.006, px(560 + 374 * (j % 4)), 300)
 chord({'bari': 37, 'ten': 44, 'alto': 53}, sc_('term') + 0.3, sc_('term') + 2.7, 0.55, step=0.2, att=0.5, rel=0.6)
 slide(ck + 0.15, 0.014, -0.4, 0.7); slide(twoF + 0.05, 0.014, 0.4, 0.7)
-for k in range(10):
-    if k != 5:
-        tap(asCk + 0.12 * k + 0.1, 0.008 if k < 3 else 0.004, -0.4)
+for k in (0, 2, 4, 7, 9):
+    tap(asCk + 0.12 * k + 0.1, 0.008 if k < 3 else 0.004, -0.4)
 for j in range(7):
     tick(asCk + 0.3 + 0.22 * j, 0.009 if j < 2 else 0.005, 0.4)
 pencil(oneMore + 0.3, 0.011, 0.4, 0.6)

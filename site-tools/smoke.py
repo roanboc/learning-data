@@ -277,6 +277,8 @@ class Run:
         """waits for the film's assets; on a page with a player, also for its controls"""
         has = await pg.evaluate("() => !!(window.FILM && FILM.ready)")
         if has:
+            # a player makes its pictures only once the visitor is about to watch: ask for them as a visitor's pointer would
+            await pg.evaluate("() => { if (FILM.prepare) FILM.prepare(); }")
             await pg.evaluate("() => Promise.race([FILM.ready, new Promise(r => setTimeout(r, %d))])" % timeout)
             if await pg.evaluate("() => !!document.getElementById('film')"):
                 await pg.wait_for_function("() => typeof FILM.time === 'function'", timeout=timeout)

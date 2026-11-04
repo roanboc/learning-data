@@ -54,8 +54,12 @@ def hz(m):
 I, IV, V, vi, iii = (39, 55, 58), (44, 51, 60), (34, 53, 62), (36, 55, 63), (43, 50, 58)
 
 # ---- the levels: the brass sits about as far under the voice as the series' other films' music (matched by loudness, not by peak);
-# the crotales a little under it, as their note is pure and high; the effects about 12 dB under the music (FX scales them all)
-BL, CL, FX = 0.044, 0.046, 1.6
+# the crotales a little under it, as their note is pure and high; the effects about 12 dB under the music (FX scales them all). Since
+# the author's review of What an agent is (4 November 2026) the brass and the crotales are 2.5 dB lower, as low as in the governance
+# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music; and
+# the home chord, which came nine times after the opening, three of
+# them within 13 seconds of itself, comes four times: home again after the grants, Clara's stars, Mei's yes, and Clara's plan
+BL, CL, FX = 0.033, 0.0345, 1.2
 LEVEL = {'tu': 1.0, 'eu': 1.0, 'th': 0.9}
 PAN = {'th': -0.32, 'eu': 0.06, 'tu': 0.3}  # as a brass band sits: the horn at the left, the euphonium in the middle, the tuba right
 
@@ -301,8 +305,7 @@ knock(board + 0.35, 0.010, px(760), 280); air(board + 1.0, 0.9, 0.007, px(760)) 
 mark(title + 0.3)
 
 # 2. Laid out by area: a chord at the turn; each drawer of the catalog comes; the learner table lifts, its area's tag drawn tight, and
-#    its model's domain; the Discover page, its tiles, on the home chord; the grants, each to a group, and Clara's card crossed off;
-#    home again
+#    its model's domain; the Discover page, its tiles; the grants, each to a group, and Clara's card crossed off; home
 aw = lambda lid, word, off=0: W('area', lid, word, off)
 a0 = S0('area')
 chord(IV, a0 + 0.2, a0 + 2.6)
@@ -315,7 +318,6 @@ paper(aw('tag', 'from the domain') + 0.1, 0.014, px(1260), 0.4); marker(aw('tag'
 lays = aw('discover', 'lays the tables')
 for k in range(6):
     tap(lays + 0.12 * k + 0.15, 0.008 * 0.92 ** k, px([407, 949, 1491][k % 3]))
-chord(I, lays - 0.2, aw('discover', 'and more') + 1.3, g=0.5)
 gtg, nv = aw('grant', 'goes to a group'), aw('grant', 'never to a person')
 knock(gtg + 0.4, 0.010, px(700), 280); knock(gtg + 0.7, 0.009, px(700), 280)
 knock(nv + 0.3, 0.010, px(600), 260)  # Clara's card comes
@@ -355,12 +357,13 @@ tap(finds + 0.2, 0.008, px(1200)); knock(owner + 0.2, 0.010, px(1100), 280); tap
 tagged(toc + 0.5)
 chord(I, toc + 0.3, E('tag') + 0.3, g=0.5)
 
-# 4. One policy, by tag: a chord at the turn; the policy's page, each field lit as it's said; a padlock on each table, swept into the one
+# 4. One policy, by tag: a chord at the turn, the third (home until 4 November 2026); the policy's page, each field lit as it's said;
+#    a padlock on each table, swept into the one
 #    policy, which locks; tomorrow's table set down, its tag, one bowed note, and its stars, the rising fifth, on the fifth going home;
 #    the row filter, lit; Clara's card, her query's rows, and her stars, on the home chord; Mei's values, and the build's card
 pw = lambda lid, word, off=0: W('policy', lid, word, off)
 p0 = S0('policy')
-chord(I, p0 + 0.2, p0 + 2.6)
+chord(iii, p0 + 0.2, p0 + 2.6)
 for w_ in ('masks', 'tagged direct', 'the whole catalog', 'for everyone', "but the registrar's office"):
     marker(pw('masks', w_), 0.007, px(900), 0.45)
 tm = G('policy', 'tomorrow', -0.3)
@@ -381,8 +384,7 @@ marker(pw('values', 'sees the values'), 0.008, px(1000), 0.6); knock(pw('values'
 
 # 5. The scrambled key: a chord at the turn; the student number slides into the machine and the code comes out; the same code in three
 #    tables, joined; "anonymous" struck through; the registrar's list through the machine, a code matched and who that is, on the
-#    sixth with its top note a step down, as for the nine; still personal, each code counted, and what reading it takes pinned:
-#    home
+#    sixth with its top note a step down, as for the nine; still personal, each code counted, and what reading it takes pinned
 kw = lambda lid, word, off=0: W('key', lid, word, off)
 k0 = S0('key')
 chord(iii, k0 + 0.2, k0 + 2.6)
@@ -403,11 +405,10 @@ tap(stl + 0.1, 0.008, px(300))
 for k in range(5):
     tick(cnt + 0.24 * k + 0.1, 0.007, px(1190))
 pin(pp + 0.2, 0.016, px(1525))
-chord(I, pp - 0.1, E('key') + 0.3, g=0.5)
 
 # 6. Groups, with an end date: a chord at the turn; Mei's card; Clara's request, each field lit, and Mei's yes, her tick and her name,
 #    on the home chord; the grants, Clara's card crossed off and Planning's group; the directory: Clara's card into Planning's drawer,
-#    its date tied on, on the home chord; the sync; someone moving to Finance, and their access following; and on 15 December her
+#    its date tied on; the sync; someone moving to Finance, and their access following; and on 15 December her
 #    card leaving by itself, the falling step, the fourth going home in the pause after it
 gw = lambda lid, word, off=0: W('groups', lid, word, off)
 g0 = S0('groups')
@@ -427,7 +428,6 @@ pencil(toc2 - 0.1, 0.010, px(860), 0.35); air(toc2 + 0.1, 0.8, 0.006, px(1200)) 
 knock(gw('joins', 'a Planning group') + 0.4, 0.010, px(700), 280)
 jn2 = gw('joins', 'and Clara joins', -0.3)
 card(jn2 + 1.4, 0.012, px(410)); tie(jn2 + 1.3, 0.008, px(600))  # into Planning's drawer, its date tied on
-chord(I, jn2 + 1.2, jn2 + 3.6, g=0.45)
 pencil(gw('reads', 'reads its groups'), 0.008, px(1345), 0.9)  # the sync
 jb, mv, fl = gw('jobs', 'changes jobs'), gw('jobs', 'moves them'), gw('jobs', 'access follows')
 card(jb + 0.2, 0.010, px(410)); air(mv, 0.6, 0.006, px(410)); card(mv + 1.5, 0.011, px(990)); air(fl, 1.2, 0.005, px(1400))
@@ -435,15 +435,14 @@ en = gw('ends', 'ends by itself')
 slide(en, 0.008, px(410), 1.0); ended(en + 0.8)
 prog([(en - 0.2, IV), (en + 2.0, I)], E('groups') + 0.3, g=0.5)
 
-# 7. Down to the column: a chord at the turn; the email picked, its thread drawn down to the column and tagged there too, on the home
-#    chord; the beta label, and the ghost of a tag travelling; the wallet's file, the email classed there too; a table sketched with an
+# 7. Down to the column: a chord at the turn; the email picked, its thread drawn down to the column and tagged there too; the beta
+#    label, and the ghost of a tag travelling; the wallet's file, the email classed there too; a table sketched with an
 #    email nobody classed, and the check's message: the tuba says no
 lw = lambda lid, word, off=0: W('lineage', lid, word, off)
 l0 = S0('lineage')
 chord(vi, l0 + 0.2, l0 + 2.6)
 pk = lw('pick', 'email')
 tap(pk + 0.05, 0.009, px(900)); tap(pk + 0.4, 0.006, px(780)); pencil(pk + 0.2, 0.009, px(1100), 1.0); tap(pk + 1.35, 0.006, px(1400))
-chord(I, pk + 0.3, pk + 3.0, g=0.45)
 bt = lw('beta', 'follow lineage')
 tap(bt + 0.3, 0.006, px(865)); air(bt + 0.25, 1.7, 0.004, px(1100))
 nd = lw('need', 'every table', -0.3)

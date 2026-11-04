@@ -284,6 +284,13 @@ def claps(t0, t1, g, pan):
     t = t0 + R10.uniform(0, 0.35)
     while t < t1:
         clap(t, g * min(1, (t - t0) / 0.3, (t1 - t) / 0.3), pan); t += R10.uniform(0.3, 0.48)
+def crowd(t0, t1, g, pan=0.0):
+    """people clapping together, further off, heard as one: a soft patter of air that swells in and fades, its grain too fine to
+    count, its swell a little uneven (since 4 November 2026, in place of a clap for each pair of hands: with the mimes', nine pairs of
+    hands made 17 sounds begin in one second, a crackle)"""
+    sec = t1 - t0; x = tt(sec); e = np.clip(x / 0.35, 0, 1) * np.clip((sec - x) / 0.5, 0, 1)
+    sw = filt(R10.standard_normal(len(x)).astype(np.float32), 'low', 4); sw = 0.8 + 0.2 * sw / (np.abs(sw).max() + 1e-9)
+    X(norm(filt((filt(noise(sec)[:len(x)], 'band', (450, 1800)) * e * sw).astype(np.float32), 'low', 2000)), t0, g * FX, pan)
 
 # =============================================================================================================================
 # 1. The mime before the fine: Bogotá, 1995, and a year on, in G. As the picture draws it: two cars pass, three roll up and stop on
@@ -351,9 +358,8 @@ paper(wr0 + 0.05, 0.014, 0.1, 0.25)
 note('bsn', 43, wr0 + 0.2, 1.8, 1.0, 'G')
 pen(wr0 + 0.4, 0.010, 0.1, applaud + 0.4 - (wr0 + 0.4))
 cl0, cl1 = applaud - 0.3, applaud + 2.4
-for X0 in [-5.8, -4.6, -3.6, -2.8, 11.8, 13.2]:
-    claps(cl0, cl1, 0.006, max(-0.7, min(0.7, (X0 - 3) / 10)))
-for i in (0, 2, 3):  # three of the mimes clap too
+crowd(cl0, cl1 + 0.2, 0.012, 0.0)  # the six people around, as one
+for i in (0, 2, 3):  # three of the mimes clap too, each heard
     claps(cl0 + 0.15 * i, cl1, 0.005, [-0.4, 0, -0.5, 0.6][i])
 flap(applaud + 0.45, 0.010, 0.1, 0.15)
 # the three panels pinned up, one voice each, from the top: the people around, the mime, the fine, last; the pencilled arrows; the

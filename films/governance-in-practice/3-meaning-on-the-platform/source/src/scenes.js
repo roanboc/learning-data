@@ -171,8 +171,9 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
     rd:c.reads-0.3,dr:wAt(sc,"reads","The draft submission"),cen:wAt(sc,"reads","Planning's census report"),
     ow:c.own-0.3,nei:wAt(sc,"own","Neither counts"),way:wAt(sc,"own","its own way")}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
-    // a ledger on Yusuf's desk: awards conferred, and its rule, a line at a time; this year's line
-    {at:0,place:"deskGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_ledger(x,{r1:clamp((tt-P.which)/1.2,0,1),r2:clamp((tt-P.yr)/1.2,0,1),yr:clamp((tt-P.once)/1.2,0,1)})},
+    // a ledger on Yusuf's desk: awards conferred, and its rule, a line at a time; this year's line, written in full before the desk
+    // gives way to the metric view's sheet
+    {at:0,place:"deskGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_ledger(x,{r1:clamp((tt-P.which)/1.2,0,1),r2:clamp((tt-P.yr)/1.2,0,1),yr:clamp((tt-P.once+0.5)/0.9,0,1)})},
     // the metric view, as the project builds it: what it counts, lit as it's said; beside it, its pull request, tested and approved by
     // its owner
     {at:P.mv,place:"desk",keys:[[P.mv,960,500,1]],push:0.02,draw:(x,tt)=>{gm_mvSheet(x,{u:clamp((tt-P.mv)/0.9,0,1),

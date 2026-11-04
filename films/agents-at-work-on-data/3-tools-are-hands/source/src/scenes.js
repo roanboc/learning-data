@@ -124,8 +124,8 @@ scene("hands",(ctx,S,t,sc)=>{const c=sc.cues,P=th_once(sc,"P",()=>({cdc:wAt(sc,"
       ag_roomLight(x,1);TL_KICK(x);}},
     // each hand is a tool server: a small program that gives an agent its tools, through an open standard; whatever it can do, the agent
     // can do; and the agent works for whoever gives it words: a hidden line, or a thief with its key; so ask for the least; since 1975
-    // (another scene in the room: it cuts to the server, the camera gliding on, rather than laying it over the six tools)
-    {cut:"later",at:c.server-0.3,place:"thLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
+    // (another scene in the room, later:true: the six tools leave, then the server comes in, as the camera glides on)
+    {later:true,at:c.server-0.3,place:"thLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
       const lit=TL_ACTS.map((s,i)=>ag_in(tt,c.cando+0.2+i*0.32,0.3)),st=[0,1,2,3].map(i=>i===0?0:ag_in(tt,P.least+0.1+(i-1)*0.3,0.5));
       tl_ticketSmall(x,110,150,520,{a:ag_in(tt,c.whoever,0.5),k:ag_spr(tt,c.whoever),hid:ag_in(tt,P.hidden,0.6)});
       withA(x,ag_in(tt,P.hidden+0.3,0.4),()=>ag_pill(x,370,414,"a hidden line",{icon:"warn",col:AG.amber}));

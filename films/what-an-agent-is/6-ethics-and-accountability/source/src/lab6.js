@@ -291,4 +291,6 @@ AG_PLACES.oxOffice=c=>ag_paintLab(c,{seed:5});
 // the lab at night with its lamp at the far left, out of the way of the gate
 const OX_LAMP=[150,760];
 AG_PLACES.oxNight=c=>ag_paintLab(c,{night:true,lamp:OX_LAMP});
+// every shot in the lab draws its light over what stands there, so the bare room keeps it while a later moment comes in
+AG_BARE.lab=c=>ag_roomLight(c,1);
 

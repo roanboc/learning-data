@@ -74,8 +74,8 @@ scene("book",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       const sl=ag_in(tt,P.less-0.2,0.5);
       SW_HEIRS.forEach((h,i)=>{const d=i===2;ag_textCard(x,h.x-SW_CARDW/2,236,SW_CARDW,{kick:h.kick,title:h.title,sub:d&&sl>0.5?"240 dirhams":h.sub},{tail:{side:"bottom",at:0.5,px:h.x,py:h.y-262*h.s},edge:d&&sl>0.5?AG.amber:null,kickCol:SW_PAL.tag});});
       const p=sw_pop(tt,P.less+0.1,null);ag_pill(x,1620,188,"less than the law gives her",{col:AG.amber,icon:"warn",a:p.a,size:28});}},
-    // two reckoners, one estate, two answers: another scene in the courtyard, cut to (the camera glides on), not laid over the family
-    {cut:"later",at:P.two,place:"swCourt",keys:[[P.two,960,560,1.02],[P.two+0.1,960,550,1.06]],d:6,push:0.01,draw:(x,tt)=>{
+    // two reckoners, one estate, two answers: another scene in the courtyard (later:true): the family leaves, then the two come in
+    {later:true,at:P.two,place:"swCourt",keys:[[P.two,960,560,1.02],[P.two+0.1,960,550,1.06]],d:6,push:0.01,draw:(x,tt)=>{
       sw_reckonerAt(x,tt,"reckoner",560,{gaze:[3,0.4]});sw_reckonerAt(x,tt+2,"reckoner2",1400,{flip:true,gaze:[3,0.4]});ag_roomLight(x,0.5);
       const p1=sw_pop(tt,P.tw1,null),p2=sw_pop(tt,P.tw1+0.4,null);
       ag_textCard(x,300,190,470,{kick:"One reckoner",title:"Her share: 280 dirhams"},{tail:{side:"bottom",at:0.6,px:580,py:470},k:p1.k,a:p1.a,kickCol:SW_PAL.tag});
@@ -89,8 +89,8 @@ scene("book",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       const p2=sw_pop(tt,P.require-0.8,null);ag_textCard(x,1020,440,700,{kick:"His short book, in his words",title:"“such as men constantly require”",sub:"in inheritance, legacies, partition, lawsuits and trade"},{k:p2.k,a:p2.a,kickCol:SW_PAL.tag});}},
     // the book open: two moves bring a problem to its form; the six forms
     {at:P.moves,place:"swBook",dis:0.7,keys:[[P.moves,960,520,1.0],[P.moves+0.1,960,510,1.02]],d:6,push:0.01,draw:(x,tt)=>sw_moves(x,tt,P)},
-    // one form's steps, an example, and the square drawn on the page as each step is said
-    {cut:"later",at:P.steps-0.3,place:"swBook",keys:[[P.steps-0.3,960,500,1.0],[P.steps,960,490,1.03]],d:8,push:0.01,draw:(x,tt)=>sw_steps(x,tt,P)},
+    // one form's steps, an example, and the square drawn on the page as each step is said (later:true: the six forms leave the page first)
+    {later:true,at:P.steps-0.3,place:"swBook",keys:[[P.steps-0.3,960,500,1.0],[P.steps,960,490,1.03]],d:8,push:0.01,draw:(x,tt)=>sw_steps(x,tt,P)},
     // pages of real cases, legacies most of all
     {cut:true,at:P.cases,place:"swBook",keys:[[P.cases,960,500,1.03],[P.cases+0.1,960,500,1.06]],d:4,push:0.01,draw:(x,tt)=>{
       const turn=ag_sine(clamp((tt-P.cases)/1.0,0,1));if(turn<1)sw_pageTurn(x,turn);

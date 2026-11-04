@@ -10,6 +10,8 @@ const TLAB={agent:{x:560,y:570,R:140,r:72},count:{x:110,y:150,w:470},tools:{x0:1
 // the lab with quieter marble where the words go: the count, the tools' arc, the agent, the middle of the wall, the kicker
 const TL_QUIET=[[345,240,300,130,0.5],[1575,500,330,430,0.5],[560,570,190,190,0.45],[960,430,520,300,0.4],[430,96,360,46,0.3]];
 AG_PLACES.thLab=c=>ag_paintLab(c,{quiet:TL_QUIET});
+// the lab's shots draw its light and the film's kicker over what stands there: the bare room keeps both while a later moment comes in
+AG_BARE.thLab=c=>{ag_roomLight(c,1);TL_KICK(c);};
 const TL_KICK=(c,a)=>ag_kicker(c,"2.3","Tools are hands",{a});
 
 /* ---------------------------------------------------------------- the agent, its hands and its tools

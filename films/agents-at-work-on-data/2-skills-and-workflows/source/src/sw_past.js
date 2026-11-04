@@ -104,6 +104,8 @@ AG_PLACES.swRiver=c=>{const bank=500;sw_sky(c,bank,[1680,150]);
 
 // a house's courtyard: plaster walls; on the left a deep pointed arch, its stucco band; on the right a carved wooden screen; a brick floor
 const SW_COURT={base:720};
+// the courtyard's shots draw a light over what stands there, so the bare courtyard keeps it while a later moment comes in
+AG_BARE.swCourt=c=>ag_roomLight(c,0.5);
 AG_PLACES.swCourt=c=>{const base=SW_COURT.base;sw_plaster(c,0,0,W,base,SW_PAL.plaster,21);
   // the arch: its band of carved stucco, the deep shade inside, a glimpse of a room
   const ax0=300,ax1=700;c.fillStyle="rgba(120,92,62,0.14)";c.beginPath();sw_arch(c,ax0-34,ax1+34,330,96,base);c.fill();

@@ -7,7 +7,8 @@ vanishes in that frame. The author saw it as sudden jumps in the zoom that broke
 snapped back at a cut to the same room, a dim wall and the same wall lit were framed a few percent apart, a chapter opened on the room
 the last one ended in under its own camera, and the cards of the shot before were gone in a thirtieth of a second. In one room the
 camera glides from one framing to the next, and what changes fades (gv_shots and ag_shots do it for shots in one room, the same place
-or two places GV_ROOMS or AG_ROOMS make one room; gv_cutInto and ag_cutInto for chapters that open on what the last one ends on).
+or two places GV_ROOMS or AG_ROOMS make one room; gv_cutInto and ag_cutInto for chapters that open on what the last one ends on). A
+later moment in the room (later:true) passes through the bare room: what was there leaves, then what comes later comes in.
 
 It draws every frame, 30 a second, on a small canvas, and follows the places each shot draws (with its camera), the people (the
 series' person and the module's ag_person) and every line of words, as they reach the picture. It lists:
@@ -15,8 +16,9 @@ series' person and the module's ag_person) and every line of words, as they reac
   under a third of that in the frames just before and after (a glide moves a little every frame);
 - something jumping: a person or a line of words, clearly seen in two frames running, that moves more than THING px or changes size by
   more than SIZE in one frame, while it moves under a third of that in the two frames before and after (a change of room is a new shot);
-- something vanishing or appearing in one frame where the film changes shot or chapter while the room stays, but for a later
-  moment's cut (cut:"later": the people elsewhere, the camera gliding on).
+- something vanishing or appearing in one frame where the film changes shot or chapter while the room stays (words written out a
+  letter at a time are the same words as they grow).
+A shot that draws its own scene and names no room (no place, no room) is a room of its own: a cut to or from it is a new shot.
 A change that moves the picture BIG px or more at its corners is a new shot, which may cut, and isn't listed."""
 import sys
 
@@ -52,15 +54,16 @@ for(const [sn,fn] of [["gv_shot","gv_focus"],["ag_shot","ag_focus"]]){if(typeof 
   if(typeof of==="function")window[fn]=function(){const r=of.apply(this,arguments),top=H.stack[H.stack.length-1];if(top&&!top.cam&&r)top.cam=[r.x,r.y,r.z];return r;};}
 // which shot each chapter's shots show, on the picture itself
 for(const nm of Object.getOwnPropertyNames(window)){if(!/^[a-z0-9]+_shots$/.test(nm))continue;let f;try{f=window[nm];}catch(e){continue;}if(typeof f!=="function")continue;
-  window[nm]=function(ctx){const r=f.apply(this,arguments),sh=arguments[4];if(H.on&&ctx&&ctx.canvas===main){H.calls.push(r);
-    if(Array.isArray(sh)&&sh[r]&&sh[r].cut==="later")H.later=true;}return r;};}
+  window[nm]=function(ctx){const r=f.apply(this,arguments);if(H.on&&ctx&&ctx.canvas===main)H.calls.push(r);return r;};}
 // words
 const P2=CanvasRenderingContext2D.prototype,ft=P2.fillText,di=P2.drawImage;
 // words drawn in a colour that has its own opacity are that faint
 const inkA=c=>{const s=c.fillStyle;if(typeof s!=="string")return 1;const m=/^rgba\([^)]*,\s*([\d.]+)\)$/.exec(s);return m?+m[1]:1;};
-// a line of words is where its middle is, however it's aligned
+// a line of words is where the middle of what shows of it is, however it's aligned: spaces at either end don't count, so a line typed
+// out letter by letter stays where it is when a space comes
 P2.fillText=function(s,x,y){if(H.on){const w=String(s).trim();if(w.length>2){const m=this.getTransform(),al={center:0.5,right:1,end:1}[this.textAlign]||0,
-    q=at(m,x+(0.5-al)*this.measureText(String(s)).width,y),px=parseFloat((/([\d.]+)px/.exec(this.font)||[0,10])[1]);
+    S0=String(s),W0=this.measureText(S0).width,x0=x-al*W0,wl=this.measureText(S0.slice(0,S0.length-S0.trimStart().length)).width,
+    q=at(m,x0+(wl+this.measureText(S0.trimEnd()).width)/2,y),px=parseFloat((/([\d.]+)px/.exec(this.font)||[0,10])[1]);
     add(this.canvas,{k:"T",key:w.slice(0,60),x:q[0],y:q[1],z:Math.hypot(m.a,m.b)*px,a:this.globalAlpha*inkA(this)});}}
   return ft.apply(this,arguments);};
 // a picture laid on another brings what's on it where it's laid, at its opacity (a dissolve, the engine's crossfade, a fading person)
@@ -82,18 +85,19 @@ const move=(a,b)=>{let m=0;for(const [sx,sy] of [[0,0],[1920,0],[0,1080],[1920,1
 const inside=r=>r.x>9.6&&r.x<182.4&&r.y>5.4&&r.y<102.6;
 // 1. every frame: each room's camera (the last one drawn, clearly seen), and the people and words clearly seen
 const F=[];
-for(let f=0;f/30<TL.total;f++){const T=f/30;H.pend=new Map();H.stack=[];H.calls=[];H.mix=false;H.later=false;H.on=true;
+for(let f=0;f/30<TL.total;f++){const T=f/30;H.pend=new Map();H.stack=[];H.calls=[];H.mix=false;H.on=true;
   mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";mx.clearRect(0,0,192,108);
   try{renderFrame(mx,S,T);}catch(e){}
   H.on=false;const R=H.pend.get(main)||[],rooms=new Map();let top=null;
   for(const r of R)if(r.k==="R"&&r.a>=SEEN){rooms.set(r.key,r.cam);top=r;}
-  F.push({f,sc:sceneIndex(T),calls:H.calls.join(","),rooms,top:top&&top.key,mix:H.mix,later:H.later,
+  F.push({f,sc:sceneIndex(T),calls:H.calls.join(","),rooms,top:top&&top.key,mix:H.mix,
     things:R.filter(r=>(r.k==="P"||r.k==="T")&&r.a>=0.05).map(r=>({k:r.k,key:r.key,x:r.x/S,y:r.y/S,z:r.z,a:r.a,in:inside(r)}))});}
 // 2. from each frame to the next: how far each room's camera moved the picture, and the picture as a whole (a new shot when far)
 const steps=[null];
 for(let i=1;i<F.length;i++){const a=F[i-1],b=F[i],cams=new Map();for(const [k,c] of b.rooms){const p=a.rooms.get(k);if(p)cams.set(k,{m:move(p,c),from:p,to:c});}
-  // a change of room is a new shot (the same people may well stand elsewhere in another place)
-  let shot=0;if(a.top&&b.top)shot=a.top===b.top?cams.get(b.top).m:Infinity;
+  // a change of room is a new shot (the same people may well stand elsewhere in another place), and so is a change of shot to or from
+  // one that names no room (a shot that draws its own scene and gives no room: only the same place or room is one room)
+  let shot=0;if(a.top&&b.top)shot=a.top===b.top?cams.get(b.top).m:Infinity;else if(a.calls!==b.calls||a.sc!==b.sc)shot=Infinity;
   steps.push({cams,shot,stay:a.top&&b.top&&a.top===b.top&&shot<BIG,change:a.sc!==b.sc||a.calls!==b.calls});}
 const probs=[];
 // the picture jumping: a room's camera moving far more in one frame than in the frames around it; not while two pictures are mixed,
@@ -111,8 +115,7 @@ const pair=(A,B)=>{const c=[],byKey=new Map();for(let i=0;i<A.length;i++){const 
   c.sort((x,y)=>x[0]-y[0]);const ua=new Set(),m=new Map();for(const [d,i,j] of c){if(ua.has(i)||m.has(j))continue;ua.add(i);m.set(j,i);}return m;};
 for(let i=1;i<F.length;i++)F[i].back=pair(F[i-1].things,F[i].things);
 const hop=(i,j)=>{const b=F[i]&&F[i].back,k=b&&b.get(j);if(k==null)return null;const p=F[i].things[j],q=F[i-1].things[k];return{k,d:Math.hypot(p.x-q.x,p.y-q.y),r:p.z/q.z};};
-const laterCut=i=>F[i].later&&F[i].calls!==F[i-1].calls;
-for(let i=1;i<F.length;i++){if(steps[i].shot>=BIG||F[i].mix||F[i-1].mix||laterCut(i))continue;const got=[];
+for(let i=1;i<F.length;i++){if(steps[i].shot>=BIG||F[i].mix||F[i-1].mix)continue;const got=[];
   for(let j=0;j<F[i].things.length;j++){const h=hop(i,j);if(!h)continue;const p=F[i].things[j],dr=Math.abs(h.r-1);if(p.a<SEEN||F[i-1].things[h.k].a<SEEN)continue;
     if(dr>=0.3||(h.d<=THING&&dr<=SIZE))continue;
     let after=null,an=null;if(F[i+1])for(const [jn,k] of F[i+1].back)if(k===j){after=hop(i+1,jn);an=jn;break;}
@@ -122,10 +125,12 @@ for(let i=1;i<F.length;i++){if(steps[i].shot>=BIG||F[i].mix||F[i-1].mix||laterCu
     const before=hop(i-1,h.k),before2=before&&hop(i-2,before.k),still=x=>x&&x.d<h.d/3+1&&Math.abs(x.r-1)<Math.max(dr/3,SIZE/3);
     if(still(before)&&still(after)&&(!before2||still(before2))&&(!after2||still(after2)))got.push(p.key+" "+Math.round(h.d)+" px"+(dr>SIZE?" x"+h.r.toFixed(2):""));}
   if(got.length)probs.push({f:i,kind:"thing",got});}
-// something vanishing or appearing in one frame where the film changes shot or chapter, while the room stays (not a later moment's cut)
-for(let i=1;i<F.length;i++){if(!steps[i].change||!steps[i].stay||F[i].mix&&F[i-1].mix||laterCut(i))continue;const a=F[i-1],b=F[i],gone=[],came=[];
-  for(const p of a.things)if(p.a>=SEEN&&p.in&&!b.things.some(q=>q.k===p.k&&q.key===p.key&&Math.hypot(q.x-p.x,q.y-p.y)<NEAR))gone.push(p.key);
-  for(const q of b.things)if(q.a>=SEEN&&q.in&&!a.things.some(p=>p.k===q.k&&p.key===q.key&&Math.hypot(q.x-p.x,q.y-p.y)<NEAR))came.push(q.key);
+// something vanishing or appearing in one frame where the film changes shot or chapter, while the room stays; words being written
+// out, a letter more in this frame than the last, are the same words
+const same=(p,q)=>p.k===q.k&&(p.key===q.key||p.k==="T"&&(p.key.startsWith(q.key)||q.key.startsWith(p.key)))&&Math.hypot(q.x-p.x,q.y-p.y)<NEAR;
+for(let i=1;i<F.length;i++){if(!steps[i].change||!steps[i].stay||F[i].mix&&F[i-1].mix)continue;const a=F[i-1],b=F[i],gone=[],came=[];
+  for(const p of a.things)if(p.a>=SEEN&&p.in&&!b.things.some(q=>same(p,q)))gone.push(p.key);
+  for(const q of b.things)if(q.a>=SEEN&&q.in&&!a.things.some(p=>same(p,q)))came.push(q.key);
   if(gone.length||came.length)probs.push({f:i,kind:"pop",gone:[...new Set(gone)],came:[...new Set(came)]});}
 const dump=o.at==null?null:F.filter(r=>Math.abs(r.f/30-o.at)<=0.2).map(r=>({f:r.f,calls:r.calls,mix:r.mix,top:r.top,rooms:[...r.rooms].map(([k,c])=>k+" "+c.map(v=>v.toFixed(3)).join(",")),
   things:r.things.map(q=>q.k+" "+q.key.slice(0,24)+" "+Math.round(q.x)+","+Math.round(q.y)+" z"+q.z.toFixed(1)+" a"+q.a.toFixed(2))}));

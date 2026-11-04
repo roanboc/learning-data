@@ -52,8 +52,9 @@ def hz(m, k='G'):
     return f * 2 ** o * alt.get(pc, _JI[pc])
 
 # ---- the levels: the glass sits about 21 dB under the voice while it speaks, as in the series' other films, and the bells a little
-# over it; the effects about 12 dB under the music (FX scales them all)
-GL, BL, FX = 0.034, 0.042, 1.3  # a glass note, a handbell, the effects
+# over it; the effects about 12 dB under the music (FX scales them all), and since the author's review of What an agent is (4 November
+# 2026) 1 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them)
+GL, BL, FX = 0.034, 0.042, 1.15  # a glass note, a handbell, the effects
 
 # ---- the glass harmonica
 def glass(m, start, sec, g=GL, pan=0.0, k='G', ring=1.6):

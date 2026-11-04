@@ -45,23 +45,30 @@ function person(ctx,id,x,y,s,o){o=o||{};const P=PEOPLE[id],po=blendPose(POSE[o.p
 // the pencil and wash: the figure, drawn into a spare canvas, then a loose wash of its side's colour behind it, the paint bleeding a little
 // past the line, pigment in the paper's tooth, and a fine pencil line round it. Blurs are made by shrinking and growing, which is cheap.
 const wc_aura=e=>e[0]>200&&e[1]>200&&e[2]>200?WC_SIDE.none:e===TECH?WC_SIDE.tech:e===BIZ?WC_SIDE.biz:e;
+/* The figure is painted in spare canvases at the size it shows on screen (K, the frame's scale, at most 1): the site's player draws
+   at the size of the page, often half the video's or less, and painting every person at full video size each frame made the
+   watercolour films play at a few frames a second on a laptop (4 November 2026). The video, stills and checks (and any frame at full size) keep K at 1,
+   so their pictures are exactly as before; the blur, wash and pencil buffers keep their sizes in the film's own units. */
 function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
-  const [c,cx]=pcanvas("p",w,h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
-  if(WC_RAW){ctx.drawImage(c,ox,oy);return;}
+  const m=!window.__RENDER__&&ctx.getTransform?ctx.getTransform():null,K=m?Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))):1,wd=K<1?Math.ceil(w*K):w,hd=K<1?Math.ceil(h*K):h;
+  const [c,cx]=pcanvas("p",wd,hd);if(K<1)cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
+  if(WC_RAW){ctx.drawImage(c,ox,oy,w,h);return;}
   wc_prep();const q=8,sw=Math.max(2,Math.ceil(w/q)),sh=Math.max(2,Math.ceil(h/q)),col=wc_aura(edge);
   // the silhouette in the side's colour, shrunk: grown again, it is a soft blur
   const [sc,sx]=wc_buf("figS"+sw+"x"+sh,sw,sh);sx.drawImage(c,0,0,sw,sh);sx.globalCompositeOperation="source-in";sx.fillStyle=rgba(col,1);sx.fillRect(0,0,sw,sh);
   ctx.save();ctx.globalAlpha*=0.3;ctx.globalCompositeOperation="multiply";ctx.imageSmoothingEnabled=true;ctx.drawImage(sc,ox-10*s-q,oy+6*s-q,w+2*q,h+2*q);ctx.restore();
   // the paint, with the paper's grain and an uneven dry
-  const [fc,fx]=wc_wpaint(c,w,h);
+  const [fc,fx]=wc_wpaint(c,wd,hd,wd/w);
   const [bc,bx]=wc_buf("figB"+w+"x"+h,Math.ceil(w/4),Math.ceil(h/4));bx.drawImage(fc,0,0,bc.width,bc.height);
   ctx.save();ctx.globalAlpha*=0.4;ctx.drawImage(bc,ox+2*s,oy+1*s,w,h);ctx.restore();
   // the pencil line: the silhouette in pencil, a little off in four directions, under the paint
-  const [tc,tx]=wc_buf("figT"+w+"x"+h,w,h);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,w,h);
-  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy);ctx.restore();
-  ctx.drawImage(fc,ox,oy);}
-function wc_wpaint(c,w,h){const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;fx.drawImage(WC.gran,0,0);
-  fx.globalAlpha=0.4;fx.drawImage(wc_tint(WC.blotch,[206,196,186]),0,0,W,H);fx.globalAlpha=1;fx.globalCompositeOperation="destination-in";fx.drawImage(c,0,0);
+  const [tc,tx]=wc_buf("figT"+wd+"x"+hd,wd,hd);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
+  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy,w,h);ctx.restore();
+  ctx.drawImage(fc,ox,oy,w,h);}
+// k: the canvas's scale against the film's units (1 at full size), so the grain and the dry keep their size on the figure
+function wc_wpaint(c,w,h,k){k=k||1;const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;
+  if(k<1)fx.drawImage(WC.gran,0,0,W*k,H*k);else fx.drawImage(WC.gran,0,0);
+  fx.globalAlpha=0.4;fx.drawImage(wc_tint(WC.blotch,[206,196,186]),0,0,W*k,H*k);fx.globalAlpha=1;fx.globalCompositeOperation="destination-in";fx.drawImage(c,0,0);
   fx.globalCompositeOperation="source-over";return[fc,fx];}
 
 // an envelope in the hand, for the person who opens someone else's post: the letter half out, the fingers over its edge

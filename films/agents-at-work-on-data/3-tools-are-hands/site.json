@@ -1,0 +1,32 @@
+{
+  "kicker": "Tools and their rights",
+  "kicker_es": "Herramientas y permisos",
+  "title_es": "Las herramientas son manos, y cada mano es un permiso",
+  "h1": "Tools are hands, and every hand is a permission",
+  "h1_es": "Las herramientas son manos, y cada mano es un permiso",
+  "lead": "Jun's agent works on the census-day count with six tools, its hands. Each one is a permission: whatever it can reach, a hidden line or a stolen key can reach too. So each hand gets only what the job needs: read only, drafts in a sandbox, names masked, and no way out.",
+  "lead_es": "El agente de Jun trabaja en el conteo del día del censo con seis herramientas, sus manos. Cada una es un permiso: lo que alcanza, lo alcanza también una línea escondida o una clave robada. Cada mano recibe solo lo necesario: solo lectura, borradores en un sandbox, nombres enmascarados y ninguna salida.",
+  "description": "A film about an AI agent's tools as its hands, and every hand a permission: whatever a tool can do, the agent can do, and so can a line hidden in what it reads, or a thief with its key; the fewest rights each job needs, as security engineers have said since 1975; rules in a file for agents, which words can argue with, and rights set on the agent's own account, where the data lives, which no instruction can change; five questions for setting up each tool server: its own identity, read only unless the job must write, drafts only in its own sandbox, counts and small samples with names masked, and no way out or into production; the census agent's six hands, Tickets, Catalog, Docs, Query, Repository and Build, through the Model Context Protocol; a pull request that one person reviews and a second approves before the team's release puts it live; and a ticket whose pasted email hides a line telling any AI assistant to send the student list outside, met by the rule that what an agent reads is data, never orders, and by hands that couldn't send it. It opens in Oxford, where the university lost its library in 1550 and Thomas Bodley restored it in 1602 on one rule, with its books chained to their shelves.",
+  "description_es": "Una película sobre las herramientas de un agente de IA como sus manos, y cada mano como un permiso: lo que puede una herramienta lo puede el agente, y también una línea escondida en lo que lee, o un ladrón con su clave; los mínimos permisos que necesita cada trabajo, como dicen los ingenieros de seguridad desde 1975; reglas en un archivo para agentes, que las palabras pueden discutir, y permisos fijados en la propia cuenta del agente, donde viven los datos, que ninguna instrucción puede cambiar; cinco preguntas para configurar cada servidor de herramientas: su propia identidad, solo lectura salvo que el trabajo exija escribir, borradores solo en su propio sandbox, conteos y muestras pequeñas con los nombres enmascarados, y ninguna salida ni camino a producción; las seis manos del agente del censo, Tickets, Catalog, Docs, Query, Repository y Build, con el Model Context Protocol; un pull request que revisa una persona y aprueba otra antes de que el despliegue del equipo lo publique; y un ticket cuyo correo pegado esconde una línea que pide a cualquier asistente de IA enviar fuera la lista de estudiantes, frente a la regla de que lo que lee un agente son datos, nunca órdenes, y a unas manos que no podían enviarla. Empieza en Oxford, donde la universidad perdió su biblioteca en 1550 y Thomas Bodley la restauró en 1602 con una sola regla, con sus libros encadenados a los estantes.",
+  "card": "Jun's agent has six tools, its hands. Each gets only what its job needs, so a line hidden in a ticket can't send the list out.",
+  "card_es": "El agente de Jun tiene seis herramientas, sus manos. Cada una tiene solo lo necesario: una línea escondida no saca la lista.",
+  "chapters_es": {
+    "rule": "La regla de la Bodleiana",
+    "hands": "Cada mano es un permiso",
+    "rights": "Las reglas piden, los permisos se cumplen",
+    "six": "Seis manos",
+    "prod": "Dos personas hasta producción",
+    "line": "Una línea que nadie podía ver",
+    "shelves": "Todavía en sus estantes"
+  },
+  "past": [
+    "Oxford, 1602: a library refounded on one rule",
+    "Read here, take no book away, mark none, bring no flame, and every book chained to its shelf. Give each of an agent's hands only what its work needs."
+  ],
+  "past_es": [
+    "Oxford, 1602: una biblioteca refundada con una sola regla",
+    "Lee aquí, no te lleves ningún libro, no marques ninguno, no traigas fuego, y cada libro encadenado a su estante. Dale a cada mano de un agente solo lo que su trabajo necesita."
+  ],
+  "next_h": "You've seen why every tool is a permission, and how to give each the fewest rights. Next: memory, from one chat to the whole team.",
+  "next_h_es": "Viste por qué cada herramienta es un permiso, y cómo darle a cada una los mínimos permisos. Después: la memoria, de un chat a todo el equipo."
+}

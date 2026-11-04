@@ -1,7 +1,8 @@
 # Runs only the checks a change needs: the site's static checks when the site changed, its browser checks on the pages
 # the change touched (a changed page, or one that loads a changed file), and each film's checks (build, the site plays
-# that build, every moment draws) when that film's source or the shared code it draws with changed, or its release.json
-# (its entry in the release workflow's list of films). .github/scripts/affected.py picks them; run it locally too.
+# that build, its tools/check.py, and its tools/quiet.py where it has one) when that film's source or the shared code it
+# draws with changed, or its release.json (its entry in the release workflow's list of films). .github/scripts/affected.py
+# picks them; run it locally too.
 # On a pull request it compares with the base branch, on a push to main with the commit before it.
 # Run every check by hand: Actions → Checks → Run workflow.
 # The dbt project has its own workflow, credential-project.yml.
@@ -109,11 +110,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      # only the browser: the checks don't voice, mix or render
+      # only the browser, and the sound check's numpy and scipy: the checks don't voice, mix or render
       - name: Install the tools
         run: |
           pip install playwright
           python -m playwright install --with-deps chromium
+          if [ -f tools/quiet.py ]; then pip install numpy scipy; fi
 
       - name: Build the player
         run: python tools/build.py
@@ -129,5 +131,13 @@ jobs:
           fi
           echo "The site's player is built from this source."
 
+      # every moment draws; in the governance and agent films, also: each place paints without holding the page, nothing shows
+      # twice where shots or chapters change (twice.py), and no arm jumps in one frame (steady.py)
       - name: Check that every moment draws
         run: python tools/check.py
+
+      # the governance, agent and master data films (and three architecture films) check their score on its own, with no voice:
+      # how often the music comes in, repeats, levels, bursts of effects, beats and pulses (AGENTS.md, Sound)
+      - name: Check the sound
+        run: |
+          if [ -f tools/quiet.py ]; then python tools/quiet.py; else echo "This film has no sound check (tools/quiet.py)."; fi

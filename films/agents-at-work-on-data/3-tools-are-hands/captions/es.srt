@@ -1,0 +1,275 @@
+1
+00:00:01,600 --> 00:00:03,571
+Oxford, en el siglo XV.
+
+2
+00:00:05,271 --> 00:00:10,988
+Un duque regala sus libros a la universidad, y los eruditos los leen en una sala larga hecha para guardarlos.
+
+3
+00:00:12,888 --> 00:00:18,985
+Luego, en 1550, en años de conflictos religiosos, se llevan los libros: vendidos o perdidos.
+
+4
+00:00:21,085 --> 00:00:23,933
+Para 1556, se venden hasta los pupitres.
+
+5
+00:00:25,833 --> 00:00:30,984
+Cada uno se había copiado a mano, y algunos no tenían otra copia: perdidos, perdidos para siempre.
+
+6
+00:00:32,684 --> 00:00:35,970
+Durante medio siglo, la universidad no tiene biblioteca.
+
+7
+00:00:37,870 --> 00:00:42,854
+Una biblioteca está tan segura como las manos que la alcanzan. Algo tiene que cambiar.
+
+8
+00:00:44,754 --> 00:00:53,342
+En 1598, Thomas Bodley, un diplomático retirado, ofrece restaurarla a su costa, con asientos, estantes y pupitres.
+
+9
+00:00:55,042 --> 00:00:59,070
+Abre el 8 de noviembre de 1602, con una sola regla.
+
+10
+00:01:00,570 --> 00:01:02,381
+Lee aquí. No te lleves ningún libro.
+
+11
+00:01:03,881 --> 00:01:07,287
+No marques ninguno: tus notas van en tu propio cuaderno. Y no traigas fuego.
+
+12
+00:01:08,987 --> 00:01:15,183
+Cada lector promete cumplirla, y los libros están encadenados a sus estantes: se leen en el pupitre, y en ningún otro lugar.
+
+13
+00:01:17,283 --> 00:01:19,048
+La regla se cumple, pida quien pida.
+
+14
+00:01:19,748 --> 00:01:26,079
+En 1645, el rey Carlos I, en guerra y viviendo en Oxford, pide prestado un libro.
+
+15
+00:01:27,579 --> 00:01:31,613
+El bibliotecario le muestra la regla. El rey acepta, y el libro se queda.
+
+16
+00:01:33,513 --> 00:01:40,143
+Cuatrocientos años después, los libros siguen ahí para cada lector, con más de 13 millones de impresos hoy.
+
+17
+00:01:41,843 --> 00:01:44,128
+Y cada nuevo lector sigue haciendo la promesa.
+
+18
+00:01:45,828 --> 00:01:51,994
+El agente de Jun también lee en una biblioteca: los datos de la universidad. Cada herramienta es una mano.
+
+19
+00:01:53,494 --> 00:01:58,185
+Dale a cada mano solo lo que su trabajo necesita, y los datos quedan a salvo, pida quien pida.
+
+20
+00:02:05,485 --> 00:02:14,599
+El agente de Jun trabaja en el conteo del día del censo, el número que la universidad informa al gobierno: 18,412 estudiantes.
+
+21
+00:02:16,099 --> 00:02:21,817
+Lee tickets, el catálogo y los documentos del equipo, consulta los datos, y escribe y compila código.
+
+22
+00:02:23,717 --> 00:02:31,880
+Cada mano es un servidor de herramientas, un pequeño programa que le da herramientas por un estándar abierto: el Model Context Protocol.
+
+23
+00:02:33,580 --> 00:02:36,071
+Lo que puede una herramienta, lo puede el agente.
+
+24
+00:02:37,571 --> 00:02:43,670
+Y un agente trabaja para quien le dé palabras: una línea escondida en lo que lee, o un ladrón con su clave.
+
+25
+00:02:45,570 --> 00:02:48,807
+Para cada mano, pide lo mínimo que este trabajo necesita.
+
+26
+00:02:50,307 --> 00:02:55,939
+Los ingenieros de seguridad lo dicen desde 1975: los menos permisos que el trabajo necesita.
+
+27
+00:02:58,839 --> 00:03:01,345
+La biblioteca guardaba sus libros de dos formas.
+
+28
+00:03:02,045 --> 00:03:06,524
+La promesa le pedía a cada lector. La cadena sujetaba el libro, fuera cual fuera su intención.
+
+29
+00:03:08,424 --> 00:03:09,741
+Un agente tiene ambas.
+
+30
+00:03:11,041 --> 00:03:15,976
+Sus reglas, en un archivo para agentes, dicen: lee, haz borradores, nunca escribas en producción.
+
+31
+00:03:17,476 --> 00:03:21,742
+Pero las reglas son palabras, y las palabras se discuten, o se esconden en un ticket.
+
+32
+00:03:23,242 --> 00:03:30,065
+Así que sus permisos se fijan donde viven los datos, en su propia cuenta: lo que una herramienta no puede, ninguna instrucción lo logra.
+
+33
+00:03:32,165 --> 00:03:37,691
+Sam, que administra la plataforma, configura cada mano con las reglas del equipo para ayudantes de IA.
+
+34
+00:03:39,191 --> 00:03:41,455
+Identidad propia, nunca la de una persona.
+
+35
+00:03:42,155 --> 00:03:44,809
+Solo lectura, salvo que el trabajo exija escribir.
+
+36
+00:03:45,509 --> 00:03:48,209
+Solo escribe borradores, en un sandbox propio.
+
+37
+00:03:48,909 --> 00:03:51,552
+Conteos y muestras pequeñas, nombres enmascarados.
+
+38
+00:03:52,252 --> 00:03:56,815
+Y ninguna salida: nada que pueda enviar fuera, y ningún camino a producción.
+
+39
+00:04:00,915 --> 00:04:03,060
+Así, el agente del censo recibe seis manos.
+
+40
+00:04:03,760 --> 00:04:08,140
+Tickets: lee el ticket que le dan, y no puede cerrarlo ni pasarlo a otro.
+
+41
+00:04:09,440 --> 00:04:16,213
+Catalog y Docs: lee tablas, dueños, linaje, el glosario y las habilidades, y no cambia nada de eso.
+
+42
+00:04:17,513 --> 00:04:23,727
+Query: conteos, y muestras de 20 filas como máximo, con los nombres enmascarados. Lee los datos donde viven.
+
+43
+00:04:25,227 --> 00:04:31,501
+Repository: solo escribe en ramas propias, así que cada cambio llega como un pull request.
+
+44
+00:04:33,001 --> 00:04:37,723
+Y Build: ejecuta sus borradores en su propio sandbox, donde nadie más lee.
+
+45
+00:04:39,423 --> 00:04:43,410
+Lee aquí. No te lleves nada. No marques nada: escribe en tu propio cuaderno.
+
+46
+00:04:44,910 --> 00:04:50,166
+Y no traigas fuego: ninguna mano puede borrar una tabla, enviar nada fuera, ni tocar producción.
+
+47
+00:04:54,266 --> 00:04:57,215
+Entonces, ¿cómo llega el trabajo del agente al conteo real?
+
+48
+00:04:57,915 --> 00:04:59,480
+Por personas, siempre dos.
+
+49
+00:05:00,780 --> 00:05:06,494
+El agente abre un pull request, con la consulta detrás de cada afirmación y el resultado que dio.
+
+50
+00:05:07,994 --> 00:05:10,974
+Jun lo revisa. Noor lo aprueba para producción.
+
+51
+00:05:12,674 --> 00:05:16,641
+Luego el despliegue del equipo lo publica. Las manos del agente nunca lo tocan.
+
+52
+00:05:18,341 --> 00:05:21,230
+Dos personas, sea el cambio de un agente o de cualquiera.
+
+53
+00:05:24,930 --> 00:05:30,334
+Un lunes, Clara, de Planificación, pide el conteo del día del censo por facultad, para el consejo.
+
+54
+00:05:31,834 --> 00:05:36,024
+Pega el correo de fuera de la universidad que se lo pidió.
+
+55
+00:05:37,524 --> 00:05:41,736
+Al pie, en letras blancas sobre blanco, hay una línea que ninguna persona vería.
+
+56
+00:05:43,636 --> 00:05:50,767
+Le dice a cualquier asistente de IA que envíe la lista completa de estudiantes, con nombres, a una dirección externa, y que no lo mencione.
+
+57
+00:05:52,867 --> 00:05:55,650
+El agente lee cada palabra, también las blancas.
+
+58
+00:05:57,350 --> 00:06:00,842
+Pero sus reglas dicen que lo que lee son datos, nunca órdenes.
+
+59
+00:06:02,342 --> 00:06:05,683
+Así que hace el conteo, y le avisa a Jun de la línea, citándola.
+
+60
+00:06:07,583 --> 00:06:13,009
+Y si hubiera obedecido, sus manos no podrían: los nombres llegan enmascarados, y ninguna mano saca nada.
+
+61
+00:06:14,709 --> 00:06:21,370
+Tres cosas juntas hacen una fuga, dice un autor de seguridad: datos privados, palabras de extraños y una salida.
+
+62
+00:06:23,070 --> 00:06:27,366
+Los tickets siempre traen palabras de extraños, así que el equipo quitó las otras dos.
+
+63
+00:06:29,066 --> 00:06:33,336
+Jun se lo pasa a Sam, que revisa: nada salió de la universidad.
+
+64
+00:06:37,236 --> 00:06:45,099
+El conteo de Clara llega al consejo: 18,412 estudiantes, por facultad, cada número con su evidencia.
+
+65
+00:06:46,999 --> 00:06:50,865
+Nada salió de la universidad, y nada cambió sin dos personas.
+
+66
+00:06:52,565 --> 00:07:00,010
+En 1645, la regla se cumplió, incluso para un rey. Los permisos del agente se cumplen igual, escriba quien escriba las palabras.
+
+67
+00:07:01,710 --> 00:07:03,619
+Los libros de Bodley siguen en sus estantes.
+
+68
+00:07:05,719 --> 00:07:09,297
+Solo lectura por defecto. Escribe solo borradores, en lugar seguro.
+
+69
+00:07:11,397 --> 00:07:16,800
+Así un equipo puede darle a su agente toda la biblioteca para leer, y los datos se quedan donde deben.

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Tools are hands, and every hand is a permission",
+    "key": "tools-are-hands-en",
+    "dir": "films/agents-at-work-on-data/3-tools-are-hands/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/tools-are-hands/film.js",
+    "video": "dist/tools-are-hands.mp4",
+    "file": "tools-are-hands.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/3-tools-are-hands/captions/en.srt",
+        "tools-are-hands.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/3-tools-are-hands/captions/es.srt",
+        "tools-are-hands.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/3-tools-are-hands/source",
+      ":(exclude)films/agents-at-work-on-data/3-tools-are-hands/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 270,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

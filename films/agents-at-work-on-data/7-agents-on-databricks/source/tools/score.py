@@ -76,7 +76,16 @@ def _ir(sec, lo):
     return ir / np.sqrt(H[(f > 80) & (f < 1200)].mean())
 ROOM = _ir(1.5, 1500)   # a quiet hall round the organ and the tubas
 def _room(s, wet):
-    return np.pad(s, (0, len(ROOM) - 1)) + wet * fftconvolve(s, ROOM).astype(np.float32) if wet else s
+    """a note in the room, then given its own level back: the room's reflections add to some pitches and take from others (up to
+    4 dB either way here), so the note with its echo is set to the level it has without, where it's held (past its first 0.4 s, before
+    it lets go), and held notes sit at even levels"""
+    if not wet:
+        return s
+    y = np.pad(s, (0, len(ROOM) - 1)) + wet * fftconvolve(s, ROOM).astype(np.float32)
+    a, b = int(0.4 * SR), len(s) - int(0.2 * SR)
+    if b - a < int(0.2 * SR):
+        a, b = 0, len(s)
+    return (y * np.sqrt(np.mean(s[a:b] ** 2) / max(1e-12, float(np.mean(y[a:b] ** 2))))).astype(np.float32)
 
 # ---- the tonewheel organ. A key held from a to b: its three drawbars, each the pure sine of one wheel, whose phase is the film's
 # clock. att: how fast it speaks (a key on its own speaks at once, softened by a few ms so it doesn't click; a chord swells in on the

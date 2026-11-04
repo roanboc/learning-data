@@ -284,7 +284,7 @@ Sexta: un trabajo sencillo vuelto complicado.
 
 72
 00:06:05,919 --> 00:06:13,990
-En Planifica, define la verificación, hazlo, verifica, un agente leyó 38 páginas web por reglas que Docs da en una llamada,
+En Planificar, definir la verificación, hacer, verificar, un agente leyó 38 páginas web por reglas que Docs da en una llamada,
 
 73
 00:06:14,190 --> 00:06:16,101

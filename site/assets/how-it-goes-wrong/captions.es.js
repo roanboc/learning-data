@@ -158,7 +158,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Sixth: a simple job made complicated.":
 "Sexta: un trabajo sencillo vuelto complicado.",
 "In Plan, define the check, do, check, an agent read 38 web pages for census rules that Docs gives in one call,":
-"En Planifica, define la verificación, hazlo, verifica, un agente leyó 38 páginas web por reglas que Docs da en una llamada,",
+"En Planificar, definir la verificación, hacer, verificar, un agente leyó 38 páginas web por reglas que Docs da en una llamada,",
 "because its plan didn't name its tools.":
 "porque su plan no nombraba sus herramientas.",
 "And asked to rename one column, an agent can come back with nine changed files, a new macro and a new model.":

@@ -293,13 +293,16 @@ function tt_qcard(ctx,i,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||TT_QW,q=TT
   return bb;}
 // the row on the wall: o.out the card that's off the wall (its index), o.tags [0 to 1 for each], o.k [spring for each], o.a
 function tt_qrow(ctx,o){o=o||{};for(let i=0;i<5;i++){if(o.out===i)continue;const k=o.k?o.k[i]:1;if(k<=0)continue;tt_qcard(ctx,i,TT_QX(i),TT_QY,{k,a:o.a,tag:TT_QTAG[i],tagA:o.tags?o.tags[i]:0,tagK:o.tagK?o.tagK[i]:null});}}
-// the sign-off under the agent's answer: drafted by the agent, approved by Mei; sg 0 to 1 how far she has signed
-function tt_signoff(ctx,x,y,w,sg,a){a=a==null?1:a;if(a<=0)return;ag_box(ctx,x,y,w,150,20,{a,edge:sg>0.9?AG.green:null,edgeA:0.6*clamp((sg-0.9)*10,0,1)});ctx.save();ctx.globalAlpha*=a;
+// the sign-off under the agent's answer: drafted by the agent, then Mei's signature, then her approval; sg 0 to 1 how far she has
+// signed; 214 tall
+function tt_signoff(ctx,x,y,w,sg,a){a=a==null?1:a;if(a<=0)return;ag_box(ctx,x,y,w,214,20,{a,edge:sg>0.9?AG.green:null,edgeA:0.6*clamp((sg-0.9)*10,0,1)});ctx.save();ctx.globalAlpha*=a;
   ag_pen(ctx,x+44,y+48,26,rgba(AG.violet,1));ag_T(ctx,"drafted by the agent",x+72,y+58,{w:600,size:28,col:AG.mut});
   ctx.strokeStyle="rgba(60,50,40,0.14)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+24,y+84);ctx.lineTo(x+w-24,y+84);ctx.stroke();
-  // her signature, written as a line, then the approval
-  const su=clamp(sg/0.7,0,1);if(su>0){ctx.strokeStyle=rgba(AG.ink,0.75);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.beginPath();for(let i=0;i<=60*su;i++){const u=i/60,xx=x+w-250+u*200,yy=y+112-Math.sin(u*TAU*2.2)*10*Math.sin(Math.PI*u)-u*6;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();}
-  const ap=clamp((sg-0.7)/0.3,0,1);if(ap>0){withA(ctx,ap,()=>{ag_tick(ctx,x+44,y+114,24,rgba(AG.green,1),4);ag_T(ctx,"approved · Mei Tanaka",x+72,y+124,{w:700,size:28,col:AG.green});});}
+  // her signature, written along a faint line
+  ctx.setLineDash([3,7]);ctx.strokeStyle="rgba(60,50,40,0.22)";ctx.beginPath();ctx.moveTo(x+72,y+142);ctx.lineTo(x+w-60,y+142);ctx.stroke();ctx.setLineDash([]);
+  const su=clamp(sg/0.7,0,1);if(su>0){ctx.strokeStyle=rgba(AG.ink,0.78);ctx.lineWidth=2.8;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
+    for(let i=0;i<=80*su;i++){const u=i/80,xx=x+84+u*230,yy=y+130-Math.sin(u*TAU*2.6)*12*Math.sin(Math.PI*u)-u*8+Math.sin(u*TAU*7)*3;i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);}ctx.stroke();}
+  const ap=clamp((sg-0.7)/0.3,0,1);if(ap>0){withA(ctx,ap,()=>{ag_tick(ctx,x+44,y+180,24,rgba(AG.green,1),4);ag_T(ctx,"approved · Mei Tanaka",x+72,y+190,{w:700,size:28,col:AG.green});});}
   ctx.restore();}
 
 /* ---------------------------------------------------------------- a neuron, and its copy
@@ -506,7 +509,7 @@ function tt_listen(ctx,words,x0,hx,y,t,t0,o){o=o||{};const a=o.a==null?1:o.a,siz
   ctx.save();ctx.globalAlpha*=a;for(const w of words){const ww=ag_tw(ctx,w,{w:700,size}),left=xx-off,arrive=t0+(xx-hx)/sp,v=ag_in(t,arrive-lead,0.25)*(1-ag_in(t,arrive+0.05,0.3));g=Math.max(g,v);
     if(v>0.01){ctx.save();ctx.globalAlpha*=v;ctx.shadowColor=rgba(AG.violet,0.6);ctx.shadowBlur=18;ctx.fillStyle=rgba(AG.violet,0.2);rr(ctx,hx-10,y-size*0.86,ww+20,size*1.2,14);ctx.fill();ctx.restore();
       ag_T(ctx,w,hx,y,{w:700,size,col:AG.violet,a:v*0.45*(1-ag_in(t,arrive-0.15,0.2))});}
-    if(left<W+40&&left+ww>hx-10){const fade=clamp((left-hx+ww*0.3)/(ww*0.3),0,1)*(1-ag_in(t,arrive+0.05,0.3));if(fade>0)ag_T(ctx,w,left,y,{w:700,size,col:AG.ink,a:fade});}
+    if(left<W+40&&left+ww>hx-10){const fade=clamp((left-hx+ww*0.3)/(ww*0.3),0,1)*(1-ag_in(t,arrive+0.05,0.3))*clamp((W-20-left-ww)/80,0,1);if(fade>0)ag_T(ctx,w,left,y,{w:700,size,col:AG.ink,a:fade});}
     xx+=ww+size*0.36;}ctx.restore();return g*a;}
 // a guess lighting in a head at (x, y): a soft violet light (v 0 to 1, r its radius)
 function tt_headGuess(ctx,x,y,r,v){if(v<=0.01)return;ctx.save();const g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgba(AG.violet,0.24*v));g.addColorStop(0.6,rgba(AG.violet,0.08*v));g.addColorStop(1,rgba(AG.violet,0));

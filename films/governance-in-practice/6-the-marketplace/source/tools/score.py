@@ -60,8 +60,11 @@ def hz(m):
 I, IV, V, vi, iii = (45, (57, 61, 64)), (50, (57, 62, 66)), (52, (56, 64, 68)), (54, (57, 61, 66)), (49, (56, 61, 64))
 
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
-# trumpets low and quiet; the effects about 12 dB under the music (FX scales them all)
-DL, TL, FX = 0.13, 0.04, 1.6
+# trumpets low and quiet; the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is
+# (4 November 2026) both are 1.5 dB lower, and the mark and the whole mark at the end 2.5 dB lower still, so the loudest notes sit as
+# low as in the governance films the author accepted (tools/quiet.py measures them); the effects 1.5 dB lower too, so they stay
+# about 12 dB under the music
+DL, TL, FX = 0.109, 0.0336, 1.34
 PAN = {'t1': -0.3, 't2': -0.14}  # the trumpets a little left; the dulcimer spreads a little by pitch, low notes left, high right
 
 # a small room of wood and plaster round the players, ringing on for about a second and a half
@@ -138,13 +141,13 @@ def window(s, step=0.25, g=0.6, notes=(57, 61, 64, 69, 73, 76)):
     """the shop window: the dulcimer's figure across its range, A up to E, a note for each tile as it comes"""
     for i, m in enumerate(notes):
         dulc(m, s + step * i, g * (0.8 if i < len(notes) - 1 else 0.95), ring=1.3 if i < len(notes) - 1 else 2.0)
-def mark(s, g=1.45, step=0.42):
+def mark(s, g=1.09, step=0.42):
     """the series' mark, 1-5-4-8, on the dulcimer; the trumpets answer an octave below with its last two notes, 4 and 8"""
     for i, m in enumerate([69, 76, 74, 81]):
         dulc(m, s + step * i, g * (0.8 if i == 3 else 0.7), ring=2.2 if i == 3 else 1.0)
     a = s + 4 * step + 0.25
     tpt(62, a, a + step, g * 0.8, att=0.07, rel=0.1, pan=PAN['t1']); tpt(69, a + step, a + step + 1.6, g * 0.8, att=0.07, rel=0.7, pan=PAN['t2'])
-def whole(s, g=1.5, step=0.46):
+def whole(s, g=1.12, step=0.46):
     """the mark whole, once, for the series: the dulcimer strikes 1-5-4-8 and the trumpets play it with it, an octave below, each
     holding its note until the next comes, the last until the end"""
     for i, m in enumerate([69, 76, 74, 81]):

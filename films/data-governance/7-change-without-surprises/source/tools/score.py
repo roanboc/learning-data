@@ -50,8 +50,9 @@ def hz(m, k='G'):
     return f * 2 ** o * _JI[pc]
 
 # ---- the levels: the violas sit about 21 dB under the voice while it speaks, as in the series' other films; the plucked notes and the
-# flugelhorn a little over them; the effects about 12 dB under the music (FX scales them all)
-VL, PZ, FL, DB, FX = 0.044, 0.052, 0.047, 0.052, 1.6
+# flugelhorn a little over them; the effects about 12 dB under the music (FX scales them all), and since the author's review of What
+# an agent is (4 November 2026) 2.5 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them)
+VL, PZ, FL, DB, FX = 0.044, 0.052, 0.047, 0.052, 1.2
 
 # ---- the strings: a bowed or plucked string sounds its note and the whole-number partials above it, coloured by the instrument's body
 def _body(f, peaks):

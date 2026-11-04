@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agents at work on data · Learning Data</title>
+<meta name="description" content="Short films on putting AI agents to work on data: what an agent reads and who writes it, skills and workflows, tools with the fewest rights, memory the whole team shares, a work cycle that decides the check before the agent starts, and the ways it goes wrong; then agents on Databricks, governed by Unity Catalog and its AI gateway, with the team's context and memory governed like any data.">
+<meta property="og:title" content="Agents at work on data · Learning Data"><meta property="og:description" content="The second series on AI agents in data work. Jun's agent now works on the census-day count, the number the university reports to the government. Six films show how agents do data work well, from what they read to how they go wrong; three show it on Databricks, governed."><meta property="og:image" content="https://data.learn-all.org/assets/context-engineering-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/agents-at-work-on-data/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/agents-at-work-on-data/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/agents-at-work-on-data/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""><img src="../assets/context-engineering-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#ai-agents">AI agents in data work</a> › Agents at work on data</p>
+<h1>Agents at work on data</h1>
+<p class="lead">The second series on AI agents in data work. Jun's agent now works on the census-day count, the number the university reports to the government. Six films show how agents do data work well, from what they read to how they go wrong; three show it on Databricks, governed.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order: each film builds on the one before.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/context-engineering-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 9 · What an agent reads</p>
+<h3><a href="context-engineering/">Context engineering</a></h3>
+<p>Jun's agent guesses what a word means and counts 6,931. Written down once by its owner, the meaning gives 6,212, for everyone.</p>
+<p class="meta">6½ min · Pause and think · Agents at work on data</p>
+<p class="tc-progress" data-progress="ld-context-engineering" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">One thread: Jun's agent on the census-day count</h2><p>Jun's agent works on the census-day count, the number the university reports to the government. Film by film, the team gives it what to read, skills to follow, hands with the fewest rights and a memory the whole team shares; decides how each result will be checked before it starts; designs for the ways it goes wrong; and then runs it all on Databricks, governed like any data, before the next series gives the agent a role of its own.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Where each film begins</h2></div></div>
+<div class="prose"><table><thead><tr><th>Film</th><th>Opens with</th><th>Still true today</th></tr></thead><tbody>
+<tr><td>Context engineering</td><td>Arezzo, Italy, about 1025: lines on the page</td><td>What lived in each master's head went onto the page, and boys sang chants they had never heard.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Who's at the table</h2><p>Cyan outlines are technical; gold outlines are business.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Builds the data project</h3><p>Jun Park, whose agent works on the census-day count, and who reviews everything it drafts</p></div>
+<div class="card biz"><h3>Owns a meaning</h3><p>Mei Tanaka, in the registrar's office, whose definitions people and agents both read</p></div>
+<div class="card tech"><h3>Draws the map</h3><p>Noor Rahman, the data architect, who approves every change to production, an agent's too</p></div>
+<div class="card tech"><h3>Runs the platform</h3><p>Sam Okafor, who gives each agent an identity of its own, and only the rights its job needs</p></div>
+<div class="card biz"><h3>Asks for numbers</h3><p>Clara Jensen, in Planning, whose questions the agents answer, with their evidence</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js"></script>
+<script src="../assets/ambient.js"></script>
+</body>
+</html>

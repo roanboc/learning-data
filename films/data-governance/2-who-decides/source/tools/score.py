@@ -386,12 +386,12 @@ turn(work7 + 1.3, Eb2, [(G3, 2.2), (Ab3, 1.2), (G3, 2.0)])
 
 # ======== 8. Where the work is ========
 # What, who, when and why going up beside her screen, one by one; the mapping's entry begun in the course area's decision book, and
-# who decides it; each area's why lit: the cellos; the thread of twenty-three replies greyed, and closed
+# who decides it; each area's why lit (since 4 November 2026 without the cellos, which come in on the same two notes 17 seconds later,
+# as her manager gives her the time); the thread of twenty-three replies greyed, and closed
 for i, k in enumerate(('what', 'who', 'when', 'why')):
     knock(W('logged', 'written', k, 0.15), 0.02 * (1 if i == 0 else 0.8), 0.25 + 0.1 * i, 250 + 25 * i)
 dbook8, why8, find8 = W('logged', 'logs', 'decision'), W('logged', 'next', 'why'), W('logged', 'not', 'find')
 pen(dbook8 + 0.2, 1.5, 0.011, 0.3); pen(dbook8 + 1.6, 0.65, 0.011, 0.3)
-turn(why8 - 0.15, Eb2, [(Bb3, 2.0), (G3, 2.2)])
 tap(find8 + 0.4, 0.012, 0.1); air(find8 + 0.4, 0.9, 0.014, 0.1)
 
 # ======== 9. Time to answer ========

@@ -6,8 +6,9 @@
    table, a folder of reports. Then the cards of the story: the question, the three answers (each with an empty slot where its
    evidence should be, or, a week later, its evidence clipped in), Anil's plan, the spreadsheet of student load, the copy of the
    student table and the folder, close.
-   Every name here starts with od_ or OD_. Sizes are in the 1920 x 1080 frame; a close shot (OD_Z1, OD_Z2, OD_Z3) is 1.5 times the
-   frame, so words drawn for it are at least 20 px (30 as seen). The cables to each person's own copy are grey: nothing of the
+   Every name here starts with od_ or OD_. Sizes are in the 1920 x 1080 frame; a close shot (OD_Z1, OD_Z2, OD_Z3) is 1.35 to 1.45
+   times the frame, and its cards are drawn in the frame (od_scr in scenes.js), at 28 px or more, so they keep their size whatever
+   the camera does. The cables to each person's own copy are grey: nothing of the
    platform's. Clothes keep clear of the colours that mean something. */
 
 /* ---------------------------------------------------------------- where everything stands */
@@ -18,7 +19,7 @@ const OD={deskY:800,depth:84,back:716,
   agent:[[400,738],[1000,738],[1600,738]],ar:30,
   answer:[400,1000,1600],ansY:128,                 // the answers over the desks, in the wide shot: their centres, their top
   copy:[[540,724],[1140,758],[1720,770]],          // where each grey cable plugs into its copy
-  wall:[[470,694],[1060,694],[1660,694]]           // the platform's socket on the wall behind each desk, where the blue cable goes
+  wall:[[416,650],[1036,650],[1640,650]]           // the platform's socket on the wall behind each desk, where the blue cable goes
 };
 // the camera: the whole office, and a close shot of each desk, the desk and its agent kept above the captions. In a close shot only
 // that desk's person and things are drawn (o.only in od_room): the cards of the story stand where the next desk would be
@@ -177,11 +178,11 @@ function od_sheet(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;cons
     ag_T(ctx,f,x+32,yy,{w:i===3?700:500,size:28,col:i===3?AG.ink:AG.mut});
     if(i<3){ctx.fillStyle="rgba(86,92,100,0.22)";rr(ctx,x+w-32-90,yy-16,90,14,7);ctx.fill();}
     else ag_T(ctx,"2,160",x+w-32,yy,{w:800,size:32,col:AG.orange,align:"right"});ctx.restore();});
-  if(o.half!=null&&o.half>-1){const hy=y+h-46,ha=ag_in(o.half,-0.4,0.4),k=ag_sine(clamp(o.half,0,1)),gap=lerp(64,0,k),r=24,hx=x+70;
+  if(o.half!=null&&o.half>-1){const hy=y+h-46,ha=ag_in(o.half,-0.4,0.4),k=ag_sine(clamp(o.half,0,1)),gap=lerp(52,0,k),r=22,hx=x+86;
     ctx.save();ctx.globalAlpha*=ha;ctx.fillStyle="rgba(60,50,40,0.1)";ctx.fillRect(x+26,y+h-96,w-52,1.5);ctx.fillStyle=rgba(AG.mut,0.55);
     for(const sd of [-1,1]){ctx.beginPath();ctx.arc(hx+sd*gap/2,hy,r,sd<0?Math.PI/2:-Math.PI/2,sd<0?Math.PI*1.5:Math.PI/2);ctx.closePath();ctx.fill();}
     if(k>0.98){ctx.strokeStyle=rgba(AG.mut,0.8);ctx.lineWidth=2;ctx.beginPath();ctx.arc(hx,hy,r,0,TAU);ctx.stroke();}
-    ag_T(ctx,"two half-time students = 1 in load",x+130,hy+10,{w:600,size:28,col:AG.ink});ctx.restore();}
+    ag_T(ctx,"two half-time students = 1 in load",x+152,hy+10,{w:600,size:28,col:AG.ink});ctx.restore();}
   ctx.restore();}
 
 // the copy of the student table on the laptop, shown large: Health's degrees, each with Health in its name, as the student system

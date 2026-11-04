@@ -51,7 +51,7 @@ const OD_DB={x:330,y:214,w:1260,h:280},OD_UC={x:362,y:290,w:1196,h:176},OD_UCP=[
 // o.parts [3] each part of Unity Catalog lit; o.uc (0 to 1) Unity Catalog's frame drawn; o.from {x, y, w, h}: it grows from there (u)
 function od_dbCard(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const D=OD_DB,U=OD_UC;ctx.save();ctx.globalAlpha*=a;
   if(o.from&&o.u<1){const e=ag_sine(o.u),f=o.from;ctx.translate(lerp(f.x+f.w/2,D.x+D.w/2,e),lerp(f.y+f.h/2,D.y+D.h/2,e));ctx.scale(lerp(f.w/D.w,1,e),lerp(f.h/D.h,1,e));ctx.translate(-(D.x+D.w/2),-(D.y+D.h/2));}
-  ag_box(ctx,D.x,D.y,D.w,D.h,24,{edge:AG.blue,edgeA:0.5});ag_T(ctx,"Databricks",D.x+32,D.y+54,{w:800,size:40});
+  ag_box(ctx,D.x,D.y,D.w,D.h,24,{edge:AG.blue,edgeA:0.5});ag_T(ctx,"Databricks",D.x+32,D.y+54,{w:800,size:40,a:o.title==null?1:o.title});
   const uc=o.uc==null?1:o.uc;if(uc>0){ctx.save();ctx.globalAlpha*=uc;ctx.strokeStyle=rgba(AG.blue,0.75);ctx.lineWidth=2.5;rr(ctx,U.x,U.y,U.w,U.h,18);ctx.stroke();
     ctx.fillStyle=rgba(AG.blue,0.05);rr(ctx,U.x,U.y,U.w,U.h,18);ctx.fill();ag_label(ctx,U.x+28,U.y+46,"Unity Catalog",{col:AG.blue});
     od_ucParts(ctx).forEach((r,i)=>{const on=o.parts?o.parts[i]:1;if(on<=0)return;ctx.save();ctx.globalAlpha*=ag_in(on,0,0.5);
@@ -196,7 +196,11 @@ function od_eval(ctx,o){o=o||{};const a=o.a==null?1:o.a,E=OD_EVAL;if(a<=0)return
   ag_T(ctx,"Evaluation",E.x+36,E.y+60,{w:800,size:36});const cx=[E.x+E.w-470,E.x+E.w-300,E.x+E.w-110];
   OD_COLS.forEach((s,i)=>ag_T(ctx,s,cx[i],E.y+60,{w:700,size:28,col:AG.mut,align:"center",a:o.colA?o.colA[i]:1}));
   ctx.fillStyle="rgba(60,50,40,0.14)";ctx.fillRect(E.x+30,E.y+90,E.w-60,1.5);
-  OD_CASES.forEach((r,i)=>{const k=clamp((o.rows||0)-i,0,1);if(k<=0)return;const y=E.y+140+i*100;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.4);ctx.translate((1-ag_eo(k))*24,0);
+  OD_CASES.forEach((r,i)=>{const k=clamp((o.rows||0)-i,0,1),y=E.y+140+i*100;
+    // o.ghost: the rows still to come, as faint outlines, so the card isn't empty while the cases are named
+    const g=(o.ghost||0)*(1-ag_in(k,0,0.4));if(g>0){ctx.save();ctx.globalAlpha*=g;ctx.fillStyle="rgba(86,92,100,0.13)";rr(ctx,E.x+40,y-24,380,26,13);ctx.fill();rr(ctx,E.x+40,y+20,250,22,11);ctx.fill();
+      cx.forEach(x=>{ctx.beginPath();ctx.arc(x,y+6,20,0,TAU);ctx.fill();});ctx.restore();}
+    if(k<=0)return;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.4);ctx.translate((1-ag_eo(k))*24,0);
     ag_T(ctx,r[0],E.x+40,y,{w:700,size:30});ag_T(ctx,r[1],E.x+40,y+40,{w:500,size:28,col:AG.mut});
     OD_COLS.forEach((c,j)=>{const m=clamp((o.cols?o.cols[j]:0)-i,0,1);const bad=j===2&&i===(o.amber==null?-1:o.amber);
       if(m<=0){ctx.fillStyle="rgba(86,92,100,0.12)";ctx.beginPath();ctx.arc(cx[j],y+6,20,0,TAU);ctx.fill();return;}

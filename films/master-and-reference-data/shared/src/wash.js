@@ -52,7 +52,10 @@ function wc_blotchTex(w,h,seed,scale,bias){const c=mkCanvas(w,h),x=c.getContext(
   x.putImageData(im,0,0);return c;}
 // what is kept: the textures, each place's background, each card's paper, each white figure, and spare canvases
 const WC={ready:false,bg:{},paint:{},card:{},tint:{},fig:{},buf:{}};
-function wc_prep(){if(WC.ready)return;WC.gran=wc_granTex(W,H,17);WC.paper=wc_paperTex(W,H,23,0.42);WC.blotch=wc_blotchTex(480,270,31,60,0.05);WC.ready=true;}
+function wc_prep(){if(WC.ready)return;WC.gran=WC.gran||wc_granTex(W,H,17);WC.paper=WC.paper||wc_paperTex(W,H,23,0.42);WC.blotch=WC.blotch||wc_blotchTex(480,270,31,60,0.05);WC.ready=true;}
+// the same, one texture at a time with a pause between, so a page that is opening stays responsive (4 November 2026)
+async function wc_prepSoft(){const y=()=>new Promise(r=>setTimeout(r,0));if(!WC.ready&&!WC.gran){WC.gran=wc_granTex(W,H,17);await y();}
+  if(!WC.ready&&!WC.paper){WC.paper=wc_paperTex(W,H,23,0.42);await y();}wc_prep();}
 function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=WC.buf[k]=mkCanvas(w,h);if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);
   x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
 // a texture's alpha, filled with one colour

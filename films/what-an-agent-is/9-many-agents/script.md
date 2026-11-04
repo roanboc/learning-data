@@ -141,7 +141,7 @@ The film can stop at the end of four chapters, with one question each (`site/ass
 
 ## Links
 
-Rodrigo's learning systems on emergence, agents and neural networks (the plan): Learning Systems, https://systems.learn-all.org/, whose labs show emergence from simple rules (sharers and cheats, ecosystems), nerve nets learning, and brain tissue. How to link it was put to Rodrigo on a card in the film's thread on 3 November 2026, recommending that the film's page link to it and the film name no site. Until he answers, the film names no site, and its page has no link yet: the site's film pages have no place for a link to another site (`site-tools/build_series.py` makes none), and adding one is a change for every series' pages, not for one film.
+Rodrigo's learning systems on emergence, agents and neural networks (the plan): Learning Systems, https://systems.learn-all.org/, whose labs and World Viewer show emergence from simple rules. Asked on a card in the film's thread on 3 November 2026, Rodrigo chose on 4 November that the film's page links to it ("Yeah, really keen to link the other site"), and the film names no site. The page's *See it emerge for yourself* section, made from `elsewhere` in the film's `site.json`, links its colonies lab (*Why share when you could cheat?*), the World Viewer's *Nerve nets* and *Ecosystems* chapters, the site and its guided labs; the Spanish page opens each in Spanish (`?lang=es`). Checked on 4 November 2026.
 
 ## Labs (candidates, for the module's set)
 

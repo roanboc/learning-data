@@ -26,6 +26,7 @@ A series can instead have labs and scenarios of its own, for all its films ("lea
 site/assets/<dir>/learn.en.js): they get their own pages (site/<slug>/labs/ and site/<slug>/scenarios/), the series' page
 gets their course bar, and each film's page links to its own lab and situations among them. series_learn() below says what
 the words must keep; each series draws them with its own engine (site/assets/<dir>/learn.js).
+A film's page can also link to another site that shows its idea, from its site.json's "elsewhere" (elsewhere_section()).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
 import html, json, math, pathlib, re, sys
@@ -677,6 +678,22 @@ def project_section(lg, f):
             f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>\n</section>\n\n')
 
 
+def elsewhere_section(lg, f):
+    """Elsewhere: another site that shows the film's idea, such as a lab on another learn-all.org site, linked from the film's
+    page (the film itself names no site). Optional: the film's site.json, "elsewhere": {"h", "p", "links": [{"title", "line",
+    "href"}], "more": [{"text", "href"}]}, each with its "_es" twin. A Spanish address opens the other site in Spanish where
+    it has Spanish (such as ?lang=es); where it hasn't, its Spanish title says "(en inglés)"."""
+    e = f["site"].get("elsewhere")
+    if not e:
+        return ""
+    w = lambda o, k: o[k + "_es"] if lg == "es" else o[k]
+    rows = "\n".join(f'<li><b><a href="{E(w(x, "href"))}">{E(w(x, "title"))}</a></b><span>{E(w(x, "line"))}</span></li>' for x in e["links"])
+    more = "".join(f'<a href="{E(w(x, "href"))}">{E(w(x, "text"))}</a>' for x in e.get("more", []))
+    return (f'<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">\n<div class="mhead"><div><h2 id="elsewhere-h">{E(w(e, "h"))}</h2>'
+            f'<p>{E(w(e, "p"))}</p></div></div>\n<ul class="repo-list">\n{rows}\n</ul>\n'
+            + (f'<p class="film-links">{more}</p>\n' if more else "") + '</section>\n\n')
+
+
 def es_scenes(f):
     names = f["site"]["chapters_es"]
     return ('<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */\n'
@@ -730,6 +747,7 @@ def film_page(lg, f, films_, series):
             + project_section(lg, f) +
             f'<section class="module" id="think-it-through" aria-labelledby="think-h">\n<div class="mhead"><div><h2 id="think-h">{T(lg, "Think it through", "Piénsalo")}</h2><p>{T(lg, f"The {ntw} Pause and think questions, for a class or a team. Open one to see the answer.", f"Las {ntw} preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.")}</p></div></div>\n<div id="think-list"></div>\n</section>\n\n'
             + (film_learn_section(lg, f, SL) if SL else "")
+            + elsewhere_section(lg, f)
             + series_nav(lg, f, films_, R, "../") + '</main>\n'
             f'{foot(lg, S, learn, own=s.get(T(lg, "fiction", "fiction_es")))}\n'
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')

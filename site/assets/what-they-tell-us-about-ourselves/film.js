@@ -2700,7 +2700,7 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
     {cut:true,at:c.sang-0.5,place:"tt_lab78",keys:[[c.sang-0.5,980,560,1.06],[P.along,900,520,1.14]],d:3,push:0.01,draw:(x,tt)=>{const lit=clamp((tt-P.played)/0.22,0,10),sing=ag_in(tt,P.along-0.1,0.5);
       tt_trolley(x,1060,560,{lit,reel:1});tt_chair(x,820,700,0.85);
       ag_person(x,TT_ROD,820,700,0.85,{t:tt,flip:true,talk:sing*(0.4+0.3*Math.sin(tt*6)),smile:lerp(0.1,0.9,ag_in(tt,P.played+1.6,0.8)),gaze:[-2,-0.6]});tt_coil(x,820,700,0.85,1080,640);
-      ag_person(x,TT_ENG1,1520,664,0.86,{t:tt+1,flip:true,pose:ag_io(tt,c.sang-0.3,P.played+1.2,0.4)>0.5?"point":"hang"});ag_person(x,TT_CLARK,330,660,0.9,{t:tt+2,smile:0.6*ag_in(tt,P.along,1)});
+      ag_person(x,TT_ENG1,1520,664,0.86,{t:tt+1,flip:true,pose:"hang",pose2:"point",mix:ag_io(tt,c.sang-0.3,P.played+1.2,0.4)});ag_person(x,TT_CLARK,330,660,0.9,{t:tt+2,smile:0.6*ag_in(tt,P.along,1)});
       const m=tt_mouth(820,700,0.85,true);tt_song(x,m[0]-210,m[1]-30,tt,sing,[196,150,92]);
       tt_tag(x,1210,470,"Waltzing Matilda",{a:ag_in(tt,c.sang,0.4),size:28});}},
     // December 1978: the audiologist hides her mouth behind a card and says a word; Rod says it back

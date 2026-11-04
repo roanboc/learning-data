@@ -108,7 +108,9 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
   // the back and those at the table
   const meeting=(x,tt,o)=>{L.back.forEach(([bx,id],i)=>{const cup=i%2===1,bo=Object.assign({t:tt,pose:cup?"spCup":"listen",carry:cup?sp_cupHeld:null,flip:true,expr:o.expr||"calm"},o.back&&o.back(i,id,bx));
       person(x,id,bx,L.bf,L.bs,bo);sp_badge(x,id,bx,L.bf,L.bs,bo.flip);});
-    const [cx,cf,cs]=L.chart,writing=tt>P.meet-0.5&&tt<P.learned+1.0;person(x,"spLa1",cx,cf,cs,{t:tt,pose:writing?"point":"listen",flip:writing,expr:o.expr||"calm"});sp_badge(x,"spLa1",cx,cf,cs,writing);
+    // she turns to the chart and her arm comes up to it, and after, down before she turns back: over 0.4 s each, not in one frame
+    const [cx,cf,cs]=L.chart,w0=P.meet-0.5,w1=P.learned+1.0,writing=tt>w0&&tt<w1+0.4;POSE.sp_la1=gv_blendNear(POSE.listen,POSE.point,sstep(w0,w0+0.4,tt)*(1-sstep(w1,w1+0.4,tt)));
+    person(x,"spLa1",cx,cf,cs,{t:tt,pose:"sp_la1",flip:writing,expr:o.expr||"calm"});sp_badge(x,"spLa1",cx,cf,cs,writing);
     L.seats.forEach(([sx,id],i)=>{const so=o.seat?o.seat(i,id,sx):{pose:"listen",flip:true};gv_behind(x,id,sx,L.table[2],L.s,Object.assign({t:tt,expr:o.expr||"calm"},so));});
     x.drawImage(gv_place("la80table"),0,0);sp_cardName(x);};
   gv_shots(ctx,S,t,sc.dur,[

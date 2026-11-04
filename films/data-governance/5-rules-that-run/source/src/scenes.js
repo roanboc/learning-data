@@ -38,8 +38,10 @@ function rr_nileBoats(x,tt){RR_NB.forEach(([s,y,x0,x1,f,sd])=>rr_boat(x,lerp(x0,
 function rr_dryField(x,tt,P,after){const D=RR_FD,[fx,fy,fs]=D.farmer,[tx,ty,ts]=D.taxman;
   rr_ghost(x,after?1:fin(tt,P.fam,0.6),q=>rr_family(q,tt,{expr:after?"smile":"concerned"}));
   if(!after){const wk=gv_walk(tt,P.tax,1520,tx,330),a=fin(tt,P.tax-0.1,0.4);
+    // as he stops, his arms come up from his sides into the hold, the scroll coming with his hands, rather than in one frame
     if(a>0.01)rr_ghost(x,a,q=>{if(wk.moving)gv_walker(q,"rr_taxman",wk,ty,ts,{t:tt});
-      else person(q,"rr_taxman",tx,ty,ts,{pose:"hold",pose2:"rr_take",mix:fin(tt,P.eat,0.6),t:tt,flip:true,carry:rr_heldScroll(fin(tt,P.guess-0.4,0.9),{left:true})});});}
+      else{const up=sstep(wk.end,wk.end+0.45,tt),sc=rr_heldScroll(fin(tt,P.guess-0.4,0.9),{left:true});POSE.rr_arrive=gv_blendNear(POSE.stand,POSE.hold,up);
+        person(q,"rr_taxman",tx,ty,ts,{pose:"rr_arrive",pose2:"rr_take",mix:fin(tt,P.eat,0.6),t:tt,flip:true,carry:(cx,P_,h)=>withA(cx,up,()=>sc(cx,P_,h))});}});}
   person(x,"rr_farmer",fx,fy,fs,{pose:"hold",t:tt,carry:rr_heldBasket,expr:after?"relieved":fin(tt,P.eat,0.4)>0.5?"worried":"concerned"});
   rr_tagAt(x,tt,after?-9:P.dryW,null,700,250,"a low flood: dry fields",{size:32});
   rr_tagAt(x,tt,after?-9:P.guess,null,tx,372,"a tax set by guess",{size:32,wash:GV.red,washA:0.18});if(after)rr_strike(x,tx,372,"a tax set by guess",32,fin(tt,P.allows,0.7));}
@@ -52,9 +54,11 @@ function rr_landing(x,tt,P){const [sx,sy,ss]=RR_RD.scribe,[bx,by,bs]=RR_RD.boat,
 // the keeper's days: the water rises a half cubit a day, from 14 to 15.5; the light moves across the stones through each day, a dusk
 // between one and the next, and he reads the water in the middle of each
 const RR_DAYS=[14,14.5,15,15.5];
+// A day lasts about 0.6 s, so his arm rises and falls, and he steps up after the water, over several frames each, never in one or two
 function rr_days(tt,t0,t1){const n=RR_DAYS.length,k=clamp((tt-t0)/((t1-t0)/n),0,n-0.001),i=Math.floor(k),f=k-i,last=i===n-1,
-    L=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:easeCam(clamp((f-0.72)/0.24,0,1))));
-  return{L,day:last?Math.min(f,0.6):f,dusk:last?0:0.5*Math.sin(Math.PI*clamp((f-0.7)/0.3,0,1)),read:clamp((f-0.12)/0.14,0,1)*(1-clamp((f-0.62)/0.1,0,1))};}
+    L=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:easeCam(clamp((f-0.72)/0.24,0,1)))),
+    ky=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:sstep(0.6,1,f)))+0.3;
+  return{L,ky,day:last?Math.min(f,0.6):f,dusk:last?0:0.5*Math.sin(Math.PI*clamp((f-0.7)/0.3,0,1)),read:sstep(0.04,0.4,f)*(1-sstep(0.52,0.84,f))};}
 // where a tag sits on the Nilometer's parapet, on the island
 const rr_rdTag=()=>{const w=RR_RD.well,p=rr_rdp((w.x0+w.x1)/2,w.h,w.z0-w.t);return[p[0],p[1]-70];};
 

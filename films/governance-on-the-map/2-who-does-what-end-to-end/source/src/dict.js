@@ -5,14 +5,16 @@
    small to read, with an English tag where the story needs one. Every name starts with ee_ or EE. */
 
 /* ---------- slips on the academy's table ---------- */
-// the slips Palma passes up the table: each slides from his place to the head of the table, one after another (up(i), 0 to 1); then most
-// come back down to a pile at his elbow (back(i)), and two stay at the head; the last to come back, he picks up (o.picked) and holds up
-// (it's drawn in his hand). y: the line on the table they slide along
-const EE_SL={n:9,from:1540,to:420,y:712,pile:[1490,736],stay:[2,6]};
+// the slips Palma passes up the table: each leaves the top of his open bundle (hand: where its middle is, in his hands; k: px to one of
+// its units; held(g): how many of its seven slips are left once g of the n have gone), drops onto the table and slides to the head of it,
+// one after another (up(i), 0 to 1), so none appears from nowhere; then most come back down to a pile at his elbow (back(i)), and two
+// stay at the head. y: the line on the table they slide along; picked: leave out the last one back once it's there
+const EE_SL={n:9,from:1540,to:420,y:712,pile:[1490,736],stay:[2,6],hand:[1612,632.6],k:0.682,held:g=>Math.round((9-g)*7/9)};
 function ee_slips(ctx,up,back,picked){const S_=EE_SL;for(let i=0;i<S_.n;i++){const u=easeCam(clamp(up(i),0,1)),b=S_.stay.includes(i)?0:easeCam(clamp(back?back(i):0,0,1));if(u<=0.001)continue;
-    if(picked&&i===S_.n-1&&b>0.999)continue;const lane=(i%3-1)*16,x0=lerp(S_.from,S_.to+i*22,u),y0=S_.y+lane+Math.sin(u*Math.PI)*-6;
-    const x=lerp(x0,S_.pile[0]+(i%2?8:-6),b),y=lerp(y0,S_.pile[1]-i*2.4,b)-Math.sin(b*Math.PI)*18,rot=lerp((i%4-1.5)*0.08,(i%2?0.05:-0.04),b);
-    ee_slipAt(ctx,x,y,58,rot);}}
+    if(picked&&i===S_.n-1&&b>0.999)continue;const lane=(i%3-1)*16,j=S_.held(i)-1,f=sstep(0,0.16,u),x1=lerp(S_.from,S_.to+i*22,u),y1=S_.y+lane+Math.sin(u*Math.PI)*-6,
+      x0=lerp(S_.hand[0]+(j-3)*14*S_.k,x1,f),y0=lerp(S_.hand[1]-j*4*S_.k,y1,f)-Math.sin(f*Math.PI)*10,r0=lerp((j-3)*0.05+((j*37)%7-3)*0.006,(i%4-1.5)*0.08,f);
+    const x=lerp(x0,S_.pile[0]+(i%2?8:-6),b),y=lerp(y0,S_.pile[1]-i*2.4,b)-Math.sin(b*Math.PI)*18,rot=lerp(r0,(i%2?0.05:-0.04),b);
+    ee_slipAt(ctx,x,y,lerp(120*S_.k,58,f),rot);}}
 // the pile at his elbow, already there (n slips)
 function ee_pile(ctx,n){for(let i=0;i<n;i++)ee_slipAt(ctx,EE_SL.pile[0]+(i%2?8:-6)+((i*13)%5-2),EE_SL.pile[1]-i*2.4,58,(i%2?0.05:-0.04));}
 

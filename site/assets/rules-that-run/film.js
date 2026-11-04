@@ -1812,6 +1812,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2592,6 +2600,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -3624,8 +3637,10 @@ function rr_nileBoats(x,tt){RR_NB.forEach(([s,y,x0,x1,f,sd])=>rr_boat(x,lerp(x0,
 function rr_dryField(x,tt,P,after){const D=RR_FD,[fx,fy,fs]=D.farmer,[tx,ty,ts]=D.taxman;
   rr_ghost(x,after?1:fin(tt,P.fam,0.6),q=>rr_family(q,tt,{expr:after?"smile":"concerned"}));
   if(!after){const wk=gv_walk(tt,P.tax,1520,tx,330),a=fin(tt,P.tax-0.1,0.4);
+    // as he stops, his arms come up from his sides into the hold, the scroll coming with his hands, rather than in one frame
     if(a>0.01)rr_ghost(x,a,q=>{if(wk.moving)gv_walker(q,"rr_taxman",wk,ty,ts,{t:tt});
-      else person(q,"rr_taxman",tx,ty,ts,{pose:"hold",pose2:"rr_take",mix:fin(tt,P.eat,0.6),t:tt,flip:true,carry:rr_heldScroll(fin(tt,P.guess-0.4,0.9),{left:true})});});}
+      else{const up=sstep(wk.end,wk.end+0.45,tt),sc=rr_heldScroll(fin(tt,P.guess-0.4,0.9),{left:true});POSE.rr_arrive=gv_blendNear(POSE.stand,POSE.hold,up);
+        person(q,"rr_taxman",tx,ty,ts,{pose:"rr_arrive",pose2:"rr_take",mix:fin(tt,P.eat,0.6),t:tt,flip:true,carry:(cx,P_,h)=>withA(cx,up,()=>sc(cx,P_,h))});}});}
   person(x,"rr_farmer",fx,fy,fs,{pose:"hold",t:tt,carry:rr_heldBasket,expr:after?"relieved":fin(tt,P.eat,0.4)>0.5?"worried":"concerned"});
   rr_tagAt(x,tt,after?-9:P.dryW,null,700,250,"a low flood: dry fields",{size:32});
   rr_tagAt(x,tt,after?-9:P.guess,null,tx,372,"a tax set by guess",{size:32,wash:GV.red,washA:0.18});if(after)rr_strike(x,tx,372,"a tax set by guess",32,fin(tt,P.allows,0.7));}
@@ -3638,9 +3653,11 @@ function rr_landing(x,tt,P){const [sx,sy,ss]=RR_RD.scribe,[bx,by,bs]=RR_RD.boat,
 // the keeper's days: the water rises a half cubit a day, from 14 to 15.5; the light moves across the stones through each day, a dusk
 // between one and the next, and he reads the water in the middle of each
 const RR_DAYS=[14,14.5,15,15.5];
+// A day lasts about 0.6 s, so his arm rises and falls, and he steps up after the water, over several frames each, never in one or two
 function rr_days(tt,t0,t1){const n=RR_DAYS.length,k=clamp((tt-t0)/((t1-t0)/n),0,n-0.001),i=Math.floor(k),f=k-i,last=i===n-1,
-    L=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:easeCam(clamp((f-0.72)/0.24,0,1))));
-  return{L,day:last?Math.min(f,0.6):f,dusk:last?0:0.5*Math.sin(Math.PI*clamp((f-0.7)/0.3,0,1)),read:clamp((f-0.12)/0.14,0,1)*(1-clamp((f-0.62)/0.1,0,1))};}
+    L=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:easeCam(clamp((f-0.72)/0.24,0,1)))),
+    ky=rr_cub(lerp(RR_DAYS[i],RR_DAYS[Math.min(i+1,n-1)],last?0:sstep(0.6,1,f)))+0.3;
+  return{L,ky,day:last?Math.min(f,0.6):f,dusk:last?0:0.5*Math.sin(Math.PI*clamp((f-0.7)/0.3,0,1)),read:sstep(0.04,0.4,f)*(1-sstep(0.52,0.84,f))};}
 // where a tag sits on the Nilometer's parapet, on the island
 const rr_rdTag=()=>{const w=RR_RD.well,p=rr_rdp((w.x0+w.x1)/2,w.h,w.z0-w.t);return[p[0],p[1]-70];};
 

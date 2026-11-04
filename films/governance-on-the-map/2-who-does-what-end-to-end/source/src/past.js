@@ -129,9 +129,9 @@ function ee_slipAt(cx,x,y,w,rot,o){o=o||{};const h=w*0.42;cx.save();cx.translate
   cx.fillStyle=rgba(o.col||EE_SLIP,1);cx.fillRect(-w/2,-h/2,w,h);cx.strokeStyle=rgba(WC_PENCIL,0.45);cx.lineWidth=Math.max(1,w*0.012);cx.strokeRect(-w/2,-h/2,w,h);
   cx.strokeStyle=rgba([60,50,46],0.6);cx.lineWidth=Math.max(1.2,w*0.03);cx.lineCap="round";cx.beginPath();cx.moveTo(-w*0.32,-h*0.08);cx.lineTo(w*0.06,-h*0.08);cx.stroke();
   cx.lineWidth=Math.max(1,w*0.016);cx.beginPath();cx.moveTo(-w*0.32,h*0.2);cx.lineTo(w*0.3,h*0.2);cx.stroke();cx.restore();}
-// a bundle of slips tied with a ribbon (o.open, 0 to 1: the ribbon off, the slips fanned)
+// a bundle of slips tied with a ribbon (o.open, 0 to 1: the ribbon off, the slips fanned; o.left: how many of its seven are left)
 function ee_bundle(cx,x,y,s,o){o=o||{};const op=clamp(o.open||0,0,1);cx.save();cx.translate(x,y);cx.scale(s,s);
-  for(let i=0;i<7;i++){const a=(i-3)*0.05*op+((i*37)%7-3)*0.006,dx=(i-3)*14*op,dy=-i*4;ee_slipAt(cx,dx,dy,120,a);}
+  for(let i=0;i<(o.left==null?7:o.left);i++){const a=(i-3)*0.05*op+((i*37)%7-3)*0.006,dx=(i-3)*14*op,dy=-i*4;ee_slipAt(cx,dx,dy,120,a);}
   if(op<0.98)withA(cx,1-op,()=>{cx.strokeStyle=rgba(EE_RIBBON,1);cx.lineWidth=6;cx.beginPath();cx.moveTo(-60,-12);cx.lineTo(60,-12);cx.stroke();cx.beginPath();cx.moveTo(4,-44);cx.lineTo(4,22);cx.stroke();
     cx.beginPath();cx.ellipse(-8,-16,12,6,0.5,0,TAU);cx.ellipse(16,-16,12,6,-0.5,0,TAU);cx.stroke();});cx.restore();}
 function ee_heldBundle(o){return(cx,P_,hands)=>{const [l,r]=hands;ee_bundle(cx,(l[0]+r[0])/2,(l[1]+r[1])/2-6,1.1,o);fingers(cx,P_,[l,r]);};}
@@ -148,6 +148,17 @@ function ee_heldWriting(p){return(cx,P_,hands)=>{const [l,r]=hands;cx.save();cx.
   cx.fillStyle=rgba([244,238,220],1);cx.fillRect(-90,-62,176,120);cx.strokeStyle=rgba(WC_PENCIL,0.5);cx.lineWidth=2;cx.strokeRect(-90,-62,176,120);
   cx.strokeStyle=rgba([40,40,70],0.75);cx.lineWidth=3;cx.lineCap="round";const n=5,q=clamp(p,0,1)*n;for(let i=0;i<n;i++){const f=clamp(q-i,0,1);if(f<=0)break;cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}
   cx.restore();cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();fingers(cx,P_,[l,r]);};}
+// the letter written (p, as ee_heldWriting draws it) folded into the letter ready to seal (as ee_heldLetter draws it, without its seal)
+// as m goes from 0 to 1: the sheet goes from the left hand to both, its lines giving way to the fold's, and the pen is put down; so the
+// one becomes the other over a few frames rather than in one
+function ee_heldFolding(p,m){const W_=ee_heldWriting(p);return(cx,P_,hands)=>{if(m<=0)return W_(cx,P_,hands);const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2,L=(a,b)=>lerp(a,b,m),
+    y0=L(-62,-56),w=L(176,180),h=L(120,112);cx.save();cx.translate(L(l[0]+70,mx),L(l[1]-30,my-28));cx.rotate(L(-0.06,-0.04));
+  cx.fillStyle="rgba(50,36,24,0.22)";cx.fillRect(-86,y0+6,w,h);cx.fillStyle=rgba(mix([244,238,220],[240,232,212],m),1);cx.fillRect(-90,y0,w,h);cx.strokeStyle=rgba(WC_PENCIL,0.5);cx.lineWidth=2;cx.strokeRect(-90,y0,w,h);
+  withA(cx,1-m,()=>{cx.strokeStyle=rgba([40,40,70],0.75);cx.lineWidth=3;cx.lineCap="round";const n=5,q=clamp(p,0,1)*n;for(let i=0;i<n;i++){const f=clamp(q-i,0,1);if(f<=0)break;
+    cx.beginPath();cx.moveTo(-70,-38+i*20);cx.lineTo(-70+(i===n-1?80:136)*f,-38+i*20);cx.stroke();}});
+  withA(cx,m,()=>{cx.beginPath();cx.moveTo(-90,-56);cx.lineTo(0,6);cx.lineTo(90,-56);cx.stroke();});cx.restore();
+  withA(cx,1-sstep(0,0.5,m),()=>{cx.save();cx.translate(r[0]+2,r[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();cx.restore();});
+  fingers(cx,P_,[[L(l[0],mx-80),L(l[1],my+18)],[L(r[0],mx+80),L(r[1],my+18)]]);};}
 // a pen in the right hand, its nib down (o.red: dipped in red ink)
 function ee_heldPen(o){o=o||{};return(cx,P_,hands)=>{const h=hands[1];cx.save();cx.translate(h[0]+2,h[1]+4);cx.rotate(0.5);cx.fillStyle=rgba([40,34,32],1);rr(cx,-5,-60,10,64,4);cx.fill();
   cx.fillStyle=rgba(o.red?[176,40,40]:[150,140,120],1);cx.beginPath();cx.moveTo(-4,4);cx.lineTo(4,4);cx.lineTo(0,22);cx.closePath();cx.fill();cx.restore();fingers(cx,P_,[h]);};}

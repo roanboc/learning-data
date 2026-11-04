@@ -588,10 +588,12 @@ Object.assign(POSE,{
   po_holdNod:{L:[0.16,-2.05],R:[0.16,-2.05],feet:24,shift:0,tilt:0.1,turn:0.06,gaze:[0.3,1.3],look:1}
 });
 // someone walking on the ground of a level camera C, from (X0, Z0) to (X1, Z1), from t0, at v metres a second: where their feet are on
-// the frame and how big they are, the step's bob and swing, when they arrive, which way they face
+// the frame and how big they are, the step's bob and swing, when they arrive, which way they face. They speed up over the first 6% of
+// the way and slow down over the last 6% (the slowing once began further on than the steady part had reached, and walkers jumped)
 function po_stroll(C,t,t0,X0,Z0,X1,Z1,v,h){const L=Math.hypot(X1-X0,Z1-Z0),T_=Math.max(0.3,L/(v||1.3)),u=clamp((t-t0)/T_,0,1),moving=u>0&&u<1,ph=(t-t0)*Math.PI*3.2,
-    e=u<0.06?u*u/0.12:u>0.94?1-(1-u)*(1-u)/0.12:u-0.03,X=lerp(X0,X1,e),Z=lerp(Z0,Z1,e),p=po_at(C,X,Z,h);
-  return{x:p.x,y:p.y,s:p.s,X,Z,moving,ph,swing:moving?Math.sin(ph):0,bob:moving?Math.abs(Math.sin(ph))*10*p.s:0,end:t0+T_,flip:X1<X0};}
+    e=(u<0.06?u*u/0.12:u>0.94?0.94-(1-u)*(1-u)/0.12:u-0.03)/0.94,X=lerp(X0,X1,e),Z=lerp(Z0,Z1,e),p=po_at(C,X,Z,h);
+  const k=clamp((1-u)/0.08,0,1);  // the step dies away as they arrive, so the arms are at their sides when they stop, not mid-swing
+  return{x:p.x,y:p.y,s:p.s,X,Z,moving,ph,swing:moving?Math.sin(ph)*k:0,bob:moving?Math.abs(Math.sin(ph))*10*p.s*k:0,end:t0+T_,flip:X1<X0};}
 // a person drawn where po_stroll puts them: walking (pose names A and B swing), or standing in pose o.pose once they stop
 function po_walker(ctx,id,w,o){o=o||{};const A=o.walk||"walk",sw=w.swing;
   person(ctx,id,w.x,w.y-w.bob,w.s,Object.assign({},o,{pose:w.moving?(o.base||"stand"):(o.pose||o.base||"stand"),pose2:w.moving?(sw>0?A+"A":A+"B"):o.pose2,mix:w.moving?Math.abs(sw):o.mix,

@@ -159,14 +159,18 @@ scene("board",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
     // the data team's room: Jun takes a change request from the tray on his desk
     {at:P.jun,place:"data",keys:[[P.jun,1420,610,1.3],[P.jun+0.1,1440,610,1.36]],d:2,draw:(x,tt)=>{const has=tt>=P.jun+1.0,h=cw_handAt("jun",0,905,0.8,"cw_reachLow",1),jx=CW_TRAY[0]+40-h[0];
       if(!has)cw_tray(x,CW_TRAY[0],CW_TRAY[1]);else{withA(x,1,()=>cw_tray(x,CW_TRAY[0],CW_TRAY[1]));}
-      person(x,"jun",jx,905,0.8,has?{pose:"hold",t:tt,carry:cw_heldForm}:{pose:"listen",pose2:"cw_reachLow",mix:fin(tt,P.jun+0.35,0.5),t:tt});}},
+      // once he has the form, his arm brings it up from the tray into the hold over half a second, not in one frame
+      const m=sstep(P.jun+1.0,P.jun+1.45,tt);POSE.cw_takeJ=gv_blendNear(POSE.cw_reachLow,POSE.hold,m);
+      person(x,"jun",jx,905,0.8,has?{pose:"cw_takeJ",t:tt,carry:gv_fromHand(cw_heldForm,m)}:{pose:"listen",pose2:"cw_reachLow",mix:fin(tt,P.jun+0.35,0.5),t:tt});}},
     // the form on his desk: he writes its title, and his name
     {at:P.form,place:"topJun",keys:[[P.form,920,330,1.38]],d:2,push:0.01,draw:(x,tt)=>{const pen=cw_at(x,CW_RQP,q=>cw_request(q,{title:clamp((tt-P.form-0.1)/1.2,0,1),name:clamp((tt-P.form-1.4)/0.45,0,1)}));
       if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.form+0.1,P.form+1.85));}},
     // Yusuf's office: the shelf, with gaps where five binders have gone to the work; he takes down binder 19
     {at:P.binder,place:"office",keys:[[P.binder,1240,560,1.3],[P.binder+0.1,1250,556,1.34]],d:2,draw:(x,tt)=>{const out=fin(tt,P.binder+0.55,0.35),has=tt>=P.binder+0.9,h=cw_handAt("yusuf",0,905,0.8,"reach",1),yx=1432-h[0];
       cw_binders(x,{out19:has,lift:out});
-      person(x,"yusuf",yx,905,0.8,has?{pose:"hold",t:tt,carry:title}:{pose:"listen",pose2:"reach",mix:fin(tt,P.binder+0.05,0.45),t:tt});}},
+      // and Yusuf's brings the binder from the shelf into the hold the same way
+      const m=sstep(P.binder+0.9,P.binder+1.35,tt);POSE.cw_takeY=gv_blendNear(POSE.reach,POSE.hold,m);
+      person(x,"yusuf",yx,905,0.8,has?{pose:"cw_takeY",t:tt,carry:gv_fromHand(title,m)}:{pose:"listen",pose2:"reach",mix:fin(tt,P.binder+0.05,0.45),t:tt});}},
     // binder 19 open on his desk: policy 19, change management, and its first line, lit gold
     {at:P.impact-0.2,place:"desk",keys:[[P.impact-0.2,1240,420,1.3]],d:2,push:0.012,draw:(x,tt)=>cw_binder19(x,{lit:fin(tt,P.impact,0.8)})},
     // the meeting room, empty: on the wall between the whiteboard and the screen, the change board's calendar
@@ -411,11 +415,12 @@ scene("ready",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
 // ---- 10 · A step, not a meeting: the policy's line leaves the shelf and becomes a box on every change request; every team adds its
 // line to the record; the board meets only when a change needs it. It paid off: in today, nothing broke, the two reports agree, and,
 // like Sweden's morning, no one was surprised. One question is left ----
-// Sweden, the morning after: the traffic flows on the right, and the officer, his glove down, walks off the road to the pavement
+// Sweden, the morning after: the traffic flows on the right, and the officer, his glove down, walks off the road to the pavement (his
+// step's swing grows from nothing and dies away as he stops, so his arms don't snap down in the frame he stops in)
 function cw_after(x,tt,t0){const C=CW_ST,u=tt-t0,items=[];CW_LIT=[];
   items.push([16+5*u,()=>cw_bus(x,C,{x:1.9,z:16+5*u})]);items.push([38+6*u,()=>cw_car(x,C,{x:1.9,z:38+6*u,col:CW_PAINT[4]})]);
   items.push([72-11*u,()=>cw_car(x,C,{x:-1.9,z:72-11*u,h:Math.PI,col:CW_PAINT[2]})]);items.push([120-10*u,()=>cw_car(x,C,{x:-1.9,z:120-10*u,h:Math.PI,col:CW_PAINT[0]})]);
-  const g=easeCam(clamp((u-0.5)/3.4,0,1)),X=lerp(0.3,5.2,g),walking=g>0&&g<1,ph=(u-0.5)*Math.PI*2.2,sw=walking?Math.sin(ph):0,k=cw_ppm(C,22.5),[ox,oy]=cw_pj(C,X,0,22.5);
+  const g=easeCam(clamp((u-0.5)/3.4,0,1)),X=lerp(0.3,5.2,g),walking=g>0&&g<1,ph=(u-0.5)*Math.PI*2.2,sw=walking?Math.sin(ph)*Math.sin(g*Math.PI):0,k=cw_ppm(C,22.5),[ox,oy]=cw_pj(C,X,0,22.5);
   items.push([22.5,()=>person(x,"cw_officer",ox,oy-Math.abs(sw)*0.02*k,1.8*k/560,{pose:"stand",pose2:sw>0?"walkA":"walkB",mix:Math.min(1,Math.abs(sw)*1.2),t:tt})]);
   cw_depth(items);cw_lights();}
 scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);

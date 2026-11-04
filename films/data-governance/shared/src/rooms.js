@@ -697,6 +697,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision

@@ -1816,6 +1816,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2596,6 +2604,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -3560,8 +3573,9 @@ function cp_personBack(ctx,id,x,y,s,o){const k=head;head=(c,P)=>cp_backHead(c,P)
 function cp_placeHi(key){return wc_kept("cpHi:"+key,W*2,H*2,q=>{q.scale(2,2);WC_PLACES[key](q);});}
 // The breach (CP_A.breach) filled with fresh clay up to the crest, and new turf laid on it in rows from the foot up (u, 0 to 1, how much
 // is laid); people at work on it: two digging clay at its foot, two laying turf, one carrying a square of turf up to them; the flood's
-// water still lying in the fields near it, in pools that shrink (dry, 0 to 1)
-function cp_mendPolder(ctx,t,u,dry){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,T=A.toe,K=A.crest[0],Hc=A.crest[1],x0=bx-bw,x1=bx+bw,R=wc_rng(591),
+// water still lying in the fields near it, in pools that shrink (dry, 0 to 1). up (0 to 1): how far up the slope the one carrying
+// turf has come; he climbs it once, while we watch, rather than over and over (he went back to the foot in one frame)
+function cp_mendPolder(ctx,t,u,dry,up){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,T=A.toe,K=A.crest[0],Hc=A.crest[1],x0=bx-bw,x1=bx+bw,R=wc_rng(591),
     sl=(X,v)=>[X,v*Hc,lerp(T,K,v)];
   for(const [X,Z,rx,rz,sd] of [[2,50,6,4.5,601],[36,47,7,5,603],[14,64,3,2.4,605]]){const k=1-0.45*clamp(dry,0,1),L=[];
     for(let i=0;i<28;i++){const a=i/28*TAU,w=1+0.14*Math.sin(a*3+sd)+0.06*Math.sin(a*7+sd*2);L.push([X+Math.cos(a)*rx*k*w,0.03,Z+Math.sin(a)*rz*k*w]);}const pts=P(L);if(pts.length>2)cp_pool(ctx,pts,0.8,sd);}
@@ -3582,11 +3596,13 @@ function cp_mendPolder(ctx,t,u,dry){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,
   const ph=(o)=>cp_dig(t+o,1.6);
   for(const [id,X,Z,o,fl] of [["cpDig",x0-3.2,T-1.6,0,false],["cpHus",x1+3,T-1.2,0.7,true]])
     cp_who(ctx,C,id,X,0,Z,{pose:"cp_digDown",pose2:"cp_digUp",mix:ph(o),t,flip:fl,wide:true,carry:cp_heldSpade({ground:-4,clod:clamp((ph(o)-0.35)/0.4,0,1)})});
-  const r=Math.floor(on/nx),vr=Math.min(0.95,(r+0.6)/nv);
+  // the two laying turf kneel at the row being laid, and shuffle up to the next as it's finished, over a few frames (not in one)
+  const rf=on/nx,r=Math.floor(rf)+sstep(0.7,1,rf-Math.floor(rf)),vr=Math.min(0.95,(r+0.6)/nv);
   for(const [id,X,o] of [["cpOwner",lerp(x0,x1,0.3),0],["cpOwnerC",lerp(x0,x1,0.72),0.9]]){const b=Math.sin(t*2.2+o);
     cp_who(ctx,C,id,X,vr*Hc,lerp(T,K,vr)-0.3,{pose:"cp_reachDown",pose2:"cp_basket",mix:0.5+0.5*b,t});}
-  const e=clamp((t%4.2)/3.4,0,1),vc=lerp(0,vr-0.12,e),wk=Math.sin(t*6);
-  cp_who(ctx,C,"cpSon",lerp(x0+1,x0+3,e),vc*Hc,lerp(T-2.5,lerp(T,K,vc),Math.min(1,e*3))-0.3,{pose:"cp_basket",pose2:wk>0?"walkA":"walkB",mix:e<1?Math.abs(wk)*0.5:0,t,carry:cp_heldTurf});}
+  // his step dies away as he arrives, rather than stopping in a frame
+  const e=clamp(up,0,1),vc=lerp(0,vr-0.12,e),wk=Math.sin(t*6);
+  cp_who(ctx,C,"cpSon",lerp(x0+1,x0+3,e),vc*Hc,lerp(T-2.5,lerp(T,K,vc),Math.min(1,e*3))-0.3,{pose:"cp_basket",pose2:wk>0?"walkA":"walkB",mix:Math.abs(wk)*0.5*(1-sstep(0.85,1,e)),t,carry:cp_heldTurf});}
 // a square of turf held in both hands, grass up
 function cp_heldTurf(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);
   cx.fillStyle=rgba(CP.peat,1);rr(cx,-84,-6,168,34,6);cx.fill();cx.fillStyle=rgba(mix(CP.grass2,CP.grass3,0.4),1);rr(cx,-86,-20,172,22,8);cx.fill();
@@ -3623,9 +3639,13 @@ function cp_heldSpadeUp(cx,P_,hands){const h=hands[1],tip=[h[0]+26,0],L=Math.hyp
   cx.strokeStyle=rgba(CP_WOODDK,1);cx.lineWidth=13;cx.beginPath();cx.moveTo(top[0]+n[0]*26,top[1]+n[1]*26);cx.lineTo(top[0]-n[0]*26,top[1]-n[1]*26);cx.stroke();
   const bl=[[s1[0]+n[0]*22,s1[1]+n[1]*22],[tip[0]+n[0]*28,tip[1]+n[1]*28],[tip[0]-n[0]*28,tip[1]-n[1]*28],[s1[0]-n[0]*22,s1[1]-n[1]*22]];cx.fillStyle=rgba(CP_WOOD,1);cx.beginPath();bl.forEach((q,i)=>i?cx.lineTo(q[0],q[1]):cx.moveTo(q[0],q[1]));
   cx.closePath();cx.fill();cx.strokeStyle=rgba(CP_WOODDK,0.8);cx.lineWidth=2.4;cx.stroke();cx.fillStyle=rgba([96,98,104],1);cx.fillRect(Math.min(tip[0]-28,tip[0]+28),tip[1]-20,56,20);cx.restore();fingers(cx,P_,[h]);}
-// someone walking along the crest from X0 to X1, setting off at t0 (1.3 m a second); returns where they are, and draws them
+// someone walking along the crest from X0 to X1, setting off at t0 (1.3 m a second); returns where they are, and draws them. o as
+// person's, or a function of the walk (gv_walk's) that gives them, for someone who takes up a pose as they go (gv_walkInto)
 function cp_bankWalker(ctx,id,t,t0,X0,X1,o){const B=CP_B,Z=B.c0+0.3,a=cp_b(X0,cp_bCrest(X0),Z)[0],b=cp_b(X1,cp_bCrest(X1),Z)[0],k=B.C.F/Z,w=gv_walk(t,t0,a,b,1.3*k),X=lerp(X0,X1,(w.x-a)/((b-a)||1)),
-    q=cp_b(X,cp_bCrest(X),Z),s=k*1.7/560;w.bob*=s/0.35;gv_walker(ctx,id,w,q[1],s,Object.assign({t},o||{}));return{X,moving:w.moving,end:w.end};}
+    q=cp_b(X,cp_bCrest(X),Z),s=k*1.7/560;w.bob*=s/0.35;if(typeof o==="function")o=o(w);gv_walker(ctx,id,w,q[1],s,Object.assign({t},o||{}));return{X,moving:w.moving,end:w.end};}
+// a staff in the right hand, going from upright on the ground beside the foot (as cp_heldStaff holds it) to its tip at rel from the
+// hand as m goes from 0 to 1, so it tilts out to tap the clay rather than jumping there
+const cp_heldStaffTo=(rel,m)=>(cx,P_,h)=>cp_heldStaff({rel:[lerp(4,rel[0],m),lerp(-h[1][1],rel[1],m)]})(cx,P_,h);
 
 // a house mark, a farm's sign cut in wood: a few straight strokes, centred at (x, y), r its half size
 function cp_mark(ctx,m,x,y,r){const L=[[[0,-1],[0,1],[-0.6,-0.4],[0,-1],[0.6,-0.4]],[[0,1],[0,-1],[-0.55,-0.5],[0.55,-0.5]],[[-0.6,-0.9],[0.6,0.9],[0,-1],[0,1],[0.6,-0.9],[-0.6,0.9]],
@@ -3662,7 +3682,8 @@ function cp_farmLife(ctx,t,t0){const F=CP_F,C=F.C,p=cp_f,P=L=>cp_proj(C,L,1),e=t
   for(const [X,Z2,col,o,fl] of [[-1.8,5.4,[238,230,212],0,0],[-0.8,6.4,[172,108,62],1.3,1],[1.2,5.8,[226,214,190],2.1,0],[2.6,6.6,[150,92,56],0.7,1]]){const h=p(X,0,Z2),pk=Math.max(0,Math.sin(t*3.1+o*2.3));
     cp_hen(ctx,h[0],h[1],cp_fK(X,Z2),col,pk,fl);}
   cp_who(ctx,C,"cpKid",-0.9,0,8.9,{t,flip:true,pose:"stand"});cp_who(ctx,C,"cpKid2",0.2,0,9.4,{t,pose:"wave",flip:true});
-  const we=clamp(e/3.6,0,1),ww=Math.sin(e*5);cp_who(ctx,C,"cpWife",lerp(-2.4,1.4,we),0,lerp(11.6,10.4,we),{pose:"cp_basket",pose2:we<1?(ww>0?"walkA":"walkB"):null,mix:we<1?Math.abs(ww)*0.6:0,t,flip:true,carry:cp_heldBasket});}
+  // her step dies away as she stops, rather than in a frame
+  const we=clamp(e/3.6,0,1),ww=Math.sin(e*5);cp_who(ctx,C,"cpWife",lerp(-2.4,1.4,we),0,lerp(11.6,10.4,we),{pose:"cp_basket",pose2:we<1?(ww>0?"walkA":"walkB"):null,mix:Math.abs(ww)*0.6*(1-sstep(0.86,1,we)),t,flip:true,carry:cp_heldBasket});}
 // a gull in flight at (x, y), s its span in px, flapping (ph); white, grey on its back and wings, the tips dark
 function cp_gull(ctx,x,y,s,ph,fl){const f=Math.sin(ph),w=s/2,d=fl?-1:1;ctx.save();ctx.translate(x,y);ctx.scale(d,1);ctx.lineCap="round";ctx.lineJoin="round";
   ctx.fillStyle=rgba([244,244,240],1);ctx.beginPath();ctx.ellipse(0,0,w*0.32,w*0.1,0,0,TAU);ctx.fill();
@@ -3876,10 +3897,11 @@ Object.assign(PEOPLE,{
 function cp_heldClip(cx,P_,hands){const h=hands[0];cx.save();cx.translate(h[0]-8,h[1]-46);cx.rotate(-0.1);cx.fillStyle="rgba(40,30,20,0.22)";cx.fillRect(-52,-66,112,150);
   cx.fillStyle=rgba([90,74,60],1);cx.fillRect(-58,-72,112,150);cx.fillStyle="#f6f4ee";cx.fillRect(-50,-60,96,128);cx.fillStyle=rgba([70,70,74],1);cx.fillRect(-22,-80,40,16);
   cx.fillStyle="rgba(120,130,150,0.45)";for(let i=0;i<6;i++)cx.fillRect(-42,-44+i*18,72-(i%3)*14,4);cx.restore();fingers(cx,P_,[h]);}
-// someone walking towards us along the dike's crest from Z0 to Z1 at X, setting off at t0 (1.2 m a second); o as person's. Returns
-// whether they're still walking
+// someone walking towards us along the dike's crest from Z0 to Z1 at X, setting off at t0 (1.2 m a second); o as person's, or a
+// function of the walk ({moving, swing}) that gives them (for gv_walkInto). The step grows as they set off and dies away as they
+// arrive, so the arms come to rest over several frames, not in one. Returns whether they're still walking
 function cp_crestWalk(ctx,id,t,t0,X,Z0,Z1,o){const D=CP_D,T_=Math.abs(Z1-Z0)/1.2,u=clamp((t-t0)/T_,0,1),Zp=lerp(Z0,Z1,u<0.5?2*u*u:1-2*(1-u)*(1-u)),moving=u>0&&u<1,
-    ph=(t-t0)*Math.PI*3.2,sw=moving?Math.sin(ph):0,bob=moving?Math.abs(sw)*0.025:0;
+    ph=(t-t0)*Math.PI*3.2,sw=moving?Math.sin(ph)*Math.sin(u*Math.PI):0,bob=moving?Math.abs(sw)*0.025:0;if(typeof o==="function")o=o({moving,swing:sw});
   cp_who(ctx,D.C,id,X,D.crest+bob,Zp,Object.assign({t},o,moving&&!(o&&o.keep)?{pose:"stand",pose2:sw>0?"walkA":"walkB",mix:Math.abs(sw)}:{}));return moving;}
 // the rain over today's dike: the far land softened (cp_rainHaze, drawn before the people, so they stay clear: thickest at the horizon,
 // fading out above and below it, so it leaves no edge), then the light greyed and streaks falling (cp_rainDay, over everything)
@@ -4332,11 +4354,15 @@ function cp_owners(x,tt,o){o=o||{};cp_aboveCrest(x,()=>{for(const [id,X] of [["c
 // the board walking the slumped stretch: the reeve taps the bare clay with his staff, the clerk cuts a notch in his tally, and the
 // landowner whose stretch it is pays a coin. s0: when they set off
 function cp_boardWalk(x,tt,s0){cp_withB(CP_BWALK,()=>cp_aboveCrest(x,()=>{cp_bankStake(x,-0.6,1,CP_OWN[2],2);cp_bankStake(x,7.6,1,CP_OWN[2],null);
-  const tap=tt>s0+2.2&&tt<s0+3.4,lift=tap?0.5-0.5*Math.cos((tt-s0-2.2)*TAU*1.6):0;
-  cp_bankWalker(x,"cpClerk",tt,s0,-7.6,-2.6,tt>s0+2.4?{pose:"cp_tally",carry:cp_heldTally({n:2,cut:clamp((tt-s0-2.8)/0.8,0,1),saw:tt*2})}:{});
+  // Each takes up what they do from their step over 0.4 s or so, not in a frame: the reeve's staff tilts out to the clay and back,
+  // the clerk's hands come up as he takes out his tally, the landowner's hand comes out with the coin
+  const lift=tt>s0+2.2?0.5-0.5*Math.cos((tt-s0-2.2)*TAU*1.6):0,tp=sstep(s0+1.8,s0+2.2,tt)*(1-sstep(s0+3.4,s0+3.8,tt));
+  cp_bankWalker(x,"cpClerk",tt,s0,-7.6,-2.6,w=>{const m=sstep(s0+2.4,s0+2.85,tt),k=cp_heldTally({n:2,cut:clamp((tt-s0-2.8)/0.8,0,1),saw:tt*2});
+    return m>0?{pose:gv_walkInto("cp_clerkT",w,"cp_tally",m),carry:(cx,P_,h)=>withA(cx,m,()=>k(cx,P_,h))}:{};});
   cp_bankWalker(x,"cpBoardA",tt,s0,-6.0,-1.2,{carry:cp_heldStaff()});
-  cp_bankWalker(x,"cpReeve",tt,s0,-4.6,0.6,tt>s0+2.2?{pose:"cp_tapDown",pose2:"cp_tapUp",mix:lift,carry:cp_heldStaff({rel:[150,560-100*lift]})}:{carry:cp_heldStaff()});
-  cp_bankWalker(x,"cpOwnerC",tt,s0+2.8,5.4,2.6,tt>s0+4.4?{pose:"cp_give",carry:cp_heldCoin,flip:true}:{flip:true});}));}
+  cp_bankWalker(x,"cpReeve",tt,s0,-4.6,0.6,w=>tp>0?{pose:gv_walkInto("cp_reeveT",w,blendPose(POSE.cp_tapDown,POSE.cp_tapUp,lift),tp),carry:cp_heldStaffTo([150,560-100*lift],tp)}:{carry:cp_heldStaff()});
+  cp_bankWalker(x,"cpOwnerC",tt,s0+2.8,5.4,2.6,w=>{const m=sstep(s0+4.2,s0+4.65,tt);
+    return m>0?{pose:gv_walkInto("cp_ownerG",w,"cp_give",m),carry:(cx,P_,h)=>withA(cx,m,()=>cp_heldCoin(cx,P_,h)),flip:true}:{flip:true};});}));}
 // the family in the flood: the man in the loft reaching down, a child beside him, his wife lifting a sack up the ladder, their son
 // wading to the door with another on his shoulder
 function cp_family(x,tt){const F=CP_F,dm=(F.dorm[0]+F.dorm[1])/2,dz=F.z-0.35,m=cp_f(dm+0.2,F.wall-0.1,dz),ms=cp_fK(0,dz+0.6)*1.7/560,m2=cp_f(dm-0.35,F.wall-0.1,dz);
@@ -4372,7 +4398,7 @@ scene("dike",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     {at:vg,keys:[[vg,960,540,1.0]],push:0,draw:(x,tt)=>{x.fillStyle=rgba(WC_PAPER,1);x.fillRect(0,0,W,H);
       [P.settles,P.wears,P.storms].forEach((t0,i)=>cp_vignette(x,i,[355,960,1565][i],470,0.86,tt,clamp((tt-t0+0.1)/1.8,0,1),fin(tt,i?t0-0.4:vg-0.5,0.5)));}},
     // the gap mended with clay and turf, and the camera pulls back along the whole dike
-    {at:md,keys:[[md,1242,500,2.2],[md+0.8,960,540,1.0]],d:3.2,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("polder"),0,0,W,H);const e=clamp((tt-md)/3.6,0,1);cp_mendPolder(x,tt,lerp(0.55,0.95,e),e);}},
+    {at:md,keys:[[md,1242,500,2.2],[md+0.8,960,540,1.0]],d:3.2,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("polder"),0,0,W,H);const e=clamp((tt-md)/3.6,0,1);cp_mendPolder(x,tt,lerp(0.55,0.95,e),e,clamp((tt-md+0.4)/3.6,0,1));}},
     // the people behind the dike gather on it in the morning: the board, with their staffs, and the landowners
     {at:gt,place:"crestKept",keys:[[gt,960,540,1.0]],push:0.03,draw:(x,tt)=>cp_gathering(x,tt)},
     // each landowner's stretch is staked along the crest, and they stand by theirs with a spade
@@ -4421,10 +4447,14 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
       cp_nameCard(x,1580,540,"Prof. David Mensah","deputy vice-chancellor",gv_io(tt,P.deputy-0.2,P.endsJ-0.9,0.4));}},
     // Yusuf knocks at the open door; David waves him in, then spreads his hands: what does it do? Yusuf comes to the desk with his report.
     // The shot starts on the planner, as the last one ends, David still writing, and the camera comes back to the room
+    // David's hands go from writing to waving, then to spread, over 0.4 s each; Yusuf's knocking hand comes down as he sets off, he
+    // grows a little as he steps from the doorway into the room, and keeps his report in the hand that held it at the door
     {at:yk,place:"dvc",keys:[[yk,1160,300,1.55],[yk+0.5,1150,520,1.25]],d:1.8,push:0.02,draw:(x,tt)=>{const wk=gv_walk(tt,c.lose,1766,1560,260),inn=tt>=c.lose;
-      cp_dvc(x,tt,{david:tt<P.isnt+0.2?{pose:"write",flip:false}:tt<P.cantSee-0.2?{pose:"wave",expr:"smile",flip:false}:{pose:"cp_spread",expr:"concerned",flip:false}});
+      POSE.cp_davidE=gv_blendNear(gv_blendNear(POSE.write,POSE.wave,sstep(P.isnt-0.1,P.isnt+0.3,tt)),POSE.cp_spread,sstep(P.cantSee-0.45,P.cantSee-0.05,tt));
+      cp_dvc(x,tt,{david:Object.assign({pose:"cp_davidE",flip:false},tt<P.isnt+0.2?{}:{expr:tt<P.cantSee-0.2?"smile":"concerned"})});
       if(!inn)person(x,"yusuf",1766,CP_DV.fy+6,0.74,{pose:"cp_knock",t:tt,flip:true,carry:cp_heldReportL});
-      else gv_walker(x,"yusuf",wk,CP_DV.fy+30,0.8,{t:tt,carry:cp_heldReport,flip:true});
+      else{const e=clamp((1766-wk.x)/206,0,1);
+        gv_walker(x,"yusuf",wk,lerp(CP_DV.fy+6,CP_DV.fy+30,e),lerp(0.74,0.8,e),{t:tt,pose:gv_walkInto("cp_yusufIn",wk,"cp_knock",1-sstep(c.lose,c.lose+0.4,tt)),carry:cp_heldReportL,flip:true});}
       gv_say(x,560,330,["what does it do?"],1050,520,{a:gv_io(tt,P.cantSee,c.report,0.3),k:0.9+0.1*spring(fin(tt,P.cantSee,0.5))});}},
     // the project's final report, open on the desk: what it did, each line ticked; its last page, After June, and nothing on it
     {cut:true,at:rp,keys:[[rp,960,500,1.0],[P.nothing-0.5,1400,370,2.0]],d:1.6,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("desk"),0,0,W,H);cp_report(x,{open:clamp((tt-rp-0.3)/0.9,0,1),tick:j=>clamp((tt-P.lists-0.1-j*0.3)/0.4,0,1)});}},
@@ -4567,14 +4597,19 @@ scene("keeps",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s
     // keeping the land dry never ended: today, two of the board's people walk a dike in the rain, and test its side
     {at:tr,keys:[[tr,960,560,1.15],[tr+0.1,980,560,1.2]],d:3,draw:(x,tt)=>{x.drawImage(cp_placeHi("today"),0,0,W,H);cp_rainHaze(x);const stop=tr+2.0,tap=tt>stop+0.2?0.5-0.5*Math.cos((tt-stop-0.2)*TAU*1.5):0;
       cp_crestWalk(x,"cpInspA",tt,tr,-0.5,12.5,8.8,{carry:cp_heldClip});
-      cp_crestWalk(x,"cpInspB",tt,tr,0.75,11.0,8.6,tt>stop?{keep:true,pose:"cp_tapDown",pose2:"cp_tapUp",mix:tap,carry:cp_heldStaff({rel:[150,560-100*tap]}),flip:true}:{carry:cp_heldStaff(),flip:true});
+      // as she stops, her staff tilts out to the clay and her arm takes up the tapping, over half a second
+      cp_crestWalk(x,"cpInspB",tt,tr,0.75,11.0,8.6,w=>{const m=sstep(stop-0.3,stop+0.2,tt);
+        return m>0?{keep:true,pose:gv_walkInto("cp_inspT",w,blendPose(POSE.cp_tapDown,POSE.cp_tapUp,tap),m),carry:cp_heldStaffTo([150,560-100*tap],m),flip:true}:{carry:cp_heldStaff(),flip:true};});
       cp_rainDay(x,tt);}},
     // June: the project's card comes off the planner; the line for every year stays
     {at:jn,place:"dvc",keys:[[jn,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:1,off:clamp((tt-P.juneW-0.2)/1.0,0,1)}})},
     // what it built stays: each capability with what the project put in place, kept, a gold edge round each
     {at:sy,place:"band",keys:[[sy,960,540,1.0]],push:0.03,draw:(x,tt)=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,wash:()=>1,first:1,lit:j=>fin(tt,P.keepsIt+j*0.12,0.4)})},
     // next November, imagined: the two reports agree again; then one meaning, one number, and someone to ask
-    {at:nv,place:"floor",keys:[[nv,738,470,1.3],[c.gives-0.2,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>{cp_floor(x,tt,{x:{yusuf:846},pose:{yusuf:tt>P.askW?{pose:"wave",carry:null,expr:"smile",flip:false}:{}}});
+    {at:nv,place:"floor",keys:[[nv,738,470,1.3],[c.gives-0.2,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>{
+      // Yusuf looks up from his notebook and waves: his hand goes up over 0.4 s, the notebook put away as it does
+      const m=sstep(P.askW-0.1,P.askW+0.3,tt);POSE.cp_yusufW=gv_blendNear(POSE.write,POSE.wave,m);
+      cp_floor(x,tt,{x:{yusuf:846},pose:{yusuf:m>0?Object.assign({pose:"cp_yusufW",carry:m<1?(cx,P_,h)=>withA(cx,1-sstep(0,0.6,m),()=>heldNotebook(cx,P_,h)):null,flip:false},tt>P.askW?{expr:"smile"}:{}):{}}});
       cp_reports(x,{n:["4,931 awards","4,931 awards"],tick:fin(tt,c.nov+0.8,0.5),join:clamp((tt-P.agree)/0.9,0,1),lit:gv_io(tt,P.numW-0.1,P.numW+1.6,0.3)});
       cp_glassAt(x,2,300,fin(tt,P.meanW-0.2,0.5),["award","a qualification the","university confers"]);
       cp_glassAt(x,2,560,fin(tt,P.askW-0.2,0.5),["Office hours","Thursdays","2 to 3 pm"],{dx:67,w:210,headSize:30,pin:GV.red,wash:GV.gold,washA:0.3});}}]);

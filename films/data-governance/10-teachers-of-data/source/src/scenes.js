@@ -27,8 +27,10 @@ function tt_crossCues(sc){const c=sc.cues,w=(id,s)=>wAt(sc,id,s);
     few:w("few","few"),dataL:c.data,breath:c.breath};}
 // a whistle and a clap, drawn over the person who does them
 const tt_whistling=(t,t0,t1)=>t>t0&&t<t1?(x,X,Y,k)=>tt_whistleMarks(x,X,Y,k,t,gv_io(t,t0,t1,0.3)):null;
-const tt_clapping=(t,t0,t1,ph)=>{if(t<=t0||t>=t1)return{};const a=gv_io(t,t0,t1,0.25),m=0.5+0.5*Math.sin((t-t0)*TAU*2.6+(ph||0)),e=clamp((m-0.72)/0.28,0,1);
-  return{pose:"tt_clapA",pose2:"tt_clapB",mix:m*a,marks:(x,X,Y,k)=>tt_clapMarks(x,X,Y,k,e,a)};};
+// The arms come up into the clap and go down after it over a third of a second (the clap was the base pose, so they jumped up and down),
+// the way down ending 0.35 s after t1, as gv_io's does; key names this person's own blended pose
+const tt_clapping=(t,t0,t1,ph,key)=>{if(t<=t0||t>=t1+0.35)return{};const a=gv_io(t,t0,t1,0.35),m=0.5+0.5*Math.sin((t-t0)*TAU*2.6+(ph||0)),e=clamp((m-0.72)/0.28,0,1);
+  return{pose:tt_mix(key,[["tt_clapA",a],["tt_clapB",m*a]]),pose2:null,mix:0,marks:(x,X,Y,k)=>tt_clapMarks(x,X,Y,k,e,a)};};
 // a pose blended in at t0 and out at t1
 const tt_doing=(t,t0,t1,pose,d)=>({pose2:pose,mix:gv_io(t,t0,t1,d||0.35)});
 
@@ -53,7 +55,7 @@ function tt_world95(t,P){const people=[],cars=[];
   const wh0=P.around-0.3,wh1=P.whistle+1.8,cl0=P.applaud-0.3,cl1=P.applaud+2.4;
   const stand=[["ttGrey",-5.8,15.9,"tt_lips",0.3],["ttFlatCap",-4.6,15.5,"tt_whistle",1.1],["ttLong",-3.6,15.0,"tt_lips",2.0],["ttWorker",-2.8,16.2,"tt_whistle",2.9],
     ["ttCurly",11.8,15.3,"tt_whistle",0.7],["ttSpecs",13.2,15.9,"tt_lips",1.6]];
-  stand.forEach(([id,X,d,wp,ph])=>{const cl=tt_clapping(t,cl0,cl1,ph);people.push({id,X,d,o:Object.assign({t,pose:"stand"},tt_doing(t,wh0+ph*0.1,wh1,wp),
+  stand.forEach(([id,X,d,wp,ph])=>{const cl=tt_clapping(t,cl0,cl1,ph,"ttClap_"+id);people.push({id,X,d,o:Object.assign({t,pose:"stand"},tt_doing(t,wh0+ph*0.1,wh1,wp),
     wp==="tt_lips"&&t>wh0&&t<wh1?{expr:"ttWhistle"}:{},{marks:tt_whistling(t,wh0+0.3+ph*0.1,wh1)},cl)});});
   people.push({id:"ttBun",X:0.9,d:15.7,o:{t,pose:"tt_umbrella",umbrella:[178,62,58]}});
   // two weave between the stopped cars, and go off along our pavement: one with a bag, one under an umbrella (round the cars' backs)
@@ -69,7 +71,7 @@ function tt_world95(t,P){const people=[],cars=[];
   // crossing bows to everyone
   const M=[["ttMime2",[[1.5,31],[1.5,16.0],[-0.9,15.0]],P.mimes-4.4],["ttMime1",[[2.1,32.5],[2.1,16.2],[2.4,14.9]],P.mimes-4.0],
     ["ttMime3",[[0.8,33.5],[0.8,16.4],[-2.0,15.4]],P.mimes-4.2],["ttMime4",[[12.9,31.5],[12.9,16.6],[12.3,15.1]],P.mimes-3.6]];
-  M.forEach(([id,pts,t0],i)=>{let w=tt_path(t,t0,pts,2.3);const o=Object.assign({t},i!==1?tt_clapping(t,cl0+0.15*i,cl1,0.9*i):{}),a=fin(t,t0,0.6);
+  M.forEach(([id,pts,t0],i)=>{let w=tt_path(t,t0,pts,2.3);const o=Object.assign({t},i!==1?tt_clapping(t,cl0+0.15*i,cl1,0.9*i,"ttClap_"+id):{}),a=fin(t,t0,0.6);
     if(i===0){const b0=w.end+0.2;o.bow=gv_io(t,b0,b0+1.0,0.35);if(o.bow>0)Object.assign(o,{pose:"tt_bow"});}
     if(i===1){// steps out to the first car's front, bows to the driver and shows him the way back, behind the line; bows his thanks as
       // the car goes; then to the next car, which won't move: a shrug, and he steps aside for the officer
@@ -256,7 +258,8 @@ scene("beside",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,
     // coming back on the sign-off sheet
     {at:0,place:"faculty",keys:[[0,960,540,1],[P.add+0.3,860,470,1.18]],d:3,draw:(x,tt)=>{const X=GV_FX,top=X.top,wk=gv_walk(tt,0.5,-160,180,300),ask=gv_io(tt,2.2,P.add+0.6,0.35);
       tt_clock(x,1250,180,60,clockM(tt));
-      gv_behind(x,"ttAdviser",wk.x,top,1.7,{standing:true,pose:wk.moving?"stand":"tt_list",pose2:wk.moving?(wk.swing>0?"walkA":"walkB"):null,mix:Math.abs(wk.swing),t:tt,carry:tt_heldList,expr:"smile"});
+      // she comes in holding her list up as she'll stand (walking with her arms swinging dropped it, and it jumped up as she stopped)
+      gv_behind(x,"ttAdviser",wk.x,top,1.7,{standing:true,pose:"tt_list",t:tt,carry:tt_heldList,expr:"smile"});
       gv_behind(x,"anil",X.seat[0],top,X.seat[1],{pose:"listen",t:tt,flip:true,nod:tt_nodAt(tt,3.6,5.4,0),expr:tt>P.stops+0.2?"concerned":"calm"});
       x.drawImage(gv_place("facultyDesk"),0,0,W,H);
       tt_onScreen(x,X.screen,q=>tt_anilScreen(q,{add:fin(tt,P.add,0.5),sheet:fin(tt,P.stops,0.6)}),true);
@@ -352,7 +355,8 @@ scene("warn",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,
   gv_shots(ctx,S,t,sc.dur,[
     // the meeting room: Yusuf brings a card to the board and pins it up
     {at:0,place:"meeting",keys:[[0,640,575,1.5]],push:0.02,draw:(x,tt)=>{const wk=gv_walk(tt,P.walk,200,300,140),pin=gv_io(tt,P.pin-0.45,P.pin+0.9,0.35);
-      tt_meeting(x,tt,{board:brd(tt),faces:()=>1,read:["tents"],yusuf:q=>gv_walker(q,"yusuf",wk,905,GV_MT.s,{t:tt,pose:wk.moving?null:"tt_marker",pose2:wk.moving?null:"tt_pin",mix:pin,
+      // he walks over holding the card up as he stood (walking with his arms at his sides dropped it to his waist and back in a frame)
+      tt_meeting(x,tt,{board:brd(tt),faces:()=>1,read:["tents"],yusuf:q=>gv_walker(q,"yusuf",wk,905,GV_MT.s,{t:tt,pose:"tt_marker",pose2:wk.moving?null:"tt_pin",mix:pin,
         carry:tt<P.pin+0.3?tt_heldCard:tt_heldMarker})});}},
     // the whiteboard, close: the new rule written as it's said; then the column nobody described, and two readers' guesses at it
     {cut:true,at:P.mz,place:"meetZ",keys:[[P.mz,1120,630,1.2],[P.why,960,540,1]],d:1.8,push:0,draw:(x,tt)=>{board(x,tt);
@@ -383,14 +387,15 @@ scene("warn",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>{const w=(id,s,
 // ---- 6 · Measured by use: binder 29 says maturity is assessed every year, and nobody does; the score comes down; three measures from
 //      the work go up where it hung; and Bogotá, which measured its crossings the same way ----
 // both arms reaching one point (U out from the middle, V up from the feet, in Yusuf's units, the same for each hand), the elbows out:
-// the angles person() takes
-function tt_ik(U,V){const L1=108,L2=113,dx=U-62,dy=V+416,d=Math.min(Math.hypot(dx,dy),L1+L2-0.5),th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),
-    a0=Math.sin(th+al)>Math.sin(th-al)?th+al:th-al;return[a0,Math.atan2(dx-L1*Math.sin(a0),dy-L1*Math.cos(a0))];}
+// the angles person() takes. That rule puts the elbows up for hands above the shoulders and down for hands below, so hands passing the
+// shoulders' height swapped them in one frame: b (0 to 1), when given, takes the elbows from up and out to down and out instead
+function tt_ik(U,V,b){const L1=108,L2=113,dx=U-62,dy=V+416,d=Math.min(Math.hypot(dx,dy),L1+L2-0.5),th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),
+    a0=b==null?(Math.sin(th+al)>Math.sin(th-al)?th+al:th-al):lerp(th-al,th+al,clamp(b,0,1));return[a0,Math.atan2(dx-L1*Math.sin(a0),dy-L1*Math.cos(a0))];}
 // Yusuf looking up at the frame; reaching a binder at his shoulder's height; his hands at the frame's lower corners, at V (tt_frameArms):
 // raised to it, or low, carrying it (tt_holdLow, and its steps)
 POSE.tt_up={L:[0.14,-0.08],R:[0.1,0.05],feet:26,shift:4,tilt:-0.06,turn:0.3,gaze:[0.6,-0.7],look:0};
 POSE.tt_take={L:[0.13,-0.1],R:[0.75,1.96],hand:"open",feet:30,shift:6,tilt:-0.02,turn:0.3,gaze:[0.8,0.2],look:0};
-const tt_frameArms=(V,o)=>{const a=tt_ik(100,V);return Object.assign({L:a,R:a.slice(),hand:"open",feet:26,shift:0,tilt:0,turn:0,gaze:[0,V<-500?-0.8:0.5],look:0},o||{});};
+const tt_frameArms=(V,o)=>{const a=tt_ik(100,V,sstep(-486,-346,V));return Object.assign({L:a,R:a.slice(),hand:"open",feet:26,shift:0,tilt:0,turn:0,gaze:[0,V<-500?-0.8:0.5],look:0},o||{});};
 POSE.tt_holdLow=tt_frameArms(-205,{turn:0.06});
 POSE.tt_holdLowA=Object.assign({},POSE.tt_holdLow,{feet:14,shift:-5,tilt:0.03});POSE.tt_holdLowB=Object.assign({},POSE.tt_holdLowA,{shift:5,tilt:-0.03});
 // his board as it stands from here on: the three panels, the stewards and the new rule's steps, the who sheet

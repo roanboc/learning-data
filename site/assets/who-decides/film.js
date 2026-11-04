@@ -1790,6 +1790,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2570,6 +2578,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -3317,10 +3330,11 @@ scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const 
       const sp=wd_supAt(tt,wd_stX(3)+92,wx+70,P.s6+0.4,sx=>wd_onPart(cx+22,cy+4,"wd_sup",sx,tryp));
       wd_scene1(x,tt,{off,lamps,press:{6:[press,lit*(1-fixed)]},who,sup:sp,odd:{e:6,part:"carb",a:ca,dy:cdy,seated:fixed>=1}});
       const g=gv_io(tt,P.stop-0.4,P.team,0.3);if(g>0.01){const lx=N.x0+6*N.sw;x.save();x.globalCompositeOperation="screen";x.filter="blur(6px)";x.fillStyle=rgba([255,250,226],0.7*g);x.fillRect(lx-12,N.top+30,24,110);x.restore();}}},
-    // every worker could, and they did: the day passes, lamps light and go dark, and once more one turns red
+    // every worker could, and they did: the day passes, lamps light and go dark, and once more one turns red (a hand goes up to the
+    // cord from the shot's first frame, not from before it, so the shot doesn't open on an arm halfway up and stopping in two frames)
     {cut:true,at:P.did,place:"line",keys:[[P.did,960,540,1],[P.reach,960,530,1.04]],d:2,push:0,draw:(x,tt)=>{const u=tt-P.did,off=P.off4(tt),lamps=lampsOff(),pulls={},who={};
       [[1,0.3,1.4],[6,0.9,2.0],[4,1.4,2.9,1.9],[2,3.0,3.9]].forEach(([i,a,b,r])=>{const l=gv_io(u,a,b,0.2);if(l>0)lamps[i]=[r!=null&&u>=r?"red":"amber",l];
-        const up=gv_io(u,a-0.45,a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:wd_onCord("wd_w"+(i+1),wx,wx+66,pl),mix:up};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
+        const up=gv_io(u,Math.max(a-0.45,0),a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:wd_onCord("wd_w"+(i+1),wx,wx+66,pl),mix:up};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
       const sp=wd_supAt(u,N.sup,wd_stX(4)+92,1.0,sx=>POSE.listen);
       wd_scene1(x,tt,{off,lamps,pulls,who,sup:sp,light:clamp(u/(P.reach-P.did),0,1)});}},
     // within reach: a hand on the cord; and someone who could decide, coming at once

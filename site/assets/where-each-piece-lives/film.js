@@ -1802,6 +1802,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2582,6 +2590,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -3243,8 +3256,9 @@ function oh_courtDesks(){return wc_kept("ohCourtDesks",W*2,H*2,q=>{q.scale(2,2);
   oh_lowDesk(q,dx,dy,0.95*k,0.34*k,301+i);const [ix,iy]=oh_ctP(X+0.45,0.34,Zd+0.12);wc_part(q,wc_rect(ix-0.08*k,iy-0.03*k,0.16*k,0.05*k),[60,60,66],1,{seed:305+i,lw:0.8});});});}
 function oh_court(x,tt,o){o=o||{};const C=OH_CT,P=oh_ctP,L=[];x.drawImage(oh_placeHi("court"),0,0,W,H);
   OH_ROWS.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z);person(x,"ohO"+(i+1),px,py,1.62*C.f/Z/560,{pose:"oh_tablet",t:tt+i*0.9,flip:X>0,carry:oh_heldTablet});}]));
-  OH_HIST.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z),s=1.62*C.f/Z/560,up=Math.sin(tt*1.7+i*2)>0.6;
-    oh_floorSit(x,"ohH"+(i+1),px,py,s,{pose:up?"oh_brushUp":"oh_brush",t:tt+i*1.3,flip:false,carry:oh_heldBrush});}]));
+  // each brush lifts from the sheet and comes down again over a few frames (it once jumped up and down in one)
+  OH_HIST.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z),s=1.62*C.f/Z/560,up=sstep(0.45,0.75,Math.sin(tt*1.7+i*2));
+    oh_floorSit(x,"ohH"+(i+1),px,py,s,{pose:"oh_brush",pose2:"oh_brushUp",mix:up,t:tt+i*1.3,flip:false,carry:oh_heldBrush});}]));
   L.sort((a,b)=>b[0]-a[0]).forEach(e=>e[1]());x.drawImage(oh_courtDesks(),0,0,W,H);
   // the sheets on the desks, written as the line goes on
   OH_HIST.forEach(([X,Z],i)=>{const Zd=Z-0.5,a=P(X-0.2,0.345,Zd+0.18),b=P(X+0.25,0.345,Zd+0.18),c=P(X+0.25,0.345,Zd-0.05),d=P(X-0.2,0.345,Zd-0.05);
@@ -3292,12 +3306,19 @@ function oh_office(x,tt,o){o=o||{};x.drawImage(gv_place("annalsOffice"),0,0,W,H)
   OH_OFS.forEach(([id,px,pose,carry],i)=>oh_floorSit(x,id,px,690,0.9,{pose:o.pose&&o.pose(i)||pose,t:tt+i,flip:i>=2,carry}));x.drawImage(oh_officeTable(),0,0,W,H);}
 
 // ---- the printers: the block inked, a sheet laid on it and rubbed, lifted to the pile ----
+// a work cycle: the poses in turn (each [name, where in the cycle, ph 0 to 1, it begins]), each taken up from the one before over a
+// little of the cycle (0.08 of it: about a fifth of a second), so the arms go from one to the next over a few frames rather than
+// jumping. Kept as POSE[key], for person() to take by name
+function oh_cycle(key,ph,steps){let i=0;steps.forEach((s,k)=>{if(ph>=s[1])i=k;});const prev=steps[(i+steps.length-1)%steps.length][0];
+  POSE[key]=gv_blendNear(POSE[prev],POSE[steps[i][0]],sstep(0,0.08,ph-steps[i][1]));return key;}
 // o.pile: how many printed sheets are on the pile; o.source (0 to 1): Jeonju's copy, open on a stand at the left, glowing gold
 function oh_print(x,tt,o){o=o||{};x.drawImage(gv_place("print"),0,0,W,H);const B=OH_PR.bench,ph=((tt*0.42)%1+1)%1,
-    p1=ph<0.35?"oh_ink":ph<0.6?"oh_lay":"oh_reach",p2=ph<0.55?"oh_watch":"oh_lift";
-  // they sit on the floor at the low bench, as printers did
+    p1=oh_cycle("oh_pr1",ph,[["oh_ink",0],["oh_lay",0.35],["oh_reach",0.6]]),p2=oh_cycle("oh_pr2",ph,[["oh_watch",0],["oh_lift",0.55]]),
+    sheet=ph>=0.55?sstep(0.55,0.63,ph):1-sstep(0,0.08,ph);
+  // they sit on the floor at the low bench, as printers did; the sheet is in the second one's hands as they lift it, and gone as they
+  // put it down
   x.save();x.beginPath();x.rect(-W,-H,3*W,B[2]+H);x.clip();oh_floorSit(x,"ohPr1",900,760,0.95,{pose:p1,t:tt,flip:false});
-  oh_floorSit(x,"ohPr2",1240,760,0.95,{pose:p2,t:tt+1,flip:true,carry:p2==="oh_lift"?oh_heldSheet:null});x.restore();x.drawImage(oh_printBench(),0,0,W,H);
+  oh_floorSit(x,"ohPr2",1240,760,0.95,{pose:p2,t:tt+1,flip:true,carry:sheet>0?(cx,P_,h)=>withA(cx,sheet,()=>oh_heldSheet(cx,P_,h)):null});x.restore();x.drawImage(oh_printBench(),0,0,W,H);
   // a sheet on the block while it's printed; the pile
   if(ph>0.4&&ph<0.72){const [r0,r1,ry]=OH_PR.tray;x.fillStyle=rgba(OH.paper,0.96);x.fillRect(r0+8,ry-2,r1-r0-16,22);}
   const [q0,q1]=OH_PR.pile,n=Math.round(o.pile==null?6:o.pile);for(let i=0;i<n;i++){x.fillStyle=rgba(i%2?OH.paper:wc_dim(OH.paper,0.05),1);x.fillRect(q0+(i%3),B[2]+10-i*3,q1-q0,3);}
@@ -3425,7 +3446,7 @@ function oh_airing(x,tt,o){o=o||{};x.drawImage(gv_place("airing"),0,0,W,H);const
   OH_AI.racks.forEach(([rx,ry,rw])=>{for(let j=0;j<6;j++){if(k++>=Math.round(nb*tot))return;oh_openBook(x,rx-rw/2+rw*(j+0.5)/6,ry-12,rw/7.2);}});
   // a keeper bringing out more books, the historian at his mat with a low desk, writing
   const kx=lerp(700,880,(Math.sin(tt*0.5)+1)/2);person(x,"ohK1",kx,700,0.7,{pose:"oh_carry",t:tt,flip:false});oh_bookStack(x,kx,700-380*0.7,60,4);
-  const [mx,my]=OH_AI.mat;oh_floorSit(x,"ohAir",mx,my-20,0.82,{pose:Math.sin(tt*1.6)>0.5?"oh_brushUp":"oh_brush",t:tt,carry:oh_heldBrush});
+  const [mx,my]=OH_AI.mat;oh_floorSit(x,"ohAir",mx,my-20,0.82,{pose:"oh_brush",pose2:"oh_brushUp",mix:sstep(0.35,0.65,Math.sin(tt*1.6)),t:tt,carry:oh_heldBrush});
   x.drawImage(oh_sprite("airDesk",300,140,q=>oh_lowDesk(q,150,130,260,100,391)),mx-150,my+40-130);
   x.fillStyle=rgba(OH.paper,1);x.fillRect(mx-70,my-66,140,14);}
 
@@ -3487,9 +3508,10 @@ function oh_smooth(P,n){n=n||12;const out=[];for(let i=0;i<P.length-1;i++){const
 function oh_along(pts,u){let L=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);L+=d;}
   let left=L*clamp(u,0,1);for(let i=1;i<pts.length;i++){if(left<=seg[i-1]||i===pts.length-1){const v=seg[i-1]?clamp(left/seg[i-1],0,1):0;return[lerp(pts[i-1][0],pts[i][0],v),lerp(pts[i-1][1],pts[i][1],v)];}left-=seg[i-1];}
   return pts[0];}
-// Clara's request, small and bright as it travels: a gold card with three lines on it, a soft glow round it (o.held: no glow)
-function oh_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);withA(ctx,a,()=>{
-  if(!(o&&o.held)){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,0,0,150,[255,222,120],0.95);wc_glowAt(ctx,0,0,80,[255,240,190],0.8);ctx.restore();}ctx.fillStyle="rgba(60,44,30,0.22)";ctx.fillRect(-54,-36,120,84);
+// Clara's request, small and bright as it travels: a gold card with three lines on it, a soft glow round it (o.held: no glow; o.glow,
+// 0 to 1: how strong, as it grows on leaving a hand)
+function oh_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);withA(ctx,a,()=>{const g=o&&o.glow!=null?o.glow:1;
+  if(!(o&&o.held)&&g>0.01){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,0,0,150,[255,222,120],0.95*g);wc_glowAt(ctx,0,0,80,[255,240,190],0.8*g);ctx.restore();}ctx.fillStyle="rgba(60,44,30,0.22)";ctx.fillRect(-54,-36,120,84);
   wc_panel(ctx,-60,-42,120,84,{kind:"card",seed:753,wash:GV.gold,washA:0.5});gv_lines(ctx,-42,-16,84,3,18,1);});ctx.restore();}
 // a screen drawn as the screen close is (GV_SC, 1260 x 690), scaled into a smaller screen's box; its words are too small to read there,
 // so they're decoration (Teachers of data's tt_onScreen)
@@ -3868,9 +3890,10 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       oh_tagAt(x,tt,P.years,null,960,210,"175 years",Object.assign({size:36},OH_GOLDTAG));
       [[P.what,"what was decided",560],[P.whom,"by whom",960],[P.why,"and why",1360]].forEach(([t0,s,tx])=>oh_tagAt(x,tt,t0,null,tx,840,s,{size:32}));}},
     // something has to change: two scholars of the town come to the archive's gate
-    {at:s8,keys:[[s8,960,700,1.5]],push:0.02,draw:(x,tt)=>oh_jeonju(x,tt,{cast:q=>{const u=clamp((tt-s8)/2.2,0,1),m=u<1?0.7:0;
-      person(q,"ohAn",lerp(1500,1080,easeCam(u)),1060,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5)>0?"walkA":"walkB",mix:m,t:tt,flip:true});
-      person(q,"ohSon",lerp(1640,1250,easeCam(u)),1070,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5+1)>0?"walkA":"walkB",mix:m,t:tt+1,flip:true});}})},
+    // (their arms swing with each step, from one side through the middle to the other, and the swing dies away as they arrive)
+    {at:s8,keys:[[s8,960,700,1.5]],push:0.02,draw:(x,tt)=>oh_jeonju(x,tt,{cast:q=>{const u=clamp((tt-s8)/2.2,0,1),m=0.7*Math.sin(u*Math.PI);
+      person(q,"ohAn",lerp(1500,1080,easeCam(u)),1060,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5)>0?"walkA":"walkB",mix:m*Math.abs(Math.sin(tt*5)),t:tt,flip:true});
+      person(q,"ohSon",lerp(1640,1250,easeCam(u)),1070,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5+1)>0?"walkA":"walkB",mix:m*Math.abs(Math.sin(tt*5+1)),t:tt+1,flip:true});}})},
     // into the mountains: the two scholars lead, the keepers carry the chests up the path towards us
     {cut:true,at:s9,keys:[[s9,960,560,1.0]],push:0.03,draw:(x,tt)=>{x.drawImage(gv_place("path"),0,0,W,H);oh_walkers(x,tt-s9,[["ohAn",0.56],["ohSon",0.5],["ohK1",0.38,true],["ohK2",0.3,true]],0.06);
       oh_nameCard(x,1480,250,"An Ui · Son Hong-rok","local scholars",gv_io(tt,s9+0.6,s9b-0.2,0.4));}},
@@ -3928,10 +3951,13 @@ scene("nine",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       oh_nameCard(x,1400,330,"Clara Jensen","Planning",gv_io(tt,s4+0.4,s5,0.4));oh_tagAt(x,tt,s4+0.6,null,910,620,"since October",OH_GOLDTAG);}},
     // nine days later: the faculty's wall calendar, nine days crossed off one by one, and the day he sees it ringed
     {at:s5,keys:[[s5,960,470,1.0]],push:0.02,draw:(x,tt)=>oh_calendar(x,tt,{cross:clamp((tt-s5-0.3)/0.17,0,9),ring:clamp((tt-P.sees+0.25)/0.5,0,1)})},
-    // Jun finds her request, frowns, and passes it on, to Clara
+    // Jun finds her request, frowns, and passes it on, to Clara: it leaves from where it was in his hands, at the size it was there, its
+    // glow growing as it goes, and his arm comes up after it from the hold (not from his side, in a frame)
     {at:s6,place:"data",keys:[[s6,1182,540,1.3]],push:0.02,draw:(x,tt)=>{const go=clamp((tt-P.passes+0.1)/0.9,0,1),has=go<=0;oh_pile(x,1540,668,{out:true});
-      person(x,"jun",1330,905,0.8,has?{pose:"hold",t:tt,expr:"concerned",carry:oh_heldReq}:{pose:"listen",pose2:"point",mix:gv_io(tt,P.passes-0.1,P.passes+1.6,0.4),t:tt});
-      if(!has){const e=easeCam(go);oh_flyCard(x,lerp(1330,1990,e),lerp(640,330,e)-Math.sin(e*Math.PI)*60,0.9,0.1*e,1-clamp((go-0.85)/0.15,0,1));}
+      POSE.oh_junPass=gv_blendNear(gv_blendNear(POSE.hold,POSE.point,sstep(P.passes-0.1,P.passes+0.3,tt)),POSE.listen,fin(tt,P.passes+1.6,0.4));
+      person(x,"jun",1330,905,0.8,has?{pose:"hold",t:tt,expr:"concerned",carry:oh_heldReq}:{pose:"oh_junPass",t:tt});
+      // (594.9: the middle of the card in his hands; 0.736: its size there, 0.92 of a unit at his 0.8)
+      if(!has){const e=easeCam(go),a=sstep(0,0.3,e);oh_flyCard(x,lerp(1330,1990,e),lerp(lerp(594.9,640,a),330,e)-Math.sin(e*Math.PI)*60,lerp(0.736,0.9,a),lerp(-0.05,0.1*e,a),1-clamp((go-0.85)/0.15,0,1),{glow:a});}
       oh_tagAt(x,tt,P.passes+0.35,null,1640,430,"to Clara Jensen",OH_GOLDTAG);}},
     // had he said yes: a pale picture of what didn't happen, his hand on "approve", a gold "no" across it, "not the owner"
     {at:s7,place:"screenData",keys:[[s7,960,470,1.0],[s7+0.1,950,474,1.05]],d:3,draw:(x,tt)=>oh_approve(x,tt,{hand:clamp((tt-P.yes+0.3)/0.8,0,1),no:clamp((tt-P.isnt+0.1)/0.9,0,1),tagAt:P.decided})},

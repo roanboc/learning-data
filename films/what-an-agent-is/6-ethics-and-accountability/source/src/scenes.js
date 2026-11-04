@@ -204,7 +204,7 @@ scene("helper",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({faster:wAt(
     // turns to the agent
     {cut:true,at:c.asks-0.4,place:"lab",keys:[[c.asks-0.4,960,540,1]],draw:(x,tt)=>{const turn=ag_in(tt,P.whoA+0.3,0.4),yin=ag_eo(clamp((tt-c.asks+0.4)/0.9,0,1));
       ox_room(x,tt,{tools:1,reach:0.5,ring:{core:0.5}});
-      ox_layerA(x,ag_in(tt,c.asks-0.4,0.8),cc=>ag_person(cc,"yusuf",250-50*(1-yin),640,0.94,{t:tt,talk:ag_talk(sc,"who",tt),pose:tt>P.ifw?"explain":null}));
+      ox_layerA(x,ag_in(tt,c.asks-0.4,0.8),cc=>ag_person(cc,"yusuf",250-50*(1-yin),640,0.94,{t:tt,talk:ag_talk(sc,"who",tt),pose:"hang",pose2:"explain",mix:ag_in(tt,P.ifw,0.4)}));
       ox_layerA(x,1-turn,cc=>ag_person(cc,"jun",650,630,0.96,{t:tt,flip:true,talk:ag_talk(sc,"asks",tt)}));
       ox_layerA(x,turn,cc=>ag_person(cc,"jun",650,630,0.96,{t:tt,gaze:[3,-1]}),"oxlayer2");
       ox_say(x,560,100,600,"Fix failures alone at night, and put its fixes live?",640,250,ag_io(tt,P.could-0.2,P.ifw-0.3,0.4),{side:"bottom",at:0.14});

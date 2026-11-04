@@ -9,8 +9,9 @@ From words to data (films/from-words-to-data/, on the site at from-words-to-data
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
-governance-in-practice/); and What an agent is (films/what-an-agent-is/, at what-an-agent-is/), the first series of the
-module on AI agents in data work. A series with no film on the site yet has no pages, and the topics leave it out until its first
+governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
+(films/what-an-agent-is/, at what-an-agent-is/) and Agents at work on data (films/agents-at-work-on-data/, at
+agents-at-work-on-data/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -96,6 +97,15 @@ def mr_builds_on(lg, f, all_films, R):
 
 def ag_builds_on(lg, f, all_films, R):
     """What an agent is: the first film opens the module on agents and needs nothing before it; each later film builds on the one before."""
+    return after_previous(lg, f, all_films)
+
+
+def aw_builds_on(lg, f, all_films, R):
+    """Agents at work on data: the first film builds on the series before it, What an agent is, whose agent it puts to work; each
+    later film builds on the one before."""
+    if f["index"] == 0:
+        RE = R if lg == "en" else R[3:]
+        return f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía la serie")} {series_link(lg, RE, "what-an-agent-is")}</p>'
     return after_previous(lg, f, all_films)
 
 
@@ -191,7 +201,10 @@ SERIES = [
          learn=dict(dir="governance-in-practice", bundle="the-marketplace")),
     dict(id="what-an-agent-is", dir="what-an-agent-is", slug="what-an-agent-is",
          name={"en": "What an agent is", "es": "Qué es un agente"}, builds_on=ag_builds_on,
-         place={"en": "university", "es": "universidad"}, blocks=[]),
+         place={"en": "university", "es": "universidad"}, blocks=[], next="agents-at-work-on-data"),
+    dict(id="agents-at-work-on-data", dir="agents-at-work-on-data", slug="agents-at-work-on-data",
+         name={"en": "Agents at work on data", "es": "Agentes trabajando con datos"}, builds_on=aw_builds_on,
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -393,7 +406,7 @@ TOPICS = [
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
                "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
-    dict(id="ai-agents", items=["what-an-agent-is"],
+    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data"],
          name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
          who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
          line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",

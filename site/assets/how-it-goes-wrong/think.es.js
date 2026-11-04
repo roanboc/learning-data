@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for How it goes wrong, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (number, ticket, loop), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "number":{q:"El agente respondió 2,911 de inmediato, y sonaba seguro. ¿Qué habría mostrado que estaba errado antes de que Clara lo usara?",
+    opts:[{t:"Preguntarle al agente otra vez, con más firmeza."},{t:"Su consulta, que contó cada carrera con «Health» en el nombre, y una segunda forma de obtener el número: el informe del equipo del censo dice 2,880.",ok:true},{t:"Nada: un agente que suena seguro suele tener razón."}],
+    why:"Su consulta muestra qué contó: cada carrera con «Health» en el nombre, así que también entraron los 31 estudiantes de la carrera conjunta Health data, que no pertenecen a ninguna facultad. El informe del propio equipo del censo dice 2,880. Donde los dos difieren, todavía no es una respuesta; es una pregunta para una persona. Sonar seguro no es evidencia. ¿Qué números envía tu equipo sin una segunda forma de obtenerlos?"},
+  "ticket":{q:"¿Por qué no basta con decirle al agente que ignore las instrucciones escondidas en lo que lee?",
+    opts:[{t:"Porque los agentes nunca siguen las reglas que se les dan."},{t:"Sí basta: una regla bien escrita siempre funciona."},{t:"Un modelo no siempre distingue una orden de los datos, y una línea escondida puede escribirse para engañarlo. Así que lo que lee son datos, nunca órdenes, y de todos modos sus manos no pueden enviar nada afuera.",ok:true}],
+    why:"Una línea escondida puede decir que viene de cualquiera, y un modelo no siempre distingue una orden de los datos. Así que el diseño no depende del modelo: lo que lee se trata como datos, nunca como órdenes, y el agente informa lo que encuentra. Y sus manos tampoco podrían hacer daño: los nombres llegan enmascarados, recibe conteos y muestras pequeñas, y ninguna herramienta puede enviar nada afuera. ¿Por dónde podría llegarle una línea así a un agente donde trabajas?"},
+  "loop":{q:"El bucle del agente tenía un límite de diez rondas, y aun así corrió toda la noche y gastó el presupuesto de una semana. ¿Qué faltaba?",
+    opts:[{t:"Un modelo más rápido, para que las diez rondas terminaran antes."},{t:"Límites de tiempo y dinero además de rondas, detenerse cuando vuelve el mismo error, y una verificación sencilla antes de empezar.",ok:true},{t:"Más rondas, para que encontrara la causa."}],
+    why:"Ningún código podía arreglar la causa: la copia del sistema de estudiantes no había llegado. Diez rondas del mismo error corrieron de las once a las seis, porque su límite contaba rondas y nada más. Ahora cada bucle tiene límites de rondas, tiempo y dinero, y se detiene cuando vuelve el mismo error; y antes corre una verificación sencilla, que ve en un segundo que la copia no está, y avisa a Sam. ¿Qué trabajos tuyos podría detener una verificación sencilla antes de empezar?"}
+  }}};

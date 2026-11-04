@@ -291,8 +291,19 @@ function hw_cutaway(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 /* ---------------------------------------------------------------- the street where the house stands (the place "hwStreet"), and the three houses in a row ("hwRow") */
 function hw_paintStreet(c){hw_sky(c,[184,200,214],[238,232,220],H,[1700,120],1);
-  // the neighbours' fronts at the edges, plain and pale, and the paving
-  for(const [x0,x1] of [[0,440],[1480,W]]){c.fillStyle="rgb(226,220,206)";c.fillRect(x0,200,x1-x0,640);hw_windows(c,x0+30,240,x1-x0-60,560,4.2,0.32);}
+  // the neighbours at the edges, houses of the same kind and size as the one cut open: four floors of plastered stone, a band at each
+  // floor, the same windows over doors at the street, and a terracotta roof sloping down towards it; each runs on past the frame
+  for(const [x0,x1,col,dir] of [[0,440,HWC.ochre,1],[1480,W,HWC.rose,-1]]){const yb=836,ye=yb-580,yr=yb-664;
+    let g=c.createLinearGradient(x0,0,x1,0);g.addColorStop(0,rgba(mix(col,HWC.wallSh,0.22),1));g.addColorStop(1,rgba(col,1));c.fillStyle=g;c.fillRect(x0,ye,x1-x0,yb-ye);
+    c.fillStyle="rgba(150,136,116,0.2)";for(let f=1;f<4;f++)c.fillRect(x0,yb-145*f-5,x1-x0,7);
+    const xs=[];if(dir>0)for(let wx=x1-140;wx>x0-72;wx-=124)xs.push(wx);else for(let wx=x0+68;wx<x1;wx+=124)xs.push(wx);
+    for(const wx of xs)for(let f=0;f<4;f++){const wy=yb-145*(f+1)+32,top=f?wy:yb-122,h=f?88:122;
+      c.fillStyle="rgb(234,228,216)";c.fillRect(wx-8,top-8,72,h+8+(f?8:0));c.fillStyle=f?"rgb(92,86,82)":"rgb(104,86,70)";c.fillRect(wx,top,56,h);
+      c.fillStyle="rgba(255,255,255,0.16)";c.fillRect(wx,top,12,h);}
+    c.fillStyle="rgb(236,230,218)";c.fillRect(x0,ye-6,x1-x0,12);
+    const ex=dir>0?x1+14:x0-14,rx=dir>0?x1-70:x0+70,far=dir>0?x0-20:x1+20;
+    ag_soft(c,cc=>{cc.moveTo(far,ye);cc.lineTo(ex,ye);cc.lineTo(rx,yr);cc.lineTo(far,yr);cc.closePath();},HWC.roof,HWC.roofHi,dir>0?x1-120:x0+120,yr+10,300,"rgba(80,40,20,0.28)",10);
+    c.fillStyle="rgba(80,50,30,0.22)";for(let i=1;i<5;i++){const yy=ye-i*16.6,t=i*16.6/(ye-yr),xe=lerp(ex,rx,t);c.fillRect(Math.min(far,xe),yy,Math.abs(xe-far),2);}}
   let g=c.createLinearGradient(0,836,0,H);g.addColorStop(0,"rgb(206,200,188)");g.addColorStop(1,"rgb(184,178,166)");c.fillStyle=g;c.fillRect(0,836,W,H-836);
   c.fillStyle="rgba(255,255,255,0.4)";c.fillRect(0,836,W,3);
   g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(40,34,28,0.14)");g.addColorStop(0.5,"rgba(40,34,28,0)");g.addColorStop(1,"rgba(255,248,232,0.12)");c.fillStyle=g;c.fillRect(0,0,W,H);}
@@ -363,7 +374,7 @@ const HW_HANDS=[{f:1,size:13,slant:0.28},{f:1.4,size:10,slant:0.08},{f:0.8,size:
 function hw_answers(ctx,tt,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;[[190,140,-0.03],[750,120,0.012],[1310,150,0.028]].forEach(([x,y,r],i)=>{const k=ag_spr(tt,(o.t0||0)+i*0.25);if(k<=0)return;
   ctx.save();ctx.globalAlpha*=a*clamp(k*2,0,1);ag_about(ctx,x+210,y+300,lerp(0.8,1,k));hw_paper(ctx,x,y,420,620,r);
   hw_scribble(ctx,40,64,300,i*7+1,HW_HANDS[i]);
-  ["1","2","3","4","5"].forEach((n,j)=>{const ly=146+j*98;ag_T(ctx,n,36,ly,{w:700,size:30,col:HWC.ink});hw_scribble(ctx,80,ly-4,300-(j%2)*60,i*13+j,HW_HANDS[i]);hw_scribble(ctx,80,ly+38,220+(j%3)*40,i*17+j+5,HW_HANDS[i]);});
+  ["1","2","3","4","5"].forEach((n,j)=>{const ly=146+j*98;ag_T(ctx,n,36,ly,{w:700,size:32,col:HWC.ink});hw_scribble(ctx,80,ly-4,300-(j%2)*60,i*13+j,HW_HANDS[i]);hw_scribble(ctx,80,ly+38,220+(j%3)*40,i*17+j+5,HW_HANDS[i]);});
   ctx.restore();});}
 
 /* ---------------------------------------------------------------- a parish priest's room (the place "hwParish"), and the archive today ("hwArchive")

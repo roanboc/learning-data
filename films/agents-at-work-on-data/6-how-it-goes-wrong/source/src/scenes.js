@@ -58,7 +58,7 @@ scene("lisbon",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({ch:wAt(sc,"
     // inside the walls, a cage of timber braced with crosses: a house cut open; it sways once, and settles
     {at:c.cage,place:"hwStreet",keys:[[c.cage,960,540,1]],push:0.03,draw:(x,tt)=>{const u=Math.max(0,tt-P.bends);
       hw_cutaway(x,960,836,1,{sway:tt>P.bends?0.05*Math.exp(-2.3*u)*Math.sin(5.2*u):0});
-      ag_pill(x,1560,330,"a timber cage that bends",{col:AG.blue,a:ag_in(tt,P.crosses,0.5)});}},
+      ag_pill(x,1560,104,"a timber cage that bends",{col:AG.blue,a:ag_in(tt,P.crosses,0.5)});}},
     // between the houses, stone walls raised above the roofs: a fire on one roof stops at the wall
     {at:c.firewall,place:"hwRow",keys:[[c.firewall,980,560,1.04]],push:0.03,draw:(x,tt)=>{hw_roofFire(x,tt,P.fire2-0.8,1);
       ag_pill(x,980,196,"stone walls above the roofs",{col:AG.blue,a:ag_in(tt,P.walls,0.5)});}},

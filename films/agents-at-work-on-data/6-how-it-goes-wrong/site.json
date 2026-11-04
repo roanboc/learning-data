@@ -1,0 +1,33 @@
+{
+  "kicker": "Designing for failure",
+  "kicker_es": "Diseñar para las fallas",
+  "title_es": "Cómo sale mal",
+  "h1": "How it goes wrong: six ways, and a design for each",
+  "h1_es": "Cómo sale mal: seis formas, y un diseño para cada una",
+  "lead": "Jun's agent works on the census-day count the university reports to the government. Agents go wrong in a few known ways: a column that isn't there, a number said too surely, a weakened test, a line hidden in a ticket, a loop all night, a simple job made big. The team designs for each.",
+  "lead_es": "El agente de Jun trabaja en el conteo del censo que la universidad informa al gobierno. Los agentes fallan de formas conocidas: una columna que no existe, un número errado y seguro, una prueba debilitada, una línea escondida, un bucle toda la noche, un trabajo inflado. El equipo diseña para cada una.",
+  "description": "A film about the six ways an AI agent most often goes wrong in data work, each blameless, each with its design: a column that isn't there, written because the name seemed likely, met by reading the real names from the catalog and building every draft in a sandbox first; a confidently wrong number, 2,911 for the Faculty of Health, that counted a joint degree belonging to no faculty, met by a query with every number and a second way to reach it; a test weakened to pass, met by tests that belong to people, written first and changed only by a person, and pull requests that list every test they change; an instruction hidden in a ticket, met by treating what an agent reads as data, never orders, and by hands that can't send anything out; a loop that ran all night on a cause no code could fix, met by limits on rounds, time and money and a plain check that runs first; and a simple job made complicated, met by plans that name their tools and plain scripts for the steps that can be written down. It opens in Lisbon in 1755, rebuilt after the earthquake for each way the city had failed.",
+  "description_es": "Una película sobre las seis formas en que un agente de IA suele fallar en el trabajo con datos, cada una sin culpa de nadie y con su diseño: una columna que no existe, escrita porque el nombre parecía probable, que se evita leyendo los nombres reales en el catálogo y compilando cada borrador primero en un sandbox; un número errado dicho con seguridad, 2,911 para la Facultad de Salud, que contó una carrera conjunta que no es de ninguna facultad, que se evita con la consulta de cada número y una segunda forma de llegar a él; una prueba debilitada para pasar, que se evita con pruebas que son de las personas, escritas primero y cambiadas solo por una persona, y solicitudes de cambio que listan cada prueba que cambian; una instrucción escondida en un ticket, que se evita tratando lo que lee el agente como datos, nunca como órdenes, y con manos que no pueden enviar nada fuera; un bucle que corrió toda la noche por una causa que ningún código podía arreglar, que se evita con límites de rondas, tiempo y dinero y una verificación sencilla que corre primero; y un trabajo sencillo vuelto complicado, que se evita con planes que nombran sus herramientas y scripts sencillos para los pasos que se pueden escribir. Empieza en Lisboa en 1755, reconstruida después del terremoto para cada forma en que la ciudad había fallado.",
+  "card": "Jun's agent works on the census-day count. Six ways it can go wrong, none anyone's fault, and the design the team builds for each.",
+  "card_es": "El agente de Jun trabaja en el conteo del censo. Seis formas en que puede fallar, sin culpa de nadie, y el diseño para cada una.",
+  "chapters_es": {
+    "lisbon": "Reconstruida para el siguiente",
+    "column": "Una columna que no existe",
+    "number": "Un número errado, dicho con seguridad",
+    "test": "Una prueba debilitada para pasar",
+    "ticket": "Una línea escondida en un ticket",
+    "loop": "Un bucle toda la noche",
+    "simple": "Un trabajo sencillo vuelto complicado",
+    "expect": "Prevé estas fallas"
+  },
+  "past": [
+    "Lisbon, 1755: an earthquake, a wave and fire, and a city rebuilt for each",
+    "The lower town was rebuilt for each way it had failed. Expect the ways an agent goes wrong, and design for each."
+  ],
+  "past_es": [
+    "Lisboa, 1755: un terremoto, una ola y el fuego, y una ciudad reconstruida para cada uno",
+    "La ciudad baja se reconstruyó para cada forma en que había fallado. Prevé las formas en que falla un agente, y diseña para cada una."
+  ],
+  "next_h": "You've seen six ways an agent goes wrong, and the design the team builds for each. Next: working with agents on Databricks.",
+  "next_h_es": "Viste seis formas en que falla un agente, y el diseño que el equipo construye para cada una. Después: trabajar con agentes en Databricks."
+}

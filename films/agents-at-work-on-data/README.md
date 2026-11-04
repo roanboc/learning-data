@@ -11,6 +11,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [How it goes wrong](https://data.learn-all.org/agents-at-work-on-data/how-it-goes-wrong/) | Designing for failure | 7½ min | 8 | 3 questions | [script](6-how-it-goes-wrong/script.md) · [source](6-how-it-goes-wrong/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

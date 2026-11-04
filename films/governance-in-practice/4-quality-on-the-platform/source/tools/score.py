@@ -57,8 +57,10 @@ def hz(m):
 I, IV, V, vi, iii = (43, (59, 62, 67)), (48, (60, 64, 67)), (50, (62, 66, 74)), (40, (59, 64, 67)), (47, (59, 62, 66))
 
 # ---- the levels: the accordion sits about as far under the voice as the series' other films' music (matched by loudness, not by
-# peak); the guitar a little under it, as it's played close; the effects about 12 dB under the music (FX scales them all)
-AL, GL, FX = 0.045, 0.07, 1.6
+# peak); the guitar a little under it, as it's played close; the effects about 12 dB under the music (FX scales them all). Since the
+# author's review of What an agent is (4 November 2026) the accordion and the guitar are 1.5 dB lower, as low as in the governance
+# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
+AL, GL, FX = 0.038, 0.059, 1.35
 LEVEL = {'r': 1.0, 'l': 1.05}
 PAN = {'r': -0.12, 'l': -0.22}  # the accordion a little left of centre, its bass side further; the guitar sits right
 
@@ -475,14 +477,15 @@ tap(bc - 2.1, 0.007, px(1340))
 keys(aw_('became', 'became a test'), 6, 0.007, px(700), 0.15)
 stamp(aw_('became', 'confirmed it', 0.3), 0.012, px(1500)); tap(aw_('became', 'confirmed it', 0.4), 0.006, px(1400))
 
-# 8. One scorecard: home at the turn; the platform's results come in, a row at a time, and the table column lit; the scorecard, the
+# 8. One scorecard: the third at the turn (home until 4 November 2026, when the home chord came five times after the opening); the
+#    platform's results come in, a row at a time, and the table column lit; the scorecard, the
 #    platform's table under the tests', each table's owner from the project; a thread from each result to one owner, the shared inbox
 #    struck through, and the falling fifth; measured, not surveyed: the survey struck, and last night's 160 of 160, the rising third,
 #    on the home chord; the governance check's measures lit
 cw_ = lambda lid, word, off=0: W('card', lid, word, off)
 cc_ = lambda lid, off=0: G('card', lid, off)
 c0 = S0('card')
-chord(I, c0 + 0.2, c0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
+chord(iii, c0 + 0.2, c0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
 ld = cw_('land', 'land on the platform')
 for i in range(5):
     tap(ld - 0.3 + 0.32 * i, 0.005, px(960))

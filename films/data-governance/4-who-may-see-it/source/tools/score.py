@@ -304,7 +304,8 @@ masked(W('grants', 'like', 'privacy', 0.6), 0.036, 0.3); chip(W('grants', 'class
 endc = G('grants', 'breath', -0.2); strings(CMAJ9, endc - 1.0, E('grants') - endc + 2.0, 0.026)
 mark(endc + 0.7)
 
-# every effect above, 4 dB up together: the softest still reads on a phone's speaker, and the loudest stays about 20 dB under the voice
+# every effect above, together: 4 dB up until the author's review of What an agent is (4 November 2026), 0.4 dB down since, so the
+# effects sit as low as in the governance films the author accepted (tools/quiet.py measures them)
 for b in (XL, XR):
-    b *= 1.6
+    b *= 0.95
 soften(2500)

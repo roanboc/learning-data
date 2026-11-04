@@ -34,10 +34,10 @@ if(typeof person==="function"&&typeof blendPose==="function"&&typeof POSE!=="und
       const P_=typeof PEOPLE!=="undefined"?PEOPLE[id]:null,h=P_&&P_.build&&P_.build.h||1,m=ctx.getTransform();
       if(po&&po.L&&po.R)keep(ctx,String(id),x,y,Math.hypot(m.a,m.b)*s*h,[-300,300,-700,0],op.flip,[...po.L,...po.R]);}
     return o0.apply(this,arguments);};}
-// the module's people: near and far arm (in degrees), a hanging arm as ag_poseOf hangs it
+// the module's people: near and far arm (in degrees), a hanging arm as the painted one hangs (AG_HANG in the module's people.js)
 if(typeof ag_person==="function"&&typeof ag_poseOf==="function"){const o1=ag_person;
   ag_person=function(ctx,who,x,y,s,op){if(H.on){op=op||{};let po=null;try{po=op.pose&&(op.pose!=="hang"||(op.pose2&&op.mix>0))?ag_poseOf(op):null;}catch(e){}
-      const n=po&&po.near||[2,14],f=po&&po.far||[0,6],m=ctx.getTransform();let key="?";
+      const H_=typeof AG_HANG!=="undefined"?AG_HANG:{near:[4,34],far:[0,6]},n=po&&po.near||H_.near,f=po&&po.far||H_.far,m=ctx.getTransform();let key="?";
       try{const P_=typeof ag_spec==="function"?ag_spec(who):who;key=typeof who==="string"?who:String(P_&&(P_.key||P_.name)||"?");}catch(e){}
       keep(ctx,key,x,y,Math.hypot(m.a,m.b)*s,[-500,500,-400,560],op.flip,[n[0],n[1],f[0],f[1]].map(v=>v*Math.PI/180));}
     return o1.apply(this,arguments);};}

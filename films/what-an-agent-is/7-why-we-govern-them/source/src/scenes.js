@@ -35,7 +35,7 @@ function wg_trayLine(x,p,a){if(p<=0||a<=0)return;const T_=WR.tray,x0=T_.x-T_.w/2
 /* ---------------------------------------------------------------- 1 · Built into the line */
 scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,"opening","Tokyo"),fast:wAt(sc,"first","two hundred and ten"),out:wAt(sc,"first","built for"),
     km:wAt(sc,"speed","a kilometre"),sig:wAt(sc,"signals","the signals"),slow:wAt(sc,"signals","and the train"),tok:wAt(sc,"missed","in Tokyo"),
-    faster:wAt(sc,"cab","goes faster"),slows:wAt(sc,"cab","slows itself down"),every:wAt(sc,"room","every train"),answers:wAt(sc,"driver","answers"),
+    faster:wAt(sc,"cab","goes faster"),slows:wAt(sc,"cab","slows itself down"),answers:wAt(sc,"driver","answers"),
     six:wAt(sc,"trip","six and a half"),four:wAt(sc,"trip","to four"),since:wAt(sc,"safe","since that first day"),watch:wAt(sc,"uni","no one can watch"),
     round:wAt(sc,"limits","its limits")}));
   ag_shots(ctx,S,t,sc.dur,[
@@ -67,8 +67,8 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,
       const f=P.faster,dn=c.room-2.2,v=ag_keys(tt,[[c.cab,200],[f,203],[f+0.9,221],[f+1.3,221],[f+2.6,204],[f+3.0,206.5],[f+3.4,205],[dn+0.3,205],[dn+1.5,157],[dn+1.8,158.5],[dn+2.1,158]]);
       const allow=tt<dn?210:160,state=v>allow?"over":tt>f+0.5?"under":"set";
       wg_cabShot(x,tt,{v,allow,state,boxA:ag_in(tt,wAt(sc,"cab","the speed allowed"),0.5),gaze:[5,-1]});}},
-    // one control room watches every train on the line; a controller lifts a handset
-    {at:c.room,place:"wgControl",keys:[[c.room,960,540,1]],push:0.025,draw:(x,tt)=>{wg_controlRoom(x,tt,{lift:ag_sine((tt-P.every)/1.2)});}},
+    // one control room watches every train on the line
+    {at:c.room,place:"wgControl",keys:[[c.room,960,540,1]],push:0.025,draw:(x,tt)=>{wg_controlRoom(x,tt,{});}},
     // and the driver still drives, and answers for the train
     {at:c.driver,place:"wgCab",keys:[[c.driver,820,580,1.1]],push:0.03,draw:(x,tt)=>{wg_cabShot(x,tt,{v:206,allow:210,state:"under",hand:true,gaze:[5,-1]});
       ag_pill(x,880,860,"the driver drives, and answers for the train",{a:ag_in(tt,P.answers,0.5)});}},
@@ -111,7 +111,7 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
     wg_plain(x,WR.cards.x,WR.cards.y+290,{k:ag_spr(tt,c.plain),a:ag_in(tt,c.plain,0.4),tick:okA});});};
   ag_shots(ctx,S,t,sc.dur,[
     // the census-day count, the number the university sends the government, and the plain job that counts it
-    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.cnt-0.3,c.plain+2,0.6)}});
+    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{});
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);ag_roomLight(x,1);WG_KICK(x);cards(x,tt,0,ag_in(tt,c.plain+0.6,0.4));}},
     // at night it fails: the agent finds the cause with its read-only tools, and puts a fix, as a draft, in its tray
     {cut:true,at:c.night,place:"wgLabNight",keys:[[c.night,1060,520,1.04]],push:0.02,draw:(x,tt)=>{const A=WR.agent;
@@ -135,7 +135,7 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
       W_.forEach(([f,ti,su,t0],i)=>wg_word(x,150,170+i*196,800,f,ti,su,{a:ag_in(tt,t0+0.1,0.4),k:ag_spr(tt,t0+0.1),hl:i===2?ag_in(tt,P.pa,0.5):0}));}},
     // Yusuf asks what the university asks of any new colleague; the four questions, and their answers
     {cut:true,at:c.yusuf,place:"wgLab",keys:[[c.yusuf,960,540,1]],push:0,draw:(x,tt)=>{wg_agent(x,tt,{});
-      wg_jun(x,tt,{p:{gaze:[4,-3]}});ag_person(x,"yusuf",640,640,0.92,{t:tt,gaze:[4,-3],pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.asks,c.four+1.0,0.6)});
+      wg_jun(x,tt,{p:{gaze:[4,-3]}});ag_person(x,"yusuf",640,640,0.92,{t:tt,gaze:[4,-3]});
       ag_roomLight(x,1);WG_KICK(x);
       wg_ghost(x,1400,300,"Work for the whole team?",{});wg_ghost(x,1400,420,"Change the pipeline itself?",{});
       wg_four(x,{q:P.q.map(q=>ag_spr(tt,q+0.1,0.6)),flip:P.f.map(f=>ag_sine((tt-f)/0.6))});}}
@@ -161,7 +161,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({drv:wAt(sc,"
       if(go<0.02||back>0.98)wg_tagOn(x,{a:ta,dy:go<0.02?dy:0,sw:sw});
       else{const u=back>0?1-back:go,fade=tt>P.stops&&back<=0?1-ag_in(tt,P.stops,0.5):1;withA(x,fade,()=>wg_tag(x,lerp(WR.agent.x-30,700,u),lerp(WR.hook-2,470,u),"owner · Jun Park",{dx:lerp(-170,-20,u),dy:lerp(80,60,u)}));}
       wg_hand(x,690,560,{a:ag_io(tt,c.moves-0.2,P.stops+2.4,0.4)});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,c.jun-0.2,P.owns+0.6,0.5),gaze:[4,0]}});
+      wg_jun(x,tt,{p:{gaze:[4,0]}});
       ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       wg_card(x,WR.cards.x,WR.cards.y,470,{kick:"For",title:"the census-day count"},{a:ag_in(tt,P.for_,0.4),k:ag_spr(tt,P.for_)});
       wg_log(x,1400,300,470,[{text:"read the failed check"},{text:"found the cause"},{text:"drafted a fix, in test"}],{a:ag_in(tt,P.reads,0.4),k:ag_spr(tt,P.reads)});
@@ -197,7 +197,7 @@ scene("identity",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({name:wAt(
     // the team sees everything it does, and can stop it without stopping anyone else
     {at:P.team,place:"wgLab",keys:[[P.team,960,540,1]],push:0.02,draw:(x,tt)=>{const off=ag_in(tt,P.noone,0.3)*(1-ag_in(tt,sc.dur-2.2,0.3));
       wg_switchWire(x,1-off,{});wg_agent(x,tt,{dim:off});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.stop-0.4,P.noone+1.2,0.4)}});
+      wg_jun(x,tt,{});
       ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});log(x,tt,1,ag_in(tt,P.team+0.3,0.5));}}
   ],0.6);});
 
@@ -224,7 +224,7 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
       wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});role(x,tt);}},
     // how much it may do alone is our choice; its skill doesn't decide it
     {cut:true,at:c.choice,place:"wgLab",keys:[[c.choice,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.ours-0.3,c.skill+1.4,0.5)}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       wg_bars(x,476,320,460,{a:ag_in(tt,c.choice,0.4),can:ag_sine((tt-c.choice-0.3)/1.2),alone:ag_sine((tt-P.ours)/0.9)*0.3,knob:ag_in(tt,P.ours,0.4)});}},
     // written down as a mandate its owner signs
     {at:c.mandate,place:"wgLab",keys:[[c.mandate,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
@@ -232,7 +232,7 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
     // like the speed in the cab: set from outside, lowered at any time, and the agent can never raise it
     {at:c.cab,place:"wgLab",keys:[[c.cab,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
       const r=ag_sine((tt-P.raise)/0.8)*(1-ag_sine((tt-P.raise-1.6)/0.8));if(r>0.01){const A=WR.agent;ag_reach(x,[A.x-A.R*0.62,A.y+A.R*0.42,990,620,900,500,876,452],r*0.82,{});}
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.low-0.4,P.low+1.6,0.4)}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       const low=tt>P.low+0.2;wg_allowBox(x,700,420,low?160:210,"set",{a:ag_in(tt,c.cab+0.2,0.4),k:low?ag_spr(tt,P.low+0.2,0.6):ag_spr(tt,c.cab+0.2)});
       if(tt>P.raise+0.5)ag_lock(x,830,404,30,rgba(AG.blue,ag_io(tt,P.raise+0.5,sc.dur,0.3)));}}
   ],0.6);});
@@ -248,7 +248,7 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
   ag_shots(ctx,S,t,sc.dur,[
     // a person checks its evidence, not its tone; it never approves, and no agent approves anyone's
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.ev-0.3,P.ev+2.6,0.5),gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{p:{gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       const r=change(x,tt,ag_in(tt,c.checks,0.4),ag_sine((tt-P.ev+0.2)/1.2));
       // Jun's eye runs down the evidence, not the title
       const hi=ag_io(tt,P.ev+0.9,P.ev+3.0,0.3);if(hi>0)r.items.forEach((it,i)=>{const on=ag_io(tt,P.ev+0.9+i*0.8,P.ev+1.9+i*0.8,0.25);if(on>0){x.save();x.globalAlpha*=on*hi;x.strokeStyle=rgba(AG.orange,0.95);x.lineWidth=4;rr(x,it.to.x-6,it.to.y-6,it.to.w+12,it.to.h+12,20);x.stroke();x.restore();}});
@@ -265,7 +265,7 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
     // every change to production: checked by its owner, approved by a second person, the same as people's changes
     {at:c.prod,place:"wgLab",keys:[[c.prod,960,540,1]],push:0.02,draw:(x,tt)=>{const pass=ag_sine((tt-P.sec-1.2)/1.2),jp=ag_sine((tt-c.same)/1.0);
       wg_production(x,880,180,560,620);ag_glass(x,880,180,560,620,{label:null});
-      ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0],pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.sec-0.4,P.sec+1.4,0.4)});
+      ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0]});
       ag_roomLight(x,1);WG_KICK(x);
       const cx=lerp(240,980,pass),ca=1-0.55*pass;
       withA(x,ca,()=>{wg_card(x,cx,300,460,{kick:"by census agent",title:"Fix a failing step"},{kickCol:AG.violet});
@@ -285,7 +285,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({role:wAt(sc,
       ag_pill(x,810,806,"the same rules",{col:AG.blue,a:ag_in(tt,P.rules,0.4)});ag_pill(x,1110,806,"the same security",{col:AG.blue,a:ag_in(tt,P.sec,0.4)});}},
     // four rules of its own, beside the four needs
     {cut:true,at:c.four,place:"wgLab",keys:[[c.four,960,540,1]],push:0,draw:(x,tt)=>{const A=WR.agent;wg_switchWire(x,1,{});wg_agent(x,tt,{});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,c.four-0.2,c.rights+1.2,0.5)}});ag_roomLight(x,1);WG_KICK(x);
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);
       // each rule swells the need (or needs) it belongs to
       const R4=[[c.rights,["No rights of its own,","only a role's"],[2]],[c.owner,["Always a human owner"],[0]],[c.approve,["Never an approver"],[3]],
         [c.mandate,["A written mandate","that can be taken back;","a person approves every","change to production"],[2,3]]],pop=[0,0,0,0];

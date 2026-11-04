@@ -22,11 +22,12 @@ function wg_cap(col){return(c,P)=>{const d=ag_dk(col,0.35);
   ag_soft(c,cc=>{cc.moveTo(206,344);cc.lineTo(398,344);cc.lineTo(396,370);cc.lineTo(210,372);cc.closePath();},d,ag_lt(col,0.12),340,352,80,null);
   ag_soft(c,cc=>{cc.moveTo(350,364);cc.bezierCurveTo(382,360,418,364,440,378);cc.bezierCurveTo(424,388,382,388,350,378);cc.closePath();},[30,32,36],[96,100,108],404,370,40,null);
   ag_soft(c,cc=>cc.ellipse(372,316,11,13,0,0,TAU),[214,206,184],[255,250,236],370,312,12,null);};}
-function wg_hat(col){return(c,P)=>{
+// a brimmed hat, worn on the head: its band just above the ear, the brim over the brow
+function wg_hat(col){return(c,P)=>{c.save();c.translate(0,22);
   ag_soft(c,cc=>{cc.moveTo(214,330);cc.bezierCurveTo(212,286,240,258,290,254);cc.bezierCurveTo(342,250,382,268,390,312);cc.lineTo(394,338);cc.closePath();},col,ag_lt(col,0.28),350,270,110,rgba(ag_dk(col,0.7),0.4),12);
   c.strokeStyle=rgba(ag_dk(col,0.4),0.7);c.lineWidth=4;c.beginPath();c.moveTo(262,262);c.quadraticCurveTo(300,282,350,262);c.stroke();
   ag_soft(c,cc=>{cc.moveTo(214,322);cc.lineTo(394,326);cc.lineTo(394,340);cc.lineTo(214,338);cc.closePath();},[34,34,38],[90,90,96],330,330,60,null);
-  ag_soft(c,cc=>cc.ellipse(306,340,124,16,-0.04,0,TAU),ag_dk(col,0.12),ag_lt(col,0.25),380,334,120,rgba(ag_dk(col,0.7),0.35),6);};}
+  ag_soft(c,cc=>cc.ellipse(306,340,124,16,-0.04,0,TAU),ag_dk(col,0.12),ag_lt(col,0.25),380,334,120,rgba(ag_dk(col,0.7),0.35),6);c.restore();};}
 function wg_tie(col){return(c,P)=>{c.save();ag_shape(c,AG_F.torso);c.clip();
   ag_soft(c,cc=>{cc.moveTo(302,616);cc.lineTo(324,614);cc.lineTo(330,642);cc.lineTo(338,820);cc.lineTo(320,850);cc.lineTo(304,820);cc.lineTo(306,644);cc.closePath();},
     col,ag_lt(col,0.3),326,680,90,rgba(ag_dk(col,0.7),0.4),8);c.restore();};}
@@ -318,17 +319,14 @@ function wg_blueLine(ctx,x0,x1,y,p,a){if(p<=0||a<=0)return;ctx.save();ctx.global
 
 /* ---------------------------------------------------------------- the control room's people and desks, live
    wg_controlRoom(ctx, t, o): the two controllers at their desks in front of the board, facing it from either side (people face us in
-   three-quarter view), a telephone on each desk; o.lift (0 to 1) the second controller's handset rising to his ear. */
+   three-quarter view), a telephone on each desk. They watch the board, their arms down behind the desks: a handset lifted to the ear
+   put a hand on the face, and read as wrong. */
 function wg_controlRoom(ctx,t,o){o=o||{};wg_board(ctx,t,{});
-  const lift=clamp(o.lift||0,0,1),up=ag_sine(clamp((lift-0.15)/0.85,0,1));
   ag_person(ctx,WG_P.ctrlA,520,700,0.72,{t,gaze:[3,-3],cut:900});
-  ag_person(ctx,WG_P.ctrlB,1400,700,0.72,{t:t+1.3,flip:true,gaze:[3,-3],cut:900,pose:lift>0.02?{near:[lerp(6,26,up),lerp(30,168,up),"hold"]}:null,hold:lift>0.02?wg_handset:null});
+  ag_person(ctx,WG_P.ctrlB,1400,700,0.72,{t:t+1.3,flip:true,gaze:[3,-3],cut:900});
   for(const x0 of [200,1080]){const g=ctx.createLinearGradient(0,984,0,H);g.addColorStop(0,"rgb(150,154,150)");g.addColorStop(1,"rgb(126,130,126)");ctx.fillStyle=g;ctx.fillRect(x0+24,984,592,H-984);
     ctx.fillStyle="rgba(255,255,255,0.25)";ctx.fillRect(x0+24,984,592,2);ag_desk(ctx,x0,962,640,{depth:62});}
-  wg_phone(ctx,700,930,0);wg_phone(ctx,1220,930,lift>0.02?1:0);}
-// a telephone's handset in a hand (figure space): held upright, its ends at the ear and the mouth
-function wg_handset(c,h){if(!h||!h.near)return;const [x,y]=h.near;c.save();c.translate(x+10,y-70);c.rotate(-0.18);
-  ag_soft(c,cc=>{ag_rect(cc,-14,-120,28,200,12);cc.moveTo(-20,-118);cc.arc(0,-118,26,0,TAU);cc.moveTo(-20,82);cc.arc(0,82,26,0,TAU);},[30,30,34],[96,98,104],10,-110,90,null);c.restore();}
+  wg_phone(ctx,700,930,0);wg_phone(ctx,1220,930,0);}
 
 /* ---------------------------------------------------------------- the places, painted once */
 AG_PLACES.wgPlatform=c=>wg_paintPlatform(c);

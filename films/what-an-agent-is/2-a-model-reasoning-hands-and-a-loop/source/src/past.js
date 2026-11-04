@@ -106,8 +106,8 @@ function ml_tent(c,x,y,w,seed){const h=w*0.42,top=y-h;c.save();
 /* a person seen from behind (u: the shoulders' width; (x, y) where the neck meets the shoulders), down to the frame's edge or o.len:
    a hat, the back of the head, the shoulders and arms in a coat or a blouse. o: coat (a colour), hat "boater", "bowler", "top", "wide"
    (a lady's wide hat, with o.ribbon), "cap" or "none"; lady (narrower shoulders, a high collar, hair up); turn (-1 to 1, the head turns
-   a little to the right or left); up (0 to 1, rising, as someone who stands); wave (0 to 1, the right arm raised with the hat in hand);
-   parasol (a colour); len (how far the body goes down, in u; 3 by default) */
+   a little to the right or left); up (0 to 1, rising, as someone who stands); parasol (a colour); len (how far the body goes down,
+   in u; 3 by default). No raised arms: a hat waved in a hand showed two hats on one man, and an arm that jumps */
 function ml_backFig(c,x,y,u,o){o=o||{};const coat=o.coat||ML_P.suit,turn=o.turn||0,lady=!!o.lady,len=(o.len||3)*u;y-=(o.up||0)*u*0.45;c.save();
   const sw=lady?0.43:0.5,dk=rgba(ag_dk(coat,0.3),1),lt=rgba(ag_lt(coat,0.2),1);
   const body=cc=>{cc.moveTo(x-u*0.11,y-u*0.04);cc.bezierCurveTo(x-u*0.3,y-u*0.01,x-u*sw,y+u*0.02,x-u*(sw+0.02),y+u*0.2);
@@ -137,10 +137,7 @@ function ml_backFig(c,x,y,u,o){o=o||{};const coat=o.coat||ML_P.suit,turn=o.turn|
   c.fillStyle="rgba(255,252,240,0.14)";c.beginPath();c.ellipse(hx+hr*0.45,hy-hr*0.3,hr*0.35,hr*0.5,0,0,TAU);c.fill();
   // the hat, a soft light on its right side
   const hat=o.hat||"boater",hc=o.hatC||(hat==="boater"?[224,204,158]:hat==="wide"?[234,228,214]:[40,40,46]);
-  if(hat!=="none"&&!(o.wave>0.5&&hat==="boater"))ml_hat(c,hat,hx,hy-hr*0.58,hr,hc,o.ribbon);
-  if(o.wave>0){const k=o.wave,sx=x+u*0.46,sy=y+u*0.18,ex=sx+u*lerp(0.08,0.28,k),ey=sy-u*lerp(0.1,0.62,k),wx=ex+u*lerp(0.02,0.1,k),wy=ey-u*lerp(0.2,0.6,k);
-    c.strokeStyle=rgba(ag_lt(coat,0.05),1);c.lineCap="round";c.lineWidth=u*0.2;c.beginPath();c.moveTo(sx,sy);c.lineTo(ex,ey);c.lineTo(wx,wy);c.stroke();
-    c.fillStyle=rgba(sk,1);c.beginPath();c.arc(wx,wy,u*0.075,0,TAU);c.fill();if(hat==="boater")ml_hat(c,"boater",wx,wy-u*0.08,hr*0.9,hc,o.ribbon);}
+  if(hat!=="none")ml_hat(c,hat,hx,hy-hr*0.58,hr,hc,o.ribbon);
   if(o.parasol){const pc=o.parasol,px=hx+u*0.34,py=hy-u*0.78,pr=u*0.56;c.strokeStyle=rgba([90,80,70],1);c.lineWidth=Math.max(1.5,u*0.025);c.beginPath();c.moveTo(px,py);c.lineTo(px-u*0.1,y+u*0.4);c.stroke();
     g=c.createLinearGradient(px-pr,0,px+pr,0);g.addColorStop(0,rgba(ag_dk(pc,0.14),1));g.addColorStop(1,rgba(ag_lt(pc,0.3),1));c.fillStyle=g;
     c.beginPath();c.moveTo(px-pr,py+pr*0.3);c.quadraticCurveTo(px-pr*0.82,py-pr*0.5,px,py-pr*0.56);c.quadraticCurveTo(px+pr*0.82,py-pr*0.5,px+pr,py+pr*0.3);
@@ -171,10 +168,10 @@ const ML_CROWD=(()=>{const R=ag_rnd(19),out=[];const spec=[["boater",0],["wide",
     coats=[ML_P.suit,[72,68,62],[86,82,94],[64,66,72]],blouses=[[234,230,220],[224,218,204],[236,232,236]];
   spec.forEach((sp,i)=>{const lady=!!sp[1],x=640+i*142+(R()-0.5)*40,u=(lady?190:220)+R()*30;
     out.push({x,y:910+R()*40-(lady?0:12),u,hat:sp[0],lady,coat:lady?blouses[(R()*3)|0]:coats[(R()*4)|0],ribbon:lady?(R()<0.5?[150,112,122]:[118,128,150]):[44,44,56],
-      hair:R()<0.5?[58,42,32]:[104,76,50],skin:mix([228,190,160],[180,132,100],R()*0.8),parasol:i===1?[242,236,222]:i===7?[228,222,234]:null,ph:R()*TAU,w:i===3||i===6});});
+      hair:R()<0.5?[58,42,32]:[104,76,50],skin:mix([228,190,160],[180,132,100],R()*0.8),parasol:i===1?[242,236,222]:i===7?[228,222,234]:null,ph:R()*TAU});});
   return out.sort((a,b)=>a.u-b.u);})();
 function ml_crowd(ctx,t,o){o=o||{};for(const p of ML_CROWD){const turn=(o.turn||0)*Math.sin(p.ph+1)*0.9,up=(o.up||0)*(0.6+0.4*Math.sin(p.ph*3));
-  ml_backFig(ctx,p.x+Math.sin(t*0.7+p.ph)*1.5,p.y,p.u,{coat:p.coat,hat:p.hat,lady:p.lady,ribbon:p.ribbon,hair:p.hair,skin:p.skin,parasol:p.parasol,turn,up,wave:p.w?(o.wave||0):0});}}
+  ml_backFig(ctx,p.x+Math.sin(t*0.7+p.ph)*1.5,p.y,p.u,{coat:p.coat,hat:p.hat,lady:p.lady,ribbon:p.ribbon,hair:p.hair,skin:p.skin,parasol:p.parasol,turn,up});}}
 
 /* ---------------------------------------------------------------- the flying boat, side on
    ml_boat(ctx, x, y, s, o): the hull's top at the wings is (x, y), s = 1 a hull 380 px long, flying to the right (o.flip: to the left).
@@ -299,9 +296,9 @@ function ml_flyingCap(col,gog){return (c,P)=>{const g=c.createLinearGradient(220
 function ml_flatCap(col){return (c,P)=>{const cap=cc=>{cc.moveTo(392,384);cc.bezierCurveTo(400,368,390,350,370,338);cc.bezierCurveTo(340,300,250,292,214,330);cc.bezierCurveTo(200,346,200,368,208,386);
     cc.bezierCurveTo(260,378,320,376,392,384);cc.closePath();};ag_soft(c,cap,col,ag_lt(col,0.3),340,320,120,"rgba(0,0,0,0.4)",12);
   ag_soft(c,cc=>{cc.moveTo(330,380);cc.bezierCurveTo(360,372,400,372,420,386);cc.bezierCurveTo(400,394,360,394,330,390);cc.closePath();},ag_dk(col,0.15),ag_lt(col,0.2),380,380,40,null);};}
-// a bowler hat
-function ml_bowler(col){return (c,P)=>{ag_soft(c,cc=>{cc.ellipse(296,330,124,20,-0.06,0,TAU);},col,ag_lt(col,0.3),340,324,90,null);
-  ag_soft(c,cc=>{cc.moveTo(212,330);cc.bezierCurveTo(212,236,380,236,382,326);cc.closePath();},col,ag_lt(col,0.35),330,270,90,"rgba(0,0,0,0.4)",10);};}
+// a bowler hat, worn on the head: its brim just above the brow and the ear
+function ml_bowler(col){return (c,P)=>{c.save();c.translate(0,24);ag_soft(c,cc=>{cc.ellipse(296,330,124,20,-0.06,0,TAU);},col,ag_lt(col,0.3),340,324,90,null);
+  ag_soft(c,cc=>{cc.moveTo(212,330);cc.bezierCurveTo(212,236,380,236,382,326);cc.closePath();},col,ag_lt(col,0.35),330,270,90,"rgba(0,0,0,0.4)",10);c.restore();};}
 // a pilot's epaulettes today: dark, with gold bars
 function ml_epaulettes(c,P){for(const [x,y,w,r] of [[150,604,74,-0.42],[396,622,56,0.36]]){c.save();c.translate(x,y);c.rotate(r);ag_soft(c,cc=>ag_rect(cc,-w/2,-11,w,22,5),[38,42,54],[90,96,110],0,-8,30,null);
   c.fillStyle="rgba(214,182,110,0.95)";for(let k=0;k<3;k++)c.fillRect(-w/2+10+k*(w-20)/3,-7,5,14);c.restore();}}
@@ -499,11 +496,11 @@ function ml_cockpit(ctx,t,o){o=o||{};const P=ML_P,roll=o.roll||0,turn=o.turn||0,
   // beside him and a little further off, his mechanic, his hands on the cockpit's edge (drawn first: he's further away)
   if(o.mate){const [mx,my,ms]=ML_PIT.mate,eM=596+(ML_PIT.edge-6-my)/ms,mn=ml_ik(J.near,[372,eM]),mf=ml_ik(J.far,[640,eM+4]);
     ag_person(ctx,o.mate,mx,my,ms,{t,pose:{near:[mn[0],mn[1],"rest"],far:[mf[0],mf[1],"rest"]},covered:true,gaze:o.mateGaze||[2,-0.6],smile:0.12});}
-  // his hands: on the wheel, resting on the edge, or (o.raise 0 to 1) let go, open in front of him (to 0.3), then raised beside his
-  // head, the near elbow out behind him
+  // his hands: on the wheel, resting on the edge, or (o.raise 0 to 1) let go, open in front of his chest (to 0.3), then raised beside
+  // his head, the near elbow out behind him (the near hand stays below his chin: a hand held up at the chin reads as thinking)
   const rr=clamp(o.raise||0,0,1),r1=ag_sine(clamp(rr/0.3,0,1)),r2=ag_sine(clamp((rr-0.3)/0.7,0,1)),wrap=(a,b)=>b-a>180?b-360:b-a<-180?b+360:b;
   const go=(S,F,U)=>{const m=[lerp(S[0],wrap(S[0],F[0]),r1),lerp(S[1],wrap(S[1],F[1]),r1)];return[lerp(m[0],wrap(m[0],U[0]),r2),lerp(m[1],wrap(m[1],U[1]),r2)];};
-  const nH=go([lerp(nG[0],nR[0],rest),lerp(nG[1],nR[1],rest)],[30,150],ml_ik(J.near,[80,360],true)),fH=go([lerp(fG[0],fR[0],rest),lerp(fG[1],fR[1],rest)],[40,150],ml_ik(J.far,[520,330]));
+  const nH=go([lerp(nG[0],nR[0],rest),lerp(nG[1],nR[1],rest)],[15,125],ml_ik(J.near,[80,360],true)),fH=go([lerp(fG[0],fR[0],rest),lerp(fG[1],fR[1],rest)],[40,150],ml_ik(J.far,[520,330]));
   const kind=r1>0.5?"open":rest>0.5?"rest":"hold",pose={near:[nH[0],nH[1],kind],far:[fH[0],fH[1],kind]};
   ag_person(ctx,o.who||ML_PEOPLE.sperry,ML_PIT.x,ML_PIT.y-lift*10,ML_PIT.s,{t,pose,covered:true,nod:(o.nod||0)-lift*0.04,gaze:[2,-1],smile:0.05,
     holdBack:(c,h)=>{c.save();c.translate(0,lift*10/ML_PIT.s);

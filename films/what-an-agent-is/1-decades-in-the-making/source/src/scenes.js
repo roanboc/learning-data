@@ -120,7 +120,7 @@ scene("learns",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({rep:wAt(sc,
     const T=dm_trials(t,P.shown+0.1,P.fifty-0.4,P.apart-0.9),off=ag_in(t,P.money,1.2),on=ag_in(t,P.perc-0.1,0.6)*(1-off);
     // Frank Rosenblatt shows it; two reporters watch, a camera flashes
     const sad=ag_in(t,P.single,1.0);
-    ag_person(x,DM_PEOPLE.y1958,250,620,0.92,{t,pose:"hang",pose2:"explain",mix:ag_io(t,P.frank-0.3,P.paper-0.4,0.8),smile:0.45*(1-sad)+0.05,gaze:[4,1+2*sad],nod:0.06*sad});
+    ag_person(x,DM_PEOPLE.y1958,250,620,0.92,{t,smile:0.45*(1-sad)+0.05,gaze:[4,1+2*sad],nod:0.06*sad});
     const fl=[P.rep+0.15,P.rep+0.85,P.perc+0.7].reduce((m,f)=>Math.max(m,t>=f&&t<f+0.5?1-(t-f)/0.5:0),0),ra=1-ag_in(t,P.fifty,0.8);
     if(ra>0){x.save();x.globalAlpha*=ra;ag_person(x,DM_PEOPLE.reporter,1800,668,0.84,{t,flip:true,pose:"hold",hold:(c2,h)=>dm_notebook(c2,h),gaze:[3,2],smile:0.15});
       ag_person(x,DM_PEOPLE.press,1570,668,0.84,{t,flip:true,pose:"hold",hold:(c2,h)=>dm_pressCamera(c2,h,fl),gaze:[3,1]});x.restore();}
@@ -274,7 +274,7 @@ scene("helpful",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({rank:wAt(s
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"dmLab",keys:[[0,960,540,1.025],[0.3,960,540,1]],d:2.0,draw:(x,t)=>{
     dm_railAt(x,t,[[0,2020,40],[0.7,2020,40],[2.3,2022,40],[c.steps-0.6,2022,40],[c.steps+1.0,2024,40]]);
     // people rank a model's answers, from best to worst
-    const ra=ag_io(t,c.rank-0.3,c.smaller-0.9,0.6);if(ra>0){x.save();x.globalAlpha*=ra;ag_person(x,DM_PEOPLE.rater,300,620,0.92,{t,pose:"hang",pose2:"point",mix:ag_in(t,P.rank-0.2,0.8),gaze:[4,1],smile:0.3});
+    const ra=ag_io(t,c.rank-0.3,c.smaller-0.9,0.6);if(ra>0){x.save();x.globalAlpha*=ra;ag_person(x,DM_PEOPLE.rater,300,620,0.92,{t,gaze:[4,1],smile:0.3});
       DM_ANS.forEach((a2,i)=>{const rk=ag_in(t,P.best-0.6+i*0.55,0.3)>0.5?i+1:0;dm_answer(x,640,370+i*150,580,a2,rk,{edge:rk===1?AG.green:null,a:ag_in(t,c.rank+0.2+i*0.2,0.4)});});x.restore();}
     // trained on the answers people preferred
     const ma=ag_io(t,c.rank+0.4,c.smaller-0.9,0.6),glow=ag_in(t,P.preferred-0.2,0.8);if(ma>0){ag_modelLight(x,1560,560,100,ma*(0.4+0.5*glow));ag_model(x,1560,560,100,{t,core:0.5+0.5*glow,a:ma});}

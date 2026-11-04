@@ -38,7 +38,7 @@ Run film and visual style work at the highest reasoning or effort setting your t
 - **Motion:** spring and settle, a slow camera (at least about 1.4 s, sine ease), things carried across cuts, motion blur, no film grain.
 - **Narration and pace:** one idea per line; 120 to 135 words a minute (at most 140 in a chapter); voice at most 82% of any chapter; about 0.8 s after each sentence.
 - **Sound:** a new palette for each film; sustained chords that follow the chapters; every effect tied to something on screen; effects soft and below about 2.5 kHz; an urgent pulse only where the story turns to an error or a rush; mix to -16 LUFS.
-- **Known faults:** long labels spilling out of small boxes, a pointing person whose hand leaves the frame near the right edge (mirror them), labels under the captions, a pose or a held thing that jumps in one frame (blend it in from the one before), and the same people or words shown twice in a dissolve (cut instead).
+- **Known faults:** long labels spilling out of small boxes, a pointing person whose hand leaves the frame near the right edge (mirror them), labels under the captions, a pose or a held thing that jumps in one frame (blend it in from the one before), the same people or words shown twice in a dissolve (cut instead), a face whose eyes, nose and ear are turned different ways (one turn for the whole head), a hat or prop drawn in two places at once, and gesturing arms (keep arms down; a hand only on the thing the story is about).
 
 ### 4. Check, publish, learn
 

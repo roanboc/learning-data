@@ -32,12 +32,12 @@ const ML_COL={model:AG.violet,reasoning:AG.violet,hands:AG.blue,loop:AG.amber};
 const ml_arm=i=>{const y=ML_ROOM.tools[i][1]+ML_ROOM.th[i]/2;return[1360,476,1430,476,1470,y,ML_ROOM.tx-4,y];};
 
 /* ---------------------------------------------------------------- Jun at his desk
-   ml_jun(ctx, t, o): the oak desk across the bottom left, Jun behind it, cut at its back edge; o.pose (desk), pose2, mix, gaze, nod,
+   ml_jun(ctx, t, o): the oak desk across the bottom left, Jun behind it, cut at its back edge, his arms down out of sight; o.gaze, nod,
    talk, smile; o.a. */
 const ML_DESK={x:-80,y:1000,w:800,depth:150};
 function ml_jun(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const [jx,jy,js]=ML_ROOM.jun,D=ML_DESK;ctx.save();ctx.globalAlpha*=a;
   ag_desk(ctx,D.x,D.y,D.w,{depth:D.depth});
-  ag_person(ctx,"jun",jx,jy,js,{t,pose:o.pose||"desk",pose2:o.pose2,mix:o.mix,gaze:o.gaze,nod:o.nod||0,talk:o.talk||0,smile:o.smile||0,cut:D.y-D.depth});
+  ag_person(ctx,"jun",jx,jy,js,{t,gaze:o.gaze,nod:o.nod||0,talk:o.talk||0,smile:o.smile||0,cut:D.y-D.depth});
   ctx.restore();}
 
 /* ---------------------------------------------------------------- a tool's card, and its server behind it

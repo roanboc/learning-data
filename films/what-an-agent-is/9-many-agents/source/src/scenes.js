@@ -385,9 +385,9 @@ function mb_room(c,S,tt,T){const H=MB.help;
     c.save();c.strokeStyle=rgba(AG.violet,0.45*la);c.lineWidth=2.5;c.setLineDash([8,8]);c.beginPath();c.moveTo(h[0],h[1]-48);c.lineTo(sx+184,sy+168);c.stroke();c.restore();}
   const K=MB.check;ma_agent(c,K[0],K[1],K[2],tt,{at:T.tCheck-0.3,from:[340,0],d:0.8,ph:2.2,ring:ag_sine((tt-T.tCheck)/0.9),think:ag_io(tt,T.tComp,T.tComp+2.6,0.3)});
   ma_pillAt(c,K[0],K[1]-96,"checking agent",tt,T.tCheck+0.2,T.tTwo-0.6);c.restore();}
-  // Clara, in Planning: she reaches to the drafts, strikes the word, and approves
-  const ca=ag_in(tt,T.tDrafted+0.2,0.6);if(ca>0){c.save();c.globalAlpha*=ca;const reach=ag_io(tt,T.tFixed-0.7,T.tAppr+0.9,0.6);
-    ag_person(c,"clara",560,510,0.72,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[33,130,"point"]},mix:reach,gaze:[4,-1]});c.restore();}
+  // Clara, in Planning: she reads the drafts; the word is struck and the draft approved on the wall (her arms stay down)
+  const ca=ag_in(tt,T.tDrafted+0.2,0.6);if(ca>0){c.save();c.globalAlpha*=ca;
+    ag_person(c,"clara",560,510,0.72,{t:tt,gaze:[4,-1]});c.restore();}
   ma_scr(c,S,()=>{ma_tag(c,MA_UNI,ag_in(tt,0.6,0.6)*(1-ag_in(tt,T.tWork-0.6,0.6)));
     ma_cardAt(c,36,96,320,{kick:"Planning",title:"Clara Jensen"},tt,T.tClara-0.1,T.tGot-2.2,{kickCol:AG.mut});});}
 // Jun at his desk, as the series draws it (the desk across the bottom left, his screen on it): the new test, "every degree has a
@@ -395,7 +395,7 @@ function mb_room(c,S,tt,T){const H=MB.help;
 const MB_JUN={card:[880,300],pill:[1110,586]};
 function mb_jun(c,S,tt,T){const a=ag_in(tt,T.tTest-0.2,0.4),pass=ag_in(tt,T.tTest+1.2,0.5),[cx,cy]=MB_JUN.card;
   ag_desk(c,-60,1040,720,{depth:150});
-  ag_person(c,"jun",250,720,0.76,{t:tt,cut:890,pose:"desk",gaze:[5,-2],smile:0.3+0.35*pass,nod:-0.035*ag_io(tt,T.tTest+1.2,T.tTest+2.6,0.4)});
+  ag_person(c,"jun",250,720,0.76,{t:tt,cut:890,gaze:[5,-2],smile:0.3+0.35*pass,nod:-0.035*ag_io(tt,T.tTest+1.2,T.tTest+2.6,0.4)});
   ag_screen(c,430,770,190,116,{stand:12,draw:(x,X,Y,W,H)=>{
     [0.5,0.72,0.46,0.64,0.38].forEach((l,k)=>{const u=clamp((tt-(T.tTest-0.9)-k*0.16)/0.3,0,1);if(u<=0)return;
       x.fillStyle=k===0?rgba(AG.blue,0.6):rgba(AG.ink,0.26);rr(x,X+14+(k?16:0),Y+16+k*17,(W-48)*l*u,8,4);x.fill();});
@@ -490,7 +490,7 @@ scene("alive",(ctx,S,t,sc)=>{
       const reach=ag_in(tt,T.tRun-0.35,0.9),press=ag_io(tt,T.tWe-0.14,T.tWe+0.1,0.12);
       ma_switch(c,MS_SW[0],MS_SW[1],1-ag_in(tt,T.tWe,0.12),1);
       ms_crowd(c,tt,p=>ag_in(tt,T.tWe+0.5+Math.max(0,p.x-MS_SW[0])/1500+(p.y-680)/900,0.3));
-      ag_person(c,"jun",-170,432,1.5,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[88+2*press,96,"point"]},mix:reach});
+      ag_person(c,"jun",-170,432,1.5,{t:tt,pose:"hang",pose2:{near:[88+2*press,96,"point"]},mix:reach});
       ma_scr(c,S,()=>ma_pillAt(c,1100,300,"they run because we run them",tt,T.tWe+0.2,null));}}],0.8);
 });
 
@@ -548,7 +548,7 @@ function mc_eastgate(c,S,tt,T){ma_eastgateLife(c,tt);
 function mc_plant(c,S,tt,T){const tp=T.tTuned,u=tt<tp?lerp(0.3,0.5,clamp((tt-T.sPlant)/(tp-T.sPlant),0,1)):lerp(0.5,0.98,clamp((tt-tp)/(T.sTeam+0.8-tp),0,1));
   ma_chart(c,u,0.52,1,1);const turn=ag_sine((tt-tp-0.05)/1.0);ma_dial(c,0,lerp(0.3,0.62,turn));ma_dial(c,1,0.46);ma_dial(c,2,0.55);ma_dial(c,3,0.4);
   const reach=ag_in(tt,tp-0.6,0.7);
-  ag_person(c,MA_ENGINEER,800,640,0.98,{t:tt,pose:{near:[2,14,"rest"]},pose2:{near:[64,113,"hold"]},mix:reach,gaze:[5,-4]});
+  ag_person(c,MA_ENGINEER,800,640,0.98,{t:tt,pose:"hang",pose2:{near:[64,113,"hold"]},mix:reach,gaze:[5,-4]});
   ma_pillAt(c,1092,252,"ran warm",tt,T.tRanWarm-0.1,null,{icon:"warn",col:AG.amber});
   ma_scr(c,S,()=>ma_tag(c,"Harare · after 1996",1));}
 // a small gauge: an arc with its needle

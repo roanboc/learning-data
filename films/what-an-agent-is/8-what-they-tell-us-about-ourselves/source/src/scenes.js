@@ -31,7 +31,7 @@ function tt_memWash(x){const g=x.createRadialGradient(960,540,320,960,540,1160);
 function tt_homeLive(x,tt,o){o=o||{};const H_=TT_HOME,R=o.rings||{};
   tt_kettle(x,290,434,tt,{steam:R.kettle||0});tt_phone(x,H_.phone[0],H_.phone[1]+18,tt,{ring:o.ring||0});
   const talk=(o.talk||0)*(0.35+0.35*Math.sin(tt*9.3)*Math.sin(tt*3.1+1));
-  tt_couple(x,tt,{mag:Object.assign({pose:"explain",talk:Math.max(0,talk),smile:0.5,gaze:[3,0]},o.mag||{}),rod:Object.assign({pose:"chin",gaze:[-3,0]},o.rod||{})});
+  tt_couple(x,tt,{mag:Object.assign({talk:Math.max(0,talk),smile:0.5,gaze:[3,0]},o.mag||{}),rod:Object.assign({gaze:[-3,0]},o.rod||{})});
   // rings of sound: from the kettle, the radio and the telephone, towards Rod, fading before they reach him
   const ear=tt_ear(H_.rod,H_.y,H_.s,true);
   if(R.kettle>0)tt_rings(x,366,368,tt,{a:R.kettle,dir:-0.7,spread:1.1,per:1.5});
@@ -53,18 +53,19 @@ function tt_rodClose(x,tt,o){o=o||{};if(o.branch>0)tt_branchLight(x,1290,370,0.8
 /* ---------------------------------------------------------------- today: the team at the long oak table, the agent at rest at its
    right end, the five questions on the wall above them. Each question's chapter takes its card off the wall (tt_cardFwd: forward,
    larger, the room veiled behind it) and puts it back with its tag */
-const TT_SEATS=[["jun",270,false,"chin"],["mei",580,false,"desk"],["noor",890,false,"hang"],["sam",1200,true,"hang"],["yusuf",1500,true,"explain"]];
+const TT_SEATS=[["jun",270,false],["mei",580,false],["noor",890,false],["sam",1200,true],["yusuf",1500,true]];
 const TT_REST=[1750,560,105,52];   // the agent at rest: x, y, the ring's radius, the sphere's
 // a cup of coffee on the table, its foot at (x, y)
 function tt_cup(ctx,x,y,s){s=s||1;ctx.save();ag_floorShadow(ctx,x+4,y+2,26*s,5*s,0.25);
   ag_soft(ctx,cc=>{cc.moveTo(x-20*s,y-36*s);cc.lineTo(x+20*s,y-36*s);cc.bezierCurveTo(x+20*s,y-10*s,x+14*s,y,x,y);cc.bezierCurveTo(x-14*s,y,x-20*s,y-10*s,x-20*s,y-36*s);cc.closePath();},[226,222,214],[250,248,244],x+8*s,y-30*s,30*s,"rgba(40,40,40,0.25)",6);
   ctx.strokeStyle="#D8D2C6";ctx.lineWidth=5*s;ctx.beginPath();ctx.arc(x+22*s,y-22*s,9*s,-Math.PI/2,Math.PI/2);ctx.stroke();
   ctx.fillStyle="#7A5A40";ctx.beginPath();ctx.ellipse(x,y-35*s,17*s,4*s,0,0,TAU);ctx.fill();ctx.restore();}
-// the team: o.talk, o.gaze, o.smile, o.nod, o.pose, o.pose2, o.mix, o.hold (each a list by seat), o.core and o.think for the agent
+// the team: o.talk, o.gaze, o.smile, o.nod, o.pose2, o.mix, o.hold (each a list by seat: a hand that lifts something, from arms
+// down), o.core and o.think for the agent
 function tt_team(x,tt,o){o=o||{};const [rx,ry,R,r]=TT_REST;
   ag_loop(x,rx,ry,{t:tt,R,r,label:null,stepA:[0,0,0],core:o.core==null?0.4:o.core,think:o.think||0});
   ag_desk(x,60,1060,1800,{depth:190,th:30});
-  TT_SEATS.forEach(([w,px,f,p],i)=>ag_person(x,w,px,740,0.5,{t:tt+px/100,flip:f,pose:(o.pose&&o.pose[i])||p,cut:870,gaze:(o.gaze&&o.gaze[i])||[3,0],
+  TT_SEATS.forEach(([w,px,f],i)=>ag_person(x,w,px,740,0.5,{t:tt+px/100,flip:f,pose:o.pose2&&o.pose2[i]?"hang":null,cut:870,gaze:(o.gaze&&o.gaze[i])||[3,0],
     talk:o.talk?o.talk[i]||0:0,smile:o.smile?o.smile[i]:0.25,nod:o.nod?o.nod[i]||0:0,pose2:o.pose2?o.pose2[i]||null:null,mix:o.mix?o.mix[i]||0:0,
     hold:o.hold?o.hold[i]||null:null}));
   TT_SEATS.forEach(([w,px,f])=>tt_cup(x,px+(f?-80:80),950,1.1));}
@@ -91,7 +92,7 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
     wrote:wAt(sc,"copies","what people wrote"),like:wAt(sc,"keep","like us"),not:wAt(sc,"keep","where they're not")}));
   const H_=TT_HOME,talkUntil=c.cut+1.5,bub=[1.4,4.6,8.2,11.6,15.6,19.4].map(t0=>({t0}));
   const homeO=tt=>({talk:ag_io(tt,0.8,talkUntil,0.5),bubbles:bub,rings:{kettle:ag_io(tt,c.cut,c.doubt+2,0.6),radio:ag_io(tt,c.cut+0.8,c.doubt+2,0.6),phone:ag_io(tt,c.cut+1.6,c.doubt+3,0.6)},
-    ring:ag_io(tt,c.cut+1.6,c.doubt+3,0.3),rod:{pose:"chin",gaze:tt>P.lips-0.2&&tt<c.aid+1?[-3,1.2]:[-3,0],smile:0.15}});
+    ring:ag_io(tt,c.cut+1.6,c.doubt+3,0.3),rod:{gaze:tt>P.lips-0.2&&tt<c.aid+1?[-3,1.2]:[-3,0],smile:0.15}});
   const shots=[
     // the living room, the afternoon: she talks, he watches her lips; then wide, the kettle, the radio and the telephone
     {at:0,place:"tt_home",keys:[[0,1000,560,1.1],[c.cut-0.6,960,540,1.0]],d:7,push:0,draw:(x,tt)=>{tt_homeLive(x,tt,homeO(tt));
@@ -100,8 +101,8 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
     // a memory rises over the window: a small-town pharmacy (drawn as a soft card, in the screen's space)
     tt_pharmShot(c.father-0.3),
     {at:c.years-0.4,place:"tt_lab78",keys:[[c.years-0.4,960,560,1.04],[c.years,980,560,1.08]],d:6,push:0.01,draw:(x,tt)=>{
-      tt_trolley(x,1060,560,{lit:0,reel:1});ag_person(x,TT_ENG2,1500,664,0.86,{t:tt+2,flip:true,pose:"hold"});
-      ag_person(x,TT_CLARK,560,640,0.92,{t:tt,pose:"explain",talk:0.4*ag_io(tt,c.years,c.implant+3,0.5)});ag_person(x,TT_ENG1,920,664,0.86,{t:tt+1,flip:true,pose:"chin"});}},
+      tt_trolley(x,1060,560,{lit:0,reel:1});ag_person(x,TT_ENG2,1500,664,0.86,{t:tt+2,flip:true});
+      ag_person(x,TT_CLARK,560,640,0.92,{t:tt,talk:0.4*ag_io(tt,c.years,c.implant+3,0.5)});ag_person(x,TT_ENG1,920,664,0.86,{t:tt+1,flip:true});}},
     // the rough copy of the inner ear: the spiral in a cutaway, its thousands of cells drawn faint; the wire winds in, ten rings settle
     {at:P.rough-0.3,place:"tt_labQuiet",keys:[[P.rough-0.3,960,520,1.0],[P.rough,960,500,1.04]],d:8,push:0.01,draw:(x,tt)=>{
       tt_spiral(x,960,500,330,{dots:0.55,wire:tt_on(tt,P.wire-0.2,2.4),rings:clamp((tt-P.ten+0.2)/0.35,0,10)});}},
@@ -112,13 +113,13 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
     {cut:true,at:c.sang-0.5,place:"tt_lab78",keys:[[c.sang-0.5,980,560,1.06],[P.along,900,520,1.14]],d:3,push:0.01,draw:(x,tt)=>{const lit=clamp((tt-P.played)/0.22,0,10),sing=ag_in(tt,P.along-0.1,0.5);
       tt_trolley(x,1060,560,{lit,reel:1});tt_chair(x,820,700,0.85);
       ag_person(x,TT_ROD,820,700,0.85,{t:tt,flip:true,talk:sing*(0.4+0.3*Math.sin(tt*6)),smile:lerp(0.1,0.9,ag_in(tt,P.played+1.6,0.8)),gaze:[-2,-0.6]});tt_coil(x,820,700,0.85,1080,640);
-      ag_person(x,TT_ENG1,1520,664,0.86,{t:tt+1,flip:true,pose:"hang",pose2:"point",mix:ag_io(tt,c.sang-0.3,P.played+1.2,0.4)});ag_person(x,TT_CLARK,330,660,0.9,{t:tt+2,smile:0.6*ag_in(tt,P.along,1)});
+      ag_person(x,TT_ENG1,1520,664,0.86,{t:tt+1,flip:true});ag_person(x,TT_CLARK,330,660,0.9,{t:tt+2,smile:0.6*ag_in(tt,P.along,1)});
       const m=tt_mouth(820,700,0.85,true);tt_song(x,m[0]-210,m[1]-30,tt,sing,[196,150,92]);
       tt_tag(x,1210,470,"Waltzing Matilda",{a:ag_in(tt,c.sang,0.4),size:28});}},
-    // December 1978: the audiologist hides her mouth behind a card and says a word; Rod says it back
+    // December 1978: the audiologist hides her mouth behind a card (held before her face: front, not hold) and says a word; Rod says it back
     {cut:true,at:c.december-0.3,place:"tt_lab78",keys:[[c.december-0.3,960,560,1.1],[c.december,960,540,1.16]],d:4,push:0.01,draw:(x,tt)=>{
       tt_chair(x,1260,700,0.85);ag_person(x,TT_ROD,1260,700,0.85,{t:tt,flip:true,talk:0.5*ag_io(tt,P.words+0.9,P.words+2.2,0.2),smile:0.6,gaze:[-3,0]});
-      ag_person(x,TT_AUD,640,690,0.86,{t:tt+1,pose:"hold",talk:0.5*ag_io(tt,P.words-0.4,P.words+0.6,0.2),hold:(c2,h)=>{const n=h.near;ag_box(c2,n[0]-70,n[1]-330,250,330,10,{});}});
+      ag_person(x,TT_AUD,640,690,0.86,{t:tt+1,pose:"hold",talk:0.5*ag_io(tt,P.words-0.4,P.words+0.6,0.2),front:(c2,h)=>{const n=h.near;ag_box(c2,n[0]-10,n[1]-310,200,290,10,{});}});
       tt_bubble(x,840,300,170,64,920,300,{a:ag_io(tt,P.words-0.3,P.words+1.0,0.3),fill:0.9});tt_bubble(x,1000,280,170,64,1080,280,{a:ag_io(tt,P.words+0.9,P.words+2.6,0.3),fill:0.9});}},
     // the copy was rough: the spiral again, its thousands of cells bright beside the ten blue rings
     {at:c.roughwas-0.3,place:"tt_labQuiet",keys:[[c.roughwas-0.3,960,500,1.04],[c.roughwas,960,520,1.0]],d:6,push:0.01,draw:(x,tt)=>{
@@ -157,7 +158,7 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(s
     {at:0,place:"lab",keys:[[0,1180,470,1.16],[c.counted-0.6,960,520,1.0]],d:2.8,push:0.01,draw:(x,tt)=>{const out=tt_on(tt,P.counted-0.2,1.1);
       ag_loop(x,RG[0],RG[1],{t:tt,R:170,r:83,label:null,stepA:[0,0,0],think:ag_io(tt,c.counted-0.2,P.counted+0.6,0.3)});
       ag_desk(x,180,1060,1000,{depth:190,th:30});
-      ag_person(x,"mei",980,770,0.72,{t:tt,flip:true,pose:"desk",cut:870,gaze:tt>c.signed-0.6?[3,-2.2]:[2,-1],nod:0.05*ag_io(tt,P.signed,P.signed+1.2,0.3)});
+      ag_person(x,"mei",980,770,0.72,{t:tt,flip:true,cut:870,gaze:tt>c.signed-0.6?[3,-2.2]:[2,-1],nod:0.05*ag_io(tt,P.signed,P.signed+1.2,0.3)});
       if(out>0)ag_evidence(x,lerp(RG[0]-A.w/2,A.x,out),lerp(RG[1]-104,A.y,out),A.w,{title:"18,412 students",sub:"this term"},[{title:"the query",col:AG.orange}],
         {side:"right",ew:300,open:clamp((tt-P.query+0.1)/1.2,0,1),k:clamp(ag_spr(tt,P.counted-0.2,0.8),0,1.2),a:ag_in(tt,P.counted-0.2,0.3)});
       const so=ag_in(tt,c.signed+0.2,0.5);if(so>0.01)tt_signoff(x,A.x,A.y+232+20*(1-so),A.w,clamp((tt-P.checked)/(P.signed+0.9-P.checked),0,1),so);
@@ -184,7 +185,7 @@ scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(s
     tt_openShot(0),
     // Buffalo, 1958: a man at a desk with papers, and on his page a neuron beside its copy
     {at:c.perceptron-0.5,place:"tt_office58",keys:[[c.perceptron-0.5,960,540,1.04],[c.perceptron,960,520,1.08]],d:5,push:0.01,draw:(x,tt)=>{
-      tt_oldDesk(x,560,880,800,{});ag_person(x,TT_ROSEN,960,574,0.8,{t:tt,pose:"desk",cut:790,gaze:[0,2.5]});}},
+      tt_oldDesk(x,560,880,800,{});ag_person(x,TT_ROSEN,960,574,0.8,{t:tt,cut:790,gaze:[0,2.5]});}},
     {cut:true,at:P.rough-0.5,place:"tt_office58",keys:[[P.rough-0.5,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_wash(x,0.4,{c:[60,48,36]});tt_page(x,300,160,1320,680,{rot:-0.012});
       tt_neuron(x,600,480,0.9,{grow:tt_on(tt,P.rough-0.3,1.6),fire:ag_io(tt,P.sense,P.act+1.2,0.4)});
       tt_perceptron(x,1190,480,1.15,{p:tt_on(tt,P.rough+0.9,1.6),fire:ag_io(tt,P.act-0.1,c.descend-0.6,0.3)});
@@ -240,7 +241,7 @@ scene("mixing",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({whatever:wA
       hand(2,[1230,452],[1305,450],1.25,0.72,{sleeve:[200,120,90],skin:[236,204,178]});}},
     // England, 1843: Lovelace writing her notes, a drawing of the engine's columns of gears beside her
     {at:c.lovelace-0.4,place:"tt_room1843",keys:[[c.lovelace-0.4,960,560,1.06],[c.lovelace,960,540,1.0]],d:4,push:0.01,draw:(x,tt)=>{
-      tt_engine(x,150,150,360,300,{turn:tt});tt_oldDesk(x,560,880,760,{});ag_person(x,TT_ADA,940,574,0.8,{t:tt,pose:"desk",cut:790,gaze:[0,2.5]});
+      tt_engine(x,150,150,360,300,{turn:tt});tt_oldDesk(x,560,880,760,{});ag_person(x,TT_ADA,940,574,0.8,{t:tt,cut:790,gaze:[0,2.5]});
       const q=tt_pop(tt,P.whatever-0.2);tt_quote(x,600,110,"‘whatever we know how to order it to perform’","Ada Lovelace",{w:720,a:q.a,k:q.k});}},
     // Boden's three ways; the agent's violet lines rearrange inside the first two
     {at:c.boden-0.4,place:"tt_labQuiet",keys:[[c.boden-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{
@@ -295,13 +296,13 @@ scene("wire",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({w302:wAt(sc,"
       const q=tt_pop(tt,P.b86);tt_tag(x,1100,820,"about 86 billion",{a:q.a,k:q.k});}},
     // a copy can act like us without working like us: Rod's implant was made for speech; music comes through blurred
     {at:c.act-0.4,place:"tt_home",keys:[[c.act-0.4,960,540,1.0],[c.ear,1050,480,1.12]],d:3,push:0.01,draw:(x,tt)=>{
-      tt_homeLive(x,tt,{talk:ag_io(tt,c.act,c.speech+1.2,0.5),bubbles:[0.3,3.3,6.3,9.3,12.3].map(v=>({t0:c.act+v,fill:0.8})),reach:true,rod:{pose:"chin",gaze:[-3,0],smile:0.45}});
+      tt_homeLive(x,tt,{talk:ag_io(tt,c.act,c.speech+1.2,0.5),bubbles:[0.3,3.3,6.3,9.3,12.3].map(v=>({t0:c.act+v,fill:0.8})),reach:true,rod:{gaze:[-3,0],smile:0.45}});
       tt_implant(x,H_.rod,H_.y,H_.s,{t:tt,pulse:1});
       const nb=ag_io(tt,P.music-0.4,c.exactly-0.3,0.4);if(nb>0.01){tt_rings(x,TT_RADIO[0]+70,TT_RADIO[1],tt,{a:nb*0.7,dir:0.1,spread:1.1,per:1.3});tt_notes(x,700,230,1180,380,tt,{a:nb,blur:1});}
       const q=tt_pop(tt,P.madefor-0.1);tt_tag(x,1500,180,"made for speech",{a:q.a,k:q.k});}},
     // 1980: a simulated rainstorm, and a man in front of it, dry
     {at:c.exactly-0.4,place:"lab",keys:[[c.exactly-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>{
-      ag_screen(x,420,170,900,560,{stand:0,draw:(c2,X,Y,w,h)=>tt_rain(c2,X,Y,w,h,tt)});ag_person(x,TT_SEARLE,1500,600,1.0,{t:tt,flip:true,pose:"hang",gaze:[3,-0.5]});ag_roomLight(x,1);
+      ag_screen(x,420,170,900,560,{stand:0,draw:(c2,X,Y,w,h)=>tt_rain(c2,X,Y,w,h,tt)});ag_person(x,TT_SEARLE,1500,600,1.0,{t:tt,flip:true,gaze:[3,-0.5]});ag_roomLight(x,1);
       const q=tt_pop(tt,P.rain-0.2);tt_tag(x,870,800,"a simulated rainstorm · nobody gets wet",{a:q.a,k:q.k});}},
     // the other side comes down to balance it; nobody knows who's right
     {at:c.others-0.4,place:"tt_labQuiet",keys:[[c.others-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const rIn=ag_in(tt,P.mind-0.3,0.6),
@@ -320,7 +321,7 @@ scene("feels",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({one:wAt(sc,"
       tt_glow(x,960,410,360,0.75*ag_in(tt,c.roddid-0.1,1.4),TT_WARM);
       const laugh=ag_io(tt,c.roddid+0.3,c.chalmers,0.3);
       tt_homeLive(x,tt,{talk:ag_io(tt,c.pulses-0.4,c.roddid+0.4,0.4),bubbles:[0.2,3.0,5.8].map(v=>({t0:c.pulses+v,fill:0.8})),reach:true,
-        rod:{pose:"chin",gaze:[-3,0],smile:lerp(0.25,1,ag_in(tt,c.roddid+0.1,0.6)),talk:laugh*(0.35+0.3*Math.abs(Math.sin(tt*11))),nod:0.04*laugh*Math.sin(tt*9)},mag:{smile:lerp(0.5,0.9,laugh)}});
+        rod:{gaze:[-3,0],smile:lerp(0.25,1,ag_in(tt,c.roddid+0.1,0.6)),talk:laugh*(0.35+0.3*Math.abs(Math.sin(tt*11))),nod:0.04*laugh*Math.sin(tt*9)},mag:{smile:lerp(0.5,0.9,laugh)}});
       tt_implant(x,H_.rod,H_.y,H_.s,{t:tt,pulse:ag_in(tt,c.pulses+0.6,0.5)});}},
     // 1995, the hard problem: a brain at work on one side, a life felt from inside on the other, and a question between them
     {at:c.chalmers-0.4,place:"tt_labQuiet",keys:[[c.chalmers-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
@@ -383,7 +384,7 @@ scene("machine",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({awake:wAt(
 // Rod and Margaret at their table, framed, in a warm light: a life felt from inside
 function tt_couplePic(x,X,Y,w,h,tt,a){if(a<=0.01)return;ag_picture(x,X,Y,w,h,{a,draw:(c2,PX,PY,pw,ph)=>{c2.save();c2.beginPath();c2.rect(PX,PY,pw,ph);c2.clip();c2.translate(PX,PY);
   c2.scale(pw/1100,pw/1100);c2.translate(-560,-260);c2.drawImage(ag_place("tt_home"),0,0);
-  tt_couple(c2,tt,{mag:{pose:"explain",talk:0.4*(0.5+0.5*Math.sin(tt*7))},rod:{pose:"chin",smile:1}});tt_glow(c2,960,520,420,1,[255,220,170]);c2.restore();}});}
+  tt_couple(c2,tt,{mag:{talk:0.4*(0.5+0.5*Math.sin(tt*7))},rod:{smile:1}});tt_glow(c2,960,520,420,1,[255,220,170]);c2.restore();}});}
 // a dotted line from x0 to x1 at y, broken around m (the middle by default) where a question mark stands
 function tt_gapLine(ctx,x0,x1,y,a,m){if(a<=0.01)return;m=m==null?(x0+x1)/2:m;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(AG_OAK.dark,0.75);ctx.lineWidth=5;ctx.lineCap="round";ctx.setLineDash([2,16]);
   ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(m-70,y);ctx.moveTo(m+70,y);ctx.lineTo(x1,y);ctx.stroke();ctx.restore();}
@@ -394,7 +395,7 @@ function tt_heldSign(a){return (c2,h)=>{if(a<=0.01)return;const n=h.near;c2.save
   c2.strokeStyle=rgba(AG.ink,0.75);c2.lineWidth=5;c2.lineCap="round";c2.beginPath();
   for(let i=0;i<=40;i++){const u=i/40,xx=60+u*220,yy=122-Math.sin(u*TAU*2.4)*14*Math.sin(Math.PI*u);i?c2.lineTo(xx,yy):c2.moveTo(xx,yy);}c2.stroke();
   ag_tick(c2,56,186,34,rgba(AG.green,1),7);c2.fillStyle=rgba(AG.green,0.5);rr(c2,100,176,180,16,8);c2.fill();c2.restore();};}
-const TT_LIFT={near:[10,128,"hold"],far:[-6,84,"rest"]};   // Mei's near hand up, holding the sign-off; her far arm stays on the table
+const TT_LIFT={near:[10,128,"hold"]};   // Mei's near hand up, holding the sign-off; her far arm stays down
 
 scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(sc,"settled","Nobody has settled"),like:wAt(sc,"building","like us"),not:wAt(sc,"building","where they're not"),
     dk:wAt(sc,"building","still don't know"),hand:wAt(sc,"helps","what to hand"),keep:wAt(sc,"helps","what to keep")}));
@@ -403,7 +404,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
   const shots=[tt_openShot(4),
     // the Dutch Republic, 1637: a study at night, a candle, a man writing, a small clockwork figure on his desk
     {at:c.descartes-0.4,place:"tt_study1637",keys:[[c.descartes-0.4,960,560,1.06],[c.descartes,960,540,1.0]],d:4,push:0.01,draw:(x,tt)=>{
-      tt_oldDesk(x,520,880,780,{});ag_person(x,TT_DESC,900,574,0.8,{t:tt,pose:"desk",cut:790,gaze:[0,2.5]});tt_candle(x,1180,820,tt,1);tt_automaton(x,700,830,tt,1);
+      tt_oldDesk(x,520,880,780,{});ag_person(x,TT_DESC,900,574,0.8,{t:tt,cut:790,gaze:[0,2.5]});tt_candle(x,1180,820,tt,1);tt_automaton(x,700,830,tt,1);
       const q=tt_pop(tt,c.descartes+2.4);tt_quote(x,360,110,"a machine could never arrange its words to answer whatever is said to it",null,{w:860,a:q.a,k:q.k});}},
     // today, machines do: a question goes into the ring, and an answer comes straight out, word by word
     {at:c.today-0.4,place:"lab",keys:[[c.today-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{const [rx,ry]=[1124,476],u=ag_sine(tt_on(tt,c.today+0.6,0.8));
@@ -418,7 +419,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
     // Melbourne, 1978: her words reach him, filled; he answers; the telephone rings, and he hears it
     {at:c.heard-0.4,place:"tt_home",keys:[[c.heard-0.4,960,540,1.06],[c.heard,960,540,1.0]],d:5,push:0.01,draw:(x,tt)=>{const rg=ag_io(tt,c.heard+4.0,c.building,0.3);
       tt_homeLive(x,tt,{talk:ag_io(tt,c.heard-0.2,c.heard+2.6,0.4),bubbles:[0.0,1.8].map(v=>({t0:c.heard+v,fill:0.85})),reach:true,ring:rg,
-        rings:{phone:rg},rod:{pose:"chin",gaze:tt>c.heard+4.3?[-3,-1.4]:[-3,0],smile:0.7,talk:0.4*ag_io(tt,c.heard+2.8,c.heard+4.2,0.3)*(0.5+0.5*Math.sin(tt*8))}});
+        rings:{phone:rg},rod:{gaze:tt>c.heard+4.3?[-3,-1.4]:[-3,0],smile:0.7,talk:0.4*ag_io(tt,c.heard+2.8,c.heard+4.2,0.3)*(0.5+0.5*Math.sin(tt*8))}});
       tt_implant(x,H_.rod,H_.y,H_.s,{t:tt,pulse:1});}},
     // the spiral and its wire, and the agent: like us, not like us, and how much we still don't know
     {at:c.building-0.4,place:"lab",keys:[[c.building-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{
@@ -427,7 +428,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
       tt_tag(x,960,520,"like us",{a:L.a*go,k:L.k,col:AG.green});tt_tag(x,960,610,"not like us",{a:N.a*go,k:N.k,col:AG.amber});tt_tag(x,960,700,"still don't know",{a:D.a*go,k:D.k});}},
     // the room: Jun hands the agent a task, read only; the sign-off stays with Mei; the five questions on the wall, each with its tag
     {cut:true,at:c.helps-0.4,place:"lab",keys:[[c.helps-0.4,1000,560,1.08],[c.answers,960,540,1.0]],d:4,push:0,draw:(x,tt)=>{const t0=c.helps-0.4,back=tt>=t0+1.9,lift=ag_sine(tt_on(tt,P.keep-0.3,0.8));
-      tt_team(x,tt,{pose:["explain","desk","hang","hang","explain"],pose2:[null,TT_LIFT],mix:[0,lift],hold:[null,tt_heldSign(clamp(lift*2.5,0,1))],
+      tt_team(x,tt,{pose2:[null,TT_LIFT],mix:[0,lift],hold:[null,tt_heldSign(clamp(lift*2.5,0,1))],
         gaze:TT_SEATS.map((_,i)=>i===0?[3,-1]:[3,0]),smile:[0.5,0.45,0.35,0.35,0.35],core:0.4+0.5*ag_io(tt,P.hand+1.4,c.answers,0.6)});
       tt_qrow(x,{out:back?-1:4,tags:[1,1,1,1,ag_in(tt,t0+1.9,0.5)],a:1-ag_in(tt,c.breath,0.8)});
       const u=tt_on(tt,P.hand-0.4,1.6);if(u>0&&u<1){const q=ag_sine(u),s=lerp(1,0.3,clamp((u-0.82)/0.18,0,1));x.save();x.globalAlpha*=1-clamp((u-0.76)/0.1,0,1);

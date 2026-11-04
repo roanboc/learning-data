@@ -4,15 +4,14 @@
    and their lists; students as plain shapes; the zip and its scale of seven; the gauges; the calendar; the evidence folder; the
    team's log; the faculty's own list; the table the agent read. */
 
-/* ---------------------------------------------------------------- Jun's desk: the desk first, Jun behind it (cut at its back edge, his
-   forearms on it when he types), then his screen, its lines decoration only (what's on it is never read there). FU_JUN: where he
-   sits, his size, the desk, the screen. o.folder: the evidence folder on the desk's front corner ({dust, open}) */
-// gestures from the desk that keep the far forearm on it, for pose2 over pose "desk": a hand to the chin, thinking; an open hand
-const FU_CHIN={near:[40,160,"rest"],far:[-6,84,"rest"]},FU_OPEN={near:[24,100,"open"],far:[-6,84,"rest"]};
+/* ---------------------------------------------------------------- Jun's desk: the desk first, Jun behind it (cut at its back edge),
+   then his screen, its lines decoration only (what's on it is never read there). FU_JUN: where he
+   sits, his size, the desk, the screen. o.folder: the evidence folder on the desk's front corner ({dust, open}). His arms stay down,
+   out of sight behind the desk: no gestures */
 const FU_JUN={x:300,neck:582,s:0.66,desk:[20,850,900],screen:[452,652,240,136]};
 function fu_junDesk(ctx,t,o){o=o||{};const J=FU_JUN,[dx,dy,dw]=J.desk;
   ag_desk(ctx,dx,dy,dw,{});
-  const pose=o.pose||"hang",ln=o.lean||0;ag_person(ctx,"jun",J.x-ln*16,J.neck+ln*7,J.s,{t,cut:dy-70,pose,pose2:o.pose2,mix:o.mix,gaze:o.gaze||[3,0],nod:(o.nod||0)-ln*0.05,smile:o.smile,talk:o.talk});
+  const ln=o.lean||0;ag_person(ctx,"jun",J.x-ln*16,J.neck+ln*7,J.s,{t,cut:dy-70,gaze:o.gaze||[3,0],nod:(o.nod||0)-ln*0.05,smile:o.smile,talk:o.talk});
   const [sx,sy,sw,sh]=J.screen;ag_screen(ctx,sx,sy,sw,sh,{stand:22,draw:o.screen||((c,x,y,w,h)=>fu_screenLines(c,x,y,w,h,0))});
   if(o.folder)fu_folder(ctx,dx+dw-216,dy-66,Object.assign({w:200,h:56},o.folder));}
 
@@ -61,7 +60,7 @@ function fu_glow(ctx,b,a,col){if(a<=0.01)return;col=col||[248,210,140];ctx.save(
    him with "Advisers next term" and the number he types in (o.typed, o.value); the advisers' row along the wall is fu_advisers */
 const FU_ANIL={x:1530,neck:566,s:0.68,desk:[1180,842,700],screen:[1200,600,300,170]};
 function fu_anilDesk(ctx,t,o){o=o||{};const A=FU_ANIL,[dx,dy,dw]=A.desk;ag_desk(ctx,dx,dy,dw,{});
-  ag_person(ctx,"anil",A.x,A.neck,A.s,{t,flip:true,cut:dy-70,pose:o.pose||"hang",pose2:o.pose2,mix:o.mix,gaze:o.gaze||[3,0],nod:o.nod,smile:o.smile,talk:o.talk});
+  ag_person(ctx,"anil",A.x,A.neck,A.s,{t,flip:true,cut:dy-70,gaze:o.gaze||[3,0],nod:o.nod,smile:o.smile,talk:o.talk});
   const [sx,sy,sw,sh]=A.screen;ag_screen(ctx,sx,sy,sw,sh,{stand:22,draw:(c,x,y,w,h)=>{if(o.screen)return o.screen(c,x,y,w,h);fu_advisersScreen(c,x,y,w,h,o);}});
   fu_binders(ctx,dx+dw-150,dy-34,3,0.8,[[124,84,98],[170,160,140],[110,112,116]]);}
 function fu_advisersScreen(c,x,y,w,h,o){c.fillStyle="rgba(46,52,60,0.06)";c.fillRect(x,y,w,40);

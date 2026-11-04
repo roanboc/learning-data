@@ -64,6 +64,7 @@ function tt_memory(ctx,x,y,w,h,key,draw,o){o=o||{};const a=o.a==null?1:o.a;if(a<
   ctx.drawImage(bc,x,y);ctx.restore();}
 // a hand cupped behind an ear, over a person drawn at (x, y, s): the hand's own shape, painted over the head
 function tt_cupEar(ctx,who,x,y,s,flip){const F=ag_fig(who),P=F.P,C=F.C;ctx.save();ctx.translate(x,y);ctx.scale(flip?-s:s,s);ctx.translate(-AG_FIG.anchor[0],-AG_FIG.anchor[1]);
+  ctx.translate(AG_FACE.ear[0]-266,0);   // drawn round an ear at x 266; the ear is at AG_FACE.ear
   const sk=P.skin;ag_soft(ctx,cc=>{cc.moveTo(250,512);cc.bezierCurveTo(228,486,214,446,220,404);cc.bezierCurveTo(224,378,240,362,252,366);cc.bezierCurveTo(262,370,258,392,254,410);
       cc.bezierCurveTo(262,388,272,372,282,378);cc.bezierCurveTo(290,384,284,404,276,420);cc.bezierCurveTo(272,446,274,478,282,512);cc.closePath();},
     mix(sk,ag_dk(sk,0.4),0.12),mix(sk,[255,240,228],0.4),262,400,90,C.skinShade,8);
@@ -79,7 +80,7 @@ function tt_pharmacy(c,w,h,t,o){o=o||{};let g=c.createLinearGradient(0,0,0,h);g.
       c.fillStyle=rgba(col,0.92);rr(c,x,sy-bh,bw,bh,5);c.fill();c.fillStyle="rgba(255,255,255,0.3)";c.fillRect(x+4,sy-bh+6,3,bh-12);c.fillStyle="rgba(60,50,40,0.5)";c.fillRect(x+bw*0.25,sy-bh-6,bw*0.5,7);x+=bw+6+R()*8;}}
   const ct=372;   // the counter's top
   // the pharmacist, behind the counter, facing the customer, his hand cupped behind his ear; the boy at the end of the counter
-  ag_person(c,TT_PHARM,600,318,0.5,{t,flip:true,covered:true,nod:0.06,gaze:[2,1],pose:"hang"});tt_cupEar(c,TT_PHARM,600,318,0.5,true);
+  ag_person(c,TT_PHARM,600,318,0.5,{t,flip:true,covered:true,nod:0.06,gaze:[2,1]});tt_cupEar(c,TT_PHARM,600,318,0.5,true);
   ag_person(c,TT_BOY,850,396,0.38,{t:t+0.7,flip:true,covered:true,gaze:[-2,0],smile:0.2});
   // the counter
   g=c.createLinearGradient(0,ct,0,h);g.addColorStop(0,"#9A7552");g.addColorStop(1,"#6E5038");c.fillStyle=g;c.fillRect(0,ct,w,h-ct);c.fillStyle="#B48C64";c.fillRect(0,ct-14,w,18);c.fillStyle="rgba(255,240,220,0.25)";c.fillRect(0,ct-14,w,3);

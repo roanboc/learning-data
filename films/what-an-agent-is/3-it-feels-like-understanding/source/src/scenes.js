@@ -45,10 +45,10 @@ function fu_room99(ctx,t,o){const S=FU_SPACE,M=S.mars,E=S.earth,sp=o.space||{};
   // the desks of 1999, and the people at them (o.empty: the wall alone, for a close-up of the drawing)
   const F=FU99,pe=o.people||{},[lx,ly,lw]=F.deskL,[rx,ry,rw]=F.deskR;if(o.empty){ag_roomLight(ctx,1);return;}
   ag_desk(ctx,lx,ly,lw,{});ag_desk(ctx,rx,ry,rw,{});
-  ag_person(ctx,FU_PEOPLE.builderB,F.bB[0],F.bB[1],F.bB[2],{t,cut:ly-70,pose:"hang",gaze:[3,1],nod:pe.nodL||0});
-  ag_person(ctx,FU_PEOPLE.builderA,F.bA[0],F.bA[1],F.bA[2],{t:t+1.3,cut:ly-70,pose:"desk",gaze:[4,1],nod:pe.nodL||0});
-  ag_person(ctx,FU_PEOPLE.navA,F.nA[0]+(pe.lean||0)*12,F.nA[1]+(pe.lean||0)*4,F.nA[2],{t:t+2.1,flip:true,cut:ry-70,pose:"desk",gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.04,smile:0.3+0.2*(pe.lean||0)});
-  ag_person(ctx,FU_PEOPLE.navB,F.nB[0]+(pe.lean||0)*8,F.nB[1],F.nB[2],{t:t+0.7,flip:true,cut:ry-70,pose:"hang",gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.03});
+  ag_person(ctx,FU_PEOPLE.builderB,F.bB[0],F.bB[1],F.bB[2],{t,cut:ly-70,gaze:[3,1],nod:pe.nodL||0});
+  ag_person(ctx,FU_PEOPLE.builderA,F.bA[0],F.bA[1],F.bA[2],{t:t+1.3,cut:ly-70,gaze:[4,1],nod:pe.nodL||0});
+  ag_person(ctx,FU_PEOPLE.navA,F.nA[0]+(pe.lean||0)*12,F.nA[1]+(pe.lean||0)*4,F.nA[2],{t:t+2.1,flip:true,cut:ry-70,gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.04,smile:0.3+0.2*(pe.lean||0)});
+  ag_person(ctx,FU_PEOPLE.navB,F.nB[0]+(pe.lean||0)*8,F.nB[1],F.nB[2],{t:t+0.7,flip:true,cut:ry-70,gaze:[4,1],nod:(pe.nodR||0)-(pe.lean||0)*0.03});
   const crt=o.crt||{};fu_crt(ctx,F.crtL[0],F.crtL[1],F.crtL[2],{on:crt.onL,draw:(c,x,y,w,h)=>fu_screen99(c,x,y,w,h,crt.L||{})});
   fu_crt(ctx,F.crtR[0],F.crtR[1],F.crtR[2],{on:crt.onR,draw:(c,x,y,w,h)=>fu_screen99(c,x,y,w,h,crt.R||{})});
   fu_phone(ctx,96,812,0.7,{ring:0});fu_binders(ctx,1846,808,2,0.74);
@@ -161,7 +161,7 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // today: the same stage, a person on the left and the agent's sphere in its ring on the right, a number between them; over each,
     // a bubble, its meaning turned away; said, both turn to the same word, and the number is checked against something else
     {at:P.risk-0.4,place:"fuData",keys:[[P.risk-0.4,960,540,1.06],[P.risk-0.3,960,540,1.0]],d:6,draw:(x,tt)=>{
-      fu_junDesk(x,tt,{pose:"hang",gaze:[4,0],smile:0.3});
+      fu_junDesk(x,tt,{gaze:[4,0],smile:0.3});
       ag_loop(x,1440,400,{R:150,r:72,label:null,core:0.7,think:0.2+0.3*ag_io(tt,P.eachSure-0.6,P.say,0.5),t:tt,a:fu_fin(tt,P.agents-0.2,0.6),floor:null});
       ag_roomLight(x,1);
       const say=fu_fin(tt,P.say,0.8),tag=say>0.5?"people":"",out=1-fu_fin(tt,P.br-0.3,0.7);
@@ -208,7 +208,7 @@ scene("fluent",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   const T={ask:P.ag,read:P.read,query:P.query,check:P.checks,done:P.ans};
   // the advisers along the faculty's wall: each with a phone and a list, "240"; a soft ring on one phone
   const adv=(x,tt)=>{x.save();ag_about(x,200,170,1.15);fu_advisers(x,200,170,4,36,i=>({a:fu_fin(tt,P.each+0.7+i*0.16,0.4),list:{n:6,done:6,p:clamp((tt-P.once+0.2)/1.4-i*0.12,0,1)},ring:i===1?clamp((tt-P.see+0.5)/1.6,0,1):0}));x.restore();};
-  const jun=(x,tt,o)=>fu_junDesk(x,tt,Object.assign({pose:"hang",gaze:tt<P.ag-0.3?[4,-1]:(tt<P.ans?[6,-1]:[4,-3]),smile:0.3+0.4*fu_fin(tt,P.two,0.8),nod:-0.03*fu_fin(tt,P.ag-0.2,0.5)*(1-fu_fin(tt,P.ans,0.6))},o||{}));
+  const jun=(x,tt,o)=>fu_junDesk(x,tt,Object.assign({gaze:tt<P.ag-0.3?[4,-1]:(tt<P.ans?[6,-1]:[4,-3]),smile:0.3+0.4*fu_fin(tt,P.two,0.8),nod:-0.03*fu_fin(tt,P.ag-0.2,0.5)*(1-fu_fin(tt,P.ans,0.6))},o||{}));
   const SC={x:960,y:520,z:1.04};
   const sh=[
     // the Faculty of Health: Anil at his desk, his screen, "Advisers next term"; out to the wall and its advisers
@@ -224,7 +224,7 @@ scene("fluent",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_say(x,520,150,440,"How many students does the faculty have this term?",{tail:{side:"bottom",at:0.1,px:390,py:400},a:fu_fin(tt,P.team+1.2,0.2)*(1-fu_fin(tt,P.ag-0.1,0.2))});}},
     // the number goes back to Anil, who types it where the caret was
     {at:P.evid+0.5,place:"fuFaculty",keys:[[P.evid+0.5,1371,600,1.75]],push:0.02,draw:(x,tt)=>{
-      adv(x,tt);const ty=clamp((tt-P.evid-1.4)/0.7,0,1);fu_anilDesk(x,tt,{value:"2,160",typed:ty,unit:"students",unitA:ag_in(ty,0.9,0.1),caret:ty<1,t:tt,gaze:[2,1],pose:"desk"});ag_roomLight(x,1);}},
+      adv(x,tt);const ty=clamp((tt-P.evid-1.4)/0.7,0,1);fu_anilDesk(x,tt,{value:"2,160",typed:ty,unit:"students",unitA:ag_in(ty,0.9,0.1),caret:ty<1,t:tt,gaze:[2,1]});ag_roomLight(x,1);}},
     // the 2025 study: a short answer and a long one; confidence rises with the long one, accuracy stays where it is
     {at:P.study-0.3,place:"fuQuiet",keys:[[P.study-0.3,960,520,1.0]],push:0.03,draw:(x,tt)=>{
       const sw=ag_tw(x,"Steyvers and colleagues",{w:700,size:30})+ag_tw(x,"2025",{w:500,size:30})+92;fu_source(x,960-sw/2,120,"Steyvers and colleagues","2025",fu_fin(tt,P.study,0.5));
@@ -277,7 +277,7 @@ scene("explain",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // Jun's own rating: six, quickly; three questions; the agent slips behind frosted glass, and the six falls to two
     {at:P.six-0.6,place:"fuData",keys:[[P.six-0.6,960,520,1.04],[P.six-0.5,960,520,1.0]],d:8,draw:(x,tt)=>{
       fu_agent(x,tt,{core:0.75,think:0.15,frost:ag_sine((tt-P.cant)/1.3)});
-      fu_junDesk(x,tt,{pose:"hang",gaze:tt<P.table?[4,-2]:[6,-1],smile:0.55*(1-fu_fin(tt,P.cant,1.2))+0.15,nod:0.04*fu_fin(tt,P.rough,1)});ag_roomLight(x,1);
+      fu_junDesk(x,tt,{gaze:tt<P.table?[4,-2]:[6,-1],smile:0.55*(1-fu_fin(tt,P.cant,1.2))+0.15,nod:0.04*fu_fin(tt,P.rough,1)});ag_roomLight(x,1);
       const b=fu_answer(x,520,150,{a:0});fu_glow(x,b.card,1-fu_fin(tt,P.know-0.4,1.6));fu_answer(x,520,150,{});
       const six=clamp((tt-P.asix+0.2)/0.9*6,0,6),fall=clamp((tt-P.rough)/1.6*4,0,4);fu_scale(x,730,476,six-fall,{gap:60,r:18,a:fu_fin(tt,P.six-0.2,0.5)});
       [["Which table did it read?",P.table],["What counted as a student?",P.student],["What did its check compare?",P.compare]].forEach(([q,t0],i)=>
@@ -299,7 +299,7 @@ scene("right",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // Jun's desk: the calendar turning, a tick on every month; the evidence folder, closed, gathering dust; the chat, and the doubt let go
     {at:0,place:"fuData",keys:[[0,960,520,1.04]],push:0.03,draw:(x,tt)=>{
       cal(x,tt);fu_agent(x,tt,{core:0.75,think:0.1});const typing=tt<P.chat-0.3||tt>P.go+0.4;
-      fu_junDesk(x,tt,{pose:"desk",pose2:FU_CHIN,mix:ag_io(tt,P.wrote+0.2,P.replied-0.6,0.5),gaze:typing?[3,2]:[5,-2],folder:{dust:fu_fin(tt,P.stopped,2.2)},smile:0.35});ag_roomLight(x,1);
+      fu_junDesk(x,tt,{gaze:typing?[3,2]:[5,-2],folder:{dust:fu_fin(tt,P.stopped,2.2)},smile:0.35});ag_roomLight(x,1);
       const up=ag_sine((tt-P.go)/1.6),ca=1-up;
       fu_chat(x,720,630-up*44,440,"Anil Kurian","The advisers' lists look long this term.",{a:fu_fin(tt,P.wrote,0.5)*ca,k:ag_spr(tt,P.wrote,0.7)});
       fu_chat(x,1190,650-up*44,420,"Jun","The agent checked its source",{tick:true,a:fu_fin(tt,P.replied,0.5)*ca,k:ag_spr(tt,P.replied,0.7)});}},
@@ -309,8 +309,8 @@ scene("right",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       const sw=ag_tw(x,"Parasuraman and Manzey",{w:700,size:30})+ag_tw(x,"2010",{w:500,size:30})+92;fu_source(x,960-sw/2,100,"Parasuraman and Manzey","2010",fu_fin(tt,P.review,0.5));
       const busy=ag_sine((tt-P.above)/1.0),busy2=ag_sine((tt-P.exp-0.2)/1.0),n=clamp((tt-P.longtime)/2.2*6,0,6);
       ag_desk(x,150,860,640,{});ag_desk(x,1130,860,640,{});
-      ag_person(x,FU_AID_PEOPLE.p1,420,610,0.56,{t:tt,cut:790,pose:"desk",gaze:busy>0.5?[2,4]:[5,0],nod:0.05*busy});
-      ag_person(x,FU_AID_PEOPLE.p2,1500,610,0.56,{t:tt+1.3,flip:true,cut:790,pose:"desk",gaze:busy2>0.5?[2,4]:[5,0],nod:0.05*busy2,a:fu_fin(tt,P.exp-0.6,0.6)});
+      ag_person(x,FU_AID_PEOPLE.p1,420,610,0.56,{t:tt,cut:790,gaze:busy>0.5?[2,4]:[5,0],nod:0.05*busy});
+      ag_person(x,FU_AID_PEOPLE.p2,1500,610,0.56,{t:tt+1.3,flip:true,cut:790,gaze:busy2>0.5?[2,4]:[5,0],nod:0.05*busy2,a:fu_fin(tt,P.exp-0.6,0.6)});
       fu_aid(x,580,662,{n,a:fu_fin(tt,P.raja,0.6)});fu_aid(x,1190,662,{n:clamp((tt-P.exp)/1.2*6,0,6),a:fu_fin(tt,P.exp-0.4,0.6)});
       ag_roomLight(x,1);
       fu_mobile(x,lerp(80,470,busy),806,busy);fu_papers(x,lerp(60,330,busy),818,4,busy);
@@ -319,7 +319,7 @@ scene("right",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     // back at Jun's desk: like the thirty years of the opening, a run of ticks along the skirting, under the calendar's
     {at:P.routine-0.4,place:"fuData",keys:[[P.routine-0.4,960,520,1.04],[P.routine-0.3,960,520,1.0]],d:3,draw:(x,tt)=>{
       cal(x,tt);const tk=fu_fin(tt,P.mars-0.2,0.4)*(1-fu_fin(tt,P.feel+0.8,0.8));if(tk>0)withA(x,tk,()=>{for(let i=0;i<30;i++){const k=clamp((tt-P.mars-i*0.04)/0.3,0,1);if(k>0)ag_tick(x,120+i*57,640,18*ag_eo(k),rgba(AG.green,1),3.4);}});
-      fu_agent(x,tt,{core:0.75,think:0.1});fu_junDesk(x,tt,{pose:"desk",gaze:[3,2],folder:{dust:1},smile:0.35});ag_roomLight(x,1);}},
+      fu_agent(x,tt,{core:0.75,think:0.1});fu_junDesk(x,tt,{gaze:[3,2],folder:{dust:1},smile:0.35});ag_roomLight(x,1);}},
     // the end of the term at the Faculty of Health: nine advisers planned; three more needed; 720 students without their call
     {at:P.planned-0.4,place:"fuFaculty",keys:[[P.planned-0.4,960,540,1.04],[P.planned-0.3,960,540,1.0]],d:8,draw:(x,tt)=>{
       const am=fu_fin(tt,P.seven-0.2,0.9);
@@ -351,7 +351,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       for(let i=0;i<12;i++){const ax=70+i*112,hl=ag_io(tt,P.lists+i*0.18,P.lists+i*0.18+0.5,0.2);
         if(i<9)fu_adviser(x,ax,150,{label:null,list:{n:8,done:6,amber:2}});else fu_adviser(x,ax,150,{dashed:true});
         if(i<9&&hl>0)withA(x,hl*0.6,()=>{x.strokeStyle=rgba([74,80,92],0.9);x.lineWidth=3;rr(x,ax-4,146,108,266,16);x.stroke();});}
-      fu_anilDesk(x,tt,{value:"9",unit:"advisers",t:tt,gaze:[1,-3],pose:"desk"});ag_roomLight(x,1);
+      fu_anilDesk(x,tt,{value:"9",unit:"advisers",t:tt,gaze:[1,-3]});ag_roomLight(x,1);
       fu_gapBars(x,140,560,{a:fu_fin(tt,P.n2880-0.5,0.5),p1:clamp((tt-P.n2880+0.3)/1.0,0,1),p2:clamp((tt-P.n2880-0.9)/1.0,0,1),gap:fu_fin(tt,P.n2880+1.9,0.6)});}},
     // student load, the table the agent read: its column, "students"; full-time and half-time students; each half-time pair counts as one
     {at:P.load-0.4,place:"fuQuiet",keys:[[P.load-0.4,960,470,1.04],[P.load-0.3,960,470,1.0]],d:14,draw:(x,tt)=>{
@@ -359,20 +359,20 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
         close:clamp((tt-P.one)/1.4,0,1),sum:fu_fin(tt,P.said-0.2,0.6)});}},
     // one word in the middle, two meanings: Jun's bubble holds a person; the agent's, violet, "full-time equivalents"; nothing passes between
     {cut:true,at:P.meant-0.4,place:"fuData",keys:[[P.meant-0.4,SC.x,SC.y,SC.z]],push:0.03,draw:(x,tt)=>{
-      fu_agent(x,tt,{core:0.75,think:0.3});fu_junDesk(x,tt,{pose:"hang",gaze:[4,-3],folder:{dust:1}});ag_roomLight(x,1);
+      fu_agent(x,tt,{core:0.75,think:0.3});fu_junDesk(x,tt,{gaze:[4,-3],folder:{dust:1}});ag_roomLight(x,1);
       ag_T(x,"students",760,560,{w:800,size:64,align:"center",a:fu_fin(tt,P.jm-0.4,0.5)});
       fu_bubble(x,340,292,"",{w:150,a:fu_fin(tt,P.jm,0.5),k:ag_spr(tt,P.jm,0.7),px:322,py:378,draw:(c,bx,by)=>fu_figure(c,bx,by+12,0.62,FU_STU)});
       fu_bubble(x,1150,168,"full-time equivalents",{a:fu_fin(tt,P.took,0.5),k:ag_spr(tt,P.took,0.7),px:1150,py:236,edge:AG.violet,size:30});}},
     // people check they've understood each other: "You mean…?", "Yes.", and a small tick between them
     {at:P.people-0.4,place:"fuQuiet",keys:[[P.people-0.4,960,560,1.1],[P.people-0.3,960,556,1.14]],d:5,draw:(x,tt)=>{
-      ag_desk(x,560,880,800,{});ag_person(x,FU_TALK.a,640,640,0.6,{t:tt,cut:810,pose:"explain",gaze:[5,-1],talk:ag_io(tt,P.say-0.2,P.say+0.9,0.15)*0.8});
-      ag_person(x,FU_TALK.b,1280,640,0.6,{t:tt+1.1,flip:true,cut:810,pose:"desk",gaze:[5,-1],nod:0.05*Math.sin(clamp((tt-P.ask+0.2)/0.9,0,1)*Math.PI*2),talk:ag_io(tt,P.ask,P.ask+0.6,0.15)*0.7});ag_roomLight(x,1);
+      ag_desk(x,560,880,800,{});ag_person(x,FU_TALK.a,640,640,0.6,{t:tt,cut:810,gaze:[5,-1],talk:ag_io(tt,P.say-0.2,P.say+0.9,0.15)*0.8});
+      ag_person(x,FU_TALK.b,1280,640,0.6,{t:tt+1.1,flip:true,cut:810,gaze:[5,-1],nod:0.05*Math.sin(clamp((tt-P.ask+0.2)/0.9,0,1)*Math.PI*2),talk:ag_io(tt,P.ask,P.ask+0.6,0.15)*0.7});ag_roomLight(x,1);
       fu_say(x,690,250,260,"You mean…?",{title:true,tail:{side:"bottom",at:0.2,px:700,py:430},a:fu_fin(tt,P.say-0.3,0.4),k:ag_spr(tt,P.say-0.3,0.7)});
       fu_say(x,1010,330,170,"Yes.",{title:true,tail:{side:"bottom",at:0.8,px:1210,py:470},a:fu_fin(tt,P.ask-0.1,0.4),k:ag_spr(tt,P.ask-0.1,0.7)});
       const tk=clamp((tt-P.ask-0.5)/0.4,0,1);if(tk>0)ag_tick(x,960,520,40*ag_eo(tk),rgba(AG.green,1),6);}},
     // the 2024 study: the agent goes straight to its answer, past the place where its question would have gone
     {at:P.study-0.4,place:"fuData",keys:[[P.study-0.4,SC.x,SC.y,SC.z]],push:0.03,draw:(x,tt)=>{
-      const go=clamp((tt-P.less)/1.6,0,1);fu_agent(x,tt,{core:0.8,think:0.3+0.4*ag_io(tt,P.less-0.4,P.presume+1.2,0.5)});fu_junDesk(x,tt,{pose:"hang",gaze:[4,-2],folder:{dust:1}});ag_roomLight(x,1);
+      const go=clamp((tt-P.less)/1.6,0,1);fu_agent(x,tt,{core:0.8,think:0.3+0.4*ag_io(tt,P.less-0.4,P.presume+1.2,0.5)});fu_junDesk(x,tt,{gaze:[4,-2],folder:{dust:1}});ag_roomLight(x,1);
       const ph=fu_fin(tt,P.study+0.6,0.6);if(ph>0)withA(x,ph,()=>{x.save();x.setLineDash([9,8]);x.strokeStyle=rgba(AG.mut,0.7);x.lineWidth=2.6;rr(x,700,470,170,72,36);x.stroke();x.restore();
         ag_T(x,"?",785,518,{w:800,size:36,align:"center",col:AG.mut,a:0.8});});
       const path=[990,410,880,470,760,560,740,396];if(go>0)fu_dots(x,path,0,ag_sine(go),{n:44,r:3.4,color:rgba(AG.violet,0.8)});
@@ -387,7 +387,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_check(x,950,450,fu_fin(tt,P.passed-0.2,0.5));}},
     // Jun opens the evidence at last: what the agent's hands did, line by line; "full-time equivalents" washes amber
     {at:P.record-0.4,place:"fuData",keys:[[P.record-0.4,900,500,1.08],[P.record-0.3,900,498,1.1]],d:6,draw:(x,tt)=>{
-      const op=ag_sine((tt-P.record+0.1)/0.9);fu_junDesk(x,tt,{pose:"desk",pose2:FU_OPEN,mix:ag_io(tt,P.record-0.15,P.record+0.6,0.35),gaze:[5,-3],folder:{dust:1-op,open:op},smile:0.2});ag_roomLight(x,1);
+      const op=ag_sine((tt-P.record+0.1)/0.9);fu_junDesk(x,tt,{gaze:[5,-3],folder:{dust:1-op,open:op},smile:0.2});ag_roomLight(x,1);
       const rise=ag_sine((tt-P.hands+0.3)/1.0),am=fu_fin(tt,P.added-0.2,0.8);
       x.save();x.translate(0,(1-rise)*500);const r=fu_answer(x,520,110,{a:fu_fin(tt,P.hands-0.3,0.4),open:clamp((tt-P.hands-0.6)/1.4,0,1),side:"right",ew:400,amber:am});x.restore();
       ag_label(x,1000,82,"What its hands did",{col:AG.kick,a:fu_fin(tt,P.hands+0.6,0.5)});
@@ -458,13 +458,13 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   const sh=[
     // this term: Jun asks again; the agent reads the question back, and waits; "Yes."; its hands, the data back, the check
     {at:0,place:"fuData",keys:[[0,960,520,1.04]],push:0.03,draw:(x,tt)=>{
-      fu_agentAt(x,tt,T,{think:0.15});fu_junDesk(x,tt,{pose:"hang",gaze:tt<P.reads?[4,-1]:[6,-2],smile:0.4,talk:ag_talk(sc,"yes",tt)*0,folder:{dust:0}});ag_roomLight(x,1);
+      fu_agentAt(x,tt,T,{think:0.15});fu_junDesk(x,tt,{gaze:tt<P.reads?[4,-1]:[6,-2],smile:0.4,talk:ag_talk(sc,"yes",tt)*0,folder:{dust:0}});ag_roomLight(x,1);
       ag_textCard(x,500,92,560,{sub:"Students in the Faculty of Health, each person counted once?"},{a:fu_fin(tt,P.reads,0.5)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.reads,0.7),edge:AG.violet,tail:{side:"right",at:0.85,px:1000,py:330}});
       fu_bubble(x,330,292,"Yes.",{a:fu_fin(tt,P.yes,0.4)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.yes,0.7),px:322,py:378,w:150});}},
     // 2,880 people, and the faculty's own list beside it: the same; a green tick; Jun's initials
     {cut:true,at:P.counts-0.3,place:"fuData",keys:[[P.counts-0.3,632,380,1.52],[P.counts-0.2,632,378,1.55]],d:5,draw:(x,tt)=>{
       // the frame's edge cuts the ring before its Act step; the agent steps back as the faculty's list comes in
-      fu_agentAt(x,tt,T,{think:0.15,a:1-0.45*fu_fin(tt,P.agrees-0.5,0.8)});fu_junDesk(x,tt,{pose:"hang",gaze:[5,-3],smile:0.5,folder:{dust:0}});ag_roomLight(x,1);
+      fu_agentAt(x,tt,T,{think:0.15,a:1-0.45*fu_fin(tt,P.agrees-0.5,0.8)});fu_junDesk(x,tt,{gaze:[5,-3],smile:0.5,folder:{dust:0}});ag_roomLight(x,1);
       const r=fu_answer(x,330,130,{v:"people",a:fu_fin(tt,P.n2880-0.2,0.5),k:ag_spr(tt,P.n2880-0.2,0.8)});
       fu_facList(x,860,140,{w:330,h:200,lines:2,a:fu_fin(tt,P.agrees-0.5,0.5),k:ag_spr(tt,P.agrees-0.5,0.7)});
       fu_equals(x,815,250,fu_fin(tt,P.agrees+0.1,0.4));const tk=clamp((tt-P.agrees-0.4)/0.4,0,1);if(tk>0)ag_tick(x,1140,296,34*ag_eo(tk),rgba(AG.green,1),5);

@@ -59,3 +59,15 @@ decisions:
     status: proposed
     evidence: [analyses/profiling/profile_keys_held.sql]
     relates_to: [LIM-SIS-01, DEC-PER-01]
+
+  - id: DEC-SIS-05
+    step: operate_and_evolve
+    title: Test records never count
+    text: Records the registrar's office makes to try a new screen are test records. They never count, in
+      any count or mart.
+    why: 'Expected: Every record in the student system is a student. Found: On the night of 21 October 2026,
+      the census-day count was 14 over the census report: fourteen records, all made in one week, all dated
+      back to February, made to try a new screen.'
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-22
+    status: agreed

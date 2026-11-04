@@ -1823,6 +1823,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1912,12 +1927,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3397,7 +3419,7 @@ scene("asking",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({card:c.toda
     {at:P.around,place:"campus",keys:[[P.around,960,540,1]],push:0.02,draw:(x,tt)=>{gk_mail(x,tt,{out:clamp((tt-P.ask)/1.8,0,1),back:clamp((tt-P.col)/1.8,0,1)});
       gk_memory(x,1);}},
     // the copy counted one; the census report said two; which was right?
-    {at:P.one,place:"desk",keys:[[P.one,960,540,1]],push:0.02,draw:(x,tt)=>{gk_copy(x,tt,{one:fin(tt,P.cnt,0.8),two:fin(tt,P.cen,0.8),q:clamp((tt-P.which)/1.0,0,1)});
+    {cut:true,at:P.one,place:"desk",keys:[[P.one,960,540,1]],push:0.02,draw:(x,tt)=>{gk_copy(x,tt,{one:fin(tt,P.cnt,0.8),two:fin(tt,P.cen,0.8),q:clamp((tt-P.which)/1.0,0,1)});
       gk_memory(x,1);}},
     // one place offered; the second learner a unit from finishing would have waited a semester
     {at:P.off,place:"desk",keys:[[P.off,960,540,1]],push:0.02,draw:(x,tt)=>{gk_placement(x,tt,{n:fin(tt,P.op,0.6),back:clamp((tt-P.wait)/1.4,0,1)});gk_memory(x,1);}},
@@ -3411,7 +3433,7 @@ scene("asking",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({card:c.toda
     {at:P.mor,place:"faculty",keys:[[P.mor,960,540,1]],push:0.025,draw:(x,tt)=>gk_anil(x,tt,{anil:{expr:tt>P.found+0.6?"smile":"calm"},
       draw:q=>gk_search(q,tt,{q:clamp((tt-P.mor-0.5)/1.2,0,1),res:fin(tt,P.found,0.6),lift:fin(tt,P.found+0.5,0.6),ask:clamp((tt-P.asked)/0.8,0,1)})})},
     // Planning: Clara, its owner, says yes by the afternoon; the key, until the end of January
-    {at:P.yes,place:"planClose",keys:[[P.yes,960,540,1]],push:0.025,draw:(x,tt)=>{gk_planDesk(x,tt,{clara:{expr:tt>P.sy?"smile":"calm"},
+    {cut:true,at:P.yes,place:"planClose",keys:[[P.yes,960,540,1]],push:0.025,draw:(x,tt)=>{gk_planDesk(x,tt,{clara:{expr:tt>P.sy?"smile":"calm"},
       draw:q=>gk_reqScreen(q,tt,{yes:clamp((tt-P.sy)/0.8,0,1)})});gu_nameCard(x,1240,96,"Clara Jensen","Planning",gv_io(tt,P.yes+0.5,P.agr-0.4,0.4));
       gk_rise(x,fin(tt,P.jan,0.6),()=>gk_key(x,1220,836,0.1,"until 31 Jan 2027",{flat:1}),10);}},
     // her table agrees with the census report: two
@@ -3437,13 +3459,13 @@ scene("window",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({on:wAt(sc,"
     {at:0,place:"platform",keys:[[0,960,540,1]],push:0.025,draw:(x,tt)=>{gk_samDesk(x,tt,{u:clamp((tt-P.on)/1.6,0,1)});
       gk_plate(x,tt,P.runs,P.sh-0.3,1570,296,["Sam Okafor","platform team"]);}},
     // its marketplace on the big screen: every live product, its domain, its owner; a price tag, crossed out; near award typed
-    {at:P.sh,place:"facBig",keys:[[P.sh,960,540,1]],push:0.02,draw:(x,tt)=>gk_market(x,tt,{u:[0,1,2,3,4,5].map(i=>fin(tt,P.mk+0.25*i,0.6)),dom:fin(tt,P.dom,0.8),
+    {cut:true,at:P.sh,place:"facBig",keys:[[P.sh,960,540,1]],push:0.02,draw:(x,tt)=>gk_market(x,tt,{u:[0,1,2,3,4,5].map(i=>fin(tt,P.mk+0.25*i,0.6)),dom:fin(tt,P.dom,0.8),
       own:fin(tt,P.own,0.8),price:gv_io(tt,P.sold+0.2,P.ty+0.2,0.5),cross:clamp((tt-P.ns)/0.8,0,1),q:clamp((tt-P.ty-0.3)/1.0,0,1)})},
     // the idea on Noor's map
     {at:P.idea-0.2,place:"mapClose",keys:[[P.idea-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gk_mapIdea(x,tt,{a:fin(tt,P.idea,0.6),
       lit:fin(tt,P.idea+0.7,0.8)})},
     // the catalogue finds the product linked to it, owned by Clara, in Planning
-    {at:P.fd,place:"facBig",keys:[[P.fd,960,540,1]],push:0.02,draw:(x,tt)=>gk_market(x,tt,{dom:1,own:1,q:1,idea:fin(tt,P.fd+0.3,0.6),thr:clamp((tt-P.lk)/1.2,0,1),
+    {cut:true,at:P.fd,place:"facBig",keys:[[P.fd,960,540,1]],push:0.02,draw:(x,tt)=>gk_market(x,tt,{dom:1,own:1,q:1,idea:fin(tt,P.fd+0.3,0.6),thr:clamp((tt-P.lk)/1.2,0,1),
       find:fin(tt,P.lna,0.8)})}],sc.dur,1));});
 
 // ---- 3 · Read before you ask: the product's page, its promise from the files in the project: what it's for, how it counts, when it's
@@ -3467,7 +3489,7 @@ scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({as:c.asks,why:
     {at:0,place:"facBig",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_form(x,tt,{press:clamp((tt-P.as-0.3)/0.8,0,1),open:fin(tt,P.as+1.1,0.6),
       lit:[gv_io(tt,P.why,P.wr-0.2,0.4),gv_io(tt,P.hl,P.wr-0.2,0.4)],why:clamp((tt-P.wr)/3.4,0,1),days:fin(tt,P.nd,0.5),sub:clamp((tt-P.nd-0.9)/0.8,0,1)})},
     // the platform's own button, in preview, sends people to the catalogue's form; every request comes to one place
-    {at:P.pl,place:"desk",keys:[[P.pl,960,540,1]],push:0.02,draw:(x,tt)=>gk_onePlace(x,tt,{plat:fin(tt,P.pl+0.4,0.6),press:clamp((tt-P.btn)/0.8,0,1),
+    {cut:true,at:P.pl,place:"desk",keys:[[P.pl,960,540,1]],push:0.02,draw:(x,tt)=>gk_onePlace(x,tt,{plat:fin(tt,P.pl+0.4,0.6),press:clamp((tt-P.btn)/0.8,0,1),
       pv:fin(tt,P.pv,0.6),redir:clamp((tt-P.here)/1.2,0,1),tray:clamp((tt-P.one)/1.6,0,1)})}],sc.dur));});
 
 // ---- 5 · The owner decides: the request comes to Clara, not to whoever built the table; governance's promise, five working days;
@@ -3487,10 +3509,10 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({cl:c.clara,o
     {at:P.af,place:"planClose",keys:[[P.af,960,540,1]],push:0.025,draw:(x,tt)=>{gk_planDesk(x,tt,{clara:{expr:"smile"},
       draw:q=>gk_reqScreen(q,tt,{why:fin(tt,P.an+0.4,0.6)})});gk_clock(x,1800,150,74,fin(tt,P.an,0.6));}},
     // her page: his reason beside the product's purpose; ninety days granted; Approve; the key, until the 31st; Reject, with a reason
-    {at:P.rs,place:"bigPlan",keys:[[P.rs,960,540,1]],push:0.02,draw:(x,tt)=>gk_approval(x,tt,{match:clamp((tt-P.wf)/1.0,0,1),grant:clamp((tt-P.so)/0.8,0,1),
+    {cut:true,at:P.rs,place:"bigPlan",keys:[[P.rs,960,540,1]],push:0.02,draw:(x,tt)=>gk_approval(x,tt,{match:clamp((tt-P.wf)/1.0,0,1),grant:clamp((tt-P.so)/0.8,0,1),
       yes:clamp((tt-P.yes-0.1)/0.8,0,1),date:fin(tt,P.d31,0.6),alt:gv_io(tt,P.fe,P.rc+0.2,0.5)})},
     // the request is the record: who asked, why, who said yes, until when
-    {at:P.rc,place:"desk",keys:[[P.rc,960,540,1]],push:0.02,draw:(x,tt)=>gk_record(x,tt,{rows:P.rows.map(w=>fin(tt,w,0.5))})}],sc.dur));});
+    {cut:true,at:P.rc,place:"desk",keys:[[P.rc,960,540,1]],push:0.02,draw:(x,tt)=>gk_record(x,tt,{rows:P.rows.map(w=>fin(tt,w,0.5))})}],sc.dur));});
 
 // ---- 6 · A key with a date: access to a group, never one person; Anil's card into the product's readers' drawer, in the
 // university's directory, until his date, and the key; the group given the table once, when the product went live; a week before, the
@@ -3505,15 +3527,15 @@ scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({gr:wAt(sc,"gro
     {at:0,place:"index",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_index(x,tt,{lit:[fin(tt,P.gr,0.6),0,0],one:gv_io(tt,P.nv,P.rd+0.6,0.4),
       x:clamp((tt-P.op)/0.6,0,1),card:clamp((tt-P.pu)/1.2,0,1),sync:clamp((tt-P.hd)/1.0,0,1),key:fin(tt,P.hd+0.6,0.6)})},
     // on the platform: the group was given the table once, when the product went live
-    {at:P.on,place:"bigPlat",keys:[[P.on,960,540,1]],push:0.02,draw:(x,tt)=>gk_perms(x,tt,{lit:fin(tt,P.gv,0.6),note:clamp((tt-P.live)/1.0,0,1),tag:fin(tt,P.on+0.8,0.6)})},
+    {cut:true,at:P.on,place:"bigPlat",keys:[[P.on,960,540,1]],push:0.02,draw:(x,tt)=>gk_perms(x,tt,{lit:fin(tt,P.gv,0.6),note:clamp((tt-P.live)/1.0,0,1),tag:fin(tt,P.on+0.8,0.6)})},
     // a week before the date: the catalogue's reminder on Anil's screen, his key on the desk
     {at:P.wk,place:"faculty",keys:[[P.wk,960,540,1]],push:0.025,draw:(x,tt)=>gk_anil(x,tt,{draw:q=>{gk_reminder(q,tt,{u:clamp((tt-P.rem)/1.2,0,1)});
       gk_key(q,1130,836,0.1,"until 31 Jan 2027",{flat:1});}})},
     // on the date: the directory takes him out of the group, and his access ends
-    {at:P.dt,place:"index",keys:[[P.dt,960,540,1]],push:0.02,draw:(x,tt)=>gk_index(x,tt,{card:1,out:clamp((tt-P.out)/1.4,0,1),sync:fin(tt,P.out+0.8,0.6),key:1,
+    {cut:true,at:P.dt,place:"index",keys:[[P.dt,960,540,1]],push:0.02,draw:(x,tt)=>gk_index(x,tt,{card:1,out:clamp((tt-P.out)/1.4,0,1),sync:fin(tt,P.out+0.8,0.6),key:1,
       grey:clamp((tt-P.ends)/1.0,0,1)})},
     // Clara sees every reader, why, and until when
-    {at:P.ev,place:"planClose",keys:[[P.ev,960,540,1]],push:0.025,draw:(x,tt)=>gk_planDesk(x,tt,{draw:q=>gk_readers(q,tt,{past:1,lit:fin(tt,P.er,0.6)})})}],sc.dur));
+    {cut:true,at:P.ev,place:"planClose",keys:[[P.ev,960,540,1]],push:0.025,draw:(x,tt)=>gk_planDesk(x,tt,{draw:q=>gk_readers(q,tt,{past:1,lit:fin(tt,P.er,0.6)})})}],sc.dur));
   wc_year(ctx,56,72,"24 January 2027",gv_io(t,P.wk+0.2,P.dt-0.2,0.4));wc_year(ctx,56,72,"31 January 2027",gv_io(t,P.dt+0.2,sc.dur-0.4,0.4));});
 
 // ---- 7 · A known reader: the faculty's plan written into the record of who uses what; the next change to Clara's table, and the
@@ -3525,7 +3547,7 @@ scene("reader",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({ad:c.adds,w
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_exposure(x,tt,{u:fin(tt,0.2,0.8),p:clamp((tt-P.ad-0.2)/3.6,0,1),
       lit:[fin(tt,P.ad+3.2,0.6),fin(tt,Math.max(P.wu,P.ad+4.0),0.6)],hand:fin(tt,P.ip,0.8),tag:fin(tt,P.ip+0.6,0.6)})},
     // the next change to Clara's table: the impact check names the faculty's plan beside the census dashboard, and who to ask
-    {at:P.nx,place:"big",keys:[[P.nx,960,540,1]],push:0.02,draw:(x,tt)=>gk_impact(x,tt,{u:clamp((tt-P.nx-0.2)/1.2,0,1),who:fin(tt,P.nm,0.6),ask:fin(tt,P.cd+0.4,0.6)})},
+    {cut:true,at:P.nx,place:"big",keys:[[P.nx,960,540,1]],push:0.02,draw:(x,tt)=>gk_impact(x,tt,{u:clamp((tt-P.nx-0.2)/1.2,0,1),who:fin(tt,P.nm,0.6),ask:fin(tt,P.cd+0.4,0.6)})},
     // both asked before the change ships: a letter to each
     {at:P.bo,place:"campus",keys:[[P.bo,960,540,1]],push:0.02,draw:(x,tt)=>gk_tell(x,tt,{go:clamp((tt-P.bt)/2.2,0,1)})}],sc.dur,1));});
 
@@ -3544,16 +3566,16 @@ scene("outside",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({sm:c.same,
     {at:P.pt,place:"registrar",keys:[[P.pt,960,540,1]],push:0.025,draw:(x,tt)=>{gk_mei(x,tt,{draw:q=>gk_meiScreen(q,tt,{})});
       gu_nameCard(x,1140,190,"Mei Tanaka","registrar's office",gv_io(tt,P.pt+0.5,P.ho-0.4,0.4));}},
     // Awards' contract: each award, its credit points and its faculty; no one's personal data
-    {at:P.ho,place:"bigReg",keys:[[P.ho,960,540,1]],push:0.02,draw:(x,tt)=>gk_awards(x,tt,{lit:[fin(tt,P.aw,0.5),fin(tt,P.cp,0.5),fin(tt,P.fc,0.5)],
+    {cut:true,at:P.ho,place:"bigReg",keys:[[P.ho,960,540,1]],push:0.02,draw:(x,tt)=>gk_awards(x,tt,{lit:[fin(tt,P.aw,0.5),fin(tt,P.cp,0.5),fin(tt,P.fc,0.5)],
       none:clamp((tt-P.no)/1.0,0,1)})},
     // Mei says yes
-    {at:P.my0,place:"registrar",keys:[[P.my0,960,540,1]],push:0.025,draw:(x,tt)=>gk_mei(x,tt,{mei:{expr:tt>P.my?"smile":"calm"},
+    {cut:true,at:P.my0,place:"registrar",keys:[[P.my0,960,540,1]],push:0.025,draw:(x,tt)=>gk_mei(x,tt,{mei:{expr:tt>P.my?"smile":"calm"},
       draw:q=>gk_meiScreen(q,tt,{yes:clamp((tt-P.my)/0.8,0,1)})})},
     // Sam shares it through OpenSharing, to a partner university, on any platform
     {at:P.sam-0.2,place:"bigPlat",keys:[[P.sam-0.2,960,540,1]],push:0.02,draw:(x,tt)=>{gk_share(x,tt,{rec:fin(tt,P.org,0.8)});
       gk_plate(x,tt,P.sam+0.2,null,1480,196,["Sam Okafor","platform team"]);}},
     // the partner reads the table where it lives: not a copy; a key that ends; the same contract
-    {at:P.any-0.3,place:"desk",keys:[[P.any-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gk_reads(x,tt,{read:clamp((tt-P.any)/1.0,0,1),thr:clamp((tt-P.itself)/1.0,0,1),
+    {cut:true,at:P.any-0.3,place:"desk",keys:[[P.any-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gk_reads(x,tt,{read:clamp((tt-P.any)/1.0,0,1),thr:clamp((tt-P.itself)/1.0,0,1),
       copy:clamp((tt-P.nc)/0.8,0,1),x:clamp((tt-P.nc-0.6)/0.6,0,1),key:fin(tt,P.ky,0.6),con:clamp((tt-P.con)/0.9,0,1)})},
     // partners on Databricks: a private exchange, a shop window only they see
     {at:P.ex,place:"exchange",keys:[[P.ex,960,540,1]],push:0.02,draw:(x,tt)=>gk_exchange(x,tt,{u:fin(tt,P.fi,0.8),sign:fin(tt,P.pe,0.6),
@@ -3572,7 +3594,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({of:c.offers-
     {at:P.gn,place:"faculty",keys:[[P.gn,960,540,1]],push:0.025,draw:(x,tt)=>gk_anil(x,tt,{anil:{expr:"smile"},draw:q=>{gk_today(q,tt,{mail:1});
       gk_key(q,1130,836,0.1,"until 31 Jan 2027",{flat:1,lit:fin(tt,P.d31,0.6)});}})},
     // Clara knows who reads her table, why, and until when
-    {at:P.sn,place:"planClose",keys:[[P.sn,960,540,1]],push:0.025,draw:(x,tt)=>gk_planDesk(x,tt,{clara:{expr:"smile"},draw:q=>gk_readers(q,tt,{lit:fin(tt,P.wr,0.6)})})},
+    {cut:true,at:P.sn,place:"planClose",keys:[[P.sn,960,540,1]],push:0.025,draw:(x,tt)=>gk_planDesk(x,tt,{clara:{expr:"smile"},draw:q=>gk_readers(q,tt,{lit:fin(tt,P.wr,0.6)})})},
     // finding and getting data: the shop window, every product with its owner
     {at:P.ls,place:"shop",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gk_shop(x,tt,{own:1})},
     // the data team's board: the series' six cards, each lit in turn
@@ -3580,6 +3602,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({of:c.offers-
     sc.dur));
   wc_year(ctx,56,72,"Today",gv_io(t,0.3,P.sn-0.2,0.4));
   gv_end(ctx,S,t,P.end,"The marketplace","Finding and getting data is part of governance.","Film 6 of 6");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["read", "ask", "owner"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

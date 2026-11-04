@@ -23,8 +23,10 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({
   ag_shots(ctx,S,t,sc.dur,[
     // the scribe copies a book, letter by letter; the light comes and goes over days of it
     {at:0,place:"dmScribe",keys:[[0,960,540,1],[P.letter-0.6,860,720,1.45],[P.slow,940,600,1.12]],d:1.8,draw:(x,t)=>{
-      const p=0.18+0.5*clamp((t-0.5)/(P.rare+1.5),0,1)+0.25*ag_sine(clamp((t-P.slow)/1.6,0,1));const tip=dm_writing(x,(p*3)%1);
-      const look=Math.sin(t*1.3)>0.55;dm_scribe(x,t,tip,{look});
+      // one page, written at a steady hand's pace (a row about every second and a half), while the light comes and goes; he glances up
+      // at the book he copies now and then, turning his head over a few tenths of a second
+      const p=0.12+0.62*clamp(t/c.cambridge,0,1),tip=dm_writing(x,p);
+      const look=sstep(0.35,0.75,Math.sin(t*1.3));dm_scribe(x,t,tip,{look});
       const night=Math.sin(Math.PI*clamp((t-P.slow)/1.8,0,1));if(night>0){x.fillStyle=rgba([40,44,70],0.32*night);x.fillRect(0,0,W,H);}
 }},
     // Cambridge's whole library, 122 books on four lecterns
@@ -73,7 +75,7 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({
       const t2=Math.max(P.two-0.2,c.towns+2.7),a=ag_in(t,t2,0.5);if(a>0)ag_textCard(x,1220,380,650,{kick:"By 1500",title:"Presses in more than 200 towns",sub:ag_in(t,P.thirty-0.2,0.4)>0?"Some 30,000 different books":""},{a,k:ag_spr(t,t2,0.6)});
       const b=ag_in(t,P.cheaper-0.2,0.5);if(b>0)ag_textCard(x,1220,620,650,{title:"Cheaper books, far more readers"},{a:b,k:ag_spr(t,P.cheaper-0.2,0.6)});}},
     // it seemed to arrive all at once: close on 1450, then back out over four hundred years
-    {at:c.seemed-0.3,place:"dmWall",keys:[[c.seemed-0.3,1493,430,2.4],[P.taken-0.2,960,540,1]],d:2.2,draw:(x,t)=>{
+    {cut:true,at:c.seemed-0.3,place:"dmWall",keys:[[c.seemed-0.3,1493,430,2.4],[P.taken-0.2,960,540,1]],d:2.2,draw:(x,t)=>{
       dm_printRail(x,{lit:[ag_in(t,P.taken+0.6,0.5),ag_in(t,P.taken+0.4,0.5),1],span:clamp((t-P.taken-0.6)/1.0,0,1),spanText:"About 400 years"});}},
     // this term an agent joins Jun's team; some fear it, some expect magic; its ideas are decades old
     {at:c.agent-0.3,place:"dmLab",keys:[[c.agent-0.3,1100,560,1.25],[c.nowhere-0.2,960,540,1],[P.decades-0.4,960,470,1.08]],d:2.0,draw:(x,t)=>{
@@ -381,3 +383,6 @@ scene("sudden",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({suddenW:wAt
     {at:c.team-0.4,place:"dmLab",push:0.012,keys:[[c.team-0.4,960,540,1]],d:2.0,draw:(x,t)=>{rail(x);
       dm_team(x,{t,agent:1,think:0.2,yusuf:1,mei:1,ySmile:0.2+0.3*ag_in(t,P.where-0.4,0.8),mSmile:0.2+0.3*ag_in(t,P.where-0.2,0.8),junSmile:0.3+0.25*ag_in(t,P.magic,0.8)});}}],0.6);
   ag_end(ctx,S,t,c.breath+0.6,"Decades in the making","Long work that finally had the power to run","Film 1 of 9","What an agent is");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["mistakes", "web"]);

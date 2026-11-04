@@ -174,6 +174,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};

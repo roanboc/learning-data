@@ -84,7 +84,7 @@ scene("river",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({flood:c.floo
     {at:P.days,place:"well",keys:[[P.days,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{const D=rr_days(tt,P.days+0.2,P.off+0.4);rr_well(x,tt,D);
       const k=rr_onStair(RR_WL.main,D.L+0.3,-0.2);rr_tagAt(x,tt,P.every,null,k.x-250,k.y+40,"read every day",{size:32,wash:GV.green,washA:0.25});}},
     // the readings go to the officials: at the island's landing the scribe hands his sheet to a messenger, whose boat crosses to Fustat
-    {at:P.off,place:"roda",keys:[[P.off,1300,600,1.45]],d:2,push:0.012,draw:(x,tt)=>rr_landing(x,tt,P)},
+    {cut:true,at:P.off,place:"roda",keys:[[P.off,1300,600,1.45]],d:2,push:0.012,draw:(x,tt)=>rr_landing(x,tt,P)},
     // sixteen cubits, close on the column: the water reaches the sixteenth mark, which lights gold
     {at:P.s16,place:"column",keys:[[P.s16,960,540,1],[P.s16+0.1,960,560,1.04]],d:2.2,push:0.01,draw:(x,tt)=>{
       const L=rr_cub(lerp(15.5,15.95,easeCam(clamp((tt-P.s16-0.2)/Math.max(0.5,P.at16-P.s16-0.2),0,1))));rr_columnClose(x,tt,L,fin(tt,P.at16,0.6));
@@ -128,7 +128,7 @@ scene("survey",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({take:wAt(sc
     {at:P.page,place:"policy",keys:[[P.page,960,500,1],[P.page+0.1,900,460,1.08],[P.form,960,520,1]],d:1.6,push:0.01,draw:(x,tt)=>{
       rr_policy9(x,{under:fin(tt,P.mon,0.7)});rr_fadeCut(x,()=>rr_survey(x,fin(tt,P.form,0.9),{nums:clamp((tt-P.nums)/1.2,0,1),ring:clamp((tt-P.ring)/0.7,0,1)}));}},
     // his board, close: the chart he pins up from the answers; the short-course platform's bar lights; the average written under it
-    {at:P.board,place:"boardGov",keys:[[P.board,800,470,1.04],[P.board+0.1,780,470,1.06]],d:3,push:0.01,draw:(x,tt)=>
+    {cut:true,at:P.board,place:"boardGov",keys:[[P.board,800,470,1.04],[P.board+0.1,780,470,1.06]],d:3,push:0.01,draw:(x,tt)=>
       rr_chart(x,290,96-18*(1-fin(tt,P.board+0.1,0.6)),1,{bars:clamp((tt-P.board-0.4)/1.4,0,1),lit:gv_io(tt,P.shortW-0.1,P.avg+0.8,0.4),avg:clamp((tt-P.avg)/1.1,0,1)})},
     // David at the door, with his question
     {at:P.door,place:"office",keys:[[P.door,760,540,1.2]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"survey");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);
@@ -138,7 +138,7 @@ scene("survey",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({take:wAt(sc
       rr_say(x,tt,P.ask,9e9,110,140,RR_Q,250,410);}},
     // the board again: his question pinned beside the chart; for a moment the dry field of the opening, pale behind it; then the chart
     // fades to pencil
-    {at:P.cant,place:"boardGov",keys:[[P.cant,960,480,1.0]],d:2,push:0.012,draw:(x,tt)=>{
+    {cut:true,at:P.cant,place:"boardGov",keys:[[P.cant,960,480,1.0]],d:2,push:0.012,draw:(x,tt)=>{
       rr_chart(x,250,96,0.96,{bars:1,avg:1,field:gv_io(tt,P.flood-0.1,P.not-0.4,0.5),pencil:fin(tt,P.not-0.1,0.9)});rr_qCard(x,1180,150,fin(tt,P.cant+0.2,0.6),0);}},
     // Yusuf looks from the chart to the question, and opens his notebook
     {at:P.needs,place:"office",keys:[[P.needs,1000,540,1.3]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"survey");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);
@@ -164,7 +164,7 @@ scene("runs",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({room:wAt(sc,"
       rr_checks(x,{n:160*(1-Math.pow(1-clamp((tt-P.run+1.4)/(P.runE-P.run+1.4),0,1),2.4)),lit:{3:fin(tt,c.id,0.4),4:fin(tt,c.twice,0.4),6:fin(tt,c.census,0.4)},
         legend:clamp((tt-c.pass)/1.8,0,1),cam});}},
     // one line grown to fill the screen, with two empty tags: whose is it, and what kind of quality does it check?
-    {at:P.big,place:"screenData",keys:[[P.big,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>{rr_nightAround(x,1);rr_checks(x,{n:160,legend:1,cam,fade:0.85*fin(tt,P.big,0.6)});
+    {cut:true,at:P.big,place:"screenData",keys:[[P.big,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>{rr_nightAround(x,1);rr_checks(x,{n:160,legend:1,cam,fade:0.85*fin(tt,P.big,0.6)});
       rr_bigLine(x,fin(tt,P.big+0.1,0.9),{count:1});
       rr_tagIn(x,690,590,"owner: ?",fin(tt,P.own,0.5),{wash:GV.red,washA:0.16});rr_tagIn(x,1230,590,"dimension: ?",fin(tt,P.dim,0.5),{wash:GV.red,washA:0.16});}}]);
   wc_paperOver(ctx,S);});
@@ -187,11 +187,11 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({nb:c.two+0.5
     // his notebook, open on Jun's desk: two words
     {at:P.nb,place:"junTop",keys:[[P.nb,960,540,1],[P.nb+0.1,960,530,1.04]],d:2,push:0.01,draw:(x,tt)=>rr_notebook(x,960,520,clamp((tt-P.w1+0.2)/0.6,0,1),clamp((tt-P.w1-0.4)/0.8,0,1))},
     // the rule register, open on Jun's desk: the owners written in; the six dimensions along the top; then each check's dimension
-    {at:P.reg,place:"junTop",keys:[[P.reg,960,540,1]],d:2,push:0.006,draw:(x,tt)=>{
+    {cut:true,at:P.reg,place:"junTop",keys:[[P.reg,960,540,1]],d:2,push:0.006,draw:(x,tt)=>{
       rr_register(x,{own:[0,1,2,3,4,5].map(own),dim:[0,1,2,3,4,5].map(dim),learning:gv_io(tt,P.learn-0.2,P.dimT-0.3,0.4),foot:clamp((tt-P.foot)/1.4,0,1)});
       rr_dims(x,P.six.map(s=>fin(tt,s-0.15,0.5)),P.six.map(s=>fin(tt,s-0.15,0.4)*(1-0.5*fin(tt,s+0.9,0.5))),clamp((tt-P.six[5]-0.5)/0.9,0,1));}},
     // the line from the night before, its two tags filled in
-    {at:P.tags,place:"screenData",keys:[[P.tags,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>{rr_checks(x,{n:160,legend:1,cam,fade:0.85});rr_bigLine(x,1,{count:1});
+    {cut:true,at:P.tags,place:"screenData",keys:[[P.tags,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>{rr_checks(x,{n:160,legend:1,cam,fade:0.85});rr_bigLine(x,1,{count:1});
       rr_tagIn(x,690,590,"owner: Learning team",fin(tt,P.tags+0.3,0.5),{wash:GV.gold,washA:0.4});rr_tagIn(x,1230,590,"dimension: completeness",fin(tt,P.tags+0.8,0.5),{wash:GV.gold,washA:0.4});}}]);
   wc_paperOver(ctx,S);});
 
@@ -233,7 +233,7 @@ scene("scorecard",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:0.9,
       rr_veil(x,[[L.cx[5],r.top,L.cw[5],r.h]],u);rr_glow(x,L.cx[5]+6,r.top+2,L.cw[5]-12,r.h-5,GV.green,0.9*fin(tt,P.acc-0.2,0.5),14);
       rr_cellCard(x,Math.min(L.cx[5]+L.cw[5]/2,1560-260),(t6+b8)/2,u,["Planning's number matches the census report","owner: Planning"],b8-t6);}},
     // Planning's room: Clara at her wall screen sees the same row, and nods
-    {at:P.room,place:"planning",keys:[[P.room,1000,520,1.12]],d:2,draw:(x,tt)=>{rr_planScreen(x,1);
+    {cut:true,at:P.room,place:"planning",keys:[[P.room,1000,520,1.12]],d:2,draw:(x,tt)=>{rr_planScreen(x,1);
       person(x,"clara",1400,905,0.8,{pose:"listen",t:tt,flip:true,nod:rr_nod(tt,P.nod)});rr_plate(x,tt,P.room+0.4,null,1400,250,["Clara Jensen","Planning"]);}},
     // the office: David's question, answered
     {at:P.tick,place:"office",keys:[[P.tick,620,500,1.35]],d:2,draw:(x,tt)=>{rr_officeScreen(x,"score");gv_deskBook(x);rr_binders(x,{gone9:true});rr_officeChart(x,1);rr_officeQ(x,1);
@@ -291,19 +291,19 @@ scene("level",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({at16:wAt(sc,
       rr_rule(x,CX,CY,1000,rr_tomCard(1,lv),{signer:"",lit:{3:gv_io(tt,P.chose+0.2,P.warn-0.3,0.4),2:fin(tt,P.warn-0.2,0.4)}});
       rr_level(x,LX,LY,fin(tt,P.warn,0.5),fin(tt,P.stop,0.5),6*clamp((tt-P.warn)/Math.max(0.6,P.five-P.warn),0,1),RR_LV,"enrolments with no email");}},
     // Planning's room: Clara at her wall screen; any difference, and nobody ships
-    {at:P.plan,place:"planning",keys:[[P.plan,1000,520,1.12],[P.plan+0.1,1250,560,1.35]],d:2.2,push:0,draw:(x,tt)=>{rr_planScreen(x,0);
+    {cut:true,at:P.plan,place:"planning",keys:[[P.plan,1000,520,1.12],[P.plan+0.1,1250,560,1.35]],d:2.2,push:0,draw:(x,tt)=>{rr_planScreen(x,0);
       person(x,"clara",1400,905,0.8,{pose:"listen",pose2:"explain",mix:gv_io(tt,P.any-0.2,P.pcard,0.5),t:tt,flip:true});
       rr_plate(x,tt,P.plan+0.5,P.any-0.1,1640,330,["Clara Jensen","Planning"]);rr_say(x,tt,P.any,9e9,1440,215,["Any difference,","and nobody ships."],1410,470);}},
     // her card, on Planning's desk: the opposite level, stop on any difference, because that number goes to the government; each owner
     // signs: Clara first, and her card is stamped
-    {at:P.pcard,place:"planTop",keys:[[P.pcard,960,540,1]],d:3,push:0.01,draw:(x,tt)=>withA(x,1-fin(tt,TS-0.25,0.25),()=>{
+    {cut:true,at:P.pcard,place:"planTop",keys:[[P.pcard,960,540,1]],d:3,push:0.01,draw:(x,tt)=>withA(x,1-fin(tt,TS-0.25,0.25),()=>{
       rr_rule(x,CX,CY,1000,RR_RLC,{signer:"Clara Jensen",sign:clamp((tt-c.signs+0.15)/0.65,0,1),stamp:fin(tt,c.signs+0.55,0.3),lit:{2:gv_io(tt,P.pcard+0.2,P.gov+0.1,0.4),3:gv_io(tt,P.gov,c.signs-0.2,0.4)}});
       rr_level(x,LX,LY,1,1,6*fin(tt,P.pcard+0.3,0.8),RR_LVC,"differences from the census");})},
     // then Tom, on his desk: his card comes in, he signs, and it's stamped
     {at:TS,place:"tomTop",keys:[[TS,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{const e=easeCam(clamp((tt-TS-0.1)/0.5,0,1));withA(x,clamp(e*1.6,0,1),()=>{
       rr_rule(x,lerp(CX+500,CX,e),CY,1000,RR_RLT,{signer:"Tom Whitfield",sign:clamp((tt-TS-0.6)/0.6,0,1),stamp:fin(tt,TS+1.2,0.3)});rr_level(x,LX,LY,1,1,null,RR_LV,"enrolments with no email");});}},
     // Jun's screen: the page of the night's checks; the two rules' lines light gold as the data team writes them into the checks
-    {at:P.page,place:"screenData",keys:[[P.page,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>
+    {cut:true,at:P.page,place:"screenData",keys:[[P.page,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>
       rr_checks(x,{n:160,legend:1,lit:{5:fin(tt,P.page+0.4,0.5),6:fin(tt,P.page+0.7,0.5)},cam})},
     // the team's board, close: the two signed cards keep their gold; a third, with nobody beside it, its owner and its reason empty;
     // warning slips pile up against it, unread; then it's struck through, "off", and it goes grey
@@ -389,11 +389,11 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:1.4,more
       rr_covers(x,[fin(tt,P.stop,0.4),fin(tt,P.plan,0.4),fin(tt,P.stop+0.45,0.4),fin(tt,P.stop+0.9,0.4)]);rr_night(x,0.4,[]);}},
     // the morning: the scorecard of the 19th, wide; one red cell, the learning team's completeness, and grey where nothing was checked;
     // then close, the learning row lit
-    {at:P.morn,place:"screenGov",keys:[[P.morn,...GV_SKV.all],[P.red-0.6,...RR_SKCAM]],d:1.6,push:0,draw:(x,tt,cam)=>{
+    {cut:true,at:P.morn,place:"screenGov",keys:[[P.morn,...GV_SKV.all],[P.red-0.6,...RR_SKCAM]],d:1.6,push:0,draw:(x,tt,cam)=>{
       const L=rr_scorecard(x,cam,{rows:RR_SK19,sections:RR_SEC19,date:"19 October 2026",hi:4,hiA:fin(tt,P.red,0.5)}),r=L.rows[4];
       rr_glow(x,L.cx[1]+6,r.top+2,L.cw[1]-12,r.h-5,GV.red,0.9*fin(tt,P.red,0.4),14);}},
     // Tom's desk: the issue log; the night's failure is written in, with its owner and a date, and lit
-    {at:P.log,place:"tomTop",keys:[[P.log,960,540,1]],d:3,push:0.01,draw:(x,tt)=>rr_issueLog(x,LX,LY,LW,{write:clamp((tt-P.log-0.3)/1.3,0,1),hiA:fin(tt,P.date,0.5)})},
+    {cut:true,at:P.log,place:"tomTop",keys:[[P.log,960,540,1]],d:3,push:0.01,draw:(x,tt)=>rr_issueLog(x,LX,LY,LW,{write:clamp((tt-P.log-0.3)/1.3,0,1),hiA:fin(tt,P.date,0.5)})},
     // Tom reads it: six; something broke
     {at:P.tom,place:"tom",keys:[[P.tom,900,500,1.08]],d:2,push:0.01,draw:(x,tt)=>{rr_tomDesk(x,tt,{expr:"concerned",nod:rr_nod(tt,P.tom+1.0)},q=>rr_tomScreenList(q,6));
       rr_say(x,tt,P.tom+0.4,9e9,700,170,["Six. Something broke."],1290,450);}},
@@ -403,13 +403,13 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({scr:1.4,more
     // the team's list now holds six: the walk-in from February, and five First Aid enrolments from last night
     {at:P.list,place:"screenLearn",keys:[[P.list,960,440,1.0]],d:2,push:0.01,draw:(x,tt,cam)=>rr_list(x,RR_L6,{cam,rowA:RR_L6.map((r,i)=>i?fin(tt,P.list+0.4+0.22*i,0.35):1)})},
     // by noon: each enrolment gets its email, and a learner registered
-    {at:P.noon,place:"tomTop",keys:[[P.noon,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:P.noon,place:"tomTop",keys:[[P.noon,960,540,1]],d:3,push:0.01,draw:(x,tt)=>{
       rr_sixCards(x,RR_L6.map((r,i)=>clamp((tt-P.reg-0.1-0.42*i)/0.6,0,1)),fin(tt,P.noon+0.1,0.6));rr_clock(x,1800,300,fin(tt,P.noon+0.2,0.5));}},
     // that night: the cell washes back to green, and the grey fills in
     {at:P.green,place:"screenGov",keys:[[P.green,...RR_SKCAM]],d:2,push:0.01,draw:(x,tt,cam)=>{const mx=clamp((tt-P.gr+0.2)/1.2,0,1);
       rr_scorecard(x,cam,{rows:RR_SK19,after:RR_SK20,mx,sections:RR_SEC19,afterSections:RR_SEC20,date:mx<0.5?"19 October 2026":"20 October 2026",hi:4,hiA:1});}},
     // the issue log: the failure's line closed
-    {at:P.close,place:"tomTop",keys:[[P.close,960,540,1]],d:3,push:0.01,draw:(x,tt)=>rr_issueLog(x,LX,LY,LW,{hiA:1,stamp:fin(tt,P.close+0.4,0.4)})}]);
+    {cut:true,at:P.close,place:"tomTop",keys:[[P.close,960,540,1]],d:3,push:0.01,draw:(x,tt)=>rr_issueLog(x,LX,LY,LW,{hiA:1,stamp:fin(tt,P.close+0.4,0.4)})}]);
   wc_paperOver(ctx,S);});
 
 // ---- 10 · Measured, not surveyed: binder 9's line runs now; a rule without an owner is sent back; like the Nilometer, a measure, not a
@@ -441,7 +441,7 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
       if(sw>0)withA(x,clamp(sw*1.6,0,1),()=>rr_rule(x,lerp(1100,460,sw),130,1000,RR_RLM,{signer:"Mei Tanaka",sign:clamp((tt-P.swap-0.35)/0.45,0,1),stamp:fin(tt,P.swap+0.85,0.25)}));}},
     // Yusuf's board: the survey's chart on the left, the red morning's scorecard printed on the right; between them, for a moment, the
     // column with its gold mark. Then close on the printout: what it can trust, what's held back, and who fixes it
-    {at:P.board,place:"boardGov",keys:[[P.board,950,460,1.15],[P.knows-0.3,1260,455,1.5]],d:1.8,push:0,draw:(x,tt,cam)=>{
+    {cut:true,at:P.board,place:"boardGov",keys:[[P.board,950,460,1.15],[P.knows-0.3,1260,455,1.5]],d:1.8,push:0,draw:(x,tt,cam)=>{
       // (as the camera closes on the printout, the frame comes to the chart: its words fade as it does, and none is ever cut)
       rr_fadeCut(x,()=>rr_chart(x,250,273,0.52,{bars:1,avg:1,z:cam.z,pencil:fin(tt,P.guess,0.7)}));
       const wT=gv_io(tt,P.trust-0.1,P.held,0.4),wH=gv_io(tt,P.held-0.1,P.fix,0.4),wF=fin(tt,P.fix-0.1,0.4),
@@ -460,3 +460,6 @@ scene("measured",(ctx,S,t,sc)=>{const c=sc.cues,P=rr_once(sc,"P",()=>({runs:wAt(
         {pose:"listen",pose2:"reach",mix:fin(tt,P.film-0.4,0.5),t:tt});}}]);
   gv_end(ctx,S,t,P.end,"Rules that run","A quality rule is a check with an owner.","Film 5 of 10");
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["measured"]);

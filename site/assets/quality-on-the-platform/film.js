@@ -1819,6 +1819,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1908,12 +1923,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3472,7 +3494,7 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({clara:wAt(sc
     {at:0,place:"planClose",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gq_planDesk(x,tt,{draw:gq_census({lit:gv_io(tt,P.chk,P.sl,0.5)})});
       gq_tags(x,GQ_GO,{u:[fin(tt,P.cen,0.9),fin(tt,P.lists,0.9)]});gu_nameCard(x,1610,420,"Clara Jensen","Planning",gv_io(tt,P.clara-0.1,P.sl-0.4,0.4));}},
     // until now: Clara and Yusuf in her office, as Off the shelf drew them, and her question; the colours fade a little
-    {at:P.sl,place:"planning",keys:[[P.sl,900,520,1.1],[P.sl+0.1,880,510,1.14]],d:4,draw:(x,tt)=>{gq_planWide(x,tt,{clara:{mix:fin(tt,P.said-0.4,0.6)}});gq_memory(x,fin(tt,P.sl,0.8));
+    {cut:true,at:P.sl,place:"planning",keys:[[P.sl,900,520,1.1],[P.sl+0.1,880,510,1.14]],d:4,draw:(x,tt)=>{gq_planWide(x,tt,{clara:{mix:fin(tt,P.said-0.4,0.6)}});gq_memory(x,fin(tt,P.sl,0.8));
       gu_nameCard(x,1300,236,"Yusuf Demir","data governance lead",gv_io(tt,P.yus-0.1,P.said+0.8,0.4));gu_filmTag(x,1600,140,"Off the shelf",fin(tt,P.yus,0.5),{align:"right"});
       gq_say(x,tt,P.said,P.ran+0.6,270,214,["Which number","do I trust?"],440,462);}},
     // a night's checks on Jun's screen: a failed one says only its name; whose data? nobody's
@@ -3585,7 +3607,7 @@ scene("typed",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ev:wAt(sc,"c
     {at:P.src,place:"desk",keys:[[P.src,960,500,1]],push:0.02,draw:(x,tt)=>{const f=gq_ecSheet(x,90,70,1740,{test:fin(tt,P.tst,0.5),since:fin(tt,P.since,0.5)});
       gq_never(x,f,{stop:fin(tt,P.stp,0.6),never:fin(tt,P.nv,0.8),broke:fin(tt,P.brk,0.6)});}},
     // once the old emails are corrected at the source: the clean-up struck through, and the test's since, so it checks every row
-    {at:P.gs,place:"desk",keys:[[P.gs,960,500,1]],push:0.02,draw:(x,tt)=>{gq_req(x,1260,60,fin(tt,P.gs+0.2,0.6));gq_clSheet(x,80,90,1150,{go:fin(tt,P.cu,0.9)});
+    {cut:true,at:P.gs,place:"desk",keys:[[P.gs,960,500,1]],push:0.02,draw:(x,tt)=>{gq_req(x,1260,60,fin(tt,P.gs+0.2,0.6));gq_clSheet(x,80,90,1150,{go:fin(tt,P.cu,0.9)});
       gq_ecSheet(x,80,330,1600,{gone:fin(tt,P.row,0.9)});}}],sc.dur));
   wc_year(ctx,56,72,"From 2 November 2026",gv_io(t,P.fm+0.3,P.src-0.2,0.4));});
 
@@ -3601,7 +3623,7 @@ scene("loaded",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({fl:wAt(sc,"
     // at the enrolments' door: two rows with no ID can't pass the expectation; they're kept out, and counted
     {at:P.ap,place:"bigPlat",keys:[[P.ap,960,540,1]],push:0.02,draw:(x,tt)=>gq_door(x,tt,{flow:clamp((tt-P.ap-0.2)/2.2,0,1),out:clamp((tt-P.kept)/1.6,0,1)})},
     // the count reaches the learning team, in its issue
-    {at:P.re,place:"bigLearn",keys:[[P.re,960,540,1]],push:0.02,draw:(x,tt)=>gq_issue(x,GQ_ISSUE2,{u:GQ_ISSUE2.map((_,i)=>fin(tt,P.re+0.2+0.08*i,0.5)),
+    {cut:true,at:P.re,place:"bigLearn",keys:[[P.re,960,540,1]],push:0.02,draw:(x,tt)=>gq_issue(x,GQ_ISSUE2,{u:GQ_ISSUE2.map((_,i)=>fin(tt,P.re+0.2+0.08*i,0.5)),
       lit:[gv_io(tt,P.own,P.fx,0.4),0,0,fin(tt,P.own+0.3,0.5)],litCol:[0,0,0,GV.amber]})},
     // and fixed where it's kept: Tom gives the two their IDs, in the short-course platform
     {at:P.fx-0.3,place:"tom",keys:[[P.fx-0.3,960,540,1]],push:0.02,draw:(x,tt)=>gq_tomDesk(x,tt,{},q=>gq_tomScreen(q,"two",{fix:clamp((tt-P.fx-0.2)/2.0,0,1)*2}))}],sc.dur));});
@@ -3616,7 +3638,7 @@ scene("watch",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({nc:wAt(sc,"h
     // one night, on the data team's big screen: the badges that arrived, half with no credit
     {at:0,place:"bigNight",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_badges(x,{u:clamp((tt-0.3)/1.2,0,1),lit:fin(tt,P.nc,0.6)})},
     // credit_points' tests: not null, and 0 isn't empty, so it passes; no rule for a microcredential's credit
-    {at:P.ps,place:"desk",keys:[[P.ps,960,500,1]],push:0.02,draw:(x,tt)=>{gq_cpSheet(x,{u:clamp((tt-P.ps-0.1)/0.9,0,1),pass:fin(tt,P.ep,0.6)});gq_whose(x,1300,140,fin(tt,P.nr,0.6),"no rule for it");}},
+    {cut:true,at:P.ps,place:"desk",keys:[[P.ps,960,500,1]],push:0.02,draw:(x,tt)=>{gq_cpSheet(x,{u:clamp((tt-P.ps-0.1)/0.9,0,1),pass:fin(tt,P.ep,0.6)});gq_whose(x,1300,140,fin(tt,P.nr,0.6),"no rule for it");}},
     // the badges' quality page: an alert; anomaly detection, in preview; the profile, and that night's point, one in two
     {at:P.cg,place:"bigNight",keys:[[P.cg,960,540,1]],push:0.02,draw:(x,tt)=>gq_quality(x,tt,{st:fin(tt,P.ct,0.5),ad:gv_io(tt,P.ln,P.pr,0.5),pr:fin(tt,P.pr,0.6),
       u:clamp((tt-P.cn)/1.6,0,1)*0.9+fin(tt,P.tw,0.6)*0.1,usual:fin(tt,P.us,0.8),last:fin(tt,P.tw,0.8),al:fin(tt,P.tw+0.6,0.6)})},
@@ -3641,7 +3663,7 @@ scene("card",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ld:wAt(sc,"la
     // what the platform found last night, a row for each check on each table, in the SQL editor
     {at:0,place:"bigPlat",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_results(x,tt,{u:clamp((tt-P.ld+0.4)/1.6,0,1),tab:gv_io(tt,P.bt,sc.dur,0.5)})},
     // the scorecard, the platform's table under the tests'; each table's owner, from the project
-    {at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gq_platCard(x,{on:fin(tt,P.own-0.3,0.8),meta:fin(tt,P.own+0.3,0.9),lit:gv_io(tt,P.rs,P.ib,0.5)})},
+    {cut:true,at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gq_platCard(x,{on:fin(tt,P.own-0.3,0.8),meta:fin(tt,P.own+0.3,0.9),lit:gv_io(tt,P.rs,P.ib,0.5)})},
     // every result to one owner, not a shared inbox
     {at:P.ib,place:"boardGov",keys:[[P.ib,960,540,1]],push:0.02,draw:(x,tt)=>gq_toOwners(x,{x:fin(tt,P.sh,0.6),u:[0,1,2].map(i=>fin(tt,P.one+0.25*i,0.9))})},
     // measured, not surveyed: last night's totals, the tests' and the platform's
@@ -3668,7 +3690,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({op:wAt(sc,"o
     {at:P.kn,place:"planClose",keys:[[P.kn,960,540,1]],push:0.02,draw:(x,tt)=>{gq_planDesk(x,tt,{clara:{expr:"smile"},draw:gq_census({tick:[0,1,2,3].map(i=>fin(tt,P.nm+0.25*i,0.5))})});
       gq_tags(x,GQ_WHO,{u:[0,1,2].map(i=>fin(tt,P.who+0.3*i,0.9)),wash:GV.gold});}},
     // the data's way again: rules you write, and monitoring for the rest
-    {at:P.ls,place:"boardGov",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gq_way(x,tt,{pin:[1,1,1,1],cat:[1,1,1,1],own:1,w:[fin(tt,P.rw,0.8),fin(tt,P.rw+0.3,0.8),fin(tt,P.mn,0.8)]})},
+    {cut:true,at:P.ls,place:"boardGov",keys:[[P.ls,960,540,1]],push:0.02,draw:(x,tt)=>gq_way(x,tt,{pin:[1,1,1,1],cat:[1,1,1,1],own:1,w:[fin(tt,P.rw,0.8),fin(tt,P.rw+0.3,0.8),fin(tt,P.mn,0.8)]})},
     // the data team's board: the next film's card lifts
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,0,1],lift:[0,0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"This morning",gv_io(t,0.3,P.am-0.6,0.4));

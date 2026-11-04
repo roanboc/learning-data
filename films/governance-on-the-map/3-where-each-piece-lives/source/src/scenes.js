@@ -20,7 +20,7 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
     // the court in the morning: down the hall from beside the seat, the officials in their rows, the historians at their desks at the left
     {at:0,keys:[[0,960,520,1.0]],push:0.03,draw:(x,tt)=>oh_court(x,tt,{write:0.3})},
     // the historians, closer, at their brushes; then close, from above, a sheet being written
-    {at:s2,keys:[[s2,430,640,1.9]],push:0.03,draw:(x,tt)=>oh_court(x,tt,{write:clamp((tt-s2)/4,0.3,0.8)})},
+    {cut:true,at:s2,keys:[[s2,430,640,1.9]],push:0.03,draw:(x,tt)=>oh_court(x,tt,{write:clamp((tt-s2)/4,0.3,0.8)})},
     {at:s2b,keys:[[s2b,960,480,1.0]],push:0.03,draw:(x,tt)=>oh_writeClose(x,tt,clamp((tt-s2b)/5.5,0.05,1))},
     // the office that makes the annals: its members round the long table, the historians' notes in bundles; one reads, one writes
     {at:s3,keys:[[s3,960,500,1.0]],push:0.03,draw:(x,tt)=>oh_office(x,tt)},
@@ -49,11 +49,11 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       person(q,"ohAn",lerp(1500,1080,easeCam(u)),1060,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5)>0?"walkA":"walkB",mix:m,t:tt,flip:true});
       person(q,"ohSon",lerp(1640,1250,easeCam(u)),1070,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5+1)>0?"walkA":"walkB",mix:m,t:tt+1,flip:true});}})},
     // into the mountains: the two scholars lead, the keepers carry the chests up the path towards us
-    {at:s9,keys:[[s9,960,560,1.0]],push:0.03,draw:(x,tt)=>{x.drawImage(gv_place("path"),0,0,W,H);oh_walkers(x,tt-s9,[["ohAn",0.56],["ohSon",0.5],["ohK1",0.38,true],["ohK2",0.3,true]],0.06);
+    {cut:true,at:s9,keys:[[s9,960,560,1.0]],push:0.03,draw:(x,tt)=>{x.drawImage(gv_place("path"),0,0,W,H);oh_walkers(x,tt-s9,[["ohAn",0.56],["ohSon",0.5],["ohK1",0.38,true],["ohK2",0.3,true]],0.06);
       oh_nameCard(x,1480,250,"An Ui · Son Hong-rok","local scholars",gv_io(tt,s9+0.6,s9b-0.2,0.4));}},
     // the cave by night: one keeps watch, the other sleeps; then the snow, and they change over (only once both shots show the same
     // two, so the dissolve between them never lays one pose over another)
-    {at:s9b,keys:CAVE,d:s10-s9b,push:0,draw:(x,tt)=>oh_cave(x,tt,{swap:0})},
+    {cut:true,at:s9b,keys:CAVE,d:s10-s9b,push:0,draw:(x,tt)=>oh_cave(x,tt,{swap:0})},
     {at:s9c,keys:CAVE,d:s10-s9b,push:0,draw:(x,tt)=>oh_cave(x,tt,{snow:true,swap:clamp((tt-s9c-0.9)/1.2,0,1)})},
     // 1603: the court prints them again, from that one copy, open on its stand
     {at:s10,keys:[[s10,880,500,1.12]],push:0.02,draw:(x,tt)=>oh_print(x,tt,{pile:3+Math.floor((tt-s10)*0.42),source:clamp((tt-s10-0.4)/0.8,0,1)})},
@@ -62,7 +62,7 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       chest:k=>k==="capital"?clamp((tt-P.capital-0.2)/0.8,0,1):clamp((tt-P.mount-0.4-M5.indexOf(k)*0.25)/0.8,0,1)})},
     // a historian climbs, years later, among the maples; airs the books in the sun; writes down what he finds
     {at:s12,keys:[[s12,960,560,1.0]],push:0.03,draw:(x,tt)=>{x.drawImage(gv_place("pathAutumn"),0,0,W,H);oh_walkers(x,tt-s12,[["ohAir",0.45]],0.08);}},
-    {at:s12b,keys:[[s12b,960,520,1.0]],push:0.03,draw:(x,tt)=>oh_airing(x,tt,{books:clamp((tt-s12b+0.4)/2.0,0.2,1)})},
+    {cut:true,at:s12b,keys:[[s12b,960,520,1.0]],push:0.03,draw:(x,tt)=>oh_airing(x,tt,{books:clamp((tt-s12b+0.4)/2.0,0.2,1)})},
     {at:s12c,keys:[[s12c,960,480,1.0]],push:0.03,draw:(x,tt)=>oh_writeClose(x,tt,clamp((tt-s12c)/3.5,0.05,1),{seed:421,sleeve:[96,110,136]})},
     // the annals survive, complete
     {at:s13,keys:[[s13,960,520,1.0],[s13+0.1,960,540,1.08]],d:6,push:0,draw:(x,tt)=>{x.drawImage(gv_place("shelf"),0,0,W,H);
@@ -92,11 +92,11 @@ scene("nine",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       gv_behind(x,"ohPlanner",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"listen",t:tt,flip:true});x.drawImage(gv_place("facDesk"),0,0,W,H);
       oh_onScreen(x,GV_FX.screen,q=>oh_tablePage(q,tt,{}));oh_nameCard(x,1330,330,"Planner","Faculty of Business",gv_io(tt,0.6,s2-0.1,0.4));}},
     // her screen, close: she asks to read it, and writes why, and until when; the owner's line, "owner: Jun Park"; her request goes to him
-    {at:s2,place:"screenFac",keys:[[s2,960,430,1.0],[s2+0.1,940,424,1.05],[c.names-0.2,780,450,1.38]],d:2.2,draw:(x,tt)=>oh_tablePage(x,tt,{
+    {cut:true,at:s2,place:"screenFac",keys:[[s2,960,430,1.0],[s2+0.1,940,424,1.05],[c.names-0.2,780,450,1.38]],d:2.2,draw:(x,tt)=>oh_tablePage(x,tt,{
       press:gv_io(tt,P.askTo+0.05,P.askTo+0.45,0.15),why:clamp((tt-P.plan+0.15)/1.3,0,1),until:clamp((tt-P.plan-1.35)/0.5,0,1),
       ownerLit:gv_io(tt,P.own-0.1,s3+0.5,0.4),sent:fin(tt,P.goes-0.15,0.5),sentText:"request · to Jun Park"})},
     // the data team's room: Jun, busy, on the phone; at his elbow, a pile of requests, hers near the bottom; he built the table
-    {at:s3,place:"data",keys:[[s3,1182,540,1.3],[s3+0.1,1190,536,1.33]],d:3,draw:(x,tt)=>{oh_pile(x,1540,668,{lit:fin(tt,s3+0.4,0.6)});
+    {cut:true,at:s3,place:"data",keys:[[s3,1182,540,1.3],[s3+0.1,1190,536,1.33]],d:3,draw:(x,tt)=>{oh_pile(x,1540,668,{lit:fin(tt,s3+0.4,0.6)});
       person(x,"jun",1330,905,0.8,{pose:"phone",t:tt});oh_nameCard(x,960,640,"Jun Park","data team",gv_io(tt,s3+0.4,P.built-0.2,0.4));
       oh_tagAt(x,tt,P.built,null,1050,560,"built the table",{size:30});}},
     // Planning's room: the product's card on the wall, its owner, Clara Jensen, ringed in gold, since October; Clara beside it
@@ -113,7 +113,7 @@ scene("nine",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
     // had he said yes: a pale picture of what didn't happen, his hand on "approve", a gold "no" across it, "not the owner"
     {at:s7,place:"screenData",keys:[[s7,960,470,1.0],[s7+0.1,950,474,1.05]],d:3,draw:(x,tt)=>oh_approve(x,tt,{hand:clamp((tt-P.yes+0.3)/0.8,0,1),no:clamp((tt-P.isnt+0.1)/0.9,0,1),tagAt:P.decided})},
     // the page, close: typed by hand when the table was built, and nobody kept it in step
-    {at:s8,place:"screenFac",keys:[[s8,800,415,1.3],[s8+0.1,790,415,1.34]],d:3,draw:(x,tt)=>oh_tablePage(x,tt,{hand:fin(tt,P.byHand-0.1,0.5),amber:fin(tt,P.nobody-0.1,0.6)})}
+    {cut:true,at:s8,place:"screenFac",keys:[[s8,800,415,1.3],[s8+0.1,790,415,1.34]],d:3,draw:(x,tt)=>oh_tablePage(x,tt,{hand:fin(tt,P.byHand-0.1,0.5),amber:fin(tt,P.nobody-0.1,0.6)})}
   ]);
   setScreen(ctx,S);oh_pill(ctx,t,[[0,null],[c.feb-0.25,"February"]],1-fin(t,c.breath,0.5));wc_paperOver(ctx,S);});
 
@@ -130,7 +130,7 @@ scene("seven",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s
       oh_onScreen(x,GV_PX.screens[0],q=>oh_fwdPage(q));oh_onScreen(x,GV_PX.screens[1],q=>oh_tablePage(q,tt,{}));
       oh_nameCard(x,1570,300,"Sam Okafor","platform team",gv_io(tt,0.5,s2-0.1,0.4));oh_tagAt(x,tt,0.9,null,500,300,"waited 9 days",OH_GOLDTAG);}},
     // the table's page, close: the owner's line, "owner: Jun Park", which Sam taps
-    {at:s2,place:"screenPlat",keys:[[s2,960,430,1.0],[s2+0.1,820,415,1.3]],d:2.2,draw:(x,tt)=>{oh_tablePage(x,tt,{amber:fin(tt,P.right,0.5)});
+    {cut:true,at:s2,place:"screenPlat",keys:[[s2,960,430,1.0],[s2+0.1,820,415,1.3]],d:2.2,draw:(x,tt)=>{oh_tablePage(x,tt,{amber:fin(tt,P.right,0.5)});
       const h=gv_io(tt,P.right-0.5,c.asks-0.6,0.5);if(h>0.01)oh_pointHand(x,lerp(700,610,h),lerp(1150,300,easeCam(h)),"sam");}},
     // Yusuf's office: Sam comes in, and asks where governance's pieces live
     {at:s3,place:"office",keys:[[s3,800,560,1.2],[s3+0.1,810,556,1.23]],d:3,draw:(x,tt)=>{const wk=gv_walk(tt,s3+0.1,60,520,280);
@@ -162,10 +162,10 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
     // her map, close: each place a card, with the pieces it holds
     {at:s2,place:"ohMap",keys:MK,d:s5-s2,push:0,draw:(x,tt)=>oh_map(x,{card:k=>(tt-s2-0.1-OH_APPS.findIndex(a=>a.k===k)*0.16)/0.5})},
     // one rule: every piece has one home, where it's changed, and an owner, who decides it
-    {at:s3,place:"ohMap",keys:MK,d:s5-s2,push:0,draw:(x,tt)=>{oh_map(x,{home:fin(tt,P.oneHome,0.6),dim:fin(tt,s3+0.1,0.5)});
+    {cut:true,at:s3,place:"ohMap",keys:MK,d:s5-s2,push:0,draw:(x,tt)=>{oh_map(x,{home:fin(tt,P.oneHome,0.6),dim:fin(tt,s3+0.1,0.5)});
       oh_ruleTable(x,tt,{a:fin(tt,P.oneRule-0.2,0.5),piece:i=>fin(tt,c.every+0.1+i*0.22,0.4),home:i=>fin(tt,P.oneHome-0.1+i*0.22,0.4),owner:i=>fin(tt,P.anOwner-0.1+i*0.22,0.4)});}},
     // every other place keeps a copy, dashed, and says where it came from, and when
-    {at:s4,place:"ohMap",keys:MK,d:s5-s2,push:0,draw:(x,tt)=>oh_map(x,{home:1,copy:fin(tt,P.keeps,0.6),from:k=>fin(tt,P.came-0.1+FROM.indexOf(k)*0.2,0.5),
+    {cut:true,at:s4,place:"ohMap",keys:MK,d:s5-s2,push:0,draw:(x,tt)=>oh_map(x,{home:1,copy:fin(tt,P.keeps,0.6),from:k=>fin(tt,P.came-0.1+FROM.indexOf(k)*0.2,0.5),
       cardLit:k=>FROM.includes(k)?gv_io(tt,P.keeps,s5,0.5)*0.7:0})},
     // a product's owner, for one: at home in the data team's repository; the catalogue copies it, from the repository; the platform's page
     // was typed by hand
@@ -235,7 +235,7 @@ scene("check",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s
       night(x,tt,q=>oh_map(q,{home:1,copy:1,from:1,use:1,flow:k=>k==="promises"?0:1}));
       oh_flow(x,OH_FLOWS.promises,1,off>=1?{col:WC_PENCIL,dash:[8,10],a:0.55}:{lit:fl});if(off<1)oh_lightAt(x,OH_FLOWS.promises,((tt-s3)*0.7)%1,fl);}},
     // every night, a check walks each arrow in turn and compares each copy with its home; the first night it stops at the platform's page
-    {at:s4,place:"ohMap",keys:MK,d:sR-s3,push:0,draw:(x,tt)=>{const am=fin(tt,P.old-0.1,0.5);
+    {cut:true,at:s4,place:"ohMap",keys:MK,d:sR-s3,push:0,draw:(x,tt)=>{const am=fin(tt,P.old-0.1,0.5);
       night(x,tt,q=>oh_map(q,{home:1,copy:1,from:1,use:1,flow:1,useLit:i=>{const t0=w0("use"+i)+0.5;return gv_io(tt,t0,t0+0.6,0.2)*0.8;},
         chip:(k,i)=>{let lit=0;for(const f of WALK)for(const [ck,ci] of (TO[f]||[]))if(ck===k&&ci===i){const t0=w0(f)+0.5;lit=Math.max(lit,gv_io(tt,t0,t0+0.6,0.2)*0.8);}
           return k==="plat"&&i===0?{lit,amber:am}:{lit};}}));
@@ -281,7 +281,7 @@ scene("theirs",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,
     {at:s3,place:"screenFac",keys:[[s3,960,430,1.0],[s3+0.1,880,430,1.2]],d:2,draw:(x,tt)=>oh_tablePage(x,tt,{owner:"Clara Jensen",from:1,press:gv_io(tt,c.next+0.2,c.next+0.6,0.15),
       sent:fin(tt,P.straight-0.2,0.5),sentText:"request · to Clara Jensen",sentCol:GV.gold,sentInk:GV.goldInk})},
     // Planning's room: Clara reads it, and approves it, in a day
-    {at:s4,place:"planning",keys:[[s4,1100,520,1.25],[s4+0.1,1110,516,1.28]],d:3,draw:(x,tt)=>{oh_productCard(x,600,190,{ring:0});
+    {cut:true,at:s4,place:"planning",keys:[[s4,1100,520,1.25],[s4+0.1,1110,516,1.28]],d:3,draw:(x,tt)=>{oh_productCard(x,600,190,{ring:0});
       person(x,"clara",1400,905,0.8,{pose:"hold",t:tt,carry:oh_heldReq,flip:true});
       oh_tagAt(x,tt,P.decides+0.1,null,1400,400,"approved · until 30 June",{size:30,wash:GV.green,washA:0.45,col:GV.greenInk});}},
     // the plan for the next series: over Noor's map, a card for each part its films build, in the tools
@@ -310,3 +310,6 @@ const WC_PLACES={court:oh_paintCourt,deskTop:oh_paintDeskTop,annalsOffice:oh_pai
   faculty:gv_paintFaculty,facDesk:gv_paintFacultyDesk,screenFac:c=>gv_paintScreenDesk(c,GV_ROOM.fac),data:c=>gv_paintData(c,{}),screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),
   planning:gv_paintPlanning,boardPlan:c=>gv_paintBoardClose(c,GV_ROOM.plan),platClose:gv_paintPlatformClose,platDesk:gv_paintPlatformDesk,screenPlat:c=>gv_paintScreenDesk(c,GV_ROOM.plat),
   office:gv_paintOffice,desk:gv_paintDesk,floor:gv_paintFloor,noor:gv_paintNoor,ohMap:oh_paintMap};
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["nine", "seven", "way"]);

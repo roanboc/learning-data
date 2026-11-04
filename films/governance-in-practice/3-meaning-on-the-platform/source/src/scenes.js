@@ -37,7 +37,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({mei:wAt(sc,"
       gu_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,P.mei-0.1,P.ch-0.2,0.4));}},
     // her screen, close: award's page; the words before Monday struck through, and Monday's coming in under them, microcredentials and the
     // 6 credit points lit as they're said; published on Monday
-    {at:P.ch,place:"regScreen",keys:[[P.ch,960,540,1]],push:0.02,draw:(x,tt)=>gm_termScreen(x,{own:1-fin(tt,P.ch+0.6,0.8),ch:clamp((tt-P.chW-0.1)/1.0,0,1),
+    {cut:true,at:P.ch,place:"regScreen",keys:[[P.ch,960,540,1]],push:0.02,draw:(x,tt)=>gm_termScreen(x,{own:1-fin(tt,P.ch+0.6,0.8),ch:clamp((tt-P.chW-0.1)/1.0,0,1),
       nw:clamp((tt-P.chW-0.3)/2.4,0,1),mc:fin(tt,P.mc,0.5),six:fin(tt,P.six,0.5),pub:fin(tt,P.cnt,0.6)})},
     // until now: Mei and Yusuf in her office, as Off the shelf drew them, and what she said slowed her down; the colours fade a little
     {at:P.sl,place:"regRoom",keys:[[P.sl,1080,520,1.12],[P.sl+0.1,1080,510,1.16]],d:4,draw:(x,tt)=>{gm_meiYusuf(x,tt,{mei:{expr:"concerned"}});gm_memory(x,fin(tt,P.sl,0.8));
@@ -88,10 +88,10 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({beta:wAt(sc,"
       gv_io(tt,P.dom,P.tab-0.4,0.4),gv_io(tt,P.tab,P.from,0.4),fin(tt,P.from,0.5)],al:[0,1,2].map(i=>gv_io(tt,P.tab+0.25*i,P.from,0.4))})},
     // Noor's map, close: award's business term at home, published one way to its page; a pencil reaching for the page stops, crossed:
     // a change is made at home
-    {at:P.mp,place:"mapClose",keys:[[P.mp,960,500,1]],push:0.02,draw:(x,tt)=>gm_mapHome(x,tt,{a:fin(tt,P.mp,0.6),pub:clamp((tt-P.pub)/1.0,0,1),hl:gv_io(tt,P.kept,P.made+0.6,0.5),
+    {cut:true,at:P.mp,place:"mapClose",keys:[[P.mp,960,500,1]],push:0.02,draw:(x,tt)=>gm_mapHome(x,tt,{a:fin(tt,P.mp,0.6),pub:clamp((tt-P.pub)/1.0,0,1),hl:gv_io(tt,P.kept,P.made+0.6,0.5),
       reach:clamp((tt-P.made+0.2)/1.0,0,1)*(1-fin(tt,P.never+1.2,0.6)),stop:fin(tt,P.never,0.6)})},
     // Planning: Clara reads award's page beside her table, on her wall screen
-    {at:P.rd,place:"planning",keys:[[P.rd,900,480,1.08]],push:0.02,draw:(x,tt)=>{gm_planWall(x,tt,{clara:{mix:fin(tt,P.rd+1.0,0.6)}});
+    {cut:true,at:P.rd,place:"planning",keys:[[P.rd,900,480,1.08]],push:0.02,draw:(x,tt)=>{gm_planWall(x,tt,{clara:{mix:fin(tt,P.rd+1.0,0.6)}});
       gu_nameCard(x,120,330,"Clara Jensen","Planning",gv_io(tt,P.rd+0.3,P.ci-0.2,0.4));}},
     // Genie One, the platform's assistant: what counts as an award? It answers in the page's words, and cites the page
     {at:P.ci,place:"bigPlan",keys:[[P.ci,960,540,1]],push:0.02,draw:(x,tt)=>gm_genie(x,tt,{question:"What counts as an award?",q:clamp((tt-P.ci-0.1)/1.0,0,1),
@@ -108,7 +108,7 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({own:wAt(sc,"k
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>{gm_copySheet(x,{rows:5,y:50,u:clamp((tt-0.2)/0.9,0,1),def:fin(tt,P.own,0.5)});
       gm_modSheet(x,{u:clamp((tt-P.tab+0.3)/0.9,0,1),doc:fin(tt,P.same,0.5)});}},
     // the whole copy: its source named, the glossary's term, and the day it was synced, lit as they're said
-    {at:P.nm,place:"desk",keys:[[P.nm,960,500,1]],push:0.02,draw:(x,tt)=>{gm_copySheet(x,{y:60,def:1,src:[fin(tt,P.src,0.5),fin(tt,P.src+0.3,0.5),fin(tt,P.term,0.5),0,fin(tt,P.day,0.5)]});
+    {cut:true,at:P.nm,place:"desk",keys:[[P.nm,960,500,1]],push:0.02,draw:(x,tt)=>{gm_copySheet(x,{y:60,def:1,src:[fin(tt,P.src,0.5),fin(tt,P.src+0.3,0.5),fin(tt,P.term,0.5),0,fin(tt,P.day,0.5)]});
       gu_filmTag(x,1830,740,"One word, one home",fin(tt,P.nm+0.6,0.5),{align:"right"});}},
     // core_award in the catalog: each build writes its comment from the project's words, one way, never back
     {at:P.sd,place:"big",keys:[[P.sd,960,540,1]],push:0.02,draw:(x,tt)=>gm_comment(x,tt,{ar:clamp((tt-P.build)/0.9,0,1),c:clamp((tt-P.desc)/1.0,0,1),back:clamp((tt-P.back+0.2)/1.0,0,1)})}],sc.dur));});
@@ -133,7 +133,7 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
     {at:P.tu,place:"bigReg",keys:[[P.tu,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reviews(x,{mei:clamp((tt-P.ap)/0.8,0,1),yus:clamp((tt-P.cf)/0.8,0,1)});
       gu_filmTag(x,1770,170,"Who does what, end to end",fin(tt,P.tu+0.6,0.5),{align:"right"});}},
     // the registrar's office: Mei at her desk, and a thread from her screen to each place her words are used
-    {at:P.sw,place:"registrar",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},bar:"GitHub · pull request",draw:gm_prSmall});
+    {cut:true,at:P.sw,place:"registrar",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},bar:"GitHub · pull request",draw:gm_prSmall});
       gm_touchTags(x,{u:[0,1,2,3].map(i=>fin(tt,P.used-0.4+0.25*i,0.9))});}}],sc.dur));
   // the day, in the corner, only where no screen's bar is under it
   wc_year(ctx,56,72,"Tuesday morning",gv_io(t,P.sw+0.3,sc.dur,0.4));});
@@ -148,7 +148,7 @@ scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc
     // the sync's report again, on Jun's screen by day: the number in the new words, and its line on vars: a number may belong in one
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_varsReport(x,{six:fin(tt,P.six,0.5),vars:fin(tt,P.vars,0.6)})},
     // dbt_project.yml's vars: the setting the new words need, lit; under it, the setting as a dial at 6, on a thread from its line
-    {at:P.kp,place:"desk",keys:[[P.kp,960,500,1]],push:0.02,draw:(x,tt)=>{const f=gm_varsSheet(x,{u:clamp((tt-P.kp)/0.8,0,1),lit:fin(tt,P.set,0.5)});
+    {cut:true,at:P.kp,place:"desk",keys:[[P.kp,960,500,1]],push:0.02,draw:(x,tt)=>{const f=gm_varsSheet(x,{u:clamp((tt-P.kp)/0.8,0,1),lit:fin(tt,P.set,0.5)});
       if(f.rows.length>5)gm_thread(x,[f.tx+gu_mw(x,GM_VARS[5].s)+16,f.rows[5]],[1500,546],clamp((tt-P.min-0.2)/0.9,0,1),{bend:-30});
       gm_dial(x,1500,660,110,6,{a:fin(tt,P.min,0.6),label:"one setting"});}},
     // core_credential version 2: Jun's new column reads the setting, a thread from the dial; every count of awards reads the column
@@ -179,7 +179,7 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
         lit:[gv_io(tt,P.mv+0.4,P.counts,0.4),fin(tt,P.cred,0.5),fin(tt,P.aw,0.5),fin(tt,P.by,0.5),fin(tt,P.counts,0.5)]});
       gm_mvPR(x,tt,{a:fin(tt,P.bd,0.6),ck:clamp((tt-P.bd-0.4)/1.6,0,1),ok:clamp((tt-P.rv)/0.8,0,1)});}},
     // the metric view's page in the catalog: its owner, and what reads it: the draft submission and Planning's census report
-    {at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gm_lineage(x,tt,{own:gv_io(tt,P.rd+0.4,P.dr,0.4),r:[clamp((tt-P.dr)/1.0,0,1),clamp((tt-P.cen)/1.0,0,1)]})},
+    {cut:true,at:P.rd,place:"big",keys:[[P.rd,960,540,1]],push:0.02,draw:(x,tt)=>gm_lineage(x,tt,{own:gv_io(tt,P.rd+0.4,P.dr,0.4),r:[clamp((tt-P.dr)/1.0,0,1),clamp((tt-P.cen)/1.0,0,1)]})},
     // Planning's census report: its own count, struck through; the metric's, in its place
     {at:P.ow,place:"bigPlan",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>gm_census(x,{x:clamp((tt-P.nei)/1.0,0,1),nw:fin(tt,P.way,0.7),lit:gv_io(tt,P.way+0.4,sc.dur,0.5)})}],sc.dur));});
 
@@ -194,12 +194,12 @@ scene("agents",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cl:wAt(sc,"
       clara:{mix:fin(tt,P.cl+0.6,0.6)}});gu_nameCard(x,120,330,"Clara Jensen","Planning",gv_io(tt,P.cl-0.1,P.gq-0.2,0.4));}},
     // Genie One, close: how many awards did we confer this year? 4,867, from the metric, and award's page, cited for what an award is;
     // its own guess, struck through; where the answer came from, lit
-    {at:P.gq,place:"bigPlan",keys:[[P.gq,960,540,1]],push:0.02,draw:(x,tt)=>{gm_genie(x,tt,{question:GM_ASK,q:1,
+    {cut:true,at:P.gq,place:"bigPlan",keys:[[P.gq,960,540,1]],push:0.02,draw:(x,tt)=>{gm_genie(x,tt,{question:GM_ASK,q:1,
         a:fin(tt,P.ans,0.6),big:"4,867 awards conferred in 2026",words:GM_ANS,wordsCol:GM_VI,ww:960,cites:[["metric","awards_conferred"],["page","Award"]],
         ci:[fin(tt,P.met,0.6),fin(tt,P.cite,0.6)],cl:[gv_io(tt,P.met,P.cite,0.4)+fin(tt,P.shows,0.5),gv_io(tt,P.cite,P.guess,0.4)+fin(tt,P.shows+0.3,0.5)],violet:1,
         guess:gv_io(tt,P.guess-0.3,P.shows+0.6,0.4),no:clamp((tt-P.guess-0.4)/0.6,0,1)});}},
     // the data team's agent: its data source is the metric; the same question, the same answer
-    {at:P.bt,place:"big",keys:[[P.bt,960,540,1]],push:0.02,draw:(x,tt)=>gm_agent(x,tt,{src:gv_io(tt,P.on,P.same+1.0,0.5),q:clamp((tt-P.bt-0.2)/1.2,0,1),a:fin(tt,P.same,0.6)})},
+    {cut:true,at:P.bt,place:"big",keys:[[P.bt,960,540,1]],push:0.02,draw:(x,tt)=>gm_agent(x,tt,{src:gv_io(tt,P.on,P.same+1.0,0.5),q:clamp((tt-P.bt-0.2)/1.2,0,1),a:fin(tt,P.same,0.6)})},
     // on Yusuf's board: the page and the metric, and the three that read them, each saying 4,867
     {at:P.one,place:"boardGov",keys:[[P.one,960,500,1]],push:0.02,draw:(x,tt)=>gm_oneNumber(x,tt,{u:[fin(tt,P.ppl,0.9),fin(tt,P.ag,0.9),fin(tt,P.ag+0.4,0.9)]})}],sc.dur));});
 
@@ -224,7 +224,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({tb:wAt(sc,"s
     {at:0,place:"registrar",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},draw:gm_meiTerm(0,0)});
       gm_used(x,tt,{u:[fin(tt,P.tb,0.9),fin(tt,P.ct,0.9),fin(tt,P.an,0.9),fin(tt,P.an+0.3,0.9)]});}},
     // the floor of offices: the registrar's office, where she decides, lit; a violet thread from it to each office that reads it
-    {at:P.dc,place:"floor",keys:[[P.dc,960,540,1]],push:0.02,draw:(x,tt)=>gm_floor(x,tt,{home:fin(tt,P.once-0.4,0.8),u:[0,1,2,3].map(i=>clamp((tt-P.car-0.2*i)/1.0,0,1)),
+    {cut:true,at:P.dc,place:"floor",keys:[[P.dc,960,540,1]],push:0.02,draw:(x,tt)=>gm_floor(x,tt,{home:fin(tt,P.once-0.4,0.8),u:[0,1,2,3].map(i=>clamp((tt-P.car-0.2*i)/1.0,0,1)),
       pose:{mei:{expr:"smile"}}})},
     // submission day, on Yusuf's desk: both reports say 4,867, counted by the same metric, with the same words
     {at:P.dy,place:"deskGov",keys:[[P.dy,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reports(x,{day:1,tick:fin(tt,P.both+0.8,0.6),n:1,seal:1,sent:1,lit:[fin(tt,P.wd,0.6),fin(tt,P.wd,0.6)]});
@@ -235,3 +235,6 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({tb:wAt(sc,"s
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[0,0,1],lift:[0,0,0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.dy+0.3,P.ls-0.2,0.4));
   gv_end(ctx,S,t,P.end,"Meaning on the platform","One meaning, read by people, reports and agents.","Film 3 of 6");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["setting"]);

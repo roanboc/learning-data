@@ -789,17 +789,24 @@ function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^
    ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
    1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
    place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot. */
+   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
+   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
 function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
   z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
 function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
 function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -1347,6 +1354,21 @@ function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.
   if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
   else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
   ctx.restore();ctx.restore();return hands;}
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
+// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
+// the size of the canvas, kept); what they hold is drawn with them
+let AG_FADE=null;
+const ag_personWhole=ag_person;
+ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
+    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
+  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
 // people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
 // stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
 // o.covered); the player on the site never stops for it
@@ -2450,9 +2472,10 @@ function ml_columns(ctx,a,o){o=o||{};const x0=o.x0||620,x1=o.x1||1300,y=o.y||170
 
 // made once per chapter, the first time it draws: its cues are known by then
 const ml_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default): the river into today takes longer
+// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default): the river into today takes longer; a shot
+// marked cut comes in on a cut
 function ml_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
@@ -2493,16 +2516,16 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ml_crowd(x,tt,{turn:ag_in(tt,P.prog+1,1.2)*0.6});
       const p=ml_pop(tt,P.prog+0.1,null);ag_textCard(x,140,170,520,{kick:"Programme · last to fly",title:"Lawrence Sperry",sub:"with Emil Cachin"},{k:p.k,a:p.a});}},
     // closer: the two of them side by side in the cockpit, Sperry at the wheel and Cachin beside him on the right, their names
-    {at:P.close,place:null,keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:P.close,place:null,keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.012*Math.sin(tt*0.9),turn:0.04*Math.sin(tt*1.1)});
       const p1=ml_pop(tt,P.young,null),p2=ml_pop(tt,P.cachin,null);
       ag_textCard(x,200,236,380,{title:"Lawrence Sperry",sub:"pilot, 21"},{tail:{side:"right",at:0.6,px:700,py:372},k:p1.k,a:p1.a});
       ag_textCard(x,1380,110,340,{title:"Emil Cachin",sub:"mechanic"},{tail:{side:"bottom",at:0.3,px:1466,py:280},k:p2.k,a:p2.a});}},
     // flying by hand, closer on Sperry: each gust tips a wing, and his arms bring it back; his back aches
-    {at:P.pit,place:null,keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
+    {cut:true,at:P.pit,place:null,keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:roll(tt),turn:turn(tt)+0.06*Math.sin(tt*1.3),gust:gustA(tt),lift:ach,nod:-0.03*ach});}},
     // the danger, drawn as a diagram: the aeroplane tipped, sliding sideways and down; the path fades before the water
-    {at:P.slip,place:null,keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
+    {cut:true,at:P.slip,place:null,keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
       const a=ag_in(tt,P.slip+0.1,0.5);ag_box(x,360,170,1200,620,26,{a});ml_slip(x,360,170,1200,620,ag_in(tt,P.slide-0.2,P.fall-P.slide+0.8),{t:tt,a,roll:0.36*ag_in(tt,P.slip+0.3,1.2)});}},
     // Sperry's answer: his box, cut open, on a card; four gyroscopes spinning, their axes upright as it tips; a valve, a piston, the wing's edge
     {at:P.box,place:"mlSeine",keys:[[P.box,960,540,1.02],[P.box+0.1,960,500,1.06]],d:10,push:0.01,draw:(x,tt)=>{ml_veil(x,0.6);ag_box(x,190,150,1540,640,26,{a:ag_in(tt,P.box,0.4)});
@@ -2510,7 +2533,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ag_T(x,"4 gyroscopes",666,734,{w:700,size:30,align:"center",a:ag_in(tt,P.four,0.4)});
       ag_T(x,"level",b.level[0]+150,b.level[1]+10,{w:700,size:30,col:AG.green,a:ag_in(tt,P.lev+0.4,0.4)});}},
     // over the river: the flying boat passes the grandstand, and heads in the crowd turn to follow it
-    {at:P.pass,place:"mlSeine",keys:[[P.pass,860,560,1.12],[P.pass+0.1,900,560,1.16]],d:3,push:0.01,draw:(x,tt)=>{const bx=lerp(700,1060,clamp((tt-P.pass)/3,0,1));
+    {cut:true,at:P.pass,place:"mlSeine",keys:[[P.pass,860,560,1.12],[P.pass+0.1,900,560,1.16]],d:3,push:0.01,draw:(x,tt)=>{const bx=lerp(700,1060,clamp((tt-P.pass)/3,0,1));
       ml_boat(x,bx,540,0.95,{t:tt,shadow:600,who:[{who:{skin:[232,198,170],top:{c:[70,62,56]},cap:[104,72,48],goggles:true}},{who:{skin:[220,182,150],top:{c:[104,100,96]},cap:[84,82,80]}}]});
       ml_crowd(x,tt,{turn:-0.6+1.3*ag_in(tt,P.pass+0.2,2.4)});}},
     // in the cockpit, Sperry lets go of the wheel and raises his hands, open; the wheel holds still; Cachin looks up at them
@@ -2801,9 +2824,9 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(s
     // Jun's room: next March's calendar; the evidence lines up into a recipe, with its test; Noor approves it; it runs each census day; the agent rests
     {at:0,place:"lab",keys:[[0,980,530,1.02],[0.1,990,530,1.03]],d:P.web,push:0.01,draw:(x,tt)=>ml_recipeRoom(x,tt,P)},
     // once: an agent whose plan named no tools took the long way, out to the web, though Docs had the rules; now each plan names them
-    {at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
+    {cut:true,at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
     // two columns on the wall: a plain script for the steps that are known, an agent for the steps nobody can write in advance
-    {at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
+    {cut:true,at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
       aL:ag_in(tt,P.known-0.3,0.6),rm:ag_sine(ag_in(tt,P.plainS-0.7,0.9)),rl:ag_in(tt,P.plainS,0.4),aR:ag_in(tt,P.keep-0.4,0.6),am:ag_sine(ag_in(tt,P.agents-0.3,1.1)),
       al:ag_in(tt,P.agents+0.6,0.4)})}]);
   ml_kick(ctx,t,[[0,"Today"],[P.web-0.2,"Once"],[P.names-0.1,"Today"]],1);});
@@ -2910,6 +2933,9 @@ function ml_recap(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,W=500;
   if(fl>0&&wa<1){x.save();x.globalAlpha*=out;x.translate(F.x,F.y);x.scale(F.s,F.s);ag_box(x,-W/2,-h/2,W,h,22,{a:(1-wa)*ag_in(tt,P.brought,0.2)});x.restore();}
   x.save();x.translate(F.x-(A.x+W/2),F.y-(A.y+h/2));ag_evidence(x,A.x,A.y,W,ML_ANSW,ML_EV,{a:wa*out});x.restore();
   const ap=ml_pop(tt,P.evid,null);ml_approve(x,A.x,A.y+h+22,W,"Jun",clamp((tt-P.decide+0.1)/0.6,0,1),{k:ap.k,a:ap.a*out});}
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["question", "hands", "loop", "answer"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

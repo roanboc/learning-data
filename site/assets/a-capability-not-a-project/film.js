@@ -1835,6 +1835,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1924,12 +1939,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -4356,15 +4378,15 @@ scene("dike",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     // each landowner's stretch is staked along the crest, and they stand by theirs with a spade
     {at:st,place:"bank",keys:[[st,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,(i,e)=>clamp((tt-st-0.5-i*0.5-e*0.5)/0.5,0,1));cp_owners(x,tt);})},
     // from above: the more land, the longer the stretch
-    {at:ae,place:"aerial",keys:[[ae,960,540,1.0]],push:0.02,draw:(x,tt)=>{cp_aerialLands(x,CP_LANDS,i=>clamp((tt-ae-0.2-i*0.45)/1.2,0,1));
+    {cut:true,at:ae,place:"aerial",keys:[[ae,960,540,1.0]],push:0.02,draw:(x,tt)=>{cp_aerialLands(x,CP_LANDS,i=>clamp((tt-ae-0.2-i*0.45)/1.2,0,1));
       cp_onAerial(()=>{for(const [id,X,Z] of [["cpOwner",-30,30],["cpOwnerB",9,31],["cpOwnerC",29,30]])cp_who(x,CP_AERIAL,id,X,0,Z,{t:tt,pose:"cp_staff",carry:cp_heldSpadeUp});});}},
     // every year the board walks the dikes: a staff taps bare clay, the clerk cuts a notch, the landowner pays
     {at:bw,place:"bankWalk",keys:[[bw,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_boardWalk(x,tt,bw+0.2)},
     // whoever relies on the dikes pays for them, and has a say
-    {at:pc,place:"bank",keys:[[pc,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,()=>1);cp_owners(x,tt);
+    {cut:true,at:pc,place:"bank",keys:[[pc,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,()=>1);cp_owners(x,tt);
       cp_skyCard(x,tt,P.relies,560,190,"interest",-0.04,GV.gold);cp_skyCard(x,tt,P.paysW,960,150,"payment",0.03,GV.gold);cp_skyCard(x,tt,P.say,1360,200,"say",-0.02,GV.gold);})},
     // behind kept dikes: a field ploughed, children at the farmhouse door, their mother with a basket
-    {at:sf,keys:[[sf,1130,600,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("farm"),0,0,W,H);cp_farmLife(x,tt,sf);}},
+    {cut:true,at:sf,keys:[[sf,1130,600,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("farm"),0,0,W,H);cp_farmLife(x,tt,sf);}},
     // Rijnland's charter, its seal hanging from a cord
     {at:ch,place:"charter",keys:[[ch,960,540,1.0]],push:0.04},
     // today: a road on the dike, two people cycling, a canal held higher than the fields, a pumping station
@@ -4405,7 +4427,7 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
       else gv_walker(x,"yusuf",wk,CP_DV.fy+30,0.8,{t:tt,carry:cp_heldReport,flip:true});
       gv_say(x,560,330,["what does it do?"],1050,520,{a:gv_io(tt,P.cantSee,c.report,0.3),k:0.9+0.1*spring(fin(tt,P.cantSee,0.5))});}},
     // the project's final report, open on the desk: what it did, each line ticked; its last page, After June, and nothing on it
-    {at:rp,keys:[[rp,960,500,1.0],[P.nothing-0.5,1400,370,2.0]],d:1.6,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("desk"),0,0,W,H);cp_report(x,{open:clamp((tt-rp-0.3)/0.9,0,1),tick:j=>clamp((tt-P.lists-0.1-j*0.3)/0.4,0,1)});}},
+    {cut:true,at:rp,keys:[[rp,960,500,1.0],[P.nothing-0.5,1400,370,2.0]],d:1.6,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("desk"),0,0,W,H);cp_report(x,{open:clamp((tt-rp-0.3)/0.9,0,1),tick:j=>clamp((tt-P.lists-0.1-j*0.3)/0.4,0,1)});}},
     // rules nobody keeps up drift: the glossary's card for award fading, a check's light going amber, then red
     {at:dr,place:"dvc",keys:[[dr,960,540,1.0]],push:0.03,draw:(x,tt)=>{cp_dvc(x,tt,{david:{pose:"listen",expr:"concerned",flip:false}});x.fillStyle=rgba(WC_PAPER,0.66);x.fillRect(0,0,W,H);
       cp_glossCard(x,620,470,fin(tt,dr+0.2,0.5),{fade:clamp((tt-dr-0.9)/2.2,0,1)});cp_checkLamp(x,1560,600,fin(tt,dr+0.5,0.5),clamp((tt-dr-1.0)/1.2,0,2));}},
@@ -4459,12 +4481,12 @@ scene("seven",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s
     {at:0,place:"band",keys:[[0,711,467,1.35],[c.c1-1.0,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>cp_band(x,{cap:j=>j<7?cap(tt,j):0,tok:j=>fin(tt,c.term+0.25+j*0.2,0.4)})},
     // two frameworks, as checklists: the wheel Yusuf drew, each part lit as a card covers it; a printed checklist, each line ticked; the
     // wheel's documents and the list's records find no card
-    {at:ck,place:"desk",keys:[[ck,960,500,1.0]],push:0.02,draw:(x,tt)=>{const s1=1-easeCam(fin(tt,ck+0.1,0.9)),s2=1-easeCam(fin(tt,P.twoF,0.9));
+    {cut:true,at:ck,place:"desk",keys:[[ck,960,500,1.0]],push:0.02,draw:(x,tt)=>{const s1=1-easeCam(fin(tt,ck+0.1,0.9)),s2=1-easeCam(fin(tt,P.twoF,0.9));
       x.save();x.translate(0,900*s1);cp_wheelSheet(x,{lit:k=>fin(tt,P.asCk+0.12*k,0.35),doc:fin(tt,P.oneMore,0.5)});x.restore();
       x.save();x.translate(0,900*s2);cp_listSheet(x,{tick:j=>clamp((tt-P.asCk-0.2-j*0.22)/0.35,0,1),miss:fin(tt,P.oneMore+0.25,0.5)});x.restore();}},
     // the eighth card, keep records only as long as they're needed; nobody does it yet, so it has no token: the camera moves in on it and
     // its neighbour, with its token, as it will again for the red card (the frame's right edge held on the band's, the words it leaves fading)
-    {at:kr,place:"band",keys:[[kr,960,540,1.0],[c.yet-0.8,W,586,2.47]],d:2.2,push:0,draw:(x,tt)=>{cp_fadeCut(x,()=>cp_band(x,{cap:j=>j<7?1:cap(tt,7),tok:j=>j<7?1:0}),cp_bandBlocks(x));
+    {cut:true,at:kr,place:"band",keys:[[kr,960,540,1.0],[c.yet-0.8,W,586,2.47]],d:2.2,push:0,draw:(x,tt)=>{cp_fadeCut(x,()=>cp_band(x,{cap:j=>j<7?1:cap(tt,7),tok:j=>j<7?1:0}),cp_bandBlocks(x));
       const [cx,cy]=cp_capXY(7),a=fin(tt,c.yet,0.5);if(a>0.01)withA(x,a,()=>{x.save();x.setLineDash([6,6]);x.strokeStyle=rgba(WC_PENCIL,0.7);x.lineWidth=2.4;x.strokeRect(cx+CP_BD.cw-64,cy+-2,60,46);x.restore();});}}]);
   wc_paperOver(ctx,S);});
 
@@ -4526,9 +4548,9 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     // the planner: the project's card still ends on 30 June; the new line runs on past it, off the planner's edge
     {at:pl,place:"dvc",keys:[[pl,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:clamp((tt-pl-0.3)/1.8,0,1)}})},
     // the money goes to one capability: a gold thread from the budget's line to govern data, and on along the dotted lines to the services
-    {at:mn,place:"services",keys:[[mn,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_services(x,{serv:()=>1,line:()=>1,budget:fin(tt,mn+0.3,0.5),gold:clamp((tt-mn-0.6)/(P.which+1.0-mn-0.6),0,1)})},
+    {cut:true,at:mn,place:"services",keys:[[mn,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_services(x,{serv:()=>1,line:()=>1,budget:fin(tt,mn+0.3,0.5),gold:clamp((tt-mn-0.6)/(P.which+1.0-mn-0.6),0,1)})},
     // next year's new work starts with the red card
-    {at:fs,place:"band",keys:[[fs,960,540,1.0],[P.red-0.9,1320,600,1.6]],d:1.8,push:0,draw:(x,tt)=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,wash:()=>1,first:fin(tt,P.red-0.2,0.5)})}]);
+    {cut:true,at:fs,place:"band",keys:[[fs,960,540,1.0],[P.red-0.9,1320,600,1.6]],d:1.8,push:0,draw:(x,tt)=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,wash:()=>1,first:fin(tt,P.red-0.2,0.5)})}]);
   wc_paperOver(ctx,S);});
 
 // ---- 8 · What it keeps: floods brought projects, and projects end; keeping the land dry never did; next November, imagined ----
@@ -4560,6 +4582,9 @@ scene("keeps",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s
   gv_end(ctx,S,t,c.breath+0.2,"A capability, not a project","A project builds it. A capability keeps it.","Film 1 of 3");
   if(t>c.breath+1.4)withA(ctx,fin(t,c.breath+1.6,0.8),()=>wc_tag(ctx,960,780,"Next: Who does what, end to end",{align:"center",size:30,w:600}));
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["ends", "seven"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

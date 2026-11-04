@@ -1802,6 +1802,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1891,12 +1906,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -4247,7 +4269,7 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({board:wAt
       sp_codeRings(x,clamp((tt-P.same+0.2)/1.6,0,1));
       wc_hand(x,"the same customer?",960,866,{size:46,col:WC_PENCIL,align:"center",p:clamp((tt-P.same-1.0)/0.9,0,1)});}},
     // the whiteboard: the business lines' sums, and the total, a red question mark; the desk calendar turns, Friday to Monday
-    {at:c.monday-0.3,place:"board08",keys:[[c.monday-0.3,940,530,1.0],[c.monday+1.6,960,520,1.04]],d:2,draw:(x,tt)=>{
+    {cut:true,at:c.monday-0.3,place:"board08",keys:[[c.monday-0.3,940,530,1.0],[c.monday+1.6,960,520,1.04]],d:2,draw:(x,tt)=>{
       sp_board(x,tt,{q:clamp((tt-P.add+0.1)/0.7,0,1)});const days=["Fri","Sat","Sun","Mon"],f=[c.monday+0.05,c.monday+0.65,c.monday+1.25];
       let i=0;f.forEach(ft=>{if(tt>=ft+0.4)i++;});const turning=f.findIndex(ft=>tt>=ft&&tt<ft+0.4);
       if(turning>=0)sp_calendar(x,days[turning],days[turning+1],(tt-f[turning])/0.4);else sp_calendar(x,days[i],days[i],0);}},
@@ -4308,7 +4330,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
     {at:c.alone-0.3,place:"alone70",keys:[[c.alone-0.3,960,520,1.0]],d:2,push:0.03,draw:(x,tt)=>{SP_AL.forEach((a,i)=>{sp_aloneWindow(x,i,tt);const [wx,wy,ww]=a.win;
       sp_slip(x,wx+ww/2,wy-58,440,66,null,[-0.02,0.015,-0.01][i],["one meaning for each word"],30,fin(tt,P.same-0.2+i*0.35,0.5),311+i);});}},
     // and now together: two standing at the back hold up their binders, pass them across and swap
-    {at:c.together-0.3,place:"la80",keys:[[c.together-0.3,1450,560,1.5],[P.tog+0.5,1440,570,1.56]],d:2,draw:(x,tt)=>{const sw=P.them-0.5,r=fin(tt,sw,0.45)*(1-fin(tt,sw+0.95,0.4)),
+    {cut:true,at:c.together-0.3,place:"la80",keys:[[c.together-0.3,1450,560,1.5],[P.tog+0.5,1440,570,1.56]],d:2,draw:(x,tt)=>{const sw=P.them-0.5,r=fin(tt,sw,0.45)*(1-fin(tt,sw+0.95,0.4)),
         m=easeCam(clamp((tt-sw-0.35)/0.6,0,1)),pair=[[3,"spLa5",false],[4,"spLa7",true]];
       meeting(x,tt,{expr:tt>P.tog?"smile":"calm",seat:i=>i===0?{pose:"write",flip:false,nod:0.03*Math.sin(tt*2)}:{pose:"listen",flip:true},
         back:i=>i===3||i===4?{pose:"spShowB",pose2:"spPassS",mix:r,flip:i===4,carry:null}:null});
@@ -4367,7 +4389,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({members:wA
     // the book opens: its wheel's two rings sketched in pencil as it "draws" it; the areas come in as they're named, uneven, until the
     // centre lights and holds them true; it turns once, evenly; the other guides, on the same ground or part of it; then all of it lit,
     // and the book closes
-    {at:pg,place:"wheelpage",keys:[[pg,960,540,1.04],[pg+0.1,960,540,1.0]],d:1.6,draw:(x,tt)=>{const cu=Math.max(1-clamp((tt-pg-0.55)/0.9,0,1),clamp((tt-shut)/0.9,0,1));
+    {cut:true,at:pg,place:"wheelpage",keys:[[pg,960,540,1.04],[pg+0.1,960,540,1.0]],d:1.6,draw:(x,tt)=>{const cu=Math.max(1-clamp((tt-pg-0.55)/0.9,0,1),clamp((tt-shut)/0.9,0,1));
       if(Math.sin(Math.PI/2*easeCam(cu))<0.86){sp_wheelGuide(x,clamp((tt-P.draws-0.2)/(P.whl-P.draws+0.5),0,1));sp_wheel(x,{area:k=>fin(tt,areaAt(k),0.5),off:1-spring(fin(tt,P.gov-0.05,1.0)),turn:TAU*easeCam(clamp((tt-P.bal+0.1)/2.0,0,1)),centre:fin(tt,P.hub-0.1,0.6),
         pulse:Math.min(1,gv_io(tt,P.auth-0.2,P.auth+1.0,0.4)+gv_io(tt,P.agree-0.3,99,0.6)),spokes:clamp((tt-P.gov+0.1)/0.9,0,1),
         spokeA:0.75+0.25*gv_io(tt,P.fit-0.1,P.fit+1.0,0.3),rim:clamp((tt-P.gov-0.3)/1.0,0,1),labels:1-gv_io(tt,P.bal-0.45,P.bal+2.05,0.3),
@@ -4376,7 +4398,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({members:wA
       sp_note(x,tt,c.guides+0.15,1660,150,["DCAM","the same ground"],{out});sp_note(x,tt,P.part-0.1,262,150,["ISO 8000","data quality"],{out});
       sp_note(x,tt,P.part+1.2,1660,780,["ISO/IEC 38505","governing data"],{out});}sp_coverClose(x,cu);}},
     // closed, and back on the shelf beside the binders
-    {at:back,place:"shelf09",keys:[[back,1160,546,1.42],[back+0.1,1020,540,1.08]],d:2.4,draw:x=>sp_book(x,K.books[0],K.top,1)}]);
+    {cut:true,at:back,place:"shelf09",keys:[[back,1160,546,1.42],[back+0.1,1020,540,1.08]],d:2.4,draw:x=>sp_book(x,K.books[0],K.top,1)}]);
   sp_pill(ctx,t,[[0,"2009"]],fin(t,0.4,0.6)*(1-fin(t,P.dm+0.3,0.5)));});
 
 // ---- 5 · Governance first: the banks' regulators put governance first, a condition for all the rest; ten years on, two of thirty-one ----
@@ -4532,7 +4554,7 @@ scene("centre",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({q:wAt(sc,"b
     // the shelf again: two hands take the newest copy from it; the draft, its prop gone, settles upright
     {at:g2,place:"shelf24",keys:[[g2,820,540,1.02],[pick+0.6,1040,520,1.2]],d:2.0,draw:(x,tt,cam)=>sp_shelfAll(x,cam,{take:clamp((tt-pick)/1.0,0,1)})},
     // it opens at its wheel: every area in its place round the centre, governance, which lights gold, its spokes running out to each
-    {at:op,place:"wheelpage",keys:[[op,960,540,1.04],[op+0.1,960,520,1.0]],d:2.4,draw:(x,tt)=>{const cu=1-clamp((tt-op-0.55)/0.9,0,1);
+    {cut:true,at:op,place:"wheelpage",keys:[[op,960,540,1.04],[op+0.1,960,520,1.0]],d:2.4,draw:(x,tt)=>{const cu=1-clamp((tt-op-0.55)/0.9,0,1);
       if(Math.sin(Math.PI/2*easeCam(cu))<0.86)sp_wheel(x,{area:()=>1,rim:1,centre:fin(tt,P.gov+0.1,0.6),pulse:gv_io(tt,P.centre-0.2,P.centre+1.2,0.4),
         spokes:clamp((tt-P.gov)/0.9,0,1),spokeA:0.9});
       sp_coverClose(x,cu,3);}},
@@ -4548,6 +4570,9 @@ scene("centre",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({q:wAt(sc,"b
   gv_end(ctx,S,t,P.end,"The same problem, everywhere",null,"Prologue");
   if(t>P.end+1.2)withA(ctx,fin(t,P.end+1.4,0.8),()=>wc_tag(ctx,960,780,"Next: Off the shelf",{align:"center",size:30,w:600}));
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["centre"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

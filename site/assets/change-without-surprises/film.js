@@ -1833,6 +1833,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1922,12 +1937,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -4066,7 +4088,7 @@ scene("board",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
     // the meeting room, empty: on the wall between the whiteboard and the screen, the change board's calendar
     {at:P.room,place:"meeting",keys:[[P.room,960,540,1],[P.room+0.3,880,400,1.55]],d:1.8,draw:(x,tt)=>{cw_calSmall(x,{});x.drawImage(gv_place("meetingTable"),0,0,W,H);}},
     // the calendar, close: once a month, the next meeting circled in red
-    {at:P.cal,place:"calWall",keys:[[P.cal,960,470,1.0],[P.cal+0.1,960,460,1.04]],d:2,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:clamp((tt-P.month)/0.7,0,1)}))},
+    {cut:true,at:P.cal,place:"calWall",keys:[[P.cal,960,470,1.0],[P.cal+0.1,960,460,1.04]],d:2,draw:(x,tt)=>cw_at(x,[CW_CW.x,CW_CW.y,CW_CW.k],q=>cw_calendar(q,{ring:clamp((tt-P.month)/0.7,0,1)}))},
     // the board's form on the meeting table: what will this change affect? A pencil writes "awards?"
     {at:P.form2,place:"topMeet",keys:[[P.form2,960,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{const pen=cw_at(x,CW_BFP,q=>cw_boardForm(q,{aw:clamp((tt-P.memory)/0.9,0,1)}));
       if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.memory,P.memory+0.9),{pencil:1});}},
@@ -4097,12 +4119,12 @@ scene("uses",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
       person(x,"yusuf",1040,905,0.8,{pose:"hold",t:tt,flip:true,carry:cw_heldTitled(["Change","without","surprises"],cw_bindCol(18))});
       person(x,"jun",790,905,0.8,{pose:"listen",pose2:"point",mix:gv_io(tt,P.who-0.3,P.close+0.4,0.45),t:tt,flip:true});}},
     // the board, close: the card for the table of credentials
-    {at:P.close,place:"boardWide",keys:[[P.close,700,440,1.22],[P.close+0.1,720,440,1.28]],d:6,draw:(x,tt)=>cw_credCard(x,...CW_CARD,1)},
+    {cut:true,at:P.close,place:"boardWide",keys:[[P.close,700,440,1.22],[P.close+0.1,720,440,1.28]],d:6,draw:(x,tt)=>cw_credCard(x,...CW_CARD,1)},
     // Jun looks at the empty board
-    {at:P.look,place:"data",keys:[[P.look,700,460,1.5],[P.look+0.1,710,460,1.54]],d:3,draw:(x,tt)=>{cw_boardSmall(x);
+    {cut:true,at:P.look,place:"data",keys:[[P.look,700,460,1.5],[P.look+0.1,710,460,1.54]],d:3,draw:(x,tt)=>{cw_boardSmall(x);
       person(x,"yusuf",1040,905,0.8,{pose:"listen",t:tt,flip:true});person(x,"jun",790,905,0.8,{pose:"listen",expr:"concerned",t:tt,flip:true});}},
     // the board again: a pencil question mark beside the card; then the register's new page pinned over it
-    {at:P.back,place:"boardWide",keys:[[P.back,820,470,1.06],[P.start-0.3,1000,450,1.1]],d:2.2,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
+    {cut:true,at:P.back,place:"boardWide",keys:[[P.back,820,470,1.06],[P.start-0.3,1000,450,1.1]],d:2.2,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
       const q=cw_qDraw(x,1000,520,240,clamp((tt-P.ans+0.2)/0.9,0,1));if(q&&tt<P.ans+0.8)cw_pen(x,q[0],q[1],cw_penA(tt,P.ans-0.2,P.ans+0.7),{pencil:1});
       const d=drop(tt);if(d>0.01){x.save();x.translate(0,-60*(1-d));withA(x,clamp(d*2,0,1),()=>pg(x,tt,{pr:[0,0,0,0,0]}));gv_pin(x,CW_PAGE[0]+CW_PAGE[2]/2,CW_PAGE[1]+16,GV.red,1.6);x.restore();}}},
     // each owner writes their own line: Mei in the registrar's office
@@ -4113,7 +4135,7 @@ scene("uses",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
     {at:P.marta,place:"meeting",keys:[[P.marta,1500,560,1.3],[P.marta+0.1,1510,556,1.34]],d:2,draw:(x,tt)=>{person(x,"marta",1720,905,0.8,{pose:"write",t:tt,carry:cw_heldPage,flip:true});
       x.drawImage(gv_place("meetingTable"),0,0,W,H);}},
     // back on the board: Jun copies Finance's note in, and writes at the foot who keeps the page
-    {at:P.jun,place:"boardWide",keys:[[P.jun,890,450,1.13],[P.jun+0.1,890,450,1.15]],d:2,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
+    {cut:true,at:P.jun,place:"boardWide",keys:[[P.jun,890,450,1.13],[P.jun+0.1,890,450,1.15]],d:2,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
       const f=clamp((tt-P.jun-0.5)/1.2,0,1),ft=clamp((tt-P.jun-1.9)/1.0,0,1),[px,py,pw]=CW_PAGE,pen=pg(x,tt,{pr:[1,1,1,1,f],foot:ft});gv_pin(x,px+pw/2,py+16,GV.red,1.6);if(pen)cw_pen(x,pen[0],pen[1]);
       cw_finNote(x,1590,690,1-fin(tt,P.jun+3.2,0.6));}}]);
   setScreen(ctx,S);cw_nameCard(ctx,24,740,"Clara Jensen","Planning",gv_io(t,P.clara+0.3,P.marta,0.4));cw_nameCard(ctx,24,740,"Marta Nowak","Wallet app team",gv_io(t,P.marta+0.3,P.jun,0.4));
@@ -4135,24 +4157,24 @@ scene("note",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
     {at:0,place:"topJun",keys:[[0,800,500,1.0],[P.clip+0.3,1300,520,1.16]],d:2.2,draw:(x,tt)=>{rq(x,{});const sl=easeCam(fin(tt,P.clip,0.7));if(sl<=0.01)return;
       x.save();x.translate(700*(1-sl),-40*(1-sl));const pen=note(x,{heads:heads(tt)});x.restore();if(pen)cw_pen(x,pen[0]+700*(1-sl),pen[1],cw_penA(tt,P.h1,P.h3+0.8));}},
     // the request, close: its one change, in a box
-    {at:P.draft,place:"topJun",keys:[[P.draft,700,610,1.5]],d:2,push:0.012,draw:(x,tt)=>{const b=clamp((tt-P.rel-0.1)/1.5,0,1),pen=rq(x,{box1:b});note(x,{heads:[1,1,1]});
+    {cut:true,at:P.draft,place:"topJun",keys:[[P.draft,700,610,1.5]],d:2,push:0.012,draw:(x,tt)=>{const b=clamp((tt-P.rel-0.1)/1.5,0,1),pen=rq(x,{box1:b});note(x,{heads:[1,1,1]});
       if(pen&&b<1)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.rel+0.1,P.rel+1.6));}},
     // the board: the register's five lines wash gold, one after another
     {at:P.board,place:"boardWide",keys:[[P.board,880,450,1.1],[P.board+0.1,880,450,1.13]],d:2,draw:(x,tt)=>page(x,tt,i=>fin(tt,P.five+0.25*i,0.35))},
     // the note: what it reaches, five things
-    {at:P.list,place:"topJun",keys:[[P.list,1330,420,1.3]],d:2,push:0.01,draw:(x,tt)=>{rq(x,{box1:1});const r=clamp((tt-P.list-0.15)/1.4,0,1),pen=note(x,{reach:CW_REACH1,reachP:r});
+    {cut:true,at:P.list,place:"topJun",keys:[[P.list,1330,420,1.3]],d:2,push:0.01,draw:(x,tt)=>{rq(x,{box1:1});const r=clamp((tt-P.list-0.15)/1.4,0,1),pen=note(x,{reach:CW_REACH1,reachP:r});
       if(pen&&r<1)cw_pen(x,pen[0],pen[1]);}},
     // the board: who asked for it, and who didn't
-    {at:P.asked,place:"boardWide",keys:[[P.asked,900,450,1.06],[P.asked+0.1,901,450,1.08]],d:2,draw:(x,tt)=>{page(x,tt,()=>1);const tx=px+pw+22;
+    {cut:true,at:P.asked,place:"boardWide",keys:[[P.asked,900,450,1.06],[P.asked+0.1,901,450,1.08]],d:2,draw:(x,tt)=>{page(x,tt,()=>1);const tx=px+pw+22;
       [0,1].forEach(i=>cw_lineTag(x,tx,cw_rowY(py,pw,i),"asked for it",GV.green,GV.greenInk,fin(tt,P.ask+0.2*i,0.45)));
       [[2,P.dash],[4,P.fore],[3,P.app]].forEach(([i,t0])=>cw_lineTag(x,tx,cw_rowY(py,pw,i),"didn't ask",GV.grey,WC_INK,fin(tt,t0,0.45)));}},
     // the note: who must be told, four names, and a quick look at each owner
-    {at:P.names,place:"topJun",keys:[[P.names,1152,640,1.25]],d:2,push:0.006,draw:(x,tt)=>{rq(x,{box1:1});const n=clamp((tt-P.mei+0.1)/(P.marta+0.9-P.mei),0,1),pen=note(x,{reach:CW_REACH1,names:CW_NAMES1,namesP:n});
+    {cut:true,at:P.names,place:"topJun",keys:[[P.names,1152,640,1.25]],d:2,push:0.006,draw:(x,tt)=>{rq(x,{box1:1});const n=clamp((tt-P.mei+0.1)/(P.marta+0.9-P.mei),0,1),pen=note(x,{reach:CW_REACH1,names:CW_NAMES1,namesP:n});
       if(pen&&n<1)cw_pen(x,pen[0],pen[1]);
       [["mei",P.mei,GV_ROOM.reg],["clara",P.clara,GV_ROOM.plan],[null,P.fin,null],["marta",P.marta,GV_ROOM.meet]].forEach(([id,t0,wall],i)=>
         cw_cameo(x,1184+i*136,636,58,id,fin(tt,t0-0.1,0.45),{wall,word:"Finance",size:26,t:tt}));}},
     // Marta, who leads the wallet app team, in the meeting room
-    {at:P.room,place:"meeting",keys:[[P.room,1220,600,1.5],[P.room+0.1,1220,600,1.56]],d:2.4,draw:(x,tt)=>{gv_behind(x,"marta",1200,GV_MT.top,GV_MT.s,{pose:"listen",t:tt});
+    {cut:true,at:P.room,place:"meeting",keys:[[P.room,1220,600,1.5],[P.room+0.1,1220,600,1.56]],d:2.4,draw:(x,tt)=>{gv_behind(x,"marta",1200,GV_MT.top,GV_MT.s,{pose:"listen",t:tt});
       x.drawImage(gv_place("meetingTable"),0,0,W,H);}}]);
   setScreen(ctx,S);cw_nameCard(ctx,24,740,"Marta Nowak","Wallet app team",gv_io(t,P.room+0.4,sc.dur+1,0.4));
   wc_paperOver(ctx,S);});
@@ -4169,14 +4191,14 @@ scene("breaks",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,
     {at:0,place:"planning",keys:[[0,1000,480,1.22],[0.1,1010,476,1.26]],d:3,draw:(x,tt)=>{cw_dashSmall(x,{});
       person(x,"clara",1420,905,0.8,{pose:"listen",pose2:"point",mix:gv_io(tt,0.6,P.close+0.4,0.45),t:tt,flip:true});}},
     // the dashboard, close: one learner's credit towards an award, in two parts; relabelled, the big microcredential drops out
-    {at:P.close,place:"planScreen",keys:[[P.close,960,520,1.0],[P.mc-0.4,1080,560,1.16]],d:2.4,push:0.01,draw:(x,tt)=>cw_dash(x,{rel:fin(tt,P.rel,0.7),drop:clamp((tt-P.drop)/1.3,0,1)})},
+    {cut:true,at:P.close,place:"planScreen",keys:[[P.close,960,520,1.0],[P.mc-0.4,1080,560,1.16]],d:2.4,push:0.01,draw:(x,tt)=>cw_dash(x,{rel:fin(tt,P.rel,0.7),drop:clamp((tt-P.drop)/1.3,0,1)})},
     // the board: Finance's forecast, pinned beside its line, moves too
     {at:P.both,place:"boardWide",keys:[[P.both,1400,560,1.3]],d:2,push:0.01,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);cw_who(x,px,py,pw,[1,1,1,1,1],{foot:1});gv_pin(x,px+pw/2,py+16,GV.red,1.6);
       cw_lineGold(x,px,py,pw,4,0.8);cw_forecast(x,1560,cw_rowY(py,pw,4)-110,{shift:clamp((tt-P.both-0.4)/1.2,0,1)});}},
     // a learner's phone: the wallet app shows the microcredential as an award
     {at:P.wallet,place:"phoneBg",keys:[[P.wallet,960,500,1.0],[P.wallet+0.1,960,480,1.04]],d:3,draw:(x,tt)=>cw_phone(x,{rel:fin(tt,P.wrel,0.7)})},
     // the table of credentials, a ruled page: the same, but for one word in one row; and changing what it means is breaking
-    {at:P.table,place:"topJun",keys:[[P.table,860,480,1.1],[P.same,900,470,1.2]],d:2.4,push:0.01,draw:(x,tt)=>cw_table(x,{rel:fin(tt,P.same,0.7),red:fin(tt,P.breaking,0.6)})},
+    {cut:true,at:P.table,place:"topJun",keys:[[P.table,860,480,1.1],[P.same,900,470,1.2]],d:2.4,push:0.01,draw:(x,tt)=>cw_table(x,{rel:fin(tt,P.same,0.7),red:fin(tt,P.breaking,0.6)})},
     // 1967: switching sides of the road, the cars cross to the right together
     {at:P.road,place:"x67dawn",keys:[[P.road,960,560,1.0]],d:2,push:0.02,draw:(x,tt)=>cw_dawn(x,tt,dawnP)},
     // the data team's room: Mei, Jun and Yusuf at the board with the note; Mei, who owns the meaning, decides
@@ -4203,18 +4225,18 @@ scene("adds",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
       pen=cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:cr,box2:b2}));cw_at(x,CW_IN4,q=>cw_impact(q,{reach:CW_REACH1,names:CW_NAMES1,stampP:1,mt:1}));
       if(pen&&b2<1)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.cross,P.cross+2.1));}},
     // the table of credentials: the new column slides in, in green; its yes cells light violet, with the 6 credit points of Mei's rule
-    {at:P.table,place:"topJun",keys:[[P.table,760,470,1.12],[P.mark+0.4,960,470,1.0]],d:2.2,push:0.01,draw:(x,tt)=>{const y=fin(tt,P.yes,0.8);
+    {cut:true,at:P.table,place:"topJun",keys:[[P.table,760,470,1.12],[P.mark+0.4,960,470,1.0]],d:2.2,push:0.01,draw:(x,tt)=>{const y=fin(tt,P.yes,0.8);
       cw_table(x,{at:CW_TB6,rel:0,mark:clamp((tt-P.mark)/0.9,0,1),yes:y});
       const rc=fin(tt,P.yes-0.3,0.6);if(rc>0)withA(x,rc,()=>cw_ruleCard(x,1420,180+40*(1-easeCam(rc)),{lit:y}));}},
     // the register on the board: its five lines stay as they are
-    {at:P.reg,place:"boardWide",keys:[[P.reg,860,450,1.06],[P.reg+0.1,880,450,1.1]],d:3,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);cw_who(x,px,py,pw,[1,1,1,1,1],{foot:1});gv_pin(x,px+pw/2,py+16,GV.red,1.6);
+    {cut:true,at:P.reg,place:"boardWide",keys:[[P.reg,860,450,1.06],[P.reg+0.1,880,450,1.1]],d:3,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);cw_who(x,px,py,pw,[1,1,1,1,1],{foot:1});gv_pin(x,px+pw/2,py+16,GV.red,1.6);
       cred.forEach((i,j)=>cw_lineGold(x,px,py,pw,i,fin(tt,P.gold+0.25*j,0.35)));}},
     // a new impact note: what it reaches, three things, and who must be told, three owners
     {at:P.note,place:"topJun",keys:[[P.note,1180,520,1.2]],d:2,push:0.01,draw:(x,tt)=>{cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:1,box2:1}));
       const r=clamp((tt-P.note-0.2)/1.2,0,1),n=clamp((tt-P.names)/1.1,0,1),pen=cw_at(x,CW_IN4,q=>cw_impact(q,{reach:CW_REACH2,reachP:r,names:n>0?CW_NAMES2:null,namesP:n}));
       if(pen&&(r<1||n<1))cw_pen(x,pen[0],pen[1]);}},
     // side by side: the first note, long, with its red stamp; the second, short, and nothing breaks
-    {at:P.side,place:"topJun",keys:[[P.side,928,520,1.04],[P.side+0.1,928,520,1.07]],d:2.4,draw:(x,tt)=>{
+    {cut:true,at:P.side,place:"topJun",keys:[[P.side,928,520,1.04],[P.side+0.1,928,520,1.07]],d:2.4,draw:(x,tt)=>{
       cw_at(x,CW_N1,q=>cw_impact(q,{reach:CW_REACH1,names:CW_NAMES1,stampP:1,mt:1,clip:false}));
       cw_at(x,CW_N2,q=>cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:clamp((tt-P.no+0.1)/0.8,0,1),clip:false}));}}]);
   wc_paperOver(ctx,S);});
@@ -4255,11 +4277,11 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
         const hA=fin(tt,P.hi,0.6);if(hA>0.01){q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(GV.gold,0.6),hA);wc_tr(q,wc_rrPts(60,668,tw(q,"Marta Nowak",32,600)+28,46,8));q.fill();q.restore();}
         cw_lineTag(q,96+tw(q,"Marta Nowak",32,600)+20,690,"didn't ask",GV.grey,WC_INK,fin(tt,P.ask,0.45));});}},
     // Jun's desk: his first try, in the data team's words, and the note he writes in the wallet team's; the first is struck through
-    {at:P.desk,place:"topJun",keys:[[P.desk,955,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[...OU,1],q=>cw_ourNote(q,{strike:clamp((tt-P.strike)/0.9,0,1)}));
+    {cut:true,at:P.desk,place:"topJun",keys:[[P.desk,955,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[...OU,1],q=>cw_ourNote(q,{strike:clamp((tt-P.strike)/0.9,0,1)}));
       const pen=cw_at(x,[...TH,1],q=>cw_theirNote(q,{p:clamp((tt-P.write)/4.4,0,1)}));if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.write,P.write+4.4));}},
     // the note and Sweden's booklet beside it: what would change, when and what to do, lifted off its pictures onto the note's rows;
     // then Jun adds who will help, and his name
-    {at:P.book,place:"topJun",keys:[[P.book,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const b=easeCam(fin(tt,P.book+0.2,0.9));
+    {cut:true,at:P.book,place:"topJun",keys:[[P.book,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const b=easeCam(fin(tt,P.book+0.2,0.9));
       const pen=cw_at(x,[...TH3,1],q=>cw_theirNote(q,{p:1,p2:clamp((tt-P.help)/1.3,0,1)}));if(b>0.001)cw_bookletOpen(x,BK[0]+(1-b)*700,BK[1]);
       tag(x,tt,0,"what would change",1);tag(x,tt,1,"when",0);tag(x,tt,2,"what to do",3);if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.help,P.help+1.3));}},
     // the meeting room: Marta reads the note across the table from Jun, and nods
@@ -4294,7 +4316,7 @@ scene("ready",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
         cw_cameo(x,px+pw+92,ry,40,id,gv_io(tt,t0,t0+1.0,0.3),{wall,t:tt,nod:cw_nod(tt,t0+0.3)});
         wc_tick(x,px+pw-58,ry-2,40,GV.greenInk,clamp((tt-t0-0.75)/0.35,0,1),6);cw_lineTag(x,px+pw+22,ry,"ready",GV.green,GV.greenInk,fin(tt,t0+0.85,0.45));});}},
     // the change request, close: Jun stamps it, "in · today"
-    {at:P.stamp,place:"topJun",keys:[[P.stamp,560,540,1.15]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:1,box2:1,stamp:clamp((tt-P.press)/0.4,0,1)}));
+    {cut:true,at:P.stamp,place:"topJun",keys:[[P.stamp,560,540,1.15]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,CW_RQ4,q=>cw_request(q,{title:1,name:1,box1:1,cross:1,box2:1,stamp:clamp((tt-P.press)/0.4,0,1)}));
       cw_at(x,CW_IN4,q=>cw_impact(q,{reach:CW_REACH2,names:CW_NAMES2,no:1}));cw_stamper(x,110+0.84*770,90+0.84*808,clamp((tt-P.press+0.5)/1.0,0,1),[62,120,112],[226,186,150]);}},
     // Thursday: in the meeting room, Jun and Marta side by side at a laptop that faces away, working
     {at:P.thu,place:"meeting",keys:[[P.thu,1080,660,1.62],[P.thu+0.1,1080,656,1.68]],d:3,draw:(x,tt)=>{
@@ -4337,7 +4359,7 @@ scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
         CW_OBL.forEach((l,j)=>cw_T(x,l,-210,-16+j*44,{w:600,size:30,col:WC_DARK}));});x.restore();}
       const og=fin(tt,P.own,0.5);if(og>0.01)cw_at(x,RQB,q=>{q.save();q.globalCompositeOperation="multiply";q.fillStyle=rgba(wc_lit(GV.green,0.6),og);q.fillRect(644,772,286,38);q.restore();});}},
     // the register: a team that starts using credentials writes its own line, in its own hand
-    {at:P.reg,place:"boardWide",keys:[[P.reg,900,470,1.04],[P.reg+0.1,902,468,1.06]],d:3,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
+    {cut:true,at:P.reg,place:"boardWide",keys:[[P.reg,900,470,1.04],[P.reg+0.1,902,468,1.06]],d:3,draw:(x,tt)=>{cw_credCard(x,...CW_CARD,1);
       const p6=clamp((tt-P.six)/1.5,0,1),pen=cw_who(x,px,py,pw,[1,1,1,1,1,p6],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,px+pw/2,py+16,GV.red,1.6);
       if(pen&&p6<1)cw_pen(x,pen[0],pen[1]);cw_cameo(x,px+pw+92,cw_rowY(py,pw,5),44,"anil",gv_io(tt,P.six-0.3,P.six+1.9,0.35),{wall:GV_ROOM.fac,t:tt});}},
     // the meeting room's calendar: the monthly circles fade; one note stays, "for a change that needs it"
@@ -4365,11 +4387,14 @@ scene("step",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s,
       x.save();x.translate(700*(1-sl),-40*(1-sl));cw_at(x,CW_IN4,q=>cw_impact(q,{bars:1,no:1,clip:sl>0.96}));x.restore();}},
     // one question: the register, every line with its owner; and the table Planning's dashboard uses, a clock above it, and no owner
     // (the papers go as the end card's veil comes, so its words never sit on theirs)
-    {at:P.late,place:"boardWide",keys:[[P.late,960,470,1.0],[P.late+0.1,962,468,1.03]],d:3,draw:(x,tt)=>{const a=fin(tt,P.near,0.6);withA(x,1-fin(tt,P.end,0.7),()=>{
+    {cut:true,at:P.late,place:"boardWide",keys:[[P.late,960,470,1.0],[P.late+0.1,962,468,1.03]],d:3,draw:(x,tt)=>{const a=fin(tt,P.near,0.6);withA(x,1-fin(tt,P.end,0.7),()=>{
       cw_who(x,...PG6,[1,1,1,1,1,1],{foot:1,rows:CW_WHO6,inks:CW_INK6});gv_pin(x,PG6[0]+PG6[2]/2,PG6[1]+16,GV.red,1.6);
       if(a>0.01)withA(x,a,()=>cw_boardClock(x,300,190,70,4,50));cw_nearCard(x,90,330,a,{owner:fin(tt,P.owner,1.0)});});}}]);
   gv_end(ctx,S,t,P.end,"Change without surprises","Change control is a step in the change, not a meeting.","Film 7 of 10");
   setScreen(ctx,S);wc_year(ctx,56,72,"Sweden · 3 September 1967",gv_io(t,P.morn+0.3,P.idea,0.4));wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["uses", "adds"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

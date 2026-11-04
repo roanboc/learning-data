@@ -185,9 +185,9 @@ scene("many",(ctx,S,t,sc)=>{
     // crowds of a new kind, coming fast: more and more agents gather, and the camera draws back as the crowd grows
     {at:0,place:"lab",keys:[[0,960,720,1.5]],push:-0.2,draw:(c,tt)=>ma_mob(c,tt)},
     // a lead agent splits the job among helpers, and a checking agent checks what they find; then back to the whole wall for two findings
-    {at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
+    {cut:true,at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
     // together: the naming game, the group's lean, and the test of the group
-    {at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)}],0.8);
+    {cut:true,at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)}],0.8);
 });
 // the crowd being built: the k-th agent appears at 1.0 + 6.0 (k / n)^0.55 s, growing from the floor where it stands with a small
 // bounce, faster and faster; once there, a wave of work passes through the crowd, each band brightening, with a faint violet light
@@ -261,7 +261,7 @@ scene("board",(ctx,S,t,sc)=>{
     {at:0,place:"lab",keys:[[0,960,348,1.55],[T.tWork-0.9,960,540,1],[T.tTwo-0.6,1258,372,1.45],[T.tDrafted-0.5,1110,432,1.25]],d:1.8,push:0,
       draw:(c,tt)=>mb_room(c,S,tt,T)},
     // Jun at his desk: the new test, which needs no agent
-    {at:T.tTest-0.6,place:"lab",keys:[[0,760,640,1.3]],push:0.03,draw:(c,tt)=>mb_jun(c,S,tt,T)}],0.8);
+    {cut:true,at:T.tTest-0.6,place:"lab",keys:[[0,760,640,1.3]],push:0.03,draw:(c,tt)=>mb_jun(c,S,tt,T)}],0.8);
 });
 // where things are in the room for this chapter: the table of counts on the left of the wall, the reasons beside it, the board on the
 // right; on the floor the lead agent, four helpers in their sandboxes and the checking agent. Slots are the drafts' places on the board
@@ -600,3 +600,6 @@ scene("close",(ctx,S,t,sc)=>{
     if(a2>0)ag_T(ctx,"and we don't yet know what.",960,364,{w:700,size:48,align:"center",a:a2});}
   const na=ag_in(t,T.tNext-0.1,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: Agents at work on data",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}
 });
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["board", "alive"]);

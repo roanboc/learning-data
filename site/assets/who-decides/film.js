@@ -1809,6 +1809,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1898,12 +1913,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -2709,10 +2731,16 @@ function wd_cap(ctx,P){const c=P.hatC||WD_CAP;
   litFill(ctx,darken(c,0.12),-48,-44,48,-22);seam(ctx,c,0.55);}
 
 /* poses: an arm's angles to put its hand on a point (in the figure's own units, from its feet), the elbow low; and a pose with
-   the hands on points of the picture, for someone at x with their feet at y, at scale s (flip: facing the other way) */
+   the hands on points of the picture, for someone at x with their feet at y, at scale s (flip: facing the other way). A hand near
+   the shoulder has no good bend: both ways to reach it point the elbow up, and the lower one swaps sides as the hand passes over or
+   under the shoulder, so the workers' arms, whose hands work at shoulder height, snapped across their bodies in one frame. Within
+   75 of the shoulder the elbow hangs instead, a little towards the hand, and the forearm points at it. The angles run from a quarter
+   turn inwards to three quarters outwards, so a forearm raised straight up (a hand on the cord) never jumps from a half turn one way
+   to a half turn the other: blended with another pose, the arm swung down and back up, and it slipped behind the body */
 function wd_ik(P_,s,T){const sx=s*(P_.build.sh-12),sy=-416,dx=s*(T[0]-sx),dy=T[1]-sy,L1=108,L2=113,D=clamp(Math.hypot(dx,dy),8,L1+L2-1),
-    th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+D*D-L2*L2)/(2*L1*D),-1,1)),pick=a=>[a,Math.atan2(dx-Math.sin(a)*L1,dy-Math.cos(a)*L1)],
-    A=pick(th+al),B=pick(th-al);return Math.cos(A[0])>=Math.cos(B[0])?A:B;}
+    th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+D*D-L2*L2)/(2*L1*D),-1,1)),A=th+al,B=th-al,low=Math.cos(A)>=Math.cos(B)?A:B,
+    a=lerp(0.25*clamp(dx/70,-1,1),Math.atan2(Math.sin(low),Math.cos(low)),sstep(45,75,D)),turn=v=>v<=-Math.PI/2?v+2*Math.PI:v;
+  return[turn(a),turn(Math.atan2(dx-Math.sin(a)*L1,dy-Math.cos(a)*L1))];}
 function wd_hands(id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,f=p=>p&&[(o.flip?x-p[0]:p[0]-x)/k,(p[1]-y)/k],po=Object.assign({},POSE[o.base||"stand"],o.extra||{});
   if(o.L)po.L=wd_ik(P_,-1,f(o.L));if(o.R)po.R=wd_ik(P_,1,f(o.R));return po;}
 // someone on the line, behind the conveyor, in a pose of their own (po), or between a named pose and it
@@ -3224,10 +3252,12 @@ function wd_scene1(ctx,tt,L){const N=WD_LN,y0=wd_feet();
   wd_cord(ctx,L.pulls||{});
   if(L.sup)L.sup.draw(ctx);
   for(let i=0;i<N.n;i++){const w=(L.who||{})[i],x=w&&w.x!=null?w.x:wd_stX(i),id="wd_w"+(i+1);
-    if(w&&w.po){wd_on(ctx,id,x,w.po,{t:tt,expr:w.expr});continue;}
+    if(w&&w.po&&!(w.mix<1)){wd_on(ctx,id,x,w.po,{t:tt,expr:w.expr});continue;}
     // working on the engine in front: both hands on its top, following it, and back to rest between engines
     const e=Math.round((x-WD_E0-L.off)/N.sw),ex=wd_engX(e,L.off),d=ex-x,m=1-sstep(64,104,Math.abs(d)),j=2.5*Math.sin(tt*3.1+i*1.7),top=N.base-136*WD_ES+j;
     const po=wd_hands(id,x,y0,N.s,{base:"stand",L:[x+clamp(d,-70,70)-26,top],R:[x+clamp(d,-70,70)+26,top+2*Math.sin(tt*2.3+i)],extra:{look:1,gaze:[0,1],tilt:0.04}});
+    // a pose of their own that comes in (mix under 1) starts from this one, so the arms move to it rather than jump
+    if(w&&w.po){wd_on(ctx,id,x,blendPose(blendPose(POSE.stand,po,m),w.po,w.mix),{t:tt,expr:w.expr});continue;}
     wd_on(ctx,id,x,po,{t:tt,pose:"stand",mix:m});}
   ctx.drawImage(gv_place("lineFront"),0,0,W,H);
   const e0=Math.ceil((-130-WD_E0-L.off)/N.sw),e1=Math.floor((W+130-WD_E0-L.off)/N.sw);
@@ -3239,10 +3269,11 @@ const wd_onPart=(x,y,id,wx,p,ext)=>wd_hands(id,wx,wd_feet(),WD_LN.s,{base:"stand
 const wd_onCord=(id,wx,hx,p,ext)=>wd_hands(id,wx,wd_feet(),WD_LN.s,{base:"stand",R:[hx,WD_LN.cord+4+44*p],extra:Object.assign({look:0,gaze:[0.3,-1],tilt:-0.03},ext||{})});
 // someone on the line whose feet are at y (a walker bobs), cut off at the conveyor's top
 function wd_behindAt(ctx,id,x,y,o){ctx.save();ctx.beginPath();ctx.rect(-W,-H,3*W,WD_LN.top+H);ctx.clip();person(ctx,id,x,y,WD_LN.s,o);ctx.restore();}
-// the supervisor: at x0 (home, watching the board) until t0, walking to x1, and there in the pose po gives for his place
+// the supervisor: at x0 (home, watching the board) until t0, walking to x1, and there in the pose po gives for his place, his arms
+// moving into it as he stops
 function wd_supAt(tt,x0,x1,t0,po){const w=gv_walk(tt,t0,x0,x1,250);return{x:w.x,end:w.end,draw:ctx=>{
     if(w.moving)wd_behindAt(ctx,"wd_sup",w.x,wd_feet()-w.bob,{pose:"stand",pose2:w.swing>0?"walkA":"walkB",mix:Math.abs(w.swing),flip:w.flip,t:tt});
-    else wd_on(ctx,"wd_sup",w.x,tt<t0?POSE.listen:po(w.x),{t:tt});}};}
+    else wd_on(ctx,"wd_sup",w.x,tt<t0?POSE.listen:blendPose(POSE.stand,po(w.x),sstep(w.end,w.end+0.45,tt)),{t:tt});}};}
 
 scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const p={find:wAt(sc,"cord","finds"),pull:wAt(sc,"cord","pulls")+0.1,btn:wAt(sc,"cord","presses"),
       lamp:c.lamp,sup:wAt(sc,"lamp","supervisor")-0.5,help:wAt(sc,"lamp","help"),s6:c.stops-0.5,stop:wAt(sc,"stops","stops"),
@@ -3274,7 +3305,7 @@ scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const 
       const g=gv_io(tt,P.btn-0.1,P.btn+1.6,0.35);if(g>0.01){x.save();x.globalCompositeOperation="screen";wc_glowAt(x,N.x0+4*N.sw,N.cord+171,60,[255,236,170],0.75*g);x.restore();}}},
     // station 6: the worker presses his button, the supervisor comes, the engine reaches the line at the station's end: the lamp turns
     // red and the line stops; the team fixes it together
-    {at:P.s6,place:"line",keys:[[P.s6,1240,500,1.5],[P.stop-0.5,1010,520,1.12],[P.team-0.2,1260,540,1.45]],d:1.6,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:P.s6,place:"line",keys:[[P.s6,1240,500,1.5],[P.stop-0.5,1010,520,1.12],[P.team-0.2,1260,540,1.45]],d:1.6,push:0.01,draw:(x,tt)=>{
       const off=P.off3(tt),i6=5,wx=wd_stX(i6),ex=wd_engX(6,off),press=gv_io(tt,P.s6+0.2,P.s6+1.0,0.25),lit=fin(tt,P.s6+0.55,0.2),
         red=fin(tt,P.stop,0.25),fixed=fin(tt,P.fixed6,0.35),lamps=lampsOff();lamps[5]=[red>0.5?"red":"amber",lit*(1-fixed)];
       const cx=ex-18*WD_ES,cy=N.base-168*WD_ES,tryp=(Math.sin((tt-P.s6)*4.2)*0.5+0.5)*(1-fixed),ca=lerp(-0.36+0.08*tryp,0,fixed),cdy=lerp(8,0,fixed),
@@ -3282,23 +3313,23 @@ scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const 
         who={5:{x:wx,po:press>0?blendPose(work,wd_hands("wd_w6",wx,wd_feet(),N.s,{base:"stand",R:[N.x0+6*N.sw-4,N.cord+171],extra:{gaze:[0.6,0.3],turn:0.2}}),press):work,expr:"concerned"}};
       // the team: the workers either side step over to help
       const tm=fin(tt,P.team,0.9);if(tm>0){const x5=lerp(wd_stX(4),wx-96,tm),x7=lerp(wd_stX(6),wx+100,tm);
-        who[4]={x:x5,po:wd_onPart(cx-14,cy+8,"wd_w5",x5,tryp*0.5,{tilt:0.08})};who[6]={x:x7,po:wd_onPart(cx+14,cy+8,"wd_w7",x7,tryp*0.5,{tilt:-0.02})};}
+        who[4]={x:x5,po:wd_onPart(cx-14,cy+8,"wd_w5",x5,tryp*0.5,{tilt:0.08}),mix:clamp(tm/0.4,0,1)};who[6]={x:x7,po:wd_onPart(cx+14,cy+8,"wd_w7",x7,tryp*0.5,{tilt:-0.02}),mix:clamp(tm/0.4,0,1)};}
       const sp=wd_supAt(tt,wd_stX(3)+92,wx+70,P.s6+0.4,sx=>wd_onPart(cx+22,cy+4,"wd_sup",sx,tryp));
       wd_scene1(x,tt,{off,lamps,press:{6:[press,lit*(1-fixed)]},who,sup:sp,odd:{e:6,part:"carb",a:ca,dy:cdy,seated:fixed>=1}});
       const g=gv_io(tt,P.stop-0.4,P.team,0.3);if(g>0.01){const lx=N.x0+6*N.sw;x.save();x.globalCompositeOperation="screen";x.filter="blur(6px)";x.fillStyle=rgba([255,250,226],0.7*g);x.fillRect(lx-12,N.top+30,24,110);x.restore();}}},
     // every worker could, and they did: the day passes, lamps light and go dark, and once more one turns red
-    {at:P.did,place:"line",keys:[[P.did,960,540,1],[P.reach,960,530,1.04]],d:2,push:0,draw:(x,tt)=>{const u=tt-P.did,off=P.off4(tt),lamps=lampsOff(),pulls={},who={};
+    {cut:true,at:P.did,place:"line",keys:[[P.did,960,540,1],[P.reach,960,530,1.04]],d:2,push:0,draw:(x,tt)=>{const u=tt-P.did,off=P.off4(tt),lamps=lampsOff(),pulls={},who={};
       [[1,0.3,1.4],[6,0.9,2.0],[4,1.4,2.9,1.9],[2,3.0,3.9]].forEach(([i,a,b,r])=>{const l=gv_io(u,a,b,0.2);if(l>0)lamps[i]=[r!=null&&u>=r?"red":"amber",l];
-        const up=gv_io(u,a-0.45,a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:blendPose(POSE.stand,wd_onCord("wd_w"+(i+1),wx,wx+66,pl),up)};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
+        const up=gv_io(u,a-0.45,a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:wd_onCord("wd_w"+(i+1),wx,wx+66,pl),mix:up};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
       const sp=wd_supAt(u,N.sup,wd_stX(4)+92,1.0,sx=>POSE.listen);
       wd_scene1(x,tt,{off,lamps,pulls,who,sup:sp,light:clamp(u/(P.reach-P.did),0,1)});}},
     // within reach: a hand on the cord; and someone who could decide, coming at once
-    {at:P.reach,place:"line",keys:[[P.reach,520,580,2.1],[P.decide-0.3,760,540,1.35]],d:1.7,push:0.01,draw:(x,tt)=>{const off=P.off5(tt),i=1,wx=wd_stX(i),
+    {cut:true,at:P.reach,place:"line",keys:[[P.reach,520,580,2.1],[P.decide-0.3,760,540,1.35]],d:1.7,push:0.01,draw:(x,tt)=>{const off=P.off5(tt),i=1,wx=wd_stX(i),
         up=gv_io(tt,P.within-0.4,P.within+1.4,0.45),pull=clamp((tt-P.within-0.15)/0.35,0,1),lamps=lampsOff();lamps[1]=["amber",fin(tt,P.within+0.3,0.2)];
       const sp=wd_supAt(tt,1300,wx+92,P.decide-1.2,sx=>POSE.listen);
       wd_scene1(x,tt,{off,lamps,pulls:up>0?{1:[wx+66,N.cord+4+44*pull*up]}:{},who:{1:{po:blendPose(POSE.stand,wd_onCord("wd_w2",wx,wx+66,pull),up)}},sup:sp});}},
     // a right to decide about data needs the same: the hall again, quiet, the lamps dark, the line moving
-    {at:P.data,place:"line",keys:[[P.data,960,540,1],[sc.dur,960,540,1.05]],d:2,push:0,draw:(x,tt)=>{
+    {cut:true,at:P.data,place:"line",keys:[[P.data,960,540,1],[sc.dur,960,540,1.05]],d:2,push:0,draw:(x,tt)=>{
       const sp=wd_supAt(tt,N.sup,N.sup,1e9,sx=>POSE.listen);wd_scene1(x,tt,{off:P.off6(tt),lamps:lampsOff(),sup:sp,light:0.9});}}]);
   wd_pill(ctx,t,"Japan · 1960s",WD_PILL.a);WD_PILL.a=0;
   gv_title(ctx,S,t,P.title,"Who decides","owners in the work, asked by name","Film 2 of 10 · data governance");
@@ -3366,13 +3397,13 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({who:wAt(sc
       person(x,"yusuf",830,905,0.8,{pose:"write",carry:heldNotebook,t:tt});
       wd_say(x,tt,P.bec-0.1,sc.dur,1250,190,["We needed someone","to ask."],1590,440);}},
     // the floor: Yusuf takes each name to its office, and a gold tick goes up on its glass
-    {at:P.fl,place:"floor",keys:[[P.fl,1000,540,1.08],[P.fl+0.3,800,545,1.1]],d:3.2,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.fl+0.1,F.x(3)+40,F.x(1)+F.w/2+70,280);
+    {cut:true,at:P.fl,place:"floor",keys:[[P.fl,1000,540,1.08],[P.fl+0.3,800,545,1.1]],d:3.2,draw:(x,tt)=>{const F=GV_FL,wk=gv_walk(tt,P.fl+0.1,F.x(3)+40,F.x(1)+F.w/2+70,280);
       // he stops at the registrar's office, where Mei nods, and the tick goes up on its glass; then on Planning's, the next along
       wd_floor(x,tt,{pose:{mei:{pose:"listen",nod:0.05*Math.sin(tt*3)*gv_io(tt,wk.end-0.6,wk.end+1.0,0.3)},clara:{pose:"listen"}}});
       wd_carrier(x,"yusuf",wk,F.walk,0.62,heldNotebook,{t:tt});wd_glassTick(x,1,fin(tt,wk.end-0.1,0.6));wd_glassTick(x,0,fin(tt,wk.end+0.7,0.6));}},
     // the register, close: each TBC gives way to its name, written in, with a gold tick: the owners from the list, the stewards each
     // office named
-    {at:P.reg,place:"deskTop",keys:[[P.reg,1330,520,1.3]],push:0.015,draw:(x,tt)=>{
+    {cut:true,at:P.reg,place:"deskTop",keys:[[P.reg,1330,520,1.3]],push:0.015,draw:(x,tt)=>{
       wd_binder2(x,1,q=>wd_policy2(q,1,0),q=>wd_reg(q,{tbc:()=>1,name:k=>fin(tt,P.reg+0.35+0.3*k,0.7)}));}}]);
   wc_paperOver(ctx,S);});
 
@@ -3434,10 +3465,10 @@ scene("domains",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(sc
     // the stewards' meeting room: the council round the table, Yusuf at the board
     {at:P.mt,place:"meeting",keys:[[P.mt,900,520,1.08],[P.mt+0.1,880,515,1.12]],d:4,draw:(x,tt)=>{rule(x,tt);wd_atBoard(x,tt);wd_council(x,tt,0);}},
     // the board, close: what Yusuf writes
-    {at:P.wb,place:"meetBoard",keys:[[P.wb,800,450,1.2],[P.wb+0.2,780,440,1.26]],d:4,push:0.01,draw:(x,tt)=>
+    {cut:true,at:P.wb,place:"meetBoard",keys:[[P.wb,800,450,1.2],[P.wb+0.2,780,440,1.26]],d:4,push:0.01,draw:(x,tt)=>
       wd_councilRule(x,[fin(tt,P.wb-1.2,2.0),fin(tt,P.cdec,0.8),fin(tt,P.next-0.1,0.8),fin(tt,P.dvc-0.5,0.6),fin(tt,P.dvc,0.9)],WD_MB[0],WD_MB[1],1,false)},
     // the room again: the deputy vice-chancellor at the door, and the council turns to him
-    {at:P.door,place:"meeting",keys:[[P.door,1300,520,1.25],[P.door+0.1,1310,515,1.28]],d:3,draw:(x,tt)=>{rule(x,tt);const w=gv_walk(tt,P.door+0.1,1900,1750,200);
+    {cut:true,at:P.door,place:"meeting",keys:[[P.door,1300,520,1.25],[P.door+0.1,1310,515,1.28]],d:3,draw:(x,tt)=>{rule(x,tt);const w=gv_walk(tt,P.door+0.1,1900,1750,200);
       wd_atBoard(x,tt);wd_council(x,tt,fin(tt,P.door+0.3,0.6));
       gv_walker(x,"david",w,905,GV_MT.s,{t:tt,flip:true});wd_tagAt(x,tt,P.door+0.5,null,1640,392,"deputy vice-chancellor",{size:30});}},
     // the board again: everything else, the owner decides, where the work is
@@ -3510,13 +3541,13 @@ scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"s
       edit:{i:0,to:"Leila Haddad",p:fin(tt,P.fol,0.8)}},WD_ADREQ));};
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"deskTop",keys:[[0,960,540,1],[P.reg,955,535,1.06]],d:2.4,push:0.004,draw:(x,tt)=>desk(x,tt)},
-    {at:P.keeps,place:"deskTop",keys:[[P.keeps,985,535,1.15],[P.fol,985,540,1.16]],push:0.004,draw:(x,tt)=>desk(x,tt)},
+    {cut:true,at:P.keeps,place:"deskTop",keys:[[P.keeps,985,535,1.15],[P.fol,985,540,1.16]],push:0.004,draw:(x,tt)=>desk(x,tt)},
     // Jun's desk from above: his next change request, award in its title lit gold as it's said; its slip clips on, filled in from the
     // register, and it goes, up and out of the frame, to Mei
-    {at:P.jun,place:"junTop",keys:[[P.jun,960,520,1.04],[P.jun+0.2,960,525,1.08]],d:2.6,push:0.004,draw:(x,tt)=>{const go=easeCam(fin(tt,P.mei-0.7,0.8)),sl=P.mei-1.9;
+    {cut:true,at:P.jun,place:"junTop",keys:[[P.jun,960,520,1.04],[P.jun+0.2,960,525,1.08]],d:2.6,push:0.004,draw:(x,tt)=>{const go=easeCam(fin(tt,P.mei-0.7,0.8)),sl=P.mei-1.9;
       wd_req(x,610,250-1000*go,1,Object.assign({award:fin(tt,P.aw-0.1,0.6),slipP:fin(tt,sl,0.6),names:i=>fin(tt,sl+0.3+0.2*i,0.4)},WD_AWREQ));}},
     // Mei's desk from above: his request comes to her, its slip naming her first, then Noor and Yusuf, each lit as the voice says it
-    {at:P.mei,place:"meiTop",keys:[[P.mei,960,520,1.08],[P.nob,960,530,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
+    {cut:true,at:P.mei,place:"meiTop",keys:[[P.mei,960,520,1.08],[P.nob,960,530,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
       const u=easeCam(fin(tt,P.mei+0.1,0.9));wd_req(x,610,200+900*(1-u),1,Object.assign({lit:i=>gv_io(tt,P.ms[i]-0.1,P.ms[i]+0.9,0.3)},WD_AWREQ));}},
     // like the cord on the line: a hand pulls it, the lamp lights, the supervisor comes
     {at:P.like,place:"line",keys:[[P.like,980,470,1.55],[P.like+0.2,1040,480,1.42]],d:3,push:0.01,draw:(x,tt)=>wd_callAt(x,tt,P.like+0.45,3,wd_run(tt-P.like,12)+40)},
@@ -3536,7 +3567,7 @@ scene("logged",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({dec:wAt(sc,
     // her desk from above: her log book, its columns lit in the same order: the decision, who, when and why; then across the desk to
     // the course area's decision book, where the mapping's entry is begun: what, and who decides. Back, to see both: each area keeps
     // its own, and the why in each is lit
-    {at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.map-0.1,562,557,1.74],[P.map+1.5,1362,557,1.72],[P.next,1356,557,1.74],[P.next+1.6,960,540,1]],d:2.4,push:0,
+    {cut:true,at:P.log,place:"meiTop",keys:[[P.log,558,557,1.72],[P.map-0.1,562,557,1.74],[P.map+1.5,1362,557,1.72],[P.next,1356,557,1.74],[P.next+1.6,960,540,1]],d:2.4,push:0,
       draw:(x,tt)=>{const lt=k=>gv_io(tt,P.log+0.5+0.5*k,P.map-0.3,0.3),wy=fin(tt,P.why-0.1,0.6);
         wd_logBook(x,{lit:[lt(2),lt(0),lt(1),Math.max(lt(3),wy)]});wd_decBook(x,{what:fin(tt,P.dbook+0.2,1.6),who:fin(tt,P.dbook+1.6,0.7),why:wy});}},
     // Yusuf's screen: the thread of twenty-three replies greys out, and closes
@@ -3594,7 +3625,7 @@ scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({cord:wAt(sc,
     {at:P.here,place:"regClose",keys:[[P.here,960,540,1.04],[P.here+0.2,990,520,1.12]],d:3,push:0.004,draw:(x,tt)=>
       wd_meiHolds(x,tt,fin(tt,P.here+0.3,0.6)*(1-fin(tt,P.open-0.8,0.8)),{E:wd_worry(0)})},
     // her desk from above: the request, laid down to read; award, in its title, lit gold as she asks
-    {at:P.open,place:"meiTop",keys:[[P.open,960,500,1.1],[P.asks-0.2,830,470,1.3]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
+    {cut:true,at:P.open,place:"meiTop",keys:[[P.open,960,500,1.1],[P.asks-0.2,830,470,1.3]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
       wd_req(x,610,200,1,Object.assign({award:fin(tt,P.asks-0.1,0.6)},WD_AWREQ));}},
     // her desk again: her screen shows the glossary on the platform, and four more places that define award come in round her, right to
     // left; each is washed in its meaning's colour, three colours, and a gold question mark settles over her. She looks from one to the
@@ -3614,6 +3645,9 @@ const WC_PLACES={line:wd_paintLine,lineFront:wd_paintLineFront,office:gv_paintOf
   screenGov:c=>gv_paintScreenDesk(c,GV_ROOM.gov),data:gv_paintData,boardData:wd_paintTeamBoard,floor:gv_paintFloor,planning:gv_paintPlanning,
   boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,meiTop:wd_paintMeiTop,junTop:wd_paintJunTop,
   platClose:gv_paintPlatformClose,registrar:gv_paintRegistrar,wdCal:wd_paintCal,platDesk:gv_paintPlatformDesk,meeting:gv_paintMeeting,meetTable:gv_paintMeetingTable,meetBoard:wd_paintMeetBoard};
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["tbc", "asked", "logged"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

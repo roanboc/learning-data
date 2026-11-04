@@ -830,17 +830,24 @@ function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^
    ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
    1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
    place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot. */
+   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
+   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
 function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
   z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
 function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
 function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -1388,6 +1395,21 @@ function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.
   if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
   else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
   ctx.restore();ctx.restore();return hands;}
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
+// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
+// the size of the canvas, kept); what they hold is drawn with them
+let AG_FADE=null;
+const ag_personWhole=ag_person;
+ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
+    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
+  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
 // people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
 // stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
 // o.covered); the player on the site never stops for it
@@ -2662,7 +2684,7 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
     // the living room, the afternoon: she talks, he watches her lips; then wide, the kettle, the radio and the telephone
     {at:0,place:"tt_home",keys:[[0,1000,560,1.1],[c.cut-0.6,960,540,1.0]],d:7,push:0,draw:(x,tt)=>{tt_homeLive(x,tt,homeO(tt));
       const m=tt_mouth(H_.mag,H_.y,H_.s,false);tt_lips(x,m[0],m[1],H_.s,ag_io(tt,P.lips-0.2,c.aid+0.6,0.4));}},
-    {at:c.change-0.6,place:"tt_home",keys:[[c.change-0.6,960,540,1.0],[c.change-0.2,1500,400,1.5]],d:2.4,push:0.01,draw:(x,tt)=>tt_homeLive(x,tt,homeO(tt))},
+    {cut:true,at:c.change-0.6,place:"tt_home",keys:[[c.change-0.6,960,540,1.0],[c.change-0.2,1500,400,1.5]],d:2.4,push:0.01,draw:(x,tt)=>tt_homeLive(x,tt,homeO(tt))},
     // a memory rises over the window: a small-town pharmacy (drawn as a soft card, in the screen's space)
     tt_pharmShot(c.father-0.3),
     {at:c.years-0.4,place:"tt_lab78",keys:[[c.years-0.4,960,560,1.04],[c.years,980,560,1.08]],d:6,push:0.01,draw:(x,tt)=>{
@@ -2673,16 +2695,16 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
       tt_spiral(x,960,500,330,{dots:0.55,wire:tt_on(tt,P.wire-0.2,2.4),rings:clamp((tt-P.ten+0.2)/0.35,0,10)});}},
     // 1 August 1978: the theatre's doors; then Rod's head, the implant under the skin behind his ear, the wire curling inwards
     {at:c.august-0.3,place:"tt_corridor",keys:[[c.august-0.3,960,540,1.0],[c.august,960,520,1.06]],d:4,push:0.01,draw:(x,tt)=>tt_theatreSign(x,1)},
-    {at:P.went-0.1,place:"tt_corridor",keys:[[P.went-0.1,1250,420,2.2]],d:3,push:0.02,draw:(x,tt)=>tt_rodClose(x,tt,{wire:tt_on(tt,P.went+0.2,1.6),smile:0.1})},
+    {cut:true,at:P.went-0.1,place:"tt_corridor",keys:[[P.went-0.1,1250,420,2.2]],d:3,push:0.02,draw:(x,tt)=>tt_rodClose(x,tt,{wire:tt_on(tt,P.went+0.2,1.6),smile:0.1})},
     // the lab: Rod in a chair with the coil behind his ear; the engineer starts the tape; ten lights, one after another; Rod sings
-    {at:c.sang-0.5,place:"tt_lab78",keys:[[c.sang-0.5,980,560,1.06],[P.along,900,520,1.14]],d:3,push:0.01,draw:(x,tt)=>{const lit=clamp((tt-P.played)/0.22,0,10),sing=ag_in(tt,P.along-0.1,0.5);
+    {cut:true,at:c.sang-0.5,place:"tt_lab78",keys:[[c.sang-0.5,980,560,1.06],[P.along,900,520,1.14]],d:3,push:0.01,draw:(x,tt)=>{const lit=clamp((tt-P.played)/0.22,0,10),sing=ag_in(tt,P.along-0.1,0.5);
       tt_trolley(x,1060,560,{lit,reel:1});tt_chair(x,820,700,0.85);
       ag_person(x,TT_ROD,820,700,0.85,{t:tt,flip:true,talk:sing*(0.4+0.3*Math.sin(tt*6)),smile:lerp(0.1,0.9,ag_in(tt,P.played+1.6,0.8)),gaze:[-2,-0.6]});tt_coil(x,820,700,0.85,1080,640);
       ag_person(x,TT_ENG1,1520,664,0.86,{t:tt+1,flip:true,pose:ag_io(tt,c.sang-0.3,P.played+1.2,0.4)>0.5?"point":"hang"});ag_person(x,TT_CLARK,330,660,0.9,{t:tt+2,smile:0.6*ag_in(tt,P.along,1)});
       const m=tt_mouth(820,700,0.85,true);tt_song(x,m[0]-210,m[1]-30,tt,sing,[196,150,92]);
       tt_tag(x,1210,470,"Waltzing Matilda",{a:ag_in(tt,c.sang,0.4),size:28});}},
     // December 1978: the audiologist hides her mouth behind a card and says a word; Rod says it back
-    {at:c.december-0.3,place:"tt_lab78",keys:[[c.december-0.3,960,560,1.1],[c.december,960,540,1.16]],d:4,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:c.december-0.3,place:"tt_lab78",keys:[[c.december-0.3,960,560,1.1],[c.december,960,540,1.16]],d:4,push:0.01,draw:(x,tt)=>{
       tt_chair(x,1260,700,0.85);ag_person(x,TT_ROD,1260,700,0.85,{t:tt,flip:true,talk:0.5*ag_io(tt,P.words+0.9,P.words+2.2,0.2),smile:0.6,gaze:[-3,0]});
       ag_person(x,TT_AUD,640,690,0.86,{t:tt+1,pose:"hold",talk:0.5*ag_io(tt,P.words-0.4,P.words+0.6,0.2),hold:(c2,h)=>{const n=h.near;ag_box(c2,n[0]-70,n[1]-330,250,330,10,{});}});
       tt_bubble(x,840,300,170,64,920,300,{a:ag_io(tt,P.words-0.3,P.words+1.0,0.3),fill:0.9});tt_bubble(x,1000,280,170,64,1080,280,{a:ag_io(tt,P.words+0.9,P.words+2.6,0.3),fill:0.9});}},
@@ -2729,7 +2751,7 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(s
       const so=ag_in(tt,c.signed+0.2,0.5);if(so>0.01)tt_signoff(x,A.x,A.y+232+20*(1-so),A.w,clamp((tt-P.checked)/(P.signed+0.9-P.checked),0,1),so);
       ag_roomLight(x,1);}},
     // over coffee: each question rises from the one who asks it and pins itself to the wall, in a row
-    {at:c.coffee-0.4,place:"lab",keys:[[c.coffee-0.4,960,620,1.14],[c.coffee,960,540,1.0]],d:2.6,push:0,draw:(x,tt)=>{
+    {cut:true,at:c.coffee-0.4,place:"lab",keys:[[c.coffee-0.4,960,620,1.14],[c.coffee,960,540,1.0]],d:2.6,push:0,draw:(x,tt)=>{
       const cur=ask.reduce((k,a,i)=>tt>=a-0.5?i:k,-1),talk=ask.map((a,i)=>0.45*ag_io(tt,a-0.5,a+1.7,0.25)*(0.55+0.45*Math.sin(tt*8.7+i)));
       tt_team(x,tt,{talk,gaze:TT_SEATS.map((_,i)=>i===cur?[3,-2.5]:[3,0]),smile:TT_SEATS.map((_,i)=>i===cur?0.5:0.25)});
       ask.forEach((a,i)=>{const u=clamp((tt-a)/1.5,0,1);if(u<=0)return;const q=ag_sine(u),px=TT_SEATS[i][1];
@@ -2751,7 +2773,7 @@ scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(s
     // Buffalo, 1958: a man at a desk with papers, and on his page a neuron beside its copy
     {at:c.perceptron-0.5,place:"tt_office58",keys:[[c.perceptron-0.5,960,540,1.04],[c.perceptron,960,520,1.08]],d:5,push:0.01,draw:(x,tt)=>{
       tt_oldDesk(x,560,880,800,{});ag_person(x,TT_ROSEN,960,574,0.8,{t:tt,pose:"desk",cut:790,gaze:[0,2.5]});}},
-    {at:P.rough-0.5,place:"tt_office58",keys:[[P.rough-0.5,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_wash(x,0.4,{c:[60,48,36]});tt_page(x,300,160,1320,680,{rot:-0.012});
+    {cut:true,at:P.rough-0.5,place:"tt_office58",keys:[[P.rough-0.5,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_wash(x,0.4,{c:[60,48,36]});tt_page(x,300,160,1320,680,{rot:-0.012});
       tt_neuron(x,600,480,0.9,{grow:tt_on(tt,P.rough-0.3,1.6),fire:ag_io(tt,P.sense,P.act+1.2,0.4)});
       tt_perceptron(x,1190,480,1.15,{p:tt_on(tt,P.rough+0.9,1.6),fire:ag_io(tt,P.act-0.1,c.descend-0.6,0.3)});
       const tg=(w,at,X,Y)=>{const q=tt_pop(tt,at);tt_tag(x,X,Y,w,{a:q.a,k:q.k});};tg("sense",P.sense-0.1,1190-253,300);tg("remember",P.rem-0.1,1190-161,670);tg("act",P.act-0.1,1190+265,570);}},
@@ -2773,11 +2795,11 @@ scene("taught",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({rough:wAt(s
       for(let i=0;i<10;i++){const u=(tt-P.ten-i*0.14)/1.3;if(u<=0||u>=1.1)continue;const q=ag_sine(Math.min(1,u)),px=lerp(rodE[0],760,q),py=lerp(rodE[1],380,q)-Math.sin(Math.PI*q)*170,
         al=Math.min(1,u*6)*(1-clamp((u-0.85)/0.25,0,1));x.save();x.shadowColor=rgba(AG.blue,0.8);x.shadowBlur=10;x.fillStyle=rgba(AG.blue,al);x.beginPath();x.arc(px,py,9,0,TAU);x.fill();x.restore();}}},
     // the copy stops somewhere: a brain guesses at many levels at once
-    {at:c.stops-0.4,place:"tt_labQuiet",keys:[[c.stops-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>{
+    {at:c.stops-0.4,place:"tt_labQuiet",keys:[[c.stops-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       ag_person(x,TT_LISTEN,560,640,1.05,{t:tt,covered:true,gaze:[3,0]});tt_headGuess(x,590,410,140,0.5+0.3*Math.sin(tt*3));
       tt_levels(x,860,330,tt,{rows:[ag_in(tt,P.next-0.2,0.5),ag_in(tt,P.next+0.9,0.5),ag_in(tt,P.story-0.2,0.5)]});}},
     // one kind of brain cell, and the network it took to imitate it
-    {at:c.cell-0.4,place:"tt_labQuiet",keys:[[c.cell-0.4,960,540,1.0]],d:2,push:0.015,draw:(x,tt)=>{
+    {at:c.cell-0.4,place:"tt_labQuiet",keys:[[c.cell-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       tt_neuron(x,600,440,0.95,{grow:tt_on(tt,c.cell,1.6)});tt_layers(x,1090,430,5+3*tt_on(tt,P.five+0.4,1.8),{a:ag_in(tt,P.five-0.4,0.5)});
       const q=tt_pop(tt,P.five+0.6);tt_tag(x,960,820,"1 brain cell · a network 5 to 8 layers deep",{a:q.a,k:q.k});}},
     // how a brain learns from its errors: the loop's way back turns to a dotted line, and a question mark
@@ -2794,7 +2816,7 @@ scene("mixing",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({whatever:wA
   const H0=c.others+0.15,seg=[[H0,H0+1.4],[H0+1.75,H0+2.85],[H0+3.2,H0+4.3]];
   const shots=[tt_openShot(1),
     // the agent writes a short poem: each word made of small pages that stream into the ring and come out as words
-    {at:2.4,place:"lab",keys:[[2.4,1000,500,1.04]],d:2,push:0.012,draw:(x,tt)=>{const [rx,ry]=[1124,476];ag_loop(x,rx,ry,{t:tt,think:0.8,label:null,stepA:[0,0,0]});
+    {cut:true,at:2.4,place:"lab",keys:[[2.4,1000,500,1.04]],d:2,push:0.012,draw:(x,tt)=>{const [rx,ry]=[1124,476];ag_loop(x,rx,ry,{t:tt,think:0.8,label:null,stepA:[0,0,0]});
       tt_roughCopy(x,rx,ry,88,tt,{pages:1,neurons:0,from:"right"});ag_roomLight(x,1);tt_poem(x,180,330,tt,3.0,{src:[rx-60,ry],rate:0.2});}},
     // a grandmother draws a house and passes the pencil; a parent adds a tree; a child adds a sun with a face no one else would have drawn
     {at:c.others-0.4,place:"tt_tableTop",keys:[[c.others-0.4,960,520,1.0]],d:2,push:0.02,draw:(x,tt)=>{
@@ -2844,13 +2866,13 @@ scene("wire",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({w302:wAt(sc,"
       ag_screen(x,560,250,800,500,{stand:60,draw:(c2,X,Y,w,h)=>tt_worm(c2,X+w/2,Y+h/2,w*0.8,tt,{blue:1})});ag_roomLight(x,1);
       const a1=tt_pop(tt,P.wrig-0.3),a2=tt_pop(tt,P.notmuch-0.2);tt_tag(x,1600,420,"wriggles",{a:a1.a,k:a1.k});tt_tag(x,1600,520,"much more · not yet",{a:a2.a,k:a2.k});}},
     // a map doesn't say how each connection works, or when
-    {at:P.how-0.5,place:"tt_labQuiet",keys:[[P.how-0.5,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_wireMap(x,960,430,1400,560,{draw:tt_on(tt,P.how-0.4,1.2),dials:tt_on(tt,P.how+0.6,1.2)});
+    {at:P.how-0.5,place:"tt_labQuiet",keys:[[P.how-0.5,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{tt_wireMap(x,960,430,1400,560,{draw:tt_on(tt,P.how-0.4,1.2),dials:tt_on(tt,P.how+0.6,1.2)});
       const q=tt_pop(tt,P.how+1.0);tt_tag(x,960,800,"how strong? when?",{a:q.a,k:q.k});}},
     // 2024: a fly, and its whole brain's map
-    {at:c.fly-0.4,place:"tt_labQuiet",keys:[[c.fly-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_fly(x,960,500,0.55,{t:tt});
+    {at:c.fly-0.4,place:"tt_labQuiet",keys:[[c.fly-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{tt_fly(x,960,500,0.55,{t:tt});
       tt_flyBrain(x,960,240,520,{lit:0,a:ag_in(tt,c.fly+0.8,1.0)});const q=tt_pop(tt,P.n139-0.1);tt_tag(x,1480,240,"139,255 neurons",{a:q.a,k:q.k});}},
     // sugar: in the model of the map a path of neurons lights, and in the real fly's brain the same ones
-    {at:c.sugar-0.4,place:"tt_labQuiet",keys:[[c.sugar-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{tt_fly(x,880,560,0.5,{t:tt});tt_drop(x,1040,600,34,ag_in(tt,P.sugar-0.4,0.5));
+    {at:c.sugar-0.4,place:"tt_labQuiet",keys:[[c.sugar-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{tt_fly(x,880,560,0.5,{t:tt});tt_drop(x,1040,600,34,ag_in(tt,P.sugar-0.4,0.5));
       tt_flyBrain(x,560,300,460,{lit:tt_on(tt,P.sugar+0.4,1.2)});tt_flyBrain(x,1360,300,460,{blue:1,lit:tt_on(tt,P.predicted,1.2)});
       const tk=ag_in(tt,P.sugar+1.4,0.4);if(tk>0.01)ag_tick(x,960,250,40*clamp(ag_spr(tt,P.sugar+1.4,0.6),0,1.2),rgba(AG.green,tk),6);}},
     // we have about 86 billion: the fly's map shrinks to a dot beside a human head
@@ -2889,14 +2911,14 @@ scene("feels",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({one:wAt(sc,"
         rod:{pose:"chin",gaze:[-3,0],smile:lerp(0.25,1,ag_in(tt,c.roddid+0.1,0.6)),talk:laugh*(0.35+0.3*Math.abs(Math.sin(tt*11))),nod:0.04*laugh*Math.sin(tt*9)},mag:{smile:lerp(0.5,0.9,laugh)}});
       tt_implant(x,H_.rod,H_.y,H_.s,{t:tt,pulse:ag_in(tt,c.pulses+0.6,0.5)});}},
     // 1995, the hard problem: a brain at work on one side, a life felt from inside on the other, and a question between them
-    {at:c.chalmers-0.4,place:"tt_labQuiet",keys:[[c.chalmers-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{
+    {at:c.chalmers-0.4,place:"tt_labQuiet",keys:[[c.chalmers-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       const ba=ag_in(tt,c.chalmers+0.3,0.7),pa=ag_in(tt,P.hard-0.2,0.8),qm=tt_pop(tt,P.hard+0.4),q=tt_pop(tt,c.why-0.3),t1=tt_pop(tt,P.phys),t2=tt_pop(tt,P.rich);
       tt_brain(x,500,540,0.95,{a:ba,sweep:{u:((tt*0.9)%1+1)%1,a:ba}});tt_couplePic(x,1180,330,560,420,tt,pa);tt_gapLine(x,720,1120,560,qm.a,960);
       ag_T(x,"?",960,590,{w:800,size:84,align:"center",col:AG.amber,a:qm.a});
       tt_tag(x,500,830,"physical processing",{a:t1.a,k:t1.k});tt_tag(x,1460,830,"a rich inner life",{a:t2.a,k:t2.k});
       tt_quote(x,330,160,"‘Why should physical processing give rise to a rich inner life at all?’",null,{w:1260,a:q.a,k:q.k});}},
     // two theories: parts that work as one; news shared across the brain
-    {at:c.theories-0.4,place:"tt_labQuiet",keys:[[c.theories-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{
+    {at:c.theories-0.4,place:"tt_labQuiet",keys:[[c.theories-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{
       tt_net(x,700,420,230,{k:tt_on(tt,c.one+0.3,1.8),t:tt});const ba=ag_in(tt,c.another-0.2,0.6);
       tt_brain(x,1320,420,0.62,{outline:1,a:ba});tt_broadcast(x,1320,420,0.62,tt_on(tt,P.news-0.2,1.4),ba);
       const q1=tt_pop(tt,P.one),q2=tt_pop(tt,P.news+0.2);tt_tag(x,700,780,"parts that work as one",{a:q1.a,k:q1.k});tt_tag(x,1320,780,"news shared across the brain",{a:q2.a,k:q2.k});}},
@@ -2920,13 +2942,13 @@ scene("machine",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({awake:wAt(
       const q=tt_pop(tt,P.forty-0.1);tt_tag(x,1490,520,"about 40 times a second",{a:q.a*(1-0.5*ds),k:q.k});
       tt_signs(x,960,800,tt_on(tt,c.ties+0.3,1.8),{a:ag_io(tt,c.ties,c.penrose-0.6,0.5)});}},
     // into a neuron, to its tiny tubes, a pearly shimmer moving in them
-    {at:c.penrose-0.4,place:"tt_labQuiet",keys:[[c.penrose-0.4,960,520,1.0],[c.penrose+0.6,960,522,3.0]],d:2.8,push:0,draw:(x,tt)=>tt_neuron(x,960,520,1.5,{grow:1})},
-    {at:P.micro-0.5,place:"tt_labQuiet",keys:[[P.micro-0.5,960,500,1.08],[P.micro,960,520,1.0]],d:2.4,push:0.01,draw:(x,tt)=>{const gone=tt>P.wipe+0.1;
+    {cut:true,at:c.penrose-0.4,place:"tt_labQuiet",keys:[[c.penrose-0.4,960,520,1.0],[c.penrose+0.6,960,522,3.0]],d:2.8,push:0,draw:(x,tt)=>tt_neuron(x,960,520,1.5,{grow:1})},
+    {cut:true,at:P.micro-0.5,place:"tt_labQuiet",keys:[[P.micro-0.5,960,500,1.08],[P.micro,960,520,1.0]],d:2.4,push:0.01,draw:(x,tt)=>{const gone=tt>P.wipe+0.1;
       tt_tubes(x,360,240,1200,420,{pearl:gone?0:ag_in(tt,P.micro,0.6),t:tt});const m=tt_pop(tt,P.micro+0.2);tt_tag(x,960,700,"microtubules",{a:m.a,k:m.k});
       const g=tt_pop(tt,P.wipe+0.3),n=tt_pop(tt,c.disagree+0.3),o=tt_pop(tt,P.tests-0.1);
       tt_tag(x,560,790,"gone too fast to matter?",{a:g.a,k:g.k,col:AG.amber});tt_tag(x,1360,790,"not so fast",{a:n.a,k:n.k});tt_tag(x,960,790,"tests go on",{a:o.a,k:o.k});}},
     // what Llinás wrote, and what he later asked
-    {at:c.y2001-0.4,place:"lab",keys:[[c.y2001-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{ag_desk(x,120,1060,1680,{depth:300,th:30});tt_book(x,600,780,{});ag_roomLight(x,1);
+    {at:c.y2001-0.4,place:"lab",keys:[[c.y2001-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{ag_desk(x,120,1060,1680,{depth:300,th:30});tt_book(x,600,780,{});ag_roomLight(x,1);
       const q1=tt_pop(tt,c.y2001+1.2),q2=tt_pop(tt,c.y2007+0.4);
       tt_quote(x,980,150,"‘I sincerely doubt it is a plausible scenario worth pursuing at any serious level.’","Rodolfo Llinás · 2001",{w:820,a:q1.a,k:q1.k});
       tt_quote(x,980,470,"‘Filaments? Microtubules? Quantum mechanics?’",null,{w:820,kick:"2007",a:q2.a,k:q2.k});}},
@@ -2972,7 +2994,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
       tt_oldDesk(x,520,880,780,{});ag_person(x,TT_DESC,900,574,0.8,{t:tt,pose:"desk",cut:790,gaze:[0,2.5]});tt_candle(x,1180,820,tt,1);tt_automaton(x,700,830,tt,1);
       const q=tt_pop(tt,c.descartes+2.4);tt_quote(x,360,110,"a machine could never arrange its words to answer whatever is said to it",null,{w:860,a:q.a,k:q.k});}},
     // today, machines do: a question goes into the ring, and an answer comes straight out, word by word
-    {at:c.today-0.4,place:"lab",keys:[[c.today-0.4,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const [rx,ry]=[1124,476],u=ag_sine(tt_on(tt,c.today+0.6,0.8));
+    {at:c.today-0.4,place:"lab",keys:[[c.today-0.4,960,540,1.0]],d:2,push:0,draw:(x,tt)=>{const [rx,ry]=[1124,476],u=ag_sine(tt_on(tt,c.today+0.6,0.8));
       ag_loop(x,rx,ry,{t:tt,think:ag_io(tt,c.today+1.1,a0+2.2,0.3),label:null,stepA:[0,0,0]});ag_roomLight(x,1);
       if(u<1){x.save();x.globalAlpha*=1-clamp((u-0.75)/0.25,0,1);const qx=lerp(470,rx,u),qy=lerp(250,ry,u)-Math.sin(Math.PI*u)*30,s=lerp(1,0.25,u*u);x.translate(qx,qy);x.scale(s,s);
         ag_textCard(x,-230,-60,460,{title:"Can you say that more simply?"},{});x.restore();}
@@ -2992,7 +3014,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
       const L=tt_pop(tt,P.like),N=tt_pop(tt,P.not),D=tt_pop(tt,P.dk),go=1-ag_in(tt,c.helps-0.9,0.4);
       tt_tag(x,960,520,"like us",{a:L.a*go,k:L.k,col:AG.green});tt_tag(x,960,610,"not like us",{a:N.a*go,k:N.k,col:AG.amber});tt_tag(x,960,700,"still don't know",{a:D.a*go,k:D.k});}},
     // the room: Jun hands the agent a task, read only; the sign-off stays with Mei; the five questions on the wall, each with its tag
-    {at:c.helps-0.4,place:"lab",keys:[[c.helps-0.4,1000,560,1.08],[c.answers,960,540,1.0]],d:4,push:0,draw:(x,tt)=>{const t0=c.helps-0.4,back=tt>=t0+1.9,lift=ag_sine(tt_on(tt,P.keep-0.3,0.8));
+    {cut:true,at:c.helps-0.4,place:"lab",keys:[[c.helps-0.4,1000,560,1.08],[c.answers,960,540,1.0]],d:4,push:0,draw:(x,tt)=>{const t0=c.helps-0.4,back=tt>=t0+1.9,lift=ag_sine(tt_on(tt,P.keep-0.3,0.8));
       tt_team(x,tt,{pose:["explain","desk","hang","hang","explain"],pose2:[null,TT_LIFT],mix:[0,lift],hold:[null,tt_heldSign(clamp(lift*2.5,0,1))],
         gaze:TT_SEATS.map((_,i)=>i===0?[3,-1]:[3,0]),smile:[0.5,0.45,0.35,0.35,0.35],core:0.4+0.5*ag_io(tt,P.hand+1.4,c.answers,0.6)});
       tt_qrow(x,{out:back?-1:4,tags:[1,1,1,1,ag_in(tt,t0+1.9,0.5)],a:1-ag_in(tt,c.breath,0.8)});
@@ -3005,6 +3027,9 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
   if(t>=c.helps-0.4&&t<c.helps+1.5)tt_cardFwd(ctx,4,1-tt_on(t,c.helps,1.5),ag_in(t,c.helps-0.4,0.6));
   tt_cornerAt(ctx,t,"The Dutch Republic · 1637",c.descartes-0.1,c.today-0.5,{col:[236,222,200]});
   ag_end(ctx,S,t,c.breath,TT_TITLE,"We don't have the answers yet. Keep wondering.","Film 8 of 9");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["five", "taught", "mixing", "wire", "feels", "human"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

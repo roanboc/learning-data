@@ -47,15 +47,15 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       ac_form(x,tt,{read:row(tt),readA:fin(tt,P.scr+0.3,0.4)*(1-fin(tt,P.appr-0.2,0.4)),q:1,ring:clamp((tt-P.appr+0.1)/1.0,0,1),draft:fin(tt,P.fix-0.1,0.6)});
       ac_note(x,tt,{p:[P.where,P.rule,P.who].map(s=>fin(tt,s-0.15,0.5))});}},
     // eight in the morning: Anil reads the note, and nods
-    {at:P.morn,place:"facMorning",keys:[[P.morn,930,520,1.3],[P.morn+0.1,940,515,1.34]],d:4,draw:(x,tt)=>{
+    {cut:true,at:P.morn,place:"facMorning",keys:[[P.morn,930,520,1.3],[P.morn+0.1,940,515,1.34]],d:4,draw:(x,tt)=>{
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",flip:true,t:tt,nod:ac_nod(tt,P.agrees)});
       ac_facDesk(x,"morning");ac_formSmall(x,tt,{sent:1,q:1,note:1,ok:0});}},
     // the screen: he marks the column, in gold; the draft goes, and the checks pass; no one had to wait
-    {at:P.marks-0.4,place:"screenMorning",keys:[[P.marks-0.4,960,540,1]],push:0.02,draw:(x,tt)=>{
+    {cut:true,at:P.marks-0.4,place:"screenMorning",keys:[[P.marks-0.4,960,540,1]],push:0.02,draw:(x,tt)=>{
       ac_form(x,tt,{q:1,draft:1,clsAt:P.marks+0.1,ok:fin(tt,P.pd+0.4,0.5)});ac_note(x,tt,{});}},
     // the office: everyone who can open the list sees stars where the date of birth was; then what this shows, each part beside what it
     // stands for
-    {at:P.saw-0.6,place:"facMorning",keys:[[P.saw-0.6,960,540,1]],push:0.02,draw:(x,tt)=>{const g=fin(tt,P.tg[2]-0.1,0.6),ex=expr=>tt>P.saw+1.0?"smile":null;
+    {cut:true,at:P.saw-0.6,place:"facMorning",keys:[[P.saw-0.6,960,540,1]],push:0.02,draw:(x,tt)=>{const g=fin(tt,P.tg[2]-0.1,0.6),ex=expr=>tt>P.saw+1.0?"smile":null;
       gv_halo(x,seat[0]-260,GV_FX.top-440,520,440,GV.gold,0.9*g);
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",flip:true,t:tt,expr:ex()});ac_facDesk(x,"morning");
       ac_formSmall(x,tt,{sent:1,cls:1,note:1,ok:1,deco:1,ruleLit:fin(tt,P.tg[0]-0.1,0.6),halo:fin(tt,P.tg[1]-0.1,0.6)});
@@ -65,7 +65,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       ac_tagAt(x,tt,P.tg[1]-0.1,null,fx+fw/2,fy+fh+64,"an agent, on every change, at any hour",{size:34,wash:WC_SIDE.tech,washA:0.3});
       ac_tagAt(x,tt,P.tg[2]-0.1,null,seat[0]+20,GV_FX.top-470,"a person who decides",{size:34,wash:GV.gold,washA:0.3});}},
     // wordless: Anil ticks the note resolved; the screen clears for the title
-    {at:P.br,place:"screenMorning",keys:[[P.br,960,540,1.02],[P.br+0.1,960,560,1.06]],d:2.4,push:0,draw:(x,tt)=>{
+    {cut:true,at:P.br,place:"screenMorning",keys:[[P.br,960,540,1.02],[P.br+0.1,960,560,1.06]],d:2.4,push:0,draw:(x,tt)=>{
       const cl=fin(tt,P.title-0.6,0.6);ac_form(x,tt,{clsAt:-99,ok:1,fade:1.25*cl});ac_note(x,tt,{res:clamp((tt-P.br-0.4)/0.6,0,1),a:1-cl});}}]);
   // imagined, and said so; and who Anil is
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.5,0.5)*(1-fin(t,P.title,0.4)));
@@ -93,7 +93,7 @@ scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     {at:P.dr,place:"data",keys:[[P.dr,860,470,1.22],[P.knows-0.2,820,440,1.3]],d:2.2,draw:(x,tt)=>{ac_queueSmall(x,{});
       person(x,"jun",1000,905,0.8,{pose:"listen",pose2:"ac_pointUp",mix:gv_io(tt,P.dr+0.3,P.bd+1,0.5),flip:true,t:tt});}},
     // his board, close: every change that nobody else owns, and the Faculty of Health's goes up
-    {at:P.bd,place:"boardData",keys:[[P.bd,960,480,1.04],[P.bd+0.1,960,470,1]],d:2.4,push:0.02,draw:(x,tt)=>ac_queue(x,tt,clamp((tt-P.owns+0.2)/0.6,0,1))},
+    {cut:true,at:P.bd,place:"boardData",keys:[[P.bd,960,480,1.04],[P.bd+0.1,960,470,1]],d:2.4,push:0.02,draw:(x,tt)=>ac_queue(x,tt,clamp((tt-P.owns+0.2)/0.6,0,1))},
     // across the faculty's office, the advisers' desk: the tray for the call list, empty, and an adviser waiting
     {at:P.adv,place:"advisers",keys:[[P.adv,960,556,1.1],[P.adv+0.1,970,552,1.14]],d:3,draw:(x,tt)=>{
       gv_behind(x,"ac_adviser",A.seat[0],A.top,A.seat[1],{pose:"ac_wait",expr:"concerned",t:tt});ac_advisersDesk(x);ac_cradle(x);ac_tray(x,0);}},
@@ -118,7 +118,7 @@ scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
       person(x,"noor",620,905,0.8,{pose:"listen",pose2:"reach",mix:fin(tt,1.0,0.6),t:tt});
       person(x,"yusuf",1250,905,0.8,{pose:"listen",flip:true,t:tt,nod:ac_nod(tt,2.3)});}},
     // the board, close: the sheet's four questions and Jun's page; the fresh page's title goes in by hand, then its steps, as pencil lines
-    {at:P.bc,place:"boardGov",keys:[[P.bc,960,480,1],[P.bc+0.1,1040,480,1.05]],d:4,push:0.02,draw:(x,tt)=>
+    {cut:true,at:P.bc,place:"boardGov",keys:[[P.bc,960,480,1],[P.bc+0.1,1040,480,1.05]],d:4,push:0.02,draw:(x,tt)=>
       ac_boardGov(x,tt,{fresh:clamp((tt-P.as-0.05)/1.2,0,1),lines:clamp((tt-P.steps)/(P.chg+0.4-P.steps),0,1)})},
     // the checklist, printed, on Yusuf's desk: one page, in plain words
     {at:P.pg,place:"sheet",keys:[[P.pg,960,540,1]],push:0.03,draw:(x,tt)=>ac_checklist(x,tt,{ink:1})},
@@ -150,15 +150,15 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,
       ac_formSmall(x,tt,AC_LFORM);ac_smallReview(x,tt,{read:clamp((tt-0.5)/1.4,0,1)*4,readA:gv_io(tt,0.4,2.0,0.25),a:fin(tt,1.9,0.5)});}},
     // the screen, closer: two things pass; three findings, each with where, our rule, a draft and who decides; the sheet comes in with
     // what the checks couldn't say; then the first two are read out
-    {at:P.big,place:"screenBig",keys:[[P.big,960,500,1]],push:0.025,draw:(x,tt)=>ac_review(x,tt,{pass:[fin(tt,P.two+0.5,0.5),fin(tt,P.two+0.9,0.5)],
+    {cut:true,at:P.big,place:"screenBig",keys:[[P.big,960,500,1]],push:0.025,draw:(x,tt)=>ac_review(x,tt,{pass:[fin(tt,P.two+0.5,0.5),fin(tt,P.two+0.9,0.5)],
       find:[0,1,2].map(i=>fin(tt,P.thr+0.15*i,0.4)),part:P.part.map(s=>fin(tt,s-0.1,0.4)),
       v:[[fin(tt,P.nob,0.6),fin(tt,P.nob+0.5,0.8),fin(tt,P.own,0.5),fin(tt,P.own+0.4,0.5)],[fin(tt,P.col,0.6),fin(tt,P.iden-0.4,0.8),fin(tt,P.iden,0.5),fin(tt,P.iden+0.3,0.5)],[0,0,0,0]],
       red:fin(tt,P.ask-0.2,0.5),lit:gv_io(tt,P.part[2]-0.1,P.one-0.4,0.4),dim:dim(tt),so:gv_io(tt,P.what-0.1,P.one-0.5,0.5),tick:fin(tt,P.part[2],0.5),tick2:fin(tt,P.part[3],0.5)})},
     // finding 2, close: it counts, and shows no values
-    {at:P.ty,place:"screenBig",keys:[[P.ty,960,500,1],[P.ty+0.1,930,500,1.04]],d:3,push:0,draw:(x,tt)=>ac_tally(x,tt,{read:clamp((tt-P.counts)/1.5,0,1)*7,
+    {cut:true,at:P.ty,place:"screenBig",keys:[[P.ty,960,500,1],[P.ty+0.1,930,500,1.04]],d:3,push:0,draw:(x,tt)=>ac_tally(x,tt,{read:clamp((tt-P.counts)/1.5,0,1)*7,
       readA:gv_io(tt,P.counts-0.2,P.counts+1.6,0.25),says:fin(tt,P.counts+1.5,0.4)+fin(tt,P.counts+2.0,0.4)+fin(tt,P.look-0.1,0.4)+fin(tt,P.look+0.8,0.4)})},
     // finding 3, close: a rule the faculty wrote, which no check could find; the drafted check, what it finds today, and who decides
-    {at:P.t3,place:"screenBig",keys:[[P.t3,960,500,1],[P.t3+0.1,975,505,1.03]],d:4,push:0,draw:(x,tt)=>ac_f3(x,tt,{tag:fin(tt,P.t3+0.6,0.5),
+    {cut:true,at:P.t3,place:"screenBig",keys:[[P.t3,960,500,1],[P.t3+0.1,975,505,1.03]],d:4,push:0,draw:(x,tt)=>ac_f3(x,tt,{tag:fin(tt,P.t3+0.6,0.5),
       read:clamp((tt-P.only+0.2)/1.2,0,1),readA:gv_io(tt,P.only-0.3,P.noth+0.6,0.3),draft:fin(tt,P.dr-0.1,0.6),pass:fin(tt,P.rows,0.5),who:clamp((tt-P.hl-0.1)/1.0,0,1)})}]);
   wc_paperOver(ctx,S);});
 
@@ -174,11 +174,11 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
     {at:0,place:"screenBig",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:fin(tt,P.unsure-0.1,0.5)})},
     // the two long codes: alike to look at; their counts tell them apart; the award code's description; when in doubt, the stricter
     // class, and ask
-    {at:P.tb,place:"screenBig",keys:[[P.tb,960,500,1]],push:0.02,draw:(x,tt)=>ac_keys(x,tt,{tag:fin(tt,P.long-0.1,0.5),lp:fin(tt,P.one-0.1,0.6),
+    {cut:true,at:P.tb,place:"screenBig",keys:[[P.tb,960,500,1]],push:0.02,draw:(x,tt)=>ac_keys(x,tt,{tag:fin(tt,P.long-0.1,0.5),lp:fin(tt,P.one-0.1,0.6),
       lc:clamp((tt-P.one-0.2)/1.0,0,1),ap:fin(tt,P.two-0.2,0.6),ac:clamp((tt-P.two)/1.0,0,1),desc:fin(tt,P.desc-0.1,0.5),q:clamp((tt-P.maybe)/0.6,0,1),
       s:clamp((tt-P.but+0.2)/0.9,0,1),step:clamp((tt-P.ck+0.2)/0.8,0,1),draft:fin(tt,P.draft-0.1,0.5),ask:fin(tt,P.ask-0.1,0.5)})},
     // the faculty's office: Anil answers, in gold
-    {at:P.an,place:"faculty",keys:[[P.an,930,520,1.3],[P.an+0.1,940,515,1.34]],d:3,draw:(x,tt)=>{const typing=tt>P.conf-0.4&&tt<P.conf+1.8;
+    {cut:true,at:P.an,place:"faculty",keys:[[P.an,930,520,1.3],[P.an+0.1,940,515,1.34]],d:3,draw:(x,tt)=>{const typing=tt>P.conf-0.4&&tt<P.conf+1.8;
       gv_behind(x,"anil",seat[0],GV_FX.top,seat[1],{pose:"listen",pose2:"write",mix:gv_io(tt,P.conf-0.4,P.conf+1.8,0.3),flip:true,t:tt,expr:typing?null:"smile"});
       ac_facDesk(x);ac_smallReply(x,tt,{a:fin(tt,P.conf-0.3,0.4),typed:clamp((tt-P.conf)/1.6,0,1)});}},
     // the table again: award code identifies no one, with Anil's reason; name stays direct
@@ -286,3 +286,6 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
   wc_year(ctx,56,72,"Imagined · a few years from now",fin(t,0.4,0.5)*(1-fin(t,P.dawn,0.4))+fin(t,P.last,0.5)*(1-fin(t,P.end,0.4)));
   gv_end(ctx,S,t,P.end,"An agent that checks","An agent checks what's written. People decide.","Film 9 of 10");
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["review", "decides"]);

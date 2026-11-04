@@ -45,7 +45,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher standing by
     {at:s4,keys:[[s4,960,560,1.06]],push:0.02,draw:(x,tt)=>ee_school(x,tt,{teacher:true})},
     // close: the teacher's pen strikes a word in red, and the pupil looks up
-    {at:s4b,keys:[[s4b,800,640,1.6],[s4b+0.1,780,630,1.66]],d:4,push:0,draw:(x,tt)=>{const st=clamp((tt-P.wrongW-0.1)/0.7,0,1);
+    {cut:true,at:s4b,keys:[[s4b,800,640,1.6],[s4b+0.1,780,630,1.66]],d:4,push:0,draw:(x,tt)=>{const st=clamp((tt-P.wrongW-0.1)/0.7,0,1);
       ee_school(x,tt,{strike:st,look:tt>P.wrongW+0.6,pen:gv_io(tt,P.wrongW-0.7,s5-0.2,0.5)});}},
     // the millions who use the words, one after another: a shopkeeper doing his accounts, a clerk at a high desk, a market seller
     {at:s5,keys:[[s5,960,540,1.0]],push:0.02,draw:(x,tt)=>{ee_paper(x);[["shop",500,400,-0.03],["clerk",1000,520,0.025],["market",1430,390,-0.02]].forEach(([k,cx,cy,r],i)=>{const t0=s5+0.15+i*0.5;
@@ -67,7 +67,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
           return i<4?{pose:"listen",pose2:"ee_shake",mix:clamp(sh+bob,0,1),flip:i%2===1,expr:"smile"}:{pose:"listen",pose2:"wave",mix:sh,flip:true,expr:"smile"};}});
       x.drawImage(ee_mexTable(),0,0,W,H);EE_DELS.forEach(([,i,n])=>ee_tent(x,EE_MX.seats[i],744,n,1));}},
     // Madrid, 1956: at a table like the first, a card for Spain is set down beside theirs
-    {at:s9,keys:[[s9,1170,640,1.6]],push:0.02,draw:(x,tt)=>ee_acadDay(x,tt,[["eeD3",2],["eeD1",3],["eeD4",4],["eeD6",5],["eeD7",6]],{
+    {cut:true,at:s9,keys:[[s9,1170,640,1.6]],push:0.02,draw:(x,tt)=>ee_acadDay(x,tt,[["eeD3",2],["eeD1",3],["eeD4",4],["eeD6",5],["eeD7",6]],{
       pose:id=>id==="eeD7"?{pose:"listen",expr:"smile"}:null,
       on:q=>{[[740,"Mexico"],[960,"Peru"],[1180,"Argentina"],[1400,"Chile"]].forEach(([X,n])=>ee_tent(q,X,744,n,1));ee_tent(q,1612,744,"Spain",clamp((tt-P.spain-0.2)/0.8,0,1),{drop:true});}})},
     // today: a member writes a word on a card at her desk in a city of the Americas, large in the middle; as the line says "from where they
@@ -83,7 +83,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       on:q=>{ee_slipAt(q,752,708,92,0.06,{col:[255,253,246]});ee_slipAt(q,640,714,80,-0.1,{col:[255,253,246]});}})},
     // the Spanish Academy approves it: a show of hands. It starts framed as the commission's shot, so the room stays put while the people
     // change, and draws back to the whole table
-    {at:s12,keys:[[s12,620,560,1.5*1.03],[s12+0.45,960,540,1.0]],d:1.6,push:0,draw:(x,tt)=>ee_acadDay(x,tt,[["eeC5",0],["eeC1",1],["eeC2",2],["eeC6",3],["eeC3",4],["eeC4",5],["eeC7",6]],{
+    {cut:true,at:s12,keys:[[s12,620,560,1.5*1.03],[s12+0.45,960,540,1.0]],d:1.6,push:0,draw:(x,tt)=>ee_acadDay(x,tt,[["eeC5",0],["eeC1",1],["eeC2",2],["eeC6",3],["eeC3",4],["eeC4",5],["eeC7",6]],{
       pose:id=>{const i=["eeC5","eeC1","eeC2","eeC6","eeC3","eeC4","eeC7"].indexOf(id),v=ease(clamp((tt-P.approves-0.1-((i*3)%7)*0.1)/0.8,0,1));
         return v<0.5?{pose:"listen",pose2:"ee_voteUp",mix:v*2}:{pose:"ee_voteUp",pose2:"ee_vote",mix:(v-0.5)*2};}})},
     // every other academy gives its view: the change goes out to twenty-two cards in a ring, and comes back ticked; then all twenty-three
@@ -156,19 +156,19 @@ scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
       if(fly>0&&!got){const [fx,fy]=ee_along(EE_FLY,easeCam(fly));ee_flyCard(x,fx,fy,0.6,Math.sin(fly*Math.PI)*0.12,1);}
       gv_walker(x,"yusuf",yw,905,0.58,{t:tt});gv_walker(x,"noor",nw,905,0.58,Object.assign({t:tt,carry:heldNotebook},nw.moving?{}:{pose:"write"}));}},
     // Mei's desk: the request lands in her hands; she reads it, and turns to her screen, and starts the draft
-    {at:s2,place:"regClose",keys:[[s2,900,520,1.0],[s2+0.1,860,540,1.06]],d:2.4,draw:(x,tt)=>{const turn=fin(tt,P.drafts-0.1,0.5);
+    {cut:true,at:s2,place:"regClose",keys:[[s2,900,520,1.0],[s2+0.1,860,540,1.06]],d:2.4,draw:(x,tt)=>{const turn=fin(tt,P.drafts-0.1,0.5);
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"hold",pose2:"ee_toScreen",mix:turn,carry:turn<0.5?ee_heldReq:null,t:tt});
       x.drawImage(gv_place("regDesk"),0,0,W,H);ee_onScreen(x,GV_RX.screen,q=>ee_draft(q,tt,{line:i=>clamp((tt-P.drafts-0.1-i*0.3)/0.5,0,1)}));
       ee_nameCard(x,900,640,"Mei Tanaka","steward, registrar's office",gv_io(tt,s2+0.3,s3-0.1,0.35));}},
     // her draft, close: the term, what it means, an example, its owner, its status
-    {at:s3,place:"screenReg",keys:[[s3,925,440,1.04]],push:0.02,draw:(x,tt)=>ee_draft(x,tt,{line:i=>i===0?1:i===1?clamp((tt-s3+0.1)/0.9,0,1):i===2?clamp((tt-P.ex+0.1)/0.8,0,1):clamp((tt-P.ex-0.75-(i-3)*0.3)/0.35,0,1)})},
+    {cut:true,at:s3,place:"screenReg",keys:[[s3,925,440,1.04]],push:0.02,draw:(x,tt)=>ee_draft(x,tt,{line:i=>i===0?1:i===1?clamp((tt-s3+0.1)/0.9,0,1):i===2?clamp((tt-P.ex+0.1)/0.8,0,1):clamp((tt-P.ex-0.75-(i-3)*0.3)/0.35,0,1)})},
     // the data team's room: on a screen, the agent reads her draft row by row, and ticks what a term needs; then its note slides up:
     // the three reports and two dashboards the change touches
     {at:s4,place:"screenData",keys:[[s4,925,440,1.04]],push:0.02,draw:(x,tt)=>{const r0=P.checks+0.15,rd=(P.lists-0.5-r0)/4;
       ee_draft(x,tt,{agent:fin(tt,s4+0.25,0.5),read:(tt-r0)/rd,readA:gv_io(tt,r0-0.1,P.lists-0.45,0.3),tick:i=>fin(tt,r0+(i+1)*rd-0.1,0.35),
         note:clamp((tt-P.lists+0.3)/0.7,0,1),touch:i=>fin(tt,i<3?P.three-0.15+i*0.3:P.two-0.15+(i-3)*0.35,0.45)});}},
     // the registrar's office: she reads the draft and the agent's note, and decides; her decision, written in, dated and signed
-    {at:s6,place:"registrar",keys:[[s6,1047,520,1.06],[s6+0.1,1047,510,1.1]],d:3.4,draw:(x,tt)=>{
+    {cut:true,at:s6,place:"registrar",keys:[[s6,1047,520,1.06],[s6+0.1,1047,510,1.1]],d:3.4,draw:(x,tt)=>{
       person(x,"ee_reg",930,905,0.82,{pose:"ee_read",carry:ee_heldDraft,t:tt,expr:tt>P.decides+0.4?"smile":"calm"});
       ee_nameCard(x,600,330,"the registrar","owner",gv_io(tt,P.reg-0.1,P.decides+0.2,0.35));
       ee_decision(x,fin(tt,P.decides-0.25,0.5),{w:i=>clamp((tt-P.decides-0.05-i*0.3)/0.45,0,1),date:fin(tt,P.decides+0.9,0.4),sign:clamp((tt-P.decides-1.1)/0.6,0,1)});}},
@@ -290,13 +290,13 @@ scene("chart",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     // to the calendar as it turns to February, and three weeks are ringed for Mei's leave
     {at:s3,place:"chartWall",keys:[[s3,960,540,1.0],[P.feb-1.6,1280,520,1.5]],d:1.7,push:0,draw:(x,tt)=>wall(x,tt)},
     // Noor's map, the rest of it dimmed: the steward's chip turns to the colleague who fills her role while she's away
-    {at:s4,keys:[[s4,922,527,1.14],[s4+0.1,890,524,1.16]],d:2.4,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("eeMap"),0,0,W,H);const v=gv_io(tt,P.coll-0.3,s5+0.5,0.5);
+    {cut:true,at:s4,keys:[[s4,922,527,1.14],[s4+0.1,890,524,1.16]],d:2.4,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("eeMap"),0,0,W,H);const v=gv_io(tt,P.coll-0.3,s5+0.5,0.5);
       ee_fadeCut(x,()=>{ee_map(x,Object.assign(ee_mapSoFar(tt),{info:1,termHead:1,termLit:0.35,house:1,swap:clamp((tt-P.coll-0.3)/0.7,0,1),
         roleLit:i=>i===1?gv_io(tt,P.coll-0.1,s5,0.4):0,chipLit:i=>i===1?0.9*gv_io(tt,P.coll+0.4,s5,0.4):0}));
         if(v>0.01){const hx=ee_mx(1)-140,hy=140,hw=280,hh=320,r=24;x.save();x.fillStyle=rgba([70,58,46],0.32*v);x.beginPath();x.rect(-W,-H,3*W,3*H);
           x.moveTo(hx+r,hy);x.arcTo(hx,hy,hx,hy+hh,r);x.arcTo(hx,hy+hh,hx+hw,hy+hh,r);x.arcTo(hx+hw,hy+hh,hx+hw,hy,r);x.arcTo(hx+hw,hy,hx,hy,r);x.closePath();x.fill("evenodd");x.restore();}});}},
     // his desk again: the chart's steward row turns to her colleague, until 19 February; and back to Mei on the Monday she returns
-    {at:s5,place:"chartWall",keys:[[s5,960,540,1.0],[s5+0.1,960,536,1.02]],d:5,push:0,draw:(x,tt)=>wall(x,tt,{who:clamp((tt-P.chg+0.05)/0.7,0,1)*(1-clamp((tt-P.ret+0.05)/0.7,0,1)),
+    {cut:true,at:s5,place:"chartWall",keys:[[s5,960,540,1.0],[s5+0.1,960,536,1.02]],d:5,push:0,draw:(x,tt)=>wall(x,tt,{who:clamp((tt-P.chg+0.05)/0.7,0,1)*(1-clamp((tt-P.ret+0.05)/0.7,0,1)),
       rowLit:0.8*Math.max(gv_io(tt,P.chg-0.2,P.chg+1.3,0.35),gv_io(tt,P.ret-0.2,P.ret+1.3,0.35))})},
     // the office: nobody retypes it; Yusuf tosses the old chart, folded, into the box marked retired, and smiles
     {at:s6,place:"officeNow",keys:[[s6,700,560,1.32],[s6+0.1,690,566,1.36]],d:3,push:0,draw:(x,tt)=>{const h=ee_handsAt("yusuf",YX,905,0.8,Object.assign({t:go},YO));
@@ -326,15 +326,15 @@ scene("product",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
     {at:0,place:"officeNow",keys:[[0,980,420,1.4],[0.1,960,425,1.44]],d:4.4,draw:(x,tt)=>{const up=fin(tt,0.7,0.6)*(1-fin(tt,2.9,0.6));
       ee_binders(x);ee_cardSmall(x,fin(tt,P.gl-0.15,0.5));ee_deskBook(x);person(x,"yusuf",1150,905,0.8,{pose:"listen",pose2:"ee_pin",mix:up,t:tt,flip:true});}},
     // the card, close: each line lit as it's said
-    {at:s2,place:"boardGov",keys:[[s2,960,500,1.0],[s2+0.1,960,505,1.04]],d:18,push:0,draw:(x,tt)=>ee_productCard(x,{seg:(i,j,k)=>fin(tt,at[i][j][k]-0.1,0.4),
+    {cut:true,at:s2,place:"boardGov",keys:[[s2,960,500,1.0],[s2+0.1,960,505,1.04]],d:18,push:0,draw:(x,tt)=>ee_productCard(x,{seg:(i,j,k)=>fin(tt,at[i][j][k]-0.1,0.4),
       band:i=>band(tt,i)})},
     // Clara's screen: the glossary's list of what changed this week; completion first, lit
     {at:s3,place:"screenPlan",keys:[[s3,960,420,1.26],[s3+0.1,960,425,1.29]],d:3,push:0,draw:(x,tt)=>ee_weekPage(x,{row:i=>fin(tt,P.week+0.05+i*0.25,0.4),lit:fin(tt,c.week+1.1,0.5)})},
     // Yusuf's screen: who reads each term; and the nine nobody read
-    {at:s4,keys:[[s4,619,430,1.55],[s4+0.1,612,428,1.58]],d:3,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("chartWall"),0,0,W,H);
+    {cut:true,at:s4,keys:[[s4,619,430,1.55],[s4+0.1,612,428,1.58]],d:3,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("chartWall"),0,0,W,H);
       ee_readers(x,{left:i=>fin(tt,s4+0.35+i*0.12,0.35),right:i=>fin(tt,P.counts+0.6+i*0.1,0.3)});}},
     // his desk: the nine, each on a card, sent to its owner, and back with their yes
-    {at:s5,place:"desk",keys:[[s5,960,500,1.0],[s5+0.1,960,505,1.03]],d:5,push:0,draw:(x,tt)=>ee_retireCards(x,{card:i=>fin(tt,s5+0.35+i*0.1,0.5),
+    {cut:true,at:s5,place:"desk",keys:[[s5,960,500,1.0],[s5+0.1,960,505,1.03]],d:5,push:0,draw:(x,tt)=>ee_retireCards(x,{card:i=>fin(tt,s5+0.35+i*0.1,0.5),
       yes:i=>clamp((tt-P.retired-0.1-i*0.18)/0.6,0,1)})},
     // the office: he tosses them into the box marked retired, with the old chart
     {at:s6,place:"officeNow",keys:[[s6,700,560,1.32],[s6+0.1,690,566,1.36]],d:2,push:0,draw:(x,tt)=>{const h=ee_handsAt("yusuf",YX,905,0.8,Object.assign({t:go},YO));
@@ -373,7 +373,7 @@ scene("where",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       person(x,"clara",CX,905,0.8,{pose:"listen",t:tt,flip:tn>=0.5,expr:tt>P.hers-0.4?"smile":"calm"});x.restore();}},
     // Noor's map: the service, a way in for anyone; its steps and the roles that do them; the words in the information band; then all of
     // it; it fades back as the end card comes over it
-    {at:s6,place:"eeMap",keys:[[s6,EE_MAPV[0],EE_MAPV[1],EE_MAPV[2]],[s6+0.1,EE_MAPV[0]-8,EE_MAPV[1]+2,EE_MAPV[2]+0.02]],d:7,push:0,draw:(x,tt)=>{
+    {cut:true,at:s6,place:"eeMap",keys:[[s6,EE_MAPV[0],EE_MAPV[1],EE_MAPV[2]],[s6+0.1,EE_MAPV[0]-8,EE_MAPV[1]+2,EE_MAPV[2]+0.02]],d:7,push:0,draw:(x,tt)=>{
       withA(x,1-0.6*fin(tt,c.breath+0.2,1.0),()=>ee_fadeCut(x,()=>{ee_map(x,Object.assign(ee_mapSoFar(tt),{info:1,termHead:1,house:1,svcLit:fin(tt,P.anyone-0.2,0.5),stepLit:i=>fin(tt,P.step-0.2+i*0.1,0.5),
         roleLit:i=>fin(tt,P.role-0.3+i*0.1,0.5),chipLit:i=>0.8*fin(tt,P.role-0.1+i*0.1,0.5),infoLit:i=>fin(tt,P.words-0.2+i*0.08,0.5),
         termLit:Math.max(0.35,fin(tt,P.words-0.2,0.5)),glossLit:fin(tt,P.everyone-0.1,0.5),copyLit:j=>fin(tt,P.everyone+j*0.1,0.5),lit:fin(tt,P.use+0.3,0.8)}));}));}}]);
@@ -386,3 +386,6 @@ const WC_PLACES={acad:c=>ee_paintAcad(c,{}),acadDay:c=>ee_paintAcad(c,{day:true}
   regClose:gv_paintRegistrarClose,regDesk:gv_paintRegistrarDesk,registrar:gv_paintRegistrar,screenReg:c=>gv_paintScreenDesk(c,GV_ROOM.reg),
   screenData:c=>gv_paintScreenDesk(c,GV_ROOM.data),noor:gv_paintNoor,eeMap:ee_paintMap,office:gv_paintOffice,boardGov:c=>gv_paintBoardClose(c,GV_ROOM.gov),
   officeNow:ee_paintOfficeNow,chartWall:ee_paintChartWall,meiCal:ee_paintMeiCal,screenPlan:c=>gv_paintScreenDesk(c,GV_ROOM.plan)};
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["three", "roles", "needs", "chart"]);

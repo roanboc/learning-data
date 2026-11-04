@@ -144,10 +144,16 @@ function wd_cap(ctx,P){const c=P.hatC||WD_CAP;
   litFill(ctx,darken(c,0.12),-48,-44,48,-22);seam(ctx,c,0.55);}
 
 /* poses: an arm's angles to put its hand on a point (in the figure's own units, from its feet), the elbow low; and a pose with
-   the hands on points of the picture, for someone at x with their feet at y, at scale s (flip: facing the other way) */
+   the hands on points of the picture, for someone at x with their feet at y, at scale s (flip: facing the other way). A hand near
+   the shoulder has no good bend: both ways to reach it point the elbow up, and the lower one swaps sides as the hand passes over or
+   under the shoulder, so the workers' arms, whose hands work at shoulder height, snapped across their bodies in one frame. Within
+   75 of the shoulder the elbow hangs instead, a little towards the hand, and the forearm points at it. The angles run from a quarter
+   turn inwards to three quarters outwards, so a forearm raised straight up (a hand on the cord) never jumps from a half turn one way
+   to a half turn the other: blended with another pose, the arm swung down and back up, and it slipped behind the body */
 function wd_ik(P_,s,T){const sx=s*(P_.build.sh-12),sy=-416,dx=s*(T[0]-sx),dy=T[1]-sy,L1=108,L2=113,D=clamp(Math.hypot(dx,dy),8,L1+L2-1),
-    th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+D*D-L2*L2)/(2*L1*D),-1,1)),pick=a=>[a,Math.atan2(dx-Math.sin(a)*L1,dy-Math.cos(a)*L1)],
-    A=pick(th+al),B=pick(th-al);return Math.cos(A[0])>=Math.cos(B[0])?A:B;}
+    th=Math.atan2(dx,dy),al=Math.acos(clamp((L1*L1+D*D-L2*L2)/(2*L1*D),-1,1)),A=th+al,B=th-al,low=Math.cos(A)>=Math.cos(B)?A:B,
+    a=lerp(0.25*clamp(dx/70,-1,1),Math.atan2(Math.sin(low),Math.cos(low)),sstep(45,75,D)),turn=v=>v<=-Math.PI/2?v+2*Math.PI:v;
+  return[turn(a),turn(Math.atan2(dx-Math.sin(a)*L1,dy-Math.cos(a)*L1))];}
 function wd_hands(id,x,y,s,o){o=o||{};const P_=PEOPLE[id],k=s*P_.build.h,f=p=>p&&[(o.flip?x-p[0]:p[0]-x)/k,(p[1]-y)/k],po=Object.assign({},POSE[o.base||"stand"],o.extra||{});
   if(o.L)po.L=wd_ik(P_,-1,f(o.L));if(o.R)po.R=wd_ik(P_,1,f(o.R));return po;}
 // someone on the line, behind the conveyor, in a pose of their own (po), or between a named pose and it

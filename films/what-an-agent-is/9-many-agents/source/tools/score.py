@@ -59,7 +59,9 @@ PENTA = (63, 65, 67, 70, 72, 75, 77)            # E flat, F, G, B flat, C: where
 # ---- the levels, measured by loudness on 3 November 2026 as tools/audio.py mixes them: where the music plays, it sits about 19.5 dB
 # under the voice while it speaks and 17 dB under it in the pauses, as the series' music does; a held chord, the clarinet and a drop's
 # bloom about level with each other; the pulse about 7 dB under the rest of the music; the effects about 13 dB under it (FX scales them)
-DL, VL, CL, FX = 0.06, 0.032, 0.06, 2.0
+# After the author's review of the series' opening films (4 November 2026), the music is 5 dB lower and the effects 8.5 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
+DL, VL, CL, FX = 0.034, 0.018, 0.034, 0.75
 
 def _ir(sec, lo):
     """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms"""
@@ -299,10 +301,11 @@ tT = bc('breath', 2.0)
 mark(tT, EB_D, EB, S0('little') + 0.2 - tT, 0.9, 0.85, seed=7)
 
 # 2. Much from little: inside a mound, each termite leaves its pellet at the top of a pillar (the picture's sum: ten workers, each with
-#    its own round of 8 to 10.6 s, leaving the pellet two-thirds of the way through it): a small voice and a soft pat for each, higher
-#    as the pillars rise. Ants: a few voices as they come into view, one as most take the shorter bridge, one as the trail becomes the
-#    colony's memory. Starlings: the wings, a few birds, then the lens: a voice for each of the seven neighbours. "This is emergence":
-#    the voices fall into step, and the chord, A flat
+#    its own round of 8 to 10.6 s, leaving the pellet two-thirds of the way through it): a soft pat for each, and a small voice for the
+#    first and for the arches, higher. Ants: a few voices as they come into view, and one as the trail becomes the colony's memory.
+#    Starlings: the wings, then the lens: a voice for each of the seven neighbours, ringing into "This is emergence", where the voices
+#    fall into step, and the chord, A flat. After the author's review (4 November 2026), the voices between, the shorter bridge's and
+#    the first birds' go without music: here the music came in nine times in forty seconds
 lw = lambda lid, word, off=0: W('little', lid, word, off)
 l0 = S0('little')
 PEL = []
@@ -314,28 +317,27 @@ for i in range(10):
             PEL.append((t_, i % 2))
 for j, (t_, s_) in enumerate(sorted(PEL)):
     m = PENTA[min(len(PENTA) - 1, int(t_ / 2.6) + (j % 2))]
-    drop(m, l0 + t_, 0.5, (-0.32, 0.32)[s_], ring=0.3)
+    if t_ < 2.0 or t_ > 7.5:  # a voice for the first pellets and for the arches; the pellets between only pat (4 November 2026)
+        drop(m, l0 + t_, 0.5, (-0.32, 0.32)[s_], ring=0.3)
     mud(l0 + t_ + 0.01, 0.025, (-0.32, 0.32)[s_])
 tA = lw('ants', 'Ants', -0.5)
 scatter([(tA + 0.5, 67, px(290)), (tA + 1.0, 70, px(650)), (tA + 1.6, 75, px(1650))], 0.5)
-drop(70, lw('ants', 'shorter', -0.4), 0.5, px(960), ring=0.5)
 drop(75, lw('trails', 'shared memory', 0.05), 0.5, px(960), ring=0.8)
 tB = lw('starlings', 'Starlings', -0.4)
 air(tB + 0.2, 2.2, 0.012, px(820), 150, 800)
-scatter([(tB + 0.7, 70, px(600)), (tB + 1.5, 67, px(1150)), (tB + 2.3, 72, px(820))], 0.45)
 tS = lw('starlings', 'six or seven', -0.5)
-scatter([(tS + 0.3 + 0.085 * k, m, px(1480) + 0.03 * (k - 3)) for k, m in enumerate((70, 72, 75, 77, 74, 79, 82))], 0.32, ring=0.3)
+scatter([(tS + 0.3 + 0.085 * k, m, px(1480) + 0.03 * (k - 3)) for k, m in enumerate((70, 72, 75, 77, 74, 79, 82))], 0.32, ring=0.6)
 tE = lw('emergence', 'This is emergence')
 mark(tE, AB_D, AB, lw('emergence', 'John Holland', 0.4) - tE, 0.9, 0.85, seed=11)
 
-# 3. Where nobody can trace why: the neurons, the softest voices, each as a signal reaches a cell (the picture's sum: a signal on link
-#    k of the 26 runs with period 2.2 + 0.5 * (k % 5) s and lights its cell at 0.9 of it), with no chord. The crash: the one pulse,
+# 3. Where nobody can trace why: the neurons, the softest voices, two as signals reach their cells (the picture's sum: a signal on link
+#    k of the 26 runs with period 2.2 + 0.5 * (k % 5) s and lights its cell at 0.9 of it), with no chord; the other cells light
+#    without music. The crash: the one pulse,
 #    low and muted, 96 beats a minute, from "did something no one planned"; it holds its breath in the pause before "In minutes",
 #    and stops at "then came back". The penny, the report, and three cards of people who still argue
 tw = lambda lid, word, off=0: W('trace', lid, word, off)
 t0_ = S0('trace')
-scatter([(t0_ + 1.47, 70, px(1469)), (t0_ + 3.33, 74, px(1022)), (t0_ + 4.52, 77, px(121)), (t0_ + 6.38, 72, px(393)), (t0_ + 7.84, 79, px(1793))],
-        0.3, ring=0.5)
+scatter([(t0_ + 3.33, 74, px(1022)), (t0_ + 4.52, 77, px(121))], 0.3, ring=0.5)
 urgent(tw('markets', 'something no one'), END('trace', 'potato') + 0.15, bpm=96, root=36, g=0.04, fade=1.6, steps=(0, 0, 1, 0))
 urgent(tw('minutes', 'In minutes', -0.05), tw('minutes', 'came back', 0.15), bpm=96, root=36, g=0.04, fade=0.5, steps=(0, 0, 1, 0))
 flick(tw('minutes', 'penny', -0.1), 0.012, px(1500))
@@ -379,8 +381,9 @@ tap(mw('group', 'enough', 0.4), 0.024, px(960))
 # 5. Agents on one board: the room, E flat, at the turn. The notes and emails; the board; a voice for each helper as it comes; their
 #    locks; each pinned card a soft tap; the checking agent's ticks, rising fifths. The pattern: three drops in three faculties, the
 #    same low note three times; side by side, the dots fly to one card and the voices fall into step: the 31, A flat. The word, copied:
-#    one note, the same each time it lands. "None had left": the flag; the flag's card pinned; "still studying", a tick. Clara strikes
-#    the word and stamps the reasons: the chord, E flat, with the clarinet. The joint degree gets its faculty; Jun's test passes: a tick
+#    one note, the same each time it lands. "None had left": the flag, and the flag's card pinned. Clara strikes the word and stamps
+#    the reasons: the chord, E flat, with the clarinet. The joint degree gets its faculty; Jun's new test, typed. The tick (E flat to
+#    B flat) isn't played at "still studying" or for the test: the crowd's held fifth on the same notes follows within seconds
 bw5 = lambda lid, word, off=0: W('board', lid, word, off)
 o0 = S0('board')
 chord(EB, o0 + 0.2, o0 + 2.6, 0.7, att=0.8, rel=1.8)
@@ -403,7 +406,6 @@ for i, s in enumerate((bw5('word', 'dropouts', -0.25), bw5('word', 'The others',
     drop(62, s, 0.5, px((1252, 1252, 868, 868)[i]), ring=0.45)
 flag(bw5('left', 'None had left'), 0.75, px(1060))
 pin(bw5('left', 'checking agent flagged', -0.1), 0.016, px(1647))
-tick(bw5('left', 'still studying', -0.2), 0.55, px(1647))
 for d in (0.37, 0.15, 0.51, 0.65):
     strike(bw5('decided', 'fixed the word', d), 0.008, px(1060))
 tAp = bw5('decided', 'approved', 0.25)
@@ -412,27 +414,25 @@ chord(EB, tAp, END('board', 'decided') + 1.4, 0.85, att=0.12, rel=1.8)
 bcl(Eb2, tAp, END('board', 'decided') + 1.4, 0.7, att=0.15, rel=1.0)
 drop(67, bw5('faculty', 'got its faculty', 0.3), 0.5, px(1647), ring=0.5)
 keys(bw5('faculty', 'a new test', -0.55), 5, 0.012, px(525), 0.13)
-tick(bw5('faculty', 'a new test', 1.2), 0.55, px(525))
 
 # 6. Is it alive?: the crowd breathing, a held fifth that swells and fades once with it. The cell: a slow ring of voices, one as each
-#    new part reaches its place (the picture's sum: a part every 3.2 s, at slot 29 c of 76 round the cell). The tortoise: its motor,
-#    slowing as its battery falls, then running home; a click as it docks, a tick as it charges. The frog cells: water-soft voices as
-#    they swim, as the cut heals, and as loose cells gather into new ones. Back in the room, the crowd breathing again; the switch: a
-#    click, and silence
+#    of the first two new parts reaches its place (the picture's sum: a part every 3.2 s, at slot 29 c of 76 round the cell), the rest
+#    coming round without music. The tortoise: its motor, slowing as its battery falls, then running home; a click as it docks. The frog
+#    cells: water-soft voices as the cut heals, and as loose cells gather into new ones. Back in the room, the crowd breathing again;
+#    the switch: a click, and silence. After the author's review (4 November 2026), the later parts, the tortoise's tick and the
+#    swimming cells go without music: here the music came in nine times in forty-nine seconds
 aw = lambda lid, word, off=0: W('alive', lid, word, off)
 a0 = S0('alive')
 for m in (63, 70):
     voice(m, a0 + 0.2, a0 + 2.0, 0.8, att=1.8, rel=1.9, room=0.15)
 tK = aw('chile', 'a cell keeps')
-for c_ in (7, 8, 9, 10):
+for c_ in (7, 8):  # the first two parts; the ring goes on round without music
     an = ((c_ * 29) % 76) / 76 * 2 * np.pi
     drop((63, 67, 70, 75)[c_ - 7], tK - 32 + 3.2 * (c_ + 1), 0.55, px(960 + np.cos(an) * 370), ring=0.75)
 sT, tLow, tRe = aw('tortoise', 'Around', -0.8), aw('tortoise', 'ran low'), aw('tortoise', 'recharge')
 motor([(sT + 0.3, 0.0), (sT + 0.6, 1.0), (sT + 2.5, 0.7), (sT + 5.0, 0.35), (tLow - 0.4, 0.05), (tLow + 0.25, 0.1), (tLow + 0.9, 1.0),
        (tRe - 0.3, 0.4), (tRe, 0.0)], 0.0038, px(1100))
 click(tRe, 0.012, px(1560))
-tick(aw('tortoise', 'recharge', 0.4), 0.5, px(1560))
-scatter([(aw('frog', 'In twenty', -0.2), 58, px(800)), (aw('frog', 'In twenty', 1.3), 63, px(1120))], 0.5, ring=0.6, soft=1.0)
 scatter([(aw('frog', 'heal', 0.05), 67, px(900)), (aw('frog', 'heal', 0.75), 70, px(1000))], 0.5, ring=0.6, soft=1.0)
 scatter([(aw('later', 'gathered', 0.05 + 0.6 * i), m, p) for i, (m, p) in enumerate(((63, -0.35), (67, 0.3), (70, -0.12), (75, 0.0)))], 0.5,
         ring=0.6, soft=1.0)
@@ -445,8 +445,8 @@ click(tWe - 0.02, 0.024, px(420))
 #    mended draft turns green, one for each card of what they might do. The mound again: the sensors set in, soft taps; the lung, a
 #    breath in and out. Back in Harare, the bass clarinet returns; the old idea struck through; "and still, it works": the chord. The
 #    plant room: the pen, the dial turned, "ran warm": the flag. Jun's team: measured, a tick; read-only, the locks; a person decides,
-#    the stamp; together, the 31's chord again, small. The takeaway: the voices fall into step one last time, and end on the Lydian
-#    chord, left open
+#    the stamp; together, without music, as the takeaway follows. The takeaway: the voices fall into step one last time, and end on the
+#    Lydian chord, left open
 cw = lambda lid, word, off=0: W('close', lid, word, off)
 tSt = cw('imagine', 'start other')
 for i, (m, x) in enumerate(((69, 600), (74, 1150), (65, 1400))):
@@ -471,6 +471,5 @@ tick(cw('same', 'measured', 0.05), 0.5, px(1660))
 for i in range(4):
     lock(cw('same', 'read-only', 0.05 + 0.08 * i), 0.008, px(560 + 240 * i))
 stamp(cw('same', 'with a person', 0.1), 0.014, px(1060))
-scatter([(cw('same', 'so together', 0.1 + 0.12 * i), m, px(1647)) for i, m in enumerate((68, 72, 75))], 0.4, ring=0.5)
 tEnd = cw('takeaway', 'When many', -0.4) + 2.1  # the ring of the end card closes round the sphere
 mark(tEnd, LYD_D, LYD, E('close') - 4.6 - tEnd, 0.9, 0.85, seed=9, rel=2.2)

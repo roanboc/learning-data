@@ -62,13 +62,25 @@ WRONG = B3                                     # the wrong line's own note
 # ---- the levels, set so the music's loud moments sit about -28 dB of full scale as one speaker plays the score (tools/quiet.py),
 # as low as the governance films', whose sound the author accepted; the sarrusophone a little under the bars; the effects about
 # 16 dB under the music (FX scales them all)
-GL, SL, FX = 0.039, 0.024, 1.4
+GL, SL, FX = 0.065, 0.040, 1.4
 
-# a room round the players: a small, quiet hall, ringing on for about a second, nothing much above 1.8 kHz
+# a room round the players: a small, quiet hall, ringing on for about a second, nothing much above 1.8 kHz. Its level is set by what
+# it rings where the notes are (its gain under 1.5 kHz is one), so a held note keeps its level, as the video guidelines ask: scaled by
+# all it rang, as at first, the room rang 10 dB louder there than its share said, and moved the bars' notes by -5 to +10 dB, each by
+# where the room's reflections met it, so the memory's D sounded 16 dB over its A
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.3)).astype(np.float32))(np.arange(int(1.3 * SR)) / SR)
-_IR = filt(_IR, 'low', 1800); _IR[:int(0.02 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1800); _IR[:int(0.02 * SR)] = 0
+_IR /= np.sqrt((np.abs(np.fft.rfft(_IR.astype(np.float64), 1 << 17))[(lambda f: (f > 100) & (f < 1500))(np.fft.rfftfreq(1 << 17, 1 / SR))] ** 2).mean())
 def _room(s, wet):
     return np.pad(s, (0, len(_IR) - 1)) + wet * fftconvolve(s, _IR).astype(np.float32) if wet else s
+def _held(s, wet):
+    """a held note in the room, at its own level: even at a gain of one, the room moves a pure note's level up or down by where its
+    reflections meet it, so the note is set back to the level it had before the room, measured over its body, not its start and end"""
+    r = _room(s, wet)
+    if not wet:
+        return r
+    a, b = int(0.25 * SR), max(int(0.25 * SR) + 1, len(s) - int(0.3 * SR))
+    return r * float(np.sqrt((s[a:b].astype(np.float64) ** 2).mean() / max(1e-12, (r[a:b].astype(np.float64) ** 2).mean())))
 
 # ---- a glass bar, struck with a soft mallet. Its first tone rings on and fades (low bars longer); the bar's overtones, two octaves up
 # and higher, are faint and die quickly, as a struck glass bar's do, with the faint, slightly out-of-tune overtone of glass that
@@ -84,7 +96,7 @@ def glass(m, s, g=1.0, pan=0.0, ring=None, room=0.32):
     nt = int(0.03 * SR); tk = filt(noise(0.03)[:nt], 'band', (700, 2200)) * np.exp(-np.arange(nt) / SR / 0.004) * 0.06
     sig[:nt] += tk
     sig = sig * np.cos(0.5 * np.pi * np.clip((x - sec + 0.1) / 0.1, 0, 1)) ** 2
-    put(_room(filt(sig.astype(np.float32), 'low', 2400), room), s, g * GL, pan)
+    put(_held(filt(sig.astype(np.float32), 'low', 2400), room), s, g * GL, pan)
 def roll(notes, s, step=0.1, g=1.0, pan=0.0, ring=None, spread=0.25):
     """bars struck one after another, the lowest first, ringing on together as a chord"""
     k = len(notes)
@@ -106,7 +118,7 @@ def sarr(m, a, b, g=1.0, att=0.14, rel=0.5, pan=-0.1, room=0.3):
         s = s * (0.9 + 0.1 * np.sin(np.pi * np.clip(x / sec, 0, 1)))
     s = s / max(1e-9, float(np.abs(s).max()))
     br = filt(noise(n / SR + 0.01)[:n], 'band', (300, 1400)) * 0.006 * (np.where(x < sec, 1.0, np.exp(-(x - sec) * 20)) + 2.0 * np.exp(-x / 0.06))
-    put(_room(filt((s + br).astype(np.float32), 'low', 1800), room), a, g * SL, pan)
+    put(_held(filt((s + br).astype(np.float32), 'low', 1800), room), a, g * SL, pan)
 def approve(s, g=1.0, hold=1.4, pan=-0.1):
     """a person approves: the sarrusophone's rising fourth, A to D"""
     sarr(A2, s, s + 0.42, g * 0.9, att=0.1, rel=0.25, pan=pan); sarr(D3, s + 0.48, s + 0.48 + hold, g, att=0.12, rel=0.8, pan=pan)

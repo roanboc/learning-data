@@ -23,7 +23,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [An agent that checks](https://data.learn-all.org/data-governance/an-agent-that-checks/) | AI for governance | 6½ min | 8 | 3 questions | [script](9-an-agent-that-checks/script.md) · [source](9-an-agent-that-checks/source/README.md) |
 | [Teachers of data](https://data.learn-all.org/data-governance/teachers-of-data/) | Getting people to take part | 7 min | 8 | 3 questions | [script](10-teachers-of-data/script.md) · [source](10-teachers-of-data/source/README.md) |
 
-For the whole series, on the site: [25 labs](https://data.learn-all.org/data-governance/labs/) and [54 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
+For the whole series, on the site: [9 labs](https://data.learn-all.org/data-governance/labs/) and [9 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
 <!-- /films -->
 
 ## The look and the sound

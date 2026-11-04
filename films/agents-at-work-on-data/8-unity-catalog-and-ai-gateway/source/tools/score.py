@@ -10,8 +10,8 @@
 #    passes the gateway: every call goes through the cap, and no further than it's allowed.
 #  - The mark: the same figure for a person and for an agent, B flat, E flat, D flat, G flat. Mei's key plays it on the clavichord alone,
 #    when the agent takes it and signs in as her; given a name of its own, under the same rules as people, the agent plays it on the
-#    crumhorn with the clavichord, together; the two play it once more on the title card, when Clara and the agent read the learner
-#    table the same way, and on the film's last line.
+#    crumhorn with the clavichord, together; the two play it again over the title card, then when Clara and the agent read the
+#    learner table the same way, and on the film's last line.
 #  - E flat minor for the nights and the trouble, G flat major (its relative major) for what the rules give; A flat minor, C flat
 #    major and B flat minor at the turns. No D flat major chord: its fifth isn't pure in this tuning.
 # The rules the series keeps (its briefs, 4 November 2026, as the module's other films do):

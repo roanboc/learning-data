@@ -455,7 +455,7 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
     {at:P.mei-0.4,place:"lab",dis:0.8,keys:[[P.mei-0.4,960,540,1.0],[P.mei-0.3,950,536,1.02]],d:9,push:0.008,draw:(x,tt)=>{
       ag_person(x,"mei",1500,610,1.0,{t:tt+5,flip:true,gaze:[4,0.2],smile:0.35,nod:0.05*ag_io(tt,P.decides-0.2,P.decides+1.0,0.4),talk:ag_talk(sc,"mei",tt)*0});ag_roomLight(x,1);
       sw_clock(x,1600,110,"22 October · morning",ag_in(tt,P.mei-0.2,0.4));
-      const q=sw_pop(tt,P.mei+0.3,null);if(q.a>0.01){const b=sw_file(x,140,210,760,250,"sandbox/report.md",[{k:"h2",t:"Question: are these students?"}],{a:q.a*0.9,k:q.k,edge:AG.violet,draft:true});}
+      const q=sw_pop(tt,P.mei+0.3,null);if(q.a>0.01){const ql=[{k:"h2",t:"Question: are these students?"}];sw_file(x,140,210,760,sw_fileH(x,760,ql),"sandbox/report.md",ql,{a:q.a*0.9,k:q.k,edge:AG.violet,draft:true});}
       const p=sw_pop(tt,P.test-0.4,null);ag_textCard(x,140,500,860,{kick:"Mei Tanaka, registrar's office",title:"They're test records, made to try a new screen.",sub:"Test records never count."},{k:p.k,a:p.a,kickCol:AG.kick,edge:AG.green,tail:{side:"right",at:0.3,px:1360,py:480}});}},
     // Jun adds the cause to the skill, with Mei's answer
     {at:P.adds-0.4,place:"lab",cut:true,keys:[[P.adds-0.4,960,540,1.0],[P.adds-0.3,970,530,1.02]],d:4,push:0.01,draw:(x,tt)=>{

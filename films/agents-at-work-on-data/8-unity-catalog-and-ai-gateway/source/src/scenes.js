@@ -104,7 +104,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({fac:wAt(sc,"
       ag_veil(x,S,0.55*ag_in(tt,c.change+0.1,0.8));}},
     // so Sam gives the agent a name of its own: the key comes off the hook, and a badge drops in its place; then the catalog's rules
     {cut:true,at:c.own,place:"ugLab",keys:[[c.own,1060,540,1]],push:0.02,draw:(x,tt)=>{const g=keyGone(tt),mk=ag_in(tt,P.stars,0.8);
-      ug_agent(x,tt,{});ug_hook(x);
+      ug_agent(x,tt,{});if(g<1){x.save();x.globalAlpha*=1-g;ug_hook(x);x.restore();}   // the hook was the key's: it goes with it
       if(g<1){const h=ug_hookAt();x.save();x.globalAlpha*=1-g;x.translate(-g*160,-g*220);ug_keyOnHook(x,{sw:-0.3*g});x.restore();}
       ug_badgeOn(x,tt,"registrar agent",{k:(tt-P.name-0.5)/0.9});
       ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",1);

@@ -7,14 +7,16 @@
 // in screen space, whatever the camera is doing
 function tm_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);fn();ctx.restore();}
 // The film's cutting of a chapter into shots: the module's ag_shots, with the camera carried, as More than a junior does. A shot in the
-// same place as the one before, unless it comes in on a cut, starts where that one's camera ended and glides from there to its own
-// keys; while it dissolves in, the shot before is drawn through the same camera, so only what changed fades in, and the place never
-// shows twice, a little apart.
+// same room as the one before starts where that one's camera ended and glides from there to its own keys, on a dissolve or a cut: a
+// cut changes what is in the room, never how near the camera is, so the room never jumps to another size from one frame to the next.
+// While a shot dissolves in, the shot before is drawn through the same camera, so only what changed fades in, and the place never
+// shows twice, a little apart. The registrar's office is painted as the lab is, another stretch of the same wall: the same room here.
+const tm_room=p=>p==="tmOffice"?"lab":p;
 function tm_camEnd(sh,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((till-sh.at)/len,0,1)),d=Math.max(1.4,sh.d||1.6),keys=sh.keys||[[0,960,540,1]];
   let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((till-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
   z=Math.max(1,z*(1+push));return[clamp(x,960/z,W-960/z),clamp(y,540/z,H-540/z),z];}
 function tm_shots(ctx,S,t,end,shots,dis){
-  for(let k=1;k<shots.length;k++){const a=shots[k-1],b=shots[k];if(b.cut||a.place!==b.place)continue;
+  for(let k=1;k<shots.length;k++){const a=shots[k-1],b=shots[k];if(tm_room(a.place)!==tm_room(b.place))continue;
     const e=tm_camEnd(a,b.at),own=(b.keys||[[b.at,960,540,1]]).map(q=>[Math.max(q[0],b.at),q[1],q[2],q[3]]);b.keys=[[b.at,e[0],e[1],e[2]]].concat(own);b.carried=true;}
   let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
   const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
@@ -222,7 +224,8 @@ scene("weeks",(ctx,S,t,sc)=>{
   const rows=[{at:T.asks,who:"clara",text:"Students on census day, by mode of study?"},
     {at:T.same-0.3,who:"agent",h:190,draw:(x,X,Y,Wd)=>tm_bars(x,X,Y+8,Wd,{p:clamp((t-T.same)/0.9,0,1),total:t>=T.total?"18,375":null})},
     {at:T.total+0.6,pill:{text:"37 short of the count reported",col:AG.amber,icon:"warn"}}];
-  tm_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
+  // the chapter cuts in from the lab: the camera starts where the last chapter's stopped, and holds while the chapters cross
+  tm_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1.02],[0.8,960,540,1.0]],push:0.02,draw:(c,tt)=>{
     const noon=ag_in(tt,T.afternoon,2.0)*(1-ag_in(tt,T.budget+1,1.5)),think=ag_io(tt,T.asks+0.6,T.same,0.4);
     ag_person(c,"clara",1600,644,1.0,{t:tt,flip:true,gaze:tt<T.known?[3,0]:[3,-2]});
     tm_agent(c,ag2[0],ag2[1],80,tt,{label:"Clara's agent",core:0.6+0.3*think,think,busy:think});
@@ -297,7 +300,8 @@ scene("team",(ctx,S,t,sc)=>{
   const agents=[[600,620,"Jun's agent"],[960,620,"Clara's agent"],[1320,620,"Noor's agent"]];
   tm_shots(ctx,S,t,sc.dur,[
     // the end of the session: the agent proposes what's worth keeping, with where it came from and who confirmed it; nothing about a person
-    {at:0,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
+    // (the chapter cuts in from the lab: the camera starts where the last chapter's stopped, and holds while the chapters cross)
+    {at:0,place:"lab",keys:[[0,960,540,1.02],[0.8,960,540,1.0]],push:0.02,draw:(c,tt)=>{
       const think=ag_io(tt,T.end,T.proposes+0.8,0.4);tm_agent(c,420,470,84,tt,{label:"Jun's agent",core:0.6+0.3*think,think,busy:think});ag_roomLight(c,1);
       const sa=ag_in(tt,0.2,0.4)*(1-ag_in(tt,T.end+0.6,0.7));if(sa>0)tm_session(c,90,96,600,170,{sub:"14 April",a:sa,k:lerp(0.75,1,sa),draw:x=>ag_T(x,"The census count",124,226,{w:600,size:30})});
       const ea=ag_in(tt,T.proposes,0.5);if(ea>0){const k=Math.min(1,ag_spr(tt,T.proposes,0.6));tm_entry(c,840,110,900,{kind:"proposed",fields:F(tt),a:ea,k});}
@@ -356,7 +360,8 @@ scene("wrong",(ctx,S,t,sc)=>{
   const PLANT="Students who withdraw after census day don't count.";
   tm_shots(ctx,S,t,sc.dur,[
     // April's first answer, had it been kept, would have taught every agent the same mistake
-    {at:0,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
+    // (the chapter cuts in from the lab: the camera starts where the last chapter's stopped, and holds while the chapters cross)
+    {at:0,place:"lab",keys:[[0,960,540,1.02],[0.8,960,540,1.0]],push:0.02,draw:(c,tt)=>{
       const ifA=ag_in(tt,T.first-0.2,0.5)*(1-ag_in(tt,T.person-1.2,0.6));
       agents.forEach(([x,y,l],i)=>tm_agent(c,x,y,56,tt+i,{label:l,ring:ifA*ag_sine(clamp((tt-T.every-i*0.3)/0.8,0,1)),ringCol:AG.amber}));
       ag_roomLight(c,1);

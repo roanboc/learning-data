@@ -52,16 +52,25 @@ SYM = (47, 54, 59, 63, 66, 71, 75)
 # ---- the levels, measured by tools/quiet.py on 4 November 2026 as one speaker plays the score: the music's loud moments about
 # -28 dB of full scale and its loudest notes under -24, as the series' films after the author's review; the effects' loud moments
 # under -43 dB (FX scales them)
-VL, OL, FX = 0.036, 0.021, 1.5
+VL, OL, FX = 0.050, 0.021, 1.5
 
 def _ir(sec, lo):
-    """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms"""
+    """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms. Its level is set by what it rings below lo
+    (its gain there about one), not by all it rings: scaled by all of it, the room rang about 10 dB louder there than its share said"""
     x = np.arange(int(sec * SR)) / SR; ir = (R1.standard_normal(len(x)) * np.exp(-6.9 * x / sec)).astype(np.float32)
     ir = filt(ir, 'low', lo); ir[:int(0.02 * SR)] = 0
-    return ir / np.sqrt((ir ** 2).sum())
+    return ir / np.sqrt((ir ** 2).sum() * SR / (2 * lo))
 ROOM = _ir(1.3, 1900)  # a wooden room round the viola d'amore
-def _room(s, wet):
-    return np.pad(s, (0, len(ROOM) - 1)) + wet * fftconvolve(s, ROOM).astype(np.float32) if wet else s
+def _room(s, wet, body=None):
+    """the room round a note. body (from, to, in samples) is where the note is held: the room still moves a held note's level, up or
+    down by where its reflections meet the note's partials (up to 7 dB in this film's notes), so the note is set back to the level it
+    had there before the room"""
+    if not wet:
+        return s
+    r = np.pad(s, (0, len(ROOM) - 1)) + wet * fftconvolve(s, ROOM).astype(np.float32)
+    if body:
+        a, b = body; r = r * np.float32(np.sqrt((s[a:b] ** 2).mean() / max(1e-12, float((r[a:b] ** 2).mean()))))
+    return r
 
 def _shares(f, fs):
     """how strongly a bowed note f sets a string fs ringing: by the partials they share, exactly, in this tuning"""
@@ -100,7 +109,7 @@ def viola(m, a, b, g=1.0, att=0.35, rel=0.8, ring=0.0, ringsec=3.0, pan=-0.12, r
             ph = R1.uniform(0, 2 * np.pi)
             tone = sum(np.sin(2 * np.pi * fs * j * x + ph * j) / j ** 1.4 for j in range(1, 7) if fs * j < 2300)
             s = s + 0.32 * ring * min(1.0, e) * held * tone
-    put(_room(filt(s.astype(np.float32), 'low', 2300), room), a, g * VL, pan)
+    put(_room(filt(s.astype(np.float32), 'low', 2300), room, (int(min(0.25, 0.4 * sec) * SR), int(sec * SR))), a, g * VL, pan)
 
 def mark(t, hold=2.2, g=1.0, ringsec=4.0, pan=-0.05):
     """the film's mark: one note bowed, B 3, and the strings beneath answering, ringing on after it"""

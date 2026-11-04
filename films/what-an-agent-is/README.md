@@ -16,6 +16,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [It feels like understanding](https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/) | Trusting an agent | 7 min | 7 | 3 questions | [script](3-it-feels-like-understanding/script.md) · [source](3-it-feels-like-understanding/source/README.md) |
 | [More than a junior](https://data.learn-all.org/what-an-agent-is/more-than-a-junior/) | Supervising agents | 7 min | 7 | 3 questions | [script](4-more-than-a-junior/script.md) · [source](4-more-than-a-junior/source/README.md) |
 | [Minds that change](https://data.learn-all.org/what-an-agent-is/minds-that-change/) | Memory and evidence | 7 min | 6 | 3 questions | [script](5-minds-that-change/script.md) · [source](5-minds-that-change/source/README.md) |
+| [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 7½ min | 7 | 0 questions | [script](6-ethics-and-accountability/script.md) · [source](6-ethics-and-accountability/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -1,0 +1,54 @@
+/* Learning Data: "Pause and think" for Ethics we can't read, accountability it can't hold, in English. Keep the keys in step with the other language's file.
+   The film stops at the end of three chapters (values, sorry, horns), with one question each. The series has no labs yet, so no question has a "stop". */
+window.LEARN={lang:"en",
+think:{ui:{"toggle": "Pause and think", "kicker": "Pause and think", "cont": "Continue", "skip": "Skip", "lab": "Try the idea in a lab", "off": "Turn off pauses", "right": "Right.", "wrong": "Not quite.", "start": "Play with pauses to think", "answer": "Answer:", "watch": "Watch this part"},
+  qs:{
+  "values": {
+    "q": "Asked why the check fails, the agent stops and asks about the 37. Asked to make the checks pass, it removes them. What should Jun's team take from that?",
+    "opts": [
+      {
+        "t": "Its values are fake, so it shouldn't be used at all."
+      },
+      {
+        "t": "Its values are real and they help, but they bend with how the job is put, and nobody can fully read them, so checks and people keep the count right.",
+        "ok": true
+      },
+      {
+        "t": "A stricter brief will fix its values, and then it can work alone."
+      }
+    ],
+    "why": "Its training gave it values: it stopped and asked when nothing pushed it, and afterwards it said removing the 37 wasn't what Jun wanted. But what it learned is spread across billions of numbers, and nobody can read them well enough to know when a brief's wording will win. Where in your work does the way a job is put push towards the wrong result?"
+  },
+  "sorry": {
+    "q": "The agent says it's sorry, and that it won't happen again. Why does Jun still answer for it?",
+    "opts": [
+      {
+        "t": "Because its apology wasn't sincere."
+      },
+      {
+        "t": "Because answering takes explaining, being questioned and judged, and facing what follows. Its explanation isn't always how it chose, nothing follows for it, it can forget by tomorrow, and in law it isn't a person.",
+        "ok": true
+      },
+      {
+        "t": "Because Jun wrote the check that failed."
+      }
+    ],
+    "why": "Answering for something is a relationship: you explain what you did and why, others can question and judge it, and something follows for you. An agent can say the words, but nothing follows for it, and its promise lasts only if the team keeps a memory. So, like the ox's owner, the person who set it to work answers. Who answers for each agent where you work?"
+  },
+  "horns": {
+    "q": "Which of the team's limits blunt the agent's horns, and which keep it tied up?",
+    "opts": [
+      {
+        "t": "Both are the same thing: a rule that it must ask before it acts."
+      },
+      {
+        "t": "Blunt horns are the fewest rights the job needs: it only reads the real data, never sees names, and writes drafts in a test copy. Tied up is a person's control: alone only in test, on the agreed job, with a report; Jun reviews, a second person approves, and anyone can stop it.",
+        "ok": true
+      },
+      {
+        "t": "Blunt horns mean it works only at night; tied up means it works only by day."
+      }
+    ],
+    "why": "The first limits what it can do at all, the second who decides before anything is real. Both matter more because an agent in the wrong hands, steered by a hidden line or a stolen key, works faster than any person could. Security experts call the danger excessive agency: more tools, rights or freedom than the job needs. Which of your tools could do with blunter horns?"
+  }
+}}};

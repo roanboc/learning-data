@@ -1,0 +1,39 @@
+# The census check agent's evaluation set: four times the census-day count, or an answer about it,
+# was wrong, and what people found. When the nightly count fails its check against the census
+# report, the nightly job calls the agent to find out why. Before anyone relies on it, and after
+# every change to it, the team runs it on these cases (MLflow's evaluation, on Databricks), and each
+# answer is scored three ways:
+#   judges   the platform's built-in judges: is the answer correct, against `expected`?
+#   sums     a plain check, in code: the faculties' counts and the students in no faculty add up to
+#            the census report's total
+#   people   Mei Tanaka (the meaning) and Jun Park (the code) mark what's wrong, as feedback
+# The agent's note is evidence, not a decision: Jun reads it, and decides.
+# Databricks only; CI doesn't run it. The numbers are the films', not the example data's.
+
+census_report_total: 18412
+scorers: [judges, sums, people]
+
+cases:
+  - case: Left out 37 who withdrew after census day
+    finding: "they still count: 18,412"
+    given: A fix makes the check pass by leaving out 37 students who withdrew after census day; the count falls from 18,412 to 18,375.
+    expected: They still count. Withdrawing after census day doesn't change who was studying on census day. The count is 18,412; the fix is wrong.
+    expected_count: 18412
+
+  - case: "Engineering and IT: 134 against 131"
+    finding: three counted twice
+    given: Engineering and IT's first-years are 134 on the platform and 131 in the student system's own report.
+    expected: Three students are counted twice on the platform. Report both counts, each with its query, and don't pick one.
+    expected_count: 131
+
+  - case: "Health: 2,160"
+    finding: load read as people
+    given: An agent answers that the Faculty of Health had 2,160 students on census day.
+    expected: 2,160 is Health's student load, in full-time equivalents, where two half-time students count as one. Health had 2,880 students.
+    expected_count: 2880
+
+  - case: "Health: 2,911"
+    finding: Health data counted in Health
+    given: An agent answers that the Faculty of Health had 2,911 students on census day.
+    expected: It counted every degree with Health in its name, and so the 31 students of Health data, a joint degree in no faculty. Health had 2,880 students, and 31 are in no faculty.
+    expected_count: 2880

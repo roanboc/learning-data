@@ -225,7 +225,9 @@ project/
 ├── examples/                 planning/: Planning's own project, refing the core across projects
 │                             (dbt Cloud only); completions/, counts-as-award/ and award-redefined/:
 │                             pull requests as patches, with what the checks and the sync said;
-│                             platform-results/: a night's checks on the platform, in the scorecard
+│                             platform-results/: a night's checks on the platform, in the scorecard;
+│                             agents-on-databricks/: the census-day count as a function, a Genie
+│                             Agent and an agent's evaluation cases (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

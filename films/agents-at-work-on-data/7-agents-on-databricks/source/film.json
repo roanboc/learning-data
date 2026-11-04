@@ -1,0 +1,38 @@
+{
+  "key": "agents-on-databricks",
+  "title": "Working with agents on Databricks",
+  "sub": "The seventh film of Agents at work on data, a series on putting AI agents to work on data: at the Faculty of Health, three people's own agents, each with its own copy of the data, give three answers to one question; on Databricks, every agent reads the same governed data through the same tools: agents that answer, tool servers any agent can use, agents the team builds and tests, and agents that write code, while people review and approve.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool or the platform, violet the model, orange the data and its evidence, green what is checked and agrees, amber a slip or a doubt. The platform's pages are drawn for the film, with no product's own look.",
+  "src": [
+    "faculty.js",
+    "platform.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "three",
+    "which",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bMCP\\b",
+      "M C P"
+    ]
+  ],
+  "story": [
+    "three"
+  ],
+  "urgent": []
+}

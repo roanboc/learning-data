@@ -41,7 +41,7 @@
   // the arrow keys, under the same rule as the player's own keys (Space, F)
   const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
   window.addEventListener("keydown",e=>{if((e.key!=="ArrowLeft"&&e.key!=="ArrowRight")||e.ctrlKey||e.metaKey||e.altKey||e.shiftKey||e.defaultPrevented)return;
-    const tg=e.target,own=box.contains(tg);
+    const tg=e.target instanceof Element?e.target:document.body,own=box.contains(tg);
     if(own&&tg.closest(".think"))return;
     if(!own&&tg.closest&&tg.closest("a,button,input,select,textarea,[contenteditable],[role=button],[role=radio],[role=option],[tabindex]"))return;
     if(!fsEl()){const r=box.getBoundingClientRect(),seen=Math.min(r.bottom,innerHeight)-Math.max(r.top,0);if(r.height<=0||seen/r.height<0.55)return;}

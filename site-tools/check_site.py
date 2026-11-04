@@ -855,6 +855,12 @@ def main():
         tpl = pg.dom.first("template", id="next-panel")
         if ("assets/learn/next.js" in ls) != bool(tpl) and pg.dom.first("canvas", id="film"):
             s["fails"].append(f"{pg.file}: next.js and <template id=\"next-panel\"> go together")
+        # back and forward 10 seconds come from one file, after the film bundle, on every page with the film's player bar
+        if film and pg.dom.first("canvas", id="film") and pg.dom.first("input", id="scrub"):
+            if "assets/seek.js" not in ls:
+                s["fails"].append(f"{pg.file}: a film player without assets/seek.js (back and forward 10 seconds)")
+            elif ls.index("assets/seek.js") < ls.index(film):
+                s["fails"].append(f"{pg.file}: assets/seek.js loads before the film bundle")
         if "assets/learn/think.js" in ls and not any(x in PACKS for x in ls):
             s["fails"].append(f"{pg.file}: think.js without a language pack")
         if film == "assets/film3/film.js":

@@ -6,36 +6,49 @@
 
 const cm_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 const CM_KICK=(x,a)=>ag_kicker(x,"2.9","Context and memory, governed",{a});
-// the team's memory on Lucía's wall, and its entries: the third is the campus line
-const CM_F={x:1530,y:470};
-const CM_FC=[["Ask which year it's for","Clara Jensen"],["Cite every number","Yusuf Demir"],["Count only students on campus","Mei Tanaka"],["Census day is 31 March","Mei Tanaka"],["Show counts, never names","Yusuf Demir"]];
-const CM_WRONG=2;
-// the file's cards: o.appear(k), o.tick(k), o.who(k) (the approver's name, 0..1), o.glow(k) (a colour or null), o.lift(k); o.without drops the campus line
-function cm_cards(o){o=o||{};const out=[];CM_FC.forEach((c,k)=>{if(o.without&&k===CM_WRONG)return;
-  out.push({text:c[0],who:o.who?c[1]:null,whoA:o.who?o.who(k):0,a:o.appear?o.appear(k):1,tick:o.tick?o.tick(k):1,glow:o.glow?o.glow(k):null,glowA:o.glowA?o.glowA(k):1,lift:o.lift?o.lift(k):0});});return out;}
-// where the agent's reading line leaves the file and meets the sphere
-function cm_fileReads(c,tt,u,ax,ay,ar,o){return cm_reads(c,CM_F.x-CM_FILE.w/2-6,CM_F.y-130,ax+ar*0.8,ay-ar*0.45,u,Object.assign({t:tt,bend:-30},o||{}));}
+// the team's memory on Lucía's wall: the four lessons Memory: from one chat to the team shows, as its cards name them, each with who
+// approved it, then the campus line. A card's title names its lesson; the lesson itself is in the entry, pulled up
+const CM_F={x:1440,y:560};
+const CM_MEM=[["Students, not enrolments","Mei Tanaka"],["Read the glossary first","Yusuf Demir"],["Show the count reported","Clara Jensen"],["Status as on census day","Mei Tanaka"]];
+const CM_WRONG=4,CM_CAMPUS_T="Campus only",CM_EXAM_T="Exam rooms: campus only",CM_ROOMS_T="Room bookings: campus only",CM_NEW_T="Say which term a count is for";
+// the file's cards, the campus line last: o.appear(k), o.tick(k), o.who(k) (the approver's name, 0..1), o.glow(k) (a colour or null),
+// o.glowA(k), o.lift(k) (px), o.each(k) (any other fields); o.without drops the campus line
+function cm_cards(o){o=o||{};const out=[];CM_MEM.concat([[CM_CAMPUS_T,"Mei Tanaka"]]).forEach((c,k)=>{if(o.without&&k===CM_WRONG)return;
+  out.push(Object.assign({text:c[0],who:o.who?c[1]:null,whoA:o.who?o.who(k):0,a:o.appear?o.appear(k):1,tick:o.tick?o.tick(k):1,glow:o.glow?o.glow(k):null,glowA:o.glowA?o.glowA(k):1,
+    lift:o.lift?o.lift(k):0},o.each?o.each(k):{}));});return out;}
+// the file as the team keeps it now: the four, and Say which term
+function cm_kept(o){o=o||{};return CM_MEM.concat([[CM_NEW_T,"Mei Tanaka"]]).map((c,k)=>({text:c[0],who:o.who?c[1]:null,whoA:o.who?o.who(k):0,a:o.appear?o.appear(k):1,tick:1,
+  glow:o.glow?o.glow(k):null,glowA:o.glowA?o.glowA(k):1}));}
+// where the agent's reading line leaves the file (under the left end of its lower ledge, clear of the names) and meets the sphere
+function cm_fileReads(c,tt,u,ax,ay,ar,o){const x0=CM_F.x-(CM_TC.per*(CM_TC.w+CM_TC.gap)+40)/2;return cm_reads(c,x0+14,CM_F.y+34,ax-ar*0.62,ay-ar*0.72,u,Object.assign({t:tt,bend:10},o||{}));}
 // the campus line as an entry, pulled up: lesson, and its fields
-const CM_CAMPUS={lesson:"Count only students on campus.",rows:[["Learned in","a session, 12 May 2026"],["Approved by","Mei Tanaka, 13 May 2026"],["History","none"]]};
+const CM_CAMPUS={lesson:"Count only students on campus.",rows:[["Learned in","A session on exam rooms, 12 May 2026"],["Approved by","Mei Tanaka, 13 May 2026",1,AG.green],["History","none"]]};
+// Memory: from one chat to the team's lesson about census day, word for word
+const CM_CENSUS="Read each student's status as it was on census day, not as it is today.";
 // the record kept when the line was deleted
 const CM_RECORD=[["Added, 13 May 2026","Approved by Mei Tanaka, for exam rooms"],["Deleted, 3 November 2026","By Yusuf Demir, data governance"],["Why","A merge dropped “For exam rooms”"]];
 
 /* ---------------------------------------------------------------- 1 · Lucía's first job */
-// the campus line's card, as it was approved in May and as it is now: v 0 shows "For exam rooms, count only students on campus.",
-// drop 0..1 lets "For exam rooms," fall away, and the rest moves left as "Count only students on campus."
+// the campus line's entry, pulled up, its lesson as it was approved in May and as it is now: may 0..1 brings in "For exam rooms, ",
+// drop 0..1 lets those words fall away, and the rest moves back as "Count only students on campus."
 function cm_campusCard(c,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return null;const may=o.may||0,drop=o.drop||0,rows=o.rows||CM_CAMPUS.rows;
-  const bb=cm_entry(c,x,y,w,{lesson:"Count only students on campus.",rows,tick:o.tick==null?1:o.tick},{measure:true});
+  const bb=cm_entry(c,x,y,w,{lesson:"Count only students on campus.",rows},{measure:true});
   c.save();c.globalAlpha*=a;if(o.k!=null)ag_about(c,x+w/2,y+bb.h/2,lerp(0.7,1,o.k));
-  cm_entry(c,x,y,w,{lesson:"Count only students on campus.",rows,tick:o.tick==null?1:o.tick},{lessonA:0,edge:o.edge,edgeA:o.edgeA});
-  const pre="For exam rooms, ",rest="count only students on campus.",pw=ag_tw(c,pre,{w:700,size:34}),ly=y+64,lx=x+28;
+  cm_entry(c,x,y,w,{lesson:"Count only students on campus.",rows},{lessonA:0,edge:o.edge,edgeA:o.edgeA});
+  const F={w:600,size:30},pre="For exam rooms, ",rest="count only students on campus.",pw=ag_tw(c,pre,F),ly=bb.ly,lx=bb.lx;
   // first the rest moves over to make room, then the three words come in; dropping, they fall and fade first, then the rest moves back
   const room=ag_sine(clamp(may/0.55,0,1)),preA=clamp((may-0.5)/0.5,0,1);
-  if(preA>0&&drop<0.4){const dq=clamp(drop/0.35,0,1),dy=ag_eo(dq)*26;c.save();c.globalAlpha*=preA*(1-dq);
-    ag_T(c,pre,lx,ly+dy,{w:700,size:34,col:mix(AG.green,AG.amber,clamp(drop/0.15,0,1))});c.restore();}
+  if(preA>0&&drop<0.4){const dq=clamp(drop/0.35,0,1),dy=ag_eo(dq)*12;c.save();c.globalAlpha*=preA*(1-ag_eo(dq));
+    ag_T(c,pre,lx,ly+dy,{w:600,size:30,col:mix(AG.green,AG.amber,clamp(drop/0.15,0,1))});c.restore();}
   const sx=lx+pw*room*(1-ag_sine(clamp((drop-0.35)/0.65,0,1)));const cap=may<=0?1:ag_in(drop,0.75,0.25);
-  if(cap<1){c.save();c.globalAlpha*=1-cap;ag_T(c,rest,sx,ly,{w:700,size:34});c.restore();}
-  if(cap>0){c.save();c.globalAlpha*=cap;ag_T(c,"Count only students on campus.",sx,ly,{w:700,size:34});c.restore();}
+  if(cap<1){c.save();c.globalAlpha*=1-cap;ag_T(c,rest,sx,ly,F);c.restore();}
+  if(cap>0){c.save();c.globalAlpha*=cap;ag_T(c,"Count only students on campus.",sx,ly,F);c.restore();}
   c.restore();return bb;}
+
+// her agent's draft and its evidence, the same in the two shots that show it: the data it read, and the line in the team's memory
+function cm_why(cx,tt,T){const open=ag_sine(clamp((tt-T.evidence)/1.3,0,1)),ea=ag_in(tt,T.evidence-0.5,0.4)*(1-ag_in(tt,T.stillThere-0.2,0.5));
+  return ag_evidence(cx,80,110,760,{kick:"Her agent's draft",title:"18,026 students"},[{kick:"Data",title:"Students on campus on census day",col:AG.orange},
+    {kick:"Team memory",title:"Count only students on campus",col:AG.blue}],{open,side:"below",ew:360,a:ea,kickCol:AG.violet});}
 
 scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     lucia:wAt(sc,"place","Lucía"),monday:wAt(sc,"place","Monday"),
@@ -61,7 +74,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     {at:0,place:"cmLab",keys:[[0,960,540,1.0],[T.mem-0.6,1000,530,1.03]],d:2.6,draw:(cx,tt)=>{
       cm_lucia(cx,S,tt,{agent:ag_in(tt,T.agent-0.2,0.6),think:0.25*ag_in(tt,T.lessons,1.2),cal:ag_in(tt,T.monday-0.1,0.4)});
       const fa=ag_in(tt,T.mem-0.3,0.6);
-      cm_file(cx,CM_F.x,CM_F.y,{a:fa,cards:cm_cards({appear:k=>ag_in(tt,T.lessons+(4-k)*0.16,0.35),tick:k=>ag_in(tt,T.approved+0.1+k*0.14,0.3)})});
+      cm_file(cx,CM_F.x,CM_F.y,{a:fa,cards:cm_cards({appear:k=>ag_in(tt,T.lessons+k*0.16,0.35),tick:k=>ag_in(tt,T.approved+0.1+k*0.14,0.3)})});
       const A=CM_DESK.agent;cm_fileReads(cx,tt,ag_sine(clamp((tt-(T.lessons+0.6))/1.2,0,1))*fa,A[0],A[1],A[2]);
       cm_pillAt(cx,CM_DESK.lucia[0],258,"Lucía Ortega · Planning",tt,T.lucia-0.1,null);
       cm_scr(cx,S,()=>cm_tag(cx,CM_UNI,ag_in(tt,0.5,0.6)));}},
@@ -86,34 +99,33 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,760,540,"386 study online",tt,T.studyOnline+0.1,null,{col:AG.amber});
       const la=ag_in(tt,T.would-0.2,0.4);if(la>0)cm_library(cx,1150,250,620,{a:la,k:Math.min(1,ag_spr(tt,T.would-0.2,0.5)),count:"For 18,026 students",col:AG.amber,note:ag_in(tt,T.fewer,0.3)>0?"386 fewer":null});
       cm_pillAt(cx,760,640,"can't come in for a book",tt,T.comeIn-0.2,null,{col:AG.amber});}},
-    // why: her agent's evidence, one line in the team's memory, pulled up; as approved in May; and as it is now
+    // why: her agent's evidence, one line in the team's memory; on "Count only", its card comes up out of the file
     {at:T.evidence-0.6,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       cm_agent(cx,250,700,64,tt,{think:0.3,core:0.8,label:"Lucía's agent",floor:800});
-      const open=ag_sine(clamp((tt-T.evidence)/1.3,0,1)),ea=ag_in(tt,T.evidence-0.5,0.4)*(1-ag_in(tt,T.stillThere-0.2,0.5));
-      const ev=ag_evidence(cx,80,110,760,{kick:"Her agent's draft",title:"18,026 students"},[{kick:"Data",title:"Students on campus on census day",col:AG.orange},{kick:"Team memory",title:"Count only students on campus",col:AG.blue}],{open,side:"below",ew:360,a:ea,kickCol:AG.violet}),mi=ev.items[1].to;
-      // the file, its campus line lit
-      const lift=ag_sine(clamp((tt-T.count+0.2)/0.9,0,1))*(1-ag_sine(clamp((tt-T.stillThere)/0.9,0,1)));
-      const gl=ag_in(tt,T.inMem-0.2,0.4);
-      const slots=cm_file(cx,1380,790,{a:ag_in(tt,T.oneLine-0.4,0.5),cards:cm_cards({glow:k=>k===CM_WRONG&&gl>0?AG.amber:null,glowA:k=>gl,lift:k=>k===CM_WRONG?lift:0})});
-      // the line from the evidence to the file
-      cm_reads(cx,mi.x+mi.w/2,mi.y+mi.h+6,slots[CM_WRONG].x-6,slots[CM_WRONG].y+24,ag_sine(clamp((tt-T.inMem+0.3)/0.9,0,1))*ea,{t:tt,bend:40});
-      // the entry, pulled up: as it is, then as approved in May, then the three words falling away
-      const pa=lift,may=ag_in(tt,T.approvedAs-0.2,0.6),drop=clamp((tt-T.threeWords+0.3)/1.4,0,1);
-      if(pa>0){const rows=[CM_CAMPUS.rows[0],CM_CAMPUS.rows[1],["History","none",1,ag_in(tt,T.nobody,0.4)>0?AG.amber:null]];
-        const b=cm_campusCard(cx,880,140,960,{a:pa,k:ag_eo(pa),may:may*(drop>=1?0:1)+(drop>=1?1:0),drop,rows,edge:ag_in(tt,T.lastWeek,0.4)>0?AG.amber:null,edgeA:ag_in(tt,T.lastWeek,0.5)});
-        if(b){cm_pillAt(cx,1560,b.y+b.h+44,"right, for exam rooms",tt,T.right-0.1,T.lastWeek-0.5,{col:AG.green,icon:"tick"});
-          cm_pillAt(cx,1560,b.y+b.h+44,"changed last week",tt,T.lastWeek,null,{col:AG.amber,icon:"warn"});}}}},
+      const ev=cm_why(cx,tt,T),mi=ev.items[1].to;
+      const lift=90*ag_sine(clamp((tt-T.count+0.7)/0.6,0,1)),gl=ag_in(tt,T.inMem-0.2,0.4);
+      const slots=cm_file(cx,1380,700,{a:ag_in(tt,T.oneLine-0.4,0.5),cards:cm_cards({glow:k=>k===CM_WRONG&&gl>0?AG.amber:null,glowA:k=>gl,lift:k=>k===CM_WRONG?lift:0})});
+      cm_reads(cx,mi.x+mi.w/2,mi.y+mi.h+6,slots[CM_WRONG].x-8,slots[CM_WRONG].y+40,ag_sine(clamp((tt-T.inMem+0.3)/0.9,0,1)),{t:tt,bend:40});}},
+    // the entry, pulled up: as it is, then as approved in May, then the three words falling away
+    {at:T.count-0.1,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
+      cm_agent(cx,250,700,64,tt,{think:0.3,core:0.8,label:"Lucía's agent",floor:800});
+      const ev=cm_why(cx,tt,T),mi=ev.items[1].to,ea=1-ag_in(tt,T.stillThere-0.2,0.5);
+      const pa=ag_in(tt,T.count-0.1,0.4),may=ag_in(tt,T.approvedAs-0.2,0.6),drop=clamp((tt-T.threeWords+0.3)/1.4,0,1);
+      const rows=[CM_CAMPUS.rows[0],CM_CAMPUS.rows[1],["History","none",1,ag_in(tt,T.nobody,0.4)>0?AG.amber:null]];
+      const b=cm_campusCard(cx,920,130,920,{a:pa,k:Math.min(1,ag_spr(tt,T.count-0.1,0.5)),may:may*(drop>=1?0:1)+(drop>=1?1:0),drop,rows,edge:ag_in(tt,T.lastWeek,0.4)>0?AG.amber:null,edgeA:ag_in(tt,T.lastWeek,0.5)});
+      cm_reads(cx,mi.x+mi.w+6,mi.y+mi.h*0.45,912,262,ag_sine(clamp((tt-T.count)/0.7,0,1))*ea,{t:tt,bend:-30});
+      if(b){cm_pillAt(cx,1380,b.y+b.h+46,"right, for exam rooms",tt,T.right-0.1,T.lastWeek-0.5,{col:AG.green,icon:"tick"});
+        cm_pillAt(cx,1380,b.y+b.h+46,"changed last week",tt,T.lastWeek,null,{col:AG.amber,icon:"warn"});}}},
     // still there: every agent reads it, for questions no report can check
     {at:T.stillThere-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const pulse=0.6+0.4*Math.sin((tt-T.change)*4)*ag_io(tt,T.change,T.change+1.8,0.3);
-      const slots=cm_file(cx,960,560,{cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>pulse})});
-      const ag=[[480,760,"Jun's agent"],[960,770,"Clara's agent"],[1440,760,"Lucía's agent"]];
-      ag.forEach((p,i)=>{cm_agent(cx,p[0],p[1],52,tt,{ph:i*1.7,think:0.2,core:0.7,label:p[2],a:ag_in(tt,T.stillThere-0.3+i*0.15,0.4)});
-        cm_reads(cx,960+(i-1)*200,590,p[0]+(i-1)*-10,p[1]-58,ag_sine(clamp((tt-T.stillThere-i*0.15)/0.9,0,1)),{t:tt,bend:0});});
-      const qa=k=>ag_in(tt,T.questions+k*0.5,0.4);
-      cm_pillAt(cx,330,300,"Students to survey?",tt,T.questions,null,{icon:"warn",col:AG.amber});
-      cm_pillAt(cx,1590,300,"Seats for welcome week?",tt,T.questions+0.5,null,{icon:"warn",col:AG.amber});
-      cm_pillAt(cx,960,150,"no report to check them against",tt,T.noReport,null,{col:AG.amber});}},
+      cm_file(cx,960,610,{cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>pulse})});
+      const ag=[[480,770,"Jun's agent"],[960,780,"Clara's agent"],[1440,770,"Lucía's agent"]];
+      ag.forEach((p,i)=>{cm_agent(cx,p[0],p[1],48,tt,{ph:i*1.7,think:0.2,core:0.7,label:p[2],a:ag_in(tt,T.stillThere-0.3+i*0.15,0.4)});
+        cm_reads(cx,960+(i-1)*200,648,p[0]+(i-1)*-10,p[1]-54,ag_sine(clamp((tt-T.stillThere-i*0.15)/0.9,0,1)),{t:tt,bend:0});});
+      cm_pillAt(cx,320,300,"Students to survey?",tt,T.questions,null,{icon:"warn",col:AG.amber});
+      cm_pillAt(cx,1640,300,"Seats for welcome week?",tt,T.questions+0.5,null,{icon:"warn",col:AG.amber});
+      cm_pillAt(cx,960,138,"no report to check them against",tt,T.noReport,null,{col:AG.amber});}},
     // the change: context and memory, governed like any data, in five ways
     {at:T.governs-0.6,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       ag_label(cx,960,196,"Governed like any data",{align:"center",a:ag_in(tt,T.governs-0.6,0.5)});
@@ -125,17 +137,17 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     // found: the line against its source, deleted, with a record of why
     {at:T.source-0.9,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const sa=ag_in(tt,T.source-0.7,0.4);cm_session(cx,100,150,760,240,{a:sa,date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});
-      const hl=ag_in(tt,T.source+0.2,0.4);if(hl>0){cx.save();cx.globalAlpha*=hl;cx.fillStyle=rgba(AG.green,0.14);rr(cx,118,206,ag_tw(cx,"For exam rooms,",{w:600,size:28})+16,48,10);cx.fill();cx.restore();}
+      const hl=ag_in(tt,T.source+0.2,0.4);if(hl>0){cx.save();cx.globalAlpha*=hl;cx.fillStyle=rgba(AG.green,0.14);rr(cx,113,220,ag_tw(cx,"For exam rooms,",{w:600,size:28})+18,42,10);cx.fill();cx.restore();}
       const rm=ag_in(tt,T.deletedW,0.4),ea=ag_in(tt,T.source-0.7,0.4)*(1-0.55*ag_in(tt,T.deletedW+0.4,0.6));
-      const b=cm_entry(cx,980,150,840,{lesson:"Count only students on campus.",rows:[["Learned in","a session, 12 May 2026"]],tick:1-rm},{a:ea,edge:AG.amber,edgeA:hl});
+      const b=cm_entry(cx,980,150,840,{lesson:"Count only students on campus.",rows:[CM_CAMPUS.rows[0]]},{a:ea,edge:AG.amber,edgeA:hl});
       cm_reads(cx,860,270,980,270,ag_sine(clamp((tt-T.source)/0.6,0,1)),{t:tt,bend:0});
       cm_pillAt(cx,1400,b.y+b.h+46,"lost: For exam rooms",tt,T.source+0.4,T.deletedW,{col:AG.amber,icon:"warn"});
-      cm_stamp(cx,1560,232,"Deleted",tt,T.deletedW,{col:AG.amber,rot:-0.06});
+      cm_stamp(cx,1606,226,"Deleted",tt,T.deletedW,{col:AG.amber,rot:-0.06});
       const ra=ag_in(tt,T.record-0.2,0.5);if(ra>0)cm_history(cx,560,470,800,CM_RECORD,{kick:"Record",a:ra,k:Math.min(1,ag_spr(tt,T.record-0.2,0.5))});}},
     // now: her agent starts with what the team knows, every entry with who approved it
     {at:T.knows-1.4,place:"cmLab",cut:true,keys:[[0,1000,530,1.03],[T.every-0.2,1150,470,1.1]],d:2.4,draw:(cx,tt)=>{
       cm_lucia(cx,S,tt,{think:0.2,smile:0.45});
-      cm_file(cx,CM_F.x,CM_F.y,{cards:cm_cards({without:true,who:k=>ag_in(tt,T.who+[0,0.15,0,0.3,0.45][k],0.4)})});
+      cm_file(cx,CM_F.x,CM_F.y,{cards:cm_cards({without:true,who:k=>ag_in(tt,T.who+k*0.15,0.4)})});
       const A=CM_DESK.agent;cm_fileReads(cx,tt,1,A[0],A[1],A[2]);}},
     // the library buys e-books for all 18,412
     {at:T.allW-0.9,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
@@ -146,8 +158,8 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_cardAt(cx,300,200,600,{kick:"What agents read",title:"The team's memory",sub:"and its context"},tt,T.read2-0.2,null,{kickCol:AG.blue,edge:AG.blue});
       cm_cardAt(cx,1020,200,600,{kick:"What they count",title:"18,412 students",sub:"on census day, 31 March 2026"},tt,T.count2-0.2,null,{kickCol:AG.orange,edge:AG.orange});
       [0,1].forEach(s=>{for(let i=0;i<5;i++)cm_govMark(cx,(s?1020:300)+90+i*105,460,ag_in(tt,T.count2+0.6+i*0.12+s*0.06,0.4));});
-      const wa=ag_in(tt,T.wrong-0.1,0.4)*(1-ag_in(tt,T.gone+0.5,0.6));if(wa>0){cm_index(cx,660,600,600,52,{text:"Count only students on campus",glow:AG.amber,a:wa});}
-      cm_stamp(cx,960,626,"Deleted",tt,T.gone,{col:AG.amber,t1:T.gone+0.5,size:28});
+      const wa=ag_in(tt,T.wrong-0.1,0.4)*(1-ag_in(tt,T.gone+0.5,0.6));if(wa>0){cx.save();cx.globalAlpha*=wa;cm_card(cx,830,560,{text:CM_CAMPUS_T,glow:AG.amber,glowA:1},-0.018);cx.restore();}
+      cm_stamp(cx,984,664,"Deleted",tt,T.gone,{col:AG.amber,t1:T.gone+0.5,size:30});
       cx.restore();}}],0.5);
   ag_title(ctx,S,t,c.breath,"Context and memory, governed",null,"FILM 9 OF 9 · AGENTS AT WORK ON DATA");
 });
@@ -163,6 +175,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     // what an agent reads, as Context engineering drew it: each kind of context as it's named, then memory; all of it is data
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const at=[T.code,T.meta,T.skills,T.tools];
       cm_context(cx,960,490,{t:tt,show:i=>clamp((tt-at[i]+0.15)/1.0,0,1),memory:clamp((tt-T.memory+0.15)/1.0,0,1),gov:clamp((tt-T.gets)/1.2,0,1),
+        back:i=>clamp((tt-at[i]-0.75)/1.3,0,1),backMem:clamp((tt-T.memory-0.75)/1.3,0,1),
         think:0.1+0.5*ag_io(tt,T.shapes-0.2,T.isData+0.8,0.5)});
       ag_label(cx,960,262,"What an agent reads",{align:"center",a:ag_in(tt,T.reads-0.2,0.4)*(1-ag_in(tt,T.isData-0.7,0.35))});
       ag_label(cx,960,262,"All of it is data",{align:"center",col:AG.orange,a:ag_in(tt,T.isData-0.2,0.4)});}},
@@ -186,7 +199,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     history:wAt(sc,"history","history"),who:wAt(sc,"history","who changed"),why:wAt(sc,"history","and why"),
     oneway:wAt(sc,"oneway","one way"),dbx:wAt(sc,"oneway","Databricks"),
     uc:wAt(sc,"comments","Unity Catalog"),comments:wAt(sc,"comments","comments"),column:wAt(sc,"comments","column"),
-    gw:wAt(sc,"skills","Unity Gateway"),beta:wAt(sc,"skills","in beta"),obj:wAt(sc,"skills","Unity Catalog object"),sOwner:wAt(sc,"skills","an owner"),perm:wAt(sc,"skills","permissions"),rec:wAt(sc,"skills","a record"),
+    gw:wAt(sc,"skills","Unity Gateway"),beta:wAt(sc,"skills","in beta"),obj:wAt(sc,"object","Unity Catalog object"),sOwner:wAt(sc,"object","an owner"),perm:wAt(sc,"object","permissions"),rec:wAt(sc,"object","a record"),
     nobody:wAt(sc,"nobody","Nobody"),starts:wAt(sc,"nobody","A change starts")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the repository, each thing lit as it's named; at the right, the owners' list, then a change, then its history
@@ -230,14 +243,11 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
 /* ---------------------------------------------------------------- 4 · Memory, kept like data */
 // the agents that write sessions, at the left of the board
 const CM_WRITERS=[[170,330,"Jun's agent"],[170,540,"Clara's agent"],[170,750,"Lucía's agent"]];
-// the two lines the daily step merged, and the line they became
-const CM_EXAM="For exam rooms, count only students on campus",CM_ROOMS="For room bookings, count only students on campus";
-// the proposals the daily step writes now, and the team's memory once Say which term is approved: the files in memory/entries/
+// the proposals the daily step writes now, and the files of the team's memory once Say which term is approved (memory/entries/)
 const CM_PROPS=["Say which term a count is for","Round averages to one decimal"];
-const CM_ENTRIES=["ask-which-year-its-for.md","census-day-is-31-march.md","cite-every-number.md","say-which-term-a-count-is-for.md","show-counts-never-names.md"];
-// the card file without the campus line, as the team keeps it now, with Say which term added (k: 0 the front card)
-function cm_kept(o){o=o||{};const L=[["Ask which year it's for","Clara Jensen"],["Cite every number","Yusuf Demir"],["Census day is 31 March","Mei Tanaka"],["Say which term a count is for","Mei Tanaka"],["Show counts, never names","Yusuf Demir"]];
-  return L.map((c,k)=>({text:c[0],who:o.who?c[1]:null,whoA:o.who?o.who(k):0,a:o.appear?o.appear(k):1,tick:1}));}
+const CM_ENTRIES=["read-the-glossary-first.md","say-which-term-a-count-is-for.md","show-the-count-reported.md","status-as-on-census-day.md","students-not-enrolments.md"];
+// the file before the merge: the four, the campus line as approved in May, and the line the step kept about room bookings, no one's tick
+function cm_before(o){o=o||{};return CM_MEM.map(m=>({text:m[0],tick:1})).concat([{text:CM_EXAM_T,tick:1},{text:CM_ROOMS_T,tick:0}]).map((cd,k)=>Object.assign(cd,o.each?o.each(k):{}));}
 scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     write:wAt(sc,"different","agents write"),
     dbx:wAt(sc,"lakebase","On Databricks"),sessions:wAt(sc,"lakebase","sessions"),lasting:wAt(sc,"lakebase","lasting memory"),lake:wAt(sc,"lakebase","Lakebase"),beta:wAt(sc,"lakebase","in beta"),
@@ -250,11 +260,10 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     yusuf:wAt(sc,"yusuf","Yusuf"),gov:wAt(sc,"yusuf","data governance"),whole:wAt(sc,"yusuf","as a whole"),
     loads:wAt(sc,"load","a script loads"),files:wAt(sc,"load","approved files"),store:wAt(sc,"load","the team's store"),every:wAt(sc,"load","every agent"),none:wAt(sc,"load","none may change")}));
   ag_shots(ctx,S,t,sc.dur,[
-    // agents write their sessions; on Databricks, a sessions store and the lasting memory, in Lakebase; once a day a step keeps what
-    // seems worth keeping, unasked: here, a line about room bookings, with no one's tick
+    // agents write their sessions; on Databricks, a sessions store and the team's lasting memory, in Lakebase; once a day a step keeps
+    // what seems worth keeping, unasked: here, a line about room bookings, with no one's tick
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
       cm_zone(cx,330,140,1550,720,"On Databricks · Lakebase",{a:ag_in(tt,T.lake-0.3,0.5)});
-      cm_pillAt(cx,960,184,"beta",tt,T.beta-0.1,null,{size:28,col:AG.blue});
       const s0=Math.min(0.15,T.write-0.4),sa=ag_in(tt,s0,0.5),rowY=i=>210+136+i*64+26;
       cm_store(cx,380,210,420,348,{kick:"Store",title:"Sessions",rows:CM_WRITERS.map((p,i)=>({text:p[2]+" · today",a:ag_in(tt,T.write+0.2+i*0.3,0.4)})),
         glow:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3)?AG.blue:null,glowA:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3),a:sa,k:Math.min(1,ag_spr(tt,s0,0.5))});
@@ -264,27 +273,27 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const sta=ag_in(tt,T.step-0.2,0.4);
       cm_step(cx,390,640,{w:400,a:sta,k:Math.min(1,ag_spr(tt,T.step-0.2,0.5)),turn:Math.max(0,tt-T.once)*0.35,glow:ag_io(tt,T.readsS-0.2,T.asking+0.6,0.4)});
       cm_arrow(cx,[590,562,590,590,590,612,590,634],ag_in(tt,T.readsS-0.3,0.5),{col:AG.violet,lw:3.5,head:12});
-      cm_arrow(cx,[794,700,880,700,950,660,1010,640],ag_in(tt,T.keeps-0.4,0.5),{col:AG.violet,lw:3.5,head:12});
-      const add=ag_in(tt,T.keeps+0.1,0.5);
-      const cards=[...CM_FC.map((f,k)=>({text:k===CM_WRONG?CM_EXAM:f[0],tick:1})),{text:CM_ROOMS,tick:0,a:add,glow:add>0?AG.violet:null,glowA:add*(1-ag_in(tt,T.asking+1.2,0.6))}];
-      cm_file(cx,1400,760,{w:760,cw:720,a:ag_in(tt,T.lasting-0.3,0.5),cards});
+      cm_arrow(cx,[794,702,842,702,898,702,946,702],ag_in(tt,T.keeps-0.4,0.5),{col:AG.violet,lw:3.5,head:12});
+      const add=ag_in(tt,T.keeps+0.1,0.5),ga=add*(1-ag_in(tt,T.asking+1.2,0.6));
+      cm_file(cx,1400,770,{a:ag_in(tt,T.lasting-0.3,0.5),cards:cm_before({each:k=>k===5?{a:add,glow:ga>0?AG.violet:null,glowA:ga}:{}})});
+      // sessions and memory are in beta; Lakebase isn't: the mark sits on the two stores
+      cm_pillAt(cx,690,302,"beta",tt,T.beta-0.1,null,{size:28,col:AG.blue});cm_pillAt(cx,1296,374,"beta",tt,T.beta+0.1,null,{size:28,col:AG.blue});
       cm_pillAt(cx,590,820,"no one reviews it",tt,T.asking,null,{icon:"warn",col:AG.amber,size:28});}},
-    // how the campus line lost its words: the step merges two lines into one, as it's built to; the store is one room: anyone who may
-    // write to it may change any entry, and nothing records what it said before
+    // how the campus line lost its words: the step merges the room bookings line into it, as it's built to, and its title becomes
+    // Campus only; the store is one room: whoever may write to it may change any entry, and nothing records what it said before
     {at:c.how-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      const m=ag_sine(clamp((tt-T.merged)/1.4,0,1)),gl=ag_in(tt,T.campus-0.2,0.4),w1=ag_in(tt,T.whoever,0.5),hit=k=>ag_io(tt,T.any-0.2+k*0.1,T.nothing,0.3);
-      const cards=[{text:"Ask which year it's for",tick:1,glow:hit(0)>0?AG.violet:null,glowA:hit(0)},{text:"Cite every number",tick:1},
-        {text:CM_EXAM,alt:"Count only students on campus",altA:clamp((m-0.45)/0.4,0,1),tick:1,glow:gl>0?AG.amber:null,glowA:gl},
-        {text:CM_ROOMS,tick:0,dy:50*m,a:1-clamp((m-0.65)/0.35,0,1),glow:gl>0?AG.amber:null,glowA:gl},
-        {text:"Census day is 31 March",tick:1,dy:50*m,glow:hit(2)>0?AG.violet:null,glowA:hit(2)},{text:"Show counts, never names",tick:1,dy:50*m}];
-      cm_file(cx,960,780,{w:940,cw:900,cards});
+      const m=clamp((tt-T.merged)/1.4,0,1),gl=ag_in(tt,T.campus-0.2,0.4)*(1-ag_in(tt,T.room-0.2,0.6)),w1=ag_in(tt,T.whoever,0.5),hit=k=>ag_io(tt,T.any-0.2+k*0.1,T.nothing,0.3);
+      // the room bookings card slides onto the campus line, which loses its title under it; then the card goes, and the new title comes
+      const slide=clamp(m/0.6,0,1),gone=clamp((m-0.6)/0.2,0,1);
+      cm_file(cx,820,770,{cards:cm_before({each:k=>k===4?{alt:CM_CAMPUS_T,altA:clamp((m-0.8)/0.2,0,1),textA:1-clamp((m-0.55)/0.05,0,1),glow:gl>0?AG.amber:null,glowA:gl}
+        :k===5?{slot:5-slide,a:1-gone,glow:gl>0?AG.amber:null,glowA:gl}:(k===0||k===2)&&hit(k)>0?{glow:AG.violet,glowA:hit(k)}:{}})});
       // the step, and its line into the two cards
-      cm_step(cx,80,300,{w:400,turn:tt*0.35,glow:ag_io(tt,T.merged-0.4,T.built+0.6,0.4)});
-      cm_arrow(cx,[280,428,300,560,380,640,470,650],ag_in(tt,T.merged-0.6,0.5),{col:AG.violet,lw:3.5,head:12});
+      cm_step(cx,1400,640,{w:400,turn:tt*0.35,glow:ag_io(tt,T.merged-0.4,T.built+0.6,0.4)});
+      const tip=1236-278*ag_sine(slide);cm_arrow(cx,[1396,702,lerp(1396,tip,0.33),702,lerp(1396,tip,0.66),702,tip,702],ag_in(tt,T.merged-0.6,0.5),{col:AG.violet,lw:3.5,head:12});
       cm_pillAt(cx,960,236,"It can rewrite, merge, split or delete any entry",tt,T.built-0.2,T.room-0.4,{size:28,col:AG.violet});
-      // whoever may write: two agents and the step, each reaching a different card
-      [[1640,500,"Jun's agent",0],[1700,700,"Clara's agent",1]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.7,think:0.3,core:0.75,label:p[2],a:w1,floor:p[1]+92});
-        const to=i?[1418,742]:[1418,594];cm_reads(cx,p[0]-48,p[1]-6,to[0],to[1],ag_sine(clamp((tt-T.whoever-0.2-i*0.2)/0.8,0,1))*w1,{t:tt,bend:-20,col:AG.violet});});
+      // whoever may write: an agent on each side, each reaching a different card
+      [[200,470,"Clara's agent",[400,478]],[1600,420,"Jun's agent",[1226,470]]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.7,think:0.3,core:0.75,label:p[2],a:w1,floor:p[1]+92});
+        const L=i?-1:1;cm_reads(cx,p[0]+L*48,p[1]-6,p[3][0],p[3][1],ag_sine(clamp((tt-T.whoever-0.2-i*0.2)/0.8,0,1))*w1,{t:tt,bend:-20,col:AG.violet});});
       cm_pillAt(cx,960,236,"nothing records what it said before",tt,T.nothing-0.1,null,{icon:"warn",col:AG.amber,size:28});}},
     // split in two: the daily step writes only proposals, in a store no agent reads; the team's memory is a store of its own
     {at:c.split-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
@@ -294,43 +303,43 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_store(cx,90,400,560,284,{kick:"Store",title:"Proposals",dashed:true,edge:null,rows:CM_PROPS.map((s,i)=>({text:s,dashed:true,a:ag_in(tt,T.props+0.2+i*0.3,0.4)})),a:pa,k:Math.min(1,ag_spr(tt,T.split-0.2,0.5))});
       cm_pillAt(cx,370,744,"no agent reads it",tt,T.noAgent-0.1,null,{icon:"lock",size:28});
       const fa=ag_in(tt,T.split+0.3,0.4);
-      cm_file(cx,1260,660,{w:640,cw:600,a:fa,cards:cm_cards({without:true})});
-      [[1760,300,"Jun's agent"],[1760,500,"Clara's agent"],[1760,700,"Lucía's agent"]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.4,think:0.2,core:0.75,label:p[2],a:fa,floor:p[1]+92});
-        cm_reads(cx,1584,500+i*40,p[0]-48,p[1]-6,ag_sine(clamp((tt-T.split-0.6-i*0.2)/0.8,0,1))*fa,{t:tt,bend:0});});}},
+      cm_file(cx,1150,700,{a:fa,cards:cm_cards({without:true})});
+      [[1760,300,"Jun's agent",410],[1760,500,"Clara's agent",560],[1760,700,"Lucía's agent",690]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.4,think:0.2,core:0.75,label:p[2],a:fa,floor:p[1]+92});
+        cm_reads(cx,1596,p[3],p[0]-48,p[1]-6,ag_sine(clamp((tt-T.split-0.6-i*0.2)/0.8,0,1))*fa,{t:tt,bend:0});});}},
     // each morning a plain script brings the proposals to the repository, one file each; the person confirms, the meaning's owner approves
     {at:c.morning-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_store(cx,80,170,520,284,{kick:"Store",title:"Proposals",dashed:true,edge:null,rows:CM_PROPS.map(s=>({text:s,dashed:true}))});
       const sa=ag_in(tt,T.script-0.3,0.4);
       cm_script(cx,80,540,"Each morning","a plain script",{a:sa,k:Math.min(1,ag_spr(tt,T.script-0.3,0.5)),turn:Math.max(0,tt-T.script)*0.5,glow:ag_io(tt,T.script,T.pr+1.0,0.4)});
       cm_arrow(cx,[300,458,300,490,300,510,300,534],ag_in(tt,T.script-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
-      cm_arrow(cx,[424,602,640,602,780,300,952,300],ag_in(tt,T.pr-0.3,0.6),{col:AG.blue,lw:3.5,head:12});
+      cm_arrow(cx,[424,602,640,602,780,250,952,250],ag_in(tt,T.pr-0.3,0.6),{col:AG.blue,lw:3.5,head:12});
       const ra=ag_in(tt,T.pr-0.2,0.4),lit=ag_in(tt,T.person-0.2,0.4);
-      cm_pr(cx,960,150,880,{title:"Memory proposals, 4 November 2026",by:"Opened by the morning script",
+      cm_pr(cx,960,110,880,{title:"Memory proposals, 4 November 2026",by:"Opened by the morning script",
         files:[["memory/entries/say-which-term-a-count-is-for.md",ag_in(tt,T.oneFile,0.4),lit>0?mix(AG.ink,AG.blue,lit):null],["memory/entries/round-averages-to-one-decimal.md",ag_in(tt,T.oneFile+0.35,0.4)]],
         a:ra,k:Math.min(1,ag_spr(tt,T.pr-0.2,0.5))});
+      // the first file as a proposed entry: dashed, with a pen, until "Approved" lands on it
       const ea=ag_in(tt,T.person-0.3,0.4),ok=ag_in(tt,T.approves+0.25,0.35);
-      const b=cm_entry(cx,960,470,880,{lesson:"Say which term a count is for.",tick:ok,rows:[["Learned in","a session, 3 November 2026"],["Confirmed by","Clara Jensen, whose session it was",ag_in(tt,T.confirms-0.2,0.4)],
-        ["Approved by","Mei Tanaka, who owns its meaning",ag_in(tt,T.ownerM-0.1,0.4)]]},{a:ea,k:Math.min(1,ag_spr(tt,T.person-0.3,0.5))});
-      if(ea>0)cm_dash(cx,960,470,880,b.h,8,AG.mut,ea*(1-ok));
-      cm_stamp(cx,1680,520,"Approved",tt,T.approves+0.2,{col:AG.green,size:28});}},
+      cm_entry(cx,960,420,880,{lesson:"Say which term a count is for.",rows:[["Learned in","A session, 3 November 2026"],["Confirmed by","Clara Jensen, whose session it was",ag_in(tt,T.confirms-0.2,0.4)],
+        ["Approved by","Mei Tanaka, who owns its meaning",ag_in(tt,T.ownerM-0.1,0.4),ok>0?mix(AG.ink,AG.green,ok):null]]},{kind:"proposed",a:ea,k:Math.min(1,ag_spr(tt,T.person-0.3,0.5))});
+      cm_stamp(cx,1650,486,"Approved",tt,T.approves+0.2,{col:AG.green,size:28});}},
     // Yusuf, in data governance, owns the memory as a whole: CODEOWNERS says so
     {at:c.yusuf-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       ag_person(cx,"yusuf",420,640,0.9,{t:tt,gaze:[4,0],smile:0.3});
       cm_pillAt(cx,420,300,"Yusuf Demir · Data governance",tt,c.yusuf-0.3,null,{size:28});
-      cm_owners(cx,960,150,880,[["/memory/","data.governance@uni.example",1,ag_in(tt,T.whole-0.2,0.4)]],{a:ag_in(tt,T.gov-0.4,0.4),k:Math.min(1,ag_spr(tt,T.gov-0.4,0.5))});
-      cm_file(cx,1400,780,{w:700,cw:640,cards:cm_kept()});}},
+      cm_owners(cx,960,110,880,[["/memory/","data.governance@uni.example",1,ag_in(tt,T.whole-0.2,0.4)]],{a:ag_in(tt,T.gov-0.4,0.4),k:Math.min(1,ag_spr(tt,T.gov-0.4,0.5))});
+      cm_file(cx,1400,812,{cards:cm_kept()});}},
     // a plain script loads the approved files into the team's store: every agent reads it, none may change it
     {at:c.load-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      cm_repo(cx,80,180,660,CM_ENTRIES.map(n=>({name:n})),{title:"memory/entries/",nameW:560});
+      cm_repo(cx,80,150,660,CM_ENTRIES.map(n=>({name:n})),{title:"memory/entries/",nameW:560});
       const sa=ag_in(tt,T.loads-0.3,0.4);
-      cm_script(cx,790,330,"Load","the approved files",{a:sa,k:Math.min(1,ag_spr(tt,T.loads-0.3,0.5)),turn:Math.max(0,tt-T.loads)*0.5,glow:ag_io(tt,T.files-0.2,T.store+1.0,0.4)});
-      cm_arrow(cx,[744,392,760,392,770,392,786,392],ag_in(tt,T.loads-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
-      cm_arrow(cx,[1170,392,1190,392,1196,420,1206,450],ag_in(tt,T.store-0.4,0.4),{col:AG.blue,lw:3.5,head:12});
+      cm_script(cx,80,640,"Load","the approved files",{a:sa,k:Math.min(1,ag_spr(tt,T.loads-0.3,0.5)),turn:Math.max(0,tt-T.loads)*0.5,glow:ag_io(tt,T.files-0.2,T.store+1.0,0.4)});
+      cm_arrow(cx,[275,580,275,600,275,618,275,636],ag_in(tt,T.loads-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
+      cm_arrow(cx,[474,702,640,702,760,600,890,600],ag_in(tt,T.store-0.4,0.4),{col:AG.blue,lw:3.5,head:12});
       const fa=ag_in(tt,T.store-0.3,0.4);
-      cm_file(cx,1530,640,{w:640,cw:600,a:fa,cards:cm_kept({appear:k=>ag_in(tt,T.store+k*0.15,0.35)}),lock:ag_in(tt,T.none-0.1,0.4)});
-      [[1300,770,"Jun's agent"],[1530,770,"Clara's agent"],[1760,770,"Lucía's agent"]].forEach((p,i)=>{const aa=ag_in(tt,T.every-0.3+i*0.12,0.4);
+      cm_file(cx,1340,660,{a:fa,cards:cm_kept({appear:k=>ag_in(tt,T.store+k*0.15,0.35)}),lock:ag_in(tt,T.none-0.1,0.4)});
+      [[1100,780,"Jun's agent"],[1340,780,"Clara's agent"],[1580,780,"Lucía's agent"]].forEach((p,i)=>{const aa=ag_in(tt,T.every-0.3+i*0.12,0.4);
         cm_agent(cx,p[0],p[1],40,tt,{ph:i*1.6,think:0.2,core:0.75,label:p[2],a:aa,floor:p[1]+84});
-        cm_reads(cx,1530+(i-1)*120,672,p[0],p[1]-44,ag_sine(clamp((tt-T.every-i*0.15)/0.8,0,1))*aa,{t:tt,bend:0});});}}]);
+        cm_reads(cx,p[0],696,p[0],p[1]-44,ag_sine(clamp((tt-T.every-i*0.15)/0.8,0,1))*aa,{t:tt,bend:0});});}}]);
   CM_KICK(ctx,1);});
 
 /* ---------------------------------------------------------------- 5 · Kept, then deleted */
@@ -369,50 +378,51 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
         ag_T(cx,"Kept 30 days",x0+(29*P+44)/2,334,{w:700,size:28,align:"center",col:AG.blue,a:ba});}
       const bna=ag_in(tt,T.job-0.3,0.4);if(bna>0){cx.save();cx.globalAlpha*=bna;cm_bin(cx,172,600,76,rgba(AG.mut,0.95),on?ag_io(f,0.0,0.5,0.15):0);cx.restore();}
       cm_script(cx,280,540,"Scheduled job","deletes sessions after 30 days",{a:ag_in(tt,T.job-0.3,0.4),k:Math.min(1,ag_spr(tt,T.job-0.3,0.5)),turn:Math.max(0,tt-T.job)*0.4,glow:on?ag_io(f,0.0,0.5,0.15)*0.8:0});}},
-    // an entry with a date to check it again, which its owner does; a proposal that names a student is turned down
+    // an entry with a date to check it again: the date comes, its owner checks it, the next date is set and its history says so; a
+    // proposal that names a student is turned down
     {at:c.again-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      const ea=ag_in(tt,c.again-0.3,0.4);
-      const rows=[["Owner","Mei Tanaka",ag_in(tt,T.date-0.7,0.4)],["Check again","1 March 2027",ag_in(tt,T.date-0.1,0.4),AG.blue],
-        ["History","approved 14 May 2026; checked 2 November 2026",ag_in(tt,T.hist-0.2,0.4)]];
-      cm_entry(cx,100,250,820,{lesson:"Census day is 31 March.",rows,tick:1},{a:ea,k:Math.min(1,ag_spr(tt,c.again-0.3,0.5))});
-      cm_stamp(cx,720,316,"Checked",tt,T.ownerDoes+0.1,{col:AG.green,size:28});
-      const pa=ag_in(tt,T.namesNo-0.7,0.4);if(pa>0)cm_proposal(cx,1000,250,820,"Student 20481 is counted twice.",{a:pa,k:Math.min(1,ag_spr(tt,T.namesNo-0.7,0.5))});
-      cm_stamp(cx,1664,288,"Turned down",tt,T.namesNo+0.2,{col:AG.amber,size:28});
-      cm_pillAt(cx,1410,440,"names a student",tt,T.namesNo+0.4,null,{icon:"warn",col:AG.amber,size:28});}},
+      const ea=ag_in(tt,c.again-0.3,0.4),chk=ag_in(tt,T.ownerDoes+0.3,0.5);
+      const rows=[["Owner","Mei Tanaka, registrar's office",ag_in(tt,T.date-0.7,0.4)],["Check again","1 November 2026",ag_in(tt,T.date-0.1,0.4),AG.blue,"1 March 2027",chk],
+        ["History","15 April 2026 · approved by Mei Tanaka",ag_in(tt,T.date+0.2,0.4)],[null,"2 November 2026 · checked by Mei Tanaka",ag_in(tt,T.ownerDoes+0.4,0.4)]];
+      cm_entry(cx,100,230,820,{lesson:CM_CENSUS,rows},{a:ea,k:Math.min(1,ag_spr(tt,c.again-0.3,0.5)),hl:3,hlA:ag_in(tt,T.hist-0.2,0.4),hlCol:AG.blue});
+      cm_stamp(cx,760,568,"Checked",tt,T.ownerDoes+0.1,{col:AG.green,size:28});
+      const pa=ag_in(tt,T.namesNo-0.7,0.4);
+      cm_entry(cx,1000,230,820,{lesson:"Student 20481 is counted twice.",rows:[["Learned in","A session, 3 November 2026"]]},{kind:"proposed",a:pa,k:Math.min(1,ag_spr(tt,T.namesNo-0.7,0.5))});
+      cm_stamp(cx,1660,288,"Turned down",tt,T.namesNo+0.2,{col:AG.amber,size:28});
+      cm_pillAt(cx,1410,548,"names a student",tt,T.namesNo+0.4,null,{icon:"warn",col:AG.amber,size:28});}},
     // the first thought: delete the chat the line came from; it deletes nothing of the line, as the docs say
     {at:c.traps-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const dq=ag_sine(clamp((tt-T.delChat-0.1)/0.8,0,1)),sa=ag_in(tt,c.traps-0.3,0.4)*(1-ag_in(tt,T.delChat+0.4,0.5));
       if(sa>0){cx.save();cx.globalAlpha*=sa;cx.translate(0,dq*90);cm_session(cx,100,250,720,220,{date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});cx.restore();}
       cm_pillAt(cx,460,200,"delete the chat?",tt,T.first-0.1,T.delChat+0.6,{size:28});
       const bna=1-ag_in(tt,T.docs-0.8,0.4);if(bna>0){cx.save();cx.globalAlpha*=bna;cm_bin(cx,460,560,84,rgba(AG.mut,0.95),ag_io(tt,T.delChat-0.1,T.delChat+0.9,0.3));cx.restore();}
-      cm_file(cx,1420,720,{w:640,cw:600,cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>ag_in(tt,T.delNothing-0.2,0.4)})});
-      cm_pillAt(cx,1420,340,"still in the team's memory",tt,T.delNothing,null,{icon:"warn",col:AG.amber,size:28});
-      const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,880,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions \u00b7 beta",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
+      cm_file(cx,1430,760,{cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>ag_in(tt,T.delNothing-0.2,0.4)})});
+      cm_pillAt(cx,1430,300,"still in the team's memory",tt,T.delNothing,null,{icon:"warn",col:AG.amber,size:28});
+      const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,860,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions \u00b7 beta",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
     // the sync that copies skills to the platform never deletes one
     {at:c.sync-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      cm_repo(cx,80,220,700,CM_SKILLS.map((n,i)=>({name:"skills/"+n+"/",folder:1,strike:i===2?1:0,note:i===2?"deleted":null,noteCol:AG.amber,col:i===2?AG.amber:null})),{nameW:470});
+      cm_repo(cx,40,220,700,CM_SKILLS.map((n,i)=>({name:"skills/"+n+"/",folder:1,strike:i===2?1:0,note:i===2?"deleted":null,noteCol:AG.amber,col:i===2?AG.amber:null})),{nameW:470});
       const sa=ag_in(tt,T.syncW-0.3,0.4);
-      cm_script(cx,840,330,"Skill sync","copies, never deletes",{a:sa,k:Math.min(1,ag_spr(tt,T.syncW-0.3,0.5)),turn:Math.max(0,tt-T.syncW)*0.5,glow:ag_io(tt,T.neverDel-0.3,T.neverDel+1.4,0.4)});
-      cm_arrow(cx,[784,392,800,392,816,392,836,392],ag_in(tt,T.syncW-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
-      cm_arrow(cx,[1274,392,1290,392,1306,392,1326,392],ag_in(tt,T.syncW+0.3,0.4),{col:AG.blue,lw:3.5,head:12});
-      const za=ag_in(tt,T.syncW,0.4);cm_zone(cx,1340,170,540,520,"Unity Gateway · beta",{a:za});
-      CM_SKILLS.forEach((n,i)=>{const g=i===2?ag_in(tt,T.neverDel,0.4):0;cx.save();cx.globalAlpha*=za;cm_index(cx,1372,260+i*76,476,56,{text:n,glow:g>0?AG.amber:null,glowA:g});cx.restore();});
-      cm_pillAt(cx,1610,560,"still on the platform",tt,T.neverDel+0.2,null,{icon:"warn",col:AG.amber,size:28});}},
+      cm_script(cx,800,330,"Skill sync","copies, never deletes",{a:sa,k:Math.min(1,ag_spr(tt,T.syncW-0.3,0.5)),turn:Math.max(0,tt-T.syncW)*0.5,glow:ag_io(tt,T.neverDel-0.3,T.neverDel+1.4,0.4)});
+      cm_arrow(cx,[744,392,760,392,776,392,796,392],ag_in(tt,T.syncW-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
+      cm_arrow(cx,[1234,392,1250,392,1266,392,1286,392],ag_in(tt,T.syncW+0.3,0.4),{col:AG.blue,lw:3.5,head:12});
+      const za=ag_in(tt,T.syncW,0.4);cm_zone(cx,1300,170,580,520,"Unity Gateway skills · beta",{a:za});
+      CM_SKILLS.forEach((n,i)=>{const g=i===2?ag_in(tt,T.neverDel,0.4):0;cx.save();cx.globalAlpha*=za;cm_index(cx,1332,260+i*76,516,56,{text:n,glow:g>0?AG.amber:null,glowA:g});cx.restore();});
+      cm_pillAt(cx,1590,560,"still on the platform",tt,T.neverDel+0.2,null,{icon:"warn",col:AG.amber,size:28});}},
     // delete where it's kept: the line's file, in a pull request that says why; its entry, at the next load; the record stays
     {at:c.where-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const pa=ag_in(tt,T.whereW-0.2,0.4),fl=ag_in(tt,T.file-0.2,0.4);
-      cm_pr(cx,80,150,900,{title:"Delete: Count only students on campus",by:"Opened by Yusuf Demir",files:[["memory/entries/count-only-students-on-campus.md",1,fl>0?mix(AG.ink,AG.amber,fl):null]],
+      cm_pr(cx,80,150,900,{title:"Delete: Count only students on campus",by:"Opened by Yusuf Demir",files:[["memory/entries/campus-only.md",1,fl>0?mix(AG.ink,AG.amber,fl):null]],
         rows:[{text:"Why: a merge dropped “For exam rooms”",state:"no",a:ag_in(tt,T.why-0.2,0.4)},{text:"Approved by Mei Tanaka",state:"wait",tick:ag_in(tt,T.why+0.9,0.35),a:ag_in(tt,T.why+0.5,0.4)}],
         a:pa,k:Math.min(1,ag_spr(tt,T.whereW-0.2,0.5))});
       const la=ag_in(tt,T.entry-0.4,0.4);
-      cm_script(cx,1080,170,"Next load","the approved files",{a:la,k:Math.min(1,ag_spr(tt,T.entry-0.4,0.5)),turn:Math.max(0,tt-T.next)*0.5,glow:ag_io(tt,T.next-0.3,T.next+1.4,0.4)});
-      cm_arrow(cx,[984,260,1020,260,1040,240,1076,236],ag_in(tt,T.entry-0.2,0.4),{col:AG.blue,lw:3.5,head:12});
-      cm_arrow(cx,[1270,298,1270,340,1270,380,1270,420],ag_in(tt,T.next-0.2,0.4),{col:AG.blue,lw:3.5,head:12});
+      cm_script(cx,1480,150,"Next load","the approved files",{a:la,k:Math.min(1,ag_spr(tt,T.entry-0.4,0.5)),turn:Math.max(0,tt-T.next)*0.5,glow:ag_io(tt,T.next-0.3,T.next+1.4,0.4)});
+      cm_arrow(cx,[984,222,1150,222,1300,214,1476,214],ag_in(tt,T.entry-0.2,0.5),{col:AG.blue,lw:3.5,head:12});
+      cm_arrow(cx,[1530,280,1500,340,1380,380,1294,382],ag_in(tt,T.next-0.2,0.4),{col:AG.blue,lw:3.5,head:12});
       const gone=ag_sine(clamp((tt-T.next-0.2)/1.2,0,1));
-      const cards=CM_FC.map((f,k)=>({text:f[0],tick:1,a:k===CM_WRONG?1-gone:1,strike:k===CM_WRONG?ag_in(tt,T.next-0.3,0.4):0,glow:k===CM_WRONG?AG.amber:null,glowA:k===CM_WRONG?1:0,dy:k>CM_WRONG?50*gone:0}));
-      cm_file(cx,1480,760,{w:640,cw:600,cards,labelDy:50*gone});
+      cm_file(cx,1440,780,{cards:cm_cards({each:k=>k===CM_WRONG?{a:1-gone,strike:ag_in(tt,T.next-0.3,0.4),glow:AG.amber,glowA:1}:{}})});
       const ra=ag_in(tt,T.rec-0.3,0.4);if(ra>0)cm_history(cx,80,530,900,CM_RECORD.map((r,i)=>[r[0],r[1],ag_in(tt,[T.added,T.deleted,T.whyR][i]-0.2,0.4)]),{kick:"Record",a:ra,k:Math.min(1,ag_spr(tt,T.rec-0.3,0.5))});
-      cm_pillAt(cx,1480,840,"no agent reads it again",tt,T.noAgent-0.1,null,{size:28});}}]);
+      cm_pillAt(cx,1500,714,"no agent reads it again",tt,T.noAgent-0.1,null,{size:28});}}]);
   CM_KICK(ctx,1);});
 
 /* ---------------------------------------------------------------- 6 · What the team knows */
@@ -436,21 +446,21 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     {at:c.answer-0.3,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       cm_agent(cx,250,700,64,tt,{think:0.3,core:0.85,label:"Lucía's agent",floor:800});
       const open=ag_sine(clamp((tt-T.evidence)/1.3,0,1));
-      const ev=ag_evidence(cx,80,110,760,{kick:"Her agent's answer",title:"18,412 students"},[{kick:"Data",title:"Census-day count, 31 March 2026",col:AG.orange},
+      const ev=ag_evidence(cx,80,110,760,{kick:"Her agent's answer",title:"18,412 students"},[{kick:"Data",title:"The census-day count",col:AG.orange},
         {kick:"Team memory",title:"5 entries, each with who approved it",col:AG.blue}],{open,side:"below",ew:360,edge:AG.green,a:ag_in(tt,c.answer-0.2,0.4),kickCol:AG.violet}),mi=ev.items[1].to;
       const slots=cm_file(cx,1380,790,{cards:cm_kept({who:k=>ag_in(tt,T.whoA+k*0.12,0.4)})});
-      cm_reads(cx,mi.x+mi.w/2,mi.y+mi.h+6,slots[2].x-6,slots[2].y+24,ag_sine(clamp((tt-T.each+0.2)/0.9,0,1)),{t:tt,bend:40});}},
+      cm_reads(cx,mi.x+mi.w+6,mi.y+mi.h*0.45,slots[0].x-8,slots[0].y+40,ag_sine(clamp((tt-T.each+0.2)/0.9,0,1)),{t:tt,bend:-20});}},
     // the library buys e-books for every student, online or on campus
     {at:c.library-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_people(cx,260,380,{join:1});
       cm_library(cx,1060,300,620,{count:"For all 18,412 students",col:AG.green,note:ag_in(tt,T.online-0.2,0.3)>0?"online or on campus":null,k:Math.min(1,ag_spr(tt,c.library-0.4,0.5)),a:ag_in(tt,c.library-0.4,0.3)});}},
     // every agent, and every newcomer, starts from what the team knows
     {at:c.same-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      cm_file(cx,960,540,{w:700,cw:640,cards:cm_kept({who:k=>1})});
+      cm_file(cx,960,560,{cards:cm_kept({who:k=>1})});
       [["Jun's agent",360],["Clara's agent",660],["Lucía's agent",960],["Noor's agent",1260],["Sam's agent",1560]].forEach((p,i)=>{const aa=ag_in(tt,T.everyAgent-0.3+i*0.12,0.4);
-        cm_agent(cx,p[1],770,44,tt,{ph:i*1.3,think:0.2,core:0.75,label:p[0],a:aa,floor:862});
-        cm_reads(cx,960+(i-2)*110,572,p[1],722,ag_sine(clamp((tt-T.everyAgent-i*0.12)/0.9,0,1))*aa,{t:tt,bend:0});});
-      cm_pillAt(cx,960,180,"what the team knows, approved by people",tt,T.knows-0.1,null,{icon:"tick",col:AG.green,size:28});}},
+        cm_agent(cx,p[1],780,44,tt,{ph:i*1.3,think:0.2,core:0.75,label:p[0],a:aa,floor:872});
+        cm_reads(cx,960+(i-2)*110,652,p[1],732,ag_sine(clamp((tt-T.everyAgent-i*0.12)/0.9,0,1))*aa,{t:tt,bend:0});});
+      cm_pillAt(cx,960,108,"what the team knows, approved by people",tt,T.knows-0.1,null,{icon:"tick",col:AG.green,size:28});}},
     // where the series began: what an agent reads; nine films, nine lessons; then the whole road, from further off
     {at:c.began-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
       const ca=ag_in(tt,c.began-0.4,0.4)*(1-ag_in(tt,T.nine-0.2,0.5));

@@ -1,18 +1,18 @@
 /* ===== Context and memory, governed: the team's memory =====
-   Drawn as Memory: from one chat to the team draws it (its thread's notes, 4 November 2026): the team's memory is an oak card file on
-   the marble wall, TEAM MEMORY above it in the module's blue; each entry an off-white index card standing in it, slightly fanned, its
-   top line the lesson's first words, a small green tick when a person approved it. An entry pulled up shows its fields, one a line:
-   Lesson, Learned in, Confirmed by, Approved by, and History; this film adds Check again. A proposed entry waits outside the file on a
-   card with a dashed edge and a small pen; "Approved" lands on it in green, "Turned down" in amber. A session is a large pale card with
-   a violet edge, SESSION and its date at the right.
+   Drawn as Memory: from one chat to the team draws it (its code and its thread's note, team-memory.md, as built on 4 November 2026):
+   the team's memory is an oak card file on the marble wall, TEAM MEMORY above it in the module's blue; each entry an off-white index
+   card standing on an oak ledge, its short title in two lines at most, a small green tick at its bottom right once a person approved it.
+   This film's file has two ledges, three cards to a ledge. An entry pulled up shows its fields, one a line, the label over the words:
+   Lesson, Learned in, Confirmed by, Approved by and History; this film adds Check again. A proposed entry waits outside the file with a
+   dashed edge and a small pen; "Approved" lands on it in green, "Turned down" in amber. A session is a large pale card with a violet
+   edge, SESSION and its date at the right.
    On the platform the memory is kept in stores (Lakebase, the platform's database): a store is a box with its entries in it.
-     cm_file(ctx, x, y, o)          the card file: (x, y) the middle of the tray's top edge; o.cards [{text, tick, who, a, glow, lift, dy}],
-                                    o.w (the tray's width), o.labelDy (the label down with the cards, when one is taken out), o.a;
-                                    returns each card's place in the file
-     cm_index(ctx, x, y, w, h, o)   one index card, flat: o.text its top line, o.tick, o.who (the approver, at the right), o.glow, o.a
-     cm_entry(ctx, x, y, w, e, o)   an entry pulled up: e.lesson, e.rows [[label, value], ...], e.tick; o.a, o.k, o.edge; returns its box
-     cm_proposal(ctx, x, y, w, text, o)  a proposed entry: dashed, a pen, PROPOSED
-     cm_stamp(ctx, x, y, text, t, t0, o)  a stamp landing at t0: o.col (green: approved; amber: turned down or removed), o.rot
+     cm_file(ctx, x, y, o)          the card file: (x, y) the middle of the lower ledge's top; o.cards [{text, tick, who, whoA, glow, glowA,
+                                    lift, a, slot, strike, dashed}], o.lock; returns each card's box
+     cm_card(ctx, x, y, card, rot)  one standing card
+     cm_index(ctx, x, y, w, h, o)   a flat index strip: o.text, o.tick, o.who, o.glow, o.a (the skills on the platform)
+     cm_entry(ctx, x, y, w, e, o)   an entry pulled up: e.lesson, e.rows [[label, words, a, col], ...]; o.kind "proposed"; returns its box
+     cm_stamp(ctx, x, y, text, t, t0, o)  a stamp landing at t0: o.col (green: approved; amber: turned down or deleted), o.rot, o.size
      cm_session(ctx, x, y, w, h, o) a session: o.date, o.lines (what was said, as quiet bars or words), o.a
      cm_store(ctx, x, y, w, h, o)   a store: o.kick, o.title, o.rows (entries, each {text, a, col, dashed}), o.edge, o.lock (read only),
                                     o.dashed (only proposals), o.a
@@ -37,56 +37,83 @@ function cm_index(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
   if(o.tick>0){ctx.save();ctx.globalAlpha*=clamp(o.tick,0,1);ag_tick(ctx,x+w-30,y+24,22,rgba(AG.green,1),3.6);ctx.restore();}
   ctx.restore();}
 
-// the card file: an oak tray on the wall, cards standing in it, each stepping up behind the one in front
-const CM_FILE={w:700,cw:640,step:50,lip:66};
-function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],n=cards.length,w=o.w||CM_FILE.w,cw=o.cw||CM_FILE.cw,st=o.step||CM_FILE.step,out=[];
-  for(let k=0;k<n;k++){const top=y-CM_FILE.lip-k*st;out.push({x:x-cw/2+((k%2)?5:-5),y:top,w:cw,h:y+12-top,rot:(k-(n-1)/2)*0.004});}
-  if(a<=0)return out;ctx.save();ctx.globalAlpha*=a;
-  const topY=(n?out[n-1].y:y-CM_FILE.lip)+(o.labelDy||0);
-  if(o.label!==null){const lt=(o.label||"Team memory");ag_label(ctx,x-w/2+6,topY-26,lt,{a:o.labelA==null?1:o.labelA});
-    if(o.lock>0){const lx=x-w/2+6+ag_tw(ctx,lt.toUpperCase(),{w:700,size:28,ls:4})+40;ctx.save();ctx.globalAlpha*=o.lock;ag_lock(ctx,lx,topY-32,26,rgba(AG.blue,1));
-      ag_T(ctx,o.lockText||"read only",lx+26,topY-26,{w:600,size:28,col:AG.blue});ctx.restore();}}
-  // its shadow on the wall
-  ctx.save();const g=ctx.createLinearGradient(0,y+26,0,y+70);g.addColorStop(0,"rgba(46,38,28,0.2)");g.addColorStop(1,"rgba(46,38,28,0)");ctx.fillStyle=g;ctx.fillRect(x-w/2+AG.sdx,y+26,w,44);ctx.restore();
-  // the tray's back, inside, darker
-  ctx.fillStyle=rgba(AG_OAK.dark,1);ctx.fillRect(x-w/2+10,y-8,w-20,10);
-  // the cards stay inside the tray: a card moved down (dy) goes behind its front, never out under it
-  ctx.save();ctx.beginPath();ctx.rect(x-w/2-60,0,w+120,y+20);ctx.clip();
-  for(let k=n-1;k>=0;k--){const c=cards[k],b=out[k];if(!c||c.a===0)continue;const lift=c.lift||0;if(lift>=1)continue;
-    ctx.save();ctx.translate(b.x+b.w/2,b.y+b.h/2-lift*40+(c.dy||0));ctx.rotate(b.rot);ctx.translate(-b.w/2,-b.h/2);
-    cm_index(ctx,0,0,b.w,b.h,{text:c.text,alt:c.alt,altA:c.altA,tick:c.tick,who:c.who,whoA:c.whoA,glow:c.glow,glowA:c.glowA,a:(c.a==null?1:c.a)*(1-lift),strike:c.strike,textA:c.textA});ctx.restore();}
-  ctx.restore();
-  // the front face, its lit top edge, and the grain
-  const fg=ctx.createLinearGradient(0,y,0,y+28);fg.addColorStop(0,rgba(mix(AG_OAK.base,[255,255,255],0.18),1));fg.addColorStop(1,rgba(AG_OAK.dark,1));
-  ctx.save();ctx.shadowColor="rgba(46,38,28,0.25)";ctx.shadowBlur=12;ctx.shadowOffsetX=AG.sdx*0.6;ctx.shadowOffsetY=6;ctx.fillStyle=fg;rr(ctx,x-w/2,y,w,28,5);ctx.fill();ctx.restore();
-  ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-w/2+5,y+1.5);ctx.lineTo(x+w/2-5,y+1.5);ctx.stroke();
-  ctx.strokeStyle=rgba(AG_OAK.dark,0.35);ctx.lineWidth=1;for(const f of [0.18,0.44,0.71,0.9]){ctx.beginPath();ctx.moveTo(x-w/2+w*f,y+6);ctx.quadraticCurveTo(x-w/2+w*f+30,y+14,x-w/2+w*f+64,y+22);ctx.stroke();}
+/* the team's memory, as Memory: from one chat to the team draws it (its tm_file, tm_entry and tm_stamp, copied here with this film's
+   prefix): an oiled-oak ledge on the marble wall, each entry an index card standing on it, 260 by 132, every other one tilted a hair the
+   other way, its title in two lines at most and, once a person approved it, a small green tick at its bottom right; TEAM MEMORY above,
+   in the module's blue. Months on, the memory fills two ledges, three cards to a ledge, the second under the first. */
+const CM_TC={w:260,h:132,gap:18,per:3,row:226};
+// where a card stands: slot k (fractional while a card moves along), in a file whose lower ledge's top middle is (x, y)
+function cm_slotXY(x,y,s){const per=CM_TC.per,W=per*(CM_TC.w+CM_TC.gap)+40,x0=x-W/2,P=k=>{const r=Math.floor(k/per),c=k%per;return[x0+22+c*(CM_TC.w+CM_TC.gap),y-(1-r)*CM_TC.row];};
+  const k=Math.floor(s+1e-6),f=s-k;if(f<0.002)return P(k);const p=P(k),q=P(k+1),e=ag_sine(f);return[lerp(p[0],q[0],e),lerp(p[1],q[1],e)];}
+// one standing card: its title, its tick, a glow in o.glow's colour, struck through in amber (o.strike 0..1), a dashed edge (o.dashed)
+function cm_card(ctx,x,y,cd,rot){const W=CM_TC.w,H=CM_TC.h,ga=cd.glowA==null?1:cd.glowA;ctx.save();ctx.translate(x+W/2,y+H);ctx.rotate(rot||0);ctx.translate(-W/2,-H);
+  ag_box(ctx,0,0,W,H,12,{edge:cd.glow&&ga>0?cd.glow:null,edgeA:0.85*ga,glow:cd.glow&&ga>0?cd.glow:null,glowA:ga});
+  if(cd.dashed){ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle=rgba(cd.dashCol||AG.amber,0.85);ctx.lineWidth=2.4;rr(ctx,5,5,W-10,H-10,9);ctx.stroke();ctx.restore();}
+  // its title; while o.altA rises, o.alt takes its place (the merge rewriting it)
+  const altA=cd.alt?clamp(cd.altA||0,0,1):0,ls=ag_wrap(ctx,cd.text,W-36,{w:700,size:28}).slice(0,2),ta=(cd.textA==null?1:cd.textA)*(1-altA);
+  if(altA>0)ag_wrap(ctx,cd.alt,W-36,{w:700,size:28}).slice(0,2).forEach((l,k)=>ag_T(ctx,l,18,46+k*36,{w:700,size:28,col:cd.tc||AG.ink,a:altA}));
+  ls.forEach((l,k)=>{if(ta>0)ag_T(ctx,l,18,46+k*36,{w:700,size:28,col:cd.tc||AG.ink,a:ta});
+    if(cd.strike>0){const tw=ag_tw(ctx,l,{w:700,size:28}),u=clamp(cd.strike*ls.length-k,0,1);if(u>0){ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=3;ctx.lineCap="round";
+      ctx.beginPath();ctx.moveTo(16,46+k*36-9);ctx.lineTo(16+(tw+4)*u,46+k*36-9);ctx.stroke();}}});
+  if(cd.tick>0){ctx.save();ctx.globalAlpha*=clamp(cd.tick,0,1);ag_tick(ctx,W-32,H-28,22,rgba(AG.green,1),4);ctx.restore();}
+  ctx.restore();}
+/* the card file. (x, y): the middle of the lower ledge's top. o.cards [{text, tick, who, whoA, glow, glowA, lift, a, slot, strike,
+   dashed, textA}]: a card's slot is its place, in order unless given; lift (px) raises it out, tilting; who, the approver's name, goes under
+   it, on the wall. o.label (false for none), o.lock and o.lockText (a padlock and "read only" beside the label), o.a, o.k. Returns each
+   card's box ({x, y, w, h, cx, cy}). */
+function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],per=CM_TC.per,W=per*(CM_TC.w+CM_TC.gap)+40,x0=x-W/2,out=[];
+  cards.forEach((cd,i)=>{const s=cd.slot==null?i:cd.slot,p=cm_slotXY(x,y,s),lift=cd.lift||0;out.push({x:p[0],y:p[1]-CM_TC.h-lift,w:CM_TC.w,h:CM_TC.h,cx:p[0]+CM_TC.w/2,cy:p[1]-CM_TC.h/2-lift,ledge:p[1]});});
+  if(a<=0)return out;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y-CM_TC.row/2,lerp(0.6,1,o.k));
+  const topY=y-CM_TC.row;
+  if(o.label!==false){const lt=o.label||"Team memory",ly=topY-CM_TC.h-30;ag_label(ctx,x0+6,ly,lt,{col:AG.blue,a:o.labelA==null?1:o.labelA});
+    if(o.lock>0){const lx=x0+6+ag_tw(ctx,lt.toUpperCase(),{w:700,size:28,ls:4})+40;ctx.save();ctx.globalAlpha*=o.lock;ag_lock(ctx,lx,ly-6,26,rgba(AG.blue,1));
+      ag_T(ctx,o.lockText||"read only",lx+26,ly,{w:600,size:28,col:AG.blue});ctx.restore();}}
+  // the two ledges: oiled oak, a lit top 12 px deep and a front 22 px tall, a soft shadow under each
+  for(const ly of [topY,y]){ag_floorShadow(ctx,x+AG.sdx*2,ly+30,W*0.52,16,0.2);
+    let g=ctx.createLinearGradient(0,ly,0,ly+12);g.addColorStop(0,rgba(mix(AG_OAK.base,[255,255,255],0.3),1));g.addColorStop(1,rgba(AG_OAK.base,1));ctx.fillStyle=g;ctx.fillRect(x0,ly-4,W,12);
+    g=ctx.createLinearGradient(0,ly+8,0,ly+30);g.addColorStop(0,rgba(AG_OAK.base,1));g.addColorStop(1,rgba(AG_OAK.dark,1));ctx.fillStyle=g;rr(ctx,x0,ly+8,W,22,4);ctx.fill();
+    ctx.fillStyle=rgba(AG_OAK.hi,0.8);ctx.fillRect(x0+4,ly-4,W-8,1.5);}
+  // the cards, standing on them; a lifted one tilts a little as it comes out, and one moving along takes the next slot's lean as it goes
+  const lean=k=>k%2?0.02:-0.018;
+  cards.forEach((cd,i)=>{const ca=cd.a==null?1:cd.a;if(ca<=0)return;const b=out[i],s=cd.slot==null?i:cd.slot,lift=cd.lift||0,fl=Math.floor(s+1e-6),
+    rot=lerp(lean(fl),lean(fl+1),ag_sine(clamp(s-fl,0,1)))+0.05*Math.min(1,lift/200);
+    ctx.save();ctx.globalAlpha*=ca;cm_card(ctx,b.x,b.y,cd,rot);ctx.restore();
+    if(cd.who&&cd.whoA>0)ag_T(ctx,cd.who,b.cx,b.ledge+62,{w:600,size:28,col:AG.mut,align:"center",a:ca*cd.whoA});});
   ctx.restore();return out;}
 
-// an entry pulled up out of the file: its lesson, then its fields, label then value
-function cm_entry(ctx,x,y,w,e,o){o=o||{};const a=o.a==null?1:o.a,lab=o.lab||236,inner=w-56,ll=ag_wrap(ctx,e.lesson,inner-(e.tick!=null?40:0),{w:700,size:34}),rows=e.rows||[];
-  const vl=rows.map(r=>ag_wrap(ctx,r[1],inner-lab,{w:600,size:28}));const h=30+ll.length*44+16+vl.reduce((s,v)=>s+v.length*38+6,0)+24,bb={x,y,w,h};if(a<=0||o.measure)return bb;
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
-  cm_index(ctx,x,y,w,h,{glow:o.edge,glowA:o.edgeA});
-  // the rule under the lesson
-  let yy=y+30;ll.forEach((l,i)=>{yy+=(i?44:34);ag_T(ctx,l,x+28,yy,{w:700,size:34,col:o.lessonCol||AG.ink,a:o.lessonA==null?1:o.lessonA});});
-  if(e.tick>0){ctx.save();ctx.globalAlpha*=clamp(e.tick,0,1);ag_tick(ctx,x+w-40,y+50,26,rgba(AG.green,1),4);ctx.restore();}
-  yy+=22;ctx.strokeStyle=CM_CARD.rule;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x+18,yy-6);ctx.lineTo(x+w-18,yy-6);ctx.stroke();
-  rows.forEach((r,i)=>{const ra=r[2]==null?1:r[2];vl[i].forEach((l,j)=>{yy+=38;if(j===0)ag_T(ctx,r[0],x+28,yy,{w:700,size:28,col:AG.mut,a:ra});
-      ag_T(ctx,l,x+28+lab,yy,{w:600,size:28,col:r[3]||AG.ink,a:ra});});yy+=6;});
+/* an entry pulled up out of the file (2.4's tm_entry): ENTRY in blue, or PROPOSED ENTRY, muted, with a pen and a dashed edge, while it
+   waits (o.kind "proposed"); then its fields one a line, the label quiet and the words under it: the lesson first. e.lesson, e.rows
+   [[label, words, a, col, alt, altA]]: a row with no label carries on the field above it, and its words give way to alt as altA rises;
+   o.kick, o.edge and o.edgeA (its edge lit in a colour), o.hl, o.hlA and o.hlCol (a field lit), o.lessonA (0: the caller draws the lesson's words,
+   at the box's lx, ly); o.a, o.k, o.measure. Returns its box. */
+function cm_entry(ctx,x,y,w,e,o){o=o||{};const a=o.a==null?1:o.a,inner=w-56,f=[["Lesson",e.lesson,1,null]].concat(e.rows||[]);
+  const rows=f.map(r=>({r,lines:ag_wrap(ctx,r[1],inner,{w:600,size:30})})),rh=q=>(q.r[0]==null?-16:34)+q.lines.length*40+16,
+    h=28+48+rows.reduce((s,q)=>s+rh(q),0)+10,bb={x,y,w,h,lx:x+28,ly:y+76+34+32};
+  if(a<=0||o.measure)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
+  const prop=o.kind==="proposed",ea=o.edgeA==null?1:o.edgeA;
+  ag_box(ctx,x,y,w,h,22,{edge:o.edge&&ea>0?o.edge:(prop?null:AG.blue),edgeA:o.edge&&ea>0?0.5+0.4*ea:0.5,glow:o.edge&&ea>0?o.edge:null,glowA:0.6*ea});
+  if(prop)cm_dash(ctx,x+5,y+5,w-10,h-10,18,AG.mut,o.dashA==null?1:o.dashA);
+  const kick=o.kick||(prop?"Proposed entry":"Entry"),kc=prop?AG.mut:AG.blue;
+  if(prop){ag_pen(ctx,x+42,y+44,30,rgba(AG.mut,1));ag_T(ctx,kick.toUpperCase(),x+68,y+52,{w:700,size:28,ls:4,col:kc});}
+  else ag_T(ctx,kick.toUpperCase(),x+28,y+52,{w:700,size:28,ls:4,col:kc});
+  let yy=y+76;rows.forEach((q,i)=>{const hl=o.hl===i?(o.hlA==null?1:o.hlA):0,ra=q.r[2]==null?1:q.r[2],lab=q.r[0]!=null;if(ra<=0){yy+=rh(q);return;}
+    ctx.save();ctx.globalAlpha*=ra;if(!lab)yy-=16;
+    // a lit field takes in the lines that carry it on
+    if(hl>0){let hh=(lab?34:0)+q.lines.length*40+8;for(let j=i+1;j<rows.length&&rows[j].r[0]==null;j++)hh+=rows[j].lines.length*40;
+      ctx.fillStyle=rgba(o.hlCol||q.r[3]||AG.amber,0.1*hl);rr(ctx,x+14,yy-4,w-28,hh,10);ctx.fill();}
+    if(lab){ag_T(ctx,q.r[0],x+28,yy+26,{w:700,size:28,col:AG.mut});yy+=34;}
+    const wa=(i===0&&o.lessonA!=null?o.lessonA:1),alt=q.r[4],altA=alt?clamp(q.r[5]||0,0,1):0;
+    q.lines.forEach((l,k)=>{yy+=40;ag_T(ctx,l,x+28,yy-8,{w:600,size:30,col:q.r[3]||AG.ink,a:wa*(1-altA)});if(k===0&&altA>0)ag_T(ctx,alt,x+28,yy-8,{w:600,size:30,col:q.r[3]||AG.ink,a:wa*altA});});
+    ctx.restore();yy+=16;});
   ctx.restore();return bb;}
 
-function cm_proposal(ctx,x,y,w,text,o){o=o||{};const a=o.a==null?1:o.a,lines=ag_wrap(ctx,text,w-56,{w:600,size:30}),h=86+lines.length*40;if(a<=0)return{x,y,w,h};
-  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
-  cm_index(ctx,x,y,w,h,{});cm_dash(ctx,x,y,w,h,8,AG.mut,1);
-  ag_pen(ctx,x+40,y+38,26,rgba(AG.mut,1));ag_T(ctx,o.kick||"PROPOSED",x+64,y+48,{w:700,size:28,ls:4,col:AG.mut});
-  lines.forEach((l,i)=>ag_T(ctx,l,x+28,y+100+i*40,{w:600,size:30,col:AG.ink}));ctx.restore();return{x,y,w,h};}
-
-// a stamp that lands: big and faint, then pressed down; it stays
-function cm_stamp(ctx,x,y,text,t,t0,o){o=o||{};if(t<t0)return;const u=clamp((t-t0)/0.32,0,1),a=ag_eo(u)*(o.a==null?1:o.a)*(o.t1==null?1:1-ag_in(t,o.t1,0.5));if(a<=0)return;
-  const col=o.col||AG.green,s=o.size||32,k=lerp(1.5,1,ag_eo(u)),rot=o.rot==null?-0.07:o.rot,tw=ag_tw(ctx,text.toUpperCase(),{w:800,size:s,ls:4}),w=tw+56,h=s+34;
-  ctx.save();ctx.globalAlpha*=a*0.92;ctx.translate(x,y);ctx.rotate(rot);ctx.scale(k,k);ctx.strokeStyle=rgba(col,1);ctx.lineWidth=4;rr(ctx,-w/2,-h/2,w,h,10);ctx.stroke();
-  ctx.lineWidth=1.6;rr(ctx,-w/2+7,-h/2+7,w-14,h-14,6);ctx.stroke();ag_T(ctx,text.toUpperCase(),0,s*0.36,{w:800,size:s,ls:4,align:"center",col});ctx.restore();}
+// a stamp that lands at t0 (2.4's tm_stamp: big and faint, then pressed down; a double edge, the word in its colour); it stays until o.t1
+function cm_stamp(ctx,x,y,text,t,t0,o){o=o||{};if(t<t0)return;const p=clamp((t-t0)/0.32,0,1),a=Math.min(1,p*1.6)*(o.a==null?1:o.a)*(o.t1==null?1:1-ag_in(t,o.t1,0.5));if(a<=0)return;
+  const col=o.col||AG.green,sz=o.size||34,s=lerp(1.5,1,ag_eo(p)),w=ag_tw(ctx,text,{w:800,size:sz})+56,h=sz+36;
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot==null?-0.06:o.rot);ctx.scale(s,s);
+  ctx.fillStyle="rgba(246,244,239,0.82)";rr(ctx,-w/2,-h/2,w,h,12);ctx.fill();
+  ctx.strokeStyle=rgba(col,0.85);ctx.lineWidth=4;rr(ctx,-w/2,-h/2,w,h,12);ctx.stroke();ctx.lineWidth=1.5;rr(ctx,-w/2+7,-h/2+7,w-14,h-14,8);ctx.stroke();
+  ag_T(ctx,text,0,sz*0.36,{w:800,size:sz,align:"center",col});ctx.restore();}
 
 // a session: a large pale card with a violet edge, SESSION and its date at the right; o.lines: what was said, as bars ([w, ...]) or words
 function cm_session(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));

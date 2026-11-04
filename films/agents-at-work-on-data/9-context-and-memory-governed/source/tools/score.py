@@ -295,7 +295,7 @@ roll((D3, A3, D4), tOW - 0.1, 0.22, 0.5, pan=-0.1, ring=1.4, spread=0.5)
 knock(C('comments', 'Unity Catalog', -0.25), 0.012, px(930), 240)
 knock(C('skills', 'Unity Gateway', -0.25), 0.012, px(1560), 240)
 for w_ in ('Unity Catalog object', 'an owner', 'permissions', 'a record'):
-    tap(C('skills', w_, -0.1), 0.007, px(1560))
+    tap(C('object', w_, -0.1), 0.007, px(1560))
 lock(C('nobody', 'Nobody', -0.05), 0.010, px(1700))
 roll((D3, Fs3, A3), C('nobody', 'A change starts', 0.0), 0.14, 0.5, ring=1.8)
 

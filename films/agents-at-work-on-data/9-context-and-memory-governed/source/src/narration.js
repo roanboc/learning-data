@@ -38,11 +38,12 @@ const NARR={
  {"id":"history","gap":0.8,"text":"And the history keeps who changed what, when, and why."},
  {"id":"oneway","gap":0.8,"text":"From there, it goes one way to where agents read it on Databricks."},
  {"id":"comments","gap":0.8,"text":"dbt writes the descriptions into Unity Catalog, as comments on each table and column."},
- {"id":"skills","gap":0.8,"text":"Skills go to Unity Gateway, in beta: each is a Unity Catalog object, with an owner, permissions, and a record of who read or changed it."},
+ {"id":"skills","gap":0.8,"text":"Skills go to Unity Gateway, where they're in beta."},
+ {"id":"object","gap":0.8,"text":"Each is a Unity Catalog object, with an owner, permissions, and a record of who read or changed it."},
  {"id":"nobody","gap":0.8,"text":"Nobody edits context on the platform. A change starts in the repository."}]},
 "memory":{"name":"Memory, kept like data","lead":1.0,"tail":1.0,"vo":[
  {"id":"different","gap":0.8,"text":"Memory is different: agents write it themselves."},
- {"id":"lakebase","gap":0.8,"text":"On Databricks, sessions and lasting memory are kept in stores in Lakebase, the platform's database, in beta."},
+ {"id":"lakebase","gap":0.8,"text":"On Databricks, sessions and lasting memory, both in beta, are kept in stores in Lakebase, the platform's database."},
  {"id":"daily","gap":0.8,"text":"A step that runs once a day reads the sessions, and keeps what seems worth keeping, without asking anyone."},
  {"id":"how","gap":0.8,"text":"That's how the campus line lost its words: the step merged it with other lines about counting students, as it's built to."},
  {"id":"room","gap":0.8,"text":"And a store is one room: whoever may write to it may change any entry, and nothing records what an entry said before."},
@@ -74,7 +75,7 @@ const NARR={
  {"id":"l5","gap":0.6,"text":"Decide how you'll check before the agent starts."},
  {"id":"l6","gap":0.6,"text":"How it goes wrong: expect these, and design for them."},
  {"id":"l7","gap":0.6,"text":"The platform gives agents the same data and tools people use, in one place."},
- {"id":"l8","gap":0.6,"text":"One set of rules for people and agents, enforced where the data and models live."},
+ {"id":"l8","gap":0.6,"text":"One set of rules for people and agents, enforced where the data and the models live."},
  {"id":"l9","gap":0.8,"text":"And the team's context and memory are governed assets, not private notes."},
  {"id":"road","gap":0.8,"text":"This series is one part of a longer road: from an agent that helps one person, to one that works beside the team."},
  {"id":"next","gap":0.8,"text":"Next: from helper to colleague."}]}

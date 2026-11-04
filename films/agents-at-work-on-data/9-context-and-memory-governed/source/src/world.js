@@ -13,7 +13,7 @@
      cm_people    the dots for students: on campus, and the 386 who study online
      cm_library   the library's card: next year's e-books, and how many students they're for */
 
-AG_PLACES.cmLab=c=>ag_paintLab(c,{quiet:[[1460,300,520,220,0.75],[620,220,520,170,0.5],[960,560,700,200,0.3]]});
+AG_PLACES.cmLab=c=>ag_paintLab(c,{quiet:[[1440,380,520,260,0.75],[620,220,520,170,0.5],[960,560,700,200,0.3]]});
 AG_PLACES.cmBoard=c=>ag_paintLab(c,{seed:3,quiet:[[960,330,980,300,0.8],[960,620,900,160,0.4]]});
 AG_PLACES.cmNight=c=>ag_paintLab(c,{seed:5,quiet:[[960,330,980,300,0.8]]});
 
@@ -43,14 +43,14 @@ function cm_agent(ctx,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 /* ---------------------------------------------------------------- Lucía's corner of Planning
    The desk across the left half, Lucía behind it, her screen to her right, a small desk calendar, and her agent beside the desk. */
-const CM_DESK={desk:[110,870,880],lucia:[430,560,0.84],screen:[660,620,250,150],agent:[1060,500,74],cal:[200,800]};
+const CM_DESK={desk:[110,870,880],lucia:[430,560,0.84],screen:[660,620,250,150],agent:[1100,716,62],cal:[200,800]};
 function cm_lucia(ctx,S,t,o){o=o||{};const D=CM_DESK,[dx,dy,dw]=D.desk,[lx,ly,ls]=D.lucia,[sx,sy,sw,sh]=D.screen,[ax,ay,ar]=D.agent;
   ag_desk(ctx,dx,dy,dw,{});
   ag_screen(ctx,sx,sy,sw,sh,{stand:dy-70-sy-sh+6,draw:(c,x0,y0,w0,h0)=>{cm_screenRows(c,x0,y0,w0,h0,o.rows==null?1:o.rows);}});
   ag_person(ctx,CM_LUCIA,lx,ly,ls,{t,cut:dy-70,gaze:o.gaze||[4,0],nod:o.nod||0,smile:o.smile==null?0.3:o.smile,blink:o.blink});
   cm_calendar(ctx,D.cal[0],D.cal[1],o.cal==null?1:o.cal);
   ag_roomLight(ctx,1);
-  if(o.agent!==0)cm_agent(ctx,ax,ay,ar,t,{a:o.agent==null?1:o.agent,think:o.think||0,core:o.core,label:"Lucía's agent",ph:1.3,floor:640});}
+  if(o.agent!==0)cm_agent(ctx,ax,ay,ar,t,{a:o.agent==null?1:o.agent,think:o.think||0,core:o.core,label:"Lucía's agent",ph:1.3,floor:ay+150});}
 // what her screen shows: quiet rows of a table, the top row blue
 function cm_screenRows(c,x,y,w,h,a){c.fillStyle="#F4F5F3";c.fillRect(x,y,w,h);if(a<=0)return;c.save();c.globalAlpha*=a;c.fillStyle=rgba(AG.blue,0.16);c.fillRect(x,y,w,20);
   c.strokeStyle=rgba(AG.blue,0.22);c.lineWidth=1;for(let k=1;k<7;k++){c.beginPath();c.moveTo(x,y+20+k*18);c.lineTo(x+w,y+20+k*18);c.stroke();}

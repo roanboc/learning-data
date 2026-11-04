@@ -58,7 +58,7 @@ function cm_branchIcon(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.fillStyle
   ctx.beginPath();ctx.moveTo(x+8,y-8);ctx.bezierCurveTo(x+8,y+4,x-8,y+2,x-8,y+10);ctx.stroke();for(const [px,py] of [[x-8,y-14],[x-8,y+14],[x+8,y-10]]){ctx.beginPath();ctx.arc(px,py,4.5,0,TAU);ctx.fill();}ctx.restore();}
 
 function cm_history(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,h=96+rows.length*84;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
-  ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,o.kick||"HISTORY",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
+  ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,(o.kick||"History").toUpperCase(),x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
   ctx.strokeStyle=rgba(AG.mut,0.35);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+40,y+92);ctx.lineTo(x+40,y+h-34);ctx.stroke();
   rows.forEach((r,i)=>{const ra=r[2]==null?1:r[2];if(ra<=0)return;const yy=y+108+i*84;ctx.save();ctx.globalAlpha*=ra;ctx.fillStyle=rgba(r[3]||AG.mut,1);ctx.beginPath();ctx.arc(x+40,yy-8,8,0,TAU);ctx.fill();
     ag_T(ctx,r[0],x+68,yy,{w:700,size:28});ag_T(ctx,r[1],x+68,yy+38,{w:500,size:28,col:AG.mut});ctx.restore();});ctx.restore();return{x,y,w,h};}

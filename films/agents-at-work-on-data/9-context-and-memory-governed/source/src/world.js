@@ -43,7 +43,7 @@ function cm_agent(ctx,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 /* ---------------------------------------------------------------- Lucía's corner of Planning
    The desk across the left half, Lucía behind it, her screen to her right, a small desk calendar, and her agent beside the desk. */
-const CM_DESK={desk:[110,870,880],lucia:[430,560,0.84],screen:[660,620,250,150],agent:[1060,520,80],cal:[200,800]};
+const CM_DESK={desk:[110,870,880],lucia:[430,560,0.84],screen:[660,620,250,150],agent:[1060,500,74],cal:[200,800]};
 function cm_lucia(ctx,S,t,o){o=o||{};const D=CM_DESK,[dx,dy,dw]=D.desk,[lx,ly,ls]=D.lucia,[sx,sy,sw,sh]=D.screen,[ax,ay,ar]=D.agent;
   ag_desk(ctx,dx,dy,dw,{});
   ag_screen(ctx,sx,sy,sw,sh,{stand:dy-70-sy-sh+6,draw:(c,x0,y0,w0,h0)=>{cm_screenRows(c,x0,y0,w0,h0,o.rows==null?1:o.rows);}});

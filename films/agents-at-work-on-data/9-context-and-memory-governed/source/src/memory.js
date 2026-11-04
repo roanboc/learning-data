@@ -6,8 +6,9 @@
    card with a dashed edge and a small pen; "Approved" lands on it in green, "Turned down" in amber. A session is a large pale card with
    a violet edge, SESSION and its date at the right.
    On the platform the memory is kept in stores (Lakebase, the platform's database): a store is a box with its entries in it.
-     cm_file(ctx, x, y, o)          the card file: (x, y) the middle of the tray's top edge; o.cards [{text, tick, who, a, glow, lift}],
-                                    o.w (the tray's width), o.a; returns each card's place in the file
+     cm_file(ctx, x, y, o)          the card file: (x, y) the middle of the tray's top edge; o.cards [{text, tick, who, a, glow, lift, dy}],
+                                    o.w (the tray's width), o.labelDy (the label down with the cards, when one is taken out), o.a;
+                                    returns each card's place in the file
      cm_index(ctx, x, y, w, h, o)   one index card, flat: o.text its top line, o.tick, o.who (the approver, at the right), o.glow, o.a
      cm_entry(ctx, x, y, w, e, o)   an entry pulled up: e.lesson, e.rows [[label, value], ...], e.tick; o.a, o.k, o.edge; returns its box
      cm_proposal(ctx, x, y, w, text, o)  a proposed entry: dashed, a pen, PROPOSED
@@ -41,7 +42,7 @@ const CM_FILE={w:700,cw:640,step:50,lip:66};
 function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],n=cards.length,w=o.w||CM_FILE.w,cw=o.cw||CM_FILE.cw,st=o.step||CM_FILE.step,out=[];
   for(let k=0;k<n;k++){const top=y-CM_FILE.lip-k*st;out.push({x:x-cw/2+((k%2)?5:-5),y:top,w:cw,h:y+12-top,rot:(k-(n-1)/2)*0.004});}
   if(a<=0)return out;ctx.save();ctx.globalAlpha*=a;
-  const topY=n?out[n-1].y:y-CM_FILE.lip;
+  const topY=(n?out[n-1].y:y-CM_FILE.lip)+(o.labelDy||0);
   if(o.label!==null){const lt=(o.label||"Team memory");ag_label(ctx,x-w/2+6,topY-26,lt,{a:o.labelA==null?1:o.labelA});
     if(o.lock>0){const lx=x-w/2+6+ag_tw(ctx,lt.toUpperCase(),{w:700,size:28,ls:4})+40;ctx.save();ctx.globalAlpha*=o.lock;ag_lock(ctx,lx,topY-32,26,rgba(AG.blue,1));
       ag_T(ctx,o.lockText||"read only",lx+26,topY-26,{w:600,size:28,col:AG.blue});ctx.restore();}}
@@ -49,9 +50,12 @@ function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],n=
   ctx.save();const g=ctx.createLinearGradient(0,y+26,0,y+70);g.addColorStop(0,"rgba(46,38,28,0.2)");g.addColorStop(1,"rgba(46,38,28,0)");ctx.fillStyle=g;ctx.fillRect(x-w/2+AG.sdx,y+26,w,44);ctx.restore();
   // the tray's back, inside, darker
   ctx.fillStyle=rgba(AG_OAK.dark,1);ctx.fillRect(x-w/2+10,y-8,w-20,10);
+  // the cards stay inside the tray: a card moved down (dy) goes behind its front, never out under it
+  ctx.save();ctx.beginPath();ctx.rect(x-w/2-60,0,w+120,y+20);ctx.clip();
   for(let k=n-1;k>=0;k--){const c=cards[k],b=out[k];if(!c||c.a===0)continue;const lift=c.lift||0;if(lift>=1)continue;
     ctx.save();ctx.translate(b.x+b.w/2,b.y+b.h/2-lift*40+(c.dy||0));ctx.rotate(b.rot);ctx.translate(-b.w/2,-b.h/2);
     cm_index(ctx,0,0,b.w,b.h,{text:c.text,alt:c.alt,altA:c.altA,tick:c.tick,who:c.who,whoA:c.whoA,glow:c.glow,glowA:c.glowA,a:(c.a==null?1:c.a)*(1-lift),strike:c.strike,textA:c.textA});ctx.restore();}
+  ctx.restore();
   // the front face, its lit top edge, and the grain
   const fg=ctx.createLinearGradient(0,y,0,y+28);fg.addColorStop(0,rgba(mix(AG_OAK.base,[255,255,255],0.18),1));fg.addColorStop(1,rgba(AG_OAK.dark,1));
   ctx.save();ctx.shadowColor="rgba(46,38,28,0.25)";ctx.shadowBlur=12;ctx.shadowOffsetX=AG.sdx*0.6;ctx.shadowOffsetY=6;ctx.fillStyle=fg;rr(ctx,x-w/2,y,w,28,5);ctx.fill();ctx.restore();

@@ -5,7 +5,8 @@
      cm_govTable(ctx, x, y, o)    the five questions as a table: a row for each kind of context and the memory, a column for each
                                   question (o.cols 0..1 each lit as it's asked), and o.chat (a note in one person's chat) as a last row
      CM_LESSONS                   the series' nine films, each with its lesson, as each film's end card says it
-     cm_lessons(ctx, o)           the nine cards, three by three: o.show(i) 0..1 for each; o.deco when the camera makes them small
+     cm_lessons(ctx, o)           the nine cards, three by three: o.show(i) 0..1 for each; o.slots, their empty places, dashed;
+                                  o.deco when the camera makes them small
      cm_shelves(ctx, o)           the module's road: four series on an oak rail; o.lit (the next one), o.a */
 
 const CM_CTX=[["CODE","The repository: models, tests, AGENTS.md"],["METADATA","What words mean, models, contracts, lineage"],["SKILLS","How the team does a job"],["TOOLS","What it can reach and do"]];
@@ -62,6 +63,8 @@ function cm_gridLayout(ctx){const G=CM_GRID,cells=[];const meas=CM_LESSONS.map(l
     for(let c=0;c<3;c++)cells.push({x:G.x+c*(G.w+G.gx),y,w:G.w,h,tl:meas[r*3+c].tl,ll:meas[r*3+c].ll});y+=h+G.gy;}
   return cells;}
 function cm_lessons(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const cells=cm_gridLayout(ctx),deco=o.deco?1:0;ctx.save();ctx.globalAlpha*=a;
+  // o.slots: the nine places, dashed, each going as its lesson comes in
+  if(o.slots>0)cells.forEach((c,i)=>{const s=o.show?o.show(i):1;cm_dash(ctx,c.x,c.y,c.w,c.h,20,AG.mut,o.slots*0.7*(1-clamp(s*2,0,1)));});
   cells.forEach((c,i)=>{const s=o.show?o.show(i):1;if(s<=0)return;const k=Math.min(1.03,ag_spr(s,0,0.55));ctx.save();ctx.globalAlpha*=clamp(s*2,0,1);ag_about(ctx,c.x+c.w/2,c.y+c.h/2,lerp(0.85,1,clamp(k,0,1.1)));
     const last=i===8;ag_box(ctx,c.x,c.y,c.w,c.h,20,{edge:last?AG.blue:null,edgeA:0.7});
     let yy=c.y+26;c.tl.forEach((l,j)=>{yy+=(j?36:26);ag_T(ctx,l,c.x+28,yy,{w:600,size:28,col:AG.mut,deco});});yy+=14;

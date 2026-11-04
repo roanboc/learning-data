@@ -164,8 +164,8 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const at=[T.code,T.meta,T.skills,T.tools];
       cm_context(cx,960,490,{t:tt,show:i=>clamp((tt-at[i]+0.15)/1.0,0,1),memory:clamp((tt-T.memory+0.15)/1.0,0,1),gov:clamp((tt-T.gets)/1.2,0,1),
         think:0.1+0.5*ag_io(tt,T.shapes-0.2,T.isData+0.8,0.5)});
-      ag_label(cx,960,344,"What an agent reads",{align:"center",a:ag_in(tt,T.reads-0.2,0.4)*(1-ag_in(tt,T.isData-0.7,0.35))});
-      ag_label(cx,960,344,"All of it is data",{align:"center",col:AG.orange,a:ag_in(tt,T.isData-0.2,0.4)});}},
+      ag_label(cx,960,262,"What an agent reads",{align:"center",a:ag_in(tt,T.reads-0.2,0.4)*(1-ag_in(tt,T.isData-0.7,0.35))});
+      ag_label(cx,960,262,"All of it is data",{align:"center",col:AG.orange,a:ag_in(tt,T.isData-0.2,0.4)});}},
     // the five questions: a column lights as each is asked; a note in a chat answers none; the team's context and memory, all five
     {at:c.owns-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{const q=CM_Q.map(id=>c[id]),nx=j=>j<4?q[j+1]:T.note;
       ag_label(cx,205,172,"What any data gets",{a:ag_in(tt,c.owns-0.5,0.4)});
@@ -193,7 +193,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{const lit=[T.page,T.skills,T.dbt,T.contracts,T.list];
       const rows=CM_REPO.map((r,i)=>Object.assign({},r,{a:i<4?1:ag_in(tt,T.list-0.3,0.4),lit:i===4?ag_io(tt,T.list-0.2,T.pr-0.6,0.3):ag_io(tt,lit[i]-0.15,lit[i]+1.4,0.3),
         noteA:ag_in(tt,lit[i]-0.1,0.4)}));
-      const R=cm_repo(cx,80,150,840,rows,{a:ag_in(tt,0.05,0.4),k:Math.min(1,ag_spr(tt,0.05,0.5)),nameW:500});
+      const R=cm_repo(cx,60,150,870,rows,{a:ag_in(tt,0.05,0.4),k:Math.min(1,ag_spr(tt,0.05,0.5)),nameW:490});
       // CODEOWNERS, linked to its row
       const oa=ag_in(tt,T.owner-0.2,0.4)*(1-ag_in(tt,T.pr-0.75,0.35));
       if(oa>0){const r4=R.rows[4];cm_arrow(cx,[r4.x+r4.w+4,r4.y+r4.h/2,r4.x+r4.w+24,r4.y+r4.h/2,r4.x+r4.w+30,r4.y+r4.h/2,r4.x+r4.w+40,r4.y+r4.h/2],ag_in(tt,T.list,0.4),{col:AG.blue,lw:3,head:10,a:oa});
@@ -211,9 +211,9 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
         ["Why","Reconcile every count against the census report",ag_in(tt,T.why-0.2,0.4)]],{kick:"History",a:ha,k:Math.min(1,ag_spr(tt,T.history-0.3,0.5))});}},
     // one way, to where agents read it: dbt's descriptions as comments in Unity Catalog, the skills in Unity Gateway; nobody edits them there
     {at:T.oneway-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      cm_repo(cx,60,250,420,[{name:"AGENTS.md"},{name:"skills/",folder:1,lit:ag_io(tt,T.gw-0.3,T.nobody-0.3,0.4)},{name:"models/",folder:1,lit:ag_io(tt,T.uc-0.3,T.gw-0.4,0.4)}],{});
-      const u=ag_sine(clamp((tt-T.oneway+0.2)/0.9,0,1));cm_arrow(cx,[490,420,520,420,540,420,566,420],u,{col:AG.blue,lw:4,head:14});
-      ag_T(cx,"one way",528,396,{w:600,size:28,col:AG.mut,align:"center",a:ag_in(tt,T.oneway,0.4)});
+      cm_repo(cx,40,250,400,[{name:"AGENTS.md"},{name:"skills/",folder:1,lit:ag_io(tt,T.gw-0.3,T.nobody-0.3,0.4)},{name:"models/",folder:1,lit:ag_io(tt,T.uc-0.3,T.gw-0.4,0.4)}],{});
+      const u=ag_sine(clamp((tt-T.oneway+0.2)/0.9,0,1));cm_arrow(cx,[456,420,490,420,530,420,568,420],u,{col:AG.blue,lw:4,head:14});
+      ag_T(cx,"one way",512,396,{w:600,size:28,col:AG.mut,align:"center",a:ag_in(tt,T.oneway,0.4)});
       cm_zone(cx,580,130,1290,740,"On Databricks",{a:ag_in(tt,T.dbx-0.4,0.5)});
       const ta=ag_in(tt,T.uc-0.3,0.4),tb=cm_table(cx,610,210,640,{name:"mart_planning__near_award",comment:"Every award a learner was enrolled in, or held credit towards, on the census date, …",
         cols:[["census_date","Planning's census date: the date the numbers are as at.",ag_in(tt,T.column-0.2,0.4)]],commentA:ag_in(tt,T.comments-0.2,0.4),a:ta,k:Math.min(1,ag_spr(tt,T.uc-0.3,0.5))});
@@ -255,9 +255,9 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
       cm_zone(cx,330,140,1550,720,"On Databricks · Lakebase",{a:ag_in(tt,T.lake-0.3,0.5)});
       cm_pillAt(cx,960,184,"beta",tt,T.beta-0.1,null,{size:28,col:AG.blue});
-      const sa=ag_in(tt,T.write-0.4,0.4),rowY=i=>210+136+i*64+26;
+      const s0=Math.min(0.15,T.write-0.4),sa=ag_in(tt,s0,0.5),rowY=i=>210+136+i*64+26;
       cm_store(cx,380,210,420,348,{kick:"Store",title:"Sessions",rows:CM_WRITERS.map((p,i)=>({text:p[2]+" · today",a:ag_in(tt,T.write+0.2+i*0.3,0.4)})),
-        glow:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3)?AG.blue:null,glowA:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3),a:sa,k:Math.min(1,ag_spr(tt,T.write-0.4,0.5))});
+        glow:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3)?AG.blue:null,glowA:ag_io(tt,T.sessions-0.2,T.sessions+1.2,0.3),a:sa,k:Math.min(1,ag_spr(tt,s0,0.5))});
       CM_WRITERS.forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.3,think:0.3,core:0.75,label:p[2],a:ag_in(tt,0.05+i*0.12,0.4),floor:p[1]+92});
         cm_reads(cx,p[0]+48,p[1]-6,376,rowY(i),ag_sine(clamp((tt-T.write-i*0.3)/0.8,0,1)),{t:tt,bend:0,col:AG.violet});});
       // the daily step reads the sessions, and writes to the lasting memory
@@ -284,7 +284,7 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,960,236,"It can rewrite, merge, split or delete any entry",tt,T.built-0.2,T.room-0.4,{size:28,col:AG.violet});
       // whoever may write: two agents and the step, each reaching a different card
       [[1640,500,"Jun's agent",0],[1700,700,"Clara's agent",1]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.7,think:0.3,core:0.75,label:p[2],a:w1,floor:p[1]+92});
-        const to=i?[1418,452]:[1418,604];cm_reads(cx,p[0]-48,p[1]-6,to[0],to[1],ag_sine(clamp((tt-T.whoever-0.2-i*0.2)/0.8,0,1))*w1,{t:tt,bend:-20,col:AG.violet});});
+        const to=i?[1418,742]:[1418,594];cm_reads(cx,p[0]-48,p[1]-6,to[0],to[1],ag_sine(clamp((tt-T.whoever-0.2-i*0.2)/0.8,0,1))*w1,{t:tt,bend:-20,col:AG.violet});});
       cm_pillAt(cx,960,236,"nothing records what it said before",tt,T.nothing-0.1,null,{icon:"warn",col:AG.amber,size:28});}},
     // split in two: the daily step writes only proposals, in a store no agent reads; the team's memory is a store of its own
     {at:c.split-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
@@ -354,11 +354,11 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
   ag_shots(ctx,S,t,sc.dur,[
     // sessions kept thirty days: a strip of days; each day a scheduled job puts the oldest in the bin, and today's comes in
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
-      ag_label(cx,960,214,"Keeping and deleting",{align:"center",a:ag_in(tt,T.keeping-0.3,0.4)});
-      cm_pillAt(cx,960,276,"the team decides both",tt,T.decisions-0.1,null,{size:28,col:AG.blue});
+      ag_label(cx,960,178,"Keeping and deleting",{align:"center",a:ag_in(tt,T.keeping-0.3,0.4)});
+      cm_pillAt(cx,960,238,"the team decides both",tt,T.decisions-0.1,null,{size:28,col:AG.blue});
       const x0=150,P=54,ty=388,per=1.7,run=tt-T.deletes,on=run>=0,n=on?Math.floor(run/per):0,f=on?(run-n*per)/per:0;
       const fall=on?clamp(f/0.45,0,1):0,slide=on?ag_sine(clamp((f-0.3)/0.4,0,1)):0,inA=on?ag_in(f,0.55,0.3):0;
-      for(let i=0;i<=30;i++){const appear=ag_in(tt,T.sessions-0.4+i*0.025,0.3);if(i===30&&!on)continue;
+      for(let i=0;i<=30;i++){const appear=ag_in(tt,0.15+i*0.03,0.3);if(i===30&&!on)continue;
         let x=x0+(i-(i>0?slide:0))*P,y=ty,a=appear;
         if(i===0&&on){y=ty+ag_sine(fall)*150;a*=1-ag_in(fall,0.5,0.45);}
         if(i===30)a=inA;
@@ -367,24 +367,24 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const ba=ag_in(tt,T.thirty-0.2,0.4);if(ba>0){cx.save();cx.globalAlpha*=ba;cx.strokeStyle=rgba(AG.blue,0.7);cx.lineWidth=3;cx.lineCap="round";
         cx.beginPath();cx.moveTo(x0,368);cx.lineTo(x0,352);cx.lineTo(x0+29*P+44,352);cx.lineTo(x0+29*P+44,368);cx.stroke();cx.restore();
         ag_T(cx,"Kept 30 days",x0+(29*P+44)/2,334,{w:700,size:28,align:"center",col:AG.blue,a:ba});}
-      cm_bin(cx,172,600,76,rgba(AG.mut,0.95),on?ag_io(f,0.0,0.5,0.15):0);
+      const bna=ag_in(tt,T.job-0.3,0.4);if(bna>0){cx.save();cx.globalAlpha*=bna;cm_bin(cx,172,600,76,rgba(AG.mut,0.95),on?ag_io(f,0.0,0.5,0.15):0);cx.restore();}
       cm_script(cx,280,540,"Scheduled job","deletes sessions after 30 days",{a:ag_in(tt,T.job-0.3,0.4),k:Math.min(1,ag_spr(tt,T.job-0.3,0.5)),turn:Math.max(0,tt-T.job)*0.4,glow:on?ag_io(f,0.0,0.5,0.15)*0.8:0});}},
     // an entry with a date to check it again, which its owner does; a proposal that names a student is turned down
     {at:c.again-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const ea=ag_in(tt,c.again-0.3,0.4);
       const rows=[["Owner","Mei Tanaka",ag_in(tt,T.date-0.7,0.4)],["Check again","1 March 2027",ag_in(tt,T.date-0.1,0.4),AG.blue],
         ["History","approved 14 May 2026; checked 2 November 2026",ag_in(tt,T.hist-0.2,0.4)]];
-      cm_entry(cx,100,190,820,{lesson:"Census day is 31 March.",rows,tick:1},{a:ea,k:Math.min(1,ag_spr(tt,c.again-0.3,0.5))});
-      cm_stamp(cx,720,256,"Checked",tt,T.ownerDoes+0.1,{col:AG.green,size:28});
-      const pa=ag_in(tt,T.namesNo-0.7,0.4);if(pa>0)cm_proposal(cx,1000,190,820,"Student 20481 is counted twice.",{a:pa,k:Math.min(1,ag_spr(tt,T.namesNo-0.7,0.5))});
-      cm_stamp(cx,1590,256,"Turned down",tt,T.namesNo+0.2,{col:AG.amber,size:28});
-      cm_pillAt(cx,1410,380,"names a student",tt,T.namesNo+0.4,null,{icon:"warn",col:AG.amber,size:28});}},
+      cm_entry(cx,100,250,820,{lesson:"Census day is 31 March.",rows,tick:1},{a:ea,k:Math.min(1,ag_spr(tt,c.again-0.3,0.5))});
+      cm_stamp(cx,720,316,"Checked",tt,T.ownerDoes+0.1,{col:AG.green,size:28});
+      const pa=ag_in(tt,T.namesNo-0.7,0.4);if(pa>0)cm_proposal(cx,1000,250,820,"Student 20481 is counted twice.",{a:pa,k:Math.min(1,ag_spr(tt,T.namesNo-0.7,0.5))});
+      cm_stamp(cx,1664,288,"Turned down",tt,T.namesNo+0.2,{col:AG.amber,size:28});
+      cm_pillAt(cx,1410,440,"names a student",tt,T.namesNo+0.4,null,{icon:"warn",col:AG.amber,size:28});}},
     // the first thought: delete the chat the line came from; it deletes nothing of the line, as the docs say
     {at:c.traps-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const dq=ag_sine(clamp((tt-T.delChat-0.1)/0.8,0,1)),sa=ag_in(tt,c.traps-0.3,0.4)*(1-ag_in(tt,T.delChat+0.4,0.5));
-      if(sa>0){cx.save();cx.globalAlpha*=sa;cx.translate(0,dq*90);cm_session(cx,100,170,720,220,{date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});cx.restore();}
-      cm_pillAt(cx,460,130,"delete the chat?",tt,T.first-0.1,T.delChat+0.6,{size:28});
-      cm_bin(cx,460,520,84,rgba(AG.mut,0.95),ag_io(tt,T.delChat-0.1,T.delChat+0.9,0.3));
+      if(sa>0){cx.save();cx.globalAlpha*=sa;cx.translate(0,dq*90);cm_session(cx,100,250,720,220,{date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});cx.restore();}
+      cm_pillAt(cx,460,200,"delete the chat?",tt,T.first-0.1,T.delChat+0.6,{size:28});
+      const bna=1-ag_in(tt,T.docs-0.8,0.4);if(bna>0){cx.save();cx.globalAlpha*=bna;cm_bin(cx,460,560,84,rgba(AG.mut,0.95),ag_io(tt,T.delChat-0.1,T.delChat+0.9,0.3));cx.restore();}
       cm_file(cx,1420,720,{w:640,cw:600,cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>ag_in(tt,T.delNothing-0.2,0.4)})});
       cm_pillAt(cx,1420,340,"still in the team's memory",tt,T.delNothing,null,{icon:"warn",col:AG.amber,size:28});
       const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,880,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions \u00b7 beta",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
@@ -400,17 +400,17 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,1610,560,"still on the platform",tt,T.neverDel+0.2,null,{icon:"warn",col:AG.amber,size:28});}},
     // delete where it's kept: the line's file, in a pull request that says why; its entry, at the next load; the record stays
     {at:c.where-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      const pa=ag_in(tt,T.file-0.4,0.4);
-      cm_pr(cx,80,150,900,{title:"Delete: Count only students on campus",by:"Opened by Yusuf Demir",files:[["memory/entries/count-only-students-on-campus.md",1,AG.amber]],
+      const pa=ag_in(tt,T.whereW-0.2,0.4),fl=ag_in(tt,T.file-0.2,0.4);
+      cm_pr(cx,80,150,900,{title:"Delete: Count only students on campus",by:"Opened by Yusuf Demir",files:[["memory/entries/count-only-students-on-campus.md",1,fl>0?mix(AG.ink,AG.amber,fl):null]],
         rows:[{text:"Why: a merge dropped “For exam rooms”",state:"no",a:ag_in(tt,T.why-0.2,0.4)},{text:"Approved by Mei Tanaka",state:"wait",tick:ag_in(tt,T.why+0.9,0.35),a:ag_in(tt,T.why+0.5,0.4)}],
-        a:pa,k:Math.min(1,ag_spr(tt,T.file-0.4,0.5))});
+        a:pa,k:Math.min(1,ag_spr(tt,T.whereW-0.2,0.5))});
       const la=ag_in(tt,T.entry-0.4,0.4);
       cm_script(cx,1080,170,"Next load","the approved files",{a:la,k:Math.min(1,ag_spr(tt,T.entry-0.4,0.5)),turn:Math.max(0,tt-T.next)*0.5,glow:ag_io(tt,T.next-0.3,T.next+1.4,0.4)});
       cm_arrow(cx,[984,260,1020,260,1040,240,1076,236],ag_in(tt,T.entry-0.2,0.4),{col:AG.blue,lw:3.5,head:12});
       cm_arrow(cx,[1270,298,1270,340,1270,380,1270,420],ag_in(tt,T.next-0.2,0.4),{col:AG.blue,lw:3.5,head:12});
       const gone=ag_sine(clamp((tt-T.next-0.2)/1.2,0,1));
       const cards=CM_FC.map((f,k)=>({text:f[0],tick:1,a:k===CM_WRONG?1-gone:1,strike:k===CM_WRONG?ag_in(tt,T.next-0.3,0.4):0,glow:k===CM_WRONG?AG.amber:null,glowA:k===CM_WRONG?1:0,dy:k>CM_WRONG?50*gone:0}));
-      cm_file(cx,1480,760,{w:640,cw:600,cards});
+      cm_file(cx,1480,760,{w:640,cw:600,cards,labelDy:50*gone});
       const ra=ag_in(tt,T.rec-0.3,0.4);if(ra>0)cm_history(cx,80,530,900,CM_RECORD.map((r,i)=>[r[0],r[1],ag_in(tt,[T.added,T.deleted,T.whyR][i]-0.2,0.4)]),{kick:"Record",a:ra,k:Math.min(1,ag_spr(tt,T.rec-0.3,0.5))});
       cm_pillAt(cx,1480,840,"no agent reads it again",tt,T.noAgent-0.1,null,{size:28});}}]);
   CM_KICK(ctx,1);});
@@ -429,7 +429,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     // back in Planning: Lucía asks again
     {at:0,place:"cmLab",keys:[[0,1000,530,1.03]],push:0.02,draw:(cx,tt)=>{
       cm_lucia(cx,S,tt,{think:0.2+0.4*ag_io(tt,T.asks,T.asks+1.6,0.4),smile:0.35});
-      cm_cardAt(cx,110,120,600,{kick:"From the library",title:"How many students are there?",sub:"To buy next year's e-books"},tt,T.asks-0.5,null,{kickCol:AG.kick});
+      cm_cardAt(cx,110,88,600,{kick:"From the library",title:"How many students are there?",sub:"To buy next year's e-books"},tt,T.asks-0.5,null,{kickCol:AG.kick});
       cm_file(cx,CM_F.x,CM_F.y,{cards:cm_kept({who:k=>1})});
       const A=CM_DESK.agent;cm_fileReads(cx,tt,ag_sine(clamp((tt-T.asks)/1.0,0,1)),A[0],A[1],A[2]);}},
     // her agent's answer, with its evidence: the census-day count, and each entry it read, with who approved it
@@ -454,13 +454,13 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     // where the series began: what an agent reads; nine films, nine lessons; then the whole road, from further off
     {at:c.began-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
       const ca=ag_in(tt,c.began-0.4,0.4)*(1-ag_in(tt,T.nine-0.2,0.5));
-      if(ca>0){cm_context(cx,960,490,{t:tt,memory:1,gov:1,a:ca});ag_label(cx,960,344,"What an agent reads",{align:"center",a:ca*ag_in(tt,T.readsW-0.3,0.4)});}
+      if(ca>0){cm_context(cx,960,490,{t:tt,memory:1,gov:1,a:ca});ag_label(cx,960,262,"What an agent reads",{align:"center",a:ca*ag_in(tt,T.readsW-0.3,0.4)});}
       // the nine lessons, each as it's said; on "a longer road", the grid goes to its shelf
       const u=ag_sine(clamp((tt-T.longer+0.4)/1.8,0,1)),G=cm_gridBox(cx),b=cm_shelf(1),s=Math.min((b.w-48)/G.w,(b.h-132)/G.h),
         tx=b.x+24+((b.w-48)-G.w*s)/2,ty=b.y+112;
-      cm_shelves(cx,{a:ag_in(tt,T.longer-0.3,0.6),skip2:true,shelfA:i=>i===1?ag_in(tt,T.longer+0.6,0.6):ag_in(tt,T.longer+0.1+i*0.2,0.5),lit:2,litA:ag_in(tt,T.nextW-0.2,0.5)});
+      cm_shelves(cx,{a:ag_in(tt,T.longer+0.3,0.6),skip2:true,shelfA:i=>i===1?ag_in(tt,T.longer+0.6,0.6):ag_in(tt,T.longer+0.9+i*0.2,0.5),lit:2,litA:ag_in(tt,T.nextW-0.2,0.5)});
       cx.save();const k=lerp(1,s,u);cx.translate(lerp(0,tx-G.x*s,u),lerp(0,ty-G.y*s,u));cx.scale(k,k);
-      cm_lessons(cx,{show:i=>clamp((tt-L[i]+0.15)/1.0,0,1),deco:u>0});cx.restore();
+      cm_lessons(cx,{show:i=>clamp((tt-L[i]+0.15)/1.0,0,1),deco:u>0,slots:ag_in(tt,T.nine+0.1,0.5)*(1-u)});cx.restore();
       ag_T(cx,"an agent that helps one person",84,750,{w:600,size:28,col:AG.mut,a:ag_in(tt,T.helps-0.2,0.4)});
       ag_T(cx,"one that works beside the team",1836,750,{w:600,size:28,col:AG.mut,align:"right",a:ag_in(tt,T.beside-0.2,0.4)});
       const b3=cm_shelf(2);cm_pillAt(cx,b3.x+b3.w/2,256,"Next",tt,T.nextW-0.1,null,{size:28,col:AG.blue});

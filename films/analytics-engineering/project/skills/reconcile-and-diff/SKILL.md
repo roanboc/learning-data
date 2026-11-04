@@ -39,3 +39,33 @@ changed against the version before?
 
 The reconciliation table, the diff summary, and the query behind each line. The model's owner
 signs off, and the consumer when their contract changed.
+
+## Causes met so far
+
+When the count and the census report differ, check these first: each was found before, and a
+person settled it. Report which one fits, with its query. When none fits, say so: a person
+settles the new cause, and it gets an entry here, so nothing is solved twice.
+
+### Withdrew after census day
+
+- Shows: the count is under the census report.
+- Settled: they still count, as at census (DEC-PLN-02).
+- Decided by: Planning, the wallet app team and Noor.
+
+### A degree in no faculty
+
+- Shows: students under no faculty, beside a new degree.
+- Settled: every degree belongs to a faculty; the registrar's office names it.
+- Decided by: Mei Tanaka, registrar's office.
+
+### A student counted twice
+
+- Shows: one person with two learner keys.
+- Settled: a person decides two keys are one (DEC-STU-04).
+- Decided by: Mei Tanaka, registrar's office.
+
+### Test records
+
+- Shows: records made in one week, dated back months.
+- Settled: they never count (DEC-SIS-05).
+- Decided by: Mei Tanaka, registrar's office, 22 October 2026.

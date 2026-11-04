@@ -35,7 +35,7 @@ const SW_CAUSES=[
   {title:"Withdrew after census day",shows:"the count is under the census report.",settled:"they still count, as at census (DEC-PLN-02).",by:"Planning, the wallet app team and Noor."},
   {title:"A degree in no faculty",shows:"students under no faculty, beside a new degree.",settled:"every degree belongs to a faculty; the registrar's office names it.",by:"Mei Tanaka, registrar's office."},
   {title:"A student counted twice",shows:"one person with two learner keys.",settled:"a person decides two keys are one (DEC-STU-04).",by:"Mei Tanaka, registrar's office."},
-  {title:"Test records",shows:"records made in one week, dated back months.",settled:"they never count; a fixed step leaves them out, with a test (DEC-SIS-05).",by:"Mei Tanaka, registrar's office, 22 October 2026."}];
+  {title:"Test records",shows:"records made in one week, dated back months.",settled:"they never count (DEC-SIS-05).",by:"Mei Tanaka, registrar's office, 22 October 2026."}];
 // the nightly workflow's fixed steps, in order; "Leave out test records" comes in on the night of the film, after Build
 const SW_STEPS_NIGHT=["Build","Count as on census day","Run the tests","Compare with the census report"],SW_NEWSTEP="Leave out test records";
 // the lab at night, its lamp in the far left corner, so the workflow's rail runs clear of its shade; sw_night lays the night's light over

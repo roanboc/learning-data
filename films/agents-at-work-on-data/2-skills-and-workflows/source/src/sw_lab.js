@@ -38,8 +38,35 @@ const SW_CAUSES=[
   {title:"Test records",shows:"records made in one week, dated back months.",settled:"they never count; a fixed step leaves them out, with a test (DEC-SIS-05).",by:"Mei Tanaka, registrar's office, 22 October 2026."}];
 // the nightly workflow's fixed steps, in order; "Leave out test records" comes in on the night of the film, after Build
 const SW_STEPS_NIGHT=["Build","Count as on census day","Run the tests","Compare with the census report"],SW_NEWSTEP="Leave out test records";
+// the lab at night, its lamp in the far left corner, so the workflow's rail runs clear of its shade; sw_night lays the night's light over
+// what stands in the room (the agent, the sandbox, a tool), drawn before it; the words and cards come after it, at full contrast
+const SW_LAMP=[110,770];AG_PLACES.swNight=c=>ag_paintLab(c,{night:true,lamp:SW_LAMP});
+const sw_night=x=>ag_roomLight(x,1,{night:true,lamp:SW_LAMP});
+// something made of parts, faded as one: drawn whole into a scratch canvas, then laid on at opacity a. Drawn straight at a part
+// opacity, each part fades on its own, and the agent's dark band shows through its sphere like a ghost
+function sw_fade(ctx,a,fn){if(a<=0.004)return;if(a>=0.996){fn(ctx);return;}const [bc,bx]=ag_buf("swFade",ctx.canvas.width,ctx.canvas.height);
+  bx.setTransform(ctx.getTransform());fn(bx);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(bc,0,0);ctx.restore();}
+// the agent, faded as one (o.only "light", its band's glow over the night, is drawn straight)
+function sw_model(ctx,x,y,r,o){o=o||{};if(o.only)return ag_model(ctx,x,y,r,o);sw_fade(ctx,o.a==null?1:o.a,c=>ag_model(c,x,y,r,Object.assign({},o,{a:1})));}
+// a dashed line from (x0, y0) to (x1, y1) with an arrowhead at its end; curve bends it through the corner (x0, y1)
+function sw_link(ctx,x0,y0,x1,y1,col,a,curve){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(col,0.75);ctx.lineWidth=3;ctx.setLineDash([9,9]);ctx.beginPath();ctx.moveTo(x0,y0);
+  let ang;if(curve){ctx.quadraticCurveTo(x0,y1,x1,y1);ang=x1<x0?Math.PI:0;}else{ctx.lineTo(x1,y1);ang=Math.atan2(y1-y0,x1-x0);}ctx.stroke();ctx.setLineDash([]);
+  ag_arrowHead(ctx,x1,y1,ang,12,rgba(col,0.85));ctx.restore();}
+// a row in a list: its words centred in a slim card; o.dashed (the next one, not met yet), o.edge, o.a, o.k; returns its box
+function sw_row(ctx,x,y,w,text,o){o=o||{};const a=o.a==null?1:o.a,h=76;if(a<=0.01)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,clamp(o.k,0,1.2)));
+  ag_box(ctx,x,y,w,h,18,{edge:o.edge||null,edgeA:0.85});if(o.dashed)sw_dash(ctx,x,y,w,h,o.edge||AG.blue,1);ag_T(ctx,text,x+28,y+h/2+11,{w:700,size:32});ctx.restore();return{x,y,w,h};}
+// a line from a problem, above the six forms, round the right margin to its form b (a card in the right column); a, its opacity
+function sw_toForm(ctx,x0,y0,b,a){if(a<=0.01)return;const ex=b.x+b.w+10,ey=b.y+b.h/2,mx=b.x+b.w+86;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(AG.blue,0.75);ctx.lineWidth=3;ctx.setLineDash([9,9]);
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.bezierCurveTo(mx,y0,mx,ey,ex+6,ey);ctx.stroke();ctx.setLineDash([]);ag_arrowHead(ctx,ex,ey,Math.PI,12,rgba(AG.blue,0.85));ctx.restore();}
+// a card whose words have gone: soft grey lines where they were (an answer, filed away); la, the lines' own opacity
+function sw_blank(ctx,x,y,w,h,a,la){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,22,{});la=la==null?1:la;if(la<=0.01){ctx.restore();return;}ctx.globalAlpha*=la;ctx.strokeStyle="rgba(60,50,40,0.26)";ctx.lineWidth=7;ctx.lineCap="round";
+  for(const [f,lw] of [[0.4,0.62],[0.64,0.4]]){const ly=y+h*f;ctx.beginPath();ctx.moveTo(x+30,ly);ctx.lineTo(x+30+(w-60)*lw,ly);ctx.stroke();}ctx.restore();}
+// a small rail of three steps, as an icon: plain, fixed steps
+function sw_miniRail(ctx,cx,cy,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=a;ctx.lineCap="round";
+  for(const [c,lw] of [[AG_OAK.dark,8],[AG_OAK.base,5]]){ctx.strokeStyle=rgba(c,1);ctx.lineWidth=lw;ctx.beginPath();ctx.moveTo(cx-82,cy);ctx.lineTo(cx+82,cy);ctx.stroke();}
+  for(let i=-1;i<=1;i++)ag_box(ctx,cx+i*52-20,cy-20,40,40,10,{edge:AG.blue,edgeA:0.9});ctx.restore();}
 // the rail's steps laid out across the frame: n slots from x0 to x1 at y; returns [{x, y, w}]
-function sw_slots(n,y,x0,x1){x0=x0==null?120:x0;x1=x1==null?1800:x1;const gap=24,w=(x1-x0-gap*(n-1))/n;return Array.from({length:n},(_,i)=>({x:x0+i*(w+gap),y,w}));}
+function sw_slots(n,y,x0,x1){x0=x0==null?220:x0;x1=x1==null?1850:x1;const gap=24,w=(x1-x0-gap*(n-1))/n;return Array.from({length:n},(_,i)=>({x:x0+i*(w+gap),y,w}));}
 // a number on a card: its kick, the number large, a line under it; o.num2 and o.m (0 to 1) turn it into another number; o.edge, o.a, o.k
 function sw_num(ctx,x,y,w,kick,num,sub,o){o=o||{};const a=o.a==null?1:o.a,h=sub?200:160;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,clamp(o.k,0,1.2)));ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:0.9});
@@ -125,7 +152,7 @@ function sw_rail(ctx,steps,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0||!steps.le
     ctx.save();ctx.globalAlpha*=sa;if(s.k!=null)ag_about(ctx,s.x+s.w/2,s.y+h/2,lerp(0.6,1,clamp(s.k,0,1.2)));
     ag_box(ctx,s.x,s.y,s.w,h,20,{edge:col,edgeA:0.9,glow:s.state===1||s.state===4?col:null,glowA:s.state===1||s.state===4?0.8:0});
     ag_T(ctx,String(s.num),s.x+26,s.y+46,{w:500,size:28,f:"mono",col:col||AG.blue});
-    const rows=ag_wrap(ctx,s.label,s.w-52,{w:700,size:30});rows.slice(0,2).forEach((r,i)=>ag_T(ctx,r,s.x+26,s.y+(rows.length>1?82:90)+i*34,{w:700,size:30,col:s.state===4?AG.violet:AG.ink}));
+    const rows=ag_wrap(ctx,s.label,s.w-40,{w:700,size:30});rows.slice(0,2).forEach((r,i)=>ag_T(ctx,r,s.x+26,s.y+(rows.length>1?82:90)+i*34,{w:700,size:30,col:s.state===4?AG.violet:AG.ink}));
     if(s.state===2)ag_tick(ctx,s.x+s.w-38,s.y+38,24,rgba(AG.green,1),4);else if(s.state===3)ag_warn(ctx,s.x+s.w-38,s.y+38,30,rgba(AG.amber,1));
     if(s.test>0.01)ag_pill(ctx,s.x+s.w/2,s.y+h+44,"with a test",{col:AG.green,icon:"tick",a:s.test,size:28});
     ctx.restore();}

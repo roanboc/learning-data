@@ -290,11 +290,12 @@ function sw_eq(ctx,cx,y,parts,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
     ag_T(ctx,p[0],x+w/2,y+11,{w:700,size,align:"center",a:k*k,col:p[4]||AG.ink});x+=w+gap*k;};
   L.forEach((i,n)=>tile(i,JL[n]));if(!o.noEq){ag_T(ctx,"=",x+eqW/2-(L.length?gap/2:0),y+14,{w:700,size:40,align:"center"});x+=eqW;}Rr.forEach((i,n)=>tile(i,JR[n]));ctx.restore();}
 
-// the six forms the two moves bring every problem to, in words, as cards in two columns from (x, y); o.lit (index, or -1), o.litA, o.a,
+// the six forms the two moves bring every problem to, in words, as cards in two columns from (x, y); o.lit (index, or -1), o.litA (or
+// o.lits {index: 0 to 1} to light more than one), o.a,
 // o.k (spring), o.each (each card's own a); returns each card's box
 const SW_FORMS=["Squares equal roots","Squares equal numbers","Roots equal numbers","Squares and roots equal numbers","Squares and numbers equal roots","Roots and numbers equal squares"];
 function sw_forms(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return[];const cw=520,ch=104,gx=28,gy=24,out=[];
-  for(let i=0;i<6;i++){const col=i%2,row=(i/2)|0,bx=x+col*(cw+gx),by=y+row*(ch+gy),lit=o.lit===i?(o.litA==null?1:o.litA):0,ai=a*(o.each?o.each[i]:1);out.push({x:bx,y:by,w:cw,h:ch});if(ai<=0.01)continue;
+  for(let i=0;i<6;i++){const col=i%2,row=(i/2)|0,bx=x+col*(cw+gx),by=y+row*(ch+gy),lit=o.lits?clamp(o.lits[i]||0,0,1):o.lit===i?(o.litA==null?1:o.litA):0,ai=a*(o.each?o.each[i]:1);out.push({x:bx,y:by,w:cw,h:ch});if(ai<=0.01)continue;
     ctx.save();if(o.k!=null)ag_about(ctx,bx+cw/2,by+ch/2,lerp(0.6,1,clamp(o.k,0,1.2)));
     ag_box(ctx,bx,by,cw,ch,18,{a:ai,edge:lit>0.05?AG.blue:null,edgeA:0.9*lit,glow:lit>0.05?AG.blue:null,glowA:lit});
     ag_T(ctx,String(i+1),bx+30,by+64,{w:500,size:30,f:"mono",col:lit>0.5?AG.blue:AG.mut,a:ai});

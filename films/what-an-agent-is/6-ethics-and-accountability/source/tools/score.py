@@ -62,7 +62,9 @@ HOLLOW = (D3, A3, D4)  # the open chord with no third: a call left unanswered
 
 # ---- the levels: the stone and the melodica matched by loudness (a stone note's first half second against a held reed), about as far
 # under the voice as the series' other music; the effects about 12 dB under the music (FX scales them all)
-SL, ML_, FX = 0.11, 0.055, 7.0
+# After the author's review of the series' opening films (4 November 2026), the music is 1.5 dB lower and the effects 7 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
+SL, ML_, FX = 0.093, 0.046, 3.1
 
 # a small room of plaster and oak round the players, ringing on for about a second and a quarter
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.25)).astype(np.float32))(np.arange(int(1.25 * SR)) / SR)
@@ -254,11 +256,11 @@ def hoe(s, g=0.006, pan=0.0):
     """a hoe into the earth: a soft thud and the soil"""
     s_knock(s, g * FX, pan, 110); x = tt(0.14); X(filt(noise(0.14), 'band', (200, 1000))[:len(x)] * np.exp(-x / 0.035), s + 0.01, 0.5 * g * FX, pan)
 def clicks(s0, s1, ramp=1.6, g=0.006, pan=0.0):
-    """the counter racing: soft, quick, low clicks, from about four a second to about twelve as it climbs, then steady, and stopping dead
-    at s1"""
+    """the counter racing: soft, quick, low clicks, from about four a second to about ten as it climbs, then steady, and stopping dead
+    at s1 (twelve a second, with the counter's other sounds, came to thirteen sounds in a second, a crackle: 4 November 2026)"""
     t = s0
     while t < s1:
-        u = min(1.0, (t - s0) / ramp); rate = 4 + 10 * u ** 1.5 if u < 1 else 12
+        u = min(1.0, (t - s0) / ramp); rate = 4 + 6 * u ** 1.5 if u < 1 else 10
         x = tt(0.03); X(norm(filt(noise(0.03), 'band', (300, 1100)) * np.exp(-x / 0.004)), t, g * FX * (0.75 + 0.25 * R1.uniform()), pan + 0.1 * R1.uniform(-1, 1))
         t += 1 / rate * (0.85 + 0.3 * R1.uniform())
 
@@ -346,15 +348,15 @@ call(st0 + 0.05, C4, G4)
 answer(ow('still', 'a person answered'), (A4, G4, F4), 2.3, (F3, C4))
 scrape(st0, oc('same', 1.6) - st0, 0.004, px(620))
 hooves(st0 + 0.2, oc('same', 1.4), st0, 2.2, 0.004, px(900))
-# the same with an agent: the field becomes a picture on the lab's wall; Jun beside the agent; then the team, and the count's tick
+# the same with an agent: the field becomes a picture on the lab's wall; Jun beside the agent; then the team, and the count's tick. The
+# B-flat chord holds from "a person must" to "stand behind" (since 4 November 2026; it was struck again for the team, 2.6 s later)
 must, team, stand = ow('same', 'a person must'), ow('behind', 'a team'), ow('behind', 'stand behind')
 air(oc('same', -0.2), 1.3, 0.006, 0.0)
 chord(Dm, oc('same', 0.15), must - 0.2, 0.55)
-chord(Bb, must - 0.05, END('ox', 'same') + 0.3, 0.55)
+chord(Bb, must - 0.05, stand - 0.15, 0.55)
 step(must - 0.1, 0.006, px(330), 'oak'); step(must + 0.3, 0.005, px(330), 'oak')
 for i, xx in enumerate((170, 650, 860)):
     step(team - 0.1 + i * 0.3, 0.005, px(xx), 'oak'); step(team + 0.3 + i * 0.3, 0.004, px(xx), 'oak')
-chord(Bb, oc('behind', -0.25), stand - 0.15, 0.5)
 chord(C_, stand, END('ox', 'behind') + 0.15, 0.55)
 knock(stand + 0.05, 0.010, px(1510), 260); tick(stand + 0.45, 0.008, px(1510))
 # the title holds the answer's last note: F, over its chord

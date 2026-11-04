@@ -58,7 +58,10 @@ Q = (72, 74, 76, 79, 81)  # the five questions' notes: C D E G A, rising
 
 # ---- the levels: the Mellotron about as far under the voice as the series' other music (matched by loudness, not by peak), the forks
 # a little above it; the effects about 12 dB under the music (FX scales them all)
-ML_, FK, FX = 0.045, 0.07, 1.6
+# After the author's review of the series' opening films (4 November 2026), the music is 6 dB lower and the effects 4.5 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them), and the effects stay
+# about 12 dB under the music
+ML_, FK, FX = 0.023, 0.035, 0.95
 
 # a small room round the Mellotron and the forks, ringing on for about a second
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.1)).astype(np.float32))(np.arange(int(1.1 * SR)) / SR)
@@ -384,15 +387,15 @@ for k in range(4):
     pencil(ew('test', 'challenged', -0.4 + 0.6 * k), 0.008, px(700 + 180 * k), 0.35)
 mel(74, ec('science', 0.0), ec('science', 2.6), 0.55)
 
-# 7. Could a machine feel? A minor at the turn, card 4 still out. Llinás: A minor as night falls on the sky and the brain hums, fading
-#    in deep sleep. Into the neuron, to its tubes: one high note while the pearl shimmers, let go as "a warm, wet brain would wipe out"
-#    it. The book and its two quotes; the fourteen signs; the gap between showing the signs and feeling: F as the picture appears
+# 7. Could a machine feel? A minor at the turn, card 4 still out. Llinás: one low A as night falls on the sky and the brain hums,
+#    fading in deep sleep (one note since 4 November 2026, not A minor again 7.6 s after the turn's). Into the neuron, to its tubes:
+#    one high note while the pearl shimmers, let go as "a warm, wet brain would wipe out" it. The book and its two quotes; the fourteen
+#    signs; the gap between showing the signs and feeling: F as the picture appears
 nw = lambda lid, word, off=0: W('machine', lid, word, off)
 nc = lambda lid, off=0: G('machine', lid, off)
 chord(Am, nc('then', -0.8), nc('then', 2.8), 0.65)
 dream = nw('llinas', 'dreaming')
-for i, m in enumerate(Am):
-    mel(m, dream - 0.3 + 0.035 * i, nc('sleep', 1.4), 0.6 if i else 0.7)
+mel(Am[0], dream - 0.3, nc('sleep', 1.4), 0.7)
 knock(nw('llinas', 'forty times', -0.1), 0.01, px(1490))
 air(nc('penrose', -0.4), 2.8, 0.008, px(960))
 micro, wipe = nw('penrose', 'microtubules'), nw('critics', 'wipe out')

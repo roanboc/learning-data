@@ -56,7 +56,10 @@ LIMIT, LOWER = 69, 67  # the cornet's A, the limit, and the G a tone below, wher
 
 # ---- the levels: the ondes about as far under the voice as the series' other music (matched by loudness, not by peak), the cornet a
 # little above them; the effects about 12 dB under the music (FX scales them all)
-OL, CL, FX = 0.03, 0.042, 3.2
+# After the author's review of the series' opening films (4 November 2026), the music is 2 dB lower and the effects 2.5 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them); and F major, held 15
+# times after the opening, twice within seconds of itself, is held 9 times: at three chapters' turns, as a chapter settles, and at the end
+OL, CL, FX = 0.024, 0.033, 2.4
 
 # a room round the players: a small hall, ringing on for about a second and a half, and nothing much above 1.6 kHz
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.6)).astype(np.float32))(np.arange(int(1.6 * SR)) / SR)
@@ -166,10 +169,11 @@ def rush(s, sec, g=0.01):
 #    three quick figures as the masts whip past, once. The signals smear past the cab's window: a short, high note for each, gone before
 #    it's read. "A missed signal could cost lives": the music stops; Tokyo, 1962, in silence. The passengers: one low D, alone. "Build
 #    the limits into the line": the cornet's A comes back with the blue line, D major under it; in the cab the figure climbs as the
-#    needle does, and stops under the limit; the allowed speed lowered, the cornet steps down to G. The control room: G major, and a
-#    handset lifted. The driver answers: D major. The time cards set down; "no passenger has died": D major, the cornet over it. The
-#    trains were fast: the figure once more at dusk. The university: F major under the same A, held across; the cards circle, then
-#    slow, and the figure climbs as they settle; the arms reach the tools; the title on the series' mark, F with the A over it
+#    needle does, and stops under the limit; the allowed speed lowered, the cornet steps down to G. The control room: G major, the two
+#    controllers watching the board. The driver answers: D major. The time cards set down; "no passenger has died": D major, the
+#    cornet over it. The trains were fast: the figure once more at dusk. The university: F major under the same A, held across; the
+#    cards circle, then slow, and the figure climbs as they settle; the arms reach the tools; the title on the series' mark, F with
+#    the A over it
 lw = lambda lid, word, off=0: W('line', lid, word, off)
 lc = lambda lid, off=0: G('line', lid, off)
 l0 = S0('line')
@@ -203,9 +207,8 @@ climb(P_fast + 0.05, (62, 64, 66, 67), 0.22, 1.6, 0.8)
 P_dn = lc('room') - 2.2
 cor(LOWER, P_dn + 0.35, lc('room', 0.1), 0.75)
 ond(62, P_dn + 0.6, lc('room', 0.1), 0.6, att=0.4, rel=0.5, pan=-0.2)
-# one control room: G major as the board lights, and a controller lifts a handset
+# one control room: G major as the board lights, the two controllers watching it (no handset is lifted any more, so no knock)
 hold(G_, lc('room', 0.1), lc('driver', 0.1), 0.75, att=1.0, rel=0.9)
-knock(lw('room', 'every train', 0.15), 0.016, px(1220), 300)
 # the driver still drives, and answers for the train: D major
 hold(D_, lc('driver', 0.15), lc('worked', 0.0), 0.75, att=1.0, rel=0.9)
 # it worked: the train in daylight; the two time cards set down; and no passenger lost since: D major, the cornet over it
@@ -230,7 +233,8 @@ for i in (0, 1):
     tap(lc('more', 1.5 + 0.5 * i), 0.009, px(1730))
 hold(F_, lc('more', 0.3), lc('breath', 3.2), 0.75, att=1.2, rel=1.4)
 
-# 2. Capable, convincing, unaccountable: F major at the turn, as the count comes in; the plain job's tick, one note. At night: D minor;
+# 2. Capable, convincing, unaccountable: the count comes in as the title's F major fades, with no chord of its own at the turn (it
+#    played the same chord again eight seconds later); the plain job's tick, one note. At night: D minor;
 #    the check fails, a G left open; three light touches as the agent's arms reach its tools, and the draft laid in the tray. In the
 #    morning, two marks pressed, the count matches again: F major, briefly. Could it do more: two rising notes, left open. The three
 #    words' cards set down, one note for "a person answers". Yusuf's four questions pinned up; turned over, the four needs climb D F G
@@ -238,7 +242,6 @@ hold(F_, lc('more', 0.3), lc('breath', 3.2), 0.75, att=1.2, rel=1.4)
 tw = lambda lid, word, off=0: W('three', lid, word, off)
 tc = lambda lid, off=0: G('three', lid, off)
 t0 = S0('three')
-hold(F_, t0 + 0.4, tw('count', 'sends the government', 0.8), 0.75, att=1.1, rel=1.0)
 paper(tw('count', 'census-day count'), 0.014, px(700))
 paper(tc('plain', 0.1), 0.012, px(700))
 ond(65, tc('plain', 0.6), tc('plain', 1.4), 0.6, att=0.1, rel=0.5, pan=-0.2)
@@ -273,7 +276,7 @@ limit(P_four[3], P_four[3] + 2.6, 0.75)
 
 # 3. An owner: F major at the turn as its card lights. "As the driver answered for the train": the cab, D major, a moment. The tag
 #    tied on; the "For" card and the log; the switch wired, a click as it lights. Handed over: the tag flies; "or it stops": a low F
-#    let go as the band goes dark, and a soft F as it comes back. "Not just anyone may own one": F major as the decision is set down
+#    let go as the band goes dark, and a soft F as it comes back. "Not just anyone may own one": a knock as the decision is set down
 ow = lambda lid, word, off=0: W('owner', lid, word, off)
 oc = lambda lid, off=0: G('owner', lid, off)
 hold(F_, S0('owner') + 0.3, oc('must', 0.6), 0.7, att=0.9, rel=0.9)
@@ -290,12 +293,11 @@ ond(53, P_stops - 0.1, P_stops + 0.35, 0.55, att=0.1, rel=0.3, pan=0.0)
 ond(65, P_stops + 1.9, P_stops + 2.7, 0.5, att=0.3, rel=0.7, pan=0.1)
 P_any = ow('hands', 'not just anyone')
 knock(P_any, 0.014, px(940))
-hold(F_, P_any + 0.1, P_any + 3.0, 0.65, att=0.9, rel=1.0)
 
 # 4. A name of its own: B flat at the turn. Its badge, "Jun Park", set on its hook; the log's lines typed. While it's learning: a light
-#    touch on the glass, and F major: that's fine. Its work looks like his: a line typed; to stop it you'd have to stop Jun: a low D as
+#    touch on the glass: that's fine. Its work looks like his: a line typed; to stop it you'd have to stop Jun: a low D as
 #    the wire runs to him. A name of its own: the badge turns, F then A. As the control room saw each train: G major, a moment. Stopped
-#    without stopping anyone else: a click, and a click as it comes back, with F major
+#    without stopping anyone else: a click, and a click as it comes back
 iw = lambda lid, word, off=0: W('identity', lid, word, off)
 ic = lambda lid, off=0: G('identity', lid, off)
 hold(Bb, S0('identity') + 0.3, ic('today', -0.3), 0.7, att=0.9, rel=0.9)
@@ -303,7 +305,6 @@ P_name = iw('today', "under Jun's name")
 tap(P_name + 0.2, 0.011, px(1190))
 keys(P_name + 0.3, 3, 0.008, px(700), step=0.35)
 tap(ic('learning', 0.5), 0.01, px(1300))
-hold(F_, ic('learning', 0.9), ic('learning', 3.4), 0.6, att=0.9, rel=0.9)
 tap(iw('looks', 'looks like his', 0.2), 0.009, px(700))
 P_jun = iw('looks', 'stop Jun')
 ond(50, P_jun - 0.2, P_jun + 2.0, 0.6, att=0.6, rel=0.6, pan=-0.2)
@@ -312,7 +313,6 @@ ond(65, P_own + 0.05, P_own + 0.45, 0.6, att=0.06, rel=0.2, pan=0.2); ond(69, P_
 hold(G_, iw('sees', 'as the control room'), iw('sees', 'the team sees', -0.3), 0.65, att=0.5, rel=0.7)
 P_none = iw('sees', 'without stopping')
 tap(P_none, 0.013, px(880)); tap(E('identity') - 2.2, 0.012, px(880))
-hold(F_, E('identity') - 2.1, E('identity') - 0.3, 0.6, att=0.6, rel=1.0)
 
 # 5. Limits it can't raise: the cornet's chapter. Its turn: the limit, A, over F major. The role card set down. "Where its rails go":
 #    the line, D major. The rails laid to the tools, a knock at each end; the arms touch them; the role's three lines; the blue line
@@ -335,7 +335,6 @@ for word in ('read-only', 'writing only drafts', 'no sensitive data'):
     tap(mw('fewest', word), 0.01, px(700))
 air(mw('fewest', 'writing only drafts'), 1.2, 0.007, px(1400))
 P_ours = mw('choice', 'our choice')
-hold(F_, mc('choice', 0.2), mc('skill', 0.4), 0.6, att=0.9, rel=0.9)
 limit(P_ours - 0.2, mc('skill', 0.4), 0.7)
 climb(P_ours + 0.3, (65, 67), 0.45, 1.8, 0.75)
 paper(mc('mandate', 0.0), 0.016, px(700))
@@ -352,7 +351,7 @@ tap(P_raise + 0.5, 0.013, px(830))
 # 6. A person checks: B flat at the turn. The change card laid down, its evidence fanned out, and a touch for each line read. The
 #    approve box an agent never has: set down, struck through; "only for reference": one low note. No train turns its own signal green:
 #    the cab, D major, and the limit as the box turns green. In test: two checks pass, F and A; its report laid down. Production: Jun's
-#    mark and Noor's, then F major as the change goes in; the same for Jun's own change, two marks, F major
+#    mark and Noor's; the same for Jun's own change, two marks, and an F as it goes in
 rw = lambda lid, word, off=0: W('review', lid, word, off)
 rc = lambda lid, off=0: G('review', lid, off)
 hold(Bb, S0('review') + 0.7, rc('checks', 0.3), 0.7, att=0.9, rel=0.9)
@@ -372,7 +371,6 @@ ond(65, P_alone, P_alone + 0.5, 0.55, att=0.06, rel=0.4, pan=-0.05); ond(69, P_a
 paper(rw('test', 'report what it did'), 0.014, px(700))
 stamp(rw('prod', 'checked by its owner'), 0.018, px(470)); stamp(rw('prod', 'approved by a second person'), 0.02, px(470))
 P_sec = rw('prod', 'approved by a second person')
-hold(F_, P_sec + 1.0, rc('same', 0.5), 0.65, att=0.8, rel=0.9)
 air(rc('same', 0.0), 1.0, 0.007, px(240))
 stamp(rc('same', 0.9), 0.018, px(470)); stamp(rc('same', 1.5), 0.02, px(470))
 ond(65, rc('same', 1.7), rc('same', 3.0), 0.55, att=0.2, rel=0.6, pan=0.1)

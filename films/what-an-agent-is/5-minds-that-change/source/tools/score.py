@@ -58,7 +58,9 @@ SLIP = 67                 # G, where C should be
 
 # ---- the levels: the bowed strings about as far under the voice as the series' other music (matched by loudness, not by peak), the
 # plucked notes a little above them; the effects about 12 dB under the music (FX scales them all)
-BL, PL, FX = 0.055, 0.12, 1.6
+# After the author's review of the series' opening films (4 November 2026), the music is 3.5 dB lower and the effects 2 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
+BL, PL, FX = 0.037, 0.080, 1.3
 
 # a small wooden room round the piano, ringing on for about a second and a half
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.5)).astype(np.float32))(np.arange(int(1.5 * SR)) / SR)
@@ -225,9 +227,9 @@ knock(tw('review', "there's no", 0.5), 0.022, px(960), 150)
 
 # 3. Ours change too: A minor at the turn. Clara's paper opened; the two year cards sliding into one. Cambridge: a page laid down and
 #    slid across the desk; the retellings, a figure that grows shorter, A C E D, then A C E, then A C; one line rising out of the last
-#    retelling, a breath of air; "canoe" struck through. The two things he added: G and B
-#    flat, two notes the figure never had; surest of exactly those, the same two, firmer. Seattle: each bar rises with a soft tap; "The
-#    question had changed the memory": A minor again, a moment
+#    retelling, a breath of air; "canoe" struck through. The two things he added: G and B flat, two notes the figure never had (not
+#    played again on "surest" since 4 November 2026: the same two notes five seconds later were one figure too many). Seattle: each bar
+#    rises with a soft tap; "The question had changed the memory": A minor again, a moment
 ow = lambda lid, word, off=0: W('ours', lid, word, off)
 oc = lambda lid, off=0: G('ours', lid, off)
 chord(Am, S0('ours') + 0.2, oc('too', 0.4), 0.7, att=0.9, rel=1.6)
@@ -241,7 +243,6 @@ figure(ow('far', 'over years', 0.15), (69, 72), 0.2, 0.42)
 air(ow('shorter', 'their own world', -0.15), 0.7, 0.008, px(1100))
 strike(ow('shorter', 'a canoe became', 0.5), 0.011, px(960), 0.5)
 plk(67, ow('added', 'totem'), 0.55, ring=0.7); plk(70, ow('added', 'pilgrimage'), 0.55, ring=0.7)
-plk(67, ow('surest', 'surest'), 0.75, ring=0.6); plk(70, ow('surest', 'surest', 0.22), 0.75, ring=0.9)
 tap(ow('hit', 'hit each other', -0.6), 0.012, px(290)); tap(ow('smashed', 'smashed', -0.4), 0.012, px(1630))
 chord(Am, oc('question', -0.1), END('ours', 'question') + 1.2, 0.6, att=0.8, rel=1.4)
 

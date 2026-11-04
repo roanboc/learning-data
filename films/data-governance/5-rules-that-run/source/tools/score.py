@@ -391,7 +391,8 @@ knock(pTags + 0.85, 0.012, P(1230)); hp(57, pTags + 0.9, 0.012, P(1230))
 # 5. The scorecard: it writes itself, and the university's F, warm, under it as a moment on screen: the faintest patter as its cells
 #    fill, a harp note as the rows, the columns and one cell light. What didn't pass comes in under it: paper; a knock for whose it is.
 #    David's question: paper. Planning's row: the harp's open fifth as its check, matched to the census report, lights green, paper for
-#    its card. Clara's room: a soft knock as she nods, and the fifth again, for "it passed"
+#    its card. Clara's room: a soft knock as she nods for "it passed" (since 4 November 2026 without the fifth again, six seconds after
+#    the last)
 S = 'scorecard'
 pScr, pFill = L(S, 0.9), L(S, 1.4)
 comes(UNI, pFill + 0.8, 5.6, 0.022)
@@ -407,19 +408,21 @@ pAcc = W(S, 'census', 'census')
 level(pAcc - 0.15, 0.014, P(seen(1240, 960, 1.5)))
 paper(pAcc + 0.05, 0.01, P(seen(1240, 960, 1.5)), 0.35)
 pNod, pTick = W(S, 'passed', 'it passed'), END(S, 'passed', 0.1)
-knock(pNod + 0.1, 0.008, P(1400), 180); level(pTick, 0.012, P(1400))
+knock(pNod + 0.1, 0.008, P(1400), 180)
 
-# 6. Whose level? The column again, for a moment: D major, and the harp's fifth as the water reaches its sixteenth mark, a knock for its
-#    "16". Tom's card: paper. Tom at his desk: paper for his name card and his words. His card again: a pen for the reason, keys for the
-#    level typed in, a knock for each of the night's three answers, and a muffled key as the marker runs to six. Planning's room: paper
-#    for Clara's name card and her words. Her card: a knock for each answer. The owners sign: the university's F, warm, under it; a pen
-#    for each signature and a stamp for each card. Jun's screen: a harp note as each rule's line lights. The board: a pin for the card
-#    with nobody beside it, slips landing against it, a marker through it, "off", and the bowed string's low D as it goes grey
+# 6. Whose level? The column again, for a moment: D major as the water reaches its sixteenth mark, a knock for its "16" (since 4
+#    November 2026 without the harp's fifth, ten seconds after Planning's). Tom's card: paper. Tom at his desk: paper for his name card
+#    and his words. His card again: a pen for the reason, keys for the level typed in, a knock for each of the night's three answers,
+#    and a muffled key as the marker runs to six. Planning's room: paper for Clara's name card and her words. Her card: a knock for each
+#    answer. The owners sign: a pen for each signature and a stamp for each card (since 4 November 2026 without the university's F under
+#    it: the chord comes four times after the opening, not five). Jun's screen: a harp note as each rule's line lights. The board: a
+#    pin for the card with nobody beside it, slips landing against it, a marker through it, "off", and the bowed string's low D as it
+#    goes grey
 S = 'level'
 pAt16 = W(S, 'cubits', 'sixteen cubits')
 comes(SIXT, pAt16 + 0.2, 4.0, 0.02)
 lap(L(S, 0.3), pAt16 - L(S, 0.3) + 0.3, 0.009, 0.0)
-level(pAt16 + 0.05, 0.015, 0.1); knock(pAt16 + 0.15, 0.012, P(1260))
+knock(pAt16 + 0.15, 0.012, P(1260))
 pCard = C(S, 'who', -0.3)
 paper(pCard + 0.05, 0.014, P(800), 0.6)
 pDesk, pWalk = C(S, 'email', -0.3), W(S, 'email', 'one or two')
@@ -435,7 +438,6 @@ paper(pPlan + 0.5, 0.008, P(seen(1640, 1250, 1.35)), 0.3); paper(pAny, 0.01, P(s
 pPcard = pGov - 0.4
 knock(pPcard + 0.35, 0.011, P(1600), 250); knock(pPcard + 0.5, 0.012, P(1600), 180)
 pSigns, pCsign = C(S, 'signs'), W(S, 'signs', 'with its level')
-comes(UNI, pSigns + 0.3, 5.0, 0.022)
 pen(pSigns - 0.15, 0.012, P(700), 0.65); press(pSigns + 0.6, 0.032, P(1100))
 TS = pCsign + 0.3
 paper(TS + 0.1, 0.012, P(1100), 0.5)
@@ -450,8 +452,9 @@ marker(pOff + 0.3, 0.012, P(1050), 0.5); pencil(pOff + 0.75, 0.008, P(1370), 0.4
 bowed(38, pOff + 0.5, 3.2, 0.014)
 
 # 7. Tom reads his row: the office door, a soft knock as Tom comes in. The scorecard: a harp note, low, as the amber cell he knows
-#    lights; paper as the enrolment comes out of its cell, a knock and a harp note left open for its certificate; the same low note for
-#    the one he's never seen, and a knock for each of its lines. The board: keys for the email as it was typed, the sieve, and a harp
+#    lights; paper as the enrolment comes out of its cell, a knock for its certificate; a knock for each line of the one he's never seen
+#    (since 4 November 2026 without a harp note for the certificate and for the one he's never seen: the music came in six times in 30
+#    seconds here). The board: keys for the email as it was typed, the sieve, and a harp
 #    note as it comes out clean, a knock for its tag. The slips nobody read, landing one on another, and a knock for the team's own. The
 #    office again: the university's F, warm, as Tom looks up: now it's his team's
 S = 'row'
@@ -460,8 +463,7 @@ pKnows, pWalkin, pCert, pNever, pTyped = (W(S, 'knows', 'he knows'), W(S, 'knows
                                           W(S, 'never', 'never seen'), W(S, 'never', 'emails typed'))
 hp(52, pKnows, 0.011, P(410))
 paper(pWalkin - 0.25, 0.012, P(500), 0.5)
-knock(pCert + 0.1, 0.01, P(890), 230); hp(59, pCert + 0.2, 0.009, P(890))
-hp(52, pNever + 0.05, 0.011, P(930))
+knock(pCert + 0.1, 0.01, P(890), 230)
 for k in (1, 2):
     knock(pTyped + 0.25 * k + 0.05, 0.008, P(400), 210)
 pSpaces, pClean, pCl, pBroke = W(S, 'never', 'spaces'), C(S, 'cleans', -0.3), W(S, 'cleans', 'cleans them'), W(S, 'cleans', 'nothing broke')

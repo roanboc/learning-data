@@ -5,8 +5,10 @@
 #    from time to time: at a chapter's turn, rolled in the pause and fading under the first words, and for a rule that runs (green):
 #    a note rising as each of the skill's steps lights, and a chord as binder 26's line goes green.
 #  - A soft electric piano is the agent. Its sign is two notes rising a fourth, from the key's second to its fifth, never coming home:
-#    it plays whenever the agent reads or drafts. For each thing the agent can't do (approve, edit the glossary, weaken a test, show a
-#    value, write to production, read in bulk, check "care"), one low note, the same each time.
+#    it plays as the agent reads or drafts, four times after the opening (as the skill runs at night, as it drafts finding 3's check,
+#    as it's governed and as it reads the checklist; until the author's review of What an agent is, 4 November 2026, it played nine
+#    times, five in 35 seconds, the same two notes within seconds of themselves). For each thing the agent can't do (approve, edit the
+#    glossary, weaken a test, show a value, write to production, read in bulk, check "care"), one low note, the same each time.
 #  - An alto flute is a person deciding: three notes falling home, 3-2-1, when Anil marks the column, when he confirms, as the owners
 #    approve one by one, when data governance approves a step, and when he can overrule. Where nobody has decided yet ("who decides?"),
 #    it falls 3-2 and stops.
@@ -14,7 +16,9 @@
 # A major for the imagined night, then and at the end; D major for today, which shares every note of A major but B.
 # The rules of the series' sound (decided with the master data films, 20 October 2026) hold, and tools/quiet.py checks them:
 #  - Music under the opening, then only from time to time, never as a bed under the voice: after the opening no chapter has music for
-#    more than half its length, or for 12 seconds without a break. Under a line, the opening's guitar plays fewer notes, and softer.
+#    more than half its length, or for 12 seconds without a break. Under a line, the opening's guitar plays fewer notes, and softer,
+#    and each bar takes the next order of the fingers, so no bar plays the one before again (since 4 November 2026: under the first
+#    lines the same two notes came back every 1.5 to 2.5 seconds).
 #  - Nothing tense, trembling or pulsing: no urgent pulse, even at the three failed checks; no tremolo on the piano; a slight vibrato.
 #  - Nothing beats on a phone's one speaker: every note is tuned just, a whole-number ratio of A (or of the D a fourth above it), so
 #    the overtones of a chord meet exactly.
@@ -62,14 +66,16 @@ def roll(ch, s, key, g=0.06, gap=0.12, pan=-0.12):
     """a chord rolled, thumb then fingers, each string a little later and a little softer"""
     for i, m in enumerate(ch):
         guitar(hz(m, key), s + i * gap * (0.85 + 0.3 * R9.random()), g * (1 - 0.07 * i) * (0.9 + 0.1 * R9.random()), pan + 0.05 * i)
-PATS = ([0, 1, 2, 'F', 1, 2, 0], [1, 0, 2, 'F', 0, 1, 3], [2, 1, 0, 'F', 2, 3, 1], [0, 2, 1, 'F', 3, 1, 2])
+PATS = ([0, 1, 2, 'F', 2, 0, 1], [1, 0, 2, 'F', 0, 1, 3], [2, 1, 0, 'F', 2, 3, 1], [0, 2, 1, 'F', 3, 1, 2])
 def pick(ch, s0, s1, key, k, g=0.06, step=0.5, pan=-0.12):
     """a chord fingerpicked from s0 to s1 (ch: the bass, its fifth, then the strings above): the thumb on the bass every fourth beat and
-    on the fifth between, the fingers in an order of the chord's own (k picks it), so no two chords go alike. Under a line, the thumb
-    keeps to the bass and the fingers play every other note, more softly"""
-    up = ch[2:]; pat = PATS[k % len(PATS)]; n = max(1, int(round((s1 - s0) / step)))
+    on the fifth between, the fingers in an order of the chord's own (k picks it), so no two chords go alike, and each bar in the next
+    order, so no bar plays the one before again. Under a line, the thumb keeps to the bass and the fingers play every other note, more
+    softly"""
+    up = ch[2:]; n = max(1, int(round((s1 - s0) / step)))
     for i in range(n):
         t = s0 + i * step + 0.012 * R9.standard_normal(); v = 0.88 + 0.12 * R9.random(); j = i % 8; vo = voiced(t)
+        pat = PATS[(k + i // 8) % len(PATS)]
         if j == 0:
             guitar(hz(ch[0], key), t, g * v, pan - 0.08)
         elif vo and j in (1, 4, 7):
@@ -249,12 +255,13 @@ agent(W('skill', 'night', 'the night', 0.1), 'D', 0.034)
 nv = E_('skill', 'night', 1.0)
 roll(ASUS, nv, 'D', 0.048); guitar(hz(61, 'D'), nv + 1.3, 0.04, 0.0)
 
-# 4. Three findings: the agent reads Anil's change, and its review comes in; a tick for each of the two things that pass; a knock for
-#    each finding's card; the sheet, with what the checks couldn't say; a low knock for "asked"; the email column counted, a tick a
-#    row, softer after the first; the agent's sign as it reads finding 3's rule and drafts its check; a note home as the draft passes
+# 4. Three findings: the agent's review comes in; a tick for each of the two things that pass; a knock for each finding's card; the
+#    sheet, with what the checks couldn't say; a low knock for "asked"; the email column counted, a tick a row, softer after the first;
+#    the agent's sign as it drafts finding 3's check (since 4 November 2026 not also as it reads Anil's change, four seconds after the
+#    last, as it counts the column and as it reads the rule: three times in nine seconds); a note home as the draft passes
 #    on every row; "who decides", the flute falling 3-2 and stopping; F sharp minor into People decide
 r0 = S0('review')
-agent(r0 + 0.4, 'D'); knock(r0 + 1.95, 0.022, 0.2, 280)
+knock(r0 + 1.95, 0.022, 0.2, 280)
 two = W('review', 'reviews', 'Two things')
 tick(two + 0.55, 0.013, 0.0); tick(two + 0.95, 0.013, 0.0)
 for i in range(3):
@@ -264,9 +271,7 @@ knock(W('review', 'one', 'asked', -0.15), 0.02, -0.4, 190)
 cn = W('review', 'tally', 'counts')
 for i in range(7):
     tick(cn + 1.5 * i / 7 + 0.08, 0.012 * (1 if i < 3 else 0.7), -0.3)
-agent(W('review', 'tally', 'look like', 0.8), 'D')
 knock(G('review', 'rule', 0.25), 0.02, 0.3, 280)
-agent(W('review', 'rule', 'only its own', -0.3), 'D')
 agent(G('review', 'draft', -0.1), 'D')
 rw = W('review', 'draft', "row's")
 tick(rw + 0.05, 0.013, 0.1); guitar(hz(62, 'D'), rw + 0.05, 0.045, 0.1)
@@ -274,16 +279,16 @@ hl = E_('review', 'draft')
 decide([hl, hl + 0.5], 'D', last=1.8, g=0.034)
 roll(FSM7D, hl + 1.3, 'D', 0.046)
 
-# 5. People decide: the agent's sign as it marks two classes "not sure"; a knock for the tag over the two codes, and for the grey
-#    question; the checklist's step slid in; the agent drafts the stricter class and asks; Anil's answer typed, the flute falling home
+# 5. People decide: the agent marks two classes "not sure"; a knock for the tag over the two codes, and for the grey question; the
+#    checklist's step slid in; the agent drafts the stricter class and asks (since 4 November 2026 without its sign, here seven and 25
+#    seconds after the last); Anil's answer typed, the flute falling home
 #    under G and D; a highlighter as the class changes; the sheet filled, the three approvals, the flute falling a note with each, and
 #    their stamps; the sheet's own stamp, signed; the list in the advisers' tray, and the phone lifted; air as the gold threads are
 #    drawn; G into Governed, too
-agent(W('decides', 'unsure', "wasn't sure", -0.1), 'D')
 knock(W('decides', 'keys', 'long codes', -0.05), 0.018, 0.2, 300)
 knock(G('decides', 'doubt', 0.1), 0.02, 0.4, 210)
 slide(W('decides', 'doubt', 'But when', -0.2), 0.8, 0.014, 0.2)
-agent(W('decides', 'doubt', 'draft the', -0.1), 'D'); knock(W('decides', 'doubt', 'and ask', -0.05), 0.022, 0.2, 280)
+knock(W('decides', 'doubt', 'and ask', -0.05), 0.022, 0.2, 280)
 cf = W('decides', 'confirms', 'confirms')
 knock(cf - 0.25, 0.018, 0.25, 300); keys(cf, 11, 0.014, 0.25)
 decide([W('decides', 'confirms', 'a course', -0.1), W('decides', 'confirms', 'not a', -0.1), W('decides', 'confirms', 'person', -0.1)], 'D', last=2.0)
@@ -330,7 +335,8 @@ roll(GM7, ag, 'D', 0.046); roll(ASUS, ag + 1.4, 'D', 0.04)
 
 # 7. Only what's written: the agent's sign as it reads the checklist; on policy 12's last line it starts, finds nothing to check, and
 #    its low note comes instead of the rest; Anil's question in pencil, and its arrow; the flute as data governance approves a change
-#    to the checklist, a knock for the tag; the agent's sign as the next review follows the steps; knocks for "read it" and "question
+#    to the checklist, a knock for the tag, and for the next review following the steps (since 4 November 2026 without the agent's
+#    sign, 23 seconds after the last); knocks for "read it" and "question
 #    it", and the flute falls home on "overrule it"; F sharp minor, the night's, into That night
 agent(W('written', 'plain', 'follow', -0.2), 'D')
 rhodes(hz(64, 'D'), W('written', 'care', 'No agent'), 0.036, -0.3, 1.2); cant(E_('written', 'care', -0.3), 'D', 0.04)
@@ -339,7 +345,7 @@ stroke(arg, 0.35, 0.012, 0.2); pencil(arg + 0.4, 1.0, 0.013, 0.2)
 dg = W('written', 'change', 'data governance')
 decide([dg - 0.2, dg + 0.3], 'D', deg=(2, 0), last=1.6, g=0.036); knock(dg + 0.05, 0.022, -0.2, 280)
 nx = W('written', 'change', 'the next')
-knock(nx, 0.02, 0.4, 300); agent(nx + 0.1, 'D')
+knock(nx, 0.02, 0.4, 300)
 knock(W('written', 'trust', 'read,', -0.05), 0.02, -0.4, 300); knock(W('written', 'trust', 'question', -0.05), 0.02, -0.4, 280)
 ov = W('written', 'trust', 'overrule', -0.1)
 knock(ov + 0.05, 0.02, -0.4, 260); decide([ov, ov + 0.35, ov + 0.7], 'D', last=1.8, g=0.038)

@@ -460,3 +460,13 @@ dialog.clip .player{border-radius:0;border-left:0;border-right:0;box-shadow:none
   .doc-nav:not(.js) .doc-toc{padding:14px 16px;max-height:none}
 }
 @media (max-width:640px){.doc-nav-btn,.doc-toc{padding-left:16px;padding-right:16px}}
+/* seek.js: back and forward 10 seconds; the cue on the side of the film that was tapped, and its line for screen readers */
+.player canvas{touch-action:manipulation}
+.bar .seek-btn{padding:8px 11px;font-variant-numeric:tabular-nums}
+.seek-cue{position:absolute;width:34%;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;opacity:0;transition:opacity .25s ease;color:#fff;font-weight:700;font-size:20px}
+.seek-cue span{background:rgba(8,12,20,.66);padding:10px 18px;border-radius:999px;font-variant-numeric:tabular-nums}
+.seek-cue.l{left:0;border-radius:0 50% 50% 0/0 50% 50% 0;background:linear-gradient(90deg,rgba(8,12,20,.22),rgba(8,12,20,0))}
+.seek-cue.r{right:0;border-radius:50% 0 0 50%/50% 0 0 50%;background:linear-gradient(270deg,rgba(8,12,20,.22),rgba(8,12,20,0))}
+.seek-cue.on{opacity:1;transition-duration:.08s}
+.seek-said{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.seek-cue{transition:none}}

@@ -1833,7 +1833,7 @@ AG_PLACES.swBook=c=>{const B=SW_BOOK;let g=c.createLinearGradient(0,0,0,H);g.add
    Painted in figure space (people.js): a hat's paint draws over the head, inside the head's picture ([160, 250] to [440, 560]); a
    top's paint draws over the body, before its near arm and its neck. A shawl is both: the head's part frames the face and leaves the
    throat open; the body's part falls over the far shoulder and behind the near arm, meeting the head's part at figure y 560. */
-function sw_turban(col){return(c,P)=>{const sh=cc=>{cc.moveTo(400,358);cc.bezierCurveTo(416,328,414,288,380,264);cc.bezierCurveTo(344,242,262,242,220,264);
+function sw_turban(col){return(c,P)=>{const sh=cc=>{cc.moveTo(400,358);cc.bezierCurveTo(416,328,414,288,380,264);cc.bezierCurveTo(344,248,262,248,220,264);
       cc.bezierCurveTo(186,284,176,342,190,404);cc.bezierCurveTo(222,394,256,382,290,370);cc.bezierCurveTo(330,356,370,352,400,358);cc.closePath();};
   // the turban's soft shadow on the brow, under its edge
   c.save();ag_shape(c,AG_F.head);c.clip();c.strokeStyle=rgba(ag_dk(P.skin,0.55),0.28);c.lineWidth=14;c.filter="blur(5px)";c.beginPath();c.moveTo(196,410);c.bezierCurveTo(240,396,330,366,400,368);c.stroke();c.restore();

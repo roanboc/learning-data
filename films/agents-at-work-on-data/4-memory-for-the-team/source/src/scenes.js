@@ -154,8 +154,9 @@ scene("approach",(ctx,S,t,sc)=>{
       const A=[560,540],Bp=[1360,540],fileA=ag_in(tt,T.team-0.2,0.6),fixed=ag_in(tt,T.everyAgent+0.6,0.5);
       tm_agent(c,A[0],A[1],72,tt,{label:"Jun's agent",core:0.8,a:ag_in(tt,T.chat-0.4,0.6)});tm_agent(c,Bp[0],Bp[1],72,tt+1.3,{label:"A colleague's agent",core:0.7,a:ag_in(tt,T.colleague-0.3,0.6)});
       ag_roomLight(c,1);
-      // far less at stake, but lost the same way: the crew rooms of 1974, framed, the warning pinned in one room
-      tm_crewPic(c,660,190,600,338,{a:ag_in(tt,T.uni+0.8,0.6)*(1-ag_in(tt,T.chat-0.5,0.5))});
+      // far less at stake, but lost the same way: the crew rooms of 1974, framed, the warning pinned in one room; gone before Jun's
+      // agent comes in, so the two are never seen through each other
+      tm_crewPic(c,660,190,600,338,{a:ag_in(tt,T.uni+0.8,0.6)*(1-ag_in(tt,T.chat-1.0,0.5))});
       // the chat, and what it learned, with Jun's agent only
       const sa=ag_in(tt,T.chat-0.1,0.5);if(sa>0)tm_session(c,90,120,470,210,{a:sa,k:Math.min(1,ag_spr(tt,T.chat-0.1,0.5)),sub:"one chat",draw:x=>{
         ag_T(x,"LESSON",120,236,{w:700,size:28,ls:3,col:AG.violet});ag_lines(x,["Read status as it was","on census day"],120,280,38,{w:600,size:30});}});

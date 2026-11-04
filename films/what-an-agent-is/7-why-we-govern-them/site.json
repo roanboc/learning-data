@@ -1,0 +1,27 @@
+{
+  "kicker": "Governing agents",
+  "kicker_es": "Gobernar agentes",
+  "title_es": "Por qué los gobernamos",
+  "h1": "Why we govern them: because they're capable, not bad",
+  "h1_es": "Por qué los gobernamos: porque son capaces, no malos",
+  "lead": "When the census-day count fails at night, Jun's agent finds the cause, and the team wonders what more it could do. It's capable, convincing and can't answer for itself, so Yusuf asks what's asked of any colleague: who answers for it, under what name, what it may touch, who checks its work.",
+  "lead_es": "Cuando el conteo del día del censo falla de noche, el agente de Jun encuentra la causa, y el equipo se pregunta qué más podría hacer. Es capaz, convincente y no rinde cuentas; Yusuf pregunta lo de cualquier colega: quién responde por él, con qué nombre trabaja, qué puede tocar, quién lo revisa.",
+  "description": "A film about why agents are governed: Japan's first high-speed line in 1964, where the limits were built into the line because the trains were fast, not because they were bad; why an agent's skill, its sureness and its lack of accountability mean every agent needs an owner, an identity, limits and review; an owner who answers for it and can stop it; a name of its own, so its work can be seen and stopped; rights from a role, the fewest that do the job, and a written mandate its owner signs, which can be lowered at any time and which the agent can never raise; a person who checks its evidence, agents that never approve, and a second person for every change to production; the four rules an agent has beside everything it shares with any colleague; and the references that name them.",
+  "description_es": "Una película sobre por qué se gobiernan los agentes: la primera línea de alta velocidad de Japón, en 1964, donde los límites se pusieron en la vía porque los trenes eran rápidos, no porque fueran malos; por qué la capacidad de un agente, su seguridad al responder y que no rinda cuentas hacen que todo agente necesite un dueño, una identidad, límites y revisión; un dueño que responde por él y puede detenerlo; un nombre propio, para ver su trabajo y poder detenerlo; permisos de un rol, los mínimos para la tarea, y un mandato escrito que firma su dueño, que se puede bajar en cualquier momento y que el agente nunca puede subir; una persona que revisa su evidencia, agentes que nunca aprueban, y una segunda persona para cada cambio en producción; las cuatro reglas propias de un agente, junto a todo lo que comparte con cualquier colega; y las referencias que les dan nombre.",
+  "card": "Jun's agent could do more. First it needs an owner, a name of its own, limits it can't raise, and a person who checks its work.",
+  "card_es": "El agente de Jun podría hacer más. Antes necesita un dueño, un nombre propio, límites que no puede subir y quien revise su trabajo.",
+  "chapters_es": {
+    "line": "Los límites, en la vía",
+    "three": "Capaz, convincente, sin rendir cuentas",
+    "owner": "Un dueño",
+    "identity": "Un nombre propio",
+    "limits": "Límites que no puede subir",
+    "review": "Una persona revisa",
+    "rules": "Como cualquier colega",
+    "capable": "Porque son capaces"
+  },
+  "past": ["Japan's first high-speed line, 1964", "The limits were built into the line because the trains were fast, not because they were bad."],
+  "past_es": ["La primera línea de alta velocidad de Japón, 1964", "Los límites se pusieron en la vía porque los trenes eran rápidos, no porque fueran malos."],
+  "next_h": "You've seen why every agent needs an owner, a name of its own, limits it can't raise and a person who checks its work. Next: what agents tell us about ourselves.",
+  "next_h_es": "Viste por qué todo agente necesita un dueño, un nombre propio, límites que no puede subir y una persona que revise su trabajo. Después: qué nos dicen de nosotros los agentes."
+}

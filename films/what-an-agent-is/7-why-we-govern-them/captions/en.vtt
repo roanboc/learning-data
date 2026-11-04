@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:03.370
+Japan, 1964.
+
+00:00:04.670 --> 00:00:08.959
+The national railway is opening a new line from Tokyo to Osaka:
+
+00:00:09.159 --> 00:00:14.501
+the world's first high-speed railway, built for trains at 210 kilometres an hour.
+
+00:00:16.401 --> 00:00:20.261
+At that speed, a train covers a kilometre in seventeen seconds.
+
+00:00:21.761 --> 00:00:27.544
+Its driver can't read the signals beside the track in time, and the train can't slow down at once.
+
+00:00:29.244 --> 00:00:39.787
+A missed signal could cost lives: in Tokyo in 1962, a train ran past a red one, and in the crashes that followed, 160 people died.
+
+00:00:42.087 --> 00:00:46.692
+Passengers' lives would rest on one person seeing every signal in time.
+
+00:00:48.392 --> 00:00:49.780
+Something had to change.
+
+00:00:51.680 --> 00:00:55.159
+So the railway's engineers build the limits into the line itself.
+
+00:00:56.659 --> 00:01:03.373
+A signal inside the driver's cab shows the speed allowed, and if the train goes faster, it slows itself down.
+
+00:01:05.673 --> 00:01:08.617
+One control room watches every train on the line.
+
+00:01:10.317 --> 00:01:13.277
+And the driver still drives, and answers for the train.
+
+00:01:14.777 --> 00:01:15.555
+It worked.
+
+00:01:16.255 --> 00:01:20.002
+For passengers, the trip fell from six and a half hours to four.
+
+00:01:21.902 --> 00:01:28.707
+And since that first day, no passenger on Japan's high-speed lines has died in a derailment or a collision.
+
+00:01:31.007 --> 00:01:33.590
+The limits weren't there because the trains were bad.
+
+00:01:34.290 --> 00:01:36.528
+They were there because the trains were fast.
+
+00:01:38.428 --> 00:01:43.817
+At the university, Jun's agent is fast too, and no one can watch its every step.
+
+00:01:45.317 --> 00:01:47.564
+So we build its limits into how it works.
+
+00:01:49.064 --> 00:01:50.553
+Then we can let it do more.
+
+00:01:57.753 --> 00:02:04.055
+Jun's agent helps with the census-day count: the number of students the university sends the government.
+
+00:02:05.755 --> 00:02:07.285
+A plain job counts them.
+
+00:02:08.385 --> 00:02:13.444
+When it fails at night, the agent finds the cause in test, and people approve its fix.
+
+00:02:15.744 --> 00:02:21.938
+Now the team wonders whether it could do more: work for all of them, or even change the pipeline itself.
+
+00:02:23.638 --> 00:02:27.947
+An agent is capable: it knows more than any junior, and works faster.
+
+00:02:29.047 --> 00:02:32.834
+It's convincing: it sounds sure, and feeling sure is not knowing.
+
+00:02:33.934 --> 00:02:37.020
+And it's unaccountable: it can't answer for what it does.
+
+00:02:37.720 --> 00:02:39.936
+The agent acts; a person answers.
+
+00:02:41.436 --> 00:02:47.275
+So Yusuf, who leads data governance, asks what the university asks of any new colleague.
+
+00:02:48.375 --> 00:02:49.519
+Who answers for it?
+
+00:02:50.519 --> 00:02:52.039
+Under what name does it work?
+
+00:02:53.039 --> 00:02:54.069
+What may it touch?
+
+00:02:55.069 --> 00:02:56.403
+And who checks its work?
+
+00:02:57.103 --> 00:02:59.687
+An owner, an identity, limits and review.
+
+00:03:03.887 --> 00:03:04.904
+First, an owner.
+
+00:03:06.004 --> 00:03:11.677
+An agent can't answer for what it does, so a person must, as the driver answered for the train.
+
+00:03:12.977 --> 00:03:15.348
+Jun set this agent up, so he owns it.
+
+00:03:17.048 --> 00:03:20.652
+He decides what it's for, reads what it did, and can stop it.
+
+00:03:22.552 --> 00:03:25.371
+If he moves on, he hands it over, or it stops.
+
+00:03:27.671 --> 00:03:32.987
+And because an agent in the wrong hands does harm faster, not just anyone may own one.
+
+00:03:36.987 --> 00:03:39.751
+Second, an identity: the name it works under.
+
+00:03:40.851 --> 00:03:43.612
+Today, Jun's agent works under Jun's name.
+
+00:03:45.112 --> 00:03:49.858
+While it's learning, with read-only tools and a sandbox for its drafts, that's fine.
+
+00:03:51.558 --> 00:03:55.510
+But its work looks like his, and to stop it, you'd have to stop Jun.
+
+00:03:57.410 --> 00:04:00.102
+To work for the team, it needs a name of its own.
+
+00:04:02.002 --> 00:04:09.329
+Then, as the control room saw each train, the team sees everything it does, and can stop it without stopping anyone else.
+
+00:04:14.329 --> 00:04:15.292
+Third, limits.
+
+00:04:16.392 --> 00:04:19.559
+An agent has no rights of its own, only its role's.
+
+00:04:21.059 --> 00:04:23.423
+A train can only go where its rails go.
+
+00:04:24.723 --> 00:04:27.176
+An agent can go wherever its tools reach.
+
+00:04:28.876 --> 00:04:37.099
+So each tool gets the fewest rights: read-only when reading is enough, writing only drafts in its sandbox, and no sensitive data.
+
+00:04:38.599 --> 00:04:40.783
+How much it may do alone is our choice.
+
+00:04:41.883 --> 00:04:43.369
+Its skill doesn't decide it.
+
+00:04:44.869 --> 00:04:50.260
+It's written down as a mandate its owner signs: which tasks, where, and how each is checked.
+
+00:04:52.360 --> 00:04:58.797
+Like the speed in the cab, it's set from outside, it can be lowered at any time, and the agent can never raise it.
+
+00:05:03.197 --> 00:05:04.265
+Fourth, review.
+
+00:05:05.365 --> 00:05:10.921
+A person checks the agent's work, and because it sounds sure, checks its evidence, not its tone.
+
+00:05:12.621 --> 00:05:19.181
+It never approves its own work, and no agent approves anyone's: an agent's review is only for reference.
+
+00:05:20.881 --> 00:05:23.086
+No train turns its own signal green.
+
+00:05:24.986 --> 00:05:31.132
+In test, away from the real work, an agent may do agreed tasks alone, and report what it did.
+
+00:05:33.032 --> 00:05:39.925
+But every change to production, the work people rely on, is checked by its owner and approved by a second person,
+
+00:05:40.125 --> 00:05:41.900
+the same as people's changes.
+
+00:05:45.900 --> 00:05:52.122
+In most ways, an agent is treated like any colleague: a role, the same rules, the same security.
+
+00:05:53.822 --> 00:05:55.177
+Four rules are special.
+
+00:05:56.477 --> 00:05:59.053
+It has no rights of its own, only a role's.
+
+00:06:00.153 --> 00:06:01.742
+It always has a human owner.
+
+00:06:02.842 --> 00:06:06.538
+It never approves its own work: agents are never approvers.
+
+00:06:07.638 --> 00:06:14.256
+And its autonomy is a written mandate that can be taken back, with a person approving every change to production.
+
+00:06:15.756 --> 00:06:17.814
+These ideas have names in the field:
+
+00:06:18.014 --> 00:06:22.735
+levels of autonomy set by the person's role, from Feng, McDonald and Zhang;
+
+00:06:22.935 --> 00:06:29.127
+ISO/IEC 42001; and NIST's AI Risk Management Framework.
+
+00:06:30.827 --> 00:06:32.873
+Series 3 and 4 put them to work.
+
+00:06:36.473 --> 00:06:44.516
+More than sixty years on, trains on that first line run at 285 kilometres an hour, and the limits are still built in.
+
+00:06:46.216 --> 00:06:47.892
+Not because the trains are bad.
+
+00:06:48.992 --> 00:06:50.182
+Because they are fast.
+
+00:06:51.882 --> 00:06:57.136
+We govern agents for the same reason: because they are capable, not because they are bad.
+
+00:06:59.436 --> 00:07:04.448
+With an owner, a name, limits and review, Jun's team can let its agent do more,
+
+00:07:04.648 --> 00:07:08.085
+and still trust the number the university sends the government.
+
+00:07:09.985 --> 00:07:12.555
+Next, what agents tell us about ourselves.
+
+00:07:13.655 --> 00:07:16.731
+Then, in series 2, Jun's agent goes to work.

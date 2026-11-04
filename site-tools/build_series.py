@@ -272,6 +272,8 @@ def films(S=FW):
         # the Pause and think questions: one per chapter it stops after, in the film's think pack
         think = WEB / "assets" / key / "think.en.js"
         nt = len(re.findall(r'[{,]q:"', think.read_text())) if think.exists() else 0
+        if think.exists() and (nt == 0 or nt != len(re.findall(r'[{,]\s*"?q"?\s*:', think.read_text()))):  # a quoted "q": counts none, and the page said "twelve"
+            sys.exit(f"{think.relative_to(ROOT)}: write each question as q:\"...\", unquoted, as the other packs do: it is how the film's page counts them")
         N = load_obj(src / "src" / "narration.js"); starts, sec = timing(src)
         out.append(dict(dir=d, key=key, title=meta["title"], site=site, labs=nl, quiz=nq, think=nt, len=minutes(sec), sec=sec, starts=starts,
                         chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=number(d, i), series=S))

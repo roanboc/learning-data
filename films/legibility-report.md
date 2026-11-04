@@ -85,6 +85,9 @@
 | It feels like understanding | 265 | 0% | 0 | 30.7 | Drawn to the rule |
 | More than a junior | 263 | 0% | 0 | 30.0 | Drawn to the rule |
 | Minds that change | 190 | 0% | 0 | 30.0 | Drawn to the rule |
+| Ethics we can't read, accountability it can't hold | 242 | 0% | 0 | 30.3 | Drawn to the rule |
+| Why we govern them | 252 | 0% | 0 | 30.0 | Drawn to the rule |
+| What they tell us about ourselves | 288 | 0% | 0 | 32.0 | Drawn to the rule |
 | Many agents, and what emerges | 215 | 0% | 0 | 30.0 | Drawn to the rule |
 <!-- /films -->
 

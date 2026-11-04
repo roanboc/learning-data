@@ -18,6 +18,8 @@ const fill=(s,o)=>String(s).replace(/\{(\w+)\}/g,(m,k)=>o[k]!=null?o[k]:m);
 // the intro keeps its answers under .ans, A Sharper Sketch at the top level; only numbered keys are answers
 const stats=p=>{const s=store(p),q=s.get("quiz",{})||{},a=q.ans||q,ans=Object.keys(a).filter(k=>/^\d+$/.test(k)&&a[k]).map(k=>a[k]),v=s.get("visited",[]);
   return{watched:!!s.get("watched",false),labs:Array.isArray(v)?v.length:0,n:ans.length,ok:ans.filter(x=>x.ok).length};};
+// a visitor may hold progress on labs and scenarios that were since removed: never count more than there are
+const cap=(st,nl,nq)=>{st.labs=Math.min(st.labs,nl);st.n=Math.min(st.n,nq);st.ok=Math.min(st.ok,st.n);return st;};
 const path=document.querySelector(".path[data-text]");
 // the home page used to hold the labs (#explore, #explore-refine) and the scenarios (#practise)
 const old=location.hash.match(/^#(explore|practise)(?:[-/](\w+))?$/);
@@ -29,9 +31,9 @@ function paint(){
     const put=(i,done,txt)=>{if(!li[i])return;li[i].classList.toggle("done",!!done);if(txt)li[i].querySelector("span:last-child").textContent=txt;};
     const fs=(path.dataset.series||"").split(" ").filter(Boolean),nw=fs.filter(p=>stats(p).watched).length;
     if(fs.length)put(0,nw>=fs.length,nw?fill(T.films,{n:nw}):null);else put(0,st.watched,st.watched?T.watched:null);
-    put(1,st.labs>=NL,st.labs?fill(T.labs,{n:st.labs}):null);put(2,st.n>=NQ,st.n?fill(T.quiz,st):null);}
+    cap(st,NL,NQ);put(1,st.labs>=NL,st.labs?fill(T.labs,{n:st.labs}):null);put(2,st.n>=NQ,st.n?fill(T.quiz,st):null);}
   document.querySelectorAll("[data-progress]").forEach(el=>{const box=el.closest("[data-progress-text]");if(!box)return;
-    const T=JSON.parse(box.dataset.progressText),st=stats(el.dataset.progress),out=[];
+    const T=JSON.parse(box.dataset.progressText),st=cap(stats(el.dataset.progress),+el.dataset.labs||1/0,+el.dataset.quiz||1/0),out=[];
     if(st.watched)out.push(T.watched);
     if(st.labs&&el.dataset.labs)out.push(fill(T.labs,{n:st.labs,of:el.dataset.labs}));
     if(st.n&&el.dataset.quiz)out.push(fill(T.quiz,{n:st.n,of:el.dataset.quiz,ok:st.ok}));

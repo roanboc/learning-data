@@ -92,3 +92,20 @@ conceptual model that copies its term with `source:` (decision DEC-PRJ-11). A co
 hint, not a meaning. If the word isn't there, don't guess: ask its owner (*Who approves what*).
 Once they've decided, the meaning goes into the glossary first, then into the project, for every
 person and every agent to read.
+
+## Start from the plan
+
+Every job here starts from one page, written before you start by the person who gives you the
+job: the goal, what to read, the tools you may use, where you may write, what you must never do,
+a limit, and how the result will be checked. [`docs/plan.md`](docs/plan.md) says what each line is
+for.
+
+- **Use only the tools it names**, with the rights it gives them. If the job needs something it
+  doesn't name, stop and ask: don't go looking elsewhere, on the web or through another tool.
+- **Write its checks first**, as tests, before any model, and open them for review. Once a person
+  has approved them, only a person changes them (*What you must not do*).
+- **Stop at its limit.** When the rounds run out, stop, and report what's done, what isn't, and why.
+- **A question of meaning goes to its owner**, with the query and its result (*What words mean*).
+- **Report against the plan.** The pull request takes the plan line by line: how each line was
+  met, with the evidence (*Evidence*). The person who wrote the plan checks the work against it,
+  and a second person approves it before it reaches production (*Who approves what*).

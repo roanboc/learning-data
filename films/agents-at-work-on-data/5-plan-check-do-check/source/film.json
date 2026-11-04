@@ -1,0 +1,38 @@
+{
+  "key": "plan-check-do-check",
+  "title": "Plan, define the check, do, check",
+  "sub": "The fifth film of Agents at work on data, the second series on AI agents in data work: before an agent starts, a person sets the goal, what it reads, the tools it may use, what it must never do, and how its result will be checked; the agent builds, tests and documents, with evidence for every claim; a person checks it against the plan and answers for it; and each loop leaves something for the next.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, violet the model, orange the data coming back, green a check that passes, amber one that fails, or a loop. The scenes of Singapore, 1998 to 2003, are painted full-frame, matte and soft-lit, with the place and year on a tag.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "water",
+    "parade",
+    6.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ]
+  ],
+  "story": [
+    "water"
+  ],
+  "urgent": []
+}

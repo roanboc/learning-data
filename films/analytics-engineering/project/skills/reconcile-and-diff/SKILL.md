@@ -39,3 +39,13 @@ changed against the version before?
 
 The reconciliation table, the diff summary, and the query behind each line. The model's owner
 signs off, and the consumer when their contract changed.
+
+## Every split adds up to its total
+
+When a change splits a number people trust (by faculty, by level of study, by anything), the
+parts must add up to the whole. Write it as a test before you build the split: the parts' sum
+against the total already reconciled, and every row in exactly one part. A sum that comes up short
+is news: find the rows behind the difference, with a query that returns counts, not names, and ask
+the owner of the meaning where they belong (*Who approves what* in `AGENTS.md`). Don't drop them,
+and don't change the test to pass. The worked example is `examples/census-by-level/`, where 28
+exchange students had no level.

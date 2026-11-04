@@ -233,7 +233,7 @@ project/
 │                             approved, a file each; removed.md, those removed, and why
 ├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
 │                             a model, reconcile and diff, review metadata, sync the glossary,
-│                             review a pull request for governance
+│                             review for governance; and choose-the-skill, which picks one
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 

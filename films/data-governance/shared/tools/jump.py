@@ -112,7 +112,15 @@ for(let i=1;i<F.length;i++)for(const [k,c] of steps[i].cams){if(c.m<=MOVE||c.m>=
 const pair=(A,B)=>{const c=[],byKey=new Map();for(let i=0;i<A.length;i++){const p=A[i];if(!p.in)continue;const kk=p.k+"|"+p.key;let l=byKey.get(kk);if(!l)byKey.set(kk,l=[]);l.push(i);}
   for(let j=0;j<B.length;j++){const q=B[j];if(!q.in)continue;for(const i of byKey.get(q.k+"|"+q.key)||[]){const p=A[i];
     const d=Math.hypot(p.x-q.x,p.y-q.y);if(d<BIG)c.push([d,i,j]);}}
-  c.sort((x,y)=>x[0]-y[0]);const ua=new Set(),m=new Map();for(const [d,i,j] of c){if(ua.has(i)||m.has(j))continue;ua.add(i);m.set(j,i);}return m;};
+  c.sort((x,y)=>x[0]-y[0]);const ua=new Set(),m=new Map();for(const [d,i,j] of c){if(ua.has(i)||m.has(j))continue;ua.add(i);m.set(j,i);}
+  // then, among things of one name, two swap partners wherever that pairs them nearer in all: lines of the same words sliding more than
+  // half their spacing in a frame (a sheet coming up) would otherwise pair across, and one of them would seem to jump
+  const ds=(i,j)=>Math.hypot(A[i].x-B[j].x,A[i].y-B[j].y),groups=new Map();
+  for(const j of m.keys()){const kk=B[j].k+"|"+B[j].key;let l=groups.get(kk);if(!l)groups.set(kk,l=[]);l.push(j);}
+  for(const js of groups.values())for(let more=js.length>1;more;){more=false;
+    for(let u=0;u<js.length;u++)for(let v=u+1;v<js.length;v++){const j1=js[u],j2=js[v],i1=m.get(j1),i2=m.get(j2),d12=ds(i1,j2),d21=ds(i2,j1);
+      if(d12<BIG&&d21<BIG&&d12+d21<ds(i1,j1)+ds(i2,j2)-0.5){m.set(j1,i2);m.set(j2,i1);more=true;}}}
+  return m;};
 for(let i=1;i<F.length;i++)F[i].back=pair(F[i-1].things,F[i].things);
 const hop=(i,j)=>{const b=F[i]&&F[i].back,k=b&&b.get(j);if(k==null)return null;const p=F[i].things[j],q=F[i-1].things[k];return{k,d:Math.hypot(p.x-q.x,p.y-q.y),r:p.z/q.z};};
 for(let i=1;i<F.length;i++){if(steps[i].shot>=BIG||F[i].mix||F[i-1].mix)continue;const got=[];

@@ -367,7 +367,7 @@ scene("wrong",(ctx,S,t,sc)=>{
     // nothing goes in without a person; any entry can be corrected or removed, its history kept
     {at:T.person-0.4,place:"lab",keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
       tm_entry(c,420,120,1080,{fields:[["Lesson",TM_CENSUS],["Approved by","Mei Tanaka, registrar's office",AG.green],
-        ["History","14 April · proposed by Jun's agent, from a session"],[null,"15 April · approved by Mei Tanaka"]],hl:2,hlA:ag_in(tt,T.history,0.5),a:ag_in(tt,T.person-0.4,0.5)});
+        ["History","14 April · proposed from a session"],[null,"15 April · approved by Mei Tanaka"]],hl:2,hlA:ag_in(tt,T.history,0.5),a:ag_in(tt,T.person-0.4,0.5)});
       tm_pillAt(c,960,96,"nothing goes in without a person",tt,T.person,null);
       tm_pillAt(c,820,760,"Correct",tt,T.corrected,null,{icon:"draft"});tm_pillAt(c,1100,760,"Remove",tt,T.removed,null);}},
     // a file from outside the team, with a hidden line; the agent reads it and proposes it

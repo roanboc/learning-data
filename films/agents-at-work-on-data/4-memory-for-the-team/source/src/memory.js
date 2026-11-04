@@ -156,9 +156,9 @@ function tm_sheet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return nu
     ctx.fillStyle="rgba(60,50,40,0.1)";ctx.fillRect(x+12,yy+rowH-1,w-24,1.2);yy+=rowH;});
   ctx.restore();return{x,y,w,h};}
 // a session's record: one line for each thing that happened, with its time; the sample rows masked; long, so it scrolls (o.scroll px)
-const TM_LOG=[["09:12","Jun asked: students on census day?"],["09:12","Read the student table"],["09:13","Ran a query"],["09:13","Sample rows:"],["","mask","Arts · withdrew 9 May"],
-  ["","mask","Health · withdrew 21 May"],["","mask","Business · withdrew 2 June"],["09:14","Answered: 18,375"],["09:20","Jun: Mei says they count"],["09:21","Counted again: 18,412"],
-  ["09:22","Jun: thank you"],["09:23","Read the census report"],["09:24","Ran the reconciliation"],["09:26","Sample rows:"],["","mask","Arts · withdrew 30 April"],["","mask","Engineering · withdrew 12 May"]];
+const TM_LOG=[["09:12","Jun asked: students on census day?"],["09:12","Read the student table"],["09:13","Ran a query"],["09:13","Sample rows:"],["","mask","Arts · withdrew 2 April"],
+  ["","mask","Health · withdrew 7 April"],["","mask","Business · withdrew 9 April"],["09:14","Answered: 18,375"],["09:20","Jun: Mei says they count"],["09:21","Counted again: 18,412"],
+  ["09:22","Jun: thank you"],["09:23","Read the census report"],["09:24","Ran the reconciliation"],["09:26","Sample rows:"],["","mask","Arts · withdrew 1 April"],["","mask","Engineering · withdrew 13 April"]];
 function tm_record(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ag_box(ctx,x,y,w,h,24,{edge:AG.violet,edgeA:0.3});ag_label(ctx,x+28,y+50,"Session record",{col:AG.violet});ag_T(ctx,o.sub||"14 April",x+w-28,y+50,{w:600,size:28,align:"right",col:AG.mut});
   ctx.save();ctx.beginPath();ctx.rect(x+6,y+74,w-12,h-80);ctx.clip();const n=o.n==null?TM_LOG.length:o.n,sc=o.scroll||0;

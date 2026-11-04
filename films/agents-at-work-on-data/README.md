@@ -11,6 +11,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Memory: from one chat to the team](https://data.learn-all.org/agents-at-work-on-data/memory-for-the-team/) | Memory for the team | 7½ min | 7 | 4 questions | [script](4-memory-for-the-team/script.md) · [source](4-memory-for-the-team/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

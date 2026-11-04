@@ -6,7 +6,7 @@
 # soon after printing, the opening's own place and time.
 #  - The cittern plays the pieces, and the years. Each year on the oak rail has its own note, rising with time, so the road sounds as it
 #    is drawn: 1958 is A, 1969 C sharp, 1986 E, 2012 the A above, 2017 C sharp, 2020 E, 2022 F sharp and 2024 the A at the top. At each
-#    chapter's turn the rail leaves one year and arrives at the next, and the two notes say so.
+#    chapter's turn the rail leaves one year and arrives at the next, and a chord rolls up to the new year's note.
 #  - The serpent is the long work: one low note held under each long stretch of time (four hundred years of printing, twenty years of
 #    small networks, "long work"), and under the problem in the opening.
 #  - The film's mark: pieces plucked one at a time, far apart, then struck together as a chord where they come together (printing's
@@ -15,7 +15,9 @@
 # The rules the series keeps:
 #  - Music only from time to time (the author's rule, 20 October 2026): under the opening story, and after it only at a chapter's turn,
 #    under a moment on screen or in a pause without words; never a bed under the voice. tools/quiet.py checks that after the opening
-#    no chapter has music for more than half its length, or for 12 seconds without a break. No urgent pulse: film.json lists none.
+#    no chapter has music for more than half its length, or for 12 seconds without a break, that it comes in at most once every 10
+#    seconds on average, that no figure comes back soon after itself, and that the music and the effects sit as low as the governance
+#    films' (the author's review, 4 November 2026). No urgent pulse: film.json lists none.
 #  - Nothing trembles, pulses or beats: each note is one string or one player, with no vibrato and no chorus (a cittern's courses are
 #    pairs of strings in unison; here the pair is tuned exactly, so it can't beat), and every chord is tuned pure (just intonation, see
 #    hz()). B is never sounded with D or F sharp, whose intervals aren't pure in this tuning.
@@ -56,8 +58,10 @@ A3, Cs4, D4, E4, Fs4, Gs4, A4, B4, C5, Cs5, D5, E5, Fs5, A5 = 57, 61, 62, 64, 66
 YN = {1958: A3, 1969: Cs4, 1986: E4, 2012: A4, 2017: Cs5, 2020: E5, 2022: Fs5, 2024: A5}
 
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
-# serpent low and quiet; the effects about 12 dB under the music (FX scales them all)
-CL, SL, FX = 0.17, 0.05, 4.5
+# serpent low and quiet; the effects about 12 dB under the music (FX scales them all). After the author's review (4 November 2026:
+# "glitches"), the cittern is 4 dB lower and the serpent 2 dB, so the music's loud moments sit as low as the governance films' (tools/
+# quiet.py measures it), and the effects 6 dB lower, as soft as theirs
+CL, SL, FX = 0.108, 0.04, 2.25
 
 # a small room of wood and plaster round the players, ringing on for about a second and a half
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.4)).astype(np.float32))(np.arange(int(1.4 * SR)) / SR)
@@ -126,11 +130,10 @@ def year(yr, s, g=0.5, ring=1.6):
     """a year on the rail: its own note"""
     cit(YN[yr], s, g, ring=ring)
 def turn(sid, old, new, below, arrive=2.3, g=0.5):
-    """a chapter's turn: the rail leaves the last chapter's year, its note plucked softly as it moves (from 0.7 s), and arrives at the
-    new one (at 2.3 s), the chord rolled up to the new year's note"""
+    """a chapter's turn: the rail leaves the last chapter's year (from 0.7 s) and arrives at the new one (at 2.3 s), the chord rolled up
+    to the new year's note. The year it leaves isn't plucked any more: with it, each turn played two figures a second apart, and the
+    music came too often (tools/quiet.py, 4 November 2026)"""
     s0 = S0(sid)
-    if old:
-        year(old, s0 + 0.72, g * 0.55, ring=1.0)
     roll(tuple(below) + (YN[new],), s0 + arrive - 0.12 * len(below), 0.12, g, ring=1.7)
 def passed(s, g=0.5):
     """a check that passes: two notes rising a fourth, E to A"""
@@ -214,13 +217,21 @@ def dial(s, g=0.006, pan=0.0, n=3, step=0.07):
     for i in range(n):
         tap(s + i * step + 0.02 * R1.uniform(), g * (1 - 0.15 * i), pan)
 def riffle(s, sec, g=0.008, pan=0.0, rate=30.0, lo=500, hi=1900, swell=True):
-    """many small flicks at random, like paper or cards riffled, swelling in and fading out"""
-    n = int(sec * rate); ts = np.sort(R1.uniform(0, sec, n))
-    for t0 in ts:
-        e = np.sin(np.pi * t0 / sec) if swell else 1.0
-        x = tt(0.03); X(filt(noise(0.03)[:len(x)], 'band', (lo, hi)) * np.exp(-x * 140), s + t0, g * FX * e * R1.uniform(0.5, 1.0), pan + R1.uniform(-0.15, 0.15))
+    """paper or cards riffled, many at once: one soft texture, placed as one sound. A bed of filtered noise that flutters as the sheets
+    pass (faster for a higher rate, up to 12 times a second), with a few flicks standing out of it, at most eight a second, each with a
+    2.5 ms attack; it swells in and fades out. Played as separate grains, up to sixty a second, each starting at full strength, it
+    sounded like crackle (the author's review, 4 November 2026)"""
+    n = int(sec * SR); x = np.arange(n) / SR
+    fl = filt(R1.standard_normal(n + SR // 10).astype(np.float32), 'low', min(12.0, 0.4 * rate))[SR // 10:]
+    fl = 0.65 + 0.35 * fl / max(1e-9, float(np.abs(fl).max()))
+    out = 0.55 * filt(noise(sec + 0.05)[:n], 'band', (lo, hi)) * fl
+    for t0 in np.sort(R1.uniform(0, max(0.01, sec - 0.05), min(int(sec * 8), int(sec * rate)))):
+        i = int(t0 * SR); j = min(n, i + int(0.04 * SR)); u = np.arange(j - i) / SR
+        out[i:j] += filt(noise(0.05)[:j - i], 'band', (lo, hi)) * np.minimum(1, u / 0.0025) * np.exp(-u * 120) * R1.uniform(0.5, 1.0)
+    e = np.sin(np.pi * x / sec) if swell else np.minimum(1, x / 0.08) * np.minimum(1, (sec - x) / 0.08)
+    X(filt((out * e).astype(np.float32), 'low', 2000), s, g * FX, pan)
 def keys(s, n, g=0.008, pan=0.0, step=0.13):
-    """a few keys typed, the first two at g and the rest softer"""
+    """a few keys typed, the first two at g and the rest softer; at most about eight a second"""
     for i in range(n):
         tap(s + i * step + 0.04 * R1.uniform(), g if i < 2 else g * 0.6, pan)
 def hum(s, sec, g=0.006, f=110.0):
@@ -275,11 +286,12 @@ whoosh(wl, 1.2, 0.007, px(200), px(1700))
 cit(E4, will + 0.1, 0.5, ring=2.4)
 cit(A3, four + 0.4, 0.5, ring=2.6); cit(Cs4, four + 0.62, 0.32, ring=2.2)
 ser(A2, four, oc('clay', 1.2), 0.75)
-# Bi Sheng's clay: a piece made for each character, one after another; A as the first comes
+# Bi Sheng's clay: a piece made for each character, one after another; A as the first comes. Ten knocks for the pieces as they appear,
+# not twenty-two: at seven a second they ran into a patter
 cl0, each = oc('clay'), ow('clay', 'each character')
 cit(A3, cl0 + 0.25, 0.42, ring=2.2)
 line([(ow('clay', 'piece'), E4), (each, Cs4), (each + 0.9, E4)], 0.36, ring=1.6)
-nclay = 22
+nclay = 10
 for k in range(nclay):
     t0 = cl0 + (each - cl0 + 1.2) * (k + 0.5) / nclay + 0.05 * R1.uniform(-1, 1)
     clay(t0, 0.012 if k < 3 else 0.006 * R1.uniform(0.6, 1.0), px(420 + 30 * (k % 6)))
@@ -355,8 +367,8 @@ ser(A2, ti + 0.05, E('story') - 0.2, 0.8, rel=1.0)
 
 # 2. A machine that learns: the turn, the rail back to 1958, A at the bottom of the road. The perceptron is shown to reporters, the
 #    flashbulbs; it hums as it starts. Each trial: a card shown, a lamp for its guess, right or wrong, and a dial nudged when wrong; the
-#    rush of the next forty-three; the fiftieth, right: the check that passes, E to A. The newspaper: walk, talk, conscious, magic's
-#    bright fourth. 1969: no straight line splits them; the rail moves on to 1969, C sharp, over the serpent's F sharp; the money goes
+#    rush of the next forty-three; the fiftieth, right: the check that passes, E to A. The newspaper: walk, talk, conscious, marked
+#    with a pencil, no music (the check has just played). 1969: no straight line splits them; the rail moves on to 1969, C sharp, over the serpent's F sharp; the money goes
 #    elsewhere, the coins away, and the machine goes quiet
 lw = lambda lid, word, off=0: W('learns', lid, word, off)
 lc = lambda lid, off=0: G('learns', lid, off)
@@ -382,7 +394,6 @@ relay(tc + 0.46, 0.008, px(560)); knock(tc + 0.64, 0.010, px(560), 300)
 passed(lw('fifty', 'tell them apart', -0.15), 0.5)
 paper(lw('paper', 'newspaper', -0.2), 0.010, px(1300), 0.6)
 pencil(lw('paper', 'walk'), 0.005, px(1300), 0.5)
-magic(lw('paper', 'walk', 0.1), 0.32)
 sg, sm, bk1 = lw('layer', 'single layer'), lw('layer', 'some patterns'), lw('layer', 'a book')
 air(sg, 0.8, 0.006, px(1420))
 ser(Fs2, sm + 0.6, bk1 + 2.2, 0.6, rel=0.7)
@@ -395,8 +406,9 @@ whoosh(mo + 0.1, 1.4, 0.006, px(900), px(1900))
 relay(mo + 0.2, 0.006, px(470))
 
 # 3. Learning from mistakes: the turn, 1969 to 1986, C sharp to E. The paper pinned; the network on its panel. It guesses: the signal
-#    climbs the layers, a note at each, and stops on G sharp, wrong; the error passed back layer by layer, the notes coming down; the
-#    error made smaller. Many examples slide in; the layers in between find patterns, a note for each. Slow computers, few
+#    climbs the layers, a note at each, and stops on G sharp, wrong, left unresolved; the error passed back layer by layer, air
+#    moving back across them, no music (a line coming down made the chapter's music come in five times in thirty seconds); the error
+#    made smaller. Many examples slide in; the layers in between find patterns, a note for each, rising to A at last. Slow computers, few
 #    examples: twenty years, the serpent holding F sharp under the bracket as the rail moves on
 mw = lambda lid, word, off=0: W('mistakes', lid, word, off)
 mc = lambda lid, off=0: G('mistakes', lid, off)
@@ -406,10 +418,9 @@ paper(th, 0.010, px(290), 0.5); pin(th + 0.6, 0.012, px(290))
 air(mc('layers', 0.4), 0.9, 0.006, px(1200))
 gw = mw('guess', 'guess')
 paper(gw - 0.6, 0.006, px(700), 0.25)
-line([(gw - 0.1 + 1.3 * l / 3, m) for l, m in enumerate((A3, Cs4, E4, Gs4))], 0.36, ring=1.0)
+line([(gw - 0.1 + 1.3 * l / 3, m) for l, m in enumerate((A3, Cs4, E4, Gs4))], 0.36, ring=1.6)
 pb = mw('back', 'passed back')
 whoosh(pb, 2.2, 0.006, px(1440), px(900))
-line([(pb + 2.2 * l / 3, m) for l, m in enumerate((Gs4, E4, Cs4, A3))], 0.3, ring=0.9)
 mn, sl = mw('patterns', 'many examples'), mw('small', 'slow')
 for k in range(5):
     paper(mn + (sl - mn) * k / 14 + 0.03 * R1.uniform(), 0.005 * (1 - 0.15 * k), px(700), 0.2)
@@ -440,11 +451,12 @@ tg2 = pw('chips', 'two graphics', -0.2)
 knock(tg2 + 0.1, 0.008, px(1400), 320); knock(tg2 + 0.3, 0.007, px(1400), 300)
 riffle(pw('chips', 'hundreds'), 2.0, 0.003, px(1400), rate=60, lo=300, hi=1200)
 paper(pw('contest', 'image contest', -0.2), 0.008, px(960), 0.5)
+# the misses marked as the grid fills, 15 and then 26: a few soft taps while the marks come, not one for each (26 in a second rattled)
 f15, f26 = pw('contest', 'fifteen', -0.6), pw('next', 'twenty-six', -0.6)
-for k in range(15):
-    tap(f15 + R1.uniform(0, 1.0), 0.005, px(550))
-for k in range(26):
-    tap(f26 + R1.uniform(0, 1.0), 0.0035, px(1370))
+for k in range(5):
+    tap(f15 + 0.2 * k + 0.05 * R1.uniform(), 0.005, px(550))
+for k in range(7):
+    tap(f26 + 0.14 * k + 0.04 * R1.uniform(), 0.0035, px(1370))
 nw0 = pc('new', -0.2)
 for i in range(3):
     knock(nw0 + 0.12 * i + 0.3, 0.006, px(480 + 480 * i), 260)
@@ -476,9 +488,9 @@ roll((D4, Fs4, A4, D5), gr + 0.1, 0.14, 0.42, ring=2.2)
 ser(D3, gr, E('attention') - 0.4, 0.5, rel=0.8)
 
 # 6. The written web: the turn, 2017 to 2020, C sharp to E. Text from the web and books, flowing in. Guess the next word, check it,
-#    adjust: three notes, E, A (the check, a fourth up) and F sharp; then billions of times, the cycle a soft riffle. Grammar, facts,
-#    ways of writing, a note for each, taken in. 175 billion numbers to tune, the dials turning. It wrote fluently, typing on; but it
-#    only carried on the text: a phrase that stops on B over E, unresolved
+#    adjust: three notes, E, A (the check, a fourth up) and F sharp; then billions of times, the cycle a soft riffle, and grammar,
+#    facts and ways of writing taken in under it, without notes of their own. 175 billion numbers to tune, the dials turning. It wrote
+#    fluently, typing on; but it only carried on the text: a phrase that stops on B over E, unresolved
 ww = lambda lid, word, off=0: W('web', lid, word, off)
 wc = lambda lid, off=0: G('web', lid, off)
 turn('web', 2017, 2020, (A4, Cs5))
@@ -489,7 +501,6 @@ line([(gs - 0.15, E4), (ck - 0.05, A4), (adj - 0.15, Fs4)], 0.36, ring=1.3)
 keys(gs + 0.4, 3, 0.005, px(520), 0.08); tap(ck, 0.006, px(700))
 bl = ww('billions', 'Billions')
 riffle(bl, wc('largest', -0.3) - bl, 0.003, px(500), rate=22, lo=300, hi=1300)
-line([(ww('billions', 'grammar', -0.1), Cs5), (ww('billions', 'facts', -0.1), E5), (ww('billions', 'ways of writing', -0.1), A5)], 0.28, ring=1.2)
 lg = wc('largest', -0.2)
 whoosh(lg, 1.2, 0.006, px(1080), px(1450))
 hd = ww('largest', 'a hundred and seventy-five', -0.2)
@@ -498,13 +509,13 @@ for k in range(4):
     dial(hd + 0.4 + 0.5 * k, 0.003, px(1200), 2, 0.09)
 knock(wc('help', -0.3), 0.007, px(530), 260)
 fl, ca = ww('help', 'fluently'), ww('help', 'carried on')
-keys(fl, int((ca + 0.4 - fl) / 0.11), 0.005, px(400), 0.11)
+keys(fl, int((ca + 0.4 - fl) / 0.17), 0.005, px(400), 0.17)
 line([(ca - 0.15, A4), (ca + 0.25, Cs5), (ca + 0.65, B4)], 0.36, ring=1.8)
 ser(E3, ca - 0.2, E('web') - 0.5, 0.5, rel=0.8)
 
 # 7. Helpful, with hands: the turn, 2020 to 2022, E to F sharp, over D. People rank a model's answers; the model trained on their
-#    choices. Preferred to a model a hundred times bigger: the check that passes. Since 2024: the rail on to 2024, the A at the top;
-#    step by step before it answers, a note for each step, the answer on A. Its hands for tools: search, a query, a file; what comes
+#    choices. Preferred to a model a hundred times bigger: air, no music (the check that passes has its place in 1958). Since 2024: the
+#    rail on to 2024, the A at the top; step by step before it answers, a note for each step, the answer on A. Its hands for tools: search, a query, a file; what comes
 #    back. A model that reasons, with hands, in a loop: a note for each, and, "that's an agent", struck together
 hw = lambda lid, word, off=0: W('helpful', lid, word, off)
 hc = lambda lid, off=0: G('helpful', lid, off)
@@ -515,10 +526,8 @@ be = hw('rank', 'best', -0.6)
 for i in range(3):
     tap(be + 0.55 * i + 0.25, 0.006, px(1180))
 whoosh(hw('trained', 'trained', -0.3), 1.0, 0.005, px(1240), px(1450))
-passed(hw('smaller', 'preferred', -0.2), 0.45)
 air(hw('smaller', 'a hundred times', -0.5), 1.2, 0.006, px(1300), 120, 700)
 s0h = hc('steps')
-year(2022, s0h - 0.6, 0.28, ring=1.0)
 roll((Cs5, E5, A5), s0h + 1.0 - 0.24, 0.12, 0.48, ring=1.7)
 sp = hw('steps', 'step by step')
 line([(sp - 0.2, Cs4), (sp + 0.3, E4), (sp + 0.8, Fs4), (sp + 1.1, A4)], 0.34, ring=1.4)
@@ -553,10 +562,12 @@ paper(sw('data', 'the web', -0.3), 0.007, px(1080), 0.35); paper(sw('data', 'mil
 air(sc('money', -0.2), 0.8, 0.005, px(1500))
 nn = sw('money', 'nine hundred', -0.3)
 coin(nn + 0.1, 0.008, px(1300)); coin(nn + 0.3, 0.007, px(1300))
+# tens of millions: six stacks grow, a coin set down as each begins and one as the tallest tops out; a clink for each of their 63
+# coins made a metallic buzz (the author's review, 4 November 2026)
 tm = sw('money', 'tens of millions', -0.4)
-for i, n_ in enumerate((9, 12, 10, 13, 11, 8)):
-    for j in range(n_):
-        coin(tm + 0.08 * i + 0.7 * (j + 0.5) / n_ + 0.02 * R1.uniform(), 0.005 * (1 - 0.5 * j / n_), px(1490 + 50 * i))
+for i in range(6):
+    coin(tm + 0.08 * i + 0.06 + 0.02 * R1.uniform(), 0.005, px(1490 + 50 * i))
+coin(tm + 0.24 + 0.66, 0.004, px(1640))
 T_IN, T_RUN = sc('long', -0.35), sc('long', 0.9)
 for i in range(3):
     whoosh(T_IN + 0.12 * i, 1.0, 0.005, px(370 + 590 * i), px(1150))

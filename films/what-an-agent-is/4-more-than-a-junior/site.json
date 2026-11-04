@@ -1,0 +1,32 @@
+{
+  "kicker": "Supervising agents",
+  "kicker_es": "Supervisar agentes",
+  "title_es": "Más que un junior",
+  "h1": "More than a junior: supervise an agent for what it is",
+  "h1_es": "Más que un junior: supervisar a un agente por lo que es",
+  "lead": "Jun's team treats its AI agent like a junior who needs supervision. But it reads the whole project in a minute, forgets a correction by its next session, and drafts deleting a table read once a year. So the team limits its rights, keeps its memory in shared notes, and leaves every yes to a person.",
+  "lead_es": "El equipo de Jun trata a su agente de IA como a un junior supervisado. Pero lee todo el proyecto en un minuto, olvida una corrección al día siguiente y propone borrar una tabla que se lee una vez al año. Así que el equipo limita sus permisos, guarda su memoria en notas comunes y deja cada sí a una persona.",
+  "description": "A film about supervising an AI agent, the fourth of What an agent is: Clever Hans, the horse that seemed to count, in Berlin in 1904, and the psychologist who tested him as a horse, without the answer in the room; the advice to treat an agent like a junior who needs supervision; where it is more than a junior, knowing more and working faster, so its pace is a danger as well as a gift; where it is less than a person, with no memory of yesterday unless we give it one, no career and nothing to lose; its rights, the team's notes for agents and a person's yes, with a second person approving; asking without the answer in the question, looking at how it got there and checking against a count it didn't make; and what supervising it for what it is gives a data team.",
+  "description_es": "Una película sobre supervisar a un agente de IA, la cuarta de Qué es un agente: Hans el Listo, el caballo que parecía contar, en Berlín en 1904, y el psicólogo que lo examinó como a un caballo, sin la respuesta en el patio; el consejo de tratar a un agente como a un junior que necesita supervisión; en qué es más que un junior, porque sabe más y trabaja más rápido, así que su ritmo es un peligro además de un don; en qué es menos que una persona, sin memoria de ayer si no se la damos, sin carrera y sin nada que perder; sus permisos, las notas del equipo para agentes y el sí de una persona, con una segunda persona que aprueba; preguntar sin la respuesta en la pregunta, mirar cómo llegó al resultado y compararlo con un conteo que no hizo; y lo que gana un equipo de datos al supervisarlo por lo que es.",
+  "card": "Jun's team treats its AI agent like a junior. It knows more and works faster, but has no career, nothing to lose and no memory.",
+  "card_es": "El equipo de Jun trata a su agente como a un junior. Sabe más y va más rápido, pero no tiene carrera, nada que perder ni memoria.",
+  "chapters_es": {
+    "hans": "Hans el Listo",
+    "junior": "Un junior que necesita supervisión",
+    "more": "Más que un junior",
+    "memory": "Sin memoria de ayer",
+    "lose": "Nada que perder",
+    "asked": "Preguntar como Pfungst",
+    "close": "Por lo que es"
+  },
+  "past": [
+    "Berlin, 1904: Clever Hans, the horse that seemed to count",
+    "A test tells the truth only when the one who asks can't give the answer away."
+  ],
+  "past_es": [
+    "Berlín, 1904: Hans el Listo, el caballo que parecía contar",
+    "Una prueba dice la verdad solo cuando quien pregunta no puede delatar la respuesta."
+  ],
+  "next_h": "You've seen where the junior picture breaks, and how to supervise an agent for what it is. Next: minds that change, the agent's and ours.",
+  "next_h_es": "Viste dónde se rompe la imagen del junior, y cómo supervisar a un agente por lo que es. Después: mentes que cambian, la del agente y la nuestra."
+}

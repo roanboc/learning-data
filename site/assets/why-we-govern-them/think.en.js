@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Why we govern them, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (identity, limits, review), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  "identity":{q:"Jun's agent works under Jun's name. Why is that fine while it's learning, but not once it works for the team?",
+    opts:[{t:"It's never fine: an agent must never use a person's name."},{t:"While it learns, its tools only read and its drafts wait in a sandbox. Working for the team, its changes would look like Jun's, and stopping it would mean stopping Jun.",ok:true},{t:"Once it's good enough, the name doesn't matter any more."}],
+    why:"While it's learning, little can go wrong: it only reads, and its drafts wait in a sandbox. Working for the team, its changes would look like Jun's, and to stop it you'd have to stop him. With a name of its own, the team sees everything it does as its own, and can stop it alone, as the control room saw each train. Where you work, could you tell a tool's changes from those of the person who set it up?"},
+  "limits":{q:"The agent could do far more than its mandate allows. Who decides how much it does alone?",
+    opts:[{t:"The agent, as it knows best what it can do."},{t:"Its skill: the more capable it is, the more it may do alone."},{t:"Its owner, in a written mandate: which tasks, where, and how each is checked. It can be lowered at any time, and the agent can never raise it.",ok:true}],
+    why:"How much an agent does alone is a choice, made apart from how capable it is: a very capable agent can still be asked to check with a person first. Its owner signs the mandate, and like the speed in the cab, it's set from outside. Which task in your team would you let an agent do alone, and which would you keep for a person to check?"},
+  "review":{q:"The agent's review of its own change is thorough and sure. Why does a person still approve every change to production?",
+    opts:[{t:"Agents are never approvers: it sounds sure, and feeling sure is not knowing. It can't answer for the change, and a person can.",ok:true},{t:"Because an agent's review is usually wrong."},{t:"Only until it has made enough changes without a mistake."}],
+    why:"An agent's review is only for reference. Its owner checks its evidence, not its tone, and a second person approves the change, the same as for people's changes. The rule isn't there because the agent is bad, but because it can't answer for what it does. Who checks the changes that reach production in your work, and would they notice if the author were an agent?"}
+  }}};

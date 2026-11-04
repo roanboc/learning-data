@@ -1,0 +1,34 @@
+{
+  "kicker": "An agent, part by part",
+  "kicker_es": "Un agente, parte por parte",
+  "title_es": "Un modelo, razonamiento, manos y un bucle",
+  "h1": "A model, reasoning, hands and a loop, or a plain script",
+  "h1_es": "Un modelo, razonamiento, manos y un bucle, o un script sencillo",
+  "lead": "Planning asks Jun how the census-day count changed since last year. An agent plans, uses three read-only tools, counts, and checks its total against the census report: 476 short, so it reads the rule and counts again. Next March, the same count runs as a plain script, in seconds.",
+  "lead_es": "Planificación pregunta a Jun cuánto cambió el conteo del día del censo desde el año pasado. Un agente planifica, usa tres herramientas de solo lectura, cuenta y compara su total con el informe del censo: le faltan 476, así que lee la regla y cuenta de nuevo. En marzo próximo, lo hace un script sencillo.",
+  "description": "A film about what an AI agent is, the second of What an agent is: Sperry's stabiliser of 1914, which held an aeroplane level with hands, a check and a loop but no model; Jun's census-day question; a model that only writes; reasoning, as feedback and checks against rules; hands, read-only tools offered by tool servers through an open standard; a loop that fails a check, reads the rule and passes; an answer with its evidence, which a person decides on; and next year's count as a plain script, the same every time.",
+  "description_es": "Una película sobre qué es un agente de IA, la segunda de Qué es un agente: el estabilizador de Sperry de 1914, que mantenía nivelado un avión con manos, una verificación y un bucle, pero sin modelo; la pregunta de Jun sobre el día del censo; un modelo que solo escribe; el razonamiento, como retroalimentación y verificaciones contra reglas; las manos, herramientas de solo lectura que ofrecen servidores de herramientas mediante un estándar abierto; un bucle que falla una verificación, lee la regla y la pasa; una respuesta con su evidencia, sobre la que decide una persona; y el conteo del año próximo como un script sencillo, igual cada vez.",
+  "card": "An agent finds the census-day count by trying, checking and trying again. Next year, a plain script does it in seconds.",
+  "card_es": "Un agente halla el conteo del censo probando, verificando y reintentando. Al año siguiente, un script sencillo lo hace en segundos.",
+  "chapters_es": {
+    "off": "Manos libres",
+    "question": "La pregunta de Jun",
+    "writes": "Un modelo escribe",
+    "reasons": "Razonamiento",
+    "hands": "Manos",
+    "loop": "Un bucle",
+    "answer": "La respuesta, con su evidencia",
+    "script": "Un script sencillo",
+    "seat": "De vuelta en el asiento"
+  },
+  "past": [
+    "Bezons, by Paris, 18 June 1914: the first autopilot",
+    "A box with hands, a check and a loop held the aeroplane level, the one job it knew, while the pilot stayed in his seat."
+  ],
+  "past_es": [
+    "Bezons, junto a París, 18 de junio de 1914: el primer piloto automático",
+    "Una caja con manos, una verificación y un bucle mantenía nivelado el avión, su único trabajo, mientras el piloto seguía en su asiento."
+  ],
+  "next_h": "You've seen an agent's four parts at work, and when a plain script does better. Next: why a fluent answer feels like understanding.",
+  "next_h_es": "Viste las cuatro partes de un agente en acción, y cuándo un script sencillo lo hace mejor. Después: por qué una respuesta fluida da la sensación de entender."
+}

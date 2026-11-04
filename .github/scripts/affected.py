@@ -16,7 +16,8 @@ The checks it picks from:
              scenarios pages
   films      for each film whose source changed (its "paths" in its release.json, shared code included,
              so a change to the first film's engine checks every film that draws with it): build the player, check
-             that the site's copy is the one it builds, and check that every moment draws (tools/check.py)
+             that the site's copy is the one it builds, check that every moment draws (tools/check.py), and check the
+             sound (tools/quiet.py), in the films that have that check
 The dbt project (films/analytics-engineering/project) has its own workflow, credential-project.yml.
 A change to the checks themselves (this script, checks.yml, films.py) runs every check. A change to a film's release.json
 checks that film.
@@ -172,7 +173,7 @@ def summary(p, files, base):
     lines = [f"### Checks to run ({what})", "", "| Check | Runs |", "|---|---|",
              f"| Site, static (`site-tools/check_site.py`) | {yes(p['site'])} |",
              f"| Site, in a browser (`site-tools/smoke.py`) | {where(p)} |",
-             f"| Films (`tools/build.py`, `tools/check.py`) | {', '.join(f['key'] for f in p['films']) or 'none'} |"]
+             f"| Films (`tools/build.py`, `tools/check.py`, `tools/quiet.py`) | {', '.join(f['key'] for f in p['films']) or 'none'} |"]
     return "\n".join(lines)
 
 
@@ -189,6 +190,8 @@ def run(p):
         steps.append((f"{f['name']}: build", [py, "tools/build.py"], ROOT / f["dir"], env))
         steps.append((f"{f['name']}: the site plays this build", ["cmp", f["player"], str(ROOT / f["site_player"])], ROOT / f["dir"], env))
         steps.append((f"{f['name']}: every moment draws", [py, "tools/check.py"], ROOT / f["dir"], env))
+        if (ROOT / f["dir"] / "tools" / "quiet.py").exists():
+            steps.append((f"{f['name']}: the sound", [py, "tools/quiet.py"], ROOT / f["dir"], env))
     failed = []
     for name, cmd, cwd, env in steps:
         print(f"\n== {name}", flush=True)

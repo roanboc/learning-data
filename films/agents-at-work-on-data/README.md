@@ -4,13 +4,14 @@
 
 Jun Park's agent now works on the census-day count, the number the university reports to the government. Six films show how agents do data work well: what the agent reads and who writes it, skills and workflows, tools with the fewest rights, memory the whole team shares, deciding how the result will be checked before the agent starts, and the ways it goes wrong. They name no product. The last three show it on Databricks: working with agents on the platform, why Unity Catalog and Unity Gateway govern them, and the team's context and memory, governed like any data. *What an agent is* comes before it; *From helper to colleague* follows. The plan for this series is in the [proposal](proposal.md).
 
-**Status:** planned on 4 November 2026; the films are being made, one at a time, and appear in the table below as each one is out. On the site, the series sits under the topic *AI agents in data work*, at `agents-at-work-on-data/`, once its opening film is out.
+**Status:** planned on 4 November 2026; the films are being made, one at a time, and appear in the table below as each one is out. On the site, the series sits under the topic *AI agents in data work*, at `agents-at-work-on-data/`, since its opening film, *Context engineering*, came out on 4 November 2026.
 
 ## The films
 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Context engineering](https://data.learn-all.org/agents-at-work-on-data/context-engineering/) | What an agent reads | 6½ min | 7 | 3 questions | [script](1-context-engineering/script.md) · [source](1-context-engineering/source/README.md) |
 | [How it goes wrong](https://data.learn-all.org/agents-at-work-on-data/how-it-goes-wrong/) | Designing for failure | 7½ min | 8 | 3 questions | [script](6-how-it-goes-wrong/script.md) · [source](6-how-it-goes-wrong/source/README.md) |
 <!-- /films -->
 

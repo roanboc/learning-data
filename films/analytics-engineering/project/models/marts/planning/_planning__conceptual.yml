@@ -1,4 +1,4 @@
-# Planning's conceptual model: the question it asks, and the one concept it adds to the core.
+# Planning's conceptual model: the question it asks, and the concepts it adds to the core.
 #
 # Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
 # block in _planning__definitions.md, next to this file, and checks that every entity it uses is defined
@@ -34,3 +34,26 @@ entities:
       - Near means more than none and no more than the near_award_credit_points var left to earn.
       - Planning's question counts graduate certificates only, by faculty.
     history: One census date at a time. A change recorded after census, dated after it, doesn't change the answer.
+
+  # Added on 4 November 2026, the first time Planning asked this project how many students were
+  # commencing. The meaning was only in an email the registrar's office sent Planning in 2021, so
+  # an agent reading the tables' names counted students back from leave as new. Mei wrote it down.
+  - name: commencing_student
+    label: commencing student
+    definition: >
+      A student who started a course at the university for the first time in the year being
+      counted. A student who comes back to a course they had already started, after leave or a
+      break, isn't commencing.
+    owner: Mei Tanaka, registrar's office
+    business_key:
+      rule: The learner's business key and the award's, together, as at census date.
+    rules:
+      - As at census date (var census_date) - counted among the learners studying an award that day.
+      - Started means the first version in which the learner was studying the award took effect in the census date's year, on or before the census date.
+      - A learner who starts a new award is commencing in it, even if they studied another one before.
+    history: One census date at a time. A change recorded after census, dated after it, doesn't change the answer.
+    source:
+      glossary: the university's Unity Catalog Glossary, on Databricks
+      term: Commencing student
+      named_by: data governance
+      synced_on: 2026-11-04

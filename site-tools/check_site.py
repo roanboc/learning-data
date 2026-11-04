@@ -24,7 +24,11 @@ What it checks, page by page (every .html under site/):
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
+- posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
+  from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
+  its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
 """
+import hashlib
 import html.parser
 import json
 import pathlib
@@ -459,6 +463,49 @@ def opening_beats(film):
                 if part and part not in said:
                     out.append(f"{script.relative_to(ROOT)}: {beat}: \"{part[:70]}\" isn't in source/src/narration.js as it's said")
     return out
+
+
+def jpeg_comments(b):
+    """the comments (COM segments) in a JPEG's headers"""
+    out, i = [], 2
+    while b[:2] == b"\xff\xd8" and i + 4 <= len(b) and b[i] == 0xFF and b[i + 1] != 0xDA:
+        n = int.from_bytes(b[i + 2:i + 4], "big")
+        if b[i + 1] == 0xFE:
+            out.append(b[i + 4:i + 2 + n].decode("utf-8", "replace"))
+        i += 2 + n
+    return out
+
+
+def poster_faults():
+    """What's wrong with the posters tools/publish.py draws: each must carry its stamp, naming the player it was drawn from (the
+    first 16 hex digits of its film.js's SHA-256) and the moment, and that must be the player the site plays, at the moment the
+    film's film.json names. publish.py writes the stamp as it draws the poster."""
+    out, seen = [], set()
+    for rel in RELEASES:
+        for e in json.loads(rel.read_text()):
+            src = ROOT / e["dir"]
+            if src in seen or not (src / "film.json").exists() or not (src / "tools" / "publish.py").exists():
+                continue
+            seen.add(src)
+            meta = json.loads((src / "film.json").read_text())
+            if not meta.get("poster"):
+                continue
+            fix = f"run python tools/build.py, then python tools/publish.py --keep-sound, in {e['dir']}, and look at the poster it draws"
+            poster, player = WEB / "assets" / f"{meta['key']}-poster.jpg", ROOT / e["site_player"]
+            if not poster.exists() or not player.exists():
+                out.append(f"site/assets/{meta['key']}-poster.jpg or {e['site_player']}: missing: {fix}")
+                continue
+            notes = [c for c in jpeg_comments(poster.read_bytes()) if c.startswith("Drawn by tools/publish.py")]
+            m = re.search(r"from the player ([0-9a-f]{16}) at (\S+)", notes[-1]) if notes else None
+            sha = hashlib.sha256(player.read_bytes()).hexdigest()[:16]
+            moment = "%s/%s%+g" % tuple(meta["poster"])
+            if not m:
+                out.append(f"site/assets/{meta['key']}-poster.jpg: no stamp of the player it was drawn from: {fix}")
+            elif m.group(1) != sha:
+                out.append(f"site/assets/{meta['key']}-poster.jpg: drawn from another player than {e['site_player']} (an older build?): {fix}")
+            elif m.group(2) != moment:
+                out.append(f"site/assets/{meta['key']}-poster.jpg: drawn at {m.group(2)}, but film.json's poster is {moment}: {fix}")
+    return out, len(seen)
 
 
 # ---------------------------------------------------------------- the checks
@@ -915,6 +962,12 @@ def main():
                 s["fails"].append(f"{pg.file}: loads {cap} after {film}; the captions must come first")
             else:
                 s["notes"].append(f"{pg.file}: {cap}")
+
+    # -- posters
+    s = rep.check("Posters: each film's poster was drawn from the player the site plays, at the moment its film.json names")
+    faults, n = poster_faults()
+    s["fails"] += faults
+    s["notes"].append(f"{n} posters drawn by tools/publish.py")
 
     # -- topic cards
     s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts (a series' card: its films'), a real poster")

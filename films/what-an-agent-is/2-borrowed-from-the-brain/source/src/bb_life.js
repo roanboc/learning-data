@@ -47,7 +47,7 @@ const BB_N1E=BB_N1.A[BB_N1.A.length-1];
 const BB_N2=bb_cell(1891,{x:BB_N1E[0]+250,y:BB_N1E[1]+30,r:32,reach:190,dirs:6,depth:3,wig:0.4,spines:true,axon:{ang:0.3,len:400,bend:0.2,ends:3,endLen:50},axW:11});
 const BB_N1TIPS=bb_tips(BB_N1,12).map(i=>bb_toBody(BB_N1,i));
 // the cells round it, faint, whose fibres end on its branches
-const BB_AROUND=[[150,170,0.6],[300,880,-0.9],[960,150,2.4],[880,900,-2.2],[120,560,0.1]].map(([x,y,a],i)=>bb_cell(3100+i*7,{x,y,r:20,reach:120,dirs:5,depth:2,wig:0.45,axon:{ang:a,len:260,bend:0.3,ends:3,endLen:40},axW:7}));
+const BB_AROUND=[[200,310,0.6],[300,880,-0.9],[1150,140,2.4],[880,900,-2.2],[120,600,0.1]].map(([x,y,a],i)=>bb_cell(3100+i*7,{x,y,r:20,reach:120,dirs:5,depth:2,wig:0.45,axon:{ang:a,len:260,bend:0.3,ends:3,endLen:40},axW:7}));
 
 /* ---------------------------------------------------------------- the pulse, as a trace: all or nothing */
 // a card: the pulse over time; small bumps that stay under the dashed line (not enough arrived: nothing), then pulses, each the same height
@@ -64,7 +64,7 @@ function bb_trace(ctx,x,y,w,h,u,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)retur
    from the bottom right, its surface set with the places the messengers fit. The gap runs between them. All drawn live: when the pulse
    arrives (o.t0), a few sacs open at the gap, their messengers cross it, and where they land the next cell lights (o.glow) or, held back,
    dims (o.dim). o.grow (0..1) makes the connection stronger: a bigger end, more places for the messengers. */
-const BB_SYN=(()=>{const kc=[700,360],kr=250,hc=[1150,700],hr=232,d=[hc[0]-kc[0],hc[1]-kc[1]],L=Math.hypot(d[0],d[1]),u=[d[0]/L,d[1]/L],
+const BB_SYN=(()=>{const kc=[740,396],kr=250,hc=[1190,736],hr=232,d=[hc[0]-kc[0],hc[1]-kc[1]],L=Math.hypot(d[0],d[1]),u=[d[0]/L,d[1]/L],
     kb=[kc[0]+u[0]*kr,kc[1]+u[1]*kr],hb=[hc[0]-u[0]*hr,hc[1]-u[1]*hr],R=ag_rnd(1953),ves=[];
   for(let i=0;i<18;i++){const a=Math.atan2(u[1],u[0])+(R()-0.5)*2.4,rr0=kr*(0.25+R()*0.55);ves.push([kc[0]+Math.cos(a)*rr0,kc[1]+Math.sin(a)*rr0,16+R()*8]);}
   ves.sort((p,q)=>Math.hypot(p[0]-kb[0],p[1]-kb[1])-Math.hypot(q[0]-kb[0],q[1]-kb[1]));
@@ -83,7 +83,7 @@ function bb_synapse(ctx,t,o){o=o||{};const S=BB_SYN,grow=o.grow||0,a=o.a==null?1
     ctx.fillStyle=rgba(mix(dk,[255,236,200],0.6*bound),1);rr(ctx,-11,-8,22,22,6);ctx.fill();ctx.restore();});
   // the fibre from the top left, and its end
   const kg=1+0.1*grow;ctx.save();ag_about(ctx,S.kb[0],S.kb[1],kg);
-  ag_soft(ctx,c=>{c.moveTo(-80,-60);c.bezierCurveTo(200,40,380,150,S.kc[0]-140,S.kc[1]-150);c.lineTo(S.kc[0]-80,S.kc[1]-60);c.bezierCurveTo(330,260,140,170,-80,90);c.closePath();},mix(col,dk,0.2),hi,300,120,400,rgba(dk,0.5),20,0.5);
+  ag_soft(ctx,c=>{c.moveTo(-80,250);c.bezierCurveTo(120,236,300,240,S.kc[0]-200,S.kc[1]-110);c.lineTo(S.kc[0]-190,S.kc[1]+110);c.bezierCurveTo(300,450,120,430,-80,430);c.closePath();},mix(col,dk,0.2),hi,260,300,400,rgba(dk,0.5),20,0.5);
   ag_soft(ctx,c=>bb_path(c,S.knob),col,hi,S.kc[0]+110,S.kc[1]-120,S.kr*1.5,rgba(dk,0.55),26,0.75);
   ctx.strokeStyle=rgba(mix(dk,[30,16,14],0.3),0.55);ctx.lineWidth=7;ctx.beginPath();bb_path(ctx,S.knob);ctx.stroke();
   // the small sacs, each holding messengers; the nearest few open at the gap when the pulse arrives
@@ -239,7 +239,8 @@ function bb_bee(ctx,x,y,s,t,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s
 // a sesame seed and a bee's brain, side by side on a card, at the same scale
 function bb_seedBrain(ctx,x,y,a,k){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x+260,y+150,lerp(0.6,1,clamp(k==null?1:k,0,1.2)));ag_box(ctx,x,y,520,300,22,{});
   ctx.save();ctx.translate(x+150,y+130);ctx.rotate(-0.5);ag_soft(ctx,c=>{c.moveTo(0,-70);c.bezierCurveTo(46,-60,52,30,0,74);c.bezierCurveTo(-52,30,-46,-60,0,-70);c.closePath();},[232,214,176],[255,248,230],14,-30,70,"rgba(80,60,30,0.35)",8,0.6);ctx.restore();
-  ag_soft(ctx,c=>{c.moveTo(390,130);c.bezierCurveTo(360,80,300,90,300,128);c.bezierCurveTo(300,160,350,170,384,150);c.bezierCurveTo(420,170,470,160,470,128);c.bezierCurveTo(470,90,410,80,390,130);c.closePath();},[222,170,160],[250,222,214],420,96,90,"rgba(90,40,40,0.35)",8,0.6);
+  ctx.save();ctx.translate(x+386,y+132);ctx.scale(0.62,0.62);ctx.translate(-385,-128);
+  ag_soft(ctx,c=>{c.moveTo(390,130);c.bezierCurveTo(360,80,300,90,300,128);c.bezierCurveTo(300,160,350,170,384,150);c.bezierCurveTo(420,170,470,160,470,128);c.bezierCurveTo(470,90,410,80,390,130);c.closePath();},[222,170,160],[250,222,214],420,96,90,"rgba(90,40,40,0.35)",8,0.6);ctx.restore();
   ag_T(ctx,"A sesame seed",x+150,y+262,{w:700,size:28,align:"center"});ag_T(ctx,"A bee's brain",x+386,y+262,{w:700,size:28,align:"center"});ctx.restore();}
 
 // a honeycomb seen from above, kept small: its wax cells, some capped; the dance is drawn in a round view of it
@@ -375,7 +376,7 @@ AG_PLACES.bbEye=c=>{bb_bareSheet(c);const E=BB_EYEA,cx=E.cx,cy=E.cy,r=E.r,na=E.n
   ag_soft(c,cc=>cc.ellipse(E.lens[0],E.lens[1],40,96,0,0,TAU),[214,226,232],[255,255,255],E.lens[0]+10,E.lens[1]-40,70,"rgba(60,80,100,0.3)",8,0.7);
   ag_grain(c,0,0,W,H,1,71);};
 function bb_bareSheet(c){const g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,rgba(mix(BB.walnut,[20,12,6],0.15),1));g.addColorStop(1,rgba(mix(BB.walnut,[255,230,200],0.08),1));c.fillStyle=g;c.fillRect(0,0,W,H);
-  ag_grain(c,0,0,W,H,2,7);bb_paper(c,180,56,1560,850);
+  ag_grain(c,0,0,W,H,2,7);bb_paper(c,40,40,1840,1000);
   const lg=c.createRadialGradient(1800,60,40,1500,200,1500);lg.addColorStop(0,"rgba(255,244,220,0.3)");lg.addColorStop(1,"rgba(255,244,220,0)");c.fillStyle=lg;c.fillRect(0,0,W,H);}
 // light from a thing on the left, through the lens, onto the lining at the back; o.u draws it on; o.blind lights the ray that lands
 // where the nerve leaves, which nothing catches

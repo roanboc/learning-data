@@ -130,13 +130,14 @@ function bb_oneCell(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ct
   ctx.restore();}
 
 /* ---------------------------------------------------------------- a few examples, or a great many */
-// a small picture of a bee, as an example: drawn simply, on a tile
-function bb_beeTile(ctx,x,y,s,i){ctx.save();ag_box(ctx,x-s/2,y-s/2,s,s,s*0.14,{});ctx.translate(x,y);ctx.scale(s/120,s/120);ctx.rotate((hash(i,5)-0.5)*0.8);
-  ctx.fillStyle="rgb(204,150,66)";ctx.beginPath();ctx.ellipse(10,0,28,18,0,0,TAU);ctx.fill();ctx.fillStyle="rgb(70,48,32)";for(let k=0;k<3;k++)ctx.fillRect(0+k*11,-17,5,34);
-  ctx.fillStyle="rgb(110,78,48)";ctx.beginPath();ctx.arc(-24,0,13,0,TAU);ctx.fill();ctx.fillStyle="rgba(230,236,240,0.85)";ctx.beginPath();ctx.ellipse(4,-24,20,9,-0.3,0,TAU);ctx.fill();ctx.restore();}
+// a small picture of a bee, as an example: the film's honeybee, drawn once in three poses and kept, on a tile
+function bb_beePic(i){const k=i%3;return ag_kept("bb:beeTile"+k,160,160,c=>{c.translate(86,88);c.rotate([-0.28,0.12,0.36][k]);if(k===1)c.scale(-1,1);bb_bee(c,-8,0,0.34,0,{});});}
+function bb_beeTile(ctx,x,y,s,i){ag_box(ctx,x-s/2,y-s/2,s,s,s*0.14,{});ctx.drawImage(bb_beePic(i),x-s/2,y-s/2,s,s);}
+// a child's card comes in with o.a (springing to size with o.k); its few examples with o.kA; the model's card, and its great many, with o.kB
 function bb_examples(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const kA=o.kA==null?1:o.kA,kB=o.kB==null?1:o.kB;
-  if(kA>0){ctx.save();ctx.globalAlpha*=clamp(kA*2,0,1);ag_box(ctx,x-860,y-240,640,480,24,{});ag_T(ctx,"A child",x-830,y-182,{w:700,size:36});ag_T(ctx,"a few examples",x-830,y-140,{w:500,size:28,col:AG.mut});
-    for(let i=0;i<3;i++)if(ag_in(kA,0.2+i*0.2,0.2)>0)bb_beeTile(ctx,x-720+i*180,y+10,140,i);
+  {ctx.save();if(o.k!=null)ag_about(ctx,x-540,y,lerp(0.6,1,clamp(o.k,0,1.2)));ag_box(ctx,x-860,y-240,640,480,24,{});ag_T(ctx,"A child",x-830,y-182,{w:700,size:36});
+    ag_T(ctx,"a few examples",x-830,y-140,{w:500,size:28,col:AG.mut,a:ag_in(kA,0,0.3)});
+    for(let i=0;i<3;i++){const k=ag_in(kA,0.2+i*0.2,0.2);if(k>0){ctx.save();ctx.globalAlpha*=k;ag_about(ctx,x-720+i*180,y+10,lerp(0.7,1,ag_eo(k)));bb_beeTile(ctx,x-720+i*180,y+10,140,i);ctx.restore();}}
     ag_pill(ctx,x-540,y+168,"“bee”",{size:34,a:ag_in(kA,0.85,0.15)});ctx.restore();}
   if(kB>0){ctx.save();ctx.globalAlpha*=clamp(kB*2,0,1);ag_box(ctx,x-120,y-240,980,480,24,{edge:BB_VI,edgeA:0.5});ag_T(ctx,"A model",x-90,y-182,{w:700,size:36});ag_T(ctx,"a great many",x-90,y-140,{w:500,size:28,col:AG.mut});
     const n=Math.floor(clamp(kB,0,1)*112);for(let i=0;i<n;i++){const cx=x-60+(i%16)*58,cy=y-90+Math.floor(i/16)*46;bb_beeTile(ctx,cx,cy,40,i);}ctx.restore();}

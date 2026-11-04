@@ -7,7 +7,18 @@
    the nerve cell in bb_model.js. */
 
 const BB_NUM="1.2",BB_TITLE="Borrowed from the brain";
-function bb_kick(ctx,a,o){ag_kicker(ctx,BB_NUM,BB_TITLE,Object.assign({a:a==null?1:a},o||{}));}
+function bb_kick(ctx,a,o){o=o||{};a=a==null?1:a;if(a<=0)return;
+  // the place behind the title is busy or mid-toned in the film's nature scenes: a soft patch of shade (under the light title) or of
+  // haze (under the dark one) keeps it readable, about 3:1 or better, like the marble behind the title in the lab
+  if(o.scrim){ctx.save();ctx.translate(390,92);ctx.scale(1,0.15);const g=ctx.createRadialGradient(0,0,0,0,0,560),c=o.dark?[14,16,22]:[252,250,246];
+    g.addColorStop(0,rgba(c,o.scrim*a));g.addColorStop(0.62,rgba(c,o.scrim*a*0.7));g.addColorStop(1,rgba(c,0));ctx.fillStyle=g;ctx.fillRect(-560,-560,1120,1120);ctx.restore();}
+  ag_kicker(ctx,BB_NUM,BB_TITLE,{a,dark:o.dark,x:o.x,y:o.y});}
+// the title through a chapter's shots: look[i] is [dark, scrim] for shot i (or a function of t giving it); at a dissolve the two looks
+// cross with the pictures, at a cut they change with them
+function bb_kickShots(ctx,t,shots,i,look,a,dis){a=a==null?1:a;if(a<=0)return;const L=k=>{const v=look[Math.min(k,look.length-1)];return typeof v==="function"?v(t):v;};
+  const cur=L(i),u=i>0&&!shots[i].cut?ease(clamp((t-shots[i].at)/(dis||0.6),0,1)):1,prev=i>0?L(i-1):cur;
+  const d=lerp(prev[0],cur[0],u),sl=lerp(prev[0]?0:prev[1],cur[0]?0:cur[1],u),sd=lerp(prev[0]?prev[1]:0,cur[0]?cur[1]:0,u);
+  if(d<1)bb_kick(ctx,a*(1-d),{scrim:sl/(1-d||1)});if(d>0)bb_kick(ctx,a*d,{dark:true,scrim:sd/(d||1)});}
 // a place-and-year tag, drawn in screen space from inside a shot (so it stays put while the camera moves, and dissolves with its shot);
 // under the kicker (BB_UNDER) in the chapters that have one
 function bb_tagS(ctx,S,s,a,o){if(a>0)bb_scr(ctx,S,()=>bb_tag(ctx,s,a,o));}
@@ -26,7 +37,7 @@ const BB_DJ=BB_DA.A[BB_DA.A.length-1];   // where A's long fibre ends, by B's br
 // the branch of B nearest A's fibre's end: the way a message comes in, from its tip to B's body
 const BB_DBIN=(()=>{let best=0,d=1e9;BB_DB.B.forEach((b,i)=>{if(b.kids.length)return;const q=b.P[b.P.length-1],e=Math.hypot(q[0]-BB_DJ[0],q[1]-BB_DJ[1]);if(e<d){d=e;best=i;}});return bb_toBody(BB_DB,best);})();
 function bb_drawing(ctx,ua,ub,uc,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;for(const [cl,u] of [[BB_DA,ua],[BB_DB,ub],[BB_DC,uc]])bb_drawCell(ctx,cl,{u,ink:true,knob:5});ctx.restore();}
-function bb_drawingPic(){return ag_kept("bb:drawing",1260,790,c=>{bb_paper(c,0,0,1260,790);c.translate(-BB_SHEET.x,-BB_SHEET.y);bb_drawing(c,1,1,1,1);});}
+function bb_drawingPic(){const B=BB_SHEET;return ag_kept("bb:drawing",B.w,B.h,c=>{bb_paper(c,0,0,B.w,B.h);c.translate(-B.x,-B.y);bb_drawing(c,1,1,1,1);});}
 // points P moved d to the side (for an arrow drawn alongside a fibre)
 function bb_beside(P,d){return P.map((p,i)=>{const a=P[Math.max(0,i-1)],b=P[Math.min(P.length-1,i+1)],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy)||1;return[p[0]-dy/l*d,p[1]+dx/l*d];});}
 // a thin leader from a label to what it names
@@ -53,7 +64,7 @@ function bb_trial(t,t0){const D=1.75,T=[[0,0,true],[1,0,false],[1,1,true]],i=Mat
   const [card,guess,right]=T[i];return{show:ag_in(u,0.02,0.16)*(1-ag_in(u,0.9,0.09)),card,guess:u>0.36&&u<0.93?guess:null,right:u>0.5&&u<0.93?right:null,nudge:i===1?ag_io(u,0.6,0.88,0.06):0,dial};}
 // the cell he modelled it on, in ink, and the unit it became, in violet
 const BB_C58=bb_cell(1958,{x:560,y:420,r:22,reach:170,dirs:6,depth:3,wig:0.4,spines:true,axon:{ang:Math.PI*0.5,len:280,bend:0.2,ends:3,endLen:40},axW:7});
-const BB_ARC58=bb_smooth([[690,300],[860,214],[1060,222],[1170,330]],8);
+const BB_ARC58=bb_smooth([[690,306],[860,232],[1060,240],[1170,336]],8);
 function bb_sketchUnit(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a,u=o.u==null?1:o.u;if(a<=0||u<=0)return;ctx.save();ctx.globalAlpha*=a;const wc=mix(BB_VI,[120,116,140],0.3);
   for(let i=0;i<3;i++){const k=ag_in(u,i*0.1,0.35),yy=y+(i-1)*120;if(k<=0)continue;bb_wire(ctx,[x-230,yy],[x-r*0.92,y+(i-1)*r*0.42],{w:5,u:k,col:wc,alpha:0.8});
     ctx.fillStyle=rgba(wc,0.8*k);ctx.beginPath();ctx.arc(x-230,yy,7,0,TAU);ctx.fill();}
@@ -66,8 +77,8 @@ const BB_TRY=(()=>{const R=ag_rnd(1859);
     for(let k=1;k<=4;k++){a+=(R()-0.5)*0.4;x+=Math.cos(a)*len/4;y+=Math.sin(a)*len/4;P.push([x,y]);}dead.push({P:bb_smooth(P,4),u});}
   return{keep,dead};})();
 function bb_trials(ctx,t,t0,tKeep){const g=ag_in(t,t0,3.6),fade=ag_in(t,tKeep,1.0);
-  bb_inkArrow(ctx,[[470,200],[1470,200]],ag_in(t,t0,1.2),4,0.85,BB.inkSoft);
-  withA(ctx,ag_in(t,t0+0.4,0.6),()=>ag_T(ctx,"Billions of years",970,170,{w:600,size:32,align:"center",col:BB.inkSoft}));
+  bb_inkArrow(ctx,[[470,232],[1470,232]],ag_in(t,t0,1.2),4,0.85,BB.inkSoft);
+  withA(ctx,ag_in(t,t0+0.4,0.6),()=>ag_T(ctx,"Billions of years",970,206,{w:600,size:32,align:"center",col:BB.inkSoft}));
   BB_TRY.dead.forEach(d=>{const k=clamp((g-d.u)/0.14,0,1);if(k<=0)return;bb_ink(ctx,d.P,k,3.2,lerp(1,0.26,fade));
     if(k>=1){const e=d.P[d.P.length-1];ctx.save();ctx.globalAlpha*=lerp(0.9,0.26,fade);ctx.strokeStyle=rgba(BB.ink,0.9);ctx.lineWidth=2.4;ctx.beginPath();ctx.arc(e[0],e[1],6,0,TAU);ctx.stroke();ctx.restore();}});
   BB_TRY.keep.forEach(L=>bb_ink(ctx,L,g,5,1));
@@ -98,12 +109,13 @@ scene("nature",(ctx,S,t,sc)=>{const C=sc.cues;
       bb_tagS(ctx,S,"Washington, D.C. · 1958",ag_in(t,t58,0.6));}},
     // on paper: the nerve cell he modelled it on, and the unit it became; why look to nature? The page turns: nature's trials
     {at:tCell-0.4,place:"bbSheet",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){
+      // the first page, until the next one has slid over it
+      const turn=ag_eo(ag_in(t,tTry-0.5,0.9));if(turn<1){
       bb_drawCell(ctx,BB_C58,{u:ag_in(t,tCell-0.2,1.6),ink:true});
       bb_inkArrow(ctx,BB_ARC58,ag_in(t,tModel-0.1,0.9),4,1);
-      withA(ctx,ag_in(t,tModel+0.4,0.5),()=>ag_T(ctx,"modelled on",930,196,{w:600,size:32,align:"center",col:BB.inkSoft}));
+      withA(ctx,ag_in(t,tModel+0.4,0.5),()=>ag_T(ctx,"modelled on",930,212,{w:600,size:32,align:"center",col:BB.inkSoft}));
       bb_sketchUnit(ctx,1290,450,64,{u:ag_in(t,tModel+0.1,1.0)});
-      bb_cardAt(ctx,760,690,400,{title:"Why look to nature?"},t,tWhy-0.1,null);
-      const turn=ag_eo(ag_in(t,tTry-0.5,0.9));if(turn>0){const B=BB_SHEET;bb_paper(ctx,B.x+(1-turn)*1520,B.y,B.w,B.h);}
+      bb_cardAt(ctx,760,690,400,{title:"Why look to nature?"},t,tWhy-0.1,null);}if(turn>0){const B=BB_SHEET;bb_paper(ctx,B.x+(1-turn)*1520,B.y,B.w,B.h);}
       if(turn>=1)bb_trials(ctx,t,tTry+0.1,tKeep);}},
     // birds: watched for centuries; Wilbur Wright saw buzzards twist their wingtips to keep their balance
     {at:tBirds-0.4,place:"bbSky",keys:[[0,960,520,1.0],[tWright-0.3,1180,430,1.7]],d:2.4,push:0.02,draw(ctx,t){
@@ -146,8 +158,15 @@ function bb_youngCard(ctx,x,y,t,t0){const a=ag_in(t,t0-0.2,0.4);if(a<=0)return;c
   ag_box(ctx,x,y,480,390,22,{});ag_T(ctx,"YOUNG BIRDS",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
   bb_finch(ctx,x+250,y+250,0.9,{young:true});ag_T(ctx,"A thinner thicket",x+28,y+356,{w:700,size:34});ctx.restore();}
 // a round inset magnifying the gap: A's fibre's end, and B's branch, close but never joined
-function bb_gapInset(ctx,cx,cy,r,k,a){if(a<=0)return;const J=BB_DJ,z=2.6;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,cx,cy,lerp(0.6,1,clamp(k,0,1.2)));
-  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fillStyle=rgba(BB.paper,1);ctx.fill();ctx.clip();ctx.translate(cx,cy);ctx.scale(z,z);ctx.translate(-J[0]-16,-J[1]-8);bb_drawing(ctx,1,1,1,1);ctx.restore();
+function bb_gapInset(ctx,cx,cy,r,k,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ag_about(ctx,cx,cy,lerp(0.6,1,clamp(k,0,1.2)));
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fillStyle=rgba(BB.paper,1);ctx.fill();ctx.clip();
+  const ka=[cx-r*0.2,cy-r*0.11],kb=[cx+r*0.2,cy+r*0.13];
+  bb_ink(ctx,bb_smooth([[cx-r-20,cy-r*0.62],[cx-r*0.62,cy-r*0.34],[ka[0]-12,ka[1]-6]],6),1,10,1);
+  ctx.fillStyle=rgba(BB.ink,0.95);ctx.beginPath();ctx.arc(ka[0],ka[1],16,0,TAU);ctx.fill();
+  bb_ink(ctx,bb_smooth([[cx+r+20,cy+r*0.7],[cx+r*0.66,cy+r*0.42],[kb[0]+12,kb[1]+8]],6),1,13,1);
+  ctx.beginPath();ctx.ellipse(kb[0],kb[1],17,13,0.6,0,TAU);ctx.fill();
+  // a second branch of B's, behind, for the look of the drawing
+  bb_ink(ctx,bb_smooth([[cx+r*0.66,cy+r*0.42],[cx+r*0.5,cy+r*0.8],[cx+r*0.36,cy+r*1.1]],5),1,6,0.8);ctx.restore();
   ctx.strokeStyle=rgba(BB.ink,0.85);ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();ctx.restore();}
 // a message, one way: along A's fibre, across, in through B's branch to its body, out along B's fibre (u 0..3)
 function bb_message(ctx,u){if(u<=0||u>=3)return;if(u<1)bb_run(ctx,BB_DA.A,u,8,{r:18});else if(u<1.15){const q=BB_DJ;bb_spark(ctx,q[0],q[1],18,1);}
@@ -196,7 +215,8 @@ scene("cajal",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
     // he draws what he sees: separate cells, never joined; a message goes one way, in through the branches, out along the fibre
     {at:tDrew-0.4,place:"bbSheet",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){
       bb_drawing(ctx,ag_in(t,tDrew+0.2,1.6),ag_in(t,tSep,1.6),ag_in(t,tSep+0.8,1.4),1);
-      const ga=ag_in(t,tNever-0.3,0.4)*(1-ag_in(t,tOneway+0.4,0.5));if(ga>0){bb_leader(ctx,[J[0]-6,J[1]+14],[742,548],ga);bb_gapInset(ctx,700,650,110,ag_spr(t,tNever-0.3,0.5),ga);
+      const ga=ag_in(t,tNever-0.3,0.4)*(1-ag_in(t,tOneway+0.4,0.5));if(ga>0){ctx.save();ctx.globalAlpha*=ga;ctx.strokeStyle=rgba(BB.ink,0.7);ctx.lineWidth=2.6;ctx.beginPath();ctx.arc(J[0]+10,J[1]+6,26,0,TAU);ctx.stroke();ctx.restore();
+        bb_leader(ctx,[J[0]-6,J[1]+30],[742,548],ga);bb_gapInset(ctx,700,650,110,ag_spr(t,tNever-0.3,0.5),ga);
         bb_word(ctx,"never joined",700,812,{a:ga,w:700,size:32,align:"center",col:BB.ink});}
       const wa=ag_in(t,tIn-0.4,0.5);if(wa>0){bb_inkArrow(ctx,bb_beside(BB_DBIN,-22),ag_in(t,tIn-0.4,0.8),3.5,wa,BB.inkSoft);
         const s=BB_DBIN[0];bb_word(ctx,"in",s[0]-30,s[1]-26,{a:wa,w:700,size:34,align:"center",col:BB.ink});}
@@ -204,10 +224,10 @@ scene("cajal",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
         const e=bb_along(P,0.55);bb_word(ctx,"out",e[0]+10,e[1]-30,{a:wb,w:700,size:34,align:"center",col:BB.ink});}
       bb_message(ctx,clamp((t-(tIn-1.2))/1.1,0,3));}},
     // Berlin, 1889: the leading anatomists look down his microscopes, and agree
-    {at:tBerlin-0.4,place:"bbBerlin",keys:[[0,960,520,1.0]],push:0.025,draw(ctx,t){const cut=654,look=0.1+0.12*ag_in(t,tLook,0.8);
+    {at:tBerlin-0.4,place:"bbBerlin",keys:[[0,960,520,1.0]],push:0.025,draw(ctx,t){const cut=654,look=0.06+0.24*ag_io(t,tLook-0.3,tAgree-0.2,0.6),sm=0.5*ag_in(t,tAgree,0.6);
       ag_person(ctx,BB_CAST.cajal,330,450,0.98,{t,cut,gaze:[3,1],nod:0.06});
-      ag_person(ctx,BB_CAST.kolliker,1010,440,1.0,{t:t+0.7,cut,flip:true,gaze:[-2,3],nod:look});
-      ag_person(ctx,BB_CAST.anat,1590,450,0.96,{t:t+1.3,cut,flip:true,gaze:[-2,3],nod:look});
+      ag_person(ctx,BB_CAST.kolliker,1010,440,1.0,{t:t+0.7,cut,flip:true,gaze:[-2,3],nod:look,smile:sm});
+      ag_person(ctx,BB_CAST.anat,1590,450,0.96,{t:t+1.3,cut,flip:true,gaze:[-2,3],nod:look,smile:sm});
       for(const [x,s] of [[560,0.72],[880,0.8],[1460,0.78]])bb_scope(ctx,x,770,s);
       bb_pillAt(ctx,1010,96,"Agrees",t,tAgree-0.1,null,{icon:"tick",col:AG.green});bb_pillAt(ctx,1590,106,"Agrees",t,tAgree+0.2,null,{icon:"tick",col:AG.green});
       bb_tagS(ctx,S,"Berlin · 1889",ag_in(t,tBerlin+0.3,0.6));}},
@@ -223,7 +243,8 @@ scene("cajal",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       bb_drawing(ctx,1,1,1,1-0.75*ag_in(t,tMany-0.3,1.2));
       const na=ag_io(t,tTheN-0.2,tMed-0.5,0.5);if(na>0){bb_leader(ctx,[1086,340],[1004,492],na,BB.ink);bb_word(ctx,"The neuron",1080,322,{a:na,w:700,size:34,col:BB.ink});}
       bb_messengers(ctx,t,ag_io(t,tGaps-0.6,tMach+0.4,0.4));
-      bb_scr(ctx,S,()=>{bb_pillAt(ctx,960,700,"Many medicines work here",t,tGaps-0.1,tMach-0.2);bb_tag(ctx,"Today",ag_io(t,tMed+0.1,tMach-0.2,0.5));});
+      const ra=ag_io(t,tGaps-0.3,tMach-0.2,0.5);if(ra>0){ctx.save();ctx.globalAlpha*=ra;ctx.setLineDash([7,6]);ctx.strokeStyle=rgba(BB.ink,0.75);ctx.lineWidth=2;ctx.beginPath();ctx.arc(J[0]+12,J[1]+6,26,0,TAU);ctx.stroke();ctx.restore();}
+      bb_scr(ctx,S,()=>{bb_pillAt(ctx,960,670,"Many medicines work here",t,tGaps-0.1,tMach-0.2);bb_tag(ctx,"Today",ag_io(t,tMed+0.1,tMach-0.2,0.5));});
       // machines: a unit with nothing to copy
       const qa=ag_in(t,tNothing-0.4,0.5)*(1-ag_in(t,tMany-0.4,0.5));if(qa>0){ctx.save();ctx.globalAlpha*=qa;ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(BB_VI,0.8);ctx.lineWidth=4;ctx.beginPath();ctx.arc(1380,250,62,0,TAU);ctx.stroke();ctx.setLineDash([]);
         ag_T(ctx,"?",1380,276,{w:800,size:72,align:"center",col:BB_VI});ctx.restore();}
@@ -273,7 +294,7 @@ scene("cell",(ctx,S,t,sc)=>{const C=sc.cues;
       bb_scr(ctx,S,()=>{const t0=tChem-0.7;
         bb_synapse(ctx,t,{t0,glow:0.8*ag_io(t,t0+1.7,tEx-0.2,0.5)+0.6*ag_io(t,tChange+0.3,tHebb,0.5),grow:ag_in(t,tChange+0.1,1.8),bound:ag_io(t,t0+1.5,t0+3.2,0.4)});
         const la=ag_in(t,tTouch+0.2,0.4),G=BB_SYN.gap;bb_leader(ctx,[1150,438],[G[0]+14,G[1]-10],la,[250,240,226]);bb_pillAt(ctx,1250,420,"The gap",t,tTouch+0.2,null);
-        bb_leader(ctx,[640,662],[842,540],ag_in(t,tChem+0.1,0.4),[250,240,226]);bb_pillAt(ctx,600,690,"Chemical messengers",t,tChem+0.1,null);
+        bb_leader(ctx,[640,662],[882,576],ag_in(t,tChem+0.1,0.4),[250,240,226]);bb_pillAt(ctx,600,690,"Chemical messengers",t,tChem+0.1,null);
         bb_exciteCard(ctx,1430,92,t,tEx,tHold);});}},
     // Hebb, 1949: when two cells fire together, the link between them grows stronger; rabbits, 1973: links grow stronger with use
     {cut:true,at:tHebb-0.3,place:"bbTissue",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
@@ -288,8 +309,8 @@ scene("cell",(ctx,S,t,sc)=>{const C=sc.cues;
         bb_pillAt(ctx,760,800,"Learning: connections that change",t,tLearn+0.2,null);});
       bb_tagS(ctx,S,"Montreal · 1949",ag_in(t,tHebb+0.4,0.5)*(1-ag_in(t,tRab-0.5,0.4)),BB_UNDER);
       bb_tagS(ctx,S,"Oslo · 1973",ag_in(t,tRab+0.1,0.5),BB_UNDER);}}];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);
-  bb_kick(ctx,ag_in(t,0.2,0.8));
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);
+  bb_kickShots(ctx,t,shots,si,[[1,0.35]],ag_in(t,0.2,0.8));
   const ta=ag_in(t,tFires-0.2,0.5)*(1-ag_in(t,tSame+2.6,0.5));if(ta>0)bb_trace(ctx,1320,96,520,250,clamp((t-tr0)/(tr1-tr0),0,1),{title:"All or nothing",ev:EV,k:ag_spr(t,tFires-0.2,0.5),a:ta});});
 
 /* ================================================================ 4 · Nature's trials */
@@ -335,7 +356,7 @@ scene("animals",(ctx,S,t,sc)=>{const C=sc.cues;
     {at:tHuman-0.4,place:"bbBrain",keys:[[0,960,520,1.0],[tWatts,1080,480,1.04]],d:2.4,push:0,draw(ctx,t){bb_brainLights(ctx,t,ag_in(t,tHuman+0.3,1.2));
       bb_pillAt(ctx,700,820,"More than 100 trillion connections",t,tTril-0.2,null);
       const ba=ag_in(t,tWatts-0.3,0.5);bb_bulb(ctx,1600,430,0.9,ag_in(t,t20w,0.8),ba);bb_pillAt(ctx,1600,690,"About 20 watts",t,t20w,null);}}];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kick(ctx);
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[0,0.5],[0,0.45],[0,0.5],[0,0.35],[1,0.45]]);
   bb_counter(ctx,t,[[tJelly+0.4,tSlug-0.5,"A net, no brain"],[t20-0.2,tBee-0.5,"About 20,000"],[tMil-0.2,tOct-0.5,"About 1 million"],[tHalf-0.2,tFinch-0.5,"About half a billion"],[t86-0.2,1e9,"About 86 billion"]]);});
 
 /* ================================================================ 5 · Filling the gaps */
@@ -355,7 +376,7 @@ scene("gaps",(ctx,S,t,sc)=>{const C=sc.cues;
 const BB_C43=bb_cell(1943,{x:520,y:470,r:22,reach:170,dirs:6,depth:3,wig:0.4,spines:true,axon:{ang:0.05,len:190,bend:0.2,ends:3,endLen:40},axW:7});
 const BB_ARC43=bb_smooth([[560,330],[720,240],[930,236],[1110,320]],8);
 // a sheet's heading in ink, that changes: the old one fades before the new one comes
-function bb_heading(ctx,t,list){for(const [a0,a1,s] of list){const a=ag_in(t,a0,0.5)*(1-ag_in(t,a1,0.4));if(a>0)ag_T(ctx,s,960,176,{w:700,size:34,align:"center",col:BB.inkSoft,a});}}
+function bb_heading(ctx,t,list){for(const [a0,a1,s] of list){const a=ag_in(t,a0,0.5)*(1-ag_in(t,a1,0.4));if(a>0)ag_T(ctx,s,960,206,{w:700,size:34,align:"center",col:BB.inkSoft,a});}}
 
 scene("borrowed",(ctx,S,t,sc)=>{const C=sc.cues;
   const tUnit=wAt(sc,"unit","a simple unit"),tDrew43=wAt(sc,"unit","drew"),tAdds=C.adds,tFire=wAt(sc,"adds","fires if the total"),tW=C.weights,tNud=wAt(sc,"weights","nudged"),tHebbs=wAt(sc,"weights","like Hebb's links");
@@ -388,14 +409,13 @@ scene("borrowed",(ctx,S,t,sc)=>{const C=sc.cues;
       if(ca>0)ag_T(ctx,"≠",800,540,{w:700,size:96,align:"center",col:AG.mut,a:ag_in(t,tIdea-0.3,0.5)*(1-ag_in(t,tComplex-0.5,0.6))});
       bb_oneCell(ctx,960,470,{t,cell:ag_in(t,tComplex,1.4),eq:ag_in(t,tMimic-0.6,0.5),net:ag_in(t,tMimic-0.4,1.4),sig:t>tMimic+1?((t-tMimic-1)*1.6)%7:null,a:ag_in(t,tComplex-0.2,0.5)*(1-ag_in(t,tChild-0.5,0.5))});
       bb_tagS(ctx,S,"Jerusalem · 2021",ag_in(t,t2021-0.2,0.5)*(1-ag_in(t,tChild-0.5,0.5)),BB_UNDER);
-      bb_examples(ctx,960,470,{kA:ag_in(t,tFew-0.6,1.6),kB:ag_in(t,tMany-0.4,1.6),a:ag_in(t,tChild-0.2,0.5)});}},
+      bb_examples(ctx,960,470,{kA:ag_in(t,tFew-0.6,1.6),kB:ag_in(t,tMany-0.4,1.6),a:ag_in(t,tChild-0.2,0.5),k:Math.min(1,ag_spr(t,tChild-0.2,0.5))});}},
     // like a plane: it borrowed the wing, but not the flapping
     {at:tWing-0.4,place:"bbSky",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){
       bb_buzzard(ctx,560,400+10*Math.sin(t*2),1.0,{flap:Math.sin(t*5.5)*(0.6+0.4*ag_in(t,tFlap-0.4,0.6)),roll:-0.04});
       bb_plane(ctx,1360,400,0.95,{wing:ag_in(t,tBorrW-0.2,0.6)});
       bb_pillAt(ctx,560,640,"A bird",t,tWing+0.1,null);bb_pillAt(ctx,1360,680,"A plane",t,tWing+0.4,null);}}];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);
-  const dk=ag_in(t,tEdges-0.4,0.6)*(1-ag_in(t,tFeed-0.4,0.6));bb_kick(ctx,1-dk);bb_kick(ctx,dk,{dark:true});});
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[1,0.3],[1,0.2],[0,0],[0,0.35]]);});
 
 /* ================================================================ 7 · Likely words */
 const BB_PROMPT="A bee tells the hive where food is by".split(" ");
@@ -493,8 +513,8 @@ scene("held",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
     // models are built on that picture; they fill gaps with what's likely, a little differently each time; check them against the
     // evidence, as his drawings were checked; next: a model that reasons, with hands, in a loop
     {at:tBuilt-0.4,place:"lab",keys:[[0,960,540,1.0]],push:0.015,draw(ctx,t){
-      const na=ag_in(t,tUnits-0.4,0.6)*(1-ag_in(t,tFill-0.4,0.5));
-      bb_net(ctx,BB_HELD,{r:30,u:ag_in(t,tUnits-0.4,1.4),sig:((t-tUnits)*0.9)%2.8,a:na,alpha:0.5,w:(i,j,k)=>1.6+3.4*(0.5+0.5*Math.sin(t*0.9*ag_in(t,tConn-0.3,1)+i*1.7+j*1.3+k*0.7))});
+      const na=ag_in(t,tBuilt-0.2,0.6)*(1-ag_in(t,tFill-0.4,0.5));
+      bb_net(ctx,BB_HELD,{r:30,u:ag_in(t,tBuilt-0.2,1.9),sig:t<tUnits?null:((t-tUnits)*0.9)%2.8,a:na,alpha:0.5,w:(i,j,k)=>1.6+3.4*(0.5+0.5*Math.sin(t*0.9*ag_in(t,tConn-0.3,1)+i*1.7+j*1.3+k*0.7))});
       // the model moves to the middle for its loop
       const mv=ag_sine(ag_in(t,tNext-0.6,1.6)),mx=lerp(300,960,mv),my=lerp(640,470,mv),la=ag_in(t,tNext+0.9,0.2);
       const ma=ag_in(t,tFill-0.4,0.6);if(la<1)bb_model(ctx,mx,my,lerp(100,88,mv),t,{a:ma*(1-la),core:0.6,think:0.4*ag_io(t,tFill,tChk,0.5),floor:lerp(770,700,mv)});
@@ -502,13 +522,13 @@ scene("held",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       if(la>0)ag_loop(ctx,960,470,{t,R:180,r:88,p:ag_in(t,tNext+0.9,1.8),core:0.7,think:0.3,a:la*(1-ag_in(t,br-0.4,0.9)),label:null});
       // a little differently each time
       const wa=ag_in(t,tFill-0.2,0.5)*(1-ag_in(t,tChk-0.5,0.5));bb_wheel(ctx,1000,500,170,R1,sp.rot,{pick:sp.pick,a:wa,k:Math.min(1,ag_spr(t,tFill-0.2,0.5))});
-      const w=sp.pick==null?null:WORDS[sp.pick];bb_line(ctx,1240,440,[["…by ",null],[w||"",BB_VI,sp.pick==null?0:1],[".",null]],{kick:"The model",w:420,a:wa});
+      const w=sp.pick==null?null:WORDS[sp.pick];bb_line(ctx,1240,440,[["…by ",null],[w||"______",w?BB_VI:AG.mut,w?1:0.7],[".",null]],{kick:"The model",w:420,a:wa});
       // checked against the evidence, as his drawings were
       const ca=ag_in(t,tEv-0.6,0.5)*(1-ag_in(t,tNext-0.6,0.5));
       ag_evidence(ctx,500,220,560,{kick:"The model",title:"A likely answer"},[{kick:"Source",title:"The records",col:AG.orange},{kick:"Check",title:"It matches",col:AG.green}],{open:ag_in(t,tEv-0.2,1.2),a:ca,k:Math.min(1,ag_spr(t,tEv-0.6,0.5))});
-      const pa=ag_in(t,tCajal-0.4,0.5)*(1-ag_in(t,tNext-0.6,0.5));bb_framed(ctx,1220,240,500,314,pa,ag_spr(t,tCajal-0.4,0.5),{img:bb_drawingPic()});
+      const pa=ag_in(t,tCajal-0.4,0.5)*(1-ag_in(t,tNext-0.6,0.5));bb_framed(ctx,1220,240,500,298,pa,ag_spr(t,tCajal-0.4,0.5),{img:bb_drawingPic()});
       bb_pillAt(ctx,1470,640,"Checked",t,tCajal+0.4,tNext-0.6,{icon:"tick",col:AG.green});}}];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kick(ctx,1-ag_in(t,br-0.4,0.5));
+  const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);bb_kickShots(ctx,t,shots,si,[[1,0.3],[0,0]],1-ag_in(t,br-0.4,0.5));
   ag_end(ctx,S,t,br,BB_TITLE,"A likely answer isn't a checked one.","Film 2 of 10");});
 
 // chapters that open on a cut: Borrowed, not copied opens on paper, as Filling the gaps ends on it

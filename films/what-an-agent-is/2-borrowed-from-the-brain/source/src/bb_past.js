@@ -30,7 +30,7 @@ const BB_CAST={
   anat:{key:"bb_anat",name:"An anatomist",skin:[226,190,160],hair:{style:"side",c:[96,74,56]},top:{kind:"suit",c:[70,66,62],inner:[238,234,226],tie:[52,46,44]},hat:{paint:bb_stache([92,70,54])},breath:0.27},
   patient:{key:"bb_patient",name:"A patient",skin:[218,180,150],hair:{style:"cropped",c:[150,146,140]},top:{kind:"overshirt",c:[132,120,104],inner:[230,224,210]},breath:0.3},
   hebb:{key:"bb_hebb",name:"Donald Hebb",skin:[232,198,172],hair:{style:"side",c:[92,80,70]},glasses:[50,46,44],top:{kind:"suit",c:[96,90,84],inner:[238,236,230],tie:[86,62,58]},breath:0.26},
-  doctor:{key:"bb_doctor",name:"A doctor",skin:[226,190,160],hair:{style:"side",c:[70,56,46]},beard:[76,60,50],top:{kind:"suit",c:[56,60,66],inner:[238,234,226],tie:[44,46,52]},breath:0.27}
+  doctor:{key:"bb_doctor",name:"A doctor",skin:[230,196,168],hair:{style:"side",c:[122,72,44]},top:{kind:"suit",c:[60,66,80],inner:[238,234,226],tie:[46,52,70]},breath:0.27}
 };
 
 /* ---------------------------------------------------------------- shared painting: plaster, a window, floorboards */
@@ -87,7 +87,8 @@ AG_PLACES.bbNavy=c=>{bb_wall(c,[196,204,192],0,700,11);c.fillStyle=rgba([150,162
   for(let k=-8;k<=8;k++){c.beginPath();c.moveTo(960+k*90,700);c.lineTo(960+k*260,H);c.stroke();}ag_grain(c,0,0,W,H,1.4,13);};
 
 /* ---------------------------------------------------------------- paper on the table, seen from above */
-const BB_SHEET={x:330,y:96,w:1260,h:790};
+// its top edge sits below the film's title, which reads on the wood above it
+const BB_SHEET={x:330,y:136,w:1260,h:750};
 AG_PLACES.bbSheet=c=>{const g=c.createLinearGradient(0,0,W,H);g.addColorStop(0,rgba(mix(BB.walnut,[20,12,6],0.15),1));g.addColorStop(1,rgba(mix(BB.walnut,[255,230,200],0.08),1));c.fillStyle=g;c.fillRect(0,0,W,H);
   c.save();c.globalAlpha=0.2;c.strokeStyle=rgba(BB.walnutDk,1);c.lineWidth=2.5;const R=ag_rnd(5);for(let i=0;i<40;i++){const y=R()*H;c.beginPath();c.moveTo(0,y);for(let x=0;x<=W;x+=80)c.lineTo(x,y+Math.sin(x*0.003+i*1.7)*10);c.stroke();}c.restore();
   ag_grain(c,0,0,W,H,2,7);const S=BB_SHEET;bb_paper(c,S.x,S.y,S.w,S.h);
@@ -106,16 +107,34 @@ function bb_hills(c,y,amp,col,seed){c.fillStyle=rgba(col,1);c.beginPath();c.move
 AG_PLACES.bbSky=c=>{bb_skyGrad(c,[150,180,206],[236,232,220],820);bb_clouds(c,4,120,520,9);
   const sun=c.createRadialGradient(1640,240,10,1640,240,640);sun.addColorStop(0,"rgba(255,246,220,0.7)");sun.addColorStop(1,"rgba(255,246,220,0)");c.fillStyle=sun;c.fillRect(0,0,W,H);
   bb_hills(c,820,160,[160,170,160],2.1);bb_hills(c,900,120,[128,140,120],5.3);bb_hills(c,980,80,[104,118,96],8.7);ag_grain(c,0,0,W,H,1.2,17);};
-// a buzzard soaring, seen from below and a little to the side: broad wings held in a shallow V, the tips spread like fingers. roll
-// tips the bird; twist (-1..1) turns one wingtip up and the other down, as Wilbur Wright saw
-function bb_buzzard(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(o.roll||0);ctx.scale(s,s);const col=o.col||[52,44,40],tw=o.twist||0,a=o.a==null?1:o.a;ctx.globalAlpha*=a;
-  const fl=(o.flap||0)*44,wing=side=>{const k=side,lift=-tw*k*14-fl;ctx.save();ctx.scale(k,1);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.moveTo(6,-4);ctx.bezierCurveTo(60,-26,130,-30+lift*0.5,186,-24+lift);
-    // the fingered tip: five primaries spread
-    for(let f=0;f<5;f++){const fx=186+f*4,fy=-22+lift+f*7;ctx.lineTo(fx+22-f*2,fy-4+f*1.5);ctx.lineTo(fx+4,fy+4);}
-    ctx.bezierCurveTo(150,8+lift*0.5,90,14,8,12);ctx.closePath();ctx.fill();
-    ctx.fillStyle=rgba(mix(col,[200,190,180],0.35),0.8);ctx.beginPath();ctx.moveTo(40,-6);ctx.bezierCurveTo(90,-14,140,-14+lift*0.5,176,-10+lift);ctx.bezierCurveTo(140,0,90,4,40,4);ctx.closePath();ctx.fill();ctx.restore();};
-  wing(1);wing(-1);ctx.fillStyle=rgba(col,1);ctx.beginPath();ctx.ellipse(0,4,16,30,0,0,TAU);ctx.fill();ctx.beginPath();ctx.moveTo(-14,26);ctx.lineTo(0,60);ctx.lineTo(14,26);ctx.closePath();ctx.fill();
-  ctx.beginPath();ctx.arc(0,-26,10,0,TAU);ctx.fill();ctx.restore();}
+// a buzzard soaring, seen from below and a little to the side: broad wings held in a shallow V, a pale underwing with a dark patch at
+// the wrist and a dark trailing edge, the tips spread like fingers, a short barred tail fanned. roll tips the bird; twist (-1..1)
+// turns one wingtip up and the other down, as Wilbur Wright saw; flap (0..1) lifts both wings
+function bb_buzzard(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate(o.roll||0);ctx.scale(s,s);const col=o.col||[70,56,46],tw=o.twist||0,a=o.a==null?1:o.a;ctx.globalAlpha*=a;
+  const fl=(o.flap||0)*44,dk=mix(col,[24,18,14],0.35),pale=mix(col,[232,222,204],0.62),mid=mix(col,pale,0.4);
+  const wing=k=>{const lift=-tw*k*14-fl-8,ch=1+tw*k*0.22;ctx.save();ctx.scale(k,1);
+    // the wing's outline: the leading edge bowing forward to the wrist, the hand narrowing to the fingers, the trailing edge curving back in
+    const out=c=>{c.moveTo(8,-12);c.bezierCurveTo(50,-30,104,-34+lift*0.3,132,-30+lift*0.55);c.bezierCurveTo(156,-27+lift*0.75,176,-24+lift*0.9,190,-22*ch+lift);
+      c.lineTo(194,10*ch+lift*0.9);c.bezierCurveTo(160,22*ch+lift*0.6,110,26+lift*0.35,64,24);c.bezierCurveTo(40,23,20,20,8,16);c.closePath();};
+    // the fingers: five primaries, each a feather tapering to its tip, spread with gaps between
+    ctx.fillStyle=rgba(dk,1);for(let f=0;f<5;f++){const by=(-20+f*7.4)*ch+lift,bx=188+f*1.6,len=(34-f*3)*(1+0.1*(2-Math.abs(f-2))),ang=-0.42+f*0.21,ex=bx+Math.cos(ang)*len,ey=by+Math.sin(ang)*len,w2=3.4;
+      ctx.beginPath();ctx.moveTo(bx,by-w2);ctx.quadraticCurveTo(bx+len*0.55,by-w2+Math.sin(ang)*len*0.5,ex,ey);ctx.quadraticCurveTo(bx+len*0.5,by+w2+Math.sin(ang)*len*0.5,bx,by+w2);ctx.closePath();ctx.fill();}
+    ctx.save();ag_shape(ctx,out);ctx.fillStyle=rgba(mid,1);ctx.fill();ctx.clip();
+    // the pale coverts under the arm, the dark wrist patch, the dark trailing band, and a soft shadow towards the body
+    ctx.fillStyle=rgba(pale,0.9);ctx.beginPath();ctx.moveTo(14,-8);ctx.bezierCurveTo(60,-22,110,-24+lift*0.3,150,-18+lift*0.7);ctx.bezierCurveTo(140,0+lift*0.6,90,6+lift*0.2,18,6);ctx.closePath();ctx.fill();
+    ctx.fillStyle=rgba(dk,0.85);ctx.beginPath();ctx.ellipse(134,-14+lift*0.6,13,8,0.2,0,TAU);ctx.fill();
+    ctx.strokeStyle=rgba(dk,0.8);ctx.lineWidth=7;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(30,20);ctx.bezierCurveTo(90,25+lift*0.3,150,20*ch+lift*0.6,194,8*ch+lift*0.9);ctx.stroke();
+    const sh=ctx.createLinearGradient(0,0,60,0);sh.addColorStop(0,rgba(dk,0.45));sh.addColorStop(1,rgba(dk,0));ctx.fillStyle=sh;ctx.fillRect(0,-40,60,80);ctx.restore();ctx.restore();};
+  wing(1);wing(-1);
+  // the tail, a short fan with fine bars and a darker band at its end
+  const tail=c=>{c.moveTo(-12,24);c.bezierCurveTo(-24,44,-30,62,-26,74);c.quadraticCurveTo(0,84,26,74);c.bezierCurveTo(30,62,24,44,12,24);c.closePath();};
+  ctx.save();ag_shape(ctx,tail);ctx.fillStyle=rgba(pale,1);ctx.fill();ctx.clip();ctx.strokeStyle=rgba(dk,0.35);ctx.lineWidth=2;for(let i=0;i<5;i++){ctx.beginPath();ctx.moveTo(-30,40+i*7);ctx.quadraticCurveTo(0,46+i*7,30,40+i*7);ctx.stroke();}
+  ctx.fillStyle=rgba(dk,0.7);ctx.fillRect(-32,68,64,14);ctx.restore();
+  // the body: a dark head and neck, a pale breast band, a dark belly
+  ag_soft(ctx,c=>c.ellipse(0,2,17,32,0,0,TAU),dk,mid,-4,-10,30,null,0,0.5);
+  ctx.fillStyle=rgba(pale,0.85);ctx.beginPath();ctx.ellipse(0,-2,13,6,0,0,TAU);ctx.fill();
+  ag_soft(ctx,c=>c.arc(0,-28,11,0,TAU),dk,mid,-2,-32,12,null,0,0.5);
+  ctx.fillStyle=rgba([210,170,60],0.9);ctx.beginPath();ctx.moveTo(-3,-38);ctx.lineTo(0,-44);ctx.lineTo(3,-38);ctx.closePath();ctx.fill();ctx.restore();}
 AG_PLACES.bbDunes=c=>{bb_skyGrad(c,[164,190,210],[240,236,224],700);bb_clouds(c,9,90,420,7);
   const sea=c.createLinearGradient(0,640,0,700);sea.addColorStop(0,rgba([132,160,170],1));sea.addColorStop(1,rgba([170,186,182],1));c.fillStyle=sea;c.fillRect(0,640,W,60);
   const dune=(y,amp,col,seed)=>{c.fillStyle=rgba(col,1);c.beginPath();c.moveTo(0,H);for(let x=0;x<=W;x+=16)c.lineTo(x,y-amp*Math.pow(Math.max(0,AG_NZ.fbm(x*0.0011+seed,1.3,3)),1.4));c.lineTo(W,H);c.closePath();c.fill();};
@@ -131,9 +150,12 @@ function bb_glider(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.rotate
     ctx.lineTo(480,yy-tw*26+th+tw*8);ctx.quadraticCurveTo(0,yy+th-4,-480,yy+tw*26+th-tw*8);ctx.closePath();ctx.fill();ctx.stroke();
     ctx.strokeStyle=rgba(fr,0.35);ctx.lineWidth=1.5;for(let k=-11;k<=11;k++){const xx=k*42;ctx.beginPath();ctx.moveTo(xx,yy+tw*26*(-xx/480)-1);ctx.lineTo(xx,yy+th+tw*20*(-xx/480)-2);ctx.stroke();}};
   wing(-60,22);wing(40,22);ctx.strokeStyle=rgba(fr,1);ctx.lineWidth=3;for(let k=-4;k<=4;k++){const xx=k*110;ctx.beginPath();ctx.moveTo(xx,-40+tw*26*(-xx/480));ctx.lineTo(xx,42+tw*26*(-xx/480));ctx.stroke();}
-  ctx.fillStyle=rgba(cl,1);ctx.strokeStyle=rgba(fr,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,-130,120,12,0,0,TAU);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-30,-118);ctx.lineTo(-30,-58);ctx.moveTo(30,-118);ctx.lineTo(30,-58);ctx.stroke();
   // a pilot lying on the lower wing, seen from the front: a small dark shape
-  ctx.fillStyle="rgba(50,44,40,0.9)";ctx.beginPath();ctx.ellipse(0,48,26,12,0,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(0,34,10,0,TAU);ctx.fill();ctx.restore();}
+  ctx.fillStyle="rgba(50,44,40,0.9)";ctx.beginPath();ctx.ellipse(0,48,26,12,0,0,TAU);ctx.fill();ctx.beginPath();ctx.arc(0,34,10,0,TAU);ctx.fill();
+  // the elevator, out in front of the wings on its outriggers: a shorter surface, nearer to us, so a little lower and larger in the view
+  ctx.strokeStyle=rgba(fr,0.8);ctx.lineWidth=2.4;for(const xx of [-70,70]){ctx.beginPath();ctx.moveTo(xx,-40);ctx.lineTo(xx*1.2,6);ctx.moveTo(xx,42);ctx.lineTo(xx*1.2,18);ctx.stroke();}
+  ctx.fillStyle=rgba(cl,1);ctx.strokeStyle=rgba(fr,0.9);ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(-230,8);ctx.quadraticCurveTo(0,0,230,8);ctx.lineTo(230,20);ctx.quadraticCurveTo(0,14,-230,20);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.strokeStyle=rgba(fr,0.35);ctx.lineWidth=1.4;for(let k=-5;k<=5;k++){ctx.beginPath();ctx.moveTo(k*40,4+Math.abs(k)*0.3);ctx.lineTo(k*40,17+Math.abs(k)*0.3);ctx.stroke();}ctx.restore();}
 
 /* ---------------------------------------------------------------- the maple and its seeds */
 AG_PLACES.bbMaple=c=>{bb_skyGrad(c,[178,196,206],[236,226,206],H);
@@ -220,9 +242,19 @@ AG_PLACES.bbRoom=c=>{bb_wall(c,BB.plaster,0,660,5);
       c.fillStyle="rgba(255,230,180,0.35)";c.fillRect(x+3,y+110-bh+10,bw-6,3);x+=bw+2;}}
   ag_inner(c,cc=>cc.rect(60,90,380,570),"rgba(0,0,0,0.4)",14,-6,4);
   // a framed print on the wall
-  ag_picture(c,560,170,240,170,{});
-  bb_window(c,1440,70,380,560,{frame:[214,204,184],sky0:[196,212,226],sky1:[244,236,218],view:(cc,x,y,w,h)=>{cc.fillStyle="rgba(200,178,150,0.8)";cc.fillRect(x,y+h*0.62,w,h*0.38);
-    cc.fillStyle="rgba(176,150,120,0.8)";for(let k=0;k<4;k++)cc.fillRect(x+k*96+10,y+h*0.5-k*14,70,h*0.5);}});
+  ag_picture(c,560,170,240,170,{draw:(cc,px,py,pw,ph)=>{const g=cc.createLinearGradient(0,py,0,py+ph);g.addColorStop(0,"rgb(240,230,208)");g.addColorStop(1,"rgb(226,212,184)");cc.fillStyle=g;cc.fillRect(px,py,pw,ph);
+    // the serrated peaks of Montserrat, above Barcelona, in sepia washes
+    for(const [base,amp,col,seed] of [[0.78,0.5,[170,140,104],2],[0.92,0.36,[132,104,76],5]]){cc.fillStyle=rgba(col,0.85);cc.beginPath();cc.moveTo(px,py+ph);
+      for(let i=0;i<=24;i++){const u=i/24,bump=Math.pow(Math.abs(Math.sin(u*Math.PI*7+seed)),0.6),env=Math.sin(u*Math.PI);cc.lineTo(px+u*pw,py+ph*base-ph*amp*env*(0.55+0.45*bump));}
+      cc.lineTo(px+pw,py+ph);cc.closePath();cc.fill();}}});
+  bb_window(c,1440,70,380,560,{frame:[214,204,184],sky0:[196,212,226],sky1:[244,236,218],view:(cc,x,y,w,h)=>{
+    // the houses across the street: one row of fronts touching, each with its cornice, its windows and shutters, one pitched roof
+    const fronts=[[0,0.44,[214,196,168]],[0.27,0.36,[200,176,146]],[0.52,0.48,[222,206,178]],[0.78,0.4,[206,184,152]]];
+    fronts.forEach(([u0,top,col],k)=>{const x0=x+u0*w,x1=x+(fronts[k+1]?fronts[k+1][0]:1)*w,y0=y+h*top;cc.fillStyle=rgba(col,0.92);cc.fillRect(x0,y0,x1-x0,y+h-y0);
+      cc.fillStyle=rgba(mix(col,[90,70,50],0.35),0.8);cc.fillRect(x0,y0-6,x1-x0,8);
+      if(k===2){cc.fillStyle=rgba([176,104,72],0.85);cc.beginPath();cc.moveTo(x0-4,y0-4);cc.lineTo((x0+x1)/2,y0-40);cc.lineTo(x1+4,y0-4);cc.closePath();cc.fill();}
+      for(let r=0;r<4;r++)for(let i=0;i<2;i++){const wx=x0+(x1-x0)*(0.22+i*0.4),wy=y0+26+r*62;if(wy>y+h-20)continue;cc.fillStyle=rgba(mix(col,[60,56,60],0.55),0.85);cc.fillRect(wx,wy,(x1-x0)*0.16,34);
+        cc.fillStyle=rgba([96,120,104],0.6);cc.fillRect(wx-6,wy,5,34);cc.fillRect(wx+(x1-x0)*0.16+1,wy,5,34);}});}});
   bb_table(c,BB_ROOM.table[0],BB_ROOM.table[1]);c.fillStyle=rgba(mix(BB.walnutDk,[0,0,0],0.4),1);c.fillRect(0,BB_ROOM.table[1]+40,W,H);
   // on the table: slides in a row, a jar, the ink pot and paper
   for(let k=0;k<5;k++){const x=1300+k*58,y=760;ag_floorShadow(c,x+20,y+12,34,6,0.3);c.fillStyle="rgba(230,236,240,0.85)";c.fillRect(x,y,46,16);c.fillStyle="rgba(176,128,58,0.8)";c.fillRect(x+16,y+3,14,10);}

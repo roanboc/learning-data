@@ -1,0 +1,347 @@
+1
+00:00:01,600 --> 00:00:08,641
+In 1958, the psychologist Frank Rosenblatt showed a program that learned from examples: the perceptron.
+
+2
+00:00:09,941 --> 00:00:11,538
+He modelled it on a nerve cell.
+
+3
+00:00:13,038 --> 00:00:15,225
+Why look to nature to build a machine?
+
+4
+00:00:16,525 --> 00:00:22,035
+Because nature has been trying out designs for billions of years, and keeping the ones that work.
+
+5
+00:00:23,135 --> 00:00:26,321
+People watched birds for centuries before they could fly.
+
+6
+00:00:27,021 --> 00:00:30,982
+Wilbur Wright noticed buzzards twisting their wingtips to keep their balance.
+
+7
+00:00:31,882 --> 00:00:34,347
+So the brothers built that twist into their wings.
+
+8
+00:00:35,647 --> 00:00:40,656
+Engineers still study the maple seed, which spins down like a tiny helicopter.
+
+9
+00:00:42,156 --> 00:00:46,813
+And for a machine that learns, nature had the only working example: a brain.
+
+10
+00:00:48,113 --> 00:00:51,764
+But in 1888, nobody could see how a brain was wired.
+
+11
+00:00:53,864 --> 00:01:00,059
+Barcelona, 1888. Santiago Ramón y Cajal, a doctor, teaches anatomy.
+
+12
+00:01:00,959 --> 00:01:04,001
+He looks at thin slices of brain under a microscope.
+
+13
+00:01:05,301 --> 00:01:09,492
+Under the lens, the brain is a thicket of fibres, too dense to follow.
+
+14
+00:01:10,792 --> 00:01:18,226
+Many scientists, among them the Italian Camillo Golgi, think the fibres are fused into one continuous net.
+
+15
+00:01:19,326 --> 00:01:23,714
+If they are, nobody can say where a message starts, or how a brain learns.
+
+16
+00:01:24,414 --> 00:01:29,237
+When a stroke cuts off the blood to part of someone's brain, it can take away their speech.
+
+17
+00:01:29,937 --> 00:01:33,283
+Doctors can't tell what it has broken, or whether it will heal.
+
+18
+00:01:34,583 --> 00:01:36,023
+Something has to change.
+
+19
+00:01:37,523 --> 00:01:42,586
+Golgi himself had found a stain that turns a few cells black, and leaves the rest clear.
+
+20
+00:01:43,286 --> 00:01:47,777
+Which few, it seems to pick at random. Nobody knows why, even today.
+
+21
+00:01:49,077 --> 00:01:54,686
+Cajal makes it work reliably, and uses the brains of young birds, where the thicket is thinner.
+
+22
+00:01:55,786 --> 00:01:58,899
+Each black cell stands out whole, like a tree in winter.
+
+23
+00:02:00,799 --> 00:02:06,819
+He draws what he sees: separate cells, their branches reaching close to other cells, but never joined.
+
+24
+00:02:08,119 --> 00:02:14,248
+And he argues that a message travels one way: in through the branches, and out along one long fibre.
+
+25
+00:02:15,748 --> 00:02:21,477
+In Berlin, in 1889, the leading anatomists look down his microscopes, and agree.
+
+26
+00:02:22,577 --> 00:02:28,365
+In 1906, he and Golgi share the Nobel Prize, though Golgi still defends his net.
+
+27
+00:02:29,665 --> 00:02:34,247
+The separate nerve cell, the neuron, became the starting point of brain science.
+
+28
+00:02:35,147 --> 00:02:38,434
+Today, many medicines for the brain work at the gaps he drew.
+
+29
+00:02:39,934 --> 00:02:45,801
+Machines had the same problem: without a picture of how a brain is wired, there was nothing to copy.
+
+30
+00:02:46,501 --> 00:02:53,044
+His picture gave them a design: many simple cells, each listening to many others, passing one message on.
+
+31
+00:02:54,344 --> 00:02:56,349
+Today's models are still built from it.
+
+32
+00:03:03,249 --> 00:03:05,902
+A neuron is a cell that carries messages.
+
+33
+00:03:06,602 --> 00:03:10,017
+Its branches take in signals from thousands of other cells.
+
+34
+00:03:11,117 --> 00:03:16,521
+When enough arrive together, it fires: a pulse of electricity runs down its long fibre.
+
+35
+00:03:17,821 --> 00:03:20,871
+The pulse is always the same size: all or nothing.
+
+36
+00:03:22,371 --> 00:03:28,334
+At the end, it almost touches the next cell, and chemical messengers carry the signal across the gap.
+
+37
+00:03:29,634 --> 00:03:33,020
+Some connections excite the next cell; others hold it back.
+
+38
+00:03:34,320 --> 00:03:35,639
+And connections change.
+
+39
+00:03:36,339 --> 00:03:44,460
+In 1949, the psychologist Donald Hebb proposed that when two cells fire together, the link between them grows stronger.
+
+40
+00:03:45,560 --> 00:03:50,661
+In 1973, experiments on rabbits showed links growing stronger with use.
+
+41
+00:03:51,761 --> 00:03:55,121
+That's learning, inside a brain: connections that change.
+
+42
+00:03:57,621 --> 00:04:01,766
+Nature has tried out nerve cells for more than six hundred million years.
+
+43
+00:04:03,266 --> 00:04:08,590
+A jellyfish has no brain: just a net of nerve cells, enough to swim and catch food.
+
+44
+00:04:10,490 --> 00:04:14,721
+A sea slug has about twenty thousand nerve cells, some big enough to see.
+
+45
+00:04:16,221 --> 00:04:19,777
+Eric Kandel showed that when it learns, its connections change.
+
+46
+00:04:21,477 --> 00:04:25,644
+A honeybee has about a million, in a brain smaller than a sesame seed.
+
+47
+00:04:27,144 --> 00:04:32,197
+Bees learn colours, scents and the way home, and dance to tell each other where food is.
+
+48
+00:04:34,097 --> 00:04:40,205
+An octopus has about half a billion, two thirds of them in its arms: each arm can taste on its own.
+
+49
+00:04:42,105 --> 00:04:46,312
+A young zebra finch learns its song from its father, practising for weeks.
+
+50
+00:04:48,212 --> 00:04:54,161
+And a human brain has about 86 billion, joined by more than a hundred trillion connections.
+
+51
+00:04:55,461 --> 00:04:59,021
+It runs on about 20 watts, the power of a dim light bulb.
+
+52
+00:05:01,521 --> 00:05:05,426
+A brain doesn't take in everything: it fills gaps with what's likely.
+
+53
+00:05:06,726 --> 00:05:11,198
+Where the nerve leaves each eye, there are no cells to catch light: a blind spot.
+
+54
+00:05:13,098 --> 00:05:16,894
+You never see a hole there. Your brain fills it in, from what's around it.
+
+55
+00:05:20,194 --> 00:05:26,478
+In 1943, Warren McCulloch and Walter Pitts drew Cajal's nerve cell as a simple unit.
+
+56
+00:05:27,578 --> 00:05:31,714
+It adds up its inputs, and fires if the total passes a set level.
+
+57
+00:05:33,214 --> 00:05:40,255
+Rosenblatt's perceptron gave each connection a weight, a number nudged up or down as it learns, like Hebb's links.
+
+58
+00:05:41,755 --> 00:05:49,420
+In 1959, David Hubel and Torsten Wiesel found cells in a cat's brain that fire for edges at one angle.
+
+59
+00:05:50,320 --> 00:05:52,573
+They feed cells that respond to shapes.
+
+60
+00:05:53,873 --> 00:05:56,790
+Networks that read pictures borrowed those layers.
+
+61
+00:05:58,290 --> 00:06:03,446
+Today's models still add up weighted inputs, with billions of weights set by training.
+
+62
+00:06:04,546 --> 00:06:06,795
+But they borrowed an idea, not a brain.
+
+63
+00:06:07,695 --> 00:06:15,426
+A real nerve cell is far more complex: in 2021, it took a network of five to eight layers to mimic just one.
+
+64
+00:06:16,926 --> 00:06:21,643
+A child can learn a new word from a few examples; a model needs a great many.
+
+65
+00:06:22,943 --> 00:06:26,067
+Like a plane, which borrowed the wing, but not the flapping.
+
+66
+00:06:28,567 --> 00:06:30,590
+A model writes one word at a time.
+
+67
+00:06:31,890 --> 00:06:34,953
+For the next word, it gives every word it knows a chance.
+
+68
+00:06:36,453 --> 00:06:43,714
+After "A bee tells the hive where food is by", "dancing" might get 70 chances in a hundred, and "buzzing" 12.
+
+69
+00:06:45,614 --> 00:06:50,870
+Then it draws one, like spinning a wheel: big slices win most often, but not always.
+
+70
+00:06:52,770 --> 00:06:58,796
+So the same question can bring a different answer: one word changes early on, and the rest follows.
+
+71
+00:07:00,296 --> 00:07:02,928
+A setting called temperature changes the slices.
+
+72
+00:07:04,428 --> 00:07:10,481
+Turned down, the biggest slice almost always wins, and answers stick to the patterns the model saw most.
+
+73
+00:07:12,181 --> 00:07:18,040
+Turned up, small slices grow: answers vary more, sometimes in new ways, and more often go wrong.
+
+74
+00:07:19,740 --> 00:07:22,358
+Even turned right down, a little chance stays.
+
+75
+00:07:23,058 --> 00:07:29,089
+When a model answers many people at once, its sums can come out a hair different, and tip a close choice.
+
+76
+00:07:31,589 --> 00:07:35,090
+And when the fact isn't there, the model still writes likely words.
+
+77
+00:07:36,590 --> 00:07:43,988
+In a 2025 study, a model asked three times for a researcher's birthday gave three different dates, all wrong.
+
+78
+00:07:45,888 --> 00:07:50,804
+A birthday is a fact a model may have seen once, or never: there's no pattern to learn.
+
+79
+00:07:52,304 --> 00:07:58,922
+And the tests models are trained to pass reward a guess over "I don't know": a guess might score; a blank never will.
+
+80
+00:08:00,922 --> 00:08:04,225
+Brains fill gaps too, with what's likely, and just as surely.
+
+81
+00:08:05,925 --> 00:08:08,098
+So a fluent answer isn't a checked one.
+
+82
+00:08:10,998 --> 00:08:13,630
+Cajal's picture held because others could check it.
+
+83
+00:08:14,730 --> 00:08:21,649
+In the 1950s, electron microscopes showed the gap he had drawn, about twenty millionths of a millimetre wide.
+
+84
+00:08:23,149 --> 00:08:27,561
+Models are built on that picture: simple units, and connections that change.
+
+85
+00:08:28,861 --> 00:08:33,046
+Like brains, they fill gaps with what's likely, a little differently each time.
+
+86
+00:08:34,346 --> 00:08:39,832
+Knowing that, you know when to check them: against the evidence, as Cajal's drawings were checked.
+
+87
+00:08:41,532 --> 00:08:45,758
+Next, what an agent is: a model that reasons, with hands, in a loop.

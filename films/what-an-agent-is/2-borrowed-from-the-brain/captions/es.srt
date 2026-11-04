@@ -1,0 +1,347 @@
+1
+00:00:01,600 --> 00:00:08,641
+En 1958, el psicólogo Frank Rosenblatt mostró un programa que aprendía de ejemplos: el perceptrón.
+
+2
+00:00:09,941 --> 00:00:11,538
+Lo basó en una célula nerviosa.
+
+3
+00:00:13,038 --> 00:00:15,225
+¿Por qué mirar a la naturaleza para crear máquinas?
+
+4
+00:00:16,525 --> 00:00:22,035
+Porque la naturaleza lleva miles de millones de años probando diseños, y conservando los que funcionan.
+
+5
+00:00:23,135 --> 00:00:26,321
+La gente observó a las aves durante siglos antes de poder volar.
+
+6
+00:00:27,021 --> 00:00:30,982
+Wilbur Wright notó que las rapaces torcían la punta de las alas para mantener el equilibrio.
+
+7
+00:00:31,882 --> 00:00:34,347
+Así que los hermanos pusieron esa torsión en sus alas.
+
+8
+00:00:35,647 --> 00:00:40,656
+Los ingenieros aún estudian la semilla del arce, que cae girando como un helicóptero diminuto.
+
+9
+00:00:42,156 --> 00:00:46,813
+Y para una máquina que aprende, la naturaleza tenía el único ejemplo que funcionaba: un cerebro.
+
+10
+00:00:48,113 --> 00:00:51,764
+Pero en 1888, nadie podía ver cómo estaba conectado un cerebro.
+
+11
+00:00:53,864 --> 00:01:00,059
+Barcelona, 1888. Santiago Ramón y Cajal, médico, enseña anatomía.
+
+12
+00:01:00,959 --> 00:01:04,001
+Observa al microscopio finas láminas de cerebro.
+
+13
+00:01:05,301 --> 00:01:09,492
+Bajo la lente, el cerebro es una maraña de fibras, demasiado densa para seguirla.
+
+14
+00:01:10,792 --> 00:01:18,226
+Muchos científicos, entre ellos el italiano Camillo Golgi, creen que las fibras se funden en una sola red continua.
+
+15
+00:01:19,326 --> 00:01:23,714
+Si es así, nadie puede decir dónde empieza un mensaje, ni cómo aprende un cerebro.
+
+16
+00:01:24,414 --> 00:01:29,237
+Cuando un derrame corta la sangre a una parte del cerebro de alguien, puede quitarle el habla.
+
+17
+00:01:29,937 --> 00:01:33,283
+Los médicos no pueden saber qué ha dañado, ni si sanará.
+
+18
+00:01:34,583 --> 00:01:36,023
+Algo tiene que cambiar.
+
+19
+00:01:37,523 --> 00:01:42,586
+El propio Golgi había hallado una tinción que vuelve negras unas pocas células y deja claras las demás.
+
+20
+00:01:43,286 --> 00:01:47,777
+Cuáles, parece elegirlas al azar. Nadie sabe por qué, ni siquiera hoy.
+
+21
+00:01:49,077 --> 00:01:54,686
+Cajal logra que funcione siempre, y usa cerebros de aves jóvenes, donde la maraña es menos densa.
+
+22
+00:01:55,786 --> 00:01:58,899
+Cada célula negra se ve entera, como un árbol en invierno.
+
+23
+00:02:00,799 --> 00:02:06,819
+Dibuja lo que ve: células separadas, con ramas que llegan cerca de otras células, pero nunca unidas.
+
+24
+00:02:08,119 --> 00:02:14,248
+Y sostiene que un mensaje va en un solo sentido: entra por las ramas y sale por una fibra larga.
+
+25
+00:02:15,748 --> 00:02:21,477
+En Berlín, en 1889, los principales anatomistas miran por sus microscopios, y le dan la razón.
+
+26
+00:02:22,577 --> 00:02:28,365
+En 1906, él y Golgi comparten el Premio Nobel, aunque Golgi aún defiende su red.
+
+27
+00:02:29,665 --> 00:02:34,247
+La célula nerviosa separada, la neurona, se volvió el punto de partida de la ciencia del cerebro.
+
+28
+00:02:35,147 --> 00:02:38,434
+Hoy, muchos medicamentos para el cerebro actúan en los espacios que él dibujó.
+
+29
+00:02:39,934 --> 00:02:45,801
+Las máquinas tenían el mismo problema: sin una imagen de cómo está conectado un cerebro, no había nada que copiar.
+
+30
+00:02:46,501 --> 00:02:53,044
+Su imagen les dio un diseño: muchas células simples, cada una atenta a muchas otras, que pasan un mensaje.
+
+31
+00:02:54,344 --> 00:02:56,349
+Los modelos de hoy aún parten de ella.
+
+32
+00:03:03,249 --> 00:03:05,902
+Una neurona es una célula que lleva mensajes.
+
+33
+00:03:06,602 --> 00:03:10,017
+Sus ramas reciben señales de miles de otras células.
+
+34
+00:03:11,117 --> 00:03:16,521
+Cuando llegan suficientes a la vez, se dispara: un pulso eléctrico recorre su fibra larga.
+
+35
+00:03:17,821 --> 00:03:20,871
+El pulso tiene siempre el mismo tamaño: todo o nada.
+
+36
+00:03:22,371 --> 00:03:28,334
+Al final, casi toca la célula siguiente, y unos mensajeros químicos llevan la señal a través del espacio.
+
+37
+00:03:29,634 --> 00:03:33,020
+Algunas conexiones excitan a la célula siguiente; otras la frenan.
+
+38
+00:03:34,320 --> 00:03:35,639
+Y las conexiones cambian.
+
+39
+00:03:36,339 --> 00:03:44,460
+En 1949, el psicólogo Donald Hebb propuso que, cuando dos células se disparan juntas, el vínculo entre ellas se fortalece.
+
+40
+00:03:45,560 --> 00:03:50,661
+En 1973, experimentos con conejos mostraron vínculos que se fortalecían con el uso.
+
+41
+00:03:51,761 --> 00:03:55,121
+Eso es aprender, dentro de un cerebro: conexiones que cambian.
+
+42
+00:03:57,621 --> 00:04:01,766
+La naturaleza ha probado células nerviosas durante más de seiscientos millones de años.
+
+43
+00:04:03,266 --> 00:04:08,590
+Una medusa no tiene cerebro: solo una red de células nerviosas, suficiente para nadar y atrapar comida.
+
+44
+00:04:10,490 --> 00:04:14,721
+Una babosa de mar tiene unas veinte mil células nerviosas, algunas tan grandes que se ven.
+
+45
+00:04:16,221 --> 00:04:19,777
+Eric Kandel mostró que, cuando aprende, sus conexiones cambian.
+
+46
+00:04:21,477 --> 00:04:25,644
+Una abeja tiene cerca de un millón, en un cerebro menor que un grano de sésamo.
+
+47
+00:04:27,144 --> 00:04:32,197
+Las abejas aprenden colores, aromas y el camino a casa, y bailan para indicarse dónde hay comida.
+
+48
+00:04:34,097 --> 00:04:40,205
+Un pulpo tiene unos quinientos millones, dos tercios en sus brazos: cada brazo puede saborear por sí solo.
+
+49
+00:04:42,105 --> 00:04:46,312
+Un pinzón cebra joven aprende su canto de su padre, practicando durante semanas.
+
+50
+00:04:48,212 --> 00:04:54,161
+Y un cerebro humano tiene unos 86 mil millones, unidos por más de cien billones de conexiones.
+
+51
+00:04:55,461 --> 00:04:59,021
+Funciona con unos 20 vatios, la potencia de una bombilla tenue.
+
+52
+00:05:01,521 --> 00:05:05,426
+Un cerebro no lo capta todo: rellena los huecos con lo probable.
+
+53
+00:05:06,726 --> 00:05:11,198
+Donde el nervio sale de cada ojo, no hay células que capten la luz: un punto ciego.
+
+54
+00:05:13,098 --> 00:05:16,894
+Nunca ves ahí un agujero. Tu cerebro lo rellena con lo que hay alrededor.
+
+55
+00:05:20,194 --> 00:05:26,478
+En 1943, Warren McCulloch y Walter Pitts dibujaron la célula nerviosa de Cajal como una unidad simple.
+
+56
+00:05:27,578 --> 00:05:31,714
+Suma sus entradas y se dispara si el total pasa de un nivel fijado.
+
+57
+00:05:33,214 --> 00:05:40,255
+El perceptrón de Rosenblatt dio a cada conexión un peso, un número que sube o baja un poco al aprender, como los vínculos de Hebb.
+
+58
+00:05:41,755 --> 00:05:49,420
+En 1959, David Hubel y Torsten Wiesel hallaron células en el cerebro de un gato que se disparan ante bordes en un ángulo.
+
+59
+00:05:50,320 --> 00:05:52,573
+Estas alimentan a células que responden a formas.
+
+60
+00:05:53,873 --> 00:05:56,790
+Las redes que leen imágenes tomaron prestadas esas capas.
+
+61
+00:05:58,290 --> 00:06:03,446
+Los modelos de hoy aún suman entradas con pesos, con miles de millones de pesos fijados por el entrenamiento.
+
+62
+00:06:04,546 --> 00:06:06,795
+Pero tomaron prestada una idea, no un cerebro.
+
+63
+00:06:07,695 --> 00:06:15,426
+Una célula nerviosa real es mucho más compleja: en 2021, hizo falta una red de cinco a ocho capas para imitar solo una.
+
+64
+00:06:16,926 --> 00:06:21,643
+Un niño puede aprender una palabra nueva con pocos ejemplos; un modelo necesita muchísimos.
+
+65
+00:06:22,943 --> 00:06:26,067
+Como un avión, que tomó prestada el ala, pero no el aleteo.
+
+66
+00:06:28,567 --> 00:06:30,590
+Un modelo escribe una palabra a la vez.
+
+67
+00:06:31,890 --> 00:06:34,953
+Para la siguiente, le da una posibilidad a cada palabra que conoce.
+
+68
+00:06:36,453 --> 00:06:43,714
+Tras «Una abeja le indica a la colmena dónde hay comida», «bailando» podría tener 70 posibilidades de cien, y «zumbando», 12.
+
+69
+00:06:45,614 --> 00:06:50,870
+Luego elige una, como al girar una ruleta: las porciones grandes ganan más a menudo, pero no siempre.
+
+70
+00:06:52,770 --> 00:06:58,796
+Así, la misma pregunta puede dar otra respuesta: una palabra cambia al principio, y el resto la sigue.
+
+71
+00:07:00,296 --> 00:07:02,928
+Un ajuste llamado temperatura cambia las porciones.
+
+72
+00:07:04,428 --> 00:07:10,481
+Si se baja, la porción mayor casi siempre gana, y las respuestas se apegan a los patrones que el modelo vio más.
+
+73
+00:07:12,181 --> 00:07:18,040
+Si se sube, las porciones pequeñas crecen: las respuestas varían más, a veces de formas nuevas, y fallan más a menudo.
+
+74
+00:07:19,740 --> 00:07:22,358
+Aun al mínimo, queda un poco de azar.
+
+75
+00:07:23,058 --> 00:07:29,089
+Cuando un modelo responde a mucha gente a la vez, sus cuentas pueden salir apenas distintas, e inclinar una elección reñida.
+
+76
+00:07:31,589 --> 00:07:35,090
+Y cuando el dato no está, el modelo igual escribe palabras probables.
+
+77
+00:07:36,590 --> 00:07:43,988
+En un estudio de 2025, a un modelo se le pidió tres veces el cumpleaños de un investigador: dio tres fechas distintas, todas mal.
+
+78
+00:07:45,888 --> 00:07:50,804
+Un cumpleaños es un dato que un modelo quizá vio una vez, o nunca: no hay patrón que aprender.
+
+79
+00:07:52,304 --> 00:07:58,922
+Y las pruebas que los modelos se entrenan para aprobar premian adivinar sobre «no lo sé»: adivinar puede sumar; en blanco, nunca.
+
+80
+00:08:00,922 --> 00:08:04,225
+Los cerebros también rellenan huecos con lo probable, y con la misma seguridad.
+
+81
+00:08:05,925 --> 00:08:08,098
+Así que una respuesta fluida no está verificada.
+
+82
+00:08:10,998 --> 00:08:13,630
+La imagen de Cajal se sostuvo porque otros pudieron verificarla.
+
+83
+00:08:14,730 --> 00:08:21,649
+En los años cincuenta, los microscopios electrónicos mostraron el espacio que dibujó, de unas veinte millonésimas de milímetro.
+
+84
+00:08:23,149 --> 00:08:27,561
+Los modelos se basan en esa imagen: unidades simples y conexiones que cambian.
+
+85
+00:08:28,861 --> 00:08:33,046
+Como los cerebros, rellenan huecos con lo probable, cada vez de forma un poco distinta.
+
+86
+00:08:34,346 --> 00:08:39,832
+Sabiéndolo, sabes cuándo verificarlos: contra la evidencia, como se verificaron los dibujos de Cajal.
+
+87
+00:08:41,532 --> 00:08:45,758
+A continuación, qué es un agente: un modelo que razona, con manos, en un ciclo.

@@ -72,6 +72,7 @@
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
+| Working with agents on Databricks | 271 | 0% | 0 | 28.2 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |

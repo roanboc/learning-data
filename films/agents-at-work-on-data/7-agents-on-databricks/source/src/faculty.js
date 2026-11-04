@@ -215,11 +215,13 @@ function od_reports(ctx,x,y,open,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)retu
 // Anil's plan for next year's places: the students, the places, and the gap. lo 0 to 1: planned for the lowest answer, the places
 // stop short and a dashed amber gap shows, "720 students with no place"; ok 0 to 1: the places reach every student, green. 760 wide
 function od_plan(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=760,h=332,bw=w-64,ok=o.ok||0,lo=o.lo||0;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
-  ag_box(ctx,x,y,w,h,20,{edge:ok>0.5?AG.green:null});ag_T(ctx,"Next year's places",x+32,y+54,{w:700,size:32});if(ok>0)ag_tick(ctx,x+w-52,y+42,30,rgba(AG.green,ok),5);
+  ag_box(ctx,x,y,w,h,20,{});if(ok>0){ctx.save();ctx.strokeStyle=rgba(AG.green,0.9*ok);ctx.lineWidth=2.4;ctx.beginPath();ag_rect(ctx,x,y,w,h,20);ctx.stroke();ctx.restore();}
+  ag_T(ctx,"Next year's places",x+32,y+54,{w:700,size:32});if(ok>0)ag_tick(ctx,x+w-52,y+42,30,rgba(AG.green,ok),5);
   ag_T(ctx,"students on census day",x+32,y+112,{w:500,size:28,col:AG.mut});ctx.fillStyle=rgba(AG.mut,0.18);rr(ctx,x+32,y+128,bw,32,9);ctx.fill();
   ctx.strokeStyle=rgba(AG.mut,0.55);ctx.lineWidth=2;rr(ctx,x+32,y+128,bw,32,9);ctx.stroke();
-  const fr=lerp(0.75,1,ok),fw=bw*fr,col=ok>0.5?AG.green:[120,124,132];
-  ag_T(ctx,ok>0.5?"a place for every student":"places for 2,160",x+32,y+212,{w:700,size:28,col:ok>0.5?AG.green:AG.ink});
+  const fr=lerp(0.75,1,ok),fw=bw*fr,col=mix([120,124,132],AG.green,ok);  // the places grow to every student and turn green as they grow
+  const o1=clamp(1-2*ok,0,1),o2=clamp(2*ok-1,0,1);  // the old words fade out, then the new ones in: nothing swaps in one frame, and the two never overlap
+  if(o1>0)ag_T(ctx,"places for 2,160",x+32,y+212,{w:700,size:28,a:o1});if(o2>0)ag_T(ctx,"a place for every student",x+32,y+212,{w:700,size:28,col:AG.green,a:o2});
   ctx.fillStyle=rgba(col,0.85);rr(ctx,x+32,y+228,fw,32,9);ctx.fill();
   if(lo>0&&ok<1){ctx.save();ctx.globalAlpha*=lo*(1-ok);const gx=x+32+bw*0.75+5,gw=bw*0.25-5;ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(AG.amber,0.95);ctx.lineWidth=2.5;rr(ctx,gx,y+228,gw,32,9);ctx.stroke();ctx.setLineDash([]);
     ag_T(ctx,"720 students with no place",x+w-32,y+300,{w:700,size:28,col:AG.amber,align:"right"});ctx.restore();}

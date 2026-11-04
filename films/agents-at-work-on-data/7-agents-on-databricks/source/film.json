@@ -15,6 +15,14 @@
   ],
   "say": [
     [
+      "\\bAnil Kurian\\b",
+      "Unnil Coo-rean"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
       "\\bJun\\b",
       "Joon"
     ],

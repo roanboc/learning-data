@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Working with agents on Databricks",
+    "key": "agents-on-databricks-en",
+    "dir": "films/agents-at-work-on-data/7-agents-on-databricks/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/agents-on-databricks/film.js",
+    "video": "dist/agents-on-databricks.mp4",
+    "file": "agents-on-databricks.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/7-agents-on-databricks/captions/en.srt",
+        "agents-on-databricks.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/7-agents-on-databricks/captions/es.srt",
+        "agents-on-databricks.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/7-agents-on-databricks/source",
+      ":(exclude)films/agents-at-work-on-data/7-agents-on-databricks/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 271,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

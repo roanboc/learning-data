@@ -419,7 +419,7 @@ for j in range(3):
     for i in range(3):
         tap(sw('asked', 'its query', -0.2 + 0.12 * j + (sw('asked', 'its definition') - sw('asked', 'its query') + 0.6) * i / 3), 0.0035,
             px((400, 1000, 1600)[j] - 130 + 130 * i))
-stamp(sw('plans', 'Anil plans', 0.35), 0.010, px(1440))
+paper(sw('plans', 'Anil plans', -0.08), 0.010, px(1440))      # the plan as it now stands springs in, a place for every student
 knock(sw('takeaway', 'The platform', -0.25), 0.010, px(960), 260)
 tWh = sw('left', 'whose reads')
 flick(tWh - 0.05, 0.009, px(480))

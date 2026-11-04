@@ -7,10 +7,10 @@
                     Agents that write code, each lit in its chapter
      od_dbCard      the platform, and its governed data: "Databricks", with Unity Catalog inside it
      od_page        a page of the platform, with its bar; od_genieOne and od_genieAgent fill two of them
-     od_tool        a tool server's card, with the matte box behind it and its socket; od_fnCard the census count as a function
+     od_tool        a tool server's card, with its socket and a plug; od_toolPanel the panel the platform runs them in; od_fnCard the census count as a function
      od_job, od_trace, od_eval, od_bricks   the nightly job, the census check agent's trace, its evaluation, and Agent Bricks
-     od_pipeline, od_editor   Sam's pipeline editor with Genie Code beside it; Jun's editor
-     od_draft       a draft on a branch, with its marks
+     od_pipeline    Sam's pipeline editor with Genie Code beside it; od_skillsScreen, od_editorScreen the two screens of the wide shot
+     od_draft       a draft on a branch, with its marks; od_folderCard a folder or a set of files on the wall
    Every name starts with od_ or OD_. Sizes are in the 1920 x 1080 frame, seen at zoom 1. */
 
 /* ---------------------------------------------------------------- the opening's shelf: one place for data and tools */

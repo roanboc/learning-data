@@ -322,7 +322,7 @@ scene("same",(ctx,S,t,sc)=>{
       od_scr(c,S,()=>od_tag(c,"Faculty of Health",ag_in(tt,0.3,0.6)*(1-ag_in(tt,T.tAsked-0.4,0.4))));}},
     // Anil plans a place for every student
     {at:T.tPlans-0.2,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],gone:1,blue:1,smile:[0.8],gaze:[[6,-2]]});
-      od_scr(c,S,()=>{od_plan(c,1060,72,{ok:ag_in(tt,T.tPlans+0.3,0.6)});od_answer(c,1440,452,"2,880",{ev:1,tick:1});});}},
+      od_scr(c,S,()=>{const k=(tt-T.tPlans+0.1)/0.6;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),ok:1});od_answer(c,1440,452,"2,880",{ev:1,tick:1});});}},  // the plan as it now stands: every student has a place
     // one question is left: the census check agent, alone at night
     {at:T.tLeft-0.4,place:"labNight",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
       ag_loop(c,960,500,{R:140,r:64,core:0.7,think:0.2,label:null,t:tt,floor:690});

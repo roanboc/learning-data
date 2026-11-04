@@ -1,54 +1,16 @@
 /* Learning Data: "Pause and think" for What they tell us about ourselves, in English. Keep the keys in step with think.es.js.
-   The film stops at the end of three chapters (taught, wire, machine), with one question each. The series has no labs yet, so no question has a "stop". */
+   The film stops at the end of three chapters (taught, wire, machine), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop". */
 window.LEARN={lang:"en",
-think:{ui:{"toggle": "Pause and think", "kicker": "Pause and think", "cont": "Continue", "skip": "Skip", "lab": "Try the idea in a lab", "off": "Turn off pauses", "right": "Right.", "wrong": "Not quite.", "start": "Play with pauses to think", "answer": "Answer:", "watch": "Watch this part"},
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
-  "taught": {
-    "q": "A model learns mostly by guessing the next word. What did the 2022 study find nine people's brains doing as they listened to a podcast?",
-    "opts": [
-      {
-        "t": "Waiting for each word, and only then working out what it meant."
-      },
-      {
-        "t": "Guessing each word before it came, much as a model does. But a brain guesses at many levels at once, and how it learns from its errors, nobody knows yet.",
-        "ok": true
-      },
-      {
-        "t": "Working exactly as a model does, so the question is settled."
-      }
-    ],
-    "why": "Before each word came, their brains were already guessing it, as Friston and Clark had argued brains do: predict, and learn from the errors. So building models taught us something about ourselves. But the copy stops somewhere: a brain also guesses where the story is going, one kind of brain cell took a network five to eight layers deep to imitate, and how a brain learns from its errors is still open. As you read this, can you catch yourself guessing the next word?"
-  },
-  "wire": {
-    "q": "Rod's implant let him understand speech again. Did it work like an ear?",
-    "opts": [
-      {
-        "t": "Yes: it copied the ear, cell for cell."
-      },
-      {
-        "t": "No, so it didn't really help him."
-      },
-      {
-        "t": "No. Ten electrodes did part of an ear's work, where an ear has thousands of cells, and his brain learned the rest. It acted like an ear without working like one.",
-        "ok": true
-      }
-    ],
-    "why": "A copy can act like us without working like us. The implant was made for speech, and to many people with implants, music still sounds poor. A wiring map is like that too: a worm's 302 neurons were mapped by 1986, and its copy on a computer still only wriggles, because a map doesn't say how each connection works, or when. Where have you seen a copy that acts like the real thing without working like it?"
-  },
-  "machine": {
-    "q": "In 2023, nineteen researchers found that no AI of the day seemed conscious, but that nothing obvious stops us building systems that show the signs. Why doesn't that settle whether a machine could feel?",
-    "opts": [
-      {
-        "t": "Because the signs come from theories of our own consciousness, which a 2025 test challenged, and the study assumes that the right computation is enough for a mind. Nobody has shown that it is.",
-        "ok": true
-      },
-      {
-        "t": "Because they didn't test enough systems."
-      },
-      {
-        "t": "Because no machine could ever show the signs."
-      }
-    ],
-    "why": "Showing the signs and feeling anything are not the same question. The signs were drawn from the leading theories, and in 2025 a test of two of them challenged key parts of both. Llinás thought a rhythm of about forty a second ties what we sense into one moment; Penrose and Hameroff look to microtubules, and critics doubt it. And whether a copy that worked exactly like us would be a mind, Searle and his critics still disagree. What would convince you that something feels?"
-  }
-}}};
+  "taught":{q:"A model learns mostly by guessing the next word. What did the 2022 study find nine people's brains doing as they listened to a podcast?",
+    opts:[{t:"Waiting for each word, and only then working out what it meant."},{t:"Guessing each word before it came, much as a model does. But a brain guesses at many levels at once, and how it learns from its errors, nobody knows yet.",ok:true},{t:"Working exactly as a model does, so the question is settled."}],
+    why:"Before each word came, their brains were already guessing it, as Friston and Clark had argued brains do: predict, and learn from the errors. So building models taught us something about ourselves. But the copy stops somewhere: a brain also guesses where the story is going, one kind of brain cell took a network five to eight layers deep to imitate, and how a brain learns from its errors is still open. As you read this, can you catch yourself guessing the next word?"},
+  "wire":{q:"Rod's implant let him understand speech again. Did it work like an ear?",
+    opts:[{t:"Yes: it copied the ear, cell for cell."},{t:"No, so it didn't really help him."},{t:"No. Ten electrodes did part of an ear's work, where an ear has thousands of cells, and his brain learned the rest. It acted like an ear without working like one.",ok:true}],
+    why:"A copy can act like us without working like us. The implant was made for speech, and to many people with implants, music still sounds poor. A wiring map is like that too: a worm's 302 neurons were mapped by 1986, and its copy on a computer still only wriggles, because a map doesn't say how each connection works, or when. Where have you seen a copy that acts like the real thing without working like it?"},
+  "machine":{q:"In 2023, nineteen researchers found that no AI of the day seemed conscious, but that nothing obvious stops us building systems that show the signs. Why doesn't that settle whether a machine could feel?",
+    opts:[{t:"Because the signs come from theories of our own consciousness, which a 2025 test challenged, and the study assumes that the right computation is enough for a mind. Nobody has shown that it is.",ok:true},{t:"Because they didn't test enough systems."},{t:"Because no machine could ever show the signs."}],
+    why:"Showing the signs and feeling anything are not the same question. The signs were drawn from the leading theories, and in 2025 a test of two of them challenged key parts of both. Llinás thought a rhythm of about forty a second ties what we sense into one moment; Penrose and Hameroff look to microtubules, and critics doubt it. And whether a copy that worked exactly like us would be a mind, Searle and his critics still disagree. What would convince you that something feels?"}
+  }}};

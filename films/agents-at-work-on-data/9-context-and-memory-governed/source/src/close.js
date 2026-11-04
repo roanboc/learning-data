@@ -1,8 +1,8 @@
 /* ===== Context and memory, governed: what an agent reads, and the series' close =====
-     cm_context(ctx, cx, cy, o)   what an agent reads, as Context engineering draws it: the sphere in the middle, four cards at its corners
-                                  (Code, Metadata, Skills, Tools, with that film's words), blue edges, an arm reaching each, orange coming
-                                  back along it (o.back(i), o.backMem); o.memory 0..1 adds the fifth,
-                                  the memory, under the sphere; o.gov 0..1 gives each card the mark of what's governed; o.a, o.t
+     cm_context(ctx, o)           what an agent reads, as Context engineering draws it: the sphere in the middle, four cards at its corners
+                                  (Code, Metadata, Skills, Tools, in that film's words), blue kickers, an arm reaching each as it comes
+                                  (o.show(i)), orange coming back along it (o.back(i), o.backMem); o.memory 0..1 adds the fifth, the memory,
+                                  under the sphere; o.gov 0..1 gives each card the mark of what's governed; o.at, o.r, o.think, o.a, o.t
      cm_govTable(ctx, x, y, o)    the five questions as a table: a row for each kind of context and the memory, a column for each
                                   question (o.cols 0..1 each lit as it's asked), and o.chat (a note in one person's chat) as a last row
      CM_LESSONS                   the series' nine films, each with its lesson, as each film's end card says it
@@ -10,26 +10,26 @@
                                   o.deco when the camera makes them small
      cm_shelves(ctx, o)           the module's road: four series on an oak rail; o.lit (the next one), o.a */
 
-// the four cards in Context engineering's own words (kicker, title, line), as that film shows them
-const CM_CTX=[["Code","The repository","Recipes, tests, AGENTS.md"],["Metadata","What words mean","Data models, contracts, lineage"],
-  ["Skills","How the team does a job","Step by step"],["Tools","What it can reach and do","Catalog, Query, Docs: read only"]];
-function cm_context(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const t=o.t||0,w=520,mem=o.memory||0,gov=o.gov||0,show=o.show||(()=>1);ctx.save();ctx.globalAlpha*=a;
-  // where Context engineering puts them: 520 wide, at x 80 and 1320, y 150 and 560, with the sphere at (960, 490)
-  const pos=[[cx-880,cy-340],[cx+360,cy-340],[cx-880,cy+70],[cx+360,cy+70]];
-  // the agent's arms, as in Context engineering: each reaches its card as it comes, and orange runs back along it (o.back(i), o.backMem
-  // 0..1); drawn first, so the sphere hides their roots and each card covers the gripper that holds its inner edge
-  const r=o.r||96,reach=s=>ag_sine(clamp(s*1.4-0.3,0,1));
-  pos.forEach((p,i)=>{const u=reach(show(i));if(u<=0)return;const L=i%2===0,top=i<2,sx=cx+(L?-1:1)*(r-12),sy=cy+(top?-30:30),ex=L?p[0]+w+18:p[0]-18,ey=top?p[1]+150:p[1]+60;
-    ag_reach(ctx,[sx,sy,lerp(sx,ex,0.45),sy,lerp(sx,ex,0.55),ey,ex,ey],u,{grip:u>0.95?1:0,data:o.back?o.back(i):0,k:0.9});});
-  if(mem>0){const u=reach(mem);if(u>0)ag_reach(ctx,[cx,cy+r-12,cx,cy+r+20,cx,cy+r+44,cx,cy+176],u,{grip:u>0.95?1:0,data:o.backMem||0,k:0.9});}
-  cm_agent(ctx,cx,cy,o.r||96,t,{core:o.core==null?0.8:o.core,think:o.think||0.1,label:o.label||null});
-  pos.forEach((p,i)=>{const s=show(i);if(s<=0)return;const [k,title,sub]=CM_CTX[i];ctx.save();ctx.globalAlpha*=clamp(s*2,0,1);const b=ag_textCard(ctx,p[0],p[1],w,{kick:k,title,sub},{measure:true});
-    ag_about(ctx,p[0]+w/2,p[1]+b.h/2,lerp(0.85,1,Math.min(1.03,ag_spr(s,0,0.55))));
-    ag_textCard(ctx,p[0],p[1],w,{kick:k,title,sub},{edge:AG.blue,kickCol:AG.blue});if(gov>0)cm_govMark(ctx,p[0]+w-44,p[1]+44,clamp(gov*1.6-i*0.15,0,1));ctx.restore();});
-  if(mem>0){const mw=440,mx=cx-mw/2,my=cy+190;ctx.save();ctx.globalAlpha*=clamp(mem*2,0,1);const k=ag_spr(mem,0,0.6);ag_about(ctx,cx,my+80,lerp(0.8,1,Math.min(1,k)));
-    ag_textCard(ctx,mx,my,mw,{kick:"MEMORY",sub:"The session it's in, and what the team keeps"},{edge:AG.blue,kickCol:AG.blue});
-    if(gov>0)cm_govMark(ctx,mx+mw-44,my+44,clamp(gov*1.6-0.6,0,1));ctx.restore();}
-  ctx.restore();return pos.map(p=>({x:p[0],y:p[1],w}));}
+// the four cards as Context engineering draws them (its CE_KINDS and ce_context, as merged on 4 November 2026): 520 wide at x 80 and
+// 1320, y 150 and 560, the sphere at (960, 470), blue kickers; each card's arm reaches from the sphere to the middle of its inner edge
+const CM_CTX=[{kick:"Code",title:"The repository",sub:"Recipes, tests, AGENTS.md",x:80,y:150},{kick:"Metadata",title:"What words mean",sub:"Data models, contracts, lineage",x:1320,y:150},
+  {kick:"Skills",title:"How the team does a job",sub:"Step by step",x:80,y:560},{kick:"Tools",title:"What it can reach and do",sub:"Catalog, Query, Docs: read only",x:1320,y:560}];
+const CM_KW=520;
+function cm_context(ctx,o){o=o||{};const a=o.a==null?1:o.a,[cx,cy]=o.at||[960,470],r=o.r||96,t=o.t||0,mem=o.memory||0,gov=o.gov||0,show=o.show||(()=>1);if(a<=0)return;
+  ctx.save();ctx.globalAlpha*=a;ag_modelLight(ctx,cx,cy,r,1,cy+260);
+  // the arms first, so the sphere hides their roots and each card covers the gripper at its edge; orange runs back along each (o.back(i))
+  CM_CTX.forEach((k,i)=>{const u=clamp(show(i),0,1);if(u<=0)return;const b=ag_textCard(ctx,k.x,k.y,CM_KW,k,{measure:true}),left=k.x<cx,ex=left?k.x+CM_KW+4:k.x-4,ey=k.y+b.h/2,
+    sx=cx+(left?-r*0.92:r*0.92),sy=cy+(ey<cy?-r*0.35:r*0.35);
+    ag_reach(ctx,[sx,sy,lerp(sx,ex,0.45),sy,lerp(sx,ex,0.55),ey,ex,ey],ag_sine(clamp(u*1.4,0,1)),{data:o.back?o.back(i):0,grip:1});});
+  // this film adds the memory under the sphere, its arm straight down (o.backMem)
+  const mw=440,mx=cx-mw/2,my=cy+190;
+  if(mem>0)ag_reach(ctx,[cx,cy+r*0.92,cx,cy+r+30,cx,my-30,cx,my-4],ag_sine(clamp(mem*1.4,0,1)),{data:o.backMem||0,grip:1});
+  ag_model(ctx,cx,cy,r,{t,core:o.core==null?1:o.core,think:o.think||0,label:o.label});
+  CM_CTX.forEach((k,i)=>{const u=clamp(show(i),0,1);if(u<=0)return;ag_textCard(ctx,k.x,k.y,CM_KW,{kick:k.kick,title:k.title,sub:k.sub},{a:clamp(u*2,0,1),k:clamp(ag_spr(u,0,0.5),0,1.2),kickCol:AG.blue});
+    if(gov>0)cm_govMark(ctx,k.x+CM_KW-44,k.y+44,clamp(gov*1.6-i*0.15,0,1));});
+  if(mem>0){ag_textCard(ctx,mx,my,mw,{kick:"Memory",sub:"The session it's in, and what the team keeps"},{a:clamp(mem*2,0,1),k:clamp(ag_spr(mem,0,0.5),0,1.2),kickCol:AG.blue});
+    if(gov>0)cm_govMark(ctx,mx+mw-44,my+44,clamp(gov*1.6-0.6,0,1));}
+  ctx.restore();}
 // the mark of something governed: a small green tick in a ring
 function cm_govMark(ctx,x,y,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const k=Math.min(1,ag_spr(a,0,0.5));ag_about(ctx,x,y,lerp(0.4,1,k));
   ctx.fillStyle="rgba(244,246,242,0.95)";ctx.beginPath();ctx.arc(x,y,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=2.6;ctx.stroke();ag_tick(ctx,x,y+1,18,rgba(AG.green,1),3.4);ctx.restore();}
@@ -54,7 +54,7 @@ function cm_bubble(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;c
 /* the nine films of Agents at work on data and their lessons, as their briefs (4 November 2026) and end cards give them */
 const CM_LESSONS=[["Context engineering","Write it down once, and people and agents both use it."],
   ["Skills and workflows","Solve it once, write it down, reuse it."],
-  ["Tools are hands, and every hand is a permission","Read-only by default; write only drafts, somewhere safe."],
+  ["Tools are hands, and every hand is a permission","Read-only by default. Write only drafts, somewhere safe."],
   ["Memory: from one chat to the team","Let the agent learn from the team, not from one person."],
   ["Plan, define the check, do, check","Decide how you'll check before the agent starts."],
   ["How it goes wrong","Expect these, and design for them."],
@@ -63,7 +63,7 @@ const CM_LESSONS=[["Context engineering","Write it down once, and people and age
   ["Context and memory, governed","The team's context and memory are governed assets, not private notes."]];
 const CM_GRID={x:80,y:110,w:568,gx:28,gy:22};
 // the cards' sizes: each row as tall as its tallest card
-function cm_gridLayout(ctx){const G=CM_GRID,cells=[];const meas=CM_LESSONS.map(l=>({tl:ag_wrap(ctx,l[0],G.w-56,{w:600,size:28}),ll:ag_wrap(ctx,l[1],G.w-56,{w:700,size:30})}));
+function cm_gridLayout(ctx){const G=CM_GRID,cells=[];const meas=CM_LESSONS.map(l=>({tl:cm_wrap(ctx,l[0],G.w-56,{w:600,size:28}),ll:cm_wrap(ctx,l[1],G.w-56,{w:700,size:30})}));
   let y=G.y;for(let r=0;r<3;r++){let h=0;for(let c=0;c<3;c++){const m=meas[r*3+c];h=Math.max(h,26+m.tl.length*36+14+m.ll.length*40+20);}
     for(let c=0;c<3;c++)cells.push({x:G.x+c*(G.w+G.gx),y,w:G.w,h,tl:meas[r*3+c].tl,ll:meas[r*3+c].ll});y+=h+G.gy;}
   return cells;}
@@ -92,7 +92,7 @@ function cm_shelves(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const 
     if(made){ag_box(ctx,b.x,b.y,b.w,b.h,22,{});}
     else{ctx.fillStyle="rgba(250,249,246,0.5)";rr(ctx,b.x,b.y,b.w,b.h,22);ctx.fill();cm_dash(ctx,b.x-5,b.y-5,b.w+10,b.h+10,26,lit>0?mix(AG.mut,AG.blue,lit):AG.mut,1);}
     if(lit>0){ctx.save();ctx.shadowColor=rgba(AG.blue,0.6*lit);ctx.shadowBlur=26;ctx.strokeStyle=rgba(AG.blue,0.8*lit);ctx.lineWidth=3;rr(ctx,b.x,b.y,b.w,b.h,22);ctx.stroke();ctx.restore();}
-    const tl=ag_wrap(ctx,s[0],b.w-48,{w:700,size:30});tl.forEach((l,j)=>ag_T(ctx,l,b.x+24,b.y+50+j*38,{w:700,size:30,col:made?AG.ink:AG.mut}));
+    const tl=cm_wrap(ctx,s[0],b.w-48,{w:700,size:30});tl.forEach((l,j)=>ag_T(ctx,l,b.x+24,b.y+50+j*38,{w:700,size:30,col:made?AG.ink:AG.mut}));
     // a made series: its nine films, as small cards (decoration: the voice and the titles say what they are)
     if(made&&!(i===1&&o.skip2)){for(let k=0;k<9;k++){const cx=b.x+28+(k%3)*120,cy=b.y+132+(k/3|0)*58;ctx.save();ctx.shadowColor="rgba(46,38,28,0.14)";ctx.shadowBlur=8;ctx.shadowOffsetY=3;
         ctx.fillStyle="#EEEBE5";rr(ctx,cx,cy,110,48,8);ctx.fill();ctx.restore();ctx.strokeStyle=AG.card.edge;ctx.lineWidth=1;rr(ctx,cx,cy,110,48,8);ctx.stroke();

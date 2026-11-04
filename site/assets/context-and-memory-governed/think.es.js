@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Context and memory, governed, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (reads, memory, keep), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "reads":{q:"Alguien del equipo guarda una nota en su propio chat, \"deja fuera los registros de prueba\", y su agente la sigue. ¿Qué tiene de malo?",
+    opts:[{t:"Nada: el agente la sigue, así que el conteo sale bien."},{t:"Nadie más es su dueño, la lee ni la revisa, y nadie sabe cuánto tiempo se guarda ni dónde borrarla.",ok:true},{t:"Un chat es demasiado lento para que lo lea un agente."}],
+    why:"Una nota en el chat de una persona no responde bien ninguna de las cinco preguntas: quién es su dueño, quién puede leerla y cambiarla, quién revisa un cambio, cuánto tiempo se guarda y cómo se borra. Escrita en el contexto del equipo, con un dueño y una revisión, la misma regla responde las cinco, y la lee cada agente. Donde trabajas, ¿qué reglas viven solo en el chat de una persona?"},
+  "memory":{q:"El paso diario de la plataforma puede reescribir, fusionar, dividir o borrar cualquier entrada del almacén en el que escribe. ¿Por qué el equipo lo deja escribir solo propuestas?",
+    opts:[{t:"Porque el paso es demasiado lento para escribir entradas cada día."},{t:"Porque cambia entradas sin que ninguna persona las revise, como hizo con la línea del campus.",ok:true},{t:"Porque las propuestas ocupan menos lugar en el almacén."}],
+    why:"El paso está hecho para fusionar y reescribir, y así perdió sus tres palabras la línea del campus. Por eso escribe solo en un almacén que ningún agente lee. Cada propuesta llega como un archivo en un pull request: la persona de cuya sesión salió confirma lo que quiso decir, el dueño de su significado la aprueba, y solo entonces un script la carga donde leen los agentes. ¿Qué notas de tus agentes podrían cambiar sin que nadie lo vea?"},
+  "keep":{q:"La línea del campus salió de un chat en mayo. ¿Por qué borrar ese chat no quita la línea?",
+    opts:[{t:"Porque los chats se guardan para siempre."},{t:"Porque borrar una sesión no borra la memoria que se guardó de ella: la línea vive en su propio archivo, y en el almacén.",ok:true},{t:"Porque solo un agente puede borrar su propia memoria."}],
+    why:"Borrar una sesión no borra la memoria que se guardó de ella, así que el equipo borra donde se guarda: el archivo de la línea, en un pull request que dice por qué, y su entrada del almacén, en la próxima carga. El registro de quién la agregó, quién la borró y por qué queda. Donde trabajas, ¿en qué otros lugares se guarda una lección una vez aprendida?"}
+  }}};

@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, section 10 on 4 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -150,7 +150,33 @@ where they are, on any platform, with a recipient token that ends within a year,
 sent with it. A product that holds personal data isn't shared outside without an agreement that
 allows it.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; the last four on 29 October 2026)
+## 10. Context and memory, one way
+
+What agents read is governed like any data (`AGENTS.md`, *Context and memory are data*). Its home is
+the repository, where every change is a pull request its owner reviews (`CODEOWNERS`). From there it
+goes one way, to where agents read it on Databricks, and nobody edits it there.
+
+1. **Descriptions, as comments.** `persist_docs` (`dbt_project.yml`) writes each model's and each
+   column's description into Unity Catalog as comments, each time it builds the model (DEC-PRJ-04).
+   A comment edited in the catalog is written over by the next build.
+2. **Skills, in Unity Gateway (Beta).** Each skill in `skills/` becomes a Unity Catalog object, with
+   an owner (whoever published it), permissions (`READ VOLUME` to use it; `WRITE VOLUME`, with
+   `READ VOLUME`, to change it) and an audit of who created, changed, deleted or read it, and who was
+   granted it. Databricks' sync notebook, run on a schedule, copies the skills from the repository:
+   it creates new ones and updates changed ones, and never deletes one. A skill deleted here is
+   deleted there too, by hand.
+3. **The team's memory (Beta).** Agent sessions and agent memory are kept in stores in Lakebase,
+   the platform's Postgres database. The store is the security boundary: there's no access for each
+   entry, so whoever may write to a store may change any entry in it. A memory pipeline, run about
+   every 24 hours, reads a session store, and may rewrite, merge, split or delete the entries in its
+   memory store. So the team keeps two memory stores (`memory/README.md`): the proposals store, which
+   the pipeline writes and no agent reads; and the team's store, which a script loads from
+   `memory/entries/`, and which agents read under a read-only grant (`permission="READ"`).
+4. **Kept, then deleted.** Sessions are kept for 30 days; then a scheduled job deletes them.
+   Deleting a session, or a session store, doesn't delete the memory kept from it: an entry is
+   deleted as its file, here, and from the team's store at the next load.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; the next four on 29 October 2026; *Skills support in Unity Gateway* to the end on 4 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -173,3 +199,17 @@ allows it.
 - Databricks, *Create a recipient object for non-Databricks users using bearer tokens* (tokens valid for at most a year):
   https://docs.databricks.com/aws/en/delta-sharing/create-recipient-token
 - Databricks Labs, Ontos, its access request workflows and their defaults: https://github.com/databrickslabs/ontos
+- Databricks, *Skills support in Unity Gateway* (Beta): https://docs.databricks.com/aws/en/agents/uc-skills/
+- Databricks, *Govern skills* (the creator is the owner; the volume privileges; the audit):
+  https://docs.databricks.com/aws/en/ai-gateway/govern-skills
+- Databricks, *Tutorial: Create and share Unity Gateway Skills* (the sync notebook never deletes):
+  https://docs.databricks.com/aws/en/agents/uc-skills/create-share-uc-skills
+- Databricks, *Agent sessions* (Beta; deleting a session doesn't delete memory):
+  https://docs.databricks.com/aws/en/agents/agent-memory/managed-sessions
+- Databricks, *Agent memory* (Beta; the store, not the actor, is the security boundary):
+  https://docs.databricks.com/aws/en/agents/agent-memory/managed-memory
+- Databricks, *Agent memory pipelines* (Beta; scheduled runs about every 24 hours):
+  https://docs.databricks.com/aws/en/agents/agent-memory/memory-pipelines
+- Databricks, *Tutorial: Add sessions and memory to an existing agent* (a read-only grant):
+  https://docs.databricks.com/aws/en/agents/agent-memory/existing-agent-tutorial
+- Databricks, *Lakebase Postgres*: https://docs.databricks.com/aws/en/oltp/projects/

@@ -70,7 +70,7 @@ const NARR={
  {"id":"began","gap":0.8,"text":"That's where this series began: what an agent reads. Nine films, nine lessons."},
  {"id":"l1","gap":0.6,"text":"Write it down once, and people and agents both use it."},
  {"id":"l2","gap":0.6,"text":"Solve it once, write it down, reuse it."},
- {"id":"l3","gap":0.6,"text":"Read-only by default; write only drafts, somewhere safe."},
+ {"id":"l3","gap":0.6,"text":"Read-only by default. Write only drafts, somewhere safe.","say":"Read-only by default; write only drafts, somewhere safe."},
  {"id":"l4","gap":0.6,"text":"Let the agent learn from the team, not from one person."},
  {"id":"l5","gap":0.6,"text":"Decide how you'll check before the agent starts."},
  {"id":"l6","gap":0.6,"text":"How it goes wrong: expect these, and design for them."},

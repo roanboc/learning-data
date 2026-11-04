@@ -8,6 +8,7 @@
      cm_pillAt    a pill that springs in at t0 and fades at t1
      cm_cardAt    a card (ag_textCard) that springs in at t0 and fades at t1
      cm_dash      a dashed rounded edge, for what is only proposed or a draft
+     cm_wrap      words wrapped in as few lines as the width allows, even, and in two lines after a comma or a full stop where one is near
      cm_agent     an agent's sphere, with its light and its name
      cm_lucia     Lucía at her desk, her screen, the calendar on the desk, and her agent beside her
      cm_people    the dots for students: on campus, and the 386 who study online
@@ -30,6 +31,14 @@ function cm_pillAt(ctx,x,y,text,t,t0,t1,o){const a=ag_in(t,t0,0.35)*(t1==null?1:
 function cm_cardAt(ctx,x,y,w,words,t,t0,t1,o){o=o||{};const a=ag_in(t,t0,0.4)*(t1==null?1:1-ag_in(t,t1,0.5));if(a<=0)return ag_textCard(ctx,x,y,w,words,{measure:true});
   return ag_textCard(ctx,x,y,w,words,Object.assign({},o,{a,k:Math.min(1,ag_spr(t,t0,0.5))}));}
 // a dashed edge inside a card's own: what is proposed, or only a draft, has no solid edge yet
+// the shared wrap (ag_wrap) fills each line in turn, which can leave one short word on the last ("reuse / it."). This keeps its
+// number of lines. In two lines it breaks where the lines are most even, and after a comma or a full stop unless that leaves them
+// much less even ("Solve it once, / write it down, reuse it."); in more, it finds the narrowest width that still gives that many
+function cm_wrap(ctx,s,maxW,o){const g=ag_wrap(ctx,s,maxW,o),n=g.length;if(n<2)return g;
+  if(n===2){const ws=String(s).split(" ");let best=null,bs=1e9;for(let i=1;i<ws.length;i++){const a=ws.slice(0,i).join(" "),b=ws.slice(i).join(" "),
+      wa=ag_tw(ctx,a,o),wb=ag_tw(ctx,b,o);if(wa>maxW||wb>maxW)continue;const sc=Math.abs(wa-wb)+(/[,.;:]$/.test(a)?0:0.35*maxW);
+      if(sc<bs){bs=sc;best=[a,b];}}return best||g;}
+  let lo=maxW*0.4,hi=maxW;for(let i=0;i<14;i++){const m=(lo+hi)/2;if(ag_wrap(ctx,s,m,o).length>n)lo=m;else hi=m;}return ag_wrap(ctx,s,hi,o);}
 function cm_dash(ctx,x,y,w,h,r,col,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.setLineDash([12,9]);ctx.strokeStyle=rgba(col||AG.mut,0.8);ctx.lineWidth=2.4;
   rr(ctx,x+5,y+5,w-10,h-10,Math.max(4,r-4));ctx.stroke();ctx.restore();}
 // a soft spring in: 0..1 for fading, and k for the scale (0.85 to 1)

@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:06.684
+Today, at the university. On Monday, Lucía Ortega joined the Planning team.
+
+00:00:07.784 --> 00:00:13.824
+Her agent starts each day with the team's memory: lessons its agents learned, approved by people.
+
+00:00:15.124 --> 00:00:20.291
+Her first job, for the library: how many students are there, to buy next year's e-books?
+
+00:00:21.391 --> 00:00:24.585
+Her agent's draft said 18,026.
+
+00:00:25.485 --> 00:00:30.922
+A plain check stopped it: the census report says 18,412.
+
+00:00:32.422 --> 00:00:36.114
+The 386 it left out all study online.
+
+00:00:37.214 --> 00:00:44.328
+The library would have bought e-books for 386 fewer students: the very ones who can't come in for a book.
+
+00:00:46.228 --> 00:00:52.178
+The agent's evidence showed why: one line in the team's memory. Count only students on campus.
+
+00:00:53.478 --> 00:00:59.545
+In May, it was approved as: For exam rooms, count only students on campus. Right, for rooms.
+
+00:01:00.645 --> 00:01:06.010
+Since last week, it had lost the three words that made it right, and nobody had seen it change.
+
+00:01:07.710 --> 00:01:12.599
+And it was still there, for questions no report could check. Something had to change.
+
+00:01:14.699 --> 00:01:18.883
+So the team now governs its context and memory as it governs any data.
+
+00:01:19.783 --> 00:01:25.601
+Each has an owner. Agents may read them, never change them. A person reviews every change.
+
+00:01:26.701 --> 00:01:31.120
+And each is kept only while it's right, then deleted from everywhere it's kept.
+
+00:01:32.420 --> 00:01:37.002
+Checked against its source, the line was found and deleted, with a record of why.
+
+00:01:38.502 --> 00:01:44.181
+Now Lucía's agent starts each day with what the team knows, and every entry says who approved it.
+
+00:01:45.281 --> 00:01:49.639
+The library buys e-books for all 18,412.
+
+00:01:51.139 --> 00:01:57.609
+And for data: what agents read is governed like what they count, so a wrong lesson is found, and stays gone.
+
+00:02:04.909 --> 00:02:11.753
+This series began with what an agent reads: four kinds of context, code, metadata, skills and tools.
+
+00:02:14.053 --> 00:02:19.084
+To those, it adds memory: the session it's in, and what the team keeps from sessions.
+
+00:02:20.984 --> 00:02:26.341
+All of it shapes what the agent does, so all of it is data, and gets what any data gets.
+
+00:02:28.241 --> 00:02:29.136
+Who owns it?
+
+00:02:30.036 --> 00:02:32.022
+Who may read it, and who may change it?
+
+00:02:32.922 --> 00:02:35.289
+Who reviews a change before agents use it?
+
+00:02:36.189 --> 00:02:37.493
+How long is it kept?
+
+00:02:38.393 --> 00:02:41.524
+And when it's deleted, is it gone from everywhere it's kept?
+
+00:02:43.624 --> 00:02:50.256
+A note in one person's chat answers none of them well. The team's context and memory answer all five.
+
+00:02:54.556 --> 00:03:02.693
+The team's context lives in its repository: the page for agents, the skills, dbt's descriptions and the contracts.
+
+00:03:04.193 --> 00:03:08.714
+Every file has an owner, in a list the project writes from its own metadata.
+
+00:03:10.214 --> 00:03:17.165
+A change is a pull request: its owner reviews it, and a change to production needs a second person's approval.
+
+00:03:18.665 --> 00:03:21.742
+Agents may propose a change. They never approve one.
+
+00:03:23.042 --> 00:03:25.837
+And the history keeps who changed what, when, and why.
+
+00:03:27.137 --> 00:03:30.784
+From there, it goes one way to where agents read it on Databricks.
+
+00:03:32.284 --> 00:03:38.470
+dbt writes the descriptions into Unity Catalog, as comments on each table and column.
+
+00:03:39.770 --> 00:03:42.647
+Skills go to Unity Gateway, where they're in beta.
+
+00:03:44.147 --> 00:03:50.701
+Each is a Unity Catalog object, with an owner, permissions, and a record of who read or changed it.
+
+00:03:51.401 --> 00:03:56.383
+Nobody edits context on the platform. A change starts in the repository.
+
+00:03:59.683 --> 00:04:02.560
+Memory is different: agents write it themselves.
+
+00:04:04.060 --> 00:04:11.539
+On Databricks, sessions and lasting memory, both in beta, are kept in stores in Lakebase, the platform's database.
+
+00:04:13.439 --> 00:04:19.856
+A step that runs once a day reads the sessions, and keeps what seems worth keeping, without asking anyone.
+
+00:04:21.756 --> 00:04:28.735
+That's how the campus line lost its words: the step merged it with other lines about counting students, as it's built to.
+
+00:04:31.035 --> 00:04:37.893
+And a store is one room: whoever may write to it may change any entry, and nothing records what an entry said before.
+
+00:04:40.193 --> 00:04:46.250
+So the team split it in two. The daily step now writes only proposals, which no agent reads.
+
+00:04:48.350 --> 00:04:54.499
+Each morning, a script brings them to the repository as a pull request, one file for each entry.
+
+00:04:56.399 --> 00:05:01.808
+The person whose session it came from confirms what they meant, and the owner of its meaning approves it.
+
+00:05:03.908 --> 00:05:07.340
+Yusuf, in data governance, owns the memory as a whole.
+
+00:05:09.040 --> 00:05:15.466
+Then a script loads the approved files into the team's store, which every agent may read, and none may change.
+
+00:05:19.566 --> 00:05:21.890
+Keeping and deleting are decisions too.
+
+00:05:23.790 --> 00:05:28.068
+The team keeps sessions for thirty days; then a scheduled job deletes them.
+
+00:05:30.168 --> 00:05:33.472
+Each entry has a date to check it again, and its owner does.
+
+00:05:35.372 --> 00:05:40.132
+A lesson names no student, and holds nothing private, so its history can be kept.
+
+00:05:42.032 --> 00:05:48.050
+Deleting has traps. When the campus line was found, the first thought was to delete the chat it came from.
+
+00:05:50.150 --> 00:05:55.969
+That deletes nothing of it: deleting a session, the docs say, doesn't delete the memory kept from it.
+
+00:05:58.269 --> 00:06:01.981
+And the sync that copies skills to the platform never deletes one.
+
+00:06:04.281 --> 00:06:12.613
+So the team deletes where a thing is kept: the line's file, in a pull request that says why, and its entry in the store, at the next load.
+
+00:06:14.913 --> 00:06:20.561
+The record stays: who added it, who deleted it, and why. No agent will read the line again.
+
+00:06:24.861 --> 00:06:27.072
+Back in Planning, Lucía asks again.
+
+00:06:28.372 --> 00:06:37.296
+Her agent answers 18,412, with its evidence: the census-day count, and each entry it read, with who approved it.
+
+00:06:38.796 --> 00:06:43.151
+The library buys e-books for every student, online or on campus.
+
+00:06:44.451 --> 00:06:48.477
+Every agent, and every newcomer, now starts from what the team knows.
+
+00:06:49.777 --> 00:06:54.657
+That's where this series began: what an agent reads. Nine films, nine lessons.
+
+00:06:56.357 --> 00:06:59.542
+Write it down once, and people and agents both use it.
+
+00:07:00.242 --> 00:07:02.535
+Solve it once, write it down, reuse it.
+
+00:07:03.235 --> 00:07:06.693
+Read-only by default. Write only drafts, somewhere safe.
+
+00:07:07.393 --> 00:07:10.548
+Let the agent learn from the team, not from one person.
+
+00:07:11.248 --> 00:07:13.809
+Decide how you'll check before the agent starts.
+
+00:07:14.509 --> 00:07:17.672
+How it goes wrong: expect these, and design for them.
+
+00:07:18.372 --> 00:07:23.215
+The platform gives agents the same data and tools people use, in one place.
+
+00:07:23.915 --> 00:07:29.059
+One set of rules for people and agents, enforced where the data and the models live.
+
+00:07:29.759 --> 00:07:34.120
+And the team's context and memory are governed assets, not private notes.
+
+00:07:35.620 --> 00:07:42.669
+This series is one part of a longer road: from an agent that helps one person, to one that works beside the team.
+
+00:07:44.169 --> 00:07:46.108
+Next: from helper to colleague.

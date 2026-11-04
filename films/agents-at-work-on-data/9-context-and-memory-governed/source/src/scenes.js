@@ -144,8 +144,9 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,1400,b.y+b.h+46,"lost: For exam rooms",tt,T.source+0.4,T.deletedW,{col:AG.amber,icon:"warn"});
       cm_stamp(cx,1606,226,"Deleted",tt,T.deletedW,{col:AG.amber,rot:-0.06});
       const ra=ag_in(tt,T.record-0.2,0.5);if(ra>0)cm_history(cx,560,470,800,CM_RECORD,{kick:"Record",a:ra,k:Math.min(1,ag_spr(tt,T.record-0.2,0.5))});}},
-    // now: her agent starts with what the team knows, every entry with who approved it
-    {at:T.knows-1.4,place:"cmLab",cut:true,keys:[[0,1000,530,1.03],[T.every-0.2,1150,470,1.1]],d:2.4,draw:(cx,tt)=>{
+    // now: her agent starts with what the team knows, every entry with who approved it; the camera leans in only a little, so her
+    // calendar stays whole in the frame and the agent's name stays above the captions
+    {at:T.knows-1.4,place:"cmLab",cut:true,keys:[[0,1000,530,1.03],[T.every-0.2,1000,540,1.06]],d:2.4,draw:(cx,tt)=>{
       cm_lucia(cx,S,tt,{think:0.2,smile:0.45});
       cm_file(cx,CM_F.x,CM_F.y,{cards:cm_cards({without:true,who:k=>ag_in(tt,T.who+k*0.15,0.4)})});
       const A=CM_DESK.agent;cm_fileReads(cx,tt,1,A[0],A[1],A[2]);}},
@@ -174,7 +175,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
   ag_shots(ctx,S,t,sc.dur,[
     // what an agent reads, as Context engineering drew it: each kind of context as it's named, then memory; all of it is data
     {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const at=[T.code,T.meta,T.skills,T.tools];
-      cm_context(cx,960,490,{t:tt,show:i=>clamp((tt-at[i]+0.15)/1.0,0,1),memory:clamp((tt-T.memory+0.15)/1.0,0,1),gov:clamp((tt-T.gets)/1.2,0,1),
+      cm_context(cx,{t:tt,show:i=>clamp((tt-at[i]+0.15)/1.0,0,1),memory:clamp((tt-T.memory+0.15)/1.0,0,1),gov:clamp((tt-T.gets)/1.2,0,1),
         back:i=>clamp((tt-at[i]-0.75)/1.3,0,1),backMem:clamp((tt-T.memory-0.75)/1.3,0,1),
         think:0.1+0.5*ag_io(tt,T.shapes-0.2,T.isData+0.8,0.5)});
       ag_label(cx,960,262,"What an agent reads",{align:"center",a:ag_in(tt,T.reads-0.2,0.4)*(1-ag_in(tt,T.isData-0.7,0.35))});
@@ -317,10 +318,10 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pr(cx,960,110,880,{title:"Memory proposals, 4 November 2026",by:"Opened by the morning script",
         files:[["memory/entries/say-which-term-a-count-is-for.md",ag_in(tt,T.oneFile,0.4),lit>0?mix(AG.ink,AG.blue,lit):null],["memory/entries/round-averages-to-one-decimal.md",ag_in(tt,T.oneFile+0.35,0.4)]],
         a:ra,k:Math.min(1,ag_spr(tt,T.pr-0.2,0.5))});
-      // the first file as a proposed entry: dashed, with a pen, until "Approved" lands on it
+      // the first file as a proposed entry: dashed, with a pen, until "Approved" lands on it; then it's an entry
       const ea=ag_in(tt,T.person-0.3,0.4),ok=ag_in(tt,T.approves+0.25,0.35);
       cm_entry(cx,960,420,880,{lesson:"Say which term a count is for.",rows:[["Learned in","A session, 3 November 2026"],["Confirmed by","Clara Jensen, whose session it was",ag_in(tt,T.confirms-0.2,0.4)],
-        ["Approved by","Mei Tanaka, who owns its meaning",ag_in(tt,T.ownerM-0.1,0.4),ok>0?mix(AG.ink,AG.green,ok):null]]},{kind:"proposed",a:ea,k:Math.min(1,ag_spr(tt,T.person-0.3,0.5))});
+        ["Approved by","Mei Tanaka, who owns its meaning",ag_in(tt,T.ownerM-0.1,0.4),ok>0?mix(AG.ink,AG.green,ok):null]]},{prop:1-ag_in(tt,T.approves+0.4,0.6),a:ea,k:Math.min(1,ag_spr(tt,T.person-0.3,0.5))});
       cm_stamp(cx,1650,486,"Approved",tt,T.approves+0.2,{col:AG.green,size:28});}},
     // Yusuf, in data governance, owns the memory as a whole: CODEOWNERS says so
     {at:c.yusuf-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
@@ -464,7 +465,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     // where the series began: what an agent reads; nine films, nine lessons; then the whole road, from further off
     {at:c.began-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
       const ca=ag_in(tt,c.began-0.4,0.4)*(1-ag_in(tt,T.nine-0.2,0.5));
-      if(ca>0){cm_context(cx,960,490,{t:tt,memory:1,gov:1,a:ca});ag_label(cx,960,262,"What an agent reads",{align:"center",a:ca*ag_in(tt,T.readsW-0.3,0.4)});}
+      if(ca>0){cm_context(cx,{t:tt,memory:1,gov:1,a:ca});ag_label(cx,960,262,"What an agent reads",{align:"center",a:ca*ag_in(tt,T.readsW-0.3,0.4)});}
       // the nine lessons, each as it's said; on "a longer road", the grid goes to its shelf
       const u=ag_sine(clamp((tt-T.longer+0.4)/1.8,0,1)),G=cm_gridBox(cx),b=cm_shelf(1),s=Math.min((b.w-48)/G.w,(b.h-132)/G.h),
         tx=b.x+24+((b.w-48)-G.w*s)/2,ty=b.y+112;

@@ -92,3 +92,17 @@ conceptual model that copies its term with `source:` (decision DEC-PRJ-11). A co
 hint, not a meaning. If the word isn't there, don't guess: ask its owner (*Who approves what*).
 Once they've decided, the meaning goes into the glossary first, then into the project, for every
 person and every agent to read.
+
+## Context and memory are data
+
+What you read shapes what you do, so it's governed like any data. This page, the skills, the
+models' descriptions, the contracts and the team's memory ([`memory/`](memory/)) each have an owner
+in `CODEOWNERS`, and a person reviews every change before an agent reads it.
+
+- **Read it, never change it.** On Databricks you read context where it's published: descriptions
+  as comments in Unity Catalog, skills in Unity Gateway, the team's memory in its store. Never edit
+  it there: a change starts here, as a pull request.
+- **Name the entries you used.** Your evidence lists each memory entry you read, with who approved
+  it, so a wrong one can be found.
+- **An entry that disagrees is news.** If an entry disagrees with a report or the glossary, don't
+  follow it: quote it, and tell the person you work with. Its owner decides.

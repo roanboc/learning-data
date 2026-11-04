@@ -82,7 +82,7 @@ function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],pe
   ctx.restore();return out;}
 
 /* an entry pulled up out of the file (2.4's tm_entry): ENTRY in blue, or PROPOSED ENTRY, muted, with a pen and a dashed edge, while it
-   waits (o.kind "proposed"); then its fields one a line, the label quiet and the words under it: the lesson first. e.lesson, e.rows
+   waits (o.kind "proposed"; o.prop 1..0 turns a proposal into an entry); then its fields one a line, the label quiet and the words under it: the lesson first. e.lesson, e.rows
    [[label, words, a, col, alt, altA]]: a row with no label carries on the field above it, and its words give way to alt as altA rises;
    o.kick, o.edge and o.edgeA (its edge lit in a colour), o.hl, o.hlA and o.hlCol (a field lit), o.lessonA (0: the caller draws the lesson's words,
    at the box's lx, ly); o.a, o.k, o.measure. Returns its box. */
@@ -90,12 +90,13 @@ function cm_entry(ctx,x,y,w,e,o){o=o||{};const a=o.a==null?1:o.a,inner=w-56,f=[[
   const rows=f.map(r=>({r,lines:ag_wrap(ctx,r[1],inner,{w:600,size:30})})),rh=q=>(q.r[0]==null?-16:34)+q.lines.length*40+16,
     h=28+48+rows.reduce((s,q)=>s+rh(q),0)+10,bb={x,y,w,h,lx:x+28,ly:y+76+34+32};
   if(a<=0||o.measure)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
-  const prop=o.kind==="proposed",ea=o.edgeA==null?1:o.edgeA;
-  ag_box(ctx,x,y,w,h,22,{edge:o.edge&&ea>0?o.edge:(prop?null:AG.blue),edgeA:o.edge&&ea>0?0.5+0.4*ea:0.5,glow:o.edge&&ea>0?o.edge:null,glowA:0.6*ea});
-  if(prop)cm_dash(ctx,x+5,y+5,w-10,h-10,18,AG.mut,o.dashA==null?1:o.dashA);
-  const kick=o.kick||(prop?"Proposed entry":"Entry"),kc=prop?AG.mut:AG.blue;
-  if(prop){ag_pen(ctx,x+42,y+44,30,rgba(AG.mut,1));ag_T(ctx,kick.toUpperCase(),x+68,y+52,{w:700,size:28,ls:4,col:kc});}
-  else ag_T(ctx,kick.toUpperCase(),x+28,y+52,{w:700,size:28,ls:4,col:kc});
+  // pv: how much it is still a proposal (o.prop, 0..1, blends one into the other: the dashes and the pen go, then ENTRY comes)
+  const pv=o.prop!=null?clamp(o.prop,0,1):(o.kind==="proposed"?1:0),ea=o.edgeA==null?1:o.edgeA;
+  ag_box(ctx,x,y,w,h,22,{edge:o.edge&&ea>0?o.edge:(pv<1?AG.blue:null),edgeA:o.edge&&ea>0?0.5+0.4*ea:0.5*(1-pv),glow:o.edge&&ea>0?o.edge:null,glowA:0.6*ea});
+  if(pv>0)cm_dash(ctx,x+5,y+5,w-10,h-10,18,AG.mut,(o.dashA==null?1:o.dashA)*pv);
+  const ka=clamp(pv*2-1,0,1),kb=clamp(1-pv*2,0,1);
+  if(ka>0){ctx.save();ctx.globalAlpha*=ka;ag_pen(ctx,x+42,y+44,30,rgba(AG.mut,1));ag_T(ctx,(o.kick||"Proposed entry").toUpperCase(),x+68,y+52,{w:700,size:28,ls:4,col:AG.mut});ctx.restore();}
+  if(kb>0){ctx.save();ctx.globalAlpha*=kb;ag_T(ctx,(o.kick||"Entry").toUpperCase(),x+28,y+52,{w:700,size:28,ls:4,col:AG.blue});ctx.restore();}
   let yy=y+76;rows.forEach((q,i)=>{const hl=o.hl===i?(o.hlA==null?1:o.hlA):0,ra=q.r[2]==null?1:q.r[2],lab=q.r[0]!=null;if(ra<=0){yy+=rh(q);return;}
     ctx.save();ctx.globalAlpha*=ra;if(!lab)yy-=16;
     // a lit field takes in the lines that carry it on

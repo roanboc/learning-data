@@ -174,8 +174,8 @@ flick(F('place', 'Monday', 0.0), 0.010, px(200))
 glass(A3, F('memory', 'Her agent', -0.05), 0.55, px(1060))
 tL = F('memory', 'lessons')
 for k, m in enumerate(MEM):
-    glass(m, tL + 0.16 * k + 0.04, 0.62, px(1530) + 0.04 * (k - 2), ring=1.3)
-slide(tL + 0.02, 0.010, px(1530)); slide(tL + 0.66, 0.010, px(1530))
+    glass(m, tL + 0.16 * k + 0.04, 0.62, px(1440) + 0.04 * (k - 2), ring=1.3)
+slide(tL + 0.02, 0.010, px(1440)); slide(tL + 0.66, 0.010, px(1440))
 approve(F('memory', 'approved', 0.1), 0.85, hold=2.2)
 # the library's question
 tQ = F('job', 'library', -0.4)
@@ -231,12 +231,12 @@ glass(D4, F('kept', 'everywhere', -0.05), 0.5, px(1220))
 # found against its source, deleted, with a record of why
 paper(F('found', 'source', -0.8), 0.010, px(480), 0.4)
 glass(B3, F('found', 'found and', -0.1), 0.5, px(1400)); glass(D4, F('found', 'found and', 0.2), 0.5, px(1400))
-stamp(F('found', 'deleted', 0.0), 0.018, px(1560))
+stamp(F('found', 'deleted', 0.0), 0.018, px(1606))
 paper(F('found', 'record', -0.2), 0.010, px(960), 0.4)
 # now her agent starts with what the team knows: the memory's figure, and the sarrusophone's D under it
 tK = F('now', 'what the team knows', -1.4)
 for k, m in enumerate(MEM):
-    glass(m, tK + 0.5 + 0.18 * k, 0.55, px(1530) + 0.04 * (k - 2), ring=1.3)
+    glass(m, tK + 0.5 + 0.18 * k, 0.55, px(1440) + 0.04 * (k - 2), ring=1.3)
 sarr(D2, tK + 0.6, F('now', 'who approved', 0.8), 0.65, att=1.0, rel=1.2)
 # the library buys for all 18,412: G major to D as the people come in
 tA = F('all', 'for all')
@@ -300,8 +300,8 @@ lock(C('nobody', 'Nobody', -0.05), 0.010, px(1700))
 roll((D3, Fs3, A3), C('nobody', 'A change starts', 0.0), 0.14, 0.5, ring=1.8)
 
 # 4. Memory, kept like data: B minor at the turn, the sarrusophone on B. The agents write their sessions: a pen for each. The daily
-#    step: a click as it turns up; the line it keeps unasked slides in, with no one's note. How the campus line lost its words: its own
-#    note, B; the two lines merge, F sharp settling to D. Split in two: G major, the proposals' cards and a lock. Each morning: the
+#    step: a click as it turns up; the line it keeps unasked comes in, with no one's note. How the campus line lost its words: its own
+#    note, B; the room bookings line slides onto it, F sharp settling to D as its new title comes. Split in two: G major, the proposals' cards and a lock. Each morning: the
 #    script, the pull request, its two files. The person confirms; the owner of its meaning approves: the stamp, a person's approval
 #    and D major. Yusuf owns the memory as a whole: the sarrusophone's low D. The load: the memory's figure as the cards stand in the
 #    team's store, and its lock
@@ -313,11 +313,11 @@ for i in range(3):
     pencil(M('different', 'agents write', 0.2 + 0.3 * i), 0.5, 0.006, px(270))
 paper(M('lakebase', 'lasting memory', -0.3), 0.009, px(1400), 0.3)
 click(M('daily', 'A step', -0.15), 0.011, px(590))
-slide(M('daily', 'keeps what', 0.15), 0.010, px(1400))
-glass(WRONG, M('how', 'campus line', -0.15), 0.55, px(960), ring=1.6)
+slide(M('daily', 'keeps what', 0.15), 0.010, px(1670))
+glass(WRONG, M('how', 'campus line', -0.15), 0.55, px(813), ring=1.6)
 tMg = M('how', 'merged')
-glass(Fs4, tMg + 0.05, 0.4, px(960), ring=1.0); glass(D4, tMg + 1.0, 0.45, px(960), ring=1.6)
-slide(tMg + 0.5, 0.009, px(960))
+glass(Fs4, tMg + 0.05, 0.4, px(880), ring=1.0); glass(D4, tMg + 1.0, 0.45, px(813), ring=1.6)
+slide(tMg + 0.5, 0.009, px(880))
 lock(M('room', 'nothing records', 0.1), 0.008, px(960))
 tSp = M('split', 'split it in two')
 roll((G3, B3, D4), tSp - 0.1, 0.13, 0.55, ring=1.8)
@@ -330,16 +330,16 @@ paper(M('morning', 'pull request', -0.2), 0.010, px(1400), 0.35)
 tap(M('morning', 'one file', 0.0), 0.008, px(1400)); tap(M('morning', 'one file', 0.35), 0.008, px(1400))
 paper(M('confirm', 'The person', -0.3), 0.009, px(1400), 0.3)
 tAp4 = M('confirm', 'approves', 0.2)
-stamp(tAp4, 0.018, px(1680))
+stamp(tAp4, 0.018, px(1650))
 approve(tAp4 + 0.05, 0.85, hold=1.4, pan=px(1400))
 roll((D3, Fs3, A3), tAp4 + 0.55, 0.12, 0.5, ring=1.8)
 knock(M('yusuf', 'data governance', -0.4), 0.012, px(1400), 240)
 sarr(D2, M('yusuf', 'as a whole', -0.2), M('yusuf', 'as a whole', 1.9), 0.65, att=0.5, rel=1.0, pan=px(420))
-click(M('load', 'a script loads', -0.25), 0.011, px(980))
+click(M('load', 'a script loads', -0.25), 0.011, px(275))
 tSt = M('load', "the team's store")
 for k, m in enumerate(MEM):
-    glass(m, tSt + 0.15 * k + 0.02, 0.55, px(1530) + 0.04 * (k - 2), ring=1.3)
-lock(M('load', 'none may change', -0.05), 0.010, px(1530))
+    glass(m, tSt + 0.15 * k + 0.02, 0.55, px(1340) + 0.04 * (k - 2), ring=1.3)
+lock(M('load', 'none may change', -0.05), 0.010, px(1210))
 
 # 5. Kept, then deleted: the strip of days comes in as one soft brush; the team decides both: the sarrusophone. The scheduled job: a
 #    click; each day the oldest falls into the bin. Its owner checks the entry: the stamp, the sarrusophone's D. A proposal naming a
@@ -359,22 +359,22 @@ for n_ in range(2):
         binned(t_, 0.010, px(172))
 paper(G('keep', 'again', -0.25), 0.010, px(510), 0.35)
 tCk = K('again', 'its owner does', 0.1)
-stamp(tCk, 0.016, px(720))
+stamp(tCk, 0.016, px(760))
 sarr(D3, tCk + 0.05, tCk + 1.6, 0.65, att=0.15, rel=0.9, pan=px(510))
 paper(K('names', 'names no student', -0.7), 0.009, px(1410), 0.3)
 stamp(K('names', 'names no student', 0.2), 0.016, px(1664))
 glass(B3, K('names', 'names no student', 0.25), 0.5, px(1410), ring=1.0); glass(Fs3, K('names', 'names no student', 0.59), 0.5, px(1410), ring=1.4)
 paper(G('keep', 'traps', -0.25), 0.009, px(460), 0.35)
 binned(K('traps', 'delete the chat', 0.75), 0.011, px(460))
-glass(WRONG, K('nothing', 'deletes nothing', -0.1), 0.55, px(1420), ring=1.8)
+glass(WRONG, K('nothing', 'deletes nothing', -0.1), 0.55, px(1430), ring=1.8)
 paper(K('nothing', 'the docs say', -0.35), 0.010, px(540), 0.4)
 click(K('sync', 'the sync', -0.25), 0.011, px(1060))
 air(K('sync', 'the sync', 0.3), 0.7, 0.007, px(1300), 180, 900)
 paper(K('where', 'where a thing', -0.2), 0.010, px(530), 0.4)
 approve(K('where', 'says why', 0.85), 0.8, hold=1.2, pan=px(530))
-click(K('where', 'its entry', -0.35), 0.011, px(1175))
-strike(K('where', 'next load', -0.25), 0.008, px(1480))
-slide(K('where', 'next load', 0.4), 0.009, px(1480))
+click(K('where', 'its entry', -0.35), 0.011, px(1675))
+strike(K('where', 'next load', -0.25), 0.008, px(1433))
+slide(K('where', 'next load', 0.4), 0.009, px(1433))
 paper(K('record', 'The record', -0.3), 0.010, px(530), 0.35)
 for w_ in ('who added', 'who deleted', 'and why'):
     tap(K('record', w_, -0.15), 0.007, px(530))

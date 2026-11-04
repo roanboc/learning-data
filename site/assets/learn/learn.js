@@ -21,10 +21,10 @@ Object.assign(LD,{store,h,esc,md,fill,css,clock,RM,$});
 /* ---------- stages: canvases that draw in logical units, with a wide and a narrow layout ---------- */
 function stageBg(c,w,hh){const g=c.createLinearGradient(0,0,0,hh);g.addColorStop(0,"#0a1022");g.addColorStop(1,"#04070f");c.fillStyle=g;c.fillRect(0,0,w,hh);
   c.strokeStyle="rgba(120,160,230,0.05)";c.lineWidth=1;c.beginPath();for(let x=24;x<w;x+=48){c.moveTo(x+0.5,0);c.lineTo(x+0.5,hh);}for(let y=24;y<hh;y+=48){c.moveTo(0,y+0.5);c.lineTo(w,y+0.5);}c.stroke();}
-const STAGES=new Set();let READY=false;
+const STAGES=new Set();let READY=false;const AWAKE=8,IDLE=2;
 function Stage(host,o){
   const cv=h("canvas",o.label?{role:"img","aria-label":o.label}:{"aria-hidden":"true"});host.append(cv);
-  const s={cv,ctx:cv.getContext("2d"),w:0,h:0,k:1,narrow:false,hits:[],hover:null,vis:false,fps:o.fps||60,last:0,o};
+  const s={cv,ctx:cv.getContext("2d"),w:0,h:0,k:1,narrow:false,hits:[],hover:null,vis:false,fps:o.fps||60,last:0,o,until:0};
   s.resize=()=>{const cw=cv.clientWidth;if(!cw)return;s.narrow=!!o.narrow&&cw<(o.bp||560);const d=s.narrow?o.narrow:o.wide;s.w=d[0];s.h=d[1];
     const pr=Math.min(window.devicePixelRatio||1,o.dpr||2),pw=Math.round(cw*pr),ph=Math.round(pw*s.h/s.w);if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph;}s.k=pw/s.w;if(READY)s.draw(clock());};
   s.hit=(id,x,y,w,hh)=>{s.hits.push([id,x,y,w,hh]);};
@@ -32,10 +32,17 @@ function Stage(host,o){
   const find=e=>{const[x,y]=at(e);for(let i=s.hits.length-1;i>=0;i--){const q=s.hits[i];if(x>=q[1]&&x<=q[1]+q[3]&&y>=q[2]&&y<=q[2]+q[4])return q[0];}return null;};
   if(o.click){cv.addEventListener("pointermove",e=>{s.hover=find(e);cv.style.cursor=s.hover!=null?"pointer":"";});cv.addEventListener("pointerleave",()=>{s.hover=null;cv.style.cursor="";});cv.addEventListener("click",e=>{const id=find(e);if(id!=null)o.click(id,s);});}
   s.draw=now=>{if(!s.w)return;const c=s.ctx;c.setTransform(s.k,0,0,s.k,0,0);c.globalAlpha=1;c.globalCompositeOperation="source-over";c.shadowBlur=0;s.hits=[];(o.bg||stageBg)(c,s.w,s.h);o.draw(c,now,s);};
-  if(window.ResizeObserver)new ResizeObserver(()=>s.resize()).observe(cv);else window.addEventListener("resize",s.resize);
-  if(window.IntersectionObserver)new IntersectionObserver(es=>{s.vis=es[es.length-1].isIntersecting;}).observe(cv);else s.vis=true;
+  // a stage draws at its full rate for a while after anything happens in its lab (a pointer, a click, a key, a change), and slowly otherwise
+  s.wake=()=>{s.until=clock()+AWAKE;};s.wake();const box=host.closest("section,article,.lab")||host;
+  ["pointermove","pointerdown","click","keydown","input","change","focusin"].forEach(ev=>box.addEventListener(ev,s.wake,{passive:true}));
+  if(window.ResizeObserver)new ResizeObserver(()=>{s.wake();s.resize();}).observe(cv);else window.addEventListener("resize",s.resize);
+  if(window.IntersectionObserver)new IntersectionObserver(es=>{s.vis=es[es.length-1].isIntersecting;if(s.vis)s.wake();}).observe(cv);else s.vis=true;
   s.kill=()=>{STAGES.delete(s);};STAGES.add(s);requestAnimationFrame(s.resize);return s;}
-function tick(){const now=clock();if(READY)for(const s of STAGES){if(!s.vis||!s.cv.isConnected)continue;if(s.fps<60&&now-s.last<1/s.fps-0.004)continue;s.last=now;s.draw(now);}requestAnimationFrame(tick);}
+/* every visible stage used to draw 60 times a second for as long as the page was open, which kept a laptop's processor about
+   three-quarters busy with nothing moving (4 November 2026): now a stage draws at its own rate for AWAKE seconds after something
+   happens in its lab (or it comes on screen), then IDLE times a second, so the labs' slow pulses and timers stay current at a fraction of the cost */
+function tick(){const now=clock();if(READY)for(const s of STAGES){if(!s.vis||!s.cv.isConnected)continue;const fps=now<s.until?s.fps:Math.min(s.fps,IDLE);
+  if(fps<60&&now-s.last<1/fps-0.004)continue;s.last=now;s.draw(now);}requestAnimationFrame(tick);}
 Object.assign(LD,{Stage,stageBg});
 
 /* ---------- canvas helpers shared by labs and scenarios ---------- */

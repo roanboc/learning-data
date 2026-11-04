@@ -398,7 +398,8 @@ question(W('found', 'next', 'an owner', 0.05), 75, 0.028, 0.1)
 endc = G('found', 'breath', -0.2); air(endc, 1.2, 0.01, 0.0); strings(EB9, endc - 1.0, E('found') - endc + 2.0, 0.026)
 mark(endc + 0.7)
 
-# every effect above, 4 dB up together: the softest still reads on a phone's speaker, and the loudest stays about 20 dB under the voice
+# every effect above, together: 4 dB up until the author's review of What an agent is (4 November 2026), 3 dB up since, so the
+# effects sit as low as in the governance films the author accepted (tools/quiet.py measures them)
 for b in (XL, XR):
-    b *= 1.6
+    b *= 1.4
 soften(2500)

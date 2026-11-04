@@ -1,0 +1,75 @@
+{
+  "title": "Agents at work on data",
+  "title_es": "Agentes trabajando con datos",
+  "planned": 9,
+  "lead": "The second series on AI agents in data work. Jun's agent now works on the census-day count, the number the university reports to the government. Six films show how agents do data work well, from what they read to how they go wrong; three show it on Databricks, governed.",
+  "lead_es": "La segunda serie sobre agentes de IA en el trabajo con datos. El agente de Jun ya trabaja en el conteo del día del censo, la cifra que la universidad informa al gobierno. Seis películas muestran cómo trabajan bien los agentes, de lo que leen a cómo fallan; tres lo muestran en Databricks, gobernado.",
+  "description": "Short films on putting AI agents to work on data: what an agent reads and who writes it, skills and workflows, tools with the fewest rights, memory the whole team shares, a work cycle that decides the check before the agent starts, and the ways it goes wrong; then agents on Databricks, governed by Unity Catalog and its AI gateway, with the team's context and memory governed like any data.",
+  "description_es": "Películas cortas sobre poner a trabajar agentes de IA con datos: lo que lee un agente y quién lo escribe, habilidades y flujos de trabajo, herramientas con los mínimos permisos, una memoria que comparte todo el equipo, un ciclo de trabajo que decide la comprobación antes de que el agente empiece, y las formas en que falla; luego, agentes en Databricks, gobernados por Unity Catalog y su pasarela de IA, con el contexto y la memoria del equipo gobernados como cualquier dato.",
+  "card": "Jun's agent goes to work on the census count: what it reads, its skills, its hands, its memory, and the rules it runs under.",
+  "card_es": "El agente de Jun se pone a trabajar en el conteo del censo: lo que lee, sus habilidades, sus manos, su memoria y sus reglas.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: Jun's agent on the census-day count",
+  "thread_h_es": "Un hilo: el agente de Jun en el conteo del día del censo",
+  "thread": "Jun's agent works on the census-day count, the number the university reports to the government. Film by film, the team gives it what to read, skills to follow, hands with the fewest rights and a memory the whole team shares; decides how each result will be checked before it starts; designs for the ways it goes wrong; and then runs it all on Databricks, governed like any data, before the next series gives the agent a role of its own.",
+  "thread_es": "El agente de Jun trabaja en el conteo del día del censo, la cifra que la universidad informa al gobierno. Película a película, el equipo le da qué leer, habilidades que seguir, manos con los mínimos permisos y una memoria que comparte todo el equipo; decide cómo se comprobará cada resultado antes de que empiece; se prepara para las formas en que falla; y luego lo lleva todo a Databricks, gobernado como cualquier dato, antes de que la siguiente serie le dé al agente un rol propio.",
+  "past_h": "Where each film begins",
+  "past_h_es": "Dónde empieza cada película",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, whose agent works on the census-day count, and who reviews everything it drafts"
+    ],
+    [
+      "biz",
+      "Owns a meaning",
+      "Mei Tanaka, in the registrar's office, whose definitions people and agents both read"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who approves every change to production, an agent's too"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who gives each agent an identity of its own, and only the rights its job needs"
+    ],
+    [
+      "biz",
+      "Asks for numbers",
+      "Clara Jensen, in Planning, whose questions the agents answer, with their evidence"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, cuyo agente trabaja en el conteo del día del censo, y que revisa todo lo que el agente redacta"
+    ],
+    [
+      "biz",
+      "Es dueña de un significado",
+      "Mei Tanaka, de la oficina de registro, cuyas definiciones leen tanto las personas como los agentes"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que aprueba cada cambio en producción, también los de un agente"
+    ],
+    [
+      "tech",
+      "Gestiona la plataforma",
+      "Sam Okafor, que da a cada agente una identidad propia, y solo los permisos que su trabajo necesita"
+    ],
+    [
+      "biz",
+      "Pide cifras",
+      "Clara Jensen, de Planificación, cuyas preguntas responden los agentes, con su evidencia"
+    ]
+  ]
+}

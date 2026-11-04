@@ -7,11 +7,13 @@
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third of
    a frame (a 126-degree shutter), so movement reads as filmed, as in In the weeds of data crafting. No glow: it would wash out the paper.
    No film grain: the paper is the grain. */
-async function prepAssets(){await fontsReady3();wc_prep();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
+async function prepAssets(){await fontsReady3();if(window.__RENDER__)wc_prep();else await wc_prepSoft();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(wc_place);return;}
-  if(ks.length)wc_place(ks[0]);let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
+  const cv0=document.getElementById("film");if(ks.length&&cv0){await new Promise(r=>setTimeout(r,0));wc_place(ks[0]);}let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
   const next=()=>{if(i>=ks.length)return;wc_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
-  const cv=document.getElementById("film"),box=cv&&cv.closest(".player");if(!box||box.classList.contains("started")){go();return;}
+  // a page without a player (labs, scenarios) paints a place only when it first draws it (the kept picture is made then), never all of
+  // them ahead: painting every place as a labs page opened held it for seconds (4 November 2026)
+  const cv=document.getElementById("film"),box=cv&&cv.closest(".player");if(!box)return;if(box.classList.contains("started")){go();return;}
   const mo=new MutationObserver(()=>{if(box.classList.contains("started")){mo.disconnect();go();}});mo.observe(box,{attributes:true,attributeFilter:["class"]});}
 // a place, painted once by the film's own painter, and kept
 function wc_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}

@@ -66,7 +66,9 @@ DOUBT, HARM = Cs5, Bn          # a doubt left unanswered; the 720 students
 
 # ---- the levels: the drum and the psaltery matched by loudness (a drum note's first second against a held psaltery note), about as
 # far under the voice as the series' other music; the effects about 12 dB under the music (FX scales them all)
-DL, SL, FX = 0.11, 0.10, 9.0
+# After the author's review of the series' opening films (4 November 2026), the music is 4 dB lower and the effects 9.5 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
+DL, SL, FX = 0.069, 0.063, 3.0
 
 # a small room round the instruments, ringing on for about a second and a quarter
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.25)).astype(np.float32))(np.arange(int(1.25 * SR)) / SR)
@@ -164,12 +166,13 @@ def tick(s, g=0.011, pan=0.0):
 def page(s, g=0.009, pan=0.0, sec=0.24):
     """a page turned, or a sheet laid down"""
     x = tt(sec); X(filt(noise(sec), 'band', (300, 2200))[:len(x)] * np.sin(np.pi * x / sec) ** 2 * np.exp(-x / (0.5 * sec)), s, g * FX, pan)
-def zip_(s, sec=1.4, n=30, g=0.010, pan=0.0):
-    """a zip drawn: its teeth, one after another, faster in the middle, under a soft rub"""
+def zip_(s, sec=1.4, n=12, g=0.010, pan=0.0):
+    """a zip drawn: some of its teeth, one after another, faster in the middle, under a soft rub (a click for each of its thirty teeth
+    came 21 to a second, a rattle: 4 November 2026)"""
     u = np.linspace(0, 1, n); at = s + sec * (u - 0.12 * np.sin(2 * np.pi * u) / (2 * np.pi) * 2)
     for i, t in enumerate(at):
         x = tt(0.012); X(filt(noise(0.012), 'band', (700, 2200))[:len(x)] * np.exp(-x / 0.003), t, g * FX * (0.6 + 0.4 * R1.uniform()), pan)
-    x = tt(sec); X(filt(noise(sec), 'band', (300, 1400))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, 0.25 * g * FX, pan)
+    x = tt(sec); X(filt(noise(sec), 'band', (300, 1400))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, 0.35 * g * FX, pan)
 def creak(s, g=0.009, pan=0.0, sec=0.55):
     """a chair leaned back: a low, slow wooden give"""
     x = tt(sec).astype(np.float64); f = 150 - 40 * x / sec; ph = 2 * np.pi * np.cumsum(f) / SR
@@ -271,7 +274,7 @@ creak(fw('feels', 'feels', 0.3), 0.008, px(300))
 #    glass slides in, and the six falls to two, the same notes going down
 ew = lambda lid, word, off=0: W('explain', lid, word, off)
 SCALE = (D4, E4, Fs4, G4, A4, B4, Cs5)
-zip_(ew('now', 'closes and opens', -0.3), 1.4, 30, 0.016, px(960))
+zip_(ew('now', 'closes and opens', -0.3), 1.4, 12, 0.016, px(960))
 for k in range(5):
     drum(SCALE[k], ew('try', 'from one to seven', 0.32 * k), 0.5, px(820 + 60 * k))
 drum(G4, ew('lower', 'rated themselves lower', 0.6), 0.4, px(980), 1.5); drum(Fs4, ew('lower', 'rated themselves lower', 1.2), 0.4, px(920), 1.5)
@@ -343,8 +346,8 @@ tap(cc('yes', 0.9), 0.009, px(1530)); tap(cc('yes', 1.8), 0.009, px(1530))
 slide(cw('counts', 'own list agrees', -0.5), 0.9, 0.008, px(1100))
 drum(D4, cw('counts', 'own list agrees', 0.1), 0.6); psal(D4, cw('counts', 'own list agrees', 0.1), cw('counts', 'own list agrees', 1.4), 0.55, att=0.4, rel=1.2)
 tick(cw('counts', 'own list agrees', 0.4), 0.010, px(1732)); pen(cw('counts', 'own list agrees', 1.0), 0.008, px(890))
-for i in range(12):
-    tick(cw('twelve', 'every student', 0.11 * i + 0.3), 0.004, px(120 + 112 * i))
+for i in range(12):  # one soft stroke for each tick drawn (two each came nineteen to a second)
+    tap(cw('twelve', 'every student', 0.11 * i + 0.3), 0.004 * (1.0 if i < 6 else 0.7), px(120 + 112 * i))
 for m, word in ((D4, 'A fluent answer'), (Fs4, 'a green tick'), (A4, 'a long run')):
     drum(m, cw('fluent', word, -0.2), 0.5)
 mark(cw('plan', 'plan on'), cc('breath', 3.2) - cw('plan', 'plan on'), 0.9, cc('breath', 0.1) - cw('plan', 'plan on'))

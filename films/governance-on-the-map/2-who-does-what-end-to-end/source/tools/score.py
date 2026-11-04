@@ -67,8 +67,10 @@ def hz(m, k='Eb'):
     return f * 2 ** o * _JI[pc]
 
 # ---- the levels: the voices sit about as far under the narrator as the series' other films' music (each matched by loudness, not
-# by peak); the effects about 12 dB under the music (FX scales them all)
-RL, FX = 0.028, 1.3
+# by peak); the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is (4 November
+# 2026) the voices are 2.5 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them), and the
+# effects as much, so they stay about 12 dB under the music
+RL, FX = 0.021, 0.975
 LEVEL = {'alto': 1.2, 'ten': 1.2, 'bari': 1.15, 'bass': 1.15, 'agent': 0.5}
 PAN = {'alto': -0.28, 'ten': -0.1, 'bari': 0.1, 'bass': 0.26}  # as a quartet stands: the alto on the left, the bass on the right
 
@@ -183,10 +185,11 @@ def paper(s, g=0.020, pan=0.0, sec=0.45):
     """paper, softly: filtered noise with a swell"""
     x = tt(sec); X(filt(noise(sec), 'band', (250, 2000))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g * FX, pan)
 def slip(s, sec=0.9, g=0.010, p0=0.0, p1=0.0):
-    """a paper slip slid along a wooden table: a dry, soft slide that moves with it"""
+    """a paper slip slid along a wooden table: a dry, soft slide that moves with it, in two halves (four until 4 November 2026,
+    when the bundle's slips made 15 sounds begin in one second)"""
     x = tt(sec); sig = filt(noise(sec), 'band', (300, 1600))[:len(x)] * np.sin(np.pi * x / sec) ** 1.2 * _swell(sec, 10, 0.4, int(s * 7) % 89)
-    for j in range(4):
-        a = j / 4; X(sig[int(a * len(sig)):int((a + 0.25) * len(sig))], s + a * sec, g * FX, p0 + (p1 - p0) * a)
+    for j in range(2):
+        a = j / 2; X(sig[int(a * len(sig)):int((a + 0.5) * len(sig))], s + a * sec, g * FX, p0 + (p1 - p0) * (a + 0.25))
 def ribbon(s, g=0.010, pan=0.0, sec=0.8):
     """a ribbon untied: a soft pull, and the bundle's slips loosening"""
     x = tt(sec); X(filt(noise(sec), 'band', (500, 1900))[:len(x)] * np.sin(np.pi * x / sec) ** 2 * _swell(sec, 9, 0.5, 23), s, g * FX, pan)
@@ -376,8 +379,9 @@ chord({'bari': 46, 'ten': 55}, breath + 0.9 + 1.9 + 1.35, E('words') + 0.4, 0.55
 
 # 2. Three ways to count, in E-flat: Clara's report laid on the desk, its rows, the note of how each faculty counts; one learner's year,
 #    and as Health's row is ringed, nine points lower, the fourth under it sinks a semitone. The emails, and nobody decided: a bare
-#    fifth. Now a service: E-flat as its line lights, the full chord in the pause; she asks, her request written as she says it, and it
-#    goes: her phrase on the alto, rising, unanswered for now
+#    fifth. Now a service: the full chord in the pause (since 4 November 2026 not E-flat as its line lights too, the bare fifth's
+#    notes again 4.6 seconds later); she asks, her request written as she says it, and it goes: her phrase on the alto, rising,
+#    unanswered for now
 tw_ = lambda lid, word, off=0: W('three', lid, word, off)
 tc_ = lambda lid, off=0: G('three', lid, off)
 fac, nineW, less, nobody, define, ten, asksW = tw_('compares', 'faculty by'), tw_('nine', 'nine points'), tw_('nine', 'less likely'), tw_('email', 'nobody'), tw_('service', 'define'), tw_('service', 'ten working'), tw_('asks', 'asks')
@@ -396,8 +400,7 @@ line('bari', [(nineW - 0.05, less, 48, 1.0), (less, tc_('email', -0.6), 47, 1.0)
 paper(em + 0.2, 0.008, px(960), 0.5)
 chord({'bass': 39, 'bari': 46}, nobody - 0.2, tc_('service', -0.6), 0.55, step=0.2, att=0.5, rel=0.6)
 pin(sv + 0.25, 0.014, px(960)); marker(define, 0.011, px(900), 0.6)
-chord({'bass': 39, 'bari': 46}, define - 0.05, tc_('asks', -0.1), 0.62, step=0.2, att=0.4, rel=0.35)
-chord({'ten': 55, 'alto': 63}, END('three', 'service') + 0.06, tc_('asks', -0.3), 0.58, step=0.2, att=0.3, rel=0.3)
+chord({'bass': 39, 'bari': 46, 'ten': 55, 'alto': 63}, END('three', 'service') + 0.06, tc_('asks', -0.3), 0.6, step=0.2, att=0.3, rel=0.3)
 for i in range(3):
     pen(rq + 0.3 + 0.8 * i, 0.008, px(960), 0.75)
 pen(asksW + 0.2, 0.007, px(1250), 0.4); air(asksW + 1.0, 1.0, 0.012, 0.4)
@@ -406,9 +409,10 @@ phrase('alto', CLARA, END('three', 'asks') + 0.08, 0.62, step=0.3, last=0.85)
 # 3. A request, followed: the floor, her request flying from her hands to Mei's, Noor's and Yusuf's steps behind it; Mei drafts, keys,
 #    and the steward's phrase on the tenor in the pause; the agent reads and ticks, its note slides up, what it touches lit one by one,
 #    and its pure tone in the pause; the registrar decides, the owner's cadence, her decision written, dated and signed; the
-#    definition pinned on the map, once; the map publishes it, the glossary's low E-flat; and every copy follows, the bass's note copied
-#    up an octave on the data team's copy, and on through the tenor and the alto after the line; the path through the rooms, a tag
-#    at each step, and, in the pause, the full chord: every step answered
+#    definition pinned on the map, once; the map publishes it; and every copy follows, the bass's E-flat copied up an octave on the data
+#    team's copy, held as the tenor and the alto join it after the line (since 4 November 2026 without the glossary's low E-flat before
+#    it, and held, not sung again: the music came in seven times in 33 seconds here); the path through the rooms, a tag at each step,
+#    and, in the pause, the full chord: every step answered
 rw_ = lambda lid, word, off=0: W('request', lid, word, off)
 rc_ = lambda lid, off=0: G('request', lid, off)
 re_ = lambda lid, off=0: END('request', lid) + off
@@ -434,9 +438,8 @@ for i in range(4):
     pen(decides - 0.05 + 0.3 * i, 0.007 if i < 2 else 0.005, px(1500), 0.4)
 pen(decides + 0.9, 0.006, px(1500), 0.3); sign(decides + 1.1, 0.010, px(1500))
 pin(onceW + 0.15, 0.020, px(968))
-note('bass', 39, gloss - 0.1, 2.3, 0.65, att=0.25, rel=0.6)
-chord({'bass': 39, 'bari': 51}, dt - 0.1, asst + 0.9, 0.65, step=0.1, att=0.3, rel=0.6)
-chord({'bass': 39, 'bari': 51, 'ten': 58, 'alto': 63}, re_('copies', 0.0), rc_('steps', -0.3), 0.6, step=0.18, att=0.3, rel=0.3)
+chord({'bass': 39, 'bari': 51}, dt - 0.1, rc_('steps', -0.3), 0.65, step=0.1, att=0.3, rel=0.3)
+chord({'ten': 58, 'alto': 63}, re_('copies', 0.0), rc_('steps', -0.3), 0.6, step=0.18, att=0.3, rel=0.3)
 for k, t0 in enumerate(st):
     pat(t0 - 0.05 + 0.15, 0.010 if k < 3 else 0.007, px(420 + 216 * k))
 chord(ACAD_EB, re_('steps', 0.1), E('request') - 0.2, 0.65, step=0.2, att=0.4, rel=0.6)
@@ -497,7 +500,8 @@ pat(s2_5 + 0.9, 0.012, px(1160)); pin(s2_5 + 1.1, 0.018, px(1160))
 chord({'ten': 55, 'alto': 63}, END('needs', 'home') + 0.08, nc_('breath') - 0.3, 0.58, step=0.2, att=0.3, rel=0.5)
 
 # 6. A chart that follows: Yusuf's office on his first day, the old chart, half its names to be confirmed, a bare fifth on the fourth
-#    under them; taken down. Drawn from the map: E-flat as it comes up on his screen, its columns as they're said; the calendar turned
+#    under them; taken down. Drawn from the map: its columns as they're said (since 4 November 2026 without E-flat as it comes up on his
+#    screen, 16 seconds after the last); the calendar turned
 #    to February, three weeks ringed. Mei on leave: her phrase sung by the baritone, an octave lower, unchanged, as the colleague's name
 #    clips onto her role; the chart's row changes, and back; and in the pause, her phrase back on the tenor. The old chart dropped in
 #    the box marked retired. A steward's time: her calendar's Thursdays painted in, and as she nods, the chord
@@ -511,7 +515,6 @@ for k in (0, 2, 4):
     tap(half - 0.15 + 0.14 * k + 0.1, 0.006, px(820 + 205 * (k % 4)))
 peel(hc_('drawn', -0.4), 0.012, px(400)); peel(hc_('drawn', -0.25), 0.010, px(1500)); slide(hc_('drawn', 0.0), 0.010, 0.4, 0.6)
 slide(hc_('drawn', 0.45), 0.010, -0.3, 0.5)
-chord({'bass': 39, 'bari': 46}, drawn + 0.1, col[2] + 0.6, 0.6, step=0.2, att=0.4, rel=0.5)
 for i in range(3):
     tap(col[i] - 0.1, 0.007, px(400 + 300 * i))
 flip(feb - 0.05, 0.010, px(1550)); marker(threeW - 0.1, 0.010, px(1550), 1.0)
@@ -524,16 +527,17 @@ for k in range(4):
     marker(timeW - 0.05 + 0.28 * k, 0.007 if k < 2 else 0.005, px(560 + 200 * k), 0.4)
 chord(ACAD_EB, he_('time', 0.08), E('chart') - 0.25, 0.6, step=0.2, att=0.4, rel=0.5)
 
-# 7. The glossary, run as a product: the product card pinned on his board, E-flat; each of its lines lit as it's said, a marker; the
-#    week's list, and the week's chord; who reads each term; the nine, each on a card, and their owners' yes, the owner's cadence; into
-#    the box; the dictionary's list of what's new on a phone; the week's list on every screen on the floor, and the week's chord again
+# 7. The glossary, run as a product: the product card pinned on his board; each of its lines lit as it's said, a marker; the week's
+#    list, and the week's chord; who reads each term; the nine, each on a card, and their owners' yes, the owner's cadence; into the
+#    box; the dictionary's list of what's new on a phone; the week's list on every screen on the floor (since 4 November 2026 without
+#    E-flat for the card and without the week's chord again, 15 seconds after it: E-flat with its fifth came seven times after the
+#    opening)
 pw_ = lambda lid, word, off=0: W('product', lid, word, off)
 pc_ = lambda lid, off=0: G('product', lid, off)
 pe_ = lambda lid, off=0: END('product', lid) + off
 glW, ownW, users, prom, week, counts, retired, yes, everyW = pw_('itself', 'glossary'), pw_('owner', 'owner'), [pw_('users', s) for s in ('people', 'reports', 'tables', 'agents')], pw_('promise', 'promise'), pw_('week', 'week'), pw_('counts', 'counts'), pw_('nine', 'retired'), pw_('nine', 'yes'), pw_('yearly', 'everyone')
 pr = [pw_('promise', s) for s in ('owner', 'definition', 'example', 'status', 'change', 'ten')]
 pin(glW + 0.25, 0.018, px(980))
-chord({'bass': 39, 'bari': 46}, glW - 0.1, pc_('owner', -0.4), 0.58, step=0.2, att=0.5, rel=0.5)
 for k, t0 in enumerate([ownW] + users[::2] + pr[::2] + [pe_('promise', 0.35)]):
     marker(t0 - 0.1, 0.008 if k < 3 else 0.005, px(700 + 60 * k), 0.4)
 for i in range(4):
@@ -550,8 +554,6 @@ line('bari', [(yes - 0.3, yes + 0.35, 46, 1.0), (yes + 0.35, pc_('yearly', -0.3)
 note('bass', 39, yes + 0.35, pc_('yearly', -0.3) - yes - 0.35, 0.6, att=0.3, rel=0.4)
 drop(yes - 0.1 + 0.55 + 0.6, 0.014, px(560))
 tap(pc_('yearly', 0.05), 0.010, px(1500)); tap(pc_('yearly', 0.22), 0.007, px(1500))
-chord({'bass': 39, 'bari': 46}, everyW - 0.2, E('product') - 0.3, 0.6, step=0.2, att=0.4, rel=0.5)
-chord({'ten': 55, 'alto': 63}, pe_('yearly', 0.06), E('product') - 0.3, 0.58, step=0.2, att=0.3, rel=0.5)
 
 # 8. Where it is: Clara's request, its six steps lit one by one, each with its date, on six notes of her phrase, rising from the bass
 #    to the baritone; each working day ticked. Her report: each faculty's note turned to the examiners' day, Health's rate rising to

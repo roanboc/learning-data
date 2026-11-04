@@ -73,7 +73,9 @@ ARP = (Bb2, D3, F3, Bb3, D4, F4, Bb4, D5, F5, Bb5)  # B-flat major up the string
 
 # ---- the levels: the zither and the heckelphone matched by loudness (a plucked note's first second against a held reed note), about as
 # far under the voice as the series' other music; the effects about 12 dB under the music (FX scales them all)
-ZL, HL, FX = 0.12, 0.085, 3.6
+# After the author's review of the series' opening films (4 November 2026), the music is 3.5 dB lower and the effects 4 dB, so
+# the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
+ZL, HL, FX = 0.080, 0.057, 2.3
 
 # a small room round the instruments, ringing on for about a second and a half
 _IR = (lambda x: (R4.standard_normal(len(x)) * np.exp(-6.9 * x / 1.45)).astype(np.float32))(np.arange(int(1.45 * SR)) / SR)
@@ -348,14 +350,13 @@ roll(CH_F, hw('safely', 'more than a junior', -0.2), 0.1, 0.45)
 mark = lambda s, hold, g=0.8: (count([s + 0.46 * i for i in range(4)], 0.62 * g), lift(s + 1.38, hold, 0.85 * g), roll((Bb2, F3, Bb3), s + 1.38, 0.1, 0.5 * g))
 mark(hc('breath', 0.3), 2.6)
 
-# 2. A junior who needs supervision: the agent at work, a zither note for each step of its loop as it lights, the arm's touch and the data
-#    coming back; the advice, pinned; the badge clipped on. The paper junior: its three small jobs, three green ticks; month by month, the
-#    calendar's pages; the amber card and the ladder's wobble. "Like Hans": the count, F F and B flat. The two-column card: two notes
-#    rising for the two ways it is more, three falling for the three it is less
+# 2. A junior who needs supervision: the agent at work, the arm's touch and the data coming back (since 4 November 2026 without a zither
+#    note for each step of its loop: the notes ran on from the title's last chord, eight seconds of music over the chapter's turn); the
+#    advice, pinned; the badge clipped on. The paper junior: its three small jobs, three green ticks; month by month, the calendar's pages;
+#    the amber card and the ladder's wobble. "Like Hans": the count, F F and B flat. The two-column card: two notes rising for the two
+#    ways it is more, three falling for the three it is less
 jw = lambda lid, word, off=0: W('junior', lid, word, off)
 jc = lambda lid, off=0: G('junior', lid, off)
-for m, word in ((Bb3, 'reasons'), (D4, 'with hands'), (F4, 'in a loop')):
-    zit(m, jw('agent', word), 0.5, px(1124), False)
 tap(jw('agent', 'with hands', 0.8), 0.006, px(1604)); air(jw('agent', 'in a loop'), 1.4, 0.005, px(1360))
 card(jw('advice', 'often told', -0.2), 0.006, px(690)); pin(jw('advice', 'often told', 0.1), 0.007, px(690))
 clip(jw('advice', 'junior who', 0.3), 0.007, px(1124))
@@ -375,8 +376,8 @@ for i, m in enumerate((F4, D4, Bb3)):
     zit(m, jw('ways', 'in three', 0.25 * i), 0.5, px(1500), until=E('junior') + 0.3)
 
 # 3. More than a junior: Jun's question; the agent reads the 33 tables, card after card, the zither rising through them; the path drawn
-#    and its pills; the clock's hand. A new junior's week, a note for each day, the count landing on Friday. The shelves, a long
-#    soft slide of books. The danger: the tables ripple amber, G minor, low; free rein, the ripple again, and its knock. A junior's pace:
+#    and its pills; the clock's hand. A new junior's week, its card (since 4 November 2026 not counted: the count, the film's mark, is
+#    kept for Hans, the agent's mistake and the evidence). The shelves, a long soft slide of books. The danger: the tables ripple amber, G minor, low; free rein, the ripple again, and its knock. A junior's pace:
 #    the paper junior slides in beside Jun, its one card turns amber; the two-column card, its two rows rising
 mw = lambda lid, word, off=0: W('more', lid, word, off)
 mc = lambda lid, off=0: G('more', lid, off)
@@ -388,7 +389,6 @@ tap(mw('reads', 'thirty-three', -0.1), 0.005, px(1760))
 tap(mw('reads', 'draws the path'), 0.005, px(1383)); tap(mw('reads', 'draws the path', 1.3), 0.005, px(1591))
 air(mw('reads', 'about a minute', -0.2), 1.4, 0.004, px(640))
 card(mc('week', -0.2), 0.006, px(300))
-count([mc('week', 0.1 + 1.6 * i / 5) for i in range(5)], 0.5, pan=px(300))
 slide(mw('lifetimes', 'a thousand', -0.4), 2.8, 0.006, px(1480))
 for t, x in ((mw('undersells', 'a danger', -0.1), 1300), (mw('rein', 'change every table'), 1600)):
     amber(t, 0.008, px(x))

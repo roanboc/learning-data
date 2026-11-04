@@ -55,8 +55,10 @@ def hz(m):
 I, IV, V, vi, iii = (38, 57, 66), (43, 59, 62), (45, 61, 64), (47, 62, 66), (42, 57, 61)
 
 # ---- the levels: the consort sits about as far under the voice as the series' other films' music (matched by loudness, not by
-# peak); the mandolin a little under it, as it's plucked close; the effects about 12 dB under the music (FX scales them all)
-VL, ML_, FX = 0.03, 0.05, 1.6
+# peak); the mandolin a little under it, as it's plucked close; the effects about 12 dB under the music (FX scales them all). Since
+# the author's review of What an agent is (4 November 2026) the consort and the mandolin are 3 dB lower, as low as in the governance
+# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
+VL, ML_, FX = 0.021, 0.035, 1.12
 LEVEL = {'tr': 1.0, 'te': 1.0, 'ba': 1.1}
 PAN = {'tr': -0.3, 'te': 0.0, 'ba': 0.3}  # as a consort sits in a half circle: the treble at the left, the bass at the right
 
@@ -451,13 +453,13 @@ for k in range(3):
     pencil(ck + 0.3 + 0.12 * k, 0.007, px([1300, 1650, 1300][k]), 0.25)
 instep(ck + 0.4); chord(I, ck + 0.2, E('layers') + 0.3, 0.5, step=0.2, att=0.6, rel=0.8)
 
-# 9. One meaning: home at the turn; a thread to each table, count and answer her words reach; the floor of offices, hers lit, and her
-#    words carried to every office at once, the treble rising; submission day, both reports ticked, in step, and a thread from the
+# 9. One meaning: a thread to each table, count and answer her words reach (since 4 November 2026 without home at the turn, ten
+#    seconds before it comes with the treble rising); the floor of offices, hers lit, and her words carried to every office at once,
+#    the treble rising; submission day, both reports ticked, in step, and a thread from the
 #    metric and the words to both; the next film's card lifts; and the end card, on the mark, the chord held to the end
 zw = lambda lid, word, off=0: W('close', lid, word, off)
 zc = lambda lid, off=0: G('close', lid, off)
 z0 = S0('close')
-chord(I, z0 + 0.2, z0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
 for k, t in enumerate((zw('sees', 'every table'), zw('sees', 'count'), zw('sees', 'answer'), zw('sees', 'answer', 0.3))):
     pencil(t, 0.007, px([1250, 1560, 1250, 1540][k]), 0.5)
 car = zw('decides', 'carries it everywhere')

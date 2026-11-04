@@ -23,7 +23,7 @@ Yusuf Demir starts as the university's data governance lead. He inherits a shelf
 | [An agent that checks](https://data.learn-all.org/data-governance/an-agent-that-checks/) | AI for governance | 6½ min | 8 | 3 questions | [script](9-an-agent-that-checks/script.md) · [source](9-an-agent-that-checks/source/README.md) |
 | [Teachers of data](https://data.learn-all.org/data-governance/teachers-of-data/) | Getting people to take part | 7 min | 8 | 3 questions | [script](10-teachers-of-data/script.md) · [source](10-teachers-of-data/source/README.md) |
 
-For the whole series, on the site: [25 labs](https://data.learn-all.org/data-governance/labs/) and [54 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
+For the whole series, on the site: [9 labs](https://data.learn-all.org/data-governance/labs/) and [9 scenarios](https://data.learn-all.org/data-governance/scenarios/), in English and Spanish, from the words in [site/assets/data-governance/](../../site/assets/data-governance/).
 <!-- /films -->
 
 ## The look and the sound
@@ -47,4 +47,4 @@ Like the other series, each film is generated from code. The series keeps what's
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of |
 | `shared/tools/names.py`, `cues.py` | Checks `build.py` runs: no name declared in two files, and every moment timed to a word that is, whole, in its line. `build.py` also stops a caption that would run to three lines |
 | `shared/tools/check.py` | *From words to data*'s check that every moment draws, then this series' own: each place the film paints lets the page draw again within two seconds |
-| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py`, `build.py` and `check.py`, and *From words to data*'s other tools and instruments unchanged |
+| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py`, `build.py`, `check.py` and `quiet.py`, and *From words to data*'s other tools and instruments unchanged. `quiet.py` checks the sound: when and how often the music comes in, that no figure is played again and again, how loud the music and the effects are, that the effects come one at a time, and that nothing beats or pulses. Every film of the three governance series and of *What an agent is* runs it, from its own `tools/quiet.py` |

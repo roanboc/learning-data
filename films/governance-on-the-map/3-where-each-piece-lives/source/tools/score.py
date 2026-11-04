@@ -68,8 +68,10 @@ def hz(m, k='Bb'):
     return f * 2 ** o * _JI[pc]
 
 # ---- the levels: the harpsichord sits about as far under the narrator as the series' other films' music (matched by loudness, not by
-# peak); the clavichord a little under it, and further off; the effects about 20 dB under the music (FX scales them all)
-RL, FX = 0.082, 1.75
+# peak); the clavichord a little under it, and further off; the effects about 20 dB under the music (FX scales them all). Since the
+# author's review of What an agent is (4 November 2026) both are 3 dB lower, as low as in the governance films the author accepted
+# (tools/quiet.py measures them), and the effects as much, so they stay about 20 dB under the music
+RL, FX = 0.058, 1.24
 LEVEL = {'hps': 1.0, 'clv': 0.8}
 PAN = {'hps': -0.18, 'clv': 0.32}  # the harpsichord a little left of the middle; the clavichord, the copies, across the room from it
 
@@ -198,13 +200,13 @@ def wind(s, sec, g=0.010, pan=0.0, lo=110, hi=650):
     x = tt(sec); e = np.minimum(1, x / 1.2) * np.minimum(1, np.maximum(sec - x, 0) / 1.5) * _swell(sec, 0.7, 0.75, int(s * 3) % 91)
     X(filt(noise(sec), 'band', (lo, hi))[:len(x)] * e, s, g * FX, pan)
 def crowd(s, sec, g=0.005, pan=0.0):
-    """men coming up the road, far off: many feet, low and blurred, each step at its own moment, so there's no beat"""
-    t0 = 0.0
-    while t0 < sec:
-        x = tt(0.12); X(norm(filt(noise(0.12), 'band', (70, 380)) * np.exp(-x * 30)), s + t0, g * FX * R1.uniform(0.3, 1.0) * min(1, t0 / 1.0 + 0.2), pan + R1.uniform(-0.25, 0.25))
-        t0 += R1.uniform(0.03, 0.11)
-def crackle(s, sec, g=0.005, pan=0.0, rate=6.0):
-    """a fire: small, uneven pops over its low breath"""
+    """men coming up the road, far off: many feet blurred into one low, uneven tread that swells in, so there's no beat (since 4
+    November 2026 one sound, not a sound for each step: with the fires, the steps made up to 20 sounds begin in one second)"""
+    x = tt(sec); e = np.minimum(1, x / 1.0) * np.minimum(1, np.maximum(sec - x, 0) / 0.8) * _swell(sec, 9, 0.6, int(s * 11) % 97)
+    X(norm(filt(noise(sec), 'band', (70, 380))[:len(x)] * e), s, g * FX * 0.7, pan)
+def crackle(s, sec, g=0.005, pan=0.0, rate=2.0):
+    """a fire: small, uneven pops over its low breath (about two a second since 4 November 2026: six, from several fires at once,
+    were a crackle of tiny sounds)"""
     t0 = R1.uniform(0, 0.1)
     while t0 < sec:
         x = tt(0.025); X(norm(filt(noise(0.025), 'band', (300, 1400)) * np.exp(-x * 170)), s + t0, g * FX * R1.uniform(0.25, 1.0), pan + R1.uniform(-0.08, 0.08))
@@ -355,7 +357,7 @@ wind(s9 - 0.3, s9b - s9 + 0.6, 0.008, 0.2, 140, 700)
 play('clv', up(HOME), s9 + 0.25, 0.42, 0.9, 0.7, 'D', pan=0.0, far=1.0)
 # the cave by night: the small fire; then the snow, the seasons turning on a held fifth, D and A, Jeonju's copy holding on; they
 # change over (from s9c + 0.9); in the pause, the figure's start, softly
-crackle(s9b, s9c - s9b + 0.4, 0.006, px(1000), 4.0); crackle(s9c - 0.2, s10 - s9c + 0.1, 0.005, px(1000), 3.0)
+crackle(s9b, s9c - s9b + 0.4, 0.006, px(1000), 2.5); crackle(s9c - 0.2, s10 - s9c + 0.1, 0.005, px(1000), 2.0)
 sleeve(s9c + 0.9, 0.004, 0.2, 0.8)
 hush(s9c, s10 - s9c, 0.006, 0.0)
 strum('clv', [50, 57], s9c + 0.05, 2.6, 0.85, 'D', step=0.0, pan=0.0, far=1.2)
@@ -440,10 +442,9 @@ pat(n4 + 0.6 + 0.2, 0.007, px(910))
 for k in range(9):
     pencil(n5 + 0.3 + 0.17 * k, 0.007 if k < 3 else 0.004, px(700 + 80 * (k % 7)), 0.12)
 marker(sees - 0.25, 0.008, px(960), 0.5)
-# Jun finds her request, and passes it on (the card flies from P.passes - 0.1, over 0.9 s, to Clara); in the pause, the call again,
-# still unanswered, from across the room
+# Jun finds her request, and passes it on (the card flies from P.passes - 0.1, over 0.9 s, to Clara); since 4 November 2026 the call
+# isn't played again here, still unanswered, 12 seconds after the last
 paper(n6 + 0.3, 0.007, px(1330), 0.3); air(passes - 0.1, 0.9, 0.009, 0.6)
-play('hps', CALL, ne_('later', 0.15), 0.45, 1.5, 0.75, pan=0.35)
 # had he said yes: his hand on "approve" (from P.yes - 0.3), a gold "no" across it (from P.isnt - 0.1)
 sleeve(yes - 0.3, 0.005, 0.2, 0.6); strike(isnt - 0.1, 0.010, 0.0, 0.8)
 # the page, close: typed by hand (P.byHand - 0.1), and nobody kept it in step (amber from P.nobody - 0.1); in the pause, the page's
@@ -452,8 +453,10 @@ tap(byHand - 0.05, 0.006, px(700)); tap(byHand + 0.1, 0.005, px(700))
 play('clv', up(OFF), ne_('typed', 0.12), 0.32, 1.2, 0.95, pan=0.3, far=1.0)
 
 # 3. Seven places: Sam at the platform's desk, the page's owner line; Sam walks into Yusuf's office; seven blank cards laid on his desk,
-#    each written as it's named, and each a note, the B-flat scale from its first note to its seventh; a gold "owner" on three: the
-#    owner's phrase at home, and the catalogue's copy of it; and as one has drifted, the platform's copy, one note off
+#    a note as each lands, the B-flat scale from its first note to its seventh, and each written in pencil as it's named (since 4
+#    November 2026 the scale plays as the cards land, not a note as each is named: the music came in six times in 27 seconds); a gold
+#    "owner" on three: the owner's phrase at home, and the catalogue's copy of it; and as one has drifted, the platform's copy, one
+#    note off
 sw_ = lambda lid, word, off=0: W('seven', lid, word, off)
 sc_ = lambda lid, off=0: G('seven', lid, off)
 se_ = lambda lid, off=0: END('seven', lid) + off
@@ -466,9 +469,9 @@ K7 = ['arch', 'gloss', 'docs', 'repo', 'platform', 'cat', 'tracker']
 DK = [460, 900, 1330, 1720, 460, 900, 1330]  # each card's middle on the desk
 for i in range(7):
     pat(t4 + 0.3 + 0.2 * i + 0.35, 0.008 if i < 3 else 0.005, px(DK[i]))
+    hps(SEVEN[i], t4 + 0.3 + 0.2 * i + 0.35, 0.3 if i < 6 else 1.0, 0.8, pan=px(DK[i], 0.8))
 for i, k in enumerate(K7):
     a = sc_(k, 0.1); pen(a, 0.006, px(DK[i]), max(1.6, se_(k, 0.4) - a) * 0.85)
-    hps(SEVEN[i], a + 0.05, 1.0, 0.85, pan=px(DK[i], 0.8))
 # a gold "owner" on three cards (from P.more - 0.1): the repository's, the platform's and the catalogue's; the owner's phrase at its
 # home; in the pause, the catalogue's copy; and as one copy no longer matches (P.no), the platform's, one note off, left unresolved
 for i in (3, 4, 5):
@@ -498,9 +501,8 @@ hps(46, oneRule + 0.05, 1.2, 0.9)
 strum('hps', [34, 41, 46, 50], he_('rule', 0.08), hc_('every', -0.2) - he_('rule', 0.08), 0.8, step=0.09)
 for i in range(4):
     knock(oneHome - 0.1 + 0.22 * i + 0.2, 0.006 if i < 2 else 0.004, px(470 + 290), 300)
-# every other place keeps a copy, dashed (P.keeps): the rule's chord on the clavichord, further off; each says where it came from
-# (from P.came - 0.1, 0.2 s apart), in pencil
-strum('clv', [46, 50, 53], keepsW + 0.05, 1.2, 0.85, step=0.08, far=1.2)
+# every other place keeps a copy, dashed (P.keeps); each says where it came from (from P.came - 0.1, 0.2 s apart), in pencil (since 4
+# November 2026 without the rule's chord again on the clavichord, six seconds after it)
 for i, vx in enumerate((805, 805, 1265)):
     pencil(came - 0.1 + 0.2 * i + 0.1, 0.006, px(vx), 0.3)
 # a product's owner, at home in the repository (lit at P.lives): the owner's phrase; the catalogue and the platform's page copy it
@@ -518,9 +520,10 @@ pen(itsHome - 0.3, 0.006, px(420), 0.9)
 play('hps', [36, 38], itsHome - 0.2, 0.3, 1.0, 0.85)
 play('clv', [48, 50], itsHome + 0.95, 0.3, 1.0, 0.85, pan=px(800, 1.2), far=1.0)
 
-# 5. One way: on Noor's map each flow is drawn as it's named, and played forward: the home's note on the harpsichord as it leaves, and
-#    the copy's, an octave up, on the clavichord as the arrow reaches it; the tools that read the glossary, copies of a copy, further
-#    off; a learner and an award slide down to the tables, a column's class along to the platform; the arrow drawn back is stopped,
+# 5. One way: on Noor's map each flow is drawn as it's named; the definitions' and the column class's are played forward: the home's
+#    note on the harpsichord as it leaves, and the copy's, an octave up, on the clavichord as the arrow reaches it (since 4 November 2026
+#    not the concepts' and the promise's too, nor a note for each tool that reads the glossary: the music came in seven times in 35
+#    seconds); a learner and an award slide down to the tables, a column's class along to the platform; the arrow drawn back is stopped,
 #    on the clavichord's note, unanswered; and a copy is never a home: in the pause, the chord
 yw_ = lambda lid, word, off=0: W('way', lid, word, off)
 yc_ = lambda lid, off=0: G('way', lid, off)
@@ -528,11 +531,12 @@ ye_ = lambda lid, off=0: END('way', lid) + off
 defGo, uW = yw_('defs', 'go from'), [yw_('tools', s) for s in ('the data team', 'the dashboards', 'the assistant')]
 cMap, learner, award, clGo, prGo, backW = yw_('concepts', 'concepts'), yw_('concepts', 'a learner'), yw_('concepts', 'an award'), yw_('class', 'goes from'), yw_('promise', 'goes from'), yw_('back', 'back')
 FLOW = [(defGo, 1.0, 41, (518, 632)), (cMap, 0.9, 34, (330, 330)), (clGo, 0.8, 38, (518, 632)), (prGo, 1.4, 41, (518, 1265))]
-for t0, d, m, (xa, xb) in FLOW:
-    hps(m, t0 + 0.02, 0.8, 0.85, pan=px(xa)); pencil(t0, 0.005, px(xa), d)
-    clv(m + 12, t0 + d, 0.8, 0.85, pan=px(xb, 1.3), far=1.0)
+for j, (t0, d, m, (xa, xb)) in enumerate(FLOW):
+    pencil(t0, 0.005, px(xa), d)
+    if j in (0, 2):
+        hps(m, t0 + 0.02, 0.8, 0.85, pan=px(xa)); clv(m + 12, t0 + d, 0.8, 0.85, pan=px(xb, 1.3), far=1.0)
 for i, t0 in enumerate(uW):
-    clv(53, t0 - 0.1, 0.6, 0.6, pan=px(1265, 1.3) + 0.1 * (i - 1), far=1.8); pencil(t0 - 0.7, 0.004, px(1035), 0.6)
+    pencil(t0 - 0.7, 0.004, px(1035), 0.6)
 air(learner, 1.5, 0.004, px(330)); air(award, 1.5, 0.004, px(330))
 pat(clGo + 1.7, 0.006, px(632))
 # nothing flows back: the arrow drawn back from the platform (from c.back + 0.1, over 0.9 s): the copy's note, C, and no answer; Noor
@@ -546,7 +550,8 @@ strum('clv', [46, 53], ye_('never', 0.5), E('way') - 0.15 - ye_('never', 0.5), 0
 # 6. Found by a check: night on the floor; someone types into the platform's page in the dark; a sync stops, its light out; every
 #    night the check walks each flow, a single clavichord note at each copy, even and slow; the first night it finds the old owner's
 #    name on the table's page, and two more: three times the home's note, and the copy's, a note off; by morning, as the light comes
-#    up, each put right, a click as each name changes, and a note to each owner; the morning's sheet pinned on Yusuf's board. As the
+#    up, each put right, a click as each name changes (since 4 November 2026 without the copy's note each time), and a note to each
+#    owner; the morning's sheet pinned on Yusuf's board. As the
 #    historians climbed: the books aired, a rising note as each rack fills, and what he found written down. Here a check does it every
 #    night: a light going from room to room, a note in each
 kw_ = lambda lid, word, off=0: W('check', lid, word, off)
@@ -567,9 +572,9 @@ for i, t0 in enumerate((old - 0.1, twoW + 0.1, twoW + 0.45)):
     hps(34, t0 - 0.05, 0.7, 0.7, pan=-0.3); clv(48, t0 + 0.2, 0.7, 0.8, pan=px(820 if i == 0 else 1100, 1.2), far=1.0)
 pat(pageW, 0.006, px(960))
 # by morning, the light coming up (from c.morning - 0.3): each name put right, a click as it changes (from P.right - 0.1, 0.35 s
-# apart), and the copy's note in tune; a note to each owner (from P.tells - 0.1, 0.3 apart)
+# apart); a note to each owner (from P.tells - 0.1, 0.3 apart)
 for i in range(3):
-    click(rightW - 0.1 + 0.35 * i + 0.1, 0.008, px(1300)); clv(46, rightW - 0.1 + 0.35 * i + 0.12, 0.6 if i < 2 else 1.2, 0.8, pan=px(1100, 1.2), far=1.0)
+    click(rightW - 0.1 + 0.35 * i + 0.1, 0.008, px(1300))
     pat(tells - 0.1 + 0.3 * i + 0.25, 0.005, px(1500))
 # the morning: Yusuf's board, the night's sheet, three put right, pinned (from c.finds + 0.4)
 pin(kc_('finds', 0.55), 0.010, px(1030)); paper(kc_('finds', 0.45), 0.006, px(1030), 0.3)
@@ -587,7 +592,9 @@ for i, m in enumerate((46, 50, 53, 50, 46)):
 # 7. Theirs to change: the floor by day, each team at its own screens; the planner's next request, sent straight to Clara, her call, and
 #    this time the answer, the owner's phrase, as she approves it; the plan for the next series, six cards, six notes rising; the annals
 #    lasted: the figure at home, in D major, and the reader's copy; one home for every piece: the owner's phrase at home, and every copy
-#    of it in tune; the same page on every screen, the same note in each; the request reaches the one who decides; the end card, the mark
+#    of it in tune; the same page on every screen, and the request reaching the one who decides (since 4 November 2026 without the same
+#    note in each screen and the request's home note, four seconds after every copy in tune: the music came in six times in 30
+#    seconds); the end card, the mark
 vw_ = lambda lid, word, off=0: W('theirs', lid, word, off)
 vc_ = lambda lid, off=0: G('theirs', lid, off)
 ve_ = lambda lid, off=0: END('theirs', lid) + off
@@ -616,12 +623,9 @@ click(v8 + 0.35, 0.007, px(560))
 play('hps', OWNER, oneHomeT - 0.1, 0.3, 1.0, 0.85, pan=px(480, 0.6))
 play('clv', up(OWNER), oneHomeT + 0.85, 0.3, 0.9, 0.8, pan=0.45, far=1.0)
 play('clv', up(OWNER), oneHomeT + 1.15, 0.3, 0.9, 0.7, pan=0.1, far=1.4)
-# everyone reads the same thing: the same page on every screen on the floor (from P.same - 0.2, 0.12 s apart), the same note in each;
-# and a request flies to the one who decides (from P.request, over 1.3 s), and comes home
-for i in range(5):
-    clv(50, sameW - 0.2 + 0.12 * i + 0.1, 0.8 if i < 4 else 1.3, 0.55, pan=px(260 + 350 * i, 1.1), far=1.2)
+# everyone reads the same thing: the same page on every screen on the floor (from P.same - 0.2, 0.12 s apart); and a request flies to
+# the one who decides (from P.request, over 1.3 s)
 air(requestW, 1.3, 0.008, -0.2)
-hps(46, requestW + 1.3, 1.4, 0.8, pan=-0.5)
 # the end card, and the mark: the harpsichord, then the clavichord answering it, further off; B-flat and F under its last note, to the end
 end = vc_('breath', 0.2)
 play('hps', MARK(34), end + 0.45, 0.5, 1.3, 1.0)

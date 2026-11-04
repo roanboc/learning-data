@@ -1234,13 +1234,7 @@ function ag_paintHead(c,P,C){const st=P.hair.style;
   ag_soft(c,AG_F.head,C.skinBase,C.skinHi,362,400,170,C.skinShade,26);
   c.save();ag_shape(c,AG_F.head);c.clip();let g=c.createRadialGradient(340,458,0,340,458,30);g.addColorStop(0,rgba(mix(P.skin,[230,110,100],0.5),0.24));g.addColorStop(1,rgba([230,120,110],0));
   c.fillStyle=g;c.fillRect(296,416,100,90);
-  // the near side of the nose, turned a little from the light: a soft shade, none between the eyes and deepest at the nostril, and a
-  // fainter one under the tip, on the lip. It gives the nose its depth without a line on it
-  const ns=mix(P.skin,[90,40,30],0.55),ng=c.createLinearGradient(368,428,380,462);ng.addColorStop(0,rgba(ns,0));ng.addColorStop(0.55,rgba(ns,0.12));ng.addColorStop(1,rgba(ns,0.2));
-  c.filter="blur(4px)";c.fillStyle=ng;c.beginPath();c.moveTo(368,426);c.bezierCurveTo(374,438,383,447,391,453);c.lineTo(384,462);
-  c.bezierCurveTo(377,464,369,462,366,456);c.bezierCurveTo(364,447,364,436,368,426);c.closePath();c.fill();
-  c.filter="blur(2.5px)";c.fillStyle=rgba(ns,0.12);c.beginPath();c.ellipse(385,467,6.5,2.2,0,0,TAU);c.fill();c.filter="none";
-  c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.2);c.lineWidth=2.4;c.beginPath();c.moveTo(274,490);c.quadraticCurveTo(296,510,322,519);c.stroke();c.restore();
+  c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.2);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(274,490);c.quadraticCurveTo(296,510,322,519);c.stroke();c.restore();
   if(P.beard){const bd=P.beard;c.save();ag_shape(c,AG_F.head);c.clip();
     const beard=cc=>{cc.moveTo(274,426);cc.bezierCurveTo(270,454,258,480,262,496);cc.bezierCurveTo(272,522,330,540,360,538);cc.bezierCurveTo(378,536,392,520,392,500);
       cc.bezierCurveTo(386,494,376,491,366,493);cc.bezierCurveTo(356,495,346,490,347,483);cc.bezierCurveTo(354,475,372,471,392,471);cc.lineTo(398,463);
@@ -1267,8 +1261,8 @@ function ag_paintHead(c,P,C){const st=P.hair.style;
   c.lineWidth=4;c.beginPath();c.moveTo(367,397);c.quadraticCurveTo(377,392,387,398);c.stroke();
   c.strokeStyle=C.lid;c.lineWidth=2.4;c.beginPath();c.moveTo(322,414);c.quadraticCurveTo(333,407,345,412);c.stroke();
   c.beginPath();c.moveTo(372,412);c.quadraticCurveTo(377,408,383,411);c.stroke();
-  // the nose: its tip on the outline; inside, one small curve for the near nostril's wing, open towards the tip and fuller as it turns
-  // under. A second curve inside the tip, as there was, read as a squiggle
+  // the nose: its tip on the outline, and inside only one small curve for the near nostril's wing, open towards the tip and fuller as it
+  // turns under, with no shade on it (the author chose this of four drafts: a second curve inside the tip, as there was, read as a squiggle)
   ag_taper(c,[377,455],[370,455],[368,464],[376,465],1,2.3,C.line);
   // glasses: the near lens over the near eye, the far lens narrower, its outer rim just past the cheek, the arm back to the ear
   if(P.glasses){c.strokeStyle=rgba(P.glasses,0.95);c.lineWidth=3.4;rr(c,311,401,45,32,10);c.stroke();rr(c,366,401,22,30,8);c.stroke();

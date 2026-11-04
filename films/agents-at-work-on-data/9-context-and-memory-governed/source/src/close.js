@@ -1,0 +1,94 @@
+/* ===== Context and memory, governed: what an agent reads, and the series' close =====
+     cm_context(ctx, cx, cy, o)   what an agent reads, as Context engineering draws it: the sphere in the middle, four cards at its corners
+                                  (Code, Metadata, Skills, Tools, with that film's words), blue edges; o.memory 0..1 adds the fifth,
+                                  the memory, under the sphere; o.gov 0..1 gives each card the mark of what's governed; o.a, o.t
+     cm_govTable(ctx, x, y, o)    the five questions as a table: a row for each kind of context and the memory, a column for each
+                                  question (o.cols 0..1 each lit as it's asked), and o.chat (a note in one person's chat) as a last row
+     CM_LESSONS                   the series' nine films, each with its lesson, as each film's end card says it
+     cm_lessons(ctx, o)           the nine cards, three by three: o.show(i) 0..1 for each; o.deco when the camera makes them small
+     cm_shelves(ctx, o)           the module's road: four series on an oak rail; o.lit (the next one), o.a */
+
+const CM_CTX=[["CODE","The repository: models, tests, AGENTS.md"],["METADATA","What words mean, models, contracts, lineage"],["SKILLS","How the team does a job"],["TOOLS","What it can reach and do"]];
+function cm_context(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const t=o.t||0,w=470,gx=250,gy=o.gy||170,mem=o.memory||0,gov=o.gov||0,show=o.show||(()=>1);ctx.save();ctx.globalAlpha*=a;
+  const pos=[[cx-gx-w,cy-gy-150],[cx+gx,cy-gy-150],[cx-gx-w,cy+gy-40],[cx+gx,cy+gy-40]];
+  // the lines that feed the sphere, under everything, each with its card
+  ctx.strokeStyle=rgba(AG.blue,0.45);ctx.lineWidth=3;ctx.lineCap="round";
+  pos.forEach((p,i)=>{const s=show(i);if(s<=0)return;const ex=i%2?p[0]:p[0]+w,ey=i<2?p[1]+150:p[1]+20,u=ag_sine(clamp(s*1.4-0.3,0,1));if(u<=0)return;
+    ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(lerp(ex,lerp(ex,cx,0.62),u),lerp(ey,lerp(ey,cy,0.62),u));ctx.stroke();});
+  if(mem>0){ctx.save();ctx.globalAlpha*=clamp(mem*1.5,0,1);ctx.beginPath();ctx.moveTo(cx,cy+190);ctx.lineTo(cx,cy+118);ctx.stroke();ctx.restore();}
+  cm_agent(ctx,cx,cy,o.r||96,t,{core:o.core==null?0.8:o.core,think:o.think||0.1,label:o.label||null});
+  pos.forEach((p,i)=>{const s=show(i);if(s<=0)return;const [k,sub]=CM_CTX[i];ctx.save();ctx.globalAlpha*=clamp(s*2,0,1);const b=ag_textCard(ctx,p[0],p[1],w,{kick:k,sub},{measure:true});
+    ag_about(ctx,p[0]+w/2,p[1]+b.h/2,lerp(0.85,1,Math.min(1.03,ag_spr(s,0,0.55))));
+    ag_textCard(ctx,p[0],p[1],w,{kick:k,sub},{edge:AG.blue,kickCol:AG.blue});if(gov>0)cm_govMark(ctx,p[0]+w-44,p[1]+44,clamp(gov*1.6-i*0.15,0,1));ctx.restore();});
+  if(mem>0){const mw=440,mx=cx-mw/2,my=cy+190;ctx.save();ctx.globalAlpha*=clamp(mem*2,0,1);const k=ag_spr(mem,0,0.6);ag_about(ctx,cx,my+80,lerp(0.8,1,Math.min(1,k)));
+    ag_textCard(ctx,mx,my,mw,{kick:"MEMORY",sub:"The session it's in, and what the team keeps"},{edge:AG.blue,kickCol:AG.blue});
+    if(gov>0)cm_govMark(ctx,mx+mw-44,my+44,clamp(gov*1.6-0.6,0,1));ctx.restore();}
+  ctx.restore();return pos.map(p=>({x:p[0],y:p[1],w}));}
+// the mark of something governed: a small green tick in a ring
+function cm_govMark(ctx,x,y,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const k=Math.min(1,ag_spr(a,0,0.5));ag_about(ctx,x,y,lerp(0.4,1,k));
+  ctx.fillStyle="rgba(244,246,242,0.95)";ctx.beginPath();ctx.arc(x,y,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(AG.green,0.9);ctx.lineWidth=2.6;ctx.stroke();ag_tick(ctx,x,y+1,18,rgba(AG.green,1),3.4);ctx.restore();}
+
+const CM_GOV={rows:["Code","Metadata","Skills","Tools","Memory"],cols:["Owner","Read, change","Review","Keeping","Deleting"],lab:330,cw:236,rh:70,hh:84};
+function cm_govTable(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const G=CM_GOV,w=G.lab+G.cols.length*G.cw,rows=G.rows.length+(o.chat?1:0),h=G.hh+rows*G.rh+16;
+  ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,22,{});
+  G.cols.forEach((c,j)=>{const lit=o.cols?o.cols[j]||0:0,cx=x+G.lab+j*G.cw;if(lit>0){ctx.fillStyle=rgba(AG.blue,0.1*lit);rr(ctx,cx+6,y+10,G.cw-12,h-20,14);ctx.fill();}
+    ag_T(ctx,c,cx+G.cw/2,y+56,{w:700,size:28,align:"center",col:mix(AG.mut,AG.blue,lit)});});
+  ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+20,y+G.hh);ctx.lineTo(x+w-20,y+G.hh);ctx.stroke();
+  G.rows.forEach((r,i)=>{const ry=y+G.hh+i*G.rh,ra=o.rowA?o.rowA[i]:1;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ra;ag_T(ctx,r.toUpperCase(),x+30,ry+46,{w:700,size:28,ls:4,col:AG.blue});
+    G.cols.forEach((c,j)=>{const v=o.cells?o.cells(i,j):0;if(v>0){const cx=x+G.lab+j*G.cw+G.cw/2;ctx.save();ctx.globalAlpha*=clamp(v,0,1);ag_tick(ctx,cx,ry+36,24,rgba(AG.green,1),4);ctx.restore();}});
+    ctx.restore();});
+  if(o.chat){const ry=y+G.hh+G.rows.length*G.rh,ca=o.chat;ctx.save();ctx.globalAlpha*=ca;ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.beginPath();ctx.moveTo(x+20,ry+4);ctx.lineTo(x+w-20,ry+4);ctx.stroke();
+    cm_bubble(ctx,x+46,ry+36,rgba(AG.amber,1));ag_T(ctx,"A note in a chat",x+80,ry+46,{w:600,size:28,col:AG.ink});
+    G.cols.forEach((c,j)=>{const v=o.chatCell?o.chatCell(j):1;if(v<=0)return;const cx=x+G.lab+j*G.cw+G.cw/2;ctx.save();ctx.globalAlpha*=v;ag_T(ctx,"?",cx,ry+48,{w:800,size:34,align:"center",col:AG.amber});ctx.restore();});ctx.restore();}
+  ctx.restore();return{x,y,w,h};}
+function cm_bubble(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x-16,y-12);ctx.lineTo(x+16,y-12);ctx.quadraticCurveTo(x+20,y-12,x+20,y-8);
+  ctx.lineTo(x+20,y+6);ctx.quadraticCurveTo(x+20,y+10,x+16,y+10);ctx.lineTo(x-4,y+10);ctx.lineTo(x-12,y+17);ctx.lineTo(x-11,y+10);ctx.lineTo(x-16,y+10);ctx.quadraticCurveTo(x-20,y+10,x-20,y+6);
+  ctx.lineTo(x-20,y-8);ctx.quadraticCurveTo(x-20,y-12,x-16,y-12);ctx.stroke();ctx.restore();}
+
+/* the nine films of Agents at work on data and their lessons, as their briefs (4 November 2026) and end cards give them */
+const CM_LESSONS=[["Context engineering","Write it down once, and people and agents both use it."],
+  ["Skills and workflows","Solve it once, write it down, reuse it."],
+  ["Tools are hands, and every hand is a permission","Read-only by default; write only drafts, somewhere safe."],
+  ["Memory: from one chat to the team","Let the agent learn from the team, not from one person."],
+  ["Plan, define the check, do, check","Decide how you'll check before the agent starts."],
+  ["How it goes wrong","Expect these, and design for them."],
+  ["Working with agents on Databricks","The platform gives agents the same data and tools people use, in one place."],
+  ["Why Unity Catalog and Unity Gateway govern them","One set of rules for people and agents, enforced where the data and models live."],
+  ["Context and memory, governed","The team's context and memory are governed assets, not private notes."]];
+const CM_GRID={x:80,y:110,w:568,gx:28,gy:22};
+// the cards' sizes: each row as tall as its tallest card
+function cm_gridLayout(ctx){const G=CM_GRID,cells=[];const meas=CM_LESSONS.map(l=>({tl:ag_wrap(ctx,l[0],G.w-56,{w:600,size:28}),ll:ag_wrap(ctx,l[1],G.w-56,{w:700,size:30})}));
+  let y=G.y;for(let r=0;r<3;r++){let h=0;for(let c=0;c<3;c++){const m=meas[r*3+c];h=Math.max(h,26+m.tl.length*36+14+m.ll.length*40+20);}
+    for(let c=0;c<3;c++)cells.push({x:G.x+c*(G.w+G.gx),y,w:G.w,h,tl:meas[r*3+c].tl,ll:meas[r*3+c].ll});y+=h+G.gy;}
+  return cells;}
+function cm_lessons(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const cells=cm_gridLayout(ctx),deco=o.deco?1:0;ctx.save();ctx.globalAlpha*=a;
+  cells.forEach((c,i)=>{const s=o.show?o.show(i):1;if(s<=0)return;const k=Math.min(1.03,ag_spr(s,0,0.55));ctx.save();ctx.globalAlpha*=clamp(s*2,0,1);ag_about(ctx,c.x+c.w/2,c.y+c.h/2,lerp(0.85,1,clamp(k,0,1.1)));
+    const last=i===8;ag_box(ctx,c.x,c.y,c.w,c.h,20,{edge:last?AG.blue:null,edgeA:0.7});
+    let yy=c.y+26;c.tl.forEach((l,j)=>{yy+=(j?36:26);ag_T(ctx,l,c.x+28,yy,{w:600,size:28,col:AG.mut,deco});});yy+=14;
+    c.ll.forEach((l,j)=>{yy+=(j?40:38);ag_T(ctx,l,c.x+28,yy,{w:700,size:30,col:AG.ink,deco});});ctx.restore();});
+  ctx.restore();return cells;}
+// the grid's bounds, for moving it into its place on the road
+function cm_gridBox(ctx){const c=cm_gridLayout(ctx),l=c[c.length-1];return{x:CM_GRID.x,y:CM_GRID.y,w:l.x+l.w-CM_GRID.x,h:l.y+l.h-CM_GRID.y};}
+
+/* the module's road, seen from further off: an oak rail, and on it the four series of AI agents in data work, the two that are made
+   with their nine films, the two still to come in a dashed outline */
+const CM_ROAD={y:676,shelves:[["What an agent is",1],["Agents at work on data",1],["From helper to colleague",0],["A colleague that isn't a person",0]],x:84,w:408,gap:32,top:300,h:320};
+function cm_shelf(i){const R=CM_ROAD;return{x:R.x+i*(R.w+R.gap),y:R.top,w:R.w,h:R.h};}
+function cm_shelves(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const R=CM_ROAD;ctx.save();ctx.globalAlpha*=a;
+  // the rail, and its arrow onward
+  const x0=40,x1=1880,y=R.y;ctx.save();ctx.shadowColor="rgba(46,38,28,0.25)";ctx.shadowBlur=14;ctx.shadowOffsetX=AG.sdx;ctx.shadowOffsetY=8;
+  const g=ctx.createLinearGradient(0,y,0,y+22);g.addColorStop(0,rgba(mix(AG_OAK.base,[255,255,255],0.2),1));g.addColorStop(1,rgba(AG_OAK.dark,1));ctx.fillStyle=g;rr(ctx,x0,y,x1-x0-30,22,6);ctx.fill();ctx.restore();
+  ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0+6,y+1.5);ctx.lineTo(x1-36,y+1.5);ctx.stroke();ag_arrowHead(ctx,x1-16,y+11,0,22,rgba(AG_OAK.dark,1));
+  R.shelves.forEach((s,i)=>{const b=cm_shelf(i),made=s[1],sa=o.shelfA?o.shelfA(i):1;if(sa<=0)return;ctx.save();ctx.globalAlpha*=sa;
+    const lit=o.lit===i?(o.litA==null?1:o.litA):0;
+    if(made){ag_box(ctx,b.x,b.y,b.w,b.h,22,{});}
+    else{ctx.fillStyle="rgba(250,249,246,0.5)";rr(ctx,b.x,b.y,b.w,b.h,22);ctx.fill();cm_dash(ctx,b.x-5,b.y-5,b.w+10,b.h+10,26,lit>0?mix(AG.mut,AG.blue,lit):AG.mut,1);}
+    if(lit>0){ctx.save();ctx.shadowColor=rgba(AG.blue,0.6*lit);ctx.shadowBlur=26;ctx.strokeStyle=rgba(AG.blue,0.8*lit);ctx.lineWidth=3;rr(ctx,b.x,b.y,b.w,b.h,22);ctx.stroke();ctx.restore();}
+    const tl=ag_wrap(ctx,s[0],b.w-48,{w:700,size:30});tl.forEach((l,j)=>ag_T(ctx,l,b.x+24,b.y+50+j*38,{w:700,size:30,col:made?AG.ink:AG.mut}));
+    // a made series: its nine films, as small cards (decoration: the voice and the titles say what they are)
+    if(made&&!(i===1&&o.skip2)){for(let k=0;k<9;k++){const cx=b.x+28+(k%3)*120,cy=b.y+132+(k/3|0)*58;ctx.save();ctx.shadowColor="rgba(46,38,28,0.14)";ctx.shadowBlur=8;ctx.shadowOffsetY=3;
+        ctx.fillStyle="#EEEBE5";rr(ctx,cx,cy,110,48,8);ctx.fill();ctx.restore();ctx.strokeStyle=AG.card.edge;ctx.lineWidth=1;rr(ctx,cx,cy,110,48,8);ctx.stroke();
+        ctx.fillStyle="rgba(86,92,100,0.22)";rr(ctx,cx+12,cy+14,70,7,3.5);ctx.fill();rr(ctx,cx+12,cy+28,52,7,3.5);ctx.fill();}}
+    // the oak post from the shelf down to the rail
+    ctx.fillStyle=rgba(AG_OAK.dark,0.8);ctx.fillRect(b.x+b.w/2-5,b.y+b.h,10,R.y-b.y-b.h);ctx.restore();});
+  ctx.restore();}

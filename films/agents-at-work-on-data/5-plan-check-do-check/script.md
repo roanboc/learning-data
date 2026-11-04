@@ -169,7 +169,7 @@ The film shows the example project's own words, and adds what it needs in place 
 - `docs/process.md`: step 5, *Tests*, "Tests, before any model", which the agent writes first and Jun approves in review. Unchanged.
 - `docs/plan.md` (new): the one-page plan, line by line, and why each line is there.
 - `examples/census-by-level/` (new): the worked example the film follows: the plan as Jun wrote it; the two tests as he approved them (`tests/levels_add_up_to_census_day.sql`, and `unique` and `not_null` in `tests/_census_by_level__tests.yml`); the agent's pull request, with the plan line by line, its four rounds of ten, the evidence for every claim and the description it copied from the glossary; and Mei's decision as a decision log keeps it. The count by level, its models and the glossary's *Level of study* are only in this example, not in the project's models or its glossary export: there, they would change the counts and the sync other films show.
-- `skills/reconcile-and-diff/SKILL.md`: what the loop leaves, a new section at the end, *Every split adds up to its total*.
+- `skills/reconcile-and-diff/SKILL.md`: what the loop leaves, the cause *Exchange students with no level* at the end of *Causes met so far*, and a new section after it, *Every split adds up to its total*.
 
 ## Rigour to check before recording
 

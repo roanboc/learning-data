@@ -40,12 +40,48 @@ changed against the version before?
 The reconciliation table, the diff summary, and the query behind each line. The model's owner
 signs off, and the consumer when their contract changed.
 
+## Causes met so far
+
+When the count and the census report differ, check these first: each was found before, and a
+person settled it. Report which one fits, with its query. When none fits, say so: a person
+settles the new cause, and it gets an entry here, so nothing is solved twice.
+
+### Withdrew after census day
+
+- Shows: the count is under the census report.
+- Settled: they still count, as at census (DEC-PLN-02).
+- Decided by: Planning, the wallet app team and Noor.
+
+### A degree in no faculty
+
+- Shows: students under no faculty, beside a new degree.
+- Settled: every degree belongs to a faculty; the registrar's office names it.
+- Decided by: Mei Tanaka, registrar's office.
+
+### A student counted twice
+
+- Shows: one person with two learner keys.
+- Settled: a person decides two keys are one (DEC-STU-04).
+- Decided by: Mei Tanaka, registrar's office.
+
+### Test records
+
+- Shows: records made in one week, dated back months.
+- Settled: they never count (DEC-SIS-05).
+- Decided by: Mei Tanaka, registrar's office, 22 October 2026.
+
+### Exchange students with no level
+
+- Shows: a split by level of study comes up short of the census-day count.
+- Settled: they count as non-award, a level of its own (`examples/census-by-level/`).
+- Decided by: Mei Tanaka, registrar's office, 3 November 2026.
+
 ## Every split adds up to its total
 
 When a change splits a number people trust (by faculty, by level of study, by anything), the
 parts must add up to the whole. Write it as a test before you build the split: the parts' sum
 against the total already reconciled, and every row in exactly one part. A sum that comes up short
 is news: find the rows behind the difference, with a query that returns counts, not names, and ask
-the owner of the meaning where they belong (*Who approves what* in `AGENTS.md`). Don't drop them,
-and don't change the test to pass. The worked example is `examples/census-by-level/`, where 28
-exchange students had no level.
+the owner of the meaning where they belong (*Who approves what* in `AGENTS.md`); their answer goes
+into *Causes met so far*. Don't drop them, and don't change the test to pass. The worked example is
+`examples/census-by-level/`, where 28 exchange students had no level.

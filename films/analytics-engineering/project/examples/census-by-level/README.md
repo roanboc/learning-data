@@ -27,4 +27,5 @@ files are the job's documents, not code that runs here.
 
 What the loop leaves for the next one: Mei's decision, recorded; *Level of study* in the glossary
 and in the model's description, with its source; a step in `skills/reconcile-and-diff/`, *Every
-split adds up to its total*; and the plan, which the next job starts from.
+split adds up to its total*, and this cause in its *Causes met so far*; and the plan, which the
+next job starts from.

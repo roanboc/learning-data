@@ -23,8 +23,8 @@ taking single units as non-award, a level of its own.
 |---|---|
 | Goal | Three levels, one row each, adding up to 18,412 (evidence 1) |
 | Read | *Student*, *Census day* and *Level of study*, from Docs; the census-day count, from Catalog |
-| Tools | Catalog, Query and Docs, read only, and nothing else (the tool log, below) |
-| Writes | Only this branch, and the agent's sandbox |
+| Tools | Catalog, Query and Docs, read only, and no other tool to read with (the tool log, below) |
+| Writes | Only this branch, with Repository, and the agent's sandbox, with Build |
 | Never | No names or student IDs: every query returns counts |
 | Limit | 4 of 10 rounds (below) |
 | Checks | Both tests untouched, and both pass (evidence 3) |
@@ -107,6 +107,8 @@ The doc block is generated from the conceptual model, which copies the glossary'
 | Docs | 3 | *Student*, *Census day*, *Level of study* |
 | Catalog | 2 | The census-day count and its tables; the courses and their levels |
 | Query | 3 | The count by level; the 28 with no level; the count again, after the fix |
+| Build | 2 | The count by level and its tests, in the sandbox; again, after the fix |
+| Repository | 2 | The two tests, for Jun Park's review; the model and this pull request |
 
 ## For the reviewers
 

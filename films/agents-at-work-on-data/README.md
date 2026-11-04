@@ -13,6 +13,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 |---|---|---|---|---|---|
 | [Context engineering](https://data.learn-all.org/agents-at-work-on-data/context-engineering/) | What an agent reads | 6½ min | 7 | 3 questions | [script](1-context-engineering/script.md) · [source](1-context-engineering/source/README.md) |
 | [Skills and workflows](https://data.learn-all.org/agents-at-work-on-data/skills-and-workflows/) | Playbooks for agents | 7½ min | 7 | 3 questions | [script](2-skills-and-workflows/script.md) · [source](2-skills-and-workflows/source/README.md) |
+| [Tools are hands, and every hand is a permission](https://data.learn-all.org/agents-at-work-on-data/tools-are-hands/) | Tools and their rights | 7½ min | 7 | 3 questions | [script](3-tools-are-hands/script.md) · [source](3-tools-are-hands/source/README.md) |
 | [Plan, define the check, do, check](https://data.learn-all.org/agents-at-work-on-data/plan-check-do-check/) | The work cycle | 7½ min | 8 | 4 questions | [script](5-plan-check-do-check/script.md) · [source](5-plan-check-do-check/source/README.md) |
 <!-- /films -->
 

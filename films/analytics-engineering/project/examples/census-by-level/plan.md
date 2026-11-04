@@ -8,7 +8,7 @@ Asked by: Clara Jensen, Planning, for the government's report · Plan: Jun Park 
   builds on, `mart_planning__census_day_students`, 18,412 students, already reconciled with the
   census report.
 - **Tools:** Catalog, Query and Docs, read only.
-- **Writes:** only its own branch, and its sandbox.
+- **Writes:** only its own branch, with Repository, and its sandbox, with Build.
 - **Never:** read names or student IDs; write to production.
 - **Limit:** 10 rounds, then stop and report.
 - **Checks:** the levels add up to 18,412, the census-day count; and every student has exactly one

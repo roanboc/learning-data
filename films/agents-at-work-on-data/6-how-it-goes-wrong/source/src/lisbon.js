@@ -150,7 +150,7 @@ function hw_paintCity(c,o){o=o||{};const L=o.light||"morning",ruin=!!o.ruin;
 
 /* ---------------------------------------------------------------- the city's live pieces: the tremble, the dust, the river and the wave, the fires */
 // a place drawn as a picture that trembles: amp in px; drawn a little larger, so its edges never show; a gentle tremble, never a flash
-function hw_shaken(x,key,tt,amp,a){const dx=amp*(0.6*Math.sin(tt*37)+0.4*Math.sin(tt*61+1)),dy=amp*0.4*Math.sin(tt*47+2),z=1+Math.max(amp,1)*0.0034;
+function hw_shaken(x,key,tt,amp,a){const dx=amp*(0.6*Math.sin(tt*37)+0.4*Math.sin(tt*61+1)),dy=amp*0.4*Math.sin(tt*47+2),z=1+amp*0.0034;
   x.save();if(a!=null)x.globalAlpha*=a;x.translate(960+dx,540+dy);x.scale(z,z);x.translate(-960,-540);x.drawImage(ag_place(key),0,0,W,H);x.restore();}
 const HW_DUST=(()=>{const R=ag_rnd(31),d=[];for(let i=0;i<22;i++){const x=lerp(560,1500,R());d.push({x,y:hw_crest(x)*0.35+HW_WATER*0.65-R()*40,r:50+R()*60,v:20+R()*30,dx:(R()-0.5)*16,t:R()*1.2});}return d;})();
 // pale dust rising from the lower town from t0, slowly spreading
@@ -344,6 +344,10 @@ function hw_sheet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;co
   HW_Q.forEach(([n,q],i)=>{const ly=166+i*96,p=o.p?clamp(o.p[i],0,1):1;ctx.fillStyle=rgba(HWC.ink,0.14);ctx.fillRect(44,ly+16,w-88,2);if(p<=0)return;
     ctx.save();ctx.beginPath();ctx.rect(30,ly-50,(w-30)*p+10,80);ctx.clip();ag_T(ctx,n,44,ly,{w:700,size:32,col:HWC.ink});ag_T(ctx,q,112,ly,{w:600,size:32,col:HWC.ink});ctx.restore();});
   ctx.restore();}
+// the sheet carried across the cut from the minister's desk to the parish: at the cut just where the desk shot leaves it (at 190, 200,
+// as wide, under that shot's camera, which ends 3% closer about the frame's centre), then gliding in 1.6 s to the priest's side
+function hw_sheetAcross(ctx,tt,t0,o){const u=ag_sine((tt-t0)/1.6),k=lerp(1.03,1,u);ctx.save();
+  ctx.translate(lerp(960+(190-960)*1.03,90,u),lerp(540+(200-540)*1.03,150,u));ctx.scale(k,k);hw_sheet(ctx,0,0,820,o);ctx.restore();}
 // the map of Portugal: its outline (longitude, latitude), its parishes as dots, Lisbon ringed; letters out to them (o.out 0 to 1) and back (o.back)
 const HW_PT=[[-8.87,41.87],[-8.6,42.05],[-8.2,42.15],[-7.9,41.92],[-7.4,41.86],[-7.2,41.98],[-6.85,41.95],[-6.55,41.67],[-6.19,41.58],[-6.33,41.4],[-6.69,41.2],[-6.93,41.02],
   [-6.8,40.85],[-6.86,40.55],[-6.81,40.34],[-7.0,40.18],[-6.87,40.0],[-7.02,39.68],[-7.33,39.6],[-7.5,39.44],[-7.25,39.25],[-7.12,38.98],[-7.32,38.72],[-7.27,38.44],[-7.0,38.2],

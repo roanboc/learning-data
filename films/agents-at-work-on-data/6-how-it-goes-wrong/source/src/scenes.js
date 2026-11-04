@@ -44,15 +44,15 @@ scene("lisbon",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({ch:wAt(sc,"
     {at:P.gw-0.2,place:"hwRuin",keys:[[P.gw-0.2,960,540,1]],push:0,draw:(x,tt)=>hw_river(x,tt,{back:ag_sine((tt-P.gw)/0.8),wave:clamp((tt-P.gw-0.6)/2.6,0,1)})},
     // and fires burn for days: the ruins at dusk under the fires' glow and smoke
     {at:P.fires+0.3,place:"hwDusk",keys:[[P.fires+0.3,980,530,1]],push:0.04,draw:(x,tt)=>hw_fires(x,tt,ag_in(tt,P.fires+0.3,1.2))},
-    // the grey morning after: tens of thousands of people died, and the heart of the city lay in ruins
-    {at:c.died,place:"hwGrey",keys:[[c.died,980,530,1.04]],push:0.03,draw:(x,tt)=>{
-      hw_card(x,600,186,720,"By most estimates","Tens of thousands of people died",null,{kickCol:AG.mut,edge:[150,148,144],edgeA:0.6,a:ag_io(tt,c.died+0.3,c.failed-0.5,0.6)});}},
-    // it had failed in every way at once: closer, on the ruins (the three ways come up over it)
-    {cut:true,at:c.failed,place:"hwGrey",keys:[[c.failed,1000,580,1.16]],push:0.02},
-    // and the ground would shake again; rebuilt the old way, the city stands up again, and falls the same way
-    {cut:true,at:c.again,keys:[[c.again,960,540,1]],push:0,draw:(x,tt)=>{const tr=u=>Math.sin(Math.PI*clamp(u,0,1)),
-      amp=4*Math.max(tr((tt-P.shake2+0.1)/1.4),tr((tt-P.same+0.1)/1.6)),up=ag_in(tt,P.rebuilt+0.2,1.2)*(1-ag_in(tt,P.same,0.9));
-      hw_shaken(x,"hwGrey",tt,amp,1);if(up>0)hw_shaken(x,"hwCity",tt,amp,up);hw_dust(x,tt,P.same,1-ag_in(tt,c.engineers-1.2,0.8));}},
+    // the grey morning after: tens of thousands of people died; it had failed in every way at once (the three ways come up over it);
+    // and the ground would shake again; rebuilt the old way, the city stands up again, and falls the same way. One shot of one place:
+    // the camera glides in on the ruins and back out, because a cut between two framings of one place reads as a jump
+    {at:c.died,place:"hwGrey",keys:[[c.died,980,530,1.04],[c.failed-0.4,1000,580,1.16],[c.again-0.1,960,540,1]],d:2.2,push:0.03,draw:(x,tt)=>{
+      const tr=u=>Math.sin(Math.PI*clamp(u,0,1)),amp=4*Math.max(tr((tt-P.shake2+0.1)/1.4),tr((tt-P.same+0.1)/1.6)),
+        up=ag_in(tt,P.rebuilt+0.2,1.2)*(1-ag_in(tt,P.same,0.9));
+      if(amp>0||up>0)hw_shaken(x,"hwGrey",tt,amp,1);if(up>0)hw_shaken(x,"hwCity",tt,amp,up);hw_dust(x,tt,P.same,1-ag_in(tt,c.engineers-1.2,0.8));
+      hw_card(x,600,186,720,"By most estimates","Tens of thousands of people died",null,{kickCol:AG.mut,edge:[150,148,144],edgeA:0.6,
+        a:ag_io(tt,c.died+0.3,c.failed-0.5,0.6)});}},
     // so the king's engineers rebuilt the lower town for each way it had failed: the old lanes, and the new plan drawing itself over them
     {at:c.engineers,place:"hwDraft",keys:[[c.engineers,960,540,1]],push:0.03,draw:(x,tt)=>{hw_plan(x,560,120,740,580,{p:(tt-P.reb)/3.4,pins:true});hw_engineers(x,tt);}},
     // inside the walls, a cage of timber braced with crosses: a house cut open; it sways once, and settles
@@ -73,7 +73,7 @@ scene("lisbon",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({ch:wAt(sc,"
     {cut:true,at:c.asked,place:"hwParish",keys:[[c.asked,960,540,1]],push:0.02,draw:(x,tt)=>{
       hw_table(x,940,1760,800,900);hw_papers(x,1330,846,{n:2,ink:true});
       ag_person(x,HW_P.priest,1180,600,0.9,{t:tt,cut:800,pose:{near:[40,95,"hold"]},hold:hw_quill,gaze:[3,3]});
-      hw_sheet(x,90,150,860,{p:P.q.map(q=>(tt-q+0.1)/0.9)});}},
+      hw_sheetAcross(x,tt,c.asked,{p:P.q.map(q=>(tt-q+0.1)/0.9)});}},
     // the lower town today: the same straight street, still standing, and one of the first built to withstand an earthquake
     {at:c.stands,place:"hwToday",keys:[[c.stands,960,540,1]],push:0.04,draw:(x,tt)=>{hw_walkers(x,tt-c.stands);
       ag_pill(x,960,206,"more than 250 years on",{a:ag_io(tt,P.years,c.read-0.4,0.4)});

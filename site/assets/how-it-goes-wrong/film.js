@@ -1829,7 +1829,7 @@ function hw_paintCity(c,o){o=o||{};const L=o.light||"morning",ruin=!!o.ruin;
 
 /* ---------------------------------------------------------------- the city's live pieces: the tremble, the dust, the river and the wave, the fires */
 // a place drawn as a picture that trembles: amp in px; drawn a little larger, so its edges never show; a gentle tremble, never a flash
-function hw_shaken(x,key,tt,amp,a){const dx=amp*(0.6*Math.sin(tt*37)+0.4*Math.sin(tt*61+1)),dy=amp*0.4*Math.sin(tt*47+2),z=1+Math.max(amp,1)*0.0034;
+function hw_shaken(x,key,tt,amp,a){const dx=amp*(0.6*Math.sin(tt*37)+0.4*Math.sin(tt*61+1)),dy=amp*0.4*Math.sin(tt*47+2),z=1+amp*0.0034;
   x.save();if(a!=null)x.globalAlpha*=a;x.translate(960+dx,540+dy);x.scale(z,z);x.translate(-960,-540);x.drawImage(ag_place(key),0,0,W,H);x.restore();}
 const HW_DUST=(()=>{const R=ag_rnd(31),d=[];for(let i=0;i<22;i++){const x=lerp(560,1500,R());d.push({x,y:hw_crest(x)*0.35+HW_WATER*0.65-R()*40,r:50+R()*60,v:20+R()*30,dx:(R()-0.5)*16,t:R()*1.2});}return d;})();
 // pale dust rising from the lower town from t0, slowly spreading
@@ -2023,6 +2023,10 @@ function hw_sheet(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;co
   HW_Q.forEach(([n,q],i)=>{const ly=166+i*96,p=o.p?clamp(o.p[i],0,1):1;ctx.fillStyle=rgba(HWC.ink,0.14);ctx.fillRect(44,ly+16,w-88,2);if(p<=0)return;
     ctx.save();ctx.beginPath();ctx.rect(30,ly-50,(w-30)*p+10,80);ctx.clip();ag_T(ctx,n,44,ly,{w:700,size:32,col:HWC.ink});ag_T(ctx,q,112,ly,{w:600,size:32,col:HWC.ink});ctx.restore();});
   ctx.restore();}
+// the sheet carried across the cut from the minister's desk to the parish: at the cut just where the desk shot leaves it (at 190, 200,
+// as wide, under that shot's camera, which ends 3% closer about the frame's centre), then gliding in 1.6 s to the priest's side
+function hw_sheetAcross(ctx,tt,t0,o){const u=ag_sine((tt-t0)/1.6),k=lerp(1.03,1,u);ctx.save();
+  ctx.translate(lerp(960+(190-960)*1.03,90,u),lerp(540+(200-540)*1.03,150,u));ctx.scale(k,k);hw_sheet(ctx,0,0,820,o);ctx.restore();}
 // the map of Portugal: its outline (longitude, latitude), its parishes as dots, Lisbon ringed; letters out to them (o.out 0 to 1) and back (o.back)
 const HW_PT=[[-8.87,41.87],[-8.6,42.05],[-8.2,42.15],[-7.9,41.92],[-7.4,41.86],[-7.2,41.98],[-6.85,41.95],[-6.55,41.67],[-6.19,41.58],[-6.33,41.4],[-6.69,41.2],[-6.93,41.02],
   [-6.8,40.85],[-6.86,40.55],[-6.81,40.34],[-7.0,40.18],[-6.87,40.0],[-7.02,39.68],[-7.33,39.6],[-7.5,39.44],[-7.25,39.25],[-7.12,38.98],[-7.32,38.72],[-7.27,38.44],[-7.0,38.2],
@@ -2299,8 +2303,8 @@ const HW_TOOLS=[["Tickets","read only","lock"],["Catalog","read only","lock"],["
 function hw_tools6(ctx,x,y,o){o=o||{};HW_TOOLS.forEach(([n,s,ic],i)=>{const a=o.a?o.a[i]:1;if(a<=0)return;ag_tool(ctx,x+(i%3)*262,y+Math.floor(i/3)*128,244,112,n,{a,sub:s,icon:ic,touch:o.touch||0});});}
 
 /* ---------------------------------------------------------------- 5 · a loop all night */
-// the stack of the night's rounds: each line the same error; n how many have dropped (it grows as one arrives)
-function hw_rounds(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const lh=40,k=Math.max(0,n),h=28+38+Math.ceil(k)*lh+18;ctx.save();ctx.globalAlpha*=a;
+// the stack of the night's rounds: each line the same error; n how many have dropped (the card grows smoothly as each one arrives)
+function hw_rounds(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const lh=40,k=Math.max(0,n),h=28+38+(Math.floor(k)+ag_sine(k-Math.floor(k)))*lh+18;ctx.save();ctx.globalAlpha*=a;
   ag_box(ctx,x,y,w,h,22,{edge:AG.amber,edgeA:0.6});ag_T(ctx,"THE NIGHT'S ROUNDS",x+28,y+50,{w:700,size:28,ls:4,col:AG.amber});
   for(let i=0;i<Math.ceil(k);i++){const la=clamp(k-i,0,1);ag_T(ctx,"round "+(i+1)+" · no new copy",x+28,y+66+i*lh+30-(1-la)*16,{w:600,size:28,col:AG.amber,a:la});}ctx.restore();}
 // Sam's budget: a bar that empties
@@ -2376,15 +2380,15 @@ scene("lisbon",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({ch:wAt(sc,"
     {at:P.gw-0.2,place:"hwRuin",keys:[[P.gw-0.2,960,540,1]],push:0,draw:(x,tt)=>hw_river(x,tt,{back:ag_sine((tt-P.gw)/0.8),wave:clamp((tt-P.gw-0.6)/2.6,0,1)})},
     // and fires burn for days: the ruins at dusk under the fires' glow and smoke
     {at:P.fires+0.3,place:"hwDusk",keys:[[P.fires+0.3,980,530,1]],push:0.04,draw:(x,tt)=>hw_fires(x,tt,ag_in(tt,P.fires+0.3,1.2))},
-    // the grey morning after: tens of thousands of people died, and the heart of the city lay in ruins
-    {at:c.died,place:"hwGrey",keys:[[c.died,980,530,1.04]],push:0.03,draw:(x,tt)=>{
-      hw_card(x,600,186,720,"By most estimates","Tens of thousands of people died",null,{kickCol:AG.mut,edge:[150,148,144],edgeA:0.6,a:ag_io(tt,c.died+0.3,c.failed-0.5,0.6)});}},
-    // it had failed in every way at once: closer, on the ruins (the three ways come up over it)
-    {cut:true,at:c.failed,place:"hwGrey",keys:[[c.failed,1000,580,1.16]],push:0.02},
-    // and the ground would shake again; rebuilt the old way, the city stands up again, and falls the same way
-    {cut:true,at:c.again,keys:[[c.again,960,540,1]],push:0,draw:(x,tt)=>{const tr=u=>Math.sin(Math.PI*clamp(u,0,1)),
-      amp=4*Math.max(tr((tt-P.shake2+0.1)/1.4),tr((tt-P.same+0.1)/1.6)),up=ag_in(tt,P.rebuilt+0.2,1.2)*(1-ag_in(tt,P.same,0.9));
-      hw_shaken(x,"hwGrey",tt,amp,1);if(up>0)hw_shaken(x,"hwCity",tt,amp,up);hw_dust(x,tt,P.same,1-ag_in(tt,c.engineers-1.2,0.8));}},
+    // the grey morning after: tens of thousands of people died; it had failed in every way at once (the three ways come up over it);
+    // and the ground would shake again; rebuilt the old way, the city stands up again, and falls the same way. One shot of one place:
+    // the camera glides in on the ruins and back out, because a cut between two framings of one place reads as a jump
+    {at:c.died,place:"hwGrey",keys:[[c.died,980,530,1.04],[c.failed-0.4,1000,580,1.16],[c.again-0.1,960,540,1]],d:2.2,push:0.03,draw:(x,tt)=>{
+      const tr=u=>Math.sin(Math.PI*clamp(u,0,1)),amp=4*Math.max(tr((tt-P.shake2+0.1)/1.4),tr((tt-P.same+0.1)/1.6)),
+        up=ag_in(tt,P.rebuilt+0.2,1.2)*(1-ag_in(tt,P.same,0.9));
+      if(amp>0||up>0)hw_shaken(x,"hwGrey",tt,amp,1);if(up>0)hw_shaken(x,"hwCity",tt,amp,up);hw_dust(x,tt,P.same,1-ag_in(tt,c.engineers-1.2,0.8));
+      hw_card(x,600,186,720,"By most estimates","Tens of thousands of people died",null,{kickCol:AG.mut,edge:[150,148,144],edgeA:0.6,
+        a:ag_io(tt,c.died+0.3,c.failed-0.5,0.6)});}},
     // so the king's engineers rebuilt the lower town for each way it had failed: the old lanes, and the new plan drawing itself over them
     {at:c.engineers,place:"hwDraft",keys:[[c.engineers,960,540,1]],push:0.03,draw:(x,tt)=>{hw_plan(x,560,120,740,580,{p:(tt-P.reb)/3.4,pins:true});hw_engineers(x,tt);}},
     // inside the walls, a cage of timber braced with crosses: a house cut open; it sways once, and settles
@@ -2405,7 +2409,7 @@ scene("lisbon",(ctx,S,t,sc)=>{const c=sc.cues,P=hw_once(sc,"P",()=>({ch:wAt(sc,"
     {cut:true,at:c.asked,place:"hwParish",keys:[[c.asked,960,540,1]],push:0.02,draw:(x,tt)=>{
       hw_table(x,940,1760,800,900);hw_papers(x,1330,846,{n:2,ink:true});
       ag_person(x,HW_P.priest,1180,600,0.9,{t:tt,cut:800,pose:{near:[40,95,"hold"]},hold:hw_quill,gaze:[3,3]});
-      hw_sheet(x,90,150,860,{p:P.q.map(q=>(tt-q+0.1)/0.9)});}},
+      hw_sheetAcross(x,tt,c.asked,{p:P.q.map(q=>(tt-q+0.1)/0.9)});}},
     // the lower town today: the same straight street, still standing, and one of the first built to withstand an earthquake
     {at:c.stands,place:"hwToday",keys:[[c.stands,960,540,1]],push:0.04,draw:(x,tt)=>{hw_walkers(x,tt-c.stands);
       ag_pill(x,960,206,"more than 250 years on",{a:ag_io(tt,P.years,c.read-0.4,0.4)});

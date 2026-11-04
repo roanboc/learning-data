@@ -175,8 +175,8 @@ const HW_TOOLS=[["Tickets","read only","lock"],["Catalog","read only","lock"],["
 function hw_tools6(ctx,x,y,o){o=o||{};HW_TOOLS.forEach(([n,s,ic],i)=>{const a=o.a?o.a[i]:1;if(a<=0)return;ag_tool(ctx,x+(i%3)*262,y+Math.floor(i/3)*128,244,112,n,{a,sub:s,icon:ic,touch:o.touch||0});});}
 
 /* ---------------------------------------------------------------- 5 · a loop all night */
-// the stack of the night's rounds: each line the same error; n how many have dropped (it grows as one arrives)
-function hw_rounds(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const lh=40,k=Math.max(0,n),h=28+38+Math.ceil(k)*lh+18;ctx.save();ctx.globalAlpha*=a;
+// the stack of the night's rounds: each line the same error; n how many have dropped (the card grows smoothly as each one arrives)
+function hw_rounds(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const lh=40,k=Math.max(0,n),h=28+38+(Math.floor(k)+ag_sine(k-Math.floor(k)))*lh+18;ctx.save();ctx.globalAlpha*=a;
   ag_box(ctx,x,y,w,h,22,{edge:AG.amber,edgeA:0.6});ag_T(ctx,"THE NIGHT'S ROUNDS",x+28,y+50,{w:700,size:28,ls:4,col:AG.amber});
   for(let i=0;i<Math.ceil(k);i++){const la=clamp(k-i,0,1);ag_T(ctx,"round "+(i+1)+" · no new copy",x+28,y+66+i*lh+30-(1-la)*16,{w:600,size:28,col:AG.amber,a:la});}ctx.restore();}
 // Sam's budget: a bar that empties

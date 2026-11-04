@@ -766,7 +766,7 @@ def film_page(lg, f, films_, series):
             + ('' if lg == "en" else '<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>\n')
             + ('' if lg == "en" else f'<script src="{R}assets/{key}/captions.es.js"></script>\n')
             + f'<script src="{R}assets/{key}/film.js"></script>\n' + ('' if lg == "en" else es_scenes(f) + "\n")
-            + f'<script src="{R}assets/{key}/think.{lg}.js"></script>\n<script src="{R}assets/learn/think.js"></script>\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/next.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
+            + f'<script src="{R}assets/{key}/think.{lg}.js"></script>\n<script src="{R}assets/learn/think.js"></script>\n<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/learn/next.js"></script>\n<script src="{R}assets/seek.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
 
 

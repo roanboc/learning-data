@@ -63,15 +63,15 @@ scene("dike",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     // each landowner's stretch is staked along the crest, and they stand by theirs with a spade
     {at:st,place:"bank",keys:[[st,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,(i,e)=>clamp((tt-st-0.5-i*0.5-e*0.5)/0.5,0,1));cp_owners(x,tt);})},
     // from above: the more land, the longer the stretch
-    {at:ae,place:"aerial",keys:[[ae,960,540,1.0]],push:0.02,draw:(x,tt)=>{cp_aerialLands(x,CP_LANDS,i=>clamp((tt-ae-0.2-i*0.45)/1.2,0,1));
+    {cut:true,at:ae,place:"aerial",keys:[[ae,960,540,1.0]],push:0.02,draw:(x,tt)=>{cp_aerialLands(x,CP_LANDS,i=>clamp((tt-ae-0.2-i*0.45)/1.2,0,1));
       cp_onAerial(()=>{for(const [id,X,Z] of [["cpOwner",-30,30],["cpOwnerB",9,31],["cpOwnerC",29,30]])cp_who(x,CP_AERIAL,id,X,0,Z,{t:tt,pose:"cp_staff",carry:cp_heldSpadeUp});});}},
     // every year the board walks the dikes: a staff taps bare clay, the clerk cuts a notch, the landowner pays
     {at:bw,place:"bankWalk",keys:[[bw,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_boardWalk(x,tt,bw+0.2)},
     // whoever relies on the dikes pays for them, and has a say
-    {at:pc,place:"bank",keys:[[pc,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,()=>1);cp_owners(x,tt);
+    {cut:true,at:pc,place:"bank",keys:[[pc,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_withB(CP_BANK,()=>{cp_bankStakes(x,CP_TS,()=>1);cp_owners(x,tt);
       cp_skyCard(x,tt,P.relies,560,190,"interest",-0.04,GV.gold);cp_skyCard(x,tt,P.paysW,960,150,"payment",0.03,GV.gold);cp_skyCard(x,tt,P.say,1360,200,"say",-0.02,GV.gold);})},
     // behind kept dikes: a field ploughed, children at the farmhouse door, their mother with a basket
-    {at:sf,keys:[[sf,1130,600,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("farm"),0,0,W,H);cp_farmLife(x,tt,sf);}},
+    {cut:true,at:sf,keys:[[sf,1130,600,1.25]],push:0.02,draw:(x,tt)=>{x.drawImage(cp_placeHi("farm"),0,0,W,H);cp_farmLife(x,tt,sf);}},
     // Rijnland's charter, its seal hanging from a cord
     {at:ch,place:"charter",keys:[[ch,960,540,1.0]],push:0.04},
     // today: a road on the dike, two people cycling, a canal held higher than the fields, a pumping station
@@ -112,7 +112,7 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
       else gv_walker(x,"yusuf",wk,CP_DV.fy+30,0.8,{t:tt,carry:cp_heldReport,flip:true});
       gv_say(x,560,330,["what does it do?"],1050,520,{a:gv_io(tt,P.cantSee,c.report,0.3),k:0.9+0.1*spring(fin(tt,P.cantSee,0.5))});}},
     // the project's final report, open on the desk: what it did, each line ticked; its last page, After June, and nothing on it
-    {at:rp,keys:[[rp,960,500,1.0],[P.nothing-0.5,1400,370,2.0]],d:1.6,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("desk"),0,0,W,H);cp_report(x,{open:clamp((tt-rp-0.3)/0.9,0,1),tick:j=>clamp((tt-P.lists-0.1-j*0.3)/0.4,0,1)});}},
+    {cut:true,at:rp,keys:[[rp,960,500,1.0],[P.nothing-0.5,1400,370,2.0]],d:1.6,push:0,draw:(x,tt)=>{x.drawImage(cp_placeHi("desk"),0,0,W,H);cp_report(x,{open:clamp((tt-rp-0.3)/0.9,0,1),tick:j=>clamp((tt-P.lists-0.1-j*0.3)/0.4,0,1)});}},
     // rules nobody keeps up drift: the glossary's card for award fading, a check's light going amber, then red
     {at:dr,place:"dvc",keys:[[dr,960,540,1.0]],push:0.03,draw:(x,tt)=>{cp_dvc(x,tt,{david:{pose:"listen",expr:"concerned",flip:false}});x.fillStyle=rgba(WC_PAPER,0.66);x.fillRect(0,0,W,H);
       cp_glossCard(x,620,470,fin(tt,dr+0.2,0.5),{fade:clamp((tt-dr-0.9)/2.2,0,1)});cp_checkLamp(x,1560,600,fin(tt,dr+0.5,0.5),clamp((tt-dr-1.0)/1.2,0,2));}},
@@ -166,12 +166,12 @@ scene("seven",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s
     {at:0,place:"band",keys:[[0,711,467,1.35],[c.c1-1.0,960,540,1.0]],d:2.2,push:0,draw:(x,tt)=>cp_band(x,{cap:j=>j<7?cap(tt,j):0,tok:j=>fin(tt,c.term+0.25+j*0.2,0.4)})},
     // two frameworks, as checklists: the wheel Yusuf drew, each part lit as a card covers it; a printed checklist, each line ticked; the
     // wheel's documents and the list's records find no card
-    {at:ck,place:"desk",keys:[[ck,960,500,1.0]],push:0.02,draw:(x,tt)=>{const s1=1-easeCam(fin(tt,ck+0.1,0.9)),s2=1-easeCam(fin(tt,P.twoF,0.9));
+    {cut:true,at:ck,place:"desk",keys:[[ck,960,500,1.0]],push:0.02,draw:(x,tt)=>{const s1=1-easeCam(fin(tt,ck+0.1,0.9)),s2=1-easeCam(fin(tt,P.twoF,0.9));
       x.save();x.translate(0,900*s1);cp_wheelSheet(x,{lit:k=>fin(tt,P.asCk+0.12*k,0.35),doc:fin(tt,P.oneMore,0.5)});x.restore();
       x.save();x.translate(0,900*s2);cp_listSheet(x,{tick:j=>clamp((tt-P.asCk-0.2-j*0.22)/0.35,0,1),miss:fin(tt,P.oneMore+0.25,0.5)});x.restore();}},
     // the eighth card, keep records only as long as they're needed; nobody does it yet, so it has no token: the camera moves in on it and
     // its neighbour, with its token, as it will again for the red card (the frame's right edge held on the band's, the words it leaves fading)
-    {at:kr,place:"band",keys:[[kr,960,540,1.0],[c.yet-0.8,W,586,2.47]],d:2.2,push:0,draw:(x,tt)=>{cp_fadeCut(x,()=>cp_band(x,{cap:j=>j<7?1:cap(tt,7),tok:j=>j<7?1:0}),cp_bandBlocks(x));
+    {cut:true,at:kr,place:"band",keys:[[kr,960,540,1.0],[c.yet-0.8,W,586,2.47]],d:2.2,push:0,draw:(x,tt)=>{cp_fadeCut(x,()=>cp_band(x,{cap:j=>j<7?1:cap(tt,7),tok:j=>j<7?1:0}),cp_bandBlocks(x));
       const [cx,cy]=cp_capXY(7),a=fin(tt,c.yet,0.5);if(a>0.01)withA(x,a,()=>{x.save();x.setLineDash([6,6]);x.strokeStyle=rgba(WC_PENCIL,0.7);x.lineWidth=2.4;x.strokeRect(cx+CP_BD.cw-64,cy+-2,60,46);x.restore();});}}]);
   wc_paperOver(ctx,S);});
 
@@ -233,9 +233,9 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s,
     // the planner: the project's card still ends on 30 June; the new line runs on past it, off the planner's edge
     {at:pl,place:"dvc",keys:[[pl,1160,300,1.55]],push:0.02,draw:(x,tt)=>cp_dvc(x,tt,{david:{pose:"listen",flip:false},plan:{card:1,flag:1,line:clamp((tt-pl-0.3)/1.8,0,1)}})},
     // the money goes to one capability: a gold thread from the budget's line to govern data, and on along the dotted lines to the services
-    {at:mn,place:"services",keys:[[mn,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_services(x,{serv:()=>1,line:()=>1,budget:fin(tt,mn+0.3,0.5),gold:clamp((tt-mn-0.6)/(P.which+1.0-mn-0.6),0,1)})},
+    {cut:true,at:mn,place:"services",keys:[[mn,960,540,1.0]],push:0.02,draw:(x,tt)=>cp_services(x,{serv:()=>1,line:()=>1,budget:fin(tt,mn+0.3,0.5),gold:clamp((tt-mn-0.6)/(P.which+1.0-mn-0.6),0,1)})},
     // next year's new work starts with the red card
-    {at:fs,place:"band",keys:[[fs,960,540,1.0],[P.red-0.9,1320,600,1.6]],d:1.8,push:0,draw:(x,tt)=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,wash:()=>1,first:fin(tt,P.red-0.2,0.5)})}]);
+    {cut:true,at:fs,place:"band",keys:[[fs,960,540,1.0],[P.red-0.9,1320,600,1.6]],d:1.8,push:0,draw:(x,tt)=>cp_band(x,{cap:()=>1,tok:j=>j<7?1:0,wash:()=>1,first:fin(tt,P.red-0.2,0.5)})}]);
   wc_paperOver(ctx,S);});
 
 // ---- 8 · What it keeps: floods brought projects, and projects end; keeping the land dry never did; next November, imagined ----
@@ -267,3 +267,6 @@ scene("keeps",(ctx,S,t,sc)=>{const c=sc.cues,P=cp_once(sc,"P",()=>{const w=(id,s
   gv_end(ctx,S,t,c.breath+0.2,"A capability, not a project","A project builds it. A capability keeps it.","Film 1 of 3");
   if(t>c.breath+1.4)withA(ctx,fin(t,c.breath+1.6,0.8),()=>wc_tag(ctx,960,780,"Next: Who does what, end to end",{align:"center",size:30,w:600}));
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["ends", "seven"]);

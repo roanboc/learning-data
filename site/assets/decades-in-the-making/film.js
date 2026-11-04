@@ -777,17 +777,24 @@ function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^
    ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
    1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
    place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot. */
+   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
+   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
 function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
   z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
 function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
 function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -1335,6 +1342,21 @@ function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.
   if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
   else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
   ctx.restore();ctx.restore();return hands;}
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
+// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
+// the size of the canvas, kept); what they hold is drawn with them
+let AG_FADE=null;
+const ag_personWhole=ag_person;
+ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
+    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
+  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
 // people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
 // stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
 // o.covered); the player on the site never stops for it
@@ -1805,7 +1827,7 @@ function dm_hand(c,Q,rows,p,o){o=o||{};const u0=o.u0||0.1,u1=o.u1||0.9,top=o.top
   for(let i=0;i<rows;i++){const v=top-i*pitch,f=clamp(p-i,0,1),uEnd=u0+(u1-u0)*f;let u=u0+(i===0&&o.indent?0.08:0);
     while(u<u1-0.01){const n=1+Math.floor(r()*6),wl=n*0.02;if(u+wl>u1)break;
       for(let k=0;k<n;k++){const m=1+(r()<0.45?1:0),asc=r()<0.14,desc=!asc&&r()<0.07;
-        for(let j=0;j<m;j++){const uu=u+k*0.02+j*0.008;if(uu>uEnd)break;const a=dm_L(Q,uu,v+(asc?h*1.7:h)),b=dm_L(Q,uu-0.002,v-(desc?h*0.9:0));
+        for(let j=0;j<m;j++){const uu=u+k*0.02+j*0.008;if(uu>=uEnd)break;const a=dm_L(Q,uu,v+(asc?h*1.7:h)),b=dm_L(Q,uu-0.002,v-(desc?h*0.9:0));
           c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);const ft=dm_L(Q,uu+0.006,v-(desc?h*0.9:0)-0.004);c.lineTo(ft[0],ft[1]);}}
       u+=wl+0.022;}
     if(f>0&&f<1)tip=dm_L(Q,uEnd,v);if(f<1&&tip)break;}
@@ -1863,19 +1885,29 @@ AG_PLACES.dmScribe=c=>{const F=DM_SCRIBE.floor,[wx,wy,ww,wh]=DM_SCRIBE.win,B=DM_
   // an inkhorn in a hole at the board's far left
   ag_soft(c,cc=>{cc.moveTo(900,686);cc.lineTo(912,640);cc.lineTo(936,644);cc.lineTo(928,690);cc.closePath();},[60,46,40],[150,130,110],930,644,40,"rgba(0,0,0,0.4)",6);};
 
+// where the pen is when the right page is written up to p (0..1 of its rows): each row is written in the first DM_WRITE of its time,
+// then the pen lifts and glides back to the start of the next row, so the hand never jumps from one row to the next (a hand that
+// snapped back at every row's end looked wild, the author's note of 4 November 2026); w is how far the writing has got, in rows
+const DM_WRITE=0.8;
+function dm_pen(p){const n=DM_SCRIBE.rows,q=clamp(p,0,1)*n,i=Math.min(n-1,Math.floor(q)),f=Math.min(1,q-i),Q=dm_page("right"),u0=0.1,u1=0.9,top=0.86,pitch=0.074,v=top-i*pitch;
+  if(f<=DM_WRITE||i>=n-1){const k=Math.min(1,f/DM_WRITE);return{w:i+k,tip:dm_L(Q,lerp(u0,u1,k),v)};}
+  const u=ag_sine((f-DM_WRITE)/(1-DM_WRITE)),a=dm_L(Q,u1,v),b=dm_L(Q,u0,v-pitch);
+  return{w:i+1,tip:[lerp(a[0],b[0],u),lerp(a[1],b[1],u)-18*Math.sin(Math.PI*u)]};}
 // the right page, written up to p (0..1 of its rows); returns where the pen is
-function dm_writing(ctx,p){return dm_hand(ctx,dm_page("right"),DM_SCRIBE.rows,p*DM_SCRIBE.rows,{seed:34,u0:0.1,u1:0.9});}
+function dm_writing(ctx,p){const pen=dm_pen(p);dm_hand(ctx,dm_page("right"),DM_SCRIBE.rows,pen.w,{seed:34,u0:0.1,u1:0.9});return pen.tip;}
 
 // an arm that reaches a point: the angles (degrees from straight down, forward positive) of the upper arm and the forearm that put
 // the wrist at T, from the shoulder J, in figure space, the elbow bending down and back
 function dm_reach(J,T,hand){const f=AG_FIG.fore,L1=AG_FIG.L1,L2=AG_FIG.L2,dx=(T[0]-J[0])/f,dy=T[1]-J[1],d=clamp(Math.hypot(dx,dy),Math.abs(L1-L2)+1,L1+L2-1);
   const base=Math.atan2(dx,dy),k=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),a1=base-k,E=[Math.sin(a1)*L1,Math.cos(a1)*L1],a2=Math.atan2(dx-E[0],dy-E[1]);
   return[a1*180/Math.PI,a2*180/Math.PI,hand||"hold"];}
-// the scribe at the desk: the near hand on the pen at tip (in the frame), the far hand resting on the new book's left page
+// the scribe at the desk: the near hand on the pen at tip (in the frame); the far arm hangs behind the desk, as seen from here (o.rest
+// lays the far hand on the board at a point instead). He faces right, so his far hand would lie right of the pen, across the page he
+// writes; reaching back to the left page bent his far arm behind his back, and its shoulder stood out of his chest
 function dm_scribe(ctx,t,tip,o){o=o||{};const x=o.x||640,y=o.y||470,s=o.s||1.0,A=AG_FIG.anchor,toFig=q=>[A[0]+(q[0]-x)/s,A[1]+(q[1]-y)/s];
-  const T=toFig(tip),near=dm_reach(AG_FIG.shoulder.near,[T[0]-104,T[1]-30]),far=dm_reach(AG_FIG.shoulder.far,toFig(o.rest||dm_L(dm_page("left"),0.62,0.55)),"rest");
-  // he looks from the book he copies (o.look) to his page and back
-  const lk=o.look?1:0;return ag_person(ctx,DM_PEOPLE.scribe,x,y,s,{t,pose:{near,far},cut:DM_SCRIBE.board[3][1],nod:lk?0.03:0.18,gaze:lk?[6,1]:[4,6],smile:0.1,
+  const T=toFig(tip),near=dm_reach(AG_FIG.shoulder.near,[T[0]-104,T[1]-30]),far=o.rest?dm_reach(AG_FIG.shoulder.far,toFig(o.rest),"rest"):null;
+  // he looks from his page up to the book he copies (o.look, 0 to 1, turning smoothly) and back
+  const lk=clamp(+o.look||0,0,1);return ag_person(ctx,DM_PEOPLE.scribe,x,y,s,{t,pose:{near,far},cut:DM_SCRIBE.board[3][1],nod:lerp(0.18,0.03,lk),gaze:[lerp(4,6,lk),lerp(6,1,lk)],smile:0.1,
     hold:(c,h)=>dm_quill(c,T[0],T[1],0.95,1/s*1.1)});}
 // a quill: a feather from (x, y) the nib, leaning back up and left
 function dm_quill(ctx,x,y,ang,s){s=s||1;ctx.save();ctx.translate(x,y);ctx.rotate(ang==null?0.95:ang);ctx.scale(s,s);
@@ -2383,8 +2415,10 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({
   ag_shots(ctx,S,t,sc.dur,[
     // the scribe copies a book, letter by letter; the light comes and goes over days of it
     {at:0,place:"dmScribe",keys:[[0,960,540,1],[P.letter-0.6,860,720,1.45],[P.slow,940,600,1.12]],d:1.8,draw:(x,t)=>{
-      const p=0.18+0.5*clamp((t-0.5)/(P.rare+1.5),0,1)+0.25*ag_sine(clamp((t-P.slow)/1.6,0,1));const tip=dm_writing(x,(p*3)%1);
-      const look=Math.sin(t*1.3)>0.55;dm_scribe(x,t,tip,{look});
+      // one page, written at a steady hand's pace (a row about every second and a half), while the light comes and goes; he glances up
+      // at the book he copies now and then, turning his head over a few tenths of a second
+      const p=0.12+0.62*clamp(t/c.cambridge,0,1),tip=dm_writing(x,p);
+      const look=sstep(0.35,0.75,Math.sin(t*1.3));dm_scribe(x,t,tip,{look});
       const night=Math.sin(Math.PI*clamp((t-P.slow)/1.8,0,1));if(night>0){x.fillStyle=rgba([40,44,70],0.32*night);x.fillRect(0,0,W,H);}
 }},
     // Cambridge's whole library, 122 books on four lecterns
@@ -2433,7 +2467,7 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({
       const t2=Math.max(P.two-0.2,c.towns+2.7),a=ag_in(t,t2,0.5);if(a>0)ag_textCard(x,1220,380,650,{kick:"By 1500",title:"Presses in more than 200 towns",sub:ag_in(t,P.thirty-0.2,0.4)>0?"Some 30,000 different books":""},{a,k:ag_spr(t,t2,0.6)});
       const b=ag_in(t,P.cheaper-0.2,0.5);if(b>0)ag_textCard(x,1220,620,650,{title:"Cheaper books, far more readers"},{a:b,k:ag_spr(t,P.cheaper-0.2,0.6)});}},
     // it seemed to arrive all at once: close on 1450, then back out over four hundred years
-    {at:c.seemed-0.3,place:"dmWall",keys:[[c.seemed-0.3,1493,430,2.4],[P.taken-0.2,960,540,1]],d:2.2,draw:(x,t)=>{
+    {cut:true,at:c.seemed-0.3,place:"dmWall",keys:[[c.seemed-0.3,1493,430,2.4],[P.taken-0.2,960,540,1]],d:2.2,draw:(x,t)=>{
       dm_printRail(x,{lit:[ag_in(t,P.taken+0.6,0.5),ag_in(t,P.taken+0.4,0.5),1],span:clamp((t-P.taken-0.6)/1.0,0,1),spanText:"About 400 years"});}},
     // this term an agent joins Jun's team; some fear it, some expect magic; its ideas are decades old
     {at:c.agent-0.3,place:"dmLab",keys:[[c.agent-0.3,1100,560,1.25],[c.nowhere-0.2,960,540,1],[P.decades-0.4,960,470,1.08]],d:2.0,draw:(x,t)=>{
@@ -2741,6 +2775,9 @@ scene("sudden",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({suddenW:wAt
     {at:c.team-0.4,place:"dmLab",push:0.012,keys:[[c.team-0.4,960,540,1]],d:2.0,draw:(x,t)=>{rail(x);
       dm_team(x,{t,agent:1,think:0.2,yusuf:1,mei:1,ySmile:0.2+0.3*ag_in(t,P.where-0.4,0.8),mSmile:0.2+0.3*ag_in(t,P.where-0.2,0.8),junSmile:0.3+0.25*ag_in(t,P.magic,0.8)});}}],0.6);
   ag_end(ctx,S,t,c.breath+0.6,"Decades in the making","Long work that finally had the power to run","Film 1 of 9","What an agent is");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["mistakes", "web"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

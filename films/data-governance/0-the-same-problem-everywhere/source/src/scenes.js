@@ -78,7 +78,7 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({board:wAt
       sp_codeRings(x,clamp((tt-P.same+0.2)/1.6,0,1));
       wc_hand(x,"the same customer?",960,866,{size:46,col:WC_PENCIL,align:"center",p:clamp((tt-P.same-1.0)/0.9,0,1)});}},
     // the whiteboard: the business lines' sums, and the total, a red question mark; the desk calendar turns, Friday to Monday
-    {at:c.monday-0.3,place:"board08",keys:[[c.monday-0.3,940,530,1.0],[c.monday+1.6,960,520,1.04]],d:2,draw:(x,tt)=>{
+    {cut:true,at:c.monday-0.3,place:"board08",keys:[[c.monday-0.3,940,530,1.0],[c.monday+1.6,960,520,1.04]],d:2,draw:(x,tt)=>{
       sp_board(x,tt,{q:clamp((tt-P.add+0.1)/0.7,0,1)});const days=["Fri","Sat","Sun","Mon"],f=[c.monday+0.05,c.monday+0.65,c.monday+1.25];
       let i=0;f.forEach(ft=>{if(tt>=ft+0.4)i++;});const turning=f.findIndex(ft=>tt>=ft&&tt<ft+0.4);
       if(turning>=0)sp_calendar(x,days[turning],days[turning+1],(tt-f[turning])/0.4);else sp_calendar(x,days[i],days[i],0);}},
@@ -139,7 +139,7 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
     {at:c.alone-0.3,place:"alone70",keys:[[c.alone-0.3,960,520,1.0]],d:2,push:0.03,draw:(x,tt)=>{SP_AL.forEach((a,i)=>{sp_aloneWindow(x,i,tt);const [wx,wy,ww]=a.win;
       sp_slip(x,wx+ww/2,wy-58,440,66,null,[-0.02,0.015,-0.01][i],["one meaning for each word"],30,fin(tt,P.same-0.2+i*0.35,0.5),311+i);});}},
     // and now together: two standing at the back hold up their binders, pass them across and swap
-    {at:c.together-0.3,place:"la80",keys:[[c.together-0.3,1450,560,1.5],[P.tog+0.5,1440,570,1.56]],d:2,draw:(x,tt)=>{const sw=P.them-0.5,r=fin(tt,sw,0.45)*(1-fin(tt,sw+0.95,0.4)),
+    {cut:true,at:c.together-0.3,place:"la80",keys:[[c.together-0.3,1450,560,1.5],[P.tog+0.5,1440,570,1.56]],d:2,draw:(x,tt)=>{const sw=P.them-0.5,r=fin(tt,sw,0.45)*(1-fin(tt,sw+0.95,0.4)),
         m=easeCam(clamp((tt-sw-0.35)/0.6,0,1)),pair=[[3,"spLa5",false],[4,"spLa7",true]];
       meeting(x,tt,{expr:tt>P.tog?"smile":"calm",seat:i=>i===0?{pose:"write",flip:false,nod:0.03*Math.sin(tt*2)}:{pose:"listen",flip:true},
         back:i=>i===3||i===4?{pose:"spShowB",pose2:"spPassS",mix:r,flip:i===4,carry:null}:null});
@@ -198,7 +198,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({members:wA
     // the book opens: its wheel's two rings sketched in pencil as it "draws" it; the areas come in as they're named, uneven, until the
     // centre lights and holds them true; it turns once, evenly; the other guides, on the same ground or part of it; then all of it lit,
     // and the book closes
-    {at:pg,place:"wheelpage",keys:[[pg,960,540,1.04],[pg+0.1,960,540,1.0]],d:1.6,draw:(x,tt)=>{const cu=Math.max(1-clamp((tt-pg-0.55)/0.9,0,1),clamp((tt-shut)/0.9,0,1));
+    {cut:true,at:pg,place:"wheelpage",keys:[[pg,960,540,1.04],[pg+0.1,960,540,1.0]],d:1.6,draw:(x,tt)=>{const cu=Math.max(1-clamp((tt-pg-0.55)/0.9,0,1),clamp((tt-shut)/0.9,0,1));
       if(Math.sin(Math.PI/2*easeCam(cu))<0.86){sp_wheelGuide(x,clamp((tt-P.draws-0.2)/(P.whl-P.draws+0.5),0,1));sp_wheel(x,{area:k=>fin(tt,areaAt(k),0.5),off:1-spring(fin(tt,P.gov-0.05,1.0)),turn:TAU*easeCam(clamp((tt-P.bal+0.1)/2.0,0,1)),centre:fin(tt,P.hub-0.1,0.6),
         pulse:Math.min(1,gv_io(tt,P.auth-0.2,P.auth+1.0,0.4)+gv_io(tt,P.agree-0.3,99,0.6)),spokes:clamp((tt-P.gov+0.1)/0.9,0,1),
         spokeA:0.75+0.25*gv_io(tt,P.fit-0.1,P.fit+1.0,0.3),rim:clamp((tt-P.gov-0.3)/1.0,0,1),labels:1-gv_io(tt,P.bal-0.45,P.bal+2.05,0.3),
@@ -207,7 +207,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({members:wA
       sp_note(x,tt,c.guides+0.15,1660,150,["DCAM","the same ground"],{out});sp_note(x,tt,P.part-0.1,262,150,["ISO 8000","data quality"],{out});
       sp_note(x,tt,P.part+1.2,1660,780,["ISO/IEC 38505","governing data"],{out});}sp_coverClose(x,cu);}},
     // closed, and back on the shelf beside the binders
-    {at:back,place:"shelf09",keys:[[back,1160,546,1.42],[back+0.1,1020,540,1.08]],d:2.4,draw:x=>sp_book(x,K.books[0],K.top,1)}]);
+    {cut:true,at:back,place:"shelf09",keys:[[back,1160,546,1.42],[back+0.1,1020,540,1.08]],d:2.4,draw:x=>sp_book(x,K.books[0],K.top,1)}]);
   sp_pill(ctx,t,[[0,"2009"]],fin(t,0.4,0.6)*(1-fin(t,P.dm+0.3,0.5)));});
 
 // ---- 5 · Governance first: the banks' regulators put governance first, a condition for all the rest; ten years on, two of thirty-one ----
@@ -363,7 +363,7 @@ scene("centre",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({q:wAt(sc,"b
     // the shelf again: two hands take the newest copy from it; the draft, its prop gone, settles upright
     {at:g2,place:"shelf24",keys:[[g2,820,540,1.02],[pick+0.6,1040,520,1.2]],d:2.0,draw:(x,tt,cam)=>sp_shelfAll(x,cam,{take:clamp((tt-pick)/1.0,0,1)})},
     // it opens at its wheel: every area in its place round the centre, governance, which lights gold, its spokes running out to each
-    {at:op,place:"wheelpage",keys:[[op,960,540,1.04],[op+0.1,960,520,1.0]],d:2.4,draw:(x,tt)=>{const cu=1-clamp((tt-op-0.55)/0.9,0,1);
+    {cut:true,at:op,place:"wheelpage",keys:[[op,960,540,1.04],[op+0.1,960,520,1.0]],d:2.4,draw:(x,tt)=>{const cu=1-clamp((tt-op-0.55)/0.9,0,1);
       if(Math.sin(Math.PI/2*easeCam(cu))<0.86)sp_wheel(x,{area:()=>1,rim:1,centre:fin(tt,P.gov+0.1,0.6),pulse:gv_io(tt,P.centre-0.2,P.centre+1.2,0.4),
         spokes:clamp((tt-P.gov)/0.9,0,1),spokeA:0.9});
       sp_coverClose(x,cu,3);}},
@@ -379,3 +379,6 @@ scene("centre",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({q:wAt(sc,"b
   gv_end(ctx,S,t,P.end,"The same problem, everywhere",null,"Prologue");
   if(t>P.end+1.2)withA(ctx,fin(t,P.end+1.4,0.8),()=>wc_tag(ctx,960,780,"Next: Off the shelf",{align:"center",size:30,w:600}));
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["centre"]);

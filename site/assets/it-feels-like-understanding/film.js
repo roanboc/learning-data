@@ -789,17 +789,24 @@ function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^
    ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
    1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
    place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot. */
+   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
+   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
 function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
   z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
 function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
 function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -1347,6 +1354,21 @@ function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.
   if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
   else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
   ctx.restore();ctx.restore();return hands;}
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
+// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
+// the size of the canvas, kept); what they hold is drawn with them
+let AG_FADE=null;
+const ag_personWhole=ag_person;
+ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
+    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
+  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
 // people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
 // stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
 // o.covered); the player on the site never stops for it
@@ -2285,26 +2307,26 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     {at:0,place:"fuWall",d:1.7,push:0,keys:[[0,960,300,1.8],[P.small-0.6,1010,150,2.7],[P.bld-0.3,960,540,1.06],[P.colo,560,560,1.32],[P.sent+0.2,1360,560,1.32],[P.agr-0.4,960,540,1.06]],
       draw:(x,tt)=>{room(x,tt,{people:nav});over(x,tt);}},
     // the navigators' monitor, close: every push counted at less than a quarter of its size, its real size a pale ghost behind it
-    {at:P.q-0.3,place:"fuWall",keys:[[P.q-0.3,1426,722,3.5]],push:0.03,draw:(x,tt)=>{room(x,tt,{people:nav});}},
+    {cut:true,at:P.q-0.3,place:"fuWall",keys:[[P.q-0.3,1426,722,3.5]],push:0.03,draw:(x,tt)=>{room(x,tt,{people:nav});}},
     // back to both desks: each team sure; up to the wall for the nine months; the navigators' desk and its emails; thirty years
-    {at:P.sure-0.4,place:"fuWall",d:1.7,keys:[[P.sure-0.4,960,540,1.06],[P.mon-0.3,960,300,1.8],[P.apr-0.3,1355,540,1.7],[P.rou-0.3,960,560,1.06]],
+    {cut:true,at:P.sure-0.4,place:"fuWall",d:1.7,keys:[[P.sure-0.4,960,540,1.06],[P.mon-0.3,960,300,1.8],[P.apr-0.3,1355,540,1.7],[P.rou-0.3,960,560,1.06]],
       draw:(x,tt)=>{room(x,tt,{people:nav,orbits:0});over(x,tt);}},
     // the night of 23 September 1999: the light lower; the engine's glow; behind Mars, on the lower orbit, the radio line ending at
     // the planet's edge; planned, and 170 km lower
-    {at:P.burn-0.5,place:"fuWallDim",keys:[[P.burn-0.5,1150,240,2.3],[P.behind-0.3,1205,215,2.75]],d:1.8,push:0,draw:(x,tt)=>{
+    {cut:true,at:P.burn-0.5,place:"fuWallDim",keys:[[P.burn-0.5,1150,240,2.3],[P.behind-0.3,1205,215,2.75]],d:1.8,push:0,draw:(x,tt)=>{
       room(x,tt,{empty:true,orbits:fu_fin(tt,P.km-0.4,0.6),lowA:1,radio:ag_in(tt,P.burn-0.3,0.6)*(1-fu_fin(tt,P.never+0.6,1.4)),dim:0.15});
       const M=S9.mars;fu_pencil(x,"planned",M[0]+S9.plan[0]+14,M[1]-22,{size:28,a:fu_fin(tt,P.km-0.2,0.5)});
       ag_T(x,"170 km lower",M[0]+S9.low[0]+18,M[1]+34,{w:700,size:28,col:AG.amber,a:fu_fin(tt,P.lower-0.3,0.5)});}},
     // the navigators' monitor in the dark: a flat, empty line
-    {at:P.never+0.5,place:"fuWallDim",keys:[[P.never+0.5,1428,690,2.6],[P.never+0.6,1428,694,2.7]],d:2,draw:(x,tt)=>{room(x,tt,{people:{},crt:{L:{p:1},R:{flat:1}},dim:0.15,craft:null});}},
+    {cut:true,at:P.never+0.5,place:"fuWallDim",keys:[[P.never+0.5,1428,690,2.6],[P.never+0.6,1428,694,2.7]],d:2,draw:(x,tt)=>{room(x,tt,{people:{},crt:{L:{p:1},R:{flat:1}},dim:0.15,craft:null});}},
     // both desks, the light going down: years of work, lost; then the picture steps back under a pale veil
-    {at:P.lost-0.4,place:"fuWallDim",keys:[[P.lost-0.4,960,540,1.12],[P.lost-0.3,960,540,1.04]],d:4,draw:(x,tt)=>{room(x,tt,{people:{},crt:{L:{p:1},R:{flat:1}},craft:null,dim:0.15+0.35*fu_fin(tt,P.were,1.2)});}},
+    {cut:true,at:P.lost-0.4,place:"fuWallDim",keys:[[P.lost-0.4,960,540,1.12],[P.lost-0.3,960,540,1.04]],d:4,draw:(x,tt)=>{room(x,tt,{people:{},crt:{L:{p:1},R:{flat:1}},craft:null,dim:0.15+0.35*fu_fin(tt,P.were,1.2)});}},
     // 2001: Odyssey on the same way, and its team's three changes; the file's tag filled; a second person's tick; a second way to find it
-    {at:P.ody-0.6,place:"fuWall",keys:[[P.ody-0.6,960,500,1.12]],push:0.02,draw:(x,tt)=>{
+    {cut:true,at:P.ody-0.6,place:"fuWall",keys:[[P.ody-0.6,960,500,1.12]],push:0.02,draw:(x,tt)=>{
       room(x,tt,{people:{},craft:null,real:0,odyssey:{u:ag_keys(tt,[[P.mo,0.1],[P.orb,0.85]]),a:fu_fin(tt,P.mo-0.3,0.6),s:0.5},oRadio:fu_fin(tt,P.sec-0.2,0.6),second:clamp((tt-P.sec)/1.6,0,1)});
       over(x,tt);odyCards(x,tt,1);}},
     // Odyssey goes into orbit round Mars, on the orbit planned; twenty years later, still at work
-    {at:P.orb-0.3,place:"fuWall",keys:[[P.orb-0.3,1180,250,2.2],[P.into,1230,250,2.5]],d:1.8,draw:(x,tt)=>{
+    {cut:true,at:P.orb-0.3,place:"fuWall",keys:[[P.orb-0.3,1180,250,2.2],[P.into,1230,250,2.5]],d:1.8,draw:(x,tt)=>{
       const thO=tt<P.into?null:(tt-P.into)*0.9;room(x,tt,{empty:true,craft:null,real:0,orbits:0,odyssey:{u:ag_keys(tt,[[P.orb-0.3,0.86],[P.into,1]]),th:thO,a:1,s:0.46}});
       if(thO!=null)fu_orbit(x,S9.plan,"front",fu_fin(tt,P.into,0.8),rgba(FU.graphite,0.7),[3,9]);
       const M=S9.mars,yr=tt<P.twenty?"2001":(tt<P.twenty+1.2?String(2001+Math.floor((tt-P.twenty)/1.2*20)):"2021");
@@ -2510,7 +2532,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_loadTable(x,300,60,1320,780,{a:fu_fin(tt,P.load-0.2,0.5),note:fu_fin(tt,P.ftes,0.6),students:clamp((tt-P.two+0.4)/1.4,0,1),labels:fu_fin(tt,P.two+0.8,0.5),
         close:clamp((tt-P.one)/1.4,0,1),sum:fu_fin(tt,P.said-0.2,0.6)});}},
     // one word in the middle, two meanings: Jun's bubble holds a person; the agent's, violet, "full-time equivalents"; nothing passes between
-    {at:P.meant-0.4,place:"fuData",keys:[[P.meant-0.4,SC.x,SC.y,SC.z]],push:0.03,draw:(x,tt)=>{
+    {cut:true,at:P.meant-0.4,place:"fuData",keys:[[P.meant-0.4,SC.x,SC.y,SC.z]],push:0.03,draw:(x,tt)=>{
       fu_agent(x,tt,{core:0.75,think:0.3});fu_junDesk(x,tt,{pose:"hang",gaze:[4,-3],folder:{dust:1}});ag_roomLight(x,1);
       ag_T(x,"students",760,560,{w:800,size:64,align:"center",a:fu_fin(tt,P.jm-0.4,0.5)});
       fu_bubble(x,340,292,"",{w:150,a:fu_fin(tt,P.jm,0.5),k:ag_spr(tt,P.jm,0.7),px:322,py:378,draw:(c,bx,by)=>fu_figure(c,bx,by+12,0.62,FU_STU)});
@@ -2531,7 +2553,7 @@ scene("meanings",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       fu_answer(x,520,150,{a:fu_fin(tt,P.less+1.4,0.4),k:ag_spr(tt,P.less+1.4,0.8)});
       const sw=fu_source(x,72,60,"Shaikh and colleagues","2024",fu_fin(tt,P.study,0.5));}},
     // the check compared the total with the same table: a closed circle, and the pill passed
-    {at:P.same-0.4,place:"fuQuiet",keys:[[P.same-0.4,960,500,1.04],[P.same-0.3,960,500,1.0]],d:5,draw:(x,tt)=>{
+    {cut:true,at:P.same-0.4,place:"fuQuiet",keys:[[P.same-0.4,960,500,1.04],[P.same-0.3,960,500,1.0]],d:5,draw:(x,tt)=>{
       fu_answer(x,240,300,{a:fu_fin(tt,P.same-0.3,0.5)});fu_table(x,1200,240,480,300,{a:fu_fin(tt,P.same,0.5),note:1,noteCol:AG.mut});
       const lp=clamp((tt-P.compared)/1.8,0,1);if(lp>0){const top=[700,330,860,200,1060,200,1196,300],bot=[1240,560,1080,700,820,700,640,560];
         fu_line(x,top,0,ag_sine(Math.min(1,lp*2)),{color:rgba(AG.ink,0.6),lw:5});if(lp>0.5)fu_line(x,bot,0,ag_sine(lp*2-1),{color:rgba(AG.ink,0.6),lw:5});
@@ -2614,7 +2636,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
       ag_textCard(x,500,92,560,{sub:"Students in the Faculty of Health, each person counted once?"},{a:fu_fin(tt,P.reads,0.5)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.reads,0.7),edge:AG.violet,tail:{side:"right",at:0.85,px:1000,py:330}});
       fu_bubble(x,330,292,"Yes.",{a:fu_fin(tt,P.yes,0.4)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.yes,0.7),px:322,py:378,w:150});}},
     // 2,880 people, and the faculty's own list beside it: the same; a green tick; Jun's initials
-    {at:P.counts-0.3,place:"fuData",keys:[[P.counts-0.3,632,380,1.52],[P.counts-0.2,632,378,1.55]],d:5,draw:(x,tt)=>{
+    {cut:true,at:P.counts-0.3,place:"fuData",keys:[[P.counts-0.3,632,380,1.52],[P.counts-0.2,632,378,1.55]],d:5,draw:(x,tt)=>{
       // the frame's edge cuts the ring before its Act step; the agent steps back as the faculty's list comes in
       fu_agentAt(x,tt,T,{think:0.15,a:1-0.45*fu_fin(tt,P.agrees-0.5,0.8)});fu_junDesk(x,tt,{pose:"hang",gaze:[5,-3],smile:0.5,folder:{dust:0}});ag_roomLight(x,1);
       const r=fu_answer(x,330,130,{v:"people",a:fu_fin(tt,P.n2880-0.2,0.5),k:ag_spr(tt,P.n2880-0.2,0.8)});
@@ -2647,6 +2669,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   ag_shots(ctx,S,t,sc.dur,sh,0.5);
   fu_when(ctx,"This term",null,fu_fin(t,0.4,0.5)*(1-fu_fin(t,P.counts-0.6,0.4)));
   ag_end(ctx,S,t,P.take-0.4,"It feels like understanding","Feeling sure is not knowing.","Film 3 of 9");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["right", "meanings"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

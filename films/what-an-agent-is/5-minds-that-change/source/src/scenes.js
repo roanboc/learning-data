@@ -50,7 +50,7 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
       mc_rise(ctx,t,[[T.teacher[0]+30,T.teacher[1]-120],[T.boy1[0]+20,T.boy1[1]-110],[T.boy2[0]+20,T.boy2[1]-110]],ag_io(t,tHymns,tWritten+0.6,1.2),34);
       withA(ctx,ag_io(t,wAt(sc,"families","Rigveda"),tWritten+0.4,0.6),()=>mc_tag(ctx,1060,320,"the Rigveda · 1,028 hymns",{k:ag_spr(t,wAt(sc,"families","Rigveda"),0.5)}));}},
     // nothing is written down: the teacher's empty hands; a line passed to the student, who says it back
-    {at:tWritten-0.3,place:"mcDawn",keys:[[0,720,600,1.75],[tPassed-0.4,820,600,1.42]],d:2.2,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");
+    {cut:true,at:tWritten-0.3,place:"mcDawn",keys:[[0,720,600,1.75],[tPassed-0.4,820,600,1.42]],d:2.2,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");
       const u=ag_in(t,tPassed,1.2),back=ag_in(t,tStudent+0.3,1.0);ribbonT(ag_sine(u),ag_io(t,tPassed,tChanges+0.2,0.4));
       if(back>0){const m=mc_mouth(T.boy1[0],T.boy1[1],T.boy1[2]);mc_ribbon(ctx,[m[0]+6,m[1],m[0]+60,m[1]-60,m[0]+40,m[1]-160,m[0]-20,m[1]-210],0,ag_sine(back),0.6*ag_io(t,tStudent+0.3,tChanges+0.3,0.4),3);}
       // memory changes: the line over the student opens into four tiles; they're put back one by one; c slips
@@ -58,7 +58,7 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
       if(op>0){const lift=[0,1,2,3].map(i=>Math.sin(Math.PI*ag_in(t,tRebuild+i*0.32,0.5))*26),k=[0,1,2,3].map(i=>ag_spr(t,tChanges+0.2+i*0.12,0.45));
         mc_verse(ctx,vx,vy,{s:0.78,a:op,lift,k,slip:ag_in(t,tSlip+0.25,0.35),wob:Math.sin(t*20)*0.12*ag_io(t,tSlip-0.1,tSlip+0.4,0.15)});}}},
     // taught to a student, the slip becomes the hymn; passed on and on along the bank, while the true verse fades from memory
-    {at:tTaught-0.2,place:"mcDawn",keys:[[0,1060,560,1.12],[tGen-0.6,1210,520,1.0]],d:2.6,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");
+    {cut:true,at:tTaught-0.2,place:"mcDawn",keys:[[0,1060,560,1.12],[tGen-0.6,1210,520,1.0]],d:2.6,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");
       // the teacher's true verse, fading to grey and gone
       const keepA=1-ag_in(t,tLose+0.2,1.2);mc_verse(ctx,T.teacher[0]+20,T.teacher[1]-250,{s:0.7,a:keepA,grey:ag_in(t,tGen+0.6,2.4)});
       // the slipped verse: over the elder student, then the younger, then the generations along the bank, paler each time
@@ -70,7 +70,7 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
       [[1420,742,0.3],[1600,730,0.26],[1770,720,0.22]].forEach((p,i)=>{const a=ag_in(t,tGen+i*1.2-0.4,0.8)*(1-ag_in(t,tExact-0.6,0.8))*(0.85-0.18*i);if(a<=0)return;
         withA(ctx,a,()=>{mc_seated(ctx,MC_TEACHER,p[0],p[1],p[2],{t:t+i,pose:MC_POSE.teach,talk:mc_recite(t,tGen+i*1.2,tGen+i*1.2+1)});mc_seated(ctx,MC_BOY2,p[0]+110*p[2]/0.3,p[1]+14,p[2]*0.92,{t:t+i+0.5,k:0.94,gaze:[-3,0]});});});}},
     // something had to keep them exact: the patterns, one at a time; the words must agree; a slip shows, and is set right
-    {at:tExact-0.3,place:"mcDawn",keys:[[0,960,540,1.0],[tPat-0.6,1010,520,1.06]],d:3,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");patterns(ctx,1);}},
+    {push:0,cut:true,at:tExact-0.3,place:"mcDawn",keys:[[0,960,540,1.0],[tPat-0.6,1010,520,1.06]],d:3,draw(ctx,t){mc_bank(ctx,t,"dawn");people(ctx);mc_leaves(ctx,t,"dawn");patterns(ctx,1);}},
     // it worked: the light moves from dawn to noon to dusk, the tree grows broader, the rows still float over the water
     {at:tWorked-0.1,place:"mcDawn",keys:[[0,1010,520,1.06],[tWorked,960,540,1.0]],d:3.2,push:0,draw(ctx,t){const noon=ag_in(t,tWorked+0.6,3),dusk=ag_in(t,tWorked+4,3.4);
       for(const [k,a] of [["mcNoon",noon*(1-dusk)],["mcDusk",dusk]])if(a>0){ctx.save();ctx.globalAlpha=a;ctx.drawImage(ag_place(k),0,0,W,H);ctx.restore();}
@@ -80,7 +80,7 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
       // a recording: one steady line of light under the rows
       const rl=ag_in(t,tRec,1.4);if(rl>0){ctx.save();ctx.globalCompositeOperation="lighter";ctx.fillStyle="rgba(255,240,206,"+(0.5*rl)+")";rr(ctx,RX-430*ag_sine(rl),RY+3*RDY*RS+40,860*ag_sine(rl),5,3);ctx.fill();ctx.restore();}}},
     // no single memory was trusted: the teacher's raised hand, close, and the students listening; the work was checked
-    {at:tSingle-0.2,place:"mcDusk",keys:[[0,780,560,1.7],[tChecked-0.5,960,540,1.0]],d:2.4,push:0,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
+    {cut:true,at:tSingle-0.2,place:"mcDusk",keys:[[0,780,560,1.7],[tChecked-0.5,960,540,1.0]],d:2.4,push:0,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
       withA(ctx,ag_in(t,tChecked+0.4,1.0),()=>patterns(ctx,1,{glow:1,slip:0,thr:1}));}},
     // it's the same with data: dusk, the four rows glowing green over the water; then they fold into one green tick, for the title
     {at:tData-0.2,place:"mcDusk",keys:[[0,960,540,1.0]],d:2,push:0.03,draw(ctx,t){mc_bank(ctx,t,"dusk");people(ctx);mc_leaves(ctx,t,"dusk");
@@ -162,7 +162,7 @@ scene("three",(ctx,S,t,sc)=>{const C=sc.cues;
       ag_roomLight(ctx,1);const pu=ag_in(t,tWrite-0.1,0.9),px=lerp(1330,MC_PAPER[0],ag_sine(pu)),py=lerp(560,MC_PAPER[1],ag_sine(pu));
       mc_deco(pu<0.97,()=>mc_draft(ctx,px,py,{a:ag_in(t,tWrite-0.1,0.25),k:lerp(0.35,1,ag_sine(pu)),glow:ag_io(t,tGo-0.2,tMon,0.5)+ag_io(t,tLost-0.1,tMon,0.5)}));}},
     // Monday and Tuesday: Jun asks, then Clara; three answers, the same shape and type; a library search for the review comes back empty
-    {at:tMon-0.4,place:"mcLab",keys:[[0,960,540,1.0],[tFits-0.6,1300,480,1.26],[tJuns-0.6,960,540,1.0]],d:1.6,push:0.015,draw(ctx,t){agent(ctx);agentName(ctx);jun(ctx);
+    {cut:true,at:tMon-0.4,place:"mcLab",keys:[[0,960,540,1.0],[tFits-0.6,1300,480,1.26],[tJuns-0.6,960,540,1.0]],d:1.6,push:0.015,draw(ctx,t){agent(ctx);agentName(ctx);jun(ctx);
       const w=mc_walkIn(t,tHerself-1.7,1.5);mc_clara(ctx,t,{x:w.x,walk:w.walk,a:w.a,pose:"hang",pose2:"explain",mix:ag_io(t,tHerself-0.2,tHealth,0.5)+ag_io(t,tSure-0.3,tBus,0.5),
         talk:mc_talkAt(t,tHerself,tHerself+1.6)+mc_talkAt(t,tSure,tSure+0.7),nod:Math.sin(clamp((t-tLast)/0.9,0,1)*TAU)*0.05*(t>tLast&&t<tLast+0.9?1:0),gaze:t>tJuns-0.3&&t<tSure-0.2?[-4,-1]:null,smile:ag_io(t,tFits,tBut,0.5)*0.6});
       ag_roomLight(ctx,1);mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{hint:1});
@@ -222,7 +222,7 @@ scene("ours",(ctx,S,t,sc)=>{const C=sc.cues;
           mc_strip(ctx,602,190,720,{a:ag_in(t,tWorld-0.15,0.25),strike:ag_in(t,tCanoe+0.5,0.6),boat:ag_in(t,tBoat-0.1,0.9)});ctx.restore();});}
     }},
     // six and a half years on: the man writes his retelling as a numbered list; two lines weren't in the story, and he's surest of them
-    {at:tAdded-0.4,place:"mcCambridge",keys:[[0,860,520,1.18]],push:0.03,draw(ctx,t){
+    {cut:true,at:tAdded-0.4,place:"mcCambridge",keys:[[0,860,520,1.18]],push:0.03,draw(ctx,t){
       ag_person(ctx,MC_MAN2,420,560,0.8,{t,pose:"desk",cut:750,gaze:[3,2],smile:ag_in(t,tSurest,0.8)*0.6,nod:ag_in(t,tSurest,0.6)*0.04});
       mc_desk1920(ctx,120,1260,830,{});
       // his list stands on the desk (its foot at the row's base, as the retellings did)
@@ -348,7 +348,7 @@ scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
       // or last year's paper: Clara's, signed
       mc_paper(ctx,1300,160,440,250,{kick:"Planning · last year",title:"First-years who left",sub:"Engineering and IT · signed",lines:1,a:ag_in(t,tLYP-0.1,0.4),rot:0.02*ag_spr(t,tLYP-0.1,0.5),seed:9});}},
     // a second way: the platform's enrolments and the student system's report, read only; they disagree; three counted twice; fixed
-    {at:tSecond-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
+    {cut:true,at:tSecond-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
       agent(ctx,{think:ag_io(t,tPlat-0.6,t131,0.4)+ag_io(t,tSays-0.4,tSays+0.8,0.3)+ag_io(t,tChanges-0.4,tChanges+0.8,0.3),spin:t<tChanges-1?ag_in(t,tPlat-0.6,1.6):ag_in(t,tChanges-0.6,1.0)});
       people(ctx,{cg:[-3,0]});ag_roomLight(ctx,1);
       // the reciters' patterns, faint, behind the two routes for a moment
@@ -361,7 +361,7 @@ scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
       const ans=ag_in(t,tSays-0.3,0.4),tn=ag_in(t,tChanges-0.2,0.9),wd=Math.max(mc_answerW(ctx,ANSD),mc_answerW(ctx,ANSF)),fl=ag_in(t,tReasonW,1.2);
       mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({a:ans,k:ag_spr(t,tSays-0.3,0.5),kx:MC_AG[0],ky:MC_AG[1],w:wd,turn:tn,back:Object.assign({fill:fl},ANSF),edge:tn>0.5?AG.green:null,edgeA:ag_in(t,tJob,0.8)},ANSD));}},
     // Monday's answer was right after all, but without its evidence nobody could tell; a plain check, every night
-    {at:tMon-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){agent(ctx);people(ctx);ag_roomLight(ctx,1);routes(ctx,1-ag_in(t,tDown-0.6,0.6));
+    {cut:true,at:tMon-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0,draw(ctx,t){agent(ctx);people(ctx);ag_roomLight(ctx,1);routes(ctx,1-ag_in(t,tDown-0.6,0.6));
       const wd=mc_answerW(ctx,ANSF);mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({w:wd,fill:1,edge:AG.green,edgeA:1,a:1-ag_in(t,tDown-0.6,0.6)},ANSF));
       mc_answer(ctx,lerp(-560,262,ag_eo(ag_in(t,tMon,1.2))),150,Object.assign({a:ag_in(t,tMon,0.3)*(1-ag_in(t,tPlain-0.4,0.5)),pulse:Math.sin(Math.PI*clamp((t-tWithout)/1.4,0,1))},MC_A1));
       mc_nightly(ctx,MC_R1[0]+6,384,{w:470,a:ag_in(t,tPlain,0.4)*(1-ag_in(t,tDown-0.6,0.6)),k:ag_spr(t,tPlain,0.5),moon:clamp((t-tNight)/1.4,0,2)*TAU,tick:ag_in(t,tNight+1.4,0.5)});}},
@@ -375,7 +375,7 @@ scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
       const wd=mc_answerW(ctx,ANSF),b=mc_answer(ctx,MC_ANX,MC_ANY,Object.assign({w:wd,fill:1,a:ag_in(t,tApp-0.4,0.5),edge:AG.green,edgeA:0.8},ANSF));
       mc_signoff(ctx,MC_ANX,MC_ANY+mc_answerH(Object.assign({fill:1},ANSF))-20,wd,{a:ag_in(t,tApp,0.5),k:ag_spr(t,tApp,0.5),sign:ag_in(t,tSigns-0.2,1.2)});}},
     // next semester: Clara's draft on the wall, its blank filled at last: the two new advisers start in Engineering and IT
-    {at:tSem-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.03,draw(ctx,t){agent(ctx);people(ctx,{cg:[2,-4]});ag_roomLight(ctx,1);
+    {cut:true,at:tSem-0.4,place:"mcLab",keys:[[0,960,540,1.0]],push:0.03,draw(ctx,t){agent(ctx);people(ctx,{cg:[2,-4]});ag_roomLight(ctx,1);
       mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{fill:ag_in(t,tStart+0.2,1.2)});
       mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{row:1});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
@@ -403,3 +403,6 @@ scene("every",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath,T=MC_AT;
       const g=ag_io(t,tHolds-0.2,tHolds+1.6,0.5);if(g>0)glow(ctx,960,MC_VY,180,[110,190,140],0.35*g);}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.8);
   ag_end(ctx,S,t,tTrust-0.1,"Minds that change","Trust no mind blindly. Check the work.","Film 5 of 9");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["ours", "check"]);

@@ -59,7 +59,7 @@ function dm_hand(c,Q,rows,p,o){o=o||{};const u0=o.u0||0.1,u1=o.u1||0.9,top=o.top
   for(let i=0;i<rows;i++){const v=top-i*pitch,f=clamp(p-i,0,1),uEnd=u0+(u1-u0)*f;let u=u0+(i===0&&o.indent?0.08:0);
     while(u<u1-0.01){const n=1+Math.floor(r()*6),wl=n*0.02;if(u+wl>u1)break;
       for(let k=0;k<n;k++){const m=1+(r()<0.45?1:0),asc=r()<0.14,desc=!asc&&r()<0.07;
-        for(let j=0;j<m;j++){const uu=u+k*0.02+j*0.008;if(uu>uEnd)break;const a=dm_L(Q,uu,v+(asc?h*1.7:h)),b=dm_L(Q,uu-0.002,v-(desc?h*0.9:0));
+        for(let j=0;j<m;j++){const uu=u+k*0.02+j*0.008;if(uu>=uEnd)break;const a=dm_L(Q,uu,v+(asc?h*1.7:h)),b=dm_L(Q,uu-0.002,v-(desc?h*0.9:0));
           c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);const ft=dm_L(Q,uu+0.006,v-(desc?h*0.9:0)-0.004);c.lineTo(ft[0],ft[1]);}}
       u+=wl+0.022;}
     if(f>0&&f<1)tip=dm_L(Q,uEnd,v);if(f<1&&tip)break;}
@@ -117,19 +117,29 @@ AG_PLACES.dmScribe=c=>{const F=DM_SCRIBE.floor,[wx,wy,ww,wh]=DM_SCRIBE.win,B=DM_
   // an inkhorn in a hole at the board's far left
   ag_soft(c,cc=>{cc.moveTo(900,686);cc.lineTo(912,640);cc.lineTo(936,644);cc.lineTo(928,690);cc.closePath();},[60,46,40],[150,130,110],930,644,40,"rgba(0,0,0,0.4)",6);};
 
+// where the pen is when the right page is written up to p (0..1 of its rows): each row is written in the first DM_WRITE of its time,
+// then the pen lifts and glides back to the start of the next row, so the hand never jumps from one row to the next (a hand that
+// snapped back at every row's end looked wild, the author's note of 4 November 2026); w is how far the writing has got, in rows
+const DM_WRITE=0.8;
+function dm_pen(p){const n=DM_SCRIBE.rows,q=clamp(p,0,1)*n,i=Math.min(n-1,Math.floor(q)),f=Math.min(1,q-i),Q=dm_page("right"),u0=0.1,u1=0.9,top=0.86,pitch=0.074,v=top-i*pitch;
+  if(f<=DM_WRITE||i>=n-1){const k=Math.min(1,f/DM_WRITE);return{w:i+k,tip:dm_L(Q,lerp(u0,u1,k),v)};}
+  const u=ag_sine((f-DM_WRITE)/(1-DM_WRITE)),a=dm_L(Q,u1,v),b=dm_L(Q,u0,v-pitch);
+  return{w:i+1,tip:[lerp(a[0],b[0],u),lerp(a[1],b[1],u)-18*Math.sin(Math.PI*u)]};}
 // the right page, written up to p (0..1 of its rows); returns where the pen is
-function dm_writing(ctx,p){return dm_hand(ctx,dm_page("right"),DM_SCRIBE.rows,p*DM_SCRIBE.rows,{seed:34,u0:0.1,u1:0.9});}
+function dm_writing(ctx,p){const pen=dm_pen(p);dm_hand(ctx,dm_page("right"),DM_SCRIBE.rows,pen.w,{seed:34,u0:0.1,u1:0.9});return pen.tip;}
 
 // an arm that reaches a point: the angles (degrees from straight down, forward positive) of the upper arm and the forearm that put
 // the wrist at T, from the shoulder J, in figure space, the elbow bending down and back
 function dm_reach(J,T,hand){const f=AG_FIG.fore,L1=AG_FIG.L1,L2=AG_FIG.L2,dx=(T[0]-J[0])/f,dy=T[1]-J[1],d=clamp(Math.hypot(dx,dy),Math.abs(L1-L2)+1,L1+L2-1);
   const base=Math.atan2(dx,dy),k=Math.acos(clamp((L1*L1+d*d-L2*L2)/(2*L1*d),-1,1)),a1=base-k,E=[Math.sin(a1)*L1,Math.cos(a1)*L1],a2=Math.atan2(dx-E[0],dy-E[1]);
   return[a1*180/Math.PI,a2*180/Math.PI,hand||"hold"];}
-// the scribe at the desk: the near hand on the pen at tip (in the frame), the far hand resting on the new book's left page
+// the scribe at the desk: the near hand on the pen at tip (in the frame); the far arm hangs behind the desk, as seen from here (o.rest
+// lays the far hand on the board at a point instead). He faces right, so his far hand would lie right of the pen, across the page he
+// writes; reaching back to the left page bent his far arm behind his back, and its shoulder stood out of his chest
 function dm_scribe(ctx,t,tip,o){o=o||{};const x=o.x||640,y=o.y||470,s=o.s||1.0,A=AG_FIG.anchor,toFig=q=>[A[0]+(q[0]-x)/s,A[1]+(q[1]-y)/s];
-  const T=toFig(tip),near=dm_reach(AG_FIG.shoulder.near,[T[0]-104,T[1]-30]),far=dm_reach(AG_FIG.shoulder.far,toFig(o.rest||dm_L(dm_page("left"),0.62,0.55)),"rest");
-  // he looks from the book he copies (o.look) to his page and back
-  const lk=o.look?1:0;return ag_person(ctx,DM_PEOPLE.scribe,x,y,s,{t,pose:{near,far},cut:DM_SCRIBE.board[3][1],nod:lk?0.03:0.18,gaze:lk?[6,1]:[4,6],smile:0.1,
+  const T=toFig(tip),near=dm_reach(AG_FIG.shoulder.near,[T[0]-104,T[1]-30]),far=o.rest?dm_reach(AG_FIG.shoulder.far,toFig(o.rest),"rest"):null;
+  // he looks from his page up to the book he copies (o.look, 0 to 1, turning smoothly) and back
+  const lk=clamp(+o.look||0,0,1);return ag_person(ctx,DM_PEOPLE.scribe,x,y,s,{t,pose:{near,far},cut:DM_SCRIBE.board[3][1],nod:lerp(0.18,0.03,lk),gaze:[lerp(4,6,lk),lerp(6,1,lk)],smile:0.1,
     hold:(c,h)=>dm_quill(c,T[0],T[1],0.95,1/s*1.1)});}
 // a quill: a feather from (x, y) the nib, leaning back up and left
 function dm_quill(ctx,x,y,ang,s){s=s||1;ctx.save();ctx.translate(x,y);ctx.rotate(ang==null?0.95:ang);ctx.scale(s,s);

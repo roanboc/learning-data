@@ -1814,6 +1814,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1903,12 +1918,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3376,7 +3398,7 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
       fw_goes(x,"doctor1",tt,P.come-0.4,FW_PL.autopsy[0],FW_PL.first[0]);fw_goes(x,"student",tt,P.come+0.15,FW_PL.autopsy[0],FW_PL.first[0]-20);
       fw_goes(x,"doctor2",tt,P.come+0.7,FW_PL.autopsy[0],FW_PL.first[0]+10);fw_goes(x,"midwife",tt,P.mid-1.2,1990,FW_PL.second[0]);}},
     // the basin by the first clinic's door: Semmelweis has a doctor wash his hands in chlorinated lime before he goes in
-    {at:P.basin,place:"corridor",keys:[[P.basin,700,600,1.5]],d:1.6,draw:(x,tt)=>{
+    {cut:true,at:P.basin,place:"corridor",keys:[[P.basin,700,600,1.5]],d:1.6,draw:(x,tt)=>{
       person(x,"doctor2",640,850,FW_WK.s,{pose:"stand",pose2:"fw_wash",mix:fin(tt,P.basin+0.4,0.6),t:tt});fw_basin(x,640,880,1.0,1);
       person(x,"semmelweis",430,FW_WK.y,FW_WK.s,{pose:"listen",pose2:"point",mix:fin(tt,P.basin+0.2,0.5),t:tt});
       fw_tagAt(x,tt,P.lime-0.1,null,900,650,"chlorinated lime");}},
@@ -3434,7 +3456,7 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({take:c.bind
       gv_tint(x,w.cols[1]-10,w.rows[0]-FW_SK.rh*0.74,tw(x,"Learning team",FW_SK.sz,600)+20,2*FW_SK.rh,GV.gold,0.7*fin(tt,P.owner,0.4));}},
     // Tom's desk, the learning team's: the issue log, the night's failure closed for good, and the line for the emails lit, then
     // closed with the old answer
-    {at:P.log,place:"tomTop",keys:[[P.log,960,550,1],[P.log+0.1,960,530,1.04]],d:3,push:0.01,draw:(x,tt)=>
+    {cut:true,at:P.log,place:"tomTop",keys:[[P.log,960,550,1],[P.log+0.1,960,530,1.04]],d:3,push:0.01,draw:(x,tt)=>
       fw_issueLog(x,fin(tt,P.log+0.3,0.5),fin(tt,P.cleaned,0.3))},
     // the data team's room: Jun shows Yusuf where the emails are cleaned; along the ceiling, a pipe; under it, a bucket and a mop
     {at:P.room,place:"data",keys:[[P.room,1300,560,1.2],[P.room+0.1,1320,560,1.24]],d:2,draw:(x,tt)=>
@@ -3444,13 +3466,13 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({take:c.bind
     {at:P.card,place:"boardData",keys:[[P.card,960,500,1],[P.card+0.1,960,490,1.04]],d:3,push:0.01,draw:(x,tt)=>
       fw_cleanCard(x,{trim:fin(tt,P.trim-0.1,0.5),low:fin(tt,P.low-0.1,0.5)})},
     // the wallet, close: without it, two wallets for one learner
-    {at:P.wal,place:"screenData",keys:[[P.wal,960,420,1],[P.wal+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_wallets(x,tt-P.wal-0.2,fin(tt,P.two,0.5))},
+    {cut:true,at:P.wal,place:"screenData",keys:[[P.wal,960,420,1],[P.wal+0.1,960,430,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_wallets(x,tt-P.wal-0.2,fin(tt,P.two,0.5))},
     // the room, wide: the pipe runs the width of the wall; two more buckets catch its drips, everyone else who cleans them again
     {at:P.wide,place:"data",keys:[[P.wide,960,540,1]],d:2,push:0.012,draw:(x,tt)=>{const b2=fin(tt,P.fin,0.5),b3=fin(tt,P.mail-0.4,0.5);
       fw_dataRoom(x,tt,{buckets:[1,b2,b3],mop:1});
       fw_tagAt(x,tt,P.fin+0.2,null,FW_LK.joints[1]-150,830,"finance");fw_tagAt(x,tt,P.mail-0.2,null,FW_LK.joints[2]-150,830,"mailing list");}},
     // the first bucket, close: the drip falls, Jun mops round it, and the drip keeps falling
-    {at:P.mop,place:"data",keys:[[P.mop,1280,700,1.5]],d:2,push:0.015,draw:(x,tt)=>{fw_dataRoom(x,tt,{buckets:[1,1,1],held:1});
+    {cut:true,at:P.mop,place:"data",keys:[[P.mop,1280,700,1.5]],d:2,push:0.015,draw:(x,tt)=>{fw_dataRoom(x,tt,{buckets:[1,1,1],held:1});
       fw_tagAt(x,tt,P.mopT,null,1480,800,"the clean-up");fw_tagAt(x,tt,P.leak,null,FW_LK.joints[0]-150,830,"data team");}}]);
   wc_year(ctx,56,72,"Today",fin(t,0.3,0.5)*(1-fin(t,P.page,0.4)));
   wc_paperOver(ctx,S);});
@@ -3494,10 +3516,10 @@ scene("back",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({point:wAt(sc,
       fw_tomDesk(x,tt,{},q=>fw_tomScreen(q,"form",{lit:fin(tt,P.tom+0.6,0.5),tag:fin(tt,P.plain-0.1,0.5)}));
       fw_plate(x,tt,P.tom+0.3,P.plain-0.6,1690,470,["Tom Whitfield","learning team"]);}},
     // a learner's phone: the phone starts the email with a capital; picking a suggestion leaves a space at the end
-    {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,{val:fw_val(tt,typed),shift:tt<d0+0.05?1:0,
+    {cut:true,at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,{val:fw_val(tt,typed),shift:tt<d0+0.05?1:0,
       ring:fin(tt,P.cap-0.1,0.5),sug:fin(tt,P.cap+1.0,0.3)*(1-fin(tt,P.sug+0.4,0.3)),sugVal:FW_EM,spc:fin(tt,P.spc-0.1,0.5),caret:true},presses)},
     // Tom's screen: the learners as the form saved them; three of eight as typed
-    {at:P.lr,place:"screenLearn",keys:[[P.lr,960,400,1],[P.lr+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_learners(x,fin(tt,P.lr+0.3,0.5),0,fin(tt,P.three,0.4))},
+    {cut:true,at:P.lr,place:"screenLearn",keys:[[P.lr,960,400,1],[P.lr+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_learners(x,fin(tt,P.lr+0.3,0.5),0,fin(tt,P.three,0.4))},
     // the bucket in the data team's room: where it shows
     {at:P.bk,place:"data",keys:[[P.bk,1280,700,1.5]],d:2,push:0.015,draw:(x,tt)=>{fw_dataRoom(x,tt,{buckets:[1,1,1],held:1,yusuf:false});
       fw_where(x,tt,P.shows-0.1,null,"where it shows",1150,760,[1250,700,210,230]);}},
@@ -3526,11 +3548,11 @@ scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"
     {at:P.tom,place:"tom",keys:[[P.tom,860,500,1.1]],d:1.8,push:0.01,draw:(x,tt)=>
       fw_tomDesk(x,tt,{pose:"listen",pose2:"point",mix:fin(tt,P.box-0.5,0.5)},q=>fw_tomScreen(q,"form",{tag:1,fix:fin(tt,P.box,0.6)}))},
     // the phone: no capital now; then the form trims the space, writes the email in lower case and checks its shape, before it's saved
-    {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,Object.assign(box(tt),{email:true,
+    {cut:true,at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>fw_typer(x,tt,Object.assign(box(tt),{email:true,
       ring:gv_io(tt,P.stop-0.15,P.sug,0.3),ringCol:GV.green,sug:fin(tt,P.stop+1.0,0.3)*(1-fin(tt,P.sug+0.05,0.3)),sugVal:FW_EM,ok:fin(tt,P.shape,0.5),
       caret:tt<P.saved-0.7,kb:1-fin(tt,P.saved-0.7,0.6),btn:gv_io(tt,P.saved+0.3,P.saved+0.55,0.12)}),presses)},
     // another learner pastes her email, a space in front and capitals in it; the form does the work
-    {at:P.gr,place:"phone",keys:[[P.gr,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>{const pasted=tt>=P.gr+1.55;
+    {cut:true,at:P.gr,place:"phone",keys:[[P.gr,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>{const pasted=tt>=P.gr+1.55;
       fw_typer(x,tt,{name:"Grace Okafor",email:true,val:pasted&&tt<P.does?gEm:"",prev:tt>=P.does?gEm:null,mixv:fin(tt,P.does,0.6),
         ...(tt>=P.does?{val:gEm.trim().toLowerCase()}:{}),paste:gv_io(tt,P.gr+1.1,P.gr+1.6,0.15),spc:gv_io(tt,P.gr+1.9,P.does,0.3),
         ok:fin(tt,P.does+0.6,0.5),caret:tt<P.does},gPress);}},
@@ -3542,7 +3564,7 @@ scene("entry",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({own:wAt(sc,"
     // Tom's screen: the team corrects the old emails, one by one
     {at:P.lr,place:"screenLearn",keys:[[P.lr,960,400,1],[P.lr+0.1,960,410,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_learners(x,1,clamp((tt-P.fix)/1.8,0,1),0)},
     // the data team's board: the clean-up's card, stamped retired
-    {at:P.cu,place:"boardData",keys:[[P.cu,960,500,1],[P.cu+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_cleanCard(x,{trim:1,low:1,retired:fin(tt,P.go,0.4)})},
+    {cut:true,at:P.cu,place:"boardData",keys:[[P.cu,960,500,1],[P.cu+0.1,960,490,1.03]],d:3,push:0.01,draw:(x,tt)=>fw_cleanCard(x,{trim:1,low:1,retired:fin(tt,P.go,0.4)})},
     // wordless: the data team's room; the joints clamped, the drips stop, the buckets and the mop are put away; then, said: no system
     // cleans them again
     {at:P.room,place:"data",keys:[[P.room,960,540,1]],d:2,push:0.012,draw:(x,tt)=>{const away=1-fin(tt,P.room+1.5,0.9);
@@ -3658,7 +3680,7 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
     // the basin alone in the corridor, the water still: washing became the rule after his death
     {at:P.af,place:"corridor",keys:[[P.af,640,640,1.6]],d:1.6,push:0.015,draw:x=>fw_basin(x,640,880,1.0,1)},
     // basic hygiene now: the first clinic's door opens, and the mother goes home with her baby, past the basin, as in 1847
-    {at:P.nw,place:"corridor",keys:[[P.nw,1060,600,1.15],[P.nw+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.nw)},
+    {cut:true,at:P.nw,place:"corridor",keys:[[P.nw,1060,600,1.15],[P.nw+0.1,1080,600,1.18]],d:3,push:0.01,draw:(x,tt)=>fw_goingHome(x,tt,P.nw)},
     // today: the email box, checked where it's typed, easy to keep
     {at:P.ph,place:"phone",keys:[[P.ph,...FW_PHV]],d:1.6,push:0.01,draw:(x,tt)=>{fw_typer(x,tt,{val:FW_EM.toLowerCase(),email:true,ok:1,kb:0});
       gv_halo(x,1086,246,120,100,GV.green,0.8*fin(tt,P.easy-0.1,0.5));}},
@@ -3675,6 +3697,9 @@ scene("blame",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({nod:wAt(sc,"
   wc_year(ctx,56,72,"Today",fin(t,P.ph+0.2,0.4)*(1-fin(t,P.end,0.6)));
   gv_end(ctx,S,t,P.end,"Fixed where it starts","Fix the cause, then make the fix a check.","Film 6 of 10");
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["back"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

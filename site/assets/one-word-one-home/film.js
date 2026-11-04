@@ -1812,6 +1812,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1901,12 +1916,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3550,14 +3572,14 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
       glow(P.script,[b0x-24,b0y-24,b1x-b0x+48,b1y-b0y+48]);const T=C.stall.top,[s0x,sy]=ow_pj(C,1.98,T,5.2),[s1x]=ow_pj(C,3.48,T,5.2),k=ow_ppm(C,5.2);glow(P.meas,[s0x,sy-0.42*k,s1x-s0x,0.5*k]);
       const zc=7.2+0.8*(tt-P.gate),[ra,rb]=ow_axle(C,zc),q=ow_ppm(C,zc);glow(P.carts,[Math.min(ra[0],rb[0])-30,Math.min(ra[1],rb[1])-1.6*q,Math.abs(rb[0]-ra[0])+60,1.6*q+30]);}},
     // close on the seller's table: his old state's measure, and Qin's, which holds less; which one prices and taxes go by, he can't say
-    {at:P.stall,place:"stall",keys:[[P.stall,960,540,1.0],[P.stall+0.1,960,522,1.045]],d:6,draw:(x,tt)=>{const T=OW_ST;
+    {cut:true,at:P.stall,place:"stall",keys:[[P.stall,960,540,1.0],[P.stall+0.1,960,522,1.045]],d:6,draw:(x,tt)=>{const T=OW_ST;
       ow_kneel(x,"ow_merchant",T.seller,T.top,T.s,{pose:"explain",pose2:"shrug",mix:fin(tt,P.taxes,0.8),expr:tt>P.taxes?"concerned":"calm",t:tt,flip:true,fy:T.edge+128});
       x.drawImage(gv_place("stallTable"),0,0,W,H);ow_stallClose(x);
       ow_tagAt(x,tt,P.old,null,T.old[0],344,"his old state's measure",{size:32});ow_tagAt(x,tt,P.qin,null,T.qin[0],424,"Qin's measure",{size:32});
       gv_qmark(x,960,188,100,clamp((tt-P.doubt)/0.9,0,1));}},
     // back at the gate: the same script, measures and cart width everywhere, each tagged as it's named, and the old measure put away
     // as they're set by law; the ruts measured where the cart has been
-    {at:P.back,place:"gate",keys:[[P.back,975,540,1.03],[P.back+0.1,1000,540,1.06]],d:5,draw:(x,tt)=>{const C=OW_GT;
+    {cut:true,at:P.back,place:"gate",keys:[[P.back,975,540,1.03],[P.back+0.1,1000,540,1.06]],d:5,draw:(x,tt)=>{const C=OW_GT;
       ow_gate(x,tt,P.gate,{old:1-fin(tt,P.made,0.5),lit:fin(tt,P.made+0.3,0.5)});
       const [ra,rb]=ow_axle(C,9.9),dp=clamp((tt-P.n3+0.1)/0.6,0,1);
       if(dp>0){const lo=24;wc_pencil(x,[[ra[0],ra[1]+6],[ra[0],ra[1]+lo+10]],dp,{col:WC_DARK,lw:2.4,seed:61});wc_pencil(x,[[rb[0],rb[1]+6],[rb[0],rb[1]+lo+10]],dp,{col:WC_DARK,lw:2.4,seed:62});
@@ -3567,7 +3589,7 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
       ow_tagAt(x,tt,P.n3+0.05,null,(ra[0]+rb[0])/2,Math.max(ra[1],rb[1])+76,"one cart width");}},
     // close on the seller's table again: the old measure is gone, and Qin's has to hold the same everywhere, so he can price by it; the
     // question mark's place is the answer's
-    {at:P.relief,place:"stall",keys:[[P.relief,960,522,1.045],[P.relief+0.1,960,540,1.0]],d:6,draw:(x,tt)=>{const T=OW_ST;
+    {cut:true,at:P.relief,place:"stall",keys:[[P.relief,960,522,1.045],[P.relief+0.1,960,540,1.0]],d:6,draw:(x,tt)=>{const T=OW_ST;
       ow_kneel(x,"ow_merchant",T.seller,T.top,T.s,{pose:"explain",expr:tt>P.rtrust?"smile":"calm",t:tt,flip:true,fy:T.edge+128});
       x.drawImage(gv_place("stallTable"),0,0,W,H);ow_stallClose(x,{old:false});ow_tagAt(x,tt,P.relief+0.35,null,T.qin[0],424,"Qin's measure",{size:32});
       ow_tagAt(x,tt,P.rsame,null,960,140,"the same everywhere",{size:36,wash:GV.green,washA:0.3});}},
@@ -3583,7 +3605,7 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>{const w=(id,
     // the board, on the scribe's table, and two of its rules in English under it, each old word and the new one; then as it was found,
     // in 2002, with the county's own records beside it, and those records counted: the new word used, so the same word as in the capital
     {at:P.then,place:"boardThen",keys:[[P.then,960,540,1.0]],d:2,draw:(x,tt)=>ow_ruleCard(x,fin(tt,P.rule,0.5))},
-    {at:P.found-0.1,place:"boardFound",keys:[[P.found-0.1,960,540,1.0],[P.found,990,530,1.04],[P.glossary,960,540,1.0]],d:2.2,draw:(x,tt)=>{ow_ruleCard(x,1);
+    {cut:true,at:P.found-0.1,place:"boardFound",keys:[[P.found-0.1,960,540,1.0],[P.found,990,530,1.04],[P.glossary,960,540,1.0]],d:2.2,draw:(x,tt)=>{ow_ruleCard(x,1);
       ow_tagAt(x,tt,P.well,P.bridge-0.2,1090,160,"found in a well");const ra=fin(tt,P.recs,0.6);if(ra>0.01)withA(x,ra,()=>x.drawImage(gv_place("records"),0,12*(1-ra),W,H));
       ow_tally(x,tt,P.recs,P.rec,P.rec+1.6);ow_tagAt(x,tt,P.same,null,1550,806,"the same word as in the capital",{size:32,wash:GV.green,washA:0.3});
       gv_halo(x,OW_BD.x-40,OW_BD.y-40,OW_BD.w+80,OW_BD.h+80,GV.gold,0.55*gv_io(tt,P.glossary,P.bridge+0.4,0.6));}},
@@ -3616,8 +3638,8 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({copy:wAt(sc,"
   // her screen, then the spreadsheet and the policy above it; a cut to the tablet and the printout at her left, and one to all five
   gv_shots(ctx,S,t,sc.dur,[
     {at:0,place:"regClose",keys:[[0,960,540,1.0],[c.platform-0.45,1371,505,1.75],[c.sheet-0.55,1080,350,1.54]],d:1.6,push:0,draw},
-    {at:c.dash-0.45,place:"regClose",keys:[[c.dash-0.45,565,400,1.7]],d:1.6,push:0,draw},
-    {at:c.three-0.6,place:"regClose",keys:[[c.three-0.6,960,540,1.0]],d:1.6,push:0,draw}]);
+    {cut:true,at:c.dash-0.45,place:"regClose",keys:[[c.dash-0.45,565,400,1.7]],d:1.6,push:0,draw},
+    {cut:true,at:c.three-0.6,place:"regClose",keys:[[c.three-0.6,960,540,1.0]],d:1.6,push:0,draw}]);
   setScreen(ctx,S);ow_nameCard(ctx,720,470,"Mei Tanaka","Registrar's office",gv_io(t,0.6,c.look-0.3,0.4));ow_nameCard(ctx,1480,96,"Yusuf Demir","Data governance",gv_io(t,c.look+0.6,c.platform-0.6,0.4));
   wc_paperOver(ctx,S);});
 
@@ -3632,13 +3654,13 @@ scene("none",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({micro:wAt(sc,
     // Yusuf pins up the five, and who made each and why
     {at:0,place:"boardGov",keys:[[0,960,500,1.0],[0.2,960,488,1.04]],d:5,draw:(x,tt)=>ow_board(x,tt,{pin:0.1,tags:c.reason+0.5,lit:fin(tt,c.differ,0.6),u0:clamp((tt-P.micro)/0.6,0,1),u3:clamp((tt-P.degree)/0.6,0,1),frost:fin(tt,P.found-0.3,0.6)})},
     // the biggest: the 2019 tool, that nobody opens
-    {at:P.login,place:"screenGov",keys:[[P.login,960,450,1.0],[P.login+0.1,1000,430,1.07]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_login(x,sx,sy,sw,sh,{web:clamp((tt-P.login-0.3)/1.4,0,1)});
+    {cut:true,at:P.login,place:"screenGov",keys:[[P.login,960,450,1.0],[P.login+0.1,1000,430,1.07]],d:5,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_login(x,sx,sy,sw,sh,{web:clamp((tt-P.login-0.3)/1.4,0,1)});
       ow_tagAt(x,tt,P.months,null,1240,690,"last opened 14 months ago",{size:32});}},
     // Monday: one changed, four never heard
-    {at:P.back,place:"boardGov",keys:[[P.back,960,488,1.04]],d:2,draw:(x,tt)=>{ow_board(x,tt,{lit:1,frost:1});
+    {cut:true,at:P.back,place:"boardGov",keys:[[P.back,960,488,1.04]],d:2,draw:(x,tt)=>{ow_board(x,tt,{lit:1,frost:1});
       ow_tagAt(x,tt,P.mon,null,OW_BX.cx(0),OW_BX.top-26,"changed Monday",{wash:GV.gold,washA:0.55});for(let i=1;i<5;i++)ow_tagAt(x,tt,P.four+0.2*i,null,OW_BX.cx(i),OW_BX.top-26,"no change",{wash:GV.grey,washA:0.45});}},
     // the floor: which one?
-    {at:P.floor,place:"floor",keys:[[P.floor,960,540,1.0]],d:2,draw:(x,tt)=>{ow_floor(x,tt,{pose:{mei:{pose:"shrug"},jun:{pose:"shrug"}}});
+    {cut:true,at:P.floor,place:"floor",keys:[[P.floor,960,540,1.0]],d:2,draw:(x,tt)=>{ow_floor(x,tt,{pose:{mei:{pose:"shrug"},jun:{pose:"shrug"}}});
       for(let i=0;i<5;i++){const t0=P.which-0.4+0.28*i,a=gv_io(tt,t0,sc.dur-1.4,0.4),sx=GV_FL.spot(i);if(a>0.01)gv_say(x,clamp(sx-115+(i%2?24:-24),20,1660),262+(i%2)*26,["which one?"],sx,530,{a,k:0.9+0.1*spring(fin(tt,t0,0.5)),seed:230+i});}}}]);
   wc_paperOver(ctx,S);});
 
@@ -3655,7 +3677,7 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({big:wAt(sc,"
     // what a term holds, line by line
     {at:P.term,place:"meetScreen",keys:[[P.term,960,450,1.0]],d:2,draw:(x,tt)=>ow_termCard(x,280,170,1360,P.u.map(v=>tt-v+0.15),{h:570})},
     // the business's words; each table and column; finding the data
-    {at:P.words,place:"meetScreen",keys:[[P.words,960,450,1.0]],d:2,draw:(x,tt)=>ow_three(x,[tt-P.words-0.1,tt-P.dict,tt-P.cat])}]);
+    {cut:true,at:P.words,place:"meetScreen",keys:[[P.words,960,450,1.0]],d:2,draw:(x,tt)=>ow_three(x,[tt-P.words-0.1,tt-P.dict,tt-P.cat])}]);
   ow_pill(ctx,t,[[0,"Qianling county · about 220 BC"]],gv_io(t,P.elbow+0.2,P.term-0.1,0.35));
   wc_paperOver(ctx,S);});
 
@@ -3669,7 +3691,7 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
       ow_board(x,tt,{lit:0.6});gv_stamp(x,OW_BX.cx(4),OW_BX.top+190,"retired",fin(tt,P.stamp,0.3),{col:GV.greyInk,size:44});
       ow_archive(x,fin(tt,P.arch-0.7,0.4),(tt-P.arch)/1.2);for(let j=0;j<3;j++)ow_flyCard(x,j,(tt-P.move-0.3*j)/1.2);}},
     // Planning's spreadsheet: award's cell becomes a link, and opens the term
-    {at:P.plan,place:"screenPlan",keys:[[P.plan,960,450,1.0],[P.link,1000,420,1.06]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC,u=fin(tt,P.link,0.5),cl=P.click+0.1;
+    {cut:true,at:P.plan,place:"screenPlan",keys:[[P.plan,960,450,1.0],[P.link,1000,420,1.06]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC,u=fin(tt,P.link,0.5),cl=P.click+0.1;
       ow_planSheet(x,sx,sy,sw,sh,u,fin(tt,cl+0.2,0.45));const e=easeCam(clamp((tt-P.link-0.2)/(cl-P.link-0.2),0,1));ow_cursor(x,lerp(1420,sx+500,e),lerp(640,sy+184,e),1.2,clamp((tt-cl)/0.5,0,1));}},
     // the registrar's policy: its own words struck, and the glossary named instead
     {at:P.pol,place:"screenReg",keys:[[P.pol,960,450,1.0],[P.says,940,430,1.05]],d:2,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_policyScreen(x,sx,sy,sw,sh,clamp((tt-P.says)/0.8,0,1),clamp((tt-P.as)/1.6,0,1));}},
@@ -3681,7 +3703,7 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({stamp:wAt(sc,
     {at:P.names-0.3,place:"screenNight",keys:[[P.names-0.3,960,420,1.0],[P.names,920,400,1.08]],d:2.4,draw:(x,tt)=>{const [sx,sy,sw,sh]=GV_SC;ow_copy(x,sx,sy,sw,sh,{lit:fin(tt,P.names+0.3,0.6)});
       ow_tagAt(x,tt,P.sync,null,1290,690,"checked every night",{size:32});}},
     // one way: from the glossary to every office's screen, never back
-    {at:P.way,place:"floor",keys:[[P.way,960,540,1.0]],d:2,draw:(x,tt)=>{ow_floor(x,tt);const p=clamp((tt-P.way-0.4)/1.6,0,1)*1.32;ow_oneWay(x,960,300,p,1);
+    {cut:true,at:P.way,place:"floor",keys:[[P.way,960,540,1.0]],d:2,draw:(x,tt)=>{ow_floor(x,tt);const p=clamp((tt-P.way-0.4)/1.6,0,1)*1.32;ow_oneWay(x,960,300,p,1);
       for(let i=0;i<5;i++)ow_screenWord(x,i,fin(tt,P.way+0.4+1.6*(1+i*0.08)/1.32,0.4));ow_floorCard(x,960,300,1);ow_tagAt(x,tt,P.one,null,960,120,"one way",{size:32});}}]);
   setScreen(ctx,S);ow_nameCard(ctx,24,740,"Clara Jensen","Planning",gv_io(t,P.plan+0.3,P.pol-0.3,0.4));ow_nameCard(ctx,24,740,"Anil Kurian","Faculty of Health",gv_io(t,P.dash+0.3,P.dash+2.4,0.4));
   wc_paperOver(ctx,S);});
@@ -3710,7 +3732,7 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({months:wAt(
     // back to the notice: what the new words touch, and who owns each part
     {at:P.back,place:"screenNight",keys:[[P.back,960,450,1.0],[P.back+0.2,960,500,1.1]],d:2,draw:night},
     // Tuesday morning: Mei signs the notice, and sees where her words go; then the camera comes back to her, smiling
-    {at:P.mei,place:"regClose",keys:[[P.mei,1160,500,1.4],[P.appr-0.3,1371,505,1.75],[P.used+0.2,1150,520,1.32]],d:1.6,draw:(x,tt)=>{const smile=fin(tt,P.used+0.8,0.6);
+    {cut:true,at:P.mei,place:"regClose",keys:[[P.mei,1160,500,1.4],[P.appr-0.3,1371,505,1.75],[P.used+0.2,1150,520,1.32]],d:1.6,draw:(x,tt)=>{const smile=fin(tt,P.used+0.8,0.6);
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"stand",expr:smile>0.5?"smile":"calm",t:tt});x.drawImage(gv_place("regDesk"),0,0,W,H);
       const [sx,sy,sw,sh]=GV_RX.screen;ow_signNotice(x,sx,sy,sw,sh,{sign:clamp((tt-P.appr-0.1)/0.8,0,1),ok:fin(tt,P.appr+0.95,0.4),glow:[0,1,2].map(i=>fin(tt,P.used+0.3*i,0.4))});
       ow_tagAt(x,tt,P.mei+0.3,null,1420,262,"Tuesday morning",{size:30});}},
@@ -3741,8 +3763,8 @@ scene("agree",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({n:[wAt(sc,"w
       [["anil",0,[P.n[1]-0.3,P.n[2]-0.3]],["ana",1,null],["ow_fac",2,[P.n[2]-0.3,P.ring+0.3]]].forEach(([id,i,sp])=>gv_behind(x,id,M.seats[i],M.top,M.s,{pose:"listen",pose2:"explain",mix:sp?gv_io(tt,sp[0],sp[1],0.5):0,t:tt+i*0.5,flip:false}));
       x.drawImage(gv_place("meetingTable"),0,0,W,H);}},
     // the keepers of the other glossaries: Clara and her definitions, Anil and his descriptions
-    {at:P.lose,place:"planning",keys:[[P.lose,900,430,1.15],[P.lose+0.1,850,450,1.22]],d:2.6,draw:(x,tt)=>{ow_planDefs(x);person(x,"clara",380,905,0.8,{pose:"listen",expr:"concerned",t:tt,flip:true});}},
-    {at:P.anil,place:"faculty",keys:[[P.anil,880,465,1.6]],d:2,draw:(x,tt)=>{gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"stand",expr:"concerned",t:tt,flip:true});x.drawImage(gv_place("facultyDesk"),0,0,W,H);ow_anilDefs(x);}},
+    {cut:true,at:P.lose,place:"planning",keys:[[P.lose,900,430,1.15],[P.lose+0.1,850,450,1.22]],d:2.6,draw:(x,tt)=>{ow_planDefs(x);person(x,"clara",380,905,0.8,{pose:"listen",expr:"concerned",t:tt,flip:true});}},
+    {cut:true,at:P.anil,place:"faculty",keys:[[P.anil,880,465,1.6]],d:2,draw:(x,tt)=>{gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"stand",expr:"concerned",t:tt,flip:true});x.drawImage(gv_place("facultyDesk"),0,0,W,H);ow_anilDefs(x);}},
     // thanked: Yusuf at Planning's door with a card
     {at:P.thanks,place:"floor",keys:[[P.thanks,711,560,1.35]],d:2,draw:(x,tt)=>{ow_floor(x,tt,{out:["yusuf"],pose:{clara:{pose:"stand",expr:fin(tt,P.thanks+0.8,0.5)>0.5?"smile":"calm",flip:true}}});
       person(x,"yusuf",170,GV_FL.walk,0.62,{pose:"hold",carry:ow_heldThanks,t:tt});}},
@@ -3770,9 +3792,13 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({tick:wAt(sc,"
       gv_halo(x,OW_BD.x-40,OW_BD.y-40,OW_BD.w+80,OW_BD.h+80,GV.gold,0.55*fin(tt,P.used+0.3,0.6));}},
     {at:P.gain,place:"floor",keys:[[P.gain,960,540,1.0]],d:2,push:0.02,draw:(x,tt)=>floor(x,tt,true)}]);
   ow_pill(ctx,t,[[0,"Liye · 2002"]],gv_io(t,P.used+0.2,P.gain-0.1,0.35));
-  const a=fin(t,P.end+0.6,0.9);if(a>0){gv_end(ctx,S,t,P.end,"One word, one home","Keep one, and sync every tool from it.","Film 3 of 10");setScreen(ctx,S);
-    withA(ctx,a,()=>wc_T(ctx,"Many glossaries are no glossary.",960,352,{w:700,size:48,align:"center",col:WC_DARK}));}
+  // the end card fades in from P.end (called only once the line comes, its veil started at two thirds, in one frame)
+  const a=fin(t,P.end+0.6,0.9);gv_end(ctx,S,t,P.end,"One word, one home","Keep one, and sync every tool from it.","Film 3 of 10");setScreen(ctx,S);
+  if(a>0)withA(ctx,a,()=>wc_T(ctx,"Many glossaries are no glossary.",960,352,{w:700,size:48,align:"center",col:WC_DARK}));
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["five", "none", "trust", "read"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

@@ -5,9 +5,10 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const ml_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default): the river into today takes longer
+// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default): the river into today takes longer; a shot
+// marked cut comes in on a cut
 function ml_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
+  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else ag_shot(ctx,S,t,shots[i],till(i));return i;}
@@ -48,16 +49,16 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ml_crowd(x,tt,{turn:ag_in(tt,P.prog+1,1.2)*0.6});
       const p=ml_pop(tt,P.prog+0.1,null);ag_textCard(x,140,170,520,{kick:"Programme · last to fly",title:"Lawrence Sperry",sub:"with Emil Cachin"},{k:p.k,a:p.a});}},
     // closer: the two of them side by side in the cockpit, Sperry at the wheel and Cachin beside him on the right, their names
-    {at:P.close,place:null,keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:P.close,place:null,keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.012*Math.sin(tt*0.9),turn:0.04*Math.sin(tt*1.1)});
       const p1=ml_pop(tt,P.young,null),p2=ml_pop(tt,P.cachin,null);
       ag_textCard(x,200,236,380,{title:"Lawrence Sperry",sub:"pilot, 21"},{tail:{side:"right",at:0.6,px:700,py:372},k:p1.k,a:p1.a});
       ag_textCard(x,1380,110,340,{title:"Emil Cachin",sub:"mechanic"},{tail:{side:"bottom",at:0.3,px:1466,py:280},k:p2.k,a:p2.a});}},
     // flying by hand, closer on Sperry: each gust tips a wing, and his arms bring it back; his back aches
-    {at:P.pit,place:null,keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
+    {cut:true,at:P.pit,place:null,keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:roll(tt),turn:turn(tt)+0.06*Math.sin(tt*1.3),gust:gustA(tt),lift:ach,nod:-0.03*ach});}},
     // the danger, drawn as a diagram: the aeroplane tipped, sliding sideways and down; the path fades before the water
-    {at:P.slip,place:null,keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
+    {cut:true,at:P.slip,place:null,keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
       const a=ag_in(tt,P.slip+0.1,0.5);ag_box(x,360,170,1200,620,26,{a});ml_slip(x,360,170,1200,620,ag_in(tt,P.slide-0.2,P.fall-P.slide+0.8),{t:tt,a,roll:0.36*ag_in(tt,P.slip+0.3,1.2)});}},
     // Sperry's answer: his box, cut open, on a card; four gyroscopes spinning, their axes upright as it tips; a valve, a piston, the wing's edge
     {at:P.box,place:"mlSeine",keys:[[P.box,960,540,1.02],[P.box+0.1,960,500,1.06]],d:10,push:0.01,draw:(x,tt)=>{ml_veil(x,0.6);ag_box(x,190,150,1540,640,26,{a:ag_in(tt,P.box,0.4)});
@@ -65,7 +66,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ag_T(x,"4 gyroscopes",666,734,{w:700,size:30,align:"center",a:ag_in(tt,P.four,0.4)});
       ag_T(x,"level",b.level[0]+150,b.level[1]+10,{w:700,size:30,col:AG.green,a:ag_in(tt,P.lev+0.4,0.4)});}},
     // over the river: the flying boat passes the grandstand, and heads in the crowd turn to follow it
-    {at:P.pass,place:"mlSeine",keys:[[P.pass,860,560,1.12],[P.pass+0.1,900,560,1.16]],d:3,push:0.01,draw:(x,tt)=>{const bx=lerp(700,1060,clamp((tt-P.pass)/3,0,1));
+    {cut:true,at:P.pass,place:"mlSeine",keys:[[P.pass,860,560,1.12],[P.pass+0.1,900,560,1.16]],d:3,push:0.01,draw:(x,tt)=>{const bx=lerp(700,1060,clamp((tt-P.pass)/3,0,1));
       ml_boat(x,bx,540,0.95,{t:tt,shadow:600,who:[{who:{skin:[232,198,170],top:{c:[70,62,56]},cap:[104,72,48],goggles:true}},{who:{skin:[220,182,150],top:{c:[104,100,96]},cap:[84,82,80]}}]});
       ml_crowd(x,tt,{turn:-0.6+1.3*ag_in(tt,P.pass+0.2,2.4)});}},
     // in the cockpit, Sperry lets go of the wheel and raises his hands, open; the wheel holds still; Cachin looks up at them
@@ -356,9 +357,9 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(s
     // Jun's room: next March's calendar; the evidence lines up into a recipe, with its test; Noor approves it; it runs each census day; the agent rests
     {at:0,place:"lab",keys:[[0,980,530,1.02],[0.1,990,530,1.03]],d:P.web,push:0.01,draw:(x,tt)=>ml_recipeRoom(x,tt,P)},
     // once: an agent whose plan named no tools took the long way, out to the web, though Docs had the rules; now each plan names them
-    {at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
+    {cut:true,at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
     // two columns on the wall: a plain script for the steps that are known, an agent for the steps nobody can write in advance
-    {at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
+    {cut:true,at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
       aL:ag_in(tt,P.known-0.3,0.6),rm:ag_sine(ag_in(tt,P.plainS-0.7,0.9)),rl:ag_in(tt,P.plainS,0.4),aR:ag_in(tt,P.keep-0.4,0.6),am:ag_sine(ag_in(tt,P.agents-0.3,1.1)),
       al:ag_in(tt,P.agents+0.6,0.4)})}]);
   ml_kick(ctx,t,[[0,"Today"],[P.web-0.2,"Once"],[P.names-0.1,"Today"]],1);});
@@ -465,3 +466,6 @@ function ml_recap(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,W=500;
   if(fl>0&&wa<1){x.save();x.globalAlpha*=out;x.translate(F.x,F.y);x.scale(F.s,F.s);ag_box(x,-W/2,-h/2,W,h,22,{a:(1-wa)*ag_in(tt,P.brought,0.2)});x.restore();}
   x.save();x.translate(F.x-(A.x+W/2),F.y-(A.y+h/2));ag_evidence(x,A.x,A.y,W,ML_ANSW,ML_EV,{a:wa*out});x.restore();
   const ap=ml_pop(tt,P.evid,null);ml_approve(x,A.x,A.y+h+22,W,"Jun",clamp((tt-P.decide+0.1)/0.6,0,1),{k:ap.k,a:ap.a*out});}
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+ag_cutInto(["question", "hands", "loop", "answer"]);

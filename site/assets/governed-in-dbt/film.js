@@ -1817,6 +1817,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1906,12 +1921,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3293,7 +3315,7 @@ scene("pins",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({p:[wAt(sc,"pi
       gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,oe+200,ow,"Who decides",fin(tt,P.owner+0.6,0.5));
       gd_flyPin(x,[960,-60],[te,tm],clamp((tt-P.term+0.2)/0.9,0,1),"a term");gu_filmTag(x,te+170,tm,"One word, one home",fin(tt,P.term+0.6,0.5));}},
     // three of its columns, each saying whether it identifies a person, its class beside it, and the film that set the classes
-    {at:P.cols,place:"desk",keys:[[P.cols,960,520,1]],push:0.02,draw:(x,tt)=>{const R=gd_columns(x,tt,clamp((tt-P.cols)/0.8,0,1),[0,1,2].map(k=>fin(tt,P.ident-0.2+0.25*k,0.5)),
+    {cut:true,at:P.cols,place:"desk",keys:[[P.cols,960,520,1]],push:0.02,draw:(x,tt)=>{const R=gd_columns(x,tt,clamp((tt-P.cols)/0.8,0,1),[0,1,2].map(k=>fin(tt,P.ident-0.2+0.25*k,0.5)),
         [0,1,2].map(k=>P.ident+0.2+0.25*k));if(!R)return;const cx=R.tx+gu_mw(x,GD_COLS[1].s)+30+tw(x,"pseudonymous",28,700)+64;
       gd_flyPin(x,[960,-60],[cx,R.rows[1]],clamp((tt-P.ident+0.1)/0.9,0,1),"a class");gu_filmTag(x,1760,690,"Who may see it",fin(tt,P.ident+0.7,0.5),{align:"right"});}},
     // the tests: who owns each, in dbt_project.yml, and the dimension each kind names where it's defined
@@ -3347,7 +3369,7 @@ scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touch
     // Jun's pull request: its description, written by the impact check
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gd_prHead(x,{});gd_report(x,tt,GD_R0,GD_R0.map((_,i)=>P.tch+0.3+0.15*i),{h:330});}},
     // Tuesday: the first draft's change, in the files
-    {at:P.tue,place:"big",keys:[[P.tue,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,1);gd_relabel(x,fin(tt,P.six,0.5));}},
+    {cut:true,at:P.tue,place:"big",keys:[[P.tue,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,1);gd_relabel(x,fin(tt,P.six,0.5));}},
     // its description: the report fills in, five who use it and four owners to ask; Mei's stamp beside it
     {at:P.rep,place:"big",keys:[[P.rep,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,1);
       // the check writes its report as it's said; then the five who use it light in turn, and the four owners to ask
@@ -3423,10 +3445,10 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({rev:wAt(sc,"
     // Anil's first pull request: the agent's comment, its three findings
     {at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:0,f:[fin(tt,P.owner,0.4),fin(tt,P.ten,0.4),fin(tt,P.rule,0.4)]})},
     // the classes it drafted, with counts, never values; and who decides each finding
-    {at:P.dr,place:"big",keys:[[P.dr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:1,rows:[0,1,2].map(k=>fin(tt,P.drS+0.1+0.35*k,0.4)),
+    {cut:true,at:P.dr,place:"big",keys:[[P.dr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:1,rows:[0,1,2].map(k=>fin(tt,P.drS+0.1+0.35*k,0.4)),
       who:[0,1,2].map(k=>fin(tt,P.who+0.25*k,0.4))})},
     // the approvals: the agent's comment, with no tick; each person's yes
-    {at:P.nv,place:"big",keys:[[P.nv,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:2,ag:fin(tt,P.nv+0.1,0.5),
+    {cut:true,at:P.nv,place:"big",keys:[[P.nv,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:2,ag:fin(tt,P.nv+0.1,0.5),
       yes:[0,1,2].map(k=>clamp((tt-P.ppl-0.1-0.35*k)/0.8,0,1))})}],sc.dur,1));});
 
 // ---- 9 · Carried with the code: Jun's table goes in; the project as a home on Noor's map; his line, changed; the pins and their lines;
@@ -3450,6 +3472,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({yes:wAt(sc,"
     // the board: the next film's card lifts
     {at:P.board,place:"board",keys:[[P.board,960,470,1]],push:0.02,draw:(x,tt)=>{if(tt<P.end+0.8)gu_board(x,{lit:[1],lift:[0,fin(tt,P.board+0.5,1.0)]});}}],sc.dur));
   gv_end(ctx,S,t,P.end,"Governed in dbt","The project carries governance with the code.","Film 1 of 6");});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["access", "contract", "close"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

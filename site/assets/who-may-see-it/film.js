@@ -1824,6 +1824,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1913,12 +1928,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3338,7 +3360,7 @@ scene("counted",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     // the same law lets the town hall add the answers, by name, to its records on each resident: the form beside a card from the register,
     // the names linked. With computers, answers like these add up to a picture of a person, and nobody knows who will see it: the answers
     // lift off and come together round the outline of a person, and question marks come up round it
-    {at:P.tb,place:"table83",keys:[[P.tb,1060,540,1],[P.tb+0.1,1090,520,1.06],[P.slip-0.8,960,520,1.02]],d:3,draw:(x,tt)=>{ws_form(x,900,520,440,600,{rot:-0.03,ticks:true});ws_regCard(x,1400,400,360,220,0.04);
+    {cut:true,at:P.tb,place:"table83",keys:[[P.tb,1060,540,1],[P.tb+0.1,1090,520,1.06],[P.slip-0.8,960,520,1.02]],d:3,draw:(x,tt)=>{ws_form(x,900,520,440,600,{rot:-0.03,ticks:true});ws_regCard(x,1400,400,360,220,0.04);
       wc_link(x,970,262,1320,314,WC_PENCIL,{p:fin(tt,P.link-0.1,0.8),lw:4,a:0.85});ws_tagAt(x,tt,P.tb+0.4,null,900,170,"census form");
       ws_tagAt(x,tt,P.reg-0.1,null,1400,236,"register of residents");
       ws_slipsMove(x,clamp((tt-P.slip)/1.3,0,1),clamp((tt-P.ring)/0.7,0,1));WS_QMS.forEach(([qx,qy],i)=>gv_qmark(x,qx,qy,56,fin(tt,P.who+0.3*i,0.6)));}},
@@ -3458,7 +3480,7 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
         withA(x,ca,()=>ws_calendar(x,O.cal[0],O.cal[1],WS_MONTHS[i],WS_MONTHS[i+1],i>=WS_MONTHS.length-2?0:fl));}
       ws_printout(x,O.print[0],O.print[1],(tt-P.whole+0.2)/1.4,1);ws_keyTag(x,O.key[0],O.key[1]+(1-easeCam(fin(tt,P.grant,0.6)))*-60,O.key[2],"Clara Jensen",fin(tt,P.grant,0.5));}},
     // the platform team's desk: Sam checks who can read the learner table today, and shows Yusuf, standing behind him
-    {at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1040,520,1.06]],d:2.6,draw:(x,tt)=>{
+    {cut:true,at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1040,520,1.06]],d:2.6,draw:(x,tt)=>{
       gv_behind(x,"yusuf",1790,GV_PX.top,1.55,{standing:true,pose:"listen",t:tt,flip:true});ws_sam(x,tt,{pose:"write"});x.drawImage(gv_place("platformDesk"),0,0,W,H);
       const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"who can read",null,{barH:44,titleSize:28});gv_lines(x,sx+30,sy+90,sw-120,6,34,0.8);
       const [rx,ry,rw,rh]=GV_PX.screens[1];gv_screen(x,rx,ry,rw,rh,"learner table",null,{barH:44,titleSize:28});ws_gridRows(x,rx+30,ry+84,rw-60,6);
@@ -3490,7 +3512,7 @@ scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       ws_regScreen(x,"learner table");ws_nameCard(x,830,560,"Mei Tanaka","registrar's office",gv_io(tt,0.5,P.top-0.3,0.4));}},
     // the register on her desk, from above: its cover opens on the learner table's page; each column's class lands as it's said, and she
     // initials the page. Then a change comes back to her on the series' sign-off sheet: its class empty, with a question
-    {at:P.top,place:"regTop",keys:[[P.top,960,540,1],[P.open,960,520,1.12]],d:1.6,draw:(x,tt)=>{const [hi,hiA]=ws_chipHi(tt,P.chip),fp=fin(tt,P.init,1.4),open=fin(tt,P.open,1.4);
+    {cut:true,at:P.top,place:"regTop",keys:[[P.top,960,540,1],[P.open,960,520,1.12]],d:1.6,draw:(x,tt)=>{const [hi,hiA]=ws_chipHi(tt,P.chip),fp=fin(tt,P.init,1.4),open=fin(tt,P.open,1.4);
       // the page is drawn once the cover starts to open, and its words give way as the sheet comes over it (the paper under them stays)
       if(open>0){const g=fin(tt,P.every,0.5);if(g>0)gv_sheet(x,WS_RG.x,WS_RG.y,WS_RG.w,WS_RG.h);withA(x,1-0.65*g,()=>{
         const r=ws_regPage(x,"learner table",WS_RGL,{chips:i=>fin(tt,P.chip[i],0.5),hi,hiA,foot:"classed by Mei Tanaka",footP:fp});
@@ -3499,7 +3521,7 @@ scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       const [px,py]=ws_penAt(x,"classed by Mei Tanaka",WS_RG.x+56,WS_RG.y+GV_REG.head+22+GV_REG.row*WS_RGL.length+64,32,fp);ws_pen(x,px,py,gv_io(tt,P.init-0.4,P.init+1.6,0.3));
       const u=fin(tt,P.every,0.9);if(u>0)ws_sheet(x,lerp(1980,480,easeCam(u)),226,{p:fin(tt,P.every+0.4,1.2),missA:fin(tt,P.no,0.4),sent:fin(tt,P.goes,0.4),askP:fin(tt,P.ask,1.2)});}},
     // Mei at her desk, the sheet in her hands
-    {at:P.held,place:"registrar",keys:[[P.held,940,520,1.06],[P.held+0.1,880,520,1.12]],d:2.4,draw:(x,tt)=>{
+    {cut:true,at:P.held,place:"registrar",keys:[[P.held,940,520,1.06],[P.held+0.1,880,520,1.12]],d:2.4,draw:(x,tt)=>{
       ws_mei(x,tt,{pose:"hold",expr:tt>P.held+1.2?"concerned":"calm",carry:ws_heldSheet});x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regFlat(x,...WS_RGF);ws_regScreen(x,"learner table");}},
     // on her desk: the sheet, and a card of three credentials and their codes. Most are only codes; an award's holds the student number;
     // a pencil ring round it. She classes it direct, signs, and it's stamped
@@ -3510,7 +3532,7 @@ scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       const [px,py]=ws_penAt(x,"Mei Tanaka",r.sign[0],r.sign[1],38,sp);ws_pen(x,px,py,gv_io(tt,P.classed+0.15,P.classed+1.2,0.25));}},
     // the register again, open at the credentials table's page: the code and its class; and under its row, the court's line, drawn in
     // pencil across the page as 1983's was drawn across the form
-    {at:P.page,place:"regTop",keys:[[P.page,960,520,1.12],[P.page+0.1,940,540,1.2]],d:2,draw:(x,tt)=>{ws_regLeft(x,true);
+    {cut:true,at:P.page,place:"regTop",keys:[[P.page,960,520,1.12],[P.page+0.1,940,540,1.2]],d:2,draw:(x,tt)=>{ws_regLeft(x,true);
       const r=ws_regPage(x,"credentials table",WS_RGCR,{chips:i=>i===2?fin(tt,P.page+0.3,0.5):1,foot:"classed by Mei Tanaka"});
       const ly=r.rows[2]+GV_REG.row/2+12,x0=WS_RG.x+30,x1=WS_RG.x+970,lp=fin(tt,P.line,1.0);ws_line(x,[x0,ly],[x1,ly],lp,5);ws_pencil(x,lerp(x0,x1,lp),ly,gv_io(tt,P.line-0.3,P.line+1.3,0.3));}}]);
   wc_paperOver(ctx,S);});
@@ -3536,19 +3558,19 @@ scene("mask",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
       ws_label(x,lerp(x0,x0+170,a1)+(2160-x0-170)*b,lerp(y0,y0-6,a1)-90*b,{a:clamp(u*5,0,1),rot:-0.03*a1+0.06*b,k:lerp(1,1.1,a1)});}},
     // the data team's board: the label comes in from the left and ties on to the learner table's email; it runs along the string to the
     // wallet, built from it, and ties on there too
-    {at:P.board,place:"boardData",keys:[[P.board,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{ws_board(x,{lt:fin(tt,P.tie,1.0),wal:fin(tt,P.every+0.9,1.0)});
+    {cut:true,at:P.board,place:"boardData",keys:[[P.board,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{ws_board(x,{lt:fin(tt,P.tie,1.0),wal:fin(tt,P.every+0.9,1.0)});
       const u=clamp((tt-P.tie+1.6)/1.6,0,1);if(u>0&&u<1){const [hx,hy]=ws_bdTie(x,B.lt,1),e=easeCam(u);ws_label(x,lerp(-180,hx,e),lerp(hy-240,hy,e)-70*Math.sin(Math.PI*e),{rot:0.25*(1-e)});}
       ws_bead(x,ws_bdAnchor(B.lt,1),ws_bdAnchor(B.wal,-1),(tt-P.every)/0.9,WS_DIRECT,11);}},
     // the platform team's desk: Sam pins the one rule up over it, and its band of stars slides in. He's mirrored, so the arm that goes up
     // and comes down swings over the screens, not out of the frame
-    {at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1010,520,1.05]],d:2.4,draw:(x,tt)=>{const u=fin(tt,P.one-0.3,0.3);
+    {cut:true,at:P.plat,place:"platform",keys:[[P.plat,1000,540,1],[P.plat+0.1,1010,520,1.05]],d:2.4,draw:(x,tt)=>{const u=fin(tt,P.one-0.3,0.3);
       if(u>0){x.save();const k=lerp(0.96,1,u),{x:rx,y:ry,w:rw,h:rh}=WS_RC;x.translate(rx+rw/2,ry+rh/2);x.scale(k,k);x.translate(-rx-rw/2,-ry-rh/2);ws_ruleCard(x,fin(tt,P.stars,0.8),u);x.restore();}
       ws_sam(x,tt,{pose:"listen",pose2:"ws_pinUp",mix:gv_io(tt,P.one-0.7,P.one+0.9,0.45),flip:true});x.drawImage(gv_place("platformDesk"),0,0,W,H);
       const [sx,sy,sw,sh]=GV_PX.screens[0];gv_screen(x,sx,sy,sw,sh,"learner table",null,{barH:44,titleSize:28});ws_gridRows(x,sx+30,sy+84,sw-60,6);
       const [rx,ry,rw,rh]=GV_PX.screens[1];gv_screen(x,rx,ry,rw,rh,"wallet",null,{barH:44,titleSize:28});ws_gridRows(x,rx+30,ry+84,rw-60,6);}},
     // the board again: the masks slide over both labelled emails at once. A card built tomorrow: its string, the label along it, its
     // email masked. The near-award list had no email, and nothing to mask
-    {at:P.board2,place:"boardData",keys:[[P.board2,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{const m=fin(tt,P.by,0.8);
+    {cut:true,at:P.board2,place:"boardData",keys:[[P.board2,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{const m=fin(tt,P.by,0.8);
       ws_board(x,{lt:1,wal:1,ltM:m,walM:m,near:fin(tt,P.near,0.6),tom:{a:fin(tt,P.tom,0.5),str:clamp((tt-P.tom-0.2)/0.6,0,1),label:fin(tt,P.tom+1.3,1.0),mask:fin(tt,P.tom+1.6,0.8)}});
       ws_bead(x,ws_bdAnchor(B.lt,1),ws_bdAnchor(B.tom,-1),(tt-P.tom-0.4)/0.9,WS_DIRECT,11);}}]);
   wc_paperOver(ctx,S);});
@@ -3564,7 +3586,7 @@ scene("purpose",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
     {at:0,place:"registrar",keys:[[0,960,540,1],[0.1,980,520,1.06]],d:3,draw:(x,tt)=>{const h=fin(tt,P.req-0.3,0.6);
       ws_mei(x,tt,{pose:"listen",pose2:"hold",mix:h,carry:h>0.5?ws_heldReq:null});x.drawImage(gv_place("registrarDesk"),0,0,W,H);ws_regFlat(x,...WS_RGF);ws_regScreen(x,"learner table");}},
     // on her desk, the request close: her yes, for her office; what for, and until when
-    {at:P.form,place:"regTop",keys:[[P.form,960,540,1],[P.form+0.1,960,560,1.04]],d:2.4,draw:(x,tt)=>{const X=460,Y=170,ok=fin(tt,P.yes,1.6);
+    {cut:true,at:P.form,place:"regTop",keys:[[P.form,960,540,1],[P.form+0.1,960,560,1.04]],d:2.4,draw:(x,tt)=>{const X=460,Y=170,ok=fin(tt,P.yes,1.6);
       ws_reqPaper(x,X,Y,{ok,hi:i=>i===1?gv_io(tt,P.pl-0.1,P.until-0.1,0.3):i===2?gv_io(tt,P.until-0.1,P.fl+0.5,0.3):0});
       const [px,py]=ws_penAt(x,"Mei Tanaka",X+144,Y+648,38,clamp(ok*2-1,0,1));ws_pen(x,px,py,gv_io(tt,P.yes+0.6,P.yes+1.75,0.25),0.25);}},
     // the floor: the access goes to Planning's group, not to Clara by name, and ends on its date by itself
@@ -3572,17 +3594,17 @@ scene("purpose",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id
       const u=fin(tt,P.grp-0.2,1.0),e=easeCam(u),from=[F.x(1)+F.w/2,F.top+300];if(u<=0)return;
       ws_accessCard(x,lerp(from[0],cardTo[0],e),lerp(from[1],cardTo[1],e)-90*Math.sin(Math.PI*e),{rot:lerp(0.08,-0.03,e),pin:u>=1,glow:fin(tt,P.ends,0.6)});}},
     // Clara's screen: the code and status as they are, student numbers, names and emails as stars
-    {at:P.scr,place:"screenPlan",keys:[[P.scr,960,440,1.04],[P.scr+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>ws_maskTable(x,{rows:6,hi:gv_io(tt,P.code-0.2,P.stars,0.3),pulse:gv_io(tt,P.stars,P.desk,0.4)})},
+    {cut:true,at:P.scr,place:"screenPlan",keys:[[P.scr,960,440,1.04],[P.scr+0.1,960,430,1.07]],d:4,push:0.01,draw:(x,tt)=>ws_maskTable(x,{rows:6,hi:gv_io(tt,P.code-0.2,P.stars,0.3),pulse:gv_io(tt,P.stars,P.desk,0.4)})},
     // his desk: a learner code on a slip names no one, close; the camera draws back as the registrar's list comes in beside it and leads
     // back to a person. So a code is still personal data, and comes with a purpose and an end date
-    {at:P.desk,place:"desk",keys:[[P.desk,565,400,1.7],[P.list-0.6,980,520,1.04]],d:1.6,draw:(x,tt)=>{const lk=fin(tt,P.leads,0.8),u=fin(tt,P.list-0.2,0.8);
+    {cut:true,at:P.desk,place:"desk",keys:[[P.desk,565,400,1.7],[P.list-0.6,980,520,1.04]],d:1.6,draw:(x,tt)=>{const lk=fin(tt,P.leads,0.8),u=fin(tt,P.list-0.2,0.8);
       wc_T(x,"learner code",360,300,{w:600,size:30,align:"center",col:WC_MUTED});ws_slip(x,360,370,"0905e6e2…",{size:40,glow:gv_io(tt,P.leads+0.6,P.agent,0.3)});
       if(u>0){x.save();x.translate((1-easeCam(u))*1300,0);ws_regList(x,700,260,{hi:fin(tt,P.leads+0.6,0.5)});x.restore();}
       if(lk>0)wc_link(x,514,370,728,ws_rlRow(260,2)-12,WC_PENCIL,{p:lk,lw:4,a:0.85*(1-fin(tt,P.agent-0.4,0.4))});
       ws_tagAt(x,tt,P.still,P.agent,960,800,"pseudonymous: still personal data",{size:30,wash:WS_PSEUDO,washA:0.4});
       ws_accessCard(x,1690,172,{rot:0.03,a:fin(tt,P.still+0.4,0.5),glow:fin(tt,P.end,0.6)});}},
     // the data team's screen: their agent reads stars too, and works from counts and samples
-    {at:P.agent,place:"screen",keys:[[P.agent,960,440,1.04],[P.agent+0.1,960,450,1.07]],d:4,push:0.01,draw:(x,tt)=>{ws_maskTable(x,{title:"learner table, as the agent reads it"});
+    {cut:true,at:P.agent,place:"screen",keys:[[P.agent,960,440,1.04],[P.agent+0.1,960,450,1.07]],d:4,push:0.01,draw:(x,tt)=>{ws_maskTable(x,{title:"learner table, as the agent reads it"});
       const [X,Y]=GV_SC;ws_agentCard(x,X+50,Y+556,fin(tt,P.ag,0.5));}}]);
   wc_paperOver(ctx,S);});
 
@@ -3598,7 +3620,7 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s
       ws_say(x,tt,P.yb,P.more-0.2,1236,128,["Planning counts learners.","It doesn't need to know who they are."],1320,466,{size:28});
       const n=fin(tt,P.more,0.45);if(n>0.01){x.save();x.translate(0,14*(1-n));withA(x,n,()=>gv_card(x,1236,124,560,196,["Need names?","Ask the registrar's office,","and say what for."],{size:30,wash:GV.gold,washA:0.18,pin:true}));x.restore();}}},
     // the floor: a no without a way forward, and the table copied into spreadsheets, office after office
-    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1],[P.fl+0.1,960,530,1.02]],d:4,push:0.01,draw:(x,tt)=>{ws_floor(x,tt,{under:x=>{
+    {cut:true,at:P.fl,place:"floor",keys:[[P.fl,960,540,1],[P.fl+0.1,960,530,1.02]],d:4,push:0.01,draw:(x,tt)=>{ws_floor(x,tt,{under:x=>{
       [[0,0.0],[3,0.35],[4,0.6],[1,0.85],[0,1.1],[3,1.3],[4,1.5],[1,1.7]].forEach(([r,dt],k)=>{const u=fin(tt,P.copied-0.2+dt,0.35)*(1-fin(tt,sc.dur-1.4,0.8));if(u<=0.01)return;
         const F=GV_FL,cx=F.x(r)+70+((k*97)%190),cy=F.top+190+((k*53)%160);x.save();x.translate(cx,cy);x.rotate(((k*37)%11-5)*0.012);x.scale(0.8+0.2*spring(u),0.8+0.2*spring(u));
         withA(x,u,()=>x.drawImage(ws_copyC(),-85,-105));x.restore();});}});}}]);
@@ -3647,6 +3669,9 @@ scene("grants",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
   wc_year(ctx,56,72,"December 2026",fin(t,0.3,0.5)*(1-fin(t,P.rev,0.4)));wc_year(ctx,56,72,"West Germany · 1987",gv_io(t,P.tb,P.morph,0.4));
   gv_end(ctx,S,t,P.end,"Who may see it","Classify once; protect it everywhere.","Film 4 of 10");
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["census", "column", "mask", "purpose", "stars", "grants"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

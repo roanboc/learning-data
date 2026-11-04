@@ -1815,6 +1815,21 @@ person=function(ctx,id,x,y,s,o){o=o||{};const P_=PEOPLE[id],po=blendPose(POSE[o.
     if(front(po.L))arm(cx,P_,-1,po.L,br,po);if(front(po.R))arm(cx,P_,1,po.R,br,po);
     if(o.carry&&!o.carryBehind){if(o.flip)cx.scale(-1,1);o.carry(cx,P_,o.flip?hands().map(h=>[-h[0],h[1]]):hands());if(o.flip)cx.scale(-1,1);}},
     x,y,k,P_.edge,[o.wide?-400:-250,P_.hat?-720:-650,o.wide?400:250,10],o.glow);};
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// layers that make them (the wash behind, the pencil line under the paint, four copies a little off, then the paint) each fade on
+// their own, so the line and the wash show through the paint and the figure looks like a dark ghost of itself. Only the part of the
+// frame they're drawn in is used (GV_FADE, the size of the canvas, kept)
+let GV_FADE=null;
+const gv_personWhole=person;
+person=function(ctx,id,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||WC_RAW||ctx.globalCompositeOperation!=="source-over")return gv_personWhole.apply(this,arguments);
+  const P_=PEOPLE[id],k=s*P_.build.h,wd=o&&o.wide?440:290,m=ctx.getTransform(),cw=ctx.canvas.width,ch=ctx.canvas.height;let L=1e9,R=-1e9,T0=1e9,B=-1e9;
+  for(const [fx,fy] of [[-wd,P_.hat?-780:-710],[wd,P_.hat?-780:-710],[-wd,60],[wd,60]]){const px=x+fx*k+Math.sign(fx)*60,py=y+fy*k+Math.sign(fy)*60;
+    const X=m.a*px+m.c*py+m.e,Y=m.b*px+m.d*py+m.f;L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return gv_personWhole.apply(this,arguments);
+  if(!GV_FADE||GV_FADE.width!==cw||GV_FADE.height!==ch)GV_FADE=mkCanvas(cw,ch);const bx=GV_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);gv_personWhole.call(this,bx,id,x,y,s,o);bx.restore();
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(GV_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();};
 // expressions in between: a little relief, a little worry
 EXPR.worried={bi:-5,bo:3,arch:-0.5,knit:2.5,eye:0.95,smile:-0.6,open:0,mw:13};
 EXPR.smile={bi:-1,bo:-2,arch:-3.5,eye:0.9,smile:0.8,open:0,mw:22};
@@ -1904,12 +1919,19 @@ function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=k
 // one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
 function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
   const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0?clamp((t-shots[i].at)/dis,0,1):1,
+// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
+// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
+// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
     till=k=>shots[k+1]?shots[k+1].at:end;
   if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
   else gv_shot(ctx,S,t,shots[i],till(i));return i;}
+// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
+// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
+// film calls it after its last scene()
+function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -4098,15 +4120,15 @@ scene("bazaar",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,
       po_tagAt(x,tt,P.guild,null,330,300,"the cap makers' guild",{size:30});po_tagAt(x,tt,P.rules,null,330,372,"rules for what a cap must be",{size:30});
       po_tagAt(x,tt,P.off,null,730,520,"the guild's officer",{size:30});}},
     // the next stall, a cloth seller's: the market inspector stops with his two men
-    {at:P.mkt,place:"st1600",keys:[[P.mkt,640,560,1.62],[P.mkt+0.1,660,550,1.7]],d:2.4,draw:(x,tt)=>{po_master(x,tt,{expr:"calm"});po_inspectors(x,tt,P.mkt);
+    {cut:true,at:P.mkt,place:"st1600",keys:[[P.mkt,640,560,1.62],[P.mkt+0.1,660,550,1.7]],d:2.4,draw:(x,tt)=>{po_master(x,tt,{expr:"calm"});po_inspectors(x,tt,P.mkt);
       po_tagAt(x,tt,P.insp,null,768,452,"the market inspector",{size:28});}},
     // at the counter: the rod goes along the cloth; it ends a hand short; the seller answers for it
-    {at:P.cc,place:"clothClose",keys:[[P.cc,960,540,1.0],[P.cc+0.1,1000,560,1.06]],d:3,draw:(x,tt)=>po_counter(x,tt,P,{steps:[P.cc+0.2,P.cc+1.2],mark:P.sold,bow:P.answers})},
+    {cut:true,at:P.cc,place:"clothClose",keys:[[P.cc,960,540,1.0],[P.cc+0.1,1000,560,1.06]],d:3,draw:(x,tt)=>po_counter(x,tt,P,{steps:[P.cc+0.2,P.cc+1.2],mark:P.sold,bow:P.answers})},
     // a woman comes up the cap makers' street to the master's stall: where to find it, what it will be, who stands behind it
     {at:P.buyer,place:"st1600",keys:[[P.buyer,780,560,1.12],[P.buyer+0.1,740,560,1.2]],d:3,draw:(x,tt)=>{const w=po_stroll(PO_STR,tt,P.buyer+0.1,0.3,11.5,-2.0,6.3,1.3);
       po_master(x,tt,{pose:w.moving?"listen":"po_offer",expr:w.moving?"calm":"smile"});po_walker(x,"po_woman",w,{t:tt,flip:w.moving?w.flip:true});po_knows(x,tt,[P.find,P.what,P.who],null);}},
     // the next day: she comes back with a friend
-    {at:P.back,place:"st1600",keys:[[P.back,740,560,1.2],[P.back+0.1,730,560,1.22]],d:2.4,draw:(x,tt)=>{const a=po_stroll(PO_STR,tt,P.back-0.3,0.4,8.6,-1.8,6.4,1.15),b=po_stroll(PO_STR,tt,P.back,1.1,9.2,-1.0,7.0,1.15);
+    {cut:true,at:P.back,place:"st1600",keys:[[P.back,740,560,1.2],[P.back+0.1,730,560,1.22]],d:2.4,draw:(x,tt)=>{const a=po_stroll(PO_STR,tt,P.back-0.3,0.4,8.6,-1.8,6.4,1.15),b=po_stroll(PO_STR,tt,P.back,1.1,9.2,-1.0,7.0,1.15);
       po_master(x,tt,{pose:"po_offer",expr:"smile"});[[b,"po_friend"],[a,"po_woman"]].forEach(([w,id])=>po_walker(x,id,w,{t:tt,flip:w.moving?w.flip:true,expr:"smile"}));
       po_knows(x,tt,[P.back-1,P.back-1,P.back-1],null);po_light(x,"next",fin(tt,P.back,0.6));}},
     // data has the same problem, and the same answer
@@ -4160,12 +4182,12 @@ scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
       person(x,"clara",po_rndX(R.plan),905,0.8,{pose:"listen",pose2:"point",mix:p,t:tt});
       gv_say(x,po_rndX(R.plan)-122,328,["Jun builds it"],po_rndX(R.plan)+8,466,{a:fin(tt,P.juns,0.3),k:0.9+0.1*spring(fin(tt,P.juns,0.5))});}},
     // the floor: three people in three places, each pointing to the next, and over the corridor, the table nobody answers for
-    {at:P.fl,place:"floor",keys:[[P.fl,960,540,1.0],[P.fl+0.1,960,520,1.04]],d:3,draw:(x,tt)=>{const pt=k=>fin(tt,P.fl+0.3+k*0.35,0.5);
+    {cut:true,at:P.fl,place:"floor",keys:[[P.fl,960,540,1.0],[P.fl+0.1,960,520,1.04]],d:3,draw:(x,tt)=>{const pt=k=>fin(tt,P.fl+0.3+k*0.35,0.5);
       po_floor(x,tt,{out:["yusuf"],pose:{clara:{pose:"listen",pose2:"point",mix:pt(2),flip:false},jun:{pose:"listen",pose2:"point",mix:pt(0),flip:true},
         mei:{pose:"hold",carry:heldNotebook},sam:{pose:"phone"}},front:x=>person(x,"noor",776,872,0.56,{pose:"listen",pose2:"point",mix:pt(1),t:tt,flip:true})});
       po_tableCard(x,960,232,{hang:true,a:fin(tt,P.fl+0.2,0.5),q:fin(tt,P.nobody,0.5)});}},
     // today again, the corridor's wall: the same card, pinned, the red question under it; the calendar turns to the next census day
-    {at:P.again,place:"corridor",keys:[[P.again,640,480,1.5],[P.again+0.4,1000,470,1.04]],d:2.6,draw:(x,tt)=>{po_tableCard(x,640,250,{q:1});
+    {cut:true,at:P.again,place:"corridor",keys:[[P.again,640,480,1.5],[P.again+0.4,1000,470,1.04]],d:2.6,draw:(x,tt)=>{po_tableCard(x,640,250,{q:1});
       const f=clamp((tt-P.again-1.4)/2.6,0,1)*5,i=Math.min(4,Math.floor(f));
       // the camera pulls back past the calendar, so its words fade as the frame comes to them
       po_fadeCut(x,()=>{po_calendar(x,PO_CW.cal[0],PO_CW.cal[1],PO_CAL[i],PO_CAL[i+1],f-i);po_tagAt(x,tt,P.again+4.2,null,PO_CW.cal[0],PO_CW.cal[1]+250,"next census day",{size:30});});}}]);
@@ -4276,12 +4298,12 @@ scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o
 
     // the product's card again, and what comes with it: three cards go down by it as each is named, then a change request. The camera
     // holds its zoom (no push), at the least that keeps the card's words at 28 px, so the card and the three beside it keep clear of the edges
-    {at:P.comes,place:"planTop",keys:[[P.comes,838,432,1.252],[P.comes+0.1,838,430,1.252]],d:6,push:0,draw:(x,tt)=>po_jobTable(x,tt,P)},
+    {cut:true,at:P.comes,place:"planTop",keys:[[P.comes,838,432,1.252],[P.comes+0.1,838,430,1.252]],d:6,push:0,draw:(x,tt)=>po_jobTable(x,tt,P)},
     // Planning's room: Clara unfolds her arms, and reaches for the pen
-    {at:P.room,place:"planning",keys:[[P.room,1214,520,1.42],[P.room+0.1,1230,524,1.46]],d:3,draw:(x,tt)=>{const u1=easeCam(clamp((tt-P.room-0.25)/0.6,0,1)),u2=easeCam(clamp((tt-P.room-0.85)/0.6,0,1));
+    {cut:true,at:P.room,place:"planning",keys:[[P.room,1214,520,1.42],[P.room+0.1,1230,524,1.46]],d:3,draw:(x,tt)=>{const u1=easeCam(clamp((tt-P.room-0.25)/0.6,0,1)),u2=easeCam(clamp((tt-P.room-0.85)/0.6,0,1));
       po_jobRoom(x,tt,{book:true,yusuf:{expr:"smile"},clara:u2>0?{pose:"listen",pose2:"po_reachDown",mix:u2,E:EXPR.smile}:{pose:"po_fold",pose2:"listen",mix:u1,E:po_exprMix("concerned","smile",u1)}});}},
     // the table from above: she signs the owner's line on the card; the promise is hers to keep, the code is Jun's
-    {at:P.sign,place:"planTop",keys:[[P.sign,838,430,1.252],[P.sign+0.1,838,428,1.252]],d:5,push:0,draw:(x,tt)=>{po_jobTable(x,tt,P,{sign:clamp((tt-P.sign-0.3)/1.2,0,1),pen:gv_io(tt,P.sign-0.1,P.sign+1.9,0.3)});
+    {cut:true,at:P.sign,place:"planTop",keys:[[P.sign,838,430,1.252],[P.sign+0.1,838,428,1.252]],d:5,push:0,draw:(x,tt)=>{po_jobTable(x,tt,P,{sign:clamp((tt-P.sign-0.3)/1.2,0,1),pen:gv_io(tt,P.sign-0.1,P.sign+1.9,0.3)});
       po_tagAt(x,tt,P.prom,null,700,100,"the promise",{size:32,wash:GV.gold,washA:0.5});po_tagAt(x,tt,P.not,null,1040,392,"not the code",{size:30,col:WC_MUTED,wash:[196,196,196],washA:0.35});}}]);
   wc_paperOver(ctx,S);});
 
@@ -4309,7 +4331,7 @@ scene("steps",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
     {at:P.back,place:"boardData",keys:[[P.back,900,560,1.08],[P.back+0.1,905,556,1.11]],d:3,draw:(x,tt)=>{po_register(x,{lit:()=>1,grey:1,pulse:gv_io(tt,P.back+0.3,P.back+1.9,0.35),tick:clamp((tt-P.back-0.45)/0.4,0,1)});
       po_rgTags(x,()=>1);po_tagAt(x,tt,P.back+0.6,null,1300,180,"every table other teams use is in exactly one product",{size:30,wash:GV.green,washA:0.3});}},
     // three kinds of product, as each is named: close to one system, joining several, serving one use
-    {at:P.cards,place:"boardData",keys:[[P.cards,960,540,1.04],[P.cards+0.1,960,540,1.08]],d:6,draw:(x,tt)=>PO_KC.forEach(([cx,n,l,ls],i)=>po_prodCard(x,cx,360,470,360,n,l,ls,clamp((tt-[P.close,P.join,P.serve][i])/0.6,0,1)))}]);
+    {cut:true,at:P.cards,place:"boardData",keys:[[P.cards,960,540,1.04],[P.cards+0.1,960,540,1.08]],d:6,draw:(x,tt)=>PO_KC.forEach(([cx,n,l,ls],i)=>po_prodCard(x,cx,360,470,360,n,l,ls,clamp((tt-[P.close,P.join,P.serve][i])/0.6,0,1)))}]);
   setScreen(ctx,S);po_pill(ctx,t,[[0,"Istanbul · 1600s"]],gv_io(t,P.baz+0.2,P.tom,0.4));
   wc_paperOver(ctx,S);});
 
@@ -4330,9 +4352,9 @@ scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id
     {at:P.top,place:"regTop",keys:[[P.top,960,520,1.12],[P.row1,840,400,1.35]],d:1.6,draw:(x,tt)=>{po_mailList(x,easeCam(clamp((tt-P.mail)/0.6,0,1)));
       const u=easeCam(clamp((tt-P.rec)/0.7,0,1));if(u>0)po_fadeCut(x,()=>po_whoUses(x,{dx:(1-u)*1300,dy:(1-u)*-60,row1:1,card2:0}));}},
     // the learner records' row: the card, and the three products that use them, each coming in as it's named
-    {at:P.lr,place:"regTop",keys:[[P.lr,1047,500,1.1],[P.lr+0.1,1040,500,1.12]],d:4,draw:(x,tt)=>{po_whoUses(x,{row1:1,card2:easeCam(clamp((tt-P.lr-0.3)/0.6,0,1)),users:i=>clamp((tt-P.us[i])/0.6,0,1)});}},
+    {cut:true,at:P.lr,place:"regTop",keys:[[P.lr,1047,500,1.1],[P.lr+0.1,1040,500,1.12]],d:4,draw:(x,tt)=>{po_whoUses(x,{row1:1,card2:easeCam(clamp((tt-P.lr-0.3)/0.6,0,1)),users:i=>clamp((tt-P.us[i])/0.6,0,1)});}},
     // Mei looks up from it, and nods
-    {at:P.back,place:"regClose",keys:[[P.back,880,520,1.05],[P.back+0.1,860,510,1.09]],d:4,draw:(x,tt)=>{const n=Math.max(0,Math.sin(Math.PI*clamp((tt-P.pub-0.2)/1.0,0,1)));
+    {cut:true,at:P.back,place:"regClose",keys:[[P.back,880,520,1.05],[P.back+0.1,860,510,1.09]],d:4,draw:(x,tt)=>{const n=Math.max(0,Math.sin(Math.PI*clamp((tt-P.pub-0.2)/1.0,0,1)));
       po_meiDesk(x,tt,{pose:"po_lookR",pose2:"po_lookUp",mix:easeCam(clamp((tt-P.back-0.4)/0.6,0,1)),expr:tt>P.pub?"smile":"calm",nod:0.07*n});po_tagAt(x,tt,P.ev,null,1420,190,"for everyone to build on",{size:32});po_tagAt(x,tt,P.kn,null,1420,262,"she knows who does",{size:32});}}]);
   wc_paperOver(ctx,S);});
 
@@ -4431,6 +4453,9 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s
   setScreen(ctx,S);po_pill(ctx,t,[[P.bz,"Istanbul · 1600s"]],gv_io(t,P.bz+0.1,P.sheet,0.35)+gv_io(t,P.eve+0.1,P.data,0.35));
   gv_end(ctx,S,t,P.end,"A product with an owner","Own the product, not only the meaning.","Film 8 of 10");
   wc_paperOver(ctx,S);});
+
+// chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
+gv_cutInto(["answers", "job", "steps", "readers", "found"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

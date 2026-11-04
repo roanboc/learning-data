@@ -20,6 +20,12 @@ MEANT = {'person': 2, 'outlined': 2, 'litFill': 2, 'seam': 2, 'limb': 2, 'prepAs
 twice = [(k, v) for k, v in clashes([f for f in FILES if f.exists()]) if MEANT.get(k) != len(v)]
 if twice:
     raise SystemExit('These names are declared at the top level of two files; rename the film\'s own:\n' + '\n'.join('  %s: %s' % (k, ', '.join(v)) for k, v in twice))
+# a key named twice in one object keeps only its last value, with no error: a chapter's moments named twice moved a shot to
+# another moment's time in A product with an owner, and kept a line on a board from coming in on its word in Tools are hands
+from names import keys_twice
+again = keys_twice([f for f in FILES if f.exists()])
+if again:
+    raise SystemExit('These keys are named twice in one object, so the first is silently lost; rename or drop one:\n' + '\n'.join('  ' + a for a in again))
 # a moment timed to a word that isn't in its line, or that only starts a longer word, comes early without a sound
 from cues import misplaced
 bad = misplaced(NARR, [S / f for f in META['src']], ROOT / 'tools' / 'score.py')

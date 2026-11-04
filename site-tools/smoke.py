@@ -663,6 +663,14 @@ async def check_players(run):
             await pg.click("#play")
             label = await pg.text_content("#play")
             expect(sec, label == UI[lang]["play"], f"{where}: when paused the button reads {label!r}, expected {UI[lang]['play']!r}")
+            # back and forward 10 seconds (seek.js): the buttons, then the arrow keys with nothing focused
+            r = await pg.evaluate("""async () => { FILM.seek(60); document.getElementById('fwd10').click(); const a = FILM.time();
+              document.getElementById('back10').click(); document.getElementById('back10').click(); const b = FILM.time();
+              document.activeElement && document.activeElement.blur && document.activeElement.blur();
+              document.querySelector('.player').scrollIntoView({block: 'center'}); await new Promise(r => setTimeout(r, 50));
+              document.body.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true})); const c = FILM.time();
+              return {a, b, c, cue: document.querySelector('.seek-cue.r.on') !== null || document.querySelector('.seek-cue.l.on') !== null}; }""")
+            expect(sec, abs(r["a"] - 70) < 0.5 and abs(r["b"] - 50) < 0.5 and abs(r["c"] - 60) < 0.5 and r["cue"], f"{where}: back and forward 10 s don't seek ({r}; want 70, 50, 60 and a cue)")
             # captions
             await pg.click("#cc")
             off = await pg.get_attribute("#cc", "aria-pressed")

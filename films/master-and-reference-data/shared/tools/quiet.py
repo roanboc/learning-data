@@ -1,4 +1,5 @@
-"""When the music plays: python tools/quiet.py, from a film's source folder, after tools/audio.py (it reads build/timeline.json).
+"""When the music plays: python tools/quiet.py, from a film's source folder, after tools/audio.py (it reads build/timeline.json, which
+audio.py writes; where there is none, as in CI, it reads the timeline from the film's render page).
 
 The series' sound (proposal.md, 20 October 2026): music plays under the film's opening story from real life; after that, music and
 sounds come in from time to time, at a chapter's turn, under a moment on screen or in a pause without words, never as a constant bed
@@ -17,7 +18,14 @@ from lang import *
 import music
 
 SHARE, RUN, GAP, FLOOR = 0.5, 12.0, 1.0, 24.0
-info = json.loads((BUILD / 'timeline.json').read_text())
+if (BUILD / 'timeline.json').exists():
+    info = json.loads((BUILD / 'timeline.json').read_text())
+else:  # no tools/audio.py run here, as in CI: the film's timeline from its render page, as audio.py reads it
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as _p:
+        _b, _pg = render_page(_p)
+        info = _pg.evaluate("filmInfo()")
+        _b.close()
 SR = music.SR; TOT = info['total']; n = int(TOT * SR) + SR
 music.init(n)
 ST = {s['id']: s for s in info['scenes']}; music.ST.update(ST)

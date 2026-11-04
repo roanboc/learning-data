@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:06.014
+Arezzo, in Italy, about the year 1025.
+
+00:00:07.914 --> 00:00:13.500
+A monk named Guido teaches boys to sing the church's chants, its prayers sung through the year.
+
+00:00:15.000 --> 00:00:18.555
+Each chant is learned by ear, from a master, one at a time.
+
+00:00:20.255 --> 00:00:26.436
+The books carry small signs above the words, to remind a singer how a chant goes, if he already knows it.
+
+00:00:27.936 --> 00:00:34.508
+A boy who has never heard a chant can't sing it from the page: the signs show up or down, but not how far.
+
+00:00:36.608 --> 00:00:39.820
+So he learns it from a master, and the masters don't agree.
+
+00:00:41.320 --> 00:00:48.899
+Guido wrote that hardly one singer agreed with another, and there were as many chant books as masters: Leo's, or Albert's.
+
+00:00:50.799 --> 00:00:56.079
+Learning the chants takes about ten years, and even then, a singer knows them imperfectly.
+
+00:00:58.179 --> 00:00:59.619
+Something has to change.
+
+00:01:01.519 --> 00:01:07.162
+Guido's answer is lines across the page: each line, and each space between, one note.
+
+00:01:08.862 --> 00:01:14.773
+Two of the lines are coloured, red for F and yellow for C, so a singer always knows where he is.
+
+00:01:16.473 --> 00:01:21.948
+Every sign now sits on a line or a space: what lived in the master's head is on the page.
+
+00:01:23.848 --> 00:01:27.890
+Within three days, some of his boys can sing chants they have never heard.
+
+00:01:29.790 --> 00:01:35.032
+In Guido's words, a singer who took ten years is now made in a year, or two at most.
+
+00:01:36.932 --> 00:01:44.075
+In Rome, Pope John turns the pages of Guido's book, and won't leave his seat until he has learned a verse he has never heard.
+
+00:01:46.175 --> 00:01:49.576
+With one more line, it's the staff musicians read today.
+
+00:01:51.276 --> 00:01:56.459
+An agent is like a boy who has never heard the chant: it can only sing what's on the page.
+
+00:01:57.959 --> 00:02:02.085
+If a word's meaning lives only in someone's head, the agent guesses.
+
+00:02:03.585 --> 00:02:07.324
+Put the meaning on the page, and people and agents both read it right.
+
+00:02:15.624 --> 00:02:21.474
+Today, at the university, Clara, in Planning, asks Jun a new question for next year's plan.
+
+00:02:22.774 --> 00:02:27.859
+Of the 18,412 students on census day, how many were commencing?
+
+00:02:29.559 --> 00:02:34.851
+Jun gives it to his agent, with its tools: Catalog, Query and Docs, each read only.
+
+00:02:36.151 --> 00:02:41.708
+It reads what they reach: the tables, their columns, the code that builds them, and the team's docs.
+
+00:02:43.208 --> 00:02:45.571
+Nothing it reads says what commencing means.
+
+00:02:47.271 --> 00:02:52.838
+So it reasons from the names: commencing must mean a student whose enrolment began this year.
+
+00:02:54.338 --> 00:03:00.372
+It counts 6,931, attaches its query, and sounds as sure as if it knew.
+
+00:03:03.072 --> 00:03:07.800
+Jun reads the query: it's careful, and it runs, but is that what the word means?
+
+00:03:09.300 --> 00:03:11.768
+He asks Mei, in the registrar's office.
+
+00:03:12.868 --> 00:03:18.217
+She knows at once: commencing means starting a course at the university for the first time.
+
+00:03:19.517 --> 00:03:26.058
+A student coming back to their course after leave, or a break, isn't commencing: that's the government's rule too.
+
+00:03:27.558 --> 00:03:35.658
+719 of the 6,931 were coming back: the right number is 6,212.
+
+00:03:37.358 --> 00:03:41.335
+Planning would have planned for 719 new students who weren't new.
+
+00:03:43.035 --> 00:03:49.986
+The meaning was written down once, in 2021, in an email Mei sent to someone in Planning who has since moved on.
+
+00:03:51.486 --> 00:03:55.407
+It lived in one head, and one inbox, where no agent could read it.
+
+00:03:57.107 --> 00:04:01.146
+The agent wasn't careless: what an agent reads decides what it writes.
+
+00:04:03.846 --> 00:04:09.919
+Everything an agent reads for a job is its context, and in a data team it comes in four kinds.
+
+00:04:11.619 --> 00:04:16.733
+Code: the repository, with its recipes, its tests, and its notes for agents.
+
+00:04:18.433 --> 00:04:23.530
+Metadata: what words mean, what each table promises, and where each number comes from.
+
+00:04:25.230 --> 00:04:28.229
+Skills: how the team does a job, step by step.
+
+00:04:29.929 --> 00:04:32.577
+And tools: what it can reach, and what it may do.
+
+00:04:34.277 --> 00:04:40.327
+Commencing was missing from the metadata, so the agent filled the gap with a guess, and said it like a fact.
+
+00:04:42.227 --> 00:04:47.389
+Choosing what goes into that context, and writing it down, is context engineering.
+
+00:04:50.489 --> 00:04:56.754
+Mei writes the meaning once, in the business glossary, where the university's words are defined, and she owns it.
+
+00:04:58.854 --> 00:05:04.394
+The project copies it into Planning's data, with where it came from, and a new column carries it.
+
+00:05:06.494 --> 00:05:14.800
+A test checks the column on four students: one new, one back from leave, one starting a second course, and one who began last year.
+
+00:05:17.100 --> 00:05:21.025
+Planning's contract now promises the column, and says what it means.
+
+00:05:23.125 --> 00:05:30.085
+The notes for agents gain a rule: look a word up before you count by it; if it isn't there, ask its owner, don't guess.
+
+00:05:33.585 --> 00:05:38.830
+Until now, each person on the team wired up their own agent, with notes of their own.
+
+00:05:40.530 --> 00:05:47.135
+Like the chant books named after their masters, each agent was its owner's: what one was told, no other knew.
+
+00:05:49.035 --> 00:05:55.186
+Now the team keeps one context, in the project, reviewed like code, with an owner for every meaning.
+
+00:05:57.086 --> 00:06:00.439
+Every agent, and every person, reads the same page.
+
+00:06:02.139 --> 00:06:07.044
+When a meaning changes, its owner changes it once, and everyone reads the new one.
+
+00:06:09.744 --> 00:06:11.439
+Jun asks his agent again.
+
+00:06:12.739 --> 00:06:18.563
+This time it looks the word up, counts 6,212, and cites Mei's definition.
+
+00:06:20.263 --> 00:06:25.682
+A new analyst who joined Planning this week reads the same definition her agent reads.
+
+00:06:27.182 --> 00:06:30.809
+Like Guido's boys, they can both sing a chant they've never heard.
+
+00:06:32.709 --> 00:06:35.894
+Write it down once, and people and agents both use it.

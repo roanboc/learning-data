@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Context engineering",
+    "key": "context-engineering-en",
+    "dir": "films/agents-at-work-on-data/1-context-engineering/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/context-engineering/film.js",
+    "video": "dist/context-engineering.mp4",
+    "file": "context-engineering.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/1-context-engineering/captions/en.srt",
+        "context-engineering.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/1-context-engineering/captions/es.srt",
+        "context-engineering.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/1-context-engineering/source",
+      ":(exclude)films/agents-at-work-on-data/1-context-engineering/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 241,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 29.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

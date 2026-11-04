@@ -65,14 +65,24 @@ CMIN = ((1 / 3, 0.5), (4 / 5, 0.36))
 CMAJ = ((4 / 5, 0.45), (2 / 5, 0.32))
 
 # ---- the levels: the trautonium about as far under the voice as the module's other music (matched by loudness, not by peak), the bell
-# plates a little under it, as they're struck; the effects about 12 dB under the music (FX scales them all)
-TL, BL, FX = 0.025, 0.028, 1.55
+# plates a little under it, as they're struck; the effects about 12 dB under the music (FX scales them all). When the room was set by
+# its gain where the notes are (4 November 2026), it rang 4 to 6 dB less, so the two were raised 4.6 and 5.4 dB to sound as loud as before
+TL, BL, FX = 0.0425, 0.052, 1.55
 
-# a room round the players: a small hall, ringing on for about a second and a half, and nothing much above 1.6 kHz
+# a room round the players: a small hall, ringing on for about a second and a half, and nothing much above 1.6 kHz. Its level is set
+# by what it rings under 1.6 kHz (its gain there about one, so `room` is its share): scaled by all it rings, the room rang about 11 dB
+# louder there than its share said, and moved a held note's level up or down by where its reflections met the note's own sound
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.6)).astype(np.float32))(np.arange(int(1.6 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.022 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.022 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum() * SR / 3200)
 def _room(s, room):
     return (np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)) if room else s
+def _held(s, room, a, b):
+    """a held note in the room, at its own level: set back to the level it had before the room, measured over its body (a to b
+    seconds, once it has come in and before it lets go). A note too short to have a body just goes into the room"""
+    r = _room(s, room); i, j = int(a * SR), int(b * SR)
+    if not room or j - i < int(0.3 * SR):
+        return r
+    return r * float(np.sqrt((s[i:j] ** 2).mean() / max(1e-12, (r[i:j] ** 2).mean())))
 
 # ---- the trautonium: the neon tube's sawtooth, each partial falling as 1/k, softened by a low pass from `bright` Hz and given its
 # voice by a gentle formant near 640 Hz. Held at one pitch: no vibrato, no slide
@@ -99,7 +109,7 @@ def traut(m, a, b, g=1.0, under=(), switch=None, att=0.22, rel=0.55, pan=0.0, ro
             s = s + gu * _tone(f * r, x, bright * 0.7) * np.clip((x - ts) / 0.09 + 0.5, 0, 1)
     s *= e
     s = filt((s / max(1e-9, float(np.abs(s).max()))).astype(np.float32), 'low', 2400)
-    put(_room(s, room).astype(np.float32), a, g * TL, pan)
+    put(_held(s, room, att, sec).astype(np.float32), a, g * TL, pan)
 
 def mark(m, a, sec=2.6, g=0.9, pan=-0.1):
     """the mark, a failure: the note, and under it the seventh undertone, that doesn't sit"""

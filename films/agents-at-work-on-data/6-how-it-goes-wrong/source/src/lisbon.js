@@ -21,9 +21,9 @@ const HWC={sky0:[176,194,210],sky1:[240,231,214],sun:[255,244,222],haze:[208,210
 const HW_WATER=648;
 
 /* ---------------------------------------------------------------- people of 1755, and of today
-   ag_person specs. The clothes of 1755 are painted over the body and the head in figure space (who.top.paint, who.hat.paint): a dark
-   mantle over a woman's head and shoulders, for church; a white neckcloth and a waistcoat's buttons for the men's long coats; hair
-   tied back at the nape with a ribbon; a cassock's buttons. Each has its own key, so it's painted once. */
+   ag_person specs. The clothes of 1755 are painted over the body and the head in figure space (who.top.paint, who.hat.paint): a white
+   neckcloth and a waistcoat's buttons for the men's long coats; hair tied back at the nape with a ribbon; a cassock's buttons. A dark
+   mantle over a woman's head and shoulders, for church, is a picture of its own (hw_inMantle). Each has its own key, so it's painted once. */
 function hw_mantle(col){return(c,P)=>{const lt=ag_lt(col,0.22),dk=ag_dk(col,0.45);
   // the cloth over the head, standing a little off the hair, and down over the shoulders and the chest; its edge frames the face
   const cloth=cc=>{cc.moveTo(380,336);cc.bezierCurveTo(374,298,340,268,296,264);cc.bezierCurveTo(244,260,202,290,190,338);
@@ -34,6 +34,19 @@ function hw_mantle(col){return(c,P)=>{const lt=ag_lt(col,0.22),dk=ag_dk(col,0.45
   c.strokeStyle=rgba(ag_lt(col,0.32),0.85);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(378,338);c.bezierCurveTo(350,344,318,356,302,376);
   c.bezierCurveTo(288,394,282,424,283,456);c.bezierCurveTo(285,498,302,536,338,566);c.stroke();
   ag_folds(c,cloth,[[[204,560],[172,640],[150,740]],[[404,640],[424,690],[428,752]],[[300,640],[296,700],[302,770]]],rgba(dk,0.5),rgba(lt,0.35));};}
+// the woman in her mantle. A person's head is kept as a picture of the head alone (figure x 160 to 440, y 250 to 560), so a mantle
+// painted with it (who.hat.paint) stopped in a straight line above her shoulders. So the mantle is a picture of its own, laid over
+// her whole figure and moving with her head, as ag_person moves the head (breathing 0.7 of the body's 2.2 px, about the top of the
+// neck). If she fades, she and her mantle are drawn whole first, then faded as one picture.
+let HW_MANTLE=null;
+function hw_inMantle(ctx,x,y,s,o){const a=ctx.globalAlpha;
+  if(a<0.995){const [bc,bx]=ag_buf("hwMantle",ctx.canvas.width,ctx.canvas.height);bx.setTransform(ctx.getTransform());hw_inMantle(bx,x,y,s,o);
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(bc,0,0);ctx.restore();return;}
+  const P=HW_P.woman,A=AG_FIG.anchor,V=AG_FIG.piv,br=Math.sin((o.t||0)*TAU*P.breath)*2.2;
+  ag_person(ctx,P,x,y,s,o);
+  if(!HW_MANTLE)HW_MANTLE=ag_layer(c=>hw_mantle([48,44,54])(c,P),[60,250,470,820]);
+  ctx.save();ctx.translate(x,y);ctx.scale(o.flip?-s:s,s);ctx.translate(-A[0],-A[1]);
+  ctx.translate(V[0],V[1]+br*0.7);ctx.rotate(o.nod||0);ctx.translate(-V[0],-V[1]);ag_drawLayer(ctx,HW_MANTLE);ctx.restore();}
 // the men's long coats: a white neckcloth tied at the throat, and the waistcoat's buttons down the opening
 function hw_coat(neck,btn){return(c,P)=>{c.save();ag_shape(c,AG_F.torso);c.clip();
   ag_soft(c,cc=>{cc.moveTo(254,570);cc.bezierCurveTo(280,600,328,608,356,598);cc.bezierCurveTo(352,620,346,640,338,662);
@@ -50,7 +63,7 @@ function hw_queue(col){return(c,P)=>{const hc=P.hair.c;
 function hw_cassock(btn){return(c,P)=>{c.save();ag_shape(c,AG_F.torso);c.clip();
   for(let y=650;y<1100;y+=34){c.fillStyle=rgba(btn,1);c.beginPath();c.arc(306+(y-616)*0.02,y,4.2,0,TAU);c.fill();}c.restore();};}
 const HW_P={
-  woman:{key:"hw_woman",name:"a woman in a dark mantle",skin:[232,198,170],hair:{style:"side",c:[58,44,36]},top:{kind:"tunic",c:[66,60,70]},hat:{paint:hw_mantle([48,44,54])},breath:0.3},
+  woman:{key:"hw_woman",name:"a woman in a dark mantle",skin:[232,198,170],hair:{style:"side",c:[58,44,36]},top:{kind:"tunic",c:[66,60,70]},breath:0.3},
   man:{key:"hw_man",name:"a man in a long coat",skin:[222,184,152],hair:{style:"side",c:[74,56,44]},top:{kind:"suit",c:[98,80,62],inner:[214,198,166],paint:hw_coat([240,236,226],[176,146,96])},hat:{paint:hw_queue([40,36,34])},breath:0.27},
   child:{key:"hw_child",name:"a child",skin:[236,202,174],hair:{style:"side",c:[92,66,46]},top:{kind:"tunic",c:[132,116,94]},breath:0.34},
   eldest:{key:"hw_eldest",name:"the eldest engineer",skin:[226,190,162],hair:{style:"cropped",c:[234,232,228]},top:{kind:"suit",c:[52,60,78],inner:[212,196,160],paint:hw_coat([242,238,228],[196,164,96])},breath:0.23},
@@ -205,7 +218,7 @@ function hw_paintChurch(c){let g=c.createLinearGradient(0,0,W,0);g.addColorStop(
   g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(40,34,28,0.18)");g.addColorStop(0.5,"rgba(40,34,28,0)");g.addColorStop(1,"rgba(255,248,232,0.1)");c.fillStyle=g;c.fillRect(0,0,W,H);}
 // the people going in: a child, a woman in her mantle, a man in his long coat, all facing the door, walking slowly towards it (u 0 to 1)
 function hw_churchgoers(x,tt,u){const d=lerp(0,70,u),bob=i=>2.5*Math.sin(tt*3.4+i*1.3)*clamp(u*4,0,1);
-  ag_person(x,HW_P.child,260+d,800+bob(0),0.66,{t:tt,gaze:[4,-1]});ag_person(x,HW_P.woman,530+d,690+bob(1),0.9,{t:tt+0.6,gaze:[4,0]});ag_person(x,HW_P.man,800+d,684+bob(2),0.92,{t:tt+1.1,gaze:[4,-1]});}
+  ag_person(x,HW_P.child,260+d,800+bob(0),0.66,{t:tt,gaze:[4,-1]});hw_inMantle(x,530+d,690+bob(1),0.9,{t:tt+0.6,gaze:[4,0]});ag_person(x,HW_P.man,800+d,684+bob(2),0.92,{t:tt+1.1,gaze:[4,-1]});}
 
 /* ---------------------------------------------------------------- the engineers' room (the place "hwDraft"), and the plan
    A plastered wall in daylight from a tall window at the right; a board on the wall where the plan of the lower town is pinned: the old

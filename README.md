@@ -6,7 +6,7 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-The site has seven big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
+The site has eight big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
 
 | Topic | Films and series | For |
 |---|---|---|
@@ -17,6 +17,7 @@ The site has seven big topics. Start with the first, the overview; then pick the
 | Enterprise architecture | [The map before the data](https://data.learn-all.org/enterprise-architecture/), eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
 | Master and reference data | [The same one, everywhere](https://data.learn-all.org/master-and-reference-data/), nine films, coming out one by one: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
 | Data governance | Three series: [Governance principles](https://data.learn-all.org/data-governance/), a prologue and ten films on who decides what, and how each decision reaches the work, as checks, owners and tests rather than policies on a shelf; then [Governance on the map](https://data.learn-all.org/governance-on-the-map/), three films that design governance into the organisation's architecture map; and [Governance you can use](https://data.learn-all.org/governance-in-practice/), six films that make it work with dbt and Databricks | Governance teams and data owners, and anyone asked to make the rules work |
+| AI agents in data work | [What an agent is](https://data.learn-all.org/what-an-agent-is/), nine films with no product: how today's models came about, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves; more series will follow | Everyone who works with data, and will work beside an AI agent |
 
 Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 
@@ -29,7 +30,7 @@ site/                            the website, published to GitHub Pages as it is
   index.html                     Start here: The Inner Life of Data, with chapters, then "Go deeper" into the topics
   labs/                          its eight hands-on labs, one per chapter, on the platform map
   scenarios/                     its twelve scenarios, ending with the topics to go deeper
-  topics/                        Topics: the seven big topics, each with a card per film or series; made by site-tools/build_series.py
+  topics/                        Topics: the eight big topics, each with a card per film or series; made by site-tools/build_series.py
   sketch/                        Data modelling: A Sharper Sketch, with labs/ (six labs) and scenarios/ (twelve scenarios)
   when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
   from-words-to-data/            the series From words to data: a page for the series, and a folder per film with labs/ and scenarios/;
@@ -92,7 +93,7 @@ films/                           one folder per film: script or story, captions/
   governance-in-practice/        the series Governance you can use, the third on data governance, made the same way
   what-an-agent-is/              the series What an agent is, the first of the module on AI agents in data work: its README, series.json, proposal.md,
                                  decided.md, shared/ (the module's marble and oak lab, people, agent, cards and tools, which its later series bundle too)
-                                 and a folder per film as they're made; on the site under the topic AI agents in data work once its opening film is out
+                                 and a folder per film; on the site under the topic AI agents in data work
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
                                  The map before the data, The same one, everywhere, the three on data governance, and What an agent is), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
@@ -111,7 +112,7 @@ Internal names never appear as text on the site. The numbers in the series' fold
 ## How the site is organised
 
 - **Header, the same on every page:** *Start here · Topics · Making of*, then *EN/ES*, and icon links to learn-all.org and to the author on LinkedIn; every link stays visible on phones. It is made in one place, `header()` in `site-tools/build_series.py`, for every page: the series' pages, the hand-written pages listed in `HAND_PAGES` (it writes over their header) and the Markdown pages. Change it there and run `build_series.py` and `build_pages.py`, never on a page. The footer's one link is the source on GitHub. The header never lists a film's own steps. The Topics link is marked as current on every page under a topic.
-- **Topics:** five big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Analytics engineering*, *Data quality and change* and *Enterprise architecture*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
+- **Topics:** eight big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Analytics engineering*, *Data quality and change*, *Enterprise architecture*, *Master and reference data*, *Data governance* and *AI agents in data work*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
 - **Stepper, on a film's own pages:** the film's steps, such as *Watch · Take it apart · Make the call*, as an `ol.path` under the title. Only a film with labs or scenarios has one; Silent change has none yet, and Too good to be true has one.
 - **Breadcrumbs:** every film, labs, scenarios and series page starts with one that names its topic, such as *Topics › Data modelling › From words to data*; the topic links to its section of the Topics page.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.

@@ -180,7 +180,7 @@ for people.
    (`examples/agents-on-databricks/census_day_students.sql`):
 
    ```sql
-   grant execute on function <catalog>.<schema>.census_day_students to `<agent service principal>`;
+   grant execute on function <production catalog>.<planning schema>.census_day_students to `<census agent>`;
    ```
 
 4. **Models and tool servers, through Unity Gateway.** Unity Gateway, part of Unity Catalog, has been

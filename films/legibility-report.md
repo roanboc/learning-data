@@ -82,6 +82,9 @@
 | Where each piece lives | 327 | 0% | 0 | 30.1 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |
+| It feels like understanding | 265 | 0% | 0 | 30.7 | Drawn to the rule |
+| More than a junior | 263 | 0% | 0 | 30.0 | Drawn to the rule |
+| Minds that change | 190 | 0% | 0 | 30.0 | Drawn to the rule |
 | Many agents, and what emerges | 215 | 0% | 0 | 30.0 | Drawn to the rule |
 <!-- /films -->
 

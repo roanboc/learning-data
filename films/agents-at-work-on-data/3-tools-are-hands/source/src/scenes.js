@@ -124,7 +124,8 @@ scene("hands",(ctx,S,t,sc)=>{const c=sc.cues,P=th_once(sc,"P",()=>({cdc:wAt(sc,"
       ag_roomLight(x,1);TL_KICK(x);}},
     // each hand is a tool server: a small program that gives an agent its tools, through an open standard; whatever it can do, the agent
     // can do; and the agent works for whoever gives it words: a hidden line, or a thief with its key; so ask for the least; since 1975
-    {cut:true,at:c.server-0.3,place:"thLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
+    // (another scene in the room: it cuts to the server, the camera gliding on, rather than laying it over the six tools)
+    {cut:"later",at:c.server-0.3,place:"thLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
       const lit=TL_ACTS.map((s,i)=>ag_in(tt,c.cando+0.2+i*0.32,0.3)),st=[0,1,2,3].map(i=>i===0?0:ag_in(tt,P.least+0.1+(i-1)*0.3,0.5));
       tl_ticketSmall(x,110,150,520,{a:ag_in(tt,c.whoever,0.5),k:ag_spr(tt,c.whoever),hid:ag_in(tt,P.hidden,0.6)});
       withA(x,ag_in(tt,P.hidden+0.3,0.4),()=>ag_pill(x,370,414,"a hidden line",{icon:"warn",col:AG.amber}));
@@ -216,8 +217,11 @@ scene("prod",(ctx,S,t,sc)=>{const c=sc.cues,P=th_once(sc,"P",()=>({two:wAt(sc,"p
         withA(x,(1-wo)*(1-ag_in(mv,0.75,0.25)),()=>{x.save();ag_about(x,cx,cy,k);ag_box(x,cx-210,cy-126,420,252,22,{edge:AG.blue,edgeA:0.5});x.restore();});}
       ag_glass(x,GL.x,GL.y,GL.w,GL.h,{});
       ag_sandbox(x,AGP.x,790,420);tl_draft(x,AGP.x,754,"draft change",{a:1-0.6*mv});
-      {const A=AGP,p=[A.x+A.R*0.5,A.y+A.R*0.85,A.x+A.R*0.75,A.y+A.R*1.6,A.x+60,660,A.x+40,708];ag_reach(x,p,ag_sine((tt-0.4)/0.9),{});}
-      tl_agent(x,tt,{at:AGP});
+      // the agent comes from where the last chapter left it (820, 540, the arc's size) once the chapters' crossfade is over, then reaches
+      // into its sandbox
+      const mv0=ag_sine(clamp((tt-0.8)/1.0,0,1)),A0={x:lerp(820,AGP.x,mv0),y:lerp(540,AGP.y,mv0),R:lerp(TLAB.agent.R,AGP.R,mv0),r:lerp(TLAB.agent.r,AGP.r,mv0)};
+      {const A=AGP,p=[A.x+A.R*0.5,A.y+A.R*0.85,A.x+A.R*0.75,A.y+A.R*1.6,A.x+60,660,A.x+40,708];ag_reach(x,p,ag_sine((tt-1.8)/0.9),{});}
+      tl_agent(x,tt,{at:A0});
       withA(x,ag_in(tt,c.people-0.2,0.5),()=>ag_person(x,"jun",190,650,0.9,{t:tt,gaze:[3,-1]}));
       withA(x,ag_in(tt,P.two-0.2,0.5),()=>ag_person(x,"noor",1760,650,0.9,{t:tt,flip:true,gaze:[3,-1]}));
       ag_pill(x,520,236,"the agent's hands: drafts only",{icon:"draft",col:AG.blue,a:ag_in(tt,P.never-0.2,0.5)});

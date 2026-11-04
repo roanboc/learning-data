@@ -13,24 +13,11 @@ const mj_taps=(t0,n,gap)=>Array.from({length:n},(_,i)=>t0+i*(gap||0.48));
 function mj_count(t,taps){let n=0,last=0;for(const s of taps)if(t>=s+MJ_STRIKE){n++;last=s;}return{n,tick:n?clamp((t-last-MJ_STRIKE)/0.16,0,1):0};}
 // a card that springs in at t0 and fades out at t1, as a value 0 to 1 for its k and its a
 const mj_card=(t,t0,t1)=>({k:ag_spr(t,t0,0.5),a:ag_in(t,t0,0.25)*(t1==null?1:1-ag_in(t,t1,0.4))});
-// The film's own cutting of a chapter into shots: the series' ag_shots, with two changes (PLAYBOOK, "Cut between two framings of one
-// moment"). A shot marked cut:true comes in on a cut, not a dissolve: two framings of one moment, or two of Berlin's cameras. And a shot
-// in the same place as the one before (the room by day and by night count as one) starts where that one's camera ended and glides from
-// there to its own keys; while it dissolves, the shot before is drawn through the same camera, so the dissolve fades in only what
-// changed, and nothing shows twice, a little apart.
-const mj_placeOf=p=>p&&p.indexOf("lab")===0?"lab":p;
-// where a shot's camera is when the next one starts: ag_focus's sums, with the shot's push complete
-function mj_camEnd(sh,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((till-sh.at)/len,0,1)),d=Math.max(1.4,sh.d||1.6),keys=sh.keys||[[0,960,540,1]];
-  let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((till-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+push));return[clamp(x,960/z,W-960/z),clamp(y,540/z,H-540/z),z];}
-function mj_shots(ctx,S,t,end,shots,dis){
-  for(let k=1;k<shots.length;k++){const a=shots[k-1],b=shots[k];if(b.cut||mj_placeOf(a.place)!==mj_placeOf(b.place))continue;
-    const e=mj_camEnd(a,b.at);b.keys=[[b.at,e[0],e[1],e[2]]].concat(b.keys||[[b.at,960,540,1]]);b.carried=true;}
-  let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){const a=shots[i-1],b=shots[i];ag_shot(ctx,S,t,b.carried?Object.assign({},a,{at:b.at,keys:b.keys,d:b.d,push:b.push}):a,b.carried?till(i):b.at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// The film's own cutting of a chapter into shots is now the series' ag_shots, which does what this film did first (PLAYBOOK, "Cut
+// between two framings of one moment"): a shot in the same room as the one before (the lab by day and by night count as one) starts
+// where that one's camera is and glides on to its own keys, and while it comes in, the shot before is drawn through the same camera,
+// so only what changed fades. Between Berlin's places, a shot marked cut:true comes in on a cut.
+const mj_shots=(ctx,S,t,end,shots,dis)=>ag_shots(ctx,S,t,end,shots,dis);
 // the 1904 men of the commission in a half circle behind Hans: [X, Z, which]
 const MJ_RING=(()=>{const out=[];for(let i=0;i<13;i++){const u=i/12,an=lerp(-2.8,-0.34,u);out.push([MJ_AT.hans[0]+0.3+Math.cos(an)*3.9,MJ_AT.hans[1]-0.1-Math.sin(an)*3.6,i]);}return out;})();
 const MJ_VIS=[[2.1,6.8],[2.9,7.6],[3.7,7.0],[4.6,8.0],[5.4,7.3],[1.4,8.6]];
@@ -247,7 +234,7 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.n
   const S1out=(x,tt)=>{const out=ag_sine(clamp((tt-tB)/1.0,0,1));if(out<1)S1(x,tt,-380*out,1-out);};
   const S2=(x,tt)=>{const sx=lerp(1980,MJ_SES.x,ag_eo(clamp((tt-c.next-0.2)/1.0,0,1)));
     mj_session(x,sx,MJ_SES.y,MJ_SES.w,MJ_SES.h,{sub:"next morning",a:1-ag_in(tt,tD-0.45,0.4),draw:xx=>{const q=mj_card(tt,wAt(sc,"next","asks for")-0.1,null);if(q.a>0)mj_q(xx,sx+30,MJ_SES.y+96,420,"Awards by faculty?",{tail:false,k:q.k,a:q.a});
-      mj_bars(xx,sx+40,MJ_SES.y+300,460,{p:clamp((tt-c.out+0.3)/1.6,0,1),total:ag_in(tt,wAt(sc,"out","add up"),0.4),warn:tt>wAt(sc,"out","left the")-0.1,a:ag_in(tt,c.out-0.4,0.3)});}});};
+      mj_bars(xx,sx+40,MJ_SES.y+300,460,{p:clamp((tt-c.out+0.3)/1.6,0,1),total:ag_in(tt,wAt(sc,"out","add up"),0.4),warn:ag_in(tt,wAt(sc,"out","left the")-0.3,0.45),a:ag_in(tt,c.out-0.4,0.3)});}});};
   const shots=[
     // a session: Jun's question, the count with its evidence; the glossary's word; the count again
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const pt=ag_io(tt,tPoint-0.2,c.again,0.5);

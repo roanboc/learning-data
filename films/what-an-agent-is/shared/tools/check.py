@@ -4,8 +4,9 @@ each place the film paints (AG_PLACES), painted again from nothing (with the oak
 again within LIMIT seconds. The site's player paints the places one by one while the film plays, so a place that keeps the browser
 busy for seconds holds up the film, its soundtrack and the whole page. Paint what is soft anyway at a lower resolution and scale it up,
 as room.js does with the marble. Last, the governance films' checks that nothing shows twice where the film changes shot or chapter
-(films/data-governance/shared/tools/twice.py) and that nobody's arm jumps in one frame (steady.py there)."""
-import runpy, steady, twice
+(films/data-governance/shared/tools/twice.py), that nobody's arm jumps in one frame (steady.py there) and that nothing jumps
+where the film changes shot or chapter (jump.py there)."""
+import jump, runpy, steady, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
@@ -32,6 +33,7 @@ with sync_playwright() as p:
       return out; }""")
     tw = twice.check(pg)
     st = steady.check(pg)
+    jp = jump.check(pg)
     b.close()
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
@@ -55,5 +57,12 @@ if st[1]:
     failed.append('%d arms jump in one frame' % len(st[1]))
 else:
     print('no arm jumps in one frame')
+print(jp[0])
+for l in jp[1]:
+    print('  ' + l)
+if jp[1]:
+    failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
+else:
+    print('nothing jumps where the film changes shot or chapter')
 if failed:
     raise SystemExit('; '.join(failed))

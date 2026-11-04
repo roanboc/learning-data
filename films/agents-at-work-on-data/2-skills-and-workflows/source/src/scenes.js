@@ -6,12 +6,9 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const sw_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default); a shot marked cut comes in on a cut
-function sw_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// the shared ag_shots: a shot may dissolve in over its own time (sh.dis, seconds; 0.5 by default); in one room the camera glides on
+// from shot to shot, and between rooms a shot marked cut comes in on a cut
+const sw_shots=(ctx,S,t,end,shots)=>ag_shots(ctx,S,t,end,shots);
 // a card that springs in at t0 and goes at t1 (or stays): its k and a
 const sw_pop=(t,t0,t1)=>({k:clamp(ag_spr(t,t0,0.8),0,1.2),a:t1==null?ag_in(t,t0,0.35):ag_io(t,t0,t1,0.35)});
 const SW_TITLE="Skills and workflows";
@@ -77,8 +74,8 @@ scene("book",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       const sl=ag_in(tt,P.less-0.2,0.5);
       SW_HEIRS.forEach((h,i)=>{const d=i===2;ag_textCard(x,h.x-SW_CARDW/2,236,SW_CARDW,{kick:h.kick,title:h.title,sub:d&&sl>0.5?"240 dirhams":h.sub},{tail:{side:"bottom",at:0.5,px:h.x,py:h.y-262*h.s},edge:d&&sl>0.5?AG.amber:null,kickCol:SW_PAL.tag});});
       const p=sw_pop(tt,P.less+0.1,null);ag_pill(x,1620,188,"less than the law gives her",{col:AG.amber,icon:"warn",a:p.a,size:28});}},
-    // two reckoners, one estate, two answers
-    {cut:true,at:P.two,place:"swCourt",keys:[[P.two,960,560,1.02],[P.two+0.1,960,550,1.06]],d:6,push:0.01,draw:(x,tt)=>{
+    // two reckoners, one estate, two answers: another scene in the courtyard, cut to (the camera glides on), not laid over the family
+    {cut:"later",at:P.two,place:"swCourt",keys:[[P.two,960,560,1.02],[P.two+0.1,960,550,1.06]],d:6,push:0.01,draw:(x,tt)=>{
       sw_reckonerAt(x,tt,"reckoner",560,{gaze:[3,0.4]});sw_reckonerAt(x,tt+2,"reckoner2",1400,{flip:true,gaze:[3,0.4]});ag_roomLight(x,0.5);
       const p1=sw_pop(tt,P.tw1,null),p2=sw_pop(tt,P.tw1+0.4,null);
       ag_textCard(x,300,190,470,{kick:"One reckoner",title:"Her share: 280 dirhams"},{tail:{side:"bottom",at:0.6,px:580,py:470},k:p1.k,a:p1.a,kickCol:SW_PAL.tag});
@@ -93,7 +90,7 @@ scene("book",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
     // the book open: two moves bring a problem to its form; the six forms
     {at:P.moves,place:"swBook",dis:0.7,keys:[[P.moves,960,520,1.0],[P.moves+0.1,960,510,1.02]],d:6,push:0.01,draw:(x,tt)=>sw_moves(x,tt,P)},
     // one form's steps, an example, and the square drawn on the page as each step is said
-    {cut:true,at:P.steps-0.3,place:"swBook",keys:[[P.steps-0.3,960,500,1.0],[P.steps,960,490,1.03]],d:8,push:0.01,draw:(x,tt)=>sw_steps(x,tt,P)},
+    {cut:"later",at:P.steps-0.3,place:"swBook",keys:[[P.steps-0.3,960,500,1.0],[P.steps,960,490,1.03]],d:8,push:0.01,draw:(x,tt)=>sw_steps(x,tt,P)},
     // pages of real cases, legacies most of all
     {cut:true,at:P.cases,place:"swBook",keys:[[P.cases,960,500,1.03],[P.cases+0.1,960,500,1.06]],d:4,push:0.01,draw:(x,tt)=>{
       const turn=ag_sine(clamp((tt-P.cases)/1.0,0,1));if(turn<1)sw_pageTurn(x,turn);
@@ -305,7 +302,7 @@ function sw_loads(x,tt,P){ag_roomLight(x,1);const ma=ag_in(tt,P.loads-0.3,0.5);s
   const ja=sw_pop(tt,P.job-0.4,null);ag_pill(x,330,640,"a job needs it",{a:ja.a,size:28});
   if(open>0.01){const g=SW_GRID[SW_RECON],X=lerp(g.x,640,open),Y=lerp(g.y,150,open),Wd=lerp(g.w,1230,open),Hd=lerp(142,470,open);
     if(open<0.5)sw_slim(x,X,Y,Wd,SW_SKILLS[SW_RECON][0],SW_SKILLS[SW_RECON][1],{rows:2,lit:1,a:1-open*2});
-    else sw_file(x,X,Y,Wd,Hd,"skills/reconcile-and-diff/SKILL.md",[{k:"h2",t:"Reconcile"}].concat(SW_RECON_STEPS.map(s=>({k:"li",t:s}))),{a:(open-0.5)*2,edge:AG.blue});}}
+    else sw_file(x,X,Y,Wd,Hd,"skills/reconcile-and-diff/SKILL.md",[{k:"h2",t:"Reconcile"}].concat(SW_RECON_STEPS.map(s=>({k:"li",t:s}))),{a:(open-0.5)*2,edge:AG.blue,lw:1230});}}
 
 // ---- 4 · A router picks the skill: seven skills; which one does a job need? a router, a skill whose only job is to choose; it reads
 // the job, compares it with each skill's line, loads the one that fits; when none fits, it says so and asks a person; that job is done

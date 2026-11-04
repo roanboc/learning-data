@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Tools are hands, and every hand is a permission, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (rights, six, line), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "rights":{q:"Las reglas del agente ya dicen que nunca debe escribir en producción. ¿Por qué el equipo fija además sus permisos en su propia cuenta?",
+    opts:[{t:"Por si se pierde el archivo para agentes."},{t:"Porque las reglas son palabras, que se pueden discutir o esconder en un ticket, y un permiso se cumple diga lo que diga el agente.",ok:true},{t:"Porque el agente lee sus reglas solo una vez al día."}],
+    why:"Las reglas son palabras: a un agente lo pueden convencer de saltárselas, o una línea escondida puede decir lo contrario. Un permiso fijado donde viven los datos se cumple le digan lo que le digan al agente, como la cadena que sujetaba los libros de Bodley fuera cual fuera la intención del lector. Donde trabajas, ¿qué límites de un agente están escritos solo en sus instrucciones?"},
+  "six":{q:"Query le da al agente conteos y muestras de 20 filas como máximo, con los nombres enmascarados. ¿Por qué no dejarle leer todas las filas, con nombres, si solo lee?",
+    opts:[{t:"Leer todas las filas sería demasiado lento."},{t:"Lo que una mano puede leer, también lo alcanzan una línea escondida o una clave robada.",ok:true},{t:"Leer no puede hacer daño, así que no hay razón para no hacerlo."}],
+    why:"Lo que una mano puede leer, también lo alcanzan una línea escondida o una clave robada. Los conteos y las muestras pequeñas son todo lo que necesita el conteo del día del censo, y los nombres se quedan en la base de datos. ¿Cuál de tus herramientas alcanza más de lo que su trabajo necesita?"},
+  "line":{q:"El correo que pegó Clara escondía una línea que pedía al agente enviar fuera la lista de estudiantes. ¿Qué mantuvo a salvo la lista?",
+    opts:[{t:"La suerte: el agente no vio la línea."},{t:"La regla del agente de que lo que lee son datos, y unas manos que enmascaran los nombres y no pueden enviar nada fuera.",ok:true},{t:"Clara borró el correo antes de que el agente lo leyera."}],
+    why:"Dos cosas juntas. La regla del agente de que lo que lee son datos, nunca órdenes, así que le avisó a Jun y citó la línea; y sus manos, que enmascaran los nombres y no pueden enviar nada fuera, así que obedecer también habría fallado. Los tickets siempre traen palabras de extraños, así que el equipo quitó las otras dos partes de una fuga. ¿Cuál de las herramientas de tu agente podría enviar algo fuera?"}
+  }}};

@@ -2631,9 +2631,10 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
       const me=(xx,l)=>{ag_person(xx,P,X0,Y0,S0,{t:tt,pose:"hang",gaze:[3,0]});mj_headHat(xx,P,X0,Y0,S0,{t:tt,lift:l},"slouch",[34,32,34]);};me(x,lift*0.1);
       const lx0=X0+(452-296)*S0-10,ly0=Y0+(332-596)*S0,u=ag_sine(clamp((tt-c.gift)/1.4,0,1)),lx=lerp(1500,lx0,u),ly=lerp(560,ly0,u),z=3.2;
       mj_lens(x,lx,ly,170,{a:ag_in(tt,c.gift-0.1,0.4),draw:xx=>{xx.save();xx.translate(lx,ly);xx.scale(z,z);xx.translate(-lx,-ly);xx.drawImage(ag_place("mjAutumnHead"),0,0);me(xx,lift);xx.restore();}});}},
-    // ever since: the answer kept from the one who asks, sealed; on a cut, so the two faces never melt into one
+    // ever since: the answer kept from the one who asks, sealed; on a cut, so the two faces never melt into one. The envelope comes up
+    // into the frame with his hand from below it, whole, rather than fading in at the frame's edge
     {at:tSince,cut:true,place:"mjAutumnHead",keys:[[tSince,960,540,1]],push:0.03,draw:(x,tt)=>{const P=MJ_PERSON.pfungst,up=ag_spr(tt,c.since+0.2,0.6);
-      ag_person(x,P,760,560,1.05,{t:tt,pose:{near:[2,14,"rest"]},pose2:"hold",mix:up,gaze:[3,lerp(0,2,up)],hold:(xx,h)=>{if(up>0.2)mj_envelope(xx,h.near[0]+60,h.near[1]-40,300,{word:"answer",rot:-0.12,a:ag_in(up,0.2,0.3)});}});}},
+      ag_person(x,P,760,560,1.05,{t:tt,pose:{near:[2,14,"rest"]},pose2:"hold",mix:up,gaze:[3,lerp(0,2,up)],hold:(xx,h)=>{if(up>0.01)mj_envelope(xx,h.near[0]+60,h.near[1]-40,300,{word:"answer",rot:-0.12,a:ag_in(up,0.01,0.12)});}});}},
     // today: the room, Jun and the agent; Berlin's light carries across
     {at:tRoom,place:"lab",keys:[[tRoom,960,540,1]],push:0.025,draw:(x,tt)=>{
       ag_person(x,"jun",296,596,1.0,{t:tt,gaze:[3,0],talk:0,smile:0.3});

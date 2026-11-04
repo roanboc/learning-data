@@ -1805,6 +1805,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2585,6 +2593,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -3467,7 +3480,9 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
     // his office: Yusuf takes the next binder off the shelf, its label the film's title; the newest DMBOK stands on his desk, as in every film
     {at:0,place:"office",keys:[[0,1250,560,1.3],[0.2,1270,540,1.36]],d:3,draw:(x,tt)=>{const out=fin(tt,P.take,0.5),has=tt>=P.take+0.55;
       ws_binders(x,{out,taken:has});gv_deskBook(x);
-      person(x,"yusuf",1370,905,0.8,{pose:has?"hold":"listen",pose2:has?null:"reach",mix:has?0:gv_io(tt,P.take-0.5,P.take+0.6,0.4),t:tt,carry:has?ws_heldTitled(["Who may","see it"],ws_bindCol(5)):null});
+      // once he has it, his arm brings it from the shelf into the hold over half a second (not in one frame), the binder in his hand
+      const m=sstep(P.take+0.55,P.take+1.0,tt);POSE.ws_take=gv_blendNear(POSE.reach,POSE.hold,m);
+      person(x,"yusuf",1370,905,0.8,{pose:has?"ws_take":"listen",pose2:has?null:"reach",mix:has?0:gv_io(tt,P.take-0.5,P.take+0.6,0.4),t:tt,carry:has?gv_fromHand(ws_heldTitled(["Who may","see it"],ws_bindCol(5)),m):null});
       ws_nameCard(x,700,390,"Yusuf Demir","data governance lead",gv_io(tt,0.5,P.desk-0.3,0.4));}},
     // the binder open on his desk: policy 6, what it says; and what it doesn't
     {at:P.desk,place:"desk",keys:[[P.desk,1152,432,1.25],[P.mem,960,540,1]],d:2.4,draw:(x,tt)=>{ws_openBinder(x,1);

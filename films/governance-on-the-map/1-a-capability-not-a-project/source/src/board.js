@@ -112,8 +112,9 @@ function cp_personBack(ctx,id,x,y,s,o){const k=head;head=(c,P)=>cp_backHead(c,P)
 function cp_placeHi(key){return wc_kept("cpHi:"+key,W*2,H*2,q=>{q.scale(2,2);WC_PLACES[key](q);});}
 // The breach (CP_A.breach) filled with fresh clay up to the crest, and new turf laid on it in rows from the foot up (u, 0 to 1, how much
 // is laid); people at work on it: two digging clay at its foot, two laying turf, one carrying a square of turf up to them; the flood's
-// water still lying in the fields near it, in pools that shrink (dry, 0 to 1)
-function cp_mendPolder(ctx,t,u,dry){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,T=A.toe,K=A.crest[0],Hc=A.crest[1],x0=bx-bw,x1=bx+bw,R=wc_rng(591),
+// water still lying in the fields near it, in pools that shrink (dry, 0 to 1). up (0 to 1): how far up the slope the one carrying
+// turf has come; he climbs it once, while we watch, rather than over and over (he went back to the foot in one frame)
+function cp_mendPolder(ctx,t,u,dry,up){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,T=A.toe,K=A.crest[0],Hc=A.crest[1],x0=bx-bw,x1=bx+bw,R=wc_rng(591),
     sl=(X,v)=>[X,v*Hc,lerp(T,K,v)];
   for(const [X,Z,rx,rz,sd] of [[2,50,6,4.5,601],[36,47,7,5,603],[14,64,3,2.4,605]]){const k=1-0.45*clamp(dry,0,1),L=[];
     for(let i=0;i<28;i++){const a=i/28*TAU,w=1+0.14*Math.sin(a*3+sd)+0.06*Math.sin(a*7+sd*2);L.push([X+Math.cos(a)*rx*k*w,0.03,Z+Math.sin(a)*rz*k*w]);}const pts=P(L);if(pts.length>2)cp_pool(ctx,pts,0.8,sd);}
@@ -134,11 +135,13 @@ function cp_mendPolder(ctx,t,u,dry){const A=CP_A,C=A.C,P=cp_aP,[bx,bw]=A.breach,
   const ph=(o)=>cp_dig(t+o,1.6);
   for(const [id,X,Z,o,fl] of [["cpDig",x0-3.2,T-1.6,0,false],["cpHus",x1+3,T-1.2,0.7,true]])
     cp_who(ctx,C,id,X,0,Z,{pose:"cp_digDown",pose2:"cp_digUp",mix:ph(o),t,flip:fl,wide:true,carry:cp_heldSpade({ground:-4,clod:clamp((ph(o)-0.35)/0.4,0,1)})});
-  const r=Math.floor(on/nx),vr=Math.min(0.95,(r+0.6)/nv);
+  // the two laying turf kneel at the row being laid, and shuffle up to the next as it's finished, over a few frames (not in one)
+  const rf=on/nx,r=Math.floor(rf)+sstep(0.7,1,rf-Math.floor(rf)),vr=Math.min(0.95,(r+0.6)/nv);
   for(const [id,X,o] of [["cpOwner",lerp(x0,x1,0.3),0],["cpOwnerC",lerp(x0,x1,0.72),0.9]]){const b=Math.sin(t*2.2+o);
     cp_who(ctx,C,id,X,vr*Hc,lerp(T,K,vr)-0.3,{pose:"cp_reachDown",pose2:"cp_basket",mix:0.5+0.5*b,t});}
-  const e=clamp((t%4.2)/3.4,0,1),vc=lerp(0,vr-0.12,e),wk=Math.sin(t*6);
-  cp_who(ctx,C,"cpSon",lerp(x0+1,x0+3,e),vc*Hc,lerp(T-2.5,lerp(T,K,vc),Math.min(1,e*3))-0.3,{pose:"cp_basket",pose2:wk>0?"walkA":"walkB",mix:e<1?Math.abs(wk)*0.5:0,t,carry:cp_heldTurf});}
+  // his step dies away as he arrives, rather than stopping in a frame
+  const e=clamp(up,0,1),vc=lerp(0,vr-0.12,e),wk=Math.sin(t*6);
+  cp_who(ctx,C,"cpSon",lerp(x0+1,x0+3,e),vc*Hc,lerp(T-2.5,lerp(T,K,vc),Math.min(1,e*3))-0.3,{pose:"cp_basket",pose2:wk>0?"walkA":"walkB",mix:Math.abs(wk)*0.5*(1-sstep(0.85,1,e)),t,carry:cp_heldTurf});}
 // a square of turf held in both hands, grass up
 function cp_heldTurf(cx,P_,hands){const [l,r]=hands,mx=(l[0]+r[0])/2,my=(l[1]+r[1])/2;cx.save();cx.translate(mx,my-14);
   cx.fillStyle=rgba(CP.peat,1);rr(cx,-84,-6,168,34,6);cx.fill();cx.fillStyle=rgba(mix(CP.grass2,CP.grass3,0.4),1);rr(cx,-86,-20,172,22,8);cx.fill();
@@ -175,9 +178,13 @@ function cp_heldSpadeUp(cx,P_,hands){const h=hands[1],tip=[h[0]+26,0],L=Math.hyp
   cx.strokeStyle=rgba(CP_WOODDK,1);cx.lineWidth=13;cx.beginPath();cx.moveTo(top[0]+n[0]*26,top[1]+n[1]*26);cx.lineTo(top[0]-n[0]*26,top[1]-n[1]*26);cx.stroke();
   const bl=[[s1[0]+n[0]*22,s1[1]+n[1]*22],[tip[0]+n[0]*28,tip[1]+n[1]*28],[tip[0]-n[0]*28,tip[1]-n[1]*28],[s1[0]-n[0]*22,s1[1]-n[1]*22]];cx.fillStyle=rgba(CP_WOOD,1);cx.beginPath();bl.forEach((q,i)=>i?cx.lineTo(q[0],q[1]):cx.moveTo(q[0],q[1]));
   cx.closePath();cx.fill();cx.strokeStyle=rgba(CP_WOODDK,0.8);cx.lineWidth=2.4;cx.stroke();cx.fillStyle=rgba([96,98,104],1);cx.fillRect(Math.min(tip[0]-28,tip[0]+28),tip[1]-20,56,20);cx.restore();fingers(cx,P_,[h]);}
-// someone walking along the crest from X0 to X1, setting off at t0 (1.3 m a second); returns where they are, and draws them
+// someone walking along the crest from X0 to X1, setting off at t0 (1.3 m a second); returns where they are, and draws them. o as
+// person's, or a function of the walk (gv_walk's) that gives them, for someone who takes up a pose as they go (gv_walkInto)
 function cp_bankWalker(ctx,id,t,t0,X0,X1,o){const B=CP_B,Z=B.c0+0.3,a=cp_b(X0,cp_bCrest(X0),Z)[0],b=cp_b(X1,cp_bCrest(X1),Z)[0],k=B.C.F/Z,w=gv_walk(t,t0,a,b,1.3*k),X=lerp(X0,X1,(w.x-a)/((b-a)||1)),
-    q=cp_b(X,cp_bCrest(X),Z),s=k*1.7/560;w.bob*=s/0.35;gv_walker(ctx,id,w,q[1],s,Object.assign({t},o||{}));return{X,moving:w.moving,end:w.end};}
+    q=cp_b(X,cp_bCrest(X),Z),s=k*1.7/560;w.bob*=s/0.35;if(typeof o==="function")o=o(w);gv_walker(ctx,id,w,q[1],s,Object.assign({t},o||{}));return{X,moving:w.moving,end:w.end};}
+// a staff in the right hand, going from upright on the ground beside the foot (as cp_heldStaff holds it) to its tip at rel from the
+// hand as m goes from 0 to 1, so it tilts out to tap the clay rather than jumping there
+const cp_heldStaffTo=(rel,m)=>(cx,P_,h)=>cp_heldStaff({rel:[lerp(4,rel[0],m),lerp(-h[1][1],rel[1],m)]})(cx,P_,h);
 
 // a house mark, a farm's sign cut in wood: a few straight strokes, centred at (x, y), r its half size
 function cp_mark(ctx,m,x,y,r){const L=[[[0,-1],[0,1],[-0.6,-0.4],[0,-1],[0.6,-0.4]],[[0,1],[0,-1],[-0.55,-0.5],[0.55,-0.5]],[[-0.6,-0.9],[0.6,0.9],[0,-1],[0,1],[0.6,-0.9],[-0.6,0.9]],
@@ -214,7 +221,8 @@ function cp_farmLife(ctx,t,t0){const F=CP_F,C=F.C,p=cp_f,P=L=>cp_proj(C,L,1),e=t
   for(const [X,Z2,col,o,fl] of [[-1.8,5.4,[238,230,212],0,0],[-0.8,6.4,[172,108,62],1.3,1],[1.2,5.8,[226,214,190],2.1,0],[2.6,6.6,[150,92,56],0.7,1]]){const h=p(X,0,Z2),pk=Math.max(0,Math.sin(t*3.1+o*2.3));
     cp_hen(ctx,h[0],h[1],cp_fK(X,Z2),col,pk,fl);}
   cp_who(ctx,C,"cpKid",-0.9,0,8.9,{t,flip:true,pose:"stand"});cp_who(ctx,C,"cpKid2",0.2,0,9.4,{t,pose:"wave",flip:true});
-  const we=clamp(e/3.6,0,1),ww=Math.sin(e*5);cp_who(ctx,C,"cpWife",lerp(-2.4,1.4,we),0,lerp(11.6,10.4,we),{pose:"cp_basket",pose2:we<1?(ww>0?"walkA":"walkB"):null,mix:we<1?Math.abs(ww)*0.6:0,t,flip:true,carry:cp_heldBasket});}
+  // her step dies away as she stops, rather than in a frame
+  const we=clamp(e/3.6,0,1),ww=Math.sin(e*5);cp_who(ctx,C,"cpWife",lerp(-2.4,1.4,we),0,lerp(11.6,10.4,we),{pose:"cp_basket",pose2:we<1?(ww>0?"walkA":"walkB"):null,mix:Math.abs(ww)*0.6*(1-sstep(0.86,1,we)),t,flip:true,carry:cp_heldBasket});}
 // a gull in flight at (x, y), s its span in px, flapping (ph); white, grey on its back and wings, the tips dark
 function cp_gull(ctx,x,y,s,ph,fl){const f=Math.sin(ph),w=s/2,d=fl?-1:1;ctx.save();ctx.translate(x,y);ctx.scale(d,1);ctx.lineCap="round";ctx.lineJoin="round";
   ctx.fillStyle=rgba([244,244,240],1);ctx.beginPath();ctx.ellipse(0,0,w*0.32,w*0.1,0,0,TAU);ctx.fill();

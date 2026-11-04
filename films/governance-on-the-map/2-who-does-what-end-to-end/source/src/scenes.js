@@ -23,7 +23,7 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
       approves:w("drafts","approves"),view:w("drafts","gives its view"),six:w("twenty","more than six"),free:w("twenty","free online"),lists:w("update","lists")};});
   const s1b=P.dict-0.4,s2=c.brings-0.3,s4=c.wrong-0.3,s4b=P.words-0.3,s5=c.millions-0.5,s6=P.noway-0.3,s7=c.later-0.3,s8=c.y1951-0.3,s9=P.spain+0.05,
     s10=c.today-0.3,s11=c.drafts-0.3,s12=P.approves-0.4,s13=P.view-0.4,s14=P.free-0.4,s15=c.update-0.3,s16=c.same-0.3;
-  // Palma's slips: up the table one after another, then most of them back to his elbow; the last one back, he picks up
+  // Palma's slips: up the table one after another, then most of them back to his elbow; then he lifts one to the lamp
   const up0=P.more+0.9,dn0=c.down+0.15,pick=P.among-0.2,slipUp=i=>clamp((t-up0-i*0.42)/1.5,0,1),slipBack=i=>clamp((t-dn0-i*0.16)/0.9,0,1);
   ee_shots(ctx,S,t,sc.dur,[
     // the academy at night; Palma stands at his place near the table's end, his bundle of slips in his hands, and sits as he joins them
@@ -35,12 +35,15 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     {at:s1b,cut:true,keys:[[s1b,440,590,1.85],[s1b+0.1,430,592,1.88]],d:3,push:0,draw:(x,tt)=>ee_acadNight(x,tt,{
       pose:id=>id==="eeHead"?{pose:"listen",pose2:"ee_hand",mix:clamp((tt-P.dict+0.2)/0.7,0,1),flip:false}:id==="eePalma"?{pose:"ee_bundle",carry:ee_heldBundle({open:0})}:null,
       on:q=>{if(tt>P.dict+0.35)ee_handOn(q,368,692,0.9,PEOPLE.eeHead.skin,EE_FROCK[0],0.1);}})},
-    // Palma unties the bundle and passes the slips up the table; they go back down, most to a pile at his elbow; he holds one up to the lamp
-    {at:s2,cut:true,keys:[[s2,1450,560,1.7],[P.more+0.3,960,540,1.0],[c.down-0.3,1330,520,1.45]],d:2.4,push:0,draw:(x,tt)=>{const op=clamp((tt-c.brings-0.3)/0.8,0,1),hold=tt<up0-0.3,
-      lamp=clamp((tt-pick)/0.7,0,1);
-      ee_acadNight(x,tt,{pose:id=>{if(id==="eePalma")return hold?{pose:"ee_bundle",carry:ee_heldBundle({open:op})}:tt<pick?{pose:"listen"}:{pose:"listen",pose2:"ee_toLamp",mix:lamp,carry:lamp>0.45?ee_heldSlip:null,expr:"concerned"};
+    // Palma unties the bundle and passes the slips up the table, one at a time from the top of it; with the last gone, his hands come down
+    // (over half a second, not in a frame). They go back down, most to a pile at his elbow; he lifts one from behind the table's edge to
+    // the lamp, so it rises with his hand rather than appearing in it
+    {at:s2,cut:true,keys:[[s2,1450,560,1.7],[P.more+0.3,960,540,1.0],[c.down-0.3,1330,520,1.45]],d:2.4,push:0,draw:(x,tt)=>{const op=clamp((tt-c.brings-0.3)/0.8,0,1),
+      gone=[...Array(EE_SL.n).keys()].filter(i=>easeCam(slipUp(i))>0.001).length,last=up0+(EE_SL.n-1)*0.42,down=sstep(last+0.05,last+0.5,tt),lamp=clamp((tt-pick)/0.7,0,1);
+      POSE.ee_palmaDown=gv_blendNear(POSE.ee_bundle,POSE.listen,down);
+      ee_acadNight(x,tt,{pose:id=>{if(id==="eePalma")return tt<pick?{pose:"ee_palmaDown",carry:down<0.5?ee_heldBundle({open:op,left:EE_SL.held(gone)}):null}:{pose:"listen",pose2:"ee_toLamp",mix:lamp,carry:lamp>0?ee_heldSlip:null,expr:"concerned"};
           if(id==="eeHead")return{pose:"listen",flip:false};return null;},
-        on:q=>ee_slips(q,slipUp,slipBack,lamp>0.45),
+        on:q=>ee_slips(q,slipUp,slipBack,false),
         after:q=>{ee_tagAt(q,tt,P.more+0.6,c.down-0.6,760,446,"more than 300 words",{size:32});ee_tagAt(q,tt,P.budget,s4+0.3,1513,424,"to budget",Object.assign({size:32},EE_GOLDTAG));}});}},
     // Lima: a schoolroom, the pupil at his desk, the thick dictionary open beside his notebook, the teacher standing by
     {at:s4,keys:[[s4,960,560,1.06]],push:0.02,draw:(x,tt)=>ee_school(x,tt,{teacher:true})},
@@ -53,10 +56,11 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
     // far away, down a corridor, the academy's tall door closes
     {at:s6,place:"hall",keys:[[s6,960,500,1.0]],push:0.04,draw:(x,tt)=>ee_door(x,clamp((tt-P.noway-0.2)/1.7,0,1))},
     // Lima, 1909: Palma, older, at his desk in the National Library, writes to a friend in Madrid; then seals the letter, and holds it
-    {at:s7,keys:[[s7,960,560,1.0],[P.asking-0.3,960,600,1.3]],d:2.6,push:0,draw:(x,tt)=>{x.drawImage(gv_place("lib"),0,0,W,H);const sl=tt>=c.change-0.2,
-      L=EE_LB;x.save();x.beginPath();x.rect(-W,-H,3*W,L.dk.bk+H);x.clip();
-      person(x,"eePalmaOld",L.seat[0],L.dk.bk+GV_SIT*L.seat[1]*PEOPLE.eePalmaOld.build.h,L.seat[1],sl?{pose:"ee_bundle",t:tt,flip:false,carry:ee_heldLetter({seal:clamp((tt-c.change-0.4)/0.5,0,1)})}:
-        {pose:"write",t:tt,flip:false,carry:ee_heldWriting(clamp((tt-s7-0.6)/6.5,0,1))});x.restore();x.drawImage(ee_libDesk(),0,0,W,H);
+    // (he folds it over half a second as his hands come together, rather than the sheet becoming the letter in a frame)
+    {at:s7,keys:[[s7,960,560,1.0],[P.asking-0.3,960,600,1.3]],d:2.6,push:0,draw:(x,tt)=>{x.drawImage(gv_place("lib"),0,0,W,H);const fold=sstep(c.change-0.45,c.change+0.05,tt),
+      L=EE_LB;x.save();x.beginPath();x.rect(-W,-H,3*W,L.dk.bk+H);x.clip();POSE.ee_palmaFold=gv_blendNear(POSE.write,POSE.ee_bundle,fold);
+      person(x,"eePalmaOld",L.seat[0],L.dk.bk+GV_SIT*L.seat[1]*PEOPLE.eePalmaOld.build.h,L.seat[1],{pose:"ee_palmaFold",t:tt,flip:false,
+        carry:fold>=1?ee_heldLetter({seal:clamp((tt-c.change-0.4)/0.5,0,1)}):ee_heldFolding(clamp((tt-s7-0.6)/6.5,0,1),fold)});x.restore();x.drawImage(ee_libDesk(),0,0,W,H);
       ee_tagAt(x,tt,P.became,s8-0.3,1250,560,"to budget?",Object.assign({size:32},EE_GOLDTAG));}},
     // Mexico City, 1951: the academies of the Americas at one table; they stand as the line names them, and shake hands as they form the
     // association; the camera closes in on them
@@ -137,6 +141,9 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s
 // and every copy follows; the request's path through the rooms ----
 // the request's flight on the floor, from Clara's hands, out past the glass and along, into Mei's
 const EE_FLY=ee_smooth([[262,646],[322,700],[420,724],[548,700],[528,652]],10);
+// where the request's middle is in Clara's hands as she lets it go, and in Mei's as she takes it (the held card is 0.92 of a unit, at
+// the floor's 0.5: 0.46)
+const EE_FLYHAND=[[252,611.6],[520,612.8]];
 scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{drafts:w("mei","drafts"),ex:w("mei","with an"),checks:w("agent","checks"),needs:w("agent","needs"),lists:w("agent","lists"),three:w("agent","three"),two:w("agent","two dash"),
       reg:w("owner","registrar"),decides:w("owner","decides"),once:w("once","once"),pub:w("once","publishes"),gloss:w("once","glossary"),
@@ -148,13 +155,17 @@ scene("request",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
     gold=tt=>{const G=[[P.pub-0.1,0],[P.gloss,gTo(2)],[P.dt-0.7,gTo(2)],[P.dt,gTo(5)],[P.dash-0.5,gTo(5)],[P.dash,gTo(8)],[P.asst-0.5,gTo(8)],[P.asst,gTo(11)]];
       if(tt<=G[0][0])return 0;for(let k=1;k<G.length;k++)if(tt<G[k][0])return lerp(G[k-1][1],G[k][1],easeCam((tt-G[k-1][0])/(G[k][0]-G[k-1][0])));return 1;};
   ee_shots(ctx,S,t,sc.dur,[
-    // the floor: Clara's request leaves her hands, small and bright, and goes along to Mei's room; Noor and Yusuf walk behind it
+    // the floor: Clara's request leaves her hands, small and bright, and goes along to Mei's room; Noor and Yusuf walk behind it. It
+    // leaves from where it was in Clara's hands, at the size it was there, its glow growing as it goes, and comes to where Mei holds it,
+    // her hands coming up for it; Noor takes up her writing as she stops: nothing changes in a frame
     {at:0,keys:[[0,768,560,1.25],[1.4,640,600,1.5]],d:5.2,draw:(x,tt)=>{x.drawImage(ee_placeHi("floor"),0,0,W,H);const fly=clamp((tt-1.0)/2.6,0,1),got=fly>=1,
-        nw=gv_walk(tt,0.6,-120,676,230),yw=gv_walk(tt,0.8,-220,812,230);
+        nw=gv_walk(tt,0.6,-120,676,230),yw=gv_walk(tt,0.8,-220,812,230),rc=sstep(3.15,3.6,tt);POSE.ee_meiRecv=gv_blendNear(POSE.listen,POSE.hold,rc);
       ee_floor(x,tt,{out:["yusuf"],names:1-fin(tt,1.3,1.2),pose:{clara:fly<=0?{pose:"hold",carry:ee_heldReq}:{pose:"hold",pose2:"stand",mix:clamp((tt-1.0)/0.6,0,1),carry:null},
-        mei:got?{pose:"hold",carry:ee_heldReq}:{pose:"listen",carry:null}}});
-      if(fly>0&&!got){const [fx,fy]=ee_along(EE_FLY,easeCam(fly));ee_flyCard(x,fx,fy,0.6,Math.sin(fly*Math.PI)*0.12,1);}
-      gv_walker(x,"yusuf",yw,905,0.58,{t:tt});gv_walker(x,"noor",nw,905,0.58,Object.assign({t:tt,carry:heldNotebook},nw.moving?{}:{pose:"write"}));}},
+        mei:{pose:"ee_meiRecv",carry:got?ee_heldReq:null}}});
+      if(fly>0&&!got){const e=easeCam(fly),[fx,fy]=ee_along(EE_FLY,e),a=sstep(0,0.3,e),b=sstep(0.7,1,e),g=a*(1-b);
+        ee_flyCard(x,fx+lerp(EE_FLYHAND[0][0]-EE_FLY[0][0],0,a)+lerp(0,EE_FLYHAND[1][0]-EE_FLY[EE_FLY.length-1][0],b),fy+lerp(EE_FLYHAND[0][1]-EE_FLY[0][1],0,a)+lerp(0,EE_FLYHAND[1][1]-EE_FLY[EE_FLY.length-1][1],b),
+          lerp(0.46,0.6,g),-0.05+Math.sin(fly*Math.PI)*0.12,1,{glow:g});}
+      gv_walker(x,"yusuf",yw,905,0.58,{t:tt});gv_walker(x,"noor",nw,905,0.58,{t:tt,carry:heldNotebook,pose:gv_walkInto("ee_noorW",nw,"write",sstep(nw.end-0.1,nw.end+0.35,tt))});}},
     // Mei's desk: the request lands in her hands; she reads it, and turns to her screen, and starts the draft
     {cut:true,at:s2,place:"regClose",keys:[[s2,900,520,1.0],[s2+0.1,860,540,1.06]],d:2.4,draw:(x,tt)=>{const turn=fin(tt,P.drafts-0.1,0.5);
       gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"hold",pose2:"ee_toScreen",mix:turn,carry:turn<0.5?ee_heldReq:null,t:tt});

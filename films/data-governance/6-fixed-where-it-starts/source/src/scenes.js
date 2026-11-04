@@ -83,8 +83,9 @@ scene("clinics",(ctx,S,t,sc)=>{const c=sc.cues,P=fw_once(sc,"P",()=>({cr:c.first
         wp.moving?{}:{pose:"stand",pose2:"point",mix:inP?0:gv_io(tt,P.begW+0.5,P.why-0.3,0.4),flip:false})));
       const inW=tt>=P.why+1.0,wm=inW?gv_walk(tt,P.why+1.0,1080,875,160):gv_walk(tt,P.bg-1.0,1700,1080,280),
         am=fin(tt,P.bg-1.15,0.35)*(inW?1-fin(tt,wm.end-0.25,0.4):1);
+      // her hands come together as she stops, not in the frame she stops in
       if(am>0.01)fw_ghost(x,am,q=>gv_walker(q,"mother",wm,FW_WK.y,FW_WK.s,Object.assign({t:tt,expr:"worried"},
-        wm.moving?{}:{pose:"stand",pose2:"fw_beg",mix:inW?0:gv_io(tt,P.begW-0.3,P.why+0.2,0.5),flip:true})));
+        wm.moving?{}:{pose:"stand",pose2:"fw_beg",mix:inW?0:gv_io(tt,P.begW-0.3,P.why+0.2,0.5)*sstep(wm.end,wm.end+0.45,tt),flip:true})));
       // Semmelweis: walks in, looks at the first clinic's door, then the second's, then watches the doctors come
       const w=gv_walk(tt,P.walk,-80,1150,300),look=tt<P.lookR?1:tt<P.come-0.5?0:1;
       gv_walker(x,"semmelweis",w,FW_WK.y,FW_WK.s,{t:tt,pose:w.moving?null:"listen",flip:w.moving?false:look===1&&tt>=P.lookL});

@@ -45,9 +45,10 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       oh_tagAt(x,tt,P.years,null,960,210,"175 years",Object.assign({size:36},OH_GOLDTAG));
       [[P.what,"what was decided",560],[P.whom,"by whom",960],[P.why,"and why",1360]].forEach(([t0,s,tx])=>oh_tagAt(x,tt,t0,null,tx,840,s,{size:32}));}},
     // something has to change: two scholars of the town come to the archive's gate
-    {at:s8,keys:[[s8,960,700,1.5]],push:0.02,draw:(x,tt)=>oh_jeonju(x,tt,{cast:q=>{const u=clamp((tt-s8)/2.2,0,1),m=u<1?0.7:0;
-      person(q,"ohAn",lerp(1500,1080,easeCam(u)),1060,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5)>0?"walkA":"walkB",mix:m,t:tt,flip:true});
-      person(q,"ohSon",lerp(1640,1250,easeCam(u)),1070,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5+1)>0?"walkA":"walkB",mix:m,t:tt+1,flip:true});}})},
+    // (their arms swing with each step, from one side through the middle to the other, and the swing dies away as they arrive)
+    {at:s8,keys:[[s8,960,700,1.5]],push:0.02,draw:(x,tt)=>oh_jeonju(x,tt,{cast:q=>{const u=clamp((tt-s8)/2.2,0,1),m=0.7*Math.sin(u*Math.PI);
+      person(q,"ohAn",lerp(1500,1080,easeCam(u)),1060,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5)>0?"walkA":"walkB",mix:m*Math.abs(Math.sin(tt*5)),t:tt,flip:true});
+      person(q,"ohSon",lerp(1640,1250,easeCam(u)),1070,0.62,{pose:u<1?"stand":"listen",pose2:Math.sin(tt*5+1)>0?"walkA":"walkB",mix:m*Math.abs(Math.sin(tt*5+1)),t:tt+1,flip:true});}})},
     // into the mountains: the two scholars lead, the keepers carry the chests up the path towards us
     {cut:true,at:s9,keys:[[s9,960,560,1.0]],push:0.03,draw:(x,tt)=>{x.drawImage(gv_place("path"),0,0,W,H);oh_walkers(x,tt-s9,[["ohAn",0.56],["ohSon",0.5],["ohK1",0.38,true],["ohK2",0.3,true]],0.06);
       oh_nameCard(x,1480,250,"An Ui · Son Hong-rok","local scholars",gv_io(tt,s9+0.6,s9b-0.2,0.4));}},
@@ -105,10 +106,13 @@ scene("nine",(ctx,S,t,sc)=>{const c=sc.cues,P=oh_once(sc,"P",()=>{const w=(id,s)
       oh_nameCard(x,1400,330,"Clara Jensen","Planning",gv_io(tt,s4+0.4,s5,0.4));oh_tagAt(x,tt,s4+0.6,null,910,620,"since October",OH_GOLDTAG);}},
     // nine days later: the faculty's wall calendar, nine days crossed off one by one, and the day he sees it ringed
     {at:s5,keys:[[s5,960,470,1.0]],push:0.02,draw:(x,tt)=>oh_calendar(x,tt,{cross:clamp((tt-s5-0.3)/0.17,0,9),ring:clamp((tt-P.sees+0.25)/0.5,0,1)})},
-    // Jun finds her request, frowns, and passes it on, to Clara
+    // Jun finds her request, frowns, and passes it on, to Clara: it leaves from where it was in his hands, at the size it was there, its
+    // glow growing as it goes, and his arm comes up after it from the hold (not from his side, in a frame)
     {at:s6,place:"data",keys:[[s6,1182,540,1.3]],push:0.02,draw:(x,tt)=>{const go=clamp((tt-P.passes+0.1)/0.9,0,1),has=go<=0;oh_pile(x,1540,668,{out:true});
-      person(x,"jun",1330,905,0.8,has?{pose:"hold",t:tt,expr:"concerned",carry:oh_heldReq}:{pose:"listen",pose2:"point",mix:gv_io(tt,P.passes-0.1,P.passes+1.6,0.4),t:tt});
-      if(!has){const e=easeCam(go);oh_flyCard(x,lerp(1330,1990,e),lerp(640,330,e)-Math.sin(e*Math.PI)*60,0.9,0.1*e,1-clamp((go-0.85)/0.15,0,1));}
+      POSE.oh_junPass=gv_blendNear(gv_blendNear(POSE.hold,POSE.point,sstep(P.passes-0.1,P.passes+0.3,tt)),POSE.listen,fin(tt,P.passes+1.6,0.4));
+      person(x,"jun",1330,905,0.8,has?{pose:"hold",t:tt,expr:"concerned",carry:oh_heldReq}:{pose:"oh_junPass",t:tt});
+      // (594.9: the middle of the card in his hands; 0.736: its size there, 0.92 of a unit at his 0.8)
+      if(!has){const e=easeCam(go),a=sstep(0,0.3,e);oh_flyCard(x,lerp(1330,1990,e),lerp(lerp(594.9,640,a),330,e)-Math.sin(e*Math.PI)*60,lerp(0.736,0.9,a),lerp(-0.05,0.1*e,a),1-clamp((go-0.85)/0.15,0,1),{glow:a});}
       oh_tagAt(x,tt,P.passes+0.35,null,1640,430,"to Clara Jensen",OH_GOLDTAG);}},
     // had he said yes: a pale picture of what didn't happen, his hand on "approve", a gold "no" across it, "not the owner"
     {at:s7,place:"screenData",keys:[[s7,960,470,1.0],[s7+0.1,950,474,1.05]],d:3,draw:(x,tt)=>oh_approve(x,tt,{hand:clamp((tt-P.yes+0.3)/0.8,0,1),no:clamp((tt-P.isnt+0.1)/0.9,0,1),tagAt:P.decided})},

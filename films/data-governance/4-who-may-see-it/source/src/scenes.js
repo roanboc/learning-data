@@ -194,7 +194,9 @@ scene("path",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
     // his office: Yusuf takes the next binder off the shelf, its label the film's title; the newest DMBOK stands on his desk, as in every film
     {at:0,place:"office",keys:[[0,1250,560,1.3],[0.2,1270,540,1.36]],d:3,draw:(x,tt)=>{const out=fin(tt,P.take,0.5),has=tt>=P.take+0.55;
       ws_binders(x,{out,taken:has});gv_deskBook(x);
-      person(x,"yusuf",1370,905,0.8,{pose:has?"hold":"listen",pose2:has?null:"reach",mix:has?0:gv_io(tt,P.take-0.5,P.take+0.6,0.4),t:tt,carry:has?ws_heldTitled(["Who may","see it"],ws_bindCol(5)):null});
+      // once he has it, his arm brings it from the shelf into the hold over half a second (not in one frame), the binder in his hand
+      const m=sstep(P.take+0.55,P.take+1.0,tt);POSE.ws_take=gv_blendNear(POSE.reach,POSE.hold,m);
+      person(x,"yusuf",1370,905,0.8,{pose:has?"ws_take":"listen",pose2:has?null:"reach",mix:has?0:gv_io(tt,P.take-0.5,P.take+0.6,0.4),t:tt,carry:has?gv_fromHand(ws_heldTitled(["Who may","see it"],ws_bindCol(5)),m):null});
       ws_nameCard(x,700,390,"Yusuf Demir","data governance lead",gv_io(tt,0.5,P.desk-0.3,0.4));}},
     // the binder open on his desk: policy 6, what it says; and what it doesn't
     {at:P.desk,place:"desk",keys:[[P.desk,1152,432,1.25],[P.mem,960,540,1]],d:2.4,draw:(x,tt)=>{ws_openBinder(x,1);

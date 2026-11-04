@@ -2273,10 +2273,12 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
     mc_rows(ctx,RX,RY,{s:RS,dy:RDY,open,labelA:0,slip:o.slip==null?slipA:o.slip,glow:o.glow==null?ag_in(t,tAgree+1.8,0.8)*(1-0.6*slipA):o.glow});ctx.restore();return rows;};
   // the teacher's hands: open and empty as nothing is written, speaking the line, raised to stop the slip, raised again for "no single memory"
   const teach=ag_io(t,tPassed-0.6,tChanges-0.4,0.6),empty=ag_io(t,tWritten-0.2,tPassed-0.6,0.6),raise=ag_io(t,tShow-0.1,tFix+0.6,0.45)+ag_io(t,tSingle,tChecked+0.6,0.6);
-  const pose=raise>0.01?MC_POSE.raise:empty>0.01?MC_POSE.empty:MC_POSE.teach,mixv=raise>0.01?raise:empty>0.01?empty:teach;
+  // each gesture is taken up from wherever his hands are, by how far it's come, so one gives way to the next without a jump (the next
+  // was once taken up only when the last had gone, and by then it was all the way up: his hand leapt from his lap to his chest)
+  const pose=[[MC_POSE.empty,empty],[MC_POSE.teach,teach],[MC_POSE.raise,raise]].reduce((p,[q,m])=>ag_poseOf({pose:p,pose2:q,mix:m}),MC_POSE.sit);
   const talk={teacher:mc_recite(t,tPassed-0.2,tStudent+0.2)+mc_recite(t,tFix-0.2,tFix+1.2)*0,boy1:mc_recite(t,tStudent+0.3,tStudent+1.6)+mc_recite(t,tSlipped-0.2,tShow+0.4)+mc_recite(t,tFix,tFix+1.4)+mc_recite(t,tLater+3.2,tLater+5),
     boy2:mc_recite(t,tTaught+1.4,tTaught+3.2)+mc_recite(t,tLater+3.2,tLater+5)};
-  const people=(ctx,o)=>{o=o||{};mc_reciters(ctx,t,{pose:MC_POSE.sit,pose2:pose,mix:mixv,talk,gaze1:t>tTaught&&t<tGen?[4,0]:[-3,0],nod1:t>tTaught&&t<tGen?0.03:0});};
+  const people=(ctx,o)=>{o=o||{};mc_reciters(ctx,t,{pose,talk,gaze1:t>tTaught&&t<tGen?[4,0]:[-3,0],nod1:t>tTaught&&t<tGen?0.03:0});};
   const ribbonT=(u,a)=>{const m=mc_mouth(T.teacher[0],T.teacher[1],T.teacher[2]),q=[T.boy1[0]-30,T.boy1[1]-150];mc_ribbon(ctx,[m[0]+10,m[1],m[0]+120,m[1]-90,q[0]-80,q[1]-110,q[0],q[1]-40],0,u,a,4);};
 
   const shots=[

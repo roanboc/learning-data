@@ -24,7 +24,9 @@ function po_hallFolk(x,tt,t0){const C=PO_IN,w=po_stroll(C,tt,t0-0.4,-3.0,8.9,-1.
 // holds up the cloth he bought, a hand short, and looks back for its seller, lost in the crowd; then he goes, down the street and out of
 // the market. The cap seller in his stall at the left; a cloth seller at the right, by his empty stall, watches him go
 function po_scene1520(x,tt,P){const C=PO_STR,cp=po_pj(C,-3.85,0.7,6.1),cs=1.68*po_ppm(C,6.1)/560,cl=po_at(C,2.5,7.4),lost=fin(tt,P.traders,0.6);
-  person(x,"po_capman",cp[0],cp[1],cs,{pose:tt>P.poor-0.2&&tt<P.stop?"po_offer":"listen",t:tt});
+  // the cap seller holds out his caps while the buyer is with him, his arms going out and back over 0.4 s, not in a frame
+  POSE.po_capOff=gv_blendNear(POSE.listen,POSE.po_offer,sstep(P.poor-0.4,P.poor,tt)*(1-sstep(P.stop-0.2,P.stop+0.2,tt)));
+  person(x,"po_capman",cp[0],cp[1],cs,{pose:"po_capOff",t:tt});
   const away=po_stroll(C,tt,P.stop,-1.9,5.5,0.5,16.5,1.15),walkIn=po_stroll(C,tt,P.st+0.2,0.7,5.0,-1.9,5.5,1.0);
   // the cloth seller is farther than the buyer until the buyer has walked past him into the street
   const seller=()=>person(x,"po_cloth1",cl.x,cl.y,cl.s,{pose:"listen",t:tt+2,flip:true,expr:lost>0.5?"concerned":"calm",nod:-0.06*lost});
@@ -33,8 +35,13 @@ function po_scene1520(x,tt,P){const C=PO_STR,cp=po_pj(C,-3.85,0.7,6.1),cs=1.68*p
     if(tt>=P.stop)po_back(x,"po_buyer",away.x,away.y-away.bob,away.s,{ph:away.ph});
     else if(walkIn.moving||tt<P.st+0.2)po_walker(x,"po_buyer",walkIn,{t:tt});
     else if(tt<P.poor-0.2)po_walker(x,"po_buyer",walkIn,{pose:"listen",t:tt,flip:true,nod:0.04*Math.sin(tt*1.3)});
-    else if(tt<P.short-0.2)po_walker(x,"po_buyer",walkIn,{pose:"po_hold",t:tt,flip:true,expr:"concerned",carry:po_heldCap(PO.felt[4],{seam:fin(tt,P.poor,0.6),turn:Math.sin(tt*1.4)*0.6})});
-    else po_walker(x,"po_buyer",walkIn,{pose:"po_measure",t:tt,flip:false,wide:true,expr:"worried",carry:po_heldClothArm});}
+    // his hands come up with the cap, and then go from the cap to the cloth, over a few frames each, not in one
+    else{const cap=po_heldCap(PO.felt[4],{seam:fin(tt,P.poor,0.6),turn:Math.sin(tt*1.4)*0.6});
+      if(tt<P.short-0.2){const m=sstep(P.poor-0.2,P.poor+0.25,tt);POSE.po_buyA=gv_blendNear(POSE.listen,POSE.po_hold,m);
+        po_walker(x,"po_buyer",walkIn,{pose:"po_buyA",t:tt,flip:true,expr:"concerned",carry:(cx,P_,h)=>withA(cx,m,()=>cap(cx,P_,h))});}
+      else{const a=P.short-0.2,m=sstep(a,a+0.45,tt);POSE.po_buyB=gv_blendNear(POSE.po_hold,POSE.po_measure,m);
+        po_walker(x,"po_buyer",walkIn,{pose:"po_buyB",t:tt,flip:false,wide:true,expr:"worried",
+          carry:(cx,P_,h)=>{withA(cx,1-sstep(a,a+0.2,tt),()=>cap(cx,P_,h));withA(cx,sstep(a+0.1,a+0.45,tt),()=>po_heldClothArm(cx,P_,h));}});}}}
   // where to find it, what it will be, who answers for it: over him as each is named, gone as he goes
   [["where to find it?",P.search],["what will it be?",P.poor],["who answers for it?",P.short]].forEach(([q,t0],i)=>po_tagAt(x,tt,t0,P.stop+0.5,790,300+i*72,q,{size:30}));}
 // the 1600s, the cap makers' street: the master in his stall, his apprentice stitching felt beside him; the guild's officer in front of
@@ -51,7 +58,9 @@ function po_inspectors(x,tt,t0){const C=PO_STR,sp=po_pj(C,-3.85,0.7,9.6),ss=1.68
     I=po_stroll(C,tt,t0-1.2,-0.4,11.6,-1.6,9.6,1.1),B=po_stroll(C,tt,t0-1.0,0.4,12.4,-0.9,10.3,1.1),R=po_stroll(C,tt,t0-1.4,-1.0,11.0,-2.3,9.2,1.1);
   person(x,"po_cloth2",sp[0],sp[1],ss,{pose:"listen",t:tt,expr:tt>t0+0.6?"concerned":"calm"});
   [[B,"po_scales",{pose:"po_balance",carry:po_heldBalance}],[I,"po_inspector",{pose:"listen"}],[R,"po_rodman",{pose:"po_staff",carry:po_heldRod}]].sort((a,b)=>b[0].Z-a[0].Z)
-    .forEach(([w,id,o])=>po_walker(x,id,w,Object.assign({t:tt,flip:true},o)));}
+    // each settles into what he does over 0.4 s once he stops, rather than in the frame he stops in
+    .forEach(([w,id,o])=>{if(!w.moving&&o.pose){POSE["po_in_"+id]=gv_blendNear(POSE.stand,POSE[o.pose],sstep(w.end,w.end+0.4,tt));o=Object.assign({},o,{pose:"po_in_"+id});}
+      po_walker(x,id,w,Object.assign({t:tt,flip:true},o));});}
 // the close-up at the counter: the seller behind it, the bolt and its length on it, the rod stepping along it; the cloth ends a hand short
 // of the rod's last mark, bracketed in red; the seller lowers his head
 function po_counter(x,tt,P,o){const C=PO_CC,bow=fin(tt,o.bow==null?1e9:o.bow,0.7);
@@ -110,7 +119,7 @@ scene("bazaar",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,
     {cut:true,at:P.cc,place:"clothClose",keys:[[P.cc,960,540,1.0],[P.cc+0.1,1000,560,1.06]],d:3,draw:(x,tt)=>po_counter(x,tt,P,{steps:[P.cc+0.2,P.cc+1.2],mark:P.sold,bow:P.answers})},
     // a woman comes up the cap makers' street to the master's stall: where to find it, what it will be, who stands behind it
     {at:P.buyer,place:"st1600",keys:[[P.buyer,780,560,1.12],[P.buyer+0.1,740,560,1.2]],d:3,draw:(x,tt)=>{const w=po_stroll(PO_STR,tt,P.buyer+0.1,0.3,11.5,-2.0,6.3,1.3);
-      po_master(x,tt,{pose:w.moving?"listen":"po_offer",expr:w.moving?"calm":"smile"});po_walker(x,"po_woman",w,{t:tt,flip:w.moving?w.flip:true});po_knows(x,tt,[P.find,P.what,P.who],null);}},
+      POSE.po_masterOff=gv_blendNear(POSE.listen,POSE.po_offer,w.moving?0:sstep(w.end,w.end+0.4,tt));po_master(x,tt,{pose:"po_masterOff",expr:w.moving?"calm":"smile"});po_walker(x,"po_woman",w,{t:tt,flip:w.moving?w.flip:true});po_knows(x,tt,[P.find,P.what,P.who],null);}},
     // the next day: she comes back with a friend
     {cut:true,at:P.back,place:"st1600",keys:[[P.back,740,560,1.2],[P.back+0.1,730,560,1.22]],d:2.4,draw:(x,tt)=>{const a=po_stroll(PO_STR,tt,P.back-0.3,0.4,8.6,-1.8,6.4,1.15),b=po_stroll(PO_STR,tt,P.back,1.1,9.2,-1.0,7.0,1.15);
       po_master(x,tt,{pose:"po_offer",expr:"smile"});[[b,"po_friend"],[a,"po_woman"]].forEach(([w,id])=>po_walker(x,id,w,{t:tt,flip:w.moving?w.flip:true,expr:"smile"}));
@@ -138,8 +147,10 @@ scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
     // today, in his office: Yusuf takes the next binder off the shelf, its label the film's title; six gaps where the films before took theirs
     {at:0,place:"office",keys:[[0,1230,560,1.3],[0.2,1250,540,1.36]],d:3,draw:(x,tt)=>{const out=fin(tt,P.take,0.5),has=tt>=P.take+0.55;
       po_binders(x,{out,taken:has});gv_deskBook(x);
-      person(x,"yusuf",1290,905,0.8,{pose:has?"hold":"listen",pose2:has?null:"po_reachLow",mix:has?0:gv_io(tt,P.take-0.6,P.take+0.6,0.4),t:tt,
-        carry:has?po_heldTitled(["A product","with","an owner"],po_bindCol(PO_BIND.mine)):null});}},
+      // once he has it, his arm brings it from the shelf into the hold over half a second (not in one frame), the binder in his hand
+      const m=sstep(P.take+0.55,P.take+1.0,tt);POSE.po_take=gv_blendNear(POSE.po_reachLow,POSE.hold,m);
+      person(x,"yusuf",1290,905,0.8,{pose:has?"po_take":"listen",pose2:has?null:"po_reachLow",mix:has?0:gv_io(tt,P.take-0.6,P.take+0.6,0.4),t:tt,
+        carry:has?gv_fromHand(po_heldTitled(["A product","with","an owner"],po_bindCol(PO_BIND.mine)),m):null});}},
     // binder 22 open on his desk: policy 22, and its line
     {at:P.desk,place:"desk",keys:[[P.desk,1152,432,1.25],[P.desk+0.1,1130,440,1.3]],d:4,draw:(x,tt)=>po_openBinder(x,1)},
     // Anil's office in the old building: he has turned from his desk to Yusuf, who sits beside him with his notebook
@@ -157,7 +168,8 @@ scene("late",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,
       gv_behind(x,"anil",GV_FX.seat[0],GV_FX.top,GV_FX.seat[1],{pose:"phone",expr:"concerned",t:tt});x.drawImage(gv_place("facDesk"),0,0,W,H);}},
     // the data team's room: Jun reads it, and points the way, to Noor
     {at:P.jun,place:"data",keys:rk,push:0,draw:(x,tt)=>{const p=fin(tt,P.noorSaid-0.35,0.5);
-      person(x,"jun",po_rndX(R.jun),905,0.8,{pose:p<0.5?"phone":"listen",pose2:"point",mix:p,t:tt});}},
+      // his arm goes from the phone straight to pointing (it switched base poses half way, and jumped)
+      POSE.po_junPt=gv_blendNear(POSE.phone,POSE.point,p);person(x,"jun",po_rndX(R.jun),905,0.8,{pose:"po_junPt",t:tt});}},
     // Noor's room, by her map: she points on, to Planning
     {at:P.noor,place:"noor",keys:rk,push:0,draw:(x,tt)=>{const p=fin(tt,P.plan-0.35,0.5);
       person(x,"noor",po_rndX(R.noor),905,0.8,{pose:"listen",pose2:"point",mix:p,t:tt,flip:true});}},

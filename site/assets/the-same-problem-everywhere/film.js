@@ -1783,6 +1783,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 
@@ -2563,6 +2571,11 @@ function gv_walk(t,t0,x0,x1,v){const L=Math.abs(x1-x0),T_=Math.max(0.3,L/(v||300
   return{x:lerp(x0,x1,e),moving,bob:moving?Math.abs(Math.sin(ph))*7*Math.sin(u*Math.PI):0,swing:moving?Math.sin(ph)*Math.sin(u*Math.PI):0,end:t0+T_,flip:x1<x0};}
 // a person walking: the arms swing and the body bobs while they move
 function gv_walker(ctx,id,w,y,s,o){o=o||{};const sw=w.swing;person(ctx,id,w.x,y-w.bob,s,Object.assign({pose:o.pose||"stand",pose2:w.moving&&!o.pose?(sw>0?"walkA":"walkB"):o.pose2,mix:w.moving&&!o.pose?Math.abs(sw):o.mix,flip:w.moving?w.flip:o.flip},o));}
+// someone walking (w: moving, and the swing of their step, as gv_walk gives them) taking up a pose (to: a pose or its name): their arms
+// go from the step they're in to it as m goes from 0 to 1, over several frames rather than in one. Kept as POSE[key], for person() to
+// take by name (gv_walker then leaves the step's swing to it)
+function gv_walkInto(key,w,to,m){const sw=w&&w.moving?w.swing:0,from=sw?blendPose(POSE.stand,POSE[sw>0?"walkA":"walkB"],Math.abs(sw)):POSE.stand;
+  POSE[key]=gv_blendNear(from,typeof to==="string"?POSE[to]:to,m);return key;}
 
 /* ---------- title and end cards ---------- */
 // the series' mark: three strokes, the colours of where a line of the binder can end up: green, it runs in the work; gold, a decision
@@ -4299,7 +4312,9 @@ scene("notnew",(ctx,S,t,sc)=>{const c=sc.cues,P=sp_once(sc,"P",()=>({share:wAt(s
   // the back and those at the table
   const meeting=(x,tt,o)=>{L.back.forEach(([bx,id],i)=>{const cup=i%2===1,bo=Object.assign({t:tt,pose:cup?"spCup":"listen",carry:cup?sp_cupHeld:null,flip:true,expr:o.expr||"calm"},o.back&&o.back(i,id,bx));
       person(x,id,bx,L.bf,L.bs,bo);sp_badge(x,id,bx,L.bf,L.bs,bo.flip);});
-    const [cx,cf,cs]=L.chart,writing=tt>P.meet-0.5&&tt<P.learned+1.0;person(x,"spLa1",cx,cf,cs,{t:tt,pose:writing?"point":"listen",flip:writing,expr:o.expr||"calm"});sp_badge(x,"spLa1",cx,cf,cs,writing);
+    // she turns to the chart and her arm comes up to it, and after, down before she turns back: over 0.4 s each, not in one frame
+    const [cx,cf,cs]=L.chart,w0=P.meet-0.5,w1=P.learned+1.0,writing=tt>w0&&tt<w1+0.4;POSE.sp_la1=gv_blendNear(POSE.listen,POSE.point,sstep(w0,w0+0.4,tt)*(1-sstep(w1,w1+0.4,tt)));
+    person(x,"spLa1",cx,cf,cs,{t:tt,pose:"sp_la1",flip:writing,expr:o.expr||"calm"});sp_badge(x,"spLa1",cx,cf,cs,writing);
     L.seats.forEach(([sx,id],i)=>{const so=o.seat?o.seat(i,id,sx):{pose:"listen",flip:true};gv_behind(x,id,sx,L.table[2],L.s,Object.assign({t:tt,expr:o.expr||"calm"},so));});
     x.drawImage(gv_place("la80table"),0,0);sp_cardName(x);};
   gv_shots(ctx,S,t,sc.dur,[

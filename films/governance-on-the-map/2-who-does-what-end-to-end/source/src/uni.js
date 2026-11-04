@@ -150,9 +150,10 @@ function ee_smooth(P,n){n=n||12;const out=[];for(let i=0;i<P.length-1;i++){const
 function ee_along(pts,u){let L=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);L+=d;}
   let left=L*clamp(u,0,1);for(let i=1;i<pts.length;i++){if(left<=seg[i-1]||i===pts.length-1){const v=seg[i-1]?clamp(left/seg[i-1],0,1):0;return[lerp(pts[i-1][0],pts[i][0],v),lerp(pts[i-1][1],pts[i][1],v)];}left-=seg[i-1];}
   return pts[0];}
-// Clara's request, small and bright as it travels: a gold card with three lines on it, a soft glow round it (o.held: no glow)
-function ee_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);withA(ctx,a,()=>{
-  if(!(o&&o.held)){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,0,0,150,[255,222,120],0.95);wc_glowAt(ctx,0,0,80,[255,240,190],0.8);ctx.restore();}ctx.fillStyle="rgba(60,44,30,0.22)";ctx.fillRect(-54,-36,120,84);
+// Clara's request, small and bright as it travels: a gold card with three lines on it, a soft glow round it (o.held: no glow; o.glow,
+// 0 to 1: how strong, as it grows on leaving a hand and dies away on coming to one)
+function ee_flyCard(ctx,x,y,s,rot,a,o){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.scale(s,s);withA(ctx,a,()=>{const g=o&&o.glow!=null?o.glow:1;
+  if(!(o&&o.held)&&g>0.01){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,0,0,150,[255,222,120],0.95*g);wc_glowAt(ctx,0,0,80,[255,240,190],0.8*g);ctx.restore();}ctx.fillStyle="rgba(60,44,30,0.22)";ctx.fillRect(-54,-36,120,84);
   wc_panel(ctx,-60,-42,120,84,{kind:"card",seed:753,wash:GV.gold,washA:0.5});gv_lines(ctx,-42,-16,84,3,18,1);});ctx.restore();}
 // the request held in both hands, its face to us: the gold card, three lines on it, without its glow (drawn with the person, a glow
 // would take the person's outline with it)

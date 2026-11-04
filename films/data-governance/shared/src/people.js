@@ -155,6 +155,14 @@ Object.assign(POSE,{
   walkA:{L:[0.34,0.3],R:[-0.26,-0.32],feet:14,shift:-5,tilt:0.03,turn:0.06,gaze:[0.3,0],look:0},
   walkB:{L:[-0.26,-0.32],R:[0.34,0.3],feet:14,shift:5,tilt:-0.03,turn:0.06,gaze:[0.3,0],look:0}
 });
+// two poses blended the short way round for each arm angle, so an arm moving from one pose to the next never swings the long way,
+// down and behind the body (blendPose takes the angles as written: a forearm raised at 2.6 going to a hold at -2.05 swings down
+// through hanging). A film blends a new pose in with it rather than switching to it in one frame.
+function gv_blendNear(a,b,m){if(!b||!(m>0))return a;const near=(p,q)=>p&&q?q.map((v,i)=>v+2*Math.PI*Math.round((p[i]-v)/(2*Math.PI))):q;
+  return blendPose(a,Object.assign({},b,{L:near(a.L,b.L),R:near(a.R,b.R)}),m);}
+// something just taken in one hand (the right, which the reaching poses reach with): held where that hand is at first, then between
+// both hands as the other comes to it (m from 0 to 1), so it travels with the hand into the hold
+function gv_fromHand(carry,m){return!carry||m>=1?carry:(cx,P_,h)=>carry(cx,P_,h.map(p=>[lerp(h[1][0],p[0],m),lerp(h[1][1],p[1],m)]));}
 // where a hand is, in the figure's own units (it's 560 tall), for things it holds
 function handAt(P_,s,a,br){const sw=P_.build.sh,sx=s*(sw-12),sy=-416+br,e=[sx+s*Math.sin(a[0])*108,sy+Math.cos(a[0])*108],d=[s*Math.sin(a[1]),Math.cos(a[1])],w=[e[0]+d[0]*100,e[1]+d[1]*100];return[w[0]+d[0]*13,w[1]+d[1]*13];}
 

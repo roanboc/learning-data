@@ -113,10 +113,11 @@ Object.assign(PEOPLE,{
 function cp_heldClip(cx,P_,hands){const h=hands[0];cx.save();cx.translate(h[0]-8,h[1]-46);cx.rotate(-0.1);cx.fillStyle="rgba(40,30,20,0.22)";cx.fillRect(-52,-66,112,150);
   cx.fillStyle=rgba([90,74,60],1);cx.fillRect(-58,-72,112,150);cx.fillStyle="#f6f4ee";cx.fillRect(-50,-60,96,128);cx.fillStyle=rgba([70,70,74],1);cx.fillRect(-22,-80,40,16);
   cx.fillStyle="rgba(120,130,150,0.45)";for(let i=0;i<6;i++)cx.fillRect(-42,-44+i*18,72-(i%3)*14,4);cx.restore();fingers(cx,P_,[h]);}
-// someone walking towards us along the dike's crest from Z0 to Z1 at X, setting off at t0 (1.2 m a second); o as person's. Returns
-// whether they're still walking
+// someone walking towards us along the dike's crest from Z0 to Z1 at X, setting off at t0 (1.2 m a second); o as person's, or a
+// function of the walk ({moving, swing}) that gives them (for gv_walkInto). The step grows as they set off and dies away as they
+// arrive, so the arms come to rest over several frames, not in one. Returns whether they're still walking
 function cp_crestWalk(ctx,id,t,t0,X,Z0,Z1,o){const D=CP_D,T_=Math.abs(Z1-Z0)/1.2,u=clamp((t-t0)/T_,0,1),Zp=lerp(Z0,Z1,u<0.5?2*u*u:1-2*(1-u)*(1-u)),moving=u>0&&u<1,
-    ph=(t-t0)*Math.PI*3.2,sw=moving?Math.sin(ph):0,bob=moving?Math.abs(sw)*0.025:0;
+    ph=(t-t0)*Math.PI*3.2,sw=moving?Math.sin(ph)*Math.sin(u*Math.PI):0,bob=moving?Math.abs(sw)*0.025:0;if(typeof o==="function")o=o({moving,swing:sw});
   cp_who(ctx,D.C,id,X,D.crest+bob,Zp,Object.assign({t},o,moving&&!(o&&o.keep)?{pose:"stand",pose2:sw>0?"walkA":"walkB",mix:Math.abs(sw)}:{}));return moving;}
 // the rain over today's dike: the far land softened (cp_rainHaze, drawn before the people, so they stay clear: thickest at the horizon,
 // fading out above and below it, so it leaves no edge), then the light greyed and streaks falling (cp_rainDay, over everything)

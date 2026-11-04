@@ -91,10 +91,11 @@ scene("cord",(ctx,S,t,sc)=>{const c=sc.cues,N=WD_LN,P=wd_once(sc,"P",()=>{const 
       const sp=wd_supAt(tt,wd_stX(3)+92,wx+70,P.s6+0.4,sx=>wd_onPart(cx+22,cy+4,"wd_sup",sx,tryp));
       wd_scene1(x,tt,{off,lamps,press:{6:[press,lit*(1-fixed)]},who,sup:sp,odd:{e:6,part:"carb",a:ca,dy:cdy,seated:fixed>=1}});
       const g=gv_io(tt,P.stop-0.4,P.team,0.3);if(g>0.01){const lx=N.x0+6*N.sw;x.save();x.globalCompositeOperation="screen";x.filter="blur(6px)";x.fillStyle=rgba([255,250,226],0.7*g);x.fillRect(lx-12,N.top+30,24,110);x.restore();}}},
-    // every worker could, and they did: the day passes, lamps light and go dark, and once more one turns red
+    // every worker could, and they did: the day passes, lamps light and go dark, and once more one turns red (a hand goes up to the
+    // cord from the shot's first frame, not from before it, so the shot doesn't open on an arm halfway up and stopping in two frames)
     {cut:true,at:P.did,place:"line",keys:[[P.did,960,540,1],[P.reach,960,530,1.04]],d:2,push:0,draw:(x,tt)=>{const u=tt-P.did,off=P.off4(tt),lamps=lampsOff(),pulls={},who={};
       [[1,0.3,1.4],[6,0.9,2.0],[4,1.4,2.9,1.9],[2,3.0,3.9]].forEach(([i,a,b,r])=>{const l=gv_io(u,a,b,0.2);if(l>0)lamps[i]=[r!=null&&u>=r?"red":"amber",l];
-        const up=gv_io(u,a-0.45,a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:wd_onCord("wd_w"+(i+1),wx,wx+66,pl),mix:up};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
+        const up=gv_io(u,Math.max(a-0.45,0),a+0.3,0.2);if(up>0){const wx=wd_stX(i),pl=clamp((u-a+0.2)/0.3,0,1);who[i]={po:wd_onCord("wd_w"+(i+1),wx,wx+66,pl),mix:up};pulls[i]=[wx+66,N.cord+4+44*pl*up];}});
       const sp=wd_supAt(u,N.sup,wd_stX(4)+92,1.0,sx=>POSE.listen);
       wd_scene1(x,tt,{off,lamps,pulls,who,sup:sp,light:clamp(u/(P.reach-P.did),0,1)});}},
     // within reach: a hand on the cord; and someone who could decide, coming at once

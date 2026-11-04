@@ -27,8 +27,9 @@ function oh_courtDesks(){return wc_kept("ohCourtDesks",W*2,H*2,q=>{q.scale(2,2);
   oh_lowDesk(q,dx,dy,0.95*k,0.34*k,301+i);const [ix,iy]=oh_ctP(X+0.45,0.34,Zd+0.12);wc_part(q,wc_rect(ix-0.08*k,iy-0.03*k,0.16*k,0.05*k),[60,60,66],1,{seed:305+i,lw:0.8});});});}
 function oh_court(x,tt,o){o=o||{};const C=OH_CT,P=oh_ctP,L=[];x.drawImage(oh_placeHi("court"),0,0,W,H);
   OH_ROWS.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z);person(x,"ohO"+(i+1),px,py,1.62*C.f/Z/560,{pose:"oh_tablet",t:tt+i*0.9,flip:X>0,carry:oh_heldTablet});}]));
-  OH_HIST.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z),s=1.62*C.f/Z/560,up=Math.sin(tt*1.7+i*2)>0.6;
-    oh_floorSit(x,"ohH"+(i+1),px,py,s,{pose:up?"oh_brushUp":"oh_brush",t:tt+i*1.3,flip:false,carry:oh_heldBrush});}]));
+  // each brush lifts from the sheet and comes down again over a few frames (it once jumped up and down in one)
+  OH_HIST.forEach(([X,Z],i)=>L.push([Z,()=>{const [px,py]=P(X,0,Z),s=1.62*C.f/Z/560,up=sstep(0.45,0.75,Math.sin(tt*1.7+i*2));
+    oh_floorSit(x,"ohH"+(i+1),px,py,s,{pose:"oh_brush",pose2:"oh_brushUp",mix:up,t:tt+i*1.3,flip:false,carry:oh_heldBrush});}]));
   L.sort((a,b)=>b[0]-a[0]).forEach(e=>e[1]());x.drawImage(oh_courtDesks(),0,0,W,H);
   // the sheets on the desks, written as the line goes on
   OH_HIST.forEach(([X,Z],i)=>{const Zd=Z-0.5,a=P(X-0.2,0.345,Zd+0.18),b=P(X+0.25,0.345,Zd+0.18),c=P(X+0.25,0.345,Zd-0.05),d=P(X-0.2,0.345,Zd-0.05);
@@ -76,12 +77,19 @@ function oh_office(x,tt,o){o=o||{};x.drawImage(gv_place("annalsOffice"),0,0,W,H)
   OH_OFS.forEach(([id,px,pose,carry],i)=>oh_floorSit(x,id,px,690,0.9,{pose:o.pose&&o.pose(i)||pose,t:tt+i,flip:i>=2,carry}));x.drawImage(oh_officeTable(),0,0,W,H);}
 
 // ---- the printers: the block inked, a sheet laid on it and rubbed, lifted to the pile ----
+// a work cycle: the poses in turn (each [name, where in the cycle, ph 0 to 1, it begins]), each taken up from the one before over a
+// little of the cycle (0.08 of it: about a fifth of a second), so the arms go from one to the next over a few frames rather than
+// jumping. Kept as POSE[key], for person() to take by name
+function oh_cycle(key,ph,steps){let i=0;steps.forEach((s,k)=>{if(ph>=s[1])i=k;});const prev=steps[(i+steps.length-1)%steps.length][0];
+  POSE[key]=gv_blendNear(POSE[prev],POSE[steps[i][0]],sstep(0,0.08,ph-steps[i][1]));return key;}
 // o.pile: how many printed sheets are on the pile; o.source (0 to 1): Jeonju's copy, open on a stand at the left, glowing gold
 function oh_print(x,tt,o){o=o||{};x.drawImage(gv_place("print"),0,0,W,H);const B=OH_PR.bench,ph=((tt*0.42)%1+1)%1,
-    p1=ph<0.35?"oh_ink":ph<0.6?"oh_lay":"oh_reach",p2=ph<0.55?"oh_watch":"oh_lift";
-  // they sit on the floor at the low bench, as printers did
+    p1=oh_cycle("oh_pr1",ph,[["oh_ink",0],["oh_lay",0.35],["oh_reach",0.6]]),p2=oh_cycle("oh_pr2",ph,[["oh_watch",0],["oh_lift",0.55]]),
+    sheet=ph>=0.55?sstep(0.55,0.63,ph):1-sstep(0,0.08,ph);
+  // they sit on the floor at the low bench, as printers did; the sheet is in the second one's hands as they lift it, and gone as they
+  // put it down
   x.save();x.beginPath();x.rect(-W,-H,3*W,B[2]+H);x.clip();oh_floorSit(x,"ohPr1",900,760,0.95,{pose:p1,t:tt,flip:false});
-  oh_floorSit(x,"ohPr2",1240,760,0.95,{pose:p2,t:tt+1,flip:true,carry:p2==="oh_lift"?oh_heldSheet:null});x.restore();x.drawImage(oh_printBench(),0,0,W,H);
+  oh_floorSit(x,"ohPr2",1240,760,0.95,{pose:p2,t:tt+1,flip:true,carry:sheet>0?(cx,P_,h)=>withA(cx,sheet,()=>oh_heldSheet(cx,P_,h)):null});x.restore();x.drawImage(oh_printBench(),0,0,W,H);
   // a sheet on the block while it's printed; the pile
   if(ph>0.4&&ph<0.72){const [r0,r1,ry]=OH_PR.tray;x.fillStyle=rgba(OH.paper,0.96);x.fillRect(r0+8,ry-2,r1-r0-16,22);}
   const [q0,q1]=OH_PR.pile,n=Math.round(o.pile==null?6:o.pile);for(let i=0;i<n;i++){x.fillStyle=rgba(i%2?OH.paper:wc_dim(OH.paper,0.05),1);x.fillRect(q0+(i%3),B[2]+10-i*3,q1-q0,3);}
@@ -209,7 +217,7 @@ function oh_airing(x,tt,o){o=o||{};x.drawImage(gv_place("airing"),0,0,W,H);const
   OH_AI.racks.forEach(([rx,ry,rw])=>{for(let j=0;j<6;j++){if(k++>=Math.round(nb*tot))return;oh_openBook(x,rx-rw/2+rw*(j+0.5)/6,ry-12,rw/7.2);}});
   // a keeper bringing out more books, the historian at his mat with a low desk, writing
   const kx=lerp(700,880,(Math.sin(tt*0.5)+1)/2);person(x,"ohK1",kx,700,0.7,{pose:"oh_carry",t:tt,flip:false});oh_bookStack(x,kx,700-380*0.7,60,4);
-  const [mx,my]=OH_AI.mat;oh_floorSit(x,"ohAir",mx,my-20,0.82,{pose:Math.sin(tt*1.6)>0.5?"oh_brushUp":"oh_brush",t:tt,carry:oh_heldBrush});
+  const [mx,my]=OH_AI.mat;oh_floorSit(x,"ohAir",mx,my-20,0.82,{pose:"oh_brush",pose2:"oh_brushUp",mix:sstep(0.35,0.65,Math.sin(tt*1.6)),t:tt,carry:oh_heldBrush});
   x.drawImage(oh_sprite("airDesk",300,140,q=>oh_lowDesk(q,150,130,260,100,391)),mx-150,my+40-130);
   x.fillStyle=rgba(OH.paper,1);x.fillRect(mx-70,my-66,140,14);}
 

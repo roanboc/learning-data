@@ -79,19 +79,19 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
     // the crowd cheers
     {at:P.cheer,place:"mlSeine",keys:[[P.cheer,960,560,1.1],[P.cheer+0.1,980,560,1.13]],d:3,push:0.01,draw:(x,tt)=>{ml_boat(x,1240,600,0.6,{t:tt,shadow:690,
         who:[{who:{skin:[232,198,170],top:{c:[70,62,56]},cap:[104,72,48],goggles:true}},{who:{skin:[220,182,150],top:{c:[104,100,96]},cap:[84,82,80]}}]});
-      ml_crowd(x,tt,{turn:0.6,up:ag_in(tt,P.cheer,0.6),wave:0.5+0.5*Math.sin(tt*7)});}},
+      ml_crowd(x,tt,{turn:0.6,up:ag_in(tt,P.cheer,0.6)});}},
     // the judges' table: first prize
     {at:P.prize,place:"mlTable",keys:[[P.prize,960,560,1.08],[P.prize+0.1,1000,600,1.14]],d:4,push:0.01,draw:(x,tt)=>{const J=ML_TABLE.judges;
-      ag_person(x,ML_J2,J[1][0],J[1][1],J[1][2],{t:tt,cut:ML_TABLE.top,pose:"desk",gaze:[2,1],smile:0.5});
-      ag_person(x,ML_PEOPLE.judge,J[0][0],J[0][1],J[0][2],{t:tt,cut:ML_TABLE.top,pose:"hold",gaze:[2,1],smile:0.5});ml_tableFront(x);
+      ag_person(x,ML_J2,J[1][0],J[1][1],J[1][2],{t:tt,cut:ML_TABLE.top,gaze:[2,1],smile:0.5});
+      ag_person(x,ML_PEOPLE.judge,J[0][0],J[0][1],J[0][2],{t:tt,cut:ML_TABLE.top,gaze:[2,1],smile:0.5});ml_tableFront(x);
       const p=ml_pop(tt,P.first-0.15,null);ag_textCard(x,1220,690,420,{kick:"First prize",title:"50,000 francs"},{k:p.k,a:p.a});}},
     // and now a pilot can let go, and rest: Sperry's hands leave the wheel and rest on the hull's edge
     {at:P.rest,place:null,keys:[[P.rest,960,540,1.04],[P.rest+0.1,960,520,1.08]],d:4,push:0.01,draw:(x,tt)=>{
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,rest:clamp((tt-P.letgo+0.2)/1.4,0,1),roll:0.01*Math.sin(tt)});}},
-    // today: an airliner's flight deck, two pilots; a typical flight's timeline; one turns to a screen and points, the other nods
+    // today: an airliner's flight deck, two pilots; a typical flight's timeline; one turns to look at a screen, the other nods
     {at:P.deck,dis:1.4,place:"mlDeck",keys:[[P.deck,960,560,1.02],[P.deck+0.1,960,540,1.05]],d:10,push:0.01,draw:(x,tt)=>{const D=ML_DECK,pt=ag_in(tt,P.watch-0.2,0.7);
-      ag_person(x,ML_PEOPLE.officer,D.fo[0],D.fo[1],D.fo[2],{t:tt,cut:D.cut,pose:"desk",pose2:"point",mix:pt,gaze:[1+pt,0.3]});
-      ag_person(x,ML_PEOPLE.captain,D.cap[0],D.cap[1],D.cap[2],{t:tt,cut:D.cut,pose:"desk",nod:0.1*ag_io(tt,P.decide-0.1,P.decide+0.8,0.3),gaze:[1,0.2]});
+      ag_person(x,ML_PEOPLE.officer,D.fo[0],D.fo[1],D.fo[2],{t:tt,cut:D.cut,gaze:[1+pt,0.3]});
+      ag_person(x,ML_PEOPLE.captain,D.cap[0],D.cap[1],D.cap[2],{t:tt,cut:D.cut,nod:0.1*ag_io(tt,P.decide-0.1,P.decide+0.8,0.3),gaze:[1,0.2]});
       ml_deckFront(x);const a=ag_in(tt,P.only-0.3,0.5);ag_box(x,240,124,1440,192,24,{a});ml_timeline(x,320,232,1280,ag_in(tt,P.only,1.6),{a,labels:ag_in(tt,P.only+1.2,0.6)});}},
     // the box again, on the marble wall: hands, a check, a loop, but no model; then a model drops in, and it's an agent
     {at:P.room,dis:0.9,place:"lab",keys:[[P.room,1124,500,1.12],[P.put-0.4,1060,520,1.0]],d:2.4,push:0.01,draw:(x,tt)=>ml_boxRoom(x,tt,P)}]);
@@ -133,10 +133,10 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({asks:wAt(
     decides:wAt(sc,"gives","decides")}));
   ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1],[0.1,950,530,1.03]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_question(x,tt,P)}]);
   ml_kick(ctx,t,[[0,"Today"]],ag_in(t,0.2,0.6));});
-function ml_question(x,tt,P){const [rx,ry]=ML_ROOM.ring,into=ag_in(tt,P.gives+0.1,1.3),ring=ag_in(tt,P.agent-0.3,1.2),rev=ag_io(tt,P.reviews-0.3,P.decides+0.6,0.6);
+function ml_question(x,tt,P){const [rx,ry]=ML_ROOM.ring,into=ag_in(tt,P.gives+0.1,1.3),ring=ag_in(tt,P.agent-0.3,1.2);
   // the agent, once Jun gives it the job: its ring draws itself, the five cards slide in, and it works round its steps
   if(ring>0){const lit=ml_steps(tt,P.takes,0.55);ag_loop(x,rx,ry,{t:tt,p:ring,core:ring,a:ring,lit:tt>=P.checks?2:lit,col:tt>=P.checks?AG.green:AG.violet,stepA:[ring,ring,ring]});}
-  ml_jun(x,tt,{pose:"desk",pose2:"chin",mix:rev,gaze:tt<P.gives?[2,-1.2]:[3,-0.2],nod:0.06*ag_io(tt,P.decides-0.1,P.decides+0.7,0.3)});
+  ml_jun(x,tt,{gaze:tt<P.gives?[2,-1.2]:[3,-0.2],nod:0.06*ag_io(tt,P.decides-0.1,P.decides+0.7,0.3)});
   ag_roomLight(x,1);
   // Planning's question, beside him; it becomes the agent's goal
   const m=ml_pop(tt,P.asks-0.1,P.gives+0.1);ag_textCard(x,452,196,600,{kick:"From Planning",title:"How has the census-day count changed since last year?",sub:"for next year's classes"},
@@ -164,7 +164,7 @@ function ml_writes(x,tt,P){const [rx,ry]=ML_ROOM.ring,pale=ag_in(tt,0.2,1.2);
   ag_modelLight(x,rx,ry,88,1);ag_ring(x,rx,ry,180,{p:1,from:-120,a:lerp(1,0.22,pale)});
   for(const [s,d] of AG_LOOP.steps){const r=d*Math.PI/180;ag_step(x,rx+Math.cos(r)*180,ry+Math.sin(r)*180,s,{a:1-pale});}
   ag_model(x,rx,ry,88,{t:tt,core:1,think:ag_io(tt,P.likely,P.best+1.5,0.5),label:"Model"});
-  ml_jun(x,tt,{pose:"desk",gaze:[3,-0.4]});
+  ml_jun(x,tt,{gaze:[3,-0.4]});
   // the student records, shut behind glass, out of the sphere's reach
   const cb=ml_pop(tt,P.never-0.1,null);ml_cabinet(x,1520,560,260,230,{a:cb.a});
   ag_roomLight(x,1);
@@ -206,7 +206,7 @@ scene("reasons",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({reason:wAt
 function ml_reasons(x,tt,P){const back=ag_in(tt,0.2,1.2),fb=[P.feedback,P.feedback+1.6],ride=fb.reduce((m,f)=>Math.max(m,ag_io(tt,f-0.2,f+1.5,0.3)),0);
   ml_agent(x,tt,{ringA:lerp(0.22,1,back),stepA:back,core:1+0.4*ride,think:ag_io(tt,P.writes,P.check3+2,0.5)+ag_io(tt,P.evidence+0.6,P.evidence+2.4,0.4)});
   for(const f of fb)ml_ride(x,clamp((tt-f)/1.3,0,1),0,120);
-  ml_jun(x,tt,{pose:"desk",gaze:[3,-0.6]});
+  ml_jun(x,tt,{gaze:[3,-0.6]});
   ag_roomLight(x,1);
   // the plan, written out line by line; the sphere's light runs down it, and each line meets the rules
   const ka=ag_spr(tt,P.writes-0.2,0.8),tk=i=>ag_in(tt,P.evidence+0.8+i*0.35,0.3);
@@ -232,7 +232,7 @@ scene("hands",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({hands:wAt(sc
   ml_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,990,520,1.05],[0.1,1000,520,1.04]],d:sc.dur,push:0.01,draw:(x,tt)=>ml_hands(x,tt,P)}]);
   ml_kick(ctx,t,[[0,"Today"]],1);ml_parts(ctx,ml_partsOn(t,2,P.hands));});
 function ml_hands(x,tt,P){const [rx,ry]=ML_ROOM.ring,arr=[P.catalog,P.query,P.docs],plug=ag_in(tt,P.std-0.2,0.5),lock=ag_io(tt,P.only-0.1,P.account+1.2,0.4);
-  ml_agent(x,tt,{core:1,lit:tt>P.tools-0.3&&tt<P.docs+1.5?1:null,col:AG.blue});ml_jun(x,tt,{pose:"desk",gaze:[3,-0.5]});
+  ml_agent(x,tt,{core:1,lit:tt>P.tools-0.3&&tt<P.docs+1.5?1:null,col:AG.blue});ml_jun(x,tt,{gaze:[3,-0.5]});
   // a model can't open a table: the sphere's light touches a closed card, and nothing opens
   const tb=ag_io(tt,P.open-0.6,P.tools+0.3,0.3),sh=Math.sin((tt-P.open)*30)*6*ag_io(tt,P.open,P.open+0.5,0.1);
   if(tb>0.01){const bx=1440+sh;x.save();x.globalAlpha*=tb;x.strokeStyle=rgba(AG.violet,0.5*ag_in(tt,P.open-0.3,0.3));x.lineWidth=4;x.setLineDash([8,10]);
@@ -276,7 +276,7 @@ function ml_loopRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;
   const use=[[P.catalog-0.3],[P.query-0.3,P.again+0.2],[P.docs-0.3]];
   ML_ROOM.tools.forEach((tl,i)=>{let on=0,d=0;for(const u0 of use[i]){on=Math.max(on,ag_io(tt,u0,u0+2.2,0.3));const v=clamp((tt-u0-0.4)/1.4,0,1);if(v>0&&v<1)d=v;}
     ml_tool(x,i,{touch:on,server:1,plug:1});ag_reach(x,ml_arm(i),1,{grip:1,data:d});const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",1);});
-  ml_jun(x,tt,{pose:"desk",gaze:tt>P.person-0.3?[3,-1.4]:[3,-0.5],nod:0.06*ag_io(tt,P.person,P.person+0.8,0.3)});
+  ml_jun(x,tt,{gaze:tt>P.person-0.3?[3,-1.4]:[3,-0.5],nod:0.06*ag_io(tt,P.person,P.person+0.8,0.3)});
   ag_roomLight(x,1);
   // the goal, above Jun: it glows on "until the goal is met"
   const [gx,gy,gw]=ML_ROOM.goal,gg=ag_io(tt,P.goal-0.1,P.goal+1.6,0.4);
@@ -323,7 +323,7 @@ function ml_answerRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,R=ML_REST,W=A
   // Jun watches it come, reads the evidence as it fans out, then again from the top; nods, signs, and watches it go
   const gy=ml_pw(tt,[[0,-0.5],[P.brings+0.6,-0.5],[P.brings+1.4,-0.35],[P.tables-0.2,-0.35],[P.tables+0.3,-0.75],[P.rule+0.3,-0.4],[P.both+0.5,0.1],[P.check+0.4,0.55],
     [P.cev,0.55],[P.cev+0.4,-0.35],[P.appr+0.3,0.3],[P.reads-0.2,-0.75],[P.decides-0.1,0.5],[P.decides+0.2,0.3],[P.planning+0.2,0.3],[P.planning+0.8,-1.2]]);
-  ml_jun(x,tt,{pose:"desk",gaze:[3,gy],nod:0.07*ag_io(tt,P.decides-0.3,P.decides+0.5,0.3),smile:0.25*ag_in(tt,P.decides+0.4,0.8)});
+  ml_jun(x,tt,{gaze:[3,gy],nod:0.07*ag_io(tt,P.decides-0.3,P.decides+0.5,0.3),smile:0.25*ag_in(tt,P.decides+0.4,0.8)});
   ag_roomLight(x,1);
   // the goal, met: it goes as the answer comes to rest where it was
   const [gx,gy0,gw]=ML_ROOM.goal,ga=1-ag_in(tt,P.brings+0.7,0.5);
@@ -367,7 +367,7 @@ function ml_recipeRoom(x,tt,P){const R=ML_REST,EP=ml_evPlaces(x),RC={x:860,y:232
     YR=[["2027",680],["2028",1000],["2029",1320]],runAt=[P.rIn,P.rIn+1.6,P.rIn+3.2];
   // the agent, resting small at the top right; "four minutes and twelve steps"; and as a plain rerun needs no agent, its band dims
   const dim=ag_in(tt,P.needs-0.1,0.9);ml_small(x,tt,R[0],R[1],R[2],R[3],{stepA:0,core:lerp(1,0.12,dim)});
-  ml_jun(x,tt,{pose:"desk",gaze:[3,ml_pw(tt,[[0,0.2],[P.March-0.4,0.2],[P.March,-0.45],[P.steps,-0.45],[P.steps+0.6,-0.3],[P.noor,-0.3],[P.noor+0.4,0.3],
+  ml_jun(x,tt,{gaze:[3,ml_pw(tt,[[0,0.2],[P.March-0.4,0.2],[P.March,-0.45],[P.steps,-0.45],[P.steps+0.6,-0.3],[P.noor,-0.3],[P.noor+0.4,0.3],
     [P.runs,0.3],[P.runs+0.5,0.35],[P.four-0.2,0.35],[P.four+0.3,-0.9]])],nod:0.05*ag_io(tt,P.approves,P.approves+0.7,0.3)});
   ag_roomLight(x,1);
   // each census day the recipe runs: a light from it down to that year's card
@@ -457,7 +457,7 @@ function ml_recap(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,W=500;
   ml_agent(x,tt,{core:1+0.4*glow,think:glow,pulse:{deg:pa>0.01?deg:-120+360*ag_sine(clamp((tt-P.loop-0.95)/1.3,0,1)),a:Math.max(pa,glow)},lit,col:AG.violet});
   ML_ROOM.tools.forEach((tl,i)=>{const d=clamp((tt-P.steps-0.2-i*0.5)/1.4,0,1);ml_tool(x,i,{touch:d>0&&d<1?1:0,server:1,plug:1});
     ag_reach(x,ml_arm(i),1,{grip:1,data:d});const e=ml_arm(i);ml_plug(x,e[6]-6,e[7],0,1,"#3E3F45",1);});
-  ml_jun(x,tt,{pose:"desk",gaze:[3,ml_pw(tt,[[0,-0.5],[P.brought+0.4,-0.5],[P.brought+1.0,-0.35],[P.is,-0.35],[P.is+0.4,-0.9]])],
+  ml_jun(x,tt,{gaze:[3,ml_pw(tt,[[0,-0.5],[P.brought+0.4,-0.5],[P.brought+1.0,-0.35],[P.is,-0.35],[P.is+0.4,-0.9]])],
     nod:0.07*ag_io(tt,P.decide-0.2,P.decide+0.6,0.3),smile:0.2*ag_in(tt,P.decide,0.8)});
   ag_roomLight(x,1);
   // its answer, brought to Jun with the evidence clipped to it; he signs it; it goes as the four parts come

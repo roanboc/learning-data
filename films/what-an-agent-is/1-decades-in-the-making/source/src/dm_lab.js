@@ -17,7 +17,7 @@ const DM_TEAM={desk:[540,900,700],jun:[760,560,0.8],screen:[980,640,220,140],age
 // Jun at the desk, the screen, the agent beside them; o: t, agent (0..1 how far it has come), think, screenDraw
 function dm_team(ctx,o){const T=DM_TEAM,[dx,dy,dw]=T.desk,[jx,jy,js]=T.jun,[sx,sy,sw,sh]=T.screen,[ax,ay,ar]=T.agent;
   ag_desk(ctx,dx,dy,dw,{});ag_screen(ctx,sx,sy,sw,sh,{stand:dy-70-sy-sh+6,draw:(cx,x0,y0,w0,h0)=>{dm_sheetOnScreen(cx,x0,y0,w0,h0);if(o.screen)o.screen(cx,x0,y0,w0,h0);}});
-  ag_person(ctx,"jun",jx,jy,js,{t:o.t,pose:"desk",cut:dy-70,gaze:o.junGaze||[4,1],nod:o.junNod||0,smile:o.junSmile==null?0.35:o.junSmile});
+  ag_person(ctx,"jun",jx,jy,js,{t:o.t,cut:dy-70,gaze:o.junGaze||[4,1],nod:o.junNod||0,smile:o.junSmile==null?0.35:o.junSmile});
   if(o.yusuf>0){ctx.save();ctx.globalAlpha*=o.yusuf;const [x,y,s]=T.yusuf;ag_person(ctx,"yusuf",x-(1-ag_eo(o.yusuf))*60,y,s,{t:o.t+3,pose:o.yPose,smile:o.ySmile==null?0.1:o.ySmile,gaze:[4,0]});ctx.restore();}
   if(o.mei>0){ctx.save();ctx.globalAlpha*=o.mei;const [x,y,s]=T.mei;ag_person(ctx,"mei",x+(1-ag_eo(o.mei))*60,y,s,{t:o.t+5,flip:true,pose:o.mPose,smile:o.mSmile==null?0.45:o.mSmile,gaze:[4,0]});ctx.restore();}
   ag_roomLight(ctx,1);

@@ -105,13 +105,13 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
       hans(x);osten(x,O[0],O[1],{arms:"hold",flip:false});mj_standAt(x,1.7,3.5,1.74,MJ_FIG.pfungst,{t:tt,arms:"book",flip:true,nod:0.04});}},
     // a movement too small for any expert to notice: a lens over the brim of the questioner's hat
     {at:tGift,cut:true,place:"mjAutumnHead",keys:[[tGift,960,540,1]],push:0.03,draw:(x,tt)=>{const P=MJ_PERSON.osten,X0=700,Y0=640,S0=1.25,lift=1.6*ag_io(tt,c.gift+1.6,c.gift+2.6,0.3);
-      const me=(xx,l)=>{ag_person(xx,P,X0,Y0,S0,{t:tt,pose:"hang",gaze:[3,0]});mj_headHat(xx,P,X0,Y0,S0,{t:tt,lift:l},"slouch",[34,32,34]);};me(x,lift*0.1);
+      const me=(xx,l)=>{ag_person(xx,P,X0,Y0,S0,{t:tt,gaze:[3,0]});mj_headHat(xx,P,X0,Y0,S0,{t:tt,lift:l},"slouch",[34,32,34]);};me(x,lift*0.1);
       const lx0=X0+(452-296)*S0-10,ly0=Y0+(332-596)*S0,u=ag_sine(clamp((tt-c.gift)/1.4,0,1)),lx=lerp(1500,lx0,u),ly=lerp(560,ly0,u),z=3.2;
       mj_lens(x,lx,ly,170,{a:ag_in(tt,c.gift-0.1,0.4),draw:xx=>{xx.save();xx.translate(lx,ly);xx.scale(z,z);xx.translate(-lx,-ly);xx.drawImage(ag_place("mjAutumnHead"),0,0);me(xx,lift);xx.restore();}});}},
     // ever since: the answer kept from the one who asks, sealed; on a cut, so the two faces never melt into one. The envelope comes up
     // into the frame with his hand from below it, whole, rather than fading in at the frame's edge
     {at:tSince,cut:true,place:"mjAutumnHead",keys:[[tSince,960,540,1]],push:0.03,draw:(x,tt)=>{const P=MJ_PERSON.pfungst,up=ag_spr(tt,c.since+0.2,0.6);
-      ag_person(x,P,760,560,1.05,{t:tt,pose:{near:[2,14,"rest"]},pose2:"hold",mix:up,gaze:[3,lerp(0,2,up)],hold:(xx,h)=>{if(up>0.01)mj_envelope(xx,h.near[0]+60,h.near[1]-40,300,{word:"answer",rot:-0.12,a:ag_in(up,0.01,0.12)});}});}},
+      ag_person(x,P,760,560,1.05,{t:tt,pose:"hang",pose2:"hold",mix:up,gaze:[3,lerp(0,2,up)],hold:(xx,h)=>{if(up>0.01)mj_envelope(xx,h.near[0]+60,h.near[1]-40,300,{word:"answer",rot:-0.12,a:ag_in(up,0.01,0.12)});}});}},
     // today: the room, Jun and the agent; Berlin's light carries across
     {at:tRoom,place:"lab",keys:[[tRoom,960,540,1]],push:0.025,draw:(x,tt)=>{
       ag_person(x,"jun",296,596,1.0,{t:tt,gaze:[3,0],talk:0,smile:0.3});
@@ -251,7 +251,7 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.n
   const shots=[
     // a session: Jun's question, the count with its evidence; the glossary's word; the count again
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const pt=ag_io(tt,tPoint-0.2,c.again,0.5);
-      jun(x,tt,{pose:{near:[2,14,"rest"]},pose2:{near:[80,112,"point"]},mix:pt,gaze:pt>0.3?[3,-3]:[3,0]});agent(x,tt);
+      jun(x,tt,{gaze:pt>0.3?[3,-3]:[3,0]});agent(x,tt);
       const reach=ag_sine(clamp((tt-tPoint-0.9)/0.9,0,1))*(1-ag_sine(clamp((tt-tAgain-0.6)/0.8,0,1)));mj_arm(x,880,430,reach,{from:"left",data:clamp((tt-tPoint-1.8)/1.2,0,1)});
       ag_roomLight(x,1);S1out(x,tt);
       const g=mj_card(tt,c.glossary-0.1,tB-0.2);if(g.a>0)ag_textCard(x,452,212,420,{kick:"Glossary",title:"Award",sub:MJ_AWARD},{kickCol:AG.blue,edge:AG.blue,edgeA:0.4,k:g.k,a:g.a});}},
@@ -265,7 +265,7 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,tB=c.next-0.5,tC=c.told-0.5,tD=c.n
     {cut:true,at:tD,place:"lab",keys:[[tD,960,540,1]],push:0,draw:(x,tt)=>{jun(x,tt);agent(x,tt,1-ag_in(tt,tD,0.4));mj_junior(x,MJ_JR.x,MJ_JR.y,MJ_JR.h,{t:tt,badge:1,cards:1});ag_roomLight(x,1);mj_morning(x,1);setScreen(x,S);mj_veil(x,ag_in(tt,tD,0.5));
       mj_two(x,MJ_TWO_AT[0],MJ_TWO_AT[1],{fill:[2,2,mj_steps(tt,[tD+0.5,wAt(sc,"none","no memory")])],lit:[1,1],more:1,less:1,k:ag_spr(tt,tD,0.5),a:ag_in(tt,tD,0.3)});}},
     // the team's notes for agents, and every session that reads them
-    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,c.lesson-0.4,c.lesson+3,0.5),gaze:[3,-2]});ag_roomLight(x,1);
+    {at:tE,place:"lab",keys:[[tE,960,540,1]],push:0.02,draw:(x,tt)=>{jun(x,tt,{gaze:[3,-2]});ag_roomLight(x,1);
       const nb=mj_notes(x,500,130,620,{write:clamp((tt-c.lesson+0.1)/2.6,0,1),k:ag_spr(tt,c.notes-0.2,0.5),a:ag_in(tt,c.notes-0.2,0.3)});
       ["Jun","Mei","Noor"].forEach((who,i)=>{const t0=c.whoever+0.1+i*0.45,sa=ag_in(tt,t0+0.3,0.3);if(sa<=0)return;const X=560+i*440,Y=560;
         const ar=clamp((tt-t0)/0.6,0,1);x.save();x.strokeStyle=rgba(AG.blue,0.7);x.lineWidth=4;x.lineCap="round";const p=[810,nb.y+nb.h+8,810,nb.y+nb.h+60,X+200,Y-70,X+200,Y-10];ag_bzPath(x,p,0,ar);x.stroke();
@@ -343,16 +343,15 @@ scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB=c.lif
       const p=mj_P(H[0],0,H[1]),s=mj_k(H[1])*1.6/468;mj_sight(x,mj_hAt(p[0],p[1],s,[155,163]),[head.x+4,head.y+10],ag_in(tt,c.berlin+1.4,1.2),1);}},
     // at the right number, the questioner's head lifts: in von Osten, a fifth of a millimetre at most
     {at:tB,cut:true,place:"mjAutumnHead",keys:[[tB,960,540,1]],push:0.03,draw:(x,tt)=>{const P=MJ_PERSON.osten,X0=700,Y0=640,S0=1.25,lift=1.6*ag_io(tt,tRight+0.3,tRight+1.6,0.3);
-      const me=(xx,l)=>{ag_person(xx,P,X0,Y0,S0,{t:tt,pose:"hang",gaze:[3,0]});mj_headHat(xx,P,X0,Y0,S0,{t:tt,lift:l},"slouch",[34,32,34]);};me(x,lift*0.1);
+      const me=(xx,l)=>{ag_person(xx,P,X0,Y0,S0,{t:tt,gaze:[3,0]});mj_headHat(xx,P,X0,Y0,S0,{t:tt,lift:l},"slouch",[34,32,34]);};me(x,lift*0.1);
       const lx0=X0+(452-296)*S0-10,ly0=Y0+(332-596)*S0,u=ag_sine(clamp((tt-c.lift+0.2)/1.4,0,1)),lx=lerp(1500,lx0,u),ly=lerp(560,ly0,u),z=3.2;
       mj_lens(x,lx,ly,170,{a:ag_in(tt,c.lift-0.3,0.4),draw:xx=>{xx.save();xx.translate(lx,ly);xx.scale(z,z);xx.translate(-lx,-ly);xx.drawImage(ag_place("mjAutumnHead"),0,0);me(xx,lift);xx.restore();
         xx.strokeStyle="rgba(250,248,240,0.9)";xx.lineWidth=2.5;for(let k=0;k<=8;k++){const yy=ly-80+k*20;xx.beginPath();xx.moveTo(lx+112,yy);xx.lineTo(lx+(k%4?128:142),yy);xx.stroke();}}});
       const pm=ag_in(tt,wAt(sc,"lift","a fifth")-0.2,0.4);if(pm>0)ag_pill(x,lerp(1500,lx0,1)+300,ly0+40,"at most 0.2 mm",{a:pm});}},
     // Pfungst's laboratory: he taps; the one who thinks of the number lifts their head at it, without knowing; so does he
     {at:tC,place:"mjLab04",keys:[[tC,960,540,1]],push:0.025,draw:(x,tt)=>{const tp=mj_taps(tC+0.5,3,0.55),k=mj_count(tt,tp),hit=k.n>=3?ag_io(tt,tp[2]+MJ_STRIKE,tp[2]+1.6,0.15):0;
-      let tap=0;for(const s0 of tp)if(tt>=s0&&tt<s0+0.5)tap=Math.sin((tt-s0)/0.5*Math.PI);
-      ag_person(x,MJ_PERSON.pfungst,560,720,1.05,{t:tt,pose:{near:[34-26*tap,70,"rest"],far:[-6,84,"rest"]},gaze:[3,1],nod:-0.03*hit,cut:720});
-      ag_person(x,MJ_PERSON.subject,1360,720,1.05,{t:tt,flip:true,pose:"desk",gaze:[3,0],nod:-0.06*hit,cut:720});
+      ag_person(x,MJ_PERSON.pfungst,560,720,1.05,{t:tt,gaze:[3,1],nod:-0.03*hit,cut:720});
+      ag_person(x,MJ_PERSON.subject,1360,720,1.05,{t:tt,flip:true,gaze:[3,0],nod:-0.06*hit,cut:720});
       mj_cloud(x,1300,380,"3",{s:1,a:ag_in(tt,tC+0.2,0.4),k:ag_spr(tt,tC+0.2,0.45)});
       mj_table04(x,720);
       mj_mirror(x,860,640,52,{draw:xx=>{xx.save();xx.translate(860,640);xx.scale(-1,1);xx.translate(-860,-640);ag_person(xx,MJ_PERSON.pfungst,870,742,0.36,{t:tt,flip:true,gaze:[3,0],nod:-0.08*hit,covered:true});xx.restore();}});

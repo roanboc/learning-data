@@ -201,7 +201,7 @@ function wg_shelf(ctx,x,y,w,books,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)ret
   ctx.restore();return top;}
 
 /* ---------------------------------------------------------------- the people of the room, as this film poses them */
-// Jun standing at the left, as the prototype has him: o.pose, o.gaze, o.nod, o.talk, o.dx (a step), o.a (at night he has gone home)
+// Jun standing at the left, as the prototype has him, his arms down: o.p (ag_person's gaze, nod, talk), o.dx (a step), o.a (at night he has gone home)
 function wg_jun(ctx,t,o){o=o||{};const J=WR.jun,a=o.a==null?1:o.a;if(a<=0.01)return null;let h=null;
   withA(ctx,a,()=>{h=ag_person(ctx,"jun",J.x+(o.dx||0),J.y,J.s,Object.assign({t,gaze:[3,0]},o.p||{}));});return h;}
 // a hand's place in the frame, from ag_person's figure-space hands: who drawn at (x, y), size s, flip

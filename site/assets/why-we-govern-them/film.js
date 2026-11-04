@@ -1081,15 +1081,16 @@ function ag_glass(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
    meets the shoulders, s the size (1: a head 225 px tall); o:
      t       the chapter's time, for breathing and blinking (each person breathes at their own pace)
      flip    true to face left (people face right by default)
-     pose    "hang" (arms down, the default), "point", "explain" (an open hand), "hold" (the near hand in front of the chest, holding o.hold),
-             "desk" (forearms on a desk), "chin" (a hand under the chin, thinking), or {near: [upper arm, forearm, hand], far: ...},
-             angles in degrees from straight down, positive towards the way the person faces; pose2 and mix blend into a second pose
+     pose    "hang" (arms down, the default), "hold" (the near hand in front of the chest, holding o.hold), or {near: [upper arm,
+             forearm, hand], far: ...} for a hand on a wheel, a switch or a dial, angles in degrees from straight down, positive towards
+             the way the person faces; pose2 and mix blend into a second pose. No gestures: any other name stops a render or a check
      hold    (ctx, hands) => draws what the near hand holds, in figure space, over the near hand (holdBack: under it); hands.near and
              hands.far are the wrists (far is null while the far arm hangs), hands.nearElbow the near elbow
+     front   the same as hold, but drawn over the head as well: a thing held up before the face, such as a card hiding the mouth
      nod     a nod, in radians (the head turns about the top of the neck); gaze [dx, dy] moves the eyes a little; blink 0 to 1
      talk    0 to 1, the mouth opens; smile 0 to 1
-     cut     a height in the frame: the body is hidden below it (draw a desk first, cut at its back edge, and pose "desk" lays the
-             forearms on it)
+     cut     a height in the frame: the body is hidden below it (draw a desk first and cut at its back edge: the desk hides the
+             hanging arms)
      covered true when something drawn over the person hides their waist. People end flat under the waist (figure y 1100, 504 s
              below the neck), so keep y + 504 s at least 1080 or cover it: a render or a check stops with an error where it shows
    People of other times: who.top.kind can be "robe" (a crossed collar), "tunic" or "apron" (over a shirt), and who.hat.paint(c, P)
@@ -1098,14 +1099,19 @@ function ag_glass(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 /* ---------------------------------------------------------------- figure space: the prototype's Jun, an adult's proportions */
 const AG_F={
-  head(c){c.moveTo(292,300);c.bezierCurveTo(340,298,374,320,384,356);c.bezierCurveTo(388,372,389,386,389,396);
-    c.bezierCurveTo(389,402,385,408,383,414);c.bezierCurveTo(388,428,396,442,400,452);c.bezierCurveTo(401,457,396,460,389,461);
-    c.bezierCurveTo(387,465,388,469,388,472);c.bezierCurveTo(390,476,388,480,385,481);c.bezierCurveTo(387,485,386,490,382,493);
-    c.bezierCurveTo(379,497,381,503,382,509);c.bezierCurveTo(381,519,372,526,358,526);c.bezierCurveTo(328,525,300,510,282,490);
-    c.bezierCurveTo(268,474,250,462,236,452);c.bezierCurveTo(214,430,206,390,212,360);c.bezierCurveTo(220,322,252,301,292,300);c.closePath();},
-  ear(c){c.moveTo(287,404);c.bezierCurveTo(273,394,256,396,252,412);c.bezierCurveTo(248,428,252,446,262,456);c.bezierCurveTo(270,463,281,462,285,452);c.bezierCurveTo(289,438,290,420,287,404);c.closePath();},
-  earIn(c){c.moveTo(277,414);c.bezierCurveTo(265,410,260,422,262,434);c.bezierCurveTo(264,444,270,448,277,444);},
-  neck(c){c.moveTo(232,446);c.bezierCurveTo(236,480,236,528,234,566);c.bezierCurveTo(254,602,308,620,358,607);c.bezierCurveTo(350,580,347,552,344,524);c.lineTo(300,470);c.closePath();},
+  // the head turned three-quarters to the right: the far side's outline runs from the forehead past the far brow and cheekbone, round the
+  // tip of the nose (the only feature that passes the cheek) and down the cheek to the chin; the jaw runs back from the chin to below the
+  // ear, which sits well behind the near eye. The eyes, the nose, the mouth and the ear inside it are drawn at the same turn (AG_FACE)
+  head(c){c.moveTo(300,300);c.bezierCurveTo(340,298,372,318,382,350);c.bezierCurveTo(387,366,390,382,390,396);
+    c.bezierCurveTo(390,404,387,410,386,415);c.bezierCurveTo(386,424,390,432,391,440);c.bezierCurveTo(394,446,397,451,397,455);
+    c.bezierCurveTo(397,460,393,463,388,464);c.bezierCurveTo(386,470,386,478,385,486);c.bezierCurveTo(384,498,381,508,377,516);
+    c.bezierCurveTo(373,526,364,531,352,531);c.bezierCurveTo(330,531,302,520,284,506);c.bezierCurveTo(274,498,268,492,264,484);
+    c.bezierCurveTo(258,474,248,464,236,458);c.bezierCurveTo(220,448,208,420,208,388);c.bezierCurveTo(208,352,226,320,256,306);
+    c.bezierCurveTo(270,301,284,300,300,300);c.closePath();},
+  ear(c){c.moveTo(266,404);c.bezierCurveTo(254,393,241,396,238,412);c.bezierCurveTo(235,428,239,446,247,456);c.bezierCurveTo(254,463,263,462,266,452);c.bezierCurveTo(269,438,269,420,266,404);c.closePath();},
+  earIn(c){c.moveTo(259,414);c.bezierCurveTo(249,410,245,422,247,434);c.bezierCurveTo(249,444,254,448,260,444);},
+  // the neck: its top tucked up under the skull with a rounded nape, so a head that nods never shows the neck's top edge
+  neck(c){c.moveTo(286,430);c.bezierCurveTo(258,432,236,446,233,468);c.bezierCurveTo(235,500,236,530,234,566);c.bezierCurveTo(254,602,308,620,358,607);c.bezierCurveTo(350,580,343,552,336,524);c.lineTo(300,470);c.closePath();},
   torso(c){c.moveTo(232,562);c.bezierCurveTo(200,572,166,584,140,598);c.bezierCurveTo(104,616,88,650,92,700);c.lineTo(120,1100);c.lineTo(414,1100);
     c.bezierCurveTo(412,1010,414,940,418,870);c.bezierCurveTo(422,800,430,740,430,700);c.bezierCurveTo(430,668,420,642,404,628);
     c.bezierCurveTo(392,618,378,608,362,603);c.closePath();},
@@ -1120,21 +1126,26 @@ const AG_F={
 };
 const AG_FIG={anchor:[296,596],box:[30,262,500,1108],piv:[282,480],res:1.5,
   shoulder:{near:[134,660],far:[428,660]},L1:282,L2:262,w:[122,96,74]};   // arm joints, the upper arm's and forearm's lengths, widths at shoulder, elbow, wrist
+// the face, turned three-quarters like the head (AG_F.head), in figure space: the near eye, wide, and the far eye, narrower and close to
+// the far cheek (x, y, half-width, half-height); the mouth's near corner, middle and far corner, the middle off to the far side as the
+// face turns; the ear's middle and the lobe. Films that draw near the face (a sound leaving the mouth, a coil behind the ear) take
+// their places from here
+const AG_FACE={eyeN:[334,418,4.8,5.6],eyeF:[377,417,3.1,5],mouth:[[350,483],[367,487],[380,481]],mid:[367,484],ear:[252,430],lobe:[253,470]};
 // hair, the shapes; each adds its path, the caller fills
 const AG_HAIR={
   side(c){c.moveTo(391,352);c.bezierCurveTo(395,326,382,300,352,290);c.bezierCurveTo(320,280,270,282,244,298);
-    c.bezierCurveTo(216,314,203,346,204,382);c.bezierCurveTo(205,414,212,440,224,456);c.bezierCurveTo(232,466,246,466,256,458);
-    c.bezierCurveTo(263,446,263,430,267,414);c.bezierCurveTo(273,402,285,398,293,406);c.lineTo(297,429);c.lineTo(303,429);
-    c.bezierCurveTo(303,404,305,384,313,368);c.bezierCurveTo(327,350,352,342,372,342);c.bezierCurveTo(381,342,387,346,391,352);c.closePath();},
+    c.bezierCurveTo(216,314,203,346,204,382);c.bezierCurveTo(205,414,210,440,218,456);c.bezierCurveTo(224,464,234,464,240,456);
+    c.bezierCurveTo(244,444,244,428,247,412);c.bezierCurveTo(252,398,266,394,274,404);c.lineTo(276,429);c.lineTo(283,429);
+    c.bezierCurveTo(283,404,290,384,302,368);c.bezierCurveTo(327,350,352,342,372,342);c.bezierCurveTo(381,342,387,346,391,352);c.closePath();},
   cropped(c){c.moveTo(386,350);c.bezierCurveTo(386,326,372,304,346,296);c.bezierCurveTo(316,288,272,290,248,304);
-    c.bezierCurveTo(222,320,210,350,211,384);c.bezierCurveTo(212,414,218,438,228,452);c.bezierCurveTo(236,460,246,460,254,452);
-    c.bezierCurveTo(260,440,262,426,266,414);c.bezierCurveTo(272,404,284,400,292,406);c.lineTo(296,426);c.lineTo(301,426);
-    c.bezierCurveTo(301,404,304,386,312,372);c.bezierCurveTo(326,356,352,350,372,350);c.bezierCurveTo(379,350,383,350,386,350);c.closePath();},
+    c.bezierCurveTo(222,320,210,350,211,384);c.bezierCurveTo(212,414,216,438,222,452);c.bezierCurveTo(228,460,236,460,240,452);
+    c.bezierCurveTo(244,440,244,426,247,414);c.bezierCurveTo(252,402,264,398,272,406);c.lineTo(275,426);c.lineTo(281,426);
+    c.bezierCurveTo(281,404,290,386,302,372);c.bezierCurveTo(326,356,352,350,372,350);c.bezierCurveTo(379,350,383,350,386,350);c.closePath();},
   coily(c){const pts=[[388,352],[392,326],[378,302],[356,290],[328,282],[296,280],[266,284],[240,296],[220,316],[208,342],[203,372],[206,402],[214,430],[226,452]];
     c.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,nx=-(b[1]-a[1]),ny=b[0]-a[0],l=Math.hypot(nx,ny)||1;
       c.quadraticCurveTo(mx-nx/l*7,my-ny/l*7,b[0],b[1]);}
-    c.bezierCurveTo(236,462,248,462,256,452);c.bezierCurveTo(262,440,262,426,266,414);c.bezierCurveTo(272,402,284,398,292,404);c.lineTo(297,428);c.lineTo(303,428);
-    c.bezierCurveTo(302,404,305,384,314,370);c.bezierCurveTo(328,354,354,348,374,349);c.closePath();},
+    c.bezierCurveTo(230,462,238,462,242,452);c.bezierCurveTo(246,440,244,426,247,414);c.bezierCurveTo(252,400,264,396,272,404);c.lineTo(276,428);c.lineTo(283,428);
+    c.bezierCurveTo(283,404,292,384,304,370);c.bezierCurveTo(328,354,354,348,374,349);c.closePath();},
   bob(c){c.moveTo(392,354);c.bezierCurveTo(396,326,382,298,350,288);c.bezierCurveTo(316,278,266,282,240,298);
     c.bezierCurveTo(210,318,198,352,200,392);c.bezierCurveTo(202,438,214,478,232,506);c.bezierCurveTo(250,528,286,532,310,518);
     c.bezierCurveTo(300,500,294,470,296,440);c.bezierCurveTo(298,404,306,378,320,362);c.bezierCurveTo(336,348,358,346,378,348);c.bezierCurveTo(385,349,389,351,392,354);c.closePath();},
@@ -1220,15 +1231,20 @@ function ag_neckline(c,P,C){const k=P.top.kind,inner=P.top.inner||[236,234,228];
 function ag_lanyard(c){c.save();ag_shape(c,AG_F.torso);c.clip();c.strokeStyle=rgba(AG.blue,0.85);c.lineWidth=7;c.lineCap="round";
   c.beginPath();c.moveTo(246,586);c.bezierCurveTo(262,680,290,760,304,806);c.moveTo(352,612);c.bezierCurveTo(342,690,326,760,314,806);c.stroke();
   ag_soft(c,cc=>ag_rect(cc,280,800,56,74,7),[244,243,240],[255,255,255],300,810,60,"rgba(46,38,28,0.3)",6);c.fillStyle=rgba(AG.blue,0.85);c.fillRect(286,808,44,10);c.restore();}
+// the ear, in three-quarter view: its outer rim and the fold inside
+function ag_ear(c,P,C){ag_soft(c,AG_F.ear,mix(P.skin,ag_dk(P.skin,0.4),0.2),P.skin,246,424,30,C.skinShade,10);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.6);c.lineWidth=2;ag_shape(c,AG_F.earIn);c.stroke();}
 // the head: skin, hair, the ear, then the face's fixed lines; eyes and mouth come live
 function ag_paintHead(c,P,C){const st=P.hair.style;
   ag_soft(c,AG_F.head,C.skinBase,C.skinHi,362,400,170,C.skinShade,26);
-  c.save();ag_shape(c,AG_F.head);c.clip();let g=c.createRadialGradient(346,458,0,346,458,32);g.addColorStop(0,rgba(mix(P.skin,[230,110,100],0.5),0.24));g.addColorStop(1,rgba([230,120,110],0));
-  c.fillStyle=g;c.fillRect(300,416,100,90);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.26);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(290,494);c.quadraticCurveTo(318,514,350,520);c.stroke();c.restore();
+  c.save();ag_shape(c,AG_F.head);c.clip();let g=c.createRadialGradient(340,458,0,340,458,30);g.addColorStop(0,rgba(mix(P.skin,[230,110,100],0.5),0.24));g.addColorStop(1,rgba([230,120,110],0));
+  c.fillStyle=g;c.fillRect(296,416,100,90);
+  // the near side of the nose, turned a little from the light: a soft shade down from between the eyes to the nostril
+  c.filter="blur(3px)";c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.45),0.12);c.lineWidth=8;c.lineCap="round";c.beginPath();c.moveTo(364,428);c.quadraticCurveTo(369,444,374,454);c.stroke();c.filter="none";
+  c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.2);c.lineWidth=2.4;c.beginPath();c.moveTo(274,490);c.quadraticCurveTo(296,510,322,519);c.stroke();c.restore();
   if(P.beard){const bd=P.beard;c.save();ag_shape(c,AG_F.head);c.clip();
-    const beard=cc=>{cc.moveTo(298,426);cc.bezierCurveTo(300,452,302,478,312,500);cc.bezierCurveTo(324,520,346,532,368,530);cc.bezierCurveTo(382,526,388,514,386,500);
-      cc.bezierCurveTo(380,494,372,490,362,492);cc.bezierCurveTo(352,494,346,488,350,478);cc.bezierCurveTo(360,470,376,466,390,468);cc.lineTo(396,462);
-      cc.bezierCurveTo(380,458,360,462,344,470);cc.bezierCurveTo(330,476,320,466,316,450);cc.bezierCurveTo(312,440,308,430,304,424);cc.closePath();};
+    const beard=cc=>{cc.moveTo(274,426);cc.bezierCurveTo(270,454,258,480,262,496);cc.bezierCurveTo(272,522,330,540,360,538);cc.bezierCurveTo(378,536,392,520,392,500);
+      cc.bezierCurveTo(386,494,376,491,366,493);cc.bezierCurveTo(356,495,346,490,347,483);cc.bezierCurveTo(354,475,372,471,392,471);cc.lineTo(398,463);
+      cc.bezierCurveTo(382,460,364,462,350,468);cc.bezierCurveTo(338,474,326,466,320,452);cc.bezierCurveTo(314,440,300,430,288,424);cc.closePath();};
     ag_soft(c,beard,bd,mix(bd,[150,150,160],0.4),360,500,60,"rgba(0,0,0,0.35)",8);c.restore();}
   if(st==="bun")ag_soft(c,AG_HAIR.knot,P.hair.c,C.hairHi,214,300,50,"rgba(0,0,0,0.5)",12);
   if(st!=="shaved"){const hf=AG_HAIR[st]||AG_HAIR.side;ag_soft(c,hf,P.hair.c,C.hairHi,336,300,110,"rgba(0,0,0,0.5)",18);
@@ -1244,16 +1260,19 @@ function ag_paintHead(c,P,C){const st=P.hair.style;
     c.strokeStyle=rgba(mix(P.skin,[210,170,150],0.5),0.45);c.lineWidth=2.2;if(st==="side"){c.beginPath();c.moveTo(262,301);c.quadraticCurveTo(300,289,344,295);c.stroke();}c.restore();}
   else{c.save();ag_shape(c,AG_F.head);c.clip();const g2=c.createLinearGradient(0,296,0,380);g2.addColorStop(0,rgba(ag_dk(P.skin,0.25),0.25));g2.addColorStop(1,rgba(ag_dk(P.skin,0.25),0));c.fillStyle=g2;c.fillRect(200,290,200,100);c.restore();}
   // the ear, over the hair, except where the hair falls over it
-  if(st!=="bob"&&st!=="long"){ag_soft(c,AG_F.ear,mix(P.skin,ag_dk(P.skin,0.4),0.2),P.skin,264,424,32,C.skinShade,10);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.6);c.lineWidth=2;ag_shape(c,AG_F.earIn);c.stroke();
-    if(P.earrings){ag_soft(c,cc=>cc.arc(270,466,6,0,TAU),P.earrings,[255,255,255],268,463,6,null);}}
+  if(st!=="bob"&&st!=="long"){ag_ear(c,P,C);if(P.earrings){const L=AG_FACE.lobe;ag_soft(c,cc=>cc.arc(L[0],L[1],6,0,TAU),P.earrings,[255,255,255],L[0]-2,L[1]-3,6,null);}}
   // brows, lids, the nose, the glasses
-  c.lineCap="round";c.strokeStyle=C.brow;c.lineWidth=5;c.beginPath();c.moveTo(313,401);c.quadraticCurveTo(332,390,353,395);c.stroke();
-  c.lineWidth=4;c.beginPath();c.moveTo(366,396);c.quadraticCurveTo(376,392,386,397);c.stroke();
+  // the brows: the near one long, the far one short, foreshortened as it turns away
+  c.lineCap="round";c.strokeStyle=C.brow;c.lineWidth=5;c.beginPath();c.moveTo(311,402);c.quadraticCurveTo(331,390,355,395);c.stroke();
+  c.lineWidth=4;c.beginPath();c.moveTo(367,397);c.quadraticCurveTo(377,392,387,398);c.stroke();
   c.strokeStyle=C.lid;c.lineWidth=2.4;c.beginPath();c.moveTo(322,414);c.quadraticCurveTo(333,407,345,412);c.stroke();
-  c.beginPath();c.moveTo(369,412);c.quadraticCurveTo(375,408,382,411);c.stroke();
-  c.strokeStyle=C.line;c.lineWidth=2.6;c.beginPath();c.moveTo(381,445);c.quadraticCurveTo(391,456,383,461);c.stroke();
-  if(P.glasses){c.strokeStyle=rgba(P.glasses,0.95);c.lineWidth=3.4;rr(c,311,401,45,32,10);c.stroke();rr(c,364,400,25,31,8);c.stroke();
-    c.beginPath();c.moveTo(356,415);c.quadraticCurveTo(360,411,364,414);c.stroke();c.beginPath();c.moveTo(311,413);c.lineTo(289,411);c.stroke();
+  c.beginPath();c.moveTo(372,412);c.quadraticCurveTo(377,408,383,411);c.stroke();
+  // the nose: its tip on the outline; inside, the curve of the nostril under it, and the near nostril's wing
+  c.strokeStyle=C.line;c.lineWidth=2.6;c.beginPath();c.moveTo(384,449);c.quadraticCurveTo(392,459,381,463);c.stroke();
+  c.lineWidth=2.2;c.beginPath();c.moveTo(368,458);c.quadraticCurveTo(367,465,375,465);c.stroke();
+  // glasses: the near lens over the near eye, the far lens narrower, its outer rim just past the cheek, the arm back to the ear
+  if(P.glasses){c.strokeStyle=rgba(P.glasses,0.95);c.lineWidth=3.4;rr(c,311,401,45,32,10);c.stroke();rr(c,366,401,22,30,8);c.stroke();
+    c.beginPath();c.moveTo(356,415);c.quadraticCurveTo(361,411,366,414);c.stroke();c.beginPath();c.moveTo(311,413);c.lineTo(268,409);c.stroke();
     c.strokeStyle="rgba(255,255,255,0.85)";c.lineWidth=2;c.beginPath();c.moveTo(345,406);c.lineTo(352,411);c.stroke();}
   if(P.hat&&P.hat.paint)P.hat.paint(c,P);}
 // the body: the far arm if it hangs, the torso and its clothes, the near arm if it hangs, the neck; arms that move are drawn live.
@@ -1271,32 +1290,36 @@ function ag_paintBody(c,P,C,near,far){const sw=P.top.c;
   if(P.lanyard)ag_lanyard(c);
   ag_soft(c,AG_F.neck,mix(P.skin,ag_dk(P.skin,0.4),0.22),P.skin,330,548,110,C.skinShade,18);
   c.save();ag_shape(c,AG_F.neck);c.clip();const ng=c.createLinearGradient(0,512,0,572);ng.addColorStop(0,rgba(mix(P.skin,[60,20,10],0.6),0.5));ng.addColorStop(1,rgba(mix(P.skin,[60,20,10],0.6),0));
-  c.fillStyle=ng;c.fillRect(230,460,140,120);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.16);c.lineWidth=2.2;c.lineCap="round";c.beginPath();c.moveTo(286,512);c.quadraticCurveTo(302,548,318,582);c.stroke();c.restore();
+  c.fillStyle=ng;c.fillRect(226,420,150,160);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.16);c.lineWidth=2.2;c.lineCap="round";c.beginPath();c.moveTo(286,512);c.quadraticCurveTo(302,548,318,582);c.stroke();c.restore();
   // the collar closes over the neck: the neckline again, only its band
   if(P.top.kind==="sweater")ag_soft(c,AG_F.collar,ag_lt(sw,0.14),ag_lt(sw,0.3),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
   else if(P.top.kind==="tunic"||P.top.kind==="apron")ag_soft(c,AG_F.collar,ag_dk(sw,P.top.kind==="tunic"?0.1:0.06),ag_lt(sw,0.25),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
   else ag_neckline(c,P,C);}
 // a person's kept pictures: the head; the body with both arms down, with only the far arm down, and with neither
 function ag_fig(who){const P=ag_spec(who),k=P.key||P.name;let F=AG_PEOPLE[k];if(F)return F;const C=ag_colours(P);
-  F=AG_PEOPLE[k]={P,C,head:ag_layer(c=>ag_paintHead(c,P,C),[180,262,420,560]),bodies:{}};return F;}
+  F=AG_PEOPLE[k]={P,C,head:ag_layer(c=>ag_paintHead(c,P,C),[160,250,440,560]),bodies:{}};return F;}
 function ag_figBody(F,near,far){const k=(near?1:0)+(far?2:0);return F.bodies[k]||(F.bodies[k]=ag_layer(c=>ag_paintBody(c,F.P,F.C,near,far)));}
 
 /* ---------------------------------------------------------------- arms that move
    An arm is [upper arm, forearm, hand]: the upper arm's and the forearm's angles in degrees from straight down, positive towards the
    way the person faces, and the hand: "rest", "hold", "point" or "open". Seen in three-quarter view, an arm reaching the way the
-   person faces also reaches towards us, so its reach across the frame is drawn shorter (AG_FIG.fore). */
+   person faces also reaches towards us, so its reach across the frame is drawn shorter (AG_FIG.fore).
+   People keep their arms down, painted with the body. A live arm is only for a hand on something the story needs: a thing held
+   ("hold", with o.hold drawing it), a wheel, a switch, a dial. Pointing, an open hand while talking, a hand at the chin and forearms on
+   a desk read as wrong, so the films don't use them: at a desk, the desk hides the hanging arms (o.cut). AG_HANG is the painted arm's
+   own angles, so a hand that rises from it starts where the arm was. */
 const AG_POSES={
-  point:  {near:[62,98,"point"]},
-  explain:{near:[24,100,"open"]},
-  hold:   {near:[10,128,"hold"]},
-  desk:   {near:[12,80,"rest"],far:[-6,84,"rest"]},
-  chin:   {near:[40,160,"rest"]}
+  hold:   {near:[10,128,"hold"]}
 };
+const AG_HANG={near:[4,34,"rest"],far:[0,6,"rest"]};
 AG_FIG.fore=0.72;
 const ag_rad=d=>d*Math.PI/180;
-function ag_poseOf(o){const get=p=>p==="hang"?{near:[2,14,"rest"]}:typeof p==="string"?AG_POSES[p]:p;const a=get(o.pose);if(!a)return null;const b=o.pose2?get(o.pose2):null,m=clamp(o.mix||0,0,1);
-  if(!b||m<=0)return a;if(m>=1)return b;const HANG={near:[2,14,"rest"],far:[0,6,"rest"]};
-  const bl=(k)=>{const x=a[k]||HANG[k],y=b[k]||HANG[k];return[lerp(x[0],y[0],m),lerp(x[1],y[1],m),m<0.5?x[2]:y[2]];};
+// a pose by its name: in a render or a check, a name that isn't in AG_POSES (a gesture the films no longer draw) stops the film with an
+// error that says so; the player on the site draws the arms down instead
+function ag_namedPose(p){const q=AG_POSES[p];if(!q&&window.__RENDER__)throw new Error('pose "'+p+'" is a gesture these films no longer draw: keep the arms down, or give a hand something to hold (people.js, AG_POSES)');return q;}
+function ag_poseOf(o){const get=p=>p==="hang"?{near:AG_HANG.near}:typeof p==="string"?ag_namedPose(p):p;const a=get(o.pose);if(!a)return null;const b=o.pose2?get(o.pose2):null,m=clamp(o.mix||0,0,1);
+  if(!b||m<=0)return a;if(m>=1)return b;
+  const bl=(k)=>{const x=a[k]||AG_HANG[k],y=b[k]||AG_HANG[k];return[lerp(x[0],y[0],m),lerp(x[1],y[1],m),m<0.5?x[2]:y[2]];};
   return{near:bl("near"),far:(a.far||b.far)?bl("far"):null};}
 // where an arm's joints are: the shoulder J, the elbow, the wrist
 function ag_joints(J,spec){const f=AG_FIG.fore,a1=ag_rad(spec[0]),a2=ag_rad(spec[1]),E=[J[0]+Math.sin(a1)*AG_FIG.L1*f,J[1]+Math.cos(a1)*AG_FIG.L1],
@@ -1360,20 +1383,24 @@ function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.
   if(!pose)body(ag_figBody(F,true,true));
   else{const J=AG_FIG.shoulder,farMoves=!!pose.far;const fr=farMoves?ag_arm(ctx,P,C,J.far,pose.far,true):null;
     body(ag_figBody(F,false,!farMoves));
-    const nj=ag_joints(J.near,pose.near||[2,14,"rest"]);hands={near:nj.Wr,far:fr?fr.Wr:null,nearElbow:nj.E};
-    if(o.holdBack)o.holdBack(ctx,hands);ag_arm(ctx,P,C,J.near,pose.near||[2,14,"rest"],false);if(o.hold)o.hold(ctx,hands);}
+    const nj=ag_joints(J.near,pose.near||AG_HANG.near);hands={near:nj.Wr,far:fr?fr.Wr:null,nearElbow:nj.E};
+    if(o.holdBack)o.holdBack(ctx,hands);ag_arm(ctx,P,C,J.near,pose.near||AG_HANG.near,false);if(o.hold)o.hold(ctx,hands);}
   ctx.restore();
   // the head: breathing a little less than the body, nodding about the top of the neck
   ctx.save();ctx.translate(AG_FIG.piv[0],AG_FIG.piv[1]+br*0.7);ctx.rotate(o.nod||0);ctx.translate(-AG_FIG.piv[0],-AG_FIG.piv[1]);
   ag_drawLayer(ctx,F.head);
-  // the eyes, the mouth
-  const by=Math.max(0.12,1-blink);ctx.fillStyle="#1a1416";
-  ctx.save();ctx.translate(334+g[0],418+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,4.8,5.6,0,0,TAU);ctx.fill();ctx.restore();
-  ctx.save();ctx.translate(376+g[0]*0.8,417+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,3.4,5,0,0,TAU);ctx.fill();ctx.restore();
-  const tk=clamp(o.talk||0,0,1),sm=clamp(o.smile==null?0.3:o.smile,0,1);
-  if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
-  else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
-  ctx.restore();ctx.restore();return hands;}
+  ag_face(ctx,P,C,blink,g,o.talk,o.smile==null?0.3:o.smile);
+  ctx.restore();
+  // o.front: a thing the near hand holds up before the face, over the head (drawn with hold, it would sit behind the face)
+  if(o.front&&hands){ctx.save();ctx.translate(0,br);o.front(ctx,hands);ctx.restore();}
+  ctx.restore();return hands;}
+// the face's live parts, in figure space: the eyes (blink 0 to 1, gaze [dx, dy]) and the mouth (talk 0 to 1, smile 0 to 1)
+function ag_face(ctx,P,C,blink,g,talk,smile){const F=AG_FACE,by=Math.max(0.12,1-(blink||0));g=g||[2,0];ctx.fillStyle="#1a1416";
+  ctx.save();ctx.translate(F.eyeN[0]+g[0],F.eyeN[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeN[2],F.eyeN[3],0,0,TAU);ctx.fill();ctx.restore();
+  ctx.save();ctx.translate(F.eyeF[0]+g[0]*0.7,F.eyeF[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeF[2],F.eyeF[3],0,0,TAU);ctx.fill();ctx.restore();
+  const tk=clamp(talk||0,0,1),sm=clamp(smile||0,0,1),[a,m,b]=F.mouth;
+  if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(a[0]+1,a[1]-1);ctx.quadraticCurveTo(m[0],m[1]-1-sm*3,b[0],b[1]-1);ctx.quadraticCurveTo(m[0]+2,m[1]+1+tk*10,a[0]+1,a[1]-1);ctx.fill();}
+  else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(a[0],a[1]-sm*1.5);ctx.quadraticCurveTo(m[0],m[1]+sm*3,b[0],b[1]-sm*1.5);ctx.stroke();}}
 // a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
 // parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
 // front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
@@ -1665,11 +1692,12 @@ function wg_cap(col){return(c,P)=>{const d=ag_dk(col,0.35);
   ag_soft(c,cc=>{cc.moveTo(206,344);cc.lineTo(398,344);cc.lineTo(396,370);cc.lineTo(210,372);cc.closePath();},d,ag_lt(col,0.12),340,352,80,null);
   ag_soft(c,cc=>{cc.moveTo(350,364);cc.bezierCurveTo(382,360,418,364,440,378);cc.bezierCurveTo(424,388,382,388,350,378);cc.closePath();},[30,32,36],[96,100,108],404,370,40,null);
   ag_soft(c,cc=>cc.ellipse(372,316,11,13,0,0,TAU),[214,206,184],[255,250,236],370,312,12,null);};}
-function wg_hat(col){return(c,P)=>{
+// a brimmed hat, worn on the head: its band just above the ear, the brim over the brow
+function wg_hat(col){return(c,P)=>{c.save();c.translate(0,22);
   ag_soft(c,cc=>{cc.moveTo(214,330);cc.bezierCurveTo(212,286,240,258,290,254);cc.bezierCurveTo(342,250,382,268,390,312);cc.lineTo(394,338);cc.closePath();},col,ag_lt(col,0.28),350,270,110,rgba(ag_dk(col,0.7),0.4),12);
   c.strokeStyle=rgba(ag_dk(col,0.4),0.7);c.lineWidth=4;c.beginPath();c.moveTo(262,262);c.quadraticCurveTo(300,282,350,262);c.stroke();
   ag_soft(c,cc=>{cc.moveTo(214,322);cc.lineTo(394,326);cc.lineTo(394,340);cc.lineTo(214,338);cc.closePath();},[34,34,38],[90,90,96],330,330,60,null);
-  ag_soft(c,cc=>cc.ellipse(306,340,124,16,-0.04,0,TAU),ag_dk(col,0.12),ag_lt(col,0.25),380,334,120,rgba(ag_dk(col,0.7),0.35),6);};}
+  ag_soft(c,cc=>cc.ellipse(306,340,124,16,-0.04,0,TAU),ag_dk(col,0.12),ag_lt(col,0.25),380,334,120,rgba(ag_dk(col,0.7),0.35),6);c.restore();};}
 function wg_tie(col){return(c,P)=>{c.save();ag_shape(c,AG_F.torso);c.clip();
   ag_soft(c,cc=>{cc.moveTo(302,616);cc.lineTo(324,614);cc.lineTo(330,642);cc.lineTo(338,820);cc.lineTo(320,850);cc.lineTo(304,820);cc.lineTo(306,644);cc.closePath();},
     col,ag_lt(col,0.3),326,680,90,rgba(ag_dk(col,0.7),0.4),8);c.restore();};}
@@ -1961,17 +1989,14 @@ function wg_blueLine(ctx,x0,x1,y,p,a){if(p<=0||a<=0)return;ctx.save();ctx.global
 
 /* ---------------------------------------------------------------- the control room's people and desks, live
    wg_controlRoom(ctx, t, o): the two controllers at their desks in front of the board, facing it from either side (people face us in
-   three-quarter view), a telephone on each desk; o.lift (0 to 1) the second controller's handset rising to his ear. */
+   three-quarter view), a telephone on each desk. They watch the board, their arms down behind the desks: a handset lifted to the ear
+   put a hand on the face, and read as wrong. */
 function wg_controlRoom(ctx,t,o){o=o||{};wg_board(ctx,t,{});
-  const lift=clamp(o.lift||0,0,1),up=ag_sine(clamp((lift-0.15)/0.85,0,1));
   ag_person(ctx,WG_P.ctrlA,520,700,0.72,{t,gaze:[3,-3],cut:900});
-  ag_person(ctx,WG_P.ctrlB,1400,700,0.72,{t:t+1.3,flip:true,gaze:[3,-3],cut:900,pose:lift>0.02?{near:[lerp(6,26,up),lerp(30,168,up),"hold"]}:null,hold:lift>0.02?wg_handset:null});
+  ag_person(ctx,WG_P.ctrlB,1400,700,0.72,{t:t+1.3,flip:true,gaze:[3,-3],cut:900});
   for(const x0 of [200,1080]){const g=ctx.createLinearGradient(0,984,0,H);g.addColorStop(0,"rgb(150,154,150)");g.addColorStop(1,"rgb(126,130,126)");ctx.fillStyle=g;ctx.fillRect(x0+24,984,592,H-984);
     ctx.fillStyle="rgba(255,255,255,0.25)";ctx.fillRect(x0+24,984,592,2);ag_desk(ctx,x0,962,640,{depth:62});}
-  wg_phone(ctx,700,930,0);wg_phone(ctx,1220,930,lift>0.02?1:0);}
-// a telephone's handset in a hand (figure space): held upright, its ends at the ear and the mouth
-function wg_handset(c,h){if(!h||!h.near)return;const [x,y]=h.near;c.save();c.translate(x+10,y-70);c.rotate(-0.18);
-  ag_soft(c,cc=>{ag_rect(cc,-14,-120,28,200,12);cc.moveTo(-20,-118);cc.arc(0,-118,26,0,TAU);cc.moveTo(-20,82);cc.arc(0,82,26,0,TAU);},[30,30,34],[96,98,104],10,-110,90,null);c.restore();}
+  wg_phone(ctx,700,930,0);wg_phone(ctx,1220,930,0);}
 
 /* ---------------------------------------------------------------- the places, painted once */
 AG_PLACES.wgPlatform=c=>wg_paintPlatform(c);
@@ -2185,7 +2210,7 @@ function wg_shelf(ctx,x,y,w,books,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)ret
   ctx.restore();return top;}
 
 /* ---------------------------------------------------------------- the people of the room, as this film poses them */
-// Jun standing at the left, as the prototype has him: o.pose, o.gaze, o.nod, o.talk, o.dx (a step), o.a (at night he has gone home)
+// Jun standing at the left, as the prototype has him, his arms down: o.p (ag_person's gaze, nod, talk), o.dx (a step), o.a (at night he has gone home)
 function wg_jun(ctx,t,o){o=o||{};const J=WR.jun,a=o.a==null?1:o.a;if(a<=0.01)return null;let h=null;
   withA(ctx,a,()=>{h=ag_person(ctx,"jun",J.x+(o.dx||0),J.y,J.s,Object.assign({t,gaze:[3,0]},o.p||{}));});return h;}
 // a hand's place in the frame, from ag_person's figure-space hands: who drawn at (x, y), size s, flip
@@ -2255,7 +2280,7 @@ function wg_trayLine(x,p,a){if(p<=0||a<=0)return;const T_=WR.tray,x0=T_.x-T_.w/2
 /* ---------------------------------------------------------------- 1 · Built into the line */
 scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,"opening","Tokyo"),fast:wAt(sc,"first","two hundred and ten"),out:wAt(sc,"first","built for"),
     km:wAt(sc,"speed","a kilometre"),sig:wAt(sc,"signals","the signals"),slow:wAt(sc,"signals","and the train"),tok:wAt(sc,"missed","in Tokyo"),
-    faster:wAt(sc,"cab","goes faster"),slows:wAt(sc,"cab","slows itself down"),every:wAt(sc,"room","every train"),answers:wAt(sc,"driver","answers"),
+    faster:wAt(sc,"cab","goes faster"),slows:wAt(sc,"cab","slows itself down"),answers:wAt(sc,"driver","answers"),
     six:wAt(sc,"trip","six and a half"),four:wAt(sc,"trip","to four"),since:wAt(sc,"safe","since that first day"),watch:wAt(sc,"uni","no one can watch"),
     round:wAt(sc,"limits","its limits")}));
   ag_shots(ctx,S,t,sc.dur,[
@@ -2287,8 +2312,8 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,
       const f=P.faster,dn=c.room-2.2,v=ag_keys(tt,[[c.cab,200],[f,203],[f+0.9,221],[f+1.3,221],[f+2.6,204],[f+3.0,206.5],[f+3.4,205],[dn+0.3,205],[dn+1.5,157],[dn+1.8,158.5],[dn+2.1,158]]);
       const allow=tt<dn?210:160,state=v>allow?"over":tt>f+0.5?"under":"set";
       wg_cabShot(x,tt,{v,allow,state,boxA:ag_in(tt,wAt(sc,"cab","the speed allowed"),0.5),gaze:[5,-1]});}},
-    // one control room watches every train on the line; a controller lifts a handset
-    {at:c.room,place:"wgControl",keys:[[c.room,960,540,1]],push:0.025,draw:(x,tt)=>{wg_controlRoom(x,tt,{lift:ag_sine((tt-P.every)/1.2)});}},
+    // one control room watches every train on the line
+    {at:c.room,place:"wgControl",keys:[[c.room,960,540,1]],push:0.025,draw:(x,tt)=>{wg_controlRoom(x,tt,{});}},
     // and the driver still drives, and answers for the train
     {at:c.driver,place:"wgCab",keys:[[c.driver,820,580,1.1]],push:0.03,draw:(x,tt)=>{wg_cabShot(x,tt,{v:206,allow:210,state:"under",hand:true,gaze:[5,-1]});
       ag_pill(x,880,860,"the driver drives, and answers for the train",{a:ag_in(tt,P.answers,0.5)});}},
@@ -2331,7 +2356,7 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
     wg_plain(x,WR.cards.x,WR.cards.y+290,{k:ag_spr(tt,c.plain),a:ag_in(tt,c.plain,0.4),tick:okA});});};
   ag_shots(ctx,S,t,sc.dur,[
     // the census-day count, the number the university sends the government, and the plain job that counts it
-    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.cnt-0.3,c.plain+2,0.6)}});
+    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{});
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);ag_roomLight(x,1);WG_KICK(x);cards(x,tt,0,ag_in(tt,c.plain+0.6,0.4));}},
     // at night it fails: the agent finds the cause with its read-only tools, and puts a fix, as a draft, in its tray
     {cut:true,at:c.night,place:"wgLabNight",keys:[[c.night,1060,520,1.04]],push:0.02,draw:(x,tt)=>{const A=WR.agent;
@@ -2355,7 +2380,7 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
       W_.forEach(([f,ti,su,t0],i)=>wg_word(x,150,170+i*196,800,f,ti,su,{a:ag_in(tt,t0+0.1,0.4),k:ag_spr(tt,t0+0.1),hl:i===2?ag_in(tt,P.pa,0.5):0}));}},
     // Yusuf asks what the university asks of any new colleague; the four questions, and their answers
     {cut:true,at:c.yusuf,place:"wgLab",keys:[[c.yusuf,960,540,1]],push:0,draw:(x,tt)=>{wg_agent(x,tt,{});
-      wg_jun(x,tt,{p:{gaze:[4,-3]}});ag_person(x,"yusuf",640,640,0.92,{t:tt,gaze:[4,-3],pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.asks,c.four+1.0,0.6)});
+      wg_jun(x,tt,{p:{gaze:[4,-3]}});ag_person(x,"yusuf",640,640,0.92,{t:tt,gaze:[4,-3]});
       ag_roomLight(x,1);WG_KICK(x);
       wg_ghost(x,1400,300,"Work for the whole team?",{});wg_ghost(x,1400,420,"Change the pipeline itself?",{});
       wg_four(x,{q:P.q.map(q=>ag_spr(tt,q+0.1,0.6)),flip:P.f.map(f=>ag_sine((tt-f)/0.6))});}}
@@ -2381,7 +2406,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({drv:wAt(sc,"
       if(go<0.02||back>0.98)wg_tagOn(x,{a:ta,dy:go<0.02?dy:0,sw:sw});
       else{const u=back>0?1-back:go,fade=tt>P.stops&&back<=0?1-ag_in(tt,P.stops,0.5):1;withA(x,fade,()=>wg_tag(x,lerp(WR.agent.x-30,700,u),lerp(WR.hook-2,470,u),"owner · Jun Park",{dx:lerp(-170,-20,u),dy:lerp(80,60,u)}));}
       wg_hand(x,690,560,{a:ag_io(tt,c.moves-0.2,P.stops+2.4,0.4)});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,c.jun-0.2,P.owns+0.6,0.5),gaze:[4,0]}});
+      wg_jun(x,tt,{p:{gaze:[4,0]}});
       ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       wg_card(x,WR.cards.x,WR.cards.y,470,{kick:"For",title:"the census-day count"},{a:ag_in(tt,P.for_,0.4),k:ag_spr(tt,P.for_)});
       wg_log(x,1400,300,470,[{text:"read the failed check"},{text:"found the cause"},{text:"drafted a fix, in test"}],{a:ag_in(tt,P.reads,0.4),k:ag_spr(tt,P.reads)});
@@ -2417,7 +2442,7 @@ scene("identity",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({name:wAt(
     // the team sees everything it does, and can stop it without stopping anyone else
     {at:P.team,place:"wgLab",keys:[[P.team,960,540,1]],push:0.02,draw:(x,tt)=>{const off=ag_in(tt,P.noone,0.3)*(1-ag_in(tt,sc.dur-2.2,0.3));
       wg_switchWire(x,1-off,{});wg_agent(x,tt,{dim:off});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.stop-0.4,P.noone+1.2,0.4)}});
+      wg_jun(x,tt,{});
       ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});log(x,tt,1,ag_in(tt,P.team+0.3,0.5));}}
   ],0.6);});
 
@@ -2444,7 +2469,7 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
       wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});role(x,tt);}},
     // how much it may do alone is our choice; its skill doesn't decide it
     {cut:true,at:c.choice,place:"wgLab",keys:[[c.choice,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.ours-0.3,c.skill+1.4,0.5)}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       wg_bars(x,476,320,460,{a:ag_in(tt,c.choice,0.4),can:ag_sine((tt-c.choice-0.3)/1.2),alone:ag_sine((tt-P.ours)/0.9)*0.3,knob:ag_in(tt,P.ours,0.4)});}},
     // written down as a mandate its owner signs
     {at:c.mandate,place:"wgLab",keys:[[c.mandate,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
@@ -2452,7 +2477,7 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
     // like the speed in the cab: set from outside, lowered at any time, and the agent can never raise it
     {at:c.cab,place:"wgLab",keys:[[c.cab,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
       const r=ag_sine((tt-P.raise)/0.8)*(1-ag_sine((tt-P.raise-1.6)/0.8));if(r>0.01){const A=WR.agent;ag_reach(x,[A.x-A.R*0.62,A.y+A.R*0.42,990,620,900,500,876,452],r*0.82,{});}
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.low-0.4,P.low+1.6,0.4)}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       const low=tt>P.low+0.2;wg_allowBox(x,700,420,low?160:210,"set",{a:ag_in(tt,c.cab+0.2,0.4),k:low?ag_spr(tt,P.low+0.2,0.6):ag_spr(tt,c.cab+0.2)});
       if(tt>P.raise+0.5)ag_lock(x,830,404,30,rgba(AG.blue,ag_io(tt,P.raise+0.5,sc.dur,0.3)));}}
   ],0.6);});
@@ -2468,7 +2493,7 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
   ag_shots(ctx,S,t,sc.dur,[
     // a person checks its evidence, not its tone; it never approves, and no agent approves anyone's
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"point",mix:ag_io(tt,P.ev-0.3,P.ev+2.6,0.5),gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{p:{gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
       const r=change(x,tt,ag_in(tt,c.checks,0.4),ag_sine((tt-P.ev+0.2)/1.2));
       // Jun's eye runs down the evidence, not the title
       const hi=ag_io(tt,P.ev+0.9,P.ev+3.0,0.3);if(hi>0)r.items.forEach((it,i)=>{const on=ag_io(tt,P.ev+0.9+i*0.8,P.ev+1.9+i*0.8,0.25);if(on>0){x.save();x.globalAlpha*=on*hi;x.strokeStyle=rgba(AG.orange,0.95);x.lineWidth=4;rr(x,it.to.x-6,it.to.y-6,it.to.w+12,it.to.h+12,20);x.stroke();x.restore();}});
@@ -2485,7 +2510,7 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
     // every change to production: checked by its owner, approved by a second person, the same as people's changes
     {at:c.prod,place:"wgLab",keys:[[c.prod,960,540,1]],push:0.02,draw:(x,tt)=>{const pass=ag_sine((tt-P.sec-1.2)/1.2),jp=ag_sine((tt-c.same)/1.0);
       wg_production(x,880,180,560,620);ag_glass(x,880,180,560,620,{label:null});
-      ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0],pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,P.sec-0.4,P.sec+1.4,0.4)});
+      ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0]});
       ag_roomLight(x,1);WG_KICK(x);
       const cx=lerp(240,980,pass),ca=1-0.55*pass;
       withA(x,ca,()=>{wg_card(x,cx,300,460,{kick:"by census agent",title:"Fix a failing step"},{kickCol:AG.violet});
@@ -2505,7 +2530,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({role:wAt(sc,
       ag_pill(x,810,806,"the same rules",{col:AG.blue,a:ag_in(tt,P.rules,0.4)});ag_pill(x,1110,806,"the same security",{col:AG.blue,a:ag_in(tt,P.sec,0.4)});}},
     // four rules of its own, beside the four needs
     {cut:true,at:c.four,place:"wgLab",keys:[[c.four,960,540,1]],push:0,draw:(x,tt)=>{const A=WR.agent;wg_switchWire(x,1,{});wg_agent(x,tt,{});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
-      wg_jun(x,tt,{p:{pose:{near:[2,14,"rest"]},pose2:"explain",mix:ag_io(tt,c.four-0.2,c.rights+1.2,0.5)}});ag_roomLight(x,1);WG_KICK(x);
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);
       // each rule swells the need (or needs) it belongs to
       const R4=[[c.rights,["No rights of its own,","only a role's"],[2]],[c.owner,["Always a human owner"],[0]],[c.approve,["Never an approver"],[3]],
         [c.mandate,["A written mandate","that can be taken back;","a person approves every","change to production"],[2,3]]],pop=[0,0,0,0];

@@ -176,12 +176,12 @@ function mc_tied(c,P){const C=ag_colours(P),h=P.hair.c;
   for(const s of [[[384,348],[334,326],[292,334]],[[376,318],[330,300],[290,320]],[[330,296],[300,298],[288,318]],[[226,440],[226,392],[248,352]],[[300,370],[290,356],[280,350]]]){
     c.beginPath();c.moveTo(s[0][0],s[0][1]);c.quadraticCurveTo(s[1][0],s[1][1],s[2][0],s[2][1]);c.stroke();}
   c.restore();
-  ag_soft(c,AG_F.ear,mix(P.skin,ag_dk(P.skin,0.4),0.2),P.skin,264,424,32,C.skinShade,10);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.6);c.lineWidth=2;ag_shape(c,AG_F.earIn);c.stroke();
+  ag_ear(c,P,C);
   // the knot: a coil sitting on the side of the head above the ear, a soft shadow under it
-  c.save();c.shadowColor="rgba(0,0,0,0.35)";c.shadowBlur=8;c.shadowOffsetX=-3;c.shadowOffsetY=5;c.fillStyle=rgba(h,1);c.beginPath();c.ellipse(276,330,33,29,-0.3,0,TAU);c.fill();c.restore();
-  ag_soft(c,cc=>cc.ellipse(276,330,33,29,-0.3,0,TAU),h,C.hairHi,290,316,34,"rgba(0,0,0,0.5)",8);
+  c.save();c.shadowColor="rgba(0,0,0,0.35)";c.shadowBlur=8;c.shadowOffsetX=-3;c.shadowOffsetY=5;c.fillStyle=rgba(h,1);c.beginPath();c.ellipse(262,330,33,29,-0.3,0,TAU);c.fill();c.restore();
+  ag_soft(c,cc=>cc.ellipse(262,330,33,29,-0.3,0,TAU),h,C.hairHi,276,316,34,"rgba(0,0,0,0.5)",8);
   c.strokeStyle=rgba(ag_lt(h,0.5),0.32);c.lineWidth=2.2;c.lineCap="round";
-  c.beginPath();c.ellipse(278,329,21,17,-0.3,-2.6,1.4);c.stroke();c.beginPath();c.ellipse(279,329,10,8,-0.3,-2.2,2.4);c.stroke();}
+  c.beginPath();c.ellipse(264,329,21,17,-0.3,-2.6,1.4);c.stroke();c.beginPath();c.ellipse(265,329,10,8,-0.3,-2.2,2.4);c.stroke();}
 const mc_reciter=(name,key,skin,hair,beard,breath)=>({name,key,skin,hair:{style:"shaved",c:hair},beard,top:{kind:"bare",c:skin,paint:mc_drape},hat:{paint:mc_tied},breath});
 const MC_TEACHER=mc_reciter("the teacher","mc-teacher",[164,114,84],[140,136,132],[156,152,148],0.2);
 const MC_BOY1=mc_reciter("the elder student","mc-boy1",[176,124,92],[30,24,24],null,0.3);
@@ -204,10 +204,9 @@ function mc_bareArm(c,P,spec){const C=ag_colours(P),J=AG_FIG.shoulder.near,j=ag_
   else{ag_soft(c,cc=>ag_capsule(cc,j.J,j.E,w[0],w[1]),ag_dk(col,0.16),ag_lt(col,0.28),hx,hy,240,rgba(ag_dk(col,0.8),0.42),20);
     ag_soft(c,cc=>ag_capsule(cc,j.E,j.Wr,w[1]*0.96,w[2]),ag_dk(col,0.1),ag_lt(col,0.3),j.E[0]+u[0]*80+20,j.E[1]+u[1]*80-20,200,rgba(ag_dk(col,0.8),0.42),18);}
   ag_hand(c,[j.Wr[0]+u[0]*6,j.Wr[1]+u[1]*6],ah+(spec[2]==="open"?-0.3:0),spec[2]||"rest",P,C,u[0]>=0?1:-1);}
-// how a reciter sits: the near hand resting on the near knee, the far one on the far knee; MC_POSE.teach opens the near hand as he
-// speaks, MC_POSE.raise lifts it, palm out, to stop a slip; MC_POSE.empty holds both hands out, open and empty
-const MC_POSE={sit:{near:[2,72,"rest"],far:[-6,66,"rest"]},teach:{near:[22,96,"open"],far:[-6,66,"rest"]},raise:{near:[48,140,"open"],far:[-6,66,"rest"]},
-  empty:{near:[18,92,"open"],far:[8,84,"open"]}};
+// how a reciter sits: the near hand resting on the near knee, the far one on the far knee. No gestures: hands raised in the air read
+// wrong, so the hands stay there
+const MC_POSE={sit:{near:[2,72,"rest"],far:[-6,66,"rest"]}};
 // one reciter seated cross-legged: the person (o as ag_person's, o.pose one of MC_POSE or angles), the lap drawn over the waist and
 // under the near arm. o.k: a slimmer build (1 for an adult)
 function mc_seated(ctx,who,x,y,s,o){o=Object.assign({pose:MC_POSE.sit},o||{});const P=ag_spec(who),k=o.k||1,inLap=o.inLap;
@@ -217,7 +216,7 @@ function mc_seated(ctx,who,x,y,s,o){o=Object.assign({pose:MC_POSE.sit},o||{});co
   const q=Object.assign({},o,{covered:true,holdBack:(c,h)=>{mc_lap(c,P);if(inLap)inLap(c,h);},hold:(c,h)=>{mc_bareArm(c,P,near);if(hold)hold(c,h);}});
   const hands=ag_person(ctx,who,x,y,s,q);ctx.restore();return hands;}
 // where a seated reciter's mouth is, in the frame (for a line of light leaving it)
-function mc_mouth(x,y,s,flip){return[x+(flip?-1:1)*(366-AG_FIG.anchor[0])*s,y+(484-AG_FIG.anchor[1])*s];}
+function mc_mouth(x,y,s,flip){return[x+(flip?-1:1)*(AG_FACE.mid[0]-AG_FIG.anchor[0])*s,y+(AG_FACE.mid[1]-AG_FIG.anchor[1])*s];}
 
 /* ---------------------------------------------------------------- a verse's words, and the patterns
    Four words of a verse, written a, b, c and d as scholars write them (Staal): pale oak tiles with a dark letter. A slip is an amber x.

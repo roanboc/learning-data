@@ -317,12 +317,7 @@ function ox_fringe(c,P){const band=P.top.band;c.save();ag_shape(c,AG_F.torso);c.
   for(let k=0;k<16;k++){const u=k/15,q=ag_bz([396,624,350,740,250,850,120,940],u);c.beginPath();c.moveTo(q[0]-4,q[1]+6);c.lineTo(q[0]-10,q[1]+22);c.stroke();}c.restore();}
 // a head from people.js (the same face as in a close shot), hu tall, its middle at (cx, cy), facing right; o: t, gaze, talk, smile
 function ox_head(ctx,P,cx,cy,hu,o){o=o||{};const F=ag_fig(P),k=hu/226,t=o.t||0;ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);ctx.translate(-300,-413);
-  ag_drawLayer(ctx,F.head);const blink=ag_blinkAt(t,P),by=Math.max(0.12,1-blink),g=o.gaze||[2,0];ctx.fillStyle="#1a1416";
-  ctx.save();ctx.translate(334+g[0],418+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,4.8,5.6,0,0,TAU);ctx.fill();ctx.restore();
-  ctx.save();ctx.translate(376+g[0]*0.8,417+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,3.4,5,0,0,TAU);ctx.fill();ctx.restore();
-  const tk=clamp(o.talk||0,0,1),sm=clamp(o.smile==null?0.2:o.smile,0,1);
-  if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(354,482);ctx.quadraticCurveTo(366,486-sm*3,379,480);ctx.quadraticCurveTo(368,488+tk*10,354,482);ctx.fill();}
-  else{ctx.strokeStyle=F.C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(353,482-sm*1.5);ctx.quadraticCurveTo(365,486+sm*3,378,481-sm*1.5);ctx.stroke();}
+  ag_drawLayer(ctx,F.head);ag_face(ctx,P,F.C,ag_blinkAt(t,P),o.gaze||[2,0],o.talk,o.smile==null?0.2:o.smile);
   ctx.restore();}
 function ox_folk(ctx,x,y,h,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const P=typeof who==="string"?OX_FOLK[who]:who,ch=!!P.child,ROBE=P.top.c,BAND=P.top.band,hu=h/(ch?5.6:7.4),t=o.t||0;
   const wk=o.walk||0,ph=t*(o.speed||1.6)*TAU,bob=wk*Math.abs(Math.sin(ph))*hu*0.05,br=Math.sin(t*1.8)*hu*0.012;

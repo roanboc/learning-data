@@ -36,8 +36,8 @@ function tt_band(c,P){ag_soft(c,cc=>{cc.moveTo(222,566);cc.bezierCurveTo(250,610
 function tt_lace(c,P){ag_soft(c,cc=>{cc.moveTo(236,568);cc.bezierCurveTo(262,606,322,618,362,602);cc.lineTo(372,622);cc.bezierCurveTo(320,648,250,640,222,592);cc.closePath();},[240,236,228],[255,255,255],320,610,80,"rgba(60,50,40,0.25)",6);
   c.fillStyle="rgba(150,140,130,0.35)";for(let i=0;i<9;i++){const u=i/8,x=lerp(228,368,u),y=lerp(596,622,u)+Math.sin(u*Math.PI)*22;c.beginPath();c.arc(x,y,3,0,TAU);c.fill();}}
 // headphones over the head, for 2022: a band over the crown and a cup over the ear
-function tt_phones(c,P){c.save();c.lineCap="round";c.strokeStyle="#3B3C42";c.lineWidth=14;c.beginPath();c.moveTo(262,430);c.bezierCurveTo(236,330,300,262,372,300);c.stroke();
-  ag_soft(c,cc=>ag_rect(cc,236,394,58,86,24),[70,72,80],[150,152,164],270,404,50,"rgba(0,0,0,0.4)",8);c.restore();}
+function tt_phones(c,P){const E=AG_FACE.ear;c.save();c.lineCap="round";c.strokeStyle="#3B3C42";c.lineWidth=14;c.beginPath();c.moveTo(E[0]-6,E[1]);c.bezierCurveTo(E[0]-26,330,300,262,372,300);c.stroke();
+  ag_soft(c,cc=>ag_rect(cc,E[0]-29,E[1]-36,58,86,24),[70,72,80],[150,152,164],E[0]+5,E[1]-26,50,"rgba(0,0,0,0.4)",8);c.restore();}
 const TT_ROD={key:"tt_rod",name:"Rod",skin:[226,184,152],hair:{style:"cropped",c:[118,102,90]},top:{kind:"cardigan",c:[128,108,86],inner:[226,220,204]},breath:0.26};
 const TT_MARGARET={key:"tt_margaret",name:"Margaret",skin:[236,198,174],hair:{style:"bob",c:[128,96,72]},earrings:[222,204,170],top:{kind:"sweater",c:[166,130,118]},breath:0.3};
 const TT_CLARK={key:"tt_clark",name:"Graeme Clark",skin:[230,190,160],hair:{style:"side",c:[96,76,58]},top:{kind:"blazer",c:[236,234,228],inner:[206,212,220],tie:[104,84,70]},breath:0.27};
@@ -136,14 +136,14 @@ function tt_tableThings(ctx,o){o=o||{};const T_=TT_HOME.table,x=T_[0],y=T_[1],w=
     ctx.strokeStyle="#DCD5C6";ctx.lineWidth=5;ctx.beginPath();ctx.arc(cx+(cx<px?-26:26),cy-16,9,cx<px?Math.PI*0.5:-Math.PI*0.5,cx<px?Math.PI*1.5:Math.PI*0.5);ctx.stroke();}
   ctx.restore();}
 // Rod and Margaret at their table: Margaret on the left, facing him; Rod on the right, facing her, so his left ear (the implant's) is ours to see.
-// o: rod {talk, smile, gaze, nod, pose, pose2, mix, flip}, mag {...}; drawn with the table (before) and what's on it (after)
+// o: rod {talk, smile, gaze, nod, flip}, mag {...}, their arms down behind the table; drawn with the table (before) and what's on it (after)
 function tt_couple(ctx,t,o){o=o||{};const H_=TT_HOME,cut=H_.table[1]-H_.table[3],r=o.rod||{},m=o.mag||{};tt_table(ctx);
-  ag_person(ctx,TT_MARGARET,H_.mag,H_.y,H_.s,Object.assign({t:t+1.3,pose:"desk",cut,gaze:[3,0]},m));
-  ag_person(ctx,TT_ROD,H_.rod,H_.y,H_.s,Object.assign({t,flip:true,pose:"desk",cut,gaze:[3,0]},r));
+  ag_person(ctx,TT_MARGARET,H_.mag,H_.y,H_.s,Object.assign({t:t+1.3,cut,gaze:[3,0]},m));
+  ag_person(ctx,TT_ROD,H_.rod,H_.y,H_.s,Object.assign({t,flip:true,cut,gaze:[3,0]},r));
   tt_tableThings(ctx);}
 // where a person's mouth and ear are in the frame: who drawn at (x, y, s), facing right unless flip
 function tt_at(x,y,s,flip,fx,fy){return[x+(fx-296)*s*(flip?-1:1),y+(fy-596)*s];}
-const tt_mouth=(x,y,s,flip)=>tt_at(x,y,s,flip,366,484),tt_ear=(x,y,s,flip)=>tt_at(x,y,s,flip,268,430);
+const tt_mouth=(x,y,s,flip)=>tt_at(x,y,s,flip,AG_FACE.mid[0],AG_FACE.mid[1]),tt_ear=(x,y,s,flip)=>tt_at(x,y,s,flip,AG_FACE.ear[0],AG_FACE.ear[1]);
 
 AG_PLACES.tt_lab78=c=>{const hz=690;
   // an institutional green-grey, a darker dado, a window with blinds on the right

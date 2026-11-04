@@ -1,0 +1,110 @@
+# Agents at work on data
+
+*Proposal for the second series of the module AI agents in data work (agentic data engineering): nine films that put the agent to work on data, six on the ideas, with no product, and three on Databricks. Planned on 4 November 2026 from version 4 of the module's plan, which the author settled on 3 November, and made from it without a script review, as he asked for the module. Status: planned; the films are being made, one thread each, and merge one at a time, in order.*
+
+## Decided
+
+<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->
+| Date | Decision |
+|---|---|
+| 4 November 2026 | Series 2 of the module *AI agents in data work*, *Agents at work on data* (*Agentes trabajando con datos*), puts the agent of *What an agent is* to work: six films on how agents do data work well, with no product (what the agent reads, skills and workflows, tools with the fewest rights, memory the team shares, deciding the check before the agent starts, and how it goes wrong), then three on Databricks: working with agents on the platform, why Unity Catalog and its AI gateway govern them, and the team's context and memory, governed. Nine films, in `films/agents-at-work-on-data/`, at `agents-at-work-on-data/` on the site with its page once its opening film is out; its cards say "Film N of 9". *From helper to colleague* follows. |
+| 4 November 2026 | Made as the author asked on 4 November 2026 ("continue with the next series for agentic data engineering"), the way he set for the module on 3 November: no script review ("I don't need to check the scripts as I already provided all my insights and the plan is right, so just ask me any question you might have for each video if needed"), one thread per film, each at the highest effort, asking him only real questions; no render and no review page ("Don't render the videos, just create and merge the PRs as the work finishes, I will check the new videos in the portal directly"). The films merge once their checks pass, one at a time, in order, and the release workflow renders each video when he starts it. |
+| 4 November 2026 | The module's rules hold in every film, as *What an agent is* set them: agents are never approvers, and their review is only for reference; nothing reaches production without a person, and a change to production needs a second person's approval, for agents as for people; in test, an agent may do agreed tasks alone and report; tool servers get the fewest rights (read-only when reading is enough, writes only as drafts in sandboxes, no sensitive data); automate deterministically first; memory is shared by the team, outside a single chat; an agent in the wrong hands is more dangerous. |
+| 4 November 2026 | The look, the people and the sound are the module's, from `films/what-an-agent-is/shared/`, used as it is: the white lab made Nordic, the colours that mean the same in every film, people with an adult's proportions and one three-quarter head, arms down and a hand only on the thing the story is about, a cut between two framings of one moment, and the sound check's limits (after the opening, music at most about once every 10 seconds, no figure again within 20 seconds, music and effects no louder than the governance films', at most 12 effects starting in a second). Each film has a palette of its own; none takes an instrument the site already has. |
+| 4 November 2026 | The films about ideas (2.1 to 2.6) open with a story from outside data, varied in culture, era and kind, in the four beats said outright; each film's thread checks its story against its own sources and records it in its own rows. The three films on Databricks (2.7 to 2.9) open today, at the university, as *Governance you can use* does, in the same four beats. |
+| 4 November 2026 | The data story is Jun's agent and the census-day count, the number the university reports to the government. Numbers and words from *What an agent is* are reused exactly (18,412 students on census day, 31 March 2026, never "enrolments"), and a number two films show is agreed between their threads before either script uses it. |
+| 4 November 2026 | The author's example, told briefly in *A model, reasoning, hands and a loop* (an agent searched the web for what its tool server already gave, because its plan didn't say what was available), is told in full in 2.5, *Plan, define the check, do, check*, and named in one line among the failures of 2.6, *How it goes wrong*. |
+| 4 November 2026 | The films on Databricks name each product as its docs name it on the day the film is made, and say "preview" or "beta" where they do. On 4 November 2026 a web search found Genie One (as *Meaning on the platform* says it), the managed MCP servers (Genie One's generally available, the others in preview), agent memory kept in Lakebase (public preview), and AI Gateway renamed Unity AI Gateway in April 2026, part of Unity Catalog, in beta; 2.8's title follows the name its thread finds. |
+| 4 November 2026 | The films show the example project's own files (`films/analytics-engineering/project/`): its `AGENTS.md`, its seven skills, its governance folder and its models; what a film needs that the project lacks is added to the project in place. Earlier films are built on, not taught again: *An agent on the team*, *Written once*, *An agent that checks*, *Governed in Unity Catalog* and *Meaning on the platform*, and all of *What an agent is*. |
+<!-- /decided -->
+
+## The brief
+
+The module, in the author's words of 3 November 2026: the basic ideas first, then the journey from people using agents on their behalf to autonomous contributors, with their own identity, permissions and human owner. Four series, about 31 films: *What an agent is*, *Agents at work on data* (this one), *From helper to colleague* and *A colleague that isn't a person*.
+
+*What an agent is* said what an agent is, what it's like to work with, and why we govern it. This series puts it to work. Jun's agent works on the census-day count, the number the university reports to the government. Six films show how agents do data work well: what the agent reads and who writes it; skills and workflows; tools with the fewest rights; memory the whole team shares; deciding how the result will be checked before the agent starts; and the ways it goes wrong. The last three show how Databricks lets the team work with agents, and why Unity Catalog and its AI gateway govern them, with the team's context and memory governed like any data.
+
+On making it, 4 November 2026, 09:36: "continue with the next series for agentic data engineering". For the module, 3 November 2026: "I don't need to check the scripts as I already provided all my insights and the plan is right, so just ask me any question you might have for each video if needed", and "Don't render the videos, just create and merge the PRs as the work finishes, I will check the new videos in the portal directly".
+
+## The reference, and its alternatives
+
+There is no single framework for doing data work with agents. The series follows the author's practice and his cycle of intent, execution and validation, and checks each film against the sources it draws on.
+
+| Body of knowledge | What it adds | Here |
+|---|---|---|
+| Context engineering (common practice since 2025) | Everything the agent reads, chosen and written down: code, metadata, skills and tools | 2.1, 2.9 |
+| Skills as files an agent loads when needed | Playbooks the team writes once and every agent reuses | 2.2, 2.9 |
+| Workflows versus agents (common practice since 2024) | A fixed workflow where the steps are known; an agent only where they aren't | 2.2, 2.6 |
+| The Model Context Protocol (MCP), an open standard | One way to plug tools into any agent, each through a tool server | 2.3, 2.7, 2.8 |
+| Least privilege (Saltzer and Schroeder, 1975); OWASP's agentic threats (excessive agency, tool misuse, prompt injection, memory poisoning) | Give every program the fewest rights its job needs; what goes wrong when an agent has too many, or reads something that tells it what to do | 2.3, 2.4, 2.6 |
+| Episodic and semantic memory (Tulving, 1972); memory in agent designs (Sumers and others, *Cognitive Architectures for Language Agents*, 2023) | Kinds of memory, in people and in agents: what happened, and what's known | 2.4, 2.9 |
+| Confidential, blameless reporting (aviation safety reporting since 1976; blameless reviews) | Lessons reach everyone when reporting them is safe, and someone reviews them | 2.4, 2.6 |
+| Plan, do, check, act (Shewhart and Deming); tests written before the code | A cycle that learns; deciding how a result will be checked before the work | 2.5 |
+| Databricks' docs (Genie One, Agent Bricks, managed MCP servers, Unity Catalog, its AI gateway, Lakebase), checked on the day | How the platform runs and governs agents | 2.7, 2.8, 2.9 |
+
+Alternatives worth knowing, named once:
+
+- **Prompt engineering**: the wording of one request. Context engineering is wider: everything the agent reads, kept for the whole team.
+- **Retrieval-augmented generation**: bringing documents into a model's answer. The series treats it as one tool among several, read-only like the others.
+- **Zero trust**: never trust, always verify. The series agrees, and adds that agents get the same rules as people, plus their own limits.
+- **The OODA loop** (observe, orient, decide, act): a cycle for acting fast. The series' cycle puts deciding the check before the doing, because an agent acts faster than anyone can watch.
+
+Where the series differs from them: it treats the team's context and memory as assets governed like data, not private notes, and it keeps the agent out of every approval.
+
+## The insights, and where each comes from
+
+| Insight (the author's words, shortened) | Where it comes from | Film |
+|---|---|---|
+| Context engineering: code, metadata, skills and tools; from each person wiring their own agent to a shared team context | His practice | 2.1, 2.2, 2.9 |
+| Tool servers set up with the fewest rights: read-only when reading is enough; writing only as drafts in sandboxes; no sensitive data | His practice | 2.3 |
+| An agent in the wrong hands is even more dangerous | His practice; OWASP's excessive agency | 2.3, 2.6 |
+| Learning is lost in one person's chat; memory must be outside it and shared, so the agent learns from the team | His practice (skills and context documents kept by hand today); Tulving (1972); Databricks' docs on agent memory (14 October 2026) | 2.4, 2.9 |
+| Plan, define how it will be checked, do, check; most waste comes from a plan that didn't say what the agent may use | His practice (intent, execution, validation) | 2.5, 2.6 |
+| Agents can overcomplicate things and cost more: automate deterministically, and keep agents for what isn't deterministic | His practice; workflows versus agents | 2.2, 2.6 |
+| A person in every critical loop; every change to production approved by a second person, for agents as for people; in test, an agent may do agreed tasks alone and report | His practice | 2.5, and every film |
+
+## Practical advice the films carry
+
+- Write a definition once, where people and agents both read it, and tell the agent where to look.
+- Do a job by hand once, then write it down as a skill, with every edge case it met; let a router pick the skill.
+- Run what's known as a plain, scheduled workflow, and call the agent only for what isn't.
+- Give each tool server the fewest rights: read-only, drafts in a sandbox, no sensitive data.
+- Keep what the team learns as shared memory, reviewed, and easy to correct or remove.
+- Before the agent starts, write the goal, what it may read and use, what it may not, and how the result will be checked.
+- Expect the common failures and design for each: a check that a column exists, a second way to every number, tests only a person can change, content treated as data and never as orders, a budget and a limit on every loop, and a plan that names the tools.
+- On the platform, give agents the same governed data and tools as people, an identity of their own, the same rules, and a cost you can see.
+
+## The thread, the world and the people
+
+The fictional university of the earlier series. Jun Park builds its data project, and his agent now works on the census-day count, the number the university reports to the government (18,412 students on census day, 31 March 2026, as *A model, reasoning, hands and a loop* found it). Mei Tanaka, in the registrar's office, owns what the university's words mean; Noor Rahman, the data architect, approves every change to production, an agent's too; Sam Okafor runs the platform; Clara Jensen, in Planning, asks the questions; Yusuf Demir leads data governance; and Anil Kurian and Prof. David Mensah appear as films need them. Six films open with a story from somewhere else, at another time; the three on Databricks open today, at the university. Numbers are invented and believable, and every story is blameless.
+
+## The look
+
+The module's look, from `films/what-an-agent-is/shared/`: the white lab made Nordic, a pale grey marble wall over a pale oak floor, daylight from the right, matte off-white cards; the agent a ceramic sphere with a band of violet light, the loop an oak ring, the hands pale robot arms with oak joints, a sandbox for drafts and a pane of glass in front of production. Colours mean the same in every film: blue tools and structure, violet the model thinking, orange data coming back, green a check that passes, amber a check that fails or a loop. People have an adult's proportions and one three-quarter head, with their arms down and a hand only on the thing a story is about. Openings from other places and times are drawn in the same matte style, dressed for their time.
+
+## The sound
+
+Each film has a palette of its own, made in its `tools/score.py`, with no instrument the site already has. Music plays under the opening story, then only at a chapter's turn, under a moment on screen or in a pause without words, at most about once every 10 seconds, and no figure comes back again and again. Effects are soft, low, one at a time and tied to something on screen. Music and effects sit no louder than the governance films'. An urgent pulse plays only where a story turns to an error or a rush. The module's `quiet.py` checks it all, and the mix is at -16 LUFS.
+
+## The films
+
+| # | Folder | Film (working title) | What it shows | The idea to take away |
+|---|---|---|---|---|
+| 1 | `1-context-engineering` | Context engineering | What the agent reads decides what it writes: everything kept as code; the metadata (business context, models, contracts, lineage); skills; and tools. A missing definition becomes a confident wrong guess | Write it down once, and people and agents both use it. |
+| 2 | `2-skills-and-workflows` | Skills and workflows | A skill is a playbook, earned by doing the job once by hand and refined at every edge case; a router skill picks the right playbook; a workflow chains fixed steps with agent steps | Solve it once, write it down, reuse it. |
+| 3 | `3-tools-are-hands` | Tools are hands, and every hand is a permission | Each tool server set up with the fewest rights: read-only unless writing is needed, writing only as drafts in a sandbox, no sensitive data; the rules for AI helpers as its checklist | Read-only by default; write only drafts, somewhere safe. |
+| 4 | `4-memory-for-the-team` | Memory: from one chat to the team | What's lost when learning stays in one person's chat; a session and lasting memory; memory shared by the team, reviewed, and able to be wrong or poisoned | Let the agent learn from the team, not from one person. |
+| 5 | `5-plan-check-do-check` | Plan, define the check, do, check | The work cycle: a person sets the goal, the context, what the agent may and may not use, and how the result will be checked, before it starts; the agent builds, tests and documents with evidence; the person checks and owns it; each loop leaves something for the next | Decide how you'll check before the agent starts. |
+| 6 | `6-how-it-goes-wrong` | How it goes wrong | A column that doesn't exist, a confidently wrong number, a test weakened to pass, an instruction hidden in a ticket, a loop that runs all night, a simple job made complicated | Expect these, and design for them. |
+| 7 | `7-agents-on-databricks` | Working with agents on Databricks | Agents that answer business questions over governed data; agents built and evaluated on the platform; managed tool servers for queries, functions and search; coding agents on the dbt project and the pipelines | The platform gives agents the same data and tools people use, in one place. |
+| 8 | `8-unity-catalog-and-ai-gateway` | Why Unity Catalog and AI Gateway govern them | The same grants, masks and row filters as people, tools as governed functions, lineage and audit for every query; which models and tool servers an agent may use, guardrails, rate limits, and usage and cost per agent | One set of rules for people and agents, enforced where the data and models live. |
+| 9 | `9-context-and-memory-governed` | Context and memory, governed | The team's context as code (the repository, skills, tool-server settings, dbt's descriptions, contracts and lineage) and its shared memory (agent sessions and lasting memory kept in Lakebase), governed like any data | The team's context and memory are governed assets, not private notes. |
+
+Every opening is told in four beats said outright (scenario, problem, solution, benefits), checked against its own sources; each film comes back to it and closes on its benefit for data.
+
+## Rules from the plan
+
+- Films 2.1 to 2.6 name no product; MCP may be named as an open standard. Films 2.7 to 2.9 show Databricks, with each product's name and maturity checked on the day, and "preview" or "beta" said where it applies.
+- Claims about memory, people and security are checked against their sources, listed with the date checked.
+- The fictional university, people and numbers. Nothing from the author's own talk is named; it is input only.
+- Spanish is captions and pages only. Site text follows the short style. Each film has Pause and think questions; the module's labs come later, as one set (*Write the agent's skill* with 2.2, *Review the agent's pull request* with 2.5).

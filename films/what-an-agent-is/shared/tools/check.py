@@ -5,8 +5,9 @@ again within LIMIT seconds. The site's player paints the places one by one while
 busy for seconds holds up the film, its soundtrack and the whole page. Paint what is soft anyway at a lower resolution and scale it up,
 as room.js does with the marble. Last, the governance films' checks that nothing shows twice where the film changes shot or chapter
 (films/data-governance/shared/tools/twice.py), that nobody's arm jumps in one frame (steady.py there) and that nothing jumps
-where the film changes shot or chapter (jump.py there)."""
-import jump, runpy, steady, twice
+where the film changes shot or chapter (jump.py there), and this module's own check that nothing painted for a person, such as a
+hat, reaches past the edge of their picture, where it would be cut off in a straight line (edges.py, here)."""
+import edges, jump, runpy, steady, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
@@ -22,6 +23,7 @@ except SystemExit as e:
 
 with sync_playwright() as p:
     b, pg = render_page(p)
+    edges.watch(pg)  # from here on each person's pictures are made again as the checks draw them, and edges.check looks at them
     r = pg.evaluate("""async () => {
       const frame = () => new Promise(f => requestAnimationFrame(() => f()));
       const ks = Object.keys(AG_PLACES), out = [];
@@ -34,6 +36,7 @@ with sync_playwright() as p:
     tw = twice.check(pg)
     st = steady.check(pg)
     jp = jump.check(pg)
+    ed = edges.check(pg)
     b.close()
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
@@ -64,5 +67,12 @@ if jp[1]:
     failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
 else:
     print('nothing jumps where the film changes shot or chapter')
+print(ed[0])
+for l in ed[1]:
+    print('  ' + l)
+if ed[1]:
+    failed.append("people's pictures that cut off what is painted past their edge: %d" % len(ed[1]))
+else:
+    print("nothing painted for a person reaches past their picture's edge")
 if failed:
     raise SystemExit('; '.join(failed))

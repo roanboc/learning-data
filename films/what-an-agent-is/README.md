@@ -4,7 +4,7 @@
 
 Jun Park builds the university's data project, and this term an agent works beside him. Before any rule or product, nine films ask how today's models came about, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves. The series names no product. *Agents at work on data* follows, then the journey from helper to colleague, and teams of people and agents. The plan for this series is in the [proposal](proposal.md).
 
-**Status:** planned on 3 November 2026. The series' look and tools are in [`shared/`](shared/), and its films are being made, one at a time, in order; each appears in the table below and on the site once it's out, at `what-an-agent-is/`, under the topic *AI agents in data work*.
+**Status:** planned on 3 November 2026, and all nine films made by 4 November: they're in the table below and [on the site](https://data.learn-all.org/what-an-agent-is/), each with Pause and think questions. The series' look and tools are in [`shared/`](shared/). Labs and scenarios will come later. On the site, it sits under the topic *AI agents in data work*, at `what-an-agent-is/`.
 
 ## The films
 
@@ -19,6 +19,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 7½ min | 7 | 3 questions | [script](6-ethics-and-accountability/script.md) · [source](6-ethics-and-accountability/source/README.md) |
 | [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](7-why-we-govern-them/script.md) · [source](7-why-we-govern-them/source/README.md) |
 | [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](8-what-they-tell-us-about-ourselves/script.md) · [source](8-what-they-tell-us-about-ourselves/source/README.md) |
+| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 7½ min | 7 | 4 questions | [script](9-many-agents/script.md) · [source](9-many-agents/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

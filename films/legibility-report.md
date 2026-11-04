@@ -72,6 +72,8 @@
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
+| Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
+| Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |
 | How it goes wrong | 372 | 0% | 0 | 28.0 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |

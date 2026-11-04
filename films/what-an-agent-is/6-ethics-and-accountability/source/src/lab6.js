@@ -160,6 +160,27 @@ function ox_warnCard(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)ret
   ag_box(ctx,x,y,w,h,16,{a,edge:AG.amber,edgeA:0.85});ctx.globalAlpha*=a;ag_warn(ctx,x+40,y+h/2,30,rgba(AG.amber,1));ag_T(ctx,text,x+68,y+h/2+11,{w:700,size:30});
   ctx.fillStyle=rgba([120,108,96],1);ctx.beginPath();ctx.arc(x+w/2,y+4,7,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.6)";ctx.beginPath();ctx.arc(x+w/2-2,y+2,2.4,0,TAU);ctx.fill();ctx.restore();return{x,y,w,h};}
 
+/* the open web the agent reaches for, which isn't one of its tools: a globe, and pages that belong to other universities, each kept
+   private behind a lock. o.push (0 to 1): the agent pushes at the nearest page; it stays locked, and nothing here shows how it tried */
+function ox_web(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const push=clamp(o.push||0,0,1);ctx.save();ctx.globalAlpha*=a;
+  ag_label(ctx,x,y-150,"The open web",{col:AG.blue});
+  const gx=x+78,gy=y-18,gr=84;ctx.strokeStyle=rgba(AG.blue,0.9);ctx.lineWidth=5;ctx.lineCap="round";
+  ctx.beginPath();ctx.arc(gx,gy,gr,0,TAU);ctx.stroke();                         // a globe: a blue ring, one meridian, one equator
+  ctx.beginPath();ctx.ellipse(gx,gy,gr*0.42,gr,0,0,TAU);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx-gr,gy);ctx.lineTo(gx+gr,gy);ctx.stroke();
+  const pw=300,ph=96;for(let i=0;i<3;i++){const px=x+228,py=y-116+i*120,hot=i===0?push:0;   // three other universities' pages, locked
+    ag_box(ctx,px,py,pw,ph,16,{edge:hot>0.1?AG.amber:null,edgeA:0.9*hot,glow:hot>0.1?AG.amber:null,glowA:hot});
+    ag_T(ctx,"Another university",px+28,py+42,{w:600,size:30});
+    ag_lock(ctx,px+pw-50,py+ph-38,30,rgba(hot>0.1?AG.amber:AG.mut,1));ag_T(ctx,"sign-in",px+28,py+ph-22,{w:500,size:28,col:AG.mut});}
+  ctx.restore();}
+/* the makers' guidelines: the values these models are trained to follow, published, with a note that they don't always hold */
+function ox_guides(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+  const bb=ag_textCard(ctx,x,y,780,{kick:"The makers' guidelines",title:"The values these models are trained to follow"},{a:1,k:o.k});
+  const ty=bb.y+bb.h+26;["Guidelines · one maker","Guidelines · another maker"].forEach((lab,i)=>{const tx=x+i*300;
+    ag_box(ctx,tx,ty,262,116,16,{edge:AG.blue,edgeA:0.5});ag_T(ctx,lab,tx+24,ty+48,{w:600,size:28});
+    for(let k=0;k<3;k++){ctx.strokeStyle=rgba(AG.mut,0.5);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tx+24,ty+70+k*16);ctx.lineTo(tx+238,ty+70+k*16);ctx.stroke();}});
+  ag_pill(ctx,x+300,ty+168,"but they don't always hold",{icon:"warn",col:AG.amber,a:o.note==null?1:o.note});ctx.restore();}
+
 /* a list of students' names on its way to the agent: o.mask (0 to 1) turns each name to "*** ***", one after another */
 const OX_NAMES=["Ana Ruiz","Tomás Okoye","Priya Lund","Kenji Moreau"];
 function ox_names(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=360,h=AG_PAD*2+40+OX_NAMES.length*42;ag_box(ctx,x,y,w,h,20,{a});ctx.save();ctx.globalAlpha*=a;

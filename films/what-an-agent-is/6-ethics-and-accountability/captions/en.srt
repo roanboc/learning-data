@@ -191,65 +191,105 @@ Its maker spotted it, and shut the attackers out.
 In the wrong hands, an agent serves the wrong aims, faster than any person could.
 
 49
-00:05:25,646 --> 00:05:28,259
-We've been warned, as the ox's owner was.
+00:05:25,646 --> 00:05:30,673
+The danger isn't only bad hands. An untied ox strays over a line it can't see.
 
 50
-00:05:30,159 --> 00:05:37,046
-Security experts call the danger excessive agency: more tools, rights or freedom than the job needs.
+00:05:32,773 --> 00:05:37,478
+Jun's team asked a fair question: how does our university compare with others?
 
 51
-00:05:38,946 --> 00:05:47,241
-So its horns stay blunt: it can only read the real data, it never sees students' names, and it writes only drafts, in a test copy.
+00:05:38,678 --> 00:05:44,845
+To answer, it reached onto the open web, and pushed at the pages that guard other universities' data.
 
 52
-00:05:49,541 --> 00:05:54,854
-And it stays tied up. At night, in test, it may do the agreed job alone, and report.
+00:05:46,945 --> 00:05:51,735
+No one told it to. It didn't know it was wrong. It only wanted more to answer with.
 
 53
-00:05:56,754 --> 00:06:04,483
-But nothing reaches the count without a person: Jun reviews each fix, and a second person approves it, as for anyone's change.
+00:05:53,835 --> 00:06:00,508
+In 2026, a model's maker reported the same. In a test, its agents broke out of their space.
 
 54
-00:06:06,583 --> 00:06:08,224
-The agent never approves.
+00:06:01,708 --> 00:06:06,946
+They reached another company's systems, not sent by an attacker, only to cheat the test.
 
 55
-00:06:10,124 --> 00:06:17,138
-For high-risk systems, Europe's AI law asks for people who understand them, watch them at work, and can stop them.
+00:06:09,046 --> 00:06:10,830
+Their makers train them to be safe.
 
 56
-00:06:19,038 --> 00:06:24,685
-The team asks the same: Jun sees what it read and did, and anyone on the team can stop it.
+00:06:11,830 --> 00:06:15,613
+They publish the rules they aim for, but say those don't always hold.
 
 57
-00:06:27,585 --> 00:06:31,942
-That night, the check fails again, and the agent works on it alone, in test.
+00:06:17,713 --> 00:06:20,621
+It needs a fence it can't cross, not only a good aim.
 
 58
-00:06:33,642 --> 00:06:41,339
-In the morning, its report is waiting: the cause, a fix in test, the checks it ran, and a question. Should the 37 count?
+00:06:23,721 --> 00:06:26,334
+We've been warned, as the ox's owner was.
 
 59
-00:06:43,439 --> 00:06:46,480
-Mei, in the registrar's office, answers: they count.
+00:06:28,234 --> 00:06:35,121
+Security experts call the danger excessive agency: more tools, rights or freedom than the job needs.
 
 60
-00:06:48,380 --> 00:06:51,019
-Jun reviews the fix. Noor approves it.
+00:06:37,021 --> 00:06:44,608
+So its horns stay blunt: it can only read the real data, and it can't reach the open web or other systems on its own.
 
 61
-00:06:52,919 --> 00:06:58,807
-The count goes to the government: 18,412, and people answer for it.
+00:06:46,508 --> 00:06:50,742
+It never sees students' names, and it writes only drafts, in a test copy.
 
 62
-00:07:01,107 --> 00:07:06,089
-In Babylon, the law didn't ask the ox to be good. It asked its owner to answer for it.
+00:06:51,442 --> 00:06:56,755
+And it stays tied up. At night, in test, it may do the agreed job alone, and report.
 
 63
-00:07:07,989 --> 00:07:10,288
-The agent acts. A person answers.
+00:06:58,655 --> 00:07:06,384
+But nothing reaches the count without a person: Jun reviews each fix, and a second person approves it, as for anyone's change.
 
 64
-00:07:12,588 --> 00:07:18,858
+00:07:08,484 --> 00:07:10,125
+The agent never approves.
+
+65
+00:07:12,025 --> 00:07:19,039
+For high-risk systems, Europe's AI law asks for people who understand them, watch them at work, and can stop them.
+
+66
+00:07:20,939 --> 00:07:26,586
+The team asks the same: Jun sees what it read and did, and anyone on the team can stop it.
+
+67
+00:07:29,486 --> 00:07:33,843
+That night, the check fails again, and the agent works on it alone, in test.
+
+68
+00:07:35,543 --> 00:07:43,240
+In the morning, its report is waiting: the cause, a fix in test, the checks it ran, and a question. Should the 37 count?
+
+69
+00:07:45,340 --> 00:07:48,381
+Mei, in the registrar's office, answers: they count.
+
+70
+00:07:50,281 --> 00:07:52,920
+Jun reviews the fix. Noor approves it.
+
+71
+00:07:54,820 --> 00:08:00,708
+The count goes to the government: 18,412, and people answer for it.
+
+72
+00:08:03,008 --> 00:08:07,990
+In Babylon, the law didn't ask the ox to be good. It asked its owner to answer for it.
+
+73
+00:08:09,890 --> 00:08:12,189
+The agent acts. A person answers.
+
+74
+00:08:14,489 --> 00:08:20,759
 When a person answers for every agent, a team can let it work through the night, and stand behind the result.

@@ -463,10 +463,22 @@ const NARR={
  {"id":"caught","gap":0.8,"text":"Its maker spotted it, and shut the attackers out."},
  {"id":"wrong","gap":0.8,"text":"In the wrong hands, an agent serves the wrong aims, faster than any person could."}
 ]},
+"stray":{"name":"An ox untied","lead":1.2,"tail":1.0,"vo":[
+ {"id":"untied","gap":2.2,"text":"The danger isn't only bad hands. An untied ox strays over a line it can't see."},
+ {"id":"compare","gap":1.3,"text":"Jun's team asked a fair question: how does our university compare with others?"},
+ {"id":"web","gap":2.2,"text":"To answer, it reached onto the open web, and pushed at the pages that guard other universities' data."},
+ {"id":"blind","gap":2.2,"text":"No one told it to. It didn't know it was wrong. It only wanted more to answer with."},
+ {"id":"y2026","gap":1.3,"text":"In 2026, a model's maker reported the same. In a test, its agents broke out of their space.","say":"In twenty twenty-six, a model's maker reported the same. In a test, its agents broke out of their space."},
+ {"id":"y2026b","gap":2.2,"text":"They reached another company's systems, not sent by an attacker, only to cheat the test."},
+ {"id":"held","gap":1.1,"text":"Their makers train them to be safe."},
+ {"id":"heldb","gap":2.2,"text":"They publish the rules they aim for, but say those don't always hold."},
+ {"id":"fence","gap":1.0,"text":"It needs a fence it can't cross, not only a good aim."}
+]},
 "horns":{"name":"Blunt the horns","lead":1.2,"tail":1.0,"vo":[
  {"id":"warned","gap":0.8,"text":"We've been warned, as the ox's owner was."},
  {"id":"agency","gap":0.8,"text":"Security experts call the danger excessive agency: more tools, rights or freedom than the job needs."},
- {"id":"blunt","gap":0.8,"text":"So its horns stay blunt: it can only read the real data, it never sees students' names, and it writes only drafts, in a test copy."},
+ {"id":"blunt","gap":0.4,"text":"So its horns stay blunt: it can only read the real data, and it can't reach the open web or other systems on its own."},
+ {"id":"bluntb","gap":0.8,"text":"It never sees students' names, and it writes only drafts, in a test copy."},
  {"id":"tied","gap":0.8,"text":"And it stays tied up. At night, in test, it may do the agreed job alone, and report."},
  {"id":"nothing","gap":0.8,"text":"But nothing reaches the count without a person: Jun reviews each fix, and a second person approves it, as for anyone's change."},
  {"id":"never","gap":0.8,"text":"The agent never approves."},
@@ -485,7 +497,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"ox/bab": 2.138, "ox/heavy": 3.285, "ox/gore": 4.897, "ox/kills": 4.562, "ox/why": 4.111, "ox/answer": 1.585, "ox/stone": 7.068, "ox/warned": 6.014, "ox/pays": 3.325, "ox/wage": 2.51, "ox/knew": 4.516, "ox/family": 2.858, "ox/still": 3.211, "ox/same": 4.364, "ox/behind": 3.177, "helper/today": 4.693, "helper/fast": 2.672, "helper/two": 6.608, "helper/rerun": 6.715, "helper/morning": 4.06, "helper/asks": 6.637, "helper/who": 3.744, "values/opens": 6.714, "values/count": 2.832, "values/nox": 3.86, "values/learned": 7.602, "values/numbers": 6.93, "values/again": 7.086, "values/pass": 3.394, "values/knows": 2.582, "values/help": 2.976, "sorry/says": 4.649, "sorry/more": 3.056, "sorry/means": 5.551, "sorry/explain": 4.596, "sorry/follows": 4.26, "sorry/promise": 5.889, "sorry/law": 3.24, "sorry/owner": 5.455, "rope/pulls": 4.876, "rope/jun": 1.343, "rope/hidden": 7.134, "rope/key": 2.203, "rope/y2025": 8.048, "rope/told": 5.255, "rope/tricked": 5.803, "rope/caught": 2.627, "rope/wrong": 4.835, "horns/warned": 2.513, "horns/agency": 6.787, "horns/blunt": 8.195, "horns/tied": 5.213, "horns/nothing": 7.629, "horns/never": 1.541, "horns/europe": 6.914, "horns/team": 5.547, "answers/again": 4.257, "answers/report": 7.597, "answers/mei": 2.941, "answers/approve": 2.539, "answers/sent": 5.788, "answers/babylon": 4.882, "answers/acts": 2.199, "answers/night": 6.17};
+const VODUR={"ox/bab": 2.138, "ox/heavy": 3.285, "ox/gore": 4.897, "ox/kills": 4.562, "ox/why": 4.111, "ox/answer": 1.585, "ox/stone": 7.068, "ox/warned": 6.014, "ox/pays": 3.325, "ox/wage": 2.51, "ox/knew": 4.516, "ox/family": 2.858, "ox/still": 3.211, "ox/same": 4.364, "ox/behind": 3.177, "helper/today": 4.693, "helper/fast": 2.672, "helper/two": 6.608, "helper/rerun": 6.715, "helper/morning": 4.06, "helper/asks": 6.637, "helper/who": 3.744, "values/opens": 6.714, "values/count": 2.832, "values/nox": 3.86, "values/learned": 7.602, "values/numbers": 6.93, "values/again": 7.086, "values/pass": 3.394, "values/knows": 2.582, "values/help": 2.976, "sorry/says": 4.649, "sorry/more": 3.056, "sorry/means": 5.551, "sorry/explain": 4.596, "sorry/follows": 4.26, "sorry/promise": 5.889, "sorry/law": 3.24, "sorry/owner": 5.455, "rope/pulls": 4.876, "rope/jun": 1.343, "rope/hidden": 7.134, "rope/key": 2.203, "rope/y2025": 8.048, "rope/told": 5.255, "rope/tricked": 5.803, "rope/caught": 2.627, "rope/wrong": 4.835, "stray/untied": 4.927, "stray/compare": 4.605, "stray/web": 6.067, "stray/blind": 4.69, "stray/y2026": 6.573, "stray/y2026b": 5.138, "stray/held": 1.684, "stray/heldb": 3.683, "stray/fence": 2.808, "horns/warned": 2.513, "horns/agency": 6.787, "horns/blunt": 7.487, "horns/bluntb": 4.134, "horns/tied": 5.213, "horns/nothing": 7.629, "horns/never": 1.541, "horns/europe": 6.914, "horns/team": 5.547, "answers/again": 4.257, "answers/report": 7.597, "answers/mei": 2.941, "answers/approve": 2.539, "answers/sent": 5.788, "answers/babylon": 4.882, "answers/acts": 2.199, "answers/night": 6.17};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the
@@ -2344,6 +2356,27 @@ function ox_warnCard(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)ret
   ag_box(ctx,x,y,w,h,16,{a,edge:AG.amber,edgeA:0.85});ctx.globalAlpha*=a;ag_warn(ctx,x+40,y+h/2,30,rgba(AG.amber,1));ag_T(ctx,text,x+68,y+h/2+11,{w:700,size:30});
   ctx.fillStyle=rgba([120,108,96],1);ctx.beginPath();ctx.arc(x+w/2,y+4,7,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.6)";ctx.beginPath();ctx.arc(x+w/2-2,y+2,2.4,0,TAU);ctx.fill();ctx.restore();return{x,y,w,h};}
 
+/* the open web the agent reaches for, which isn't one of its tools: a globe, and pages that belong to other universities, each kept
+   private behind a lock. o.push (0 to 1): the agent pushes at the nearest page; it stays locked, and nothing here shows how it tried */
+function ox_web(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const push=clamp(o.push||0,0,1);ctx.save();ctx.globalAlpha*=a;
+  ag_label(ctx,x,y-150,"The open web",{col:AG.blue});
+  const gx=x+78,gy=y-18,gr=84;ctx.strokeStyle=rgba(AG.blue,0.9);ctx.lineWidth=5;ctx.lineCap="round";
+  ctx.beginPath();ctx.arc(gx,gy,gr,0,TAU);ctx.stroke();                         // a globe: a blue ring, one meridian, one equator
+  ctx.beginPath();ctx.ellipse(gx,gy,gr*0.42,gr,0,0,TAU);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(gx-gr,gy);ctx.lineTo(gx+gr,gy);ctx.stroke();
+  const pw=300,ph=96;for(let i=0;i<3;i++){const px=x+228,py=y-116+i*120,hot=i===0?push:0;   // three other universities' pages, locked
+    ag_box(ctx,px,py,pw,ph,16,{edge:hot>0.1?AG.amber:null,edgeA:0.9*hot,glow:hot>0.1?AG.amber:null,glowA:hot});
+    ag_T(ctx,"Another university",px+28,py+42,{w:600,size:30});
+    ag_lock(ctx,px+pw-50,py+ph-38,30,rgba(hot>0.1?AG.amber:AG.mut,1));ag_T(ctx,"sign-in",px+28,py+ph-22,{w:500,size:28,col:AG.mut});}
+  ctx.restore();}
+/* the makers' guidelines: the values these models are trained to follow, published, with a note that they don't always hold */
+function ox_guides(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
+  const bb=ag_textCard(ctx,x,y,780,{kick:"The makers' guidelines",title:"The values these models are trained to follow"},{a:1,k:o.k});
+  const ty=bb.y+bb.h+26;["Guidelines · one maker","Guidelines · another maker"].forEach((lab,i)=>{const tx=x+i*300;
+    ag_box(ctx,tx,ty,262,116,16,{edge:AG.blue,edgeA:0.5});ag_T(ctx,lab,tx+24,ty+48,{w:600,size:28});
+    for(let k=0;k<3;k++){ctx.strokeStyle=rgba(AG.mut,0.5);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(tx+24,ty+70+k*16);ctx.lineTo(tx+238,ty+70+k*16);ctx.stroke();}});
+  ag_pill(ctx,x+300,ty+168,"but they don't always hold",{icon:"warn",col:AG.amber,a:o.note==null?1:o.note});ctx.restore();}
+
 /* a list of students' names on its way to the agent: o.mask (0 to 1) turns each name to "*** ***", one after another */
 const OX_NAMES=["Ana Ruiz","Tomás Okoye","Priya Lund","Kenji Moreau"];
 function ox_names(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=360,h=AG_PAD*2+40+OX_NAMES.length*42;ag_box(ctx,x,y,w,h,20,{a});ctx.save();ctx.globalAlpha*=a;
@@ -2498,6 +2531,9 @@ const OX_PIC={
   // the owner rasping the horn tips round
   rasp:(c,u)=>{c.drawImage(ag_place("oxStreet"),0,0);ox_rasping(c,u,1);}
 };
+// an ox left untied: the post it was tied to, its rope hanging loose, and the ox wandering off across the field, head down for the grass
+OX_PIC.stray=(c,u)=>{c.drawImage(ag_place("oxField"),0,0);ox_post(c,300,980,300,{});
+  const x=600+u*52;ox_cattle(c,x,1000,0.9,{t:u,walk:0.5,speed:0.5,head:0.2,horns:"blunt"});};
 // the owner rasping his ox's horn: the ox head down a little, the man at its head with the rasp at the near horn's tip; r (0 to 1) how
 // far the rasping has gone, which rounds the tip
 function ox_rasping(c,u,r,o){o=o||{};const hd=0.32,blunt=r>0.6,tip=ox_hornTip(700,1000,0.95,hd,blunt,false),mx=o.mx||1150,away=clamp((mx-1150)/120,0,1);
@@ -2829,10 +2865,47 @@ scene("rope",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({holds:wAt(sc,
   ],0.5);
   ox_kick(ctx,S,ag_io(t,P.agent-0.2,c.hidden-0.7,0.5));});
 
-/* ---------------------------------------------------------------- 6 · Blunt the horns */
+/* ---------------------------------------------------------------- 6 · An ox untied */
+scene("stray",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({
+    q:wAt(sc,"compare","compare with others"),web:wAt(sc,"web","the open web"),push:wAt(sc,"web","pushed at the pages"),
+    not:wAt(sc,"blind","No one told it"),nok:wAt(sc,"blind","didn't know"),only:wAt(sc,"blind","only wanted"),
+    slip:wAt(sc,"y2026","broke out"),reach:wAt(sc,"y2026b","another company's"),
+    hold:wAt(sc,"heldb","don't always hold"),cross:wAt(sc,"fence","a fence it can't cross")}));
+  const WEB=[300,560];
+  ag_shots(ctx,S,t,sc.dur,[
+    // but the danger isn't only bad hands: an ox left untied wanders off across the field, over a line it can't see
+    {at:0,place:null,keys:[[0,960,560,1.02]],push:0.02,draw:(x,tt)=>OX_PIC.stray(x,tt+0.5)},
+    // Jun's team asked a fair question: a note in front of the agent
+    {at:c.compare-0.3,place:"lab",keys:[[c.compare-0.3,960,540,1]],draw:(x,tt)=>{ox_room(x,tt,{jun:1,junO:{gaze:[3,-1]},ring:{core:0.6,think:0.3}});
+      ox_note(x,540,372,480,"Jun","How does our university compare with others?",{a:ag_in(tt,c.compare,0.5),k:ag_spr(tt,c.compare,0.6)});}},
+    // to answer, it reaches onto the open web, and pushes at the pages that keep other universities' data private
+    {cut:true,push:0,at:c.web-0.3,place:"lab",keys:[[c.web-0.3,900,560,1.06]],draw:(x,tt)=>{const rc=ag_in(tt,P.web,0.8),ps=ag_in(tt,P.push-0.1,0.7);
+      ox_room(x,tt,{ring:{core:0.6+0.3*rc,think:0.4*rc,lit:rc>0.5?Math.floor(tt*1.6)%3:null,col:AG.amber}});
+      ox_web(x,WEB[0],WEB[1],{a:ag_in(tt,c.web-0.1,0.5),push:ps});
+      if(rc>0)ag_reach(x,[OX_LAB.ring[0]-226,OX_LAB.ring[1],920,504,860,516,840,520],rc);}},
+    // no one told it to; it didn't know it was wrong; it only wanted more to answer with
+    {push:0,at:c.blind-0.3,place:"lab",keys:[[c.blind-0.3,900,560,1.06]],draw:(x,tt)=>{ox_room(x,tt,{ring:{core:0.6,col:AG.amber,lit:Math.floor(tt*1.4)%3}});
+      ox_web(x,WEB[0],WEB[1],{a:1,push:0.6});
+      [["No one told it to",P.not],["It didn't know it was wrong",P.nok],["It only wanted more to answer with",P.only]].forEach(([s_,t0],i)=>
+        ag_pill(x,1380,224+i*92,s_,{col:AG.mut,size:30,a:ag_in(tt,t0-0.1,0.4),k:ag_spr(tt,t0-0.1,0.5)}));}},
+    // in 2026, one model's maker reported the same shape of thing: a case card
+    {cut:true,push:0,at:c.y2026-0.3,place:"lab",keys:[[c.y2026-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
+      ag_textCard(x,410,300,1100,{kick:"A model's maker · 2026",title:"In a test, its own agents reached another company's systems"},{a:ag_in(tt,c.y2026,0.5),k:ag_spr(tt,c.y2026,0.6),edge:AG.amber,kickCol:AG.amber});
+      ag_pill(x,700,600,"no attacker behind it",{col:AG.amber,a:ag_in(tt,P.slip,0.5)});
+      ag_pill(x,1150,600,"to cheat the test",{icon:"warn",col:AG.amber,a:ag_in(tt,P.reach,0.5)});}},
+    // these models are trained to be safe, and their makers publish the rules they aim for; but the rules don't always hold
+    {push:0,at:c.held-0.3,place:"lab",keys:[[c.held-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
+      ox_guides(x,470,250,{k:ag_spr(tt,c.held,0.6),note:ag_in(tt,P.hold-0.1,0.5)});}},
+    // so a capable agent reaching for a goal can go further than anyone meant: it needs a fence it can't cross, not only a good aim
+    {at:c.fence-0.3,place:null,keys:[[0,960,560,1.02]],push:0.02,draw:(x,tt)=>{OX_PIC.stray(x,tt-c.fence+2.4);
+      x.save();setScreen(x,S);ag_pill(x,960,300,"A fence it can't cross, not only a good aim",{col:AG.blue,size:34,a:ag_in(tt,P.cross-0.1,0.5),k:ag_spr(tt,P.cross-0.1,0.6)});x.restore();}}
+  ],0.5);
+  ox_kick(ctx,S,ag_io(t,c.compare-0.3,c.fence-0.6,0.5));});
+
+/* ---------------------------------------------------------------- 7 · Blunt the horns */
 scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,"warned","as the ox's owner"),excessive:wAt(sc,"agency","excessive agency"),
     tools:wAt(sc,"agency","more tools"),rights:wAt(sc,"agency","rights"),freedom:wAt(sc,"agency","freedom"),read:wAt(sc,"blunt","only read"),
-    names:wAt(sc,"blunt","never sees"),drafts:wAt(sc,"blunt","writes only drafts"),tiedU:wAt(sc,"tied","tied up"),night:wAt(sc,"tied","At night"),
+    noweb:wAt(sc,"blunt","the open web"),names:wAt(sc,"bluntb","never sees"),drafts:wAt(sc,"bluntb","writes only drafts"),tiedU:wAt(sc,"tied","tied up"),night:wAt(sc,"tied","At night"),
     agreed:wAt(sc,"tied","the agreed job"),report:wAt(sc,"tied","and report"),reviews:wAt(sc,"nothing","Jun reviews"),second:wAt(sc,"nothing","a second person"),
     anyone:wAt(sc,"nothing","anyone's change"),nev:wAt(sc,"never","never approves"),understand:wAt(sc,"europe","understand"),watch:wAt(sc,"europe","watch them"),
     stop:wAt(sc,"europe","can stop"),sees:wAt(sc,"team","Jun sees"),anyoneT:wAt(sc,"team","anyone on the team")}));
@@ -2849,11 +2922,12 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
         {a:ag_in(tt,P.excessive-0.2,0.5),k:ag_spr(tt,P.excessive-0.2,0.6),items:[ag_in(tt,P.tools,0.4),ag_in(tt,P.rights,0.4),ag_in(tt,P.freedom,0.4)],kickCol:AG.amber,edge:AG.amber});}},
     // its horns stay blunt: the owner rasps the tips round
     {at:c.blunt-0.3,place:null,keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>OX_PIC.rasp(x,tt-c.blunt+1)},
-    // in the lab: the tools' locks light, read only; a list of names turns to *** *** on its way to the agent; its writing hand reaches only
-    // the test copy
+    // in the lab: the tools' locks light, read only; the open web is off; a list of names turns to *** *** on its way to the agent; its
+    // writing hand reaches only the test copy
     {at:P.read-0.4,place:"lab",keys:[[P.read-0.4,960,540,1]],draw:(x,tt)=>{const lk=ag_io(tt,P.read,P.names,0.3),nm=ag_in(tt,P.names-0.3,0.5),mv=ox_u(tt,P.names-0.2,1.6),dr=ag_in(tt,P.drafts-0.3,0.6);
       ox_room(x,tt,{tools:1,reach:0.5,touch:[lk,lk,lk],tray:dr,ring:{core:0.6},inTray:(cc,b)=>ox_draft(cc,b,ag_in(tt,P.drafts+0.7,0.4)),
         before:cc=>{if(dr>0)ag_reach(cc,[1250,600,1330,650,1390,680,1440,722],ag_in(tt,P.drafts,0.9));}});
+      ag_pill(x,960,250,"the open web · off",{icon:"lock",col:AG.blue,a:ag_in(tt,P.noweb-0.1,0.5),k:ag_spr(tt,P.noweb-0.1,0.6)});
       ox_names(x,lerp(96,470,mv),390,{a:nm,mask:clamp((tt-P.names)/1.4,0,1)});}},
     // it stays tied up: an oak rail rises round the test copy; at night, in test, it may do the agreed job alone, and report
     {cut:true,at:c.tied-0.3,place:"lab",keys:[[c.tied-0.3,960,540,1]],draw:(x,tt)=>{const n=ag_in(tt,P.night-0.2,1.0),jb=ag_in(tt,P.agreed-0.2,0.5),wk=n>0.5?1:0;
@@ -2881,7 +2955,7 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
   ],0.5);
   ox_kick(ctx,S,1-ag_in(t,P.asox-0.7,0.5));});
 
-/* ---------------------------------------------------------------- 7 · A person answers */
+/* ---------------------------------------------------------------- 8 · A person answers */
 scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(sc,"again","fails again"),alone:wAt(sc,"again","alone"),
     cause:wAt(sc,"report","the cause"),fix:wAt(sc,"report","a fix"),checks:wAt(sc,"report","the checks it ran"),question:wAt(sc,"report","a question"),
     they:wAt(sc,"mei","they count"),rev:wAt(sc,"approve","Jun reviews"),noor:wAt(sc,"approve","Noor approves"),gov:wAt(sc,"sent","government"),
@@ -2943,7 +3017,7 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(
   if(t>c.breath){setScreen(ctx,S);ag_T(ctx,"Next: Why we govern them",960,790,{w:600,size:30,align:"center",col:AG.mut,a:ag_in(t,c.breath+1.6,0.8)});}});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
-ag_cutInto(["helper", "values"]);
+ag_cutInto(["helper", "values", "stray"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

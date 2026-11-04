@@ -26,7 +26,10 @@
 # The rules the series keeps (its briefs, 3 November 2026, as the governance and master data films did):
 #  - Music only from time to time: under the opening story, and after it only at a chapter's turn, under a moment on screen or in a
 #    pause without words; never a bed under the voice. tools/quiet.py checks that after the opening no chapter has music for more than
-#    half its length, or for 12 seconds without a break.
+#    half its length, or for 12 seconds without a break, that it comes in at most once every 10 seconds on average, that no figure
+#    comes back soon after itself, and that the music and the effects sit as low as the governance films' (the author's review, 4
+#    November 2026, found this film's audio "a bit disruptive and repetitive": its music came in every five seconds, Sperry's box
+#    played its figure six times, and its music sat 2 to 4 dB louder than theirs, its effects 6 to 9 dB).
 #  - Nothing trembles or pulses: each note is one string, steady, with no vibrato or bend, its partials harmonic; every chord pure; the
 #    plucked notes damped by the player before they'd ring into the next chapter. No urgent pulse: the failed check isn't a crisis, only
 #    a reason to go round again.
@@ -62,8 +65,10 @@ TOOL = (C4, E4, G4)                 # Catalog, Query, Docs
 
 # ---- the levels: the plucked guitar, the e-bow (a note of a chord) and the bass matched by loudness, about as far under the voice as
 # the series' other music; the effects about 12 dB under the music (FX scales them all). LV[0] is the chapter's own level, set at the
-# top of each chapter below, so each sits about 20 dB under the voice
-LG, LH, LM, LE, LB, FX = 0.126, 0.092, 0.126, 0.046, 0.17, 7.6
+# top of each chapter below. After the author's review (4 November 2026: "a bit disruptive and repetitive"), the plucked notes and the
+# bass are 5 dB lower and the e-bow 2.5 dB, so the music's loud moments sit as low as the governance films' (tools/quiet.py measures
+# it), and the effects 7 dB lower, as soft as theirs
+LG, LH, LM, LE, LB, FX = 0.071, 0.052, 0.071, 0.035, 0.096, 3.4
 LV = [1.0]
 
 # a small room round the instruments, ringing on for about a second
@@ -165,7 +170,7 @@ def ebow(m, a, b, g=1.0, att=0.9, rel=1.6, pan=None, f=None, room=0.3, until=Non
             break
         ak = (1 / k ** 1.15) * (0.35 + 0.65 * _comb(k, NECK)) * np.exp(-fk / 2600) * _SEVEN.get(k, 1.0)
         on = np.sin(0.5 * np.pi * np.minimum(x / (att * (1 + 0.2 * (k - 1))), 1)) ** 2
-        off = np.where(x > sec, np.exp(-(x - sec) * 4.6 * (1 + 0.5 * (k - 1)) / rel), 1.0)
+        off = np.where(x > sec, np.exp(-np.maximum(x - sec, 0) * 4.6 * (1 + 0.5 * (k - 1)) / rel), 1.0)
         sig += ak * on * off * np.sin(2 * np.pi * fk * x + 0.7 * k)
     sig /= max(1e-9, float(np.abs(sig).max()))
     sig = _until(_room(filt(filt(sig.astype(np.float32), 'low', 2300), 'high', 60), room, min(att * 1.5, sec * 0.5), sec), a, until)
@@ -360,14 +365,14 @@ def rustle(s, sec, g=0.004, pan=0.0, k=7):
 # =============================================================================================================================
 # 1. Hands off: the opening, the series' story from outside data. 1914 by the Seine: the river and the crowd, a few seconds each; the
 #    e-bow holds G as the crowds line the river; the flying boat comes in, its engine far off; the bass enters with Sperry and Cachin.
-#    The problem, E minor: each gust a breath of air, a plucked note that leans away, and the bass bringing it back; the chord thins as
-#    his arms and back ache, to the bass alone as the aeroplane slips and falls; on "Something has to change", nothing. The box, C:
-#    the gyroscopes spin up under a held fifth on the e-bow; the aeroplane tips, a note leans, the valve puffs, the piston knocks, and
-#    the bass's two notes bring it level. Over the river the engine passes; Sperry lets go and raises his hands: the box's figure, the
-#    guitar alone. Cachin climbs out, the wing creaks and dips, and the bass brings it back; the crowd cheers. The prize, G, the e-bow
-#    rising to the third; today's pilots, who watch and decide, held. In the room, the box's figure, once for its hands, check and loop,
-#    a muted note where a plan would be, and again, the same way, for its one job; the model drops in, its plan's note; the agent's
-#    ring, the loop's mark whole for the first time, and the title on G
+#    The problem, E minor: each gust a breath of air, the first with a plucked note that leans away and the bass bringing it back, the
+#    second the bass alone; the chord thins as his arms and back ache, to the bass alone as the aeroplane slips and falls; on
+#    "Something has to change", nothing. The box, C: the gyroscopes spin up under a held fifth on the e-bow; the aeroplane tips, a note
+#    leans, the valve puffs, the piston knocks, and the bass's two notes bring it level. Over the river the engine passes; Sperry lets
+#    go and raises his hands: the box's figure, the guitar alone. Cachin climbs out, the wing creaks and dips, and the bass brings it
+#    back; the crowd cheers. The prize, G, the e-bow rising to the third; today's pilots, who watch and decide, held. In the room, the
+#    box's figure for its hands, check and loop, and a muted note where a plan would be; the model drops in, its plan's note; the
+#    agent's ring, the loop's mark whole for the first time, and the title on G
 LV[0] = 0.84
 ow = lambda lid, word, off=0: W('off', lid, word, off)
 oc = lambda lid, off=0: G('off', lid, off)
@@ -380,16 +385,19 @@ prog = oc('last', -0.2)
 engine(prog, 4.6, 0.004, -0.85, -0.2, 450)
 ebass(G2, ow('last', 'young'), 0.85, ring=2.4)
 ebass(D2, ow('last', 'Emil'), 0.75, ring=1.4)
-# the problem: E minor, from the shot of Sperry flying by hand; three gusts, each a breath of air, a plucked note leaning away, and his
-# arms bringing the wing back on the bass; the chord thins as he aches
+# the problem: E minor, from the shot of Sperry flying by hand; three gusts, each a breath of air: the first a plucked note leaning away
+# and his arms bringing the wing back on the bass, the second the bass alone, softer, the third only the air (the same figure three
+# times in four seconds sounded repetitive); the chord thins as he aches
 pit = oc('hard', -0.5); g1 = ow('gust', 'gust')
 ebow(E3, pit, oc('fall', -0.5), 0.9, att=1.4, rel=1.2, pan=-0.12)
 ebow(B3, pit + 0.2, oc('ache'), 0.75, att=1.4, rel=1.6, pan=0.0)
 ebow(G4, pit + 0.4, g1 + 4.6, 0.55, att=1.4, rel=1.6, pan=0.12)
 for k, gt in enumerate((g1, g1 + 1.7, g1 + 3.4)):
     gust(gt - 0.4, 1.3, 0.0045 - 0.0005 * k, px(1300))
-    gtr(C5, gt, 0.7, px(1100), ring=0.5)
-    ebass(E2, gt + 0.25, 0.8, ring=1.1)
+    if k == 0:
+        gtr(C5, gt, 0.7, px(1100), ring=0.5)
+    if k < 2:
+        ebass(E2, gt + 0.25, 0.8 if k == 0 else 0.55, ring=1.1)
 # the slip, drawn: the bass alone, one low note left to hang, no correction coming; the air of the slide; then silence
 ebass(E2, oc('fall', -0.4), 0.85, ring=5.6, until=oc('change', -0.3))
 slip(ow('fall', 'slip', -0.2), 1.9, 0.004, px(1100))
@@ -430,14 +438,11 @@ ebow(G3, oc('seats'), oc('nomodel', -0.6), 0.8, att=1.1, rel=1.2, pan=-0.12)
 ebow(D4, oc('seats', 0.15), oc('nomodel', -0.6), 0.7, att=1.1, rel=1.2, pan=0.0)
 ebow(B4, ow('seats', 'watch', -0.2), oc('nomodel', -0.6), 0.5, att=0.9, rel=1.2, pan=0.12)
 # the box in the room: its figure for its hands, its check (it tips, amber) and its loop (level again); a muted note where its plan
-# would be; and the same figure again, the same way, for its one known job
+# would be. Its one known job goes without music: the figure played again three seconds later sounded repetitive
 rx = px(1124)
 for m, t, r in ((C5, ow('nomodel', 'hands'), 1.0), (D5, ow('nomodel', 'check'), 1.0), (B4, ow('nomodel', 'loop'), 0.9), (G4, ow('nomodel', 'loop', 0.45), 0.9)):
     gtr(m, t, 0.65, rx, ring=r)
 mute(G3, ow('nomodel', 'model'), 0.75, rx)
-j0 = ow('nomodel', 'known', -0.1); d1 = (ow('nomodel', 'check') - ow('nomodel', 'hands'), ow('nomodel', 'loop') - ow('nomodel', 'check'), 0.45)
-for i, m in enumerate((C5, D5, B4, G4)):
-    gtr(m, j0 + sum(d1[:i]), 0.65, rx, ring=1.0 if i < 3 else 1.4)
 # a model that reasons, dropped into the loop: it settles where the muted note was, and its plan sounds; the ring closes to the agent's,
 # its steps come one by one with the loop's notes, and the line falls home as the title comes; the e-bow holds G under the title
 ins = ow('agent', 'inside', -0.3)
@@ -450,8 +455,8 @@ gtr(B4, ag + 1.5, 0.7, rx, ring=1.4); gtr(G4, title, 0.75, rx, ring=3.0, until=E
 chord((G3, D4, B4), title, E('off') - 0.9, 0.8, att=1.4, rel=0.8, until=E('off'))
 
 # 2. Jun's question: the chapter turns on E minor, the e-bow alone. Census day's calendar; the afternoon's clock card; the five small
-#    steps by hand, a tap each, and the bass as they go round again; the question carried to the agent as its goal; its ring, and the
-#    loop's three notes as its light goes round, falling home as its check turns green
+#    steps by hand, a tap each; the question carried to the agent as its goal; its ring, and the loop's three notes as its light goes
+#    round, falling home as its check turns green
 LV[0] = 0.8
 qw = lambda lid, word, off=0: W('question', lid, word, off)
 qc = lambda lid, off=0: G('question', lid, off)
@@ -460,7 +465,6 @@ calpage(qc('census'), 0.005, px(1300))
 card(qc('byhand'), 0.006, px(1580))
 for i, word in enumerate(('find', 'read', 'query', 'check', 'fix')):
     tap(qw('byhand', word, -0.1), 0.005, px(560 + 130 * i))
-ebass(E2, qw('byhand', 'fix', 0.3), 0.7, ring=1.1)
 air(qw('gives', 'gives', 0.1), 1.3, 0.004, px(800))
 tk = qw('gives', 'takes')
 for i, m in enumerate((PLAN, ACT, CHECK)):
@@ -469,8 +473,7 @@ home(qw('gives', 'checks', 0.35), 0.6, ring=1.2, pan=px(1124))
 
 # 3. A model writes: the chapter turns on C. Pages in the air round the model as it learns; a plucked note for each word it writes,
 #    "The university has about", and the three words it might write next, the likeliest the one it takes, the line's obvious end; the
-#    question, and its guess, three notes that stop short; the records shut behind glass; nothing looked up, nothing checked: two
-#    muted notes
+#    question, and its guess, laid down without music; the records shut behind glass; nothing looked up: a muted note
 LV[0] = 1.0
 ww = lambda lid, word, off=0: W('writes', lid, word, off)
 wc = lambda lid, off=0: G('writes', lid, off)
@@ -483,15 +486,12 @@ for i, m in enumerate((C5, D5, B4)):
     gtr(m, ww('learned', 'likely', 1.0 + 0.15 * i), 0.3, px(1300 + 150 * i), ring=0.35)
 gtr(C5, ww('learned', 'likely', 2.2), 0.6, px(1300), ring=1.2)
 card(wc('guess'), 0.005, px(700))
-bw = ww('guess', 'best')
-for i, m in zip((0, 6, 14), (C4, D4, E4)):
-    gtr(m, bw + 1.2 * i / 23, 0.55, px(1300), ring=0.8 if m != E4 else 1.4)
 lock(ww('guess', 'never', -0.1), 0.006, px(1520))
-mute(G3, ww('alone', 'look'), 0.7, px(1400)); mute(D4, ww('alone', 'check'), 0.7, px(1712))
+mute(G3, ww('alone', 'look'), 0.7, px(1400))
 
 # 4. Reasoning: the chapter turns on B minor. The plan written out, a note for each of its three lines, rising; the census report laid
-#    down, and the rules; each line of the plan meets the rules and passes, three harmonics; the results ride back as feedback, a low
-#    note each as they reach the model; and "checks against rules", a harmonic
+#    down, and the rules; each line of the plan meets the rules and passes, three harmonics; the results ride back as feedback, and
+#    "checks against rules", without music
 LV[0] = 1.0
 rw = lambda lid, word, off=0: W('reasons', lid, word, off)
 rc = lambda lid, off=0: G('reasons', lid, off)
@@ -501,9 +501,6 @@ for m, (lid, word) in zip((B3, D4, Fs4), (('plan', 'find'), ('plan', 'count'), (
 card(rw('report', 'census', -0.1), 0.005, px(705)); card(rc('rules', -0.1), 0.005, px(687))
 for i, m in enumerate((B4, D5, Fs5)):
     harm(m, rw('rules', 'evidence', 0.8 + 0.35 * i), 0.55, px(1600), ring=1.3)
-for k, m in enumerate((D4, B3)):
-    gtr(m, rw('result', 'feedback', 1.6 * k + 0.9), 0.45, px(1124), ring=0.8)
-harm(B4, rw('is', 'checks'), 0.5, px(1600), ring=1.3)
 
 # 5. Hands: the chapter turns on C. A model can't open a table: the closed card rattles on its catch; but tools can: three arms
 #    unfold; each tool card arrives with its own note, Catalog C, Query E and Docs G, and an arm takes hold; their servers set down;
@@ -523,38 +520,37 @@ plug(hw('mcp', 'standard', 0.25), 0.006, px(1500))
 plug(hw('mcp', 'any', 0.35), 0.005, px(1795)); unplug(hw('mcp', 'use', 0.9), 0.005, px(1795))
 lock(hw('read', 'only', -0.1), 0.006, px(1660))
 
-# 6. A loop: the loop's notes as its light reaches each step, as it's named, and round again. Round one: the Catalog touched, the act;
-#    its data, and the query's, coming back with their tools' notes; the check, and its fail: the D held with its fourth. The model
-#    thinks, in silence. Round two: a new plan, the bass's correction; the rule from Docs; the new query, the act, its data; the check,
-#    and it passes, falling home, and a held G. Unlike Sperry's box, which can only push back (its correction), the model decides what
-#    to try next (the plan's note). The loop stops: when the checks pass (a harmonic), at its limit (a muted note), or when it needs a
-#    person (held)
+# 6. A loop: the loop's notes as its light reaches each step, as it's named. Round one: the Catalog and the query touched, their data
+#    coming back with their tools' notes; the check, and its fail: the D held with its fourth. The model thinks, in silence. Round two:
+#    a new plan, its note; the rule from Docs and the new query, touched; the new query's data; the check, and it passes, falling home,
+#    and a held G. Unlike Sperry's box, which can only push back (its correction), the model decides what to try next (the plan's
+#    note). The loop stops: when the checks pass, at its limit, or when it needs a person (held). After the author's review (4 November
+#    2026: "a bit disruptive and repetitive"), the chapter's sixteen figures in a minute were too many: the acts, a second plan note,
+#    the second round's tool notes and the stops before "a person" now go without music
 LV[0] = 1.0
 lw = lambda lid, word, off=0: W('loop', lid, word, off)
 lc = lambda lid, off=0: G('loop', lid, off)
 rx = px(1124)
-for m, t in ((PLAN, lw('fourth', 'plan')), (ACT, lw('fourth', 'act')), (CHECK, lw('fourth', 'check')), (PLAN, lw('fourth', 'round', 0.4))):
+for m, t in ((PLAN, lw('fourth', 'plan')), (ACT, lw('fourth', 'act')), (CHECK, lw('fourth', 'check'))):
     gtr(m, t, 0.6, rx, ring=0.8)
-gtr(ACT, lw('counts', 'Catalog', -0.3), 0.6, rx, ring=0.8)
 for t, y in ((lw('counts', 'Catalog', -0.3), 236), (lw('counts', 'Query', -0.3), 404), (lw('rule', 'Docs', -0.3), 572), (lc('again', 0.2), 404)):
     tap(t, 0.007, px(1660))
 gtr(TOOL[0], lw('counts', 'Catalog', 1.5), 0.4, px(1400), ring=0.6); gtr(TOOL[1], lw('counts', 'Query', 1.5), 0.4, px(1400), ring=0.6)
 gtr(CHECK, lw('short', 'check'), 0.6, rx, ring=0.5); fails(lw('short', 'check', 0.2), 1.6, 0.85)
-fix(lc('rule', -0.3), 1.2, 0.8, ring=1.0); gtr(PLAN, lc('rule', -0.3), 0.6, rx, ring=0.9)
-gtr(TOOL[2], lw('rule', 'Docs', 1.5), 0.4, px(1400), ring=0.6)
-gtr(ACT, lc('again', -0.2), 0.6, rx, ring=0.8); gtr(TOOL[1], lc('again', 2.0), 0.4, px(1400), ring=0.6)
+gtr(PLAN, lc('rule', -0.3), 0.6, rx, ring=0.9)
+gtr(TOOL[1], lc('again', 2.0), 0.4, px(1400), ring=0.6)
 gtr(CHECK, lw('passes', 'matches', -0.3), 0.6, rx, ring=0.6)
 home(lw('passes', 'matches'), 0.65, ring=1.0, pan=rx)
 chord((G3, D4), lw('passes', 'matches', 0.55), lw('passes', 'passes', 0.3), 0.6, att=0.8, rel=1.2)
 fix(lw('unlike', 'push'), 0.7, 0.7, ring=0.8)
 gtr(PLAN, lw('unlike', 'decides'), 0.55, px(1050), ring=1.0)
-harm(G4, lw('stops', 'checks', -0.1), 0.5, px(824), ring=1.0)
-mute(D4, lw('stops', 'limit', -0.1), 0.6, px(1124))
-chord((G3, D4), lw('stops', 'person', -0.1), E('loop') - 1.2, 0.55, att=0.6, rel=0.9, until=E('loop'))
+chord((G3, D4, B4), lw('stops', 'person', -0.1), E('loop') - 1.2, 0.5, att=0.6, rel=0.9, until=E('loop'))
 
 # 7. The answer, with its evidence: the agent lets go of its tools, the arms' joints, and they slide away; the answer carried to Jun
-#    and laid down, and the e-bow's G; the evidence comes out from under the clip, a card for each piece as it's named; its check,
-#    evidence, a harmonic; "Approved by", and Jun signs: a held chord, a person deciding; and it goes up to Planning
+#    and laid down, without music; the evidence comes out from under the clip, a card for each piece as it's named, its check among
+#    them, without music (its harmonic made the music come in six times in thirty seconds); "Approved by", and Jun signs: a held chord,
+#    a person deciding (the chord is kept for him: it also sounded as the answer was laid down, which played it twice in eighteen
+#    seconds); and it goes up to Planning
 LV[0] = 1.1
 aw = lambda lid, word, off=0: W('answer', lid, word, off)
 br = aw('brings', 'brings')
@@ -562,22 +558,21 @@ for i in range(3):
     joint(br - 0.15 + 0.2 * i, 0.0025, px(1440))
 slide(br + 0.4, 1.0, 0.003, px(1700))
 air(br, 1.2, 0.0035, px(900)); card(br + 1.3, 0.0035, px(732))
-chord((G3, D4, B4), br + 1.3, br + 3.6, 0.7, att=0.9, rel=1.4)
 clip(aw('evid', 'tables', -0.3), 0.004, px(890))
 for t in (aw('evid', 'tables', -0.2), aw('evid', 'rule', -0.2), aw('evid', 'both', -0.2), aw('evid', 'both', 0.3), aw('evid', 'check', -0.2)):
     card(t, 0.0025, px(1270))
-harm(G4, aw('decides', 'evidence', -0.2), 0.5, px(732), ring=1.3)
 card(aw('decides', 'approval', -0.1), 0.0025, px(732))
 pen(aw('decides', 'decides', -0.05), 0.7, 0.0035, px(500))
 chord((G3, D4, B4), aw('decides', 'decides'), aw('decides', 'Planning', 0.6), 0.7, att=0.8, rel=1.3, until=E('answer'))
 air(aw('decides', 'Planning', 0.2), 1.1, 0.0035, px(732))
 
 # 8. A plain script: the chapter turns on D. Next March's calendar, its page turned to 2027; the recipe card, and the steps that worked
-#    slid into it; its test, a harmonic; saved in the project; Noor's review, and her approval, a held chord; then the recipe runs each
-#    census day: the box's figure, three times exactly alike; like Sperry's box, its gyroscopes' whir. The agent's four minutes. Once,
-#    the long way: its plan, the long arm's joints, Docs's note though it had them, a muted note for the plan that named no tools, and
-#    the slow data from the web, at last. Today each plan names its tools, their three notes, and the arms given; then the two columns:
-#    the plain script, the box's figure, and the agent, the loop's three notes, left open: steps nobody can write in advance
+#    slid into it; its test, a card; saved in the project; Noor's review, and her approval, a held chord; then the recipe runs each
+#    census day: the box's figure, once (three times in four seconds sounded repetitive; the picture shows the three years); like
+#    Sperry's box, its gyroscopes' whir. The agent's four minutes. Once, the long way: the long arm's joints, and a muted note for the
+#    plan that named no tools; the slow data from the web comes back without music. Today each plan names its tools, their three notes,
+#    and the arms given; then the two columns: the plain script, the box's figure, and the agent, the loop's three notes, left open:
+#    steps nobody can write in advance
 LV[0] = 0.88
 sw = lambda lid, word, off=0: W('script', lid, word, off)
 sq = lambda lid, off=0: G('script', lid, off)
@@ -585,20 +580,16 @@ chord((D3, A3, Fs4), S0('script') + 0.15, S0('script') + 2.6, 0.75, att=1.0, rel
 calpage(sw('march', 'March', 0.2), 0.005, px(452))
 card(sw('march', 'steps', -0.35), 0.005, px(1140))
 slide(sw('march', 'steps', 0.2), 0.9, 0.004, px(1250)); slide(sw('march', 'steps', 0.65), 0.9, 0.004, px(1200))
-harm(D5, sw('recipe', 'test'), 0.5, px(1374), ring=1.3)
 knock(sw('recipe', 'project', -0.1), 0.005, px(1140), 150)
 card(sw('recipe', 'Noor', -0.25), 0.005, px(1140)); ticked(sw('recipe', 'approves'), 0.005, px(1270))
 chord((G3, D4), sw('recipe', 'approves'), sw('recipe', 'approves', 1.4), 0.55, att=0.6, rel=1.1)
-for k in range(3):
-    boxfig(sw('runs', 'runs', 1.6 * k - 0.2), 0.2, 0.55, ring=0.7, pan=px((820, 1140, 1460)[k]))
+boxfig(sw('runs', 'runs', -0.2), 0.2, 0.55, ring=0.7, pan=px(1140))
 whir(sw('runs', 'like', -0.1), 2.2, 0.003, px(1744))
 card(sw('took', 'four', -0.1), 0.005, px(1750))
 card(sq('web', -0.25), 0.005, px(480))
 for i in range(3):
     joint(sw('web', 'searched', -0.2 + 0.4 * i), 0.004, px(1440))
-gtr(G4, sw('docs', 'Docs'), 0.55, px(1660), ring=1.1)
 mute(D4, sw('docs', 'plan', -0.1), 0.6, px(480))
-gtr(D3, sw('web', 'web', 5.0), 0.45, px(1420), ring=1.2)
 nm = sw('names', 'names')
 for f, m in ((1 / 21, TOOL[0]), (10 / 21, TOOL[1]), (17 / 21, TOOL[2])):
     gtr(m, nm + f, 0.55, px(600), ring=0.9)
@@ -607,23 +598,19 @@ for i in range(3):
 boxfig(sw('known', 'plain', -0.7), 0.3, 0.55, ring=0.8, pan=px(640))
 mark(sw('keep', 'agents', -0.3), (0.4, 0.4), 0.55, ring=1.4, pan=px(1220))
 
-# 9. Back in the seat: 1914 again, the river and the engine as the flying boat crosses; the box's one job in its corner, its figure;
-#    Sperry back in his seat, held. Today: the agent's loop once round, its three notes, and its answer brought home; Jun signs. An
-#    agent is a model that reasons, with hands, in a loop: the parts gather into the ring, and it glows, held; and the end card: the
-#    loop's mark whole, and the title on G
+# 9. Back in the seat: 1914 again, the river and the engine as the flying boat crosses; the box's one job in its corner, without music
+#    (its figure had just played for the plain script); Sperry back in his seat, held. Today: the agent's loop once round, without
+#    music, and its answer brought home; Jun signs. An agent is a model that reasons, with hands, in a loop: the parts gather into the
+#    ring, and it glows, held on into the end card: the loop's mark whole over it, and the title on G (one chord, not the same one twice
+#    in six seconds)
 LV[0] = 0.85
 tw = lambda lid, word, off=0: W('seat', lid, word, off)
 tc = lambda lid, off=0: G('seat', lid, off)
 river(S0('seat') + 0.1, 3.6, 0.003, px(900)); engine(S0('seat'), 4.4, 0.004, -0.3, 0.25, 600)
-boxfig(tw('held', 'one', -0.3), 0.35, 0.55, ring=0.9, pan=px(1460))
 chord((G3, D4), tw('held', 'seat', -0.5), tw('held', 'seat', 0.7), 0.5, att=0.8, rel=0.9)
-st = tw('took', 'steps', -0.4)
-for m, t in ((PLAN, st), (ACT, st + 0.94), (CHECK, st + 1.46)):
-    gtr(m, t, 0.55, px(1124), ring=0.8)
 home(tw('took', 'brought', 0.1), 0.6, ring=1.0, pan=px(900))
 pen(tw('took', 'decide', -0.1), 0.6, 0.004, px(500))
-chord((G3, D4, B4), tw('is', 'loop', 0.95), tw('is', 'loop', 1.6), 0.5, att=0.8, rel=0.9)
 en = tc('breath')
+chord((G3, D4, B4), tw('is', 'loop', 0.95), TOT - 0.3, 0.5, att=1.4, rel=0.25, until=TOT)
 mark(en, (0.42, 0.42), 0.55, ring=1.4)
 home(en + 1.4, 0.55, step=0.6, ring=2.6, until=TOT)
-chord((G3, D4, B4), en + 2.0, TOT - 0.3, 0.6, att=1.2, rel=0.25, until=TOT)

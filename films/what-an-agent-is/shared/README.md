@@ -21,7 +21,7 @@ A film lives in `films/what-an-agent-is/<n>-<slug>/`: `script.md`, `site.json`, 
 
   one each for `tts.py`, `build.py`, `check.py`, `legible.py`, `pace.py`, `stills.py`, `audio.py`, `quiet.py`, `captions.py`, `render.py` and `publish.py`. A film of a later series points at this folder instead (`parents[4] / "what-an-agent-is" / "shared" / "tools"` from its own `tools/`).
 
-Then, from the film's `source/`: `python tools/tts.py`, `build.py`, `check.py`, `legible.py --overlaps`, `pace.py`, `stills.py --size 1920`, `audio.py`, `quiet.py`, `build.py` again, `captions.py` (and `FILM_LANG=es python tools/captions.py`), `render.py`, and `publish.py` for the site.
+Then, from the film's `source/`: `python tools/tts.py`, `build.py`, `check.py`, `legible.py --overlaps`, `pace.py`, `stills.py --size 1920`, `quiet.py` (the sound, before it's mixed, and again after every change to `tools/score.py`), `audio.py`, `build.py` again, `captions.py` (and `FILM_LANG=es python tools/captions.py`), `render.py`, and `publish.py` for the site.
 
 To try a frame before a film exists, write `function draft(ctx) { ... }` in a file and run `python films/what-an-agent-is/shared/tools/sketch.py draft.js build/draft.png`: it draws one 1920 by 1080 frame with every call below.
 
@@ -41,4 +41,4 @@ Sizes are in the 1920 by 1080 frame. Every word is at least 28 px as seen, drawn
 
 **`src/finish.js`** and **`src/page.html`**: what a film needs before it starts (the fonts, each place, painted once: the video at once, the site's player the first at once and the others after Play) and the video's motion blur; the standalone player page.
 
-**`tools/`**: `lang.py` (where everything lives), `build.py` (what a film is made of, in order, and three checks: no name declared twice, every cue word whole in its line, no caption over 140 characters), `check.py` (every moment draws, and every place paints in time), `quiet.py` (when the music plays, and what may pulse), `run.py` (runs these, the governance films' `names.py` and `cues.py`, and *From words to data*'s other tools on a film), and `sketch.py`.
+**`tools/`**: `lang.py` (where everything lives), `build.py` (what a film is made of, in order, and three checks: no name declared twice, every cue word whole in its line, no caption over 140 characters), `check.py` (every moment draws, and every place paints in time), `quiet.py` (the sound: when and how often the music comes in, that no figure is played again and again, that the music and the effects sit as low as the governance films', that the effects come one at a time, and what may pulse), `run.py` (runs these, the governance films' `names.py` and `cues.py`, and *From words to data*'s other tools on a film), and `sketch.py`.

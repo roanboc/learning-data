@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:10.109
+On the 18th of June, 1914, crowds line the River Seine, just outside Paris, for a contest to make aeroplanes safer.
+
+00:00:11.409 --> 00:00:17.092
+Last to fly is Lawrence Sperry, a young American, with his French mechanic, Emil Cachin.
+
+00:00:18.392 --> 00:00:20.471
+Flying is hard, tiring work.
+
+00:00:21.571 --> 00:00:26.796
+When a gust tips a wing, the pilot has to level it again, at once, all through the flight.
+
+00:00:28.296 --> 00:00:30.759
+On a long flight, his arms and back ache.
+
+00:00:32.059 --> 00:00:36.572
+And if he's tired, or slow, a tipped aeroplane can slip sideways, and fall.
+
+00:00:38.272 --> 00:00:39.712
+Something has to change.
+
+00:00:41.412 --> 00:00:49.968
+Sperry's answer is a box of four gyroscopes: wheels that spin so fast they keep pointing the same way, however the aeroplane moves.
+
+00:00:51.468 --> 00:00:56.978
+Each time the aeroplane tips, the box feels it, and pistons driven by air level it again.
+
+00:00:58.678 --> 00:01:01.952
+Over the river, Sperry lets go, and raises his hands.
+
+00:01:03.652 --> 00:01:05.436
+Cachin climbs out along the wing.
+
+00:01:06.536 --> 00:01:09.875
+The aeroplane dips under his weight, and the box brings it back.
+
+00:01:11.575 --> 00:01:16.134
+The judges give Sperry first prize, and now a pilot can let go, and rest.
+
+00:01:17.434 --> 00:01:24.851
+His box grew into the autopilot: today, airline pilots fly by hand for only a few minutes of a typical flight.
+
+00:01:26.351 --> 00:01:28.956
+And they stay in their seats, to watch, and decide.
+
+00:01:30.456 --> 00:01:37.434
+Sperry's box has hands, a check and a loop, but no model: it does one known job, the same way every time.
+
+00:01:38.934 --> 00:01:42.659
+Put a model that reasons inside that loop, and you have an agent.
+
+00:01:49.959 --> 00:01:56.110
+Today, at the university, Planning asks Jun how the census-day count has changed since last year.
+
+00:01:57.410 --> 00:02:02.436
+Census day, the 31st of March, is when the university counts who is studying.
+
+00:02:03.936 --> 00:02:10.411
+By hand, that's an afternoon of small corrections: find the tables, read the rules, query, check, fix.
+
+00:02:12.111 --> 00:02:18.313
+So Jun gives it to an agent, which takes the steps and checks its own work, while he reviews and decides.
+
+00:02:21.613 --> 00:02:24.655
+An agent has four parts, and the first is a model.
+
+00:02:26.555 --> 00:02:31.219
+It has learned from a vast amount of writing, and it writes what's likely to come next.
+
+00:02:33.519 --> 00:02:40.136
+Ask it for the census-day count, and the best it can write is a guess: it has never seen the university's records.
+
+00:02:42.436 --> 00:02:46.182
+On its own, a model can't look anything up, or check what it wrote.
+
+00:02:50.082 --> 00:02:51.800
+The second part is reasoning.
+
+00:02:52.900 --> 00:02:57.380
+Before it acts, the model writes out a plan: find the tables, count the students,
+
+00:02:57.580 --> 00:03:01.964
+and check the total against the census report, the university's official count.
+
+00:03:03.464 --> 00:03:11.652
+It checks the plan against the rules Jun's team gave it: only the university's tools, only reading, and evidence for every answer.
+
+00:03:13.152 --> 00:03:17.287
+It reads each result as feedback, and changes the plan if it must.
+
+00:03:18.387 --> 00:03:21.247
+Reasoning is feedback, and checks against rules.
+
+00:03:24.547 --> 00:03:28.849
+The third part is hands: a model can't open a table, but tools can.
+
+00:03:30.349 --> 00:03:38.769
+Jun's agent has three: Catalog, which lists the tables; Query, which reads the data; and Docs, with the university's definitions.
+
+00:03:40.469 --> 00:03:44.702
+Each comes from a tool server: a small program that offers it to agents.
+
+00:03:46.202 --> 00:03:52.960
+They plug in through an open standard, the Model Context Protocol, so any agent that follows it can use them.
+
+00:03:54.660 --> 00:04:00.949
+Reading is all this job needs, so these three can only read: their account can't change a single row.
+
+00:04:04.649 --> 00:04:09.641
+The fourth part is a loop: plan, act, check, and round again, until the goal is met.
+
+00:04:11.341 --> 00:04:15.542
+The agent finds the students' table in Catalog, and counts with Query.
+
+00:04:17.042 --> 00:04:21.791
+Then the check: its total is 476 short of the census report.
+
+00:04:23.691 --> 00:04:27.749
+The model reads that feedback: did it count the students as they are today?
+
+00:04:29.249 --> 00:04:34.669
+It reads the census rule in Docs: count each student as their record stood on census day.
+
+00:04:36.169 --> 00:04:40.134
+A new query, with that date, gives 18,412.
+
+00:04:41.634 --> 00:04:45.108
+Its total matches the census report, and the check passes.
+
+00:04:47.008 --> 00:04:52.198
+Unlike Sperry's box, which can only push back, the model decides what to try next.
+
+00:04:53.698 --> 00:04:58.468
+The loop stops when the checks pass, at its limit of tries, or when it needs a person.
+
+00:05:01.968 --> 00:05:10.200
+The agent brings Jun its answer: 18,412 students on census day, 454 more than last year.
+
+00:05:11.300 --> 00:05:17.215
+And its evidence: the tables it read, the rule, both queries, and the check that failed, then passed.
+
+00:05:18.915 --> 00:05:24.085
+Its check is evidence, not approval: Jun reads it, and decides what goes to Planning.
+
+00:05:27.385 --> 00:05:31.381
+Next March, Planning will want the same count, and now the steps are known.
+
+00:05:32.881 --> 00:05:39.991
+So Jun saves the query as a recipe in the project, with a test against the census report, and Noor approves it.
+
+00:05:41.891 --> 00:05:48.493
+Every census day, it runs in seconds, for almost nothing, the same way every time, like Sperry's box.
+
+00:05:50.593 --> 00:05:55.376
+The agent took four minutes and twelve steps. A plain rerun needs no agent.
+
+00:05:57.276 --> 00:06:03.422
+An agent can also take the long way: one of the team's agents once searched the web for the census rules,
+
+00:06:03.622 --> 00:06:06.935
+though Docs had them, because its plan didn't name its tools.
+
+00:06:09.035 --> 00:06:13.985
+Now each plan names its tools, and gives the agent only those the job needs.
+
+00:06:15.685 --> 00:06:18.930
+Where the steps can be written down, let a plain script run them.
+
+00:06:20.630 --> 00:06:24.401
+Keep agents for the work whose steps nobody can write in advance.
+
+00:06:28.501 --> 00:06:33.922
+Sperry's box held the aeroplane level, the one job it knew, while the pilot stayed in his seat.
+
+00:06:35.422 --> 00:06:40.267
+Jun's agent took the steps of a new question, and brought him the evidence to decide.
+
+00:06:41.767 --> 00:06:45.221
+An agent is a model that reasons, with hands, in a loop.
+
+00:06:46.921 --> 00:06:49.703
+Use one only where a plain script can't do the job.

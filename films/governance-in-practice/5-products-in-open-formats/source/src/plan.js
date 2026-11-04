@@ -29,6 +29,10 @@ function gp_arrow(ctx,a,b,bend,p,o){o=o||{};if(p<=0)return;const c=[(a[0]+b[0])/
   for(let i=0;i<=m;i++){const [x,y]=pt(i/n);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.setLineDash([]);
   if(p>=1&&o.head!==false){const [x1,y1]=pt(1),[x0,y0]=pt(0.93),an=Math.atan2(y1-y0,x1-x0);ctx.beginPath();ctx.moveTo(x1-16*Math.cos(an-0.5),y1-16*Math.sin(an-0.5));
     ctx.lineTo(x1,y1);ctx.lineTo(x1-16*Math.cos(an+0.5),y1-16*Math.sin(an+0.5));ctx.stroke();}ctx.restore();}
+// handwriting written in place: the line laid out whole (right-aligned at x, or centred on it) and its letters written from its left,
+// so what is written stays put as the next letters come (wc_hand, right-aligned or centred, moved them along a letter at a time)
+function gp_hand(ctx,s,x,y,o){o=Object.assign({},o||{});const al=o.align==="right"?1:o.align==="center"?0.5:0;delete o.align;
+  wc_hand(ctx,s,x-al*tw(ctx,s,o.size||32,o.w||600),y,o);}
 // a red question mark, settling with a spring
 function gp_redQ(ctx,x,y,s,p){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:GV.redInk}));ctx.restore();}
 // until now: the colours fade a little, warmer and paler (as Who may see it draws a memory)
@@ -226,7 +230,7 @@ function gp_stay(ctx,t,o){o=o||{};const cd=clamp(o.cards==null?1:o.cards,0,1),rd
   [[150,"Catalogue · today",GP_CATBAR],[1010,"Another catalogue",GP_NEWBAR]].forEach(([x,ttl,bar],i)=>gp_rise(ctx,clamp(cd*2-i,0,1),()=>gp_win(ctx,x,96,760,330,ttl,q=>gp_card(q,x,96,760),bar),16));
   const f=gu_file(ctx,360,560,1200,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:[{n:6,s:"name: Learners near an award"}]});
   [[[760,556],[530,440]],[[1160,556],[1390,440]]].forEach(([a,b],i)=>gp_arrow(ctx,a,b,-10,clamp(rd*2-i*0.5,0,1),{col:GU_CYAN,lw:4}));
-  if(o.own>0.01)wc_hand(ctx,"the university's, kept in its project",960,800,{size:38,w:700,col:GV.goldInk,align:"center",p:clamp(o.own,0,1)});}
+  if(o.own>0.01)gp_hand(ctx,"the university's, kept in its project",960,800,{size:38,w:700,col:GV.goldInk,align:"center",p:clamp(o.own,0,1)});}
 
 /* ---------- 2 · written by its owner ---------- */
 // Clara's product file, as she wrote it (governance/4-data-products/learners_near_an_award.yml): o.lit[k] lights its parts as they're
@@ -240,7 +244,7 @@ const GP_PF=[{n:6,s:"name: learners_near_an_award"},{fold:1},{n:8,s:"owner: \"Cl
   GP_PFL=[[4],[6],[2],[8,9],[10],[11],[12],[13,14]];
 function gp_prodFile(ctx,o){o=o||{};const L=o.lit||[],lit=new Array(GP_PF.length).fill(0);GP_PFL.forEach((rs,k)=>rs.forEach(r=>{lit[r]=Math.max(lit[r],clamp(L[k]||0,0,1));}));
   const f=gp_file(ctx,70,50,1780,o.u==null?1:o.u,{path:"governance/4-data-products/learners_near_an_award.yml",lang:"yaml",lines:GP_PF.map((r,i)=>lit[i]>0.01?Object.assign({},r,{lit:lit[i]}):r)});
-  if(f.rows.length&&o.note>0.01)wc_hand(ctx,"written by its owner",1820,f.rows[0]-58,{size:38,w:700,col:WC_PENCIL,align:"right",p:clamp(o.note,0,1)});}
+  if(f.rows.length&&o.note>0.01)gp_hand(ctx,"written by its owner",1820,f.rows[0]-58,{size:38,w:700,col:WC_PENCIL,align:"right",p:clamp(o.note,0,1)});}
 // Planning's office, close, the camera at the height of someone sitting (as Quality on the platform drew it): a pale green wall, a
 // window, a chart pinned up; the desk (its front layer) with a screen, a keyboard and a mug
 const GP_PX={top:800,seat:[1480,1.7],screen:[380,236,800,450],win:[60,56,250,420],chart:[1250,60,440,286]};
@@ -284,7 +288,7 @@ function gp_contractDesk(ctx,t,o){o=o||{};const C=gu_file(ctx,990,50,880,{path:"
   if(o.std>0.01)withA(ctx,clamp(o.std,0,1),()=>wc_tag(ctx,1850,C.rows[1],"Open Data Contract Standard",{align:"right",size:28,wash:GU_CYAN,washA:0.25,seed:342}));
   const src=clamp(o.src||0,0,1),out=1-clamp(src*2.5,0,1);
   if(out>0.01)GP_NOTES.forEach(([s,r],k)=>{const v=clamp((o.note||[])[k]||0,0,1)*out;if(v<=0.01)return;const ry=C.rows[r];
-    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});wc_hand(ctx,s,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
+    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});gp_hand(ctx,s,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
   const pn=clamp(o.pen||0,0,1);if(pn>0.01){const e=easeCam(clamp(pn*1.6,0,1)),x=lerp(-80,940,e)+(pn>0.7?Math.sin(t*16)*3*(1-pn):0);gp_pencil(ctx,x,C.rows[0]+14,-0.18,clamp(pn*4,0,1)*out);}
   if(src<=0.01)return;const e=easeCam(src),ma=clamp(src*2.2-0.9,0,1),dy=24*(1-e);
   const M=gu_file(ctx,50,60+dy,880,{path:"models/marts/planning/_planning__models.yml",lang:"yaml",lines:GP_MD,a:ma});
@@ -304,8 +308,8 @@ function gp_prCheck(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,
   wc_T(ctx,"governance/5-data-contracts/mart_planning__near_award.yaml",182,342,{w:500,size:28,f:"mono",col:WC_MUTED});
   [["    description: 'Planning''s census date: the date the numbers are as at. …'",1],["    description: 'The date the numbers are counted at.'",0]].forEach(([s,del],i)=>{const ry=402+i*46;
     gv_tint(ctx,166,ry-32,1588,44,del?GV.red:GV.green,0.45);wc_T(ctx,del?"−":"+",226,ry,{w:500,size:28,f:"mono",col:del?GV.redInk:GV.greenInk,align:"right"});gu_code(ctx,s,246,ry,{lang:"yaml"});});
-  wc_hand(ctx,"edited by hand",1740,504,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand==null?1:o.hand,0,1)*(1-clamp(ps*3,0,1))});
-  if(ps>0.34)wc_hand(ctx,"then made in the model, and the script run",1740,504,{size:34,w:700,col:GV.greenInk,align:"right",p:clamp(ps*1.5-0.5,0,1)});
+  gp_hand(ctx,"edited by hand",1740,504,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand==null?1:o.hand,0,1)*(1-clamp(ps*3,0,1))});
+  if(ps>0.34)gp_hand(ctx,"then made in the model, and the script run",1740,504,{size:34,w:700,col:GV.greenInk,align:"right",p:clamp(ps*1.5-0.5,0,1)});
   const st=k=>k==="products"?(ps>0.5?"pass":fl>0.5?"fail":fl>0.01?"run":"wait"):(fl>0.01||ps>0.01?"pass":"wait"),
     its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:st(n)}));
   const msg=ps>0.5?GP_OK16.map(s=>({s,col:GV.greenInk,p:clamp(ps*2-1,0,1)})):GP_OOD.map(s=>({s,col:GV.redInk,p:clamp(fl*2-1,0,1)}));
@@ -397,7 +401,7 @@ function gp_verCard(ctx,x,y,w,h,ver,col,seed,lit){wc_panel(ctx,x,y,w,h,{kind:"ca
 function gp_editions(ctx,t,o){o=o||{};const v1=clamp(o.v1==null?1:o.v1,0,1),v2=clamp(o.v2||0,0,1),dt=clamp(o.date||0,0,1),rd=clamp(o.rd||0,0,1);
   gp_head(ctx,"Clara's table",clamp(v1*2,0,1));
   gp_rise(ctx,v1,()=>gp_verCard(ctx,260,300,600,290,"1","faculty_code",461,0),16);
-  if(dt>0.01){wc_hand(ctx,"a date to go",700,672,{size:44,w:700,col:GV.redInk,align:"center",p:dt});wc_ring(ctx,700,656,170,44,clamp(dt*1.4-0.3,0,1),{col:GV.redInk,lw:4});}
+  if(dt>0.01){gp_hand(ctx,"a date to go",700,672,{size:44,w:700,col:GV.redInk,align:"center",p:dt});wc_ring(ctx,700,656,170,44,clamp(dt*1.4-0.3,0,1),{col:GV.redInk,lw:4});}
   if(v2>0.01){const e=easeCam(v2);withA(ctx,clamp(v2*1.6,0,1),()=>gp_verCard(ctx,lerp(1340,1060,e),300,600,290,"2","faculty",462,clamp(v2*2-1,0,1)));}
   if(rd>0.01){const x=240,y=730,w=440,h=96;gp_thread(ctx,[x+w/2,y],[x+w/2,596],clamp(rd*1.6,0,1),{col:WC_PENCIL,bend:0,lw:3.5});
     gp_rise(ctx,clamp(rd*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:463});wc_T(ctx,"census_dashboard",x+30,y+60,{w:500,size:28,f:"mono",col:WC_DARK});},10);}}
@@ -427,7 +431,7 @@ function gp_readers(ctx,t,o){o=o||{};const rd=clamp(o.rd||0,0,1),bl=clamp(o.buil
     gp_thread(ctx,end,[x,y+h/2],clamp(rd*1.6,0,1),{col:WC_PENCIL,bend:-10,lw:3.5});
     gp_rise(ctx,clamp(rd*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:471});wc_T(ctx,"census_dashboard",x+30,y+58,{w:500,size:28,f:"mono",col:WC_DARK});
       wc_T(ctx,"owned by Planning",x+30,y+104,{w:600,size:28,col:WC_MUTED});},12);
-    wc_hand(ctx,"from dbt's exposures: who uses what",x+w,y+h+52,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(rd*1.6-0.6,0,1)});}
+    gp_hand(ctx,"from dbt's exposures: who uses what",x+w,y+h+52,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(rd*1.6-0.6,0,1)});}
   if(bl>0.01)[[0,70],[1,330]].forEach(([p,y],k)=>{const v=clamp(bl*2-k*0.5,0,1);if(v<=0.01)return;
     gp_rise(ctx,v,()=>gp_stall(ctx,p,1250,y,600,200,{size:34,own:clamp(v*1.4-0.4,0,1)}),16);
     GP_RDS.forEach((r,i)=>{if(r.pr!==p)return;gp_thread(ctx,[F.tx+gu_mw(ctx,r.s)+18,F.rows[i]],[1244,y+100],clamp(v*1.6-0.3,0,1),{col:mix(GP_SIX[p][2],WC_DARK,0.3),bend:-20,lw:3.5});});});}
@@ -590,7 +594,7 @@ function gp_home(ctx,t,o){o=o||{};const [bx,by,bw,bh]=gv_mapFree(GV_MC[0],GV_MC[
   const s1="governance/",w1=Math.round(gu_mw(ctx,s1)+92),x1=bx+20,s2="Ontos",w2=Math.round(tw(ctx,s2,30,700)+40),x2=x1+w1+170;
   if(hm>0.01)gp_rise(ctx,hm,()=>{wc_panel(ctx,x1,cy-30,w1,60,{kind:"chip",wash:[255,253,246],washA:0.9,seed:591});gp_house(ctx,x1+34,cy+1,0.9);
     wc_T(ctx,s1,x1+64,cy+10,{w:500,size:28,f:"mono",col:WC_DARK});},10);
-  if(ar>0.01){gp_arrow(ctx,[x1+w1+16,cy],[x2-16,cy],0,clamp(ar*1.4,0,1),{col:WC_PENCIL,lw:4});wc_hand(ctx,"copy",(x1+w1+x2)/2,cy-42,{size:32,w:700,col:WC_PENCIL,align:"center",p:clamp(ar*1.6-0.4,0,1)});}
+  if(ar>0.01){gp_arrow(ctx,[x1+w1+16,cy],[x2-16,cy],0,clamp(ar*1.4,0,1),{col:WC_PENCIL,lw:4});gp_hand(ctx,"copy",(x1+w1+x2)/2,cy-42,{size:32,w:700,col:WC_PENCIL,align:"center",p:clamp(ar*1.6-0.4,0,1)});}
   if(cp>0.01)gp_rise(ctx,cp,()=>{wc_panel(ctx,x2,cy-30,w2,60,{kind:"chip",dashed:true,seed:592});wc_T(ctx,s2,x2+20,cy+11,{w:700,size:30,col:WC_MUTED});},10);
   if(o.tag>0.01)gu_filmTag(ctx,bx+bw-10,by+bh+64,"Where each piece lives",clamp(o.tag,0,1),{align:"right"});}
 

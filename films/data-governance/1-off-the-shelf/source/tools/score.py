@@ -35,8 +35,10 @@ P = lambda x: max(-0.85, min(0.85, (x - 960) / 960 * 0.9))  # where something is
 
 # ---- this film's instruments ----
 # the music's levels against the voice: the horns' chords as loud as the brass choir that held them under every chapter before
-# the author's review (three players to a note, each at 0.036), one player to a note now
-BED = 2.6
+# the author's review (three players to a note, each at 0.036), one player to a note now. Since the author's review of What an agent
+# is (4 November 2026), the horns, the mark's horn and the music box (BOX) are 1 dB lower, and the effects (FX) 4.4 dB, so they sit
+# as low as in the governance films the author accepted (tools/quiet.py measures them)
+BED, BOX, FX = 2.3, 0.89, 0.6
 # the tuning: every note pure over F, the film's home. In equal temperament a held major third beats four to eight times a second, a
 # tremble that a phone's speaker brings out, so, as in Which value wins, each pitch takes a just ratio over F. G, B, D and E flat can
 # each take either of two (D is 5/3 over F, a fourth over A, but 27/16 a fifth over G at 9/8), and each chord takes, of its notes'
@@ -132,14 +134,14 @@ def play_bed():
 def horn(m, start, sec, g=0.05, pan=0.0):
     """one horn, for the mark: a breath in, round and warm, held straight"""
     s = player(m, sec, m * 17 + int(start * 5)) * env(sec, 0.09, min(0.6, sec * 0.45))
-    put(norm(filt(s.astype(np.float32), 'low', 1500)), start, g, pan)
+    put(norm(filt(s.astype(np.float32), 'low', 1500)), start, g * BOX, pan)
 def comb(m, start, g=0.05, pan=0.0, sec=2.6):
     """the music box, low: one steel tooth to a note, plucked, its high partial gone at once"""
     f = hz(m); x = tt(sec).astype(np.float64)
     s = np.sin(2 * np.pi * f * x) * np.exp(-x * 1.25)
     s = s + 0.22 * np.sin(2 * np.pi * f * 5.93 * x) * np.exp(-x * 16) + 0.08 * np.sin(2 * np.pi * f * 2 * x) * np.exp(-x * 4)
     s = s * np.minimum(1, x / 0.002) + 0.06 * filt(noise(sec), 'band', (700, 2000))[:len(x)] * np.exp(-x * 260)
-    put(norm(filt(s.astype(np.float32), 'low', 2400)), start, g, pan)
+    put(norm(filt(s.astype(np.float32), 'low', 2400)), start, g * BOX, pan)
 def mark(start, root=53, g=0.07):
     """the series' four notes, 1-5-4-8: one horn, the music box an octave above"""
     for i, iv in enumerate([0, 7, 5, 12]):
@@ -263,7 +265,8 @@ ask(G(J, 'which')); knock(G(J, 'which'), 0.026, 0.0, 200)
 # 4. Who decides? The turn on C, open, as the question rings. The two numbers' notes together, a third apart, as both are right; the chip and the new row on
 #    the glossary; a pin for Monday's card; knocks for the two definitions; air as the arc is drawn; a knock as Jun reaches Yusuf's
 #    office, and the question; three notes that don't resolve for three answers; the TBC stamp; and the operating room before the
-#    checklist, a pencil's tap as each one's step is named, and the question no one can answer yet, where no one checks them all
+#    checklist, a pencil's tap as each one's step is named (and, since 4 November 2026, not the question again where no one checks
+#    them all: the same two notes 17 seconds after the last were one figure too many)
 J = 'decides'
 turn(J, CSUS)
 right = W(J, 'both', 'right')
@@ -279,7 +282,6 @@ for k, word in enumerate(['Mei', 'Jun', 'Planning']):
 rubber(W(J, 'tbc', 'to be', -0.07), 0.05)
 for k, x in enumerate([360, 930, 1180]):
     tap(W(J, 'room', 'everyone', 0.32 * k + 0.1), 0.014, P(x))
-ask(W(J, 'room', 'no one'), 0.035)
 # 5. What governance is for: the turn on B flat. Paper as each note is stuck beside policy 12; a knock for "deciding who decides"; the
 #    horns as each decision goes out to an office and lands; 1-3-5 for the checklist again, the page, the copy in the room and the
 #    nurse; a knock as governance's card goes up, and a pen for each tick on the decisions
@@ -353,3 +355,5 @@ mark(G(J, 'breath', 0.5))
 
 # and the chords, where they come in
 play_bed()
+# the effects, all of them, FX lower (4.4 dB, since 4 November 2026)
+XL[:] *= FX; XR[:] *= FX

@@ -195,7 +195,8 @@ THREE = [50, 57, 66, 67, 69]  # the three meanings' notes, F-sharp, G and A, hel
 #    as the emperor's edict is written in, and the home note for the new words. The county: the scribes' brushes, and a wooden tock and
 #    the home note as the middle one checks the board; paper for its rules, each old word and the new one. The board found: a knock and
 #    an open fifth, low, as it's found in a well, and the county's own records laid out beside it (dry slips); pins for the tally cards,
-#    a pencil stroke for each time the new word was used, and one for the old; a knock and the home note for the same word as in the
+#    a pencil's soft scratch as the new word's tally is drawn (since 4 November 2026 not a stroke for each of its 34 marks, 22 sounds
+#    in a second, a crackle), and one stroke for the old; a knock and the home note for the same word as in the
 #    capital; the home note and its third as the board is lit, a glossary that was used. The floor: G major's neighbours, then
 #    suspended, for the university's same problem: each screen's note as its card comes up, A for the old words, G for the new, and the
 #    two together for the doubt; a breath as the one glossary comes in, in outline, and every tool reading from it; G major, open, under
@@ -250,7 +251,7 @@ paper(tRu, 0.024, P(690), 0.5)
 knock(tWl + 0.05, 0.014, P(1090)); wood(40 + 12, tWl + 0.1, 0.014, P(690)); wood(47 + 12, tWl + 0.1, 0.011, P(690))
 tRs, tRc = W(S, 'well', 'with thousands'), W(S, 'used', 'use the new')
 slips(tRs + 0.1, 0.01, P(1550), 7)
-pin(tRc + 0.1, 0.018, P(1550)); tallies(tRc + 0.15, 1.6, 34, 0.007, P(1550))
+pin(tRc + 0.1, 0.018, P(1550)); pencil(tRc + 0.15, 0.011, P(1550), 1.6)
 pin(tRc + 1.7, 0.018, P(1550)); tallies(tRc + 1.75, 0.3, 1, 0.009, P(1550))
 tSame = W(S, 'used', 'the same in')
 knock(tSame + 0.05, 0.012, P(1550)); wood(VIO, tSame + 0.12, 0.01, P(1550))
@@ -265,8 +266,9 @@ every([(tEv - 0.2 + 1.4 * (1 + 0.08 * i) / 1.32, x) for i, x in enumerate([274, 
 mark(G(S, 'breath', 0.2))
 # After the opening, music only from time to time: chords at a few turns, moments and pauses, and the marimba's notes as things appear
 # 2. Five glossaries: an E minor chord at the turn, Mei at her desk where Who decides left her. Each glossary sounds its meaning's
-#    note as it's named: the platform's G, then A for Planning's sheet, the policy's appendix and the 2019 printout, F-sharp for the
-#    faculty's tablet; paper for the appendix and the printout, a muffled key for the copy's pill. All five together: a knock for
+#    note as it's named: the platform's G, then A for Planning's sheet and the policy's appendix, F-sharp for the faculty's tablet (and
+#    since 4 November 2026 not A again for the 2019 printout, the music's fourth entry in 15 seconds); paper for the appendix and the
+#    printout, a muffled key for the copy's pill. All five together: a knock for
 #    "3 meanings", the three notes as their dots appear, and the three held, unsettled, over an open fifth
 F = 'five'
 comes(EM9, S0(F) + 0.5, 5.5, 0.024)
@@ -275,7 +277,7 @@ tap(W(F, 'platform', 'The data', -0.1), 0.008, P(960))
 wood(ROSE, C(F, 'sheet', 0.05), 0.015, P(883))
 paper(C(F, 'appendix', -0.1), 0.016, P(476), 0.4); wood(ROSE, C(F, 'appendix', 0.05), 0.015, P(476))
 wood(OLIVE, C(F, 'dash', 0.05), 0.015, P(564))
-paper(C(F, 'tool', -0.1), 0.016, P(268), 0.4); wood(ROSE, C(F, 'tool', 0.05), 0.015, P(268))
+paper(C(F, 'tool', -0.1), 0.016, P(268), 0.4)
 t3 = C(F, 'three')
 knock(t3 + 0.35, 0.014, P(1420))
 for m_, n_ in enumerate([VIO, ROSE, OLIVE]):
@@ -283,8 +285,9 @@ for m_, n_ in enumerate([VIO, ROSE, OLIVE]):
 comes(THREE, t3 + 1.3, 4.5, 0.02)
 # 3. Many is none: a pin for each card as Yusuf puts it up, and a soft knock for each tag under it; a marker as the platform's
 #    microcredentials are underlined, with its G, and as the dashboard's degree is, with its F-sharp. A hush as two cards go behind
-#    frosted glass. The 2019 tool: the faintest air as cobwebs grow, and a knock and a low, dull A for "last opened 14 months ago".
-#    Monday: a knock and G for the one that changed, a dull knock for each "no change". The floor: a soft knock for each "which one?",
+#    frosted glass. The 2019 tool: the faintest air as cobwebs grow, and a knock for "last opened 14 months ago". Monday: a knock for
+#    the one that changed, a dull knock for each "no change" (since 4 November 2026 the tool's low A and Monday's G go: the music came
+#    in seven times in 30 seconds here). The floor: a soft knock for each "which one?",
 #    and A minor, for a moment, as nobody knows which to trust
 N = 'none'
 for i in range(5):
@@ -298,9 +301,9 @@ frost(tFd, 0.012, P(660)); frost(tFd + 0.15, 0.012, P(960))
 tLg = C(N, 'unused', -0.35)
 dust(tLg + 0.3, 1.4, 0.008, 0.0)
 tMo = W(N, 'unused', 'last opened')
-knock(tMo + 0.05, 0.014, P(1240)); wood(ROSE - 12, tMo + 0.1, 0.012, P(1240))
+knock(tMo + 0.05, 0.014, P(1240))
 tMn, tFr = W(N, 'monday', 'only one'), W(N, 'monday', 'The other four')
-knock(tMn + 0.05, 0.014, P(360)); wood(VIO, tMn + 0.1, 0.014, P(360))
+knock(tMn + 0.05, 0.014, P(360))
 for i in range(1, 5):
     knock(tFr + 0.2 * i + 0.05, 0.01, P(360 + 300 * i), 160)
 tWh = W(N, 'none', 'Nobody knows')
@@ -310,8 +313,9 @@ comes(AM9, tWh + 1.0, 5.0, 0.02)
 # 4. One to trust: G major at the turn, as Yusuf brings the owners together. Air as the biggest moves aside, and G and D as the glossary
 #    on the platform is chosen. Back in the county office, like the Qin board: the opening's E minor for a moment, the scribes' brushes,
 #    and the wooden tock and the home note as the middle one checks the board at his elbow, a soft knock for its tag. Its term, line by
-#    line: a muffled key and a note for each, rising (its definition, owner, status and date). The three side by side: paper for each; G
-#    for the business glossary, D, lower, for the data dictionary, both for the catalog that shows both
+#    line: a muffled key for each (its definition, owner, status and date). The three side by side: paper for each, and G and D
+#    together for the catalog that shows both. Since 4 November 2026 the term's lines have no rising notes and the glossary and the
+#    dictionary no note of their own: the music came in six times in 23 seconds here
 T = 'trust'
 comes(GADD9, S0(T) + 0.5, 6.0, 0.026)
 air(W(T, 'not', 'Not the', 0.1), 0.9, 0.012, 0.3)
@@ -323,17 +327,18 @@ inkbrush(tEl + 0.4, 0.35, 0.007, P(seen(733, 1030, 1.42))); inkbrush(tEl + 1.2, 
 knock(tWk + 0.25, 0.012, P(seen(1074, 1030, 1.42)), 210); wood(VIO, tWk + 0.3, 0.011, P(seen(1074, 1030, 1.42)))
 knock(tWk + 0.55, 0.008, P(seen(1126, 1030, 1.42)))
 for wd, m_ in [('a definition', 67), ('an owner', 71), ('a status', 74), ('the date', 79)]:
-    t0 = W(T, 'term', wd); tap(t0 - 0.1, 0.008, P(600)); wood(m_, t0 + 0.05, 0.012, P(600))
+    t0 = W(T, 'term', wd); tap(t0 - 0.1, 0.008, P(600))
 tWd, tDc, tCt = C(T, 'words', -0.2), W(T, 'dict', 'A data'), W(T, 'dict', 'A catalog')
-paper(tWd, 0.02, P(420), 0.4); wood(VIO, tWd + 0.3, 0.013, P(420))
-paper(tDc - 0.1, 0.02, P(960), 0.4); wood(62, tDc + 0.2, 0.013, P(960))
+paper(tWd, 0.02, P(420), 0.4)
+paper(tDc - 0.1, 0.02, P(960), 0.4)
 paper(tCt - 0.1, 0.02, P(1500), 0.4); wood(VIO, tCt + 0.2, 0.011, P(1500)); wood(62, tCt + 0.2, 0.011, P(1500))
 # 5. Every tool reads it: G as the glossary on the platform is lit; a rubber stamp for the 2019 tool, retired; air as each of its
 #    owned terms flies across, and a knock and a note as it lands in the glossary's card; a knock for the archive box, and a dull knock
 #    for each card dropped in. Then each glossary steps home: Planning's sheet (a muffled key for the link, a click, then A to G as the
-#    term opens), the registrar's policy (a marker as its words are struck, keys as the glossary is named, A to G), the faculty's
-#    dashboard (F-sharp to G, read from the platform). The data team's room at night: air, and G as its copy says where its words came
-#    from, a knock for "checked every night". One way: every tool reading the glossary, a knock for the tag, and a G major chord, the
+#    term opens), the registrar's policy (a marker as its words are struck, keys as the glossary is named), the faculty's dashboard
+#    (F-sharp to G, read from the platform). The data team's room at night: air as its copy says where its words came from, a knock
+#    for "checked every night" (since 4 November 2026 the policy's A to G, 5.8 seconds after the sheet's, and the copy's G go without
+#    music). One way: every tool reading the glossary, a knock for the tag, and a G major chord, the
 #    moment on screen, as every office's screen reads award
 R = 'read'
 wood(VIO, C(R, 'others', 0.3), 0.012, P(360))
@@ -351,11 +356,9 @@ home(ROSE, tCl + 0.3, 0.014, P(780))
 tSy, tAs = W(R, 'policy', 'now says'), W(R, 'policy', 'award, as')
 marker(tSy, 0.012, P(900), 0.8)
 typing(tAs, 1.5, 0.007, P(900))
-home(ROSE, tAs + 1.0, 0.014, P(900))
 home(OLIVE, W(R, 'dash', 'read from', 0.1), 0.014, 0.0)
 tNt = C(R, 'copy', -0.4)
 air(tNt + 0.1, 1.4, 0.01, -0.2)
-wood(VIO, W(R, 'copy', 'it says', 0.4), 0.014, P(920))
 knock(W(R, 'copy', 'checked against', 0.05), 0.012, P(1290))
 tWy = C(R, 'way', -0.4)
 every([(tWy + 0.4 + 1.6 * (1 + 0.08 * i) / 1.32, x) for i, x in enumerate([274, 516, 1042, 1284, 1810])])
@@ -365,9 +368,10 @@ comes(GMAJ9, tWy + 2.0, 5.0, 0.024)
 #    number steps up, and a dull knock for its question; a knock for each tag. Monday night: an E minor chord at the turn, a knock for
 #    the tag, then a pencil and A as the copy's old words are ringed, and a knock for the tag that says why. The change notice: air and
 #    paper as it comes in, A and then G as the old words and the new are shown. Like the Qin board: the opening's E minor for a moment
-#    over the board's rules, a pencil and A as its old words are underlined, a pencil and G for the new ones. Back to the notice: a note
-#    for each part the new words touch, rising, and a knock for each who signs. Tuesday morning: a knock for the tag, a pen as Mei
-#    signs, G and D at the tick, and the same three notes as her words' places light. Jun: a pencil under six credit points, paper for
+#    over the board's rules, a pencil and A as its old words are underlined, a pencil and G for the new ones. Back to the notice: a knock
+#    for each part the new words touch, and for each who signs (since 4 November 2026 without a rising note for each part: the three
+#    come once, as her words' places light). Tuesday morning: a knock for the tag, a pen as Mei signs, G and D at the tick, and three
+#    notes rising as her words' places light. Jun: a pencil under six credit points, paper for
 #    the note and for the business rule's card, G as it's the rule, and a muffled key for its line that every report reads it
 H = 'change'
 tMs = W(H, 'before', 'when a number')
@@ -390,7 +394,7 @@ tOd, tNu = W(H, 'like', 'the old words'), W(H, 'like', 'the new ones')
 pencil(tOd + 0.1, 0.008, P(seen(420, 930, 1.05)), 0.6); wood(ROSE, tOd + 0.15, 0.011, P(seen(420, 930, 1.05)))
 pencil(tNu + 0.1, 0.008, P(seen(820, 930, 1.05)), 0.6); wood(VIO, tNu + 0.15, 0.012, P(seen(820, 930, 1.05)))
 for t0, m_ in zip([C(H, 'list'), W(H, 'list', 'its dashboard'), W(H, 'list', 'The wallet')], [67, 71, 74]):
-    knock(t0 - 0.05, 0.008, -0.2, 230); wood(m_, t0, 0.012, -0.2)
+    knock(t0 - 0.05, 0.008, -0.2, 230)
 tOw = W(H, 'list', 'The wallet', 1.3)
 knock(tOw + 0.1, 0.01, 0.4); knock(tOw + 0.3, 0.01, 0.4, 220)
 knock(C(H, 'mei', -0.1), 0.01, P(seen(1420, 1160, 1.4)))
@@ -406,8 +410,9 @@ tSe = W(H, 'rule', 'as a business')
 knock(tSe, 0.01, P(700)); wood(VIO, tSe + 0.05, 0.014, P(700))
 tap(W(H, 'rule', 'every report'), 0.008, P(900))
 # 7. Agreed by people: paper for "a week before"; a sticky note pressed onto the board for each question as it's asked; a marker round
-#    the one they agree, G and its third, and the marker again as "at least 6" is written; air as the note flies to the screen, and G
-#    and D as its words go in. The keepers: a low E for Clara's definitions, and a low C for Anil's. Thanked: paper for the card, and
+#    the one they agree, G and its third, and the marker again as "at least 6" is written; air as the note flies to the screen (since 4
+#    November 2026 without G and D as its words go in, three seconds after G and its third, nor a low note for each keeper's
+#    definitions, Clara's and Anil's, just before the chord that thanks them). Thanked: paper for the card, and
 #    G major as Clara smiles; then air and a knock for each definition that moves into the glossary, with their notes
 A = 'agree'
 paper(S0(A) + 0.4, 0.016, P(200), 0.4)
@@ -419,9 +424,6 @@ marker(tRg, 0.014, P(877), 0.7); wood(VIO, tRg + 0.5, 0.014, P(877)); wood(71, t
 marker(tRg + 0.6, 0.01, P(1000), 0.5)
 tFl = W(A, 'keeps', 'keeps what')
 glide(tFl, 1.3, 0.014, P(877), P(1316))
-wood(VIO, tFl + 1.1, 0.014, P(1316)); wood(74, tFl + 1.32, 0.011, P(1316))
-wood(52, C(A, 'lose', 0.2), 0.012, P(700))
-wood(60, W(A, 'lose', 'lose something', 0.3), 0.011, P(860))
 tTk = C(A, 'thanks', -0.7)
 paper(tTk + 0.2, 0.02, P(230), 0.4)
 comes(GMAJ9, tTk + 1.1, 4.5, 0.022)
@@ -432,8 +434,9 @@ for i, m_ in enumerate([71, 74]):
 # 8. One word, one home: paper for binder 12; a pencil's tick and G as 12.4 is lit, and a pencil as Yusuf writes beside it. The floor:
 #    air along the arcs, and every tool reading the glossary, as the light reaches each screen. Like the Qin board, used: the opening's
 #    E minor for a moment over the board as it was found, and the home note and its third as the board is lit, as in the opening. The
-#    floor again, and what one glossary gives: a knock and G as the reports agree, air and every tool's figure as a change goes out
-#    along the arcs, a knock and G major's third and fifth as people trust the numbers. In the pause without words, G major, open, to
+#    floor again, and what one glossary gives: a knock and G as the reports agree, air as a change goes out along the arcs (since 4
+#    November 2026 without every tool's figure again, 6.5 seconds after the last), a knock as people trust the numbers (and no longer
+#    G major's third and fifth, eight seconds before the end's chord). In the pause without words, G major, open, to
 #    the end, the marimba once under the end card, and the mark
 O = 'home'
 paper(S0(O) + 0.2, 0.02, P(1000), 0.5)
@@ -449,8 +452,7 @@ wood(VIO, tUd + 0.5, 0.014, P(690)); wood(71, tUd + 0.75, 0.012, P(690))
 tGn = [W(O, 'gain', 'Reports agree'), W(O, 'gain', 'a change'), W(O, 'gain', 'people can')]
 knock(tGn[0] + 0.15, 0.01, P(330)); wood(VIO, tGn[0] + 0.2, 0.012, P(330))
 glide(tGn[1], 1.0, 0.008, 0.0, -0.5); glide(tGn[1] + 0.05, 1.0, 0.008, 0.0, 0.5)
-every([(tGn[1] + 0.9 * (1 + 0.06 * i), x) for i, x in enumerate([274, 516, 1042, 1284, 1810])], 0.011)
-knock(tGn[2] + 0.15, 0.01, P(1590)); wood(71, tGn[2] + 0.2, 0.012, P(1590)); wood(74, tGn[2] + 0.45, 0.01, P(1590))
+knock(tGn[2] + 0.15, 0.01, P(1590))
 tEn = END(O, 'idea', 0.35)
 knock(tEn + 0.65, 0.01, 0.0, 200); wood(71, tEn + 0.7, 0.012, 0.1)
 comes(GOPEN, G(O, 'breath', -0.2), TOT - G(O, 'breath') + 1.2, 0.03, bassg=0.022)

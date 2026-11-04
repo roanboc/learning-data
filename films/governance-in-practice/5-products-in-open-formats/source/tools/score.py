@@ -59,8 +59,10 @@ def hz(m):
 I, IV, V, vi, iii = (41, (57, 60, 65)), (46, (58, 62, 65)), (48, (60, 64, 67)), (38, (57, 62, 65)), (45, (57, 60, 64))
 
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
-# lute a little over the synthesiser, as it's played close; the effects about 12 dB under the music (FX scales them all)
-SL, LL, FX = 0.03, 0.055, 1.6
+# lute a little over the synthesiser, as it's played close; the effects about 12 dB under the music (FX scales them all). Since the
+# author's review of What an agent is (4 November 2026) both are 2 dB lower, as low as in the governance films the author accepted
+# (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
+SL, LL, FX = 0.024, 0.044, 1.28
 PAN = {'s': -0.14, 'l': 0.16}  # the synthesiser a little left of centre, the lute a little right
 
 # a small room of wood and plaster round the players, ringing on for about a second and a half
@@ -373,8 +375,9 @@ written(tk + 0.5)
 marker(tk + 2.4, 0.007, px(700), 0.5)
 chord(I, tk + 1.7, E('shared') + 0.3, 0.45, step=0.15, att=0.6, rel=0.8)
 
-# 5. A change that would break it: the sixth at the turn; the model's line renamed, keys, and the contract follows by itself, the
-#    rising fourth; the census dashboard set down, its thread struck; the rename's pull request, the impact check fails, the low note;
+# 5. A change that would break it: the sixth at the turn; the model's line renamed, keys, and the contract follows by itself (since 4
+#    November 2026 without the rising fourth, six seconds after the last); the census dashboard set down, its thread struck; the
+#    rename's pull request, the impact check fails, the low note;
 #    on the board, version 1 pinned, a date to go in pencil and ringed, version 2 slid in beside it; credentials' two versions, the first's
 #    date ringed, its contract stamped deprecated; and better, add: Jun's column again, the rising fourth, every reader ticked, home
 bw_ = lambda lid, word, off=0: W('break', lid, word, off)
@@ -382,7 +385,6 @@ bc_ = lambda lid, off=0: G('break', lid, off)
 b0 = S0('break')
 chord(vi, b0 + 0.2, b0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
 keys(bw_('follows', 'a model changes'), 5, 0.007, px(400), 0.15)
-written(bw_('follows', 'its contract follows', 0.4))
 knock(bc_('some', 0.1), 0.010, px(1560), 260); strike(bw_('some', 'break the readers', 0.3), 0.010, px(1450), 0.5)
 tap(bc_('rename', -0.2), 0.008, px(960))
 halt(bw_('rename', 'the impact check fails', 0.5))
@@ -489,15 +491,15 @@ air(hm8 + 0.5, 2.0, 0.006, px(1150))
 tap(kw_('home', 'the files'), 0.006, px(1720)); pin(kw_('home', 'at home'), 0.012, px(1100))
 cp8 = kw_('home', 'holds a copy')
 air(cp8 - 0.4, 1.0, 0.008, px(1300)); tap(cp8 + 0.3, 0.007, px(1550))
-chord(I, cp8, E('catalogue') + 0.3, 0.45, step=0.2, att=0.7, rel=0.8)
+chord(I, cp8, S0('close') + 3.0, 0.45, step=0.2, att=0.7, rel=0.9)
 
-# 9. Outlives the tool: home at the turn, at dawn; Anil reads the promise, and plans from it by seven; the catalogue swaps for another,
+# 9. Outlives the tool: home held over the turn, at dawn (since 4 November 2026 the catalogue's chord held on, not struck again 3.4
+#    seconds after it); Anil reads the promise, and plans from it by seven; the catalogue swaps for another,
 #    the file laid down, its standard's tag; the owner lit; and as the other catalogue reads it, the synthesiser joins the lute; as the
 #    catalogue goes and the file stays, home, held to the end; the next film's card lifts; and the end card, on the mark
 zw_ = lambda lid, word, off=0: W('close', lid, word, off)
 zc_ = lambda lid, off=0: G('close', lid, off)
 z0 = S0('close')
-chord(I, z0 + 0.2, z0 + 3.0, 0.5, step=0.25, att=0.8, rel=0.9)
 marker(zw_('march', 'read its promise'), 0.007, px(1370), 0.5); pencil(zw_('march', 'plan from it'), 0.007, px(1370), 0.6)
 tap(zw_('march', 'by seven'), 0.007, px(1480))
 air(zw_('changed', 'the catalogue has changed'), 1.0, 0.008, px(960))

@@ -24,6 +24,7 @@ erDiagram
         int credit_points_earned
         int credit_points_remaining
         boolean is_near_award
+        boolean is_commencing
     }
     core_learner_v1 {
         string learner_key PK

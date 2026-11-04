@@ -12,3 +12,15 @@
 - Rule: Planning's question counts graduate certificates only, by faculty.
 - History: One census date at a time. A change recorded after census, dated after it, doesn't change the answer.
 {% enddocs %}
+
+{% docs commencing_student %}
+**Commencing student.** A student who started a course at the university for the first time in the year being counted. A student who comes back to a course they had already started, after leave or a break, isn't commencing.
+
+- Business key: The learner's business key and the award's, together, as at census date.
+- Owner of the meaning: Mei Tanaka, registrar's office.
+- Rule: As at census date (var census_date) - counted among the learners studying an award that day.
+- Rule: Started means the first version in which the learner was studying the award took effect in the census date's year, on or before the census date.
+- Rule: A learner who starts a new award is commencing in it, even if they studied another one before.
+- History: One census date at a time. A change recorded after census, dated after it, doesn't change the answer.
+- Source of the definition: the term Commencing student in the university's Unity Catalog Glossary, on Databricks, named by data governance; synced on 2026-11-04.
+{% enddocs %}

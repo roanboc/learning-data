@@ -105,5 +105,9 @@ select
     is_enrolled
         and learner_status = 'studying'
         and {{ is_near_award('credit_points_remaining') }}
-        as is_near_award
+        as is_near_award,
+    is_enrolled
+        and learner_status = 'studying'
+        and {{ is_commencing('measured.learner_key', 'measured.award_key') }}
+        as is_commencing
 from measured

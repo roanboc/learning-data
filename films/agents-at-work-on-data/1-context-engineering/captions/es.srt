@@ -1,0 +1,227 @@
+1
+00:00:03,000 --> 00:00:06,014
+Arezzo, en Italia, hacia el año 1025.
+
+2
+00:00:07,914 --> 00:00:13,500
+Un monje llamado Guido enseña a unos niños a cantar los cantos de la Iglesia, sus oraciones cantadas durante el año.
+
+3
+00:00:15,000 --> 00:00:18,555
+Cada canto se aprende de oído, de un maestro, uno por uno.
+
+4
+00:00:20,255 --> 00:00:26,436
+Los libros llevan pequeños signos sobre las palabras, para recordarle a un cantor cómo va un canto, si ya lo conoce.
+
+5
+00:00:27,936 --> 00:00:34,508
+Un niño que nunca ha oído un canto no puede cantarlo de la página: los signos muestran si sube o baja, pero no cuánto.
+
+6
+00:00:36,608 --> 00:00:39,820
+Así que lo aprende de un maestro, y los maestros no se ponen de acuerdo.
+
+7
+00:00:41,320 --> 00:00:48,899
+Guido escribió que apenas un cantor coincidía con otro, y que había tantos libros de canto como maestros: el de Leo, o el de Albert.
+
+8
+00:00:50,799 --> 00:00:56,079
+Aprender los cantos lleva unos diez años, y aun así, un cantor los sabe de forma imperfecta.
+
+9
+00:00:58,179 --> 00:00:59,619
+Algo tiene que cambiar.
+
+10
+00:01:01,519 --> 00:01:07,162
+La respuesta de Guido son líneas a lo ancho de la página: cada línea, y cada espacio entre ellas, una nota.
+
+11
+00:01:08,862 --> 00:01:14,773
+Dos de las líneas tienen color, roja para el fa (F) y amarilla para el do (C), así un cantor siempre sabe dónde está.
+
+12
+00:01:16,473 --> 00:01:21,948
+Cada signo se asienta ahora en una línea o en un espacio: lo que vivía en la cabeza del maestro está en la página.
+
+13
+00:01:23,848 --> 00:01:27,890
+En tres días, algunos de sus niños pueden cantar cantos que nunca han oído.
+
+14
+00:01:29,790 --> 00:01:35,032
+En palabras de Guido, un cantor que tardaba diez años ahora se forma en un año, o dos como mucho.
+
+15
+00:01:36,932 --> 00:01:44,075
+En Roma, el papa Juan hojea el libro de Guido, y no deja su asiento hasta haber aprendido un verso que nunca ha oído.
+
+16
+00:01:46,175 --> 00:01:49,576
+Con una línea más, es el pentagrama que hoy leen los músicos.
+
+17
+00:01:51,276 --> 00:01:56,459
+Un agente es como un niño que nunca ha oído el canto: solo puede cantar lo que está en la página.
+
+18
+00:01:57,959 --> 00:02:02,085
+Si el significado de una palabra vive solo en la cabeza de alguien, el agente adivina.
+
+19
+00:02:03,585 --> 00:02:07,324
+Pon el significado en la página, y personas y agentes lo leerán bien.
+
+20
+00:02:15,624 --> 00:02:21,474
+Hoy, en la universidad, Clara, de Planificación, le hace a Jun una pregunta nueva para el plan del año próximo.
+
+21
+00:02:22,774 --> 00:02:27,859
+De los 18,412 estudiantes del día del censo, ¿cuántos eran «commencing», de nuevo ingreso?
+
+22
+00:02:29,559 --> 00:02:34,851
+Jun se la pasa a su agente, con sus herramientas: Catalog, Query y Docs, cada una de solo lectura.
+
+23
+00:02:36,151 --> 00:02:41,708
+Lee lo que ellas alcanzan: las tablas, sus columnas, el código que las construye y los documentos del equipo.
+
+24
+00:02:43,208 --> 00:02:45,571
+Nada de lo que lee dice qué significa «commencing».
+
+25
+00:02:47,271 --> 00:02:52,838
+Así que razona a partir de los nombres: «commencing» debe ser un estudiante cuya matrícula empezó este año.
+
+26
+00:02:54,338 --> 00:03:00,372
+Cuenta 6,931, adjunta su consulta, y suena tan seguro como si lo supiera.
+
+27
+00:03:03,072 --> 00:03:07,800
+Jun lee la consulta: es cuidadosa, y funciona, pero ¿es eso lo que significa la palabra?
+
+28
+00:03:09,300 --> 00:03:11,768
+Le pregunta a Mei, de la oficina de registro.
+
+29
+00:03:12,868 --> 00:03:18,217
+Ella lo sabe al instante: «commencing» es empezar un programa en la universidad por primera vez.
+
+30
+00:03:19,517 --> 00:03:26,058
+Un estudiante que vuelve a su programa tras una licencia, o una pausa, no es «commencing»: también es la regla del gobierno.
+
+31
+00:03:27,558 --> 00:03:35,658
+719 de los 6,931 estaban volviendo: la cifra correcta es 6,212.
+
+32
+00:03:37,358 --> 00:03:41,335
+Planificación habría planificado para 719 estudiantes nuevos que no lo eran.
+
+33
+00:03:43,035 --> 00:03:49,986
+El significado se escribió una vez, en 2021, en un correo que Mei envió a alguien de Planificación que ya se fue.
+
+34
+00:03:51,486 --> 00:03:55,407
+Vivía en una cabeza, y en un buzón, donde ningún agente podía leerlo.
+
+35
+00:03:57,107 --> 00:04:01,146
+El agente no fue descuidado: lo que un agente lee decide lo que escribe.
+
+36
+00:04:03,846 --> 00:04:09,919
+Todo lo que un agente lee para un trabajo es su contexto, y en un equipo de datos viene en cuatro tipos.
+
+37
+00:04:11,619 --> 00:04:16,733
+Código: el repositorio, con sus recetas, sus pruebas y sus notas para agentes.
+
+38
+00:04:18,433 --> 00:04:23,530
+Metadatos: qué significan las palabras, qué promete cada tabla y de dónde sale cada cifra.
+
+39
+00:04:25,230 --> 00:04:28,229
+Habilidades: cómo hace el equipo un trabajo, paso a paso.
+
+40
+00:04:29,929 --> 00:04:32,577
+Y herramientas: lo que puede alcanzar, y lo que puede hacer.
+
+41
+00:04:34,277 --> 00:04:40,327
+«Commencing» faltaba en los metadatos, así que el agente llenó el hueco con una conjetura, y la dijo como un hecho.
+
+42
+00:04:42,227 --> 00:04:47,389
+Elegir qué entra en ese contexto, y escribirlo, es ingeniería de contexto.
+
+43
+00:04:50,489 --> 00:04:56,754
+Mei escribe el significado una vez, en el glosario de negocio, donde se definen las palabras de la universidad, y es su dueña.
+
+44
+00:04:58,854 --> 00:05:04,394
+El proyecto lo copia en los datos de Planificación, con su origen, y una columna nueva lo lleva.
+
+45
+00:05:06,494 --> 00:05:14,800
+Una prueba revisa la columna con cuatro estudiantes: uno nuevo, uno de vuelta de licencia, uno en un segundo programa y uno del año pasado.
+
+46
+00:05:17,100 --> 00:05:21,025
+El contrato de Planificación ahora promete la columna, y dice qué significa.
+
+47
+00:05:23,125 --> 00:05:30,085
+Las notas para agentes suman una regla: busca una palabra antes de contar con ella; si no está, pregunta a su dueño, no adivines.
+
+48
+00:05:33,585 --> 00:05:38,830
+Hasta ahora, cada persona del equipo armaba su propio agente, con sus propias notas.
+
+49
+00:05:40,530 --> 00:05:47,135
+Como los libros de canto con el nombre de sus maestros, cada agente era de su dueño: lo que a uno le decían, ningún otro lo sabía.
+
+50
+00:05:49,035 --> 00:05:55,186
+Ahora el equipo mantiene un solo contexto, en el proyecto, revisado como el código, con un dueño para cada significado.
+
+51
+00:05:57,086 --> 00:06:00,439
+Cada agente, y cada persona, lee la misma página.
+
+52
+00:06:02,139 --> 00:06:07,044
+Cuando un significado cambia, su dueño lo cambia una vez, y todos leen el nuevo.
+
+53
+00:06:09,744 --> 00:06:11,439
+Jun le pregunta otra vez a su agente.
+
+54
+00:06:12,739 --> 00:06:18,563
+Esta vez busca la palabra, cuenta 6,212 y cita la definición de Mei.
+
+55
+00:06:20,263 --> 00:06:25,682
+Una analista nueva, que llegó a Planificación esta semana, lee la misma definición que lee su agente.
+
+56
+00:06:27,182 --> 00:06:30,809
+Como los niños de Guido, ambos pueden cantar un canto que nunca han oído.
+
+57
+00:06:32,709 --> 00:06:35,894
+Escríbelo una vez, y lo usan tanto las personas como los agentes.

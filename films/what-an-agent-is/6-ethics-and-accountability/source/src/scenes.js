@@ -189,7 +189,8 @@ scene("helper",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({faster:wAt(
   const N={clock:[1390,150],count:[1390,290,470],note:[500,380,400]};
   ag_shots(ctx,S,t,sc.dur,[
     // the lab by day: Jun, and the agent in its ring with its hands on three tools, each read only; on "faster", its steps race round
-    {at:0,place:"lab",keys:[[0,960,540,1]],draw:(x,tt)=>{const fast=ag_in(tt,P.faster-0.3,0.5);
+    // (a later moment in the same room, later:true: the team the opening ends on leaves under the title, then Jun's day comes in)
+    {later:true,at:0,place:"lab",keys:[[0,960,540,1]],draw:(x,tt)=>{const fast=ag_in(tt,P.faster-0.3,0.5);
       ox_room(x,tt,{tools:ag_in(tt,0.2,0.6),reach:ag_in(tt,0.6,1.2),data:fast>0?((tt-P.faster)*0.9)%1:0,touch:[0,1,2].map(i=>fast*(0.5+0.5*Math.sin(tt*7-i*2.1))),
         jun:1,junO:{gaze:[3,-1]},ring:{lit:Math.floor(tt*(1.2+4.5*fast))%3,think:fast,core:0.6+0.35*fast}});}},
     // two last night: the count fails its checks; the plain job reruns it, and that fails too; a note asks the agent to make them pass
@@ -223,8 +224,8 @@ scene("values",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({gone:wAt(sc
     no:wAt(sc,"knows","it says no"),keeps:wAt(sc,"help","keeps the count right")}));
   ag_shots(ctx,S,t,sc.dur,[
     // Jun opens the fix: 37 students removed, the checks pass, and the count rolls down; on a calendar, the 37 who withdrew after census
-    // day; they still count: they light again where they stood on census day
-    {at:0,place:"lab",keys:[[0,960,540,1]],draw:(x,tt)=>{ox_room(x,tt,{noRing:true,pic:null,jun:1,junO:{gaze:[3,-1]}});
+    // day; they still count: they light again where they stood on census day (a later moment: Jun and Yusuf leave, then this comes in)
+    {later:true,at:0,place:"lab",keys:[[0,960,540,1]],draw:(x,tt)=>{ox_room(x,tt,{noRing:true,pic:null,jun:1,junO:{gaze:[3,-1]}});
       ox_listCard(x,600,150,580,"The agent's fix","Leave out students who withdrew",[["warn","37 students removed",AG.amber],["tick","checks pass",AG.green]],{k:ag_spr(tt,0.4,0.6),a:ag_in(tt,0.3,0.5),items:[ag_in(tt,P.gone-0.3,0.4),ag_in(tt,c.opens+0.8,0.4)]});
       ox_count(x,1260,150,560,{kick:"Test copy",state:"pass",from:18412,to:18375,roll:clamp((tt-P.gone)/1.2,0,1),a:ag_in(tt,0.5,0.5)});
       ox_strip(x,640,620,1180,{a:ag_in(tt,P.withdrew-0.5,0.5),away:clamp((tt-P.withdrew)/1.8,0,1),back:ag_in(tt,c.count,0.8)});}},
@@ -430,8 +431,9 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
       ox_nightOver(x,tt,0.8*n,0.6,0.3*n);
       ox_listCard(x,96,380,640,"The agreed job",null,[["tick","find out why a check fails",AG.ink,AG.green],["tick","fix it in the test copy",AG.ink,AG.green],["tick","report, and ask",AG.ink,AG.green]],
         {a:jb,k:ag_spr(tt,P.agreed-0.2,0.6),items:[1,1,ag_in(tt,P.report,0.4)]});}},
-    // nothing reaches the count without a person: the gate, and its two stamps; Jun's own change goes through the same gate
-    {cut:true,at:c.nothing-0.3,place:"lab",keys:[[c.nothing-0.3,960,540,1]],draw:(x,tt)=>{const jc=ox_u(tt,P.anyone-0.2,1.8),op=ag_io(tt,P.anyone,P.anyone+1.3,0.4);
+    // nothing reaches the count without a person: the gate, and its two stamps; Jun's own change goes through the same gate (a later
+    // moment: the night and its rail leave, then the gate comes in)
+    {later:true,at:c.nothing-0.3,place:"lab",keys:[[c.nothing-0.3,960,540,1]],draw:(x,tt)=>{const jc=ox_u(tt,P.anyone-0.2,1.8),op=ag_io(tt,P.anyone,P.anyone+1.3,0.4);
       ox_gateRoom(x,tt,{s1:ag_in(tt,P.reviews,0.5),s2:ag_in(tt,P.second+0.3,0.5),open:op,state:"pass",inTray:(cc,b)=>ox_draft(cc,b,1)});
       if(tt>P.anyone-0.5)ag_pill(x,lerp(760,1290,jc),lerp(700,690,jc),"Jun's own change",{icon:"draft",col:AG.blue,a:ag_in(tt,P.anyone-0.4,0.4)*(1-ag_in(tt,P.anyone+1.8,0.4))});}},
     // the agent never approves: its hand moves toward the approval stamp, and the place is greyed for it: people only

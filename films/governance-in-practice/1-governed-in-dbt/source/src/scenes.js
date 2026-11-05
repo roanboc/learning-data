@@ -74,8 +74,9 @@ scene("pins",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({p:[wAt(sc,"pi
       if(!R)return;const ow=R.rows[5],tm=R.rows[7],oe=R.tx+gu_mw(x,GD_LRN[5].s)+30,te=R.tx+gu_mw(x,GD_LRN[7].s)+30;
       gd_flyPin(x,[960,-60],[oe,ow],clamp((tt-P.owner+0.2)/0.9,0,1),"an owner");gu_filmTag(x,oe+200,ow,"Who decides",fin(tt,P.owner+0.6,0.5));
       gd_flyPin(x,[960,-60],[te,tm],clamp((tt-P.term+0.2)/0.9,0,1),"a term");gu_filmTag(x,te+170,tm,"One word, one home",fin(tt,P.term+0.6,0.5));}},
-    // three of its columns, each saying whether it identifies a person, its class beside it, and the film that set the classes
-    {cut:true,at:P.cols,place:"desk",keys:[[P.cols,960,520,1]],push:0.02,draw:(x,tt)=>{const R=gd_columns(x,tt,clamp((tt-P.cols)/0.8,0,1),[0,1,2].map(k=>fin(tt,P.ident-0.2+0.25*k,0.5)),
+    // three of its columns, each saying whether it identifies a person, its class beside it, and the film that set the classes. The
+    // same desk and the same file: the first sheet leaves before this one comes up (later), so its lines never show twice
+    {later:true,at:P.cols,place:"desk",keys:[[P.cols,960,520,1]],push:0.02,draw:(x,tt)=>{const R=gd_columns(x,tt,clamp((tt-P.cols)/0.8,0,1),[0,1,2].map(k=>fin(tt,P.ident-0.2+0.25*k,0.5)),
         [0,1,2].map(k=>P.ident+0.2+0.25*k));if(!R)return;const cx=R.tx+gu_mw(x,GD_COLS[1].s)+30+tw(x,"pseudonymous",28,700)+64;
       gd_flyPin(x,[960,-60],[cx,R.rows[1]],clamp((tt-P.ident+0.1)/0.9,0,1),"a class");gu_filmTag(x,1760,690,"Who may see it",fin(tt,P.ident+0.7,0.5),{align:"right"});}},
     // the tests: who owns each, in dbt_project.yml, and the dimension each kind names where it's defined
@@ -128,8 +129,8 @@ scene("impact",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({tch:c.touch
   gv_shots(ctx,S,t,sc.dur,gd_run([
     // Jun's pull request: its description, written by the impact check
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{gd_prHead(x,{});gd_report(x,tt,GD_R0,GD_R0.map((_,i)=>P.tch+0.3+0.15*i),{h:330});}},
-    // Tuesday: the first draft's change, in the files
-    {cut:true,at:P.tue,place:"big",keys:[[P.tue,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,1);gd_relabel(x,fin(tt,P.six,0.5));}},
+    // Tuesday: the first draft's change, in the files. The same screen: the description leaves before the files come (later)
+    {later:true,at:P.tue,place:"big",keys:[[P.tue,960,548,1.04]],push:0.02,draw:(x,tt)=>{gd_tues(x,1,1);gd_relabel(x,fin(tt,P.six,0.5));}},
     // its description: the report fills in, five who use it and four owners to ask; Mei's stamp beside it
     {at:P.rep,place:"big",keys:[[P.rep,960,540,1]],push:0.02,draw:(x,tt)=>{gd_tues(x,0,1);
       // the check writes its report as it's said; then the five who use it light in turn, and the four owners to ask
@@ -204,11 +205,12 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({rev:wAt(sc,"
       gu_filmTag(x,1840,846,"An agent that checks",fin(tt,P.rev,0.5),{align:"right"});}},
     // Anil's first pull request: the agent's comment, its three findings
     {at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:0,f:[fin(tt,P.owner,0.4),fin(tt,P.ten,0.4),fin(tt,P.rule,0.4)]})},
-    // the classes it drafted, with counts, never values; and who decides each finding
-    {cut:true,at:P.dr,place:"big",keys:[[P.dr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:1,rows:[0,1,2].map(k=>fin(tt,P.drS+0.1+0.35*k,0.4)),
+    // the classes it drafted, with counts, never values; and who decides each finding. The same screen, another view of the pull
+    // request: the first leaves before the next comes (later), here and for the approvals
+    {later:true,at:P.dr,place:"big",keys:[[P.dr,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:1,rows:[0,1,2].map(k=>fin(tt,P.drS+0.1+0.35*k,0.4)),
       who:[0,1,2].map(k=>fin(tt,P.who+0.25*k,0.4))})},
     // the approvals: the agent's comment, with no tick; each person's yes
-    {cut:true,at:P.nv,place:"big",keys:[[P.nv,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:2,ag:fin(tt,P.nv+0.1,0.5),
+    {later:true,at:P.nv,place:"big",keys:[[P.nv,960,540,1]],push:0.02,draw:(x,tt)=>gd_agentPR(x,tt,{view:2,ag:fin(tt,P.nv+0.1,0.5),
       yes:[0,1,2].map(k=>clamp((tt-P.ppl-0.1-0.35*k)/0.8,0,1))})}],sc.dur,1));});
 
 // ---- 9 · Carried with the code: Jun's table goes in; the project as a home on Noor's map; his line, changed; the pins and their lines;
@@ -218,8 +220,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=gd_once(sc,"P",()=>({yes:wAt(sc,"
     plat:wAt(sc,"flow","the platform"),cat:wAt(sc,"flow","the catalogue"),room:c.after-0.4,built:wAt(sc,"after","after he's built it"),
     every:wAt(sc,"every","every change"),poster:c.last-0.4,carries:wAt(sc,"last","carries governance"),board:c.breath-0.3,end:c.breath+1.6}));
   gv_shots(ctx,S,t,sc.dur,gd_run([
-    // Jun's pull request: every check green, Planning's yes, and then it's merged
-    {at:0,place:"big",keys:[[0,960,540,1],[P.yes-0.6,980,480,1.1]],d:1.6,draw:(x,tt)=>gd_pr(x,tt,{state:tt<P.yes+0.7?["Open",GV.green]:["Merged",GV.green],stateA:tt<P.yes+0.7?1:fin(tt,P.yes+0.7,0.35),
+    // Jun's pull request: every check green, Planning's yes, and then it's merged. The same screen the chapter before ends on, Anil's
+    // pull request: it leaves before Jun's comes (later)
+    {later:true,at:0,place:"big",keys:[[0,960,540,1],[P.yes-0.6,980,480,1.1]],d:1.6,draw:(x,tt)=>gd_pr(x,tt,{state:tt<P.yes+0.7?["Open",GV.green]:["Merged",GV.green],stateA:tt<P.yes+0.7?1:fin(tt,P.yes+0.7,0.35),
       items:GD_PR.ck.map(n=>({name:n,st:"pass"})),rev:1,glow:0.4,appr:fin(tt,P.yes,0.5)})},
     // Noor's map: the project, the home of five things, and their copies flowing one way
     {at:P.map,place:"mapClose",keys:[[P.map,960,470,1],[P.home,1140,560,1.04]],d:1.6,draw:(x,tt)=>gd_homeMap(x,tt,{a:clamp((tt-P.home+0.4)/0.8,0,1),

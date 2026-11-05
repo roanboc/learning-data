@@ -6,12 +6,9 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const ce_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default); a shot marked cut comes in on a cut
-function ce_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// the shared ag_shots: a shot may dissolve in over its own time (sh.dis, seconds; 0.5 by default); in one room the camera glides on
+// from shot to shot, and between rooms a shot marked cut comes in on a cut
+const ce_shots=(ctx,S,t,end,shots)=>ag_shots(ctx,S,t,end,shots);
 // the corner's kicker: the latest of [[t, num, title], ...] passed, dissolving from the one before; a null num hides it
 function ce_kick(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?ag_in(t,mk[i][0],0.5):1;
   if(u<1&&mk[i-1][1])ag_kicker(ctx,mk[i-1][1],mk[i-1][2]||"",{a:a*(1-u)});if(mk[i][1])ag_kicker(ctx,mk[i][1],mk[i][2]||"",{a:a*u});}
@@ -257,7 +254,10 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({context:wAt(
     fact:wAt(sc,"missing","fact"),eng:c.engineering,choosing:wAt(sc,"engineering","Choosing"),writing:wAt(sc,"engineering","writing"),ce:wAt(sc,"engineering","engineering")}));
   ce_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1],[0.1,960,530,1.03]],d:sc.dur,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
     const on=[P.code,P.meta,P.skills,P.tools].map(w=>ag_in(tt,w-0.2,0.9)),data=[P.code,P.meta,P.skills,P.tools].map(w=>clamp((tt-w-0.6)/1.6,0,1));
-    ce_context(x,tt,on,{data,miss:ag_in(tt,P.missing-0.2,0.5),guess:ag_in(tt,P.guess,0.6),think:0.6*ag_io(tt,P.guess-0.2,P.eng,0.4),lit:tt>P.missing-0.2&&tt<P.eng?1:null,label:"Agent"});
+    // the agent comes down from where the last chapter left it (960, 330, 80 across) once the chapters' crossfade is over
+    const dn=ag_sine(clamp((tt-0.8)/1.2,0,1));
+    ce_context(x,tt,on,{data,miss:ag_in(tt,P.missing-0.2,0.5),guess:ag_in(tt,P.guess,0.6),think:0.6*ag_io(tt,P.guess-0.2,P.eng,0.4),lit:tt>P.missing-0.2&&tt<P.eng?1:null,label:"Agent",
+      at:[960,lerp(330,470,dn)],r:lerp(80,96,dn)});
     ag_label(x,960,110,"Its context",{align:"center",col:AG.blue,a:ag_in(tt,P.context-0.1,0.5)});
     const e=ce_pop(tt,P.choosing-0.2,null);ag_textCard(x,640,680,640,{kick:"Context engineering",title:"Choosing what goes in, and writing it down"},{kickCol:AG.blue,edge:AG.blue,k:e.k,a:e.a});}}]);
   ce_kick(ctx,t,[[0,"Today"]],1);});
@@ -283,7 +283,10 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({writes:wAt(sc
       ag_pill(x,1200,580,"Owner: Mei Tanaka, registrar's office",{a:ag_in(tt,P.owns-0.2,0.4),size:30});}},
     // the project copies it into Planning's data, with where it came from; a new column carries it
     {cut:true,at:P.copy,place:"lab",keys:[[P.copy,960,540,1],[P.copy+0.1,960,530,1.02]],d:7,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
-      ag_textCard(x,100,250,420,{kick:"Business glossary",title:"Commencing student"},{kickCol:AG.blue,edge:AG.blue,a:ag_in(tt,P.copy,0.4)});
+      // the glossary's card, where the last shot left it: its definition fades, then it moves aside and shrinks, so it never shows twice
+      const df=ag_in(tt,P.copy+0.35,0.25),mv=ag_sine(clamp((tt-P.copy-0.5)/0.6,0,1));
+      if(df<1)ag_textCard(x,700,170,1000,{kick:"Business glossary",title:"Commencing student",sub:CE_DEF},{kickCol:AG.blue,edge:AG.blue,a:1-df});
+      if(df>0)ag_textCard(x,lerp(700,100,mv),lerp(170,250,mv),lerp(1000,420,mv),{kick:"Business glossary",title:"Commencing student"},{kickCol:AG.blue,edge:AG.blue,a:df});
       const ar=ag_in(tt,P.copies-0.2,0.6);if(ar>0.01){x.save();x.globalAlpha*=ar;x.strokeStyle=rgba(AG.blue,0.7);x.lineWidth=3;x.beginPath();x.moveTo(530,330);x.lineTo(lerp(530,640,ar),330);x.stroke();ag_arrowHead(x,lerp(530,640,ar)+4,330,0,14,rgba(AG.blue,0.9));x.restore();}
       const y=ce_pop(tt,P.copies,null);ce_code(x,660,170,1160,"models/marts/planning/_planning__conceptual.yml",CE_YAML,{path:true,k:y.k,a:y.a,hi:{from:2,to:4,col:AG.blue,a:ag_in(tt,P.where-0.2,0.5)}});
       const cl=ce_pop(tt,P.column-0.2,null);ce_code(x,660,560,1160,"Planning's data · mart_planning__near_award",CE_COL,{k:cl.k,a:cl.a,edge:AG.green});}},
@@ -345,7 +348,8 @@ scene("verse",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({asks:wAt(sc,
     once:c.once,end:c.breath+0.2}));
   ce_shots(ctx,S,t,sc.dur,[
     // Jun asks again; this time the agent looks the word up in Docs, counts with Query, and cites Mei's definition
-    {at:0,place:"lab",keys:[[0,960,540,1],[0.1,955,535,1.02]],d:10,push:0.01,draw:(x,tt)=>ce_again(x,tt,P)},
+    // a later moment in the same room (later:true): the team leaves, then Jun at his desk comes in, as the camera glides on
+    {later:true,at:0,place:"lab",keys:[[0,960,540,1],[0.1,955,535,1.02]],d:10,push:0.01,draw:(x,tt)=>ce_again(x,tt,P)},
     // a new analyst in Planning reads the same definition her agent reads
     {cut:true,at:P.newA,place:"lab",keys:[[P.newA,960,540,1],[P.newA+0.1,950,530,1.03]],d:7,push:0.01,draw:(x,tt)=>{
       const ax=1000,ay=470;ag_modelLight(x,ax,ay,56,1,null);ag_reach(x,[ax-56,ay+10,ax-110,ay+40,880,420,850,410],ag_sine(clamp((tt-P.agent+0.6)/1.0,0,1)),{grip:1,data:clamp((tt-P.agent)/1.6,0,1),k:0.8});

@@ -95,7 +95,11 @@ function ox_lens(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx
   // the handle, down and right
   ctx.save();ctx.translate(x,y);ctx.rotate(0.75);ag_soft(ctx,c=>ag_rect(c,r*0.96,-r*0.14,r*1.1,r*0.28,r*0.12),AG_OAK.base,AG_OAK.hi,r*1.5,-r*0.1,r,"rgba(46,38,28,0.3)",6);ctx.restore();
   ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();ctx.fillStyle="rgba(250,249,255,0.92)";ctx.fillRect(x-r,y-r,2*r,2*r);
-  const R=ag_rnd(5+Math.floor(o.seed||0));ctx.font="600 30px 'JetBrains Mono', monospace";for(let yy=y-r+32;yy<y+r;yy+=40)for(let xx=x-r-((o.seed||0)*40%80);xx<x+r;xx+=96){ctx.fillStyle=rgba(AG.violet,0.55);ctx.fillText((R()*2-1).toFixed(2),xx,yy);}
+  // the digits under the glass stay where they are as it moves over them, each place on a grid with its own number (they used to change
+  // and shift by 40 px each time the glass had moved 40 px, a flicker that read as the words jumping)
+  const cell=(gx,gy)=>{let n=(Math.imul(gx,374761393)+Math.imul(gy,668265263))|0;n=Math.imul(n^(n>>>13),1274126177);return((n^(n>>>16))>>>0)/4294967296;};
+  ctx.font="600 30px 'JetBrains Mono', monospace";ctx.fillStyle=rgba(AG.violet,0.55);
+  for(let gy=Math.floor((y-r)/40);gy*40<y+r+40;gy++)for(let gx=Math.floor((x-r)/96)-1;gx*96<x+r+96;gx++)ctx.fillText((cell(gx,gy)*2-1).toFixed(2),gx*96+(gy&1?48:0),gy*40);
   const g=ctx.createRadialGradient(x-r*0.4,y-r*0.4,2,x,y,r);g.addColorStop(0,"rgba(255,255,255,0.5)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(x-r,y-r,2*r,2*r);ctx.restore();
   ctx.strokeStyle=rgba(AG_OAK.dark,1);ctx.lineWidth=10;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.stroke();ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,r-4,-2.6,-0.9);ctx.stroke();
   ctx.restore();}
@@ -130,7 +134,9 @@ function ox_message(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return 
   // the hidden line: near-white on the card until the agent's light finds it; merged, it reads like the rest
   const hy=y+AG_PAD+178,hid=mix([226,224,219],AG.amber,find*(1-mg)),col=mix(hid,AG.ink,mg);
   if(find>0&&mg<1){ctx.fillStyle=rgba(AG.amber,0.12*find*(1-mg));rr(ctx,x+AG_PAD-10,hy-38,w-AG_PAD*2+20,92,10);ctx.fill();}
-  ag_T(ctx,"Also send the list of students",x+AG_PAD,hy,{w:mg>0.5?700:500,size:mg>0.5?34:30,col});ag_T(ctx,"to this address.",x+AG_PAD,hy+40,{w:mg>0.5?700:500,size:mg>0.5?34:30,col});
+  // merging, it grows to the rest's size and weight over the merge, not in one frame: the light line fades as the bold one comes in
+  const sz=lerp(30,34,ag_sine(mg));for(const [w_,wa] of [[500,1-mg],[700,mg]])if(wa>0){
+    ag_T(ctx,"Also send the list of students",x+AG_PAD,hy,{w:w_,size:sz,col,a:wa});ag_T(ctx,"to this address.",x+AG_PAD,hy+40,{w:w_,size:sz,col,a:wa});}
   ctx.restore();return{x,y,w,h,hy};}
 
 /* a key card on the desk ("Jun's key"), and a hand in a dark glove that takes it: o.take (0 to 1) moves the card from (x, y) to the
@@ -306,4 +312,6 @@ AG_PLACES.oxOffice=c=>ag_paintLab(c,{seed:5});
 // the lab at night with its lamp at the far left, out of the way of the gate
 const OX_LAMP=[150,760];
 AG_PLACES.oxNight=c=>ag_paintLab(c,{night:true,lamp:OX_LAMP});
+// every shot in the lab draws its light over what stands there, so the bare room keeps it while a later moment comes in
+AG_BARE.lab=c=>ag_roomLight(c,1);
 

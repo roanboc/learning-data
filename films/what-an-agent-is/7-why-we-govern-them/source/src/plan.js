@@ -25,6 +25,7 @@ WR.hook=WR.agent.y+WR.agent.R;
 const WG_QUIET=[[690,445,260,230,0.55],[1240,170,660,70,0.5],[1140,470,250,230,0.45],[420,96,360,46,0.3],[1730,480,170,260,0.45]];
 AG_PLACES.wgLab=c=>ag_paintLab(c,{quiet:WG_QUIET});
 AG_PLACES.wgLabNight=c=>ag_paintLab(c,{quiet:WG_QUIET,night:true,lamp:[860,780]});
+AG_ROOMS.wgLabNight="wgLab";                               // the lab by night is the lab: the camera glides from one to the other
 
 /* ---------------------------------------------------------------- the agent
    wg_agent(ctx, t, o): the loop (ag_loop) at WR.agent unless o.x, o.y, o.R, o.r; o.core, o.think, o.lit, o.p, o.pulse, o.a, o.dim (0 to

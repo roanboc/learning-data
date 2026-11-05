@@ -109,11 +109,14 @@ function tm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],n=
   g=ctx.createLinearGradient(0,y+8,0,y+30);g.addColorStop(0,rgba(AG_OAK.base,1));g.addColorStop(1,rgba(AG_OAK.dark,1));ctx.fillStyle=g;rr(ctx,x,y+8,w,22,4);ctx.fill();
   ctx.fillStyle=rgba(AG_OAK.hi,0.8);ctx.fillRect(x+4,y-4,w-8,1.5);
   ctx.restore();return out;}
-/* an entry: its fields one per line, the label quiet and the words under it. fields [[label, words, col], ...]; o.hl the index of
+/* an entry: its fields one per line, the label quiet and the words under it. fields [[label, words, col, a, open], ...] (a: the
+   field's opacity; open: how much of its room it has, 0 to 1, for a line filled in as we watch); o.hl the index of
    a field to light (in its col, or amber); o.kind "proposed": a dashed muted edge, PROPOSED ENTRY and a pen; o.ghost: an amber
    dashed card, for a lesson that was never kept; o.stamp {text, col, p}; o.a, o.k; returns its box */
 function tm_entry(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,f=o.fields||[],inner=w-56;
-  const rows=f.map(r=>({r,lines:ag_wrap(ctx,r[1],inner,{w:600,size:30})})),h=28+48+rows.reduce((s,q)=>s+(q.r[0]?34:0)+q.lines.length*40+16,0)+10,bb={x,y,w,h};
+  // a field's room, opened to g of it (a field's fifth value: a line that opens when it's filled in)
+  const rows=f.map(r=>({r,g:r[4]==null?1:clamp(r[4],0,1),lines:ag_wrap(ctx,r[1],inner,{w:600,size:30})})),hr=q=>((q.r[0]?34:0)+q.lines.length*40+16)*q.g,
+    h=28+48+rows.reduce((s,q)=>s+hr(q),0)+10,bb={x,y,w,h};
   if(a<=0||o.measure)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   const prop=o.kind==="proposed",gh=!!o.ghost;
   ag_box(ctx,x,y,w,h,22,{edge:!prop&&!gh?(o.edge||AG.blue):null,edgeA:0.5});
@@ -121,7 +124,7 @@ function tm_entry(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,f=o.fields||[],in
   const kick=o.kick||(prop?"Proposed entry":gh?"Never kept":"Entry"),kc=gh?AG.amber:prop?AG.mut:AG.blue;
   if(prop){ag_pen(ctx,x+42,y+44,30,rgba(AG.mut,1));ag_T(ctx,kick.toUpperCase(),x+68,y+52,{w:700,size:28,ls:4,col:kc});}
   else ag_T(ctx,kick.toUpperCase(),x+28,y+52,{w:700,size:28,ls:4,col:kc});
-  let yy=y+76;rows.forEach((q,i)=>{const hl=o.hl===i?(o.hlA==null?1:o.hlA):0,ra=q.r[3]==null?1:q.r[3];if(ra<=0){yy+=(q.r[0]?34:0)+q.lines.length*40+16;return;}
+  let yy=y+76;rows.forEach((q,i)=>{const hl=o.hl===i?(o.hlA==null?1:o.hlA):0,ra=q.r[3]==null?1:q.r[3];if(ra<=0){yy+=hr(q);return;}
     ctx.save();ctx.globalAlpha*=ra;
     if(hl>0){const hh=(q.r[0]?34:0)+q.lines.length*40+8;ctx.fillStyle=rgba(q.r[2]||AG.amber,0.1*hl);rr(ctx,x+14,yy-4,w-28,hh,10);ctx.fill();}
     if(q.r[0]){ag_T(ctx,q.r[0],x+28,yy+26,{w:700,size:28,col:AG.mut});yy+=34;}

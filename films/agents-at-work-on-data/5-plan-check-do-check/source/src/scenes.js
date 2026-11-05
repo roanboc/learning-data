@@ -241,60 +241,97 @@ function pc_planRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,cl=1-ag_in(tt,P.p
     hi:RT.map(T=>T?0.9*ag_io(tt,T[0]-0.1,T[2]+0.6,0.4):0),hiCol:AG_OAK.dark});}
 
 /* ---------------------------------------------------------------- 4 · Define the check
-   The same shot: the step moves on; the Checks row opens on the page and is written in, then the Tests row; the agent writes the two
-   tests and they fly up beside the page; Jun approves them, and they lock, so only a person changes them; the agent's arm tries for
-   one and stops. Then Singapore's list, whole before the plant made any water. */
+   The same shot: the step moves on, and the Checks row opens on the page. Nobody knows the answer yet: beside the page, the count
+   by level with a question mark for each level and only its total known, 18,412. What must be true of any right answer comes in as
+   it's said: the + and = that make the levels add up to the total, one level each, the word as the glossary (the Read row) defines
+   it; neither says how many. The count goes, and the agent writes the two checks as tests: they fly up beside the page, Jun approves
+   them, and they lock, so only a person changes them; the agent's arm tries for one and stops. The tests go, and two rules for the
+   agent come in their place: what everyone uses can be wrong, and it says so, with its evidence; where nobody can say what's right,
+   it brings the options, for a person to choose. Then Singapore's list, whole before the plant made any water: none of its measures
+   said what the results would be, only what the water had to meet (the bottle's mark). */
 const PC_T1=[1410,150,450],PC_T2=[1410,370,450],PC_TT=["Levels add up to 18,412","Every student has exactly one level"];
-scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),levels:wAt(sc,"adds","levels"),
-    count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
-    onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),like:c.like,written:wAt(sc,"like","written")}));
+// the two rules, in the tests' place: what the agent does when the data disagrees, and when nobody can say what's right
+const PC_RULES=[{kick:"What everyone uses",title:"Can be wrong",sub:"sometimes for years"},{kick:"If nobody can say",title:"The options",sub:"for a person to choose"}];
+scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),unknown:c.unknown,
+    nobody:wAt(sc,"unknown","nobody"),must:c.must,right:wAt(sc,"must","right answer"),levels:wAt(sc,"adds","levels"),add:wAt(sc,"adds","add up"),
+    count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),exactly:wAt(sc,"one","exactly"),glossary:wAt(sc,"one","glossary"),
+    neither:c.neither,many:wAt(sc,"neither","how many"),relate:wAt(sc,"neither","parts relate"),mean:wAt(sc,"neither","words mean"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
+    onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),wrong:c.wrong,years:wAt(sc,"wrong","years"),
+    says:wAt(sc,"wrong","says so"),options:c.options,brings:wAt(sc,"options","brings"),choose:wAt(sc,"options","choose"),
+    like:c.like,written:wAt(sc,"like","written"),meet:c.meet,had:wAt(sc,"meet","had to meet")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
     {at:P.like-0.3,dis:0.9,place:"pcPlant",keys:[[P.like-0.3,960,540,1.03],[P.like-0.2,980,540,1.0]],push:0,draw:(x,tt)=>pc_plantAgain(x,tt,P)}]);
   pc_tags(ctx,S,t,[[P.like-0.3,"Singapore · 1998 to 2000"]]);});
 
 function pc_defineRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,wake=ag_in(tt,P.writes-0.4,0.6);
-  pc_agent(x,G,rx,ry,R,r,{core:lerp(0.25,1,wake),think:0.6*ag_io(tt,P.writes-0.2,P.approves,0.4)});
+  // the agent: awake as it writes the tests, and thinking again while its two rules are said
+  pc_agent(x,G,rx,ry,R,r,{core:lerp(0.25,1,wake),think:Math.max(0.6*ag_io(tt,P.writes-0.2,P.approves,0.4),0.5*ag_io(tt,P.says-0.3,P.like-0.6,0.5))});
   // its arm tries for the second test as "moving the mark" is said, and stops short of it
   const tr=ag_sine((tt-P.moving+0.5)/0.7)*(1-ag_sine((tt-P.moving-0.5)/0.8));if(tr>0.002)ag_reach(x,[1700,650,1712,616,1730,592,1752,552],tr*0.78);
   pc_jun(x,G,{gaze:tt<P.writes?[2.6,-0.8]:tt<P.person?[3.6,-1.6]:[3.2,-1.2],nod:0.06*ag_io(tt,P.approves-0.1,P.approves+0.7,0.3)});
   ag_roomLight(x,1);
   pc_steps(x,ag_sine((tt-P.matters+0.2)/0.9));
-  // the page: Checks opens and is written as the two checks are said; then Tests, in two parts
+  // the page: Checks opens and is written as the two checks are said; the Read row lit as the glossary is named; then Tests, in two parts
   pc_page(x,{grow:[1,1,1,1,1,clamp((tt-P.matters+0.3)/0.9,0,1),clamp((tt-P.tests+0.3)/0.9,0,1),1],
     k:[1,1,1,1,1,pc_type2(tt,P.levels-0.1,P.count-0.2,24/52,P.every-0.1,P.every+1.5),pc_type2(tt,P.writes-0.1,P.approves+0.5,31/58,P.onlyw-0.1,P.person+1.3),1],
     lab:[1,1,1,1,1,ag_in(tt,P.matters,0.4),ag_in(tt,P.tests,0.4),1],
-    hi:[0,0,0,0,0,0.9*ag_io(tt,P.matters,P.tests-0.2,0.4),0.9*ag_io(tt,P.tests,P.like-0.6,0.4),0],hiCol:AG.blue});
-  // the two tests, out of the sphere and up beside the page; approved by Jun; locked
-  [PC_T1,PC_T2].forEach(([tx,ty,tw],i)=>{const u=clamp((tt-P.writes-0.35*i+0.1)/1.0,0,1);if(u<=0.01)return;const h=pc_test(x,tx,ty,tw,PC_TT[i],{lock:0,a:0}).h,cx=tx+tw/2,cy=ty+h/2;
+    hi:[0,0.9*Math.max(ag_io(tt,P.glossary-0.3,P.glossary+1.6,0.4),ag_io(tt,P.mean-0.3,P.mean+1.4,0.4)),0,0,0,0.9*ag_io(tt,P.matters,P.tests-0.2,0.4),0.9*ag_io(tt,P.tests,P.wrong-0.4,0.4),0],hiCol:AG.blue});
+  // the count nobody knows yet, beside the page: a question mark for each level, its total known; the + and = come in as "add up" is
+  // said, "one level each" under it; the question marks pulse as neither check says how many; then the + and = as "how the parts
+  // relate" is said, and the Read row, the glossary's words, as "what the words mean"; it goes before the tests come
+  const uk=pc_pop(tt,P.nobody-0.3,P.tests-0.45);
+  pc_unknown(x,PC_T1[0],PC_T1[1],PC_T1[2],{k:uk.k,a:uk.a,rel:ag_in(tt,P.add-0.2,0.6),one:ag_in(tt,P.exactly-0.1,0.5),
+    q:Math.max(ag_io(tt,P.nobody,P.nobody+0.9,0.35),ag_io(tt,P.many-0.2,P.many+1.0,0.35)),relHi:ag_io(tt,P.relate-0.2,P.relate+1.0,0.35),
+    oneHi:ag_io(tt,P.mean-0.2,P.mean+1.0,0.35)});
+  // the two tests, out of the sphere and up beside the page; approved by Jun; locked; they go as the agent's rules are said
+  const tg=1-ag_in(tt,P.wrong-0.3,0.45);
+  [PC_T1,PC_T2].forEach(([tx,ty,tw],i)=>{const u=clamp((tt-P.writes-0.35*i+0.1)/1.0,0,1);if(u<=0.01||tg<=0.01)return;const h=pc_test(x,tx,ty,tw,PC_TT[i],{lock:0,a:0}).h,cx=tx+tw/2,cy=ty+h/2;
     const F=pc_fly(u,rx,ry,rx-80,ry-260,cx,cy),lk=clamp((tt-P.person+0.2-0.15*i)/0.6,0,1);
+    x.save();x.globalAlpha*=tg;
     pc_flown(x,F,cx,cy,()=>pc_test(x,tx,ty,tw,PC_TT[i],{a:clamp(u*3,0,1),lock:lk,ok:clamp((tt-P.approves+0.1-0.2*i)/1.0,0,1),okLeft:1}),{w:tw,h,a:clamp(u*3,0,1)});
-    if(i===1)pc_lockFlash(x,tx+tw-40,ty+36,ag_io(tt,P.moving+0.1,P.moving+0.8,0.25));});}
-// Singapore again: the plant still dry, its bottle empty by the tap, the list of how it will be judged already whole
-function pc_plantAgain(x,tt,P){pc_tap(x);pc_bottle(x,PC_TAP[2],790,230,{fill:0,line:0.78});pc_list(x,120,170,620,1,{});
-  ag_pill(x,430,624,"written before any water",{a:ag_in(tt,P.written-0.1,0.5)});}
+    if(i===1)pc_lockFlash(x,tx+tw-40,ty+36,ag_io(tt,P.moving+0.1,P.moving+0.8,0.25));x.restore();});
+  // the agent's two rules, in the tests' place: the first, amber, as what everyone uses can be wrong, its pill as it says so; the
+  // second, violet, as it brings the options
+  const [rx0,ry0,rw]=PC_T1,h1=ag_textCard(x,0,0,rw,PC_RULES[0],{measure:1}).h,r1=pc_pop(tt,P.wrong+0.15,null),r2=pc_pop(tt,P.options-0.1,null);
+  if(r1.a>0.01){ag_textCard(x,rx0,ry0,rw,{kick:PC_RULES[0].kick,title:PC_RULES[0].title,sub:" "},{k:r1.k,a:r1.a,kickCol:AG.amber,edge:AG.amber,edgeA:0.85});
+    ag_T(x,PC_RULES[0].sub,rx0+28,ry0+148,{w:500,size:28,col:AG.mut,a:r1.a*ag_in(tt,P.years-0.3,0.5)});}
+  ag_pill(x,rx0+rw/2,ry0+h1+42,"Says so, with evidence",{col:AG.amber,icon:"warn",a:ag_in(tt,P.says-0.1,0.4)});
+  const y2=ry0+h1+96;
+  if(r2.a>0.01){ag_textCard(x,rx0,y2,rw,{kick:PC_RULES[1].kick,title:PC_RULES[1].title,sub:" "},{k:r2.k,a:r2.a,kickCol:AG.violet,edge:AG.violet,edgeA:0.6});
+    ag_T(x,PC_RULES[1].sub,rx0+28,y2+148,{w:500,size:28,col:AG.green,a:r2.a*ag_in(tt,P.choose-0.4,0.5)});}}
+// Singapore again: the plant still dry, its bottle empty by the tap, the list of how it will be judged already whole; as "had to meet"
+// is said, the bottle's mark lights, and its pill: each measure set what the water had to meet, not what it would show
+function pc_plantAgain(x,tt,P){pc_tap(x);const m=ag_io(tt,P.had-0.2,P.had+2.4,0.5);pc_bottle(x,PC_TAP[2],790,230,{fill:0,line:0.78,mark:m});pc_list(x,120,170,620,1,{});
+  ag_pill(x,430,624,"written before any water",{a:ag_in(tt,P.written-0.1,0.5)});
+  ag_pill(x,430,704,"what it had to meet",{a:ag_in(tt,P.had-0.1,0.5)});}
 
 /* ---------------------------------------------------------------- 5 · Do
    The agent at work, in its sandbox, with the three tools the plan gave it: three words from Docs, the tables from Catalog, the count
    by level built in the sandbox. The first run fails the first test, 28 short; Query finds 28 students with no level, exchange
-   students. It doesn't drop them or touch the test: it asks Mei, who decides from the government's list. Then the third level goes in,
-   both tests pass, the description is written from the glossary, and the pull request opens with its evidence. */
+   students, and, asked of every census day since 2021, the same each year: every split by level since was short. It doesn't drop them
+   or touch the test: it asks Mei, with its evidence and two options that both add up, and she decides from the government's list; the
+   years before go to Planning, for people to look into. Then the third level goes in, both tests pass, the description is written
+   from the glossary, and the pull request opens with its evidence. */
 const PC_R5=[1230,400,150,76],PC_SB=[780,760,600],PC_CX=[570,740,420],PC_DT=[[90,160,450],[90,420,450]];
 const PC_QEV=[{kick:"Query",title:"census day, no level",col:AG.blue},{kick:"Result",title:"28 students",col:AG.orange}];
 scene("do",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),words:wAt(sc,"builds","three words"),tables:wAt(sc,"builds","tables"),
     count:wAt(sc,"builds","count by level"),red:c.red,fails:wAt(sc,"red","fails"),n384:wAt(sc,"red","eighteen"),short:c.short,query:wAt(sc,"looks","Query"),
-    n28:wAt(sc,"looks","twenty-eight"),exchange:c.exchange,doesnt:c.doesnt,touch:wAt(sc,"doesnt","touch"),meis:wAt(sc,"meaning","Mei's"),
-    asks:c.asks,mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
+    n28:wAt(sc,"looks","twenty-eight"),exchange:c.exchange,since:c.since,n2021:wAt(sc,"since","twenty twenty-one"),split:c.split,
+    shortw:wAt(sc,"split","short"),doesnt:c.doesnt,touch:wAt(sc,"doesnt","touch"),meaning:c.meaning,meis:wAt(sc,"meaning","Mei's"),
+    asks:c.asks,two:wAt(sc,"asks","two options"),options:c.options,home:wAt(sc,"options","or the level"),
+    mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
+    years:c.years,planning:wAt(sc,"years","Planning"),look:wAt(sc,"years","look into"),
     again:c.again,adds:wAt(sc,"again","adds"),runs:wAt(sc,"again","runs"),n412:wAt(sc,"again","eighteen"),every:wAt(sc,"again","every"),pass:c.pass,
     descr:wAt(sc,"pr","description"),opens:wAt(sc,"pr","pull request"),evidence:c.evidence,claim:wAt(sc,"evidence","claim")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
-    {at:P.mei-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
+    {at:P.asks-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
     {at:P.again-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);
   // the steps stay put over the shots, while one moment in the lab gives way to the next
   pc_steps(ctx,2);});
 
 function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_SB,after=part===1,keep=after?1-ag_in(tt,P.opens-0.5,0.5):1;
   // the agent, at work; its arms out to each tool in turn (Catalog, Query, Docs), data coming back along them
-  const RT=after?[null,null,[P.descr-0.4,P.opens-0.3]]:[[P.tables-0.3,P.count+0.4],[P.query-0.4,P.exchange+0.6],[P.words-0.4,P.tables-0.2]],
+  const RT=after?[null,null,[P.descr-0.4,P.opens-0.3]]:[[P.tables-0.3,P.count+0.4],[P.query-0.4,P.shortw-0.2],[P.words-0.4,P.tables-0.2]],
     U=RT.map(T=>T?ag_sine((tt-T[0])/0.9)*(1-ag_sine((tt-T[1])/0.9)):0);
   pc_agent(x,G,rx,ry,R,r,{think:after?0.6*ag_io(tt,P.adds-0.3,P.pass,0.4):0.6*ag_io(tt,P.words-0.4,P.touch+0.4,0.4)});
   U.forEach((u,i)=>{if(u>0.002)ag_reach(x,pc_arm(i,rx,ry,R),u,{data:RT[i]?clamp((tt-RT[i][0]-0.9)/1.4,0,1):0});});
@@ -305,11 +342,14 @@ function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_
     // three words from Docs, in orange: data brought back
     ["student","census day","level of study"].forEach((s,i)=>ag_pill(x,1310,612+i*64,s,{col:AG.orange,a:ag_io(tt,P.words+0.6+0.3*i,P.count+0.6,0.35)}));
     // the query's answer, at the top: 28 students with no level; exchange students
-    const qa=ag_io(tt,P.n28-0.3,P.meis-0.65,0.35),qk=clamp(ag_spr(tt,P.n28-0.3,0.8),0,1.2);
+    const qa=ag_io(tt,P.n28-0.3,P.since-0.55,0.35),qk=clamp(ag_spr(tt,P.n28-0.3,0.8),0,1.2);
     if(qa>0.01){ag_textCard(x,560,170,500,{kick:"Query · census day",title:"28 students, no level",sub:" "},{k:qk,a:qa,kickCol:AG.blue,edge:AG.orange});
       ag_T(x,"exchange students, single units",560+28,170+148,{w:500,size:28,col:AG.mut,a:qa*ag_in(tt,P.exchange-0.1,0.5)});}
+    // then every census day since 2021, in its place: no level, every year, a mark for each as it's said; every split since, short
+    const ya=pc_pop(tt,P.since-0.1,P.meaning-0.6);
+    pc_years(x,560,170,500,{k:ya.k,a:ya.a,n:5*clamp((tt-P.n2021+0.1)/1.4,0,1),split:ag_in(tt,P.shortw-0.2,0.5)});
     // the question for Mei, with its query and the result clipped to it; it goes to her
-    const qs=pc_pop(tt,P.meis-0.25,null),off=ag_sine((tt-P.mei+1.3)/0.9);
+    const qs=pc_pop(tt,P.meaning-0.2,null),off=ag_sine((tt-P.asks+1.3)/0.9);
     ag_evidence(x,560-640*off,160,500,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{k:qs.k,a:qs.a*(1-off),kickCol:AG.mut,ew:240});}
   // the tests, on the left, locked; the first fails, 28 short, until the third level goes in; then both pass
   const s1=after?(tt>P.n412+0.3?"pass":"fail"):(tt>P.fails-0.1?"fail":"set"),s2=after&&tt>P.every+0.3?"pass":"set";
@@ -337,11 +377,16 @@ function pc_govList(x,X,Y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=["Undergradu
     ag_T(x,s,X+28,yy,{w:600,size:32});});
   x.restore();}
 function pc_meiRoom(x,tt,P){const G=P.g0+tt;
-  ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.6]:tt<P.own?[3.6,-0.4]:[3.4,0.4],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
+  ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.2]:tt<P.own?[3.8,-0.6]:tt<P.years?[3.4,0.2]:[3.8,0.6],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
   ag_roomLight(x,1);
-  const qs=ag_eo(clamp((tt-P.mei+0.4)/0.7,0,1));ag_evidence(x,lerp(700,820,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
-  const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,820,390,560,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
-  const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,820,654,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});}
+  // the question comes to her, with its evidence; the two options under it, both adding up, each as it's said
+  const qs=ag_eo(clamp((tt-P.asks+0.4)/0.7,0,1));ag_evidence(x,lerp(680,800,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
+  const op=pc_pop(tt,P.two-0.2,null);pc_options(x,800,376,560,{k:op.k,a:op.a,A:ag_in(tt,P.options-0.1,0.4),B:ag_in(tt,P.home-0.1,0.4),pick:ag_in(tt,P.nonaward-0.1,0.5)});
+  // she checks the government's list, and decides: the first
+  const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,1390,376,480,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
+  const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,800,656,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});
+  // the years before, with the agent's evidence, to Planning: for people to look into
+  const pl=pc_pop(tt,P.planning-0.3,null);ag_textCard(x,1390,626,480,{kick:"To Planning",title:"Splits since 2021",sub:"for people to look into"},{k:pl.k,a:pl.a,kickCol:AG.mut,edge:AG.amber,edgeA:0.7});}
 
 /* ---------------------------------------------------------------- 6 · Check
    Jun reads the pull request against his page, not the agent's word: a tick by each row it meets; four of ten rounds; the change is

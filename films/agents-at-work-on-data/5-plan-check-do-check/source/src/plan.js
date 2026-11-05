@@ -7,6 +7,9 @@
                   warning or a lock by a row; o.empty takes the rows' words away, leaving the plan ready for the next job
      pc_test      a test card, set (blue), failing (amber) or passing (green), with a person's approval and a lock
      pc_count     the count by level the agent builds: its rows, a row that grows in, its total
+     pc_unknown   the count as nobody knows it yet: a question mark for each level, and the total everyone knows
+     pc_years     the agent's query across the census days since 2021, a mark for each year with no level
+     pc_options   the two places the 28 could go, both adding up, for Mei to choose
      pc_tool      a tool on the wall, read only; pc_arm(i) the arm from the agent's ring to tool i
      pc_globe     a pale globe, "the web"; pc_webPage a small page coming back from it
      pc_num       a card with a number that counts up; pc_clock a clock on a card, its hand turning
@@ -98,6 +101,48 @@ function pc_count(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,k=o.k||[1,1,0],gr
     ag_T(ctx,s,x+28,yy,{w:600,size:30,a:kk});ag_T(ctx,n,x+w-28,yy,{w:800,size:32,col:AG.orange,align:"right",a:kk});});
   const ty=y+148+rh*(2+grow)-10;ctx.strokeStyle="rgba(60,50,40,0.2)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+28,ty-6);ctx.lineTo(x+w-28,ty-6);ctx.stroke();
   const ta=o.totalA==null?1:o.totalA;if(ta>0.01){ag_T(ctx,"Total",x+28,ty+40,{w:700,size:30,a:ta});ag_T(ctx,o.total||"",x+w-28,ty+42,{w:800,size:40,col:o.totalCol||AG.orange,align:"right",a:ta});}
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the count nobody knows yet
+   pc_unknown(ctx, x, y, w, o): the count by level as it stands before any work: "COUNT BY LEVEL", each level with a question mark,
+   and the total everyone knows, 18,412. o.rel (0 to 1) brings in, in blue, the + and = that say how the levels must relate to it
+   (the labels make room for them, and the rule turns blue); o.q (0 to 1, and back) a pulse of the question marks; o.one (0 to 1) a
+   blue pill under it, "one level each"; o.relHi and o.oneHi (0 to 1, and back) a pulse of the + and =, and of the pill; o.k springs
+   it in; o.a. Returns its box. */
+function pc_unknown(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=50,h=118+rh*2+70,b={x,y,w,h};if(a<=0.01)return b;
+  const rel=clamp(o.rel||0,0,1),q=clamp(o.q||0,0,1),ind=40*ag_sine(rel);ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
+  ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,"COUNT BY LEVEL",x+28,y+50,{w:700,size:28,ls:4,col:AG.mut});ag_T(ctx,"census day",x+28,y+90,{w:500,size:28,col:AG.mut});
+  ["Undergraduate","Postgraduate"].forEach((s,i)=>{const yy=y+148+i*rh;ag_T(ctx,s,x+28+ind,yy,{w:600,size:30});
+    ctx.save();ag_about(ctx,x+w-40,yy-12,1+0.22*q);ag_T(ctx,"?",x+w-28,yy,{w:800,size:36,col:mix(AG.mut,AG.violet,q),align:"right"});ctx.restore();});
+  const rh2=clamp(o.relHi||0,0,1),sg=(s,X,Y)=>{ctx.save();ag_about(ctx,X+9,Y-11,1+0.3*rh2);ag_T(ctx,s,X,Y,{w:800,size:32,col:AG.blue,a:rel});ctx.restore();};
+  if(rel>0.01)sg("+",x+28,y+148+rh);
+  const ty=y+148+rh*2-10;ctx.strokeStyle=rgba(mix([60,50,40],AG.blue,rel),0.2+0.5*rel);ctx.lineWidth=2+rel;ctx.beginPath();ctx.moveTo(x+28,ty-6);ctx.lineTo(x+w-28,ty-6);ctx.stroke();
+  if(rel>0.01)sg("=",x+28,ty+40);
+  ag_T(ctx,"Total",x+28+ind,ty+40,{w:700,size:30});ag_T(ctx,"18,412",x+w-28,ty+42,{w:800,size:40,align:"right"});
+  const one=clamp(o.one||0,0,1);if(one>0.01){ctx.save();ag_about(ctx,x+w/2,y+h+40,1+0.1*clamp(o.oneHi||0,0,1));ag_pill(ctx,x+w/2,y+h+40,"one level each",{col:AG.blue,a:one});ctx.restore();}
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the years since 2021, and the options for Mei
+   pc_years(ctx, x, y, w, o): the agent's second query: "QUERY · SINCE 2021", "No level, every year", the census days from 2021 to 2025
+   each with an amber mark as o.n (0 to 5) reaches it, and o.split (0 to 1) the amber line "every split by level: short"; o.k, o.a.
+   pc_options(ctx, x, y, w, o): "OPTIONS · BOTH ADD UP", the two places the 28 could go, each with what it gives (o.A, o.B, 0 to 1);
+   o.pick (0 to 1) the first chosen: a green tick and a soft green light, the second fading back; o.k, o.a. Both return their box. */
+const PC_YEARS=["2021","2022","2023","2024","2025"];
+function pc_years(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=262,b={x,y,w,h};if(a<=0.01)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.orange,edgeA:0.75});
+  ag_T(ctx,"QUERY · SINCE 2021",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"No level, every year",x+28,y+98,{w:700,size:36});
+  const f={w:600,size:28},ws=PC_YEARS.map(s=>ag_tw(ctx,s,f)),gap=(w-56-ws.reduce((s,v)=>s+v,0))/(PC_YEARS.length-1);let xx=x+28;
+  PC_YEARS.forEach((s,i)=>{const on=clamp((o.n||0)-i,0,1);if(on>0.01){ag_T(ctx,s,xx,y+156,{...f,col:AG.orange,a:on});
+      ctx.fillStyle=rgba(AG.amber,0.9*on);ctx.beginPath();ctx.arc(xx+ws[i]/2,y+182,6+3*(1-ag_eo(on)),0,TAU);ctx.fill();}xx+=ws[i]+gap;});
+  ag_T(ctx,"every split by level: short",x+28,y+232,{w:700,size:28,col:AG.amber,a:clamp(o.split||0,0,1)});
+  ctx.restore();return b;}
+function pc_options(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=262,b={x,y,w,h};if(a<=0.01)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.violet,edgeA:0.5});
+  ag_T(ctx,"OPTIONS · BOTH ADD UP",x+28,y+50,{w:700,size:28,ls:4,col:AG.violet});const pk=clamp(o.pick||0,0,1);
+  [["A level of their own","non-award · 28",o.A],["Their level at home","undergraduate 19 · postgraduate 9",o.B]].forEach(([t,s,v],i)=>{
+    const yy=y+104+i*88,va=clamp(v||0,0,1)*(i===1?1-0.45*pk:1);if(va<=0.01)return;
+    if(i===0&&pk>0.01){ctx.save();ctx.globalAlpha*=pk;ctx.fillStyle=rgba(AG.green,0.1);ctx.beginPath();ag_rect(ctx,x+14,yy-36,w-28,86,12);ctx.fill();ctx.restore();ag_tick(ctx,x+w-44,yy-10,24,rgba(AG.green,pk),4);}
+    ag_T(ctx,t,x+28,yy,{w:600,size:30,a:va});ag_T(ctx,s,x+28,yy+38,{w:500,size:28,col:AG.mut,a:va});});
   ctx.restore();return b;}
 
 /* ---------------------------------------------------------------- the tools, and the arms that reach them

@@ -24,3 +24,9 @@ groups:
     owner:
       name: Finance
       email: finance@uni.example
+
+  - name: graduations
+    description: The graduation list and the staging it reads, for the graduations office.
+    owner:
+      name: "Mei Tanaka, registrar's office"
+      email: mei.tanaka@uni.example

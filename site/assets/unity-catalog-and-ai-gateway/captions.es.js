@@ -6,7 +6,7 @@
    la tabla de personal, el código de personal, los docentes, temporales for casual staff, asteriscos for a mask's stars, etiquetada directa, una política,
    un permiso for a grant (conceder, to grant), una bitácora for the log, el linaje, un esquema de desarrollo, una entidad de servicio for a service principal,
    un servidor de herramientas, un prompt, los tokens, dueño (Anil), los proyectos activos and el gobierno. Anil's agent, the workload agent, is el agente de
-   carga docente; Jun's project check agent is el agente que revisa proyectos, as in film 2.7; a personal key is una clave personal; a check on a model
+   carga docente; Jun's project check agent is el agente que revisa proyectos, as in Working with agents on Databricks; a personal key is una clave personal; a check on a model
    service is un control. Unity Catalog and Unity Gateway keep their names, and "one set of rules" is unas mismas reglas. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Today, at the university.":

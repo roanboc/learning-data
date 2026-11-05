@@ -166,9 +166,9 @@ The film can stop at the end of three chapters, with one question each (`site/as
 
 | After | Question | The answer that holds |
 |---|---|---|
-| A place on the map | The planning contributor does three of the seven steps. Why isn't it also given *approve the change*, when it drafted the change and knows it best? | Whoever drafts a change never approves or releases it, so approving is another role's step, filled by a person. No stage changes that: agents never approve. |
-| The gate | It matched 37 of 40 tickets, asked on 3, and was confidently wrong on none. Which result mattered most before it worked alone? | The none confidently wrong: an agent that says when it isn't sure can be trusted with work of its own, because its misses come to a person. Passing 36 was needed too, but wasn't enough on its own. |
-| Who owns it, and who can stop it | Late one night, Sam sees the planning agent change things it shouldn't. Clara is asleep. What may Sam do? | Stop it, at any hour, without asking first. Only Clara may sign for it, but stopping it is hers and Sam's, and anyone who sees it go wrong may ask them to. |
+| A place on the map | The planning contributor does three of the seven steps. Why isn't it also given "approve the change", when it drafted the change and knows it best? | Whoever drafts a change never approves or releases it, so approving is another role's step, filled by a person. No stage changes that: agents never approve. |
+| The gate | At its gate, the planning agent matched 37 of 40 tickets, asked on 3, and was confidently wrong on none. Which result mattered most before it worked alone? | The none confidently wrong: an agent that says when it isn't sure can be trusted with work of its own, because what it isn't sure of comes to a person as a question. Matching 36 was needed too, but wasn't enough on its own. |
+| Who owns it, and who can stop it | Late one night, Sam sees the planning agent changing things it shouldn't. Clara is asleep. What may Sam do? | Stop it, at any hour, without asking first. Only Clara may sign for it, but stopping it is hers and Sam's, and anyone who sees it go wrong may ask them to. |
 
 ## What the example project has
 

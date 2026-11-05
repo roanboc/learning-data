@@ -1,0 +1,32 @@
+{
+  "key": "unity-catalog-and-ai-gateway",
+  "title": "Why Unity Catalog and Unity Gateway govern them",
+  "sub": "Film 8 of 9 of Agents at work on data: one set of rules for people and agents, enforced where the data and the models live. Mei's agent answers the faculties' questions at night on her personal key, so the log takes its reads for hers. Given a name of its own, it gets only the grants its job needs and stars where the names are, in Unity Catalog, and calls only the models it's granted, in Unity Gateway, where every call is counted under its name.",
+  "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (grants, locks, the catalog's and the gateway's frames, the tool servers), violet the model thinking (the agent's band, its thread to its model, its own lines in the log), orange data coming back, green a check that passes, and amber something wrong (the Sunday reads, the question that tries to trick it, the hidden words that say ignore your rules).",
+  "src": [
+    "pieces.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "reads",
+    "all",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "reads"
+  ]
+}

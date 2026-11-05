@@ -147,7 +147,7 @@ project/
 ├── seeds/
 │   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
 │   │                         identity decisions, credit recognition), finance (tuition rates),
-│   │                         shared (key sets [generated] from each source's meta.key_set)
+│   │                         graduations (ceremonies), shared (key sets [generated] from each source's meta.key_set)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report), finance (Finance's tuition report). No model
 │                             reads them
@@ -168,14 +168,15 @@ project/
 │   │                         core_credential v1 [temporary], removed after 31 March 2027
 │   ├── marts/planning/       as at census; the semantic model and metric
 │   ├── marts/wallet/         as it is now
-│   └── marts/finance/        as at census: the tuition recognised credit saves
+│   ├── marts/finance/        as at census: the tuition recognised credit saves
+│   └── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
 │                             Each core domain and mart folder also holds:
 │                               _<domain>__conceptual.yml and .md   its conceptual model
 │                               _<domain>__decisions.yml            its decision log
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses
 ├── governance/               what isn't dbt's, and could live in another tool or repository:
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
@@ -188,7 +189,7 @@ project/
 ├── macros/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
-│   ├── governance/           on Databricks: each column's class and each table's area as tags, the policy
+│   ├── governance/           on Databricks: each column's class, each critical column and each table's area as tags, the policy
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
@@ -227,13 +228,13 @@ project/
 │                             pull requests as patches, with what the checks and the sync said;
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
-│                             agents-on-databricks/: the census-day count as a function, a Genie
-│                             Agent and an agent's evaluation cases (Databricks only)
+│                             agents-on-databricks/: the count of active research projects as a
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root
-├── memory/                   the team's memory: in entries/, each lesson agents learned and people
-│                             approved, a file each; removed.md, those removed, and why
+├── memory/                   the team's memory, kept by the platform and second to what's governed:
+│                             who owns it and may read or write it; removed.md, what was deleted, why
 ├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
 │                             a model, reconcile and diff, review metadata, sync the glossary,
 │                             review for governance; and choose-the-skill, which picks one
@@ -305,6 +306,16 @@ her a contract each semester to tutor a first-year unit; `R-3082` at the researc
 `A-61207` at the alumni office, which knows only her old number. No model reads them yet: the
 person domain's conceptual model (`models/core/person/`) is a draft, and
 `analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
+
+The graduation list has a slice of its own: 23 graduates and 25 certificates, at the ceremonies of
+December 2025, March, July and December 2026, from the student system's list of graduates
+(`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
+(`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
+don't change. Their names are as the platform received them: no accents before September 2026
+unless the graduate corrected them in the portal, some family names in capitals, one given and
+family name swapped, and family names cut at the student system's 30 characters, such as Beatriz
+Fonseca de Albuquerque Cavalcanti's. Hamid Karimi's double degree is two certificates; Andrés
+Peñaloza (`S-16874`), who graduates in December 2026, is held as Andres Penaloza.
 
 ## A new version, and who it touches
 

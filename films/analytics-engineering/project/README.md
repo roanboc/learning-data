@@ -208,8 +208,8 @@ project/
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
-├── docs/                     how the work is done: the process and the conventions; decisions.md
-│                             [generated], the index of every decision log; scorecard.md
+├── docs/                     how the work is done: the process, the conventions, the one-page plan;
+│                             decisions.md [generated], the index of every decision log; scorecard.md
 │                             [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
@@ -226,6 +226,7 @@ project/
 │                             (dbt Cloud only); completions/, counts-as-award/ and award-redefined/:
 │                             pull requests as patches, with what the checks and the sync said;
 │                             platform-results/: a night's checks on the platform, in the scorecard;
+│                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the census-day count as a function, a Genie
 │                             Agent and an agent's evaluation cases (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access

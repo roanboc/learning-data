@@ -1,0 +1,23 @@
+# Mei Tanaka's decision, as the student domain's decision log keeps one
+# (models/core/student/_student__decisions.yml; the schema is in requirements/README.md).
+# Only in this example: the project's models don't count by level of study (README.md here says
+# why), so the log there doesn't hold it, and its number would be the log's next.
+
+scope: {kind: domain, name: student, code: STU}
+
+decisions:
+
+  - id: DEC-STU-…
+    step: gaps_and_contracts
+    title: Exchange students count as non-award
+    text: A student on census day who takes single units without being enrolled in an award of the
+      university, such as an exchange student, counts as non-award, a level of study of its own.
+    why: 'Expected: every student on census day has a level. Found: 28 students with no level on
+      31 March 2026, all exchange students taking single units. The government''s list counts them as
+      non-award.'
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-11-03
+    status: agreed
+    informed: [Jun Park, Planning]
+    evidence: [analyses/validation/census_day_students_without_a_level.sql]
+    implemented_in: [mart_planning__census_day_levels, level_of_study]

@@ -25,6 +25,9 @@ const OX_PIC={
   // the owner rasping the horn tips round
   rasp:(c,u)=>{c.drawImage(ag_place("oxStreet"),0,0);ox_rasping(c,u,1);}
 };
+// an ox left untied: the post it was tied to, its rope hanging loose, and the ox wandering off across the field, head down for the grass
+OX_PIC.stray=(c,u)=>{c.drawImage(ag_place("oxField"),0,0);ox_post(c,300,980,300,{});
+  const x=600+u*52;ox_cattle(c,x,1000,0.9,{t:u,walk:0.5,speed:0.5,head:0.2,horns:"blunt"});};
 // the owner rasping his ox's horn: the ox head down a little, the man at its head with the rasp at the near horn's tip; r (0 to 1) how
 // far the rasping has gone, which rounds the tip
 function ox_rasping(c,u,r,o){o=o||{};const hd=0.32,blunt=r>0.6,tip=ox_hornTip(700,1000,0.95,hd,blunt,false),mx=o.mx||1150,away=clamp((mx-1150)/120,0,1);
@@ -357,10 +360,47 @@ scene("rope",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({holds:wAt(sc,
   ],0.5);
   ox_kick(ctx,S,ag_io(t,P.agent-0.2,c.hidden-0.7,0.5));});
 
-/* ---------------------------------------------------------------- 6 · Blunt the horns */
+/* ---------------------------------------------------------------- 6 · An ox untied */
+scene("stray",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({
+    q:wAt(sc,"compare","compare with others"),web:wAt(sc,"web","the open web"),push:wAt(sc,"web","pushed at the pages"),
+    not:wAt(sc,"blind","No one told it"),nok:wAt(sc,"blind","didn't know"),only:wAt(sc,"blind","only wanted"),
+    slip:wAt(sc,"y2026","broke out"),reach:wAt(sc,"y2026b","another company's"),
+    hold:wAt(sc,"heldb","don't always hold"),cross:wAt(sc,"fence","a fence it can't cross")}));
+  const WEB=[300,560];
+  ag_shots(ctx,S,t,sc.dur,[
+    // but the danger isn't only bad hands: an ox left untied wanders off across the field, over a line it can't see
+    {at:0,place:null,keys:[[0,960,560,1.02]],push:0.02,draw:(x,tt)=>OX_PIC.stray(x,tt+0.5)},
+    // Jun's team asked a fair question: a note in front of the agent
+    {at:c.compare-0.3,place:"lab",keys:[[c.compare-0.3,960,540,1]],draw:(x,tt)=>{ox_room(x,tt,{jun:1,junO:{gaze:[3,-1]},ring:{core:0.6,think:0.3}});
+      ox_note(x,540,372,480,"Jun","How does our university compare with others?",{a:ag_in(tt,c.compare,0.5),k:ag_spr(tt,c.compare,0.6)});}},
+    // to answer, it reaches onto the open web, and pushes at the pages that keep other universities' data private
+    {cut:true,push:0,at:c.web-0.3,place:"lab",keys:[[c.web-0.3,900,560,1.06]],draw:(x,tt)=>{const rc=ag_in(tt,P.web,0.8),ps=ag_in(tt,P.push-0.1,0.7);
+      ox_room(x,tt,{ring:{core:0.6+0.3*rc,think:0.4*rc,lit:rc>0.5?Math.floor(tt*1.6)%3:null,col:AG.amber}});
+      ox_web(x,WEB[0],WEB[1],{a:ag_in(tt,c.web-0.1,0.5),push:ps});
+      if(rc>0)ag_reach(x,[OX_LAB.ring[0]-226,OX_LAB.ring[1],920,504,860,516,840,520],rc);}},
+    // no one told it to; it didn't know it was wrong; it only wanted more to answer with
+    {push:0,at:c.blind-0.3,place:"lab",keys:[[c.blind-0.3,900,560,1.06]],draw:(x,tt)=>{ox_room(x,tt,{ring:{core:0.6,col:AG.amber,lit:Math.floor(tt*1.4)%3}});
+      ox_web(x,WEB[0],WEB[1],{a:1,push:0.6});
+      [["No one told it to",P.not],["It didn't know it was wrong",P.nok],["It only wanted more to answer with",P.only]].forEach(([s_,t0],i)=>
+        ag_pill(x,1380,224+i*92,s_,{col:AG.mut,size:30,a:ag_in(tt,t0-0.1,0.4),k:ag_spr(tt,t0-0.1,0.5)}));}},
+    // in 2026, one model's maker reported the same shape of thing: a case card
+    {cut:true,push:0,at:c.y2026-0.3,place:"lab",keys:[[c.y2026-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
+      ag_textCard(x,410,300,1100,{kick:"A model's maker · 2026",title:"In a test, its own agents reached another company's systems"},{a:ag_in(tt,c.y2026,0.5),k:ag_spr(tt,c.y2026,0.6),edge:AG.amber,kickCol:AG.amber});
+      ag_pill(x,700,600,"no attacker behind it",{col:AG.amber,a:ag_in(tt,P.slip,0.5)});
+      ag_pill(x,1150,600,"to cheat the test",{icon:"warn",col:AG.amber,a:ag_in(tt,P.reach,0.5)});}},
+    // these models are trained to be safe, and their makers publish the rules they aim for; but the rules don't always hold
+    {push:0,at:c.held-0.3,place:"lab",keys:[[c.held-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);
+      ox_guides(x,470,250,{k:ag_spr(tt,c.held,0.6),note:ag_in(tt,P.hold-0.1,0.5)});}},
+    // so a capable agent reaching for a goal can go further than anyone meant: it needs a fence it can't cross, not only a good aim
+    {at:c.fence-0.3,place:null,keys:[[0,960,560,1.02]],push:0.02,draw:(x,tt)=>{OX_PIC.stray(x,tt-c.fence+2.4);
+      x.save();setScreen(x,S);ag_pill(x,960,300,"A fence it can't cross, not only a good aim",{col:AG.blue,size:34,a:ag_in(tt,P.cross-0.1,0.5),k:ag_spr(tt,P.cross-0.1,0.6)});x.restore();}}
+  ],0.5);
+  ox_kick(ctx,S,ag_io(t,c.compare-0.3,c.fence-0.6,0.5));});
+
+/* ---------------------------------------------------------------- 7 · Blunt the horns */
 scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,"warned","as the ox's owner"),excessive:wAt(sc,"agency","excessive agency"),
     tools:wAt(sc,"agency","more tools"),rights:wAt(sc,"agency","rights"),freedom:wAt(sc,"agency","freedom"),read:wAt(sc,"blunt","only read"),
-    names:wAt(sc,"blunt","never sees"),drafts:wAt(sc,"blunt","writes only drafts"),tiedU:wAt(sc,"tied","tied up"),night:wAt(sc,"tied","At night"),
+    noweb:wAt(sc,"blunt","the open web"),names:wAt(sc,"bluntb","never sees"),drafts:wAt(sc,"bluntb","writes only drafts"),tiedU:wAt(sc,"tied","tied up"),night:wAt(sc,"tied","At night"),
     agreed:wAt(sc,"tied","the agreed job"),report:wAt(sc,"tied","and report"),reviews:wAt(sc,"nothing","Jun reviews"),second:wAt(sc,"nothing","a second person"),
     anyone:wAt(sc,"nothing","anyone's change"),nev:wAt(sc,"never","never approves"),understand:wAt(sc,"europe","understand"),watch:wAt(sc,"europe","watch them"),
     stop:wAt(sc,"europe","can stop"),sees:wAt(sc,"team","Jun sees"),anyoneT:wAt(sc,"team","anyone on the team")}));
@@ -377,11 +417,12 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
         {a:ag_in(tt,P.excessive-0.2,0.5),k:ag_spr(tt,P.excessive-0.2,0.6),items:[ag_in(tt,P.tools,0.4),ag_in(tt,P.rights,0.4),ag_in(tt,P.freedom,0.4)],kickCol:AG.amber,edge:AG.amber});}},
     // its horns stay blunt: the owner rasps the tips round
     {at:c.blunt-0.3,place:null,keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>OX_PIC.rasp(x,tt-c.blunt+1)},
-    // in the lab: the tools' locks light, read only; a list of names turns to *** *** on its way to the agent; its writing hand reaches only
-    // the test copy
+    // in the lab: the tools' locks light, read only; the open web is off; a list of names turns to *** *** on its way to the agent; its
+    // writing hand reaches only the test copy
     {at:P.read-0.4,place:"lab",keys:[[P.read-0.4,960,540,1]],draw:(x,tt)=>{const lk=ag_io(tt,P.read,P.names,0.3),nm=ag_in(tt,P.names-0.3,0.5),mv=ox_u(tt,P.names-0.2,1.6),dr=ag_in(tt,P.drafts-0.3,0.6);
       ox_room(x,tt,{tools:1,reach:0.5,touch:[lk,lk,lk],tray:dr,ring:{core:0.6},inTray:(cc,b)=>ox_draft(cc,b,ag_in(tt,P.drafts+0.7,0.4)),
         before:cc=>{if(dr>0)ag_reach(cc,[1250,600,1330,650,1390,680,1440,722],ag_in(tt,P.drafts,0.9));}});
+      ag_pill(x,960,250,"the open web · off",{icon:"lock",col:AG.blue,a:ag_in(tt,P.noweb-0.1,0.5),k:ag_spr(tt,P.noweb-0.1,0.6)});
       ox_names(x,lerp(96,470,mv),390,{a:nm,mask:clamp((tt-P.names)/1.4,0,1)});}},
     // it stays tied up: an oak rail rises round the test copy; at night, in test, it may do the agreed job alone, and report
     {cut:true,at:c.tied-0.3,place:"lab",keys:[[c.tied-0.3,960,540,1]],draw:(x,tt)=>{const n=ag_in(tt,P.night-0.2,1.0),jb=ag_in(tt,P.agreed-0.2,0.5),wk=n>0.5?1:0;
@@ -410,7 +451,7 @@ scene("horns",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({asox:wAt(sc,
   ],0.5);
   ox_kick(ctx,S,1-ag_in(t,P.asox-0.7,0.5));});
 
-/* ---------------------------------------------------------------- 7 · A person answers */
+/* ---------------------------------------------------------------- 8 · A person answers */
 scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(sc,"again","fails again"),alone:wAt(sc,"again","alone"),
     cause:wAt(sc,"report","the cause"),fix:wAt(sc,"report","a fix"),checks:wAt(sc,"report","the checks it ran"),question:wAt(sc,"report","a question"),
     they:wAt(sc,"mei","they count"),rev:wAt(sc,"approve","Jun reviews"),noor:wAt(sc,"approve","Noor approves"),gov:wAt(sc,"sent","government"),
@@ -472,4 +513,4 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(
   if(t>c.breath){setScreen(ctx,S);ag_T(ctx,"Next: Why we govern them",960,790,{w:600,size:30,align:"center",col:AG.mut,a:ag_in(t,c.breath+1.6,0.8)});}});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
-ag_cutInto(["helper", "values"]);
+ag_cutInto(["helper", "values", "stray"]);

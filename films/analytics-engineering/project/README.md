@@ -47,7 +47,7 @@ Then, if you like:
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, and Ontos: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -208,8 +208,8 @@ project/
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
-├── docs/                     how the work is done: the process and the conventions; decisions.md
-│                             [generated], the index of every decision log; scorecard.md
+├── docs/                     how the work is done: the process, the conventions, the one-page plan;
+│                             decisions.md [generated], the index of every decision log; scorecard.md
 │                             [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
@@ -225,7 +225,10 @@ project/
 ├── examples/                 planning/: Planning's own project, refing the core across projects
 │                             (dbt Cloud only); completions/, counts-as-award/ and award-redefined/:
 │                             pull requests as patches, with what the checks and the sync said;
-│                             platform-results/: a night's checks on the platform, in the scorecard
+│                             platform-results/: a night's checks on the platform, in the scorecard;
+│                             census-by-level/: a job, from its one-page plan to its pull request;
+│                             agents-on-databricks/: the census-day count as a function, a Genie
+│                             Agent and an agent's evaluation cases (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

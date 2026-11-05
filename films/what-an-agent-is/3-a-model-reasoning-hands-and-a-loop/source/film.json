@@ -1,0 +1,38 @@
+{
+  "key": "a-model-reasoning-hands-and-a-loop",
+  "title": "A model, reasoning, hands and a loop",
+  "sub": "The third film of What an agent is, a series on what an AI agent is and what it isn't: a model that writes, reasoning that checks its plan against rules, hands that read, and a loop that keeps going until the checks pass; and where the steps are known, a plain script that does the job better.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, violet the model, orange the data coming back, green a check that passes, amber one that fails, or a loop. The scenes of 1914 are painted full-frame, matte and soft-lit, with the place and year on a tag.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "off",
+    "dips",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bCachin\\b",
+      "Kashann"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "off"
+  ],
+  "urgent": []
+}

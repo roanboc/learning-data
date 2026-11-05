@@ -1,0 +1,271 @@
+1
+00:00:01,600 --> 00:00:03,512
+Lunes, en la Facultad de Salud.
+
+2
+00:00:04,212 --> 00:00:08,921
+Anil Kurian planifica los lugares del próximo año en clases, laboratorios y hospitales.
+
+3
+00:00:10,021 --> 00:00:15,386
+Parte de los estudiantes de Salud en el día del censo: el día en que la universidad cuenta quién estudia.
+
+4
+00:00:16,686 --> 00:00:23,042
+Le pregunta a su agente, y dos colegas les preguntan a los suyos. Cada uno armó el propio, con su propia copia de los datos.
+
+5
+00:00:24,542 --> 00:00:29,115
+El de Anil lee una hoja de cálculo de carga estudiantil, hecha para pedir fondos para la facultad.
+
+6
+00:00:29,815 --> 00:00:37,031
+La carga cuenta a dos estudiantes de medio tiempo como uno, pero el agente la toma por personas: 2,160.
+
+7
+00:00:38,331 --> 00:00:43,145
+El segundo, con una copia de la tabla de estudiantes, cuenta cada carrera con «Health» en el nombre.
+
+8
+00:00:43,845 --> 00:00:51,733
+Así que también cuenta a los 31 de Health data, una carrera conjunta que no es de ninguna facultad: 2,911.
+
+9
+00:00:53,033 --> 00:00:57,874
+El tercero lee una carpeta de informes, y dice 2,880.
+
+10
+00:00:58,974 --> 00:01:02,925
+Uno tiene razón, y nadie sabe cuál: ninguno muestra lo que leyó.
+
+11
+00:01:05,025 --> 00:01:09,222
+Si planifica con la más baja, 720 estudiantes se quedarían sin lugar.
+
+12
+00:01:10,722 --> 00:01:14,854
+Y una copia de la tabla de estudiantes, con todos los nombres, está en una laptop.
+
+13
+00:01:16,354 --> 00:01:17,742
+Algo tenía que cambiar.
+
+14
+00:01:19,442 --> 00:01:27,102
+Entonces Sam, que administra la plataforma, y Jun, que construye el proyecto de datos, llevan los agentes a los datos, en Databricks.
+
+15
+00:01:28,202 --> 00:01:36,336
+Ahora cada agente lee las mismas tablas gobernadas, definiciones y herramientas que todos, y solo lo que su persona puede leer.
+
+16
+00:01:37,836 --> 00:01:45,114
+Una semana después, los tres responden 2,880, cada uno con su consulta, su tabla y su definición.
+
+17
+00:01:46,614 --> 00:01:51,721
+Anil lo comprueba en un minuto y planifica un lugar para cada estudiante. Las copias se borran.
+
+18
+00:01:53,221 --> 00:01:59,198
+Cuando cada agente lee los mismos datos con las mismas herramientas, las respuestas coinciden, con su evidencia.
+
+19
+00:02:06,698 --> 00:02:14,617
+Databricks guarda los datos de la universidad, gobernados en Unity Catalog: sus tablas, sus definiciones y quién puede leer qué.
+
+20
+00:02:15,917 --> 00:02:19,851
+Las personas ya trabajan ahí, en sus editores, cuadernos y tableros.
+
+21
+00:02:20,951 --> 00:02:23,430
+Ahora también trabajan ahí agentes, de cuatro maneras.
+
+22
+00:02:24,530 --> 00:02:27,454
+Agentes que responden preguntas, sobre datos gobernados.
+
+23
+00:02:27,954 --> 00:02:30,454
+Servidores de herramientas, que cualquier agente puede usar.
+
+24
+00:02:30,954 --> 00:02:33,672
+Agentes que el equipo construye y prueba en la plataforma.
+
+25
+00:02:34,172 --> 00:02:38,595
+Y agentes que escriben código, para el proyecto dbt y los pipelines.
+
+26
+00:02:39,895 --> 00:02:44,819
+Cada uno lee los mismos datos, y usa las mismas herramientas, que las personas para las que trabaja.
+
+27
+00:02:48,319 --> 00:02:50,072
+Primero, los agentes que responden.
+
+28
+00:02:50,772 --> 00:02:56,538
+Genie One es el asistente de la plataforma para preguntas de negocio, y dice de dónde vienen sus palabras.
+
+29
+00:02:57,838 --> 00:03:03,223
+Para las preguntas que piden cuidado, el equipo de datos construye Genie Agents, cada uno para un tema.
+
+30
+00:03:04,323 --> 00:03:08,931
+Su agente Census day lee la tabla gobernada de estudiantes en el día del censo.
+
+31
+00:03:09,631 --> 00:03:17,416
+Sus instrucciones son las definiciones del equipo: un estudiante es una persona, contada una vez, según su registro en el día del censo.
+
+32
+00:03:18,716 --> 00:03:26,361
+Sus pruebas, que Genie llama benchmarks, son las preguntas tras las tres respuestas de Salud, cada una con su respuesta correcta en SQL.
+
+33
+00:03:27,861 --> 00:03:33,522
+El equipo las corre después de cada cambio, así una respuesta incorrecta aparece antes de que alguien dependa de ella.
+
+34
+00:03:35,022 --> 00:03:38,771
+Y cada respuesta muestra su SQL, para que cualquiera pueda comprobar lo que leyó.
+
+35
+00:03:42,271 --> 00:03:45,543
+Segundo, los servidores de herramientas: las manos que cualquier agente puede usar.
+
+36
+00:03:46,243 --> 00:03:49,432
+La plataforma los ejecuta, así nadie tiene que mantener los suyos.
+
+37
+00:03:50,532 --> 00:03:57,020
+Uno ejecuta consultas. Otro convierte una función gobernada en herramienta. Otro busca en los documentos del equipo.
+
+38
+00:03:58,320 --> 00:04:02,982
+Y Genie One y cada Genie Agent tienen el suyo, así cualquier agente puede preguntarles.
+
+39
+00:04:04,082 --> 00:04:09,114
+Ahora el agente de Anil se conecta a ellos con la sesión de Anil, y lee solo lo que Anil puede leer.
+
+40
+00:04:10,614 --> 00:04:15,178
+El equipo de datos escribió el conteo del censo una sola vez, como una función, para cualquier facultad.
+
+41
+00:04:16,478 --> 00:04:19,676
+Todos los agentes la llaman, y ninguno escribe un conteo propio.
+
+42
+00:04:21,176 --> 00:04:25,638
+Siguen el estándar abierto MCP, así cualquier agente puede conectarse.
+
+43
+00:04:26,938 --> 00:04:31,383
+El servidor de herramientas de Genie One está disponible de forma general; los otros, en versión preliminar.
+
+44
+00:04:34,883 --> 00:04:36,767
+Tercero, los agentes que construye el equipo.
+
+45
+00:04:37,467 --> 00:04:45,489
+Si el conteo nocturno no pasa su control contra el informe del censo, alguien debe averiguar por qué, y esos pasos no se escriben antes.
+
+46
+00:04:46,789 --> 00:04:53,131
+Así que el equipo construye un agente que revisa el censo, en código, con Agent Bricks, la forma de la plataforma de construir agentes.
+
+47
+00:04:54,231 --> 00:04:58,927
+Agent Runtime lo ejecuta, el trabajo nocturno lo llama, y cada paso que da queda registrado.
+
+48
+00:05:00,227 --> 00:05:03,113
+Usa los mismos servidores de herramientas que todos.
+
+49
+00:05:03,813 --> 00:05:08,354
+Antes de que alguien dependa de él, el equipo lo prueba con casos que ya conoce.
+
+50
+00:05:09,454 --> 00:05:16,881
+Los 37 que se dieron de baja después del día del censo y aún cuentan. Tres estudiantes contados dos veces. Y las tres respuestas de Salud.
+
+51
+00:05:18,381 --> 00:05:25,741
+Jueces integrados en la plataforma califican cada respuesta, una prueba simple revisa las sumas, y Mei y Jun marcan lo que está mal.
+
+52
+00:05:27,241 --> 00:05:31,360
+Su nota es evidencia, no una decisión: Jun la lee, y decide.
+
+53
+00:05:34,860 --> 00:05:36,776
+Cuarto, los agentes que escriben código.
+
+54
+00:05:37,476 --> 00:05:41,158
+Sam construye los pipelines que cargan el sistema de estudiantes cada noche.
+
+55
+00:05:41,858 --> 00:05:47,768
+Genie Code, el agente de programación de la plataforma, trabaja a su lado en el editor de pipelines, con los permisos de Sam.
+
+56
+00:05:48,868 --> 00:05:54,763
+Lee las habilidades del equipo: los mismos archivos que lee el agente de Jun, en el mismo formato abierto.
+
+57
+00:05:56,063 --> 00:06:02,208
+Si se le pide perfilar una tabla, sigue la habilidad del equipo, con la consulta y el resultado detrás de cada afirmación.
+
+58
+00:06:03,708 --> 00:06:08,217
+El propio agente de programación de Jun trabaja en el proyecto dbt, en su editor.
+
+59
+00:06:08,917 --> 00:06:14,581
+Llega a la plataforma por los mismos servidores de herramientas, y las habilidades propias de Databricks le enseñan la plataforma.
+
+60
+00:06:15,881 --> 00:06:19,814
+Las habilidades le enseñan a un agente cómo trabajar; los servidores de herramientas le permiten hacer el trabajo.
+
+61
+00:06:21,314 --> 00:06:28,529
+Lo que escribe cada uno es un borrador, en una rama: su persona lo revisa, y una segunda persona aprueba lo que llega a producción.
+
+62
+00:06:32,029 --> 00:06:35,871
+De vuelta en la Facultad de Salud, los tres agentes siguen siendo de sus dueños.
+
+63
+00:06:36,571 --> 00:06:41,126
+Pero leen los mismos datos gobernados, con las mismas herramientas, que todos.
+
+64
+00:06:42,426 --> 00:06:51,006
+Ante la pregunta por los estudiantes de Salud en el día del censo, cada uno responde 2,880, con su consulta, su tabla y su definición.
+
+65
+00:06:52,506 --> 00:06:54,690
+Anil planifica un lugar para cada estudiante.
+
+66
+00:06:55,990 --> 00:07:00,833
+La plataforma les da a los agentes los mismos datos y herramientas que usan las personas, en un solo lugar.
+
+67
+00:07:02,533 --> 00:07:08,752
+Queda una pregunta: cuando un agente lee por su cuenta, ¿de quién son esas lecturas, y quién paga su modelo?
+
+68
+00:07:10,252 --> 00:07:11,388
+De eso trata la próxima película.

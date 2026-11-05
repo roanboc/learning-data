@@ -69,3 +69,19 @@ settles the new cause, and it gets an entry here, so nothing is solved twice.
 - Shows: records made in one week, dated back months.
 - Settled: they never count (DEC-SIS-05).
 - Decided by: Mei Tanaka, registrar's office, 22 October 2026.
+
+### Exchange students with no level
+
+- Shows: a split by level of study comes up short of the census-day count.
+- Settled: they count as non-award, a level of its own (`examples/census-by-level/`).
+- Decided by: Mei Tanaka, registrar's office, 3 November 2026.
+
+## Every split adds up to its total
+
+When a change splits a number people trust (by faculty, by level of study, by anything), the
+parts must add up to the whole. Write it as a test before you build the split: the parts' sum
+against the total already reconciled, and every row in exactly one part. A sum that comes up short
+is news: find the rows behind the difference, with a query that returns counts, not names, and ask
+the owner of the meaning where they belong (*Who approves what* in `AGENTS.md`); their answer goes
+into *Causes met so far*. Don't drop them, and don't change the test to pass. The worked example is
+`examples/census-by-level/`, where 28 exchange students had no level.

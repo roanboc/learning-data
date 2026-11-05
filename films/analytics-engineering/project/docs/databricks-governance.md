@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, section 10 on 4 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -150,6 +150,56 @@ where they are, on any platform, with a recipient token that ends within a year,
 sent with it. A product that holds personal data isn't shared outside without an agreement that
 allows it.
 
+## 9. Agents, under the same rules
+
+An agent that works on its own, at night or in a job, never signs in as a person: not with their
+sign-in, and not with their personal access token, which Databricks calls a legacy way to sign in.
+It works as its own service principal, an identity made for software (`AGENTS.md`, *Your access*),
+and a person owns it and answers for what it does. Then the sections above hold for it as they do
+for people.
+
+1. **Only what its job needs.** Grant the service principal what its job reads, and nothing to write
+   where it only reads. The registrar's office's agent, which answers the faculties' weekly counts,
+   reads the core and writes nowhere:
+
+   ```sql
+   grant use catalog on catalog <production catalog> to `<registrar agent>`;
+   grant use schema, select on schema <production catalog>.<schema>_core to `<registrar agent>`;
+   ```
+
+   To stop it, an admin deactivates its service principal: it can't sign in, everyone else works on,
+   and its grants stay for when it's switched on again.
+2. **The masks it already meets.** Section 3's policy masks every column tagged `direct` for
+   `account users` except the readers, and `account users` holds every user and every service
+   principal in the account. An agent outside the readers' group reads stars, as Clara does, with no
+   rule written for agents, and a row filter's `TO` clause covers it the same way. The learner code
+   stays readable, so an agent can count without a name.
+3. **Its tools, granted like tables.** A Unity Catalog function an agent calls as a tool needs
+   `EXECUTE` on it, with `USE CATALOG` and `USE SCHEMA` on its catalog and schema: the agent can run
+   it, and can't change it. The census count is one, `census_day_students(faculty)`
+   (`examples/agents-on-databricks/census_day_students.sql`):
+
+   ```sql
+   grant execute on function <production catalog>.<planning schema>.census_day_students to `<census agent>`;
+   ```
+
+4. **Models and tool servers, through Unity Gateway.** Unity Gateway, part of Unity Catalog, has been
+   generally available since 4 August 2026. Each model the university allows is a model service in
+   the catalog. By default only its owner can call it: to let an agent call it, grant the agent's
+   service principal `EXECUTE` on it, with `USE CATALOG` and `USE SCHEMA` on its catalog and schema.
+   Tool servers from outside are registered the same way, as MCP services, each with its own
+   `EXECUTE`. On each service:
+   - **Service policies**, in Beta, check what goes in and what comes out.
+     `system.ai.detect_sensitive_data` finds structured personal data in a prompt, such as an email
+     address, and blocks the call or redacts the value; it finds no names.
+     `system.ai.block_jailbreak` detects jailbreak and prompt-injection content.
+   - **A rate limit**, in queries or tokens a minute, for a user, a group or a service principal.
+   - **Usage**: every call is a row of `system.ai_gateway.usage`, with its requester (a user or a
+     service principal) and its tokens, so the office an agent works for sees what it costs.
+5. **Its work, under its own name.** Section 6's query lists the agent's reads under its service
+   principal's ID, apart from people's; `system.access.table_lineage` shows the tables its queries
+   read; and section 7's review lists its grants with everyone else's.
+
 ## 10. Context and memory, one way
 
 What agents read is governed like any data (`AGENTS.md`, *Context and memory are data*). Its home is
@@ -176,7 +226,7 @@ goes one way, to where agents read it on Databricks, and nobody edits it there.
    Deleting a session, or a session store, doesn't delete the memory kept from it: an entry is
    deleted as its file, here, and from the team's store at the next load.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; the next four on 29 October 2026; *Skills support in Unity Gateway* to the end on 4 November 2026)
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -199,6 +249,28 @@ goes one way, to where agents read it on Databricks, and nobody edits it there.
 - Databricks, *Create a recipient object for non-Databricks users using bearer tokens* (tokens valid for at most a year):
   https://docs.databricks.com/aws/en/delta-sharing/create-recipient-token
 - Databricks Labs, Ontos, its access request workflows and their defaults: https://github.com/databrickslabs/ontos
+- Databricks, *Unity Gateway release notes* (generally available, 4 August 2026):
+  https://docs.databricks.com/aws/en/release-notes/unity-gateway/
+- Databricks, *AI governance*: https://docs.databricks.com/aws/en/ai-gateway/ai-governance
+- Databricks, *Model services* (only the owner can call one until it grants `EXECUTE`):
+  https://docs.databricks.com/aws/en/ai-gateway/model-services
+- Databricks, *Govern an MCP*: https://docs.databricks.com/aws/en/ai-gateway/govern-mcp-service
+- Databricks, *Rate limits*: https://docs.databricks.com/aws/en/ai-gateway/rate-limits
+- Databricks, *Usage tracking*: https://docs.databricks.com/aws/en/ai-gateway/usage-tracking
+- Databricks, *Service policies for AI securables* (Beta):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/service-policies/
+- Databricks, *Detect sensitive data with a service policy* (its categories; names aren't among them):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/service-policies/detect-sensitive-data
+- Databricks, *Service principals*: https://docs.databricks.com/aws/en/admin/users-groups/service-principals
+- Databricks, *Manage service principals* (deactivation keeps its permissions):
+  https://docs.databricks.com/aws/en/admin/users-groups/manage-service-principals
+- Databricks, *Groups* (`account users` holds every user and service principal):
+  https://docs.databricks.com/aws/en/admin/users-groups/groups
+- Databricks, *Authenticate with Databricks personal access tokens (legacy)*:
+  https://docs.databricks.com/aws/en/dev-tools/auth/pat
+- Databricks, *Create a custom tool* (a function as a tool needs `EXECUTE`):
+  https://docs.databricks.com/aws/en/agents/custom-agents/create-custom-tool
+- Databricks, *Lineage system tables*: https://docs.databricks.com/aws/en/admin/system-tables/lineage
 - Databricks, *Skills support in Unity Gateway* (Beta): https://docs.databricks.com/aws/en/agents/uc-skills/
 - Databricks, *Govern skills* (the creator is the owner; the volume privileges; the audit):
   https://docs.databricks.com/aws/en/ai-gateway/govern-skills

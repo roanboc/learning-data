@@ -60,14 +60,32 @@ YN = {1958: A3, 1969: Cs4, 1986: E4, 2012: A4, 2017: Cs5, 2020: E5, 2022: Fs5, 2
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
 # serpent low and quiet; the effects about 12 dB under the music (FX scales them all). After the author's review (4 November 2026:
 # "glitches"), the cittern is 4 dB lower and the serpent 2 dB, so the music's loud moments sit as low as the governance films' (tools/
-# quiet.py measures it), and the effects 6 dB lower, as soft as theirs
-CL, SL, FX = 0.108, 0.04, 2.25
+# quiet.py measures it), and the effects 6 dB lower, as soft as theirs. With the room set by what it rings where the notes are (below),
+# the cittern is 1.6 dB higher and the serpent 3.1 dB, so each is as loud as before, its echo now quieter
+CL, SL, FX = 0.130, 0.057, 2.25
 
-# a small room of wood and plaster round the players, ringing on for about a second and a half
+# a small room of wood and plaster round the players, ringing on for about a second and a half. Its level is set by what it rings
+# where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back to its own level after it (_held), as
+# the video guidelines ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said, and made the
+# serpent's held notes 1.5 to 4.7 dB louder, each by where the room's reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.4)).astype(np.float32))(np.arange(int(1.4 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
 def _room(sig, amt):
     return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32)
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- the cittern: wire strings, brass below and steel above, plucked with a quill near the bridge, in pairs tuned exactly together.
 # The quill near the bridge gives a bright, even spread of harmonics, the second to the sixth strongest; wire rings on longer than gut,
@@ -110,7 +128,7 @@ def ser(m, a, b, g=0.8, att=0.2, rel=0.6, pan=-0.15):
         env = env * (0.84 + 0.16 * np.sin(np.pi * np.clip(x / sec, 0, 1)))
     s = s * env; nb = min(n, int(0.3 * SR))
     s[:nb] += 0.02 * filt(noise(0.3), 'band', (200, 1100))[:nb] * np.exp(-np.arange(nb) / SR / 0.07)
-    s = _room(filt(s.astype(np.float32), 'low', 1800), 0.4)
+    s = _held(filt(s.astype(np.float32), 'low', 1800), 0.4)
     put(s.astype(np.float32), a, g * SL, pan)
 
 # ---- what the two play

@@ -69,9 +69,15 @@ Db5, Eb5, F5 = 73, 75, 77
 # sits as low as the governance films' (tools/quiet.py measures it)
 HG, RK, FX = 0.028, 0.036, 3.1
 
-# a room of stone and oak round the players, ringing on for about a second and a half
+# a room of stone and oak round the players, ringing on for about a second and a half. Its level is set by what it rings where the
+# notes are (its gain from 100 Hz to 1.5 kHz is one), as the video guidelines ask: scaled by all it rang, as at first, it rang 10 dB
+# louder there than its share said. _room() keeps each note as loud as it was dry, as before
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.5)).astype(np.float32))(np.arange(int(1.5 * SR)) / SR)
-_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= _band(_IR)
 def _room(sig, k, a=0.0, b=1.0):
     """the room round a note; it keeps the note as loud as it was dry (its rms from a to b seconds), because a room lifts some pitches
     and hollows others, and every note should sound as loud as its neighbours"""
@@ -234,8 +240,8 @@ def books(s, sec, g=0.004, pan=0.0):
 rw = lambda lid, word, off=0: W('rule', lid, word, off)
 rc = lambda lid, off=0: G('rule', lid, off)
 gives, scholars, longroom = rw('duke', 'gives'), rw('duke', 'scholars'), rw('duke', 'long room')
-# Oxford, in the 1400s: the long room, its lecterns waiting
-duet([(Ab4, 1.5), (Bb4, 0.7), (Ab4, 0.7), (F4, 2.2)], [(Db2, 0.0, 5.0)], 0.4)
+# Oxford, in the 1400s: the long room, its lecterns waiting; the film's first phrase 1 dB softer, as it begins
+duet([(Ab4, 1.5), (Bb4, 0.7), (Ab4, 0.7), (F4, 2.2)], [(Db2, 0.0, 5.0)], 0.4, 0.89)
 # the duke gives his books: they arrive down the room, far ones first, the nearest four on the scholar's desk last
 duet([(F4, 0.8), (Gb4, 0.8), (Ab4, 1.2), (Db5, 2.2)], [(Gb2, 0.0, 2.4), (Ab2, 2.5, 4.9)], gives - 0.35)
 books(gives + 0.9, 1.6, 0.0045, px(900))

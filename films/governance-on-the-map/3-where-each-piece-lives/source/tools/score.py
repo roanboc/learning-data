@@ -70,8 +70,10 @@ def hz(m, k='Bb'):
 # ---- the levels: the harpsichord sits about as far under the narrator as the series' other films' music (matched by loudness, not by
 # peak); the clavichord a little under it, and further off; the effects about 20 dB under the music (FX scales them all). Since the
 # author's review of What an agent is (4 November 2026) both are 3 dB lower, as low as in the governance films the author accepted
-# (tools/quiet.py measures them), and the effects as much, so they stay about 20 dB under the music
-RL, FX = 0.058, 1.24
+# (tools/quiet.py measures them), and the effects as much, so they stay about 20 dB under the music. With the rooms set by what they
+# ring where the notes are (below), the harpsichord and the clavichord are 2.3 dB higher, so the music's loud moments are where they
+# were, its echo now quieter
+RL, FX = 0.0756, 1.24
 LEVEL = {'hps': 1.0, 'clv': 0.8}
 PAN = {'hps': -0.18, 'clv': 0.32}  # the harpsichord a little left of the middle; the clavichord, the copies, across the room from it
 
@@ -82,10 +84,17 @@ PAN = {'hps': -0.18, 'clv': 0.32}  # the harpsichord a little left of the middle
 # harmonics stop at 2.7 kHz, and the whole score is low-passed at the end. No string is detuned from its note, and none trembles.
 # The two stand in one small room (room(), about a second and a quarter); the copies are further off, in a larger, darker echo (2.4 s)
 FL, FR = np.zeros_like(ML), np.zeros_like(MR)
+# Each room's level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), as the video guidelines ask:
+# scaled by all they rang, as at first, the small room rang 10.5 dB louder there than its share said and the far echo 11 dB. The notes
+# are plucked, so none is held for the room to move (tools/quiet.py checks it)
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 def _ir(sec, lp, seed, pre):
     r = np.random.default_rng(seed); x = np.arange(int(sec * SR)) / SR
     ir = filt((r.standard_normal(len(x)) * np.exp(-6.9 * x / sec)).astype(np.float32), 'low', lp); ir[:int(pre * SR)] = 0
-    return ir / np.sqrt((ir ** 2).sum())
+    return ir / _band(ir)
 _IR, _FARL, _FARR = _ir(1.25, 1700, 11, 0.016), _ir(2.4, 1150, 12, 0.035), _ir(2.4, 1150, 13, 0.035)
 def _pluck(f, d, tilt, beta, top, t60, half, att, click, rel):
     """a plucked or struck string at f Hz, its key held d seconds and then damped: the sum of its harmonics"""

@@ -1928,26 +1928,88 @@ function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;c
 const gv_io=(t,t0,t1,d)=>fin(t,t0,d||0.4)*(1-fin(t,t1,d||0.4));
 
 /* ---------- the camera ---------- */
-// keys are [time, x, y, zoom], each move eased over d seconds (1.4 at least); push closes in a little more, slowly; kept inside the frame
-function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+// keys are [time, x, y, zoom], each move eased over d seconds (1.4 at least); push closes in a little more, slowly; kept inside the frame.
+// In one room the camera never jumps: a cut between two framings of one place makes the whole picture jump a little in, out or aside
+// (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+// vanishes in that frame, which the author saw as a jump in the zoom (4 November 2026). So a shot in the same room as the one before
+// (the same place, or two places GV_ROOMS makes one room; a shot that draws its own scene, with no place, names it in room) starts
+// where that one's camera is and glides to its own framing over its d,
+// and while it comes in, the shot before is drawn through that same camera: what both show stays put, and only what changed fades.
+// So what both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in
+// the same room, with people elsewhere, is marked later:true: what the shot before shows leaves over its last dis seconds, the bare
+// room shows for an instant (its place, and what GV_BARE draws in it), and the later moment's people and things come in over its first
+// dis, while the camera glides on. A cut there makes all of them vanish in one frame, and people a few steps away jump.
+// Only a change that moves the picture GV_NEWSHOT px or more at its corners is a new shot, which may cut
+const GV_NEWSHOT=300,GV_ROOMS={},GV_BARE={};let GV_JOIN=null,GV_PROBE=null;
+const gv_room=p=>p&&(GV_ROOMS[p]||p),gv_roomOf=sh=>sh&&gv_room(sh.room||sh.place);
+function gv_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
     x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-// one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
-function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
-// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
-    till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else gv_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function gv_focus(ctx,t,keys,d,push){const c=gv_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function gv_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return gv_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function gv_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function gv_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot: its place under the camera (its own, or cam when it shares one with the shot it dissolves with), then what it draws on top,
+// in the place's coordinates; the shot closes in slowly until the next
+function gv_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||gv_camOf(sh,t,till);cam=gv_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function gv_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what GV_BARE draws in it (a light that every shot of it draws)
+function gv_bare(ctx,S,t,place,cam){gv_shot(ctx,S,t,{place,draw:GV_BARE[place]||null},t+1,cam);}
+// a chapter cut into shots, [{at, place, keys, draw, push, d, dis}]: each comes in from the one before over dis seconds (or its own
+// dis); returns the shot. Between rooms, a shot marked cut (cut:true) comes in on a cut: when two shots show the same people or the same
+// words, a dissolve lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){const join=GV_JOIN;GV_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=gv_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?gv_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:gv_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&gv_roomOf(sh)&&gv_room(pv.place)===gv_roomOf(sh)&&gv_camMove(pv.cam,gv_camOf(sh,sh.at,till(k)))<GV_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:gv_roomOf(shots[i]),glides,dip};
+  if(GV_PROBE){Object.assign(GV_PROBE,{cam,place:gv_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)gv_shot(ctx,S,t,sh,till(i),join.cam);else{gv_bare(ctx,S,t,sh.place,join.cam);gv_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){gv_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);gv_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));gv_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else gv_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function gv_probe(sc,t){const c=wc_buf("probe",2,2)[1],was=GV_PROBE,j=GV_JOIN;GV_PROBE={};try{sc.draw(c,0.001,t,sc);return GV_PROBE.cam?GV_PROBE:null;}
+  catch(e){return null;}finally{GV_PROBE=was;GV_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.gvEnd!==undefined?pv.gvEnd:(pv.gvEnd=gv_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=GV_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});GV_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{GV_JOIN=was;if(J.out&&!J.cam)nx.gvLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.gvLast&&Math.abs(nx.gvLast.t-lt)<1e-6?nx.gvLast:gv_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=GV_JOIN;GV_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{GV_JOIN=was;}};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -3532,9 +3594,12 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
     if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
   gv_shots(ctx,S,t,sc.dur,[
     // the data team checks both numbers: Jun takes them back down the floor to his team; it starts as the last chapter left the floor,
-    // so nothing doubles as the two dissolve
-    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.1,368,1250,380);
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});os_carrier(x,"jun",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // so nothing doubles as the two dissolve: Jun stands where it left him until its end has gone, then takes up his notebook (over
+    // 0.4 s) and walks, and the camera follows him
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.9,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const F=GV_FL,w=gv_walk(tt,1.05,F.x(1)-16,1250,380),m=fin(tt,0.65,0.4);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});
+      if(m<1)person(x,"jun",F.x(1)-16,F.walk,0.62,{pose:gv_walkInto("os_junUp",null,"os_carry",m),t:tt,carry:m>0?(cx,P_,h)=>withA(cx,m,()=>heldNotebook(cx,P_,h)):null});
+      else os_carrier(x,"jun",w,F.walk,0.62,heldNotebook,{t:tt});}},
     // the data team's board: both reports are right, each by its own meaning of award
     {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
     // Jun's screen: the glossary's term, and the row added on Monday

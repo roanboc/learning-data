@@ -58,14 +58,33 @@ LIMIT, LOWER = 69, 67  # the cornet's A, the limit, and the G a tone below, wher
 # little above them; the effects about 12 dB under the music (FX scales them all)
 # After the author's review of the series' opening films (4 November 2026), the music is 2 dB lower and the effects 2.5 dB, so
 # the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them); and F major, held 15
-# times after the opening, twice within seconds of itself, is held 9 times: at three chapters' turns, as a chapter settles, and at the end
-OL, CL, FX = 0.024, 0.033, 2.4
+# times after the opening, twice within seconds of itself, is held 9 times: at three chapters' turns, as a chapter settles, and at the end.
+# With the room set by what it rings where the notes are (below), the ondes are 2 dB higher and the cornet 2.4 dB, so each is as loud
+# as before, its echo now quieter
+OL, CL, FX = 0.0302, 0.0435, 2.4
 
-# a room round the players: a small hall, ringing on for about a second and a half, and nothing much above 1.6 kHz
+# a room round the players: a small hall, ringing on for about a second and a half, and nothing much above 1.6 kHz. Its level is set
+# by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back to its own level after
+# it (_held), as the video guidelines ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said,
+# and moved the ondes' held notes by -6.4 to +5.0 dB and the cornet's by about +2 to +4.6, each by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.6)).astype(np.float32))(np.arange(int(1.6 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.022 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.022 * SR)] = 0; _IR /= _band(_IR)
 def _room(s, room):
     return (np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)) if room else s
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- the ondes Martenot: an oscillator's near-sine note, a little hollow (a touch of its third and fifth partials), swelled in and out
 # by the player's intensity key, held at one pitch: no vibrato, no slide. Its palme speaker: strings tuned to the scale ring
@@ -92,7 +111,7 @@ def ond(m, a, b, g=1.0, att=0.35, rel=0.5, pan=0.0, palme=0.32, room=0.28):
         h += bk * hk * np.sin(2 * np.pi * f * k * x + 1.3 * k + 0.4)
     s = s + palme * h / max(1e-9, float(np.abs(h).max())) * float(np.abs(s).max())
     s = filt((s / max(1e-9, float(np.abs(s).max()))).astype(np.float32), 'low', 2400)
-    put(_room(s, room).astype(np.float32), a, g * OL, pan)
+    put(_held(s, room).astype(np.float32), a, g * OL, pan)
 
 def hold(ch, a, b, g=1.0, att=1.2, rel=0.9, pans=(-0.25, 0.05, 0.22)):
     """a chord held by three ondes, one to a note, the lowest first and the others a moment apart"""
@@ -124,7 +143,7 @@ def cor(m, a, b, g=1.0, att=0.09, rel=0.28, pan=0.12, room=0.3):
     br = filt(noise(0.09)[:int(0.09 * SR)], 'band', (500, 1800)) * np.exp(-np.arange(int(0.09 * SR)) / SR / 0.025) * 0.035
     s[:len(br)] += br
     s = filt(s.astype(np.float32), 'low', 2300)
-    put(_room(s, room).astype(np.float32), a, g * CL, pan)
+    put(_held(s, room).astype(np.float32), a, g * CL, pan)
 
 def limit(a, b, g=1.0, m=LIMIT):
     """the cornet holds the limit; a note longer than about seven seconds takes a breath and goes on"""

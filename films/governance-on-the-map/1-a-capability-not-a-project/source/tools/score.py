@@ -64,9 +64,10 @@ def hz(m, k='Db'):
 
 # ---- the levels: a saxophone sits about as far under the voice as the series' other films' music (each matched by loudness, not by
 # peak); the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is (4 November 2026)
-# the saxophones are 1 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them), and the
-# effects as much, so they stay about 12 dB under the music
-RL, FX = 0.0265, 1.15
+# the saxophones are 1 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them), and the effects
+# as much, so they stay about 12 dB under the music. With the room set by what it rings where the notes are (below), the saxophones
+# are 2 dB higher, so each is as loud as before, its echo now quieter
+RL, FX = 0.0334, 1.15
 LEVEL = {'sop': 0.95, 'alto': 1.15, 'ten': 1.1, 'bari': 1.05}
 PAN = {'sop': -0.3, 'alto': -0.1, 'ten': 0.12, 'bari': 0.28}  # as a quartet sits: soprano on the left, baritone on the right
 
@@ -81,8 +82,27 @@ SAX = {  # formants as (Hz, width, weight); the corner under which the harmonics
     'alto': ([(600, 420, 1.0), (1200, 520, 0.4), (1950, 600, 0.09)], 210, 1250, 0.055, (650, 1600)),
     'ten': ([(430, 320, 1.0), (900, 440, 0.4), (1650, 560, 0.09)], 140, 1000, 0.06, (450, 1300)),
     'bari': ([(300, 230, 1.0), (650, 360, 0.42), (1300, 480, 0.1)], 95, 760, 0.07, (300, 1000))}
+# A small room round the players. Its level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and
+# each held note is set back to its own level after it (_held), as the video guidelines ask: scaled by all it rang, as at first, the
+# room rang 10 dB louder there than its share said, and moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.05)).astype(np.float32))(np.arange(int(1.05 * SR)) / SR)
-_IR = filt(_IR, 'low', 1800); _IR[:int(0.014 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1800); _IR[:int(0.014 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 def _harm(inst, f, soft=1.0):
     """the weights of a note's harmonics on inst, at f Hz"""
     F, lo, hi = SAX[inst][:3]; n = max(1, int(2500 // f)); k = np.arange(1, n + 1); fk = f * k
@@ -125,8 +145,7 @@ def _line(inst, segs, g, k, soft, att, rel, tongue, room, pan, tie):
     lo, hi = SAX[inst][4]
     s = s * lev + 0.026 * filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)) * e * lev * (1 + 2.5 * np.exp(-x / (0.012 if tongue else 0.035)))
     s = filt(s.astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), T0, g * RL * LEVEL[inst], pan)
 def note(inst, m, s, sec, g=1.0, k='Db', **o):
     """one held note"""

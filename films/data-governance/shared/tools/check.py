@@ -4,8 +4,9 @@ each place the film paints, painted again from nothing, leaves the page drawing 
 paints the places one by one while the film plays, so a place that keeps the browser busy for seconds holds up the film, its
 soundtrack and the whole page. A blur set before many strokes of a full-size picture (the browser blurs every stroke) once held
 the page for seven seconds; paint such a picture sharp on a layer and blur the layer once. Then nothing shows twice where the film
-changes shot or chapter (twice.py), and last, nobody's arm jumps in one frame (steady.py)."""
-import runpy, steady, twice
+changes shot or chapter (twice.py), nobody's arm jumps in one frame (steady.py), and last, nothing jumps where the film changes
+shot or chapter (jump.py): in one room the camera glides, and what changes fades."""
+import jump, runpy, steady, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
@@ -31,6 +32,7 @@ with sync_playwright() as p:
       return out; }""")
     tw = twice.check(pg)
     st = steady.check(pg)
+    jp = jump.check(pg)
     b.close()
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
@@ -54,5 +56,12 @@ if st[1]:
     failed.append('%d arms jump in one frame' % len(st[1]))
 else:
     print('no arm jumps in one frame')
+print(jp[0])
+for l in jp[1]:
+    print('  ' + l)
+if jp[1]:
+    failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
+else:
+    print('nothing jumps where the film changes shot or chapter')
 if failed:
     raise SystemExit('; '.join(failed))

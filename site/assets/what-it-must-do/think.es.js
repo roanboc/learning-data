@@ -6,12 +6,12 @@ window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   "who":{stop:"survive",q:"«Operaciones de Red» es un recuadro del primer mapa de capacidades de Tomás. ¿Qué tiene de malo?",
-    opts:[{t:"Nada: es lo que hace el equipo."},{t:"Debería dividirse en dos recuadros."},{t:"Es un equipo, quién hace el trabajo. Los equipos cambian; lo que hay que hacer se queda.",ok:true}],
+    opts:[{t:"Es un proceso, cómo se hace el trabajo. Los procesos cambian; el equipo se queda.",near:true},{t:"Es un equipo, quién hace el trabajo. Los equipos cambian; lo que hay que hacer se queda.",ok:true},{t:"Nada: nombra lo que hace el equipo, que es lo que un mapa debe mostrar."}],
     why:"El equipo de Grace eran dos equipos hace dos años, y el año que viene puede ser parte de otro. Una capacidad es lo que hay que hacer, lo haga quien lo haga. Piensa en la última reestructuración donde trabajas: ¿qué tenía que seguir siendo capaz de hacer la organización después?"},
   "how":{stop:"survive",q:"«Usar el sistema de cortes» y «Despachar desde la sala de control»: ¿qué capacidad hay debajo de las dos?",
-    opts:[{t:"Gestionar los cortes.",ok:true},{t:"Operar la sala de control."},{t:"Comprar un sistema de cortes nuevo."}],
+    opts:[{t:"Operar la sala de control.",near:true},{t:"Comprar un sistema de cortes nuevo."},{t:"Gestionar los cortes.",ok:true}],
     why:"La primera nombra un sistema: con qué. La segunda nombra un proceso: cómo. Una capacidad sobrevive a una reestructuración, a un sistema nuevo y a un proceso nuevo; si un recuadro no sobreviviría, no es una capacidad."},
   "heat":{q:"Conectar clientes está en rojo en el mapa de calor. ¿Qué hace que valga la pena actuar sobre ese color?",
-    opts:[{t:"El rojo siempre significa que el equipo está fallando."},{t:"Su evidencia: conectar una instalación solar nueva tarda treinta y cuatro días hábiles, y la meta es diez.",ok:true},{t:"La mayoría votó por el rojo."}],
+    opts:[{t:"Su evidencia: conectar una instalación solar nueva tarda treinta y cuatro días hábiles, y la meta es diez.",ok:true},{t:"La mayoría en el taller votó por el rojo, así que es el color en que coinciden."},{t:"Su evidencia: el equipo de conexiones dijo en el taller que se estaba quedando atrás.",near:true}],
     why:"Cada color se apoya en evidencia, como cada nota de la pared. Un mapa de calor muestra dónde duele, así que muestra adónde debería ir el dinero. ¿Dónde le duele hoy a tu organización, y qué evidencia sujetarías a esa tarjeta?"}
   }}};

@@ -1,0 +1,75 @@
+{
+  "title": "Locks before the data",
+  "title_es": "Cerraduras antes que los datos",
+  "planned": 9,
+  "lead": "The first series of Data protection and privacy. A nightly job loads the registrar's data on Jun's own token, from a workspace open to the internet. Four films show the ideas behind a platform's locks, with no product named; five build them in Databricks, GitHub and Azure.",
+  "lead_es": "La primera serie de Protección de datos y privacidad. Un proceso nocturno carga los datos del registro con el token personal de Jun, desde un espacio de trabajo abierto a internet. Cuatro películas muestran las ideas detrás de las cerraduras de una plataforma, sin nombrar productos; cinco las construyen en Databricks, GitHub y Azure.",
+  "description": "Films on platform security for data teams: identity as the boundary, sign-in with no secret anyone keeps, walls and keys, admin power switched on only for a task, groups from the identity provider, workloads without secrets, private networks and storage only through the catalog, a reviewed path to production, and audit.",
+  "description_es": "Películas sobre la seguridad de la plataforma para equipos de datos: la identidad como frontera, accesos sin secretos que alguien guarde, muros y llaves, poder de administrador encendido solo para una tarea, grupos del proveedor de identidad, cargas sin secretos, redes privadas y almacenamiento solo a través del catálogo, un camino revisado a producción, y auditoría.",
+  "card": "Who and what may reach the platform, from where, with which proof, and who can switch on more power.",
+  "card_es": "Quién y qué puede llegar a la plataforma, desde dónde, con qué prueba, y quién puede encender más poder.",
+  "order": "Watch them in order: the ideas first, then the tools.",
+  "order_es": "Míralas en orden: primero las ideas, luego las herramientas.",
+  "thread_h": "One thread: a nightly job, from a borrowed token to its own name",
+  "thread_h_es": "Un hilo: un proceso nocturno, de un token prestado a un nombre propio",
+  "thread": "The job that loads the registrar's data every night runs on Jun Park's personal token, made in 2025 with no end date, from one workspace open to the internet. Film by film, Sam Okafor gives it a name of its own and no secret anyone keeps, puts the workspace behind private paths, moves the specialists' great power into admin accounts switched on for a task, lets production change only through review, and watches all of it.",
+  "thread_es": "El proceso que carga cada noche los datos del registro se ejecuta con el token personal de Jun Park, creado en 2025 sin fecha de fin, desde un espacio de trabajo abierto a internet. Película a película, Sam Okafor le da un nombre propio y ningún secreto que alguien guarde, pone el espacio de trabajo tras caminos privados, lleva el gran poder de los especialistas a cuentas de administrador que se encienden para una tarea, deja que producción cambie solo con revisión, y lo vigila todo.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who keeps the platform and its locks, and guides the series"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, whose nightly job ran on his own token"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, whose map sets the areas each wall follows"
+    ],
+    [
+      "biz",
+      "Owns the registrar's data",
+      "Mei Tanaka, who decides who may see it"
+    ],
+    [
+      "biz",
+      "Leads data governance",
+      "Yusuf Demir, who keeps the register of who owns what and the signed agreements"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que cuida la plataforma y sus cerraduras, y guía la serie"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, cuyo proceso nocturno corría con su propio token"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, cuyo mapa fija las áreas que sigue cada muro"
+    ],
+    [
+      "biz",
+      "Es dueña de los datos del registro",
+      "Mei Tanaka, que decide quién puede verlos"
+    ],
+    [
+      "biz",
+      "Lidera la gobernanza de datos",
+      "Yusuf Demir, que lleva el registro de quién es dueño de qué y los acuerdos firmados"
+    ]
+  ]
+}

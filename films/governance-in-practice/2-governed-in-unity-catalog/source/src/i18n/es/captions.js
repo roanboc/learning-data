@@ -4,7 +4,7 @@
    Words as in Who may see it: the classes are directa, seudónima and ninguna; the stars of a mask are asteriscos; a tag is una etiqueta, a code un código, a student number
    un número de estudiante, the learner table la tabla de estudiantes, and the registrar's office la oficina de registro; a purpose and an end date are un propósito y una
    fecha de fin. As in Governed in dbt: dueño, una construcción for a build, el control for the check, la plataforma, el catálogo. Here a grant is un permiso (to grant,
-   conceder), scrambled is codificado, a log una bitácora, preview versión preliminar, and next term's places los cupos del próximo semestre. Discover and dbt keep
+   conceder), scrambled is codificado, a log una bitácora, and next term's places los cupos del próximo semestre. Discover and dbt keep
    their names. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Today, in the platform team's room.":
@@ -93,14 +93,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La plataforma también dibuja el linaje de cada columna.",
 "Pick the learner's email, and it shows every table it flows into, down to the column.":
 "Elige el correo del estudiante, y muestra cada tabla a la que llega, hasta la columna.",
-"Tags can follow lineage by themselves, in beta.":
-"Las etiquetas pueden seguir el linaje solas, en beta.",
+"Tags can follow lineage by themselves.":
+"Las etiquetas pueden seguir el linaje solas.",
 "Here they don't need to: every table the email reaches is built by the project, which classes it there too,":
 "Aquí no hace falta: cada tabla a la que llega el correo la construye el proyecto, que también la clasifica allí,",
 "and the check stops a table that doesn't.":
 "y el control detiene una tabla que no lo hace.",
-"And the platform keeps a log, in preview, of who read each table, and when.":
-"Y la plataforma lleva una bitácora, en versión preliminar, de quién leyó cada tabla, y cuándo.",
+"And the platform keeps a log of who read each table, and when.":
+"Y la plataforma lleva una bitácora de quién leyó cada tabla, y cuándo.",
 "So Sam can answer what Yusuf wanted to know: who read the learner table this month.":
 "Así Sam puede responder lo que Yusuf quería saber: quién leyó la tabla de estudiantes este mes.",
 "Each December, the access review reads the grants themselves: who can read each table, through which group, and who's in it.":

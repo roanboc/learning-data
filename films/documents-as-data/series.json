@@ -1,0 +1,66 @@
+{
+  "draft": true,
+  "title": "Documents as data",
+  "title_es": "Documentos como datos",
+  "planned": 1,
+  "lead": "The last series of Modern data basics, in one film. Finance receives thousands of supplier invoices a month as PDF files, and HR keeps every signed contract. Documents are data to extract and context for agents. The film shows the platform's functions that read them, and where the docs go further.",
+  "lead_es": "La última serie de Lo básico de los datos modernos, en una película. Finanzas recibe miles de facturas de proveedores al mes en PDF, y RR. HH. guarda cada contrato firmado. Los documentos son datos que extraer y contexto para agentes. La película muestra las funciones que los leen, y dónde la documentación va más allá.",
+  "description": "A short film on documents as data and as context: invoices and contracts read into tables with the platform's functions, each file and its metadata kept beside them, and standard structures such as JSON and YAML where an application writes documents. In Databricks, at the level of architecture, with the official docs for the rest.",
+  "description_es": "Una película corta sobre los documentos como datos y como contexto: facturas y contratos leídos a tablas con las funciones de la plataforma, cada archivo y sus metadatos guardados junto a ellas, y estructuras estándar como JSON y YAML donde una aplicación escribe documentos. En Databricks, al nivel de la arquitectura, con la documentación oficial para el resto.",
+  "card": "An invoice is a file, a row of data and context for an agent. Read it with the platform, and keep the file.",
+  "card_es": "Una factura es un archivo, una fila de datos y contexto para un agente. Léela con la plataforma, y guarda el archivo.",
+  "order": "One film, the last of the module.",
+  "order_es": "Una película, la última del módulo.",
+  "thread_h": "One thread: an invoice and a contract",
+  "thread_h_es": "Un hilo: una factura y un contrato",
+  "thread": "Finance receives about 3,860 supplier invoices a month, most of them as PDF files, and HR keeps every contract its staff sign, Linh Nguyen's among them. The film reads them as data, with the platform's functions, into tables Finance can check, and keeps each file and its metadata as context an agent may cite, while who may read a document stays the work of governance and data protection.",
+  "thread_es": "Finanzas recibe unas 3.860 facturas de proveedores al mes, la mayoría en PDF, y RR. HH. guarda cada contrato que firma su personal, entre ellos el de Linh Nguyen. La película los lee como datos, con las funciones de la plataforma, a tablas que Finanzas puede revisar, y guarda cada archivo y sus metadatos como contexto que un agente puede citar, mientras que quién puede leer un documento sigue siendo trabajo de la gobernanza y de la protección de datos.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Pays the invoices",
+      "Rohan Desai, in Finance, whose team checks every supplier invoice before it's paid"
+    ],
+    [
+      "biz",
+      "Keeps the contracts",
+      "Ingrid Holm, in HR, who keeps every contract staff sign, and decides who may read them"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who decides where each file lives and what is kept beside it"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, who turns what the functions extract into tested tables"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Paga las facturas",
+      "Rohan Desai, de Finanzas, cuyo equipo revisa cada factura de proveedor antes de pagarla"
+    ],
+    [
+      "biz",
+      "Guarda los contratos",
+      "Ingrid Holm, de RR. HH., que guarda cada contrato que firma el personal, y decide quién puede leerlos"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que decide dónde vive cada archivo y qué se guarda junto a él"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, que convierte lo que extraen las funciones en tablas probadas"
+    ]
+  ]
+}

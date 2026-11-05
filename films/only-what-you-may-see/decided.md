@@ -1,0 +1,9 @@
+# Decided: Only what you may see
+
+The series' own decisions. The module's are in [`../locks-before-the-data/decided.md`](../locks-before-the-data/decided.md), with its plan in [`../locks-before-the-data/proposal.md`](../locks-before-the-data/proposal.md). With each film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row. A decision a film's thread makes goes in that film's file, so threads never edit the same lines.
+
+| Date | Decision |
+|---|---|
+| 3 November 2026 | Decided by the author: the series presents data classification, the ways to mask a value, and how they're built with Databricks' attribute-based access control, with tags carried downstream through lineage. |
+| 5 November 2026 | *Only what you may see* (*Solo lo que puedes ver*), the module's second series, is eight films: *An agreement first*, *Know what you hold* and *Show the least* on the ideas; *Grants by design*, *Tags that travel*, *One policy for many tables*, *Copies that keep the rules* and *Proof it held* in Databricks and dbt; in `films/only-what-you-may-see/`, at `only-what-you-may-see/` on the site; its cards say "Film N of 8". *Locks before the data* comes before it; *Kept for a reason* follows. Its thread: Anil Kurian's request for learners' records for a Faculty of Health study, from a signed agreement to a proof that the protection held. Mei Tanaka guides it. |
+| 5 November 2026 | Assumed: *Governed in Unity Catalog* stays as made, the overview; this series names it in a line and goes deeper on each mechanism, never re-showing its scenes. The classes are those of *Who may see it* (direct identifier, indirect identifier, special category, none), with a level for each table (public, internal, confidential, restricted). |

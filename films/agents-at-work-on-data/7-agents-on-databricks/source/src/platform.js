@@ -129,8 +129,8 @@ function od_genieAgent(ctx,T,o){o=o||{};const P=OD_PG,a=o.a==null?1:o.a;if(a<=0)
 
 /* ---------------------------------------------------------------- the tool servers
    The platform runs them, in one panel of its own ("Databricks"), a card for each: its name and what it does, a socket on the card's
-   left where an agent plugs in. od_tool: o.touch (0 to 1) lit blue; o.badge [text, a] a small grey pill at its right ("generally
-   available", "preview"); o.plug (0 to 1) a plug in its socket, the open standard's; o.a; o.k (0 to 1) it slides in */
+   left where an agent plugs in. od_tool: o.touch (0 to 1) lit blue; o.plug (0 to 1) a plug in its socket, the open standard's; o.a;
+   o.k (0 to 1) it slides in. No card says whether its server is in preview: that changes, and the film would have to change with it */
 const OD_TOOLS=[["Databricks SQL","runs queries"],["Unity Catalog functions","a function as a tool"],["AI Search","searches documents"],["Genie One","ask it"],["Genie Agent","Census day"]];
 const OD_TP={x:1200,y:206,w:656,h:640};
 function od_toolBox(i,o){o=o||{};const h=o.h||94,p=o.pitch||110;return{x:o.x||1232,y:(o.y||286)+i*p,w:o.w||592,h};}
@@ -146,9 +146,6 @@ function od_tool(ctx,b,name,sub,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)retur
   ag_T(ctx,name,b.x+44,b.y+(sub?44:b.h/2+11),{w:700,size:30});if(sub)ag_T(ctx,sub,b.x+44,b.y+80,{w:500,size:28,col:AG.mut});
   // the socket, on the left edge, and a plug in it
   ctx.fillStyle="#2E2F34";rr(ctx,b.x-8,cy-12,16,24,5);ctx.fill();if(o.plug>0)od_plug(ctx,b.x-8,cy,o.plug);
-  if(o.badge&&o.badge[1]>0){const s=o.badge[0],w=ag_tw(ctx,s,{w:600,size:28})+36,bx=b.x+b.w-w-18,by=cy-22;ctx.save();ctx.globalAlpha*=ag_in(o.badge[1],0,0.35);
-    const e=ag_spr(o.badge[1],0,0.4);ag_about(ctx,bx+w/2,cy,lerp(0.7,1,Math.min(1.1,e)));ctx.fillStyle="rgba(236,234,230,1)";rr(ctx,bx,by,w,44,22);ctx.fill();ctx.strokeStyle=rgba(AG.mut,0.6);ctx.lineWidth=1.8;rr(ctx,bx,by,w,44,22);ctx.stroke();
-    ag_T(ctx,s,bx+w/2,cy+10,{w:600,size:28,col:AG.mut,align:"center"});ctx.restore();}
   ctx.restore();}
 
 // the census count, written once, as a function: its name, its comment (what an agent reads as the tool's description), and the

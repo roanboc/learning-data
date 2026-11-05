@@ -205,7 +205,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     history:wAt(sc,"history","history"),who:wAt(sc,"history","who changed"),why:wAt(sc,"history","and why"),
     oneway:wAt(sc,"oneway","one way"),dbx:wAt(sc,"oneway","Databricks"),
     uc:wAt(sc,"comments","Unity Catalog"),comments:wAt(sc,"comments","comments"),column:wAt(sc,"comments","column"),
-    gw:wAt(sc,"skills","Unity Gateway"),beta:wAt(sc,"skills","in beta"),obj:wAt(sc,"object","Unity Catalog object"),sOwner:wAt(sc,"object","an owner"),perm:wAt(sc,"object","permissions"),rec:wAt(sc,"object","a record"),
+    gw:wAt(sc,"skills","Unity Gateway"),obj:wAt(sc,"object","Unity Catalog object"),sOwner:wAt(sc,"object","an owner"),perm:wAt(sc,"object","permissions"),rec:wAt(sc,"object","a record"),
     nobody:wAt(sc,"nobody","Nobody"),starts:wAt(sc,"nobody","A change starts")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the repository, each thing lit as it's named; at the right, the owners' list, then a change, then its history
@@ -238,7 +238,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const ta=ag_in(tt,T.uc-0.3,0.4),tb=cm_table(cx,610,210,640,{name:"mart_planning__near_award",comment:"Every award a learner was enrolled in, or held credit towards, on the census date, …",
         cols:[["census_date","Planning's census date: the date the numbers are as at.",ag_in(tt,T.column-0.2,0.4)]],commentA:ag_in(tt,T.comments-0.2,0.4),a:ta,k:Math.min(1,ag_spr(tt,T.uc-0.3,0.5))});
       const sr=[["A Unity Catalog object",T.obj],["An owner",T.sOwner],["Permissions",T.perm],["A record of who read or changed it",T.rec]];
-      const sa=ag_in(tt,T.gw-0.3,0.4),sb=cm_skill(cx,1280,210,560,{name:"reconcile-and-diff",rows:sr.map(r=>[r[0],ag_in(tt,r[1]-0.15,0.4)]),beta:ag_in(tt,T.beta-0.1,0.4),a:sa,k:Math.min(1,ag_spr(tt,T.gw-0.3,0.5))});
+      const sa=ag_in(tt,T.gw-0.3,0.4),sb=cm_skill(cx,1280,210,560,{name:"reconcile-and-diff",rows:sr.map(r=>[r[0],ag_in(tt,r[1]-0.15,0.4)]),a:sa,k:Math.min(1,ag_spr(tt,T.gw-0.3,0.5))});
       // Jun's agent reads both there
       const aa=ag_in(tt,T.uc+0.4,0.5);cm_agent(cx,1262,760,54,tt,{a:aa,think:0.2,core:0.75,label:"Jun's agent",floor:850});
       cm_reads(cx,tb.x+tb.w*0.55,tb.y+tb.h+6,1222,722,ag_sine(clamp((tt-T.uc-0.5)/0.9,0,1))*ta,{t:tt,bend:20});
@@ -257,7 +257,7 @@ const CM_ENTRIES=["read-the-glossary-first.md","say-which-term-a-count-is-for.md
 function cm_before(o){o=o||{};return CM_MEM.map(m=>({text:m[0],tick:1})).concat([{text:CM_EXAM_T,tick:1},{text:CM_ROOMS_T,tick:0}]).map((cd,k)=>Object.assign(cd,o.each?o.each(k):{}));}
 scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     write:wAt(sc,"different","agents write"),
-    dbx:wAt(sc,"lakebase","On Databricks"),sessions:wAt(sc,"lakebase","sessions"),lasting:wAt(sc,"lakebase","lasting memory"),lake:wAt(sc,"lakebase","Lakebase"),beta:wAt(sc,"lakebase","in beta"),
+    dbx:wAt(sc,"lakebase","On Databricks"),sessions:wAt(sc,"lakebase","sessions"),lasting:wAt(sc,"lakebase","lasting memory"),lake:wAt(sc,"lakebase","Lakebase"),
     step:wAt(sc,"daily","A step"),once:wAt(sc,"daily","once a day"),readsS:wAt(sc,"daily","reads the sessions"),keeps:wAt(sc,"daily","keeps what"),asking:wAt(sc,"daily","without asking"),
     campus:wAt(sc,"how","campus line"),lost:wAt(sc,"how","lost its words"),merged:wAt(sc,"how","merged"),other:wAt(sc,"how","other lines"),built:wAt(sc,"how","as it's built"),
     room:wAt(sc,"room","one room"),whoever:wAt(sc,"room","whoever may write"),any:wAt(sc,"room","any entry"),nothing:wAt(sc,"room","nothing records"),
@@ -284,8 +284,6 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_arrow(cx,[794,702,842,702,898,702,946,702],ag_in(tt,T.keeps-0.4,0.5),{col:AG.violet,lw:3.5,head:12});
       const add=ag_in(tt,T.keeps+0.1,0.5),ga=add*(1-ag_in(tt,T.asking+1.2,0.6));
       cm_file(cx,1400,770,{a:ag_in(tt,T.lasting-0.3,0.5),cards:cm_before({each:k=>k===5?{a:add,glow:ga>0?AG.violet:null,glowA:ga}:{}})});
-      // sessions and memory are in beta; Lakebase isn't: the mark sits on the two stores
-      cm_pillAt(cx,690,302,"beta",tt,T.beta-0.1,null,{size:28,col:AG.blue});cm_pillAt(cx,1296,374,"beta",tt,T.beta+0.1,null,{size:28,col:AG.blue});
       cm_pillAt(cx,590,820,"no one reviews it",tt,T.asking,null,{icon:"warn",col:AG.amber,size:28});}},
     // how the campus line lost its words: the step merges the room bookings line into it, as it's built to, and its title becomes
     // Campus only; the store is one room: whoever may write to it may change any entry, and nothing records what it said before
@@ -410,7 +408,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const bna=1-ag_in(tt,T.docs-0.8,0.4);if(bna>0){cx.save();cx.globalAlpha*=bna;cm_bin(cx,460,560,84,rgba(AG.mut,0.95),ag_io(tt,T.delChat-0.1,T.delChat+0.9,0.3));cx.restore();}
       cm_file(cx,1430,760,{cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>ag_in(tt,T.delNothing-0.2,0.4)})});
       cm_pillAt(cx,1430,300,"still in the team's memory",tt,T.delNothing,null,{icon:"warn",col:AG.amber,size:28});
-      const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,860,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions \u00b7 beta",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
+      const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,860,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
     // the sync that copies skills to the platform never deletes one
     {later:true,at:c.sync-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_repo(cx,40,220,700,CM_SKILLS.map((n,i)=>({name:"skills/"+n+"/",folder:1,strike:i===2?1:0,note:i===2?"deleted":null,noteCol:AG.amber,col:i===2?AG.amber:null})),{nameW:470});
@@ -418,7 +416,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_script(cx,800,330,"Skill sync","copies, never deletes",{a:sa,k:Math.min(1,ag_spr(tt,T.syncW-0.3,0.5)),turn:Math.max(0,tt-T.syncW)*0.5,glow:ag_io(tt,T.neverDel-0.3,T.neverDel+1.4,0.4)});
       cm_arrow(cx,[744,392,760,392,776,392,796,392],ag_in(tt,T.syncW-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
       cm_arrow(cx,[1234,392,1250,392,1266,392,1286,392],ag_in(tt,T.syncW+0.3,0.4),{col:AG.blue,lw:3.5,head:12});
-      const za=ag_in(tt,T.syncW,0.4);cm_zone(cx,1300,170,580,520,"Unity Gateway skills · beta",{a:za});
+      const za=ag_in(tt,T.syncW,0.4);cm_zone(cx,1300,170,580,520,"Unity Gateway skills",{a:za});
       CM_SKILLS.forEach((n,i)=>{const g=i===2?ag_in(tt,T.neverDel,0.4):0;cx.save();cx.globalAlpha*=za;cm_index(cx,1332,260+i*76,516,56,{text:n,glow:g>0?AG.amber:null,glowA:g});cx.restore();});
       cm_pillAt(cx,1590,560,"still on the platform",tt,T.neverDel+0.2,null,{icon:"warn",col:AG.amber,size:28});}},
     // delete where it's kept: the line's file, in a pull request that says why; its entry, at the next load; the record stays

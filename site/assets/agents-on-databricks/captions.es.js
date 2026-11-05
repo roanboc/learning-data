@@ -3,8 +3,8 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series and the earlier films: el día del censo, la Facultad de Salud, el proyecto de datos, el equipo de datos, una consulta for a
    query, una prueba for a test, las habilidades for skills, una rama for a branch, producción, la plataforma, de solo lectura. New here: la carga
-   estudiantil for student load, los servidores de herramientas for tool servers, las tablas gobernadas, el inicio de sesión, el estándar abierto, en
-   versión preliminar for preview and disponible de forma general, los jueces for the judges, el trabajo for the nightly job, los pipelines. The
+   estudiantil for student load, los servidores de herramientas for tool servers, las tablas gobernadas, el inicio de sesión, el estándar abierto,
+   los jueces for the judges, el trabajo for the nightly job, los pipelines. The
    platform's names stay as they are on screen: Databricks, Unity Catalog, Genie One, Genie Agents, the Census day agent, Agent Bricks, Agent
    Runtime, Genie Code, MCP, SQL, dbt; so do the degree names the picture shows («Health», Health data). Numbers keep the picture's comma (2,880),
    as the series' other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
@@ -93,8 +93,6 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Todos los agentes la llaman, y ninguno escribe un conteo propio.",
 "They follow the open standard, MCP, so any agent can plug in.":
 "Siguen el estándar abierto MCP, así cualquier agente puede conectarse.",
-"Genie One's tool server is generally available; the others are in preview.":
-"El servidor de herramientas de Genie One está disponible de forma general; los otros, en versión preliminar.",
 "Third, agents the team builds.":
 "Tercero, los agentes que construye el equipo.",
 "When the nightly count fails its check against the census report, someone has to find out why, and those steps can't be written in advance.":

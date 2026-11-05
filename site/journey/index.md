@@ -86,7 +86,7 @@ Before any animation, every product claim was checked against current sources. S
 
 Everything the film simplifies is written down in a **rigour sheet** in the [script](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md): what each scene shows, the real technology, and what an expert would add.
 
-> **Lesson:** names and maturity change fast. Check them when you publish, and say "preview" when something is in preview.
+> **Lesson:** names and maturity change fast. Check them when you publish, and keep a feature's release status out of the film itself, so the film needn't change when a preview becomes generally available.
 
 ## 4. From light to pictures
 
@@ -320,7 +320,7 @@ Mistakes were part of the process, and most of them taught something:
 5. **Start where data is born,** in the system of record.
 6. **Show the conceptual model, and show it failing.** The wrong sketch teaches more than the right one.
 7. **Keep roles clear.** dbt writes and tests the recipes; Databricks runs, stores and governs.
-8. **Check names and maturity when you publish.** Products get renamed, and previews aren't generally available.
+8. **Check names and maturity when you publish.** Products get renamed, and previews become generally available, so a film uses the name of the day and never says a feature's release status.
 9. **Coherence beats flourish.** Use one design language, and vary the content instead of repeating it.
 10. **Use cheap checkpoints.** Style frames and five-second voice tests come before full rebuilds.
 11. **Build media as code.** When scenes are timed to the narration, changing a line re-times the whole film.

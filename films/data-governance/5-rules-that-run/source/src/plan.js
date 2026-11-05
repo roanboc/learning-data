@@ -400,7 +400,7 @@ function rr_level(ctx,x,y,a,b,m,segs,head){if(a<=0.01)return;segs=segs||RR_LV;co
 function rr_slips(ctx,x,y,n,o){o=o||{};const N=Math.floor(n),f=n-N,top=Math.min(N+(f>0.5?1:0),40)-1,g=clamp(o.grey||0,0,1),wash=mix(GV.amber,GV.grey,g),ink=mix(GV.amberInk,GV.greyInk,g);
   for(let i=0;i<Math.min(N+1,40);i++){const u=i<N?1:f;if(u<=0.01)continue;const R=wc_rng(500+i),px=x+(R()-0.5)*40,py=y-i*9-(1-easeCam(u))*60,rot=(R()-0.5)*0.24;
   withA(ctx,clamp(u*2,0,1),()=>{ctx.save();ctx.translate(px,py);ctx.rotate(rot);wc_panel(ctx,-130,-38,260,76,{kind:"card",wash,washA:0.3,seed:600+i%7});
-    if(i===top){wc_T(ctx,"warning",-108,o.owner?-6:10,{w:700,size:28,col:ink});if(o.owner)wc_T(ctx,"owner: —",-108,28,{w:600,size:28,col:WC_INK});}ctx.restore();});}
+    wc_T(ctx,"warning",-108,o.owner?-6:10,{w:700,size:28,col:ink});if(o.owner)wc_T(ctx,"owner: —",-108,28,{w:600,size:28,col:WC_INK});ctx.restore();});}
   if(o.mine>0){const k=0.9+0.1*spring(clamp(o.mine,0,1));ctx.save();ctx.translate(x,y-Math.min(N,40)*9-70);ctx.scale(k,k);ctx.rotate(-0.04);
     withA(ctx,clamp(o.mine*2,0,1),()=>wc_tag(ctx,0,0,"owner: Learning team",{align:"center",size:34,wash:GV.gold,washA:0.5}));ctx.restore();}}
 // an enrolment card: its number, its course and status, its email (or a dash); o.cert, a certificate beside it that can't find an
@@ -467,14 +467,14 @@ function rr_sixCards(ctx,em,u){RR_L6.forEach((r,i)=>{const a=clamp((u==null?1:u)
     if(!(em[i]>0))wc_T(ctx,"—",-210,40,{w:800,size:34,col:GV.redInk});else{wc_hand(ctx,RR_SIXE[i],-210,40,{size:32,w:600,col:GV_SIGN.ink,p:clamp(em[i]*1.3,0,1)});wc_tick(ctx,300,-30,40,GV.green,clamp(em[i]*3-2,0,1),5);}
     ctx.restore();});});}
 // the issue log, as Fixed where it starts keeps it (the series' register page, agreed between the two films): open in its blue boards
-// on Tom's desk at the Monday's lines. The night's failure is written in by hand (write, 0 to 1) and lit gold (hiA); the emails' line,
-// from the same morning, stays unlit; the next night the failure's line is stamped closed (stamp, 0 to 1), on the ruled line under it
+// on Tom's desk at the Monday's lines. The night's failure is written in by hand (write, 0 to 1), and stays in his hand once written,
+// so its words never change size in a frame; lit gold (hiA); the emails' line, from the same morning, stays unlit; the next night the failure's line is stamped closed (stamp, 0 to 1), on the ruled line under it
 const RR_IL={kicker:"Issue log",title:"Data quality",h:540,cols:[["Opened",0.13],["Issue",0.48],["Owner",0.25],["Due",0.14]]};
 function rr_issueBook(ctx,x,y,w){const h=RR_IL.h*w/1000;ctx.drawImage(wc_kept("rrIssueBook"+w,w+160,h+120,q=>{q.translate(70,40);
     q.save();q.filter="blur(10px)";q.fillStyle="rgba(50,40,30,0.3)";q.fillRect(-40,-8,w+70,h+44);q.restore();
     wc_wash(q,wc_rrPts(-46,-22,w+72,h+44,10),[58,82,118],{kind:"cover",lw:1.4,seed:116});wc_flat(q,wc_rect(-46,-22,34,h+44),[40,58,88],1,"spine");
     for(let i=3;i>0;i--)wc_flat(q,wc_rect(i*3,i*3,w,h),[240-i*8,236-i*8,226-i*8],1,"pages");}),x-70,y-40);}
-function rr_issueLog(ctx,x,y,w,o){o=o||{};rr_issueBook(ctx,x,y,w);const wr=o.write==null?1:o.write,hand=(t,i)=>wr>=1?t:{t,hand:true,p:clamp(wr*4-i,0,1)};
+function rr_issueLog(ctx,x,y,w,o){o=o||{};rr_issueBook(ctx,x,y,w);const wr=o.write==null?1:o.write,hand=(t,i)=>({t,hand:true,p:clamp(wr*4-i,0,1)});
   const rows=[["19 Oct","Enrolments with no email, 6","Learning team","20 Oct"].map(hand),["","","",""],["19 Oct","Short-course emails as typed","Learning team","26 Oct"],["","","",""]];
   const r=gv_register(ctx,x,y,w,Object.assign({hi:0,hiA:o.hiA||0,rows},RR_IL));
   if(o.stamp>0)gv_stamp(ctx,x+(48+904*(0.13+0.24))*w/1000,r.rows[1],"CLOSED: the check passes",o.stamp,{size:30*w/1000*1.2,col:GV.greenInk,rot:0.03});return r;}

@@ -34,7 +34,12 @@ This plays the film's score (tools/score.py) on its own and checks:
     like crackle or a buzz: play a few sounds, or one soft texture that swells in;
   - no beats: no two held sounds are a little out of tune with each other, so that they beat, 0.3 to 12 times a second, when a phone's
     one speaker adds the two channels together, loud enough to move the music's level by a fifth or more;
-  - no pulse: nothing pulses (urgent(), pulse() or ostinato()) outside the chapters film.json lists in "urgent".
+  - no pulse: nothing pulses (urgent(), pulse() or ostinato()) outside the chapters film.json lists in "urgent";
+  - held notes keep their level in the room (held.py, which plays the score a second time with its rooms silent and compares each note
+    with itself): each room's echo rings within 3 dB of one from 100 Hz to 1.5 kHz, where the notes are; no held note is made more
+    than 2 dB louder or quieter by it; and no room is laid over the whole music bus while it holds notes. Scaled by all the energy
+    they held, the rooms of 22 films rang 10 to 11 dB louder there than their level said, and moved held notes by up to 17 dB, louder
+    or quieter (4 November 2026, after Plan, define the check, do, check found it).
 The opening is the chapters film.json lists in "story" (by default, the first). Music is what the score puts on the music bus (put()),
 not the effects (X()), and it counts while it's within 24 dB of the music's loudest three seconds. A break is a second or more without.
 Each failure names the lines of tools/score.py that placed the sounds. The master data films keep a copy of the first checks each.
@@ -45,7 +50,7 @@ if 'run' not in sys.modules:  # run on its own: this folder's tools first, then 
     sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
     import run
 from lang import *
-import music
+import held, music
 from playwright.sync_api import sync_playwright
 
 SHARE, RUN, GAP, FLOOR = 0.5, 12.0, 1.0, 24.0       # a chapter's music, a run of it, a break, and what counts as sounding
@@ -68,6 +73,7 @@ music.init(n)
 ST = {s['id']: s for s in info['scenes']}; music.ST.update(ST)
 STORY = META.get('story') or [info['scenes'][0]['id']]
 SCORE = str(ROOT / 'tools' / 'score.py')
+HW = held.Watch(music, SCORE)                       # the rooms the score makes, and each note it holds (held.py)
 mmss = lambda t: '%d:%04.1f' % (max(0, t) // 60, max(0, t) % 60)
 
 
@@ -119,6 +125,7 @@ def _put(L, R, sig, start, g, pan):
             FXS.append((start, where()))
         else:
             NOTES.append((start, pitch(sig), where()))
+            HW.note(sig, start, g, pan)
     return _put0(L, R, sig, start, g, pan)
 
 
@@ -161,6 +168,7 @@ def put(sig, start, g=1.0, pan=0.0):
 
 
 music.put = put
+PLAIN = {name: getattr(music, name) for name in ('urgent', 'pulse', 'ostinato')}
 for name in ('urgent', 'pulse', 'ostinato'):
     def played(*a, _f=getattr(music, name), _n=name, **k):
         PULSES.append((_n, a[0] if a else 0.0)); return _f(*a, **k)
@@ -351,10 +359,30 @@ for name, t in PULSES:
         fails.append('%s() at %s (%s): nothing pulses, except in a chapter where the story turns to an error or a rush, listed in '
                      'film.json\'s "urgent"' % (name, mmss(t), w or 'after the end'))
 
+
+# held notes in the room: the score played again, its rooms silent, and each held note compared with itself (held.py)
+def again():
+    """the score played again as tools/audio.py plays it, with only the held-note watch listening"""
+    def plain(L, R, sig, start, g, pan):
+        if L is not music.XL and len(sig) and g:
+            HW.note(sig, start, g, pan)
+        return _put0(L, R, sig, start, g, pan)
+    music.init(n); music._put, music.put = plain, _put1
+    for name, f in PLAIN.items():
+        setattr(music, name, f)
+    ns2 = {k: v for k, v in vars(music).items() if not k.startswith('_')}
+    ns2.update(ST=ST, TOT=TOT, G=lambda sid, cid, off=0: ST[sid]['start'] + ST[sid]['cues'][cid] + off,
+               S0=lambda sid: ST[sid]['start'], E=lambda sid: ST[sid]['start'] + ST[sid]['dur'], cq=lambda sid, cid: ST[sid]['cues'][cid])
+    exec(compile((ROOT / 'tools' / 'score.py').read_text(), SCORE, 'exec'), ns2)
+
+
+print()
+fails += held.check(HW, again, mmss, ALL)
+
 print()
 if fails:
     raise SystemExit('The sound doesn\'t follow the films\' rules (the author\'s, 20 October and 4 November 2026):\n  ' + '\n  '.join(fails))
 print('The sound follows the films\' rules: the opening (%s) has its music, the rest comes in from time to time and isn\'t repeated, it '
-      'sits no louder than the governance films the author accepted, the effects come one at a time, nothing beats, and nothing '
-      'pulses%s.'
+      'sits no louder than the governance films the author accepted, the effects come one at a time, nothing beats, held notes keep their '
+      'level in the room, and nothing pulses%s.'
       % (', '.join(STORY), ' outside ' + ', '.join(URGENT) if URGENT else ''))

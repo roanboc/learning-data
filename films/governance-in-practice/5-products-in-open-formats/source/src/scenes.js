@@ -40,7 +40,7 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(
     {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.frm)/1.0,0,1),thr:clamp((tt-P.dis+0.4)/1.4,0,1),
       ck:clamp((tt-P.stp)/1.4,0,1)})},
     // Jun's column on credentials: its contract grows by a line, by itself, and every report that reads it still works
-    {cut:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
+    {later:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
       ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.jun+0.3,P.tn-0.4,0.4));}},
     // the data team's board: the ten tables other teams read, each ticked, checked on every change
     {at:P.tn,place:"board",keys:[[P.tn,960,500,1]],push:0.02,draw:(x,tt)=>gp_ten(x,tt,{u:clamp((tt-P.tn-0.1)/1.6,0,1),tick:clamp((tt-P.prom)/1.6,0,1),ck:fin(tt,P.chk,0.6)})},
@@ -115,7 +115,7 @@ scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"f
     {at:P.tw,place:"desk",keys:[[P.tw,960,540,1]],push:0.02,draw:(x,tt)=>gp_credVers(x,tt,{u:clamp((tt-P.tw-0.1)/0.9,0,1),two:fin(tt,P.has,0.6),date:fin(tt,P.ret,0.6),
       ring:clamp((tt-P.d31)/1.0,0,1),c:clamp((tt-P.cs)/0.9,0,1),dep:fin(tt,P.dep,0.6),out:clamp((tt-P.out)/1.0,0,1)})},
     // better, add: Jun's column again, and every reader still whole
-    {cut:true,at:P.ad,place:"desk",keys:[[P.ad,960,540,1]],push:0.02,draw:(x,tt)=>gp_junCol(x,tt,{add:clamp((tt-P.nc)/1.0,0,1),read:1,ok:clamp((tt-P.nb)/0.9,0,1),
+    {later:true,at:P.ad,place:"desk",keys:[[P.ad,960,540,1]],push:0.02,draw:(x,tt)=>gp_junCol(x,tt,{add:clamp((tt-P.nc)/1.0,0,1),read:1,ok:clamp((tt-P.nb)/0.9,0,1),
       tag:fin(tt,P.ad+0.4,0.5),tagTitle:"Change without surprises"})}],sc.dur,1));});
 
 // ---- 6 · Who reads it: Clara's descriptor, who reads it, from dbt's exposures: the census dashboard; what it's built from: two of Mei's
@@ -124,9 +124,9 @@ scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({rec:wAt(sc
     chg:wAt(sc,"when","one of them changes"),mk:wAt(sc,"when","Mei knows"),tell:wAt(sc,"when","who to tell"),ship:wAt(sc,"when","before anything ships")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
     // Clara's descriptor: its readers, then its inputs, two of Mei's products
-    {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_readers(x,tt,{u:clamp((tt-0.2)/0.9,0,1),rd:clamp((tt-P.rec)/2.0,0,1),built:clamp((tt-P.bf)/2.0,0,1)})},
+    {later:true,at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_readers(x,tt,{u:clamp((tt-0.2)/0.9,0,1),rd:clamp((tt-P.rec)/2.0,0,1),built:clamp((tt-P.bf)/2.0,0,1)})},
     // learner_records' descriptor: the products that read it; Mei tells each of their owners
-    {cut:true,at:P.wh,place:"desk",keys:[[P.wh,960,540,1]],push:0.02,draw:(x,tt)=>gp_meiTells(x,tt,{u:clamp((tt-P.wh-0.1)/0.9,0,1),lit:clamp((tt-P.chg)/1.2,0,1),mei:fin(tt,P.mk,0.6),
+    {later:true,at:P.wh,place:"desk",keys:[[P.wh,960,540,1]],push:0.02,draw:(x,tt)=>gp_meiTells(x,tt,{u:clamp((tt-P.wh-0.1)/0.9,0,1),lit:clamp((tt-P.chg)/1.2,0,1),mei:fin(tt,P.mk,0.6),
       tell:clamp((tt-P.tell)/2.4,0,1),tag:fin(tt,P.ship,0.5)})}],sc.dur,1));});
 
 // ---- 7 · Open standards: the two files and the two standards they're written in, as books, kept by Bitol at the Linux Foundation,
@@ -140,7 +140,7 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({bf:wAt(sc,"bo
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_books(x,tt,{files:clamp((tt-P.bf)/0.9,0,1),u:[fin(tt,P.dp,0.8),fin(tt,P.dc,0.8)],
       thr:clamp((tt-P.dc-0.2)/1.4,0,1),who:fin(tt,P.bit,0.6),lic:fin(tt,P.free,0.6),newer:clamp((tt-P.ver)/1.2,0,1)})},
     // three tools read the contract; the check, in a terminal: every file up to date and valid
-    {cut:true,at:P.tl,place:"desk",keys:[[P.tl,960,540,1]],push:0.02,draw:(x,tt)=>gp_tools(x,tt,{read:clamp((tt-P.tk)/2.0,0,1),chk:clamp((tt-P.ck)/1.4,0,1),valid:fin(tt,P.rl,0.6)})},
+    {later:true,at:P.tl,place:"desk",keys:[[P.tl,960,540,1]],push:0.02,draw:(x,tt)=>gp_tools(x,tt,{read:clamp((tt-P.tk)/2.0,0,1),chk:clamp((tt-P.ck)/1.4,0,1),valid:fin(tt,P.rl,0.6)})},
     // the versions it keeps: what the catalogue reads today, and how to move to a newer one
     {at:P.kp,place:"desk",keys:[[P.kp,960,540,1]],push:0.02,draw:(x,tt)=>gp_kept(x,tt,{u:clamp((tt-P.kp-0.1)/0.9,0,1),dir:fin(tt,P.kp+0.5,0.6),lit:fin(tt,P.today,0.6),
       move:fin(tt,P.mv,0.6)})}],sc.dur));});
@@ -161,9 +161,9 @@ scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(s
     // Ontos imports the contract from its file
     {at:P.imp,place:"bigPlat",keys:[[P.imp,960,540,1]],push:0.02,draw:(x,tt)=>gp_import(x,tt,{up:clamp((tt-P.ff+0.3)/0.9,0,1),rev:clamp((tt-P.ff-0.6)/0.9,0,1)})},
     // and lays the products out by domain, each with its owner team
-    {cut:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
+    {later:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
     // Clara's product on its way to being published: a data steward reviews and approves; its owner publishes
-    {cut:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
+    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
       stw:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
     // the policy every night: an active product with no owner is tagged, and governance is told
     {at:P.po,place:"bigPlat",keys:[[P.po,960,540,1]],push:0.02,draw:(x,tt)=>gp_policy(x,tt,{sch:fin(tt,P.eve,0.6),lit:[0,gv_io(tt,P.act,P.no,0.4),fin(tt,P.no,0.5),0,

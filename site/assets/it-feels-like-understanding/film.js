@@ -2386,7 +2386,7 @@ scene("orbiter",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   fu_when(ctx,"Today","the same risk",fu_fin(t,P.risk,0.5)*(1-fu_fin(t,P.br,0.4)));
   // the Odyssey cards and file stay legible over the first wide; "Something had to change": a pale veil
   ag_veil(ctx,S,0.55*ag_io(t,P.chg-0.2,P.ody-0.4,0.5));
-  ag_veil(ctx,S,0.65*ag_in(t,P.br,0.8));ag_title(ctx,S,t,P.br,"It feels like understanding",null,"FILM 3 OF 9 · WHAT AN AGENT IS");});
+  ag_veil(ctx,S,0.65*ag_in(t,P.br,0.8));ag_title(ctx,S,t,P.br,"It feels like understanding",null,"FILM 4 OF 10 · WHAT AN AGENT IS");});
 
 /* ---------------------------------------------------------------- today's agent at work: o {ask (when Jun asks it), read, query, check,
    done (the answer's moment)}, as times; the hands reach to the catalog and the query, data rides back, the ring turns once on the check */
@@ -2699,7 +2699,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
   ];
   ag_shots(ctx,S,t,sc.dur,sh,0.5);
   fu_when(ctx,"This term",null,fu_fin(t,0.4,0.5)*(1-fu_fin(t,P.counts-0.6,0.4)));
-  ag_end(ctx,S,t,P.take-0.4,"It feels like understanding","Feeling sure is not knowing.","Film 3 of 9");});
+  ag_end(ctx,S,t,P.take-0.4,"It feels like understanding","Feeling sure is not knowing.","Film 4 of 10");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["right", "meanings"]);

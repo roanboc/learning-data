@@ -2516,7 +2516,7 @@ scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({
   // each past scene's place and year, in the corner of the screen (not of the place, so the camera doesn't move it)
   for(const [s_,t0,t1,col] of [["Europe · the 1440s",0.8,P.rare+0.8],["Cambridge · 1424",c.cambridge+0.2,c.mistakes-0.2],["China · the 1040s",c.clay,c.korea-0.4],
     ["Korea · 1377",c.korea,c.mainz-0.4],["Mainz · around 1450",c.mainz,P.letters-0.3]])dm_whereAt(ctx,t,s_,t0,t1,col?{col}:null);
-  ag_title(ctx,S,t,c.breath+0.4,"Decades in the making","Where AI agents came from","FILM 1 OF 9 · WHAT AN AGENT IS");
+  ag_title(ctx,S,t,c.breath+0.4,"Decades in the making","Where AI agents came from","FILM 1 OF 10 · WHAT AN AGENT IS");
 });
 
 // ---- 2 · A machine that learns: 1958, the perceptron; the newspaper's hopes; 1969, what one layer can't learn ----
@@ -2806,7 +2806,7 @@ scene("sudden",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({suddenW:wAt
     // Jun's team, under the same rail: nobody expects magic or needs to fear it, because they know where it came from
     {at:c.team-0.4,place:"dmLab",push:0.012,keys:[[c.team-0.4,960,540,1]],d:2.0,draw:(x,t)=>{rail(x);
       dm_team(x,{t,agent:1,think:0.2,yusuf:1,mei:1,ySmile:0.2+0.3*ag_in(t,P.where-0.4,0.8),mSmile:0.2+0.3*ag_in(t,P.where-0.2,0.8),junSmile:0.3+0.25*ag_in(t,P.magic,0.8)});}}],0.6);
-  ag_end(ctx,S,t,c.breath+0.6,"Decades in the making","Long work that finally had the power to run","Film 1 of 9","What an agent is");});
+  ag_end(ctx,S,t,c.breath+0.6,"Decades in the making","Long work that finally had the power to run","Film 1 of 10","What an agent is");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["mistakes", "web"]);

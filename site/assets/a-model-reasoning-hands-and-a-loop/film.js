@@ -2592,7 +2592,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
     // the box again, on the marble wall: hands, a check, a loop, but no model; then a model drops in, and it's an agent
     {at:P.room,dis:0.9,place:"lab",keys:[[P.room,1124,500,1.12],[P.put-0.4,1060,520,1.0]],d:2.4,push:0.01,draw:(x,tt)=>ml_boxRoom(x,tt,P)}]);
   ml_kick(ctx,t,[[0,"1914"],[P.deck+0.6,"Today"],[P.room+0.2,null]],ag_in(t,0.6,0.6));
-  ag_title(ctx,S,t,P.title,ML_TITLE,null,"WHAT AN AGENT IS · FILM 2 OF 9");});
+  ag_title(ctx,S,t,P.title,ML_TITLE,null,"WHAT AN AGENT IS · FILM 3 OF 10");});
 
 // a second judge, younger, for the table
 const ML_J2={name:"A judge",key:"ml-judge2",skin:[214,178,148],hair:{style:"side",c:[96,76,60]},beard:[110,90,72],top:{kind:"suit",c:[58,56,62],inner:[238,236,230],tie:[90,60,60]},breath:0.29};
@@ -2944,7 +2944,7 @@ scene("seat",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({job:wAt(sc,"h
   // the four parts, lighting in turn as they're named, then into the ring, each to its place
   const pa=ag_io(t,P.is-0.4,P.only-0.3,0.5);if(pa>0.01)ml_parts(ctx,[ag_in(t,P.model-0.1,0.4),ag_in(t,P.reasons-0.1,0.4),ag_in(t,P.hands-0.1,0.4),ag_in(t,P.loop-0.1,0.4)],
     {a:pa,gather:ag_in(t,P.loop+0.25,1.0)});
-  ag_end(ctx,S,t,P.end,ML_TITLE,null,"Film 2 of 9");});
+  ag_end(ctx,S,t,P.end,ML_TITLE,null,"Film 3 of 10");});
 const ML_FACE=[880,440];   // Sperry's face in the cockpit, for the camera
 function ml_recap(x,tt,P){const [rx,ry]=ML_ROOM.ring,A=ML_ANS,W=500;
   // it takes the steps: its light goes once round the ring, data back along the arms

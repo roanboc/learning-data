@@ -109,12 +109,12 @@ function pg_who(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,w=Math.max(dp_tw
   dp_T(ctx,name,x+86,y+(o.sub?50:51),{w:700,size:30,col:o.dim?"grey":"ink"});if(o.sub)dp_T(ctx,o.sub,x+86,y+92,{w:600,size:28,col:o.subCol||"mut"});
   ctx.restore();return{x,y,w,h};}
 // an admin account's badge: a band that says so, the account's name, and the security key it signs in with; 460 x 150.
-// o: on (0 to 1, switched on: its band and rim turn amber), a, dim (0 to 1: an account that holds nothing until it's switched on)
+// o: on (0 to 1, switched on: its band and rim turn amber), a, touch (0 to 1: its security key touched, as it signs in)
 function pg_admin(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const on=clamp(o.on||0,0,1),w=460,h=150;ctx.save();ctx.globalAlpha*=a;
   const col=on>0.5?"amber":"grey";dp_panel(ctx,x,y,w,h,{col:on>0?mix(DP.F.grey,DP.F.amber,on):DP.F.grey,r:18,glowA:0.4+0.8*on,behind:o.behind});
   ctx.save();rr(ctx,x,y,w,h,18);ctx.clip();const bc=mix(DP.F.grey,DP.F.amber,on);ctx.fillStyle=rgba(bc,1);ctx.fillRect(x,y,w,46);ctx.restore();
   dp_T(ctx,"ADMIN ACCOUNT",x+24,y+33,{w:800,size:28,ls:3,col:DP.on});
-  dp_T(ctx,name,x+24,y+102,{w:700,size:32});pg_seckey(ctx,x+w-62,y+98,0.62,{});
+  dp_T(ctx,name,x+24,y+102,{w:700,size:32});pg_seckey(ctx,x+w-62,y+98,0.62,{touch:o.touch});
   ctx.restore();return{x,y,w,h};}
 // an admin group: a slot of glass with an amber edge, its name as the directory writes it, and how many are in it; when someone is
 // switched on (on, 0 to 1) it fills with solid amber and dark words. 640 x 70 by default; returns its box

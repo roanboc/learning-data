@@ -2,7 +2,7 @@
   {
     "name": "What they tell us about ourselves",
     "key": "what-they-tell-us-about-ourselves-en",
-    "dir": "films/what-an-agent-is/8-what-they-tell-us-about-ourselves/source",
+    "dir": "films/what-an-agent-is/9-what-they-tell-us-about-ourselves/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/what-they-tell-us-about-ourselves/film.js",
@@ -10,17 +10,17 @@
     "file": "what-they-tell-us-about-ourselves.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/8-what-they-tell-us-about-ourselves/captions/en.srt",
+        "films/what-an-agent-is/9-what-they-tell-us-about-ourselves/captions/en.srt",
         "what-they-tell-us-about-ourselves.en.srt"
       ],
       [
-        "films/what-an-agent-is/8-what-they-tell-us-about-ourselves/captions/es.srt",
+        "films/what-an-agent-is/9-what-they-tell-us-about-ourselves/captions/es.srt",
         "what-they-tell-us-about-ourselves.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/8-what-they-tell-us-about-ourselves/source",
-      ":(exclude)films/what-an-agent-is/8-what-they-tell-us-about-ourselves/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/9-what-they-tell-us-about-ourselves/source",
+      ":(exclude)films/what-an-agent-is/9-what-they-tell-us-about-ourselves/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared/tools",

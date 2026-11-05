@@ -2,7 +2,7 @@
   {
     "name": "It feels like understanding",
     "key": "it-feels-like-understanding-en",
-    "dir": "films/what-an-agent-is/3-it-feels-like-understanding/source",
+    "dir": "films/what-an-agent-is/4-it-feels-like-understanding/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/it-feels-like-understanding/film.js",
@@ -10,17 +10,17 @@
     "file": "it-feels-like-understanding.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/3-it-feels-like-understanding/captions/en.srt",
+        "films/what-an-agent-is/4-it-feels-like-understanding/captions/en.srt",
         "it-feels-like-understanding.en.srt"
       ],
       [
-        "films/what-an-agent-is/3-it-feels-like-understanding/captions/es.srt",
+        "films/what-an-agent-is/4-it-feels-like-understanding/captions/es.srt",
         "it-feels-like-understanding.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/3-it-feels-like-understanding/source",
-      ":(exclude)films/what-an-agent-is/3-it-feels-like-understanding/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/4-it-feels-like-understanding/source",
+      ":(exclude)films/what-an-agent-is/4-it-feels-like-understanding/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared",

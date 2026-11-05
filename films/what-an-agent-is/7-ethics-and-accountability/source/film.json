@@ -1,7 +1,7 @@
 {
   "key": "ethics-and-accountability",
   "title": "Ethics we can't read, accountability it can't hold",
-  "sub": "The sixth film of nine in What an agent is: an agent's values, learned from us and hard to read; why it can't answer for its work; why it's more dangerous in the wrong hands; and why a person answers for every agent.",
+  "sub": "The seventh film of ten in What an agent is: an agent's values, learned from us and hard to read; why it can't answer for its work; why it's more dangerous in the wrong hands; and why a person answers for every agent.",
   "howto": "The film is drawn in the module's matte style: the lab's grey marble wall and oak floor, and Babylon around 1750 BC in the same light. Blue is tools and structure, violet the model thinking, orange data coming back, green a check that passes, and amber a check that fails or a warning.",
   "src": [
     "babylon.js",

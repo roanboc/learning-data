@@ -1,7 +1,7 @@
 {
  "key": "what-they-tell-us-about-ourselves",
  "title": "What they tell us about ourselves",
- "sub": "The eighth film of What an agent is, a series on what an AI agent is and what it isn't: building rough copies of ourselves, from the first bionic ear to today's agents, keeps teaching us about our own minds, and leaves five questions science hasn't answered yet: the brain, creating, copying a mind, feeling, and what makes us human.",
+ "sub": "The ninth film of What an agent is, a series on what an AI agent is and what it isn't: building rough copies of ourselves, from the first bionic ear to today's agents, keeps teaching us about our own minds, and leaves five questions science hasn't answered yet: the brain, creating, copying a mind, feeling, and what makes us human.",
  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is something built, such as the implant's wire or a copy of a neuron; violet the model; orange data coming back; green a check that passes; amber what a test challenged.",
  "src": [
   "tt_world.js",

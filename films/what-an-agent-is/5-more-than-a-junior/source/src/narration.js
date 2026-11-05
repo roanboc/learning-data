@@ -1,4 +1,4 @@
-// More than a junior, film 4 of 9 of What an agent is, the first series of the module on AI agents in data work. One line per id; the film re-times itself to the voice.
+// More than a junior, film 5 of 10 of What an agent is, the first series of the module on AI agents in data work. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers in words). The few longer stops are in breath.js.
 const NARR={
 "hans":{"name":"Clever Hans","lead":2.2,"tail":1.0,"vo":[

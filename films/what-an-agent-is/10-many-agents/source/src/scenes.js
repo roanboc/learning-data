@@ -85,7 +85,7 @@ scene("breathes",(ctx,S,t,sc)=>{
     {at:tUni,place:"lab",keys:[[0,960,500,1.06],[tYear-0.3,960,540,1.0]],d:2.2,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath+0.5,0.8);if(f<=0)return;c.save();c.globalAlpha*=f;
       ma_census(c,S,tt,{tUni,tCensus,tAsks,tFac,tNotes,tWeeks,tBudget,tYear,tMany,tWork,tDrafts,tNoon,tMistake});c.restore();}}
   ],0.8);
-  ag_title(ctx,S,t,sc.cues.breath,"Many agents, and what emerges",null,"FILM 9 OF 9 · WHAT AN AGENT IS");
+  ag_title(ctx,S,t,sc.cues.breath,"Many agents, and what emerges",null,"FILM 10 OF 10 · WHAT AN AGENT IS");
 });
 
 /* the census scene: the room with four faculties' cards; last year's two weeks; this year's small agents, one to each pile */
@@ -595,7 +595,7 @@ scene("close",(ctx,S,t,sc)=>{
     {at:T.sTeam,place:"lab",keys:[[0,960,540,1],[T.tTogether-0.2,1180,430,1.22]],d:1.8,push:0,draw:(c,tt)=>{const f=1-ag_in(tt,T.tTake+0.1,0.8);if(f<=0)return;
       c.save();c.globalAlpha*=f;mc_board(c,S,tt,T);c.restore();}}],0.8);
   // the takeaway, then the end card; the next series named as the voice says it
-  const t0=T.tTake-0.4;ag_veil(ctx,S,0.5*ag_in(t,t0,1.0));ag_end(ctx,S,t,t0,"Many agents, and what emerges",null,"Film 9 of 9");
+  const t0=T.tTake-0.4;ag_veil(ctx,S,0.5*ag_in(t,t0,1.0));ag_end(ctx,S,t,t0,"Many agents, and what emerges",null,"Film 10 of 10");
   const a1=ag_in(t,t0+0.6,0.9),a2=ag_in(t,T.tYet-0.3,0.7);if(a1>0){setScreen(ctx,S);ag_T(ctx,"When many work together, something new appears,",960,296,{w:700,size:48,align:"center",a:a1});
     if(a2>0)ag_T(ctx,"and we don't yet know what.",960,364,{w:700,size:48,align:"center",a:a2});}
   const na=ag_in(t,T.tNext-0.1,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: Agents at work on data",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}

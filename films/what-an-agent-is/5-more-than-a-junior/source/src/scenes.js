@@ -138,7 +138,7 @@ scene("hans",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten;
     if(g2.a>0)mj_grid(x,1452,500,26,MJ_RIGHT.seen,ag_in(t,c.sight+0.1,2.4),"In sight · 89 in 100",{a:g2.a,k:g2.k});
     const r2=mj_card(t,c.cheat+0.1,tGift);if(r2.a>0)ag_textCard(x,560,86,800,{kick:"9 December 1904",title:"No fraud. Hans can't count.",sub:"He reads the one who asks."},{kickCol:AG.kick,k:r2.k,a:r2.a});
   });
-  ag_title(ctx,S,t,c.breath,"More than a junior","less than a person","FILM 4 OF 9 · WHAT AN AGENT IS");
+  ag_title(ctx,S,t,c.breath,"More than a junior","less than a person","FILM 5 OF 10 · WHAT AN AGENT IS");
 });
 
 /* ---------------------------------------------------------------- the room's shared moves */
@@ -150,7 +150,7 @@ const mj_wob=(t,t0,amp)=>{const w=t-t0;return w>0?amp*Math.exp(-2.4*w)*Math.sin(
 // a value that steps from 0 to n as times pass, each step eased over d
 const mj_steps=(t,times,d)=>times.reduce((s,t0)=>s+clamp((t-t0)/(d||0.5),0,1),0);
 // the kicker, over the room's shots
-const mj_kick=(ctx,S,a)=>{if(a>0)mj_screen(ctx,S,x=>ag_kicker(x,"1.4","More than a junior",{a}));};
+const mj_kick=(ctx,S,a)=>{if(a>0)mj_screen(ctx,S,x=>ag_kicker(x,"1.5","More than a junior",{a}));};
 // the morning's light from the window
 function mj_morning(x,a){if(a<=0)return;const g=x.createRadialGradient(1900,80,40,1700,200,1300);g.addColorStop(0,"rgba(255,232,188,"+(0.42*a)+")");g.addColorStop(0.6,"rgba(255,236,196,"+(0.12*a)+")");g.addColorStop(1,"rgba(255,236,196,0)");
   x.save();x.globalCompositeOperation="screen";x.fillStyle=g;x.fillRect(0,0,W,H);x.restore();}
@@ -424,7 +424,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,H=MJ_AT.hans,O=MJ_AT.osten,tB1=c.ju
       const cd=mj_card(tt,c.takeaway-0.2,null);if(cd.a>0)mj_say(x,960,120,["Supervise it for what it is,","not for what it looks like."],{k:cd.k,a:cd.a*out});}}
   ];
   mj_shots(ctx,S,t,sc.dur,shots,0.7);mj_kick(ctx,S,ag_in(t,tB1,0.6));
-  ag_end(ctx,S,t,c.breath,"More than a junior","Supervise it for what it is, not for what it looks like.","Film 4 of 9");});
+  ag_end(ctx,S,t,c.breath,"More than a junior","Supervise it for what it is, not for what it looks like.","Film 5 of 10");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["more", "memory"]);

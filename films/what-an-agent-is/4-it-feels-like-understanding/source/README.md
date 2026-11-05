@@ -1,6 +1,6 @@
 # Rebuilding It feels like understanding
 
-*It feels like understanding*, film 3 of 9 of *What an agent is*, the first series of the module on AI agents in data work, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s scene helpers, and uses the module's look, marble and oak: its room, its people, the agent and its cards, in [`../../shared/src/`](../../shared/src/), bundled as they are. Only what is new in this film lives here, each name with the prefix `fu_` (or `FU_`):
+*It feels like understanding*, film 4 of 10 of *What an agent is*, the first series of the module on AI agents in data work, is generated from code like every other film here. It shares the engine, components, fonts and voice model of *The Inner Life of Data*, draws with *A Sharper Sketch*'s scene helpers, and uses the module's look, marble and oak: its room, its people, the agent and its cards, in [`../../shared/src/`](../../shared/src/), bundled as they are. Only what is new in this film lives here, each name with the prefix `fu_` (or `FU_`):
 
 | File | What it holds |
 |---|---|
@@ -21,7 +21,7 @@ Follow the setup in [the build guide of *The Inner Life of Data*](../../../inner
 
 ## Rebuild
 
-Run from this folder, `films/what-an-agent-is/3-it-feels-like-understanding/source/`:
+Run from this folder, `films/what-an-agent-is/4-it-feels-like-understanding/source/`:
 
 ```
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js

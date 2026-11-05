@@ -1,4 +1,4 @@
-// Ethics we can't read, accountability it can't hold: film 6 of 9 of What an agent is, the first series on AI agents in data work. One line per id; the film re-times itself to the voice.
+// Ethics we can't read, accountability it can't hold: film 7 of 10 of What an agent is, the first series on AI agents in data work. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "ox":{"name":"The ox that gores","lead":1.6,"tail":1.0,"vo":[

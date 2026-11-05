@@ -1,6 +1,6 @@
 # Rebuilding Many agents, and what emerges
 
-*Many agents, and what emerges*, film 9 of 9 of *What an agent is*, the first series of the module on AI agents in data work, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, and the module's look and tools in [`../../shared/`](../../shared/), whose [README](../../shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `ma_` or `MA_` (the scenes' own helpers with `mb_`, `mc_` and `ms_`):
+*Many agents, and what emerges*, film 10 of 10 of *What an agent is*, the first series of the module on AI agents in data work, is generated from code like every other film here. It bundles *The Inner Life of Data*'s engine, fonts and voice model, *A Sharper Sketch*'s `scene()`, and the module's look and tools in [`../../shared/`](../../shared/), whose [README](../../shared/README.md) says how a film uses them. Only what is new in this film lives here, and every name it declares starts with `ma_` or `MA_` (the scenes' own helpers with `mb_`, `mc_` and `ms_`):
 
 | File | What it holds |
 |---|---|
@@ -23,7 +23,7 @@ Follow the setup in [the build guide of *The Inner Life of Data*](../../../inner
 
 ## Rebuild
 
-Run from this folder, `films/what-an-agent-is/9-many-agents/source/`:
+Run from this folder, `films/what-an-agent-is/10-many-agents/source/`:
 
 ```
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js

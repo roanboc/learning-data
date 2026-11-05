@@ -2,7 +2,7 @@
   {
     "name": "Many agents, and what emerges",
     "key": "many-agents-en",
-    "dir": "films/what-an-agent-is/9-many-agents/source",
+    "dir": "films/what-an-agent-is/10-many-agents/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/many-agents/film.js",
@@ -10,17 +10,17 @@
     "file": "many-agents.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/9-many-agents/captions/en.srt",
+        "films/what-an-agent-is/10-many-agents/captions/en.srt",
         "many-agents.en.srt"
       ],
       [
-        "films/what-an-agent-is/9-many-agents/captions/es.srt",
+        "films/what-an-agent-is/10-many-agents/captions/es.srt",
         "many-agents.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/9-many-agents/source",
-      ":(exclude)films/what-an-agent-is/9-many-agents/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/10-many-agents/source",
+      ":(exclude)films/what-an-agent-is/10-many-agents/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared/tools",
       "films/data-governance/shared/tools/names.py",

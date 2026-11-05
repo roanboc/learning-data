@@ -1,6 +1,6 @@
 # Rebuilding Why we govern them
 
-*Why we govern them*, film 7 of 9 of *What an agent is*, the first series of the module *AI agents in data work*, is generated from code like every other film here. It draws with *The Inner Life of Data*'s engine and helpers, *A Sharper Sketch*'s scenes, and the series' own look in [`../../shared/`](../../shared/): the lab, its people, the agent and its loop, the cards, and the finishing pass ([`../../shared/README.md`](../../shared/README.md) says what each file holds). Only what is new in this film lives here:
+*Why we govern them*, film 8 of 10 of *What an agent is*, the first series of the module *AI agents in data work*, is generated from code like every other film here. It draws with *The Inner Life of Data*'s engine and helpers, *A Sharper Sketch*'s scenes, and the series' own look in [`../../shared/`](../../shared/): the lab, its people, the agent and its loop, the cards, and the finishing pass ([`../../shared/README.md`](../../shared/README.md) says what each file holds). Only what is new in this film lives here:
 
 | File | What it holds |
 |---|---|
@@ -21,7 +21,7 @@ Follow the setup in [the build guide of *The Inner Life of Data*](../../../inner
 
 ## Rebuild
 
-Run from this folder, `films/what-an-agent-is/7-why-we-govern-them/source/`:
+Run from this folder, `films/what-an-agent-is/8-why-we-govern-them/source/`:
 
 ```
 python tools/tts.py        # voices each line into build/vo/ and writes src/vodur.js

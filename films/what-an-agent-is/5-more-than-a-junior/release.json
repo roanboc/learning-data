@@ -2,7 +2,7 @@
   {
     "name": "More than a junior",
     "key": "more-than-a-junior-en",
-    "dir": "films/what-an-agent-is/4-more-than-a-junior/source",
+    "dir": "films/what-an-agent-is/5-more-than-a-junior/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/more-than-a-junior/film.js",
@@ -10,17 +10,17 @@
     "file": "more-than-a-junior.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/4-more-than-a-junior/captions/en.srt",
+        "films/what-an-agent-is/5-more-than-a-junior/captions/en.srt",
         "more-than-a-junior.en.srt"
       ],
       [
-        "films/what-an-agent-is/4-more-than-a-junior/captions/es.srt",
+        "films/what-an-agent-is/5-more-than-a-junior/captions/es.srt",
         "more-than-a-junior.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/4-more-than-a-junior/source",
-      ":(exclude)films/what-an-agent-is/4-more-than-a-junior/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/5-more-than-a-junior/source",
+      ":(exclude)films/what-an-agent-is/5-more-than-a-junior/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared",

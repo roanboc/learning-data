@@ -2,7 +2,7 @@
   {
     "name": "Why we govern them",
     "key": "why-we-govern-them-en",
-    "dir": "films/what-an-agent-is/7-why-we-govern-them/source",
+    "dir": "films/what-an-agent-is/8-why-we-govern-them/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/why-we-govern-them/film.js",
@@ -10,17 +10,17 @@
     "file": "why-we-govern-them.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/7-why-we-govern-them/captions/en.srt",
+        "films/what-an-agent-is/8-why-we-govern-them/captions/en.srt",
         "why-we-govern-them.en.srt"
       ],
       [
-        "films/what-an-agent-is/7-why-we-govern-them/captions/es.srt",
+        "films/what-an-agent-is/8-why-we-govern-them/captions/es.srt",
         "why-we-govern-them.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/7-why-we-govern-them/source",
-      ":(exclude)films/what-an-agent-is/7-why-we-govern-them/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/8-why-we-govern-them/source",
+      ":(exclude)films/what-an-agent-is/8-why-we-govern-them/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared/tools",

@@ -2,7 +2,7 @@
   {
     "name": "Minds that change",
     "key": "minds-that-change-en",
-    "dir": "films/what-an-agent-is/5-minds-that-change/source",
+    "dir": "films/what-an-agent-is/6-minds-that-change/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/minds-that-change/film.js",
@@ -10,17 +10,17 @@
     "file": "minds-that-change.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/5-minds-that-change/captions/en.srt",
+        "films/what-an-agent-is/6-minds-that-change/captions/en.srt",
         "minds-that-change.en.srt"
       ],
       [
-        "films/what-an-agent-is/5-minds-that-change/captions/es.srt",
+        "films/what-an-agent-is/6-minds-that-change/captions/es.srt",
         "minds-that-change.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/5-minds-that-change/source",
-      ":(exclude)films/what-an-agent-is/5-minds-that-change/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/6-minds-that-change/source",
+      ":(exclude)films/what-an-agent-is/6-minds-that-change/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared/tools",

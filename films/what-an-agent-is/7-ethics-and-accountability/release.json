@@ -2,7 +2,7 @@
   {
     "name": "Ethics we can't read, accountability it can't hold",
     "key": "ethics-and-accountability-en",
-    "dir": "films/what-an-agent-is/6-ethics-and-accountability/source",
+    "dir": "films/what-an-agent-is/7-ethics-and-accountability/source",
     "lang": "en",
     "player": "dist/film.js",
     "site_player": "site/assets/ethics-and-accountability/film.js",
@@ -10,17 +10,17 @@
     "file": "ethics-and-accountability.mp4",
     "captions": [
       [
-        "films/what-an-agent-is/6-ethics-and-accountability/captions/en.srt",
+        "films/what-an-agent-is/7-ethics-and-accountability/captions/en.srt",
         "ethics-and-accountability.en.srt"
       ],
       [
-        "films/what-an-agent-is/6-ethics-and-accountability/captions/es.srt",
+        "films/what-an-agent-is/7-ethics-and-accountability/captions/es.srt",
         "ethics-and-accountability.es.srt"
       ]
     ],
     "paths": [
-      "films/what-an-agent-is/6-ethics-and-accountability/source",
-      ":(exclude)films/what-an-agent-is/6-ethics-and-accountability/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/7-ethics-and-accountability/source",
+      ":(exclude)films/what-an-agent-is/7-ethics-and-accountability/source/src/i18n/es/captions.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared",
       "films/data-governance/shared/tools",

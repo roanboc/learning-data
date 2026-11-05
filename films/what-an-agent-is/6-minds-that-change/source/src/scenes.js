@@ -90,7 +90,7 @@ scene("kept",(ctx,S,t,sc)=>{const C=sc.cues,E=sc.ends,br=C.breath,T=MC_AT;
   const tagA=ag_in(t,C.place-0.2,0.8)*(1-ag_in(t,tToday-0.3,0.4))*(1-ag_in(t,br-0.4,0.5));
   withA(ctx,tagA,()=>mc_tag(ctx,96,100,"Northern India · about 3,000 years ago"));
   withA(ctx,ag_in(t,tToday,0.5)*(1-ag_in(t,tSingle-0.4,0.4)),()=>mc_tag(ctx,96,100,"today",{k:ag_spr(t,tToday,0.5)}));
-  ag_title(ctx,S,t,br+0.6,"Minds that change","the agent's, and ours","FILM 5 OF 9 · WHAT AN AGENT IS");});
+  ag_title(ctx,S,t,br+0.6,"Minds that change","the agent's, and ours","FILM 6 OF 10 · WHAT AN AGENT IS");});
 
 /* ---------------------------------------------------------------- the university's room
    One room for chapters 2 to 6 (mcLab): the agent in its ring in the middle; Jun at his desk on the left, facing it; Clara standing
@@ -149,7 +149,7 @@ scene("three",(ctx,S,t,sc)=>{const C=sc.cues;
     mc_memory(ctx,1110,394,"last year: Health",{a:ag_io(t,tFits+0.1,tBut+0.4,0.5),k:ag_spr(t,tFits+0.1,0.6),tail:[MC_CMOUTH[0]-30,MC_CMOUTH[1]-110]});
     mc_bubble(ctx,1150,410,330,"Are you sure?",MC_CMOUTH[0]-8,MC_CMOUTH[1]-26,{a:ag_io(t,tSure-0.15,tBus+0.5,0.3),k:ag_spr(t,tSure-0.15,0.5),at:0.8});};
   // the day, top right
-  const day=ctx=>{ag_kicker(ctx,"1.5","Minds that change",{a:ag_in(t,0.2,0.8)});
+  const day=ctx=>{ag_kicker(ctx,"1.6","Minds that change",{a:ag_in(t,0.2,0.8)});
     mc_corner(ctx,"Today",ag_io(t,C.today-0.3,tMon-0.5,0.5));mc_corner(ctx,"Monday",ag_io(t,tMon-0.1,tTue-0.3,0.4));mc_corner(ctx,"Tuesday",ag_in(t,tTue-0.1,0.4)*(1-ag_in(t,tEach-0.2,0.6)));};
   // Clara's people: Jun at his desk, who asks on Monday; Clara on Tuesday, who nods at her memory
   const jun=ctx=>mc_jun(ctx,t,{talk:mc_talkAt(t,tAsks,tAsks+1.6),gaze:t>tTue+0.3&&t<tJuns?[-2,-3]:null});
@@ -247,7 +247,7 @@ scene("ours",(ctx,S,t,sc)=>{const C=sc.cues;
     }}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
   // the kicker in the room; the place and the time in the corner elsewhere
-  ag_kicker(ctx,"1.5","Minds that change",{a:1-ag_in(t,tCent-0.6,0.5)});
+  ag_kicker(ctx,"1.6","Minds that change",{a:1-ag_in(t,tCent-0.6,0.5)});
   withA(ctx,ag_in(t,tCent-0.2,0.6)*(1-ag_in(t,tAdded-0.6,0.4)),()=>mc_tag(ctx,96,100,"Cambridge · about 1920"));
   withA(ctx,ag_in(t,tAdded-0.2,0.6)*(1-ag_in(t,tSea-0.6,0.4)),()=>mc_tag(ctx,96,100,"Cambridge · six and a half years later"));
   withA(ctx,ag_in(t,tSea-0.2,0.6)*(1-ag_io(t,tNone-0.7,tQ+0.4,0.5)),()=>mc_tag(ctx,96,100,"Seattle · 1974"));});
@@ -305,7 +305,7 @@ scene("rebuilt",(ctx,S,t,sc)=>{const C=sc.cues;
     // a change we can't see the reason for: the three answers again, their slots empty, pulsing once
     const ra=ag_in(t,tTrouble+0.6,0.8),L=mc_lineup(ctx),pl=Math.sin(Math.PI*clamp((t-tReason)/1.4,0,1));
     [MC_A1,MC_A2,MC_A3].forEach((o,i)=>mc_answer(ctx,L[i],600,Object.assign({a:ra,k:ag_spr(t,tTrouble+0.6+i*0.15,0.5),pulse:pl,false:i===1?1:0},o)));}}];
-  ag_shots(ctx,S,t,sc.dur,shots,0.6);ag_kicker(ctx,"1.5","Minds that change",{a:ag_in(t,0.3,0.8)});});
+  ag_shots(ctx,S,t,sc.dur,shots,0.6);ag_kicker(ctx,"1.6","Minds that change",{a:ag_in(t,0.3,0.8)});});
 
 /* ================================================================ 5 · Check the work */
 // the two routes to the number, read only, either side of the agent; Jun and Clara a little further out, to leave them room
@@ -377,7 +377,7 @@ scene("check",(ctx,S,t,sc)=>{const C=sc.cues;
       mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{fill:ag_in(t,tStart+0.2,1.2)});
       mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{row:1});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
-  ag_kicker(ctx,"1.5","Minds that change");
+  ag_kicker(ctx,"1.6","Minds that change");
   mc_corner(ctx,"Wednesday",ag_io(t,tNext-0.3,tSem-0.4,0.4));mc_corner(ctx,"Next semester",ag_in(t,tSem-0.2,0.5));});
 
 /* ================================================================ 6 · Every pattern, every time */
@@ -400,7 +400,7 @@ scene("every",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath,T=MC_AT;
       ag_verdict(ctx,960,MC_VY,"agrees two ways","pass",1);mc_record(ctx,MC_REC[0],MC_REC[1],MC_REC[2],{row:1});mc_draft(ctx,MC_PAPER[0],MC_PAPER[1],{fill:1});
       const g=ag_io(t,tHolds-0.2,tHolds+1.6,0.5);if(g>0)glow(ctx,960,MC_VY,180,[110,190,140],0.35*g);}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.8);
-  ag_end(ctx,S,t,tTrust-0.1,"Minds that change","Trust no mind blindly. Check the work.","Film 5 of 9");});
+  ag_end(ctx,S,t,tTrust-0.1,"Minds that change","Trust no mind blindly. Check the work.","Film 6 of 10");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["ours", "check"]);

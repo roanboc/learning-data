@@ -2,7 +2,7 @@
    Each chapter is a run of shots (ag_shots): a place painted once, a slow camera, and what's drawn live. Times come from the cues
    (c.<line>, when each line starts) and from the words of the lines (wAt), so the pictures stay with the voice. */
 
-const WG_KICK=(x)=>ag_kicker(x,"1.7","Why we govern them");
+const WG_KICK=(x)=>ag_kicker(x,"1.8","Why we govern them");
 
 /* ---------------------------------------------------------------- pieces the scenes share */
 // the train at rest at the platform, or easing out: u 0 (at rest) to 1 (gone); dusk at evening
@@ -89,7 +89,7 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,
       wg_jun(x,tt,{p:{gaze:[lerp(6*Math.sin(tt*7),3,st),lerp(-2+2*Math.cos(tt*5),0,st)]}});
       ag_roomLight(x,1);WG_KICK(x);wg_flick(x,tt,P.watch-0.4,P.round+0.4,2.2);})}
   ],0.6);
-  ag_title(ctx,S,t,c.breath,"Why we govern them","because they're capable, not because they're bad","FILM 7 OF 9 · WHAT AN AGENT IS");});
+  ag_title(ctx,S,t,c.breath,"Why we govern them","because they're capable, not because they're bad","FILM 8 OF 10 · WHAT AN AGENT IS");});
 
 // the carriage's passengers, row by row, in front of their seats (each row's armrest in front of them)
 function wg_passengers(x,tt){const R=WG_ROWS,y=WG_SEAT.seat-212,cut=WG_SEAT.seat-4;
@@ -118,7 +118,7 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);wg_draft(x,WR.tray.x,WR.tray.y-36,"draft fix",{a:ag_in(tt,P.test,0.3),k:ag_spr(tt,P.test)});
       tools(x,tt,{a:ag_in(tt,c.night+0.3,0.6),touch:touch(tt)});wg_agent(x,tt,{think:ag_io(tt,P.cause-0.3,P.test+0.8,0.4)});reach(x,tt);
       ag_roomLight(x,1,{night:true,lamp:[860,780]});ag_model(x,A.x,A.y,A.r,{only:"light",t:tt,think:ag_io(tt,P.cause-0.3,P.test+0.8,0.4)});
-      x.save();setScreen(x,S);ag_kicker(x,"1.7","Why we govern them",{dark:true});x.restore();cards(x,tt,ag_in(tt,c.night+0.5,0.5),0,true);}},
+      x.save();setScreen(x,S);ag_kicker(x,"1.8","Why we govern them",{dark:true});x.restore();cards(x,tt,ag_in(tt,c.night+0.5,0.5),0,true);}},
     // in the morning, people approve its fix: Jun reviews it, Noor approves it, and the count matches again; then, could it do more?
     {cut:true,at:P.appr,place:"wgLab",keys:[[P.appr,960,540,1]],push:0.02,draw:(x,tt)=>{const yi=ag_sine((tt-P.team)/2.0);
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);wg_draft(x,WR.tray.x,WR.tray.y-36,"draft fix",{a:1-ag_in(tt,P.dm,0.5)});
@@ -322,7 +322,7 @@ scene("capable",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({k285:wAt(s
       wg_card(x,476,200,470,{kick:"Next",title:"What they tell us about\u00a0ourselves"},{a:ag_in(tt,c.next,0.4),k:ag_spr(tt,c.next)});
       wg_card(x,476,398,470,{kick:"Series 2",title:"Agents at work on data"},{a:ag_in(tt,c.series2,0.4),k:ag_spr(tt,c.series2)});})}
   ],0.6);
-  ag_end(ctx,S,t,c.breath,"Why we govern them","We govern agents because they're capable, not bad.","Film 7 of 9");});
+  ag_end(ctx,S,t,c.breath,"Why we govern them","We govern agents because they're capable, not bad.","Film 8 of 10");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["limits", "rules"]);

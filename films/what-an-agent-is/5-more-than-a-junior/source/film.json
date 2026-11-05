@@ -1,7 +1,7 @@
 {
   "key": "more-than-a-junior",
   "title": "More than a junior",
-  "sub": "Film 4 of 9 of What an agent is: more than a junior, less than a person. In Berlin in 1904, a horse seemed to count, until a psychologist tested him as a horse. Today, Jun's team treats its AI agent like a junior who needs supervision, and finds where that picture breaks: it knows more and works faster, but has no career, nothing to lose and no memory of yesterday, so its caution lives in its rights, its memory in the team's notes, and every yes with a person.",
+  "sub": "Film 5 of 10 of What an agent is: more than a junior, less than a person. In Berlin in 1904, a horse seemed to count, until a psychologist tested him as a horse. Today, Jun's team treats its AI agent like a junior who needs supervision, and finds where that picture breaks: it knows more and works faster, but has no career, nothing to lose and no memory of yesterday, so its caution lives in its rights, its memory in the team's notes, and every yes with a person.",
   "howto": "The film is drawn in the module's marble and oak: a pale marble wall over an oak floor, with daylight from the right. The agent is a matte sphere whose violet band glows while it thinks, in an oak ring, with pale arms that reach into tools. Blue is tools and structure, violet the model thinking, orange data coming back, green a check that passes, and amber one that fails. The opening, Berlin in 1904, is drawn in the same light.",
   "src": [
     "plan.js",

@@ -442,9 +442,11 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       sw_num(x,260,540,520,"The count","18,426",null,{k:a.k,a:a.a,edge:AG.amber});sw_num(x,840,540,520,"The census report","18,412",null,{k:b.k,a:b.a});}},
     // the agent loads the skill and checks the causes met so far, one by one: none fits; it finds the records behind the difference
     {at:P.loads-0.4,place:"swNight",cut:true,keys:[[P.loads-0.4,960,540,1.0],[P.loads-0.3,960,536,1.02]],d:15,push:0.006,draw:(x,tt)=>sw_finds(x,tt,P)},
-    // in its sandbox, a draft report, and a question: are these students?
+    // in its sandbox, a draft report, and a question: are these students? Once the shot has dissolved in, the agent rises from where it
+    // found the records to make room for the sandbox (drawn in its new place at once, it showed twice, a little apart)
     {at:P.drafts-0.4,place:"swNight",cut:true,keys:[[P.drafts-0.4,960,540,1.0],[P.drafts-0.3,960,536,1.02]],d:8,push:0.006,draw:(x,tt)=>{
-      sw_model(x,470,420,64,{t:tt,core:1,think:0.5});ag_sandbox(x,1120,780,1080,{depth:96});sw_night(x);ag_model(x,470,420,64,{only:"light",t:tt,core:1,think:0.5});
+      const mv=ag_sine(clamp((tt-P.drafts-0.1)/1.2,0,1)),ax=lerp(520,470,mv),ay=lerp(520,420,mv),ar=lerp(66,64,mv);
+      sw_model(x,ax,ay,ar,{t:tt,core:1,think:0.5});ag_sandbox(x,1120,780,1080,{depth:96});sw_night(x);ag_model(x,ax,ay,ar,{only:"light",t:tt,core:1,think:0.5});
       const p=sw_pop(tt,P.report-0.3,null),L=[{k:"h2",t:"Why the count is 14 over"},{k:"p",t:"Cause: 14 records, all made last week, all dated back to February.",a:ag_in(tt,P.cause-0.2,0.4)},
         {k:"p",t:"Query: the one that finds them, attached.",a:ag_in(tt,P.query-0.2,0.4)},{k:"gap"},{k:"h2",t:"Question: are these students?",a:ag_in(tt,P.are-0.3,0.4)}];
       sw_file(x,660,390,920,350,"sandbox/report.md",L,{a:p.a,k:p.k,edge:AG.violet,draft:true});}},
@@ -479,11 +481,13 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       ag_pill(x,1640,800,"no agent called",{a:sa,size:28});}}];
   sw_shots(ctx,S,t,sc.dur,shots);sw_kick(ctx,S,sw_kickA(t),true);});
 // the agent at work on the night: the skill's causes checked one by one, none fits; then a read-only query, the records it finds
-function sw_finds(x,tt,P){const ax=520,ay=520,fa=ag_in(tt,P.finds-0.3,0.5),u=ag_eo(clamp((tt-P.finds)/0.9,0,1)),d=tt>P.finds+0.9?((tt-P.finds-0.9)*0.5)%1:0;
-  sw_model(x,ax,ay,66,{t:tt,core:1,think:0.6});
+// once the shot has dissolved in, the agent moves from under the workflow's last step, where it was called, to its place by the lamp as
+// the skill comes in (drawn there from the start, it showed in two places as the shots dissolved)
+function sw_finds(x,tt,P){const g=sw_slots(5,230)[4],mv=ag_sine(clamp((tt-P.loads-0.1)/1.4,0,1)),ax=lerp(g.x+g.w/2,520,mv),ay=lerp(580,520,mv),ar=lerp(54,66,mv),fa=ag_in(tt,P.finds-0.3,0.5),u=ag_eo(clamp((tt-P.finds)/0.9,0,1)),d=tt>P.finds+0.9?((tt-P.finds-0.9)*0.5)%1:0;
+  sw_model(x,ax,ay,ar,{t:tt,core:1,think:0.6});
   // the query tool: read only; the hand reaches it, and the records come back
   if(fa>0.01){ag_tool(x,1300,170,440,130,"Query",{a:fa,touch:ag_in(tt,P.finds+0.6,0.4)});ag_reach(x,[ax+60,ay-30,760,320,1060,240,1290,236],u,{grip:u>0.95?1:0,data:tt<P.feb+1.5?d:0});}
-  sw_night(x);ag_model(x,ax,ay,66,{only:"light",t:tt,core:1,think:0.6});
+  sw_night(x);ag_model(x,ax,ay,ar,{only:"light",t:tt,core:1,think:0.6});
   const ca=ag_io(tt,P.loads-0.2,P.finds-0.2,0.4),sk=sw_pop(tt,P.skill-0.3,null);
   if(ca>0.01){x.save();x.globalAlpha*=ca;sw_slim(x,760,140,1040,SW_SKILLS[SW_RECON][0],SW_SKILLS[SW_RECON][1],{a:sk.a,k:sk.k,lit:1});
     for(let i=0;i<3;i++){const p=sw_pop(tt,P.checks+i*0.3,null),y=290+i*150,b=ag_textCard(x,760,y,1040,{title:SW_CAUSES[i].title,sub:"Shows: "+SW_CAUSES[i].shows},{k:p.k,a:p.a});

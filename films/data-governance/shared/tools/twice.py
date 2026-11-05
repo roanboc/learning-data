@@ -9,7 +9,8 @@ never catch it, and viewers do: people appeared as ghosts for under two seconds.
 shots), and such a chapter opens on one (gv_cutInto or ag_cutInto, after the film's last scene()).
 
 It finds every dissolve and chapter crossfade (a pass four times a second, with the shots each chapter passes), draws each of their
-frames, 30 a second, while both pictures are clearly seen, and lists each person, line of words and place that both draw: a person
+frames, 30 a second, while both pictures are clearly seen, and lists each person, line of words and place that both draw (the
+agentic module's agents count as one person, since they look alike: one dissolved into another place showed it twice): a person
 or a line of words that leaves one place and arrives at another more than PX apart (or at sizes more than SIZE apart), a person
 who stays put but whose arms are in two poses more than ARM apart (or who faces both ways), and a place whose two cameras are more
 than ROOM apart. A shot in the room of the one before glides and dissolves even where it's marked as a cut (gv_shots, ag_shots), so
@@ -46,6 +47,12 @@ if(typeof ag_person==="function"){const o1=ag_person;ag_person=function(ctx,who,
         H_=typeof AG_HANG!=="undefined"?AG_HANG:{near:[4,34],far:[0,6]},n=po&&po.near||H_.near,f=po&&po.far||H_.far;arms=[n[0],n[1],f[0],f[1]].map(v=>v*Math.PI/180);}catch(e){}
     add(ctx.canvas,{k:"P",key,x:q[0],y:q[1],z:Math.hypot(m.a,m.b)*s,a:ctx.globalAlpha,b:[-500,500,-400,560],arms,flip:!!op.flip!==(m.a<0)});}
   return o1.apply(this,arguments);};}
+// the module's agents (ag_model, a sphere): like one person, in one place at a time, since they look alike; its size is its radius. The mark on a
+// title card (ag_mark) is an emblem, not the agent
+let mark=0;if(typeof ag_mark==="function"){const om=ag_mark;ag_mark=function(){mark++;try{return om.apply(this,arguments);}finally{mark--;}};}
+if(typeof ag_model==="function"){const o2=ag_model;ag_model=function(ctx,x,y,r,op){op=op||{};const a=op.a==null?1:op.a;
+    if(H.on&&!mark&&op.only!=="light"&&a>0){const m=ctx.getTransform(),q=at(m,x,y);add(ctx.canvas,{k:"P",key:"the agent",x:q[0],y:q[1],z:Math.hypot(m.a,m.b)*r,a:ctx.globalAlpha*a,b:[-1.1,1.1,-1.1,1.1],arms:null,flip:false});}
+  return o2.apply(this,arguments);};}
 // a scratch canvas starts again empty
 for(const nm of["wc_buf","ag_buf"]){if(typeof window[nm]!=="function")continue;const ob=window[nm];
   window[nm]=function(){const r=ob.apply(this,arguments);if(r&&r[0])H.pend.delete(r[0]);return r;};}

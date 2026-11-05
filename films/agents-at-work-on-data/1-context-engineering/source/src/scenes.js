@@ -350,8 +350,9 @@ scene("verse",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({asks:wAt(sc,
     // Jun asks again; this time the agent looks the word up in Docs, counts with Query, and cites Mei's definition
     // a later moment in the same room (later:true): the team leaves, then Jun at his desk comes in, as the camera glides on
     {later:true,at:0,place:"lab",keys:[[0,960,540,1],[0.1,955,535,1.02]],d:10,push:0.01,draw:(x,tt)=>ce_again(x,tt,P)},
-    // a new analyst in Planning reads the same definition her agent reads
-    {cut:true,at:P.newA,place:"lab",keys:[[P.newA,960,540,1],[P.newA+0.1,950,530,1.03]],d:7,push:0.01,draw:(x,tt)=>{
+    // a new analyst in Planning reads the same definition her agent reads. A later moment in the lab: Jun's desk leaves before hers comes
+    // in (dissolved one into the other, the two desks and the agent showed twice)
+    {later:true,at:P.newA,place:"lab",keys:[[P.newA,960,540,1],[P.newA+0.1,950,530,1.03]],d:7,push:0.01,draw:(x,tt)=>{
       const ax=1000,ay=470;ag_modelLight(x,ax,ay,56,1,null);ag_reach(x,[ax-56,ay+10,ax-110,ay+40,880,420,850,410],ag_sine(clamp((tt-P.agent+0.6)/1.0,0,1)),{grip:1,data:clamp((tt-P.agent)/1.6,0,1),k:0.8});
       ag_model(x,ax,ay,56,{t:tt,core:1});
       ce_desk(x,CE_LUCIA,1460,640,0.98,1060,1010,860,{t:tt,flip:true,gaze:[2.5,0.4],smile:0.3});

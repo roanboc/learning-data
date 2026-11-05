@@ -2568,6 +2568,8 @@ const ml_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 // the shared ag_shots: a shot may dissolve in over its own time (sh.dis, seconds; 0.5 by default): the river into today takes longer;
 // in one room the camera glides on from shot to shot, and between rooms a shot marked cut comes in on a cut
 const ml_shots=(ctx,S,t,end,shots)=>ag_shots(ctx,S,t,end,shots);
+// the bare lab, as a later moment passes through it: its light, which every shot of it draws
+AG_BARE.lab=c=>ag_roomLight(c,1);
 // the corner's kicker: the latest of [[t, num, title], ...] passed, dissolving from the one before; a null num hides it
 function ml_kick(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?ag_in(t,mk[i][0],0.5):1;
   if(u<1&&mk[i-1][1])ag_kicker(ctx,mk[i-1][1],mk[i-1][2]||"",{a:a*(1-u)});if(mk[i][1])ag_kicker(ctx,mk[i][1],mk[i][2]||"",{a:a*u});}
@@ -2917,8 +2919,10 @@ scene("script",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({March:wAt(s
   ml_shots(ctx,S,t,sc.dur,[
     // Jun's room: next March's calendar; the evidence lines up into a recipe, with its test; Noor approves it; it runs each census day; the agent rests
     {at:0,place:"lab",keys:[[0,980,530,1.02],[0.1,990,530,1.03]],d:P.web,push:0.01,draw:(x,tt)=>ml_recipeRoom(x,tt,P)},
-    // once: an agent whose plan named no tools took the long way, out to the web, though Docs had the rules; now each plan names them
-    {cut:true,at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
+    // once: an agent whose plan named no tools took the long way, out to the web, though Docs had the rules; now each plan names them.
+    // Another time in the lab (later:true): today's room leaves before that day's comes in (dissolved one into the other, the agent showed
+    // in two places, and the plan's words over the recipe's)
+    {later:true,at:P.web-0.4,dis:0.7,place:"lab",keys:[[P.web-0.4,1000,520,1.04],[P.web-0.3,990,520,1.02]],d:8,push:0.01,draw:(x,tt)=>ml_longWay(x,tt,P)},
     // two columns on the wall: a plain script for the steps that are known, an agent for the steps nobody can write in advance
     {cut:true,at:P.known-0.4,dis:0.7,place:"lab",keys:[[P.known-0.4,960,520,1.02],[P.known-0.3,960,530,1.0]],d:6,push:0.01,draw:(x,tt)=>ml_twoCols(x,tt,{
       aL:ag_in(tt,P.known-0.3,0.6),rm:ag_sine(ag_in(tt,P.plainS-0.7,0.9)),rl:ag_in(tt,P.plainS,0.4),aR:ag_in(tt,P.keep-0.4,0.6),am:ag_sine(ag_in(tt,P.agents-0.3,1.1)),

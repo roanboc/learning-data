@@ -230,8 +230,10 @@ scene("mixing",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({whatever:wA
     reasonW:wAt(sc,"brings","a reason"),notsci:wAt(sc,"science","not for science"),mean:wAt(sc,"choice","what we mean"),achoice:wAt(sc,"choice","a choice"),end:sc.dur-2.8,three:wAt(sc,"boden","three ways")}));
   const H0=c.others+0.15,seg=[[H0,H0+1.4],[H0+1.75,H0+2.85],[H0+3.2,H0+4.3]];
   const shots=[tt_openShot(1),
-    // the agent writes a short poem: each word made of small pages that stream into the ring and come out as words
-    {cut:true,at:2.4,place:"lab",keys:[[2.4,1000,500,1.04]],d:2,push:0.012,draw:(x,tt)=>{const [rx,ry]=[1124,476];ag_loop(x,rx,ry,{t:tt,think:0.8,label:null,stepA:[0,0,0]});
+    // the agent writes a short poem: each word made of small pages that stream into the ring and come out as words. A later moment in
+    // the lab: the team and the agent at rest leave, then the agent at its work comes in (dissolved one into the other, the agent showed
+    // in two places)
+    {later:true,at:2.4,place:"lab",keys:[[2.4,1000,500,1.04]],d:2,push:0.012,draw:(x,tt)=>{const [rx,ry]=[1124,476];ag_loop(x,rx,ry,{t:tt,think:0.8,label:null,stepA:[0,0,0]});
       tt_roughCopy(x,rx,ry,88,tt,{pages:1,neurons:0,from:"right"});ag_roomLight(x,1);tt_poem(x,180,330,tt,3.0,{src:[rx-60,ry],rate:0.2});}},
     // a grandmother draws a house and passes the pencil; a parent adds a tree; a child adds a sun with a face no one else would have drawn
     {at:c.others-0.4,place:"tt_tableTop",keys:[[c.others-0.4,960,520,1.0]],d:2,push:0.02,draw:(x,tt)=>{
@@ -428,8 +430,10 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
       tt_spiral(x,520,470,230,{dots:1,wire:1,rings:10,lit:10});ag_loop(x,1400,470,{t:tt,label:null,stepA:[0,0,0],think:0.3});tt_roughCopy(x,1400,470,88,tt,{neurons:0.6,pages:0.6});ag_roomLight(x,1);
       const L=tt_pop(tt,P.like),N=tt_pop(tt,P.not),D=tt_pop(tt,P.dk),go=1-ag_in(tt,c.helps-0.9,0.4);
       tt_tag(x,960,520,"like us",{a:L.a*go,k:L.k,col:AG.green});tt_tag(x,960,610,"not like us",{a:N.a*go,k:N.k,col:AG.amber});tt_tag(x,960,700,"still don't know",{a:D.a*go,k:D.k});}},
-    // the room: Jun hands the agent a task, read only; the sign-off stays with Mei; the five questions on the wall, each with its tag
-    {cut:true,at:c.helps-0.4,place:"lab",keys:[[c.helps-0.4,1000,560,1.08],[c.answers,960,540,1.0]],d:4,push:0,draw:(x,tt)=>{const t0=c.helps-0.4,back=tt>=t0+1.9,lift=ag_sine(tt_on(tt,P.keep-0.3,0.8));
+    // the room: Jun hands the agent a task, read only; the sign-off stays with Mei; the five questions on the wall, each with its tag. A
+    // later moment in the lab: the spiral and the agent leave, then the team comes in (dissolved one into the other, the agent showed
+    // in two places, and the spiral over the team)
+    {later:true,at:c.helps-0.4,place:"lab",keys:[[c.helps-0.4,1000,560,1.08],[c.answers,960,540,1.0]],d:4,push:0,draw:(x,tt)=>{const t0=c.helps-0.4,back=tt>=t0+1.9,lift=ag_sine(tt_on(tt,P.keep-0.3,0.8));
       tt_team(x,tt,{pose2:[null,TT_LIFT],mix:[0,lift],hold:[null,tt_heldSign(clamp(lift*2.5,0,1))],
         gaze:TT_SEATS.map((_,i)=>i===0?[3,-1]:[3,0]),smile:[0.5,0.45,0.35,0.35,0.35],core:0.4+0.5*ag_io(tt,P.hand+1.4,c.answers,0.6)});
       tt_qrow(x,{out:back?-1:4,tags:[1,1,1,1,ag_in(tt,t0+1.9,0.5)],a:1-ag_in(tt,c.breath,0.8)});

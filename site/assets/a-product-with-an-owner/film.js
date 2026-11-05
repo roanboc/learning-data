@@ -4381,7 +4381,7 @@ function po_jobTable(x,tt,P,o){o=o||{};po_cardSmall(x,{sign:o.sign||0,pen:o.pen|
   const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",rows:[{l:"needs:",v:"Clara's yes"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
 scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{im:w("didnt","I'm")-0.15,book:c.depends-0.4,dep:w("depends","who depends"),dash:w("depends","near-award")-0.1,fac:w("depends","every faculty")-0.1,
-      worth:c.worth-0.3,num:w("worth","a number"),ask:w("worth","someone"),comes:c.comes-0.3,jun:w("comes","Jun")-0.1,noor:w("comes","Noor")-0.1,sam:w("comes","Sam")-0.1,
+      worth:c.worth-0.3,num:w("worth","a number"),ask:w("worth","someone"),glide:c.comes-1.3,table:c.comes+0.1,jun:w("comes","Jun")-0.1,noor:w("comes","Noor")-0.1,sam:w("comes","Sam")-0.1,
       chg:w("comes","any change")-0.1,yes:w("comes","her yes"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning's room: Clara stands by the window, arms folded: "I'm not technical"
@@ -4395,9 +4395,13 @@ scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o
         po_tagAt(q,tt,P.dash+0.1,null,-195,470,"the near-award dashboard",{size:30});po_tagAt(q,tt,P.fac+0.1,null,356,196,"every faculty that plans from it",{size:30});
         po_tagAt(q,tt,P.num,null,-195,546,"a number on time",{size:30});po_tagAt(q,tt,P.ask,null,356,546,"someone to ask",{size:30});});}},
 
-    // the product's card again, and what comes with it: three cards go down by it as each is named, then a change request. The camera
-    // holds its zoom (no push), at the least that keeps the card's words at 28 px, so the card and the three beside it keep clear of the edges
-    {cut:true,at:P.comes,place:"planTop",keys:[[P.comes,838,432,1.252],[P.comes+0.1,838,430,1.252]],d:6,push:0,draw:(x,tt)=>po_jobTable(x,tt,P)},
+    // the notebook leaves as the camera glides over the bare table to where the card will lie (one room: the notebook dissolving into the
+    // card showed one through the other, and the card came in while the camera was still wide, its words under 28 px)
+    {at:P.glide,place:"planTop",keys:[[P.glide,838,432,1.252]],d:1.4,push:0},
+    // the product's card again, once the camera is there, and what comes with it: three cards go down by it as each is named, then a change
+    // request. The camera holds its zoom (no push), at the least that keeps the card's words at 28 px, so the card and the three beside it
+    // keep clear of the edges
+    {at:P.table,place:"planTop",keys:[[P.table,838,432,1.252],[P.table+0.1,838,430,1.252]],d:6,push:0,draw:(x,tt)=>po_jobTable(x,tt,P)},
     // Planning's room: Clara unfolds her arms, and reaches for the pen
     {cut:true,at:P.room,place:"planning",keys:[[P.room,1214,520,1.42],[P.room+0.1,1230,524,1.46]],d:3,draw:(x,tt)=>{const u1=easeCam(clamp((tt-P.room-0.25)/0.6,0,1)),u2=easeCam(clamp((tt-P.room-0.85)/0.6,0,1));
       po_jobRoom(x,tt,{book:true,yusuf:{expr:"smile"},clara:u2>0?{pose:"listen",pose2:"po_reachDown",mix:u2,E:EXPR.smile}:{pose:"po_fold",pose2:"listen",mix:u1,E:po_exprMix("concerned","smile",u1)}});}},

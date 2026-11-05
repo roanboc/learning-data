@@ -1,5 +1,6 @@
 """Check the film before a long render: python tools/check.py
-First From words to data's check, unchanged: every moment draws, 30 a second, as the video does. Then one of the module's own:
+First From words to data's checks, unchanged: every moment draws, 30 a second, as the video does (check.py there), and no text is
+drawn smaller than 28 px after the camera's zoom, the smallest that reads on a phone (legible.py there). Then one of the module's own:
 each place the film paints (AG_PLACES), painted again from nothing (with the oak and the grain it shares), leaves the page drawing
 again within LIMIT seconds. The site's player paints the places one by one while the film plays, so a place that keeps the browser
 busy for seconds holds up the film, its soundtrack and the whole page. Paint what is soft anyway at a lower resolution and scale it up,
@@ -15,11 +16,12 @@ from playwright.sync_api import sync_playwright
 LIMIT = 2.0  # seconds from a place's first stroke until two frames after it; the lab takes about half a second
 
 failed = []
-try:
-    runpy.run_path(str(FW / 'check.py'), run_name='__main__')
-except SystemExit as e:
-    if e.code:
-        failed.append(str(e.code))
+for tool in ('check.py', 'legible.py'):
+    try:
+        runpy.run_path(str(FW / tool), run_name='__main__')
+    except SystemExit as e:
+        if e.code:
+            failed.append(str(e.code))
 
 with sync_playwright() as p:
     b, pg = render_page(p)

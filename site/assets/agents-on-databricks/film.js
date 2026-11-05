@@ -2213,7 +2213,7 @@ function od_draft(ctx,x,y,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
    the office the cards stand where the next desk would be, and only that desk's person and things are drawn. */
 
 // the bare lab, by day and by night, as a later moment passes through it: the light every shot of it draws
-AG_BARE.lab=c=>ag_roomLight(c,1);AG_BARE.labNight=c=>ag_roomLight(c,1,{night:true});
+AG_BARE.lab=c=>ag_roomLight(c,1);AG_BARE.labNight=c=>ag_roomLight(c,1,{night:true});AG_BARE.odOffice=c=>ag_roomLight(c,1);
 
 // a phase: 0 before tIn, rising to 1 over din; from tOut, from 1 to 2 over dout (for what is shown, then put away)
 const od_ph=(t,tIn,tOut,din,dout)=>t<tOut?clamp((t-tIn)/(din||0.6),0,1):1+clamp((t-tOut)/(dout||0.5),0,1);
@@ -2302,8 +2302,8 @@ scene("three",(ctx,S,t,sc)=>{
     {at:T.tTable-0.15,cut:true,place:"odOffice",keys:[OD_Z2],draw:(c,tt)=>{od_room(c,tt,{only:1,lit:[1,1,1],cable:[1,1,1],gaze:[null,[6,0]]});
       od_scr(c,S,()=>{const k=(tt-T.tTable-0.4)/0.6;od_tableCard(c,1040,72,{k,a:ag_in(k,0,0.3),rows:clamp((tt-T.tTable-0.6)/1.0,0,1),hl:clamp((tt-T.tName)/0.45,0,3),joint:ag_in(tt,T.tJoint,0.6)});
         od_answer(c,1450,432,"2,911",{u:clamp((tt-T.tN2+0.9)/0.7,0,1),from:fromZ(OD_Z2,1),numA:ag_in(tt,T.tN2-0.15,0.3)});});}},
-    // the third desk: a folder of reports, and 2,880
-    {at:T.tFolder-0.15,cut:true,place:"odOffice",keys:[OD_Z3],draw:(c,tt)=>{od_room(c,tt,{only:2,lit:[1,1,1],cable:[1,1,1],gaze:[null,null,[5,0]]});
+    // the third desk: a folder of reports, and 2,880; the second desk leaves before it comes in, so no agent shows in two places
+    {at:T.tFolder-0.15,later:true,dis:0.45,place:"odOffice",keys:[OD_Z3],draw:(c,tt)=>{od_room(c,tt,{only:2,lit:[1,1,1],cable:[1,1,1],gaze:[null,null,[5,0]]});
       od_scr(c,S,()=>{const k=(tt-T.tReports+0.3)/0.6;od_reports(c,64,72,clamp((tt-T.tReports)/1.4,0,1),{k,a:ag_in(k,0,0.3)});
         od_answer(c,1630,80,"2,880",{u:clamp((tt-T.tN3+0.9)/0.7,0,1),from:fromZ(OD_Z3,2),numA:ag_in(tt,T.tN3-0.15,0.3)});});}},
     // three answers, and nothing to tell them apart
@@ -2320,8 +2320,8 @@ scene("three",(ctx,S,t,sc)=>{
     // Sam and Jun bring the agents to the data: the platform's shelf, and the three agents' cables plugged into its tools
     {at:T.tBring-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>od_labOpening(c,S,tt,{in:clamp((tt-T.tAgents+0.2)/1.4,0,1),plug:clamp((tt-T.tSame)/1.6,0,1),lock:clamp((tt-T.tOnly)/0.8,0,1),
       names:[(tt-T.tBring-0.3)/0.5,(tt-T.tJun+0.1)/0.5]})},
-    // a week later: three answers, the same, each with its evidence; each agent wired to the platform, its copy unplugged
-    {at:T.tWeek-0.3,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{od_room(c,tt,{lit:[1,1,1],blue:1,gaze:[[4,-3],[4,-3],[4,-3]]});
+    // a week later: three answers, the same, each with its evidence; each agent wired to the platform, its copy unplugged (a cut: the lab shows the same agents)
+    {at:T.tWeek-0.3,cut:true,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{od_room(c,tt,{lit:[1,1,1],blue:1,gaze:[[4,-3],[4,-3],[4,-3]]});
       wideAns(c,tt,{num:["2,880","2,880","2,880"],u:[0,1,2].map(i=>clamp((tt-T.tAll-i*0.25)/0.7,0,1)),ev:[0,1,2].map(i=>clamp((tt-T.tQuery+0.2-i*0.12)/(T.tDef-T.tQuery+0.6),0,1))});
       od_scr(c,S,()=>od_tag(c,"A week later",ag_in(tt,T.tWeek,0.5)));}},
     // Anil checks it in a minute, and plans a place for every student
@@ -2332,8 +2332,8 @@ scene("three",(ctx,S,t,sc)=>{
     {at:T.tDel-0.15,cut:true,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{const g=ag_in(tt,T.tDel+0.3,1.0);od_room(c,tt,{lit:[1,1,1],blue:1,gone:g,smile:[0.8,0.3,0.3]});
       wideAns(c,tt,{num:["2,880","2,880","2,880"],ev:[1,1,1]});
       [[540,556],[1150,600],[1745,600]].forEach(([x,y],i)=>od_note(c,x,y,"deleted",ag_in(tt,T.tDel+0.5+i*0.2,0.4)));}},
-    // every agent reads the same data through the same tools: the shelf, and a blue thread from each agent
-    {at:T.tData-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
+    // every agent reads the same data through the same tools: the shelf, and a blue thread from each agent (a cut: the office shows the same agents)
+    {at:T.tData-0.3,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
       od_labOpening(c,S,tt,{in:1,plug:1,lock:0,cards:false});c.restore();}}
   ],0.6);
   ag_title(ctx,S,t,sc.cues.breath,"Working with agents on Databricks","the same data and tools people use, in one place","FILM 7 OF 9 · AGENTS AT WORK ON DATA");
@@ -2400,8 +2400,8 @@ scene("tools",(ctx,S,t,sc)=>{
   const tb=i=>{const b=od_toolBox(i);return[b.x-14,b.y+b.h/2];};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
-      // an agent, then Anil's, which takes its place among the agents that call the census count
-      const an=ag_in(tt,0.4,0.6),mv=ag_sine((tt-T.tOnce+0.7)/1.0),ax=lerp(AX,row[0][0],mv),ay=lerp(AY,row[0][1],mv),ar=lerp(AR,30,mv);
+      // an agent, then Anil's, which takes its place among the agents that call the census count; it comes in once the last chapter's end has gone
+      const an=ag_in(tt,0.8,0.6),mv=ag_sine((tt-T.tOnce+0.7)/1.0),ax=lerp(AX,row[0][0],mv),ay=lerp(AY,row[0][1],mv),ar=lerp(AR,30,mv);
       const calls=clamp((tt-T.tCalls)/1.6,0,1);
       if(an>0){c.save();c.globalAlpha*=an;ag_floorShadow(c,ax+AG.sdx,ay+ar*0.98+(1-mv)*170,ar*1.2,ar*0.24,0.3);ag_model(c,ax,ay,ar,{t:tt,core:0.9,think:0.3});c.restore();}
       [1,2,3].forEach(i=>{const k=ag_in(tt,T.tCalls+0.2+i*0.2,0.5);if(k>0){c.save();c.globalAlpha*=k;ag_floorShadow(c,row[i][0]+AG.sdx,row[i][1]+29,36,8,0.3);ag_model(c,row[i][0],row[i][1]-(1-ag_eo(k))*30,30,{t:tt+i,core:0.9});c.restore();}});
@@ -2534,8 +2534,8 @@ scene("same",(ctx,S,t,sc)=>{
     // Anil plans a place for every student
     {at:T.tPlans-0.2,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],gone:1,blue:1,smile:[0.8],gaze:[[6,-2]]});
       od_scr(c,S,()=>{const k=(tt-T.tPlans+0.1)/0.6;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),ok:1});od_answer(c,1440,452,"2,880",{ev:1,tick:1});});}},  // the plan as it now stands: every student has a place
-    // one question is left: the census check agent, alone at night
-    {at:T.tLeft-0.4,place:"labNight",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
+    // one question is left: the census check agent, alone at night (a cut under the takeaway's veil, so no agent shows in two places)
+    {at:T.tLeft-0.6,cut:true,place:"labNight",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
       ag_loop(c,960,500,{R:140,r:64,core:0.7,think:0.2,label:null,t:tt,floor:690});
       ag_roomLight(c,1,{night:true});ag_model(c,960,500,64,{only:"light",t:tt,core:0.8});ag_pill(c,960,300,"Census check agent",{size:28});
       od_ask(c,330,410,"Whose reads?",ag_in(tt,T.tWhose-0.1,0.4),{k:(tt-T.tWhose+0.1)/0.5});od_ask(c,1200,410,"Who pays for its model?",ag_in(tt,T.tPays-0.1,0.4),{k:(tt-T.tPays+0.1)/0.5});

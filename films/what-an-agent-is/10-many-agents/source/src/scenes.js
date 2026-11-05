@@ -184,8 +184,10 @@ scene("many",(ctx,S,t,sc)=>{
   ag_shots(ctx,S,t,sc.dur,[
     // crowds of a new kind, coming fast: more and more agents gather, and the camera draws back as the crowd grows
     {at:0,place:"lab",keys:[[0,960,720,1.5]],push:-0.2,draw:(c,tt)=>ma_mob(c,tt)},
-    // a lead agent splits the job among helpers, and a checking agent checks what they find; then back to the whole wall for two findings
-    {cut:true,at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
+    // a lead agent splits the job among helpers, and a checking agent checks what they find; then back to the whole wall for two findings.
+    // A later moment in the lab: the crowd leaves, then the team comes in (dissolved one into the other, an agent of the crowd showed
+    // through the lead agent)
+    {later:true,at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
     // together: the naming game, the group's lean, and the test of the group
     {cut:true,at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)}],0.8);
 });
@@ -583,8 +585,10 @@ scene("close",(ctx,S,t,sc)=>{
     tTake:wAt(sc,"takeaway","When many"),tYet:wAt(sc,"takeaway","and we don't"),tNext:wAt(sc,"next","Next")};
   T.sMound=T.tNeither-0.7;T.sEG=T.tEGwas-0.6;T.sPlant=T.tMeasuring-0.1;T.sTeam=T.tTeam-0.6;
   ag_shots(ctx,S,t,sc.dur,[
-    // imagined: the room at night, agents starting agents, mending each other's work, a clock turning through the night
-    {at:0,place:"labNight",keys:[[0,900,560,1.2],[T.tMight-0.6,900,530,1.26]],d:2.4,push:0,draw:(c,tt)=>mc_night(c,S,tt,T)},
+    // imagined: the room at night, agents starting agents, mending each other's work, a clock turning through the night. A later moment
+    // in the lab, so the chapter opens on it (ag_cutInto): the crowd leaves, and the camera glides on from it to the night as the night's
+    // agents come in (crossed, the crowd's agents and the night's showed at once)
+    {later:true,at:0,place:"labNight",keys:[[0,960,694,1.4],[0,900,560,1.2],[T.tMight-0.6,900,530,1.26]],d:2.4,push:0,draw:(c,tt)=>mc_night(c,S,tt,T)},
     // the mound: the idea then, then sensors, a lung, the day and the night
     {at:T.sMound,place:"maMoundCut",keys:[[0,900,520,1.06],[T.tLungW-0.4,900,500,1.14]],d:1.8,push:0,draw:(c,tt)=>mc_mound(c,S,tt,T)},
     // Eastgate, later: built on the wrong idea, and still it works
@@ -602,4 +606,4 @@ scene("close",(ctx,S,t,sc)=>{
 });
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
-ag_cutInto(["board", "alive"]);
+ag_cutInto(["board", "alive", "close"]);

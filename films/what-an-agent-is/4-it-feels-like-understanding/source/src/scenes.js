@@ -456,9 +456,10 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fu_once(sc,"P",()=>({
     plan:c.plan,on:wAt(sc,"plan","plan on"),take:c.takeaway,br:c.breath}));
   const T={ask:P.asks,read:P.yes+0.5,query:P.yes+1.3,check:P.counts-0.2,done:P.counts+0.4};
   const sh=[
-    // this term: Jun asks again; the agent reads the question back, and waits; "Yes."; its hands, the data back, the check
+    // this term: Jun asks again; the agent reads the question back, and waits; "Yes."; its hands, the data back, the check. The agent
+    // comes in once the board has gone (as the chapters crossed, it showed both here and on the board)
     {at:0,place:"fuData",keys:[[0,960,520,1.04]],push:0.03,draw:(x,tt)=>{
-      fu_agentAt(x,tt,T,{think:0.15});fu_junDesk(x,tt,{gaze:tt<P.reads?[4,-1]:[6,-2],smile:0.4,talk:ag_talk(sc,"yes",tt)*0,folder:{dust:0}});ag_roomLight(x,1);
+      fu_agentAt(x,tt,T,{think:0.15,a:ag_in(tt,0.8,0.5)});fu_junDesk(x,tt,{gaze:tt<P.reads?[4,-1]:[6,-2],smile:0.4,talk:ag_talk(sc,"yes",tt)*0,folder:{dust:0}});ag_roomLight(x,1);
       ag_textCard(x,500,92,560,{sub:"Students in the Faculty of Health, each person counted once?"},{a:fu_fin(tt,P.reads,0.5)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.reads,0.7),edge:AG.violet,tail:{side:"right",at:0.85,px:1000,py:330}});
       fu_bubble(x,330,292,"Yes.",{a:fu_fin(tt,P.yes,0.4)*(1-fu_fin(tt,P.counts-0.6,0.4)),k:ag_spr(tt,P.yes,0.7),px:322,py:378,w:150});}},
     // 2,880 people, and the faculty's own list beside it: the same; a green tick; Jun's initials

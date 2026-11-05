@@ -16,7 +16,7 @@
      cm_session(ctx, x, y, w, h, o) a session: o.date, o.lines (what was said, as quiet bars or words), o.a
      cm_store(ctx, x, y, w, h, o)   a store: o.kick, o.title, o.rows (entries, each {text, a, col, dashed}), o.edge, o.lock (read only),
                                     o.dashed (only proposals), o.a
-     cm_step(ctx, x, y, o)          the platform's daily memory step: a violet card with a clock, "Memory step", "once a day · beta"
+     cm_step(ctx, x, y, o)          the platform's daily memory step: a violet card with a clock, "Memory step", "once a day"
      cm_script(ctx, x, y, title, sub, o)  a plain script, no model: a blue card with a gear
      cm_arrow(ctx, p, u, o)         an arrow along a cubic curve p [x0,y0, x1,y1, x2,y2, x3,y3], drawn to u; o.col, o.dash, o.lw, o.a
      cm_reads(ctx, x0, y0, x1, y1, u, o)  the dashed blue line an agent reads along, from the file to the agent */
@@ -145,7 +145,7 @@ function cm_cyl(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;cons
 function cm_step(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=o.w||400,h=124;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:AG.violet,edgeA:0.75,glow:o.glow?AG.violet:null,glowA:o.glow});
   cm_clock(ctx,x+50,y+62,26,rgba(AG.violet,1),o.turn||0);
-  ag_T(ctx,o.title||"Memory step",x+92,y+56,{w:700,size:32});ag_T(ctx,o.sub||"once a day · beta",x+92,y+96,{w:500,size:28,col:AG.mut});ctx.restore();return{x,y,w,h};}
+  ag_T(ctx,o.title||"Memory step",x+92,y+56,{w:700,size:32});ag_T(ctx,o.sub||"once a day",x+92,y+96,{w:500,size:28,col:AG.mut});ctx.restore();return{x,y,w,h};}
 function cm_clock(ctx,x,y,r,col,turn){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.stroke();
   const a1=-Math.PI/2+turn*TAU,a2=-Math.PI/2+turn*TAU/12;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a1)*r*0.72,y+Math.sin(a1)*r*0.72);ctx.stroke();
   ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(a2)*r*0.5,y+Math.sin(a2)*r*0.5);ctx.stroke();ctx.restore();}

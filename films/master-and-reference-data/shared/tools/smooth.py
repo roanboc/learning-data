@@ -18,7 +18,8 @@ film. Then it draws the film through:
 The limits leave room, about twice, for a slower machine than the one that drew the films (a browser with no graphics card, as
 the checks run, draws several times slower than a laptop's); the times are printed, film by film, to compare. On 5 November 2026,
 in that browser, nine moments in ten took at most 0.08 s at 1118 px and the slowest 0.28 s, and slowed four times the slowest took
-0.7 s: a crowd of twenty people in A product with an owner, Who decides and Teachers of data. Before, Rules that run took 3.2 s."""
+0.7 s: nine to twenty people painted every frame in Who decides and Teachers of data, and fourteen shadows blurred every frame
+in A product with an owner. Before, Rules that run took 3.2 s."""
 
 PAINT_LIMIT = 0.15    # seconds for anything painted once and kept while the film plays (a card, a sheet: a few hundredths)
 TYPICAL_LIMIT = 0.15  # seconds that nine moments in ten take at most at 1118 px (the films: 0.02 to 0.08 s)

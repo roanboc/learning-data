@@ -8,7 +8,7 @@ const BREATH={
 "policy":{"hold":{"masks":0.8,"tomorrow":1.4,"rows":0.4,"clara":1.0,"values":0.8}},
 "key":{"hold":{"code":0.8,"anon":0.6,"list":1.4,"still":1.0}},
 "groups":{"hold":{"never":0.4,"yes":0.8,"grants":0.4,"joins":0.8,"reads":0.6,"jobs":0.8,"ends":1.6}},
-"lineage":{"hold":{"draws":0.4,"pick":1.0,"beta":0.6,"stops":1.0}},
+"lineage":{"hold":{"draws":0.4,"pick":1.0,"follow":0.6,"stops":1.0}},
 "audit":{"hold":{"log":0.8,"answer":1.2,"review":1.0,"two":1.2}},
 "close":{"hold":{"plans":0.8,"flow":1.0,"sam":0.8,"last":0.2},"breathe":4.6}
 };

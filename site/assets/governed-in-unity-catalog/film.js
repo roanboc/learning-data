@@ -459,11 +459,11 @@ const NARR={
 "lineage":{"name":"Down to the column","lead":1.0,"tail":1.0,"vo":[
  {"id":"draws","gap":0.8,"text":"The platform also draws each column's lineage."},
  {"id":"pick","gap":0.8,"text":"Pick the learner's email, and it shows every table it flows into, down to the column."},
- {"id":"beta","gap":0.8,"text":"Tags can follow lineage by themselves, in beta."},
+ {"id":"follow","gap":0.8,"text":"Tags can follow lineage by themselves."},
  {"id":"need","gap":0.3,"text":"Here they don't need to: every table the email reaches is built by the project, which classes it there too,"},
  {"id":"stops","gap":0.8,"text":"and the check stops a table that doesn't."}]},
 "audit":{"name":"Who read this, and when","lead":1.0,"tail":1.0,"vo":[
- {"id":"log","gap":0.8,"text":"And the platform keeps a log, in preview, of who read each table, and when."},
+ {"id":"log","gap":0.8,"text":"And the platform keeps a log of who read each table, and when."},
  {"id":"answer","gap":0.8,"text":"So Sam can answer what Yusuf wanted to know: who read the learner table this month."},
  {"id":"review","gap":0.8,"text":"Each December, the access review reads the grants themselves: who can read each table, through which group, and who's in it."},
  {"id":"gave","gap":0.3,"text":"Forty-one people gave way to two groups:"},
@@ -476,7 +476,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"The platform enforces what the metadata says."}]}
 };
 
-const VODUR={"which/today": 1.906, "which/runs": 5.314, "which/asks": 5.676, "which/slowed": 5.925, "which/nobody": 4.185, "which/path": 6.113, "which/forty": 2.496, "which/nine": 4.302, "which/change": 1.288, "which/now": 6.068, "which/policy": 8.162, "which/groups": 2.22, "which/december": 4.528, "which/built": 2.351, "which/minutes": 3.999, "area/catalog": 6.933, "area/people": 2.868, "area/tag": 4.569, "area/discover": 6.145, "area/grant": 4.542, "tag/classes": 6.437, "tag/writes": 5.831, "tag/governed": 7.264, "tag/next": 3.716, "tag/classifier": 7.3, "policy/masks": 7.191, "policy/tomorrow": 6.608, "policy/rows": 3.342, "policy/clara": 6.028, "policy/values": 4.932, "key/code": 7.898, "key/anon": 1.62, "key/list": 4.462, "key/still": 7.27, "groups/never": 2.345, "groups/yes": 6.788, "groups/grants": 2.294, "groups/joins": 6.068, "groups/reads": 1.978, "groups/jobs": 4.363, "groups/ends": 3.27, "lineage/draws": 2.736, "lineage/pick": 4.746, "lineage/beta": 2.939, "lineage/need": 6.268, "lineage/stops": 1.867, "audit/log": 4.11, "audit/answer": 4.637, "audit/review": 7.012, "audit/gave": 2.268, "audit/two": 5.569, "close/plans": 4.993, "close/map": 4.986, "close/flow": 4.423, "close/sam": 4.07, "close/last": 2.645};
+const VODUR={"which/today": 1.906, "which/runs": 5.314, "which/asks": 5.676, "which/slowed": 5.925, "which/nobody": 4.185, "which/path": 6.113, "which/forty": 2.496, "which/nine": 4.302, "which/change": 1.288, "which/now": 6.068, "which/policy": 8.162, "which/groups": 2.22, "which/december": 4.528, "which/built": 2.351, "which/minutes": 3.999, "area/catalog": 6.933, "area/people": 2.868, "area/tag": 4.569, "area/discover": 6.145, "area/grant": 4.542, "tag/classes": 6.437, "tag/writes": 5.832, "tag/governed": 7.264, "tag/next": 3.716, "tag/classifier": 7.3, "policy/masks": 7.191, "policy/tomorrow": 6.608, "policy/rows": 3.342, "policy/clara": 6.028, "policy/values": 4.932, "key/code": 7.898, "key/anon": 1.62, "key/list": 4.462, "key/still": 7.27, "groups/never": 2.345, "groups/yes": 6.788, "groups/grants": 2.294, "groups/joins": 6.068, "groups/reads": 1.978, "groups/jobs": 4.363, "groups/ends": 3.27, "lineage/draws": 2.736, "lineage/pick": 4.746, "lineage/follow": 2.185, "lineage/need": 6.268, "lineage/stops": 1.867, "audit/log": 3.286, "audit/answer": 4.637, "audit/review": 7.012, "audit/gave": 2.268, "audit/two": 5.569, "close/plans": 4.993, "close/map": 4.987, "close/flow": 4.423, "close/sam": 4.07, "close/last": 2.645};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -488,7 +488,7 @@ const BREATH={
 "policy":{"hold":{"masks":0.8,"tomorrow":1.4,"rows":0.4,"clara":1.0,"values":0.8}},
 "key":{"hold":{"code":0.8,"anon":0.6,"list":1.4,"still":1.0}},
 "groups":{"hold":{"never":0.4,"yes":0.8,"grants":0.4,"joins":0.8,"reads":0.6,"jobs":0.8,"ends":1.6}},
-"lineage":{"hold":{"draws":0.4,"pick":1.0,"beta":0.6,"stops":1.0}},
+"lineage":{"hold":{"draws":0.4,"pick":1.0,"follow":0.6,"stops":1.0}},
 "audit":{"hold":{"log":0.8,"answer":1.2,"review":1.0,"two":1.2}},
 "close":{"hold":{"plans":0.8,"flow":1.0,"sam":0.8,"last":0.2},"breathe":4.6}
 };
@@ -3430,7 +3430,7 @@ function gc_index(ctx,t,o){o=o||{};GC_DRN.forEach((s,i)=>{const [x,y,w]=GC_IX.dr
 /* ---------- down to the column ---------- */
 // The lineage view, drawn as a form: the learner table in the middle with four of its columns; what it's built from at the left; what
 // it flows into at the right. o.pick (0 to 1) lights the email and draws its thread to the wallet's email, both tagged direct; o.none,
-// Planning's list's note; o.beta (0 to 1), a grey tag sliding along the thread
+// Planning's list's note; o.prop (0 to 1), a grey tag sliding along the thread
 const GC_LN={up:[["int_learner_timeline",160,420],["int_learners",160,560]],mid:[640,400,450,["learner_key","full_name","email","status"]],
   down:[["mart_wallet__learners",1240,330,["learner_key","full_name","email"]],["mart_planning__near_award",1240,590,[]],["mart_finance__tuition_forgone",1240,720,[]]]};
 function gc_lnBox(ctx,x,y,w,name,cols,o){o=o||{};const h=60+cols.length*46+(cols.length?14:0);wc_panel(ctx,x,y,w,h,{kind:"card",wash:o.wash,washA:0.15,seed:name.length+580});
@@ -3443,8 +3443,8 @@ function gc_lineage(ctx,t,o){o=o||{};gc_tablePage(ctx,{tab:4,sub:"university · 
   const dn=GC_LN.down.map(([n,x,y,cols],k)=>{const B=gc_lnBox(ctx,x,y,520,n,cols,{lit:k===0?{email:clamp(pk*1.6-0.6,0,1)}:{}});gc_arrow(ctx,[M[0]+M[2]+8,M[1]+60],[x-8,y+30],0,1,{a:0.5,lw:3});return B;});
   if(pk>0.01){const a=[M[0]+M[2]-30,mb.rows[2]-10],b=[1240+30,dn[0].rows[2]-10];gc_arrow(ctx,[M[0]+M[2],mb.rows[2]-10],[1240,dn[0].rows[2]-10],-40,clamp(pk*1.4-0.2,0,1),{col:GV_CLASSINK.direct,lw:5});
     gc_tag(ctx,null,0,M[0]+30+gu_mw(ctx,"email")+24,mb.rows[2]-10,"direct",clamp(pk*3,0,1));gc_tag(ctx,null,0,1270+gu_mw(ctx,"email")+24,dn[0].rows[2]-10,"direct",clamp(pk*2-1,0,1));
-    // tags following lineage by themselves: a ghost of the chip travels to the wallet's email, under a fixed "beta" label
-    const bt=clamp(o.beta||0,0,1);if(bt>0.01){withA(ctx,clamp(bt*4,0,1),()=>wc_tag(ctx,865,744,"tag propagation · beta",{size:28,align:"center",wash:GV.grey,washA:0.3,seed:591}));
+    // tags following lineage by themselves: a ghost of the chip travels to the wallet's email, under a fixed label
+    const bt=clamp(o.prop||0,0,1);if(bt>0.01){withA(ctx,clamp(bt*4,0,1),()=>wc_tag(ctx,865,744,"tag propagation",{size:28,align:"center",wash:GV.grey,washA:0.3,seed:591}));
       if(bt<1){const f=[M[0]+30+gu_mw(ctx,"email")+24,mb.rows[2]-10],to=[1270+gu_mw(ctx,"email")+24,dn[0].rows[2]-10],[px,py]=gc_along(f,to,-80,easeCam(clamp((bt-0.1)/0.7,0,1)));
         withA(ctx,0.45*Math.sin(clamp((bt-0.05)/0.9,0,1)*Math.PI),()=>gv_classChip(ctx,px,py,"direct"));}}}
   const nn=clamp(o.none||0,0,1);if(nn>0.01)withA(ctx,nn,()=>wc_hand(ctx,"no names or emails",1500,700,{size:30,w:700,align:"center",col:WC_PENCIL}));}
@@ -3464,10 +3464,10 @@ function gc_unclassed(ctx,t,o){o=o||{};const u=clamp(o.u||0,0,1);if(u<=0.01)retu
     gu_light(ctx,1760,454,"fail",0,clamp(er*3,0,1));}}
 
 /* ---------- who read this, and when ---------- */
-// A query on the platform's system tables and its result: who read the learner table this month (the audit log, in preview), or which
+// A query on the platform's system tables and its result: who read the learner table this month (the audit log), or which
 // groups can read it (the access review). o.rows (0 to 1) brings the result; o.lit[k] lights row k; o.strike[k] crosses row k out, with
 // its note; o.notes[k] (0 to 1), who's in each group
-const GC_AUD={title:"Who read the learner table",sub:"analyses/governance/who_read_a_table.sql · compiled",pill:"system.access.audit · preview",
+const GC_AUD={title:"Who read the learner table",sub:"analyses/governance/who_read_a_table.sql · compiled",
   q:["select event_time, user_identity.email","from system.access.audit","where action_name = 'getTable'","  and request_params.full_name_arg = 'university.prod_core.core_learner_v1'",
     "  and event_date >= date_trunc('month', current_date())","order by event_time"],head:[["event_time",180],["email",620]],
   rows:[["2026-10-26 08:02","5f2d8c1e-…","the build"],["2026-10-27 09:14","mei.tanaka@uni.example"],["2026-10-28 10:31","clara.jensen@uni.example"]]};
@@ -3703,21 +3703,21 @@ scene("groups",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({top:c.yes-0
       gc_card(x,0,"A. Moreau",gv_io(tt,P.jobs-0.4,P.moves,0.6));gc_card(x,3,"A. Moreau",fin(tt,P.moves+0.6,0.9),{dx:80});}}],sc.dur));
   wc_year(ctx,56,72,"15 December 2026",gv_io(t,P.ends-0.6,sc.dur,0.4));});
 
-// ---- 7 · Down to the column: the learner's email, picked, and every table it flows into; tags following lineage, in beta; each table
+// ---- 7 · Down to the column: the learner's email, picked, and every table it flows into; tags following lineage; each table
 // classed in the project; and the check that stops one that isn't ----
-scene("lineage",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({email:wAt(sc,"pick","email"),every:wAt(sc,"pick","every table"),beta:wAt(sc,"beta","follow lineage"),
+scene("lineage",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({email:wAt(sc,"pick","email"),every:wAt(sc,"pick","every table"),prop:wAt(sc,"follow","follow lineage"),
     nd:wAt(sc,"need","every table")-0.3,built:wAt(sc,"need","built by the project"),classes:wAt(sc,"need","classes it there"),
     stp:c.stops-0.3,check:wAt(sc,"stops","the check"),stops:wAt(sc,"stops","stops")}));
   gv_shots(ctx,S,t,sc.dur,gc_run([
     // the lineage view: the email, and the column it flows into; Planning's and Finance's lists get no names or emails
-    {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_lineage(x,tt,{pick:clamp((tt-P.email)/1.4,0,1),none:fin(tt,P.every+0.6,0.6),beta:clamp((tt-P.beta)/2.4,0,1)})},
+    {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_lineage(x,tt,{pick:clamp((tt-P.email)/1.4,0,1),none:fin(tt,P.every+0.6,0.6),prop:clamp((tt-P.prop)/2.4,0,1)})},
     // the wallet's learners in the project: the email, classed there too (the opening film's check)
     {cut:true,at:P.nd,place:"desk",keys:[[P.nd,960,500,1]],push:0.02,draw:(x,tt)=>{gc_walletSheet(x,clamp((tt-P.nd)/0.8,0,1),fin(tt,P.classes,0.5));
       gu_filmTag(x,1840,846,"Governed in dbt",fin(tt,P.built,0.5),{align:"right"});}},
     // a table with an email nobody classed, stopped by the check
     {at:P.stp,place:"desk",keys:[[P.stp,960,500,1]],push:0.02,draw:(x,tt)=>gc_unclassed(x,tt,{u:clamp((tt-P.stp)/0.6,0,1),q:fin(tt,P.check,0.5),err:clamp((tt-P.stops)/1.6,0,1)})}],sc.dur));});
 
-// ---- 8 · Who read this, and when: the audit log, in preview; who read the learner table this month; December's access review; forty-one
+// ---- 8 · Who read this, and when: the audit log; who read the learner table this month; December's access review; forty-one
 // names folded away; two groups ----
 scene("audit",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({who:wAt(sc,"log","who read"),who2:wAt(sc,"answer","who read"),rv:c.review-0.3,dec:wAt(sc,"review","Each December"),
     reads:wAt(sc,"review","reads the grants"),whos:wAt(sc,"review","who's in it"),gave:c.gave,gw:wAt(sc,"gave","gave way"),two:wAt(sc,"gave","two groups"),

@@ -17,7 +17,7 @@ const NARR={
  {"id":"day","gap":0.8,"text":"On submission day, both reports say 4,867.","say":"On submission day, both reports say four thousand, eight hundred and sixty-seven."},
  {"id":"reach","gap":0.8,"text":"Her words reach the work, and the university sends one number."}]},
 "page":{"name":"One term, one page","lead":0.8,"tail":0.8,"vo":[
- {"id":"term","gap":0.8,"text":"On the platform, each term of the glossary is a page, in beta."},
+ {"id":"term","gap":0.8,"text":"On the platform, each term of the glossary is a page."},
  {"id":"has","gap":0.8,"text":"Award's page has its words, its owner, Mei, and its domain, course."},
  {"id":"lists","gap":0.8,"text":"It lists the tables that hold it, and where its words come from."},
  {"id":"map","gap":0.8,"text":"It's published from Noor's map, where each term is kept, so a change is made there, never on the page."},

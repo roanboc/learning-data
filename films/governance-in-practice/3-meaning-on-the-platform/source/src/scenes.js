@@ -75,16 +75,16 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({mei:wAt(sc,"
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.day+0.3,P.reach-0.2,0.4));
   gv_title(ctx,S,t,P.title,"Meaning on the platform","one meaning for people, reports and agents","Film 3 of 6 · data governance");});
 
-// ---- 2 · One term, one page: award's page on the platform, in beta: its words, owner and domain, the tables that hold it and where its
+// ---- 2 · One term, one page: award's page on the platform: its words, owner and domain, the tables that hold it and where its
 // words come from; published from Noor's map, where a change is made; Clara reading it beside the data; and the assistant citing it ----
-scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({beta:wAt(sc,"term","in beta"),words:wAt(sc,"has","its words"),owner:wAt(sc,"has","its owner"),
+scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({words:wAt(sc,"has","its words"),owner:wAt(sc,"has","its owner"),
     dom:wAt(sc,"has","its domain"),tab:wAt(sc,"lists","the tables"),from:wAt(sc,"lists","where its words come from"),
     mp:c.map-0.3,pub:wAt(sc,"map","published"),kept:wAt(sc,"map","where each term is kept"),made:wAt(sc,"map","a change is made"),never:wAt(sc,"map","never on the page"),
     rd:c.read-0.3,ci:c.cites-0.3,ans:wAt(sc,"cites","it cites")}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
-    // award's page on the platform, drawn as a form, in beta: its words, its owner and its domain; the tables that hold it, and where its
+    // award's page on the platform, drawn as a form: its words, its owner and its domain; the tables that hold it, and where its
     // words come from, lit as they're said
-    {at:0,place:"bigReg",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_awardPage(x,{beta:fin(tt,P.beta,0.5),lit:[gv_io(tt,P.words,P.owner,0.4),gv_io(tt,P.owner,P.dom,0.4),
+    {at:0,place:"bigReg",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_awardPage(x,{lit:[gv_io(tt,P.words,P.owner,0.4),gv_io(tt,P.owner,P.dom,0.4),
       gv_io(tt,P.dom,P.tab-0.4,0.4),gv_io(tt,P.tab,P.from,0.4),fin(tt,P.from,0.5)],al:[0,1,2].map(i=>gv_io(tt,P.tab+0.25*i,P.from,0.4))})},
     // Noor's map, close: award's business term at home, published one way to its page; a pencil reaching for the page stops, crossed:
     // a change is made at home

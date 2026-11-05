@@ -3,7 +3,7 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series and the earlier films: la memoria del equipo, una entrada, una sesión and un chat, la memoria duradera, una lección; el día del censo,
    el informe del censo, Planificación, la oficina de registro; una habilidad, el repositorio, un pull request (as Tools are hands says it), el dueño, los metadatos, gobernanza de datos;
-   un almacén for a store, un paso diario for the daily memory step, propuestas, un script, beta as the docs say it; los libros electrónicos, las salas de examen.
+   un almacén for a store, un paso diario for the daily memory step, propuestas, un script; los libros electrónicos, las salas de examen.
    Tú, as the nine lessons speak to the viewer, as each film's own Spanish does. The last line names the next series as its page does: Después: de ayudante a colega.
    Numbers keep the picture's comma (18,412; 386), as the series' other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -75,16 +75,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Desde ahí, va en un solo sentido a donde los agentes lo leen, en Databricks.",
 "dbt writes the descriptions into Unity Catalog, as comments on each table and column.":
 "dbt escribe las descripciones en Unity Catalog, como comentarios en cada tabla y columna.",
-"Skills go to Unity Gateway, where they're in beta.":
-"Las habilidades van a Unity Gateway, donde están en beta.",
+"Skills go to Unity Gateway.":
+"Las habilidades van a Unity Gateway.",
 "Each is a Unity Catalog object, with an owner, permissions, and a record of who read or changed it.":
 "Cada una es un objeto de Unity Catalog, con un dueño, permisos y un registro de quién la leyó o la cambió.",
 "Nobody edits context on the platform. A change starts in the repository.":
 "Nadie edita el contexto en la plataforma. Un cambio empieza en el repositorio.",
 "Memory is different: agents write it themselves.":
 "La memoria es distinta: la escriben los propios agentes.",
-"On Databricks, sessions and lasting memory, both in beta, are kept in stores in Lakebase, the platform's database.":
-"En Databricks, las sesiones y la memoria duradera, ambas en beta, se guardan en almacenes en Lakebase, la base de datos de la plataforma.",
+"On Databricks, sessions and lasting memory are kept in stores in Lakebase, the platform's database.":
+"En Databricks, las sesiones y la memoria duradera se guardan en almacenes en Lakebase, la base de datos de la plataforma.",
 "A step that runs once a day reads the sessions, and keeps what seems worth keeping, without asking anyone.":
 "Un paso que corre una vez al día lee las sesiones, y guarda lo que parece valer la pena, sin preguntarle a nadie.",
 "That's how the campus line lost its words: the step merged it with other lines about counting students, as it's built to.":

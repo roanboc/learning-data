@@ -1,15 +1,15 @@
 /* ===== Why Unity Catalog and Unity Gateway govern them: the room's own pieces =====
    The film's pieces in the module's lab, all prefixed ug_ / UG_ (the module's shared code is never changed for one film):
      the room's usual shot (UG): a person standing at the left, the cards they talk about beside them, the agent in its ring on the
-     wall in the middle, with a hook under it (Mei's key, then its badge and its owner tag), and the wall's right for what it reads;
-     its pieces: a name card over a person, Mei's key and the paper tags on strings, the learner table's record (names and emails as
-     grey bars, then stars), the log of who read it, the faculties' questions and the answers, the agent's thread to its model and the
+     wall in the middle, with a hook under it (Anil's key, then its badge and its owner tag), and the wall's right for what it reads;
+     its pieces: a name card over a person, Anil's key and the paper tags on strings, the staff table's record (names, birth dates and
+     emails as grey bars, then stars), the log of who read it, the heads of school's questions and the answers, the agent's thread to its model and the
      calls along it, the gateway's frame and the catalog's frame, the model services, the checks, the slip of hidden words, the prompt,
      the dial of its limit, the usage card, the grants card, the policy card and the groups, the pencil sketch with its row filter, the
-     function and the tool servers, the query and its answer, the lineage, the page for agents, and the census count.
+     function and the tool servers, the query and its answer, the lineage, the page for agents, and the count cards.
    Colours keep the module's meanings: blue tools and structure (grants, locks, the frames, the tool servers), violet the model and
    what it does (its band, its thread, its own lines in the log), orange data coming back, green a check that passes, amber something
-   wrong. No name or email of a learner is ever drawn: they are grey bars, then stars. */
+   wrong. No name, birth date or email of a member of staff is ever drawn: they are grey bars, then stars. */
 
 // a value worked out once per chapter (the cue times its scene uses)
 function ug_once(sc,k,fn){sc.__ug=sc.__ug||{};if(!(k in sc.__ug))sc.__ug[k]=fn();return sc.__ug[k];}
@@ -63,8 +63,17 @@ function ug_who(ctx,who,t,o){o=o||{};const W_=UG.who,a=o.a==null?1:o.a;if(a<=0.0
   withA(ctx,a,()=>{h=ag_person(ctx,who,o.x==null?W_.x:o.x,o.y==null?W_.y:o.y,o.s||W_.s,Object.assign({t,gaze:[3,0]},o.p||{}));});return h;}
 function ug_name(ctx,cx,y,name,role,a){if(a<=0)return;const w=Math.max(ag_tw(ctx,name,{w:700,size:30}),ag_tw(ctx,role,{w:600,size:28}))+60,h=100;
   ag_box(ctx,cx-w/2,y,w,h,18,{a});withA(ctx,a,()=>{ag_T(ctx,name,cx,y+43,{w:700,size:30,align:"center"});ag_T(ctx,role,cx,y+80,{w:600,size:28,align:"center",col:AG.mut});});}
+// Databricks' official logo, unaltered, h high, its top at y; returns its width (0 until the logos are loaded). The film names three
+// of the platform's parts (Unity Catalog, Unity Gateway, a service principal), and its mark stands beside each name: they are Databricks'
+// own, so there's no separate logo for them. ug_named: a frame's name, as ag_label writes it, with the mark before it (o.align
+// "center" centres both on x)
+function ug_mark(ctx,x,y,h){return typeof LOGO!=="undefined"&&LOGO.databricks?logo(ctx,"databricks",x,y,h):0;}
+function ug_named(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const T_=String(text).toUpperCase(),h=34,
+    lw=typeof LOGO!=="undefined"&&LOGO.databricks?h*LOGO.databricks.width/LOGO.databricks.height:0,gap=lw?12:0,
+    tw=ag_tw(ctx,T_,{w:700,size:28,ls:4}),x0=o.align==="center"?x-(lw+gap+tw)/2:x;
+  if(lw)withA(ctx,a,()=>ug_mark(ctx,x0,y-29,h));ag_label(ctx,x0+lw+gap,y,text,{a,col:o.col});}
 
-/* ---------------------------------------------------------------- Mei's key, and paper tags on strings
+/* ---------------------------------------------------------------- Anil's key, and paper tags on strings
    ug_key(ctx, x, y, s, o): a pale oak bow with a hole and a graphite blade with its teeth, the bow's middle at (x, y), the blade along
    o.rot (radians; 0 points right), s its size; o.a. Held, it's drawn behind the near hand (holdBack), in figure space; anywhere else,
    in the frame. ug_tag: a paper tag on a string from a point, as a label hangs from a key or a hook. */
@@ -86,35 +95,35 @@ function ug_tag(ctx,hx,hy,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return
   ctx.fillStyle="rgba(87,82,76,0.6)";ctx.beginPath();ctx.arc(l?w/2-22:-w/2+22,0,5,0,TAU);ctx.fill();
   ag_T(ctx,text,l?-w/2+26:-w/2+44,size*0.36,{w:700,size,col:o.col});ctx.restore();}
 
-/* ---------------------------------------------------------------- the learner table's record, and the log of who read it
-   ug_record(ctx, x, y, w, o): one learner's record in core_learner_v1, row by row: learner_key (a scrambled code), full_name and email
-   (grey bars), status. o.mask 0 to 1: the name and email turn to stars; o.glow 0 to 1: the whole record lit (everything she can read);
+/* ---------------------------------------------------------------- the staff table's record, and the log of who read it
+   ug_record(ctx, x, y, w, o): one person's record in stg_hr_system__staff, row by row: staff_key (a scrambled code), family_name,
+   birth_date and email (grey bars, each its own length). o.mask 0 to 1: the bars turn to stars; o.glow 0 to 1: the whole record lit (everything he can read);
    o.hl[i] a row lit; o.lock 0 to 1: a blue lock at its corner; o.edge; o.title (another table); o.a, o.k. Returns where each row's
    value is, for an arm to reach. */
-const UG_REC=[["learner_key","code"],["full_name","bar"],["email","bar"],["status","studying"]];
+const UG_REC=[["staff_key","code"],["family_name","bar",172],["birth_date","bar",150],["email","bar",226]];
 function ug_record(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=52,h=28+38+44+UG_REC.length*rh+34,rows=UG_REC.map((r,i)=>[x+w-150,y+122+i*rh+rh/2-4]);if(a<=0)return rows;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   const g=clamp(o.glow||0,0,1);ag_box(ctx,x,y,w,h,22,{edge:g>0.02?AG.orange:(o.edge||null),edgeA:g>0.02?0.85*g:0.75,glow:g>0.02?AG.orange:null,glowA:g*0.8});
-  ag_T(ctx,"LEARNER TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});ag_T(ctx,o.title||"core_learner_v1",x+28,y+96,{w:500,size:30,f:"mono"});
+  ag_T(ctx,"STAFF TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});ag_T(ctx,o.title||"stg_hr_system__staff",x+28,y+96,{w:500,size:30,f:"mono"});
   const m=clamp(o.mask||0,0,1);
-  UG_REC.forEach(([col,kind],i)=>{const ry=y+122+i*rh,hl=Math.max(g*0.7,o.hl?o.hl[i]||0:0),vx=x+262;
+  UG_REC.forEach(([col,kind,bw],i)=>{const ry=y+122+i*rh,hl=Math.max(g*0.7,o.hl?o.hl[i]||0:0),vx=x+262;
     if(hl>0){ctx.fillStyle=rgba(AG.orange,0.1*hl);rr(ctx,x+14,ry,w-28,rh-6,10);ctx.fill();}
     ag_T(ctx,col,x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut});
     if(kind==="code")ag_T(ctx,"4d0508d9…",vx,ry+34,{w:500,size:28,f:"mono"});
-    else if(kind==="bar"){if(m<1){ctx.fillStyle=rgba([150,146,140],0.6*(1-m));rr(ctx,vx,ry+13,i===1?172:226,20,10);ctx.fill();}
+    else if(kind==="bar"){if(m<1){ctx.fillStyle=rgba([150,146,140],0.6*(1-m));rr(ctx,vx,ry+13,bw,20,10);ctx.fill();}
       if(m>0)ag_T(ctx,"***",vx,ry+40,{w:700,size:34,f:"mono",a:m});}
     else ag_T(ctx,kind,vx,ry+34,{w:600,size:28});});
   if(o.lock>0)withA(ctx,o.lock,()=>ag_lock(ctx,x+w-46,y+50,32,rgba(AG.blue,1)));
   ctx.restore();return rows;}
 // the record's height, for laying out under it
 const ug_recordH=()=>28+38+44+UG_REC.length*52+34;
-/* ug_log(ctx, x, y, w, rows, o): a log card, "Who read the learner table", o.sub ("October"); rows [{when, who, id (an agent's own
+/* ug_log(ctx, x, y, w, rows, o): a log card, "Who read the staff table", o.sub ("August"); rows [{when, who, id (an agent's own
    identity, as the log keeps it: a code), tag (its name, on a violet tag), hl (0 to 1, lit violet), warn (0 to 1, lit amber), a}];
-   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, all of them Mei's, o.raceOff px along,
+   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, all of them Anil's, o.raceOff px along,
    blurred by o.raceBlur (0 to 1, o.race unless given: their speed); o.a, o.k */
 function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==null?rows.length:o.n,h=28+38+40+n*lh+20;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
-  ag_box(ctx,x,y,w,h,22,{edge:o.edge,edgeA:0.8});ag_T(ctx,"WHO READ THE LEARNER TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
+  ag_box(ctx,x,y,w,h,22,{edge:o.edge,edgeA:0.8});ag_T(ctx,"WHO READ THE STAFF TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
   if(o.sub)ag_T(ctx,o.sub,x+28,y+92,{w:600,size:28,col:AG.mut});
   const top=y+112;ctx.save();ctx.beginPath();ctx.rect(x+6,top-6,w-12,n*lh+10);ctx.clip();
   const race=clamp(o.race||0,0,1);
@@ -124,7 +133,7 @@ function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==n
     for(let k=k0;k<=k0+n+2;k++){const ry=top+k*lh-off,ea=ag_sine((ry-top+lh)/lh)*ag_sine((top+n*lh-ry)/lh);if(ea<=0.01)continue;
       const m=122+Math.floor(Math.max(0,k)*6/60);
       ag_T(ctx,"Sun "+String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"),x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut,deco:1,a:ea});
-      ag_T(ctx,"mei.tanaka@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1,a:ea});}
+      ag_T(ctx,"anil.kurian@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1,a:ea});}
     ctx.restore();}
   rows.forEach((r,i)=>{const ry=top+i*lh,ra=(r.a==null?1:r.a)*(1-race);if(ra<=0)return;
     if(r.hl>0){ctx.fillStyle=rgba(AG.violet,0.09*r.hl);rr(ctx,x+14,ry,w-28,lh-6,10);ctx.fill();}
@@ -135,8 +144,8 @@ function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==n
       if(r.tag)ag_pill(ctx,x+210+ag_tw(ctx,r.id,{w:500,size:28,f:"mono"})+30+(ag_tw(ctx,r.tag,{w:700,size:28})+56)/2,ry+22,r.tag,{size:28,col:AG.violet,a:ra});}});
   ctx.restore();ctx.restore();return{x,y,w,h};}
 
-/* ---------------------------------------------------------------- the faculties' questions, and the answers */
-const UG_ASKS=[["Faculty of Health","How many in Nursing?","Nursing"],["Business","How many in first year?","First year"],["Engineering and IT","How many part-time?","Part-time"]];
+/* ---------------------------------------------------------------- the heads of school's questions, and the answers */
+const UG_ASKS=[["School of Nursing","How many teach each unit?","Nursing"],["School of Medicine","How many teach this term?","Medicine"],["School of Public Health","How many are casual?","Public Health"]];
 function ug_ask(ctx,x,y,w,i,o){o=o||{};const q=UG_ASKS[i];return ag_textCard(ctx,x,y,w,{kick:q[0],title:q[1]},Object.assign({kickCol:AG.kick},o));}
 /* the answers, in a stack: o.n (0 to 3, each springing in), o.tick 0 to 1 (a green tick on each), o.sign 0 to 1 (the agent's own name
    on each, in violet); (x, y) the stack's top left */
@@ -145,7 +154,7 @@ function ug_answers(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,n=o.n==null?3:o
     ctx.save();ctx.globalAlpha*=clamp(k*3,0,1);ag_about(ctx,x+w/2,by+h/2,lerp(0.6,1,s));ag_box(ctx,x,by,w,h,18,{edge:AG.orange,edgeA:0.6});
     ag_T(ctx,"ANSWER",x+28,by+38,{w:700,size:28,ls:4,col:AG.orange});ag_T(ctx,UG_ASKS[i][2],x+28,by+74,{w:700,size:30});
     if(o.tick>0)withA(ctx,o.tick,()=>ag_tick(ctx,x+w-46,by+h/2,28,rgba(AG.green,1),5));
-    if(o.sign>0)ag_T(ctx,"registrar agent",x+w-(o.tick>0?86:28),by+74,{w:700,size:28,align:"right",col:AG.violet,a:o.sign});
+    if(o.sign>0)ag_T(ctx,"workload agent",x+w-(o.tick>0?86:28),by+74,{w:700,size:28,align:"right",col:AG.violet,a:o.sign});
     ctx.restore();}
   ctx.restore();}
 
@@ -170,18 +179,18 @@ function ug_gateway(ctx,cx,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,p=clamp(o.p=
   ctx.save();ctx.shadowColor="rgba(46,38,28,0.26)";ctx.shadowBlur=22;ctx.shadowOffsetX=AG.sdx;ctx.shadowOffsetY=12;ctx.beginPath();fr(ctx);ctx.fillStyle=rgba(AG_OAK.base,1);ctx.fill("evenodd");ctx.restore();
   ctx.save();ctx.beginPath();fr(ctx);ctx.clip("evenodd");const g=ctx.createLinearGradient(x,yy,x+w,yy+hh);g.addColorStop(0,rgba(AG_OAK.hi,0.9));g.addColorStop(1,rgba(AG_OAK.dark,0.6));ctx.fillStyle=g;ctx.fillRect(x,yy,w,hh);ctx.restore();
   if(hh>2*b){ctx.strokeStyle=rgba(AG.blue,0.9);ctx.lineWidth=3.4;rr(ctx,x+b,yy+b,w-2*b,hh-2*b,8);ctx.stroke();}
-  if(o.label!==false)ag_label(ctx,cx,y-26,"Unity Gateway",{align:"center",a:ag_in(p,0.6,0.4)});
+  if(o.label!==false)ug_named(ctx,cx,y-26,"Unity Gateway",{align:"center",a:ag_in(p,0.6,0.4)});
   ctx.restore();}
 function ug_catalog(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,p=clamp(o.p==null?1:o.p,0,1);if(a<=0||p<=0)return;const ww=w*ag_sine(p),b=16;
   ctx.save();ctx.globalAlpha*=a;ctx.fillStyle="rgba(46,38,28,0.05)";rr(ctx,x+b,y+b,Math.max(0,ww-2*b),h-2*b,10);ctx.fill();
   const fr=c=>{ag_rect(c,x,y,ww,h,18);if(ww>2*b)ag_rect(c,x+b,y+b,ww-2*b,h-2*b,10);};
   ctx.save();ctx.shadowColor="rgba(46,38,28,0.24)";ctx.shadowBlur=20;ctx.shadowOffsetX=AG.sdx;ctx.shadowOffsetY=10;ctx.beginPath();fr(ctx);ctx.fillStyle=rgba(AG_OAK.base,1);ctx.fill("evenodd");ctx.restore();
   ctx.save();ctx.beginPath();fr(ctx);ctx.clip("evenodd");const g=ctx.createLinearGradient(x,y,x,y+h);g.addColorStop(0,rgba(AG_OAK.hi,0.85));g.addColorStop(1,rgba(AG_OAK.dark,0.45));ctx.fillStyle=g;ctx.fillRect(x,y,ww,h);ctx.restore();
-  ag_label(ctx,x+8,y-22,o.label||"Unity Catalog",{a:ag_in(p,0.5,0.4)});ctx.restore();}
+  ug_named(ctx,x+8,y-22,o.label||"Unity Catalog",{a:ag_in(p,0.5,0.4)});ctx.restore();}
 
 /* ---------------------------------------------------------------- the gateway's pieces
    ug_service: a model service, a card in the catalog: "Model service", who it's granted to (o.who) or "not granted"; o.lit 0 to 1 (its
-   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill with a small "beta" beside it.
+   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill (no "beta" beside it: a status changes, and the film would have to change with it).
    ug_slip: a small slip of paper in amber, the words hidden to trick an agent. ug_prompt: a prompt riding the thread, with an email
    address in it, never written out: a chip, "an email address", that a grey band hides (o.hide 0 to 1). ug_dial: the limit. */
 function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,lit=clamp(o.lit||0,0,1),h=148;if(a<=0)return{x,y,w,h};
@@ -192,8 +201,7 @@ function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,
   else{ag_lock(ctx,x+42,y+96,28,rgba(AG.blue,1));ag_T(ctx,"granted · "+o.who,x+66,y+104,{w:700,size:30});}
   ctx.restore();return{x,y,w,h};}
 function ug_check(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const b=ag_pill(ctx,x,y,text,{icon:o.icon||"lock",col:o.col||AG.blue,a,size:28});
-  const bw=ag_tw(ctx,"beta",{w:700,size:28})+40;ag_box(ctx,b.x+b.w+12,y-22,bw,44,22,{a});withA(ctx,a,()=>ag_T(ctx,"beta",b.x+b.w+12+bw/2,y+10,{w:700,size:28,align:"center",col:AG.mut}));
-  return{x:b.x,y:b.y,w:b.w+12+bw,h:b.h};}
+  return{x:b.x,y:b.y,w:b.w,h:b.h};}
 function ug_slip(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const text=o.text||"ignore your rules",w=ag_tw(ctx,text,{w:700,size:28})+52,h=56;
   ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot==null?-0.05:o.rot);if(o.k!=null)ctx.scale(lerp(0.6,1,o.k),lerp(0.6,1,o.k));
   ag_box(ctx,-w/2,-h/2,w,h,8,{edge:AG.amber,edgeA:0.85});ag_T(ctx,text,0,10,{w:700,size:28,align:"center",col:AG.amber});ctx.restore();}
@@ -215,11 +223,11 @@ function ug_dial(ctx,x,y,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx
 
 /* ---------------------------------------------------------------- what it costs, under its name */
 function ug_usage(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,bud=clamp(o.budget||0,0,1),h=bud>0?262:184;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
-  ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.5});ag_T(ctx,"USAGE",x+28,y+48,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"registrar agent",x+28,y+92,{w:700,size:32,col:AG.violet});
+  ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.5});ag_T(ctx,"USAGE",x+28,y+48,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"workload agent",x+28,y+92,{w:700,size:32,col:AG.violet});
   [["calls",0.62],["tokens",0.8]].forEach(([s,f],i)=>{const by=y+118+i*30;ag_T(ctx,s,x+28,by+22,{w:600,size:28,col:AG.mut});const bx=x+150,bw=(w-150-32)*f*clamp(o.fill==null?1:o.fill,0,1);
     ctx.fillStyle=rgba(AG.blue,0.55);rr(ctx,bx,by+6,Math.max(8,bw),16,8);ctx.fill();});
   if(bud>0)withA(ctx,bud,()=>{ctx.strokeStyle="rgba(60,50,40,0.16)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,y+186);ctx.lineTo(x+w-28,y+186);ctx.stroke();
-    ag_T(ctx,"Registrar's budget",x+28,y+226,{w:600,size:28,col:AG.mut});ag_T(ctx,"about $300 a month",x+w-28,y+226,{w:700,size:30,align:"right"});});
+    ag_T(ctx,"Health's budget",x+28,y+226,{w:600,size:28,col:AG.mut});ag_T(ctx,"about $300 a month",x+w-28,y+226,{w:700,size:30,align:"right"});});
   ctx.restore();}
 
 /* ---------------------------------------------------------------- grants, the policy and the groups
@@ -263,11 +271,11 @@ function ug_sketch(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the function, and the tool servers
-   ug_function(ctx, x, y, w, o): the census count as a function in the catalog: its name in code, "may run · can't change" with a lock,
+   ug_function(ctx, x, y, w, o): the count of active projects as a function in the catalog: its name in code, "may run · can't change" with a lock,
    and who owns it (o.owner); o.lit 0 to 1 (an arm touches it, its edge blue), o.a, o.k */
 function ug_function(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,lit=clamp(o.lit||0,0,1),h=196;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ag_box(ctx,x,y,w,h,20,{edge:AG.blue,edgeA:0.45+0.5*lit,glow:lit>0.02?AG.blue:null,glowA:lit});
-  ag_T(ctx,"FUNCTION",x+28,y+48,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"census_day_students(faculty)",x+28,y+96,{w:500,size:28,f:"mono"});
+  ag_T(ctx,"FUNCTION",x+28,y+48,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"active_projects(faculty)",x+28,y+96,{w:500,size:28,f:"mono"});
   ag_lock(ctx,x+42,y+136,28,rgba(AG.blue,1));ag_T(ctx,"may run · can't change",x+66,y+144,{w:600,size:28,col:AG.mut,a:o.rule==null?1:o.rule});
   if(o.owner)ag_T(ctx,"owner · "+o.owner,x+28,y+180,{w:600,size:28,col:AG.mut,a:o.ownerA==null?1:o.ownerA});
   ctx.restore();return{x,y,w,h};}
@@ -294,12 +302,14 @@ function ug_page(ctx,x,y,w,head,lines,o){o=o||{};const a=o.a==null?1:o.a,h=28+38
   ctx.restore();return{x,y,w,h};}
 function ug_card(ctx,x,y,w,words,o){o=o||{};return ag_textCard(ctx,x,y,w,words,Object.assign({kickCol:AG.kick},o));}
 
-/* ---------------------------------------------------------------- the census count (A model, reasoning, hands and a loop's answer)
-   o.gov (0 to 1) the line under its pill, "to the government"; o.w its width; o.k springs it in */
+/* ---------------------------------------------------------------- the count cards
+   ug_count(ctx, x, y, o): the count the project check agent checks each night, Health's active research projects (Working with agents
+   on Databricks); o.words another count's words ({kick, title, sub}), with no pill; o.gov (0 to 1) the line under its pill, what the
+   count is for; o.w its width; o.k springs it in */
 function ug_count(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||470;if(a<=0)return null;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+90,lerp(0.6,1,o.k));
-  const b=ag_textCard(ctx,x,y,w,{kick:"Census-day count",title:"18,412 students"},{kickCol:AG.kick});
-  ag_pill(ctx,x+28+ag_tw(ctx,"Matches the source",{w:700,size:30})/2+48,b.y+b.h+44,"Matches the source",{icon:"tick",col:AG.green,a:o.pass==null?1:o.pass});
-  if(o.gov>0)ag_T(ctx,"to the government",x+28,b.y+b.h+118,{w:600,size:28,col:AG.mut,a:o.gov});
+  const b=ag_textCard(ctx,x,y,w,o.words||{kick:"Active projects",title:"168 in Health"},{kickCol:AG.kick});
+  if(!o.words)ag_pill(ctx,x+28+ag_tw(ctx,"Matches the source",{w:700,size:30})/2+48,b.y+b.h+44,"Matches the source",{icon:"tick",col:AG.green,a:o.pass==null?1:o.pass});
+  if(o.gov>0)ag_T(ctx,"for next year's lab space",x+28,b.y+b.h+118,{w:600,size:28,col:AG.mut,a:o.gov});
   ctx.restore();return b;}
 
 /* ---------------------------------------------------------------- the badge and the owner tag on the ring's hook

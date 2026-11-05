@@ -402,7 +402,7 @@ roll(vi, pp - 0.2, E('read') + 0.3, 0.45, step=0.2, top=False)
 line([(pp, 73), (pp + 1.4, 69)], 0.4)
 
 # 4. Ask, with a purpose: home at the turn; he presses Request access, the form comes up; why, and for how long, marked; his reason
-#    typed; ninety days; Submit, and the request, the call, on the fifth. On the platform, its own button, in preview; the redirect,
+#    typed; ninety days; Submit, and the request, the call, on the fifth. On the platform, its own button; the redirect,
 #    a breath across; every request comes to one place: the tray set down, his card into it, and home, held through the pause
 kw = lambda lid, word, off=0: W('ask', lid, word, off)
 kc = lambda lid, off=0: G('ask', lid, off)
@@ -419,7 +419,7 @@ roll(V, nd + 1.1, nd + 3.6, 0.45, step=0.2, top=False)
 ask(nd + 1.35, 0.65)
 pl = kc('platform', -0.3)
 air(pl + 0.4, 0.6, 0.006, px(470))
-tap(kw('platform', 'its request button', 0.4), 0.007, px(260)); marker(kw('platform', 'in preview'), 0.006, px(460), 0.5)
+tap(kw('platform', 'its request button', 0.4), 0.007, px(260))
 whoosh(kw('platform', 'brought him here'), 1.2, 0.008, px(560), px(1050))
 o1 = kc('one')
 knock(o1 + 0.5, 0.012, px(1450), 220)

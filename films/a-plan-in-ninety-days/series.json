@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "A plan in ninety days",
+  "title_es": "Un plan en noventa días",
+  "planned": 4,
+  "lead": "The first series of Data management. Helena Novak starts as the university's data manager with 46 open requests that touch every area of data. In ninety days she listens, designs the target with the team, and turns the gaps into a roadmap the data council approves.",
+  "lead_es": "La primera serie de Gestión de datos. Helena Novak empieza como gestora de datos de la universidad con 46 solicitudes abiertas que tocan todas las áreas de los datos. En noventa días escucha, diseña con el equipo la situación deseada y convierte las brechas en una hoja de ruta que aprueba el consejo de datos.",
+  "description": "Short films on a data manager's first ninety days: every area of data management seen as one job, with a plan in three lanes (people, strategy, operations); listening before designing, to people and to the systems' own numbers; a target state for the business, the solutions and the data, from a few principles, with a small team in the middle and data partners around it; and the gaps turned into stages that each work on their own, on a one-page data strategy.",
+  "description_es": "Películas cortas sobre los primeros noventa días de una gestora de datos: todas las áreas de la gestión de datos vistas como un solo trabajo, con un plan en tres carriles (personas, estrategia, operaciones); escuchar antes de diseñar, a las personas y a las propias cifras de los sistemas; una situación deseada para el negocio, las soluciones y los datos, a partir de unos pocos principios, con un equipo pequeño en el centro y referentes de datos a su alrededor; y las brechas convertidas en etapas que funcionan por sí solas, en una estrategia de datos de una página.",
+  "card": "46 requests on day one, touching every area. Listen, design it simple, and plan in stages that each work on their own.",
+  "card_es": "46 solicitudes el primer día, en todas las áreas. Escuchar, diseñar simple y planificar por etapas que funcionen solas.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: a new data manager's first ninety days",
+  "thread_h_es": "Un hilo: los primeros noventa días de una gestora de datos",
+  "thread": "In 2027, imagined: on Monday 1 February Helena Novak starts as the university's data manager. 46 requests are waiting, the oldest from August, and they touch every area of data, from reports to security. Over twelve weeks she listens to 31 people and to the systems' own numbers, designs the target with the team and the faculties, and turns the gaps into six work packages in three stages, on a one-page data strategy the data council approves on 27 April.",
+  "thread_es": "En 2027, imaginado: el lunes 1 de febrero Helena Novak empieza como gestora de datos de la universidad. Esperan 46 solicitudes, la más antigua de agosto, y tocan todas las áreas de los datos, de los reportes a la seguridad. En doce semanas escucha a 31 personas y a las propias cifras de los sistemas, diseña con el equipo y las facultades la situación deseada, y convierte las brechas en seis paquetes de trabajo en tres etapas, en una estrategia de datos de una página que el consejo de datos aprueba el 27 de abril.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Sponsors the data strategy",
+      "Prof. David Mensah, the deputy vice-chancellor, who plans the university's budget and chairs the data council's quarterly review"
+    ],
+    [
+      "biz",
+      "Becomes the first data partner",
+      "Anil Kurian, the Faculty of Health's analyst, who tries the new way of building on his faculty's own reports"
+    ],
+    [
+      "tech",
+      "Leads the data work",
+      "Helena Novak, the university's new data manager, who answers for every area of data and the plan that joins them"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who keeps the university's architecture map: today's, and the target"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who runs the data platform and knows what each system really holds"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Patrocina la estrategia de datos",
+      "El profesor David Mensah, vicerrector adjunto, que planifica el presupuesto de la universidad y preside la revisión trimestral del consejo de datos"
+    ],
+    [
+      "biz",
+      "Será el primer referente de datos",
+      "Anil Kurian, analista de la Facultad de Salud, que prueba la nueva forma de construir con los reportes de su propia facultad"
+    ],
+    [
+      "tech",
+      "Lidera el trabajo con datos",
+      "Helena Novak, la nueva gestora de datos de la universidad, que responde por todas las áreas de los datos y por el plan que las une"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que mantiene el mapa de arquitectura de la universidad: el de hoy y el deseado"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que lleva la plataforma de datos y sabe qué guarda de verdad cada sistema"
+    ]
+  ]
+}

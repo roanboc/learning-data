@@ -81,8 +81,6 @@ function cm_table(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,inner=w-56,tl=o.c
 function cm_skill(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],h=150+rows.length*48+14;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.6});
   ag_T(ctx,"SKILL IN UNITY GATEWAY",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,o.name||"",x+28,y+96,{w:500,size:32,f:"mono"});
-  if(o.beta>0){const nx=x+28+ag_tw(ctx,o.name||"",{w:500,size:32,f:"mono"})+24,pw=ag_tw(ctx,"beta",{w:700,size:28})+40;ctx.save();ctx.globalAlpha*=o.beta;
-    ag_box(ctx,nx,y+66,pw,44,22,{edge:AG.blue,edgeA:0.6});ag_T(ctx,"beta",nx+pw/2,y+97,{w:700,size:28,align:"center",col:AG.blue});ctx.restore();}
   rows.forEach((r,i)=>{const ra=r[1]==null?1:r[1];if(ra<=0)return;const yy=y+150+i*48;ctx.save();ctx.globalAlpha*=ra;ctx.fillStyle=rgba(AG.blue,0.85);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
     ag_T(ctx,r[0],x+60,yy,{w:600,size:28});ctx.restore();});ctx.restore();return{x,y,w,h};}
 

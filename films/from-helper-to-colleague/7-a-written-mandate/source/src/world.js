@@ -1,8 +1,8 @@
 /* ===== A mandate, written and enforced: the world =====
    The film's places and the small pieces every chapter uses. Every name here starts with wm_ or WM_.
-     places       wmLab (the lab by day: Jun's desk at the left, test as an oak tray in the middle, production behind glass at the right),
+     places       wmLab (the lab by day: Anil's desk at the left, test as an oak tray in the middle, production behind glass at the right),
                   wmNight (the same lab at night, its lamp in the far left corner: one room with wmLab, so the camera glides on and only
-                  the light changes), wmBoard (the quiet wall, for the page and the diagrams)
+                  the light changes), wmBoard (the quiet wall, for the page, the map and the tools)
      wm_night     the night's light over what stands in the lab, drawn before it; the words and cards come after it, at full contrast
      wm_scr       draw in screen space, whatever the camera is doing
      wm_tag       a tag at the top left: where and when
@@ -12,14 +12,15 @@
      wm_wrap      words wrapped in as few lines as the width allows, even, and in two lines after a comma or a full stop where one is near
      wm_pop       a soft spring in, for anything drawn by fn
      wm_fade      something made of parts, faded as one (the agent, a person): drawn whole on a scratch canvas, then laid on
-     wm_agent     the census agent: its sphere, its light, and its badge on a lanyard ("census agent"), faded as one; wm_band, its band's
-                  light again over the night
+     wm_agent     the workload agent: its sphere, its light, and its badge on a lanyard ("workload agent"), faded as one; wm_band, its
+                  band's light again over the night
      wm_clock     the lab's wall clock: its hands at a time of day, in minutes after midnight
-     wm_lab       the lab's things: Jun's desk and screen (and Jun, by day), the clock, test (the oak tray, with the build's tables and its
-                  count) and production (behind the glass), and their labels; the agent and the cards are the scenes' own */
+     wm_lab       the lab's things: Anil's desk and screen (and Anil, by day), the clock, test (the oak tray, with the build's tables) and
+                  production (behind the glass), and their labels; the agent and the cards are the scenes' own
+     wm_contracts three tutors' contracts, each held twice: the version HR keeps from before they moved, behind the one that holds today */
 
 const WM_LAMP=[96,772];
-// the marble quieter where the film puts its cards: over Jun's desk (the report), above the tray (the code and the checks), at the top right
+// the marble quieter where the film puts its cards: over Anil's desk (the report), above the tray (the code and the checks), at the top right
 const WM_QUIET=[[400,320,360,220,0.75],[1080,220,380,150,0.6],[1660,140,300,90,0.4]];
 AG_PLACES.wmLab=c=>ag_paintLab(c,{quiet:WM_QUIET});
 AG_PLACES.wmNight=c=>ag_paintLab(c,{night:true,lamp:WM_LAMP,quiet:WM_QUIET});
@@ -62,12 +63,12 @@ function wm_fade(ctx,a,fn){if(a<=0.004)return;if(a>=0.996){fn(ctx);return;}const
   bx.setTransform(1,0,0,1,0,0);bx.clearRect(0,0,bc.width,bc.height);bx.setTransform(ctx.getTransform());fn(bx);
   ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(bc,0,0);ctx.restore();}
 
-/* ---------------------------------------------------------------- the census agent
+/* ---------------------------------------------------------------- the workload agent
    The sphere with its violet band, its light on the wall and its shadow on the floor, and its badge on a blue lanyard hanging from the
-   sphere's foot: "census agent", its own name in every tool. o.a (faded as one), o.think, o.core, o.badge (0..1, how far its badge is
+   sphere's foot: "workload agent", its own name in every tool (Anil Kurian's, as Why Unity Catalog and Unity Gateway govern them gave it). o.a (faded as one), o.think, o.core, o.badge (0..1, how far its badge is
    down; 1 by default), o.ph (its band's phase), o.floor (where its shadow falls), o.loop (0..1: its ring of Plan, Act and Check drawn
    round it, amber while it goes round again), o.ringP (how much of the ring is drawn), o.pulse (the light going round it) */
-const WM_BADGE="census agent";
+const WM_BADGE="workload agent";
 function wm_agent(ctx,x,y,r,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;wm_fade(ctx,a,c=>{
   if(o.loop>0){c.save();c.globalAlpha*=o.loop;ag_ring(c,x,y,r*2.7,{p:o.ringP==null?1:o.ringP,from:-120,pulse:o.pulse});c.restore();}
   if(o.light!==false)ag_modelLight(c,x,y,r,0.8,o.floor||y+250);
@@ -88,35 +89,29 @@ function wm_clock(ctx,x,y,r,mins,a){a=a==null?1:a;if(a<=0)return;ctx.save();ctx.
   ctx.fillStyle="#2E2F34";ctx.beginPath();ctx.arc(x,y,r*0.07,0,TAU);ctx.fill();ctx.restore();}
 
 /* ---------------------------------------------------------------- the lab
-   Jun's desk across the left, his screen at its right end; the wall clock at the top right; test, an oak tray on the floor in the
+   Anil's desk across the left, his screen at its right end; the wall clock at the top right; test, an oak tray on the floor in the
    middle, where the night build runs on a copy of the data; production behind a pane of glass at the right, which the agent only reads.
    The agent hangs over the tray's left end (WM_L.agent). Positions are the lab's, in the 1920 x 1080 frame. */
-const WM_L={desk:[60,868,760],jun:[370,590,0.84],screen:[598,616,222,138],clock:[1666,132,50],tray:[1120,790,560],glass:[1460,236,420,612],agent:[980,500,60],
-  report:[1262,642],count:[1186,752],prodCount:[1670,716]};
+const WM_L={desk:[60,868,760],anil:[370,590,0.84],screen:[598,616,222,138],clock:[1666,132,50],tray:[1120,790,560],glass:[1460,236,420,612],agent:[980,500,60]};
 // the build's tables, as small slabs: in the tray (test) and behind the glass (production); k, how lit
 function wm_slabs(ctx,x,y,n,col,k){for(let i=0;i<n;i++){const sx=x+i*112,g=ctx.createLinearGradient(0,y-26,0,y);g.addColorStop(0,"#F1EFEA");g.addColorStop(1,"#D9D5CD");
     ctx.save();ctx.shadowColor="rgba(40,32,24,0.22)";ctx.shadowBlur=8;ctx.shadowOffsetY=3;ctx.fillStyle=g;rr(ctx,sx,y-26,92,26,6);ctx.fill();ctx.restore();
     ctx.fillStyle=rgba(col||AG.blue,0.35+0.4*(k||0));ctx.fillRect(sx+8,y-21,76,4);ctx.fillStyle="rgba(86,92,100,0.25)";for(let j=0;j<2;j++)ctx.fillRect(sx+8,y-13+j*6,60-j*18,2.5);}}
-// three students who fall out of the count and come back: out 0..1 drops them off the tray's front edge, back 0..1 puts them in again
-function wm_three(ctx,x,y,out,back,a){a=a==null?1:a;if(a<=0||out<=0)return;ctx.save();ctx.globalAlpha*=a;
-  for(let i=0;i<3;i++){const u=ag_sine(clamp(out*1.4-i*0.18,0,1)),v=ag_sine(clamp(back*1.4-i*0.18,0,1)),fx=x+i*30,fy=y,tx=x-96+i*30,ty=y+52,
-      px=lerp(lerp(fx,tx,u),fx,v),py=lerp(lerp(fy,ty,u),fy,v)-Math.sin(Math.PI*(u<1?u:v))*26,col=mix(AG.amber,AG.green,v);
-    ctx.fillStyle=rgba(col,0.92);ctx.beginPath();ctx.arc(px,py,9,0,TAU);ctx.fill();ctx.strokeStyle="rgba(255,255,255,0.7)";ctx.lineWidth=1.5;ctx.stroke();}
-  ctx.restore();}
-/* the lab's things, by day or by night (o.night): Jun's desk and screen (o.screen: "dark", "report" or "pr" rows), Jun himself
-   (o.jun 0..1, faded as one; o.junT his own time for breathing), the clock (o.time, minutes after midnight; o.clockA), the tray with the
-   build's tables (o.testLit 0..1), production's tables behind the glass (o.prodLit 0..1). Then o.things(ctx), drawn in the room's light
-   (the agent), then the light, then o.after(ctx) at full contrast (the band's light again, the cards) */
+/* the lab's things, by day or by night (o.night): Anil's desk and screen (o.screen: "dark", "report" or "pr" rows), Anil himself
+   (o.anil 0..1, faded as one; o.anilT his own time for breathing, o.anilGaze, o.anilSmile, o.anilNod), the clock (o.time, minutes after
+   midnight; o.clockA), the tray with the build's tables (o.testLit 0..1, o.testCol), production's tables behind the glass (o.prodLit
+   0..1). Then o.things(ctx), drawn in the room's light (the agent), then the light, then o.after(ctx) at full contrast (the band's light
+   again, the cards) */
 function wm_lab(ctx,S,t,o){o=o||{};const L=WM_L,[dx,dy,dw]=L.desk,[sx,sy,sw,sh]=L.screen,[tx,ty,tw]=L.tray,[gx,gy,gw,gh]=L.glass;
   // production, behind its glass: three slabs on a low plinth
   ctx.save();ag_floorShadow(ctx,gx+gw/2+AG.sdx*2,gy+gh-60,gw*0.42,16,0.18);ctx.fillStyle="#E4E0D8";rr(ctx,gx+40,gy+gh-150,gw-80,92,10);ctx.fill();
   ctx.fillStyle="rgba(46,38,28,0.12)";ctx.fillRect(gx+40,gy+gh-66,gw-80,8);ctx.restore();
   wm_slabs(ctx,gx+52,gy+gh-160,3,AG.blue,o.prodLit||0);
   ag_glass(ctx,gx,gy,gw,gh,{label:null});
-  // Jun's desk and his screen
+  // Anil's desk and his screen
   ag_desk(ctx,dx,dy,dw,{});
   ag_screen(ctx,sx,sy,sw,sh,{stand:dy-70-sy-sh+6,bg:o.night&&o.screen==="dark"?"#2A2C33":"#EEF0EE",draw:(c,x0,y0,w0,h0)=>wm_screen(c,x0,y0,w0,h0,o.screen||"dark")});
-  if(o.jun>0)wm_fade(ctx,o.jun,c=>ag_person(c,"jun",L.jun[0],L.jun[1],L.jun[2],{t:o.junT==null?t:o.junT,cut:dy-70,gaze:o.junGaze||[5,1],smile:o.junSmile==null?0.25:o.junSmile,nod:o.junNod||0}));
+  if(o.anil>0)wm_fade(ctx,o.anil,c=>ag_person(c,"anil",L.anil[0],L.anil[1],L.anil[2],{t:o.anilT==null?t:o.anilT,cut:dy-70,gaze:o.anilGaze||[5,1],smile:o.anilSmile==null?0.22:o.anilSmile,nod:o.anilNod||0}));
   // the tray, test, with the night build's tables in it
   const ins=ag_sandbox(ctx,tx,ty,tw,{label:null});if(ins)wm_slabs(ctx,ins.x+20,ins.y+ins.h-4,3,o.testCol||AG.blue,o.testLit||0);
   wm_clock(ctx,L.clock[0],L.clock[1],L.clock[2],o.time==null?8*60+30:o.time,o.clockA==null?1:o.clockA);
@@ -126,10 +121,28 @@ function wm_lab(ctx,S,t,o){o=o||{};const L=WM_L,[dx,dy,dw]=L.desk,[sx,sy,sw,sh]=
   const la=o.labels==null?1:o.labels;if(la>0){ag_pill(ctx,tx,ty+60,"Test · a copy of the data",{icon:"draft",col:AG.blue,a:la,size:28});
     const pl="Production · read only",pw=ag_tw(ctx,pl,{w:700,size:28})+96;ag_pill(ctx,gx+gw-pw/2-18,gy+44,pl,{icon:"lock",col:AG.blue,a:la,size:28});}
   if(o.after)o.after(ctx);}
-// what Jun's screen shows: dark at night with nothing on it; a report or a pull request as quiet rows, the top row in its colour
+// what Anil's screen shows: dark at night with nothing on it; a report or a pull request as quiet rows, the top row in its colour
 function wm_screen(c,x,y,w,h,what){if(what==="dark"){c.fillStyle="rgba(120,130,150,0.18)";c.fillRect(x,y,w,6);return;}
   const col=what==="pr"?AG.green:AG.violet;c.fillStyle=rgba(col,0.18);c.fillRect(x,y,w,22);c.fillStyle="rgba(86,92,100,0.3)";
   for(let k=0;k<5;k++){c.fillRect(x+14,y+36+k*19,(w-28)*(k%2?0.62:0.84),6);}}
+
+/* three tutors' contracts, each held twice (the day's change read every version HR keeps): a slip for each, "version 2", the one that
+   holds today, and behind it the version from before they moved, "version 1". o.dup (0..1) slides the old versions out from behind,
+   amber; o.fix (0..1) puts them back and fades them, and the three slips turn green; o.a, o.k (springs in). 3 x 228 + 2 x 30 wide,
+   about 150 tall from y */
+const WM_CW=228,WM_CH=104,WM_CG=30;
+function wm_contracts(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return{x,y,w:3*WM_CW+2*WM_CG,h:WM_CH+46};const dup=clamp(o.dup||0,0,1),fix=clamp(o.fix||0,0,1);
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+(3*WM_CW+2*WM_CG)/2,y+WM_CH/2,lerp(0.8,1,clamp(o.k,0,1.1)));
+  const slip=(sx,sy,ver,edge,ea,al)=>{if(al<=0.01)return;ctx.save();ctx.globalAlpha*=al;ag_box(ctx,sx,sy,WM_CW,WM_CH,14,{edge,edgeA:ea});
+    wm_fileIcon(ctx,sx+34,sy+38,rgba(edge||AG.mut,0.9),false);ag_T(ctx,"CONTRACT",sx+62,sy+48,{w:700,size:28,ls:2,col:AG.kick});
+    ag_T(ctx,ver,sx+28,sy+86,{w:600,size:28,col:AG.ink});ctx.restore();};
+  for(let i=0;i<3;i++){const sx=x+i*(WM_CW+WM_CG),u=ag_sine(clamp(dup*1.5-i*0.25,0,1))*(1-ag_sine(clamp(fix*1.5-i*0.25,0,1))),
+      old=1-ag_sine(clamp(fix*1.5-i*0.25,0,1))*1;
+    // the old version, behind: it slides out down and to the right while it's counted, and back (and away) once the fix holds
+    slip(sx+lerp(0,22,u),y+lerp(0,46,u),"version 1",AG.amber,0.35+0.5*u,clamp(u*2,0,1)*old);
+    const ok=ag_sine(clamp(fix*1.5-i*0.25-0.2,0,1));slip(sx,y,"version 2",ok>0.02?AG.green:(u>0.3?AG.amber:null),0.4+0.5*Math.max(ok,u),1);
+    if(ok>0.02)ag_tick(ctx,sx+WM_CW-34,y+34,22,rgba(AG.green,ok),4);}
+  ctx.restore();return{x,y,w:3*WM_CW+2*WM_CG,h:WM_CH+46};}
 
 /* ---------------------------------------------------------------- small pieces */
 function wm_gear(ctx,x,y,r,col,turn){ctx.save();ctx.translate(x,y);ctx.rotate(turn*TAU);ctx.fillStyle=col;ctx.beginPath();const n=8;

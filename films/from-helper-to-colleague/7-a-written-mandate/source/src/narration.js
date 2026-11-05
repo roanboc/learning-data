@@ -30,7 +30,7 @@ const NARR={
 "page":{"name":"One page, on the map","lead":1.0,"tail":1.0,"vo":[
  {"id":"role","gap":0.8,"text":"On the map, the workload agent is assigned to its role, with its stage beside each kind of task."},
  {"id":"line","gap":0.8,"text":"Beside the night task, at stage five, is one more line: its mandate."},
- {"id":"file","gap":0.8,"text":"The mandate itself is a requirement, kept with the project's other rules."},
+ {"id":"file","gap":0.8,"text":"The mandate itself is a requirement, kept with the project's governance."},
  {"id":"test","gap":0.8,"text":"In test: find why the night build failed. If the cause is in its own models, fix it on its own branch, in its own schema."},
  {"id":"pr","gap":0.8,"text":"Then open a pull request, and report by six."},
  {"id":"else","gap":0.8,"text":"If the cause is anywhere else, tell that part's owner, and change nothing."},
@@ -59,7 +59,7 @@ const NARR={
  {"id":"may","gap":0.8,"text":"Putting that right is a fix the mandate lets it make, in test."},
  {"id":"moved","gap":0.8,"text":"The second it found while it looked: one of the three tutors moved from a Nursing unit to one in Public Health."},
  {"id":"which","gap":0.8,"text":"Does that tutor count in both schools this term, or only in the one they teach in now? No rule says."},
- {"id":"decide","gap":0.8,"text":"That's not a bug: it's what a word means, and Mei decides it. The agent asked in its report, and changed nothing."},
+ {"id":"decide","gap":0.8,"text":"That's not a bug: it's what a word about staff means, and HR decides it. The agent asked in its report, and changed nothing."},
  {"id":"apart","gap":0.8,"text":"An agent can't always tell the two apart, and at first, neither can a person."},
  {"id":"draft","gap":0.8,"text":"So in production, it only drafts: Jun reviews the code, a meaning goes to its owner, and Noor approves, as a second person."},
  {"id":"costs","gap":0.8,"text":"In test, a wrong guess costs only a pull request nobody approves."},
@@ -80,7 +80,7 @@ const NARR={
 "close":{"name":"Five stages, each with its gate","lead":1.0,"tail":1.0,"vo":[
  {"id":"morning","gap":0.8,"text":"Back at the university this morning, Anil read the report and its measures: three rounds, twenty minutes, well within its limits."},
  {"id":"jun","gap":0.8,"text":"Jun reviewed the fix and merged it. It ran in test again, and Noor said yes for production."},
- {"id":"mei","gap":0.8,"text":"The question of the tutor who moved is with Mei."},
+ {"id":"hr","gap":0.8,"text":"The question of the tutor who moved is with HR."},
  {"id":"count","gap":0.8,"text":"Nursing counts 64 teachers, 38 of them casual, and the agent decided nothing a person owns.","say":"Nursing counts sixty-four teachers, thirty-eight of them casual, and the agent decided nothing a person owns."},
  {"id":"began","gap":0.8,"text":"This series began with five stages, not a switch."},
  {"id":"three","gap":0.8,"text":"Each stage changes whose identity the agent uses, how much it may do, and what the person does."},

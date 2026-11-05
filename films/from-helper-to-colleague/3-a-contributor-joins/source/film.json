@@ -1,0 +1,51 @@
+{
+  "key": "a-contributor-joins",
+  "title": "A contributor joins",
+  "sub": "The third film of From helper to colleague, the third series on AI agents in data work: before an agent works alone, it's architected like a colleague, with a place on the map, a role, an owner, rights from its role, someone to ask, a gate it passes and people who may stop it.",
+  "howto": "The opening is California in 1970, drawn in the module's matte style; the rest is the module's lab, a pale marble wall over an oak floor, light from a window on the right. Each agent is a ceramic sphere with a violet band, never a person, told apart by its name and its badge. Blue is structure (a role, a rule, the map), violet the model, orange the data, green a check that passed or a person's approval, amber what went wrong.",
+  "src": [
+    "past.js",
+    "lab.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "map",
+    "asks",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bLucía\\b",
+      "Lu-ceeah"
+    ],
+    [
+      "\\bOrtega\\b",
+      "Or-tega"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "first",
+    "scope"
+  ],
+  "urgent": []
+}

@@ -107,12 +107,8 @@ scene("domains",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o
 const WO_YML=["  - name: core_learner","    description: >","      What the model knows about a learner from valid_from until valid_to.","      {{ doc(\"learner\") }}","    latest_version: 1","    config:","      meta:","        grain: One row per learner per version","        owner: Mei Tanaka, registrar's office","        domain: student","        glossary_term: learner"];
 scene("products",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
-  const cL=c("learner"),cB=c("build"),out=ease(fin(t,0,1.2));
-  // the small map from the last chapter: the student domain grows towards us and fades; the rest fade
-  withA(ctx,1-out,()=>{ctx.save();const[x,y,w_,h]=WO_TER[2][4];ctx.translate(x+w_/2,y+h/2);ctx.scale(1+0.6*out,1+0.6*out);ctx.translate(-(x+w_/2),-(y+h/2));wo_terr(ctx,x,y,w_,h,WO_STU,"student",t,{seed:3});ctx.restore();
-    WO_TER.forEach(([dk,nm,,,C],i)=>{if(i!==2)wo_terr(ctx,C[0],C[1],C[2],C[3],WO_DOM[dk][1],nm,t,{seed:i+1,a:1-out});});
-    wo_code(ctx,1030,110,830,"the project's folders",["sources/student_system/          # application"],{a:1-out,size:18,lh:28,edge:[150,190,255]});
-    wo_code(ctx,1030,440,830,"models/_groups.yml",["groups:"],{a:1-out,size:18,lh:27,edge:[150,190,255]});});
+  const cL=c("learner"),cB=c("build");
+  // the last chapter's map and groups leave first, over the bare screen (CHAPTER_JOINS, at the end), then the product comes in
   arrive(ctx,960,96,t,Math.min(1.0,w("publish","A core model")-0.2),()=>withA(ctx,1-fin(t,w("build","not on how")-0.1,0.3),()=>tag(ctx,960,96,"a core model, as a product",TRUST,{align:"center",size:24})),{dy:12});
   // the YAML, lit line by line as each part is named
   const L=(s,k)=>fin(t,w(s,k)-0.15,0.4),lit={0:L("learner","Take the learner"),7:L("learner","grain"),8:L("owner","owner"),9:L("owner","domain"),10:L("owner","glossary"),4:L("promise","version"),1:L("promise","documentation"),3:L("promise","documentation")};
@@ -360,3 +356,7 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
   const orb=ease(fin(t,w("hands","isn't a person")-0.4,1.6));kt_agent(ctx,lerp(2010,1790,orb),740+Math.sin(t*0.9)*8,30,t,{a:fin(t,w("hands","isn't a person")-0.4,0.6)});
   ctx.restore();weedsEnd(ctx,S,t,B,"Who owns what",WEED,"Owners publish. Consumers build on what's published.");
   vign(ctx,S);});
+
+// where the chapters meet (From words to data's joins.js): the shared parts carry on from the two projects, so the camera carries on;
+// the product and the second project are new pictures, so the map and the rings leave first, over the bare screen
+const CHAPTER_JOINS={glide:["shared"],leave:["products","across"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

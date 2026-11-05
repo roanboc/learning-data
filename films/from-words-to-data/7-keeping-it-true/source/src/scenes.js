@@ -394,3 +394,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");histBg(ctx,S,t,{
       if(i===2){stamp(ctx,x+40,480,"v3",TRUST,1,0);kt_agent(ctx,x-80,478,26,t);kt_gtick(ctx,x+90,478,16,1);}});});});
   endCard(ctx,S,t,B+0.3,"Keeping it true",KT_AI,"Agree what things are, write it down, and keep it true.");
   vign(ctx,S);});
+
+// where the chapters meet (joins.js): the model gone stale, the agent's draft, the people who decide and the change end to end are later
+// pictures with the same words, or the agent, in another place, so what was there leaves first, over the bare screen
+const CHAPTER_JOINS={leave:["stale","draft","decide","e2e"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

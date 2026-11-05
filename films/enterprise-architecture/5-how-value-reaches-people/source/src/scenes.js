@@ -136,8 +136,11 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wa
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const tG=c("grace"),tR=c("restore"),mp=clamp((t-w("grace","process map")+0.2)/1.6,0,1),rh=fin(t,w("restore","Restoring"),0.5),mh=fin(t,w("restore","Evaluation"),0.5);
   arrive(ctx,1810,800,t,tG-0.3,()=>person(ctx,"grace",1810,1030,0.72,{t,pose:t>tG&&t<tG+2.4?"explain":"stand"}),{dy:20,from:0.96});
-  // what each one shows
-  const vs=fin(t,0.2,0.5)*(1-fin(t,w("grace","process map")-0.4,0.5));if(vs>0)withA(ctx,vs,()=>{d5_stream(ctx,t,400,250,300,100,D5_STAGES,{size:28});T(ctx,"a value stream: what reaches the customer",900,400,{w:700,size:30,align:"center",color:rgba(STR,1)});
+  // what each one shows: the value stream, carried from the last chapter, stays where it was while that fades, then moves down beside a
+  // process, and their names come in
+  const mv=ease(fin(t,0.5,1.2)),go=1-fin(t,w("grace","process map")-0.4,0.5),vs=fin(t,1.2,0.5)*go;
+  if(go>0)withA(ctx,go,()=>d5_stream(ctx,t,lerp(80,400,mv),lerp(110,250,mv),lerp(410,300,mv),lerp(110,100,mv),D5_STAGES,{size:Math.round(lerp(30,28,mv))}));
+  if(vs>0)withA(ctx,vs,()=>{T(ctx,"a value stream: what reaches the customer",900,400,{w:700,size:30,align:"center",color:rgba(STR,1)});
     D5_STEPS.forEach((s_,i)=>{if(i>4)return;d5_step(ctx,400+i*250,600,230,110,s_,{});});T(ctx,"a process: how the work gets done",900,710,{w:700,size:30,align:"center",color:rgba(BUS,1)});});
   const band=["Strategic","Operational","Support","Evaluation"].map(k=>pulseAt(t,w("groups",k)-0.1,1.6));
   const pos=d5_pmap(ctx,200,100,1360,700,{a:fin(t,w("grace","process map")-0.2,0.5),p:mp,band,hi:{"restore supply":rh,"measure reliability":mh}});
@@ -255,3 +258,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     arrive(ctx,1480,700,t,w("next","who does"),()=>sticky(ctx,1480,700,430,150,"Who does it, and where does meaning change?",{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
     ctx.restore();vign(ctx,S);});
   eaEnd(ctx,S,t,B+0.8,"How value reaches people",EAC,"See it from the customer's side. Go deep only where it matters.","Film 5 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the value stream carries on from one chapter to the next, so the camera
+// carries on
+const CHAPTER_JOINS={glide:["teams","map"]};

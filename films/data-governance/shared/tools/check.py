@@ -17,8 +17,8 @@ LIMIT = 2.0  # seconds from a place's first stroke until two frames after it; Of
 
 failed = []
 for tool in ('check.py', 'legible.py'):
-    try:
-        runpy.run_path(str(FW / tool), run_name='__main__')
+    try:  # twice.py runs below, with this check's own, so From words to data's check.py leaves it (TWICE)
+        runpy.run_path(str(FW / tool), init_globals={'TWICE': False}, run_name='__main__')
     except SystemExit as e:
         if e.code:
             failed.append(str(e.code))

@@ -187,3 +187,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,960,650,t,w("next","why"),()=>sticky(ctx,960,650,320,140,"Why must it change?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Who it serves, and how it pays",EAC,"Know who it serves, and how it pays, before anything else.","Film 2 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the map moves from the wall to the screen and back, with the canvases'
+// words in another place and size, so both chapters open on a cut
+const CHAPTER_JOINS={cut:["map","end"]};

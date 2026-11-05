@@ -8,8 +8,9 @@ const trendTo=n=>TREND.concat([n]);
 const roll=(t,t0,a,b,d)=>lerp(a,b,ease(clamp((t-t0)/(d||1.6),0,1)));
 
 /* ---------- 1. Tuesday, 10:05 · One version of Tuesday ---------- */
-scene("open",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
-  room(ctx,S,t,{wx:70});camKeys(ctx,S,[[0,960,540,1.0],[c("number"),990,500,1.05],[c("version"),990,500,1.05],[sc.dur+1,1000,495,1.07]],t);
+scene("open",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),oA=fin(t,B+0.1,0.6),tA=fin(t,B+0.6,0.7);
+  // once the title's dark frame is whole, nothing under it is drawn
+  if(oA<1){room(ctx,S,t,{wx:70});camKeys(ctx,S,[[0,960,540,1.0],[c("number"),990,500,1.05],[c("version"),990,500,1.05],[sc.dur+1,1000,495,1.07]],t);
   const frozen=fin(t,c("version")+0.2,0.8);
   person(ctx,"david",560,1180,1.3,{pose:"stand",pose2:"explain",mix:fin(t,c("approve")+0.3,0.6),expr:t>c("number")+0.5?"relieved":"calm",t:frozen>0.5?c("version")+0.2:t});
   committeeDash(ctx,820,120,1000,500,{num:11340,delta:38.3,s:1.25,trend:trendTo(11340)});
@@ -18,9 +19,9 @@ scene("open",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
   withA(ctx,fin(t,c("approve")+0.4),()=>tag(ctx,1410,700,"approved",GRN,{align:"center",size:24}));
   // the picture freezes: this is one version of Tuesday
   if(frozen>0){setScreen(ctx,S);ctx.fillStyle="rgba(8,10,18,"+(0.45*frozen)+")";ctx.fillRect(0,0,W,H);withA(ctx,frozen,()=>tag(ctx,1700,200,"Version 1 of Tuesday",SOFT,{align:"center",size:24}));}
-  setScreen(ctx,S);clockChip(ctx,S,"Tue 10:05","planning committee",fin(t,0.3)*(1-fin(t,B,0.5)));
+  setScreen(ctx,S);clockChip(ctx,S,"Tue 10:05","planning committee",fin(t,0.3)*(1-fin(t,B,0.5)));}
   // the title, over a darker frame
-  const oA=fin(t,B+0.1,0.6),tA=fin(t,B+0.6,0.7);if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
+  if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,AMB,0.1);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(AMB,0.95)});T(ctx,"Too good to be true",960,540,{w:800,size:88,align:"center"});
       T(ctx,"what a test on a number is for",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});
     withA(ctx,fin(t,sc.dur-1.2,0.6),()=>T(ctx,"Monday",960,700,{w:700,size:30,align:"center",f:"mono",color:rgba(SOFT,0.9)}));}
@@ -214,3 +215,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),y=500;
   withA(ctx,late,()=>{ctx.save();ctx.setLineDash([6,6]);ctx.strokeStyle=rgba(AMB,0.5+0.4*Math.sin(t*3));ctx.lineWidth=2;rr(ctx,346,y-12,24,24,6);ctx.stroke();ctx.restore();tag(ctx,190,y+130,"02:00 · file expected",AMB,{align:"center",size:17});});
   // the last line, once it has been said
   setScreen(ctx,S);withA(ctx,fin(t,c("tag")+2.0,0.8),()=>{T(ctx,"Stale and labelled beats fresh and wrong.",960,150,{w:800,size:50,align:"center"});T(ctx,"When things go wrong · Too good to be true",960,196,{w:600,size:22,align:"center",color:rgba(SOFT,0.95)});});});
+
+// where the chapters meet (From words to data's joins.js): the three Tuesdays leave before the gauge comes in elsewhere,
+// and the reload's platform leaves before the calm one of the next night comes in, each over the bare screen
+const CHAPTER_JOINS={leave:["level","end"],bare:(ctx,S)=>world(ctx,S)};

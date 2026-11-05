@@ -138,8 +138,8 @@ function sq_erd(ctx,q,t){const ink=[215,232,255],box=(x,y,s,a)=>{if(a<=0)return;
   ln(1740,614,1740,806,"counts towards",1728,712,"right",q[4]);ln(1340,614,1712,808,"is enrolled in",1532,672,"center",q[5]);}
 scene("yaml",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  const cO=c("once"),cD=c("diagram"),cR=c("read"),m=ease(fin(t,0,1.6));
-  // the four, carried from the last chapter, rise and settle as a blueprint along the top
+  const cO=c("once"),cD=c("diagram"),cR=c("read"),m=ease(fin(t,0.5,1.2));
+  // the four, carried from the last chapter, rise and settle as a blueprint along the top, once that chapter has faded
   const[sx,st,ss,sp]=SQ_STRIP;sq_bp(ctx,lerp(960,sx,m),lerp(270,st,m),lerp(1,ss,m),{b:m,ph:lerp(250,sp,m),paper:m});
   // the learner, written once: each part lights as it's named
   const yp=clamp((t-cO-0.2)/1.8,0,1),L1=fin(t,w("learner","a definition")-0.1,0.4),L2=fin(t,w("learner","an owner")-0.1,0.4),L3=fin(t,w("learner","the rule")-0.1,0.4),Lw=fin(t,w("words","a person")-0.1,0.5);
@@ -204,8 +204,8 @@ function sq_cmp(ctx,x,y,w,h,name,col,rows,o){o=o||{};const a=o.a==null?1:o.a;if(
     else T(ctx,val,x+200,yy,{w:700,size:22,color:rgba(vc||INK,1)});});});});}
 scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  const cC=c("compare"),cR=c("rule"),cA=c("attend"),m=ease(fin(t,0,1.4)),mg=ease(fin(t,w("rule","one entity")-0.3,1.3)),yk=fin(t,w("rule","with kinds")-0.1,0.6)*(1-fin(t,cA-0.2,0.6));
-  // the blueprint from the last chapter recedes; its credential box comes forward to be compared
+  const cC=c("compare"),cR=c("rule"),cA=c("attend"),m=ease(fin(t,0.5,1.4)),mg=ease(fin(t,w("rule","one entity")-0.3,1.3)),yk=fin(t,w("rule","with kinds")-0.1,0.6)*(1-fin(t,cA-0.2,0.6));
+  // the blueprint from the last chapter recedes; its credential box comes forward to be compared, once that chapter has faded
   const[bx,bt,bs,bph]=SQ_MID,B0=sq_bpBoxes(bx,bt,bs);sq_bp(ctx,bx,bt,bs,{b:1,ph:bph,a:1-fin(t,0,0.9),ea:{cred:0}});
   arrive(ctx,960,100,t,c("harder")+0.2,()=>withA(ctx,1-fin(t,w("rule","A different")-0.4,0.5),()=>T(ctx,"combine or split?",960,110,{w:800,size:40,align:"center"})),{from:0.9});
   const id1=fin(t,w("compare","what identifies")-0.1,0.5),lc=fin(t,w("compare","its life")-0.1,0.5),cp=fin(t,w("same","credit points")-0.2,0.5);
@@ -213,8 +213,9 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   const cxL=lerp(200,610,mg),cxR=lerp(1060,610,mg),[fx,fy,fw,fh]=B0.cred,cy=lerp(280,170,mg);
   arrive(ctx,530,420,t,c("harder")+0.5,()=>sq_cmp(ctx,cxL,cy,660,280,"microcredential",SRC3[1][1],rowsM,{a:1-mg}),{dy:30});
   const crX=lerp(fx,cxR,m),crY=lerp(fy,cy,m),crW=lerp(fw,660,m),crH=lerp(fh,280,m);
-  sq_cmp(ctx,crX,crY,crW,crH,"credential",TRUST,m<1?[]:rowsC.map(r=>[r[0],r[1],r[2]*(1-mg),r[3]]),{a:1});
-  if(m<1)withA(ctx,1-m,()=>bpBox(ctx,crX,crY,crW,crH,"Credential",TRUST,1,{size:26}));
+  // the box becomes the card: the box and its label go, then the card and its name come in, so the name never shows twice
+  sq_cmp(ctx,crX,crY,crW,crH,"credential",TRUST,m<1?[]:rowsC.map(r=>[r[0],r[1],r[2]*(1-mg),r[3]]),{a:fin(m,0.3,0.3)});
+  if(m<1)withA(ctx,1-fin(m,0.1,0.3),()=>bpBox(ctx,crX,crY,crW,crH,"Credential",TRUST,1,{size:26}));
   // the first two rows match; the third stays apart
   [[id1,w("compare","Compare its life")-0.3],[lc,w("same","Both match")]].forEach(([ra,tt],i)=>{const k=fin(t,tt,0.4)*(1-mg);if(k>0)tick_(ctx,960,cy+102+i*62,44,GOOD,k);});
   withA(ctx,cp*(1-mg),()=>T(ctx,"≠",960,cy+248,{w:800,size:44,align:"center",color:rgba(SQ_AMB,1)}));
@@ -283,3 +284,6 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,x,740,t,w("three","Aisha")+k*0.3,()=>sq_aisha(ctx,x,740,k,key,1),{from:0.7});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Start from a question",WEED,"Model only what the question touches; name who owns each meaning first.");
   vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before
+const CHAPTER_JOINS={glide:["slice","yaml","owners","split"]};

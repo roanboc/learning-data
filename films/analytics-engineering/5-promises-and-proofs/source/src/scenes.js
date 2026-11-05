@@ -150,11 +150,12 @@ const PP_EXP_W=["exposures:","","  - name: wallet_app","    label: Learner walle
 scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:500});
   const Ow=c("own"),Pr=c("protected"),Ex=c("exposure"),Te=c("tell"),Ap=c("approve");
-  // the core band comes down from the layers of the last chapter, and the two marts rise on it
-  const m=ease(fin(t,0,1.4)),bandY=lerp(140,808,m),bandX=lerp(980,140,m),bandW=lerp(540,1640,m),tell=fin(t,Te,0.5);
+  // the core band comes down from the layers of the last chapter, once that chapter has faded, and the two marts rise on it;
+  // it starts as the layers' core row, and its own words come in as it leaves, so "core" never shows twice
+  const m=ease(fin(t,0.5,1.4)),bandY=lerp(115,808,m),bandX=lerp(980,140,m),bandW=lerp(540,1640,m),tell=fin(t,Te,0.5);
   // on a phone the exposures' code runs down over the core band: while it's up, the band's words are behind it (texture)
   const exUp=phMin(ctx)>0&&fin(t,Ex-0.2,0.4)*(1-fin(t,Te+0.8,0.6)*(1-fin(t,Ap,0.6)))>0.5;
-  const P=phAsDeco(exUp,()=>pp_core(ctx,bandX,bandY,bandW,64,{chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}}));
+  const P=phAsDeco(exUp,()=>pp_core(ctx,bandX,bandY,bandW,lerp(45,64,m),{lab:fin(m,0.45,0.35),chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}}));
   const feeds=[["core_learner","planning"],["core_award","planning"],["core_credit_towards_award","planning"],["core_learner","wallet"],["core_credential","wallet"],["core_credit_towards_award","wallet"]];
   withA(ctx,fin(t,Ow,0.8),()=>feeds.forEach(([k,mk])=>{const[x0,y0]=P[k],x1=mk==="planning"?510:1410;ctx.strokeStyle=rgba(TRUST,0.16);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0-16);ctx.bezierCurveTo(x0,y0-300,x1,500,x1,330);ctx.stroke();}));
   const gr=[clamp((t-w("grains","Planning's"))/1.6,0,1),clamp((t-w("grains","the wallet's"))/1.2,0,1)],ch=fin(t,w("protected","enforced"),0.4),hiW=fin(t,Te+1.6,0.5)*(1-fin(t,Ap,0.5));
@@ -357,3 +358,7 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   arrive(ctx,1310,808,t,Gr-0.1,()=>T(ctx,"next: the least code that turns them green",1310,816,{w:700,size:22,align:"center",color:rgba(GOOD,1)}),{dy:12});
   ctx.restore();weedsEnd(ctx,S,t,B,"Promises and proofs",WEED,"Promise it in a contract. Prove it with a test, first.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before; the blueprint and the
+// tests come in once the chapter before has gone, since both show some of its words in other places
+const CHAPTER_JOINS={glide:["consumer","unit"],leave:["enterprise","tests"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

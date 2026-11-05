@@ -211,3 +211,7 @@ scene("again",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),on=c("on"),B=c("breath");
   if(eA>0){dark(ctx,S,eA*0.92);setScreen(ctx,S);withA(ctx,fin(t,B+1.2,0.8),()=>{T(ctx,"MAKING OF",960,420,{w:800,size:24,align:"center",color:rgba(CYAN,0.95)});T(ctx,"Data for Films",960,510,{w:800,size:80,align:"center"});
     T(ctx,"Every frame drawn by code. The narration is a synthetic voice.",960,580,{w:500,size:24,align:"center",color:rgba(SOFT,0.95)});T(ctx,"Learning Data",960,650,{w:700,size:22,align:"center",color:rgba(SOFT,0.8)});});}
   vign(ctx,S);});
+
+// where the chapters meet (From words to data's joins.js): the picture's numbers and the platform at another moment don't line up
+// with the chapter before, so the title and the camera's view leave first, over the dark and the bare world, and then the chapter comes in
+const CHAPTER_JOINS={leave:["data","time"],bare:{data:(ctx,S)=>{dark(ctx,S,1);vign(ctx,S);},time:(ctx,S)=>{bgWorld(ctx,S,{x:1300,y:540,z:1.3});vign(ctx,S);}}};

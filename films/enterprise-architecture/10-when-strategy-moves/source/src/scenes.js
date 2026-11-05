@@ -390,8 +390,8 @@ const D10_GR=[150,240,170],D10_AMB=[255,190,120];
 scene("lands",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   const tV=c("version"),tL=c("lineage"),tX=c("exchange");
   ctx.save();drift(ctx,t,sc,{z:0.015,y:480});
-  // A. the bill, from the counter, its new line lit; it slides out as the contract comes in
-  const mvB=easeCam(clamp((t-0.2)/1.6,0,1)),goA=fin(t,tV-0.9,0.6),bX=lerp(438,80,mvB)-60*goA,bY=lerp(68,256,mvB),bS=lerp(0.6,0.96,mvB),tLn=w("line","discount line")-0.2;
+  // A. the bill, from the counter, its new line lit; it moves once the counter has faded, and slides out as the contract comes in
+  const mvB=easeCam(clamp((t-0.5)/1.6,0,1)),goA=fin(t,tV-0.9,0.6),bX=lerp(438,80,mvB)-60*goA,bY=lerp(68,256,mvB),bS=lerp(0.6,0.96,mvB),tLn=w("line","discount line")-0.2;
   if(goA<1)withA(ctx,1-goA,()=>{ctx.save();ctx.translate(bX,bY);ctx.scale(bS,bS);d10_bill(ctx,0,0,560,470,{hi:pulseAt(t,tLn,1.6)+fin(t,tLn,0.6)*0.5,deco:bS<0.955});ctx.restore();});
   // the product it comes from: accounts and bills, retail's, as Now the questions appear found it; up, for its contract
   const tP=w("line","the accounts")-0.3,mvP=easeCam(clamp((t-tV+1.0)/1.4,0,1)),goP=fin(t,tL-0.9,0.5),pX=lerp(720,80,mvP),pY=lerp(256,230,mvP),pW=lerp(1100,820,mvP);
@@ -608,3 +608,7 @@ scene("july",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     ctx.restore();});
   vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"When strategy moves",EAC,"A change in strategy lands in every layer: walk it down, in order.","Film 10 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the bill carries on from the counter, so the camera carries on and the bill
+// stays put while the counter fades; the rules are a new picture with some of the same words elsewhere, so the wall leaves first
+const CHAPTER_JOINS={glide:["lands"],leave:["rules"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

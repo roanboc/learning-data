@@ -141,8 +141,8 @@ scene("fan",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);se
   // threads from each learner to its rows, while they double
   const th=fin(t,w("join","every learner"),0.4)*(1-fin(t,cQ,0.8));if(th>0)RW_FAN.forEach((_,i)=>{const y0=300+44+56+i*LH+LH/2;[0,1].forEach(j=>{const q=jOn[2*i+j];if(q<=0)return;const y1=jy+96+(2*i+j)*27+14;
     ctx.strokeStyle=rgba(j?RW_AMB:KIND,0.45*th*q);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(762,y0);ctx.bezierCurveTo(800,y0,800,y1,lerp(762,838,q),y1);ctx.stroke();});});
-  // nothing errors; only the grain test notices
-  const red=fin(t,w("quiet","Only the test"),0.4)*(1-fold),green=fold,m=ease(fin(t,0,1.2)),T2=RW_TEST2,T3=RW_TEST3;
+  // nothing errors; only the grain test notices. The test, carried from the last chapter, moves to its corner once that chapter has faded
+  const red=fin(t,w("quiet","Only the test"),0.4)*(1-fold),green=fold,m=ease(fin(t,0.5,1.2)),T2=RW_TEST2,T3=RW_TEST3;
   const T3y=ph?724:T3[1],tx=lerp(T2[0],T3[0],m),ty=lerp(T2[1],T3y,m),tw_=lerp(T2[2],T3[2],m),st=(1-m)*1-red+green;
   rw_test(ctx,tx,ty,tw_,"unique_combination",m<0.3?"3 rows · 1 learner · 3 awards":red>0.5?"16 rows · 8 learners":green>0.5?"8 rows · 8 learners":"",clamp(st,-1,1),{h:56});
   const NY=ph?816:764;arrive(ctx,430,NY,t,w("quiet","Nothing errors"),()=>withA(ctx,1-fin(t,cF,0.5),()=>tag(ctx,430,NY,"no error · every row looks right",SOFT,{align:"center",size:20})),{dy:10});
@@ -197,8 +197,9 @@ const RW_TIME5=["{#-","    True for the version that was valid on a date: valid_
 const RW_MART5=["-- as it was: each entity's version on the census date","learners_at_census as (","    select * from learners","    where {{ valid_at(census_date()) }}","),","…","credit_at_census as (","    select * from credit","    where {{ valid_at(census_date()) }}","),"];
 scene("was",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  const cC=c("census"),cTd=c("today"),cTo=c("totals"),cB=c("both"),cDc=c("declare"),m=ease(fin(t,0,1.3)),close=ease(fin(t,cTo-0.4,1.0)),dc=ease(fin(t,cDc-0.3,1.0)),sp=1-close;
-  // the split: Planning on the left, as at census day; the wallet on the right, as at today
+  const cC=c("census"),cTd=c("today"),cTo=c("totals"),cB=c("both"),cDc=c("declare"),m=ease(fin(t,0.5,1.3)),close=ease(fin(t,cTo-0.4,1.0)),dc=ease(fin(t,cDc-0.3,1.0)),sp=1-close;
+  // the split: Planning on the left, as at census day; the wallet on the right, as at today. The stair, carried from the last
+  // chapter, moves left once that chapter has faded
   withA(ctx,sp*fin(t,0.4,0.8),()=>{ctx.strokeStyle=rgba(SOFT,0.3);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(960,110);ctx.lineTo(960,840);ctx.stroke();});
   const L=[lerp(RW_STAIR4[0],120,m),lerp(RW_STAIR4[1],300,m),lerp(RW_STAIR4[2],740,m),lerp(RW_STAIR4[3],360,m)],atL=fin(t,w("census","census day"),0.6);
   withA(ctx,sp,()=>{rw_stair(ctx,...L,t,{at:"2026-03-31",atA:atL,upTo:atL>0.5?"2026-03-31":null,labels:true,size:19});
@@ -365,3 +366,6 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   arrive(ctx,960,822,t,w("promise","one core"),()=>tag(ctx,960,822,"two consumers · one core",RW_CON,{align:"center",size:22}),{dy:10});
   ctx.restore();weedsEnd(ctx,S,t,B,"One row of what, and when",WEED,"Say what one row is, and which day it describes, before any SQL.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before
+const CHAPTER_JOINS={glide:["grain","fan","was"]};

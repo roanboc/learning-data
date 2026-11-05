@@ -242,3 +242,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1500,720,t,w("next","opens"),()=>sticky(ctx,1500,720,440,140,"What runs it today, "+d6_nb("and where is it going?"),{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Who does it, and where meaning changes",EAC,"Know who does the work. Translate at the edges.","Film 6 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the wall between network and retail, and the end back at the team's wall,
+// are other places that show the same two names elsewhere, so both open on a cut
+const CHAPTER_JOINS={cut:["wall","end"]};

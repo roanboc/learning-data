@@ -311,3 +311,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");setScreen(ctx,S)
     withA(ctx,fin(t,cL+4.0,0.6),()=>ot_tag(ctx,960,812,"Next: one model, many shapes",OT_GOLD,1,{size:26}));});
   endCard(ctx,S,t,B+0.3,"Older than the systems",OT_WAX,"The concepts outlive the systems.");
   vign(ctx,S);});
+
+// where the chapters meet (joins.js): the systems meet as a ring of points, not five columns, so the columns leave first, over the bare
+// screen, and then the ring comes in
+const CHAPTER_JOINS={leave:["meet"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

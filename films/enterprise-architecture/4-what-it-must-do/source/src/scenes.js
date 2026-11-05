@@ -243,3 +243,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1500,690,t,w("next","power cut"),()=>sticky(ctx,1500,690,400,140,"How does value reach people?",{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"What it must be able to do",EAC,"Know what it must be able to do, whoever does it.","Film 4 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the pictures that carry on from the chapter before keep its camera; the
+// team's note and the owners' grid are new pictures on the wall with the same words elsewhere, so what was there leaves first, over
+// the bare wall; the end comes back from the screen to the wall, so it opens on a cut
+const CHAPTER_JOINS={glide:["who","deep"],leave:["how","owners"],cut:["end"],bare:(ctx,S,t)=>{wallBg(ctx,S,t);vign(ctx,S);}};

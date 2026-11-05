@@ -225,3 +225,9 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1500,730,t,w("next","backlog"),()=>sticky(ctx,1500,730,420,130,"Which questions matter?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Today, and where it's going",EAC,"Today, a target, and the path between: three drawings.","Film 7 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the layers move the list from the wall to the screen, so they open on a cut;
+// the views, the target, the gaps and the end are later pictures in the same place with some of the same words or Grace elsewhere,
+// so what was there leaves first, over the bare screen or wall
+const D7_SCREEN=(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);},D7_WALL=(ctx,S,t)=>{wallBg(ctx,S,t);vign(ctx,S);};
+const CHAPTER_JOINS={cut:["layers"],leave:["views","target","gaps","end"],bare:{views:D7_SCREEN,target:D7_SCREEN,gaps:D7_SCREEN,end:D7_WALL}};

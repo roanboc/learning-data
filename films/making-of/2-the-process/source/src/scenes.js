@@ -120,3 +120,7 @@ scene("split",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),la=c("last");s
   if(eA>0){dark(ctx,S,eA*0.92);setScreen(ctx,S);withA(ctx,fin(t,B+1.4,0.8),()=>{T(ctx,"MAKING OF",960,420,{w:800,size:24,align:"center",color:rgba(WARM,0.95)});T(ctx,"That's not quite right",960,510,{w:800,size:76,align:"center"});
     T(ctx,"Made by a person and Claude, an AI model by Anthropic. The narration is a synthetic voice.",960,580,{w:500,size:24,align:"center",color:rgba(SOFT,0.95)});T(ctx,"Learning Data",960,650,{w:700,size:22,align:"center",color:rgba(SOFT,0.8)});});}
   vign(ctx,S);});
+
+// where the chapters meet (From words to data's joins.js): the two lanes show the author and Claude where the title and the quote
+// showed them elsewhere, so those leave first, over the bare screen, and then the lanes come in
+const CHAPTER_JOINS={leave:["lanes","cheap"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

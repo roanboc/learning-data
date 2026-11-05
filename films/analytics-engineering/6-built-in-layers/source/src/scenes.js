@@ -207,8 +207,8 @@ const BL_CONV=["- **Import CTEs** first, one per model or source, each `select *
 scene("ctes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:700});
   const cI=c("import"),cL=c("logical"),cF=c("final"),cR=c("review"),F="models/marts/planning/mart_planning__near_award.sql",MC=[...BL_MART];
-  // Planning's table, carried from the marts, closes into its file
-  const op=fin(t,0,1.2);withA(ctx,1-op,()=>{bl_planTable(ctx,lerp(140,240,op),290,lerp(260,120,op),lerp(570,200,op),t,{sort:1,labels:1-fin(t,0,0.4)});bl_badge(ctx,150,240,"Planning",1);});
+  // Planning's table, carried from the marts, closes into its file once that chapter has faded
+  const op=fin(t,0.5,1.2);withA(ctx,1-op,()=>{bl_planTable(ctx,lerp(140,240,op),290,lerp(260,120,op),lerp(570,200,op),t,{sort:1,labels:1-fin(t,0.5,0.4)});bl_badge(ctx,150,240,"Planning",1);});
   bl_cols(ctx,t,{k:1,lit:[1,1,1,1],count:[1,1,1,1],a:LAYER4.map(()=>1-fin(t,0.2,0.8))});
   // CTE: the word, and what it stands for
   arrive(ctx,200,130,t,w("open","CTE")-0.2,()=>{T(ctx,"CTE",60,140,{w:800,size:44,color:rgba(BL_MART,1)});T(ctx,"common table expression · a named step",170,138,{w:600,size:24,color:rgba(SOFT,1)});},{dy:12});
@@ -279,13 +279,13 @@ function bl_pill(ctx,x,y,s,col,a){const w=tw(ctx,s,phSz(ctx,20),500,"mono")+40;i
 scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cC=c("count"),cP=c("pass"),cE=c("each"),cN=c("next"),tM=w("count","the metric");
-  // the columns, carried from the last chapter, fold into the strip
-  const k=fin(t,0,1.4);withA(ctx,1-fin(t,cP-0.4,0.6),()=>bl_cols(ctx,t,{k,g:BL_G7,lit:[1,1,1,1],count:[1,1,1,1],mat:1-k}));
+  // the columns, carried from the last chapter, fold into the strip once that chapter has faded, and the macro comes in as they go
+  const k=fin(t,0.5,1.0);withA(ctx,1-fin(t,cP-0.4,0.6),()=>bl_cols(ctx,t,{k,g:BL_G7,lit:[1,1,1,1],count:[1,1,1,1],mat:1-k}));
   // the rule and the count: one macro file; the var it reads, set once
   // on a phone the var's card is wider (its line fits) and the macro's narrower; the flow takes two rows, and the semantic layer sits under them
   const aA=1-fin(t,cP-0.4,0.6),ph=phMin(ctx)>0,MW=ph?1220:1320,VX=ph?1300:1420,VW=ph?560:440;
   withA(ctx,aA,()=>{
-    arrive(ctx,720,450,t,0.6,()=>bl_code(ctx,60,200,MW,"macros/planning/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-0.8)/2.0,0,1),
+    arrive(ctx,720,450,t,1.0,()=>bl_code(ctx,60,200,MW,"macros/planning/near_award.sql",BL_MAC,{edge:TRUST,fold:fin(t,tM-0.3,0.6),p:clamp((t-1.2)/2.0,0,1),
       lit:{0:fin(t,w("rule","near an award"),0.4),1:fin(t,w("rule","near an award"),0.4),2:fin(t,w("rule","more than nothing"),0.4),5:fin(t,w("count","one macro")-0.3,0.4),8:fin(t,w("count","one macro"),0.4),10:fin(t,w("count","one macro")+0.2,0.4)}}),{dy:30});
     const vA=fin(t,w("rule","fifteen"),0.4);arrive(ctx,VX+220,280,t,w("rule","fifteen")-0.3,()=>bl_code(ctx,VX,200,VW,"dbt_project.yml",["vars:","  near_award_credit_points: 15"],{edge:TRUST,lit:{1:vA},hi:pulseAt(t,w("rule","fifteen"),1.2)}),{dy:20});
     const ln=fin(t,w("rule","fifteen")+0.3,0.6)*(1-fin(t,tM-0.4,0.4));if(ln>0)withA(ctx,ln,()=>{ctx.save();ctx.strokeStyle=rgba(TRUST,0.9);ctx.lineWidth=2.4;ctx.setLineDash([6,6]);const ya=bl_rowY(ctx,200,VW,["vars:","  near_award_credit_points: 15"],1),yb=bl_rowY(ctx,200,MW,BL_MAC,2);ctx.beginPath();ctx.moveTo(VX,ya);ctx.lineTo(lerp(VX,ph?60+MW-20:1340,ln),lerp(ya,yb,ln));ctx.stroke();ctx.restore();});
@@ -332,3 +332,7 @@ scene("once",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     withA(ctx,pA2,()=>{const bx=lerp(1360,1520,lf),by=lerp(560,400,lf);bl_badge(ctx,bx,by,"Planning",1);glass(ctx,bx-30,by+50,240,56,10,BL_MART,{glow:10,ea:0.8,fill:"rgba(8,14,28,0.95)"});ctx.fillStyle=rgba(BL_MART,0.95);rr(ctx,bx-20,by+67,6,22,3);ctx.fill();T(ctx,"near award",bx-4,by+85,{w:700,size:18});});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Built in layers",WEED,"Each layer one job; each CTE one step; each rule written once.");
   vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before; how it's stored comes in
+// once the CTEs have gone, since both name the tables
+const CHAPTER_JOINS={glide:["intermediate","ctes","once"],leave:["physical"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

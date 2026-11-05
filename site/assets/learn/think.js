@@ -1,4 +1,4 @@
-/* Learning Data: "Pause and think" for the film on any film page. When it's on, the film holds on the last frame of each chapter
+/* Learning Data: "Pause and think" for the film on any film page. It's on unless the visitor turns it off. When it's on, the film holds on the last frame of each chapter
    and asks one short question about it, then carries on. The questions come from the page's language pack (window.LEARN.think).
    - Each question's lab link goes to <.player data-labs>#<stop> (default "labs/"); data-labs="" leaves it out.
    - A question's optional "more" ({href,label}) shows a "Go deeper" link once the viewer has answered.
@@ -25,12 +25,10 @@ if(list){Object.keys(Q.qs).forEach(id=>{const q=Q.qs[id],d=document.createElemen
   // Space on a question opens it; without this, the player (listening on window) would take it as play/pause
   list.addEventListener("keydown",e=>{if(e.target.closest("summary"))e.stopPropagation();});}
 if(!btn)return;
-let on=get("think",false),last=null,panel=null;
+let on=get("think",true),last=null,panel=null;
 function setOn(v){on=v;btn.setAttribute("aria-pressed",v?"true":"false");btn.classList.toggle("on",v);put("think",v);}
 setOn(on);btn.textContent=Q.ui.toggle;
 btn.addEventListener("click",()=>setOn(!on));
-// the poster offers "Play with pauses to think" next to "Play the film"
-box.querySelectorAll("[data-think]").forEach(b=>b.addEventListener("click",()=>{setOn(true);F.play();}));
 function close(go){if(!panel)return;const had=panel.contains(document.activeElement);panel.remove();panel=null;if(had)toPlay();if(go)F.play();}
 F.onChapterEnd=id=>{
   if(!on||id===last)return false;const q=Q.qs[id];if(!q)return false;

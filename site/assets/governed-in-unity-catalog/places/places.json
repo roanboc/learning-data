@@ -1,0 +1,240 @@
+{
+ "player": "770be04cfee6d488",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:platform": {
+   "file": "platform.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     13.75
+    ],
+    [
+     18.0,
+     26.25
+    ],
+    [
+     83.0,
+     90.25
+    ],
+    [
+     357.5,
+     368.75
+    ]
+   ]
+  },
+  "place:platformDesk": {
+   "file": "platformDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     13.75
+    ],
+    [
+     18.0,
+     26.25
+    ],
+    [
+     83.0,
+     90.25
+    ],
+    [
+     357.5,
+     368.75
+    ]
+   ]
+  },
+  "place:big": {
+   "file": "big.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     13.5,
+     18.25
+    ],
+    [
+     26.0,
+     30.25
+    ],
+    [
+     38.5,
+     83.75
+    ],
+    [
+     94.0,
+     129.75
+    ],
+    [
+     142.0,
+     154.25
+    ],
+    [
+     159.25,
+     193.25
+    ],
+    [
+     251.0,
+     256.75
+    ],
+    [
+     278.5,
+     295.75
+    ],
+    [
+     305.5,
+     339.75
+    ]
+   ]
+  },
+  "place:deskGov": {
+   "file": "deskGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     29.5,
+     39.25
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     89.5,
+     95.25
+    ],
+    [
+     368.0,
+     373.0
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     128.75,
+     142.75
+    ],
+    [
+     154.0,
+     159.5
+    ],
+    [
+     208.0,
+     228.25
+    ],
+    [
+     295.5,
+     306.5
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     192.5,
+     195.0
+    ],
+    [
+     338.75,
+     346.75
+    ]
+   ]
+  },
+  "place:bigPlan": {
+   "file": "bigPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     194.25,
+     200.5
+    ],
+    [
+     228.0,
+     239.5
+    ]
+   ]
+  },
+  "place:bigReg": {
+   "file": "bigReg.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     200.25,
+     209.25
+    ]
+   ]
+  },
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     238.25,
+     243.25
+    ]
+   ]
+  },
+  "place:registrarDesk": {
+   "file": "registrarDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     238.25,
+     243.25
+    ]
+   ]
+  },
+  "place:regTop": {
+   "file": "regTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     242.5,
+     251.75
+    ]
+   ]
+  },
+  "place:index": {
+   "file": "index.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     256.5,
+     279.5
+    ]
+   ]
+  },
+  "place:mapClose": {
+   "file": "mapClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     346.0,
+     357.75
+    ]
+   ]
+  }
+ }
+}

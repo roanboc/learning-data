@@ -1,0 +1,392 @@
+{
+ "player": "28f0c256fea2de78",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:planClose": {
+   "file": "planClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     11.0
+    ],
+    [
+     91.75,
+     99.5
+    ],
+    [
+     363.0,
+     369.5
+    ],
+    [
+     379.5,
+     385.0
+    ]
+   ]
+  },
+  "place:planDesk": {
+   "file": "planDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     11.0
+    ],
+    [
+     91.75,
+     99.5
+    ],
+    [
+     363.0,
+     369.5
+    ],
+    [
+     379.5,
+     385.0
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     10.75,
+     18.0
+    ]
+   ]
+  },
+  "place:nightScreen": {
+   "file": "nightScreen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     17.25,
+     25.0
+    ],
+    [
+     87.0,
+     92.5
+    ]
+   ]
+  },
+  "place:screen": {
+   "file": "screen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     24.25,
+     32.5
+    ]
+   ]
+  },
+  "place:deskGov": {
+   "file": "deskGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     31.75,
+     49.5
+    ],
+    [
+     135.5,
+     140.75
+    ],
+    [
+     346.25,
+     358.75
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.75,
+     56.5
+    ],
+    [
+     66.25,
+     84.5
+    ],
+    [
+     184.75,
+     217.0
+    ],
+    [
+     341.25,
+     347.0
+    ],
+    [
+     384.75,
+     389.75
+    ]
+   ]
+  },
+  "place:platform": {
+   "file": "platform.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     55.75,
+     60.25
+    ]
+   ]
+  },
+  "place:platformDesk": {
+   "file": "platformDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     55.75,
+     60.25
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     59.5,
+     67.0
+    ],
+    [
+     103.5,
+     136.25
+    ],
+    [
+     216.0,
+     225.25
+    ],
+    [
+     230.5,
+     253.75
+    ],
+    [
+     258.75,
+     265.75
+    ],
+    [
+     286.5,
+     293.0
+    ],
+    [
+     321.25,
+     327.75
+    ]
+   ]
+  },
+  "place:tom": {
+   "file": "tom.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     83.75,
+     87.75
+    ],
+    [
+     224.5,
+     231.25
+    ],
+    [
+     275.75,
+     282.25
+    ],
+    [
+     319.0,
+     322.0
+    ],
+    [
+     371.5,
+     376.0
+    ]
+   ]
+  },
+  "place:tomDesk": {
+   "file": "tomDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     83.75,
+     87.75
+    ],
+    [
+     224.5,
+     231.25
+    ],
+    [
+     275.75,
+     282.25
+    ],
+    [
+     319.0,
+     322.0
+    ],
+    [
+     371.5,
+     376.0
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     98.75,
+     104.5
+    ],
+    [
+     389.0,
+     394.25
+    ]
+   ]
+  },
+  "sheet|1780x572|w": {
+   "file": "sheet_1780x572_w.webp",
+   "w": 1820,
+   "h": 612,
+   "shows": [
+    [
+     113.25,
+     121.0
+    ]
+   ]
+  },
+  "sheet|1460x660|w": {
+   "file": "sheet_1460x660_w.webp",
+   "w": 1500,
+   "h": 700,
+   "shows": [
+    [
+     135.75,
+     140.75
+    ]
+   ]
+  },
+  "place:big": {
+   "file": "big.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     140.0,
+     173.0
+    ],
+    [
+     333.75,
+     342.0
+    ],
+    [
+     358.0,
+     364.0
+    ]
+   ]
+  },
+  "place:bigLearn": {
+   "file": "bigLearn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     172.25,
+     185.75
+    ],
+    [
+     272.0,
+     276.5
+    ]
+   ]
+  },
+  "sheet|1440x760|w": {
+   "file": "sheet_1440x760_w.webp",
+   "w": 1480,
+   "h": 800,
+   "shows": [
+    [
+     184.75,
+     217.0
+    ],
+    [
+     384.75,
+     389.75
+    ]
+   ]
+  },
+  "place:bigPlat": {
+   "file": "bigPlat.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     252.75,
+     259.5
+    ],
+    [
+     265.0,
+     272.25
+    ],
+    [
+     326.75,
+     334.0
+    ]
+   ]
+  },
+  "place:bigNight": {
+   "file": "bigNight.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     281.25,
+     286.75
+    ],
+    [
+     292.25,
+     315.25
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     314.5,
+     319.75
+    ]
+   ]
+  },
+  "place:bigPlan": {
+   "file": "bigPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     368.75,
+     372.25
+    ],
+    [
+     375.25,
+     380.25
+    ]
+   ]
+  }
+ }
+}

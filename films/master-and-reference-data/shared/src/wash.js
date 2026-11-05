@@ -266,41 +266,61 @@ function wc_walker(ctx,x,y,h,cloth,depth,o){o=o||{};const k=h/100,P=WCP;
   wc_wash(ctx,[[x+8*k,y-78*k],[x+20*k,y-60*k],[x+15*k,y-56*k],[x+4*k,y-70*k]],cloth,{depth,kind:"arm",lw:1.2});}
 
 /* ---------- what is kept ---------- */
-// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still
-function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return wc_seen(c);wc_prep();c=wc_keep("bg",key,mkCanvas(w||W,h||H));paint(c.getContext("2d"));return c;}
+// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still. In the
+// site's player, one the film was published with as a picture (below) is that picture, and is never painted
+function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return wc_seen(c);const pic=wc_pic(key);if(pic)return pic;
+  wc_prep();c=wc_keep("bg",key,mkCanvas(w||W,h||H));paint(c.getContext("2d"));return c;}
 /* ---------- the site's player: each place as a picture ---------- */
-// tools/publish.py draws each place the film paints (WC_PLACES) as a picture, places/<key>.webp beside film.js, and lists them in
-// places/places.json with the player that drew them and when the film shows each ([from, to] in seconds). The site's player shows
-// those pictures instead of painting the places: a place took 0.1 to 0.5 s to paint on a fast computer and several times that on a
-// laptop or a phone, and the player painted them while the film played, so the picture froze again and again (5 November 2026). It
-// fetches every picture once, in the order the film shows them, and keeps decoded only those it shows from a moment ago to half a
-// minute ahead. A place with no picture is painted, as before. The video, the stills, the poster and the checks paint every place.
+// tools/publish.py draws each place the film paints (WC_PLACES), and anything else it keeps at the frame's size or larger (such as a
+// place painted at twice the size, for close-ups), as a picture, places/<name>.webp beside film.js, and lists them in
+// places/places.json by what wc_kept calls them ("place:" and the place's name), with the player that drew them, their size and when
+// the film shows each ([from, to] in seconds). The site's player shows those pictures instead of painting them: a place took 0.1 to
+// 0.5 s to paint on a fast computer and several times that on a laptop or a phone, and the player painted them while the film
+// played, so the picture froze again and again (5 November 2026). It fetches every picture once, in the order the film shows them,
+// and keeps decoded only those it shows from a moment ago to half a minute ahead, one the frame's size or larger at no more than twice
+// the player's width. One with no picture is painted, as before. The video, the stills, the poster and the checks paint everything.
 const WC_PICS={dir:null,list:null,file:{},pic:{},dec:{},job:{},failed:{},used:{},busy:0,t:0,hold:0,ready:null};
+// a picture decoded smaller than the film keeps it: [its width and height in the film, and how much smaller it is, across and down].
+// Wherever the film draws it at its own size, or a part of it, it is drawn as the film's size: master data film 8 draws the place
+// "screen" at its own size inside another picture, and governance in practice film 1 its faculty desk
+const WC_SMALL=new WeakMap();
+(function(){if(window.__RENDER__||typeof CanvasRenderingContext2D==="undefined")return;const P=CanvasRenderingContext2D.prototype,d=P.drawImage;
+  P.drawImage=function(im){const s=WC_SMALL.get(im);if(!s)return d.apply(this,arguments);const a=arguments;
+    if(a.length===3)return d.call(this,im,a[1],a[2],s[0],s[1]);
+    if(a.length===9)return d.call(this,im,a[1]*s[2],a[2]*s[3],a[3]*s[2],a[4]*s[3],a[5],a[6],a[7],a[8]);
+    return d.apply(this,arguments);};})();
 (function(){try{const s=!window.__RENDER__&&document.currentScript&&document.currentScript.src;if(s)WC_PICS.dir=s.replace(/[?#].*$/,"").replace(/[^/]*$/,"")+"places/";}catch(e){}})();
-// starts loading the pictures, once, on a page with the film; the list of places, or null where there are no pictures
+// starts loading the pictures, once, on a page with the film; the list of pictures, or null where there are none
 function wc_picsLoad(){return WC_PICS.ready||(WC_PICS.ready=(async()=>{
   if(!WC_PICS.dir||typeof WC_PLACES==="undefined"||!document.getElementById("film")||typeof fetch!=="function")return null;
   try{const r=await fetch(WC_PICS.dir+"places.json");if(!r.ok)return null;const m=await r.json(),P=m.places||{};
-    const L=Object.keys(P).filter(k=>WC_PLACES[k]&&P[k].file).map(k=>({k,file:P[k].file,shows:P[k].shows||[]}));if(!L.length)return null;
+    const L=Object.keys(P).filter(k=>P[k].file).map(k=>({k,file:P[k].file,w:P[k].w||W,h:P[k].h||H,shows:P[k].shows||[]}));if(!L.length)return null;
     WC_PICS.list=L;wc_picsFetch();return L;}catch(e){return null;}})());}
-// how soon the film shows a place after t (a place it showed before t, or never, comes last)
+// how soon the film shows a picture after t (one it showed before t, or never, comes last)
 function wc_picSoon(p,t){let d=1e9;for(const [a,b] of p.shows)if(b>=t)d=Math.min(d,Math.max(0,a-t));return d<1e9?d:1e6+(p.shows.length?p.shows[0][0]:0);}
 function wc_picsFetch(){const L=WC_PICS.list;if(!L)return;const todo=L.filter(p=>!WC_PICS.file[p.k]&&!WC_PICS.job[p.k]&&!WC_PICS.failed[p.k]).sort((a,b)=>wc_picSoon(a,WC_PICS.t)-wc_picSoon(b,WC_PICS.t));
   while(WC_PICS.busy<3&&todo.length){const p=todo.shift();WC_PICS.busy++;
     WC_PICS.job[p.k]=fetch(WC_PICS.dir+p.file).then(r=>{if(!r.ok)throw new Error(r.status);return r.blob();}).then(b=>{WC_PICS.file[p.k]=b;},()=>{WC_PICS.failed[p.k]=1;})
       .then(()=>{WC_PICS.busy--;delete WC_PICS.job[p.k];wc_picsFetch();wc_picsKeep(WC_PICS.t);});}}
-// keeps decoded the pictures the film shows from 2 s before t to 30 s after, and lets the others go (their files stay, to decode again)
+// the width a picture is decoded at: one the frame's size or larger, enough for the camera to move in twice as close at the player's
+// size, never more than its own; a smaller one, whole
+function wc_picNeed(p){if(p.w*p.h<W*H)return p.w;const cv=document.getElementById("film");return Math.min(p.w,cv&&cv.width?Math.ceil(cv.width*2):p.w);}
+// keeps decoded the pictures the film shows from 2 s before t to 30 s after, and lets the others go (their files stay, to decode
+// again); one decoded smaller than the player now needs (it grew, or went full screen) is decoded again, and shown meanwhile
 function wc_picsKeep(t){const L=WC_PICS.list;if(!L)return;const moved=Math.abs(t-WC_PICS.t)>2;WC_PICS.t=t;if(moved)wc_picsFetch();
   for(const p of L){const near=p.shows.some(([a,b])=>b>=t-2&&a<=t+30),have=WC_PICS.pic[p.k];
-    if(near&&!have&&WC_PICS.file[p.k]&&!WC_PICS.dec[p.k])wc_picDecode(p.k);
+    if(near&&WC_PICS.file[p.k]&&!WC_PICS.dec[p.k]&&(!have||have.width<wc_picNeed(p)*0.9))wc_picDecode(p);
     else if(!near&&have&&WC_PICS.used[p.k]!==WC_FRAME){if(have.close)have.close();delete WC_PICS.pic[p.k];}}}
 // decoded off the page's thread where the browser can (createImageBitmap); when the film is waiting for it, it draws again
-function wc_picDecode(k){const b=WC_PICS.file[k];
-  WC_PICS.dec[k]=(typeof createImageBitmap==="function"?createImageBitmap(b):new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(b);}))
-    .then(pic=>{WC_PICS.pic[k]=pic;if(WC_PICS.hold)window.dispatchEvent(new Event("resize"));},()=>{WC_PICS.failed[k]=1;}).then(()=>{delete WC_PICS.dec[k];});}
-// a place's picture, if it's ready; null where the place is to be painted
+function wc_picDecode(p){const k=p.k,b=WC_PICS.file[k],w=wc_picNeed(p);
+  const whole=()=>typeof createImageBitmap==="function"?createImageBitmap(b):new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(b);});
+  WC_PICS.dec[k]=(w<p.w&&typeof createImageBitmap==="function"?createImageBitmap(b,{resizeWidth:w,resizeHeight:Math.round(w*p.h/p.w),resizeQuality:"medium"}).catch(whole):whole())
+    .then(pic=>{const old=WC_PICS.pic[k];if(old&&old!==pic&&old.close)old.close();if(pic.width<p.w)WC_SMALL.set(pic,[p.w,p.h,pic.width/p.w,pic.height/p.h]);
+      WC_PICS.pic[k]=pic;if(WC_PICS.hold)window.dispatchEvent(new Event("resize"));},
+      ()=>{if(!WC_PICS.pic[k])WC_PICS.failed[k]=1;}).then(()=>{delete WC_PICS.dec[k];});}
+// a picture, if it's ready; null where it is to be painted
 function wc_pic(k){const p=WC_PICS.pic[k];if(!p)return null;WC_PICS.used[k]=WC_FRAME;return p;}
-// a place the film shows at t whose picture is on its way
+// a picture the film shows at t that is still on its way
 function wc_picsMissing(t){const L=WC_PICS.list;if(!L)return false;for(const p of L)if(!WC_PICS.pic[p.k]&&!WC_PICS.failed[p.k]&&p.shows.some(([a,b])=>t>=a-0.3&&t<=b+0.3))return true;return false;}
 // resolves once the pictures the film shows from t to 2 s after are ready, or 8 s have passed
 function wc_picsReady(t){WC_PICS.t=t;wc_picsFetch();const until=performance.now()+8000;

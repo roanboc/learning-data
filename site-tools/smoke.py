@@ -256,8 +256,9 @@ class Run:
             f = r.failure or ""
             if not r.url.startswith(origin):
                 return
-            if "ERR_ABORTED" in f and (r.resource_type in ("media", "document") or r.url.endswith(".mp3")):
-                return  # a seek aborts the soundtrack's range request; a redirect page aborts its own load
+            if "ERR_ABORTED" in f and (r.resource_type in ("media", "document") or r.url.endswith(".mp3") or "/places/" in r.url):
+                return  # a seek aborts the soundtrack's range request; a redirect page aborts its own load; leaving a watercolour
+                # film's page aborts the pictures of its places that the player was fetching ahead (master data's wash.js)
             log["failed"].append(f"{r.url[len(origin):]} {f}")
 
         def on_response(r):

@@ -9,10 +9,12 @@ player it was drawn from and the moment. A player rebuilt without its poster, su
 then fails the site's checks instead of leaving the old picture on the film's page and cards.
 --keep-sound copies the player, the captions and the poster, and leaves the site's soundtrack as it is: use it when only the
 pictures changed, since dist/ is not in git and can hold a soundtrack older than the site's.
-A film drawn in the master data series' watercolour (its places in WC_PLACES) also gets each place as a picture, painted here as
-the video paints it, in site/assets/<key>/places/, with places.json: the player they were drawn from, and when the film shows each
-place, found by playing the film through at four moments a second. The site's player shows those pictures instead of painting the
-places while the film plays (wash.js), and site-tools/check_site.py fails pictures drawn from any other player."""
+A film drawn in the master data series' watercolour (its places in WC_PLACES) also gets each place it shows as a picture, and
+anything else it keeps (wc_kept) at the frame's size or larger, such as a place at twice the size for close-ups, or that takes
+SLOW_PAINT or longer to paint, painted here as the video paints them, in site/assets/<key>/places/, with places.json: the player
+they were drawn from, and when the film shows each one, found by playing the film through at four moments a second. The site's
+player shows those pictures instead of painting them while the film plays (wash.js), and site-tools/check_site.py fails pictures
+drawn from any other player."""
 import base64, hashlib, json, re, shutil, sys
 from lang import *
 from playwright.sync_api import sync_playwright
@@ -20,21 +22,29 @@ from playwright.sync_api import sync_playwright
 KEEP_SOUND = '--keep-sound' in sys.argv
 
 
-STEP = 0.25  # seconds between the moments at which the film is played through, to find when it shows each place
-# Paints every place (WC_PLACES) as the video does, as a WebP picture at the frame's size, then plays the film through at a tenth of
-# its size, a moment every STEP seconds, with the people and the paper left out (they never paint a place), noting the places each
-# moment draws. Returns {key: [the picture as a data URL, [the moments that show it]]}.
-PLACES_JS = """async (step) => {
-  const fn = typeof gv_place === 'function' ? 'gv_place' : 'wc_place', place = window[fn], out = {}, seen = {};
-  for (const k of Object.keys(WC_PLACES)) { out[k] = place(k).toDataURL('image/webp', 0.8); seen[k] = []; await new Promise(r => setTimeout(r, 0)); }
-  let now = null; const keep = { outlined: window.outlined, wc_paperOver: window.wc_paperOver };
-  window[fn] = function (k) { if (now) now.add(k); return place.apply(this, arguments); };
+STEP = 0.25        # seconds between the moments at which the film is played through, to find when it shows each picture
+SLOW_PAINT = 0.05  # seconds: a kept picture that takes this long to paint here is drawn as a picture too (smooth.py, the same)
+# Paints every place (WC_PLACES) as the video does, then plays the film through at a tenth of its size, a moment every STEP seconds,
+# with the people and the paper left out (they never paint a place), noting each picture the film keeps (wc_kept) that each moment
+# shows. Then paints again, with the people in, each kept picture the size of the frame or larger (such as a place at twice the size
+# for close-ups) and each that takes SLOW_PAINT or longer (an open binder, a sketch). Returns {what wc_kept calls it: [the picture as
+# a WebP data URL, [the moments], [width, height]]}: the places, and those other pictures.
+PLACES_JS = """async ({ step, slow }) => {
+  const fn = typeof gv_place === 'function' ? 'gv_place' : 'wc_place', out = {}, seen = {}, size = {}, paint = {}, big = W * H;
+  for (const k of Object.keys(WC_PLACES)) { const key = 'place:' + k, c = window[fn](k); out[key] = c.toDataURL('image/webp', 0.8); size[key] = [c.width, c.height];
+    await new Promise(r => setTimeout(r, 0)); }
+  let now = null; const keep = { outlined: window.outlined, wc_paperOver: window.wc_paperOver, wc_kept: window.wc_kept };
+  window.wc_kept = function (key, w, h, p) { if (now) now.add(key); if (!(key in out) && !(key in paint)) { paint[key] = p; size[key] = [w || W, h || H]; }
+    return keep.wc_kept.apply(this, arguments); };
   window.outlined = function () {}; window.wc_paperOver = function (ctx, S) { setScreen(ctx, S); };
   try { const c = document.createElement('canvas'); c.width = 192; c.height = 108; const x = c.getContext('2d');
     for (let t = 0; t < TL.total; t += step) { now = new Set(); x.setTransform(1, 0, 0, 1, 0, 0); x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
-      renderFrame(x, 0.1, t); for (const k of now) if (seen[k]) seen[k].push(+t.toFixed(2)); } }
-  finally { window[fn] = place; Object.assign(window, keep); now = null; }
-  const r = {}; for (const k in out) r[k] = [out[k], seen[k]]; return r; }"""
+      renderFrame(x, 0.1, t); for (const k of now) (seen[k] = seen[k] || []).push(+t.toFixed(2)); } }
+  finally { Object.assign(window, keep); now = null; }
+  for (const key in paint) { const [w, h] = size[key], c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'), a = performance.now();
+    paint[key](x); x.getImageData(0, 0, 1, 1); if (w * h >= big || performance.now() - a >= slow * 1000) out[key] = c.toDataURL('image/webp', 0.8);
+    await new Promise(r => setTimeout(r, 0)); }
+  const r = {}; for (const k in out) r[k] = [out[k], seen[k] || [], size[k]]; return r; }"""
 
 
 def spans(ts):
@@ -83,32 +93,35 @@ with sync_playwright() as p:
     t = s['start'] + s['cues'][cid] + off
     pg.evaluate("CAPS_ON=false")
     d = pg.evaluate("""(t)=>{const c=document.createElement('canvas');c.width=1280;c.height=720;renderFrame(c.getContext('2d'),1280/1920,t);return c.toDataURL('image/jpeg',0.88);}""", t)
-    places = pg.evaluate(PLACES_JS, STEP) if pg.evaluate("typeof WC_PLACES!=='undefined'&&typeof wc_pic==='function'") else None
+    places = pg.evaluate(PLACES_JS, {'step': STEP, 'slow': SLOW_PAINT}) if pg.evaluate("typeof WC_PLACES!=='undefined'&&typeof wc_pic==='function'") else None
     b.close()
 player = hashlib.sha256((dst / 'film.js').read_bytes()).hexdigest()[:16]
 pics = dst / 'places'
 if places:
     pics.mkdir(exist_ok=True)
-    names, listed = {}, {}
-    for k, (url, seen) in places.items():
-        f = re.sub(r'[^A-Za-z0-9_-]', '_', k) + '.webp'
+    names, listed, unseen = {}, {}, []
+    for k, (url, seen, (w, h)) in places.items():
+        if not seen:
+            unseen.append(k[6:] if k.startswith('place:') else k)
+            continue
+        f = re.sub(r'[^A-Za-z0-9_-]', '_', k[6:] if k.startswith('place:') else k) + '.webp'
         if f.lower() in names:
-            raise SystemExit('the places %s and %s would share the picture %s; rename one in WC_PLACES' % (names[f.lower()], k, f))
+            raise SystemExit('%s and %s would share the picture %s; rename one' % (names[f.lower()], k, f))
         names[f.lower()] = k
         (pics / f).write_bytes(base64.b64decode(url.split(',', 1)[1]))
-        listed[k] = {'file': f, 'shows': spans(seen)}
+        listed[k] = {'file': f, 'w': w, 'h': h, 'shows': spans(seen)}
     for old in pics.iterdir():
         if old.name != 'places.json' and old.name.lower() not in names:
             old.unlink()
-    order = sorted(listed, key=lambda k: (listed[k]['shows'] or [[1e9]])[0][0])
-    (pics / 'places.json').write_text(json.dumps({'player': player, 'note': 'Drawn by tools/publish.py: each place of the film as a picture, '
-        'and when the film shows it ([from, to] in seconds). The site\'s player shows these instead of painting the places.',
+    order = sorted(listed, key=lambda k: listed[k]['shows'][0][0])
+    (pics / 'places.json').write_text(json.dumps({'player': player, 'note': 'Drawn by tools/publish.py: each place of the film, and anything '
+        'else it keeps at the frame\'s size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and '
+        'when the film shows it ([from, to] in seconds). The site\'s player shows these instead of painting them.',
         'places': {k: listed[k] for k in order}}, indent=1) + '\n')
     kb = sum((pics / listed[k]['file']).stat().st_size for k in listed) / 1024
-    unseen = [k for k in order if not listed[k]['shows']]
     copied.append('%d places as pictures (%.0f KB)' % (len(listed), kb))
     if unseen:
-        print('these places never show at four moments a second, so the player decodes them only if it needs them:', ', '.join(unseen))
+        print('left out these places, which the film never shows (painted inside another picture, or not used):', ', '.join(unseen))
 elif pics.exists():
     shutil.rmtree(pics)
 note = 'Drawn by tools/publish.py from the player %s at %s/%s%+g (%.2f s)' % (player, sid, cid, off, t)

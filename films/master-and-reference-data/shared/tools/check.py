@@ -1,10 +1,10 @@
 """Check the film before a long render: python tools/check.py
 First From words to data's checks, unchanged: every moment draws, 30 a second, as the video does, and the same words never show
 twice where one chapter fades into the next (check.py and twice.py there). Then this series' own: the site's player keeps up
-(smooth.py): drawn as the player draws it, with the places as pictures, no moment takes long, nothing big is painted while the
+(smooth.py): drawn as the player draws it, with the places as pictures, no moment takes long, nothing slow is painted while the
 film plays, and what it keeps stays within its budget, also with the processor slowed four times, as on a phone."""
 import runpy, smooth
-from lang import DIST
+from lang import DIST, META, REPO
 from run import FW
 from playwright.sync_api import sync_playwright
 
@@ -15,7 +15,7 @@ except SystemExit as e:
     if e.code:
         failed.append(str(e.code))
 with sync_playwright() as p:
-    summary, faults = smooth.check(p, DIST / 'render.html')
+    summary, faults = smooth.check(p, DIST / 'render.html', REPO / 'site' / 'assets' / META['key'] / 'places')
 print(summary)
 for l in faults:
     print('  ' + l)

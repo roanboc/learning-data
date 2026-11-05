@@ -18,8 +18,8 @@ async function prepAssets(){await fontsReady3();if(window.__RENDER__)wc_prep();e
   // them ahead: painting every place as a labs page opened held it for seconds (4 November 2026)
   const cv=document.getElementById("film"),box=cv&&cv.closest(".player");if(!box)return;if(box.classList.contains("started")){go();return;}
   const mo=new MutationObserver(()=>{if(box.classList.contains("started")){mo.disconnect();go();}});mo.observe(box,{attributes:true,attributeFilter:["class"]});}
-// a place: in the site's player, its picture; otherwise painted once by the film's own painter, and kept
-function wc_place(key){return wc_pic(key)||wc_kept("place:"+key,W,H,WC_PLACES[key]);}
+// a place, painted once by the film's own painter, and kept (in the site's player, its picture: wc_kept)
+function wc_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 if(!window.__RENDER__)renderFrame=wc_liveFrame(renderFrame);
 if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
     M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d");

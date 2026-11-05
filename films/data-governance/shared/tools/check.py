@@ -41,7 +41,7 @@ with sync_playwright() as p:
     st = steady.check(pg)
     jp = jump.check(pg)
     b.close()
-    sm = smooth.check(p, DIST / 'render.html')
+    sm = smooth.check(p, DIST / 'render.html', REPO / 'site' / 'assets' / META['key'] / 'places')
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
 for k, s in slow:

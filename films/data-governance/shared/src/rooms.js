@@ -115,8 +115,8 @@ function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id==
     if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
     // before a later moment, what the end shows leaves
     const was=GV_JOIN;GV_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{GV_JOIN=was;}};}}
-// a place: in the site's player, its picture (master data's wash.js); otherwise painted once by the film's painter (WC_PLACES), and kept
-function gv_place(key){return wc_pic(key)||wc_kept("place:"+key,W,H,WC_PLACES[key]);}
+// a place, painted once by the film's painter (WC_PLACES), and kept (in the site's player, its picture: master data's wc_kept)
+function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
 /* ---------- rooms ---------- */
 // a room's back wall to fy, its floor boards running away from us, and a skirting board

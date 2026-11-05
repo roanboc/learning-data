@@ -1,0 +1,232 @@
+{
+ "player": "75e76de2e908a203",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     33.0
+    ],
+    [
+     126.75,
+     146.0
+    ]
+   ]
+  },
+  "shot:home": {
+   "file": "shot_home.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     33.0
+    ]
+   ]
+  },
+  "shot:rules": {
+   "file": "shot_rules.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     33.0
+    ]
+   ]
+  },
+  "back:mei": {
+   "file": "back_mei.webp",
+   "w": 840,
+   "h": 960,
+   "shows": [
+    [
+     0,
+     33.0
+    ],
+    [
+     126.75,
+     146.0
+    ],
+    [
+     244.25,
+     258.75
+    ]
+   ]
+  },
+  "place:screen": {
+   "file": "screen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     32.0,
+     53.0
+    ],
+    [
+     73.5,
+     127.75
+    ],
+    [
+     186.25,
+     186.75
+    ],
+    [
+     244.25,
+     244.75
+    ]
+   ]
+  },
+  "place:street": {
+   "file": "street.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     51.75,
+     74.75
+    ]
+   ]
+  },
+  "band0": {
+   "file": "band0.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     74.75,
+     104.0
+    ]
+   ]
+  },
+  "band1": {
+   "file": "band1.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     74.75,
+     104.0
+    ]
+   ]
+  },
+  "band2": {
+   "file": "band2.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     74.75,
+     104.0
+    ]
+   ]
+  },
+  "band9": {
+   "file": "band9.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     93.25,
+     104.0
+    ]
+   ]
+  },
+  "shot:case0": {
+   "file": "shot_case0.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     126.75,
+     146.0
+    ]
+   ]
+  },
+  "shot:case1": {
+   "file": "shot_case1.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     126.75,
+     146.0
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     145.0,
+     187.5
+    ],
+    [
+     217.5,
+     245.25
+    ]
+   ]
+  },
+  "place:friday": {
+   "file": "friday.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     186.25,
+     218.75
+    ]
+   ]
+  },
+  "shot:check": {
+   "file": "shot_check.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     186.25,
+     218.75
+    ]
+   ]
+  },
+  "back:leila": {
+   "file": "back_leila.webp",
+   "w": 840,
+   "h": 960,
+   "shows": [
+    [
+     186.25,
+     218.75
+    ]
+   ]
+  },
+  "place:eve": {
+   "file": "eve.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     244.25,
+     258.75
+    ]
+   ]
+  },
+  "shot:week": {
+   "file": "shot_week.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     244.25,
+     258.75
+    ]
+   ]
+  }
+ }
+}

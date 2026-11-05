@@ -1,0 +1,595 @@
+{
+ "player": "eaa0a8027b77d2ce",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:x67dawn": {
+   "file": "x67dawn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     22.25
+    ],
+    [
+     75.0,
+     85.5
+    ],
+    [
+     230.25,
+     236.25
+    ],
+    [
+     331.25,
+     333.75
+    ]
+   ]
+  },
+  "place:x66border": {
+   "file": "x66border.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     21.5,
+     27.0
+    ]
+   ]
+  },
+  "place:x66borderBar": {
+   "file": "x66borderBar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     21.5,
+     27.0
+    ]
+   ]
+  },
+  "place:x66road": {
+   "file": "x66road.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     26.0,
+     40.5
+    ]
+   ]
+  },
+  "place:x67night": {
+   "file": "x67night.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     39.75,
+     49.25
+    ]
+   ]
+  },
+  "place:x63office": {
+   "file": "x63office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.25,
+     55.25
+    ]
+   ]
+  },
+  "place:x63officeT": {
+   "file": "x63officeT.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.25,
+     55.25
+    ]
+   ]
+  },
+  "place:x67pole": {
+   "file": "x67pole.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     54.25,
+     60.0
+    ],
+    [
+     278.25,
+     280.75
+    ]
+   ]
+  },
+  "place:x67post": {
+   "file": "x67post.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     59.25,
+     62.0
+    ]
+   ]
+  },
+  "place:x67postT": {
+   "file": "x67postT.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     59.25,
+     62.0
+    ]
+   ]
+  },
+  "place:x67grocer": {
+   "file": "x67grocer.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     61.0,
+     66.0
+    ]
+   ]
+  },
+  "place:x67grocerT": {
+   "file": "x67grocerT.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     61.0,
+     66.0
+    ]
+   ]
+  },
+  "place:x67day": {
+   "file": "x67day.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     65.0,
+     70.0
+    ],
+    [
+     378.5,
+     384.25
+    ]
+   ]
+  },
+  "place:x67desk": {
+   "file": "x67desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     69.0,
+     75.75
+    ]
+   ]
+  },
+  "place:x67deskT": {
+   "file": "x67deskT.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     69.0,
+     75.75
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     84.5,
+     94.75
+    ]
+   ]
+  },
+  "place:topMei": {
+   "file": "topMei.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     94.0,
+     101.25
+    ],
+    [
+     101.75,
+     106.25
+    ],
+    [
+     325.25,
+     328.0
+    ]
+   ]
+  },
+  "place:regClose": {
+   "file": "regClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     100.5,
+     102.5
+    ]
+   ]
+  },
+  "place:regDesk": {
+   "file": "regDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     100.5,
+     102.5
+    ]
+   ]
+  },
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     105.5,
+     107.75
+    ],
+    [
+     129.5,
+     140.0
+    ],
+    [
+     147.5,
+     151.25
+    ],
+    [
+     235.5,
+     238.75
+    ],
+    [
+     352.5,
+     355.0
+    ]
+   ]
+  },
+  "place:topJun": {
+   "file": "topJun.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     107.0,
+     109.75
+    ],
+    [
+     166.25,
+     182.5
+    ],
+    [
+     184.25,
+     186.25
+    ],
+    [
+     194.5,
+     198.25
+    ],
+    [
+     223.75,
+     231.0
+    ],
+    [
+     238.0,
+     254.0
+    ],
+    [
+     260.5,
+     270.5
+    ],
+    [
+     298.25,
+     318.0
+    ],
+    [
+     340.5,
+     343.25
+    ],
+    [
+     366.5,
+     370.25
+    ],
+    [
+     383.5,
+     388.5
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     109.0,
+     112.25
+    ],
+    [
+     347.5,
+     350.0
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.5,
+     114.75
+    ],
+    [
+     349.25,
+     353.25
+    ]
+   ]
+  },
+  "cwOpenBinder": {
+   "file": "cwOpenBinder.webp",
+   "w": 1500,
+   "h": 880,
+   "shows": [
+    [
+     111.5,
+     114.75
+    ],
+    [
+     349.25,
+     353.25
+    ]
+   ]
+  },
+  "place:meeting": {
+   "file": "meeting.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     114.0,
+     116.0
+    ],
+    [
+     159.25,
+     160.75
+    ],
+    [
+     198.0,
+     204.0
+    ],
+    [
+     317.25,
+     321.0
+    ],
+    [
+     342.5,
+     348.5
+    ]
+   ]
+  },
+  "place:meetingTable": {
+   "file": "meetingTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     114.0,
+     116.0
+    ],
+    [
+     159.25,
+     160.75
+    ],
+    [
+     198.0,
+     204.0
+    ],
+    [
+     317.25,
+     321.0
+    ],
+    [
+     342.5,
+     348.5
+    ]
+   ]
+  },
+  "place:calWall": {
+   "file": "calWall.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     115.75,
+     117.5
+    ],
+    [
+     120.0,
+     126.5
+    ],
+    [
+     362.75,
+     367.25
+    ],
+    [
+     369.5,
+     375.0
+    ]
+   ]
+  },
+  "place:topMeet": {
+   "file": "topMeet.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     116.75,
+     120.75
+    ],
+    [
+     125.75,
+     130.25
+    ],
+    [
+     320.25,
+     324.0
+    ],
+    [
+     375.5,
+     379.25
+    ]
+   ]
+  },
+  "place:boardWide": {
+   "file": "boardWide.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     139.75,
+     147.75
+    ],
+    [
+     151.0,
+     156.0
+    ],
+    [
+     160.5,
+     167.25
+    ],
+    [
+     181.75,
+     184.5
+    ],
+    [
+     186.0,
+     194.75
+    ],
+    [
+     216.0,
+     219.75
+    ],
+    [
+     253.75,
+     261.25
+    ],
+    [
+     333.0,
+     340.75
+    ],
+    [
+     354.25,
+     363.5
+    ],
+    [
+     374.25,
+     376.25
+    ],
+    [
+     388.25,
+     399.75
+    ]
+   ]
+  },
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     155.25,
+     158.25
+    ],
+    [
+     323.0,
+     326.0
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     157.5,
+     160.0
+    ],
+    [
+     202.75,
+     206.0
+    ]
+   ]
+  },
+  "place:planScreen": {
+   "file": "planScreen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     205.75,
+     216.75
+    ]
+   ]
+  },
+  "place:phoneBg": {
+   "file": "phoneBg.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     219.0,
+     224.0
+    ]
+   ]
+  },
+  "place:shelf": {
+   "file": "shelf.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     269.5,
+     279.0
+    ],
+    [
+     280.0,
+     299.25
+    ]
+   ]
+  },
+  "place:topPlan": {
+   "file": "topPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     327.25,
+     332.0
+    ]
+   ]
+  }
+ }
+}

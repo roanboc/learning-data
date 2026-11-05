@@ -39,7 +39,6 @@
 
 # What comes in: each source's owner
 /sources/alumni_system/                                  alumni@uni.example jun.park@uni.example
-/sources/claims_app/                                     hr@uni.example jun.park@uni.example
 /sources/hr_system/                                      hr@uni.example jun.park@uni.example
 /sources/learning_platform/                              learning@uni.example jun.park@uni.example
 /sources/research_system/                                research@uni.example jun.park@uni.example
@@ -89,3 +88,6 @@
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
+
+# The claims app: its owner, for the claims read where the app writes them
+/sources/claims_app/                                     hr@uni.example jun.park@uni.example

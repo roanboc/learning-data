@@ -176,9 +176,13 @@ function dm_textIn(ctx,tx,ty,u,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;f
       ctx.fillStyle=rgba(AG.orange,0.55);for(let k2=0;k2<7;k2++)ctx.fillRect(-32,-42+k2*13,k2%3===2?38:62,5);}
     ctx.restore();}ctx.restore();}
 // an answer card with a rank badge
-function dm_answer(ctx,x,y,w,lines,rank,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const h=40+lines.length*38;ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,16,{edge:o.edge,edgeA:o.edgeA});
-  lines.forEach((l,i)=>ag_T(ctx,l,x+(rank?86:26),y+46+i*38,{w:o.bold?700:500,size:28,col:o.col||AG.ink}));
-  if(rank){ctx.fillStyle=rgba(rank===1?AG.green:AG.mut,0.95);ctx.beginPath();ctx.arc(x+44,y+h/2,24,0,TAU);ctx.fill();ag_T(ctx,String(rank),x+44,y+h/2+11,{w:800,size:30,align:"center",col:[255,255,255]});}
+// o.k (0 to 1, 1 by default) is how far the rank has come in: the words move aside for it and its disc grows, rather than in one frame
+function dm_answer(ctx,x,y,w,lines,rank,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const h=40+lines.length*38,k=rank?clamp(o.k==null?1:o.k,0,1):0,e=ag_sine(k);
+  ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,y,w,h,16,{});
+  if(o.edge&&k>0){ctx.save();ctx.strokeStyle=rgba(o.edge,(o.edgeA==null?0.9:o.edgeA)*k);ctx.lineWidth=2.4;ctx.beginPath();ag_rect(ctx,x,y,w,h,16);ctx.stroke();ctx.restore();}
+  lines.forEach((l,i)=>ag_T(ctx,l,x+lerp(26,86,e),y+46+i*38,{w:o.bold?700:500,size:28,col:o.col||AG.ink}));
+  if(k>0){ctx.save();ctx.globalAlpha*=k;ctx.fillStyle=rgba(rank===1?AG.green:AG.mut,0.95);ctx.beginPath();ctx.arc(x+44,y+h/2,24*lerp(0.6,1,e),0,TAU);ctx.fill();
+    ag_T(ctx,String(rank),x+44,y+h/2+11,{w:800,size:30,align:"center",col:[255,255,255]});ctx.restore();}
   ctx.restore();return h;}
 // the small pictures on the cards of the pieces that came together in 2012, and again at the end
 const DM_ICONS={

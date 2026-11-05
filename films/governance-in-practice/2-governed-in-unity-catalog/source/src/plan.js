@@ -72,8 +72,9 @@ const GC_COLS=[["learner_key","pseudonymous",160,290],["learner_bk","direct",450
 const GC_ROWS=[["0905e6e2…","SIS|S-20417","Aisha Karimi","aisha.k@mail.example","completed"],["1364b7f6…","SIS|S-20418","Jie Chen","jie.chen@mail.example","studying"],
   ["4d0508d9…","SIS|S-20419","Omar Haddad","omar.haddad@mail.example","studying"]];
 const GC_GY={head:396,chip:452,rule:490,row0:552,dy:62};
-// a tag: the class's chip on a pencil string, tied to what it labels at (ax,ay); drawn at (x,y), its left end, and settling as it lands
-function gc_tag(ctx,ax,ay,x,y,cls,u,o){o=o||{};if(u<=0.01)return 0;const land=clamp(u,0,1),k=lerp(1.2,1,spring(clamp((u-0.75)*4,0,1)));
+// a tag: the class's chip on a pencil string, tied to what it labels at (ax,ay); drawn at (x,y), its left end, and settling to its
+// size as it lands, over the last part of its way rather than in a frame or two
+function gc_tag(ctx,ax,ay,x,y,cls,u,o){o=o||{};if(u<=0.01)return 0;const land=clamp(u,0,1),k=lerp(1.2,1,easeCam(clamp((u-0.4)/0.6,0,1)));
   if(ax!=null&&land>0.85){ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.8*clamp((land-0.85)*7,0,1));ctx.lineWidth=2.4;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(ax,ay);
     ctx.quadraticCurveTo((ax+x)/2-10,(ay+y)/2+18,x+6,y);ctx.stroke();ctx.restore();}
   let w=0;ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(u*3,0,1),()=>{w=gv_classChip(ctx,0,0,cls,{size:o.size});});ctx.restore();return w;}

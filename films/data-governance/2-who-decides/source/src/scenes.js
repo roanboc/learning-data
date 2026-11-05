@@ -293,9 +293,9 @@ const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admi
 const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman","Yusuf Demir"]};
 // Mei at her desk, holding Jun's request up beside her face to read it (am: its slip lit like a lamp, 0 to 1); her screen shows her own
 // work. The slip's light falls round it, drawn over the picture where her hand holds the request
-function wd_meiHolds(x,tt,am,o){const [sx,s]=GV_RX.seat;gv_behind(x,"mei",sx,GV_RX.top,s,Object.assign({pose:"wd_meiRead",t:tt,carry:wd_heldReq(am),wide:true},o||{}));
+function wd_meiHolds(x,tt,am,o){const [sx,s]=GV_RX.seat,q=Object.assign({pose:"wd_meiRead",t:tt,carry:wd_heldReq(am),wide:true},o||{});gv_behind(x,"mei",sx,GV_RX.top,s,q);
   x.drawImage(gv_place("regDesk"),0,0,W,H);wd_meiWork(x);
-  if(am>0.01){const P_=PEOPLE.mei,k=s*P_.build.h,h=handAt(P_,1,POSE.wd_meiRead.R,0),gx=sx+(h[0]+WD_HR.slip[0])*k,gy=GV_RX.top+GV_SIT*s+(h[1]+WD_HR.slip[1])*k;
+  if(am>0.01){const P_=PEOPLE.mei,k=s*P_.build.h,h=handAt(P_,1,POSE[q.pose].R,0),gx=sx+(h[0]+WD_HR.slip[0])*k,gy=GV_RX.top+GV_SIT*s+(h[1]+WD_HR.slip[1])*k;
     wc_glowAt(x,gx,gy,110*k,[255,190,90],0.38*am);x.save();x.globalCompositeOperation="screen";wc_glowAt(x,gx,gy,64*k,[255,226,150],0.7*am);x.restore();}}
 // the line again, at station i: a hand pulls the cord at t0, the lamp lights amber, and the supervisor comes at once
 function wd_callAt(x,tt,t0,i,off){const N=WD_LN,wx=wd_stX(i),up=gv_io(tt,t0-0.4,t0+1.4,0.45),pull=clamp((tt-t0-0.15)/0.35,0,1),lamps=[...Array(N.n)].map(()=>["off",0]);
@@ -335,10 +335,13 @@ scene("logged",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({dec:wAt(sc,
     log:c.logs-0.3,map:wAt(sc,"logs","mapping")-0.3,dbook:wAt(sc,"logs","decision"),next:c.next-0.3,own:wAt(sc,"next","own"),why:wAt(sc,"next","why"),
     not:c.not-0.3,thr:wAt(sc,"not","thread"),find:wAt(sc,"not","find")}));
   gv_shots(ctx,S,t,sc.dur,[
-    // Mei's desk: what, who, when and why go up beside her screen as the voice names them
-    {at:0,place:"regClose",keys:[[0,1000,520,1.1],[0.2,960,540,1.06]],d:4,push:0.006,draw:(x,tt)=>{
-      gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"wd_meiUp",nod:0.06*gv_io(tt,P.dec-0.1,P.dec+0.5,0.25),t:tt});
-      x.drawImage(gv_place("regDesk"),0,0,W,H);wd_meiWork(x);wd_fourCards(x,i=>fin(tt,P.ww[i]-0.05,0.5));}},
+    // Mei's desk, as the chapter before left her: his request in her hands, its slip lit. As she decides she nods, then lowers it
+    // behind the desk as she looks up (she takes up the new pose over half a second, after the chapters' join has passed), and what,
+    // who, when and why go up beside her screen as the voice names them
+    {at:0,place:"regClose",keys:[[0,1000,520,1.1],[0.2,960,540,1.06]],d:4,push:0.006,draw:(x,tt)=>{const m=fin(tt,P.dec+0.3,0.5),nod=0.06*gv_io(tt,P.dec-0.1,P.dec+0.5,0.25);
+      if(m<1){POSE.wd_meiLower=gv_blendNear(POSE.wd_meiRead,POSE.wd_meiUp,m);wd_meiHolds(x,tt,1-m,{pose:"wd_meiLower",nod});}
+      else{gv_behind(x,"mei",GV_RX.seat[0],GV_RX.top,GV_RX.seat[1],{pose:"wd_meiUp",nod,t:tt});x.drawImage(gv_place("regDesk"),0,0,W,H);wd_meiWork(x);}
+      wd_fourCards(x,i=>fin(tt,P.ww[i]-0.05,0.5));}},
     // her desk from above: her log book, its columns lit in the same order: the decision, who, when and why; then across the desk to
     // the course area's decision book, where the mapping's entry is begun: what, and who decides. Back, to see both: each area keeps
     // its own, and the why in each is lit

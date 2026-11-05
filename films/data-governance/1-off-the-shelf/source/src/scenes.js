@@ -202,9 +202,12 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=os_once(sc,"P",()=>({b1:c.both-
     if(mon>0){const [mx,my,mw,mh]=OS_RC.monday;x.save();x.translate(0,-60*(1-easeCam(mon)));withA(x,clamp(mon*3,0,1),()=>os_mondayCard(x));x.restore();}};
   gv_shots(ctx,S,t,sc.dur,[
     // the data team checks both numbers: Jun takes them back down the floor to his team; it starts as the last chapter left the floor,
-    // so nothing doubles as the two dissolve
-    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.4,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const w=gv_walk(tt,0.1,368,1250,380);
-      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});os_carrier(x,"jun",w,GV_FL.walk,0.62,heldNotebook,{t:tt});}},
+    // so nothing doubles as the two dissolve: Jun stands where it left him until its end has gone, then takes up his notebook (over
+    // 0.4 s) and walks, and the camera follows him
+    {at:0,place:"floor",keys:[[0,732,530,1.312],[0.9,1180,560,1.14]],d:2.6,draw:(x,tt)=>{const F=GV_FL,w=gv_walk(tt,1.05,F.x(1)-16,1250,380),m=fin(tt,0.65,0.4);
+      os_floor(x,tt,{pose:{clara:{pose:"listen"},mei:{pose:"listen"},yusuf:OS_YUSUF},out:["jun"],yusufIn:true});
+      if(m<1)person(x,"jun",F.x(1)-16,F.walk,0.62,{pose:gv_walkInto("os_junUp",null,"os_carry",m),t:tt,carry:m>0?(cx,P_,h)=>withA(cx,m,()=>heldNotebook(cx,P_,h)):null});
+      else os_carrier(x,"jun",w,F.walk,0.62,heldNotebook,{t:tt});}},
     // the data team's board: both reports are right, each by its own meaning of award
     {at:P.b1,place:"boardData",keys:[[P.b1,960,500,1.08],[P.b1+0.1,960,490,1.12]],d:3,push:0,draw:(x,tt)=>board(x,tt,0)},
     // Jun's screen: the glossary's term, and the row added on Monday

@@ -19,6 +19,7 @@ const FU_KICK=[480,90,420,46,0.3];
 AG_PLACES.fuWall=c=>ag_paintLab(c,{quiet:[[980,250,880,190,0.8],[1124,476,250,210,0.4],FU_KICK]});            // 1999: the drawing of space across the upper wall
 AG_PLACES.fuWallDim=c=>{ag_paintLab(c,{quiet:[[980,250,880,190,0.8],[1124,476,250,210,0.4],FU_KICK]});            // the same wall, the light lower: the night of the loss
   c.save();c.globalCompositeOperation="multiply";c.fillStyle="rgb(214,212,214)";c.fillRect(0,0,W,H);c.restore();};
+AG_ROOMS.fuWallDim="fuWall";                                // one wall, its light up or down: the camera glides from one to the other
 AG_PLACES.fuData=c=>ag_paintLab(c,{seed:2,quiet:[[1180,300,520,250,0.7],[600,330,420,200,0.5],FU_KICK]});          // the data team: the agent, its tools and its cards
 AG_PLACES.fuFaculty=c=>ag_paintLab(c,{seed:4,quiet:[[620,330,600,230,0.7],[1300,260,360,160,0.5],FU_KICK]});      // the Faculty of Health: the advisers along the wall
 AG_PLACES.fuQuiet=c=>ag_paintLab(c,{seed:6,quiet:[[960,360,860,260,0.8],FU_KICK]});                               // the zip, the study cards, the word in the middle

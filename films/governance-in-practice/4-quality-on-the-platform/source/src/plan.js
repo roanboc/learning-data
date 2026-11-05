@@ -432,9 +432,11 @@ function gq_pr(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,{bar:
   gu_checks(ctx,150,262,1620,{h:330,items:o.items||GQ_PR.ck.map(n=>({name:n,st:"wait"})),t,msg:o.msg,pop:o.pop,msgGap:74,summary:true});
   const fx=clamp(o.fix||0,0,1),fy=612;gu_box(ctx,150,fy,1620,240,"Files changed · dbt_project.yml",{seed:621});
   const rows=[[109,"    short_courses: {+meta: {owner: Learning team}}"],[null,"    learning_platform: {+meta: {owner: Learning team}}"],[110,"    staging:"]];
-  rows.forEach(([n,s],i)=>{const ry=fy+104+i*46;if(n==null){if(fx<=0.01)return;gv_tint(ctx,164,ry-32,1592,42,GV.green,0.5);wc_T(ctx,"+",230,ry,{w:500,size:28,f:"mono",col:GV.greenInk,align:"right"});
-      gu_code(ctx,s.slice(0,Math.ceil(s.length*fx)),250,ry,{lang:"yaml"});return;}
-    const ry2=n===110&&fx<=0.01?ry-46:ry;wc_T(ctx,String(n),230,ry2,{w:500,size:28,f:"mono",col:WC_MUTED,align:"right"});gu_code(ctx,s,250,ry2,{lang:"yaml"});});}
+  // the new line opens first (the line under it moves down to make room for it, over 0.3 of fix), then it's typed in
+  const op=easeCam(clamp(fx/0.3,0,1)),ty=clamp((fx-0.3)/0.7,0,1);
+  rows.forEach(([n,s],i)=>{const ry=fy+104+i*46;if(n==null){if(fx<=0.01)return;withA(ctx,op,()=>{gv_tint(ctx,164,ry-32,1592,42,GV.green,0.5);wc_T(ctx,"+",230,ry,{w:500,size:28,f:"mono",col:GV.greenInk,align:"right"});});
+      if(ty>0)gu_code(ctx,s.slice(0,Math.ceil(s.length*ty)),250,ry,{lang:"yaml"});return;}
+    const ry2=n===110?ry-46*(1-op):ry;wc_T(ctx,String(n),230,ry2,{w:500,size:28,f:"mono",col:WC_MUTED,align:"right"});gu_code(ctx,s,250,ry2,{lang:"yaml"});});}
 
 /* ---------- written from the run ---------- */
 // the terminal on the data team's big screen, after the night's build: a card for dbt's results, a pencil arrow from it to each script

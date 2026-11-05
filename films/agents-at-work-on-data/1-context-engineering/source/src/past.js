@@ -79,6 +79,8 @@ function ce_lectern(c,x,y){const P=CE_P;
 function ce_bookLines(c,a){if(a<=0.01)return;const [x,y]=CE_SCHOOL.desk;c.save();c.lineWidth=1.8;
   for(const s of [-1,1])for(const [k,col,al] of [[1,CE_P.red,0.7],[3,CE_P.yellow,0.8]]){const yy=y-30+k*14;c.strokeStyle=rgba(col,al*a);c.beginPath();c.moveTo(x+s*24,yy+6);c.lineTo(x+s*178,yy+2);c.stroke();}
   c.restore();}
+// the lab's shots draw its light over what stands there, so the bare room keeps it while a later moment comes in
+AG_BARE.lab=c=>ag_roomLight(c,1);
 AG_PLACES.ceSchool=c=>{const S=CE_SCHOOL,hz=S.hz;
   ce_stones(c,0,0,W,hz,{seed:3});
   // a blind arch on the left wall, in shade, and the window on the right

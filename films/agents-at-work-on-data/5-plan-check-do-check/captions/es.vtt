@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.864
+Singapur, a finales de los noventa: una ciudad isla de cuatro millones de personas, con poca tierra para recoger la lluvia.
+
+00:00:09.564 --> 00:00:16.935
+Gran parte de su agua llega por tubería desde Malasia, con dos acuerdos: uno termina en 2011 y el otro en 2061.
+
+00:00:18.235 --> 00:00:24.017
+Los ingenieros pueden limpiar el agua usada de fregaderos y desagües hasta que sea lo bastante pura para beber.
+
+00:00:25.117 --> 00:00:28.118
+Pero ¿alguien bebería agua que se fue por un desagüe?
+
+00:00:29.618 --> 00:00:35.514
+Si la gente no confía en ella, el país no puede usarla, y sigue dependiendo del agua del otro lado de la frontera.
+
+00:00:36.414 --> 00:00:40.068
+Algo tiene que hacerla confiable antes de que alguien beba una gota.
+
+00:00:41.568 --> 00:00:47.099
+Así que, en 1998, la agencia del agua y el ministerio del ambiente empiezan un estudio.
+
+00:00:47.999 --> 00:00:52.122
+Antes de que la planta de prueba produzca agua, escriben cómo se la va a juzgar:
+
+00:00:52.322 --> 00:00:59.305
+190 parámetros, físicos, químicos y microbiológicos, de las normas de agua potable del mundo.
+
+00:01:01.605 --> 00:01:07.941
+Y un panel de expertos, de Singapur y del extranjero, ayuda a fijar las reglas, y verifica los resultados, durante dos años.
+
+00:01:09.041 --> 00:01:14.246
+En julio de 2002, el panel informa: el agua está holgadamente dentro de las normas.
+
+00:01:15.546 --> 00:01:22.056
+Ese agosto, en el desfile del cumpleaños del país, unas 60,000 personas levantan una botella de esa agua, y beben.
+
+00:01:24.356 --> 00:01:29.643
+Desde 2003, fluye a los embalses: agua que el país produce por sí mismo.
+
+00:01:30.943 --> 00:01:36.848
+Hoy se analiza en unos 300 parámetros, y expertos externos todavía la auditan cada año.
+
+00:01:38.348 --> 00:01:46.120
+En la universidad, el agente de Jun está por cambiar el conteo del día del censo, el número que la universidad informa al gobierno.
+
+00:01:47.020 --> 00:01:52.207
+Si nadie decide primero cómo se verificará su trabajo, nadie puede confiar en lo que trae de vuelta.
+
+00:01:53.307 --> 00:01:57.491
+Decide la verificación antes de que empiece, y su trabajo será algo que el equipo pueda usar.
+
+00:02:05.991 --> 00:02:12.261
+Una vez, a uno de los agentes del equipo le dieron un objetivo y nada más: verificar el conteo contra las reglas del censo.
+
+00:02:13.561 --> 00:02:19.279
+Su plan no decía qué podía usar, así que hizo lo que sabía: buscó en la web las reglas del censo.
+
+00:02:20.779 --> 00:02:23.731
+Leyó 38 páginas web, en 40 minutos.
+
+00:02:25.831 --> 00:02:30.705
+Docs, la herramienta con las definiciones propias de la universidad, habría respondido en una llamada.
+
+00:02:32.405 --> 00:02:35.324
+Y la regla que trajo era de otra universidad.
+
+00:02:37.024 --> 00:02:39.871
+Jun lo detectó en la revisión, y el trabajo empezó de nuevo.
+
+00:02:41.571 --> 00:02:47.474
+Nada en el agente estaba roto: usó lo que pudo encontrar, porque nadie le había dicho qué había.
+
+00:02:48.974 --> 00:02:54.351
+La mayor parte del desperdicio con agentes empieza aquí, con un plan que no dice qué puede usar el agente.
+
+00:02:59.051 --> 00:03:06.286
+Ahora Clara, de Planificación, pide algo nuevo: el conteo del día del censo por nivel de estudio, para el informe al gobierno.
+
+00:03:07.386 --> 00:03:10.164
+Antes de que el agente empiece, Jun escribe una página.
+
+00:03:11.464 --> 00:03:16.472
+El objetivo: estudiantes el día del censo, por nivel, pregrado y posgrado.
+
+00:03:17.572 --> 00:03:24.928
+Qué leer: las palabras del glosario para estudiante, día del censo y nivel de estudio, y el conteo del día del censo en que se basa.
+
+00:03:26.028 --> 00:03:29.654
+Las herramientas que puede usar: Catalog, Query y Docs, de solo lectura.
+
+00:03:30.754 --> 00:03:33.882
+Dónde puede escribir: solo en su propia rama, y en su entorno aislado.
+
+00:03:34.982 --> 00:03:39.842
+Lo que nunca debe hacer: leer nombres o códigos de estudiante, ni escribir en producción.
+
+00:03:41.142 --> 00:03:44.132
+Y un límite: diez rondas, y luego se detiene e informa.
+
+00:03:48.032 --> 00:03:53.543
+Luego, la línea que más importa: cómo se verificará el resultado, decidido ahora, antes de cualquier trabajo.
+
+00:03:54.643 --> 00:04:01.504
+Dos verificaciones: los niveles suman 18,412, el conteo que ya coincide con el informe del censo;
+
+00:04:01.704 --> 00:04:04.268
+y cada estudiante tiene exactamente un nivel.
+
+00:04:05.368 --> 00:04:09.654
+El agente las escribe como pruebas, antes de cualquier modelo, y Jun las aprueba.
+
+00:04:10.954 --> 00:04:16.389
+Desde entonces, solo una persona puede cambiarlas, así que el agente no puede pasar moviendo la marca.
+
+00:04:17.889 --> 00:04:22.637
+Como los 190 parámetros de Singapur, escritos antes de que la planta produjera agua.
+
+00:04:26.537 --> 00:04:30.841
+Ahora el agente trabaja, en su entorno aislado, solo con las herramientas que le dio el plan.
+
+00:04:31.741 --> 00:04:37.639
+Lee las tres palabras en Docs, encuentra las tablas en Catalog, y construye el conteo por nivel.
+
+00:04:38.939 --> 00:04:44.742
+La primera ejecución falla una prueba: los dos niveles suman 18,384.
+
+00:04:46.042 --> 00:04:47.686
+Faltan veintiocho estudiantes.
+
+00:04:48.786 --> 00:04:53.133
+Busca, con Query: el día del censo, 28 estudiantes no tienen nivel.
+
+00:04:54.033 --> 00:04:57.838
+Son estudiantes de intercambio, que toman asignaturas sueltas, sin un título aquí.
+
+00:04:58.938 --> 00:05:01.658
+No los descarta, y no toca la prueba.
+
+00:05:03.158 --> 00:05:07.344
+A qué nivel pertenecen es un significado, y los significados los decide Mei.
+
+00:05:08.244 --> 00:05:11.566
+Así que se detiene, y le pregunta, con su consulta y el resultado.
+
+00:05:13.266 --> 00:05:17.730
+Mei revisa la lista del gobierno: cuentan como sin titulación, un nivel propio.
+
+00:05:19.030 --> 00:05:32.742
+El agente lo agrega, y corre las pruebas de nuevo: 13,906, 4,478 y 28 suman 18,412, y cada estudiante tiene un nivel.
+
+00:05:33.842 --> 00:05:35.101
+Las dos pruebas pasan.
+
+00:05:36.801 --> 00:05:42.411
+Escribe la descripción del modelo a partir del glosario, con su fuente, y abre una solicitud de cambio:
+
+00:05:42.611 --> 00:05:45.871
+qué cambió, por qué, y la evidencia de cada afirmación.
+
+00:05:49.971 --> 00:05:54.511
+Ahora una persona verifica el trabajo, contra el plan, no contra la palabra del agente.
+
+00:05:56.011 --> 00:06:03.599
+Jun lee la solicitud de cambio: objetivo cumplido, solo las herramientas dadas, ningún nombre, y las dos pruebas intactas y en verde.
+
+00:06:05.299 --> 00:06:06.923
+Le tomó cuatro de sus diez rondas.
+
+00:06:08.623 --> 00:06:13.218
+Ahora el cambio es suyo: si el conteo está mal, responde él, no el agente.
+
+00:06:14.918 --> 00:06:19.884
+Para llegar a producción, una segunda persona debe aprobarlo: Noor, la arquitecta de datos.
+
+00:06:21.584 --> 00:06:25.797
+El agente también puede revisar, pero solo como referencia: nunca aprueba.
+
+00:06:27.497 --> 00:06:31.763
+Como en Singapur, personas que no hicieron el trabajo lo miden con sus verificaciones.
+
+00:06:35.863 --> 00:06:38.194
+Y cada vuelta del bucle deja algo para la siguiente.
+
+00:06:39.294 --> 00:06:43.446
+Una decisión, registrada: la regla de Mei para estudiantes de intercambio, con su nombre.
+
+00:06:44.746 --> 00:06:49.894
+Metadatos: nivel de estudio, en el glosario y en la descripción del modelo, con su fuente.
+
+00:06:51.194 --> 00:06:56.879
+Una skill, actualizada: conciliar y comparar ahora verifica que cada desglose sume su total.
+
+00:06:58.179 --> 00:07:01.391
+Y el plan mismo: el próximo empieza desde esta página.
+
+00:07:05.491 --> 00:07:11.538
+En Singapur, los parámetros se fijaron antes de la primera gota, y personas externas midieron el agua con ellos.
+
+00:07:12.638 --> 00:07:16.994
+Así, cuando 60,000 personas levantaron una botella, tenían motivos para confiar en ella.
+
+00:07:18.694 --> 00:07:24.490
+En la universidad, las verificaciones llegaron antes del primer paso del agente, y una persona midió su trabajo con ellas.
+
+00:07:25.590 --> 00:07:28.684
+Así que el conteo puede ir al gobierno, con su evidencia.
+
+00:07:30.184 --> 00:07:32.745
+Decide cómo vas a verificar antes de que el agente empiece.

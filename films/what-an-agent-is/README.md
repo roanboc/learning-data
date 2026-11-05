@@ -2,9 +2,9 @@
 
 *The first series of the module AI agents in data work.*
 
-Jun Park builds the university's data project, and this term an agent works beside him. Before any rule or product, nine films ask how today's models came about, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves. The series names no product. *Agents at work on data* follows, then the journey from helper to colleague, and teams of people and agents. The plan for this series is in the [proposal](proposal.md).
+Jun Park builds the university's data project, and this term an agent works beside him. Before any rule or product, ten films ask how today's models came about, what they took from the brain, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves. The series names no product. *Agents at work on data* follows, then the journey from helper to colleague, and teams of people and agents. The plan for this series is in the [proposal](proposal.md).
 
-**Status:** planned on 3 November 2026, and all nine films made by 4 November: they're in the table below and [on the site](https://data.learn-all.org/what-an-agent-is/), each with Pause and think questions. The series' look and tools are in [`shared/`](shared/). Labs and scenarios will come later. On the site, it sits under the topic *AI agents in data work*, at `what-an-agent-is/`.
+**Status:** planned on 3 November 2026, and all nine films made by 4 November; a tenth, *Borrowed from the brain*, which the author asked for on 4 November, came in second on 5 November. They're in the table below and [on the site](https://data.learn-all.org/what-an-agent-is/), each with Pause and think questions. The series' look and tools are in [`shared/`](shared/). Labs and scenarios will come later. On the site, it sits under the topic *AI agents in data work*, at `what-an-agent-is/`.
 
 ## The films
 
@@ -12,14 +12,15 @@ Jun Park builds the university's data project, and this term an agent works besi
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Decades in the making](https://data.learn-all.org/what-an-agent-is/decades-in-the-making/) | How we got here | 6½ min | 8 | 3 questions | [script](1-decades-in-the-making/script.md) · [source](1-decades-in-the-making/source/README.md) |
-| [A model, reasoning, hands and a loop](https://data.learn-all.org/what-an-agent-is/a-model-reasoning-hands-and-a-loop/) | An agent, part by part | 7 min | 9 | 3 questions | [script](2-a-model-reasoning-hands-and-a-loop/script.md) · [source](2-a-model-reasoning-hands-and-a-loop/source/README.md) |
-| [It feels like understanding](https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/) | Trusting an agent | 7 min | 7 | 3 questions | [script](3-it-feels-like-understanding/script.md) · [source](3-it-feels-like-understanding/source/README.md) |
-| [More than a junior](https://data.learn-all.org/what-an-agent-is/more-than-a-junior/) | Supervising agents | 7 min | 7 | 3 questions | [script](4-more-than-a-junior/script.md) · [source](4-more-than-a-junior/source/README.md) |
-| [Minds that change](https://data.learn-all.org/what-an-agent-is/minds-that-change/) | Memory and evidence | 7 min | 6 | 3 questions | [script](5-minds-that-change/script.md) · [source](5-minds-that-change/source/README.md) |
-| [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 7½ min | 7 | 3 questions | [script](6-ethics-and-accountability/script.md) · [source](6-ethics-and-accountability/source/README.md) |
-| [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](7-why-we-govern-them/script.md) · [source](7-why-we-govern-them/source/README.md) |
-| [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](8-what-they-tell-us-about-ourselves/script.md) · [source](8-what-they-tell-us-about-ourselves/source/README.md) |
-| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 7½ min | 7 | 4 questions | [script](9-many-agents/script.md) · [source](9-many-agents/source/README.md) |
+| [Borrowed from the brain](https://data.learn-all.org/what-an-agent-is/borrowed-from-the-brain/) | Nerve cells and models | 9 min | 9 | 3 questions | [script](2-borrowed-from-the-brain/script.md) · [source](2-borrowed-from-the-brain/source/README.md) |
+| [A model, reasoning, hands and a loop](https://data.learn-all.org/what-an-agent-is/a-model-reasoning-hands-and-a-loop/) | An agent, part by part | 7 min | 9 | 3 questions | [script](3-a-model-reasoning-hands-and-a-loop/script.md) · [source](3-a-model-reasoning-hands-and-a-loop/source/README.md) |
+| [It feels like understanding](https://data.learn-all.org/what-an-agent-is/it-feels-like-understanding/) | Trusting an agent | 7 min | 7 | 3 questions | [script](4-it-feels-like-understanding/script.md) · [source](4-it-feels-like-understanding/source/README.md) |
+| [More than a junior](https://data.learn-all.org/what-an-agent-is/more-than-a-junior/) | Supervising agents | 7 min | 7 | 3 questions | [script](5-more-than-a-junior/script.md) · [source](5-more-than-a-junior/source/README.md) |
+| [Minds that change](https://data.learn-all.org/what-an-agent-is/minds-that-change/) | Memory and evidence | 7 min | 6 | 3 questions | [script](6-minds-that-change/script.md) · [source](6-minds-that-change/source/README.md) |
+| [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 8½ min | 8 | 3 questions | [script](7-ethics-and-accountability/script.md) · [source](7-ethics-and-accountability/source/README.md) |
+| [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](8-why-we-govern-them/script.md) · [source](8-why-we-govern-them/source/README.md) |
+| [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](9-what-they-tell-us-about-ourselves/script.md) · [source](9-what-they-tell-us-about-ourselves/source/README.md) |
+| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 7½ min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

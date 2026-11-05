@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Plan, define the check, do, check",
+    "key": "plan-check-do-check-en",
+    "dir": "films/agents-at-work-on-data/5-plan-check-do-check/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/plan-check-do-check/film.js",
+    "video": "dist/plan-check-do-check.mp4",
+    "file": "plan-check-do-check.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/5-plan-check-do-check/captions/en.srt",
+        "plan-check-do-check.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/5-plan-check-do-check/captions/es.srt",
+        "plan-check-do-check.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/5-plan-check-do-check/source",
+      ":(exclude)films/agents-at-work-on-data/5-plan-check-do-check/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 305,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30,
+      "status": "Drawn to the rule"
+    }
+  }
+]

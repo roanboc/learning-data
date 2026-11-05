@@ -1,0 +1,36 @@
+{
+  "key": "how-it-goes-wrong",
+  "title": "How it goes wrong",
+  "sub": "Film 6 of 9 of Agents at work on data: six ways an agent goes wrong, each blameless, each with its design. After the earthquake of 1755, Lisbon's lower town was rebuilt for each way it had failed. Jun's team expects a column that isn't there, a confidently wrong number, a weakened test, an instruction hidden in a ticket, a loop that runs all night and a simple job made complicated, and builds for each.",
+  "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (the new street plan, the tools, the limits and the plain check), violet the model thinking (a name guessed, an answer said too soon), orange data coming back, green a check that passes, and amber a check that fails or a loop. The only red is the fire of 1755.",
+  "src": [
+    "lisbon.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "lisbon",
+    "cage",
+    2.0
+  ],
+  "say": [
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "lisbon"
+  ],
+  "urgent": [
+    "loop"
+  ]
+}

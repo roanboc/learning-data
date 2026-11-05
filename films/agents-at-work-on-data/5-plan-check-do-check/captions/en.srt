@@ -1,0 +1,279 @@
+1
+00:00:01,600 --> 00:00:08,864
+Singapore, in the late 1990s: an island city of four million people, with little land to catch the rain.
+
+2
+00:00:09,564 --> 00:00:16,935
+Much of its water is piped in from Malaysia, under two agreements: one ends in 2011, the other in 2061.
+
+3
+00:00:18,235 --> 00:00:24,017
+Engineers can clean used water, from the city's sinks and drains, until it's pure enough to drink.
+
+4
+00:00:25,117 --> 00:00:28,118
+But would anyone drink water that had gone down a drain?
+
+5
+00:00:29,618 --> 00:00:35,514
+If people don't trust it, the country can't use it, and stays dependent on water from across the border.
+
+6
+00:00:36,414 --> 00:00:40,068
+Something has to make it trustworthy, before anyone drinks a drop.
+
+7
+00:00:41,568 --> 00:00:47,099
+So, in 1998, the water agency and the environment ministry begin a study.
+
+8
+00:00:47,999 --> 00:00:52,122
+Before the test plant makes any water, they write down how it will be judged:
+
+9
+00:00:52,322 --> 00:00:59,305
+190 measures, physical, chemical and microbiological, from the world's drinking-water standards.
+
+10
+00:01:01,605 --> 00:01:07,941
+And a panel of experts, from Singapore and abroad, helps set the rules, and checks the results, for two years.
+
+11
+00:01:09,041 --> 00:01:14,246
+In July 2002, the panel reports: the water is well within the standards.
+
+12
+00:01:15,546 --> 00:01:22,056
+That August, at the parade for the country's birthday, about 60,000 people raise a bottle of it, and drink.
+
+13
+00:01:24,356 --> 00:01:29,643
+Since 2003, it has flowed into the reservoirs: water the country makes itself.
+
+14
+00:01:30,943 --> 00:01:36,848
+Today it's tested for about 300 measures, and experts from outside still audit it every year.
+
+15
+00:01:38,348 --> 00:01:46,120
+At the university, Jun's agent is about to change the census-day count, the number the university reports to the government.
+
+16
+00:01:47,020 --> 00:01:52,207
+If nobody decides first how its work will be checked, nobody can trust what it brings back.
+
+17
+00:01:53,307 --> 00:01:57,491
+Decide the check before it starts, and its work is something the team can use.
+
+18
+00:02:05,991 --> 00:02:12,261
+Once, one of the team's agents was given a goal and nothing else: check the count against the census rules.
+
+19
+00:02:13,561 --> 00:02:19,279
+Its plan didn't say what it could use, so it did what it knew: it searched the web for the census rules.
+
+20
+00:02:20,779 --> 00:02:23,731
+It read 38 web pages, in 40 minutes.
+
+21
+00:02:25,831 --> 00:02:30,705
+Docs, the tool with the university's own definitions, would have answered in one call.
+
+22
+00:02:32,405 --> 00:02:35,324
+And the rule it brought back was another university's.
+
+23
+00:02:37,024 --> 00:02:39,871
+Jun caught it in review, and the work began again.
+
+24
+00:02:41,571 --> 00:02:47,474
+Nothing in the agent was broken: it used what it could find, because nobody had said what was there.
+
+25
+00:02:48,974 --> 00:02:54,351
+Most of the waste with agents starts here, with a plan that doesn't say what the agent may use.
+
+26
+00:02:59,051 --> 00:03:06,286
+Now Clara, in Planning, asks for something new: the census-day count by level of study, for the government's report.
+
+27
+00:03:07,386 --> 00:03:10,164
+Before the agent starts, Jun writes one page.
+
+28
+00:03:11,464 --> 00:03:16,472
+The goal: students on census day, by level, undergraduate and postgraduate.
+
+29
+00:03:17,572 --> 00:03:24,928
+What to read: the glossary's words for student, census day and level of study, and the census-day count it builds on.
+
+30
+00:03:26,028 --> 00:03:29,654
+The tools it may use: Catalog, Query and Docs, read only.
+
+31
+00:03:30,754 --> 00:03:33,882
+Where it may write: only its own branch, and its sandbox.
+
+32
+00:03:34,982 --> 00:03:39,842
+What it must never do: read names or student IDs, or write to production.
+
+33
+00:03:41,142 --> 00:03:44,132
+And a limit: ten rounds, then it stops and reports.
+
+34
+00:03:48,032 --> 00:03:53,543
+Then the line that matters most: how the result will be checked, decided now, before any work.
+
+35
+00:03:54,643 --> 00:04:01,504
+Two checks: the levels add up to 18,412, the count already matched to the census report;
+
+36
+00:04:01,704 --> 00:04:04,268
+and every student has exactly one level.
+
+37
+00:04:05,368 --> 00:04:09,654
+The agent writes them as tests, before any model, and Jun approves them.
+
+38
+00:04:10,954 --> 00:04:16,389
+From then on, only a person can change them, so the agent can't pass by moving the mark.
+
+39
+00:04:17,889 --> 00:04:22,637
+Like Singapore's 190 measures, written before the plant made any water.
+
+40
+00:04:26,537 --> 00:04:30,841
+Now the agent works, in its sandbox, with only the tools the plan gave it.
+
+41
+00:04:31,741 --> 00:04:37,639
+It reads the three words in Docs, finds the tables in Catalog, and builds the count by level.
+
+42
+00:04:38,939 --> 00:04:44,742
+The first run fails a test: the two levels add up to 18,384.
+
+43
+00:04:46,042 --> 00:04:47,686
+Twenty-eight students are missing.
+
+44
+00:04:48,786 --> 00:04:53,133
+It looks, with Query: on census day, 28 students have no level.
+
+45
+00:04:54,033 --> 00:04:57,838
+They're exchange students, taking single units, with no degree here.
+
+46
+00:04:58,938 --> 00:05:01,658
+It doesn't drop them, and it doesn't touch the test.
+
+47
+00:05:03,158 --> 00:05:07,344
+Which level they belong to is a meaning, and meanings are Mei's to decide.
+
+48
+00:05:08,244 --> 00:05:11,566
+So it stops, and asks her, with its query and the result.
+
+49
+00:05:13,266 --> 00:05:17,730
+Mei checks the government's list: they count as non-award, a level of its own.
+
+50
+00:05:19,030 --> 00:05:32,742
+The agent adds it, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.
+
+51
+00:05:33,842 --> 00:05:35,101
+Both tests pass.
+
+52
+00:05:36,801 --> 00:05:42,411
+It writes the model's description from the glossary, with its source, and opens a pull request:
+
+53
+00:05:42,611 --> 00:05:45,871
+what it changed, why, and the evidence for every claim.
+
+54
+00:05:49,971 --> 00:05:54,511
+Now a person checks the work, against the plan, not against the agent's word.
+
+55
+00:05:56,011 --> 00:06:03,599
+Jun reads the pull request: the goal met, only the tools it was given, no names, and both tests untouched, and green.
+
+56
+00:06:05,299 --> 00:06:06,923
+It took four of its ten rounds.
+
+57
+00:06:08,623 --> 00:06:13,218
+Now the change is his: if the count is wrong, he answers for it, not the agent.
+
+58
+00:06:14,918 --> 00:06:19,884
+To reach production, a second person must approve it: Noor, the data architect.
+
+59
+00:06:21,584 --> 00:06:25,797
+The agent can review, too, but only for reference: it never approves.
+
+60
+00:06:27,497 --> 00:06:31,763
+As in Singapore, the work is held to its checks by people who didn't do it.
+
+61
+00:06:35,863 --> 00:06:38,194
+And each loop leaves something for the next one.
+
+62
+00:06:39,294 --> 00:06:43,446
+A decision, recorded: Mei's rule for exchange students, with her name.
+
+63
+00:06:44,746 --> 00:06:49,894
+Metadata: level of study, in the glossary and in the model's description, with its source.
+
+64
+00:06:51,194 --> 00:06:56,879
+A skill, updated: reconcile and diff now checks that every split adds up to its total.
+
+65
+00:06:58,179 --> 00:07:01,391
+And the plan itself: the next one starts from this page.
+
+66
+00:07:05,491 --> 00:07:11,538
+In Singapore, the measures were set before the first drop, and people from outside held the water to them.
+
+67
+00:07:12,638 --> 00:07:16,994
+So when 60,000 people raised a bottle, they had good reason to trust it.
+
+68
+00:07:18,694 --> 00:07:24,490
+At the university, the checks came before the agent's first step, and a person held its work to them.
+
+69
+00:07:25,590 --> 00:07:28,684
+So the count can go to the government, with its evidence.
+
+70
+00:07:30,184 --> 00:07:32,745
+Decide how you'll check before the agent starts.

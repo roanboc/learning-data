@@ -2836,7 +2836,7 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
   const tg=ag_io(t,P.thou-0.2,c.rest-0.4,0.4);if(tg>0.01){tt_tag(ctx,1420,250,"thousands of cells",{a:tg,k:clamp(ag_spr(t,P.thou-0.2,0.8),0,1.2)});tt_tag(ctx,1420,760,"10 electrodes",{a:ag_io(t,P.tenE-0.1,c.rest-0.4,0.4),col:AG.blue});}
   const fl=ag_io(t,c.rest-0.2,P.learned+0.6,0.4);if(fl>0.01)tt_tag(ctx,700,200,"‘foreign language’",{a:fl*(1-ag_in(t,P.learned,1.2))});
   const yt=ag_io(t,c.y2019+0.3,c.same-0.4,0.4);if(yt>0.01)tt_tag(ctx,960,820,"2019 · more than 700,000 implants",{a:yt,k:clamp(ag_spr(t,c.y2019+0.3,0.8),0,1.2)});
-  ag_title(ctx,S,t,c.breath,TT_TITLE,"five open questions","FILM 8 OF 9 · WHAT AN AGENT IS");});
+  ag_title(ctx,S,t,c.breath,TT_TITLE,"five open questions","FILM 9 OF 10 · WHAT AN AGENT IS");});
 
 scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(sc,"counted","counted"),query:wAt(sc,"counted","query"),checked:wAt(sc,"signed","checked"),
     signed:wAt(sc,"signed","signed"),noans:wAt(sc,"noanswer","no answer")}));
@@ -3130,7 +3130,7 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
       if(!back)tt_cardFwd(x,4,1-tt_on(tt,c.helps,1.5),ag_in(tt,t0,0.6));}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.7);setScreen(ctx,S);tt_cardMoves(ctx,t,4,c.descartes-0.4,null);
   tt_cornerAt(ctx,t,"The Dutch Republic · 1637",c.descartes-0.1,c.today-0.5,{col:[236,222,200]});
-  ag_end(ctx,S,t,c.breath,TT_TITLE,"We don't have the answers yet. Keep wondering.","Film 8 of 9");});
+  ag_end(ctx,S,t,c.breath,TT_TITLE,"We don't have the answers yet. Keep wondering.","Film 9 of 10");});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
 ag_cutInto(["five", "taught", "mixing", "wire", "feels", "human"]);

@@ -402,7 +402,7 @@ function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*
 function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
   rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
 
-// Ethics we can't read, accountability it can't hold: film 6 of 9 of What an agent is, the first series on AI agents in data work. One line per id; the film re-times itself to the voice.
+// Ethics we can't read, accountability it can't hold: film 7 of 10 of What an agent is, the first series on AI agents in data work. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
 const NARR={
 "ox":{"name":"The ox that gores","lead":1.6,"tail":1.0,"vo":[
@@ -2548,7 +2548,7 @@ AG_BARE.lab=c=>ag_roomLight(c,1);
    matte way (babylon.js); the rest is the module's lab, with this film's pieces (lab6.js). */
 
 // the film's kicker, over the lab's chapters, and Babylon's label in the opening, in the frame's own coordinates
-function ox_kick(ctx,S,a,dark){if(a<=0)return;setScreen(ctx,S);ag_kicker(ctx,"1.6","Ethics and accountability",{a,dark});}
+function ox_kick(ctx,S,a,dark){if(a<=0)return;setScreen(ctx,S);ag_kicker(ctx,"1.7","Ethics and accountability",{a,dark});}
 function ox_place(ctx,S,text,a){if(a<=0)return;setScreen(ctx,S);ag_T(ctx,text.toUpperCase(),96,100,{w:700,size:28,ls:4,col:[70,50,34],a});}
 
 /* pictures of Babylon, each drawn whole (1920 x 1080), for the chapters and for the framed picture on the lab's wall; u is the seconds
@@ -2673,7 +2673,7 @@ scene("ox",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({carts:wAt(sc,"h
       ox_count(x,1300,590,420,{state:"pass",a:ag_in(tt,P.stand,0.5)*ti,k:ag_spr(tt,P.stand,0.6)});}}
   ],0.5);
   ox_place(ctx,S,"Babylon · about 1750 BC",ag_io(t,c.bab-0.2,c.gore-0.8,0.6));
-  ox_title(ctx,S,t,c.breath,"Ethics we can't read,","accountability it can't hold","FILM 6 OF 9 · WHAT AN AGENT IS");});
+  ox_title(ctx,S,t,c.breath,"Ethics we can't read,","accountability it can't hold","FILM 7 OF 10 · WHAT AN AGENT IS");});
 
 /* ---------------------------------------------------------------- the lab, as this film lays it out
    ox_room(x, tt, o) draws what stands in the lab, then its light: o.night; o.pic [kind, u, picture options] the framed picture (the
@@ -3013,7 +3013,7 @@ scene("answers",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({fails:wAt(
   if(t>c.mei-0.3&&t<c.approve){setScreen(ctx,S);const ma=ag_io(t,c.mei,c.approve-0.5,0.4);
     ag_pill(ctx,953,600,"Mei · registrar's office",{col:AG.blue,a:ma});ox_say(ctx,1290,250,340,"They count.",1060,420,ag_io(t,P.they-0.1,c.approve-0.5,0.4),{side:"left",at:0.6,kick:"Mei"});}
   ox_kick(ctx,S,1-ag_in(t,c.report-0.8,0.5),true);
-  ag_end(ctx,S,t,c.breath,"Ethics we can't read, accountability it can't hold","The agent acts. A person answers.","Film 6 of 9");
+  ag_end(ctx,S,t,c.breath,"Ethics we can't read, accountability it can't hold","The agent acts. A person answers.","Film 7 of 10");
   if(t>c.breath){setScreen(ctx,S);ag_T(ctx,"Next: Why we govern them",960,790,{w:600,size:30,align:"center",col:AG.mut,a:ag_in(t,c.breath+1.6,0.8)});}});
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice

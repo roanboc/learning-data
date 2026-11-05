@@ -368,9 +368,11 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=cw_once(sc,"P",()=>{const w=(id,s
     {cut:true,at:P.desk,place:"topJun",keys:[[P.desk,955,470,1.08]],d:2,push:0.012,draw:(x,tt)=>{cw_at(x,[...OU,1],q=>cw_ourNote(q,{strike:clamp((tt-P.strike)/0.9,0,1)}));
       const pen=cw_at(x,[...TH,1],q=>cw_theirNote(q,{p:clamp((tt-P.write)/4.4,0,1)}));if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.write,P.write+4.4));}},
     // the note and Sweden's booklet beside it: what would change, when and what to do, lifted off its pictures onto the note's rows;
-    // then Jun adds who will help, and his name
-    {cut:true,at:P.book,place:"topJun",keys:[[P.book,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const b=easeCam(fin(tt,P.book+0.2,0.9));
-      const pen=cw_at(x,[...TH3,1],q=>cw_theirNote(q,{p:1,p2:clamp((tt-P.help)/1.3,0,1)}));if(b>0.001)cw_bookletOpen(x,BK[0]+(1-b)*700,BK[1]);
+    // then Jun adds who will help, and his name. The same desk: once the camera has moved on, the struck-through first try fades away
+    // and the note slides over to the left, so it never shows twice, and the booklet comes in beside it
+    {at:P.book,place:"topJun",keys:[[P.book,960,540,1.0]],d:2,push:0.012,draw:(x,tt)=>{const m=easeCam(fin(tt,P.book+0.5,0.9)),b=easeCam(fin(tt,P.book+0.7,0.9)),o=1-fin(tt,P.book+0.5,0.5);
+      if(o>0.01)withA(x,o,()=>cw_at(x,[...OU,1],q=>cw_ourNote(q,{strike:1})));
+      const pen=cw_at(x,[lerp(TH[0],TH3[0],m),lerp(TH[1],TH3[1],m),1],q=>cw_theirNote(q,{p:1,p2:clamp((tt-P.help)/1.3,0,1)}));if(b>0.001)cw_bookletOpen(x,BK[0]+(1-b)*700,BK[1]);
       tag(x,tt,0,"what would change",1);tag(x,tt,1,"when",0);tag(x,tt,2,"what to do",3);if(pen)cw_pen(x,pen[0],pen[1],cw_penA(tt,P.help,P.help+1.3));}},
     // the meeting room: Marta reads the note across the table from Jun, and nods
     {at:P.room,place:"meeting",keys:[[P.room,960,680,1.66],[P.room+0.1,960,676,1.72]],d:3,draw:(x,tt)=>{

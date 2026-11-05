@@ -60,8 +60,9 @@ def hz(m, k='Eb'):
     return f * 2 ** o * _JI[pc]
 
 # ---- the levels: a reed sits about as far under the voice as the series' other films' music (each instrument matched by loudness,
-# not by peak); the effects about 12 dB under the music (FX scales them all)
-RL, FX = 0.03, 1.3
+# not by peak); the effects about 12 dB under the music (FX scales them all). With the room set by what it rings where the notes are
+# (below), the reeds are 0.6 dB higher, so the music's loud moments are where they were, its echo now quieter
+RL, FX = 0.0322, 1.3
 LEVEL = {'oboe': 1.25, 'cor': 1.1, 'bsn': 1.0}
 PAN = {'oboe': -0.2, 'cor': 0.05, 'bsn': 0.25}  # where each sits: oboe a little left, bassoon a little right
 
@@ -75,8 +76,27 @@ REED = {  # formants as (Hz, width, weight); the corner under which the harmonic
     'oboe': ([(1150, 520, 1.0), (1480, 520, 0.55), (2350, 650, 0.12)], 520, 1500, 0.06, (800, 1700)),
     'cor': ([(960, 460, 1.0), (1320, 460, 0.32), (2150, 600, 0.09)], 380, 1250, 0.075, (650, 1400)),
     'bsn': ([(470, 230, 1.0), (1150, 380, 0.5), (1980, 520, 0.12)], 200, 950, 0.09, (300, 1100))}
+# A small room round the players. Its level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and
+# each held note is set back to its own level after it (_held), as the video guidelines ask: scaled by all it rang, as at first, the
+# room rang 10 dB louder there than its share said, and moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R10.standard_normal(len(x)) * np.exp(-6.9 * x / 0.9)).astype(np.float32))(np.arange(int(0.9 * SR)) / SR)
-_IR = filt(_IR, 'low', 1800); _IR[:int(0.012 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1800); _IR[:int(0.012 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 def _harm(inst, f, soft=1.0):
     """the weights of a note's harmonics on inst, at f Hz"""
     F, lo, hi = REED[inst][:3]; n = max(1, int(2500 // f)); k = np.arange(1, n + 1); fk = f * k
@@ -118,8 +138,7 @@ def _line(inst, segs, g, k, soft, att, rel, tongue, room, pan, tie):
     lo, hi = REED[inst][4]
     s = s * lev + 0.02 * filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)) * e * lev * (1 + 2.5 * np.exp(-x / (0.012 if tongue else 0.03)))
     s = filt(s.astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), T0, g * RL * LEVEL[inst], pan)
 def note(inst, m, s, sec, g=1.0, k='Eb', **o):
     """one held note"""

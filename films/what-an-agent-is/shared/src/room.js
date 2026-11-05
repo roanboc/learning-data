@@ -98,6 +98,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);

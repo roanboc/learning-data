@@ -344,9 +344,9 @@ scene("product",(ctx,S,t,sc)=>{const c=sc.cues,P=ee_once(sc,"P",()=>{const w=(id
     // Yusuf's screen: who reads each term; and the nine nobody read
     {cut:true,at:s4,keys:[[s4,619,430,1.55],[s4+0.1,612,428,1.58]],d:3,push:0,draw:(x,tt)=>{x.drawImage(ee_placeHi("chartWall"),0,0,W,H);
       ee_readers(x,{left:i=>fin(tt,s4+0.35+i*0.12,0.35),right:i=>fin(tt,P.counts+0.6+i*0.1,0.3)});}},
-    // his desk: the nine, each on a card, sent to its owner, and back with their yes
+    // his desk: the nine, each on a card, sent to its owner, and back with their yes, the last written before the office comes
     {cut:true,at:s5,place:"desk",keys:[[s5,960,500,1.0],[s5+0.1,960,505,1.03]],d:5,push:0,draw:(x,tt)=>ee_retireCards(x,{card:i=>fin(tt,s5+0.35+i*0.1,0.5),
-      yes:i=>clamp((tt-P.retired-0.1-i*0.18)/0.6,0,1)})},
+      yes:i=>clamp((tt-P.retired-i*0.15)/0.5,0,1)})},
     // the office: he tosses them into the box marked retired, with the old chart
     {at:s6,place:"officeNow",keys:[[s6,700,560,1.32],[s6+0.1,690,566,1.36]],d:2,push:0,draw:(x,tt)=>{const h=ee_handsAt("yusuf",YX,905,0.8,Object.assign({t:go},YO));
       ee_binders(x);ee_cardSmall(x,1);ee_deskBook(x);person(x,"yusuf",YX,905,0.8,Object.assign({},YO,{pose2:"listen",mix:fin(tt,go+0.1,0.6),carry:tt<go?ee_heldStack:null,t:tt,expr:tt>go+0.6?"smile":"calm"}));

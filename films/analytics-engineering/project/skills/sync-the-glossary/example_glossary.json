@@ -13,6 +13,12 @@
       "definition": "A student who started a course at the university for the first time in the year being counted. A student who comes back to a course they had already started, after leave or a break, isn't commencing.",
       "owner": "Mei Tanaka, registrar's office",
       "updated_on": "2026-11-04"
+    },
+    {
+      "term": "Unit offering",
+      "definition": "A unit taught in a semester, on campus, online or both.",
+      "owner": "Mei Tanaka, registrar's office",
+      "updated_on": "2026-06-30"
     }
   ]
 }

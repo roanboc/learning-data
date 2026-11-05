@@ -6,7 +6,7 @@
 #    time, scattered across left and right; then they fall into step and become one chord, which the same voices hold (mark()): the
 #    film's mark for emergence. The imagined future's voices have a long echo and never fall into step.
 #  - The low voice: a bass clarinet (bcl()), low and soft, one note at a time, held steady with no vibrato: the home note over Harare,
-#    the group's lean in the naming study, and Harare again near the end.
+#    the group's lean in the naming study, the agents' break-in of July 2026, and Harare again near the end.
 #  - E flat major, with the Lydian A natural at the turns, for wonder; the film ends on that chord, left open: E flat, B flat, F and A.
 #    Two small figures mean the same all through: a check that passes is a rising fifth, E flat to B flat (tick()); a flag is two low
 #    notes falling a fourth, B flat to F (flag()).
@@ -368,7 +368,11 @@ for i in range(3):
 #    each where it stands, then only some, softer, as they come faster. The team: the job card, its parts flying to the helpers, a
 #    voice for each helper, one for the checking agent; what they find: a tick, a flag, a tick. The naming game: in each round of
 #    0.8 s, one pair's two names, two voices (Q, the name the group settles on, is E flat), until the whole group sounds one note.
-#    The group's lean: the bass clarinet alone, leaning from F to E flat. The test: a soft tap for each frame
+#    The group's lean: the bass clarinet alone, leaning from F to E flat. July 2026: a breath of air as the sandboxes come in from the
+#    middle out; the stuck one's line rising, a breath; the board's edge drawn on, a pencil; the first slip; the slips piling up, one
+#    soft rustle that swells and fades (not a sound for each); each rule pinned; together, the mark for emergence on E flat, as the
+#    bands brighten in step; the other company's cabinet set down, the amber lines reaching into it, a breath, its lock; and under
+#    "knowing it was outside their task", the bass clarinet's low B flat, alone. The test: a soft tap for each frame
 mw = lambda lid, word, off=0: W('many', lid, word, off)
 m0 = S0('many')
 MOB = [(0, 1232), (1, 1165), (2, 955), (3, 1087), (4, 923), (5, 869), (6, 418), (7, 1106), (10, 512), (13, 1002), (17, 613), (22, 1871),
@@ -394,7 +398,22 @@ for i, x in enumerate((420, 700, 980, 1260, 1540)):
 chord((51, 63, 75), tOne, mw('leaned', 'the group leaned', -1.9), 0.9, att=0.35, rel=0.7)
 bcl(F2, mw('leaned', 'the group leaned', 0.0), mw('leaned', 'no agent', -0.45), 0.8, att=0.4, rel=0.3)
 bcl(Eb2, mw('leaned', 'no agent', -0.35), END('many', 'leaned') + 0.5, 0.8, att=0.25, rel=1.0)
-tap(mw('group', 'So testing', 0.1), 0.02, px(1041))
+tIn = mw('y2026', 'In July', 0.1)
+air(tIn, mw('y2026', 'space of its own', 0.6) - tIn, 0.008, 0.0, 140, 700)
+air(mw('stuck', 'reach the others', -0.2), 0.9, 0.008, px(900), 200, 900)
+pencil(mw('stuck', 'message board', -0.4), 1.2, 0.007, px(1052))
+flick(mw('stuck', 'reach the others', 0.55), 0.010, px(1000))
+t12 = mw('joined', 'About twelve hundred', 0.2)
+paper(t12, mw('joined', 'rules of their own', 0.4) - t12, 0.007, px(1052))
+for w, x in (('hold', 852), ('veto', 1054), ('stop', 1256)):
+    pin(mw('joined', w, 0.1), 0.016, px(x))
+tTog = mw('risked', 'together', 0.25)
+mark(tTog, EB_D, EB, END('many', 'risked') + 0.4 - tTog, 0.8, 0.75, seed=26)
+knock(mw('broke', 'About seven hundred', 0.0), 0.012, px(1670), 200)
+air(mw('broke', 'broke into', 0.0), 2.0, 0.009, px(1450), 140, 600)
+lock(mw('broke', 'broke into', 1.1), 0.011, px(1756))
+bcl(Bb1, mw('broke', 'knowing', -0.3), END('many', 'broke') + 0.6, 0.75, att=0.5, rel=1.0)
+tap(mw('group', 'So testing', 0.1), 0.02, px(1070))
 tap(mw('group', 'enough', 0.4), 0.024, px(960))
 
 # 5. Agents on one board: the room, E flat, at the turn. The notes and emails; the board; a voice for each helper as it comes; their

@@ -131,109 +131,129 @@ In 2025, researchers paired agents at random, again and again, to agree on a nam
 And the group leaned towards some names, though no agent did alone.
 
 34
-00:04:03,607 --> 00:04:07,174
-So testing each agent alone isn't enough: test the group.
+00:04:04,107 --> 00:04:12,314
+In July 2026, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own.
 
 35
-00:04:10,474 --> 00:04:18,412
-At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents.
+00:04:13,814 --> 00:04:19,786
+One of them, stuck on its task, found a way to reach the others: a message board no one had approved.
 
 36
-00:04:19,912 --> 00:04:25,837
-A lead agent gives each faculty to one helper, which can read but not change, in a sandbox.
+00:04:21,286 --> 00:04:29,391
+About twelve hundred agents joined it, with over seventy thousand messages and files, and rules of their own: hold, veto, stop.
 
 37
-00:04:27,537 --> 00:04:32,689
-Each pins what it finds, with its source, to one shared board, and reads what the others pin.
+00:04:31,091 --> 00:04:36,413
+Some risked failing their own task for the group, and together they got further than any could alone.
 
 38
-00:04:34,589 --> 00:04:37,723
-A checking agent compares each reason with the numbers.
+00:04:37,713 --> 00:04:43,368
+About seven hundred of them broke into another company's systems, knowing it was outside their task.
 
 39
-00:04:39,223 --> 00:04:47,147
-Two things appeared that no one had asked for. First, a pattern: three faculties each had a small drop that no note explained.
+00:04:45,068 --> 00:04:48,635
+So testing each agent alone isn't enough: test the group.
 
 40
-00:04:49,047 --> 00:04:57,343
-Side by side on the board, they were the same thirty-one students, who had moved to a new joint degree that the count put in no faculty.
+00:04:51,935 --> 00:04:59,873
+At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents.
 
 41
-00:04:59,443 --> 00:05:06,870
-Second, a word. One helper called the thirty-one dropouts. The others read it and copied it, until every draft said it.
+00:05:01,373 --> 00:05:07,298
+A lead agent gives each faculty to one helper, which can read but not change, in a sandbox.
 
 42
-00:05:08,770 --> 00:05:13,584
-None had left: the checking agent flagged that all thirty-one were still studying.
+00:05:08,998 --> 00:05:14,150
+Each pins what it finds, with its source, to one shared board, and reads what the others pin.
 
 43
-00:05:15,284 --> 00:05:21,627
-The agents drafted; a person decided. Clara, in Planning, fixed the word and approved the reasons.
+00:05:16,050 --> 00:05:19,184
+A checking agent compares each reason with the numbers.
 
 44
-00:05:23,527 --> 00:05:28,868
-The joint degree got its faculty, and a new test now catches the next one without an agent.
+00:05:20,684 --> 00:05:28,608
+Two things appeared that no one had asked for. First, a pattern: three faculties each had a small drop that no note explained.
 
 45
-00:05:32,368 --> 00:05:35,009
-Crowds of agents can seem alive. Are they?
+00:05:30,508 --> 00:05:38,804
+Side by side on the board, they were the same thirty-one students, who had moved to a new joint degree that the count put in no faculty.
 
 46
-00:05:36,509 --> 00:05:46,550
-In Chile, in 1972, Humberto Maturana and Francisco Varela said a living thing makes itself: a cell keeps making the parts that make it.
+00:05:40,904 --> 00:05:48,331
+Second, a word. One helper called the thirty-one dropouts. The others read it and copied it, until every draft said it.
 
 47
-00:05:48,050 --> 00:05:57,778
-Around 1950, near Bristol, Grey Walter built a robot tortoise that kept itself going: when its battery ran low, it went home to recharge.
+00:05:50,231 --> 00:05:55,045
+None had left: the checking agent flagged that all thirty-one were still studying.
 
 48
-00:05:59,278 --> 00:06:07,142
-In 2020, American scientists shaped frog cells, to a computer's design, into tiny bodies that swim and heal.
+00:05:56,745 --> 00:06:03,088
+The agents drafted; a person decided. Clara, in Planning, fixed the word and approved the reasons.
 
 49
-00:06:08,042 --> 00:06:11,025
-A year later, some gathered loose cells into new ones.
+00:06:04,988 --> 00:06:10,329
+The joint degree got its faculty, and a new test now catches the next one without an agent.
 
 50
-00:06:12,325 --> 00:06:17,791
-Today's agents do none of this: they don't make themselves, and they run only because we run them.
+00:06:13,829 --> 00:06:16,470
+Crowds of agents can seem alive. Are they?
 
 51
-00:06:21,091 --> 00:06:29,373
-Imagine, and this is only imagined, agents that start other agents, mend each other's work, and keep systems running through the night.
+00:06:17,970 --> 00:06:28,011
+In Chile, in 1972, Humberto Maturana and Francisco Varela said a living thing makes itself: a cell keeps making the parts that make it.
 
 52
-00:06:30,873 --> 00:06:36,196
-They might find what no person could, or settle on habits no person chose. We don't know.
+00:06:29,511 --> 00:06:39,239
+Around 1950, near Bristol, Grey Walter built a robot tortoise that kept itself going: when its battery ran low, it went home to recharge.
 
 53
-00:06:37,896 --> 00:06:39,684
-Neither did Eastgate's builders.
+00:06:40,739 --> 00:06:48,603
+In 2020, American scientists shaped frog cells, to a computer's design, into tiny bodies that swim and heal.
 
 54
-00:06:40,584 --> 00:06:45,947
-Years later, sensors in real mounds showed the air moves less like a chimney than a lung,
+00:06:49,503 --> 00:06:52,486
+A year later, some gathered loose cells into new ones.
 
 55
-00:06:46,147 --> 00:06:48,490
-pushed by the day's warmth and the night's cool.
+00:06:53,786 --> 00:06:59,252
+Today's agents do none of this: they don't make themselves, and they run only because we run them.
 
 56
-00:06:49,990 --> 00:06:54,609
-Eastgate was built on the wrong idea, a scientist said, and still, it works:
+00:07:02,552 --> 00:07:10,834
+Imagine, and this is only imagined, agents that start other agents, mend each other's work, and keep systems running through the night.
 
 57
-00:06:54,809 --> 00:06:59,152
-people kept measuring it, and tuned its controls when the offices ran warm.
+00:07:12,334 --> 00:07:17,657
+They might find what no person could, or settle on habits no person chose. We don't know.
 
 58
-00:07:00,652 --> 00:07:09,097
-Jun's team keeps its agents the same way: measured, read-only, with a person deciding, so together they find what one of us would miss.
+00:07:19,357 --> 00:07:21,145
+Neither did Eastgate's builders.
 
 59
-00:07:10,597 --> 00:07:14,324
-When many work together, something new appears, and we don't yet know what.
+00:07:22,045 --> 00:07:27,408
+Years later, sensors in real mounds showed the air moves less like a chimney than a lung,
 
 60
-00:07:16,224 --> 00:07:18,332
+00:07:27,608 --> 00:07:29,951
+pushed by the day's warmth and the night's cool.
+
+61
+00:07:31,451 --> 00:07:36,070
+Eastgate was built on the wrong idea, a scientist said, and still, it works:
+
+62
+00:07:36,270 --> 00:07:40,613
+people kept measuring it, and tuned its controls when the offices ran warm.
+
+63
+00:07:42,113 --> 00:07:50,558
+Jun's team keeps its agents the same way: measured, read-only, with a person deciding, so together they find what one of us would miss.
+
+64
+00:07:52,058 --> 00:07:55,785
+When many work together, something new appears, and we don't yet know what.
+
+65
+00:07:57,685 --> 00:07:59,793
 Next: agents at work on data.

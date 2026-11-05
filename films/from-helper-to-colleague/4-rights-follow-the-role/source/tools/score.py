@@ -11,9 +11,9 @@
 #    small ring at pitches no string has (2.37, 3.53 and 4.83 times the note); rubber: a muted thud, the string stopped almost at
 #    once. Never the open, held sound of the site's felt pianos. It plays what was prepared: the pharmacy's doses, each step's right.
 #  - The mark: three prepared notes, one for each of the planning contributor's steps (B, D and G), then one damped stroke of the brake
-#    drum where its steps end; nothing sounds that wasn't prepared. Heard as the pharmacist fills a patient's drawer (each dose a
-#    note, and the brake as no more than a day's reaches the ward), under the title, where its rights are made from its steps, and on
-#    the end card.
+#    drum where its steps end; nothing sounds that wasn't prepared. Heard in the opening in two halves (the pharmacy's single doses,
+#    a note each; then the brake as no more than a day's reaches the ward), whole under the title, where its rights are made from its
+#    steps, and on the end card.
 #  - Keys, all tuned pure (just intonation from G, see hz()): E minor for the ward's problem, and for a person's rights; G major from
 #    Little Rock on. E and A never sound together (their fourth isn't pure in this tuning), so nothing beats.
 # The rules the module keeps (the author's, 20 October and 4 November 2026; tools/quiet.py checks them):
@@ -163,9 +163,10 @@ def lock(s, g=0.010, pan=0.0):
 #    unresolved; a pen as the clerk copies it. The slip: a low muted E as the copy's edge turns amber; then silence while the harms are
 #    told. Every medicine within reach of every hand: E, B and G as the lines reach the beds, one soft texture under them. "Something
 #    had to change": D, leaning towards G. Little Rock: G and D together, the pharmacists' card laid down. The pharmacist reads the
-#    order (it's lifted), the drawer slides open and three doses drop in; "single doses, labelled, ready to give", a prepared note for
-#    each (B, D and G), and the brake drum, damped, as no more than one day's doses reach the ward. The three cards, laid down. The
-#    study: G major, rolled, and the brake let ring a little. The university: the agent's question, a bolted E. A person's rights: the
+#    order (it's lifted); "single doses, labelled and ready to give", a prepared note for each (B, D and G), as the pharmacy sends
+#    them one by one. The three cards, laid down. The study: G major, rolled, and the brake let ring a little. As other hospitals
+#    take it up, a drawer slides open and three doses drop in, and the brake drum, damped, as no more than one day's doses reach
+#    the ward. The university: the agent's question, a bolted E. A person's rights: the
 #    shelf lit (one soft texture) and a muted E and B; locks on approving and changing production. The rights of its work: G and D as
 #    the drawer is named; and, as a slip can't reach any further, the brake, damped. The title: the mark
 ww = lambda lid, word, off=0: W('ward', lid, word, off)
@@ -189,18 +190,18 @@ paper(ww('arkansas', 'pharmacists', 0.2), 0.011, px(1555))
 preps((G3, D4), ww('arkansas', 'another way'), 0.75, [px(700), px(1200)])
 P_reado = ww('drawer', "each doctor's order")
 paper(P_reado - 0.3, 0.008, px(430))
-P_filled = ww('drawer', 'filled a drawer')
-drawer(P_filled, 0.9, 0.006, px(1550))
-for i in range(3):
-    dose(P_filled + 0.7 + i / 2.4, 0.006, px(1500 + 60 * i))
 for w_, m, x_ in (('single doses', B3, 1340), ('labelled', D4, 1550), ('ready to give', G4, 1550)):
     prep(m, ww('drawer', w_, 0.05), 0.55, px(x_))
-brake(D4, ww('day', "one day's doses", 0.1), 0.8, px(1500), 0.2)
 paper(wc('each'), 0.010, px(720)); paper(ww('each', 'the pharmacist checked'), 0.010, px(1154)); paper(ww('each', 'the nurse gave'), 0.010, px(1578))
 paper(ww('fell', 'In their study'), 0.011, px(990))
 P_thirty = ww('fell', 'one in thirty')
 preps((G3, B3, D4, G4), P_thirty + 0.1, 0.75, [-0.3, -0.1, 0.1, 0.3], 0.12)
 brake(G4, P_thirty + 0.25, 0.55, 0.0, 0.45)
+P_gotd = ww('day', 'a drawer')
+drawer(P_gotd, 0.9, 0.006, px(1550))
+for i in range(3):
+    dose(ww('day', 'filled from the order', 0.1 + i / 2.4), 0.006, px(1500 + 60 * i))
+brake(D4, ww('day', "one day's doses", 0.1), 0.8, px(1500), 0.2)
 paper(ww('spread', 'nine American hospitals', -0.2), 0.011, px(990))
 prep(E4, ww('uni', 'what should it'), 0.55, px(960))
 paper(ww('uni', 'the same question'), 0.010, px(960))

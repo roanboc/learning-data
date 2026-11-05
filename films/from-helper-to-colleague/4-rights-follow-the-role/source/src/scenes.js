@@ -19,8 +19,9 @@ scene("ward",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>(
     shared:wAt(sc,"pour","the shared bottles"),hand:wAt(sc,"pour","by hand"),dorder:wAt(sc,"order","the doctor's order"),copy:wAt(sc,"order","only a copy"),
     clerk:wAt(sc,"order","written out"),slip:wAt(sc,"wrong","a slip"),drug:wAt(sc,"wrong","the wrong drug"),amount:wAt(sc,"wrong","the wrong amount"),
     inj:wAt(sc,"wrong","an injection"),hands:wAt(sc,"reach","every hand"),ark:wAt(sc,"arkansas","pharmacists"),another:wAt(sc,"arkansas","another way"),
-    reado:wAt(sc,"drawer","each doctor's order"),filled:wAt(sc,"drawer","filled a drawer"),single:wAt(sc,"drawer","single doses"),labelled:wAt(sc,"drawer","labelled"),
-    ready:wAt(sc,"drawer","ready to give"),oneday:wAt(sc,"day","one day's doses"),ordered:c.each,checked:wAt(sc,"each","the pharmacist checked"),
+    reado:wAt(sc,"drawer","each doctor's order"),single:wAt(sc,"drawer","single doses"),labelled:wAt(sc,"drawer","labelled"),
+    ready:wAt(sc,"drawer","ready to give"),due:wAt(sc,"drawer","each as it fell due"),took:wAt(sc,"day","took it up"),gotd:wAt(sc,"day","a drawer"),
+    from:wAt(sc,"day","filled from the order"),oneday:wAt(sc,"day","one day's doses"),ordered:c.each,checked:wAt(sc,"each","the pharmacist checked"),
     gave:wAt(sc,"each","the nurse gave"),study:wAt(sc,"fell","In their study"),five:wAt(sc,"fell","one dose in five"),thirty:wAt(sc,"fell","one in thirty"),
     nine:wAt(sc,"spread","nine American hospitals"),same:wAt(sc,"uni","the same question"),reachQ:wAt(sc,"uni","what should it"),
     persons:wAt(sc,"shelf","a person's rights"),whole:wAt(sc,"shelf","the whole shelf"),approving:wAt(sc,"shelf","approving"),prod:wAt(sc,"shelf","changing production"),
@@ -61,25 +62,30 @@ scene("ward",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>(
     {at:c.reach-0.3,place:"rfWard",cut:true,keys:[[c.reach-0.3,960,540,1]],push:0.025,draw:(x,tt)=>{web(x,tt);
       rf_scr(x,S,()=>rf_card(x,1230,124,620,"Every medicine","Within reach of every hand",null,{kickCol:AG.amber,edge:AG.amber,edgeA:0.55,
         a:ag_in(tt,P.hands,0.4),k:ag_spr(tt,P.hands)}));}},
-    // in the early 1960s, at Little Rock, the pharmacists tried another way: a pharmacist reads each doctor's order and fills a drawer
-    // for each patient, single doses, labelled, ready to give; no more than a day's doses on the ward; the doctor orders, the
-    // pharmacist checks and fills, the nurse gives; mistakes fell from almost one dose in five to one in thirty; by 1990 nine
-    // hospitals in ten
+    // in the early 1960s, at Little Rock, the pharmacists tried another way: a pharmacist reads each doctor's order, and the pharmacy
+    // sends single doses, labelled and ready to give, each as it falls due; the doctor orders, the pharmacist checks and fills, the
+    // nurse gives; mistakes fell from almost one dose in five to one in thirty. As other hospitals took it up, each patient got a
+    // drawer, filled from the order, no more than a day's doses; by 1990 nine hospitals in ten
     {at:c.arkansas-0.5,place:"rfPharm",keys:[[c.arkansas-0.5,960,540,1]],push:0.03,draw:(x,tt)=>{
-      const mo=ag_in(tt,P.reado-0.4,0.45),open=clamp((tt-P.filled)/0.9,0,1),fill=clamp((tt-P.filled-0.7)*2.4,0,3);
-      rf_cart(x,{open:[3,open],fill,lit:tt>P.filled-0.2?3:-1});
+      const mo=ag_in(tt,P.reado-0.4,0.45),ca=ag_in(tt,P.took-0.2,0.6),open=clamp((tt-P.gotd)/0.9,0,1),fill=clamp((tt-P.from-0.1)*2.4,0,3);
+      // as other hospitals took it up, a cart with a drawer for each patient: it comes in whole, then Bed 4's drawer opens and is filled
+      if(ca>=0.999)rf_cart(x,{open:[3,open],fill,lit:tt>P.gotd-0.2?3:-1});else rf_cartIn(x,ca);
       x.save();x.beginPath();x.rect(0,0,W,RF_PH.counter-12);x.clip();
       rf_who(x,RF_P.pharm,FT,PX,PY,1,{p:{cut:RF_PH.counter-12,pose:"hang",pose2:"hold",mix:mo,gaze:[4,1],
         hold:(cc,h)=>{if(mo<=0)return;cc.save();cc.globalAlpha*=mo;rf_holdOrder(cc,h);cc.restore();}}});x.restore();
-      // the nurse comes for the doses, and gives them
-      const na=ag_in(tt,c.each-0.4,0.5),gx=rf_slide(tt,c.each-0.4,2150,N2,1.3),gm=ag_in(tt,P.gave-0.4,0.45);
+      // the nurse comes for a dose and gives it, and goes as the story moves on to other hospitals
+      const na=ag_in(tt,c.each-0.4,0.5)*(1-ag_in(tt,c.day+0.3,0.5)),gm=ag_in(tt,P.gave-0.4,0.45),
+        gx=tt<c.day-0.6?rf_slide(tt,c.each-0.4,2150,N2,1.3):rf_slide(tt,c.day-0.6,N2,2150,1.3);
       if(na>0)rf_who(x,RF_P.nurse2,FT,gx,N2Y,0.9,{a:na,p:{flip:true,pose:"hang",pose2:"hold",mix:gm,gaze:[3,1],
         hold:(cc,h)=>{if(gm<=0)return;cc.save();cc.globalAlpha*=gm;rf_holdCup(cc,h);cc.restore();}}});
       rf_card(x,1250,96,610,"Pharmacists at the","University of Arkansas Medical Center",null,{kickCol:AG.blue,a:ag_io(tt,P.ark+0.2,c.drawer-0.3,0.4),k:ag_spr(tt,P.ark+0.2)});
-      const s1=rf_pillL(x,1250,150,"single doses",{col:AG.blue,a:ag_io(tt,P.single,c.day-0.3,0.4)});
-      rf_pillL(x,s1.x+s1.w+18,150,"labelled",{col:AG.blue,a:ag_io(tt,P.labelled,c.day-0.3,0.4)});
-      rf_pillL(x,1250,228,"ready to give",{col:AG.blue,a:ag_io(tt,P.ready,c.day-0.3,0.4)});
-      rf_pillL(x,1250,150,"one day's doses at most",{col:AG.blue,a:ag_io(tt,P.oneday,c.each-0.4,0.4)});
+      // single doses on the counter, sent one after another, each labelled and ready to give
+      for(let i=0;i<3;i++){const pa=ag_in(tt,P.single+0.25*i,0.4)*(1-ag_in(tt,c.fell-0.4,0.4));if(pa>0)rf_packet(x,820+i*96,RF_PH.counter-38-(1-ag_eo(pa))*40,62,{a:clamp(pa*3,0,1),r:(i-1)*0.05});}
+      const s1=rf_pillL(x,1250,150,"single doses",{col:AG.blue,a:ag_io(tt,P.single,P.due-0.3,0.4)});
+      rf_pillL(x,s1.x+s1.w+18,150,"labelled",{col:AG.blue,a:ag_io(tt,P.labelled,P.due-0.3,0.4)});
+      rf_pillL(x,1250,228,"ready to give",{col:AG.blue,a:ag_io(tt,P.ready,P.due-0.3,0.4)});
+      rf_pillL(x,1250,150,"each dose, as it fell due",{col:AG.blue,a:ag_io(tt,P.due,c.each-0.4,0.4)});
+      rf_pillL(x,1250,150,"one day's doses at most",{col:AG.blue,a:ag_io(tt,P.oneday,c.spread-0.4,0.4)});
       // the doctor ordered, the pharmacist checked and filled, the nurse gave: three cards along the top, one for each
       const ea=k=>ag_io(tt,[P.ordered,P.checked,P.gave][k],c.fell-0.4,0.4),kk=k=>ag_spr(tt,[P.ordered,P.checked,P.gave][k]);
       rf_card(x,560,64,320,"The doctor","orders",null,{kickCol:AG.kick,a:ea(0),k:kk(0)});rf_arrow(x,912,134,ea(1));
@@ -87,8 +93,8 @@ scene("ward",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>(
       rf_card(x,1428,64,300,"The nurse","gives",null,{kickCol:AG.kick,a:ea(2),k:kk(2)});
       // what their study found, and how far it spread
       rf_card(x,560,64,860,"Mistakes other than timing","From almost 1 dose in 5 to 1 in 30","Barker's study, 1969",{kickCol:AG.blue,edge:AG.green,edgeA:0.6,
-        a:ag_io(tt,P.study,c.spread-0.4,0.4),k:ag_spr(tt,P.study)});
-      rf_card(x,560,64,860,"By 1990","Nine American hospitals in ten","worked this way · ASHP's survey, 1990",{kickCol:AG.blue,edge:AG.green,edgeA:0.6,
+        a:ag_io(tt,P.study,c.day-0.4,0.4),k:ag_spr(tt,P.study)});
+      rf_card(x,700,64,860,"By 1990","Nine American hospitals in ten","worked this way · ASHP's survey, 1990",{kickCol:AG.blue,edge:AG.green,edgeA:0.6,
         a:ag_io(tt,P.nine-0.2,c.uni-0.6,0.4),k:ag_spr(tt,P.nine-0.2)});}},
     // at the university, Planning's new agent raises the same question: what should it be able to reach? A person's rights reach the
     // whole shelf, approving and changing production included; the rights of its work reach only what each of its steps needs
@@ -106,7 +112,7 @@ scene("ward",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>(
         rf_pillL(x,1050,782,"a slip stays inside its work",{icon:"tick",col:AG.green,a:ag_in(tt,P.further,0.4)});
         RF_KICK(x,{a:ag_in(tt,c.uni+0.6,0.6)});});}}
   ],0.6);
-  rf_tags(ctx,S,t,[[0.8,c.arkansas-0.5,RF_TAG_50],[c.arkansas+0.6,c.each-0.5,RF_TAG_60]]);
+  rf_tags(ctx,S,t,[[0.8,c.arkansas-0.5,RF_TAG_50],[c.arkansas+0.6,c.each-0.5,RF_TAG_60],[c.day+0.3,c.uni-0.4,RF_TAG_US]]);
   ag_title(ctx,S,t,c.breath,"Rights follow the role","an agent's rights come from its work, not from a person's","FILM 4 OF 7 · FROM HELPER TO COLLEAGUE");});
 
 /* ---------------------------------------------------------------- 2 · What Jun's helper had */
@@ -341,7 +347,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
       rf_pillL(x,720,662,"Jun's rights stay his own",{col:AG.blue,a:ag_in(tt,P.own-0.2,0.4)});
       RF_KICK(x);});}}
   ],0.6);
-  rf_tags(ctx,S,t,[[0.6,c.here-0.7,RF_TAG_60]]);
+  rf_tags(ctx,S,t,[[0.6,c.here-0.7,RF_TAG_US]]);
   ag_end(ctx,S,t,c.breath,"Rights follow the role","An agent's rights come from its work, not from a person's.","Film 4 of 7","From helper to colleague");});
 
 ag_cutInto(["borrowed","steps","reads","left","change"]);

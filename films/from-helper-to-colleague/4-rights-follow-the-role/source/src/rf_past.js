@@ -16,7 +16,7 @@ const RFW={wall:[196,212,198],wallLt:[220,230,216],dado:[160,182,166],rail:[232,
   clear:[204,220,222],green:[92,128,104],label:[238,230,206],sheet:[242,242,238],blanket:[196,206,214],iron:[226,228,224],
   cream:[230,220,196],creamLt:[244,236,214],wood:[150,110,74],woodDk:[104,74,48],paper:[248,246,238],ink:[52,50,58],
   light:[255,248,226]};
-const RF_TAG_50="United States · late 1950s",RF_TAG_60="Little Rock, Arkansas · early 1960s";
+const RF_TAG_50="United States · late 1950s",RF_TAG_60="Little Rock, Arkansas · early 1960s",RF_TAG_US="United States · 1960s to 1990";
 // a tag in the corner, as the module's films put the place and the years
 function rf_corner(ctx,s,a){if(a<=0)return;const w=ag_tw(ctx,s,{w:700,size:28,ls:2})+56;ag_box(ctx,64,64,w,58,29,{a});
   ag_T(ctx,s,92,103,{w:700,size:28,ls:2,col:AG.kick,a});}
@@ -210,6 +210,12 @@ function rf_cart(ctx,o){o=o||{};const C=RF_PH.cart,a=o.a==null?1:o.a;if(a<=0)ret
     const n=o.fill||0;for(let i=0;i<3;i++){const fa=clamp(n-i,0,1);if(fa>0)rf_packet(ctx,op.dx+op.w/2+(i-1)*42,op.dy+L*0.62-(1-ag_eo(fa))*70,40,{a:clamp(fa*3,0,1),r:(i-1)*0.08});}
     ctx.restore();ctx.save();ag_about(ctx,fx+fw/2,fy+fh/2,1);front(fx,fy,fw,fh,op.k);ctx.restore();}
   ctx.restore();return out;}
+
+// the cart drawn whole into its own picture, closed and unlit, so it comes in faded as one thing, never layer by layer
+const RF_CART_BOX=[RF_PH.cart.x-40,RF_PH.cart.y-30,RF_PH.cart.x+RF_PH.cart.w+40,1040];let RF_CARTPIC=null;
+function rf_cartIn(ctx,a){if(a<=0)return;const [x0,y0,x1,y1]=RF_CART_BOX,R=2;
+  if(!RF_CARTPIC){RF_CARTPIC=mkCanvas(Math.ceil((x1-x0)*R),Math.ceil((y1-y0)*R));const c=RF_CARTPIC.getContext("2d");c.scale(R,R);c.translate(-x0,-y0);rf_cart(c,{});}
+  ctx.save();ctx.globalAlpha*=a;ctx.drawImage(RF_CARTPIC,x0,y0,x1-x0,y1-y0);ctx.restore();}
 
 /* ---------------------------------------------------------------- the people, dressed for their time */
 // a nurse's starched white cap, on the crown, inside the head's picture

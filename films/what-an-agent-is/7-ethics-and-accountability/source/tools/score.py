@@ -506,7 +506,34 @@ wr0 = rc('wrong', -0.3)
 hooves(wr0 + 0.1, E('rope') - 0.3, rc('wrong') - 5, 2.2, 0.0045, px(900))
 steps(wr0 + 0.1, E('rope') - 0.4, 1.0, 0.004, px(1400), u0=rc('wrong') - 5)
 
-# 6. Blunt the horns: G minor to B flat at the turn. Four warnings pinned on the wall; the elder, out of doors. Excessive agency: its card
+# 6. An ox untied: D minor at the turn, the unease of an agent that strays. The ox wanders off, its loose rope. Jun's note. It reaches onto
+#    the open web and pushes at other universities' locked pages: the reach stretches out, one low melodica note held, and the page stays
+#    locked. Three plain notes. The 2026 card, its two tags. The makers' guidelines. Out of doors again, the untied ox, and the stone's call
+#    left open, a question carried into the next chapter. No urgent sound here: nothing is racing
+tw = lambda lid, word, off=0: W('stray', lid, word, off)
+tc = lambda lid, off=0: G('stray', lid, off)
+t0_ = S0('stray')
+chord(Dm, t0_ - 1.0, t0_ + 0.4, 0.5, att=0.4)
+hooves(t0_ + 0.1, tc('compare', -0.5), t0_ - 0.5, 2.2, 0.0045, px(760))
+steps(t0_ + 0.1, tc('compare', -0.5), 1.0, 0.004, px(900), u0=t0_ - 0.5)
+rope(t0_ + 0.35, 0.007, px(320))
+paper(tc('compare', 0.0), 0.006, px(540)); tap(tc('compare', 0.5), 0.005, px(1124))
+webr, push = tw('web', 'the open web'), tw('web', 'pushed at the pages')
+air(webr - 0.2, 1.2, 0.005, px(1124))
+melo(D3, push, push + 2.4, 0.8, att=0.25, rel=0.9)
+lock(push + 0.35, 0.007, px(560))
+for wd_ in ('No one told it', "didn't know", 'only wanted'):
+    tap(tw('blind', wd_, 0.05), 0.005, px(1360))
+knock(tc('y2026', 0.1), 0.008, px(960), 250)
+tap(tw('y2026', 'broke out', 0.1), 0.006, px(700)); tap(tw('y2026b', "another company's", 0.1), 0.006, px(1150))
+paper(tc('held', 0.0), 0.006, px(470)); keys(tc('held', 0.6), 4, 0.004, px(600), 0.14)
+tap(tw('heldb', "don't always hold", 0.0), 0.005, px(770))
+cross = tw('fence', "a fence it can't cross")
+hooves(tc('fence', -0.2), E('stray') - 0.3, tc('fence') - 2.4, 2.2, 0.0045, px(760))
+steps(tc('fence', -0.2), E('stray') - 0.4, 1.0, 0.004, px(1100), u0=tc('fence') - 2.4)
+call(cross + 0.2, A3, E4, 0.9)
+
+# 7. Blunt the horns: G minor to B flat at the turn. Four warnings pinned on the wall; the elder, out of doors. Excessive agency: its card
 #    and three lines. The owner rasps the horn tips round; in the lab the tools' locks close, the names masked on their way, the hand
 #    only into the test copy. The rail rises round it; night; the agreed job. The gate: Jun's stamp, a second person's; Jun's own change
 #    through the same gate, its halves opening and closing. The agent's hand toward the stamp, and the place greyed for it. Europe's
@@ -527,7 +554,7 @@ r_0 = bc('blunt', -0.3)
 rasp(r_0 + 0.2, max(1, int((rd - 0.5 - r_0) * 2.2)), 0.005, px(860))
 for i in range(3):
     lock(rd + 0.05 + 0.12 * i, 0.007, px(1500))
-nm, dr = bw('blunt', 'never sees'), bw('blunt', 'writes only drafts')
+nm, dr = bw('bluntb', 'never sees'), bw('bluntb', 'writes only drafts')
 paper(nm - 0.3, 0.006, px(300)); keys(nm + 0.1, 6, 0.004, px(400), 0.2)
 knock(dr - 0.2, 0.007, px(1440), 220); air(dr, 0.9, 0.005, px(1350)); paper(dr + 0.75, 0.006, px(1440))
 tu, ag_, rp = bw('tied', 'tied up'), bw('tied', 'the agreed job'), bw('tied', 'and report')
@@ -548,7 +575,7 @@ for i in range(4):
 for i, xx in enumerate((432, 788, 1144, 1500)):
     tap(anyT + i * 0.45 + 0.1, 0.007, px(xx))
 
-# 7. A person answers: the night at the turn, the stone alone, lower and slower; the clock; the count fails again; the agent's hand into
+# 8. A person answers: the night at the turn, the stone alone, lower and slower; the clock; the count fails again; the agent's hand into
 #    the test copy. Morning: Jun, the report and its lines. Mei's bubble, "They count". The stamps, Jun's and Noor's; the gate opens, the
 #    fix goes live, the count's tick, the three names. In Babylon: out of doors, the field. "The agent acts.": the stone's call; "A
 #    person answers.": the melodica answers, home in D major. Through the night, and morning: the team, and the count's tick. The end

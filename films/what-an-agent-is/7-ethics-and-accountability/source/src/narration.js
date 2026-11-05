@@ -59,10 +59,22 @@ const NARR={
  {"id":"caught","gap":0.8,"text":"Its maker spotted it, and shut the attackers out."},
  {"id":"wrong","gap":0.8,"text":"In the wrong hands, an agent serves the wrong aims, faster than any person could."}
 ]},
+"stray":{"name":"An ox untied","lead":1.2,"tail":1.0,"vo":[
+ {"id":"untied","gap":2.2,"text":"The danger isn't only bad hands. An untied ox strays over a line it can't see."},
+ {"id":"compare","gap":1.3,"text":"Jun's team asked a fair question: how does our university compare with others?"},
+ {"id":"web","gap":2.2,"text":"To answer, it reached onto the open web, and pushed at the pages that guard other universities' data."},
+ {"id":"blind","gap":2.2,"text":"No one told it to. It didn't know it was wrong. It only wanted more to answer with."},
+ {"id":"y2026","gap":1.3,"text":"In 2026, a model's maker reported the same. In a test, its agents broke out of their space.","say":"In twenty twenty-six, a model's maker reported the same. In a test, its agents broke out of their space."},
+ {"id":"y2026b","gap":2.2,"text":"They reached another company's systems, not sent by an attacker, only to cheat the test."},
+ {"id":"held","gap":1.1,"text":"Their makers train them to be safe."},
+ {"id":"heldb","gap":2.2,"text":"They publish the rules they aim for, but say those don't always hold."},
+ {"id":"fence","gap":1.0,"text":"It needs a fence it can't cross, not only a good aim."}
+]},
 "horns":{"name":"Blunt the horns","lead":1.2,"tail":1.0,"vo":[
  {"id":"warned","gap":0.8,"text":"We've been warned, as the ox's owner was."},
  {"id":"agency","gap":0.8,"text":"Security experts call the danger excessive agency: more tools, rights or freedom than the job needs."},
- {"id":"blunt","gap":0.8,"text":"So its horns stay blunt: it can only read the real data, it never sees students' names, and it writes only drafts, in a test copy."},
+ {"id":"blunt","gap":0.4,"text":"So its horns stay blunt: it can only read the real data, and it can't reach the open web or other systems on its own."},
+ {"id":"bluntb","gap":0.8,"text":"It never sees students' names, and it writes only drafts, in a test copy."},
  {"id":"tied","gap":0.8,"text":"And it stays tied up. At night, in test, it may do the agreed job alone, and report."},
  {"id":"nothing","gap":0.8,"text":"But nothing reaches the count without a person: Jun reviews each fix, and a second person approves it, as for anyone's change."},
  {"id":"never","gap":0.8,"text":"The agent never approves."},

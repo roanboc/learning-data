@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again on 5 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again and section 11 on 5 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -233,7 +233,33 @@ Memory is kept by the platform, and comes second.
    Deleting a session, or a session store, doesn't delete the memory kept from it: data governance
    deletes a wrong line from the team's store itself, and records it in `memory/removed.md`.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, and *Skills support in Unity Gateway* to the end again on 5 November 2026)
+## 11. Critical data, as a tag
+
+Data is good enough for a use, or not, and each use of a table depends on a few of its columns.
+The model's YAML names them: a column's `meta.critical_for` lists the uses that can't do without it
+(the graduation list's printed name for the certificates and the programme; its ceremony and
+attendance for the seating plan). After the table builds, dbt tags each of those columns with the
+key-only tag `critical_data`, and takes the tag off a column no use needs any more
+(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
+(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
+the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+
+1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
+   *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can
+   set it, so a column is marked critical where its uses are written down, and nowhere else.
+2. Give the identity that runs dbt `ASSIGN` on it. It owns the tables it builds, which is enough to
+   tag their columns; anyone else needs `APPLY TAG` on the table too.
+
+Tagging a column takes Databricks Runtime 16.1 or above, or a SQL warehouse. To list every critical
+column in the catalog, and the table it's in:
+
+```sql
+select schema_name, table_name, column_name
+from information_schema.column_tags
+where tag_name = 'critical_data'
+```
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, and the last two, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -292,3 +318,7 @@ Memory is kept by the platform, and comes second.
 - Databricks, *Tutorial: Add sessions and memory to an existing agent* (a read-only grant):
   https://docs.databricks.com/aws/en/agents/agent-memory/existing-agent-tutorial
 - Databricks, *Lakebase Postgres*: https://docs.databricks.com/aws/en/oltp/projects/
+- Databricks, *SET TAG*, again for section 11 (a column takes a key-only tag; setting a tag already
+  there fails; Databricks Runtime 16.1 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-set-tag
+- Databricks, *COLUMN_TAGS* (the tags on each column, by catalog, schema and table):
+  https://docs.databricks.com/aws/en/sql/language-manual/information-schema/column_tags

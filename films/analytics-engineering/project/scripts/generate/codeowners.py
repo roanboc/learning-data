@@ -32,6 +32,12 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
 TARGET = ROOT / "CODEOWNERS"
+# Paths added after films cited CODEOWNERS by line: each goes in a section of its own at the end,
+# not in its section's place, so the cited lines keep their numbers (AGENTS.md, Keep cited lines in
+# place). Add a new folder or file here, with the section's title, when its place would move them.
+LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
+         ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
+          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/")}
 
 
 def load(path):
@@ -126,6 +132,11 @@ def main():
     # Last, so the lines above keep their numbers.
     rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
+
+    # Then what came after the films cited the lines above, each section in the order it came.
+    for title, prefixes in LATER.items():
+        later = [rule for rule in rules if rule[0] and rule[0].startswith(prefixes)]
+        rules = [rule for rule in rules if rule not in later] + [(None, None, title)] + later
 
     if unknown:
         raise SystemExit(f"{REGISTER.relative_to(ROOT)} doesn't say how to reach: {', '.join(sorted(unknown))}. "

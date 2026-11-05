@@ -76,3 +76,10 @@
 
 # The team's memory: data governance, which owns it as a whole
 /memory/                                                 data.governance@uni.example
+
+# The graduation list: its owner, its sources, its ceremonies and the people who use it
+/models/marts/graduations/_graduations__models.yml       mei.tanaka@uni.example jun.park@uni.example
+/sources/portal/                                         mei.tanaka@uni.example jun.park@uni.example
+/seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
+/governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
+/exposures/graduations/                                  malia.fonoti@uni.example

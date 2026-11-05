@@ -15,7 +15,7 @@ const NARR={
  {"id":"rules","gap":0.5,"text":"Rules try to narrow it."},
  {"id":"y1764","gap":0.8,"text":"From 1764, the member must write the whole address in his own hand.","say":"From seventeen sixty-four, the member must write the whole address in his own hand."},
  {"id":"y1784","gap":0.8,"text":"From 1784, the town and the date as well, the day in words, and the letter posted that same day.","say":"From seventeen eighty-four, the town and the date as well, the day in words, and the letter posted that same day."},
- {"id":"gap","gap":0.8,"text":"Still, the gap stays open: by the 1830s, about five million letters a year travel free.","say":"Still, the gap stays open: by the eighteen-thirties, about five million letters a year travel free."},
+ {"id":"gap","gap":0.8,"text":"Still, the gap stays open: in the 1830s, about seven million letters a year travel free.","say":"Still, the gap stays open: in the eighteen-thirties, about seven million letters a year travel free."},
  {"id":"change","gap":0.8,"text":"Something had to change."},
  {"id":"hill","gap":0.8,"text":"A schoolmaster, Rowland Hill, argues for a cheap post that the sender pays."},
  {"id":"parl","gap":0.5,"text":"Parliament agrees."},
@@ -27,23 +27,25 @@ const NARR={
  {"id":"learn","gap":0.8,"text":"Narrowed, those borrowed rights let it learn, safely, in a sandbox."},
  {"id":"name","gap":0.8,"text":"And once it works for the team, it needs a name of its own."}
 ]},
-"start":{"name":"Where everyone starts","lead":0.9,"tail":1.0,"vo":[
- {"id":"every","gap":0.8,"text":"An AI helper in an editor or a chat starts the same way: on the sign-in of the person using it."},
- {"id":"quick","gap":0.8,"text":"It's quick: nothing to set up, nobody to ask, and it can do whatever that person can."},
+"start":{"name":"Where everyone starts","lead":1.4,"tail":1.2,"vo":[
+ {"id":"every","gap":0.8,"text":"An AI helper in an editor or a chat starts on the sign-in of the person using it."},
+ {"id":"quick","gap":0.8,"text":"It's quick: nothing to set up, and it can do whatever that person can."},
  {"id":"tickets","gap":0.8,"text":"Through 2026, Jun's helper drafted Planning's tickets for him: a new column, a filter, a new mart.","say":"Through twenty twenty-six, Jun's helper drafted Planning's tickets for him: a new column, a filter, a new mart."},
- {"id":"three","gap":0.8,"text":"The first three of the five stages of trust all work on the person's sign-in."},
+ {"id":"three","gap":0.8,"text":"The first three of the five stages all work on the person's sign-in."},
  {"id":"s1","gap":0.8,"text":"At the first, it suggests: it drafts, runs nothing, and Jun accepts or rejects every line."},
  {"id":"s2","gap":0.8,"text":"At the second, it acts for him, step by step: it runs a query or a command, and Jun allows each one."},
- {"id":"s3","gap":0.8,"text":"At the third, it acts for him within limits: it works alone, and Jun checks the result against the plan's checks."},
+ {"id":"s3","gap":0.8,"text":"At the third, it acts for him within limits: it works alone, and Jun checks the result."},
  {"id":"each","gap":0.8,"text":"Each stage changes how much it may do, and what Jun does. The sign-in stays his."}
 ]},
 "wide":{"name":"Everything Jun can do","lead":0.9,"tail":1.0,"vo":[
  {"id":"wide","gap":0.8,"text":"Jun's rights are wide: he builds the project, and he reviews and approves its code."},
  {"id":"all","gap":0.8,"text":"On his sign-in, his helper can do all of that, at every stage."},
  {"id":"friday","gap":0.8,"text":"Friday, the sixteenth of October."},
- {"id":"ticket","gap":0.8,"text":"The helper is drafting Planning's ticket for Monday's board: a change to Students near an award."},
- {"id":"waits","gap":0.8,"text":"Its change waits on a fix the census agent has proposed, in review for Jun."},
- {"id":"next","gap":0.8,"text":"The fix's checks have passed. The helper's next step: approve it, as Jun Park."},
+ {"id":"ticket","gap":0.8,"text":"The helper is drafting Planning's ticket for Monday's board: a new mart of teaching staff by school."},
+ {"id":"waits","gap":0.8,"text":"Its change waits on a fix to the count of who teaches in each school."},
+ {"id":"whose","gap":0.8,"text":"Anil Kurian's workload agent, which has a name of its own, proposed that fix."},
+ {"id":"review","gap":0.8,"text":"It's in review for Jun, and its checks have passed."},
+ {"id":"next","gap":0.8,"text":"The helper's next step: approve it, as Jun Park."},
  {"id":"step","gap":0.8,"text":"It's the thirty-eighth step Jun has been asked to allow that day."},
  {"id":"no","gap":0.8,"text":"He reads it, and says no."},
  {"id":"monday","gap":0.8,"text":"On Monday he reviews the fix himself, and Noor approves it for production."},
@@ -53,8 +55,9 @@ const NARR={
 "who":{"name":"Who did what?","lead":0.9,"tail":1.0,"vo":[
  {"id":"reads","gap":0.8,"text":"On a person's sign-in, every step reads as that person's."},
  {"id":"log","gap":0.8,"text":"Jun's log says Jun, for what he did and for what his helper did."},
- {"id":"mei","gap":0.8,"text":"Mei Tanaka's agent showed the same, on her personal key: the log couldn't tell her reads from her agent's."},
+ {"id":"anil","gap":0.8,"text":"The workload agent once ran on Anil's personal key, and the log couldn't tell his reads from his agent's."},
  {"id":"agent","gap":0.8,"text":"Had the helper approved, an agent's change would have been approved by an agent, with a person's name on it."},
+ {"id":"stop","gap":0.8,"text":"And the helper can't be narrowed or stopped on its own: to every tool, it is Jun."},
  {"id":"deputy","gap":0.3,"text":"In 1988, a computer scientist, Norm Hardy, called this a confused deputy:","say":"In nineteen eighty-eight, a computer scientist, Norm Hardy, called this a confused deputy:"},
  {"id":"purpose","gap":0.8,"text":"a program that acts for someone, with their rights, for a purpose that isn't theirs."},
  {"id":"hands","gap":0.8,"text":"And in the wrong hands, it's more dangerous still."},
@@ -74,7 +77,9 @@ const NARR={
 ]},
 "checked":{"name":"Allowed, then checked","lead":0.9,"tail":1.0,"vo":[
  {"id":"allow","gap":0.8,"text":"At the second stage, Jun still allows each step."},
- {"id":"now","gap":0.8,"text":"Now each step is a read, or a draft in its sandbox, and none of them can approve."},
+ {"id":"setting","gap":0.8,"text":"A helper's own setting can make it ask before each step, or go on without asking."},
+ {"id":"boundary","gap":0.8,"text":"One maker calls such a setting a productivity feature, not a security boundary."},
+ {"id":"now","gap":0.8,"text":"So the boundary is in its tools: each step is now a read, or a draft in its sandbox."},
  {"id":"third","gap":0.8,"text":"At the third, it works alone, within a plan whose checks are set before it starts."},
  {"id":"written","gap":0.8,"text":"Its allowed and blocked actions are written on the plan, and its evidence comes with its result."},
  {"id":"against","gap":0.8,"text":"Jun checks the result against the plan's checks, and Noor approves whatever reaches production."},
@@ -91,6 +96,7 @@ const NARR={
  {"id":"paid","gap":0.8,"text":"That took every letter paying its own way."},
  {"id":"team","gap":0.8,"text":"A helper that works for the team, not beside one person, needs the same: a name of its own."},
  {"id":"planning","gap":0.8,"text":"That same Monday, Planning's tickets passed to the planning agent, a contributor with its own name, owned by Clara Jensen."},
- {"id":"next","gap":0.8,"text":"How it earned that name is where this series goes next."}
+ {"id":"map","gap":0.8,"text":"Before it took a single ticket, it was given a place on the university's map, like every colleague."},
+ {"id":"next","gap":0.8,"text":"How that place is made is where this series goes next."}
 ]}
 };

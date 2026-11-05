@@ -1,8 +1,8 @@
 {
   "key": "borrowed-rights",
   "title": "Borrowed rights",
-  "sub": "Film 2 of 7 of From helper to colleague: an AI helper on a person's sign-in, and how to narrow it. In Britain before 1840, a member of parliament's name on a letter's cover let it travel free, so whoever held a signed cover held his privilege. Jun's helper drafts Planning's tickets on his sign-in, with everything Jun may do, until one step asks to approve a change as Jun; narrowed to a development workspace, tools that only read, a sandbox and masked samples, it learns safely, and once it works for the team, it needs a name of its own.",
-  "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (the tools that only read, the sandbox, what stays Jun's), violet the model thinking (the helper's band, its next step), orange data coming back, green a check that passes, and amber something wrong (the step that would approve as Jun, the record that would have said so, the words hidden in a ticket). The red of 1840 is the post office's own ink.",
+  "sub": "Film 2 of 7 of From helper to colleague: an AI helper on a person's sign-in, and how to narrow it. In Britain before 1840, a member of parliament's name on a letter's cover let it travel free, so whoever held a signed cover held his privilege. Jun's helper drafts Planning's tickets on his sign-in, with everything Jun may do, until one step asks to approve another agent's fix as Jun; narrowed to a development workspace, tools that only read, a sandbox and masked samples, it learns safely, and once it works for the team, it needs a name of its own.",
+  "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (the tools that only read, the sandbox, what stays Jun's), violet the model thinking (the helper's band, its next step), orange data coming back, green a check that passes, and amber something wrong (the step that would approve as Jun, the record that would have said so, the words hidden in a ticket). Each helper wears its person's badge, and an agent with a name of its own wears its own. The red of 1840 is the post office's own ink, and the wax of the seals.",
   "src": [
     "frank.js",
     "pieces.js",
@@ -23,8 +23,12 @@
       "Joon"
     ],
     [
-      "\\bMei\\b",
-      "May"
+      "\\bAnil Kurian\\b",
+      "Unnil Coo-rean"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
     ],
     [
       "\\bNoor\\b",

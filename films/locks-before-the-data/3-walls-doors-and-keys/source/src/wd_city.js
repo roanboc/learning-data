@@ -6,6 +6,7 @@
      wdGate, wdGateNight                     a gate in the walls, from the quay outside (one room)
      wdStreet, wdStreetNight                 the street up from the gate to the rector's palace (one room)
      wdCouncil                               the Great Council's hall
+     wdTable                                 the table where the law is written, from just above
      wdCoast                                 the coast as a frosted map: the city, the open sea, Mrkan and Cavtat
    What moves is drawn live over them: ships, the gates' light and their doors, small people far off (wd_walker), lanterns, the haze
    of the sickness (coral, the module's colour for what must be kept out), windows going dark, the moon, the council's parchment. */
@@ -299,7 +300,7 @@ const WD_ST={vx:960,hz:470,g:610,top:1600,half:700};
 // a point of the street: side -1 the left fronts, 1 the right, 0 the middle of the paving; h the height (0 the ground, 1 the roofs)
 function wd_st(side,h,z,dx){const S=WD_ST;return[S.vx+(side*S.half+(dx||0))/z,S.hz+(S.g-h*S.top)/z];}
 // the windows: small openings, irregular, three floors on each house; each knows its house's depth and floor
-const WD_SWIN=(()=>{const L=[],R=ag_rnd(9);for(const side of [-1,1])for(const z of [0.9,1.08,1.3,1.56,1.86,2.2,2.6,3.04,3.5])for(const h of [0.36,0.56,0.76]){if(R()<0.12)continue;
+const WD_SWIN=(()=>{const L=[],R=ag_rnd(9);for(const side of [-1,1])for(const z of [0.9,1.08,1.3,1.56,1.86,2.2,2.6,3.04])for(const h of [0.36,0.56,0.76]){if(R()<0.12)continue;
   const wz=0.032*z*z;L.push({side,z:z+R()*0.04*z,h:h+(R()-0.5)*0.03,wz,hh:0.07});}return L;})();
 function wd_quad(c,side,h0,h1,z0,z1){const a=wd_st(side,h1,z0),b=wd_st(side,h1,z1),d=wd_st(side,h0,z1),e=wd_st(side,h0,z0);c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.lineTo(d[0],d[1]);c.lineTo(e[0],e[1]);c.closePath();}
 function wd_paintStreet(c,tod){const T=WD_TOD[tod],k=T.f*0.86,R=ag_rnd(1417);
@@ -323,9 +324,9 @@ function wd_paintStreet(c,tod){const T=WD_TOD[tod],k=T.f*0.86,R=ag_rnd(1417);
   c.save();c.clip();c.strokeStyle="rgba(10,14,16,0.35)";c.lineWidth=1.4;for(let z=0.7;z<4;z*=1.09){const a=wd_st(-1,0,z),b=wd_st(1,0,z);c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();}
   for(let i=-6;i<=6;i++){const a=wd_st(0,0,0.7,i*120),b=wd_st(0,0,4,i*120);c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();}
   c.globalCompositeOperation="lighter";const sh=c.createLinearGradient(700,0,1220,0);sh.addColorStop(0,"rgba(150,200,205,0)");sh.addColorStop(0.5,"rgba(150,200,205,0.08)");sh.addColorStop(1,"rgba(150,200,205,0)");c.fillStyle=sh;c.fillRect(0,600,W,480);c.restore();
-  // the rector's palace across the far end, wider than the street: an arcade of five round arches on columns, a row of paired
+  // the rector's palace across the far end of the street: an arcade of five round arches on columns, a row of paired
   // windows over it, a cornice and the roof
-  const pl=[wd_st(-1,0,4)[0]-60,wd_st(-1,0,4)[1]],pr=[wd_st(1,0,4)[0]+60,0],pt=wd_st(-1,1.02,4)[1],ar=wd_st(-1,0.36,4)[1],pw=pr[0]-pl[0];
+  const pl=[wd_st(-1,0,4)[0],wd_st(-1,0,4)[1]],pr=[wd_st(1,0,4)[0],0],pt=wd_st(-1,1.02,4)[1],ar=wd_st(-1,0.36,4)[1],pw=pr[0]-pl[0];
   g=c.createLinearGradient(0,pt,0,pl[1]);g.addColorStop(0,rgba(wd_sc([140,134,120],k*0.8),1));g.addColorStop(1,rgba(wd_sc([110,104,94],k*0.8),1));c.fillStyle=g;c.fillRect(pl[0],pt,pw,pl[1]-pt);
   c.fillStyle=rgba(wd_sc([96,66,56],k*0.8),1);c.fillRect(pl[0]-10,pt-16,pw+20,18);c.fillStyle=rgba(WD.ice,0.14);c.fillRect(pl[0]-10,pt-16,pw+20,1.2);
   c.fillStyle=rgba(wd_sc([120,114,102],k*0.75),1);c.fillRect(pl[0],ar-12,pw,10);
@@ -340,7 +341,7 @@ AG_ROOMS.wdStreetNight="wdStreet";
 function wd_streetWindows(ctx,lit){ctx.save();WD_SWIN.forEach((w,i)=>{const a=lit(i,w);if(a<=0)return;wd_quad(ctx,w.side,w.h,w.h+w.hh,w.z,w.z+w.wz);ctx.fillStyle=rgba(mix([30,28,26],mix(WD.warm,[230,160,90],0.3),a*0.92),1);ctx.fill();
   const m=wd_st(w.side,w.h+w.hh/2,w.z+w.wz/2);ctx.save();ctx.globalCompositeOperation="lighter";wd_glow(ctx,m[0],m[1],110/w.z,WD.warm,0.12*a);ctx.restore();});ctx.restore();}
 // the palace's arcade lit from within (a), its door in the middle arch (open 1, shut 0), and one window lit over it (w)
-function wd_palace(ctx,a,open,w){const pl=[wd_st(-1,0,4)[0]-60,wd_st(-1,0,4)[1]],pr=[wd_st(1,0,4)[0]+60,0],pt=wd_st(-1,1.02,4)[1],ar=wd_st(-1,0.36,4)[1],pw=pr[0]-pl[0];
+function wd_palace(ctx,a,open,w){const pl=[wd_st(-1,0,4)[0],wd_st(-1,0,4)[1]],pr=[wd_st(1,0,4)[0],0],pt=wd_st(-1,1.02,4)[1],ar=wd_st(-1,0.36,4)[1],pw=pr[0]-pl[0];
   for(let i=0;i<5;i++){const aw=pw/5,ax=pl[0]+i*aw+aw*0.14,wd=aw*0.72;ctx.save();ctx.beginPath();wd_archPath(ctx,ax,pl[1],wd,pl[1]-ar);ctx.clip();
     if(a>0){const g=ctx.createLinearGradient(0,ar,0,pl[1]);g.addColorStop(0,rgba(mix([24,22,20],[110,82,56],a),1));g.addColorStop(1,rgba(mix([24,22,20],[150,112,74],a),1));ctx.fillStyle=g;ctx.fillRect(ax,ar,wd,pl[1]-ar);}
     if(i===2){const dw=wd*0.62,dx=ax+wd*0.19,dh=(pl[1]-ar)*0.66,u=clamp(open,0,1);ctx.fillStyle="rgb(20,16,14)";ctx.fillRect(dx,pl[1]-dh,dw,dh);
@@ -383,6 +384,15 @@ function wd_paintCouncil(c){const R=ag_rnd(1377),vx=960,vy=430;
   c.fillStyle="rgb(46,36,28)";c.beginPath();c.moveTo(380,880);c.lineTo(1540,880);c.lineTo(1660,H);c.lineTo(260,H);c.closePath();c.fill();
   c.fillStyle="rgba(200,230,230,0.12)";c.fillRect(380,880,1160,2);}
 AG_PLACES.wdCouncil=c=>wd_paintCouncil(c);
+// the table where the law is written, from just above: dark oak boards, warm in a candle's light (the parchment and the candle are
+// drawn live, wd_parchment)
+function wd_paintTable(c){const R=ag_rnd(27);let g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgb(34,24,18)");g.addColorStop(1,"rgb(22,16,12)");c.fillStyle=g;c.fillRect(0,0,W,H);
+  for(let y=-40;y<H;y+=118){const k=0.85+R()*0.3;c.fillStyle=rgba(wd_sc([58,40,28],k),1);c.fillRect(0,y+2,W,114);
+    c.strokeStyle="rgba(20,12,8,0.35)";c.lineWidth=1.2;for(let i=0;i<9;i++){const yy=y+10+R()*96,ph=R()*6;c.beginPath();c.moveTo(0,yy);for(let x=0;x<=W;x+=60)c.lineTo(x,yy+Math.sin(x*0.004+ph)*4+R()*1.5);c.stroke();}
+    c.fillStyle="rgba(8,5,3,0.7)";c.fillRect(0,y,W,3);c.fillStyle="rgba(255,220,180,0.05)";c.fillRect(0,y+3,W,1.2);}
+  c.save();c.globalCompositeOperation="lighter";wd_glow(c,1450,250,900,[255,190,120],0.15);wd_glow(c,1000,480,760,[255,190,120],0.06);c.restore();
+  const v=c.createRadialGradient(1000,480,300,960,540,1200);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.62)");c.fillStyle=v;c.fillRect(0,0,W,H);}
+AG_PLACES.wdTable=c=>wd_paintTable(c);
 // the law on its parchment, on the table: a few lines of writing as texture (no words to read), the seal pressed at p (0 to 1), and
 // a candle; at (x, y) its top left, w wide
 function wd_parchment(ctx,x,y,w,a,seal,t){if(a<=0)return;const h=w*0.62;ctx.save();ctx.globalAlpha*=a;

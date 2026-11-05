@@ -3,15 +3,15 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Eight series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Ten series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
 governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
-(films/what-an-agent-is/, at what-an-agent-is/) and Agents at work on data (films/agents-at-work-on-data/, at
-agents-at-work-on-data/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+(films/what-an-agent-is/, at what-an-agent-is/), Agents at work on data (films/agents-at-work-on-data/, at
+agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -64,7 +64,8 @@ def series_link(lg, RE, sid):
 # (in Where next? and beside the series' films) once that series has a film on the site;
 # blocks: the hand-written pages that show its first film's card, between <!-- <id>: made by site-tools/build_series.py --> and
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder);
-# project: the folder under films/ whose example project its films show (its own folder if not given).
+# project: the folder under films/ whose example project its films show (its own folder if not given); built: the id of the series
+# that built that project, which each film's See it in the project names for how it was built (none if not given).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work.
@@ -109,7 +110,12 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], next="agents-at-work-on-data"),
     dict(id="agents-at-work-on-data", dir="agents-at-work-on-data", slug="agents-at-work-on-data",
          name={"en": "Agents at work on data", "es": "Agentes trabajando con datos"},
-         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         next="from-helper-to-colleague"),
+    dict(id="from-helper-to-colleague", dir="from-helper-to-colleague", slug="from-helper-to-colleague",
+         name={"en": "From helper to colleague", "es": "De ayudante a colega"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -311,7 +317,7 @@ TOPICS = [
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
                "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
-    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data"],
+    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data", "from-helper-to-colleague"],
          name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
          who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
          line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",
@@ -582,6 +588,8 @@ def project_section(lg, f):
     if not repo:
         return ""
     names = dict(f["chapters"]) if lg == "en" else {k: f["site"]["chapters_es"].get(k, v) for k, v in f["chapters"]}
+    built = f["series"].get("built")  # the series that built the project: how it was built is told there (a film page is two below its root)
+    how = (T(lg, " How it was built, step by step, is told in ", " Cómo se construyó, paso a paso, lo cuenta ") + series_link(lg, "../../", built) + ".") if built else ""
     rows = []
     for cid, _ in f["chapters"]:
         paths = repo.get(cid)
@@ -589,7 +597,7 @@ def project_section(lg, f):
             links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(x)}</code></a>' for x in paths)
             rows.append(f'<li><b>{E(names[cid])}</b><span>{links}</span></li>')
     return (f'<section class="module" id="in-the-project" aria-labelledby="project-h">\n<div class="mhead"><div><h2 id="project-h">{T(lg, "See it in the project", "Míralo en el proyecto")}</h2>'
-            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}</p></div></div>\n'
+            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}{how}</p></div></div>\n'
             f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>\n</section>\n\n')
 
 

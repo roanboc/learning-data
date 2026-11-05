@@ -1,0 +1,32 @@
+{
+  "kicker": "Agents on the platform",
+  "kicker_es": "Agentes en la plataforma",
+  "title_es": "Trabajar con agentes en Databricks",
+  "h1": "Working with agents on Databricks: one place, one answer",
+  "h1_es": "Trabajar con agentes en Databricks: un lugar, una respuesta",
+  "lead": "At the Faculty of Health, three people ask their own agents how many students Health had on census day, and get 2,160, 2,911 and 2,880, with nothing to show what each read. Sam and Jun bring the agents to Databricks, to the same governed data and tools. A week later, all three say 2,880.",
+  "lead_es": "En la Facultad de Salud, tres personas les preguntan a sus agentes cuántos estudiantes tenía Salud en el día del censo, y reciben 2,160, 2,911 y 2,880, sin nada que muestre qué leyó cada uno. Sam y Jun llevan los agentes a Databricks, a los mismos datos y herramientas. Una semana después, los tres dicen 2,880.",
+  "description": "A film about working with agents on Databricks, the seventh of Agents at work on data: three people in the Faculty of Health, each with their own agent and their own copy of the data, ask how many students Health had on census day, and get 2,160 (student load read as people), 2,911 (a joint degree counted in Health) and 2,880, with nothing to show what each read; Sam and Jun bring the agents to the data on Databricks, where every agent reads the same governed tables, definitions and tools as everyone else, and only what its person may read; the four ways agents work there: agents that answer (Genie One, and the team's Census day Genie Agent with its instructions and benchmarks), tool servers any agent can use (queries, a governed function, document search, and Genie's own), agents the team builds and tests (a census check agent, made with Agent Bricks and run by Agent Runtime), and agents that write code (Genie Code and Jun's own agent, reading the team's skills, their work a draft that a second person approves); and a week later, one answer from all three, 2,880, with its evidence.",
+  "description_es": "Una película sobre trabajar con agentes en Databricks, la séptima de Agentes trabajando con datos: tres personas de la Facultad de Salud, cada una con su propio agente y su propia copia de los datos, preguntan cuántos estudiantes tenía Salud en el día del censo, y reciben 2,160 (la carga estudiantil leída como personas), 2,911 (una carrera conjunta contada en Salud) y 2,880, sin nada que muestre qué leyó cada uno; Sam y Jun llevan los agentes a los datos en Databricks, donde cada agente lee las mismas tablas gobernadas, definiciones y herramientas que todos, y solo lo que su persona puede leer; las cuatro maneras en que los agentes trabajan ahí: agentes que responden (Genie One, y el Genie Agent Census day del equipo, con sus instrucciones y sus benchmarks), servidores de herramientas que cualquier agente puede usar (consultas, una función gobernada, búsqueda en documentos y los de Genie), agentes que el equipo construye y prueba (un agente que revisa el censo, hecho con Agent Bricks y ejecutado por Agent Runtime) y agentes que escriben código (Genie Code y el propio agente de Jun, que leen las habilidades del equipo, y cuyo trabajo es un borrador que aprueba una segunda persona); y una semana después, una sola respuesta de los tres, 2,880, con su evidencia.",
+  "card": "Three agents with their own copies give three answers. On Databricks, with the same data and tools, all three say 2,880.",
+  "card_es": "Tres agentes con sus propias copias dan tres respuestas. En Databricks, con los mismos datos y herramientas, los tres dicen 2,880.",
+  "chapters_es": {
+    "three": "Tres respuestas",
+    "place": "Un solo lugar",
+    "ask": "Agentes que responden",
+    "tools": "Herramientas que cualquier agente puede usar",
+    "build": "Agentes que construye el equipo",
+    "code": "Agentes que escriben código",
+    "same": "La misma respuesta"
+  },
+  "past": [
+    "The Faculty of Health, today",
+    "When every agent reads the same governed data through the same tools, one question gets one answer, with its evidence."
+  ],
+  "past_es": [
+    "La Facultad de Salud, hoy",
+    "Cuando cada agente lee los mismos datos gobernados con las mismas herramientas, una pregunta tiene una sola respuesta, con su evidencia."
+  ],
+  "next_h": "You've seen agents work on Databricks with the same data and tools as people. Next: when an agent reads on its own, whose reads are they, and who pays for its model?",
+  "next_h_es": "Viste a los agentes trabajar en Databricks con los mismos datos y herramientas que las personas. Después: cuando un agente lee por su cuenta, ¿de quién son esas lecturas, y quién paga su modelo?"
+}

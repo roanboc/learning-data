@@ -17,6 +17,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 | [Memory: from one chat to the team](https://data.learn-all.org/agents-at-work-on-data/memory-for-the-team/) | Memory for the team | 7½ min | 7 | 4 questions | [script](4-memory-for-the-team/script.md) · [source](4-memory-for-the-team/source/README.md) |
 | [Plan, define the check, do, check](https://data.learn-all.org/agents-at-work-on-data/plan-check-do-check/) | The work cycle | 7½ min | 8 | 4 questions | [script](5-plan-check-do-check/script.md) · [source](5-plan-check-do-check/source/README.md) |
 | [How it goes wrong](https://data.learn-all.org/agents-at-work-on-data/how-it-goes-wrong/) | Designing for failure | 7½ min | 8 | 3 questions | [script](6-how-it-goes-wrong/script.md) · [source](6-how-it-goes-wrong/source/README.md) |
+| [Working with agents on Databricks](https://data.learn-all.org/agents-at-work-on-data/agents-on-databricks/) | Agents on the platform | 7½ min | 7 | 3 questions | [script](7-agents-on-databricks/script.md) · [source](7-agents-on-databricks/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

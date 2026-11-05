@@ -671,6 +671,11 @@ async def check_players(run):
               document.body.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true})); const c = FILM.time();
               return {a, b, c, cue: document.querySelector('.seek-cue.r.on') !== null || document.querySelector('.seek-cue.l.on') !== null}; }""")
             expect(sec, abs(r["a"] - 70) < 0.5 and abs(r["b"] - 50) < 0.5 and abs(r["c"] - 60) < 0.5 and r["cue"], f"{where}: back and forward 10 s don't seek ({r}; want 70, 50, 60 and a cue)")
+            # play speed (seek.js): the button steps 1× → 1.25× → 1.5× and sets the soundtrack's rate, which the film's clock follows
+            r = await pg.evaluate("""() => { const b = document.getElementById('speed'), au = document.getElementById('snd'), x = [];
+              for (let i = 0; i < 2; i++) { b.click(); x.push(au.playbackRate); } for (let i = 0; i < 4; i++) b.click();
+              return {x, back: au.playbackRate}; }""")
+            expect(sec, r["x"] == [1.25, 1.5] and r["back"] == 1, f"{where}: the speed button doesn't set the speed ({r}; want 1.25, 1.5, then back to 1)")
             # captions
             await pg.click("#cc")
             off = await pg.get_attribute("#cc", "aria-pressed")

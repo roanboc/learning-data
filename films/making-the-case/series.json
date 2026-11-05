@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "Making the case",
+  "title_es": "Construir el caso",
+  "planned": 4,
+  "lead": "The second series of Data management. The old warehouse costs A$310,000 a year, and 17 of its 38 reports are never opened. Helena makes the case to retire it, names its risks out loud, brings fourteen stakeholders to the table, and puts every request on one list, ordered in the open.",
+  "lead_es": "La segunda serie de Gestión de datos. El viejo almacén de datos cuesta 310.000 dólares australianos al año, y 17 de sus 38 reportes nunca se abren. Helena presenta el caso para retirarlo, dice sus riesgos en voz alta, sienta a la mesa a catorce partes interesadas y pone cada solicitud en una sola lista, ordenada a la vista de todos.",
+  "description": "Short films on winning support for data work and keeping it: a business case with options, costs once and running, benefits with owners and one clear ask; a risk register that lives, with owners, responses and early signs; stakeholders mapped by what each needs from data, told the same story every month; and one front door and one list for all the data work, ordered in the open by value, urgency, effort and risk.",
+  "description_es": "Películas cortas sobre cómo conseguir apoyo para el trabajo con datos y conservarlo: un caso de negocio con opciones, costos únicos y recurrentes, beneficios con dueño y una petición clara; un registro de riesgos vivo, con dueños, respuestas y señales tempranas; las partes interesadas en un mapa según lo que cada una necesita de los datos, con la misma historia cada mes; y una sola puerta de entrada y una sola lista para todo el trabajo con datos, ordenada a la vista de todos por valor, urgencia, esfuerzo y riesgo.",
+  "card": "A case on one page, risks said out loud, everyone at the table, and one list for all the work.",
+  "card_es": "Un caso en una página, los riesgos en voz alta, todos en la mesa y una sola lista para todo el trabajo.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: retiring the old warehouse, with everyone on board",
+  "thread_h_es": "Un hilo: retirar el viejo almacén de datos, con todos a bordo",
+  "thread": "The old warehouse has run on the university's own servers since 2012; it costs A$310,000 a year, and its licence ends on 31 December 2027. On 25 May Helena, with Finance, asks the data council for A$380,000 to move the 21 reports people use onto the platform and retire the rest. Then she keeps the case on track: eight risks with owners, fourteen stakeholders with a line each on one monthly page, and, from 7 June, one front door and one list for every request.",
+  "thread_es": "El viejo almacén de datos funciona en los servidores de la universidad desde 2012; cuesta 310.000 dólares australianos al año, y su licencia vence el 31 de diciembre de 2027. El 25 de mayo Helena, con Finanzas, pide al consejo de datos 380.000 dólares australianos para llevar a la plataforma los 21 reportes que la gente usa y retirar el resto. Luego mantiene el caso en marcha: ocho riesgos con dueño, catorce partes interesadas con una línea cada una en una página mensual y, desde el 7 de junio, una sola puerta de entrada y una sola lista para cada solicitud.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Checks the money",
+      "Rohan Desai, Finance's management accountant, who checks every figure in the case before it goes to the data council"
+    ],
+    [
+      "biz",
+      "Owns HR's data",
+      "Ingrid Holm, in HR, who makes sure HR's reports move only once payroll's busiest weeks are over"
+    ],
+    [
+      "biz",
+      "Waits her turn",
+      "Clara Jensen, in Planning, whose request for a forecast goes on the one list, with a reason and a date"
+    ],
+    [
+      "tech",
+      "Makes the case",
+      "Helena Novak, the data manager, who asks for the money, names the risks and keeps everyone on one page"
+    ],
+    [
+      "tech",
+      "Guards personal data",
+      "Yusuf Demir, the data governance lead, who owns the risks to personal data in the move"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Revisa el dinero",
+      "Rohan Desai, contador de gestión de Finanzas, que revisa cada cifra del caso antes de que llegue al consejo de datos"
+    ],
+    [
+      "biz",
+      "Es dueña de los datos de RR. HH.",
+      "Ingrid Holm, de RR. HH., que se asegura de que los reportes de RR. HH. se muevan solo cuando acaben las semanas de más trabajo de nómina"
+    ],
+    [
+      "biz",
+      "Espera su turno",
+      "Clara Jensen, de Planificación, cuya solicitud de una previsión entra en la lista única, con un motivo y una fecha"
+    ],
+    [
+      "tech",
+      "Presenta el caso",
+      "Helena Novak, la gestora de datos, que pide el dinero, nombra los riesgos y mantiene a todos en la misma página"
+    ],
+    [
+      "tech",
+      "Protege los datos personales",
+      "Yusuf Demir, responsable de gobernanza de datos, que es dueño de los riesgos para los datos personales en el traslado"
+    ]
+  ]
+}

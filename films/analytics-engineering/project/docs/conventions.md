@@ -306,3 +306,18 @@ gets a mask, so only that group sees the value. Nothing repeats the class: chang
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
 read a table, the access review, the product catalogue, and agents under the same rules: `docs/databricks-governance.md`.
+
+### What each use needs
+
+Quality is fitness for a use, so a model other teams read can say what each of its uses needs.
+Each use is an exposure. In the model's YAML, `meta.quality` holds one requirement per use: its
+`name`, the exposure it's for (`use`), the `dimension` it's about (DAMA's six), a `description`,
+the `level` agreed (`Zero wrong`, `Within 2% at each ceremony`), who it was agreed with
+(`agreed_with`) and what goes wrong when it isn't met (`business_impact`). The model's owner owns
+the levels. A column a use can't do without names that use in `meta.critical_for`: the use's
+critical data. `scripts/generate/products.py` writes each requirement into the contract as a
+quality rule in words (`type: text`), with its use, level and who agreed it, until a check
+measures it, and each critical column as a critical data element (`criticalDataElement: true`).
+On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
+Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
+is the first.

@@ -11,6 +11,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Borrowed rights](https://data.learn-all.org/from-helper-to-colleague/borrowed-rights/) | On a person's sign-in | 8½ min | 7 | 3 questions | [script](2-borrowed-rights/script.md) · [source](2-borrowed-rights/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

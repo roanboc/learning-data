@@ -40,7 +40,7 @@ The chapters don't depend on TCSI. To make an internal version with your own ref
 
 ## How it was made
 
-Like *The Inner Life of Data*, it is generated entirely from code, and it draws with that film's components and engine, so the two look like one world. The source and the rebuild steps are in [source/](source/).
+Like *The Inner Life of Data*, it is generated entirely from code, and it draws with that film's components and engine, so the two look like one world. The source and the rebuild steps are in [source/](source/). Where one chapter fades into the next, nothing shows twice: *Check, adopt, extend, record* shows the same words in another place, so what was there leaves first, and then the chapter comes in (5 November 2026: `CHAPTER_JOINS` in `source/src/scenes.js`, read by From words to data's `shared/src/joins.js`; `source/tools/check.py` runs the governance films' `twice.py` on every join).
 
 The film carries no number. It opens with the recap "In The Inner Life of Data, we drew a sketch of the university: a student, a class, an enrolment, a term and a course." The board reads "Conceptual model · the sketch we drew", and the end card "Learning Data · Data modelling".
 

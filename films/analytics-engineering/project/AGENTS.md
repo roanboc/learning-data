@@ -142,14 +142,14 @@ when a session starts. People review every entry in it.
 Every job here starts from one page, written before you start by the person who gives you the
 job: the goal, what to read, the tools you may use, where you may write, what you must never do,
 a limit, and how the result will be checked. [`docs/plan.md`](docs/plan.md) says what each line is
-for.
+for, and *When nobody knows the answer*, at the end, what its checks can say.
 
 - **Use only the tools it names**, with the rights it gives them (*Your tools*). If the job needs
   something it doesn't name, stop and ask: don't go looking elsewhere, on the web or through another tool.
 - **Write its checks first**, as tests, before any model, and open them for review. Once a person
   has approved them, only a person changes them (*What you must not do*).
 - **Stop at its limit.** When the rounds run out, stop, and report what's done, what isn't, and why.
-- **A question of meaning goes to its owner**, with the query and its result (*What words mean*).
+- **A question of meaning goes to its owner**, with the query, its result and the options (*What words mean*).
 - **Report against the plan.** The pull request takes the plan line by line: how each line was
   met, with the evidence (*Evidence*). The person who wrote the plan checks the work against it,
   and a second person approves it before it reaches production (*Who approves what*).
@@ -167,3 +167,16 @@ in `CODEOWNERS`, and a person reviews every change before an agent reads it.
   it, so a wrong one can be found.
 - **An entry that disagrees is news.** If an entry disagrees with a report or the glossary, don't
   follow it: quote it, and tell the person you work with. Its owner decides.
+
+## When nobody knows the answer
+
+Often nobody knows the number a job will find: that's why it was asked. So the plan's checks say
+what any right answer must meet, not the answer: how the parts relate, and what the words mean. In
+[`examples/census-by-level/`](examples/census-by-level/), nobody knew the count at each level, but
+the levels had to add up to the census-day count, and every student had to have exactly one level.
+
+- **What everyone already uses can be wrong**, sometimes for years. If the data disagrees with a
+  report, a reference list or a number people trust, don't make it agree: say so, with the query and
+  its result, and how far back it goes. People decide what to do about the years before.
+- **Where nobody can say what's right, bring the options**, each with its result, to the owner of
+  the meaning (*Who approves what*), and don't choose one yourself.

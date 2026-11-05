@@ -120,6 +120,10 @@ function pc_bottle(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
   ctx.fillStyle="rgba(255,255,255,0.6)";ctx.beginPath();ag_rect(ctx,w/2-w*0.2,-body+w*0.1,w*0.09,body*0.78,w*0.05);ctx.fill();
   // the mark: a small line etched on the glass
   const my=-body*line;ctx.strokeStyle="rgba(60,64,70,0.85)";ctx.lineWidth=Math.max(1.6,h/70);ctx.beginPath();ctx.moveTo(-w/2-2,my);ctx.lineTo(-w/2+w*0.32,my);ctx.stroke();
+  // o.mark (0 to 1): the mark picked out, a soft light along it and a short line on across the glass, as what the water must reach
+  const mk=clamp(o.mark||0,0,1);if(mk>0.01){ctx.save();ctx.lineCap="round";ctx.strokeStyle="rgba(255,255,255,"+0.7*mk+")";ctx.lineWidth=Math.max(6,h/22);
+    ctx.beginPath();ctx.moveTo(-w/2-8,my);ctx.lineTo(w/2+8,my);ctx.stroke();ctx.strokeStyle="rgba(60,64,70,"+0.8*mk+")";ctx.lineWidth=Math.max(1.6,h/70);
+    ctx.setLineDash([h/40,h/50]);ctx.beginPath();ctx.moveTo(-w/2+w*0.32,my);ctx.lineTo(w/2+8,my);ctx.stroke();ctx.restore();}
   // the cap ring
   ctx.fillStyle="rgba(150,160,162,0.7)";ctx.fillRect(-nk*0.7,-h+h*0.01,nk*1.4,h*0.035);
   if(o.pour>0.01){ctx.strokeStyle=rgba(pc_shade(PC_SEA,0.8),0.9*clamp(o.pour,0,1));ctx.lineWidth=Math.max(3,h/45);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(0,-h-h*0.7);ctx.lineTo(0,-lvl);ctx.stroke();}

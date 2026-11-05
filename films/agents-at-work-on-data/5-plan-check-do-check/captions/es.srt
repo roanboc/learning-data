@@ -99,181 +99,221 @@ Nada en el agente estaba roto: usó lo que pudo encontrar, porque nadie le habí
 La mayor parte del desperdicio con agentes empieza aquí, con un plan que no dice qué puede usar el agente.
 
 26
-00:02:59,051 --> 00:03:06,286
-Ahora Clara, de Planificación, pide algo nuevo: el conteo del día del censo por nivel de estudio, para el informe al gobierno.
+00:02:59,051 --> 00:03:05,457
+Ahora Clara, de Planificación, pide el conteo del día del censo por nivel de estudio, para el informe al gobierno.
 
 27
-00:03:07,386 --> 00:03:10,164
+00:03:06,557 --> 00:03:09,335
 Antes de que el agente empiece, Jun escribe una página.
 
 28
-00:03:11,464 --> 00:03:16,472
+00:03:10,635 --> 00:03:15,643
 El objetivo: estudiantes el día del censo, por nivel, pregrado y posgrado.
 
 29
-00:03:17,572 --> 00:03:24,928
+00:03:16,743 --> 00:03:24,099
 Qué leer: las palabras del glosario para estudiante, día del censo y nivel de estudio, y el conteo del día del censo en que se basa.
 
 30
-00:03:26,028 --> 00:03:29,654
+00:03:25,199 --> 00:03:28,825
 Las herramientas que puede usar: Catalog, Query y Docs, de solo lectura.
 
 31
-00:03:30,754 --> 00:03:33,882
+00:03:29,925 --> 00:03:33,053
 Dónde puede escribir: solo en su propia rama, y en su entorno aislado.
 
 32
-00:03:34,982 --> 00:03:39,842
+00:03:34,153 --> 00:03:39,013
 Lo que nunca debe hacer: leer nombres o códigos de estudiante, ni escribir en producción.
 
 33
-00:03:41,142 --> 00:03:44,132
+00:03:40,313 --> 00:03:43,303
 Y un límite: diez rondas, y luego se detiene e informa.
 
 34
-00:03:48,032 --> 00:03:53,543
+00:03:47,203 --> 00:03:52,714
 Luego, la línea que más importa: cómo se verificará el resultado, decidido ahora, antes de cualquier trabajo.
 
 35
-00:03:54,643 --> 00:04:01,504
-Dos verificaciones: los niveles suman 18,412, el conteo que ya coincide con el informe del censo;
+00:03:54,214 --> 00:03:57,581
+Pero nadie sabe todavía la respuesta: por eso Clara la pidió.
 
 36
-00:04:01,704 --> 00:04:04,268
-y cada estudiante tiene exactamente un nivel.
+00:03:59,481 --> 00:04:02,762
+Lo que Jun sabe es lo que debe cumplir cualquier respuesta correcta:
 
 37
-00:04:05,368 --> 00:04:09,654
-El agente las escribe como pruebas, antes de cualquier modelo, y Jun las aprueba.
+00:04:02,962 --> 00:04:09,189
+los niveles suman 18,412, el conteo que ya coincide con el informe del censo;
 
 38
-00:04:10,954 --> 00:04:16,389
-Desde entonces, solo una persona puede cambiarlas, así que el agente no puede pasar moviendo la marca.
+00:04:09,389 --> 00:04:13,574
+y cada estudiante tiene exactamente un nivel, como lo define el glosario.
 
 39
-00:04:17,889 --> 00:04:22,637
-Como los 190 parámetros de Singapur, escritos antes de que la planta produjera agua.
+00:04:15,074 --> 00:04:20,780
+Ninguna dice cuántos estudiantes hay en cada nivel: verifican cómo se relacionan las partes y qué significan las palabras.
 
 40
-00:04:26,537 --> 00:04:30,841
-Ahora el agente trabaja, en su entorno aislado, solo con las herramientas que le dio el plan.
+00:04:23,080 --> 00:04:27,850
+El agente escribe las dos verificaciones como pruebas, antes de cualquier modelo, y Jun las aprueba.
 
 41
-00:04:31,741 --> 00:04:37,639
-Lee las tres palabras en Docs, encuentra las tablas en Catalog, y construye el conteo por nivel.
+00:04:29,550 --> 00:04:34,985
+Desde entonces, solo una persona puede cambiarlas, así que el agente no puede pasar moviendo la marca.
 
 42
-00:04:38,939 --> 00:04:44,742
-La primera ejecución falla una prueba: los dos niveles suman 18,384.
+00:04:36,885 --> 00:04:44,953
+Y lo que todos ya usan puede estar mal, a veces durante años: si los datos no coinciden, el agente lo dice, con su evidencia.
 
 43
-00:04:46,042 --> 00:04:47,686
-Faltan veintiocho estudiantes.
+00:04:47,153 --> 00:04:53,331
+Donde nadie puede decir qué es lo correcto, trae las opciones, cada una con su resultado, para que una persona elija.
 
 44
-00:04:48,786 --> 00:04:53,133
-Busca, con Query: el día del censo, 28 estudiantes no tienen nivel.
+00:04:55,631 --> 00:05:00,328
+Como los 190 parámetros de Singapur, escritos antes de que la planta produjera agua:
 
 45
-00:04:54,033 --> 00:04:57,838
-Son estudiantes de intercambio, que toman asignaturas sueltas, sin un título aquí.
+00:05:00,528 --> 00:05:04,226
+ninguno decía cuáles serían los resultados, solo lo que el agua debía cumplir.
 
 46
-00:04:58,938 --> 00:05:01,658
-No los descarta, y no toca la prueba.
+00:05:08,726 --> 00:05:13,030
+Ahora el agente trabaja, en su entorno aislado, solo con las herramientas que le dio el plan.
 
 47
-00:05:03,158 --> 00:05:07,344
-A qué nivel pertenecen es un significado, y los significados los decide Mei.
+00:05:13,930 --> 00:05:19,828
+Lee las tres palabras en Docs, encuentra las tablas en Catalog, y construye el conteo por nivel.
 
 48
-00:05:08,244 --> 00:05:11,566
-Así que se detiene, y le pregunta, con su consulta y el resultado.
+00:05:21,328 --> 00:05:27,131
+La primera ejecución falla una prueba: los dos niveles suman 18,384.
 
 49
-00:05:13,266 --> 00:05:17,730
-Mei revisa la lista del gobierno: cuentan como sin titulación, un nivel propio.
+00:05:28,431 --> 00:05:30,075
+Faltan veintiocho estudiantes.
 
 50
-00:05:19,030 --> 00:05:32,742
-El agente lo agrega, y corre las pruebas de nuevo: 13,906, 4,478 y 28 suman 18,412, y cada estudiante tiene un nivel.
+00:05:31,175 --> 00:05:35,522
+Busca, con Query: el día del censo, 28 estudiantes no tienen nivel.
 
 51
-00:05:33,842 --> 00:05:35,101
-Las dos pruebas pasan.
+00:05:36,422 --> 00:05:40,227
+Son estudiantes de intercambio, que toman asignaturas sueltas, sin un título aquí.
 
 52
-00:05:36,801 --> 00:05:42,411
-Escribe la descripción del modelo a partir del glosario, con su fuente, y abre una solicitud de cambio:
+00:05:41,327 --> 00:05:48,333
+Y no es nuevo: desde 2021, cuando los estudiantes de intercambio pasaron a un sistema propio, ninguno tiene nivel.
 
 53
-00:05:42,611 --> 00:05:45,871
-qué cambió, por qué, y la evidencia de cada afirmación.
+00:05:49,833 --> 00:05:55,092
+Así que cada desglose por nivel desde entonces quedó corto, y nada verificaba que los niveles sumaran.
 
 54
-00:05:49,971 --> 00:05:54,511
-Ahora una persona verifica el trabajo, contra el plan, no contra la palabra del agente.
+00:05:56,792 --> 00:05:59,512
+No los descarta, y no toca la prueba.
 
 55
-00:05:56,011 --> 00:06:03,599
-Jun lee la solicitud de cambio: objetivo cumplido, solo las herramientas dadas, ningún nombre, y las dos pruebas intactas y en verde.
+00:06:01,212 --> 00:06:05,398
+A qué nivel pertenecen es un significado, y los significados los decide Mei.
 
 56
-00:06:05,299 --> 00:06:06,923
-Le tomó cuatro de sus diez rondas.
+00:06:06,298 --> 00:06:11,689
+Así que se detiene, y le pregunta, con su consulta, el resultado y dos opciones, y ambas suman:
 
 57
-00:06:08,623 --> 00:06:13,218
-Ahora el cambio es suyo: si el conteo está mal, responde él, no el agente.
+00:06:11,889 --> 00:06:15,271
+un nivel propio, o el nivel que cada uno cursa en su universidad de origen.
 
 58
-00:06:14,918 --> 00:06:19,884
-Para llegar a producción, una segunda persona debe aprobarlo: Noor, la arquitecta de datos.
+00:06:16,971 --> 00:06:21,435
+Mei revisa la lista del gobierno: cuentan como sin titulación, un nivel propio.
 
 59
-00:06:21,584 --> 00:06:25,797
-El agente también puede revisar, pero solo como referencia: nunca aprueba.
+00:06:22,935 --> 00:06:27,850
+Y los años anteriores pasan a Planificación, con la evidencia del agente, para que las personas los revisen.
 
 60
-00:06:27,497 --> 00:06:31,763
-Como en Singapur, personas que no hicieron el trabajo lo miden con sus verificaciones.
+00:06:29,550 --> 00:06:43,987
+El agente agrega el tercer nivel, y corre las pruebas de nuevo: 13,906, 4,478 y 28 suman 18,412, y cada estudiante tiene un nivel.
 
 61
-00:06:35,863 --> 00:06:38,194
-Y cada vuelta del bucle deja algo para la siguiente.
+00:06:45,087 --> 00:06:46,346
+Las dos pruebas pasan.
 
 62
-00:06:39,294 --> 00:06:43,446
-Una decisión, registrada: la regla de Mei para estudiantes de intercambio, con su nombre.
+00:06:48,046 --> 00:06:53,656
+Escribe la descripción del modelo a partir del glosario, con su fuente, y abre una solicitud de cambio:
 
 63
-00:06:44,746 --> 00:06:49,894
-Metadatos: nivel de estudio, en el glosario y en la descripción del modelo, con su fuente.
+00:06:53,856 --> 00:06:57,116
+qué cambió, por qué, y la evidencia de cada afirmación.
 
 64
-00:06:51,194 --> 00:06:56,879
-Una skill, actualizada: conciliar y comparar ahora verifica que cada desglose sume su total.
+00:07:01,216 --> 00:07:05,756
+Ahora una persona verifica el trabajo, contra el plan, no contra la palabra del agente.
 
 65
-00:06:58,179 --> 00:07:01,391
-Y el plan mismo: el próximo empieza desde esta página.
+00:07:07,256 --> 00:07:14,844
+Jun lee la solicitud de cambio: objetivo cumplido, solo las herramientas dadas, ningún nombre, y las dos pruebas intactas y en verde.
 
 66
-00:07:05,491 --> 00:07:11,538
-En Singapur, los parámetros se fijaron antes de la primera gota, y personas externas midieron el agua con ellos.
+00:07:16,544 --> 00:07:18,168
+Le tomó cuatro de sus diez rondas.
 
 67
-00:07:12,638 --> 00:07:16,994
-Así, cuando 60,000 personas levantaron una botella, tenían motivos para confiar en ella.
+00:07:19,868 --> 00:07:24,463
+Ahora el cambio es suyo: si el conteo está mal, responde él, no el agente.
 
 68
-00:07:18,694 --> 00:07:24,490
-En la universidad, las verificaciones llegaron antes del primer paso del agente, y una persona midió su trabajo con ellas.
+00:07:26,163 --> 00:07:31,129
+Para llegar a producción, una segunda persona debe aprobarlo: Noor, la arquitecta de datos.
 
 69
-00:07:25,590 --> 00:07:28,684
-Así que el conteo puede ir al gobierno, con su evidencia.
+00:07:32,829 --> 00:07:37,042
+El agente también puede revisar, pero solo como referencia: nunca aprueba.
 
 70
-00:07:30,184 --> 00:07:32,745
+00:07:38,742 --> 00:07:43,008
+Como en Singapur, personas que no hicieron el trabajo lo miden con sus verificaciones.
+
+71
+00:07:47,108 --> 00:07:49,439
+Y cada vuelta del bucle deja algo para la siguiente.
+
+72
+00:07:50,539 --> 00:07:54,691
+Una decisión, registrada: la regla de Mei para estudiantes de intercambio, con su nombre.
+
+73
+00:07:55,991 --> 00:08:01,139
+Metadatos: nivel de estudio, en el glosario y en la descripción del modelo, con su fuente.
+
+74
+00:08:02,439 --> 00:08:08,124
+Una skill, actualizada: conciliar y comparar ahora verifica que cada desglose sume su total.
+
+75
+00:08:09,424 --> 00:08:12,636
+Y el plan mismo: el próximo empieza desde esta página.
+
+76
+00:08:16,736 --> 00:08:22,783
+En Singapur, los parámetros se fijaron antes de la primera gota, y personas externas midieron el agua con ellos.
+
+77
+00:08:23,883 --> 00:08:28,239
+Así, cuando 60,000 personas levantaron una botella, tenían motivos para confiar en ella.
+
+78
+00:08:29,939 --> 00:08:35,735
+En la universidad, las verificaciones llegaron antes del primer paso del agente, y una persona midió su trabajo con ellas.
+
+79
+00:08:36,835 --> 00:08:39,929
+Así que el conteo puede ir al gobierno, con su evidencia.
+
+80
+00:08:41,429 --> 00:08:43,990
 Decide cómo vas a verificar antes de que el agente empiece.

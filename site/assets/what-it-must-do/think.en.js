@@ -6,12 +6,12 @@ window.LEARN={lang:"en",
 think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
   qs:{
   "who":{stop:"survive",q:"“Network Operations” is a box on Tomás's first capability map. What's wrong with it?",
-    opts:[{t:"Nothing: it's what the team does."},{t:"It should be split into two boxes."},{t:"It's a team, who does the work. Teams change; what must be done stays.",ok:true}],
+    opts:[{t:"It's a process, how the work is done. Processes change; the team stays.",near:true},{t:"It's a team, who does the work. Teams change; what must be done stays.",ok:true},{t:"Nothing: it names what the team does, which is what a map should show."}],
     why:"Grace's team was two teams two years ago, and may be part of another next year. A capability is what must be done, whoever does it. Think of the last restructure where you work: what did the organisation still have to be able to do afterwards?"},
   "how":{stop:"survive",q:"“Run the outage system” and “Dispatch through the control room”: what one capability sits under both?",
-    opts:[{t:"Manage outages.",ok:true},{t:"Run the control room."},{t:"Buy a new outage system."}],
+    opts:[{t:"Run the control room.",near:true},{t:"Buy a new outage system."},{t:"Manage outages.",ok:true}],
     why:"The first names a system: with what. The second names a process: how. A capability survives a restructure, a new system and a new process; if a box wouldn't, it isn't one."},
   "heat":{q:"Connecting customers is red on the heat map. What makes that colour worth acting on?",
-    opts:[{t:"Red always means the team is failing."},{t:"Its evidence: new solar takes thirty-four working days to connect, and the goal is ten.",ok:true},{t:"Most people voted for red."}],
+    opts:[{t:"Its evidence: new solar takes thirty-four working days to connect, and the goal is ten.",ok:true},{t:"Most people at the workshop voted for red, so it's the colour they agree on."},{t:"Its evidence: the connections team said in the workshop that it was falling behind.",near:true}],
     why:"Each colour is backed by evidence, like every note on the wall. A heat map shows where it hurts, so it shows where the money should go. Where does your organisation hurt today, and what evidence would you clip to that card?"}
   }}};

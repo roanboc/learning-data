@@ -4,7 +4,7 @@
 
 Jun Park builds the university's data project, and this term an agent works beside him. Before any rule or product, ten films ask how today's models came about, what they took from the brain, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves. The series names no product. *Agents at work on data* follows, then the journey from helper to colleague, and teams of people and agents. The plan for this series is in the [proposal](proposal.md).
 
-**Status:** planned on 3 November 2026, and all nine films made by 4 November; a tenth, *Borrowed from the brain*, which the author asked for on 4 November, came in second on 5 November. They're in the table below and [on the site](https://data.learn-all.org/what-an-agent-is/), each with Pause and think questions. The series' look and tools are in [`shared/`](shared/). Labs and scenarios will come later. On the site, it sits under the topic *AI agents in data work*, at `what-an-agent-is/`.
+**Status:** planned on 3 November 2026, and all nine films made by 4 November; a tenth, *Borrowed from the brain*, which the author asked for on 4 November, came in second on 5 November. They're in the table below and [on the site](https://data.learn-all.org/what-an-agent-is/), each with Pause and think questions. The series' look and tools are in [`shared/`](shared/). Its labs and scenarios, one set for the whole series (nine hands-on labs, among them an emergence lab of ants and two bridges that points to more scenarios at Learning Systems, and nine situations), are on the site at `what-an-agent-is/labs/` and `scenarios/`, drawn by `site/assets/what-an-agent-is/learn.js` from its words in `learn.en.js` and `learn.es.js`. On the site, it sits under the topic *AI agents in data work*, at `what-an-agent-is/`.
 
 ## The films
 
@@ -21,6 +21,8 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](8-why-we-govern-them/script.md) · [source](8-why-we-govern-them/source/README.md) |
 | [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](9-what-they-tell-us-about-ourselves/script.md) · [source](9-what-they-tell-us-about-ourselves/source/README.md) |
 | [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 8 min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
+
+For the whole series, on the site: [9 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [9 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
 <!-- /films -->
 
 ## The look and the sound

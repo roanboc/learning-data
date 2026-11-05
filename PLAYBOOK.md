@@ -257,6 +257,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 - **Say the end once.** When a lab ends, its end box says what it showed, and the line under the picture stays for screen readers only. Shown twice, the same sentence reads as a mistake.
 - **Reuse the film's pictures in the labs,** so recognition carries over from watching to doing.
 - **Write scenarios as situations, not definitions.** "Every test passed, yet the class is 312% full. Why?" teaches more than "What is a conceptual model?"
+- **Don't let the answer give itself away.** Five weeks into the films, the author noticed the right answer was the middle option in 225 of 270 Pause and think questions, and the longest in 259: it explained everything, while the wrong ones were a short phrase, so a reader could pick it without the idea. Every pack was rewritten (5 November 2026): right answers spread over the three places, every option as full as the right one, and one near miss in each question, which takes the right answer's words and changes the one thing the film turns on (who decides, when the clock stops, which side does what). Write the right answer first, then the near miss from it, then a third option a newcomer might believe. `site-tools/check_site.py` fails a pack that slips back.
 - **Make every wrong option plausible, and explain it.** A wrong answer is the best moment to teach, so each option says why it's wrong.
 - **Make a pass mean something.** A fix that turns a check green must be one its owner would accept. In *The navigator's test*, "owner: to find" passed the map's checks and taught the opposite of the film; a named owner, with the meeting that confirmed it, doesn't.
 - **Vary the format:** choose, sort, order and spot the problem. Each asks for a different kind of thinking.
@@ -358,6 +359,7 @@ What *From words to data*, seven films made together, added.
 - [ ] The poster is looked at after `tools/publish.py` draws it: its moment comes after every fade has settled, so no two texts show in one place. *Who is it?*'s first poster caught a date changing into another.
 - [ ] After any change to the player, the poster is drawn again from it (`tools/publish.py`, with `--keep-sound` when the sound didn't change): `site-tools/check_site.py` fails a poster drawn from another player.
 - [ ] Pause and think packs are written with unquoted keys (`q:`, `opts:`, `why:`), and the film's page counts its questions.
+- [ ] Each Pause and think question has one right answer (`ok:true`) and one near miss (`near:true`), options of like length and detail, and right answers in different places (`check_site.py` checks it); read each as a newcomer: is the near miss wrong for a reason the film gives?
 - [ ] The labs and scenarios still match the film: same names, numbers and colours.
 - [ ] Tested on a phone, in dark mode and with the keyboard only.
 - [ ] The videos are released by the release workflow, and watched once from the release.

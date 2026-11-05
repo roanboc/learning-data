@@ -31,7 +31,7 @@ const NARR={
  {"id":"waste","gap":0.8,"text":"Most of the waste with agents starts here, with a plan that doesn't say what the agent may use."}
 ]},
 "plan":{"name":"Plan","lead":1.0,"tail":1.0,"vo":[
- {"id":"asks","gap":0.8,"text":"Now Clara, in Planning, asks for something new: the census-day count by level of study, for the government's report."},
+ {"id":"asks","gap":0.8,"text":"Now Clara, in Planning, asks for the census-day count by level of study, for the government's report."},
  {"id":"page","gap":0.8,"text":"Before the agent starts, Jun writes one page."},
  {"id":"goal","gap":0.8,"text":"The goal: students on census day, by level, undergraduate and postgraduate."},
  {"id":"reads","gap":0.8,"text":"What to read: the glossary's words for student, census day and level of study, and the census-day count it builds on."},
@@ -40,13 +40,19 @@ const NARR={
  {"id":"never","gap":0.8,"text":"What it must never do: read names or student IDs, or write to production."},
  {"id":"limit","gap":0.8,"text":"And a limit: ten rounds, then it stops and reports."}
 ]},
-"define":{"name":"Define the check","lead":1.0,"tail":1.0,"vo":[
+"define":{"name":"Define the check","lead":1.0,"tail":1.4,"vo":[
  {"id":"matters","gap":0.8,"text":"Then the line that matters most: how the result will be checked, decided now, before any work."},
- {"id":"adds","gap":0.3,"text":"Two checks: the levels add up to 18,412, the count already matched to the census report;","say":"Two checks: the levels add up to eighteen thousand four hundred and twelve, the count already matched to the census report;"},
- {"id":"one","gap":0.8,"text":"and every student has exactly one level."},
- {"id":"tests","gap":0.8,"text":"The agent writes them as tests, before any model, and Jun approves them."},
+ {"id":"unknown","gap":0.8,"text":"But nobody knows the answer yet: that's why Clara asked."},
+ {"id":"must","gap":0.3,"text":"What Jun knows is what must be true of any right answer:"},
+ {"id":"adds","gap":0.3,"text":"the levels add up to 18,412, the count already matched to the census report;","say":"the levels add up to eighteen thousand four hundred and twelve, the count already matched to the census report;"},
+ {"id":"one","gap":0.8,"text":"and every student has exactly one level, as the glossary defines it."},
+ {"id":"neither","gap":0.8,"text":"Neither says how many students are at any level: they check how the parts relate, and what the words mean."},
+ {"id":"tests","gap":0.8,"text":"The agent writes the two checks as tests, before any model, and Jun approves them."},
  {"id":"only","gap":0.8,"text":"From then on, only a person can change them, so the agent can't pass by moving the mark."},
- {"id":"like","gap":0.8,"text":"Like Singapore's 190 measures, written before the plant made any water.","say":"Like Singapore's hundred and ninety measures, written before the plant made any water."}
+ {"id":"wrong","gap":0.8,"text":"And what everyone already uses can be wrong, sometimes for years: if the data disagrees, the agent says so, with its evidence."},
+ {"id":"options","gap":0.8,"text":"Where nobody can say what's right, it brings the options, each with its result, for a person to choose."},
+ {"id":"like","gap":0.3,"text":"Like Singapore's 190 measures, written before the plant made any water:","say":"Like Singapore's hundred and ninety measures, written before the plant made any water:"},
+ {"id":"meet","gap":0.8,"text":"none said what the results would be, only what the water had to meet."}
 ]},
 "do":{"name":"Do","lead":1.0,"tail":1.0,"vo":[
  {"id":"works","gap":0.8,"text":"Now the agent works, in its sandbox, with only the tools the plan gave it."},
@@ -55,11 +61,15 @@ const NARR={
  {"id":"short","gap":0.8,"text":"Twenty-eight students are missing."},
  {"id":"looks","gap":0.8,"text":"It looks, with Query: on census day, 28 students have no level.","say":"It looks, with Query: on census day, twenty-eight students have no level."},
  {"id":"exchange","gap":0.8,"text":"They're exchange students, taking single units, with no degree here."},
+ {"id":"since","gap":0.8,"text":"And it isn't new: since 2021, when exchange students moved to a system of their own, none has had a level.","say":"And it isn't new: since twenty twenty-one, when exchange students moved to a system of their own, none has had a level."},
+ {"id":"split","gap":0.8,"text":"So every split by level since then was short, and nothing checked that the levels added up."},
  {"id":"doesnt","gap":0.8,"text":"It doesn't drop them, and it doesn't touch the test."},
  {"id":"meaning","gap":0.8,"text":"Which level they belong to is a meaning, and meanings are Mei's to decide."},
- {"id":"asks","gap":0.8,"text":"So it stops, and asks her, with its query and the result."},
+ {"id":"asks","gap":0.3,"text":"So it stops, and asks her, with its query, the result, and two options that both add up:"},
+ {"id":"options","gap":0.8,"text":"a level of their own, or the level each one studies at home."},
  {"id":"mei","gap":0.8,"text":"Mei checks the government's list: they count as non-award, a level of its own."},
- {"id":"again","gap":0.8,"text":"The agent adds it, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.","say":"The agent adds it, and runs the tests again: thirteen thousand nine hundred and six, four thousand four hundred and seventy-eight and twenty-eight add up to eighteen thousand four hundred and twelve, and every student has one level."},
+ {"id":"years","gap":0.8,"text":"And the years before go to Planning, with the agent's evidence, for people to look into."},
+ {"id":"again","gap":0.8,"text":"The agent adds the third level, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.","say":"The agent adds the third level, and runs the tests again: thirteen thousand nine hundred and six, four thousand four hundred and seventy-eight and twenty-eight add up to eighteen thousand four hundred and twelve, and every student has one level."},
  {"id":"pass","gap":0.8,"text":"Both tests pass."},
  {"id":"pr","gap":0.3,"text":"It writes the model's description from the glossary, with its source, and opens a pull request:"},
  {"id":"evidence","gap":0.8,"text":"what it changed, why, and the evidence for every claim."}

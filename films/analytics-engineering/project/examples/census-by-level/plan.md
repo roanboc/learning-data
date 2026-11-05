@@ -11,8 +11,9 @@ Asked by: Clara Jensen, Planning, for the government's report · Plan: Jun Park 
 - **Writes:** only its own branch, with Repository, and its sandbox, with Build.
 - **Never:** read names or student IDs; write to production.
 - **Limit:** 10 rounds, then stop and report.
-- **Checks:** the levels add up to 18,412, the census-day count; and every student has exactly one
-  level. Written as tests before any model; Jun Park approves them, and from then on only a person
+- **Checks:** nobody knows the count at each level yet, so these say what any right answer must
+  meet: the levels add up to 18,412, the census-day count; and every student has exactly one level,
+  as the glossary defines it. Written as tests before any model; Jun Park approves them, and from then on only a person
   changes them.
 - **Approves:** Jun Park checks the work against this page · Noor, data architect, approves it for
   production.

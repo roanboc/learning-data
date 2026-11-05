@@ -17,6 +17,11 @@ report. Non-award is a third level because Mei Tanaka, who owns the meaning, dec
 3 November 2026 ([`decision.yml`](decision.yml)): the government's list counts exchange students
 taking single units as non-award, a level of its own.
 
+The 28 aren't new: none has had a level since 2021, when exchange students moved to a system of
+their own, so every split by level since then was short (evidence 3). This change counts only
+31 March 2026; the years before went to Clara Jensen, in Planning, with this evidence, for people to
+look into.
+
 ## The plan, line by line
 
 | Line | How it was met |
@@ -27,7 +32,7 @@ taking single units as non-award, a level of its own.
 | Writes | Only this branch, with Repository, and the agent's sandbox, with Build |
 | Never | No names or student IDs: every query returns counts |
 | Limit | 4 of 10 rounds (below) |
-| Checks | Both tests untouched, and both pass (evidence 3) |
+| Checks | Both tests untouched, and both pass (evidence 5) |
 | Approves | Jun Park checks it against the plan; Noor approves it for production. This agent doesn't approve |
 
 ## Rounds: 4 of 10
@@ -35,9 +40,10 @@ taking single units as non-award, a level of its own.
 1. Read the three terms in Docs and found the tables in Catalog; built the count by level in the
    sandbox; ran the tests. The first failed: the two levels added up to 18,384, 28 short of 18,412.
 2. Looked at the 28 with Query: on census day, they have no level; they're exchange students,
-   taking single units, with no degree here (evidence 2). Which level they belong to is a meaning,
-   so the agent didn't drop them or touch the test: it asked Mei Tanaka, with the query and its
-   result, and stopped until she answered.
+   taking single units, with no degree here (evidence 2), and none has had a level on any census
+   day since 2021 (evidence 3). Which level they belong to is a meaning, so the agent didn't drop
+   them or touch the test: it asked Mei Tanaka, with the query, its result and two options that
+   both add up (evidence 4), and stopped until she answered.
 3. Added non-award, as Mei decided, and ran the tests again: both pass.
 4. Wrote `level_of_study`'s description from the glossary, with its source, and opened this pull
    request.
@@ -50,7 +56,16 @@ taking single units as non-award, a level of its own.
 2. On census day, 28 students had no level, all exchange students taking single units.
    `dbt show --select census_day_students_without_a_level --profiles-dir .` →
    `exchange | single units | 28`
-3. Both tests pass, as approved.
+3. No exchange student has had a level on any census day since 2021: every split by level since
+   then was short.
+   `dbt show --select census_days_without_a_level --profiles-dir .` →
+   `2021 | 24` · `2022 | 31` · `2023 | 27` · `2024 | 33` · `2025 | 30` · `2026 | 28`, all exchange
+   students
+4. Both options add up to 18,412: as a level of their own, 13,906, 4,478 and 28; at each one's
+   level at home, 13,925 and 4,487.
+   `dbt show --select census_day_students_without_a_level_by_home_level --profiles-dir .` →
+   `undergraduate | 19` · `postgraduate | 9`
+5. Both tests pass, as approved.
    `dbt build --select +mart_planning__census_by_level --profiles-dir .` →
    `levels_add_up_to_census_day` PASS · `unique_mart_planning__census_day_levels_learner_key` PASS ·
    `not_null_mart_planning__census_day_levels_learner_key` PASS ·
@@ -106,7 +121,7 @@ The doc block is generated from the conceptual model, which copies the glossary'
 |---|---|---|
 | Docs | 3 | *Student*, *Census day*, *Level of study* |
 | Catalog | 2 | The census-day count and its tables; the courses and their levels |
-| Query | 3 | The count by level; the 28 with no level; the count again, after the fix |
+| Query | 5 | The count by level; the 28 with no level; every census day since 2021; the 28 by their level at home; the count again, after the fix |
 | Build | 2 | The count by level and its tests, in the sandbox; again, after the fix |
 | Repository | 2 | The two tests, for Jun Park's review; the model and this pull request |
 

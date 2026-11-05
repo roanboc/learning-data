@@ -6,12 +6,12 @@ window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   "segments":{stop:"fit",q:"Un inquilino usa la electricidad y paga la factura, el propietario decide si hay paneles solares y el regulador decide el precio. ¿Qué te dice eso de los clientes?",
-    opts:[{t:"El inquilino es el único cliente."},{t:"El regulador es un segmento de clientes."},{t:"Quién paga, quién usa y quién decide suelen ser personas distintas.",ok:true}],
+    opts:[{t:"Quién paga, quién usa y quién decide suelen ser personas distintas.",ok:true},{t:"El regulador es el cliente que más le importa a la empresa."},{t:"El inquilino es el cliente, y los demás son socios de la empresa.",near:true}],
     why:"Los segmentos salen de mirar los tres. El ministro y el regulador importan igual, pero no son clientes: tienen su propio lugar en el mapa. Donde trabajas, ¿son las mismas personas?"},
   "fit":{stop:"fit",q:"En el lienzo de los hogares con paneles solares, un dolor no tiene nada que lo alivie: esperar meses para conectar paneles nuevos. ¿Qué tiene que decir el lienzo?",
-    opts:[{t:"Nada: un hueco no importa."},{t:"Si es una capacidad que falta, o un cliente al que la empresa decidió no atender.",ok:true},{t:"Que esos hogares deben salir del lienzo."}],
+    opts:[{t:"Que es una capacidad que falta, que se construye primero, antes de mirar otro dolor.",near:true},{t:"Si es una capacidad que falta, o un cliente al que la empresa decidió no atender.",ok:true},{t:"Nada: un hueco en un lienzo no cambia el valor que ofrece a esos hogares."}],
     why:"El encaje es una regla: cada dolor necesita algo que lo alivie. Farah tiene claro que sí atienden a esos hogares, así que es una capacidad que falta, y va a la lista."},
   "pays":{q:"¿Por qué cada oferta tiene su propio lienzo de modelo de negocio, en vez de uno para toda la empresa?",
-    opts:[{t:"Porque cada oferta tiene su propia economía: quién paga, qué gana y cuál es su mayor costo.",ok:true},{t:"Porque cada equipo quiere el suyo."},{t:"Porque el regulador lo exige."}],
+    opts:[{t:"Porque cada oferta tiene sus propios clientes, aunque los costos se comparten en la empresa.",near:true},{t:"Porque el regulador exige un lienzo aparte para cada una de las ofertas de la empresa."},{t:"Porque cada oferta tiene su propia economía: quién paga, qué gana y cuál es su mayor costo.",ok:true}],
     why:"La red gana lo que el regulador permite, la venta minorista gana con las tarifas, y el gobierno paga el plan de ayuda. Un solo lienzo las mezclaría. ¿Dos de tus ofertas comparten una misma partida del presupuesto?"}
   }}};

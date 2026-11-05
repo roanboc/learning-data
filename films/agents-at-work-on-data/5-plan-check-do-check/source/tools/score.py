@@ -350,12 +350,15 @@ for a, b in ((pw('goal', 'students', -0.1), pw('goal', 'students', 2.2)), (pw('r
 lock(pc('tools', -0.1), 0.012, px(1340))
 bottle(Cs5, pw('limit', 'reports'), pw('limit', 'reports', 3.0), 0.65)
 
-# 4. Define the check: as the Checks row opens, the mark, the check set before any work; the checks and the tests written in; the tests
-#    fly up; Jun approves them, and the contrabassoon answers the mark; they lock; the agent's arm tries for one and is held. Then the
-#    plant, still dry, its list whole: B
+# 4. Define the check: as the Checks row opens, the mark, the check set before any work. Nobody knows the answer yet: its card comes in
+#    beside the page. The checks, on how the levels relate and what one is, written in; the tests fly up; Jun approves them, and the
+#    contrabassoon answers the mark; they lock; the agent's arm tries for one and is held. In the tests' place, the agent's two rules:
+#    what everyone uses can be wrong (it says so, with evidence), and where nobody can say, the options. Then the plant, still dry, its
+#    list whole: B; and its bottle's mark lights, what the water had to meet
 dw = lambda lid, word, off=0: W('define', lid, word, off)
 dc = lambda lid, off=0: G('define', lid, off)
 pour(Fs4, dw('matters', 'matters', -0.45), dw('matters', 'matters', 1.15)); bottle(Fs4, dw('matters', 'matters', 1.2), dw('matters', 'matters', 3.8), 1.0)
+card(dw('unknown', 'nobody', -0.3), 0.014, px(1635))
 for a, b in ((dw('adds', 'levels', -0.1), dw('adds', 'count already', -0.2)), (dw('one', 'every', -0.1), dw('one', 'every', 1.5)),
              (dw('tests', 'writes', -0.1), dw('tests', 'approves', 0.5)), (dw('only', 'only', -0.1), dw('only', 'person', 1.3))):
     keys(a, b, 0.019, px(920))
@@ -364,13 +367,17 @@ tap(dw('tests', 'approves', 0.15), 0.009, px(1500)); tap(dw('tests', 'approves',
 contra(Fs2, dw('tests', 'approves', -0.05), dw('tests', 'approves', 2.6), 0.85)
 lock(dw('only', 'person', 0.1), 0.012, px(1820)); lock(dw('only', 'person', 0.25), 0.011, px(1820))
 air(dw('only', 'moving', -0.5), 1.3, 0.007, px(1700), px(1752)); stop(dw('only', 'moving', 0.15), 0.011, px(1820))
+card(dc('wrong', 0.15), 0.014, px(1635)); tap(dw('wrong', 'says so', -0.1), 0.009, px(1635))
+card(dc('options', -0.1), 0.014, px(1635))
 band((B3, Ds4, Fs4), dc('like', 0.0), dc('like', 4.7), 0.7, stag=0.14)
 tap(dw('like', 'written', -0.1), 0.009, px(430))
+tap(dw('meet', 'had to meet', -0.1), 0.009, px(700))
 
 # 5. Do: the arms out to Docs, Catalog and Query, and what comes back; the count by level, built; the first run fails a test: D-sharp
-#    minor. The query, the 28 with no level; a lock the agent doesn't touch; the question for Mei: one bottle, C-sharp, open. Mei's
-#    decision: B, warm, held across the cut. The third level goes in; the total turns green; both tests pass: F-sharp, rising. The
-#    description, and the pull request with its evidence
+#    minor. The query, the 28 with no level; every census day since 2021, the same, and every split short; a lock the agent doesn't
+#    touch; the question for Mei: one bottle, C-sharp, open. It goes to her, with two options that both add up, each as it's said;
+#    the government's list, the one she picks; her decision: B, warm. The years before, to Planning. The third level goes in; the
+#    total turns green; both tests pass: F-sharp, rising. The description, and the pull request with its evidence
 ow = lambda lid, word, off=0: W('do', lid, word, off)
 oc = lambda lid, off=0: G('do', lid, off)
 air(ow('builds', 'three words', -0.4), 0.9, 0.007, px(1230), px(1685))
@@ -383,13 +390,17 @@ band((Fs4, As4, Ds5), ow('red', 'fails', -0.15), ow('red', 'fails', 3.8), 0.7)
 tap(ow('red', 'eighteen', -0.2), 0.009, px(780)); tap(oc('short', -0.2), 0.009, px(315))
 air(ow('looks', 'Query', -0.4), 0.9, 0.007, px(1230), px(1685))
 card(ow('looks', 'twenty-eight', -0.3), 0.014, px(810))
+card(oc('since', -0.1), 0.014, px(810)); tap(ow('split', 'short', -0.2), 0.008, px(810))
 stop(ow('doesnt', 'touch', -0.05), 0.011, px(500))
-card(ow('meaning', "Mei's", -0.25), 0.014, px(810)); bottle(Cs5, ow('meaning', "Mei's", -0.3), ow('meaning', "Mei's", 2.8), 0.6)
-slide(oc('mei', -1.3), 0.9, 0.008, px(810), px(-100))
-slide(oc('mei', -0.35), 0.7, 0.008, px(980), px(1100))
-card(ow('mei', "government's", -0.3), 0.013, px(1100)); tap(ow('mei', 'non-award', -0.1), 0.009, px(1100))
-card(ow('mei', 'own', -0.3), 0.014, px(1100)); land(ow('mei', 'own', -0.1), 0.01, px(1100))
+card(oc('meaning', -0.2), 0.014, px(810)); bottle(Cs5, oc('meaning', -0.3), oc('meaning', 2.8), 0.6)
+slide(oc('asks', -1.3), 0.9, 0.008, px(810), px(-100))
+slide(oc('asks', -0.35), 0.7, 0.008, px(960), px(1080))
+card(ow('asks', 'two options', -0.2), 0.013, px(1080))
+tap(oc('options', -0.1), 0.008, px(1080)); tap(ow('options', 'or the level', -0.1), 0.008, px(1080))
+card(ow('mei', "government's", -0.3), 0.013, px(1630)); tick(ow('mei', 'non-award', -0.1), 0.01, px(1080))
+card(ow('mei', 'own', -0.3), 0.014, px(1080)); land(ow('mei', 'own', -0.1), 0.01, px(1080))
 band((B3, Ds4, Fs4, B4), ow('mei', 'own', -0.4), ow('mei', 'own', 3.6), 0.7, stag=0.12)
+card(ow('years', 'Planning', -0.3), 0.013, px(1630))
 tap(ow('again', 'adds', 0.3), 0.009, px(780))
 tick(ow('again', 'eighteen', -0.2), 0.01, px(780)); tick(ow('again', 'eighteen', 0.3), 0.01, px(315)); tick(ow('again', 'every', 0.3), 0.01, px(315))
 tap(oc('pass', -0.1), 0.01, px(315))

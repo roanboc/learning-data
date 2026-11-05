@@ -435,7 +435,7 @@ const NARR={
  {"id":"waste","gap":0.8,"text":"Most of the waste with agents starts here, with a plan that doesn't say what the agent may use."}
 ]},
 "plan":{"name":"Plan","lead":1.0,"tail":1.0,"vo":[
- {"id":"asks","gap":0.8,"text":"Now Clara, in Planning, asks for something new: the census-day count by level of study, for the government's report."},
+ {"id":"asks","gap":0.8,"text":"Now Clara, in Planning, asks for the census-day count by level of study, for the government's report."},
  {"id":"page","gap":0.8,"text":"Before the agent starts, Jun writes one page."},
  {"id":"goal","gap":0.8,"text":"The goal: students on census day, by level, undergraduate and postgraduate."},
  {"id":"reads","gap":0.8,"text":"What to read: the glossary's words for student, census day and level of study, and the census-day count it builds on."},
@@ -444,13 +444,19 @@ const NARR={
  {"id":"never","gap":0.8,"text":"What it must never do: read names or student IDs, or write to production."},
  {"id":"limit","gap":0.8,"text":"And a limit: ten rounds, then it stops and reports."}
 ]},
-"define":{"name":"Define the check","lead":1.0,"tail":1.0,"vo":[
+"define":{"name":"Define the check","lead":1.0,"tail":1.4,"vo":[
  {"id":"matters","gap":0.8,"text":"Then the line that matters most: how the result will be checked, decided now, before any work."},
- {"id":"adds","gap":0.3,"text":"Two checks: the levels add up to 18,412, the count already matched to the census report;","say":"Two checks: the levels add up to eighteen thousand four hundred and twelve, the count already matched to the census report;"},
- {"id":"one","gap":0.8,"text":"and every student has exactly one level."},
- {"id":"tests","gap":0.8,"text":"The agent writes them as tests, before any model, and Jun approves them."},
+ {"id":"unknown","gap":0.8,"text":"But nobody knows the answer yet: that's why Clara asked."},
+ {"id":"must","gap":0.3,"text":"What Jun knows is what must be true of any right answer:"},
+ {"id":"adds","gap":0.3,"text":"the levels add up to 18,412, the count already matched to the census report;","say":"the levels add up to eighteen thousand four hundred and twelve, the count already matched to the census report;"},
+ {"id":"one","gap":0.8,"text":"and every student has exactly one level, as the glossary defines it."},
+ {"id":"neither","gap":0.8,"text":"Neither says how many students are at any level: they check how the parts relate, and what the words mean."},
+ {"id":"tests","gap":0.8,"text":"The agent writes the two checks as tests, before any model, and Jun approves them."},
  {"id":"only","gap":0.8,"text":"From then on, only a person can change them, so the agent can't pass by moving the mark."},
- {"id":"like","gap":0.8,"text":"Like Singapore's 190 measures, written before the plant made any water.","say":"Like Singapore's hundred and ninety measures, written before the plant made any water."}
+ {"id":"wrong","gap":0.8,"text":"And what everyone already uses can be wrong, sometimes for years: if the data disagrees, the agent says so, with its evidence."},
+ {"id":"options","gap":0.8,"text":"Where nobody can say what's right, it brings the options, each with its result, for a person to choose."},
+ {"id":"like","gap":0.3,"text":"Like Singapore's 190 measures, written before the plant made any water:","say":"Like Singapore's hundred and ninety measures, written before the plant made any water:"},
+ {"id":"meet","gap":0.8,"text":"none said what the results would be, only what the water had to meet."}
 ]},
 "do":{"name":"Do","lead":1.0,"tail":1.0,"vo":[
  {"id":"works","gap":0.8,"text":"Now the agent works, in its sandbox, with only the tools the plan gave it."},
@@ -459,11 +465,15 @@ const NARR={
  {"id":"short","gap":0.8,"text":"Twenty-eight students are missing."},
  {"id":"looks","gap":0.8,"text":"It looks, with Query: on census day, 28 students have no level.","say":"It looks, with Query: on census day, twenty-eight students have no level."},
  {"id":"exchange","gap":0.8,"text":"They're exchange students, taking single units, with no degree here."},
+ {"id":"since","gap":0.8,"text":"And it isn't new: since 2021, when exchange students moved to a system of their own, none has had a level.","say":"And it isn't new: since twenty twenty-one, when exchange students moved to a system of their own, none has had a level."},
+ {"id":"split","gap":0.8,"text":"So every split by level since then was short, and nothing checked that the levels added up."},
  {"id":"doesnt","gap":0.8,"text":"It doesn't drop them, and it doesn't touch the test."},
  {"id":"meaning","gap":0.8,"text":"Which level they belong to is a meaning, and meanings are Mei's to decide."},
- {"id":"asks","gap":0.8,"text":"So it stops, and asks her, with its query and the result."},
+ {"id":"asks","gap":0.3,"text":"So it stops, and asks her, with its query, the result, and two options that both add up:"},
+ {"id":"options","gap":0.8,"text":"a level of their own, or the level each one studies at home."},
  {"id":"mei","gap":0.8,"text":"Mei checks the government's list: they count as non-award, a level of its own."},
- {"id":"again","gap":0.8,"text":"The agent adds it, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.","say":"The agent adds it, and runs the tests again: thirteen thousand nine hundred and six, four thousand four hundred and seventy-eight and twenty-eight add up to eighteen thousand four hundred and twelve, and every student has one level."},
+ {"id":"years","gap":0.8,"text":"And the years before go to Planning, with the agent's evidence, for people to look into."},
+ {"id":"again","gap":0.8,"text":"The agent adds the third level, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.","say":"The agent adds the third level, and runs the tests again: thirteen thousand nine hundred and six, four thousand four hundred and seventy-eight and twenty-eight add up to eighteen thousand four hundred and twelve, and every student has one level."},
  {"id":"pass","gap":0.8,"text":"Both tests pass."},
  {"id":"pr","gap":0.3,"text":"It writes the model's description from the glossary, with its source, and opens a pull request:"},
  {"id":"evidence","gap":0.8,"text":"what it changed, why, and the evidence for every claim."}
@@ -493,7 +503,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"water/city": 7.164, "water/piped": 7.271, "water/clean": 5.682, "water/fear": 2.901, "water/trust": 5.796, "water/change": 3.554, "water/study": 5.431, "water/before": 4.023, "water/measures": 6.883, "water/panel": 6.236, "water/report": 5.105, "water/parade": 6.41, "water/flows": 5.187, "water/today": 5.805, "water/data": 7.672, "water/unless": 5.087, "water/first": 4.084, "long/once": 6.17, "long/knew": 5.618, "long/pages": 2.852, "long/docs": 4.774, "long/other": 2.819, "long/caught": 2.747, "long/broken": 5.803, "long/waste": 5.277, "plan/asks": 7.135, "plan/page": 2.678, "plan/goal": 4.908, "plan/reads": 7.256, "plan/tools": 3.526, "plan/writes": 3.028, "plan/never": 4.76, "plan/limit": 2.89, "define/matters": 5.411, "define/adds": 6.761, "define/one": 2.464, "define/tests": 4.186, "define/only": 5.335, "define/like": 4.648, "do/works": 4.204, "do/builds": 5.798, "do/red": 5.703, "do/short": 1.544, "do/looks": 4.247, "do/exchange": 3.705, "do/doesnt": 2.62, "do/meaning": 4.086, "do/asks": 3.222, "do/mei": 4.364, "do/again": 13.612, "do/pass": 1.159, "do/pr": 5.51, "do/evidence": 3.16, "check/person": 4.44, "check/jun": 7.488, "check/rounds": 1.524, "check/his": 4.495, "check/noor": 4.866, "check/never": 4.113, "check/outside": 4.166, "leaves/next": 2.231, "leaves/decision": 4.052, "leaves/meta": 5.048, "leaves/skill": 5.585, "leaves/plan": 3.112, "trust/sg": 5.947, "trust/bottle": 4.256, "trust/uni": 5.696, "trust/send": 2.994, "trust/take": 2.461};
+const VODUR={"water/city": 7.164, "water/piped": 7.271, "water/clean": 5.682, "water/fear": 2.901, "water/trust": 5.796, "water/change": 3.554, "water/study": 5.431, "water/before": 4.023, "water/measures": 6.883, "water/panel": 6.236, "water/report": 5.105, "water/parade": 6.41, "water/flows": 5.187, "water/today": 5.805, "water/data": 7.672, "water/unless": 5.087, "water/first": 4.084, "long/once": 6.17, "long/knew": 5.618, "long/pages": 2.852, "long/docs": 4.774, "long/other": 2.819, "long/caught": 2.747, "long/broken": 5.803, "long/waste": 5.277, "plan/asks": 6.306, "plan/page": 2.678, "plan/goal": 4.908, "plan/reads": 7.256, "plan/tools": 3.526, "plan/writes": 3.028, "plan/never": 4.76, "plan/limit": 2.89, "define/matters": 5.411, "define/unknown": 3.267, "define/must": 3.181, "define/adds": 6.127, "define/one": 4.085, "define/neither": 5.606, "define/tests": 4.67, "define/only": 5.335, "define/wrong": 7.968, "define/options": 6.078, "define/like": 4.597, "define/meet": 3.598, "do/works": 4.204, "do/builds": 5.798, "do/red": 5.703, "do/short": 1.544, "do/looks": 4.247, "do/exchange": 3.705, "do/since": 6.906, "do/split": 5.159, "do/doesnt": 2.62, "do/meaning": 4.086, "do/asks": 5.291, "do/options": 3.282, "do/mei": 4.364, "do/years": 4.815, "do/again": 14.337, "do/pass": 1.159, "do/pr": 5.51, "do/evidence": 3.16, "check/person": 4.44, "check/jun": 7.488, "check/rounds": 1.524, "check/his": 4.495, "check/noor": 4.866, "check/never": 4.113, "check/outside": 4.166, "leaves/next": 2.231, "leaves/decision": 4.052, "leaves/meta": 5.048, "leaves/skill": 5.585, "leaves/plan": 3.112, "trust/sg": 5.947, "trust/bottle": 4.256, "trust/uni": 5.696, "trust/send": 2.994, "trust/take": 2.461};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -502,8 +512,8 @@ const BREATH={
 "water":{"hold":{"piped":0.6,"clean":0.4,"fear":0.8,"trust":0.2,"change":0.8,"study":0.2,"measures":1.6,"panel":0.4,"report":0.6,"parade":1.6,"flows":0.6,"today":0.8,"data":0.2,"unless":0.4,"first":0.6},"breathe":4.6},
 "long":{"hold":{"once":0.6,"knew":0.8,"pages":1.4,"docs":1.0,"other":1.0,"caught":1.0,"broken":0.8,"waste":1.4}},
 "plan":{"hold":{"asks":0.4,"page":0.6,"goal":0.4,"reads":0.4,"tools":0.4,"writes":0.4,"never":0.6,"limit":1.2}},
-"define":{"hold":{"matters":0.4,"one":0.4,"tests":0.6,"only":0.8,"like":1.2}},
-"do":{"hold":{"works":0.2,"builds":0.6,"red":0.6,"short":0.4,"looks":0.2,"exchange":0.4,"doesnt":0.8,"meaning":0.2,"asks":1.0,"mei":0.6,"again":0.4,"pass":1.0,"evidence":1.2}},
+"define":{"hold":{"matters":0.8,"unknown":1.2,"one":0.8,"neither":1.6,"tests":1.0,"only":1.2,"wrong":1.5,"options":1.6,"meet":1.4}},
+"do":{"hold":{"works":0.2,"builds":0.8,"red":0.6,"short":0.4,"looks":0.2,"exchange":0.4,"since":0.8,"split":1.0,"doesnt":1.0,"meaning":0.2,"options":1.0,"mei":0.8,"years":1.0,"again":0.4,"pass":1.0,"evidence":1.2}},
 "check":{"hold":{"person":0.8,"jun":1.0,"rounds":1.0,"his":1.0,"noor":1.0,"never":1.0,"outside":1.2}},
 "leaves":{"hold":{"next":0.4,"decision":0.6,"meta":0.6,"skill":0.6,"plan":1.4}},
 "trust":{"hold":{"sg":0.4,"bottle":1.0,"uni":0.4,"send":0.8},"breathe":4.8}
@@ -1845,6 +1855,10 @@ function pc_bottle(ctx,x,y,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)retur
   ctx.fillStyle="rgba(255,255,255,0.6)";ctx.beginPath();ag_rect(ctx,w/2-w*0.2,-body+w*0.1,w*0.09,body*0.78,w*0.05);ctx.fill();
   // the mark: a small line etched on the glass
   const my=-body*line;ctx.strokeStyle="rgba(60,64,70,0.85)";ctx.lineWidth=Math.max(1.6,h/70);ctx.beginPath();ctx.moveTo(-w/2-2,my);ctx.lineTo(-w/2+w*0.32,my);ctx.stroke();
+  // o.mark (0 to 1): the mark picked out, a soft light along it and a short line on across the glass, as what the water must reach
+  const mk=clamp(o.mark||0,0,1);if(mk>0.01){ctx.save();ctx.lineCap="round";ctx.strokeStyle="rgba(255,255,255,"+0.7*mk+")";ctx.lineWidth=Math.max(6,h/22);
+    ctx.beginPath();ctx.moveTo(-w/2-8,my);ctx.lineTo(w/2+8,my);ctx.stroke();ctx.strokeStyle="rgba(60,64,70,"+0.8*mk+")";ctx.lineWidth=Math.max(1.6,h/70);
+    ctx.setLineDash([h/40,h/50]);ctx.beginPath();ctx.moveTo(-w/2+w*0.32,my);ctx.lineTo(w/2+8,my);ctx.stroke();ctx.restore();}
   // the cap ring
   ctx.fillStyle="rgba(150,160,162,0.7)";ctx.fillRect(-nk*0.7,-h+h*0.01,nk*1.4,h*0.035);
   if(o.pour>0.01){ctx.strokeStyle=rgba(pc_shade(PC_SEA,0.8),0.9*clamp(o.pour,0,1));ctx.lineWidth=Math.max(3,h/45);ctx.lineCap="round";ctx.beginPath();ctx.moveTo(0,-h-h*0.7);ctx.lineTo(0,-lvl);ctx.stroke();}
@@ -2132,6 +2146,9 @@ function pc_benchBottles(ctx,t,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha*=
                   warning or a lock by a row; o.empty takes the rows' words away, leaving the plan ready for the next job
      pc_test      a test card, set (blue), failing (amber) or passing (green), with a person's approval and a lock
      pc_count     the count by level the agent builds: its rows, a row that grows in, its total
+     pc_unknown   the count as nobody knows it yet: a question mark for each level, and the total everyone knows
+     pc_years     the agent's query across the census days since 2021, a mark for each year with no level
+     pc_options   the two places the 28 could go, both adding up, for Mei to choose
      pc_tool      a tool on the wall, read only; pc_arm(i) the arm from the agent's ring to tool i
      pc_globe     a pale globe, "the web"; pc_webPage a small page coming back from it
      pc_num       a card with a number that counts up; pc_clock a clock on a card, its hand turning
@@ -2223,6 +2240,48 @@ function pc_count(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,k=o.k||[1,1,0],gr
     ag_T(ctx,s,x+28,yy,{w:600,size:30,a:kk});ag_T(ctx,n,x+w-28,yy,{w:800,size:32,col:AG.orange,align:"right",a:kk});});
   const ty=y+148+rh*(2+grow)-10;ctx.strokeStyle="rgba(60,50,40,0.2)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+28,ty-6);ctx.lineTo(x+w-28,ty-6);ctx.stroke();
   const ta=o.totalA==null?1:o.totalA;if(ta>0.01){ag_T(ctx,"Total",x+28,ty+40,{w:700,size:30,a:ta});ag_T(ctx,o.total||"",x+w-28,ty+42,{w:800,size:40,col:o.totalCol||AG.orange,align:"right",a:ta});}
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the count nobody knows yet
+   pc_unknown(ctx, x, y, w, o): the count by level as it stands before any work: "COUNT BY LEVEL", each level with a question mark,
+   and the total everyone knows, 18,412. o.rel (0 to 1) brings in, in blue, the + and = that say how the levels must relate to it
+   (the labels make room for them, and the rule turns blue); o.q (0 to 1, and back) a pulse of the question marks; o.one (0 to 1) a
+   blue pill under it, "one level each"; o.relHi and o.oneHi (0 to 1, and back) a pulse of the + and =, and of the pill; o.k springs
+   it in; o.a. Returns its box. */
+function pc_unknown(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=50,h=118+rh*2+70,b={x,y,w,h};if(a<=0.01)return b;
+  const rel=clamp(o.rel||0,0,1),q=clamp(o.q||0,0,1),ind=40*ag_sine(rel);ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));
+  ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,"COUNT BY LEVEL",x+28,y+50,{w:700,size:28,ls:4,col:AG.mut});ag_T(ctx,"census day",x+28,y+90,{w:500,size:28,col:AG.mut});
+  ["Undergraduate","Postgraduate"].forEach((s,i)=>{const yy=y+148+i*rh;ag_T(ctx,s,x+28+ind,yy,{w:600,size:30});
+    ctx.save();ag_about(ctx,x+w-40,yy-12,1+0.22*q);ag_T(ctx,"?",x+w-28,yy,{w:800,size:36,col:mix(AG.mut,AG.violet,q),align:"right"});ctx.restore();});
+  const rh2=clamp(o.relHi||0,0,1),sg=(s,X,Y)=>{ctx.save();ag_about(ctx,X+9,Y-11,1+0.3*rh2);ag_T(ctx,s,X,Y,{w:800,size:32,col:AG.blue,a:rel});ctx.restore();};
+  if(rel>0.01)sg("+",x+28,y+148+rh);
+  const ty=y+148+rh*2-10;ctx.strokeStyle=rgba(mix([60,50,40],AG.blue,rel),0.2+0.5*rel);ctx.lineWidth=2+rel;ctx.beginPath();ctx.moveTo(x+28,ty-6);ctx.lineTo(x+w-28,ty-6);ctx.stroke();
+  if(rel>0.01)sg("=",x+28,ty+40);
+  ag_T(ctx,"Total",x+28+ind,ty+40,{w:700,size:30});ag_T(ctx,"18,412",x+w-28,ty+42,{w:800,size:40,align:"right"});
+  const one=clamp(o.one||0,0,1);if(one>0.01){ctx.save();ag_about(ctx,x+w/2,y+h+40,1+0.1*clamp(o.oneHi||0,0,1));ag_pill(ctx,x+w/2,y+h+40,"one level each",{col:AG.blue,a:one});ctx.restore();}
+  ctx.restore();return b;}
+
+/* ---------------------------------------------------------------- the years since 2021, and the options for Mei
+   pc_years(ctx, x, y, w, o): the agent's second query: "QUERY · SINCE 2021", "No level, every year", the census days from 2021 to 2025
+   each with an amber mark as o.n (0 to 5) reaches it, and o.split (0 to 1) the amber line "every split by level: short"; o.k, o.a.
+   pc_options(ctx, x, y, w, o): "OPTIONS · BOTH ADD UP", the two places the 28 could go, each with what it gives (o.A, o.B, 0 to 1);
+   o.pick (0 to 1) the first chosen: a green tick and a soft green light, the second fading back; o.k, o.a. Both return their box. */
+const PC_YEARS=["2021","2022","2023","2024","2025"];
+function pc_years(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=262,b={x,y,w,h};if(a<=0.01)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.orange,edgeA:0.75});
+  ag_T(ctx,"QUERY · SINCE 2021",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"No level, every year",x+28,y+98,{w:700,size:36});
+  const f={w:600,size:28},ws=PC_YEARS.map(s=>ag_tw(ctx,s,f)),gap=(w-56-ws.reduce((s,v)=>s+v,0))/(PC_YEARS.length-1);let xx=x+28;
+  PC_YEARS.forEach((s,i)=>{const on=clamp((o.n||0)-i,0,1);if(on>0.01){ag_T(ctx,s,xx,y+156,{...f,col:AG.orange,a:on});
+      ctx.fillStyle=rgba(AG.amber,0.9*on);ctx.beginPath();ctx.arc(xx+ws[i]/2,y+182,6+3*(1-ag_eo(on)),0,TAU);ctx.fill();}xx+=ws[i]+gap;});
+  ag_T(ctx,"every split by level: short",x+28,y+232,{w:700,size:28,col:AG.amber,a:clamp(o.split||0,0,1)});
+  ctx.restore();return b;}
+function pc_options(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=262,b={x,y,w,h};if(a<=0.01)return b;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.violet,edgeA:0.5});
+  ag_T(ctx,"OPTIONS · BOTH ADD UP",x+28,y+50,{w:700,size:28,ls:4,col:AG.violet});const pk=clamp(o.pick||0,0,1);
+  [["A level of their own","non-award · 28",o.A],["Their level at home","undergraduate 19 · postgraduate 9",o.B]].forEach(([t,s,v],i)=>{
+    const yy=y+104+i*88,va=clamp(v||0,0,1)*(i===1?1-0.45*pk:1);if(va<=0.01)return;
+    if(i===0&&pk>0.01){ctx.save();ctx.globalAlpha*=pk;ctx.fillStyle=rgba(AG.green,0.1);ctx.beginPath();ag_rect(ctx,x+14,yy-36,w-28,86,12);ctx.fill();ctx.restore();ag_tick(ctx,x+w-44,yy-10,24,rgba(AG.green,pk),4);}
+    ag_T(ctx,t,x+28,yy,{w:600,size:30,a:va});ag_T(ctx,s,x+28,yy+38,{w:500,size:28,col:AG.mut,a:va});});
   ctx.restore();return b;}
 
 /* ---------------------------------------------------------------- the tools, and the arms that reach them
@@ -2532,60 +2591,97 @@ function pc_planRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,cl=1-ag_in(tt,P.p
     hi:RT.map(T=>T?0.9*ag_io(tt,T[0]-0.1,T[2]+0.6,0.4):0),hiCol:AG_OAK.dark});}
 
 /* ---------------------------------------------------------------- 4 · Define the check
-   The same shot: the step moves on; the Checks row opens on the page and is written in, then the Tests row; the agent writes the two
-   tests and they fly up beside the page; Jun approves them, and they lock, so only a person changes them; the agent's arm tries for
-   one and stops. Then Singapore's list, whole before the plant made any water. */
+   The same shot: the step moves on, and the Checks row opens on the page. Nobody knows the answer yet: beside the page, the count
+   by level with a question mark for each level and only its total known, 18,412. What must be true of any right answer comes in as
+   it's said: the + and = that make the levels add up to the total, one level each, the word as the glossary (the Read row) defines
+   it; neither says how many. The count goes, and the agent writes the two checks as tests: they fly up beside the page, Jun approves
+   them, and they lock, so only a person changes them; the agent's arm tries for one and stops. The tests go, and two rules for the
+   agent come in their place: what everyone uses can be wrong, and it says so, with its evidence; where nobody can say what's right,
+   it brings the options, for a person to choose. Then Singapore's list, whole before the plant made any water: none of its measures
+   said what the results would be, only what the water had to meet (the bottle's mark). */
 const PC_T1=[1410,150,450],PC_T2=[1410,370,450],PC_TT=["Levels add up to 18,412","Every student has exactly one level"];
-scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),levels:wAt(sc,"adds","levels"),
-    count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
-    onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),like:c.like,written:wAt(sc,"like","written")}));
+// the two rules, in the tests' place: what the agent does when the data disagrees, and when nobody can say what's right
+const PC_RULES=[{kick:"What everyone uses",title:"Can be wrong",sub:"sometimes for years"},{kick:"If nobody can say",title:"The options",sub:"for a person to choose"}];
+scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),unknown:c.unknown,
+    nobody:wAt(sc,"unknown","nobody"),must:c.must,right:wAt(sc,"must","right answer"),levels:wAt(sc,"adds","levels"),add:wAt(sc,"adds","add up"),
+    count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),exactly:wAt(sc,"one","exactly"),glossary:wAt(sc,"one","glossary"),
+    neither:c.neither,many:wAt(sc,"neither","how many"),relate:wAt(sc,"neither","parts relate"),mean:wAt(sc,"neither","words mean"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
+    onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),wrong:c.wrong,years:wAt(sc,"wrong","years"),
+    says:wAt(sc,"wrong","says so"),options:c.options,brings:wAt(sc,"options","brings"),choose:wAt(sc,"options","choose"),
+    like:c.like,written:wAt(sc,"like","written"),meet:c.meet,had:wAt(sc,"meet","had to meet")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
     {at:P.like-0.3,dis:0.9,place:"pcPlant",keys:[[P.like-0.3,960,540,1.03],[P.like-0.2,980,540,1.0]],push:0,draw:(x,tt)=>pc_plantAgain(x,tt,P)}]);
   pc_tags(ctx,S,t,[[P.like-0.3,"Singapore · 1998 to 2000"]]);});
 
 function pc_defineRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,wake=ag_in(tt,P.writes-0.4,0.6);
-  pc_agent(x,G,rx,ry,R,r,{core:lerp(0.25,1,wake),think:0.6*ag_io(tt,P.writes-0.2,P.approves,0.4)});
+  // the agent: awake as it writes the tests, and thinking again while its two rules are said
+  pc_agent(x,G,rx,ry,R,r,{core:lerp(0.25,1,wake),think:Math.max(0.6*ag_io(tt,P.writes-0.2,P.approves,0.4),0.5*ag_io(tt,P.says-0.3,P.like-0.6,0.5))});
   // its arm tries for the second test as "moving the mark" is said, and stops short of it
   const tr=ag_sine((tt-P.moving+0.5)/0.7)*(1-ag_sine((tt-P.moving-0.5)/0.8));if(tr>0.002)ag_reach(x,[1700,650,1712,616,1730,592,1752,552],tr*0.78);
   pc_jun(x,G,{gaze:tt<P.writes?[2.6,-0.8]:tt<P.person?[3.6,-1.6]:[3.2,-1.2],nod:0.06*ag_io(tt,P.approves-0.1,P.approves+0.7,0.3)});
   ag_roomLight(x,1);
   pc_steps(x,ag_sine((tt-P.matters+0.2)/0.9));
-  // the page: Checks opens and is written as the two checks are said; then Tests, in two parts
+  // the page: Checks opens and is written as the two checks are said; the Read row lit as the glossary is named; then Tests, in two parts
   pc_page(x,{grow:[1,1,1,1,1,clamp((tt-P.matters+0.3)/0.9,0,1),clamp((tt-P.tests+0.3)/0.9,0,1),1],
     k:[1,1,1,1,1,pc_type2(tt,P.levels-0.1,P.count-0.2,24/52,P.every-0.1,P.every+1.5),pc_type2(tt,P.writes-0.1,P.approves+0.5,31/58,P.onlyw-0.1,P.person+1.3),1],
     lab:[1,1,1,1,1,ag_in(tt,P.matters,0.4),ag_in(tt,P.tests,0.4),1],
-    hi:[0,0,0,0,0,0.9*ag_io(tt,P.matters,P.tests-0.2,0.4),0.9*ag_io(tt,P.tests,P.like-0.6,0.4),0],hiCol:AG.blue});
-  // the two tests, out of the sphere and up beside the page; approved by Jun; locked
-  [PC_T1,PC_T2].forEach(([tx,ty,tw],i)=>{const u=clamp((tt-P.writes-0.35*i+0.1)/1.0,0,1);if(u<=0.01)return;const h=pc_test(x,tx,ty,tw,PC_TT[i],{lock:0,a:0}).h,cx=tx+tw/2,cy=ty+h/2;
+    hi:[0,0.9*Math.max(ag_io(tt,P.glossary-0.3,P.glossary+1.6,0.4),ag_io(tt,P.mean-0.3,P.mean+1.4,0.4)),0,0,0,0.9*ag_io(tt,P.matters,P.tests-0.2,0.4),0.9*ag_io(tt,P.tests,P.wrong-0.4,0.4),0],hiCol:AG.blue});
+  // the count nobody knows yet, beside the page: a question mark for each level, its total known; the + and = come in as "add up" is
+  // said, "one level each" under it; the question marks pulse as neither check says how many; then the + and = as "how the parts
+  // relate" is said, and the Read row, the glossary's words, as "what the words mean"; it goes before the tests come
+  const uk=pc_pop(tt,P.nobody-0.3,P.tests-0.45);
+  pc_unknown(x,PC_T1[0],PC_T1[1],PC_T1[2],{k:uk.k,a:uk.a,rel:ag_in(tt,P.add-0.2,0.6),one:ag_in(tt,P.exactly-0.1,0.5),
+    q:Math.max(ag_io(tt,P.nobody,P.nobody+0.9,0.35),ag_io(tt,P.many-0.2,P.many+1.0,0.35)),relHi:ag_io(tt,P.relate-0.2,P.relate+1.0,0.35),
+    oneHi:ag_io(tt,P.mean-0.2,P.mean+1.0,0.35)});
+  // the two tests, out of the sphere and up beside the page; approved by Jun; locked; they go as the agent's rules are said
+  const tg=1-ag_in(tt,P.wrong-0.3,0.45);
+  [PC_T1,PC_T2].forEach(([tx,ty,tw],i)=>{const u=clamp((tt-P.writes-0.35*i+0.1)/1.0,0,1);if(u<=0.01||tg<=0.01)return;const h=pc_test(x,tx,ty,tw,PC_TT[i],{lock:0,a:0}).h,cx=tx+tw/2,cy=ty+h/2;
     const F=pc_fly(u,rx,ry,rx-80,ry-260,cx,cy),lk=clamp((tt-P.person+0.2-0.15*i)/0.6,0,1);
+    x.save();x.globalAlpha*=tg;
     pc_flown(x,F,cx,cy,()=>pc_test(x,tx,ty,tw,PC_TT[i],{a:clamp(u*3,0,1),lock:lk,ok:clamp((tt-P.approves+0.1-0.2*i)/1.0,0,1),okLeft:1}),{w:tw,h,a:clamp(u*3,0,1)});
-    if(i===1)pc_lockFlash(x,tx+tw-40,ty+36,ag_io(tt,P.moving+0.1,P.moving+0.8,0.25));});}
-// Singapore again: the plant still dry, its bottle empty by the tap, the list of how it will be judged already whole
-function pc_plantAgain(x,tt,P){pc_tap(x);pc_bottle(x,PC_TAP[2],790,230,{fill:0,line:0.78});pc_list(x,120,170,620,1,{});
-  ag_pill(x,430,624,"written before any water",{a:ag_in(tt,P.written-0.1,0.5)});}
+    if(i===1)pc_lockFlash(x,tx+tw-40,ty+36,ag_io(tt,P.moving+0.1,P.moving+0.8,0.25));x.restore();});
+  // the agent's two rules, in the tests' place: the first, amber, as what everyone uses can be wrong, its pill as it says so; the
+  // second, violet, as it brings the options
+  const [rx0,ry0,rw]=PC_T1,h1=ag_textCard(x,0,0,rw,PC_RULES[0],{measure:1}).h,r1=pc_pop(tt,P.wrong+0.15,null),r2=pc_pop(tt,P.options-0.1,null);
+  if(r1.a>0.01){ag_textCard(x,rx0,ry0,rw,{kick:PC_RULES[0].kick,title:PC_RULES[0].title,sub:" "},{k:r1.k,a:r1.a,kickCol:AG.amber,edge:AG.amber,edgeA:0.85});
+    ag_T(x,PC_RULES[0].sub,rx0+28,ry0+148,{w:500,size:28,col:AG.mut,a:r1.a*ag_in(tt,P.years-0.3,0.5)});}
+  ag_pill(x,rx0+rw/2,ry0+h1+42,"Says so, with evidence",{col:AG.amber,icon:"warn",a:ag_in(tt,P.says-0.1,0.4)});
+  const y2=ry0+h1+96;
+  if(r2.a>0.01){ag_textCard(x,rx0,y2,rw,{kick:PC_RULES[1].kick,title:PC_RULES[1].title,sub:" "},{k:r2.k,a:r2.a,kickCol:AG.violet,edge:AG.violet,edgeA:0.6});
+    ag_T(x,PC_RULES[1].sub,rx0+28,y2+148,{w:500,size:28,col:AG.green,a:r2.a*ag_in(tt,P.choose-0.4,0.5)});}}
+// Singapore again: the plant still dry, its bottle empty by the tap, the list of how it will be judged already whole; as "had to meet"
+// is said, the bottle's mark lights, and its pill: each measure set what the water had to meet, not what it would show
+function pc_plantAgain(x,tt,P){pc_tap(x);const m=ag_io(tt,P.had-0.2,P.had+2.4,0.5);pc_bottle(x,PC_TAP[2],790,230,{fill:0,line:0.78,mark:m});pc_list(x,120,170,620,1,{});
+  ag_pill(x,430,624,"written before any water",{a:ag_in(tt,P.written-0.1,0.5)});
+  ag_pill(x,430,704,"what it had to meet",{a:ag_in(tt,P.had-0.1,0.5)});}
 
 /* ---------------------------------------------------------------- 5 · Do
    The agent at work, in its sandbox, with the three tools the plan gave it: three words from Docs, the tables from Catalog, the count
    by level built in the sandbox. The first run fails the first test, 28 short; Query finds 28 students with no level, exchange
-   students. It doesn't drop them or touch the test: it asks Mei, who decides from the government's list. Then the third level goes in,
-   both tests pass, the description is written from the glossary, and the pull request opens with its evidence. */
+   students, and, asked of every census day since 2021, the same each year: every split by level since was short. It doesn't drop them
+   or touch the test: it asks Mei, with its evidence and two options that both add up, and she decides from the government's list; the
+   years before go to Planning, for people to look into. Then the third level goes in, both tests pass, the description is written
+   from the glossary, and the pull request opens with its evidence. */
 const PC_R5=[1230,400,150,76],PC_SB=[780,760,600],PC_CX=[570,740,420],PC_DT=[[90,160,450],[90,420,450]];
 const PC_QEV=[{kick:"Query",title:"census day, no level",col:AG.blue},{kick:"Result",title:"28 students",col:AG.orange}];
 scene("do",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),words:wAt(sc,"builds","three words"),tables:wAt(sc,"builds","tables"),
     count:wAt(sc,"builds","count by level"),red:c.red,fails:wAt(sc,"red","fails"),n384:wAt(sc,"red","eighteen"),short:c.short,query:wAt(sc,"looks","Query"),
-    n28:wAt(sc,"looks","twenty-eight"),exchange:c.exchange,doesnt:c.doesnt,touch:wAt(sc,"doesnt","touch"),meis:wAt(sc,"meaning","Mei's"),
-    asks:c.asks,mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
+    n28:wAt(sc,"looks","twenty-eight"),exchange:c.exchange,since:c.since,n2021:wAt(sc,"since","twenty twenty-one"),split:c.split,
+    shortw:wAt(sc,"split","short"),doesnt:c.doesnt,touch:wAt(sc,"doesnt","touch"),meaning:c.meaning,meis:wAt(sc,"meaning","Mei's"),
+    asks:c.asks,two:wAt(sc,"asks","two options"),options:c.options,home:wAt(sc,"options","or the level"),
+    mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
+    years:c.years,planning:wAt(sc,"years","Planning"),look:wAt(sc,"years","look into"),
     again:c.again,adds:wAt(sc,"again","adds"),runs:wAt(sc,"again","runs"),n412:wAt(sc,"again","eighteen"),every:wAt(sc,"again","every"),pass:c.pass,
     descr:wAt(sc,"pr","description"),opens:wAt(sc,"pr","pull request"),evidence:c.evidence,claim:wAt(sc,"evidence","claim")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
-    {at:P.mei-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
+    {at:P.asks-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
     {at:P.again-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);
   // the steps stay put over the shots, while one moment in the lab gives way to the next
   pc_steps(ctx,2);});
 
 function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_SB,after=part===1,keep=after?1-ag_in(tt,P.opens-0.5,0.5):1;
   // the agent, at work; its arms out to each tool in turn (Catalog, Query, Docs), data coming back along them
-  const RT=after?[null,null,[P.descr-0.4,P.opens-0.3]]:[[P.tables-0.3,P.count+0.4],[P.query-0.4,P.exchange+0.6],[P.words-0.4,P.tables-0.2]],
+  const RT=after?[null,null,[P.descr-0.4,P.opens-0.3]]:[[P.tables-0.3,P.count+0.4],[P.query-0.4,P.shortw-0.2],[P.words-0.4,P.tables-0.2]],
     U=RT.map(T=>T?ag_sine((tt-T[0])/0.9)*(1-ag_sine((tt-T[1])/0.9)):0);
   pc_agent(x,G,rx,ry,R,r,{think:after?0.6*ag_io(tt,P.adds-0.3,P.pass,0.4):0.6*ag_io(tt,P.words-0.4,P.touch+0.4,0.4)});
   U.forEach((u,i)=>{if(u>0.002)ag_reach(x,pc_arm(i,rx,ry,R),u,{data:RT[i]?clamp((tt-RT[i][0]-0.9)/1.4,0,1):0});});
@@ -2596,11 +2692,14 @@ function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_
     // three words from Docs, in orange: data brought back
     ["student","census day","level of study"].forEach((s,i)=>ag_pill(x,1310,612+i*64,s,{col:AG.orange,a:ag_io(tt,P.words+0.6+0.3*i,P.count+0.6,0.35)}));
     // the query's answer, at the top: 28 students with no level; exchange students
-    const qa=ag_io(tt,P.n28-0.3,P.meis-0.65,0.35),qk=clamp(ag_spr(tt,P.n28-0.3,0.8),0,1.2);
+    const qa=ag_io(tt,P.n28-0.3,P.since-0.55,0.35),qk=clamp(ag_spr(tt,P.n28-0.3,0.8),0,1.2);
     if(qa>0.01){ag_textCard(x,560,170,500,{kick:"Query · census day",title:"28 students, no level",sub:" "},{k:qk,a:qa,kickCol:AG.blue,edge:AG.orange});
       ag_T(x,"exchange students, single units",560+28,170+148,{w:500,size:28,col:AG.mut,a:qa*ag_in(tt,P.exchange-0.1,0.5)});}
+    // then every census day since 2021, in its place: no level, every year, a mark for each as it's said; every split since, short
+    const ya=pc_pop(tt,P.since-0.1,P.meaning-0.6);
+    pc_years(x,560,170,500,{k:ya.k,a:ya.a,n:5*clamp((tt-P.n2021+0.1)/1.4,0,1),split:ag_in(tt,P.shortw-0.2,0.5)});
     // the question for Mei, with its query and the result clipped to it; it goes to her
-    const qs=pc_pop(tt,P.meis-0.25,null),off=ag_sine((tt-P.mei+1.3)/0.9);
+    const qs=pc_pop(tt,P.meaning-0.2,null),off=ag_sine((tt-P.asks+1.3)/0.9);
     ag_evidence(x,560-640*off,160,500,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{k:qs.k,a:qs.a*(1-off),kickCol:AG.mut,ew:240});}
   // the tests, on the left, locked; the first fails, 28 short, until the third level goes in; then both pass
   const s1=after?(tt>P.n412+0.3?"pass":"fail"):(tt>P.fails-0.1?"fail":"set"),s2=after&&tt>P.every+0.3?"pass":"set";
@@ -2628,11 +2727,16 @@ function pc_govList(x,X,Y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=["Undergradu
     ag_T(x,s,X+28,yy,{w:600,size:32});});
   x.restore();}
 function pc_meiRoom(x,tt,P){const G=P.g0+tt;
-  ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.6]:tt<P.own?[3.6,-0.4]:[3.4,0.4],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
+  ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.2]:tt<P.own?[3.8,-0.6]:tt<P.years?[3.4,0.2]:[3.8,0.6],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
   ag_roomLight(x,1);
-  const qs=ag_eo(clamp((tt-P.mei+0.4)/0.7,0,1));ag_evidence(x,lerp(700,820,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
-  const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,820,390,560,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
-  const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,820,654,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});}
+  // the question comes to her, with its evidence; the two options under it, both adding up, each as it's said
+  const qs=ag_eo(clamp((tt-P.asks+0.4)/0.7,0,1));ag_evidence(x,lerp(680,800,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
+  const op=pc_pop(tt,P.two-0.2,null);pc_options(x,800,376,560,{k:op.k,a:op.a,A:ag_in(tt,P.options-0.1,0.4),B:ag_in(tt,P.home-0.1,0.4),pick:ag_in(tt,P.nonaward-0.1,0.5)});
+  // she checks the government's list, and decides: the first
+  const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,1390,376,480,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
+  const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,800,656,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});
+  // the years before, with the agent's evidence, to Planning: for people to look into
+  const pl=pc_pop(tt,P.planning-0.3,null);ag_textCard(x,1390,626,480,{kick:"To Planning",title:"Splits since 2021",sub:"for people to look into"},{k:pl.k,a:pl.a,kickCol:AG.mut,edge:AG.amber,edgeA:0.7});}
 
 /* ---------------------------------------------------------------- 6 · Check
    Jun reads the pull request against his page, not the agent's word: a tick by each row it meets; four of ten rounds; the change is

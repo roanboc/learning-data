@@ -13,8 +13,10 @@ decisions:
     text: A student on census day who takes single units without being enrolled in an award of the
       university, such as an exchange student, counts as non-award, a level of study of its own.
     why: 'Expected: every student on census day has a level. Found: 28 students with no level on
-      31 March 2026, all exchange students taking single units. The government''s list counts them as
-      non-award.'
+      31 March 2026, all exchange students taking single units; none has had a level since 2021, when
+      exchange students moved to a system of their own. Options, both adding up to 18,412: a level of
+      their own (non-award, 28), or each one''s level at home (undergraduate 19, postgraduate 9). The
+      government''s list counts them as non-award. The years since 2021 went to Planning.'
     decided_by: Mei Tanaka, registrar's office
     decided_on: 2026-11-03
     status: agreed

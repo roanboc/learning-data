@@ -4,9 +4,13 @@ Clara Jensen, in Planning, asks for the census-day count by level of study, for 
 report. Before the agent starts, Jun Park writes one page ([`docs/plan.md`](../../docs/plan.md)
 says what each line is for): the goal, what to read, the tools it may use, where it may write, what
 it must never do, a limit, and two checks, which the agent writes as tests before any model and
-Jun approves. The first run is 28 short: exchange students with no level. The agent doesn't drop
-them or touch the test; it asks Mei Tanaka, who owns the meaning, with its query and the result.
-She decides they count as non-award, a level of its own; both tests pass; and the agent opens a
+Jun approves. Nobody knows the count at each level yet, so the checks say what any right answer
+must meet: the levels add up to the census-day count, and every student has exactly one level. The
+first run is 28 short: exchange students with no level, and none has had one since 2021, when they
+moved to a system of their own, so every split by level since then was short. The agent doesn't
+drop them or touch the test; it asks Mei Tanaka, who owns the meaning, with its query, the result
+and two options that both add up. She decides they count as non-award, a level of its own, and the
+years since 2021 go to Planning, for people to look into; both tests pass; and the agent opens a
 pull request with the evidence for every claim. Jun checks it against the plan, and Noor approves
 it for production. *Plan, define the check, do, check*, the fifth film of *Agents at work on
 data*, follows it.

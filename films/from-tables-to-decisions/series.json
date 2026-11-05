@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "From tables to decisions",
+  "title_es": "De las tablas a las decisiones",
+  "planned": 3,
+  "lead": "The third series of Modern data basics. Finance asks what casual teaching costs, and the answer used to wait for a report. Three films: answers on demand, with dashboards only for the questions asked again and again; each measure defined once; and the same definitions for people, agents and systems.",
+  "lead_es": "La tercera serie de Lo básico de los datos modernos. Finanzas pregunta cuánto cuesta la docencia ocasional, y la respuesta esperaba un reporte. Tres películas: respuestas a pedido, con tableros solo para las preguntas que se repiten; cada medida definida una vez; y las mismas definiciones para personas, agentes y sistemas.",
+  "description": "Short films on serving data to people, agents and systems: answers on demand, with dashboards kept for the questions asked again and again; good models and their context in a semantic layer, each measure defined once in an open format; and the same definitions read by dashboards, agents, BI tools and apps. In Databricks and dbt, at the level of architecture, with the official docs for the rest.",
+  "description_es": "Películas cortas sobre cómo servir datos a personas, agentes y sistemas: respuestas a pedido, con tableros solo para las preguntas que se repiten; buenos modelos y su contexto en una capa semántica, cada medida definida una vez en un formato abierto; y las mismas definiciones leídas por tableros, agentes, herramientas de BI y aplicaciones. En Databricks y dbt, al nivel de la arquitectura, con la documentación oficial para el resto.",
+  "card": "Ask for the answer you need. Define each measure once, and every reader, person or agent, gets the same one.",
+  "card_es": "Pide la respuesta que necesitas. Define cada medida una vez, y cada lector, persona o agente, recibe la misma.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: what casual teaching costs",
+  "thread_h_es": "Un hilo: cuánto cuesta la docencia ocasional",
+  "thread": "Rohan Desai, in Finance, asks what casual teaching cost the Faculty of Health this semester. It used to take a report and a week. Film by film, the team serves the answer on demand, keeps a dashboard only for the figures asked every fortnight, defines casual teaching cost once, and serves that one definition to people in Finance's own tools, to agents and to the systems that need it.",
+  "thread_es": "Rohan Desai, de Finanzas, pregunta cuánto le costó la docencia ocasional a la Facultad de Salud este semestre. Antes hacía falta un reporte y una semana. Película a película, el equipo sirve la respuesta a pedido, deja un tablero solo para las cifras que se piden cada quincena, define una vez el costo de la docencia ocasional y sirve esa única definición a las personas en las herramientas de Finanzas, a los agentes y a los sistemas que la necesitan.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Owns a measure",
+      "Rohan Desai, in Finance, who decides what casual teaching cost means, and asks for it on demand"
+    ],
+    [
+      "biz",
+      "Owns HR's data",
+      "Ingrid Holm, in HR, who answers for the contracts and claims behind the cost"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who decides where each measure is defined and who may read it"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, who models the facts and defines each measure once"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who sets up the dashboards, the agents' spaces and the shares"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Es dueño de una medida",
+      "Rohan Desai, de Finanzas, que decide qué significa el costo de la docencia ocasional, y lo pide cuando lo necesita"
+    ],
+    [
+      "biz",
+      "Es dueña de los datos de RR. HH.",
+      "Ingrid Holm, de RR. HH., que responde por los contratos y las horas detrás del costo"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que decide dónde se define cada medida y quién puede leerla"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, que modela los hechos y define cada medida una vez"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que configura los tableros, los espacios de los agentes y los datos compartidos"
+    ]
+  ]
+}

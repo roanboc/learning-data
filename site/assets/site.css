@@ -338,6 +338,7 @@ details.real summary{cursor:pointer;font-weight:700}details.real p{margin:8px 0 
 .crumbs a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.crumbs a:hover{text-decoration-thickness:2px}
 .note{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:760px}
 .note{padding:6px 12px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
+.note.draft{border-left-color:#e0a526}.note.draft b{text-transform:uppercase;letter-spacing:.08em;font-size:13px}
 .section-gap{margin-top:22px}
 /* topic cards: the whole card is one link (h3 a::after); buttons inside sit above it */
 .topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:16px;margin-top:14px}

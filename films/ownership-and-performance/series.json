@@ -1,0 +1,66 @@
+{
+  "draft": true,
+  "title": "Ownership and performance",
+  "title_es": "Responsabilidad y desempeño",
+  "planned": 3,
+  "lead": "The last series of Leading data people. From July 2027 Ivy Reyes owns her first data product, Teaching space use, which Facilities and the faculties read every Monday. What does it mean to own an outcome, how should a team measure its work, and how do people grow?",
+  "lead_es": "La última serie de Liderar equipos de datos. Desde julio de 2027 Ivy Reyes es dueña de su primer producto de datos, Uso de los espacios docentes, que Instalaciones y las facultades leen cada lunes. ¿Qué significa responder por un resultado, cómo debe medir un equipo su trabajo y cómo crecen las personas?",
+  "description": "Three films on ownership and performance: owning what your work is for, not only what you did; measuring how the work flows, together, to fix the system rather than rank people; and growing people with goals they help set, weekly feedback about the work, and a next step with more to own.",
+  "description_es": "Tres películas sobre responsabilidad y desempeño: responder por aquello para lo que sirve tu trabajo, no solo por lo que hiciste; medir cómo fluye el trabajo, en equipo, para arreglar el sistema y no para clasificar personas; y hacer crecer a las personas con metas que ayudan a fijar, comentarios semanales sobre el trabajo y un siguiente paso con más a su cargo.",
+  "card": "Own the outcome, measure the work together to fix the system, and grow people with goals, feedback and a next step.",
+  "card_es": "Responde por el resultado, mide el trabajo en equipo para arreglar el sistema, y haz crecer con metas y comentarios.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: Ivy's first data product, and her first year",
+  "thread_h_es": "Un hilo: el primer producto de datos de Ivy, y su primer año",
+  "thread": "From 1 July 2027 Ivy owns Teaching space use, the counts per room per hour that Facilities and the faculties read every Monday. When forty rooms' sensors change in August, she notices first and says so. The team reads its measures together to fix how the work flows, never to rank anyone, and Ivy's year ends with her next goal: helping the next graduate start.",
+  "thread_es": "Desde el 1 de julio de 2027 Ivy es dueña de Uso de los espacios docentes, los conteos por aula y por hora que Instalaciones y las facultades leen cada lunes. Cuando cambian los sensores de cuarenta aulas en agosto, ella lo nota primero y lo dice. El equipo lee sus medidas en conjunto para arreglar cómo fluye el trabajo, nunca para clasificar a nadie, y el año de Ivy termina con su siguiente meta: ayudar a empezar al próximo graduado.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Reads it every Monday",
+      "Graham Ellis, the Director of Facilities, who plans the rooms with it"
+    ],
+    [
+      "tech",
+      "Owns the product",
+      "Ivy Reyes, a data analyst, who owns her first data product from July 2027"
+    ],
+    [
+      "tech",
+      "Leads the team",
+      "Helena Novak, the data manager, who holds weekly one-to-ones"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who keeps the sensors' data flowing"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Lo lee cada lunes",
+      "Graham Ellis, el director de Instalaciones, que planifica las aulas con él"
+    ],
+    [
+      "tech",
+      "Dueña del producto",
+      "Ivy Reyes, analista de datos, dueña de su primer producto de datos desde julio de 2027"
+    ],
+    [
+      "tech",
+      "Dirige el equipo",
+      "Helena Novak, la gestora de datos, que tiene reuniones uno a uno cada semana"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que mantiene fluyendo los datos de los sensores"
+    ]
+  ]
+}

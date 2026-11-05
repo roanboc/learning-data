@@ -2227,6 +2227,7 @@ HR.hook=HR.agent.y+HR.agent.R;
 const HW_QUIET=[[850,430,430,290,0.6],[1200,150,720,56,0.5],[1420,470,250,230,0.45],[420,96,360,46,0.3],[1772,400,150,280,0.4]];
 AG_PLACES.hwLab=c=>ag_paintLab(c,{quiet:HW_QUIET});
 AG_PLACES.hwLabNight=c=>ag_paintLab(c,{quiet:HW_QUIET,night:true,lamp:HR.lamp});
+AG_ROOMS.hwLabNight="hwLab";                                 // the lab by night is the lab: from night to morning the camera glides on
 const HW_KICK=(x,o)=>ag_kicker(x,"2.6","How it goes wrong",o);
 
 /* ---------------------------------------------------------------- the agent, its arms, Jun */

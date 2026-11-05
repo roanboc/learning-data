@@ -792,27 +792,90 @@ function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(l
 function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
 
 /* ---------------------------------------------------------------- the camera
-   ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
-   1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
-   place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
-   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
-function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -968,6 +1031,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);
@@ -2226,19 +2290,17 @@ function pc_whole(ctx,a,fn){if(a<=0.01)return;if(a>=0.99){fn(ctx);return;}const 
   bx.setTransform(ctx.getTransform());fn(bx);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(bc,0,0);ctx.restore();}
 
 /* ===== Plan, define the check, do, check: the eight chapters =====
-   Each chapter is a few shots (pc_shots): a place painted once, a slow camera, and what's drawn live over it, cut together with
-   short dissolves, or with a cut where two shots show the same people or words. Times inside a chapter come from its cues (when each
+   Each chapter is a few shots (the shared ag_shots): a place painted once, a slow camera, and what's drawn live over it. Between
+   places a shot dissolves in. In the lab the camera never jumps: the next shot, or a chapter that opens there (ag_cutInto), glides
+   on from where the camera is, and a later moment there (later:true) lets what was there leave, through the bare lab, before what
+   comes next comes in, so nothing appears or vanishes in one frame. Times inside a chapter come from its cues (when each
    line starts) and the words of its lines (wAt), so the pictures stay with the voice if it's recorded again. Words on screen are on
    cards, labels and pills, at least 28 px as seen, and above the captions (y 890). */
 
 // made once per chapter, the first time it draws: its cues are known by then
 const pc_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with each shot's own dissolve (sh.dis, seconds; 0.5 by default); a shot marked cut comes in on a cut
-function pc_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// the lab, bare for an instant between two moments in it (later:true): its place, and the light every shot of it draws
+AG_BARE.lab=c=>ag_roomLight(c,1);
 // a card that springs in at t0 and goes at t1 (or stays): its k and a
 const pc_pop=(t,t0,t1)=>({k:clamp(ag_spr(t,t0,0.8),0,1.2),a:t1==null?ag_in(t,t0,0.35):ag_io(t,t0,t1,0.35)});
 // the place-and-year tag at the top left, in screen space: the latest of [[t, words, dissolve], ...] passed, dissolving from the one
@@ -2286,7 +2348,7 @@ scene("water",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({rain:wAt(sc,
     uni:c.data-0.6,change:wAt(sc,"data","change"),census:wAt(sc,"data","census-day"),gov:wAt(sc,"data","government"),
     checked:wAt(sc,"unless","checked"),brings:wAt(sc,"unless","brings"),back:c.first-0.2,check:wAt(sc,"first","check"),starts:wAt(sc,"first","starts"),
     work:wAt(sc,"first","work"),use:wAt(sc,"first","use"),title:c.breath+0.2}));
-  pc_shots(ctx,S,t,sc.dur,[
+  ag_shots(ctx,S,t,sc.dur,[
     // across calm water, the island city in soft daylight; a band of rain moves in from the left and falls on the city and the sea
     {at:0,place:"pcCity",keys:[[0,960,520,1.07],[0.1,960,540,1.0]],d:8.6,push:0,draw:(x,tt)=>{
       pc_cityLife(x,tt,lerp(-220,2300,ag_sine((tt-P.island+1.2)/7.5)),ag_in(tt,P.island-1.4,1.2));}},
@@ -2393,7 +2455,7 @@ scene("long",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),
     n38:wAt(sc,"pages","thirty-eight"),forty:wAt(sc,"pages","forty"),docs:c.docs,call:wAt(sc,"docs","one call"),other:c.other,
     brought:wAt(sc,"other","brought"),another:wAt(sc,"other","another"),caught:wAt(sc,"caught","caught"),again:wAt(sc,"caught","again"),
     broken:c.broken,nobody:wAt(sc,"broken","nobody"),waste:wAt(sc,"waste","waste")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_longRoom(x,tt,P)}]);
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_longRoom(x,tt,P)}]);
   pc_tags(ctx,S,t,[[0.4,"Once"]]);});
 
 function pc_longRoom(x,tt,P){const [rx,ry,R,r]=PC_R2,G=P.g0+tt;
@@ -2451,7 +2513,7 @@ scene("plan",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),
     goal:c.goal,students:wAt(sc,"goal","students"),reads:c.reads,glossary:wAt(sc,"reads","glossary's"),builds:wAt(sc,"reads","builds"),
     tools:c.tools,catalog:wAt(sc,"tools","Catalog"),ronly:wAt(sc,"tools","read only"),writes:c.writes,only:wAt(sc,"writes","only"),
     never:c.never,names:wAt(sc,"never","names"),prod:wAt(sc,"never","production"),limit:c.limit,ten:wAt(sc,"limit","ten"),reports:wAt(sc,"limit","reports")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_planRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_planRoom(x,tt,P)}]);});
 
 function pc_planRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,cl=1-ag_in(tt,P.page-0.2,0.9);
   // the agent, dim, waiting for the page: it comes once Clara has gone
@@ -2477,7 +2539,7 @@ const PC_T1=[1410,150,450],PC_T2=[1410,370,450],PC_TT=["Levels add up to 18,412"
 scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),levels:wAt(sc,"adds","levels"),
     count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
     onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),like:c.like,written:wAt(sc,"like","written")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
     {at:P.like-0.3,dis:0.9,place:"pcPlant",keys:[[P.like-0.3,960,540,1.03],[P.like-0.2,980,540,1.0]],push:0,draw:(x,tt)=>pc_plantAgain(x,tt,P)}]);
   pc_tags(ctx,S,t,[[P.like-0.3,"Singapore · 1998 to 2000"]]);});
 
@@ -2515,9 +2577,11 @@ scene("do",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),wo
     asks:c.asks,mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
     again:c.again,adds:wAt(sc,"again","adds"),runs:wAt(sc,"again","runs"),n412:wAt(sc,"again","eighteen"),every:wAt(sc,"again","every"),pass:c.pass,
     descr:wAt(sc,"pr","description"),opens:wAt(sc,"pr","pull request"),evidence:c.evidence,claim:wAt(sc,"evidence","claim")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
-    {at:P.mei-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
-    {at:P.again-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
+    {at:P.mei-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
+    {at:P.again-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);
+  // the steps stay put over the shots, while one moment in the lab gives way to the next
+  pc_steps(ctx,2);});
 
 function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_SB,after=part===1,keep=after?1-ag_in(tt,P.opens-0.5,0.5):1;
   // the agent, at work; its arms out to each tool in turn (Catalog, Query, Docs), data coming back along them
@@ -2527,7 +2591,6 @@ function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_
   U.forEach((u,i)=>{if(u>0.002)ag_reach(x,pc_arm(i,rx,ry,R),u,{data:RT[i]?clamp((tt-RT[i][0]-0.9)/1.4,0,1):0});});
   ag_sandbox(x,sx,sy,sw,{depth:110,a:keep});
   ag_roomLight(x,1);
-  pc_steps(x,2);
   for(let i=0;i<3;i++)pc_tool(x,i,{touch:clamp((U[i]-0.85)/0.15,0,1)});
   if(!after){
     // three words from Docs, in orange: data brought back
@@ -2567,7 +2630,6 @@ function pc_govList(x,X,Y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=["Undergradu
 function pc_meiRoom(x,tt,P){const G=P.g0+tt;
   ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.6]:tt<P.own?[3.6,-0.4]:[3.4,0.4],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
   ag_roomLight(x,1);
-  pc_steps(x,2);
   const qs=ag_eo(clamp((tt-P.mei+0.4)/0.7,0,1));ag_evidence(x,lerp(700,820,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
   const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,820,390,560,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
   const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,820,654,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});}
@@ -2581,15 +2643,15 @@ scene("check",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc)
     tools:wAt(sc,"jun","tools"),names:wAt(sc,"jun","names"),untouched:wAt(sc,"jun","untouched"),green:wAt(sc,"jun","green"),four:wAt(sc,"rounds","four"),
     his:c.his,answers:wAt(sc,"his","answers"),noor:c.noor,prod:wAt(sc,"noor","production"),approve:wAt(sc,"noor","approve"),
     review:wAt(sc,"never","review"),approves:wAt(sc,"never","approves"),outside:c.outside}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_checkRoom(x,tt,P)},
-    {at:P.noor-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_noorRoom(x,tt,P)},
-    {at:P.outside-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_heldRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_checkRoom(x,tt,P)},
+    {at:P.noor-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_noorRoom(x,tt,P)},
+    {at:P.outside-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_heldRoom(x,tt,P)}]);
+  pc_steps(ctx,3);});
 
 function pc_checkRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,[px,py,pw]=PC_PR;
   pc_agent(x,G,rx,ry,R,r,{core:0.6});
   pc_jun(x,G,{gaze:tt<P.plan?[3.4,-1.6]:tt<P.four?[2.8,-0.8]:[3.4,-1.4],nod:0.06*ag_io(tt,P.answers-0.1,P.answers+0.8,0.3)});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   // the page, a tick by each row the pull request meets, as it's said
   pc_page(x,{tick:[P.goal,0,P.tools,0,P.names,P.green,P.untouched,P.four].map(v=>v?ag_in(tt,v+0.1,0.4):0),hi:[0,0,0,0,0,0,0,0]});
   ag_evidence(x,px,py,pw,{kick:"Pull request",title:"Census-day count by level",sub:"from the agent’s branch"},PC_PREV,{kickCol:AG.mut});
@@ -2601,7 +2663,6 @@ function pc_noorRoom(x,tt,P){const G=P.g0+tt,into=ag_sine((tt-P.approves-0.5)/1.
   // the agent, small, below the pull request: its review is for reference only
   pc_agent(x,G,840,760,80,40,{a:ag_in(tt,P.review-0.5,0.6),core:0.8});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   // the pull request: Noor approves it, and it goes behind the glass, into production
   pc_flown(x,{x:lerp(840,1540,into),y:lerp(343,470,into),s:1},840,343,()=>{
     ag_evidence(x,560,220,560,{kick:"Pull request",title:"Census-day count by level",sub:"from the agent’s branch"},PC_PREV,{kickCol:AG.mut});
@@ -2616,7 +2677,6 @@ function pc_heldRoom(x,tt,P){const G=P.g0+tt;
   pc_jun(x,G,{gaze:[3.0,-1.6]});
   ag_person(x,"noor",1600,640,0.92,{t:G+0.4,flip:true,gaze:[3.0,-1.4]});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   ag_label(x,960,742,"The panel · Singapore, 2000 to 2002",{align:"center",col:AG.mut,a:ag_in(tt,P.outside-0.2,0.5)});}
 
 /* ---------------------------------------------------------------- 7 · What the loop leaves
@@ -2625,7 +2685,9 @@ function pc_heldRoom(x,tt,P){const G=P.g0+tt;
 const PC_CY=[760,310,170];
 scene("leaves",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({loop:wAt(sc,"next","loop"),nextOne:wAt(sc,"next","next one"),
     decision:c.decision,meta:c.meta,skill:c.skill,plan:c.plan,starts:wAt(sc,"plan","starts")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_leavesRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_leavesRoom(x,tt,P)}]);
+  // the steps, kept from the chapter before, give way to the ring as it starts
+  const t0=P.loop-0.4;if(t<t0+1.6)pc_steps(ctx,3,{a:1-ag_in(t,t0,0.5)});});
 
 function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
   ag_roomLight(x,1);
@@ -2633,7 +2695,6 @@ function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
   // the steps across the top give way to the ring: it draws itself from the top, clockwise, each step coming on as it's reached;
   // then a light goes round it
   const t0=P.loop-0.4,dr=1.6,ring=clamp((tt-t0)/dr,0,1);
-  if(ring<1)pc_steps(x,3,{a:1-ag_in(tt,t0,0.5)});
   const pu=pc_round(tt,t0+dr+0.3,2.0),lit=PC_CYC.map((d,i)=>{const dd=((pu.deg-d)%360+540)%360-180;return Math.max(clamp(1-Math.abs(dd)/50,0,1)*pu.a,i===0?ag_in(tt,P.starts-0.3,0.5):0);});
   if(ring>0){if(ring<1){ag_ring(x,cx,cy,R,{p:ag_sine(ring),from:-90,arrows:[-45,45,135,225].filter(d=>(d+90)/360<ag_sine(ring))});
       PC_CYC.forEach((d,i)=>{const a=ag_in(tt,t0+dr*(i/4)-0.05,0.35);if(a<=0.01)return;const q=d*Math.PI/180,px=cx+Math.cos(q)*R,py=cy+Math.sin(q)*R,w=ag_tw(x,PC_STEPS[i],{w:700,size:30})+54;
@@ -2653,7 +2714,7 @@ function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
    the count by level, checked, with its evidence, goes into the report to the government. The end card carries the takeaway. */
 scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),outside:wAt(sc,"sg","outside"),bottle:c.bottle,raised:wAt(sc,"bottle","raised"),
     trust:wAt(sc,"bottle","trust"),uni:c.uni,person:wAt(sc,"uni","person"),gov:wAt(sc,"send","government"),evidence:wAt(sc,"send","evidence"),breath:c.breath}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"pcPanel",keys:[[0,960,520,1.03],[0.1,960,540,1.0]],d:6,push:0,draw:(x,tt)=>pc_panelShot(x,tt,{results:-20,july:-10,well:P.outside-0.2,rules:-10,years:-10})},
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"pcPanel",keys:[[0,960,520,1.03],[0.1,960,540,1.0]],d:6,push:0,draw:(x,tt)=>pc_panelShot(x,tt,{results:-20,july:-10,well:P.outside-0.2,rules:-10,years:-10})},
     {at:P.bottle-0.5,dis:1.0,place:"pcStadium",keys:[[P.bottle-0.5,960,560,1.08],[P.bottle-0.4,960,540,1.0]],d:7,push:0,draw:(x,tt)=>pc_crowd(x,tt,ag_sine((tt-P.raised+0.4)/2.6),ag_sine((tt-P.trust+0.1)/1.6),1)},
     {at:P.uni-0.4,dis:1.0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_sendRoom(x,tt,P)}]);
   pc_tags(ctx,S,t,[[0.4,"The panel · 2000 to 2002"],[P.bottle-0.5,"National Day Parade · 9 August 2002",1.0],[P.uni-0.4,"The university",1.0],[P.breath,null,0.6]]);

@@ -1,17 +1,15 @@
 /* ===== Plan, define the check, do, check: the eight chapters =====
-   Each chapter is a few shots (pc_shots): a place painted once, a slow camera, and what's drawn live over it, cut together with
-   short dissolves, or with a cut where two shots show the same people or words. Times inside a chapter come from its cues (when each
+   Each chapter is a few shots (the shared ag_shots): a place painted once, a slow camera, and what's drawn live over it. Between
+   places a shot dissolves in. In the lab the camera never jumps: the next shot, or a chapter that opens there (ag_cutInto), glides
+   on from where the camera is, and a later moment there (later:true) lets what was there leave, through the bare lab, before what
+   comes next comes in, so nothing appears or vanishes in one frame. Times inside a chapter come from its cues (when each
    line starts) and the words of its lines (wAt), so the pictures stay with the voice if it's recorded again. Words on screen are on
    cards, labels and pills, at least 28 px as seen, and above the captions (y 890). */
 
 // made once per chapter, the first time it draws: its cues are known by then
 const pc_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with each shot's own dissolve (sh.dis, seconds; 0.5 by default); a shot marked cut comes in on a cut
-function pc_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// the lab, bare for an instant between two moments in it (later:true): its place, and the light every shot of it draws
+AG_BARE.lab=c=>ag_roomLight(c,1);
 // a card that springs in at t0 and goes at t1 (or stays): its k and a
 const pc_pop=(t,t0,t1)=>({k:clamp(ag_spr(t,t0,0.8),0,1.2),a:t1==null?ag_in(t,t0,0.35):ag_io(t,t0,t1,0.35)});
 // the place-and-year tag at the top left, in screen space: the latest of [[t, words, dissolve], ...] passed, dissolving from the one
@@ -59,7 +57,7 @@ scene("water",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({rain:wAt(sc,
     uni:c.data-0.6,change:wAt(sc,"data","change"),census:wAt(sc,"data","census-day"),gov:wAt(sc,"data","government"),
     checked:wAt(sc,"unless","checked"),brings:wAt(sc,"unless","brings"),back:c.first-0.2,check:wAt(sc,"first","check"),starts:wAt(sc,"first","starts"),
     work:wAt(sc,"first","work"),use:wAt(sc,"first","use"),title:c.breath+0.2}));
-  pc_shots(ctx,S,t,sc.dur,[
+  ag_shots(ctx,S,t,sc.dur,[
     // across calm water, the island city in soft daylight; a band of rain moves in from the left and falls on the city and the sea
     {at:0,place:"pcCity",keys:[[0,960,520,1.07],[0.1,960,540,1.0]],d:8.6,push:0,draw:(x,tt)=>{
       pc_cityLife(x,tt,lerp(-220,2300,ag_sine((tt-P.island+1.2)/7.5)),ag_in(tt,P.island-1.4,1.2));}},
@@ -166,7 +164,7 @@ scene("long",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),
     n38:wAt(sc,"pages","thirty-eight"),forty:wAt(sc,"pages","forty"),docs:c.docs,call:wAt(sc,"docs","one call"),other:c.other,
     brought:wAt(sc,"other","brought"),another:wAt(sc,"other","another"),caught:wAt(sc,"caught","caught"),again:wAt(sc,"caught","again"),
     broken:c.broken,nobody:wAt(sc,"broken","nobody"),waste:wAt(sc,"waste","waste")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_longRoom(x,tt,P)}]);
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_longRoom(x,tt,P)}]);
   pc_tags(ctx,S,t,[[0.4,"Once"]]);});
 
 function pc_longRoom(x,tt,P){const [rx,ry,R,r]=PC_R2,G=P.g0+tt;
@@ -224,7 +222,7 @@ scene("plan",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),
     goal:c.goal,students:wAt(sc,"goal","students"),reads:c.reads,glossary:wAt(sc,"reads","glossary's"),builds:wAt(sc,"reads","builds"),
     tools:c.tools,catalog:wAt(sc,"tools","Catalog"),ronly:wAt(sc,"tools","read only"),writes:c.writes,only:wAt(sc,"writes","only"),
     never:c.never,names:wAt(sc,"never","names"),prod:wAt(sc,"never","production"),limit:c.limit,ten:wAt(sc,"limit","ten"),reports:wAt(sc,"limit","reports")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_planRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_planRoom(x,tt,P)}]);});
 
 function pc_planRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,cl=1-ag_in(tt,P.page-0.2,0.9);
   // the agent, dim, waiting for the page: it comes once Clara has gone
@@ -250,7 +248,7 @@ const PC_T1=[1410,150,450],PC_T2=[1410,370,450],PC_TT=["Levels add up to 18,412"
 scene("define",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),matters:wAt(sc,"matters","matters"),levels:wAt(sc,"adds","levels"),
     count:wAt(sc,"adds","count already"),every:wAt(sc,"one","every"),tests:c.tests,writes:wAt(sc,"tests","writes"),approves:wAt(sc,"tests","approves"),
     onlyw:wAt(sc,"only","only"),person:wAt(sc,"only","person"),moving:wAt(sc,"only","moving"),like:c.like,written:wAt(sc,"like","written")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_defineRoom(x,tt,P)},
     {at:P.like-0.3,dis:0.9,place:"pcPlant",keys:[[P.like-0.3,960,540,1.03],[P.like-0.2,980,540,1.0]],push:0,draw:(x,tt)=>pc_plantAgain(x,tt,P)}]);
   pc_tags(ctx,S,t,[[P.like-0.3,"Singapore · 1998 to 2000"]]);});
 
@@ -288,9 +286,11 @@ scene("do",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),wo
     asks:c.asks,mei:c.mei,list:wAt(sc,"mei","government's"),nonaward:wAt(sc,"mei","non-award"),own:wAt(sc,"mei","own"),
     again:c.again,adds:wAt(sc,"again","adds"),runs:wAt(sc,"again","runs"),n412:wAt(sc,"again","eighteen"),every:wAt(sc,"again","every"),pass:c.pass,
     descr:wAt(sc,"pr","description"),opens:wAt(sc,"pr","pull request"),evidence:c.evidence,claim:wAt(sc,"evidence","claim")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
-    {at:P.mei-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
-    {at:P.again-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,0)},
+    {at:P.mei-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_meiRoom(x,tt,P)},
+    {at:P.again-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_doRoom(x,tt,P,1)}]);
+  // the steps stay put over the shots, while one moment in the lab gives way to the next
+  pc_steps(ctx,2);});
 
 function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_SB,after=part===1,keep=after?1-ag_in(tt,P.opens-0.5,0.5):1;
   // the agent, at work; its arms out to each tool in turn (Catalog, Query, Docs), data coming back along them
@@ -300,7 +300,6 @@ function pc_doRoom(x,tt,P,part){const G=P.g0+tt,[rx,ry,R,r]=PC_R5,[sx,sy,sw]=PC_
   U.forEach((u,i)=>{if(u>0.002)ag_reach(x,pc_arm(i,rx,ry,R),u,{data:RT[i]?clamp((tt-RT[i][0]-0.9)/1.4,0,1):0});});
   ag_sandbox(x,sx,sy,sw,{depth:110,a:keep});
   ag_roomLight(x,1);
-  pc_steps(x,2);
   for(let i=0;i<3;i++)pc_tool(x,i,{touch:clamp((U[i]-0.85)/0.15,0,1)});
   if(!after){
     // three words from Docs, in orange: data brought back
@@ -340,7 +339,6 @@ function pc_govList(x,X,Y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=["Undergradu
 function pc_meiRoom(x,tt,P){const G=P.g0+tt;
   ag_person(x,"mei",520,640,0.95,{t:G+0.6,gaze:tt<P.list?[3.2,-1.6]:tt<P.own?[3.6,-0.4]:[3.4,0.4],nod:0.05*ag_io(tt,P.own-0.1,P.own+0.8,0.3),smile:0.25*ag_in(tt,P.own,0.8)});
   ag_roomLight(x,1);
-  pc_steps(x,2);
   const qs=ag_eo(clamp((tt-P.mei+0.4)/0.7,0,1));ag_evidence(x,lerp(700,820,qs),150,560,{kick:"For Mei",title:"Which level are these 28?"},PC_QEV,{a:qs,kickCol:AG.mut,ew:240});
   const lk=pc_pop(tt,P.list-0.3,null);pc_govList(x,820,390,560,{k:lk.k,a:lk.a,hi:ag_in(tt,P.nonaward-0.1,0.5)});
   const dk=pc_pop(tt,P.own-0.3,null);ag_textCard(x,820,654,560,{kick:"Decided",title:"Non-award: a level of its own",sub:"Mei Tanaka, Registrar’s office"},{k:dk.k,a:dk.a,kickCol:AG.mut});}
@@ -354,15 +352,15 @@ scene("check",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc)
     tools:wAt(sc,"jun","tools"),names:wAt(sc,"jun","names"),untouched:wAt(sc,"jun","untouched"),green:wAt(sc,"jun","green"),four:wAt(sc,"rounds","four"),
     his:c.his,answers:wAt(sc,"his","answers"),noor:c.noor,prod:wAt(sc,"noor","production"),approve:wAt(sc,"noor","approve"),
     review:wAt(sc,"never","review"),approves:wAt(sc,"never","approves"),outside:c.outside}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_checkRoom(x,tt,P)},
-    {at:P.noor-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_noorRoom(x,tt,P)},
-    {at:P.outside-0.4,cut:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_heldRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_checkRoom(x,tt,P)},
+    {at:P.noor-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_noorRoom(x,tt,P)},
+    {at:P.outside-0.4,later:true,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_heldRoom(x,tt,P)}]);
+  pc_steps(ctx,3);});
 
 function pc_checkRoom(x,tt,P){const G=P.g0+tt,[rx,ry,R,r]=PC_R3,[px,py,pw]=PC_PR;
   pc_agent(x,G,rx,ry,R,r,{core:0.6});
   pc_jun(x,G,{gaze:tt<P.plan?[3.4,-1.6]:tt<P.four?[2.8,-0.8]:[3.4,-1.4],nod:0.06*ag_io(tt,P.answers-0.1,P.answers+0.8,0.3)});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   // the page, a tick by each row the pull request meets, as it's said
   pc_page(x,{tick:[P.goal,0,P.tools,0,P.names,P.green,P.untouched,P.four].map(v=>v?ag_in(tt,v+0.1,0.4):0),hi:[0,0,0,0,0,0,0,0]});
   ag_evidence(x,px,py,pw,{kick:"Pull request",title:"Census-day count by level",sub:"from the agent’s branch"},PC_PREV,{kickCol:AG.mut});
@@ -374,7 +372,6 @@ function pc_noorRoom(x,tt,P){const G=P.g0+tt,into=ag_sine((tt-P.approves-0.5)/1.
   // the agent, small, below the pull request: its review is for reference only
   pc_agent(x,G,840,760,80,40,{a:ag_in(tt,P.review-0.5,0.6),core:0.8});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   // the pull request: Noor approves it, and it goes behind the glass, into production
   pc_flown(x,{x:lerp(840,1540,into),y:lerp(343,470,into),s:1},840,343,()=>{
     ag_evidence(x,560,220,560,{kick:"Pull request",title:"Census-day count by level",sub:"from the agent’s branch"},PC_PREV,{kickCol:AG.mut});
@@ -389,7 +386,6 @@ function pc_heldRoom(x,tt,P){const G=P.g0+tt;
   pc_jun(x,G,{gaze:[3.0,-1.6]});
   ag_person(x,"noor",1600,640,0.92,{t:G+0.4,flip:true,gaze:[3.0,-1.4]});
   ag_roomLight(x,1);
-  pc_steps(x,3);
   ag_label(x,960,742,"The panel · Singapore, 2000 to 2002",{align:"center",col:AG.mut,a:ag_in(tt,P.outside-0.2,0.5)});}
 
 /* ---------------------------------------------------------------- 7 · What the loop leaves
@@ -398,7 +394,9 @@ function pc_heldRoom(x,tt,P){const G=P.g0+tt;
 const PC_CY=[760,310,170];
 scene("leaves",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({loop:wAt(sc,"next","loop"),nextOne:wAt(sc,"next","next one"),
     decision:c.decision,meta:c.meta,skill:c.skill,plan:c.plan,starts:wAt(sc,"plan","starts")}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_leavesRoom(x,tt,P)}]);});
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"lab",later:true,keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_leavesRoom(x,tt,P)}]);
+  // the steps, kept from the chapter before, give way to the ring as it starts
+  const t0=P.loop-0.4;if(t<t0+1.6)pc_steps(ctx,3,{a:1-ag_in(t,t0,0.5)});});
 
 function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
   ag_roomLight(x,1);
@@ -406,7 +404,6 @@ function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
   // the steps across the top give way to the ring: it draws itself from the top, clockwise, each step coming on as it's reached;
   // then a light goes round it
   const t0=P.loop-0.4,dr=1.6,ring=clamp((tt-t0)/dr,0,1);
-  if(ring<1)pc_steps(x,3,{a:1-ag_in(tt,t0,0.5)});
   const pu=pc_round(tt,t0+dr+0.3,2.0),lit=PC_CYC.map((d,i)=>{const dd=((pu.deg-d)%360+540)%360-180;return Math.max(clamp(1-Math.abs(dd)/50,0,1)*pu.a,i===0?ag_in(tt,P.starts-0.3,0.5):0);});
   if(ring>0){if(ring<1){ag_ring(x,cx,cy,R,{p:ag_sine(ring),from:-90,arrows:[-45,45,135,225].filter(d=>(d+90)/360<ag_sine(ring))});
       PC_CYC.forEach((d,i)=>{const a=ag_in(tt,t0+dr*(i/4)-0.05,0.35);if(a<=0.01)return;const q=d*Math.PI/180,px=cx+Math.cos(q)*R,py=cy+Math.sin(q)*R,w=ag_tw(x,PC_STEPS[i],{w:700,size:30})+54;
@@ -426,7 +423,7 @@ function pc_leavesRoom(x,tt,P){const [cx,cy,R]=PC_CY;
    the count by level, checked, with its evidence, goes into the report to the government. The end card carries the takeaway. */
 scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=pc_once(sc,"P",()=>({g0:pc_g0(sc),outside:wAt(sc,"sg","outside"),bottle:c.bottle,raised:wAt(sc,"bottle","raised"),
     trust:wAt(sc,"bottle","trust"),uni:c.uni,person:wAt(sc,"uni","person"),gov:wAt(sc,"send","government"),evidence:wAt(sc,"send","evidence"),breath:c.breath}));
-  pc_shots(ctx,S,t,sc.dur,[{at:0,place:"pcPanel",keys:[[0,960,520,1.03],[0.1,960,540,1.0]],d:6,push:0,draw:(x,tt)=>pc_panelShot(x,tt,{results:-20,july:-10,well:P.outside-0.2,rules:-10,years:-10})},
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"pcPanel",keys:[[0,960,520,1.03],[0.1,960,540,1.0]],d:6,push:0,draw:(x,tt)=>pc_panelShot(x,tt,{results:-20,july:-10,well:P.outside-0.2,rules:-10,years:-10})},
     {at:P.bottle-0.5,dis:1.0,place:"pcStadium",keys:[[P.bottle-0.5,960,560,1.08],[P.bottle-0.4,960,540,1.0]],d:7,push:0,draw:(x,tt)=>pc_crowd(x,tt,ag_sine((tt-P.raised+0.4)/2.6),ag_sine((tt-P.trust+0.1)/1.6),1)},
     {at:P.uni-0.4,dis:1.0,place:"lab",keys:[[0,960,540,1]],push:0,draw:(x,tt)=>pc_sendRoom(x,tt,P)}]);
   pc_tags(ctx,S,t,[[0.4,"The panel · 2000 to 2002"],[P.bottle-0.5,"National Day Parade · 9 August 2002",1.0],[P.uni-0.4,"The university",1.0],[P.breath,null,0.6]]);

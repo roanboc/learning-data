@@ -2445,8 +2445,11 @@ scene("map",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wa
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const tG=c("grace"),tR=c("restore"),mp=clamp((t-w("grace","process map")+0.2)/1.6,0,1),rh=fin(t,w("restore","Restoring"),0.5),mh=fin(t,w("restore","Evaluation"),0.5);
   arrive(ctx,1810,800,t,tG-0.3,()=>person(ctx,"grace",1810,1030,0.72,{t,pose:t>tG&&t<tG+2.4?"explain":"stand"}),{dy:20,from:0.96});
-  // what each one shows
-  const vs=fin(t,0.2,0.5)*(1-fin(t,w("grace","process map")-0.4,0.5));if(vs>0)withA(ctx,vs,()=>{d5_stream(ctx,t,400,250,300,100,D5_STAGES,{size:28});T(ctx,"a value stream: what reaches the customer",900,400,{w:700,size:30,align:"center",color:rgba(STR,1)});
+  // what each one shows: the value stream, carried from the last chapter, stays where it was while that fades, then moves down beside a
+  // process, and their names come in
+  const mv=ease(fin(t,0.5,1.2)),go=1-fin(t,w("grace","process map")-0.4,0.5),vs=fin(t,1.2,0.5)*go;
+  if(go>0)withA(ctx,go,()=>d5_stream(ctx,t,lerp(80,400,mv),lerp(110,250,mv),lerp(410,300,mv),lerp(110,100,mv),D5_STAGES,{size:Math.round(lerp(30,28,mv))}));
+  if(vs>0)withA(ctx,vs,()=>{T(ctx,"a value stream: what reaches the customer",900,400,{w:700,size:30,align:"center",color:rgba(STR,1)});
     D5_STEPS.forEach((s_,i)=>{if(i>4)return;d5_step(ctx,400+i*250,600,230,110,s_,{});});T(ctx,"a process: how the work gets done",900,710,{w:700,size:30,align:"center",color:rgba(BUS,1)});});
   const band=["Strategic","Operational","Support","Evaluation"].map(k=>pulseAt(t,w("groups",k)-0.1,1.6));
   const pos=d5_pmap(ctx,200,100,1360,700,{a:fin(t,w("grace","process map")-0.2,0.5),p:mp,band,hi:{"restore supply":rh,"measure reliability":mh}});
@@ -2565,6 +2568,10 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
     ctx.restore();vign(ctx,S);});
   eaEnd(ctx,S,t,B+0.8,"How value reaches people",EAC,"See it from the customer's side. Go deep only where it matters.","Film 5 of 11");});
 
+// where the chapters meet (From words to data's joins.js): the value stream carries on from one chapter to the next, so the camera
+// carries on
+const CHAPTER_JOINS={glide:["teams","map"]};
+
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)
@@ -2643,6 +2650,48 @@ window.addEventListener("DOMContentLoaded",async()=>{
   ["pointerenter","touchstart","focusin"].forEach(ev=>box.addEventListener(ev,prep,{once:true,passive:true}));
   Object.assign(FILM,{prepare:prep,seek,time:()=>t,playing:()=>playing,play:()=>{if(!playing)toggle();},pause:()=>{if(playing)toggle();},playScene:(id,once)=>{const s=SCENES.find(x=>x.id===id);seek(FILM.sceneStart(id)+0.01);if(once&&s)stopAt=s.start+s.dur-0.05;if(!playing)toggle();}});
   const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const p=hm[1].split(":").map(Number);seek(p.length>1?p[0]*60+p[1]:p[0]);}requestAnimationFrame(loop);});}
+
+/* ===== Where one chapter meets the next =====
+   The engine (engine3.js) lays the end of each chapter over the next one's first XF seconds, fading it out. Where both chapters show
+   the same words a little apart, or at another size, those words show twice for that time, like a ghost (twice.py finds them). The
+   older films load this after the engine, and each names its joins in CHAPTER_JOINS, after its last scene():
+     glide: chapters that carry the picture on from the one before. The camera (weeds.js's drift) starts where the chapter before
+            left it, so what both draw stays put while the engine fades, then glides on to the chapter's own over GL seconds.
+     leave: chapters that show the same words in another place. What was there leaves first, over the bare background (bare), and
+            then the chapter comes in, over LV seconds: a later moment in the same place.
+     cut:   chapters that open on a cut: another place, with the same people or words.
+     bare:  (ctx,S,t,sc) draws the background of the chapter coming in with nothing on it, at its own time; or, for each chapter
+            that leaves, its own.
+   A chapter not named keeps the engine's fade. */
+function chapterJoins(J){J=J||{};const GL=1.6,LV=1.2,orig=new Map(SCENES.map(s=>[s,s.draw])),named=new Set();
+  const join=id=>{const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("CHAPTER_JOINS: "+id+" isn't a chapter after the first");
+    if(named.has(id))throw new Error("CHAPTER_JOINS: "+id+" is named twice");named.add(id);return[SCENES[i-1],SCENES[i]];};
+  let SCR=null;const scratch=cv=>{if(!SCR||SCR.width!==cv.width||SCR.height!==cv.height)SCR=mkCanvas(cv.width,cv.height);return SCR;};
+  // the chapter before draws nothing where the engine lays its end over this one
+  const quiet=pv=>{const d=pv.draw;pv.draw=function(ctx,S,t,s){if(t<s.dur)return d.apply(this,arguments);
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();};};
+  (J.cut||[]).forEach(id=>quiet(join(id)[0]));
+  // what was there leaves over the bare background in the first LV/2 seconds, and the chapter comes in over it in the next
+  (J.leave||[]).forEach(id=>{const[pv,sc]=join(id),bare=typeof J.bare==="function"?J.bare:J.bare&&J.bare[id],d=sc.draw,da=orig.get(pv);
+    if(typeof bare!=="function")throw new Error("CHAPTER_JOINS.leave: give bare, the background "+id+" comes in over");quiet(pv);
+    sc.draw=function(ctx,S,t,s){if(t>=LV)return d.apply(this,arguments);const k=clamp(t/LV,0,1),out=k<0.5,c=scratch(ctx.canvas),x=c.getContext("2d");
+      ctx.save();bare(ctx,S,t,s);ctx.restore();
+      x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();
+      x.save();if(out)da.call(pv,x,S,pv.dur+t,pv);else d.call(this,x,S,t,s);x.restore();
+      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=out?1-easeCam(k*2):easeCam(k*2-1);ctx.drawImage(c,0,0);ctx.restore();};});
+  // the camera carries on: drift's own move, read from an empty drawing, eased from where the chapter before left it to the chapter's own
+  const G=J.glide||[];if(!G.length)return;if(typeof drift!=="function")throw new Error("CHAPTER_JOINS.glide: the film has no drift()");
+  const D=drift,P=mkCanvas(1,1).getContext("2d"),own={},on=new Set(),seen=new Set();
+  const cam=(sc,t,o)=>{P.setTransform(1,0,0,1,0,0);D(P,t,sc,o);return P.getTransform();};
+  G.forEach(id=>{const[pv,sc]=join(id),d=sc.draw;on.add(sc);
+    // the chapter before's camera options, from drawing it once at its end where it hasn't been drawn yet (a seek straight here)
+    sc.draw=function(ctx,S,t,s){if(t<XF+GL&&!seen.has(pv)&&!(pv.id in own)){seen.add(pv);const c=scratch(ctx.canvas),x=c.getContext("2d");
+        x.save();try{orig.get(pv).call(pv,x,S,pv.dur,pv);}catch(e){}x.restore();}
+      return d.apply(this,arguments);};});
+  drift=function(ctx,t,sc,o){if(sc&&sc.id)own[sc.id]=o||{};if(!on.has(sc)||!(t<XF+GL))return D.apply(this,arguments);
+    const pv=SCENES[SCENES.indexOf(sc)-1],a=pv.id in own?cam(pv,pv.dur,own[pv.id]):new DOMMatrix(),b=cam(sc,t,o),k=t<XF?0:easeCam((t-XF)/GL);
+    ctx.transform(lerp(a.a,b.a,k),lerp(a.b,b.b,k),lerp(a.c,b.c,k),lerp(a.d,b.d,k),lerp(a.e,b.e,k),lerp(a.f,b.f,k));};}
+if(typeof CHAPTER_JOINS!=="undefined")chapterJoins(CHAPTER_JOINS);
 
 /* ===== In the weeds of data crafting: the video's finishing pass =====
    Loaded after the engine. Only the rendered video uses it (tools/render.py calls renderAt); the site's player draws live, as before.

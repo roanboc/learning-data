@@ -2021,9 +2021,9 @@ function d3_card(ctx,cx,cy,w,h,kind,title,line,o){o=o||{};const a=o.a==null?1:o.
     if(head){archGlyph(ctx,kind,x0+46,y0_+36,22,gc);T(ctx,o.kindText||kind,x0+90,y0_+47,{f:"mono",w:600,size:30,color:rgba(gc,1),deco:o.deco});
       ctx.fillStyle=rgba(gc,0.35);ctx.fillRect(x0+16,y0_+70,w-32,1.5);top=y0_+72;}
     else archGlyph(ctx,kind,x0+36,cy,17,gc);
-    const tx=head?x0+26:x0+66,tw_=head?w-52:w-(o.st!=null?100:80),ls=wrapT(ctx,title,0,0,tw_,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35:0),mid=(top+cy+h/2)/2,y1=mid-tot/2+sz*0.8;
+    const la=o.lineA==null?1:o.lineA,tx=head?x0+26:x0+66,tw_=head?w-52:w-(o.st!=null?100:80),ls=wrapT(ctx,title,0,0,tw_,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35*la:0),mid=(top+cy+h/2)/2,y1=mid-tot/2+sz*0.8;
     ls.forEach((l,i)=>T(ctx,l,tx,y1+i*lh,{w:800,size:sz,color:rgba(ink,0.94),deco:o.deco}));
-    if(line)T(ctx,line,tx,y1+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco});});}
+    if(line&&la>0.01)withA(ctx,la,()=>T(ctx,line,tx,y1+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco}));});}
 // a sketch of the valley in marker on a sheet: hills with a wind farm on the left, the valley, a substation on the right; p draws the
 // new line from the wind farm, through the valley, to the substation. Returns the knot where the ropes are tied.
 function d3_valley(ctx,x,y,w,h,t,p){sheet(ctx,x,y,w,h,{rot:-0.004});
@@ -2131,7 +2131,9 @@ const D3_ASM=[["bills up 18% in two years","annual report",720,"bills","rose"],[
 scene("means",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const cO=c("opinion"),gone=fin(t,cO+1.4,0.8);
-  D3_DRV.forEach(([n],i)=>arrive(ctx,260+i*460,200,t,0.2+i*0.12,()=>d3_card(ctx,260+i*460,210,420,140,"driver",n,null,{size:30}),{dy:-16}));
+  // the four drivers, carried from the last chapter: they stay where they were while it fades, then line up along the top, their lines going
+  const mv=ease(fin(t,0.5,1.2));
+  D3_DRV.forEach(([n,l,x,y],i)=>d3_card(ctx,lerp(x,260+i*460,mv),lerp(y,210,mv),lerp(480,420,mv),lerp(180,140,mv),"driver",n,l,{size:lerp(32,30,mv),lineA:1-fin(mv,0,0.5)}));
   D3_ASM.forEach(([s_,src,x,lid,k])=>{const t0=w(lid,k)-0.3,q=fin(t,t0,0.6);if(q<=0)return;
     withA(ctx,q,()=>{ctx.strokeStyle=rgba(MOT,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,280);ctx.lineTo(x,380);ctx.stroke();});
     arrive(ctx,x,490,t,t0,()=>d3_card(ctx,x,490,420,220,"assessment",s_,null,{size:30,src,srcA:fin(t,t0+0.5,0.4)}),{dy:-24,from:1.06});});
@@ -2228,6 +2230,9 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Why it moves",EAC,"Know why it must change, and what it will be checked against.","Film 3 of 11");});
 
+// where the chapters meet (From words to data's joins.js): the drivers carry on from the chapter before, so the camera carries on
+const CHAPTER_JOINS={glide:["means"]};
+
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
 // the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)
@@ -2306,6 +2311,48 @@ window.addEventListener("DOMContentLoaded",async()=>{
   ["pointerenter","touchstart","focusin"].forEach(ev=>box.addEventListener(ev,prep,{once:true,passive:true}));
   Object.assign(FILM,{prepare:prep,seek,time:()=>t,playing:()=>playing,play:()=>{if(!playing)toggle();},pause:()=>{if(playing)toggle();},playScene:(id,once)=>{const s=SCENES.find(x=>x.id===id);seek(FILM.sceneStart(id)+0.01);if(once&&s)stopAt=s.start+s.dur-0.05;if(!playing)toggle();}});
   const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const p=hm[1].split(":").map(Number);seek(p.length>1?p[0]*60+p[1]:p[0]);}requestAnimationFrame(loop);});}
+
+/* ===== Where one chapter meets the next =====
+   The engine (engine3.js) lays the end of each chapter over the next one's first XF seconds, fading it out. Where both chapters show
+   the same words a little apart, or at another size, those words show twice for that time, like a ghost (twice.py finds them). The
+   older films load this after the engine, and each names its joins in CHAPTER_JOINS, after its last scene():
+     glide: chapters that carry the picture on from the one before. The camera (weeds.js's drift) starts where the chapter before
+            left it, so what both draw stays put while the engine fades, then glides on to the chapter's own over GL seconds.
+     leave: chapters that show the same words in another place. What was there leaves first, over the bare background (bare), and
+            then the chapter comes in, over LV seconds: a later moment in the same place.
+     cut:   chapters that open on a cut: another place, with the same people or words.
+     bare:  (ctx,S,t,sc) draws the background of the chapter coming in with nothing on it, at its own time; or, for each chapter
+            that leaves, its own.
+   A chapter not named keeps the engine's fade. */
+function chapterJoins(J){J=J||{};const GL=1.6,LV=1.2,orig=new Map(SCENES.map(s=>[s,s.draw])),named=new Set();
+  const join=id=>{const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("CHAPTER_JOINS: "+id+" isn't a chapter after the first");
+    if(named.has(id))throw new Error("CHAPTER_JOINS: "+id+" is named twice");named.add(id);return[SCENES[i-1],SCENES[i]];};
+  let SCR=null;const scratch=cv=>{if(!SCR||SCR.width!==cv.width||SCR.height!==cv.height)SCR=mkCanvas(cv.width,cv.height);return SCR;};
+  // the chapter before draws nothing where the engine lays its end over this one
+  const quiet=pv=>{const d=pv.draw;pv.draw=function(ctx,S,t,s){if(t<s.dur)return d.apply(this,arguments);
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();};};
+  (J.cut||[]).forEach(id=>quiet(join(id)[0]));
+  // what was there leaves over the bare background in the first LV/2 seconds, and the chapter comes in over it in the next
+  (J.leave||[]).forEach(id=>{const[pv,sc]=join(id),bare=typeof J.bare==="function"?J.bare:J.bare&&J.bare[id],d=sc.draw,da=orig.get(pv);
+    if(typeof bare!=="function")throw new Error("CHAPTER_JOINS.leave: give bare, the background "+id+" comes in over");quiet(pv);
+    sc.draw=function(ctx,S,t,s){if(t>=LV)return d.apply(this,arguments);const k=clamp(t/LV,0,1),out=k<0.5,c=scratch(ctx.canvas),x=c.getContext("2d");
+      ctx.save();bare(ctx,S,t,s);ctx.restore();
+      x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();
+      x.save();if(out)da.call(pv,x,S,pv.dur+t,pv);else d.call(this,x,S,t,s);x.restore();
+      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=out?1-easeCam(k*2):easeCam(k*2-1);ctx.drawImage(c,0,0);ctx.restore();};});
+  // the camera carries on: drift's own move, read from an empty drawing, eased from where the chapter before left it to the chapter's own
+  const G=J.glide||[];if(!G.length)return;if(typeof drift!=="function")throw new Error("CHAPTER_JOINS.glide: the film has no drift()");
+  const D=drift,P=mkCanvas(1,1).getContext("2d"),own={},on=new Set(),seen=new Set();
+  const cam=(sc,t,o)=>{P.setTransform(1,0,0,1,0,0);D(P,t,sc,o);return P.getTransform();};
+  G.forEach(id=>{const[pv,sc]=join(id),d=sc.draw;on.add(sc);
+    // the chapter before's camera options, from drawing it once at its end where it hasn't been drawn yet (a seek straight here)
+    sc.draw=function(ctx,S,t,s){if(t<XF+GL&&!seen.has(pv)&&!(pv.id in own)){seen.add(pv);const c=scratch(ctx.canvas),x=c.getContext("2d");
+        x.save();try{orig.get(pv).call(pv,x,S,pv.dur,pv);}catch(e){}x.restore();}
+      return d.apply(this,arguments);};});
+  drift=function(ctx,t,sc,o){if(sc&&sc.id)own[sc.id]=o||{};if(!on.has(sc)||!(t<XF+GL))return D.apply(this,arguments);
+    const pv=SCENES[SCENES.indexOf(sc)-1],a=pv.id in own?cam(pv,pv.dur,own[pv.id]):new DOMMatrix(),b=cam(sc,t,o),k=t<XF?0:easeCam((t-XF)/GL);
+    ctx.transform(lerp(a.a,b.a,k),lerp(a.b,b.b,k),lerp(a.c,b.c,k),lerp(a.d,b.d,k),lerp(a.e,b.e,k),lerp(a.f,b.f,k));};}
+if(typeof CHAPTER_JOINS!=="undefined")chapterJoins(CHAPTER_JOINS);
 
 /* ===== In the weeds of data crafting: the video's finishing pass =====
    Loaded after the engine. Only the rendered video uses it (tools/render.py calls renderAt); the site's player draws live, as before.

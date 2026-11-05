@@ -2123,7 +2123,7 @@ const PP_CORE=["core_learner","core_award","core_credential","core_credit_toward
 // on a phone the chips are spaced by their widths at the size they're drawn, so the long names don't run into each other
 function pp_core(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,P={};const n=PP_CORE.length,L=250,cw=(w-L)/n,ca=o.chips==null?1:o.chips,ph=phMin(ctx)>0,cs=phSz(ctx,18),WW=PP_CORE.map(m=>tw(ctx,m,cs,500,"mono")+28),gp=(w-L-WW.reduce((s,v)=>s+v,0))/(n+1);
   PP_CORE.forEach((m,i)=>P[m]=[ph&&gp>8?x+L+gp*(i+1)+WW.slice(0,i).reduce((s,v)=>s+v,0)+WW[i]/2:x+L+cw*(i+0.5),y+h/2]);if(a<=0.01)return P;
-  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});T(ctx,"core",x+20,y+h/2-(ph?8:4),{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+(ph?23:20),{w:700,size:18,color:rgba(SOFT,1)});
+  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});withA(ctx,o.lab==null?1:o.lab,()=>{T(ctx,"core",x+20,y+h/2-(ph?8:4),{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+(ph?23:20),{w:700,size:18,color:rgba(SOFT,1)});});
     if(ca>0.01)withA(ctx,ca,()=>PP_CORE.forEach((m,i)=>{const[cx,cy]=P[m],pu=o.pulse?o.pulse[m]||0:0,ww=WW[i];if(pu>0)glow(ctx,cx,cy,ww*0.7,TRUST,0.5*pu);ctx.fillStyle=rgba(mix([30,26,12],TRUST,0.12+0.3*pu),1);rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.fill();
       ctx.strokeStyle=rgba(TRUST,0.5+0.5*pu);ctx.lineWidth=1.4;rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.stroke();T(ctx,m,cx,cy+6,{f:"mono",w:500,size:18,align:"center",color:rgba(mix(INK,TRUST,0.4),1)});}));});return P;}
 
@@ -2525,11 +2525,12 @@ const PP_EXP_W=["exposures:","","  - name: wallet_app","    label: Learner walle
 scene("consumer",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:500});
   const Ow=c("own"),Pr=c("protected"),Ex=c("exposure"),Te=c("tell"),Ap=c("approve");
-  // the core band comes down from the layers of the last chapter, and the two marts rise on it
-  const m=ease(fin(t,0,1.4)),bandY=lerp(140,808,m),bandX=lerp(980,140,m),bandW=lerp(540,1640,m),tell=fin(t,Te,0.5);
+  // the core band comes down from the layers of the last chapter, once that chapter has faded, and the two marts rise on it;
+  // it starts as the layers' core row, and its own words come in as it leaves, so "core" never shows twice
+  const m=ease(fin(t,0.5,1.4)),bandY=lerp(115,808,m),bandX=lerp(980,140,m),bandW=lerp(540,1640,m),tell=fin(t,Te,0.5);
   // on a phone the exposures' code runs down over the core band: while it's up, the band's words are behind it (texture)
   const exUp=phMin(ctx)>0&&fin(t,Ex-0.2,0.4)*(1-fin(t,Te+0.8,0.6)*(1-fin(t,Ap,0.6)))>0.5;
-  const P=phAsDeco(exUp,()=>pp_core(ctx,bandX,bandY,bandW,64,{chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}}));
+  const P=phAsDeco(exUp,()=>pp_core(ctx,bandX,bandY,bandW,lerp(45,64,m),{lab:fin(m,0.45,0.35),chips:fin(m,0.75,0.25),pulse:{core_credential:Math.max(pulseAt(t,Te,1.6),tell*(1-fin(t,Ap,0.6))*0.7)}}));
   const feeds=[["core_learner","planning"],["core_award","planning"],["core_credit_towards_award","planning"],["core_learner","wallet"],["core_credential","wallet"],["core_credit_towards_award","wallet"]];
   withA(ctx,fin(t,Ow,0.8),()=>feeds.forEach(([k,mk])=>{const[x0,y0]=P[k],x1=mk==="planning"?510:1410;ctx.strokeStyle=rgba(TRUST,0.16);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x0,y0-16);ctx.bezierCurveTo(x0,y0-300,x1,500,x1,330);ctx.stroke();}));
   const gr=[clamp((t-w("grains","Planning's"))/1.6,0,1),clamp((t-w("grains","the wallet's"))/1.2,0,1)],ch=fin(t,w("protected","enforced"),0.4),hiW=fin(t,Te+1.6,0.5)*(1-fin(t,Ap,0.5));
@@ -2732,6 +2733,10 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   arrive(ctx,1310,808,t,Gr-0.1,()=>T(ctx,"next: the least code that turns them green",1310,816,{w:700,size:22,align:"center",color:rgba(GOOD,1)}),{dy:12});
   ctx.restore();weedsEnd(ctx,S,t,B,"Promises and proofs",WEED,"Promise it in a contract. Prove it with a test, first.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before; the blueprint and the
+// tests come in once the chapter before has gone, since both show some of its words in other places
+const CHAPTER_JOINS={glide:["consumer","unit"],leave:["enterprise","tests"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};
 
 /* ===== Made to read on a phone =====
    A phone held sideways shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to
@@ -3082,6 +3087,48 @@ window.addEventListener("DOMContentLoaded",async()=>{
   ["pointerenter","touchstart","focusin"].forEach(ev=>box.addEventListener(ev,prep,{once:true,passive:true}));
   Object.assign(FILM,{prepare:prep,seek,time:()=>t,playing:()=>playing,play:()=>{if(!playing)toggle();},pause:()=>{if(playing)toggle();},playScene:(id,once)=>{const s=SCENES.find(x=>x.id===id);seek(FILM.sceneStart(id)+0.01);if(once&&s)stopAt=s.start+s.dur-0.05;if(!playing)toggle();}});
   const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const p=hm[1].split(":").map(Number);seek(p.length>1?p[0]*60+p[1]:p[0]);}requestAnimationFrame(loop);});}
+
+/* ===== Where one chapter meets the next =====
+   The engine (engine3.js) lays the end of each chapter over the next one's first XF seconds, fading it out. Where both chapters show
+   the same words a little apart, or at another size, those words show twice for that time, like a ghost (twice.py finds them). The
+   older films load this after the engine, and each names its joins in CHAPTER_JOINS, after its last scene():
+     glide: chapters that carry the picture on from the one before. The camera (weeds.js's drift) starts where the chapter before
+            left it, so what both draw stays put while the engine fades, then glides on to the chapter's own over GL seconds.
+     leave: chapters that show the same words in another place. What was there leaves first, over the bare background (bare), and
+            then the chapter comes in, over LV seconds: a later moment in the same place.
+     cut:   chapters that open on a cut: another place, with the same people or words.
+     bare:  (ctx,S,t,sc) draws the background of the chapter coming in with nothing on it, at its own time; or, for each chapter
+            that leaves, its own.
+   A chapter not named keeps the engine's fade. */
+function chapterJoins(J){J=J||{};const GL=1.6,LV=1.2,orig=new Map(SCENES.map(s=>[s,s.draw])),named=new Set();
+  const join=id=>{const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("CHAPTER_JOINS: "+id+" isn't a chapter after the first");
+    if(named.has(id))throw new Error("CHAPTER_JOINS: "+id+" is named twice");named.add(id);return[SCENES[i-1],SCENES[i]];};
+  let SCR=null;const scratch=cv=>{if(!SCR||SCR.width!==cv.width||SCR.height!==cv.height)SCR=mkCanvas(cv.width,cv.height);return SCR;};
+  // the chapter before draws nothing where the engine lays its end over this one
+  const quiet=pv=>{const d=pv.draw;pv.draw=function(ctx,S,t,s){if(t<s.dur)return d.apply(this,arguments);
+    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();};};
+  (J.cut||[]).forEach(id=>quiet(join(id)[0]));
+  // what was there leaves over the bare background in the first LV/2 seconds, and the chapter comes in over it in the next
+  (J.leave||[]).forEach(id=>{const[pv,sc]=join(id),bare=typeof J.bare==="function"?J.bare:J.bare&&J.bare[id],d=sc.draw,da=orig.get(pv);
+    if(typeof bare!=="function")throw new Error("CHAPTER_JOINS.leave: give bare, the background "+id+" comes in over");quiet(pv);
+    sc.draw=function(ctx,S,t,s){if(t>=LV)return d.apply(this,arguments);const k=clamp(t/LV,0,1),out=k<0.5,c=scratch(ctx.canvas),x=c.getContext("2d");
+      ctx.save();bare(ctx,S,t,s);ctx.restore();
+      x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();
+      x.save();if(out)da.call(pv,x,S,pv.dur+t,pv);else d.call(this,x,S,t,s);x.restore();
+      ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=out?1-easeCam(k*2):easeCam(k*2-1);ctx.drawImage(c,0,0);ctx.restore();};});
+  // the camera carries on: drift's own move, read from an empty drawing, eased from where the chapter before left it to the chapter's own
+  const G=J.glide||[];if(!G.length)return;if(typeof drift!=="function")throw new Error("CHAPTER_JOINS.glide: the film has no drift()");
+  const D=drift,P=mkCanvas(1,1).getContext("2d"),own={},on=new Set(),seen=new Set();
+  const cam=(sc,t,o)=>{P.setTransform(1,0,0,1,0,0);D(P,t,sc,o);return P.getTransform();};
+  G.forEach(id=>{const[pv,sc]=join(id),d=sc.draw;on.add(sc);
+    // the chapter before's camera options, from drawing it once at its end where it hasn't been drawn yet (a seek straight here)
+    sc.draw=function(ctx,S,t,s){if(t<XF+GL&&!seen.has(pv)&&!(pv.id in own)){seen.add(pv);const c=scratch(ctx.canvas),x=c.getContext("2d");
+        x.save();try{orig.get(pv).call(pv,x,S,pv.dur,pv);}catch(e){}x.restore();}
+      return d.apply(this,arguments);};});
+  drift=function(ctx,t,sc,o){if(sc&&sc.id)own[sc.id]=o||{};if(!on.has(sc)||!(t<XF+GL))return D.apply(this,arguments);
+    const pv=SCENES[SCENES.indexOf(sc)-1],a=pv.id in own?cam(pv,pv.dur,own[pv.id]):new DOMMatrix(),b=cam(sc,t,o),k=t<XF?0:easeCam((t-XF)/GL);
+    ctx.transform(lerp(a.a,b.a,k),lerp(a.b,b.b,k),lerp(a.c,b.c,k),lerp(a.d,b.d,k),lerp(a.e,b.e,k),lerp(a.f,b.f,k));};}
+if(typeof CHAPTER_JOINS!=="undefined")chapterJoins(CHAPTER_JOINS);
 
 /* ===== In the weeds of data crafting: the video's finishing pass =====
    Loaded after the engine. Only the rendered video uses it (tools/render.py calls renderAt); the site's player draws live, as before.

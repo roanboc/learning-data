@@ -366,8 +366,9 @@ glass(D4, K('decide', 'decisions', 0.0), 0.4, 0.0, ring=1.6)
 click(K('thirty', 'scheduled job', -0.25), 0.011, px(420))
 tDel = K('thirty', 'deletes them')
 for n_ in range(2):
+    # only while the strip is all there: the shot after it is a later moment on the wall, so the strip leaves over its last half second
     t_ = tDel + 1.7 * n_ + 0.62
-    if t_ < G('keep', 'again', -0.5):
+    if t_ < G('keep', 'again', -0.9):
         binned(t_, 0.010, px(172))
 paper(G('keep', 'again', -0.25), 0.010, px(510), 0.35)
 tCk = K('again', 'its owner does', 0.1)

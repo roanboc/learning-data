@@ -17,6 +17,8 @@
 AG_PLACES.cmLab=c=>ag_paintLab(c,{quiet:[[1440,380,520,260,0.75],[620,220,520,170,0.5],[960,560,700,200,0.3]]});
 AG_PLACES.cmBoard=c=>ag_paintLab(c,{seed:3,quiet:[[960,330,980,300,0.8],[960,620,900,160,0.4]]});
 AG_PLACES.cmNight=c=>ag_paintLab(c,{seed:5,quiet:[[960,330,980,300,0.8]]});
+// the bare room keeps the light every shot of Lucía's corner draws (cm_lucia); the quiet wall and the night wall have none of their own
+AG_BARE.cmLab=c=>ag_roomLight(c,1);
 
 const CM_LUCIA={name:"Lucía Ortega",role:"Planning",skin:[206,160,124],hair:{style:"long",c:[48,32,26]},earrings:[208,214,226],top:{kind:"sweater",c:[84,88,96]},breath:0.29};
 const CM_UNI="The university · Planning · today";

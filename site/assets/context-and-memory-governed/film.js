@@ -782,27 +782,90 @@ function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(l
 function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
 
 /* ---------------------------------------------------------------- the camera
-   ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
-   1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
-   place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
-   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
-function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -958,6 +1021,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);
@@ -1668,6 +1732,8 @@ function ag_end(ctx,S,t,t0,title,line,n,series){const oA=ag_in(t,t0,1.0),tA=ag_i
 AG_PLACES.cmLab=c=>ag_paintLab(c,{quiet:[[1440,380,520,260,0.75],[620,220,520,170,0.5],[960,560,700,200,0.3]]});
 AG_PLACES.cmBoard=c=>ag_paintLab(c,{seed:3,quiet:[[960,330,980,300,0.8],[960,620,900,160,0.4]]});
 AG_PLACES.cmNight=c=>ag_paintLab(c,{seed:5,quiet:[[960,330,980,300,0.8]]});
+// the bare room keeps the light every shot of Lucía's corner draws (cm_lucia); the quiet wall and the night wall have none of their own
+AG_BARE.cmLab=c=>ag_roomLight(c,1);
 
 const CM_LUCIA={name:"Lucía Ortega",role:"Planning",skin:[206,160,124],hair:{style:"long",c:[48,32,26]},earrings:[208,214,226],top:{kind:"sweater",c:[84,88,96]},breath:0.29};
 const CM_UNI="The university · Planning · today";
@@ -2119,9 +2185,11 @@ function cm_shelves(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const 
 
 /* ===== Context and memory, governed: the scenes =====
    Six chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The places are painted once
-   (world.js); what moves is drawn live in the shots of ag_shots. Shots that show the same place, people or words come in on a cut
-   (cut:true), so nothing shows twice; a dissolve only joins two different places. The title card ends chapter 1, the end card
-   chapter 6. */
+   (world.js); what moves is drawn live in the shots of ag_shots. On one wall the camera glides on from shot to shot and only what
+   changes fades; a new picture on the wall that names what the last one showed somewhere else is a later moment (later:true), so
+   what was there leaves before it comes in, and a thing both show stays put, or slides. Between Lucía's corner and the quiet wall,
+   shots that show the same people or words come in on a cut (cut:true), so nothing shows twice. The title card ends chapter 1, the
+   end card chapter 6. */
 
 const cm_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
 const CM_KICK=(x,a)=>ag_kicker(x,"2.9","Context and memory, governed",{a});
@@ -2212,31 +2280,33 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       // the difference: 386 left out
       const g=ag_in(tt,T.n386-0.2,0.4);if(g>0)cm_pillAt(cx,860,390,"386 left out",tt,T.n386-0.2,null,{col:AG.amber,icon:"warn"});}},
     // who they are: the 386 who study online, and what the library would have bought
-    {at:T.studyOnline-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:T.studyOnline-0.5,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const out=ag_in(tt,T.studyOnline,0.8);cm_people(cx,200,320,{a:ag_in(tt,T.studyOnline-0.5,0.4),out,ring:ag_in(tt,T.veryOnes,0.6)});
       cm_pillAt(cx,360,500,"on campus",tt,T.studyOnline-0.3,null);
       cm_pillAt(cx,760,540,"386 study online",tt,T.studyOnline+0.1,null,{col:AG.amber});
       const la=ag_in(tt,T.would-0.2,0.4);if(la>0)cm_library(cx,1150,250,620,{a:la,k:Math.min(1,ag_spr(tt,T.would-0.2,0.5)),count:"For 18,026 students",col:AG.amber,note:ag_in(tt,T.fewer,0.3)>0?"386 fewer":null});
       cm_pillAt(cx,760,640,"can't come in for a book",tt,T.comeIn-0.2,null,{col:AG.amber});}},
     // why: her agent's evidence, one line in the team's memory; on "Count only", its card comes up out of the file
-    {at:T.evidence-0.6,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
+    {later:true,at:T.evidence-0.6,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       cm_agent(cx,250,700,64,tt,{think:0.3,core:0.8,label:"Lucía's agent",floor:800});
       const ev=cm_why(cx,tt,T),mi=ev.items[1].to;
       const lift=90*ag_sine(clamp((tt-T.count+0.7)/0.6,0,1)),gl=ag_in(tt,T.inMem-0.2,0.4);
       const slots=cm_file(cx,1380,700,{a:ag_in(tt,T.oneLine-0.4,0.5),cards:cm_cards({glow:k=>k===CM_WRONG&&gl>0?AG.amber:null,glowA:k=>gl,lift:k=>k===CM_WRONG?lift:0})});
       cm_reads(cx,mi.x+mi.w/2,mi.y+mi.h+6,slots[CM_WRONG].x-8,slots[CM_WRONG].y+40,ag_sine(clamp((tt-T.inMem+0.3)/0.9,0,1)),{t:tt,bend:40});}},
-    // the entry, pulled up: as it is, then as approved in May, then the three words falling away
-    {at:T.count-0.1,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
+    // the entry, pulled up: as it is, then as approved in May, then the three words falling away. Lucía's agent and its evidence stay
+    // where they are as the camera glides on; the file leaves before the entry comes in
+    {at:T.count-0.1,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       cm_agent(cx,250,700,64,tt,{think:0.3,core:0.8,label:"Lucía's agent",floor:800});
       const ev=cm_why(cx,tt,T),mi=ev.items[1].to,ea=1-ag_in(tt,T.stillThere-0.2,0.5);
-      const pa=ag_in(tt,T.count-0.1,0.4),may=ag_in(tt,T.approvedAs-0.2,0.6),drop=clamp((tt-T.threeWords+0.3)/1.4,0,1);
+      const pa=ag_in(tt,T.count+0.4,0.4),may=ag_in(tt,T.approvedAs-0.2,0.6),drop=clamp((tt-T.threeWords+0.3)/1.4,0,1);
       const rows=[CM_CAMPUS.rows[0],CM_CAMPUS.rows[1],["History","none",1,ag_in(tt,T.nobody,0.4)>0?AG.amber:null]];
-      const b=cm_campusCard(cx,920,130,920,{a:pa,k:Math.min(1,ag_spr(tt,T.count-0.1,0.5)),may:may*(drop>=1?0:1)+(drop>=1?1:0),drop,rows,edge:ag_in(tt,T.lastWeek,0.4)>0?AG.amber:null,edgeA:ag_in(tt,T.lastWeek,0.5)});
-      cm_reads(cx,mi.x+mi.w+6,mi.y+mi.h*0.45,912,262,ag_sine(clamp((tt-T.count)/0.7,0,1))*ea,{t:tt,bend:-30});
+      const b=cm_campusCard(cx,920,130,920,{a:pa,k:Math.min(1,ag_spr(tt,T.count+0.4,0.5)),may:may*(drop>=1?0:1)+(drop>=1?1:0),drop,rows,edge:ag_in(tt,T.lastWeek,0.4)>0?AG.amber:null,edgeA:ag_in(tt,T.lastWeek,0.5)});
+      cm_reads(cx,mi.x+mi.w+6,mi.y+mi.h*0.45,912,262,ag_sine(clamp((tt-T.count-0.5)/0.7,0,1))*ea,{t:tt,bend:-30});
       if(b){cm_pillAt(cx,1380,b.y+b.h+46,"right, for exam rooms",tt,T.right-0.1,T.lastWeek-0.5,{col:AG.green,icon:"tick"});
         cm_pillAt(cx,1380,b.y+b.h+46,"changed last week",tt,T.lastWeek,null,{col:AG.amber,icon:"warn"});}}},
-    // still there: every agent reads it, for questions no report can check
-    {at:T.stillThere-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    // still there: every agent reads it, for questions no report can check (a later moment on the wall, later:true: the entry and the
+    // evidence leave before the file comes back, so the team's memory never shows twice)
+    {later:true,at:T.stillThere-0.5,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const pulse=0.6+0.4*Math.sin((tt-T.change)*4)*ag_io(tt,T.change,T.change+1.8,0.3);
       cm_file(cx,960,610,{cards:cm_cards({glow:k=>k===CM_WRONG?AG.amber:null,glowA:k=>pulse})});
       const ag=[[480,770,"Jun's agent"],[960,780,"Clara's agent"],[1440,770,"Lucía's agent"]];
@@ -2246,7 +2316,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,1640,300,"Seats for welcome week?",tt,T.questions+0.5,null,{icon:"warn",col:AG.amber});
       cm_pillAt(cx,960,138,"no report to check them against",tt,T.noReport,null,{col:AG.amber});}},
     // the change: context and memory, governed like any data, in five ways
-    {at:T.governs-0.6,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:T.governs-0.6,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       ag_label(cx,960,196,"Governed like any data",{align:"center",a:ag_in(tt,T.governs-0.6,0.5)});
       cm_cardAt(cx,330,236,560,{kick:"Context",sub:"The repository, the skills, dbt's descriptions, the contracts"},tt,T.context-0.2,null,{kickCol:AG.blue,edge:AG.blue});
       cm_cardAt(cx,1030,236,560,{kick:"Memory",sub:"What the team keeps from its sessions"},tt,T.memory2-0.2,null,{kickCol:AG.blue,edge:AG.blue});
@@ -2254,7 +2324,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
         [700,588,"Kept while it's right",T.keptW,null],[1220,588,"Deleted everywhere",T.everywhere,null]];
       P.forEach(p=>cm_pillAt(cx,p[0],p[1],p[2],tt,p[3]-0.1,null,{col:AG.green,icon:p[4]}));}},
     // found: the line against its source, deleted, with a record of why
-    {at:T.source-0.9,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:T.source-0.9,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const sa=ag_in(tt,T.source-0.7,0.4);cm_session(cx,100,150,760,240,{a:sa,date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});
       const hl=ag_in(tt,T.source+0.2,0.4);if(hl>0){cx.save();cx.globalAlpha*=hl;cx.fillStyle=rgba(AG.green,0.14);rr(cx,113,220,ag_tw(cx,"For exam rooms,",{w:600,size:28})+18,42,10);cx.fill();cx.restore();}
       const rm=ag_in(tt,T.deletedW,0.4),ea=ag_in(tt,T.source-0.7,0.4)*(1-0.55*ag_in(tt,T.deletedW+0.4,0.6));
@@ -2274,7 +2344,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const j=ag_sine(clamp((tt-T.allW)/1.6,0,1));cm_people(cx,260,380,{join:j});
       cm_library(cx,1060,300,620,{count:"For all 18,412 students",col:AG.green,k:Math.min(1,ag_spr(tt,T.allW-0.9,0.5)),a:ag_in(tt,T.allW-0.9,0.3)});}},
     // and for data: what agents read is governed like what they count
-    {at:T.read2-0.8,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
+    {later:true,at:T.read2-0.8,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
       cm_cardAt(cx,300,200,600,{kick:"What agents read",title:"The team's memory",sub:"and its context"},tt,T.read2-0.2,null,{kickCol:AG.blue,edge:AG.blue});
       cm_cardAt(cx,1020,200,600,{kick:"What they count",title:"18,412 students",sub:"on census day, 31 March 2026"},tt,T.count2-0.2,null,{kickCol:AG.orange,edge:AG.orange});
       [0,1].forEach(s=>{for(let i=0;i<5;i++)cm_govMark(cx,(s?1020:300)+90+i*105,460,ag_in(tt,T.count2+0.6+i*0.12+s*0.06,0.4));});
@@ -2293,14 +2363,15 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     note:wAt(sc,"chat","A note"),none:wAt(sc,"chat","none of them"),answer:wAt(sc,"chat","The team's context"),all5:wAt(sc,"chat","all five")}));
   ag_shots(ctx,S,t,sc.dur,[
     // what an agent reads, as Context engineering drew it: each kind of context as it's named, then memory; all of it is data
-    {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const at=[T.code,T.meta,T.skills,T.tools];
+    {later:true,at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.03,draw:(cx,tt)=>{const at=[T.code,T.meta,T.skills,T.tools];
       cm_context(cx,{t:tt,show:i=>clamp((tt-at[i]+0.15)/1.0,0,1),memory:clamp((tt-T.memory+0.15)/1.0,0,1),gov:clamp((tt-T.gets)/1.2,0,1),
         back:i=>clamp((tt-at[i]-0.75)/1.3,0,1),backMem:clamp((tt-T.memory-0.75)/1.3,0,1),
         think:0.1+0.5*ag_io(tt,T.shapes-0.2,T.isData+0.8,0.5)});
       ag_label(cx,960,262,"What an agent reads",{align:"center",a:ag_in(tt,T.reads-0.2,0.4)*(1-ag_in(tt,T.isData-0.7,0.35))});
       ag_label(cx,960,262,"All of it is data",{align:"center",col:AG.orange,a:ag_in(tt,T.isData-0.2,0.4)});}},
     // the five questions: a column lights as each is asked; a note in a chat answers none; the team's context and memory, all five
-    {at:c.owns-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{const q=CM_Q.map(id=>c[id]),nx=j=>j<4?q[j+1]:T.note;
+    // (later:true: the cards leave before the table comes, so their names never show twice)
+    {later:true,at:c.owns-0.5,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{const q=CM_Q.map(id=>c[id]),nx=j=>j<4?q[j+1]:T.note;
       ag_label(cx,205,172,"What any data gets",{a:ag_in(tt,c.owns-0.5,0.4)});
       cm_govTable(cx,205,200,{cols:q.map((t0,j)=>ag_io(tt,t0-0.2,nx(j)-0.2,0.3)+0.25*ag_in(tt,nx(j)-0.2,0.3)*(1-ag_in(tt,T.answer,0.5))),
         cells:(i,j)=>ag_in(tt,T.answer+0.25+j*0.16+i*0.05,0.3),chat:ag_in(tt,T.note-0.2,0.4)*(1-0.55*ag_in(tt,T.answer,0.6)),chatCell:j=>ag_in(tt,T.none+j*0.12,0.3)});}}]);
@@ -2323,7 +2394,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     nobody:wAt(sc,"nobody","Nobody"),starts:wAt(sc,"nobody","A change starts")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the repository, each thing lit as it's named; at the right, the owners' list, then a change, then its history
-    {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{const lit=[T.page,T.skills,T.dbt,T.contracts,T.list];
+    {later:true,at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{const lit=[T.page,T.skills,T.dbt,T.contracts,T.list];
       const rows=CM_REPO.map((r,i)=>Object.assign({},r,{a:i<4?1:ag_in(tt,T.list-0.3,0.4),lit:i===4?ag_io(tt,T.list-0.2,T.pr-0.6,0.3):ag_io(tt,lit[i]-0.15,lit[i]+1.4,0.3),
         noteA:ag_in(tt,lit[i]-0.1,0.4)}));
       const R=cm_repo(cx,60,150,870,rows,{a:ag_in(tt,0.05,0.4),k:Math.min(1,ag_spr(tt,0.05,0.5)),nameW:490});
@@ -2343,7 +2414,8 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       if(ha>0)cm_history(cx,960,150,880,[["Proposed by","Jun's agent, 2 November 2026",ag_in(tt,T.who-0.2,0.4)],["Reviewed and approved by","Jun Park and Noor Rahman, 3 November 2026",ag_in(tt,T.who+0.4,0.4)],
         ["Why","Reconcile every count against the census report",ag_in(tt,T.why-0.2,0.4)]],{kick:"History",a:ha,k:Math.min(1,ag_spr(tt,T.history-0.3,0.5))});}},
     // one way, to where agents read it: dbt's descriptions as comments in Unity Catalog, the skills in Unity Gateway; nobody edits them there
-    {at:T.oneway-0.5,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    // (later:true: the repository leaves, then comes back smaller at the left, so its files never show twice)
+    {later:true,at:T.oneway-0.5,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_repo(cx,40,250,400,[{name:"AGENTS.md"},{name:"skills/",folder:1,lit:ag_io(tt,T.gw-0.3,T.nobody-0.3,0.4)},{name:"models/",folder:1,lit:ag_io(tt,T.uc-0.3,T.gw-0.4,0.4)}],{});
       const u=ag_sine(clamp((tt-T.oneway+0.2)/0.9,0,1));cm_arrow(cx,[456,420,490,420,530,420,568,420],u,{col:AG.blue,lw:4,head:14});
       ag_T(cx,"one way",512,396,{w:600,size:28,col:AG.mut,align:"center",a:ag_in(tt,T.oneway,0.4)});
@@ -2381,8 +2453,9 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     loads:wAt(sc,"load","a script loads"),files:wAt(sc,"load","approved files"),store:wAt(sc,"load","the team's store"),every:wAt(sc,"load","every agent"),none:wAt(sc,"load","none may change")}));
   ag_shots(ctx,S,t,sc.dur,[
     // agents write their sessions; on Databricks, a sessions store and the team's lasting memory, in Lakebase; once a day a step keeps
-    // what seems worth keeping, unasked: here, a line about room bookings, with no one's tick
-    {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
+    // what seems worth keeping, unasked: here, a line about room bookings, with no one's tick (later:true: what the last chapter ends on
+    // leaves before the agents come, so Jun's agent never shows twice)
+    {later:true,at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
       cm_zone(cx,330,140,1550,720,"On Databricks · Lakebase",{a:ag_in(tt,T.lake-0.3,0.5)});
       const s0=Math.min(0.15,T.write-0.4),sa=ag_in(tt,s0,0.5),rowY=i=>210+136+i*64+26;
       cm_store(cx,380,210,420,348,{kick:"Store",title:"Sessions",rows:CM_WRITERS.map((p,i)=>({text:p[2]+" · today",a:ag_in(tt,T.write+0.2+i*0.3,0.4)})),
@@ -2401,7 +2474,8 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,590,820,"no one reviews it",tt,T.asking,null,{icon:"warn",col:AG.amber,size:28});}},
     // how the campus line lost its words: the step merges the room bookings line into it, as it's built to, and its title becomes
     // Campus only; the store is one room: whoever may write to it may change any entry, and nothing records what it said before
-    {at:c.how-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    // (later:true: the file and the step change places, so they leave first and never show twice)
+    {later:true,at:c.how-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const m=clamp((tt-T.merged)/1.4,0,1),gl=ag_in(tt,T.campus-0.2,0.4)*(1-ag_in(tt,T.room-0.2,0.6)),w1=ag_in(tt,T.whoever,0.5),hit=k=>ag_io(tt,T.any-0.2+k*0.1,T.nothing,0.3);
       // the room bookings card slides onto the campus line, which loses its title under it; then the card goes, and the new title comes
       const slide=clamp(m/0.6,0,1),gone=clamp((m-0.6)/0.2,0,1);
@@ -2416,7 +2490,8 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
         const L=i?-1:1;cm_reads(cx,p[0]+L*48,p[1]-6,p[3][0],p[3][1],ag_sine(clamp((tt-T.whoever-0.2-i*0.2)/0.8,0,1))*w1,{t:tt,bend:-20,col:AG.violet});});
       cm_pillAt(cx,960,236,"nothing records what it said before",tt,T.nothing-0.1,null,{icon:"warn",col:AG.amber,size:28});}},
     // split in two: the daily step writes only proposals, in a store no agent reads; the team's memory is a store of its own
-    {at:c.split-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    // (later:true: the step leaves the right before it comes in at the top left)
+    {later:true,at:c.split-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_step(cx,90,190,{w:400,turn:tt*0.35,glow:ag_io(tt,T.props-0.3,T.props+1.4,0.4)});
       cm_arrow(cx,[290,318,290,350,290,370,290,394],ag_in(tt,T.props-0.2,0.5),{col:AG.violet,lw:3.5,head:12});
       const pa=ag_in(tt,T.split-0.2,0.4);
@@ -2427,8 +2502,10 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       [[1760,300,"Jun's agent",410],[1760,500,"Clara's agent",560],[1760,700,"Lucía's agent",690]].forEach((p,i)=>{cm_agent(cx,p[0],p[1],44,tt,{ph:i*1.4,think:0.2,core:0.75,label:p[2],a:fa,floor:p[1]+92});
         cm_reads(cx,1596,p[3],p[0]-48,p[1]-6,ag_sine(clamp((tt-T.split-0.6-i*0.2)/0.8,0,1))*fa,{t:tt,bend:0});});}},
     // each morning a plain script brings the proposals to the repository, one file each; the person confirms, the meaning's owner approves
-    {at:c.morning-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
-      cm_store(cx,80,170,520,284,{kick:"Store",title:"Proposals",dashed:true,edge:null,rows:CM_PROPS.map(s=>({text:s,dashed:true}))});
+    // (the proposals' store stays where the last shot left it, then, once the step there has gone, slides up to make room for the script)
+    {at:c.morning-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+      const up=ag_sine(clamp((tt-c.morning+0.4-0.5)/0.7,0,1));
+      cm_store(cx,lerp(90,80,up),lerp(400,170,up),lerp(560,520,up),284,{kick:"Store",title:"Proposals",dashed:true,edge:null,rows:CM_PROPS.map(s=>({text:s,dashed:true}))});
       const sa=ag_in(tt,T.script-0.3,0.4);
       cm_script(cx,80,540,"Each morning","a plain script",{a:sa,k:Math.min(1,ag_spr(tt,T.script-0.3,0.5)),turn:Math.max(0,tt-T.script)*0.5,glow:ag_io(tt,T.script,T.pr+1.0,0.4)});
       cm_arrow(cx,[300,458,300,490,300,510,300,534],ag_in(tt,T.script-0.1,0.4),{col:AG.blue,lw:3.5,head:12});
@@ -2443,13 +2520,13 @@ scene("memory",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
         ["Approved by","Mei Tanaka, who owns its meaning",ag_in(tt,T.ownerM-0.1,0.4),ok>0?mix(AG.ink,AG.green,ok):null]]},{prop:1-ag_in(tt,T.approves+0.4,0.6),a:ea,k:Math.min(1,ag_spr(tt,T.person-0.3,0.5))});
       cm_stamp(cx,1650,486,"Approved",tt,T.approves+0.2,{col:AG.green,size:28});}},
     // Yusuf, in data governance, owns the memory as a whole: CODEOWNERS says so
-    {at:c.yusuf-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.yusuf-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       ag_person(cx,"yusuf",420,640,0.9,{t:tt,gaze:[4,0],smile:0.3});
       cm_pillAt(cx,420,300,"Yusuf Demir · Data governance",tt,c.yusuf-0.3,null,{size:28});
       cm_owners(cx,960,110,880,[["/memory/","data.governance@uni.example",1,ag_in(tt,T.whole-0.2,0.4)]],{a:ag_in(tt,T.gov-0.4,0.4),k:Math.min(1,ag_spr(tt,T.gov-0.4,0.5))});
       cm_file(cx,1400,812,{cards:cm_kept()});}},
     // a plain script loads the approved files into the team's store: every agent reads it, none may change it
-    {at:c.load-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.load-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_repo(cx,80,150,660,CM_ENTRIES.map(n=>({name:n})),{title:"memory/entries/",nameW:560});
       const sa=ag_in(tt,T.loads-0.3,0.4);
       cm_script(cx,80,640,"Load","the approved files",{a:sa,k:Math.min(1,ag_spr(tt,T.loads-0.3,0.5)),turn:Math.max(0,tt-T.loads)*0.5,glow:ag_io(tt,T.files-0.2,T.store+1.0,0.4)});
@@ -2482,7 +2559,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     rec:wAt(sc,"record","The record"),added:wAt(sc,"record","who added"),deleted:wAt(sc,"record","who deleted"),whyR:wAt(sc,"record","and why"),noAgent:wAt(sc,"record","No agent")}));
   ag_shots(ctx,S,t,sc.dur,[
     // sessions kept thirty days: a strip of days; each day a scheduled job puts the oldest in the bin, and today's comes in
-    {at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
+    {later:true,at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
       ag_label(cx,960,178,"Keeping and deleting",{align:"center",a:ag_in(tt,T.keeping-0.3,0.4)});
       cm_pillAt(cx,960,238,"the team decides both",tt,T.decisions-0.1,null,{size:28,col:AG.blue});
       const x0=150,P=54,ty=388,per=1.7,run=tt-T.deletes,on=run>=0,n=on?Math.floor(run/per):0,f=on?(run-n*per)/per:0;
@@ -2500,7 +2577,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_script(cx,280,540,"Scheduled job","deletes sessions after 30 days",{a:ag_in(tt,T.job-0.3,0.4),k:Math.min(1,ag_spr(tt,T.job-0.3,0.5)),turn:Math.max(0,tt-T.job)*0.4,glow:on?ag_io(f,0.0,0.5,0.15)*0.8:0});}},
     // an entry with a date to check it again: the date comes, its owner checks it, the next date is set and its history says so; a
     // proposal that names a student is turned down
-    {at:c.again-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.again-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const ea=ag_in(tt,c.again-0.3,0.4),chk=ag_in(tt,T.ownerDoes+0.3,0.5);
       const rows=[["Owner","Mei Tanaka, registrar's office",ag_in(tt,T.date-0.7,0.4)],["Check again","1 November 2026",ag_in(tt,T.date-0.1,0.4),AG.blue,"1 March 2027",chk],
         ["History","15 April 2026 · approved by Mei Tanaka",ag_in(tt,T.date+0.2,0.4)],[null,"2 November 2026 · checked by Mei Tanaka",ag_in(tt,T.ownerDoes+0.4,0.4)]];
@@ -2511,7 +2588,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_stamp(cx,1660,288,"Turned down",tt,T.namesNo+0.2,{col:AG.amber,size:28});
       cm_pillAt(cx,1410,548,"names a student",tt,T.namesNo+0.4,null,{icon:"warn",col:AG.amber,size:28});}},
     // the first thought: delete the chat the line came from; it deletes nothing of the line, as the docs say
-    {at:c.traps-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.traps-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const dq=ag_sine(clamp((tt-T.delChat-0.1)/0.8,0,1)),sa=ag_in(tt,c.traps-0.3,0.4)*(1-ag_in(tt,T.delChat+0.4,0.5));
       if(sa>0){cx.save();cx.globalAlpha*=sa;cx.translate(0,dq*90);cm_session(cx,100,250,720,220,{date:"12 May 2026",lines:["For exam rooms, count only","students on campus."]});cx.restore();}
       cm_pillAt(cx,460,200,"delete the chat?",tt,T.first-0.1,T.delChat+0.6,{size:28});
@@ -2520,7 +2597,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_pillAt(cx,1430,300,"still in the team's memory",tt,T.delNothing,null,{icon:"warn",col:AG.amber,size:28});
       const qa=ag_in(tt,T.docs-0.4,0.4);if(qa>0)cm_quote(cx,100,600,860,CM_DOCS_Q,"Databricks docs \u00b7 Agent sessions \u00b7 beta",{a:qa,k:Math.min(1,ag_spr(tt,T.docs-0.4,0.5))});}},
     // the sync that copies skills to the platform never deletes one
-    {at:c.sync-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.sync-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_repo(cx,40,220,700,CM_SKILLS.map((n,i)=>({name:"skills/"+n+"/",folder:1,strike:i===2?1:0,note:i===2?"deleted":null,noteCol:AG.amber,col:i===2?AG.amber:null})),{nameW:470});
       const sa=ag_in(tt,T.syncW-0.3,0.4);
       cm_script(cx,800,330,"Skill sync","copies, never deletes",{a:sa,k:Math.min(1,ag_spr(tt,T.syncW-0.3,0.5)),turn:Math.max(0,tt-T.syncW)*0.5,glow:ag_io(tt,T.neverDel-0.3,T.neverDel+1.4,0.4)});
@@ -2530,7 +2607,7 @@ scene("keep",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       CM_SKILLS.forEach((n,i)=>{const g=i===2?ag_in(tt,T.neverDel,0.4):0;cx.save();cx.globalAlpha*=za;cm_index(cx,1332,260+i*76,516,56,{text:n,glow:g>0?AG.amber:null,glowA:g});cx.restore();});
       cm_pillAt(cx,1590,560,"still on the platform",tt,T.neverDel+0.2,null,{icon:"warn",col:AG.amber,size:28});}},
     // delete where it's kept: the line's file, in a pull request that says why; its entry, at the next load; the record stays
-    {at:c.where-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.where-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       const pa=ag_in(tt,T.whereW-0.2,0.4),fl=ag_in(tt,T.file-0.2,0.4);
       cm_pr(cx,80,150,900,{title:"Delete: Count only students on campus",by:"Opened by Yusuf Demir",files:[["memory/entries/campus-only.md",1,fl>0?mix(AG.ink,AG.amber,fl):null]],
         rows:[{text:"Why: a merge dropped “For exam rooms”",state:"no",a:ag_in(tt,T.why-0.2,0.4)},{text:"Approved by Mei Tanaka",state:"wait",tick:ag_in(tt,T.why+0.9,0.35),a:ag_in(tt,T.why+0.5,0.4)}],
@@ -2571,18 +2648,18 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const slots=cm_file(cx,1380,790,{cards:cm_kept({who:k=>ag_in(tt,T.whoA+k*0.12,0.4)})});
       cm_reads(cx,mi.x+mi.w+6,mi.y+mi.h*0.45,slots[0].x-8,slots[0].y+40,ag_sine(clamp((tt-T.each+0.2)/0.9,0,1)),{t:tt,bend:-20});}},
     // the library buys e-books for every student, online or on campus
-    {at:c.library-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.library-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_people(cx,260,380,{join:1});
       cm_library(cx,1060,300,620,{count:"For all 18,412 students",col:AG.green,note:ag_in(tt,T.online-0.2,0.3)>0?"online or on campus":null,k:Math.min(1,ag_spr(tt,c.library-0.4,0.5)),a:ag_in(tt,c.library-0.4,0.3)});}},
     // every agent, and every newcomer, starts from what the team knows
-    {at:c.same-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
+    {later:true,at:c.same-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       cm_file(cx,960,560,{cards:cm_kept({who:k=>1})});
       [["Jun's agent",360],["Clara's agent",660],["Lucía's agent",960],["Noor's agent",1260],["Sam's agent",1560]].forEach((p,i)=>{const aa=ag_in(tt,T.everyAgent-0.3+i*0.12,0.4);
         cm_agent(cx,p[1],780,44,tt,{ph:i*1.3,think:0.2,core:0.75,label:p[0],a:aa,floor:872});
         cm_reads(cx,960+(i-2)*110,652,p[1],732,ag_sine(clamp((tt-T.everyAgent-i*0.12)/0.9,0,1))*aa,{t:tt,bend:0});});
       cm_pillAt(cx,960,108,"what the team knows, approved by people",tt,T.knows-0.1,null,{icon:"tick",col:AG.green,size:28});}},
     // where the series began: what an agent reads; nine films, nine lessons; then the whole road, from further off
-    {at:c.began-0.4,place:"cmBoard",cut:true,keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
+    {later:true,at:c.began-0.4,place:"cmBoard",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const f=1-ag_in(tt,end+0.4,0.8);if(f<=0)return;cx.save();cx.globalAlpha*=f;
       const ca=ag_in(tt,c.began-0.4,0.4)*(1-ag_in(tt,T.nine-0.2,0.5));
       if(ca>0){cm_context(cx,{t:tt,memory:1,gov:1,a:ca});ag_label(cx,960,262,"What an agent reads",{align:"center",a:ca*ag_in(tt,T.readsW-0.3,0.4)});}
       // the nine lessons, each as it's said; on "a longer road", the grid goes to its shelf
@@ -2602,7 +2679,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
   const na=ag_in(t,end+1.2,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: From helper to colleague",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}
 });
 
-// chapters that open on a cut: each shows the board the chapter before ends on, which a crossfade would show twice
+// chapters that open where the chapter before ends: on the quiet wall the camera glides on, and what the last chapter ends on leaves
+// before the new one's picture comes in (its first shot is later:true); from the wall to Lucía's corner, it's a cut
 ag_cutInto(["reads","code","memory","keep","close"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

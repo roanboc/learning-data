@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Ethics we can't read, accountability it can't hold",
+    "key": "ethics-and-accountability-en",
+    "dir": "films/what-an-agent-is/7-ethics-and-accountability/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/ethics-and-accountability/film.js",
+    "video": "dist/ethics-and-accountability.mp4",
+    "file": "ethics-and-accountability.mp4",
+    "captions": [
+      [
+        "films/what-an-agent-is/7-ethics-and-accountability/captions/en.srt",
+        "ethics-and-accountability.en.srt"
+      ],
+      [
+        "films/what-an-agent-is/7-ethics-and-accountability/captions/es.srt",
+        "ethics-and-accountability.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/what-an-agent-is/7-ethics-and-accountability/source",
+      ":(exclude)films/what-an-agent-is/7-ethics-and-accountability/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 270,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

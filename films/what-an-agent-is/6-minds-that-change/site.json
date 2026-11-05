@@ -1,0 +1,31 @@
+{
+  "kicker": "Memory and evidence",
+  "kicker_es": "Memoria y evidencia",
+  "title_es": "Mentes que cambian",
+  "h1": "Minds that change: the agent's, and ours",
+  "h1_es": "Mentes que cambian: la del agente, y la nuestra",
+  "lead": "Asked which faculty lost the most first-year students, the agent tells Jun one thing on Monday and Clara another on Tuesday, citing a review that doesn't exist. Clara is sure of last year's number too, and wrong. The team stops blaming and checks the work: evidence, a second way, a person who signs.",
+  "lead_es": "¿Qué facultad perdió más estudiantes de primer año? El agente le dice una cosa a Jun el lunes y otra a Clara el martes, y cita una revisión que no existe. Clara también está segura del dato del año pasado, y se equivoca. El equipo no culpa a nadie: revisa el trabajo con evidencia, otro camino y una persona que firma.",
+  "description": "A film about minds that change, the sixth of What an agent is: the reciters of the Rigveda, who kept their hymns with nothing written down by learning each one in several patterns whose words had to agree; an agent that gives three answers in two days, each as sure as the last, and cites a review that doesn't exist; Clara's own memory, which joined two years into one; Bartlett's retellings and Loftus and Palmer's question, which show memory rebuilding itself and bending to what we're asked; a model that writes likely words and gives way when doubted; and a team that blames nobody and checks the work instead: every answer with its evidence, every number reached a second way, a nightly check, a record outside any one chat, and a person who signs.",
+  "description_es": "Una película sobre mentes que cambian, la sexta de Qué es un agente: los recitadores del Rigveda, que guardaron sus himnos sin escribir nada aprendiendo cada uno en varios patrones cuyas palabras tenían que coincidir; un agente que da tres respuestas en dos días, cada una tan segura como la anterior, y cita una revisión que no existe; la propia memoria de Clara, que unió dos años en uno; las versiones del cuento de Bartlett y la pregunta de Loftus y Palmer, que muestran una memoria que se reconstruye y se acomoda a lo que nos preguntan; un modelo que escribe palabras probables y cede cuando se le duda; y un equipo que no culpa a nadie y revisa el trabajo: cada respuesta con su evidencia, cada número obtenido de una segunda forma, una verificación cada noche, un registro fuera de cualquier chat, y una persona que firma.",
+  "card": "The agent gives three answers in two days; Clara's memory gives a wrong one. The team checks the work, the same way for both.",
+  "card_es": "El agente da tres respuestas en dos días; la memoria de Clara da una equivocada. El equipo revisa el trabajo, igual para ambos.",
+  "chapters_es": {
+    "kept": "Guardado en la memoria",
+    "three": "Tres respuestas",
+    "ours": "La nuestra también cambia",
+    "rebuilt": "Reconstruida, no reproducida",
+    "check": "Revisar el trabajo",
+    "every": "Cada patrón, cada vez"
+  },
+  "past": [
+    "Northern India, about three thousand years ago: the reciters of the Rigveda",
+    "Trust no mind blindly: check the work, the same way for people and agents."
+  ],
+  "past_es": [
+    "El norte de la India, hace unos tres mil años: los recitadores del Rigveda",
+    "No confíes a ciegas en ninguna mente: revisa el trabajo, igual para personas y agentes."
+  ],
+  "next_h": "You've seen why an agent's answers change, and ours do too, and how evidence and checks, not blame, keep the work right. Next: ethics we can't read, and accountability it can't hold.",
+  "next_h_es": "Viste por qué cambian las respuestas de un agente, y también las nuestras, y cómo la evidencia y las verificaciones, no la culpa, mantienen bien el trabajo. Después: una ética que no podemos leer, y una responsabilidad que no puede asumir."
+}

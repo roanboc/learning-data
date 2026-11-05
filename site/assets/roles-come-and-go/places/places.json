@@ -1,0 +1,65 @@
+{
+ "player": "7aa2c9477b7aae2b",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:forum": {
+   "file": "forum.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     38.5
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     37.5,
+     65.75
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     64.5,
+     235.0
+    ],
+    [
+     298.75,
+     322.75
+    ]
+   ]
+  },
+  "place:street": {
+   "file": "street.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     234.0,
+     260.25
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     259.25,
+     299.0
+    ]
+   ]
+  }
+ }
+}

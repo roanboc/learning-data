@@ -13,7 +13,7 @@
 #  - The mark, as the series closes: one bar for each of the series' nine lessons, rising once (D, E, F sharp, A, B, D, E, F sharp, A)
 #    as the nine lessons' places appear; then each lesson comes in without music, a card set down, and the film ends on the bars
 #    together, D major.
-#  - D major for the team and what it keeps; B minor for the wrong line and the students it left out; G major for a question and for
+#  - D major for the team and what it keeps; B minor for the wrong line and the units it left out; G major for a question and for
 #    the library; A major at "Something had to change", which turns to D as the team governs. No E minor chord: its fifth isn't pure
 #    in this tuning.
 # The rules the series keeps (its briefs, 4 November 2026, as the module's other films do):
@@ -168,45 +168,46 @@ def binned(s, g=0.012, pan=0.0):
 # =============================================================================================================================
 # 1. Lucía's first job: the opening, with music all through it.
 #    Planning, today: the bars' home chord, D major, and the sarrusophone's low D under it; the calendar's page. Her agent: a bar. The
-#    team's memory: a bar for each card as it stands in the file, the back one first (the memory's figure); people's ticks: a person's
-#    approval, A to D. The library's question: G major, open. The draft: an open fifth, A and E. A plain check stops it: the stamp, and
-#    B minor, the sarrusophone on B; the census report, a card. The 386 left out: two bars falling. The library would have bought for
-#    fewer: G under B minor, the sarrusophone on G as the ring closes round the very ones. The evidence opens; the line lights: its
-#    own note, B, with the sarrusophone's B. In May: approved, D major, and "Right, for rooms": the sarrusophone's D. Lost since last
-#    week: three bars falling as the three words fall, then B minor held. Still there: the sarrusophone swells on A, and "Something
-#    had to change" is A major; "governs": D major. The five ways: a bar rising for each, and a person's approval for "A person
-#    reviews". Found: B rising to D, the stamp, the record. Now: the memory's figure again, the sarrusophone's D. All 18,412: G major
-#    to D as the people come in. For data: one soft roll as the marks appear; the wrong lesson's own note, and the stamp. The title
-#    card: the bars' home chord and the low D
+#    team's memory: a bar for each card as it stands in the file, the back one first (the memory's figure); kept by the platform, a
+#    soft tap as its mark comes. The library's question: G major, open. The draft: an open fifth, A and E. A plain check stops it: the
+#    stamp, and B minor, the sarrusophone on B; the student system, a card. The 94 left out: two bars falling. The library would have
+#    bought none for them: G under B minor, the sarrusophone on G as the ring closes round the very ones. The evidence opens; the line
+#    lights: its own note, B, with the sarrusophone's B. Kept in July: D major, and "Right, for rooms": a bar, D (the platform kept it,
+#    so no person's note). Lost since last week: three bars falling as the three words fall, then B minor held as nobody saw. The
+#    glossary: its card, and G major as the definition lights. Which comes first: the sarrusophone swells on A, and "Something had to
+#    change" is A major. The order: D major and the low D; what's governed, a bar for each, and an owner who reviews (a person's
+#    approval, A to D); memory second, a lower bar; the definition wins: D major, gently; the flag, a tap. Now: the answer laid down, D
+#    major. All 1,236: G major to D as the units come in. For data: the tiers; D major, soft, as what's governed decides; the wrong
+#    line's own note, and a tap. The title card: the bars' home chord and the low D
 F = lambda lid, word, off=0: W('first', lid, word, off)
 f0 = S0('first')
 roll((D3, A3, D4, Fs4), f0 + 0.5, 0.13, 0.8, ring=2.2)
 sarr(D2, f0 + 0.8, F('place', 'Lucía', 0.3), 0.75, att=1.4, rel=1.4)
 flick(F('place', 'Monday', 0.0), 0.010, px(200))
 glass(A3, F('memory', 'Her agent', -0.05), 0.55, px(1060))
-tL = F('memory', 'lessons')
+tL = F('memory', 'learned')
 for k, m in enumerate(MEM):
     glass(m, tL + 0.16 * k + 0.04, 0.62, px(1440) + 0.04 * (k - 2), ring=1.3)
 slide(tL + 0.02, 0.010, px(1440)); slide(tL + 0.66, 0.010, px(1440))
-approve(F('memory', 'approved', 0.1), 0.85, hold=2.2)
+tap(F('memory', 'kept by the platform', 0.0), 0.008, px(1300))
 # the library's question
 tQ = F('job', 'library', -0.4)
 knock(tQ + 0.1, 0.014, px(430), 260)
 roll((G3, B3, D4), tQ + 0.2, 0.12, 0.65)
 # the draft, and the plain check that stops it
-tD = F('draft', 'eighteen', -0.3)
+tD = F('draft', 'one thousand', -0.3)
 paper(tD + 0.05, 0.010, px(1500), 0.35)
 glass(A3, tD + 0.12, 0.5, px(1500)); glass(E4, tD + 0.3, 0.4, px(1500))
 tS = F('check', 'stopped')
 click(tS - 0.65, 0.012, px(1500))
 stamp(tS + 0.1, 0.018, px(1660))
-sarr(B2, tS + 0.12, F('online', 'study online', -0.3), 0.75, att=0.35, rel=1.0)
+sarr(B2, tS + 0.12, F('online', 'taught only online', -0.3), 0.75, att=0.35, rel=1.0)
 roll((B3, D4, Fs4), tS + 0.14, 0.09, 0.6, ring=1.6)
-knock(F('check', 'census report', -0.1), 0.014, px(1500), 220)
-# the 386 left out: two bars falling as the pill comes; the people who study online move out of the room
-tN = F('online', 'three hundred', -0.2)
+knock(F('check', 'student system', -0.1), 0.014, px(1500), 220)
+# the 94 left out: two bars falling as the pill comes; the units taught only online move out of the block
+tN = F('online', 'ninety-four', -0.2)
 glass(Fs3, tN + 0.05, 0.5, px(860)); glass(D3, tN + 0.45, 0.5, px(860))
-air(F('online', 'study online', 0.0), 1.0, 0.008, px(300), 160, 700)
+air(F('online', 'taught only online', 0.0), 1.0, 0.008, px(300), 160, 700)
 # what the library would have bought: its card; G under B minor as the ring closes round the very ones
 knock(F('books', 'would have', -0.15), 0.014, px(1460), 240)
 sarr(G2, F('books', 'very ones', -0.1), END('first', 'books') + 0.9, 0.75, att=0.6, rel=1.2)
@@ -217,49 +218,49 @@ paper(tE - 0.1, 0.010, px(440), 0.4)
 glass(WRONG, F('line', "team's memory", -0.15), 0.65, px(1380), ring=1.8)
 sarr(B2, F('line', "team's memory", -0.1), F('line', 'Count only', 0.6), 0.6, att=0.5, rel=0.9)
 slide(F('line', 'Count only', -0.2), 0.009, px(1380))
-# approved in May for exam rooms: D major, and a person's D
-roll((D3, Fs3, A3), F('may', 'approved as', 0.0), 0.11, 0.6)
-sarr(D3, F('may', 'Right, for rooms', -0.05), END('first', 'may') + 0.5, 0.7, att=0.25, rel=0.9)
+# kept in July for room bookings: D major, and a bar for "Right, for rooms"
+roll((D3, Fs3, A3), F('may', 'kept as', 0.0), 0.11, 0.6)
+glass(D4, F('may', 'Right, for rooms', 0.0), 0.45, px(1380), ring=1.4)
 # lost since last week: three bars falling as the three words fall away, then B minor held, and nobody saw
 tW3 = F('lost', 'three words', -0.3)
 for i, m in enumerate((A3, Fs3, D3)):
     glass(m, tW3 + 0.12 + 0.24 * i, 0.5 - 0.06 * i, px(1100 - 120 * i), ring=1.2)
 sarr(B2, F('lost', 'nobody', -0.2), END('first', 'lost') + 1.0, 0.7, att=0.8, rel=1.2)
 glass(Fs3, F('lost', 'nobody', 0.0), 0.4, px(960), ring=1.8)
-# still there: every agent reads it; something had to change: the sarrusophone swells on A, A major
-sarr(A2, F('still', 'questions', -0.2), F('govern', 'governs', -0.6), 0.65, att=1.2, rel=0.8)
+# yet the glossary already said: its card set down, and G major as the definition lights
+knock(F('glossary', 'glossary', -0.3), 0.012, px(500), 240)
+roll((G3, B3, D4), F('glossary', 'online or both', -0.1), 0.12, 0.5, ring=1.6)
+# which comes first: the sarrusophone swells on A; something had to change: A major
+sarr(A2, F('still', 'which comes first', -0.2), F('govern', 'set an order', -0.6), 0.65, att=1.2, rel=0.8)
 roll((Cs4, E4), F('still', 'Something', 0.0), 0.14, 0.5, ring=1.6)
-# the team governs its context and memory like any data: D major
-tG = F('govern', 'governs', -0.5)
+# the order: D major and the low D; first what's governed, a bar for each, and an owner who reviews every change
+tG = F('govern', 'set an order', -0.5)
 roll((D3, A3, D4, Fs4), tG, 0.12, 0.75, ring=2.0)
-sarr(D2, tG + 0.05, F('govern', 'any data', 0.4), 0.7, att=0.5, rel=1.2)
-knock(F('govern', 'context', -0.15), 0.012, px(610), 260); knock(F('govern', 'memory', -0.15), 0.012, px(1310), 260)
-# the five ways, a bar rising for each; a person's approval for "A person reviews"; a lock for "never change"
-glass(D3, F('five', 'an owner', -0.05), 0.5, px(520))
-glass(Fs3, F('five', 'Agents may read', -0.05), 0.5, px(960)); lock(F('five', 'Agents may read', 0.1), 0.010, px(860))
-approve(F('five', 'A person', -0.1), 0.75, hold=1.0, pan=px(1400))
-glass(B3, F('kept', 'kept only', -0.05), 0.5, px(700))
-glass(D4, F('kept', 'everywhere', -0.05), 0.5, px(1220))
-# found against its source, deleted, with a record of why
-paper(F('found', 'source', -0.8), 0.010, px(480), 0.4)
-glass(B3, F('found', 'found and', -0.1), 0.5, px(1400)); glass(D4, F('found', 'found and', 0.2), 0.5, px(1400))
-stamp(F('found', 'deleted', 0.0), 0.018, px(1606))
-paper(F('found', 'record', -0.2), 0.010, px(960), 0.4)
-# now her agent starts with what the team knows: the memory's figure, and the sarrusophone's D under it
-tK = F('now', 'what the team knows', -1.4)
-for k, m in enumerate(MEM):
-    glass(m, tK + 0.5 + 0.18 * k, 0.55, px(1440) + 0.04 * (k - 2), ring=1.3)
-sarr(D2, tK + 0.6, F('now', 'who approved', 0.8), 0.65, att=1.0, rel=1.2)
-# the library buys for all 18,412: G major to D as the people come in
-tA = F('all', 'for all')
+sarr(D2, tG + 0.05, F('governed', 'First', 0.4), 0.7, att=0.5, rel=1.2)
+knock(F('governed', 'First', -0.2), 0.012, px(1110), 260)
+glass(D4, F('governed', 'definitions', -0.05), 0.5, px(700))
+glass(Fs4, F('governed', 'data rules', -0.05), 0.5, px(1060))
+approve(F('governed', 'an owner', 0.2), 0.75, hold=1.0, pan=px(700))
+# second, the memory the platform keeps: its tier, a lower bar
+knock(F('second', 'Second', -0.2), 0.012, px(1110), 240)
+glass(A3, F('second', 'the platform keeps', -0.05), 0.45, px(640))
+# when the two disagree: the line's own note; the definition wins, D major; the line flagged, a tap
+glass(WRONG, F('wins', 'disagree', 0.0), 0.5, px(1200), ring=1.4)
+roll((D3, Fs3, A3), F('wins', 'the definition wins', 0.0), 0.12, 0.55, ring=1.6)
+tap(F('wins', 'flags the line', 0.1), 0.008, px(1440))
+# now her agent lists all 1,236, and says which definition it followed: its answer laid down, D major
+paper(F('now', 'lists all', -0.3), 0.010, px(410), 0.35)
+roll((D3, Fs3, A3, D4), F('now', 'lists all', 0.1), 0.12, 0.65, ring=1.8)
+# the library buys for every one: G major to D as the units come in
+tA = F('all', 'every one')
 knock(tA - 0.8, 0.014, px(1370), 240)
 roll((G3, B3, D4), tA, 0.13, 0.6, ring=1.4); roll((D3, Fs3, A3, D4), tA + 1.3, 0.12, 0.7, ring=2.0)
 air(tA + 0.2, 1.4, 0.008, px(400), 160, 700)
-# and for data: the cards; one soft roll as the ten marks appear; the wrong lesson's own note, and the stamp: it stays gone
-knock(F('data', 'what agents read', -0.15), 0.012, px(600), 260); knock(F('data', 'what they count', -0.15), 0.012, px(1320), 260)
-roll((D4, Fs4, A4), F('data', 'what they count', 0.65), 0.2, 0.45, ring=1.2)
-glass(WRONG, F('data', 'a wrong lesson', 0.0), 0.5, px(960), ring=1.4)
-stamp(F('data', 'stays gone', 0.0), 0.016, px(960))
+# and for data: the tiers; D major, soft, as what's governed decides; the wrong line's own note, and its flag
+knock(F('data', 'for data', -0.15), 0.012, px(630), 260)
+roll((D4, Fs4, A4), F('data', 'governed decides', 0.1), 0.2, 0.45, ring=1.2)
+glass(WRONG, F('data', 'a wrong line', 0.0), 0.5, px(900), ring=1.4)
+tap(F('data', "can't change", 0.0), 0.008, px(1550))
 # the title card: the bars' home chord, D major, and the low D
 tT = G('first', 'breath', 0.3)
 roll((D3, A3, D4, Fs4, A4), tT, 0.16, 0.85, ring=2.6)
@@ -267,7 +268,8 @@ sarr(D2, tT + 0.1, E('first') + 0.4, 0.7, att=1.0, rel=1.6)
 
 # 2. What an agent reads: a bar for the turn as the four kinds of context come; each card set down as it's named; the memory, the
 #    wrong line's note's neighbour, B; the marks of what's governed, rising; a soft tap as each question lights its column; the
-#    questions a chat can't answer, one low knock; the team's context and memory answer all five: D major, and a person's D under it
+#    questions a chat can't answer, one low knock; the team's context answers all five: D major, and a person's D under it; the
+#    memory four, no one reviewing each line: its lower note, B
 R = lambda lid, word, off=0: W('reads', lid, word, off)
 r0 = S0('reads')
 glass(Fs3, r0 + 0.4, 0.45, 0.0, ring=1.6)
@@ -279,13 +281,14 @@ roll((D4, Fs4, A4), R('data', 'gets what', 0.1), 0.16, 0.45, ring=1.2)
 for lid in ('owns', 'may', 'reviews', 'kept', 'gone'):
     tap(G('reads', lid, -0.15), 0.008, 0.0)
 knock(R('chat', 'none of them', 0.05), 0.010, px(560), 170)
-tAn = R('chat', "The team's context", 0.25)
+tAn = R('context', "The team's context", 0.25)
 roll((D3, Fs3, A3, D4), tAn, 0.12, 0.65, ring=1.8)
 sarr(D2, tAn + 0.1, tAn + 2.4, 0.6, att=0.6, rel=1.2)
+glass(B3, R('memory', 'no one reviews', -0.05), 0.45, px(1300), ring=1.2)
 
 # 3. Context, reviewed like code: the repository set down; a soft tap as each part of it lights; CODEOWNERS, its lines typed. A
 #    change: the pull request laid down; its owner reviews it (the sarrusophone's D), a second person approves it (A to D); the
-#    agent's lock. The history, a row at a time. One way to Databricks: three bars rising as the arrow goes; the table and the skill
+#    agent's lock. The history, a row at a time. The glossary, its owners, the skill that copies its terms. One way to Databricks: three bars rising as the arrow goes; the table and the skill
 #    set down, their rows; nobody edits there (a lock); a change starts in the repository: D major, gently
 C = lambda lid, word, off=0: W('code', lid, word, off)
 c0 = S0('code')
@@ -301,6 +304,13 @@ lock(C('propose', 'never approve', -0.05), 0.010, px(1400))
 paper(C('history', 'history', -0.3), 0.010, px(1400), 0.35)
 for w_ in ('who changed', 'and why'):
     tap(C('history', w_, -0.15), 0.007, px(1400))
+# the business glossary, kept by its owners on Databricks: its card, and the sarrusophone's D for its owners; the skill that copies
+# each term: a click, the copy laid down, and a tap as its source lights
+paper(C('glossary', 'business glossary', -0.3), 0.010, px(430), 0.35)
+sarr(D3, C('glossary', 'their owners', -0.1), C('glossary', 'their owners', 1.4), 0.6, att=0.2, rel=0.8, pan=px(430))
+click(C('copies', 'A skill', -0.25), 0.011, px(1030))
+paper(C('copies', 'copies each one', 0.1), 0.009, px(1550), 0.3)
+tap(C('copies', 'where it came from', -0.1), 0.007, px(1550))
 tOW = C('oneway', 'one way')
 air(tOW - 0.2, 0.9, 0.009, px(510), 180, 900)
 roll((D3, A3, D4), tOW - 0.1, 0.22, 0.5, pan=-0.1, ring=1.4, spread=0.5)
@@ -311,12 +321,13 @@ for w_ in ('Unity Catalog object', 'an owner', 'permissions', 'a record'):
 lock(C('nobody', 'Nobody', -0.05), 0.010, px(1700))
 roll((D3, Fs3, A3), C('nobody', 'A change starts', 0.0), 0.14, 0.5, ring=1.8)
 
-# 4. Memory, kept like data: B minor at the turn, the sarrusophone on B. The agents write their sessions: a pen for each. The daily
-#    step: a click as it turns up; the line it keeps unasked comes in, with no one's note. How the campus line lost its words: its own
-#    note, B; the room bookings line slides onto it, F sharp settling to D as its new title comes. Split in two: G major, the proposals' cards and a lock. Each morning: the
-#    script, the pull request, its two files. The person confirms; the owner of its meaning approves: the stamp, a person's approval
-#    and D major. Yusuf owns the memory as a whole: the sarrusophone's low D. The load: the memory's figure as the cards stand in the
-#    team's store, and its lock
+# 4. Memory, kept by the platform: B minor at the turn, the sarrusophone on B. The agents write their sessions: a pen for each. The
+#    daily step: a click as it turns up; the line it keeps unasked comes in, with no one's note. How the campus line lost its words:
+#    its own note, B; the line about counting each unit once slides onto it, F sharp settling to D as its new title comes; nothing
+#    records it: a lock. By hand, a few: Mei's approval, A to D. Hundreds a week: a click, one soft brush as the tiles pour in, and B
+#    minor. So the platform keeps the memory, and the team governs: D major; first and second, a tap each; the line that disagrees, its
+#    own note, and the flag, a tap. Yusuf owns the memory as a whole: the sarrusophone's low D; a flagged line slid to him, and the
+#    stamp as he deletes it. Every agent may read, none may change it: the step's click, and the lock
 M = lambda lid, word, off=0: W('memory', lid, word, off)
 m0 = S0('memory')
 sarr(B2, m0 + 0.3, m0 + 2.6, 0.6, att=0.8, rel=1.2)
@@ -331,33 +342,27 @@ tMg = M('how', 'merged')
 glass(Fs4, tMg + 0.05, 0.4, px(880), ring=1.0); glass(D4, tMg + 1.0, 0.45, px(813), ring=1.6)
 slide(tMg + 0.5, 0.009, px(880))
 lock(M('room', 'nothing records', 0.1), 0.008, px(960))
-tSp = M('split', 'split it in two')
-roll((G3, B3, D4), tSp - 0.1, 0.13, 0.55, ring=1.8)
-knock(tSp - 0.15, 0.012, px(370), 240)
-for i in range(2):
-    slide(M('split', 'only proposals', 0.2 + 0.3 * i), 0.008, px(370))
-lock(M('split', 'no agent reads', -0.05), 0.009, px(370))
-click(M('morning', 'a script', -0.25), 0.011, px(300))
-paper(M('morning', 'pull request', -0.2), 0.010, px(1400), 0.35)
-tap(M('morning', 'one file', 0.0), 0.008, px(1400)); tap(M('morning', 'one file', 0.35), 0.008, px(1400))
-paper(M('confirm', 'The person', -0.3), 0.009, px(1400), 0.3)
-tAp4 = M('confirm', 'approves', 0.2)
-stamp(tAp4, 0.018, px(1650))
-approve(tAp4 + 0.05, 0.85, hold=1.4, pan=px(1400))
-roll((D3, Fs3, A3), tAp4 + 0.55, 0.12, 0.5, ring=1.8)
-knock(M('yusuf', 'data governance', -0.4), 0.012, px(1400), 240)
-sarr(D2, M('yusuf', 'as a whole', -0.2), M('yusuf', 'as a whole', 1.9), 0.65, att=0.5, rel=1.0, pan=px(420))
-click(M('load', 'a script loads', -0.25), 0.011, px(275))
-tSt = M('load', "the team's store")
-for k, m in enumerate(MEM):
-    glass(m, tSt + 0.15 * k + 0.02, 0.55, px(1340) + 0.04 * (k - 2), ring=1.3)
-lock(M('load', 'none may change', -0.05), 0.010, px(1210))
+approve(M('hand', 'a few lessons', 0.0), 0.75, hold=1.2, pan=px(560))
+tH = M('hundreds', 'hundreds a week')
+click(tH - 0.5, 0.011, px(1300))
+air(tH - 0.2, 2.4, 0.008, px(1450), 180, 900)
+roll((B3, D4, Fs4), M('hundreds', 'more than anyone', 0.0), 0.12, 0.55, ring=1.6)
+knock(M('so', 'keeps the memory', -0.3), 0.012, px(1150), 240)
+roll((D3, Fs3, A3, D4), M('so', 'the team governs', 0.0), 0.12, 0.6, ring=1.8)
+tap(M('order', 'the definitions', 0.0), 0.008, px(800)); tap(M('order', 'memory second', 0.0), 0.007, px(800))
+glass(WRONG, M('disagree', 'disagrees', 0.0), 0.5, px(1400), ring=1.4)
+tap(M('disagree', 'flags the line', 0.1), 0.008, px(1680))
+knock(M('yusuf', 'as a whole', -0.4), 0.012, px(1320), 240)
+sarr(D2, M('yusuf', 'as a whole', -0.2), M('yusuf', 'as a whole', 1.9), 0.65, att=0.5, rel=1.0, pan=px(360))
+slide(M('flag', 'goes to him', -0.2), 0.009, px(1000))
+stamp(M('flag', 'deletes it', 0.2), 0.016, px(770))
+click(G('memory', 'read', -0.3), 0.011, px(300))
+lock(M('read', 'none may change', -0.05), 0.010, px(1240))
 
 # 5. Kept, then deleted: the strip of days comes in as one soft brush; the team decides both: the sarrusophone. The scheduled job: a
-#    click; each day the oldest falls into the bin. Its owner checks the entry: the stamp, the sarrusophone's D. A proposal naming a
-#    student is turned down: two bars falling a fourth, B to F sharp. The chat dropped in the bin; still in the team's memory: the
-#    wrong line's note; the docs' words laid down. The sync: a click, its arrows. Deleted where it's kept: the pull request, a person's
-#    approval; the next load, the line struck through and slid out. The record stays; no agent will read the line again: D major
+#    click; each day the oldest falls into the bin. The chat dropped in the bin; still in the team's memory: the wrong line's note;
+#    the docs' words laid down. The sync: a click, its arrows. Deleted where it's kept: the store, and the stamp as the line goes; the
+#    skill struck on the platform, then in the repository. The record, a row at a time; no agent will read the line again: D major
 K = lambda lid, word, off=0: W('keep', lid, word, off)
 k0 = S0('keep')
 air(k0 + 0.15, 1.1, 0.008, 0.0, 200, 1000)
@@ -368,34 +373,26 @@ tDel = K('thirty', 'deletes them')
 for n_ in range(2):
     # only while the strip is all there: the shot after it is a later moment on the wall, so the strip leaves over its last half second
     t_ = tDel + 1.7 * n_ + 0.62
-    if t_ < G('keep', 'again', -0.9):
+    if t_ < G('keep', 'traps', -0.9):
         binned(t_, 0.010, px(172))
-paper(G('keep', 'again', -0.25), 0.010, px(510), 0.35)
-tCk = K('again', 'its owner does', 0.1)
-stamp(tCk, 0.016, px(760))
-sarr(D3, tCk + 0.05, tCk + 1.6, 0.65, att=0.15, rel=0.9, pan=px(510))
-paper(K('names', 'names no student', -0.7), 0.009, px(1410), 0.3)
-stamp(K('names', 'names no student', 0.2), 0.016, px(1664))
-glass(B3, K('names', 'names no student', 0.25), 0.5, px(1410), ring=1.0); glass(Fs3, K('names', 'names no student', 0.59), 0.5, px(1410), ring=1.4)
 paper(G('keep', 'traps', -0.25), 0.009, px(460), 0.35)
 binned(K('traps', 'delete the chat', 0.75), 0.011, px(460))
 glass(WRONG, K('nothing', 'deletes nothing', -0.1), 0.55, px(1430), ring=1.8)
 paper(K('nothing', 'the docs say', -0.35), 0.010, px(540), 0.4)
 click(K('sync', 'the sync', -0.25), 0.011, px(1060))
 air(K('sync', 'the sync', 0.3), 0.7, 0.007, px(1300), 180, 900)
-paper(K('where', 'where a thing', -0.2), 0.010, px(530), 0.4)
-approve(K('where', 'says why', 0.85), 0.8, hold=1.2, pan=px(530))
-click(K('where', 'its entry', -0.35), 0.011, px(1675))
-strike(K('where', 'next load', -0.25), 0.008, px(1433))
-slide(K('where', 'next load', 0.4), 0.009, px(1433))
-paper(K('record', 'The record', -0.3), 0.010, px(530), 0.35)
-for w_ in ('who added', 'who deleted', 'and why'):
-    tap(K('record', w_, -0.15), 0.007, px(530))
+knock(K('where', 'where a thing', -0.3), 0.012, px(430), 240)
+stamp(K('where', "the team's store", 0.1), 0.016, px(600))
+strike(K('where', 'on the platform', -0.1), 0.008, px(1230))
+strike(K('where', 'the repository', 0.1), 0.008, px(1230))
+paper(G('keep', 'record', -0.4), 0.010, px(960), 0.35)
+for w_ in ('what he deleted', 'and why'):
+    tap(K('record', w_, -0.15), 0.007, px(960))
 roll((D3, Fs3, A3, D4), K('record', 'No agent', 0.0), 0.13, 0.6, ring=2.0)
 
 # 6. What the team knows: back in Planning, the bars' home chord and the low D. Her agent's answer: D major rising, A, D, F sharp, as
-#    its evidence opens. The library buys for every student: G major. Every agent and every newcomer starts from what the team knows:
-#    a person's approval for "approved by people". Where the series began: the context, set down. Nine
+#    its evidence opens; the definition it followed, its card. The library buys for every unit: G major. Every agent and every
+#    newcomer starts from the same definitions: a bar, D. Where the series began: the context, set down. Nine
 #    films, nine lessons: the mark, a bar for each lesson rising once as their places appear, in the pause before the first; then each
 #    lesson's card set down as it's said, with no music under the voice. The longer road: D major, and the low D; "Next": a fourth
 #    rising. The end card: the bars together, D major, and the low D under them, ringing out
@@ -406,9 +403,10 @@ sarr(D2, x0 + 0.5, X_('again', 'asks again', 0.6), 0.6, att=0.8, rel=1.2)
 knock(X_('again', 'asks again', -0.4), 0.012, px(410), 240)
 paper(X_('answer', 'with its evidence', -0.1), 0.010, px(460), 0.4)
 roll((A3, D4, Fs4), X_('answer', 'with its evidence', 0.1), 0.18, 0.55, ring=1.8)
+knock(X_('answer', 'the definition it followed', -0.5), 0.012, px(1430), 240)
 knock(G('close', 'library', -0.3), 0.012, px(1370), 240)
 roll((G3, B3, D4), X_('library', 'online or on campus', -0.1), 0.13, 0.55, ring=1.1)
-approve(X_('same', 'what the team knows', -0.05), 0.75, hold=1.6)
+glass(D4, X_('same', 'the same definitions', -0.05), 0.45, px(960), ring=1.6)
 knock(G('close', 'began', -0.3), 0.010, px(960), 260)
 tNn = X_('began', 'Nine films', 0.15)
 for i, m in enumerate(NINE):

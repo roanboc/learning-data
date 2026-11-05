@@ -44,7 +44,7 @@ const NARR={
  {"id":"contrib","gap":0.8,"text":"One new role, planning contributor, drafts the change, builds it in development, and opens a pull request."},
  {"id":"people","gap":0.8,"text":"People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production."},
  {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
- {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner."},
+ {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place."},
  {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
  {"id":"build","gap":0.8,"text":"It may also build in its own development schema, and open a pull request."},
  {"id":"maynot","gap":0.8,"text":"What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights."},

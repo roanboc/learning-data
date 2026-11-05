@@ -155,125 +155,125 @@ People keep the rest. Jun reviews the code, Clara approves the change, and Noor 
 So whoever drafts a change never approves or releases it: separation of duties, on the map.
 
 40
-00:05:05,343 --> 00:05:09,778
-Then Noor assigned the planning agent to that role, with Clara as its owner.
+00:05:05,343 --> 00:05:12,926
+Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place.
 
 41
-00:05:11,878 --> 00:05:18,711
+00:05:15,026 --> 00:05:21,859
 Its role says what it may do: read the project and production, with names masked, and draft on its own branches.
 
 42
-00:05:20,011 --> 00:05:24,536
+00:05:23,159 --> 00:05:27,684
 It may also build in its own development schema, and open a pull request.
 
 43
-00:05:26,836 --> 00:05:34,599
+00:05:29,984 --> 00:05:37,747
 What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights.
 
 44
-00:05:36,899 --> 00:05:43,809
+00:05:40,047 --> 00:05:46,957
 And whom it asks: Clara for what Planning needs, Mei for what a word means, Noor for the model, and Jun for the code.
 
 45
-00:05:46,109 --> 00:05:50,046
+00:05:49,257 --> 00:05:53,194
 When it isn't sure, it doesn't guess. It asks, and a person decides.
 
 46
-00:05:52,146 --> 00:05:55,523
+00:05:55,294 --> 00:05:58,671
 Where each of those rights comes from is the next film's story.
 
 47
-00:05:57,423 --> 00:06:05,266
+00:06:00,571 --> 00:06:08,414
 The same day, Noor placed Anil Kurian's workload agent. It had its own identity since September, but no place on the map.
 
 48
-00:06:06,566 --> 00:06:09,620
+00:06:09,714 --> 00:06:12,768
 Its stage for each kind of task went on its assignment.
 
 49
-00:06:11,720 --> 00:06:15,357
+00:06:14,868 --> 00:06:18,505
 Now the map holds three agents, each with a role and an owner.
 
 50
-00:06:16,657 --> 00:06:23,533
+00:06:19,805 --> 00:06:26,681
 The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them.
 
 51
-00:06:27,233 --> 00:06:30,082
+00:06:30,381 --> 00:06:33,230
 One thing came before it worked alone: its gate.
 
 52
-00:06:31,782 --> 00:06:38,467
+00:06:34,930 --> 00:06:41,615
 The week before, in a sandbox, where nothing it did could reach anyone, it redid Planning's last forty tickets.
 
 53
-00:06:40,767 --> 00:06:48,283
+00:06:43,915 --> 00:06:51,431
 Clara and Jun had set the bar first: at least thirty-six done as a person had done them, and none wrong without saying so.
 
 54
-00:06:50,583 --> 00:06:56,082
+00:06:53,731 --> 00:06:59,230
 Thirty-seven matched. On three, it said it wasn't sure, and asked. None was confidently wrong.
 
 55
-00:06:58,382 --> 00:07:04,390
+00:07:01,530 --> 00:07:07,538
 That last number matters most: an agent that says when it isn't sure can be trusted with work of its own.
 
 56
-00:07:06,490 --> 00:07:11,305
+00:07:09,638 --> 00:07:14,453
 Audit is on from its first run: everything it does is recorded under its own name.
 
 57
-00:07:13,605 --> 00:07:18,801
+00:07:16,753 --> 00:07:21,949
 So Clara agreed stage four for Planning's tickets: it proposes, and people review.
 
 58
-00:07:20,101 --> 00:07:26,329
+00:07:23,249 --> 00:07:29,477
 Noor wrote it on its assignment, on the map, with stage one for what a word means: it only suggests.
 
 59
-00:07:28,429 --> 00:07:35,014
+00:07:31,577 --> 00:07:38,162
 From then on, a check fails any agent on the map without an owner, a role, or a stage for each kind of task.
 
 60
-00:07:39,114 --> 00:07:41,737
+00:07:42,262 --> 00:07:44,885
 Who may do what with an agent is written down too.
 
 61
-00:07:43,637 --> 00:07:51,913
+00:07:46,785 --> 00:07:55,061
 Only a person may own an agent, never a team. Clara answers for everything the planning agent does, and only she may sign for it.
 
 62
-00:07:54,213 --> 00:08:00,141
+00:07:57,361 --> 00:08:03,289
 Only Sam's platform team may set an agent up: for its owner, and once it has a place on the map.
 
 63
-00:08:02,441 --> 00:08:06,721
+00:08:05,589 --> 00:08:09,869
 Clara may stop it. So may Sam, at any hour, without asking first.
 
 64
-00:08:09,021 --> 00:08:15,013
+00:08:12,169 --> 00:08:18,161
 And anyone who sees it go wrong may ask them to, as anyone on a production line may pull the cord.
 
 65
-00:08:19,713 --> 00:08:24,734
+00:08:22,861 --> 00:08:27,882
 In 1970, help couldn't become one team until there was one structure to join.
 
 66
-00:08:26,434 --> 00:08:31,316
+00:08:29,582 --> 00:08:34,464
 Since then, crews from anywhere check in, take their place, and know who they answer to.
 
 67
-00:08:32,816 --> 00:08:40,204
+00:08:35,964 --> 00:08:43,352
 The planning agent has done the same: a place in Planning's work, a role, an owner, and a stage for each kind of task.
 
 68
-00:08:42,104 --> 00:08:46,357
+00:08:45,252 --> 00:08:49,505
 So everyone knows what it may do, who answers for it, and who can stop it.
 
 69
-00:08:47,857 --> 00:08:51,503
+00:08:51,005 --> 00:08:54,651
 Before an agent works alone, it's architected like a colleague.
 
 70
-00:08:53,403 --> 00:08:57,000
+00:08:56,551 --> 00:09:00,148
 Next: rights that come from the work, and not from a person's.

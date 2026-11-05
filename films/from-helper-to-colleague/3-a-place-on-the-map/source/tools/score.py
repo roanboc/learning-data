@@ -256,7 +256,8 @@ nova(Cs4, mw('alone', 'a place of its own', -0.2), mw('alone', 'a place of its o
 # 4. A place on the map: the map, the people's low A and E as it's named. The work: the tickets laid down under the capability. The
 #    process: as its bracket closes over the seven steps, the string's open chord. The people keep the rest: a tromba for each person
 #    as they come (E, A, E: the 3rd, 4th and 6th harmonics). Separation of duties: the lock. Noor assigns the planning agent to its
-#    role: the people hold A, A and E, and the Novachord comes in on the C sharp left open (the mark); Clara's owner line, a pen. The
+#    role: the people hold A, A and E, and the Novachord comes in on the C sharp left open (the mark); Clara's owner line, a pen; its
+#    place under it, like a crew's card on the board: a card laid down. The
 #    rights laid down; "a person decides": a person's rising fourth, E to A. The workload agent placed: the Novachord's E; its stages
 #    laid down. Three agents, each with a role and an owner: the people's A and A, the Novachord's C sharp and E. The third never
 #    approves: the lock
@@ -271,6 +272,7 @@ for i, (w_, m) in enumerate((('Jun reviews', E3), ('Clara approves', A3), ('Noor
 lock(pw('sod', 'never approves', -0.2), 0.010, px(1087))
 mark(pw('agent', 'Then Noor'), pw('agent', 'assigned the planning agent', -0.1), pw('agent', 'Clara as its owner', 0.6), 0.75, px(700), (1, 2, 0), 0.0)
 pencil(pw('agent', 'Clara as its owner', 0.1), 1.0, 0.006, px(1090))
+paper(pw('agent', 'it had its place', -0.1), 0.011, px(700))
 paper(pw('may', 'Its role', -0.4), 0.012, px(1485))
 P_dec = pw('guess', 'a person decides', -0.3)
 tromba(E3, P_dec, P_dec + 0.45, 0.5, px(1485), att=0.1, rel=0.25); tromba(A3, P_dec + 0.5, P_dec + 2.8, 0.55, px(1485))

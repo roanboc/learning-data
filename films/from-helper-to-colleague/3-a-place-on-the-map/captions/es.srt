@@ -155,125 +155,125 @@ Las personas conservan el resto. Jun revisa el código, Clara aprueba el cambio 
 Así, quien redacta un cambio nunca lo aprueba ni lo libera: separación de funciones, en el mapa.
 
 40
-00:05:05,343 --> 00:05:09,778
-Luego Noor asignó el agente de Planificación a ese rol, con Clara como su dueña.
+00:05:05,343 --> 00:05:12,926
+Luego Noor asignó el agente a ese rol, con Clara como su dueña. Como la tarjeta de una cuadrilla en el tablero, tenía su lugar.
 
 41
-00:05:11,878 --> 00:05:18,711
+00:05:15,026 --> 00:05:21,859
 Su rol dice qué puede hacer: leer el proyecto y producción, con los nombres enmascarados, y redactar en sus propias ramas.
 
 42
-00:05:20,011 --> 00:05:24,536
+00:05:23,159 --> 00:05:27,684
 También puede construir en su propio esquema de desarrollo y abrir un pull request.
 
 43
-00:05:26,836 --> 00:05:34,599
+00:05:29,984 --> 00:05:37,747
 Lo que no puede hacer: aprobar, fusionar, cambiar producción o una prueba aprobada, cambiar qué significa una palabra ni darse permisos.
 
 44
-00:05:36,899 --> 00:05:43,809
+00:05:40,047 --> 00:05:46,957
 Y a quién consulta: a Clara, lo que necesita Planificación; a Mei, qué significa una palabra; a Noor, el modelo; a Jun, el código.
 
 45
-00:05:46,109 --> 00:05:50,046
+00:05:49,257 --> 00:05:53,194
 Cuando no está seguro, no adivina. Pregunta, y una persona decide.
 
 46
-00:05:52,146 --> 00:05:55,523
+00:05:55,294 --> 00:05:58,671
 De dónde sale cada uno de esos permisos es la historia de la próxima película.
 
 47
-00:05:57,423 --> 00:06:05,266
+00:06:00,571 --> 00:06:08,414
 El mismo día, Noor ubicó el agente de carga de trabajo de Anil Kurian: con identidad propia desde septiembre, pero sin lugar en el mapa.
 
 48
-00:06:06,566 --> 00:06:09,620
+00:06:09,714 --> 00:06:12,768
 Su etapa para cada tipo de tarea quedó escrita en su asignación.
 
 49
-00:06:11,720 --> 00:06:15,357
+00:06:14,868 --> 00:06:18,505
 Ahora el mapa tiene tres agentes, cada uno con un rol y un dueño.
 
 50
-00:06:16,657 --> 00:06:23,533
+00:06:19,805 --> 00:06:26,681
 El tercero, el agente de revisión de gobernanza de Yusuf, ya estaba: revisa pull requests y nunca los aprueba.
 
 51
-00:06:27,233 --> 00:06:30,082
+00:06:30,381 --> 00:06:33,230
 Antes de trabajar solo, tuvo que pasar por su puerta.
 
 52
-00:06:31,782 --> 00:06:38,467
+00:06:34,930 --> 00:06:41,615
 La semana anterior, en un sandbox, donde nada de lo que hiciera podía llegar a nadie, rehízo los últimos cuarenta encargos de Planificación.
 
 53
-00:06:40,767 --> 00:06:48,283
+00:06:43,915 --> 00:06:51,431
 Clara y Jun habían fijado antes la meta: al menos treinta y seis hechos como los hizo una persona, y ninguno mal sin decirlo.
 
 54
-00:06:50,583 --> 00:06:56,082
+00:06:53,731 --> 00:06:59,230
 Treinta y siete coincidieron. En tres, dijo que no estaba seguro, y preguntó. Ninguno estuvo mal sin que lo dijera.
 
 55
-00:06:58,382 --> 00:07:04,390
+00:07:01,530 --> 00:07:07,538
 Ese último número es el que más importa: a un agente que dice cuándo no está seguro se le puede confiar trabajo propio.
 
 56
-00:07:06,490 --> 00:07:11,305
+00:07:09,638 --> 00:07:14,453
 La auditoría está activa desde su primera ejecución: todo lo que hace queda registrado con su propio nombre.
 
 57
-00:07:13,605 --> 00:07:18,801
+00:07:16,753 --> 00:07:21,949
 Así que Clara aprobó la etapa cuatro para los encargos de Planificación: propone, y las personas revisan.
 
 58
-00:07:20,101 --> 00:07:26,329
+00:07:23,249 --> 00:07:29,477
 Noor la escribió en su asignación, en el mapa, con la etapa uno para qué significa una palabra: solo sugiere.
 
 59
-00:07:28,429 --> 00:07:35,014
+00:07:31,577 --> 00:07:38,162
 Desde entonces, una verificación rechaza a cualquier agente del mapa sin dueño, sin rol o sin una etapa para cada tipo de tarea.
 
 60
-00:07:39,114 --> 00:07:41,737
+00:07:42,262 --> 00:07:44,885
 Quién puede hacer qué con un agente también está por escrito.
 
 61
-00:07:43,637 --> 00:07:51,913
+00:07:46,785 --> 00:07:55,061
 Solo una persona, nunca un equipo, puede ser dueña de un agente. Clara responde por todo lo que hace, y solo ella puede firmar por él.
 
 62
-00:07:54,213 --> 00:08:00,141
+00:07:57,361 --> 00:08:03,289
 Solo el equipo de plataforma de Sam puede crear un agente: para su dueño, y una vez que tiene un lugar en el mapa.
 
 63
-00:08:02,441 --> 00:08:06,721
+00:08:05,589 --> 00:08:09,869
 Clara puede detenerlo. Sam también, a cualquier hora, sin preguntar antes.
 
 64
-00:08:09,021 --> 00:08:15,013
+00:08:12,169 --> 00:08:18,161
 Y cualquiera que lo vea fallar puede pedírselo, como en una línea de producción cualquiera puede tirar del cordón.
 
 65
-00:08:19,713 --> 00:08:24,734
+00:08:22,861 --> 00:08:27,882
 En 1970, la ayuda no podía ser un solo equipo hasta que hubo una estructura a la cual sumarse.
 
 66
-00:08:26,434 --> 00:08:31,316
+00:08:29,582 --> 00:08:34,464
 Desde entonces, cuadrillas de cualquier lugar se registran, ocupan su lugar y saben ante quién responden.
 
 67
-00:08:32,816 --> 00:08:40,204
+00:08:35,964 --> 00:08:43,352
 El agente de Planificación hizo lo mismo: un lugar en el trabajo de Planificación, un rol, una dueña y una etapa para cada tipo de tarea.
 
 68
-00:08:42,104 --> 00:08:46,357
+00:08:45,252 --> 00:08:49,505
 Así todos saben qué puede hacer, quién responde por él y quién puede detenerlo.
 
 69
-00:08:47,857 --> 00:08:51,503
+00:08:51,005 --> 00:08:54,651
 Antes de trabajar solo, un agente se integra a la arquitectura como un colega.
 
 70
-00:08:53,403 --> 00:08:57,000
+00:08:56,551 --> 00:09:00,148
 Después: permisos que vienen del trabajo, no de una persona.

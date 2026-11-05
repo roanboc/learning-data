@@ -38,8 +38,11 @@ function cj_together(ctx,gt,o){o=o||{};CJ_LD.forEach(L=>ag_person(ctx,L.p,L.x,L.
     ag_T(ctx,"they all shared",B.x+B.w/2,B.y+B.h/2+52,{w:700,size:40,align:"center",col:AG.mut});ctx.restore();
     ag_pill(ctx,B.x+B.w/2,B.y,"missing",{col:AG.amber,icon:"warn",a:m*(o.miss==null?1:o.miss)});}
   if((o.coop||0)>0.01)ag_pill(ctx,480,300,"every agency cooperated",{a:o.coop});}
-// a crew's card on its way from the check-in to its slot on the board: u 0 to 1, along an arc
-function cj_flyCard(ctx,from,to,u,words,o){o=o||{};const e=ag_sine(u),x=lerp(from[0],to[0],e),y=lerp(from[1],to[1],e)-150*Math.sin(Math.PI*e);
+// a crew's card on its way from the check-in to its slot on the board: u 0 to 1, along an arc; o.low (a y) carries it under the
+// board's other cards and up into its slot from below, so it never crosses another card's words (a slot under a full column)
+function cj_flyCard(ctx,from,to,u,words,o){o=o||{};const e=ag_sine(u);let x,y;
+  if(o.low!=null){const f=1-e;x=f*f*from[0]+2*f*e*to[0]+e*e*to[0];y=f*f*from[1]+2*f*e*o.low+e*e*to[1];}
+  else{x=lerp(from[0],to[0],e);y=lerp(from[1],to[1],e)-150*Math.sin(Math.PI*e);}
   cj_tcard(ctx,x,y,CJ_CW,words,{h:CJ_CH,a:o.a==null?1:o.a,band:o.band});}
 // the crews' cards in their agencies' colours
 const CJ_BANDK={C0_0:0,C0_1:4,C0_2:1,C0_3:2,C1_0:3,C1_1:0,C1_2:5,C1_3:6,C2_0:2,C2_1:4,C2_2:1};
@@ -150,7 +153,7 @@ scene("scope",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
       const to=cj_below(2,3),u=clamp((tt-(T.checkin+0.2))/1.6,0,1),landed=u>=1,b=cj_band(5);
       cj_board(cx,{lines:1,lit:null,band:cj_bandOf,extra:landed?[{x:to.x,y:to.y,w:CJ_CW,words:"Crew 14",band:b}]:[]});
       cj_checkin(cx,{});ag_person(cx,CJ_CLERK,440,700,0.8,{t:gt,cut:756,gaze:[3,1]});
-      if(!landed)cj_flyCard(cx,[520,684],[to.x,to.y],u,"Crew 14",{a:ag_in(tt,T.checkin-0.4,0.4),band:b});
+      if(!landed)cj_flyCard(cx,[520,684],[to.x,to.y],u,"Crew 14",{a:ag_in(tt,T.checkin-0.4,0.4),band:b,low:870});
       cj_pillAt(cx,1380,880-60,"one team",tt,T.one-0.1,null,{col:AG.green,icon:"tick"});}},
     // the university, Monday 2 November 2026: a new kind of colleague joins Planning, the planning agent. If it simply started, nobody
     // could say what it may do, who answers for it, or who can stop it; so, like a crew at a fire, it checks in first
@@ -224,7 +227,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     newr:wAt(sc,"contrib","One new role"),drafts:wAt(sc,"contrib","drafts the change"),builds:wAt(sc,"contrib","builds it"),opens:wAt(sc,"contrib","opens a pull request"),
     rest:wAt(sc,"people","People keep the rest"),jun:wAt(sc,"people","Jun reviews"),clara:wAt(sc,"people","Clara approves"),noor:wAt(sc,"people","Noor releases"),
     so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
-    then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),
+    then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),had:wAt(sc,"agent","it had its place"),
     may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
     n:[wAt(sc,"maynot","approve"),wAt(sc,"maynot","merge"),wAt(sc,"maynot","change production"),wAt(sc,"maynot","change an approved"),wAt(sc,"maynot","change what"),wAt(sc,"maynot","grant")],
     a:[wAt(sc,"asks","Clara"),wAt(sc,"asks","Mei"),wAt(sc,"asks","Noor"),wAt(sc,"asks","Jun")],
@@ -266,6 +269,8 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       cj_pillAt(cx,(cj_stepX(4)+cj_stepX(6)+CJ_SW)/2,834,"people keep the rest",tt,T.rest-0.1,T.so-0.3,{col:AG.green});
       const sa=ag_in(tt,T.sep-0.2,0.5)*(1-ag_in(tt,T.then-0.4,0.4));if(sa>0.01)ag_label(cx,CJ_DIV,786,"Separation of duties",{align:"center",a:sa});
       cj_pillAt(cx,CJ_DIV,838,"whoever drafts a change never approves or releases it",tt,T.never-0.2,T.then-0.4,{col:AG.blue,icon:"lock"});
+      // like a crew's card on the board, it has its place: the words the opening left under it
+      cj_pillAt(cx,CJ_PAG.x+CJ_PAG.w/2,834,"its place on the map",tt,T.had-0.1,T.may-0.6,{col:AG.blue});
       // the role's rights: may, may not, whom it asks; when it isn't sure, it asks, and a person decides
       cj_rights(cx,1090,90,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
         may:i=>ag_in(tt,T.m[i]-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
@@ -353,7 +358,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
       const to=cj_below(0,4),u=clamp((tt-(T.take-0.6))/1.6,0,1),landed=u>=1,b=cj_band(3);
       cj_board(cx,{lines:1,band:cj_bandOf,extra:[{x:cj_below(2,3).x,y:cj_below(2,3).y,w:CJ_CW,words:"Crew 14",band:cj_band(5)}].concat(landed?[{x:to.x,y:to.y,w:CJ_CW,words:"Engine 52",band:b}]:[])});
       cj_checkin(cx,{});ag_person(cx,CJ_CLERK,440,700,0.8,{t:gt,cut:756,gaze:[3,1]});
-      if(!landed)cj_flyCard(cx,[520,684],[to.x,to.y],u,"Engine 52",{a:ag_in(tt,T.since-0.2,0.4),band:b});
+      if(!landed)cj_flyCard(cx,[520,684],[to.x,to.y],u,"Engine 52",{a:ag_in(tt,T.since-0.2,0.4),band:b,low:800});
       cj_pillAt(cx,1380,198,"one structure to join",tt,T.join-0.2,null,{col:AG.blue});}},
     // the planning agent has done the same: a place in Planning's work, a role, an owner, and a stage for each kind of task; so everyone
     // knows what it may do, who answers for it, and who can stop it

@@ -181,7 +181,7 @@ scene("watch",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({nc:wAt(sc,"h
     {at:0,place:"bigNight",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_badges(x,{u:clamp((tt-0.3)/1.2,0,1),lit:fin(tt,P.nc,0.6)})},
     // credit_points' tests: not null, and 0 isn't empty, so it passes; no rule for a microcredential's credit
     {cut:true,at:P.ps,place:"desk",keys:[[P.ps,960,500,1]],push:0.02,draw:(x,tt)=>{gq_cpSheet(x,{u:clamp((tt-P.ps-0.1)/0.9,0,1),pass:fin(tt,P.ep,0.6)});gq_whose(x,1300,140,fin(tt,P.nr,0.6),"no rule for it");}},
-    // the badges' quality page: an alert; anomaly detection, in preview; the profile, and that night's point, one in two
+    // the badges' quality page: an alert; anomaly detection; the profile, and that night's point, one in two
     {at:P.cg,place:"bigNight",keys:[[P.cg,960,540,1]],push:0.02,draw:(x,tt)=>gq_quality(x,tt,{st:fin(tt,P.ct,0.5),ad:gv_io(tt,P.ln,P.pr,0.5),pr:fin(tt,P.pr,0.6),
       u:clamp((tt-P.cn)/1.6,0,1)*0.9+fin(tt,P.tw,0.6)*0.1,usual:fin(tt,P.us,0.8),last:fin(tt,P.tw,0.8),al:fin(tt,P.tw+0.6,0.6)})},
     // the alert crosses the campus to the learning team's door, the owner on record

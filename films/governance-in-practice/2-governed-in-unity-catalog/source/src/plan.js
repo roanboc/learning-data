@@ -436,7 +436,7 @@ function gc_index(ctx,t,o){o=o||{};GC_DRN.forEach((s,i)=>{const [x,y,w]=GC_IX.dr
 /* ---------- down to the column ---------- */
 // The lineage view, drawn as a form: the learner table in the middle with four of its columns; what it's built from at the left; what
 // it flows into at the right. o.pick (0 to 1) lights the email and draws its thread to the wallet's email, both tagged direct; o.none,
-// Planning's list's note; o.beta (0 to 1), a grey tag sliding along the thread
+// Planning's list's note; o.prop (0 to 1), a grey tag sliding along the thread
 const GC_LN={up:[["int_learner_timeline",160,420],["int_learners",160,560]],mid:[640,400,450,["learner_key","full_name","email","status"]],
   down:[["mart_wallet__learners",1240,330,["learner_key","full_name","email"]],["mart_planning__near_award",1240,590,[]],["mart_finance__tuition_forgone",1240,720,[]]]};
 function gc_lnBox(ctx,x,y,w,name,cols,o){o=o||{};const h=60+cols.length*46+(cols.length?14:0);wc_panel(ctx,x,y,w,h,{kind:"card",wash:o.wash,washA:0.15,seed:name.length+580});
@@ -449,8 +449,8 @@ function gc_lineage(ctx,t,o){o=o||{};gc_tablePage(ctx,{tab:4,sub:"university · 
   const dn=GC_LN.down.map(([n,x,y,cols],k)=>{const B=gc_lnBox(ctx,x,y,520,n,cols,{lit:k===0?{email:clamp(pk*1.6-0.6,0,1)}:{}});gc_arrow(ctx,[M[0]+M[2]+8,M[1]+60],[x-8,y+30],0,1,{a:0.5,lw:3});return B;});
   if(pk>0.01){const a=[M[0]+M[2]-30,mb.rows[2]-10],b=[1240+30,dn[0].rows[2]-10];gc_arrow(ctx,[M[0]+M[2],mb.rows[2]-10],[1240,dn[0].rows[2]-10],-40,clamp(pk*1.4-0.2,0,1),{col:GV_CLASSINK.direct,lw:5});
     gc_tag(ctx,null,0,M[0]+30+gu_mw(ctx,"email")+24,mb.rows[2]-10,"direct",clamp(pk*3,0,1));gc_tag(ctx,null,0,1270+gu_mw(ctx,"email")+24,dn[0].rows[2]-10,"direct",clamp(pk*2-1,0,1));
-    // tags following lineage by themselves: a ghost of the chip travels to the wallet's email, under a fixed "beta" label
-    const bt=clamp(o.beta||0,0,1);if(bt>0.01){withA(ctx,clamp(bt*4,0,1),()=>wc_tag(ctx,865,744,"tag propagation · beta",{size:28,align:"center",wash:GV.grey,washA:0.3,seed:591}));
+    // tags following lineage by themselves: a ghost of the chip travels to the wallet's email, under a fixed label
+    const bt=clamp(o.prop||0,0,1);if(bt>0.01){withA(ctx,clamp(bt*4,0,1),()=>wc_tag(ctx,865,744,"tag propagation",{size:28,align:"center",wash:GV.grey,washA:0.3,seed:591}));
       if(bt<1){const f=[M[0]+30+gu_mw(ctx,"email")+24,mb.rows[2]-10],to=[1270+gu_mw(ctx,"email")+24,dn[0].rows[2]-10],[px,py]=gc_along(f,to,-80,easeCam(clamp((bt-0.1)/0.7,0,1)));
         withA(ctx,0.45*Math.sin(clamp((bt-0.05)/0.9,0,1)*Math.PI),()=>gv_classChip(ctx,px,py,"direct"));}}}
   const nn=clamp(o.none||0,0,1);if(nn>0.01)withA(ctx,nn,()=>wc_hand(ctx,"no names or emails",1500,700,{size:30,w:700,align:"center",col:WC_PENCIL}));}
@@ -470,10 +470,10 @@ function gc_unclassed(ctx,t,o){o=o||{};const u=clamp(o.u||0,0,1);if(u<=0.01)retu
     gu_light(ctx,1760,454,"fail",0,clamp(er*3,0,1));}}
 
 /* ---------- who read this, and when ---------- */
-// A query on the platform's system tables and its result: who read the learner table this month (the audit log, in preview), or which
+// A query on the platform's system tables and its result: who read the learner table this month (the audit log), or which
 // groups can read it (the access review). o.rows (0 to 1) brings the result; o.lit[k] lights row k; o.strike[k] crosses row k out, with
 // its note; o.notes[k] (0 to 1), who's in each group
-const GC_AUD={title:"Who read the learner table",sub:"analyses/governance/who_read_a_table.sql · compiled",pill:"system.access.audit · preview",
+const GC_AUD={title:"Who read the learner table",sub:"analyses/governance/who_read_a_table.sql · compiled",
   q:["select event_time, user_identity.email","from system.access.audit","where action_name = 'getTable'","  and request_params.full_name_arg = 'university.prod_core.core_learner_v1'",
     "  and event_date >= date_trunc('month', current_date())","order by event_time"],head:[["event_time",180],["email",620]],
   rows:[["2026-10-26 08:02","5f2d8c1e-…","the build"],["2026-10-27 09:14","mei.tanaka@uni.example"],["2026-10-28 10:31","clara.jensen@uni.example"]]};

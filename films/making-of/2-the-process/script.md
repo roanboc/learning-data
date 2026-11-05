@@ -131,7 +131,7 @@ The treatment left these open; this draft picks one answer each, and each is eas
 |---|---|---|
 | The first message asked for a film "anyone can understand, even a teenager", without losing rigour | The making-of story, *The brief* | The film shows it "in short": a paraphrase of the brief's first message. |
 | Five analogies tested against zero-copy sharing, and all broke; the author chose a documentary fly-through with data as light | *Finding the analogy* | — |
-| Delta Sharing had been renamed OpenSharing; dbt Cloud had become the dbt platform; the rest of the rigour sheet | *Getting the facts right* | The rigour sheet on screen lists five of its real lines, shortened. |
+| Delta Sharing had been renamed OpenSharing; dbt Cloud had become the dbt platform; the rest of the rigour sheet | *Getting the facts right* | The rigour sheet on screen lists five of its real lines, shortened. Since 5 November 2026 the Genie Ontology line reads "its status checked, never said" (it said "in preview: say so"): no film says a feature's release status, which changes (the author). |
 | Four style boards; "there is no better light than other"; pictures that sharpen and paintings for audiences were the author's ideas; Claude tied style to the audience's need, not the channel | *From light to pictures* | The pictures on screen are the real style boards and a real frame of the first cut, from the story's images. |
 | "Start at the system of record" | *The big review* | The code change on screen is simplified: it names what changed in the scene *The tap*, not its code. |
 | Changing a line re-times the whole film | *The second cut*, and the playbook (*Media as code*) | This became true once the film was timed to its narration, in the second cut. |

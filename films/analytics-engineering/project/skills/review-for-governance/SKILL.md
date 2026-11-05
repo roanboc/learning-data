@@ -68,3 +68,5 @@ never weaken a test.
 - Don't lower a test's severity, narrow it or delete it to make the check pass, and don't set
   `personal_data: none` to make a column pass: a class is a claim about the data, with evidence.
 - Don't copy values out of the data to show evidence: counts and the query that gives them.
+- Don't request changes, or block the merge: submit your review as a comment, for reference. The
+  people who approve decide what to do with each finding.

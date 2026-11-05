@@ -1,0 +1,107 @@
+The checks on "Plan each unit's classes from its own class size", on its first push, Tuesday 3 November 2026,
+and what changed on its second, the same day.
+
+At the university's scale, CI builds only what changed and everything that depends on it, on Databricks, in a
+schema of its own for the pull request, and reads what it doesn't build from production (README.md, "Adding a
+Databricks job to CI"). Here, in this repository, CI builds the small sample whole, on DuckDB. Both are the check
+called "build" that the rules on main require (review-and-release/rulesets/main.json). dbt's log is shortened.
+
+== build, on the first push ==
+
+$ dbt build --select state:modified+ --defer --state prod-artifacts/ --target ci
+  (state: production's manifest, from the last release; schema: ci_pr_412)
+
+  OK    mart_planning__class_plan             table, in ci_pr_412_marts
+  PASS  unique_mart_planning__class_plan_unit_offering_key
+  PASS  not_null_mart_planning__class_plan_unit_offering_key
+  PASS  not_null_mart_planning__class_plan_classes
+  PASS  every_student_has_a_place_in_a_class
+  PASS  no_class_planned_that_isnt_needed
+  OK    mart_planning__classes_by_faculty     table, in ci_pr_412_marts
+  PASS  unique_mart_planning__classes_by_faculty_faculty
+  PASS  not_null_mart_planning__classes_by_faculty_faculty
+  PASS  faculties_classes_add_up_to_the_plan
+
+  Done. PASS=10 WARN=0 ERROR=0 SKIP=0 TOTAL=10
+
+Two models, not the whole project: the class plan, which changed, and the classes by faculty, built from it, which
+the faculties' tutor hiring reads. The faculties' classes still add up to the plan's: 3,477.
+
+$ python scripts/check/governance.py --measures
+  Governance's rules are met: every owner, glossary term, column class, test and description is in place.
+
+$ python scripts/generate/codeowners.py --check
+  CODEOWNERS and review-and-release/teams.yml are up to date
+
+$ python scripts/check/impact.py --base origin/main --report impact.md
+
+# What this change touches
+
+7 file(s) changed in the project since `origin/main`; 1 model(s), seed(s) or source(s) changed, 2 test(s) changed,
+1 downstream model(s), 8 test(s), 1 exposure(s).
+
+## Changed
+
+- `mart_planning__class_plan` (model): changed in `models/marts/planning/mart_planning__class_plan.sql`
+
+## Meaning
+
+- `models/marts/planning/_planning__conceptual.yml`: `class_size`. Its owners approve; data governance confirms any
+  glossary term (DEC-PRJ-11).
+
+## Contracts
+
+- `mart_planning__class_plan`: additive: added class_size
+
+## Downstream
+
+- `mart_planning__classes_by_faculty`
+
+## Who uses it
+
+- `tutor_hiring`, owned by The faculties
+
+## Tests changed
+
+- `every_student_has_a_place_in_a_class`, owned by Clara Jensen, Planning
+- `no_class_planned_that_isnt_needed`, owned by Clara Jensen, Planning
+
+## Tests
+
+8 test(s) on it and downstream. `dbt build --select mart_planning__class_plan+ --profiles-dir .` runs them.
+
+## Who to ask
+
+Clara Jensen, Planning; The faculties
+
+== databricks-parse, on the first push ==
+
+$ dbt parse --target databricks --profiles-dir . --no-partial-parse --warn-error
+  Performance info: target/perf_info.json
+  (no errors, no warnings)
+
+Both checks passed, on a branch up to date with main. The rules ask for both, from GitHub Actions only.
+
+== build, on the second push ==
+
+The warning Clara agreed to (governance_review.md): on class_size, owned by the faculties. Everything else is as on
+the first push.
+
+  OK    mart_planning__class_plan             table, in ci_pr_412_marts
+  PASS  unique_mart_planning__class_plan_unit_offering_key
+  PASS  not_null_mart_planning__class_plan_unit_offering_key
+  PASS  not_null_mart_planning__class_plan_classes
+  WARN  every_unit_has_a_class_size          31 units, kept in ci_pr_412_dbt_test__audit
+  PASS  every_student_has_a_place_in_a_class
+  PASS  no_class_planned_that_isnt_needed
+  OK    mart_planning__classes_by_faculty     table, in ci_pr_412_marts
+  PASS  unique_mart_planning__classes_by_faculty_faculty
+  PASS  not_null_mart_planning__classes_by_faculty_faculty
+  PASS  faculties_classes_add_up_to_the_plan
+
+  Done. PASS=10 WARN=1 ERROR=0 SKIP=0 TOTAL=11
+
+A warning doesn't fail the build: both checks pass again. The impact report is the same, with one test more, 9 on
+it and downstream, 3 of them changed: the warning is owned by the faculties. Every night from the merge, the build
+lists the units with no class size in its audit schema, and scripts/generate/issues.py puts them in the faculties'
+issue, so each faculty can ask its schools to set a size.

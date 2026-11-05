@@ -2,7 +2,7 @@
   "wait_timer": 0,
   "prevent_self_review": true,
   "reviewers": [
-    {"type": "Team", "id": 7300104}
+    {"type": "Team", "id": 7300103}
   ],
   "deployment_branch_policy": {
     "protected_branches": false,

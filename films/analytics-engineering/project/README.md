@@ -330,3 +330,17 @@ dbt ls --select core_credential+ --resource-type exposure --profiles-dir .
 A consumer still on version 1, such as a model that selects
 `credential_key, is_revoked from {{ ref('core_credential', v=1) }}`, gets dbt's warning on every
 parse: version 1 is slated for deprecation, and version 2 is available.
+
+## Review and release
+
+Every change reaches production the same way, a person's or an agent's: a pull request; checks on
+what changed, with the impact report; a diff of the data (`scripts/tools/diff_against_main.py`); a
+review for reference by the governance review agent (`skills/review-for-governance/`); the approval
+of the people the map's roles name (`CODEOWNERS`, and GitHub's teams in
+`review-and-release/teams.yml`, both written by `scripts/generate/codeowners.py`); and a release
+that a second person approves. The release runs every night at 23:00, or when a person starts it:
+it builds `main` in test first, and production only once test has passed and a release approver
+has said yes. It deploys the project as a bundle (`databricks.yml`), signed in to Databricks with
+no secret. `review-and-release/README.md` says what each rule stops and where it's set;
+`examples/class-size/` follows the planning agent's first pull request through all of it, as
+*Every change through review* tells it.

@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.444
+Southern California, the autumn of 1970. For thirteen days, wildfires burned across the hills.
+
+00:00:09.744 --> 00:00:14.499
+Sixteen people died, and about seven hundred homes and other buildings were lost.
+
+00:00:16.199 --> 00:00:23.624
+Some twenty thousand firefighters came to help, from about five hundred agencies: city, county, state and federal.
+
+00:00:24.824 --> 00:00:30.814
+Each agency organised its crews its own way, with its own words, on its own radio channels.
+
+00:00:31.914 --> 00:00:37.226
+Near the fires, crews struggled to reach each other: too many voices, on too many channels.
+
+00:00:38.426 --> 00:00:41.851
+And nobody had one up-to-date picture of all the fires.
+
+00:00:43.051 --> 00:00:49.045
+So it was hard, sometimes impossible, to send scarce engines and crews where they were needed most.
+
+00:00:50.345 --> 00:00:56.901
+Every agency cooperated as well as it could. What was missing was one way of working they all shared.
+
+00:00:58.201 --> 00:00:59.589
+Something had to change.
+
+00:01:03.089 --> 00:01:10.923
+In 1972, seven of those agencies began to build that way of working, together. Their programme was called FIRESCOPE.
+
+00:01:12.623 --> 00:01:17.462
+Its Incident Command System starts where help arrives: everyone who comes checks in.
+
+00:01:19.362 --> 00:01:24.591
+Each crew is written on a card, and the card takes its place on one board, in one structure.
+
+00:01:26.491 --> 00:01:29.573
+Each place has a role, and one person it answers to.
+
+00:01:31.273 --> 00:01:33.353
+Nobody leads more than about seven.
+
+00:01:35.053 --> 00:01:38.570
+And everyone uses the same plain words, with no codes.
+
+00:01:40.270 --> 00:01:49.258
+By 1981, the major fire agencies of Southern California used it widely, and more and more for emergencies other than fires.
+
+00:01:50.758 --> 00:01:58.043
+In 2004, it became part of the national standard in the United States, for emergencies of every kind.
+
+00:01:59.543 --> 00:02:06.066
+Crews from anywhere could arrive, check in, and work as one team, each knowing their place and who they answered to.
+
+00:02:07.966 --> 00:02:16.047
+At the university, on Monday, 2 November 2026, a new kind of colleague joined Planning: the planning agent.
+
+00:02:17.747 --> 00:02:24.825
+It will work on its own. If it simply started, nobody could say what it may do, who answers for it, or who can stop it.
+
+00:02:26.725 --> 00:02:34.991
+So, like a crew at a fire, it checks in first and takes its place on the map. Then anyone can see what it may do, and who answers for it.
+
+00:02:42.691 --> 00:02:47.408
+That Monday, Planning had two newcomers: Lucía Ortega, and the planning agent.
+
+00:02:49.308 --> 00:02:57.464
+All year, Jun's helper had drafted Planning's tickets on his own sign-in. Now the planning agent takes them, under a name of its own.
+
+00:02:59.364 --> 00:03:02.179
+Both are welcomed the same way, line by line.
+
+00:03:03.879 --> 00:03:10.289
+Lucía gets her badge. The agent gets an identity of its own, set up by Sam: never a person's.
+
+00:03:12.389 --> 00:03:17.399
+Lucía has her role in Planning. The agent has a role too: planning contributor.
+
+00:03:19.499 --> 00:03:25.801
+Lucía has a manager she answers to. The agent has an owner who answers for it: Clara Jensen.
+
+00:03:27.901 --> 00:03:34.893
+Lucía's rights come from Planning's group. The agent's come from its role's group: never its own, and never an admin's.
+
+00:03:36.993 --> 00:03:42.953
+An agent with an admin's rights, in the wrong hands, could do anything an admin can, only faster.
+
+00:03:44.853 --> 00:03:53.755
+Lucía signed the confidentiality agreement. An agent can't sign, so Clara signs it on its behalf, and answers for the data it touches.
+
+00:03:55.855 --> 00:04:01.200
+One thing differs. Lucía's helper works on her sign-in, with her rights, while she watches.
+
+00:04:02.500 --> 00:04:06.039
+The planning agent works alone, so it needs a place of its own.
+
+00:04:09.739 --> 00:04:15.400
+A week before it started, Noor, the data architect, gave it a place on the university's map.
+
+00:04:17.300 --> 00:04:22.460
+She started from the work: the capability Planning's tickets serve, provide data products.
+
+00:04:24.360 --> 00:04:30.723
+Each ticket goes through one process, change a data product: seven steps, from a ticket to production.
+
+00:04:33.023 --> 00:04:37.463
+Each step is assigned to a role, whoever fills it: a person or an agent.
+
+00:04:39.563 --> 00:04:46.212
+One new role, planning contributor, drafts the change, builds it in development, and opens a pull request.
+
+00:04:48.112 --> 00:04:54.856
+People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production.
+
+00:04:56.956 --> 00:05:03.043
+So whoever drafts a change never approves or releases it: separation of duties, on the map.
+
+00:05:05.343 --> 00:05:09.778
+Then Noor assigned the planning agent to that role, with Clara as its owner.
+
+00:05:11.878 --> 00:05:18.711
+Its role says what it may do: read the project and production, with names masked, and draft on its own branches.
+
+00:05:20.011 --> 00:05:24.536
+It may also build in its own development schema, and open a pull request.
+
+00:05:26.836 --> 00:05:34.599
+What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights.
+
+00:05:36.899 --> 00:05:43.809
+And whom it asks: Clara for what Planning needs, Mei for what a word means, Noor for the model, and Jun for the code.
+
+00:05:46.109 --> 00:05:50.046
+When it isn't sure, it doesn't guess. It asks, and a person decides.
+
+00:05:52.146 --> 00:05:55.523
+Where each of those rights comes from is the next film's story.
+
+00:05:57.423 --> 00:06:05.266
+The same day, Noor placed Anil Kurian's workload agent. It had its own identity since September, but no place on the map.
+
+00:06:06.566 --> 00:06:09.620
+Its stage for each kind of task went on its assignment.
+
+00:06:11.720 --> 00:06:15.357
+Now the map holds three agents, each with a role and an owner.
+
+00:06:16.657 --> 00:06:23.533
+The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them.
+
+00:06:27.233 --> 00:06:30.082
+One thing came before it worked alone: its gate.
+
+00:06:31.782 --> 00:06:38.467
+The week before, in a sandbox, where nothing it did could reach anyone, it redid Planning's last forty tickets.
+
+00:06:40.767 --> 00:06:48.283
+Clara and Jun had set the bar first: at least thirty-six done as a person had done them, and none wrong without saying so.
+
+00:06:50.583 --> 00:06:56.082
+Thirty-seven matched. On three, it said it wasn't sure, and asked. None was confidently wrong.
+
+00:06:58.382 --> 00:07:04.390
+That last number matters most: an agent that says when it isn't sure can be trusted with work of its own.
+
+00:07:06.490 --> 00:07:11.305
+Audit is on from its first run: everything it does is recorded under its own name.
+
+00:07:13.605 --> 00:07:18.801
+So Clara agreed stage four for Planning's tickets: it proposes, and people review.
+
+00:07:20.101 --> 00:07:26.329
+Noor wrote it on its assignment, on the map, with stage one for what a word means: it only suggests.
+
+00:07:28.429 --> 00:07:35.014
+From then on, a check fails any agent on the map without an owner, a role, or a stage for each kind of task.
+
+00:07:39.114 --> 00:07:41.737
+Who may do what with an agent is written down too.
+
+00:07:43.637 --> 00:07:51.913
+Only a person may own an agent, never a team. Clara answers for everything the planning agent does, and only she may sign for it.
+
+00:07:54.213 --> 00:08:00.141
+Only Sam's platform team may set an agent up: for its owner, and once it has a place on the map.
+
+00:08:02.441 --> 00:08:06.721
+Clara may stop it. So may Sam, at any hour, without asking first.
+
+00:08:09.021 --> 00:08:15.013
+And anyone who sees it go wrong may ask them to, as anyone on a production line may pull the cord.
+
+00:08:19.713 --> 00:08:24.734
+In 1970, help couldn't become one team until there was one structure to join.
+
+00:08:26.434 --> 00:08:31.316
+Since then, crews from anywhere check in, take their place, and know who they answer to.
+
+00:08:32.816 --> 00:08:40.204
+The planning agent has done the same: a place in Planning's work, a role, an owner, and a stage for each kind of task.
+
+00:08:42.104 --> 00:08:46.357
+So everyone knows what it may do, who answers for it, and who can stop it.
+
+00:08:47.857 --> 00:08:51.503
+Before an agent works alone, it's architected like a colleague.
+
+00:08:53.403 --> 00:08:57.000
+Next: rights that come from the work, and not from a person's.

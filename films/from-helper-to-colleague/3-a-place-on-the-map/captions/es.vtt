@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.444
+El sur de California, otoño de 1970. Durante trece días, los incendios forestales ardieron en las colinas.
+
+00:00:09.744 --> 00:00:14.499
+Murieron dieciséis personas, y se perdieron unas setecientas casas y otros edificios.
+
+00:00:16.199 --> 00:00:23.624
+Unos veinte mil bomberos llegaron a ayudar, de unas quinientas agencias: municipales, de condado, estatales y federales.
+
+00:00:24.824 --> 00:00:30.814
+Cada agencia organizaba sus cuadrillas a su manera, con sus propias palabras y en sus propios canales de radio.
+
+00:00:31.914 --> 00:00:37.226
+Cerca del fuego, a las cuadrillas les costaba comunicarse: demasiadas voces, en demasiados canales.
+
+00:00:38.426 --> 00:00:41.851
+Y nadie tenía una imagen actualizada de todos los incendios.
+
+00:00:43.051 --> 00:00:49.045
+Así que era difícil, a veces imposible, enviar los pocos camiones y cuadrillas adonde más se necesitaban.
+
+00:00:50.345 --> 00:00:56.901
+Cada agencia cooperó lo mejor que pudo. Lo que faltaba era una forma de trabajar que todas compartieran.
+
+00:00:58.201 --> 00:00:59.589
+Algo tenía que cambiar.
+
+00:01:03.089 --> 00:01:10.923
+En 1972, siete de esas agencias empezaron a construir juntas esa forma de trabajar. Su programa se llamó FIRESCOPE.
+
+00:01:12.623 --> 00:01:17.462
+Su Sistema de Comando de Incidentes empieza donde llega la ayuda: todo el que llega se registra.
+
+00:01:19.362 --> 00:01:24.591
+Cada cuadrilla se anota en una tarjeta, y la tarjeta ocupa su lugar en un solo tablero, en una sola estructura.
+
+00:01:26.491 --> 00:01:29.573
+Cada lugar tiene un rol, y una persona ante quien responde.
+
+00:01:31.273 --> 00:01:33.353
+Nadie tiene a su cargo a más de unos siete.
+
+00:01:35.053 --> 00:01:38.570
+Y todos usan las mismas palabras sencillas, sin códigos.
+
+00:01:40.270 --> 00:01:49.258
+Para 1981, las grandes agencias de bomberos del sur de California lo usaban mucho, y cada vez más en otras emergencias.
+
+00:01:50.758 --> 00:01:58.043
+En 2004, pasó a formar parte del estándar nacional de Estados Unidos, para emergencias de todo tipo.
+
+00:01:59.543 --> 00:02:06.066
+Cuadrillas de cualquier lugar podían llegar, registrarse y trabajar como un solo equipo, sabiendo su lugar y ante quién respondían.
+
+00:02:07.966 --> 00:02:16.047
+En la universidad, el lunes 2 de noviembre de 2026, un nuevo tipo de colega se unió a Planificación: el agente de Planificación.
+
+00:02:17.747 --> 00:02:24.825
+Trabajará por su cuenta. Si simplemente empezara, nadie podría decir qué puede hacer, quién responde por él ni quién puede detenerlo.
+
+00:02:26.725 --> 00:02:34.991
+Como una cuadrilla en un incendio, primero se registra y toma su lugar en el mapa. Así todos ven qué puede hacer y quién responde por él.
+
+00:02:42.691 --> 00:02:47.408
+Ese lunes, Planificación tuvo dos recién llegados: Lucía Ortega y el agente de Planificación.
+
+00:02:49.308 --> 00:02:57.464
+Todo el año, el ayudante de Jun redactó los encargos de Planificación con el acceso de Jun. Ahora el agente los toma, con un nombre propio.
+
+00:02:59.364 --> 00:03:02.179
+Los dos reciben la misma bienvenida, línea por línea.
+
+00:03:03.879 --> 00:03:10.289
+Lucía recibe su credencial de empleada. El agente recibe una identidad propia, creada por Sam: nunca la de una persona.
+
+00:03:12.389 --> 00:03:17.399
+Lucía tiene su rol en Planificación. El agente también tiene un rol: colaborador de Planificación.
+
+00:03:19.499 --> 00:03:25.801
+Lucía tiene un jefe ante quien responde. El agente tiene una dueña que responde por él: Clara Jensen.
+
+00:03:27.901 --> 00:03:34.893
+Los permisos de Lucía vienen del grupo de Planificación. Los del agente, del grupo de su rol: nunca propios, ni de administrador.
+
+00:03:36.993 --> 00:03:42.953
+Un agente con permisos de administrador, en malas manos, podría hacer todo lo que hace un administrador, solo que más rápido.
+
+00:03:44.853 --> 00:03:53.755
+Lucía firmó el acuerdo de confidencialidad. Un agente no puede firmar, así que Clara firma por él y responde por los datos que toca.
+
+00:03:55.855 --> 00:04:01.200
+Algo es distinto. El ayudante de Lucía trabaja con el acceso de ella, con sus permisos, mientras ella mira.
+
+00:04:02.500 --> 00:04:06.039
+El agente de Planificación trabaja solo, así que necesita un lugar propio.
+
+00:04:09.739 --> 00:04:15.400
+Una semana antes de que empezara, Noor, la arquitecta de datos, le dio un lugar en el mapa de la universidad.
+
+00:04:17.300 --> 00:04:22.460
+Empezó por el trabajo: la capacidad a la que sirven los encargos de Planificación, proveer productos de datos.
+
+00:04:24.360 --> 00:04:30.723
+Cada encargo pasa por un proceso, cambiar un producto de datos: siete pasos, de un encargo a producción.
+
+00:04:33.023 --> 00:04:37.463
+Cada paso se asigna a un rol, sin importar quién lo ocupe: una persona o un agente.
+
+00:04:39.563 --> 00:04:46.212
+Un rol nuevo, colaborador de Planificación, redacta el cambio, lo construye en desarrollo y abre un pull request.
+
+00:04:48.112 --> 00:04:54.856
+Las personas conservan el resto. Jun revisa el código, Clara aprueba el cambio y Noor lo libera a producción.
+
+00:04:56.956 --> 00:05:03.043
+Así, quien redacta un cambio nunca lo aprueba ni lo libera: separación de funciones, en el mapa.
+
+00:05:05.343 --> 00:05:09.778
+Luego Noor asignó el agente de Planificación a ese rol, con Clara como su dueña.
+
+00:05:11.878 --> 00:05:18.711
+Su rol dice qué puede hacer: leer el proyecto y producción, con los nombres enmascarados, y redactar en sus propias ramas.
+
+00:05:20.011 --> 00:05:24.536
+También puede construir en su propio esquema de desarrollo y abrir un pull request.
+
+00:05:26.836 --> 00:05:34.599
+Lo que no puede hacer: aprobar, fusionar, cambiar producción o una prueba aprobada, cambiar qué significa una palabra ni darse permisos.
+
+00:05:36.899 --> 00:05:43.809
+Y a quién consulta: a Clara, lo que necesita Planificación; a Mei, qué significa una palabra; a Noor, el modelo; a Jun, el código.
+
+00:05:46.109 --> 00:05:50.046
+Cuando no está seguro, no adivina. Pregunta, y una persona decide.
+
+00:05:52.146 --> 00:05:55.523
+De dónde sale cada uno de esos permisos es la historia de la próxima película.
+
+00:05:57.423 --> 00:06:05.266
+El mismo día, Noor ubicó el agente de carga de trabajo de Anil Kurian: con identidad propia desde septiembre, pero sin lugar en el mapa.
+
+00:06:06.566 --> 00:06:09.620
+Su etapa para cada tipo de tarea quedó escrita en su asignación.
+
+00:06:11.720 --> 00:06:15.357
+Ahora el mapa tiene tres agentes, cada uno con un rol y un dueño.
+
+00:06:16.657 --> 00:06:23.533
+El tercero, el agente de revisión de gobernanza de Yusuf, ya estaba: revisa pull requests y nunca los aprueba.
+
+00:06:27.233 --> 00:06:30.082
+Antes de trabajar solo, tuvo que pasar por su puerta.
+
+00:06:31.782 --> 00:06:38.467
+La semana anterior, en un sandbox, donde nada de lo que hiciera podía llegar a nadie, rehízo los últimos cuarenta encargos de Planificación.
+
+00:06:40.767 --> 00:06:48.283
+Clara y Jun habían fijado antes la meta: al menos treinta y seis hechos como los hizo una persona, y ninguno mal sin decirlo.
+
+00:06:50.583 --> 00:06:56.082
+Treinta y siete coincidieron. En tres, dijo que no estaba seguro, y preguntó. Ninguno estuvo mal sin que lo dijera.
+
+00:06:58.382 --> 00:07:04.390
+Ese último número es el que más importa: a un agente que dice cuándo no está seguro se le puede confiar trabajo propio.
+
+00:07:06.490 --> 00:07:11.305
+La auditoría está activa desde su primera ejecución: todo lo que hace queda registrado con su propio nombre.
+
+00:07:13.605 --> 00:07:18.801
+Así que Clara aprobó la etapa cuatro para los encargos de Planificación: propone, y las personas revisan.
+
+00:07:20.101 --> 00:07:26.329
+Noor la escribió en su asignación, en el mapa, con la etapa uno para qué significa una palabra: solo sugiere.
+
+00:07:28.429 --> 00:07:35.014
+Desde entonces, una verificación rechaza a cualquier agente del mapa sin dueño, sin rol o sin una etapa para cada tipo de tarea.
+
+00:07:39.114 --> 00:07:41.737
+Quién puede hacer qué con un agente también está por escrito.
+
+00:07:43.637 --> 00:07:51.913
+Solo una persona, nunca un equipo, puede ser dueña de un agente. Clara responde por todo lo que hace, y solo ella puede firmar por él.
+
+00:07:54.213 --> 00:08:00.141
+Solo el equipo de plataforma de Sam puede crear un agente: para su dueño, y una vez que tiene un lugar en el mapa.
+
+00:08:02.441 --> 00:08:06.721
+Clara puede detenerlo. Sam también, a cualquier hora, sin preguntar antes.
+
+00:08:09.021 --> 00:08:15.013
+Y cualquiera que lo vea fallar puede pedírselo, como en una línea de producción cualquiera puede tirar del cordón.
+
+00:08:19.713 --> 00:08:24.734
+En 1970, la ayuda no podía ser un solo equipo hasta que hubo una estructura a la cual sumarse.
+
+00:08:26.434 --> 00:08:31.316
+Desde entonces, cuadrillas de cualquier lugar se registran, ocupan su lugar y saben ante quién responden.
+
+00:08:32.816 --> 00:08:40.204
+El agente de Planificación hizo lo mismo: un lugar en el trabajo de Planificación, un rol, una dueña y una etapa para cada tipo de tarea.
+
+00:08:42.104 --> 00:08:46.357
+Así todos saben qué puede hacer, quién responde por él y quién puede detenerlo.
+
+00:08:47.857 --> 00:08:51.503
+Antes de trabajar solo, un agente se integra a la arquitectura como un colega.
+
+00:08:53.403 --> 00:08:57.000
+Después: permisos que vienen del trabajo, no de una persona.

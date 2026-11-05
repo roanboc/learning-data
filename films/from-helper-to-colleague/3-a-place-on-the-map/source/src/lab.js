@@ -155,7 +155,7 @@ function cj_process(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;con
    will go, before its gate), glow {owner, agent, role, card}, pass [owner, role, card]} (0 to 1 each); o.head the label. */
 const CJ_AROWS=[
   {owner:"Clara Jensen",name:"planning agent",role:"planning contributor",stage:[["Planning's tickets",4],["what a word means",1]],y:120},
-  {owner:"Anil Kurian",name:"workload agent",role:"workload contributor",stage:[["what a staff word means",1],["a new question",3],["fix a model",4],["night build, in test",5],["night build, in production",4]],y:312},
+  {owner:"Anil Kurian",name:"workload agent",role:"workload contributor",stage:[["what a staff word means",1],["a new question",3],["fix a model",4],["night build, in test",4],["night build, in production",4]],y:312},
   {owner:"Yusuf Demir",name:"governance review agent",role:"governance reviewer",stage:[["review a pull request",1],["draft what's missing",1]],y:636}];
 const CJ_AC={ox:50,ow:280,ax:440,aw:460,cx:940,cw:520,rx:1500,rw:360};
 const cj_stageH=n=>40+n*44+24;

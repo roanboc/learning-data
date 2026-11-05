@@ -12,5 +12,6 @@ relationships:
     fix a model: 4
     find why the night build failed, in test: 5
     find why the night build failed, in production: 4
-evidence: its own identity since 7 Sep 2026; placed on the map with its stages · 26 Oct 2026
+evidence: its own identity since 7 Sep 2026; placed on the map with its stages, the night build in test at 4 since 13 Oct
+  · 26 Oct 2026; the night build in test at 5 again · 30 Oct 2026
 status: confirmed

@@ -1,4 +1,4 @@
-/* ===== A contributor joins: Southern California, 1970, and the way of working that came after it =====
+/* ===== A place on the map: Southern California, 1970, and the way of working that came after it =====
    The opening's places, painted full-frame in the module's matte style (no outlines, muted colours, daylight from the right, soft
    contact shadows), dressed for their time. Each is a place painted once (AG_PLACES.cj*); what moves in it is drawn live by the
    helpers beside it. Every name here starts with cj_ or CJ_. The fires keep their own deep red-orange (CJ_FIRE), far off on the

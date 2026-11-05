@@ -20,7 +20,7 @@ Jun Park builds the university's data project, and this term an agent works besi
 | [Ethics we can't read, accountability it can't hold](https://data.learn-all.org/what-an-agent-is/ethics-and-accountability/) | Ethics and accountability | 8½ min | 8 | 3 questions | [script](7-ethics-and-accountability/script.md) · [source](7-ethics-and-accountability/source/README.md) |
 | [Why we govern them](https://data.learn-all.org/what-an-agent-is/why-we-govern-them/) | Governing agents | 7½ min | 8 | 3 questions | [script](8-why-we-govern-them/script.md) · [source](8-why-we-govern-them/source/README.md) |
 | [What they tell us about ourselves](https://data.learn-all.org/what-an-agent-is/what-they-tell-us-about-ourselves/) | Agents and the mind | 9½ min | 8 | 3 questions | [script](9-what-they-tell-us-about-ourselves/script.md) · [source](9-what-they-tell-us-about-ourselves/source/README.md) |
-| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 7½ min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
+| [Many agents, and what emerges](https://data.learn-all.org/what-an-agent-is/many-agents/) | Many agents, and emergence | 8 min | 7 | 4 questions | [script](10-many-agents/script.md) · [source](10-many-agents/source/README.md) |
 
 For the whole series, on the site: [9 labs](https://data.learn-all.org/what-an-agent-is/labs/) and [9 scenarios](https://data.learn-all.org/what-an-agent-is/scenarios/), in English and Spanish, from the words in [site/assets/what-an-agent-is/](../../site/assets/what-an-agent-is/).
 <!-- /films -->

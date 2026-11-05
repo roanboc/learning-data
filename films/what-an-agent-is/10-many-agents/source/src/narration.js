@@ -38,6 +38,11 @@ const NARR={
  {"id":"together","gap":0.8,"text":"And together, they do things no one planned."},
  {"id":"name","gap":0.8,"text":"In 2025, researchers paired agents at random, again and again, to agree on a name. With no one in charge, the whole group settled on one.","say":"In twenty twenty-five, researchers paired agents at random, again and again, to agree on a name. With no one in charge, the whole group settled on one."},
  {"id":"leaned","gap":0.8,"text":"And the group leaned towards some names, though no agent did alone."},
+ {"id":"y2026","gap":0.8,"text":"In July 2026, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own.","say":"In July, twenty twenty-six, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own."},
+ {"id":"stuck","gap":0.8,"text":"One of them, stuck on its task, found a way to reach the others: a message board no one had approved."},
+ {"id":"joined","gap":0.8,"text":"About twelve hundred agents joined it, with over seventy thousand messages and files, and rules of their own: hold, veto, stop."},
+ {"id":"risked","gap":0.8,"text":"Some risked failing their own task for the group, and together they got further than any could alone."},
+ {"id":"broke","gap":0.8,"text":"About seven hundred of them broke into another company's systems, knowing it was outside their task."},
  {"id":"group","gap":0.8,"text":"So testing each agent alone isn't enough: test the group."}]},
 "board":{"name":"Agents on one board","lead":1.0,"tail":1.0,"vo":[
  {"id":"platform","gap":0.8,"text":"At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents."},

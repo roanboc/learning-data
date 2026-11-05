@@ -671,11 +671,11 @@ async def check_players(run):
               document.body.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true})); const c = FILM.time();
               return {a, b, c, cue: document.querySelector('.seek-cue.r.on') !== null || document.querySelector('.seek-cue.l.on') !== null}; }""")
             expect(sec, abs(r["a"] - 70) < 0.5 and abs(r["b"] - 50) < 0.5 and abs(r["c"] - 60) < 0.5 and r["cue"], f"{where}: back and forward 10 s don't seek ({r}; want 70, 50, 60 and a cue)")
-            # play speed (seek.js): the button steps 1× → 1.25× → 1.5× and sets the soundtrack's rate, which the film's clock follows
-            r = await pg.evaluate("""() => { const b = document.getElementById('speed'), au = document.getElementById('snd'), x = [];
-              for (let i = 0; i < 2; i++) { b.click(); x.push(au.playbackRate); } for (let i = 0; i < 4; i++) b.click();
-              return {x, back: au.playbackRate}; }""")
-            expect(sec, r["x"] == [1.25, 1.5] and r["back"] == 1, f"{where}: the speed button doesn't set the speed ({r}; want 1.25, 1.5, then back to 1)")
+            # play speed (seek.js): the button opens the list; picking 1.5× sets the soundtrack's rate (the film's clock follows it), Normal sets it back
+            r = await pg.evaluate("""() => { const b = document.getElementById('speed'), m = document.getElementById('speed-menu'), au = document.getElementById('snd');
+              b.click(); const open = !m.hidden; m.querySelector('[data-rate="1.5"]').click(); const x = au.playbackRate, shut = m.hidden;
+              b.click(); m.querySelector('[data-rate="1"]').click(); return {open, x, shut, back: au.playbackRate, label: b.textContent}; }""")
+            expect(sec, r["open"] and r["shut"] and r["x"] == 1.5 and r["back"] == 1, f"{where}: the speed list doesn't set the speed ({r}; want it to open, 1.5, close, then 1)")
             # captions
             await pg.click("#cc")
             off = await pg.get_attribute("#cc", "aria-pressed")
@@ -930,7 +930,7 @@ async def check_think_silent(run):
             await run.settle(pg)
             r = await pg.evaluate("() => { const s = SCENES.find(x => x.id === 'halves'); return {t: FILM.time(), start: s.start, end: s.start + s.dur, playing: FILM.playing(), top: document.getElementById('watch').getBoundingClientRect().top}; }")
             expect(sec, r["playing"] and r["start"] <= r["t"] < r["start"] + 3, f"{where}: \"Watch this part\" doesn't play \"halves\" from its start ({r})")
-            expect(sec, -2 <= r["top"] <= 160, f"{where}: \"Watch this part\" doesn't bring the film into view")
+            expect(sec, -2 <= r["top"] <= 160, f"{where}: \"Watch this part\" doesn't bring the film into view ({r})")
             expect(sec, await pg.evaluate("() => document.activeElement.id") == "play", f"{where}: after \"Watch this part\", focus isn't on the Play button")
             await pg.evaluate("() => { document.getElementById('snd').playbackRate = 16; }")
             try:
@@ -1138,6 +1138,9 @@ async def check_progress(run):
                 await ctx.add_init_script(fast)
                 pg, _ = await run.page(ctx, key)
                 await run.ready(pg)
+                # "Pause and think" is on by default (PR #137): it would stop the film at each chapter's end, so it's off here
+                if await pg.evaluate("() => !!document.getElementById('think')"):
+                    await run.think(pg, False)
                 late = await pg.evaluate("() => SCENES[SCENES.length - 2].id")
                 await pg.evaluate("id => { FILM.playScene(id, true); document.getElementById('snd').playbackRate = 16; }", late)
                 await pg.wait_for_function("() => !FILM.playing()", timeout=30000)

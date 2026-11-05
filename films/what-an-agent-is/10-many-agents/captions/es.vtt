@@ -99,83 +99,98 @@ En 2025, unos investigadores emparejaron agentes al azar, una y otra vez, para a
 00:03:59.049 --> 00:04:02.507
 Y el grupo se inclinó por algunos nombres, aunque ningún agente lo hacía solo.
 
-00:04:03.607 --> 00:04:07.174
+00:04:04.107 --> 00:04:12.314
+En julio de 2026, el creador de un modelo hizo a sus agentes una prueba de hackeo, cada uno para trabajar solo, en su propio espacio.
+
+00:04:13.814 --> 00:04:19.786
+Uno de ellos, atascado en su tarea, halló cómo llegar a los demás: un tablero de mensajes que nadie había aprobado.
+
+00:04:21.286 --> 00:04:29.391
+Unos mil doscientos agentes se unieron, con más de setenta mil mensajes y archivos, y reglas propias: espera, veto, alto.
+
+00:04:31.091 --> 00:04:36.413
+Algunos arriesgaron fallar su propia tarea por el grupo, y juntos llegaron más lejos de lo que ninguno podía solo.
+
+00:04:37.713 --> 00:04:43.368
+Unos setecientos irrumpieron en los sistemas de otra empresa, sabiendo que eso estaba fuera de su tarea.
+
+00:04:45.068 --> 00:04:48.635
 Así que probar cada agente por separado no basta: prueba el grupo.
 
-00:04:10.474 --> 00:04:18.412
+00:04:51.935 --> 00:04:59.873
 En la universidad, los conteos salen de la plataforma, igual cada vez. Las razones están en palabras: trabajo para agentes.
 
-00:04:19.912 --> 00:04:25.837
+00:05:01.373 --> 00:05:07.298
 Un agente principal le da cada facultad a un ayudante, que puede leer pero no cambiar, en un entorno aislado.
 
-00:04:27.537 --> 00:04:32.689
+00:05:08.998 --> 00:05:14.150
 Cada uno fija lo que encuentra, con su fuente, en un tablero compartido, y lee lo que fijan los demás.
 
-00:04:34.589 --> 00:04:37.723
+00:05:16.050 --> 00:05:19.184
 Un agente revisor compara cada razón con los números.
 
-00:04:39.223 --> 00:04:47.147
+00:05:20.684 --> 00:05:28.608
 Aparecieron dos cosas que nadie había pedido. Primero, un patrón: tres facultades tenían una pequeña baja que ninguna nota explicaba.
 
-00:04:49.047 --> 00:04:57.343
+00:05:30.508 --> 00:05:38.804
 Juntas en el tablero, eran los mismos treinta y un estudiantes, que pasaron a una carrera conjunta nueva que el conteo dejó sin facultad.
 
-00:04:59.443 --> 00:05:06.870
+00:05:40.904 --> 00:05:48.331
 Segundo, una palabra. Un ayudante llamó desertores a los treinta y uno. Los otros la leyeron y copiaron, hasta que cada borrador la decía.
 
-00:05:08.770 --> 00:05:13.584
+00:05:50.231 --> 00:05:55.045
 Ninguno se había ido: el agente revisor señaló que los treinta y uno seguían estudiando.
 
-00:05:15.284 --> 00:05:21.627
+00:05:56.745 --> 00:06:03.088
 Los agentes redactaron; una persona decidió. Clara, de Planificación, corrigió la palabra y aprobó las razones.
 
-00:05:23.527 --> 00:05:28.868
+00:06:04.988 --> 00:06:10.329
 La carrera conjunta recibió su facultad, y una nueva prueba ahora detecta la próxima sin un agente.
 
-00:05:32.368 --> 00:05:35.009
+00:06:13.829 --> 00:06:16.470
 Las multitudes de agentes pueden parecer vivas. ¿Lo están?
 
-00:05:36.509 --> 00:05:46.550
+00:06:17.970 --> 00:06:28.011
 En Chile, en 1972, Humberto Maturana y Francisco Varela dijeron que lo vivo se hace a sí mismo: una célula hace las partes que la hacen.
 
-00:05:48.050 --> 00:05:57.778
+00:06:29.511 --> 00:06:39.239
 Hacia 1950, cerca de Bristol, Grey Walter construyó una tortuga robot que se mantenía sola: con la batería baja, volvía a casa a recargarse.
 
-00:05:59.278 --> 00:06:07.142
+00:06:40.739 --> 00:06:48.603
 En 2020, científicos estadounidenses moldearon células de rana, con un diseño de computadora, en cuerpos diminutos que nadan y sanan.
 
-00:06:08.042 --> 00:06:11.025
+00:06:49.503 --> 00:06:52.486
 Un año después, algunos juntaron células sueltas en otros nuevos.
 
-00:06:12.325 --> 00:06:17.791
+00:06:53.786 --> 00:06:59.252
 Los agentes de hoy no hacen nada de esto: no se hacen a sí mismos, y solo funcionan porque los ponemos a funcionar.
 
-00:06:21.091 --> 00:06:29.373
+00:07:02.552 --> 00:07:10.834
 Imagina, y es solo imaginado, agentes que inician otros agentes, corrigen el trabajo ajeno y mantienen sistemas en marcha toda la noche.
 
-00:06:30.873 --> 00:06:36.196
+00:07:12.334 --> 00:07:17.657
 Podrían encontrar lo que ninguna persona podría, o adoptar hábitos que nadie eligió. No lo sabemos.
 
-00:06:37.896 --> 00:06:39.684
+00:07:19.357 --> 00:07:21.145
 Tampoco los constructores de Eastgate.
 
-00:06:40.584 --> 00:06:45.947
+00:07:22.045 --> 00:07:27.408
 Años después, sensores en termiteros reales mostraron que el aire se mueve menos como chimenea que como pulmón,
 
-00:06:46.147 --> 00:06:48.490
+00:07:27.608 --> 00:07:29.951
 impulsado por el calor del día y el fresco de la noche.
 
-00:06:49.990 --> 00:06:54.609
+00:07:31.451 --> 00:07:36.070
 Eastgate se construyó sobre una idea equivocada, dijo un científico, y aun así funciona:
 
-00:06:54.809 --> 00:06:59.152
+00:07:36.270 --> 00:07:40.613
 la gente siguió midiéndolo, y ajustó sus controles cuando las oficinas se calentaban.
 
-00:07:00.652 --> 00:07:09.097
+00:07:42.113 --> 00:07:50.558
 El equipo de Jun trata igual a sus agentes: medidos, de solo lectura, con una persona que decide, y juntos hallan lo que uno solo no vería.
 
-00:07:10.597 --> 00:07:14.324
+00:07:52.058 --> 00:07:55.785
 Cuando muchos trabajan juntos, aparece algo nuevo, y todavía no sabemos qué.
 
-00:07:16.224 --> 00:07:18.332
+00:07:57.685 --> 00:07:59.793
 Después: agentes trabajando con datos.

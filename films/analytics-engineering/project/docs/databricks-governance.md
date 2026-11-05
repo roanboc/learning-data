@@ -204,29 +204,34 @@ for people.
 
 ## 10. Context and memory, one way
 
-What agents read is governed like any data (`AGENTS.md`, *Context and memory are data*). Its home is
-the repository, where every change is a pull request its owner reviews (`CODEOWNERS`). From there it
-goes one way, to where agents read it on Databricks, and nobody edits it there.
+What agents read is governed like any data (`AGENTS.md`, *Context and memory are data*). Context's
+home is the repository, where every change is a pull request its owner reviews (`CODEOWNERS`); the
+glossary's definitions come from Unity Catalog's Glossary, kept there by their owners, and a skill
+copies each into the conceptual models with its `source:` (`skills/sync-the-glossary/`). From the
+repository, context goes one way, to where agents read it on Databricks, and nobody edits it there.
+Memory is kept by the platform, and comes second.
 
 1. **Descriptions, as comments.** `persist_docs` (`dbt_project.yml`) writes each model's and each
    column's description into Unity Catalog as comments, each time it builds the model (DEC-PRJ-04).
    A comment edited in the catalog is written over by the next build.
-2. **Skills, in Unity Gateway (Beta).** Each skill in `skills/` becomes a Unity Catalog object, with
-   an owner (whoever published it), permissions (`READ VOLUME` to use it; `WRITE VOLUME`, with
+2. **Skills, in Unity Gateway.** Each skill in `skills/` becomes a Unity Catalog object, with an
+   owner (whoever published it), permissions (`READ VOLUME` to use it; `WRITE VOLUME`, with
    `READ VOLUME`, to change it) and an audit of who created, changed, deleted or read it, and who was
    granted it. Databricks' sync notebook, run on a schedule, copies the skills from the repository:
    it creates new ones and updates changed ones, and never deletes one. A skill deleted here is
    deleted there too, by hand.
-3. **The team's memory (Beta).** Agent sessions and agent memory are kept in stores in Lakebase,
-   the platform's Postgres database. The store is the security boundary: there's no access for each
-   entry, so whoever may write to a store may change any entry in it. A memory pipeline, run about
-   every 24 hours, reads a session store, and may rewrite, merge, split or delete the entries in its
-   memory store. So the team keeps two memory stores (`memory/README.md`): the proposals store, which
-   the pipeline writes and no agent reads; and the team's store, which a script loads from
-   `memory/entries/`, and which agents read under a read-only grant (`permission="READ"`).
+3. **The team's memory, kept by the platform.** Agent sessions and agent memory are kept in stores
+   in Lakebase, the platform's Postgres database. A memory pipeline, run about every 24 hours, reads
+   a session store and may rewrite, merge, split or delete any entry in its memory store, and nobody
+   approves each one. The store is the security boundary: there's no access for each entry, so
+   whoever may write to a store may change any entry in it, and nothing keeps what an entry said
+   before. So memory comes second (`memory/README.md`): agents read the glossary's definitions and
+   the data rules first, follow the definition where a memory line disagrees, and flag the line.
+   Every agent reads the team's store under a read-only grant (`permission="READ"`), and only the
+   pipeline writes there.
 4. **Kept, then deleted.** Sessions are kept for 30 days; then a scheduled job deletes them.
-   Deleting a session, or a session store, doesn't delete the memory kept from it: an entry is
-   deleted as its file, here, and from the team's store at the next load.
+   Deleting a session, or a session store, doesn't delete the memory kept from it: data governance
+   deletes a wrong line from the team's store itself, and records it in `memory/removed.md`.
 
 ## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, and *Skills support in Unity Gateway* to the end again on 5 November 2026)
 

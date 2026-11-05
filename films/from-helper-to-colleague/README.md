@@ -2,9 +2,9 @@
 
 *The third series of the module AI agents in data work.*
 
-How a team comes to trust an agent, one stage and one kind of task at a time. Planning's tickets, drafted by Jun Park's helper on his own sign-in, pass to the planning agent, a contributor with its own name, owned by Clara Jensen, while Jun's census agent goes ahead of it, to a written mandate. Three films show the ideas, with no product: five stages, not a switch; borrowed rights; and what a contributor needs before it works alone. Four show them in Databricks, GitHub and dbt: helpers on a person's behalf, an agent with its own badge, every change through review, and a mandate, written and enforced. *Agents at work on data* comes before it; *A colleague that isn't a person* follows. The plan for this series is in the [proposal](proposal.md).
+How an agent becomes a colleague: designed into the university's enterprise architecture before it gets any rights. Planning's tickets, drafted by Jun Park's helper on his own sign-in, pass to the planning agent, owned by Clara Jensen, with a place on the map: the work it serves, its role, its owner, its stage for each kind of task, and rights that come from its role's steps. Four films show the ideas, with no product: five stages, not a switch; borrowed rights; a place on the map; and rights that follow the role. Three show them in Databricks, GitHub and dbt: the map, enforced; every change through review; and a mandate, written and enforced. *Agents at work on data* comes before it; *A colleague that isn't a person* follows. The plan for this series is in the [proposal](proposal.md).
 
-**Status:** agreed on 5 November 2026; the films are being made, one at a time, in order, and appear in the table below as each one is out. On the site, the series will sit under the topic *AI agents in data work*, at `from-helper-to-colleague/`, once its opening film is out.
+**Status:** version 2 of the plan, approved on 5 November 2026; the films are being made, one at a time, in order, and appear in the table below as each one is out. On the site, the series will sit under the topic *AI agents in data work*, at `from-helper-to-colleague/`, once its opening film is out.
 
 ## The films
 

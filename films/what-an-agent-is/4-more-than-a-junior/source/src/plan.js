@@ -216,8 +216,15 @@ function mj_bars(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;con
     ag_T(ctx,name,x,yy+28,{w:600,size:28,col:AG.ink,a:clamp(u*4,0,1)});
     ctx.fillStyle=rgba(AG.orange,0.82);rr(ctx,x,yy+42,Math.max(10,bw*v/max*u),20,10);ctx.fill();
     if(u>0.6)ag_T(ctx,v.toLocaleString("en-GB"),x+bw*v/max+14,yy+62,{w:700,size:28,col:AG.ink,a:clamp((u-0.6)*3,0,1)});});
-  const tA=clamp(o.total||0,0,1);if(tA>0)ag_pill(ctx,x+w/2-30,y+4*82+44,"By faculty: 4,812",{icon:o.warn?"warn":null,col:o.warn?AG.amber:null,a:tA});
+  const tA=clamp(o.total||0,0,1);if(tA>0)mj_sumPill(ctx,x+w/2-30,y+4*82+44,"By faculty: 4,812",+o.warn||0,tA);
   ctx.restore();}
+// the sum's pill turning amber with a warning sign (u 0 to 1): it widens for the sign, and its words move aside and take the colour,
+// over a few frames (ag_pill lays out its words 20 px apart with and without an icon, so switching to it moved them in one frame)
+function mj_sumPill(ctx,x,y,text,u,a){if(a<=0)return;const size=30,e=ag_sine(clamp(u,0,1)),tw=ag_tw(ctx,text,{w:700,size}),w=tw+lerp(56,96,e),h=size+28,bx=x-w/2,by=y-h/2;
+  ag_box(ctx,bx,by,w,h,h/2,{a});
+  if(e>0){ctx.save();ctx.globalAlpha*=a*e;ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=2.4;ctx.beginPath();ag_rect(ctx,bx,by,w,h,h/2);ctx.stroke();
+    ag_warn(ctx,bx+40,y,30,rgba(AG.amber,1));ctx.restore();}
+  ag_T(ctx,text,x+20*e,y+size*0.36,{w:700,size,align:"center",col:mix(AG.ink,AG.amber,e),a});}
 // the model's reasoning: a card with a violet edge, its steps appearing in turn (o.p 0 to 1); (x, y) its top left
 function mj_reason(ctx,x,y,w,steps,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const h=AG_PAD*2+38+steps.length*44;ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.5,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.violet,edgeA:0.6});

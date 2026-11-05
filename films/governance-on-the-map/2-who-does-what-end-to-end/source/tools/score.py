@@ -69,9 +69,11 @@ def hz(m, k='Eb'):
 # ---- the levels: the voices sit about as far under the narrator as the series' other films' music (each matched by loudness, not
 # by peak); the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is (4 November
 # 2026) the voices are 2.5 dB lower, as low as in the governance films the author accepted (tools/quiet.py measures them), and the
-# effects as much, so they stay about 12 dB under the music
-RL, FX = 0.021, 0.975
-LEVEL = {'alto': 1.2, 'ten': 1.2, 'bari': 1.15, 'bass': 1.15, 'agent': 0.5}
+# effects as much, so they stay about 12 dB under the music. With the room set by what it rings where the notes are, and each note in
+# it set back to its own level (below), the voices are 4.1 dB higher, so the music's loud moments are where they were, and the agent's
+# tone as loud as before
+RL, FX = 0.0337, 0.975
+LEVEL = {'alto': 1.2, 'ten': 1.2, 'bari': 1.15, 'bass': 1.15, 'agent': 0.275}
 PAN = {'alto': -0.28, 'ten': -0.1, 'bari': 0.1, 'bass': 0.26}  # as a quartet stands: the alto on the left, the bass on the right
 
 # ---- the voices. A hum is a voice with the lips closed: every harmonic of its pitch, falling away above the first few (a soft
@@ -80,14 +82,35 @@ PAN = {'alto': -0.28, 'ten': -0.1, 'bari': 0.1, 'bass': 0.26}  # as a quartet st
 # about 100 Hz a little weakened, so the bass's lowest notes carry on a phone's small speaker, through their harmonics. A little air through
 # the nose as each note starts; the pitch rises from a few cents under in its first twentieth of a second, as a voice finds its note,
 # and then holds, with no vibrato; the level drifts by a few per cent, slowly and unevenly, as a held breath does. The four stand in
-# one small room, which rings on for about a second and a quarter: the whole music bus is played into it at once, last of all (room())
+# one small room, which rings on for about a second and a quarter: each note is played into it as it's sung (_held)
 VOX = {  # the nasal resonance (Hz, width); two weak ones above it (Hz, width, weight); the dip (Hz, width); the onset
     'alto': ((320, 300), [(1250, 420, 0.12), (2250, 500, 0.035)], (1000, 300), 0.10),
     'ten': ((285, 260), [(1120, 400, 0.13), (2150, 500, 0.04)], (900, 280), 0.11),
     'bari': ((265, 220), [(1050, 380, 0.14), (2050, 480, 0.045)], (850, 260), 0.12),
     'bass': ((250, 190), [(1000, 360, 0.15), (2000, 460, 0.05)], (800, 250), 0.13)}
+# The singers' room. Its level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each note is played
+# into it as it's sung and set back to its own level after it (_held), as the video guidelines ask: scaled by all it rang, as at
+# first, the room rang 10 dB louder there than its share said, and, laid over the whole music bus at the end, it moved each held
+# note's level by where its reflections met it, with no way to set one back
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.25)).astype(np.float32))(np.arange(int(1.25 * SR)) / SR)
-_IR = filt(_IR, 'low', 1700); _IR[:int(0.016 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1700); _IR[:int(0.016 * SR)] = 0; _IR /= _band(_IR)
+ROOM = 0.26  # how much of the singers' room each note carries
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 def _harm(inst, f, soft=1.0):
     """the weights of a hummed note's harmonics, at f Hz (soft < 1: darker)"""
     (c1, b1), up, (cz, bz), _ = VOX[inst]; n = max(1, int(2300 // f)); k = np.arange(1, n + 1); fk = f * k
@@ -130,7 +153,7 @@ def _line(inst, segs, g, k, soft, att, rel, pan, tie):
         if aj.max() > 1e-4:
             s += aj * e ** (1 + 0.12 * j) * np.sin((j + 1) * ph + 0.7 * j * j)
     s = s * lev + 0.010 * filt(noise(n / SR + 0.01)[:n], 'band', (200, 1400)) * e * lev * (1 + 3 * np.exp(-x / 0.06))
-    put(filt(s.astype(np.float32), 'low', 2300), T0, g * RL * LEVEL[inst], pan)
+    put(_held(filt(s.astype(np.float32), 'low', 2300), ROOM), T0, g * RL * LEVEL[inst], pan)
 def note(inst, m, s, sec, g=1.0, k='Eb', **o):
     """one held note"""
     line(inst, [(s, s + sec, m, 1.0)], g, k, **o)
@@ -147,21 +170,15 @@ def chord(voices, a, b, g=0.8, k='Eb', step=0.12, att=0.3, rel=0.4):
 def mark(inst, root, s, g=1.0, k='Eb', step=0.45, last=1.4):
     """the series' mark, 1-5-4-8"""
     phrase(inst, [root, root + 7, root + 5, root + 12], s, g, k, step, last)
-def room(level=0.26):
-    """the singers' room, last of all: the whole music bus played into it at once, as four voices stand in one room. (One room for
-    all of them sounds the same as one for each line, and a held note's partials are measured as it's sung, not as the room's
-    echo of it, which splits a short note's peak in two)"""
-    for b in (ML, MR):
-        b[:] = b + level * fftconvolve(b, _IR)[:len(b)].astype(np.float32)
 AGENT = []
 def agent(m, s, sec, g=0.8, pan=0.55):
-    """the agent's step: a soft, pure tone, a little apart. It isn't a voice: one sine, no air, no rise to its pitch; and it isn't in the
-    singers' room: it's placed after room(), with only a little of it"""
+    """the agent's step: a soft, pure tone, a little apart. It isn't a voice: one sine, no air, no rise to its pitch; and it has only a
+    little of the singers' room, placed after their lines"""
     AGENT.append((m, s, sec, g, pan))
 def _agent(m, s, sec, g, pan):
     x = tt(sec); e = np.sin(0.5 * np.pi * np.minimum(x / 0.09, 1)) ** 2 * np.cos(0.5 * np.pi * np.clip((x - (sec - 0.4)) / 0.4, 0, 1)) ** 2
     sig = (np.sin(2 * np.pi * hz(m) * x) * e).astype(np.float32)
-    sig = np.pad(sig, (0, len(_IR) - 1)) + 0.1 * fftconvolve(sig, _IR).astype(np.float32)
+    sig = _held(sig, 0.1)
     put(sig.astype(np.float32), s, g * RL * LEVEL['agent'], pan)
 # the phrases: Palma's request in A minor, rising, 1-3-4-5; Clara's the same in E-flat major; the steward's three falling notes, from
 # the request's last; the owner's cadence, 5 to 1; and the academies' chord, root, fifth, octave and tenth, entering from the lowest
@@ -593,9 +610,8 @@ chord({'bass': 39, 'bari': 46, 'ten': 55, 'alto': 63}, we_('gives', 0.06), end +
 mark('alto', 63, end + 0.75, 0.8)
 mark('bass', 39, end + 0.75 + 1.9, 0.85, last=TOT - (end + 0.75 + 1.9 + 1.35))
 chord({'bari': 46, 'ten': 55}, end + 0.75 + 1.9 + 1.35, TOT, 0.5, step=0.2, att=0.6, rel=0.4)
-# the singers' room; then the agent's tones, outside it; and as the noises' filters have soft edges, last of all the whole score is
-# low-passed, to keep everything under the voice below about 2.5 kHz
-room()
+# the agent's tones, with only a little of the singers' room; and as the noises' filters have soft edges, last of all the whole score
+# is low-passed, to keep everything under the voice below about 2.5 kHz
 for a_ in AGENT:
     _agent(*a_)
 soften(2500)

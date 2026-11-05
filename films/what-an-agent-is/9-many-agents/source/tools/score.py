@@ -61,18 +61,37 @@ PENTA = (63, 65, 67, 70, 72, 75, 77)            # E flat, F, G, B flat, C: where
 # bloom about level with each other; the pulse about 7 dB under the rest of the music; the effects about 13 dB under it (FX scales them)
 # After the author's review of the series' opening films (4 November 2026), the music is 5 dB lower and the effects 8.5 dB, so
 # the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
-DL, VL, CL, FX = 0.034, 0.018, 0.034, 0.75
+# With the rooms set by what they ring where the notes are (below), the drops are 2.6 dB higher, the held voices 2.4 dB and the clarinet
+# 0.6 dB, so each is as loud as before, its echo now quieter
+DL, VL, CL, FX = 0.0459, 0.0237, 0.0364, 0.75
 
+# A room's level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back
+# to its own level after it (_held), as the video guidelines ask: scaled by all they rang, as at first, the room rang 10 dB louder there
+# than its share said and the night's echo 11 dB, and the room moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 def _ir(sec, lo):
-    """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms"""
+    """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms; its gain where the notes are one"""
     x = np.arange(int(sec * SR)) / SR; ir = (R1.standard_normal(len(x)) * np.exp(-6.9 * x / sec)).astype(np.float32)
     ir = filt(ir, 'low', lo); ir[:int(0.02 * SR)] = 0
-    return ir / np.sqrt((ir ** 2).sum())
+    return ir / _band(ir)
 ROOM = _ir(1.1, 1800)   # a quiet room round the small voices
 HALL = _ir(3.4, 1000)   # the imagined night's long, dark echo
 def _room(s, wet, ir=None):
     ir = ROOM if ir is None else ir
     return np.pad(s, (0, len(ir) - 1)) + wet * fftconvolve(s, ir).astype(np.float32) if wet else s
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- a small voice: a pure, rounded note that blooms in about 15 ms and fades like a drop. It settles up onto its note as it blooms,
 # a few cents only, as a drop of water does; low ones keep a little more of their octave, so a phone's speaker still hears them.
@@ -106,7 +125,7 @@ def voice(m, a, b, g=1.0, att=0.5, rel=1.6, pan=None, room=0.3):
     s = (np.sin(2 * np.pi * f * x) + 0.08 * np.sin(4 * np.pi * f * x) + 0.02 * np.sin(6 * np.pi * f * x)) * on * off
     if sec >= 1.2:
         s = s * (0.9 + 0.1 * np.sin(np.pi * np.clip(x / sec, 0, 1)))
-    put(_room(s.astype(np.float32), room), a, g * VL, max(-0.3, min(0.3, (m - 62) * 0.02)) if pan is None else pan)
+    put(_held(s.astype(np.float32), room), a, g * VL, max(-0.3, min(0.3, (m - 62) * 0.02)) if pan is None else pan)
 def chord(c, a, b, g=1.0, att=0.6, rel=1.8, room=0.3):
     """the voices hold a chord from a to b, the lowest first and the others a moment apart"""
     for i, m in enumerate(c):
@@ -127,7 +146,7 @@ def bcl(m, a, b, g=1.0, att=0.16, rel=0.5, pan=-0.12, room=0.3):
         s = s * (0.88 + 0.12 * np.sin(np.pi * np.clip(x / sec, 0, 1)))
     s = s / max(1e-9, float(np.abs(s).max()))
     br = filt(noise(n / SR + 0.01)[:n], 'band', (250, 1500)) * 0.005 * (np.where(x < sec, 1.0, np.exp(-(x - sec) * 20)) + 2.5 * np.exp(-x / 0.07))
-    put(_room(filt((s + br).astype(np.float32), 'low', 2000), room), a, g * CL, pan)
+    put(_held(filt((s + br).astype(np.float32), 'low', 2000), room), a, g * CL, pan)
 
 # ---- what the voices play
 def mark(t, notes, held=None, hold=3.0, g=1.0, hg=1.0, P=0.28, hits=(3, 6), seed=1, att=0.5, rel=2.0, pans=None):

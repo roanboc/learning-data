@@ -120,8 +120,8 @@ scene("bazaar",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,
     // a woman comes up the cap makers' street to the master's stall: where to find it, what it will be, who stands behind it
     {at:P.buyer,place:"st1600",keys:[[P.buyer,780,560,1.12],[P.buyer+0.1,740,560,1.2]],d:3,draw:(x,tt)=>{const w=po_stroll(PO_STR,tt,P.buyer+0.1,0.3,11.5,-2.0,6.3,1.3);
       POSE.po_masterOff=gv_blendNear(POSE.listen,POSE.po_offer,w.moving?0:sstep(w.end,w.end+0.4,tt));po_master(x,tt,{pose:"po_masterOff",expr:w.moving?"calm":"smile"});po_walker(x,"po_woman",w,{t:tt,flip:w.moving?w.flip:true});po_knows(x,tt,[P.find,P.what,P.who],null);}},
-    // the next day: she comes back with a friend
-    {cut:true,at:P.back,place:"st1600",keys:[[P.back,740,560,1.2],[P.back+0.1,730,560,1.22]],d:2.4,draw:(x,tt)=>{const a=po_stroll(PO_STR,tt,P.back-0.3,0.4,8.6,-1.8,6.4,1.15),b=po_stroll(PO_STR,tt,P.back,1.1,9.2,-1.0,7.0,1.15);
+    // the next day: she comes back with a friend. The same street, later: the day before leaves, then the next day comes (later)
+    {later:true,at:P.back,place:"st1600",keys:[[P.back,740,560,1.2],[P.back+0.1,730,560,1.22]],d:2.4,draw:(x,tt)=>{const a=po_stroll(PO_STR,tt,P.back-0.3,0.4,8.6,-1.8,6.4,1.15),b=po_stroll(PO_STR,tt,P.back,1.1,9.2,-1.0,7.0,1.15);
       po_master(x,tt,{pose:"po_offer",expr:"smile"});[[b,"po_friend"],[a,"po_woman"]].forEach(([w,id])=>po_walker(x,id,w,{t:tt,flip:w.moving?w.flip:true,expr:"smile"}));
       po_knows(x,tt,[P.back-1,P.back-1,P.back-1],null);po_light(x,"next",fin(tt,P.back,0.6));}},
     // data has the same problem, and the same answer

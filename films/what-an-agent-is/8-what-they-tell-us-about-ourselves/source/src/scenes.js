@@ -117,7 +117,8 @@ scene("rough",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({lips:wAt(sc,
       const m=tt_mouth(820,700,0.85,true);tt_song(x,m[0]-210,m[1]-30,tt,sing,[196,150,92]);
       tt_tag(x,1210,470,"Waltzing Matilda",{a:ag_in(tt,c.sang,0.4),size:28});}},
     // December 1978: the audiologist hides her mouth behind a card (held before her face: front, not hold) and says a word; Rod says it back
-    {cut:true,at:c.december-0.3,place:"tt_lab78",keys:[[c.december-0.3,960,560,1.1],[c.december,960,540,1.16]],d:4,push:0.01,draw:(x,tt)=>{
+    // (a later moment in the same room, later:true: the summer's people leave, then December's come in)
+    {later:true,at:c.december-0.3,place:"tt_lab78",keys:[[c.december-0.3,960,560,1.1],[c.december,960,540,1.16]],d:4,push:0.01,draw:(x,tt)=>{
       tt_chair(x,1260,700,0.85);ag_person(x,TT_ROD,1260,700,0.85,{t:tt,flip:true,talk:0.5*ag_io(tt,P.words+0.9,P.words+2.2,0.2),smile:0.6,gaze:[-3,0]});
       ag_person(x,TT_AUD,640,690,0.86,{t:tt+1,pose:"hold",talk:0.5*ag_io(tt,P.words-0.4,P.words+0.6,0.2),front:(c2,h)=>{const n=h.near;ag_box(c2,n[0]-10,n[1]-310,200,290,10,{});}});
       tt_bubble(x,840,300,170,64,920,300,{a:ag_io(tt,P.words-0.3,P.words+1.0,0.3),fill:0.9});tt_bubble(x,1000,280,170,64,1080,280,{a:ag_io(tt,P.words+0.9,P.words+2.6,0.3),fill:0.9});}},
@@ -163,8 +164,9 @@ scene("five",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({counted:wAt(s
         {side:"right",ew:300,open:clamp((tt-P.query+0.1)/1.2,0,1),k:clamp(ag_spr(tt,P.counted-0.2,0.8),0,1.2),a:ag_in(tt,P.counted-0.2,0.3)});
       const so=ag_in(tt,c.signed+0.2,0.5);if(so>0.01)tt_signoff(x,A.x,A.y+232+20*(1-so),A.w,clamp((tt-P.checked)/(P.signed+0.9-P.checked),0,1),so);
       ag_roomLight(x,1);}},
-    // over coffee: each question rises from the one who asks it and pins itself to the wall, in a row
-    {cut:true,at:c.coffee-0.4,place:"lab",keys:[[c.coffee-0.4,960,620,1.14],[c.coffee,960,540,1.0]],d:2.6,push:0,draw:(x,tt)=>{
+    // over coffee: each question rises from the one who asks it and pins itself to the wall, in a row (a later moment: Mei and her
+    // cards leave, then the team comes in)
+    {later:true,at:c.coffee-0.4,place:"lab",keys:[[c.coffee-0.4,960,620,1.14],[c.coffee,960,540,1.0]],d:2.6,push:0,draw:(x,tt)=>{
       const cur=ask.reduce((k,a,i)=>tt>=a-0.5?i:k,-1),talk=ask.map((a,i)=>0.45*ag_io(tt,a-0.5,a+1.7,0.25)*(0.55+0.45*Math.sin(tt*8.7+i)));
       tt_team(x,tt,{talk,gaze:TT_SEATS.map((_,i)=>i===cur?[3,-2.5]:[3,0]),smile:TT_SEATS.map((_,i)=>i===cur?0.5:0.25)});
       ask.forEach((a,i)=>{const u=clamp((tt-a)/1.5,0,1);if(u<=0)return;const q=ag_sine(u),px=TT_SEATS[i][1];
@@ -435,9 +437,11 @@ scene("human",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({settled:wAt(
         x.translate(lerp(330,TT_REST[0],q),lerp(520,TT_REST[1],q)-Math.sin(Math.PI*q)*30);x.scale(s,s);ag_textCard(x,-170,-60,340,{title:"count students",sub:"read only"},{edge:AG.blue});x.restore();}
       const fl=ag_in(tt,c.answers-0.4,2.4);if(fl>0.01){x.save();const g=x.createLinearGradient(1920,0,700,0);g.addColorStop(0,"rgba(255,236,200,"+(0.22*fl)+")");g.addColorStop(1,"rgba(255,236,200,0)");
         x.fillStyle=g;x.fillRect(0,653,W,H-653);x.restore();}
-      ag_roomLight(x,1);}}];
+      ag_roomLight(x,1);
+      // the fifth card goes back to the wall in the room, under the shot's camera, so it lands where the row is drawn: over the shots, in
+      // the frame, it landed 22 px from it while the camera was still closing in, and jumped there in one frame
+      if(!back)tt_cardFwd(x,4,1-tt_on(tt,c.helps,1.5),ag_in(tt,t0,0.6));}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.7);setScreen(ctx,S);tt_cardMoves(ctx,t,4,c.descartes-0.4,null);
-  if(t>=c.helps-0.4&&t<c.helps+1.5)tt_cardFwd(ctx,4,1-tt_on(t,c.helps,1.5),ag_in(t,c.helps-0.4,0.6));
   tt_cornerAt(ctx,t,"The Dutch Republic · 1637",c.descartes-0.1,c.today-0.5,{col:[236,222,200]});
   ag_end(ctx,S,t,c.breath,TT_TITLE,"We don't have the answers yet. Keep wondering.","Film 8 of 9");});
 

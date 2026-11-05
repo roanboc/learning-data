@@ -154,8 +154,9 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,
       find:[0,1,2].map(i=>fin(tt,P.thr+0.15*i,0.4)),part:P.part.map(s=>fin(tt,s-0.1,0.4)),
       v:[[fin(tt,P.nob,0.6),fin(tt,P.nob+0.5,0.8),fin(tt,P.own,0.5),fin(tt,P.own+0.4,0.5)],[fin(tt,P.col,0.6),fin(tt,P.iden-0.4,0.8),fin(tt,P.iden,0.5),fin(tt,P.iden+0.3,0.5)],[0,0,0,0]],
       red:fin(tt,P.ask-0.2,0.5),lit:gv_io(tt,P.part[2]-0.1,P.one-0.4,0.4),dim:dim(tt),so:gv_io(tt,P.what-0.1,P.one-0.5,0.5),tick:fin(tt,P.part[2],0.5),tick2:fin(tt,P.part[3],0.5)})},
-    // finding 2, close: it counts, and shows no values
-    {cut:true,at:P.ty,place:"screenBig",keys:[[P.ty,960,500,1],[P.ty+0.1,930,500,1.04]],d:3,push:0,draw:(x,tt)=>ac_tally(x,tt,{read:clamp((tt-P.counts)/1.5,0,1)*7,
+    // finding 2, close: it counts, and shows no values. The same screen, and its title was in the list: the list leaves before the
+    // finding comes (later), so the title never shows twice
+    {later:true,at:P.ty,place:"screenBig",keys:[[P.ty,960,500,1],[P.ty+0.1,930,500,1.04]],d:3,push:0,draw:(x,tt)=>ac_tally(x,tt,{read:clamp((tt-P.counts)/1.5,0,1)*7,
       readA:gv_io(tt,P.counts-0.2,P.counts+1.6,0.25),says:fin(tt,P.counts+1.5,0.4)+fin(tt,P.counts+2.0,0.4)+fin(tt,P.look-0.1,0.4)+fin(tt,P.look+0.8,0.4)})},
     // finding 3, close: a rule the faculty wrote, which no check could find; the drafted check, what it finds today, and who decides
     {cut:true,at:P.t3,place:"screenBig",keys:[[P.t3,960,500,1],[P.t3+0.1,975,505,1.03]],d:4,push:0,draw:(x,tt)=>ac_f3(x,tt,{tag:fin(tt,P.t3+0.6,0.5),
@@ -173,8 +174,8 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
     // the review's table of classes: two are marked "not sure"
     {at:0,place:"screenBig",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:fin(tt,P.unsure-0.1,0.5)})},
     // the two long codes: alike to look at; their counts tell them apart; the award code's description; when in doubt, the stricter
-    // class, and ask
-    {cut:true,at:P.tb,place:"screenBig",keys:[[P.tb,960,500,1]],push:0.02,draw:(x,tt)=>ac_keys(x,tt,{tag:fin(tt,P.long-0.1,0.5),lp:fin(tt,P.one-0.1,0.6),
+    // class, and ask. The same screen, and both codes were in the table: the table leaves before the codes come (later)
+    {later:true,at:P.tb,place:"screenBig",keys:[[P.tb,960,500,1]],push:0.02,draw:(x,tt)=>ac_keys(x,tt,{tag:fin(tt,P.long-0.1,0.5),lp:fin(tt,P.one-0.1,0.6),
       lc:clamp((tt-P.one-0.2)/1.0,0,1),ap:fin(tt,P.two-0.2,0.6),ac:clamp((tt-P.two)/1.0,0,1),desc:fin(tt,P.desc-0.1,0.5),q:clamp((tt-P.maybe)/0.6,0,1),
       s:clamp((tt-P.but+0.2)/0.9,0,1),step:clamp((tt-P.ck+0.2)/0.8,0,1),draft:fin(tt,P.draft-0.1,0.5),ask:fin(tt,P.ask-0.1,0.5)})},
     // the faculty's office: Anil answers, in gold

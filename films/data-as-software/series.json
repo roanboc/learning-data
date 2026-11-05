@@ -1,0 +1,75 @@
+{
+  "title": "Data as software",
+  "title_es": "Datos como software",
+  "planned": 2,
+  "lead": "The second series of Modern data basics. Payroll's export to Finance ran for years as a script on one person's laptop. Two films: data work kept as software, versioned, reviewed, tested and deployed, which isn't new; and a platform that watches its own jobs and proposes a fix a person approves.",
+  "lead_es": "La segunda serie de Lo básico de los datos modernos. La exportación de nómina a Finanzas corrió años como un script en el portátil de una persona. Dos películas: el trabajo con datos llevado como software, versionado, revisado, probado y desplegado, que no es nuevo; y una plataforma que vigila sus tareas y propone un arreglo que aprueba una persona.",
+  "description": "Short films on running a data platform: data work versioned, reviewed, tested and deployed like any software, with dbt, Git and Declarative Automation Bundles; and a platform that watches its own jobs, pipelines and tables, finds the cause of a failure and proposes a fix a person approves. At the level of architecture, with the official docs for the rest.",
+  "description_es": "Películas cortas sobre cómo operar una plataforma de datos: el trabajo con datos versionado, revisado, probado y desplegado como cualquier software, con dbt, Git y Declarative Automation Bundles; y una plataforma que vigila sus propias tareas, pipelines y tablas, encuentra la causa de un fallo y propone un arreglo que aprueba una persona. Al nivel de la arquitectura, con la documentación oficial para el resto.",
+  "card": "Scripts became software long ago. Now the platform watches its own jobs, and a person approves every fix.",
+  "card_es": "Los scripts se volvieron software hace tiempo. Ahora la plataforma vigila sus tareas, y una persona aprueba cada arreglo.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: payroll's export, from a script to software",
+  "thread_h_es": "Un hilo: la exportación de nómina, de script a software",
+  "thread": "Every second Thursday, payroll's figures reach Finance through an export that ran for years as a script on one person's laptop. Sam Okafor and Jun Park move it into the data project, where it's versioned, reviewed, tested and deployed the same way every time. Then one night the job that loads the approved claims fails, and the platform finds the cause and proposes a fix, which Sam reviews before pay day.",
+  "thread_es": "Cada dos jueves, las cifras de nómina llegan a Finanzas por una exportación que corrió años como un script en el portátil de una persona. Sam Okafor y Jun Park la llevan al proyecto de datos, donde se versiona, se revisa, se prueba y se despliega igual cada vez. Luego, una noche, falla la tarea que carga las horas aprobadas, y la plataforma encuentra la causa y propone un arreglo, que Sam revisa antes del día de pago.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who moves payroll's export into the project and reviews every fix the platform proposes"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, who keeps the export's models versioned, reviewed and tested"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who approves every change before it reaches production"
+    ],
+    [
+      "biz",
+      "Waits for the figures",
+      "Rohan Desai, in Finance, who needs payroll's figures every second Thursday"
+    ],
+    [
+      "biz",
+      "Owns HR's data",
+      "Ingrid Holm, in HR, who answers for what payroll's figures mean"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que lleva la exportación de nómina al proyecto y revisa cada arreglo que propone la plataforma"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, que mantiene los modelos de la exportación versionados, revisados y probados"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que aprueba cada cambio antes de que llegue a producción"
+    ],
+    [
+      "biz",
+      "Espera las cifras",
+      "Rohan Desai, de Finanzas, que necesita las cifras de nómina cada dos jueves"
+    ],
+    [
+      "biz",
+      "Es dueña de los datos de RR. HH.",
+      "Ingrid Holm, de RR. HH., que responde por lo que significan las cifras de nómina"
+    ]
+  ]
+}

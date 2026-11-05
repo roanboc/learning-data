@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Ten series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Fourteen series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
@@ -11,7 +11,11 @@ the three series of data governance: Governance principles (films/data-governanc
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
 governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
 (films/what-an-agent-is/, at what-an-agent-is/), Agents at work on data (films/agents-at-work-on-data/, at
-agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/); and the
+four series of the module Modern data basics: Data that moves (films/data-that-moves/, at data-that-moves/, which holds the
+module's plan), Data as software (films/data-as-software/, at data-as-software/), From tables to decisions
+(films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents as data (films/documents-as-data/, at
+documents-as-data/, a series of one film). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -68,7 +72,8 @@ def series_link(lg, RE, sid):
 # that built that project, which each film's See it in the project names for how it was built (none if not given).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
-# agent is opens the module AI agents in data work.
+# agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
+# each the next of the one before; the last, Documents as data, is a series of one film.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
@@ -115,6 +120,22 @@ SERIES = [
          next="from-helper-to-colleague"),
     dict(id="from-helper-to-colleague", dir="from-helper-to-colleague", slug="from-helper-to-colleague",
          name={"en": "From helper to colleague", "es": "De ayudante a colega"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
+    dict(id="data-that-moves", dir="data-that-moves", slug="data-that-moves",
+         name={"en": "Data that moves", "es": "Datos que se mueven"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="data-as-software"),
+    dict(id="data-as-software", dir="data-as-software", slug="data-as-software",
+         name={"en": "Data as software", "es": "Datos como software"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="from-tables-to-decisions"),
+    dict(id="from-tables-to-decisions", dir="from-tables-to-decisions", slug="from-tables-to-decisions",
+         name={"en": "From tables to decisions", "es": "De las tablas a las decisiones"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="documents-as-data"),
+    dict(id="documents-as-data", dir="documents-as-data", slug="documents-as-data",
+         name={"en": "Documents as data", "es": "Documentos como datos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
 ]
@@ -293,6 +314,11 @@ TOPICS = [
          who={"en": "For anyone who designs models, definitions or reports", "es": "Para quien diseña modelos, definiciones o reportes"},
          line={"en": "What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.",
                "es": "Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema."}),
+    dict(id="modern-data-basics", items=["data-that-moves", "data-as-software", "from-tables-to-decisions", "documents-as-data"],
+         name={"en": "Modern data basics", "es": "Lo básico de los datos modernos"},
+         who={"en": "For anyone who moves, runs or serves data, and anyone choosing the tools", "es": "Para quien mueve, opera o sirve datos, y para quien elige las herramientas"},
+         line={"en": "What today's tools make easier: moving data, running it as software, serving it to people and agents, and reading documents. The architecture only: the official docs go deeper.",
+               "es": "Lo que las herramientas de hoy facilitan: mover datos, operarlos como software, servirlos a personas y agentes, y leer documentos. Solo la arquitectura: la documentación oficial va más allá."}),
     dict(id="analytics-engineering", items=["in-the-weeds"],
          name={"en": "Analytics engineering", "es": "Ingeniería analítica"},
          who={"en": "For analytics engineers", "es": "Para analytics engineers"},
@@ -357,7 +383,8 @@ def entry(lg, item_id):
     if S is not None:
         series, films_ = films(S)
         n, planned = sum(x["index"] >= 0 for x in films_), series.get("planned", len(series["films"]))  # a prologue isn't one of the films
-        many = (T(lg, f"{n} of {planned} films", f"{n} de {planned} películas") if planned > n else T(lg, f"{n} films", f"{n} películas")) + \
+        many = (T(lg, f"{n} of {planned} films", f"{n} de {planned} películas") if planned > n else
+                T(lg, "1 film", "1 película") if n == 1 else T(lg, f"{n} films", f"{n} películas")) + \
             (T(lg, " and a prologue", " y un prólogo") if any(x["index"] < 0 for x in films_) else "")
         extra = T(lg, "labs and scenarios", "labs y situaciones") if any(x["labs"] for x in films_) or series_learn(S) else T(lg, "Pause and think", "Pausa para pensar")
         return dict(kind="series", href=S["slug"] + "/", title=SN(lg, S), title_lang=None, posters=[f'{x["key"]}-poster.jpg' for x in films_],
@@ -508,11 +535,13 @@ def crumbs(lg, R, S, up=None):
 def num(lg, f):
     """A film's place in its series, always as "Film 2 of 7": site-tools/check_site.py allows numbering only in this form.
     A series still being made counts the films it plans ("planned" in its series.json), not only those made so far.
-    A prologue (folder 0) comes before the films, and is "Prologue"."""
+    A prologue (folder 0) comes before the films, and is "Prologue"; the film of a series of one is "A single film"."""
     if f["index"] < 0:
         return T(lg, "Prologue", "Prólogo")
     ser = series_data(f["series"])
     n = ser.get("planned", len(ser["films"]))  # a series still being made says how many films it will have
+    if n == 1:
+        return T(lg, "A single film", "Una sola película")
     return T(lg, "Film", "Película") + f' {f["index"] + 1} {T(lg, "of", "de")} {n}'
 
 
@@ -809,7 +838,8 @@ def series_course(lg, S, SL, series, films_, step):
     up = "" if step == 0 else "../"
     txt = (json.dumps({"watched": "Watched", "films": "{n} of %d films watched" % n, "labs": "{n} of %d labs explored" % nl, "quiz": "{n} of %d answered · {ok} right" % nq}) if lg == "en" else
            json.dumps({"watched": "Vista", "films": "{n} de %d películas vistas" % n, "labs": "{n} de %d labs explorados" % nl, "quiz": "{n} de %d respondidas · {ok} correctas" % nq}, ensure_ascii=False))
-    made = T(lg, f"{w(n).capitalize()} films", f"{w(n).capitalize()} películas") + (T(lg, f", {w(planned - n)} coming", f", {w(planned - n)} en camino") if planned > n else "")
+    made = (T(lg, "One film", "Una película") if n == 1 else T(lg, f"{w(n).capitalize()} films", f"{w(n).capitalize()} películas")) + \
+        (T(lg, f", {w(planned - n)} coming", f", {w(planned - n)} en camino") if planned > n else "")
     steps = ([("#films", "The films", made), ("labs/", "Take it apart", f"{w(nl).capitalize()} hands-on labs"), ("scenarios/", "Make the call", f"{nq} real situations")] if lg == "en" else
              [("#films", "Las películas", made), ("labs/", "Desarma", f"{w(nl).capitalize()} labs interactivos"), ("scenarios/", "Tú decides", f"{nq} situaciones reales")])
     here = lambda i: ' aria-current="step"' if i == step else ""

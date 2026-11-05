@@ -111,8 +111,14 @@ films/                           one folder per film: script or story, captions/
                                  under the topic Data protection and privacy, between Data governance and AI agents in data work, from its opening film
   only-what-you-may-see/         the series Only what you may see, the second of the module, made the same way
   kept-for-a-reason/             the series Kept for a reason, the module's last, made the same way
+  a-plan-in-ninety-days/         the series A plan in ninety days, the first of the module Data management: its README, series.json,
+                                 proposal.md (the plan for the whole module) and decided.md, and a folder per film as they're made,
+                                 drawn with the-new-skills/shared/; on the site under the topic Data management, the last, from its
+                                 opening film
+  making-the-case/               the series Making the case, the second of the module, made the same way
+  small-steps-measured/          the series Small steps, measured, the module's last, made the same way
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
-                                 The map before the data, The same one, everywhere, the three on data governance, the three on AI agents, the four of Modern data basics, and the three of Data protection and privacy), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
+                                 The map before the data, The same one, everywhere, the three on data governance, the three on AI agents, the four of Modern data basics, the three of Data protection and privacy, and the three of Data management), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
                                  (its chapters, captions and a 720p copy, which review_copy.py makes)
 .github/workflows/pages.yml      publishes site/ on every push to main

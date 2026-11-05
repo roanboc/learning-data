@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Nineteen series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Twenty-two series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
@@ -19,7 +19,10 @@ documents-as-data/, a series of one film); and the three series of the module Da
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
 kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
-holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/); and the three series of the module Data
+management: A plan in ninety days (films/a-plan-in-ninety-days/, at a-plan-in-ninety-days/, which holds the module's plan), Making
+the case (films/making-the-case/, at making-the-case/) and Small steps, measured (films/small-steps-measured/, at
+small-steps-measured/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -79,7 +82,8 @@ def series_link(lg, RE, sid):
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
 # each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
 # Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
-# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong.
+# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. A plan in ninety days opens the
+# module Data management, whose three series are each the next of the one before; its topic is the site's last.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
@@ -162,6 +166,18 @@ SERIES = [
          built="in-the-weeds", next="quality-as-a-habit"),
     dict(id="quality-as-a-habit", dir="quality-as-a-habit", slug="quality-as-a-habit",
          name={"en": "Quality as a habit", "es": "La calidad como hábito"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
+    dict(id="a-plan-in-ninety-days", dir="a-plan-in-ninety-days", slug="a-plan-in-ninety-days",
+         name={"en": "A plan in ninety days", "es": "Un plan en noventa días"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="making-the-case"),
+    dict(id="making-the-case", dir="making-the-case", slug="making-the-case",
+         name={"en": "Making the case", "es": "Construir el caso"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="small-steps-measured"),
+    dict(id="small-steps-measured", dir="small-steps-measured", slug="small-steps-measured",
+         name={"en": "Small steps, measured", "es": "Pasos pequeños, medidos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
 ]
@@ -380,6 +396,11 @@ TOPICS = [
          who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
          line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",
                "es": "La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos."}),
+    dict(id="data-management", items=["a-plan-in-ninety-days", "making-the-case", "small-steps-measured"],
+         name={"en": "Data management", "es": "Gestión de datos"},
+         who={"en": "For data managers, and anyone who leads data work across an organisation", "es": "Para gestores de datos, y para quien lidera el trabajo con datos en toda una organización"},
+         line={"en": "A data manager's whole job: every area in one picture, a plan in stages, a case and its risks, everyone at the table, and small steps, measured.",
+               "es": "Todo el trabajo de una gestora de datos: todas las áreas en una imagen, un plan por etapas, un caso y sus riesgos, todos en la mesa, y pasos pequeños, medidos."}),
 ]
 
 

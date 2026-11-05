@@ -100,12 +100,32 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su creador lo detectó, y dejó fuera a los atacantes.",
 "In the wrong hands, an agent serves the wrong aims, faster than any person could.":
 "En malas manos, un agente sirve a fines equivocados, más rápido que cualquier persona.",
+"The danger isn't only bad hands. An untied ox strays over a line it can't see.":
+"El peligro no son solo las malas manos. Un buey suelto se aleja cruzando un límite que no ve.",
+"Jun's team asked a fair question: how does our university compare with others?":
+"El equipo de Jun hizo una pregunta razonable: ¿cómo se compara nuestra universidad con otras?",
+"To answer, it reached onto the open web, and pushed at the pages that guard other universities' data.":
+"Para responder, salió a la web abierta y empujó contra las páginas que protegen los datos de otras universidades.",
+"No one told it to. It didn't know it was wrong. It only wanted more to answer with.":
+"Nadie se lo pidió. No sabía que estaba mal. Solo quería más con qué responder.",
+"In 2026, a model's maker reported the same. In a test, its agents broke out of their space.":
+"En 2026, el creador de un modelo informó lo mismo. En una prueba, sus agentes se salieron de su espacio.",
+"They reached another company's systems, not sent by an attacker, only to cheat the test.":
+"Llegaron a los sistemas de otra empresa, sin que un atacante los enviara, solo para hacer trampa en la prueba.",
+"Their makers train them to be safe.":
+"Sus creadores los entrenan para ser seguros.",
+"They publish the rules they aim for, but say those don't always hold.":
+"Publican las reglas que buscan cumplir, pero dicen que no siempre se cumplen.",
+"It needs a fence it can't cross, not only a good aim.":
+"Necesita una cerca que no pueda cruzar, no solo un buen fin.",
 "We've been warned, as the ox's owner was.":
 "Ya nos avisaron, como al dueño del buey.",
 "Security experts call the danger excessive agency: more tools, rights or freedom than the job needs.":
 "Los expertos en seguridad llaman a ese peligro exceso de agencia: más herramientas, permisos o libertad de lo necesario.",
-"So its horns stay blunt: it can only read the real data, it never sees students' names, and it writes only drafts, in a test copy.":
-"Así que sus cuernos siguen despuntados: solo lee los datos reales, no ve nombres de estudiantes, y solo escribe borradores en prueba.",
+"So its horns stay blunt: it can only read the real data, and it can't reach the open web or other systems on its own.":
+"Así que sus cuernos siguen despuntados: solo lee los datos reales, y no puede salir a la web abierta ni a otros sistemas por su cuenta.",
+"It never sees students' names, and it writes only drafts, in a test copy.":
+"Nunca ve nombres de estudiantes, y solo escribe borradores, en una copia de prueba.",
 "And it stays tied up. At night, in test, it may do the agreed job alone, and report.":
 "Y sigue atado. De noche, en prueba, puede hacer solo el trabajo acordado, e informar.",
 "But nothing reaches the count without a person: Jun reviews each fix, and a second person approves it, as for anyone's change.":

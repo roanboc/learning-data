@@ -100,8 +100,19 @@ films/                           one folder per film: script or story, captions/
   from-helper-to-colleague/      the series From helper to colleague, the third of the module: its README, series.json, proposal.md and decided.md,
                                  and a folder per film as they're made, drawn and checked with what-an-agent-is/shared/; on the site under the topic
                                  AI agents in data work, from its opening film
+  data-that-moves/               the series Data that moves, the first of the module Modern data basics: its README, series.json, proposal.md (the
+                                 plan for the whole module) and decided.md, and a folder per film as they're made; on the site under the topic
+                                 Modern data basics, right after Data modelling, from its opening film
+  data-as-software/              the series Data as software, the second of the module, made the same way
+  from-tables-to-decisions/      the series From tables to decisions, the third of the module, made the same way
+  documents-as-data/             the series Documents as data, the module's last, a series of one film, made the same way
+  locks-before-the-data/         the series Locks before the data, the first of the module Data protection and privacy: its README, series.json,
+                                 proposal.md (the plan for the whole module) and decided.md, and a folder per film as they're made; on the site
+                                 under the topic Data protection and privacy, between Data governance and AI agents in data work, from its opening film
+  only-what-you-may-see/         the series Only what you may see, the second of the module, made the same way
+  kept-for-a-reason/             the series Kept for a reason, the module's last, made the same way
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
-                                 The map before the data, The same one, everywhere, the three on data governance, and the three on AI agents), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
+                                 The map before the data, The same one, everywhere, the three on data governance, the three on AI agents, the four of Modern data basics, and the three of Data protection and privacy), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
                                  (its chapters, captions and a 720p copy, which review_copy.py makes)
 .github/workflows/pages.yml      publishes site/ on every push to main
@@ -122,7 +133,7 @@ Internal names never appear as text on the site. The numbers in the series' fold
 - **Stepper, on a film's own pages:** the film's steps, such as *Watch · Take it apart · Make the call*, as an `ol.path` under the title. Only a film with labs or scenarios has one; Silent change has none yet, and Too good to be true has one.
 - **Breadcrumbs:** every film, labs, scenarios and series page starts with one that names its topic, such as *Topics › Data modelling › From words to data*; the topic links to its section of the Topics page.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.
-- **No film numbers.** Each film is shown by its topic, then its title. Only a series numbers its films, always as *Film 2 of 7*.
+- **No film numbers.** Each film is shown by its topic, then its title. Only a series numbers its films, always as *Film 2 of 7*; the film of a series of one says *A single film*.
 - **English and Spanish:** English pages sit at the root and Spanish ones under `es/`, at the same paths. Every page has an EN/ES toggle to the same page in the other language; A Sharper Sketch's labs and scenarios, which are in English only, toggle to `es/sketch/`. A film that exists only in English gets a Spanish page around it, with Spanish chapter names, controls and captions: the same film and video, captioned in Spanish (see the film's source README); links from there to English pages say "(en inglés)".
 
 **Progress** stays in the visitor's browser (local storage), under one prefix per film:

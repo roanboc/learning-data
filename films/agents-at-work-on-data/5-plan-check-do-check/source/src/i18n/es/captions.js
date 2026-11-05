@@ -60,8 +60,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nada en el agente estaba roto: usó lo que pudo encontrar, porque nadie le había dicho qué había.",
 "Most of the waste with agents starts here, with a plan that doesn't say what the agent may use.":
 "La mayor parte del desperdicio con agentes empieza aquí, con un plan que no dice qué puede usar el agente.",
-"Now Clara, in Planning, asks for something new: the census-day count by level of study, for the government's report.":
-"Ahora Clara, de Planificación, pide algo nuevo: el conteo del día del censo por nivel de estudio, para el informe al gobierno.",
+"Now Clara, in Planning, asks for the census-day count by level of study, for the government's report.":
+"Ahora Clara, de Planificación, pide el conteo del día del censo por nivel de estudio, para el informe al gobierno.",
 "Before the agent starts, Jun writes one page.":
 "Antes de que el agente empiece, Jun escribe una página.",
 "The goal: students on census day, by level, undergraduate and postgraduate.":
@@ -78,16 +78,28 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y un límite: diez rondas, y luego se detiene e informa.",
 "Then the line that matters most: how the result will be checked, decided now, before any work.":
 "Luego, la línea que más importa: cómo se verificará el resultado, decidido ahora, antes de cualquier trabajo.",
-"Two checks: the levels add up to 18,412, the count already matched to the census report;":
-"Dos verificaciones: los niveles suman 18,412, el conteo que ya coincide con el informe del censo;",
-"and every student has exactly one level.":
-"y cada estudiante tiene exactamente un nivel.",
-"The agent writes them as tests, before any model, and Jun approves them.":
-"El agente las escribe como pruebas, antes de cualquier modelo, y Jun las aprueba.",
+"But nobody knows the answer yet: that's why Clara asked.":
+"Pero nadie sabe todavía la respuesta: por eso Clara la pidió.",
+"What Jun knows is what must be true of any right answer:":
+"Lo que Jun sabe es lo que debe cumplir cualquier respuesta correcta:",
+"the levels add up to 18,412, the count already matched to the census report;":
+"los niveles suman 18,412, el conteo que ya coincide con el informe del censo;",
+"and every student has exactly one level, as the glossary defines it.":
+"y cada estudiante tiene exactamente un nivel, como lo define el glosario.",
+"Neither says how many students are at any level: they check how the parts relate, and what the words mean.":
+"Ninguna dice cuántos estudiantes hay en cada nivel: verifican cómo se relacionan las partes y qué significan las palabras.",
+"The agent writes the two checks as tests, before any model, and Jun approves them.":
+"El agente escribe las dos verificaciones como pruebas, antes de cualquier modelo, y Jun las aprueba.",
 "From then on, only a person can change them, so the agent can't pass by moving the mark.":
 "Desde entonces, solo una persona puede cambiarlas, así que el agente no puede pasar moviendo la marca.",
-"Like Singapore's 190 measures, written before the plant made any water.":
-"Como los 190 parámetros de Singapur, escritos antes de que la planta produjera agua.",
+"And what everyone already uses can be wrong, sometimes for years: if the data disagrees, the agent says so, with its evidence.":
+"Y lo que todos ya usan puede estar mal, a veces durante años: si los datos no coinciden, el agente lo dice, con su evidencia.",
+"Where nobody can say what's right, it brings the options, each with its result, for a person to choose.":
+"Donde nadie puede decir qué es lo correcto, trae las opciones, cada una con su resultado, para que una persona elija.",
+"Like Singapore's 190 measures, written before the plant made any water:":
+"Como los 190 parámetros de Singapur, escritos antes de que la planta produjera agua:",
+"none said what the results would be, only what the water had to meet.":
+"ninguno decía cuáles serían los resultados, solo lo que el agua debía cumplir.",
 "Now the agent works, in its sandbox, with only the tools the plan gave it.":
 "Ahora el agente trabaja, en su entorno aislado, solo con las herramientas que le dio el plan.",
 "It reads the three words in Docs, finds the tables in Catalog, and builds the count by level.":
@@ -100,16 +112,24 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Busca, con Query: el día del censo, 28 estudiantes no tienen nivel.",
 "They're exchange students, taking single units, with no degree here.":
 "Son estudiantes de intercambio, que toman asignaturas sueltas, sin un título aquí.",
+"And it isn't new: since 2021, when exchange students moved to a system of their own, none has had a level.":
+"Y no es nuevo: desde 2021, cuando los estudiantes de intercambio pasaron a un sistema propio, ninguno tiene nivel.",
+"So every split by level since then was short, and nothing checked that the levels added up.":
+"Así que cada desglose por nivel desde entonces quedó corto, y nada verificaba que los niveles sumaran.",
 "It doesn't drop them, and it doesn't touch the test.":
 "No los descarta, y no toca la prueba.",
 "Which level they belong to is a meaning, and meanings are Mei's to decide.":
 "A qué nivel pertenecen es un significado, y los significados los decide Mei.",
-"So it stops, and asks her, with its query and the result.":
-"Así que se detiene, y le pregunta, con su consulta y el resultado.",
+"So it stops, and asks her, with its query, the result, and two options that both add up:":
+"Así que se detiene, y le pregunta, con su consulta, el resultado y dos opciones, y ambas suman:",
+"a level of their own, or the level each one studies at home.":
+"un nivel propio, o el nivel que cada uno cursa en su universidad de origen.",
 "Mei checks the government's list: they count as non-award, a level of its own.":
 "Mei revisa la lista del gobierno: cuentan como sin titulación, un nivel propio.",
-"The agent adds it, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.":
-"El agente lo agrega, y corre las pruebas de nuevo: 13,906, 4,478 y 28 suman 18,412, y cada estudiante tiene un nivel.",
+"And the years before go to Planning, with the agent's evidence, for people to look into.":
+"Y los años anteriores pasan a Planificación, con la evidencia del agente, para que las personas los revisen.",
+"The agent adds the third level, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.":
+"El agente agrega el tercer nivel, y corre las pruebas de nuevo: 13,906, 4,478 y 28 suman 18,412, y cada estudiante tiene un nivel.",
 "Both tests pass.":
 "Las dos pruebas pasan.",
 "It writes the model's description from the glossary, with its source, and opens a pull request:":

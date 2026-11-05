@@ -6,12 +6,12 @@ window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
   "names":{q:"Tomás escribió «Sam» en el paso «decidir quién va primero». ¿Por qué Grace lo tachó?",
-    opts:[{t:"Sam tomó mal la decisión."},{t:"Un paso lo hace un rol, el controlador de turno; Sam es solo el actor que lo ocupó esa noche.",ok:true},{t:"Los pasos no deberían decir quién los hace."}],
+    opts:[{t:"Un paso lo hace un actor, pero Sam no estaba de turno esa noche, así que el nombre estaba mal.",near:true},{t:"Un paso lo hace un rol, el controlador de turno; Sam es solo el actor que lo ocupó esa noche.",ok:true},{t:"Los pasos no deberían decir quién los hace, solo qué se hace y en qué orden."}],
     why:"La semana que viene otra persona hará el turno de noche, y el paso no cambia. Los roles se quedan; los actores, personas o equipos, van y vienen. En tus propios mapas de procesos, ¿cuántos pasos llevan el nombre de una persona?"},
   "agent":{q:"El agente agrupa los avisos de corte y propone un orden. Un aviso dice que hay un cable caído. ¿Qué pasa?",
-    opts:[{t:"El agente envía la cuadrilla más cercana."},{t:"El agente lo ordena con los demás, por número de avisos."},{t:"Pasa directo al controlador de turno: el agente recomienda, y una persona decide.",ok:true}],
+    opts:[{t:"Pasa directo al controlador de turno: el agente recomienda, y una persona decide.",ok:true},{t:"El agente lo pone primero en su orden, y envía la cuadrilla más cercana para asegurarlo.",near:true},{t:"El agente lo ordena con los demás, por el número de avisos que recibió."}],
     why:"Un agente de IA es un actor como cualquier otro, con sus atribuciones escritas: puede agrupar avisos y proponer; no puede enviar una cuadrilla; los cables caídos y las personas electrodependientes se escalan. Si un agente trabaja con tu equipo, ¿dónde están escritas sus atribuciones, y quién es su responsable?"},
   "one":{stop:"cross",q:"¿Por qué no una sola definición de «cliente» para toda la empresa?",
-    opts:[{t:"No le serviría a ningún lado, y llevaría lo que sabe la red al otro lado del muro.",ok:true},{t:"Porque acordar una definición llevaría demasiado tiempo."},{t:"Porque solo comercialización tiene clientes."}],
+    opts:[{t:"Solo comercialización tiene clientes, así que la red no usa la palabra para nada."},{t:"Les serviría a los dos lados, pero acordarla les llevaría demasiado tiempo.",near:true},{t:"No le serviría a ningún lado, y llevaría lo que sabe la red al otro lado del muro.",ok:true}],
     why:"El cliente de comercialización es quien tiene una cuenta; el de la red, un punto de conexión. Cada dominio conserva su significado, y el borde recibe una traducción: una lista corta y acordada de lo que cruza, y cómo. ¿Dónde significa una misma palabra dos cosas donde trabajas?"}
   }}};

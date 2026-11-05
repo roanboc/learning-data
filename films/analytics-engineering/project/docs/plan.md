@@ -18,7 +18,7 @@ question and its meaning, the output, and the tests, before any model.
 | **Writes** | Its own branch, and its development schema, its sandbox | Drafts stay somewhere safe until a person has checked them |
 | **Never** | What it must never do: read names, emails or student IDs; write to production | The lines no job crosses, said again on every page |
 | **Limit** | How many rounds, then stop and report | So a loop ends, and a person hears why |
-| **Checks** | How the result will be checked, decided now: the tests, and the number to reconcile with | Decided before the work, the checks say what right means; the agent writes them as tests first, a person approves them, and only a person changes them |
+| **Checks** | How the result will be checked, decided now: what any right answer must meet, as tests, and the number to reconcile with | Often nobody knows the answer yet, so the checks say how the parts relate and what the words mean, not the numbers. Decided before the work, they say what right means; the agent writes them as tests first, a person approves them, and only a person changes them |
 | **Approves** | Who checks the work against this page, and who approves it for production | The agent never approves; every change to production needs a second person |
 
 ## The page

@@ -72,7 +72,7 @@ settles the new cause, and it gets an entry here, so nothing is solved twice.
 
 ### Exchange students with no level
 
-- Shows: a split by level of study comes up short of the census-day count.
+- Shows: a split by level of study comes up short of the census-day count, every year since 2021.
 - Settled: they count as non-award, a level of its own (`examples/census-by-level/`).
 - Decided by: Mei Tanaka, registrar's office, 3 November 2026.
 
@@ -81,7 +81,7 @@ settles the new cause, and it gets an entry here, so nothing is solved twice.
 When a change splits a number people trust (by faculty, by level of study, by anything), the
 parts must add up to the whole. Write it as a test before you build the split: the parts' sum
 against the total already reconciled, and every row in exactly one part. A sum that comes up short
-is news: find the rows behind the difference, with a query that returns counts, not names, and ask
-the owner of the meaning where they belong (*Who approves what* in `AGENTS.md`); their answer goes
-into *Causes met so far*. Don't drop them, and don't change the test to pass. The worked example is
-`examples/census-by-level/`, where 28 exchange students had no level.
+is news: find the rows behind the difference, with a query that returns counts, not names, and
+how far back it goes. Ask the owner of the meaning where they belong, with options that each add
+up (*Who approves what* in `AGENTS.md`); their answer goes into *Causes met so far*, and the years
+before go to people. Don't drop rows or change the test to pass. See `examples/census-by-level/`.

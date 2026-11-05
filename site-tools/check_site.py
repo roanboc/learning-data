@@ -24,6 +24,9 @@ What it checks, page by page (every .html under site/):
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
+- Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
+  longer than the longest wrong one, and clearly the longest in at most half a pack's questions), right answers spread across the options,
+  and each Spanish pack's right answers and near misses in the English places.
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
@@ -465,6 +468,68 @@ def opening_beats(film):
     return out
 
 
+# Pause and think: what makes a question fair but not obvious (AGENTS.md, Video craft; PLAYBOOK §7)
+THINK_LONGER = 1.25   # the right answer at most this much longer than the longest wrong one
+THINK_SHORTEST = 0.5  # the shortest option at least this share of the longest
+THINK_CLEARLY = 1.10  # "clearly the longest": longer than every other option by more than this, in at most half a pack's questions
+THINK_ONE_PLACE = 0.40  # across the site, no position holds more than this share of the right answers
+
+
+def think_questions(path):
+    """A Pause and think pack's questions, in order: {key: [(text, ok, near), ...]}, read from its source as written."""
+    src, out = path.read_text(), {}
+    for m in re.finditer(r'(?:"([\w-]+)"|\b([\w-]+))\s*:\s*\{(?:\s*\w+:"(?:[^"\\]|\\.)*",)*\s*q:"', src):
+        s = src.find("opts:[", m.end())
+        i, depth, in_str = s + 6, 1, False
+        while i < len(src) and depth:
+            c = src[i]
+            if in_str:
+                if c == "\\":
+                    i += 1
+                elif c == '"':
+                    in_str = False
+            elif c == '"':
+                in_str = True
+            elif c == "[":
+                depth += 1
+            elif c == "]":
+                depth -= 1
+            i += 1
+        out[m.group(1) or m.group(2)] = [(json.loads('"' + t + '"'), "ok:true" in f, "near:true" in f)
+                                        for t, f in re.findall(r'\{t:"((?:[^"\\]|\\.)*)"((?:,\s*\w+:true)*)\}', src[s + 6:i - 1])]
+    return out
+
+
+def think_faults(path, en=None):
+    """What gives a pack's answers away: one right answer and one near miss per question, options of like length,
+    the right one not clearly the longest in most questions, nor always in one place; a Spanish pack's in the English places."""
+    rel, qs, out = path.relative_to(ROOT), think_questions(path), []
+    clearly = 0
+    for k, opts in qs.items():
+        ok = [i for i, o in enumerate(opts) if o[1]]
+        near = [i for i, o in enumerate(opts) if o[2] and not o[1]]
+        if len(opts) < 3 or len(ok) != 1 or len(near) != 1 or any(o[1] and o[2] for o in opts):
+            out.append(f"{rel}: \"{k}\" needs three options or more, one right (ok:true) and one near miss (near:true) that is wrong for a clear reason")
+            continue
+        n = [len(o[0]) for o in opts]
+        right, wrong = n[ok[0]], max(x for i, x in enumerate(n) if i != ok[0])
+        if right > THINK_LONGER * wrong:
+            out.append(f"{rel}: \"{k}\": the right answer is {right} characters, the longest wrong one {wrong}: its length gives it away")
+        if min(n) < THINK_SHORTEST * max(n):
+            out.append(f"{rel}: \"{k}\": options of {'/'.join(map(str, n))} characters: give the short ones the same detail")
+        clearly += right > THINK_CLEARLY * wrong
+        if en is not None and k in en and [i for i, o in enumerate(en[k]) if o[1]] + [i for i, o in enumerate(en[k]) if o[2]] != ok + near:
+            out.append(f"{rel}: \"{k}\": its right answer and near miss aren't in the places the English pack puts them")
+    if en is not None and set(qs) != set(en):
+        out.append(f"{rel}: its questions {sorted(qs)} aren't the English pack's {sorted(en)}")
+    if clearly > -(-len(qs) // 2):
+        out.append(f"{rel}: the right answer is clearly the longest option in {clearly} of {len(qs)} questions: make the wrong ones as full")
+    places = {[i for i, o in enumerate(opts) if o[1]][0] for opts in qs.values() if sum(o[1] for o in opts) == 1}
+    if len(qs) > 1 and len(places) == 1:
+        out.append(f"{rel}: every right answer is option {places.pop() + 1}: spread them")
+    return out
+
+
 def jpeg_comments(b):
     """the comments (COM segments) in a JPEG's headers"""
     out, i = [], 2
@@ -887,6 +952,22 @@ def main():
         films += 1
         s["fails"] += opening_beats(film)
     s["notes"].append(f"{films} films; the {sum(len(v) for v in BEATS_BEFORE.values())} made before the rule (28 October 2026) are left as they are")
+
+    s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
+    places, packs = Counter(), 0
+    for en_path in sorted(WEB.glob("assets/*/think.en.js")):
+        packs += 1
+        en = think_questions(en_path)
+        s["fails"] += think_faults(en_path)
+        es_path = en_path.with_name("think.es.js")
+        if es_path.exists():
+            s["fails"] += think_faults(es_path, en)
+        places.update(i for opts in en.values() for i, o in enumerate(opts) if o[1])
+    total = sum(places.values())
+    for i, c in sorted(places.items()):
+        if total and c > THINK_ONE_PLACE * total:
+            s["fails"].append(f"Pause and think: {c} of {total} right answers are option {i + 1}: spread them")
+    s["notes"].append(f"{packs} packs, {total} questions; right answers by option: " + ", ".join(f"{i + 1}: {c}" for i, c in sorted(places.items())))
 
     # -- scripts and progress
     s = rep.check("Scripts: one film bundle per page, in order, and each film's progress prefix")

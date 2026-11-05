@@ -46,109 +46,14 @@ def T(lg, en, es):
     return en if lg == "en" else es
 
 
-# ---------------------------------------------------------------- what each film builds on
-def fw_builds_on(lg, f, all_films, R):
-    """From words to data: the chapter of The Inner Life of Data and A Sharper Sketch for the first film, the films before it for the rest."""
-    i = f["index"]; by = {x["index"]: x for x in all_films}
-    name = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-    if i == 0:
-        return (f'<p class="builds-on">Builds on <i>The Inner Life of Data</i> · <a href="{R}#t=72">The sketch</a>, and <a href="{R}sketch/"><i>A Sharper Sketch</i></a></p>' if lg == "en" else
-                f'<p class="builds-on">Amplía <a href="{R[3:]}#t=81"><i>El boceto</i></a> de <i>La vida interior de los datos</i>, y <a href="{R[3:]}sketch/"><i>Un boceto más preciso</i></a></p>')
-    prev = {1: [0], 2: [1], 3: [2], 4: [2, 3], 5: [0, 1], 6: list(range(6))}[i]
-    got = [by[j] for j in prev if j in by]
-    if i == 6:
-        return f'<p class="builds-on">{T(lg, "Builds on", "Amplía")} <a href="../">{T(lg, "the whole series", "toda la serie")}</a></p>'
-    links = f' {T(lg, "and", "y")} '.join(f'<a href="../{x["key"]}/"><i>{name(x)}</i></a>' for x in got)
-    return f'<p class="builds-on">{T(lg, "Builds on", "Amplía")} {links}</p>' if got else ""
-
-
-def after_previous(lg, f, all_films):
-    """The film before this one in its series, as "Builds on", or nothing for the first."""
-    by = {x["index"]: x for x in all_films}
-    got = [by[f["index"] - 1]] if f["index"] - 1 in by else []
-    name = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
-    return (f'<p class="builds-on">{T(lg, "Builds on", "Amplía")} ' + "".join(f'<a href="../{x["key"]}/"><i>{name(x)}</i></a>' for x in got) + '</p>') if got else ""
-
-
-def weeds_builds_on(lg, f, all_films, R):
-    """In the weeds of data crafting: the first film builds on From words to data (and Keeping it true, where it ends); each later film on the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return (f'<p class="builds-on">Builds on the series <a href="{RE}from-words-to-data/"><i>From words to data</i></a>, and where it ends: <a href="{RE}from-words-to-data/keeping-it-true/"><i>Keeping it true</i></a></p>' if lg == "en" else
-                f'<p class="builds-on">Amplía la serie <a href="{RE}from-words-to-data/"><i>De las palabras a los datos</i></a>, y donde termina: <a href="{RE}from-words-to-data/keeping-it-true/"><i>Que siga siendo verdad</i></a></p>')
-    return after_previous(lg, f, all_films)
-
-
-def ea_builds_on(lg, f, all_films, R):
-    """The map before the data: the first film opens the series and needs nothing before it; each later film builds on the one before."""
-    return after_previous(lg, f, all_films)
-
-
-def mr_builds_on(lg, f, all_films, R):
-    """The same one, everywhere: the first film builds on What makes it the same one (In the weeds of data crafting), where a learner
-    is matched across three systems, and on Who does it, and where meaning changes (The map before the data), where an actor is
-    assigned to roles; each later film builds on the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>What makes it the same one</i></a> and <a href="{RE}enterprise-architecture/who-does-it/"><i>Who does it, and where meaning changes</i></a></p>' if lg == "en" else
-                f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/what-makes-it-the-same-one/"><i>Qué lo hace el mismo</i></a> y <a href="{RE}enterprise-architecture/who-does-it/"><i>Quién lo hace, y dónde cambia el significado</i></a></p>')
-    return after_previous(lg, f, all_films)
-
-
-def ag_builds_on(lg, f, all_films, R):
-    """What an agent is: the first film opens the module on agents and needs nothing before it; each later film builds on the one before."""
-    return after_previous(lg, f, all_films)
-
-
-def aw_builds_on(lg, f, all_films, R):
-    """Agents at work on data: the first film builds on the series before it, What an agent is, whose agent it puts to work; each
-    later film builds on the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía la serie")} {series_link(lg, RE, "what-an-agent-is")}</p>'
-    return after_previous(lg, f, all_films)
-
-
-def gov_builds_on(lg, f, all_films, R):
-    """Governance principles: the first film builds on Declare it, then build it (In the weeds of data crafting), where the data
-    team's loop of ten steps is drawn, which it pins governance to, and on Who owns what, where each fact's meaning has an owner;
-    each later film builds on the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return (f'<p class="builds-on">Builds on <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Declare it, then build it</i></a> and <a href="{RE}in-the-weeds/who-owns-what/"><i>Who owns what</i></a></p>' if lg == "en" else
-                f'<p class="builds-on">Amplía <a href="{RE}in-the-weeds/declare-it-then-build-it/"><i>Decláralo, luego constrúyelo</i></a> y <a href="{RE}in-the-weeds/who-owns-what/"><i>Quién es dueño de qué</i></a></p>')
-    return after_previous(lg, f, all_films)
-
-
 def series_link(lg, RE, sid):
     """A link to a series' page, by its id in SERIES, with its name, from a page whose path to its language's root is RE."""
     S = next(x for x in SERIES if x["id"] == sid)
     return f'<a href="{RE}{S["slug"]}/"><i>{S["name"][lg]}</i></a>'
 
 
-def gov_map_builds_on(lg, f, all_films, R):
-    """Governance on the map: the first film builds on the series before it, Governance principles, whose films find what's worth
-    keeping and who decides, and on The map before the data, whose kind of map it draws governance on; each later film builds on
-    the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return (f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía las series")} {series_link(lg, RE, "data-governance")} '
-                f'{T(lg, "and", "y")} {series_link(lg, RE, "enterprise-architecture")}</p>')
-    return after_previous(lg, f, all_films)
-
-
-def gov_use_builds_on(lg, f, all_films, R):
-    """Governance you can use: the first film builds on the two series before it, Governance principles and Governance on the map,
-    whose decisions and map it builds with the tools; each later film builds on the one before."""
-    if f["index"] == 0:
-        RE = R if lg == "en" else R[3:]
-        return (f'<p class="builds-on">{T(lg, "Builds on the series", "Amplía las series")} {series_link(lg, RE, "data-governance")} '
-                f'{T(lg, "and", "y")} {series_link(lg, RE, "governance-on-the-map")}</p>')
-    return after_previous(lg, f, all_films)
-
-
 # ---------------------------------------------------------------- the series
-# id: the series' key; dir: its folder under films/; slug: its path on the site; name: its title; builds_on: what each film builds on;
+# id: the series' key; dir: its folder under films/; slug: its path on the site; name: its title;
 # place: where its films happen, as its footer says it ("The university, people, numbers and records… are fictional"; a film whose
 # history is real, such as a prologue, says its own line instead, its site.json's "fiction", and the series' page adds its
 # "fiction_series");
@@ -165,45 +70,45 @@ def gov_use_builds_on(lg, f, all_films, R):
 # agent is opens the module AI agents in data work.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
-         name={"en": "From words to data", "es": "De las palabras a los datos"}, builds_on=fw_builds_on,
+         name={"en": "From words to data", "es": "De las palabras a los datos"},
          place={"en": "university", "es": "universidad"},
          blocks=[("sketch/index.html", "en", "card", "../", "../from-words-to-data/"), ("es/sketch/index.html", "es", "card", "../../", "../from-words-to-data/")]),
     dict(id="in-the-weeds", dir="analytics-engineering", slug="in-the-weeds",
-         name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"}, builds_on=weeds_builds_on,
+         name={"en": "In the weeds of data crafting", "es": "En las entrañas del oficio de datos"},
          place={"en": "university", "es": "universidad"}, blocks=[]),
     dict(id="enterprise-architecture", dir="enterprise-architecture", slug="enterprise-architecture",
-         name={"en": "The map before the data", "es": "El mapa antes de los datos"}, builds_on=ea_builds_on,
+         name={"en": "The map before the data", "es": "El mapa antes de los datos"},
          place={"en": "utility", "es": "empresa de energía"}, blocks=[],
          learn=dict(dir="enterprise-architecture", bundle="now-the-questions-appear", coming=True),
          marks={"en": "TOGAF and ArchiMate are trademarks of The Open Group, and Zachman of Zachman International, named only to identify those frameworks; this project is not affiliated with or endorsed by them.",
                 "es": "TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="master-and-reference-data", dir="master-and-reference-data", slug="master-and-reference-data",
-         name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"}, builds_on=mr_builds_on,
+         name={"en": "The same one, everywhere", "es": "El mismo, en todas partes"},
          place={"en": "university", "es": "universidad"}, blocks=[], next="data-governance",
          learn=dict(dir="master-and-reference-data", bundle="one-person-many-roles"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and ArchiMate of The Open Group, named or drawn only to identify that body of knowledge and that notation. This project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar ese cuerpo de conocimiento y esa notación. Este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="data-governance", dir="data-governance", slug="data-governance",
-         name={"en": "Governance principles", "es": "Principios de gobernanza"}, builds_on=gov_builds_on,
+         name={"en": "Governance principles", "es": "Principios de gobernanza"},
          place={"en": "university", "es": "universidad"}, blocks=[], next="governance-on-the-map",
          learn=dict(dir="data-governance", bundle="off-the-shelf"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, and DCAM of the EDM Association, named or drawn only to identify those bodies of knowledge; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, y DCAM de la EDM Association, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="governance-on-the-map", dir="governance-on-the-map", slug="governance-on-the-map",
-         name={"en": "Governance on the map", "es": "La gobernanza en el mapa"}, builds_on=gov_map_builds_on,
+         name={"en": "Governance on the map", "es": "La gobernanza en el mapa"},
          place={"en": "university", "es": "universidad"}, blocks=[], next="governance-in-practice",
          learn=dict(dir="governance-on-the-map", bundle="a-capability-not-a-project"),
          marks={"en": "DAMA and DAMA-DMBOK are trademarks of DAMA International, DCAM of the EDM Association, and ArchiMate of The Open Group, named or drawn only to identify those bodies of knowledge and that notation; this project is not affiliated with or endorsed by them.",
                 "es": "DAMA y DAMA-DMBOK son marcas de DAMA International, DCAM de la EDM Association, y ArchiMate de The Open Group, nombradas o dibujadas solo para identificar esos cuerpos de conocimiento y esa notación; este proyecto no está afiliado a ellos ni cuenta con su respaldo."}),
     dict(id="governance-in-practice", dir="governance-in-practice", slug="governance-in-practice",
-         name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"}, builds_on=gov_use_builds_on,
+         name={"en": "Governance you can use", "es": "Gobernanza que puedes usar"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          learn=dict(dir="governance-in-practice", bundle="the-marketplace")),
     dict(id="what-an-agent-is", dir="what-an-agent-is", slug="what-an-agent-is",
-         name={"en": "What an agent is", "es": "Qué es un agente"}, builds_on=ag_builds_on,
+         name={"en": "What an agent is", "es": "Qué es un agente"},
          place={"en": "university", "es": "universidad"}, blocks=[], next="agents-at-work-on-data"),
     dict(id="agents-at-work-on-data", dir="agents-at-work-on-data", slug="agents-at-work-on-data",
-         name={"en": "Agents at work on data", "es": "Agentes trabajando con datos"}, builds_on=aw_builds_on,
+         name={"en": "Agents at work on data", "es": "Agentes trabajando con datos"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
 ]
 for _S in SERIES:
@@ -636,9 +541,6 @@ def course(lg, f, step):
             f'<ol class="path" data-store="{f["prefix"]}" data-labs="{nl}" data-quiz="{nq}" data-text=\'{txt}\'>\n{lis}\n</ol></div></nav>')
 
 
-def builds_on(lg, f, all_films_, R):
-    return f["series"]["builds_on"](lg, f, all_films_, R)
-
 
 def next_series(f):
     """The series to watch after f's ("next" in SERIES), with its films on the site, if f is the last film its series plans and that
@@ -728,19 +630,16 @@ def film_page(lg, f, films_, series):
             '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n' if learn else
             '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos y las preguntas están en español.</p>\n')
     ntw = NUM[lg][f["think"] - 1]  # how many Pause and think questions, in words
-    extra = (f'<span>{f["labs"]} labs</span><span>{f["quiz"]} {T(lg, "scenarios", "situaciones")}</span>' if learn else "")
-    meta = (f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pause and think</span><span>English captions</span></p>' if lg == "en" else
-            f'<p class="meta-row"><span>{f["len"]} min</span>{extra}<span>Pausa para pensar</span><span>En inglés, con subtítulos en español</span></p>')
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     after = None if nxt else next_series(f)  # the last film: the series to watch next, once it's on the site
     third = (f'<a class="btn" href="../{nxt["key"]}/">{T(lg, "Next in the series", "Sigue en la serie")}: {nm(nxt)}</a>' if nxt else
              f'<a class="btn" href="{R if lg == "en" else R[3:]}{after[0]["slug"]}/">{T(lg, "Next series", "Siguiente serie")}: {SN(lg, after[0])}</a>' if after else
              f'<a class="btn" href="../">{T(lg, "The whole series", "Toda la serie")}: {SN(lg, S)}</a>')
     player = (f'<div class="player" data-labs="{"labs/" if learn else "../labs/" if SL else ""}">\n<audio id="snd" preload="metadata" src="{R}assets/{key}/soundtrack.mp3"></audio><div class="poster"><img src="{R}assets/{key}-poster.jpg" alt="" width="1280" height="720" data-play>'
-              f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button><button type="button" class="think-badge" data-think>{T(lg, "Play with pauses to think", "Ver con pausas para pensar")}</button></div></div>'
+              f'<div class="poster-cta"><button type="button" class="play-badge" data-play>{T(lg, "▶ Play the film", "▶ Ver la película")} · {f["len"]} min</button></div></div>'
               f'<canvas id="film" width="1280" height="720" aria-label="{T(lg, "Animated film", "Película animada, en inglés")}: {E(f["title"])}"></canvas>\n'
-              + (f'<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Stop at the end of {ntw} chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>' if lg == "en" else
-                 f'<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="false" title="Detenerse al final de {ntw} capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>')
+              + (f'<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Stop at the end of {ntw} chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>' if lg == "en" else
+                 f'<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Detenerse al final de {ntw} capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>')
               + '\n</div>')
     links = (f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Download the video</a><a href="{caps}">Caption files</a><a href="{script}">Read the script</a></p>' if lg == "en" else
              f'<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/{key}.mp4">Descargar el video (en inglés)</a><a href="{caps}">Archivos de subtítulos</a><a href="{script}" hreflang="en">Leer el guion (en inglés)</a></p>')
@@ -752,10 +651,10 @@ def film_page(lg, f, films_, series):
              f'<div class="think-foot"><button type="button" class="btn" data-again>{T(lg, "Watch again", "Ver de nuevo")}</button></div></div></template>')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../")}\n'
-            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n{meta}\n{note}{builds_on(lg, f, films_, R if lg == "en" else R)}\n</section>\n'
+            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n{note}</section>\n'
             + (f'{course(lg, f, 0)}\n' if learn else "") +
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
-            f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "Press Play, or pick a chapter. Turn on <b>Pause and think</b> to stop for one question at the end of chapters.", "Presiona Reproducir, o salta a un capítulo. Activa <b>Pausa para pensar</b> y la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
+            f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "<b>Pause and think</b> is on: the film stops for one question at the end of chapters.", "<b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
             f'{player}\n<div class="chapters" id="chapters" aria-label="{T(lg, "Chapters", "Capítulos")}"></div>\n{links}\n{nextp}\n</section>\n\n'
             + project_section(lg, f) +
             f'<section class="module" id="think-it-through" aria-labelledby="think-h">\n<div class="mhead"><div><h2 id="think-h">{T(lg, "Think it through", "Piénsalo")}</h2><p>{T(lg, f"The {ntw} Pause and think questions, for a class or a team. Open one to see the answer.", f"Las {ntw} preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.")}</p></div></div>\n<div id="think-list"></div>\n</section>\n\n'

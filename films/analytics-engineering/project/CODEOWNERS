@@ -81,3 +81,10 @@
 /memory/entries/show-the-count-reported.md               clara.jensen@uni.example
 /memory/entries/status-as-on-census-day.md               mei.tanaka@uni.example
 /memory/entries/students-not-enrolments.md               mei.tanaka@uni.example
+
+# The graduation list: its owner, its sources, its ceremonies and the people who use it
+/models/marts/graduations/_graduations__models.yml       mei.tanaka@uni.example jun.park@uni.example
+/sources/portal/                                         mei.tanaka@uni.example jun.park@uni.example
+/seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
+/governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
+/exposures/graduations/                                  malia.fonoti@uni.example

@@ -154,8 +154,9 @@ scene("trust",(ctx,S,t,sc)=>{const c=sc.cues,P=ow_once(sc,"P",()=>({big:wAt(sc,"
     {at:P.elbow,place:"county",keys:[[P.elbow,1010,600,1.32],[P.elbow+0.1,1030,610,1.42]],d:3,draw:(x,tt)=>{ow_county(x,tt,gv_io(tt,P.work,P.term-0.1,0.45));ow_tagAt(x,tt,P.work+0.3,null,1126,688,"the board",{size:30});}},
     // what a term holds, line by line
     {at:P.term,place:"meetScreen",keys:[[P.term,960,450,1.0]],d:2,draw:(x,tt)=>ow_termCard(x,280,170,1360,P.u.map(v=>tt-v+0.15),{h:570})},
-    // the business's words; each table and column; finding the data
-    {cut:true,at:P.words,place:"meetScreen",keys:[[P.words,960,450,1.0]],d:2,draw:(x,tt)=>ow_three(x,[tt-P.words-0.1,tt-P.dict,tt-P.cat])}]);
+    // the business's words; each table and column; finding the data. The same screen, and award heads both the card and the first of
+    // the three: the card leaves before the three come in (later), so the word never shows twice
+    {later:true,at:P.words,place:"meetScreen",keys:[[P.words,960,450,1.0]],d:2,draw:(x,tt)=>ow_three(x,[tt-P.words-0.1,tt-P.dict,tt-P.cat])}]);
   ow_pill(ctx,t,[[0,"Qianling county · about 220 BC"]],gv_io(t,P.elbow+0.2,P.term-0.1,0.35));
   wc_paperOver(ctx,S);});
 

@@ -275,7 +275,7 @@ scene("helpful",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({rank:wAt(s
     dm_railAt(x,t,[[0,2020,40],[0.7,2020,40],[2.3,2022,40],[c.steps-0.6,2022,40],[c.steps+1.0,2024,40]]);
     // people rank a model's answers, from best to worst
     const ra=ag_io(t,c.rank-0.3,c.smaller-0.9,0.6);if(ra>0){x.save();x.globalAlpha*=ra;ag_person(x,DM_PEOPLE.rater,300,620,0.92,{t,gaze:[4,1],smile:0.3});
-      DM_ANS.forEach((a2,i)=>{const rk=ag_in(t,P.best-0.6+i*0.55,0.3)>0.5?i+1:0;dm_answer(x,640,370+i*150,580,a2,rk,{edge:rk===1?AG.green:null,a:ag_in(t,c.rank+0.2+i*0.2,0.4)});});x.restore();}
+      DM_ANS.forEach((a2,i)=>{const rk=ag_in(t,P.best-0.75+i*0.55,0.6);dm_answer(x,640,370+i*150,580,a2,i+1,{k:rk,edge:i===0?AG.green:null,a:ag_in(t,c.rank+0.2+i*0.2,0.4)});});x.restore();}
     // trained on the answers people preferred
     const ma=ag_io(t,c.rank+0.4,c.smaller-0.9,0.6),glow=ag_in(t,P.preferred-0.2,0.8);if(ma>0){ag_modelLight(x,1560,560,100,ma*(0.4+0.5*glow));ag_model(x,1560,560,100,{t,core:0.5+0.5*glow,a:ma});}
     const fb=ag_io(t,P.trained-0.3,c.smaller-0.9,0.4);if(fb>0){x.save();x.globalAlpha*=fb;x.strokeStyle=rgba(AG.green,0.8);x.lineWidth=4;x.setLineDash([12,10]);x.lineDashOffset=-t*30;

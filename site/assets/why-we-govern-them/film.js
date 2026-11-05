@@ -806,27 +806,90 @@ function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(l
 function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
 
 /* ---------------------------------------------------------------- the camera
-   ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
-   1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
-   place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
-   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
-function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -982,6 +1045,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);
@@ -2039,6 +2103,7 @@ WR.hook=WR.agent.y+WR.agent.R;
 const WG_QUIET=[[690,445,260,230,0.55],[1240,170,660,70,0.5],[1140,470,250,230,0.45],[420,96,360,46,0.3],[1730,480,170,260,0.45]];
 AG_PLACES.wgLab=c=>ag_paintLab(c,{quiet:WG_QUIET});
 AG_PLACES.wgLabNight=c=>ag_paintLab(c,{quiet:WG_QUIET,night:true,lamp:[860,780]});
+AG_ROOMS.wgLabNight="wgLab";                               // the lab by night is the lab: the camera glides from one to the other
 
 /* ---------------------------------------------------------------- the agent
    wg_agent(ctx, t, o): the loop (ag_loop) at WR.agent unless o.x, o.y, o.R, o.r; o.core, o.think, o.lit, o.p, o.pulse, o.a, o.dim (0 to
@@ -2252,7 +2317,11 @@ function wg_group(x,tt,cx,cy,s,o){o=o||{};const A=WR.agent;x.save();x.translate(
    Each chapter is a run of shots (ag_shots): a place painted once, a slow camera, and what's drawn live. Times come from the cues
    (c.<line>, when each line starts) and from the words of the lines (wAt), so the pictures stay with the voice. */
 
-const WG_KICK=(x)=>ag_kicker(x,"1.8","Why we govern them");
+// the kicker, on the frame (not in the room, where the camera would move it): the same in every shot, so a glide between two shots of
+// the room never shows it twice
+const WG_KICK=(x,S,o)=>{x.save();setScreen(x,S);ag_kicker(x,"1.8","Why we govern them",o);x.restore();};
+// where something that moves between two shots of the room is: where it was until the shot's dissolve is over, then on its way (1 s)
+const wg_slide=(tt,t0,a,b,d)=>{const u=ag_sine((tt-t0)/(d||1.0));return{x:lerp(a.x,b.x,u),y:lerp(a.y,b.y,u)};};
 
 /* ---------------------------------------------------------------- pieces the scenes share */
 // the train at rest at the platform, or easing out: u 0 (at rest) to 1 (gone); dusk at evening
@@ -2337,7 +2406,7 @@ scene("line",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({tokyo:wAt(sc,
       if(tt>c.more+0.4)for(const i of [0,1]){const u=ag_sine((tt-c.more-0.4-i*0.5)/1.3);ag_reach(x,wg_armTo(WR.tools.x,WR.tools.y[i]+58),u,{data:clamp((tt-c.more-1.6-i*0.5)/1.2,0,1)});}
       wg_tools(x,{a:[0,1].map(i=>ag_in(tt,c.more+0.2+i*0.3,0.5)).concat([0]),touch:[0,1].map(i=>ag_in(tt,c.more+1.5+i*0.5,0.4)).concat([0])});
       wg_jun(x,tt,{p:{gaze:[lerp(6*Math.sin(tt*7),3,st),lerp(-2+2*Math.cos(tt*5),0,st)]}});
-      ag_roomLight(x,1);WG_KICK(x);wg_flick(x,tt,P.watch-0.4,P.round+0.4,2.2);})}
+      ag_roomLight(x,1);WG_KICK(x,S);wg_flick(x,tt,P.watch-0.4,P.round+0.4,2.2);})}
   ],0.6);
   ag_title(ctx,S,t,c.breath,"Why we govern them","because they're capable, not because they're bad","FILM 8 OF 10 · WHAT AN AGENT IS");});
 
@@ -2362,31 +2431,31 @@ scene("three",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({cnt:wAt(sc,"
   ag_shots(ctx,S,t,sc.dur,[
     // the census-day count, the number the university sends the government, and the plain job that counts it
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{});
-      ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);ag_roomLight(x,1);WG_KICK(x);cards(x,tt,0,ag_in(tt,c.plain+0.6,0.4));}},
+      ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);ag_roomLight(x,1);WG_KICK(x,S);cards(x,tt,0,ag_in(tt,c.plain+0.6,0.4));}},
     // at night it fails: the agent finds the cause with its read-only tools, and puts a fix, as a draft, in its tray
     {cut:true,at:c.night,place:"wgLabNight",keys:[[c.night,1060,520,1.04]],push:0.02,draw:(x,tt)=>{const A=WR.agent;
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);wg_draft(x,WR.tray.x,WR.tray.y-36,"draft fix",{a:ag_in(tt,P.test,0.3),k:ag_spr(tt,P.test)});
       tools(x,tt,{a:ag_in(tt,c.night+0.3,0.6),touch:touch(tt)});wg_agent(x,tt,{think:ag_io(tt,P.cause-0.3,P.test+0.8,0.4)});reach(x,tt);
       ag_roomLight(x,1,{night:true,lamp:[860,780]});ag_model(x,A.x,A.y,A.r,{only:"light",t:tt,think:ag_io(tt,P.cause-0.3,P.test+0.8,0.4)});
-      x.save();setScreen(x,S);ag_kicker(x,"1.8","Why we govern them",{dark:true});x.restore();cards(x,tt,ag_in(tt,c.night+0.5,0.5),0,true);}},
+      WG_KICK(x,S,{dark:true});cards(x,tt,ag_in(tt,c.night+0.5,0.5),0,true);}},
     // in the morning, people approve its fix: Jun reviews it, Noor approves it, and the count matches again; then, could it do more?
     {cut:true,at:P.appr,place:"wgLab",keys:[[P.appr,960,540,1]],push:0.02,draw:(x,tt)=>{const yi=ag_sine((tt-P.team)/2.0);
       ag_sandbox(x,WR.tray.x,WR.tray.y,WR.tray.w);wg_draft(x,WR.tray.x,WR.tray.y-36,"draft fix",{a:1-ag_in(tt,P.dm,0.5)});
       tools(x,tt,{a:1-ag_in(tt,P.dm-0.4,0.6)});wg_agent(x,tt,{});
       wg_jun(x,tt,{p:{gaze:[3,tt>P.team?-2:0]}});
       if(yi>0)ag_person(x,"yusuf",lerp(-260,640,yi),640,0.92,{t:tt,gaze:[3,-2]});
-      ag_roomLight(x,1);WG_KICK(x);
+      ag_roomLight(x,1);WG_KICK(x,S);
       const mk=1-ag_in(tt,P.dm,0.5);wg_mark(x,WR.tray.x,612,"reviewed · Jun",{k:ag_spr(tt,P.appr+0.5,0.6),a:mk});wg_mark(x,WR.tray.x,680,"approved · Noor",{ok:1,k:ag_spr(tt,P.appr+1.2,0.6),a:mk});
       cards(x,tt,1-ag_in(tt,P.appr+1.6,0.5),ag_in(tt,P.appr+1.8,0.4));
       wg_ghost(x,1400,300,"Work for the whole team?",{a:ag_in(tt,P.team,0.6),k:ag_spr(tt,P.team)});wg_ghost(x,1400,420,"Change the pipeline itself?",{a:ag_in(tt,P.pipe,0.6),k:ag_spr(tt,P.pipe)});}},
     // what the series' earlier films showed, each card under a phrase from its film's title: capable, convincing, unaccountable
-    {cut:true,at:c.capable,place:"wgLab",keys:[[c.capable,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{x:1320,y:460});ag_roomLight(x,1);WG_KICK(x);
+    {cut:true,at:c.capable,place:"wgLab",keys:[[c.capable,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,wg_slide(tt,c.capable+0.6,WR.agent,{x:1320,y:460}));ag_roomLight(x,1);WG_KICK(x,S);
       const W_=[["More than a junior","Capable","knows more · works faster",c.capable],["It feels like understanding","Convincing","sounds sure · feeling sure is not knowing",c.convincing],["Accountability it can't hold","Unaccountable","the agent acts · a person answers",c.unacc]];
       W_.forEach(([f,ti,su,t0],i)=>wg_word(x,150,170+i*196,800,f,ti,su,{a:ag_in(tt,t0+0.1,0.4),k:ag_spr(tt,t0+0.1),hl:i===2?ag_in(tt,P.pa,0.5):0}));}},
     // Yusuf asks what the university asks of any new colleague; the four questions, and their answers
-    {cut:true,at:c.yusuf,place:"wgLab",keys:[[c.yusuf,960,540,1]],push:0,draw:(x,tt)=>{wg_agent(x,tt,{});
+    {cut:true,at:c.yusuf,place:"wgLab",keys:[[c.yusuf,960,540,1]],push:0,draw:(x,tt)=>{wg_agent(x,tt,wg_slide(tt,c.yusuf+0.6,{x:1320,y:460},WR.agent));
       wg_jun(x,tt,{p:{gaze:[4,-3]}});ag_person(x,"yusuf",640,640,0.92,{t:tt,gaze:[4,-3]});
-      ag_roomLight(x,1);WG_KICK(x);
+      ag_roomLight(x,1);WG_KICK(x,S);
       wg_ghost(x,1400,300,"Work for the whole team?",{});wg_ghost(x,1400,420,"Change the pipeline itself?",{});
       wg_four(x,{q:P.q.map(q=>ag_spr(tt,q+0.1,0.6)),flip:P.f.map(f=>ag_sine((tt-f)/0.6))});}}
   ],0.6);});
@@ -2397,7 +2466,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({drv:wAt(sc,"
     over:wAt(sc,"moves","hands it over"),stops:wAt(sc,"moves","or it stops"),wrong:wAt(sc,"hands","the wrong hands"),anyone:wAt(sc,"hands","not just anyone")}));
   const lit=tt=>[ag_in(tt,c.first,0.6),0,0,0];
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});}},
+    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_agent(x,tt,{});wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});}},
     // as the driver answered for the train
     {at:P.drv,place:"wgCab",keys:[[P.drv,820,580,1.1]],push:0.03,draw:(x,tt)=>{wg_cabShot(x,tt,{v:206,allow:210,state:"under",hand:true,gaze:[5,-1]});}},
     // Jun set it up, so he owns it: what it's for, what it did, and a switch to stop it; handed over, or stopped; not just anyone may own one
@@ -2412,7 +2481,7 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({drv:wAt(sc,"
       else{const u=back>0?1-back:go,fade=tt>P.stops&&back<=0?1-ag_in(tt,P.stops,0.5):1;withA(x,fade,()=>wg_tag(x,lerp(WR.agent.x-30,700,u),lerp(WR.hook-2,470,u),"owner · Jun Park",{dx:lerp(-170,-20,u),dy:lerp(80,60,u)}));}
       wg_hand(x,690,560,{a:ag_io(tt,c.moves-0.2,P.stops+2.4,0.4)});
       wg_jun(x,tt,{p:{gaze:[4,0]}});
-      ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       wg_card(x,WR.cards.x,WR.cards.y,470,{kick:"For",title:"the census-day count"},{a:ag_in(tt,P.for_,0.4),k:ag_spr(tt,P.for_)});
       wg_log(x,1400,300,470,[{text:"read the failed check"},{text:"found the cause"},{text:"drafted a fix, in test"}],{a:ag_in(tt,P.reads,0.4),k:ag_spr(tt,P.reads)});
       ag_pill(x,940,786,"who may own an agent · decided",{a:ag_in(tt,P.anyone,0.5)});}}
@@ -2429,26 +2498,26 @@ scene("identity",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({name:wAt(
   ag_shots(ctx,S,t,sc.dur,[
     // it works under Jun's name: a badge with his name, and a log where every line says "Jun Park"
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_switchWire(x,1,{});wg_agent(x,tt,{});wg_tagOn(x,{});
-      wg_badgeOn(x,tt,{a:ag_in(tt,P.name,0.4),dy:lerp(-60,0,ag_spr(tt,P.name,0.7))});wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});log(x,tt,0,0);}},
+      wg_badgeOn(x,tt,{a:ag_in(tt,P.name,0.4),dy:lerp(-60,0,ag_spr(tt,P.name,0.7))});wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});log(x,tt,0,0);}},
     // while it's learning: read-only tools, its drafts in a sandbox, and production behind glass
     {cut:true,at:c.learning,place:"wgLab",keys:[[c.learning,960,540,1]],push:0.025,draw:(x,tt)=>{
       wg_production(x,1120,236,700,560);ag_glass(x,1120,236,700,560);
       ag_sandbox(x,700,800,380);wg_draft(x,700,764,"draft fix",{});
-      wg_agent(x,tt,{x:700,y:400});ag_roomLight(x,1);WG_KICK(x);
+      wg_agent(x,tt,wg_slide(tt,c.learning+0.6,WR.agent,{x:700,y:400}));ag_roomLight(x,1);WG_KICK(x,S);
       for(let i=0;i<2;i++)ag_tool(x,170,300+i*150,300,116,["Query","Docs"][i],{a:ag_in(tt,c.learning+0.4+i*0.3,0.5)});}},
     // its work looks like his; to stop it, you'd have to stop Jun; then a name of its own
     {cut:true,at:c.looks,place:"wgLab",keys:[[c.looks,960,540,1]],push:0.02,draw:(x,tt)=>{const fl=ag_sine((tt-P.own)/0.7),wj=ag_sine((tt-P.jun+0.3)/1.0)*(1-ag_in(tt,P.own,0.5));
       wg_switchWire(x,1,{});wg_wire(x,[[WR.agent.x+50,WR.hook+70],[1000,800],[640,800],[400,700]],wj,{lit:1});
-      wg_agent(x,tt,{});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:fl});
+      const back=ag_in(tt,c.looks+1.5,0.4);wg_agent(x,tt,wg_slide(tt,c.looks+0.6,{x:700,y:400},WR.agent));wg_tagOn(x,{a:back});wg_badgeOn(x,tt,{flip:fl,a:back});
       wg_jun(x,tt,{p:{gaze:tt>P.jun&&tt<P.own+0.6?[6,3]:[3,0],smile:tt>P.jun&&tt<P.own+0.6?0:0.3}});
-      ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});log(x,tt,fl,0);}},
+      ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});log(x,tt,fl,0);}},
     // as the control room saw each train
     {at:P.ctrl,place:"wgControl",keys:[[P.ctrl,960,400,1.12]],push:0.03,draw:(x,tt)=>{wg_controlRoom(x,tt,{});}},
     // the team sees everything it does, and can stop it without stopping anyone else
     {at:P.team,place:"wgLab",keys:[[P.team,960,540,1]],push:0.02,draw:(x,tt)=>{const off=ag_in(tt,P.noone,0.3)*(1-ag_in(tt,sc.dur-2.2,0.3));
       wg_switchWire(x,1-off,{});wg_agent(x,tt,{dim:off});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
       wg_jun(x,tt,{});
-      ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});log(x,tt,1,ag_in(tt,P.team+0.3,0.5));}}
+      ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});log(x,tt,1,ag_in(tt,P.team+0.3,0.5));}}
   ],0.6);});
 
 /* ---------------------------------------------------------------- 5 · Limits it can't raise */
@@ -2460,7 +2529,7 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
   const role=(x,tt)=>wg_role(x,WR.cards.x,WR.cards.y,470,"census agent",[{text:"read: the tables it needs",lock:1,a:ag_in(tt,P.ro,0.4),hl:ag_io(tt,P.ro,P.dr,0.3)},
     {text:"write: drafts, in its sandbox",a:ag_in(tt,P.dr,0.4),hl:ag_io(tt,P.dr,P.sens,0.3)},{text:"sensitive data: none",a:ag_in(tt,P.sens,0.4),hl:ag_in(tt,P.sens,0.3)}],{a:ag_in(tt,P.only,0.4),k:ag_spr(tt,P.only)});
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});role(x,tt);}},
+    {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});role(x,tt);}},
     // a train can only go where its rails go
     {at:c.rails,place:"wgCountry",keys:[[c.rails,960,540,1]],push:0.02,draw:(x,tt)=>{wg_lineShot(x,tt,{off:tt*2400,nose:1100});wg_blueLine(x,0,1960,WG_LINE.rail-1,1,1);}},
     // an agent can go wherever its tools reach: rails to its tools, and no further; the fewest rights on each
@@ -2471,18 +2540,18 @@ scene("limits",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({only:wAt(sc
       for(let i=0;i<3;i++){const t0=P.reach+i*0.9,u=ag_sine((tt-t0)/0.7)*(1-ag_sine((tt-t0-0.9)/0.5)*(i<2?1:0));if(u>0.01)ag_reach(x,wg_armTo(WR.tools.x,WR.tools.y[i]+58),u,{});}
       wg_tools(x,{a:[0,1,2].map(i=>ag_in(tt,c.reach+0.3+i*0.3,0.4)),touch:[0,1,2].map(i=>Math.max(ag_io(tt,P.reach+i*0.9+0.5,P.reach+i*0.9+1.2,0.2),ag_io(tt,P.ro,P.dr,0.3)))});
       wg_trayLine(x,ag_io(tt,P.dr,P.sens+1.5,0.4),1);
-      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});role(x,tt);}},
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});role(x,tt);}},
     // how much it may do alone is our choice; its skill doesn't decide it
     {cut:true,at:c.choice,place:"wgLab",keys:[[c.choice,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       wg_bars(x,476,320,460,{a:ag_in(tt,c.choice,0.4),can:ag_sine((tt-c.choice-0.3)/1.2),alone:ag_sine((tt-P.ours)/0.9)*0.3,knob:ag_in(tt,P.ours,0.4)});}},
     // written down as a mandate its owner signs
-    {at:c.mandate,place:"wgLab",keys:[[c.mandate,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+    {at:c.mandate,place:"wgLab",keys:[[c.mandate,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       wg_mandate(x,476,148,470,{a:ag_in(tt,c.mandate,0.4),k:ag_spr(tt,c.mandate),sign:(tt-P.signs)/1.3});}},
     // like the speed in the cab: set from outside, lowered at any time, and the agent can never raise it
     {at:c.cab,place:"wgLab",keys:[[c.cab,960,540,1]],push:0,draw:(x,tt)=>{base(x,tt);
       const r=ag_sine((tt-P.raise)/0.8)*(1-ag_sine((tt-P.raise-1.6)/0.8));if(r>0.01){const A=WR.agent;ag_reach(x,[A.x-A.R*0.62,A.y+A.R*0.42,990,620,900,500,876,452],r*0.82,{});}
-      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       const low=tt>P.low+0.2;wg_allowBox(x,700,420,low?160:210,"set",{a:ag_in(tt,c.cab+0.2,0.4),k:low?ag_spr(tt,P.low+0.2,0.6):ag_spr(tt,c.cab+0.2)});
       if(tt>P.raise+0.5)ag_lock(x,830,404,30,rgba(AG.blue,ag_io(tt,P.raise+0.5,sc.dur,0.3)));}}
   ],0.6);});
@@ -2498,7 +2567,7 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
   ag_shots(ctx,S,t,sc.dur,[
     // a person checks its evidence, not its tone; it never approves, and no agent approves anyone's
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{base(x,tt);
-      wg_jun(x,tt,{p:{gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      wg_jun(x,tt,{p:{gaze:[4,-2]}});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       const r=change(x,tt,ag_in(tt,c.checks,0.4),ag_sine((tt-P.ev+0.2)/1.2));
       // Jun's eye runs down the evidence, not the title
       const hi=ag_io(tt,P.ev+0.9,P.ev+3.0,0.3);if(hi>0)r.items.forEach((it,i)=>{const on=ag_io(tt,P.ev+0.9+i*0.8,P.ev+1.9+i*0.8,0.25);if(on>0){x.save();x.globalAlpha*=on*hi;x.strokeStyle=rgba(AG.orange,0.95);x.lineWidth=4;rr(x,it.to.x-6,it.to.y-6,it.to.w+12,it.to.h+12,20);x.stroke();x.restore();}});
@@ -2510,13 +2579,13 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({ev:wAt(sc,"
     {at:c.test,place:"wgLab",keys:[[c.test,960,540,1]],push:0,draw:(x,tt)=>{
       wg_testFrame(x,1140,800,460,96,{label:"in test",a:ag_in(tt,c.test+0.2,0.5)});
       for(let i=0;i<2;i++)ag_verdict(x,1060+i*170,774,"check","pass",ag_in(tt,P.alone+i*0.6,0.3));
-      base(x,tt);wg_jun(x,tt,{p:{gaze:[3,-1]}});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:lit(tt)});
+      base(x,tt);wg_jun(x,tt,{p:{gaze:[3,-1]}});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:lit(tt)});
       const rk=ag_sine((tt-P.rep)/0.8);wg_card(x,476,lerp(276,260,rk),470,{kick:"Report",title:"2 checks rerun · 1 draft",sub:"nothing changed in production"},{a:ag_in(tt,P.rep,0.3),kickCol:AG.violet});}},
     // every change to production: checked by its owner, approved by a second person, the same as people's changes
     {at:c.prod,place:"wgLab",keys:[[c.prod,960,540,1]],push:0.02,draw:(x,tt)=>{const pass=ag_sine((tt-P.sec-1.2)/1.2),jp=ag_sine((tt-c.same)/1.0);
       wg_production(x,880,180,560,620);ag_glass(x,880,180,560,620,{label:null});
       ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0]});
-      ag_roomLight(x,1);WG_KICK(x);
+      ag_roomLight(x,1);WG_KICK(x,S);
       const cx=lerp(240,980,pass),ca=1-0.55*pass;
       withA(x,ca,()=>{wg_card(x,cx,300,460,{kick:"by census agent",title:"Fix a failing step"},{kickCol:AG.violet});
         wg_mark(x,cx+230,530,"reviewed · Jun",{k:ag_spr(tt,P.ownr,0.6)});wg_mark(x,cx+230,600,"approved · Noor",{ok:1,k:ag_spr(tt,P.sec,0.6)});});
@@ -2530,12 +2599,13 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({role:wAt(sc,
   ag_shots(ctx,S,t,sc.dur,[
     // in most ways, a colleague like any other: a role, the same rules, the same security
     {at:0,place:"wgLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{wg_group(x,tt,960,470,1,{});
-      wg_jun(x,tt,{});ag_person(x,"noor",1680,620,0.96,{t:tt,flip:true,gaze:[4,0]});ag_roomLight(x,1);WG_KICK(x);
+      wg_jun(x,tt,{});ag_person(x,"noor",1690,640,0.94,{t:tt,flip:true,gaze:[4,0]});ag_roomLight(x,1);WG_KICK(x,S);
       [[110,"analytics engineer"],[745,"census agent"],[1380,"data architect"]].forEach(([rx,rn],i)=>wg_role(x,rx,140,430,rn,[],{a:ag_in(tt,P.role+i*0.3,0.4),k:ag_spr(tt,P.role+i*0.3)}));
       ag_pill(x,810,806,"the same rules",{col:AG.blue,a:ag_in(tt,P.rules,0.4)});ag_pill(x,1110,806,"the same security",{col:AG.blue,a:ag_in(tt,P.sec,0.4)});}},
     // four rules of its own, beside the four needs
-    {cut:true,at:c.four,place:"wgLab",keys:[[c.four,960,540,1]],push:0,draw:(x,tt)=>{const A=WR.agent;wg_switchWire(x,1,{});wg_agent(x,tt,{});wg_tagOn(x,{});wg_badgeOn(x,tt,{flip:1});
-      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);
+    {cut:true,at:c.four,place:"wgLab",keys:[[c.four,960,540,1]],push:0,draw:(x,tt)=>{const A=WR.agent,m=wg_slide(tt,c.four+0.6,{x:960,y:470},A);
+      wg_switchWire(x,1,{a:ag_in(tt,c.four+1.5,0.4)});wg_group(x,tt,m.x,m.y,1,{});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);
       // each rule swells the need (or needs) it belongs to
       const R4=[[c.rights,["No rights of its own,","only a role's"],[2]],[c.owner,["Always a human owner"],[0]],[c.approve,["Never an approver"],[3]],
         [c.mandate,["A written mandate","that can be taken back;","a person approves every","change to production"],[2,3]]],pop=[0,0,0,0];
@@ -2543,7 +2613,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({role:wAt(sc,
       const L=ag_in(tt,c.four,0.5);wg_four(x,{lit:[L,L,L,L],pop});
       let ry=244;R4.forEach(([t0,ls],i)=>{ry+=wg_rule(x,1392,ry,480,i+1,ls,{a:ag_in(tt,t0,0.4),k:ag_spr(tt,t0)})+12;});}},
     // these ideas have names in the field; series 3 and 4 put them to work
-    {at:c.names,place:"wgLab",keys:[[c.names,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:[1,1,1,1]});
+    {at:c.names,place:"wgLab",keys:[[c.names,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:[1,1,1,1]});
       wg_shelf(x,300,600,1320,["Levels of autonomy · Feng, McDonald and Zhang, 2025","ISO/IEC 42001","NIST AI Risk Management Framework"],{k:[c.feng,P.iso,P.nist].map(q=>ag_sine((tt-q)/0.9))});
       ag_T(x,"IN THE FIELD",330,372,{w:700,size:28,ls:4,col:AG.kick,a:ag_in(tt,c.names+0.2,0.5)});
       ag_pill(x,1340,568,"Series 3",{a:ag_in(tt,c.series,0.4)});ag_pill(x,1530,568,"Series 4",{a:ag_in(tt,c.series+0.3,0.4)});}}
@@ -2563,7 +2633,7 @@ scene("capable",(ctx,S,t,sc)=>{const c=sc.cues,P=wg_once(sc,"P",()=>({k285:wAt(s
     {at:c.govern,place:"wgLab",keys:[[c.govern,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1-ag_in(tt,c.breath,0.9),()=>{base(x,tt);
       const fill=ag_sine((tt-P.dm)/0.9),gone=ag_sine((tt-P.num-0.2)/1.6);
       for(let i=0;i<2;i++){const u=ag_sine((tt-P.dm-0.3-i*0.4)/0.9);if(u>0.01)ag_reach(x,wg_armTo(1400,340+i*120),u,{});}
-      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x);wg_four(x,{lit:[1,1,1,1],pop:P.named.map(q=>Math.sin(Math.PI*clamp((tt-q)/0.8,0,1)))});
+      wg_jun(x,tt,{});ag_roomLight(x,1);WG_KICK(x,S);wg_four(x,{lit:[1,1,1,1],pop:P.named.map(q=>Math.sin(Math.PI*clamp((tt-q)/0.8,0,1)))});
       const la=ag_in(tt,c.govern+0.3,0.6)*(1-ag_in(tt,c.next-0.2,0.5));
       ["We govern agents","because they are capable,","not because they are bad."].forEach((s,i)=>ag_T(x,s,476,292+i*50,{w:700,size:36,a:la}));
       wg_ghost(x,1400,300,"Work for the whole team",{a:ag_in(tt,c.more,0.4),fill});wg_ghost(x,1400,420,"Change the pipeline itself",{a:ag_in(tt,c.more+0.2,0.4),fill});

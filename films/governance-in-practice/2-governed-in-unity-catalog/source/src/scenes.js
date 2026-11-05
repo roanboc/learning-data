@@ -89,7 +89,7 @@ scene("area",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({tabs:wAt(sc,"
       gc_discover(x,tt,{tile:[0,1,2,3,4,5].map(k=>fin(tt,P.lays+0.12*k,0.5)),fill:[0,1,2,3,4,5].map(k=>clamp((tt-on(k)+0.1)/0.7,0,1)),
         lit:[0,1,2,3,4,5].map(k=>gv_io(tt,on(k)-0.1,on(k)+1.0,0.3))});}},
     // the learner table's grants: each to a group; never to a person
-    {cut:true,at:P.gr,place:"big",keys:[[P.gr,960,540,1]],push:0.02,draw:(x,tt)=>gc_perms(x,tt,{rows:[fin(tt,P.grp,0.5),fin(tt,P.grp+0.3,0.5),0],clara:fin(tt,P.nv-0.2,0.6),off:clamp((tt-P.nv-1.4)/1.0,0,1),claraAt:2})}],sc.dur));});
+    {later:true,at:P.gr,place:"big",keys:[[P.gr,960,540,1]],push:0.02,draw:(x,tt)=>gc_perms(x,tt,{rows:[fin(tt,P.grp,0.5),fin(tt,P.grp+0.3,0.5),0],clara:fin(tt,P.nv-0.2,0.6),off:clamp((tt-P.nv-1.4)/1.0,0,1),claraAt:2})}],sc.dur));});
 
 // ---- 3 · A tag from the class: the classes in the project; dbt writing each as a tag; the governed tag, with its three values; a class
 // changed, and the next build; and, for tables the project doesn't build, the classifier ----
@@ -109,7 +109,7 @@ scene("tag",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({cs:wAt(sc,"cla
     // the platform: each column's tag lands on it
     {at:P.col,place:"big",keys:[[P.col,960,540,1]],push:0.02,draw:(x,tt)=>gc_columns(x,tt,{chip:LAND.map(d=>clamp((tt-P.col-0.4-d)/0.9,0,1))})},
     // the governed tag: three values, set once by an admin; "maybe" is refused
-    {cut:true,at:P.gov,place:"big",keys:[[P.gov,960,540,1]],push:0.02,draw:(x,tt)=>gc_govTag(x,tt,{lock:fin(tt,P.admin,0.6),vals:fin(tt,P.three,0.5),try:clamp((tt-P.nob)/0.9,0,1),
+    {later:true,at:P.gov,place:"big",keys:[[P.gov,960,540,1]],push:0.02,draw:(x,tt)=>gc_govTag(x,tt,{lock:fin(tt,P.admin,0.6),vals:fin(tt,P.three,0.5),try:clamp((tt-P.nob)/0.9,0,1),
       no:clamp((tt-P.maybe-0.3)/1.0,0,1)})},
     // a class changed in the project, and the next build changes the tag
     {cut:true,at:P.nx,place:"desk",keys:[[P.nx,960,500,1]],push:0.02,draw:(x,tt)=>{x.save();x.translate(0,110);gc_change(x,tt,{ch:clamp((tt-P.chg)/1.0,0,1),arrow:clamp((tt-P.nb)/0.8,0,1),next:clamp((tt-P.ct)/1.0,0,1)});x.restore();}},
@@ -128,10 +128,10 @@ scene("policy",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({masks:wAt(s
     // the policy's page: what it masks, when, in the whole catalog, for everyone but the registrar's office
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_policy(x,tt,{lit:[fin(tt,P.every,0.5),fin(tt,P.but,0.5),fin(tt,P.tagged,0.5),fin(tt,P.masks,0.5)],sub:fin(tt,P.whole,0.5)})},
     // not table by table: a lock on each table gives way to the one policy; a table built tomorrow is masked as soon as it's tagged
-    {cut:true,at:P.tm,place:"big",keys:[[P.tm,960,540,1]],push:0.02,draw:(x,tt)=>{gc_cabinet(x,tt,{band:1,locks:clamp((tt-P.tm-0.2)/1.0,0,1),sweep:clamp((tt-P.tbt-0.1)/1.0,0,1)});
+    {later:true,at:P.tm,place:"big",keys:[[P.tm,960,540,1]],push:0.02,draw:(x,tt)=>{gc_cabinet(x,tt,{band:1,locks:clamp((tt-P.tm-0.2)/1.0,0,1),sweep:clamp((tt-P.tbt-0.1)/1.0,0,1)});
       gc_policyCard(x,1150,100,1,{lock:fin(tt,P.tbt+0.7,0.5)});gc_newTable(x,tt,{a:fin(tt,P.built-0.2,0.8),tag:clamp((tt-P.soon)/0.9,0,1),mask:clamp((tt-P.tagd)/1.0,0,1)});}},
     // the policy again: a row filter, the other kind; this one masks
-    {cut:true,at:P.rw,place:"big",keys:[[P.rw,960,540,1]],push:0.02,draw:(x,tt)=>gc_policy(x,tt,{kind:gv_io(tt,P.filter,P.one+0.3,0.4)})},
+    {later:true,at:P.rw,place:"big",keys:[[P.rw,960,540,1]],push:0.02,draw:(x,tt)=>gc_policy(x,tt,{kind:gv_io(tt,P.filter,P.one+0.3,0.4)})},
     // Planning: Clara reads the learner table on her wall screen
     {at:P.cl,place:"planning",keys:[[P.cl,900,480,1.08]],push:0.02,draw:(x,tt)=>{gc_planScreen(x);person(x,"clara",440,905,0.8,{pose:"point",pose2:"listen",mix:fin(tt,P.cl+1.2,0.6),t:tt});
       gu_nameCard(x,120,560,"Clara Jensen","Planning",gv_io(tt,P.cl+0.3,P.sees+0.4,0.4));}},
@@ -152,7 +152,7 @@ scene("key",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({sn:wAt(sc,"cod
     {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gc_scramble(x,tt,{in:clamp((tt-P.sn+0.2)/1.2,0,1),out:clamp((tt-P.scr)/1.0,0,1),tables:clamp((tt-P.every)/1.2,0,1),
       same:fin(tt,P.join-0.4,0.6),join:clamp((tt-P.join)/1.2,0,1),anon:clamp((tt-P.anon)/1.2,0,1)})},
     // the registrar's list through the same machine: one code matches a row Clara sees, and says who that is
-    {cut:true,at:P.ls,place:"desk",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gc_regList(x,tt,{run:clamp((tt-P.run)/2.0,0,1),match:clamp((tt-P.match+0.3)/0.6,0,1),who:clamp((tt-P.match-0.2)/0.8,0,1)})},
+    {later:true,at:P.ls,place:"desk",keys:[[P.ls,960,500,1]],push:0.02,draw:(x,tt)=>gc_regList(x,tt,{run:clamp((tt-P.run)/2.0,0,1),match:clamp((tt-P.match+0.3)/0.6,0,1),who:clamp((tt-P.match-0.2)/0.8,0,1)})},
     // Planning's list: still personal; counted; and what reading it takes
     {cut:true,at:P.st,place:"bigPlan",keys:[[P.st,960,540,1]],push:0.02,draw:(x,tt)=>gc_nearList(x,tt,{still:fin(tt,P.still,0.6),count:clamp((tt-P.count)/1.2,0,1),card:fin(tt,P.purpose,0.6)})}],sc.dur));});
 

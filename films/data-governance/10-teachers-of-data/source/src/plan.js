@@ -478,8 +478,10 @@ function tt_person(ctx,id,x,y,s,o){o=o||{};const b=o.bow||0,pt=o.pitch||0;if(b<=
 function tt_mix(key,list){let po=POSE.stand;for(const [n,w] of list)if(w>0.001)po=blendPose(po,POSE[n],Math.min(1,w));POSE[key]=po;return key;}
 // a person of the crossing standing at (X, d), on the pavement (0.15 m up) or the road; drawn at a size rounded to a step and scaled the
 // rest of the way, so someone walking towards us doesn't need a new canvas every frame. o.bob lifts them (metres), o.umbrella opens one
-// over them, o.marks draws what they're doing (whistling, clapping) above them; other options go to the series' person
-function tt_who(ctx,c,id,X,d,o){o=o||{};if(c.d0+d<0.8)return;const Y=o.Y==null?(d>TT_ST.far-0.1||d<0.1?0.15:0):o.Y,p=tt_pr(c,X,d,Y),s=p[2]*1.7/560;if(p[0]<-300||p[0]>W+300)return;
+// over them, o.marks draws what they're doing (whistling, clapping) above them; other options go to the series' person. Someone who
+// walks off a kerb, or onto one, steps down or up over 0.3 m of the way (tt_kerbY): at once, they dropped a few pixels in one frame
+const tt_kerbY=d=>0.15*Math.max(ease(clamp((d-TT_ST.far+0.25)/0.3,0,1)),1-ease(clamp((d+0.05)/0.3,0,1)));
+function tt_who(ctx,c,id,X,d,o){o=o||{};if(c.d0+d<0.8)return;const Y=o.Y==null?tt_kerbY(d):o.Y,p=tt_pr(c,X,d,Y),s=p[2]*1.7/560;if(p[0]<-300||p[0]>W+300)return;
   const q=Math.max(0.04,Math.round(s/0.016)*0.016),r=s/q,x=p[0],y=p[1]-(o.bob||0)*p[2];ctx.save();ctx.translate(x,y);ctx.scale(r,r);tt_person(ctx,id,0,0,q,o);ctx.restore();
   const k=s*PEOPLE[id].build.h;if(o.umbrella)tt_umbrellaOver(ctx,PEOPLE[id],x,y,k,o.umbrella,o);if(o.marks)o.marks(ctx,x,y,k);}
 // an umbrella over someone, from their right hand: a dome of cloth with its ribs, on a dark shaft

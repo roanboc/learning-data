@@ -87,7 +87,9 @@ function sw_dash(ctx,x,y,w,h,col,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha
 const SW_FS={front:{w:500,size:28,f:"mono",lh:40},h1:{w:800,size:36,lh:54},h2:{w:700,size:32,lh:50},li:{w:500,size:28,lh:40},p:{w:500,size:28,lh:40},gap:{lh:18}};
 function sw_layout(ctx,lines,inner){return lines.map(l=>{const st=SW_FS[l.k]||SW_FS.p;if(l.k==="gap")return{l,rows:[],h:st.lh};
   const rows=ag_wrap(ctx,l.t,inner-(l.k==="li"?34:0),{w:st.w,size:st.size,f:st.f});return{l,rows,h:rows.length*st.lh+(l.k==="h2"?6:0)};});}
-function sw_file(ctx,x,y,w,h,path,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return[];const head=74,inner=w-56,L=sw_layout(ctx,lines,inner),tops=[];
+// o.lw: the width its lines are laid out at, when the card grows to it (the lines keep their breaks as it opens, instead of a word
+// jumping up to the line above in one frame each time one fits; the card shows what fits)
+function sw_file(ctx,x,y,w,h,path,lines,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return[];const head=74,inner=(o.lw||w)-56,L=sw_layout(ctx,lines,inner),tops=[];
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,clamp(o.k,0,1.2)));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:0.85});
   if(o.draft){ctx.save();ctx.setLineDash([12,10]);ctx.strokeStyle=rgba(o.edge||AG.blue,0.8);ctx.lineWidth=2.4;rr(ctx,x+6,y+6,w-12,h-12,18);ctx.stroke();ctx.restore();}

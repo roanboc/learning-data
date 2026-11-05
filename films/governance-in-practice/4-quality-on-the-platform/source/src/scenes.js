@@ -147,8 +147,9 @@ scene("typed",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({ev:wAt(sc,"c
     // the test on the source: every email recorded since that day is clean, or the build stops; it should never fail
     {at:P.src,place:"desk",keys:[[P.src,960,500,1]],push:0.02,draw:(x,tt)=>{const f=gq_ecSheet(x,90,70,1740,{test:fin(tt,P.tst,0.5),since:fin(tt,P.since,0.5)});
       gq_never(x,f,{stop:fin(tt,P.stp,0.6),never:fin(tt,P.nv,0.8),broke:fin(tt,P.brk,0.6)});}},
-    // once the old emails are corrected at the source: the clean-up struck through, and the test's since, so it checks every row
-    {cut:true,at:P.gs,place:"desk",keys:[[P.gs,960,500,1]],push:0.02,draw:(x,tt)=>{gq_req(x,1260,60,fin(tt,P.gs+0.2,0.6));gq_clSheet(x,80,90,1150,{go:fin(tt,P.cu,0.9)});
+    // once the old emails are corrected at the source: the clean-up struck through, and the test's since, so it checks every row. The
+    // same desk, and the same file on another sheet: the first sheet leaves before these come (later)
+    {later:true,at:P.gs,place:"desk",keys:[[P.gs,960,500,1]],push:0.02,draw:(x,tt)=>{gq_req(x,1260,60,fin(tt,P.gs+0.2,0.6));gq_clSheet(x,80,90,1150,{go:fin(tt,P.cu,0.9)});
       gq_ecSheet(x,80,330,1600,{gone:fin(tt,P.row,0.9)});}}],sc.dur));
   wc_year(ctx,56,72,"From 2 November 2026",gv_io(t,P.fm+0.3,P.src-0.2,0.4));});
 

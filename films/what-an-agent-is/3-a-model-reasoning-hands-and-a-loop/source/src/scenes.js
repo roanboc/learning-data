@@ -5,13 +5,9 @@
 
 // made once per chapter, the first time it draws: its cues are known by then
 const ml_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
-// the shared ag_shots, with a dissolve of each shot's own (sh.dis, seconds; 0.5 by default): the river into today takes longer; a shot
-// marked cut comes in on a cut
-function ml_shots(ctx,S,t,end,shots){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;
-  const dis=i>0?(shots[i].dis||0.5):0.5,u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
+// the shared ag_shots: a shot may dissolve in over its own time (sh.dis, seconds; 0.5 by default): the river into today takes longer;
+// in one room the camera glides on from shot to shot, and between rooms a shot marked cut comes in on a cut
+const ml_shots=(ctx,S,t,end,shots)=>ag_shots(ctx,S,t,end,shots);
 // the corner's kicker: the latest of [[t, num, title], ...] passed, dissolving from the one before; a null num hides it
 function ml_kick(ctx,t,mk,a){if(a<=0.01)return;let i=0;for(let k=1;k<mk.length;k++)if(t>=mk[k][0])i=k;const u=i>0?ag_in(t,mk[i][0],0.5):1;
   if(u<1&&mk[i-1][1])ag_kicker(ctx,mk[i-1][1],mk[i-1][2]||"",{a:a*(1-u)});if(mk[i][1])ag_kicker(ctx,mk[i][1],mk[i][2]||"",{a:a*u});}
@@ -49,16 +45,17 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ml_crowd(x,tt,{turn:ag_in(tt,P.prog+1,1.2)*0.6});
       const p=ml_pop(tt,P.prog+0.1,null);ag_textCard(x,140,170,520,{kick:"Programme · last to fly",title:"Lawrence Sperry",sub:"with Emil Cachin"},{k:p.k,a:p.a});}},
     // closer: the two of them side by side in the cockpit, Sperry at the wheel and Cachin beside him on the right, their names
-    {cut:true,at:P.close,place:null,keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
+    {cut:true,at:P.close,place:null,room:"cockpit",keys:[[P.close,960,540,1],[P.close+0.1,950,540,1.03]],d:4,push:0.01,draw:(x,tt)=>{
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.012*Math.sin(tt*0.9),turn:0.04*Math.sin(tt*1.1)});
       const p1=ml_pop(tt,P.young,null),p2=ml_pop(tt,P.cachin,null);
       ag_textCard(x,200,236,380,{title:"Lawrence Sperry",sub:"pilot, 21"},{tail:{side:"right",at:0.6,px:700,py:372},k:p1.k,a:p1.a});
       ag_textCard(x,1380,110,340,{title:"Emil Cachin",sub:"mechanic"},{tail:{side:"bottom",at:0.3,px:1466,py:280},k:p2.k,a:p2.a});}},
-    // flying by hand, closer on Sperry: each gust tips a wing, and his arms bring it back; his back aches
-    {cut:true,at:P.pit,place:null,keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
+    // flying by hand, closer on Sperry: each gust tips a wing, and his arms bring it back; his back aches. The cockpit is one room
+    // (room), so the camera glides in closer from the shot before rather than jumping
+    {cut:true,at:P.pit,place:null,room:"cockpit",keys:[[P.pit,920,540,1.06],[P.pit+0.1,890,560,1.13]],d:8,push:0.01,draw:(x,tt)=>{const ach=ag_io(tt,P.ache,P.ache+1.8,0.6);
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:roll(tt),turn:turn(tt)+0.06*Math.sin(tt*1.3),gust:gustA(tt),lift:ach,nod:-0.03*ach});}},
     // the danger, drawn as a diagram: the aeroplane tipped, sliding sideways and down; the path fades before the water
-    {cut:true,at:P.slip,place:null,keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
+    {cut:true,at:P.slip,place:null,room:"cockpit",keys:[[P.slip,960,540,1.06],[P.slip+0.1,960,520,1.0]],d:2,push:0.01,draw:(x,tt)=>{ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,roll:0.02});ml_veil(x,0.55*ag_in(tt,P.slip,0.6));
       const a=ag_in(tt,P.slip+0.1,0.5);ag_box(x,360,170,1200,620,26,{a});ml_slip(x,360,170,1200,620,ag_in(tt,P.slide-0.2,P.fall-P.slide+0.8),{t:tt,a,roll:0.36*ag_in(tt,P.slip+0.3,1.2)});}},
     // Sperry's answer: his box, cut open, on a card; four gyroscopes spinning, their axes upright as it tips; a valve, a piston, the wing's edge
     {at:P.box,place:"mlSeine",keys:[[P.box,960,540,1.02],[P.box+0.1,960,500,1.06]],d:10,push:0.01,draw:(x,tt)=>{ml_veil(x,0.6);ag_box(x,190,150,1540,640,26,{a:ag_in(tt,P.box,0.4)});
@@ -70,7 +67,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,P=ml_once(sc,"P",()=>({contest:wAt(sc
       ml_boat(x,bx,540,0.95,{t:tt,shadow:600,who:[{who:{skin:[232,198,170],top:{c:[70,62,56]},cap:[104,72,48],goggles:true}},{who:{skin:[220,182,150],top:{c:[104,100,96]},cap:[84,82,80]}}]});
       ml_crowd(x,tt,{turn:-0.6+1.3*ag_in(tt,P.pass+0.2,2.4)});}},
     // in the cockpit, Sperry lets go of the wheel and raises his hands, open; the wheel holds still; Cachin looks up at them
-    {at:P.lets-0.3,place:null,keys:[[P.lets-0.3,960,540,1],[P.lets-0.2,960,525,1.04]],d:4,push:0.01,draw:(x,tt)=>{const r=0.3*ag_in(tt,P.lets,0.5)+0.7*ag_in(tt,P.raise-0.15,0.9);
+    {at:P.lets-0.3,place:null,room:"cockpit",keys:[[P.lets-0.3,960,540,1],[P.lets-0.2,960,525,1.04]],d:4,push:0.01,draw:(x,tt)=>{const r=0.3*ag_in(tt,P.lets,0.5)+0.7*ag_in(tt,P.raise-0.15,0.9);
       ml_cockpit(x,tt,{mate:ML_PEOPLE.cachin,raise:r,mateGaze:[2-3*r,-0.6-0.8*r],roll:0.008*Math.sin(tt*0.8)});}},
     // from behind: Cachin climbs out along the lower wing; it dips under his weight, and the box brings it back
     {at:P.out,place:"mlSky",keys:[[P.out,960,560,1],[P.out+0.1,960,540,1.04]],d:5,push:0.01,draw:(x,tt)=>{const u=ag_sine(clamp((tt-P.climbs+0.2)/2.2,0,1)),
@@ -117,8 +114,12 @@ function ml_boxRoom(x,tt,P){const [rx,ry]=ML_ROOM.ring;ag_roomLight(x,1);
   if(grow<=0){ag_ring(x,rx,ry,R,{p:ringP,from:-120,arrows:[-30]});
     if(drop>0){const y0=ry-560,fall=ag_eo(clamp(drop*1.25,0,1)),settle=drop>=0.8?Math.sin((drop-0.8)/0.2*Math.PI)*-10:0;
       ag_model(x,rx,lerp(y0,ry,fall)+settle,b.r,{t:tt,core:0.5});}}
-  else{const ti=1-ag_in(tt,P.title,0.5);ag_loop(x,rx,ry,{t:tt,R,r:lerp(b.r,88,grow),label:grow>0.6&&ti>0.5?"Model":null,core:lerp(0.5,1,grow),
-    stepA:[ag_in(tt,P.agent-0.2,0.4)*ti,ag_in(tt,P.agent+0.3,0.4)*ti,ag_in(tt,P.agent+0.8,0.4)*ti]});}}
+  else{const ti=1-ag_in(tt,P.title,0.5),r=lerp(b.r,88,grow);ag_loop(x,rx,ry,{t:tt,R,r,label:null,core:lerp(0.5,1,grow),
+    stepA:[ag_in(tt,P.agent-0.2,0.4)*ti,ag_in(tt,P.agent+0.3,0.4)*ti,ag_in(tt,P.agent+0.8,0.4)*ti]});
+    // its name fades in as the sphere grows, and moves up into it as it passes the size where ag_model puts the name inside (80),
+    // rather than jumping there in one frame
+    const na=ag_in(grow,0.55,0.15)*ti,u=ag_sine(clamp((r-68)/12,0,1));
+    if(na>0)ag_T(x,"Model",rx,lerp(ry+r+44,ry+r*0.6,u),{w:700,size:28,align:"center",col:AG.label,a:na});}}
 
 /* ---------------------------------------------------------------- the room, today
    Chapters 2 to 8 share one room (the style prototype's layout, ML_ROOM): Jun at his desk on the left, the agent's ring right of

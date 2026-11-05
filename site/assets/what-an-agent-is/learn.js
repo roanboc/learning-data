@@ -72,6 +72,10 @@ const OK=[50,116,80],NO=[170,56,40];
 // red for wrong, ink, muted, or a hex
 function C(k){if(Array.isArray(k))return k;const A=typeof AG!=="undefined"?AG:{};if(!k)return A.mut||[86,92,100];if(k[0]==="#")return hexRGB(k)||A.ink;
   return ({blue:A.blue,violet:A.violet,orange:A.orange,green:A.green,amber:A.amber,red:NO,ok:OK,no:NO,ink:A.ink,muted:A.mut})[k]||A.mut;}
+// the page's own pieces (the rail's numbers, the lab's kicker, the scenario's tag) take a light tint of a lab's colour, as the other
+// series' light colours are: dark ink reads on it, and it reads on the dark page
+const TINT={"#584ec4":"#b3abf0","#266684":"#8ec3dc","#327450":"#8fcfa8","#ba5e36":"#f0a57f","#9c6412":"#f2c46a"};
+const pc=k=>TINT[css(k)]||css(k)||k;
 const css=k=>!k?null:k[0]==="#"?k:({blue:"#266684",violet:"#584ec4",orange:"#ba5e36",green:"#327450",amber:"#9c6412",red:"#aa3828"})[k]||null;
 const INK=()=>C("ink"),MUT=()=>C("muted");
 const tw=(ctx,s,size,w)=>ag_tw(ctx,String(s),{w:w||600,size});
@@ -326,14 +330,14 @@ if(labsApp&&LABS.length){labsApp.textContent="";const visited=new Set(get("visit
   function paintFilms(){films.replaceChildren(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>{const ls=ofFilm(f.n),seen=ls.filter(x=>visited.has(x.id)).length;
     return h("button",{type:"button","aria-pressed":String(f.n===film),onclick:()=>show(ofFilm(f.n)[0].id)},h("i",null,String(f.n)),h("span",null,f.title),h("small",null,fill(U.seen,{n:seen,of:ls.length})));}));}
   rails.append(...FILMS.filter(f=>ofFilm(f.n).length).map(f=>h("div",{class:"stops",role:"tablist","aria-label":U.labsLabel+" · "+f.title,"data-film":String(f.n)},
-    ...ofFilm(f.n).map((Lb,i)=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+(css(Lb.c)||Lb.c),onclick:()=>show(Lb.id)},h("i",null,String(i+1)),Lb.name)))));
+    ...ofFilm(f.n).map((Lb,i)=>h("button",{type:"button",role:"tab","data-id":Lb.id,style:"--c:"+pc(Lb.c),onclick:()=>show(Lb.id)},h("i",null,String(i+1)),Lb.name)))));
   const tabs=()=>[...rails.querySelectorAll("[role=tab]")];
   function paintRail(){[...rails.children].forEach(r=>{r.hidden=r.dataset.film!==String(film);});}
   // the next lab of the series, across films
   function show(id,focus){const Lb=labOf(id)||LABS[0];visited.add(Lb.id);set("visited",[...visited]);if(Lb.film!==film){film=Lb.film;paintRail();}paintFilms();
     tabs().forEach(b=>{const on=b.dataset.id===Lb.id;b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1;b.classList.toggle("done",visited.has(b.dataset.id));});
     const ls=ofFilm(film),i=ls.indexOf(Lb),all=LABS.indexOf(Lb),nxt=LABS[all+1],f=filmOf(film);
-    holder.replaceChildren(h("div",{class:"stop",style:"--c:"+(css(Lb.c)||Lb.c)},
+    holder.replaceChildren(h("div",{class:"stop",style:"--c:"+pc(Lb.c)},
       h("div",{class:"stop-text"},h("p",{class:"kicker"},h("b",null,U.lab+" "+(all+1))," "+U.of+" "+LABS.length+" · "+f.title),h("h3",null,Lb.name),h("p",{class:"idea"},Lb.idea),h("ul",null,...Lb.points.map(p=>h("li",null,p))),
         h("details",{class:"real"},h("summary",null,U.inPractice),h("p",null,Lb.real)),
         h("div",{class:"stop-nav"},watchHref(Lb)?h("a",{class:"btn",href:watchHref(Lb)},U.watch):h("span",{class:"mr-coming"},U.coming),nxt?h("button",{type:"button",class:"btn primary",onclick:()=>show(nxt.id,true)},U.next+" "+nxt.name+" →"):h("a",{class:"btn primary",href:"../scenarios/"},U.makeCall))),
@@ -361,7 +365,7 @@ if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{}),ALL=-1;le
     h("button",{type:"button",class:"btn primary",onclick:()=>{if(last)results();else{cur+=1;render();}}},last?U.results:U.nextQ));}
   function render(){paintBar();const q=list[cur],f=PIX[q.vis],body=h("div",{class:"qbody"}),out=h("div"),prev=A(q),Lq=labOf(q.lab)||{};
     const vis=stage(1000,760,c=>{if(f)f(c,1000,760,q.st||{},Lq,1);},q.alt||q.title);
-    body.append(h("p",{class:"qtag",style:"--c:"+(css(Lq.c)||"#584ec4")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+list.length+(sel!==ALL?"":" · "+filmOf(q.film).title)),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
+    body.append(h("p",{class:"qtag",style:"--c:"+(pc(Lq.c)||"#b3abf0")},h("i"),U.scenario+" "+(cur+1)+" "+U.of+" "+list.length+(sel!==ALL?"":" · "+filmOf(q.film).title)),h("h3",null,q.title),h("p",{class:"qsit"},q.sit));
     if(q.type==="choice"){const box=h("div",{class:"qopts"});
       const answer=(i,save)=>{[...box.children].forEach((b,j)=>{b.disabled=true;if(q.opts[j].ok)b.classList.add("ok");});const o=q.opts[i];
         if(!o.ok){box.children[i].classList.add("no");box.children[i].append(h("small",null,o.why));}if(save)done(q,!!o.ok,i);out.replaceChildren(feed(!!o.ok,q),foot(q));};
@@ -376,7 +380,7 @@ if(quizApp&&QS.length){quizApp.textContent="";const ans=get("quiz",{}),ALL=-1;le
   function results(){paintBar();const ok=list.filter(q=>A(q)&&A(q).ok).length,n=list.length,band=L.done[ok>=n?0:ok>=n-2?1:ok>=n/2?2:3];
     const by={};list.forEach(q=>{const k=q.lab;by[k]=by[k]||{ok:0,n:0};by[k].n++;if(A(q)&&A(q).ok)by[k].ok++;});
     card.replaceChildren(h("div",{class:"qdone"},h("div",{class:"ring",style:"--p:"+Math.round(ok/n*100)},h("b",null,ok+"/"+n)),h("div",null,h("h3",null,band[0]),h("p",null,band[1]),
-      h("div",{class:"mastery"},...Object.keys(by).map(k=>h("a",{href:labHref(k),class:by[k].ok===by[k].n?"ok":"no",style:"--c:"+(css((labOf(k)||{}).c)||"#a0b2cd")},h("i"),labName(k)+" · "+by[k].ok+"/"+by[k].n))),
+      h("div",{class:"mastery"},...Object.keys(by).map(k=>h("a",{href:labHref(k),class:by[k].ok===by[k].n?"ok":"no",style:"--c:"+(pc((labOf(k)||{}).c)||"#a0b2cd")},h("i"),labName(k)+" · "+by[k].ok+"/"+by[k].n))),
       h("button",{type:"button",class:"btn",onclick:()=>{list.forEach(q=>delete ans[q.n]);set("quiz",ans);paintFilms();cur=0;render();}},U.again)),closing(sel===ALL?0:sel,sel===ALL)));}
   const fromHash=()=>{const hs=(location.hash||"").slice(1),fm=/^film-(\d+)$/.exec(hs),todo=QS.find(q=>!A(q));return fm&&QS.some(q=>q.film===+fm[1])?+fm[1]:hs==="all"?ALL:todo?todo.film:ALL;};
   pick(fromHash());window.addEventListener("hashchange",()=>{const n=fromHash();if(n!==sel)pick(n);});}

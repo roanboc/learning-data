@@ -55,6 +55,7 @@ const NARR={
 "who":{"name":"Who did what?","lead":0.9,"tail":1.0,"vo":[
  {"id":"reads","gap":0.8,"text":"On a person's sign-in, every step reads as that person's."},
  {"id":"log","gap":0.8,"text":"Jun's log says Jun, for what he did and for what his helper did."},
+ {"id":"cover","gap":0.8,"text":"Like a franked cover, it can't say who really did each step."},
  {"id":"anil","gap":0.8,"text":"The workload agent once ran on Anil's personal key, and the log couldn't tell his reads from his agent's."},
  {"id":"agent","gap":0.8,"text":"Had the helper approved, an agent's change would have been approved by an agent, with a person's name on it."},
  {"id":"stop","gap":0.8,"text":"And the helper can't be narrowed or stopped on its own: to every tool, it is Jun."},

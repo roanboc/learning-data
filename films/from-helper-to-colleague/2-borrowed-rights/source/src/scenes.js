@@ -223,6 +223,10 @@ scene("who",(ctx,S,t,sc)=>{const c=sc.cues,P=br_once(sc,"P",()=>({says:wAt(sc,"l
       br_ghost(x,640,640,640,"Had Jun said yes","Approved by Jun Park",{a:1-ag_in(tt,c.stop-0.6,0.5)});
       // on a person's sign-in every step reads as that person's: Jun's log, Jun on every row, and beside it who really did each step
       br_log(x,640,130,820,"Jun's log · Friday 16 October",BR_JUNLOG,{by:ag_in(tt,P.helperDid-0.3,0.6),a:ag_in(tt,c.reads,0.4)*(1-ag_in(tt,c.anil-0.4,0.4)),k:ag_spr(tt,c.reads)});
+      // like a franked cover, it can't say who really did each step: the opening's cover, franked, framed on the wall at the right, as
+      // the close frames it again (its desk and cover scaled from the close's picture, 560 px wide)
+      ag_picture(x,1530,150,330,220,{a:ag_in(tt,c.cover,0.5)*(1-ag_in(tt,c.anil-0.4,0.4)),draw:(cx,X,Y,Wd,Hd)=>{const k=Wd/560;
+        cx.drawImage(ag_place("brDesk"),X-200*k,Y-120*k,952*k,551*k);br_cover(cx,X+20,Y+18,290,{p:{addr:1,date:1,frank:1}});}});
       // the workload agent once ran on Anil's personal key, and the log couldn't tell his reads from his agent's
       br_log(x,640,130,820,"Its log, until September",BR_ANILLOG,{by:ag_in(tt,P.couldnt-0.3,0.6),a:ag_io(tt,c.anil+0.1,c.agent-0.3,0.4),k:ag_spr(tt,c.anil+0.1)});
       br_pillL(x,640,430,"on Anil's personal key",{icon:"warn",col:AG.amber,a:ag_io(tt,c.anil+0.6,c.agent-0.3,0.4)});

@@ -260,10 +260,15 @@ scene("column",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,
       const [qx,qy]=ws_ringAt(...ws_codeRing(x,kx,ky),rp);ws_pencil(x,qx,qy,gv_io(tt,P.ring-0.3,P.ring+1.2,0.3));
       const [px,py]=ws_penAt(x,"Mei Tanaka",r.sign[0],r.sign[1],38,sp);ws_pen(x,px,py,gv_io(tt,P.classed+0.15,P.classed+1.2,0.25));}},
     // the register again, open at the credentials table's page: the code and its class; and under its row, the court's line, drawn in
-    // pencil across the page as 1983's was drawn across the form
-    {cut:true,at:P.page,place:"regTop",keys:[[P.page,960,520,1.12],[P.page+0.1,940,540,1.2]],d:2,draw:(x,tt)=>{ws_regLeft(x,true);
-      const r=ws_regPage(x,"credentials table",WS_RGCR,{chips:i=>i===2?fin(tt,P.page+0.3,0.5):1,foot:"classed by Mei Tanaka"});
-      const ly=r.rows[2]+GV_REG.row/2+12,x0=WS_RG.x+30,x1=WS_RG.x+970,lp=fin(tt,P.line,1.0);ws_line(x,[x0,ly],[x1,ly],lp,5);ws_pencil(x,lerp(x0,x1,lp),ly,gv_io(tt,P.line-0.3,P.line+1.3,0.3));}}]);
+    // pencil across the page as 1983's was drawn across the form. The same desk, so the sheet and the card leave before the register
+    // comes (later). As the chapter ends the page turns, the line with it, to the learner table's page under it, where the next
+    // chapter starts
+    {later:true,dis:0.4,at:P.page+0.1,place:"regTop",keys:[[P.page,960,520,1.12],[P.page+0.1,940,540,1.2]],d:2,draw:(x,tt)=>{const tn=fin(tt,sc.dur-1.3,0.9);ws_regLeft(x,true);
+      if(tn>0)ws_regPage(x,"learner table",WS_RGL,{foot:"classed by Mei Tanaka"});
+      const r=ws_regPage(x,"credentials table",WS_RGCR,{chips:i=>i===2?fin(tt,P.page+0.3,0.5):1,foot:"classed by Mei Tanaka",turn:tn});if(tn>=1)return;
+      const ly=r.rows[2]+GV_REG.row/2+12,x0=WS_RG.x+30,x1=WS_RG.x+970,lp=fin(tt,P.line,1.0);x.save();
+      if(tn>0){const xv=Math.max(0,2000*(1-easeCam(tn))-1000)*WS_RG.w/1000;x.beginPath();x.rect(WS_RG.x-40,0,xv+40,H);x.clip();}
+      ws_line(x,[x0,ly],[x1,ly],lp,5);x.restore();ws_pencil(x,lerp(x0,x1,lp),ly,gv_io(tt,P.line-0.3,P.line+1.3,0.3));}}]);
   wc_paperOver(ctx,S);});
 
 // ---- 5 · The mask follows: the class travels with its column as a label, and one rule reads the label ----
@@ -281,14 +286,15 @@ scene("mask",(ctx,S,t,sc)=>{const c=sc.cues,P=ws_once(sc,"P",()=>{const w=(id,s,
       board2:c.bylabel-0.3,by:w("bylabel","by"),tom:w("every","tables")-0.2,near:sc.ends.every+0.6};});
   const B=WS_BD;
   gv_shots(ctx,S,t,sc.dur,[
-    // the register, as chapter 4 left it: a label lifts off the email's class, which stays where it is, and goes
-    {at:0,place:"regTop",keys:[[0,960,520,1.12],[0.1,980,520,1.14]],d:2,draw:(x,tt)=>{ws_regLeft(x);const r=ws_regPage(x,"learner table",WS_RGL,{foot:"classed by Mei Tanaka"});
+    // the register, as chapter 4 left it, open at the learner table's page: a label lifts off the email's class, which stays where it
+    // is, and goes
+    {at:0,place:"regTop",keys:[[0,960,520,1.12],[0.1,980,520,1.14]],d:2,draw:(x,tt)=>{ws_regLeft(x,true);const r=ws_regPage(x,"learner table",WS_RGL,{foot:"classed by Mei Tanaka"});
       const u=clamp((tt-P.lift+0.2)/1.6,0,1);if(u<=0||u>=1)return;const x0=r.cols[2]+28,y0=r.rows[3],a1=easeCam(clamp(u/0.35,0,1)),b=Math.pow(clamp((u-0.35)/0.65,0,1),2);
       ws_label(x,lerp(x0,x0+170,a1)+(2160-x0-170)*b,lerp(y0,y0-6,a1)-90*b,{a:clamp(u*5,0,1),rot:-0.03*a1+0.06*b,k:lerp(1,1.1,a1)});}},
-    // the data team's board: the label comes in from the left and ties on to the learner table's email; it runs along the string to the
-    // wallet, built from it, and ties on there too
+    // the data team's board: the label comes in from the left and ties on to the learner table's email, at the angle it then swings
+    // from; it runs along the string to the wallet, built from it, and ties on there too
     {cut:true,at:P.board,place:"boardData",keys:[[P.board,960,540,1]],d:2,push:0.01,draw:(x,tt)=>{ws_board(x,{lt:fin(tt,P.tie,1.0),wal:fin(tt,P.every+0.9,1.0)});
-      const u=clamp((tt-P.tie+1.6)/1.6,0,1);if(u>0&&u<1){const [hx,hy]=ws_bdTie(x,B.lt,1),e=easeCam(u);ws_label(x,lerp(-180,hx,e),lerp(hy-240,hy,e)-70*Math.sin(Math.PI*e),{rot:0.25*(1-e)});}
+      const u=clamp((tt-P.tie+1.6)/1.6,0,1);if(u>0&&u<1){const [hx,hy]=ws_bdTie(x,B.lt,1),e=easeCam(u);ws_label(x,lerp(-180,hx,e),lerp(hy-240,hy,e)-70*Math.sin(Math.PI*e),{rot:lerp(0.25,0.32,e)});}
       ws_bead(x,ws_bdAnchor(B.lt,1),ws_bdAnchor(B.wal,-1),(tt-P.every)/0.9,WS_DIRECT,11);}},
     // the platform team's desk: Sam pins the one rule up over it, and its band of stars slides in. He's mirrored, so the arm that goes up
     // and comes down swings over the screens, not out of the frame

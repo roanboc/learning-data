@@ -1927,26 +1927,88 @@ function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;c
 const gv_io=(t,t0,t1,d)=>fin(t,t0,d||0.4)*(1-fin(t,t1,d||0.4));
 
 /* ---------- the camera ---------- */
-// keys are [time, x, y, zoom], each move eased over d seconds (1.4 at least); push closes in a little more, slowly; kept inside the frame
-function gv_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
+// keys are [time, x, y, zoom], each move eased over d seconds (1.4 at least); push closes in a little more, slowly; kept inside the frame.
+// In one room the camera never jumps: a cut between two framings of one place makes the whole picture jump a little in, out or aside
+// (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+// vanishes in that frame, which the author saw as a jump in the zoom (4 November 2026). So a shot in the same room as the one before
+// (the same place, or two places GV_ROOMS makes one room; a shot that draws its own scene, with no place, names it in room) starts
+// where that one's camera is and glides to its own framing over its d,
+// and while it comes in, the shot before is drawn through that same camera: what both show stays put, and only what changed fades.
+// So what both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in
+// the same room, with people elsewhere, is marked later:true: what the shot before shows leaves over its last dis seconds, the bare
+// room shows for an instant (its place, and what GV_BARE draws in it), and the later moment's people and things come in over its first
+// dis, while the camera glides on. A cut there makes all of them vanish in one frame, and people a few steps away jump.
+// Only a change that moves the picture GV_NEWSHOT px or more at its corners is a new shot, which may cut
+const GV_NEWSHOT=300,GV_ROOMS={},GV_BARE={};let GV_JOIN=null,GV_PROBE=null;
+const gv_room=p=>p&&(GV_ROOMS[p]||p),gv_roomOf=sh=>sh&&gv_room(sh.room||sh.place);
+function gv_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;
     x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-// one shot: its place under the camera, then what it draws on top, in the place's coordinates; the shot closes in slowly until the next
-function gv_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=gv_focus(ctx,t,sh.keys,sh.d,push);if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-// a chapter cut into shots, [{at, place, keys, draw, push, d}]: each dissolves in from the one before over dis seconds; returns the shot.
-// A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-// lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
-function gv_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,
-    till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else gv_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function gv_focus(ctx,t,keys,d,push){const c=gv_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function gv_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return gv_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function gv_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function gv_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot: its place under the camera (its own, or cam when it shares one with the shot it dissolves with), then what it draws on top,
+// in the place's coordinates; the shot closes in slowly until the next
+function gv_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||gv_camOf(sh,t,till);cam=gv_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(gv_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function gv_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=wc_buf("cut",ctx.canvas.width,ctx.canvas.height);gv_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what GV_BARE draws in it (a light that every shot of it draws)
+function gv_bare(ctx,S,t,place,cam){gv_shot(ctx,S,t,{place,draw:GV_BARE[place]||null},t+1,cam);}
+// a chapter cut into shots, [{at, place, keys, draw, push, d, dis}]: each comes in from the one before over dis seconds (or its own
+// dis); returns the shot. Between rooms, a shot marked cut (cut:true) comes in on a cut: when two shots show the same people or the same
+// words, a dissolve lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost
+function gv_shots(ctx,S,t,end,shots,dis){const join=GV_JOIN;GV_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=gv_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?gv_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:gv_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&gv_roomOf(sh)&&gv_room(pv.place)===gv_roomOf(sh)&&gv_camMove(pv.cam,gv_camOf(sh,sh.at,till(k)))<GV_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:gv_roomOf(shots[i]),glides,dip};
+  if(GV_PROBE){Object.assign(GV_PROBE,{cam,place:gv_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)gv_shot(ctx,S,t,sh,till(i),join.cam);else{gv_bare(ctx,S,t,sh.place,join.cam);gv_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){gv_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);gv_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){gv_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));gv_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else gv_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function gv_probe(sc,t){const c=wc_buf("probe",2,2)[1],was=GV_PROBE,j=GV_JOIN;GV_PROBE={};try{sc.draw(c,0.001,t,sc);return GV_PROBE.cam?GV_PROBE:null;}
+  catch(e){return null;}finally{GV_PROBE=was;GV_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("gv_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.gvEnd!==undefined?pv.gvEnd:(pv.gvEnd=gv_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=GV_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});GV_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{GV_JOIN=was;if(J.out&&!J.cam)nx.gvLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.gvLast&&Math.abs(nx.gvLast.t-lt)<1e-6?nx.gvLast:gv_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=GV_JOIN;GV_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{GV_JOIN=was;}};}}
 // a place, painted once by the film's painter (WC_PLACES), and kept
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
@@ -2824,6 +2886,10 @@ function gp_arrow(ctx,a,b,bend,p,o){o=o||{};if(p<=0)return;const c=[(a[0]+b[0])/
   for(let i=0;i<=m;i++){const [x,y]=pt(i/n);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.setLineDash([]);
   if(p>=1&&o.head!==false){const [x1,y1]=pt(1),[x0,y0]=pt(0.93),an=Math.atan2(y1-y0,x1-x0);ctx.beginPath();ctx.moveTo(x1-16*Math.cos(an-0.5),y1-16*Math.sin(an-0.5));
     ctx.lineTo(x1,y1);ctx.lineTo(x1-16*Math.cos(an+0.5),y1-16*Math.sin(an+0.5));ctx.stroke();}ctx.restore();}
+// handwriting written in place: the line laid out whole (right-aligned at x, or centred on it) and its letters written from its left,
+// so what is written stays put as the next letters come (wc_hand, right-aligned or centred, moved them along a letter at a time)
+function gp_hand(ctx,s,x,y,o){o=Object.assign({},o||{});const al=o.align==="right"?1:o.align==="center"?0.5:0;delete o.align;
+  wc_hand(ctx,s,x-al*tw(ctx,s,o.size||32,o.w||600),y,o);}
 // a red question mark, settling with a spring
 function gp_redQ(ctx,x,y,s,p){if(p<=0)return;const k=spring(p);ctx.save();ctx.translate(x,y);ctx.scale(k,k);withA(ctx,clamp(p*2,0,1),()=>wc_T(ctx,"?",0,0,{w:800,size:s,align:"center",col:GV.redInk}));ctx.restore();}
 // until now: the colours fade a little, warmer and paler (as Who may see it draws a memory)
@@ -2876,9 +2942,9 @@ function gp_awningC(col,w){return wc_kept("gpAwn"+col.join(",")+"|"+w,w+40,90,q=
   wc_ink(q,[[0,0],[w,0]],false,2,WC_PENCIL,0.7,61,0.6);});}
 // a product's card, as a stall (top left x,y, w by h): its awning, its name (as large as fits, 28 px or more), its owner. o.lit: a gold ring
 // round it; o.own: its owner washed gold; o.n (0 to 1): how many of the ten tables it holds, on a chip at its top right; o.a; o.size: the
-// name's largest size
+// name's largest size; o.bare: only what's written on it, for a card already drawn
 function gp_stall(ctx,i,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const [name,own,col]=GP_SIX[i],sz=o.size||32,ns=Math.max(28,Math.min(sz,sz*(w-40)/tw(ctx,name,sz,700)));
-  withA(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:700+i});ctx.drawImage(gp_awningC(col,w+12),x-26,y-20);
+  withA(ctx,a,()=>{if(!o.bare){wc_panel(ctx,x,y,w,h,{kind:"card",seed:700+i});ctx.drawImage(gp_awningC(col,w+12),x-26,y-20);}
     const lit=clamp(o.lit||0,0,1);if(lit>0.01){ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95*lit);ctx.lineWidth=5;rr(ctx,x-6,y-6,w+12,h+12,14);ctx.stroke();ctx.restore();}
     const ny=y+Math.max(h*0.5+8,92);wc_T(ctx,name,x+20,ny,{w:700,size:ns,col:WC_DARK});const oy=ny+(o.gap||48),os=o.ownSize||28,ow=tw(ctx,"owner: "+own,os,600);
     const g=clamp(o.own||0,0,1);if(g>0.01)wc_panel(ctx,x+12,oy-os*0.95,Math.round((ow+16)*easeCam(g))+2,Math.round(os*1.4),{kind:"tag",wash:GV.gold,washA:0.42,seed:720+i});
@@ -2902,7 +2968,8 @@ function gp_board6(ctx,o){o=o||{};gp_head(ctx,"Data products",1);const op=clamp(
   ctx.save();ctx.filter="blur(14px)";ctx.fillStyle=`rgba(40,40,50,${0.22*u})`;ctx.fillRect(r[0]+10,r[1]+18,r[2],r[3]);ctx.restore();
   wc_panel(ctx,r[0],r[1],r[2],r[3],{kind:"card",seed:731});ctx.drawImage(gp_awningC(GP_SIX[2][2],Math.round(r[2])+12),r[0]-26,r[1]-20);
   ctx.save();ctx.strokeStyle=rgba(GV.gold,0.95*u);ctx.lineWidth=5;rr(ctx,r[0]-6,r[1]-6,r[2]+12,r[3]+12,14);ctx.stroke();ctx.restore();
-  if(u<0.5)wc_T(ctx,GP_SIX[2][0],r[0]+20,r[1]+r[3]*0.5+8,{w:700,size:30,col:WC_DARK,a:1-u*2});
+  // what the stall said, its name and its owner, as it said it, going as the card grows, so nothing on it changes in a frame
+  if(u<0.5)gp_stall(ctx,2,r[0],r[1],r[2],r[3],{size:34,own:o.own||0,a:1-u*2,bare:true});
   if(u>0.9)withA(ctx,clamp((u-0.9)/0.1,0,1),()=>{const [x,y]=GP_BIGC;wc_T(ctx,"Learners near an award",x+52,y+150,{w:800,size:52,col:WC_DARK});
     [["owner:","Clara Jensen, Planning"],["promise:","ready by 7 a.m. on census day"]].forEach(([l,v],k)=>{const p=clamp((o.rows||[])[k]==null?1:o.rows[k],0,1);if(p<=0.01)return;
       const ry=y+262+k*92;withA(ctx,p,()=>{if(k===0)wc_panel(ctx,x+40,ry-44,Math.round(tw(ctx,l+" "+v,36,700)+36),62,{kind:"tag",wash:GV.gold,washA:0.42*p,seed:733});
@@ -2989,10 +3056,16 @@ function gp_written(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),ck=clamp
 const GP_CV=[{n:140,s:"  - name: credit_points"},{fold:1},{s:"  - name: counts_as_award",add:1},{s:"    logicalType: boolean",add:1},{s:"    physicalType: boolean",add:1},
   {s:"    required: false",add:1},{s:"    classification: none",add:1},{n:147,s:"  - name: issued_on"}],
   GP_RD=[["census_report","Planning"],["draft_submission","registrar's office"],["wallet_app","Wallet app team"]];
-function gp_junCol(ctx,t,o){o=o||{};const ad=clamp(o.add||0,0,1),rows=GP_CV.map((r,i)=>r.add?Object.assign({},r,{dA:ad,p:clamp(ad*6-(i-2),0,1)}):r).filter((r,i)=>!r.add||ad>0.01||i===7);
-  const f=gu_file(ctx,90,60,1180,{path:"governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:ad>0.01?rows:[GP_CV[0],GP_CV[1],GP_CV[7]]});gp_gen(ctx,1250,30,1);
-  if(ad>0.01&&f.rows.length>6)gp_mark(ctx,f.tx,f.rows[2],GP_CV[2].s,"counts_as_award",clamp(ad*2-1,0,1),GV.green);
-  const rd=clamp(o.read==null?1:o.read,0,1),ok=clamp(o.ok||0,0,1),my=f.rows.length>6?(f.rows[2]+f.rows[6])/2:f.rows[1];
+// The sheet is as long as the contract will be. The five new lines open first (op), the last line moving down to make room for them,
+// then they're typed in (ty), so no line jumps down in a frame
+function gp_junCol(ctx,t,o){o=o||{};const ad=clamp(o.add||0,0,1),op=easeCam(clamp(ad/0.25,0,1)),ty=clamp((ad-0.25)/0.75,0,1),lh=GU_F.lh;
+  const f=gu_file(ctx,90,60,1180,{path:"governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:GP_CV.map(r=>r.add||r.n===147?{s:""}:r)});gp_gen(ctx,1250,30,1);
+  if(op>0.01)GP_CV.forEach((r,i)=>{if(!r.add)return;const cy=f.rows[i],by=cy+10,p=clamp(ty*6-(i-2),0,1);
+    withA(ctx,op,()=>{gv_tint(ctx,104,cy-lh/2+3,1152,lh-6,GV.green,0.5);wc_T(ctx,"+",f.tx-26,by,{w:500,size:28,f:"mono",col:GV.greenInk,align:"right"});});
+    if(p>0){const lw=gu_code(ctx,r.s.slice(0,Math.ceil(r.s.length*p)),f.tx,by,{lang:"yaml"});if(p<1){ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(f.tx+lw+3,by-26,3,32);}}});
+  const ly=lerp(f.rows[2],f.rows[7],op)+10;wc_T(ctx,"147",f.tx-26,ly,{w:500,size:28,f:"mono",col:WC_MUTED,align:"right"});gu_code(ctx,GP_CV[7].s,f.tx,ly,{lang:"yaml"});
+  if(ty>0)gp_mark(ctx,f.tx,f.rows[2],GP_CV[2].s,"counts_as_award",clamp(ad*2-1,0,1),GV.green);
+  const rd=clamp(o.read==null?1:o.read,0,1),ok=clamp(o.ok||0,0,1),my=lerp(f.rows[1],(f.rows[2]+f.rows[6])/2,op);
   GP_RD.forEach(([n,w],i)=>{const v=clamp(rd*3-i,0,1);if(v<=0.01)return;const x=1340,y=70+i*170,cw=490,ch=132;
     gp_thread(ctx,[1250,my],[x+4,y+ch/2],clamp(v*1.6,0,1),{col:WC_PENCIL,bend:-20+i*20,lw:3.5});
     gp_rise(ctx,clamp(v*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,cw,ch,{kind:"card",seed:361+i});wc_T(ctx,n,x+30,y+56,{w:500,size:28,f:"mono",col:WC_DARK});
@@ -3014,7 +3087,7 @@ function gp_stay(ctx,t,o){o=o||{};const cd=clamp(o.cards==null?1:o.cards,0,1),rd
   [[150,"Catalogue · today",GP_CATBAR],[1010,"Another catalogue",GP_NEWBAR]].forEach(([x,ttl,bar],i)=>gp_rise(ctx,clamp(cd*2-i,0,1),()=>gp_win(ctx,x,96,760,330,ttl,q=>gp_card(q,x,96,760),bar),16));
   const f=gu_file(ctx,360,560,1200,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:[{n:6,s:"name: Learners near an award"}]});
   [[[760,556],[530,440]],[[1160,556],[1390,440]]].forEach(([a,b],i)=>gp_arrow(ctx,a,b,-10,clamp(rd*2-i*0.5,0,1),{col:GU_CYAN,lw:4}));
-  if(o.own>0.01)wc_hand(ctx,"the university's, kept in its project",960,800,{size:38,w:700,col:GV.goldInk,align:"center",p:clamp(o.own,0,1)});}
+  if(o.own>0.01)gp_hand(ctx,"the university's, kept in its project",960,800,{size:38,w:700,col:GV.goldInk,align:"center",p:clamp(o.own,0,1)});}
 
 /* ---------- 2 · written by its owner ---------- */
 // Clara's product file, as she wrote it (governance/4-data-products/learners_near_an_award.yml): o.lit[k] lights its parts as they're
@@ -3028,7 +3101,7 @@ const GP_PF=[{n:6,s:"name: learners_near_an_award"},{fold:1},{n:8,s:"owner: \"Cl
   GP_PFL=[[4],[6],[2],[8,9],[10],[11],[12],[13,14]];
 function gp_prodFile(ctx,o){o=o||{};const L=o.lit||[],lit=new Array(GP_PF.length).fill(0);GP_PFL.forEach((rs,k)=>rs.forEach(r=>{lit[r]=Math.max(lit[r],clamp(L[k]||0,0,1));}));
   const f=gp_file(ctx,70,50,1780,o.u==null?1:o.u,{path:"governance/4-data-products/learners_near_an_award.yml",lang:"yaml",lines:GP_PF.map((r,i)=>lit[i]>0.01?Object.assign({},r,{lit:lit[i]}):r)});
-  if(f.rows.length&&o.note>0.01)wc_hand(ctx,"written by its owner",1820,f.rows[0]-58,{size:38,w:700,col:WC_PENCIL,align:"right",p:clamp(o.note,0,1)});}
+  if(f.rows.length&&o.note>0.01)gp_hand(ctx,"written by its owner",1820,f.rows[0]-58,{size:38,w:700,col:WC_PENCIL,align:"right",p:clamp(o.note,0,1)});}
 // Planning's office, close, the camera at the height of someone sitting (as Quality on the platform drew it): a pale green wall, a
 // window, a chart pinned up; the desk (its front layer) with a screen, a keyboard and a mug
 const GP_PX={top:800,seat:[1480,1.7],screen:[380,236,800,450],win:[60,56,250,420],chart:[1250,60,440,286]};
@@ -3072,7 +3145,7 @@ function gp_contractDesk(ctx,t,o){o=o||{};const C=gu_file(ctx,990,50,880,{path:"
   if(o.std>0.01)withA(ctx,clamp(o.std,0,1),()=>wc_tag(ctx,1850,C.rows[1],"Open Data Contract Standard",{align:"right",size:28,wash:GU_CYAN,washA:0.25,seed:342}));
   const src=clamp(o.src||0,0,1),out=1-clamp(src*2.5,0,1);
   if(out>0.01)GP_NOTES.forEach(([s,r],k)=>{const v=clamp((o.note||[])[k]||0,0,1)*out;if(v<=0.01)return;const ry=C.rows[r];
-    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});wc_hand(ctx,s,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
+    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});gp_hand(ctx,s,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
   const pn=clamp(o.pen||0,0,1);if(pn>0.01){const e=easeCam(clamp(pn*1.6,0,1)),x=lerp(-80,940,e)+(pn>0.7?Math.sin(t*16)*3*(1-pn):0);gp_pencil(ctx,x,C.rows[0]+14,-0.18,clamp(pn*4,0,1)*out);}
   if(src<=0.01)return;const e=easeCam(src),ma=clamp(src*2.2-0.9,0,1),dy=24*(1-e);
   const M=gu_file(ctx,50,60+dy,880,{path:"models/marts/planning/_planning__models.yml",lang:"yaml",lines:GP_MD,a:ma});
@@ -3092,8 +3165,8 @@ function gp_prCheck(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,
   wc_T(ctx,"governance/5-data-contracts/mart_planning__near_award.yaml",182,342,{w:500,size:28,f:"mono",col:WC_MUTED});
   [["    description: 'Planning''s census date: the date the numbers are as at. …'",1],["    description: 'The date the numbers are counted at.'",0]].forEach(([s,del],i)=>{const ry=402+i*46;
     gv_tint(ctx,166,ry-32,1588,44,del?GV.red:GV.green,0.45);wc_T(ctx,del?"−":"+",226,ry,{w:500,size:28,f:"mono",col:del?GV.redInk:GV.greenInk,align:"right"});gu_code(ctx,s,246,ry,{lang:"yaml"});});
-  wc_hand(ctx,"edited by hand",1740,504,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand==null?1:o.hand,0,1)*(1-clamp(ps*3,0,1))});
-  if(ps>0.34)wc_hand(ctx,"then made in the model, and the script run",1740,504,{size:34,w:700,col:GV.greenInk,align:"right",p:clamp(ps*1.5-0.5,0,1)});
+  gp_hand(ctx,"edited by hand",1740,504,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand==null?1:o.hand,0,1)*(1-clamp(ps*3,0,1))});
+  if(ps>0.34)gp_hand(ctx,"then made in the model, and the script run",1740,504,{size:34,w:700,col:GV.greenInk,align:"right",p:clamp(ps*1.5-0.5,0,1)});
   const st=k=>k==="products"?(ps>0.5?"pass":fl>0.5?"fail":fl>0.01?"run":"wait"):(fl>0.01||ps>0.01?"pass":"wait"),
     its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:st(n)}));
   const msg=ps>0.5?GP_OK16.map(s=>({s,col:GV.greenInk,p:clamp(ps*2-1,0,1)})):GP_OOD.map(s=>({s,col:GV.redInk,p:clamp(fl*2-1,0,1)}));
@@ -3185,7 +3258,7 @@ function gp_verCard(ctx,x,y,w,h,ver,col,seed,lit){wc_panel(ctx,x,y,w,h,{kind:"ca
 function gp_editions(ctx,t,o){o=o||{};const v1=clamp(o.v1==null?1:o.v1,0,1),v2=clamp(o.v2||0,0,1),dt=clamp(o.date||0,0,1),rd=clamp(o.rd||0,0,1);
   gp_head(ctx,"Clara's table",clamp(v1*2,0,1));
   gp_rise(ctx,v1,()=>gp_verCard(ctx,260,300,600,290,"1","faculty_code",461,0),16);
-  if(dt>0.01){wc_hand(ctx,"a date to go",700,672,{size:44,w:700,col:GV.redInk,align:"center",p:dt});wc_ring(ctx,700,656,170,44,clamp(dt*1.4-0.3,0,1),{col:GV.redInk,lw:4});}
+  if(dt>0.01){gp_hand(ctx,"a date to go",700,672,{size:44,w:700,col:GV.redInk,align:"center",p:dt});wc_ring(ctx,700,656,170,44,clamp(dt*1.4-0.3,0,1),{col:GV.redInk,lw:4});}
   if(v2>0.01){const e=easeCam(v2);withA(ctx,clamp(v2*1.6,0,1),()=>gp_verCard(ctx,lerp(1340,1060,e),300,600,290,"2","faculty",462,clamp(v2*2-1,0,1)));}
   if(rd>0.01){const x=240,y=730,w=440,h=96;gp_thread(ctx,[x+w/2,y],[x+w/2,596],clamp(rd*1.6,0,1),{col:WC_PENCIL,bend:0,lw:3.5});
     gp_rise(ctx,clamp(rd*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:463});wc_T(ctx,"census_dashboard",x+30,y+60,{w:500,size:28,f:"mono",col:WC_DARK});},10);}}
@@ -3215,7 +3288,7 @@ function gp_readers(ctx,t,o){o=o||{};const rd=clamp(o.rd||0,0,1),bl=clamp(o.buil
     gp_thread(ctx,end,[x,y+h/2],clamp(rd*1.6,0,1),{col:WC_PENCIL,bend:-10,lw:3.5});
     gp_rise(ctx,clamp(rd*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:471});wc_T(ctx,"census_dashboard",x+30,y+58,{w:500,size:28,f:"mono",col:WC_DARK});
       wc_T(ctx,"owned by Planning",x+30,y+104,{w:600,size:28,col:WC_MUTED});},12);
-    wc_hand(ctx,"from dbt's exposures: who uses what",x+w,y+h+52,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(rd*1.6-0.6,0,1)});}
+    gp_hand(ctx,"from dbt's exposures: who uses what",x+w,y+h+52,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(rd*1.6-0.6,0,1)});}
   if(bl>0.01)[[0,70],[1,330]].forEach(([p,y],k)=>{const v=clamp(bl*2-k*0.5,0,1);if(v<=0.01)return;
     gp_rise(ctx,v,()=>gp_stall(ctx,p,1250,y,600,200,{size:34,own:clamp(v*1.4-0.4,0,1)}),16);
     GP_RDS.forEach((r,i)=>{if(r.pr!==p)return;gp_thread(ctx,[F.tx+gu_mw(ctx,r.s)+18,F.rows[i]],[1244,y+100],clamp(v*1.6-0.3,0,1),{col:mix(GP_SIX[p][2],WC_DARK,0.3),bend:-20,lw:3.5});});});}
@@ -3378,7 +3451,7 @@ function gp_home(ctx,t,o){o=o||{};const [bx,by,bw,bh]=gv_mapFree(GV_MC[0],GV_MC[
   const s1="governance/",w1=Math.round(gu_mw(ctx,s1)+92),x1=bx+20,s2="Ontos",w2=Math.round(tw(ctx,s2,30,700)+40),x2=x1+w1+170;
   if(hm>0.01)gp_rise(ctx,hm,()=>{wc_panel(ctx,x1,cy-30,w1,60,{kind:"chip",wash:[255,253,246],washA:0.9,seed:591});gp_house(ctx,x1+34,cy+1,0.9);
     wc_T(ctx,s1,x1+64,cy+10,{w:500,size:28,f:"mono",col:WC_DARK});},10);
-  if(ar>0.01){gp_arrow(ctx,[x1+w1+16,cy],[x2-16,cy],0,clamp(ar*1.4,0,1),{col:WC_PENCIL,lw:4});wc_hand(ctx,"copy",(x1+w1+x2)/2,cy-42,{size:32,w:700,col:WC_PENCIL,align:"center",p:clamp(ar*1.6-0.4,0,1)});}
+  if(ar>0.01){gp_arrow(ctx,[x1+w1+16,cy],[x2-16,cy],0,clamp(ar*1.4,0,1),{col:WC_PENCIL,lw:4});gp_hand(ctx,"copy",(x1+w1+x2)/2,cy-42,{size:32,w:700,col:WC_PENCIL,align:"center",p:clamp(ar*1.6-0.4,0,1)});}
   if(cp>0.01)gp_rise(ctx,cp,()=>{wc_panel(ctx,x2,cy-30,w2,60,{kind:"chip",dashed:true,seed:592});wc_T(ctx,s2,x2+20,cy+11,{w:700,size:30,col:WC_MUTED});},10);
   if(o.tag>0.01)gu_filmTag(ctx,bx+bw-10,by+bh+64,"Where each piece lives",clamp(o.tag,0,1),{align:"right"});}
 
@@ -3464,7 +3537,7 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(
     {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.frm)/1.0,0,1),thr:clamp((tt-P.dis+0.4)/1.4,0,1),
       ck:clamp((tt-P.stp)/1.4,0,1)})},
     // Jun's column on credentials: its contract grows by a line, by itself, and every report that reads it still works
-    {cut:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
+    {later:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
       ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.jun+0.3,P.tn-0.4,0.4));}},
     // the data team's board: the ten tables other teams read, each ticked, checked on every change
     {at:P.tn,place:"board",keys:[[P.tn,960,500,1]],push:0.02,draw:(x,tt)=>gp_ten(x,tt,{u:clamp((tt-P.tn-0.1)/1.6,0,1),tick:clamp((tt-P.prom)/1.6,0,1),ck:fin(tt,P.chk,0.6)})},
@@ -3539,7 +3612,7 @@ scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"f
     {at:P.tw,place:"desk",keys:[[P.tw,960,540,1]],push:0.02,draw:(x,tt)=>gp_credVers(x,tt,{u:clamp((tt-P.tw-0.1)/0.9,0,1),two:fin(tt,P.has,0.6),date:fin(tt,P.ret,0.6),
       ring:clamp((tt-P.d31)/1.0,0,1),c:clamp((tt-P.cs)/0.9,0,1),dep:fin(tt,P.dep,0.6),out:clamp((tt-P.out)/1.0,0,1)})},
     // better, add: Jun's column again, and every reader still whole
-    {cut:true,at:P.ad,place:"desk",keys:[[P.ad,960,540,1]],push:0.02,draw:(x,tt)=>gp_junCol(x,tt,{add:clamp((tt-P.nc)/1.0,0,1),read:1,ok:clamp((tt-P.nb)/0.9,0,1),
+    {later:true,at:P.ad,place:"desk",keys:[[P.ad,960,540,1]],push:0.02,draw:(x,tt)=>gp_junCol(x,tt,{add:clamp((tt-P.nc)/1.0,0,1),read:1,ok:clamp((tt-P.nb)/0.9,0,1),
       tag:fin(tt,P.ad+0.4,0.5),tagTitle:"Change without surprises"})}],sc.dur,1));});
 
 // ---- 6 · Who reads it: Clara's descriptor, who reads it, from dbt's exposures: the census dashboard; what it's built from: two of Mei's
@@ -3548,9 +3621,9 @@ scene("readers",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({rec:wAt(sc
     chg:wAt(sc,"when","one of them changes"),mk:wAt(sc,"when","Mei knows"),tell:wAt(sc,"when","who to tell"),ship:wAt(sc,"when","before anything ships")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
     // Clara's descriptor: its readers, then its inputs, two of Mei's products
-    {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_readers(x,tt,{u:clamp((tt-0.2)/0.9,0,1),rd:clamp((tt-P.rec)/2.0,0,1),built:clamp((tt-P.bf)/2.0,0,1)})},
+    {later:true,at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_readers(x,tt,{u:clamp((tt-0.2)/0.9,0,1),rd:clamp((tt-P.rec)/2.0,0,1),built:clamp((tt-P.bf)/2.0,0,1)})},
     // learner_records' descriptor: the products that read it; Mei tells each of their owners
-    {cut:true,at:P.wh,place:"desk",keys:[[P.wh,960,540,1]],push:0.02,draw:(x,tt)=>gp_meiTells(x,tt,{u:clamp((tt-P.wh-0.1)/0.9,0,1),lit:clamp((tt-P.chg)/1.2,0,1),mei:fin(tt,P.mk,0.6),
+    {later:true,at:P.wh,place:"desk",keys:[[P.wh,960,540,1]],push:0.02,draw:(x,tt)=>gp_meiTells(x,tt,{u:clamp((tt-P.wh-0.1)/0.9,0,1),lit:clamp((tt-P.chg)/1.2,0,1),mei:fin(tt,P.mk,0.6),
       tell:clamp((tt-P.tell)/2.4,0,1),tag:fin(tt,P.ship,0.5)})}],sc.dur,1));});
 
 // ---- 7 · Open standards: the two files and the two standards they're written in, as books, kept by Bitol at the Linux Foundation,
@@ -3564,7 +3637,7 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({bf:wAt(sc,"bo
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_books(x,tt,{files:clamp((tt-P.bf)/0.9,0,1),u:[fin(tt,P.dp,0.8),fin(tt,P.dc,0.8)],
       thr:clamp((tt-P.dc-0.2)/1.4,0,1),who:fin(tt,P.bit,0.6),lic:fin(tt,P.free,0.6),newer:clamp((tt-P.ver)/1.2,0,1)})},
     // three tools read the contract; the check, in a terminal: every file up to date and valid
-    {cut:true,at:P.tl,place:"desk",keys:[[P.tl,960,540,1]],push:0.02,draw:(x,tt)=>gp_tools(x,tt,{read:clamp((tt-P.tk)/2.0,0,1),chk:clamp((tt-P.ck)/1.4,0,1),valid:fin(tt,P.rl,0.6)})},
+    {later:true,at:P.tl,place:"desk",keys:[[P.tl,960,540,1]],push:0.02,draw:(x,tt)=>gp_tools(x,tt,{read:clamp((tt-P.tk)/2.0,0,1),chk:clamp((tt-P.ck)/1.4,0,1),valid:fin(tt,P.rl,0.6)})},
     // the versions it keeps: what the catalogue reads today, and how to move to a newer one
     {at:P.kp,place:"desk",keys:[[P.kp,960,540,1]],push:0.02,draw:(x,tt)=>gp_kept(x,tt,{u:clamp((tt-P.kp-0.1)/0.9,0,1),dir:fin(tt,P.kp+0.5,0.6),lit:fin(tt,P.today,0.6),
       move:fin(tt,P.mv,0.6)})}],sc.dur));});
@@ -3585,9 +3658,9 @@ scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(s
     // Ontos imports the contract from its file
     {at:P.imp,place:"bigPlat",keys:[[P.imp,960,540,1]],push:0.02,draw:(x,tt)=>gp_import(x,tt,{up:clamp((tt-P.ff+0.3)/0.9,0,1),rev:clamp((tt-P.ff-0.6)/0.9,0,1)})},
     // and lays the products out by domain, each with its owner team
-    {cut:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
+    {later:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
     // Clara's product on its way to being published: a data steward reviews and approves; its owner publishes
-    {cut:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
+    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
       stw:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
     // the policy every night: an active product with no owner is tagged, and governance is told
     {at:P.po,place:"bigPlat",keys:[[P.po,960,540,1]],push:0.02,draw:(x,tt)=>gp_policy(x,tt,{sch:fin(tt,P.eve,0.6),lit:[0,gv_io(tt,P.act,P.no,0.4),fin(tt,P.no,0.5),0,

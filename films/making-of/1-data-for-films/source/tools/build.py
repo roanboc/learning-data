@@ -11,13 +11,14 @@ ILD_OWN=S/'ild';ILD_OWN_FILES={'narration.js','vodur.js','breath.js','scA.js','s
 ild='const ILD=(function(){\n'+'\n'.join(((ILD_OWN if f in ILD_OWN_FILES else SS)/f).read_text() for f in ILD_FILES)+'\n'+eng+'\nCAPS_ON=false;return{renderFrame,prepAssets,TL,SCENES};})();'
 # shared components and engine from The Inner Life of Data, then this film's narration, timings, pauses, components and scenes; the engine comes last,
 # and waits for the embedded film's assets too (PREP_MORE), so a render never draws it half-loaded
-# the layer that makes the film's text read on a phone (From words to data's phone.js) comes after the scenes, before the engine
-PHONE=ROOT.parents[2]/'from-words-to-data'/'shared'/'src'/'phone.js'
+# the layer that makes the film's text read on a phone (From words to data's phone.js) comes after the scenes, before the engine, and
+# where the film's chapters meet (From words to data's joins.js: its CHAPTER_JOINS) after the engine
+PHONE=ROOT.parents[2]/'from-words-to-data'/'shared'/'src'/'phone.js';JOINS=ROOT.parents[2]/'from-words-to-data'/'shared'/'src'/'joins.js'
 FILES=[SS/'core.js',SS/'logos.js',SS/'style2.js',S/'narration.js',S/'vodur.js',S/'breath.js',SS/'ui3.js',S/'frames.js',S/'scenes.js',PHONE]
 engine=eng=(SS/'engine3.js').read_text();hook='async function prepAssets(){'
 assert engine.count(hook)==1,'engine3.js changed: update the PREP_MORE hook in tools/build.py'
 engine=engine.replace(hook,hook+'if(typeof PREP_MORE==="function")await PREP_MORE();')
-js=ild+'\n'+'\n'.join(f.read_text() for f in FILES if f.exists())+'\n'+engine
+js=ild+'\n'+'\n'.join(f.read_text() for f in FILES if f.exists())+'\n'+engine+'\n'+JOINS.read_text()
 GF='<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">'
 # the render page carries its own fonts, so renders need no network and look the same on every machine
 FD=SHARED/'fonts'

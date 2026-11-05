@@ -52,9 +52,9 @@ function d3_card(ctx,cx,cy,w,h,kind,title,line,o){o=o||{};const a=o.a==null?1:o.
     if(head){archGlyph(ctx,kind,x0+46,y0_+36,22,gc);T(ctx,o.kindText||kind,x0+90,y0_+47,{f:"mono",w:600,size:30,color:rgba(gc,1),deco:o.deco});
       ctx.fillStyle=rgba(gc,0.35);ctx.fillRect(x0+16,y0_+70,w-32,1.5);top=y0_+72;}
     else archGlyph(ctx,kind,x0+36,cy,17,gc);
-    const tx=head?x0+26:x0+66,tw_=head?w-52:w-(o.st!=null?100:80),ls=wrapT(ctx,title,0,0,tw_,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35:0),mid=(top+cy+h/2)/2,y1=mid-tot/2+sz*0.8;
+    const la=o.lineA==null?1:o.lineA,tx=head?x0+26:x0+66,tw_=head?w-52:w-(o.st!=null?100:80),ls=wrapT(ctx,title,0,0,tw_,{size:sz,w:800,measure:true}),lh=sz*1.15,tot=ls.length*lh+(line?lsz*1.35*la:0),mid=(top+cy+h/2)/2,y1=mid-tot/2+sz*0.8;
     ls.forEach((l,i)=>T(ctx,l,tx,y1+i*lh,{w:800,size:sz,color:rgba(ink,0.94),deco:o.deco}));
-    if(line)T(ctx,line,tx,y1+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco});});}
+    if(line&&la>0.01)withA(ctx,la,()=>T(ctx,line,tx,y1+ls.length*lh+lsz*0.3,{w:600,size:lsz,color:rgba(ink,0.72),deco:o.deco}));});}
 // a sketch of the valley in marker on a sheet: hills with a wind farm on the left, the valley, a substation on the right; p draws the
 // new line from the wind farm, through the valley, to the substation. Returns the knot where the ropes are tied.
 function d3_valley(ctx,x,y,w,h,t,p){sheet(ctx,x,y,w,h,{rot:-0.004});

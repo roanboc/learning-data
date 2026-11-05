@@ -326,8 +326,7 @@ const WR_WARN=["[WARNING]: While compiling 'mart_wallet__old_reader': Found a re
 scene("version",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
   const cE=c("expire"),cB=c("breaks"),cD=c("date"),cT=c("tell"),cW=c("warn"),cC=c("choice");
-  // the catalog, carried from the last chapter, slides away
-  const go=ease(fin(t,0,1.0));withA(ctx,1-go,()=>wr_catalog(ctx,1060+500*go,100,780,600,t,{}));
+  // the last chapter's catalog leaves first, over the bare screen (CHAPTER_JOINS, at the end)
   withA(ctx,fin(t,0.4,0.6)*(1-fin(t,cE+1.5,0.6)),()=>T(ctx,"written once ≠ never changed",960,140,{w:800,size:40,align:"center"}));
   // core_credential, its old column, and the status a true or false can't hold
   const tNew=w("breaks","new version"),split=ease(fin(t,tNew-0.2,1.0)),tl=ease(fin(t,cT-0.6,1.2));
@@ -403,3 +402,8 @@ scene("loop",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
     arrive(ctx,960,440,t,w("declare","Then build"),()=>T(ctx,"Declare it. Then build it.",960,450,{w:800,size:34,align:"center"}),{dy:14});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Written once",WEED,"One home per fact. Everything else, generated.");
   vign(ctx,S);});
+
+// where the chapters meet (From words to data's joins.js): the pictures that carry on from the chapter before keep its camera; the
+// catalog and the new version are new pictures that show some of the same words elsewhere, so what was there leaves first, over the
+// bare screen
+const CHAPTER_JOINS={glide:["where","diagrams"],leave:["catalog","version"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

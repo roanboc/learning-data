@@ -54,8 +54,8 @@ scene("west",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
 /* ---------- 2. Three keys ---------- */
 scene("three",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
-  // Aisha's outline, carried from the past, moves to her place
-  const m=ease(fin(t,0,1.4)),bx=lerp(960,1420,m),by=lerp(800,730,m),bh=lerp(320,300,m);
+  // Aisha's outline, carried from the past, moves to her place once the past has faded
+  const m=ease(fin(t,0.5,1.4)),bx=lerp(960,1420,m),by=lerp(800,730,m),bh=lerp(320,300,m);
   sm_bust(ctx,bx,by,bh,KIND,{});T(ctx,"Aisha",bx,by+44,{w:800,size:28,align:"center",color:rgba(KIND,1)});
   arrive(ctx,1450,205,t,w("aisha","graduate")-0.2,()=>{glass(ctx,1150,150,600,112,18,TRUST,{glow:14,ea:0.8,fill:"rgba(7,12,24,0.95)"});T(ctx,"Graduate Certificate in Data Analytics",1172,196,{w:800,size:26});
     tag(ctx,1172,232,"completed",GOOD,{size:18});},{dy:24});
@@ -150,8 +150,8 @@ scene("rules",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
   ctx.save();drift(ctx,t,sc,{z:0.03});
   const cB=c("best"),cAi=c("aisha"),acr=w("aisha","ninety")-0.6,cOw=c("owned"),P1=1-fin(t,acr-0.6,0.5);
   // Aisha's qualified keys, carried from the last chapter, slip away to make room for the rules
-  // Aisha's qualified keys, carried from the last chapter, move left and wait for the rules
-  const kk=ease(fin(t,0,1.4)),ko=fin(t,c("id")-0.6,0.5);withA(ctx,1-ko,()=>{SM_AK.forEach(([pre,k],i)=>sm_key(ctx,lerp(1000,160,kk),lerp(170+i*80,260+i*90,kk),i<2?k:"aisha.k@mail.example",SRC3[i][1],{pre}));
+  // Aisha's qualified keys, carried from the last chapter, move left and wait for the rules, once that chapter has faded
+  const kk=ease(fin(t,0.5,1.4)),ko=fin(t,c("id")-0.6,0.5);withA(ctx,1-ko,()=>{SM_AK.forEach(([pre,k],i)=>sm_key(ctx,lerp(1000,160,kk),lerp(170+i*80,260+i*90,kk),i<2?k:"aisha.k@mail.example",SRC3[i][1],{pre}));
     arrive(ctx,360,180,t,w("same","same learner"),()=>tag(ctx,160,180,"the same learner?",EDGE_,{size:20}),{from:0.85});});
   withA(ctx,fin(t,w("same","most trusted"),0.6)*(1-fin(t,acr-0.4,0.7)),()=>{for(let k=0;k<6;k++){ctx.save();ctx.setLineDash([6,8]);ctx.strokeStyle=rgba(LAYER4[1][1],0.25);ctx.lineWidth=1.5;rr(ctx,1100,140+k*76,720,60,14);ctx.stroke();ctx.restore();}});
   withA(ctx,P1,()=>{
@@ -289,8 +289,8 @@ scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     arrive(ctx,1340,540,t,w("map","status map"),()=>tag(ctx,880,92,"status map · one row per code",TRUST,{size:20}),{from:0.85});
     const oT=w("map","registrar's");arrive(ctx,1340,640,t,oT-0.2,()=>sm_file(ctx,880,560,920,"seeds/reference/student/_student__seeds.yml",SM_SY,{size:19,lh:30,edge:TRUST,wrap:true}),{dy:24});
     arrive(ctx,1100,720,t,w("map","approves"),()=>{kt_gtick(ctx,900,722,18,1);T(ctx,"owner: registrar's office · approves every change",930,730,{w:700,size:22,color:rgba(TRUST,1)});},{from:0.85});});
-  // the key from the last chapter waits below, then takes the centre: one key, many rows behind it, and a clock
-  const mv=ease(fin(t,cN-0.3,1.4)),rx=lerp(lerp(1060,140,ease(fin(t,0,1.4))),700,mv),ry=lerp(lerp(594,700,ease(fin(t,0,1.4))),470,mv),rs=lerp(1,1.2,mv);
+  // the key from the last chapter waits below (once that chapter has faded), then takes the centre: one key, many rows behind it, and a clock
+  const mv=ease(fin(t,cN-0.3,1.4)),rx=lerp(lerp(1060,140,ease(fin(t,0.5,1.4))),700,mv),ry=lerp(lerp(594,700,ease(fin(t,0.5,1.4))),470,mv),rs=lerp(1,1.2,mv);
   const nR=w("next","many rows"),nV=w("next","many versions");
   for(let k=4;k>=1;k--){const q=fin(t,nR+k*0.18-0.18,0.5);if(q<=0)continue;withA(ctx,q*(0.75-k*0.12),()=>glass(ctx,rx+k*22,ry-k*22,410*rs,102*rs,12,TRUST,{glow:6,ea:0.4,fill:"rgba(6,10,20,0.9)"}));}
   sm_keyRow(ctx,rx,ry,rs,1);
@@ -301,3 +301,7 @@ scene("codes",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     arrive(ctx,1580,640,t,nV,()=>tag(ctx,1580,640,"many versions?",SOFT,{align:"center",size:20}),{from:0.85});}
   ctx.restore();dark(ctx,S,fin(t,B+0.3,0.9));weedsEnd(ctx,S,t,B,"What makes it the same one",WEED,"Looking alike isn't being the same. Write down what is.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before; the key sets come in
+// once the profiles have gone, since both show where their file runs
+const CHAPTER_JOINS={glide:["three","rules","codes"],leave:["sets"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

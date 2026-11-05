@@ -336,3 +336,7 @@ scene("stays",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),
     g.addColorStop(0,rgba(WC_PAPER,0.94));g.addColorStop(0.7,rgba(WC_PAPER,0.7));g.addColorStop(1,rgba(WC_PAPER,0));ctx.fillStyle=g;ctx.fillRect(-700,-700,1400,1400);ctx.restore();});}
   wc_end(ctx,S,t,B+0.8,"Roles come and go",KL,"Film 4 of 9");
   if(kl>0.01&&t<B+2.4){setScreen(ctx,S);withA(ctx,kl,()=>wc_T(ctx,KL,960,ky,{w:700,size:48,align:"center",col:WC_DARK}));}});
+
+// where the chapters meet (From words to data's joins.js): the last chapter goes outside, with the table's roles drawn again as bands,
+// so it opens on a cut
+const CHAPTER_JOINS={cut:["stays"]};

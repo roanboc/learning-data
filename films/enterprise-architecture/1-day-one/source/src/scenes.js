@@ -96,8 +96,8 @@ const D1_LESSONS=["start with why","capabilities outlast reorganisations","descr
 scene("methods",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03,y:450});
   const cC=c("champ"),gat=w("champ","Under the vocabulary"),cT=c("takes");
-  // the map, small, in the middle; it gives way to what the methods agree on
-  const shrink=ease(fin(t,0,1.2));withA(ctx,1-fin(t,gat-0.4,0.6),()=>layerStack(ctx,lerp(720,800,shrink),lerp(150,330,shrink),lerp(800,320,shrink),{sh:lerp(66,24,shrink),gap:lerp(16,8,shrink),size:lerp(30,13,shrink),deco:1}));
+  // the map, small, in the middle, once the last chapter has faded; it gives way to what the methods agree on
+  const shrink=ease(fin(t,0.5,1.2));withA(ctx,1-fin(t,gat-0.4,0.6),()=>layerStack(ctx,lerp(720,800,shrink),lerp(150,330,shrink),lerp(800,320,shrink),{sh:lerp(66,24,shrink),gap:lerp(16,8,shrink),size:lerp(30,13,shrink),deco:1}));
   const P=[[40,96],[500,96],[960,96],[1420,96],[270,650],[730,650],[1190,650]],words=[["three","Toe-gaff"],["three","Arky-mate"],["three","Zack-man"],["more","Business architecture"],["more","process frameworks"],["more","domain-driven"],["more","data management"]];
   P.forEach(([x,y],i)=>arrive(ctx,x+225,y+75,t,w(words[i][0],words[i][1])-0.15,()=>d1_methodCard(ctx,i,x,y,450,150,{hi:pulseAt(t,w(words[i][0],words[i][1]),1.6),a:1-0.45*fin(t,gat,0.8)}),{dy:24}));
   withA(ctx,fin(t,w("champ","champions"),0.5)*(1-fin(t,gat,0.5)),()=>T(ctx,"each has its champions",960,560,{w:700,size:34,align:"center",color:rgba(SOFT,1)}));
@@ -216,3 +216,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1220,300,t,cN,()=>sticky(ctx,1220,300,280,180,"Why does it exist?",{col:NOTEC[0],size:30,p:clamp((t-cN-0.3)/1.2,0,1),st:fin(t,cN+1.4,0.4)>0?0:null,rot:-0.03}),{dy:-40,from:1.08});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Day one",EAC,"Learn the place before you ask the questions.","Film 1 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the methods carry on from the map, so the camera carries on; the series'
+// map is a new picture with the layers elsewhere, so the rule leaves first, over the bare screen
+const CHAPTER_JOINS={glide:["methods"],leave:["series"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

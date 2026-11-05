@@ -258,3 +258,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),cA=c("arrived"),cG=c("grew"),c
     withA(ctx,fin(t,cN+1.8,0.5),()=>{T(ctx,"?",960,300,{w:800,size:72,align:"center",color:rgba(TRUST,0.6+0.4*g)});T(ctx,"one database?",960,580,{w:700,size:26,align:"center",color:rgba(CYAN,1)});});});
   endCard(ctx,S,t,B+0.3,"Many ways to read",MW_V,"Choose per question, not per fashion.");
   vign(ctx,S);});
+
+// where the chapters meet (joins.js): integrating lists the systems down the side, not along the top, so the four ways of modelling
+// leave first, over the bare screen, and then the list comes in
+const CHAPTER_JOINS={leave:["integrate"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

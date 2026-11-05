@@ -75,3 +75,7 @@ scene("end",(ctx,S,t,sc)=>{
   // the closing line keeps a margin at the frame's sides in every language (the Spanish one is longer)
   else{clearTo(ctx,S);const a=fin(t,cTg-0.25,0.8),tz=Math.min(104,104*(W-240)/Math.max(1,tw(ctx,"Move less. Mean more.",104,800)));withA(ctx,a,()=>T(ctx,"Move less. Mean more.",W/2,H/2-6,{w:800,size:tz,align:"center"}));withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"The Inner Life of Data",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"University edition",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
 });
+
+// where the chapters meet (From words to data's joins.js): refining and gold are new pictures that show the sketch's names and
+// Silver in other places, so what was there leaves first, over the bare grid, and then the chapter comes in
+const CHAPTER_JOINS={leave:["refine","gold"],bare:{refine:(ctx,S)=>{bgW(ctx,S,{x:820,y:520,z:0.95});vign(ctx,S);},gold:(ctx,S)=>{bgW(ctx,S,{x:380,y:540,z:1.2});vign(ctx,S);}}};

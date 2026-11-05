@@ -9,7 +9,7 @@
     "video": "dist/inner-life-of-data.mp4",
     "file": "inner-life-of-data.mp4",
     "captions": [["films/inner-life-of-data/captions/en.srt", "inner-life-of-data.en.srt"]],
-    "paths": ["films/inner-life-of-data/source", "films/from-words-to-data/shared/src/phone.js"],
+    "paths": ["films/inner-life-of-data/source", "films/from-words-to-data/shared/src/phone.js", "films/from-words-to-data/shared/src/joins.js", "films/data-governance/shared/tools/twice.py"],
     "legibility": {"texts": 262, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
   },
   {
@@ -22,7 +22,7 @@
     "video": "dist/es/inner-life-of-data.es.mp4",
     "file": "inner-life-of-data.es.mp4",
     "captions": [["films/inner-life-of-data/captions/es.srt", "inner-life-of-data.es.srt"]],
-    "paths": ["films/inner-life-of-data/source", "films/from-words-to-data/shared/src/phone.js"],
+    "paths": ["films/inner-life-of-data/source", "films/from-words-to-data/shared/src/phone.js", "films/from-words-to-data/shared/src/joins.js", "films/data-governance/shared/tools/twice.py"],
     "legibility": {"texts": 262, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
   }
 ]

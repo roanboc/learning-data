@@ -4,16 +4,17 @@
 const pulse=(t,t0,d)=>t>t0&&t<t0+(d||2.2)?Math.sin(Math.PI*(t-t0)/(d||2.2)):0;
 
 /* ---------- 1. 7:58 am · Yesterday's numbers ---------- */
-scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
-  room(ctx,S,t);camKeys(ctx,S,[[0,960,540,1.0],[B,985,528,1.04],[sc.dur+1,995,522,1.06]],t);
+scene("banner",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath"),oA=fin(t,B+0.1,0.6),tA=fin(t,B+0.6,0.7);
+  // once the frame has darkened all the way, the room under it isn't drawn: nothing of it shows as the next chapter comes in
+  if(oA<1){room(ctx,S,t);camKeys(ctx,S,[[0,960,540,1.0],[B,985,528,1.04],[sc.dur+1,995,522,1.06]],t);
   person(ctx,"ana",400,1180,1.34,{pose:"stand",pose2:"phone",mix:fin(t,c("asks")-0.6,0.5),expr:t>c("old")-0.5&&t<c("asks")+1.5?"concerned":t>c("note")+0.8?"concerned":"calm",t});
   dashboard(ctx,860,150,960,580,{banner:fin(t,c("note")+0.2),pulse:pulse(t,c("note")+0.2,2.4)+pulse(t,c("old")+1.2,2.4)});
   msg(ctx,490,236,330,"Ana → Sam","Are these numbers safe to use?",BIZ,fin(t,c("asks")+0.9,0.4),t>c("asks")-0.1?t:0);
   clockChip(ctx,S,"7:58","the morning before census date",fin(t,0.3));
-  setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});
+  setScreen(ctx,S);withA(ctx,fin(t,c("ana")+0.6),()=>{glass(ctx,1560,52,296,64,18,BIZ,{glow:10,ea:0.6,fill:"rgba(8,14,28,0.85)"});T(ctx,"9:00 · confirm classes",1586,94,{w:700,size:22});});}
   // the title, over a darker frame
   // the frame darkens first; the title comes in only once the dashboard has gone
-  const oA=fin(t,B+0.1,0.6),tA=fin(t,B+0.6,0.7);if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
+  if(oA>0){setScreen(ctx,S);ctx.fillStyle="rgba(3,5,11,"+oA+")";ctx.fillRect(0,0,W,H);
     withA(ctx,tA,()=>{glow(ctx,960,500,420,SK,0.12);T(ctx,"WHEN THINGS GO WRONG",960,450,{w:800,size:26,align:"center",color:rgba(SK,0.95)});T(ctx,"Silent change",960,540,{w:800,size:88,align:"center"});
       T(ctx,"why a change needs both sides",960,600,{w:600,size:26,align:"center",color:rgba(SOFT,0.95)});});}
   if(t<1.4){setScreen(ctx,S);ctx.fillStyle="rgba(0,0,0,"+(1-ease(t/1.4))+")";ctx.fillRect(0,0,W,H);}});
@@ -75,8 +76,9 @@ scene("thread",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
 // the rows in bronze as they arrived: the columns the contract will later name
 const ROWS=[["S-2231","DS101-S2","enrolled","2026-07-28"],["S-4410","DS101-S2","waitlisted","2026-08-24"],["S-1187","DS101-S2","enrolled","2026-08-02"],["S-5092","DS101-S2","waitlisted","2026-08-24"],["S-3368","DS101-S2","enrolled","2026-08-05"],["S-6120","DS101-S2","waitlisted","2026-08-24"]],COLX=[24,130,270,420];
 scene("bronze",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);
-  world(ctx,S);camKeys(ctx,S,[[0,750,560,1.3],[1.8,712,440,1.2],[c("new"),712,430,1.22],[sc.dur+1,712,430,1.24]],t);
-  lineWorld(ctx,t,3+ease(clamp((t-0.2)/1.4,0,1)),1-fin(t,c("arrived")+0.3,0.8),0);
+  // the lineage carries on from the last chapter: it holds still while that fades, then steps back to bronze
+  world(ctx,S);camKeys(ctx,S,[[0,750,560,1.3],[0.5,750,560,1.3],[2.0,712,440,1.2],[c("new"),712,430,1.22],[sc.dur+1,712,430,1.24]],t);
+  lineWorld(ctx,t,3+ease(clamp((t-0.6)/1.4,0,1)),1-fin(t,c("arrived")+0.3,0.8),0);
   const a=fin(t,c("arrived")+0.6,0.8);withA(ctx,a,()=>{const x=0,y=40,w=560;glass(ctx,x,y,w,344,20,LAYER.bronze,{glow:16,ea:0.8,fill:"rgba(20,12,6,0.9)"});
     T(ctx,"bronze.enrolments",x+24,y+40,{w:700,size:20,f:"mono",color:rgba(LAYER.bronze,1)});["student","offering","status","date"].forEach((h,i)=>T(ctx,h,x+COLX[i],y+78,{w:700,size:16,color:rgba(SOFT,0.9)}));
     ROWS.forEach((r,i)=>{const yy=y+112+i*36,wl=r[2]==="waitlisted",hi=wl?fin(t,c("new")+0.3+i*0.1):0;if(hi>0){ctx.fillStyle=rgba(AMBER,0.16*hi);rr(ctx,x+12,yy-24,w-24,32,8);ctx.fill();}
@@ -217,3 +219,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),B=c("breath");
     ctx.fillStyle=v>0.6?DB.red:DB.blue;ctx.beginPath();ctx.arc(px(tr.length-1),py(tr[tr.length-1]),4,0,TAU);ctx.fill();});
   // the last line, once it has been said
   setScreen(ctx,S);withA(ctx,fin(t,c("tag")+2.2,0.8),()=>{T(ctx,"Seen by both sides, before it ships.",960,150,{w:800,size:50,align:"center"});T(ctx,"When things go wrong · Silent change",960,196,{w:600,size:22,align:"center",color:rgba(SOFT,0.95)});});});
+
+// where the chapters meet (From words to data's joins.js): three weeks later the contract sits in another place, so the four people
+// and the contract leave first, over the bare screen, and then the later moment comes in
+const CHAPTER_JOINS={leave:["later"],bare:(ctx,S)=>world(ctx,S)};

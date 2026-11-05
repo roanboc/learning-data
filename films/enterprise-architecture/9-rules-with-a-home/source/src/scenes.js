@@ -512,3 +512,8 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1460,770,t,tNx-0.1,()=>sticky(ctx,1460,770,460,150,D9_NEXT,{col:NOTEC[0],size:30,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Rules with a home",EAC,"Write each rule once, where it applies, with an owner and a reason.","Film 9 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the five questions go from the screen to the wall, with the script in
+// another place, so they open on a cut; why carries on from the split, so the camera carries on; the standard's three rules and the
+// rule's form are later pictures with the same rules elsewhere, so what was there leaves first, over the bare screen
+const CHAPTER_JOINS={cut:["five"],glide:["why"],leave:["std","checks"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

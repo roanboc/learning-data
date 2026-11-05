@@ -128,8 +128,8 @@ scene("work",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);s
 /* ---------- 6. The name that misleads ---------- */
 scene("name",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=c("breath");setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.03});
-  const cA=c("apart"),mv=fin(t,w("step","The model is")-0.3,1.3),rl=fin(t,w("step","The model is")+0.2,0.6),m=ease(fin(t,0,1.3));
-  // the staging file, carried from the last chapter, moves to its place; the blueprint arrives beside it
+  const cA=c("apart"),mv=fin(t,w("step","The model is")-0.3,1.3),rl=fin(t,w("step","The model is")+0.2,0.6),m=ease(fin(t,0.5,1.3));
+  // the staging file, carried from the last chapter, moves to its place once that chapter has faded; the blueprint arrives beside it
   const fx=lerp(100,120,m),fy=lerp(240,330,m),fw=lerp(760,740,m);
   const fh=codeFile(ctx,fx,fy,fw,"stg_student_system__learners.sql",MT_F1,{edge:LAYER4[0][1]});
   arrive(ctx,1410,460,t,0.3,()=>{bpPaper(ctx,1000,250,820,420,1,{title:"CREDENTIAL MODEL · v3",sub:"the blueprint"});bpModel(ctx,1410,520,0.62,{b:1,hi:{learner:fin(t,cA,0.6)}});},{d:1.0,from:0.9});
@@ -168,8 +168,8 @@ scene("models",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o)
 /* ---------- 8. Where the model lives ---------- */
 scene("lives",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025,x:1100});
-  const cY=c("yaml"),cM=c("md"),m=ease(fin(t,0,1.4));
-  // the graph, carried from the last chapter, shrinks to the left to make room for the model's files
+  const cY=c("yaml"),cM=c("md"),m=ease(fin(t,0.5,1.4));
+  // the graph, carried from the last chapter, shrinks to the left to make room for the model's files, once that chapter has faded
   arrive(ctx,960,110,t,0.4,()=>T(ctx,"The model lives beside the code",960,110,{w:800,size:40,align:"center"}),{from:0.92});
   lineageGraph(ctx,lerp(180,70,m),lerp(190,250,m),lerp(1560,560,m),lerp(760,560,m),t,{core:lerp(0,1,m),dim:lerp(1,0.5,m),heads:m*0.8});
   // YAML: grain, key, relationships, contract
@@ -204,9 +204,9 @@ scene("steps",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);
 /* ---------- 10. The series ---------- */
 scene("series",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);setScreen(ctx,S);bg2(ctx);motes(ctx,t);
   ctx.save();drift(ctx,t,sc,{z:0.025});
-  // the loop, carried from the last chapter, shrinks to make room for the films, and its labels give way to theirs
-  const m=ease(fin(t,0,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
-  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7)});
+  // the loop, carried from the last chapter, shrinks to make room for the films once that chapter has faded, and its labels give way to theirs
+  const m=ease(fin(t,0.5,1.4)),cx=960,cy=lerp(560,540,m),rx=lerp(640,400,m),ry=lerp(360,250,m),words=["question","same one","Grain","Contracts","layers","owns","agent","written"],ids=["list1","list1","list1","list2","list2","list2","list2","list2"];
+  stepLoop(ctx,cx,cy,rx,ry,t,{on:STEPS10.map(()=>lerp(1,0.35,m)),labA:1-fin(t,0,0.7),phases:1-fin(t,0,0.7),phaseSize:30});
   arrive(ctx,cx,cy,t,1.0,()=>{glass(ctx,cx-200,cy-54,400,108,20,WEED,{glow:18,ea:0.85,fill:"rgba(7,12,24,0.96)"});T(ctx,"1 · this film",cx,cy-12,{f:"mono",w:500,size:18,align:"center",color:rgba(WEED,1)});T(ctx,"Declare it, then build it",cx,cy+24,{w:800,size:22,align:"center"});});
   arrive(ctx,960,76,t,0.4,()=>T(ctx,"The next eight films",960,76,{w:800,size:36,align:"center"}),{from:0.9});
   // each film arrives in its place, beside the steps it takes, and a line joins it to them
@@ -238,3 +238,6 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   withA(ctx,rA,()=>{tag(ctx,1440,50,"the model",BPL,{align:"center",size:20});tag(ctx,1440,975,"the building work: transformations",[255,160,110],{align:"center",size:20});});
   ctx.restore();weedsEnd(ctx,S,t,B,"Declare it, then build it",WEED,"The model is the blueprint. dbt is how you build it.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where its chapters meet (joins.js): the camera carries each picture on from the chapter before
+const CHAPTER_JOINS={glide:["name","lives","series"]};

@@ -351,7 +351,7 @@ const PP_CORE=["core_learner","core_award","core_credential","core_credit_toward
 // on a phone the chips are spaced by their widths at the size they're drawn, so the long names don't run into each other
 function pp_core(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,P={};const n=PP_CORE.length,L=250,cw=(w-L)/n,ca=o.chips==null?1:o.chips,ph=phMin(ctx)>0,cs=phSz(ctx,18),WW=PP_CORE.map(m=>tw(ctx,m,cs,500,"mono")+28),gp=(w-L-WW.reduce((s,v)=>s+v,0))/(n+1);
   PP_CORE.forEach((m,i)=>P[m]=[ph&&gp>8?x+L+gp*(i+1)+WW.slice(0,i).reduce((s,v)=>s+v,0)+WW[i]/2:x+L+cw*(i+0.5),y+h/2]);if(a<=0.01)return P;
-  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});T(ctx,"core",x+20,y+h/2-(ph?8:4),{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+(ph?23:20),{w:700,size:18,color:rgba(SOFT,1)});
+  withA(ctx,a,()=>{glow(ctx,x+w/2,y+h/2,w*0.5,TRUST,0.12);glass(ctx,x,y,w,h,14,TRUST,{glow:16,ea:0.85,fill:"rgba(16,13,6,0.94)"});withA(ctx,o.lab==null?1:o.lab,()=>{T(ctx,"core",x+20,y+h/2-(ph?8:4),{w:800,size:22,color:rgba(TRUST,1)});T(ctx,"public · enforced",x+20,y+h/2+(ph?23:20),{w:700,size:18,color:rgba(SOFT,1)});});
     if(ca>0.01)withA(ctx,ca,()=>PP_CORE.forEach((m,i)=>{const[cx,cy]=P[m],pu=o.pulse?o.pulse[m]||0:0,ww=WW[i];if(pu>0)glow(ctx,cx,cy,ww*0.7,TRUST,0.5*pu);ctx.fillStyle=rgba(mix([30,26,12],TRUST,0.12+0.3*pu),1);rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.fill();
       ctx.strokeStyle=rgba(TRUST,0.5+0.5*pu);ctx.lineWidth=1.4;rr(ctx,cx-ww/2,cy-15,ww,30,8);ctx.stroke();T(ctx,m,cx,cy+6,{f:"mono",w:500,size:18,align:"center",color:rgba(mix(INK,TRUST,0.4),1)});}));});return P;}
 

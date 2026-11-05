@@ -245,3 +245,7 @@ scene("end",(ctx,S,t,sc)=>{
   else{clearTo(ctx,S);withA(ctx,fin(t,cTg-0.25,0.8),()=>T(ctx,"Check the reference. Fit it to the business.",W/2,H/2-6,{w:800,size:72,align:"center"}));
     withA(ctx,fin(t,cTg+1.2,0.8),()=>{T(ctx,"A Sharper Sketch",W/2,H/2+76,{w:700,size:32,align:"center",color:rgba(SOFT,1)});T(ctx,"Learning Data · Data modelling",W/2,H/2+118,{w:500,size:22,align:"center",color:rgba(SOFT,0.7)});});}
 });
+
+// where the chapters meet (From words to data's joins.js): the reference model shows the levels' words in other places, so the
+// levels leave first, over the bare grid, and then the reference comes in
+const CHAPTER_JOINS={leave:["fit"],bare:(ctx,S)=>{bgW(ctx,S,CAM0);vign(ctx,S);}};

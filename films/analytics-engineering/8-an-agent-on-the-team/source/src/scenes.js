@@ -405,3 +405,7 @@ scene("next",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B
   });
   ctx.restore();weedsEnd(ctx,S,t,B,"An agent on the team",WEED,"The agent drafts and checks, with evidence. People approve.");
   fadeIn(ctx,S,t,0.01);vign(ctx,S);});
+
+// where the chapters meet (From words to data's joins.js): the agent's own key and the code it changes are new pictures, with the
+// agent and some words in another place, so what was there leaves first, over the bare screen, and then the chapter comes in
+const CHAPTER_JOINS={leave:["least","shortcut"],bare:(ctx,S,t)=>{setScreen(ctx,S);bg2(ctx);motes(ctx,t);vign(ctx,S);}};

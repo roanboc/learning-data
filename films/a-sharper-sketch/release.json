@@ -9,7 +9,7 @@
     "video": "dist/a-sharper-sketch.mp4",
     "file": "a-sharper-sketch.mp4",
     "captions": [["films/a-sharper-sketch/captions/en.srt", "a-sharper-sketch.en.srt"], ["films/a-sharper-sketch/captions/es.srt", "a-sharper-sketch.es.srt"]],
-    "paths": ["films/a-sharper-sketch/source", ":(exclude)films/a-sharper-sketch/source/src/i18n/es/captions.js", "films/from-words-to-data/shared/src/phone.js", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "paths": ["films/a-sharper-sketch/source", ":(exclude)films/a-sharper-sketch/source/src/i18n/es/captions.js", "films/from-words-to-data/shared/src/phone.js", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts", "films/from-words-to-data/shared/src/joins.js", "films/data-governance/shared/tools/twice.py"],
     "legibility": {"texts": 323, "under_28": "0%", "under_20": 0, "median": 28, "status": "Reworked"}
   }
 ]

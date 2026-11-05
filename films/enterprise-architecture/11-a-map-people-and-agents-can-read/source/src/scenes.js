@@ -546,3 +546,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
         T(ctx,"seven films on data modelling",HX+34,HY+64,{f:"mono",w:500,size:28,color:rgba(D11_RULE,1)});T(ctx,"From words to data",HX+34,HY+152,{w:800,size:60});},{dy:-16});}});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"A map people and agents can read",EAC,"A map lives while people use it, keep it true, and can pass it on.","Film 11 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the tool's window shows the map's name where the slides showed it, a little
+// way off, so the wall's slides and copies leave first, over the bare wall, and then the window comes in
+const CHAPTER_JOINS={leave:["sources"],bare:(ctx,S,t)=>{wallBg(ctx,S,t);vign(ctx,S);}};

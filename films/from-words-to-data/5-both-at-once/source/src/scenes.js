@@ -296,3 +296,7 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),at=(id,f)=>bo_at(sc,id,f),B=c(
     arrowTo(ctx,1690,394,1690,370,KIND,0.8,{head:10});tag(ctx,1690,600,"next: meaning",KIND,{align:"center",size:24});tag(ctx,1690,650,"a machine can read",KIND,{align:"center",size:24});});
   endCard(ctx,S,t,B+0.3,"Both at once",BO_ACC,"Hybrid removes the copy, not the model.");
   vign(ctx,S);});
+
+// where the chapters meet (joins.js): data flowing back is a new picture with the same award rows in another place, so what the
+// hybrid doesn't remove leaves first, over the bare screen
+const CHAPTER_JOINS={leave:["back"],bare:(ctx,S)=>{setScreen(ctx,S);bg2(ctx);vign(ctx,S);}};

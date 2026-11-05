@@ -2,9 +2,9 @@ import base64,json,re
 from lang import *
 S=ROOT/'src';D=DIST
 # the layer that makes the film's text read on a phone (From words to data's phone.js), kept to the film's own frame by phonefit.js,
-# comes after the scenes and before the engine
-PHONE=str(ROOT.parents[1]/'from-words-to-data'/'shared'/'src'/'phone.js')
-FILES=['core.js','logos.js','style2.js','narration.js','vodur.js','breath.js','ui3.js','scA.js','scB.js','scC.js','scD.js',PHONE,'phonefit.js','engine3.js']
+# comes after the scenes and before the engine; where the film's chapters meet (From words to data's joins.js: its CHAPTER_JOINS) after it
+PHONE=str(ROOT.parents[1]/'from-words-to-data'/'shared'/'src'/'phone.js');JOINS=str(ROOT.parents[1]/'from-words-to-data'/'shared'/'src'/'joins.js')
+FILES=['core.js','logos.js','style2.js','narration.js','vodur.js','breath.js','ui3.js','scA.js','scB.js','scC.js','scD.js',PHONE,'phonefit.js','engine3.js',JOINS]
 # another language swaps in its narration and voice timings, and adds its on-screen text ahead of the i18n hook that applies it
 if not EN:FILES=['i18n/%s/strings.js'%LANG,'i18n.js']+[f if f not in('narration.js','vodur.js') else 'i18n/%s/%s'%(LANG,f) for f in FILES]
 js='\n'.join((S/f).read_text() for f in FILES if (S/f).exists())

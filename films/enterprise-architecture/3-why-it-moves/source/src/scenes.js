@@ -84,7 +84,9 @@ const D3_ASM=[["bills up 18% in two years","annual report",720,"bills","rose"],[
 scene("means",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o);wallBg(ctx,S,t);
   ctx.save();drift(ctx,t,sc,{z:0.02,y:420});
   const cO=c("opinion"),gone=fin(t,cO+1.4,0.8);
-  D3_DRV.forEach(([n],i)=>arrive(ctx,260+i*460,200,t,0.2+i*0.12,()=>d3_card(ctx,260+i*460,210,420,140,"driver",n,null,{size:30}),{dy:-16}));
+  // the four drivers, carried from the last chapter: they stay where they were while it fades, then line up along the top, their lines going
+  const mv=ease(fin(t,0.5,1.2));
+  D3_DRV.forEach(([n,l,x,y],i)=>d3_card(ctx,lerp(x,260+i*460,mv),lerp(y,210,mv),lerp(480,420,mv),lerp(180,140,mv),"driver",n,l,{size:lerp(32,30,mv),lineA:1-fin(mv,0,0.5)}));
   D3_ASM.forEach(([s_,src,x,lid,k])=>{const t0=w(lid,k)-0.3,q=fin(t,t0,0.6);if(q<=0)return;
     withA(ctx,q,()=>{ctx.strokeStyle=rgba(MOT,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,280);ctx.lineTo(x,380);ctx.stroke();});
     arrive(ctx,x,490,t,t0,()=>d3_card(ctx,x,490,420,220,"assessment",s_,null,{size:30,src,srcA:fin(t,t0+0.5,0.4)}),{dy:-24,from:1.06});});
@@ -180,3 +182,6 @@ scene("end",(ctx,S,t,sc)=>{const c=id=>cue(sc,id),w=(id,s,o)=>kt_w(sc,id,s,o),B=
   arrive(ctx,1500,700,t,w("next","what"),()=>sticky(ctx,1500,700,380,140,"What must it be able to do?",{col:NOTEC[0],size:32,st:0,rot:0.03}),{dy:-30,from:1.06});
   ctx.restore();vign(ctx,S);
   eaEnd(ctx,S,t,B+0.8,"Why it moves",EAC,"Know why it must change, and what it will be checked against.","Film 3 of 11");});
+
+// where the chapters meet (From words to data's joins.js): the drivers carry on from the chapter before, so the camera carries on
+const CHAPTER_JOINS={glide:["means"]};

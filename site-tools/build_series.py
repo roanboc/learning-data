@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Seventeen series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Nineteen series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
@@ -18,7 +18,8 @@ module's plan), Data as software (films/data-as-software/, at data-as-software/)
 documents-as-data/, a series of one film); and the three series of the module Data protection and privacy: Locks before the
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
-kept-for-a-reason/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
+holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -77,7 +78,8 @@ def series_link(lg, RE, sid):
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
 # each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
-# Data protection and privacy, whose three series are each the next of the one before.
+# Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
+# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
@@ -152,6 +154,14 @@ SERIES = [
          built="in-the-weeds", next="kept-for-a-reason"),
     dict(id="kept-for-a-reason", dir="kept-for-a-reason", slug="kept-for-a-reason",
          name={"en": "Kept for a reason", "es": "Guardado por una razón"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
+    dict(id="fit-for-use", dir="fit-for-use", slug="fit-for-use",
+         name={"en": "Fit for use", "es": "Apto para su uso"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="quality-as-a-habit"),
+    dict(id="quality-as-a-habit", dir="quality-as-a-habit", slug="quality-as-a-habit",
+         name={"en": "Quality as a habit", "es": "La calidad como hábito"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
 ]
@@ -340,11 +350,11 @@ TOPICS = [
          who={"en": "For analytics engineers", "es": "Para analytics engineers"},
          line={"en": "How an agreed data model becomes tested, documented tables, with dbt.",
                "es": "Cómo un modelo de datos acordado se convierte en tablas probadas y documentadas, con dbt."}),
-    dict(id="data-quality", items=["when-things-go-wrong"],
-         name={"en": "Data quality and change", "es": "Calidad de datos y cambios"},
-         who={"en": "For anyone who builds pipelines, or owns a source system or a data product", "es": "Para quien construye pipelines, o es responsable de un sistema de origen o de un producto de datos"},
-         line={"en": "What goes wrong on a data platform, and what catches it: changes, data contracts and tests.",
-               "es": "Lo que sale mal en una plataforma de datos, y lo que lo detecta: cambios, contratos de datos y pruebas."}),
+    dict(id="data-quality", items=["when-things-go-wrong", "fit-for-use", "quality-as-a-habit"],
+         name={"en": "Data quality", "es": "Calidad de datos"},
+         who={"en": "For anyone who builds pipelines, owns a source system or a data product, or depends on data being right", "es": "Para quien construye pipelines, es responsable de un sistema de origen o de un producto de datos, o depende de que los datos estén bien"},
+         line={"en": "What good enough means for data, what goes wrong, and what catches it: changes, contracts, checks, and errors fixed where they start.",
+               "es": "Qué es lo bastante bueno para los datos, qué sale mal y qué lo detecta: cambios, contratos, controles, y errores arreglados donde empiezan."}),
     dict(id="enterprise-architecture", items=["enterprise-architecture"],
          name={"en": "Enterprise architecture", "es": "Arquitectura empresarial"},
          who={"en": "For architects, and anyone new to an organisation", "es": "Para arquitectos, y para quien llega nuevo a una organización"},

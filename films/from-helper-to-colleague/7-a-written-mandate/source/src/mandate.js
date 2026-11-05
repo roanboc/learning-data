@@ -4,7 +4,8 @@
                         lights it (o.litCol(i) its colour), o.sign 0..1 draws Anil's signature, o.approve 0..1 Noor's tick, o.blank
                         0..1 the page still empty (a dashed edge, nothing written), o.a, o.k; returns {x, y, w, h, rows: [{x, y, w, h}]}
      wm_detail(ctx, x, y, w, o) a row of the page, opened up: a kicker, a title and its items, one under another, each with a mark
-                        ("n" its number, "tick", "no", "lock", "warn", "undo", "gear", or none); o.items [{text, mark, a, col, f}]
+                        ("n" its number, "tick", "no", "lock", "warn", "undo", "gear", "file", or none); o.items [{text, mark, a, col, f,
+                        lit}]; o.mark, a tool's mark before the kicker
      wm_place(ctx, x, y, w, o)  where a line is held: a tool's card (its mark, kicker, title) and its settings as rows, the name above
                         and its value under it in mono; o.rows [{name, value, a, col, lit, mark}]
      wm_mark(ctx, k, x, y, h)   a tool's official mark, h tall, its left edge at x and its middle at y: Databricks' and dbt's as they
@@ -24,18 +25,20 @@
      wm_yaml(ctx, x, y, w, o)   the mandate file's first lines, in mono
      wm_checks(ctx, x, y, w, o) the project's check, scripts/check/mandates.py: each place against the page
      wm_law(ctx, x, y, w, o)    Europe's AI law on human oversight: four things a person must be able to do
-     wm_nights(ctx, x, y, o)    the nights in test before the mandate, one mark each */
+     wm_nights(ctx, x, y, o)    the nights in test before the mandate, one mark each
+     wm_tile(ctx, x, y, w, o)   a tool where lines are held, as a small tile: its mark, its name, what it holds
+     wm_moved(ctx, x, y, o)     one tutor who moved: HR's two versions of their contract, before and today */
 
 // the page's rows: what each says, in the order the voice names them; the last two are the signature and the approval
 const WM_ROWS=[["In test","Find why the night build failed, and fix it"],["In production","Read, find the cause, and draft the fix"],
-  ["Folders","models/marts/workload/ · models/intermediate/workload/ · analyses/workload/"],["Never","A test, a seed, a contract or a definition"],
+  ["Folders",["models/marts/workload/","models/intermediate/workload/","analyses/workload/"]],["Never","A test, a seed, a contract or a definition"],
   ["Checks","First: has tonight's copy arrived?"],["Limits","10 rounds · 1 hour · a set budget"],
   ["Switch","Off in both tools, at any hour"],["Undo","Revert the change, restore the table"],
   ["Signed","Anil Kurian, owner · 30 October 2026"],["Approved","Noor Rahman, as a second person"]];
 const WM_SIGN=8,WM_APPROVE=9,WM_FILE="governance/8-mandates/workload-agent.yml";
-const WM_PG={lab:228,rowH:58,top:132};
+const WM_PG={lab:232,rowH:58,top:132};
 function wm_pageRows(ctx,x,y,w){const P=WM_PG,vw=w-P.lab-40,out=[];let yy=y+P.top;
-  WM_ROWS.forEach((r,i)=>{const ls=wm_wrap(ctx,r[1],vw,{w:600,size:28}),h=P.rowH+(ls.length-1)*36;out.push({x:x+14,y:yy,w:w-28,h,ls});yy+=h;});
+  WM_ROWS.forEach((r,i)=>{const ls=Array.isArray(r[1])?r[1].slice():wm_wrap(ctx,r[1],vw,{w:600,size:28}),h=P.rowH+(ls.length-1)*36;out.push({x:x+14,y:yy,w:w-28,h,ls});yy+=h;});
   return{rows:out,h:yy-y+20};}
 function wm_page(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,L=wm_pageRows(ctx,x,y,w),h=L.h,bb={x,y,w,h,rows:L.rows};if(a<=0)return bb;
   const blank=clamp(o.blank||0,0,1);
@@ -45,13 +48,16 @@ function wm_page(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,L=wm_pageRows(ctx,
   if(blank<1){ctx.save();ctx.globalAlpha*=1-blank;
     ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.7});
     wm_fileIcon(ctx,x+40,y+46,rgba(AG.blue,0.95),false);ag_T(ctx,WM_FILE,x+70,y+56,{w:500,size:28,f:"mono",col:AG.blue});
+    if(o.locked>0){ctx.save();ctx.globalAlpha*=clamp(o.locked,0,1);const lx=x+w-44,ly=y+50;ag_about(ctx,lx,ly,lerp(0.6,1,Math.min(1,ag_spr(o.locked,0,0.5))));ag_lock(ctx,lx,ly,34,rgba(AG.blue,0.95));ctx.restore();}
     ag_T(ctx,"The workload agent's mandate",x+28,y+108,{w:700,size:36});
     L.rows.forEach((b,i)=>{const s=o.show?o.show(i):1;if(s<=0)return;const lit=o.lit?o.lit(i):0,col=(o.litCol&&o.litCol(i))||AG.blue;ctx.save();ctx.globalAlpha*=clamp(s*1.6,0,1);
       const dx=(1-ag_eo(clamp(s,0,1)))*-18;ctx.translate(dx,0);
       if(lit>0){ctx.fillStyle=rgba(col,0.11*lit);rr(ctx,b.x,b.y+4,b.w,b.h-8,12);ctx.fill();ctx.strokeStyle=rgba(col,0.5*lit);ctx.lineWidth=2;rr(ctx,b.x,b.y+4,b.w,b.h-8,12);ctx.stroke();}
       if(i>0){ctx.strokeStyle="rgba(60,50,40,0.1)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(b.x+14,b.y+2);ctx.lineTo(b.x+b.w-14,b.y+2);ctx.stroke();}
       const sg=i===WM_SIGN||i===WM_APPROVE;
-      ag_T(ctx,WM_ROWS[i][0].toUpperCase(),b.x+16,b.y+39,{w:700,size:28,ls:3,col:sg?AG.kick:mix(AG.blue,col,lit)});
+      ag_T(ctx,WM_ROWS[i][0],b.x+16,b.y+39,{w:700,size:28,col:sg?AG.kick:mix(AG.blue,col,lit)});
+      // a row a tool now holds: a small lock at its right end
+      const hd=o.held?o.held(i):0;if(hd>0&&!sg){ctx.save();ctx.globalAlpha*=clamp(hd,0,1);const lx=b.x+b.w-30,ly=b.y+31;ag_about(ctx,lx,ly,lerp(0.6,1,Math.min(1,ag_spr(hd,0,0.5))));ag_lock(ctx,lx,ly,30,rgba(AG.blue,0.9));ctx.restore();}
       b.ls.forEach((l,j)=>ag_T(ctx,l,x+WM_PG.lab,b.y+39+j*36,{w:600,size:28,col:AG.ink}));
       // Anil's signature: a pen line drawn after his name; Noor's approval: a green tick
       if(i===WM_SIGN&&o.sign>0){const sx=x+w-138,sy=b.y+34;ctx.save();ctx.strokeStyle=rgba(AG.ink,0.8);ctx.lineWidth=2.6;ctx.lineCap="round";ctx.lineJoin="round";
@@ -69,7 +75,7 @@ function wm_detail(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,items=o.items||[
   let yy=y+28+(o.kick?40:0)+tl.length*46+(tl.length?10:0);L.forEach((ls,i)=>{bb.items.push({x,y:yy,w,h:ls.length*40+18});yy+=ls.length*40+18;});
   if(a<=0)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge||null,edgeA:o.edgeA==null?0.75:o.edgeA});if(o.dashed)wm_dash(ctx,x,y,w,h,22,o.dashCol||AG.mut,o.dashed);
-  let ty=y+28;if(o.kick){ag_T(ctx,String(o.kick).toUpperCase(),x+28,ty+22,{w:700,size:28,ls:3.5,col:o.kickCol||AG.blue});ty+=40;}
+  let ty=y+28;if(o.kick){const kx=x+28+(o.mark?wm_mark(ctx,o.mark,x+28,ty+12,o.mark==="github"?30:34)+14:0);ag_T(ctx,String(o.kick).toUpperCase(),kx,ty+22,{w:700,size:28,ls:3.5,col:o.kickCol||AG.blue});ty+=40;}
   tl.forEach(l=>{ty+=40;ag_T(ctx,l,x+28,ty,{w:700,size:36});ty+=6;});
   items.forEach((it,i)=>{const ia=it.a==null?1:it.a;if(ia<=0)return;const b=bb.items[i],col=it.col||AG.ink,mk=it.mark;ctx.save();ctx.globalAlpha*=clamp(ia,0,1);
     const mx=x+46,my=b.y+30,tx=o.marks===false?x+28:x+80;
@@ -105,19 +111,22 @@ function wm_place(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],t
   ctx.restore();return bb;}
 
 /* the report the workload agent left for Anil: o.lines (how many of its lines show, 0..5, eased), o.measures (0..1, its measures under
-   them), o.tail ([px, py], where its tail points), o.a, o.k */
+   them), o.tail ([px, py], where its tail points; o.tailSide "left" or "bottom"), o.title (false: no title line, for a small one),
+   o.rowH (82), o.a, o.k */
 const WM_REPORT=[["Failed at 23:14","each contract counts once: 3 twice",AG.amber],["Cause","the day's change read every version",AG.violet],
   ["Fixed","on its own branch: Nursing 64 and 38",AG.green],["Then","a pull request, for Jun to review",AG.blue],["A question","for HR: where a tutor who moved counts",AG.violet]];
-function wm_report(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,m=o.measures||0,n=WM_REPORT.length,h=128+n*82+(m>0?88*ag_sine(clamp(m*2,0,1)):0)+8,bb={x,y,w,h};if(a<=0)return bb;
+function wm_report(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,m=o.measures||0,n=WM_REPORT.length,rh=o.rowH||82,top=o.title===false?76:128,
+    h=top+n*rh+(m>0?88*ag_sine(clamp(m*2,0,1)):0)+8,bb={x,y,w,h};if(a<=0)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,o.tail?o.tail[0]:x+w/2,o.tail?o.tail[1]:y+h/2,lerp(0.6,1,o.k));
-  let tail=null;if(o.tail){const ty=y+h-70;tail={side:"left",a:ty-24,b:ty+24,px:o.tail[0],py:o.tail[1]};}
+  let tail=null;if(o.tail){if(o.tailSide==="bottom"){const tx=clamp(o.tail[0],x+60,x+w-60);tail={side:"bottom",a:tx-24,b:tx+24,px:o.tail[0],py:o.tail[1]};}
+    else{const ty=y+h-70;tail={side:"left",a:ty-24,b:ty+24,px:o.tail[0],py:o.tail[1]};}}
   ag_card(ctx,c=>ag_cardPath(c,x,y,w,h,22,tail),bb,{edge:AG.violet,edgeA:0.6});
   ag_T(ctx,"REPORT · 23:34",x+28,y+50,{w:700,size:28,ls:3.5,col:AG.violet});ag_T(ctx,"workload agent",x+w-28,y+50,{w:500,size:28,f:"mono",col:AG.mut,align:"right"});
-  ag_T(ctx,"Why the night build failed",x+28,y+98,{w:700,size:36});
-  WM_REPORT.forEach((r,i)=>{const la=clamp((o.lines==null?n:o.lines)-i,0,1);if(la<=0)return;const yy=y+128+i*82;ctx.save();ctx.globalAlpha*=la;
+  if(o.title!==false)ag_T(ctx,"Why the night build failed",x+28,y+98,{w:700,size:36});
+  WM_REPORT.forEach((r,i)=>{const la=clamp((o.lines==null?n:o.lines)-i,0,1);if(la<=0)return;const yy=y+top+i*rh;ctx.save();ctx.globalAlpha*=la;
     ctx.fillStyle=rgba(r[2],0.9);ctx.beginPath();ctx.arc(x+38,yy+30,7,0,TAU);ctx.fill();
     ag_T(ctx,r[0],x+58,yy+40,{w:700,size:28,col:AG.ink});ag_T(ctx,r[1],x+58,yy+76,{w:500,size:28,col:AG.mut});ctx.restore();});
-  if(m>0){const yy=y+128+n*82;ctx.save();ctx.globalAlpha*=clamp(m*2-0.6,0,1);ctx.strokeStyle="rgba(60,50,40,0.14)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,yy+6);ctx.lineTo(x+w-28,yy+6);ctx.stroke();
+  if(m>0){const yy=y+top+n*rh;ctx.save();ctx.globalAlpha*=clamp(m*2-0.6,0,1);ctx.strokeStyle="rgba(60,50,40,0.14)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+28,yy+6);ctx.lineTo(x+w-28,yy+6);ctx.stroke();
     ag_T(ctx,"MEASURES",x+28,yy+44,{w:700,size:28,ls:3.5,col:AG.kick});ag_T(ctx,"3 of 10 rounds · 20 minutes · within its limits",x+28,yy+80,{w:600,size:28,col:AG.ink});ctx.restore();}
   ctx.restore();return bb;}
 
@@ -134,23 +143,25 @@ function wm_pr(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],tl=w
     const tk=r.state==="tick"?1:r.state==="wait"?clamp(r.tick||0,0,1):0;
     if(tk>0){ctx.save();ctx.globalAlpha*=tk;ag_about(ctx,ix,iy,lerp(0.6,1,Math.min(1,ag_spr(tk,0,0.5))));ag_tick(ctx,ix,iy,24,rgba(AG.green,1),4);ctx.restore();}
     if(r.state==="lock")ag_lock(ctx,ix,iy+4,26,rgba(AG.mut,1));else if(r.state==="no")ag_warn(ctx,ix,iy,28,rgba(AG.amber,1));
+    else if(r.state==="undo")wm_undoIcon(ctx,ix,iy,28,rgba(AG.blue,1),3.4);
     else if(r.state==="wait"&&tk<1){ctx.save();ctx.globalAlpha*=1-tk;ctx.strokeStyle=rgba(AG.mut,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.arc(ix,iy,12,0,TAU);ctx.stroke();ctx.restore();}
-    ag_T(ctx,r.text,x+76,yy,{w:600,size:28,col:r.state==="no"?AG.ink:mix(AG.mut,AG.ink,Math.max(tk,r.state==="lock"?0.6:0))});ctx.restore();});
+    ag_T(ctx,r.text,x+76,yy,{w:600,size:28,col:r.state==="no"||r.state==="undo"?AG.ink:mix(AG.mut,AG.ink,Math.max(tk,r.state==="lock"?0.6:0))});ctx.restore();});
   ctx.restore();return bb;}
 
 /* the agent's own model, mart_workload__teaching_staff.sql, as four lines in mono: the line that reads HR's contracts, then the line the
    day's change dropped (only the version of each contract that holds today), in two parts. o.bad 0..1 lights the place it's missing,
-   amber; o.gap 0..1 opens room for it (so nothing below jumps), o.fix 0..1 types it in, green; o.kick, o.note */
+   amber; o.gap 0..1 opens room for it (so nothing below jumps), o.fix 0..1 types it in, green; o.kick, o.note, o.mark (dbt's, before
+   the file's name: the model is dbt's) */
 const WM_CODE=["from {{ ref('stg_hr_system__contracts') }}","where {{ valid_at(as_is_date(),","    'cast(recorded_from as date)',","    'cast(recorded_to as date)') }}"];
 function wm_code(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,F={w:500,size:28,f:"mono"},gap=ag_sine(clamp(o.gap||0,0,1)),fx=clamp(o.fix||0,0,1),bad=clamp(o.bad||0,0,1),
-    lh=42,h=96+lh+lh*3*gap+(o.note?58:0)+24,bb={x,y,w,h};if(a<=0)return bb;
+    lh=42,room=lerp(bad,3,gap),h=96+lh+lh*room+(o.note?58:0)+24,bb={x,y,w,h};if(a<=0)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:fx>0.5?AG.green:AG.amber,edgeA:0.3+0.45*Math.max(bad,fx)});
-  ag_T(ctx,o.kick||"mart_workload__teaching_staff.sql",x+28,y+52,{w:500,size:28,f:"mono",col:AG.violet});
+  const kx=x+28+(o.mark?wm_mark(ctx,o.mark,x+28,y+43,34)+14:0);ag_T(ctx,o.kick||"mart_workload__teaching_staff.sql",kx,y+52,{w:500,size:28,f:"mono",col:AG.violet});
   const lx=x+28,ly=y+104;ag_T(ctx,WM_CODE[0],lx,ly,Object.assign({},F,{col:AG.mut}));
   // where the line belongs: an amber mark while it's missing, then the room it needs, then the line typed in, green
-  if(bad>0&&gap<0.5){ctx.save();ctx.globalAlpha*=bad*(1-gap*2);ctx.fillStyle=rgba(AG.amber,0.9);ctx.fillRect(lx,ly+16,ag_tw(ctx,"where",F),4);
-    ag_T(ctx,"no line keeps only today's version",lx+ag_tw(ctx,"where ",F),ly+28,{w:600,size:28,col:AG.amber});ctx.restore();}
-  if(gap>0.01&&(fx>0||bad>0)){const top=ly+16,hh=lh*3*gap;ctx.fillStyle=rgba(fx>0?AG.green:AG.amber,0.08+0.06*Math.max(fx,bad));rr(ctx,lx-12,top,w-32,hh,10);ctx.fill();}
+  if(room>0.01&&(fx>0||bad>0)){const top=ly+16,hh=lh*room;ctx.fillStyle=rgba(fx>0?AG.green:AG.amber,0.08+0.06*Math.max(fx,bad));rr(ctx,lx-12,top,w-32,hh,10);ctx.fill();}
+  if(bad>0&&gap<0.5){ctx.save();ctx.globalAlpha*=bad*(1-gap*2);ctx.fillStyle=rgba(AG.amber,0.9);ctx.fillRect(lx,ly+lh-6,ag_tw(ctx,"where",F),4);
+    ag_T(ctx,"no line keeps only today's version",lx+ag_tw(ctx,"where ",F),ly+lh,{w:600,size:28,col:AG.amber});ctx.restore();}
   if(fx>0){const all=WM_CODE.slice(1).join("").length,shown=Math.round(all*fx);let left=shown;
     WM_CODE.slice(1).forEach((l,j)=>{if(left<=0)return;const s=l.slice(0,Math.min(l.length,left));left-=l.length;ctx.save();ctx.globalAlpha*=gap;ag_T(ctx,s,lx,ly+lh*(j+1),Object.assign({},F,{col:AG.green}));ctx.restore();});
     if(fx<1){const j=Math.min(2,WM_CODE.slice(1).findIndex((l,k)=>WM_CODE.slice(1,k+2).join("").length>=shown)),pre=WM_CODE.slice(1,j+1).join("").length,
@@ -218,25 +229,29 @@ function wm_owns(ctx,p,q,u,o){o=o||{};if(u<=0.01)return;const a=o.a==null?1:o.a,
 
 /* the workload agent on the map, as A place on the map placed it on 26 October: Anil Kurian (a person, Faculty of Health) owns it, and
    it's assigned to its role, workload contributor. o.show(key) 0..1 for "anil", "agent", "role", "owner", "assign"; o.at [x, y] moves it
-   (the agent's top left), o.glow(key) a colour; returns each element's box */
+   (the agent's top left), o.pos {key: [x, y, w]} puts any element elsewhere (the lines then leave from the edges that face each other),
+   o.glow(key) a colour; returns each element's box, and assignAt, the middle of the assignment */
 const WM_MAP={anil:{x:0,y:0,w:400,kind:"person",name:"Anil Kurian",sub:"Faculty of Health"},agent:{x:0,y:236,w:400,kind:"agent",name:"workload agent"},
   role:{x:560,y:236,w:470,kind:"role",name:"workload contributor"}};
-function wm_onMap(ctx,o){o=o||{};const a=o.a==null?1:o.a,[ox,oy]=o.at||[0,0],show=o.show||(()=>1),out={};
-  for(const k in WM_MAP){const e=WM_MAP[k];out[k]=wm_el(ctx,ox+e.x,oy+e.y,e.w,Object.assign({},e,{measure:true}));}
+function wm_onMap(ctx,o){o=o||{};const a=o.a==null?1:o.a,[ox,oy]=o.at||[0,0],show=o.show||(()=>1),out={},P=k=>{const e=WM_MAP[k],q=o.pos&&o.pos[k];return q?[q[0],q[1],q[2]||e.w]:[ox+e.x,oy+e.y,e.w];};
+  for(const k in WM_MAP){const e=WM_MAP[k],[px,py,pw]=P(k);out[k]=wm_el(ctx,px,py,pw,Object.assign({},e,{measure:true}));}
   if(a<=0.01)return out;ctx.save();ctx.globalAlpha*=a;
-  const an=out.anil,ag=out.agent,ro=out.role;
-  wm_owns(ctx,[an.x+an.w/2,an.y+an.h],[ag.x+ag.w/2,ag.y],clamp(show("owner"),0,1),{lx:70});
-  wm_assign(ctx,[ag.x+ag.w,ag.y+ag.h/2],[ro.x,ro.y+ro.h/2],clamp(show("assign"),0,1),{});
-  for(const k in WM_MAP){const e=WM_MAP[k],s=clamp(show(k),0,1);if(s<=0.01)continue;
-    wm_el(ctx,ox+e.x,oy+e.y,e.w,Object.assign({},e,{a:s,k:ag_eo(clamp(s*1.2,0,1)),glow:o.glow?o.glow(k):null,glowA:0.9}));}
+  // from the middle of p's edge that faces q to the middle of q's that faces p
+  const ends=(p,q)=>{const below=q.y>=p.y+p.h-2;return below?[[p.x+p.w/2,p.y+p.h],[q.x+q.w/2,q.y]]:[[p.x+p.w,p.y+p.h/2],[q.x,q.y+q.h/2]];};
+  const an=out.anil,ag=out.agent,ro=out.role,eo=ends(an,ag),ea=ends(ag,ro);out.assignAt=[(ea[0][0]+ea[1][0])/2,(ea[0][1]+ea[1][1])/2];
+  wm_owns(ctx,eo[0],eo[1],clamp(show("owner"),0,1),{lx:70});
+  wm_assign(ctx,ea[0],ea[1],clamp(show("assign"),0,1),{});
+  for(const k in WM_MAP){const e=WM_MAP[k],s=clamp(show(k),0,1),[px,py,pw]=P(k);if(s<=0.01)continue;
+    wm_el(ctx,px,py,pw,Object.assign({},e,{a:s,k:ag_eo(clamp(s*1.2,0,1)),glow:o.glow?o.glow(k):null,glowA:0.9}));}
   ctx.restore();return out;}
 
 /* its stage beside each kind of task, as its assignment holds them (A place on the map's lines, word for word), the night task's line
    lit (o.lit(i) 0..1, o.litCol(i)), and under the stage-5 line its mandate's line (o.mandate 0..1), with a bracket that ties it to that
-   line. o.show(i) 0..1 each line in; returns {x, y, w, h, rows} */
+   line. o.show(i) 0..1 each line in; o.rh the rows' height (62); o.num(i) [from, to, u]: a stage's number turning into another (o.numCol);
+   o.mandateA, the mandate's line quieter (a mandate withdrawn); returns {x, y, w, h, rows} */
 const WM_STAGES=[["what a word about staff means",1],["a new question about teaching staff",3],["fix a model",4],["find why the night build failed, in test",5],
   ["find why the night build failed, in production",4]];
-function wm_stageList(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=62,m=ag_sine(clamp(o.mandate||0,0,1)),n=WM_STAGES.length,h=96+n*rh+m*(rh+24)+18,bb={x,y,w,h,rows:[]};
+function wm_stageList(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||62,m=ag_sine(clamp(o.mandate||0,0,1)),n=WM_STAGES.length,h=96+n*rh+m*(rh+24)+18,bb={x,y,w,h,rows:[]};
   for(let i=0;i<n;i++)bb.rows.push({x:x+14,y:y+84+i*rh+(i>3?m*(rh+24):0),w:w-28,h:rh-6});if(a<=0)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+40,lerp(0.85,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.5});
   ag_T(ctx,"ITS STAGE, FOR EACH KIND OF TASK",x+28,y+52,{w:700,size:28,ls:3.5,col:AG.blue});
@@ -244,9 +259,12 @@ function wm_stageList(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=62,m=ag_si
     ctx.save();ctx.globalAlpha*=s;if(lit>0){ctx.fillStyle=rgba(col,0.1*lit);rr(ctx,b.x,b.y,b.w,b.h,12);ctx.fill();ctx.strokeStyle=rgba(col,0.45*lit);ctx.lineWidth=2;rr(ctx,b.x,b.y,b.w,b.h,12);ctx.stroke();}
     ag_T(ctx,r[0],b.x+18,b.y+40,{w:600,size:28,col:AG.ink});
     const cx=b.x+b.w-38,cy=b.y+b.h/2;ctx.fillStyle=rgba(mix(AG.mut,col,0.3+0.7*lit),0.14+0.2*lit);ctx.beginPath();ctx.arc(cx,cy,22,0,TAU);ctx.fill();
-    ag_T(ctx,String(r[1]),cx,cy+10,{w:800,size:28,align:"center",col:mix(AG.mut,col,0.5+0.5*lit)});ctx.restore();});
+    // its number, or (o.num(i), [from, to, u]) one number turning into another
+    const nm=o.num?o.num(i):null;if(nm&&nm[2]>0){const u=clamp(nm[2],0,1),nc=o.numCol||AG.amber;ctx.save();ctx.globalAlpha*=1-u;ag_T(ctx,String(nm[0]),cx,cy+10-12*u,{w:800,size:28,align:"center",col:mix(AG.mut,col,0.5+0.5*lit)});ctx.restore();
+      ctx.save();ctx.globalAlpha*=u;ag_T(ctx,String(nm[1]),cx,cy+10+12*(1-u),{w:800,size:28,align:"center",col:nc});ctx.restore();}
+    else ag_T(ctx,String(r[1]),cx,cy+10,{w:800,size:28,align:"center",col:mix(AG.mut,col,0.5+0.5*lit)});ctx.restore();});
   // the mandate's line, under the stage-5 line, and the bracket from it up to that line
-  if(m>0.01){const b4=bb.rows[3],my=b4.y+b4.h+12;ctx.save();ctx.globalAlpha*=clamp((o.mandate-0.3)/0.5,0,1);
+  if(m>0.01){const b4=bb.rows[3],my=b4.y+b4.h+12;ctx.save();ctx.globalAlpha*=clamp((o.mandate-0.3)/0.5,0,1)*(o.mandateA==null?1:o.mandateA);
     ctx.fillStyle=rgba(AG.blue,0.1);rr(ctx,x+60,my,w-88,rh,12);ctx.fill();ctx.strokeStyle=rgba(AG.blue,0.6);ctx.lineWidth=2.2;rr(ctx,x+60,my,w-88,rh,12);ctx.stroke();
     ctx.strokeStyle=rgba(AG.blue,0.7);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+40,b4.y+b4.h/2);ctx.lineTo(x+30,b4.y+b4.h/2);ctx.lineTo(x+30,my+rh/2);ctx.lineTo(x+56,my+rh/2);ctx.stroke();
     wm_icon(ctx,"requirement",x+96,my+rh/2,0.95,rgba(AG.blue,1));
@@ -281,14 +299,14 @@ function wm_yaml(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=50,h=100+WM_YAM
 /* the project's check, scripts/check/mandates.py: each place where a line is held, against the page; o.rows(i) 0..1, o.fail (0..1)
    a grant that allows more (the last row turns amber, and the check fails before anything merges) */
 const WM_CHK=[["Unity Catalog's grants","only its own schema, in test"],["GitHub's push rules","only its three folders"],["the run's timeout","60 minutes"],["Unity Gateway's limit","50,000 tokens a minute"]];
-function wm_checks(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=84,fl=clamp(o.fail||0,0,1),h=100+WM_CHK.length*rh+(fl>0?96*ag_sine(fl):0)+16,bb={x,y,w,h};if(a<=0)return bb;
+function wm_checks(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=84,top=y+124,fl=clamp(o.fail||0,0,1),h=140+WM_CHK.length*rh+(fl>0?96*ag_sine(fl):0)+16,bb={x,y,w,h};if(a<=0)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.8,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:fl>0.5?AG.amber:AG.green,edgeA:0.35+0.4*Math.max(fl,o.pass||0)});
-  ag_T(ctx,"THE PROJECT'S CHECK",x+28,y+52,{w:700,size:28,ls:3.5,col:AG.kick});ag_T(ctx,"scripts/check/mandates.py",x+w-28,y+52,{w:500,size:28,f:"mono",col:AG.mut,align:"right"});
-  WM_CHK.forEach((r,i)=>{const s=o.rows?clamp(o.rows(i),0,1):1;if(s<=0.01)return;const yy=y+84+i*rh;ctx.save();ctx.globalAlpha*=s;
+  ag_T(ctx,"THE PROJECT'S CHECK",x+28,y+52,{w:700,size:28,ls:3.5,col:AG.kick});ag_T(ctx,"scripts/check/mandates.py",x+28,y+94,{w:500,size:28,f:"mono",col:AG.blue});
+  WM_CHK.forEach((r,i)=>{const s=o.rows?clamp(o.rows(i),0,1):1;if(s<=0.01)return;const yy=top+i*rh;ctx.save();ctx.globalAlpha*=s;
     if(i){ctx.strokeStyle="rgba(60,50,40,0.1)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+24,yy);ctx.lineTo(x+w-24,yy);ctx.stroke();}
     ag_T(ctx,r[0],x+28,yy+38,{w:700,size:28,col:AG.ink});ag_T(ctx,r[1],x+28,yy+72,{w:500,size:28,f:"mono",col:AG.mut});
     ag_tick(ctx,x+w-46,yy+rh/2,26,rgba(AG.green,clamp(s*2-1,0,1)),4.2);ctx.restore();});
-  if(fl>0.01){const yy=y+84+WM_CHK.length*rh+6;ctx.save();ctx.globalAlpha*=clamp(fl*2-0.4,0,1);ctx.fillStyle=rgba(AG.amber,0.1);rr(ctx,x+14,yy,w-28,84,12);ctx.fill();
+  if(fl>0.01){const yy=top+WM_CHK.length*rh+6;ctx.save();ctx.globalAlpha*=clamp(fl*2-0.4,0,1);ctx.fillStyle=rgba(AG.amber,0.1);rr(ctx,x+14,yy,w-28,84,12);ctx.fill();
     ag_warn(ctx,x+50,yy+42,30,rgba(AG.amber,1));ag_T(ctx,"a grant allows more than the page:",x+82,yy+34,{w:700,size:28,col:AG.ink});
     ag_T(ctx,"the check fails, before anything merges",x+82,yy+70,{w:600,size:28,col:AG.amber});ctx.restore();}
   ctx.restore();return bb;}
@@ -312,3 +330,24 @@ function wm_nights(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,n=o.n||14,u=clamp(
     ctx.fillStyle="rgba(84,88,106,0.7)";ctx.beginPath();ctx.arc(cx-3,y-2,11,0,TAU);ctx.fill();ctx.fillStyle="#E9E6DF";ctx.beginPath();ctx.arc(cx+3,y-6,10,0,TAU);ctx.fill();
     ag_tick(ctx,cx,y+44,20,rgba(AG.green,1),3.6);ctx.restore();}
   ctx.restore();}
+
+/* a tool where lines are held, as a small tile: o.mark (its official mark), o.name, o.sub (what it holds), o.a, o.k, o.glow 0..1 */
+function wm_tile(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=o.sub?112:84,bb={x,y,w,h};if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.75,1,clamp(o.k,0,1.1)));
+  ag_box(ctx,x,y,w,h,20,{edge:AG.blue,edgeA:0.6,glow:o.glow>0?AG.blue:null,glowA:o.glow||0});
+  const mw=o.mark?wm_mark(ctx,o.mark,x+26,y+h/2,o.mark==="github"?36:44):0,tx=x+26+(mw?mw+20:0);
+  ag_T(ctx,o.name,tx,y+(o.sub?48:h/2+11),{w:700,size:32});if(o.sub)ag_T(ctx,o.sub,tx,y+90,{w:500,size:28,col:AG.mut});
+  ctx.restore();return bb;}
+
+/* one tutor who moved this term: HR's two versions of their contract, the one from before they moved (a Nursing unit) and the one that
+   holds today (a Public Health unit), an arrow between them; o.arrow 0..1 draws it on, o.now 0..1 lights the one that holds today
+   (green), o.a, o.k; returns the box and each slip's */
+const WM_MV={w:340,h:146,gap:110};
+function wm_moved(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,M=WM_MV,bb={x,y,w:2*M.w+M.gap,h:M.h,slips:[{x,y,w:M.w,h:M.h},{x:x+M.w+M.gap,y,w:M.w,h:M.h}]};if(a<=0)return bb;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+bb.w/2,y+M.h/2,lerp(0.8,1,clamp(o.k,0,1.1)));
+  [["version 1","a Nursing unit"],["version 2","a Public Health unit"]].forEach((v,i)=>{const b=bb.slips[i],lit=i?clamp(o.now||0,0,1):0;
+    ag_box(ctx,b.x,b.y,b.w,b.h,16,{edge:lit>0?AG.green:AG.orange,edgeA:0.35+0.4*lit});wm_fileIcon(ctx,b.x+36,b.y+40,rgba(AG.orange,0.9),false);
+    ag_T(ctx,"CONTRACT",b.x+64,b.y+50,{w:700,size:28,ls:2,col:AG.kick});ag_T(ctx,v[0],b.x+28,b.y+92,{w:600,size:28,col:AG.mut});
+    ag_T(ctx,v[1],b.x+28,b.y+128,{w:700,size:28,col:AG.ink});if(lit>0.02)ag_tick(ctx,b.x+b.w-36,b.y+38,22,rgba(AG.green,lit),4);});
+  const u=clamp(o.arrow==null?1:o.arrow,0,1),ay=y+M.h/2;if(u>0.01)wm_arrow(ctx,[x+M.w+12,ay,x+M.w+40,ay,x+M.w+M.gap-40,ay,x+M.w+M.gap-14,ay],u,{col:AG.orange,lw:3.5,head:12});
+  ctx.restore();return bb;}

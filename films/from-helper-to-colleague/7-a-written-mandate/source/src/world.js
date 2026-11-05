@@ -6,7 +6,7 @@
      wm_night     the night's light over what stands in the lab, drawn before it; the words and cards come after it, at full contrast
      wm_scr       draw in screen space, whatever the camera is doing
      wm_tag       a tag at the top left: where and when
-     wm_pillAt    a pill that springs in at t0 and fades at t1
+     wm_pillAt    a pill that springs in at t0 and fades at t1 (o.icon "undo" too: the undo arrow); wm_pillL, the same by its left edge
      wm_cardAt    a card (ag_textCard) that springs in at t0 and fades at t1
      wm_dash      a dashed rounded edge, for what is only proposed or a draft
      wm_wrap      words wrapped in as few lines as the width allows, even, and in two lines after a comma or a full stop where one is near
@@ -40,8 +40,12 @@ function wm_tag(ctx,s,a,o){o=o||{};if(a<=0)return;const f={w:500,size:28,f:"mono
   ctx.strokeStyle=AG.card.edge;ctx.lineWidth=1.2;rr(ctx,x,y,w,h,12);ctx.stroke();ag_T(ctx,s,x+24,y+38,{w:500,size:28,f:"mono",col:AG.ink});ctx.restore();}
 // two tags in turn at the same place: the first until t1, the second from it, crossed over 0.4 s
 function wm_tags(ctx,S,tt,list){wm_scr(ctx,S,()=>{list.forEach((g,i)=>{const nx=list[i+1],a=ag_in(tt,g[1],0.4)*(nx?1-ag_in(tt,nx[1],0.4):1)*(g[2]==null?1:g[2]);wm_tag(ctx,g[0],a);});});}
-function wm_pillAt(ctx,x,y,text,t,t0,t1,o){const a=ag_in(t,t0,0.35)*(t1==null?1:1-ag_in(t,t1,0.5));if(a<=0)return null;const k=ag_spr(t,t0,0.45);
-  ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.7,1,clamp(k,0,1.2)));const b=ag_pill(ctx,x,y,text,o||{});ctx.restore();return b;}
+function wm_pillAt(ctx,x,y,text,t,t0,t1,o){o=o||{};const a=ag_in(t,t0,0.35)*(t1==null?1:1-ag_in(t,t1,0.5));if(a<=0)return null;const k=ag_spr(t,t0,0.45);
+  ctx.save();ctx.globalAlpha*=a;ag_about(ctx,x,y,lerp(0.7,1,clamp(k,0,1.2)));const b=ag_pill(ctx,x,y,text,o);
+  // the undo arrow as its icon (ag_pill leaves an icon it doesn't know blank, with room for it)
+  if(o.icon==="undo")wm_undoIcon(ctx,b.x+40,y,30,rgba(o.col||AG.ink,1),3.2);ctx.restore();return b;}
+// a pill whose left edge is at x (ag_pill takes its middle)
+function wm_pillL(ctx,x,y,text,t,t0,t1,o){o=o||{};const w=ag_tw(ctx,text,{w:700,size:o.size||30})+(o.icon?96:56);return wm_pillAt(ctx,x+w/2,y,text,t,t0,t1,o);}
 function wm_cardAt(ctx,x,y,w,words,t,t0,t1,o){o=o||{};const a=ag_in(t,t0,0.4)*(t1==null?1:1-ag_in(t,t1,0.5));if(a<=0)return ag_textCard(ctx,x,y,w,words,{measure:true});
   return ag_textCard(ctx,x,y,w,words,Object.assign({},o,{a,k:Math.min(1,ag_spr(t,t0,0.5))}));}
 // the shared wrap (ag_wrap) fills each line in turn, which can leave one short word on the last. This keeps its number of lines; in
@@ -91,13 +95,14 @@ function wm_clock(ctx,x,y,r,mins,a){a=a==null?1:a;if(a<=0)return;ctx.save();ctx.
 /* ---------------------------------------------------------------- the lab
    Anil's desk across the left, his screen at its right end; the wall clock at the top right; test, an oak tray on the floor in the
    middle, where the night build runs on a copy of the data; production behind a pane of glass at the right, which the agent only reads.
-   The agent hangs over the tray's left end (WM_L.agent). Positions are the lab's, in the 1920 x 1080 frame. */
-const WM_L={desk:[60,868,760],anil:[370,590,0.84],screen:[598,616,222,138],clock:[1666,132,50],tray:[1120,790,560],glass:[1460,236,420,612],agent:[980,500,60]};
+   The agent hangs over the tray's right end, by the glass (WM_L.agent), so the wall from x 80 to 1180 is free for the night's cards.
+   Positions are the lab's, in the 1920 x 1080 frame. */
+const WM_L={desk:[60,868,760],anil:[370,590,0.84],screen:[598,616,222,138],clock:[1666,132,50],tray:[1120,790,560],glass:[1460,236,420,612],agent:[1290,450,60]};
 // the build's tables, as small slabs: in the tray (test) and behind the glass (production); k, how lit
 function wm_slabs(ctx,x,y,n,col,k){for(let i=0;i<n;i++){const sx=x+i*112,g=ctx.createLinearGradient(0,y-26,0,y);g.addColorStop(0,"#F1EFEA");g.addColorStop(1,"#D9D5CD");
     ctx.save();ctx.shadowColor="rgba(40,32,24,0.22)";ctx.shadowBlur=8;ctx.shadowOffsetY=3;ctx.fillStyle=g;rr(ctx,sx,y-26,92,26,6);ctx.fill();ctx.restore();
     ctx.fillStyle=rgba(col||AG.blue,0.35+0.4*(k||0));ctx.fillRect(sx+8,y-21,76,4);ctx.fillStyle="rgba(86,92,100,0.25)";for(let j=0;j<2;j++)ctx.fillRect(sx+8,y-13+j*6,60-j*18,2.5);}}
-/* the lab's things, by day or by night (o.night): Anil's desk and screen (o.screen: "dark", "report" or "pr" rows), Anil himself
+/* the lab's things, by day or by night (o.night): Anil's desk and screen (o.screen: "dark", or "day", "report" or "pr" rows), Anil himself
    (o.anil 0..1, faded as one; o.anilT his own time for breathing, o.anilGaze, o.anilSmile, o.anilNod), the clock (o.time, minutes after
    midnight; o.clockA), the tray with the build's tables (o.testLit 0..1, o.testCol), production's tables behind the glass (o.prodLit
    0..1). Then o.things(ctx), drawn in the room's light (the agent), then the light, then o.after(ctx) at full contrast (the band's light
@@ -121,9 +126,10 @@ function wm_lab(ctx,S,t,o){o=o||{};const L=WM_L,[dx,dy,dw]=L.desk,[sx,sy,sw,sh]=
   const la=o.labels==null?1:o.labels;if(la>0){ag_pill(ctx,tx,ty+60,"Test · a copy of the data",{icon:"draft",col:AG.blue,a:la,size:28});
     const pl="Production · read only",pw=ag_tw(ctx,pl,{w:700,size:28})+96;ag_pill(ctx,gx+gw-pw/2-18,gy+44,pl,{icon:"lock",col:AG.blue,a:la,size:28});}
   if(o.after)o.after(ctx);}
-// what Anil's screen shows: dark at night with nothing on it; a report or a pull request as quiet rows, the top row in its colour
+// what Anil's screen shows: dark at night with nothing on it; the week's answers, a report or a pull request as quiet rows, the top row
+// in its colour (blue, violet, green)
 function wm_screen(c,x,y,w,h,what){if(what==="dark"){c.fillStyle="rgba(120,130,150,0.18)";c.fillRect(x,y,w,6);return;}
-  const col=what==="pr"?AG.green:AG.violet;c.fillStyle=rgba(col,0.18);c.fillRect(x,y,w,22);c.fillStyle="rgba(86,92,100,0.3)";
+  const col=what==="pr"?AG.green:what==="report"?AG.violet:AG.blue;c.fillStyle=rgba(col,0.18);c.fillRect(x,y,w,22);c.fillStyle="rgba(86,92,100,0.3)";
   for(let k=0;k<5;k++){c.fillRect(x+14,y+36+k*19,(w-28)*(k%2?0.62:0.84),6);}}
 
 /* three tutors' contracts, each held twice (the day's change read every version HR keeps): a slip for each, "version 2", the one that
@@ -133,23 +139,23 @@ function wm_screen(c,x,y,w,h,what){if(what==="dark"){c.fillStyle="rgba(120,130,1
 const WM_CW=228,WM_CH=104,WM_CG=30;
 function wm_contracts(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return{x,y,w:3*WM_CW+2*WM_CG,h:WM_CH+46};const dup=clamp(o.dup||0,0,1),fix=clamp(o.fix||0,0,1);
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+(3*WM_CW+2*WM_CG)/2,y+WM_CH/2,lerp(0.8,1,clamp(o.k,0,1.1)));
-  const slip=(sx,sy,ver,edge,ea,al)=>{if(al<=0.01)return;ctx.save();ctx.globalAlpha*=al;ag_box(ctx,sx,sy,WM_CW,WM_CH,14,{edge,edgeA:ea});
-    wm_fileIcon(ctx,sx+34,sy+38,rgba(edge||AG.mut,0.9),false);ag_T(ctx,"CONTRACT",sx+62,sy+48,{w:700,size:28,ls:2,col:AG.kick});
+  // a version's slip; the one behind (back) shows only its version, below the one in front: its head is always under that one
+  const slip=(sx,sy,ver,edge,ea,al,back)=>{if(al<=0.01)return;ctx.save();ctx.globalAlpha*=al;ag_box(ctx,sx,sy,WM_CW,WM_CH,14,{edge,edgeA:ea});
+    if(!back){wm_fileIcon(ctx,sx+34,sy+38,rgba(edge||AG.mut,0.9),false);ag_T(ctx,"Contract",sx+62,sy+48,{w:700,size:28,col:AG.kick});}
     ag_T(ctx,ver,sx+28,sy+86,{w:600,size:28,col:AG.ink});ctx.restore();};
   for(let i=0;i<3;i++){const sx=x+i*(WM_CW+WM_CG),u=ag_sine(clamp(dup*1.5-i*0.25,0,1))*(1-ag_sine(clamp(fix*1.5-i*0.25,0,1))),
       old=1-ag_sine(clamp(fix*1.5-i*0.25,0,1))*1;
     // the old version, behind: it slides out down and to the right while it's counted, and back (and away) once the fix holds
-    slip(sx+lerp(0,22,u),y+lerp(0,46,u),"version 1",AG.amber,0.35+0.5*u,clamp(u*2,0,1)*old);
+    slip(sx+lerp(0,22,u),y+lerp(0,46,u),"version 1",AG.amber,0.35+0.5*u,clamp(u*2,0,1)*old,true);
     const ok=ag_sine(clamp(fix*1.5-i*0.25-0.2,0,1));slip(sx,y,"version 2",ok>0.02?AG.green:(u>0.3?AG.amber:null),0.4+0.5*Math.max(ok,u),1);
-    if(ok>0.02)ag_tick(ctx,sx+WM_CW-34,y+34,22,rgba(AG.green,ok),4);}
+    if(ok>0.02)ag_tick(ctx,sx+WM_CW-32,y+78,22,rgba(AG.green,ok),4);}
   ctx.restore();return{x,y,w:3*WM_CW+2*WM_CG,h:WM_CH+46};}
 
 /* ---------------------------------------------------------------- small pieces */
 function wm_gear(ctx,x,y,r,col,turn){ctx.save();ctx.translate(x,y);ctx.rotate(turn*TAU);ctx.fillStyle=col;ctx.beginPath();const n=8;
   for(let i=0;i<n*2;i++){const ang=i*Math.PI/n,rr_=i%2?r*0.78:r;ctx.lineTo(Math.cos(ang-0.18)*rr_,Math.sin(ang-0.18)*rr_);ctx.lineTo(Math.cos(ang+0.18)*rr_,Math.sin(ang+0.18)*rr_);}
   ctx.closePath();ctx.fill();ctx.fillStyle="#EEECE7";ctx.beginPath();ctx.arc(0,0,r*0.36,0,TAU);ctx.fill();ctx.restore();}
-// a plain script: no model, the same steps every time (blue, a gear); o.w, o.turn, o.glow, o.a, o.k, o.tick (0..1, a green tick and
-// o.result under the title, in green)
+// a plain script: no model, the same steps every time (blue, a gear); o.w, o.turn, o.glow, o.a, o.k, o.edge, o.subCol
 function wm_script(ctx,x,y,title,sub,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||Math.max(ag_tw(ctx,title,{w:700,size:32}),sub?ag_tw(ctx,sub,{w:500,size:28}):0)+140,h=sub?124:84;
   if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:o.edge||AG.blue,edgeA:0.75,glow:o.glow?AG.blue:null,glowA:o.glow});
   wm_gear(ctx,x+52,y+h/2,22,rgba(AG.blue,1),o.turn||0);ag_T(ctx,title,x+96,y+(sub?56:h/2+11),{w:700,size:32});if(sub)ag_T(ctx,sub,x+96,y+96,{w:500,size:28,col:o.subCol||AG.mut});

@@ -1,8 +1,8 @@
 /* ===== A mandate, written and enforced: the five stages and their gates =====
-   Five stages, not a switch's fs_stages, copied whole from that film's source (its branch claude/project-thread-x3g9en, 9f03a9f6, 5
+   Five stages, not a switch's fs_stages, copied whole from that film's source (its branch claude/project-thread-x3g9en, 2c63ffcf, 5
    November 2026) under this film's prefix, as the series' briefs ask, so the stages keep 3.1's look, words and colours. If 3.1 changes
-   it before this film merges, it's copied again. Its own notes follow, unchanged but for the name. */
-/*    wm_stages(ctx, x, y, w, o) draws the series' picture of the five stages: five oak steps rising from left to right on the floor, each
+   it before this film merges, it's copied again. Its own notes follow, unchanged but for the name.
+   wm_stages(ctx, x, y, w, o) draws the series' picture of the five stages: five oak steps rising from left to right on the floor, each
    with its number on its face and a card on its top with its name (the plan's names, or o.short for one word or two), and a slim gate
    before each step, a post with a round knob that turns green once the gate is passed. Everything it needs is inside it, and it calls
    only the module's shared helpers (ag_box, ag_T, ag_tw, ag_floorShadow, ag_tick, ag_about), so a later film can copy it
@@ -13,8 +13,8 @@
      o.a    the whole picture's opacity; o.k [5] each step springing in (0 to 1), o.lit [5] each stage lit (a blue edge, 0 to 1),
             o.dim (0 to 1) the stages not lit, quieter; o.col [5] a colour for a stage's edge instead of blue (amber for a stage a task
             moved down from, green for one passed)
-     o.short  the short names, on one line, for a small picture (true or 1); between 0 and 1 the names change over, the long
-              fading as the short come in
+     o.short  the short names, on one line, for a small picture (true or 1); between 0 and 1 the names change over: the long
+              fade out in the first half, and the short come in in the second, so the two never show at once
      o.gates  [5] each gate shown (0 to 1), or true for all; o.passed [5] each gate passed (0 to 1): its knob turns green, with a tick
      o.gate   {i, a, k, x, y, w}: the words of gate i (0 to 4, the gate before stage i + 1) on a card at (x, y) (w wide, or as wide as
               its words), with a line to the gate's knob
@@ -53,8 +53,9 @@ function wm_stages(ctx,x,y,w,o){o=o||{};
     ctx.globalAlpha*=clamp((kk-0.85)/0.12,0,1);
     ag_box(ctx,S.x,S.y,S.w,S.h,18,{edge:lit>0.02?col:null,edgeA:0.35+0.6*lit,glow:lit>0.02?col:null,glowA:lit});
     ag_T(ctx,"STAGE "+(i+1),S.x+16,S.y+36,{w:700,size:28,ls:3,col:lit>0.4?col:[80,86,94]});
-    if(sm>0)ag_T(ctx,SHORT[i],S.x+16,S.y+82,{w:700,size:30,a:sm});
-    if(sm<1)NAMES[i].forEach((l,j)=>ag_T(ctx,l,S.x+16,S.y+78+j*38,{w:700,size:32,a:1-sm}));
+    const sa=clamp(sm*2-1,0,1),la=clamp(1-sm*2,0,1);
+    if(sa>0)ag_T(ctx,SHORT[i],S.x+16,S.y+82,{w:700,size:30,a:sa});
+    if(la>0)NAMES[i].forEach((l,j)=>ag_T(ctx,l,S.x+16,S.y+78+j*38,{w:700,size:32,a:la}));
     ctx.restore();}
   // the gates: a slim post and its knob before each step; a passed gate's knob turns green, with a tick
   for(let i=0;i<5;i++){const ga=arr(o.gates,i,0),G=out.gates[i];if(ga<=0)continue;const ps=clamp(arr(o.passed,i,0),0,1),top=G.y,bot=i?out.stages[i-1].top:y;

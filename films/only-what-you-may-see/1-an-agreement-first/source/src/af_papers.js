@@ -102,7 +102,7 @@ function af_agreement(ctx,x,y,w,o){o=o||{};const show=o.show||(()=>1),hi=o.hi||(
 
 /* ---------------------------------------------------------------- the agreement's contract: its terms where the platform reads them */
 function af_contract(ctx,x,y,w,o){o=o||{};const show=o.show||(()=>1),hi=o.hi||(()=>0);
-  return af_paper(ctx,x,y,w,{kick:"Contract",kickCol:"cyan",title:"2026-14",rows:[{label:"Columns",text:"course · results · year of birth · learner code",lines:["course · results ·","year of birth · learner code"],a:show(0),glow:hi(0)},
+  return af_paper(ctx,x,y,w,{kick:"Contract · 2026-14",kickCol:"cyan",rows:[{label:"Columns",text:"course · results · year of birth · learner code",lines:["course · results ·","year of birth · learner code"],a:show(0),glow:hi(0)},
     {label:"Group",text:"Health progress study",a:show(1),glow:hi(1)},{label:"Until",text:"30 June 2027",a:show(2),glow:hi(2),col:o.ended?"coral":null}]},
     {a:o.a,k:o.k,behind:o.behind,measure:o.measure,labelW:160,col:"cyan"});}
 
@@ -131,10 +131,29 @@ function af_register(ctx,x,y,w,o){o=o||{};const h=o.h||420,a=o.a==null?1:o.a;if(
     ctx.restore();ry+=rh+10+(q.note?42:0);});
   ctx.restore();}
 
+/* ---------------------------------------------------------------- a register as a table: what was agreed, by whom, until when
+   af_ledger(ctx, x, y, w, {h, kick, title, head: [[label, dx]], ghosts, rows: [{cells, col, a, glow, pill, pillCol, pillA}], a, behind}):
+   its title, a row of headings, older entries as frosted bars that can't be read (ghosts), then the rows, each cell under its heading;
+   pill (a closed entry's coral pill) sits at the row's right end, under it */
+function af_ledger(ctx,x,y,w,o){o=o||{};const h=o.h||480,a=o.a==null?1:o.a;if(!(a>0.003))return;ctx.save();ctx.globalAlpha*=a;
+  dp_panel(ctx,x,y,w,h,{col:AF_ICE,r:18,behind:o.behind,glowR:40});
+  dp_T(ctx,String(o.kick||"Register").toUpperCase(),x+34,y+66,{w:800,size:28,ls:4,col:"cyan"});
+  dp_T(ctx,o.title||"",x+34,y+118,{w:900,size:36});
+  const H=o.head||[],hy=y+190;H.forEach(([s,dx])=>dp_T(ctx,s,x+34+dx,hy,{w:500,size:28,col:"mut"}));
+  ctx.save();ctx.fillStyle="rgba(190,245,245,0.22)";ctx.fillRect(x+34,hy+22,w-68,1.6);ctx.restore();
+  let ry=hy+80;
+  for(let g=0;g<(o.ghosts||0);g++){ctx.save();ctx.fillStyle="rgba(190,245,245,0.13)";H.forEach(([s,dx],k)=>{rr(ctx,x+34+dx,ry-18,[300,250,150][k%3]-g*30,12,6);ctx.fill();});ctx.restore();ry+=54;}
+  (o.rows||[]).forEach(r=>{const ra=r.a==null?1:r.a;if(ra>0.003){ctx.save();ctx.globalAlpha*=ra;
+    if(r.glow>0){ctx.save();ctx.globalAlpha*=r.glow;ctx.fillStyle=rgba(dp_f(r.glowCol||"cyan"),0.16);rr(ctx,x+16,ry-42,w-32,62,12);ctx.fill();ctx.fillStyle=rgba(dp_f(r.glowCol||"cyan"),1);rr(ctx,x+16,ry-42,5,62,2.5);ctx.fill();ctx.restore();}
+    r.cells.forEach((s,k)=>dp_T(ctx,s,x+34+H[k][1],ry,{w:600,size:28,col:r.col||"ink"}));
+    if(r.pill)dp_pill(ctx,x+w-34,ry+62,r.pill,r.pillCol||"coral",{align:"right",a:r.pillA==null?1:r.pillA});
+    ctx.restore();}ry+=64;});
+  ctx.restore();}
+
 /* ---------------------------------------------------------------- a group's badge, and the people in it
    af_group(ctx, x, y, w, {title, members: [{name, state, a}], a, behind}): a cyan band "Group" (who it lets in is an identity), its
    name, and a row for each member: a person's picture, the name, and a pill for the state of their confidentiality agreement: "signed"
-   (green, "Signed · current"), "renew" (amber, "Renew by February"), "lapsed" (coral, "Lapsed"), with paused (0 to 1) greying the
+   (green, "Signed · current"), "renew" (frosted, "Renew by February"), "lapsed" (coral, "Lapsed"), with paused (0 to 1) greying the
    member, "Paused" */
 function af_group(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(!(a>0.003))return null;const M=o.members||[],h=128+M.length*104;ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
@@ -146,8 +165,10 @@ function af_group(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(!(a>0.003))ret
     ctx.beginPath();ctx.arc(x+62,my+38,34,0,TAU);ctx.strokeStyle=rgba(dp_f(p>0.5?"grey":"cyan"),0.9);ctx.lineWidth=2;ctx.stroke();
     dp_T(ctx,m.name,x+116,my+48,{w:700,size:30,col:p>0.5?"grey":"ink"});ctx.restore();
     if(p>0.003)dp_T(ctx,"Paused",x+116+dp_tw(ctx,m.name,{w:700,size:30})+18,my+48,{w:700,size:28,col:"grey",a:ag_in(p,0.3,0.7)});
-    const st=m.state||"signed",txt=st==="renew"?"Renew by February":st==="lapsed"?"Lapsed":st==="paused"?"Paused":"Signed · current",col=st==="renew"?"amber":st==="lapsed"||st==="paused"?"coral":"green";
-    dp_pill(ctx,x+w-30,my+50,txt,col,{align:"right",a:m.pillA==null?1:m.pillA});
+    const st=m.state||"signed",txt=st==="renew"?"Renew by February":st==="lapsed"?"Lapsed":st==="paused"?"Paused":"Signed · current",pa=m.pillA==null?1:m.pillA;
+    // a date coming up means nothing yet: frosted glass and ice words; lapsed is closed (coral), signed and current allowed (green)
+    if(st==="renew"){const pw=dp_tw(ctx,txt,{w:700,size:28})+36;if(pa>0.003){ctx.save();ctx.globalAlpha*=pa;dp_panel(ctx,x+w-30-pw,my+50-36,pw,48,{col:AF_ICE,r:24,glowR:16,behind:o.behind});dp_T(ctx,txt,x+w-30-pw+18,my+50,{w:700,size:28});ctx.restore();}}
+    else dp_pill(ctx,x+w-30,my+50,txt,st==="lapsed"||st==="paused"?"coral":"green",{align:"right",a:pa});
     ctx.restore();});
   ctx.restore();return{x,y,w,h};}
 

@@ -104,8 +104,8 @@ function af_screen(ctx,u,o){o=o||{};const a=o.a==null?1:o.a;if(!(a>0.003))return
    to a laptop and a shared folder, at the frame's edges */
 function af_harm(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(!(a>0.003))return;const w=760,rh=62,c3=o.third==null?1:o.third,bh=o.behind;ctx.save();ctx.globalAlpha*=a;
   dp_panel(ctx,x,y,w,74+rh*3+16,{col:AF_ICE,r:18,behind:bh});
-  const cx=[x+30,x+290,x+520];dp_T(ctx,"Name",cx[0],y+50,{w:700,size:28,col:"violet"});dp_T(ctx,"Results",cx[1],y+50,{w:700,size:28,col:"mut"});
-  if(c3>0.003)dp_T(ctx,"Exam support",cx[2],y+50,{w:700,size:28,col:"violet",a:ag_in(c3,0,0.5)});
+  const cx=[x+30,x+290,x+520];dp_T(ctx,"Name",cx[0],y+50,{w:700,size:28});dp_T(ctx,"Results",cx[1],y+50,{w:700,size:28,col:"mut"});
+  if(c3>0.003)dp_T(ctx,"Exam support",cx[2],y+50,{w:700,size:28,a:ag_in(c3,0,0.5)});
   const names=["Samira Haddad","Tom Ellery","Priya Nair"],sup=["extra time","none","extra time"],res=["90 of 120","75 of 120","105 of 120"];
   for(let i=0;i<3;i++){const ry=y+74+i*rh;
     dp_frost(ctx,cx[0]-10,ry+8,230,rh-16,c=>ag_T(c,names[i],cx[0],ry+rh/2+10,{w:600,size:28,col:[240,240,250],deco:1}),{behind:bh});

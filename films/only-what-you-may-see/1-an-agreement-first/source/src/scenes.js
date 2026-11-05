@@ -90,12 +90,14 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({
     // a university holds secrets too: the hall and the platform; the study's request; a no dims it, a yes with nothing written lets
     // a violet haze spread from it; two papers come first, and the door to the data stays closed
     {cut:true,at:P.too,place:"afHall",keys:[[P.too,960,540,1.0],[P.too+0.1,960,540,1.03]],d:16,push:0.01,draw:(x,tt)=>{
+      // all of it leaves as the title card comes in, so nothing shows through it
+      const out=1-ag_in(tt,P.title-0.3,0.7);if(!(out>0.003))return;x.save();x.globalAlpha*=out;
       af_platform(x,{a:ag_in(tt,P.too+0.4,0.6)});
       const q=af_pop(tt,P.ask-0.1,null),dim=ag_io(tt,P.no,P.yes-0.2,0.4),lit=ag_io(tt,P.yes,P.expose+1.4,0.5);
       if(lit>0)dp_halo(x,510,250,620,"violet",0.32*lit*ag_in(tt,P.expose-0.4,0.8)+0.1*lit);
       af_request(x,110,170,800,{col:dim>0.01?mix(AF_ICE,DP.F.grey,dim):AF_ICE,a:q.a*(1-0.45*dim),k:q.k,behind:"afHall"});
       af_twoPapers(x,110,520,{ka:Math.max(0,tt-P.papers+0.1),kb:Math.max(0,tt-P.papers-0.3),behind:"afHall"});
-      af_door(x,{a:ag_in(tt,P.access-0.2,0.7)});}}]);
+      af_door(x,{a:ag_in(tt,P.access-0.2,0.7)});x.restore();}}]);
   // the place and the year, top left, in the park and the hut
   const kA=[0,2,3,4,7].includes(i)?(i===0?ag_in(t,c.place-0.2,0.8):1):0;if(kA>0)dp_kicker(ctx,"Bletchley Park · 1939",null,{a:kA});
   dp_title(ctx,S,t,P.title,AF_TITLE,AF_SUB,"FILM 1 OF 8 · ONLY WHAT YOU MAY SEE");});
@@ -118,14 +120,14 @@ scene("asks",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({anil:wAt(sc,"
       dp_person(x,"anil",ax,ay,as,{t:tt,cut:AF_BACK,gaze:[3,1]});
       af_screen(x,clamp((tt-P.progress+0.2)/1.8,0,1),{a:ag_in(tt,P.progress-0.5,0.5)});
       const n=af_pop(tt,P.anil-0.1,P.asks-0.3);af_name(x,1070,110,520,"Faculty of Health","Anil Kurian",{k:n.k,a:n.a,behind:"afAnil"});
-      const q=af_pop(tt,P.asks,null),dx=1400*Math.pow(clamp((tt-fly)/0.7,0,1),2);af_request(x,1000+dx,110,800,{k:q.k,a:q.a,behind:"afAnil"});}},
+      const q=af_pop(tt,P.asks,null),go=clamp((tt-fly)/0.45,0,1),dx=100*ag_sine(go);af_request(x,1000+dx,110,800,{k:q.k,a:q.a*(1-go),behind:"afAnil"});}},
     // the registrar's office: the request lands by Mei, who owns the records. What two films gave it, and what neither says
     {cut:true,at:land-0.25,place:"afMei",keys:[[land-0.25,960,540,1.0],[land,970,540,1.03]],d:30,push:0.01,draw:(x,tt)=>{af_mei(x,tt);
       const m=af_pop(tt,P.owns-0.1,null);af_name(x,1290,110,560,"Owner · registrar's office","Mei Tanaka",{k:m.k,a:m.a,behind:"afMei"});
-      const lx=lerp(-860,110,ag_eo(clamp((tt-land+0.25)/0.7,0,1)));af_request(x,lx,150,800,{full:true,behind:"afMei"});
+      const ar=clamp((tt-land+0.25)/0.5,0,1),lx=lerp(10,110,ag_eo(ar));af_request(x,lx,150,800,{full:true,a:ag_sine(ar),behind:"afMei"});
       const g=af_pop(tt,P.gave,P.unsaid-0.4),mk=af_pop(tt,P.market-0.1,P.unsaid-0.4);
-      const b1=dp_card(x,110,380,380,{kick:"Access",title:"for: … · until: …"},{col:AF_ICE,k:g.k,a:g.a,behind:"afMei"});dp_tag(x,110,b1.y+b1.h+24,"Who may see it",AF_ICE,{a:g.a,behind:"afMei"});
-      const b2=dp_card(x,530,380,380,{kick:"Requests",title:"Asked in one place"},{col:AF_ICE,k:mk.k,a:mk.a,behind:"afMei"});dp_tag(x,530,b2.y+b2.h+24,"The marketplace",AF_ICE,{a:mk.a,behind:"afMei"});
+      const b1=dp_card(x,110,380,400,{kick:"Access",title:"A purpose and an end date"},{col:AF_ICE,k:g.k,a:g.a,behind:"afMei"});dp_tag(x,110,b1.y+b1.h+24,"Who may see it",AF_ICE,{a:g.a,behind:"afMei"});
+      const b2=dp_card(x,540,380,400,{kick:"Requests",title:"Asked in one place"},{col:AF_ICE,k:mk.k,a:mk.a,behind:"afMei"});dp_tag(x,540,b2.y+b2.h+24,"The marketplace",AF_ICE,{a:mk.a,behind:"afMei"});
       af_unsaid(x,tt,P);
       // left unsaid: names beside results, then who gets extra time; copies travel to a laptop and a shared folder
       const h=ag_in(tt,P.names-0.3,0.5)*(1-ag_in(tt,P.two,0.5));af_harm(x,110,380,{a:h,third:ag_in(tt,P.extra-0.1,0.6),behind:"afMei"});
@@ -176,7 +178,9 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({own:wAt(sc
       af_promise(x,530,80,860,{kick:"Each person's own",glow:i=>i===5?ag_in(tt,P.outlasts,0.6):0,behind:"hall"});}}]);});
 
 /* ---------------------------------------------------------------- 4 · An agreement for each use */
-const AF_AG={x:260,y:84,w:1440};
+const AF_AG={x:300,y:84,w:1440};
+// the register of agreements, as a table: what was agreed, by whom, until when
+const AF_LEDGER={x:720,y:170,w:1160,head:[["What was agreed",0],["By whom",470],["Until",850]],row:["2026-14 · learner records","Mei Tanaka, Anil Kurian","30 June 2027"]};
 const AF_SAFES=[["project","purpose"],["data",["may","never"]],["people","who"],["setting","where"],["outputs","leave"]];
 scene("agreement",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({purpose:c.purpose,from:c.from,may:c.may,course:wAt(sc,"may","course"),never:wAt(sc,"never","Never"),
     who:c.who,where:c.where,leave:c.leave,ends:c.ends,safe:{people:wAt(sc,"safes","people"),project:wAt(sc,"safes","project"),setting:wAt(sc,"safes","setting"),data:wAt(sc,"safes","data"),outputs:wAt(sc,"safes","outputs")},
@@ -198,8 +202,8 @@ scene("agreement",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({purpose:
     // Yusuf keeps it in the register of agreements
     {cut:true,at:P.register,place:"afYusuf",keys:[[P.register,960,540,1.0],[P.register+0.1,960,540,1.03]],d:7,push:0.01,draw:(x,tt)=>{const [yx,yy,ys]=AF_YUSUF;
       dp_person(x,"yusuf",yx,yy,ys,{t:tt,cut:AF_BACK,gaze:[3,1]});af_name(x,60,110,560,"Data governance","Yusuf Demir",{behind:"afYusuf"});
-      af_register(x,880,170,960,{h:520,kick:"Data sharing",title:"Register of agreements",keeper:"What, by whom, until when",open:ag_in(tt,P.register+0.4,0.8),behind:"afYusuf",
-        rows:[["",{ghost:1}],["",{ghost:1}],["2026-14 · learner records → Health progress study · owner: registrar's office · until 30 June 2027",{glow:ag_in(tt,P.agreed,0.6),a:ag_in(tt,P.register+0.9,0.6)}]]});}},
+      af_ledger(x,AF_LEDGER.x,AF_LEDGER.y,AF_LEDGER.w,{kick:"Data sharing",title:"Register of agreements",head:AF_LEDGER.head,ghosts:2,a:ag_in(tt,P.register+0.2,0.5),behind:"afYusuf",
+        rows:[{cells:AF_LEDGER.row,glow:ag_io(tt,P.agreed,P.agreed+3,0.5),a:ag_in(tt,P.register+0.8,0.6)}]});}},
     // as at Bletchley: the officer's hand on the sheet
     {at:P.bl,dis:0.9,place:"afDesk",keys:[[P.bl,980,660,1.45],[P.bl+0.1,990,670,1.5]],d:3,push:0.01,draw:(x,tt)=>{
       af_desk(x,tt,null,{officer:{pose:af_reachTo([AF_OFFICE.officer[0],AF_OFFICE.officer[1],1,false],AF_OFFICE.sheet[0]-50,AF_OFFICE.sheet[1]-2,"hold"),flat:1},commander:{}});}},
@@ -208,11 +212,12 @@ scene("agreement",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({purpose:
       agree(x,tt,{may:1,never:1,signs:{mei:1,anil:1,chip:1},date:"Monday 12 October 2026",dateA:1,hi:k=>k==="who"?ag_io(tt,P.named,P.stays-0.2,0.3):k==="where"?ag_io(tt,P.stays,P.leaves-0.2,0.3):k==="leave"?ag_in(tt,P.leaves,0.3):0});}}]);});
 
 /* ---------------------------------------------------------------- 5 · Access, made from the agreement */
-const AF_CON={x:80,y:330,w:780};
+const AF_CON={x:80,y:345,w:780},AF_AGY=140;
 // the agreement and its contract, at the hall's left: the contract slides out from under the agreement (out 0 to 1)
-function af_papersLeft(x,tt,o){const out=o.out==null?1:o.out,cy=lerp(110,AF_CON.y,ag_sine(out));
-  if(out>0)af_contract(x,AF_CON.x,cy,AF_CON.w,{hi:o.hi,ended:o.ended,a:ag_in(out,0,0.3),behind:"afHall"});
-  dp_card(x,AF_CON.x,110,AF_CON.w,{kick:"Data sharing agreement",title:"2026-14",sub:"For a study in the Faculty of Health"},{col:AF_ICE,k:o.k,a:o.a,behind:"afHall"});}
+function af_papersLeft(x,tt,o){const con=o.con||{k:1,a:1};
+  if(con.a>0.003)af_contract(x,AF_CON.x,AF_CON.y,AF_CON.w,{hi:o.hi,ended:o.ended,a:con.a,k:con.k,behind:"afHall"});
+  if(o.glow>0)dp_halo(x,AF_CON.x+AF_CON.w/2,AF_AGY+90,460,"cyan",0.22*o.glow);
+  dp_card(x,AF_CON.x,AF_AGY,AF_CON.w,{kick:"Data sharing agreement",title:"2026-14",sub:"For a study in the Faculty of Health"},{col:AF_ICE,k:o.k,a:o.a,behind:"afHall"});}
 const AF_LINE0=[AF_CON.x+AF_CON.w,AF_CON.y+130];
 scene("grant",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({made:wAt(sc,"now","made"),written:wAt(sc,"contract","written"),
     columns:wAt(sc,"terms","columns"),group:wAt(sc,"terms","group"),endT:wAt(sc,"terms","end"),team:wAt(sc,"hand","team"),grant:wAt(sc,"hand","grant"),hand:wAt(sc,"hand","hand"),give:wAt(sc,"hand","give"),
@@ -222,7 +227,7 @@ scene("grant",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({made:wAt(sc,
   const i=ag_shots(ctx,S,t,sc.dur,[
     // the hall and the platform: only now comes access; the agreement, and its contract, which the platform reads
     {at:0,place:"afHall",keys:[[0,960,540,1.0],[0.1,960,540,1.02]],d:20,push:0.01,draw:(x,tt)=>{af_platform(x);
-      const p=af_pop(tt,P.made-0.4,null);af_papersLeft(x,tt,{k:p.k,a:p.a,out:clamp((tt-P.written)/1.0,0,1),hi:hi(tt)});}},
+      af_papersLeft(x,tt,{glow:ag_io(tt,P.made-0.1,P.made+1.6,0.4),con:af_pop(tt,P.written,null),hi:hi(tt)});}},
     // Sam, on the platform team, makes the grant from the contract, never by hand
     {cut:true,at:P.team-0.4,place:"afSam",keys:[[P.team-0.4,960,540,1.0],[P.team,960,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [sx,sy,ss]=AF_SAM;
       dp_person(x,"sam",sx,sy,ss,{t:tt,cut:AF_BACK,gaze:[3,1]});af_name(x,60,110,560,"Platform team","Sam Okafor",{behind:"afSam"});
@@ -232,20 +237,22 @@ scene("grant",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({made:wAt(sc,
     // back in the hall: the grant has reached the study's own space, its four columns and nothing else, the line named by its agreement;
     // in November a new purpose stops at the agreement's edge
     {cut:true,at:P.give-0.2,place:"afHall",keys:[[P.give-0.2,960,540,1.0],[P.give,960,540,1.02]],d:24,push:0.01,draw:(x,tt)=>{af_platform(x);
-      af_papersLeft(x,tt,{out:1});const lp=0.55+0.45*af_ph(tt,P.give-0.2,0.5);dp_link(x,AF_LINE0,AF_ROOMIN,"cyan",lp,{lw:4});
+      af_papersLeft(x,tt,{});const lp=0.55+0.45*af_ph(tt,P.give-0.2,0.5);dp_link(x,AF_LINE0,AF_ROOMIN,"cyan",lp,{lw:4});
       af_room(x,{a:ag_in(tt,P.give,0.4),cols:k=>ag_in(tt,P.give+0.4+k*0.18,0.35)});
+      if(tt>P.every-0.2&&tt<P.every+1.6)dp_halo(x,1000,400,220,"cyan",0.25*ag_io(tt,P.every-0.2,P.every+1.4,0.4));
       const tg=ag_in(tt,P.give+0.6,0.5);dp_tag(x,860,370,"Agreement 2026-14","cyan",{a:tg,to:[1010,AF_LINE0[1]+(AF_ROOMIN[1]-AF_LINE0[1])*0.5],behind:"afHall"});
-      if(tt>P.every-0.2&&tt<P.every+1.6)dp_halo(x,1000,400,200,"cyan",0.25*ag_io(tt,P.every-0.2,P.every+1.4,0.4));
       dp_pill(x,AF_CON.x,780,"No agreement, no grant","coral",{a:ag_in(tt,P.no,0.4)*(1-ag_in(tt,P.nov,0.5))});
       // November: the faculty asks the study for names; the request travels to the study's space and stops at its wall
-      const rq=af_pop(tt,P.faculty,null),rx=lerp(-700,1160-620,ag_eo(clamp((tt-P.faculty)/2.2,0,1)));
-      if(rq.a>0){dp_card(x,rx,722,620,{kick:"Request · to call them",title:"Names of learners who need support"},{col:AF_ICE,a:rq.a,behind:"afHall"});
-        dp_pill(x,rx+620,736,"Not in 2026-14","coral",{align:"right",a:ag_in(tt,P.stretch-0.1,0.4)});}}},
+      const rq=af_pop(tt,P.faculty,null),RW=700,rx=lerp(40,AF_PLAT.x-RW-6,ag_eo(clamp((tt-P.faculty)/1.6,0,1)));
+      if(rq.a>0){dp_card(x,rx,740,RW,{kick:"Request · to call them",title:"Names of learners who need support"},{col:AF_ICE,a:rq.a,behind:"afHall"});
+        const st=ag_in(tt,P.faculty+1.4,0.4);if(st>0)dp_link(x,[AF_PLAT.x,744],[AF_PLAT.x,858],"coral",1,{lw:4,dot:false,alpha:st});
+        dp_pill(x,AF_PLAT.x+24,818,"Not in 2026-14","coral",{a:ag_in(tt,P.stretch-0.1,0.4)});}}},
     // the support team asks Mei for an agreement of its own: a new paper, empty but for its purpose to come
     {cut:true,at:P.support,place:"afMei",keys:[[P.support,960,540,1.0],[P.support+0.1,970,540,1.03]],d:5,push:0.01,draw:(x,tt)=>{af_mei(x,tt);
       af_name(x,1290,110,560,"Owner · registrar's office","Mei Tanaka",{behind:"afMei"});
-      const lx=lerp(-900,110,ag_eo(clamp((tt-P.support-0.4)/0.9,0,1)));
-      af_paper(x,lx,200,820,{kick:"Data sharing agreement",title:"Student support team",rows:[{label:"Purpose",text:"…"},{label:"Signed",text:"…"}]},{behind:"afMei",labelW:180});}}]);
+      const sp=clamp((tt-P.support-0.4)/0.6,0,1),lx=lerp(10,110,ag_eo(sp));x.save();x.globalAlpha*=ag_sine(sp);
+      const b=af_paper(x,lx,200,820,{kick:"Data sharing agreement",title:"Student support team",rows:[{label:"Purpose",text:"To call learners who need support"},{label:"May have",lines:[""]},{label:"Ends",lines:[""]},{label:"Signed",lines:[""]}]},{behind:"afMei",labelW:180});
+      x.save();x.fillStyle="rgba(190,245,245,0.3)";b.rows.slice(1).forEach(r=>x.fillRect(lx+AF_PAD+180,r.base+6,420,1.6));x.restore();x.restore();}}]);
   dp_kicker(ctx,"November 2026",null,{a:i>=2?ag_in(t,P.nov,0.6):0});});
 
 /* ---------------------------------------------------------------- 6 · When it ends */
@@ -254,15 +261,15 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({ends:wAt(sc,"
   const twoUp=(x,tt,o)=>{af_totals(x,140,190,700,{behind:"hall",a:o.ta,k:o.tk});af_promise(x,930,110,860,{kick:"Anil Kurian's",who:"Anil Kurian",sign:1,chip:1,seed:2.2,glow:i=>i===5?(o.glow||0):0,a:o.pa,k:o.pk,behind:"hall"});};
   const i=ag_shots(ctx,S,t,sc.dur,[
     // the grant ends by itself on its date: the line from the contract thins to nothing; the study's copy frosts over and is gone
-    {at:0,place:"afHall",keys:[[0,960,540,1.0],[0.1,960,540,1.02]],d:12,push:0.01,draw:(x,tt)=>{af_platform(x);af_papersLeft(x,tt,{out:1,ended:tt>P.ends});
+    {at:0,place:"afHall",keys:[[0,960,540,1.0],[0.1,960,540,1.02]],d:12,push:0.01,draw:(x,tt)=>{af_platform(x);af_papersLeft(x,tt,{ended:tt>P.ends});
       const th=1-af_ph(tt,P.ends,1.8);if(th>0.01)dp_link(x,AF_LINE0,AF_ROOMIN,"cyan",1,{lw:4*th,alpha:th});
       af_room(x,{cols:()=>1,frost:clamp((tt-P.deleted)/1.4,0,1)});
-      const gy=af_ph(tt,P.ends,1.2);dp_tag(x,860,370,"Agreement 2026-14",mix(DP.F.cyan,DP.F.grey,gy),{behind:"afHall"});}},
+      const gy=af_ph(tt,P.ends,1.2);dp_tag(x,860,370,"Agreement 2026-14",mix(DP.T.cyan,DP.T.grey,gy),{behind:"afHall"});}},
     // Yusuf closes the agreement in the register
     {cut:true,at:P.yusuf-0.2,place:"afYusuf",keys:[[P.yusuf-0.2,960,540,1.0],[P.yusuf,960,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [yx,yy,ys]=AF_YUSUF;
       dp_person(x,"yusuf",yx,yy,ys,{t:tt,cut:AF_BACK,gaze:[3,1]});af_name(x,60,110,560,"Data governance","Yusuf Demir",{behind:"afYusuf"});
-      const cl=ag_in(tt,P.closes,0.5);af_register(x,880,170,960,{h:520,kick:"Data sharing",title:"Register of agreements",keeper:"What, by whom, until when",behind:"afYusuf",
-        rows:[["",{ghost:1}],["",{ghost:1}],["2026-14 · learner records → Health progress study · owner: registrar's office · until 30 June 2027",{col:cl>0.5?"grey":"ink",tick:clamp((tt-P.closes)/0.6,0,1),tickCol:"grey",note:"Closed · 30 June 2027",noteA:cl}]]});}},
+      const cl=ag_in(tt,P.closes,0.5);af_ledger(x,AF_LEDGER.x,AF_LEDGER.y,AF_LEDGER.w,{kick:"Data sharing",title:"Register of agreements",head:AF_LEDGER.head,ghosts:2,behind:"afYusuf",
+        rows:[{cells:AF_LEDGER.row,col:cl>0.5?"mut":"ink",pill:"Closed",pillA:cl}]});}},
     // the totals stay; Anil's promise holds
     {cut:true,at:P.totals,place:"hall",keys:[[P.totals,960,540,1.0],[P.totals+0.1,960,540,1.02]],d:10,push:0.01,draw:(x,tt)=>{const a=af_pop(tt,P.totals+0.2,null),b=af_pop(tt,P.holds-0.2,null);
       twoUp(x,tt,{ta:a.a,tk:a.k,pa:b.a,pk:b.k,glow:ag_in(tt,P.leaves-0.3,0.6)});}},
@@ -271,9 +278,9 @@ scene("ends",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({ends:wAt(sc,"
     // the study learned what it needed, and named no one: the totals and Anil's promise, side by side
     {at:P.learned,dis:1.0,place:"hall",keys:[[P.learned,960,540,1.0],[P.learned+0.1,960,540,1.02]],d:10,push:0.01,draw:(x,tt)=>twoUp(x,tt,{glow:0})},
     // access is the end of an agreement: the two papers, and the door to the data at their end, opening a little, then closing
-    {at:P.end,later:true,dis:0.5,place:"hall",keys:[[P.end,960,540,1.0],[P.end+0.1,960,540,1.02]],d:6,push:0.01,draw:(x,tt)=>{
-      af_twoPapers(x,240,430,{ka:Math.max(0,tt-P.end-0.5),kb:Math.max(0,tt-P.end-0.8),behind:"hall"});
-      af_door(x,{rect:[1400,410,240,360],open:0.4*Math.sin(Math.PI*clamp((tt-P.start-0.4)/3.2,0,1)),a:ag_in(tt,P.end+1.2,0.6),behind:"hall"});}}]);
+    {at:P.end,later:true,dis:0.5,place:"hall",keys:[[P.end,960,540,1.0],[P.end+0.1,960,540,1.02]],d:6,push:0.01,draw:(x,tt)=>{const out=1-ag_in(tt,P.fin-0.4,0.8);if(!(out>0.003))return;
+      x.save();x.globalAlpha*=out;af_twoPapers(x,240,430,{ka:Math.max(0,tt-P.end-0.5),kb:Math.max(0,tt-P.end-0.8),behind:"hall"});
+      af_door(x,{rect:[1400,410,240,360],open:0.4*Math.sin(Math.PI*clamp((tt-P.start-0.4)/3.2,0,1)),a:ag_in(tt,P.end+1.2,0.6),behind:"hall"});x.restore();}}]);
   dp_kicker(ctx,"Wednesday 30 June 2027",null,{a:i===0?ag_in(t,0.3,0.8):0});
   dp_end(ctx,S,t,P.fin,AF_TITLE,"Access is the end of an agreement, not the start.","Film 1 of 8","Only what you may see");
   if(t>P.fin)dp_T(ctx,"Next: Know what you hold",960,790,{w:600,size:28,align:"center",col:"mut",a:ag_in(t,P.fin+1.4,0.8)});});

@@ -62,9 +62,28 @@ SLIP = 67                 # G, where C should be
 # the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
 BL, PL, FX = 0.037, 0.080, 1.3
 
-# a small wooden room round the piano, ringing on for about a second and a half
+# a small wooden room round the piano, ringing on for about a second and a half. Its level is set by what it rings where the notes are
+# (its gain from 100 Hz to 1.5 kHz is one), and each bowed note is set back to its own level after it (_held), as the video guidelines
+# ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said, and moved the bowed notes by -3.6 to
+# +3.3 dB, each by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.5)).astype(np.float32))(np.arange(int(1.5 * SR)) / SR)
-_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 # the piano's soundboard: broad resonances that colour every string, bowed or plucked, and nothing much above about 1.5 kHz
 BOARD = [(110, 90, 0.8), (240, 170, 1.0), (520, 320, 0.6), (1100, 500, 0.25)]
 def _board(fk):
@@ -88,8 +107,7 @@ def bow(m, a, b, g=1.0, att=0.6, rel=1.2, pan=None, room=0.3):
     s = s / max(1e-9, float(np.abs(s).max()))
     hush = filt(noise(n / SR + 0.01)[:n], 'band', (300, 1400)) * 0.004 * np.where(x < sec, np.minimum(1, x / att), 0)
     s = filt((s + hush).astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), a, g * BL, max(-0.35, min(0.35, (m - 60) * 0.015)) if pan is None else pan)
 
 # ---- the same strings, plucked by hand and damped with felt: a round, woody note whose higher partials die soonest, damped by hand

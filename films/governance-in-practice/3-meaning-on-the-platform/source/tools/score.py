@@ -54,11 +54,13 @@ def hz(m):
 # the chords, as (bass viol, tenor viol, treble viol): one player to a note, the bass at the root
 I, IV, V, vi, iii = (38, 57, 66), (43, 59, 62), (45, 61, 64), (47, 62, 66), (42, 57, 61)
 
-# ---- the levels: the consort sits about as far under the voice as the series' other films' music (matched by loudness, not by
-# peak); the mandolin a little under it, as it's plucked close; the effects about 12 dB under the music (FX scales them all). Since
-# the author's review of What an agent is (4 November 2026) the consort and the mandolin are 3 dB lower, as low as in the governance
-# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
-VL, ML_, FX = 0.021, 0.035, 1.12
+# ---- the levels: the consort sits about as far under the voice as the series' other films' music (matched by loudness, not by peak);
+# the mandolin a little under it, as it's plucked close; the effects about 12 dB under the music (FX scales them all). Since the
+# author's review of What an agent is (4 November 2026) the consort and the mandolin are 3 dB lower, as low as in the governance films
+# the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music. With the room
+# set by what it rings where the notes are (below), the viols are 5 dB higher and the mandolin 1 dB, so each is as loud as before, its
+# echo now quieter
+VL, ML_, FX = 0.0373, 0.0393, 1.12
 LEVEL = {'tr': 1.0, 'te': 1.0, 'ba': 1.1}
 PAN = {'tr': -0.3, 'te': 0.0, 'ba': 0.3}  # as a consort sits in a half circle: the treble at the left, the bass at the right
 
@@ -71,8 +73,27 @@ BODY = {  # resonances as (Hz, width, weight); where the harmonics start to fall
     'tr': ([(290, 100, 0.55), (510, 150, 0.85), (1200, 500, 0.8)], 1500, (700, 2000)),
     'te': ([(200, 70, 0.55), (380, 120, 0.85), (980, 420, 0.75)], 1250, (500, 1600)),
     'ba': ([(100, 36, 0.55), (230, 80, 0.9), (720, 320, 0.7)], 950, (280, 1200))}
+# A small room round the players. Its level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and
+# each held note is set back to its own level after it (_held), as the video guidelines ask: scaled by all it rang, as at first, the
+# room rang 10 dB louder there than its share said, and moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.4)).astype(np.float32))(np.arange(int(1.4 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 def _harm(inst, f):
     """the weights of a note's harmonics on inst, at f Hz"""
     F, fm = BODY[inst][:2]; n = max(1, int(2500 // f)); k = np.arange(1, n + 1); fk = f * k
@@ -120,8 +141,7 @@ def _line(inst, segs, g, att, rel, room, pan, tie):
     lo, hi = BODY[inst][2]
     s = s + 0.014 * filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)) * lev * (1 + 2.5 * np.exp(-x / 0.07))
     s = filt(s.astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), T0, g * VL * LEVEL[inst], pan)
 def note(inst, m, s, sec, g=1.0, **o):
     """one held note"""

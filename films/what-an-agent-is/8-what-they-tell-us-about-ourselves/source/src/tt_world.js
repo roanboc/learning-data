@@ -145,6 +145,8 @@ function tt_couple(ctx,t,o){o=o||{};const H_=TT_HOME,cut=H_.table[1]-H_.table[3]
 function tt_at(x,y,s,flip,fx,fy){return[x+(fx-296)*s*(flip?-1:1),y+(fy-596)*s];}
 const tt_mouth=(x,y,s,flip)=>tt_at(x,y,s,flip,AG_FACE.mid[0],AG_FACE.mid[1]),tt_ear=(x,y,s,flip)=>tt_at(x,y,s,flip,AG_FACE.ear[0],AG_FACE.ear[1]);
 
+// the lab's shots draw its light over what stands there, so the bare room keeps it while a later moment comes in
+AG_BARE.lab=c=>ag_roomLight(c,1);
 AG_PLACES.tt_lab78=c=>{const hz=690;
   // an institutional green-grey, a darker dado, a window with blinds on the right
   tt_wall(c,hz,[200,206,194],{dado:470});

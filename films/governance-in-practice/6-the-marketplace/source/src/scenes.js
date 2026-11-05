@@ -88,8 +88,9 @@ scene("window",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({on:wAt(sc,"
 scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({fr:wAt(sc,"before","from the files"),f:c.for,cn:c.counts,rd:c.ready,wh:wAt(sc,"ready","where to ask"),
     ct:c.contract-0.3,tw:c.two,pp:wAt(sc,"purpose","a purpose")}));
   gv_shots(ctx,S,t,sc.dur,gk_run([
-    // the product's page: each part of its promise lit as it's named
-    {at:0,place:"facBig",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_prodPage(x,tt,{from:fin(tt,P.fr,0.6),tag:fin(tt,P.fr+0.5,0.6),
+    // the product's page: each part of its promise lit as it's named. The same screen the chapter before ends on, the marketplace: it
+    // leaves before the page comes (later), so the product's name never shows twice
+    {later:true,at:0,place:"facBig",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_prodPage(x,tt,{from:fin(tt,P.fr,0.6),tag:fin(tt,P.fr+0.5,0.6),
       lit:[gv_io(tt,P.f,P.cn-0.2,0.4),gv_io(tt,P.cn,P.rd-0.2,0.4),gv_io(tt,P.rd,P.ct,0.4),gv_io(tt,P.wh,P.ct,0.4)]})},
     // its contract, column by column: the two that can lead back to a learner; a purpose, and an end date
     {at:P.ct,place:"facBig",keys:[[P.ct,960,540,1]],push:0.02,draw:(x,tt)=>gk_contractTab(x,tt,{two:fin(tt,P.tw,0.8),card:fin(tt,P.pp,0.8)})}],sc.dur,1));});

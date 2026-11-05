@@ -59,12 +59,19 @@ MARK = ((63, 0.38), (68, 0.38), (70, 0.32), (72, 1.5))  # the cornett's phrase: 
 # ---- the levels: the autoharp and the cornett as loud as the module's other music after the author's review of 4 November 2026 (its
 # loud moments under -26.5 dB of full scale as one speaker plays the score, tools/quiet.py); the effects well under the music, as low as
 # the governance films' (FX scales them all). A string plucked on its own is played a little firmer (PK) than each string of a strum,
-# so that one note carries about as well as a chord
-AL, CL, PK, FX = 0.058, 0.040, 1.35, 1.3
+# so that one note carries about as well as a chord. With the room set by what it rings where the notes are (below), the cornett is
+# 0.8 dB higher, so it's as loud as before, its echo now quieter
+AL, CL, PK, FX = 0.058, 0.0438, 1.35, 1.3
 
-# a small room round the players, ringing on for about a second and a quarter, and nothing much above 1.5 kHz
+# a small room round the players, ringing on for about a second and a quarter, and nothing much above 1.5 kHz. Its level is set by
+# what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), as the video guidelines ask: scaled by all it rang, as
+# at first, it rang 10 dB louder there than its share said. _room() keeps each note as loud as it was dry, as before
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.3)).astype(np.float32))(np.arange(int(1.3 * SR)) / SR)
-_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1500); _IR[:int(0.02 * SR)] = 0; _IR /= _band(_IR)
 # the autoharp's box: broad resonances that colour every string, and little above a kilohertz
 BOX = [(190, 120, 0.7), (420, 260, 1.0), (900, 500, 0.5)]
 def _box(fk):

@@ -61,13 +61,34 @@ I, IV, V, vi, iii = (41, (57, 60, 65)), (46, (58, 62, 65)), (48, (60, 64, 67)), 
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
 # lute a little over the synthesiser, as it's played close; the effects about 12 dB under the music (FX scales them all). Since the
 # author's review of What an agent is (4 November 2026) both are 2 dB lower, as low as in the governance films the author accepted
-# (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music
-SL, LL, FX = 0.024, 0.044, 1.28
+# (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music. With the room set by what it
+# rings where the notes are (below), the synthesiser is 3.4 dB higher and the lute 1.5 dB, so each is as loud as before, its echo now
+# quieter
+SL, LL, FX = 0.0355, 0.0523, 1.28
 PAN = {'s': -0.14, 'l': 0.16}  # the synthesiser a little left of centre, the lute a little right
 
-# a small room of wood and plaster round the players, ringing on for about a second and a half
+# a small room of wood and plaster round the players, ringing on for about a second and a half. The room's level is set by what it
+# rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back to its own level after it
+# (_held), as the video guidelines ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said, and
+# moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.4)).astype(np.float32))(np.arange(int(1.4 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- the synthesiser: one plain voice, a sine with a triangle under it (its odd harmonics, falling as 1/k squared), nothing above
 # about 2.4 kHz. A note swells in slowly and fades as it's let go; a long one swells a little and eases, once; the pitch never moves
@@ -109,8 +130,7 @@ def _sline(segs, g, att, rel, room, pan):
             if aj > 1e-4:
                 s[p0:p1] += aj * w * e[p0:p1] * np.sin(2 * np.pi * f * (j + 1) * xs + (np.pi if j % 4 == 2 else 0))
     s = filt(s.astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), T0, g * SL, pan)
 
 # ---- the lute: gut strings, plucked with the flesh of a finger near the rose, close and soft. Each note is one string: its upper

@@ -1,0 +1,35 @@
+seeds:
+
+  - name: ceremonies
+    description: >
+      One row per graduation ceremony in the Great Hall: six each December, three in March and
+      two in July, with the day and time it starts and when its round's list goes to the
+      certificate printer (5 pm on the Thursday about four weeks before the round's first
+      ceremony). Reference data, owned by the graduations office; changes come through a pull
+      request they approve.
+    config:
+      column_types:
+        ceremony_id: string
+        ceremony_round: string
+        ceremony_on: date
+        starts_at: timestamp
+        list_due_at: timestamp
+      meta: {owner: "Malia Fonoti, graduations office", domain: student, purpose: reference}
+    columns:
+      - name: ceremony_id
+        description: The ceremony's code, its round and its place in the round, like DEC26-3.
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Malia Fonoti, graduations office"}
+          - not_null:
+              config:
+                meta: {owner: "Malia Fonoti, graduations office"}
+      - name: ceremony_round
+        description: The round of ceremonies it belongs to, like December 2026. A round's list goes to the printer once.
+      - name: ceremony_on
+        description: The day of the ceremony.
+      - name: starts_at
+        description: When the ceremony starts, in the university's time.
+      - name: list_due_at
+        description: When its round's list goes to the certificate printer. A change after it means a certificate printed again.

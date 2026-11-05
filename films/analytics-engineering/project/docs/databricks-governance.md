@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again on 5 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again and section 11 on 5 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -159,12 +159,14 @@ and a person owns it and answers for what it does. Then the sections above hold 
 for people.
 
 1. **Only what its job needs.** Grant the service principal what its job reads, and nothing to write
-   where it only reads. The registrar's office's agent, which answers the faculties' weekly counts,
-   reads the core and writes nowhere:
+   where it only reads. The Faculty of Health's workload agent, which answers its heads of school's
+   weekly counts of who teaches, reads the two HR tables and writes nowhere:
 
    ```sql
-   grant use catalog on catalog <production catalog> to `<registrar agent>`;
-   grant use schema, select on schema <production catalog>.<schema>_core to `<registrar agent>`;
+   grant use catalog on catalog <production catalog> to `<workload agent>`;
+   grant use schema on schema <production catalog>.<schema>_staging to `<workload agent>`;
+   grant select on table <production catalog>.<schema>_staging.stg_hr_system__staff to `<workload agent>`;
+   grant select on table <production catalog>.<schema>_staging.stg_hr_system__contracts to `<workload agent>`;
    ```
 
    To stop it, an admin deactivates its service principal: it can't sign in, everyone else works on,
@@ -172,15 +174,15 @@ for people.
 2. **The masks it already meets.** Section 3's policy masks every column tagged `direct` for
    `account users` except the readers, and `account users` holds every user and every service
    principal in the account. An agent outside the readers' group reads stars, as Clara does, with no
-   rule written for agents, and a row filter's `TO` clause covers it the same way. The learner code
-   stays readable, so an agent can count without a name.
+   rule written for agents, and a row filter's `TO` clause covers it the same way. The staff key, a
+   hash of the staff ID, isn't tagged, so it stays readable, and an agent can count without a name.
 3. **Its tools, granted like tables.** A Unity Catalog function an agent calls as a tool needs
    `EXECUTE` on it, with `USE CATALOG` and `USE SCHEMA` on its catalog and schema: the agent can run
-   it, and can't change it. The census count is one, `census_day_students(faculty)`
-   (`examples/agents-on-databricks/census_day_students.sql`):
+   it, and can't change it. The count of active research projects is one, `active_projects(faculty)`
+   (`examples/agents-on-databricks/active_projects.sql`):
 
    ```sql
-   grant execute on function <production catalog>.<planning schema>.census_day_students to `<census agent>`;
+   grant execute on function <production catalog>.<research schema>.active_projects to `<project check agent>`;
    ```
 
 4. **Models and tool servers, through Unity Gateway.** Unity Gateway, part of Unity Catalog, has been
@@ -195,7 +197,7 @@ for people.
      `system.ai.block_jailbreak` detects jailbreak and prompt-injection content.
    - **A rate limit**, in queries or tokens a minute, for a user, a group or a service principal.
    - **Usage**: every call is a row of `system.ai_gateway.usage`, with its requester (a user or a
-     service principal) and its tokens, so the office an agent works for sees what it costs.
+     service principal) and its tokens, so the faculty or office an agent works for sees what it costs.
 5. **Its work, under its own name.** Section 6's query lists the agent's reads under its service
    principal's ID, apart from people's; `system.access.table_lineage` shows the tables its queries
    read; and section 7's review lists its grants with everyone else's.
@@ -226,7 +228,33 @@ goes one way, to where agents read it on Databricks, and nobody edits it there.
    Deleting a session, or a session store, doesn't delete the memory kept from it: an entry is
    deleted as its file, here, and from the team's store at the next load.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, and *Skills support in Unity Gateway* to the end again on 5 November 2026)
+## 11. Critical data, as a tag
+
+Data is good enough for a use, or not, and each use of a table depends on a few of its columns.
+The model's YAML names them: a column's `meta.critical_for` lists the uses that can't do without it
+(the graduation list's printed name for the certificates and the programme; its ceremony and
+attendance for the seating plan). After the table builds, dbt tags each of those columns with the
+key-only tag `critical_data`, and takes the tag off a column no use needs any more
+(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
+(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
+the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+
+1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
+   *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can
+   set it, so a column is marked critical where its uses are written down, and nowhere else.
+2. Give the identity that runs dbt `ASSIGN` on it. It owns the tables it builds, which is enough to
+   tag their columns; anyone else needs `APPLY TAG` on the table too.
+
+Tagging a column takes Databricks Runtime 16.1 or above, or a SQL warehouse. To list every critical
+column in the catalog, and the table it's in:
+
+```sql
+select schema_name, table_name, column_name
+from information_schema.column_tags
+where tag_name = 'critical_data'
+```
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, and the last two, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -285,3 +313,7 @@ goes one way, to where agents read it on Databricks, and nobody edits it there.
 - Databricks, *Tutorial: Add sessions and memory to an existing agent* (a read-only grant):
   https://docs.databricks.com/aws/en/agents/agent-memory/existing-agent-tutorial
 - Databricks, *Lakebase Postgres*: https://docs.databricks.com/aws/en/oltp/projects/
+- Databricks, *SET TAG*, again for section 11 (a column takes a key-only tag; setting a tag already
+  there fails; Databricks Runtime 16.1 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-set-tag
+- Databricks, *COLUMN_TAGS* (the tags on each column, by catalog, schema and table):
+  https://docs.databricks.com/aws/en/sql/language-manual/information-schema/column_tags

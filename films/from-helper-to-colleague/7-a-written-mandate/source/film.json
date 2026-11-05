@@ -1,0 +1,40 @@
+{
+  "key": "a-written-mandate",
+  "title": "A mandate, written and enforced",
+  "sub": "The seventh and last film of From helper to colleague, the third series on AI agents in data work: stage five, where an agent works alone under a mandate its owner signs, one page naming its tasks, where it may do them, its folders, its checks, its limits, the switch that stops it and the way every change is undone, each line held where the work happens: grants in Unity Catalog, rules in GitHub, the workflow's timeout and a rate limit in Unity Gateway.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is structure (the mandate, a grant, a rule, a tool), violet the model thinking, orange the data and its evidence, green what passed or what a person approved, amber what failed or went wrong. Test is an oak tray, a sandbox; production is under glass.",
+  "src": [
+    "world.js",
+    "mandate.js",
+    "stages.js",
+    "close.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "first",
+    "mandate",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "first"
+  ],
+  "urgent": []
+}

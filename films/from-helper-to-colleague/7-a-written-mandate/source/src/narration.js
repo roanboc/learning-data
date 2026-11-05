@@ -1,0 +1,93 @@
+// A mandate, written and enforced, the seventh and last film of From helper to colleague, the third series on AI agents in data work. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and dates in words). The few longer stops are in breath.js.
+const NARR={
+"first":{"name":"Last night, in test","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"Today, at the university."},
+ {"id":"fail","gap":0.8,"text":"Last night at eleven, the census build failed in test."},
+ {"id":"test","gap":0.8,"text":"In test, each change is tried on a copy of the data before it reaches production."},
+ {"id":"nobody","gap":0.8,"text":"Nobody was at work. Jun's census agent was: finding out why is its job."},
+ {"id":"harm","gap":0.8,"text":"But an agent that works alone can do harm alone."},
+ {"id":"loop","gap":0.8,"text":"Once, on a night like this, it went round in circles until six, and spent a week's budget."},
+ {"id":"looks","gap":0.8,"text":"And a fix that looks like code can be a decision."},
+ {"id":"oct","gap":0.8,"text":"On the night of 21 October, in production, fourteen extra students looked like a bug.","say":"On the night of the twenty-first of October, in production, fourteen extra students looked like a bug."},
+ {"id":"mei","gap":0.8,"text":"Whether they counted was Mei's to decide, and that count goes to the government."},
+ {"id":"where","gap":0.8,"text":"What it might do was spread over grants, a plan and a page for agents, with no one place to sign, read or stop."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"mandate","gap":0.8,"text":"So Jun wrote its mandate: one page, in the project, saying what it may do alone."},
+ {"id":"which","gap":0.8,"text":"Its tasks, and where. Its folders, and its checks."},
+ {"id":"limits","gap":0.8,"text":"Ten rounds, one hour, a set budget."},
+ {"id":"switch","gap":0.8,"text":"A switch that stops it, and a way to undo each change."},
+ {"id":"signed","gap":0.8,"text":"Jun signed it on 30 October, and Noor approved it, as a second person.","say":"Jun signed it on the thirtieth of October, and Noor approved it, as a second person."},
+ {"id":"held","gap":0.8,"text":"And each line is held where the work happens."},
+ {"id":"check","gap":0.8,"text":"Last night, a plain check saw the copy had arrived, and the agent started."},
+ {"id":"cause","gap":0.8,"text":"In three rounds it found why: yesterday's change left out students whose record changed on census day itself."},
+ {"id":"fixed","gap":0.8,"text":"It fixed the code in test, and touched nothing else."},
+ {"id":"report","gap":0.8,"text":"Twenty-two minutes after the failure, its report was waiting for Jun."},
+ {"id":"never","gap":0.8,"text":"Production never saw the bug. This morning, the fix went to Noor, as a pull request."},
+ {"id":"data","gap":0.8,"text":"And for data: an agent works alone only where its autonomy is written down, held where the data lives, and can be taken back."}
+]},
+"page":{"name":"One page, signed","lead":1.0,"tail":1.0,"vo":[
+ {"id":"file","gap":0.8,"text":"The mandate is a file in the project's governance, naming the only tasks the agent may do alone."},
+ {"id":"test","gap":0.8,"text":"In test: find why the night build failed. Fix the code on its own branch, build and check the fix in its own schema, open a pull request, and report by six."},
+ {"id":"prod","gap":0.8,"text":"In production: read, find the cause, and draft the fix. Never rerun: a plain job does that."},
+ {"id":"never","gap":0.8,"text":"Everywhere: never change a test, a seed, a contract or a definition; a meaning goes to its owner."},
+ {"id":"first","gap":0.8,"text":"Before it starts, a plain check: has tonight's copy arrived? If not, nothing starts, and Sam is told."},
+ {"id":"twice","gap":0.8,"text":"The same error twice: it stops and reports."},
+ {"id":"gate","gap":0.8,"text":"Signing it was the last step of its gate to stage five."},
+ {"id":"record","gap":0.8,"text":"Twenty nights in test without a miss. A switch that stops it. A way to undo every change."},
+ {"id":"law","gap":0.8,"text":"Europe's AI law asks as much of what it counts as high-risk: people able to understand it, watch it, reverse what it does, and stop it."},
+ {"id":"one","gap":0.8,"text":"It covers one kind of task: on what a census word means, the same agent only suggests."}
+]},
+"held":{"name":"Held where it lives","lead":1.0,"tail":1.0,"vo":[
+ {"id":"words","gap":0.8,"text":"A page is only words. So each line is held where the work happens."},
+ {"id":"grants","gap":0.8,"text":"Where it may write lives in Unity Catalog's grants, on its own service principal: in test, only its own schema; in production, nowhere."},
+ {"id":"folders","gap":0.8,"text":"Its folders live in GitHub's rules: its App can't push a change to the tests, the seeds or governance."},
+ {"id":"hour","gap":0.8,"text":"The hour is the workflow's own timeout: at sixty minutes, GitHub cancels the job."},
+ {"id":"rounds","gap":0.8,"text":"Its rounds are counted by the plain code that runs it, not by the model."},
+ {"id":"budget","gap":0.8,"text":"Its budget is a limit in Unity Gateway, on its service principal: 50,000 tokens a minute. With the hour, that caps what any night can cost.","say":"Its budget is a limit in Unity Gateway, on its service principal: fifty thousand tokens a minute. With the hour, that caps what any night can cost."},
+ {"id":"first","gap":0.8,"text":"The plain check is the workflow's first step."},
+ {"id":"agree","gap":0.8,"text":"And the project checks the page against those places: if a grant, a rule or a limit allows more, the check fails before anything merges."},
+ {"id":"widen","gap":0.8,"text":"Nothing the agent reads can widen it, and neither can the agent."}
+]},
+"alone":{"name":"Alone in test, a draft in production","lead":1.0,"tail":1.0,"vo":[
+ {"id":"same","gap":0.8,"text":"From outside, last night and the night of 21 October looked the same: a count that didn't match the census report.","say":"From outside, last night and the night of the twenty-first of October looked the same: a count that didn't match the census report."},
+ {"id":"clear","gap":0.8,"text":"Last night, the contract was clear: each student counts as their record stood on census day."},
+ {"id":"before","gap":0.8,"text":"The code said before census day. One character, and three students fell out."},
+ {"id":"may","gap":0.8,"text":"Putting that back is a fix the mandate lets it make, in test."},
+ {"id":"records","gap":0.8,"text":"On 21 October, fourteen records made in one week, to try a new screen, were dated back to February.","say":"On the twenty-first of October, fourteen records made in one week, to try a new screen, were dated back to February."},
+ {"id":"rule","gap":0.8,"text":"No rule said whether test records count. That wasn't a bug: it was a decision, and Mei made it. Test records never count."},
+ {"id":"apart","gap":0.8,"text":"An agent can't always tell the two apart, and at first, neither can a person."},
+ {"id":"draft","gap":0.8,"text":"So in production, it only drafts. Jun reviews the code, a meaning goes to its owner, and Noor approves the change, as a second person."},
+ {"id":"costs","gap":0.8,"text":"In test, a wrong guess costs only a pull request nobody approves."},
+ {"id":"rerun","gap":0.8,"text":"And a night that only needs to run again needs no agent: a plain job does it."}
+]},
+"stop":{"name":"A switch, and an undo","lead":1.0,"tail":1.0,"vo":[
+ {"id":"shown","gap":0.8,"text":"Two lines more, shown here, not used."},
+ {"id":"switch","gap":0.8,"text":"The switch: Sam deactivates its service principal, and suspends its App on GitHub."},
+ {"id":"sp","gap":0.8,"text":"Then it can't sign in, and its grants stay, for when it's switched on again."},
+ {"id":"app","gap":0.8,"text":"It can't reach the repository, and everyone else works on."},
+ {"id":"undo","gap":0.8,"text":"The undo: every change it proposes is a pull request, and a pull request can be reverted."},
+ {"id":"table","gap":0.8,"text":"And each table keeps its versions, with who wrote each one and when, so a person can restore the one before. By default, for seven days."},
+ {"id":"back","gap":0.8,"text":"The mandate itself can be taken back. Jun can narrow it, or withdraw it, in a pull request, and the task waits for him again, as it did in October."},
+ {"id":"december","gap":0.8,"text":"Each December, it's read again, with the access review."},
+ {"id":"none","gap":0.8,"text":"Last night, nobody needed either."}
+]},
+"close":{"name":"Five stages, each with its gate","lead":1.0,"tail":1.0,"vo":[
+ {"id":"morning","gap":0.8,"text":"Back at the university, this morning, Jun read the report and its measures: three rounds, twenty-two minutes, well within its budget."},
+ {"id":"noor","gap":0.8,"text":"He reviewed the fix, and Noor approved it. Tonight it runs in test, then in production."},
+ {"id":"count","gap":0.8,"text":"The count stays 18,412, and the agent decided nothing a person owns.","say":"The count stays eighteen thousand, four hundred and twelve, and the agent decided nothing a person owns."},
+ {"id":"began","gap":0.8,"text":"This series began with five stages, not a switch."},
+ {"id":"three","gap":0.8,"text":"Each stage changes whose identity the agent uses, how much it may do, and what the person does."},
+ {"id":"gate","gap":0.8,"text":"Each has its gate, and the last is a mandate: written, narrow, and revocable."},
+ {"id":"seven","gap":0.8,"text":"Seven films, seven lessons."},
+ {"id":"l1","gap":0.8,"text":"Autonomy is earned one kind of task at a time."},
+ {"id":"l2","gap":0.8,"text":"Borrowed rights are for learning, in a sandbox."},
+ {"id":"l3","gap":0.8,"text":"Before an agent works alone, it's architected like a colleague."},
+ {"id":"l4","gap":0.8,"text":"The platform's protections hold, whoever types."},
+ {"id":"l5","gap":0.8,"text":"One identity per agent, so its work can be seen and stopped."},
+ {"id":"l6","gap":0.8,"text":"An agent proposes; a person releases."},
+ {"id":"l7","gap":0.8,"text":"Autonomy is a written, narrow, revocable mandate."},
+ {"id":"road","gap":0.8,"text":"This series is one more step on a longer road: from an agent that helps one person, to one that works beside the team."},
+ {"id":"next","gap":0.8,"text":"Next: a colleague that isn't a person."}
+]}
+};

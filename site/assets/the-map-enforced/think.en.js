@@ -14,7 +14,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   logs:{q:"Anyone could type planning-agent[bot] as a commit's author. How can a reviewer tell the agent's own commits?",
     opts:[{t:"They're signed with a secret key of its own, which only the planning agent can read.",near:true},{t:"They're made through its App, so GitHub marks them verified, and a typed name isn't.",ok:true},{t:"They name its owner, Clara Jensen, in each message, which a typed name never does."}],
     why:"A name typed into a commit is only text. The planning agent's own commits are made through its App, so GitHub marks them verified, and it holds no secret to do it with: each run signs in with a pass that lasts minutes. Then the auditors' question is one search. Where you work, which names in your logs could anyone have typed?"},
-  stop:{q:"Sam deactivates the planning agent's service principal for ten minutes. What happens?",
+  stop:{q:"Sam deactivates the planning agent's service principal for a few minutes. What happens?",
     opts:[{t:"It can't sign in, and its grants are removed, so the map must give them again when it's back.",near:true},{t:"Every agent in its group stops too, since they all sign in with the group's one identity."},{t:"It can't sign in, and it keeps its rights, while Jun, Lucía and the workload agent work on.",ok:true}],
     why:"Each agent has its own name in each tool, so each can be stopped on its own. A deactivated service principal can't sign in, and its grants stay for when it's turned back on. On Wednesday, its next call failed, and nobody else stopped. A helper on Jun's sign-in could only be stopped by stopping Jun. How would you stop one of your agents, and only it?"}
   }}};

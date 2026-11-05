@@ -159,7 +159,7 @@ The film can stop at the end of four chapters, with one question each (`site/ass
 | Written from the map | Next term, the planning agent's work needs to read one more table. What should happen first? | The step that needs it changes on the map, through review, and the script writes the grant. A grant made first by hand and written on the map later is the other way round, and the check fails on it until the map catches up. |
 | A place of its own | On Tuesday, a grant given by hand let the agent's group change Planning's production tables. Why couldn't the agent have used it? | It works in the development workspace, where production can only be read, whatever its grants say. The check each night only reads: it failed, and Sam took the grant back in the morning. |
 | Under its own name | Anyone could type `planning-agent[bot]` as a commit's author. How can a reviewer tell the agent's own commits? | They're made through its App, so GitHub marks them verified, and a typed name isn't. The agent holds no secret key of its own. |
-| Stopped, and only it | Sam deactivates the planning agent's service principal for ten minutes. What happens? | It can't sign in, and it keeps its rights, while Jun, Lucía and the workload agent work on. Deactivating doesn't remove its grants, and nobody else signs in as it. |
+| Stopped, and only it | Sam deactivates the planning agent's service principal for a few minutes. What happens? | It can't sign in, and it keeps its rights, while Jun, Lucía and the workload agent work on. Deactivating doesn't remove its grants, and nobody else signs in as it. |
 
 ## What the example project has
 

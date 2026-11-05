@@ -1,4 +1,4 @@
-/* ===== A contributor joins: the scenes =====
+/* ===== A place on the map: the scenes =====
    Seven chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The places are painted once
    (past.js, lab.js); what moves is drawn live in the shots of ag_shots. The opening is Southern California: the hills, the lot where
    help arrives and the map on its table, in 1970 and the years after. Then the university's lab, one room for the rest of the film,
@@ -167,7 +167,7 @@ scene("scope",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
       Q.forEach((q,i)=>{const y=320+i*120;cj_pillAt(cx,640,y,q[0],tt,q[2]-0.1,q[3]==null?end-1.0:q[3]-0.2,{col:AG.amber,icon:"warn"});
         if(q[1])cj_pillAt(cx,640,y,q[1],tt,q[3]+0.2,end-1.0,{col:AG.green,icon:"tick"});});
       cj_pillAt(cx,A.x,A.y+A.r+200,"its place on the map",tt,T.place-0.1,end-1.0,{col:AG.blue});}}]);
-  ag_title(ctx,S,t,end,"A contributor joins",null,"FILM 3 OF 7 · FROM HELPER TO COLLEAGUE");
+  ag_title(ctx,S,t,end,"A place on the map",null,"FILM 3 OF 7 · FROM HELPER TO COLLEAGUE");
 });
 
 /* ---------------------------------------------------------------- 3 · Two newcomers */
@@ -193,9 +193,9 @@ scene("monday",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       cj_pillAt(cx,200,300,"Lucía Ortega",tt,0.6,T.same-0.6,{});
       // Planning's tickets: on Jun's sign-in all year, then the planning agent's
       const ta=ag_in(tt,T.year-0.2,0.5)*(1-ag_in(tt,T.same-1.6,0.5)),mv=ag_sine(clamp((tt-T.now)/1.4,0,1));
-      cj_tickets(cx,lerp(560,1000,mv),330,{a:ta,edge:mv>0.5?AG.violet:null});
+      cj_tickets(cx,lerp(535,880,mv),330,{a:ta,edge:mv>0.5?AG.violet:null});
       cj_pillAt(cx,730,520,"drafted by Jun's helper, on his sign-in",tt,T.year+0.4,T.now-0.2,{});
-      cj_pillAt(cx,1170,520,"the planning agent's, under its own name",tt,T.name-0.2,T.same-1.6,{col:AG.violet});
+      cj_pillAt(cx,1075,520,"the planning agent's, under its own name",tt,T.name-0.2,T.same-1.6,{col:AG.violet,size:28});
       // the welcome, line by line
       cj_welcome(cx,380,170,{head:ag_in(tt,T.same-0.2,0.5),rows:k=>ag_in(tt,rows[k]-0.1,0.5),lit:k=>tt>=rows[k]&&tt<rows[k+1]-0.2?AG.blue:null});
       cj_pillAt(cx,1750,800,"never a person's",tt,T.never-0.1,T.role-0.4,{col:AG.blue});
@@ -216,45 +216,72 @@ scene("monday",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
 });
 
 /* ---------------------------------------------------------------- 4 · A place on the map */
-// the map's elements in the order they come in, so the map builds from its teams
-const CJ_ORDER=["clara","lucia","marts","jun","noor","count","mei","sis","yusuf","govrole","govagent"];
 scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
-    map:wAt(sc,"noor","university's map"),
-    drawn:wAt(sc,"drawn","It's drawn"),assigned:wAt(sc,"drawn","assigned"),owner:wAt(sc,"drawn","with an owner"),
+    week:wAt(sc,"noor","A week before"),map:wAt(sc,"noor","university's map"),
+    work:wAt(sc,"work","from the work"),cap:wAt(sc,"work","the capability"),tix:wAt(sc,"work","Planning's tickets"),
+    ticket:wAt(sc,"process","Each ticket"),cadp:wAt(sc,"process","change a data product"),seven:wAt(sc,"process","seven steps"),prod:wAt(sc,"process","to production"),
+    step:wAt(sc,"roles","Each step"),role:wAt(sc,"roles","to a role"),person:wAt(sc,"roles","a person or an agent"),
+    newr:wAt(sc,"contrib","One new role"),drafts:wAt(sc,"contrib","drafts the change"),builds:wAt(sc,"contrib","builds it"),opens:wAt(sc,"contrib","opens a pull request"),
+    rest:wAt(sc,"people","People keep the rest"),jun:wAt(sc,"people","Jun reviews"),clara:wAt(sc,"people","Clara approves"),noor:wAt(sc,"people","Noor releases"),
+    so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
+    then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),
     may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
     n:[wAt(sc,"maynot","approve"),wAt(sc,"maynot","merge"),wAt(sc,"maynot","change production"),wAt(sc,"maynot","change an approved"),wAt(sc,"maynot","change what"),wAt(sc,"maynot","grant")],
     a:[wAt(sc,"asks","Clara"),wAt(sc,"asks","Mei"),wAt(sc,"asks","Noor"),wAt(sc,"asks","Jun")],
     guess:wAt(sc,"guess","When"),decides:wAt(sc,"guess","a person decides"),
-    census:wAt(sc,"census","The same day"),jun:wAt(sc,"census","census agent"),
-    three:wAt(sc,"three","three agents"),role:wAt(sc,"three","a role"),owner2:wAt(sc,"three","an owner"),third:wAt(sc,"third","The third"),never:wAt(sc,"third","never approves")}));
+    where:wAt(sc,"ahead","Where each"),
+    same:wAt(sc,"workload","The same day"),wl:wAt(sc,"workload","workload agent"),ident:wAt(sc,"workload","its own identity"),noplace:wAt(sc,"workload","no place on the map"),
+    st:wAt(sc,"stages","Its stage"),ass:wAt(sc,"stages","on its assignment"),
+    three:wAt(sc,"three","three agents"),role3:wAt(sc,"three","a role"),owner3:wAt(sc,"three","an owner"),third:wAt(sc,"third","The third"),never3:wAt(sc,"third","never approves")}));
+  const who=[T.jun,T.clara,T.noor];
   ag_shots(ctx,S,t,sc.dur,[
-    // Noor puts it on the university's map, where every person, team and system already has a place; it's drawn as the map draws
-    // software that works beside people: assigned to a role, with an owner; its role's rights beside it; the census agent; three agents
-    {later:true,at:0,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);
-      ag_person(cx,"noor",150,700,0.95,{t:gt,smile:0.2,gaze:[4,-1]});
+    // a week before it started, Noor, the data architect, gives the planning agent a place on the university's map
+    {later:true,at:0,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);
+      ag_person(cx,"noor",560,700,0.95,{t:gt,smile:0.2,gaze:[4,-1]});
+      cj_agent(cx,1460,470,88,gt,{label:"planning agent",floor:726,think:0.2,a:ag_in(tt,0.3,0.6)});
       ag_roomLight(cx,1);
-      const dim=ag_in(tt,T.may-0.6,0.6)*(1-ag_in(tt,T.census-0.6,0.6))+0.55*ag_in(tt,T.three-0.2,0.6);
-      const glowA=k=>ag_io(tt,T.three+k*0.35,T.never+2.2,0.4);
-      cj_map(cx,{show:k=>ag_in(tt,T.map-0.4+CJ_ORDER.indexOf(k)*0.13,0.4),spring:true,dim,keep:dim>0.3&&tt>T.three-1?["clara","jun","yusuf","govagent","govrole"]:["clara"],
-        glow:k=>k==="govagent"&&glowA(2)>0?AG.violet:null});
-      const pa=ag_in(tt,T.drawn-0.2,0.5);
-      cj_newOnMap(cx,{pagent:pa,prole:ag_in(tt,T.assigned-0.5,0.5),passign:clamp((tt-T.assigned)/0.9,0,1),powner:clamp((tt-T.owner)/0.9,0,1),
-        cagent:ag_in(tt,T.jun-0.2,0.5),crole:ag_in(tt,T.jun+0.6,0.5),cassign:clamp((tt-T.jun-1.2)/0.9,0,1),cowner:clamp((tt-T.jun-2.0)/0.9,0,1),
-        glow:k=>(k==="pagent"&&glowA(0)>0)||(k==="cagent"&&glowA(1)>0)?AG.violet:(k==="prole"||k==="crole")&&ag_io(tt,T.role,T.never+2.2,0.4)>0?AG.blue:null});
+      cj_scr(cx,S,()=>cj_tag(cx,"Monday 26 October 2026",ag_in(tt,0.4,0.6)));
+      cj_pillAt(cx,560,282,"Noor · data architect",tt,T.week,null,{});
+      cj_pillAt(cx,1460,690,"a place on the university's map",tt,T.map-0.2,null,{col:AG.blue});}},
+    // she starts from the work: the capability Planning's tickets serve, the service that changes a data product, its seven steps from a
+    // ticket to production; each step assigned to a role, whoever fills it. The planning contributor has the three drafting steps;
+    // people keep the rest, so whoever drafts a change never approves or releases it. Then the planning agent, assigned to that role,
+    // owned by Clara; its role's rights, and whom it asks
+    {later:true,at:T.work-0.7,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
+      ag_roomLight(cx,1);
+      // Planning's tickets, under the capability they serve; gone before the steps come in where they lie
+      cj_tickets(cx,70,256,{a:ag_in(tt,T.tix-0.2,0.4)*(1-ag_in(tt,T.seven-0.9,0.4)),k:Math.min(1,ag_spr(tt,T.tix-0.2,0.5))});
+      const dim=ag_in(tt,T.may-0.6,0.6),drafting=i=>i>=1&&i<=3,people=i=>i>=4;
+      cj_process(cx,{spring:true,dim,keep:k=>["r1","s1","s2","s3","agent"].indexOf(k)>=0,
+        cap:ag_in(tt,T.cap-0.2,0.5),srv:ag_in(tt,T.cadp-0.3,0.5),srvLine:clamp((tt-T.cadp-0.2)/0.9,0,1),
+        step:i=>ag_in(tt,T.seven-0.3+i*0.16,0.4),bracket:clamp((tt-T.prod+0.2)/1.2,0,1),
+        role:k=>ag_in(tt,T.role-0.2+k*0.18,0.4),roleLine:k=>clamp((tt-(T.role+0.3+k*0.18))/0.7,0,1),
+        who:k=>ag_in(tt,who[k]-0.15,0.4),whoLine:k=>clamp((tt-(who[k]+0.25))/0.6,0,1),
+        agent:ag_in(tt,T.assigned-0.1,0.5),agentLine:clamp((tt-T.that)/0.9,0,1),owner:clamp((tt-T.owner+0.1)/1.2,0,1),
+        tint:i=>drafting(i)?[AG.blue,ag_in(tt,[T.drafts,T.builds,T.opens][i-1]-0.15,0.4)]:people(i)?[AG.green,ag_in(tt,who[i-4]-0.15,0.4)]:null,
+        divide:clamp((tt-T.so+0.2)/1.0,0,1),
+        glow:k=>(k==="r1"&&ag_io(tt,T.newr-0.1,T.rest-0.2,0.4)>0.5)||(drafting(+k.slice(1))&&k[0]==="s"&&ag_io(tt,T.where-0.1,T.same+2,0.4)>0.5)?AG.blue:
+          k==="agent"&&ag_io(tt,T.assigned,T.may-0.4,0.4)>0.5?AG.violet:null});
+      cj_pillAt(cx,960,834,"a person or an agent",tt,T.person-0.1,T.newr-0.3,{});
+      cj_pillAt(cx,(cj_stepX(4)+cj_stepX(6)+CJ_SW)/2,834,"people keep the rest",tt,T.rest-0.1,T.so-0.3,{col:AG.green});
+      const sa=ag_in(tt,T.sep-0.2,0.5)*(1-ag_in(tt,T.then-0.4,0.4));if(sa>0.01)ag_label(cx,CJ_DIV,786,"Separation of duties",{align:"center",a:sa});
+      cj_pillAt(cx,CJ_DIV,838,"whoever drafts a change never approves or releases it",tt,T.never-0.2,T.then-0.4,{col:AG.blue,icon:"lock"});
       // the role's rights: may, may not, whom it asks; when it isn't sure, it asks, and a person decides
-      cj_rights(cx,1090,90,790,{a:ag_in(tt,T.may-0.4,0.5)*(1-ag_in(tt,T.census-0.7,0.5)),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
-        may:i=>ag_in(tt,T.m[i]-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.census-0.8,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});
-      // the governance review agent was already there: it reviews pull requests, and never approves them
-      cj_pillAt(cx,1420,598,"reviews, never approves",tt,T.never-0.3,null,{col:AG.blue,icon:"lock"});}}]);
+      cj_rights(cx,1090,90,790,{a:ag_in(tt,T.may-0.4,0.5),k:Math.min(1,ag_spr(tt,T.may-0.4,0.5)),
+        may:i=>ag_in(tt,T.m[i]-0.15,0.35),maynot:i=>ag_in(tt,T.n[i]-0.15,0.35),asks:i=>ag_in(tt,T.a[i]-0.15,0.35),glow:ag_io(tt,T.guess-0.2,T.where-0.4,0.4),rule:ag_in(tt,T.decides-0.3,0.4)});}},
+    // the same day, Noor places Anil Kurian's workload agent, with its stage for each kind of task on its assignment; the map now holds
+    // three agents, each with a role and an owner; the third, the governance review agent, was there before (a later moment)
+    {later:true,at:T.same-0.7,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
+      ag_roomLight(cx,1);const s0=T.same-0.5,gl=(k,t0)=>ag_io(tt,t0+k*0.3,T.third-0.3,0.4)>0.5;
+      cj_agents(cx,{head:ag_in(tt,s0,0.5),row:k=>k===0?{a:ag_in(tt,s0,0.5),card:0,ph:1,glow:{agent:gl(0,T.three)?AG.violet:null,role:gl(0,T.role3)?AG.blue:null,owner:gl(0,T.owner3)?AG.blue:null}}:
+        k===2?{a:ag_in(tt,s0+0.3,0.5),glow:{agent:gl(2,T.three)||ag_io(tt,T.third-0.2,T.third+4,0.4)>0.5?AG.violet:null,role:gl(2,T.role3)?AG.blue:null,owner:gl(2,T.owner3)?AG.blue:null}}:
+        {agent:ag_in(tt,T.wl-0.2,0.5),owner:ag_in(tt,T.wl+0.2,0.5),ownLine:clamp((tt-T.wl-0.5)/0.8,0,1),role:ag_in(tt,T.noplace-0.1,0.5),line:clamp((tt-T.noplace-0.3)/0.8,0,1),
+          card:ag_in(tt,T.st-0.2,0.5),stage:j=>ag_in(tt,T.ass-0.3+j*0.25,0.35),glow:{agent:gl(1,T.three)?AG.violet:null,role:gl(1,T.role3)?AG.blue:null,owner:gl(1,T.owner3)?AG.blue:null}}});
+      cj_legend(cx,960,846,{a:ag_in(tt,T.ass+1.4,0.5)});
+      cj_pillAt(cx,1680,583,"never approves",tt,T.never3-0.3,null,{col:AG.blue,icon:"lock"});}}]);
 });
 
 /* ---------------------------------------------------------------- 5 · The gate */
-const CJ_STAGES=[["1","Suggests"],["2","Acts for you, step by step"],["3","Acts for you, within limits"],["4","A contributor that proposes"],["5","A contributor with a mandate"]];
-// the five stages, from 1 at the bottom to 5 at the top: o.show(k), o.lit(k) a colour; returns each row's box
-function cj_ladder(ctx,x,y,w,o){o=o||{};const out=[];CJ_STAGES.forEach((s,k)=>{const yy=y-k*118,b={x,y:yy,w,h:96};out.push(b);const a=o.show?o.show(k):1;if(a<=0.01)return;
-    const lit=o.lit?o.lit(k):null;ctx.save();ctx.globalAlpha*=a;ag_box(ctx,x,yy,w,96,18,{edge:lit,edgeA:0.85});
-    ctx.fillStyle=rgba(lit||AG.mut,lit?0.95:0.55);ctx.beginPath();ctx.arc(x+52,yy+48,26,0,TAU);ctx.fill();
-    ag_T(ctx,s[0],x+52,yy+60,{w:800,size:32,align:"center",col:[250,250,248]});ag_T(ctx,s[1],x+100,yy+59,{w:700,size:32});ctx.restore();});return out;}
 scene("gate",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     gate:wAt(sc,"before","its gate"),
     week:wAt(sc,"redo","The week before"),sandbox:wAt(sc,"redo","in a sandbox"),redid:wAt(sc,"redo","it redid"),
@@ -262,8 +289,9 @@ scene("gate",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     r37:wAt(sc,"result","Thirty-seven"),r3:wAt(sc,"result","On three"),r0:wAt(sc,"result","None was"),
     matters:wAt(sc,"matters","That last"),
     audit:wAt(sc,"audit","Audit"),name:wAt(sc,"audit","under its own name"),
-    stage:wAt(sc,"stage","So for"),four:wAt(sc,"stage","stage four"),word:wAt(sc,"word","For what"),one:wAt(sc,"word","stage one"),
-    never:wAt(sc,"never","It never"),prod:wAt(sc,"never","every change")}));
+    stage:wAt(sc,"stage","So Clara"),four:wAt(sc,"stage","stage four"),
+    wrote:wAt(sc,"word","Noor wrote"),one:wAt(sc,"word","stage one"),
+    chk:wAt(sc,"check","a check fails"),owner:wAt(sc,"check","an owner"),role:wAt(sc,"check","a role"),stg:wAt(sc,"check","a stage for each")}));
   const AGX=420,AGY=636;
   ag_shots(ctx,S,t,sc.dur,[
     // before it worked alone, its gate: the week before, in a sandbox, it redid Planning's last 40 tickets against the bar Clara and
@@ -273,7 +301,7 @@ scene("gate",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       cj_agent(cx,AGX,AGY,80,gt,{label:"planning agent",floor:760,think:0.25+0.5*ag_io(tt,T.redid,T.bar,0.6)});
       ag_roomLight(cx,1);
       cj_cardAt(cx,110,110,620,{kick:"Before it worked alone",title:"Its gate"},tt,T.gate-0.4,null,{kickCol:AG.blue,edge:AG.blue});
-      cj_scr(cx,S,()=>cj_tag(cx,"The week before",ag_in(tt,T.week-0.1,0.5),{x:1300}));
+      cj_scr(cx,S,()=>cj_tag(cx,"27 to 29 October 2026",ag_in(tt,T.week-0.1,0.5),{x:1300}));
       // Planning's last 40 tickets, done again one after another; marked once a person's result is set against them
       const per=(T.bar-T.redid-0.4)/40;
       cj_grid(cx,860,150,{a:ag_in(tt,T.redid-0.4,0.5),done:i=>clamp((tt-T.redid-i*per)/0.5,0,1),mark:i=>{const asked=CJ_ASKED.indexOf(i)>=0;return ag_in(tt,(asked?T.r3:T.r37)+0.2+(asked?CJ_ASKED.indexOf(i)*0.25:i*0.02),0.3);}});
@@ -286,17 +314,16 @@ scene("gate",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
         cj_pillAt(cx,1660,y,r[0],tt,r[1]-0.1,null,{col:r[2],icon:r[3],a:ba});});
       // the audit log, under its own name
       cj_audit(cx,860,612,800,{a:ag_in(tt,T.audit-0.2,0.5),rows:i=>ag_in(tt,T.name-0.6+i*0.35,0.3)});}},
-    // so for Planning's tickets it starts at stage 4: it proposes, and people review; for what a word means, stage 1: it only suggests.
-    // It never approves its own change; every change to production is approved by a person other than its author
-    {later:true,at:T.stage-0.6,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
-      ag_roomLight(cx,1);
-      const L=cj_ladder(cx,120,688,660,{show:k=>ag_in(tt,T.stage-0.2+k*0.15,0.4),lit:k=>(k===3&&ag_in(tt,T.four-0.2,0.3)>0)||(k===0&&ag_in(tt,T.one-0.2,0.3)>0)?AG.blue:null});
-      const link=(b,y,a)=>{if(a<=0.01)return;cx.save();cx.globalAlpha*=a;cx.strokeStyle=rgba(AG.blue,0.8);cx.lineWidth=3.5;cx.beginPath();cx.moveTo(b.x+b.w,b.y+48);cx.lineTo(880,y);cx.stroke();cx.restore();};
-      const a4=ag_in(tt,T.four,0.4),a1=ag_in(tt,T.one,0.4);link(L[3],L[3].y+48,a4);link(L[0],L[0].y+48,a1);
-      cj_cardAt(cx,880,L[3].y-30,620,{kick:"Planning's tickets",title:"Stage 4",sub:"it proposes, and people review"},tt,T.four,null,{kickCol:AG.blue,edge:AG.blue});
-      cj_cardAt(cx,880,L[0].y-30,620,{kick:"What a word means",title:"Stage 1",sub:"it only suggests"},tt,T.one,null,{kickCol:AG.blue,edge:AG.blue});
-      cj_pillAt(cx,1440,96,"it never approves its own change",tt,T.never-0.1,null,{col:AG.blue,icon:"lock"});
-      cj_pillAt(cx,1440,176,"production: approved by a person other than its author",tt,T.prod-0.1,null,{col:AG.green,icon:"tick",size:28});}}]);
+    // Thursday 29 October: Clara agrees stage 4 for Planning's tickets, and Noor writes it on its assignment on the map, with stage 1 for
+    // what a word means; from then on a check fails any agent on the map without an owner, a role, or a stage for each kind of task
+    {later:true,at:T.stage-0.6,place:"cjWall",keys:[[0,960,540,1.0]],push:0,draw:(cx,tt)=>{
+      ag_roomLight(cx,1);const fill=ag_in(tt,T.four-0.3,0.5),pass=(k,t0)=>ag_in(tt,t0-0.1+k*0.22,0.35);
+      cj_agents(cx,{head:1,row:k=>Object.assign(k===0?{card:fill,ph:1-fill,stage:j=>ag_in(tt,[T.four,T.one][j]-0.15,0.35),lit:j=>(j===0&&ag_io(tt,T.four,T.wrote-0.2,0.3)>0.5)||(j===1&&ag_io(tt,T.one,T.chk-0.4,0.3)>0.5),
+          glow:{owner:ag_io(tt,T.stage-0.1,T.four+1.2,0.4)>0.5?AG.green:null,card:ag_io(tt,T.wrote,T.one+1.0,0.4)>0.5?AG.blue:null}}:{},
+        {pass:[pass(k,T.owner),pass(k,T.role),pass(k,T.stg)]})});
+      cj_scr(cx,S,()=>cj_tag(cx,"Thursday 29 October 2026",ag_in(tt,T.stage-0.4,0.5)*(1-ag_in(tt,T.chk-0.8,0.5)),{x:1240}));
+      cj_legend(cx,960,846,{a:1-ag_in(tt,T.chk-0.7,0.4),lit:n=>(n===4&&ag_io(tt,T.four,T.wrote-0.2,0.3))||(n===1&&ag_io(tt,T.one,T.chk-0.7,0.3))});
+      cj_pillAt(cx,960,846,"a check fails any agent without an owner, a role, or a stage for each kind of task",tt,T.chk-0.2,null,{col:AG.green,icon:"tick",size:28});}}]);
 });
 
 /* ---------------------------------------------------------------- 6 · Who owns it, and who can stop it */
@@ -317,7 +344,7 @@ scene("stop",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
 /* ---------------------------------------------------------------- 7 · One structure to join */
 scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
     join:wAt(sc,"back","one structure"),since:wAt(sc,"since","Since then"),take:wAt(sc,"since","take their place"),
-    now:wAt(sc,"now","The planning agent"),place:wAt(sc,"now","a place on the map"),role:wAt(sc,"now","a role"),owner:wAt(sc,"now","an owner"),rights:wAt(sc,"now","rights from"),ask:wAt(sc,"now","people to ask"),
+    now:wAt(sc,"now","The planning agent"),place:wAt(sc,"now","a place in"),role:wAt(sc,"now","a role"),owner:wAt(sc,"now","an owner"),stage:wAt(sc,"now","a stage for each"),
     so:wAt(sc,"so","So everyone"),may:wAt(sc,"so","what it may do"),who:wAt(sc,"so","who answers"),stop:wAt(sc,"so","who can stop")}));
   const end=c.breath;
   ag_shots(ctx,S,t,sc.dur,[
@@ -328,26 +355,30 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
       cj_checkin(cx,{});ag_person(cx,CJ_CLERK,440,700,0.8,{t:gt,cut:756,gaze:[3,1]});
       if(!landed)cj_flyCard(cx,[520,684],[to.x,to.y],u,"Engine 52",{a:ag_in(tt,T.since-0.2,0.4),band:b});
       cj_pillAt(cx,1380,198,"one structure to join",tt,T.join-0.2,null,{col:AG.blue});}},
-    // the planning agent has done the same: a place on the map, a role, an owner, rights from its role, and people to ask; so everyone
+    // the planning agent has done the same: a place in Planning's work, a role, an owner, and a stage for each kind of task; so everyone
     // knows what it may do, who answers for it, and who can stop it
     {at:T.now-0.9,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       ag_roomLight(cx,1);
-      cj_map(cx,{dim:0.85,keep:["clara"]});cj_newOnMap(cx,{pagent:1,prole:1,passign:1,powner:1,cagent:1,crole:1,cassign:1,cowner:1,a:1,
-        glow:k=>(k==="pagent"&&ag_in(tt,T.place-0.2,0.4)>0)?AG.violet:(k==="prole"&&ag_in(tt,T.role-0.2,0.4)>0)?AG.blue:null});
-      const L=[["a place on the map",T.place],["a role: planning contributor",T.role],["an owner: Clara Jensen",T.owner],["rights from its role",T.rights],["people to ask",T.ask]];
-      cj_list(cx,1090,90,790,"The planning agent",L.map(l=>[l[0],ag_in(tt,l[1]-0.15,0.35)]),{a:ag_in(tt,T.now-0.3,0.5)});
-      const Q=[["what it may do: its role says",T.may],["who answers for it: Clara",T.who],["who can stop it: Clara, or Sam",T.stop]];
-      cj_list(cx,1090,520,790,"So everyone knows",Q.map(q=>[q[0],ag_in(tt,q[1]-0.15,0.35)]),{a:ag_in(tt,T.so-0.3,0.5),col:AG.green});}}]);
+      cj_process(cx,{cap:1,srv:1,srvLine:1,step:1,bracket:1,role:1,roleLine:1,who:1,whoLine:1,agent:1,agentLine:1,owner:1,dim:0.85,
+        keep:k=>["r1","s1","s2","s3","agent"].indexOf(k)>=0,glow:k=>(k==="agent"&&ag_in(tt,T.place-0.2,0.4)>0.5)?AG.violet:(k==="r1"&&ag_in(tt,T.role-0.2,0.4)>0.5)?AG.blue:null});
+      // one card over the people's side: what the planning agent has, then what everyone knows
+      const ca=ag_in(tt,T.now-0.3,0.5);if(ca>0.01){cx.save();cx.globalAlpha*=ca;ag_about(cx,1485,460,lerp(0.85,1,Math.min(1,ag_spr(tt,T.now-0.3,0.5))));
+        ag_box(cx,1090,90,790,740,22,{edge:AG.blue,edgeA:0.55});
+        const L=[["a place in Planning's work",T.place],["a role: planning contributor",T.role],["an owner: Clara Jensen",T.owner],["a stage for each kind of task",T.stage]];
+        cj_list(cx,1090,110,790,"The planning agent",L.map(l=>[l[0],ag_in(tt,l[1]-0.15,0.35)]),{bare:true});
+        const sa=ag_in(tt,T.so-0.3,0.5);if(sa>0.01){cx.strokeStyle=rgba(AG.shadow,0.18*sa);cx.lineWidth=2;cx.beginPath();cx.moveTo(1130,482);cx.lineTo(1840,482);cx.stroke();}
+        const Q=[["what it may do: its role says",T.may],["who answers for it: Clara",T.who],["who can stop it: Clara, or Sam",T.stop]];
+        cj_list(cx,1090,494,790,"So everyone knows",Q.map(q=>[q[0],ag_in(tt,q[1]-0.15,0.35)]),{bare:true,a:sa,col:AG.green});cx.restore();}}}]);
   // the end card: the film's lesson, and the next film
-  ag_end(ctx,S,t,end,"A contributor joins",null,"Film 3 of 7","From helper to colleague");
+  ag_end(ctx,S,t,end,"A place on the map",null,"Film 3 of 7","From helper to colleague");
   const a1=ag_in(t,end+0.6,0.9);if(a1>0){setScreen(ctx,S);ag_T(ctx,"Before an agent works alone,",960,296,{w:700,size:48,align:"center",a:a1});
     ag_T(ctx,"it's architected like a colleague.",960,364,{w:700,size:48,align:"center",a:a1});}
-  const na=ag_in(t,end+1.2,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: Helpers on your behalf",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}
+  const na=ag_in(t,end+1.2,0.6);if(na>0){setScreen(ctx,S);ag_T(ctx,"Next: Rights follow the role",960,790,{w:600,size:30,align:"center",col:AG.mut,a:na});}
 });
-// a short list on a card: its kicker, then rows [text, how far in (0 to 1)], each with a tick; o.col the ticks' colour
-function cj_list(ctx,x,y,w,kick,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const h=86+rows.length*54+18;ctx.save();ctx.globalAlpha*=a;
-  ag_box(ctx,x,y,w,h,22,{edge:o.col||AG.blue,edgeA:0.55});ag_T(ctx,String(kick).toUpperCase(),x+32,y+56,{w:700,size:28,ls:4,col:o.col||AG.blue});
-  rows.forEach((r,i)=>{const u=clamp(r[1],0,1);if(u<=0.01)return;const yy=y+112+i*54;ctx.save();ctx.globalAlpha*=u;ag_tick(ctx,x+50,yy-10,24,rgba(o.col||AG.green,1),4);
+// a short list on a card: its kicker, then rows [text, how far in (0 to 1)], each with a tick; o.col the ticks' colour; o.bare: no card
+function cj_list(ctx,x,y,w,kick,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return null;const h=86+rows.length*62+18;ctx.save();ctx.globalAlpha*=a;
+  if(!o.bare)ag_box(ctx,x,y,w,h,22,{edge:o.col||AG.blue,edgeA:0.55});ag_T(ctx,String(kick).toUpperCase(),x+32,y+60,{w:700,size:28,ls:4,col:o.col||AG.blue});
+  rows.forEach((r,i)=>{const u=clamp(r[1],0,1);if(u<=0.01)return;const yy=y+124+i*62;ctx.save();ctx.globalAlpha*=u;ag_tick(ctx,x+50,yy-10,24,rgba(o.col||AG.green,1),4);
     ag_T(ctx,r[0],x+84,yy,{w:600,size:30});ctx.restore();});ctx.restore();return{x,y,w,h};}
 
 // chapters that open where the one before ends: on the lot, the leaders stay put as it glides on; in the lab, the agent stays where

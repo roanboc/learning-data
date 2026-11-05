@@ -74,7 +74,7 @@ function cp_rock(c,o){const R=ag_rnd(o.seed||3);c.fillStyle=rgba(o.lo,1);c.fillR
   c.restore();
   // bumps of the rock: soft lit tops and shaded undersides
   for(let i=0;i<70;i++){const x=R()*W,y=R()*H*0.9,r=30+R()*110;c.save();c.globalAlpha=0.10+R()*0.08;
-    const g=c.createRadialGradient(x-r*0.2,y-r*0.3,0,x,y,r);g.addColorStop(0,"rgba(255,236,206,0.55)");g.addColorStop(0.6,"rgba(255,236,206,0)");g.addColorStop(0.85,"rgba(20,12,8,0.35)");g.addColorStop(1,"rgba(20,12,8,0)");
+    const g=c.createRadialGradient(x-r*0.2,y-r*0.3,0,x,y,r);g.addColorStop(0,"rgba(255,236,206,0.55)");g.addColorStop(0.6,"rgba(255,236,206,0)");g.addColorStop(0.85,"rgba(20,12,8,0.15)");g.addColorStop(1,"rgba(20,12,8,0)");
     c.fillStyle=g;c.fillRect(x-r,y-r,2*r,2*r);c.restore();}
   // cracks: fine dark lines, a lighter edge beside each
   c.save();c.lineCap="round";for(let i=0;i<9;i++){const x=R()*W,y=R()*H*0.85,dx=(R()-0.5)*420,dy=(R()-0.2)*160;c.beginPath();c.moveTo(x,y);

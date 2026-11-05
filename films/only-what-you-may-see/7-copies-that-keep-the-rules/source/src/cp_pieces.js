@@ -30,7 +30,7 @@ function cp_record(ctx,x,y,o){o=o||{};const w=o.w||900,lh=58,rows=o.rows||[],top
   dp_T(ctx,o.name,x+30,y+54,{w:500,size:28,f:"mono",col:o.nameCol||o.col||"cyan"});
   if(o.sub)dp_T(ctx,o.sub,x+30,y+96,{w:600,size:28,col:"mut"});
   ctx.fillStyle=rgba(DP.T.mut,0.35);ctx.fillRect(x+24,y+top-6,w-48,1.4);
-  const cw=o.cw||300;
+  const cw=o.cw==null?300:o.cw;
   rows.forEach((r,i)=>{const by=y+top+i*lh+40,ra=r.a==null?1:r.a;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ra;
     dp_T(ctx,r.c,x+30,by,{w:500,size:28,f:"mono",col:"mut"});
     const u=clamp(r.u||0,0,1);
@@ -42,7 +42,7 @@ function cp_record(ctx,x,y,o){o=o||{};const w=o.w||900,lh=58,rows=o.rows||[],top
 
 /* cp_agree(ctx, x, y, w, {kind, sub, lines, lw, a, k, behind, hi}): an agreement, its number on a band of the identity's cyan (who may),
    its sub-title, then lines [label, words, colour], the labels lw wide; hi [index, 0 to 1] lights one line; returns its box */
-function cp_agree(ctx,x,y,w,o){o=o||{};const lw=o.lw||170,inner=w-60-lw,L=[];let yy=y+62+(o.sub?52:12);
+function cp_agree(ctx,x,y,w,o){o=o||{};const lw=o.lw==null?170:o.lw,inner=w-60-lw,L=[];let yy=y+62+(o.sub?52:12);
   (o.lines||[]).forEach((l,i)=>{const ws=ag_wrap(ctx,l[1],inner,{w:600,size:28});ws.forEach((s,j)=>{yy+=j?38:46;L.push([j?"":l[0],s,l[2],yy,i]);});});
   const h=Math.round(yy-y+28),bb={x,y,w,h},a=o.a==null?1:o.a;if(a<=0||o.measure)return bb;
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
@@ -120,12 +120,12 @@ function cp_laptop(ctx,cx,cy,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)ret
   ctx.fillStyle=rgba(li,0.8);for(let r=0;r<4;r++)ctx.fillRect(fx+14,fy+48+r*20,76,6);ctx.restore();
   if(name)dp_T(ctx,name,cx,cy-8,{w:500,size:28,f:"mono",align:"center",col:o.col||"coral"});
   ctx.restore();}
-// a phone held up to take a photo: its outline, its lens, a flash of light; w 150, h 280
-function cp_phone(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const c=dp_f(o.col||"amber"),li=mix(c,[255,255,255],0.45);ctx.save();ctx.globalAlpha*=a;
+// a phone held up to take a photo: its outline, its lens, a flash of light; coral, like the laptop: a copy that keeps no rules; w 150, h 280
+function cp_phone(ctx,cx,cy,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const c=dp_f(o.col||"coral"),li=mix(c,[255,255,255],0.45);ctx.save();ctx.globalAlpha*=a;
   ctx.save();ctx.shadowColor=rgba(c,0.7);ctx.shadowBlur=14;rr(ctx,cx-75,cy-140,150,280,24);ctx.fillStyle="rgba(10,18,22,0.92)";ctx.fill();ctx.strokeStyle=rgba(li,1);ctx.lineWidth=3;ctx.stroke();ctx.restore();
   ctx.strokeStyle=rgba(li,1);ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy-60,26,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(cx,cy-60,10,0,TAU);ctx.fillStyle=rgba(li,0.9);ctx.fill();
   rr(ctx,cx-40,cy+60,80,10,5);ctx.fillStyle=rgba(li,0.6);ctx.fill();
-  if(o.flash>0){dp_halo(ctx,cx,cy-60,180,o.col||"amber",0.5*o.flash);}
+  if(o.flash>0){dp_halo(ctx,cx,cy-60,180,o.col||"coral",0.5*o.flash);}
   ctx.restore();}
 // a coral line through what isn't made, from (x0, y0) to (x1, y1), drawn on as p goes from 0 to 1
 function cp_strike(ctx,x0,y0,x1,y1,p){p=clamp(p||0,0,1);if(p<=0)return;const c=dp_f("coral");ctx.save();ctx.strokeStyle=rgba(c,1);ctx.shadowColor=rgba(c,0.85);ctx.shadowBlur=12;

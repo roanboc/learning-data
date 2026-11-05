@@ -92,33 +92,37 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     withA(x,cat,()=>{dp_wall(x,60,240,1460,620,{col:"cyan",label:"The catalog"});if(live>0)withA(x,live,()=>dp_wall(x,60,240,1460,620,{col:"cyan"}));});
     // the learner's record, as the registrar keeps it: each column a class, each class a tag
     const rec=CP_SAMUEL.map((r,i)=>({c:r[0],v:r[1],cls:r[2],ca:ag_in(tt,tClass+i*0.18,0.4)}));
-    const recA=cat*(1-0.45*ag_in(tt,tNot,0.6)*(1-ag_in(tt,c.leave,0.6)));
-    const bb=cp_record(x,100,290,{name:"registrar.core.core_learner_v1",rows:rec,w:740,cw:262,a:recA});
-    withA(x,recA,()=>{for(let i=0;i<5;i++)cp_tagMark(x,bb.x+bb.w-190,bb.y+86+i*58+28,ag_in(tt,tTag+i*0.12,0.4)*(CP_SAMUEL[i][2]==="none"?0:1));
+    // the record dims while the voice says the rules aren't in it, and comes back when a copy is pulled out of it; the rules' cards stay dim
+    const recA=cat*(1-0.45*cp_io(tt,tNot,c.leave,0.6)),dimP=1-0.45*ag_in(tt,tNot,0.6);
+    const bb=cp_record(x,90,290,{name:"registrar.core.core_learner_v1",rows:rec,w:690,cw:250,a:recA});
+    // each class's tag, just left of its chip
+    withA(x,recA,()=>{for(let i=0;i<5;i++){const cls=CP_SAMUEL[i][2];if(cls==="none")continue;
+        cp_tagMark(x,bb.x+bb.w-28-(dp_tw(x,cls,{w:700,size:28})+36)-30,bb.y+86+i*58+28,ag_in(tt,tTag+i*0.12,0.4));}
       const hl=cp_io(tt,tHides,c.inside+0.4,0.5);if(hl>0){x.save();x.globalAlpha*=hl;rr(x,bb.x+12,bb.y+86,bb.w-24,58*2,10);x.strokeStyle=rgba(DP.F.violet,0.95);x.lineWidth=2.4;x.shadowColor=rgba(DP.F.violet,0.8);x.shadowBlur=12;x.stroke();x.restore();}});
-    dp_slip(x,100,740,"Know what you hold","cyan",{ink:true,a:cp_io(tt,c.classes,c.policy+0.3)});dp_slip(x,440,740,"Tags that travel","cyan",{ink:true,a:cp_io(tt,tTags,c.policy+0.3)});
+    const s1=dp_slip(x,90,740,"Know what you hold","cyan",{ink:true,a:cp_io(tt,c.classes,c.policy+0.3)});dp_slip(x,s1.x+s1.w+18,740,"Tags that travel","cyan",{ink:true,a:cp_io(tt,tTags,c.policy+0.3)});
     // one policy, by tag
-    dp_card(x,880,290,600,{kick:"One policy, by tag",title:"hide_direct: masks it whole"},{a:cat*ag_in(tt,c.policy,0.5),k:ag_spr(tt,c.policy,0.7)});
-    dp_slip(x,100,740,"One policy for many tables","cyan",{ink:true,a:cp_io(tt,c.policy+0.9,c.inside+1)});
-    // the study's copy, made inside and read through the rules: only what Anil may see
+    dp_card(x,800,290,700,{kick:"One policy, by tag",title:"hide_direct: masks it whole"},{a:cat*ag_in(tt,c.policy,0.5)*dimP,k:ag_spr(tt,c.policy,0.7)});
+    dp_slip(x,90,740,"One policy for many tables","cyan",{ink:true,a:cp_io(tt,c.policy+0.9,c.inside+1)});
+    // the study's copy, made inside and read through the rules: only what Anil may see; it steps aside when a copy leaves
     const st=[["learner_code","a7772705…","pseudonymous"],["name","***","direct"],["date_of_birth","1987","indirect"],["course","Public health","none"],["results","90 of 120","none"]];
-    const sb=cp_record(x,880,456,{name:"studies.health_progress.learners",rows:st.map(r=>({c:r[0],v:r[1],cls:r[2],vc:r[1]==="***"?"violet":"ink"})),w:600,cw:236,
-      a:cat*ag_in(tt,c.inside+0.4,0.5)*(1-0.45*ag_in(tt,tNot,0.6)*(1-ag_in(tt,c.leave,0.6))),k:ag_spr(tt,c.inside+0.4,0.7)});
-    withA(x,cat*ag_in(tt,tKeeps,0.4),()=>dp_tick(x,sb.x+sb.w-34,sb.y+40,"green",cp_lin(tt,tKeeps,0.6)));
+    const sA=cat*ag_in(tt,c.inside+0.4,0.5)*dimP*(1-ag_in(tt,c.leave-0.2,0.5));
+    const sb=cp_record(x,800,456,{name:"studies.health_progress.learners",rows:st.map(r=>({c:r[0],v:r[1],cls:r[2],vc:r[1]==="***"?"violet":"ink"})),w:700,cw:236,
+      a:sA,k:ag_spr(tt,c.inside+0.4,0.7)});
+    withA(x,sA*ag_in(tt,tKeeps,0.4),()=>dp_tick(x,sb.x+sb.w-36,sb.y+42,"green",cp_lin(tt,tKeeps,0.6)));
     dp_tag(x,1060,170,"The rules live here: classes and policies","cyan",{a:cp_io(tt,tLive,c.wrote-0.2)});
-    dp_tag(x,100,740,"The records: only their values","grey",{a:cp_io(tt,tNot,c.leave+0.4)});
-    // a copy that leaves the catalog: its chips fall away, its values show, and nothing guards it
-    const u=ag_sine(cp_lin(tt,tLeaves-0.4,1.8)),mx=lerp(400,1540,u),out=ag_in(tt,tLeaves+0.6,0.8),fall=ag_in(tt,tLeaves+0.5,0.9);
-    const lv=[["S-20412","direct"],["Samuel Osei","direct"],["14 May 1987","indirect"]].map(r=>({c:"",v:r[0],cls:r[1],ca:1-fall}));
+    dp_tag(x,90,740,"The records: only their values","grey",{a:cp_io(tt,tNot,c.leave+0.4)});
+    // a copy that leaves the catalog: pulled out of the record, it slides out of the catalog; there its chips fall away and nothing guards it
+    const u=ag_sine(cp_lin(tt,tLeaves-0.4,2.0)),mx=lerp(760,1530,u),fall=ag_in(tt,tLeaves+1.0,0.8),out=ag_in(tt,tLeaves+1.1,0.8);
+    const lv=[["S-20412","direct"],["Samuel Osei","direct"]].map(r=>({c:"",v:r[0],cls:r[1],ca:1-fall}));
     withA(x,cp_io(tt,tLeaves-0.4,c.wrote+0.2,0.4),()=>{
-      withA(x,1-out,()=>cp_record(x,mx,300,{name:"a copy",rows:lv,w:340,cw:0}));
-      withA(x,out,()=>cp_record(x,mx,300,{name:"a copy",rows:lv.map(r=>Object.assign({},r,{ca:0})),w:340,cw:0,col:"coral"}));});
-    dp_tag(x,1540,600,"No class, no policy","coral",{a:cp_io(tt,tNone-0.3,c.wrote+0.2)});
+      withA(x,1-out,()=>cp_record(x,mx,470,{name:"a copy",rows:lv,w:360,cw:0}));
+      withA(x,out,()=>cp_record(x,mx,470,{name:"a copy",rows:lv.map(r=>Object.assign({},r,{ca:0})),w:360,cw:0,col:"coral"}));});
+    dp_tag(x,1530,712,"No class, no policy","coral",{a:cp_io(tt,tNone-0.3,c.wrote+0.2)});
     // An agreement first said where the study may work, and what may leave it
     cp_agree(x,410,280,1100,{kind:"Data sharing agreement 2026-14",sub:"For a study in the Faculty of Health",lw:180,
       lines:[["Where","On the platform, in the study's own space; nothing downloaded"],["May leave","Totals, with any count under 10 hidden"]],
       hi:[tt<tMay-0.2?0:1,tt<tMay-0.2?ag_in(tt,tWhere-0.2,0.4):ag_in(tt,tMay-0.2,0.4)],a:cp_io(tt,c.wrote,c.four,0.5),k:ag_spr(tt,c.wrote,0.7)});
-    dp_slip(x,410,640,"An agreement first","cyan",{ink:true,a:cp_io(tt,tAgr,c.four)});
+    dp_slip(x,410,540,"An agreement first","cyan",{ink:true,a:cp_io(tt,tAgr,c.four)});
     // four copies, asked for this autumn
     const F=[["Jun Park","A copy, to build with",180,300],["The teaching hospital","A table, to share",980,300],["The teaching hospital","An answer from both sides",180,520],["Elena Lindgren","A download, to take home",980,520]];
     F.forEach(([k,ti,fx,fy],i)=>dp_card(x,fx,fy,760,{kick:k,title:ti},{a:ag_in(tt,tFour+i*0.25,0.5),k:ag_spr(tt,tFour+i*0.25,0.7)}));}}]);
@@ -181,7 +185,7 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     cp_hospital(x,1550,220,{a:ag_in(tt,c.hospital,0.5),k:ag_spr(tt,c.hospital,0.7)});
     dp_card(x,500,250,1020,{kick:"The hospital asks",title:"How many leave after first year, by course?",sub:"To plan its places"},{a:cp_io(tt,c.hospital+0.4,c.agreement),k:ag_spr(tt,c.hospital+0.4,0.7)});
     cp_agree(x,500,226,1020,{kind:"Data sharing agreement 2026-21",sub:"For the teaching hospital",lw:180,
-      lines:[["Purpose","How many learners leave after first year, by course, to plan placements"],["May leave","Totals, with any count under 10 hidden"],["Ends","30 June 2027"],
+      lines:[["Purpose","To plan placements: how many learners leave after first year, by course, and whether more weeks on the wards help them do better"],["May leave","Totals, with any count under 10 hidden"],["Ends","30 June 2027"],
         ["Signed","Mei Tanaka, for the registrar's office, and the hospital's head of education, 16 November 2026"]],hi:[3,ag_in(tt,tSigned,0.4)],
       a:cp_io(tt,c.agreement+0.4,c.opensharing),k:ag_spr(tt,c.agreement+0.4,0.7)});
     // the share: Databricks to Databricks; what it holds
@@ -212,12 +216,12 @@ scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     const lasc=ag_in(tt,c.lascaux,0.7);
     cp_hospital(x,1550,220,{a:1-0.6*lasc});
-    dp_card(x,500,250,1020,{kick:"The hospital asks",title:"Do learners who spend more weeks on its wards do better that year?"},{a:cp_io(tt,0.6,c.cleanroom),k:ag_spr(tt,0.6,0.7)});
+    dp_card(x,500,250,1020,{kick:"The hospital asks",title:"Do learners who spend more weeks on its wards do better that year?",sub:"Agreement 2026-21 covers it too"},{a:cp_io(tt,0.6,c.cleanroom),k:ag_spr(tt,0.6,0.7)});
     // each side's rows, which neither may hand to the other
-    for(const [k,ti,hx,t0] of [["The university","Each learner's results",500,c.both+0.3],["The hospital","Weeks on its wards",1030,A("both","the hospital's weeks")]]){
-      const a=cp_io(tt,t0,c.cleanroom,0.5);if(a<=0)continue;const bb=dp_card(x,hx,480,490,{kick:k,title:ti},{a,k:ag_spr(tt,t0,0.7)});
+    for(const [k,ti,hx,t0] of [["The university","Each learner's results",500,A("both","the university's results")],["The hospital","Weeks on its wards",1030,A("both","the hospital's weeks")]]){
+      const a=cp_io(tt,t0,c.cleanroom,0.5);if(a<=0)continue;const bb=dp_card(x,hx,500,490,{kick:k,title:ti},{a,k:ag_spr(tt,t0,0.7)});
       withA(x,a,()=>{dp_frost(x,hx+24,bb.y+bb.h+16,442,110,null,{r:12});dp_lock(x,hx+245,bb.y+bb.h+76,46,"violet",0);});}
-    withA(x,cp_io(tt,tNeither,c.cleanroom,0.4),()=>{dp_link(x,[990,700],[1030,700],"coral",1,{dot:false});dp_cross(x,1010,700,"coral",cp_lin(tt,tNeither,0.5));});
+    withA(x,cp_io(tt,tNeither,c.cleanroom,0.4),()=>{dp_link(x,[990,705],[1030,705],"coral",1,{dot:false});dp_cross(x,1010,705,"coral",cp_lin(tt,tNeither,0.5));});
     // the clean room: each side sees only the other's columns' names; the approved notebook; who approved it
     const ra=ag_in(tt,c.cleanroom,0.6)*(1-0.8*lasc);if(ra>0){const bx=dp_page(x,500,210,1020,590,{tool:"databricks",name:"Azure Databricks",where:"Clean Rooms · health_placements",a:ra});
       withA(x,ra,()=>{
@@ -233,13 +237,13 @@ scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     dp_tag(x,500,812,"Hides nothing by itself","coral",{a:cp_io(tt,tHides,c.runs)});
     dp_tag(x,500,812,"Run by the hospital, 3 December","cyan",{a:cp_io(tt,c.runs+0.3,c.lascaux)});
     // Jun reads it with Mei; she approves
-    const pp=cp_io(tt,c.approve-0.3,c.lascaux-0.2,0.7);cp_figure(x,"jun",410,664,0.86,tt,pp);cp_figure(x,"mei",180,644,0.9,tt,pp);
+    const pp=cp_io(tt,c.approve-0.3,c.lascaux-0.2,0.7);cp_figure(x,"jun",345,684,0.79,tt,pp);cp_figure(x,"mei",130,672,0.82,tt,pp);
     // what comes out: one table of totals, to the hospital, kept 30 days
     cp_totals(x,1530,540,350,"Passed, by weeks",[["Under 4","hidden","violet"],["4 to 7","84 in 100"],["8 to 11","89 in 100"],["12 or more","91 in 100"]],
       {lh:46,sub:"Kept 30 days",subCol:tt<tDays?"mut":"cyan",a:ag_in(tt,tTable,0.5)*(1-0.6*lasc),k:ag_spr(tt,tTable,0.7),hi:{3:cp_io(tt,t12,c.lascaux),1:cp_io(tt,t47,c.lascaux)}});
     // like the scientists at Lascaux: what goes in is approved, and the walls never leave
     cp_thumb(x,560,250,720,405,"cpHill",{view:[150,380,880,495],label:"Lascaux",a:cp_io(tt,c.lascaux,sc.dur-0.9,0.6),
-      draw:(cx)=>{cp_caveLight(cx,0.22,{});cp_door(cx,1);cx.save();cx.globalCompositeOperation="lighter";for(let i=0;i<3;i++){const px=430+i*130+Math.sin(tt*0.5+i*2)*30,py=660-i*14;
+      draw:(cx)=>{cp_caveLight(cx,0.3,{});cp_door(cx,1);cx.save();cx.globalCompositeOperation="lighter";for(let i=0;i<3;i++){const px=430+i*130+Math.sin(tt*0.5+i*2)*30,py=660-i*14;
         const g=cx.createRadialGradient(px,py,0,px,py,20);g.addColorStop(0,"rgba(255,226,170,0.8)");g.addColorStop(1,"rgba(255,200,120,0)");cx.fillStyle=g;cx.fillRect(px-20,py-20,40,40);}cx.restore();}});}}]);
   setScreen(ctx,S);cp_day(ctx,t,"From 16 November","A room for both",0.3,c.both-0.2);});
 
@@ -258,13 +262,13 @@ scene("out",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     dp_tag(x,930,560,"Keeps no rules at all","coral",{a:ea*ag_in(tt,tNoRules,0.4)});
     cp_agree(x,100,654,1300,{kind:"Data sharing agreement 2026-14",lw:140,lines:[["Where","On the platform, in the study's own space; nothing downloaded"]],hi:[0,ag_in(tt,tNothing,0.4)],a:ea*ag_in(tt,tNothing-0.3,0.5)});
     // the studies' workspace: every way out switched off
-    const sa=cp_io(tt,c.switches+0.2,c.code,0.5);if(sa>0){const bx=dp_page(x,90,210,1300,660,{tool:"databricks",name:"Azure Databricks",where:"Settings › Security",title:"Workspace: studies",a:sa});
+    const sa=cp_io(tt,c.switches+0.2,c.code,0.5);if(sa>0){const bx=dp_page(x,90,210,1140,660,{tool:"databricks",name:"Azure Databricks",where:"Settings › Security",title:"Workspace: studies",a:sa});
       const R=[["Notebook results download",tDR],["SQL results download",tDR+0.3],["Notebook exporting",tEN],["Results table clipboard features",tCT],["Volume files download",tDF],["MLflow run artifact download",tDF+0.4]];
       withA(x,sa,()=>R.forEach(([s,t0],i)=>{const ry=bx.y+18+i*68;dp_switch(x,bx.x,ry,0,{label:s,a:ag_in(tt,c.switches+0.4+i*0.12,0.4)});
         dp_cross(x,bx.x+bx.w-24,ry+20,"coral",cp_lin(tt,t0,0.5));}));
-      dp_slip(x,860,296,"Grants by design","cyan",{ink:true,a:sa*ag_in(tt,tGrants,0.4)});dp_pill(x,1360,354,"All off","coral",{align:"right",a:sa*ag_in(tt,tOff,0.4)});}
+      dp_slip(x,90,124,"Grants by design","cyan",{ink:true,a:sa*ag_in(tt,tGrants,0.4)});dp_pill(x,1200,354,"All off","coral",{align:"right",a:sa*ag_in(tt,tOff,0.4)});}
     // kept as code, changed only by a reviewed change, seen in the audit log
-    const ga=cp_io(tt,c.code,c.network,0.5);if(ga>0){const bx=dp_page(x,90,210,1300,470,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"platform/workspaces/studies.yml",a:ga});
+    const ga=cp_io(tt,c.code,c.network,0.5);if(ga>0){const bx=dp_page(x,90,210,1140,470,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"platform/workspaces/studies.yml",a:ga});
       cp_code(x,bx.x,bx.y+40,["studies:","  enableResultsDownloading: false","  enableExportNotebook: false","  enableNotebookTableClipboard: false"],{a:ga});
       dp_slip(x,90,712,"A reviewed change","green",{ink:true,a:ga*ag_in(tt,tRev,0.4)});dp_slip(x,450,712,"Shown in the audit log","cyan",{ink:true,a:ga*ag_in(tt,tAudit,0.4)});}
     // and no other door: the network
@@ -273,11 +277,11 @@ scene("out",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     dp_slip(x,100,520,"Network, storage and keys","cyan",{ink:true,a:na*ag_in(tt,tNSK,0.4)});
     // a photo of a screen: no switch stops it; her confidentiality agreement covers it
     const ca=cp_io(tt,c.photo,c.clean,0.5);
-    cp_phone(x,300,470,{a:ca*ag_in(tt,tPhoto,0.4),flash:cp_io(tt,tPhoto+0.3,tPhoto+0.9,0.25)});
+    cp_phone(x,300,470,{a:ca*ag_in(tt,Math.min(tPhoto,c.photo+0.3),0.4),flash:cp_io(tt,tPhoto+0.3,tPhoto+0.9,0.25)});
     cp_agree(x,520,226,880,{kind:"Confidentiality agreement",sub:"Elena Lindgren",lw:0,lines:[["","I keep what I see to myself"],["","I use it only for the work it's given for"],["","I keep no copy where it isn't allowed"],
       ["","I answer for the data I'm given"],["","I report anything that goes wrong, at once"],["","It holds after I leave"]],hi:[2,ag_in(tt,tConf,0.4)],a:ca*ag_in(tt,tConf-0.6,0.5),k:ag_spr(tt,tConf-0.6,0.7)});
     // so she cleans it where it is
-    const la=cp_io(tt,c.clean,c.lascaux,0.5);if(la>0){const bx=dp_page(x,90,230,1300,380,{tool:"databricks",name:"Azure Databricks",where:"Workspace: studies · notebook",title:"Cleaning the study's table",a:la});
+    const la=cp_io(tt,c.clean,c.lascaux,0.5);if(la>0){const bx=dp_page(x,90,230,1140,380,{tool:"databricks",name:"Azure Databricks",where:"Workspace: studies · notebook",title:"Cleaning the study's table",a:la});
       cp_code(x,bx.x,bx.y+40,["learners = spark.table(\"studies.health_progress.learners\")","cleaned  = learners.dropDuplicates([\"learner_code\"])"],{a:la});
       withA(x,la,()=>{dp_tick(x,bx.x+20,bx.y+150,"green",cp_lin(tt,tWhere,0.6));dp_T(x,"Cleaned where it is, in the study's space",bx.x+56,bx.y+160,{w:700,size:28,col:"green",a:ag_in(tt,tWhere,0.4)});});}
     cp_person(x,100,650,"Elena Lindgren","Research assistant, Anil's study",{w:680,a:cp_io(tt,c.clean+0.3,c.lascaux,0.5)});

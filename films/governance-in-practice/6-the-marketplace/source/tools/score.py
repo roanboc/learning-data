@@ -62,14 +62,34 @@ I, IV, V, vi, iii = (45, (57, 61, 64)), (50, (57, 62, 66)), (52, (56, 64, 68)), 
 # ---- the levels: the two sit about as far under the voice as the series' other films' music (matched by loudness, not by peak); the
 # trumpets low and quiet; the effects about 12 dB under the music (FX scales them all). Since the author's review of What an agent is
 # (4 November 2026) both are 1.5 dB lower, and the mark and the whole mark at the end 2.5 dB lower still, so the loudest notes sit as
-# low as in the governance films the author accepted (tools/quiet.py measures them); the effects 1.5 dB lower too, so they stay
-# about 12 dB under the music
-DL, TL, FX = 0.109, 0.0336, 1.34
+# low as in the governance films the author accepted (tools/quiet.py measures them); the effects 1.5 dB lower too, so they stay about
+# 12 dB under the music. With the room set by what it rings where the notes are (below), the dulcimer is 0.8 dB higher and the
+# trumpets 0.3 dB lower, so each is as loud as before, its echo now quieter
+DL, TL, FX = 0.1195, 0.0325, 1.34
 PAN = {'t1': -0.3, 't2': -0.14}  # the trumpets a little left; the dulcimer spreads a little by pitch, low notes left, high right
 
-# a small room of wood and plaster round the players, ringing on for about a second and a half
+# a small room of wood and plaster round the players, ringing on for about a second and a half. The room's level is set by what it
+# rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back to its own level after it
+# (_held), as the video guidelines ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said, and
+# moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.4)).astype(np.float32))(np.arange(int(1.4 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- the hammered dulcimer: one steel string to a note, struck near its bridge with a hammer faced with felt, softly, and damped by
 # hand once it has rung. The strike near the bridge favours the second to fourth harmonics; the felt rounds them off, and the higher
@@ -108,8 +128,7 @@ def tpt(m, a, b, g=1.0, att=0.09, rel=0.3, pan=None, room=0.35):
     s = s * env; nb = min(n, int(0.2 * SR))  # and a breath of air as the note speaks
     s[:nb] += 0.012 * filt(noise(0.2), 'band', (300, 1500))[:nb] * np.exp(-np.arange(nb) / SR / 0.04)
     s = filt(s.astype(np.float32), 'low', 2300)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), a, g * TL, PAN['t1'] if pan is None else pan)
 
 # ---- what the two play
@@ -131,9 +150,9 @@ def returned(s, g=0.75):
     """the same call played back a tone low, A to D: the copy coming back"""
     dulc(69, s, g, ring=1.1); dulc(74, s + 0.24, g * 0.95, ring=1.6)
 def yes(s, g=1.0, low=False, sec=1.4):
-    """the owner's yes: the trumpets' answer, a soft third, A and C sharp; low, an octave lower, heard from further away"""
+    """the owner's yes: the trumpets' soft third, A and C sharp, the C sharp a little under the A; low, an octave lower, further off"""
     o = -12 if low else 0
-    tpt(69 + o, s, s + sec, g, pan=PAN['t1']); tpt(73 + o, s + 0.03, s + sec, g * 0.9, pan=PAN['t2'])
+    tpt(69 + o, s, s + sec, g, pan=PAN['t1']); tpt(73 + o, s + 0.03, s + sec, g * 0.8, pan=PAN['t2'])
 def held(s, e, g=0.9, rel=0.14):
     """the key with a date: one trumpet holds E from s, and ends, without a fall, at e"""
     tpt(64, s, e, g, att=0.14, rel=rel, pan=PAN['t2'])

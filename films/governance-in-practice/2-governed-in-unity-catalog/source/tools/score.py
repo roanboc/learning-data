@@ -56,10 +56,12 @@ I, IV, V, vi, iii = (39, 55, 58), (44, 51, 60), (34, 53, 62), (36, 55, 63), (43,
 # ---- the levels: the brass sits about as far under the voice as the series' other films' music (matched by loudness, not by peak);
 # the crotales a little under it, as their note is pure and high; the effects about 12 dB under the music (FX scales them all). Since
 # the author's review of What an agent is (4 November 2026) the brass and the crotales are 2.5 dB lower, as low as in the governance
-# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music; and
-# the home chord, which came nine times after the opening, three of
-# them within 13 seconds of itself, comes four times: home again after the grants, Clara's stars, Mei's yes, and Clara's plan
-BL, CL, FX = 0.033, 0.0345, 1.2
+# films the author accepted (tools/quiet.py measures them), and the effects as much, so they stay about 12 dB under the music; and the
+# home chord, which came nine times after the opening, three of them within 13 seconds of itself, comes four times: home again after
+# the grants, Clara's stars, Mei's yes, and Clara's plan. With the room set by what it rings where the notes are (below), the brass is
+# 1.5 dB higher and the crotales 1.1 dB lower (their echo had taken more from them than it gave), so each is as loud as before, its
+# echo now quieter
+BL, CL, FX = 0.0392, 0.0304, 1.2
 LEVEL = {'tu': 1.0, 'eu': 1.0, 'th': 0.9}
 PAN = {'th': -0.32, 'eu': 0.06, 'tu': 0.3}  # as a brass band sits: the horn at the left, the euphonium in the middle, the tuba right
 
@@ -72,8 +74,27 @@ BRASS = {  # resonances as (Hz, width, weight); the corner above which a soft no
     'tu': ([(120, 90, 0.6), (250, 150, 1.0), (520, 260, 0.3)], 480, (150, 900)),
     'eu': ([(200, 120, 0.5), (420, 220, 1.0), (880, 380, 0.3)], 780, (250, 1300)),
     'th': ([(280, 150, 0.5), (580, 260, 1.0), (1150, 420, 0.3)], 1000, (300, 1600))}
+# A small room round the players. Its level is set by what it rings where the notes are (its gain from 100 Hz to 1.5 kHz is one), and
+# each held note is set back to its own level after it (_held), as the video guidelines ask: scaled by all it rang, as at first, the
+# room rang 10 dB louder there than its share said, and moved each held note's level by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.3)).astype(np.float32))(np.arange(int(1.3 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
+def _room(sig, amt):
+    return np.pad(sig, (0, len(_IR) - 1)) + amt * fftconvolve(sig, _IR).astype(np.float32) if amt else sig
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 def _harm(inst, f, soft=1.0):
     """the weights of a note's harmonics on inst, at f Hz"""
     F, fm = BRASS[inst][:2]; n = max(1, int(2500 // f)); k = np.arange(1, n + 1); fk = f * k
@@ -126,8 +147,7 @@ def _line(inst, segs, g, soft, att, rel, room, pan, tie, dyn):
     br = filt(noise(n / SR + 0.01)[:n], 'band', (lo, hi)); puff = sum(np.exp(-np.maximum(x - t0, 0) / 0.03) * (x >= t0) for t0 in tg)
     s = s * dl + (0.004 * e + 0.03 * puff) * br * lev  # a breath under the note, and the tongue's puff at its start
     s = filt(s.astype(np.float32), 'low', 2400)
-    if room:
-        s = np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+    s = _held(s, room)
     put(s.astype(np.float32), T0, g * BL * LEVEL[inst], pan)
 def chord(ch, a, b, g=0.55, step=0.15, att=0.5, rel=0.8, soft=0.9):
     """a held chord, (tuba, euphonium, horn), each player coming in a moment after the one under it"""

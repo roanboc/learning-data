@@ -60,16 +60,34 @@ Q = (72, 74, 76, 79, 81)  # the five questions' notes: C D E G A, rising
 # a little above it; the effects about 12 dB under the music (FX scales them all)
 # After the author's review of the series' opening films (4 November 2026), the music is 6 dB lower and the effects 4.5 dB, so
 # the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them), and the effects stay
-# about 12 dB under the music
-ML_, FK, FX = 0.023, 0.035, 0.95
+# about 12 dB under the music. With the room set by what it rings where the notes are (below), the Mellotron is 2.8 dB higher (its ten
+# bands 3.2 dB) and the forks on their boxes 2.7 dB, so each is as loud as before, its echo now quieter
+ML_, FK, FX = 0.0317, 0.0478, 0.95
 
-# a small room round the Mellotron and the forks, ringing on for about a second
+# a small room round the Mellotron and the forks, ringing on for about a second. Its level is set by what it rings where the notes are
+# (its gain from 100 Hz to 1.5 kHz is one), and each held note is set back to its own level after it (_held), as the video guidelines
+# ask: scaled by all it rang, as at first, the room rang 10 dB louder there than its share said, and moved the Mellotron's held notes
+# by -6.2 to +5.4 dB and the forks' by -2.1 to +3.1, each by where its reflections met it
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R1.standard_normal(len(x)) * np.exp(-6.9 * x / 1.1)).astype(np.float32))(np.arange(int(1.1 * SR)) / SR)
-_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1600); _IR[:int(0.018 * SR)] = 0; _IR /= _band(_IR)
 def _room(s, room):
     if not room:
         return s
     return np.pad(s, (0, len(_IR) - 1)) + room * fftconvolve(s, _IR).astype(np.float32)
+def _held(sig, amt):
+    """a held note in the room, at its own level: the room's echoes meet a held note's own sound at its pitch, adding to it on one
+    note and taking from it on another, so the note is set back to the level it had without the room, where it's held (within 3 dB
+    of its own level, after its first quarter second), as tools/quiet.py measures it"""
+    out = _room(sig, amt); h = SR // 100; k = len(sig) // h
+    if not amt or k < 35:
+        return out
+    dry = (sig[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1); wet = (out[:k * h].astype(np.float64).reshape(k, h) ** 2).sum(1)
+    lv = np.convolve(dry, np.ones(10) / 10, 'same')[25:]; on = np.nonzero(lv >= lv.max() * 10 ** -0.3)[0] + 25
+    return out * np.float32(np.sqrt(dry[on].sum() / max(1e-12, wet[on].sum())))
 
 # ---- the Mellotron's flute tape: one key, pressed at 0 and let go at sec (at most the tape's eight seconds). The flute's partials are
 # harmonic, the lower notes richer; each speaks a moment after the one below it, as breath does; a short breathy chiff as the note
@@ -101,7 +119,7 @@ def _key(m, sec):
 def mel(m, a, b=None, g=1.0, pan=None, room=0.28):
     """one Mellotron key, down at a and up at b (or held until its tape runs out)"""
     sec = TAPE if b is None else b - a
-    put(_room(_key(m, sec), room).astype(np.float32), a, g * ML_, max(-0.4, min(0.4, (m - 62) * 0.018)) if pan is None else pan)
+    put(_held(_key(m, sec), room).astype(np.float32), a, g * ML_, max(-0.4, min(0.4, (m - 62) * 0.018)) if pan is None else pan)
 def chord(notes, a, b=None, g=1.0, top=None):
     """a chord, the keys a moment apart, lowest first; top: a note added later (a, time)"""
     for i, m in enumerate(notes):
@@ -134,7 +152,7 @@ def tenband(notes, a, b, g=1.0, op=None, od=1.6, pan=0.0, room=0.28):
     if op is not None:
         x = np.arange(n) / SR; u = np.clip((x - (op - a)) / od, 0, 1); u = np.sin(0.5 * np.pi * u) ** 2
         wet = wet * np.cos(0.5 * np.pi * u) + dry * np.sin(0.5 * np.pi * u)
-    put(_room(norm(wet) * 0.9, room).astype(np.float32), a, g * ML_ * 1.6, pan)
+    put(_held(norm(wet) * 0.9, room).astype(np.float32), a, g * ML_ * 1.68, pan)
 
 # ---- a tuning fork on its wooden box, struck with felt: a soft wooden knock, then the pure note blooming as the box takes it up, and
 # dying away slowly, damped by hand after ring seconds. set_at: struck in the hand first (faint, no box), then set on the box there
@@ -144,13 +162,13 @@ def fork(m, s, g=1.0, ring=4.0, pan=0.0, set_at=None):
     if 6.27 * f < 2300:
         tone = tone + 0.05 * np.sin(2 * np.pi * 6.27 * f * x) * np.exp(-x / 0.05)
     tone = tone * np.where(x > ring, np.cos(0.5 * np.pi * np.minimum((x - ring) / 0.3, 1)) ** 2, 1.0)
-    put(_room(tone.astype(np.float32), 0.2).astype(np.float32), t0, g * FK, pan)
+    put(_held(tone.astype(np.float32), 0.2).astype(np.float32), t0, g * FK, pan)
     s_knock(t0, 0.03 * g * FX, pan, 170)
     if set_at is not None:
         # in the hand: the felt's knock, and the note faint until the stem meets the box
         y = tt(set_at - s + 0.25).astype(np.float64)
         h = np.sin(2 * np.pi * f * y) * np.minimum(1, y / 0.02) * np.where(y > set_at - s, np.cos(0.5 * np.pi * np.minimum((y - (set_at - s)) / 0.25, 1)) ** 2, 1.0)
-        put(h.astype(np.float32), s, g * FK * 0.22, pan); s_knock(s, 0.022 * g * FX, pan, 260)
+        put(h.astype(np.float32), s, g * FK * 0.161, pan); s_knock(s, 0.022 * g * FX, pan, 260)
 
 # ---- soft sounds on screen, all low-passed (soft() keeps what's made here under about 2.2 kHz, steeply)
 soft = lambda sig: filt(np.asarray(sig, np.float32), 'low', 2200, 4)

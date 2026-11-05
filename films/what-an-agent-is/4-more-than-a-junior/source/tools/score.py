@@ -77,9 +77,15 @@ ARP = (Bb2, D3, F3, Bb3, D4, F4, Bb4, D5, F5, Bb5)  # B-flat major up the string
 # the music's and the effects' loud moments sit as low as the governance films' (tools/quiet.py measures them)
 ZL, HL, FX = 0.080, 0.057, 2.3
 
-# a small room round the instruments, ringing on for about a second and a half
+# a small room round the instruments, ringing on for about a second and a half. Its level is set by what it rings where the notes are
+# (its gain from 100 Hz to 1.5 kHz is one), as the video guidelines ask: scaled by all it rang, as at first, it rang 10 dB louder
+# there than its share said. _room() keeps each note as loud as it was dry, as before
+def _band(ir):
+    """a room's gain where the notes are: the square root of its mean power from 100 Hz to 1.5 kHz"""
+    nf = 1 << int(np.ceil(np.log2(len(ir) * 2))); f = np.fft.rfftfreq(nf, 1 / SR)
+    return float(np.sqrt((np.abs(np.fft.rfft(ir.astype(np.float64), nf))[(f > 100) & (f < 1500)] ** 2).mean()))
 _IR = (lambda x: (R4.standard_normal(len(x)) * np.exp(-6.9 * x / 1.45)).astype(np.float32))(np.arange(int(1.45 * SR)) / SR)
-_IR = filt(_IR, 'low', 1700); _IR[:int(0.016 * SR)] = 0; _IR /= np.sqrt((_IR ** 2).sum())
+_IR = filt(_IR, 'low', 1700); _IR[:int(0.016 * SR)] = 0; _IR /= _band(_IR)
 def _room(sig, k, a=0.0, b=1.0):
     """the room round a note; it keeps the note as loud as it was dry (its rms from a to b seconds)"""
     if not k:

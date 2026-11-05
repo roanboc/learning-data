@@ -47,7 +47,7 @@ scene("whose",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({col:wAt(sc,"
     ask:wAt(sc,"wrong","who to ask"),check:wAt(sc,"wrong","what else to check"),
     whatever:wAt(sc,"all","whatever Jun could"),more:wAt(sc,"all","far more than a ticket needs"),tostop:wAt(sc,"all","to stop it"),sj:wAt(sc,"all","stop Jun"),
     place:wAt(sc,"badge","a place on the university's map"),role:wAt(sc,"badge","a role"),owner:wAt(sc,"badge","an owner"),only:wAt(sc,"badge","only the rights"),
-    wrote:wAt(sc,"three","wrote that place"),own:wAt(sc,"three","own name"),dbx:wAt(sc,"three","Databricks"),gh:wAt(sc,"three","GitHub"),dbt:wAt(sc,"three","dbt"),
+    own:wAt(sc,"three","own name"),dbx:wAt(sc,"three","Databricks"),gh:wAt(sc,"three","GitHub"),dbt:wAt(sc,"three","dbt"),
     bot:wAt(sc,"since","says planning agent bot"),query:wAt(sc,"since","every query"),
     ten:wAt(sc,"tried","for ten minutes"),stopped:wAt(sc,"tried","the planning agent stopped"),jun2:wAt(sc,"tried","and Jun"),lucia:wAt(sc,"tried","Lucía"),wl:wAt(sc,"tried","Anil's workload agent"),
     one:wAt(sc,"ask","one search"),nottwo:wAt(sc,"ask","not two days"),who:wAt(sc,"data","who made it"),more2:wAt(sc,"data","no tool lets")}));
@@ -115,13 +115,14 @@ scene("whose",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({col:wAt(sc,"
       ob_pillL(x,1296,440,"role · planning contributor",tt,P.role,null,{col:AG.blue});
       ob_pillL(x,1296,520,"rights · only what its work needs",tt,P.only,null,{col:AG.blue,icon:"lock"});}},
     // and Sam wrote that place into every tool, under the agent's own name: Databricks, GitHub and dbt; the paper tag goes and its badge
-    // drops in (later:true: Noor and the map's card leave, then Sam and the agent come in)
+    // drops in, and "written from the map" comes in under the card once the tag has gone, so the two never cross (later:true: Noor
+    // and the map's card leave, then Sam and the agent come in)
     {later:true,at:c.three,place:"obLab",keys:[[c.three,960,540,1]],push:0.02,draw:(x,tt)=>{
       ob_agentWith(x,tt,{think:0.2,name:"planning agent",nameA:1-ag_in(tt,P.own,0.4),badge:"planning agent",bk:(tt-P.own-0.2)/0.9,tag:"owner · Clara Jensen",dx:-260});
       ob_person(x,"sam",tt,{});ag_roomLight(x,1);ob_personCard(x,"sam",ag_in(tt,c.three+0.3,0.5));
       ob_idCard(x,1296,170,570,[["Databricks","service principal",ag_in(tt,P.dbx,0.4),0,false,null,"databricks"],["GitHub","planning-agent[bot]",ag_in(tt,P.gh,0.4),0,true,null,"githubLockup"],
         ["dbt","signs in as it",ag_in(tt,P.dbt,0.4),0,false,null,"dbt"]],{name:"planning agent",owner:"Clara Jensen",a:ag_in(tt,P.own,0.5),k:ag_spr(tt,P.own)});
-      ob_pillL(x,1296,640,"written from the map",tt,P.wrote,null,{col:AG.blue});}},
+      ob_pillL(x,1296,640,"written from the map",tt,P.own+0.45,null,{col:AG.blue});}},
     // since Monday, every change it makes says planning-agent[bot], every query names it (the card goes, two logs come in)
     {at:c.since,place:"obLab",keys:[[c.since,960,540,1]],push:0.02,draw:(x,tt)=>{
       ob_agentWith(x,tt,{think:0.2,badge:"planning agent",tag:"owner · Clara Jensen",dx:-260});

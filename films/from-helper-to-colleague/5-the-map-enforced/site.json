@@ -1,0 +1,53 @@
+{
+  "kicker": "The map in every tool",
+  "kicker_es": "El mapa en cada herramienta",
+  "title_es": "El mapa, aplicado",
+  "h1": "The map, enforced: an agent's own name in every tool",
+  "h1_es": "El mapa, aplicado: un nombre propio en cada herramienta",
+  "lead": "In October, the auditors asked which of this year's 214 changes to Planning's tables an agent had drafted. Every one said Jun, and for nine he couldn't be sure. Now the planning agent has its own name in every tool, rights written from the map and checked each night, and a switch that stops only it.",
+  "lead_es": "En octubre, los auditores preguntaron cuáles de los 214 cambios en las tablas de Planificación redactó un agente. Todos decían Jun, y él dudaba de nueve. Ahora el agente tiene nombre propio en cada herramienta, permisos escritos desde el mapa y revisados cada noche, y un interruptor solo suyo.",
+  "description": "A film about holding an AI agent to its place on the map in every tool, the fifth of From helper to colleague: one name in every tool, as a person has, a service principal in Databricks, an App in GitHub, and the same service principal for its runs in dbt, which sign in with short-lived passes, so it holds no secret it can see or leak; its rights written one way from the map, where its role's steps say what each reads, writes and calls, by a script that writes every tool's settings, a group named for the role in Unity Catalog with its grants and the agent its only member, the one model and the tool servers its steps name in Unity Gateway, one repository and two permissions for its App, and a dbt target of its own; governed context first, read only, and the platform's memory second, where the definition wins; a check each night that fails on a right a tool holds that the map doesn't give, as it did on Tuesday, when a right was given by hand to save a day; a place of its own, branches it alone writes to, pull requests it never merges, the development workspace that only reads production, and schemas of its own; every log under its own name, verified commits, the query history and the audit log, so the auditors' question is one search; and a switch in each tool that stops it alone, with its rights kept. It opens today at the university, where the auditors asked which of this year's 214 changes to Planning's tables an agent had drafted, and every one said Jun Park.",
+  "description_es": "Una película sobre cómo cada herramienta ciñe a un agente de IA a su lugar en el mapa, la quinta de De ayudante a colega: un solo nombre en cada herramienta, como una persona, una entidad de servicio en Databricks, una App en GitHub y la misma entidad de servicio para sus ejecuciones en dbt, que entran con pases de corta duración, así que no guarda ningún secreto que pueda ver o filtrar; sus permisos escritos en un solo sentido desde el mapa, donde los pasos de su rol dicen qué lee, qué escribe y a qué llama cada uno, por un script que escribe la configuración de cada herramienta, el grupo del rol en Unity Catalog con sus permisos y el agente como único miembro, el único modelo y los servidores de herramientas que nombran sus pasos en Unity Gateway, un repositorio y dos permisos para su App, y un target propio en dbt; el contexto gobernado primero, de solo lectura, y la memoria de la plataforma después, donde gana la definición; una verificación cada noche que falla ante un permiso que una herramienta tiene y el mapa no da, como pasó el martes, cuando se dio un permiso a mano para ahorrar un día; un lugar propio, ramas donde solo él escribe, pull requests que nunca fusiona, el espacio de desarrollo que solo lee producción y esquemas propios; cada bitácora con su propio nombre, commits verificados, el historial de consultas y la bitácora de auditoría, así que la pregunta de los auditores es una búsqueda; y un interruptor en cada herramienta que lo detiene solo a él, con sus permisos guardados. Empieza hoy en la universidad, donde los auditores preguntaron cuáles de los 214 cambios del año en las tablas de Planificación había redactado un agente, y todos decían Jun Park.",
+  "card": "Every change said Jun. Now the planning agent works under its own name in every tool, with rights written from the map.",
+  "card_es": "Todo cambio decía Jun. Ahora el agente de Planificación tiene nombre propio en cada herramienta y permisos escritos desde el mapa.",
+  "chapters_es": {
+    "whose": "¿De quién fue ese cambio?",
+    "name": "Un nombre en cada herramienta",
+    "map": "Escrito desde el mapa",
+    "own": "Un lugar propio",
+    "logs": "Con su propio nombre",
+    "stop": "Detenido, y solo él"
+  },
+  "past": [
+    "Today, at the university: whose change was that?",
+    "Every change said Jun, so nobody could say which ones an agent had drafted. Now the planning agent works under its own name, and every tool holds it to its place on the map."
+  ],
+  "past_es": [
+    "Hoy, en la universidad: ¿de quién fue ese cambio?",
+    "Todo cambio decía Jun, así que nadie sabía cuáles había redactado un agente. Ahora el agente de Planificación trabaja con su propio nombre, y cada herramienta lo ciñe a su lugar en el mapa."
+  ],
+  "repo": {
+    "name": [
+      "profiles.yml",
+      "agents/tools.yml"
+    ],
+    "map": [
+      "scripts/generate/agents.py",
+      "agents/",
+      "agents/README.md"
+    ],
+    "own": [
+      "profiles.yml"
+    ],
+    "logs": [
+      "analyses/governance/an_agents_work.sql"
+    ],
+    "stop": [
+      "agents/README.md",
+      "AGENTS.md"
+    ]
+  },
+  "next_h": "You've seen an agent's place on the map written into every tool, under its own name. Next: every change through review.",
+  "next_h_es": "Viste el lugar de un agente en el mapa escrito en cada herramienta, con su propio nombre. Después: cada cambio pasa por revisión.",
+  "draft": true
+}

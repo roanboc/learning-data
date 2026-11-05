@@ -6,9 +6,9 @@
   contract), its input ports (the other products' contracts it reads), its team and support;
 - governance/5-data-contracts/<model>_v<version>.yaml: one contract per output port in the Open Data
   Contract Standard 3.1.0, generated from the model's YAML: each column with its type, whether it's
-  required, the primary key, its class (meta.personal_data), its description and its tests as
-  quality rules (with their dimension: the contract standard calls validity "conformity"); the known limitations;
-  the product's service levels, team and support.
+  required, the primary key, its class (meta.personal_data), whether a use can't do without it
+  (meta.critical_for), its description, and its tests and each use's level (meta.quality) as quality rules
+  (their dimension: the standard calls validity "conformity"); the limitations; service levels, team, support.
 
 Both standards are Bitol's, at the Linux Foundation. Contract standard 3.1.0 is the version Ontos
 reads and writes; their JSON schemas are kept in governance/7-standards/ (README there, with the newer
@@ -152,19 +152,19 @@ def main():
                 prop = {"name": col, "logicalType": LOGICAL.get(str(spec.get("data_type")).lower(), "string"),
                         "physicalType": spec.get("data_type"),
                         "required": any(c["type"] == "not_null" for c in spec.get("constraints", [])),
-                        "classification": spec["meta"].get("personal_data")}
+                        "classification": spec["meta"].get("personal_data"), **critical(spec["meta"])}
                 if col in pk:
                     prop.update(primaryKey=True, primaryKeyPosition=pk.index(col) + 1)
                 if spec.get("description"):
                     prop["description"] = " ".join(spec["description"].split())
-                rules = [quality(t) for t in tests if t.get("column_name") == col]
+                rules = [quality(t) for t in tests if t.get("column_name") == col] + requirements(spec["meta"])
                 if rules:
                     prop["quality"] = rules
                 properties.append(prop)
             schema_object = {"name": port_name(node), "physicalName": node["alias"], "logicalType": "object",
                              "physicalType": "table", "description": " ".join(node["description"].split()),
                              "properties": properties}
-            object_rules = [quality(t) for t in tests if not t.get("column_name")]
+            object_rules = [quality(t) for t in tests if not t.get("column_name")] + requirements(meta)
             if object_rules:
                 schema_object["quality"] = object_rules
             limitations = " ".join(f"{lim['id']}: {' '.join(lim['text'].split())}" for lim in meta.get("limitations", []))
@@ -233,6 +233,25 @@ def main():
     print(f"{len(files)} files {'are up to date and valid' if args.check else 'written, and valid'}: "
           f"{sum(1 for k, _, _ in files.values() if k == 'odps')} products (product standard {ODPS}), "
           f"{sum(1 for k, _, _ in files.values() if k == 'odcs')} contracts (contract standard {ODCS})")
+
+
+
+def critical(meta):
+    """A column a use can't do without, meta.critical_for, is one of the contract's critical data elements."""
+    return {"criticalDataElement": True} if meta.get("critical_for") else {}
+
+
+def requirements(meta):
+    """What each use needs (meta.quality): a rule in words, with its use, its level and who agreed it,
+    until a check measures it."""
+    return [{"name": rule["name"], "type": "text", "description": " ".join(rule["description"].split()),
+             "dimension": {"validity": "conformity"}.get(rule["dimension"], rule["dimension"]),
+             "severity": rule.get("severity", "error"),
+             "businessImpact": " ".join(rule["business_impact"].split()),
+             "customProperties": [{"property": "use", "value": rule["use"]},
+                                  {"property": "level", "value": rule["level"]},
+                                  {"property": "agreedWith", "value": rule["agreed_with"]}]}
+            for rule in meta.get("quality", [])]
 
 
 if __name__ == "__main__":

@@ -79,7 +79,7 @@
 | How it goes wrong | 372 | 0% | 0 | 28.0 | Drawn to the rule |
 | Working with agents on Databricks | 271 | 0% | 0 | 28.2 | Drawn to the rule |
 | Why Unity Catalog and Unity Gateway govern them | 315 | 0% | 0 | 28.3 | Drawn to the rule |
-| Context and memory, governed | 408 | 0% | 0 | 28.1 | Drawn to the rule |
+| Context and memory, governed | 393 | 0% | 0 | 28.2 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |

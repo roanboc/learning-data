@@ -1,0 +1,165 @@
+models:
+
+  - name: mart_graduations__graduation_list
+    description: >
+      The graduation list: who graduates, at which ceremony, with which award, and their name as
+      it will be printed on the degree certificate. One row per certificate, so a graduate of a
+      double degree has two. The graduations office seats the Great Hall, prints the programme and
+      sends the certificates to the printer from it, and Planning counts the awards for the
+      government. What each of those uses needs is in quality, below.
+    config:
+      group: graduations
+      # Databricks only: each column a use can't do without as a Unity Catalog tag (macros/governance/critical_data.sql).
+      post_hook: ["{{ apply_critical_data() }}"]
+      meta:
+        grain: One row per certificate, a graduate, an award and a ceremony
+        owner: "Mei Tanaka, registrar's office"
+        domain: student
+        consumer: The graduations office
+        # The list's four uses, each an exposure, and the level each needs: agreed in January 2026
+        # with the people who use it, and owned by the person who answers for the list. Each is a
+        # rule in words in the contract until a check measures it (scripts/generate/products.py).
+        # A column a use can't do without names it in its critical_for.
+        quality:
+          - name: seating_plan_count_per_ceremony
+            use: seating_plan
+            dimension: completeness
+            description: >
+              For seating the Great Hall: how many graduates cross the stage at each ceremony. A
+              graduate with two certificates takes one seat.
+            level: Within 2% at each ceremony
+            agreed_with: "Malia Fonoti, graduations office"
+            business_impact: Graduates or their guests without a seat, or rows of empty ones.
+          - name: certificates_exactly_right
+            use: certificates
+            dimension: accuracy
+            description: >
+              For the certificates: each name exactly as the graduate writes it, accents and all,
+              and each award and conferral date as the faculty's exam board approved them, on the
+              list when it goes to the printer.
+            level: Zero wrong
+            agreed_with: "Malia Fonoti, graduations office"
+            business_impact: >
+              A certificate printed again, about 120 dollars with its courier, and a graduate who
+              may cross the stage holding an empty folder.
+          - name: programme_as_the_certificates
+            use: ceremony_programme
+            dimension: consistency
+            description: >
+              For the printed programme: each graduate who crosses the stage, under their ceremony
+              and award, with the same name and award as their certificate.
+            level: No difference from the certificates; a change after it's printed goes on a slip
+            agreed_with: "Malia Fonoti, graduations office"
+            business_impact: A name every guest reads wrong, or a slip in every programme.
+          - name: awards_return_each_award_once
+            use: awards_return
+            dimension: uniqueness
+            description: >
+              For the government's count of awards: each award conferred in the year, counted once
+              by its code and conferral date. A double degree is two awards. Names aren't needed.
+            level: Exact
+            agreed_with: Planning
+            business_impact: A count the government publishes, and funds by, that is wrong.
+    constraints:
+      - type: primary_key
+        name: pk_mart_graduations__graduation_list
+        columns: [graduation_bk]
+        warn_unenforced: false
+    columns:
+      - name: graduation_bk
+        description: The certificate's key, the graduate and the award, qualified by its key set, like SIS|S-16874|MDA.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: direct, critical_for: [awards_return]}
+      - name: student_bk
+        description: '{{ doc("qualified_key") }} The graduate, so a graduate with two certificates is counted once.'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: direct, critical_for: [seating_plan]}
+      - name: given_name
+        description: >
+          The given name to be printed: the one the graduate confirmed in the portal for this
+          ceremony, else the student system's.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        description: >
+          The family name to be printed: the one the graduate confirmed in the portal for this
+          ceremony, else the student system's, which holds 30 characters.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: name_as_printed
+        description: >
+          The whole name as it will be printed and read out, in the graduate's own order: as they
+          confirmed it in the portal for this ceremony, else the student system's given and
+          family names. Its letters are as the platform received them.
+        data_type: string
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme]}
+      - name: name_confirmed_on
+        description: >
+          The day the graduate confirmed their name, or corrected it, in the portal for this
+          ceremony; a correction counts once the registrar's office has checked it. Empty when
+          they haven't confirmed it through the portal.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: award_code
+        description: The award's code, like MDA.
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none, critical_for: [awards_return]}
+      - name: award_name
+        description: The award's name as it was on the day it was conferred, as it's printed on the certificate.
+        data_type: string
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none, critical_for: [certificates, ceremony_programme]}
+      - name: conferred_on
+        description: The date the faculty's exam board approved the award, printed on the certificate.
+        data_type: date
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none, critical_for: [certificates, awards_return]}
+      - name: ceremony_id
+        description: The ceremony the graduate is presented at, like DEC26-3.
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none, critical_for: [seating_plan, ceremony_programme]}
+      - name: ceremony_on
+        description: The day of that ceremony.
+        data_type: date
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none}
+      - name: is_attending
+        description: True when the graduate crosses the stage; false when the award is conferred in absentia and the certificate posted.
+        data_type: boolean
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none, critical_for: [seating_plan, ceremony_programme]}
+      - name: added_on
+        description: The day the certificate's row first joined the list, the night after its award was approved.
+        data_type: date
+        config:
+          meta: {personal_data: none}

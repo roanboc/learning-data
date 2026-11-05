@@ -425,7 +425,7 @@ const NARR={
  {"id":"day","gap":0.8,"text":"On submission day, both reports say 4,867.","say":"On submission day, both reports say four thousand, eight hundred and sixty-seven."},
  {"id":"reach","gap":0.8,"text":"Her words reach the work, and the university sends one number."}]},
 "page":{"name":"One term, one page","lead":0.8,"tail":0.8,"vo":[
- {"id":"term","gap":0.8,"text":"On the platform, each term of the glossary is a page, in beta."},
+ {"id":"term","gap":0.8,"text":"On the platform, each term of the glossary is a page."},
  {"id":"has","gap":0.8,"text":"Award's page has its words, its owner, Mei, and its domain, course."},
  {"id":"lists","gap":0.8,"text":"It lists the tables that hold it, and where its words come from."},
  {"id":"map","gap":0.8,"text":"It's published from Noor's map, where each term is kept, so a change is made there, never on the page."},
@@ -475,7 +475,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"One meaning, read by people, reports and agents."}]}
 };
 
-const VODUR={"words/today": 2.044, "words/owns": 5.226, "words/changes": 7.285, "words/slowed": 5.341, "words/five": 6.405, "words/two": 11.852, "words/explain": 3.443, "words/change": 1.288, "words/page": 5.193, "words/setting": 2.715, "words/once": 4.408, "words/night": 5.712, "words/day": 4.953, "words/reach": 3.585, "page/term": 3.662, "page/has": 4.182, "page/lists": 3.186, "page/map": 5.606, "page/read": 1.602, "page/cites": 3.79, "copy/keeps": 7.888, "copy/names": 4.049, "copy/sends": 4.561, "sync/every": 3.946, "sync/monday": 1.932, "sync/opened": 6.068, "sync/three": 6.267, "sync/tuesday": 4.589, "sync/saw": 2.274, "setting/number": 2.638, "setting/kept": 4.245, "setting/reads": 5.836, "setting/agree": 6.451, "count/meaning": 3.78, "count/once": 7.395, "count/what": 4.102, "count/builds": 4.074, "count/reads": 3.651, "count/own": 2.4, "agents/same": 2.427, "agents/asks": 6.053, "agents/answers": 7.152, "agents/prefers": 4.011, "agents/built": 3.788, "agents/one": 3.176, "layers/three": 5.547, "layers/home": 1.109, "layers/words": 3.317, "layers/relate": 3.438, "layers/counts": 4.265, "layers/checked": 3.09, "close/sees": 4.689, "close/decides": 4.648, "close/day": 9.955, "close/last": 3.086};
+const VODUR={"words/today": 2.044, "words/owns": 5.226, "words/changes": 7.285, "words/slowed": 5.341, "words/five": 6.405, "words/two": 11.852, "words/explain": 3.443, "words/change": 1.288, "words/page": 5.193, "words/setting": 2.715, "words/once": 4.408, "words/night": 5.712, "words/day": 4.953, "words/reach": 3.585, "page/term": 2.956, "page/has": 4.182, "page/lists": 3.186, "page/map": 5.606, "page/read": 1.6, "page/cites": 3.79, "copy/keeps": 7.888, "copy/names": 4.049, "copy/sends": 4.561, "sync/every": 3.946, "sync/monday": 1.932, "sync/opened": 6.068, "sync/three": 6.267, "sync/tuesday": 4.589, "sync/saw": 2.274, "setting/number": 2.638, "setting/kept": 4.245, "setting/reads": 5.836, "setting/agree": 6.451, "count/meaning": 3.78, "count/once": 7.395, "count/what": 4.102, "count/builds": 4.074, "count/reads": 3.651, "count/own": 2.4, "agents/same": 2.427, "agents/asks": 6.053, "agents/answers": 7.152, "agents/prefers": 4.009, "agents/built": 3.787, "agents/one": 3.176, "layers/three": 5.547, "layers/home": 1.109, "layers/words": 3.317, "layers/relate": 3.438, "layers/counts": 4.265, "layers/checked": 3.09, "close/sees": 4.689, "close/decides": 4.648, "close/day": 9.955, "close/last": 3.086};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2969,7 +2969,7 @@ function gm_meiTerm(own,m){return(q,sx,sy,sw)=>{wc_T(q,"Award",sx+30,sy+102,{w:8
 // award's page, close up on her screen (GV_SC): its owner (o.own); its words before Monday, in rose, struck through as Monday's come
 // (o.ch); the new words, violet (o.nw), "a master or a microcredential" (o.mc) and "at least 6 credit points" (o.six) lit as they're
 // said; and when it was published (o.pub)
-function gm_termScreen(ctx,o){o=o||{};const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Databricks · Unity Catalog · Pages · beta",null,{barH:54,titleSize:30});
+function gm_termScreen(ctx,o){o=o||{};const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Databricks · Unity Catalog · Pages",null,{barH:54,titleSize:30});
   wc_T(ctx,"Award",x+56,y+140,{w:800,size:56,col:WC_DARK});const own=clamp(o.own||0,0,1),os="Owner · Mei Tanaka";
   if(own>0.01)gv_tint(ctx,x+46,y+170,tw(ctx,os,30,600)+20,46,GV.gold,0.9*own);wc_T(ctx,os,x+56,y+204,{w:600,size:30,col:WC_INK});
   const pub=clamp(o.pub||0,0,1);if(pub>0.01){const s="published Monday",pw=Math.round(tw(ctx,s,28,700)+44);gm_rise(ctx,pub,()=>{wc_panel(ctx,x+w-56-pw,y+102,pw,48,{kind:"pill",wash:GM_V,washA:0.4,seed:411});
@@ -3088,13 +3088,13 @@ function gm_touchTags(ctx,o){o=o||{};const [sx,sy,sw]=GV_RX.screen;GM_TT.forEach
   gm_thread(ctx,[sx+sw/2,sy-6],[x+w/2,y+30],clamp(v*1.6,0,1),{bend:10});gm_rise(ctx,clamp(v*1.6-0.4,0,1),()=>wc_tag(ctx,x,y,s,{size:30,seed:430+i}));});}
 
 /* ---------- one term, one page ---------- */
-// award's page on the platform, as Databricks lays a page out (Pages, in beta), drawn as a form: its title; its description, the
+// award's page on the platform, as Databricks lays a page out (Pages), drawn as a form: its title; its description, the
 // glossary's words in violet (o.six lights "at least 6 credit points"); its owner; its domain; the tables and the column that hold it,
 // and the count (related assets); and where its words come from (sources). o.lit: [words, owner, domain, assets, sources], each 0 to
-// 1 as it's named; o.al[i] lights one asset; o.beta brings in the page's state, beta
+// 1 as it's named; o.al[i] lights one asset
 const GM_ASSETS=[["core_award","table"],["core_credential · counts_as_award","table · column"],["awards_conferred","metric view"]];
 function gm_awardPage(ctx,o){o=o||{};const [x,y,w,h]=GU_BIG,L=o.lit||[],v=i=>clamp(L[i]||0,0,1),AL=o.al||[];
-  const top=gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog · Pages · beta",title:"Award",state:["beta",GV.amber],stateA:o.beta==null?1:o.beta,sub:"a page of the business glossary"});
+  const top=gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog · Pages",title:"Award",sub:"a page of the business glossary"});
   const dx=x+40,dy=top+24,dw=1000,rx=x+1080,rw=w-1120;
   gm_lit(ctx,dx,dy,dw,300,v(0),GM_V);gu_box(ctx,dx,dy,dw,300,"Description",{seed:301});gm_para(ctx,GM_NEW,dx+30,dy+100,dw-60,{size:31,lh:46,col:GM_VI,lit:[["at least 6 credit points",o.six||0,GV.gold]]});
   const ay=dy+320;gm_lit(ctx,dx,ay,dw,250,v(3));gu_box(ctx,dx,ay,dw,250,"Related assets",{seed:302});
@@ -3436,16 +3436,16 @@ scene("words",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({mei:wAt(sc,"
   wc_year(ctx,56,72,"Tuesday 24 November 2026",gv_io(t,P.day+0.3,P.reach-0.2,0.4));
   gv_title(ctx,S,t,P.title,"Meaning on the platform","one meaning for people, reports and agents","Film 3 of 6 · data governance");});
 
-// ---- 2 · One term, one page: award's page on the platform, in beta: its words, owner and domain, the tables that hold it and where its
+// ---- 2 · One term, one page: award's page on the platform: its words, owner and domain, the tables that hold it and where its
 // words come from; published from Noor's map, where a change is made; Clara reading it beside the data; and the assistant citing it ----
-scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({beta:wAt(sc,"term","in beta"),words:wAt(sc,"has","its words"),owner:wAt(sc,"has","its owner"),
+scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({words:wAt(sc,"has","its words"),owner:wAt(sc,"has","its owner"),
     dom:wAt(sc,"has","its domain"),tab:wAt(sc,"lists","the tables"),from:wAt(sc,"lists","where its words come from"),
     mp:c.map-0.3,pub:wAt(sc,"map","published"),kept:wAt(sc,"map","where each term is kept"),made:wAt(sc,"map","a change is made"),never:wAt(sc,"map","never on the page"),
     rd:c.read-0.3,ci:c.cites-0.3,ans:wAt(sc,"cites","it cites")}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
-    // award's page on the platform, drawn as a form, in beta: its words, its owner and its domain; the tables that hold it, and where its
+    // award's page on the platform, drawn as a form: its words, its owner and its domain; the tables that hold it, and where its
     // words come from, lit as they're said
-    {at:0,place:"bigReg",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_awardPage(x,{beta:fin(tt,P.beta,0.5),lit:[gv_io(tt,P.words,P.owner,0.4),gv_io(tt,P.owner,P.dom,0.4),
+    {at:0,place:"bigReg",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_awardPage(x,{lit:[gv_io(tt,P.words,P.owner,0.4),gv_io(tt,P.owner,P.dom,0.4),
       gv_io(tt,P.dom,P.tab-0.4,0.4),gv_io(tt,P.tab,P.from,0.4),fin(tt,P.from,0.5)],al:[0,1,2].map(i=>gv_io(tt,P.tab+0.25*i,P.from,0.4))})},
     // Noor's map, close: award's business term at home, published one way to its page; a pencil reaching for the page stops, crossed:
     // a change is made at home

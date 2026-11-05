@@ -4,7 +4,7 @@
    Words as in the governance series: gobernanza de datos, dueña for Mei, la oficina de registro, Planificación, título for an award, microcredenciales and créditos,
    el informe del censo and el borrador de la entrega, as in Off the shelf; un solo lugar for a home, as in Una palabra, un solo lugar. As in Governed in dbt: el control
    for a check, una solicitud de cambio for a pull request, la columna cuenta como título, una construcción for a build, la plataforma and el catálogo. Here a term's page
-   is una página, in beta, a setting is un parámetro, a metric view una vista de métricas, a count un conteo, and a layer una capa. Genie One, dbt and the setting's
+   is una página, a setting is un parámetro, a metric view una vista de métricas, a count un conteo, and a layer una capa. Genie One, dbt and the setting's
    name keep their names. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Monday, in the registrar's office.":
@@ -35,8 +35,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El día de la entrega, los dos informes dicen 4,867.",
 "Her words reach the work, and the university sends one number.":
 "Sus palabras llegan al trabajo, y la universidad envía una sola cifra.",
-"On the platform, each term of the glossary is a page, in beta.":
-"En la plataforma, cada término del glosario es una página, en beta.",
+"On the platform, each term of the glossary is a page.":
+"En la plataforma, cada término del glosario es una página.",
 "Award's page has its words, its owner, Mei, and its domain, course.":
 "La página de título tiene sus palabras, su dueña, Mei, y su dominio, curso.",
 "It lists the tables that hold it, and where its words come from.":

@@ -455,7 +455,7 @@ en = gw('ends', 'ends by itself')
 slide(en, 0.008, px(410), 1.0); ended(en + 0.8)
 prog([(en - 0.2, IV), (en + 2.0, I)], E('groups') + 0.3, g=0.5)
 
-# 7. Down to the column: a chord at the turn; the email picked, its thread drawn down to the column and tagged there too; the beta
+# 7. Down to the column: a chord at the turn; the email picked, its thread drawn down to the column and tagged there too; the
 #    label, and the ghost of a tag travelling; the wallet's file, the email classed there too; a table sketched with an
 #    email nobody classed, and the check's message: the tuba says no
 lw = lambda lid, word, off=0: W('lineage', lid, word, off)
@@ -463,7 +463,7 @@ l0 = S0('lineage')
 chord(vi, l0 + 0.2, l0 + 2.6)
 pk = lw('pick', 'email')
 tap(pk + 0.05, 0.009, px(900)); tap(pk + 0.4, 0.006, px(780)); pencil(pk + 0.2, 0.009, px(1100), 1.0); tap(pk + 1.35, 0.006, px(1400))
-bt = lw('beta', 'follow lineage')
+bt = lw('follow', 'follow lineage')
 tap(bt + 0.3, 0.006, px(865)); air(bt + 0.25, 1.7, 0.004, px(1100))
 nd = lw('need', 'every table', -0.3)
 paper(nd + 0.1, 0.014, px(700), 0.4); knock(lw('need', 'built by the project') + 0.15, 0.008, px(1700), 300); marker(lw('need', 'classes it there'), 0.008, px(700), 0.5)

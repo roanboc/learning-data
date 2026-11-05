@@ -1824,7 +1824,7 @@ scene("options",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   vign(ctx,S);});
 
 /* ---------- 4. Facts ---------- */
-const RIG=[["Delta Sharing","renamed OpenSharing"],["dbt Cloud","now the dbt platform"],["Genie Ontology","in preview: say so"],["Lakebase synced tables","a managed copy, not zero-copy"],["Fabric mirroring","reads Databricks data without a copy"]];
+const RIG=[["Delta Sharing","renamed OpenSharing"],["dbt Cloud","now the dbt platform"],["Genie Ontology","its status checked, never said"],["Lakebase synced tables","a managed copy, not zero-copy"],["Fabric mirroring","reads Databricks data without a copy"]];
 scene("facts",(ctx,S,t,sc)=>{const c=id=>cue(sc,id);setScreen(ctx,S);bg2(ctx);
   lanes(ctx,t,0.35,{thread:0.3});const sh=fin(t,c("sheet")-0.3,0.7);
   // sources checked

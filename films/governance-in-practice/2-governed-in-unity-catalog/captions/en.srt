@@ -83,141 +83,141 @@ Who may read a table is a grant, and a grant goes to a group, never to a person.
 In the project, each column's class says whether it identifies a person: direct, pseudonymous or none.
 
 22
-00:02:17,627 --> 00:02:23,558
+00:02:17,627 --> 00:02:23,559
 After each table builds, dbt writes the class to the platform, as a tag on the column.
 
 23
-00:02:25,258 --> 00:02:32,622
+00:02:25,259 --> 00:02:32,623
 The tag is governed: an admin created it once, with only those three values, so nobody can tag a column "maybe".
 
 24
-00:02:34,322 --> 00:02:38,138
+00:02:34,323 --> 00:02:38,139
 Change a class in the project, and the next build changes the tag.
 
 25
-00:02:39,638 --> 00:02:47,038
+00:02:39,639 --> 00:02:47,039
 For tables the project doesn't build, the platform's classifier finds columns that look personal, for their owner to class.
 
 26
-00:02:50,738 --> 00:02:58,029
+00:02:50,739 --> 00:02:58,030
 Then one policy masks every column tagged direct, in the whole catalog, for everyone but the registrar's office.
 
 27
-00:02:59,529 --> 00:03:06,237
+00:02:59,530 --> 00:03:06,238
 It isn't set table by table: a table built tomorrow, with an email in it, is masked as soon as it's tagged.
 
 28
-00:03:08,337 --> 00:03:11,779
+00:03:08,338 --> 00:03:11,780
 A policy can filter rows the same way; this one masks.
 
 29
-00:03:12,879 --> 00:03:19,007
+00:03:12,880 --> 00:03:19,008
 Clara reads the learner table, and sees each learner's status, and stars where the names and emails are.
 
 30
-00:03:20,707 --> 00:03:25,739
+00:03:20,708 --> 00:03:25,740
 The registrar's office sees the values, and so does the identity that runs the build.
 
 31
-00:03:29,239 --> 00:03:37,237
+00:03:29,240 --> 00:03:37,238
 The learner code is pseudonymous: the student number, scrambled the same way in every table, so tables can be joined without names.
 
 32
-00:03:38,737 --> 00:03:40,457
+00:03:38,738 --> 00:03:40,458
 Scrambled isn't anonymous.
 
 33
-00:03:41,757 --> 00:03:46,319
+00:03:41,758 --> 00:03:46,320
 With the registrar's list, anyone can scramble every number on it and match them.
 
 34
-00:03:48,419 --> 00:03:55,789
+00:03:48,420 --> 00:03:55,790
 So the code is still personal: the policy leaves it readable, for counting, and reading it takes a purpose and an end date.
 
 35
-00:03:59,489 --> 00:04:01,934
+00:03:59,490 --> 00:04:01,935
 Access goes to groups, never to people.
 
 36
-00:04:03,034 --> 00:04:09,922
+00:04:03,035 --> 00:04:09,923
 Mei, for the registrar's office, said yes to Clara: to plan next term's places, until 15 December.
 
 37
-00:04:11,422 --> 00:04:13,816
+00:04:11,423 --> 00:04:13,817
 So Sam doesn't grant the table to Clara.
 
 38
-00:04:14,916 --> 00:04:21,084
+00:04:14,917 --> 00:04:21,085
 He grants it to a Planning group, and Clara joins the group in the university's directory, until that date.
 
 39
-00:04:22,584 --> 00:04:24,662
+00:04:22,585 --> 00:04:24,663
 The platform reads its groups from there.
 
 40
-00:04:25,962 --> 00:04:30,425
+00:04:25,963 --> 00:04:30,426
 When someone changes jobs, the directory moves them, and their access follows.
 
 41
-00:04:31,925 --> 00:04:35,295
+00:04:31,926 --> 00:04:35,296
 On 15 December, her access ends by itself.
 
 42
-00:04:39,595 --> 00:04:42,431
+00:04:39,596 --> 00:04:42,432
 The platform also draws each column's lineage.
 
 43
-00:04:43,531 --> 00:04:48,377
+00:04:43,532 --> 00:04:48,378
 Pick the learner's email, and it shows every table it flows into, down to the column.
 
 44
-00:04:50,077 --> 00:04:53,116
-Tags can follow lineage by themselves, in beta.
+00:04:50,078 --> 00:04:52,363
+Tags can follow lineage by themselves.
 
 45
-00:04:54,416 --> 00:05:00,784
+00:04:53,663 --> 00:05:00,031
 Here they don't need to: every table the email reaches is built by the project, which classes it there too,
 
 46
-00:05:00,984 --> 00:05:02,951
+00:05:00,231 --> 00:05:02,198
 and the check stops a table that doesn't.
 
 47
-00:05:06,651 --> 00:05:10,861
-And the platform keeps a log, in preview, of who read each table, and when.
+00:05:05,898 --> 00:05:09,284
+And the platform keeps a log of who read each table, and when.
 
 48
-00:05:12,361 --> 00:05:17,098
+00:05:10,784 --> 00:05:15,521
 So Sam can answer what Yusuf wanted to know: who read the learner table this month.
 
 49
-00:05:18,998 --> 00:05:26,110
+00:05:17,421 --> 00:05:24,533
 Each December, the access review reads the grants themselves: who can read each table, through which group, and who's in it.
 
 50
-00:05:27,810 --> 00:05:30,178
+00:05:26,233 --> 00:05:28,601
 Forty-one people gave way to two groups:
 
 51
-00:05:30,378 --> 00:05:36,047
+00:05:28,801 --> 00:05:34,470
 the registrar's office, which keeps the learners' records, and the data team, which builds the tables.
 
 52
-00:05:39,947 --> 00:05:45,040
+00:05:38,370 --> 00:05:43,463
 Clara plans next term's places with the statuses she needs, and stars where the names are.
 
 53
-00:05:46,540 --> 00:05:51,626
+00:05:44,963 --> 00:05:50,050
 On Noor's map, the project says what each column is, and the platform holds the line:
 
 54
-00:05:51,826 --> 00:05:56,349
+00:05:50,250 --> 00:05:54,773
 classes become tags, tags meet one policy, and groups carry the dates.
 
 55
-00:05:58,049 --> 00:06:02,219
+00:05:56,473 --> 00:06:00,643
 Sam protects a column in minutes now, because the project tells him which.
 
 56
-00:06:03,719 --> 00:06:06,464
+00:06:02,143 --> 00:06:04,888
 The platform enforces what the metadata says.

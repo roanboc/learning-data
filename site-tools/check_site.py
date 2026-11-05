@@ -24,6 +24,8 @@ What it checks, page by page (every .html under site/):
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
+- release status: no film's voice, captions, page text or Pause and think says a feature is in preview, in beta or generally
+  available, in English or Spanish; it changes, and the film would have to change with it (tools/check.py looks on screen).
 - Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
   longer than the longest wrong one, and clearly the longest in at most half a pack's questions), right answers spread across the options,
   and each Spanish pack's right answers and near misses in the English places.
@@ -70,13 +72,13 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "es/sketch/": ("Temas › Modelado de datos", ["es/topics/", "es/topics/"]),
     "sketch/labs/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
     "sketch/scenarios/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
-    "when-things-go-wrong/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/"]),
-    "es/when-things-go-wrong/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
-    "when-things-go-wrong/silent-change/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
-    "es/when-things-go-wrong/silent-change/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"]),
+    "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
+    "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
+    "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
+    "es/when-things-go-wrong/silent-change/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"]),
     **{f"{lg}when-things-go-wrong/too-good-to-be-true/{sub}": crumb
-       for lg, crumb in (("", ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])),
-                         ("es/", ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])))
+       for lg, crumb in (("", ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])),
+                         ("es/", ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])))
        for sub in ("", "labs/", "scenarios/")},
 }
 # the film bundles (one per page: they declare the same top-level names) and the progress prefix of each film
@@ -185,6 +187,30 @@ BEATS = ["Scenario", "Problem", "Solution", "Benefits", "Back to the story"]
 # the films made before the rule (28 October 2026), by series folder and number; a film that changes its opening adds its table
 BEATS_BEFORE = {"analytics-engineering": range(1, 11), "enterprise-architecture": range(1, 12), "from-words-to-data": range(1, 8),
                 "master-and-reference-data": range(1, 10), "data-governance": (0, 2, 3)}
+
+# a feature's release status changes, so no film says it (AGENTS.md, Sources and names on the day; the author, 5 November 2026):
+# "preview", "beta", "generally available" (or GA), in English or in Spanish. The script's sources keep it, with its date.
+STATUS = re.compile(r"\b(?:public |private )?preview\b|\bbeta\b|\bgenerally available\b|\bgeneral availability\b|\bversi[oó]n preliminar\b|"
+                    r"\bvista previa\b|\bdisponib\w+ (?:de forma |en forma )?general\b|\bdisponibilidad general\b", re.I)
+STATUS_GA = re.compile(r"\bGA\b")
+
+
+def release_status(text):
+    """where a piece of a film's text names a feature's release status: (the words, the words around them)"""
+    return [(m.group(0), ("…" if m.start() > 50 else "") + text[max(0, m.start() - 50):m.end() + 30].strip() + ("…" if m.end() + 30 < len(text) else ""))
+            for m in sorted(list(STATUS.finditer(text)) + list(STATUS_GA.finditer(text)), key=lambda m: m.start())]
+
+
+def json_strings(v, where=""):
+    """every string in a JSON value, with where it is ("lead_es", "past[2].text")"""
+    if isinstance(v, str):
+        yield where, v
+    elif isinstance(v, dict):
+        for k, x in v.items():
+            yield from json_strings(x, f"{where}.{k}" if where else k)
+    elif isinstance(v, list):
+        for i, x in enumerate(v):
+            yield from json_strings(x, f"{where}[{i}]")
 
 # ---------------------------------------------------------------- a small DOM, from the standard library's parser
 class Node:
@@ -953,6 +979,32 @@ def main():
         s["fails"] += opening_beats(film)
     s["notes"].append(f"{films} films; the {sum(len(v) for v in BEATS_BEFORE.values())} made before the rule (28 October 2026) are left as they are")
 
+    s = rep.check("Release status: no film says a feature is in preview, in beta or generally available, in its voice, captions, page or Pause and think")
+    says = lambda f, where, t: [f"{f.relative_to(ROOT)}{where}: \"{w}\" in \"{near}\"" for w, near in release_status(plain_words(t))]
+    made = lambda f: "/build/" in f.as_posix() or "/dist/" in f.as_posix()
+    st_voices = [f for f in sorted(ROOT.glob("films/**/source/src/narration.js")) if not made(f)]
+    for f in st_voices:
+        for m in re.finditer(r'"(?:text|say)"\s*:\s*"((?:[^"\\]|\\.)*)"', f.read_text(encoding="utf-8")):
+            s["fails"] += says(f, "", m.group(1))
+    st_caps = [f for f in sorted(ROOT.glob("films/**/captions/*.vtt")) if not made(f)]
+    for f in st_caps:
+        for i, line in enumerate(f.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            s["fails"] += says(f, f":{i}", line)
+    st_pages = sorted(ROOT.glob("films/**/site.json"))
+    for f in st_pages:
+        for where, t in json_strings(json.loads(f.read_text(encoding="utf-8"))):
+            s["fails"] += says(f, f" {where}", t)
+    st_packs = sorted(ROOT.glob("site/assets/**/think.*.js"))
+    for f in st_packs:
+        src = f.read_text(encoding="utf-8")
+        for a, b in reversed(js_comment_spans(src)):
+            src = src[:a] + re.sub(r"[^\n]", " ", src[a:b]) + src[b:]  # blank, keeping its lines
+        for i, line in enumerate(src.splitlines(), 1):
+            s["fails"] += says(f, f":{i}", line)
+    if s["fails"]:
+        s["notes"].append("say what the feature does, and keep its release status, with its date, in the script's sources: it changes, "
+                          "and the film would have to change with it")
+    s["notes"].append(f"{len(st_voices)} films' voices, {len(st_caps)} caption files, {len(st_pages)} films' page text and {len(st_packs)} Pause and think packs")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     for en_path in sorted(WEB.glob("assets/*/think.en.js")):

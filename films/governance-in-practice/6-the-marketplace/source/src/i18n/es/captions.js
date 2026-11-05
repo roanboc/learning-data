@@ -3,8 +3,8 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the governance series: gobernanza de datos, never gobierno; dueño and dueña, Planificación, estudiantes cerca de un título, el día del censo, los cupos
    del próximo semestre, and the products' names said in Spanish (los Títulos de Mei). As in A product with an owner and Products in open formats: producto de datos,
-   el catálogo, su promesa, el contrato, el registro de quién usa qué. As in Governed in dbt: el control de impacto, la plataforma; as in Governed in Unity Catalog,
-   versión preliminar. Here the marketplace is el mercado, a shop window un escaparate, a request una solicitud, a placement una práctica, the directory el
+   el catálogo, su promesa, el contrato, el registro de quién usa qué. As in Governed in dbt: el control de impacto, la plataforma.
+   Here the marketplace is el mercado, a shop window un escaparate, a request una solicitud, a placement una práctica, the directory el
    directorio de cuentas, a readers' group el grupo de lectores, a partner university una universidad socia, and a private exchange un intercambio privado.
    Ontos, Databricks Labs, OpenSharing, the Databricks Marketplace and what Anil types (near award) keep their names. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -74,8 +74,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Escribe: para planear los cupos del próximo semestre en la última unidad del certificado.",
 "And he asks for ninety days.":
 "Y pide noventa días.",
-"Had he started on the platform, its request button, in preview, would have brought him here too.":
-"Si hubiera empezado en la plataforma, su botón de solicitud, en versión preliminar, también lo habría traído aquí.",
+"Had he started on the platform, its request button would have brought him here too.":
+"Si hubiera empezado en la plataforma, su botón de solicitud también lo habría traído aquí.",
 "Every request comes to one place.":
 "Cada solicitud llega a un solo lugar.",
 "The request goes to Clara, the product's owner, not to whoever built the table.":

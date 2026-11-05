@@ -4,7 +4,7 @@
    Words as in Rules that run: control for a check, dueño, Planificación, el gobierno for the government, el tablero de calidad for the scorecard (el tablero for short),
    una incidencia, una advertencia, el equipo de aprendizaje and el equipo de datos, una encuesta, and the dimensions completitud and the others; numbers keep the picture's
    form (3.9). As in Governed in dbt: prueba for a test, una construcción for a build, la plataforma; as in Fixed where it starts, el formulario and una alerta, las
-   insignias and sus créditos; as in Governed in Unity Catalog, versión preliminar for preview. Here monitoring is el monitoreo, the pipeline keeps its name (el pipeline,
+   insignias and sus créditos. Here monitoring is el monitoreo, the pipeline keeps its name (el pipeline,
    as in the analytics films), an expectation is una expectativa, a profile un perfil, an enrolment una inscripción, the learning domain el área de aprendizaje, and the
    owner on record el dueño registrado. dbt keeps its name. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -100,8 +100,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Todas las pruebas pasaron: ninguna regla pedía créditos a una microcredencial.",
 "Monitoring caught it.":
 "El monitoreo lo detectó.",
-"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write; that's in preview.":
-"La plataforma aprende cuándo suele llegar cada tabla y cuántas filas trae, sin escribir reglas; eso está en versión preliminar.",
+"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write.":
+"La plataforma aprende cuándo suele llegar cada tabla y cuántas filas trae, sin escribir reglas.",
 "And a profile of the badges counts, each night, how many carry no credit: usually one in twelve.":
 "Y un perfil de las insignias cuenta, cada noche, cuántas no llevan créditos: por lo general, una de cada doce.",
 "That night, one in two.":

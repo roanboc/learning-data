@@ -3,265 +3,265 @@
 Monday, at the Faculty of Health.
 
 2
-00:00:04,212 --> 00:00:08,921
-Anil Kurian plans next year's places in classes, labs and hospitals.
+00:00:04,212 --> 00:00:08,856
+Anil Kurian plans next year's lab space, equipment and research support.
 
 3
-00:00:10,021 --> 00:00:15,386
-He starts from Health's students on census day: the day the university counts who is studying.
+00:00:09,956 --> 00:00:15,212
+He starts from Health's active research projects: those that have started and not yet ended.
 
 4
-00:00:16,686 --> 00:00:23,042
+00:00:15,912 --> 00:00:22,268
 He asks his agent, and two colleagues ask theirs. Each set up their own, with their own copy of the data.
 
 5
-00:00:24,542 --> 00:00:29,115
-Anil's reads a spreadsheet of student load, made for the faculty's funding bid.
+00:00:23,768 --> 00:00:27,511
+Anil's reads a spreadsheet made for the yearly research report.
 
 6
-00:00:29,815 --> 00:00:37,031
-Load counts two half-time students as one, but the agent takes it for people: 2,160.
+00:00:28,211 --> 00:00:35,754
+That report counts a project shared with another faculty as half, but the agent reads it as a count: 141.
 
 7
-00:00:38,331 --> 00:00:43,145
-The second, with a copy of the student table, counts every degree with Health in its name.
+00:00:36,454 --> 00:00:42,181
+The second, with a copy of the projects table, counts every project in a unit with Health in its name.
 
 8
-00:00:43,845 --> 00:00:51,733
-So it counts the 31 students of Health data too, a joint degree in no faculty: 2,911.
+00:00:42,881 --> 00:00:51,374
+So it counts the 9 projects of Engineering's Bridge Health Lab too, which tests bridges, not people: 177.
 
 9
-00:00:53,033 --> 00:00:57,874
-The third reads a folder of reports, and says 2,880.
+00:00:52,074 --> 00:00:56,317
+The third reads a folder of reports, and says 168.
 
 10
-00:00:58,974 --> 00:01:02,925
+00:00:57,417 --> 00:01:01,368
 One is right, and nobody can tell which: none of them shows what it read.
 
 11
-00:01:05,025 --> 00:01:09,222
-Plan for the lowest, and 720 students would have no place.
+00:01:03,468 --> 00:01:07,486
+Plan for the lowest, and 27 projects would have no lab space.
 
 12
-00:01:10,722 --> 00:01:14,854
-And a copy of the student table, with every name in it, sits on a laptop.
+00:01:08,986 --> 00:01:13,914
+And a copy of the projects table, with every researcher's name in it, sits on a laptop.
 
 13
-00:01:16,354 --> 00:01:17,742
+00:01:15,414 --> 00:01:16,802
 Something had to change.
 
 14
-00:01:19,442 --> 00:01:27,102
+00:01:18,502 --> 00:01:26,162
 So Sam, who runs the platform, and Jun, who builds the data project, bring the agents to the data, on Databricks.
 
 15
-00:01:28,202 --> 00:01:36,336
+00:01:27,262 --> 00:01:35,396
 Every agent now reads the same governed tables, definitions and tools as everyone else, and only what its own person may read.
 
 16
-00:01:37,836 --> 00:01:45,114
-A week later, all three answer 2,880, each with its query, its table and its definition.
+00:01:36,896 --> 00:01:43,680
+A week later, all three answer 168, each with its query, its table and its definition.
 
 17
-00:01:46,614 --> 00:01:51,721
-Anil checks it in a minute, and plans a place for every student. The copies are deleted.
+00:01:45,180 --> 00:01:50,368
+Anil checks it in a minute, and plans space for every project. The copies are deleted.
 
 18
-00:01:53,221 --> 00:01:59,198
+00:01:51,868 --> 00:01:57,845
 When every agent reads the same data through the same tools, the answers agree, with their evidence.
 
 19
-00:02:06,698 --> 00:02:14,617
+00:02:05,345 --> 00:02:13,264
 Databricks holds the university's data, governed in Unity Catalog: its tables, its definitions, and who may read what.
 
 20
-00:02:15,917 --> 00:02:19,851
+00:02:14,564 --> 00:02:18,498
 People already work there, in its editors, notebooks and dashboards.
 
 21
-00:02:20,951 --> 00:02:23,430
+00:02:19,598 --> 00:02:22,077
 Now agents work there too, in four ways.
 
 22
-00:02:24,530 --> 00:02:27,454
+00:02:23,177 --> 00:02:26,101
 Agents that answer questions, over governed data.
 
 23
-00:02:27,954 --> 00:02:30,454
+00:02:26,601 --> 00:02:29,101
 Tool servers, which any agent can use.
 
 24
-00:02:30,954 --> 00:02:33,672
+00:02:29,601 --> 00:02:32,319
 Agents the team builds and tests on the platform.
 
 25
-00:02:34,172 --> 00:02:38,595
+00:02:32,819 --> 00:02:37,242
 And agents that write code, for the dbt project and the pipelines.
 
 26
-00:02:39,895 --> 00:02:44,819
+00:02:38,542 --> 00:02:43,466
 Each reads the same data, and uses the same tools, as the people it works for.
 
 27
-00:02:48,319 --> 00:02:50,072
+00:02:46,966 --> 00:02:48,719
 First, agents that answer.
 
 28
-00:02:50,772 --> 00:02:56,538
+00:02:49,419 --> 00:02:55,185
 Genie One is the platform's assistant for business questions, and it says where its words come from.
 
 29
-00:02:57,838 --> 00:03:03,223
+00:02:56,485 --> 00:03:01,870
 For questions that need care, the data team builds Genie Agents, each for one subject.
 
 30
-00:03:04,323 --> 00:03:08,931
-Their Census day agent reads the governed table of students on census day.
+00:03:02,970 --> 00:03:08,237
+Their Research projects agent reads the governed table of projects, and who leads each.
 
 31
-00:03:09,631 --> 00:03:17,416
-Its instructions are the team's definitions: a student is a person, counted once, as their record stood on census day.
+00:03:08,937 --> 00:03:17,542
+Its instructions are the team's definitions: a project is active from its start to its end, and counts once, in the faculty that leads it.
 
 32
-00:03:18,716 --> 00:03:26,361
+00:03:18,842 --> 00:03:26,487
 Its tests, which Genie calls benchmarks, are the questions behind Health's three answers, each with its right answer in SQL.
 
 33
-00:03:27,861 --> 00:03:33,522
+00:03:27,987 --> 00:03:33,648
 The team runs them after every change, so a wrong answer shows before anyone relies on it.
 
 34
-00:03:35,022 --> 00:03:38,771
+00:03:35,148 --> 00:03:38,897
 And each answer shows its SQL, so anyone can check what it read.
 
 35
-00:03:42,271 --> 00:03:45,543
+00:03:42,397 --> 00:03:45,669
 Second, tool servers: the hands any agent can use.
 
 36
-00:03:46,243 --> 00:03:49,432
+00:03:46,369 --> 00:03:49,558
 The platform runs them, so nobody has to keep their own.
 
 37
-00:03:50,532 --> 00:03:57,020
+00:03:50,658 --> 00:03:57,146
 One runs queries. One turns a governed function into a tool. One searches the team's documents.
 
 38
-00:03:58,320 --> 00:04:02,982
+00:03:58,446 --> 00:04:03,108
 And Genie One and each Genie Agent have their own, so any agent can ask them.
 
 39
-00:04:04,082 --> 00:04:09,114
+00:04:04,208 --> 00:04:09,240
 Anil's agent now connects to them with his own sign-in, and reads only what he may read.
 
 40
-00:04:10,614 --> 00:04:15,178
-The data team wrote the census count once, as a function, for any faculty.
+00:04:10,740 --> 00:04:16,263
+The data team wrote the count of active projects once, as a function, for any faculty.
 
 41
-00:04:16,478 --> 00:04:19,676
+00:04:17,563 --> 00:04:20,761
 Every agent calls it, and none writes a count of its own.
 
 42
-00:04:21,176 --> 00:04:25,638
+00:04:22,261 --> 00:04:26,723
 They follow the open standard, MCP, so any agent can plug in.
 
 43
-00:04:29,138 --> 00:04:31,022
+00:04:30,223 --> 00:04:32,107
 Third, agents the team builds.
 
 44
-00:04:31,722 --> 00:04:39,744
-When the nightly count fails its check against the census report, someone has to find out why, and those steps can't be written in advance.
+00:04:32,807 --> 00:04:40,702
+When the nightly count disagrees with the Research Office's list, someone has to find out why, and those steps can't be written in advance.
 
 45
-00:04:41,044 --> 00:04:47,386
-So the team builds a census check agent, in code, with Agent Bricks, the platform's way to build agents.
+00:04:42,002 --> 00:04:48,332
+So the team builds a project check agent, in code, with Agent Bricks, the platform's way to build agents.
 
 46
-00:04:48,486 --> 00:04:53,182
+00:04:49,432 --> 00:04:54,128
 Agent Runtime runs it, the job calls it, and every step it takes is traced.
 
 47
-00:04:54,482 --> 00:04:57,368
+00:04:55,428 --> 00:04:58,314
 It uses the same tool servers as everyone else.
 
 48
-00:04:58,068 --> 00:05:02,609
+00:04:59,014 --> 00:05:03,555
 Before anyone relies on it, the team tests it on cases they have met before.
 
 49
-00:05:03,709 --> 00:05:11,136
-The 37 who withdrew after census day and still count. Three students counted twice. And Health's three answers.
+00:05:04,655 --> 00:05:12,389
+The 12 projects given more time, whose first end date has passed. Two projects entered twice. And Health's three answers.
 
 50
-00:05:12,636 --> 00:05:19,996
+00:05:13,889 --> 00:05:21,249
 Judges built into the platform score each answer, a plain test checks the sums, and Mei and Jun mark what's wrong.
 
 51
-00:05:21,496 --> 00:05:25,615
+00:05:22,749 --> 00:05:26,868
 Its note is evidence, not a decision: Jun reads it, and decides.
 
 52
-00:05:29,115 --> 00:05:31,031
+00:05:30,368 --> 00:05:32,284
 Fourth, agents that write code.
 
 53
-00:05:31,731 --> 00:05:35,413
-Sam builds the pipelines that load the student system each night.
+00:05:32,984 --> 00:05:37,241
+Sam builds the pipelines that load the university's systems each night.
 
 54
-00:05:36,113 --> 00:05:42,023
+00:05:37,941 --> 00:05:43,851
 Genie Code, the platform's coding agent, works beside him in the pipeline editor, with his rights.
 
 55
-00:05:43,123 --> 00:05:49,018
+00:05:44,951 --> 00:05:50,846
 It reads the team's skills: the same files Jun's agent reads, in the same open format.
 
 56
-00:05:50,318 --> 00:05:56,463
+00:05:52,146 --> 00:05:58,291
 Asked to profile a table, it follows the team's skill, with the query and result behind every claim.
 
 57
-00:05:57,963 --> 00:06:02,472
+00:05:59,791 --> 00:06:04,300
 Jun's own coding agent works on the dbt project, in his editor.
 
 58
-00:06:03,172 --> 00:06:08,836
+00:06:05,000 --> 00:06:10,664
 It reaches the platform through the same tool servers, and Databricks' own skills teach it the platform.
 
 59
-00:06:10,136 --> 00:06:14,069
+00:06:11,964 --> 00:06:15,897
 Skills teach an agent how to work; tool servers let it do the work.
 
 60
-00:06:15,569 --> 00:06:22,784
+00:06:17,397 --> 00:06:24,612
 What either writes is a draft, on a branch: its person reviews it, and a second person approves what reaches production.
 
 61
-00:06:26,284 --> 00:06:30,126
+00:06:28,112 --> 00:06:31,954
 Back at the Faculty of Health, the three agents are still their owners' own.
 
 62
-00:06:30,826 --> 00:06:35,381
+00:06:32,654 --> 00:06:37,209
 But they read the same governed data, through the same tools, as everyone else.
 
 63
-00:06:36,681 --> 00:06:45,261
-Asked for Health's students on census day, each answers 2,880, with its query, its table and its definition.
+00:06:38,509 --> 00:06:46,642
+Asked for Health's active research projects, each answers 168, with its query, its table and its definition.
 
 64
-00:06:46,761 --> 00:06:48,945
-Anil plans a place for every student.
+00:06:48,142 --> 00:06:50,374
+Anil plans space for every project.
 
 65
-00:06:50,245 --> 00:06:55,088
+00:06:51,674 --> 00:06:56,517
 The platform gives agents the same data and tools people use, in one place.
 
 66
-00:06:56,788 --> 00:07:03,007
+00:06:58,217 --> 00:07:04,436
 One question is left: when an agent reads on its own, whose reads are they, and who pays for its model?
 
 67
-00:07:04,507 --> 00:07:05,643
+00:07:05,936 --> 00:07:07,072
 That's the next film.

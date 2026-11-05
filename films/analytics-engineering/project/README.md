@@ -227,8 +227,8 @@ project/
 │                             pull requests as patches, with what the checks and the sync said;
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
-│                             agents-on-databricks/: the census-day count as a function, a Genie
-│                             Agent and an agent's evaluation cases (Databricks only)
+│                             agents-on-databricks/: the count of active research projects as a
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

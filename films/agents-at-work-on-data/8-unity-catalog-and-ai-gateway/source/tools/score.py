@@ -8,10 +8,10 @@
 #  - The crumhorn is a Renaissance reed whose reed is shut inside a wind cap: the player's breath reaches the reed only through the cap,
 #    and it can't overblow past its range. Played softly, low in its range, it is the agent's own voice, and it sounds where something
 #    passes the gateway: every call goes through the cap, and no further than it's allowed.
-#  - The mark: the same figure for a person and for an agent, B flat, E flat, D flat, G flat. Mei's key plays it on the clavichord alone,
-#    when the agent takes it and signs in as her; given a name of its own, under the same rules as people, the agent plays it on the
+#  - The mark: the same figure for a person and for an agent, B flat, E flat, D flat, G flat. Anil's key plays it on the clavichord alone,
+#    when the agent takes it and signs in as him; given a name of its own, under the same rules as people, the agent plays it on the
 #    crumhorn with the clavichord, together; the two play it again over the title card, then when Clara and the agent read the
-#    learner table the same way, and on the film's last line.
+#    staff table the same way, and on the film's last line.
 #  - E flat minor for the nights and the trouble, G flat major (its relative major) for what the rules give; A flat minor, C flat
 #    major and B flat minor at the turns. No D flat major chord: its fifth isn't pure in this tuning.
 # The rules the series keeps (its briefs, 4 November 2026, as the module's other films do):
@@ -163,14 +163,14 @@ def flutter(s, sec=2.6, g=0.008, pan=0.0):
     x = tt(sec); X(filt(noise(sec), 'band', (300, 1600))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g * FX, pan)
 
 # =============================================================================================================================
-# 1. Whose reads were those? The opening, under the clavichord. By day: G flat, open, as Mei is introduced; the faculties' three
+# 1. Whose reads were those? The opening, under the clavichord. By day: G flat, open, as Anil is introduced; the heads of school's three
 #    questions laid on the wall. The agent's ring draws itself: C flat. At night: E flat minor; the questions go into the ring on a
-#    breath of air, and the answers settle, one knock each. Her personal key: she holds it up and it goes to the agent's hook, a clink,
-#    and the figure, on the clavichord alone (hers, now the agent's). Sam and the log: A flat minor; the Sunday lines race past, one soft
+#    breath of air, and the answers settle, one knock each. His personal key: he holds it up and it goes to the agent's hook, a clink,
+#    and the figure, on the clavichord alone (his, now the agent's). Sam and the log: A flat minor; the Sunday lines race past, one soft
 #    texture, and a low open fifth with the amber count. At night again: E flat minor; the arm touches each row. The trick: A flat
 #    minor, low. Its calls: a breath of air along the thread out of the room, a clink for the second key, and one note left hanging
-#    over the question mark. The log points at Mei: the low fifth again. She did nothing wrong: A flat minor, softly; three lines to
-#    what her key opens. Something had to change: nothing. A name of its own: the key comes off the hook, the badge drops, G flat
+#    over the question mark. The log points at Anil: the low fifth again. He did nothing wrong: A flat minor, softly; three lines to
+#    what his key opens. Something had to change: nothing. A name of its own: the key comes off the hook, the badge drops, G flat
 #    major, and the figure on the crumhorn and the clavichord together, "under the same rules as people". The catalog's record; the
 #    stars. Unity Gateway: the crumhorn holds a low G flat as the thread passes the frame. Every morning: G flat. Jun's agent: C flat,
 #    then G flat on "one set of rules"; the title card: the figure once more, on both
@@ -179,20 +179,20 @@ rc = lambda lid, off=0: G('reads', lid, off)
 r0 = S0('reads')
 # by day: G flat, open; the questions laid on the wall
 roll((42, 54, 61, 66), r0 + 0.5, 0.85)
-for i, word in enumerate(('the same questions', 'how many students', 'in which courses')):
+for i, word in enumerate(('the same questions', 'how many teach this term', 'how many are casual')):
     paper(rw('ask', word), 0.012, px(1576))
-roll((46, 58, 61, 65), rw('ask', 'how many students', -0.2), 0.7)
+roll((46, 58, 61, 65), rw('ask', 'how many teach this term', -0.2), 0.7)
 # the agent's ring draws itself
-roll((47, 59, 63, 66), rw('mei', 'set up an agent'), 0.75)
+roll((47, 59, 63, 66), rw('anil', 'set up an agent'), 0.75)
 # at night: E flat minor; the questions go into the ring, and the answers settle
-P_night = rw('mei', 'at night')
+P_night = rw('anil', 'at night')
 roll((39, 51, 58, 66), P_night + 0.05, 0.8)
 air(P_night + 0.3, 2.4, 0.008, px(1300))
 for i in range(3):
     knock(P_night + 0.3 + 1.4 + 0.7 * i + 0.25, 0.012, px(1580), 260)
-# her personal key: held up, it flies to the hook, a clink as it lands; the figure, hers, now the agent's
-P_key = rw('key', 'sign in as her', 0.1)
-paper(rw('key', 'sign in as her'), 0.012, px(686))
+# his personal key: held up, it flies to the hook, a clink as it lands; the figure, his, now the agent's
+P_key = rw('key', 'sign in as him', 0.1)
+paper(rw('key', 'sign in as him'), 0.012, px(686))
 air(P_key, 1.5, 0.006, px(900))
 clink(P_key + 1.5, 0.01, px(1130))
 figure(P_key + 1.55, 0.8)
@@ -204,7 +204,7 @@ flutter(rc('sunday', 0.2), 3.0, 0.007, px(826))
 P_2300 = rw('sunday', 'two thousand')
 roll((39, 46), P_2300, 0.75)
 knock(P_2300, 0.012, px(826), 180)
-# at night again: E flat minor; the arm touches each row; everything she can, lit
+# at night again: E flat minor; the arm touches each row; everything he can, lit
 roll((51, 58, 63, 66), rc('asleep', 0.1), 0.7)
 for i in range(4):
     tap(rc('asleep', 0.8 + 0.5 * i + 0.6), 0.008, px(1700))
@@ -214,13 +214,13 @@ roll((44, 51, 59), rw('trick', 'handing names over', -0.6), 0.7)
 paper(rc('trick', 0.1), 0.012, px(1540))
 # its calls: the thread runs out of the room on a breath of air; the second key, a clink; budget none; and one note left hanging
 air(rc('calls', 0.2), 1.6, 0.008, px(1500))
-clink(rw('calls', 'another key of hers', 0.4), 0.008, px(1500))
+clink(rw('calls', 'another key of his', 0.4), 0.008, px(1500))
 tap(rw('calls', "no one's budget"), 0.01, px(1560))
 clav(61, rw('calls', 'what the calls carried', 0.1), None, 0.6, px(1800))
-# the log points at Mei: the low fifth, as the line reaches her name
-P_pt = rw('blame', 'point at Mei')
+# the log points at Anil: the low fifth, as the line reaches his name
+P_pt = rw('blame', 'point at Anil')
 roll((39, 46), P_pt + 0.85, 0.7)
-# she did nothing wrong: A flat minor, softly; a line to each thing her key opens
+# he did nothing wrong: A flat minor, softly; a line to each thing his key opens
 roll((56, 59, 63), rc('nothing', 0.3), 0.6)
 for i in range(3):
     tap(rw('nothing', 'a personal key', 0.2 + 0.45 * i), 0.008, px(1500))
@@ -239,14 +239,14 @@ P_gw = rc('gateway', 0.6)
 crum(42, P_gw, P_gw + 3.4, 0.9)
 knock(rw('gateway', "only the ones it's allowed"), 0.012, px(1635))
 tap(rw('gateway', 'counts what it spends'), 0.01, px(1635))
-# every morning: G flat; the answers ticked; no names seen; the registrar's budget
+# every morning: G flat; the answers ticked; no names seen; the faculty's budget
 roll((54, 58, 61, 66), rc('worked', 0.2), 0.75)
 tap(rc('worked', 0.6), 0.009, px(1800))
 tap(rw('since', "hasn't seen a single name"), 0.009, px(1580))
 paper(rw('since', 'three hundred dollars'), 0.012, px(706))
 # and the log says whose: the agent's two lines lit
 tap(rc('whose', 0.4), 0.008, px(600)); tap(rc('whose', 0.6), 0.008, px(600))
-# Jun's census agent: C flat; one set of rules: G flat; the title card: the figure on both
+# Jun's project check agent: C flat; one set of rules: G flat; the title card: the figure on both
 roll((47, 54, 59, 63), rc('jun', 0.3), 0.7)
 paper(rc('jun', 0.4), 0.012, px(1580))
 roll((42, 58, 61, 66), rc('rules', 0.1), 0.7)
@@ -264,7 +264,7 @@ air(hw('lose', 'misread it'), 1.2, 0.006, px(430))
 for i in range(4):
     tap(hw('lose', 'lose it in a long task', 0.3 + 0.35 * i), 0.007, px(1460))
 paper(hw('lose', 'words hidden'), 0.01, px(520))
-for i in (1, 2):
+for i in (1, 2, 3):
     tap(hc('enforce', 0.6 + 0.5 * (i - 1) + 0.6), 0.008, px(1700))
 roll((42, 54, 58, 61), hc('enforce', 1.7), 0.65)
 tap(hw('enforce', 'only ever sees as stars'), 0.01, px(1576))
@@ -274,9 +274,9 @@ for lid, word in (('touch', 'the tables'), ('touch', 'the functions'), ('touch',
     knock(hw(lid, word), 0.011, px(950 if lid == 'touch' else 1560), 260)
 crum(42, hc('ug', 0.2), hc('ug', 3.4), 0.8)
 
-# 3. A name for the agent: B flat minor at the turn. Beside her, by day: a small agent, signed in as Mei. On its own, at night: E flat
+# 3. A name for the agent: B flat minor at the turn. Beside him, by day: a small agent, signed in as Anil. On its own, at night: E flat
 #    minor. A service principal: its card and its grants laid up, read with a lock, write struck out. Jun's page. Switched off: one low
-#    note stopped short, a click; the census agent works on, a breath of air. Mei its owner: the tag on the hook, G flat major
+#    note stopped short, a click; the project check agent works on, a breath of air. Anil its owner: the tag on the hook, G flat major
 nw = lambda lid, word, off=0: W('name', lid, word, off)
 nc = lambda lid, off=0: G('name', lid, off)
 roll((46, 58, 61, 65), S0('name') + 0.3, 0.62)
@@ -286,8 +286,8 @@ roll((39, 51, 58, 66), nc('alone', 0.2), 0.62)
 paper(nw('alone', 'a name of its own'), 0.011, px(686))
 paper(nw('sp', 'a service principal'), 0.012, px(756))
 paper(nw('make', 'grants it only'), 0.012, px(1456))
-tap(nw('needs', 'the core tables'), 0.01, px(1300)); strike(nw('needs', 'write nowhere', 0.1), 0.008, px(1300), 0.4)
-paper(nc('census', 0.4), 0.012, px(856))
+tap(nw('needs', 'the HR tables'), 0.01, px(1300)); strike(nw('needs', 'write nowhere', 0.1), 0.008, px(1300), 0.4)
+paper(nc('check', 0.4), 0.012, px(856))
 P_off = nw('stop', 'switches off')
 clav(39, P_off + 0.2, P_off + 0.55, 0.6, px(950))
 tap(P_off + 0.25, 0.012, px(950))
@@ -295,10 +295,10 @@ air(nw('stop', 'everyone else works on'), 1.0, 0.007, px(1650))
 knock(nw('owner', 'stays its owner', 0.75), 0.012, px(880), 280)
 roll((54, 58, 61, 66), nw('owner', 'stays its owner', 0.8), 0.65)
 
-# 4. The same stars: C flat major at the turn, the policy laid up; the group's members, one tap each; the office's group, and the agent
-#    not in it. Clara and the agent read the same record: the figure, on the clavichord and the crumhorn together, the mark: the same
+# 4. The same stars: C flat major at the turn, the policy laid up; the group's members, one tap each; the group of HR and the faculty offices,
+#    and the agent not in it. Clara and the agent read the same record: the figure, on the clavichord and the crumhorn together, the mark: the same
 #    for a person and for an agent. Nobody wrote a rule for agents: no music. The row filter slides, a breath of air; the group; Health
-#    only, a lock. The learner code; the census count; no names read
+#    only, a lock. The staff code; each school's teachers, counted; no names read
 sw = lambda lid, word, off=0: W('stars', lid, word, off)
 sc_ = lambda lid, off=0: G('stars', lid, off)
 roll((47, 54, 59, 63), S0('stars') + 0.4, 0.62)
@@ -307,14 +307,14 @@ P_us = sw('everyone', "all the account's users")
 paper(P_us, 0.011, px(1576)); tap(P_us + 0.3, 0.008, px(1450))
 P_sp = sw('everyone', 'every service principal')
 tap(P_sp, 0.008, px(1450)); tap(P_sp + 0.5, 0.008, px(1450))
-paper(sw('counts', "the office's group"), 0.011, px(756)); tap(sw('counts', 'all it needs is counts'), 0.009, px(680))
+paper(sw('counts', 'their group'), 0.011, px(756)); tap(sw('counts', 'all it needs is counts'), 0.009, px(680))
 paper(sc_('clara', 0.3), 0.011, px(746)); paper(sc_('clara', 0.6), 0.011, px(1566))
-mark(sw('status', "each learner's status", -0.2), 0.75, 2.4)
+mark(sw('status', "each person's staff code", -0.2), 0.75, 2.4)
 paper(sw('nobody', 'The rule for people'), 0.011, px(756))
 air(sw('rows', 'A row filter', 0.2), 1.4, 0.007, px(856))
 paper(sw('rows', 'A row filter', 0.6), 0.011, px(1580)); tap(sw('rows', 'for an agent'), 0.008, px(1450))
 tap(sw('rows', 'for an agent', 0.4), 0.01, px(1580))
-paper(sw('count', 'eighteen thousand'), 0.012, px(1536)); tap(sw('count', 'without a single name'), 0.009, px(1500))
+paper(sw('count', "each school's teachers"), 0.012, px(1566)); tap(sw('count', 'without a single name'), 0.009, px(1500))
 
 # 5. Tools in the catalog: A flat minor at the turn, as the frame draws. The function laid in; its grant; the arm touches it. The tool
 #    servers, set in; the arms reach two and stop short of the third; registered through Unity Gateway: the crumhorn, a moment
@@ -333,7 +333,7 @@ crum(46, tw('servers', 'through Unity Gateway'), tw('servers', 'through Unity Ga
 tap(tw('fewest', 'only read'), 0.008, px(1440))
 
 # 6. Through the gateway: the gateway's frame draws itself and the crumhorn holds G flat under it; G flat major as the model services
-#    are set in. Mei's keys struck through, taken back. The checks come up. A prompt comes to the door; its email address is hidden, a
+#    are set in. Anil's keys struck through, taken back. The checks come up. A prompt comes to the door; its email address is hidden, a
 #    soft swipe, and it goes on through: the crumhorn, a moment. The hidden words come to the same door and stop there, a dull knock;
 #    blocked. The limit's dial. Every call counted under its name: the usage fills on a breath of air, the budget laid under it, and
 #    G flat major with the crumhorn under it
@@ -345,7 +345,7 @@ P_svc = gw('models', 'a service in the catalog')
 roll((54, 61, 66, 70), P_svc + 0.1, 0.62)
 for i in range(3):
     knock(P_svc + 0.1 + 0.3 * i, 0.011, px(1580), 260)
-P_keys = gw('one', "Mei's keys")
+P_keys = gw('one', "Anil's keys")
 paper(P_keys, 0.011, px(420)); strike(P_keys + 0.5, 0.009, px(300), 0.6)
 tap(gc('checks', 0.6), 0.009, px(906)); tap(gc('checks', 1.0), 0.009, px(920))
 paper(gc('email', 0.2), 0.011, px(700))
@@ -364,28 +364,28 @@ crum(42, gw('count', 'its own budget', 0.15), gw('count', 'its own budget', 2.6)
 
 # 7. Seen under its own name: B flat minor at the turn, a month later. The query laid up, the log under it, a tap for each of its lines.
 #    Whose reads were those? Now the log says: G flat major. Lineage: the tables, the answer; the gateway's own table. Stopped alone:
-#    one low note stopped short, a click. No read of the agent's taken for Mei's: G flat, with its sixth, softly
+#    one low note stopped short, a click. No read of the agent's taken for Anil's: G flat, with its sixth, softly
 ew = lambda lid, word, off=0: W('seen', lid, word, off)
 ec = lambda lid, off=0: G('seen', lid, off)
 roll((46, 53, 58, 61), S0('seen') + 0.4, 0.6)
 paper(ew('same', 'The same question'), 0.012, px(856))
-P_mei = ew('same', 'lists Mei')
-paper(P_mei - 0.3, 0.011, px(916)); tap(P_mei, 0.007, px(900)); tap(P_mei + 0.3, 0.007, px(900))
-P_ag = ew('same', 'the registrar agent')
+P_anil = ew('same', 'lists Anil')
+paper(P_anil - 0.3, 0.011, px(916)); tap(P_anil, 0.007, px(900)); tap(P_anil + 0.3, 0.007, px(900))
+P_ag = ew('same', 'the workload agent')
 tap(P_ag, 0.008, px(1000)); tap(P_ag + 0.3, 0.008, px(1000))
 roll((54, 61, 66, 70), ew('whose', 'Now the log says', 0.1), 0.6)
-for i in range(3):
-    knock(ew('lineage', 'the tables', -0.2 + 0.25 * i), 0.01, px(640), 270)
+for i in range(2):
+    knock(ew('lineage', 'the tables', -0.2 + 0.25 * i), 0.01, px(700), 270)
 paper(ew('lineage', 'the tables', 0.6), 0.011, px(1100))
 paper(ew('usage', 'own table'), 0.011, px(1580)); tap(ew('usage', 'the tokens'), 0.008, px(1580))
 P_al = ew('stop', 'stop the agent alone')
 clav(39, P_al + 0.2, P_al + 0.55, 0.6, px(900))
 tap(P_al + 0.25, 0.012, px(900))
-paper(ec('mei', 0.3), 0.011, px(916))
-roll((42, 58, 63, 66), ec('mei', 0.5), 0.55)
+paper(ec('anil', 0.3), 0.011, px(916))
+roll((42, 58, 63, 66), ec('anil', 0.5), 0.55)
 
 # 8. One set of rules: A flat minor at the turn, the page and the catalog. Every person, agent and tool: their names set in, a tap for
-#    each row. One set to keep, one log, one review: C flat major. Jun's agent and the number for the government: its card laid up;
+#    each row. One set to keep, one log, one review: C flat major. Jun's agent and the count Anil plans lab space from: its card laid up;
 #    seen, limited, counted; the count leaves on a breath of air. Every morning: the answers signed, G flat major. The last line: the
 #    figure on both, the mark. Next: a card set down. The end card: G flat major, the clavichord and the crumhorn on G flat together
 ow = lambda lid, word, off=0: W('one', lid, word, off)

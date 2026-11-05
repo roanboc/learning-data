@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again on 5 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -226,7 +226,7 @@ goes one way, to where agents read it on Databricks, and nobody edits it there.
    Deleting a session, or a session store, doesn't delete the memory kept from it: an entry is
    deleted as its file, here, and from the team's store at the next load.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026)
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, and *Skills support in Unity Gateway* to the end again on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies

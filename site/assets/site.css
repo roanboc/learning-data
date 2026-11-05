@@ -164,8 +164,8 @@ details.howto .notes{padding:0 16px 14px;color:var(--muted);font-size:15px}detai
 @media (max-width:900px){.think{position:static;aspect-ratio:auto;padding:12px;background:#0b0f16;backdrop-filter:none;overflow:visible}.think-card{padding:14px}}
 .player:fullscreen .think{position:absolute;inset:0;aspect-ratio:auto;bottom:60px;height:auto;overflow-y:auto}
 .player.started .poster,.player:fullscreen .poster{display:none}
-.bar{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#0b0f16;color:#e8eef8;flex-wrap:wrap}
-.bar button{font-weight:700;font-size:14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#1a2130;color:#e8eef8;padding:8px 14px;cursor:pointer}
+.bar{display:flex;gap:8px;align-items:center;padding:8px 10px;background:#0b0f16;color:#e8eef8;flex-wrap:wrap}
+.bar button{font-weight:700;font-size:13px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:#1a2130;color:#e8eef8;padding:6px 12px;cursor:pointer}
 .bar button.on,#play,#dff-play,#nqr-play{background:#2f6fd6;border-color:#2f6fd6}
 #think[aria-pressed=false]{background:#1a2130;border-color:rgba(255,255,255,.2)}
 .bar input[type=range]{flex:1;min-width:120px;accent-color:#6aa8ff}
@@ -462,7 +462,25 @@ dialog.clip .player{border-radius:0;border-left:0;border-right:0;box-shadow:none
 @media (max-width:640px){.doc-nav-btn,.doc-toc{padding-left:16px;padding-right:16px}}
 /* seek.js: back and forward 10 seconds; the cue on the side of the film that was tapped, and its line for screen readers */
 .player canvas{touch-action:manipulation}
-.bar .seek-btn{padding:8px 11px;font-variant-numeric:tabular-nums}
+.bar .seek-btn{padding:6px 10px;font-variant-numeric:tabular-nums}
+#speed{min-width:46px}#speed.on{background:#1a2130;border-color:#6aa8ff;color:#fff}
+/* phones: the bar and the time on one row, the buttons on the next; Play, Pause and Full screen as icons, short words for the rest
+   (each button keeps its full name for screen readers) — Rodrigo, 5 November 2026: three rows of controls were too many */
+@media (max-width:640px){
+.bar{gap:4px;padding:6px 8px}
+.bar #scrub{order:-2;flex:1 1 calc(100% - 104px);min-width:0;margin:4px 0}
+.bar #time{order:-1;min-width:92px;font-size:12px}
+.bar button{font-size:12px;padding:4px 8px;min-height:32px}
+.bar #speed{min-width:38px}
+.bar .seek-btn .u{display:none}
+.bar #play[data-state]{font-size:0;width:36px;padding:0;background-repeat:no-repeat;background-position:center;background-size:16px}
+.bar #play[data-state=play]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 2.8v10.4L13 8z' fill='%23fff'/%3E%3C/svg%3E")}.bar #play[data-state=pause]{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 3h3v10H4zM9 3h3v10H9z' fill='%23fff'/%3E%3C/svg%3E")}
+.bar #play[data-state=load]::after{content:"…";font-size:14px}
+.bar #fs{font-size:0;width:34px;padding:0;background:#1a2130 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4' fill='none' stroke='%23e8eef8' stroke-width='1.8'/%3E%3C/svg%3E") no-repeat center/15px}
+.bar #cc{font-size:0}.bar #cc::after{content:"CC";font-size:12px}
+.bar #think{font-size:0}.bar #think::after{content:"Think";font-size:12px}:lang(es) .bar #think::after{content:"Pensar"}
+}
+@media (max-width:380px){.bar{gap:3px}.bar button{padding:4px 5px}.bar #speed{min-width:34px}}
 .seek-cue{position:absolute;width:34%;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;opacity:0;transition:opacity .25s ease;color:#fff;font-weight:700;font-size:20px}
 .seek-cue span{background:rgba(8,12,20,.66);padding:10px 18px;border-radius:999px;font-variant-numeric:tabular-nums}
 .seek-cue.l{left:0;border-radius:0 50% 50% 0/0 50% 50% 0;background:linear-gradient(90deg,rgba(8,12,20,.22),rgba(8,12,20,0))}

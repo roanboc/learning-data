@@ -55,7 +55,7 @@ D2, A2 = 38, 45
 # ---- the levels, set so the music's loud moments sit near -28 dB of full scale as one speaker plays the score (tools/quiet.py), as
 # low as the governance films', whose sound the author accepted; the timpani under the douçaine; the effects about 16 dB under the
 # music (FX scales them all)
-DL, TL, FX = 0.058, 0.085, 1.4
+DL, TL, FX = 0.039, 0.044, 2.0
 
 # a room round the players: a stone hall, ringing on for about a second and a half, nothing much above 1.8 kHz. Its level is set by
 # what it rings where the notes are (its gain under 1.5 kHz is one), and each held note is set back to its own level in it (_held)

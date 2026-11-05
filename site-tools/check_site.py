@@ -30,6 +30,10 @@ What it checks, page by page (every .html under site/):
 - posters: each poster tools/publish.py draws (site/assets/<key>-poster.jpg) carries its stamp, naming the player it was drawn
   from, and that is the player the site plays (its film.js), at the moment the film's film.json names. A player rebuilt without
   its poster, as after a fix in a series' shared code, would otherwise leave the old picture on the film's page and cards.
+- places: a film drawn in the master data series' watercolour (its film.js declares WC_PLACES) has each place as a picture,
+  drawn by tools/publish.py from the player the site plays (site/assets/<key>/places/, listed with that player in places.json),
+  and no other film has the folder. The site's player shows those pictures instead of painting the places while the film plays,
+  which froze the governance films again and again on a laptop (5 November 2026).
 """
 import hashlib
 import html.parser
@@ -573,6 +577,43 @@ def poster_faults():
     return out, len(seen)
 
 
+def places_faults():
+    """What's wrong with the places tools/publish.py draws as pictures for the site's player (wash.js): a film whose film.js declares
+    WC_PLACES needs site/assets/<key>/places/places.json, stamped with that film.js (the first 16 hex digits of its SHA-256), and
+    each picture it lists, a WebP; the folder holds nothing else, and a film without places has no folder."""
+    out, n, seen = [], 0, set()
+    for rel in RELEASES:
+        for e in json.loads(rel.read_text()):
+            player = ROOT / e["site_player"]
+            if not player.exists() or player in seen:
+                continue
+            seen.add(player)
+            folder, fix = player.parent / "places", f"run python tools/build.py, then python tools/publish.py --keep-sound, in {e['dir']}"
+            where = folder.relative_to(ROOT).as_posix()
+            js = player.read_text(errors="replace")
+            if "const WC_PLACES=" not in js:
+                if folder.exists():
+                    out.append(f"{where}: the film paints no places (no WC_PLACES in its film.js), so remove the folder: {fix}")
+                continue
+            n += 1
+            listing = folder / "places.json"
+            if not listing.exists():
+                out.append(f"{where}/places.json: missing, so the player paints every place while the film plays: {fix}")
+                continue
+            m = json.loads(listing.read_text())
+            if m.get("player") != hashlib.sha256(player.read_bytes()).hexdigest()[:16]:
+                out.append(f"{where}: drawn from another player than {e['site_player']} (an older build?): {fix}")
+            files = {v.get("file") for v in m.get("places", {}).values()}
+            for f in sorted(x for x in files if x):
+                b = (folder / f).read_bytes()[:12] if (folder / f).exists() else b""
+                if b[:4] != b"RIFF" or b[8:12] != b"WEBP":
+                    out.append(f"{where}/{f}: {'not a WebP picture' if b else 'missing'}: {fix}")
+            for f in sorted(folder.iterdir()):
+                if f.name != "places.json" and f.name not in files:
+                    out.append(f"{where}/{f.name}: no place of the film's lists it: {fix}")
+    return out, n
+
+
 # ---------------------------------------------------------------- the checks
 def main():
     rep = Report()
@@ -1055,6 +1096,12 @@ def main():
     faults, n = poster_faults()
     s["fails"] += faults
     s["notes"].append(f"{n} posters drawn by tools/publish.py")
+
+    # -- places, as pictures
+    s = rep.check("Places: each watercolour film's places are pictures drawn from the player the site plays")
+    faults, n = places_faults()
+    s["fails"] += faults
+    s["notes"].append(f"{n} films show their places as pictures")
 
     # -- topic cards
     s = rep.check("Topic cards: one link each, the linked film's progress prefix and counts (a series' card: its films'), a real poster")

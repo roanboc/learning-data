@@ -9,6 +9,8 @@
 
 Databricks and the Databricks logo, and dbt and the dbt logo, are trademarks of their respective owners. Other product names (such as Unity Catalog, Genie, Lakebase, Zerobus, Auto Loader, OpenSharing and Microsoft Fabric) belong to their respective owners. They appear only to identify those products. This project is not affiliated with, sponsored by or endorsed by them, and no rights to use their logos or trademarks are granted by this repository's licences.
 
+The Model Context Protocol (MCP) and its logo belong to their owners. *Working with agents on Databricks* draws MCP's mark, taken from the protocol project's own site files (`modelcontextprotocol/modelcontextprotocol`, `docs/favicon.svg`, on 5 November 2026) and embedded unaltered, beside the tool servers that follow the standard, only to identify it; this project is not affiliated with or endorsed by its owners, and no rights to use the mark are granted by this repository's licences.
+
 TOGAF and ArchiMate are registered trademarks of The Open Group, and Zachman is a trademark of Zachman International. *The map before the data* names them, and draws ArchiMate's element symbols, only to identify those frameworks and that notation; this project is not affiliated with or endorsed by them.
 
 DAMA and DAMA-DMBOK are registered trademarks of DAMA International. *The same one, everywhere* names them, and draws its own picture of the knowledge areas, only to identify that body of knowledge; *One person, many roles* also draws ArchiMate's actor and role symbols. This project is not affiliated with or endorsed by DAMA International or The Open Group.

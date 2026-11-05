@@ -28,5 +28,6 @@
     "Cuando cada agente lee los mismos datos gobernados con las mismas herramientas, una pregunta tiene una sola respuesta, con su evidencia."
   ],
   "next_h": "You've seen agents work on Databricks with the same data and tools as people. Next: when an agent reads on its own, whose reads are they, and who pays for its model?",
-  "next_h_es": "Viste a los agentes trabajar en Databricks con los mismos datos y herramientas que las personas. Después: cuando un agente lee por su cuenta, ¿de quién son esas lecturas, y quién paga su modelo?"
+  "next_h_es": "Viste a los agentes trabajar en Databricks con los mismos datos y herramientas que las personas. Después: cuando un agente lee por su cuenta, ¿de quién son esas lecturas, y quién paga su modelo?",
+  "draft": true
 }

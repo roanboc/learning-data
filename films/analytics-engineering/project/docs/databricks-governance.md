@@ -159,12 +159,14 @@ and a person owns it and answers for what it does. Then the sections above hold 
 for people.
 
 1. **Only what its job needs.** Grant the service principal what its job reads, and nothing to write
-   where it only reads. The registrar's office's agent, which answers the faculties' weekly counts,
-   reads the core and writes nowhere:
+   where it only reads. The Faculty of Health's workload agent, which answers its heads of school's
+   weekly counts of who teaches, reads the two HR tables and writes nowhere:
 
    ```sql
-   grant use catalog on catalog <production catalog> to `<registrar agent>`;
-   grant use schema, select on schema <production catalog>.<schema>_core to `<registrar agent>`;
+   grant use catalog on catalog <production catalog> to `<workload agent>`;
+   grant use schema on schema <production catalog>.<schema>_staging to `<workload agent>`;
+   grant select on table <production catalog>.<schema>_staging.stg_hr_system__staff to `<workload agent>`;
+   grant select on table <production catalog>.<schema>_staging.stg_hr_system__contracts to `<workload agent>`;
    ```
 
    To stop it, an admin deactivates its service principal: it can't sign in, everyone else works on,
@@ -172,15 +174,15 @@ for people.
 2. **The masks it already meets.** Section 3's policy masks every column tagged `direct` for
    `account users` except the readers, and `account users` holds every user and every service
    principal in the account. An agent outside the readers' group reads stars, as Clara does, with no
-   rule written for agents, and a row filter's `TO` clause covers it the same way. The learner code
-   stays readable, so an agent can count without a name.
+   rule written for agents, and a row filter's `TO` clause covers it the same way. The staff key, a
+   hash of the staff ID, isn't tagged, so it stays readable, and an agent can count without a name.
 3. **Its tools, granted like tables.** A Unity Catalog function an agent calls as a tool needs
    `EXECUTE` on it, with `USE CATALOG` and `USE SCHEMA` on its catalog and schema: the agent can run
-   it, and can't change it. The census count is one, `census_day_students(faculty)`
-   (`examples/agents-on-databricks/census_day_students.sql`):
+   it, and can't change it. The count of active research projects is one, `active_projects(faculty)`
+   (`examples/agents-on-databricks/active_projects.sql`):
 
    ```sql
-   grant execute on function <production catalog>.<planning schema>.census_day_students to `<census agent>`;
+   grant execute on function <production catalog>.<research schema>.active_projects to `<project check agent>`;
    ```
 
 4. **Models and tool servers, through Unity Gateway.** Unity Gateway, part of Unity Catalog, has been
@@ -195,7 +197,7 @@ for people.
      `system.ai.block_jailbreak` detects jailbreak and prompt-injection content.
    - **A rate limit**, in queries or tokens a minute, for a user, a group or a service principal.
    - **Usage**: every call is a row of `system.ai_gateway.usage`, with its requester (a user or a
-     service principal) and its tokens, so the office an agent works for sees what it costs.
+     service principal) and its tokens, so the faculty or office an agent works for sees what it costs.
 5. **Its work, under its own name.** Section 6's query lists the agent's reads under its service
    principal's ID, apart from people's; `system.access.table_lineage` shows the tables its queries
    read; and section 7's review lists its grants with everyone else's.

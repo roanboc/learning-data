@@ -145,7 +145,7 @@ function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==n
   ctx.restore();ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the heads of school's questions, and the answers */
-const UG_ASKS=[["School of Nursing","How many teach this term?","Nursing"],["School of Medicine","How many are casual?","Medicine"],["School of Public Health","How many teach each unit?","Public Health"]];
+const UG_ASKS=[["School of Nursing","How many teach each unit?","Nursing"],["School of Medicine","How many teach this term?","Medicine"],["School of Public Health","How many are casual?","Public Health"]];
 function ug_ask(ctx,x,y,w,i,o){o=o||{};const q=UG_ASKS[i];return ag_textCard(ctx,x,y,w,{kick:q[0],title:q[1]},Object.assign({kickCol:AG.kick},o));}
 /* the answers, in a stack: o.n (0 to 3, each springing in), o.tick 0 to 1 (a green tick on each), o.sign 0 to 1 (the agent's own name
    on each, in violet); (x, y) the stack's top left */

@@ -1,0 +1,25 @@
+{
+  "key": "helpers-on-your-behalf",
+  "title": "Helpers on your behalf",
+  "sub": "The fourth film of From helper to colleague, the third series on AI agents in data work: a helper on a person's sign-in works with that person's rights, so the protections that hold are the platform's, in Databricks and in dbt, whoever types.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. A helper is a ceramic sphere with a violet band, never a person, with its person's name under it. Blue is structure (a tool, a setting, a grant, the platform's limits), violet the model, orange the data and its evidence, green what a person approved or what held, amber what went wrong or nearly did.",
+  "src": [
+    "world.js",
+    "pieces.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "whoever",
+    "there",
+    1.2
+  ],
+  "say": [
+    ["\\bLucía\\b", "Lu-ceeah"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "whoever"
+  ],
+  "urgent": []
+}

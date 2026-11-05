@@ -12,7 +12,8 @@
                   written on when its word is said; a cover turns over between its back and its front
      BR_P         the people of the time, dressed for it: a member of parliament (a claret coat over a cream waistcoat, a white
                   neckcloth, his grey hair tied at the nape), his sister (a white cap and a kerchief), a clerk of the letter office
-                  (a dark coat, spectacles), and a woman who posts a letter in 1840 (her hair parted and drawn low, a shawl)
+                  in the 1700s (a brown coat, a white neckcloth, his hair tied back) and in the 1830s (a dark coat, a black stock),
+                  and a woman who posts a letter in 1840 (her hair parted and drawn low, a shawl)
      br_pamphlet  Rowland Hill's pamphlet of 1837; br_notice the post office's notice of 1840; br_coin a penny; br_pile letters
                   in a pile, and br_stacks the two years' counts
    Words that matter are drawn live with ag_T, at least 28 px, above y 890; the handwriting is decoration, and each part of a cover
@@ -42,9 +43,9 @@ function br_mottle(c,x,y,w,h,base,amp,seed,fr){const k=0.25,cw=Math.ceil(w*k),ch
   cx.putImageData(img,0,0);c.save();c.imageSmoothingEnabled=true;c.drawImage(cv,x,y,w,h);c.restore();}
 
 /* ---------------------------------------------------------------- the writing table, close up (the place "brDesk")
-   Seen from above, a little tilted: mahogany boards, a leather writing top with a gilt line round it, the inkstand at the top
-   left with its quill, a stick of red wax and a brass seal at the top right. The covers, the coins and the pamphlet are drawn
-   live on the leather. */
+   Seen from above, a little tilted: mahogany boards, a leather writing top with a gilt line round it, and at the top right the
+   inkstand with its quill, a stick of red wax and a brass seal (the corner tag sits at the top left, over bare leather). The
+   covers, the coins and the pamphlet are drawn live on the leather. */
 function br_paintDesk(c){br_wood(c,0,0,W,H,{board:170,seed:1});
   // the leather writing top
   const L={x:170,y:96,w:1580,h:930};
@@ -57,7 +58,7 @@ function br_paintDesk(c){br_wood(c,0,0,W,H,{board:170,seed:1});
   // the leather's edge, a little proud of the wood
   c.strokeStyle="rgba(255,220,190,0.18)";c.lineWidth=2;c.beginPath();c.moveTo(L.x+10,L.y+1);c.lineTo(L.x+L.w-10,L.y+1);c.stroke();
   // the inkstand: a brass tray, a glass inkwell, a sand pot, and a quill leaning out of the frame
-  br_inkstand(c,40,24);
+  br_inkstand(c,1300,24);
   // the wax and the seal, top right
   ag_floorShadow(c,1772,128,96,16,0.35);
   ag_soft(c,cc=>{cc.moveTo(1690,104);cc.lineTo(1860,86);cc.lineTo(1864,112);cc.lineTo(1694,130);cc.closePath();},BR_OLD.wax,BR_OLD.waxHi,1800,94,90,"rgba(40,0,0,0.4)",8);
@@ -93,7 +94,7 @@ function br_panel(c,x,y,w,h){c.fillStyle=rgba(mix(BR_OLD.paint,[255,250,236],0.0
   c.fillStyle="rgba(60,48,30,0.16)";c.beginPath();c.moveTo(x,y+h);c.lineTo(x+w,y+h);c.lineTo(x+w-b,y+h-b);c.lineTo(x+b,y+h-b);c.closePath();c.fill();
   c.beginPath();c.moveTo(x,y);c.lineTo(x,y+h);c.lineTo(x+b,y+h-b);c.lineTo(x+b,y+b);c.closePath();c.fill();
   c.strokeStyle="rgba(60,48,30,0.22)";c.lineWidth=2;c.strokeRect(x-3,y-3,w+6,h+6);}
-function br_paintStudy(c){const hz=760;
+function br_paintStudy(c,o){o=o||{};const hz=760;
   br_mottle(c,0,0,W,hz,BR_OLD.paint,10,2.1);
   // the cornice, the panels above the dado, the rail, the panels below it, the skirting
   c.fillStyle=rgba(mix(BR_OLD.paint,[255,252,240],0.2),1);c.fillRect(0,0,W,46);c.fillStyle="rgba(60,48,30,0.2)";c.fillRect(0,46,W,4);c.fillStyle="rgba(255,252,240,0.5)";c.fillRect(0,40,W,2);
@@ -117,7 +118,7 @@ function br_paintStudy(c){const hz=760;
   g=c.createRadialGradient(1520,300,40,1400,380,1300);g.addColorStop(0,"rgba(255,246,222,0.32)");g.addColorStop(1,"rgba(255,246,222,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
   g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(40,30,20,0.22)");g.addColorStop(0.5,"rgba(40,30,20,0.04)");g.addColorStop(1,"rgba(40,30,20,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
   // the writing table across the front
-  br_table(c,BR_STUDY.table.x,BR_STUDY.table.y,BR_STUDY.table.w,BR_STUDY.table.depth);}
+  if(!o.open)br_table(c,BR_STUDY.table.x,BR_STUDY.table.y,BR_STUDY.table.w,BR_STUDY.table.depth);}
 // a window in the wall: the reveal, the sky, the bars, and the glow round it; o.arch for an arched top
 function br_window(c,x,y,w,h,o){o=o||{};const r=o.arch?w/2:0,shape=cc=>{if(o.arch){cc.moveTo(x,y+r);cc.arc(x+w/2,y+r,w/2,Math.PI,0);cc.lineTo(x+w,y+h);cc.lineTo(x,y+h);cc.closePath();}else cc.rect(x,y,w,h);};
   c.save();c.shadowColor="rgba(255,248,230,0.7)";c.shadowBlur=60;c.fillStyle="#F4F0E4";c.beginPath();shape(c);c.fill();c.restore();
@@ -146,12 +147,16 @@ function br_table(c,x,y,w,d){ag_floorShadow(c,x+w/2,y+120,w*0.5,60,0.3);
   c.save();c.beginPath();c.rect(x,y,w,H-y);c.clip();br_wood(c,x,y,w,H-y,{board:600,seed:5,base:mix(BR_OLD.wood,[0,0,0],0.2),hi:mix(BR_OLD.woodHi,[0,0,0],0.25)});
   const g=c.createLinearGradient(0,y,0,y+40);g.addColorStop(0,"rgba(20,10,6,0.45)");g.addColorStop(1,"rgba(20,10,6,0)");c.fillStyle=g;c.fillRect(x,y,w,40);c.restore();}
 AG_PLACES.brStudy=c=>br_paintStudy(c);
+// the same study, seen from further in, with the writing table out of the picture: people stand in it, and a hand may hold a cover
+AG_PLACES.brStudyOpen=c=>br_paintStudy(c,{open:true});
+AG_ROOMS.brStudyOpen="brStudy";
 
 /* ---------------------------------------------------------------- the letter office (the place "brOffice")
-   Plastered walls, a tall rack of pigeonholes behind the counter with letters in some of them, an arched window on the right, a
-   bare stretch of wall between them where the notice of 1840 is put up (drawn live), and the counter across the front: the clerk
-   stands behind it, cut at its back edge (BR_OFFICE.cut). */
-const BR_OFFICE={cut:826,counter:{x:-40,y:880,w:2000,depth:54},notice:{x:1210,y:118,w:330,h:430},rack:{x:80,y:96,w:1060,h:640}};
+   Plastered walls, a tall rack of pigeonholes with letters in some of them, an arched window on the right, a bare stretch of wall
+   between them where the notice of 1840 is put up (drawn live), and a sorting counter along the right, where the letters are piled
+   (BR_OFFICE.counter, its top's front edge at y 820). The clerk stands on the floor at the left, in front of the rack, so a hand
+   that holds a letter is never cut by a counter in front of him; a woman who posts a letter stands before the notice. */
+const BR_OFFICE={counter:{x:1060,y:820,w:900,depth:44},top:806,notice:{x:1210,y:118,w:330,h:430},rack:{x:80,y:96,w:1060,h:640}};
 function br_paintOffice(c){const hz=780,Rk=BR_OFFICE.rack;
   br_mottle(c,0,0,W,hz,BR_OLD.plaster,12,6.3);
   c.fillStyle="rgba(60,48,30,0.16)";c.fillRect(0,hz-30,W,30);
@@ -174,7 +179,7 @@ function br_paintOffice(c){const hz=780,Rk=BR_OFFICE.rack;
   ag_floor(c,ag_oakTex(),hz,600,300);c.save();c.globalCompositeOperation="multiply";c.fillStyle="rgb(170,136,104)";c.fillRect(0,hz,W,H-hz);c.restore();
   let g=c.createRadialGradient(1700,300,40,1500,400,1400);g.addColorStop(0,"rgba(255,246,222,0.3)");g.addColorStop(1,"rgba(255,246,222,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
   g=c.createLinearGradient(0,0,W,0);g.addColorStop(0,"rgba(40,30,20,0.2)");g.addColorStop(0.5,"rgba(40,30,20,0.03)");g.addColorStop(1,"rgba(40,30,20,0)");c.fillStyle=g;c.fillRect(0,0,W,H);
-  // the counter
+  // the sorting counter along the right
   const K=BR_OFFICE.counter;br_table(c,K.x,K.y,K.w,K.depth);}
 AG_PLACES.brOffice=c=>br_paintOffice(c);
 
@@ -246,9 +251,15 @@ function br_paper(side){return ag_kept("brpaper:"+side,Math.ceil(BR_CV.w*BR_CV.r
     const ex=w*0.57,edge=cc=>{cc.moveTo(ex-4,0);cc.bezierCurveTo(ex+3,h*0.3,ex-5,h*0.7,ex+2,h);};
     c.save();c.filter="blur(6px)";c.strokeStyle="rgba(110,86,50,0.28)";c.lineWidth=14;c.beginPath();c.moveTo(ex+6,0);c.bezierCurveTo(ex+13,h*0.3,ex+5,h*0.7,ex+12,h);c.stroke();c.restore();
     c.fillStyle=rgba(BR_OLD.paper,1);c.beginPath();c.moveTo(0,0);c.lineTo(ex-4,0);c.bezierCurveTo(ex+3,h*0.3,ex-5,h*0.7,ex+2,h);c.lineTo(0,h);c.closePath();c.fill();
-    c.fillStyle="rgba(255,252,240,0.25)";c.fillRect(0,0,ex-6,h);
+    c.fillStyle="rgba(255,252,240,0.12)";c.fillRect(0,0,ex-6,h);
+    // the flap is the same sheet: its laid and chain lines, and its own age at the edge
+    c.save();c.beginPath();c.moveTo(0,0);c.lineTo(ex-4,0);c.bezierCurveTo(ex+3,h*0.3,ex-5,h*0.7,ex+2,h);c.lineTo(0,h);c.closePath();c.clip();
+    c.strokeStyle="rgba(150,130,96,0.045)";c.lineWidth=1;for(let y=11;y<h;y+=7){c.beginPath();c.moveTo(0,y);c.lineTo(w,y);c.stroke();}
+    c.strokeStyle="rgba(150,130,96,0.08)";for(let x=95;x<ex;x+=110){c.beginPath();c.moveTo(x,0);c.lineTo(x,h);c.stroke();}
+    const g2=c.createRadialGradient(ex*0.5,h/2,h*0.25,ex*0.5,h/2,ex*0.8);g2.addColorStop(0,"rgba(180,150,100,0)");g2.addColorStop(1,"rgba(180,150,100,0.2)");c.fillStyle=g2;c.fillRect(0,0,ex,h);c.restore();
     c.strokeStyle="rgba(110,86,50,0.5)";c.lineWidth=2;c.beginPath();edge(c);c.stroke();
-    c.strokeStyle="rgba(120,96,60,0.16)";c.lineWidth=1.6;c.beginPath();c.moveTo(0,h*0.5);c.lineTo(ex-10,h*0.5);c.stroke();}
+    // the sheet folded in half across: its crease over both flaps
+    c.strokeStyle="rgba(120,96,60,0.16)";c.lineWidth=1.6;c.beginPath();c.moveTo(0,h*0.5);c.lineTo(ex-10,h*0.5);c.moveTo(ex+12,h*0.5+3);c.lineTo(w,h*0.5+3);c.stroke();}
   else{c.strokeStyle="rgba(120,96,60,0.16)";c.lineWidth=1.6;c.beginPath();c.moveTo(6,h*0.06);c.lineTo(w-6,h*0.06);c.stroke();}
   c.restore();});}
 // the wax seal on the back: a red blob pressed with a ring and a small device, at (x, y), r across, k 0 to 1 as it presses
@@ -262,12 +273,13 @@ function br_write(ctx,key,p){if(p<=0)return;const n=BR_CVPARTS[key].lines.length
   for(let i=0;i<n;i++){const u=clamp(p*n-i,0,1);if(u<=0)break;const {b,img}=br_line(key,i);
     ctx.save();ctx.beginPath();ctx.rect(b[0],b[1],(b[2]-b[0])*u,b[3]-b[1]);ctx.clip();ctx.drawImage(img,b[0],b[1],b[2]-b[0],b[3]-b[1]);ctx.restore();}}
 // the red PAID of 1840: a double ring, the word inside, a little uneven, as a handstamp leaves it
-function br_paid(ctx,x,y,r,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(-0.12);ctx.strokeStyle=rgba(BR_OLD.red,0.86);ctx.lineWidth=4;
+function br_paid(ctx,x,y,r,a,deco){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(-0.12);ctx.strokeStyle=rgba(BR_OLD.red,0.86);ctx.lineWidth=4;
   ctx.beginPath();ctx.ellipse(0,0,r*1.25,r,0,0,TAU);ctx.stroke();ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(0,0,r*1.25-9,r-9,0,0,TAU);ctx.stroke();
-  ag_T(ctx,"PAID",0,13,{w:800,size:38,align:"center",col:BR_OLD.red,a:0.9,ls:2});ctx.restore();}
+  ag_T(ctx,"PAID",0,13,{w:800,size:38,align:"center",col:BR_OLD.red,a:0.9,ls:2,deco:deco?1:0});ctx.restore();}
 /* the cover at (x, y), w wide (its height follows), turned by o.rot; o.flip 0 shows its back, 1 its front, and between it turns over;
    o.p {addr, charge, frank, date, paid, seal}; o.blank: a cover with only the frank on it, no address; o.copied: its frank in another
-   hand; o.dim greys it; o.a, o.k (springs from its middle); o.edge a colour round it (amber for a copied name), o.edgeA */
+   hand; o.dim greys it; o.a, o.k (springs from its middle); o.edge a colour round it (amber for a copied name), o.edgeA; o.deco marks
+   its PAID as decoration, where the cover is drawn small and a pill says it */
 function br_cover(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return null;const sc=w/BR_CV.w,h=BR_CV.h*sc,p=o.p||{},fl=o.flip==null?1:o.flip;
   const b={x,y,w,h};ctx.save();ctx.globalAlpha*=a;ctx.translate(x+w/2,y+h/2);if(o.rot)ctx.rotate(o.rot);if(o.k!=null){const k=lerp(0.6,1,o.k);ctx.scale(k,k);}
   // turning over: the cover narrows to its edge, then widens showing its other side
@@ -277,7 +289,7 @@ function br_cover(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return nu
   ctx.drawImage(br_paper(front?"front":"back"),0,0,BR_CV.w,BR_CV.h);
   if(front){if(!o.blank){br_write(ctx,"addr",p.addr==null?1:p.addr);br_write(ctx,"charge",p.charge||0);}
     br_write(ctx,"date",p.date||0);br_write(ctx,o.copied?"copy":"frank",p.frank||0);
-    if(p.paid)br_paid(ctx,720,130,58,p.paid);}
+    if(p.paid)br_paid(ctx,720,130,58,p.paid,o.deco);}
   else br_seal(ctx,BR_CV.w*0.57,BR_CV.h*0.5,46,p.seal==null?1:p.seal);
   // a little shade as it turns, darker on its far half
   if(sx<0.98){ctx.fillStyle="rgba(60,40,20,"+(0.25*(1-sx))+")";ctx.fillRect(0,0,BR_CV.w,BR_CV.h);}
@@ -291,8 +303,9 @@ function br_cover(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return nu
        shirt's frill falling below it, his grey hair tied at the nape with a black ribbon
      his sister: a white linen cap, puffed over the crown, its frill round her face and over her ears, a ribbon round it; a white
        kerchief over her shoulders, crossed on her chest
-     a clerk of the letter office (the 1830s): a dark coat, a buff waistcoat, a black stock high round the neck with the shirt's white
-       edge above it, spectacles
+     a clerk of the letter office in the 1700s: a brown coat over a buff waistcoat, a white neckcloth, his own hair tied at the nape
+     a clerk of the letter office in the 1830s: a dark coat, a buff waistcoat, a black stock round the neck with the shirt's white
+       edge and collar point above it and its front below
      a woman who posts a letter (1840): a straw bonnet over hair parted and drawn smooth over the ears, its ribbon tied under her chin;
        a shawl over her shoulders with a darker border, a small white collar
    A hat or a cap is painted with the head (who.hat.paint, inside the head's picture, x 160 to 440, y 250 to 560). What closes over the
@@ -303,15 +316,19 @@ function br_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha;if(a<0.004)r
   if(!who.over)return ag_person(ctx,who,x,y,s,o);
   if(a<0.995){const [bc,bx]=ag_buf("brPerson",ctx.canvas.width,ctx.canvas.height);bx.setTransform(ctx.getTransform());const hd=br_person(bx,who,x,y,s,o);
     ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(bc,0,0);ctx.restore();return hd;}
-  const hands=ag_person(ctx,who,x,y,s,o),F=ag_fig(who),L=F.over||(F.over=ag_layer(c=>who.over(c,who),who.overBox)),
-    A=AG_FIG.anchor,br=Math.sin((o.t||0)*TAU*who.breath)*2.2;
+  const F=ag_fig(who),L=F.over||(F.over=ag_layer(c=>who.over(c,who),who.overBox)),A=AG_FIG.anchor,br=Math.sin((o.t||0)*TAU*who.breath)*2.2;
+  // a hand that holds something rises in front of the cloth: the cloth is laid on the body first (as what's behind the hand), then the
+  // near arm and what it holds, then the head
+  if(o.pose&&o.pose!=="hang"){const hb=o.holdBack;return ag_person(ctx,who,x,y,s,Object.assign({},o,{holdBack:(c,h)=>{c.save();
+      if(o.cut!=null){c.beginPath();c.rect(-4000,-4000,9000,4000+A[1]+(o.cut-y)/s-br);c.clip();}ag_drawLayer(c,L);c.restore();if(hb)hb(c,h);}}));}
+  const hands=ag_person(ctx,who,x,y,s,o);
   ctx.save();ctx.translate(x,y);ctx.scale(o.flip?-s:s,s);ctx.translate(-A[0],-A[1]+br);
   if(o.cut!=null){ctx.beginPath();ctx.rect(-4000,-4000,9000,4000+A[1]+(o.cut-y)/s-br);ctx.clip();}
   ag_drawLayer(ctx,L);ctx.restore();return hands;}
-// the neck wound round from the collar to just under the jaw, in figure space
-const BR_STOCK=cc=>{cc.moveTo(238,488);cc.bezierCurveTo(256,498,274,510,292,518);cc.bezierCurveTo(308,526,324,534,341,538);
-  cc.bezierCurveTo(347,560,353,584,361,606);cc.bezierCurveTo(330,620,282,616,248,596);cc.bezierCurveTo(238,588,233,578,232,566);
-  cc.bezierCurveTo(232,540,235,512,238,488);cc.closePath();};
+// a stock: a band round the neck from the collar to a little under the jaw, the nape's skin showing above it at the back, in figure space
+const BR_STOCK=cc=>{cc.moveTo(238,512);cc.bezierCurveTo(258,522,276,532,294,538);cc.bezierCurveTo(310,544,326,548,342,551);
+  cc.bezierCurveTo(348,570,354,588,361,606);cc.bezierCurveTo(330,620,282,616,248,596);cc.bezierCurveTo(238,588,233,578,232,566);
+  cc.bezierCurveTo(232,548,235,530,238,512);cc.closePath();};
 // a neckcloth, wound round the neck lower than a stock, the neck showing under the jaw, its cloth puffed a little at the front
 const BR_CRAVAT=cc=>{cc.moveTo(236,516);cc.bezierCurveTo(262,528,300,544,342,552);cc.bezierCurveTo(360,564,368,588,362,606);
   cc.bezierCurveTo(330,620,282,616,248,596);cc.bezierCurveTo(238,588,233,578,232,566);cc.bezierCurveTo(232,548,234,530,236,516);cc.closePath();};
@@ -330,11 +347,15 @@ function br_neckwear(o){return(c,P)=>{const cl=o.cloth,lt=ag_lt(cl,0.5),dk=ag_dk
   const g=c.createLinearGradient(236,0,360,0);g.addColorStop(0,rgba(dk,0.3));g.addColorStop(0.55,rgba(dk,0));c.fillStyle=g;c.fillRect(226,480,140,140);
   c.strokeStyle=rgba(dk,0.3);c.lineWidth=2.4;c.beginPath();
   if(o.low){c.moveTo(312,562);c.quadraticCurveTo(334,566,352,578);c.moveTo(318,588);c.quadraticCurveTo(338,590,356,600);}
-  else{c.moveTo(236,530);c.bezierCurveTo(268,540,300,560,348,560);c.moveTo(240,566);c.bezierCurveTo(276,580,320,594,358,594);}c.stroke();
-  c.strokeStyle=rgba(lt,0.45);c.lineWidth=2;c.beginPath();if(o.low){c.moveTo(300,552);c.quadraticCurveTo(326,560,350,568);}else{c.moveTo(250,526);c.bezierCurveTo(284,540,312,552,344,552);}c.stroke();c.restore();
-  if(o.shirt){c.strokeStyle=rgba(o.shirt,1);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(240,490);c.bezierCurveTo(258,500,276,512,293,520);c.bezierCurveTo(309,528,325,535,340,539);c.stroke();
-    // the near collar point, standing up against the cheek
-    ag_soft(c,cc=>{cc.moveTo(298,524);cc.lineTo(316,508);cc.lineTo(338,540);cc.closePath();},o.shirt,[255,255,255],318,514,30,rgba(ag_dk(o.shirt,0.4),0.35),4);}};}
+  else{c.moveTo(236,550);c.bezierCurveTo(268,560,300,574,350,576);}c.stroke();
+  c.strokeStyle=rgba(lt,0.45);c.lineWidth=2;c.beginPath();if(o.low){c.moveTo(300,552);c.quadraticCurveTo(326,560,350,568);}else{c.moveTo(250,538);c.bezierCurveTo(284,550,312,560,344,562);}c.stroke();c.restore();
+  if(o.shirt){const sl=ag_lt(o.shirt,0.5),sd=ag_dk(o.shirt,0.4);
+    // the shirt's front, white in the waistcoat's opening under the stock's bow
+    ag_soft(c,cc=>{cc.moveTo(300,604);cc.bezierCurveTo(320,612,340,612,356,604);cc.bezierCurveTo(352,628,344,652,334,672);cc.bezierCurveTo(322,656,310,630,300,604);cc.closePath();},
+      o.shirt,sl,334,616,60,rgba(sd,0.3),5);
+    c.strokeStyle=rgba(o.shirt,1);c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(240,514);c.bezierCurveTo(258,523,276,533,294,539);c.bezierCurveTo(310,545,326,549,341,552);c.stroke();
+    // the near collar point, standing up from the stock against the cheek
+    ag_soft(c,cc=>{cc.moveTo(296,540);cc.lineTo(318,516);cc.lineTo(340,553);cc.closePath();},o.shirt,[255,255,255],318,524,30,rgba(sd,0.35),4);}};}
 // hair tied back at the nape with a black ribbon bow
 function br_queue(col){return(c,P)=>{const hc=P.hair.c;
   ag_soft(c,cc=>{cc.moveTo(226,446);cc.bezierCurveTo(206,466,198,500,202,530);cc.bezierCurveTo(206,548,216,550,220,534);cc.bezierCurveTo(218,502,224,476,240,458);cc.closePath();},hc,ag_lt(hc,0.3),214,470,40,null);
@@ -407,7 +428,9 @@ const BR_P={
     hat:{paint:br_queue([30,28,30])},over:br_neckwear({cloth:[244,240,232],frill:[246,242,234],btn:[214,186,120],low:true}),overBox:[226,480,372,852],breath:0.24},
   sister:{key:"br_sister",name:"his sister",skin:[238,206,182],hair:{style:"side",c:[104,74,54]},top:{kind:"tunic",c:[150,114,112]},
     hat:{paint:br_mobcap([244,242,236],[176,150,140])},over:br_kerchief([242,238,230]),overBox:[70,550,462,866],breath:0.3},
-  clerk:{key:"br_clerk",name:"a clerk of the letter office",skin:[214,176,144],hair:{style:"side",c:[74,56,44]},glasses:[70,62,52],top:{kind:"suit",c:[58,58,60],inner:[150,128,92]},
+  clerk17:{key:"br_clerk17",name:"a clerk of the letter office",skin:[214,176,144],hair:{style:"side",c:[86,62,44]},top:{kind:"suit",c:[96,74,52],inner:[176,150,106]},
+    hat:{paint:br_queue([30,28,30])},over:br_neckwear({cloth:[238,234,224],btn:[150,120,70],low:true}),overBox:[226,480,372,852],breath:0.27},
+  clerk:{key:"br_clerk",name:"a clerk of the letter office",skin:[214,176,144],hair:{style:"side",c:[74,56,44]},top:{kind:"suit",c:[58,58,60],inner:[150,128,92]},
     over:br_neckwear({cloth:[34,32,36],shirt:[240,236,228],btn:[96,84,64]}),overBox:[226,480,372,852],breath:0.27},
   sender:{key:"br_sender",name:"a woman who posts a letter",skin:[226,190,158],hair:{style:"bob",c:[78,54,40]},top:{kind:"tunic",c:[62,58,70]},
     hat:{paint:br_bonnet([214,192,146],[234,224,204],[128,78,80])},over:br_shawl([176,154,120],[118,74,62],[240,236,228]),overBox:[50,555,478,1108],breath:0.29}
@@ -443,3 +466,10 @@ function br_pile(ctx,x,y,w,n,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0||n<=0)re
   for(let i=0;i<m;i++){const dx=(R()-0.5)*w*0.12,rot=(R()-0.5)*0.05,yy=y-i*lh;ctx.save();ctx.translate(x+dx,yy);ctx.rotate(rot);
     ctx.fillStyle=rgba(mix(BR_OLD.paper,BR_OLD.paperDk,R()*0.7),1);ctx.fillRect(-w/2,-lh+1,w,lh-1);ctx.fillStyle="rgba(90,70,40,0.35)";ctx.fillRect(-w/2,-1,w,1.5);
     if(o.free){ctx.fillStyle=rgba(BR_OLD.ink,0.55);ctx.fillRect(-w/2+14,-lh+4,w*0.28,2.4);}ctx.restore();}ctx.restore();}
+
+// the two years' letters on the counter, side by side, their bottoms on the line y: 1839's pile at x0 and 1840's at x1, more than twice
+// as high (about 76 million and about 169 million), each with its count above it; o.p [2] grows each (0 to 1), o.a
+function br_stacks(ctx,x0,x1,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const p=o.p||[1,1],R=[0.45,1];
+  [[x0,"1839 · about 76 million",0],[x1,"1840 · nearly 170 million",1]].forEach(([x,s,i])=>{const n=R[i]*ag_eo(clamp(p[i],0,1));if(n<=0)return;
+    br_pile(ctx,x,y,210,n,{seed:11+i*7,max:22,lh:12,a});const top=y-22*n*12;
+    ag_pill(ctx,x,top-46,s,{a:a*clamp(p[i]*2-0.6,0,1),size:28});});}

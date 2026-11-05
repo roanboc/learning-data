@@ -5,6 +5,7 @@
   "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (the tools that only read, the sandbox, what stays Jun's), violet the model thinking (the helper's band, its next step), orange data coming back, green a check that passes, and amber something wrong (the step that would approve as Jun, the record that would have said so, the words hidden in a ticket). Each helper wears its person's badge, and an agent with a name of its own wears its own. The red of 1840 is the post office's own ink, and the wax of the seals.",
   "src": [
     "frank.js",
+    "stages.js",
     "pieces.js",
     "scenes.js"
   ],

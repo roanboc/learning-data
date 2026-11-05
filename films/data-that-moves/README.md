@@ -11,6 +11,7 @@ How data moves between applications today, and what still needs people. Linh Ngu
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Hot, warm, cold](https://data.learn-all.org/data-that-moves/hot-warm-cold/) | Data temperature | 7½ min | 7 | 3 questions | [script](2-hot-warm-cold/script.md) · [source](2-hot-warm-cold/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

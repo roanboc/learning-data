@@ -780,27 +780,90 @@ function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(l
 function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
 
 /* ---------------------------------------------------------------- the camera
-   ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
-   1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
-   place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
-   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
-function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -956,6 +1019,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);
@@ -2140,10 +2204,16 @@ function od_draft(ctx,x,y,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 /* ===== Working with agents on Databricks: the scenes =====
    Seven chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The office is painted once
-   (faculty.js) and the lab is the module's; what moves is drawn live in the shots of ag_shots. Two framings of one place change on a
-   cut (cut: true), never a dissolve, so nothing shows twice. A close shot's cards, the kicker and the four ways along the top are
-   drawn in the frame (od_scr), so their words keep their size whatever the camera does; in a close shot of the office the cards
-   stand where the next desk would be, and only that desk's person and things are drawn. */
+   (faculty.js) and the lab is the module's; what moves is drawn live in the shots of ag_shots. In one room the camera never jumps:
+   ag_shots glides it from one framing to the next and fades only what changes (the lab by night is the lab). A later moment in the
+   room, or the same person framed another way (Sam close, then at his desk), is later: true: what was there leaves, the bare room
+   shows for an instant, in a pause of the voice, and what comes next comes in. Only framings far apart (a desk's close shot and the
+   whole office) change on a cut (cut: true), never a dissolve, so nothing shows twice. A close shot's cards, the kicker and the four
+   ways along the top are drawn in the frame (od_scr), so their words keep their size whatever the camera does; in a close shot of
+   the office the cards stand where the next desk would be, and only that desk's person and things are drawn. */
+
+// the bare lab, by day and by night, as a later moment passes through it: the light every shot of it draws
+AG_BARE.lab=c=>ag_roomLight(c,1);AG_BARE.labNight=c=>ag_roomLight(c,1,{night:true});
 
 // a phase: 0 before tIn, rising to 1 over din; from tOut, from 1 to 2 over dout (for what is shown, then put away)
 const od_ph=(t,tIn,tOut,din,dout)=>t<tOut?clamp((t-tIn)/(din||0.6),0,1):1+clamp((t-tOut)/(dout||0.5),0,1);
@@ -2152,7 +2222,8 @@ const od_lit=(t,t0,t1)=>ag_in(t,t0,0.3)*(1-ag_in(t,t1,0.4));
 // draw in the frame, whatever the camera is doing
 function od_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);fn();ctx.restore();}
 // the kicker and the four ways, in the frame; lit: the chapter's card (0 to 3), or o.on for each
-function od_chrome(ctx,S,t,lit,o){o=o||{};od_scr(ctx,S,()=>{const dark=!!o.dark,a=o.a==null?1:o.a;ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark,a});
+function od_chrome(ctx,S,t,lit,o){o=o||{};od_scr(ctx,S,()=>{const dk=o.dark===true?1:clamp(o.dark||0,0,1),a=o.a==null?1:o.a;  // dark 0 to 1: the night's kicker, blended into the day's as the room lights
+    if(dk>0)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:true,a:a*dk});if(dk<1)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:false,a:a*(1-dk)});
   const on=o.on||[0,1,2,3].map(i=>i===lit?ag_in(t,0.3,0.8):0);od_strip(ctx,{on,k:o.k,a});});}
 // the card of next year's places: what Anil plans from the census-day count. o.n (0 to 3) its lines come in. 500 wide, in the frame
 function od_places(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=500,h=262;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
@@ -2390,16 +2461,16 @@ scene("build",(ctx,S,t,sc)=>{
       OD_TOOLS.forEach((d,i)=>{const hit=steps>0&&steps<4&&tgt[si]===i?Math.sin(Math.PI*clamp(sf,0,1)):0;
         od_tool(c,TB(i),d[0],null,{a:ag_in(tt,T.tRT+0.2+i*0.12,0.4)*lerp(0.75,1,sm),touch:Math.max(hit,sm*0.7*(1-ag_in(tt,T.tBefore-1.0,0.6)))});});}},
     // morning: the cases the team has met before, and the three ways each answer is scored
-    {at:T.tBefore-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_roomLight(c,1);
+    {at:T.tBefore-0.1,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_roomLight(c,1);
       od_eval(c,{a:ag_in(tt,T.tBefore,0.5),ghost:ag_in(tt,T.tCases-0.2,0.6),rows:clamp((tt-T.tC1+0.2)/0.5,0,1)+clamp((tt-T.tC2+0.1)/0.5,0,1)+clamp((tt-T.tC3+0.1)/0.5,0,1)+clamp((tt-T.tC3-0.7)/0.5,0,1),
         colA:[ag_in(tt,T.tJudges-0.1,0.4),ag_in(tt,T.tSums-0.1,0.4),ag_in(tt,T.tMei-0.1,0.4)],cols:[(tt-T.tJudges-0.2)/0.3,(tt-T.tSums-0.1)/0.3,(tt-T.tMei-0.1)/0.3],amber:2});}},
     // its note is evidence, not a decision: Jun reads it, and decides
-    {at:T.tNote-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_person(c,"jun",330,640,0.92,{t:tt,gaze:[6,-2],nod:0.03*ag_in(tt,T.tDecides,0.5)});ag_roomLight(c,1);
+    {at:T.tNote-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_person(c,"jun",330,640,0.92,{t:tt,gaze:[6,-2],nod:0.03*ag_in(tt,T.tDecides,0.5)});ag_roomLight(c,1);
       ag_evidence(c,640,300,640,{kick:"Note for Jun",title:"Three students counted twice?",sub:"Engineering and IT: 134 against 131"},
         [{kick:"query",title:"count by faculty",col:AG.orange},{kick:"trace",title:"its four steps",col:AG.blue}],{open:clamp((tt-T.tReads+0.2)/1.2,0,1),a:ag_in(tt,T.tNote-0.1,0.4),k:Math.min(1,ag_spr(tt,T.tNote-0.1,0.5)),kickCol:AG.violet});
       ag_pill(c,960,800,"Jun decides",{col:AG.ink,a:ag_in(tt,T.tDecides,0.4),size:30});}}
   ],0.6);
-  od_chrome(ctx,S,t,2,{dark:t<T.tBefore-0.3+0.3});
+  od_chrome(ctx,S,t,2,{dark:1-ag_in(t,T.tBefore-0.1,0.45)});
 });
 
 /* ---------------------------------------------------------------- 6 · Agents that write code */
@@ -2433,15 +2504,15 @@ scene("code",(ctx,S,t,sc)=>{
     if(o.dbs>0){const w=od_folderCard(c,1110,214,"Databricks' skills",{mono:false,col:AG.violet,k:o.dbs,a:ag_in(o.dbs,0,0.4)});od_thread(c,[JX-12,JY-30],[1110+w/2,292],ag_in(o.dbs,0.2,0.8),AG.violet,{lw:3.5});}};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{name:ag_in(tt,T.tSam-0.2,0.5),code:clamp((tt-T.tPipes)/1.4,0,1),panel:(tt-T.tGC+0.1)/0.6,rights:(tt-T.tRights+0.1)/0.4,
-      skills:clamp((tt-T.tSkills)/1.0,0,1),think:0.3})},
-    {at:T.tFiles-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>wide(c,tt,{th:ag_in(tt,T.tFiles,1.0),md:(tt-T.tFormat+0.1)/0.5,tree:0})},
-    {at:T.tAsked-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{panel:1,rights:1,skills:1,using:(tt-T.tFollows+0.2)/0.5,claim:(tt-T.tFollows-0.3)/0.5,
+      skills:clamp((tt-T.tSkills)/0.6,0,1),think:0.3})},
+    {at:T.tFiles+0.4,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>wide(c,tt,{th:ag_in(tt,T.tFiles+0.9,1.0),md:(tt-T.tFormat+0.1)/0.5,tree:0})},
+    {at:T.tAsked-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{panel:1,rights:1,skills:1,using:(tt-T.tFollows+0.2)/0.5,claim:(tt-T.tFollows-0.3)/0.5,
       chip:(tt-T.tQuery)/0.4,res:(tt-T.tClaim+0.2)/0.4,think:0.6})},
-    {at:T.tJun-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{wide(c,tt,{tree:clamp((tt-T.tDbt+0.2)/1.0,0,1),jun:ag_in(tt,T.tJun,0.5),tools:(tt-T.tReach+0.2)/0.6,dbs:(tt-T.tDbs+0.1)/0.6});
+    {at:T.tJun-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{wide(c,tt,{tree:clamp((tt-T.tDbt+0.2)/1.0,0,1),jun:ag_in(tt,T.tJun,0.5),tools:(tt-T.tReach+0.2)/0.6,dbs:(tt-T.tDbs+0.1)/0.6});
       // skills teach an agent how to work; tool servers let it do the work
       od_statement(c,S,ag_in(tt,T.tTeach-0.2,0.5),"Skills teach an agent how to work;","tool servers let it do the work.",{c1:AG.violet,c2:AG.blue,a2:ag_in(tt,T.tLet-0.2,0.4),k:(tt-T.tTeach+0.2)/0.5});}},
     // a draft on a branch: its person reviews it, and a second person approves what reaches production
-    {at:T.tDraft-0.3,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
+    {at:T.tDraft-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
       const mv=ag_sine((tt-T.tProd+0.1)/1.3),app=(tt-T.tSecond-0.3)/0.4;
       [["Genie Code","reviewed · Sam",150,470],["Jun's agent","reviewed · Jun",690,470]].forEach(([who,rev,x,y],i)=>{const m=clamp(mv*1.3-(1-i)*0.3,0,1),e=ag_sine(m);
         od_draft(c,lerp(x,1300,e),lerp(y,300+i*240,e),who,{a:ag_in(tt,T.tDraft-0.2+i*0.2,0.4),rev:[rev,(tt-T.tRev+0.1-i*0.25)/0.4],app});});}}
@@ -2476,7 +2547,7 @@ scene("same",(ctx,S,t,sc)=>{
 });
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
-ag_cutInto(["place","ask","tools","code"]);
+ag_cutInto(["place","ask","tools","build","code"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
 const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});

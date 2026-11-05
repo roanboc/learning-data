@@ -1,9 +1,15 @@
 /* ===== Working with agents on Databricks: the scenes =====
    Seven chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The office is painted once
-   (faculty.js) and the lab is the module's; what moves is drawn live in the shots of ag_shots. Two framings of one place change on a
-   cut (cut: true), never a dissolve, so nothing shows twice. A close shot's cards, the kicker and the four ways along the top are
-   drawn in the frame (od_scr), so their words keep their size whatever the camera does; in a close shot of the office the cards
-   stand where the next desk would be, and only that desk's person and things are drawn. */
+   (faculty.js) and the lab is the module's; what moves is drawn live in the shots of ag_shots. In one room the camera never jumps:
+   ag_shots glides it from one framing to the next and fades only what changes (the lab by night is the lab). A later moment in the
+   room, or the same person framed another way (Sam close, then at his desk), is later: true: what was there leaves, the bare room
+   shows for an instant, in a pause of the voice, and what comes next comes in. Only framings far apart (a desk's close shot and the
+   whole office) change on a cut (cut: true), never a dissolve, so nothing shows twice. A close shot's cards, the kicker and the four
+   ways along the top are drawn in the frame (od_scr), so their words keep their size whatever the camera does; in a close shot of
+   the office the cards stand where the next desk would be, and only that desk's person and things are drawn. */
+
+// the bare lab, by day and by night, as a later moment passes through it: the light every shot of it draws
+AG_BARE.lab=c=>ag_roomLight(c,1);AG_BARE.labNight=c=>ag_roomLight(c,1,{night:true});
 
 // a phase: 0 before tIn, rising to 1 over din; from tOut, from 1 to 2 over dout (for what is shown, then put away)
 const od_ph=(t,tIn,tOut,din,dout)=>t<tOut?clamp((t-tIn)/(din||0.6),0,1):1+clamp((t-tOut)/(dout||0.5),0,1);
@@ -12,7 +18,8 @@ const od_lit=(t,t0,t1)=>ag_in(t,t0,0.3)*(1-ag_in(t,t1,0.4));
 // draw in the frame, whatever the camera is doing
 function od_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);fn();ctx.restore();}
 // the kicker and the four ways, in the frame; lit: the chapter's card (0 to 3), or o.on for each
-function od_chrome(ctx,S,t,lit,o){o=o||{};od_scr(ctx,S,()=>{const dark=!!o.dark,a=o.a==null?1:o.a;ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark,a});
+function od_chrome(ctx,S,t,lit,o){o=o||{};od_scr(ctx,S,()=>{const dk=o.dark===true?1:clamp(o.dark||0,0,1),a=o.a==null?1:o.a;  // dark 0 to 1: the night's kicker, blended into the day's as the room lights
+    if(dk>0)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:true,a:a*dk});if(dk<1)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:false,a:a*(1-dk)});
   const on=o.on||[0,1,2,3].map(i=>i===lit?ag_in(t,0.3,0.8):0);od_strip(ctx,{on,k:o.k,a});});}
 // the card of next year's places: what Anil plans from the census-day count. o.n (0 to 3) its lines come in. 500 wide, in the frame
 function od_places(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=500,h=262;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
@@ -250,16 +257,16 @@ scene("build",(ctx,S,t,sc)=>{
       OD_TOOLS.forEach((d,i)=>{const hit=steps>0&&steps<4&&tgt[si]===i?Math.sin(Math.PI*clamp(sf,0,1)):0;
         od_tool(c,TB(i),d[0],null,{a:ag_in(tt,T.tRT+0.2+i*0.12,0.4)*lerp(0.75,1,sm),touch:Math.max(hit,sm*0.7*(1-ag_in(tt,T.tBefore-1.0,0.6)))});});}},
     // morning: the cases the team has met before, and the three ways each answer is scored
-    {at:T.tBefore-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_roomLight(c,1);
+    {at:T.tBefore-0.1,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_roomLight(c,1);
       od_eval(c,{a:ag_in(tt,T.tBefore,0.5),ghost:ag_in(tt,T.tCases-0.2,0.6),rows:clamp((tt-T.tC1+0.2)/0.5,0,1)+clamp((tt-T.tC2+0.1)/0.5,0,1)+clamp((tt-T.tC3+0.1)/0.5,0,1)+clamp((tt-T.tC3-0.7)/0.5,0,1),
         colA:[ag_in(tt,T.tJudges-0.1,0.4),ag_in(tt,T.tSums-0.1,0.4),ag_in(tt,T.tMei-0.1,0.4)],cols:[(tt-T.tJudges-0.2)/0.3,(tt-T.tSums-0.1)/0.3,(tt-T.tMei-0.1)/0.3],amber:2});}},
     // its note is evidence, not a decision: Jun reads it, and decides
-    {at:T.tNote-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_person(c,"jun",330,640,0.92,{t:tt,gaze:[6,-2],nod:0.03*ag_in(tt,T.tDecides,0.5)});ag_roomLight(c,1);
+    {at:T.tNote-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_person(c,"jun",330,640,0.92,{t:tt,gaze:[6,-2],nod:0.03*ag_in(tt,T.tDecides,0.5)});ag_roomLight(c,1);
       ag_evidence(c,640,300,640,{kick:"Note for Jun",title:"Three students counted twice?",sub:"Engineering and IT: 134 against 131"},
         [{kick:"query",title:"count by faculty",col:AG.orange},{kick:"trace",title:"its four steps",col:AG.blue}],{open:clamp((tt-T.tReads+0.2)/1.2,0,1),a:ag_in(tt,T.tNote-0.1,0.4),k:Math.min(1,ag_spr(tt,T.tNote-0.1,0.5)),kickCol:AG.violet});
       ag_pill(c,960,800,"Jun decides",{col:AG.ink,a:ag_in(tt,T.tDecides,0.4),size:30});}}
   ],0.6);
-  od_chrome(ctx,S,t,2,{dark:t<T.tBefore-0.3+0.3});
+  od_chrome(ctx,S,t,2,{dark:1-ag_in(t,T.tBefore-0.1,0.45)});
 });
 
 /* ---------------------------------------------------------------- 6 · Agents that write code */
@@ -293,15 +300,15 @@ scene("code",(ctx,S,t,sc)=>{
     if(o.dbs>0){const w=od_folderCard(c,1110,214,"Databricks' skills",{mono:false,col:AG.violet,k:o.dbs,a:ag_in(o.dbs,0,0.4)});od_thread(c,[JX-12,JY-30],[1110+w/2,292],ag_in(o.dbs,0.2,0.8),AG.violet,{lw:3.5});}};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{name:ag_in(tt,T.tSam-0.2,0.5),code:clamp((tt-T.tPipes)/1.4,0,1),panel:(tt-T.tGC+0.1)/0.6,rights:(tt-T.tRights+0.1)/0.4,
-      skills:clamp((tt-T.tSkills)/1.0,0,1),think:0.3})},
-    {at:T.tFiles-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>wide(c,tt,{th:ag_in(tt,T.tFiles,1.0),md:(tt-T.tFormat+0.1)/0.5,tree:0})},
-    {at:T.tAsked-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{panel:1,rights:1,skills:1,using:(tt-T.tFollows+0.2)/0.5,claim:(tt-T.tFollows-0.3)/0.5,
+      skills:clamp((tt-T.tSkills)/0.6,0,1),think:0.3})},
+    {at:T.tFiles+0.4,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>wide(c,tt,{th:ag_in(tt,T.tFiles+0.9,1.0),md:(tt-T.tFormat+0.1)/0.5,tree:0})},
+    {at:T.tAsked-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>pipe(c,tt,{panel:1,rights:1,skills:1,using:(tt-T.tFollows+0.2)/0.5,claim:(tt-T.tFollows-0.3)/0.5,
       chip:(tt-T.tQuery)/0.4,res:(tt-T.tClaim+0.2)/0.4,think:0.6})},
-    {at:T.tJun-0.2,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{wide(c,tt,{tree:clamp((tt-T.tDbt+0.2)/1.0,0,1),jun:ag_in(tt,T.tJun,0.5),tools:(tt-T.tReach+0.2)/0.6,dbs:(tt-T.tDbs+0.1)/0.6});
+    {at:T.tJun-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{wide(c,tt,{tree:clamp((tt-T.tDbt+0.2)/1.0,0,1),jun:ag_in(tt,T.tJun,0.5),tools:(tt-T.tReach+0.2)/0.6,dbs:(tt-T.tDbs+0.1)/0.6});
       // skills teach an agent how to work; tool servers let it do the work
       od_statement(c,S,ag_in(tt,T.tTeach-0.2,0.5),"Skills teach an agent how to work;","tool servers let it do the work.",{c1:AG.violet,c2:AG.blue,a2:ag_in(tt,T.tLet-0.2,0.4),k:(tt-T.tTeach+0.2)/0.5});}},
     // a draft on a branch: its person reviews it, and a second person approves what reaches production
-    {at:T.tDraft-0.3,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
+    {at:T.tDraft-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_glass(c,1260,200,580,640,{label:"Production"});ag_sandbox(c,640,790,940,{});ag_roomLight(c,1);
       const mv=ag_sine((tt-T.tProd+0.1)/1.3),app=(tt-T.tSecond-0.3)/0.4;
       [["Genie Code","reviewed · Sam",150,470],["Jun's agent","reviewed · Jun",690,470]].forEach(([who,rev,x,y],i)=>{const m=clamp(mv*1.3-(1-i)*0.3,0,1),e=ag_sine(m);
         od_draft(c,lerp(x,1300,e),lerp(y,300+i*240,e),who,{a:ag_in(tt,T.tDraft-0.2+i*0.2,0.4),rev:[rev,(tt-T.tRev+0.1-i*0.25)/0.4],app});});}}
@@ -336,4 +343,4 @@ scene("same",(ctx,S,t,sc)=>{
 });
 
 // chapters that open on a cut: each shows people, a place or words the chapter before ends on, which a crossfade would show twice
-ag_cutInto(["place","ask","tools","code"]);
+ag_cutInto(["place","ask","tools","build","code"]);

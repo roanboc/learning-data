@@ -11,6 +11,7 @@ Serving data to people, agents and systems. Rohan Desai, in Finance, asks what c
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Defined in the open](https://data.learn-all.org/from-tables-to-decisions/define-it-once/) | Each measure defined once | 7½ min | 7 | 3 questions | [script](2-define-it-once/script.md) · [source](2-define-it-once/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

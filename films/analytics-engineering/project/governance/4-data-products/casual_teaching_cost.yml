@@ -1,0 +1,23 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: casual_teaching_cost
+title: Casual teaching cost
+owner: "Rohan Desai, Finance"
+domain: finance
+status: active
+version: 1.0.0
+description:
+  purpose: What the casual teaching in a teaching period costs, by faculty, unit and teaching period,
+    defined once for every tool. The claims approved for casual staff for teaching, plus on-costs.
+  usage: For Finance and the faculties, to plan and budget casual teaching. On Databricks, read the
+    metric view casual_teaching_cost, which counts this fact once, with MEASURE(casual_teaching_cost),
+    from Genie, a dashboard, an alert or the SQL editor. Summed by hand from the fact, the measure
+    would be defined twice.
+outputs:
+  - {model: mart_finance__casual_claims}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: "Built each night, from the claims as the claims app holds them that evening."}
+support:
+  - {channel: finance-data, tool: email, url: "mailto:rohan.desai@uni.example", scope: issues}

@@ -81,6 +81,7 @@
 | Why Unity Catalog and Unity Gateway govern them | 315 | 0% | 0 | 28.3 | Drawn to the rule |
 | Context and memory, governed | 393 | 0% | 0 | 28.2 | Drawn to the rule |
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
+| Defined in the open | 252 | 0% | 0 | 28.5 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |

@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:08.774
+Near Paris, 1889. A small cylinder of platinum and iridium, kept in a vault, becomes the kilogram.
+
+00:00:10.074 --> 00:00:15.908
+Forty copies go out to countries around the world, and each country checks its weights against its copy.
+
+00:00:17.008 --> 00:00:24.116
+But only the cylinder in the vault is the kilogram, so about every forty years, the copies come back to be weighed against it.
+
+00:00:25.216 --> 00:00:30.712
+By 1989, they have drifted apart, by up to about fifty millionths of a gram.
+
+00:00:32.212 --> 00:00:38.757
+Nobody can tell which has moved, because by definition, the cylinder is always exactly one kilogram.
+
+00:00:40.257 --> 00:00:46.509
+Every exact weighing in the world rests on one object, in one place, which could be scratched, or lost.
+
+00:00:47.809 --> 00:00:49.197
+Something had to change.
+
+00:00:51.097 --> 00:00:57.063
+In 2018, the world's conference on weights and measures voted to define the kilogram anew.
+
+00:00:57.963 --> 00:01:05.190
+From May 2019, it's set by a constant of nature, the Planck constant: the same everywhere, and fixed exactly.
+
+00:01:06.490 --> 00:01:14.714
+Any well-equipped lab can make a kilogram from it, for example with a Kibble balance, which weighs a mass against an electromagnetic force.
+
+00:01:16.014 --> 00:01:21.040
+One definition, the same for everyone, and held by no single object or place.
+
+00:01:22.540 --> 00:01:28.428
+In the United States, the standard of mass is now such a balance, in place of copy number 20.
+
+00:01:29.928 --> 00:01:32.895
+At the university, a measure had the same problem.
+
+00:01:33.795 --> 00:01:41.740
+In August, three tools gave the Faculty of Health three numbers for casual teaching cost, and nobody could tell which one was the answer.
+
+00:01:43.040 --> 00:01:48.802
+Now it's defined once, in a format any tool can read, and every tool gives the same number.
+
+00:01:56.302 --> 00:02:02.856
+Casual teaching is the teaching done by tutors hired a semester at a time, who claim the hours they teach.
+
+00:02:03.956 --> 00:02:08.629
+Planning next year, the Faculty of Health asked what it had cost in Semester 1.
+
+00:02:09.929 --> 00:02:15.981
+The faculty's spreadsheet said 2.46 million dollars: the hours in the tutors' contracts.
+
+00:02:17.281 --> 00:02:22.865
+Payroll's report said 1.88 million: the pay paid on the semester's pay days.
+
+00:02:24.165 --> 00:02:34.196
+Finance's report said 2.21 million: the claims approved for the semester's teaching, plus on-costs, what the university pays on top of pay.
+
+00:02:35.696 --> 00:02:40.371
+Each was right for its own question, but all three were called casual teaching cost.
+
+00:02:42.071 --> 00:02:51.701
+Budget on payroll's number, and Health would be 330 thousand dollars short next year: about one tutorial in seven with no money for a tutor.
+
+00:02:53.601 --> 00:03:00.087
+Rohan Desai, in Finance, owns this measure, but his definition lived only inside his report.
+
+00:03:03.187 --> 00:03:07.450
+Like the kilogram, it needed one definition that no single tool held.
+
+00:03:08.950 --> 00:03:14.252
+In September, Rohan defined it once, with Jun Park, who builds the data project.
+
+00:03:15.352 --> 00:03:20.164
+Its owner is Rohan: he decides what it means, and approves every change to it.
+
+00:03:21.464 --> 00:03:27.524
+Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost.
+
+00:03:28.824 --> 00:03:36.625
+Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.
+
+00:03:37.925 --> 00:03:42.333
+Counted by the teaching period the teaching was done in, not the day it was paid.
+
+00:03:43.833 --> 00:03:49.010
+The claims are HR's data: Ingrid Holm answers for what each of their fields means.
+
+00:03:50.310 --> 00:03:58.174
+And the other two numbers get names of their own: casual hours contracted, for planning, and casual pay paid, for each pay day.
+
+00:04:01.474 --> 00:04:06.559
+Its home is a metric view in Unity Catalog, beside the tables it's counted from.
+
+00:04:08.059 --> 00:04:16.539
+A metric view holds a measure's definition once, and works out the right number however it's grouped: by faculty, unit or teaching period.
+
+00:04:18.239 --> 00:04:22.724
+Unity Catalog governs it like a table: who may read it, and what reads it.
+
+00:04:24.024 --> 00:04:26.569
+So every tool on the platform reads this one.
+
+00:04:28.269 --> 00:04:36.009
+Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred.
+
+00:04:37.509 --> 00:04:44.838
+Rohan approves its meaning in a pull request, and Noor Rahman, the data architect, approves the change to production.
+
+00:04:46.538 --> 00:04:53.555
+Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars.
+
+00:04:57.055 --> 00:05:03.647
+None of this is new: for decades, BI tools have kept a layer of business definitions over the tables.
+
+00:05:05.147 --> 00:05:11.587
+But each kept them in its own format, so no other tool could read them, and a new tool meant writing them all again.
+
+00:05:13.287 --> 00:05:19.895
+dbt has a semantic layer too, MetricFlow, which reads measures defined in the project's YAML.
+
+00:05:21.395 --> 00:05:26.072
+Planning counts learners near a graduate certificate with it, in the same project.
+
+00:05:27.572 --> 00:05:31.235
+MetricFlow is open source, so other tools can build on it.
+
+00:05:32.735 --> 00:05:38.828
+Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice.
+
+00:05:42.528 --> 00:05:47.781
+For tools to read each other's definitions, they need a common format: Apache Ossie.
+
+00:05:49.081 --> 00:05:58.186
+It began as the Open Semantic Interchange, and more than fifty organisations now stand behind it, Databricks and dbt Labs among them.
+
+00:05:59.686 --> 00:06:07.485
+Converters translate a definition between Ossie and each tool's own format: a metric view, MetricFlow, and many others.
+
+00:06:08.985 --> 00:06:16.734
+dbt writes the project's measures in Ossie each time it reads the project, and it reads Ossie definitions too.
+
+00:06:18.234 --> 00:06:25.678
+So casual teaching cost can go to any tool that reads Ossie, with its words and its rules, and nobody types it again.
+
+00:06:27.178 --> 00:06:30.206
+Keep each rule inside the measure, so it travels with it.
+
+00:06:31.706 --> 00:06:34.996
+And check what arrives: a converter says what it can't carry.
+
+00:06:38.296 --> 00:06:41.334
+Today, Thursday the fifth of November, is pay day.
+
+00:06:42.634 --> 00:06:50.620
+Rohan asks Genie One what casual teaching has cost Health this semester so far: 1.84 million dollars.
+
+00:06:52.120 --> 00:06:56.638
+The fortnightly dashboard's Ask Genie gives the same, from the same definition.
+
+00:06:57.938 --> 00:07:04.385
+Last semester's is 2.21 million, with the other two numbers beside it, each under its own name.
+
+00:07:05.885 --> 00:07:10.806
+Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it.
+
+00:07:12.306 --> 00:07:19.872
+Like the kilogram, casual teaching cost is one definition, written where anyone can read it, and held by no single tool.
+
+00:07:21.772 --> 00:07:29.835
+The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.

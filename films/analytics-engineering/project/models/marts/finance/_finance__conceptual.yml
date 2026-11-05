@@ -15,7 +15,7 @@ question:
     Next year's revenue forecast, and the price of microcredentials.
 
 # The core's entities this mart reads, as they were on the census date.
-uses: [learner, award, credit_towards_award]
+uses: [learner, award, credit_towards_award, claim]
 
 entities:
 
@@ -32,3 +32,20 @@ entities:
       - Recognised credit only (microcredentials and short-course certificates a faculty recognises); units passed are paid for.
       - Only in the award the learner is enrolled in on census day. Credit that counts towards other awards saves nothing there yet.
     history: One census date at a time, like Planning's.
+
+  - name: casual_teaching_cost
+    label: casual teaching cost
+    definition: >
+      What the casual teaching in a teaching period costs: the claims approved for casual staff for
+      teaching, plus on-costs, what the university pays on top of their pay. Also called sessional
+      teaching cost, or casual teaching spend.
+    owner: Rohan Desai, Finance
+    business_key:
+      rule: The faculty, unit and teaching period it is counted by.
+    rules:
+      - Claims approved only, for casual staff (pay type CAS); a claim still waiting for its coordinator isn't counted.
+      - Teaching duties only, tutorial, marking and consultation (the seed teaching_duties); training isn't teaching.
+      - Plus on-costs, at Finance's rate for the year of the teaching period (the seed on_cost_rates).
+      - Counted by the teaching period the teaching was done in, not the day it was paid.
+      - Two other counts have names of their own, casual hours contracted (the hours the contracts allow, for planning) and casual pay paid (the pay paid on each pay day).
+    history: As the claims stand now. A claim approved late changes its teaching period's cost (LIM-FIN-04).

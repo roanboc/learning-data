@@ -1,0 +1,114 @@
+{
+  "kicker": "Each measure defined once",
+  "kicker_es": "Cada medida, definida una vez",
+  "title_es": "Definida en formato abierto",
+  "h1": "One measure, one definition, in an open format",
+  "h1_es": "Una medida, una definición, en formato abierto",
+  "lead": "In August, three tools gave the Faculty of Health three numbers for casual teaching cost, each right for its own question. Now Rohan Desai, in Finance, defines it once, with its owner, words and rules, as a metric view near the data, and an open format carries it to any tool.",
+  "lead_es": "En agosto, tres herramientas dieron a la Facultad de Salud tres cifras del costo de la docencia ocasional, cada una correcta para su pregunta. Ahora Rohan Desai, de Finanzas, lo define una vez, con dueño, palabras y reglas, en una vista de métricas, y un formato abierto lo lleva a otras.",
+  "description": "A film about defining each measure once, the second of From tables to decisions. In August, the Faculty of Health asked what casual teaching cost in Semester 1 and got three numbers from three tools: A$2.46 million from its spreadsheet, the hours in the tutors' contracts; A$1.88 million from payroll's report, the pay paid on the semester's pay days; and A$2.21 million from Finance's, the claims approved for the semester's teaching, plus on-costs. Each was right for its own question, but all three had one name, and the definition that fit lived only inside Finance's report; budgeted on payroll's number, Health would have been A$330,000 short, about one tutorial in seven with no money for a tutor. In September, Rohan Desai, who owns the measure, defined it once with Jun Park: its owner, its words and its rules, counted by the teaching period the teaching was done in, and the other two numbers got names of their own. Its home is a metric view in Unity Catalog, beside the tables it's counted from and governed like them, so every tool on the platform reads the same one; the data project builds it from a few lines of YAML, Rohan approves its meaning in a pull request and Noor Rahman approves the change to production. dbt's semantic layer, MetricFlow, does the same job in the project: choose one home for each measure, near most of its readers, and never define it twice. And Apache Ossie, an open format with a converter for each tool, carries a definition from one tool to another, with its words and its rules inside it, saying what it can't carry. It opens near Paris in 1889, where one cylinder in a vault was the kilogram, until a constant of nature defined it, the same for everyone.",
+  "description_es": "Una película sobre definir cada medida una vez, la segunda de De las tablas a las decisiones. En agosto, la Facultad de Salud preguntó cuánto costó la docencia ocasional en el Semestre 1 y recibió tres cifras de tres herramientas: A$2.46 millones de su hoja de cálculo, las horas de los contratos de los tutores; A$1.88 millones del reporte de nómina, lo pagado en los días de pago del semestre; y A$2.21 millones del de Finanzas, las declaraciones aprobadas por la docencia del semestre, más las cargas sociales. Cada una era correcta para su propia pregunta, pero las tres tenían un mismo nombre, y la definición que correspondía vivía solo dentro del reporte de Finanzas; con la cifra de nómina, a Salud le habrían faltado A$330,000, una de cada siete tutorías sin dinero para un tutor. En septiembre, Rohan Desai, dueño de la medida, la definió una vez con Jun Park: su dueño, sus palabras y sus reglas, contada por el período lectivo en que se dio la docencia, y las otras dos cifras recibieron nombre propio. Su hogar es una vista de métricas en Unity Catalog, junto a las tablas de las que se calcula y gobernada como ellas, así que todas las herramientas de la plataforma leen la misma; el proyecto de datos la construye con unas líneas de YAML, Rohan aprueba su significado en un pull request y Noor Rahman aprueba el cambio a producción. La capa semántica de dbt, MetricFlow, hace lo mismo en el proyecto: elige un hogar para cada medida, cerca de la mayoría de sus lectores, y nunca la definas dos veces. Y Apache Ossie, un formato abierto con un conversor para cada herramienta, lleva una definición de una herramienta a otra, con sus palabras y sus reglas dentro, y avisa lo que no puede llevar. Empieza cerca de París en 1889, donde un cilindro en una bóveda era el kilogramo, hasta que una constante de la naturaleza lo definió, el mismo para todos.",
+  "card": "Three tools, three numbers, one name. Define each measure once, near the data, in a format any tool can read.",
+  "card_es": "Tres herramientas, tres cifras, un nombre. Define cada medida una vez, junto a los datos, en un formato que todas leen.",
+  "chapters_es": {
+    "kilo": "Un kilogramo que cualquiera puede hacer",
+    "three": "Tres cifras, un nombre",
+    "once": "Su dueño, sus palabras, sus reglas",
+    "near": "Junto a los datos, hecha como código",
+    "dbt": "La misma idea en dbt",
+    "open": "Un formato que toda herramienta lee",
+    "same": "Una cifra, en cada herramienta"
+  },
+  "past": [
+    "Near Paris, 1889: one cylinder in a vault becomes the kilogram",
+    "A definition one object holds drifts from its copies; one set by a constant of nature is the same for everyone."
+  ],
+  "past_es": [
+    "Cerca de París, 1889: un cilindro en una bóveda pasa a ser el kilogramo",
+    "Una definición que guarda un objeto se separa de sus copias; una fijada por una constante de la naturaleza es la misma para todos."
+  ],
+  "next_h": "You've seen casual teaching cost defined once, near the data, in a format any tool can read. Next: more readers than people, as agents and systems read the same definitions.",
+  "next_h_es": "Viste el costo de la docencia ocasional definido una vez, junto a los datos, en un formato que toda herramienta lee. Después: más lectores que personas, cuando agentes y sistemas leen las mismas definiciones.",
+  "repo": {
+    "three": [
+      "models/marts/finance/mart_finance__casual_claims.sql"
+    ],
+    "once": [
+      "models/marts/finance/_finance__conceptual.yml",
+      "models/marts/finance/_finance__decisions.yml",
+      "seeds/reference/finance/teaching_duties.csv",
+      "seeds/reference/finance/on_cost_rates.csv"
+    ],
+    "near": [
+      "models/marts/finance/casual_teaching_cost.sql",
+      "governance/4-data-products/casual_teaching_cost.yml"
+    ],
+    "dbt": [
+      "models/marts/planning/_planning__semantic.yml"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film stays at the level of architecture. The tools' own pages show how to set each piece up, and stay current as the tools change.",
+    "p_es": "La película se queda en el nivel de la arquitectura. Las páginas de cada herramienta muestran cómo configurar cada pieza, y se mantienen al día cuando cambian.",
+    "links": [
+      {
+        "title": "Unity Catalog metric views",
+        "title_es": "Vistas de métricas de Unity Catalog",
+        "line": "Define a measure once, near the data, and group it any way: the platform works out the right number.",
+        "line_es": "Define una medida una vez, junto a los datos, y agrúpala como quieras: la plataforma calcula la cifra correcta.",
+        "href": "https://docs.databricks.com/aws/en/metric-views/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/metric-views/"
+      },
+      {
+        "title": "Metric view YAML syntax reference",
+        "title_es": "Referencia de sintaxis de YAML de la vista de métricas",
+        "line": "A metric view's source, fields and measures, and a filter inside a measure.",
+        "line_es": "La fuente, los campos y las medidas de una vista de métricas, y un filtro dentro de una medida.",
+        "href": "https://docs.databricks.com/aws/en/metric-views/data-modeling/syntax",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/metric-views/data-modeling/syntax"
+      },
+      {
+        "title": "Agent metadata in metric views",
+        "title_es": "Metadatos del agente en vistas de métricas",
+        "line": "Display names, formats and synonyms, so people and agents read a measure in its owner's words.",
+        "line_es": "Nombres para mostrar, formatos y sinónimos, para que personas y agentes lean una medida con las palabras de su dueño.",
+        "href": "https://docs.databricks.com/aws/en/metric-views/data-modeling/semantic-metadata",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/metric-views/data-modeling/semantic-metadata"
+      },
+      {
+        "title": "Databricks configurations: metric views",
+        "title_es": "Databricks configurations: metric views (en inglés)",
+        "line": "Build a metric view from the data project, reviewed like the rest of its code.",
+        "line_es": "Construye una vista de métricas desde el proyecto de datos, revisada como el resto de su código.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/databricks-configs#metric-views",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/databricks-configs#metric-views"
+      },
+      {
+        "title": "About MetricFlow",
+        "title_es": "About MetricFlow (en inglés)",
+        "line": "dbt's semantic layer: measures and metrics defined in the project's YAML.",
+        "line_es": "La capa semántica de dbt: medidas y métricas definidas en el YAML del proyecto.",
+        "href": "https://docs.getdbt.com/docs/build/about-metricflow",
+        "href_es": "https://docs.getdbt.com/docs/build/about-metricflow"
+      },
+      {
+        "title": "Apache Ossie semantic layer documents",
+        "title_es": "Apache Ossie semantic layer documents (en inglés)",
+        "line": "How dbt writes the project's measures in Ossie, and reads Ossie documents too.",
+        "line_es": "Cómo dbt escribe las medidas del proyecto en Ossie, y también lee documentos de Ossie.",
+        "href": "https://docs.getdbt.com/docs/build/ossie-semantic-models",
+        "href_es": "https://docs.getdbt.com/docs/build/ossie-semantic-models"
+      },
+      {
+        "title": "Apache Ossie",
+        "title_es": "Apache Ossie (en inglés)",
+        "line": "The open format for semantic models and metrics, its specification and its converters.",
+        "line_es": "El formato abierto para modelos semánticos y métricas, su especificación y sus conversores.",
+        "href": "https://ossie.apache.org/",
+        "href_es": "https://ossie.apache.org/"
+      }
+    ]
+  }
+}

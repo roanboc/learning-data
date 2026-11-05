@@ -12,3 +12,16 @@
 - Rule: Only in the award the learner is enrolled in on census day. Credit that counts towards other awards saves nothing there yet.
 - History: One census date at a time, like Planning's.
 {% enddocs %}
+
+{% docs casual_teaching_cost %}
+**Casual teaching cost.** What the casual teaching in a teaching period costs: the claims approved for casual staff for teaching, plus on-costs, what the university pays on top of their pay. Also called sessional teaching cost, or casual teaching spend.
+
+- Business key: The faculty, unit and teaching period it is counted by.
+- Owner of the meaning: Rohan Desai, Finance.
+- Rule: Claims approved only, for casual staff (pay type CAS); a claim still waiting for its coordinator isn't counted.
+- Rule: Teaching duties only, tutorial, marking and consultation (the seed teaching_duties); training isn't teaching.
+- Rule: Plus on-costs, at Finance's rate for the year of the teaching period (the seed on_cost_rates).
+- Rule: Counted by the teaching period the teaching was done in, not the day it was paid.
+- Rule: Two other counts have names of their own, casual hours contracted (the hours the contracts allow, for planning) and casual pay paid (the pay paid on each pay day).
+- History: As the claims stand now. A claim approved late changes its teaching period's cost (LIM-FIN-04).
+{% enddocs %}

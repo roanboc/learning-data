@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Defined in the open",
+    "key": "define-it-once-en",
+    "dir": "films/from-tables-to-decisions/2-define-it-once/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/define-it-once/film.js",
+    "video": "dist/define-it-once.mp4",
+    "file": "define-it-once.mp4",
+    "captions": [
+      [
+        "films/from-tables-to-decisions/2-define-it-once/captions/en.srt",
+        "define-it-once.en.srt"
+      ],
+      [
+        "films/from-tables-to-decisions/2-define-it-once/captions/es.srt",
+        "define-it-once.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-tables-to-decisions/2-define-it-once/source",
+      ":(exclude)films/from-tables-to-decisions/2-define-it-once/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts",
+      "films/inner-life-of-data/source/src/logos.js"
+    ],
+    "legibility": {
+      "texts": 252,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.5,
+      "status": "Drawn to the rule"
+    }
+  }
+]

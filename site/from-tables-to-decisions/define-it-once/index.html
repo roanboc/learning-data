@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Defined in the open · From tables to decisions · Learning Data</title>
+<meta name="description" content="A film about defining each measure once, the second of From tables to decisions. In August, the Faculty of Health asked what casual teaching cost in Semester 1 and got three numbers from three tools: A$2.46 million from its spreadsheet, the hours in the tutors' contracts; A$1.88 million from payroll's report, the pay paid on the semester's pay days; and A$2.21 million from Finance's, the claims approved for the semester's teaching, plus on-costs. Each was right for its own question, but all three had one name, and the definition that fit lived only inside Finance's report; budgeted on payroll's number, Health would have been A$330,000 short, about one tutorial in seven with no money for a tutor. In September, Rohan Desai, who owns the measure, defined it once with Jun Park: its owner, its words and its rules, counted by the teaching period the teaching was done in, and the other two numbers got names of their own. Its home is a metric view in Unity Catalog, beside the tables it's counted from and governed like them, so every tool on the platform reads the same one; the data project builds it from a few lines of YAML, Rohan approves its meaning in a pull request and Noor Rahman approves the change to production. dbt's semantic layer, MetricFlow, does the same job in the project: choose one home for each measure, near most of its readers, and never define it twice. And Apache Ossie, an open format with a converter for each tool, carries a definition from one tool to another, with its words and its rules inside it, saying what it can't carry. It opens near Paris in 1889, where one cylinder in a vault was the kilogram, until a constant of nature defined it, the same for everyone.">
+<meta property="og:title" content="Defined in the open · From tables to decisions · Learning Data"><meta property="og:description" content="Three tools, three numbers, one name. Define each measure once, near the data, in a format any tool can read."><meta property="og:image" content="https://data.learn-all.org/assets/define-it-once-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/from-tables-to-decisions/define-it-once/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/from-tables-to-decisions/define-it-once/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a href="../../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/from-tables-to-decisions/define-it-once/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/define-it-once-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../../topics/#modern-data-basics">Modern data basics</a> › <a href="../">From tables to decisions</a></p>
+<h1>One measure, one definition, in an open format</h1>
+<p class="lead">In August, three tools gave the Faculty of Health three numbers for casual teaching cost, each right for its own question. Now Rohan Desai, in Finance, defines it once, with its owner, words and rules, as a metric view near the data, and an open format carries it to any tool.</p>
+</section>
+<section class="module" id="watch" data-store="ld-define-it-once" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../assets/define-it-once/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/define-it-once-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 7½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Defined in the open"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Stop at the end of three chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/define-it-once.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/tree/main/films/from-tables-to-decisions/2-define-it-once/captions">Caption files</a><a href="https://github.com/roanboc/learning-data/blob/main/films/from-tables-to-decisions/2-define-it-once/script.md">Read the script</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen casual teaching cost defined once, near the data, in a format any tool can read. Next: more readers than people, as agents and systems read the same definitions.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Think it through: 3 questions</a><a class="btn" href="../">The whole series: From tables to decisions</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
+</section>
+
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">See it in the project</h2><p>Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself. How it was built, step by step, is told in <a href="../../in-the-weeds/"><i>In the weeds of data crafting</i></a>.</p></div></div>
+<ul class="repo-list">
+<li><b>Three numbers, one name</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/mart_finance__casual_claims.sql"><code>models/marts/finance/mart_finance__casual_claims.sql</code></a></span></li>
+<li><b>Its owner, its words, its rules</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__conceptual.yml"><code>models/marts/finance/_finance__conceptual.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/_finance__decisions.yml"><code>models/marts/finance/_finance__decisions.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/teaching_duties.csv"><code>seeds/reference/finance/teaching_duties.csv</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/seeds/reference/finance/on_cost_rates.csv"><code>seeds/reference/finance/on_cost_rates.csv</code></a></span></li>
+<li><b>Near the data, built as code</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/finance/casual_teaching_cost.sql"><code>models/marts/finance/casual_teaching_cost.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/governance/4-data-products/casual_teaching_cost.yml"><code>governance/4-data-products/casual_teaching_cost.yml</code></a></span></li>
+<li><b>The same idea in dbt</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/planning/_planning__semantic.yml"><code>models/marts/planning/_planning__semantic.yml</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explore the whole project</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">How to run it</a></p>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The three Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">
+<div class="mhead"><div><h2 id="elsewhere-h">Go further in the official docs</h2><p>The film stays at the level of architecture. The tools' own pages show how to set each piece up, and stay current as the tools change.</p></div></div>
+<ul class="repo-list">
+<li><b><a href="https://docs.databricks.com/aws/en/metric-views/">Unity Catalog metric views</a></b><span>Define a measure once, near the data, and group it any way: the platform works out the right number.</span></li>
+<li><b><a href="https://docs.databricks.com/aws/en/metric-views/data-modeling/syntax">Metric view YAML syntax reference</a></b><span>A metric view's source, fields and measures, and a filter inside a measure.</span></li>
+<li><b><a href="https://docs.databricks.com/aws/en/metric-views/data-modeling/semantic-metadata">Agent metadata in metric views</a></b><span>Display names, formats and synonyms, so people and agents read a measure in its owner's words.</span></li>
+<li><b><a href="https://docs.getdbt.com/reference/resource-configs/databricks-configs#metric-views">Databricks configurations: metric views</a></b><span>Build a metric view from the data project, reviewed like the rest of its code.</span></li>
+<li><b><a href="https://docs.getdbt.com/docs/build/about-metricflow">About MetricFlow</a></b><span>dbt's semantic layer: measures and metrics defined in the project's YAML.</span></li>
+<li><b><a href="https://docs.getdbt.com/docs/build/ossie-semantic-models">Apache Ossie semantic layer documents</a></b><span>How dbt writes the project's measures in Ossie, and reads Ossie documents too.</span></li>
+<li><b><a href="https://ossie.apache.org/">Apache Ossie</a></b><span>The open format for semantic models and metrics, its specification and its converters.</span></li>
+</ul>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">In the series: <a href="../">From tables to decisions</a></h2><p>Film 2 of 3.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+
+</div>
+<ol class="series-list" aria-label="Every film of the series">
+<li><a href="../define-it-once/" aria-current="page"><span class="n">2</span>Defined in the open</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../../assets/define-it-once/film.js"></script>
+<script src="../../assets/define-it-once/think.en.js"></script>
+<script src="../../assets/learn/think.js"></script>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/learn/next.js"></script>
+<script src="../../assets/seek.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

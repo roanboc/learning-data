@@ -3,15 +3,15 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Eight series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Ten series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
 the three series of data governance: Governance principles (films/data-governance/, at data-governance/), Governance on the
 map (films/governance-on-the-map/, at governance-on-the-map/) and Governance you can use (films/governance-in-practice/, at
 governance-in-practice/); and the series of the module on AI agents in data work: What an agent is
-(films/what-an-agent-is/, at what-an-agent-is/) and Agents at work on data (films/agents-at-work-on-data/, at
-agents-at-work-on-data/). A series with no film on the site yet has no pages, and the topics leave it out until its first
+(films/what-an-agent-is/, at what-an-agent-is/), Agents at work on data (films/agents-at-work-on-data/, at
+agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-colleague/, at from-helper-to-colleague/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -109,6 +109,10 @@ SERIES = [
          place={"en": "university", "es": "universidad"}, blocks=[], next="agents-at-work-on-data"),
     dict(id="agents-at-work-on-data", dir="agents-at-work-on-data", slug="agents-at-work-on-data",
          name={"en": "Agents at work on data", "es": "Agentes trabajando con datos"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         next="from-helper-to-colleague"),
+    dict(id="from-helper-to-colleague", dir="from-helper-to-colleague", slug="from-helper-to-colleague",
+         name={"en": "From helper to colleague", "es": "De ayudante a colega"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
 ]
 for _S in SERIES:
@@ -311,7 +315,7 @@ TOPICS = [
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
                "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
-    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data"],
+    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data", "from-helper-to-colleague"],
          name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
          who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
          line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",

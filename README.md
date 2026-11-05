@@ -97,8 +97,11 @@ films/                           one folder per film: script or story, captions/
   agents-at-work-on-data/        the series Agents at work on data, the second of the module: its README, series.json, proposal.md and decided.md,
                                  and a folder per film as they're made, drawn and checked with what-an-agent-is/shared/; on the site under the topic
                                  AI agents in data work, from its opening film
+  from-helper-to-colleague/      the series From helper to colleague, the third of the module: its README, series.json, proposal.md and decided.md,
+                                 and a folder per film as they're made, drawn and checked with what-an-agent-is/shared/; on the site under the topic
+                                 AI agents in data work, from its opening film
 site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
-                                 The map before the data, The same one, everywhere, the three on data governance, and the two on AI agents), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
+                                 The map before the data, The same one, everywhere, the three on data governance, and the three on AI agents), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
                                  check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
                                  (its chapters, captions and a 720p copy, which review_copy.py makes)
 .github/workflows/pages.yml      publishes site/ on every push to main

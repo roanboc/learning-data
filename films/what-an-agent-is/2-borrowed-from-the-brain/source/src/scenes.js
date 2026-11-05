@@ -455,7 +455,9 @@ scene("likely",(ctx,S,t,sc)=>{const C=sc.cues;
     // the chances: as bars (with every other word it knows), and as a wheel
     const ba=ag_in(t,tEvery-0.4,0.6)*(1-ag_in(t,tAgain-0.6,0.5))+ag_in(t,tDial+0.6,0.6)*(1-ag_in(t,br-0.9,0.5));
     const bpick=t>tDanc-0.1&&t<tBuzz-0.1?0:t>tBuzz-0.1&&t<tWheel?1:sp.pick;
-    bb_chances(ctx,560,360,rows,{u:ag_in(t,tEvery-0.4,1.0),tail:ag_in(t,tEvery,0.6)*(1-ag_in(t,tDial,0.5)),pick:bpick,wrong:sp.pick===4?4:null,a:ba});
+    // the numbers dim while the dial turns or a close choice tips, and the new ones come up once the bars have moved
+    const chg=(t0,t1)=>ag_io(t,t0-0.15,t1,0.15),na=1-0.75*Math.max(chg(tLow-0.2,tLow+1.0),chg(tHigh-0.2,tHigh+1.2),chg(tZero-0.3,tZero+0.9),chg(tBusy-0.2,tBusy+1.2),chg(tHair,tHair+0.4));
+    bb_chances(ctx,560,360,rows,{u:ag_in(t,tEvery-0.4,1.0),tail:ag_in(t,tEvery,0.6)*(1-ag_in(t,tDial,0.5)),pick:bpick,wrong:sp.pick===4?4:null,a:ba,na});
     const wh=ag_in(t,tWheel-0.2,0.5)*(1-ag_in(t,br-0.9,0.5));bb_wheel(ctx,1600,560,210,rows,sp.rot,{pick:sp.pick,wrong:sp.pick===4?4:null,a:wh,k:Math.min(1,ag_spr(t,tWheel-0.2,0.5))});
     // the same question, two answers: one word changes early on, and the rest follows
     const aa=ag_in(t,tDiff-0.4,0.4)*(1-ag_in(t,tDial-0.6,0.5)),ab=ag_in(t,tEarly-0.3,0.4)*(1-ag_in(t,tDial-0.6,0.5));

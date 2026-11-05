@@ -157,11 +157,12 @@ const BB_NEXT=[["dancing",70],["buzzing",12],["waggling",8],["flying",5],["singi
 // the chances at a temperature T (1 as the model gave them): each raised to the power 1/T, then shared out again
 function bb_temper(rows,T){const q=rows.map(r=>Math.pow(r[1]/100,1/Math.max(0.05,T))),s=q.reduce((a,b)=>a+b,0)+Math.pow(0.02,1/Math.max(0.05,T));return rows.map((r,i)=>[r[0],100*q[i]/s]);}
 // as bars: each word, its bar, its chances in a hundred; o.tail draws a faint run of many more, every other word it knows; o.pick lights one
+// o.na: how much the numbers show (they dim while the chances change, so each settles before it's read)
 function bb_chances(ctx,x,y,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;const bw=o.bw||420,u=o.u==null?1:o.u;
   rows.forEach(([w,p],i)=>{const k=ag_in(u,i*0.12,0.3);if(k<=0)return;const yy=y+i*66,pick=o.pick===i,wrong=o.wrong===i;ctx.save();ctx.globalAlpha*=k;
     ag_T(ctx,w,x,yy+11,{w:700,size:32,col:wrong?AG.amber:AG.ink});ctx.fillStyle="rgba(60,56,70,0.1)";rr(ctx,x+190,yy-14,bw,28,14);ctx.fill();
     ctx.fillStyle=rgba(wrong?AG.amber:BB_VI,pick?1:0.55);rr(ctx,x+190,yy-14,Math.max(28,bw*p/100*k),28,14);ctx.fill();
-    ag_T(ctx,Math.round(p)+" in 100",x+190+bw+24,yy+11,{w:700,size:30,col:AG.mut});ctx.restore();});
+    if(o.na!==0)withA(ctx,o.na==null?1:o.na,()=>ag_T(ctx,Math.round(p)+" in 100",x+190+bw+24,yy+11,{w:700,size:30,col:AG.mut}));ctx.restore();});
   if(o.tail){ctx.save();ctx.globalAlpha*=o.tail;for(let i=0;i<12;i++){ctx.fillStyle=rgba(BB_VI,0.35);rr(ctx,x+190,y+rows.length*66-20+i*7,4+hash(i,9)*18,4,2);ctx.fill();}
     ag_T(ctx,"and every other word it knows",x+250,y+rows.length*66+28,{w:500,size:28,col:AG.mut});ctx.restore();}
   ctx.restore();}

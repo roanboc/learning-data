@@ -1,0 +1,8 @@
+# Decided: Documents as data
+
+The series' own decisions. The module's are in [`../data-that-moves/decided.md`](../data-that-moves/decided.md), with its plan in [`../data-that-moves/proposal.md`](../data-that-moves/proposal.md). With its film's rows (`<n-film>/decided.md`), they make the *Decided* table in [proposal.md](proposal.md): run `python site-tools/build_series.py` after adding a row.
+
+| Date | Decision |
+|---|---|
+| 5 November 2026 | *Documents as data* (*Documentos como datos*), the last series of *Modern data basics*, is one film: *Files as data and as context*, in `films/documents-as-data/`, at `documents-as-data/` on the site, with its page once the film is out; its card says "A single film". *From tables to decisions* comes before it. The module's plan, its rules and its world are in `films/data-that-moves/proposal.md`. |
+| 5 November 2026 | One film, as the author asked: "document and unstructured is an interesting one as context and data itself, but they are generally very specific in use cases so probably good to mention and all the new functions in Databricks to process them more easily but not much more from there." Its practical advice comes from his own work, on the application side: "official documents with metadata, scraping and standard json or yaml structures but that's more on the application side rather than business documents". The film shows supplier invoices read into tables with `ai_parse_document` and `ai_extract` from a Unity Catalog volume, and HR's signed contracts kept with their metadata; it says that business documents are use-case specific, and points to the docs. Documents as an agent's context (permissions on chunks, personal data in PDFs, old versions) belong to the agent films. |

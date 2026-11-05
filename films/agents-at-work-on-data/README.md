@@ -14,6 +14,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 | [Context engineering](https://data.learn-all.org/agents-at-work-on-data/context-engineering/) | What an agent reads | 6½ min | 7 | 3 questions | [script](1-context-engineering/script.md) · [source](1-context-engineering/source/README.md) |
 | [Skills and workflows](https://data.learn-all.org/agents-at-work-on-data/skills-and-workflows/) | Playbooks for agents | 7½ min | 7 | 3 questions | [script](2-skills-and-workflows/script.md) · [source](2-skills-and-workflows/source/README.md) |
 | [Tools are hands, and every hand is a permission](https://data.learn-all.org/agents-at-work-on-data/tools-are-hands/) | Tools and their rights | 7½ min | 7 | 3 questions | [script](3-tools-are-hands/script.md) · [source](3-tools-are-hands/source/README.md) |
+| [Memory: from one chat to the team](https://data.learn-all.org/agents-at-work-on-data/memory-for-the-team/) | Memory for the team | 7½ min | 7 | 4 questions | [script](4-memory-for-the-team/script.md) · [source](4-memory-for-the-team/source/README.md) |
 | [Why Unity Catalog and Unity Gateway govern them](https://data.learn-all.org/agents-at-work-on-data/unity-catalog-and-ai-gateway/) | Agents under the same rules | 8 min | 8 | 3 questions | [script](8-unity-catalog-and-ai-gateway/script.md) · [source](8-unity-catalog-and-ai-gateway/source/README.md) |
 <!-- /films -->
 

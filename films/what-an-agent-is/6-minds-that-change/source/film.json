@@ -1,0 +1,40 @@
+{
+  "key": "minds-that-change",
+  "title": "Minds that change",
+  "sub": "The sixth film of What an agent is, a series on what an AI agent is and what it isn't: an agent invents and changes its answer, and so do we, since our memory rebuilds itself each time we remember; the answer isn't blame but evidence and checks, the same for people and agents.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, violet the model, orange the data and its evidence, green what is checked and agrees, amber a slip or a doubt.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "kept",
+    "agree",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bRigveda\\b",
+      "Rig vayda"
+    ],
+    [
+      "\\bFrederic\\b",
+      "Fredric"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bIT\\b",
+      "I T"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "kept"
+  ]
+}

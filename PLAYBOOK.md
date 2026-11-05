@@ -44,7 +44,7 @@ Before story or pictures, the concept is settled. [`AGENTS.md`](AGENTS.md) gives
 ## 3. Rigour
 
 - **Keep a rigour sheet.** For each scene, write down the real technology and what the picture simplifies. It answers experts before they ask, and it's the checklist for the next update.
-- **Check names and maturity when you publish,** not when you start. Products get renamed, and previews become generally available. Use the name of the day, but never say a feature's release status in the film, in its voice, on screen or on its page: it changes, and the film would have to change with it (the author, 5 November 2026, on *Working with agents on Databricks*, whose tool servers wore "preview" pills). Keep it, with its date, in the script's sources.
+- **Check names and maturity when you publish,** not when you start. Products get renamed, and previews become generally available. Use the name of the day, but never say a feature's release status in the film, in its voice, on screen, on its page or in its labs and scenarios: it changes, and the film would have to change with it (the author, 5 November 2026, on *Working with agents on Databricks*, whose tool servers wore "preview" pills). Keep it, with its date, in the script's sources. A lab's *In the film vs in real life* note says what the lab simplifies, never a status.
 - **Keep roles clear.** dbt writes and tests the recipes; Databricks runs, stores and governs. One sentence per role, repeated in picture and word.
 - **Give a discipline's rules no product as their home when the discipline keeps them in its own tools.** Master data rules, such as when two records are one person, are a specification: master data tools often let stewards set them in screens, and in the simplest form they're YAML and SQL. *Who is it?*'s first cut matched people "in dbt" and kept the links "In Databricks", with their logos, and the author asked for no tool to be named as the rules' home. Say where they're kept in plain words ("where the data is transformed"), and tag code on screen as the simplest form.
 - **Show whose component is whose.** Use official logos, unaltered, and credit the trademarks. License code and content separately (here MIT and CC BY 4.0), and exclude the logos.
@@ -353,7 +353,7 @@ What *From words to data*, seven films made together, added.
 - [ ] Held notes sit at even levels, a room's echo included: each room rings about one where the notes are, and each held note is set back to its own level after it (`tools/quiet.py` checks both).
 
 **Before publishing**
-- [ ] Product names, maturity and sources are checked on the day, and no release status (preview, beta, generally available) is said or shown.
+- [ ] Product names, maturity and sources are checked on the day, and no release status (preview, beta, generally available) is said or shown, in the film, on its page or in its labs and scenarios.
 - [ ] Captions are generated in every language.
 - [ ] Logos are unaltered and credited, and the licences are stated.
 - [ ] The poster is looked at after `tools/publish.py` draws it: its moment comes after every fade has settled, so no two texts show in one place. *Who is it?*'s first poster caught a date changing into another.

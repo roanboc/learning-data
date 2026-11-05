@@ -64,7 +64,8 @@ def series_link(lg, RE, sid):
 # (in Where next? and beside the series' films) once that series has a film on the site;
 # blocks: the hand-written pages that show its first film's card, between <!-- <id>: made by site-tools/build_series.py --> and
 # <!-- /<id> -->: (path under site/, language, "card", the path from that page to the site's root, and to the series' folder);
-# project: the folder under films/ whose example project its films show (its own folder if not given).
+# project: the folder under films/ whose example project its films show (its own folder if not given); built: the id of the series
+# that built that project, which each film's See it in the project names for how it was built (none if not given).
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work.
@@ -113,7 +114,8 @@ SERIES = [
          next="from-helper-to-colleague"),
     dict(id="from-helper-to-colleague", dir="from-helper-to-colleague", slug="from-helper-to-colleague",
          name={"en": "From helper to colleague", "es": "De ayudante a colega"},
-         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering"),
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
 ]
 for _S in SERIES:
     _S["root"] = ROOT / "films" / _S["dir"]
@@ -586,6 +588,8 @@ def project_section(lg, f):
     if not repo:
         return ""
     names = dict(f["chapters"]) if lg == "en" else {k: f["site"]["chapters_es"].get(k, v) for k, v in f["chapters"]}
+    built = f["series"].get("built")  # the series that built the project: how it was built is told there (a film page is two below its root)
+    how = (T(lg, " How it was built, step by step, is told in ", " Cómo se construyó, paso a paso, lo cuenta ") + series_link(lg, "../../", built) + ".") if built else ""
     rows = []
     for cid, _ in f["chapters"]:
         paths = repo.get(cid)
@@ -593,7 +597,7 @@ def project_section(lg, f):
             links = " ".join(f'<a href="{project_url(f, x)}"><code>{E(x)}</code></a>' for x in paths)
             rows.append(f'<li><b>{E(names[cid])}</b><span>{links}</span></li>')
     return (f'<section class="module" id="in-the-project" aria-labelledby="project-h">\n<div class="mhead"><div><h2 id="project-h">{T(lg, "See it in the project", "Míralo en el proyecto")}</h2>'
-            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}</p></div></div>\n'
+            f'<p>{T(lg, "Every card in the film shows a real file from the example dbt project. Open the ones each chapter shows, on GitHub, or run the whole project yourself.", "Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero.")}{how}</p></div></div>\n'
             f'<ul class="repo-list">\n' + "\n".join(rows) + f'\n</ul>\n<p class="film-links"><a href="{project_url(f, "")}">{T(lg, "Explore the whole project", "Explora el proyecto entero")}</a><a href="{project_url(f, "README.md")}">{T(lg, "How to run it", "Cómo ejecutarlo")}</a></p>\n</section>\n\n')
 
 

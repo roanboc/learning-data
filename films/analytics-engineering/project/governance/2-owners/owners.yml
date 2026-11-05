@@ -25,6 +25,7 @@ owners:
   - {name: "Sam, platform team", email: platform@uni.example}
   - {name: "Noor, data architect", email: noor@uni.example}
   - {name: Faculty of Health, email: health.data@uni.example}
+  - {name: "Anil Kurian, Faculty of Health", email: anil.kurian@uni.example}
 # Who reviews what isn't owned by a business owner (AGENTS.md, Who approves what).
 reviewers:
   code: {name: "Jun Park, analytics engineer", email: jun.park@uni.example}

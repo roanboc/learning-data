@@ -1,0 +1,16 @@
+name: workload agent
+kind: application component
+agent: 'yes'
+definition: Software that answers the Faculty of Health's heads of school, every week, how many teach in each school
+  or unit this term and how many are casual, under its own name.
+owner: Anil Kurian, Faculty of Health
+relationships:
+- assignment: workload contributor
+  stage:
+    what a word about staff means: 1
+    a new question about teaching staff: 3
+    fix a model: 4
+    find why the night build failed, in test: 5
+    find why the night build failed, in production: 4
+evidence: its own identity since 7 Sep 2026; placed on the map with its stages · 26 Oct 2026
+status: confirmed

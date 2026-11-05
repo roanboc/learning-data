@@ -1,4 +1,4 @@
-// A contributor joins, the third film of From helper to colleague, the third series on AI agents in data work. One line per id; the film re-times itself to the voice.
+// A place on the map, the third film of From helper to colleague, the third series on AI agents in data work. One line per id; the film re-times itself to the voice.
 // "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and dates in words). The few longer stops are in breath.js.
 const NARR={
 "first":{"name":"Thirteen days in 1970","lead":1.6,"tail":1.0,"vo":[
@@ -37,14 +37,22 @@ const NARR={
  {"id":"differ","gap":0.8,"text":"One thing differs. Lucía's helper works on her sign-in, with her rights, while she watches."},
  {"id":"alone","gap":0.8,"text":"The planning agent works alone, so it needs a place of its own."}]},
 "map":{"name":"A place on the map","lead":1.0,"tail":1.0,"vo":[
- {"id":"noor","gap":0.8,"text":"Noor, the data architect, puts it on the university's map, where every person, team and system already has a place."},
- {"id":"drawn","gap":0.8,"text":"It's drawn as the map draws software that works beside people: assigned to a role, with an owner."},
+ {"id":"noor","gap":0.8,"text":"A week before it started, Noor, the data architect, gave it a place on the university's map."},
+ {"id":"work","gap":0.8,"text":"She started from the work: the capability Planning's tickets serve, provide data products."},
+ {"id":"process","gap":0.8,"text":"Each ticket goes through one process, change a data product: seven steps, from a ticket to production."},
+ {"id":"roles","gap":0.8,"text":"Each step is assigned to a role, whoever fills it: a person or an agent."},
+ {"id":"contrib","gap":0.8,"text":"One new role, planning contributor, drafts the change, builds it in development, and opens a pull request."},
+ {"id":"people","gap":0.8,"text":"People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production."},
+ {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
+ {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner."},
  {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
  {"id":"build","gap":0.8,"text":"It may also build in its own development schema, and open a pull request."},
  {"id":"maynot","gap":0.8,"text":"What it may not do: approve, merge, change production, change an approved test, change what a word means, or grant itself rights."},
  {"id":"asks","gap":0.8,"text":"And whom it asks: Clara for what Planning needs, Mei for what a word means, Noor for the model, and Jun for the code."},
  {"id":"guess","gap":0.8,"text":"When it isn't sure, it doesn't guess. It asks, and a person decides."},
- {"id":"census","gap":0.8,"text":"The same day, Noor adds Jun's census agent. It already had its own identity, but no place on the map."},
+ {"id":"ahead","gap":0.8,"text":"Where each of those rights comes from is the next film's story."},
+ {"id":"workload","gap":0.8,"text":"The same day, Noor placed Anil Kurian's workload agent. It had its own identity since September, but no place on the map."},
+ {"id":"stages","gap":0.8,"text":"Its stage for each kind of task went on its assignment."},
  {"id":"three","gap":0.8,"text":"Now the map holds three agents, each with a role and an owner."},
  {"id":"third","gap":0.8,"text":"The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them."}]},
 "gate":{"name":"The gate","lead":1.0,"tail":1.0,"vo":[
@@ -54,9 +62,9 @@ const NARR={
  {"id":"result","gap":0.8,"text":"Thirty-seven matched. On three, it said it wasn't sure, and asked. None was confidently wrong."},
  {"id":"matters","gap":0.8,"text":"That last number matters most: an agent that says when it isn't sure can be trusted with work of its own."},
  {"id":"audit","gap":0.8,"text":"Audit is on from its first run: everything it does is recorded under its own name."},
- {"id":"stage","gap":0.8,"text":"So for Planning's tickets, it starts at stage four: it proposes, and people review."},
- {"id":"word","gap":0.8,"text":"For what a word means, it stays at stage one: it only suggests."},
- {"id":"never","gap":0.8,"text":"It never approves its own change, and every change to production is approved by a person other than its author."}]},
+ {"id":"stage","gap":0.8,"text":"So Clara agreed stage four for Planning's tickets: it proposes, and people review."},
+ {"id":"word","gap":0.8,"text":"Noor wrote it on its assignment, on the map, with stage one for what a word means: it only suggests."},
+ {"id":"check","gap":0.8,"text":"From then on, a check fails any agent on the map without an owner, a role, or a stage for each kind of task."}]},
 "stop":{"name":"Who owns it, and who can stop it","lead":1.0,"tail":2.0,"vo":[
  {"id":"written","gap":0.8,"text":"Who may do what with an agent is written down too."},
  {"id":"own","gap":0.8,"text":"Only a person may own an agent, never a team. Clara answers for everything the planning agent does, and only she may sign for it."},
@@ -66,8 +74,8 @@ const NARR={
 "close":{"name":"One structure to join","lead":1.0,"tail":1.0,"vo":[
  {"id":"back","gap":0.8,"text":"In 1970, help couldn't become one team until there was one structure to join.","say":"In nineteen seventy, help couldn't become one team until there was one structure to join."},
  {"id":"since","gap":0.8,"text":"Since then, crews from anywhere check in, take their place, and know who they answer to."},
- {"id":"now","gap":0.8,"text":"The planning agent has done the same: a place on the map, a role, an owner, rights from its role, and people to ask."},
+ {"id":"now","gap":0.8,"text":"The planning agent has done the same: a place in Planning's work, a role, an owner, and a stage for each kind of task."},
  {"id":"so","gap":0.8,"text":"So everyone knows what it may do, who answers for it, and who can stop it."},
  {"id":"lesson","gap":0.8,"text":"Before an agent works alone, it's architected like a colleague."},
- {"id":"next","gap":0.8,"text":"Next: the helpers that still work on a person's sign-in, in the tools, and the protections that hold whoever types."}]}
+ {"id":"next","gap":0.8,"text":"Next: rights that come from the work, and not from a person's."}]}
 };

@@ -99,181 +99,221 @@ Nothing in the agent was broken: it used what it could find, because nobody had 
 Most of the waste with agents starts here, with a plan that doesn't say what the agent may use.
 
 26
-00:02:59,051 --> 00:03:06,286
-Now Clara, in Planning, asks for something new: the census-day count by level of study, for the government's report.
+00:02:59,051 --> 00:03:05,457
+Now Clara, in Planning, asks for the census-day count by level of study, for the government's report.
 
 27
-00:03:07,386 --> 00:03:10,164
+00:03:06,557 --> 00:03:09,335
 Before the agent starts, Jun writes one page.
 
 28
-00:03:11,464 --> 00:03:16,472
+00:03:10,635 --> 00:03:15,643
 The goal: students on census day, by level, undergraduate and postgraduate.
 
 29
-00:03:17,572 --> 00:03:24,928
+00:03:16,743 --> 00:03:24,099
 What to read: the glossary's words for student, census day and level of study, and the census-day count it builds on.
 
 30
-00:03:26,028 --> 00:03:29,654
+00:03:25,199 --> 00:03:28,825
 The tools it may use: Catalog, Query and Docs, read only.
 
 31
-00:03:30,754 --> 00:03:33,882
+00:03:29,925 --> 00:03:33,053
 Where it may write: only its own branch, and its sandbox.
 
 32
-00:03:34,982 --> 00:03:39,842
+00:03:34,153 --> 00:03:39,013
 What it must never do: read names or student IDs, or write to production.
 
 33
-00:03:41,142 --> 00:03:44,132
+00:03:40,313 --> 00:03:43,303
 And a limit: ten rounds, then it stops and reports.
 
 34
-00:03:48,032 --> 00:03:53,543
+00:03:47,203 --> 00:03:52,714
 Then the line that matters most: how the result will be checked, decided now, before any work.
 
 35
-00:03:54,643 --> 00:04:01,504
-Two checks: the levels add up to 18,412, the count already matched to the census report;
+00:03:54,214 --> 00:03:57,581
+But nobody knows the answer yet: that's why Clara asked.
 
 36
-00:04:01,704 --> 00:04:04,268
-and every student has exactly one level.
+00:03:59,481 --> 00:04:02,762
+What Jun knows is what must be true of any right answer:
 
 37
-00:04:05,368 --> 00:04:09,654
-The agent writes them as tests, before any model, and Jun approves them.
+00:04:02,962 --> 00:04:09,189
+the levels add up to 18,412, the count already matched to the census report;
 
 38
-00:04:10,954 --> 00:04:16,389
-From then on, only a person can change them, so the agent can't pass by moving the mark.
+00:04:09,389 --> 00:04:13,574
+and every student has exactly one level, as the glossary defines it.
 
 39
-00:04:17,889 --> 00:04:22,637
-Like Singapore's 190 measures, written before the plant made any water.
+00:04:15,074 --> 00:04:20,780
+Neither says how many students are at any level: they check how the parts relate, and what the words mean.
 
 40
-00:04:26,537 --> 00:04:30,841
-Now the agent works, in its sandbox, with only the tools the plan gave it.
+00:04:23,080 --> 00:04:27,850
+The agent writes the two checks as tests, before any model, and Jun approves them.
 
 41
-00:04:31,741 --> 00:04:37,639
-It reads the three words in Docs, finds the tables in Catalog, and builds the count by level.
+00:04:29,550 --> 00:04:34,985
+From then on, only a person can change them, so the agent can't pass by moving the mark.
 
 42
-00:04:38,939 --> 00:04:44,742
-The first run fails a test: the two levels add up to 18,384.
+00:04:36,885 --> 00:04:44,953
+And what everyone already uses can be wrong, sometimes for years: if the data disagrees, the agent says so, with its evidence.
 
 43
-00:04:46,042 --> 00:04:47,686
-Twenty-eight students are missing.
+00:04:47,153 --> 00:04:53,331
+Where nobody can say what's right, it brings the options, each with its result, for a person to choose.
 
 44
-00:04:48,786 --> 00:04:53,133
-It looks, with Query: on census day, 28 students have no level.
+00:04:55,631 --> 00:05:00,328
+Like Singapore's 190 measures, written before the plant made any water:
 
 45
-00:04:54,033 --> 00:04:57,838
-They're exchange students, taking single units, with no degree here.
+00:05:00,528 --> 00:05:04,226
+none said what the results would be, only what the water had to meet.
 
 46
-00:04:58,938 --> 00:05:01,658
-It doesn't drop them, and it doesn't touch the test.
+00:05:08,726 --> 00:05:13,030
+Now the agent works, in its sandbox, with only the tools the plan gave it.
 
 47
-00:05:03,158 --> 00:05:07,344
-Which level they belong to is a meaning, and meanings are Mei's to decide.
+00:05:13,930 --> 00:05:19,828
+It reads the three words in Docs, finds the tables in Catalog, and builds the count by level.
 
 48
-00:05:08,244 --> 00:05:11,566
-So it stops, and asks her, with its query and the result.
+00:05:21,328 --> 00:05:27,131
+The first run fails a test: the two levels add up to 18,384.
 
 49
-00:05:13,266 --> 00:05:17,730
-Mei checks the government's list: they count as non-award, a level of its own.
+00:05:28,431 --> 00:05:30,075
+Twenty-eight students are missing.
 
 50
-00:05:19,030 --> 00:05:32,742
-The agent adds it, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.
+00:05:31,175 --> 00:05:35,522
+It looks, with Query: on census day, 28 students have no level.
 
 51
-00:05:33,842 --> 00:05:35,101
-Both tests pass.
+00:05:36,422 --> 00:05:40,227
+They're exchange students, taking single units, with no degree here.
 
 52
-00:05:36,801 --> 00:05:42,411
-It writes the model's description from the glossary, with its source, and opens a pull request:
+00:05:41,327 --> 00:05:48,333
+And it isn't new: since 2021, when exchange students moved to a system of their own, none has had a level.
 
 53
-00:05:42,611 --> 00:05:45,871
-what it changed, why, and the evidence for every claim.
+00:05:49,833 --> 00:05:55,092
+So every split by level since then was short, and nothing checked that the levels added up.
 
 54
-00:05:49,971 --> 00:05:54,511
-Now a person checks the work, against the plan, not against the agent's word.
+00:05:56,792 --> 00:05:59,512
+It doesn't drop them, and it doesn't touch the test.
 
 55
-00:05:56,011 --> 00:06:03,599
-Jun reads the pull request: the goal met, only the tools it was given, no names, and both tests untouched, and green.
+00:06:01,212 --> 00:06:05,398
+Which level they belong to is a meaning, and meanings are Mei's to decide.
 
 56
-00:06:05,299 --> 00:06:06,923
-It took four of its ten rounds.
+00:06:06,298 --> 00:06:11,689
+So it stops, and asks her, with its query, the result, and two options that both add up:
 
 57
-00:06:08,623 --> 00:06:13,218
-Now the change is his: if the count is wrong, he answers for it, not the agent.
+00:06:11,889 --> 00:06:15,271
+a level of their own, or the level each one studies at home.
 
 58
-00:06:14,918 --> 00:06:19,884
-To reach production, a second person must approve it: Noor, the data architect.
+00:06:16,971 --> 00:06:21,435
+Mei checks the government's list: they count as non-award, a level of its own.
 
 59
-00:06:21,584 --> 00:06:25,797
-The agent can review, too, but only for reference: it never approves.
+00:06:22,935 --> 00:06:27,850
+And the years before go to Planning, with the agent's evidence, for people to look into.
 
 60
-00:06:27,497 --> 00:06:31,763
-As in Singapore, the work is held to its checks by people who didn't do it.
+00:06:29,550 --> 00:06:43,987
+The agent adds the third level, and runs the tests again: 13,906, 4,478 and 28 add up to 18,412, and every student has one level.
 
 61
-00:06:35,863 --> 00:06:38,194
-And each loop leaves something for the next one.
+00:06:45,087 --> 00:06:46,346
+Both tests pass.
 
 62
-00:06:39,294 --> 00:06:43,446
-A decision, recorded: Mei's rule for exchange students, with her name.
+00:06:48,046 --> 00:06:53,656
+It writes the model's description from the glossary, with its source, and opens a pull request:
 
 63
-00:06:44,746 --> 00:06:49,894
-Metadata: level of study, in the glossary and in the model's description, with its source.
+00:06:53,856 --> 00:06:57,116
+what it changed, why, and the evidence for every claim.
 
 64
-00:06:51,194 --> 00:06:56,879
-A skill, updated: reconcile and diff now checks that every split adds up to its total.
+00:07:01,216 --> 00:07:05,756
+Now a person checks the work, against the plan, not against the agent's word.
 
 65
-00:06:58,179 --> 00:07:01,391
-And the plan itself: the next one starts from this page.
+00:07:07,256 --> 00:07:14,844
+Jun reads the pull request: the goal met, only the tools it was given, no names, and both tests untouched, and green.
 
 66
-00:07:05,491 --> 00:07:11,538
-In Singapore, the measures were set before the first drop, and people from outside held the water to them.
+00:07:16,544 --> 00:07:18,168
+It took four of its ten rounds.
 
 67
-00:07:12,638 --> 00:07:16,994
-So when 60,000 people raised a bottle, they had good reason to trust it.
+00:07:19,868 --> 00:07:24,463
+Now the change is his: if the count is wrong, he answers for it, not the agent.
 
 68
-00:07:18,694 --> 00:07:24,490
-At the university, the checks came before the agent's first step, and a person held its work to them.
+00:07:26,163 --> 00:07:31,129
+To reach production, a second person must approve it: Noor, the data architect.
 
 69
-00:07:25,590 --> 00:07:28,684
-So the count can go to the government, with its evidence.
+00:07:32,829 --> 00:07:37,042
+The agent can review, too, but only for reference: it never approves.
 
 70
-00:07:30,184 --> 00:07:32,745
+00:07:38,742 --> 00:07:43,008
+As in Singapore, the work is held to its checks by people who didn't do it.
+
+71
+00:07:47,108 --> 00:07:49,439
+And each loop leaves something for the next one.
+
+72
+00:07:50,539 --> 00:07:54,691
+A decision, recorded: Mei's rule for exchange students, with her name.
+
+73
+00:07:55,991 --> 00:08:01,139
+Metadata: level of study, in the glossary and in the model's description, with its source.
+
+74
+00:08:02,439 --> 00:08:08,124
+A skill, updated: reconcile and diff now checks that every split adds up to its total.
+
+75
+00:08:09,424 --> 00:08:12,636
+And the plan itself: the next one starts from this page.
+
+76
+00:08:16,736 --> 00:08:22,783
+In Singapore, the measures were set before the first drop, and people from outside held the water to them.
+
+77
+00:08:23,883 --> 00:08:28,239
+So when 60,000 people raised a bottle, they had good reason to trust it.
+
+78
+00:08:29,939 --> 00:08:35,735
+At the university, the checks came before the agent's first step, and a person held its work to them.
+
+79
+00:08:36,835 --> 00:08:39,929
+So the count can go to the government, with its evidence.
+
+80
+00:08:41,429 --> 00:08:43,990
 Decide how you'll check before the agent starts.

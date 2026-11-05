@@ -1,0 +1,44 @@
+{
+  "key": "context-and-memory-governed",
+  "title": "Context and memory, governed",
+  "sub": "The ninth and last film of Agents at work on data, the second series on AI agents in data work: what agents read is data too, so the team keeps its context in its repository, reviewed like code, and its memory where people approve every entry, with an owner, access, review, a time to keep it and a way to delete it.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is structure the agents read (a tool, a file, the team's memory), violet the model, orange the data and its evidence, green what a person approved or a check passed, amber what went wrong. The team's memory is an oak card file on the wall, one card for each lesson.",
+  "src": [
+    "world.js",
+    "memory.js",
+    "repo.js",
+    "close.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "first",
+    "now",
+    1.5
+  ],
+  "say": [
+    [
+      "\\bLucía\\b",
+      "Lu-ceeah"
+    ],
+    [
+      "\\bOrtega\\b",
+      "Or-tega"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "first"
+  ],
+  "urgent": []
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Why Unity Catalog and Unity Gateway govern them",
+    "key": "unity-catalog-and-ai-gateway-en",
+    "dir": "films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/unity-catalog-and-ai-gateway/film.js",
+    "video": "dist/unity-catalog-and-ai-gateway.mp4",
+    "file": "unity-catalog-and-ai-gateway.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/captions/en.srt",
+        "unity-catalog-and-ai-gateway.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/captions/es.srt",
+        "unity-catalog-and-ai-gateway.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/source",
+      ":(exclude)films/agents-at-work-on-data/8-unity-catalog-and-ai-gateway/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 315,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

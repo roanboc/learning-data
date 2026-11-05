@@ -21,12 +21,12 @@ Object.assign(LD,{store,h,esc,md,fill,css,clock,RM,$});
 /* ---------- stages: canvases that draw in logical units, with a wide and a narrow layout ---------- */
 function stageBg(c,w,hh){const g=c.createLinearGradient(0,0,0,hh);g.addColorStop(0,"#0a1022");g.addColorStop(1,"#04070f");c.fillStyle=g;c.fillRect(0,0,w,hh);
   c.strokeStyle="rgba(120,160,230,0.05)";c.lineWidth=1;c.beginPath();for(let x=24;x<w;x+=48){c.moveTo(x+0.5,0);c.lineTo(x+0.5,hh);}for(let y=24;y<hh;y+=48){c.moveTo(0,y+0.5);c.lineTo(w,y+0.5);}c.stroke();}
-const STAGES=new Set();let READY=false;const AWAKE=8,IDLE=2;
+const STAGES=new Set();const AWAKE=8,IDLE=2;
 function Stage(host,o){
   const cv=h("canvas",o.label?{role:"img","aria-label":o.label}:{"aria-hidden":"true"});host.append(cv);
   const s={cv,ctx:cv.getContext("2d"),w:0,h:0,k:1,narrow:false,hits:[],hover:null,vis:false,fps:o.fps||60,last:0,o,until:0};
   s.resize=()=>{const cw=cv.clientWidth;if(!cw)return;s.narrow=!!o.narrow&&cw<(o.bp||560);const d=s.narrow?o.narrow:o.wide;s.w=d[0];s.h=d[1];
-    const pr=Math.min(window.devicePixelRatio||1,o.dpr||2),pw=Math.round(cw*pr),ph=Math.round(pw*s.h/s.w);if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph;}s.k=pw/s.w;if(READY)s.draw(clock());};
+    const pr=Math.min(window.devicePixelRatio||1,o.dpr||2),pw=Math.round(cw*pr),ph=Math.round(pw*s.h/s.w);if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph;}s.k=pw/s.w;s.draw(clock());};
   s.hit=(id,x,y,w,hh)=>{s.hits.push([id,x,y,w,hh]);};
   const at=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)/r.width*s.w,(e.clientY-r.top)/r.height*s.h];};
   const find=e=>{const[x,y]=at(e);for(let i=s.hits.length-1;i>=0;i--){const q=s.hits[i];if(x>=q[1]&&x<=q[1]+q[3]&&y>=q[2]&&y<=q[2]+q[4])return q[0];}return null;};
@@ -41,7 +41,7 @@ function Stage(host,o){
 /* every visible stage used to draw 60 times a second for as long as the page was open, which kept a laptop's processor about
    three-quarters busy with nothing moving (4 November 2026): now a stage draws at its own rate for AWAKE seconds after something
    happens in its lab (or it comes on screen), then IDLE times a second, so the labs' slow pulses and timers stay current at a fraction of the cost */
-function tick(){const now=clock();if(READY)for(const s of STAGES){if(!s.vis||!s.cv.isConnected)continue;const fps=now<s.until?s.fps:Math.min(s.fps,IDLE);
+function tick(){const now=clock();for(const s of STAGES){if(!s.vis||!s.cv.isConnected)continue;const fps=now<s.until?s.fps:Math.min(s.fps,IDLE);
   if(fps<60&&now-s.last<1/fps-0.004)continue;s.last=now;s.draw(now);}requestAnimationFrame(tick);}
 Object.assign(LD,{Stage,stageBg});
 
@@ -138,7 +138,11 @@ LD.shell=(host,s,o)=>{o=o||{};const lab=s.lab;
 
 /* ---------- start ---------- */
 function start(){clipSetup();buildExplore();if(LD.buildQuiz)LD.buildQuiz();}
-FILM.ready.then(()=>{READY=true;STAGES.forEach(s=>s.resize());});
+/* a stage draws as soon as it has a size: what it shows makes itself on first draw, so the labs never wait
+   for the film. The film's own pictures are still made only when the visitor reaches for the player, and
+   its logos and fonts can arrive later than a stage's first paint: wake every stage then, to paint them in. */
+FILM.ready.then(()=>STAGES.forEach(s=>{s.wake();s.resize();}));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>STAGES.forEach(s=>s.wake()));
 requestAnimationFrame(tick);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();

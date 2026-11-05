@@ -193,7 +193,7 @@ scene("cajal",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       bb_tagS(ctx,S,"Barcelona · 1888",ag_in(t,0.9,0.6));}},
     // under the lens: a thicket of fibres; Golgi's idea, one continuous net; the questions it leaves
     {at:tThicket-0.4,place:"bbLens",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){bb_thicket(ctx,1);
-      bb_golgiNet(ctx,ag_in(t,tFused-0.2,2.2),0.9*ag_in(t,tFused-0.3,0.5),[44,30,22]);
+      bb_inLens(ctx,c=>bb_golgiNet(c,ag_in(t,tFused-0.2,2.2),0.9*ag_in(t,tFused-0.3,0.5),[44,30,22]));
       bb_portrait(ctx,90,230,380,440,BB_CAST.golgi88,"Camillo Golgi",t,{a:ag_in(t,tGolgi-0.3,0.4),k:ag_spr(t,tGolgi-0.3,0.5),gaze:[3,1]});
       bb_cardAt(ctx,1420,300,440,{title:"Where does a message start?"},t,tStarts-0.2,null);
       bb_cardAt(ctx,1420,480,440,{title:"How does a brain learn?"},t,tLearns-0.2,null);}},
@@ -205,13 +205,13 @@ scene("cajal",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       bb_pillAt(ctx,1250,200,"What has it broken?",t,tBroken-0.15,null);bb_pillAt(ctx,1250,290,"Will it heal?",t,tHeal-0.15,null);}},
     // Golgi's stain: a few cells turn black, the rest clear; which few, nobody knows
     {at:tStain-0.4,place:"bbLens",keys:[[0,960,480,1.0]],push:0.02,draw(ctx,t){bb_thicket(ctx,1-ag_in(t,tBlack-0.2,1.8));
-      BB_STAINED.forEach((cl,i)=>bb_drawCell(ctx,cl,{ink:true,u:ag_in(t,tBlack+BB_PICK[i],1.0)}));
+      bb_inLens(ctx,c=>BB_STAINED.forEach((cl,i)=>bb_drawCell(c,cl,{ink:true,u:ag_in(t,tBlack+BB_PICK[i],1.0)})));
       bb_cardAt(ctx,1430,380,420,{title:"Nobody knows why, even today"},t,tNobodyK-0.2,null);}},
     // Cajal makes it work reliably, on young birds' brains, where the thicket is thinner
     {at:tYoung-0.4,place:"bbRoom",keys:[[0,980,520,1.08]],push:0.02,draw(ctx,t){bb_room(ctx,t,{nod:0.14});bb_youngCard(ctx,1360,150,t,tBirds);}},
     // each black cell whole, like a tree in winter (the poster)
     {at:tWhole-0.4,place:"bbLens",keys:[[0,960,480,1.0],[tWhole+0.6,960,500,1.06]],d:2.6,push:0.015,draw(ctx,t){bb_thicket(ctx,0.16);
-      bb_drawCell(ctx,BB_TREE,{ink:true,u:ag_in(t,tWhole-0.3,1.5)});}},
+      bb_inLens(ctx,c=>bb_drawCell(c,BB_TREE,{ink:true,u:ag_in(t,tWhole-0.3,1.5)}));}},
     // he draws what he sees: separate cells, never joined; a message goes one way, in through the branches, out along the fibre
     {at:tDrew-0.4,place:"bbSheet",keys:[[0,960,500,1.0]],push:0.02,draw(ctx,t){
       bb_drawing(ctx,ag_in(t,tDrew+0.2,1.6),ag_in(t,tSep,1.6),ag_in(t,tSep+0.8,1.4),1);

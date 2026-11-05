@@ -224,7 +224,10 @@ const BB_STAINED=(()=>{const L=BB_LENS,R=ag_rnd(1888),out=[];const spots=[[-170,
   spots.forEach((p,i)=>out.push(bb_cell(400+i*13,{x:L.x+p[0],y:L.y+p[1],r:13+R()*6,reach:90+R()*60,dirs:5+(i%3),depth:3,wig:0.45,spines:true,axon:{ang:R()*TAU,len:180+R()*140,bend:0.3,ends:3,endLen:40}})));
   return out;})();
 // the one big cell, whole, like a tree in winter (the poster's cell): its body low, its branches rising, its fibre going down
-const BB_TREE=bb_cell(1906,{x:960,y:560,r:26,reach:300,dirs:6,depth:4,wig:0.32,spines:true,axon:{ang:Math.PI*0.5,len:280,bend:0.15,ends:3,endLen:60}});
+// it fits in the lens's field, every branch and its fibre's ends, about 370 px from the field's middle at most: seen whole
+const BB_TREE=bb_cell(1906,{x:960,y:470,r:21,reach:204,dirs:6,depth:4,wig:0.32,spines:true,axon:{ang:Math.PI*0.5,len:240,bend:0.15,ends:3,endLen:41}});
+// what is seen through the lens stays inside its field: a cell that runs past the field's edge is cut off there, as in a microscope
+function bb_inLens(ctx,fn){const L=BB_LENS;ctx.save();ctx.beginPath();ctx.arc(L.x,L.y,L.r,0,TAU);ctx.clip();fn(ctx);ctx.restore();}
 // Golgi's idea: the fibres fused into one net, every crossing joined
 const BB_NET=(()=>{const L=BB_LENS,R=ag_rnd(1873),N=[];for(let i=0;i<26;i++){const a=R()*TAU,d=Math.sqrt(R())*L.r*0.85;N.push([L.x+Math.cos(a)*d,L.y+Math.sin(a)*d]);}
   const E=[];N.forEach((p,i)=>{const d=N.map((q,j)=>[Math.hypot(q[0]-p[0],q[1]-p[1]),j]).filter(x=>x[1]!==i).sort((a,b)=>a[0]-b[0]);for(let k=0;k<3;k++){const j=d[k][1];if(!E.some(e=>e[0]===j&&e[1]===i))E.push([i,j,(R()-0.5)*60]);}});

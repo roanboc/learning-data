@@ -1,0 +1,287 @@
+1
+00:00:01,600 --> 00:00:06,684
+Hoy, en la universidad. El lunes, Lucía Ortega entró al equipo de Planificación.
+
+2
+00:00:07,784 --> 00:00:13,824
+Su agente empieza cada día con la memoria del equipo: lecciones que aprendieron sus agentes, aprobadas por personas.
+
+3
+00:00:15,124 --> 00:00:20,291
+Su primer trabajo, para la biblioteca: ¿cuántos estudiantes hay, para comprar los libros electrónicos del próximo año?
+
+4
+00:00:21,391 --> 00:00:24,585
+El borrador de su agente decía 18,026.
+
+5
+00:00:25,485 --> 00:00:30,922
+Una verificación sencilla lo detuvo: el informe del censo dice 18,412.
+
+6
+00:00:32,422 --> 00:00:36,114
+Los 386 que dejó fuera estudian todos en línea.
+
+7
+00:00:37,214 --> 00:00:44,328
+La biblioteca habría comprado libros electrónicos para 386 estudiantes menos: justo los que no pueden venir por un libro.
+
+8
+00:00:46,228 --> 00:00:52,178
+La evidencia del agente mostró por qué: una línea en la memoria del equipo. Cuenta solo a los estudiantes en el campus.
+
+9
+00:00:53,478 --> 00:00:59,545
+En mayo, se aprobó así: Para las salas de examen, cuenta solo a los estudiantes en el campus. Correcto, para las salas.
+
+10
+00:01:00,645 --> 00:01:06,010
+Desde la semana pasada, había perdido las tres palabras que la hacían correcta, y nadie la había visto cambiar.
+
+11
+00:01:07,710 --> 00:01:12,599
+Y seguía ahí, para preguntas que ningún informe podía verificar. Algo tenía que cambiar.
+
+12
+00:01:14,699 --> 00:01:18,883
+Así que ahora el equipo gobierna su contexto y su memoria como gobierna cualquier dato.
+
+13
+00:01:19,783 --> 00:01:25,601
+Cada uno tiene un dueño. Los agentes pueden leerlos, nunca cambiarlos. Una persona revisa cada cambio.
+
+14
+00:01:26,701 --> 00:01:31,120
+Y cada uno se guarda solo mientras es correcto, y luego se borra de todos los lugares donde se guarda.
+
+15
+00:01:32,420 --> 00:01:37,002
+Al compararla con su fuente, la línea se encontró y se borró, con un registro del porqué.
+
+16
+00:01:38,502 --> 00:01:44,181
+Ahora el agente de Lucía empieza cada día con lo que el equipo sabe, y cada entrada dice quién la aprobó.
+
+17
+00:01:45,281 --> 00:01:49,639
+La biblioteca compra libros electrónicos para los 18,412.
+
+18
+00:01:51,139 --> 00:01:57,609
+Y para los datos: lo que leen los agentes se gobierna como lo que cuentan, así que una lección errónea se encuentra, y no vuelve.
+
+19
+00:02:04,909 --> 00:02:11,753
+Esta serie empezó con lo que lee un agente: cuatro tipos de contexto, código, metadatos, habilidades y herramientas.
+
+20
+00:02:14,053 --> 00:02:19,084
+A esos se suma la memoria: la sesión en la que está, y lo que el equipo guarda de las sesiones.
+
+21
+00:02:20,984 --> 00:02:26,341
+Todo eso da forma a lo que hace el agente, así que todo es dato, y recibe lo que recibe cualquier dato.
+
+22
+00:02:28,241 --> 00:02:29,136
+¿De quién es?
+
+23
+00:02:30,036 --> 00:02:32,022
+¿Quién puede leerlo, y quién puede cambiarlo?
+
+24
+00:02:32,922 --> 00:02:35,289
+¿Quién revisa un cambio antes de que los agentes lo usen?
+
+25
+00:02:36,189 --> 00:02:37,493
+¿Cuánto tiempo se guarda?
+
+26
+00:02:38,393 --> 00:02:41,524
+Y cuando se borra, ¿desaparece de todos los lugares donde se guarda?
+
+27
+00:02:43,624 --> 00:02:50,256
+Una nota en el chat de una persona no responde bien ninguna. El contexto y la memoria del equipo responden las cinco.
+
+28
+00:02:54,556 --> 00:03:02,693
+El contexto del equipo vive en su repositorio: la página para agentes, las habilidades, las descripciones de dbt y los contratos.
+
+29
+00:03:04,193 --> 00:03:08,714
+Cada archivo tiene un dueño, en una lista que el proyecto escribe a partir de sus propios metadatos.
+
+30
+00:03:10,214 --> 00:03:17,165
+Un cambio es un pull request: su dueño lo revisa, y un cambio a producción necesita la aprobación de una segunda persona.
+
+31
+00:03:18,665 --> 00:03:21,742
+Los agentes pueden proponer un cambio. Nunca aprueban uno.
+
+32
+00:03:23,042 --> 00:03:25,837
+Y el historial guarda quién cambió qué, cuándo y por qué.
+
+33
+00:03:27,137 --> 00:03:30,784
+Desde ahí, va en un solo sentido a donde los agentes lo leen, en Databricks.
+
+34
+00:03:32,284 --> 00:03:38,470
+dbt escribe las descripciones en Unity Catalog, como comentarios en cada tabla y columna.
+
+35
+00:03:39,770 --> 00:03:42,647
+Las habilidades van a Unity Gateway, donde están en beta.
+
+36
+00:03:44,147 --> 00:03:50,701
+Cada una es un objeto de Unity Catalog, con un dueño, permisos y un registro de quién la leyó o la cambió.
+
+37
+00:03:51,401 --> 00:03:56,383
+Nadie edita el contexto en la plataforma. Un cambio empieza en el repositorio.
+
+38
+00:03:59,683 --> 00:04:02,560
+La memoria es distinta: la escriben los propios agentes.
+
+39
+00:04:04,060 --> 00:04:11,539
+En Databricks, las sesiones y la memoria duradera, ambas en beta, se guardan en almacenes en Lakebase, la base de datos de la plataforma.
+
+40
+00:04:13,439 --> 00:04:19,856
+Un paso que corre una vez al día lee las sesiones, y guarda lo que parece valer la pena, sin preguntarle a nadie.
+
+41
+00:04:21,756 --> 00:04:28,735
+Así perdió sus palabras la línea del campus: el paso la fusionó con otras líneas sobre contar estudiantes; para eso está hecho.
+
+42
+00:04:31,035 --> 00:04:37,893
+Y un almacén es un solo cuarto: quien puede escribir en él puede cambiar cualquier entrada, y nada registra lo que decía antes.
+
+43
+00:04:40,193 --> 00:04:46,250
+Así que el equipo lo dividió en dos. El paso diario ahora escribe solo propuestas, que ningún agente lee.
+
+44
+00:04:48,350 --> 00:04:54,499
+Cada mañana, un script las lleva al repositorio como un pull request, un archivo por cada entrada.
+
+45
+00:04:56,399 --> 00:05:01,808
+La persona de cuya sesión salió confirma lo que quiso decir, y el dueño de su significado la aprueba.
+
+46
+00:05:03,908 --> 00:05:07,340
+Yusuf, de gobernanza de datos, es el dueño de la memoria en su conjunto.
+
+47
+00:05:09,040 --> 00:05:15,466
+Luego un script carga los archivos aprobados en el almacén del equipo, que todo agente puede leer, y ninguno puede cambiar.
+
+48
+00:05:19,566 --> 00:05:21,890
+Guardar y borrar también son decisiones.
+
+49
+00:05:23,790 --> 00:05:28,068
+El equipo guarda las sesiones treinta días; luego un trabajo programado las borra.
+
+50
+00:05:30,168 --> 00:05:33,472
+Cada entrada tiene una fecha para volver a revisarla, y su dueño lo hace.
+
+51
+00:05:35,372 --> 00:05:40,132
+Una lección no nombra a ningún estudiante, ni guarda nada privado, así que su historial se puede conservar.
+
+52
+00:05:42,032 --> 00:05:48,050
+Borrar tiene trampas. Cuando se encontró la línea del campus, lo primero que se pensó fue borrar el chat del que salió.
+
+53
+00:05:50,150 --> 00:05:55,969
+Eso no borra nada de ella: borrar una sesión, dice la documentación, no borra la memoria que se guardó de ella.
+
+54
+00:05:58,269 --> 00:06:01,981
+Y la sincronización que copia las habilidades a la plataforma nunca borra ninguna.
+
+55
+00:06:04,281 --> 00:06:12,613
+Así, el equipo borra donde se guarda: el archivo, en un pull request que dice por qué, y la entrada del almacén, en la próxima carga.
+
+56
+00:06:14,913 --> 00:06:20,561
+El registro queda: quién la agregó, quién la borró, y por qué. Ningún agente volverá a leer esa línea.
+
+57
+00:06:24,861 --> 00:06:27,072
+En Planificación, Lucía vuelve a preguntar.
+
+58
+00:06:28,372 --> 00:06:37,296
+Su agente responde 18,412, con su evidencia: el conteo del día del censo, y cada entrada que leyó, con quién la aprobó.
+
+59
+00:06:38,796 --> 00:06:43,151
+La biblioteca compra libros electrónicos para cada estudiante, en línea o en el campus.
+
+60
+00:06:44,451 --> 00:06:48,477
+Cada agente, y cada persona que llega, ahora empieza desde lo que el equipo sabe.
+
+61
+00:06:49,777 --> 00:06:54,657
+Ahí empezó esta serie: con lo que lee un agente. Nueve películas, nueve lecciones.
+
+62
+00:06:56,357 --> 00:06:59,542
+Escríbelo una vez, y lo usan tanto las personas como los agentes.
+
+63
+00:07:00,242 --> 00:07:02,535
+Resuélvelo una vez, escríbelo, reutilízalo.
+
+64
+00:07:03,235 --> 00:07:06,693
+Solo lectura por defecto. Escribe solo borradores, en lugar seguro.
+
+65
+00:07:07,393 --> 00:07:10,548
+Deja que el agente aprenda del equipo, no de una sola persona.
+
+66
+00:07:11,248 --> 00:07:13,809
+Decide cómo vas a verificar antes de que el agente empiece.
+
+67
+00:07:14,509 --> 00:07:17,672
+Cómo sale mal: prevé estas fallas, y diseña para ellas.
+
+68
+00:07:18,372 --> 00:07:23,215
+La plataforma da a los agentes los mismos datos y herramientas que usan las personas, en un solo lugar.
+
+69
+00:07:23,915 --> 00:07:29,059
+Unas mismas reglas para personas y agentes, aplicadas donde viven los datos y los modelos.
+
+70
+00:07:29,759 --> 00:07:34,120
+Y el contexto y la memoria del equipo son activos gobernados, no notas privadas.
+
+71
+00:07:35,620 --> 00:07:42,669
+Esta serie es una parte de un camino más largo: de un agente que ayuda a una persona, a uno que trabaja junto al equipo.
+
+72
+00:07:44,169 --> 00:07:46,108
+Después: de ayudante a colega.

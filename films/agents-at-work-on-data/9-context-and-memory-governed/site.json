@@ -1,0 +1,31 @@
+{
+  "kicker": "Context and memory as data",
+  "kicker_es": "Contexto y memoria como datos",
+  "title_es": "Contexto y memoria, gobernados",
+  "h1": "Context and memory, governed like any data",
+  "h1_es": "Contexto y memoria, gobernados como cualquier dato",
+  "lead": "Lucía, new in Planning, asks her agent how many students the library should buy e-books for. It says 18,026, leaving out 386 who study online: a line in the team's memory had lost three words. So the team governs its context and memory like any data, with an owner, a review and a way to delete.",
+  "lead_es": "Lucía, nueva en Planificación, pregunta a su agente para cuántos estudiantes compra libros electrónicos la biblioteca. Dice 18,026 y deja fuera a 386 en línea: una línea de la memoria del equipo perdió tres palabras. El equipo gobierna su contexto y memoria como datos, con dueño, revisión y borrado.",
+  "description": "A film about governing what AI agents read like any data, the last of Agents at work on data: the context an agent reads, its code, metadata, skills and tools, and its memory, the session it's in and what the team keeps from sessions; five questions for each, who owns it, who may read and change it, who reviews a change, how long it's kept, and how it's deleted everywhere it's kept; context kept in the repository and reviewed like code, each file with an owner in CODEOWNERS, each change a pull request its owner reviews, with a second person's approval for production, then published on Databricks where agents read it, as comments in Unity Catalog and as skills in Unity Gateway, in beta; memory kept like data, the platform's daily memory step, in beta, writing only proposals no agent reads, a script bringing them each morning as a pull request, one file for each entry, confirmed by the person whose session it came from and approved by the owner of its meaning, and a script loading the approved files into the team's store, which every agent may read and none may change; sessions kept thirty days, each entry checked again by its owner, and deleted where it's kept, since deleting a session doesn't delete the memory kept from it; and the series' nine lessons. It opens today at the university, where Lucía Ortega, new in Planning, asks her agent how many students the library should buy next year's e-books for, and a line in the team's memory, approved in May for exam rooms, has lost the three words that made it right.",
+  "description_es": "Una película sobre gobernar lo que leen los agentes de IA como cualquier dato, la última de Agentes trabajando con datos: el contexto que lee un agente, su código, sus metadatos, sus habilidades y sus herramientas, y su memoria, la sesión en la que está y lo que el equipo guarda de las sesiones; cinco preguntas para cada uno, quién es su dueño, quién puede leerlo y cambiarlo, quién revisa un cambio, cuánto tiempo se guarda y cómo se borra de todos los lugares donde se guarda; el contexto guardado en el repositorio y revisado como código, cada archivo con un dueño en CODEOWNERS, cada cambio un pull request que revisa su dueño, con la aprobación de una segunda persona para producción, y publicado luego en Databricks donde lo leen los agentes, como comentarios en Unity Catalog y como habilidades en Unity Gateway, en beta; la memoria guardada como datos, el paso diario de memoria de la plataforma, en beta, que escribe solo propuestas que ningún agente lee, un script que las lleva cada mañana como un pull request, un archivo por cada entrada, confirmadas por la persona de cuya sesión salieron y aprobadas por el dueño de su significado, y un script que carga los archivos aprobados en el almacén del equipo, que todo agente puede leer y ninguno puede cambiar; las sesiones guardadas treinta días, cada entrada revisada otra vez por su dueño, y borrada donde se guarda, porque borrar una sesión no borra la memoria que se guardó de ella; y las nueve lecciones de la serie. Empieza hoy en la universidad, donde Lucía Ortega, nueva en Planificación, pregunta a su agente para cuántos estudiantes debe comprar la biblioteca los libros electrónicos del próximo año, y una línea de la memoria del equipo, aprobada en mayo para las salas de examen, perdió las tres palabras que la hacían correcta.",
+  "card": "A line in the team's memory lost three words, and Lucía's agent left out 386 students. Now every entry has an owner and a review.",
+  "card_es": "Una línea de la memoria perdió tres palabras, y el agente de Lucía dejó fuera a 386. Ahora cada entrada tiene dueño y revisión.",
+  "chapters_es": {
+    "first": "El primer trabajo de Lucía",
+    "reads": "Lo que lee un agente",
+    "code": "Contexto, revisado como código",
+    "memory": "Memoria, guardada como datos",
+    "keep": "Se guarda, luego se borra",
+    "close": "Lo que sabe el equipo"
+  },
+  "past": [
+    "Today, at the university: a lesson that lost three words",
+    "What agents read is governed like what they count, so a wrong lesson is found, and stays gone."
+  ],
+  "past_es": [
+    "Hoy, en la universidad: una lección que perdió tres palabras",
+    "Lo que leen los agentes se gobierna como lo que cuentan, así que una lección errónea se encuentra, y no vuelve."
+  ],
+  "next_h": "You've seen the team's context and memory governed like any data, and the series' nine lessons. Next: from helper to colleague, an agent with a role of its own.",
+  "next_h_es": "Viste el contexto y la memoria del equipo gobernados como cualquier dato, y las nueve lecciones de la serie. Después: de ayudante a colega, un agente con un rol propio."
+}

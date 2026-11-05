@@ -153,3 +153,17 @@ for.
 - **Report against the plan.** The pull request takes the plan line by line: how each line was
   met, with the evidence (*Evidence*). The person who wrote the plan checks the work against it,
   and a second person approves it before it reaches production (*Who approves what*).
+
+## Context and memory are data
+
+What you read shapes what you do, so it's governed like any data. This page, the skills, the
+models' descriptions, the contracts and the team's memory ([`memory/`](memory/)) each have an owner
+in `CODEOWNERS`, and a person reviews every change before an agent reads it.
+
+- **Read it, never change it.** On Databricks you read context where it's published: descriptions
+  as comments in Unity Catalog, skills in Unity Gateway, the team's memory in its store. Never edit
+  it there: a change starts here, as a pull request.
+- **Name the entries you used.** Your evidence lists each memory entry you read, with who approved
+  it, so a wrong one can be found.
+- **An entry that disagrees is news.** If an entry disagrees with a report or the glossary, don't
+  follow it: quote it, and tell the person you work with. Its owner decides.

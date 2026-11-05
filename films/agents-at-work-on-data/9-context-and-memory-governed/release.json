@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Context and memory, governed",
+    "key": "context-and-memory-governed-en",
+    "dir": "films/agents-at-work-on-data/9-context-and-memory-governed/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/context-and-memory-governed/film.js",
+    "video": "dist/context-and-memory-governed.mp4",
+    "file": "context-and-memory-governed.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/9-context-and-memory-governed/captions/en.srt",
+        "context-and-memory-governed.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/9-context-and-memory-governed/captions/es.srt",
+        "context-and-memory-governed.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/9-context-and-memory-governed/source",
+      ":(exclude)films/agents-at-work-on-data/9-context-and-memory-governed/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 408,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

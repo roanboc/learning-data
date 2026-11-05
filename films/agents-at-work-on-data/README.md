@@ -19,6 +19,7 @@ Jun Park's agent now works on the census-day count, the number the university re
 | [How it goes wrong](https://data.learn-all.org/agents-at-work-on-data/how-it-goes-wrong/) | Designing for failure | 7½ min | 8 | 3 questions | [script](6-how-it-goes-wrong/script.md) · [source](6-how-it-goes-wrong/source/README.md) |
 | [Working with agents on Databricks](https://data.learn-all.org/agents-at-work-on-data/agents-on-databricks/) | Agents on the platform | 7½ min | 7 | 3 questions | [script](7-agents-on-databricks/script.md) · [source](7-agents-on-databricks/source/README.md) |
 | [Why Unity Catalog and Unity Gateway govern them](https://data.learn-all.org/agents-at-work-on-data/unity-catalog-and-ai-gateway/) | Agents under the same rules | 8 min | 8 | 3 questions | [script](8-unity-catalog-and-ai-gateway/script.md) · [source](8-unity-catalog-and-ai-gateway/source/README.md) |
+| [Context and memory, governed](https://data.learn-all.org/agents-at-work-on-data/context-and-memory-governed/) | Context and memory as data | 8 min | 6 | 3 questions | [script](9-context-and-memory-governed/script.md) · [source](9-context-and-memory-governed/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

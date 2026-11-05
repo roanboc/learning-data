@@ -85,10 +85,10 @@ scene("night",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({claim:wAt(sc
     sent:wAt(sc,"type","where it sent"),still:wAt(sc,"contract","still says"),three:wAt(sc,"fails","three minutes past ten"),fail:wAt(sc,"fails","the job fails"),read:wAt(sc,"fails","can't read"),
     nothing:wAt(sc,"waits","Nothing wrong"),stops:wAt(sc,"waits","the job stops"),noon:wAt(sc,"noon","by noon on Tuesday"),pay:wAt(sc,"noon","eight hundred and fifty-six")}));
   ag_shots(ctx,S,t,sc.dur,[
-    // casual staff claim the hours they teach in an app: Linh, a casual tutor, and her claim
+    // casual staff claim the hours they teach in an app: Linh, a casual tutor, and her claim (the example project's CL-104262)
     {at:0,place:"night",keys:[[0,960,540,1.0]],push:0.025,draw:(x,tt)=>{pw_who(x,"linh",420,660,ag_in(tt,0.2,0.6),tt,{col:[214,224,240]});
       md_window(x,800,170,980,560,{product:"Claims app",title:"A claim",edge:MD.sys.hr,a:ag_in(tt,P.claim-0.3,0.5),k:pw_k(tt,P.claim-0.3),draw:(cx,B)=>{
-        pw_fields(cx,B.x+24,B.y+30,B.w-48,[["Unit","HI101"],["Duty","tutorial"],["Day","Monday 2 November"],["Hours","1.50","mono"]],{rowA:i=>ag_in(tt,P.claim+0.2+i*0.35,0.3)});}});}},
+        pw_fields(cx,B.x+24,B.y+30,B.w-48,[["Unit","HI101"],["Duty","consultation"],["Day","Thursday 29 October"],["Hours","1.50","mono"]],{rowA:i=>ag_in(tt,P.claim+0.2+i*0.35,0.3)});}});}},
     // the map, one shot whose camera glides: the claims job, at ten on the Monday before pay day, builds the hours to pay and sends
     // them to the payroll system; on the app's new version, at 15:02, the camera glides to the app, its hours in the new form, and its
     // contract, unchanged; at 22:03 it glides back as the job fails, nothing wrong reaches payroll, and payroll needs the hours by noon
@@ -142,7 +142,7 @@ scene("approve",(ctx,S,t,sc)=>{const c=sc.cues,P=pw_once(sc,"P",()=>({cause:wAt(
       pw_who(x,"sam",330,660,ag_in(tt,0.2,0.6),tt,{col:MD.flow});
       if(a1>0)withA(x,a1,()=>{md_card(x,620,140,1220,130,{edge:MD.wait,glow:0.8});x.fillStyle=rgba(MD.wait,1);x.beginPath();x.arc(664,190,9,0,TAU);x.fill();
         md_T(x,"The claims job failed at 22:03",696,200,{w:800,size:32});md_T(x,"cause: the hours' new form · fix proposed",696,246,{w:600,size:28,col:MD.soft});
-        md_rows(x,640,310,[{h:"Claim",w:300,f:"mono"},{h:"Hours",w:220,f:"mono"}],[["CL-104188","1.50"],["CL-104189","2.00"],["CL-104201",{s:"1:30",f:"mono",col:mix(MD.fail,MD.ink,0.3)}]],
+        md_rows(x,640,310,[{h:"Claim",w:300,f:"mono"},{h:"Hours",w:220,f:"mono"}],[["CL-104190","3.50"],["CL-104262","1.50"],["CL-104287",{s:"1:30",f:"mono",col:mix(MD.fail,MD.ink,0.3)}]],
           {rh:58,lit:tt>P.cause+0.6?2:[],litCol:MD.fail,rowA:(r,i)=>ag_in(tt,P.cause+i*0.2,0.3)});
         pw_confirm(x,1180,320,660,{press:ag_in(tt,P.conf,0.25),k:pw_k(tt,P.push),a:ag_in(tt,P.push,0.35)});
         pw_branch(x,1200,640,620,{u:clamp((tt-P.conf-0.3)/1.2,0,1),a:ag_in(tt,P.conf,0.4)});});

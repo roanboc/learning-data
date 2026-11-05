@@ -11,6 +11,7 @@ Running a data platform, kept light because it's no longer new. Payroll's export
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A platform that watches itself](https://data.learn-all.org/data-as-software/a-platform-that-watches-itself/) | Running the platform | 6 min | 6 | 3 questions | [script](2-a-platform-that-watches-itself/script.md) · [source](2-a-platform-that-watches-itself/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

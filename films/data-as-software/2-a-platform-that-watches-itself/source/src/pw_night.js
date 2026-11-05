@@ -90,9 +90,13 @@ function pw_field(ctx,x,y,w,h,o){o=o||{};const hu=clamp(o.hu||0,0,1),edge=o.good
    step whose detail shows on the right (with o.vu 0 to 1 coming in), o.trace (0 to 1, the lineage lit from the failure back to the
    source), o.cause (the cause's tag), o.hits [three alphas], o.fix (0 to 1), o.lock (0 to 1) */
 const PW_STEPS=[["Detected","the claims job failed"],["Root cause","traced through lineage"],["Impact","what it touches"],["Proposed fix","for a person to review"]];
-function pw_zero(ctx,x,y,w,h,o){o=o||{};const title=o.mode==="watch"?"What it watches":o.mode==="inbox"?"Inbox":"Insight",ma=o.ma==null?1:o.ma;
-  return md_window(ctx,x,y,w,h,{logo:"databricks",product:"Genie ZeroOps",edge:o.mode==="inbox"?mix(MD.flow,MD.wait,ma):MD.flow,a:o.a,k:o.k,lit:o.lit,draw:(c,B)=>{if(ma<=0.004)return;c.save();c.globalAlpha*=ma;
-    md_T(c,title,x+w-24,y+44,{w:600,size:28,align:"right",col:MD.soft});pw_zeroBody(c,B,o);c.restore();}});}
+function pw_zero(ctx,x,y,w,h,o){o=o||{};const title=o.mode==="inbox"?"Inbox":o.mode==="insight"?"Insight":"",ma=o.ma==null?1:o.ma,a=o.a==null?1:o.a;
+  const B=md_window(ctx,x,y,w,h,{logo:"databricks",product:"Genie ZeroOps",edge:o.mode==="inbox"?mix(MD.flow,MD.wait,ma):MD.flow,a,k:o.k,lit:o.lit,draw:(c,B)=>{if(ma<=0.004)return;c.save();c.globalAlpha*=ma;
+    pw_zeroBody(c,B,o);c.restore();}});
+  // the page's name, on the window's bar at the right (the window clips what it draws to its body): it fades with the page, as
+  // the page turns to its insight and then its inbox, and springs in with the window; what it watches says so in its table
+  if(title&&a*ma>0.004){ctx.save();ctx.globalAlpha*=a*ma;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));md_T(ctx,title,x+w-24,y+44,{w:600,size:28,align:"right",col:MD.soft});ctx.restore();}
+  return B;}
 function pw_zeroBody(c,B,o){{
     if(o.mode==="watch"){md_rows(c,B.x+20,B.y+10,[{h:"It watches",w:560},{h:"",w:B.w-620}],[[{s:"the pay run's jobs",icon:"eye",col:MD.flow},"claims job, payroll's export"],[{s:"the pay run's tables",icon:"eye",col:MD.flow},"the claims, and what's built from them"]],{rh:70,rowA:(r,i)=>clamp((o.rows||1)*2-i,0,1)});
       if(o.night>0)withA(c,o.night,()=>md_tag(c,B.x+20,B.y+B.h-56,"in the background, overnight",{icon:"clock",col:MD.flow}));return;}

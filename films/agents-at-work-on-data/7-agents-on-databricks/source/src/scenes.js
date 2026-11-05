@@ -190,7 +190,7 @@ scene("tools",(ctx,S,t,sc)=>{
     tAnil:wAt(sc,"anil","Anil's agent"),tConn:wAt(sc,"anil","connects"),tSign:wAt(sc,"anil","sign-in"),tOnly:wAt(sc,"anil","only what"),
     tOnce:wAt(sc,"once","census count"),tAny:wAt(sc,"once","any faculty"),
     tCalls:wAt(sc,"calls","Every agent"),tNone:wAt(sc,"calls","none writes"),
-    tMcp:wAt(sc,"mcp","open standard"),tPlug:wAt(sc,"mcp","plug in"),tGa:wAt(sc,"ga","generally available"),tPrev:wAt(sc,"ga","in preview")};
+    tMcp:wAt(sc,"mcp","open standard"),tPlug:wAt(sc,"mcp","plug in")};
   const cue=[T.tQ1,T.tQ2,T.tQ3,T.tG,T.tGA],next=[T.tQ2,T.tQ3,T.tG-0.3,T.tGA,T.tAsk+0.6];
   const row=[[170,740],[390,740],[610,740],[830,740]],who=["Anil's agent","Genie","census check","Jun's agent"],AX=420,AY=470,AR=64;
   const tb=i=>{const b=od_toolBox(i);return[b.x-14,b.y+b.h/2];};
@@ -207,9 +207,9 @@ scene("tools",(ctx,S,t,sc)=>{
       // the agent's hand: first toward the tools, the hands any agent can use; then, signed in as Anil, to each in turn
       const r1=ag_in(tt,T.tHands-0.1,0.6)*(1-ag_in(tt,T.tRuns+0.6,0.6)),r2=ag_in(tt,T.tConn-0.2,0.7)*(1-ag_in(tt,T.tOnce-1.0,0.5));
       const seg=clamp((tt-T.tConn-0.5)/0.55,0,4),si=Math.min(3,Math.floor(seg)),sf=ag_sine(seg-si),tp=r2>r1?[lerp(tb(si)[0],tb(si+1)[0],sf),lerp(tb(si)[1],tb(si+1)[1],sf)]:tb(2);
-      OD_TOOLS.forEach((d,i)=>{const b=od_toolBox(i),k=(tt-(T.tServers+0.2+i*0.15))/0.6,touch=r2>0.6?clamp(1-Math.abs(seg-i)*1.6,0,1):0,ga=i===3?T.tGa:T.tPrev+0.12*(i>3?i-1:i);
+      OD_TOOLS.forEach((d,i)=>{const b=od_toolBox(i),k=(tt-(T.tServers+0.2+i*0.15))/0.6,touch=r2>0.6?clamp(1-Math.abs(seg-i)*1.6,0,1):0;
         const named=od_lit(tt,cue[i]-0.1,next[i]),called=i===1?0.8*clamp(calls*2,0,1)*(1-ag_in(tt,T.tMcp,0.6)):0,held=i===2?r1*0.7:0;
-        od_tool(c,b,d[0],d[1],{k:clamp(k,0,1),a:ag_in(k,0,0.3),touch:Math.max(touch,named,called,held),plug:ag_in(tt,T.tMcp+0.2+i*0.12,0.4),badge:[i===3?"generally available":"preview",(tt-ga+0.1)/0.45]});});
+        od_tool(c,b,d[0],d[1],{k:clamp(k,0,1),a:ag_in(k,0,0.3),touch:Math.max(touch,named,called,held),plug:ag_in(tt,T.tMcp+0.2+i*0.12,0.4)});});
       const u=Math.max(r1,r2);if(u>0)ag_reach(c,[ax+ar*0.9,ay,ax+360,ay-50,tp[0]-300,tp[1]+30,tp[0],tp[1]],u,{data:r2>0.95?clamp((tt-T.tConn-0.6)%0.55/0.55,0,1):0});
       if(an>0&&mv<1){c.save();c.globalAlpha*=an*(1-mv);const na=ag_in(tt,T.tAnil-0.2,0.4);if(na>0)ag_T(c,"Anil's agent",ax,ay+ar+48,{w:700,size:28,align:"center",col:AG.label,a:na});
         if(tt>T.tSign-0.2)ag_pill(c,ax,ay+ar+112,"signed in as Anil",{icon:"lock",col:AG.blue,a:ag_in(tt,T.tSign-0.2,0.4)});c.restore();

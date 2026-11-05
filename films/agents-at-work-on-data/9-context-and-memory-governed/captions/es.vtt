@@ -102,116 +102,116 @@ Desde ahí, va en un solo sentido a donde los agentes lo leen, en Databricks.
 00:03:32.284 --> 00:03:38.470
 dbt escribe las descripciones en Unity Catalog, como comentarios en cada tabla y columna.
 
-00:03:39.770 --> 00:03:42.647
-Las habilidades van a Unity Gateway, donde están en beta.
+00:03:39.770 --> 00:03:41.535
+Las habilidades van a Unity Gateway.
 
-00:03:44.147 --> 00:03:50.701
+00:03:43.035 --> 00:03:49.589
 Cada una es un objeto de Unity Catalog, con un dueño, permisos y un registro de quién la leyó o la cambió.
 
-00:03:51.401 --> 00:03:56.383
+00:03:50.289 --> 00:03:55.271
 Nadie edita el contexto en la plataforma. Un cambio empieza en el repositorio.
 
-00:03:59.683 --> 00:04:02.560
+00:03:58.571 --> 00:04:01.448
 La memoria es distinta: la escriben los propios agentes.
 
-00:04:04.060 --> 00:04:11.539
-En Databricks, las sesiones y la memoria duradera, ambas en beta, se guardan en almacenes en Lakebase, la base de datos de la plataforma.
+00:04:02.948 --> 00:04:09.201
+En Databricks, las sesiones y la memoria duradera se guardan en almacenes en Lakebase, la base de datos de la plataforma.
 
-00:04:13.439 --> 00:04:19.856
+00:04:11.101 --> 00:04:17.518
 Un paso que corre una vez al día lee las sesiones, y guarda lo que parece valer la pena, sin preguntarle a nadie.
 
-00:04:21.756 --> 00:04:28.735
+00:04:19.418 --> 00:04:26.397
 Así perdió sus palabras la línea del campus: el paso la fusionó con otras líneas sobre contar estudiantes; para eso está hecho.
 
-00:04:31.035 --> 00:04:37.893
+00:04:28.697 --> 00:04:35.555
 Y un almacén es un solo cuarto: quien puede escribir en él puede cambiar cualquier entrada, y nada registra lo que decía antes.
 
-00:04:40.193 --> 00:04:46.250
+00:04:37.855 --> 00:04:43.912
 Así que el equipo lo dividió en dos. El paso diario ahora escribe solo propuestas, que ningún agente lee.
 
-00:04:48.350 --> 00:04:54.499
+00:04:46.012 --> 00:04:52.161
 Cada mañana, un script las lleva al repositorio como un pull request, un archivo por cada entrada.
 
-00:04:56.399 --> 00:05:01.808
+00:04:54.061 --> 00:04:59.470
 La persona de cuya sesión salió confirma lo que quiso decir, y el dueño de su significado la aprueba.
 
-00:05:03.908 --> 00:05:07.340
+00:05:01.570 --> 00:05:05.002
 Yusuf, de gobernanza de datos, es el dueño de la memoria en su conjunto.
 
-00:05:09.040 --> 00:05:15.466
+00:05:06.702 --> 00:05:13.128
 Luego un script carga los archivos aprobados en el almacén del equipo, que todo agente puede leer, y ninguno puede cambiar.
 
-00:05:19.566 --> 00:05:21.890
+00:05:17.228 --> 00:05:19.552
 Guardar y borrar también son decisiones.
 
-00:05:23.790 --> 00:05:28.068
+00:05:21.452 --> 00:05:25.730
 El equipo guarda las sesiones treinta días; luego un trabajo programado las borra.
 
-00:05:30.168 --> 00:05:33.472
+00:05:27.830 --> 00:05:31.134
 Cada entrada tiene una fecha para volver a revisarla, y su dueño lo hace.
 
-00:05:35.372 --> 00:05:40.132
+00:05:33.034 --> 00:05:37.794
 Una lección no nombra a ningún estudiante, ni guarda nada privado, así que su historial se puede conservar.
 
-00:05:42.032 --> 00:05:48.050
+00:05:39.694 --> 00:05:45.712
 Borrar tiene trampas. Cuando se encontró la línea del campus, lo primero que se pensó fue borrar el chat del que salió.
 
-00:05:50.150 --> 00:05:55.969
+00:05:47.812 --> 00:05:53.631
 Eso no borra nada de ella: borrar una sesión, dice la documentación, no borra la memoria que se guardó de ella.
 
-00:05:58.269 --> 00:06:01.981
+00:05:55.931 --> 00:05:59.643
 Y la sincronización que copia las habilidades a la plataforma nunca borra ninguna.
 
-00:06:04.281 --> 00:06:12.613
+00:06:01.943 --> 00:06:10.275
 Así, el equipo borra donde se guarda: el archivo, en un pull request que dice por qué, y la entrada del almacén, en la próxima carga.
 
-00:06:14.913 --> 00:06:20.561
+00:06:12.575 --> 00:06:18.223
 El registro queda: quién la agregó, quién la borró, y por qué. Ningún agente volverá a leer esa línea.
 
-00:06:24.861 --> 00:06:27.072
+00:06:22.523 --> 00:06:24.734
 En Planificación, Lucía vuelve a preguntar.
 
-00:06:28.372 --> 00:06:37.296
+00:06:26.034 --> 00:06:34.958
 Su agente responde 18,412, con su evidencia: el conteo del día del censo, y cada entrada que leyó, con quién la aprobó.
 
-00:06:38.796 --> 00:06:43.151
+00:06:36.458 --> 00:06:40.813
 La biblioteca compra libros electrónicos para cada estudiante, en línea o en el campus.
 
-00:06:44.451 --> 00:06:48.477
+00:06:42.113 --> 00:06:46.139
 Cada agente, y cada persona que llega, ahora empieza desde lo que el equipo sabe.
 
-00:06:49.777 --> 00:06:54.657
+00:06:47.439 --> 00:06:52.319
 Ahí empezó esta serie: con lo que lee un agente. Nueve películas, nueve lecciones.
 
-00:06:56.357 --> 00:06:59.542
+00:06:54.019 --> 00:06:57.204
 Escríbelo una vez, y lo usan tanto las personas como los agentes.
 
-00:07:00.242 --> 00:07:02.535
+00:06:57.904 --> 00:07:00.197
 Resuélvelo una vez, escríbelo, reutilízalo.
 
-00:07:03.235 --> 00:07:06.693
+00:07:00.897 --> 00:07:04.355
 Solo lectura por defecto. Escribe solo borradores, en lugar seguro.
 
-00:07:07.393 --> 00:07:10.548
+00:07:05.055 --> 00:07:08.210
 Deja que el agente aprenda del equipo, no de una sola persona.
 
-00:07:11.248 --> 00:07:13.809
+00:07:08.910 --> 00:07:11.471
 Decide cómo vas a verificar antes de que el agente empiece.
 
-00:07:14.509 --> 00:07:17.672
+00:07:12.171 --> 00:07:15.334
 Cómo sale mal: prevé estas fallas, y diseña para ellas.
 
-00:07:18.372 --> 00:07:23.215
+00:07:16.034 --> 00:07:20.877
 La plataforma da a los agentes los mismos datos y herramientas que usan las personas, en un solo lugar.
 
-00:07:23.915 --> 00:07:29.059
+00:07:21.577 --> 00:07:26.721
 Unas mismas reglas para personas y agentes, aplicadas donde viven los datos y los modelos.
 
-00:07:29.759 --> 00:07:34.120
+00:07:27.421 --> 00:07:31.782
 Y el contexto y la memoria del equipo son activos gobernados, no notas privadas.
 
-00:07:35.620 --> 00:07:42.669
+00:07:33.282 --> 00:07:40.331
 Esta serie es una parte de un camino más largo: de un agente que ayuda a una persona, a uno que trabaja junto al equipo.
 
-00:07:44.169 --> 00:07:46.108
+00:07:41.831 --> 00:07:43.770
 Después: de ayudante a colega.

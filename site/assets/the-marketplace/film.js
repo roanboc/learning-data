@@ -446,7 +446,7 @@ const NARR={
  {"id":"form","gap":0.8,"text":"The form wants two things: why, and for how long."},
  {"id":"writes","gap":0.8,"text":"He writes: to plan next semester's places in the certificate's last unit."},
  {"id":"ninety","gap":0.8,"text":"And he asks for ninety days."},
- {"id":"platform","gap":0.8,"text":"Had he started on the platform, its request button, in preview, would have brought him here too."},
+ {"id":"platform","gap":0.8,"text":"Had he started on the platform, its request button would have brought him here too."},
  {"id":"one","gap":0.8,"text":"Every request comes to one place."}]},
 "owner":{"name":"The owner decides","lead":0.8,"tail":0.8,"vo":[
  {"id":"clara","gap":0.8,"text":"The request goes to Clara, the product's owner, not to whoever built the table."},
@@ -482,7 +482,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"Finding and getting data is part of governance."}]}
 };
 
-const VODUR={"asking/today": 4.549, "asking/cert": 5.344, "asking/count": 4.714, "asking/sept": 4.783, "asking/around": 2.923, "asking/one": 2.251, "asking/two": 6.399, "asking/offered": 5.266, "asking/inbox": 8.118, "asking/change": 1.288, "asking/now": 7.003, "asking/find": 5.247, "asking/morning": 3.786, "asking/yes": 4.467, "asking/agrees": 2.719, "asking/second": 3.768, "asking/deleted": 1.659, "window/ontos": 4.693, "window/shows": 4.838, "window/sold": 3.435, "window/types": 2.968, "window/finds": 5.857, "read/before": 4.504, "read/for": 3.059, "read/counts": 3.872, "read/ready": 1.645, "read/contract": 2.109, "read/two": 3.199, "read/purpose": 2.517, "ask/asks": 1.916, "ask/form": 3.004, "ask/writes": 4.125, "ask/ninety": 1.551, "ask/platform": 4.883, "ask/one": 1.834, "owner/clara": 4.426, "owner/five": 3.365, "owner/afternoon": 1.583, "owner/reason": 6.399, "owner/fewer": 3.145, "owner/record": 4.791, "key/group": 2.723, "key/readers": 6.52, "key/once": 4.322, "key/week": 2.711, "key/date": 4.037, "key/every": 3.057, "reader/adds": 5.717, "reader/next": 7.464, "reader/both": 1.97, "reader/known": 2.398, "outside/same": 2.75, "outside/partner": 6.324, "outside/holds": 4.462, "outside/share": 8.17, "outside/reads": 6.154, "outside/exchange": 7.628, "close/morning": 4.264, "close/offers": 5.754, "close/gone": 5.38, "close/seen": 3.413, "close/last": 2.71};
+const VODUR={"asking/today": 4.549, "asking/cert": 5.344, "asking/count": 4.711, "asking/sept": 4.783, "asking/around": 2.923, "asking/one": 2.251, "asking/two": 6.399, "asking/offered": 5.266, "asking/inbox": 8.118, "asking/change": 1.288, "asking/now": 7.003, "asking/find": 5.247, "asking/morning": 3.786, "asking/yes": 4.467, "asking/agrees": 2.719, "asking/second": 3.768, "asking/deleted": 1.663, "window/ontos": 4.693, "window/shows": 4.838, "window/sold": 3.435, "window/types": 2.968, "window/finds": 5.857, "read/before": 4.504, "read/for": 3.059, "read/counts": 3.872, "read/ready": 1.645, "read/contract": 2.109, "read/two": 3.199, "read/purpose": 2.517, "ask/asks": 1.916, "ask/form": 3.004, "ask/writes": 4.125, "ask/ninety": 1.551, "ask/platform": 3.932, "ask/one": 1.834, "owner/clara": 4.426, "owner/five": 3.365, "owner/afternoon": 1.583, "owner/reason": 6.398, "owner/fewer": 3.145, "owner/record": 4.791, "key/group": 2.722, "key/readers": 6.52, "key/once": 4.322, "key/week": 2.711, "key/date": 4.036, "key/every": 3.057, "reader/adds": 5.717, "reader/next": 7.464, "reader/both": 1.97, "reader/known": 2.398, "outside/same": 2.75, "outside/partner": 6.324, "outside/holds": 4.462, "outside/share": 8.17, "outside/reads": 6.154, "outside/exchange": 7.628, "close/morning": 4.264, "close/offers": 5.754, "close/gone": 5.38, "close/seen": 3.413, "close/last": 2.71};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -3240,15 +3240,14 @@ function gk_form(ctx,t,o){o=o||{};const op=clamp(o.open==null?1:o.open,0,1);gk_d
     const dy=clamp(o.days||0,0,1);["30","60","90"].forEach((s,i)=>{const bx=x+48+i*180,on=i===2?dy:0;if(on>0.01)gv_halo(ctx,bx-10,y+404,170,76,GU_CYAN,0.8*on);
       wc_panel(ctx,bx,y+412,150,60,{kind:"pill",wash:on>0.5?GU_CYAN:null,washA:0.4,seed:965+i});wc_T(ctx,s,bx+75,y+454,{w:800,size:32,col:WC_DARK,align:"center"});});
     gk_button(ctx,x+w-260,y+h-70,"Submit",{press:clamp(o.sub||0,0,1),size:30});},24);}
-// every request comes to one place: the platform's page for the table, small, its own Request access button, in preview, sending its
-// people to the catalogue's form (o.plat; o.press, o.pv: in preview; o.redir); the catalogue's form; both arrive in one tray, and Anil's request drops in (o.tray)
+// every request comes to one place: the platform's page for the table, small, its own Request access button, sending its
+// people to the catalogue's form (o.plat; o.press; o.redir); the catalogue's form; both arrive in one tray, and Anil's request drops in (o.tray)
 function gk_onePlace(ctx,t,o){o=o||{};const pl=clamp(o.plat||0,0,1),rd=clamp(o.redir||0,0,1),tr=clamp(o.tray||0,0,1);
   gk_rise(ctx,clamp(o.cat==null?1:o.cat,0,1),()=>gk_win(ctx,1060,90,780,380,GK_ONTOS,q=>{wc_T(q,"Request access",1100,196,{w:800,size:34,col:WC_DARK});
     wc_T(q,"Learners near an award",1100,246,{w:600,size:28,col:WC_MUTED});wc_T(q,"Why do you need access?",1100,314,{w:700,size:28,col:WC_INK});
     wc_T(q,"Requested duration (days, …)",1100,368,{w:700,size:28,col:WC_INK});},GK_CAT),14);
   if(pl>0.01)gk_rise(ctx,pl,()=>gk_win(ctx,80,150,780,320,"Databricks · Unity Catalog",q=>{wc_T(q,"mart_planning__near_award",120,256,{w:500,size:28,f:"mono",col:WC_DARK});
-    wc_T(q,"university · prod_marts · table",120,302,{w:600,size:28,col:WC_MUTED});const bw=gk_button(q,120,396,"Request access",{press:clamp(o.press||0,0,1)});
-    wc_tag(q,120+bw+20,396,"preview",{size:28,wash:o.pv>0.5?GV.gold:GV.grey,washA:0.3+0.2*clamp(o.pv||0,0,1),seed:971});}),14);
+    wc_T(q,"university · prod_marts · table",120,302,{w:600,size:28,col:WC_MUTED});gk_button(q,120,396,"Request access",{press:clamp(o.press||0,0,1)});}),14);
   if(rd>0.01){gk_arrow(ctx,[560,396],[1050,286],-70,clamp(rd*1.4,0,1),{col:GU_CYAN,lw:5});wc_hand(ctx,"redirect",958,226,{size:38,w:700,col:GU_CYAN,align:"center",p:clamp(rd*1.6-0.6,0,1)});}
   if(tr<=0.01)return;const tx=1210,ty=640,tw2=480;gk_rise(ctx,clamp(tr*2,0,1),()=>{wc_part(ctx,[[tx,ty],[tx+tw2,ty],[tx+tw2-26,ty+120],[tx+26,ty+120]],[176,150,120],1,{seed:972});
     wc_flat(ctx,wc_rect(tx+40,ty+10,tw2-80,14),[236,226,206],1,"tray");wc_T(ctx,"Requests",tx+tw2/2,ty+84,{w:800,size:34,col:[255,255,255],align:"center"});},14);
@@ -3566,17 +3565,17 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({fr:wAt(sc,"be
     {at:P.ct,place:"facBig",keys:[[P.ct,960,540,1]],push:0.02,draw:(x,tt)=>gk_contractTab(x,tt,{two:fin(tt,P.tw,0.8),card:fin(tt,P.pp,0.8)})}],sc.dur,1));});
 
 // ---- 4 · Ask, with a purpose: Request access on the product's page; the form's two questions; his reason; ninety days; on the
-// platform, its button in preview sends him to the same form; every request in one place ----
+// platform, its button sends him to the same form; every request in one place ----
 scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({as:c.asks,why:wAt(sc,"form","why"),hl:wAt(sc,"form","for how long"),wr:wAt(sc,"writes","to plan"),
-    nd:wAt(sc,"ninety","ninety days"),pl:c.platform-0.3,btn:wAt(sc,"platform","its request button"),pv:wAt(sc,"platform","in preview"),
+    nd:wAt(sc,"ninety","ninety days"),pl:c.platform-0.3,btn:wAt(sc,"platform","its request button"),
     here:wAt(sc,"platform","brought him here"),one:c.one}));
   gv_shots(ctx,S,t,sc.dur,gk_run([
     // he asks, on the product's page: the form, why and for how long; his reason typed; ninety days; Submit
     {at:0,place:"facBig",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_form(x,tt,{press:clamp((tt-P.as-0.3)/0.8,0,1),open:fin(tt,P.as+1.1,0.6),
       lit:[gv_io(tt,P.why,P.wr-0.2,0.4),gv_io(tt,P.hl,P.wr-0.2,0.4)],why:clamp((tt-P.wr)/3.4,0,1),days:fin(tt,P.nd,0.5),sub:clamp((tt-P.nd-0.9)/0.8,0,1)})},
-    // the platform's own button, in preview, sends people to the catalogue's form; every request comes to one place
+    // the platform's own button sends people to the catalogue's form; every request comes to one place
     {cut:true,at:P.pl,place:"desk",keys:[[P.pl,960,540,1]],push:0.02,draw:(x,tt)=>gk_onePlace(x,tt,{plat:fin(tt,P.pl+0.4,0.6),press:clamp((tt-P.btn)/0.8,0,1),
-      pv:fin(tt,P.pv,0.6),redir:clamp((tt-P.here)/1.2,0,1),tray:clamp((tt-P.one)/1.6,0,1)})}],sc.dur));});
+      redir:clamp((tt-P.here)/1.2,0,1),tray:clamp((tt-P.one)/1.6,0,1)})}],sc.dur));});
 
 // ---- 5 · The owner decides: the request comes to Clara, not to whoever built the table; governance's promise, five working days;
 // her answer by the afternoon; his reason is the product's purpose, so yes, ninety days, until the 31st of January; or fewer, or no,

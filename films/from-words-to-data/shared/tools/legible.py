@@ -6,8 +6,11 @@ visible (its opacity, with its colour's, over 0.5). It measures what the canvas 
 only what goes through T. It lists, per chapter, the text drawn smaller than --min (allowing 5% for things still settling as
 they arrive), with the function that drew it, and fails if there is any. Text marked as decoration ({deco:1}, or drawn inside
 phDeco) is skipped, and so is text drawn into a cached picture.
---overlaps also lists text that runs off the frame or over other text: what larger words most often break."""
+--overlaps also lists text that runs off the frame or over other text: what larger words most often break.
+It also fails any text on screen that names a feature's release status ("preview", "beta", "generally available"): it changes,
+and the film would have to change with it (AGENTS.md, Sources and names on the day). The script's sources keep it, with its date."""
 import argparse
+import re
 from lang import *
 from playwright.sync_api import sync_playwright
 
@@ -61,6 +64,20 @@ if A.overlaps:
     print('%d places where text runs off the frame or over other text' % len(hs))
     for h in hs:
         print('  %-10s %6.1fs  %s: %s%s' % (h[0], h[1], h[2], h[3][:40], ' / ' + h[4][:40] if h[4] else ''))
+# a feature's release status changes, so no film shows it (the author, 5 November 2026); NOT_STATUS is text where "preview" means
+# something else
+STATUS = re.compile(r"\b(?:public |private )?preview\b|\bbeta\b|\bgenerally available\b|\bgeneral availability\b", re.I)
+NOT_STATUS = {'Sign-up form \u00b7 preview'}  # Fixed where it starts: the sign-up form as Tom previews it, not a product's status
+status = sorted({(x[0], x[1]) for x in texts if x[1] not in NOT_STATUS and (STATUS.search(x[1]) or re.search(r'\bGA\b', x[1]))},
+                key=lambda x: order.get(x[0], 99))
+for sid, s in status:
+    print('  %-10s names a release status: %s' % (sid, s[:60]))
+fails = []
 if bad:
-    raise SystemExit('%d pieces of text are too small to read on a phone' % len(bad))
-print('all text reads on a phone')
+    fails.append('%d pieces of text are too small to read on a phone' % len(bad))
+if status:
+    fails.append('%d pieces of text on screen name a feature\'s release status (preview, beta, generally available): say what it '
+                 'does, and keep its status, with its date, in the script\'s sources' % len(status))
+if fails:
+    raise SystemExit('; '.join(fails))
+print('all text reads on a phone, and none names a release status')

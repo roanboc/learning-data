@@ -119,205 +119,205 @@ Two places keep them.
 Unity Catalog governs what agents touch:
 
 31
-00:03:01,305 --> 00:03:06,521
-the tables, the functions they run as tools, and the log, in preview, of who read what.
+00:03:01,305 --> 00:03:05,675
+the tables, the functions they run as tools, and the log of who read what.
 
 32
-00:03:07,621 --> 00:03:12,652
+00:03:06,775 --> 00:03:11,806
 Unity Gateway, part of the catalog, governs the models and tool servers they call.
 
 33
-00:03:16,752 --> 00:03:17,692
+00:03:15,906 --> 00:03:16,846
 First, a name.
 
 34
-00:03:18,992 --> 00:03:23,619
+00:03:18,146 --> 00:03:22,773
 An agent that helps one person, while they're there, can use that person's sign-in.
 
 35
-00:03:25,319 --> 00:03:29,430
+00:03:24,473 --> 00:03:28,584
 One that works on its own, like Mei's at night, needs a name of its own.
 
 36
-00:03:30,930 --> 00:03:36,502
+00:03:30,084 --> 00:03:35,656
 On Databricks, that's a service principal: an identity made for software, not for a person.
 
 37
-00:03:38,002 --> 00:03:43,923
+00:03:37,156 --> 00:03:43,077
 Sam makes one for Mei's agent, the registrar agent, and grants it only what its job needs:
 
 38
-00:03:44,423 --> 00:03:48,367
+00:03:43,577 --> 00:03:47,521
 it may read the core tables its answers come from, and write nowhere.
 
 39
-00:03:50,067 --> 00:03:57,628
+00:03:49,221 --> 00:03:56,782
 Jun's census agent already has its own: it reads the core and the marts, and writes only to its own development schema.
 
 40
-00:03:59,328 --> 00:04:04,465
+00:03:58,482 --> 00:04:03,619
 To stop an agent, Sam switches off its service principal, and everyone else works on.
 
 41
-00:04:06,565 --> 00:04:09,542
+00:04:05,719 --> 00:04:08,696
 And Mei stays its owner: she answers for what it does.
 
 42
-00:04:13,242 --> 00:04:20,851
+00:04:12,396 --> 00:04:20,005
 Then the masks. One policy shows stars in every column tagged direct, to everyone outside the registrar's office.
 
 43
-00:04:22,351 --> 00:04:27,938
+00:04:21,505 --> 00:04:27,092
 It's written for all the account's users, and on Databricks, they include every service principal.
 
 44
-00:04:29,438 --> 00:04:33,969
+00:04:28,592 --> 00:04:33,123
 The registrar agent isn't in the office's group: all it needs is counts.
 
 45
-00:04:35,069 --> 00:04:37,495
+00:04:34,223 --> 00:04:36,649
 So it reads the learner table as Clara does:
 
 46
-00:04:37,695 --> 00:04:41,223
+00:04:36,849 --> 00:04:40,377
 each learner's status, and stars where the names and emails are.
 
 47
-00:04:43,123 --> 00:04:47,598
+00:04:42,277 --> 00:04:46,752
 Nobody wrote a rule for agents. The rule for people already covered them.
 
 48
-00:04:49,298 --> 00:04:53,162
+00:04:48,452 --> 00:04:52,316
 A row filter works the same way, for an agent as for a person.
 
 49
-00:04:54,862 --> 00:04:57,366
+00:04:54,016 --> 00:04:56,520
 And the learner code stays readable for counting,
 
 50
-00:04:57,566 --> 00:05:04,473
+00:04:56,720 --> 00:05:03,627
 so Jun's agent checks the census count, 18,412 students, without a single name.
 
 51
-00:05:08,173 --> 00:05:10,575
+00:05:07,327 --> 00:05:09,729
 Agents' tools live in the catalog too.
 
 52
-00:05:11,275 --> 00:05:14,942
+00:05:10,429 --> 00:05:14,096
 The census count the data team wrote once is a function there.
 
 53
-00:05:16,442 --> 00:05:19,523
+00:05:15,596 --> 00:05:18,677
 Running it takes a grant, the same one a person needs.
 
 54
-00:05:20,223 --> 00:05:23,936
+00:05:19,377 --> 00:05:23,090
 Jun's agent has it: it may run the count, and can't change it.
 
 55
-00:05:25,636 --> 00:05:29,994
+00:05:24,790 --> 00:05:29,148
 And the tool servers agents call are registered there, through Unity Gateway,
 
 56
-00:05:30,194 --> 00:05:34,145
+00:05:29,348 --> 00:05:33,299
 each with its own grant: an agent can reach these, and only these.
 
 57
-00:05:35,845 --> 00:05:40,154
+00:05:34,999 --> 00:05:39,308
 Each gets the fewest rights: the registrar agent's tools only read.
 
 58
-00:05:43,854 --> 00:05:50,076
+00:05:43,008 --> 00:05:49,230
 Then the models. In Unity Gateway, each model the university allows is a service in the catalog,
 
 59
-00:05:50,476 --> 00:05:52,480
+00:05:49,630 --> 00:05:51,634
 and only those granted it can call it.
 
 60
-00:05:54,180 --> 00:05:58,290
+00:05:53,334 --> 00:05:57,444
 The registrar agent is granted one, and Mei's keys are taken back.
 
 61
-00:06:00,190 --> 00:06:04,524
-Checks on each service, still in beta, look at what goes in and what comes out.
+00:05:59,344 --> 00:06:02,700
+Checks on each service look at what goes in and what comes out.
 
 62
-00:06:06,224 --> 00:06:10,471
+00:06:04,400 --> 00:06:08,647
 One finds an email address in a prompt, and hides it or stops the call.
 
 63
-00:06:12,371 --> 00:06:15,038
+00:06:10,547 --> 00:06:13,214
 Another looks for words written to trick the agent.
 
 64
-00:06:16,938 --> 00:06:19,465
+00:06:15,114 --> 00:06:17,641
 A limit sets how many calls a minute it may make.
 
 65
-00:06:21,165 --> 00:06:28,081
+00:06:19,341 --> 00:06:26,257
 And every call is counted under its name, so the registrar's office sees what its agent costs, in its own budget.
 
 66
-00:06:32,381 --> 00:06:34,603
+00:06:30,557 --> 00:06:32,779
 A month later, Sam checks the log again.
 
 67
-00:06:35,303 --> 00:06:42,694
+00:06:33,479 --> 00:06:40,870
 The same question, who read the learner table this month, lists Mei on weekday mornings, and the registrar agent at night.
 
 68
-00:06:44,594 --> 00:06:46,980
+00:06:42,770 --> 00:06:45,156
 Whose reads were those? Now the log says.
 
 69
-00:06:48,680 --> 00:06:51,108
+00:06:46,856 --> 00:06:49,284
 Lineage shows the tables its queries read.
 
 70
-00:06:52,608 --> 00:06:56,892
+00:06:50,784 --> 00:06:55,068
 The gateway's own table lists every call it made, and the tokens it used.
 
 71
-00:06:58,392 --> 00:07:03,448
+00:06:56,568 --> 00:07:01,624
 If something looks wrong, Sam can stop the agent alone, and nobody else stops with it.
 
 72
-00:07:05,348 --> 00:07:08,430
+00:07:03,524 --> 00:07:06,606
 And no read of the agent's is taken for Mei's again.
 
 73
-00:07:12,130 --> 00:07:17,321
+00:07:10,306 --> 00:07:15,497
 Why keep the rules where the data and the models live, and not only in what agents are told?
 
 74
-00:07:18,821 --> 00:07:24,591
+00:07:16,997 --> 00:07:22,767
 Because there, they hold for every agent, every tool and every person, whatever anyone types.
 
 75
-00:07:26,291 --> 00:07:32,753
+00:07:24,467 --> 00:07:30,929
 And because they're the rules people already work under, there's one set to keep, one log to read, and one review.
 
 76
-00:07:34,453 --> 00:07:36,998
+00:07:32,629 --> 00:07:35,174
 Jun's census agent works under them too.
 
 77
-00:07:37,698 --> 00:07:43,391
+00:07:35,874 --> 00:07:41,567
 The number the university sends the government, 18,412 students,
 
 78
-00:07:43,591 --> 00:07:47,322
+00:07:41,767 --> 00:07:45,498
 is checked by an agent the team can see, limit and account for.
 
 79
-00:07:49,222 --> 00:07:53,920
+00:07:47,398 --> 00:07:52,096
 And every morning, the faculties' answers wait under the registrar agent's own name.
 
 80
-00:07:55,620 --> 00:08:00,764
+00:07:53,796 --> 00:07:58,940
 One set of rules for people and agents, enforced where the data and the models live.
 
 81
-00:08:03,064 --> 00:08:06,874
+00:08:01,240 --> 00:08:05,050
 Next: the team's context and memory, governed like any data.

@@ -462,7 +462,7 @@ const NARR={
  {"id":"half","gap":0.8,"text":"One night, half the new badges arrived with no credit."},
  {"id":"passed","gap":0.8,"text":"Every test passed: no rule said a microcredential carries credit."},
  {"id":"caught","gap":0.8,"text":"Monitoring caught it."},
- {"id":"learns","gap":0.8,"text":"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write; that's in preview."},
+ {"id":"learns","gap":0.8,"text":"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write."},
  {"id":"profile","gap":0.8,"text":"And a profile of the badges counts, each night, how many carry no credit: usually one in twelve."},
  {"id":"two","gap":0.8,"text":"That night, one in two."},
  {"id":"alert","gap":0.8,"text":"An alert went to the owner on record, the learning team."},
@@ -481,7 +481,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"Rules you write, and monitoring for the rest."}]}
 };
 
-const VODUR={"trust/room": 4.019, "trust/leave": 3.825, "trust/slowed": 4.507, "trust/ran": 5.014, "trust/year": 5.795, "trust/survey": 5.254, "trust/broken": 5.489, "trust/change": 1.288, "trust/now": 5.229, "trust/watch": 2.338, "trust/morning": 5.062, "trust/oct": 4.239, "trust/six": 3.063, "trust/stopped": 5.531, "trust/noon": 6.251, "trust/trust": 4.474, "owner/test": 7.813, "owner/folder": 5.159, "owner/kind": 5.048, "owner/level": 6.615, "owner/log": 2.424, "owner/in": 3.283, "run/read": 3.62, "run/scorecard": 4.914, "run/learning": 3.201, "run/notrun": 5.449, "run/issue": 5.619, "run/due": 2.521, "where/one": 4.351, "where/more": 6.854, "where/each": 3.637, "where/prevent": 1.883, "where/check": 0.883, "where/watch": 1.268, "typed/cleaned": 6.145, "typed/form": 4.327, "typed/source": 7.716, "typed/never": 2.915, "typed/goes": 4.978, "loaded/loads": 3.699, "loaded/expect": 4.639, "loaded/apart": 5.175, "loaded/reaches": 6.706, "watch/half": 3.02, "watch/passed": 4.085, "watch/caught": 1.058, "watch/learns": 7.451, "watch/profile": 5.939, "watch/two": 1.267, "watch/alert": 2.866, "watch/became": 2.967, "card/land": 4.62, "card/reads": 5.807, "card/inbox": 3.138, "card/measured": 7.826, "card/platform": 4.669, "close/opens": 3.756, "close/amber": 4.834, "close/else": 2.698, "close/knows": 3.428, "close/last": 2.43};
+const VODUR={"trust/room": 4.019, "trust/leave": 3.825, "trust/slowed": 4.507, "trust/ran": 5.014, "trust/year": 5.795, "trust/survey": 5.254, "trust/broken": 5.489, "trust/change": 1.288, "trust/now": 5.23, "trust/watch": 2.338, "trust/morning": 5.062, "trust/oct": 4.239, "trust/six": 3.063, "trust/stopped": 5.531, "trust/noon": 6.251, "trust/trust": 4.474, "owner/test": 7.813, "owner/folder": 5.159, "owner/kind": 5.048, "owner/level": 6.615, "owner/log": 2.424, "owner/in": 3.283, "run/read": 3.62, "run/scorecard": 4.914, "run/learning": 3.201, "run/notrun": 5.449, "run/issue": 5.619, "run/due": 2.521, "where/one": 4.351, "where/more": 6.854, "where/each": 3.637, "where/prevent": 1.883, "where/check": 0.881, "where/watch": 1.268, "typed/cleaned": 6.145, "typed/form": 4.327, "typed/source": 7.716, "typed/never": 2.915, "typed/goes": 4.978, "loaded/loads": 3.699, "loaded/expect": 4.639, "loaded/apart": 5.175, "loaded/reaches": 6.706, "watch/half": 3.02, "watch/passed": 4.085, "watch/caught": 1.058, "watch/learns": 6.233, "watch/profile": 5.939, "watch/two": 1.267, "watch/alert": 2.866, "watch/became": 2.967, "card/land": 4.62, "card/reads": 5.807, "card/inbox": 3.138, "card/measured": 7.826, "card/platform": 4.669, "close/opens": 3.756, "close/amber": 4.834, "close/else": 2.698, "close/knows": 3.428, "close/last": 2.43};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -3438,12 +3438,12 @@ function gq_cpSheet(ctx,o){o=o||{};const ad=clamp(o.add||0,0,1),rows=ad>0.01?GQ_
   const ps=clamp(o.pass||0,0,1);if(ps>0.01&&f.rows.length>3){const px=f.tx+gu_mw(ctx,GQ_CP[3].s)+40;gu_light(ctx,px,f.rows[3],"pass",0,ps);
     wc_hand(ctx,"0 isn't empty: it passes",px+40,f.rows[3]+10,{size:32,w:700,col:GV.greenInk,p:ps});}
   return f;}
-// the badges' quality, on the platform: anomaly detection (in preview), what it learned, each table's freshness and rows (o.ad lights
+// the badges' quality, on the platform: anomaly detection, what it learned, each table's freshness and rows (o.ad lights
 // it); a profile of credit_points, the share of a day's badges with no credit (o.pr lights it; o.u draws the line; o.last brings the
 // last night's point up to one in two; o.usual, the line at about one in twelve); the page's state, an alert (o.st), and the alert (o.al)
 function gq_quality(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,al=clamp(o.al||0,0,1);gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog",title:"badges",titleSize:40,sub:"university · learning_platform · table",
     tabs:["Overview","Sample data","Quality","Lineage"],tab:2,state:["1 alert",GV.amber],stateA:clamp(o.st==null?al:o.st,0,1)});
-  const ax=150,ay=390,aw=640,ah=450;gq_lit(ctx,ax,ay,aw,ah,o.ad||0);gu_box(ctx,ax,ay,aw,ah,"Anomaly detection",{seed:801});gq_pill(ctx,ax+aw-170,ay+40,"preview",{size:28,wash:GV.amber,washA:0.35,seed:802});
+  const ax=150,ay=390,aw=640,ah=450;gq_lit(ctx,ax,ay,aw,ah,o.ad||0);gu_box(ctx,ax,ay,aw,ah,"Anomaly detection",{seed:801});
   [["freshness","arrived as usual"],["rows","as many as usual"]].forEach(([k,s],i)=>{const ry=ay+130+i*96;gu_light(ctx,ax+50,ry-10,"pass",t);wc_T(ctx,k,ax+84,ry,{w:800,size:30,col:WC_DARK});
     wc_T(ctx,s,ax+84,ry+40,{w:600,size:28,col:WC_INK});});wc_T(ctx,"learned from the table's history,",ax+40,ay+ah-80,{w:600,size:28,col:WC_MUTED});wc_T(ctx,"with no rule written",ax+40,ay+ah-40,{w:600,size:28,col:WC_MUTED});
   const px=820,py=390,pw=950,ph=450;gq_lit(ctx,px,py,pw,ph,o.pr||0);gu_box(ctx,px,py,pw,ph,"Data profile · credit_points",{seed:803});
@@ -3727,7 +3727,7 @@ scene("watch",(ctx,S,t,sc)=>{const c=sc.cues,P=gq_once(sc,"P",()=>({nc:wAt(sc,"h
     {at:0,place:"bigNight",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gq_badges(x,{u:clamp((tt-0.3)/1.2,0,1),lit:fin(tt,P.nc,0.6)})},
     // credit_points' tests: not null, and 0 isn't empty, so it passes; no rule for a microcredential's credit
     {cut:true,at:P.ps,place:"desk",keys:[[P.ps,960,500,1]],push:0.02,draw:(x,tt)=>{gq_cpSheet(x,{u:clamp((tt-P.ps-0.1)/0.9,0,1),pass:fin(tt,P.ep,0.6)});gq_whose(x,1300,140,fin(tt,P.nr,0.6),"no rule for it");}},
-    // the badges' quality page: an alert; anomaly detection, in preview; the profile, and that night's point, one in two
+    // the badges' quality page: an alert; anomaly detection; the profile, and that night's point, one in two
     {at:P.cg,place:"bigNight",keys:[[P.cg,960,540,1]],push:0.02,draw:(x,tt)=>gq_quality(x,tt,{st:fin(tt,P.ct,0.5),ad:gv_io(tt,P.ln,P.pr,0.5),pr:fin(tt,P.pr,0.6),
       u:clamp((tt-P.cn)/1.6,0,1)*0.9+fin(tt,P.tw,0.6)*0.1,usual:fin(tt,P.us,0.8),last:fin(tt,P.tw,0.8),al:fin(tt,P.tw+0.6,0.6)})},
     // the alert crosses the campus to the learning team's door, the owner on record

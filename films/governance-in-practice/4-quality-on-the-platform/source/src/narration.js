@@ -54,7 +54,7 @@ const NARR={
  {"id":"half","gap":0.8,"text":"One night, half the new badges arrived with no credit."},
  {"id":"passed","gap":0.8,"text":"Every test passed: no rule said a microcredential carries credit."},
  {"id":"caught","gap":0.8,"text":"Monitoring caught it."},
- {"id":"learns","gap":0.8,"text":"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write; that's in preview."},
+ {"id":"learns","gap":0.8,"text":"The platform learns when each table usually arrives, and how many rows it brings, with no rule to write."},
  {"id":"profile","gap":0.8,"text":"And a profile of the badges counts, each night, how many carry no credit: usually one in twelve."},
  {"id":"two","gap":0.8,"text":"That night, one in two."},
  {"id":"alert","gap":0.8,"text":"An alert went to the owner on record, the learning team."},

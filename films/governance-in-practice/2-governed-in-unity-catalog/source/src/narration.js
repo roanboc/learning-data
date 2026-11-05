@@ -51,11 +51,11 @@ const NARR={
 "lineage":{"name":"Down to the column","lead":1.0,"tail":1.0,"vo":[
  {"id":"draws","gap":0.8,"text":"The platform also draws each column's lineage."},
  {"id":"pick","gap":0.8,"text":"Pick the learner's email, and it shows every table it flows into, down to the column."},
- {"id":"beta","gap":0.8,"text":"Tags can follow lineage by themselves, in beta."},
+ {"id":"follow","gap":0.8,"text":"Tags can follow lineage by themselves."},
  {"id":"need","gap":0.3,"text":"Here they don't need to: every table the email reaches is built by the project, which classes it there too,"},
  {"id":"stops","gap":0.8,"text":"and the check stops a table that doesn't."}]},
 "audit":{"name":"Who read this, and when","lead":1.0,"tail":1.0,"vo":[
- {"id":"log","gap":0.8,"text":"And the platform keeps a log, in preview, of who read each table, and when."},
+ {"id":"log","gap":0.8,"text":"And the platform keeps a log of who read each table, and when."},
  {"id":"answer","gap":0.8,"text":"So Sam can answer what Yusuf wanted to know: who read the learner table this month."},
  {"id":"review","gap":0.8,"text":"Each December, the access review reads the grants themselves: who can read each table, through which group, and who's in it."},
  {"id":"gave","gap":0.3,"text":"Forty-one people gave way to two groups:"},

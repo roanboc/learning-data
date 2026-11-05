@@ -574,12 +574,12 @@ function gq_cpSheet(ctx,o){o=o||{};const ad=clamp(o.add||0,0,1),rows=ad>0.01?GQ_
   const ps=clamp(o.pass||0,0,1);if(ps>0.01&&f.rows.length>3){const px=f.tx+gu_mw(ctx,GQ_CP[3].s)+40;gu_light(ctx,px,f.rows[3],"pass",0,ps);
     wc_hand(ctx,"0 isn't empty: it passes",px+40,f.rows[3]+10,{size:32,w:700,col:GV.greenInk,p:ps});}
   return f;}
-// the badges' quality, on the platform: anomaly detection (in preview), what it learned, each table's freshness and rows (o.ad lights
+// the badges' quality, on the platform: anomaly detection, what it learned, each table's freshness and rows (o.ad lights
 // it); a profile of credit_points, the share of a day's badges with no credit (o.pr lights it; o.u draws the line; o.last brings the
 // last night's point up to one in two; o.usual, the line at about one in twelve); the page's state, an alert (o.st), and the alert (o.al)
 function gq_quality(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,al=clamp(o.al||0,0,1);gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog",title:"badges",titleSize:40,sub:"university · learning_platform · table",
     tabs:["Overview","Sample data","Quality","Lineage"],tab:2,state:["1 alert",GV.amber],stateA:clamp(o.st==null?al:o.st,0,1)});
-  const ax=150,ay=390,aw=640,ah=450;gq_lit(ctx,ax,ay,aw,ah,o.ad||0);gu_box(ctx,ax,ay,aw,ah,"Anomaly detection",{seed:801});gq_pill(ctx,ax+aw-170,ay+40,"preview",{size:28,wash:GV.amber,washA:0.35,seed:802});
+  const ax=150,ay=390,aw=640,ah=450;gq_lit(ctx,ax,ay,aw,ah,o.ad||0);gu_box(ctx,ax,ay,aw,ah,"Anomaly detection",{seed:801});
   [["freshness","arrived as usual"],["rows","as many as usual"]].forEach(([k,s],i)=>{const ry=ay+130+i*96;gu_light(ctx,ax+50,ry-10,"pass",t);wc_T(ctx,k,ax+84,ry,{w:800,size:30,col:WC_DARK});
     wc_T(ctx,s,ax+84,ry+40,{w:600,size:28,col:WC_INK});});wc_T(ctx,"learned from the table's history,",ax+40,ay+ah-80,{w:600,size:28,col:WC_MUTED});wc_T(ctx,"with no rule written",ax+40,ay+ah-40,{w:600,size:28,col:WC_MUTED});
   const px=820,py=390,pw=950,ph=450;gq_lit(ctx,px,py,pw,ph,o.pr||0);gu_box(ctx,px,py,pw,ph,"Data profile · credit_points",{seed:803});

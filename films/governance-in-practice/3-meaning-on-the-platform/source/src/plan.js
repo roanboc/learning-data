@@ -111,7 +111,7 @@ function gm_meiTerm(own,m){return(q,sx,sy,sw)=>{wc_T(q,"Award",sx+30,sy+102,{w:8
 // award's page, close up on her screen (GV_SC): its owner (o.own); its words before Monday, in rose, struck through as Monday's come
 // (o.ch); the new words, violet (o.nw), "a master or a microcredential" (o.mc) and "at least 6 credit points" (o.six) lit as they're
 // said; and when it was published (o.pub)
-function gm_termScreen(ctx,o){o=o||{};const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Databricks · Unity Catalog · Pages · beta",null,{barH:54,titleSize:30});
+function gm_termScreen(ctx,o){o=o||{};const [x,y,w,h]=GV_SC;gv_screen(ctx,x,y,w,h,"Databricks · Unity Catalog · Pages",null,{barH:54,titleSize:30});
   wc_T(ctx,"Award",x+56,y+140,{w:800,size:56,col:WC_DARK});const own=clamp(o.own||0,0,1),os="Owner · Mei Tanaka";
   if(own>0.01)gv_tint(ctx,x+46,y+170,tw(ctx,os,30,600)+20,46,GV.gold,0.9*own);wc_T(ctx,os,x+56,y+204,{w:600,size:30,col:WC_INK});
   const pub=clamp(o.pub||0,0,1);if(pub>0.01){const s="published Monday",pw=Math.round(tw(ctx,s,28,700)+44);gm_rise(ctx,pub,()=>{wc_panel(ctx,x+w-56-pw,y+102,pw,48,{kind:"pill",wash:GM_V,washA:0.4,seed:411});
@@ -230,13 +230,13 @@ function gm_touchTags(ctx,o){o=o||{};const [sx,sy,sw]=GV_RX.screen;GM_TT.forEach
   gm_thread(ctx,[sx+sw/2,sy-6],[x+w/2,y+30],clamp(v*1.6,0,1),{bend:10});gm_rise(ctx,clamp(v*1.6-0.4,0,1),()=>wc_tag(ctx,x,y,s,{size:30,seed:430+i}));});}
 
 /* ---------- one term, one page ---------- */
-// award's page on the platform, as Databricks lays a page out (Pages, in beta), drawn as a form: its title; its description, the
+// award's page on the platform, as Databricks lays a page out (Pages), drawn as a form: its title; its description, the
 // glossary's words in violet (o.six lights "at least 6 credit points"); its owner; its domain; the tables and the column that hold it,
 // and the count (related assets); and where its words come from (sources). o.lit: [words, owner, domain, assets, sources], each 0 to
-// 1 as it's named; o.al[i] lights one asset; o.beta brings in the page's state, beta
+// 1 as it's named; o.al[i] lights one asset
 const GM_ASSETS=[["core_award","table"],["core_credential · counts_as_award","table · column"],["awards_conferred","metric view"]];
 function gm_awardPage(ctx,o){o=o||{};const [x,y,w,h]=GU_BIG,L=o.lit||[],v=i=>clamp(L[i]||0,0,1),AL=o.al||[];
-  const top=gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog · Pages · beta",title:"Award",state:["beta",GV.amber],stateA:o.beta==null?1:o.beta,sub:"a page of the business glossary"});
+  const top=gu_page(ctx,x,y,w,h,{bar:"Databricks · Unity Catalog · Pages",title:"Award",sub:"a page of the business glossary"});
   const dx=x+40,dy=top+24,dw=1000,rx=x+1080,rw=w-1120;
   gm_lit(ctx,dx,dy,dw,300,v(0),GM_V);gu_box(ctx,dx,dy,dw,300,"Description",{seed:301});gm_para(ctx,GM_NEW,dx+30,dy+100,dw-60,{size:31,lh:46,col:GM_VI,lit:[["at least 6 credit points",o.six||0,GV.gold]]});
   const ay=dy+320;gm_lit(ctx,dx,ay,dw,250,v(3));gu_box(ctx,dx,ay,dw,250,"Related assets",{seed:302});

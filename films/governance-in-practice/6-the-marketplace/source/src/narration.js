@@ -38,7 +38,7 @@ const NARR={
  {"id":"form","gap":0.8,"text":"The form wants two things: why, and for how long."},
  {"id":"writes","gap":0.8,"text":"He writes: to plan next semester's places in the certificate's last unit."},
  {"id":"ninety","gap":0.8,"text":"And he asks for ninety days."},
- {"id":"platform","gap":0.8,"text":"Had he started on the platform, its request button, in preview, would have brought him here too."},
+ {"id":"platform","gap":0.8,"text":"Had he started on the platform, its request button would have brought him here too."},
  {"id":"one","gap":0.8,"text":"Every request comes to one place."}]},
 "owner":{"name":"The owner decides","lead":0.8,"tail":0.8,"vo":[
  {"id":"clara","gap":0.8,"text":"The request goes to Clara, the product's owner, not to whoever built the table."},

@@ -34,7 +34,7 @@ const NARR={
  {"id":"both","gap":0.8,"text":"So the team does both. It tells its agents the rules, and enforces them where the data and the models live."},
  {"id":"two","gap":0.8,"text":"Two places keep them."},
  {"id":"uc","gap":0.3,"text":"Unity Catalog governs what agents touch:"},
- {"id":"touch","gap":0.8,"text":"the tables, the functions they run as tools, and the log, in preview, of who read what."},
+ {"id":"touch","gap":0.8,"text":"the tables, the functions they run as tools, and the log of who read what."},
  {"id":"ug","gap":0.8,"text":"Unity Gateway, part of the catalog, governs the models and tool servers they call."}
 ]},
 "name":{"name":"A name for the agent","lead":1.0,"tail":1.0,"vo":[
@@ -72,7 +72,7 @@ const NARR={
  {"id":"models","gap":0.3,"text":"Then the models. In Unity Gateway, each model the university allows is a service in the catalog,"},
  {"id":"granted","gap":0.8,"text":"and only those granted it can call it."},
  {"id":"one","gap":0.8,"text":"The registrar agent is granted one, and Mei's keys are taken back."},
- {"id":"checks","gap":0.8,"text":"Checks on each service, still in beta, look at what goes in and what comes out."},
+ {"id":"checks","gap":0.8,"text":"Checks on each service look at what goes in and what comes out."},
  {"id":"email","gap":0.8,"text":"One finds an email address in a prompt, and hides it or stops the call."},
  {"id":"trick","gap":0.8,"text":"Another looks for words written to trick the agent."},
  {"id":"limit","gap":0.8,"text":"A limit sets how many calls a minute it may make."},

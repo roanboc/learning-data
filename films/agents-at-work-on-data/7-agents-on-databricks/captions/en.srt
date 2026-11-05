@@ -167,105 +167,101 @@ Every agent calls it, and none writes a count of its own.
 They follow the open standard, MCP, so any agent can plug in.
 
 43
-00:04:26,938 --> 00:04:31,383
-Genie One's tool server is generally available; the others are in preview.
-
-44
-00:04:34,883 --> 00:04:36,767
+00:04:29,138 --> 00:04:31,022
 Third, agents the team builds.
 
-45
-00:04:37,467 --> 00:04:45,489
+44
+00:04:31,722 --> 00:04:39,744
 When the nightly count fails its check against the census report, someone has to find out why, and those steps can't be written in advance.
 
-46
-00:04:46,789 --> 00:04:53,131
+45
+00:04:41,044 --> 00:04:47,386
 So the team builds a census check agent, in code, with Agent Bricks, the platform's way to build agents.
 
-47
-00:04:54,231 --> 00:04:58,927
+46
+00:04:48,486 --> 00:04:53,182
 Agent Runtime runs it, the job calls it, and every step it takes is traced.
 
-48
-00:05:00,227 --> 00:05:03,113
+47
+00:04:54,482 --> 00:04:57,368
 It uses the same tool servers as everyone else.
 
-49
-00:05:03,813 --> 00:05:08,354
+48
+00:04:58,068 --> 00:05:02,609
 Before anyone relies on it, the team tests it on cases they have met before.
 
-50
-00:05:09,454 --> 00:05:16,881
+49
+00:05:03,709 --> 00:05:11,136
 The 37 who withdrew after census day and still count. Three students counted twice. And Health's three answers.
 
-51
-00:05:18,381 --> 00:05:25,741
+50
+00:05:12,636 --> 00:05:19,996
 Judges built into the platform score each answer, a plain test checks the sums, and Mei and Jun mark what's wrong.
 
-52
-00:05:27,241 --> 00:05:31,360
+51
+00:05:21,496 --> 00:05:25,615
 Its note is evidence, not a decision: Jun reads it, and decides.
 
-53
-00:05:34,860 --> 00:05:36,776
+52
+00:05:29,115 --> 00:05:31,031
 Fourth, agents that write code.
 
-54
-00:05:37,476 --> 00:05:41,158
+53
+00:05:31,731 --> 00:05:35,413
 Sam builds the pipelines that load the student system each night.
 
-55
-00:05:41,858 --> 00:05:47,768
+54
+00:05:36,113 --> 00:05:42,023
 Genie Code, the platform's coding agent, works beside him in the pipeline editor, with his rights.
 
-56
-00:05:48,868 --> 00:05:54,763
+55
+00:05:43,123 --> 00:05:49,018
 It reads the team's skills: the same files Jun's agent reads, in the same open format.
 
-57
-00:05:56,063 --> 00:06:02,208
+56
+00:05:50,318 --> 00:05:56,463
 Asked to profile a table, it follows the team's skill, with the query and result behind every claim.
 
-58
-00:06:03,708 --> 00:06:08,217
+57
+00:05:57,963 --> 00:06:02,472
 Jun's own coding agent works on the dbt project, in his editor.
 
-59
-00:06:08,917 --> 00:06:14,581
+58
+00:06:03,172 --> 00:06:08,836
 It reaches the platform through the same tool servers, and Databricks' own skills teach it the platform.
 
-60
-00:06:15,881 --> 00:06:19,814
+59
+00:06:10,136 --> 00:06:14,069
 Skills teach an agent how to work; tool servers let it do the work.
 
-61
-00:06:21,314 --> 00:06:28,529
+60
+00:06:15,569 --> 00:06:22,784
 What either writes is a draft, on a branch: its person reviews it, and a second person approves what reaches production.
 
-62
-00:06:32,029 --> 00:06:35,871
+61
+00:06:26,284 --> 00:06:30,126
 Back at the Faculty of Health, the three agents are still their owners' own.
 
-63
-00:06:36,571 --> 00:06:41,126
+62
+00:06:30,826 --> 00:06:35,381
 But they read the same governed data, through the same tools, as everyone else.
 
-64
-00:06:42,426 --> 00:06:51,006
+63
+00:06:36,681 --> 00:06:45,261
 Asked for Health's students on census day, each answers 2,880, with its query, its table and its definition.
 
-65
-00:06:52,506 --> 00:06:54,690
+64
+00:06:46,761 --> 00:06:48,945
 Anil plans a place for every student.
 
-66
-00:06:55,990 --> 00:07:00,833
+65
+00:06:50,245 --> 00:06:55,088
 The platform gives agents the same data and tools people use, in one place.
 
-67
-00:07:02,533 --> 00:07:08,752
+66
+00:06:56,788 --> 00:07:03,007
 One question is left: when an agent reads on its own, whose reads are they, and who pays for its model?
 
-68
-00:07:10,252 --> 00:07:11,388
+67
+00:07:04,507 --> 00:07:05,643
 That's the next film.

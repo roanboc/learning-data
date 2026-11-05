@@ -180,21 +180,21 @@ scene("groups",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({top:c.yes-0
       gc_card(x,0,"A. Moreau",gv_io(tt,P.jobs-0.4,P.moves,0.6));gc_card(x,3,"A. Moreau",fin(tt,P.moves+0.6,0.9),{dx:80});}}],sc.dur));
   wc_year(ctx,56,72,"15 December 2026",gv_io(t,P.ends-0.6,sc.dur,0.4));});
 
-// ---- 7 · Down to the column: the learner's email, picked, and every table it flows into; tags following lineage, in beta; each table
+// ---- 7 · Down to the column: the learner's email, picked, and every table it flows into; tags following lineage; each table
 // classed in the project; and the check that stops one that isn't ----
-scene("lineage",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({email:wAt(sc,"pick","email"),every:wAt(sc,"pick","every table"),beta:wAt(sc,"beta","follow lineage"),
+scene("lineage",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({email:wAt(sc,"pick","email"),every:wAt(sc,"pick","every table"),prop:wAt(sc,"follow","follow lineage"),
     nd:wAt(sc,"need","every table")-0.3,built:wAt(sc,"need","built by the project"),classes:wAt(sc,"need","classes it there"),
     stp:c.stops-0.3,check:wAt(sc,"stops","the check"),stops:wAt(sc,"stops","stops")}));
   gv_shots(ctx,S,t,sc.dur,gc_run([
     // the lineage view: the email, and the column it flows into; Planning's and Finance's lists get no names or emails
-    {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_lineage(x,tt,{pick:clamp((tt-P.email)/1.4,0,1),none:fin(tt,P.every+0.6,0.6),beta:clamp((tt-P.beta)/2.4,0,1)})},
+    {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gc_lineage(x,tt,{pick:clamp((tt-P.email)/1.4,0,1),none:fin(tt,P.every+0.6,0.6),prop:clamp((tt-P.prop)/2.4,0,1)})},
     // the wallet's learners in the project: the email, classed there too (the opening film's check)
     {cut:true,at:P.nd,place:"desk",keys:[[P.nd,960,500,1]],push:0.02,draw:(x,tt)=>{gc_walletSheet(x,clamp((tt-P.nd)/0.8,0,1),fin(tt,P.classes,0.5));
       gu_filmTag(x,1840,846,"Governed in dbt",fin(tt,P.built,0.5),{align:"right"});}},
     // a table with an email nobody classed, stopped by the check
     {at:P.stp,place:"desk",keys:[[P.stp,960,500,1]],push:0.02,draw:(x,tt)=>gc_unclassed(x,tt,{u:clamp((tt-P.stp)/0.6,0,1),q:fin(tt,P.check,0.5),err:clamp((tt-P.stops)/1.6,0,1)})}],sc.dur));});
 
-// ---- 8 · Who read this, and when: the audit log, in preview; who read the learner table this month; December's access review; forty-one
+// ---- 8 · Who read this, and when: the audit log; who read the learner table this month; December's access review; forty-one
 // names folded away; two groups ----
 scene("audit",(ctx,S,t,sc)=>{const c=sc.cues,P=gc_once(sc,"P",()=>({who:wAt(sc,"log","who read"),who2:wAt(sc,"answer","who read"),rv:c.review-0.3,dec:wAt(sc,"review","Each December"),
     reads:wAt(sc,"review","reads the grants"),whos:wAt(sc,"review","who's in it"),gave:c.gave,gw:wAt(sc,"gave","gave way"),two:wAt(sc,"gave","two groups"),

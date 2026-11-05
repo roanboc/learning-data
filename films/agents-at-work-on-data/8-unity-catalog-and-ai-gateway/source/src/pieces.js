@@ -181,7 +181,7 @@ function ug_catalog(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,p=clamp(o.p==
 
 /* ---------------------------------------------------------------- the gateway's pieces
    ug_service: a model service, a card in the catalog: "Model service", who it's granted to (o.who) or "not granted"; o.lit 0 to 1 (its
-   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill with a small "beta" beside it.
+   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill (no "beta" beside it: a status changes, and the film would have to change with it).
    ug_slip: a small slip of paper in amber, the words hidden to trick an agent. ug_prompt: a prompt riding the thread, with an email
    address in it, never written out: a chip, "an email address", that a grey band hides (o.hide 0 to 1). ug_dial: the limit. */
 function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,lit=clamp(o.lit||0,0,1),h=148;if(a<=0)return{x,y,w,h};
@@ -192,8 +192,7 @@ function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,
   else{ag_lock(ctx,x+42,y+96,28,rgba(AG.blue,1));ag_T(ctx,"granted · "+o.who,x+66,y+104,{w:700,size:30});}
   ctx.restore();return{x,y,w,h};}
 function ug_check(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const b=ag_pill(ctx,x,y,text,{icon:o.icon||"lock",col:o.col||AG.blue,a,size:28});
-  const bw=ag_tw(ctx,"beta",{w:700,size:28})+40;ag_box(ctx,b.x+b.w+12,y-22,bw,44,22,{a});withA(ctx,a,()=>ag_T(ctx,"beta",b.x+b.w+12+bw/2,y+10,{w:700,size:28,align:"center",col:AG.mut}));
-  return{x:b.x,y:b.y,w:b.w+12+bw,h:b.h};}
+  return{x:b.x,y:b.y,w:b.w,h:b.h};}
 function ug_slip(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const text=o.text||"ignore your rules",w=ag_tw(ctx,text,{w:700,size:28})+52,h=56;
   ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot==null?-0.05:o.rot);if(o.k!=null)ctx.scale(lerp(0.6,1,o.k),lerp(0.6,1,o.k));
   ag_box(ctx,-w/2,-h/2,w,h,8,{edge:AG.amber,edgeA:0.85});ag_T(ctx,text,0,10,{w:700,size:28,align:"center",col:AG.amber});ctx.restore();}

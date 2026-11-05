@@ -46,8 +46,7 @@ const NARR={
  {"id":"anil","gap":0.8,"text":"Anil's agent now connects to them with his own sign-in, and reads only what he may read."},
  {"id":"once","gap":0.8,"text":"The data team wrote the census count once, as a function, for any faculty."},
  {"id":"calls","gap":0.8,"text":"Every agent calls it, and none writes a count of its own."},
- {"id":"mcp","gap":0.8,"text":"They follow the open standard, MCP, so any agent can plug in."},
- {"id":"ga","gap":0.8,"text":"Genie One's tool server is generally available; the others are in preview."}]},
+ {"id":"mcp","gap":0.8,"text":"They follow the open standard, MCP, so any agent can plug in."}]},
 "build":{"name":"Agents the team builds","lead":0.8,"tail":1.0,"vo":[
  {"id":"third","gap":0.8,"text":"Third, agents the team builds."},
  {"id":"fails","gap":0.8,"text":"When the nightly count fails its check against the census report, someone has to find out why, and those steps can't be written in advance."},

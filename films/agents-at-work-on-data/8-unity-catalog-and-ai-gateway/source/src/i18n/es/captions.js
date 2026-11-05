@@ -3,7 +3,7 @@
    the video, which has no captions on its picture, takes es.srt. The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes
    captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in Governed in Unity Catalog and the series: la oficina de registro, la tabla de estudiantes, el código de estudiante, asteriscos for a mask's stars,
-   etiquetada directa, una política, un permiso for a grant (conceder, to grant), una bitácora for the log, versión preliminar for preview and beta for beta,
+   etiquetada directa, una política, un permiso for a grant (conceder, to grant), una bitácora for the log,
    el linaje, el núcleo y los marts, un esquema de desarrollo, una entidad de servicio for a service principal, un servidor de herramientas, un prompt, los
    tokens, dueño (dueña for Mei); el conteo del censo, estudiantes and el gobierno. The agent's name, registrar agent, is el agente de registro; a personal
    key is una clave personal; a check on a model service is un control. Unity Catalog and Unity Gateway keep their names, and "one set of rules" is unas
@@ -69,8 +69,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Dos lugares las guardan.",
 "Unity Catalog governs what agents touch:":
 "Unity Catalog gobierna lo que tocan los agentes:",
-"the tables, the functions they run as tools, and the log, in preview, of who read what.":
-"las tablas, las funciones que usan como herramientas, y la bitácora, en versión preliminar, de quién leyó qué.",
+"the tables, the functions they run as tools, and the log of who read what.":
+"las tablas, las funciones que usan como herramientas, y la bitácora de quién leyó qué.",
 "Unity Gateway, part of the catalog, governs the models and tool servers they call.":
 "Unity Gateway, parte del catálogo, gobierna los modelos y servidores de herramientas que llaman.",
 "First, a name.":
@@ -129,8 +129,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "y solo quienes tienen permiso pueden llamarlo.",
 "The registrar agent is granted one, and Mei's keys are taken back.":
 "Al agente de registro se le concede uno, y a Mei se le retiran las claves.",
-"Checks on each service, still in beta, look at what goes in and what comes out.":
-"Los controles de cada servicio, aún en beta, miran lo que entra y lo que sale.",
+"Checks on each service look at what goes in and what comes out.":
+"Los controles de cada servicio miran lo que entra y lo que sale.",
 "One finds an email address in a prompt, and hides it or stops the call.":
 "Uno encuentra un correo en un prompt, y lo oculta o detiene la llamada.",
 "Another looks for words written to trick the agent.":

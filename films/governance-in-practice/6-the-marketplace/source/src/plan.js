@@ -372,15 +372,14 @@ function gk_form(ctx,t,o){o=o||{};const op=clamp(o.open==null?1:o.open,0,1);gk_d
     const dy=clamp(o.days||0,0,1);["30","60","90"].forEach((s,i)=>{const bx=x+48+i*180,on=i===2?dy:0;if(on>0.01)gv_halo(ctx,bx-10,y+404,170,76,GU_CYAN,0.8*on);
       wc_panel(ctx,bx,y+412,150,60,{kind:"pill",wash:on>0.5?GU_CYAN:null,washA:0.4,seed:965+i});wc_T(ctx,s,bx+75,y+454,{w:800,size:32,col:WC_DARK,align:"center"});});
     gk_button(ctx,x+w-260,y+h-70,"Submit",{press:clamp(o.sub||0,0,1),size:30});},24);}
-// every request comes to one place: the platform's page for the table, small, its own Request access button, in preview, sending its
-// people to the catalogue's form (o.plat; o.press, o.pv: in preview; o.redir); the catalogue's form; both arrive in one tray, and Anil's request drops in (o.tray)
+// every request comes to one place: the platform's page for the table, small, its own Request access button, sending its
+// people to the catalogue's form (o.plat; o.press; o.redir); the catalogue's form; both arrive in one tray, and Anil's request drops in (o.tray)
 function gk_onePlace(ctx,t,o){o=o||{};const pl=clamp(o.plat||0,0,1),rd=clamp(o.redir||0,0,1),tr=clamp(o.tray||0,0,1);
   gk_rise(ctx,clamp(o.cat==null?1:o.cat,0,1),()=>gk_win(ctx,1060,90,780,380,GK_ONTOS,q=>{wc_T(q,"Request access",1100,196,{w:800,size:34,col:WC_DARK});
     wc_T(q,"Learners near an award",1100,246,{w:600,size:28,col:WC_MUTED});wc_T(q,"Why do you need access?",1100,314,{w:700,size:28,col:WC_INK});
     wc_T(q,"Requested duration (days, …)",1100,368,{w:700,size:28,col:WC_INK});},GK_CAT),14);
   if(pl>0.01)gk_rise(ctx,pl,()=>gk_win(ctx,80,150,780,320,"Databricks · Unity Catalog",q=>{wc_T(q,"mart_planning__near_award",120,256,{w:500,size:28,f:"mono",col:WC_DARK});
-    wc_T(q,"university · prod_marts · table",120,302,{w:600,size:28,col:WC_MUTED});const bw=gk_button(q,120,396,"Request access",{press:clamp(o.press||0,0,1)});
-    wc_tag(q,120+bw+20,396,"preview",{size:28,wash:o.pv>0.5?GV.gold:GV.grey,washA:0.3+0.2*clamp(o.pv||0,0,1),seed:971});}),14);
+    wc_T(q,"university · prod_marts · table",120,302,{w:600,size:28,col:WC_MUTED});gk_button(q,120,396,"Request access",{press:clamp(o.press||0,0,1)});}),14);
   if(rd>0.01){gk_arrow(ctx,[560,396],[1050,286],-70,clamp(rd*1.4,0,1),{col:GU_CYAN,lw:5});wc_hand(ctx,"redirect",958,226,{size:38,w:700,col:GU_CYAN,align:"center",p:clamp(rd*1.6-0.6,0,1)});}
   if(tr<=0.01)return;const tx=1210,ty=640,tw2=480;gk_rise(ctx,clamp(tr*2,0,1),()=>{wc_part(ctx,[[tx,ty],[tx+tw2,ty],[tx+tw2-26,ty+120],[tx+26,ty+120]],[176,150,120],1,{seed:972});
     wc_flat(ctx,wc_rect(tx+40,ty+10,tw2-80,14),[236,226,206],1,"tray");wc_T(ctx,"Requests",tx+tw2/2,ty+84,{w:800,size:34,col:[255,255,255],align:"center"});},14);

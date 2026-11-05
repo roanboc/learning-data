@@ -185,7 +185,7 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({req:wAt(sc,"
       ug_catalog(x,640,200,1220,480,{p:(tt-c.two-1.4)/1.4});
       ug_gateway(x,1560,280,520,370,{p:(tt-c.ug-0.2)/1.2,label:false});ag_roomLight(x,1);
       ag_label(x,1560,266,"Unity Gateway",{align:"center",a:ag_in(tt,c.ug+0.6,0.5)});
-      [["tables",P.tables],["functions",P.fns],["the log · preview",P.log]].forEach(([s,t0],i)=>ag_tool(x,690,236+i*136,520,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));
+      [["tables",P.tables],["functions",P.fns],["the log",P.log]].forEach(([s,t0],i)=>ag_tool(x,690,236+i*136,520,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));
       [["models",P.models],["tool servers",P.servers]].forEach(([s,t0],i)=>ag_tool(x,1360,330+i*136,400,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));}}
   ],0.6);
   ug_kick(ctx,S,ag_in(t,0.6,0.6),0);});   // once the title has gone
@@ -321,7 +321,7 @@ scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,
         ug_key(x,bx+70,by+102,0.7,{rot:0});ug_key(x,bx+230,by+102,0.6,{rot:0});const st=ag_sine((tt-P.keys-0.5)/0.6);
         if(st>0){x.strokeStyle=rgba(AG.mut,0.9);x.lineWidth=4;x.lineCap="round";x.beginPath();x.moveTo(bx+30,by+118);x.lineTo(bx+30+(330)*st,by+86);x.stroke();}
         ag_T(x,"taken back",bx+592,by+112,{w:700,size:28,align:"right",col:AG.mut,a:ag_in(tt,P.keys+0.9,0.4)});x.restore();}}},
-    // checks on each service, in beta: an email address hidden, words written to trick it stopped; a limit; every call counted
+    // checks on each service: an email address hidden, words written to trick it stopped; a limit; every call counted
     {at:c.checks,place:"ugLab",keys:[[c.checks,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,Object.assign({think:0.5},AGT));ug_badgeOn(x,tt,"registrar agent",AGT);thread(x,tt,1);
       ug_gateway(x,1000,200,140,450,{});ag_roomLight(x,1);

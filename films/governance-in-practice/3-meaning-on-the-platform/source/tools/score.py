@@ -316,14 +316,13 @@ knock(board + 0.35, 0.014, px(1415), 280); air(board + 1.0, 0.9, 0.008, px(1415)
 chord({'te': 57, 'tr': 66}, board + 0.4, E('words') + 0.3, 0.55, step=0.2, att=0.8, rel=1.0)
 mark(title + 0.3)
 
-# 2. One term, one page: a chord at the turn; the page's badge, its words, owner and domain lit, the tables that hold it and where its
+# 2. One term, one page: a chord at the turn; its words, owner and domain lit, the tables that hold it and where its
 #    words come from; Noor's map, the term published one way, and a pencil reaching for the page, stopped; Clara at her screen; the
 #    assistant's question typed and its answer, citing the page: in step, on the home chord
 pw = lambda lid, word, off=0: W('page', lid, word, off)
 pc = lambda lid, off=0: G('page', lid, off)
 p0 = S0('page')
 chord(IV, p0 + 0.2, p0 + 2.6, 0.55, step=0.2, att=0.6, rel=0.8)
-tap(pw('term', 'in beta'), 0.008, px(1500))
 for t in (pw('has', 'its words'), pw('has', 'its owner'), pw('has', 'its domain')):
     marker(t, 0.007, px(900), 0.45)
 for i in range(3):

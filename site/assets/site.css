@@ -88,8 +88,6 @@ footer p{margin:0;max-width:900px}.foot-links{margin:0 0 8px!important;font-weig
 @media (prefers-reduced-motion:reduce){.cine .bg img{animation:none}.cine .bg{transition:none}}
 .cine .eyebrow{color:#8ec0ff}.cine .lead{color:#c4d0e3}.cine a:not(.btn){color:#a9cfff}
 .cine h1{color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.5)}
-.cine .meta-row{color:#c4d0e3}.cine .meta-row span{padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:13px}
-.cine .builds-on{color:#a3b3cb}
 @media (max-width:640px){.cine{padding-left:16px;padding-right:16px}.cine::before{background:linear-gradient(0deg,rgba(5,9,18,.95),rgba(5,9,18,.72))}}
 /* the course bar: where you are in a film's three steps, always in view under the header */
 .course{position:sticky;top:var(--top-h);z-index:25;margin:0 calc(50% - 50vw);background:rgba(8,13,26,.9);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid rgba(170,200,245,.14);color:#ecf3ff}
@@ -139,9 +137,7 @@ details.howto .notes{padding:0 16px 14px;color:var(--muted);font-size:15px}detai
 .poster-cta{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px}
 .play-badge{background:rgba(0,0,0,.76);color:#fff;border:0;padding:14px 24px;border-radius:999px;font-weight:800;font-size:clamp(15px,2vw,19px);white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
 .play-badge:hover{transform:scale(1.05)}
-.think-badge{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.4);padding:8px 16px;border-radius:999px;font-weight:700;font-size:clamp(13px,1.5vw,15px);white-space:nowrap;cursor:pointer}
-.think-badge:hover{border-color:#fff}
-@media (max-width:420px){.poster-cta{gap:6px}.play-badge{padding:10px 18px}.think-badge{padding:6px 12px}}
+@media (max-width:420px){.poster-cta{gap:6px}.play-badge{padding:10px 18px}}
 /* pause and think: a question on the paused frame (below the film up to 900 px, where the longer questions don't fit the frame) */
 .think{position:absolute;left:0;top:0;width:100%;aspect-ratio:16/9;z-index:2;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(3,5,11,.66);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);overflow-y:auto}
 .think-card{margin:auto;width:min(600px,100%);background:rgba(10,16,34,.96);color:#ecf3ff;border:1px solid rgba(170,200,245,.3);border-radius:18px;padding:18px 20px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
@@ -340,8 +336,7 @@ details.real summary{cursor:pointer;font-weight:700}details.real p{margin:8px 0 
 
 /* film pages: breadcrumb, facts, and the chapter a topic builds on */
 .crumbs a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}.crumbs a:hover{text-decoration-thickness:2px}
-.meta-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0 0;color:var(--muted);font-weight:600;font-size:14px;max-width:760px}
-.builds-on,.note{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:760px}
+.note{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:760px}
 .note{padding:6px 12px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 8px 8px 0}
 .section-gap{margin-top:22px}
 /* topic cards: the whole card is one link (h3 a::after); buttons inside sit above it */

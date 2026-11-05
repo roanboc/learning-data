@@ -359,6 +359,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
     // knows what it may do, who answers for it, and who can stop it
     {at:T.now-0.9,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       ag_roomLight(cx,1);
+      // all of it leaves before the end card, so nothing shows through its veil under the lesson
+      const out=1-ag_in(tt,end-1.0,0.6);if(out<=0.01)return;cx.save();cx.globalAlpha*=out;
       cj_process(cx,{cap:1,srv:1,srvLine:1,step:1,bracket:1,role:1,roleLine:1,who:1,whoLine:1,agent:1,agentLine:1,owner:1,dim:0.85,
         keep:k=>["r1","s1","s2","s3","agent"].indexOf(k)>=0,glow:k=>(k==="agent"&&ag_in(tt,T.place-0.2,0.4)>0.5)?AG.violet:(k==="r1"&&ag_in(tt,T.role-0.2,0.4)>0.5)?AG.blue:null});
       // one card over the people's side: what the planning agent has, then what everyone knows
@@ -368,7 +370,8 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=cj_once(sc,"T",()=>({
         cj_list(cx,1090,110,790,"The planning agent",L.map(l=>[l[0],ag_in(tt,l[1]-0.15,0.35)]),{bare:true});
         const sa=ag_in(tt,T.so-0.3,0.5);if(sa>0.01){cx.strokeStyle=rgba(AG.shadow,0.18*sa);cx.lineWidth=2;cx.beginPath();cx.moveTo(1130,482);cx.lineTo(1840,482);cx.stroke();}
         const Q=[["what it may do: its role says",T.may],["who answers for it: Clara",T.who],["who can stop it: Clara, or Sam",T.stop]];
-        cj_list(cx,1090,494,790,"So everyone knows",Q.map(q=>[q[0],ag_in(tt,q[1]-0.15,0.35)]),{bare:true,a:sa,col:AG.green});cx.restore();}}}]);
+        cj_list(cx,1090,494,790,"So everyone knows",Q.map(q=>[q[0],ag_in(tt,q[1]-0.15,0.35)]),{bare:true,a:sa,col:AG.green});cx.restore();}
+      cx.restore();}}]);
   // the end card: the film's lesson, and the next film
   ag_end(ctx,S,t,end,"A place on the map",null,"Film 3 of 7","From helper to colleague");
   const a1=ag_in(t,end+0.6,0.9);if(a1>0){setScreen(ctx,S);ag_T(ctx,"Before an agent works alone,",960,296,{w:700,size:48,align:"center",a:a1});

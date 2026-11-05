@@ -76,6 +76,7 @@
 | Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |
 | Memory: from one chat to the team | 298 | 0% | 0 | 28.2 | Drawn to the rule |
 | Plan, define the check, do, check | 305 | 0% | 0 | 30 | Drawn to the rule |
+| How it goes wrong | 372 | 0% | 0 | 28.0 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |

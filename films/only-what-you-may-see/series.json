@@ -1,0 +1,75 @@
+{
+  "title": "Only what you may see",
+  "title_es": "Solo lo que puedes ver",
+  "planned": 8,
+  "lead": "The second series of Data protection and privacy. The Faculty of Health asks for learners' records for a study. Three films show agreements, classification and the ways to hide a value, with no product named; five build them in Databricks and dbt.",
+  "lead_es": "La segunda serie de Protección de datos y privacidad. La Facultad de Salud pide registros de estudiantes para un estudio. Tres películas muestran los acuerdos, la clasificación y las formas de ocultar un valor, sin nombrar productos; cinco las construyen en Databricks y dbt.",
+  "description": "Films on protecting data by what it is: signed agreements before access, a class for every column, the ways to mask a value and what each keeps, grants by design, tags that travel downstream, one policy for many tables, copies that keep the rules, and proof that the protection held.",
+  "description_es": "Películas sobre proteger los datos según lo que son: acuerdos firmados antes del acceso, una clase para cada columna, las formas de enmascarar un valor y lo que conserva cada una, permisos diseñados, etiquetas que viajan aguas abajo, una política para muchas tablas, copias que mantienen las reglas, y la prueba de que la protección se cumplió.",
+  "card": "Classify once, protect by class everywhere the data goes, and prove it held.",
+  "card_es": "Clasifica una vez, protege por clase dondequiera que vayan los datos, y demuestra que se cumplió.",
+  "order": "Watch them in order: the ideas first, then the tools.",
+  "order_es": "Míralas en orden: primero las ideas, luego las herramientas.",
+  "thread_h": "One thread: a study's request, from a question to a proof",
+  "thread_h_es": "Un hilo: la petición de un estudio, de una pregunta a una prueba",
+  "thread": "Anil Kurian, an analyst in the Faculty of Health, asks for learners' records for a study of how health students progress. Film by film, the request becomes a signed agreement; every column gets its class from its owner; the class travels to every table made from it; one policy hides each class wherever it lands, and shows the faculty only its own learners; copies keep the rules; and a review proves it held, until the agreement's end date.",
+  "thread_es": "Anil Kurian, analista de la Facultad de Salud, pide registros de estudiantes para un estudio sobre cómo avanzan los estudiantes de salud. Película a película, la petición se vuelve un acuerdo firmado; cada columna recibe su clase de su dueña; la clase viaja a cada tabla hecha a partir de ella; una política oculta cada clase dondequiera que llegue, y muestra a la facultad solo a sus propios estudiantes; las copias mantienen las reglas; y una revisión demuestra que se cumplió, hasta la fecha de fin del acuerdo.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Owns the registrar's data",
+      "Mei Tanaka, who classifies its columns and signs who may see them, and guides the series"
+    ],
+    [
+      "biz",
+      "Asks for the data",
+      "Anil Kurian, an analyst in the Faculty of Health, who needs it for a study"
+    ],
+    [
+      "biz",
+      "Leads data governance",
+      "Yusuf Demir, who keeps the agreements and runs the access reviews"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who builds the grants, tags and policies"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, who writes each column's class in the project"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Es dueña de los datos del registro",
+      "Mei Tanaka, que clasifica sus columnas y firma quién puede verlas, y guía la serie"
+    ],
+    [
+      "biz",
+      "Pide los datos",
+      "Anil Kurian, analista de la Facultad de Salud, que los necesita para un estudio"
+    ],
+    [
+      "biz",
+      "Lidera la gobernanza de datos",
+      "Yusuf Demir, que guarda los acuerdos y hace las revisiones de acceso"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que construye los permisos, las etiquetas y las políticas"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, que escribe la clase de cada columna en el proyecto"
+    ]
+  ]
+}

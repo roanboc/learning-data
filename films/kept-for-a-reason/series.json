@@ -1,0 +1,75 @@
+{
+  "title": "Kept for a reason",
+  "title_es": "Guardado por una razón",
+  "planned": 5,
+  "lead": "The third series of Data protection and privacy. Linh's tutoring contract ends, and she asks what the university holds about her. Three films show purpose, retention and people's rights over their data, with no product named; two show deleting and answering on the platform.",
+  "lead_es": "La tercera serie de Protección de datos y privacidad. Termina el contrato de tutora de Linh, y pregunta qué guarda la universidad sobre ella. Tres películas muestran el propósito, la conservación y los derechos de las personas sobre sus datos, sin nombrar productos; dos muestran cómo borrar y responder en la plataforma.",
+  "description": "Films on privacy and the life of data: a reason for every piece of personal data, how long each kind of record is kept and what happens then, people's rights to see, correct and erase their data, deleting so that no old copy remains, and a person's request answered end to end, with proof.",
+  "description_es": "Películas sobre la privacidad y la vida de los datos: una razón para cada dato personal, cuánto se guarda cada tipo de registro y qué pasa después, los derechos de las personas a ver, corregir y borrar sus datos, borrar sin que quede ninguna copia antigua, y la petición de una persona respondida de principio a fin, con pruebas.",
+  "card": "Keep personal data for a reason and a time, then let it go, and answer when a person asks.",
+  "card_es": "Guarda los datos personales por una razón y un tiempo, luego déjalos ir, y responde cuando una persona pregunta.",
+  "order": "Watch them in order: the ideas first, then the tools.",
+  "order_es": "Míralas en orden: primero las ideas, luego las herramientas.",
+  "thread_h": "One thread: a tutor's contract ends, and she asks",
+  "thread_h_es": "Un hilo: termina el contrato de una tutora, y ella pregunta",
+  "thread": "Linh Nguyen's tutoring contract ends on 20 November 2026. Four days later she asks the university what it holds about her, and to be taken off the tutors' mailing list. Film by film, Ingrid Holm, who owns HR's data, finds why each record is kept and until when; what must stay by law and what can go; and, with Jun, how deleting on the platform really deletes, until Linh gets her answer on time, with proof.",
+  "thread_es": "El contrato de tutora de Linh Nguyen termina el 20 de noviembre de 2026. Cuatro días después pide a la universidad qué guarda sobre ella, y que la quiten de la lista de correo de tutores. Película a película, Ingrid Holm, dueña de los datos de RR. HH., averigua por qué se guarda cada registro y hasta cuándo; qué debe quedarse por ley y qué puede irse; y, con Jun, cómo borrar en la plataforma borra de verdad, hasta que Linh recibe su respuesta a tiempo, con pruebas.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Owns HR's data",
+      "Ingrid Holm, in HR, who decides how long each record is kept, and guides the series"
+    ],
+    [
+      "biz",
+      "Asks",
+      "Linh Nguyen, the casual tutor the data is about"
+    ],
+    [
+      "biz",
+      "Owns the registrar's data",
+      "Mei Tanaka, whose records of Linh as a student are kept for good"
+    ],
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, who finds every copy and deletes it"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who sets how long old versions stay"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Es dueña de los datos de RR. HH.",
+      "Ingrid Holm, de RR. HH., que decide cuánto se guarda cada registro, y guía la serie"
+    ],
+    [
+      "biz",
+      "Pregunta",
+      "Linh Nguyen, la tutora ocasional sobre la que tratan los datos"
+    ],
+    [
+      "biz",
+      "Es dueña de los datos del registro",
+      "Mei Tanaka, cuyos registros de Linh como estudiante se guardan para siempre"
+    ],
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, que encuentra cada copia y la borra"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que fija cuánto tiempo se quedan las versiones antiguas"
+    ]
+  ]
+}

@@ -230,6 +230,7 @@ project/
 │                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the count of active research projects as a
 │                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
+│                             hr-system-interface/: the HR system's data contract, agreed with its owner;
 │                             hot-warm-cold/: a streaming table, a materialized view and an archive,
 │                             data kept hot, warm and cold, with their service levels (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access

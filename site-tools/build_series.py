@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Fourteen series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Seventeen series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
@@ -15,7 +15,10 @@ agents-at-work-on-data/) and From helper to colleague (films/from-helper-to-coll
 four series of the module Modern data basics: Data that moves (films/data-that-moves/, at data-that-moves/, which holds the
 module's plan), Data as software (films/data-as-software/, at data-as-software/), From tables to decisions
 (films/from-tables-to-decisions/, at from-tables-to-decisions/) and Documents as data (films/documents-as-data/, at
-documents-as-data/, a series of one film). A series with no film on the site yet has no pages, and the topics leave it out until its first
+documents-as-data/, a series of one film); and the three series of the module Data protection and privacy: Locks before the
+data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
+(films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
+kept-for-a-reason/). A series with no film on the site yet has no pages, and the topics leave it out until its first
 film is out, as the Topics and home pages leave out a topic with nothing on the site yet. Each is described once, in SERIES below: its folder, its place on the site, its names, the
 hand-written pages that show its cards, and what each film builds on. The films and series whose pages are written by hand
 (The Inner Life of Data, A Sharper Sketch, When things go wrong) are described, for their cards, in HAND.
@@ -73,7 +76,8 @@ def series_link(lg, RE, sid):
 # The series' place among the topics, and its card on the Topics and home pages, are in TOPICS below. The three series of data
 # governance are one pack: principles, then the organisation's map, then making it work, each the next of the one before. What an
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
-# each the next of the one before; the last, Documents as data, is a series of one film.
+# each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
+# Data protection and privacy, whose three series are each the next of the one before.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
@@ -136,6 +140,18 @@ SERIES = [
          built="in-the-weeds", next="documents-as-data"),
     dict(id="documents-as-data", dir="documents-as-data", slug="documents-as-data",
          name={"en": "Documents as data", "es": "Documentos como datos"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
+    dict(id="locks-before-the-data", dir="locks-before-the-data", slug="locks-before-the-data",
+         name={"en": "Locks before the data", "es": "Cerraduras antes que los datos"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="only-what-you-may-see"),
+    dict(id="only-what-you-may-see", dir="only-what-you-may-see", slug="only-what-you-may-see",
+         name={"en": "Only what you may see", "es": "Solo lo que puedes ver"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="kept-for-a-reason"),
+    dict(id="kept-for-a-reason", dir="kept-for-a-reason", slug="kept-for-a-reason",
+         name={"en": "Kept for a reason", "es": "Guardado por una razón"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
 ]
@@ -344,6 +360,11 @@ TOPICS = [
          who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
          line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
                "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
+    dict(id="data-protection", items=["locks-before-the-data", "only-what-you-may-see", "kept-for-a-reason"],
+         name={"en": "Data protection and privacy", "es": "Protección de datos y privacidad"},
+         who={"en": "For platform teams, data owners and anyone who gives or gets access to data", "es": "Para equipos de plataforma, dueños de datos y quien da o recibe acceso a datos"},
+         line={"en": "Who and what may reach the data, what each person may see, and how long personal data is kept: each lock built from a role, a boundary or a rule already decided.",
+               "es": "Quién y qué puede llegar a los datos, qué puede ver cada persona, y cuánto se guardan los datos personales: cada cerradura hecha a partir de un rol, una frontera o una regla ya decididos."}),
     dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data", "from-helper-to-colleague"],
          name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
          who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},

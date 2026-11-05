@@ -281,7 +281,7 @@ scene("narrow",(ctx,S,t,sc)=>{const c=sc.cues,P=br_once(sc,"P",()=>({fewest:wAt(
       // a development workspace, with tools that only read
       const wa=ag_io(tt,c.dev,c.stays-0.3,0.4);
       if(wa>0){x.save();x.globalAlpha*=wa;ag_box(x,640,120,860,300,24,{edge:AG.blue,edgeA:0.5});ag_label(x,668,170,"Development workspace");
-        ["Query","Catalog","Repository"].forEach((n,i)=>ag_tool(x,668+i*272,206,252,130,n,{a:ag_in(tt,P.tools+0.15*i,0.4),touch:ag_io(tt,P.tools+0.15*i,P.tools+1.6,0.4)}));x.restore();}
+        ["Query","Catalog","Docs"].forEach((n,i)=>ag_tool(x,668+i*272,206,252,130,n,{a:ag_in(tt,P.tools+0.15*i,0.4),touch:ag_io(tt,P.tools+0.15*i,P.tools+1.6,0.4)}));x.restore();}
       // none of them writes outside its sandbox, approves, merges, or grants a right
       br_list(x,640,450,600,"None of its tools",[{t:"Writes outside its sandbox",icon:"no",a:ag_in(tt,c.none+0.2,0.4)},{t:"Approves",icon:"no",a:ag_in(tt,P.appr,0.4)},
         {t:"Merges",icon:"no",a:ag_in(tt,P.merges,0.4)},{t:"Grants a right",icon:"no",a:ag_in(tt,P.grants,0.4)}],{a:ag_io(tt,c.none,c.sandbox-0.3,0.4),k:ag_spr(tt,c.none)});

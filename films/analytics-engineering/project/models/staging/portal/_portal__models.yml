@@ -1,0 +1,73 @@
+models:
+
+  - name: stg_portal__name_confirmations
+    description: >
+      One row per version of a graduate's answer to "Is this your name?", as the student portal
+      recorded it. In the group graduations, so the graduation list can read it.
+    config:
+      group: graduations
+      meta: {owner: "Mei Tanaka, registrar's office", domain: registrar}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [confirmation_bk, recorded_from]
+          config:
+            meta: {owner: "Mei Tanaka, registrar's office"}
+    columns:
+      - name: confirmation_key
+        description: The hash of confirmation_bk.
+      - name: confirmation_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none}
+      - name: student_bk
+        description: The graduate's student ID, qualified by the student system's key set, like SIS|S-19733.
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: direct}
+      - name: ceremony_id
+        description: The ceremony the graduate registered for. The answer counts for it only.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('ceremonies')
+                field: ceremony_id
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+      - name: answer
+        description: confirmed, or corrected with the name the graduate typed.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [confirmed, corrected]
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+      - name: given_name
+        config:
+          meta: {personal_data: direct}
+      - name: family_name
+        config:
+          meta: {personal_data: direct}
+      - name: name_as_printed
+        description: The whole name, in the graduate's own order, every letter kept.
+        config:
+          meta: {personal_data: direct}
+      - name: confirmed_at
+        description: When the graduate answered.
+      - name: checked_on
+        description: For a correction, the day the registrar's office checked it against the document seen at enrolment. Empty for a confirmation.
+      - name: recorded_from
+        description: '{{ doc("recorded_from") }}'
+      - name: recorded_to
+        description: '{{ doc("recorded_to") }}'
+      - name: is_current_version
+        description: '{{ doc("is_current_version") }}'
+      - name: loaded_at
+        description: '{{ doc("loaded_at") }}'

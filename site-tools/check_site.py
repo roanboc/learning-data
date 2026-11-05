@@ -72,13 +72,13 @@ CRUMBS = {  # page: (text, the pages its links go to, in order)
     "es/sketch/": ("Temas › Modelado de datos", ["es/topics/", "es/topics/"]),
     "sketch/labs/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
     "sketch/scenarios/": ("Topics › Data modelling › A Sharper Sketch", ["topics/", "topics/", "sketch/"]),
-    "when-things-go-wrong/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/"]),
-    "es/when-things-go-wrong/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
-    "when-things-go-wrong/silent-change/": ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
-    "es/when-things-go-wrong/silent-change/": ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"]),
+    "when-things-go-wrong/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/"]),
+    "es/when-things-go-wrong/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/"]),
+    "when-things-go-wrong/silent-change/": ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"]),
+    "es/when-things-go-wrong/silent-change/": ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"]),
     **{f"{lg}when-things-go-wrong/too-good-to-be-true/{sub}": crumb
-       for lg, crumb in (("", ("Topics › Data quality and change › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])),
-                         ("es/", ("Temas › Calidad de datos y cambios › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])))
+       for lg, crumb in (("", ("Topics › Data quality › When things go wrong", ["topics/", "topics/", "when-things-go-wrong/"])),
+                         ("es/", ("Temas › Calidad de datos › Cuando algo sale mal", ["es/topics/", "es/topics/", "es/when-things-go-wrong/"])))
        for sub in ("", "labs/", "scenarios/")},
 }
 # the film bundles (one per page: they declare the same top-level names) and the progress prefix of each film

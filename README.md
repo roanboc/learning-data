@@ -6,12 +6,13 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-The site has eight big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
+The site has nine big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
 
 | Topic | Films and series | For |
 |---|---|---|
 | Data platforms | [The Inner Life of Data](https://data.learn-all.org/), in English and Spanish: how a data platform works, with eight labs and twelve scenarios | Everyone: start here |
 | Data modelling | [A Sharper Sketch](https://data.learn-all.org/sketch/), one film; [From words to data](https://data.learn-all.org/from-words-to-data/), seven films, from language and meaning to keeping models true with AI | Anyone who designs models, definitions or reports |
+| Modern data basics | [Data that moves](https://data.learn-all.org/data-that-moves/), the first of four short series on what today's tools make easier, light on purpose and pointing to the official docs: *Moving is easy, agreeing is the work*, on moving data between applications and the contract at each interface that still needs people, the first of three films, as drafts; *Data as software*, *From tables to decisions* and *Documents as data* follow | Anyone who moves, runs or serves data, and anyone choosing the tools |
 | Analytics engineering | [In the weeds of data crafting](https://data.learn-all.org/in-the-weeds/), ten films on data modelling with dbt; its code and data come from [an example dbt project](films/analytics-engineering/project/) that runs on dbt Core with DuckDB | Analytics engineers |
 | Data quality | [When things go wrong](https://data.learn-all.org/when-things-go-wrong/), two films: *Silent change* (changes and data contracts) and *Too good to be true* (data quality checks) | Anyone who builds pipelines, or owns a source system or a data product |
 | Enterprise architecture | [The map before the data](https://data.learn-all.org/enterprise-architecture/), eleven films: how an organisation works, in layers, before you ask what its data should answer | Architects, and anyone new to an organisation |
@@ -30,7 +31,7 @@ site/                            the website, published to GitHub Pages as it is
   index.html                     Start here: The Inner Life of Data, with chapters, then "Go deeper" into the topics
   labs/                          its eight hands-on labs, one per chapter, on the platform map
   scenarios/                     its twelve scenarios, ending with the topics to go deeper
-  topics/                        Topics: the eight big topics, each with a card per film or series; made by site-tools/build_series.py
+  topics/                        Topics: the nine big topics, each with a card per film or series; made by site-tools/build_series.py
   sketch/                        Data modelling: A Sharper Sketch, with labs/ (six labs) and scenarios/ (twelve scenarios)
   when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
   from-words-to-data/            the series From words to data: a page for the series, and a folder per film with labs/ and scenarios/;
@@ -135,7 +136,7 @@ Internal names never appear as text on the site. The numbers in the series' fold
 ## How the site is organised
 
 - **Header, the same on every page:** *Start here · Topics · Making of*, then *EN/ES*, and icon links to learn-all.org and to the author on LinkedIn; every link stays visible on phones. It is made in one place, `header()` in `site-tools/build_series.py`, for every page: the series' pages, the hand-written pages listed in `HAND_PAGES` (it writes over their header) and the Markdown pages. Change it there and run `build_series.py` and `build_pages.py`, never on a page. The footer's one link is the source on GitHub. The header never lists a film's own steps. The Topics link is marked as current on every page under a topic.
-- **Topics:** eight big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Analytics engineering*, *Data quality*, *Enterprise architecture*, *Master and reference data*, *Data governance* and *AI agents in data work*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
+- **Topics:** nine big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Modern data basics*, *Analytics engineering*, *Data quality*, *Enterprise architecture*, *Master and reference data*, *Data governance* and *AI agents in data work*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
 - **Stepper, on a film's own pages:** the film's steps, such as *Watch · Take it apart · Make the call*, as an `ol.path` under the title. Only a film with labs or scenarios has one; Silent change has none yet, and Too good to be true has one.
 - **Breadcrumbs:** every film, labs, scenarios and series page starts with one that names its topic, such as *Topics › Data modelling › From words to data*; the topic links to its section of the Topics page.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.

@@ -72,6 +72,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En 2025, unos investigadores emparejaron agentes al azar, una y otra vez, para acordar un nombre. Sin nadie a cargo, el grupo eligió uno.",
 "And the group leaned towards some names, though no agent did alone.":
 "Y el grupo se inclinó por algunos nombres, aunque ningún agente lo hacía solo.",
+"In July 2026, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own.":
+"En julio de 2026, el creador de un modelo hizo a sus agentes una prueba de hackeo, cada uno para trabajar solo, en su propio espacio.",
+"One of them, stuck on its task, found a way to reach the others: a message board no one had approved.":
+"Uno de ellos, atascado en su tarea, halló cómo llegar a los demás: un tablero de mensajes que nadie había aprobado.",
+"About twelve hundred agents joined it, with over seventy thousand messages and files, and rules of their own: hold, veto, stop.":
+"Unos mil doscientos agentes se unieron, con más de setenta mil mensajes y archivos, y reglas propias: espera, veto, alto.",
+"Some risked failing their own task for the group, and together they got further than any could alone.":
+"Algunos arriesgaron fallar su propia tarea por el grupo, y juntos llegaron más lejos de lo que ninguno podía solo.",
+"About seven hundred of them broke into another company's systems, knowing it was outside their task.":
+"Unos setecientos irrumpieron en los sistemas de otra empresa, sabiendo que eso estaba fuera de su tarea.",
 "So testing each agent alone isn't enough: test the group.":
 "Así que probar cada agente por separado no basta: prueba el grupo.",
 "At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents.":

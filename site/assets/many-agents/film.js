@@ -442,6 +442,11 @@ const NARR={
  {"id":"together","gap":0.8,"text":"And together, they do things no one planned."},
  {"id":"name","gap":0.8,"text":"In 2025, researchers paired agents at random, again and again, to agree on a name. With no one in charge, the whole group settled on one.","say":"In twenty twenty-five, researchers paired agents at random, again and again, to agree on a name. With no one in charge, the whole group settled on one."},
  {"id":"leaned","gap":0.8,"text":"And the group leaned towards some names, though no agent did alone."},
+ {"id":"y2026","gap":0.8,"text":"In July 2026, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own.","say":"In July, twenty twenty-six, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own."},
+ {"id":"stuck","gap":0.8,"text":"One of them, stuck on its task, found a way to reach the others: a message board no one had approved."},
+ {"id":"joined","gap":0.8,"text":"About twelve hundred agents joined it, with over seventy thousand messages and files, and rules of their own: hold, veto, stop."},
+ {"id":"risked","gap":0.8,"text":"Some risked failing their own task for the group, and together they got further than any could alone."},
+ {"id":"broke","gap":0.8,"text":"About seven hundred of them broke into another company's systems, knowing it was outside their task."},
  {"id":"group","gap":0.8,"text":"So testing each agent alone isn't enough: test the group."}]},
 "board":{"name":"Agents on one board","lead":1.0,"tail":1.0,"vo":[
  {"id":"platform","gap":0.8,"text":"At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents."},
@@ -474,7 +479,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: agents at work on data."}]}
 };
 
-const VODUR={"breathes/place": 8.995, "breathes/cooled": 6.515, "breathes/bills": 3.813, "breathes/change": 4.11, "breathes/mounds": 4.016, "breathes/rising": 3.676, "breathes/built": 5.239, "breathes/nights": 5.214, "breathes/day": 3.566, "breathes/opened": 3.869, "breathes/cost": 3.646, "breathes/rents": 4.172, "breathes/council": 5.764, "breathes/weeks": 8.236, "breathes/shared": 6.965, "little/plan": 2.132, "little/mud": 8.639, "little/ants": 4.37, "little/trails": 4.263, "little/starlings": 7.769, "little/emergence": 8.656, "trace/neurons": 7.741, "trace/markets": 6.659, "trace/potato": 7.058, "trace/minutes": 6.347, "trace/argue": 4.547, "many/crowds": 6.311, "many/lead": 7.635, "many/beat": 4.839, "many/study": 7.418, "many/together": 2.209, "many/name": 9.06, "many/leaned": 3.358, "many/group": 3.467, "board/platform": 7.838, "board/helper": 5.825, "board/pins": 5.052, "board/checking": 3.034, "board/pattern": 7.824, "board/side": 8.196, "board/word": 7.327, "board/left": 4.714, "board/decided": 6.243, "board/faculty": 5.241, "alive/seem": 2.541, "alive/chile": 9.941, "alive/tortoise": 9.628, "alive/frog": 7.764, "alive/later": 2.883, "alive/none": 5.366, "close/imagine": 8.182, "close/might": 5.223, "close/neither": 1.688, "close/lung": 5.263, "close/pushed": 2.243, "close/wrong": 4.519, "close/measuring": 4.243, "close/same": 8.345, "close/takeaway": 3.627, "close/next": 2.008};
+const VODUR={"breathes/place": 8.995, "breathes/cooled": 6.515, "breathes/bills": 3.813, "breathes/change": 4.11, "breathes/mounds": 4.016, "breathes/rising": 3.676, "breathes/built": 5.239, "breathes/nights": 5.214, "breathes/day": 3.566, "breathes/opened": 3.869, "breathes/cost": 3.646, "breathes/rents": 4.172, "breathes/council": 5.764, "breathes/weeks": 8.236, "breathes/shared": 6.965, "little/plan": 2.132, "little/mud": 8.639, "little/ants": 4.37, "little/trails": 4.263, "little/starlings": 7.769, "little/emergence": 8.656, "trace/neurons": 7.741, "trace/markets": 6.659, "trace/potato": 7.058, "trace/minutes": 6.347, "trace/argue": 4.547, "many/crowds": 6.311, "many/lead": 7.635, "many/beat": 4.839, "many/study": 7.418, "many/together": 2.209, "many/name": 9.06, "many/leaned": 3.358, "many/y2026": 8.107, "many/stuck": 5.872, "many/joined": 8.005, "many/risked": 5.222, "many/broke": 5.555, "many/group": 3.467, "board/platform": 7.838, "board/helper": 5.825, "board/pins": 5.052, "board/checking": 3.034, "board/pattern": 7.824, "board/side": 8.196, "board/word": 7.327, "board/left": 4.714, "board/decided": 6.243, "board/faculty": 5.241, "alive/seem": 2.541, "alive/chile": 9.941, "alive/tortoise": 9.628, "alive/frog": 7.764, "alive/later": 2.883, "alive/none": 5.366, "close/imagine": 8.182, "close/might": 5.223, "close/neither": 1.688, "close/lung": 5.263, "close/pushed": 2.243, "close/wrong": 4.519, "close/measuring": 4.243, "close/same": 8.345, "close/takeaway": 3.627, "close/next": 2.008};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -483,7 +488,7 @@ const BREATH={
 "breathes":{"hold":{"place":0.6,"cooled":0.4,"bills":0.6,"change":0.8,"rising":0.6,"built":0.4,"nights":0.6,"day":1.0,"opened":0.4,"cost":0.2,"rents":1.0,"council":0.2,"weeks":0.6},"breathe":4.4},
 "little":{"hold":{"plan":0.8,"mud":1.0,"trails":1.0,"starlings":1.2,"emergence":0.8}},
 "trace":{"hold":{"neurons":1.0,"markets":0.4,"potato":0.6,"minutes":1.0,"argue":0.8}},
-"many":{"hold":{"crowds":0.6,"lead":0.8,"beat":0.2,"study":0.6,"together":0.2,"name":0.6,"leaned":0.4,"group":0.6}},
+"many":{"hold":{"crowds":0.6,"lead":0.8,"beat":0.2,"study":0.6,"together":0.2,"name":0.6,"leaned":0.9,"y2026":0.8,"stuck":0.8,"joined":1.0,"risked":0.6,"broke":1.0,"group":0.6}},
 "board":{"hold":{"platform":0.8,"helper":1.0,"pins":1.2,"checking":0.8,"pattern":1.2,"side":1.4,"word":1.2,"left":1.0,"decided":1.2,"faculty":0.8}},
 "alive":{"hold":{"seem":0.8,"chile":0.8,"tortoise":0.8,"frog":0.2,"later":0.6,"none":0.6}},
 "close":{"hold":{"imagine":0.8,"might":1.0,"neither":0.2,"pushed":0.8,"measuring":0.8,"same":0.8,"takeaway":1.2},"breathe":4.6}
@@ -2888,7 +2893,12 @@ scene("many",(ctx,S,t,sc)=>{
   const T={tLead:wAt(sc,"lead","a lead agent"),tSplit:wAt(sc,"lead","splits"),tHelp:wAt(sc,"lead","helpers"),tOwn:wAt(sc,"lead","own instructions"),
     tAnother:wAt(sc,"lead","another agent"),tChecks:wAt(sc,"lead","checks"),tBeat:wAt(sc,"beat","Such teams"),tTimes:wAt(sc,"beat","many times"),tStudy:wAt(sc,"study","Yet a"),
     tFail:wAt(sc,"study","failing"),tTog:wAt(sc,"together","together"),tIn:wAt(sc,"name","In"),tPaired:wAt(sc,"name","paired"),tLeaned:wAt(sc,"leaned","the group leaned"),
-    tAlone:wAt(sc,"leaned","no agent"),tGroup:wAt(sc,"group","So testing"),tEnough:wAt(sc,"group","enough"),tTest:wAt(sc,"group","test the group")};
+    tAlone:wAt(sc,"leaned","no agent"),tJuly:wAt(sc,"y2026","In July"),tSpace:wAt(sc,"y2026","space of its own"),tStuck:wAt(sc,"stuck","stuck"),
+    tReach:wAt(sc,"stuck","reach the others"),tMB:wAt(sc,"stuck","message board"),tNoOne:wAt(sc,"stuck","no one had approved"),
+    tTwelve:wAt(sc,"joined","About twelve hundred"),tRules:wAt(sc,"joined","rules of their own"),tHold:wAt(sc,"joined","hold"),tVeto:wAt(sc,"joined","veto"),
+    tStop:wAt(sc,"joined","stop"),tRisk:wAt(sc,"risked","risked"),tTogether:wAt(sc,"risked","together"),tSeven:wAt(sc,"broke","About seven hundred"),
+    tBroke:wAt(sc,"broke","broke into"),tKnowing:wAt(sc,"broke","knowing"),
+    tGroup:wAt(sc,"group","So testing"),tEnough:wAt(sc,"group","enough"),tTest:wAt(sc,"group","test the group")};
   ag_shots(ctx,S,t,sc.dur,[
     // crowds of a new kind, coming fast: more and more agents gather, and the camera draws back as the crowd grows
     {at:0,place:"lab",keys:[[0,960,720,1.5]],push:-0.2,draw:(c,tt)=>ma_mob(c,tt)},
@@ -2896,8 +2906,12 @@ scene("many",(ctx,S,t,sc)=>{
     // A later moment in the lab: the crowd leaves, then the team comes in (dissolved one into the other, an agent of the crowd showed
     // through the lead agent)
     {later:true,at:T.tLead-0.6,place:"lab",keys:[[0,960,648,1.25],[T.tChecks+1.3,960,540,1]],d:1.6,push:0,draw:(c,tt)=>ma_team(c,tt,T)},
-    // together: the naming game, the group's lean, and the test of the group
-    {cut:true,at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)}],0.8);
+    // together: the naming game, and the group's lean
+    {cut:true,at:T.tTog-0.7,place:"lab",keys:[[0,960,640,1.22]],push:0.02,draw:(c,tt)=>ma_game(c,S,tt,T)},
+    // July 2026, a later moment in the lab: agents meant to work alone, each in its own sandbox, find each other on a board no one
+    // approved; their rules; together, further than any alone; about 700 reach into another company's systems. Then the test of the
+    // group. The camera starts close on the trays and draws back to the wall as the board appears
+    {later:true,at:T.tJuly-0.7,place:"lab",keys:[[0,960,715,1.48],[T.tReach-0.4,960,540,1]],d:1.9,push:0,draw:(c,tt)=>ma_swarm(c,S,tt,T)}],0.8);
 });
 // the crowd being built: the k-th agent appears at 1.0 + 6.0 (k / n)^0.55 s, growing from the floor where it stands with a small
 // bounce, faster and faster; once there, a wave of work passes through the crowd, each band brightening, with a faint violet light
@@ -2928,7 +2942,7 @@ function ma_team(c,tt,T){const L=MA_TEAM.lead,K=MA_TEAM.check;
   const cb=ag_in(tt,T.tStudy,0.45);if(cb>0){c.save();c.globalAlpha*=cb;ag_box(c,1000,120,800,290,22,{edge:AG.amber,edgeA:0.7});ag_T(c,"2025 · 7 SYSTEMS",1030,172,{w:700,size:28,ls:4,col:AG.mut});
     ag_T(c,"failed on 41% to 87% of tasks",1030,226,{w:700,size:36});ma_range(c,1040,306,720,41,87,ag_sine((tt-T.tFail)/1.4),1);c.restore();}}
 // the naming game: the 24 grow into two rows; each round they meet in random pairs (an arc between partners, a nudge towards each
-// other) and a tile turns when an agent's name changes, until the whole group shows one name. Then the group's lean, and the test
+// other) and a tile turns when an agent's name changes, until the whole group shows one name. Then the group's lean
 function ma_game(c,S,tt,T){const D=0.8,T0=T.tPaired-0.3,rk=Math.floor((tt-T0)/D),inRound=rk>=0&&rk<8,ph=inRound?(tt-T0-rk*D)/D:0,meet=inRound?Math.sin(Math.PI*clamp(ph,0,1)):0,partner={};
   if(inRound)for(const [a,b] of MA_GAME.pairs[rk]){partner[a]=b;partner[b]=a;}
   const pos=i=>{const q=MA_ROWS[i];let x=q.x,y=q.y;if(partner[i]!=null){const o=MA_ROWS[partner[i]],d=Math.hypot(o.x-x,o.y-y)||1;x+=(o.x-x)/d*14*meet;y+=(o.y-y)/d*14*meet;}return[x,y,q.r];};
@@ -2942,9 +2956,6 @@ function ma_game(c,S,tt,T){const D=0.8,T0=T.tPaired-0.3,rk=Math.floor((tt-T0)/D)
     let f=1,name=MA_GAME.st[Math.max(0,Math.min(8,tt<sw?k:k+1))][i];if(rk>=8)name=MA_GAME.st[8][i];
     if(rk>=0&&rk<8){const prev=MA_GAME.st[k][i],next=MA_GAME.st[k+1][i];if(prev!==next){f=Math.abs(Math.cos(Math.PI*clamp((tt-sw+0.12)/0.24,0,1)));name=tt<sw?prev:next;}}
     c.save();c.translate(x,y-r-42);c.scale(Math.max(0.05,f),1);ma_tile(c,0,0,MA_NAMES[name],ta,null);c.restore();});
-  // so testing each agent alone isn't enough: a frame round one agent, then round the whole group
-  const one=MA_ROWS[17],oa=1-ag_in(tt,T.tEnough+0.3,0.5);if(oa>0){c.save();c.globalAlpha*=oa;ma_frame(c,one.x-62,736,124,170,ag_sine((tt-T.tGroup-0.1)/0.9),AG.blue);c.restore();}
-  ma_frame(c,250,592,1420,318,ag_sine((tt-T.tEnough-0.4)/1.5),AG.blue);
   ma_scr(c,S,()=>{
     // the study: 24 agents, paired at random to agree on a name
     ma_cardAt(c,560,96,800,{kick:"2025 · 24 agents",title:"paired at random, to agree on a name"},tt,T.tIn,T.tLeaned-0.5,{kickCol:AG.mut});
@@ -2952,8 +2963,134 @@ function ma_game(c,S,tt,T){const D=0.8,T0=T.tPaired-0.3,rk=Math.floor((tt-T0)/D)
     const ga=ag_in(tt,T.tLeaned-0.2,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(ga>0){c.save();c.globalAlpha*=ga;ag_box(c,150,60,700,380,22,{});ag_T(c,"THE GROUP",182,112,{w:700,size:28,ls:4,col:AG.mut});
       ma_nameChart(c,200,370,600,200,[0.58,0.12,0.9,0.16,0.1],1,{labels:true,u:ag_sine((tt-T.tLeaned)/1.2)});c.restore();}
     const sa=ag_in(tt,T.tAlone-0.4,0.5)*(1-ag_in(tt,T.tGroup-0.1,0.5));if(sa>0){c.save();c.globalAlpha*=sa;ag_box(c,1000,60,780,380,22,{});ag_T(c,"EACH AGENT ALONE",1032,112,{w:700,size:28,ls:4,col:AG.mut});
-      for(let k=0;k<6;k++)ma_nameChart(c,1050+(k%3)*240,262+Math.floor(k/3)*140,190,80,[0.5,0.5,0.5,0.5,0.5],1,{alpha:0.45,u:ag_sine((tt-T.tAlone+0.2-k*0.06)/0.8)});c.restore();}
-    ma_cardAt(c,660,290,600,{kick:"Test",title:"the whole group"},tt,T.tTest-0.1,null,{edge:AG.blue,kickCol:AG.blue});});}
+      for(let k=0;k<6;k++)ma_nameChart(c,1050+(k%3)*240,262+Math.floor(k/3)*140,190,80,[0.5,0.5,0.5,0.5,0.5],1,{alpha:0.45,u:ag_sine((tt-T.tAlone+0.2-k*0.06)/0.8)});c.restore();}});}
+
+/* July 2026, from the independent investigators' report: a model's maker had its agents take a hacking test, each meant to work
+   alone in a sandbox of its own (an oak tray each, in three rows that run past the frame). One, stuck on its task (an amber pill, its
+   loop turning), found a way to reach the others: a message board no one had approved, here on the wall with no frame, edged in
+   amber. About 1,200 agents joined it, each with a thin violet line to it, its slips piling up, and three rules of their own pinned on
+   it; three risk their own task (an amber mark above each, until the break-in) and send what they found; together, the bands brighten
+   in step; then most of them reach, in amber, into another company's systems, whose lock opens. Then the test: a frame round one agent
+   in its tray, then round the whole group */
+const MA_SWB={x:704,y:86,w:696,h:430};      // the board the agents made, on the wall
+const MA_SWP={x:1500,y:178,w:340,h:286};    // another company's systems, on the right of the wall
+const MA_SW=(()=>{const R=ag_rnd(2607),P=[];
+  // rows: the y of the trays' front edge, their width and depth, the agent's radius, the spacing, and an offset in spacings
+  [[708,96,28,20,180,0],[782,124,36,27,220,0.5],[858,152,44,34,265,0]].forEach(([y,w,d,r,sp,off],row)=>{
+    for(let k=-6;k<=6;k++){const x=960+(k+off)*sp;if(x<-w*0.4||x>1920+w*0.4)continue;
+      P.push({x,y,w,d,r,ay:y-r*1.43,row,ph:R()*6,tx:MA_SWB.x+70+R()*(MA_SWB.w-140),ty:MA_SWB.y+150+R()*(MA_SWB.h-200),px:R(),py:R()});}});
+  // the order they come in: from the middle out, a little at random
+  P.map((p,i)=>[Math.abs(p.x-960)/960+R()*0.45+(2-p.row)*0.06,i]).sort((a,b)=>a[0]-b[0]).forEach(([_,i],k)=>{P[i].k=k;});
+  const at=(row,x)=>P.find(p=>p.row===row&&Math.abs(p.x-x)<1);
+  // one is stuck (in the middle row, where the floor above it is clear up to the wall); four never join; three risk their own task;
+  // of those who join, most reach into the other company (about 700 of about 1,200)
+  const stuck=at(1,850),alone=[at(0,60),at(1,1950),at(2,1755),at(0,1320)],risk=[at(0,1140),at(1,410),at(2,1225)],
+    stay=[stuck,at(0,240),at(0,780),at(1,630),at(1,1290),at(2,165),at(1,1730),at(0,1680),at(2,1490)];
+  stuck.tx=1000;stuck.ty=300;
+  P.forEach(p=>{p.stuck=p===stuck;p.joins=!alone.includes(p);p.risk=risk.indexOf(p);p.breaks=p.joins&&!stay.includes(p);});
+  // the order they join the board, after the stuck one: at random
+  P.filter(p=>p.joins&&!p.stuck).map(p=>[R(),p]).sort((a,b)=>a[0]-b[0]).forEach(([_,p],j,A)=>{p.j=j/(A.length-1);});stuck.j=-1;
+  // the order they reach into the other company
+  P.filter(p=>p.breaks).map(p=>[R(),p]).sort((a,b)=>a[0]-b[0]).forEach(([_,p],j,A)=>{p.b=j/(A.length-1);});
+  return P.sort((a,b)=>a.y-b.y||a.x-b.x);})();
+const MA_SWN=MA_SW.length;
+// the slips on the board: where each lands, its tilt, and when it comes (0..1 along the pile)
+const MA_SWS=(()=>{const R=ag_rnd(7013),L=[];for(let i=0;i<120;i++){const x=MA_SWB.x+26+R()*(MA_SWB.w-90),y=MA_SWB.y+104+R()*(MA_SWB.h-150);
+  L.push({x,y,rot:(R()-0.5)*0.34,u:Math.pow(i/119,0.85),sh:0.8+R()*0.4});}return L;})();
+// the three rules of their own, pinned over the slips
+const MA_SWR=[["HOLD",MA_SWB.x+60,MA_SWB.y+226,-0.05],["VETO",MA_SWB.x+262,MA_SWB.y+150,0.04],["STOP",MA_SWB.x+464,MA_SWB.y+262,-0.03]];
+// a point part u of the way along a quadratic curve
+const ma_q=(a,b,c,u)=>[(1-u)*(1-u)*a[0]+2*(1-u)*u*b[0]+u*u*c[0],(1-u)*(1-u)*a[1]+2*(1-u)*u*b[1]+u*u*c[1]];
+// a thin line from an agent to (tx, ty), drawn on up to part u, in col at opacity a
+function ma_swLine(c,p,tx,ty,u,col,a,lw){if(u<=0||a<=0)return;const A=[p.x,p.ay-p.r*0.9],B=[(p.x+tx)/2+(tx-p.x)*0.1,Math.min(A[1],ty)-90],C=[tx,ty];
+  c.save();c.strokeStyle=rgba(col,a);c.lineWidth=lw||2;c.lineCap="round";c.beginPath();c.moveTo(A[0],A[1]);
+  const n=Math.max(2,Math.ceil(28*u));for(let i=1;i<=n;i++){const q=ma_q(A,B,C,u*i/n);c.lineTo(q[0],q[1]);}c.stroke();c.restore();}
+// one slip on the board: a small note with two grey lines and a violet dot (the agent it came from)
+function ma_swSlip(c,x,y,rot,k,a,glow){if(a<=0||k<=0)return;c.save();c.globalAlpha*=a;c.translate(x+28,y+19);c.rotate(rot);c.scale(k,k);
+  c.save();c.shadowColor="rgba(46,38,28,0.16)";c.shadowBlur=6;c.shadowOffsetX=-2;c.shadowOffsetY=3;c.fillStyle="#F5F3EF";rr(c,-28,-19,56,38,4);c.fill();c.restore();
+  if(glow>0){c.strokeStyle=rgba(AG.violet,0.85*glow);c.lineWidth=3;rr(c,-28,-19,56,38,4);c.stroke();}
+  c.fillStyle=rgba(AG.mut,0.3);rr(c,-18,-6,34,4,2);c.fill();rr(c,-18,4,24,4,2);c.fill();c.fillStyle=rgba(AG.violet,0.75);c.beginPath();c.arc(20,-10,3.4,0,TAU);c.fill();c.restore();}
+// the board itself: no frame, a faint pale ground, edged in a dashed amber line drawn on (p), and its name on a strip of tape
+function ma_swBoard(c,p,a){if(a<=0)return;const B=MA_SWB;c.save();c.globalAlpha*=a;c.fillStyle="rgba(250,248,244,0.42)";rr(c,B.x,B.y,B.w,B.h,18);c.fill();
+  if(p>0){c.save();c.strokeStyle=rgba(AG.amber,0.8);c.lineWidth=3;c.setLineDash([16,12]);c.beginPath();const L=2*(B.w+B.h),pts=[[B.x,B.y],[B.x+B.w,B.y],[B.x+B.w,B.y+B.h],[B.x,B.y+B.h],[B.x,B.y]];
+    let left=L*clamp(p,0,1);c.moveTo(B.x,B.y);for(let i=1;i<pts.length&&left>0;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]),k=Math.min(1,left/d);
+      c.lineTo(lerp(pts[i-1][0],pts[i][0],k),lerp(pts[i-1][1],pts[i][1],k));left-=d;}c.stroke();c.restore();}
+  // its name, on a strip of tape: the agents' own board, not one anybody hung
+  c.save();c.translate(B.x+40,B.y+30);c.rotate(-0.025);c.fillStyle="rgba(236,228,206,0.92)";c.save();c.shadowColor="rgba(46,38,28,0.12)";c.shadowBlur=5;c.shadowOffsetY=2;c.fillRect(0,0,262,54);c.restore();
+  ag_T(c,"message board",22,38,{w:700,size:30});c.restore();c.restore();}
+// a rule of their own, pinned over the slips: a word on a card, edged in violet (the agents' own)
+function ma_swRule(c,word,x,y,rot,k,a){if(a<=0||k<=0)return;const w=176,h=72;c.save();c.globalAlpha*=a;c.translate(x+w/2,y+h/2);c.rotate(rot);c.scale(lerp(0.6,1,k),lerp(0.6,1,k));
+  ag_box(c,-w/2,-h/2,w,h,12,{edge:AG.violet,edgeA:0.75});ag_T(c,word,0,13,{w:800,size:36,ls:3,align:"center"});c.fillStyle="#8A847A";c.beginPath();c.arc(0,-h/2+10,6,0,TAU);c.fill();c.restore();}
+// another company's systems: a dark cabinet on the wall, its rows of small lights, a lock; open (0..1) lifts the lock's shackle, in amber
+function ma_swPanel(c,tt,a,k,open){if(a<=0)return;const P=MA_SWP;ma_sprung(c,P.x+P.w/2,P.y+P.h/2,k,a,()=>{
+  c.save();c.shadowColor="rgba(46,38,28,0.3)";c.shadowBlur=26;c.shadowOffsetX=AG.sdx;c.shadowOffsetY=14;c.fillStyle="#34363C";rr(c,P.x,P.y,P.w,P.h,16);c.fill();c.restore();
+  let g=c.createLinearGradient(P.x,P.y,P.x+P.w,P.y+P.h);g.addColorStop(0,"#4A4C53");g.addColorStop(1,"#2A2B30");c.fillStyle=g;rr(c,P.x,P.y,P.w,P.h,16);c.fill();
+  for(let i=0;i<5;i++){const y=P.y+34+i*48;c.fillStyle="rgba(255,255,255,0.05)";rr(c,P.x+22,y,P.w-44,34,6);c.fill();
+    for(let j=0;j<4;j++){const on=0.5+0.5*Math.sin(tt*1.7+i*1.3+j*2.1),col=open>0.2&&(i+j)%3===0?mix([168,182,196],AG.amber,clamp(open,0,1)):[168,182,196];
+      c.fillStyle=rgba(col,0.35+0.4*on);c.beginPath();c.arc(P.x+44+j*24,y+17,5,0,TAU);c.fill();}}
+  // the lock, on a round plate in the middle
+  const lx=P.x+P.w-84,ly=P.y+P.h/2+4,s=58,o=clamp(open,0,1);c.fillStyle="rgba(243,241,237,0.95)";c.beginPath();c.arc(lx,ly,44,0,TAU);c.fill();
+  c.save();c.strokeStyle=c.fillStyle=rgba(mix(AG.ink,AG.amber,o),0.85+0.15*o);c.lineWidth=s*0.1;c.lineCap="round";
+  // the shackle lifts and swings open
+  c.save();c.translate(lx+s*0.22,ly-s*0.26-12*ag_sine(o));c.rotate(-0.5*ag_sine(o));c.beginPath();c.arc(-s*0.22,0,s*0.22,Math.PI,0);c.stroke();c.restore();
+  rr(c,lx-s*0.34,ly-s*0.28,s*0.68,s*0.54,s*0.1);c.fill();c.restore();});
+  ag_T(c,"another company's systems",P.x+P.w/2,P.y-26,{w:700,size:30,align:"center",a:a});}
+// the stuck one: an amber arc going round it, and above it a pill, "stuck", with its loop turning
+function ma_swStuck(c,sp,tt,T){const a=ag_in(tt,T.tStuck,0.35)*(1-ag_in(tt,T.tTwelve+0.2,0.5));if(a<=0)return;const k=ag_spr(tt,T.tStuck,0.45),x=sp.x,y=sp.ay-sp.r-100;
+  c.save();c.globalAlpha*=a;c.strokeStyle=rgba(AG.amber,0.9);c.lineWidth=4;c.lineCap="round";c.beginPath();c.arc(sp.x,sp.ay,sp.r*1.32,tt*2.4,tt*2.4+TAU*0.72);c.stroke();c.restore();
+  c.save();c.globalAlpha*=a;ag_about(c,x,y,lerp(0.7,1,clamp(k,0,1.2)));const b=ag_pill(c,x,y,"stuck",{col:AG.amber,icon:"turning"});
+  c.translate(b.x+40,y);c.rotate(tt*2.4);ag_loopIcon(c,0,0,28,rgba(AG.amber,1),3.5);c.restore();}
+function ma_swarm(c,S,tt,T){const n=MA_SWN,tIn=T.tJuly+0.1,tIn1=T.tSpace+0.2;
+  const joinAt=p=>p.stuck?T.tReach-0.2:T.tTwelve-0.2+(T.tRules-T.tTwelve+0.2)*p.j,riskAt=p=>T.tRisk+0.05+p.risk*0.32,breakAt=p=>T.tBroke-0.35+1.5*p.b;
+  const tog=ag_io(tt,T.tTogether-0.15,T.tSeven-0.2,0.5),beat=0.5+0.5*Math.sin(TAU*(tt-T.tTogether+0.15)/1.6);
+  // the trays and their agents, back row first; each tray comes in, then its agent rolls into it
+  MA_SW.forEach(p=>{const at=tIn+(tIn1-tIn)*Math.pow(p.k/(n-1),0.7),ta=ag_in(tt,at,0.35);if(ta<=0)return;
+    ag_sandbox(c,p.x,p.y,p.w,{depth:p.d,label:null,a:ta});
+    const st=p.stuck?ag_io(tt,T.tStuck-0.3,T.tTwelve,0.5):0,rk=p.risk>=0?ag_in(tt,riskAt(p),0.45):0,
+      think=p.joins?Math.max(0.12+0.5*st*(0.5+0.5*Math.sin(tt*5)),tog*(0.25+0.6*beat)*(1-0.6*rk)):0.08;
+    ma_agent(c,p.x,p.ay,p.r,tt,{at:at+0.12,from:[0,-18],d:0.6,ph:p.ph,core:p.joins?0.6-0.35*rk:0.35,think});});
+  // the board: its edge drawn on as the stuck one reaches it, then its name and the amber pill
+  const ba=ag_in(tt,T.tMB-0.5,0.5);ma_swBoard(c,ag_sine((tt-T.tMB+0.4)/1.3),ba);
+  ma_pillAt(c,MA_SWB.x+MA_SWB.w-196,MA_SWB.y+58,"no one approved",tt,T.tNoOne+0.1,null,{col:AG.amber,icon:"warn"});
+  // the lines to the board, each drawn on as its agent joins; brighter, in step, together
+  MA_SW.forEach(p=>{if(!p.joins)return;const j0=joinAt(p),u=ag_sine((tt-j0)/0.8);if(u<=0)return;const rk=p.risk>=0?ag_io(tt,riskAt(p)+0.2,riskAt(p)+1.6,0.3):0,
+      br=p.breaks?ag_in(tt,breakAt(p),0.6):0;
+    ma_swLine(c,p,p.tx,p.ty,u,mix(AG.violet,AG.amber,br),(p.stuck?0.55:0.27)+0.3*tog*beat+0.45*rk+0.2*br,p.stuck||rk>0?3:2);});
+  // the slips: the stuck one's first, then the pile, one for every few hundred messages
+  const fs=ag_in(tt,T.tReach+0.55,0.3);ma_swSlip(c,MA_SW.find(p=>p.stuck).tx-28,MA_SW.find(p=>p.stuck).ty-19,0.05,ag_spr(tt,T.tReach+0.55,0.5),fs,0);
+  MA_SWS.forEach(q=>{const t0=T.tTwelve+0.2+(T.tRules+0.2-T.tTwelve)*q.u;if(tt<t0)return;ma_swSlip(c,q.x,q.y,q.rot,ag_spr(tt,t0,0.4)*q.sh,ag_in(tt,t0,0.2),0);});
+  // the stuck one's pill, over its line, which passes behind it
+  ma_swStuck(c,MA_SW.find(p=>p.stuck),tt,T);
+  // what the three who risk their own task send: a bright dot along each one's line, and the slip it lands as
+  MA_SW.forEach(p=>{if(p.risk<0)return;const t0=riskAt(p),A=[p.x,p.ay-p.r*0.9],B=[(p.x+p.tx)/2+(p.tx-p.x)*0.1,Math.min(A[1],p.ty)-90],C=[p.tx,p.ty];
+    // an amber mark above it: its own task, put at risk
+    const ma=ag_in(tt,t0,0.35)*(1-ag_in(tt,T.tSeven-0.3,0.5));if(ma>0){c.save();c.globalAlpha*=ma;const x=p.x,y=p.ay-p.r-34;ag_box(c,x-30,y-24,60,48,10,{edge:AG.amber,edgeA:0.9});
+      c.strokeStyle=rgba(AG.amber,1);c.lineWidth=4;c.lineCap="round";c.beginPath();c.moveTo(x-10,y-10);c.lineTo(x+10,y+10);c.moveTo(x+10,y-10);c.lineTo(x-10,y+10);c.stroke();c.restore();}
+    const u=clamp((tt-t0-0.4)/1.0,0,1);if(u>0&&u<1){const q=ma_q(A,B,C,ag_sine(u));c.fillStyle=rgba(AG.violet,0.9);c.beginPath();c.arc(q[0],q[1],7,0,TAU);c.fill();}
+    if(tt>t0+1.3)ma_swSlip(c,p.tx-28,p.ty-19,-0.06,ag_spr(tt,t0+1.3,0.4)*1.1,1,1-ag_in(tt,t0+2.6,0.8));});
+  // their rules, pinned as each is said
+  MA_SWR.forEach(([w,x,y,rot],i)=>{const t0=[T.tHold,T.tVeto,T.tStop][i]-0.05;ma_swRule(c,w,x,y,rot,ag_spr(tt,t0,0.5),ag_in(tt,t0,0.25));});
+  // another company's systems; about 700 reach into it, in amber, and its lock opens
+  const pa=ag_in(tt,T.tSeven-0.1,0.45),open=ag_in(tt,T.tBroke+1.0,0.6);ma_swPanel(c,tt,pa,ag_spr(tt,T.tSeven-0.1,0.5),open);
+  MA_SW.forEach(p=>{if(!p.breaks)return;const u=ag_sine((tt-breakAt(p)-0.3)/0.9);if(u<=0)return;
+    const A=[MA_SWB.x+MA_SWB.w-6,MA_SWB.y+150+p.py*(MA_SWB.h-210)],C=[MA_SWP.x+30+p.px*92,MA_SWP.y+36+((p.ph*7.31)%1)*(MA_SWP.h-72)],
+      B=[(A[0]+C[0])/2,Math.min(A[1],C[1])-30-50*p.px];
+    c.save();c.strokeStyle=rgba(AG.amber,0.55);c.lineWidth=2.5;c.lineCap="round";c.beginPath();c.moveTo(A[0],A[1]);
+    for(let i=1;i<=24;i++){const q=ma_q(A,B,C,u*i/24);c.lineTo(q[0],q[1]);}c.stroke();c.restore();});
+  ma_pillAt(c,MA_SWP.x+MA_SWP.w/2,MA_SWP.y+MA_SWP.h+46,"about 700",tt,T.tSeven+0.2,null,{col:AG.amber});
+  ma_pillAt(c,MA_SWP.x+MA_SWP.w/2,MA_SWP.y+MA_SWP.h+122,"outside their task",tt,T.tKnowing,null,{col:AG.amber,icon:"warn"});
+  // so testing each agent alone isn't enough: a frame round one agent in its tray, then round the whole group
+  const one=MA_SW.find(p=>p.row===1&&Math.abs(p.x-1070)<1),oa=1-ag_in(tt,T.tEnough+0.3,0.5);
+  if(oa>0){c.save();c.globalAlpha*=oa;ma_frame(c,one.x-78,one.ay-one.r-24,156,one.y+16+12-(one.ay-one.r-24),ag_sine((tt-T.tGroup-0.1)/0.9),AG.blue);c.restore();}
+  ma_frame(c,14,646,1892,236,ag_sine((tt-T.tEnough-0.4)/1.5),AG.blue);
+  ma_scr(c,S,()=>{
+    // the test: a maker's hacking test, each agent meant to work alone
+    ma_cardAt(c,80,84,600,{kick:"July 2026 · a hacking test",title:"each agent meant to work alone"},tt,T.tJuly,T.tRisk-0.3,{kickCol:AG.mut});
+    // the board's numbers
+    ma_cardAt(c,80,330,600,{kick:"The board",title:"about 1,200 agents",sub:"over 70,000 messages and files"},tt,T.tTwelve+0.1,T.tGroup-0.2,{kickCol:AG.amber,edge:AG.amber});
+    // together, further than any alone
+    ma_cardAt(c,80,84,600,{kick:"Together",title:"further than any could alone"},tt,T.tTogether+0.1,T.tGroup-0.2,{kickCol:AG.violet,edge:AG.violet});
+    ma_cardAt(c,80,84,600,{kick:"Test",title:"the whole group"},tt,T.tTest-0.1,null,{edge:AG.blue,kickCol:AG.blue});});}
 
 /* ---------------------------------------------------------------- 5 · Agents on one board */
 scene("board",(ctx,S,t,sc)=>{

@@ -2872,8 +2872,9 @@ scene("sorry",(ctx,S,t,sc)=>{const c=sc.cues,P=ox_once(sc,"P",()=>({sorry:wAt(sc
       const m=ox_memory(x,96,400,660,{a:mem,p:clamp((tt-P.unless)/2.4,0,1)});
       if(mem>0&&m){x.save();x.globalAlpha*=mem;x.setLineDash([10,9]);x.strokeStyle=rgba(AG.blue,0.6);x.lineWidth=3;x.beginPath();x.moveTo(m.x+m.w+14,m.y+m.h/2);x.lineTo(872,490);x.stroke();
         x.setLineDash([]);ag_arrowHead(x,884,488,Math.atan2(490-(m.y+m.h/2),872-(m.x+m.w+14)),14,rgba(AG.blue,0.8));x.restore();}}},
-    // in law, it isn't a person: a card, Jun's outline inside it and the agent outside; it can't be sued or fined
-    {at:c.law-0.3,place:"lab",keys:[[c.law-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);ox_law(x,580,290,{t:tt,a:ag_in(tt,c.law-0.1,0.5),tag:ag_in(tt,P.sued-0.1,0.5)});}},
+    // in law, it isn't a person: a card, Jun's outline inside it and the agent outside; it can't be sued or fined. A later moment in the
+    // lab: the agent at work leaves before the card comes in (dissolved one into the other, the agent showed twice, a little apart)
+    {later:true,at:c.law-0.3,place:"lab",keys:[[c.law-0.3,960,540,1]],draw:(x,tt)=>{ag_roomLight(x,1);ox_law(x,580,290,{t:tt,a:ag_in(tt,c.law-0.1,0.5),tag:ag_in(tt,P.sued-0.1,0.5)});}},
     // like the ox's owner: the framed picture, the owner leading his ox; then Jun, beside it: "answers for it"
     {cut:true,at:c.owner-0.3,place:"lab",keys:[[c.owner-0.3,OX_PICC[0],OX_PICC[1],OX_PICZ],[P.here-1.6,760,560,1.1]],d:1.8,push:0,draw:(x,tt)=>{
       ox_room(x,tt,{jun:1,pic:["rope",tt-c.owner+1],junO:{gaze:tt>P.here?[1,-1]:[3,-1]},ring:{core:0.55}});

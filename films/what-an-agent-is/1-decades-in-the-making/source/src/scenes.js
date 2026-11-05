@@ -236,7 +236,9 @@ scene("web",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({huge:wAt(sc,"t
     hundred:wAt(sc,"largest","a hundred and seventy-five"),fluently:wAt(sc,"help","fluently"),help:wAt(sc,"help","trying to help"),carried:wAt(sc,"help","carried on")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"dmLab",keys:[[0,960,540,1.025],[0.3,960,540,1]],d:2.0,draw:(x,t)=>{
     dm_railAt(x,t,[[0,2017,40],[0.7,2017,40],[2.3,2020,40]]);
-    const big=ag_in(t,P.hundred-0.4,1.8),R=lerp(118,178,ag_eo(big)),mx=1450,my=560;
+    // the model the last chapter grew moves on to its place on the right, once the chapters have crossed (drawn in its new place from
+    // the start, it showed in two places as they crossed)
+    const mv=ag_sine(clamp((t-0.8)/1.4,0,1)),big=ag_in(t,P.hundred-0.4,1.8),R=lerp(lerp(160,118,mv),178,ag_eo(big)),mx=lerp(1190,1450,mv),my=lerp(525,560,mv);
     // text from the web and books, flowing in
     const fa=ag_io(t,c.text,c.task+0.6,0.8)+0.6*ag_io(t,P.billions,c.largest,0.6);dm_textIn(x,mx,my,t,fa);
     ag_pill(x,470,380,"Text from the web and books",{a:ag_io(t,P.huge-0.2,c.task,0.5)});
@@ -372,15 +374,16 @@ scene("sudden",(ctx,S,t,sc)=>{const c=sc.cues,P=dm_once(sc,"P",()=>({suddenW:wAt
         dm_thing(x,120+i*590,330+(1-ag_spr(t,t0,0.8))*70,500,icon,title,{a:ar*(1-0.42*(1-focus[i])*on*(1-ag_in(t,tf-0.3,0.3)))*(1-ag_in(t,tf+0.75,0.25)),ta:1-ag_in(t,tf-0.35,0.25),grow:ag_in(t,tg-0.2,1.0),draw:DRAW[i]});x.restore();});
       // the takeaway
       const ka=ag_io(t,c.long+0.95,c.printing-0.4,0.5);if(ka>0)dm_bigCard(x,960,430,"Not a sudden discovery","Long work that finally had the power to run",{a:ka,k:ag_spr(t,c.long+0.95,0.7)});
-      // printing waited four hundred years for its pieces; these ideas waited decades for theirs
-      const pa=ag_in(t,c.printing-0.3,0.8);if(pa>0){ag_picture(x,100,340,700,340,{img:ag_place("dmMainz"),a:pa});
+      // printing waited four hundred years for its pieces; these ideas waited decades for theirs. Both pictures leave before Jun's team
+      // comes in (the agent in the second showed through the team's agent as one dissolved into the other)
+      const gone=1-ag_in(t,c.team-0.2,0.5),pa=ag_in(t,c.printing-0.3,0.8)*gone;if(pa>0){ag_picture(x,100,340,700,340,{img:ag_place("dmMainz"),a:pa});
         dm_pillRow(x,450,752,[["Metal letters",pa*ag_in(t,P.metal-0.2,0.4)],["Paper",pa*ag_in(t,P.paperW-0.2,0.4)],["A press",pa*ag_in(t,P.press-0.2,0.4)],["A lender",pa*ag_in(t,P.lender-0.2,0.4)]]);
         ag_T(x,"About 400 years",450,836,{w:700,size:32,align:"center",a:pa*ag_in(t,P.lender+0.3,0.5)});}
-      const qa=ag_in(t,c.decades-0.3,0.8);if(qa>0){ag_picture(x,1120,340,700,340,{draw:(c2,px,py,pw,ph)=>dm_today(c2,px,py,pw,ph),a:qa});
+      const qa=ag_in(t,c.decades-0.3,0.8)*gone;if(qa>0){ag_picture(x,1120,340,700,340,{draw:(c2,px,py,pw,ph)=>dm_today(c2,px,py,pw,ph),a:qa});
         dm_pillRow(x,1470,752,[["Chips",qa*ag_in(t,P.chips-0.2,0.4)],["Data",qa*ag_in(t,P.data2-0.2,0.4)],["Money",qa*ag_in(t,P.money2-0.2,0.4)]]);
         ag_T(x,"About 60 years",1470,836,{w:700,size:32,align:"center",a:qa*ag_in(t,P.money2+0.3,0.5)});}}},
     // Jun's team, under the same rail: nobody expects magic or needs to fear it, because they know where it came from
-    {at:c.team-0.4,place:"dmLab",push:0.012,keys:[[c.team-0.4,960,540,1]],d:2.0,draw:(x,t)=>{rail(x);
+    {at:c.team+0.3,place:"dmLab",push:0.012,keys:[[c.team+0.3,960,540,1]],d:2.0,draw:(x,t)=>{rail(x);
       dm_team(x,{t,agent:1,think:0.2,yusuf:1,mei:1,ySmile:0.2+0.3*ag_in(t,P.where-0.4,0.8),mSmile:0.2+0.3*ag_in(t,P.where-0.2,0.8),junSmile:0.3+0.25*ag_in(t,P.magic,0.8)});}}],0.6);
   ag_end(ctx,S,t,c.breath+0.6,"Decades in the making","Long work that finally had the power to run","Film 1 of 10","What an agent is");});
 

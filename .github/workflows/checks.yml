@@ -131,8 +131,10 @@ jobs:
           fi
           echo "The site's player is built from this source."
 
-      # every moment draws; in the governance and agent films, also: each place paints without holding the page, nothing shows
-      # twice where shots or chapters change (twice.py), and no arm jumps in one frame (steady.py)
+      # every moment draws; in the governance and agent films, also: no text is too small for a phone (legible.py), each place
+      # paints without holding the page, nothing shows twice where shots or chapters change (twice.py), no arm jumps in one frame
+      # (steady.py), nothing jumps where the shot changes in one room (jump.py), and in the agent films nothing painted for a person
+      # reaches past their picture (edges.py)
       - name: Check that every moment draws
         run: python tools/check.py
 

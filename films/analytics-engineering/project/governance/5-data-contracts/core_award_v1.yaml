@@ -147,6 +147,7 @@ customProperties:
   value: core_award_v1
 - property: consumers
   value:
+  - product graduation_list
   - product learner_wallet
   - product learners_near_an_award
   - product tuition_forgone

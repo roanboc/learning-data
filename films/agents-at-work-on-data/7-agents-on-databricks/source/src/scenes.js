@@ -21,10 +21,10 @@ function od_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);fn();ctx.restore();}
 function od_chrome(ctx,S,t,lit,o){o=o||{};od_scr(ctx,S,()=>{const dk=o.dark===true?1:clamp(o.dark||0,0,1),a=o.a==null?1:o.a;  // dark 0 to 1: the night's kicker, blended into the day's as the room lights
     if(dk>0)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:true,a:a*dk});if(dk<1)ag_kicker(ctx,"2.7","Working with agents on Databricks",{dark:false,a:a*(1-dk)});
   const on=o.on||[0,1,2,3].map(i=>i===lit?ag_in(t,0.3,0.8):0);od_strip(ctx,{on,k:o.k,a});});}
-// the card of next year's places: what Anil plans from the census-day count. o.n (0 to 3) its lines come in. 500 wide, in the frame
+// the card of next year's plan for research: what Anil plans from the count of active projects. o.n (0 to 3) its lines come in. 500 wide, in the frame
 function od_places(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=500,h=262;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
-  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Next year's places",x+32,y+54,{w:700,size:32});
-  ["classes","labs","hospital placements"].forEach((s,i)=>{const k=clamp((o.n||0)-i,0,1);if(k<=0)return;const yy=y+122+i*50;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.4);
+  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Next year's research",x+32,y+54,{w:700,size:32});
+  ["lab space","equipment","research support"].forEach((s,i)=>{const k=clamp((o.n||0)-i,0,1);if(k<=0)return;const yy=y+122+i*50;ctx.save();ctx.globalAlpha*=ag_in(k,0,0.4);
     ctx.fillStyle=rgba(AG_OAK.dark,0.9);ctx.beginPath();ctx.arc(x+42,yy-9,6,0,TAU);ctx.fill();ag_T(ctx,s,x+64,yy,{w:600,size:28});ctx.restore();});ctx.restore();}
 // a tag that points down at what it names, with a short leader
 function od_pointTag(ctx,x,y,text,px,py,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.strokeStyle=rgba(AG.mut,0.7);ctx.lineWidth=2;ctx.setLineDash([5,6]);ctx.beginPath();ctx.moveTo(x,y+28);ctx.lineTo(px,py);ctx.stroke();ctx.setLineDash([]);
@@ -56,30 +56,30 @@ function od_labOpening(c,S,tt,o){o=o||{};const sk=od_shelf(c,{glow:clamp(o.plug|
 
 /* ---------------------------------------------------------------- 1 · Three answers */
 scene("three",(ctx,S,t,sc)=>{
-  const T={tMon:wAt(sc,"monday","Monday"),tAnil:wAt(sc,"anil","Anil"),tPlaces:wAt(sc,"anil","next year's"),tClasses:wAt(sc,"anil","classes"),tLabs:wAt(sc,"anil","labs"),tHosp:wAt(sc,"anil","hospitals"),
-    tCensus:wAt(sc,"census","census day"),tCounts:wAt(sc,"census","counts who"),
+  const T={tMon:wAt(sc,"monday","Monday"),tAnil:wAt(sc,"anil","Anil"),tPlaces:wAt(sc,"anil","next year's"),tClasses:wAt(sc,"anil","lab space"),tLabs:wAt(sc,"anil","equipment"),tHosp:wAt(sc,"anil","research support"),
+    tCensus:wAt(sc,"active","those that"),
     tAsks:wAt(sc,"asks","He asks"),tHis:wAt(sc,"asks","his agent"),tTwo:wAt(sc,"asks","two colleagues"),tTheirs:wAt(sc,"asks","theirs"),tOwn:wAt(sc,"asks","Each set up"),tCopy:wAt(sc,"asks","own copy"),
-    tLoad:wAt(sc,"load","Anil's reads"),tSheet:wAt(sc,"load","spreadsheet"),tBid:wAt(sc,"load","funding bid"),
-    tHalf:wAt(sc,"fte","two half-time"),tOne:wAt(sc,"fte","as one"),tPeople:wAt(sc,"fte","takes it for people"),tN1:wAt(sc,"fte","two thousand"),
+    tLoad:wAt(sc,"report","Anil's reads"),tSheet:wAt(sc,"report","spreadsheet"),tBid:wAt(sc,"report","research report"),
+    tHalf:wAt(sc,"half","a project shared"),tOne:wAt(sc,"half","as half"),tPeople:wAt(sc,"half","reads it as a count"),tN1:wAt(sc,"half","one hundred"),
     tTable:wAt(sc,"table","The second"),tName:wAt(sc,"table","with Health"),
-    tJoint:wAt(sc,"joint","Health data"),tN2:wAt(sc,"joint","two thousand"),
-    tFolder:wAt(sc,"folder","The third"),tReports:wAt(sc,"folder","folder of reports"),tN3:wAt(sc,"folder","two thousand"),
+    tJoint:wAt(sc,"bridge","Bridge Health"),tN2:wAt(sc,"bridge","one hundred"),
+    tFolder:wAt(sc,"folder","The third"),tReports:wAt(sc,"folder","folder of reports"),tN3:wAt(sc,"folder","one hundred"),
     tWhich:wAt(sc,"which","One is right"),tNobody:wAt(sc,"which","nobody can tell"),
-    tShort:wAt(sc,"short","Plan for"),tLowest:wAt(sc,"short","lowest"),tGap:wAt(sc,"short","seven hundred"),
-    tNames:wAt(sc,"names","And a copy"),tEvery:wAt(sc,"names","every name"),
+    tShort:wAt(sc,"short","Plan for"),tLowest:wAt(sc,"short","lowest"),tGap:wAt(sc,"short","twenty-seven"),
+    tNames:wAt(sc,"names","And a copy"),tEvery:wAt(sc,"names","every researcher's"),
     tChange:wAt(sc,"change","Something"),
     tBring:wAt(sc,"bring","So Sam"),tJun:wAt(sc,"bring","Jun"),tAgents:wAt(sc,"bring","bring the agents"),
     tSame:wAt(sc,"same","the same governed"),tOnly:wAt(sc,"same","only what"),
-    tWeek:wAt(sc,"week","A week later"),tAll:wAt(sc,"week","all three"),tN4:wAt(sc,"week","two thousand"),tQuery:wAt(sc,"week","its query"),tDef:wAt(sc,"week","its definition"),
-    tChecks:wAt(sc,"minute","Anil checks"),tPlan:wAt(sc,"minute","plans a place"),tDel:wAt(sc,"minute","The copies"),
+    tWeek:wAt(sc,"week","A week later"),tAll:wAt(sc,"week","all three"),tN4:wAt(sc,"week","one hundred"),tQuery:wAt(sc,"week","its query"),tDef:wAt(sc,"week","its definition"),
+    tChecks:wAt(sc,"minute","Anil checks"),tPlan:wAt(sc,"minute","plans space"),tDel:wAt(sc,"minute","The copies"),
     tData:wAt(sc,"data","When every"),tAgree:wAt(sc,"data","the answers agree")};
   const lit3=tt=>[ag_in(tt,T.tHis,0.5),ag_in(tt,T.tTwo+0.3,0.5),ag_in(tt,T.tTheirs,0.5)],cab=tt=>[0,1,2].map(i=>ag_sine((tt-(T.tOwn+0.2+i*0.3))/1.1));
-  const A=OD.answer,nums=["2,160","2,911","2,880"],fromW=i=>[OD.answer[i],OD.ansY+OD_ANS_H/2+90];  // in the wide shot, an answer rises from just over its person's head, never across a face
+  const A=OD.answer,nums=["141","177","168"],fromW=i=>[OD.answer[i],OD.ansY+OD_ANS_H/2+90];  // in the wide shot, an answer rises from just over its person's head, never across a face
   const wideAns=(c,tt,o)=>A.forEach((x,i)=>od_answer(c,x,OD.ansY,o.num?o.num[i]:nums[i],{none:o.none||0,ev:o.ev?o.ev[i]:0,tick:o.tick?o.tick[i]:0,u:o.u?o.u[i]:1,from:fromW(i)}));
   // in a close shot, an answer rises from where its agent is in the frame
   const fromZ=(cam,i)=>od_see(cam,[OD.agent[i][0],OD.agent[i][1]-20]);
   ag_shots(ctx,S,t,sc.dur,[
-    // Monday: Anil at his desk, close; the places he plans; census day. Then the camera draws back to the three desks, and the question
+    // Monday: Anil at his desk, close; the research he plans; what active means. Then the camera draws back to the three desks, and the question
     {at:0,place:"odOffice",keys:[[0,OD_Z1[1],OD_Z1[2],OD_Z1[3]],[T.tAsks-0.1,960,540,1]],d:2.2,draw:(c,tt)=>{
       od_room(c,tt,{lit:lit3(tt),cable:cab(tt),gaze:[[5,-1],[4,1],[4,1]]});
       od_pointTag(c,400,340,"their own agent",400,704,ag_in(tt,T.tOwn+0.8,0.4)*(1-ag_in(tt,T.tLoad-0.6,0.4)));
@@ -88,45 +88,45 @@ scene("three",(ctx,S,t,sc)=>{
       od_scr(c,S,()=>{od_tag(c,"Faculty of Health · Monday",ag_in(tt,0.4,0.6));
         if(back<1){c.save();c.globalAlpha*=1-back;od_cardAt(c,470,290,360,{title:"Anil Kurian",sub:"Faculty of Health"},tt,T.tAnil-0.1,null);
           od_places(c,1340,96,{k:(tt-T.tPlaces)/0.5,a:ag_in(tt,T.tPlaces-0.1,0.4),n:clamp((tt-T.tClasses+0.1)/0.45,0,1)+clamp((tt-T.tLabs+0.1)/0.45,0,1)+clamp((tt-T.tHosp+0.1)/0.45,0,1)});
-          od_pillAt(c,1590,420,"census day · 31 March 2026",tt,T.tCensus-0.1,null,{size:28});c.restore();}
-        const qa=ag_in(tt,T.tAsks-0.2,0.5);if(qa>0)ag_textCard(c,610,36,700,{title:"Health's students on census day?"},{a:qa,k:Math.min(1,ag_spr(tt,T.tAsks-0.2,0.5))});});}},
-    // Anil's spreadsheet: student load, for the funding bid; two half-time students as one; 2,160
+          od_pillAt(c,1590,420,"started · not yet ended",tt,T.tCensus-0.1,null,{size:28});c.restore();}
+        const qa=ag_in(tt,T.tAsks-0.2,0.5);if(qa>0)ag_textCard(c,610,36,700,{title:"Health's active research projects?"},{a:qa,k:Math.min(1,ag_spr(tt,T.tAsks-0.2,0.5))});});}},
+    // Anil's spreadsheet: made for the yearly research report, where a project shared with another faculty counts as half; 141
     {at:T.tLoad-0.15,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],cable:[1,1,1],sheet:ag_in(tt,T.tBid,0.5),gaze:[[6,-1]]});
       od_scr(c,S,()=>{const k=(tt-T.tSheet+0.3)/0.6;od_sheet(c,1060,72,{k,a:ag_in(k,0,0.3),rows:clamp((tt-T.tSheet)/1.2,0,1),pick:ag_in(tt,T.tBid+0.4,0.5),half:(tt-T.tHalf-0.4)/(T.tOne-T.tHalf+0.2)});
-        od_answer(c,1440,566,"2,160",{u:clamp((tt-T.tPeople)/0.7,0,1),from:fromZ(OD_Z1,0),numA:ag_in(tt,T.tN1-0.15,0.3)});});}},
-    // the second desk: a copy of the student table, its degrees with Health in their names, and the joint degree in no faculty
+        od_answer(c,1440,566,"141",{u:clamp((tt-T.tPeople)/0.7,0,1),from:fromZ(OD_Z1,0),numA:ag_in(tt,T.tN1-0.15,0.3)});});}},
+    // the second desk: a copy of the projects table, its units with Health in their names, and Engineering's Bridge Health Lab
     {at:T.tTable-0.15,cut:true,place:"odOffice",keys:[OD_Z2],draw:(c,tt)=>{od_room(c,tt,{only:1,lit:[1,1,1],cable:[1,1,1],gaze:[null,[6,0]]});
       od_scr(c,S,()=>{const k=(tt-T.tTable-0.4)/0.6;od_tableCard(c,1040,72,{k,a:ag_in(k,0,0.3),rows:clamp((tt-T.tTable-0.6)/1.0,0,1),hl:clamp((tt-T.tName)/0.45,0,3),joint:ag_in(tt,T.tJoint,0.6)});
-        od_answer(c,1450,432,"2,911",{u:clamp((tt-T.tN2+0.9)/0.7,0,1),from:fromZ(OD_Z2,1),numA:ag_in(tt,T.tN2-0.15,0.3)});});}},
-    // the third desk: a folder of reports, and 2,880; the second desk leaves before it comes in, so no agent shows in two places
+        od_answer(c,1450,432,"177",{u:clamp((tt-T.tN2+0.9)/0.7,0,1),from:fromZ(OD_Z2,1),numA:ag_in(tt,T.tN2-0.15,0.3)});});}},
+    // the third desk: a folder of reports, and 168; the second desk leaves before it comes in, so no agent shows in two places
     {at:T.tFolder-0.15,later:true,dis:0.45,place:"odOffice",keys:[OD_Z3],draw:(c,tt)=>{od_room(c,tt,{only:2,lit:[1,1,1],cable:[1,1,1],gaze:[null,null,[5,0]]});
       od_scr(c,S,()=>{const k=(tt-T.tReports+0.3)/0.6;od_reports(c,64,72,clamp((tt-T.tReports)/1.4,0,1),{k,a:ag_in(k,0,0.3)});
-        od_answer(c,1630,80,"2,880",{u:clamp((tt-T.tN3+0.9)/0.7,0,1),from:fromZ(OD_Z3,2),numA:ag_in(tt,T.tN3-0.15,0.3)});});}},
+        od_answer(c,1630,80,"168",{u:clamp((tt-T.tN3+0.9)/0.7,0,1),from:fromZ(OD_Z3,2),numA:ag_in(tt,T.tN3-0.15,0.3)});});}},
     // three answers, and nothing to tell them apart
     {at:T.tWhich-0.15,cut:true,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{od_room(c,tt,{lit:[1,1,1],cable:[1,1,1],gaze:[[4,-3],[4,-3],[4,-3]]});
       wideAns(c,tt,{none:ag_in(tt,T.tNobody+0.3,0.6)});}},
-    // planned for the lowest: 720 students with no place
+    // planned for the lowest: 27 projects with no lab space
     {at:T.tShort-0.15,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],cable:[1,1,1],gaze:[[6,-1]]});
       od_scr(c,S,()=>{const k=(tt-T.tShort)/0.6;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),lo:ag_in(tt,T.tGap-0.1,0.5)});
-        od_answer(c,1440,452,"2,160",{none:1,a:ag_in(tt,T.tLowest-0.2,0.4)});});}},
-    // and every student's name, on a laptop; something had to change
+        od_answer(c,1440,452,"141",{none:1,a:ag_in(tt,T.tLowest-0.2,0.4)});});}},
+    // and every researcher's name, on a laptop; something had to change
     {at:T.tNames-0.15,cut:true,place:"odOffice",keys:[OD_Z2],draw:(c,tt)=>{od_room(c,tt,{only:1,lit:[1,1,1],cable:[1,1,1],gaze:[null,[6,0]]});
-      od_scr(c,S,()=>{od_tableCard(c,1040,72,{names:ag_in(tt,T.tNames+0.2,0.6)});od_pillAt(c,1450,452,"every student's name, on a laptop",tt,T.tEvery,null,{col:AG.amber,icon:"warn",size:28});
+      od_scr(c,S,()=>{od_tableCard(c,1040,72,{names:ag_in(tt,T.tNames+0.2,0.6)});od_pillAt(c,1450,452,"every researcher's name, on a laptop",tt,T.tEvery,null,{col:AG.amber,icon:"warn",size:28});
         ag_veil(c,S,0.62*ag_in(tt,T.tChange-0.1,1.0));});}},
     // Sam and Jun bring the agents to the data: the platform's shelf, and the three agents' cables plugged into its tools
     {at:T.tBring-0.3,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>od_labOpening(c,S,tt,{in:clamp((tt-T.tAgents+0.2)/1.4,0,1),plug:clamp((tt-T.tSame)/1.6,0,1),lock:clamp((tt-T.tOnly)/0.8,0,1),
       names:[(tt-T.tBring-0.3)/0.5,(tt-T.tJun+0.1)/0.5]})},
     // a week later: three answers, the same, each with its evidence; each agent wired to the platform, its copy unplugged (a cut: the lab shows the same agents)
     {at:T.tWeek-0.3,cut:true,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{od_room(c,tt,{lit:[1,1,1],blue:1,gaze:[[4,-3],[4,-3],[4,-3]]});
-      wideAns(c,tt,{num:["2,880","2,880","2,880"],u:[0,1,2].map(i=>clamp((tt-T.tAll-i*0.25)/0.7,0,1)),ev:[0,1,2].map(i=>clamp((tt-T.tQuery+0.2-i*0.12)/(T.tDef-T.tQuery+0.6),0,1))});
+      wideAns(c,tt,{num:["168","168","168"],u:[0,1,2].map(i=>clamp((tt-T.tAll-i*0.25)/0.7,0,1)),ev:[0,1,2].map(i=>clamp((tt-T.tQuery+0.2-i*0.12)/(T.tDef-T.tQuery+0.6),0,1))});
       od_scr(c,S,()=>od_tag(c,"A week later",ag_in(tt,T.tWeek,0.5)));}},
-    // Anil checks it in a minute, and plans a place for every student
+    // Anil checks it in a minute, and plans space for every project
     {at:T.tChecks-0.15,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],blue:1,smile:[ag_in(tt,T.tChecks+0.6,0.8)],gaze:[[6,-2]]});
       od_scr(c,S,()=>{const k=(tt-T.tPlan+0.3)/0.6;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),ok:ag_in(tt,T.tPlan+0.3,0.6)});
-        od_answer(c,1440,452,"2,880",{ev:1,tick:ag_in(tt,T.tChecks+0.8,0.4)});});}},
+        od_answer(c,1440,452,"168",{ev:1,tick:ag_in(tt,T.tChecks+0.8,0.4)});});}},
     // the copies are deleted
     {at:T.tDel-0.15,cut:true,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{const g=ag_in(tt,T.tDel+0.3,1.0);od_room(c,tt,{lit:[1,1,1],blue:1,gone:g,smile:[0.8,0.3,0.3]});
-      wideAns(c,tt,{num:["2,880","2,880","2,880"],ev:[1,1,1]});
+      wideAns(c,tt,{num:["168","168","168"],ev:[1,1,1]});
       [[540,556],[1150,600],[1745,600]].forEach(([x,y],i)=>od_note(c,x,y,"deleted",ag_in(tt,T.tDel+0.5+i*0.2,0.4)));}},
     // every agent reads the same data through the same tools: the shelf, and a blue thread from each agent (a cut: the office shows the same agents)
     {at:T.tData-0.3,cut:true,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
@@ -167,7 +167,7 @@ scene("place",(ctx,S,t,sc)=>{
 scene("ask",(ctx,S,t,sc)=>{
   const T={tG1:wAt(sc,"genie","Genie One"),tAsst:wAt(sc,"genie","assistant"),tQ:wAt(sc,"genie","business questions"),tWords:wAt(sc,"genie","where its words"),
     tCare:wAt(sc,"care","For questions"),tTeam:wAt(sc,"care","the data team"),
-    tGov:wAt(sc,"census","governed table"),tIns:wAt(sc,"instr","Its instructions"),tStud:wAt(sc,"instr","a student is"),
+    tGov:wAt(sc,"projects","governed table"),tIns:wAt(sc,"instr","Its instructions"),tStud:wAt(sc,"instr","a project is"),
     tTests:wAt(sc,"bench","Its tests"),tBehind:wAt(sc,"bench","questions behind"),tRight:wAt(sc,"bench","right answer"),
     tRuns:wAt(sc,"runs","runs them"),tSql:wAt(sc,"sql","shows its"),tCheck:wAt(sc,"sql","anyone can check")};
   ag_shots(ctx,S,t,sc.dur,[
@@ -188,15 +188,15 @@ scene("tools",(ctx,S,t,sc)=>{
     tRuns:wAt(sc,"runs","The platform runs"),tQ1:wAt(sc,"query","runs queries"),tQ2:wAt(sc,"query","governed function"),tQ3:wAt(sc,"query","searches"),
     tG:wAt(sc,"genie","Genie One"),tGA:wAt(sc,"genie","each Genie Agent"),tAsk:wAt(sc,"genie","can ask them"),
     tAnil:wAt(sc,"anil","Anil's agent"),tConn:wAt(sc,"anil","connects"),tSign:wAt(sc,"anil","sign-in"),tOnly:wAt(sc,"anil","only what"),
-    tOnce:wAt(sc,"once","census count"),tAny:wAt(sc,"once","any faculty"),
+    tOnce:wAt(sc,"once","count of active"),tAny:wAt(sc,"once","any faculty"),
     tCalls:wAt(sc,"calls","Every agent"),tNone:wAt(sc,"calls","none writes"),
     tMcp:wAt(sc,"mcp","open standard"),tPlug:wAt(sc,"mcp","plug in")};
   const cue=[T.tQ1,T.tQ2,T.tQ3,T.tG,T.tGA],next=[T.tQ2,T.tQ3,T.tG-0.3,T.tGA,T.tAsk+0.6];
-  const row=[[170,740],[390,740],[610,740],[830,740]],who=["Anil's agent","Genie","census check","Jun's agent"],AX=420,AY=470,AR=64;
+  const row=[[170,740],[390,740],[610,740],[830,740]],who=["Anil's agent","Genie","project check","Jun's agent"],AX=420,AY=470,AR=64;
   const tb=i=>{const b=od_toolBox(i);return[b.x-14,b.y+b.h/2];};
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
-      // an agent, then Anil's, which takes its place among the agents that call the census count; it comes in once the last chapter's end has gone
+      // an agent, then Anil's, which takes its place among the agents that call the count of active projects; it comes in once the last chapter's end has gone
       const an=ag_in(tt,0.8,0.6),mv=ag_sine((tt-T.tOnce+0.7)/1.0),ax=lerp(AX,row[0][0],mv),ay=lerp(AY,row[0][1],mv),ar=lerp(AR,30,mv);
       const calls=clamp((tt-T.tCalls)/1.6,0,1);
       if(an>0){c.save();c.globalAlpha*=an;ag_floorShadow(c,ax+AG.sdx,ay+ar*0.98+(1-mv)*170,ar*1.2,ar*0.24,0.3);ag_model(c,ax,ay,ar,{t:tt,core:0.9,think:0.3});c.restore();}
@@ -215,12 +215,12 @@ scene("tools",(ctx,S,t,sc)=>{
         if(tt>T.tSign-0.2)ag_pill(c,ax,ay+ar+112,"signed in as Anil",{icon:"lock",col:AG.blue,a:ag_in(tt,T.tSign-0.2,0.4)});c.restore();
         const la=ag_in(tt,T.tOnly,0.4);if(la>0){const lx=ax+ar*0.85,ly=ay-ar*0.8;c.save();c.globalAlpha*=la*(1-mv);c.fillStyle="rgba(243,241,237,0.96)";c.beginPath();c.arc(lx,ly,22,0,TAU);c.fill();
           c.strokeStyle=rgba(AG.blue,0.5);c.lineWidth=1.5;c.stroke();ag_lock(c,lx,ly+2,28,rgba(AG.blue,1));c.restore();}}
-      // the census count, written once, as a function; every agent calls it, and each gets 2,880
+      // the count of active projects, written once, as a function; every agent calls it, and each gets 168
       const fk=(tt-T.tOnce-0.2)/0.6,fn=od_fnCard(c,{k:clamp(fk,0,1),a:ag_in(fk,0,0.3),rev:(tt-T.tAny-0.2)/0.4,app:(tt-T.tAny-0.8)/0.4,glow:calls*(1-ag_in(tt,T.tMcp,0.6))});
       if(fk>0){row.forEach(([x,y],i)=>{const st=T.tCalls+(i?0.45+0.2*i:0),v=clamp((tt-st)/0.8,0,1),top=[OD_FN.x+150+i*140,fn.y+fn.h];if(v<=0)return;  // a thread only from an agent that is there
           od_thread(c,[x,y-32],top,v,AG.blue,{lw:3.5});const back=clamp((tt-st-0.9)/0.7,0,1);
           if(back>0&&back<1){const p=[x,y-32,x,y-32-(y-32-top[1])*0.6,top[0],top[1]+(y-32-top[1])*0.6,top[0],top[1]],q=ag_bz(p,1-back);ag_pellet(c,q[0],q[1]);}
-          if(back>=1)ag_T(c,"2,880",(x+top[0])/2+16,(y-32+top[1])/2+10,{w:800,size:30,col:AG.orange,a:ag_in(tt,st+1.6,0.3)});});
+          if(back>=1)ag_T(c,"168",(x+top[0])/2+16,(y-32+top[1])/2+10,{w:800,size:30,col:AG.orange,a:ag_in(tt,st+1.6,0.3)});});
         row.forEach(([x,y],i)=>{const k=i===0?ag_in(mv,0.6,0.4):ag_in(tt,T.tCalls+0.2+i*0.2,0.5);if(k>0)ag_T(c,who[i],x,y+70,{w:700,size:28,align:"center",col:AG.label,a:k});});}}}
   ],0.6);
   od_chrome(ctx,S,t,1);
@@ -228,11 +228,11 @@ scene("tools",(ctx,S,t,sc)=>{
 
 /* ---------------------------------------------------------------- 5 · Agents the team builds */
 scene("build",(ctx,S,t,sc)=>{
-  const T={tFails:wAt(sc,"fails","fails its check"),tWhy:wAt(sc,"fails","find out why"),
-    tAgent:wAt(sc,"bricks","census check agent"),tCode:wAt(sc,"bricks","in code"),tBricks:wAt(sc,"bricks","Agent Bricks"),
+  const T={tFails:wAt(sc,"fails","disagrees"),tWhy:wAt(sc,"fails","find out why"),
+    tAgent:wAt(sc,"bricks","project check agent"),tCode:wAt(sc,"bricks","in code"),tBricks:wAt(sc,"bricks","Agent Bricks"),
     tRT:wAt(sc,"runtime","Agent Runtime"),tJob:wAt(sc,"runtime","the job calls"),tTraced:wAt(sc,"runtime","every step"),
     tSame:wAt(sc,"same","same tool servers"),tBefore:wAt(sc,"before","Before anyone"),tCases:wAt(sc,"before","cases"),
-    tC1:wAt(sc,"cases","thirty-seven"),tC2:wAt(sc,"cases","Three students"),tC3:wAt(sc,"cases","And Health's"),
+    tC1:wAt(sc,"cases","twelve"),tC2:wAt(sc,"cases","Two projects"),tC3:wAt(sc,"cases","And Health's"),
     tJudges:wAt(sc,"judges","Judges"),tSums:wAt(sc,"judges","plain test"),tMei:wAt(sc,"judges","Mei and Jun"),
     tNote:wAt(sc,"note","Its note"),tReads:wAt(sc,"note","Jun reads"),tDecides:wAt(sc,"note","decides")};
   const RX=980,RY=560,TB=i=>od_toolBox(i,{x:1330,y:330,w:500,h:76,pitch:92});
@@ -247,7 +247,7 @@ scene("build",(ctx,S,t,sc)=>{
       ag_roomLight(c,1,{night:true});if(ra>0)ag_model(c,RX,RY,64,{only:"light",t:tt,core:1,a:ra});
       // the job, its check, and why (after the chapter's dissolve, so no words of the last chapter's show under them)
       od_job(c,96,236,{a:ag_in(tt,0.7,0.5),fail:ag_in(tt,T.tFails,0.4)});od_ask(c,96,450,"Why?",ag_in(tt,T.tWhy,0.4),{k:(tt-T.tWhy)/0.5});
-      if(ra>0)ag_pill(c,RX,360,"Census check agent",{a:ra,size:28});
+      if(ra>0)ag_pill(c,RX,360,"Project check agent",{a:ra,size:28});
       ag_pill(c,1430,267,"built in code",{icon:"draft",col:AG.blue,a:ag_in(tt,T.tCode,0.4),size:28});
       od_bricks(c,700,236,560,ag_in(tt,T.tBricks-0.1,0.5));
       od_runtime(c,RX,724,420,ag_in(tt,T.tRT-0.2,0.5),{u:clamp((tt-T.tRT+0.2)/0.6,0,1)});
@@ -262,7 +262,7 @@ scene("build",(ctx,S,t,sc)=>{
         colA:[ag_in(tt,T.tJudges-0.1,0.4),ag_in(tt,T.tSums-0.1,0.4),ag_in(tt,T.tMei-0.1,0.4)],cols:[(tt-T.tJudges-0.2)/0.3,(tt-T.tSums-0.1)/0.3,(tt-T.tMei-0.1)/0.3],amber:2});}},
     // its note is evidence, not a decision: Jun reads it, and decides
     {at:T.tNote-0.2,later:true,dis:0.45,place:"lab",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{ag_person(c,"jun",330,640,0.92,{t:tt,gaze:[6,-2],nod:0.03*ag_in(tt,T.tDecides,0.5)});ag_roomLight(c,1);
-      ag_evidence(c,640,300,640,{kick:"Note for Jun",title:"Three students counted twice?",sub:"Engineering and IT: 134 against 131"},
+      ag_evidence(c,640,300,640,{kick:"Note for Jun",title:"Two projects entered twice?",sub:"Business: 88 against 86"},
         [{kick:"query",title:"count by faculty",col:AG.orange},{kick:"trace",title:"its four steps",col:AG.blue}],{open:clamp((tt-T.tReads+0.2)/1.2,0,1),a:ag_in(tt,T.tNote-0.1,0.4),k:Math.min(1,ag_spr(tt,T.tNote-0.1,0.5)),kickCol:AG.violet});
       ag_pill(c,960,800,"Jun decides",{col:AG.ink,a:ag_in(tt,T.tDecides,0.4),size:30});}}
   ],0.6);
@@ -318,22 +318,23 @@ scene("code",(ctx,S,t,sc)=>{
 
 /* ---------------------------------------------------------------- 7 · The same answer */
 scene("same",(ctx,S,t,sc)=>{
-  const T={tBack:wAt(sc,"back","Back at"),tRead:wAt(sc,"read","the same governed"),tAsked:wAt(sc,"asked","Asked for"),tN:wAt(sc,"asked","two thousand"),
+  const T={tBack:wAt(sc,"back","Back at"),tRead:wAt(sc,"read","the same governed"),tAsked:wAt(sc,"asked","Asked for"),tN:wAt(sc,"asked","one hundred"),
     tQ:wAt(sc,"asked","its query"),tDef:wAt(sc,"asked","its definition"),tPlans:wAt(sc,"plans","Anil plans"),
     tTake:wAt(sc,"takeaway","The platform"),tLeft:wAt(sc,"left","One question"),tWhose:wAt(sc,"left","whose reads"),tPays:wAt(sc,"left","who pays"),tNext:wAt(sc,"next","the next film")};
   ag_shots(ctx,S,t,sc.dur,[
     // the faculty again: the agents still their owners' own, reading the same data through the same tools
     {at:0,place:"odOffice",keys:[OD_WIDE],draw:(c,tt)=>{od_room(c,tt,{lit:[1,1,1],gone:1,blue:ag_in(tt,T.tRead-0.2,1.4)+0.0001,gaze:[[4,-3],[4,-3],[4,-3]]});
-      ag_textCard(c,610,24,700,{title:"Health's students on census day?"},{a:ag_in(tt,T.tAsked-0.2,0.4),k:Math.min(1,ag_spr(tt,T.tAsked-0.2,0.5))});
-      OD.answer.forEach((x,i)=>od_answer(c,x,OD.ansY+22,"2,880",{u:clamp((tt-T.tN+0.8-i*0.25)/0.7,0,1),from:[OD.agent[i][0],OD.agent[i][1]-20],ev:clamp((tt-T.tQ+0.2-i*0.12)/(T.tDef-T.tQ+0.6),0,1)}));
+      ag_textCard(c,610,24,700,{title:"Health's active research projects?"},{a:ag_in(tt,T.tAsked-0.2,0.4),k:Math.min(1,ag_spr(tt,T.tAsked-0.2,0.5))});
+      OD.answer.forEach((x,i)=>od_answer(c,x,OD.ansY+22,"168",{u:clamp((tt-T.tN+0.8-i*0.25)/0.7,0,1),from:[OD.agent[i][0],OD.agent[i][1]-20],ev:clamp((tt-T.tQ+0.2-i*0.12)/(T.tDef-T.tQ+0.6),0,1)}));
       od_scr(c,S,()=>od_tag(c,"Faculty of Health",ag_in(tt,0.3,0.6)*(1-ag_in(tt,T.tAsked-0.4,0.4))));}},
-    // Anil plans a place for every student
+    // Anil plans space for every project
     {at:T.tPlans-0.2,cut:true,place:"odOffice",keys:[OD_Z1],draw:(c,tt)=>{od_room(c,tt,{only:0,lit:[1,1,1],gone:1,blue:1,smile:[0.8],gaze:[[6,-2]]});
-      od_scr(c,S,()=>{const k=(tt-T.tPlans+0.1)/0.6;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),ok:1});od_answer(c,1440,452,"2,880",{ev:1,tick:1});});}},  // the plan as it now stands: every student has a place
-    // one question is left: the census check agent, alone at night (a cut under the takeaway's veil, so no agent shows in two places)
+      // the plan as it now stands: every project has space; its cards leave as the takeaway comes in over them, so no words show under its words
+      od_scr(c,S,()=>{const k=(tt-T.tPlans+0.1)/0.6,f=1-ag_in(tt,T.tTake-0.3,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;od_plan(c,1060,72,{k,a:ag_in(k,0,0.3),ok:1});od_answer(c,1440,452,"168",{ev:1,tick:1});c.restore();});}},
+    // one question is left: the project check agent, alone at night (a cut under the takeaway's veil, so no agent shows in two places)
     {at:T.tLeft-0.6,cut:true,place:"labNight",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{const f=1-ag_in(tt,sc.cues.breath,0.6);if(f<=0)return;c.save();c.globalAlpha*=f;  // gone before the card's words come in (0.5 s after its veil)
       ag_loop(c,960,500,{R:140,r:64,core:0.7,think:0.2,label:null,t:tt,floor:690});
-      ag_roomLight(c,1,{night:true});ag_model(c,960,500,64,{only:"light",t:tt,core:0.8});ag_pill(c,960,300,"Census check agent",{size:28});
+      ag_roomLight(c,1,{night:true});ag_model(c,960,500,64,{only:"light",t:tt,core:0.8});ag_pill(c,960,300,"Project check agent",{size:28});
       od_ask(c,330,410,"Whose reads?",ag_in(tt,T.tWhose-0.1,0.4),{k:(tt-T.tWhose+0.1)/0.5});od_ask(c,1200,410,"Who pays for its model?",ag_in(tt,T.tPays-0.1,0.4),{k:(tt-T.tPays+0.1)/0.5});
       const na=ag_in(tt,T.tNext-0.3,0.5);if(na>0)ag_textCard(c,460,704,1000,{kick:"Next",title:"Why Unity Catalog and Unity Gateway govern them"},{a:na,k:Math.min(1,ag_spr(tt,T.tNext-0.3,0.5)),kickCol:AG.blue});c.restore();}}
   ],0.6);

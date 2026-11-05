@@ -1,7 +1,7 @@
 {
   "key": "moving-is-easy",
   "title": "Moving is easy, agreeing is the work",
-  "sub": "The first film of Data that moves, the first series of Modern data basics: at Albury, two railways met for 79 years on two gauges, and everything changed trains; at the university, a managed connector, a query in place, a mirror, a share and an API move a tutor's contract with little work, and what's left for people is the contract at each interface: what each field means, who answers for it, what a deletion means, and what's personal.",
+  "sub": "The opening film of Data that moves, the first series of Modern data basics: at Albury, two railways met for 79 years on two gauges, and everything changed trains; at the university, a managed connector, a query in place, a mirror, a share and an API move a tutor's contract with little work, and what's left for people is the contract at each interface: what each field means, who answers for it, what a deletion means, and what's personal.",
   "howto": "The film is drawn as the intro's platform map, up close, at night. Light blue is data moving and the platform; gold, what people agree on; green, a check that passes; red, an error; lilac with a lock, personal data. The tools' pages are drawn for the film, with their official logos.",
   "src": [
     "rail.js",

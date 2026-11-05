@@ -3,7 +3,7 @@
 HR's contracts reach the platform through a managed connector: each change as it's made, and the
 whole file again on the first day of each teaching period. Moving them is easy now. What still needs
 people is the contract at the interface: what the data means where the HR system meets the
-platform. *Modern data basics* film 1, *Moving is easy, agreeing is the work*, shows Ingrid Holm,
+platform. *Moving is easy, agreeing is the work*, in *Modern data basics*, shows Ingrid Holm,
 who owns the HR system's data, and Noor Rahman, the data architect, agreeing it, and Jun Park's
 tests checking every row against it. This is that contract, written in the Open Data Contract
 Standard.

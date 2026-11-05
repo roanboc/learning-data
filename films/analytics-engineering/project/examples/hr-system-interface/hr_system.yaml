@@ -1,7 +1,7 @@
 # The HR system's data contract: what its data means where it meets the platform. Ingrid Holm, in HR, owns the HR system's data;
 # Noor Rahman, the data architect, agreed this with her; Jun Park's tests check every row against it. Written by hand in the Open
-# Data Contract Standard, at the version the project pins (governance/7-standards/), for Modern data basics' first film, Moving is
-# easy, agreeing is the work. It says the four things the film names: what each field means, who answers for it, what a deletion
+# Data Contract Standard, at the version the project pins (governance/7-standards/), for Moving is easy, agreeing is
+# the work, in Modern data basics. It says the four things the film names: what each field means, who answers for it, what a deletion
 # means, and what's personal. Check it against the standard: see README.md, in this folder.
 apiVersion: v3.1.0
 kind: DataContract

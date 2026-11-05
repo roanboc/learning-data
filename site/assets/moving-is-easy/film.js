@@ -445,7 +445,7 @@ const NARR={
  {"id":"days","gap":0.8,"text":"Rohan Desai's team spent two days working out what each column meant."},
  {"id":"hard","gap":0.8,"text":"Moving the data was never the hard part. Agree what it means, once, and it passes straight through."}]},
 "promise":{"name":"What got easier","lead":1.0,"tail":1.0,"vo":[
- {"id":"module","gap":0.8,"text":"This is the first film of Modern data basics: what the tools now make easier."},
+ {"id":"module","gap":0.8,"text":"Modern data basics is about what the tools now make easier."},
  {"id":"teams","gap":0.8,"text":"Moving data, running a platform, serving data to people and agents, and reading documents all used to take whole teams."},
  {"id":"now","gap":0.8,"text":"Databricks and dbt now do much of it."},
  {"id":"each","gap":0.8,"text":"Each film shows what got easier, what still needs people to agree, and where the official docs take you next."},
@@ -495,7 +495,7 @@ const NARR={
  {"id":"takeaway","gap":0.8,"text":"Let the tools move it; spend your time on the contract."}]}
 };
 
-const VODUR={"gauge/june": 7.318, "gauge/bridge": 5.035, "gauge/gauge": 5.263, "gauge/wider": 5.12, "gauge/change": 6.915, "gauge/cost": 3.539, "gauge/reasons": 8.557, "gauge/years": 4.573, "gauge/agreed": 9.772, "gauge/through": 6.736, "gauge/third": 2.894, "gauge/files": 5.846, "gauge/days": 4.206, "gauge/hard": 5.407, "promise/module": 4.762, "promise/teams": 7.448, "promise/now": 2.732, "promise/each": 6.4, "promise/light": 5.267, "promise/advice": 4.916, "promise/linh": 8.409, "promise/born": 6.211, "promise/events": 8.401, "promise/batch": 7.46, "promise/eip": 7.316, "promise/takes": 2.648, "ways/connector": 2.688, "ways/sam": 5.195, "ways/keeps": 5.136, "ways/bronze": 4.118, "ways/query": 3.554, "ways/ledger": 6.364, "ways/large": 4.646, "ways/mirror": 6.613, "ways/rohan": 5.604, "ways/share": 5.965, "ways/api": 5.122, "ways/easy": 4.209, "contract/left": 5.942, "contract/ingrid": 3.665, "contract/noor": 3.578, "contract/fields": 6.089, "contract/con": 6.725, "contract/owner": 2.701, "contract/delete": 4.686, "contract/arrive": 7.517, "contract/history": 3.449, "contract/personal": 5.18, "contract/never": 3.116, "contract/standard": 5.869, "contract/silent": 5.893, "contract/ahead": 5.382, "agreed/ran": 5.377, "agreed/ours": 8.331, "agreed/standards": 1.626, "agreed/two": 6.527, "agreed/wheel": 6.417, "agreed/struggle": 7.137, "agreed/takeaway": 2.863};
+const VODUR={"gauge/june": 7.318, "gauge/bridge": 5.035, "gauge/gauge": 5.263, "gauge/wider": 5.12, "gauge/change": 6.915, "gauge/cost": 3.539, "gauge/reasons": 8.557, "gauge/years": 4.573, "gauge/agreed": 9.772, "gauge/through": 6.736, "gauge/third": 2.894, "gauge/files": 5.846, "gauge/days": 4.206, "gauge/hard": 5.407, "promise/module": 3.56, "promise/teams": 7.448, "promise/now": 2.732, "promise/each": 6.4, "promise/light": 5.267, "promise/advice": 4.916, "promise/linh": 8.409, "promise/born": 6.211, "promise/events": 8.401, "promise/batch": 7.46, "promise/eip": 7.316, "promise/takes": 2.648, "ways/connector": 2.688, "ways/sam": 5.195, "ways/keeps": 5.136, "ways/bronze": 4.118, "ways/query": 3.554, "ways/ledger": 6.364, "ways/large": 4.646, "ways/mirror": 6.613, "ways/rohan": 5.604, "ways/share": 5.965, "ways/api": 5.122, "ways/easy": 4.209, "contract/left": 5.942, "contract/ingrid": 3.665, "contract/noor": 3.578, "contract/fields": 6.089, "contract/con": 6.725, "contract/owner": 2.701, "contract/delete": 4.686, "contract/arrive": 7.517, "contract/history": 3.449, "contract/personal": 5.18, "contract/never": 3.116, "contract/standard": 5.869, "contract/silent": 5.893, "contract/ahead": 5.382, "agreed/ran": 5.377, "agreed/ours": 8.331, "agreed/standards": 1.626, "agreed/two": 6.527, "agreed/wheel": 6.417, "agreed/struggle": 7.137, "agreed/takeaway": 2.863};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2199,7 +2199,7 @@ scene("gauge",(ctx,S,t,sc)=>{
 
 /* ---------------------------------------------------------------- 2 · What got easier */
 scene("promise",(ctx,S,t,sc)=>{
-  const T={tFirst:wAt(sc,"module","the first film"),tMDB:wAt(sc,"module","Modern data basics"),tEasier:wAt(sc,"module","what the tools"),
+  const T={tMDB:wAt(sc,"module","Modern data basics"),tEasier:wAt(sc,"module","what the tools"),
     tMove:wAt(sc,"teams","Moving data"),tRun:wAt(sc,"teams","running a platform"),tServe:wAt(sc,"teams","serving data"),tRead:wAt(sc,"teams","reading documents"),tTeams:wAt(sc,"teams","whole teams"),
     tDbx:wAt(sc,"now","Databricks"),tDbt:wAt(sc,"now","dbt"),tMuch:wAt(sc,"now","much of it"),
     tGot:wAt(sc,"each","what got easier"),tStill:wAt(sc,"each","what still needs"),tDocs:wAt(sc,"each","the official docs"),
@@ -2239,7 +2239,7 @@ scene("promise",(ctx,S,t,sc)=>{
           md_textCard(c,560,250,800,{kick:"2003",title:"Enterprise Integration Patterns",sub:"Gregor Hohpe and Bobby Woolf"},{icon:"doc",a:ea,k:(tt-T.tNames+0.2)/0.5});
           [["event","Events"],["doc","Messages"],["batch","Batches"]].forEach(([ic,s],i)=>md_tag(c,620+i*240,560,s,{col:MD.flow,icon:ic,a:ea*ag_in(tt,T.tEIP+i*0.25,0.4)}));}});}}
   ],0.6);
-  mv_kicker(ctx,S,ag_in(t,0.2,0.6));
+  mv_kicker(ctx,S,ag_in(t,0.8,0.6));  // once the title card has faded with chapter 1 (0.8 s): it says the same words
 });
 
 /* ---------------------------------------------------------------- 3 · Five ways to move it */

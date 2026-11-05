@@ -36,8 +36,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El equipo de Rohan Desai pasaba dos días averiguando qué significaba cada columna.",
 "Moving the data was never the hard part. Agree what it means, once, and it passes straight through.":
 "Mover los datos nunca fue lo difícil. Acuerda qué significan, una vez, y pasan sin detenerse.",
-"This is the first film of Modern data basics: what the tools now make easier.":
-"Primera película de Lo básico de los datos modernos: lo que las herramientas hoy facilitan.",
+"Modern data basics is about what the tools now make easier.":
+"Lo básico de los datos modernos trata de lo que las herramientas hoy facilitan.",
 "Moving data, running a platform, serving data to people and agents, and reading documents all used to take whole teams.":
 "Mover datos, operar una plataforma, servir datos a personas y agentes, y leer documentos antes exigía equipos enteros.",
 "Databricks and dbt now do much of it.":

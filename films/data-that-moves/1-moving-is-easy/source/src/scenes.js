@@ -61,7 +61,7 @@ scene("gauge",(ctx,S,t,sc)=>{
 
 /* ---------------------------------------------------------------- 2 · What got easier */
 scene("promise",(ctx,S,t,sc)=>{
-  const T={tFirst:wAt(sc,"module","the first film"),tMDB:wAt(sc,"module","Modern data basics"),tEasier:wAt(sc,"module","what the tools"),
+  const T={tMDB:wAt(sc,"module","Modern data basics"),tEasier:wAt(sc,"module","what the tools"),
     tMove:wAt(sc,"teams","Moving data"),tRun:wAt(sc,"teams","running a platform"),tServe:wAt(sc,"teams","serving data"),tRead:wAt(sc,"teams","reading documents"),tTeams:wAt(sc,"teams","whole teams"),
     tDbx:wAt(sc,"now","Databricks"),tDbt:wAt(sc,"now","dbt"),tMuch:wAt(sc,"now","much of it"),
     tGot:wAt(sc,"each","what got easier"),tStill:wAt(sc,"each","what still needs"),tDocs:wAt(sc,"each","the official docs"),
@@ -101,7 +101,7 @@ scene("promise",(ctx,S,t,sc)=>{
           md_textCard(c,560,250,800,{kick:"2003",title:"Enterprise Integration Patterns",sub:"Gregor Hohpe and Bobby Woolf"},{icon:"doc",a:ea,k:(tt-T.tNames+0.2)/0.5});
           [["event","Events"],["doc","Messages"],["batch","Batches"]].forEach(([ic,s],i)=>md_tag(c,620+i*240,560,s,{col:MD.flow,icon:ic,a:ea*ag_in(tt,T.tEIP+i*0.25,0.4)}));}});}}
   ],0.6);
-  mv_kicker(ctx,S,ag_in(t,0.2,0.6));
+  mv_kicker(ctx,S,ag_in(t,0.8,0.6));  // once the title card has faded with chapter 1 (0.8 s): it says the same words
 });
 
 /* ---------------------------------------------------------------- 3 · Five ways to move it */

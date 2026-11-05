@@ -17,7 +17,7 @@ const NARR={
  {"id":"days","gap":0.8,"text":"Rohan Desai's team spent two days working out what each column meant."},
  {"id":"hard","gap":0.8,"text":"Moving the data was never the hard part. Agree what it means, once, and it passes straight through."}]},
 "promise":{"name":"What got easier","lead":1.0,"tail":1.0,"vo":[
- {"id":"module","gap":0.8,"text":"This is the first film of Modern data basics: what the tools now make easier."},
+ {"id":"module","gap":0.8,"text":"Modern data basics is about what the tools now make easier."},
  {"id":"teams","gap":0.8,"text":"Moving data, running a platform, serving data to people and agents, and reading documents all used to take whole teams."},
  {"id":"now","gap":0.8,"text":"Databricks and dbt now do much of it."},
  {"id":"each","gap":0.8,"text":"Each film shows what got easier, what still needs people to agree, and where the official docs take you next."},

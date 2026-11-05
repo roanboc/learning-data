@@ -118,7 +118,7 @@ scene("whose",(ctx,S,t,sc)=>{const c=sc.cues,P=ob_once(sc,"P",()=>({col:wAt(sc,"
     // drops in, and "written from the map" comes in under the card once the tag has gone, so the two never cross (later:true: Noor
     // and the map's card leave, then Sam and the agent come in)
     {later:true,at:c.three,place:"obLab",keys:[[c.three,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ob_agentWith(x,tt,{think:0.2,name:"planning agent",nameA:1-ag_in(tt,P.own,0.4),badge:"planning agent",bk:(tt-P.own-0.2)/0.9,tag:"owner · Clara Jensen",dx:-260});
+      ob_agentWith(x,tt,{think:0.2,name:"planning agent",nameA:1-ag_in(tt,P.own,0.3),badge:"planning agent",bk:(tt-P.own-0.3)/0.9,tag:"owner · Clara Jensen",dx:-260});
       ob_person(x,"sam",tt,{});ag_roomLight(x,1);ob_personCard(x,"sam",ag_in(tt,c.three+0.3,0.5));
       ob_idCard(x,1296,170,570,[["Databricks","service principal",ag_in(tt,P.dbx,0.4),0,false,null,"databricks"],["GitHub","planning-agent[bot]",ag_in(tt,P.gh,0.4),0,true,null,"githubLockup"],
         ["dbt","signs in as it",ag_in(tt,P.dbt,0.4),0,false,null,"dbt"]],{name:"planning agent",owner:"Clara Jensen",a:ag_in(tt,P.own,0.5),k:ag_spr(tt,P.own)});

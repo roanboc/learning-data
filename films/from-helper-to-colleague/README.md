@@ -11,6 +11,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [The map, enforced](https://data.learn-all.org/from-helper-to-colleague/the-map-enforced/) | The map in every tool | 8½ min | 6 | 4 questions | [script](5-the-map-enforced/script.md) · [source](5-the-map-enforced/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -90,7 +90,7 @@ function ob_badge(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return
   ctx.restore();}
 function ob_hook(o){o=o||{};const A=OB.agent;return[(o.x==null?A.x:o.x)+50,(o.y==null?A.y:o.y)+(o.R||A.R)-2];}
 function ob_badgeOn(ctx,tt,text,o){o=o||{};const k=o.k==null?1:o.k;if(k<=0)return;const h=ob_hook(o);
-  const fall=1-clamp(ag_spr(k,0,0.5),0,1.2);ob_badge(ctx,h[0],h[1]-fall*160,text,{t:tt,drop:56,a:clamp(k*3,0,1)*(o.a==null?1:o.a),grey:o.grey,off:o.off,sw:fall*0.2});}
+  const fall=1-clamp(ag_spr(k,0,0.5),0,1.2);ob_badge(ctx,h[0],h[1]-fall*60,text,{t:tt,drop:56,a:clamp(k*3,0,1)*(o.a==null?1:o.a),grey:o.grey,off:o.off,sw:fall*0.2});}
 function ob_tag(ctx,hx,hy,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const dx=o.dx==null?-120:o.dx,dy=o.dy==null?70:o.dy,size=o.size||28,w=ag_tw(ctx,text,{w:700,size})+70,h=56;
   ctx.save();ctx.globalAlpha*=a;ctx.translate(hx,hy);ctx.rotate(o.sw||0);
   ctx.strokeStyle="rgba(87,82,76,0.85)";ctx.lineWidth=2.2;ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(dx*0.4,dy*0.3,dx+(dx<0?w/2-22:-w/2+22),dy);ctx.stroke();

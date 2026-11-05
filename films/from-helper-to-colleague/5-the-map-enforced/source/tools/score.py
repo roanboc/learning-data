@@ -198,7 +198,7 @@ tap(F('badge', 'a role', 0.05), 0.009, px(1500)); tap(F('badge', 'an owner', 0.0
 lock(F('badge', 'only the rights', 0.1), 0.010, px(1500))
 # Sam wrote that place into every tool, under its own name: its badge drops in, with its bell; Databricks, GitHub and dbt
 fourth(G('whose', 'three', 0.3), 0.55, px(420), D3, A3)
-bell(PLAN, F('three', 'own name', 0.35), 0.7, px(500), ring=0.8)
+bell(PLAN, F('three', 'own name', 0.45), 0.7, px(500), ring=0.8)
 for w_ in ('Databricks', 'GitHub', 'dbt'):
     knock(F('three', w_, 0.05), 0.011, px(1580), 260)
 tap(F('three', 'wrote that place', 0.05), 0.009, px(1500))

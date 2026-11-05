@@ -96,17 +96,17 @@ scene("read",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({fr:wAt(sc,"be
     {at:P.ct,place:"facBig",keys:[[P.ct,960,540,1]],push:0.02,draw:(x,tt)=>gk_contractTab(x,tt,{two:fin(tt,P.tw,0.8),card:fin(tt,P.pp,0.8)})}],sc.dur,1));});
 
 // ---- 4 · Ask, with a purpose: Request access on the product's page; the form's two questions; his reason; ninety days; on the
-// platform, its button in preview sends him to the same form; every request in one place ----
+// platform, its button sends him to the same form; every request in one place ----
 scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({as:c.asks,why:wAt(sc,"form","why"),hl:wAt(sc,"form","for how long"),wr:wAt(sc,"writes","to plan"),
-    nd:wAt(sc,"ninety","ninety days"),pl:c.platform-0.3,btn:wAt(sc,"platform","its request button"),pv:wAt(sc,"platform","in preview"),
+    nd:wAt(sc,"ninety","ninety days"),pl:c.platform-0.3,btn:wAt(sc,"platform","its request button"),
     here:wAt(sc,"platform","brought him here"),one:c.one}));
   gv_shots(ctx,S,t,sc.dur,gk_run([
     // he asks, on the product's page: the form, why and for how long; his reason typed; ninety days; Submit
     {at:0,place:"facBig",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_form(x,tt,{press:clamp((tt-P.as-0.3)/0.8,0,1),open:fin(tt,P.as+1.1,0.6),
       lit:[gv_io(tt,P.why,P.wr-0.2,0.4),gv_io(tt,P.hl,P.wr-0.2,0.4)],why:clamp((tt-P.wr)/3.4,0,1),days:fin(tt,P.nd,0.5),sub:clamp((tt-P.nd-0.9)/0.8,0,1)})},
-    // the platform's own button, in preview, sends people to the catalogue's form; every request comes to one place
+    // the platform's own button sends people to the catalogue's form; every request comes to one place
     {cut:true,at:P.pl,place:"desk",keys:[[P.pl,960,540,1]],push:0.02,draw:(x,tt)=>gk_onePlace(x,tt,{plat:fin(tt,P.pl+0.4,0.6),press:clamp((tt-P.btn)/0.8,0,1),
-      pv:fin(tt,P.pv,0.6),redir:clamp((tt-P.here)/1.2,0,1),tray:clamp((tt-P.one)/1.6,0,1)})}],sc.dur));});
+      redir:clamp((tt-P.here)/1.2,0,1),tray:clamp((tt-P.one)/1.6,0,1)})}],sc.dur));});
 
 // ---- 5 · The owner decides: the request comes to Clara, not to whoever built the table; governance's promise, five working days;
 // her answer by the afternoon; his reason is the product's purpose, so yes, ninety days, until the 31st of January; or fewer, or no,

@@ -310,7 +310,7 @@ tap(aw('sql', 'shows its', 0.15), 0.008, px(700))
 
 # 4. Tools any agent can use: G flat major as the second way lights. The tool servers slide in, the agent's hand to them, the panel
 #    the platform runs them in, each named; Anil's agent signs in as Anil, and its tuba, G flat; it touches each tool in turn; the
-#    census count written once, reviewed and approved; the agents call it, and each gets 2,880; the open standard's plugs; the badges
+#    census count written once, reviewed and approved; the agents call it, and each gets 2,880; the open standard's plugs
 ow = lambda lid, word, off=0: W('tools', lid, word, off)
 o0 = S0('tools')
 play([(o0 + 0.2, (42, 54, 58, 61))], o0 + 2.6, att=0.4, rel=0.8)
@@ -339,9 +339,6 @@ for i in range(4):
     tap(st_ + 1.6, 0.008 - 0.001 * i, px(300 + 220 * i))           # each gets 2,880
 for i in range(5):
     plug(ow('mcp', 'open standard', 0.2 + 0.12 * i), 0.009 - 0.001 * i, px(1232))
-tap(ow('ga', 'generally available', 0.1), 0.008, px(1700))
-for k_ in range(4):
-    tap(ow('ga', 'in preview', 0.02 + 0.12 * k_), 0.007 - 0.001 * k_, px(1700))
 
 # 5. Agents the team builds. Night: the nightly job; its check fails, on a low E flat minor; "Why?"; the census check agent draws
 #    itself, built in code, Agent Bricks, Agent Runtime, the job's thread; each step reaching a tool. Morning: the evaluation, its

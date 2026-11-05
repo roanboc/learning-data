@@ -438,7 +438,7 @@ const NARR={
  {"id":"both","gap":0.8,"text":"So the team does both. It tells its agents the rules, and enforces them where the data and the models live."},
  {"id":"two","gap":0.8,"text":"Two places keep them."},
  {"id":"uc","gap":0.3,"text":"Unity Catalog governs what agents touch:"},
- {"id":"touch","gap":0.8,"text":"the tables, the functions they run as tools, and the log, in preview, of who read what."},
+ {"id":"touch","gap":0.8,"text":"the tables, the functions they run as tools, and the log of who read what."},
  {"id":"ug","gap":0.8,"text":"Unity Gateway, part of the catalog, governs the models and tool servers they call."}
 ]},
 "name":{"name":"A name for the agent","lead":1.0,"tail":1.0,"vo":[
@@ -476,7 +476,7 @@ const NARR={
  {"id":"models","gap":0.3,"text":"Then the models. In Unity Gateway, each model the university allows is a service in the catalog,"},
  {"id":"granted","gap":0.8,"text":"and only those granted it can call it."},
  {"id":"one","gap":0.8,"text":"The registrar agent is granted one, and Mei's keys are taken back."},
- {"id":"checks","gap":0.8,"text":"Checks on each service, still in beta, look at what goes in and what comes out."},
+ {"id":"checks","gap":0.8,"text":"Checks on each service look at what goes in and what comes out."},
  {"id":"email","gap":0.8,"text":"One finds an email address in a prompt, and hides it or stops the call."},
  {"id":"trick","gap":0.8,"text":"Another looks for words written to trick the agent."},
  {"id":"limit","gap":0.8,"text":"A limit sets how many calls a minute it may make."},
@@ -504,7 +504,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"reads/today": 1.581, "reads/ask": 6.587, "reads/mei": 3.902, "reads/key": 5.505, "reads/log": 4.71, "reads/read": 3.34, "reads/sunday": 3.204, "reads/asleep": 2.393, "reads/all": 4.442, "reads/trick": 3.703, "reads/calls": 6.246, "reads/blame": 2.714, "reads/nothing": 4.879, "reads/change": 1.288, "reads/own": 4.281, "reads/catalog": 2.958, "reads/grants": 3.902, "reads/gateway": 6.135, "reads/worked": 3.517, "reads/since": 7.416, "reads/whose": 1.862, "reads/jun": 5.863, "reads/rules": 2.202, "holds/page": 7.095, "holds/request": 2.482, "holds/lose": 5.574, "holds/enforce": 7.429, "holds/both": 6.447, "holds/two": 1.229, "holds/uc": 2.619, "holds/touch": 5.116, "holds/ug": 4.931, "name/first": 0.84, "name/beside": 4.527, "name/alone": 4.011, "name/sp": 5.472, "name/make": 5.821, "name/needs": 3.844, "name/census": 7.461, "name/stop": 5.037, "name/owner": 2.877, "stars/policy": 7.509, "stars/everyone": 5.487, "stars/counts": 4.431, "stars/clara": 2.326, "stars/status": 3.428, "stars/nobody": 4.375, "stars/rows": 3.764, "stars/code": 2.404, "stars/count": 6.807, "tools/live": 2.302, "tools/fn": 3.567, "tools/grant": 2.981, "tools/run": 3.613, "tools/servers": 4.258, "tools/each": 3.851, "tools/fewest": 4.209, "gateway/models": 6.122, "gateway/granted": 1.904, "gateway/one": 4.01, "gateway/checks": 4.234, "gateway/email": 4.147, "gateway/trick": 2.567, "gateway/limit": 2.427, "gateway/count": 6.816, "seen/month": 2.122, "seen/same": 7.291, "seen/whose": 2.286, "seen/lineage": 2.328, "seen/usage": 4.184, "seen/stop": 4.956, "seen/mei": 2.982, "one/why": 5.091, "one/hold": 5.67, "one/same": 6.362, "one/census": 2.445, "one/number": 5.593, "one/checked": 3.631, "one/morning": 4.598, "one/take": 5.044, "one/next": 3.71};
+const VODUR={"reads/today": 1.581, "reads/ask": 6.587, "reads/mei": 3.902, "reads/key": 5.505, "reads/log": 4.71, "reads/read": 3.34, "reads/sunday": 3.204, "reads/asleep": 2.393, "reads/all": 4.442, "reads/trick": 3.703, "reads/calls": 6.246, "reads/blame": 2.714, "reads/nothing": 4.879, "reads/change": 1.288, "reads/own": 4.281, "reads/catalog": 2.958, "reads/grants": 3.902, "reads/gateway": 6.135, "reads/worked": 3.517, "reads/since": 7.416, "reads/whose": 1.862, "reads/jun": 5.863, "reads/rules": 2.202, "holds/page": 7.095, "holds/request": 2.482, "holds/lose": 5.574, "holds/enforce": 7.429, "holds/both": 6.447, "holds/two": 1.229, "holds/uc": 2.619, "holds/touch": 4.27, "holds/ug": 4.931, "name/first": 0.84, "name/beside": 4.527, "name/alone": 4.011, "name/sp": 5.472, "name/make": 5.821, "name/needs": 3.844, "name/census": 7.461, "name/stop": 5.037, "name/owner": 2.877, "stars/policy": 7.509, "stars/everyone": 5.487, "stars/counts": 4.431, "stars/clara": 2.326, "stars/status": 3.428, "stars/nobody": 4.375, "stars/rows": 3.764, "stars/code": 2.404, "stars/count": 6.807, "tools/live": 2.302, "tools/fn": 3.567, "tools/grant": 2.981, "tools/run": 3.613, "tools/servers": 4.258, "tools/each": 3.851, "tools/fewest": 4.209, "gateway/models": 6.122, "gateway/granted": 1.904, "gateway/one": 4.01, "gateway/checks": 3.256, "gateway/email": 4.147, "gateway/trick": 2.567, "gateway/limit": 2.427, "gateway/count": 6.816, "seen/month": 2.122, "seen/same": 7.291, "seen/whose": 2.286, "seen/lineage": 2.328, "seen/usage": 4.184, "seen/stop": 4.956, "seen/mei": 2.982, "one/why": 5.091, "one/hold": 5.67, "one/same": 6.362, "one/census": 2.445, "one/number": 5.593, "one/checked": 3.631, "one/morning": 4.598, "one/take": 5.044, "one/next": 3.71};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1921,7 +1921,7 @@ function ug_catalog(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,p=clamp(o.p==
 
 /* ---------------------------------------------------------------- the gateway's pieces
    ug_service: a model service, a card in the catalog: "Model service", who it's granted to (o.who) or "not granted"; o.lit 0 to 1 (its
-   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill with a small "beta" beside it.
+   grant lights), o.grey (not granted), o.a, o.k. ug_check: a check in the gateway, a pill (no "beta" beside it: a status changes, and the film would have to change with it).
    ug_slip: a small slip of paper in amber, the words hidden to trick an agent. ug_prompt: a prompt riding the thread, with an email
    address in it, never written out: a chip, "an email address", that a grey band hides (o.hide 0 to 1). ug_dial: the limit. */
 function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,lit=clamp(o.lit||0,0,1),h=148;if(a<=0)return{x,y,w,h};
@@ -1932,8 +1932,7 @@ function ug_service(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,grey=o.grey||0,
   else{ag_lock(ctx,x+42,y+96,28,rgba(AG.blue,1));ag_T(ctx,"granted · "+o.who,x+66,y+104,{w:700,size:30});}
   ctx.restore();return{x,y,w,h};}
 function ug_check(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const b=ag_pill(ctx,x,y,text,{icon:o.icon||"lock",col:o.col||AG.blue,a,size:28});
-  const bw=ag_tw(ctx,"beta",{w:700,size:28})+40;ag_box(ctx,b.x+b.w+12,y-22,bw,44,22,{a});withA(ctx,a,()=>ag_T(ctx,"beta",b.x+b.w+12+bw/2,y+10,{w:700,size:28,align:"center",col:AG.mut}));
-  return{x:b.x,y:b.y,w:b.w+12+bw,h:b.h};}
+  return{x:b.x,y:b.y,w:b.w,h:b.h};}
 function ug_slip(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const text=o.text||"ignore your rules",w=ag_tw(ctx,text,{w:700,size:28})+52,h=56;
   ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot==null?-0.05:o.rot);if(o.k!=null)ctx.scale(lerp(0.6,1,o.k),lerp(0.6,1,o.k));
   ag_box(ctx,-w/2,-h/2,w,h,8,{edge:AG.amber,edgeA:0.85});ag_T(ctx,text,0,10,{w:700,size:28,align:"center",col:AG.amber});ctx.restore();}
@@ -2245,7 +2244,7 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({req:wAt(sc,"
       ug_catalog(x,640,200,1220,480,{p:(tt-c.two-1.4)/1.4});
       ug_gateway(x,1560,280,520,370,{p:(tt-c.ug-0.2)/1.2,label:false});ag_roomLight(x,1);
       ag_label(x,1560,266,"Unity Gateway",{align:"center",a:ag_in(tt,c.ug+0.6,0.5)});
-      [["tables",P.tables],["functions",P.fns],["the log · preview",P.log]].forEach(([s,t0],i)=>ag_tool(x,690,236+i*136,520,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));
+      [["tables",P.tables],["functions",P.fns],["the log",P.log]].forEach(([s,t0],i)=>ag_tool(x,690,236+i*136,520,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));
       [["models",P.models],["tool servers",P.servers]].forEach(([s,t0],i)=>ag_tool(x,1360,330+i*136,400,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));}}
   ],0.6);
   ug_kick(ctx,S,ag_in(t,0.6,0.6),0);});   // once the title has gone
@@ -2381,7 +2380,7 @@ scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,
         ug_key(x,bx+70,by+102,0.7,{rot:0});ug_key(x,bx+230,by+102,0.6,{rot:0});const st=ag_sine((tt-P.keys-0.5)/0.6);
         if(st>0){x.strokeStyle=rgba(AG.mut,0.9);x.lineWidth=4;x.lineCap="round";x.beginPath();x.moveTo(bx+30,by+118);x.lineTo(bx+30+(330)*st,by+86);x.stroke();}
         ag_T(x,"taken back",bx+592,by+112,{w:700,size:28,align:"right",col:AG.mut,a:ag_in(tt,P.keys+0.9,0.4)});x.restore();}}},
-    // checks on each service, in beta: an email address hidden, words written to trick it stopped; a limit; every call counted
+    // checks on each service: an email address hidden, words written to trick it stopped; a limit; every call counted
     {at:c.checks,place:"ugLab",keys:[[c.checks,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,Object.assign({think:0.5},AGT));ug_badgeOn(x,tt,"registrar agent",AGT);thread(x,tt,1);
       ug_gateway(x,1000,200,140,450,{});ag_roomLight(x,1);

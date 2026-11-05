@@ -450,8 +450,7 @@ const NARR={
  {"id":"anil","gap":0.8,"text":"Anil's agent now connects to them with his own sign-in, and reads only what he may read."},
  {"id":"once","gap":0.8,"text":"The data team wrote the census count once, as a function, for any faculty."},
  {"id":"calls","gap":0.8,"text":"Every agent calls it, and none writes a count of its own."},
- {"id":"mcp","gap":0.8,"text":"They follow the open standard, MCP, so any agent can plug in."},
- {"id":"ga","gap":0.8,"text":"Genie One's tool server is generally available; the others are in preview."}]},
+ {"id":"mcp","gap":0.8,"text":"They follow the open standard, MCP, so any agent can plug in."}]},
 "build":{"name":"Agents the team builds","lead":0.8,"tail":1.0,"vo":[
  {"id":"third","gap":0.8,"text":"Third, agents the team builds."},
  {"id":"fails","gap":0.8,"text":"When the nightly count fails its check against the census report, someone has to find out why, and those steps can't be written in advance."},
@@ -482,7 +481,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"That's the next film."}]}
 };
 
-const VODUR={"three/monday": 1.812, "three/anil": 4.609, "three/census": 5.265, "three/asks": 6.256, "three/load": 4.473, "three/fte": 7.116, "three/table": 4.714, "three/joint": 7.788, "three/folder": 4.741, "three/which": 3.851, "three/short": 4.097, "three/names": 4.032, "three/change": 1.288, "three/bring": 7.56, "three/same": 8.034, "three/week": 7.178, "three/minute": 5.007, "three/data": 5.877, "place/holds": 7.819, "place/people": 3.834, "place/four": 2.379, "place/answer": 2.824, "place/servers": 2.4, "place/builds": 2.618, "place/writes": 4.323, "place/each": 4.824, "ask/first": 1.653, "ask/genie": 5.666, "ask/care": 5.285, "ask/census": 4.508, "ask/instr": 7.685, "ask/bench": 7.545, "ask/runs": 5.561, "ask/sql": 3.649, "tools/second": 3.172, "tools/runs": 3.089, "tools/query": 6.388, "tools/genie": 4.562, "tools/anil": 4.932, "tools/once": 4.464, "tools/calls": 3.098, "tools/mcp": 4.362, "tools/ga": 4.345, "build/third": 1.784, "build/fails": 7.922, "build/bricks": 6.242, "build/runtime": 4.596, "build/same": 2.786, "build/before": 4.441, "build/cases": 7.327, "build/judges": 7.26, "build/note": 4.019, "code/fourth": 1.816, "code/sam": 3.582, "code/genie": 5.81, "code/skills": 5.795, "code/profile": 6.045, "code/jun": 4.409, "code/reach": 5.564, "code/teach": 3.833, "code/draft": 7.115, "same/back": 3.742, "same/read": 4.455, "same/asked": 8.48, "same/plans": 2.084, "same/takeaway": 4.743, "same/left": 6.119, "same/next": 1.036};
+const VODUR={"three/monday": 1.812, "three/anil": 4.609, "three/census": 5.265, "three/asks": 6.256, "three/load": 4.473, "three/fte": 7.116, "three/table": 4.714, "three/joint": 7.788, "three/folder": 4.741, "three/which": 3.851, "three/short": 4.097, "three/names": 4.032, "three/change": 1.288, "three/bring": 7.56, "three/same": 8.034, "three/week": 7.178, "three/minute": 5.007, "three/data": 5.877, "place/holds": 7.819, "place/people": 3.834, "place/four": 2.379, "place/answer": 2.824, "place/servers": 2.4, "place/builds": 2.618, "place/writes": 4.323, "place/each": 4.824, "ask/first": 1.653, "ask/genie": 5.666, "ask/care": 5.285, "ask/census": 4.508, "ask/instr": 7.685, "ask/bench": 7.545, "ask/runs": 5.561, "ask/sql": 3.649, "tools/second": 3.172, "tools/runs": 3.089, "tools/query": 6.388, "tools/genie": 4.562, "tools/anil": 4.932, "tools/once": 4.464, "tools/calls": 3.098, "tools/mcp": 4.362, "build/third": 1.784, "build/fails": 7.922, "build/bricks": 6.242, "build/runtime": 4.596, "build/same": 2.786, "build/before": 4.441, "build/cases": 7.327, "build/judges": 7.26, "build/note": 4.019, "code/fourth": 1.816, "code/sam": 3.582, "code/genie": 5.81, "code/skills": 5.795, "code/profile": 6.045, "code/jun": 4.409, "code/reach": 5.564, "code/teach": 3.833, "code/draft": 7.115, "same/back": 3.742, "same/read": 4.455, "same/asked": 8.48, "same/plans": 2.084, "same/takeaway": 4.743, "same/left": 6.119, "same/next": 1.036};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -491,7 +490,7 @@ const BREATH={
 "three":{"hold":{"anil":0.4,"census":0.6,"asks":0.8,"fte":0.6,"joint":0.6,"folder":0.4,"which":1.4,"short":0.8,"names":0.8,"change":1.0,"bring":0.4,"same":0.8,"week":0.8,"minute":0.8,"data":0.4},"breathe":4.6},
 "place":{"hold":{"holds":0.6,"people":0.4,"four":0.4,"writes":0.6,"each":1.0}},
 "ask":{"hold":{"genie":0.6,"care":0.4,"instr":0.6,"bench":0.8,"runs":0.8,"sql":1.0}},
-"tools":{"hold":{"runs":0.4,"query":0.6,"genie":0.4,"anil":0.8,"once":0.6,"calls":0.8,"mcp":0.6,"ga":1.0}},
+"tools":{"hold":{"runs":0.4,"query":0.6,"genie":0.4,"anil":0.8,"once":0.6,"calls":0.8,"mcp":1.0}},
 "build":{"hold":{"fails":0.6,"bricks":0.4,"runtime":0.6,"before":0.4,"cases":0.8,"judges":0.8,"note":1.0}},
 "code":{"hold":{"genie":0.4,"skills":0.6,"profile":0.8,"reach":0.6,"teach":0.8,"draft":1.0}},
 "same":{"hold":{"read":0.6,"asked":0.8,"plans":0.6,"takeaway":1.0,"left":0.8},"breathe":4.6}
@@ -2071,8 +2070,8 @@ function od_genieAgent(ctx,T,o){o=o||{};const P=OD_PG,a=o.a==null?1:o.a;if(a<=0)
 
 /* ---------------------------------------------------------------- the tool servers
    The platform runs them, in one panel of its own ("Databricks"), a card for each: its name and what it does, a socket on the card's
-   left where an agent plugs in. od_tool: o.touch (0 to 1) lit blue; o.badge [text, a] a small grey pill at its right ("generally
-   available", "preview"); o.plug (0 to 1) a plug in its socket, the open standard's; o.a; o.k (0 to 1) it slides in */
+   left where an agent plugs in. od_tool: o.touch (0 to 1) lit blue; o.plug (0 to 1) a plug in its socket, the open standard's; o.a;
+   o.k (0 to 1) it slides in. No card says whether its server is in preview: that changes, and the film would have to change with it */
 const OD_TOOLS=[["Databricks SQL","runs queries"],["Unity Catalog functions","a function as a tool"],["AI Search","searches documents"],["Genie One","ask it"],["Genie Agent","Census day"]];
 const OD_TP={x:1200,y:206,w:656,h:640};
 function od_toolBox(i,o){o=o||{};const h=o.h||94,p=o.pitch||110;return{x:o.x||1232,y:(o.y||286)+i*p,w:o.w||592,h};}
@@ -2088,9 +2087,6 @@ function od_tool(ctx,b,name,sub,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)retur
   ag_T(ctx,name,b.x+44,b.y+(sub?44:b.h/2+11),{w:700,size:30});if(sub)ag_T(ctx,sub,b.x+44,b.y+80,{w:500,size:28,col:AG.mut});
   // the socket, on the left edge, and a plug in it
   ctx.fillStyle="#2E2F34";rr(ctx,b.x-8,cy-12,16,24,5);ctx.fill();if(o.plug>0)od_plug(ctx,b.x-8,cy,o.plug);
-  if(o.badge&&o.badge[1]>0){const s=o.badge[0],w=ag_tw(ctx,s,{w:600,size:28})+36,bx=b.x+b.w-w-18,by=cy-22;ctx.save();ctx.globalAlpha*=ag_in(o.badge[1],0,0.35);
-    const e=ag_spr(o.badge[1],0,0.4);ag_about(ctx,bx+w/2,cy,lerp(0.7,1,Math.min(1.1,e)));ctx.fillStyle="rgba(236,234,230,1)";rr(ctx,bx,by,w,44,22);ctx.fill();ctx.strokeStyle=rgba(AG.mut,0.6);ctx.lineWidth=1.8;rr(ctx,bx,by,w,44,22);ctx.stroke();
-    ag_T(ctx,s,bx+w/2,cy+10,{w:600,size:28,col:AG.mut,align:"center"});ctx.restore();}
   ctx.restore();}
 
 // the census count, written once, as a function: its name, its comment (what an agent reads as the tool's description), and the
@@ -2394,7 +2390,7 @@ scene("tools",(ctx,S,t,sc)=>{
     tAnil:wAt(sc,"anil","Anil's agent"),tConn:wAt(sc,"anil","connects"),tSign:wAt(sc,"anil","sign-in"),tOnly:wAt(sc,"anil","only what"),
     tOnce:wAt(sc,"once","census count"),tAny:wAt(sc,"once","any faculty"),
     tCalls:wAt(sc,"calls","Every agent"),tNone:wAt(sc,"calls","none writes"),
-    tMcp:wAt(sc,"mcp","open standard"),tPlug:wAt(sc,"mcp","plug in"),tGa:wAt(sc,"ga","generally available"),tPrev:wAt(sc,"ga","in preview")};
+    tMcp:wAt(sc,"mcp","open standard"),tPlug:wAt(sc,"mcp","plug in")};
   const cue=[T.tQ1,T.tQ2,T.tQ3,T.tG,T.tGA],next=[T.tQ2,T.tQ3,T.tG-0.3,T.tGA,T.tAsk+0.6];
   const row=[[170,740],[390,740],[610,740],[830,740]],who=["Anil's agent","Genie","census check","Jun's agent"],AX=420,AY=470,AR=64;
   const tb=i=>{const b=od_toolBox(i);return[b.x-14,b.y+b.h/2];};
@@ -2411,9 +2407,9 @@ scene("tools",(ctx,S,t,sc)=>{
       // the agent's hand: first toward the tools, the hands any agent can use; then, signed in as Anil, to each in turn
       const r1=ag_in(tt,T.tHands-0.1,0.6)*(1-ag_in(tt,T.tRuns+0.6,0.6)),r2=ag_in(tt,T.tConn-0.2,0.7)*(1-ag_in(tt,T.tOnce-1.0,0.5));
       const seg=clamp((tt-T.tConn-0.5)/0.55,0,4),si=Math.min(3,Math.floor(seg)),sf=ag_sine(seg-si),tp=r2>r1?[lerp(tb(si)[0],tb(si+1)[0],sf),lerp(tb(si)[1],tb(si+1)[1],sf)]:tb(2);
-      OD_TOOLS.forEach((d,i)=>{const b=od_toolBox(i),k=(tt-(T.tServers+0.2+i*0.15))/0.6,touch=r2>0.6?clamp(1-Math.abs(seg-i)*1.6,0,1):0,ga=i===3?T.tGa:T.tPrev+0.12*(i>3?i-1:i);
+      OD_TOOLS.forEach((d,i)=>{const b=od_toolBox(i),k=(tt-(T.tServers+0.2+i*0.15))/0.6,touch=r2>0.6?clamp(1-Math.abs(seg-i)*1.6,0,1):0;
         const named=od_lit(tt,cue[i]-0.1,next[i]),called=i===1?0.8*clamp(calls*2,0,1)*(1-ag_in(tt,T.tMcp,0.6)):0,held=i===2?r1*0.7:0;
-        od_tool(c,b,d[0],d[1],{k:clamp(k,0,1),a:ag_in(k,0,0.3),touch:Math.max(touch,named,called,held),plug:ag_in(tt,T.tMcp+0.2+i*0.12,0.4),badge:[i===3?"generally available":"preview",(tt-ga+0.1)/0.45]});});
+        od_tool(c,b,d[0],d[1],{k:clamp(k,0,1),a:ag_in(k,0,0.3),touch:Math.max(touch,named,called,held),plug:ag_in(tt,T.tMcp+0.2+i*0.12,0.4)});});
       const u=Math.max(r1,r2);if(u>0)ag_reach(c,[ax+ar*0.9,ay,ax+360,ay-50,tp[0]-300,tp[1]+30,tp[0],tp[1]],u,{data:r2>0.95?clamp((tt-T.tConn-0.6)%0.55/0.55,0,1):0});
       if(an>0&&mv<1){c.save();c.globalAlpha*=an*(1-mv);const na=ag_in(tt,T.tAnil-0.2,0.4);if(na>0)ag_T(c,"Anil's agent",ax,ay+ar+48,{w:700,size:28,align:"center",col:AG.label,a:na});
         if(tt>T.tSign-0.2)ag_pill(c,ax,ay+ar+112,"signed in as Anil",{icon:"lock",col:AG.blue,a:ag_in(tt,T.tSign-0.2,0.4)});c.restore();

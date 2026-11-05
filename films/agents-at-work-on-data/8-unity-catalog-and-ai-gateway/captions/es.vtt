@@ -90,155 +90,155 @@ Dos lugares las guardan.
 00:02:58.186 --> 00:03:00.905
 Unity Catalog gobierna lo que tocan los agentes:
 
-00:03:01.305 --> 00:03:06.521
-las tablas, las funciones que usan como herramientas, y la bitácora, en versión preliminar, de quién leyó qué.
+00:03:01.305 --> 00:03:05.675
+las tablas, las funciones que usan como herramientas, y la bitácora de quién leyó qué.
 
-00:03:07.621 --> 00:03:12.652
+00:03:06.775 --> 00:03:11.806
 Unity Gateway, parte del catálogo, gobierna los modelos y servidores de herramientas que llaman.
 
-00:03:16.752 --> 00:03:17.692
+00:03:15.906 --> 00:03:16.846
 Primero, un nombre.
 
-00:03:18.992 --> 00:03:23.619
+00:03:18.146 --> 00:03:22.773
 Un agente que ayuda a una persona, mientras está presente, puede entrar con su cuenta.
 
-00:03:25.319 --> 00:03:29.430
+00:03:24.473 --> 00:03:28.584
 Uno que trabaja solo, como el de Mei de noche, necesita un nombre propio.
 
-00:03:30.930 --> 00:03:36.502
+00:03:30.084 --> 00:03:35.656
 En Databricks, eso es una entidad de servicio: una identidad hecha para un programa, no para una persona.
 
-00:03:38.002 --> 00:03:43.923
+00:03:37.156 --> 00:03:43.077
 Sam crea una para el agente de Mei, el agente de registro, y le concede solo lo que su tarea necesita:
 
-00:03:44.423 --> 00:03:48.367
+00:03:43.577 --> 00:03:47.521
 puede leer las tablas del núcleo que dan sus respuestas, y no escribir en ninguna parte.
 
-00:03:50.067 --> 00:03:57.628
+00:03:49.221 --> 00:03:56.782
 El agente del censo de Jun ya tiene la suya: lee el núcleo y los marts, y solo escribe en su propio esquema de desarrollo.
 
-00:03:59.328 --> 00:04:04.465
+00:03:58.482 --> 00:04:03.619
 Para detener un agente, Sam desactiva su entidad de servicio, y todos los demás siguen trabajando.
 
-00:04:06.565 --> 00:04:09.542
+00:04:05.719 --> 00:04:08.696
 Y Mei sigue siendo su dueña: responde por lo que hace.
 
-00:04:13.242 --> 00:04:20.851
+00:04:12.396 --> 00:04:20.005
 Luego, las máscaras. Una política muestra asteriscos en cada columna etiquetada directa, a todos fuera de la oficina de registro.
 
-00:04:22.351 --> 00:04:27.938
+00:04:21.505 --> 00:04:27.092
 Está escrita para todos los usuarios de la cuenta, y en Databricks, eso incluye cada entidad de servicio.
 
-00:04:29.438 --> 00:04:33.969
+00:04:28.592 --> 00:04:33.123
 El agente de registro no está en el grupo de la oficina: solo necesita conteos.
 
-00:04:35.069 --> 00:04:37.495
+00:04:34.223 --> 00:04:36.649
 Así que lee la tabla de estudiantes como Clara:
 
-00:04:37.695 --> 00:04:41.223
+00:04:36.849 --> 00:04:40.377
 el estado de cada uno, y asteriscos donde están los nombres y los correos.
 
-00:04:43.123 --> 00:04:47.598
+00:04:42.277 --> 00:04:46.752
 Nadie escribió una regla para agentes. La regla para personas ya los cubría.
 
-00:04:49.298 --> 00:04:53.162
+00:04:48.452 --> 00:04:52.316
 Un filtro de filas funciona igual, para un agente que para una persona.
 
-00:04:54.862 --> 00:04:57.366
+00:04:54.016 --> 00:04:56.520
 Y el código de estudiante sigue legible para contar,
 
-00:04:57.566 --> 00:05:04.473
+00:04:56.720 --> 00:05:03.627
 así que el agente de Jun revisa el conteo del censo, 18,412 estudiantes, sin un solo nombre.
 
-00:05:08.173 --> 00:05:10.575
+00:05:07.327 --> 00:05:09.729
 Sus herramientas también viven en el catálogo.
 
-00:05:11.275 --> 00:05:14.942
+00:05:10.429 --> 00:05:14.096
 El conteo del censo que el equipo de datos escribió una vez es una función allí.
 
-00:05:16.442 --> 00:05:19.523
+00:05:15.596 --> 00:05:18.677
 Ejecutarla requiere un permiso, el mismo que necesita una persona.
 
-00:05:20.223 --> 00:05:23.936
+00:05:19.377 --> 00:05:23.090
 El agente de Jun lo tiene: puede ejecutar el conteo, y no puede cambiarlo.
 
-00:05:25.636 --> 00:05:29.994
+00:05:24.790 --> 00:05:29.148
 Y los servidores de herramientas que llaman los agentes se registran ahí, con Unity Gateway,
 
-00:05:30.194 --> 00:05:34.145
+00:05:29.348 --> 00:05:33.299
 cada uno con su propio permiso: un agente puede usar estos, y solo estos.
 
-00:05:35.845 --> 00:05:40.154
+00:05:34.999 --> 00:05:39.308
 Cada uno, con los mínimos permisos: las del agente de registro solo leen.
 
-00:05:43.854 --> 00:05:50.076
+00:05:43.008 --> 00:05:49.230
 Luego, los modelos. En Unity Gateway, cada modelo que la universidad permite es un servicio en el catálogo,
 
-00:05:50.476 --> 00:05:52.480
+00:05:49.630 --> 00:05:51.634
 y solo quienes tienen permiso pueden llamarlo.
 
-00:05:54.180 --> 00:05:58.290
+00:05:53.334 --> 00:05:57.444
 Al agente de registro se le concede uno, y a Mei se le retiran las claves.
 
-00:06:00.190 --> 00:06:04.524
-Los controles de cada servicio, aún en beta, miran lo que entra y lo que sale.
+00:05:59.344 --> 00:06:02.700
+Los controles de cada servicio miran lo que entra y lo que sale.
 
-00:06:06.224 --> 00:06:10.471
+00:06:04.400 --> 00:06:08.647
 Uno encuentra un correo en un prompt, y lo oculta o detiene la llamada.
 
-00:06:12.371 --> 00:06:15.038
+00:06:10.547 --> 00:06:13.214
 Otro busca palabras escritas para engañar al agente.
 
-00:06:16.938 --> 00:06:19.465
+00:06:15.114 --> 00:06:17.641
 Un límite fija cuántas llamadas por minuto puede hacer.
 
-00:06:21.165 --> 00:06:28.081
+00:06:19.341 --> 00:06:26.257
 Y cada llamada se cuenta a su nombre, así la oficina de registro ve lo que cuesta su agente, en su propio presupuesto.
 
-00:06:32.381 --> 00:06:34.603
+00:06:30.557 --> 00:06:32.779
 Un mes después, Sam vuelve a revisar la bitácora.
 
-00:06:35.303 --> 00:06:42.694
+00:06:33.479 --> 00:06:40.870
 La misma pregunta, quién leyó la tabla de estudiantes este mes, lista a Mei las mañanas de semana y al agente de registro de noche.
 
-00:06:44.594 --> 00:06:46.980
+00:06:42.770 --> 00:06:45.156
 ¿De quién eran esas lecturas? Ahora la bitácora lo dice.
 
-00:06:48.680 --> 00:06:51.108
+00:06:46.856 --> 00:06:49.284
 El linaje muestra las tablas que leen sus consultas.
 
-00:06:52.608 --> 00:06:56.892
+00:06:50.784 --> 00:06:55.068
 La tabla de Unity Gateway lista cada llamada que hizo, y los tokens que usó.
 
-00:06:58.392 --> 00:07:03.448
+00:06:56.568 --> 00:07:01.624
 Si algo se ve mal, Sam puede detener solo al agente, y nadie más se detiene con él.
 
-00:07:05.348 --> 00:07:08.430
+00:07:03.524 --> 00:07:06.606
 Y ninguna lectura del agente vuelve a pasar por una de Mei.
 
-00:07:12.130 --> 00:07:17.321
+00:07:10.306 --> 00:07:15.497
 ¿Por qué guardar las reglas donde viven los datos y los modelos, y no solo en lo que se les dice a los agentes?
 
-00:07:18.821 --> 00:07:24.591
+00:07:16.997 --> 00:07:22.767
 Porque ahí se cumplen para cada agente, cada herramienta y cada persona, escriba lo que escriba quien sea.
 
-00:07:26.291 --> 00:07:32.753
+00:07:24.467 --> 00:07:30.929
 Y como la gente ya trabaja con esas reglas, hay un solo conjunto que mantener, una bitácora que leer y una sola revisión.
 
-00:07:34.453 --> 00:07:36.998
+00:07:32.629 --> 00:07:35.174
 El agente del censo de Jun también trabaja con ellas.
 
-00:07:37.698 --> 00:07:43.391
+00:07:35.874 --> 00:07:41.567
 La cifra que la universidad envía al gobierno, 18,412 estudiantes,
 
-00:07:43.591 --> 00:07:47.322
+00:07:41.767 --> 00:07:45.498
 la revisa un agente que el equipo puede ver, limitar y por el que responde.
 
-00:07:49.222 --> 00:07:53.920
+00:07:47.398 --> 00:07:52.096
 Y cada mañana, las respuestas de las facultades esperan a nombre del agente de registro.
 
-00:07:55.620 --> 00:08:00.764
+00:07:53.796 --> 00:07:58.940
 Unas mismas reglas para personas y agentes, aplicadas donde viven los datos y los modelos.
 
-00:08:03.064 --> 00:08:06.874
+00:08:01.240 --> 00:08:05.050
 Después: el contexto y la memoria del equipo, gobernados como cualquier dato.

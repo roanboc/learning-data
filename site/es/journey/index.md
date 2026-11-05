@@ -86,7 +86,7 @@ Antes de cualquier animación, cada afirmación sobre un producto se verificó c
 
 Todo lo que la película simplifica está escrito en una **hoja de rigor** dentro del [guion](https://github.com/roanboc/learning-data/blob/main/films/inner-life-of-data/script.md) (en inglés): qué muestra cada escena, la tecnología real y lo que agregaría un experto.
 
-> **Lección:** los nombres y la madurez de los productos cambian rápido. Verifícalos al publicar, y di "preview" cuando algo esté en preview.
+> **Lección:** los nombres y la madurez de los productos cambian rápido. Verifícalos al publicar, y deja fuera de la película el estado de cada función, para que no tenga que cambiar cuando algo en preview pase a disponibilidad general.
 
 ## 4. De la luz a las imágenes
 
@@ -320,7 +320,7 @@ Los errores fueron parte del proceso, y casi todos enseñaron algo:
 5. **Empieza donde nacen los datos,** en el sistema de registro.
 6. **Muestra el modelo conceptual, y muéstralo fallando.** El boceto equivocado enseña más que el correcto.
 7. **Mantén claros los roles.** dbt escribe y prueba las recetas; Databricks ejecuta, guarda y gobierna.
-8. **Verifica nombres y madurez al publicar.** Los productos cambian de nombre, y lo que está en preview no tiene disponibilidad general.
+8. **Verifica nombres y madurez al publicar.** Los productos cambian de nombre, y lo que está en preview pasa a disponibilidad general: la película usa el nombre del día y nunca dice en qué estado está una función.
 9. **La coherencia le gana al adorno.** Usa un solo lenguaje de diseño, y varía el contenido en lugar de repetirlo.
 10. **Usa puntos de control baratos.** Los cuadros de estilo y las pruebas de voz de cinco segundos van antes de las reconstrucciones completas.
 11. **Crea contenido multimedia como código.** Cuando las escenas están sincronizadas con la narración, cambiar una línea vuelve a sincronizar toda la película.

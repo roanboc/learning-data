@@ -1,0 +1,344 @@
+{
+ "player": "feec2d67fd0809a6",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:hall83": {
+   "file": "hall83.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     10.5
+    ],
+    [
+     28.25,
+     33.0
+    ]
+   ]
+  },
+  "place:counter83": {
+   "file": "counter83.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     10.5
+    ],
+    [
+     28.25,
+     33.0
+    ]
+   ]
+  },
+  "place:table83": {
+   "file": "table83.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     10.25,
+     25.5
+    ],
+    [
+     32.25,
+     36.75
+    ],
+    [
+     43.25,
+     86.75
+    ],
+    [
+     342.75,
+     359.75
+    ]
+   ]
+  },
+  "place:street83": {
+   "file": "street83.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     25.0,
+     29.0
+    ]
+   ]
+  },
+  "place:court": {
+   "file": "court.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     36.0,
+     44.0
+    ]
+   ]
+  },
+  "place:bench": {
+   "file": "bench.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     36.0,
+     44.0
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     86.5,
+     112.0
+    ],
+    [
+     283.0,
+     303.75
+    ],
+    [
+     311.0,
+     318.75
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.0,
+     115.0
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     114.25,
+     139.0
+    ],
+    [
+     262.5,
+     276.0
+    ],
+    [
+     328.75,
+     343.5
+    ]
+   ]
+  },
+  "openBinder": {
+   "file": "openBinder.webp",
+   "w": 1500,
+   "h": 880,
+   "shows": [
+    [
+     114.25,
+     139.0
+    ],
+    [
+     328.75,
+     343.5
+    ]
+   ]
+  },
+  "place:platform": {
+   "file": "platform.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     138.75,
+     142.5
+    ],
+    [
+     149.25,
+     155.75
+    ],
+    [
+     213.75,
+     222.0
+    ]
+   ]
+  },
+  "place:platformDesk": {
+   "file": "platformDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     138.75,
+     142.5
+    ],
+    [
+     149.25,
+     155.75
+    ],
+    [
+     213.75,
+     222.0
+    ]
+   ]
+  },
+  "place:screenPlat": {
+   "file": "screenPlat.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     141.75,
+     150.0
+    ],
+    [
+     318.0,
+     329.5
+    ]
+   ]
+  },
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     155.5,
+     159.0
+    ],
+    [
+     187.5,
+     191.75
+    ],
+    [
+     234.75,
+     241.25
+    ]
+   ]
+  },
+  "place:registrarDesk": {
+   "file": "registrarDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     155.5,
+     159.0
+    ],
+    [
+     187.5,
+     191.75
+    ],
+    [
+     234.75,
+     241.25
+    ]
+   ]
+  },
+  "place:regTop": {
+   "file": "regTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     158.75,
+     187.75
+    ],
+    [
+     191.0,
+     208.75
+    ],
+    [
+     241.0,
+     249.0
+    ]
+   ]
+  },
+  "regcover|1000,674,58,82,118": {
+   "file": "regcover_1000_674_58_82_118.webp",
+   "w": 1040,
+   "h": 714,
+   "shows": [
+    [
+     158.75,
+     161.25
+    ]
+   ]
+  },
+  "place:boardData": {
+   "file": "boardData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     208.5,
+     214.0
+    ],
+    [
+     221.75,
+     235.0
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     248.25,
+     255.5
+    ],
+    [
+     303.5,
+     311.25
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     248.25,
+     255.5
+    ],
+    [
+     303.5,
+     311.25
+    ]
+   ]
+  },
+  "place:screenPlan": {
+   "file": "screenPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     255.25,
+     262.75
+    ]
+   ]
+  },
+  "place:screen": {
+   "file": "screen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     275.75,
+     283.25
+    ]
+   ]
+  }
+ }
+}

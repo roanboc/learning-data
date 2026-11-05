@@ -13,3 +13,16 @@ exposures:
     depends_on:
       - ref('mart_planning__near_award')
       - metric('learners_near_graduate_certificate')
+
+  - name: awards_return
+    label: The government's count of awards
+    type: analysis
+    maturity: high
+    description: >
+      Planning's count, once a year, of the awards the university conferred, by award, for the
+      government's statistics. It needs every award once, and no names.
+    owner:
+      name: Planning
+      email: planning@uni.example
+    depends_on:
+      - ref('mart_graduations__graduation_list')

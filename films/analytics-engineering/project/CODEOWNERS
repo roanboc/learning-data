@@ -74,13 +74,8 @@
 /docs/how-to/                                            data.governance@uni.example noor@uni.example
 /skills/review-for-governance/                           data.governance@uni.example noor@uni.example
 
-# The team's memory: data governance, and each entry's owner
+# The team's memory: data governance, which owns it as a whole
 /memory/                                                 data.governance@uni.example
-/memory/entries/read-the-glossary-first.md               data.governance@uni.example
-/memory/entries/say-which-term-a-count-is-for.md         mei.tanaka@uni.example
-/memory/entries/show-the-count-reported.md               clara.jensen@uni.example
-/memory/entries/status-as-on-census-day.md               mei.tanaka@uni.example
-/memory/entries/students-not-enrolments.md               mei.tanaka@uni.example
 
 # The graduation list: its owner, its sources, its ceremonies and the people who use it
 /models/marts/graduations/_graduations__models.yml       mei.tanaka@uni.example jun.park@uni.example

@@ -1,0 +1,246 @@
+# The HR system's data contract: what its data means where it meets the platform. Ingrid Holm, in HR, owns the HR system's data;
+# Noor Rahman, the data architect, agreed this with her; Jun Park's tests check every row against it. Written by hand in the Open
+# Data Contract Standard, at the version the project pins (governance/7-standards/), for Modern data basics' first film, Moving is
+# easy, agreeing is the work. It says the four things the film names: what each field means, who answers for it, what a deletion
+# means, and what's personal. Check it against the standard: see README.md, in this folder.
+apiVersion: v3.1.0
+kind: DataContract
+id: c995fbdc-7a09-5ccb-b8d9-95b156eb1486
+name: hr_system
+version: 1.0.0
+status: active
+domain: hr
+tags: [source, interface]
+description:
+  purpose: >-
+    The HR system's staff and their contracts of employment, as the platform receives them from HR's system of record: each change
+    as it's made, and the whole file again on the first day of each teaching period. Finance reads them, through the platform, to
+    know what teaching costs.
+  usage: >-
+    Read a contract's current version (_is_current) or the version true at a time (_valid_from to _valid_to). A contract HR cancels
+    arrives as a deletion, with the time it was made: the platform closes that contract's last version (its _valid_to set to that
+    time, _is_current false) and keeps every version before it. A row that's missing from a whole file is never read as a deletion:
+    it could as well be a failed export, or a filter someone changed.
+  limitations: >-
+    Bank details and rates of pay never leave the HR system: they aren't in this contract, and the connector doesn't bring them.
+    What payroll pays reaches Finance from payroll, as totals.
+team:
+  name: HR
+  description: Who answers for the HR system's data, and who agreed this contract.
+  members:
+    - username: ingrid.holm@uni.example
+      name: Ingrid Holm
+      role: owner
+      description: Owns the HR system's data, and answers for what it means, by name.
+    - username: noor.rahman@uni.example
+      name: Noor Rahman
+      role: data architect
+      description: Agreed this contract with its owner, for the platform.
+    - username: jun.park@uni.example
+      name: Jun Park
+      role: tests
+      description: Writes the tests that check every row against it (models/staging/hr_system/_hr_system__models.yml).
+support:
+  - channel: HR's data
+    tool: email
+    url: mailto:hr@uni.example
+    description: Questions about what a field means, and changes to this contract, go to HR first.
+slaProperties:
+  - property: latency
+    value: 1
+    unit: d
+    description: Each change, a deletion included, reaches the platform within a day of HR recording it.
+  - property: frequency
+    value: teaching period
+    description: The whole file again on the first day of each teaching period, beside the changes.
+servers:
+  - server: platform
+    type: databricks
+    catalog: university
+    schema: hr_system
+    description: Where the managed connector lands the HR system's tables, in bronze, just as the HR system sent them.
+customProperties:
+  - property: deletion
+    value: A change with its time, never a row missing from a whole file.
+    description: >-
+      HR deletes a contract when it's cancelled. The deletion arrives as a change, with the time it was made, and the platform
+      closes the contract and keeps its history.
+  - property: personalData
+    value: Names, birth dates, countries of birth and emails come across, each marked personal. Bank details and rates of pay never leave HR.
+schema:
+  - name: contracts
+    physicalName: contracts
+    logicalType: object
+    physicalType: table
+    description: >-
+      One row per version of a contract of employment: a continuing or fixed-term appointment, or a casual contract to teach one
+      unit in one teaching period. Linh Nguyen's this semester is T-26188, a casual contract to tutor HI101, recorded on 14 July 2026.
+    properties:
+      - name: contract_id
+        logicalType: string
+        physicalType: string
+        required: true
+        primaryKey: true
+        primaryKeyPosition: 1
+        classification: none
+        description: The contract ID HR issues, like T-26188.
+        quality:
+          - metric: nullValues
+            mustBe: 0
+            description: Every contract has its ID.
+      - name: staff_id
+        logicalType: string
+        physicalType: string
+        required: true
+        classification: personal
+        tags: [personal]
+        description: The staff member the contract is with, by the staff ID HR issues, like E-4417. Personal, since it points to a person.
+      - name: position_type
+        logicalType: string
+        physicalType: string
+        required: true
+        classification: none
+        description: "HR's kind of position: Casual Academic, paid by the hour for one teaching period, or Academic."
+        quality:
+          - metric: invalidValues
+            arguments:
+              validValues: [Casual Academic, Academic]
+            mustBe: 0
+      - name: position_title
+        logicalType: string
+        physicalType: string
+        classification: none
+        description: The position's title, like Tutor or Head of School.
+      - name: pay_type
+        logicalType: string
+        physicalType: string
+        required: true
+        classification: none
+        description: >-
+          The pay type payroll pays a contract under, one of three values: CAS, casual, paid by the hour for one teaching period; FT,
+          fixed-term, an appointment with an end date; CON, continuing, an appointment with no end date. CON means continuing, not
+          contract: every row here is a contract. Read it wrong, and Finance counts continuing staff as casual.
+        quality:
+          - metric: invalidValues
+            arguments:
+              validValues: [CAS, FT, CON]
+            mustBe: 0
+            description: Only the three pay types HR uses. A new value is a change to this contract, agreed first, never a surprise.
+      - name: unit_code
+        logicalType: string
+        physicalType: string
+        classification: none
+        description: The unit a casual contract is to teach, like HI101. Empty for an appointment.
+      - name: teaching_period
+        logicalType: string
+        physicalType: string
+        classification: none
+        description: The teaching period a casual contract is for, like 2026-S2. Empty for an appointment.
+      - name: starts_on
+        logicalType: date
+        physicalType: date
+        required: true
+        classification: none
+        description: The contract's first day.
+      - name: ends_on
+        logicalType: date
+        physicalType: date
+        classification: none
+        description: The contract's last day, inclusive. Empty for a continuing appointment.
+      - name: _valid_from
+        logicalType: timestamp
+        physicalType: timestamp
+        required: true
+        primaryKey: true
+        primaryKeyPosition: 2
+        classification: none
+        description: When HR recorded this version. T-26188's first is 14 July 2026, the day HR recorded it.
+      - name: _valid_to
+        logicalType: timestamp
+        physicalType: timestamp
+        classification: none
+        description: >-
+          When this version stopped being true: the time of the next change, or of the deletion that cancelled the contract. Empty
+          for the version true now.
+      - name: _is_current
+        logicalType: boolean
+        physicalType: boolean
+        required: true
+        classification: none
+        description: True for the version true now; false once a change replaces it, or a deletion closes it.
+      - name: _loaded_at
+        logicalType: timestamp
+        physicalType: timestamp
+        required: true
+        classification: none
+        description: When the platform last loaded the row.
+  - name: staff
+    physicalName: staff
+    logicalType: object
+    physicalType: table
+    description: One row per version of a staff member's record. What's personal is marked, and stays where it may be read.
+    properties:
+      - name: staff_id
+        logicalType: string
+        physicalType: string
+        required: true
+        primaryKey: true
+        primaryKeyPosition: 1
+        classification: personal
+        tags: [personal]
+        description: The staff ID HR issues, like E-4417.
+      - name: given_name
+        logicalType: string
+        physicalType: string
+        classification: personal
+        tags: [personal]
+        description: The staff member's given name, as HR holds it.
+      - name: family_name
+        logicalType: string
+        physicalType: string
+        classification: personal
+        tags: [personal]
+        description: The staff member's family name, as HR holds it.
+      - name: birth_date
+        logicalType: date
+        physicalType: date
+        classification: personal
+        tags: [personal]
+        description: The date of birth HR holds, as it was typed when the person was hired.
+      - name: country_of_birth
+        logicalType: string
+        physicalType: string
+        classification: personal
+        tags: [personal]
+        description: The country of birth HR holds.
+      - name: email
+        logicalType: string
+        physicalType: string
+        classification: personal
+        tags: [personal]
+        description: The staff member's university email.
+      - name: _valid_from
+        logicalType: timestamp
+        physicalType: timestamp
+        required: true
+        primaryKey: true
+        primaryKeyPosition: 2
+        classification: none
+        description: When HR recorded this version.
+      - name: _valid_to
+        logicalType: timestamp
+        physicalType: timestamp
+        classification: none
+        description: When this version stopped being true. Empty for the version true now.
+      - name: _is_current
+        logicalType: boolean
+        physicalType: boolean
+        required: true
+        classification: none
+        description: True for the version true now.
+      - name: _loaded_at
+        logicalType: timestamp
+        physicalType: timestamp
+        required: true
+        classification: none
+        description: When the platform last loaded the row.

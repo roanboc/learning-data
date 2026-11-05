@@ -20,7 +20,22 @@ UG.hook=UG.agent.y+UG.agent.R;   // under the ring: the key's hook and later the
 const UG_QUIET=[[700,430,290,260,0.55],[1580,430,340,320,0.5],[640,96,560,46,0.3],[1080,430,250,230,0.45]];
 AG_PLACES.ugLab=c=>ag_paintLab(c,{quiet:UG_QUIET});
 AG_PLACES.ugLabNight=c=>ag_paintLab(c,{quiet:UG_QUIET,night:true});
+// the lab by night is the lab: from one to the other the camera glides on and the light changes, never a cut a few percent apart;
+// the bare room, in a later moment's pass through it, keeps the light every shot of it draws
+AG_ROOMS.ugLabNight="ugLab";
+AG_BARE.ugLab=c=>ag_roomLight(c,1);AG_BARE.ugLabNight=c=>ag_roomLight(c,1,{night:true});
 const UG_KICK=(x,dark,a)=>ag_kicker(x,"2.8","Why Unity Catalog and Unity Gateway govern them",{dark,a});
+// the kicker, on the frame and drawn once by each chapter after its shots, so a glide never moves it and a pass through the bare room
+// never takes it away: a at its opacity, night (0 to 1) as its night colours, for the lab by night
+function ug_kick(ctx,S,a,night){if(!(a>0))return;night=clamp(night||0,0,1);ctx.save();setScreen(ctx,S);
+  if(night<1)UG_KICK(ctx,false,a*(1-night));if(night>0)UG_KICK(ctx,true,a*night);ctx.restore();}
+// what fn draws, laid on the picture at opacity a as one picture: a ring faded layer by layer shows its band through its sphere
+function ug_asOne(ctx,a,fn){if(a>=1)return fn(ctx);if(!(a>0))return;const [bc,bx]=ag_buf("ugOne",ctx.canvas.width,ctx.canvas.height);
+  bx.setTransform(ctx.getTransform());fn(bx);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(bc,0,0);ctx.restore();}
+// where the agent is while it moves between two shots of the room: where it was until the shot's dissolve is over (t0), then on its
+// way to b over d seconds (1 s), its ring's size with it
+function ug_slide(tt,t0,a,b,d){const u=ag_sine((tt-t0)/(d||1.0)),A=UG.agent,R0=a.R||A.R,r0=a.r||A.r;
+  return{x:lerp(a.x,b.x,u),y:lerp(a.y,b.y,u),R:lerp(R0,b.R||A.R,u),r:lerp(r0,b.r||A.r,u)};}
 // text on its way somewhere, too small to read for a moment, is decoration on purpose: PH_OFF is the legibility check's hook, as From
 // words to data's tools name it
 let PH_OFF=0;
@@ -95,17 +110,21 @@ function ug_record(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=52,h=28+38+44
 const ug_recordH=()=>28+38+44+UG_REC.length*52+34;
 /* ug_log(ctx, x, y, w, rows, o): a log card, "Who read the learner table", o.sub ("October"); rows [{when, who, id (an agent's own
    identity, as the log keeps it: a code), tag (its name, on a violet tag), hl (0 to 1, lit violet), warn (0 to 1, lit amber), a}];
-   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, blurred, all of them Mei's; o.a, o.k */
+   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, all of them Mei's, o.raceOff px along,
+   blurred by o.raceBlur (0 to 1, o.race unless given: their speed); o.a, o.k */
 function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==null?rows.length:o.n,h=28+38+40+n*lh+20;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge,edgeA:0.8});ag_T(ctx,"WHO READ THE LEARNER TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
   if(o.sub)ag_T(ctx,o.sub,x+28,y+92,{w:600,size:28,col:AG.mut});
   const top=y+112;ctx.save();ctx.beginPath();ctx.rect(x+6,top-6,w-12,n*lh+10);ctx.clip();
   const race=clamp(o.race||0,0,1);
-  if(race>0){const off=o.raceOff||0;ctx.save();ctx.globalAlpha*=race;ctx.filter="blur("+(1.2+2.4*race)+"px)";
-    for(let i=-1;i<n+2;i++){const ry=top+((i*lh-off)%(lh*(n+2))+lh*(n+2))%(lh*(n+2))-lh;
-      ag_T(ctx,"Sun 0"+(1+((i+20)%3))+":"+String(10+((i*17+40)%49)).padStart(2,"0"),x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut,deco:1});
-      ag_T(ctx,"mei.tanaka@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1});}
+  // the racing rows: row k, k rows down from the card's first when off is 0, read about six seconds after the one above it, from
+  // 02:02; they fade as they leave the card at its top and come in at its foot, so none is seen where it goes
+  if(race>0){const off=o.raceOff||0,bl=clamp(o.raceBlur==null?race:o.raceBlur,0,1),k0=Math.floor(off/lh)-1;ctx.save();ctx.globalAlpha*=race;if(bl>0.01)ctx.filter="blur("+(3.6*bl)+"px)";
+    for(let k=k0;k<=k0+n+2;k++){const ry=top+k*lh-off,ea=ag_sine((ry-top+lh)/lh)*ag_sine((top+n*lh-ry)/lh);if(ea<=0.01)continue;
+      const m=122+Math.floor(Math.max(0,k)*6/60);
+      ag_T(ctx,"Sun "+String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"),x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut,deco:1,a:ea});
+      ag_T(ctx,"mei.tanaka@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1,a:ea});}
     ctx.restore();}
   rows.forEach((r,i)=>{const ry=top+i*lh,ra=(r.a==null?1:r.a)*(1-race);if(ra<=0)return;
     if(r.hl>0){ctx.fillStyle=rgba(AG.violet,0.09*r.hl);rr(ctx,x+14,ry,w-28,lh-6,10);ctx.fill();}

@@ -807,27 +807,90 @@ function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(l
 function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
 
 /* ---------------------------------------------------------------- the camera
-   ag_focus moves the camera through keys [[t, x, y, zoom], ...], gliding (sine ease) over d seconds from each key's time, at least
-   1.4 s; push closes in a little more; the view never leaves the frame. ag_shot draws one shot {at, place, keys, draw, push, d}: its
-   place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly (push, 2.5% by default) until
-   the next shot. ag_shots cuts a chapter into shots, each dissolving in from the one before over dis seconds; it returns the shot.
-   A shot marked cut (cut:true) comes in on a cut: when two shots show the same people, the same place or the same words, a dissolve
-   lays them over each other, a little apart, and for half a second everything in them shows twice, like a ghost. */
-function ag_focus(ctx,t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
   for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
-  z=Math.max(1,z*(1+(push||0)));x=clamp(x,960/z,W-960/z);y=clamp(y,540/z,H-540/z);ctx.translate(960,540);ctx.scale(z,z);ctx.translate(-x,-y);return{x,y,z};}
-function ag_shot(ctx,S,t,sh,till){setScreen(ctx,S);ctx.save();const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
-  const cam=ag_focus(ctx,t,sh.keys||[[0,960,540,1]],sh.d,push);if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
-function ag_shots(ctx,S,t,end,shots,dis){let i=0;for(let k=1;k<shots.length;k++)if(t>=shots[k].at)i=k;dis=dis==null?0.5:dis;
-  const u=i>0&&!shots[i].cut?clamp((t-shots[i].at)/dis,0,1):1,till=k=>shots[k+1]?shots[k+1].at:end;
-  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at);const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,shots[i],till(i));
-    ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=ease(u);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
-  else ag_shot(ctx,S,t,shots[i],till(i));return i;}
-// chapters that open on a cut, by id. The engine lays the end of each chapter over the next one's first 0.8 s, so when both show the
-// same people, place or words, those show twice; for that time the chapter before draws the next one's opening, and it's a cut. A
-// film calls it after its last scene()
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
 function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
-  const pv=SCENES[i-1],nx=SCENES[i],d=pv.draw;pv.draw=function(ctx,S,t,s){return t>=s.dur?nx.draw(ctx,S,t-s.dur,nx):d.apply(this,arguments);};}}
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
 
 /* ---------------------------------------------------------------- pictures painted once
    AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
@@ -983,6 +1046,7 @@ function ag_paintLab(c,o){o=o||{};const hz=o.hz||AG_ROOM.hz;
 AG_ROOM.lamp=[300,760];
 AG_PLACES.lab=c=>ag_paintLab(c);
 AG_PLACES.labNight=c=>ag_paintLab(c,{night:true});
+AG_ROOMS.labNight="lab";                                    // the lab by night is the lab: its camera glides on, never jumps
 // the same room's light on anything drawn in it: the window's warmth on the right, the soft shade on the left (over a whole frame);
 // o.night: the night's light instead (o.lamp where the lamp stands, as the place has it)
 function ag_roomLight(ctx,a,o){a=a==null?1:a;if(a<=0)return;o=o||{};if(o.night)return ag_night(ctx,a,o.lamp||AG_ROOM.lamp,null,true);
@@ -1696,7 +1760,22 @@ UG.hook=UG.agent.y+UG.agent.R;   // under the ring: the key's hook and later the
 const UG_QUIET=[[700,430,290,260,0.55],[1580,430,340,320,0.5],[640,96,560,46,0.3],[1080,430,250,230,0.45]];
 AG_PLACES.ugLab=c=>ag_paintLab(c,{quiet:UG_QUIET});
 AG_PLACES.ugLabNight=c=>ag_paintLab(c,{quiet:UG_QUIET,night:true});
+// the lab by night is the lab: from one to the other the camera glides on and the light changes, never a cut a few percent apart;
+// the bare room, in a later moment's pass through it, keeps the light every shot of it draws
+AG_ROOMS.ugLabNight="ugLab";
+AG_BARE.ugLab=c=>ag_roomLight(c,1);AG_BARE.ugLabNight=c=>ag_roomLight(c,1,{night:true});
 const UG_KICK=(x,dark,a)=>ag_kicker(x,"2.8","Why Unity Catalog and Unity Gateway govern them",{dark,a});
+// the kicker, on the frame and drawn once by each chapter after its shots, so a glide never moves it and a pass through the bare room
+// never takes it away: a at its opacity, night (0 to 1) as its night colours, for the lab by night
+function ug_kick(ctx,S,a,night){if(!(a>0))return;night=clamp(night||0,0,1);ctx.save();setScreen(ctx,S);
+  if(night<1)UG_KICK(ctx,false,a*(1-night));if(night>0)UG_KICK(ctx,true,a*night);ctx.restore();}
+// what fn draws, laid on the picture at opacity a as one picture: a ring faded layer by layer shows its band through its sphere
+function ug_asOne(ctx,a,fn){if(a>=1)return fn(ctx);if(!(a>0))return;const [bc,bx]=ag_buf("ugOne",ctx.canvas.width,ctx.canvas.height);
+  bx.setTransform(ctx.getTransform());fn(bx);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha*=a;ctx.drawImage(bc,0,0);ctx.restore();}
+// where the agent is while it moves between two shots of the room: where it was until the shot's dissolve is over (t0), then on its
+// way to b over d seconds (1 s), its ring's size with it
+function ug_slide(tt,t0,a,b,d){const u=ag_sine((tt-t0)/(d||1.0)),A=UG.agent,R0=a.R||A.R,r0=a.r||A.r;
+  return{x:lerp(a.x,b.x,u),y:lerp(a.y,b.y,u),R:lerp(R0,b.R||A.R,u),r:lerp(r0,b.r||A.r,u)};}
 // text on its way somewhere, too small to read for a moment, is decoration on purpose: PH_OFF is the legibility check's hook, as From
 // words to data's tools name it
 let PH_OFF=0;
@@ -1771,17 +1850,21 @@ function ug_record(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=52,h=28+38+44
 const ug_recordH=()=>28+38+44+UG_REC.length*52+34;
 /* ug_log(ctx, x, y, w, rows, o): a log card, "Who read the learner table", o.sub ("October"); rows [{when, who, id (an agent's own
    identity, as the log keeps it: a code), tag (its name, on a violet tag), hl (0 to 1, lit violet), warn (0 to 1, lit amber), a}];
-   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, blurred, all of them Mei's; o.a, o.k */
+   o.n how many rows tall (all of them unless given); o.race 0 to 1: the rows race upwards, all of them Mei's, o.raceOff px along,
+   blurred by o.raceBlur (0 to 1, o.race unless given: their speed); o.a, o.k */
 function ug_log(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lh=50,n=o.n==null?rows.length:o.n,h=28+38+40+n*lh+20;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.edge,edgeA:0.8});ag_T(ctx,"WHO READ THE LEARNER TABLE",x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
   if(o.sub)ag_T(ctx,o.sub,x+28,y+92,{w:600,size:28,col:AG.mut});
   const top=y+112;ctx.save();ctx.beginPath();ctx.rect(x+6,top-6,w-12,n*lh+10);ctx.clip();
   const race=clamp(o.race||0,0,1);
-  if(race>0){const off=o.raceOff||0;ctx.save();ctx.globalAlpha*=race;ctx.filter="blur("+(1.2+2.4*race)+"px)";
-    for(let i=-1;i<n+2;i++){const ry=top+((i*lh-off)%(lh*(n+2))+lh*(n+2))%(lh*(n+2))-lh;
-      ag_T(ctx,"Sun 0"+(1+((i+20)%3))+":"+String(10+((i*17+40)%49)).padStart(2,"0"),x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut,deco:1});
-      ag_T(ctx,"mei.tanaka@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1});}
+  // the racing rows: row k, k rows down from the card's first when off is 0, read about six seconds after the one above it, from
+  // 02:02; they fade as they leave the card at its top and come in at its foot, so none is seen where it goes
+  if(race>0){const off=o.raceOff||0,bl=clamp(o.raceBlur==null?race:o.raceBlur,0,1),k0=Math.floor(off/lh)-1;ctx.save();ctx.globalAlpha*=race;if(bl>0.01)ctx.filter="blur("+(3.6*bl)+"px)";
+    for(let k=k0;k<=k0+n+2;k++){const ry=top+k*lh-off,ea=ag_sine((ry-top+lh)/lh)*ag_sine((top+n*lh-ry)/lh);if(ea<=0.01)continue;
+      const m=122+Math.floor(Math.max(0,k)*6/60);
+      ag_T(ctx,"Sun "+String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0"),x+28,ry+34,{w:500,size:28,f:"mono",col:AG.mut,deco:1,a:ea});
+      ag_T(ctx,"mei.tanaka@uni.example",x+210,ry+34,{w:500,size:28,f:"mono",deco:1,a:ea});}
     ctx.restore();}
   rows.forEach((r,i)=>{const ry=top+i*lh,ra=(r.a==null?1:r.a)*(1-race);if(ra<=0)return;
     if(r.hl>0){ctx.fillStyle=rgba(AG.violet,0.09*r.hl);rr(ctx,x+14,ry,w-28,lh-6,10);ctx.fill();}
@@ -1977,16 +2060,17 @@ function ug_ownerOn(x,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;con
 
 /* ===== Why Unity Catalog and Unity Gateway govern them: the scenes, chapter by chapter =====
    Each chapter is a run of shots (ag_shots): a place painted once, a slow camera, and what's drawn live. Times come from the cues
-   (c.<line>, when each line starts) and from the words of the lines (wAt), so the pictures stay with the voice. Two framings of one
-   moment are joined by a cut (cut:true), never a dissolve, so nothing shows twice. */
+   (c.<line>, when each line starts) and from the words of the lines (wAt), so the pictures stay with the voice. Every shot is in the
+   lab, by day or by night, which is one room (AG_ROOMS): from shot to shot and chapter to chapter the camera glides on from where it
+   is, what stays stays put, and only what changes fades. What both shots show is drawn the same; the agent that moves slides there
+   once the dissolve is over (ug_slide); and a later moment, with other people or another page of cards, is marked later:true, so
+   what was there leaves before what comes later comes in, through the bare room. */
 
 /* ---------------------------------------------------------------- pieces the scenes share */
 // the title card, its title on two lines (the film's title is too long for one at this size); otherwise ag_title's
 function ug_title(ctx,S,t,t0,lines,sub,line){const oA=ag_in(t,t0,0.8),tA=ag_in(t,t0+0.5,0.8);if(oA<=0)return;ag_veil(ctx,S,oA*0.9);setScreen(ctx,S);
   withA(ctx,tA,()=>{ag_mark(ctx,960,290,58,(t-t0-0.4)/1.6,1);lines.forEach((l,i)=>ag_T(ctx,l,960,476+i*94,{w:800,size:80,align:"center"}));
     if(sub)ag_T(ctx,sub,960,660,{w:600,size:36,align:"center",col:AG.mut});withA(ctx,ag_in(t,t0+1.2,0.8),()=>ag_T(ctx,line,960,750,{w:700,size:28,ls:3,align:"center",col:AG.kick}));});}
-// the kicker over a night pass, in the frame's own space
-function ug_kickNight(x,S){x.save();setScreen(x,S);UG_KICK(x,true);x.restore();}
 // Mei's key in her near hand (drawn behind the hand: holdBack), and where it is in the frame while she holds it up
 const UG_KEYROT=-0.9;
 function ug_keyHeld(c,h){if(!h||!h.near)return;ug_key(c,h.near[0]+58,h.near[1]-30,1,{rot:UG_KEYROT});}
@@ -2026,39 +2110,46 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({fac:wAt(sc,"
       ug_who(x,"mei",tt,{p:{gaze:[4,tt>P.fac?-2:0]}});ag_roomLight(x,1);ug_corner(x,"Today · the university",ag_in(tt,0.6,0.6));
       ug_name(x,250,196,"Mei Tanaka","Registrar's office",ag_in(tt,0.9,0.6));
       [0,1,2].forEach(i=>ug_ask(x,1296,170+i*162,560,i,{a:ag_in(tt,P.q[i],0.4),k:ag_spr(tt,P.q[i])}));}},
-    // at night, on its own: the questions go into the ring one by one, and the answers settle in a stack
-    {cut:true,at:P.night,place:"ugLabNight",keys:[[P.night,1080,520,1.03]],push:0.02,draw:(x,tt)=>{const t0=P.night+0.3;
+    // at night, on its own: the room darkens round the questions, Mei gone home; once it has, they go into the ring one by one, and
+    // the answers settle in a stack
+    {at:P.night,place:"ugLabNight",keys:[[P.night,1080,520,1.03]],push:0.02,draw:(x,tt)=>{const t0=P.night+0.6;
       ug_agent(x,tt,{think:0.8});ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.8});
-      [0,1,2].forEach(i=>{const u=ag_sine((tt-t0-i*0.7)/1.0);if(u>=1)return;const sx=lerp(1296,UG.agent.x-130,u),sy=lerp(170+i*162,UG.agent.y-60,u);
+      [0,1,2].forEach(i=>{const u=ag_sine((tt-t0-i*0.45)/0.8);if(u>=1)return;const sx=lerp(1296,UG.agent.x-130,u),sy=lerp(170+i*162,UG.agent.y-60,u);
         ug_deco(u>0.02,()=>{x.save();x.globalAlpha*=1-ag_in(u,0.7,0.3);ag_about(x,sx,sy,lerp(1,0.5,u));ug_ask(x,sx,sy,560,i,{});x.restore();});});
-      ug_answers(x,1340,250,480,{n:clamp((tt-t0-1.4)/0.7,0,3)});}},
-    // her personal key: she holds it up, and it goes to the hook under the ring, so the agent signs in as her
-    {cut:true,at:c.key,place:"ugLab",keys:[[c.key,760,560,1.06]],push:0.02,draw:(x,tt)=>{const rel=P.signin+0.1,down=ag_sine((tt-rel-0.4)/0.9);
+      ug_answers(x,1340,250,480,{n:clamp((tt-t0-1.0)/0.5,0,3)});}},
+    // her personal key, in the afternoon she set it up: she holds it up, and it goes to the hook under the ring, so the agent signs in
+    // as her
+    {at:c.key,place:"ugLab",keys:[[c.key,760,560,1.06]],push:0.02,draw:(x,tt)=>{const rel=P.signin+0.1,down=ag_sine((tt-rel-0.4)/0.9);
       ug_agent(x,tt,{});ug_hook(x);
       ug_who(x,"mei",tt,{p:{pose:"hang",pose2:"hold",mix:tt<rel?1:1-down,holdBack:tt<rel?ug_keyHeld:null,gaze:[4,tt<rel?1:-2]}});
       ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
       if(tt<rel){const k=ug_keyInHand(),h=ug_keyHole(k[0],k[1],UG.who.s,UG_KEYROT);ug_tag(x,h[0],h[1]+4,"Mei Tanaka",{dx:110,dy:70});}
       else ug_keyFlight(x,clamp((tt-rel)/1.5,0,1),tt,rel+1.5);
       ug_card(x,476,250,420,{kick:"Her personal key",title:"signs in as Mei"},{a:ag_in(tt,P.signin,0.5),k:ag_spr(tt,P.signin)});}},
-    // Sam, who runs the platform, checks who read the learner table: Mon, Tue, Wed; then one Sunday night, Mei, over and over
-    {cut:true,at:c.log,place:"ugLab",keys:[[c.log,960,540,1]],push:0.02,draw:(x,tt)=>{const race=ag_in(tt,c.sunday+0.2,0.5);
+    // Sam, who runs the platform, checks who read the learner table: Mon, Tue, Wed; then one Sunday night, Mei, over and over (a
+    // later moment, later:true: Mei, her key and the agent leave, then Sam and his log come in)
+    // (the Sunday rows race, then slow to a stop before the night comes in, four whole rows in the card: the slowing lasts 1 to 1.2 s,
+    // so that it ends where the rows sit in their places)
+    {later:true,at:c.log,place:"ugLab",keys:[[c.log,960,540,1]],push:0.02,draw:(x,tt)=>{const race=ag_in(tt,c.sunday+0.2,0.5);
+      const r1=c.asleep-1.9,F0=820*(r1-c.sunday),D=Math.ceil((F0+820/3)/50)*50-F0,ru=clamp((tt-r1)/(3*D/820),0,1),raceOff=820*(Math.min(tt,r1)-c.sunday)+D*(1-Math.pow(1-ru,3));
       ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",ag_in(tt,c.log+0.4,0.5));
       rec(x,{a:ag_in(tt,c.read-0.2,0.5),k:ag_spr(tt,c.read-0.2),hl:[0,ag_io(tt,P.names,P.names+1.8,0.4),ag_io(tt,P.names+0.2,P.names+1.8,0.4),0]});
       ug_log(x,476,230,700,[{when:"Mon 09:12",who:"mei.tanaka@uni.example"},{when:"Tue 10:40",who:"jun.park@uni.example"},{when:"Wed 14:05",who:"mei.tanaka@uni.example"}],
-        {sub:"October",n:4,a:ag_in(tt,P.chk,0.5),k:ag_spr(tt,P.chk),race,raceOff:(tt-c.sunday)*820});
+        {sub:"October",n:4,a:ag_in(tt,P.chk,0.5),k:ag_spr(tt,P.chk),race,raceOff,raceBlur:race*Math.pow(1-ru,2)});
       ag_pill(x,826,700,"Sunday night · 2,300 reads",{icon:"warn",col:AG.amber,a:ag_in(tt,P.n2300,0.4)});}},
-    // she was asleep: at night the agent reads the learner table as her, every row, though all it needed was counts
-    {cut:true,at:c.asleep,place:"ugLabNight",keys:[[c.asleep,1080,520,1.02]],push:0.02,draw:(x,tt)=>{const rows=rec(x,{a:0}),t0=c.asleep+0.8,tr=c.trick;
-      const turn=ag_sine((tt-P.hand+0.6)/1.0),glow=ag_in(tt,P.every,0.6)*(1-ag_in(tt,tr,0.5)*0.6);
-      ug_agent(x,tt,{think:0.9});ug_hook(x);ug_keyOnHook(x,{});
+    // she was asleep: the room darkens, Sam and his log go, the learner table stays where it is, and the agent comes in on her key
+    // and reads it as her, every row, though all it needed was counts
+    {at:c.asleep,place:"ugLabNight",keys:[[c.asleep,1080,520,1.02]],push:0.02,draw:(x,tt)=>{const rows=rec(x,{a:0}),t0=c.asleep+0.8,tr=c.trick;
+      const turn=ag_sine((tt-P.hand+0.6)/1.0),glow=ag_in(tt,P.every,0.6)*(1-ag_in(tt,tr,0.5)*0.6),ga=ag_in(tt,c.asleep+0.4,0.5);
+      ug_asOne(x,ga,bx=>{ug_agent(bx,tt,{think:0.9});ug_hook(bx);ug_keyOnHook(bx,{});});
       rec(x,{glow,hl:rows.map((r,i)=>ag_io(tt,t0+i*0.5,t0+i*0.5+1.4,0.3))});
       for(let i=0;i<4;i++){const ts=t0+i*0.5,u=ag_sine((tt-ts)/0.6)*(1-ag_sine((tt-ts-1.6)/0.6));if(u>0.01)ag_reach(x,ug_armTo(rows[i][0],rows[i][1]),u,{data:clamp((tt-ts-0.5)/0.9,0,1)});}
       if(tt>tr){const u=ag_sine((tt-tr-0.2)/0.8)*0.82;ag_reach(x,ug_armTo(lerp(rows[1][0],1500,turn),lerp(rows[1][1],640,turn)),u,{data:((tt-tr)*0.8)%1});}
-      ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.9});
+      ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.9,a:ga});
       ug_card(x,476,250,380,{kick:"its job",title:"counts"},{a:ag_in(tt,P.counts,0.5),k:ag_spr(tt,P.counts),edge:AG.blue});
       ug_card(x,1220,700,640,{title:"…and list their names and emails"},{a:ag_in(tt,tr+0.1,0.5),k:ag_spr(tt,tr+0.1),edge:AG.amber});}},
     // its model calls: a violet thread out of the room, on another key of hers, from no one's budget, carrying who knows what
-    {cut:true,at:c.calls,place:"ugLabNight",keys:[[c.calls,1180,500,1.04]],push:0.02,draw:(x,tt)=>{const p=[1150,404,1360,420,1640,300,1990,310],u=ag_sine((tt-c.calls-0.2)/1.4);
+    {at:c.calls,place:"ugLabNight",keys:[[c.calls,1180,500,1.04]],push:0.02,draw:(x,tt)=>{const p=[1150,404,1360,420,1640,300,1990,310],u=ag_sine((tt-c.calls-0.2)/1.4);
       ug_agent(x,tt,{think:0.9});ug_hook(x);ug_keyOnHook(x,{});ug_thread(x,p,u,{beads:tt,n:5});
       const k=ag_bz(p,0.62),ka=ag_in(tt,P.another,0.5),dy=(1-ag_spr(tt,P.another,0.6))*-60;
       if(ka>0){x.save();x.globalAlpha*=ka;x.strokeStyle="rgba(87,82,76,0.8)";x.lineWidth=2;x.beginPath();x.moveTo(k[0],k[1]);x.lineTo(k[0],k[1]+30+dy);x.stroke();
@@ -2066,21 +2157,23 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({fac:wAt(sc,"
       ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.9});
       ag_pill(x,1560,720,"budget · none",{col:AG.amber,icon:"warn",a:ag_in(tt,P.budget,0.4)});
       const qa=ag_in(tt,P.carried,0.5);if(qa>0){const q=ag_bz(p,0.84);ag_box(x,q[0]-34,q[1]-104,68,68,34,{a:qa});ag_T(x,"?",q[0],q[1]-56,{w:800,size:40,align:"center",col:AG.mut,a:qa});}}},
-    // by day: the log says Mei, every line; if names leaked, it would point at her
-    {cut:true,at:c.blame,place:"ugLab",keys:[[c.blame,960,540,1]],push:0.02,draw:(x,tt)=>{const pt=ag_in(tt,P.point,0.6);
+    // by day: the log says Mei, every line; if names leaked, it would point at her (later:true: the night leaves, then Mei comes in)
+    {later:true,at:c.blame,place:"ugLab",keys:[[c.blame,960,540,1]],push:0.02,draw:(x,tt)=>{const pt=ag_in(tt,P.point,0.6);
       ug_who(x,"mei",tt,{p:{gaze:[4,0]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
       const L=ug_log(x,476,330,700,[{when:"Sun 02:14",who:"mei.tanaka@uni.example",warn:pt},{when:"Sun 02:14",who:"mei.tanaka@uni.example",warn:pt},{when:"Sun 02:15",who:"mei.tanaka@uni.example",warn:pt}],{sub:"Sunday night",n:3});
       if(pt>0){x.save();x.strokeStyle=rgba(AG.amber,0.9);x.lineWidth=4;x.lineCap="round";const p=[L.x+18,L.y+40,L.x-60,L.y-30,400,330,374,250],u=ag_sine((tt-P.point)/0.9);
         ag_bzPath(x,p,0,u);x.stroke();if(u>0.97)ag_arrowHead(x,374,250,Math.atan2(250-330,374-400),11,rgba(AG.amber,0.95));x.restore();}}},
-    // she did nothing wrong: her key, on the agent's hook, hands over everything she can do; then a veil
-    {cut:true,at:c.nothing,place:"ugLab",keys:[[c.nothing,960,540,1]],push:0.02,draw:(x,tt)=>{const kp=ug_hookAt(),cx=kp[0],cy=kp[1]+11;
-      ug_agent(x,tt,{});ug_hook(x);ug_keyOnHook(x,{tag:false});
-      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
+    // she did nothing wrong: her key, on the agent's hook, hands over everything she can do; then a veil (Mei stays where she is, and
+    // looks up to the agent, which comes in once the log has gone)
+    {at:c.nothing,place:"ugLab",keys:[[c.nothing,960,540,1]],push:0.02,draw:(x,tt)=>{const kp=ug_hookAt(),cx=kp[0],cy=kp[1]+11;
+      ug_asOne(x,ag_in(tt,c.nothing+0.4,0.5),bx=>{ug_agent(bx,tt,{});ug_hook(bx);ug_keyOnHook(bx,{tag:false});});
+      ug_who(x,"mei",tt,{p:{gaze:[4,-ag_in(tt,c.nothing+0.6,0.5)]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
       [["learner table · read",1330,650],["awards · read",1380,730],["glossary · edit",1330,810]].forEach(([s,px,py],i)=>{const t0=P.pk+0.2+i*0.45,a=ag_in(tt,t0,0.4);if(a<=0)return;
         const b=ag_pill(x,px+(ag_tw(x,s,{w:700,size:28})+56)/2,py,s,{size:28,a,col:AG.ink});ug_line(x,cx,cy+20,b.x,py,ag_in(tt,t0,0.5),{head:false,a});});
       ag_veil(x,S,0.55*ag_in(tt,c.change+0.1,0.8));}},
     // so Sam gives the agent a name of its own: the key comes off the hook, and a badge drops in its place; then the catalog's rules
-    {cut:true,at:c.own,place:"ugLab",keys:[[c.own,1060,540,1]],push:0.02,draw:(x,tt)=>{const g=keyGone(tt),mk=ag_in(tt,P.stars,0.8);
+    // (later:true: Mei and the veil leave, then Sam comes in, with the agent and her key still on its hook)
+    {later:true,at:c.own,place:"ugLab",keys:[[c.own,1060,540,1]],push:0.02,draw:(x,tt)=>{const g=keyGone(tt),mk=ag_in(tt,P.stars,0.8);
       ug_agent(x,tt,{});if(g<1){x.save();x.globalAlpha*=1-g;ug_hook(x);x.restore();}   // the hook was the key's: it goes with it
       if(g<1){const h=ug_hookAt();x.save();x.globalAlpha*=1-g;x.translate(-g*160,-g*220);ug_keyOnHook(x,{sw:-0.3*g});x.restore();}
       ug_badgeOn(x,tt,"registrar agent",{k:(tt-P.name-0.5)/0.9});
@@ -2088,24 +2181,27 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({fac:wAt(sc,"
       const ra=ag_in(tt,P.uc,0.5);rec(x,{a:ra,k:ag_spr(tt,P.uc),mask:mk,lock:mk});ag_label(x,1300,178,"Unity Catalog",{a:ra});
       ag_pill(x,1576,620,"registrar agent · reads core",{col:AG.blue,icon:"lock",size:28,a:ag_in(tt,P.grants,0.5)});}},
     // Unity Gateway, its gate to models: the thread comes back, through the gateway's frame, to the one model it may call, counted
-    {cut:true,at:c.gateway,place:"ugLab",keys:[[c.gateway,1060,520,1.03]],push:0.02,draw:(x,tt)=>{const p=[1150,404,1240,440,1300,370,1410,320],u=ag_sine((tt-c.gateway-0.6)/1.4);
+    // (Sam and the catalog's record leave; the agent and its badge stay where they are)
+    {at:c.gateway,place:"ugLab",keys:[[c.gateway,1060,520,1.03]],push:0.02,draw:(x,tt)=>{const p=[1150,404,1240,440,1300,370,1410,320],u=ag_sine((tt-c.gateway-0.6)/1.4);
       ug_agent(x,tt,{think:0.5});ug_badgeOn(x,tt,"registrar agent",{});ug_thread(x,p,u,{beads:tt,n:3});
       ug_gateway(x,1325,160,110,420,{p:(tt-c.gateway-0.1)/1.2});
       ag_roomLight(x,1);
       ug_service(x,1410,246,450,{who:"registrar agent",a:ag_in(tt,P.allowed,0.5),k:ag_spr(tt,P.allowed),lit:ag_in(tt,P.allowed+0.4,0.5)});
       ag_pill(x,1635,470,"counted · registrar agent",{col:AG.blue,size:28,a:ag_in(tt,P.spends,0.5)});}},
     // it worked: the same answers every morning, no names seen, a known cost; and the log says whose reads they were
-    {cut:true,at:c.worked,place:"ugLab",keys:[[c.worked,960,540,1]],push:0.02,draw:(x,tt)=>{
+    {at:c.worked,place:"ugLab",keys:[[c.worked,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,{});ug_badgeOn(x,tt,"registrar agent",{});ag_roomLight(x,1);ug_corner(x,"Every morning",ag_in(tt,c.worked+0.2,0.5));
-      ug_answers(x,1340,190,480,{n:3,tick:ag_in(tt,c.worked+0.6,0.5)});
+      ug_answers(x,1340,190,480,{n:clamp((tt-c.worked-0.5)/0.4,0,3),tick:ag_in(tt,c.worked+1.8,0.5)});   // once the gateway has gone
       ag_pill(x,1580,560,"names seen · 0",{icon:"tick",col:AG.green,a:ag_in(tt,P.noName,0.4)});
       ug_card(x,476,250,460,{kick:"Registrar's budget",title:"about $300 a month"},{a:ag_in(tt,P.dollars,0.5),k:ag_spr(tt,P.dollars)});}},
-    {cut:true,at:c.whose,place:"ugLab",keys:[[c.whose,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ug_agent(x,tt,{x:1560,y:430,R:130,r:68});ug_badgeOn(x,tt,"registrar agent",{x:1560,y:430,R:130});ag_roomLight(x,1);
-      ug_log(x,150,250,880,[{when:"Mon 09:12",who:"mei.tanaka@uni.example"},{when:"Sun 02:14",id:"7c41e09a-…",tag:"registrar agent",hl:ag_in(tt,c.whose+0.4,0.5)},
-        {when:"Sun 02:15",id:"7c41e09a-…",tag:"registrar agent",hl:ag_in(tt,c.whose+0.6,0.5)}],{sub:"November",n:3});}},
-    // the same for data: Jun's census agent, which checks the count the university sends the government
-    {cut:true,at:c.jun,place:"ugLab",keys:[[c.jun,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1-ag_in(tt,c.breath,0.8),()=>{
+    // (the agent stays where it is until the answers have gone, then moves aside for the log, which comes in as it goes)
+    {at:c.whose,place:"ugLab",keys:[[c.whose,960,540,1]],push:0.02,draw:(x,tt)=>{const A=ug_slide(tt,c.whose+0.6,UG.agent,{x:1560,y:430,R:130,r:68});
+      ug_agent(x,tt,A);ug_badgeOn(x,tt,"registrar agent",A);ag_roomLight(x,1);
+      ug_log(x,150,250,880,[{when:"Mon 09:12",who:"mei.tanaka@uni.example"},{when:"Sun 02:14",id:"7c41e09a-…",tag:"registrar agent",hl:ag_in(tt,c.whose+1.4,0.5)},
+        {when:"Sun 02:15",id:"7c41e09a-…",tag:"registrar agent",hl:ag_in(tt,c.whose+1.6,0.5)}],{sub:"November",n:3,a:ag_in(tt,c.whose+0.8,0.6)});}},
+    // the same for data: Jun's census agent, which checks the count the university sends the government (later:true: the registrar
+    // agent and its log leave, then Jun and his agent come in)
+    {later:true,at:c.jun,place:"ugLab",keys:[[c.jun,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1-ag_in(tt,c.breath,0.8),()=>{
       ug_agent(x,tt,{});ug_badgeOn(x,tt,"census agent",{});
       ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Jun Park","Analytics engineer",ag_in(tt,c.jun+0.2,0.5));
       ug_count(x,1340,240,{w:480,k:ag_spr(tt,c.jun+0.4),a:ag_in(tt,c.jun+0.4,0.4),gov:ag_in(tt,P.gov,0.5)});
@@ -2122,9 +2218,10 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({req:wAt(sc,"
   const page=(x,tt,o)=>ug_page(x,120,200,620,"What you must not do",PAGE,o);
   const WORK=["Nursing · count","query · status","First year · count","Part-time · count"];
   ag_shots(ctx,S,t,sc.dur,[
-    // the project's page for agents says it; but a rule it's told is a request: misread, lost in a long task, talked out of
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ug_agent(x,tt,{think:ag_io(tt,P.lose,P.hid+2,0.5)*0.8});ug_badgeOn(x,tt,"registrar agent",{});ag_roomLight(x,1);UG_KICK(x);
+    // the project's page for agents says it; but a rule it's told is a request: misread, lost in a long task, talked out of (later:true:
+    // the title leaves first, then the agent and the page come in)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
+      ug_agent(x,tt,{think:ag_io(tt,P.lose,P.hid+2,0.5)*0.8});ug_badgeOn(x,tt,"registrar agent",{});ag_roomLight(x,1);
       const lost=ag_io(tt,P.lose+1.2,P.hid+1.8,0.6),wa=1-ag_in(tt,P.hid+1.6,0.6);
       const pg=page(x,tt,{a:ag_in(tt,0.4,0.5)*(1-0.7*lost),k:ag_spr(tt,0.4),blur:Math.sin(Math.PI*clamp((tt-P.mis)/1.2,0,1))});
       ag_pill(x,120+(ag_tw(x,"told · a request",{w:700,size:30})+56)/2,pg.y+pg.h+48,"told · a request",{col:AG.violet,a:ag_in(tt,P.req,0.4)});
@@ -2133,23 +2230,25 @@ scene("holds",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({req:wAt(sc,"
         ag_pill(x,1360+w/2-(1-ag_eo(clamp((tt-t0)/0.5,0,1)))*40,270+i*84,s,{size:28,a});});
       const sa=ag_in(tt,P.hid,0.4)*(1-ag_in(tt,P.hid+1.8,0.4));if(sa>0)ug_slip(x,520,330+20*(1-ag_eo(clamp((tt-P.hid)/0.6,0,1))),{a:sa,rot:-0.06});}},
     // a rule the platform enforces holds: the agent's arm comes back with stars; so the team does both
-    {cut:true,at:c.enforce,place:"ugLab",keys:[[c.enforce,960,540,1]],push:0.02,draw:(x,tt)=>{const rows=ug_record(x,1296,200,560,{a:0}),t0=c.enforce+0.6;
+    {at:c.enforce,place:"ugLab",keys:[[c.enforce,960,540,1]],push:0.02,draw:(x,tt)=>{const rows=ug_record(x,1296,200,560,{a:0}),t0=c.enforce+0.6;
       ug_agent(x,tt,{think:0.4});ug_badgeOn(x,tt,"registrar agent",{});
       ug_record(x,1296,200,560,{mask:1,lock:1,hl:[0,ag_io(tt,t0+0.4,t0+2,0.3),ag_io(tt,t0+0.9,t0+2.4,0.3),0]});
       for(let i=1;i<3;i++){const ts=t0+(i-1)*0.5,u=ag_sine((tt-ts)/0.6)*(1-ag_sine((tt-ts-1.8)/0.6));if(u>0.01)ag_reach(x,ug_armTo(rows[i][0],rows[i][1]),u,{data:clamp((tt-ts-0.5)/0.9,0,1)});}
-      ag_roomLight(x,1);UG_KICK(x);const pg=page(x,tt,{});
+      ag_roomLight(x,1);const pg=page(x,tt,{});
       ag_pill(x,1576,ug_recordH()+200+52,"***",{size:30,col:AG.ink,a:ag_io(tt,P.stars,c.both+0.2,0.4)});
       ag_pill(x,120+(ag_tw(x,"told",{w:700,size:30})+56)/2,pg.y+pg.h+48,"told",{col:AG.violet,a:ag_in(tt,P.tells,0.4)});
       ag_pill(x,1296+(ag_tw(x,"enforced",{w:700,size:30})+56)/2,ug_recordH()+200+52,"enforced",{col:AG.blue,icon:"lock",a:ag_in(tt,P.enf,0.4)});}},
-    // two places keep them: Unity Catalog, what agents touch; and inside it, Unity Gateway, the models and tool servers they call
-    {cut:true,at:c.two,place:"ugLab",keys:[[c.two,1000,520,1]],push:0.02,draw:(x,tt)=>{
-      ug_agent(x,tt,{x:340,y:430,R:130,r:68});ug_badgeOn(x,tt,"registrar agent",{x:340,y:430,R:130});
-      ug_catalog(x,640,200,1220,480,{p:(tt-c.two-0.2)/1.4});
-      ug_gateway(x,1560,280,520,370,{p:(tt-c.ug-0.2)/1.2,label:false});ag_roomLight(x,1);UG_KICK(x);
+    // two places keep them: Unity Catalog, what agents touch; and inside it, Unity Gateway, the models and tool servers they call (the
+    // agent stays where it is until the page and the record have gone, then moves aside, and the catalog's frame draws itself)
+    {at:c.two,place:"ugLab",keys:[[c.two,1000,520,1]],push:0.02,draw:(x,tt)=>{const A=ug_slide(tt,c.two+0.6,UG.agent,{x:340,y:430,R:130,r:68},1.2);
+      ug_agent(x,tt,A);ug_badgeOn(x,tt,"registrar agent",A);
+      ug_catalog(x,640,200,1220,480,{p:(tt-c.two-1.4)/1.4});
+      ug_gateway(x,1560,280,520,370,{p:(tt-c.ug-0.2)/1.2,label:false});ag_roomLight(x,1);
       ag_label(x,1560,266,"Unity Gateway",{align:"center",a:ag_in(tt,c.ug+0.6,0.5)});
       [["tables",P.tables],["functions",P.fns],["the log · preview",P.log]].forEach(([s,t0],i)=>ag_tool(x,690,236+i*136,520,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));
       [["models",P.models],["tool servers",P.servers]].forEach(([s,t0],i)=>ag_tool(x,1360,330+i*136,400,108,s,{sub:null,a:ag_in(tt,t0,0.4),touch:ag_io(tt,t0,t0+1.4,0.4)}));}}
-  ],0.6);});
+  ],0.6);
+  ug_kick(ctx,S,ag_in(t,0.6,0.6),0);});   // once the title has gone
 
 /* ---------------------------------------------------------------- 3 · A name for the agent */
 scene("name",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({helps:wAt(sc,"beside","helps one person"),there:wAt(sc,"beside","while they're there"),sign:wAt(sc,"beside","sign-in"),
@@ -2160,37 +2259,42 @@ scene("name",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({helps:wAt(sc,
     ug_agent(x,tt,{x:1500,y:420,R:130,r:68,think:o.think||0});ug_badgeOn(x,tt,"census agent",{x:1500,y:420,R:130});};
   ag_shots(ctx,S,t,sc.dur,[
     // an agent that helps one person while they're there may use their sign-in
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const sa=ag_in(tt,P.helps,0.6);
+    // (a later moment, later:true: the catalog's frames leave, then Mei comes in)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const sa=ag_in(tt,P.helps,0.6);
       ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});
       if(sa>0)withA(x,sa,()=>{ag_floorShadow(x,700+AG.sdx*3,700,100,18,0.18);ag_loop(x,700,420,{R:96,r:46,t:tt,think:0.4,p:ag_sine((tt-P.helps)/1.4),stepA:[0,0,0],label:null});});
-      ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
+      ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);
       ag_pill(x,700,580,"signed in as Mei",{col:AG.blue,a:ag_in(tt,P.sign,0.4)});
       ug_card(x,1296,250,500,{kick:"with her there",title:"it helps her, as her"},{a:ag_in(tt,P.there,0.5),k:ag_spr(tt,P.there)});}},
-    // one that works on its own, as Mei's does at night, needs a name of its own
-    {cut:true,at:c.alone,place:"ugLabNight",keys:[[c.alone,1080,520,1.03]],push:0.02,draw:(x,tt)=>{
-      ug_agent(x,tt,{think:0.7});ug_badgeOn(x,tt,"registrar agent",{});ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.7});ug_kickNight(x,S);
+    // one that works on its own, as Mei's does at night, needs a name of its own (later:true: Mei and the agent that helps her leave,
+    // and the room goes dark as Mei's own agent comes in)
+    {later:true,at:c.alone,place:"ugLabNight",keys:[[c.alone,1080,520,1.03]],push:0.02,draw:(x,tt)=>{
+      ug_agent(x,tt,{think:0.7});ug_badgeOn(x,tt,"registrar agent",{});ag_roomLight(x,1,{night:true});ug_glow(x,tt,{think:0.7});
       ug_card(x,476,250,420,{kick:"on its own",title:"a name of its own"},{a:ag_in(tt,P.own,0.5),k:ag_spr(tt,P.own)});}},
-    // on Databricks, a service principal: Sam makes one for the registrar agent, with only the grants its job needs
-    {cut:true,at:c.sp,place:"ugLab",keys:[[c.sp,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Sam Okafor","Data platform",1);
+    // on Databricks, a service principal: Sam makes one for the registrar agent, with only the grants its job needs (day again: the
+    // agent and its card go, and Sam comes in)
+    {at:c.sp,place:"ugLab",keys:[[c.sp,960,540,1]],push:0.02,draw:(x,tt)=>{
+      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",1);
       ug_card(x,476,250,560,{kick:"Service principal",title:"registrar agent",sub:"an identity for software, not a person"},{a:ag_in(tt,P.sp,0.5),k:ag_spr(tt,P.sp),edge:AG.blue});
       ug_grants(x,1176,250,560,"registrar agent",[{text:"read · the core tables",lock:1,a:ag_in(tt,P.core,0.4)},{text:"write · nowhere",no:1,a:ag_in(tt,P.nowhere,0.4)}],
         {a:ag_in(tt,P.grants,0.5),k:ag_spr(tt,P.grants)});}},
-    // Jun's census agent already has its own, as the project's page for agents says
-    {cut:true,at:c.census,place:"ugLab",keys:[[c.census,960,540,1]],push:0.02,draw:(x,tt)=>{
+    // Jun's census agent already has its own, as the project's page for agents says (later:true: Sam leaves, then Jun comes in)
+    {later:true,at:c.census,place:"ugLab",keys:[[c.census,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,{x:1600,y:430,R:130,r:68});ug_badgeOn(x,tt,"census agent",{x:1600,y:430,R:130});
-      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Jun Park","Analytics engineer",ag_in(tt,c.census+0.2,0.5));
+      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Jun Park","Analytics engineer",ag_in(tt,c.census+0.2,0.5));
       ug_page(x,476,230,760,"Your access",["On Databricks, you work as your own service","principal, never as a person. It can read","production and write only to its own","development schema."],{a:ag_in(tt,c.census+0.4,0.5),k:ag_spr(tt,c.census+0.4),edge:AG.blue});}},
-    // to stop an agent, Sam switches off its service principal, and everyone else works on
-    {cut:true,at:c.stop,place:"ugLab",keys:[[c.stop,1000,540,1]],push:0.02,draw:(x,tt)=>{const g=ag_io(tt,P.off+0.2,P.off+3.2,0.5);
+    // to stop an agent, Sam switches off its service principal, and everyone else works on (later:true: Jun leaves, then Sam comes in
+    // with the two agents)
+    {later:true,at:c.stop,place:"ugLab",keys:[[c.stop,1000,540,1]],push:0.02,draw:(x,tt)=>{const g=ag_io(tt,P.off+0.2,P.off+3.2,0.5);
       two(x,tt,{off:g,think:ag_in(tt,P.works,0.5)*0.8});
       if(tt>P.works){const u=ag_sine((tt-P.works)/0.7);ag_reach(x,ug_armTo(1800,640,{x:1500,y:420,R:130}),u,{data:((tt-P.works)*0.7)%1});}
-      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Sam Okafor","Data platform",1);}},
-    // and Mei stays its owner: she answers for what it does
-    {cut:true,at:c.owner,place:"ugLab",keys:[[c.owner,960,540,1]],push:0.02,draw:(x,tt)=>{
+      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",1);}},
+    // and Mei stays its owner: she answers for what it does (later:true: Sam and the two agents leave, then Mei and hers come in)
+    {later:true,at:c.owner,place:"ugLab",keys:[[c.owner,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,{});ug_badgeOn(x,tt,"registrar agent",{});ug_ownerOn(x,"owner · Mei Tanaka",{k:(tt-P.owner-0.2)/0.9});
-      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);}}
-  ],0.6);});
+      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",1);}}
+  ],0.6);
+  ug_kick(ctx,S,1,ag_in(t,c.alone,0.6)*(1-ag_in(t,c.sp,0.6)));});
 
 /* ---------------------------------------------------------------- 4 · The same stars */
 scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({users:wAt(sc,"everyone","all the account's users"),sps:wAt(sc,"everyone","every service principal"),
@@ -2200,56 +2304,64 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({users:wAt(sc
   const USERS=[["Clara Jensen"],["registrar agent",1],["census agent",1]];
   ag_shots(ctx,S,t,sc.dur,[
     // one policy, for all the account's users, and they include every service principal; the registrar agent isn't in the office's group
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);UG_KICK(x);
+    // (each shot of this chapter is another page of cards, or another person with them: later:true, so the last leaves first)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
       ug_policy(x,476,200,560,{a:ag_in(tt,0.4,0.5),k:ag_spr(tt,0.4)});
       ug_group(x,1296,200,560,"account users",USERS,{a:ag_in(tt,P.users,0.5),k:ag_spr(tt,P.users),n:clamp((tt-P.users-0.3)/0.5,0,1)+clamp((tt-P.sps)/0.5,0,2)});
       ug_group(x,476,460,560,"registrar's office",[["Mei Tanaka"]],{a:ag_in(tt,P.grp,0.5),k:ag_spr(tt,P.grp)});
       ag_pill(x,476+(ag_tw(x,"registrar agent · not in it",{w:700,size:28})+56)/2,720,"registrar agent · not in it",{size:28,col:AG.violet,a:ag_in(tt,P.cnt,0.4)});}},
     // so it reads the learner table as Clara does: the same status, the same stars
-    {cut:true,at:c.clara,place:"ugLab",keys:[[c.clara,960,540,1]],push:0.02,draw:(x,tt)=>{const hs=ag_io(tt,P.stat,P.stat+1.8,0.4),hm=ag_io(tt,P.stars,P.stars+1.8,0.4);
-      ug_who(x,"clara",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Clara Jensen","Planning",ag_in(tt,c.clara+0.2,0.5));
+    {later:true,at:c.clara,place:"ugLab",keys:[[c.clara,960,540,1]],push:0.02,draw:(x,tt)=>{const hs=ag_io(tt,P.stat,P.stat+1.8,0.4),hm=ag_io(tt,P.stars,P.stars+1.8,0.4);
+      ug_who(x,"clara",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Clara Jensen","Planning",ag_in(tt,c.clara+0.2,0.5));
       ag_label(x,500,214,"Clara reads",{col:AG.kick,a:ag_in(tt,c.clara+0.3,0.5)});ag_label(x,1316,214,"the registrar agent reads",{col:AG.violet,a:ag_in(tt,c.clara+0.6,0.5)});
       ug_record(x,476,240,540,{mask:1,hl:[0,hm,hm,hs],a:ag_in(tt,c.clara+0.3,0.5)});ug_record(x,1296,240,540,{mask:1,hl:[0,hm,hm,hs],a:ag_in(tt,c.clara+0.6,0.5)});}},
     // nobody wrote a rule for agents: the rule for people already covered them
-    {cut:true,at:c.nobody,place:"ugLab",keys:[[c.nobody,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);UG_KICK(x);
+    {later:true,at:c.nobody,place:"ugLab",keys:[[c.nobody,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
       ug_policy(x,476,200,560,{glow:ag_io(tt,c.nobody+0.4,c.nobody+3.2,0.6)});ug_group(x,1296,200,560,"account users",USERS,{});
       ug_card(x,476,470,560,{kick:"written for",title:"people",sub:"and it covers agents too"},{a:ag_in(tt,wAt(sc,"nobody","The rule for people"),0.5)});}},
     // a row filter works the same way
-    {cut:true,at:c.rows,place:"ugLab",keys:[[c.rows,960,540,1]],push:0.02,draw:(x,tt)=>{const f=ag_sine((tt-P.filter-0.2)/1.4);ag_roomLight(x,1);UG_KICK(x);
+    {later:true,at:c.rows,place:"ugLab",keys:[[c.rows,960,540,1]],push:0.02,draw:(x,tt)=>{const f=ag_sine((tt-P.filter-0.2)/1.4);ag_roomLight(x,1);
       ug_sketch(x,476,250,760,{filter:f,keep:3});
       ug_group(x,1340,250,480,"health_readers",[["a person"],["an agent",1]],{a:ag_in(tt,P.filter+0.6,0.5),k:ag_spr(tt,P.filter+0.6),n:1+ag_in(tt,P.agentP,0.4)});
       ag_pill(x,1580,620,"sees Health only",{col:AG.blue,icon:"lock",size:28,a:ag_in(tt,P.agentP+0.4,0.4)});}},
     // the learner code stays readable for counting: the census count, without a single name
-    {cut:true,at:c.code,place:"ugLab",keys:[[c.code,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Jun Park","Analytics engineer",1);
+    {later:true,at:c.code,place:"ugLab",keys:[[c.code,960,540,1]],push:0.02,draw:(x,tt)=>{
+      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Jun Park","Analytics engineer",1);
       ug_record(x,476,230,540,{mask:1,hl:[ag_in(tt,P.code,0.5),0,0,0]});
       ug_count(x,1296,240,{w:480,a:ag_in(tt,P.n,0.4),k:ag_spr(tt,P.n)});
       ag_pill(x,1296+(ag_tw(x,"names read · 0",{w:700,size:30})+96)/2,560,"names read · 0",{icon:"tick",col:AG.green,a:ag_in(tt,P.none,0.4)});}}
-  ],0.6);});
+  ],0.6);
+  ug_kick(ctx,S,1,0);});
 
 /* ---------------------------------------------------------------- 5 · Tools in the catalog */
+// where the agent stands in this chapter, and where the next one finds it
+const UG_TOOLSAT={x:700,y:430,R:140,r:72};
 scene("tools",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({fn:wAt(sc,"fn","a function"),grant:wAt(sc,"grant","a grant"),may:wAt(sc,"run","may run the count"),
     cant:wAt(sc,"run","can't change it"),servers:wAt(sc,"servers","the tool servers"),gw:wAt(sc,"servers","through Unity Gateway"),only:wAt(sc,"each","only these"),
     read:wAt(sc,"fewest","only read")}));
-  const AGT={x:700,y:430,R:140,r:72};
+  const AGT=UG_TOOLSAT;
   ag_shots(ctx,S,t,sc.dur,[
     // the census count, written once by the data team, is a function in the catalog: Jun's agent has the grant to run it, and can't change it
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const F=ug_function(x,1200,240,620,{a:0}),reach=ag_sine((tt-c.run-0.2)/0.8);
+    // (later:true: Jun and his cards leave, then the catalog's frame and the census agent come in)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const F=ug_function(x,1200,240,620,{a:0}),reach=ag_sine((tt-c.run-0.2)/0.8);
       ug_catalog(x,1150,190,720,520,{p:(tt-0.2)/1.4});ug_agent(x,tt,Object.assign({think:reach*0.6},AGT));ug_badgeOn(x,tt,"census agent",AGT);
       if(reach>0.01)ag_reach(x,ug_armTo(F.x,F.y+110,AGT),reach,{data:clamp((tt-c.run-1.1)/1.0,0,1)});
-      ag_roomLight(x,1);UG_KICK(x);
+      ag_roomLight(x,1);
       ug_function(x,1200,240,620,{owner:"data team",a:ag_in(tt,P.fn,0.5),k:ag_spr(tt,P.fn),lit:ag_in(tt,c.run+0.8,0.4),rule:ag_in(tt,P.may,0.4)});
       ag_pill(x,1510,500,"grant EXECUTE · census agent",{col:AG.blue,size:28,a:ag_in(tt,P.grant,0.4)});}},
-    // the tool servers agents call, registered there through Unity Gateway, each with its own grant: these, and only these
-    {cut:true,at:c.servers,place:"ugLab",keys:[[c.servers,960,540,1]],push:0.02,draw:(x,tt)=>{const T_=[["Catalog","read only"],["Query","read only"],["Repository","not granted"]];
+    // the tool servers agents call, registered there through Unity Gateway, each with its own grant: these, and only these (later:true:
+    // the census agent and its function leave, then the registrar agent comes in, with its tool servers)
+    {later:true,at:c.servers,place:"ugLab",keys:[[c.servers,960,540,1]],push:0.02,draw:(x,tt)=>{const T_=[["Catalog","read only"],["Query","read only"],["Repository","not granted"]];
       ug_catalog(x,1150,190,720,560,{});ug_agent(x,tt,Object.assign({think:0.4},AGT));ug_badgeOn(x,tt,"registrar agent",AGT);
-      for(let i=0;i<3;i++){const t0=P.only-0.6+i*0.4,u=ag_sine((tt-t0)/0.7)*(i===2?0.78:1);if(u>0.01)ag_reach(x,ug_armTo(1230,276+i*150,AGT),u,{data:i<2?clamp((tt-t0-0.8)/1.0,0,1):0});}
-      ag_roomLight(x,1);UG_KICK(x);
+      // its arms reach for the tool servers, and come back before the chapter ends, so the next one finds the agent as it was
+      for(let i=0;i<3;i++){const t0=P.only-0.6+i*0.4,u=ag_sine((tt-t0)/0.7)*(i===2?0.78:1)*(1-ag_sine((tt-sc.dur+1.6)/0.8));if(u>0.01)ag_reach(x,ug_armTo(1230,276+i*150,AGT),u,{data:i<2?clamp((tt-t0-0.8)/1.0,0,1):0});}
+      ag_roomLight(x,1);
       const pulse=Math.sin(Math.PI*clamp((tt-P.read)/0.9,0,1));
       T_.forEach(([n,s],i)=>{const t0=P.servers+0.2+i*0.3,grey=i===2;x.save();if(grey)x.globalAlpha*=0.55;
         ag_tool(x,1230,218+i*150,420,116,n,{sub:s,icon:grey?null:"lock",a:ag_in(tt,t0,0.4),touch:grey?0:Math.max(ag_in(tt,P.only-0.6+i*0.4+0.7,0.3),pulse)});x.restore();});
       ag_pill(x,1510,712,"registered through Unity Gateway",{col:AG.blue,size:28,a:ag_in(tt,P.gw,0.4)});}}
-  ],0.6);});
+  ],0.6);
+  ug_kick(ctx,S,1,0);});
 
 /* ---------------------------------------------------------------- 6 · Through the gateway */
 scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,"models","In Unity Gateway"),svc:wAt(sc,"models","a service in the catalog"),
@@ -2258,9 +2370,10 @@ scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,
   const AGT={x:400,y:470,R:120,r:64},TH=[470,500,700,520,860,390,1000,400],TH2=[1000,400,1120,408,1220,300,1300,244];
   const thread=(x,tt,u)=>{ug_thread(x,TH,clamp(u*2,0,1),{beads:tt,n:3,speed:0.3});if(u>0.5)ug_thread(x,TH2,(u-0.5)*2,{beads:tt+0.6,n:2,speed:0.3});};
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const tu=ag_sine((tt-c.one-0.2)/1.6),ka=ag_in(tt,P.keys,0.4)*(1-ag_in(tt,P.keys+2.4,0.6));
-      ug_agent(x,tt,Object.assign({think:0.5},AGT));ug_badgeOn(x,tt,"registrar agent",AGT);thread(x,tt,tu);
-      ug_gateway(x,1000,200,140,450,{p:(tt-P.ug)/1.2});ag_roomLight(x,1);UG_KICK(x);
+    // the agent stays where the last chapter left it until the chapters' crossfade is over, then moves to the left, out of the gateway's way
+    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const tu=ag_sine((tt-c.one-0.2)/1.6),ka=ag_in(tt,P.keys,0.4)*(1-ag_in(tt,P.keys+2.4,0.6)),A0=ug_slide(tt,0.8,UG_TOOLSAT,AGT);
+      ug_agent(x,tt,Object.assign({think:0.5},A0));ug_badgeOn(x,tt,"registrar agent",A0);thread(x,tt,tu);
+      ug_gateway(x,1000,200,140,450,{p:(tt-P.ug)/1.2});ag_roomLight(x,1);
       [["registrar agent"],["data team"],[null]].forEach(([w],i)=>{const t0=P.svc+0.1+i*0.3;
         ug_service(x,1300,170+i*180,560,{who:w,grey:w?0:1,a:ag_in(tt,t0,0.4),k:ag_spr(tt,t0),lit:i===0?Math.max(ag_io(tt,c.granted,c.granted+1.2,0.3),ag_in(tt,c.one+1.4,0.5)):i===1?ag_io(tt,c.granted+0.5,c.granted+1.7,0.3):0});});
       // Mei's keys, taken back
@@ -2269,9 +2382,9 @@ scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,
         if(st>0){x.strokeStyle=rgba(AG.mut,0.9);x.lineWidth=4;x.lineCap="round";x.beginPath();x.moveTo(bx+30,by+118);x.lineTo(bx+30+(330)*st,by+86);x.stroke();}
         ag_T(x,"taken back",bx+592,by+112,{w:700,size:28,align:"right",col:AG.mut,a:ag_in(tt,P.keys+0.9,0.4)});x.restore();}}},
     // checks on each service, in beta: an email address hidden, words written to trick it stopped; a limit; every call counted
-    {cut:true,at:c.checks,place:"ugLab",keys:[[c.checks,960,540,1]],push:0.02,draw:(x,tt)=>{
+    {at:c.checks,place:"ugLab",keys:[[c.checks,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,Object.assign({think:0.5},AGT));ug_badgeOn(x,tt,"registrar agent",AGT);thread(x,tt,1);
-      ug_gateway(x,1000,200,140,450,{});ag_roomLight(x,1);UG_KICK(x);
+      ug_gateway(x,1000,200,140,450,{});ag_roomLight(x,1);
       [["registrar agent"],["data team"],[null]].forEach(([w],i)=>ug_service(x,1300,170+i*180,560,{who:w,grey:w?0:1,lit:i===0?1:0}));
       ug_check(x,906,716,"sensitive data",{a:ag_in(tt,c.checks+0.6,0.4)});ug_check(x,920,800,"prompt injection",{a:ag_in(tt,c.checks+1.0,0.4)});
       // a prompt comes to the gateway's door, its email address is hidden there, and it goes on through
@@ -2283,12 +2396,14 @@ scene("gateway",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({ug:wAt(sc,
         ag_pill(x,sx,330,"blocked",{icon:"warn",col:AG.amber,size:28,a:ag_in(tt,P.trick,0.4)*sa});}
       ug_dial(x,1420,800,52,{a:ag_in(tt,c.limit+0.2,0.4),v:ag_keys(tt,[[c.limit,0.2],[c.limit+1.2,0.84],[c.limit+1.6,0.8]])});
       ag_T(x,"limit · 60 calls a minute",1490,810,{w:700,size:28,a:ag_in(tt,P.lim,0.4)});}},
-    // every call counted under its name: the registrar's office sees what its agent costs, in its own budget
-    {cut:true,at:c.count,place:"ugLab",keys:[[c.count,960,540,1]],push:0.02,draw:(x,tt)=>{const AG2={x:1580,y:430,R:130,r:68};
+    // every call counted under its name: the registrar's office sees what its agent costs, in its own budget (later:true: the gateway
+    // and its checks leave, then Mei comes in, the agent beside her)
+    {later:true,at:c.count,place:"ugLab",keys:[[c.count,960,540,1]],push:0.02,draw:(x,tt)=>{const AG2={x:1580,y:430,R:130,r:68};
       ug_agent(x,tt,Object.assign({think:0.3},AG2));ug_badgeOn(x,tt,"registrar agent",AG2);
-      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Mei Tanaka","Registrar's office",ag_in(tt,c.count+0.2,0.5));
+      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",ag_in(tt,c.count+0.2,0.5));
       ug_usage(x,476,230,620,{a:ag_in(tt,P.name,0.5),k:ag_spr(tt,P.name),fill:ag_sine((tt-P.name-0.3)/1.2),budget:ag_in(tt,P.bud,0.5)});}}
-  ],0.6);});
+  ],0.6);
+  ug_kick(ctx,S,1,0);});
 
 /* ---------------------------------------------------------------- 7 · Seen under its own name */
 scene("seen",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({q:wAt(sc,"same","The same question"),mei:wAt(sc,"same","lists Mei"),agent:wAt(sc,"same","the registrar agent"),
@@ -2298,30 +2413,35 @@ scene("seen",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({q:wAt(sc,"sam
   const rows=(tt,hl)=>[{when:"Mon 09:12",who:"mei.tanaka@uni.example",a:ag_in(tt,P.mei,0.4)},{when:"Wed 14:05",who:"mei.tanaka@uni.example",a:ag_in(tt,P.mei+0.3,0.4)},
     {when:"Sun 02:14",id:"7c41e09a-…",tag:"registrar agent",a:ag_in(tt,P.agent,0.4),hl},{when:"Sun 02:15",id:"7c41e09a-…",tag:"registrar agent",a:ag_in(tt,P.agent+0.3,0.4),hl}];
   ag_shots(ctx,S,t,sc.dur,[
-    // a month later: the same question, and an answer that says whose reads they were
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const hl=Math.sin(Math.PI*clamp((tt-P.says)/1.2,0,1));
-      const ca=ag_io(tt,0.3,c.same,0.5);ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x,false,1-ca);ug_corner(x,"A month later",ca);ug_name(x,250,196,"Sam Okafor","Data platform",ag_in(tt,0.4,0.5));
+    // a month later: the same question, and an answer that says whose reads they were (later:true: Mei and her agent leave, then Sam
+    // comes in; the corner says when, over the kicker)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{const hl=Math.sin(Math.PI*clamp((tt-P.says)/1.2,0,1));
+      const ca=ag_io(tt,0.3,c.same,0.5);ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_corner(x,"A month later",ca);ug_name(x,250,196,"Sam Okafor","Data platform",ag_in(tt,0.4,0.5));
       ug_query(x,476,180,760,{a:ag_in(tt,P.q,0.5),k:ag_spr(tt,P.q)});
       ug_log(x,476,446,880,rows(tt,ag_in(tt,P.agent+0.6,0.4)*0.6+hl*0.4),{sub:"November",a:ag_in(tt,P.mei-0.3,0.4)});}},
-    // lineage: the tables its queries read; and the gateway's own table of its calls
-    {cut:true,at:c.lineage,place:"ugLab",keys:[[c.lineage,960,540,1]],push:0.02,draw:(x,tt)=>{const t0=P.tables;
-      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Sam Okafor","Data platform",1);
-      ag_label(x,480,214,"Lineage",{col:AG.kick,a:ag_in(tt,c.lineage+0.2,0.4)});
+    // lineage: the tables its queries read; and the gateway's own table of its calls (Sam stays; the query and the log go before the
+    // lineage comes in where they were)
+    {at:c.lineage,place:"ugLab",keys:[[c.lineage,960,540,1]],push:0.02,draw:(x,tt)=>{const t0=Math.max(P.tables,c.lineage+0.8);
+      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",1);
+      ag_label(x,480,214,"Lineage",{col:AG.kick,a:ag_in(tt,c.lineage+0.6,0.4)});
       const T3=["core_learner_v1","core_credential_v2","core_award"].map((n,i)=>ug_table(x,476,246+i*104,n,{a:ag_in(tt,t0-0.2+i*0.25,0.4)}));
       const A=ug_card(x,950,330,300,{kick:"Answer",title:"Nursing"},{a:ag_in(tt,t0+0.6,0.4),edge:AG.orange,kickCol:AG.orange});
       T3.forEach((b,i)=>ug_line(x,b.x+b.w+10,b.y+b.h/2,A.x-12,A.y+A.h/2,(tt-t0-0.2-i*0.2)/0.7,{}));
       ug_card(x,1300,250,560,{kick:"The gateway's own table",title:"system.ai_gateway.usage",sub:"requester · registrar agent"},{a:ag_in(tt,P.table,0.5),k:ag_spr(tt,P.table),edge:AG.blue,kickCol:AG.blue});
       ag_pill(x,1580,500,"every call · its tokens",{col:AG.blue,size:28,a:ag_in(tt,P.tokens,0.4)});}},
-    // if something looks wrong, Sam stops the agent alone, and nobody else stops with it
-    {cut:true,at:c.stop,place:"ugLab",keys:[[c.stop,1000,540,1]],push:0.02,draw:(x,tt)=>{const g=ag_io(tt,P.alone+0.2,P.alone+2.8,0.5);
-      ug_agent(x,tt,{x:900,y:420,R:130,r:68,dim:g});ug_badgeOn(x,tt,"registrar agent",{x:900,y:420,R:130,grey:g,off:true});
-      ug_agent(x,tt,{x:1500,y:420,R:130,r:68,think:ag_in(tt,P.nobody,0.5)*0.8});ug_badgeOn(x,tt,"census agent",{x:1500,y:420,R:130});
-      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Sam Okafor","Data platform",1);}},
-    // and no read of the agent's is taken for Mei's again
-    {cut:true,at:c.mei,place:"ugLab",keys:[[c.mei,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Mei Tanaka","Registrar's office",ag_in(tt,c.mei+0.2,0.5));
+    // if something looks wrong, Sam stops the agent alone, and nobody else stops with it (Sam stays; the two agents come in once the
+    // lineage has gone, each as one picture)
+    {at:c.stop,place:"ugLab",keys:[[c.stop,1000,540,1]],push:0.02,draw:(x,tt)=>{const g=ag_io(tt,P.alone+0.2,P.alone+2.8,0.5);
+      ug_asOne(x,ag_in(tt,c.stop+0.5,0.5),bx=>{
+        ug_agent(bx,tt,{x:900,y:420,R:130,r:68,dim:g});ug_badgeOn(bx,tt,"registrar agent",{x:900,y:420,R:130,grey:g,off:true});
+        ug_agent(bx,tt,{x:1500,y:420,R:130,r:68,think:ag_in(tt,P.nobody,0.5)*0.8});ug_badgeOn(bx,tt,"census agent",{x:1500,y:420,R:130});});
+      ug_who(x,"sam",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Sam Okafor","Data platform",1);}},
+    // and no read of the agent's is taken for Mei's again (later:true: Sam and the agents leave, then Mei and the log come in)
+    {later:true,at:c.mei,place:"ugLab",keys:[[c.mei,960,540,1]],push:0.02,draw:(x,tt)=>{
+      ug_who(x,"mei",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Mei Tanaka","Registrar's office",ag_in(tt,c.mei+0.2,0.5));
       ug_log(x,476,300,880,rows(1e6,ag_io(tt,c.mei+0.8,c.mei+2.4,0.4)),{sub:"November",a:ag_in(tt,c.mei+0.3,0.5)});}}
-  ],0.6);});
+  ],0.6);
+  ug_kick(ctx,S,1-ag_io(t,0.15,c.same+0.5,0.45),0);});   // "A month later" in the corner over it: neither shows through the other
 
 /* ---------------------------------------------------------------- 8 · One set of rules */
 scene("one",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({agent:wAt(sc,"hold","every agent"),tool:wAt(sc,"hold","every tool"),person:wAt(sc,"hold","every person"),
@@ -2329,8 +2449,9 @@ scene("one",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({agent:wAt(sc,"
     see:wAt(sc,"checked","can see"),limit:wAt(sc,"checked","limit"),acct:wAt(sc,"checked","account for")}));
   const ROWS=[[["Mei Tanaka",0],["Clara Jensen",0],["Sam Okafor",0]],[["registrar agent",1],["census agent",1]],[["Catalog",2],["Query",2],["census_day_students",2]]];
   ag_shots(ctx,S,t,sc.dur,[
-    // kept where the data and the models live, the rules hold for every agent, every tool and every person
-    {at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);UG_KICK(x);
+    // kept where the data and the models live, the rules hold for every agent, every tool and every person (each shot of this chapter
+    // is another moment, with other people or other cards: later:true, so the last leaves first)
+    {later:true,at:0,place:"ugLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
       ug_page(x,110,210,560,"What you must not do",["Never copy names, emails or student","IDs out of the project, into a prompt,","a log or a pull request, beyond the","sample a claim needs."],{a:ag_in(tt,0.3,0.5)});
       ug_catalog(x,760,200,1100,470,{});ug_gateway(x,1690,290,270,340,{label:false});ag_label(x,1690,270,"Unity Gateway",{align:"center"});
       ag_T(x,"models",1690,440,{w:700,size:30,align:"center",col:AG.blue});ag_T(x,"tool servers",1690,490,{w:700,size:30,align:"center",col:AG.blue});
@@ -2339,25 +2460,28 @@ scene("one",(ctx,S,t,sc)=>{const c=sc.cues,P=ug_once(sc,"P",()=>({agent:wAt(sc,"
       ag_pill(x,960,740,"one set to keep",{col:AG.blue,a:ag_in(tt,P.keep,0.4)});ag_pill(x,1290,740,"one log to read",{col:AG.blue,a:ag_in(tt,P.log,0.4)});
       ag_pill(x,1580,740,"one review",{col:AG.blue,a:ag_in(tt,P.rev,0.4)});}},
     // Jun's census agent works under them too: the number the university sends the government, checked by an agent the team can see
-    {cut:true,at:c.census,place:"ugLab",keys:[[c.census,960,540,1]],push:0.02,draw:(x,tt)=>{const fly=ag_sine((tt-P.acct-0.6)/1.4);
+    {later:true,at:c.census,place:"ugLab",keys:[[c.census,960,540,1]],push:0.02,draw:(x,tt)=>{const fly=ag_sine((tt-P.acct-0.6)/1.4);
       ug_agent(x,tt,{});ug_badgeOn(x,tt,"census agent",{});
-      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);UG_KICK(x);ug_name(x,250,196,"Jun Park","Analytics engineer",ag_in(tt,c.census+0.2,0.5));
+      ug_who(x,"jun",tt,{p:{gaze:[4,-1]}});ag_roomLight(x,1);ug_name(x,250,196,"Jun Park","Analytics engineer",ag_in(tt,c.census+0.2,0.5));
       if(fly<1){x.save();x.globalAlpha*=1-ag_in(fly,0.2,0.25);x.translate(fly*fly*700,-fly*fly*200);ug_count(x,1340,240,{w:480,a:ag_in(tt,c.number,0.4),k:ag_spr(tt,c.number),gov:ag_in(tt,P.gov,0.5)});x.restore();}
       [["seen",P.see],["limited",P.limit],["counted",P.acct]].forEach(([s,t0],i)=>ag_pill(x,UG.agent.x+(i-1)*190,790,s,{col:AG.blue,size:28,a:ag_in(tt,t0,0.4)}));}},
     // every morning, the faculties' answers wait under the registrar agent's own name
-    {cut:true,at:c.morning,place:"ugLab",keys:[[c.morning,960,540,1]],push:0.02,draw:(x,tt)=>{
+    {later:true,at:c.morning,place:"ugLab",keys:[[c.morning,960,540,1]],push:0.02,draw:(x,tt)=>{
       ug_agent(x,tt,{});ug_badgeOn(x,tt,"registrar agent",{});ug_ownerOn(x,"owner · Mei Tanaka",{});
-      const ca=ag_in(tt,c.morning+0.2,0.5);ug_who(x,"mei",tt,{p:{gaze:[4,-1],smile:0.45}});ag_roomLight(x,1);UG_KICK(x,false,1-ca);ug_corner(x,"Every morning",ca);
+      const ca=ag_in(tt,c.morning+0.2,0.5);ug_who(x,"mei",tt,{p:{gaze:[4,-1],smile:0.45}});ag_roomLight(x,1);ug_corner(x,"Every morning",ca);
       ug_answers(x,1340,190,520,{n:3,tick:1,sign:ag_in(tt,c.morning+0.8,0.6)});}},
     // one set of rules for people and agents, enforced where the data and the models live; next, the team's context and memory
-    {cut:true,at:c.take,place:"ugLab",keys:[[c.take,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1-ag_in(tt,c.breath,0.9),()=>{ag_roomLight(x,1);UG_KICK(x);
+    {later:true,at:c.take,place:"ugLab",keys:[[c.take,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1-ag_in(tt,c.breath,0.9),()=>{ag_roomLight(x,1);
       const la=ag_in(tt,c.take+0.2,0.6);ag_T(x,"One set of rules for people and agents,",960,380,{w:700,size:48,align:"center",a:la});
       ag_T(x,"enforced where the data and the models live.",960,450,{w:700,size:48,align:"center",a:la});
       ug_card(x,650,560,620,{kick:"Next",title:"Context and memory, governed"},{a:ag_in(tt,c.next,0.4),k:ag_spr(tt,c.next)});})}
   ],0.6);
+  // the kicker, but for the corner that says "Every morning" over it: it goes before the corner comes, and comes back once it has gone
+  ug_kick(ctx,S,(1-ag_io(t,c.morning-0.5,c.take,0.45))*(1-ag_in(t,c.breath,0.9)),0);
   ag_end(ctx,S,t,c.breath,"Why Unity Catalog and Unity Gateway govern them","One set of rules for people and agents.","Film 8 of 9","Agents at work on data");});
 
-// every chapter after the opening opens on a cut: each shows the same room as the one before, under another camera
+// every chapter after the opening opens in the room the one before ends in: its camera glides on from there, and the end of the last
+// one is drawn through it (a chapter whose first shot is a later moment lets that end leave first)
 ag_cutInto(["holds","name","stars","tools","gateway","seen","one"]);
 
 /* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */

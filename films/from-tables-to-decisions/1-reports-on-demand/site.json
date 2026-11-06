@@ -1,0 +1,113 @@
+{
+  "kicker": "Answers on demand",
+  "kicker_es": "Respuestas a pedido",
+  "title_es": "Reportes a pedido",
+  "h1": "Reports on demand, dashboards for what comes back",
+  "h1_es": "Reportes a pedido, tableros para lo que se repite",
+  "lead": "Rohan Desai, in Finance, needs what casual teaching has cost the Faculty of Health this semester. It used to take a report from the data team, and a week. Now he asks Genie One and gets A$1.84 million, with its query, and the questions asked every pay day get one dashboard.",
+  "lead_es": "Rohan Desai, de Finanzas, necesita saber cuánto costó la docencia ocasional en la Facultad de Salud este semestre. Antes pedía un reporte del equipo de datos y una semana. Ahora le pregunta a Genie One y recibe A$1.84 millones, con su consulta, y lo de cada día de pago tiene un tablero.",
+  "description": "A film about serving data on demand, the first of From tables to decisions: people and agents ask for the answer they need, in their own words, and get it when they ask. Rohan Desai, in Finance, asks Genie One what casual teaching has cost the Faculty of Health this semester, and the answer comes with what it counted and the query it ran, so anyone can check it. It answers from a Genie Agent the data team set up for one subject: its data, one measure, casual teaching cost, by faculty, unit and teaching period; its rules in their owners' words, Rohan's for what cost means and Ingrid's in HR for totals only, never one person's pay; its examples, each with its query; and its tests, questions with known answers run after every change; each answer run as the person asking, who sees only what they may read. So the data team's work moves from a report for each question to good models and their context, built once, for people and agents to explore. The questions that come back every pay day get one dashboard, read at a glance, refreshed after each pay run and sent to the people who act on it, with an Ask Genie button for the rest; it retires a 40-page report. The rule of thumb: a question deserves a dashboard when it comes back on a schedule and someone acts on what it shows. It opens in London in 1936, where people asked the telephone exchange for the time, until the Post Office's speaking clock answered it, on demand, for anyone.",
+  "description_es": "Una película sobre servir datos a pedido, la primera de De las tablas a las decisiones: las personas y los agentes piden la respuesta que necesitan, con sus palabras, y la reciben cuando la piden. Rohan Desai, de Finanzas, le pregunta a Genie One cuánto le ha costado la docencia ocasional a la Facultad de Salud este semestre, y la respuesta llega con lo que contó y la consulta que corrió, para que cualquiera pueda revisarla. Responde desde un Genie Agent que el equipo de datos configuró para un tema: sus datos, una medida, el costo de la docencia ocasional, por facultad, asignatura y período lectivo; sus reglas con las palabras de sus dueños, la de Rohan sobre qué significa costo y la de Ingrid, de RR. HH., solo totales, nunca el sueldo de una persona; sus ejemplos, cada uno con su consulta; y sus pruebas, preguntas con respuestas conocidas que se corren tras cada cambio; cada respuesta se ejecuta como la persona que pregunta, que ve solo lo que puede leer. Así, el trabajo del equipo de datos pasa de un reporte para cada pregunta a buenos modelos y su contexto, construidos una vez, para que personas y agentes los exploren. Las preguntas que vuelven cada día de pago tienen un tablero, que se lee de un vistazo, se actualiza tras cada nómina y llega a quienes actúan con él, con un botón Ask Genie para lo demás; reemplaza un reporte de 40 páginas. La regla práctica: una pregunta merece un tablero cuando vuelve con un calendario fijo y alguien actúa según lo que muestra. Empieza en Londres en 1936, donde la gente le preguntaba la hora a la central telefónica, hasta que el reloj parlante de Correos la respondió, a pedido, para cualquiera.",
+  "card": "Rohan needed one number, and a week for its report. Now he asks Genie, and the questions that come back get one dashboard.",
+  "card_es": "Rohan necesitaba un número, y una semana por su reporte. Ahora pregunta a Genie, y lo que se repite tiene un tablero.",
+  "chapters_es": {
+    "clock": "El reloj parlante",
+    "ask": "Pide la respuesta",
+    "context": "De dónde responde",
+    "back": "Las preguntas que vuelven",
+    "close": "Se pregunta cuando hace falta"
+  },
+  "past": [
+    "London, 1936: the speaking clock tells anyone the time",
+    "A question everyone asks gets a machine of its own; every other question is answered when it's asked."
+  ],
+  "past_es": [
+    "Londres, 1936: el reloj parlante le da la hora a cualquiera",
+    "Una pregunta que todos hacen tiene su propia máquina; cualquier otra se responde cuando se hace."
+  ],
+  "next_h": "You've seen answers asked for when they're needed, and one dashboard for the questions that come back. Next: casual teaching cost, defined in the open, so every reader counts it the same way.",
+  "next_h_es": "Viste respuestas pedidas cuando hacen falta, y un tablero para las preguntas que se repiten. Después: el costo de la docencia ocasional, definido en formato abierto, para que todos lo cuenten igual.",
+  "repo": {
+    "ask": [
+      "examples/reports-on-demand/health_this_semester.sql"
+    ],
+    "context": [
+      "examples/reports-on-demand/casual_teaching_cost_genie_agent.md"
+    ],
+    "back": [
+      "examples/reports-on-demand/fortnightly_figures_dashboard.md"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film stays at the level of architecture. Databricks' own pages show how to set each piece up, and stay current as the tools change.",
+    "p_es": "La película se queda en el nivel de la arquitectura. Las páginas de Databricks muestran cómo configurar cada pieza, y se mantienen al día cuando cambian las herramientas.",
+    "links": [
+      {
+        "title": "Use Genie One",
+        "title_es": "Uso de Genie One",
+        "line": "Ask questions of your data in your own words, with dashboards and apps in one place.",
+        "line_es": "Haz preguntas a tus datos con tus palabras, con tableros y aplicaciones en un solo lugar.",
+        "href": "https://docs.databricks.com/aws/en/genie-one/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-one"
+      },
+      {
+        "title": "Genie Agents",
+        "title_es": "Agentes de Genie",
+        "line": "An agent for one subject: its datasets, example queries, SQL expressions and instructions in the organisation's words.",
+        "line_es": "Un agente para un tema: sus conjuntos de datos, consultas de ejemplo, expresiones SQL e instrucciones con las palabras de la organización.",
+        "href": "https://docs.databricks.com/aws/en/genie-agents/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-agents/"
+      },
+      {
+        "title": "Curate an effective Genie Agent",
+        "title_es": "Optimiza un Genie Agent eficaz",
+        "line": "Start small, let a domain expert define it, and be its first user.",
+        "line_es": "Empieza con poco, que lo defina quien conoce el tema, y sé su primer usuario.",
+        "href": "https://docs.databricks.com/aws/en/genie/best-practices",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-agents/best-practices"
+      },
+      {
+        "title": "Test and monitor a Genie Agent",
+        "title_es": "Prueba y supervisión de un agente de Genie",
+        "line": "Benchmarks: questions with their SQL answers, run after each change and rated Good or Bad.",
+        "line_es": "Pruebas comparativas: preguntas con su respuesta en SQL, que se corren tras cada cambio y se califican Bueno o Malo.",
+        "href": "https://docs.databricks.com/aws/en/genie/benchmarks",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-agents/monitor"
+      },
+      {
+        "title": "Dashboards",
+        "title_es": "Paneles",
+        "line": "AI/BI dashboards, for the figures read at a glance.",
+        "line_es": "Los tableros de AI/BI, para las cifras que se leen de un vistazo.",
+        "href": "https://docs.databricks.com/aws/en/dashboards/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/"
+      },
+      {
+        "title": "Manage scheduled dashboard updates and subscriptions",
+        "title_es": "Actualizaciones y suscripciones programadas del panel",
+        "line": "Refresh a dashboard on a schedule, and send it to the people who act on it.",
+        "line_es": "Actualiza un tablero con un calendario y envíalo a las personas que actúan con él.",
+        "href": "https://docs.databricks.com/aws/en/dashboards/schedule-subscribe",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/schedule-subscribe"
+      },
+      {
+        "title": "Genie Agents with dashboards",
+        "title_es": "Agentes de Genie con paneles",
+        "line": "The Ask Genie button on a published dashboard, linked to an existing Genie Agent.",
+        "line_es": "El botón Ask Genie de un tablero publicado, vinculado a un Genie Agent que ya existe.",
+        "href": "https://docs.databricks.com/aws/en/dashboards/genie-spaces",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/genie-spaces"
+      },
+      {
+        "title": "Unity Catalog metric views",
+        "title_es": "Vistas de métricas del catálogo de Unity",
+        "line": "A measure defined once, then queried from dashboards, Genie Agents and SQL, grouped by any of its fields.",
+        "line_es": "Una medida definida una vez, y consultada desde tableros, Genie Agents y SQL, agrupada por cualquiera de sus campos.",
+        "href": "https://docs.databricks.com/aws/en/metric-views/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/metric-views/"
+      }
+    ]
+  }
+}

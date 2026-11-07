@@ -723,10 +723,6 @@ def film_page(lg, f, films_, series):
     nxt = next((x for x in films_ if x["index"] == f["index"] + 1), None)
     script = f'{REPO}/blob/main/films/{S["dir"]}/{f["dir"]}/script.md'; caps = f'{REPO}/tree/main/films/{S["dir"]}/{f["dir"]}/captions'
     es_audio = lg == "es" and spanish_audio(f)
-    note = ('' if lg == "en" else
-            '<p class="note">La narración y los subtítulos están en español; las palabras en pantalla siguen en inglés.</p>\n' if es_audio else
-            '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n' if learn else
-            '<p class="note">La película está en inglés, con subtítulos en español. Esta página, los capítulos y las preguntas están en español.</p>\n')
     ntw = NUM[lg][f["think"] - 1]  # how many Pause and think questions, in words
     nm = lambda x: E(x["title"] if lg == "en" else x["site"]["title_es"])
     after = None if nxt else next_series(f)  # the last film: the series to watch next, once it's on the site
@@ -749,7 +745,7 @@ def film_page(lg, f, films_, series):
              f'<div class="think-foot"><button type="button" class="btn" data-again>{T(lg, "Watch again", "Ver de nuevo")}</button></div></div></template>')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../")}\n'
-            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n{note}</section>\n'
+            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n</section>\n'
             + (f'{course(lg, f, 0)}\n' if learn else "") +
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "<b>Pause and think</b> is on: the film stops for one question at the end of chapters.", "<b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
@@ -811,13 +807,8 @@ def series_page(lg, series, films_, S=FW):
     posters = [f'<img src="{R}assets/{x["key"]}-poster.jpg" alt="">' for x in films_] * (8 if len(films_) < 4 else 2)
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">' + "".join(posters[:8]) + '</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S)}\n'
-            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n'
-            + ('' if lg == "en" else
-               '<p class="note">Cada tarjeta indica el idioma de la narración; las palabras en pantalla siguen en inglés. Estas páginas, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n' if any(spanish_audio(x) for x in films_) and learn else
-               '<p class="note">Cada tarjeta indica el idioma de la narración; las palabras en pantalla siguen en inglés. Estas páginas, los capítulos y las preguntas están en español.</p>\n' if any(spanish_audio(x) for x in films_) else
-               '<p class="note">Las películas están en inglés, con subtítulos en español. Estas páginas, los capítulos, las preguntas, los labs y las situaciones están en español.</p>\n' if learn else
-               '<p class="note">Las películas están en inglés, con subtítulos en español. Estas páginas, los capítulos y las preguntas están en español.</p>\n')
-            + '</section>\n' + (series_course(lg, S, SL, series, films_, 0) + "\n" if SL else "") + '\n'
+            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n</section>\n'
+            + (series_course(lg, S, SL, series, films_, 0) + "\n" if SL else "") + '\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n')
     if SL:

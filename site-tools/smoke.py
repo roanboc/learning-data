@@ -613,7 +613,7 @@ async def check_chapter_links(run):
 
 # ---------------------------------------------------------------- 5. the players
 async def check_players(run):
-    sec = run.rep.sec("players", "Players: play with sound, chapters, captions, full screen, Spanish controls and chapter names")
+    sec = run.rep.sec("players", "Players: play with sound, chapters, captions, full screen, Spanish audio, controls and chapter names")
     if not run.pick(FILMS):
         return
     ctx = await run.context(1280)
@@ -626,8 +626,13 @@ async def check_players(run):
             await run.ready(pg)
             info = await pg.evaluate("""() => ({total: TL.total, scenes: SCENES.map(s => ({id: s.id, name: s.name, start: s.start})),
               buttons: [...document.querySelectorAll('#chapters button')].map(b => b.lastChild.textContent),
-              badge: (document.querySelector('.poster .play-badge') || {}).textContent || ''})""")
+              badge: (document.querySelector('.poster .play-badge') || {}).textContent || '',
+              soundtrack: document.getElementById('snd').getAttribute('src')})""")
             where = "/" + key
+            audio = re.search(r"assets/([^/]+)/soundtrack(\.es)?\.mp3$", info["soundtrack"])
+            expect(sec, audio and (WEB / "assets" / audio[1] / f"soundtrack{audio[2] or ''}.mp3").is_file() and
+                   bool(audio[2]) == (lang == "es" and (WEB / "assets" / audio[1] / "soundtrack.es.mp3").is_file()),
+                   f"{where}: wrong soundtrack {info['soundtrack']!r} for {lang}")
             expect(sec, len(info["buttons"]) == count == len(info["scenes"]), f"{where}: {len(info['buttons'])} chapter buttons, {len(info['scenes'])} chapters, expected {count}")
             # the stated length on the play badge matches the film, to the half minute
             m = re.search(r"(\d+)(½)?\s*min", info["badge"])

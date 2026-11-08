@@ -57,6 +57,13 @@ Run film and visual style work at the highest reasoning or effort setting your t
 3. **Share the video for review.** Whenever a new or changed video is made, render it and share it with the author on a review page, with the pull request link. `python site-tools/review_page.py <film folder> --pr <number> --note "<what changed>"` makes the page from the film's own files: a 720p copy under 15 MB (made by `site-tools/review_copy.py`), a button for each chapter, and the captions in each language. Publish it as a private artifact, one page per film (a new version goes to the same link), and share the link in the conversation. Don't attach video files: the chat may only offer them as a download, and a full render can't be downloaded from it. The author watches it and either asks for corrections or approves the pull request. Never call a film done before that.
 4. Turn every review finding into a check, in the series' shared tools so every film of the series runs it, and in CI where it can run. Write the lesson into `PLAYBOOK.md`, and the fault into *Known faults* above, so the next film starts from it.
 
+## Working here
+
+- **Check a change with `python .github/scripts/affected.py --run`** (CI runs the same choice): only the pages a change touched and the films whose source changed — never the whole site or every film, unless the checks themselves changed. A change to only a film's published files, such as a soundtrack or a poster, draws no frame: the site checks cover it.
+- **On Windows, run Python tools with `PYTHONUTF8=1`**, so they read the UTF-8 scripts, captions and pages.
+- **`smoke.py` on Windows can't start `npx` from Python**: serve the site yourself (`npx http-server site -p 8777 -c-1 -s`) and run it with `--base http://127.0.0.1:8777/`; `python -m http.server` refuses the checks' parallel requests. See [CONTRIBUTING.md](CONTRIBUTING.md).
+- **A film's Spanish narration** is an alternate `soundtrack.es.mp3` built from its published Spanish captions by the film's `tools/audio_es.py` (es-MX-DaliaNeural, each line fitted to its cue, mixed under the original score and effects; it needs network for the voice and caches lines in `build/es_voice/`).
+
 ## Rules that always apply
 
 - **Look before you start.** Check open pull requests and unmerged branches for the same film or series, so nothing is made twice or overwritten.

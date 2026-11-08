@@ -17,7 +17,11 @@ The checks it picks from:
   films      for each film whose source changed (its "paths" in its release.json, shared code included,
              so a change to the first film's engine checks every film that draws with it): build the player, check
              that the site's copy is the one it builds, check that every moment draws (tools/check.py), and check the
-             sound (tools/quiet.py), in the films that have that check
+             sound (tools/quiet.py), in the films that have that check. A change to only the film's published files
+             under site/assets/<key>/ (a soundtrack, a poster, the places' pictures) checks no frame: the site checks
+             cover it (every link resolves, and the players check the right soundtrack is selected). A change to only
+             the site's copy of the player (site/assets/<key>/film.js) builds the film and compares the two, but draws
+             no frame, since the picture didn't change.
 The dbt project (films/analytics-engineering/project) has its own workflow, credential-project.yml.
 A change to the checks themselves (this script, checks.yml, films.py) runs every check. A change to a film's release.json
 checks that film.
@@ -140,18 +144,29 @@ def changed(base):
 
 
 def plan(files, everything):
-    """What to check."""
+    """What to check. Each picked film carries checks: full (source changed), or player (only the site's
+    copy of its player changed: build and compare, draw no frame). A change to only a film's other published
+    files, such as a soundtrack or a poster, picks no film job: the site checks cover those files."""
     fl = films()
     everything = everything or any(f in EVERYTHING for f in files)
+    assets_only = []
     if everything:
-        pick = fl
+        pick = [dict(f, checks="full") for f in fl]
     else:
-        pick = [f for f in fl if any(touches(p, f["paths"] + [f["site_player"], f["release"]]) for p in files)]
+        pick = []
+        for f in fl:
+            if any(touches(p, f["paths"] + [f["release"]]) for p in files):
+                pick.append(dict(f, checks="full"))
+            elif f["site_player"] in files:
+                pick.append(dict(f, checks="player"))
+            elif any(touches(p, [posixpath.dirname(f["site_player"])]) for p in files):
+                assets_only.append(f)
     keys = None if everything else pages(files)  # None: every page
     browser = keys is None or bool(keys) or any(p in USED for p in files)
     site = browser or any(under(p, ["site", "site-tools"]) for p in files) or any(r.match(p) for p in files for r in SITE_EXTRA)
-    matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player")} for f in pick]
-    return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys), films=matrix, everything=everything)
+    matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player", "checks")} for f in pick]
+    return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys),
+                films=matrix, assets=assets_only, everything=everything)
 
 
 def where(p):
@@ -174,6 +189,9 @@ def summary(p, files, base):
              f"| Site, static (`site-tools/check_site.py`) | {yes(p['site'])} |",
              f"| Site, in a browser (`site-tools/smoke.py`) | {where(p)} |",
              f"| Films (`tools/build.py`, `tools/check.py`, `tools/quiet.py`) | {', '.join(f['key'] for f in p['films']) or 'none'} |"]
+    if p["assets"]:
+        lines.append(f"| Film assets only (a soundtrack, a poster; covered by the site checks) | "
+                     f"{', '.join(f['key'] for f in p['assets'])} |")
     return "\n".join(lines)
 
 

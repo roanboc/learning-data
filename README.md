@@ -26,112 +26,25 @@ And on the [Making of page](https://data.learn-all.org/journey/), two short film
 
 ## What's here
 
-```
-site/                            the website, published to GitHub Pages as it is
-  index.html                     Start here: The Inner Life of Data, with chapters, then "Go deeper" into the topics
-  labs/                          its eight hands-on labs, one per chapter, on the platform map
-  scenarios/                     its twelve scenarios, ending with the topics to go deeper
-  topics/                        Topics: the nine big topics, each with a card per film or series; made by site-tools/build_series.py
-  sketch/                        Data modelling: A Sharper Sketch, with labs/ (six labs) and scenarios/ (twelve scenarios)
-  when-things-go-wrong/          the series When things go wrong: a page for the series, and a folder per film
-  from-words-to-data/            the series From words to data: a page for the series, and a folder per film with labs/ and scenarios/;
-                                 made by site-tools/build_series.py (never edit these pages by hand)
-    silent-change/               Changes and data contracts: Silent change, with "Pause and think" questions
-    too-good-to-be-true/         Data quality checks: Too good to be true, with "Pause and think", labs/ (three labs) and scenarios/ (ten)
-  in-the-weeds/                  the series In the weeds of data crafting, made the same way: a page for the series, and a folder per film
-  enterprise-architecture/       the series The map before the data, made the same way: a page for the series, and a folder per film
-                                 (a Watch page with Pause and think; no labs or scenarios yet)
-  master-and-reference-data/     the series The same one, everywhere, made the same way (a Watch page with Pause and think; no labs or scenarios yet)
-  data-governance/               the series Governance principles, made the same way (a Watch page with Pause and think; no labs or scenarios yet). Governance on the map
-                                 and Governance you can use, the two series that follow it, get their pages at governance-on-the-map/ and governance-in-practice/ with their opening films
-  journey/                       Making of: two films (Data for Films, That's not quite right), then how the films were made; index.md (source) and index.html (generated)
-  films/                         redirects: films/ goes to topics/, and the old player address films/inner-life-of-data/ to the home page
-  404.html                       "Page not found", in English and Spanish
-  es/                            the Spanish site, at the same paths. es/sketch/ and the pages of When things go wrong
-                                 are Spanish pages around English films, with Spanish captions; Too good to be true's labs and scenarios are in Spanish too; A Sharper Sketch's labs and scenarios are in English only
-  assets/                        styles (site.css), ambient.js (the moving light behind each page's hero), doc-nav.js (the Making of page's "On this page"), the icon, and a poster per film: poster.jpg, poster.es.jpg,
-                                 sketch-poster.jpg, silent-change-poster.jpg and too-good-to-be-true-poster.jpg
-    film/                        The Inner Life of Data's player and soundtrack, per language (built in films/inner-life-of-data/source/)
-    film3/                       A Sharper Sketch's player and soundtrack (built in films/a-sharper-sketch/source/), and its Spanish captions (captions.es.js)
-    silent-change/               Silent change's player and soundtrack (built in its source/), its Spanish captions (captions.es.js), and its questions in think.en.js and think.es.js
-    making-of/                   the Making of films' players, soundtracks, posters and Spanish captions (*.captions.es.js; built in films/making-of/*/source/)
-    from-words-to-data/          the series' labs and scenarios engine (learn.js, learn.css), shared by its seven films and by In the weeds of data crafting
-    whats-in-a-word/ …           each film of From words to data: its player and soundtrack, its Spanish captions (captions.es.js), its Pause and think
-                                 questions (think.en.js, think.es.js) and the words of its labs and scenarios (learn.en.js, learn.es.js);
-                                 the same for each film of In the weeds of data crafting, of The map before the data (whose labs and scenarios
-                                 are the series' own), of The same one, everywhere and of Governance principles (without labs
-                                 and scenarios)
-    enterprise-architecture/     The map before the data's labs and scenarios, one set for the whole series: learn.js and learn.css, drawn with
-                                 the series' own components, and their words in learn.en.js and learn.es.js
-    too-good-to-be-true/         Too good to be true's player and soundtrack, its Spanish captions (captions.es.js), its questions (think.en.js, think.es.js), and its labs and
-                                 scenarios: learn.js, drawn with the film's own components, with their words in learn.en.js and learn.es.js
-    learn/                       for every film page: path.js (the stepper and progress), think.js ("Pause and think")
-                                 and next.js ("Where next?" when a film ends); for The Inner Life of Data: learn.js (map and stops),
-                                 labs.js and labs2.js (the eight labs), quiz.js (the scenarios), and their words in learn.en.js and learn.es.js
-    sketch/                      A Sharper Sketch's stepper, labs and scenarios (sketch.js, sketch.css)
-films/                           one folder per film: script or story, captions/, and source/ (the code that generates the film,
-                                 and how to rebuild and publish it)
-  inner-life-of-data/            The Inner Life of Data, plus breathing-cut.md (how its pauses work) and pacing-review.md (how they were tuned)
-  a-sharper-sketch/              A Sharper Sketch, on data modelling
-  from-words-to-data/            the series From words to data: its README, series.json (the words of its series page), proposal.md,
-                                 shared/ (the series' components, words.js, and its tools, including the instrument library music.py),
-                                 and one folder per film, each with script.md, site.json (the words of its pages), captions/ and source/
-  when-things-go-wrong/          the series When things go wrong: its README, the characters it shares, and one folder per film
-    1-silent-change/             Silent change: treatment, story outline, captions and source
-    2-too-good-to-be-true/       Too good to be true: treatment, script (with the rigour sheet), style frames, captions and source
-  making-of/                     the two Making of films: 1-data-for-films and 2-the-process, each with treatment, script, captions and source
-  analytics-engineering/         the series In the weeds of data crafting, for analytics engineers: its README, series.json,
-                                 proposal.md, characters/ (Jun), shared/ (its components and tools), project/ (the example dbt project the films
-                                 draw from, on dbt Core and DuckDB, checked by .github/workflows/credential-project.yml) and one folder per film
-  enterprise-architecture/       the series The map before the data, on enterprise architecture for data: its README, series.json, proposal.md,
-                                 shared/ (its components, people and tools) and one folder per film, each with script.md, site.json, captions/ and source/
-  master-and-reference-data/     the series The same one, everywhere, on master and reference data: its README, series.json, proposal.md, look/ (the
-                                 reference frames of its watercolour), shared/ (its watercolour, people and tools) and one folder per film, made the same way
-  data-governance/               the series Governance principles, the first of three on data governance, the companion of the one above: its README, series.json,
-                                 proposal.md (the plan for all three), shared/ (its rooms in watercolour, people and tools, which the other two bundle too)
-                                 and one folder per film, made the same way
-  governance-on-the-map/         the series Governance on the map, the second on data governance: its README, series.json, proposal.md and decided.md, and a folder per film as they're made
-  governance-in-practice/        the series Governance you can use, the third on data governance, made the same way
-  what-an-agent-is/              the series What an agent is, the first of the module on AI agents in data work: its README, series.json, proposal.md,
-                                 decided.md, shared/ (the module's marble and oak lab, people, agent, cards and tools, which its later series bundle too)
-                                 and a folder per film; on the site under the topic AI agents in data work
-  agents-at-work-on-data/        the series Agents at work on data, the second of the module: its README, series.json, proposal.md and decided.md,
-                                 and a folder per film as they're made, drawn and checked with what-an-agent-is/shared/; on the site under the topic
-                                 AI agents in data work, from its opening film
-  from-helper-to-colleague/      the series From helper to colleague, the third of the module: its README, series.json, proposal.md and decided.md,
-                                 and a folder per film as they're made, drawn and checked with what-an-agent-is/shared/; on the site under the topic
-                                 AI agents in data work, from its opening film
-  data-that-moves/               the series Data that moves, the first of the module Modern data basics: its README, series.json, proposal.md (the
-                                 plan for the whole module) and decided.md, and a folder per film as they're made; on the site under the topic
-                                 Modern data basics, right after Data modelling, from its opening film
-  data-as-software/              the series Data as software, the second of the module, made the same way
-  from-tables-to-decisions/      the series From tables to decisions, the third of the module, made the same way
-  documents-as-data/             the series Documents as data, the module's last, a series of one film, made the same way
-  locks-before-the-data/         the series Locks before the data, the first of the module Data protection and privacy: its README, series.json,
-                                 proposal.md (the plan for the whole module) and decided.md, and a folder per film as they're made; on the site
-                                 under the topic Data protection and privacy, between Data governance and AI agents in data work, from its opening film
-  only-what-you-may-see/         the series Only what you may see, the second of the module, made the same way
-  kept-for-a-reason/             the series Kept for a reason, the module's last, made the same way
-  a-plan-in-ninety-days/         the series A plan in ninety days, the first of the module Data management: its README, series.json,
-                                 proposal.md (the plan for the whole module) and decided.md, and a folder per film as they're made,
-                                 drawn with the-new-skills/shared/; on the site under the topic Data management, the last, from its
-                                 opening film
-  making-the-case/               the series Making the case, the second of the module, made the same way
-  small-steps-measured/          the series Small steps, measured, the module's last, made the same way
-site-tools/                      build_pages.py turns the Markdown pages into site pages; build_series.py makes the pages of the series (From words to data, In the weeds of data crafting,
-                                 The map before the data, The same one, everywhere, the three on data governance, the three on AI agents, the four of Modern data basics, the three of Data protection and privacy, and the three of Data management), the Topics page, and the topics' tiles on the home page and at the end of the intro's scenarios;
-                                 check_site.py and smoke.py check the site (smoke/ plays a series' own labs through); review_page.py makes a page to review a rendered film on
-                                 (its chapters, captions and a 720p copy, which review_copy.py makes)
-.github/workflows/pages.yml      publishes site/ on every push to main
-.github/workflows/release.yml    renders the films (all, the changed ones, or a list) and publishes every video to a release, when you run it
-.github/scripts/plan.py          chooses which films the release renders
-PLAYBOOK.md                      what made the films work, and how to reuse it for the next film or course
-LICENSE                          MIT licence for the code
-LICENSE-CONTENT.md               CC BY 4.0 for the films, scripts and text, with exclusions
-NOTICE.md                        credits and trademarks
+```mermaid
+flowchart TB
+    site["site/<br/>the website, published to GitHub Pages as it is"]
+    films["films/<br/>one folder per series and film:<br/>script, captions, and the source that builds it"]
+    tools["site-tools/<br/>the page generators and the site checks"]
+    workflows[".github/<br/>the Checks, Pages and release workflows"]
+    site --> es["es/ mirrors every page in Spanish"]
+    site --> assets["assets/ holds one folder per film:<br/>its player, soundtrack, Spanish soundtrack and captions,<br/>its poster beside it as key-poster.jpg"]
+    films --> series["a series: README, series.json, proposal.md,<br/>shared/ components and tools, one numbered folder per film"]
+    films --> film["a film: script.md, site.json, captions/, source/"]
+    tools --> generators["build_series.py, build_pages.py"]
+    tools --> checks["check_site.py, smoke.py, review_page.py"]
 ```
 
-Internal names never appear as text on the site. The numbers in the series' folder names only keep the folders in order; the release workflow and the site's links to GitHub use them, so don't rename them. The same goes for `assets/film3/`.
+- The pages of the series, the Topics page, the *Decided* tables and the legibility report are generated (see *Each film keeps its own rows* below): never edit them by hand.
+- Internal names never appear as text on the site. The numbers in the series' folder names only keep the folders in order; the release workflow and the site's links to GitHub use them, so don't rename the folders.
+- `site/films/` holds only redirects (`films/` goes to `topics/`), and `site/assets/film3/` is A Sharper Sketch's player folder: historical names the release workflow and the site's links use, so don't rename them.
+- The example dbt project the analytics-engineering films draw from lives at `films/analytics-engineering/project/` and is checked by its own workflow, `credential-project.yml`.
+- For more detail, read the README closest to what you touch — a series' `films/<series>/README.md` or a film's `films/<series>/<n>-<film>/source/README.md` (the build guide is [The Inner Life of Data's](films/inner-life-of-data/source/README.md)) — and [CONTRIBUTING.md](CONTRIBUTING.md) for how to work here.
 
 ## How the site is organised
 
@@ -171,26 +84,9 @@ A film's page sets its prefix with `data-store` on `section#watch`, and `path.js
 
 *A Sharper Sketch* follows the same shape with six labs and twelve scenarios, all in `assets/sketch/sketch.js`; see [its README](films/a-sharper-sketch/README.md). *Too good to be true* has three labs and ten scenarios in `assets/too-good-to-be-true/learn.js`, with their words in `learn.en.js` and `learn.es.js`, so both languages share one engine; its Pause and think questions link to its own labs. Old links to the one-page version of the home page (`#explore`, `#practise`) redirect to the labs and scenarios pages.
 
-## Making the next one
+## Contributing
 
-[PLAYBOOK.md](PLAYBOOK.md) collects what made the films work, from the two-audience promise to pacing, rigour and the labs, with checklists for the script, the render and the release.
-
-## Writing pages
-
-Write pages in Markdown and turn them into site pages with `python site-tools/build_pages.py` (it needs `pip install markdown`). It builds `site/journey/index.md` and `site/es/journey/index.md` with the templates `site-tools/page.html` and `page.es.html`, which hold the hero and the footer (the header comes from `header()` in `build_series.py`): the first heading and the italic line under it become the hero, and every section (each `##` heading, and the films at the top of the Making of page) goes into "On this page": a sidebar beside the text on wide screens, and a bar under the header on phones that names the section being read and opens the list (`assets/doc-nav.js`). Never edit the generated `index.html` by hand. Keep each Spanish page at the same path under `site/es/`, so the language toggle finds it.
-
-## Adding a film
-
-A new film of a series that `site-tools/build_series.py` makes (*From words to data*, *In the weeds of data crafting*, *The map before the data*, *The same one, everywhere*, and the three on data governance) needs no hand-made page and no line in a shared list: add its numbered folder (such as `3-which-value-wins/`, found by its `source/film.json`), give it a `site.json` (with its `past` row, if the series has one), publish its player (`python tools/publish.py` in its source), and run `python site-tools/build_series.py`. A film with `learn.en.js` and `learn.es.js` in its assets gets labs and scenarios pages; one without gets a Watch page with its Pause and think questions. A film's page can also link to another site that shows its idea, such as a lab on another learn-all.org site: give its `site.json` an `elsewhere` (see `elsewhere_section()` in `build_series.py`); the film itself names no site. In a series with its own labs and scenarios (`learn` in `SERIES`), a new film's lab and scenarios go in the series' words, with the film's number, and its lab names a chapter once the film is on the site. A new series of the same kind goes in `SERIES`, and in a topic's `items` in `TOPICS`. The checks read the series and the topics from the same data.
-
-The site is plain HTML, published as it is. For a new film:
-
-1. **Pages.** A folder `site/<topic>/` for the film, plus `labs/` and `scenarios/` if it has them, mirrored under `site/es/`. A film in a series goes under the series, as `site/when-things-go-wrong/<film>/`. Start from the closest existing page, such as Silent change's, and add it to `HAND_PAGES` in `site-tools/build_series.py` so it gets the site's header. Then its breadcrumb and the footer row. A film page keeps its hero to the title and lead: no meta row, no "Builds on" line; the Watch heading says only that Pause and think is on, which it is by default. Link the two languages with the EN/ES toggle and an `hreflang` pair. For a film in English only, the Spanish page sets the player's labels in `window.L10N` before the film's bundle and renames the chapters in `SCENES` after it (see `site/es/when-things-go-wrong/silent-change/`). Chapter links use the chapter's start rounded up (`#t=145` for a start at 144.7 s), or they land on the previous chapter.
-2. **Assets.** The player and soundtrack in `site/assets/<film>/`, copied from the film's `source/dist/`, and a 1280×720 poster in `site/assets/<film>-poster.jpg`. Load one film bundle per page: two bundles declare the same names and the second fails. Give the film a `release.json` in its own folder, so each release renders it and checks the site's copy (see *Each film keeps its own rows*).
-3. **Progress.** A `data-store` prefix `ld-<film>`, such as `ld-silent-change`, on `section#watch`, and the same prefix in `data-progress` on its topic cards.
-4. **Topic.** Put the film, or its series, in a topic: its id in a topic's `items` in `TOPICS`, and what its card says in `HAND`, both in `site-tools/build_series.py`. The Topics page, the home page's tiles and the end of the intro's scenarios come from there, in both languages. Add its card to its series page too, if it has one.
-5. **Where next.** A `<template id="next-panel">` on its own page, and a link to it in the panel of the page it builds on.
-6. **Check.** Run `python .github/scripts/affected.py --run`, and fix what it finds: it runs `site-tools/check_site.py`, and `site-tools/smoke.py` on the pages your change touched (see *Checking a change*). `check_site.py` only reads the files, in a second: links, header, `hreflang`, breadcrumbs, film numbering and stated lengths. `smoke.py` opens the pages in Chromium, every page when you run it alone (about twenty minutes): it serves `site/` on port 8110 with `npx http-server` and checks the players, chapter links, panels, keyboard focus, progress, phone and tablet layouts, heading levels and text contrast in both themes. It needs `pip install playwright` and Node. Both exit with an error when something fails. A new film page needs its chapter count in `FILMS` in `smoke.py`, and a new page under a topic needs its breadcrumb in `CRUMBS` in `check_site.py`.
+[CONTRIBUTING.md](CONTRIBUTING.md) is the practical guide: what to install, how to make a change, and how to check it — only the checks a change needs, never the whole site or every film. [PLAYBOOK.md](PLAYBOOK.md) collects what made the films work, from the two-audience promise to pacing, rigour and the labs, with checklists for the script, the render and the release, for the next film or course. [AGENTS.md](AGENTS.md) is the process every film change follows.
 
 ## Each film keeps its own rows
 
@@ -206,12 +102,6 @@ Every film has a row in a few lists, and two films that edit the same list at on
 | The series pages, Topics and the home page's series cards | all of the above, through `build_series.py` |
 
 When two branches clash in one of these lists or pages, take either side, merge the rows in the films' own files, and run `python site-tools/build_series.py` again.
-
-## Checking a change
-
-Run only the checks your change needs: `python .github/scripts/affected.py --run`. It compares your branch, uncommitted files included, with `origin/main` and picks the checks from what changed. `site-tools/check_site.py` runs when the site, its tools, a Markdown doc, a series' data or a film's Spanish captions changed. `site-tools/smoke.py`, the slow one, runs only on the pages a change touched: a changed page, and every page that loads a changed file (a script, a stylesheet, an image, a soundtrack). A change to a series' play script in `site-tools/smoke/` checks that series' labs and scenarios pages, a change to `smoke.py` itself checks every page, and one to `check_site.py` or `build_series.py`, which it reads, only checks that it starts. Each film whose source changed, or whose `release.json` changed, is built, compared with the site's copy of its player, and checked frame by frame with its `tools/check.py`. A change to shared code, such as the engine in `films/inner-life-of-data/source/src` or the phone layer, checks every film that draws with it, from the paths each film lists in its `release.json`. Without `--run` it only lists the checks and the pages, and `--all` picks every one. `python site-tools/smoke.py --pages '["", "topics/"]'` checks just the pages you name (`""` is the home page).
-
-The *Checks* workflow (`.github/workflows/checks.yml`) runs the same choice on every pull request and every push to `main`. To run every check, open *Checks* in the Actions tab → *Run workflow*. The dbt project is checked by its own workflow, `credential-project.yml`, only when it changes.
 
 ## Licence
 

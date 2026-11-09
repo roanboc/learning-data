@@ -42,6 +42,7 @@ A film's page can also link to another site that shows its idea, from its site.j
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
 import html, json, math, pathlib, re, sys
+from media import available as media_available
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 WEB = ROOT / "site"
@@ -327,17 +328,20 @@ def learn_text(lg, S, series, key):
 # from the site's root (its Spanish twin is the same path under es/); a film: its posters, length, labs, scenarios and progress
 # prefix; a series: its films, as (key, progress prefix, source folder under films/), to time them and to count them as watched.
 HAND = {
-    "intro": dict(href="", title={"en": "The Inner Life of Data", "es": "La vida interior de los datos"},
+    "intro": dict(href="", source="films/inner-life-of-data", learning=["site/assets/learn/learn.en.js", "site/assets/learn/learn.es.js"],
+                  title={"en": "The Inner Life of Data", "es": "La vida interior de los datos"},
                   poster={"en": "poster.jpg", "es": "poster.es.jpg"}, len={"en": "7", "es": "8½"}, labs=8, quiz=12, prefix="ld",
                   card={"en": "Follow one enrolment from a tap on a phone to a decision, through Databricks and dbt.",
                         "es": "Sigue una inscripción desde un toque en el teléfono hasta una decisión, pasando por Databricks y dbt."},
                   note={"en": "English and Spanish", "es": "En español e inglés"}),
-    "sketch": dict(href="sketch/", title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
+    "sketch": dict(href="sketch/", source="films/a-sharper-sketch", learning=["site/assets/sketch/sketch.js"],
+                   title={"en": "A Sharper Sketch", "es": "A Sharper Sketch"}, title_lang="en",
                    poster={"en": "sketch-poster.jpg", "es": "sketch-poster.jpg"}, len={"en": "5½", "es": "5½"}, labs=6, quiz=12, prefix="ld3",
                    card={"en": "Two trusted numbers disagree. When does a simple model need more precision, and how do you use a reference model without copying it?",
                          "es": "Dos cifras confiables no coinciden. ¿Cuándo necesita más precisión un modelo sencillo, y cómo se usa un modelo de referencia sin copiarlo?"},
                    note={"en": "", "es": "En inglés"}),
-    "when-things-go-wrong": dict(href="when-things-go-wrong/", title={"en": "When things go wrong", "es": "Cuando algo sale mal"},
+    "when-things-go-wrong": dict(href="when-things-go-wrong/", source="films/when-things-go-wrong",
+                   title={"en": "When things go wrong", "es": "Cuando algo sale mal"},
                    card={"en": "Two bad mornings at the university: a change only half of it saw, and a number too good to be true. Each ends with what catches it next time.",
                          "es": "Dos malas mañanas en la universidad: un cambio que solo la mitad vio, y una cifra demasiado buena para ser verdad. Cada una termina con lo que lo detecta la próxima vez."},
                    films=[("silent-change", "ld-silent-change", "when-things-go-wrong/1-silent-change"),
@@ -345,63 +349,8 @@ HAND = {
 }
 # The big topics, in order: their names, who each is for, what it covers, and what it holds (an id of HAND or SERIES). The Topics
 # page shows them all, each with its cards; the home page plays the first and shows the others as tiles.
-TOPICS = [
-    dict(id="data-platforms", items=["intro"],
-         name={"en": "Data platforms", "es": "Plataformas de datos"},
-         who={"en": "Start here: for everyone", "es": "Empieza aquí: para todos"},
-         line={"en": "How data moves through a modern data platform, from a tap on a phone to a decision.",
-               "es": "Cómo se mueven los datos en una plataforma de datos moderna, desde un toque en el teléfono hasta una decisión."}),
-    dict(id="data-modelling", items=["sketch", "from-words-to-data"],
-         name={"en": "Data modelling", "es": "Modelado de datos"},
-         who={"en": "For anyone who designs models, definitions or reports", "es": "Para quien diseña modelos, definiciones o reportes"},
-         line={"en": "What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.",
-               "es": "Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema."}),
-    dict(id="modern-data-basics", items=["data-that-moves", "data-as-software", "from-tables-to-decisions", "documents-as-data"],
-         name={"en": "Modern data basics", "es": "Lo básico de los datos modernos"},
-         who={"en": "For anyone who moves, runs or serves data, and anyone choosing the tools", "es": "Para quien mueve, opera o sirve datos, y para quien elige las herramientas"},
-         line={"en": "What today's tools make easier: moving data, running it as software, serving it to people and agents, and reading documents. The architecture only: the official docs go deeper.",
-               "es": "Lo que las herramientas de hoy facilitan: mover datos, operarlos como software, servirlos a personas y agentes, y leer documentos. Solo la arquitectura: la documentación oficial va más allá."}),
-    dict(id="analytics-engineering", items=["in-the-weeds"],
-         name={"en": "Analytics engineering", "es": "Ingeniería analítica"},
-         who={"en": "For analytics engineers", "es": "Para analytics engineers"},
-         line={"en": "How an agreed data model becomes tested, documented tables, with dbt.",
-               "es": "Cómo un modelo de datos acordado se convierte en tablas probadas y documentadas, con dbt."}),
-    dict(id="data-quality", items=["when-things-go-wrong", "fit-for-use", "quality-as-a-habit"],
-         name={"en": "Data quality", "es": "Calidad de datos"},
-         who={"en": "For anyone who builds pipelines, owns a source system or a data product, or depends on data being right", "es": "Para quien construye pipelines, es responsable de un sistema de origen o de un producto de datos, o depende de que los datos estén bien"},
-         line={"en": "What good enough means for data, what goes wrong, and what catches it: changes, contracts, checks, and errors fixed where they start.",
-               "es": "Qué es lo bastante bueno para los datos, qué sale mal y qué lo detecta: cambios, contratos, controles, y errores arreglados donde empiezan."}),
-    dict(id="enterprise-architecture", items=["enterprise-architecture"],
-         name={"en": "Enterprise architecture", "es": "Arquitectura empresarial"},
-         who={"en": "For architects, and anyone new to an organisation", "es": "Para arquitectos, y para quien llega nuevo a una organización"},
-         line={"en": "How an organisation works, in layers, before you ask what its data should answer.",
-               "es": "Cómo funciona una organización, por capas, antes de preguntar qué deberían responder sus datos."}),
-    dict(id="master-data", items=["master-and-reference-data"],
-         name={"en": "Master and reference data", "es": "Datos maestros y de referencia"},
-         who={"en": "For data stewards and architects, and anyone whose data lives in many systems", "es": "Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas"},
-         line={"en": "The people and things a business is about, kept once and shared across its systems, and the lists that sort them.",
-               "es": "Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican."}),
-    dict(id="data-governance", items=["data-governance", "governance-on-the-map", "governance-in-practice"],
-         name={"en": "Data governance", "es": "Gobernanza de datos"},
-         who={"en": "For governance teams and data owners, and anyone asked to make the rules work", "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"},
-         line={"en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
-               "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."}),
-    dict(id="data-protection", items=["locks-before-the-data", "only-what-you-may-see", "kept-for-a-reason"],
-         name={"en": "Data protection and privacy", "es": "Protección de datos y privacidad"},
-         who={"en": "For platform teams, data owners and anyone who gives or gets access to data", "es": "Para equipos de plataforma, dueños de datos y quien da o recibe acceso a datos"},
-         line={"en": "Who and what may reach the data, what each person may see, and how long personal data is kept: each lock built from a role, a boundary or a rule already decided.",
-               "es": "Quién y qué puede llegar a los datos, qué puede ver cada persona, y cuánto se guardan los datos personales: cada cerradura hecha a partir de un rol, una frontera o una regla ya decididos."}),
-    dict(id="ai-agents", items=["what-an-agent-is", "agents-at-work-on-data", "from-helper-to-colleague"],
-         name={"en": "AI agents in data work", "es": "Agentes de IA en el trabajo con datos"},
-         who={"en": "For everyone who works with data, and will work beside an AI agent", "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"},
-         line={"en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",
-               "es": "La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos."}),
-    dict(id="data-management", items=["a-plan-in-ninety-days", "making-the-case", "small-steps-measured"],
-         name={"en": "Data management", "es": "Gestión de datos"},
-         who={"en": "For data managers, and anyone who leads data work across an organisation", "es": "Para gestores de datos, y para quien lidera el trabajo con datos en toda una organización"},
-         line={"en": "A data manager's whole job: every area in one picture, a plan in stages, a case and its risks, everyone at the table, and small steps, measured.",
-               "es": "Todo el trabajo de una gestora de datos: todas las áreas en una imagen, un plan por etapas, un caso y sus riesgos, todos en la mesa, y pasos pequeños, medidos."}),
-]
+from catalog import load_modules
+TOPICS = load_modules()
 
 
 def topic_of(item_id):
@@ -604,7 +553,7 @@ def offers(lg, f):
 
 def spanish_audio(f):
     """Whether a film has a Spanish soundtrack for its Spanish page."""
-    return (WEB / "assets" / f["key"] / "soundtrack.es.mp3").is_file()
+    return media_available(WEB / "assets" / f["key"] / "soundtrack.es.mp3")
 
 
 def card(lg, f, rel, R, kicker=None):

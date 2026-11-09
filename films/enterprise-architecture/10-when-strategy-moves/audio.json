@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/when-strategy-moves/soundtrack.mp3",
+      "size": 5725666,
+      "sha256": "5ab0621bf54f5d397355bb5ee8c53f9daf02ae391c85cabc3fee904d4ae945ed",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/5ab0621bf54f5d397355bb5ee8c53f9daf02ae391c85cabc3fee904d4ae945ed.mp3"
+    }
+  ]
+}

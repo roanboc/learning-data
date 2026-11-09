@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/change-without-surprises/soundtrack.mp3",
+      "size": 5610100,
+      "sha256": "58c38c09d75fa082dcbfdf27ad1320be60edc5bb59f48b2f8583a9740deaa4ba",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/58c38c09d75fa082dcbfdf27ad1320be60edc5bb59f48b2f8583a9740deaa4ba.mp3"
+    }
+  ]
+}

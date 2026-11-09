@@ -1,0 +1,19 @@
+{
+  "order": 3,
+  "id": "analytics-engineering",
+  "items": [
+    "in-the-weeds"
+  ],
+  "name": {
+    "en": "Analytics engineering",
+    "es": "Ingeniería analítica"
+  },
+  "who": {
+    "en": "For analytics engineers",
+    "es": "Para analytics engineers"
+  },
+  "line": {
+    "en": "How an agreed data model becomes tested, documented tables, with dbt.",
+    "es": "Cómo un modelo de datos acordado se convierte en tablas probadas y documentadas, con dbt."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/promises-and-proofs/soundtrack.mp3",
+      "size": 4724340,
+      "sha256": "e0f62c380071bbc3a3e949d17d9878fc9a85a029c490b8426c1503a064b7192c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e0f62c380071bbc3a3e949d17d9878fc9a85a029c490b8426c1503a064b7192c.mp3"
+    }
+  ]
+}

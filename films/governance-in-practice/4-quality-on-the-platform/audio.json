@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/quality-on-the-platform/soundtrack.mp3",
+      "size": 5515014,
+      "sha256": "7ec5245c7804bae79a0b5c5d3798190bbf5369da361cae2c0db557f3b926322f",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/7ec5245c7804bae79a0b5c5d3798190bbf5369da361cae2c0db557f3b926322f.mp3"
+    }
+  ]
+}

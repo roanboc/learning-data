@@ -1,9 +1,11 @@
-# Publishes the site/ folder to GitHub Pages on every push to main.
+# Publishes the exact main commit that passed Checks, or an explicitly requested deployment.
 # One-time setting: Settings → Pages → Build and deployment → Source: GitHub Actions.
 name: Publish site
 
 on:
-  push:
+  workflow_run:
+    workflows: [Checks]
+    types: [completed]
     branches: [main]
   workflow_dispatch:
 
@@ -18,12 +20,28 @@ concurrency:
 
 jobs:
   deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Restore and verify the published audio
+        run: python site-tools/media.py fetch
+      - name: Validate the assembled site
+        run: |
+          pip install markdown
+          python site-tools/check_site.py
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:

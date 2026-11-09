@@ -41,6 +41,30 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          # Keep commit history for merge-base, but do not download historical media blobs.
+          filter: blob:none
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      # Planner/workflow changes exercise the policy without checking every film.
+      - name: Test the tooling contracts
+        run: python -m unittest discover -s tests -v
+
+      - name: Lint the workflows
+        run: |
+          lint_dir="$RUNNER_TEMP/actionlint"
+          mkdir -p "$lint_dir"
+          curl -fsSL --retry 3 https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz \
+            | tar -xz -C "$lint_dir" actionlint
+          "$lint_dir/actionlint" -shellcheck= -pyflakes=
+
+      - name: Check the module catalog
+        run: python site-tools/catalog.py --check
+
+      - name: Check audio pointers and local copies
+        run: python site-tools/media.py check
 
       - name: Plan
         id: plan
@@ -88,6 +112,7 @@ jobs:
         env:
           PAGES: ${{ needs.plan.outputs.pages }}
         run: |
+          python site-tools/media.py fetch --pages "$PAGES"
           if [ "$PAGES" = all ]; then python site-tools/smoke.py; else python site-tools/smoke.py --pages "$PAGES"; fi
 
   film:
@@ -101,11 +126,6 @@ jobs:
         # checks: full (the source changed) runs every step below; player (only the site's copy of the player changed)
         # builds and compares but draws no frame, since the picture didn't change
         include: ${{ fromJSON(needs.plan.outputs.films) }}
-    defaults:
-      run:
-        working-directory: ${{ matrix.dir }}
-    env:
-      FILM_LANG: ${{ matrix.lang }}
     steps:
       - uses: actions/checkout@v7
 
@@ -115,38 +135,18 @@ jobs:
 
       # only the browser, and the sound check's numpy and scipy: the checks don't voice, mix or render
       - name: Install the tools
+        if: matrix.checks == 'full'
+        env:
+          FILM_DIR: ${{ matrix.dir }}
         run: |
           pip install playwright
           python -m playwright install --with-deps chromium
-          if [ -f tools/quiet.py ]; then pip install numpy scipy; fi
+          if [ -f "$FILM_DIR/tools/quiet.py" ]; then pip install numpy scipy; fi
 
-      - name: Build the player
-        run: python tools/build.py
-
-      - name: Check that the site plays this build
+      # Execute the same task list as affected.py --run on a contributor's machine.
+      - name: Run the film plan
         env:
-          PLAYER: ${{ matrix.player }}
-          SITE_PLAYER: ${{ github.workspace }}/${{ matrix.site_player }}
+          FILM_KEY: ${{ matrix.key }}
+          FILM_CHECKS: ${{ matrix.checks }}
         run: |
-          if ! cmp -s "$PLAYER" "$SITE_PLAYER"; then
-            echo "::error title=The site plays an older film::Build the film and copy $PLAYER to ${{ matrix.site_player }}, as the film's source README says."
-            exit 1
-          fi
-          echo "The site's player is built from this source."
-
-      # every moment draws; in the governance and agent films, also: no text is too small for a phone (legible.py), each place
-      # paints without holding the page, nothing shows twice where shots or chapters change (twice.py), no arm jumps in one frame
-      # (steady.py), nothing jumps where the shot changes in one room (jump.py), and in the agent films nothing painted for a person
-      # reaches past their picture (edges.py). Only when the film's source changed (checks: full): a player's or a soundtrack's
-      # change draws no frame.
-      - name: Check that every moment draws
-        if: matrix.checks == 'full'
-        run: python tools/check.py
-
-      # the governance, agent and master data films (and three architecture films) check their score on its own, with no voice:
-      # how often the music comes in, repeats, levels, bursts of effects, beats and pulses (AGENTS.md, Sound). Only when the
-      # film's source changed (checks: full): the score is part of the source.
-      - name: Check the sound
-        if: matrix.checks == 'full'
-        run: |
-          if [ -f tools/quiet.py ]; then python tools/quiet.py; else echo "This film has no sound check (tools/quiet.py)."; fi
+          python .github/scripts/affected.py --film "$FILM_KEY" --tier "$FILM_CHECKS" --run

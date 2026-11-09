@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/today-and-where-its-going/soundtrack.mp3",
+      "size": 4336683,
+      "sha256": "9198a5bd0e503e8dd0f8df0443f75b543367c8cbb00efb2039cc5408e671e008",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/9198a5bd0e503e8dd0f8df0443f75b543367c8cbb00efb2039cc5408e671e008.mp3"
+    }
+  ]
+}

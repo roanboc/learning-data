@@ -12,6 +12,12 @@ How to work on this repository. [AGENTS.md](AGENTS.md) is the process every film
 
 ## Making a change
 
+For several videos in parallel, run `python site-tools/work.py start off-the-shelf-en` from the existing repository. It fetches main and creates a separate branch and sibling worktree with its own build outputs. It rejects a second claim on that film's source. Reuse an existing task worktree rather than nesting another one. `work.py list` shows the active ownership records; `--base HEAD` starts from committed unpublished tooling, and `--no-fetch` supports offline work.
+
+Find a module, series or film in the generated [portal-to-source catalog](modules/README.md), or run `python site-tools/catalog.py --json` for its paths, routes, release keys and learning sources. Module membership is edited in `modules/<id>/module.json`. After changing metadata or adding a film, run `python site-tools/catalog.py --write`; CI checks that it is current.
+
+Legacy hand-written entries in `HAND` also declare their `source` folder and any `learning` packs there, so the catalog reads the same registry as the portal.
+
 - **Generated files are generated.** Pages made by `site-tools/build_series.py`, the *Decided* tables in the series' `proposal.md` and the legibility report's table are never edited by hand: change the film's own rows (`decided.md`, `site.json`, `release.json`) and run `python site-tools/build_series.py`.
 - **Each film keeps its own rows**, so two films never edit the same list; on a merge clash in a generated page, merge the rows in the films' own files and run `build_series.py` again. See *Each film keeps its own rows* in [README.md](README.md).
 - **Stay in the film's lane.** A series' shared source is bundled by every film in it; put a film's own helper in that film's source. A shared fix is a new version of every film that draws with it (AGENTS.md, *Rules that always apply*).
@@ -37,11 +43,17 @@ Run only the checks your change needs:
 python .github/scripts/affected.py --run
 ```
 
-It compares your branch, uncommitted files included, with `origin/main` and picks the checks from what changed. Without `--run` it lists them; `--all` picks every one.
+For the complete pre-handoff activity, use `python site-tools/work.py check`: it regenerates the shared pages and catalog before running that same affected plan. It stops if regeneration fails. No separate hand-maintained checklist or shared-list editing is required.
+
+It compares your branch, uncommitted files included, with `origin/main` and picks the checks from what changed. Without `--run` it lists them and the paths selecting each film; `--json` produces a machine-readable plan; `--all` picks every one. Renames check both their previous and new owners. Markdown-only changes never draw frames.
+
+Planner and workflow changes run `python -m unittest discover -s tests -v`, rather than every film. CI runs this suite before trusting its plan. To build and compare just one published player, use `python .github/scripts/affected.py --film off-the-shelf-en --tier player --run`; omit `--tier player` to include that film's frame and sound checks. CI invokes this same runner.
 
 - **Site, static** (`site-tools/check_site.py`): runs when the site, its tools, a Markdown doc, a series' data or a film's Spanish captions changed. Links, header, `hreflang`, breadcrumbs, film numbering, stated lengths, poster and place stamps: a few seconds.
 - **Site, in a browser** (`site-tools/smoke.py`): the slow one, so only on the pages a change touched — a changed page, and every page that loads a changed file. A change to `smoke.py` itself checks every page; one to a series' play script in `site-tools/smoke/` its labs and scenarios pages. To name pages yourself: `python site-tools/smoke.py --pages '["", "topics/"]'` (`""` is the home page).
 - **Films**: each film whose source changed, or whose `release.json` changed, is built, compared with the site's copy of its player, drawn frame by frame (`tools/check.py`) and sound-checked (`tools/quiet.py`) where it has one. A change to shared code — an engine, a series' shared folder — checks every film that draws with it, from the paths each film lists in its `release.json`. A change to only the site's copy of a film's player builds the film and compares the two. A change to only a film's other published files, such as a soundtrack, a poster or the places' pictures, runs no film job: the site checks cover those files. So a change to one film never checks another film that nothing it uses changed.
+
+Audio needed for browser checks can be restored with `python site-tools/media.py fetch --pages '["data-governance/off-the-shelf/"]'`; omit `--pages` for the complete site. The automatic runner and CI fetch the chosen pages' audio before opening the browser. See [the audio migration and maintenance guide](docs/maintenance.md) before changing or removing a soundtrack.
 
 The *Checks* workflow (`.github/workflows/checks.yml`) runs the same choice on every pull request and push to `main`; its summary table lists what it picked and why. To run every check by hand: Actions → *Checks* → *Run workflow*. The dbt project has its own workflow, `credential-project.yml`, which runs only when it changes.
 

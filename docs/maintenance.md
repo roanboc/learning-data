@@ -6,6 +6,20 @@ Keep one repository and the existing static portal. Organize module metadata fir
 
 This builds on merged PR #177. It does not replace film craft or review rules in AGENTS.md.
 
+## Parallel video work
+
+Use one worktree per video task; reuse the checkout already provided by the agent's task when it is isolated. `python site-tools/work.py start off-the-shelf-en` fetches main and creates a sibling worktree on `video/off-the-shelf-en`, without switching the current checkout. Optional `--branch` and `--directory` override those names. Source-folder claims include both language variants, so two sessions cannot accidentally own the same film. `work.py list` shows the owners. Git history is shared; build outputs are separate. Before the tooling is merged, commit it and use `--base HEAD`. Offline starts can use `--no-fetch`.
+
+Before handing off, run `python site-tools/work.py check`. It regenerates shared pages and the catalog from film-owned records, then executes the affected checks. This automates the existing process instead of adding a second list of steps for agents. Merge real source changes first and regenerate aggregate lists afterward; don't resolve generated tables by hand.
+
+Voice lines now use the spoken text, voice settings, model bytes, synthesis source and dependency versions as their cache key. Existing unstamped WAVs are regenerated once because their wording cannot be proven. Edited lines invalidate automatically. A verified cache is shared through the repository's Git common directory, with ordinary copies into each worktree so one editor cannot change another editor's recordings. The release workflow restores per-film voice caches under `.cache/voices` and uploads a new cache only when its contents changed; the model loads only when a line needs synthesis. Spanish cue-fitting caches also include wording and cue duration. The committed-timing guard remains mandatory.
+
+### Repository setting after GitHub access is restored
+
+Require the stable **Required checks** status and require branches to be up to date before merging. If this repository supports a merge queue, use that instead: the workflow now handles `merge_group` with its actual base SHA. The aggregate status succeeds only when planning and every selected job succeed; intentionally skipped jobs are accepted. These code changes do not enable repository rules automatically. This prevents a second PR's old green check from being accepted after the first PR changes shared inputs.
+
+Expensive frame checks still run for changed visual/timing inputs. Only production-tool-only edits use the lightweight synthesis contracts. Successful frame results are not cached yet: dependency completeness and runtime/performance variation should be established before skipping those checks. Pip downloads, version-matched Chromium binaries and verified voice lines are cached now, where reuse is safe. Final video-release publication stays serialized because it updates a shared release catalog; audio releases with different content-based tags can publish independently.
+
 ## Find a module, series, film, lab or assessment
 
 Start at [the generated catalog](../modules/README.md). It has each module's portal title, each series' source directory and public route, and each film's source link. Labs and assessments link to their current English and Spanish packs. `python site-tools/catalog.py --json` also lists stable film ids, release keys and the check-tool directory.
@@ -44,19 +58,19 @@ For a small working clone after migration, use `git clone --filter=blob:none --d
 
 ### Add or replace audio
 
-Generate or copy the MP3 to its usual site path, then run `python site-tools/media.py index --tag audio-v2` (choose a new tag for each batch). It updates changed files' pointers; unchanged soundtracks keep their original release URLs. Commit the changed `audio.json` files. MP3s are ignored, so they do not enter Git automatically.
+Generate or copy the MP3 to its usual site path, then run `python site-tools/media.py index --film off-the-shelf-en`. The tag is derived from that film and its changed content, so independent branches do not compete for a shared `audio-v2` counter. Only the selected film's pointers change; unchanged soundtracks keep their original URLs. Commit its `audio.json`. MP3s are ignored, so they do not enter Git automatically. Explicit `--tag` remains available for the initial shared `audio-v1` migration.
 
-For new audio that is no longer tracked, stage and publish from the machine holding it:
+`python site-tools/media.py publish --film off-the-shelf-en` uploads missing checksum-named assets, resumes an interrupted release and verifies only the selected film. It never uses `--clobber`; existing wrong-size assets fail, authentication errors are not treated as missing releases, and a partial film selection cannot create the shared initial release. `verify-remote`, `check`, `fetch` and `untrack` also accept repeatable `--film` and optional `--tag` filters. The default untracking command still verifies every replacement before removing anything from Git.
+
+Publish from the machine holding the new MP3s before merging their pointers. The manual workflow is useful when source MP3s are still present in its checkout (the initial migration); future ignored audio must be uploaded from the author's machine. Keep audio releases for as long as any manifest references them.
+
+If GitHub CLI is not signed in, use the browser profile that already has access. Take the content-based tag printed by `index` (replace `TAG` below), and stage just its assets:
 
 ```
-python site-tools/media.py prepare --tag audio-v2 --output /path/to/audio-staging
-gh release create audio-v2 /path/to/audio-staging/*.mp3 --prerelease --latest=false --title "Published audio: audio-v2"
-python site-tools/media.py verify-remote
+python site-tools/media.py prepare --film off-the-shelf-en --tag TAG --output /path/to/audio-staging
 ```
 
-Publish those assets before merging their pointers. Never replace files of an existing audio release. The manual workflow is useful when the source MP3s are still present in its checkout (the initial migration); future ignored audio must be uploaded from the author's machine as above. Keep audio releases for as long as any manifest references them.
-
-If GitHub CLI is not signed in, use the browser profile that already has access: create the new `audio-v2` release in GitHub, mark it as a **prerelease**, and upload the checksum-named MP3s from the prepared folder. Then run `verify-remote`, which needs no GitHub login for this public repository. The `gh release create` command above is an alternative to that browser upload.
+Create that tag's release in GitHub, mark it as a **prerelease**, and upload the checksum-named MP3s from the prepared folder. Never replace existing assets. Then run `python site-tools/media.py verify-remote --film off-the-shelf-en --tag TAG`, which needs no GitHub login for this public repository.
 
 `media.py check` validates pointers and any local files; it permits absent local files in a lean checkout. `fetch --pages '["es/what-an-agent-is/decades-in-the-making/"]'` restores just the owning bundles, including both language alternatives. Plain `fetch` restores all declared audio. Render/downloadable-video releases keep their existing workflow.
 

@@ -9,12 +9,15 @@ on:
         description: "New immutable audio release tag (first migration: audio-v1)"
         required: true
         default: audio-v1
+      film:
+        description: "Optional film release key; blank publishes the whole tag for the initial migration"
+        required: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: audio-release
+  group: audio-release-${{ inputs.tag }}
   cancel-in-progress: false
 
 jobs:
@@ -27,18 +30,12 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - name: Prepare checksum-named audio
-        env:
-          TAG: ${{ inputs.tag }}
-        run: python site-tools/media.py prepare --tag "$TAG" --output "$RUNNER_TEMP/audio"
-      - name: Publish a new immutable audio release
+      - name: Publish or resume the selected immutable audio assets
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
+          FILM: ${{ inputs.film }}
         run: |
-          gh release create "$TAG" "$RUNNER_TEMP/audio/"*.mp3 \
-            --target "$GITHUB_SHA" --prerelease --latest=false \
-            --title "Published audio: $TAG" \
-            --notes "Checksum-named audio referenced by each film's audio.json. Keep these assets immutable."
-      - name: Verify every uploaded replacement
-        run: python site-tools/media.py verify-remote
+          args=(--tag "$TAG")
+          if [ -n "$FILM" ]; then args+=(--film "$FILM"); fi
+          python site-tools/media.py publish "${args[@]}"

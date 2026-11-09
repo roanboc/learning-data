@@ -35,7 +35,14 @@ import films as release_films  # .github/scripts/films.py: every film's release.
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 # The tooling suite exercises selection against fixtures and the real inventory without drawing frames.
-TOOLING = [".github/scripts", ".github/workflows", "tests", "modules", "site-tools"]
+TOOLING = [".github/scripts", ".github/workflows", ".github/actions", "tests", "modules", "site-tools"]
+
+
+def production_tool(path):
+    # These tools produce audio, not the player. Their cache/synthesis contracts are
+    # tested without rechecking every frame. Changed timings or published audio still
+    # select their normal film/page checks independently.
+    return path == "site-tools/voice_cache.py" or (path.startswith("films/") and path.endswith(("/tools/tts.py", "/tools/audio_es.py")))
 SMOKE = ["site-tools/smoke.py"]  # the browser checks themselves: a change runs them on every page
 PLAYS = "site-tools/smoke"        # a series' play script: its labs and scenarios pages
 USED = ["site-tools/check_site.py", "site-tools/build_series.py"]  # what smoke.py imports: a change starts it, with no page
@@ -48,7 +55,7 @@ SITE_EXTRA = [re.compile(p) for p in [r".*\.md$", r"films/[^/]+/series\.json$", 
 
 def films():
     """The FILMS list (films.py): one entry per video, with the paths it is built from, and the release.json it is in."""
-    return [dict(e, release=f.relative_to(ROOT).as_posix()) for f in release_films.files() for e in json.loads(f.read_text())]
+    return [dict(e, release=f.relative_to(ROOT).as_posix()) for f in release_films.files() for e in release_films.entries(f)]
 
 
 def under(path, prefixes):
@@ -193,7 +200,7 @@ def plan(files, everything, base="HEAD"):
     else:
         pick = []
         for f in fl:
-            source = [p for p in files if not p.endswith((".md", ".rst")) and touches(p, f["paths"] + [f["release"]])]
+            source = [p for p in files if not p.endswith((".md", ".rst")) and not production_tool(p) and touches(p, f["paths"] + [f["release"]])]
             if source:
                 pick.append(dict(f, checks="full"))
                 reasons[f["key"]] = source
@@ -208,7 +215,7 @@ def plan(files, everything, base="HEAD"):
     matrix = [{k: f[k] for k in ("name", "key", "dir", "lang", "player", "site_player", "checks")} for f in pick]
     return dict(site=site, browser=browser, pages=None if keys is None else sorted(keys),
                 films=matrix, assets=assets_only, everything=everything, reasons=reasons,
-                tooling=everything or any(under(p, TOOLING) for p in files),
+                tooling=everything or any(under(p, TOOLING) or production_tool(p) for p in files),
                 media=everything or "site-tools/media.py" in files or any(p.endswith(("/audio.json", ".mp3")) for p in files))
 
 

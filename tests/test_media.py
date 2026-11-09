@@ -7,6 +7,7 @@ import sys
 import tempfile
 import unittest
 import contextlib
+import subprocess
 from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -138,6 +139,99 @@ class MediaTests(unittest.TestCase):
                 updated = json.loads((source / "audio.json").read_text())["files"][0]
                 self.assertIn("/audio-v2/", updated["url"])
                 self.assertNotEqual(updated["sha256"], first["files"][0]["sha256"])
+
+    def test_film_scopes_and_unknown_scopes_are_explicit(self):
+        chosen = media.scoped(media.inventory(), ["off-the-shelf-en"])
+        self.assertTrue(chosen)
+        self.assertTrue(all(p.startswith("site/assets/off-the-shelf/") for p in chosen))
+        with self.assertRaises(ValueError):
+            media.scoped(media.inventory(), ["no-such-film"])
+        with self.assertRaises(ValueError):
+            media.scoped(media.inventory(), tag="audio-no-such-tag")
+
+    def test_auto_tags_are_per_film_and_index_does_not_touch_other_films(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            for name in ("one", "two"):
+                folder = root / "films" / name
+                folder.mkdir(parents=True)
+                (folder / "release.json").write_text(json.dumps([dict(key=name + "-en", site_player=f"site/assets/{name}/film.js")]))
+                audio = root / f"site/assets/{name}/soundtrack.mp3"
+                audio.parent.mkdir(parents=True)
+                audio.write_bytes(name.encode())
+            with patch.object(media, "ROOT", root), contextlib.redirect_stdout(io.StringIO()):
+                tags = media.index(films=["one-en"])
+                self.assertTrue(next(iter(tags)).startswith("audio-one-"))
+                first = (root / "films/one/audio.json").read_bytes()
+                self.assertFalse((root / "films/two/audio.json").exists())
+                other = media.index(films=["two-en"])
+                self.assertFalse(tags & other)
+                self.assertEqual(first, (root / "films/one/audio.json").read_bytes())
+                self.assertEqual(media.index(films=["one-en"]), set())
+
+    def test_interrupted_upload_resumes_only_missing_assets(self):
+        audio = entry()
+        remote = dict(isPrerelease=True, assets=[])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / audio["path"]
+            path.parent.mkdir(parents=True)
+            path.write_bytes(b"example audio")
+            with patch.object(media, "ROOT", root), patch.object(media, "remote_release", return_value=remote), \
+                 patch.object(media.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")) as upload, patch.object(media, "verify_remote") as verify:
+                media.publish({audio["path"]: audio}, {audio["path"]: audio})
+                command = upload.call_args.args[0]
+                self.assertEqual(command[:3], ["gh", "release", "upload"])
+                self.assertNotIn("--clobber", command)
+                verify.assert_called_once_with({audio["path"]: audio})
+
+    def test_existing_verified_assets_are_not_uploaded_again(self):
+        audio = entry()
+        remote = dict(isPrerelease=True, assets=[dict(name=audio["sha256"] + ".mp3", size=audio["size"])])
+        with patch.object(media, "remote_release", return_value=remote), patch.object(media.subprocess, "run") as upload, patch.object(media, "verify_remote") as verify:
+            media.publish({audio["path"]: audio}, {audio["path"]: audio})
+            upload.assert_not_called()
+            verify.assert_called_once()
+
+    def test_new_audio_release_is_a_prerelease_and_never_latest(self):
+        audio = entry()
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / audio["path"]
+            path.parent.mkdir(parents=True)
+            path.write_bytes(b"example audio")
+            with patch.object(media, "ROOT", root), patch.object(media, "remote_release", return_value=None), \
+                 patch.object(media.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")) as create, patch.object(media, "verify_remote") as verify:
+                media.publish({audio["path"]: audio}, {audio["path"]: audio})
+                command = create.call_args.args[0]
+                self.assertEqual(command[:3], ["gh", "release", "create"])
+                self.assertIn("--prerelease", command)
+                self.assertIn("--latest=false", command)
+                self.assertNotIn("--clobber", command)
+                verify.assert_called_once_with({audio["path"]: audio})
+
+    def test_wrong_size_remote_asset_is_never_replaced(self):
+        audio = entry()
+        remote = dict(isPrerelease=True, assets=[dict(name=audio["sha256"] + ".mp3", size=1)])
+        with patch.object(media, "remote_release", return_value=remote), patch.object(media.subprocess, "run") as upload:
+            with self.assertRaisesRegex(ValueError, "never overwritten"):
+                media.publish({audio["path"]: audio}, {audio["path"]: audio})
+            upload.assert_not_called()
+
+    def test_scoped_upload_cannot_create_an_incomplete_shared_initial_release(self):
+        audio = entry()
+        other = dict(entry(b"other"), path="site/assets/other/soundtrack.mp3")
+        with patch.object(media, "remote_release", return_value=None), patch.object(media.subprocess, "run") as upload:
+            with self.assertRaisesRegex(ValueError, "shared initial"):
+                media.publish({audio["path"]: audio}, {audio["path"]: audio, other["path"]: other})
+            upload.assert_not_called()
+
+    def test_failed_authentication_is_not_treated_as_a_missing_release(self):
+        result = subprocess.CompletedProcess([], 1, "", "HTTP 401: bad credentials")
+        with patch.object(media.subprocess, "run", return_value=result) as command:
+            with self.assertRaisesRegex(ValueError, "lookup failed"):
+                media.remote_release("audio-test")
+            self.assertEqual(command.call_count, 1)
 
 
 if __name__ == "__main__":

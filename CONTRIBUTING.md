@@ -12,6 +12,8 @@ How to work on this repository. [AGENTS.md](AGENTS.md) is the process every film
 
 ## Making a change
 
+For several videos in parallel, run `python site-tools/work.py start off-the-shelf-en` from the existing repository. It fetches main and creates a separate branch and sibling worktree with its own build outputs. It rejects a second claim on that film's source. Reuse an existing task worktree rather than nesting another one. `work.py list` shows the active ownership records; `--base HEAD` starts from committed unpublished tooling, and `--no-fetch` supports offline work.
+
 Find a module, series or film in the generated [portal-to-source catalog](modules/README.md), or run `python site-tools/catalog.py --json` for its paths, routes, release keys and learning sources. Module membership is edited in `modules/<id>/module.json`. After changing metadata or adding a film, run `python site-tools/catalog.py --write`; CI checks that it is current.
 
 Legacy hand-written entries in `HAND` also declare their `source` folder and any `learning` packs there, so the catalog reads the same registry as the portal.
@@ -40,6 +42,8 @@ Run only the checks your change needs:
 ```
 python .github/scripts/affected.py --run
 ```
+
+For the complete pre-handoff activity, use `python site-tools/work.py check`: it regenerates the shared pages and catalog before running that same affected plan. It stops if regeneration fails. No separate hand-maintained checklist or shared-list editing is required.
 
 It compares your branch, uncommitted files included, with `origin/main` and picks the checks from what changed. Without `--run` it lists them and the paths selecting each film; `--json` produces a machine-readable plan; `--all` picks every one. Renames check both their previous and new owners. Markdown-only changes never draw frames.
 

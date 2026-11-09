@@ -2,7 +2,7 @@
 Run from this film's source folder after tools/build.py. Spanish captions keep their original cue times; each line is
 voiced at its natural rate, or faster only when needed to fit. The original score plays underneath. The output is
 dist/soundtrack.es.mp3 and site/assets/decades-in-the-making/soundtrack.es.mp3; English files are not changed.
-Voice files are cached in build/es_voice. Delete a line's cached files there after changing its Spanish wording."""
+Voice files in build/es_voice are keyed by wording, cue duration and synthesis code; edits invalidate them automatically."""
 import asyncio
 import json
 import math
@@ -23,6 +23,8 @@ import run
 from lang import *
 import music
 from playwright.sync_api import sync_playwright
+sys.path.insert(0, str(next(p for p in pathlib.Path(__file__).resolve().parents if (p / "site-tools/voice_cache.py").is_file()) / "site-tools"))
+from voice_cache import input_key, sha256
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 CACHE = BUILD / "es_voice"
@@ -82,24 +84,26 @@ async def make_voice(items):
         key = cap["sid"] + "/" + cap["id"]
         name = cap["sid"] + "__" + cap["id"]
         text = SAY_ES.get(key, cap["text"])
-        stem = CACHE / name
-        base_mp3 = stem.with_suffix(".base.mp3")
-        base_wav = stem.with_suffix(".base.wav")
-        base_trim = stem.with_suffix(".trim.wav")
+        target = cap["end"] - cap["start"] - 0.06
+        identity = input_key(dict(text=text, slot=target, voice="es-MX-DaliaNeural",
+                                  tool=sha256(__file__), edge_tts=getattr(edge_tts, "__version__", "unknown")))
+        stem = CACHE / (name + "-" + identity)
+        base_mp3 = pathlib.Path(str(stem) + ".base.mp3")
+        base_wav = pathlib.Path(str(stem) + ".base.wav")
+        base_trim = pathlib.Path(str(stem) + ".trim.wav")
         if not base_trim.exists():
             await save_tts(text, base_mp3)
             decode(base_mp3, base_wav)
             trim(base_wav, base_trim)
         base_duration = sf.info(str(base_trim)).frames / sf.info(str(base_trim)).samplerate
-        target = cap["end"] - cap["start"] - 0.06
         rate = "+0%"
         source = base_trim
         if base_duration > target:
             pct = min(100, max(1, math.ceil((base_duration / target - 1) * 100 + 3)))
             rate = f"+{pct}%"
-            fit_mp3 = stem.with_suffix(".fit.mp3")
-            fit_wav = stem.with_suffix(".fit.wav")
-            fit_trim = stem.with_suffix(".fit.trim.wav")
+            fit_mp3 = pathlib.Path(str(stem) + ".fit.mp3")
+            fit_wav = pathlib.Path(str(stem) + ".fit.wav")
+            fit_trim = pathlib.Path(str(stem) + ".fit.trim.wav")
             if not fit_trim.exists():
                 await save_tts(text, fit_mp3, rate=rate)
                 decode(fit_mp3, fit_wav)

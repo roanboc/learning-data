@@ -11,6 +11,8 @@ name: Checks
 
 on:
   pull_request:
+  merge_group:
+    types: [checks_requested]
   push:
     branches: [main]
   workflow_dispatch:
@@ -72,10 +74,12 @@ jobs:
           EVENT: ${{ github.event_name }}
           SCOPE: ${{ inputs.scope }}
           PR_BASE: ${{ github.event.pull_request.base.sha }}
+          GROUP_BASE: ${{ github.event.merge_group.base_sha }}
           BEFORE: ${{ github.event.before }}
         run: |
           case "$EVENT" in
             pull_request) args="--base $PR_BASE" ;;
+            merge_group) args="--base $GROUP_BASE" ;;
             push)
               # a new branch, or a push git can't compare with, checks everything
               if git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then args="--base $BEFORE"; else args="--all"; fi ;;
@@ -94,14 +98,14 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: .github/workflows/checks.yml
 
       - name: Install the tools
-        run: |
-          pip install markdown
-          if [ "${{ needs.plan.outputs.browser }}" = true ]; then
-            pip install playwright
-            python -m playwright install --with-deps chromium
-          fi
+        uses: ./.github/actions/check-tools
+        with:
+          site: 'true'
+          browser: ${{ needs.plan.outputs.browser }}
 
       - name: Static checks
         run: python site-tools/check_site.py
@@ -132,16 +136,16 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: .github/workflows/checks.yml
 
       # only the browser, and the sound check's numpy and scipy: the checks don't voice, mix or render
       - name: Install the tools
         if: matrix.checks == 'full'
-        env:
-          FILM_DIR: ${{ matrix.dir }}
-        run: |
-          pip install playwright
-          python -m playwright install --with-deps chromium
-          if [ -f "$FILM_DIR/tools/quiet.py" ]; then pip install numpy scipy; fi
+        uses: ./.github/actions/check-tools
+        with:
+          browser: 'true'
+          sound: ${{ hashFiles(format('{0}/tools/quiet.py', matrix.dir)) != '' }}
 
       # Execute the same task list as affected.py --run on a contributor's machine.
       - name: Run the film plan
@@ -150,3 +154,17 @@ jobs:
           FILM_CHECKS: ${{ matrix.checks }}
         run: |
           python .github/scripts/affected.py --film "$FILM_KEY" --tier "$FILM_CHECKS" --run
+
+  required:
+    name: Required checks
+    needs: [plan, site, film]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every selected job to pass
+        env:
+          PLAN: ${{ needs.plan.result }}
+          SITE: ${{ needs.site.result }}
+          FILM: ${{ needs.film.result }}
+        run: |
+          [ "$PLAN" = success ] && [[ "$SITE" = success || "$SITE" = skipped ]] && [[ "$FILM" = success || "$FILM" = skipped ]]

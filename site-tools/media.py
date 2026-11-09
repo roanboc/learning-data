@@ -1,6 +1,8 @@
 """Keep published audio in GitHub Releases, with per-film checksum manifests.
 
-index --tag audio-v1       record current MP3s in each film's audio.json
+index --film KEY          record a film's MP3s using a content-based release tag
+index --tag audio-v1      record all MP3s for the initial shared migration
+publish --film KEY        upload/resume and verify only that film's audio
 prepare --tag TAG --output DIR   stage the immutable release assets
 fetch [--pages JSON|all]   restore only missing audio (all by default)
 check                     validate manifests and any local copies
@@ -22,6 +24,7 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 BASE = "https://github.com/roanboc/learning-data/releases/download/"
+REPOSITORY = "roanboc/learning-data"
 
 
 def digest(path):
@@ -143,13 +146,40 @@ def selected(page_scope, entries):
             pathlib.PurePosixPath(p.removeprefix("site/")).parent.as_posix() in owners}
 
 
-def index(tag):
-    if not re.fullmatch(r"audio-[A-Za-z0-9._-]+", tag):
+def release_files(films=None):
+    paths = sorted((ROOT / "films").rglob("release.json"))
+    if not films:
+        return paths
+    owners = {e["key"]: p for p in paths for e in json.loads(p.read_text(encoding="utf-8"))}
+    unknown = set(films) - set(owners)
+    if unknown:
+        raise ValueError(f"unknown film keys: {sorted(unknown)}")
+    return sorted({owners[key] for key in films})
+
+
+def scoped(entries, films=None, tag=None):
+    if films:
+        owners = set()
+        for release in release_files(films):
+            path = release.with_name("audio.json")
+            if path.is_file():
+                owners.update(e["path"] for e in json.loads(path.read_text(encoding="utf-8"))["files"])
+        entries = {p: e for p, e in entries.items() if p in owners}
+    if tag:
+        entries = {p: e for p, e in entries.items() if e["url"].removeprefix(BASE).split("/")[0] == tag}
+    if not entries:
+        raise ValueError("the requested film/tag has no audio pointers")
+    return entries
+
+
+def index(tag=None, films=None):
+    if tag is not None and not re.fullmatch(r"audio-[A-Za-z0-9._-]+", tag):
         raise ValueError("audio tags must start audio- and contain only letters, digits, dots, hyphens and underscores")
-    seen = set()
-    for release in sorted((ROOT / "films").rglob("release.json")):
+    seen, new_tags = set(), set()
+    for release in release_files(films):
         paths = set()
-        for film in json.loads(release.read_text(encoding="utf-8")):
+        declared = json.loads(release.read_text(encoding="utf-8"))
+        for film in declared:
             player = ROOT / film["site_player"]
             if player.name in ("film.js", "film.es.js"):
                 paths.update(player.parent.glob("soundtrack*.mp3"))
@@ -160,23 +190,104 @@ def index(tag):
         previous = json.loads(release.with_name("audio.json").read_text(encoding="utf-8"))["files"] if release.with_name("audio.json").exists() else []
         # Files not fetched in a lean checkout retain their existing release pointer.
         by_path = {e["path"]: e for e in previous}
+        changed = {}
         for p in paths:
             sha = digest(p)
             name = p.relative_to(ROOT).as_posix()
             old = by_path.get(name)
-            by_path[name] = old if old and old["sha256"] == sha else dict(path=name, size=p.stat().st_size, sha256=sha, url=BASE + tag + "/" + sha + ".mp3")
+            if not old or old["sha256"] != sha:
+                changed[name] = dict(path=name, size=p.stat().st_size, sha256=sha)
+        if changed:
+            batch = hashlib.sha256(json.dumps(changed, sort_keys=True).encode()).hexdigest()[:20]
+            key = re.sub(r"[^a-z0-9-]", "-", declared[0].get("key", release.parent.name).removesuffix("-en").removesuffix("-es").lower())
+            chosen_tag = tag or f"audio-{key}-{batch}"
+            new_tags.add(chosen_tag)
+            by_path.update({p: dict(e, url=BASE + chosen_tag + "/" + e["sha256"] + ".mp3") for p, e in changed.items()})
         for name, entry in sorted(by_path.items()):
             if name in seen:
                 raise ValueError(f"audio belongs to two films: {name}")
             seen.add(name)
-            entries.append(validate(entry))
+            entries.append(validate(entry, ROOT))
         if entries:
-            release.with_name("audio.json").write_text(json.dumps(dict(version=1, files=entries), indent=2) + "\n", encoding="utf-8")
-    unowned = {p.relative_to(ROOT).as_posix() for p in (ROOT / "site/assets").rglob("*.mp3")} - seen
+            text = json.dumps(dict(version=1, files=entries), indent=2) + "\n"
+            output = release.with_name("audio.json")
+            if not output.exists() or output.read_text(encoding="utf-8") != text:
+                output.write_text(text, encoding="utf-8")
+    candidates = set() if films else {p.relative_to(ROOT).as_posix() for p in (ROOT / "site/assets").rglob("*.mp3")}
+    unowned = candidates - seen
     if unowned:
         raise ValueError(f"audio without a release owner: {sorted(unowned)}")
     inventory.cache_clear()
     print(f"Indexed {len(seen)} audio files; unchanged files keep their original release URLs.")
+    if new_tags:
+        print("New audio releases: " + ", ".join(sorted(new_tags)))
+    return new_tags
+
+
+def remote_release(tag):
+    result = subprocess.run(["gh", "release", "view", tag, "--repo", REPOSITORY, "--json", "assets,isPrerelease"], capture_output=True, text=True)
+    if result.returncode == 0:
+        data = json.loads(result.stdout)
+        if not data["isPrerelease"]:
+            raise ValueError(f"{tag} must be an audio prerelease")
+        return data
+    if "release not found" in result.stderr.lower() or "HTTP 404" in result.stderr:
+        return None
+    raise ValueError("GitHub release lookup failed: " + result.stderr.strip())
+
+
+def publish(entries, all_entries):
+    """Resume incomplete uploads without overwriting existing immutable assets."""
+    groups = {}
+    for path, entry in entries.items():
+        tag = entry["url"].removeprefix(BASE).split("/")[0]
+        groups.setdefault(tag, {})[path] = entry
+    for tag, group in sorted(groups.items()):
+        remote = remote_release(tag)
+        if remote is None:
+            shared = {p for p, e in all_entries.items() if e["url"].removeprefix(BASE).split("/")[0] == tag} - set(group)
+            if shared:
+                raise ValueError(f"{tag} is a shared initial release; publish the whole tag before film-scoped updates")
+        assets = {a["name"]: a["size"] for a in remote["assets"]} if remote else {}
+        missing = {}
+        for entry in group.values():
+            name = entry["sha256"] + ".mp3"
+            if name in assets and assets[name] != entry["size"]:
+                raise ValueError(f"{tag}/{name} has an unexpected size; existing assets are never overwritten")
+            if name not in assets:
+                missing[name] = entry
+        with tempfile.TemporaryDirectory(prefix="learning-data-upload-") as tmp:
+            paths = []
+            for name, entry in missing.items():
+                source = ROOT / entry["path"]
+                if not matches(source, entry):
+                    raise ValueError(f"missing or modified audio: {source}; run index before publishing")
+                target = pathlib.Path(tmp) / name
+                shutil.copyfile(source, target)
+                paths.append(str(target))
+            if remote is None:
+                result = subprocess.run(["gh", "release", "create", tag, *paths, "--repo", REPOSITORY,
+                                         "--prerelease", "--latest=false", "--title", "Published audio: " + tag,
+                                         "--notes", "Immutable checksum-named audio referenced by per-film audio.json."], capture_output=True, text=True)
+                if result.returncode:
+                    # Another branch or an interrupted first attempt may have created it.
+                    remote = remote_release(tag)
+                    if remote is None:
+                        raise ValueError("Audio release creation failed: " + result.stderr.strip())
+            if remote is not None:
+                present = {a["name"] for a in remote["assets"]}
+                for path in paths:
+                    if pathlib.Path(path).name not in present:
+                        result = subprocess.run(["gh", "release", "upload", tag, path, "--repo", REPOSITORY], capture_output=True, text=True)
+                        if result.returncode:
+                            # Another publisher may have uploaded the same checksum while
+                            # this process was staging it. Verification below remains final.
+                            latest = remote_release(tag)
+                            uploaded = {a["name"]: a["size"] for a in latest["assets"]} if latest else {}
+                            name = pathlib.Path(path).name
+                            if uploaded.get(name) != missing[name]["size"]:
+                                raise ValueError("Audio upload failed: " + result.stderr.strip())
+        verify_remote(group)
 
 
 def verify_remote(entries):
@@ -188,18 +299,18 @@ def verify_remote(entries):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("command", choices=("index", "prepare", "fetch", "check", "verify-remote", "untrack"))
+    parser.add_argument("command", choices=("index", "prepare", "publish", "fetch", "check", "verify-remote", "untrack"))
     parser.add_argument("--tag")
+    parser.add_argument("--film", action="append", help="release key; scopes indexing, publishing and verification (repeatable)")
     parser.add_argument("--output", type=pathlib.Path)
     parser.add_argument("--pages", default="all")
     args = parser.parse_args()
     try:
         if args.command == "index":
-            if not args.tag:
-                parser.error("index requires --tag")
-            index(args.tag)
+            index(args.tag, args.film)
             return
-        entries = inventory()
+        all_entries = inventory()
+        entries = scoped(all_entries, args.film, args.tag)
         if not entries:
             raise ValueError("no audio manifests found: run index first")
         if args.command == "prepare":
@@ -218,8 +329,10 @@ def main():
                 raise ValueError("no audio files belong to this release tag")
         elif args.command == "fetch":
             fetch(selected(args.pages, entries))
+        elif args.command == "publish":
+            publish(entries, all_entries)
         elif args.command == "check":
-            unowned = {p.relative_to(ROOT).as_posix() for p in (ROOT / "site/assets").rglob("*.mp3")} - set(entries)
+            unowned = set() if args.film else {p.relative_to(ROOT).as_posix() for p in (ROOT / "site/assets").rglob("*.mp3")} - set(all_entries)
             if unowned:
                 raise ValueError(f"audio needs indexing: {sorted(unowned)}")
             for entry in entries.values():

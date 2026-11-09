@@ -37,6 +37,16 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(p["films"], [])
         self.assertEqual(p["pages"], [])
 
+    def test_voice_production_tool_changes_run_contracts_without_frame_checks(self):
+        for path in ("films/from-words-to-data/shared/tools/tts.py", "films/inner-life-of-data/source/tools/tts.py",
+                     "films/what-an-agent-is/1-decades-in-the-making/source/tools/audio_es.py", "site-tools/voice_cache.py"):
+            p = self.plan(path)
+            self.assertTrue(p["tooling"])
+            self.assertEqual(p["films"], [])
+        p = self.plan("films/from-words-to-data/shared/tools/tts.py", "films/from-words-to-data/1-whats-in-a-word/source/src/vodur.js")
+        self.assertEqual([f["key"] for f in p["films"]], ["whats-in-a-word-en"])
+        self.assertTrue(all("site-tools/voice_cache.py" in f["paths"] for f in affected.films()))
+
     def test_shared_engine_keeps_every_consumer(self):
         p = self.plan("films/inner-life-of-data/source/src/engine3.js")
         self.assertEqual({f["key"] for f in p["films"]}, {f["key"] for f in affected.films()})

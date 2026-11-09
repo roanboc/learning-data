@@ -1,0 +1,49 @@
+name: Install check tools
+description: Install only the needed Python tools and reuse the matching verified Chromium download
+inputs:
+  site:
+    description: Install Markdown for static page validation
+    default: 'false'
+  browser:
+    description: Install Playwright and Chromium
+    default: 'false'
+  sound:
+    description: Install NumPy and SciPy for score checks
+    default: 'false'
+runs:
+  using: composite
+  steps:
+    - name: Install selected Python dependencies
+      shell: bash
+      env:
+        SITE_TOOLS: ${{ inputs.site }}
+        BROWSER_TOOLS: ${{ inputs.browser }}
+        SOUND_TOOLS: ${{ inputs.sound }}
+      run: |
+        check_packages=()
+        if [ "$SITE_TOOLS" = true ]; then check_packages+=(markdown); fi
+        if [ "$BROWSER_TOOLS" = true ]; then check_packages+=(playwright); fi
+        if [ "$SOUND_TOOLS" = true ]; then check_packages+=(numpy scipy); fi
+        if [ "${#check_packages[@]}" -gt 0 ]; then pip install "${check_packages[@]}"; fi
+    - name: Identify the installed browser tool version
+      id: version
+      if: inputs.browser == 'true'
+      shell: bash
+      run: python -c "import importlib.metadata; print('version=' + importlib.metadata.version('playwright'))" >> "$GITHUB_OUTPUT"
+    - name: Restore matching Chromium binaries
+      id: browser-cache
+      if: inputs.browser == 'true'
+      uses: actions/cache/restore@v6
+      with:
+        path: ~/.cache/ms-playwright
+        key: chromium-${{ runner.os }}-${{ runner.arch }}-${{ steps.version.outputs.version }}
+    - name: Verify Chromium and install system libraries
+      if: inputs.browser == 'true'
+      shell: bash
+      run: python -m playwright install --with-deps chromium
+    - name: Save verified Chromium binaries
+      if: inputs.browser == 'true' && steps.browser-cache.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v6
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ steps.browser-cache.outputs.cache-primary-key }}

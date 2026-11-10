@@ -12,6 +12,7 @@ Running a data platform, kept light because it's no longer new. Payroll's export
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Scripts became software](https://data.learn-all.org/data-as-software/scripts-became-software/) | Data work as software | 6½ min | 7 | 3 questions | [script](1-scripts-became-software/script.md) · [source](1-scripts-became-software/source/README.md) |
+| [A platform that watches itself](https://data.learn-all.org/data-as-software/a-platform-that-watches-itself/) | Running the platform | 6 min | 6 | 3 questions | [script](2-a-platform-that-watches-itself/script.md) · [source](2-a-platform-that-watches-itself/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

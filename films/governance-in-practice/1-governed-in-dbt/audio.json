@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/governed-in-dbt/soundtrack.mp3",
+      "size": 5162466,
+      "sha256": "b6cda6f5627907d55666a0c0750617c48e8c624a8e13a13acaf07fe525c7eab9",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/b6cda6f5627907d55666a0c0750617c48e8c624a8e13a13acaf07fe525c7eab9.mp3"
+    }
+  ]
+}

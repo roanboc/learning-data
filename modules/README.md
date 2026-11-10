@@ -281,6 +281,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 - [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
+- [From a branch to production](../films/locks-before-the-data/8-from-a-branch-to-production/) — `from-a-branch-to-production`
 
 ### Only what you may see
 
@@ -423,6 +424,7 @@ Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: 
 
 - [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
 - [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
+- [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
 
 ## Making of and supplementary films
 

@@ -42,7 +42,7 @@ Then, if you like:
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
 | `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor in the open standard, from the dbt models; checks each canonical table's enterprise contract, which data governance writes first, against its model; and validates both against the standards' schemas |
-| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner, and the hours spent checking the graduation list by hand. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
@@ -195,7 +195,7 @@ project/
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
-│   ├── rules/                business rules that must hold: identity decisions
+│   ├── rules/                business rules that must hold: identity decisions; names, each night, at the source
 │   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
 ├── analyses/
@@ -206,8 +206,8 @@ project/
 │   │                         as-was and as-is
 │   ├── governance/           on Databricks: who read a table, and the access review
 │   ├── privacy/              on Databricks: whether a request's data is gone, now and from the old files
-│   └── quality/              on Databricks: the platform's checks for the scorecard, and the
-│                             badges' alert
+│   └── quality/              on Databricks: the platform's checks for the scorecard, the badges'
+│                             alert, the rounds of checking names by hand, the printed name's lineage
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
@@ -241,7 +241,10 @@ project/
 │                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
 │                             the fortnightly dashboard (Databricks only);
 │                             a-late-file/: the night a file came late, its freshness check on the
-│                             receipts, and the send that waits
+│                             receipts, and the send that waits;
+│                             files-as-data/: supplier invoices read with the platform's functions and
+│                             checked, a signed contract found by its metadata, and the claims app's
+│                             data contract (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -336,6 +339,21 @@ unless the graduate corrected them in the portal, some family names in capitals,
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz
 Fonseca de Albuquerque Cavalcanti's. Hamid Karimi's double degree is two certificates; Andrés
 Peñaloza (`S-16874`), who graduates in December 2026, is held as Andres Penaloza.
+
+Since 14 September 2026, each name is put right where it's born (*The hidden factory*): once, in the
+student system, by the registrar's office (DEC-SIS-06), and the nightly file keeps every letter
+(DEC-SIS-07). Each night three checks, owned by Mei Tanaka, look at the student system's graduations
+as staged (`tests/rules/`): a family name exactly 30 characters long, and one in capitals only, each
+hold for the registrar's office, a list to work through (`severity: warn`; on the example rows, which
+keep the names as they were before the office worked through them, two graduates cut at 30 and three
+in capitals); and a night's file of more than 200 names with not one letter outside A to Z stops the
+night's update (`night_file_keeps_every_letter`), so `dbt build` skips the graduation list, which keeps
+the night before's names. The example's nights hold a few names each, so it passes; add
+`--vars '{night_file_names: 0}'` to see it stop. The hours of checking the list by hand, round by
+round, are a seed (`seeds/reference/graduations/hand_check_rounds.csv`) and a table on the scorecard,
+and on Databricks two analyses count the rounds from the query history and the audit log
+(`analyses/quality/rounds_from_the_system_tables.sql`) and follow the printed name back to the
+student system, column by column, in Unity Catalog's lineage (`analyses/quality/printed_name_lineage.sql`).
 
 ## A new version, and who it touches
 

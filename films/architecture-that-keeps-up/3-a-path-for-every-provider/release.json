@@ -1,0 +1,42 @@
+[
+  {
+    "name": "A path for every provider",
+    "key": "a-path-for-every-provider-en",
+    "dir": "films/architecture-that-keeps-up/3-a-path-for-every-provider/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/a-path-for-every-provider/film.js",
+    "video": "dist/a-path-for-every-provider.mp4",
+    "file": "a-path-for-every-provider.mp4",
+    "captions": [
+      [
+        "films/architecture-that-keeps-up/3-a-path-for-every-provider/captions/en.srt",
+        "a-path-for-every-provider.en.srt"
+      ],
+      [
+        "films/architecture-that-keeps-up/3-a-path-for-every-provider/captions/es.srt",
+        "a-path-for-every-provider.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/architecture-that-keeps-up/3-a-path-for-every-provider/source",
+      ":(exclude)films/architecture-that-keeps-up/3-a-path-for-every-provider/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ]
+  }
+]

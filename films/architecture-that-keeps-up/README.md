@@ -11,6 +11,7 @@ The product owner's side of a data manager's job, borrowed from architecture. Th
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A path for every provider](https://data.learn-all.org/architecture-that-keeps-up/a-path-for-every-provider/) | Data from every provider | 8 min | 7 | 3 questions | [script](3-a-path-for-every-provider/script.md) · [source](3-a-path-for-every-provider/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

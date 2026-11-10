@@ -340,7 +340,7 @@ No film source yet.
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
-No film source yet.
+- [A path for every provider](../films/architecture-that-keeps-up/3-a-path-for-every-provider/) — `a-path-for-every-provider`
 
 ### Small steps, measured
 

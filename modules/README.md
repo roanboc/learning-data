@@ -87,6 +87,7 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 
 ### Documents as data
 

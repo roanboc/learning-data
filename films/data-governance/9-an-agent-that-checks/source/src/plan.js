@@ -257,9 +257,9 @@ function ac_list(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,X={award:420,cpR:860,nam
 // the list's sign-off sheet (the series' gv_signoff): sent back, its four lines empty, the question in red under each, and "sent back"
 // stamped in its top margin as Who may see it stamps it (sent, 0 to 1); p, missA and askP as gv_signoff takes them. filled: the four
 // lines from the drafts, and the green stamp (signed, 0 to 1). At (x,y), w wide, turned by rot about its top left
-const AC_SO={title:"Change: the advisers' call list",rows:[["owner",null],["class",null],["who to ask",null],["product",null]],
+const AC_SO={title:"Change: the advisers' call list",rows:[["owner",null],["class",null],["who to tell",null],["product",null]],
   ask:{0:"who answers for this list?",1:"10 columns: does each identify a person?",2:"the faculty isn't in the register",3:"which product is it part of?"},
-  filled:[["owner","Faculty of Health"],["class","all 10 columns"],["who to ask","the faculty's data desk"],["product","Learner progress, Health"]]};
+  filled:[["owner","Faculty of Health"],["class","all 10 columns"],["who to tell","the faculty's data desk"],["product","Learner progress, Health"]]};
 function ac_sheet(ctx,x,y,w,o){o=o||{};const k=w/1000;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);let r;
   if(o.filled)r=gv_signoff(ctx,0,0,w,{title:AC_SO.title,rows:AC_SO.filled,p:o.p,split:0.3,stamp:"signed",stampP:o.signed||0});
   else{r=gv_signoff(ctx,0,0,w,{title:AC_SO.title,rows:AC_SO.rows,ask:AC_SO.ask,p:o.p,missA:o.missA,askP:o.askP,split:0.3});
@@ -371,13 +371,13 @@ function ac_tray(ctx,full,o){o=o||{};const [t0,t1]=AC_AD.tray,top=AC_AD.top,f=cl
 /* ---------- 3 · Rules an agent can follow: the checklist ---------- */
 // the checklist, as Yusuf and Noor write it: its title and first line, seven steps and four don'ts
 const AC_CKT="How we review a change for governance",AC_CK1="You find, draft and flag. People decide.",
-  AC_STEPS=["Run the checks","An owner","A glossary term, or governance confirms none","A class for every column","Each stated rule: checked, or tracked","What it touches","Report once"],
+  AC_STEPS=["A glossary term, or governance confirms none","An owner","Run the checks","A class for every column","Each stated rule: checked, or tracked","What it touches","Report once"],
   AC_DONTS=["approve a change","edit the glossary","weaken a check","show a value from the data"];
-// a sign in pencil for each step: a small sign-off sheet, a person, a book, a chip, a ticked box, a branch, a speech bubble
+// a sign in pencil for each step: a book (the glossary comes first), a person, a small sign-off sheet, a chip, a ticked box, a branch, a speech bubble
 function ac_stepSign(ctx,i,x,y,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.globalAlpha*=a;ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=3;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
-  if(i===0){ctx.rect(-10,-13,20,26);ctx.moveTo(-5,-5);ctx.lineTo(5,-5);ctx.moveTo(-5,2);ctx.lineTo(5,2);ctx.moveTo(-5,8);ctx.lineTo(1,8);}
+  if(i===2){ctx.rect(-10,-13,20,26);ctx.moveTo(-5,-5);ctx.lineTo(5,-5);ctx.moveTo(-5,2);ctx.lineTo(5,2);ctx.moveTo(-5,8);ctx.lineTo(1,8);}
   else if(i===1){ctx.arc(0,-7,6,0,TAU);ctx.moveTo(-11,12);ctx.quadraticCurveTo(0,-2,11,12);}
-  else if(i===2){ctx.moveTo(0,-8);ctx.lineTo(-14,-11);ctx.lineTo(-14,9);ctx.lineTo(0,12);ctx.lineTo(14,9);ctx.lineTo(14,-11);ctx.lineTo(0,-8);ctx.lineTo(0,12);}
+  else if(i===0){ctx.moveTo(0,-8);ctx.lineTo(-14,-11);ctx.lineTo(-14,9);ctx.lineTo(0,12);ctx.lineTo(14,9);ctx.lineTo(14,-11);ctx.lineTo(0,-8);ctx.lineTo(0,12);}
   else if(i===3){rr(ctx,-15,-8,30,16,8);ctx.moveTo(-7,0);ctx.lineTo(6,0);}
   else if(i===4){ctx.rect(-12,-12,24,24);ctx.moveTo(-6,0);ctx.lineTo(-1,6);ctx.lineTo(8,-6);}
   else if(i===5){ctx.moveTo(-13,0);ctx.lineTo(0,0);ctx.lineTo(12,-10);ctx.moveTo(0,0);ctx.lineTo(12,10);ctx.moveTo(6,-11);ctx.lineTo(12,-10);ctx.lineTo(10,-4);ctx.moveTo(6,11);ctx.lineTo(12,10);ctx.lineTo(10,4);}
@@ -455,7 +455,7 @@ const AC_BIGT="Call list · Add the advisers' call list";
 function ac_num(ctx,n,x,y,s){s=s||1;ctx.save();ctx.fillStyle=rgba(AC_CYAN,1);ctx.beginPath();ctx.arc(x,y,21*s,0,TAU);ctx.fill();ctx.restore();
   wc_T(ctx,String(n),x,y+10*s,{w:800,size:28*s,col:[255,255,255],align:"center"});}
 // the three findings: a title, where, our rule, the draft, who decides; the first also says who'd be asked
-const AC_FIND=[{title:"Nobody answers for it",where:["the list: no owner"],red:"who to ask: nobody named",rule:["every table other teams","read has an owner"],draft:"owner: Faculty of Health",who:["data governance"]},
+const AC_FIND=[{title:"Nobody answers for it",where:["the list: no owner"],red:"who to tell: nobody named",rule:["every table other teams","read has an owner"],draft:"owner: Faculty of Health",who:["data governance"]},
   {title:"Ten columns with no class",where:["all 10 columns"],rule:["every column says whether","it identifies a person"],draft:"a class for each",who:["Faculty of Health"]},
   {title:"A rule with no check",where:["the list's description"],rule:["a rule about the data","has a check"],draft:"check: every row's faculty is Health",who:["Faculty of Health, for the rule","Jun, for how it's built"]}];
 const AC_RV={card:[140,124,1640,742],head:184,pass:240,cx:[168,710,1252],cw:512,cy:270,ch:580};
@@ -468,7 +468,7 @@ function ac_subCard(q,x,y,w,h,lab,vals,v,o){o=o||{};wc_panel(q,x,y,w,h,{kind:"ca
 function ac_draftPill(q,x,y,w,s,v,lit,seed){wc_panel(q,x,y,w,56,{kind:"pill",dashed:true,role:WC_SIDE.tech,seed:seed||93});if(lit>0.01)gv_tint(q,x+8,y+6,w-16,44,WC_SIDE.tech,0.7*lit);
   if(s&&v>0.01)withA(q,clamp(v,0,1),()=>wc_T(q,s,x+24,y+38,{w:700,size:28,col:WC_DARK}));}
 // one finding's card (i): it comes in (a); its parts as they're named (part: where, our rule, the draft, who decides, 0 to 1); its words
-// as they're said (v: the same four, 0 to 1, and red, the first's who to ask); lit, the draft and who decides; dim fades it back
+// as they're said (v: the same four, 0 to 1, and red, the first's who to tell); lit, the draft and who decides; dim fades it back
 function ac_findCard(q,i,t,o){const F=AC_FIND[i],R=AC_RV,x=R.cx[i],y=R.cy,w=R.cw,a=(o.a||0)*(o.dim==null?1:o.dim);if(a<=0.01)return;const pt=o.part||[1,1,1,1],v=o.v||[0,0,0,0],lit=o.lit||0;
   withA(q,a,()=>{wc_panel(q,x,y,w,R.ch,{kind:"card",seed:90+i});ac_num(q,i+1,x+40,y+40);wc_T(q,F.title,x+72,y+50,{w:800,size:30,col:WC_DARK});
     const ix=x+16,iw=w-32,sub=(k,fn)=>{const p=clamp(pt[k],0,1);if(p<=0.01)return;withA(q,clamp(p*2,0,1),fn);};
@@ -536,7 +536,7 @@ function ac_classes(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,ok=o.okAt==null?0:cl
   AC_CLS.forEach(([c,k,ev,ns],i)=>{const ry=326+i*53,ak=c==="award code";
     if(ns){gv_tint(q,180,ry-38,1580,52,WC_SIDE.tech,0.55*un*(1-ok));gv_tint(q,180,ry-38,1580,52,GV.gold,0.6*ok);}
     wc_T(q,c,200,ry,{w:600,size:28,col:WC_DARK});
-    if(ak){withA(q,1-ok,()=>gv_classChip(q,520,ry-10,k));if(ok>0)gv_classChipAt(q,t,o.okAt,520,ry-10,"none");}
+    if(ak){withA(q,1-clamp(ok*2,0,1),()=>gv_classChip(q,520,ry-10,k));if(ok>=0.5)gv_classChipAt(q,t,o.okAt+0.4,520,ry-10,"none");}
     else gv_classChip(q,520,ry-10,k);
     if(ns)ac_notSure(q,520+ac_chipW(q,k)+22,ry,un*(1-ok));
     if(ak){const wy=clamp(o.why==null?ok:o.why,0,1);withA(q,1-wy,()=>wc_T(q,ev,1010,ry,{w:600,size:28,col:WC_INK}));
@@ -573,16 +573,17 @@ function ac_smallReply(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen;gv_screen(c
   const a=o.a||0;if(a<=0.01)return;withA(q,a,()=>{wc_panel(q,x+20,y+194,w-40,124,{kind:"card",wash:GV.gold,washA:0.3,seed:81});
     wc_T(q,"Anil Kurian",x+44,y+228,{w:700,size:24,col:WC_MUTED});const L=["It's made from the award:","a course, not a person."],n=Math.round(clamp(o.typed||0,0,1)*(L[0].length+L[1].length));
     wc_T(q,L[0].slice(0,n),x+44,y+262,{w:600,size:24,col:GV.goldInk});if(n>L[0].length)wc_T(q,L[1].slice(0,n-L[0].length),x+44,y+294,{w:600,size:24,col:GV.goldInk});});},{titleSize:26,barH:44});}
-// the owners' approvals, each a gold card that takes its stamp as it's named (a, 0 to 1): the faculty, its classes and its rule; Yusuf,
-// the new owner; Jun, how it's built
-const AC_AP=[["Faculty of Health","its classes and its rule"],["Yusuf Demir","the new owner"],["Jun Park","how it's built"]];
-function ac_approval(ctx,x,y,w,h,i,a){if(a<=0.01)return;const [nm,what]=AC_AP[i];withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.3,seed:70+i});
+// who decided what, each a gold card that takes its stamp as it's named (a, 0 to 1). The meaning first: the faculty writes its classes
+// and its rule in the glossary, Yusuf names the new owner in the register ("written"); then Jun, in the data team, reviews the change
+// against them ("approved"). Owners and stewards never review a change: they decide its meaning, and are told what it touches
+const AC_AP=[["Faculty of Health","glossary: classes and rule","WRITTEN"],["Yusuf Demir","register: the new owner","WRITTEN"],["Jun Park, data team","reviews the change","APPROVED"]];
+function ac_approval(ctx,x,y,w,h,i,a){if(a<=0.01)return;const [nm,what,st]=AC_AP[i];withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.3,seed:70+i});
   wc_T(ctx,nm,x+30,y+58,{w:800,size:32,col:WC_DARK});wc_T(ctx,what,x+30,y+102,{w:600,size:28,col:WC_INK});});
-  gv_stamp(ctx,x+w-121,y+h/2+6,"APPROVED",clamp(a*2-1,0,1),{size:28,col:GV.goldInk,rot:-0.07});}
-// the sign-off sheet on Yusuf's desk, its four lines filled from the drafts (p, 0 to 1), and beside it the approvals (ap, three); then
+  gv_stamp(ctx,x+w-121,y+h/2+6,st,clamp(a*2-1,0,1),{size:28,col:GV.goldInk,rot:-0.07});}
+// the sign-off sheet on Yusuf's desk, its four lines filled from the drafts (p, 0 to 1), and beside it who decided (ap, three); then
 // the sheet's own stamp, signed (signed, 0 to 1)
 function ac_signed(ctx,t,o){o=o||{};ac_sheet(ctx,130,240,1000,{filled:1,p:o.p==null?1:o.p,signed:o.signed||0});
-  if((o.ap||[]).some(a=>a>0))wc_T(ctx,"Approvals",1190,222,{w:700,size:30,col:WC_MUTED});
+  if((o.ap||[]).some(a=>a>0))wc_T(ctx,"Meaning first, then the review",1190,222,{w:700,size:30,col:WC_MUTED});
   AC_AP.forEach((_,i)=>ac_approval(ctx,1180,250+i*170,640,150,i,(o.ap||[])[i]||0));}
 // who decided what: the agent's three findings, small, across the top (dim fades them back), and the approvals under them, each
 // a gold card; a gold thread runs from each finding to whoever decided it (th, 0 to 1)
@@ -623,7 +624,7 @@ function ac_paintDesk26(c){gv_paintDesk(c);const B=AC_OPEN,top=B.y+26,ph=B.h-52,
   ac_marker(c,1250,962,-0.3,GV.green);}
 // policy 26's page: its line, a green stroke behind it as it goes green (hi), and where it runs, in Yusuf's hand, green (hw, three, 0 to 1)
 const AC_P26={x:AC_OPEN.mid+46+64,top:AC_OPEN.y+26,size:38,lh:52,lines:["AI use follows the","organisation's data","policies."],
-  note:["the agent's access","its checklist","owners' approvals"]};
+  note:["the agent's access","its checklist","data team's approval"]};
 function ac_open26(ctx,t,o){o=o||{};const P=AC_P26,x=P.x,top=P.top,n=P.lines.length,u=o.hi||0;
   wc_T(ctx,"Data policies",x,top+64,{w:600,size:28,col:WC_MUTED,deco:1});wc_T(ctx,"Policy 26",x,top+150,{w:800,size:56,col:WC_DARK});
   wc_T(ctx,"AI and automated tools",x,top+200,{w:600,size:32,col:WC_MUTED});
@@ -656,13 +657,13 @@ function ac_accessForm(ctx,t,o){o=o||{};const F=AC_AF,r=o.rows||[];
   wc_hand(ctx,"Yes, as the rules for AI helpers say.  Sam Okafor",F.x,F.ans,{size:34,w:700,col:GV.goldInk,p:o.ans||0});}
 // the agent's access request, small, lying on Sam's desk in front of him
 function ac_formOnDesk(ctx,a){if(a<=0.01)return;withA(ctx,a,()=>ac_flatSheet(ctx,1150,GV_PX.top+6,300,false));}
-// who signs off what: a page of the register of owners and stewards; the call list's two lines in fresh ink. own (0 to 1) lights the
+// who owns what: a page of the register of owners and stewards; the call list's two lines in fresh ink. own (0 to 1) lights the
 // names gold; focus keeps one line bright while the rest fade back (dim, 0 to 1), and hi washes it gold (hiA)
 const AC_WHO=[["anything nobody else owns","Jun Park"],[{t:"the call list: what it means",hand:1},{t:"Faculty of Health, with Noor",hand:1}],
-  [{t:"the call list: how it's built",hand:1},{t:"Faculty of Health, with Jun",hand:1}],["the register of owners","data governance, with Noor"],["the review checklist","data governance, with Noor"]],
+  [{t:"the call list: how it's built",hand:1},{t:"the data team, Jun Park",hand:1}],["the register of owners","data governance, with Noor"],["the review checklist","data governance, with Noor"]],
   AC_WX={x:200,y:240,w:1000};
-function ac_whoPage(ctx,t,o){o=o||{};const X=AC_WX,r=gv_register(ctx,X.x,X.y,X.w,{kicker:"Register of owners and stewards",title:"Who signs off what",
-    cols:[["what",0.5],["signs off",0.5]],rows:AC_WHO,hi:o.focus,hiA:o.hiA});
+function ac_whoPage(ctx,t,o){o=o||{};const X=AC_WX,r=gv_register(ctx,X.x,X.y,X.w,{kicker:"Register of owners and stewards",title:"Who owns what",
+    cols:[["what",0.5],["owner",0.5]],rows:AC_WHO,hi:o.focus,hiA:o.hiA});
   const own=clamp(o.own||0,0,1);if(own>0.01)r.rows.forEach((ry,i)=>{if(o.focus!=null&&i!==o.focus)return;gv_tint(ctx,r.cols[1]+6,ry-26,X.x+952-r.cols[1]-6,52,GV.gold,0.75*clamp(own*3-i*0.4,0,1));});
   if(o.dim>0.01){ctx.save();ctx.fillStyle=rgba(GV.paper,0.62*clamp(o.dim,0,1));r.rows.forEach((ry,i)=>{if(i!==o.focus)ctx.fillRect(X.x+40,ry-30,920,60);});ctx.restore();}
   return r;}
@@ -672,8 +673,8 @@ function ac_agentCard(ctx,t,x,y,ag,cr){if(ag<=0.01)return;withA(ctx,ag,()=>{ctx.
   wc_panel(ctx,x+104,y+108,220,58,{kind:"pill",wash:WC_MUTED,washA:0.2,seed:87});wc_T(ctx,"approve",x+214,y+148,{w:700,size:30,col:WC_MUTED,align:"center"});
   ac_cross(ctx,x+214,y+137,22,cr||0,WC_INK);ctx.restore();});}
 // the register's page as a picture (kept: the film has read it), at (x,y), w wide, turned by rot about its top left
-function ac_whoPic(ctx,x,y,w,rot){const c=wc_kept("acWhoPic",1060,690,q=>{q.translate(30,30);gv_register(q,0,0,1000,{kicker:"Register of owners and stewards",title:"Who signs off what",
-    cols:[["what",0.5],["signs off",0.5]],rows:AC_WHO});}),k=w/1000;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.drawImage(c,-30*k,-30*k,1060*k,690*k);ctx.restore();}
+function ac_whoPic(ctx,x,y,w,rot){const c=wc_kept("acWhoPic",1060,690,q=>{q.translate(30,30);gv_register(q,0,0,1000,{kicker:"Register of owners and stewards",title:"Who owns what",
+    cols:[["what",0.5],["owner",0.5]],rows:AC_WHO});}),k=w/1000;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.drawImage(c,-30*k,-30*k,1060*k,690*k);ctx.restore();}
 
 /* ---------- 7 · Only what's written ---------- */
 // Yusuf's desk, from above: binder 12, closed, as Off the shelf left it, his two notes sticking out of it as flags; beside it, the
@@ -732,14 +733,14 @@ function ac_paintDawn(c){gv_paintCampus(c);ac_clockAt(c,7,58);c.save();c.globalC
   c.save();c.globalCompositeOperation="screen";wc_glowAt(c,1500,240,700,[255,214,170],0.3);c.restore();}
 // what the night is made of, each a picture of the paper that stands for it with its words under it: the checklist, the rules for AI
 // helpers with the agent's star, the register's page, and the approvals in gold (a, four, 0 to 1)
-const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who signs off what","people who decide"],AC_PT={cx:[520,1400],cy:[310,640]};
+const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who owns what","people who decide"],AC_PT={cx:[520,1400],cy:[310,640]};
 function ac_parts(ctx,t,a){AC_PARTS.forEach((s_,i)=>{const p=a[i]||0;if(p<=0.01)return;const cx=AC_PT.cx[i%2],cy=AC_PT.cy[i>>1],k=0.9+0.1*spring(p);
   ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);withA(ctx,clamp(p*1.6,0,1),()=>{
     if(i===0)ac_checkCopy(ctx,-190,-150,380,183,-0.015);
     else if(i===1){ctx.save();ctx.rotate(0.02);ctx.drawImage(gv_sheetPaper(150,222),-95,-175);gv_lines(ctx,-56,-128,100,1,0,1);gv_lines(ctx,-56,-96,110,8,20,0.9);ctx.restore();ac_star(ctx,62,-140,1.2,t,1);}
     else if(i===2)ac_whoPic(ctx,-180,-150,340,0);
     else{for(let j=0;j<3;j++){ctx.save();ctx.translate(-70+j*70,-80+j*12);ctx.rotate((j-1)*0.08);wc_panel(ctx,-110,-50,220,100,{kind:"card",wash:GV.gold,washA:0.35,seed:170+j});
-      gv_lines(ctx,-90,-22,120,2,22,0.9);ctx.restore();}gv_stamp(ctx,30,-44,"APPROVED",1,{size:29,col:GV.goldInk,rot:-0.07,a:0.9});}
+      gv_lines(ctx,-90,-22,120,2,22,0.9);ctx.restore();}gv_stamp(ctx,30,-44,"DECIDED",1,{size:29,col:GV.goldInk,rot:-0.07,a:0.9});}
     wc_tag(ctx,0,96,s_,{size:34,wash:i===3?GV.gold:i===1?WC_SIDE.tech:null,washA:0.3,align:"center"});});ctx.restore();});}
 
 const WC_PLACES={screenMorning:ac_paintScreenFacMorning,dusk:ac_paintDusk,night:ac_paintNight,dawn:ac_paintDawn,faculty:gv_paintFaculty,facDusk:ac_paintFacDusk,facMorning:ac_paintFacMorning,

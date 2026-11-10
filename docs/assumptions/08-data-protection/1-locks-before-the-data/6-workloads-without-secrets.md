@@ -1,8 +1,8 @@
 # Workloads without secrets: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 6 · open, PR #198 · [pull request](https://github.com/roanboc/learning-data/pull/198)
+*Data protection and privacy* · *Locks before the data*, film 6 of 9 · merged, PR #198 · [pull request](https://github.com/roanboc/learning-data/pull/198)
 
-On the site once PR #198 merges: https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

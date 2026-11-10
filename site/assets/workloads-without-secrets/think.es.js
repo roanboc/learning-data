@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Workloads without secrets, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (asked, vault, found), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). Los labs del módulo llegan más adelante, como un solo conjunto, así que
+   ninguna pregunta tiene "stop" todavía, y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "asked":{q:"Alguien copia el flujo de despliegue en su propio repositorio y lo ejecuta. ¿Por qué no recibe ningún pase?",
+    opts:[{t:"GitHub firma una nota solo para el repositorio de la plataforma, así que la copia no recibe ninguna.",near:true},{t:"La copia no tiene ningún token en su configuración, y un flujo no puede entrar sin uno."},{t:"Su nota dice dónde corrió, y la directiva solo nombra el repositorio de la plataforma.",ok:true}],
+    why:"GitHub firma una nota para cualquier ejecución que la pida, corra donde corra, y la nota dice dónde: el repositorio y el entorno. Azure Databricks comprueba la firma, y luego que la nota diga exactamente lo que nombra la directiva de registrar-loader, el repositorio de la plataforma en su entorno de producción. La nota de la copia nombra otro repositorio, así que no recibe ningún pase; y ninguno de los dos flujos guardó nunca un token que robar. ¿Cuáles de tus despliegues aún guardan un token?"},
+  "vault":{q:"Cada mes una función cambia la contraseña, también en el almacén. ¿Por qué no necesita ningún secreto para abrirlo?",
+    opts:[{t:"Entra con su propia identidad administrada, cuyas credenciales nadie ve nunca.",ok:true},{t:"Guarda un secreto propio en el mismo almacén, así que no hay nada guardado en otro sitio.",near:true},{t:"Corre una vez al mes, así que un secreto propio no tendría tiempo de filtrarse."}],
+    why:"La función entra con su propia identidad administrada: Azure guarda y cambia sus credenciales, y nadie las ve nunca, así que no hay ningún secreto con que abrir el almacén. Un secreto propio, guardado en el mismo almacén, necesitaría otra forma de entrar para leerlo, y esa forma de entrar necesitaría otra. ¿Cuáles de tus scripts abren un almacén con un secreto guardado en otro sitio?"},
+  "found":{q:"El token de Jun sigue en la historia del repositorio. ¿Por qué es seguro dejarlo ahí?",
+    opts:[{t:"La protección de inserción ahora bloquea el commit viejo, así que nadie puede leer el token.",near:true},{t:"Jun anuló el token esa mañana, así que la copia de la historia ya no abre nada.",ok:true},{t:"El análisis de secretos borró cada copia que encontró, así que la historia quedó limpia."}],
+    why:"Anular un secreto es lo que vuelve inútil cada copia: en cuanto Jun anuló su token, las copias de la historia, del notebook y de la laptop ya no abren nada. La protección de inserción detiene una inserción nueva con un secreto antes de que llegue; no oculta los commits viejos, y el análisis de secretos crea una alerta pero no borra nada. Reescribir una historia compartida rompería las copias del repositorio de todos, y no llegaría a las copias ya hechas. ¿Cuáles de tus tokens viejos aún funcionan?"}
+  }}};

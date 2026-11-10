@@ -1,0 +1,21 @@
+{
+  "order": 9,
+  "id": "ai-agents",
+  "items": [
+    "what-an-agent-is",
+    "agents-at-work-on-data",
+    "from-helper-to-colleague"
+  ],
+  "name": {
+    "en": "AI agents in data work",
+    "es": "Agentes de IA en el trabajo con datos"
+  },
+  "who": {
+    "en": "For everyone who works with data, and will work beside an AI agent",
+    "es": "Para quien trabaja con datos, y trabajará junto a un agente de IA"
+  },
+  "line": {
+    "en": "Agentic data engineering from the ground up: what an AI agent is and how we got here, what agents are like to work with, and why that means governing them.",
+    "es": "La ingeniería de datos con agentes desde la base: qué es un agente de IA y cómo llegamos aquí, cómo es trabajar con agentes, y por qué eso significa gobernarlos."
+  }
+}

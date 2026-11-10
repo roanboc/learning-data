@@ -1,0 +1,21 @@
+{
+  "order": 4,
+  "id": "data-quality",
+  "items": [
+    "when-things-go-wrong",
+    "fit-for-use",
+    "quality-as-a-habit"
+  ],
+  "name": {
+    "en": "Data quality",
+    "es": "Calidad de datos"
+  },
+  "who": {
+    "en": "For anyone who builds pipelines, owns a source system or a data product, or depends on data being right",
+    "es": "Para quien construye pipelines, es responsable de un sistema de origen o de un producto de datos, o depende de que los datos estén bien"
+  },
+  "line": {
+    "en": "What good enough means for data, what goes wrong, and what catches it: changes, contracts, checks, and errors fixed where they start.",
+    "es": "Qué es lo bastante bueno para los datos, qué sale mal y qué lo detecta: cambios, contratos, controles, y errores arreglados donde empiezan."
+  }
+}

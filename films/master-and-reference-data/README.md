@@ -40,9 +40,10 @@ Like the other series, each film is generated from code. The series keeps what's
 |---|---|
 | `shared/src/wash.js` | The watercolour look: the paper and the pigment's grain, washes and the pencil line (`wc_wash`, `wc_pencil`), skies, land, trees and buildings for the places, the colours of the roles, the industries and the sides (`WC_ROLE`, `WC_IND`, `WC_SIDE`), cards, tags, chips, envelopes, ticks and crosses, the person as white paper banded in her roles (`wc_whiteFig`), and the title and end cards (`wc_title`, `wc_end`) |
 | `shared/src/people.js` | The series' people in pencil and wash: Linh, Noor, Mei and Minh, drawn from the cast of *When things go wrong* |
-| `shared/src/post.js` | What a film paints before it starts (the paper, then each place, once), and the video's motion blur |
+| `shared/src/post.js` | What a film paints before it starts (the paper, then each place, once; the site's player shows each place as the picture `tools/publish.py` draws, and paints none), and the video's motion blur |
 | `shared/src/page.html` | The standalone player page |
 | `shared/tools/lang.py`, `build.py` | Where everything lives, and what a film is made of |
-| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py` and `build.py`, and *From words to data*'s other tools and instruments unchanged |
+| `shared/tools/run.py` | Runs a tool on a film: this series' own `lang.py`, `build.py` and `check.py`, and *From words to data*'s other tools and instruments unchanged |
+| `shared/tools/check.py`, `smooth.py` | *From words to data*'s checks, then whether the site's player keeps up (`smooth.py`): drawn as the player draws it, with the places as pictures, no moment takes long, nothing slow is painted while the film plays, and what it keeps stays within its budget, also with the processor slowed four times, as on a phone. Every governance film runs `smooth.py` too |
 | `shared/tools/quiet.py` | When the music plays: it plays a film's score on its own and fails when, after the opening's chapters (`story` in its `film.json`), a chapter has music for more than half its length or 12 seconds without a break, when two held notes are a little out of tune and beat, or when anything pulses. Each film runs it as `tools/quiet.py`, after `tools/audio.py` |
 | `shared/tools/review_page.py` | The page the author reviews a film on: it runs `site-tools/review_page.py`, then lays the page out on watercolour paper, with the new chapters marked (`--new 2,3`) and the copy under a new name for each version (`--name`) |

@@ -1,0 +1,19 @@
+{
+  "order": 0,
+  "id": "data-platforms",
+  "items": [
+    "intro"
+  ],
+  "name": {
+    "en": "Data platforms",
+    "es": "Plataformas de datos"
+  },
+  "who": {
+    "en": "Start here: for everyone",
+    "es": "Empieza aquí: para todos"
+  },
+  "line": {
+    "en": "How data moves through a modern data platform, from a tap on a phone to a decision.",
+    "es": "Cómo se mueven los datos en una plataforma de datos moderna, desde un toque en el teléfono hasta una decisión."
+  }
+}

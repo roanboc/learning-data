@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/an-agent-on-the-team/soundtrack.mp3",
+      "size": 4571837,
+      "sha256": "80cf90a3a808318e791bca7604fb2b647940f0190cd54eaccb56966cbcc11a4d",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/80cf90a3a808318e791bca7604fb2b647940f0190cd54eaccb56966cbcc11a4d.mp3"
+    }
+  ]
+}

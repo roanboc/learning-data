@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/the-same-problem-everywhere/soundtrack.mp3",
+      "size": 4193323,
+      "sha256": "cea50b8e2dde3bbd37013be21315f2c20996fcbd45ac644a20177e31ed3315c4",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/cea50b8e2dde3bbd37013be21315f2c20996fcbd45ac644a20177e31ed3315c4.mp3"
+    }
+  ]
+}

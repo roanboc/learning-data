@@ -6,12 +6,16 @@ each place the film paints, painted again from nothing, leaves the page drawing 
 paints the places one by one while the film plays, so a place that keeps the browser busy for seconds holds up the film, its
 soundtrack and the whole page. A blur set before many strokes of a full-size picture (the browser blurs every stroke) once held
 the page for seven seconds; paint such a picture sharp on a layer and blur the layer once. Then nothing shows twice where the film
-changes shot or chapter (twice.py), nobody's arm jumps in one frame (steady.py), and last, nothing jumps where the film changes
-shot or chapter (jump.py): in one room the camera glides, and what changes fades."""
-import jump, runpy, steady, twice
+changes shot or chapter (twice.py), nobody's arm jumps in one frame (steady.py), nothing jumps where the film changes
+shot or chapter (jump.py): in one room the camera glides, and what changes fades. And last, the site's player keeps up
+(master data's smooth.py): drawn as the player draws it, with the places as pictures, no moment takes long, nothing big is painted
+while the film plays, and what it keeps stays within its budget, also with the processor slowed four times, as on a phone."""
+import jump, runpy, steady, sys, twice
 from lang import *
 from run import FW
 from playwright.sync_api import sync_playwright
+sys.path.append(str(FW.parents[2] / 'master-and-reference-data' / 'shared' / 'tools'))
+import smooth  # after this series' tools and From words to data's, so lang stays this series' own
 
 LIMIT = 2.0  # seconds from a place's first stroke until two frames after it; Off the shelf's 19 places take 0.1 to 0.4
 
@@ -37,6 +41,7 @@ with sync_playwright() as p:
     st = steady.check(pg)
     jp = jump.check(pg)
     b.close()
+    sm = smooth.check(p, DIST / 'render.html', REPO / 'site' / 'assets' / META['key'] / 'places')
 slow = [(k, s) for k, s in r if s > LIMIT]
 print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
 for k, s in slow:
@@ -66,5 +71,12 @@ if jp[1]:
     failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
 else:
     print('nothing jumps where the film changes shot or chapter')
+print(sm[0])
+for l in sm[1]:
+    print('  ' + l)
+if sm[1]:
+    failed.append('%d faults in how the site\'s player keeps up' % len(sm[1]))
+else:
+    print('the site\'s player keeps up')
 if failed:
     raise SystemExit('; '.join(failed))

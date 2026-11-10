@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/what-they-tell-us-about-ourselves/soundtrack.mp3",
+      "size": 7967129,
+      "sha256": "faaa8068c316c4c6be5da932ca5fcae23e5b021cf63298a76a94babd322f8642",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/faaa8068c316c4c6be5da932ca5fcae23e5b021cf63298a76a94babd322f8642.mp3"
+    }
+  ]
+}

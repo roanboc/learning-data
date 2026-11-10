@@ -1,0 +1,567 @@
+{
+ "player": "a19e3bfadf2fcd90",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:gate": {
+   "file": "gate.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     8.75
+    ]
+   ]
+  },
+  "place:hallIn": {
+   "file": "hallIn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     8.0,
+     12.25
+    ]
+   ]
+  },
+  "place:hallInFront": {
+   "file": "hallInFront.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     8.0,
+     12.25
+    ]
+   ]
+  },
+  "place:air": {
+   "file": "air.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     11.5,
+     20.5
+    ],
+    [
+     33.0,
+     41.5
+    ]
+   ]
+  },
+  "place:airShops": {
+   "file": "airShops.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     11.5,
+     20.5
+    ],
+    [
+     33.0,
+     41.5
+    ]
+   ]
+  },
+  "place:airHall": {
+   "file": "airHall.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     11.5,
+     20.5
+    ],
+    [
+     33.0,
+     41.5
+    ]
+   ]
+  },
+  "place:airCrowd": {
+   "file": "airCrowd.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     15.5,
+     20.5
+    ],
+    [
+     33.0,
+     41.5
+    ]
+   ]
+  },
+  "place:st1520": {
+   "file": "st1520.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     19.75,
+     33.5
+    ]
+   ]
+  },
+  "place:airTrade0": {
+   "file": "airTrade0.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     36.75,
+     41.5
+    ]
+   ]
+  },
+  "place:airTrade1": {
+   "file": "airTrade1.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     37.75,
+     41.5
+    ]
+   ]
+  },
+  "place:airTrade2": {
+   "file": "airTrade2.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     38.5,
+     41.5
+    ]
+   ]
+  },
+  "place:st1600": {
+   "file": "st1600.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     40.75,
+     49.75
+    ],
+    [
+     53.5,
+     62.5
+    ],
+    [
+     69.75,
+     75.75
+    ],
+    [
+     170.75,
+     179.25
+    ],
+    [
+     316.0,
+     321.75
+    ],
+    [
+     332.25,
+     335.75
+    ]
+   ]
+  },
+  "place:clothClose": {
+   "file": "clothClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     49.5,
+     54.25
+    ],
+    [
+     238.25,
+     240.5
+    ]
+   ]
+  },
+  "place:clothFront": {
+   "file": "clothFront.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     49.5,
+     54.25
+    ],
+    [
+     238.25,
+     240.5
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     61.75,
+     70.5
+    ],
+    [
+     335.0,
+     346.0
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     74.75,
+     79.0
+    ],
+    [
+     331.0,
+     333.0
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     78.25,
+     84.0
+    ],
+    [
+     327.0,
+     331.75
+    ]
+   ]
+  },
+  "poOpenBinder": {
+   "file": "poOpenBinder.webp",
+   "w": 1500,
+   "h": 880,
+   "shows": [
+    [
+     78.25,
+     84.0
+    ],
+    [
+     327.0,
+     331.75
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     83.25,
+     89.75
+    ],
+    [
+     98.75,
+     101.0
+    ],
+    [
+     307.0,
+     309.75
+    ]
+   ]
+  },
+  "place:facDesk": {
+   "file": "facDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     83.25,
+     89.75
+    ],
+    [
+     98.75,
+     101.0
+    ],
+    [
+     307.0,
+     309.75
+    ]
+   ]
+  },
+  "place:screenFac": {
+   "file": "screenFac.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     89.0,
+     95.75
+    ],
+    [
+     309.0,
+     316.75
+    ]
+   ]
+  },
+  "place:facTop": {
+   "file": "facTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     95.0,
+     99.5
+    ],
+    [
+     321.0,
+     323.75
+    ],
+    [
+     345.25,
+     357.75
+    ]
+   ]
+  },
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     100.25,
+     104.0
+    ],
+    [
+     219.25,
+     223.75
+    ]
+   ]
+  },
+  "place:noor": {
+   "file": "noor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     103.25,
+     106.0
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     105.25,
+     108.75
+    ],
+    [
+     117.25,
+     122.75
+    ],
+    [
+     129.25,
+     133.25
+    ],
+    [
+     155.75,
+     159.0
+    ],
+    [
+     186.5,
+     193.25
+    ],
+    [
+     212.5,
+     214.25
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     108.5,
+     112.0
+    ],
+    [
+     158.75,
+     171.5
+    ],
+    [
+     178.5,
+     186.75
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     108.5,
+     112.0
+    ],
+    [
+     158.75,
+     171.5
+    ],
+    [
+     178.5,
+     186.75
+    ]
+   ]
+  },
+  "place:corridor": {
+   "file": "corridor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.75,
+     118.5
+    ],
+    [
+     323.0,
+     327.75
+    ]
+   ]
+  },
+  "place:planTable": {
+   "file": "planTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     117.25,
+     122.75
+    ],
+    [
+     129.25,
+     133.25
+    ],
+    [
+     155.75,
+     159.0
+    ],
+    [
+     186.5,
+     193.25
+    ],
+    [
+     212.5,
+     214.25
+    ]
+   ]
+  },
+  "place:planTop": {
+   "file": "planTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     122.0,
+     130.0
+    ],
+    [
+     132.5,
+     156.5
+    ],
+    [
+     192.5,
+     212.75
+    ],
+    [
+     214.0,
+     219.5
+    ]
+   ]
+  },
+  "place:boardData": {
+   "file": "boardData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     223.0,
+     239.0
+    ],
+    [
+     245.5,
+     254.25
+    ],
+    [
+     277.0,
+     307.25
+    ]
+   ]
+  },
+  "place:tomTop": {
+   "file": "tomTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     239.75,
+     246.25
+    ]
+   ]
+  },
+  "place:regClose": {
+   "file": "regClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     254.0,
+     257.75
+    ],
+    [
+     269.75,
+     278.0
+    ]
+   ]
+  },
+  "place:regDesk": {
+   "file": "regDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     254.0,
+     257.75
+    ],
+    [
+     269.75,
+     278.0
+    ]
+   ]
+  },
+  "place:regTop": {
+   "file": "regTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     257.0,
+     270.0
+    ]
+   ]
+  }
+ }
+}

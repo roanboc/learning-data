@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/meaning-machines-can-read/soundtrack.mp3",
+      "size": 4476752,
+      "sha256": "a477b7cf37ea851218bedc10ef871adeec7069abdd877b3e707653eb3cc2150f",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/a477b7cf37ea851218bedc10ef871adeec7069abdd877b3e707653eb3cc2150f.mp3"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+ "player": "fd391fce27b52919",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:noor": {
+   "file": "noor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     6.75
+    ]
+   ]
+  },
+  "place:noorBoard": {
+   "file": "noorBoard.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     6.0,
+     21.5
+    ]
+   ]
+  },
+  "place:noorScreen": {
+   "file": "noorScreen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     20.75,
+     35.5
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     34.75,
+     43.75
+    ]
+   ]
+  },
+  "place:facDesk": {
+   "file": "facDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     34.75,
+     43.75
+    ]
+   ]
+  },
+  "place:noorBig": {
+   "file": "noorBig.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     43.0,
+     55.5
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     54.75,
+     82.75
+    ],
+    [
+     88.0,
+     95.25
+    ],
+    [
+     99.25,
+     122.0
+    ],
+    [
+     128.0,
+     160.0
+    ],
+    [
+     192.25,
+     200.75
+    ],
+    [
+     214.0,
+     283.75
+    ],
+    [
+     336.5,
+     353.5
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     82.0,
+     88.75
+    ],
+    [
+     94.5,
+     100.25
+    ],
+    [
+     168.25,
+     181.5
+    ],
+    [
+     208.25,
+     214.75
+    ],
+    [
+     352.75,
+     357.75
+    ]
+   ]
+  },
+  "place:planClose": {
+   "file": "planClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     121.75,
+     129.0
+    ]
+   ]
+  },
+  "place:planDesk": {
+   "file": "planDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     121.75,
+     129.0
+    ]
+   ]
+  },
+  "place:big": {
+   "file": "big.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     159.25,
+     169.25
+    ],
+    [
+     180.75,
+     192.5
+    ],
+    [
+     200.5,
+     208.5
+    ]
+   ]
+  },
+  "place:platform": {
+   "file": "platform.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     282.75,
+     290.25
+    ]
+   ]
+  },
+  "place:platformDesk": {
+   "file": "platformDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     282.75,
+     290.25
+    ]
+   ]
+  },
+  "place:bigPlat": {
+   "file": "bigPlat.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     289.5,
+     320.25
+    ]
+   ]
+  },
+  "place:mapClose": {
+   "file": "mapClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     319.5,
+     327.5
+    ]
+   ]
+  },
+  "place:facultyDawn": {
+   "file": "facultyDawn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     326.5,
+     337.25
+    ]
+   ]
+  },
+  "place:facDeskDawn": {
+   "file": "facDeskDawn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     326.5,
+     337.25
+    ]
+   ]
+  }
+ }
+}

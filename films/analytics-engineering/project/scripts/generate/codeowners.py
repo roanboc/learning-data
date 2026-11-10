@@ -38,6 +38,13 @@ TARGET = ROOT / "CODEOWNERS"
 LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
           "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
+         "The claims app: its owner, for the claims read where the app writes them":
+         ("/sources/claims_app/",),
+         "Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products":
+         ("/models/core/staff/", "/seeds/reference/course/units.csv", "/seeds/reference/staff/",
+          "/governance/4-data-products/claims.yml", "/governance/4-data-products/payroll_export.yml"),
+         "The hours to pay: the claims job's mart, its product and the payroll system that reads it":
+         ("/models/marts/payroll/", "/governance/4-data-products/hours_to_pay.yml", "/exposures/payroll/"),
          "Name reports: graduates' reports about their own names, and the registrar's office's answers":
          ("/governance/4-data-products/name_reports.yml",)}
 

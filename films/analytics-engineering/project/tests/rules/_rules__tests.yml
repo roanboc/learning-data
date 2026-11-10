@@ -10,6 +10,13 @@ data_tests:
     config:
       meta: {owner: Alumni office, dimension: consistency}
 
+  - name: approved_claims_have_a_pay_day
+    description: >
+      Every approved claim has a pay day in payroll's calendar, so none waits for a pay day that
+      isn't there. HR adds the next year's pay days before the last close of this one.
+    config:
+      meta: {owner: HR, dimension: completeness}
+
   - name: old_form_names_not_yet_confirmed
     description: >
       A name the old form made, still in plain letters A to Z, not yet confirmed by its graduate:

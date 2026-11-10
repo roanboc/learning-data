@@ -1,0 +1,113 @@
+{
+ "player": "2453d684ea1ed288",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "m6cloth": {
+   "file": "m6cloth.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     8.75
+    ]
+   ]
+  },
+  "leaf1000x150|21|0|333.3333333333333,666.6666666666666": {
+   "file": "leaf1000x150_21_0_333_3333333333333_666_6666666666666.webp",
+   "w": 2080,
+   "h": 380,
+   "shows": [
+    [
+     0,
+     8.75
+    ]
+   ]
+  },
+  "place:ashram": {
+   "file": "ashram.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     7.5,
+     21.5
+    ]
+   ]
+  },
+  "leaf1460x200|13|0|70,1390": {
+   "file": "leaf1460x200_13_0_70_1390.webp",
+   "w": 3000,
+   "h": 480,
+   "shows": [
+    [
+     14.5,
+     23.0
+    ]
+   ]
+  },
+  "place:village": {
+   "file": "village.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     20.0,
+     41.25
+    ],
+    [
+     270.75,
+     276.0
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     40.0,
+     98.5
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     97.5,
+     212.25
+    ],
+    [
+     274.5,
+     292.25
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     211.25,
+     254.5
+    ]
+   ]
+  },
+  "place:plainB": {
+   "file": "plainB.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     253.25,
+     271.75
+    ]
+   ]
+  }
+ }
+}

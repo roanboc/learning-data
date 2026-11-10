@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/what-it-must-do/soundtrack.mp3",
+      "size": 4587563,
+      "sha256": "237bb960730addb7f427a0af105bfc57fa14bd61a7e5b3fd6c2ea655aa5d2c5c",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/237bb960730addb7f427a0af105bfc57fa14bd61a7e5b3fd6c2ea655aa5d2c5c.mp3"
+    }
+  ]
+}

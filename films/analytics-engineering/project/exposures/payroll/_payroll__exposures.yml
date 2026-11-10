@@ -1,0 +1,18 @@
+exposures:
+
+  - name: payroll_system
+    label: The payroll system
+    type: application
+    maturity: high
+    description: >
+      The payroll system pays casual staff from the hours it's sent: each claim approved for the
+      coming pay day, sent at 22:00 on the Monday before it by the claims job
+      (resources/claims.job.yml), and needed by noon on the Tuesday. The university buys the system
+      and doesn't run it on the platform, so the hours to pay are the one thing in the claims' story
+      that leaves it. A change to what reaches payroll comes through a pull request, and the lineage
+      names payroll among who to tell.
+    owner:
+      name: HR
+      email: hr@uni.example
+    depends_on:
+      - ref('mart_payroll__hours_to_pay')

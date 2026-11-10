@@ -7,7 +7,7 @@
 // Zoë Lefèvre, a March graduate, new in this film: drawn to the kit's rules (an adult's proportions, one three-quarter head, arms
 // down), in none of the module's six colours; looked at full size, facing both ways, on 5 November 2026
 const VT_ZOE={key:"vtZoe",name:"Zoë Lefèvre",role:"Graduate, Bachelor of Arts",skin:[236,202,178],hair:{style:"long",c:[98,64,42]},earrings:[224,216,204],
-  top:{kind:"cardigan",c:[124,92,116],inner:[240,234,226]},breath:0.3};
+  top:{kind:"cardigan",c:[188,140,134],inner:[240,234,226]},breath:0.3};
 // where people stand behind the bench: their y, and the height they're cut at
 const VT_P={y:588,s:0.98,cut:DQ_BENCH.back};
 
@@ -70,11 +70,18 @@ function vt_folder(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
   if(o.k!=null)ag_about(ctx,x,y,lerp(0.7,1,ag_spr(o.k,0,0.6)));if(o.touch){ctx.translate(x,y);ctx.rotate(-0.05*ag_sine(o.touch));ctx.translate(-x,-y);}
   ag_floorShadow(ctx,x-12,y-2,w*0.56,10,0.5);
   const buff=[222,206,172];ctx.save();dq_shadow(ctx,"wall",0.8);ctx.fillStyle=rgba(ag_dk(buff,0.08),1);ctx.beginPath();ctx.moveTo(L+18,T0+8);ctx.lineTo(L+120,T0+8);ctx.lineTo(L+136,T0-22);ctx.lineTo(L+230,T0-22);ctx.lineTo(L+246,T0+8);ctx.lineTo(L+w-6,T0+8);ctx.lineTo(L+w-6,y);ctx.lineTo(L+18,y);ctx.closePath();ctx.fill();ctx.restore();
+  // the papers inside, their edges just showing at the top and the open side
+  ctx.fillStyle=rgba(DQ.paper,1);rr(ctx,L+8,T0+6,w-4,h-10,3);ctx.fill();ctx.strokeStyle="rgba(120,96,64,0.3)";ctx.lineWidth=1;rr(ctx,L+8,T0+6,w-4,h-10,3);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(L+w+1,T0+16);ctx.lineTo(L+w+1,y-8);ctx.stroke();
   let g=ctx.createLinearGradient(L,0,L+w,0);g.addColorStop(0,rgba(ag_dk(buff,0.1),1));g.addColorStop(1,rgba(ag_lt(buff,0.08),1));ctx.fillStyle=g;rr(ctx,L,T0+14,w,h-14,6);ctx.fill();
-  ctx.strokeStyle="rgba(120,96,64,0.4)";ctx.lineWidth=1.4;rr(ctx,L,T0+14,w,h-14,6);ctx.stroke();
-  // the string, round it both ways, and its bow
-  ctx.strokeStyle=rgba(DQ.string,1);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(L,T0+h*0.56);ctx.lineTo(L+w,T0+h*0.56);ctx.moveTo(x+40,T0+14);ctx.lineTo(x+40,y);ctx.stroke();
-  ctx.lineWidth=2.6;ctx.beginPath();ctx.ellipse(x+24,T0+h*0.56-8,16,8,-0.5,0,TAU);ctx.ellipse(x+56,T0+h*0.56-8,16,8,0.5,0,TAU);ctx.moveTo(x+40,T0+h*0.56);ctx.lineTo(x+22,T0+h*0.56+26);ctx.moveTo(x+40,T0+h*0.56);ctx.lineTo(x+60,T0+h*0.56+24);ctx.stroke();
+  ctx.strokeStyle="rgba(120,96,64,0.45)";ctx.lineWidth=1.4;rr(ctx,L,T0+14,w,h-14,6);ctx.stroke();
+  // its cream label, written by hand: two lines of ink too small to read, there to say it's a file, not to be read
+  ctx.save();dq_shadow(ctx,"wall",0.3);ctx.fillStyle=rgba(DQ.paper,1);rr(ctx,x-96,T0+56,192,70,5);ctx.fill();ctx.restore();ctx.strokeStyle="rgba(120,96,64,0.45)";ctx.lineWidth=1.2;rr(ctx,x-96,T0+56,192,70,5);ctx.stroke();
+  ctx.strokeStyle=rgba(DQ.ink,0.55);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(x-72,T0+82);ctx.bezierCurveTo(x-30,T0+78,x+10,T0+86,x+60,T0+80);ctx.moveTo(x-72,T0+104);ctx.bezierCurveTo(x-44,T0+101,x-16,T0+107,x+18,T0+103);ctx.stroke();
+  // the tape, round it both ways, and its bow: a darker brown than the folder, so it reads as tied shut
+  const tape=[128,92,58],ty=T0+h*0.56;ctx.strokeStyle=rgba(tape,0.95);ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(L,ty);ctx.lineTo(L+w,ty);ctx.moveTo(x+40,T0+14);ctx.lineTo(x+40,y);ctx.stroke();
+  ctx.lineWidth=3.4;ctx.beginPath();ctx.ellipse(x+22,ty-9,18,9,-0.5,0,TAU);ctx.moveTo(x+76,ty-9);ctx.ellipse(x+58,ty-9,18,9,0.5,0,TAU);ctx.moveTo(x+40,ty);ctx.quadraticCurveTo(x+30,ty+14,x+20,ty+30);ctx.moveTo(x+40,ty);ctx.quadraticCurveTo(x+52,ty+14,x+62,ty+28);ctx.stroke();
+  ctx.fillStyle=rgba(tape,1);ctx.beginPath();ctx.arc(x+40,ty-2,6,0,TAU);ctx.fill();
   ctx.restore();}
 
 // the exam boards' approved lists: three bound volumes lying one on another, brass corners on their covers, a cream label on each spine.

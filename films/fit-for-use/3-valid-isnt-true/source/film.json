@@ -5,12 +5,13 @@
   "howto": "The film is drawn in the module's look, the quality bench: a warm stone wall and a dark granite bench under its lamp. Records are cream index cards, checks an inspector's gauges, and results tags tied on with string, in the verdict's colour: green passes, amber holds for a person, red stops, grey wasn't checked. Brass is the reference, steel blue a measure taken. Japan, 1800 to 1821, is painted full-frame, matte and soft-lit, with the place and year on a tag.",
   "src": [
     "past.js",
+    "bench.js",
     "scenes.js"
   ],
   "poster": [
     "true",
-    "printer",
-    2.0
+    "now",
+    2.5
   ],
   "say": [
     [

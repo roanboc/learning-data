@@ -71,19 +71,20 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>{const q={g0:vt_g0
       let q=vt_pop(tt,P.finished+0.2,c.degree-0.4);dq_textCard(x,140,220,700,{title:"Finished by his teams",sub:"three years after his death"},{k:q.k,a:q.a});
       q=vt_pop(tt,P.base,c.degree-0.4);dq_textCard(x,140,420,700,{title:"The base of Japan's maps",sub:"for decades"},{edge:"brass",k:q.k,a:q.a});
       q=vt_pop(tt,c.degree,null);vt_degree(x,140,300,{his:ag_in(tt,P.oneDeg,1.0),today:ag_in(tt,P.ns+0.3,1.0),frac:ag_in(tt,P.frac,0.6),k:q.k,a:q.a});}},
-    {at:c.uni-0.2,place:"bench",keys:[[0,960,540,1]],draw:(x,tt)=>{
+    {at:c.uni-0.2,place:"bench",keys:[[0,960,540,1]],draw:(x,tt)=>{vt_who(x,"jun",300,P.g0+tt,1);
       let q=vt_pop(tt,P.list-0.3,null);vt_whole(x,q.a,cx=>vt_tray(cx,760,872,{label:"The March list",sub:"1,064 graduates",k:q.k}));
-      q=vt_pop(tt,P.allowed,null);dq_tag(x,1060,836,"pass",{text:"ALLOWED · 1,064 OF 1,064",to:[1000,814],k:q.k,a:q.a,on:"granite",angle:0.02});
-      const rt=ag_in(tt,P.right,0.8),wa=ag_in(tt,P.wrong,0.5),nw=vt_count(x,1100,440,"88",null,{size:120,col:mix(DQ_TONE.hold.word,DQ_TONE.pass.word,rt),a:wa});
+      // the words go as the title comes, so none shows through it; Jun and the list stay, and the next chapter opens on them
+      const T1=c.breath-0.2;q=vt_pop(tt,P.allowed,T1);dq_tag(x,1060,836,"pass",{text:"ALLOWED · 1,064 OF 1,064",to:[1000,814],k:q.k,a:q.a,on:"granite",angle:0.02});
+      const rt=ag_in(tt,P.right,0.8),wa=ag_io(tt,P.wrong,T1,0.5),nw=vt_count(x,1100,440,"88",null,{size:120,col:mix(DQ_TONE.hold.word,DQ_TONE.pass.word,rt),a:wa});
       dq_T(x,"still wrong",1100+nw+22,432,{w:700,size:32,col:"hold",a:wa*(1-ag_in(tt,P.right-0.2,0.3))});
-      dq_T(x,"put right",1100+nw+22,432,{w:700,size:32,col:"pass",a:ag_in(tt,P.right+0.2,0.4)});
-      dq_chip(x,1100,520,"before a single certificate was printed",{icon:"certificate",col:"pass",a:ag_in(tt,P.before,0.5)});
-      vt_bigStar(x,1130,236,ag_in(tt,P.stars2,0.8),1.4);vt_folk(x,1206,236,10,44,{col:"brass",u:ag_in(tt,P.grads,1.4),a:ag_in(tt,P.grads,0.3)});}}]);
+      dq_T(x,"put right",1100+nw+22,432,{w:700,size:32,col:"pass",a:ag_io(tt,P.right+0.2,T1,0.4)});
+      dq_chip(x,1100,520,"before a single certificate was printed",{icon:"certificate",col:"pass",a:ag_io(tt,P.before,T1,0.5)});
+      vt_bigStar(x,1130,236,ag_io(tt,P.stars2,T1,0.8),1.4);vt_folk(x,1206,236,10,44,{col:"brass",u:ag_in(tt,P.grads,1.4),a:ag_io(tt,P.grads,T1,0.3)});}}]);
   // the coast sheet, over the shore in screen space: it stays put while the day turns to night
   const shA=ag_io(t,P.stretch-0.6,c.years-0.6,0.6);if(shA>0.004){setScreen(ctx,S);const pull=ag_in(t,P.corr,1.6),end=vt_sheetEnd(pull),e0=vt_sheetEnd(0),io=(t0,t1)=>ag_io(t,t0,t1,0.4);
     vt_sheet(ctx,t,{n:vt_stretches(t,P.stretch-0.2,P.per),wedge:ag_in(t,P.small,2.0),lat:ag_in(t,P.north,1.2),pull,a:shA});
-    withA(ctx,shA,()=>{dq_T(ctx,"small errors,",1600,480,{w:700,size:28,col:DQ.soft,a:io(P.pile,P.corr)});dq_T(ctx,"piling up",1600,516,{w:700,size:28,col:DQ.soft,a:io(P.pile+0.3,P.corr)});
-      dq_T(ctx,"each passes,",1600,620,{w:700,size:28,col:"pass",a:io(P.agree,P.corr)});dq_T(ctx,"agrees with itself",1600,656,{w:700,size:28,col:DQ.soft,a:io(P.agree+0.3,P.corr)});
+    withA(ctx,shA,()=>{dq_T(ctx,"small errors,",1566,480,{w:700,size:28,col:DQ.soft,a:io(P.pile,P.corr)});dq_T(ctx,"piling up",1566,516,{w:700,size:28,col:DQ.soft,a:io(P.pile+0.3,P.corr)});
+      dq_T(ctx,"each passes,",1566,620,{w:700,size:28,col:"pass",a:io(P.agree,P.corr)});dq_T(ctx,"agrees with itself",1566,656,{w:700,size:28,col:DQ.soft,a:io(P.agree+0.3,P.corr)});
       const da=io(P.milesOut,P.corr-0.2),tr=VT_TRUE[VT_TRUE.length-1];if(da>0.004){ctx.save();ctx.globalAlpha*=da;ctx.strokeStyle=rgba(DQ.ink,0.8);ctx.lineWidth=3;ctx.setLineDash([8,8]);
         ctx.beginPath();ctx.moveTo(e0[0]-10,e0[1]+8);ctx.lineTo(tr[0]+10,tr[1]-6);ctx.stroke();ctx.restore();}
       dq_T(ctx,"miles out",1604,214,{w:700,size:28,a:da});
@@ -105,7 +106,7 @@ scene("stars",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>{const q={g0:vt_g0
 function vt_allowed(x,tt,c,P){const G=P.g0+tt,A1=c.zoe-0.6,B1=c.doubts-0.5;
   vt_who(x,"jun",300,G,1);
   // the list: it goes while three of its records are looked at, and comes back for the doubts
-  const trA=tt<B1?ag_in(tt,c.holds+0.2,0.5)*(1-ag_in(tt,A1,0.4)):ag_in(tt,c.doubts-0.3,0.5);vt_whole(x,trA,cx=>vt_tray(cx,760,872,{label:"The March list",sub:"1,064 graduates",k:tt<B1?tt-c.holds-0.2:tt-c.doubts+0.3}));
+  const trA=tt<B1?1-ag_in(tt,A1,0.4):ag_in(tt,c.doubts-0.3,0.5);vt_whole(x,trA,cx=>vt_tray(cx,760,872,{label:"The March list",sub:"1,064 graduates",k:tt<B1?9:tt-c.doubts+0.3}));
   // the rules, as said, then measuring; all pass
   let q=vt_pop(tt,P.empty-0.3,A1);vt_rule(x,1180,110,640,"Not empty",{k:q.k,a:q.a,lit:ag_in(tt,P.empty+0.4,0.5)});
   q=vt_pop(tt,P.letters-0.3,A1);vt_rule(x,1180,272,640,"Letters, spaces, hyphens, apostrophes",{k:q.k,a:q.a,lit:ag_in(tt,P.letters+0.6,0.5)});
@@ -130,14 +131,14 @@ scene("allowed",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),e
     field:wAt(sc,"thirty","field"),allowedW:wAt(sc,"means","allowed"),cutS:wAt(sc,"short","a name cut short"),swap:wAt(sc,"short","a given name"),
     hundred:wAt(sc,"doubts","a hundred records"),accent:wAt(sc,"twelve","not one accent")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1],[c.doubts-0.4,1000,520,1.04]],d:2.4,draw:(x,tt)=>vt_allowed(x,tt,c,P)}]);
-  setScreen(ctx,S);dq_kicker(ctx,"2","Every name allowed",{a:ag_in(t,0.3,0.6)});vt_date(ctx,S,"February 2026",ag_in(t,c.feb,0.5));});
+  setScreen(ctx,S);dq_kicker(ctx,"2","Every name allowed",{a:ag_in(t,0.8,0.5)});vt_date(ctx,S,"February 2026",ag_in(t,c.feb,0.5));});
 
 /* ---------------------------------------------------------------- 3 · A reference outside the data
    Ino's star, and what a reference is: outside the data, knowing the truth, out of the errors' reach. Jun and the list go; the list's
    three references come in, each as it's said, from the closest to the truth: the graduate (Zoë), the document seen at enrolment (a
    closed folder, never opened), and the exam boards' approved lists, kept apart. A brass arrow over them points to the closest; what
    the closest and the farthest can tell, and what each costs; checking against a reference measures accuracy. */
-function vt_reference(x,tt,c,P){const G=P.g0+tt,go=c.three-1.2;
+function vt_reference(x,tt,c,P){const G=P.g0+tt,go=c.graduate-1.2;
   vt_who(x,"jun",300,G,1-ag_in(tt,go,0.6));vt_whole(x,1-ag_in(tt,go,0.6),cx=>vt_tray(cx,760,872,{label:"The March list",sub:"1,064 graduates",k:9}));
   vt_bigStar(x,700,300,ag_io(tt,P.stars-0.2,c.three-0.8,0.6),1.5);
   let q=vt_pop(tt,P.outside-0.3,c.three-0.8);dq_textCard(x,800,200,820,{kick:"A reference",title:"Something outside the data",sub:"that knows the truth, and that the data's errors can't reach"},{edge:"brass",k:q.k,a:q.a});
@@ -149,19 +150,19 @@ function vt_reference(x,tt,c,P){const G=P.g0+tt,go=c.three-1.2;
   q=vt_pop(tt,c.boards,null);vt_whole(x,q.a,cx=>vt_boards(cx,1560,850,{k:q.k}));dq_chip(x,1560,200,"The exam boards' approved lists",{align:"center",col:"brass",a:ag_in(tt,c.boards+0.3,0.5)});
   dq_chip(x,1560,266,"kept apart",{align:"center",a:ag_in(tt,P.apart,0.5)});dq_chip(x,1560,332,"who completed each award, and when",{align:"center",a:ag_in(tt,P.who,0.5)});
   // closer to the truth: the arrow points to the graduate
-  const ar=ag_in(tt,c.closer,1.2);if(ar>0.004){const x0=1560,x1=300,y=146,xe=lerp(x0,x1+40,ag_sine(ar));x.save();x.strokeStyle=rgba(DQ.brass,1);x.fillStyle=rgba(DQ.brass,1);x.lineWidth=5;x.lineCap="round";
+  const ar=ag_in(tt,P.closest,1.2);if(ar>0.004){const x0=1560,x1=300,y=146,xe=lerp(x0,x1+40,ag_sine(ar));x.save();x.strokeStyle=rgba(DQ.brass,1);x.fillStyle=rgba(DQ.brass,1);x.lineWidth=5;x.lineCap="round";
     x.beginPath();x.moveTo(x0,y);x.lineTo(xe,y);x.stroke();x.beginPath();x.moveTo(xe-18,y);x.lineTo(xe+6,y-13);x.lineTo(xe+6,y+13);x.closePath();x.fill();x.restore();
-    dq_T(x,"closer to the truth",930,124,{w:700,size:28,col:"brass",align:"center",a:ag_in(tt,c.closer+0.8,0.5)});}
+    dq_T(x,"closer to the truth",930,124,{w:700,size:28,col:"brass",align:"center",a:ag_in(tt,P.closest+0.8,0.5)});}
   // what each can tell, and what it costs
   const off=c.accuracy-0.4;
   q=vt_pop(tt,P.anything-0.2,off);dq_chip(x,470,400,"anything about their name",{a:q.a});q=vt_pop(tt,P.wait-0.3,off);dq_chip(x,470,470,"ask, and wait",{icon:"hourglass",a:q.a});
   q=vt_pop(tt,P.night-0.2,off);dq_chip(x,1560,560,"there every night",{icon:"clock",align:"center",a:q.a});q=vt_pop(tt,P.spelling-0.3,off);dq_chip(x,1560,630,"nothing of spelling",{align:"center",a:q.a});
   q=vt_pop(tt,c.accuracy+0.1,null);dq_textCard(x,1240,400,600,{kick:"In data quality's words",title:"Accuracy: whether it's true"},{edge:"brass",k:q.k,a:q.a});}
-scene("reference",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),stars:wAt(sc,"had","stars"),outside:wAt(sc,"needs","outside the data"),
+scene("reference",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),stars:wAt(sc,"had","stars"),closest:wAt(sc,"three","closest"),outside:wAt(sc,"needs","outside the data"),
     once:wAt(sc,"document","checked once"),apart:wAt(sc,"boards","kept apart"),who:wAt(sc,"boards","who completed"),anything:wAt(sc,"ask","anything"),wait:wAt(sc,"ask","wait"),
     night:wAt(sc,"every","every night"),spelling:wAt(sc,"every","spelling")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],d:2.4,draw:(x,tt)=>vt_reference(x,tt,c,P)}]);
-  setScreen(ctx,S);dq_kicker(ctx,"3","A reference outside the data",{a:ag_in(t,0.3,0.6)});});
+  setScreen(ctx,S);dq_kicker(ctx,"3","A reference outside the data",{a:ag_in(t,0.8,0.5)});});
 
 /* ---------------------------------------------------------------- 4 · Ask the graduate
    Zoë, and the portal's page beside her, as large as a card: her name as it would be printed, and two buttons; she presses "This
@@ -169,41 +170,55 @@ scene("reference",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc)
    88 were; all of them allowed. A certificate carries a legal name: Mei, and the folder, the next reference; 84 matched, 4 had changed
    their name and sent the document. The list takes each name as confirmed, with the date; 51 didn't answer. The one name exactly 30
    long that really is that long: its amber tag turns green. A check raises a doubt; a reference settles it. */
+// the 1,064 graduates as one bar: those who answered fill it in ink as it's said, then the 925 who confirmed turn green and the 88 who
+// corrected turn amber; the 51 who didn't answer stay empty at its end
+function vt_answerBar(x,tt,c,a){if(a<=0.004)return;const X=600,Y=300,BW=1040,BH=44,k=BW/1064,aw=1013*k*ag_sine((tt-c.answered)/1.2),g=ag_in(tt,c.confirmed,0.6),h=ag_in(tt,c.corrected,0.6);
+  x.save();x.globalAlpha*=a;x.fillStyle=rgba(DQ.paper,0.92);rr(x,X,Y,BW,BH,12);x.fill();x.save();rr(x,X,Y,BW,BH,12);x.clip();
+  x.fillStyle=rgba(DQ.ink,0.62);x.fillRect(X,Y,aw,BH);
+  if(g>0.004){x.fillStyle=rgba(DQ_TONE.pass.col,g);x.fillRect(X,Y,Math.min(aw,925*k),BH);}
+  if(h>0.004){x.fillStyle=rgba(DQ_TONE.hold.col,h);x.fillRect(X+925*k,Y,clamp(aw-925*k,0,88*k),BH);}
+  x.fillStyle=rgba(DQ.paper,0.9*Math.max(g,h));x.fillRect(X+925*k-1.5,Y,3,BH);x.restore();
+  x.strokeStyle="rgba(110,90,66,0.5)";x.lineWidth=1.6;rr(x,X,Y,BW,BH,12);x.stroke();x.restore();}
 function vt_ask(x,tt,c,P){const G=P.g0+tt,z1=c.answered-0.6,L1=c.legal-0.4,T1=c.took-0.4,O1=c.one-0.4;
-  vt_who(x,VT_ZOE,300,G,1-ag_in(tt,z1,0.6));
-  let q=vt_pop(tt,c.showed-0.2,z1);vt_whole(x,q.a,cx=>vt_portal(cx,560,96,{name:"Zoe Lefevre",typed:"Zoë Lefèvre",tu:(tt-P.typed-0.2)/1.8,press:tt>P.pressed-0.1?2:0,pu:ag_in(tt,P.pressed,0.35),k:q.k}));
-  // the answers
-  q=vt_pop(tt,c.answered,L1);vt_count(x,200,250,"1,013","of 1,064 answered · 95%",{a:q.a});
-  q=vt_pop(tt,c.confirmed,L1);vt_count(x,200,370,"925","confirmed their name as it was",{col:"pass",a:q.a});
-  q=vt_pop(tt,c.corrected,T1);const nw=vt_count(x,200,490,"88","corrected it",{col:"hold",a:q.a});
+  // Zoë stays while her answer, the others' and her row on the list are shown; she goes before another graduate's name comes in
+  vt_who(x,VT_ZOE,300,G,1-ag_in(tt,c.one-0.7,0.6));
+  // what the registrar's office asked, as the graduates registered; the portal's page beside Zoë
+  let q=vt_pop(tt,c.asked+0.2,z1);dq_textCard(x,1120,170,680,{kick:"The registrar's office asked",title:"Is this your name?",sub:"exactly as it will be printed"},{k:q.k,a:q.a});
+  dq_chip(x,1120,420,"while registering for the March ceremonies",{icon:"seat",a:ag_io(tt,P.reg-0.2,z1,0.4)});
+  q=vt_pop(tt,c.showed-0.2,z1);vt_whole(x,q.a,cx=>vt_portal(cx,560,96,{name:"Zoe Lefevre",typed:"Zoë Lefèvre",tu:(tt-P.typed-0.2)/1.8,press:tt>P.pressed-0.1?2:0,pu:ag_in(tt,P.pressed,0.35),k:q.k}));
+  // the answers: 1,013 answered, 925 confirmed, 88 corrected, and what the 88 were; all of them allowed
+  const bA=ag_io(tt,c.answered,L1,0.4);vt_answerBar(x,tt,c,bA);vt_count(x,600,262,"1,013","of 1,064 answered · 95%",{size:88,a:bA});
+  vt_count(x,600,440,"925","confirmed their name as it was",{col:"pass",size:72,a:ag_io(tt,c.confirmed,L1,0.4)});
+  const nw=vt_count(x,600,540,"88","corrected it",{col:"hold",size:72,a:ag_io(tt,c.corrected,T1,0.4)});
   const bars=[[P.f51,"lost their accents",51],[P.f19,"given and family names swapped",19],[P.f11,"cut short",11],[P.f7,"misspelt",7]];
-  bars.forEach(([t0,s,n],i)=>{const a=ag_io(tt,t0-0.2,L1,0.4);if(a<=0.004)return;const y=578+i*56,len=n*10*ag_sine((tt-t0+0.2)/0.8);
-    dq_T(x,s,240,y,{w:600,size:28,col:DQ.soft,a});x.save();x.globalAlpha*=a;x.fillStyle=rgba(DQ_TONE.hold.col,0.9);rr(x,760,y-22,len,26,5);x.fill();x.restore();
-    dq_T(x,String(n),760+len+16,y,{w:700,size:28,col:"hold",a:a*ag_in(tt,t0+0.5,0.3)});});
-  dq_chip(x,200+nw+18+dq_tw(x,"corrected it",{w:500,size:30})+30,482,"all 88 allowed",{icon:"tick",col:"pass",a:ag_io(tt,c.allowed,L1,0.4)});
-  // a legal name: the next reference, the document seen at enrolment
-  dq_chip(x,200,250,"a certificate carries the legal name",{icon:"certificate",a:ag_io(tt,c.legal,T1,0.4)});
-  vt_who(x,"mei",1720,G,ag_io(tt,P.mei-0.3,c.dur+1,0.6),{flip:true});
+  bars.forEach(([t0,s,n],i)=>{const a=ag_io(tt,t0-0.2,L1,0.4);if(a<=0.004)return;const y=606+i*48,len=n*8*ag_sine((tt-t0+0.2)/0.8);
+    dq_T(x,s,640,y,{w:600,size:28,col:DQ.soft,a});if(len>1){x.save();x.globalAlpha*=a;x.fillStyle=rgba(DQ_TONE.hold.col,0.9);rr(x,1100,y-22,len,26,5);x.fill();x.restore();}
+    dq_T(x,String(n),1100+len+16,y,{w:700,size:28,col:"hold",a:a*ag_in(tt,t0+0.5,0.3)});});
+  dq_chip(x,600+nw+18+dq_tw(x,"corrected it",{w:500,size:30})+30,526,"all 88 allowed",{icon:"tick",col:"pass",a:ag_io(tt,c.allowed,L1,0.4)});
+  // a legal name: Mei's team checks each correction against the next reference, the document seen at enrolment
+  dq_chip(x,600,262,"a certificate carries the legal name",{icon:"certificate",a:ag_io(tt,c.legal,T1,0.4)});
+  vt_who(x,"mei",1720,G,ag_in(tt,P.mei-0.3,0.6),{flip:true});
   q=vt_pop(tt,P.doc-0.2,null);vt_whole(x,q.a,cx=>vt_folder(cx,1330,846,{k:q.k,touch:ag_io(tt,c.matched-0.3,c.matched+1.2,0.4)+ag_io(tt,P.settled-0.2,P.settled+1.2,0.4)}));
   dq_chip(x,1330,400,"seen at enrolment",{align:"center",col:"brass",a:q.a});
-  q=vt_pop(tt,c.matched,T1);vt_count(x,200,620,"84","matched the document",{col:"pass",a:q.a});
-  q=vt_pop(tt,P.sent-0.4,T1);vt_count(x,200,740,"4","changed their name, and sent the new document",{col:"pass",a:q.a});
-  // the list takes each name as its graduate confirmed it, with the date; those who didn't answer, as the student system holds them
-  q=vt_pop(tt,c.took,O1);const r=dq_record(x,200,230,800,{rows:[{k:"Name as printed",v:""},{k:"Confirmed on",v:"11 February 2026"}]},{k:q.k,a:q.a,labW:260,fixed:true});
-  if(q.a>0.004){x.save();x.globalAlpha*=q.a;vt_name(x,"Zoë Lefèvre",200+DQ_PAD+260,r.rows[0].cy+10,{size:30});x.restore();}
-  x.save();x.globalAlpha*=ag_io(tt,P.date-0.2,O1,0.4);x.fillStyle=rgba(DQ.brass,1);rr(x,200+10,r.rows[1].y+4,6,50,3);x.fill();x.restore();
-  q=vt_pop(tt,c.didnt,O1);dq_textCard(x,200,520,760,{kick:"Didn't answer · 51",title:"Printed as the student system holds them"},{k:q.k,a:q.a});
+  vt_count(x,600,636,"84","matched the document",{col:"pass",size:72,a:ag_io(tt,c.matched,T1,0.4)});
+  const fa=ag_io(tt,c.four,T1,0.4),fw=vt_count(x,600,730,"4","had changed their name since,",{col:"pass",size:72,a:fa});
+  dq_T(x,"and sent the new document",600+fw+18,766,{w:500,size:30,col:DQ.soft,a:fa*ag_in(tt,P.sent-0.3,0.4)});
+  // the list takes each name as its graduate confirmed it, with the date; those who didn't answer, as the student system held them
+  q=vt_pop(tt,c.took,O1);const r=dq_record(x,600,196,560,{rows:[{k:"Name as printed",v:""},{k:"Confirmed on",v:"11 February 2026"}]},{k:q.k,a:q.a,labW:220,fixed:true});
+  const na=q.a*ag_in(tt,c.took+0.45,0.3);if(na>0.004){x.save();x.globalAlpha*=na;vt_name(x,"Zoë Lefèvre",600+DQ_PAD+220,r.rows[0].cy+10,{size:30});x.restore();}
+  x.save();x.globalAlpha*=ag_io(tt,P.date-0.2,O1,0.4);x.fillStyle=rgba(DQ.brass,1);rr(x,600+10,r.rows[1].y+4,6,50,3);x.fill();x.restore();
+  q=vt_pop(tt,c.didnt,O1);dq_textCard(x,600,430,560,{kick:"Didn't answer · 51",title:"Printed as the student system held them"},{k:q.k,a:q.a});
   // the one name exactly 30 long: the document settles it
-  q=vt_pop(tt,c.one,null);const r2=dq_record(x,200,230,600,{rows:[{k:"Family name",v:"Herath Mudiyanselage Wijeratne"}]},{k:q.k,a:q.a,labW:200});
-  const tA=vt_pop(tt,c.one+0.5,P.settled+0.3);dq_tag(x,r2.x+r2.w+48,r2.y+r2.h/2,"hold",{text:"EXACTLY 30 CHARACTERS",icon:"why",size:28,to:[r2.x+r2.w,r2.y+r2.h/2],k:tA.k,a:tA.a});
+  q=vt_pop(tt,c.one+0.1,null);const r2=dq_record(x,200,230,600,{rows:[{k:"Family name",v:"Herath Mudiyanselage Wijeratne"}]},{k:q.k,a:q.a,labW:200});
+  const tA=vt_pop(tt,c.one+0.6,P.settled+0.3);dq_tag(x,r2.x+r2.w+48,r2.y+r2.h/2,"hold",{text:"EXACTLY 30 CHARACTERS",icon:"why",size:28,to:[r2.x+r2.w,r2.y+r2.h/2],k:tA.k,a:tA.a});
   const tB=vt_pop(tt,P.settled+0.7,null);dq_tag(x,r2.x+r2.w+48,r2.y+r2.h/2,"pass",{text:"REALLY 30 CHARACTERS",size:28,to:[r2.x+r2.w,r2.y+r2.h/2],k:tB.k+0.5,a:tB.a});
   q=vt_pop(tt,c.doubt,null);dq_textCard(x,200,420,760,{title:"A check can raise a doubt"},{edge:"hold",k:q.k,a:q.a});
   q=vt_pop(tt,c.settle,null);dq_textCard(x,200,560,760,{title:"Only a reference can settle it"},{edge:"brass",k:q.k,a:q.a});}
-scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),pressed:wAt(sc,"zoe","pressed"),typed:wAt(sc,"zoe","typed"),f51:wAt(sc,"corrected","fifty-one"),
+scene("ask",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),reg:wAt(sc,"portal","registered"),pressed:wAt(sc,"zoe","pressed"),typed:wAt(sc,"zoe","typed"),f51:wAt(sc,"corrected","fifty-one"),
     f19:wAt(sc,"corrected","nineteen"),f11:wAt(sc,"cut","eleven"),f7:wAt(sc,"cut","seven"),mei:wAt(sc,"next","Mei's team"),doc:wAt(sc,"next","the document"),
     sent:wAt(sc,"four","sent"),date:wAt(sc,"took","with the date"),settled:wAt(sc,"one","settled")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],d:2.4,draw:(x,tt)=>vt_ask(x,tt,c,P)}]);
-  setScreen(ctx,S);dq_kicker(ctx,"4","Ask the graduate",{a:ag_in(t,0.3,0.6)});vt_date(ctx,S,"9 to 20 February",ag_io(t,c.portal,c.answered-0.6,0.5));});
+  setScreen(ctx,S);dq_kicker(ctx,"4","Ask the graduate",{a:ag_in(t,0.8,0.5)});vt_date(ctx,S,"9 to 20 February",ag_io(t,c.portal,c.answered-0.6,0.5));});
 
 /* ---------------------------------------------------------------- 5 · Another record, kept apart
    Jun, and a double degree's two awards. On Monday 23 February the check lays the boards' approved awards (brass) over the list's
@@ -216,7 +231,7 @@ const VT_AX=i=>470+i*345,VT_ROW={boards:330,list:520};
 function vt_apart(x,tt,c,P){const G=P.g0+tt,M0=c.monday-0.3,K0=c.kept-0.4,C0=c.copy;
   vt_who(x,"jun",280,G,1);
   // a double degree: two awards, two certificates
-  let q=vt_pop(tt,c.double+0.4,M0);vt_award(x,520,300,"Bachelor of Arts",{k:q.k,a:q.a});q=vt_pop(tt,c.double+0.8,M0);vt_award(x,870,300,"Bachelor of Laws",{k:q.k,a:q.a});
+  let q=vt_pop(tt,c.double+0.4,P.listW-0.6);vt_award(x,520,300,"Bachelor of Arts",{k:q.k,a:q.a});q=vt_pop(tt,c.double+0.8,P.listW-0.6);vt_award(x,870,300,"Bachelor of Laws",{k:q.k,a:q.a});
   dq_chip(x,520,470,"two awards, two certificates",{icon:"certificate",a:ag_io(tt,P.twoCert-0.3,M0,0.4)});
   // the boards' approved awards, and the list's, award by award; after the copy, a copy of the student system in the boards' place
   const W4=["Bachelor of Arts","Bachelor of Laws","Bachelor of Arts","Bachelor of Laws"],bA=ag_io(tt,P.boardsW-0.3,C0-0.1,0.4),cA=ag_io(tt,C0+0.3,c.like-0.3,0.4),
@@ -224,28 +239,32 @@ function vt_apart(x,tt,c,P){const G=P.g0+tt,M0=c.monday-0.3,K0=c.kept-0.4,C0=c.c
   dq_T(x,"The exam boards' approved lists",VT_AX(0),VT_ROW.boards-18,{w:700,size:28,col:"brass",a:bA});
   dq_T(x,"A copy of the student system",VT_AX(0),VT_ROW.boards-18,{w:700,size:28,col:"steel",a:cA});
   const lA=ag_io(tt,P.listW-0.3,c.like-0.3,0.4);
-  dq_T(x,"The list",VT_AX(0),VT_ROW.list-18,{w:700,size:28,col:"steel",a:lA*(1-ag_in(tt,C0-0.1,0.3))});
-  dq_T(x,"The list, as it was",VT_AX(0),VT_ROW.list-18,{w:700,size:28,col:"steel",a:lA*ag_in(tt,C0+0.3,0.4)});
+  // the list's name under its row, the boards' over theirs: the stamps between the rows stay clear
+  dq_T(x,"The list",VT_AX(0),VT_ROW.list+VT_AWARD.h+40,{w:700,size:28,col:"steel",a:lA*(1-ag_in(tt,C0-0.1,0.3))});
+  dq_T(x,"The list, as it was",VT_AX(0),VT_ROW.list+VT_AWARD.h+40,{w:700,size:28,col:"steel",a:lA*ag_in(tt,C0+0.3,0.4)});
   W4.forEach((s,i)=>{const miss=i%2===0,glow=ag_io(tt,c.missing,P.both,0.5)*(miss?1:0);
-    if(bA>0.004)vt_award(x,VT_AX(i),VT_ROW.boards,s,{edge:"brass",k:tt-P.boardsW+0.3-i*0.12,a:bA});
+    // each card fades in as it springs, one after another: none waits, small, for its turn
+    if(bA>0.004)vt_award(x,VT_AX(i),VT_ROW.boards,s,{edge:"brass",k:tt-P.boardsW+0.3-i*0.12,a:bA*ag_in(tt,P.boardsW-0.3+i*0.12,0.25)});
     if(cA>0.004)vt_award(x,VT_AX(i),VT_ROW.boards,s,{edge:"steel",dash:miss,ghost:miss,a:cA});
-    if(lA>0.004){if(miss){const sol=fixed*(1-asWas);vt_award(x,VT_AX(i),VT_ROW.list,s,{edge:"steel",dash:true,ghost:true,glow,glowCol:"stop",a:lA*(1-sol)});
+    if(lA>0.004){const li=ag_in(tt,P.listW-0.3+i*0.12,0.25);if(miss){const sol=fixed*(1-asWas);vt_award(x,VT_AX(i),VT_ROW.list,s,{edge:"steel",dash:true,ghost:true,glow,glowCol:"stop",a:lA*li*(1-sol)});
         vt_award(x,VT_AX(i),VT_ROW.list,s,{edge:"steel",a:lA*sol});}
-      else vt_award(x,VT_AX(i),VT_ROW.list,s,{edge:"steel",k:tt-P.listW+0.3-i*0.12,a:lA});}
+      else vt_award(x,VT_AX(i),VT_ROW.list,s,{edge:"steel",k:tt-P.listW+0.3-i*0.12,a:lA*li});}
     const px=VT_AX(i)+VT_AWARD.w/2,y0=VT_ROW.boards+VT_AWARD.h+8,y1=VT_ROW.list-8;
-    vt_pair(x,px,y0,y1,miss?"stop":"pass",ag_in(tt,P.byAward+i*0.35,0.5),ag_io(tt,P.byAward,C0-0.1,0.3));
+    // the check's verdicts, award by award: the two missing ones fail until both certificates are put back, then pass like the rest
+    const u0=ag_in(tt,P.byAward+i*0.35,0.5);if(miss){vt_pair(x,px,y0,y1,"stop",u0,ag_io(tt,P.byAward,P.both+0.2,0.3));vt_pair(x,px,y0,y1,"pass",1,ag_io(tt,P.both+0.2,C0-0.1,0.3));}
+    else vt_pair(x,px,y0,y1,"pass",u0,ag_io(tt,P.byAward,C0-0.1,0.3));
     vt_pair(x,px,y0,y1,"pass",ag_in(tt,C0+0.6+i*0.25,0.5),ag_io(tt,C0+0.6,c.like-0.3,0.3));});
   q=vt_pop(tt,c.approved,K0);vt_count(x,VT_AX(0),250,"1,101","approved by the boards",{col:"brass",a:q.a});
   q=vt_pop(tt,c.held,K0);vt_count(x,VT_AX(2),250,"1,099","on the list",{col:"steel",a:q.a});
-  dq_chip(x,VT_AX(0),700,"Arts and Laws, held with Laws only",{a:ag_io(tt,c.laws,c.found-0.3,0.4)});
-  q=vt_pop(tt,c.passed,c.found-0.3);dq_tag(x,1290,710,"pass",{text:"EVERY ROW PASSED",to:[VT_AX(3)+VT_AWARD.w/2,VT_ROW.list+VT_AWARD.h],k:q.k,a:q.a});
-  dq_chip(x,VT_AX(0),700,"found three days before the list went",{icon:"clock",a:ag_io(tt,c.found,c.agreed-0.3,0.4)});
-  dq_chip(x,1110,700,"both Arts certificates printed",{icon:"certificate",col:"pass",a:ag_io(tt,P.both,c.agreed-0.3,0.4)});
-  dq_chip(x,VT_AX(0),700,"every other award and date agreed",{icon:"tick",col:"pass",a:ag_io(tt,c.agreed,K0,0.4)});
+  dq_chip(x,VT_AX(0),734,"Arts and Laws, held with Laws only",{a:ag_io(tt,c.laws,c.found-0.3,0.4)});
+  q=vt_pop(tt,c.passed,c.found-0.3);dq_tag(x,1290,740,"pass",{text:"EVERY ROW PASSED",to:[VT_AX(3)+VT_AWARD.w/2,VT_ROW.list+VT_AWARD.h],k:q.k,a:q.a});
+  dq_chip(x,VT_AX(0),734,"found three days before the list went",{icon:"clock",a:ag_io(tt,c.found,c.agreed-0.3,0.4)});
+  dq_chip(x,1110,734,"both Arts certificates printed",{icon:"certificate",col:"pass",a:ag_io(tt,P.both,c.agreed-0.3,0.4)});
+  dq_chip(x,VT_AX(0),734,"every other award and date agreed",{icon:"tick",col:"pass",a:ag_io(tt,c.agreed,K0,0.4)});
   // kept apart; a copy would agree, and both be wrong
   const k1=dq_chip(x,VT_AX(0),250,"kept apart",{col:"brass",a:ag_io(tt,c.kept,C0-0.4,0.4)});
   dq_chip(x,k1.x+k1.w+16,250,"made from the boards' own decisions",{a:ag_io(tt,P.own-0.3,C0-0.4,0.4)});
-  dq_chip(x,VT_AX(0),700,"they agree, and both are wrong",{icon:"tick",a:ag_io(tt,P.bothWrong-0.2,c.like-0.3,0.4)});
+  dq_chip(x,VT_AX(0),734,"they agree, and both are wrong",{icon:"tick",a:ag_io(tt,P.bothWrong-0.2,c.like-0.3,0.4)});
   q=vt_pop(tt,c.consistent,c.like-0.3);dq_textCard(x,VT_AX(2),120,640,{kick:"In data quality's words",title:"Consistent, not accurate"},{k:q.k,a:q.a});}
 // back at the bench: the boards' lists can say an award is missing, not how a name is spelled
 function vt_apartEnd(x,tt,c,P){const G=P.g0+tt,t0=c.spelled-0.3;vt_who(x,"jun",280,G,1);
@@ -268,7 +287,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),two
     withA(ctx,shA,()=>{dq_T(ctx,"how far north",1140,236,{w:700,size:28,col:"brass",a:ag_in(t,N0+1.0,0.6)});
       const e=vt_sheetEnd(1);dq_T(ctx,"how far east?",e[0],e[1]+64,{w:700,size:28,col:"steel",align:"center",a:ea});});}
   vt_tag(ctx,S,"Ezo · 1800",ag_io(t,N0+0.3,N1-0.4,0.5));
-  const day=1-ag_io(t,N0-0.3,N1,0.4);setScreen(ctx,S);dq_kicker(ctx,"5","Another record, kept apart",{a:ag_in(t,0.3,0.6)*day});
+  const day=1-ag_io(t,N0-0.3,N1,0.4);setScreen(ctx,S);dq_kicker(ctx,"5","Another record, kept apart",{a:ag_in(t,0.8,0.5)*day});
   vt_date(ctx,S,"Monday 23 February",ag_io(t,c.monday+0.2,N0-0.3,0.5));});
 
 /* ---------------------------------------------------------------- 6 · Say which reference
@@ -301,20 +320,20 @@ scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),own
     ref:wAt(sc,"beside","its reference"),date:wAt(sc,"graduate","the date"),dim:wAt(sc,"contract","the dimension"),method:wAt(sc,"contract","the method"),
     allowedW:wAt(sc,"scorecard","allowed"),trueW:wAt(sc,"scorecard","true"),tell:wAt(sc,"say","what it can tell"),cant:wAt(sc,"say","what it can't")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],d:2.4,draw:(x,tt)=>vt_which(x,tt,c,P)}]);
-  setScreen(ctx,S);dq_kicker(ctx,"6","Say which reference",{a:ag_in(t,0.3,0.6)});});
+  setScreen(ctx,S);dq_kicker(ctx,"6","Say which reference",{a:ag_in(t,0.8,0.5)});});
 
 /* ---------------------------------------------------------------- 7 · Allowed, and true
    Ezo's shore by day, the team at work and the sheet over it; by night, the stars, and the walk's end pulled to their latitude. The
    bench on Thursday 26 February: Zoë, and the list in its envelope to the printer; what was put right, and found; every name allowed
    all along, and now 1,013 confirmed by the person they belong to. A check says it's allowed; only a reference says it's true. */
-function vt_trueEnd(x,tt,c,P){const G=P.g0+tt,X0=c.check-0.4;vt_who(x,VT_ZOE,300,G,ag_in(tt,c.printer-0.4,0.6));
-  let q=vt_pop(tt,c.printer,null);vt_whole(x,q.a,cx=>vt_envelope(cx,520,300,{label:"To the printer",sub:"the March list · 5 pm",close:ag_in(tt,P.went,1.0),k:q.k}));
+function vt_trueEnd(x,tt,c,P){const G=P.g0+tt,X0=c.check-0.4,E0=c.breath-0.1;vt_who(x,VT_ZOE,300,G,ag_in(tt,c.printer-0.4,0.6));
+  let q=vt_pop(tt,c.printer,E0);vt_whole(x,q.a,cx=>vt_envelope(cx,520,300,{label:"To the printer",sub:"the March list · 5 pm",close:ag_in(tt,P.went,1.0),k:q.k}));
   q=vt_pop(tt,P.eighty-0.2,X0);dq_chip(x,1180,330,"88 names put right by the graduates",{icon:"tick",col:"pass",a:q.a});
   q=vt_pop(tt,P.twoAw-0.2,X0);dq_chip(x,1180,420,"2 awards found in the boards' lists",{icon:"tick",col:"pass",a:q.a});
   q=vt_pop(tt,c.along,X0);dq_chip(x,1180,510,"every name allowed, all along",{icon:"tick",col:"pass",a:q.a});
   q=vt_pop(tt,c.now+0.2,X0);dq_figure(x,1180,680,"1,013","confirmed by the person they belong to",{col:"brass",size:96,a:q.a});
-  q=vt_pop(tt,c.check,null);dq_textCard(x,1180,300,640,{kick:"A check",title:"says it's allowed"},{edge:"pass",k:q.k,a:q.a});
-  q=vt_pop(tt,c.reference,null);dq_textCard(x,1180,480,640,{kick:"A reference",title:"says it's true"},{edge:"brass",k:q.k,a:q.a});}
+  q=vt_pop(tt,c.check,E0);dq_textCard(x,1180,300,640,{kick:"A check",title:"says it's allowed"},{edge:"pass",k:q.k,a:q.a});
+  q=vt_pop(tt,c.reference,E0);dq_textCard(x,1180,480,640,{kick:"A reference",title:"says it's true"},{edge:"brass",k:q.k,a:q.a});}
 scene("true",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),byNight:wAt(sc,"walked","by night"),north:wAt(sc,"stars","how far north"),really:wAt(sc,"stars","really"),
     went:wAt(sc,"printer","printer"),eighty:wAt(sc,"put","eighty-eight"),twoAw:wAt(sc,"put","two awards")}));
   const N0=P.byNight-0.4,B0=c.printer-0.4;

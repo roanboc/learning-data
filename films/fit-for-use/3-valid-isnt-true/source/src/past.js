@@ -95,8 +95,6 @@ AG_PLACES.vt_oldmap=c=>{vt_paper(c,{base:[230,214,182],seed:63});const ink=[110,
   // the sea's side shaded with fine lines along the coast, as maps of the time did, then the coast itself
   c.save();c.beginPath();vt_line(c,S_);c.lineTo(W+40,1100);c.lineTo(W+40,-20);c.closePath();c.clip();for(let k=1;k<6;k++){c.strokeStyle=rgba(ink,0.16-0.022*k);c.lineWidth=1.6;c.beginPath();vt_line(c,S_.map(p=>[p[0]+k*14,p[1]-k*4]));c.stroke();}c.restore();
   c.strokeStyle=rgba(ink,0.78);c.lineWidth=3.4;c.lineJoin="round";c.lineCap="round";c.beginPath();vt_line(c,S_);c.stroke();
-  // hills inland, a few soft strokes each
-  const R=ag_rnd(64);for(let i=0;i<14;i++){const x=80+R()*560,y=200+R()*700;if(x>S_.find(p=>p[1]>=y)[0]-80)continue;c.strokeStyle=rgba(ink,0.4);c.lineWidth=2.2;c.beginPath();c.moveTo(x-26,y+10);c.quadraticCurveTo(x,y-22,x+26,y+10);c.stroke();}
   vt_light(c,0.5);};
 // what the old map shows live: the cape picked out (u), where it really lay (v), and how far apart (w)
 function vt_oldLife(ctx,u,v,w){const [cx,cy]=VT_OLD.cape,[rx,ry]=VT_OLD.real;

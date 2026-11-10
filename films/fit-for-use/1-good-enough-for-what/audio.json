@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/good-enough-for-what/soundtrack.mp3",
+      "size": 5991906,
+      "sha256": "15b99ffc800ecd021944c5d8e96449463971743ac0ea0d09cb609e87fcff259f",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-good-enough-for-what-dbee9e70866ebde95989/15b99ffc800ecd021944c5d8e96449463971743ac0ea0d09cb609e87fcff259f.mp3"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+*Fit for use*, the first series of the module Data quality, on what good enough means for data and how to measure it: four films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

@@ -1,0 +1,9 @@
+name: language model
+kind: application service
+definition: The model a step drafts and reasons with.
+owner: Sam, platform team
+relationships:
+- serving: draft the change
+- serving: build it in development
+- serving: open a pull request
+status: confirmed

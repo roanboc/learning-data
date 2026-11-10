@@ -1,0 +1,103 @@
+{
+  "kicker": "Fitness for use",
+  "kicker_es": "Aptitud para el uso",
+  "title_es": "¿Lo bastante bueno para qué?",
+  "h1": "Good enough for what? One list, four uses, four levels",
+  "h1_es": "¿Lo bastante bueno para qué? Una lista, cuatro usos",
+  "lead": "In December 2025, the graduation list passed every check and seated the Great Hall well, and still 41 degree certificates were printed again. In January, Malia Fonoti, Mei Tanaka and Jun Park ask who uses the list, for what, and what goes wrong when it's wrong, and agree a level for each use.",
+  "lead_es": "En diciembre de 2025, la lista de graduación pasó todos los controles y acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo. En enero, Malia Fonoti, Mei Tanaka y Jun Park preguntan quién usa la lista, para qué y qué sale mal cuando está mal, y acuerdan un nivel para cada uso.",
+  "description": "A film about what good enough means for data, the first of Fit for use and of Data quality: in Duisburg in 1569, Gerardus Mercator published a world chart made for sailors, stretched towards the poles so that every course on one bearing is a straight line, right for steering and wrong for comparing countries, since Greenland looks as big as Africa, which is fourteen times larger; at the university, in December 2025, the graduation list seated the Great Hall well, and still 41 degree certificates were printed again (26 with a wrong name, 9 with a wrong award, 6 graduates missing), and Andrés Peñaloza's name is held without its accents, right for a seat and wrong on a certificate. In January 2026, Malia Fonoti, who uses the list, Mei Tanaka, who answers for it, and Jun Park, who builds it, ask who uses it, for what, and what goes wrong, for whom, when it's wrong: four uses, each with its level (the seating plan within 2% at each ceremony, the certificates zero wrong, the printed programme the same names as the certificates, the government's count of awards exact), the few columns it can't do without, its critical data, and the dimensions it leans on, asked as DAMA's six questions; each level agreed with the people who use it and owned by Mei. Jun writes it down beside the data: in the list's data contract, as quality rules in the Open Data Contract Standard; in dbt, where every check names its dimension and its owner; and on Databricks, where each critical column carries a governed tag. If quality keeps failing, look first at governance, then at the tools.",
+  "description_es": "Una película sobre qué es lo bastante bueno para los datos, la primera de Apto para su uso y de Calidad de datos: en Duisburgo, en 1569, Gerardus Mercator publicó una carta del mundo hecha para navegantes, estirada hacia los polos para que todo rumbo fijo sea una línea recta, correcta para navegar e incorrecta para comparar países, pues Groenlandia parece tan grande como África, que es catorce veces mayor; en la universidad, en diciembre de 2025, la lista de graduación acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo (26 con el nombre mal, 9 con el título mal, 6 graduados que faltaban), y el nombre de Andrés Peñaloza está guardado sin sus tildes, correcto para un asiento e incorrecto en un diploma. En enero de 2026, Malia Fonoti, que usa la lista, Mei Tanaka, que responde por ella, y Jun Park, que la construye, preguntan quién la usa, para qué, y qué sale mal, y para quién, cuando está mal: cuatro usos, cada uno con su nivel (el plano de asientos con un 2% de margen en cada ceremonia, los diplomas cero errores, el programa impreso con los mismos nombres que los diplomas, el conteo de títulos para el gobierno exacto), las pocas columnas que le son imprescindibles, sus datos críticos, y las dimensiones en que se apoya, preguntadas como las seis de DAMA; cada nivel acordado con quienes usan la lista y a cargo de Mei. Jun lo escribe junto a los datos: en el contrato de datos de la lista, como reglas de calidad del Open Data Contract Standard; en dbt, donde cada control nombra su dimensión y su responsable; y en Databricks, donde cada columna crítica lleva una etiqueta gobernada. Si la calidad sigue fallando, mira primero el gobierno de datos, y luego las herramientas.",
+  "card": "The graduation list seated the Great Hall well and still sent 41 certificates to be printed again. Good depends on the use.",
+  "card_es": "La lista de graduación acomodó bien el Aula Magna y aun así 41 diplomas se imprimieron de nuevo. Lo bueno depende del uso.",
+  "chapters_es": {
+    "chart": "Una carta para navegantes",
+    "reprint": "Cuarenta y un diplomas",
+    "uses": "Una lista, cuatro usos",
+    "needs": "Lo que necesita cada uso",
+    "written": "Escrito junto a los datos"
+  },
+  "past": [
+    "Duisburg, 1569: a world chart made for sailors",
+    "Mercator stretched his chart so that a course on one bearing is a straight line: right for steering, wrong for comparing countries. One chart, made for one use."
+  ],
+  "past_es": [
+    "Duisburgo, 1569: una carta del mundo hecha para navegantes",
+    "Mercator estiró su carta para que un rumbo fijo fuera una línea recta: correcta para navegar, incorrecta para comparar países. Una carta, hecha para un uso."
+  ],
+  "next_h": "You've seen one list with four uses, each with its own level. Next: look at a hundred of its records, one by one, before writing a check.",
+  "next_h_es": "Viste una lista con cuatro usos, cada uno con su nivel. Después: revisar cien de sus registros, uno por uno, antes de escribir un control.",
+  "repo": {
+    "reprint": [
+      "data/student_system/graduations.csv"
+    ],
+    "uses": [
+      "exposures/graduations/_graduations__exposures.yml",
+      "exposures/planning/_planning__exposures.yml"
+    ],
+    "needs": [
+      "models/marts/graduations/_graduations__models.yml"
+    ],
+    "written": [
+      "governance/5-data-contracts/mart_graduations__graduation_list.yaml",
+      "tests/generic/builtin.sql",
+      "macros/governance/critical_data.sql"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film shows what each tool records; the docs show how, and stay up to date as the tools change. Checked on 10 November 2026.",
+    "p_es": "La película muestra qué registra cada herramienta; la documentación muestra cómo, y se mantiene al día a medida que cambian las herramientas. Revisada el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Data quality in the Open Data Contract Standard",
+        "title_es": "La calidad de datos en el Open Data Contract Standard (en inglés)",
+        "line": "How a data contract writes a quality rule: its dimension, its severity and what a failure costs the business.",
+        "line_es": "Cómo un contrato de datos escribe una regla de calidad: su dimensión, su gravedad y lo que un fallo le cuesta al negocio.",
+        "href": "https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/",
+        "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/"
+      },
+      {
+        "title": "dbt's data tests",
+        "title_es": "Las pruebas de datos de dbt (en inglés)",
+        "line": "The checks dbt runs on every build, as Jun's checks on the graduation list.",
+        "line_es": "Los controles que dbt ejecuta en cada construcción, como los de Jun sobre la lista de graduación.",
+        "href": "https://docs.getdbt.com/docs/build/data-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/data-tests"
+      },
+      {
+        "title": "meta in dbt",
+        "title_es": "meta en dbt (en inglés)",
+        "line": "Where a check records its owner, and the dimension it checks, for the scorecard to read.",
+        "line_es": "Dónde un control registra su responsable, y la dimensión que revisa, para que lo lea el tablero.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/meta",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/meta"
+      },
+      {
+        "title": "Governed tags",
+        "title_es": "Etiquetas gobernadas",
+        "line": "Tags with rules for who may set them and which values they take, as critical_data on the list's columns.",
+        "line_es": "Etiquetas con reglas sobre quién puede ponerlas y qué valores toman, como critical_data en las columnas de la lista.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/governed-tags/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/governed-tags/"
+      },
+      {
+        "title": "Tags on Unity Catalog objects",
+        "title_es": "Etiquetas en los objetos de Unity Catalog",
+        "line": "How a tag is set on a table or a column, and how anyone who finds the table sees it.",
+        "line_es": "Cómo se pone una etiqueta en una tabla o una columna, y cómo la ve quien encuentra la tabla.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/database-objects/tags",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/database-objects/tags"
+      },
+      {
+        "title": "DAMA's body of knowledge",
+        "title_es": "El cuerpo de conocimiento de DAMA (en inglés)",
+        "line": "DAMA-DMBOK's data quality chapter: its dimensions, critical data, and quality as its users see it.",
+        "line_es": "El capítulo de calidad de datos del DAMA-DMBOK: sus dimensiones, los datos críticos y la calidad como la ven sus usuarios.",
+        "href": "https://www.dama.org/cpages/body-of-knowledge",
+        "href_es": "https://www.dama.org/cpages/body-of-knowledge"
+      }
+    ]
+  }
+}

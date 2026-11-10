@@ -159,169 +159,169 @@ Su palabra entra al proyecto, en dbt.
 Jun Park escribe cada clase junto a su columna, en el archivo de la tabla de estudiantes.
 
 41
-00:03:58,853 --> 00:04:01,452
-Mei aprueba el cambio, como dueña del archivo.
+00:03:58,853 --> 00:04:02,496
+El equipo de datos revisa el código, y a Mei le avisan qué toca.
 
 42
-00:04:02,752 --> 00:04:07,089
+00:04:03,796 --> 00:04:08,133
 Después de cada ejecución, dbt pone cada clase como etiqueta en su columna.
 
 43
-00:04:08,389 --> 00:04:12,357
+00:04:09,433 --> 00:04:13,401
 Luego la etiqueta de facultad, y al final, el nivel de la tabla: confidencial.
 
 44
-00:04:13,657 --> 00:04:17,506
+00:04:14,701 --> 00:04:18,550
 Una columna marcada ninguna no recibe etiqueta, y se le quita la que tenía.
 
 45
-00:04:18,806 --> 00:04:21,869
+00:04:19,850 --> 00:04:22,913
 Cambia el archivo, y la siguiente ejecución cambia las etiquetas.
 
 46
-00:04:23,169 --> 00:04:27,628
+00:04:24,213 --> 00:04:28,672
 Aquí empiezan las etiquetas: en la tabla de estudiantes, la primera que la gente lee.
 
 47
-00:04:31,128 --> 00:04:35,813
+00:04:32,172 --> 00:04:36,857
 Luego Sam activa la propagación de etiquetas, para las clases y la etiqueta de facultad.
 
 48
-00:04:37,313 --> 00:04:44,293
+00:04:38,357 --> 00:04:45,337
 Ahora cada etiqueta sigue a su columna por el linaje: el registro de la plataforma de lo que leyó cada consulta, y lo que hizo.
 
 49
-00:04:45,593 --> 00:04:52,798
+00:04:46,637 --> 00:04:53,842
 Esa tarde, el cargador de la oficina de registro hace la copia del estudio: los 2,614 estudiantes de Salud.
 
 50
-00:04:54,098 --> 00:05:00,905
+00:04:55,142 --> 00:05:01,949
 En minutos llegan sus etiquetas: seudónima para el código, indirecta para el año de nacimiento, como sus orígenes.
 
 51
-00:05:02,405 --> 00:05:04,075
+00:05:03,449 --> 00:05:05,119
 Curso y resultados no traen ninguna.
 
 52
-00:05:05,175 --> 00:05:06,719
+00:05:06,219 --> 00:05:07,763
 Nadie etiqueta la copia.
 
 53
-00:05:08,219 --> 00:05:10,995
+00:05:09,263 --> 00:05:12,039
 Hasta que sus etiquetas están ahí, una política no puede verlas.
 
 54
-00:05:12,095 --> 00:05:16,750
+00:05:13,139 --> 00:05:17,794
 Así que Mei revisa que las clases estén, y le da a la copia su nivel: confidencial.
 
 55
-00:05:18,050 --> 00:05:21,923
+00:05:19,094 --> 00:05:22,967
 El estudio recibe su espacio recién al día siguiente, con la copia dentro.
 
 56
-00:05:23,423 --> 00:05:27,207
+00:05:24,467 --> 00:05:28,251
 Y cada tabla que Anil haga a partir de ella llevará las mismas clases.
 
 57
-00:05:30,707 --> 00:05:32,967
+00:05:31,751 --> 00:05:34,011
 La propagación nunca baja una clase.
 
 58
-00:05:34,267 --> 00:05:37,923
+00:05:35,311 --> 00:05:38,967
 Supón que la propia copia hiciera el código, a partir del número de estudiante.
 
 59
-00:05:39,223 --> 00:05:42,278
+00:05:40,267 --> 00:05:43,322
 El linaje traería la clase del número de estudiante: directa.
 
 60
-00:05:43,578 --> 00:05:45,329
+00:05:44,622 --> 00:05:46,373
 El archivo de Mei dice seudónima.
 
 61
-00:05:46,429 --> 00:05:49,772
+00:05:47,473 --> 00:05:50,816
 Una columna, dos valores para una etiqueta: un conflicto.
 
 62
-00:05:51,272 --> 00:05:57,100
+00:05:52,316 --> 00:05:58,144
 La plataforma no puede elegir, así que aplica el valor que Sam fijó de antemano: especial, la más estricta.
 
 63
-00:05:58,600 --> 00:06:02,307
+00:05:59,644 --> 00:06:03,351
 Como la regla de la madera mezclada, se fija antes de mezclar nada.
 
 64
-00:06:03,807 --> 00:06:08,762
+00:06:04,851 --> 00:06:09,806
 No se ve nada que no deba, pero ahora la columna dice algo equivocado, y lo pasa adelante.
 
 65
-00:06:10,262 --> 00:06:14,300
+00:06:11,306 --> 00:06:15,344
 Por eso un valor que dice menos lo hace una vez su dueño, en el origen.
 
 66
-00:06:15,600 --> 00:06:21,103
+00:06:16,644 --> 00:06:22,147
 La tabla de estudiantes guarda el código junto al número de estudiante, y cada tabla posterior toma el código.
 
 67
-00:06:22,603 --> 00:06:24,292
+00:06:23,647 --> 00:06:25,336
 Y un nivel no viaja en absoluto.
 
 68
-00:06:25,392 --> 00:06:30,818
+00:06:26,436 --> 00:06:31,862
 Une una tabla pública con una confidencial, y cada tabla hecha a partir de ellas sería un conflicto.
 
 69
-00:06:32,118 --> 00:06:34,340
+00:06:33,162 --> 00:06:35,384
 El nivel de cada tabla sigue siendo decisión de su dueño.
 
 70
-00:06:37,840 --> 00:06:40,415
+00:06:38,884 --> 00:06:41,459
 Una etiqueta solo viaja dentro de la plataforma.
 
 71
-00:06:41,515 --> 00:06:45,772
+00:06:42,559 --> 00:06:46,816
 Un archivo descargado, o una copia en otra herramienta, no lleva ninguna etiqueta.
 
 72
-00:06:47,072 --> 00:06:50,221
+00:06:48,116 --> 00:06:51,265
 Por eso el espacio de los estudios tiene las descargas desactivadas.
 
 73
-00:06:51,521 --> 00:06:58,680
+00:06:52,565 --> 00:06:59,724
 Dentro, las etiquetas viajan solo donde el linaje puede seguir: a tablas y vistas que hace el cómputo sin servidor de la plataforma.
 
 74
-00:06:59,980 --> 00:07:05,236
+00:07:01,024 --> 00:07:06,280
 Los totales por curso de Anil se cuentan a partir de cursos y resultados, que no llevan clase.
 
 75
-00:07:06,336 --> 00:07:07,934
+00:07:07,380 --> 00:07:08,978
 Así que nada viaja hacia ellos.
 
 76
-00:07:09,034 --> 00:07:11,967
+00:07:10,078 --> 00:07:13,011
 Mei los revisa, y les da su nivel: pública.
 
 77
-00:07:15,467 --> 00:07:21,661
+00:07:16,511 --> 00:07:22,705
 Se puede confiar en la etiqueta de una silla porque cada empresa pasó la declaración, con reglas acordadas antes.
 
 78
-00:07:23,161 --> 00:07:25,381
+00:07:24,205 --> 00:07:26,425
 Mei nombró cada clase una vez, en el origen.
 
 79
-00:07:26,681 --> 00:07:33,119
+00:07:27,725 --> 00:07:34,163
 La plataforma la lleva a cada tabla hecha a partir de ahí, y donde dos se encuentran, decide una regla fijada de antemano.
 
 80
-00:07:34,619 --> 00:07:38,082
+00:07:35,663 --> 00:07:39,126
 Después, una política lee esas etiquetas, dondequiera que lleguen.
 
 81
-00:07:39,382 --> 00:07:40,744
+00:07:40,426 --> 00:07:41,788
 Etiqueta una vez en el origen.
 
 82
-00:07:41,844 --> 00:07:43,411
+00:07:42,888 --> 00:07:44,455
 La etiqueta sigue a los datos.

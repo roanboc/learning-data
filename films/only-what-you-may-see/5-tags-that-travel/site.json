@@ -55,8 +55,8 @@
       {
         "title": "Data Classification",
         "title_es": "Clasificación de datos",
-        "line": "Azure Databricks: a scan of chosen catalogs that proposes classes for the columns it recognises, such as a name or an email, for their owners to review.",
-        "line_es": "Azure Databricks: un escaneo de los catálogos elegidos que propone clases para las columnas que reconoce, como un nombre o un correo, para que sus dueños las revisen.",
+        "line": "Azure Databricks: a scan of chosen catalogs that proposes classes for the columns it recognises, such as a name or an email, for their owners to confirm.",
+        "line_es": "Azure Databricks: un escaneo de los catálogos elegidos que propone clases para las columnas que reconoce, como un nombre o un correo, para que sus dueños las confirmen.",
         "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-classification",
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-classification"
       },

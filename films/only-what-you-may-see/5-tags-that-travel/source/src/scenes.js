@@ -147,19 +147,19 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({scans:c.scan
 
 /* ---------------------------------------------------------------- 4 · Once, in the project */
 const TT_PRAT=[680,110];
-scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({project:wAt(sc,"project","project"),jun:c.jun,writes:wAt(sc,"jun","writes"),approves:c.approves,ok:wAt(sc,"approves","approves"),
+scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({project:wAt(sc,"project","project"),jun:c.jun,writes:wAt(sc,"jun","writes"),reviews:c.reviews,ok:wAt(sc,"reviews","reviews"),mei:wAt(sc,"reviews","Mei"),told:wAt(sc,"reviews","told"),
     build:c.build,after:wAt(sc,"build","build"),sets:wAt(sc,"build","sets"),last:c.last,fac:wAt(sc,"last","faculty"),lvl:wAt(sc,"last","confidential"),
     none:c.none,old:wAt(sc,"none","old one"),off:wAt(sc,"none","taken off"),change:c.change,next:wAt(sc,"change","next build"),start:c.start,read:wAt(sc,"start","first")}));
   const typed=i=>clamp((t-P.writes-i*0.42)/0.4,0,1);
   ag_shots(ctx,S,t,sc.dur,[
-    // the data team: Jun writes each class beside its column, in GitHub
+    // the data team: Jun writes each class beside its column, in GitHub; the data team reviews the code, and approves it
     {at:0,place:"ttJun",keys:[[0,960,540,1.0],[0.1,970,540,1.03]],d:10,push:0.01,draw:(x,tt)=>{const [jx,jy,js]=TT_JUN;
       dp_person(x,"jun",jx,jy,js,{t:tt,cut:TT_BACK,gaze:[3,1]});const jn=tt_pop(tt,P.jun,null);tt_name(x,60,110,560,"Analytics engineer","Jun Park",{k:jn.k,a:jn.a});
-      tt_prPage(x,...TT_PRAT,{a:ag_in(tt,P.project-0.2,0.5),typed:i=>clamp((tt-P.writes-i*0.42)/0.4,0,1)});}},
-    // the registrar's office: the same page, its review asked of Mei, the file's owner; she approves it
-    {cut:true,at:P.approves-0.2,place:"ttMei",keys:[[P.approves-0.2,960,540,1.0],[P.approves,965,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [mx,my,ms]=TT_MEI;
-      dp_person(x,"mei",mx,my,ms,{t:tt,cut:TT_BACK,gaze:[3,1]});tt_name(x,60,110,560,"Owner of the file","Mei Tanaka");
-      tt_prPage(x,...TT_PRAT,{reviewA:1,approved:clamp((tt-P.ok-0.2)/0.6,0,1)});}},
+      tt_prPage(x,...TT_PRAT,{a:ag_in(tt,P.project-0.2,0.5),typed:i=>clamp((tt-P.writes-i*0.42)/0.4,0,1),reviewA:ag_in(tt,P.reviews-0.2,0.4),approved:clamp((tt-P.ok)/0.6,0,1)});}},
+    // the registrar's office: the same page, approved by the data team; Mei is told what it touches. Owners never review a pull request
+    {cut:true,at:P.mei-0.25,place:"ttMei",keys:[[P.mei-0.25,960,540,1.0],[P.mei,965,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [mx,my,ms]=TT_MEI;
+      dp_person(x,"mei",mx,my,ms,{t:tt,cut:TT_BACK,gaze:[3,1]});tt_name(x,60,110,560,"Registrar's office","Mei Tanaka");
+      tt_prPage(x,...TT_PRAT,{reviewA:1,approved:1,told:clamp((tt-P.told)/0.5,0,1)});}},
     // the hall: dbt builds the learner table, then sets each class, the faculty tag and, last, the level; none is no tag, and an old
     // tag is taken off; a change to the file changes the tag at the next build
     {cut:true,at:P.build-0.2,place:"ttHall",keys:[[P.build-0.2,960,540,1.03],[P.start-0.2,960,540,1.0]],d:2.4,push:0.008,draw:(x,tt)=>{

@@ -276,7 +276,7 @@ tAdds = nw('decides', 'adds')
 bray(DIRECT, tAdds + 0.1, 0.62, px(1100) * 0.5); bray(PSEUDO, tAdds + 0.28, 0.6, px(1100) * 0.5)
 tap(tAdds + 0.5, 0.006, px(1100))
 
-# 4. Once, in the project: the pull request; Jun's card; each line written, a tap; Mei approves, a soft knock as its green pill comes
+# 4. Once, in the project: the pull request; Jun's card; each line written, a tap; the data team approves, a soft knock as its green pill comes
 #    in. The hall: dbt builds, and sets each class as a tag, each string plucked as its first column is tagged: direct, pseudonymous,
 #    indirect; the faculty tag, a tap; the level; an old tag slides off; the next build: special, and back to direct
 ww = lambda lid, word, off=0: W('written', lid, word, off)
@@ -285,7 +285,7 @@ glass(ww('project', 'project', 0.1), 0.012, px(1270))
 glass(wc('jun', 0.2), 0.012, px(340))
 for i in range(8):
     tap(ww('jun', 'writes', 0.1 + 0.42 * i), 0.006, px(1000))
-glass(ww('approves', 'approves', 0.55), 0.012, px(740))
+glass(ww('reviews', 'reviews', 0.35), 0.012, px(740))
 glass(wc('build', 0.05), 0.012, px(1300))
 tap(ww('build', 'build', 0.3), 0.007, px(1300))
 tSets = ww('build', 'sets')

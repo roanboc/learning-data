@@ -159,169 +159,169 @@ Her word goes into the project, in dbt.
 Jun Park writes each class beside its column, in the learner table's file.
 
 41
-00:03:58,853 --> 00:04:01,452
-Mei approves the change, as the file's owner.
+00:03:58,853 --> 00:04:02,496
+The data team reviews the code, and Mei is told what it touches.
 
 42
-00:04:02,752 --> 00:04:07,089
+00:04:03,796 --> 00:04:08,133
 After each build, dbt sets every class as a tag on its column.
 
 43
-00:04:08,389 --> 00:04:12,357
+00:04:09,433 --> 00:04:13,401
 Then the faculty tag, and last, the table's level: confidential.
 
 44
-00:04:13,657 --> 00:04:17,506
+00:04:14,701 --> 00:04:18,550
 A column marked none gets no tag, and an old one is taken off.
 
 45
-00:04:18,806 --> 00:04:21,869
+00:04:19,850 --> 00:04:22,913
 Change the file, and the next build changes the tags.
 
 46
-00:04:23,169 --> 00:04:27,628
+00:04:24,213 --> 00:04:28,672
 This is where the tags start: on the learner table, the first that people read.
 
 47
-00:04:31,128 --> 00:04:35,813
+00:04:32,172 --> 00:04:36,857
 Then Sam turns on tag propagation, for the classes and the faculty tag.
 
 48
-00:04:37,313 --> 00:04:44,293
+00:04:38,357 --> 00:04:45,337
 Now each tag follows its column through lineage: the platform's record of what each query read, and what it made.
 
 49
-00:04:45,593 --> 00:04:52,798
+00:04:46,637 --> 00:04:53,842
 That afternoon, the registrar's loader makes the study's copy: Health's 2,614 learners.
 
 50
-00:04:54,098 --> 00:05:00,905
+00:04:55,142 --> 00:05:01,949
 Within minutes, its tags arrive: the learner code pseudonymous, the year of birth indirect, as their sources are.
 
 51
-00:05:02,405 --> 00:05:04,075
+00:05:03,449 --> 00:05:05,119
 Course and results bring none.
 
 52
-00:05:05,175 --> 00:05:06,719
+00:05:06,219 --> 00:05:07,763
 Nobody tags the copy.
 
 53
-00:05:08,219 --> 00:05:10,995
+00:05:09,263 --> 00:05:12,039
 Until its tags are there, a policy can't see them.
 
 54
-00:05:12,095 --> 00:05:16,750
+00:05:13,139 --> 00:05:17,794
 So Mei checks the classes are there, and gives the copy its level: confidential.
 
 55
-00:05:18,050 --> 00:05:21,923
+00:05:19,094 --> 00:05:22,967
 The study is given its space only the next day, with the copy in it.
 
 56
-00:05:23,423 --> 00:05:27,207
+00:05:24,467 --> 00:05:28,251
 And every table Anil makes from it will carry the same classes.
 
 57
-00:05:30,707 --> 00:05:32,967
+00:05:31,751 --> 00:05:34,011
 Propagation never lowers a class.
 
 58
-00:05:34,267 --> 00:05:37,923
+00:05:35,311 --> 00:05:38,967
 Suppose the copy had made the code itself, from the student number.
 
 59
-00:05:39,223 --> 00:05:42,278
+00:05:40,267 --> 00:05:43,322
 Lineage would bring the student number's class: direct.
 
 60
-00:05:43,578 --> 00:05:45,329
+00:05:44,622 --> 00:05:46,373
 Mei's file says pseudonymous.
 
 61
-00:05:46,429 --> 00:05:49,772
+00:05:47,473 --> 00:05:50,816
 One column, two values for one tag: a conflict.
 
 62
-00:05:51,272 --> 00:05:57,100
+00:05:52,316 --> 00:05:58,144
 The platform can't choose, so it applies the value Sam set in advance: special, the strictest.
 
 63
-00:05:58,600 --> 00:06:02,307
+00:05:59,644 --> 00:06:03,351
 Like the rule for mixed wood, it's set before anything is mixed.
 
 64
-00:06:03,807 --> 00:06:08,762
+00:06:04,851 --> 00:06:09,806
 Nothing shows that shouldn't, but the column now says the wrong thing, and passes it on.
 
 65
-00:06:10,262 --> 00:06:14,300
+00:06:11,306 --> 00:06:15,344
 So a value that says less is made once, at the source, by its owner.
 
 66
-00:06:15,600 --> 00:06:21,103
+00:06:16,644 --> 00:06:22,147
 The learner table holds the code beside the student number, and every table after takes the code.
 
 67
-00:06:22,603 --> 00:06:24,292
+00:06:23,647 --> 00:06:25,336
 And a level doesn't travel at all.
 
 68
-00:06:25,392 --> 00:06:30,818
+00:06:26,436 --> 00:06:31,862
 Join a public table to a confidential one, and every table made from them would be a conflict.
 
 69
-00:06:32,118 --> 00:06:34,340
+00:06:33,162 --> 00:06:35,384
 Each table's level stays its owner's call.
 
 70
-00:06:37,840 --> 00:06:40,415
+00:06:38,884 --> 00:06:41,459
 A tag travels only inside the platform.
 
 71
-00:06:41,515 --> 00:06:45,772
+00:06:42,559 --> 00:06:46,816
 A file downloaded, or a copy in another tool, carries no tag at all.
 
 72
-00:06:47,072 --> 00:06:50,221
+00:06:48,116 --> 00:06:51,265
 That's why the studies' workspace has downloads switched off.
 
 73
-00:06:51,521 --> 00:06:58,680
+00:06:52,565 --> 00:06:59,724
 Inside, tags travel only where lineage can follow: into tables and views the platform's serverless compute makes.
 
 74
-00:06:59,980 --> 00:07:05,236
+00:07:01,024 --> 00:07:06,280
 Anil's totals by course are counted from courses and results, which carry no class.
 
 75
-00:07:06,336 --> 00:07:07,934
+00:07:07,380 --> 00:07:08,978
 So nothing travels into them.
 
 76
-00:07:09,034 --> 00:07:11,967
+00:07:10,078 --> 00:07:13,011
 Mei checks them, and gives them their level: public.
 
 77
-00:07:15,467 --> 00:07:21,661
+00:07:16,511 --> 00:07:22,705
 A label on a chair can be trusted because every company passed the claim on, by rules agreed before.
 
 78
-00:07:23,161 --> 00:07:25,381
+00:07:24,205 --> 00:07:26,425
 Mei named each class once, at the source.
 
 79
-00:07:26,681 --> 00:07:33,119
+00:07:27,725 --> 00:07:34,163
 The platform carries it into every table made from it, and where two meet, a rule set in advance decides.
 
 80
-00:07:34,619 --> 00:07:38,082
+00:07:35,663 --> 00:07:39,126
 Next, one policy reads those tags, wherever they land.
 
 81
-00:07:39,382 --> 00:07:40,744
+00:07:40,426 --> 00:07:41,788
 Tag once at the source.
 
 82
-00:07:41,844 --> 00:07:43,411
+00:07:42,888 --> 00:07:44,455
 The tag follows the data.

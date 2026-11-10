@@ -8,7 +8,7 @@
                     value lands), and a value typed by hand, refused
      tt_permits     the tags' permissions: ASSIGN to registrar_owners, whose one member is registrar-loader; anyone else may not
      tt_scanPage    Databricks' Data classification results: the classes it detected in the registrar's catalog
-     tt_prPage      GitHub's pull request: each class written beside its column in the learner table's file, and its owner's review
+     tt_prPage      GitHub's pull request: each class written beside its column in the learner table's file, the data team's review, and its owner told
      tt_dbtRun      dbt's build: the learner table built, then its classes, its faculty tag and its level set
      tt_propDialog  Databricks' tag propagation, tag by tag: on for personal_data (its default propagation value special) and for
                     faculty, off for level
@@ -82,7 +82,8 @@ function tt_scanPage(ctx,x,y,o){o=o||{};const w=1180,h=440,a=o.a==null?1:o.a;if(
 // the change in GitHub: lines added to the learner table's file, each column's class beside it
 const TT_PR=["- name: email","  config:","    meta: {personal_data: direct}","- name: date_of_birth","  config:","    meta: {personal_data: indirect}","- name: course","  config: {meta: {personal_data: none}}"];
 // GitHub's pull request, 1180 x 740: o.typed(i) 0 to 1 types line i; o.flick (0 to 1) shows the change to one line, and back;
-// o.reviewA its review asked of Mei, o.approved (0 to 1) her approval
+// o.reviewA its review asked of the data team, o.approved (0 to 1) the data team's approval, o.told (0 to 1) Mei told what it touches:
+// owners and stewards never review a pull request (AGENTS.md)
 function tt_prPage(ctx,x,y,o){o=o||{};const w=1180,h=740,a=o.a==null?1:o.a;if(!(a>0.003))return;ctx.save();ctx.globalAlpha*=a;
   dp_page(ctx,x,y,w,h,{tool:"github",name:"GitHub",where:"Pull request",title:"Classes for the learner table",col:TT_ICE});
   dp_T(ctx,"models/core/student/_core_student__models.yml",x+32,y+190,{w:500,size:28,f:"mono",col:"mut"});
@@ -92,8 +93,9 @@ function tt_prPage(ctx,x,y,o){o=o||{};const w=1180,h=740,a=o.a==null?1:o.a;if(!(
       dp_T(ctx,"    meta: {personal_data: special}",x+88,ly,{w:500,size:28,f:"mono",col:"violet",a:f});return;}
     dp_T(ctx,"+",x+52,ly,{w:500,size:28,f:"mono",col:"mut"});dp_T(ctx,txt,x+88,ly,{w:500,size:28,f:"mono"});});
   const ra=o.reviewA||0,ap=clamp(o.approved||0,0,1);
-  if(ra>0)dp_T(ctx,"Review required · Mei Tanaka",x+32,y+648,{w:600,size:28,col:"mut",a:ra*(1-clamp(ap/0.45,0,1))});   // leaves, then the approval comes in
-  if(ap>0.55){ctx.save();ctx.globalAlpha*=clamp((ap-0.55)/0.45,0,1);const pw=dp_pill(ctx,x+32,y+648,"Approved","green");dp_T(ctx,"Mei Tanaka · owner of the file",x+52+pw,y+648,{w:600,size:28});ctx.restore();}
+  if(ra>0)dp_T(ctx,"Review required · data team",x+32,y+648,{w:600,size:28,col:"mut",a:ra*(1-clamp(ap/0.45,0,1))});   // leaves, then the approval comes in
+  if(ap>0.55){ctx.save();ctx.globalAlpha*=clamp((ap-0.55)/0.45,0,1);const pw=dp_pill(ctx,x+32,y+648,"Approved","green");dp_T(ctx,"data team",x+52+pw,y+648,{w:600,size:28});ctx.restore();}
+  const tl=clamp(o.told||0,0,1);if(tl>0){ctx.save();ctx.globalAlpha*=tl;const pw=dp_pill(ctx,x+32,y+704,"Told","cyan");dp_T(ctx,"Mei Tanaka · what it touches",x+52+pw,y+704,{w:600,size:28});ctx.restore();}
   if(o.mergedA>0)dp_T(ctx,"Merged into main",x+32,y+704,{w:600,size:28,col:"mut",a:o.mergedA});
   ctx.restore();}
 

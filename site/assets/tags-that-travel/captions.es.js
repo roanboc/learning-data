@@ -87,8 +87,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su palabra entra al proyecto, en dbt.",
 "Jun Park writes each class beside its column, in the learner table's file.":
 "Jun Park escribe cada clase junto a su columna, en el archivo de la tabla de estudiantes.",
-"Mei approves the change, as the file's owner.":
-"Mei aprueba el cambio, como dueña del archivo.",
+"The data team reviews the code, and Mei is told what it touches.":
+"El equipo de datos revisa el código, y a Mei le avisan qué toca.",
 "After each build, dbt sets every class as a tag on its column.":
 "Después de cada ejecución, dbt pone cada clase como etiqueta en su columna.",
 "Then the faculty tag, and last, the table's level: confidential.":

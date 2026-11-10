@@ -45,7 +45,7 @@ const NARR={
 "written":{"name":"Once, in the project","lead":1.0,"tail":1.0,"vo":[
  {"id":"project","gap":0.8,"text":"Her word goes into the project, in dbt."},
  {"id":"jun","gap":0.8,"text":"Jun Park writes each class beside its column, in the learner table's file."},
- {"id":"approves","gap":0.8,"text":"Mei approves the change, as the file's owner."},
+ {"id":"reviews","gap":0.8,"text":"The data team reviews the code, and Mei is told what it touches."},
  {"id":"build","gap":0.8,"text":"After each build, dbt sets every class as a tag on its column."},
  {"id":"last","gap":0.8,"text":"Then the faculty tag, and last, the table's level: confidential."},
  {"id":"none","gap":0.8,"text":"A column marked none gets no tag, and an old one is taken off."},

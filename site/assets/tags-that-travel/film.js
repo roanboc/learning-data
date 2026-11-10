@@ -484,7 +484,7 @@ const NARR={
 "written":{"name":"Once, in the project","lead":1.0,"tail":1.0,"vo":[
  {"id":"project","gap":0.8,"text":"Her word goes into the project, in dbt."},
  {"id":"jun","gap":0.8,"text":"Jun Park writes each class beside its column, in the learner table's file."},
- {"id":"approves","gap":0.8,"text":"Mei approves the change, as the file's owner."},
+ {"id":"reviews","gap":0.8,"text":"The data team reviews the code, and Mei is told what it touches."},
  {"id":"build","gap":0.8,"text":"After each build, dbt sets every class as a tag on its column."},
  {"id":"last","gap":0.8,"text":"Then the faculty tag, and last, the table's level: confidential."},
  {"id":"none","gap":0.8,"text":"A column marked none gets no tag, and an old one is taken off."},
@@ -532,7 +532,7 @@ const NARR={
  {"id":"follows","gap":0.8,"text":"The tag follows the data."}]}
 };
 
-const VODUR={"forest/nineties": 1.413, "forest/cut": 3.779, "forest/boycott": 5.528, "forest/tell": 2.886, "forest/same": 3.788, "forest/harm": 6.042, "forest/rio": 5.315, "forest/change": 1.34, "forest/toronto": 9.673, "forest/council": 1.884, "forest/auditor": 3.653, "forest/passes": 6.39, "forest/label": 4.635, "forest/mixed": 4.92, "forest/hectares": 9.598, "forest/buyer": 3.051, "forest/travels": 5.078, "forest/hidden": 4.245, "forest/protected": 3.953, "governed/day": 1.901, "governed/named": 5.829, "governed/read": 1.793, "governed/sam": 5.179, "governed/four": 4.907, "governed/none": 1.423, "governed/level": 3.957, "governed/faculty": 4.963, "governed/means": 4.51, "governed/loader": 5.876, "found/look": 3.374, "found/scans": 5.769, "found/finds": 3.929, "found/confirms": 3.055, "found/number": 4.604, "found/support": 5.076, "found/knows": 4.391, "found/proposes": 1.137, "found/decides": 2.92, "written/project": 2.765, "written/jun": 4.324, "written/approves": 2.499, "written/build": 4.237, "written/last": 3.868, "written/none": 3.749, "written/change": 2.963, "written/start": 4.359, "follows/on": 4.585, "follows/lineage": 6.88, "follows/copy": 7.105, "follows/arrive": 6.707, "follows/bring": 1.57, "follows/nobody": 1.444, "follows/see": 2.676, "follows/checks": 4.555, "follows/next": 3.773, "follows/anil": 3.684, "conflict/never": 2.16, "conflict/suppose": 3.556, "conflict/bring": 2.955, "conflict/file": 1.651, "conflict/two": 3.243, "conflict/default": 5.728, "conflict/mixed": 3.607, "conflict/wrong": 4.855, "conflict/once": 3.938, "conflict/beside": 5.403, "conflict/level": 1.589, "conflict/join": 5.326, "conflict/call": 2.122, "stays/inside": 2.475, "stays/file": 4.157, "stays/off": 3.049, "stays/follow": 7.059, "stays/totals": 5.156, "stays/nothing": 1.498, "stays/public": 2.833, "chain/chair": 6.094, "chain/once": 2.12, "chain/carries": 6.338, "chain/next": 3.363, "chain/tag": 1.262, "chain/follows": 1.467};
+const VODUR={"forest/nineties": 1.413, "forest/cut": 3.779, "forest/boycott": 5.528, "forest/tell": 2.886, "forest/same": 3.788, "forest/harm": 6.042, "forest/rio": 5.315, "forest/change": 1.34, "forest/toronto": 9.673, "forest/council": 1.884, "forest/auditor": 3.653, "forest/passes": 6.39, "forest/label": 4.635, "forest/mixed": 4.92, "forest/hectares": 9.598, "forest/buyer": 3.051, "forest/travels": 5.078, "forest/hidden": 4.245, "forest/protected": 3.953, "governed/day": 1.901, "governed/named": 5.829, "governed/read": 1.793, "governed/sam": 5.179, "governed/four": 4.907, "governed/none": 1.423, "governed/level": 3.957, "governed/faculty": 4.963, "governed/means": 4.51, "governed/loader": 5.876, "found/look": 3.374, "found/scans": 5.769, "found/finds": 3.929, "found/confirms": 3.055, "found/number": 4.604, "found/support": 5.076, "found/knows": 4.391, "found/proposes": 1.137, "found/decides": 2.92, "written/project": 2.765, "written/jun": 4.324, "written/reviews": 3.543, "written/build": 4.237, "written/last": 3.868, "written/none": 3.749, "written/change": 2.963, "written/start": 4.359, "follows/on": 4.585, "follows/lineage": 6.88, "follows/copy": 7.105, "follows/arrive": 6.707, "follows/bring": 1.57, "follows/nobody": 1.444, "follows/see": 2.676, "follows/checks": 4.555, "follows/next": 3.773, "follows/anil": 3.684, "conflict/never": 2.16, "conflict/suppose": 3.556, "conflict/bring": 2.955, "conflict/file": 1.651, "conflict/two": 3.243, "conflict/default": 5.728, "conflict/mixed": 3.607, "conflict/wrong": 4.855, "conflict/once": 3.938, "conflict/beside": 5.403, "conflict/level": 1.589, "conflict/join": 5.326, "conflict/call": 2.122, "stays/inside": 2.475, "stays/file": 4.157, "stays/off": 3.049, "stays/follow": 7.059, "stays/totals": 5.156, "stays/nothing": 1.498, "stays/public": 2.833, "chain/chair": 6.094, "chain/once": 2.12, "chain/carries": 6.338, "chain/next": 3.363, "chain/tag": 1.262, "chain/follows": 1.467};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -541,7 +541,7 @@ const BREATH={
 "forest":{"hold":{"nineties":0.8,"cut":0.6,"boycott":0.6,"tell":0.4,"same":0.6,"harm":1.0,"rio":0.6,"change":1.4,"toronto":0.6,"council":0.6,"auditor":0.6,"passes":1.2,"label":0.6,"mixed":0.8,"hectares":0.8,"buyer":1.2,"travels":0.6,"hidden":0.8},"breathe":4.4},
 "governed":{"hold":{"day":0.4,"named":0.4,"read":0.4,"sam":0.6,"four":0.6,"none":0.6,"level":0.6,"faculty":0.6,"means":0.6,"loader":0.8}},
 "found":{"hold":{"look":0.4,"scans":0.6,"finds":0.6,"confirms":0.8,"number":0.6,"support":0.6,"knows":0.8,"proposes":0.4,"decides":0.8}},
-"written":{"hold":{"project":0.4,"jun":0.6,"approves":0.6,"build":0.6,"last":0.6,"none":0.6,"change":0.6,"start":0.8}},
+"written":{"hold":{"project":0.4,"jun":0.6,"reviews":0.6,"build":0.6,"last":0.6,"none":0.6,"change":0.6,"start":0.8}},
 "follows":{"hold":{"on":0.8,"lineage":0.6,"copy":0.6,"arrive":0.8,"bring":0.4,"nobody":0.8,"see":0.4,"checks":0.6,"next":0.8,"anil":0.8}},
 "conflict":{"hold":{"never":0.6,"suppose":0.6,"bring":0.6,"file":0.4,"two":0.8,"default":0.8,"mixed":0.8,"wrong":0.8,"once":0.6,"beside":0.8,"level":0.4,"join":0.6,"call":0.8}},
 "stays":{"hold":{"inside":0.4,"file":0.6,"off":0.6,"follow":0.6,"totals":0.4,"nothing":0.4,"public":0.8}},
@@ -2100,7 +2100,7 @@ function tt_ring(ctx,x,y,w,h,p,o){o=o||{};p=clamp(p,0,1);if(p<=0)return;const a=
                     value lands), and a value typed by hand, refused
      tt_permits     the tags' permissions: ASSIGN to registrar_owners, whose one member is registrar-loader; anyone else may not
      tt_scanPage    Databricks' Data classification results: the classes it detected in the registrar's catalog
-     tt_prPage      GitHub's pull request: each class written beside its column in the learner table's file, and its owner's review
+     tt_prPage      GitHub's pull request: each class written beside its column in the learner table's file, the data team's review, and its owner told
      tt_dbtRun      dbt's build: the learner table built, then its classes, its faculty tag and its level set
      tt_propDialog  Databricks' tag propagation, tag by tag: on for personal_data (its default propagation value special) and for
                     faculty, off for level
@@ -2174,7 +2174,8 @@ function tt_scanPage(ctx,x,y,o){o=o||{};const w=1180,h=440,a=o.a==null?1:o.a;if(
 // the change in GitHub: lines added to the learner table's file, each column's class beside it
 const TT_PR=["- name: email","  config:","    meta: {personal_data: direct}","- name: date_of_birth","  config:","    meta: {personal_data: indirect}","- name: course","  config: {meta: {personal_data: none}}"];
 // GitHub's pull request, 1180 x 740: o.typed(i) 0 to 1 types line i; o.flick (0 to 1) shows the change to one line, and back;
-// o.reviewA its review asked of Mei, o.approved (0 to 1) her approval
+// o.reviewA its review asked of the data team, o.approved (0 to 1) the data team's approval, o.told (0 to 1) Mei told what it touches:
+// owners and stewards never review a pull request (AGENTS.md)
 function tt_prPage(ctx,x,y,o){o=o||{};const w=1180,h=740,a=o.a==null?1:o.a;if(!(a>0.003))return;ctx.save();ctx.globalAlpha*=a;
   dp_page(ctx,x,y,w,h,{tool:"github",name:"GitHub",where:"Pull request",title:"Classes for the learner table",col:TT_ICE});
   dp_T(ctx,"models/core/student/_core_student__models.yml",x+32,y+190,{w:500,size:28,f:"mono",col:"mut"});
@@ -2184,8 +2185,9 @@ function tt_prPage(ctx,x,y,o){o=o||{};const w=1180,h=740,a=o.a==null?1:o.a;if(!(
       dp_T(ctx,"    meta: {personal_data: special}",x+88,ly,{w:500,size:28,f:"mono",col:"violet",a:f});return;}
     dp_T(ctx,"+",x+52,ly,{w:500,size:28,f:"mono",col:"mut"});dp_T(ctx,txt,x+88,ly,{w:500,size:28,f:"mono"});});
   const ra=o.reviewA||0,ap=clamp(o.approved||0,0,1);
-  if(ra>0)dp_T(ctx,"Review required · Mei Tanaka",x+32,y+648,{w:600,size:28,col:"mut",a:ra*(1-clamp(ap/0.45,0,1))});   // leaves, then the approval comes in
-  if(ap>0.55){ctx.save();ctx.globalAlpha*=clamp((ap-0.55)/0.45,0,1);const pw=dp_pill(ctx,x+32,y+648,"Approved","green");dp_T(ctx,"Mei Tanaka · owner of the file",x+52+pw,y+648,{w:600,size:28});ctx.restore();}
+  if(ra>0)dp_T(ctx,"Review required · data team",x+32,y+648,{w:600,size:28,col:"mut",a:ra*(1-clamp(ap/0.45,0,1))});   // leaves, then the approval comes in
+  if(ap>0.55){ctx.save();ctx.globalAlpha*=clamp((ap-0.55)/0.45,0,1);const pw=dp_pill(ctx,x+32,y+648,"Approved","green");dp_T(ctx,"data team",x+52+pw,y+648,{w:600,size:28});ctx.restore();}
+  const tl=clamp(o.told||0,0,1);if(tl>0){ctx.save();ctx.globalAlpha*=tl;const pw=dp_pill(ctx,x+32,y+704,"Told","cyan");dp_T(ctx,"Mei Tanaka · what it touches",x+52+pw,y+704,{w:600,size:28});ctx.restore();}
   if(o.mergedA>0)dp_T(ctx,"Merged into main",x+32,y+704,{w:600,size:28,col:"mut",a:o.mergedA});
   ctx.restore();}
 
@@ -2406,19 +2408,19 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({scans:c.scan
 
 /* ---------------------------------------------------------------- 4 · Once, in the project */
 const TT_PRAT=[680,110];
-scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({project:wAt(sc,"project","project"),jun:c.jun,writes:wAt(sc,"jun","writes"),approves:c.approves,ok:wAt(sc,"approves","approves"),
+scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=tt_once(sc,"P",()=>({project:wAt(sc,"project","project"),jun:c.jun,writes:wAt(sc,"jun","writes"),reviews:c.reviews,ok:wAt(sc,"reviews","reviews"),mei:wAt(sc,"reviews","Mei"),told:wAt(sc,"reviews","told"),
     build:c.build,after:wAt(sc,"build","build"),sets:wAt(sc,"build","sets"),last:c.last,fac:wAt(sc,"last","faculty"),lvl:wAt(sc,"last","confidential"),
     none:c.none,old:wAt(sc,"none","old one"),off:wAt(sc,"none","taken off"),change:c.change,next:wAt(sc,"change","next build"),start:c.start,read:wAt(sc,"start","first")}));
   const typed=i=>clamp((t-P.writes-i*0.42)/0.4,0,1);
   ag_shots(ctx,S,t,sc.dur,[
-    // the data team: Jun writes each class beside its column, in GitHub
+    // the data team: Jun writes each class beside its column, in GitHub; the data team reviews the code, and approves it
     {at:0,place:"ttJun",keys:[[0,960,540,1.0],[0.1,970,540,1.03]],d:10,push:0.01,draw:(x,tt)=>{const [jx,jy,js]=TT_JUN;
       dp_person(x,"jun",jx,jy,js,{t:tt,cut:TT_BACK,gaze:[3,1]});const jn=tt_pop(tt,P.jun,null);tt_name(x,60,110,560,"Analytics engineer","Jun Park",{k:jn.k,a:jn.a});
-      tt_prPage(x,...TT_PRAT,{a:ag_in(tt,P.project-0.2,0.5),typed:i=>clamp((tt-P.writes-i*0.42)/0.4,0,1)});}},
-    // the registrar's office: the same page, its review asked of Mei, the file's owner; she approves it
-    {cut:true,at:P.approves-0.2,place:"ttMei",keys:[[P.approves-0.2,960,540,1.0],[P.approves,965,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [mx,my,ms]=TT_MEI;
-      dp_person(x,"mei",mx,my,ms,{t:tt,cut:TT_BACK,gaze:[3,1]});tt_name(x,60,110,560,"Owner of the file","Mei Tanaka");
-      tt_prPage(x,...TT_PRAT,{reviewA:1,approved:clamp((tt-P.ok-0.2)/0.6,0,1)});}},
+      tt_prPage(x,...TT_PRAT,{a:ag_in(tt,P.project-0.2,0.5),typed:i=>clamp((tt-P.writes-i*0.42)/0.4,0,1),reviewA:ag_in(tt,P.reviews-0.2,0.4),approved:clamp((tt-P.ok)/0.6,0,1)});}},
+    // the registrar's office: the same page, approved by the data team; Mei is told what it touches. Owners never review a pull request
+    {cut:true,at:P.mei-0.25,place:"ttMei",keys:[[P.mei-0.25,960,540,1.0],[P.mei,965,540,1.03]],d:6,push:0.01,draw:(x,tt)=>{const [mx,my,ms]=TT_MEI;
+      dp_person(x,"mei",mx,my,ms,{t:tt,cut:TT_BACK,gaze:[3,1]});tt_name(x,60,110,560,"Registrar's office","Mei Tanaka");
+      tt_prPage(x,...TT_PRAT,{reviewA:1,approved:1,told:clamp((tt-P.told)/0.5,0,1)});}},
     // the hall: dbt builds the learner table, then sets each class, the faculty tag and, last, the level; none is no tag, and an old
     // tag is taken off; a change to the file changes the tag at the next build
     {cut:true,at:P.build-0.2,place:"ttHall",keys:[[P.build-0.2,960,540,1.03],[P.start-0.2,960,540,1.0]],d:2.4,push:0.008,draw:(x,tt)=>{

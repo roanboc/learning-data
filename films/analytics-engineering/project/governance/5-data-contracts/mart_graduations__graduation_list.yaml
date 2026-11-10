@@ -258,6 +258,20 @@ schema:
       value: Exact
     - property: agreedWith
       value: Planning
+  - id: awards_match_the_boards
+    type: custom
+    engine: dbt
+    implementation: 'reconciles_with: awards_match_the_boards'
+    dimension: accuracy
+    severity: error
+    description: 'Every certificate on the list is an award a faculty''s exam board approved, with the
+      day the board approved it as its conferral date, and every award the boards approved is on the list:
+      award by award, against the boards'' own register, kept apart from the student system. A copy of
+      the student system couldn''t do this: it would share any gap the list has, and agree with it.'
+    method: reconciliation
+    customProperties:
+    - property: reference
+      value: the exam boards' approved lists
 slaProperties:
 - property: latency
   value: 24

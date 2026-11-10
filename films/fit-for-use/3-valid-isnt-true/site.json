@@ -1,0 +1,80 @@
+{
+  "kicker": "Accuracy and references",
+  "kicker_es": "Exactitud y referencias",
+  "title_es": "Válido no es cierto",
+  "h1": "Every name was allowed, and 88 were still wrong",
+  "h1_es": "Cada nombre estaba permitido, y 88 seguían mal",
+  "lead": "In February 2026, every name on the March graduation list passed the checks that say a name is allowed. Asked in the portal, the graduates corrected 88 of them, and a check against the exam boards' approved lists found two awards missing. Only a reference outside the data says what's true.",
+  "lead_es": "En febrero de 2026, cada nombre de la lista de graduación de marzo pasó los controles que dicen si está permitido. En el portal, los graduados corrigieron 88, y un control contra las listas aprobadas por las juntas examinadoras halló dos títulos faltantes. Solo una referencia dice qué es cierto.",
+  "description": "A film about accuracy, the third of Fit for use: Japan, 1800 to 1821, where Ino Tadataka's teams measured the coast on foot by day and the stars on clear nights, and corrected the walk by the stars, because small errors pile up unseen when every measure looks right on its own; the March graduation list, whose 1,064 names all passed the checks that say a name is allowed; three references, from the closest to the truth: the graduate, the identity document seen at enrolment, and the exam boards' approved lists; the portal where 1,013 graduates answered and 88 corrected their names, each correction checked against the document; a check, award by award, that found two Bachelor of Arts awards missing, which a copy of the student system could never have found; and every check saying which reference it uses.",
+  "description_es": "Una película sobre la exactitud, la tercera de Apto para su uso: Japón, de 1800 a 1821, donde los equipos de Ino Tadataka midieron la costa a pie de día y las estrellas en las noches despejadas, y corrigieron el camino con las estrellas, porque los pequeños errores se acumulan sin verse cuando cada medida parece correcta por sí sola; la lista de graduación de marzo, cuyos 1,064 nombres pasaron todos los controles que dicen si un nombre está permitido; tres referencias, de la más cercana a la verdad: el graduado, el documento de identidad visto en la matrícula y las listas aprobadas por las juntas examinadoras; el portal donde respondieron 1,013 graduados y 88 corrigieron su nombre, cada corrección comparada con el documento; un control, título por título, que halló dos títulos de Licenciatura en Artes que faltaban, algo que una copia del sistema de estudiantes nunca habría hallado; y cada control diciendo qué referencia usa.",
+  "card": "Every name passed the checks, and 88 were still wrong. Only a reference outside the data, such as the graduate, says what's true.",
+  "card_es": "Cada nombre pasó los controles, y 88 seguían mal. Solo una referencia fuera de los datos, como el graduado, dice qué es cierto.",
+  "chapters_es": {
+    "stars": "Bajo las estrellas",
+    "allowed": "Cada nombre, permitido",
+    "reference": "Una referencia fuera de los datos",
+    "ask": "Preguntar al graduado",
+    "apart": "Otro registro, aparte",
+    "which": "Decir qué referencia",
+    "true": "Permitido, y cierto"
+  },
+  "past": [
+    "Japan, 1800 to 1821: a survey checked by the stars",
+    "Ino Tadataka's teams measured the coast on foot by day and the stars on clear nights, and corrected the walk by them: a map of all Japan, the base of its maps for decades."
+  ],
+  "past_es": [
+    "Japón, de 1800 a 1821: un levantamiento comprobado con las estrellas",
+    "Los equipos de Ino Tadataka midieron la costa a pie de día y las estrellas en las noches despejadas, y corrigieron el camino con ellas: un mapa de todo Japón, la base de sus mapas durante décadas."
+  ],
+  "repo": {
+    "ask": [
+      "sources/portal/_portal__sources.yml"
+    ],
+    "apart": [
+      "sources/exam_boards/_exam_boards__sources.yml",
+      "tests/generic/reconciles_with.sql"
+    ],
+    "which": [
+      "tests/rules/names_are_allowed.sql",
+      "models/marts/graduations/_graduations__models.yml",
+      "governance/5-data-contracts/mart_graduations__graduation_list.yaml",
+      "docs/scorecard.md"
+    ]
+  },
+  "next_h": "You've seen why only a reference says what's true. Next: data that comes late, and looks complete.",
+  "next_h_es": "Viste por qué solo una referencia dice qué es cierto. Después: datos que llegan tarde, y parecen completos.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The standards and docs behind the film's words and checks.",
+    "p_es": "Las normas y la documentación detrás de las palabras y los controles de la película.",
+    "links": [
+      {
+        "title": "The data quality model, ISO/IEC 25012",
+        "title_es": "El modelo de calidad de datos, ISO/IEC 25012",
+        "line": "Fifteen characteristics of data quality, accuracy and consistency among them, from the international standard.",
+        "line_es": "Quince características de la calidad de datos, entre ellas la exactitud y la consistencia, de la norma internacional.",
+        "href": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25012",
+        "href_es": "https://iso25000.com/index.php/normas-iso-25000/iso-25012"
+      },
+      {
+        "title": "Data quality in a data contract",
+        "title_es": "La calidad en un contrato de datos (en inglés)",
+        "line": "The Open Data Contract Standard's quality rules, each with its dimension and its method, such as reconciliation.",
+        "line_es": "Las reglas de calidad del Open Data Contract Standard, cada una con su dimensión y su método, como la conciliación.",
+        "href": "https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/",
+        "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/data-quality/"
+      },
+      {
+        "title": "Data tests in dbt",
+        "title_es": "Las pruebas de datos en dbt (en inglés)",
+        "line": "Data tests, singular and generic, which return the rows that fail, and the meta that says who owns each one and what it measures.",
+        "line_es": "Las pruebas de datos, singulares y genéricas, que devuelven las filas que fallan, y el meta que dice quién es responsable de cada una y qué mide.",
+        "href": "https://docs.getdbt.com/docs/build/data-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/data-tests"
+      }
+    ]
+  },
+  "draft": true
+}

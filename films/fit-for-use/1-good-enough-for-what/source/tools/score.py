@@ -113,7 +113,7 @@ def tap(s, g=0.009, pan=0.0):
     """a tag tied on, a chip, a row lit: a muffled tap"""
     s_tap(s, g * FX, pan)
 def paper(s, g=0.011, pan=0.0, sec=0.4):
-    """a sheet laid down: an index card, a chart, a page of the contract"""
+    """a sheet laid down: an index card, a chart, a page of the list's file"""
     x = tt(sec); X(filt(noise(sec), 'band', (250, 2000))[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g * FX, pan)
 def air(s, sec=0.9, g=0.007, pan=0.0, lo=150, hi=800):
     """a breath of air: something drawn out across the frame"""
@@ -264,14 +264,14 @@ tap(N('agreed', 'Malia', -0.1), 0.007, px(550)); tap(N('agreed', 'Planning', -0.
 tap(N('owner', 'Mei owns', -0.2), 0.008, px(960))
 knock(N('films', 'Rules that run', -0.2), 0.011, px(680), 230); knock(N('films', 'Too good', -0.2), 0.011, px(1240), 230)
 
-# 5. Written beside the data: the contract opens, the small D and F sharp. Its lines lit as the voice names them, a tap each; the dbt
+# 5. Written beside the data: the list's file opens, the small D and F sharp. Its lines lit as the voice names them, a tap each; the dbt
 #    file and Catalog Explorer, each set down, their tags as one soft sound. Governance first, then the tools: the large D under
 #    "your governance". Mercator's chart again, its title: the opening's three small bowls, rising, and the small D. The list now says
 #    what it's for: the four uses' large bowls again, in turn, ringing together as one chord. The next film's card. The end card:
 #    the mark, and the large low D ringing out under it
 V = lambda lid, word, off=0: W('written', lid, word, off)
 v0 = S0('written')
-tDc = V('contract', 'data contract', -0.3)
+tDc = V('contract', 'the file', -0.3)
 paper(tDc, 0.011, px(960), 0.45)
 bowl(D4, tDc + 0.1, 0.5, -0.15); bowl(Fs4, tDc + 0.55, 0.5, 0.15)
 for w_ in ('its dimension', 'its level', 'who agreed', 'what a failure'):

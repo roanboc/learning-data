@@ -1,0 +1,112 @@
+{
+  "kicker": "Data temperature",
+  "kicker_es": "La temperatura de los datos",
+  "title_es": "Caliente, tibio, frío",
+  "h1": "Freshness and reading decide where data lives",
+  "h1_es": "La frescura y la lectura deciden dónde viven los datos",
+  "lead": "Until September, nobody at the university had asked how fresh each kind of data must be. Contract changes came in once a night, and 23 tutors were paid two weeks late; old pay records sat in the costliest storage, never deleted. Now each kind of data has its own temperature.",
+  "lead_es": "Hasta septiembre, nadie en la universidad había preguntado cuán frescos debían estar sus datos. Los cambios de contrato llegaban cada noche, y 23 tutores cobraron dos semanas tarde; los registros de pago viejos ocupaban el almacenamiento más caro, sin borrarse. Hoy cada dato tiene su temperatura.",
+  "description": "A film about data temperature: how fresh each kind of data must be, and how often it's read, decide how it moves and where it's kept. In 2015, a gene bank driven from Aleppo by war asked the seed vault on Svalbard for the copies it kept frozen there, the first to do so. At the university, contracts are hot, pushed from the HR system as they change and kept as a streaming table within a minute; each faculty's spending is warm, a materialized view worked out each night; old pay records are cold, moved to the archive tier after a year and deleted at seven. Light on purpose, with the official docs for the rest.",
+  "description_es": "Una película sobre la temperatura de los datos: cuán frescos deben estar y cuán a menudo se leen deciden cómo se mueven y dónde se guardan. En 2015, un banco de germoplasma que la guerra sacó de Alepo pidió a la bóveda de semillas de Svalbard las copias que guardaba congeladas, el primero en hacerlo. En la universidad, los contratos son calientes: el sistema de RR. HH. envía cada cambio y una tabla de streaming lo tiene en un minuto; el gasto de cada facultad es tibio, una vista materializada que se calcula cada noche; los registros de pago viejos son fríos: pasan al nivel de archivo al año y se borran a los siete. Liviana a propósito, con la documentación oficial para el resto.",
+  "card": "Hot, warm or cold: how fresh data must be, and how often it's read, decide how it moves and where it's kept.",
+  "card_es": "Caliente, tibio o frío: cuán frescos deben estar los datos y cuán a menudo se leen deciden cómo se mueven y dónde viven.",
+  "chapters_es": {
+    "vault": "La bóveda de semillas",
+    "two": "Dos preguntas",
+    "hot": "Caliente",
+    "warm": "Tibio",
+    "cold": "Frío",
+    "cools": "Un dato que se enfría",
+    "close": "Guardado según su uso"
+  },
+  "past": [
+    "Svalbard, 2008 to 2015: a seed vault, and a gene bank that asked for its copies back",
+    "Seeds in use are kept close and ready; their copies sleep, frozen far away, until the day they're needed. Data can be kept the same way: hot, warm or cold, as it's used."
+  ],
+  "past_es": [
+    "Svalbard, de 2008 a 2015: una bóveda de semillas, y un banco que pidió de vuelta sus copias",
+    "Las semillas en uso se guardan cerca y listas; sus copias duermen, congeladas y lejos, hasta el día en que se necesitan. Los datos pueden guardarse igual: calientes, tibios o fríos, según su uso."
+  ],
+  "next_h": "You've seen data kept hot, warm and cold, as it's used. Next: one copy, one platform.",
+  "next_h_es": "Viste datos guardados calientes, tibios y fríos, según su uso. Después: una copia, una plataforma.",
+  "repo": {
+    "two": [
+      "examples/hot-warm-cold/service_levels.yaml"
+    ],
+    "hot": [
+      "sources/hr_system/_hr_system__sources.yml",
+      "examples/hot-warm-cold/contracts_as_they_stand.sql"
+    ],
+    "warm": [
+      "examples/hot-warm-cold/spending_by_faculty.sql",
+      "examples/hot-warm-cold/spending_by_faculty.yml"
+    ],
+    "cold": [
+      "examples/hot-warm-cold/pay_records_archive.sql"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film shows the idea once. The docs say how to keep each temperature on the platform today: a stream for what's hot, a view on a schedule for what's warm, and the archive tier for what's cold.",
+    "p_es": "La película muestra la idea una vez. La documentación dice cómo mantener hoy cada temperatura en la plataforma: un flujo para lo caliente, una vista con horario para lo tibio y el nivel de archivo para lo frío.",
+    "links": [
+      {
+        "title": "Zerobus Ingest",
+        "title_es": "Zerobus Ingest",
+        "line": "A system pushes each change as it's made, straight into a table, with no message bus to run.",
+        "line_es": "Un sistema envía cada cambio al hacerse, directo a una tabla, sin un bus de mensajes que operar.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/ingestion/zerobus-overview",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/ingestion/zerobus-overview"
+      },
+      {
+        "title": "Streaming tables",
+        "title_es": "Tablas de streaming",
+        "line": "Take in each row as it arrives, and keep what's hot fresh to the minute.",
+        "line_es": "Recibe cada fila al llegar, y mantiene lo caliente fresco al minuto.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/ldp/concepts/streaming-tables",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/ldp/concepts/streaming-tables"
+      },
+      {
+        "title": "The AUTO CDC APIs",
+        "title_es": "Las API AUTO CDC",
+        "line": "Apply each change a system sends, in order, to a table of how things stand.",
+        "line_es": "Aplica cada cambio que envía un sistema, en orden, a una tabla de cómo están las cosas.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/ldp/cdc",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/ldp/cdc"
+      },
+      {
+        "title": "Materialized views",
+        "title_es": "Vistas materializadas",
+        "line": "Work out an answer on a schedule, and keep it ready to read.",
+        "line_es": "Calcula una respuesta con un horario, y la deja lista para leer.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/ldp/concepts/materialized-views",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/ldp/concepts/materialized-views"
+      },
+      {
+        "title": "Databricks configurations in dbt",
+        "title_es": "Configuraciones de Databricks en dbt (en inglés)",
+        "line": "A materialized view as a dbt model, with its schedule in its config.",
+        "line_es": "Una vista materializada como modelo de dbt, con su horario en su configuración.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/databricks-configs",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/databricks-configs"
+      },
+      {
+        "title": "Archival support in Azure Databricks",
+        "title_es": "Soporte de archivo en Azure Databricks",
+        "line": "Tell a table which files have gone to the archive tier, and find the ones a query needs back.",
+        "line_es": "Dile a una tabla qué archivos pasaron al nivel de archivo, y halla los que una consulta necesita de vuelta.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/optimizations/archive-delta",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/optimizations/archive-delta"
+      },
+      {
+        "title": "Access tiers for blob data",
+        "title_es": "Niveles de acceso para los datos de blobs",
+        "line": "The cloud's tiers, from hot to archive: what each costs to keep and to read, and how long it takes to bring back.",
+        "line_es": "Los niveles de la nube, de frecuente a archivo: cuánto cuesta guardar y leer en cada uno, y cuánto tarda en volver.",
+        "href": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
+        "href_es": "https://learn.microsoft.com/es-es/azure/storage/blobs/access-tiers-overview"
+      }
+    ]
+  }
+}

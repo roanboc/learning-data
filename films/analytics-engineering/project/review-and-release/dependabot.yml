@@ -1,0 +1,32 @@
+# Dependabot, as From a branch to production shows it: it proposes each new version of the actions the release uses,
+# and a fix for any known flaw in the project's Python libraries, each as a pull request, reviewed like any other change.
+# In the project's own repository this file is .github/dependabot.yml; here it's an example, and GitHub reads nothing
+# from it (GitHub reads Dependabot's settings only from .github/ at a repository's root).
+#
+# The release pins each action to a full commit, with its version in a comment on the same line, such as
+#   uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+# A tag or a branch can be moved to other code; a commit always means the same code. When a new version comes out,
+# Dependabot's pull request changes the commit and the comment together. GitHub raises Dependabot alerts only for actions
+# named by a version, not by a commit, so for the release's actions it's these pull requests that keep them current; for
+# the libraries, Dependabot also raises an alert and opens a security update when a flaw is published.
+#
+# The stronger step is GitHub's workflow dependency lockfile (.github/workflows/actions.lock, made with gh actions-lock):
+# it also pins the actions an action calls in turn, which a pin in the workflow can't reach. GitHub's "Secure use
+# reference" says it supersedes pinning in the workflow for the repositories that adopt it.
+version: 2
+updates:
+  # the actions in the workflows (.github/workflows/ in the project's own repository)
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # the actions' updates in one pull request a week, so one review covers them
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # the Python libraries the project builds with (requirements.txt and requirements-databricks.txt)
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly

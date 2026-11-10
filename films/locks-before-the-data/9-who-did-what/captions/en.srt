@@ -1,0 +1,347 @@
+1
+00:00:01,600 --> 00:00:03,660
+Australia, 1953.
+
+2
+00:00:05,160 --> 00:00:11,519
+David Warren is a chemist at the Aeronautical Research Laboratories, and he knows aircraft fuel tanks.
+
+3
+00:00:13,019 --> 00:00:17,974
+He's asked to help find out why two Comets, the world's first jet airliners, have crashed.
+
+4
+00:00:19,674 --> 00:00:24,755
+In 1954, two more break up over the sea, and no one on board survives.
+
+5
+00:00:26,655 --> 00:00:29,428
+No one is left to say what the crew saw or heard.
+
+6
+00:00:30,928 --> 00:00:32,622
+So the experts can only guess.
+
+7
+00:00:34,122 --> 00:00:40,029
+And while they guess, the planes fly again, full of passengers, and the next one may fail the same way.
+
+8
+00:00:41,729 --> 00:00:43,169
+Something has to change.
+
+9
+00:00:45,869 --> 00:00:49,375
+In April 1954, Warren writes a short note.
+
+10
+00:00:50,875 --> 00:00:57,319
+A small box could record the voices in the cockpit, over and over, so the last hours are always kept.
+
+11
+00:00:59,219 --> 00:01:02,744
+It would sit in the tail, where a crash is least likely to reach it.
+
+12
+00:01:04,444 --> 00:01:09,348
+Pilots fear a spy in the cockpit, and his boss tells him to get on with fuel tanks.
+
+13
+00:01:10,848 --> 00:01:16,472
+By 1958, his team's box keeps four hours of voices and the instruments' readings.
+
+14
+00:01:18,172 --> 00:01:27,251
+After one more crash that no one can explain, Australia is the first country to require recorders on its airliners, from 1963.
+
+15
+00:01:28,951 --> 00:01:35,990
+Now, when a plane is lost, investigators can hear its last minutes, find the cause, and fix it on every other plane.
+
+16
+00:01:37,890 --> 00:01:40,347
+A data platform needs a recorder too.
+
+17
+00:01:41,847 --> 00:01:47,663
+Without one, when something goes wrong, the team can only guess what was touched, and the way in stays open.
+
+18
+00:01:49,363 --> 00:01:53,752
+With one, they can see who did what, close the way in, and show what didn't happen.
+
+19
+00:02:01,252 --> 00:02:07,417
+At the university, Sam Okafor has locked the platform's sign-ins, doors, power and changes.
+
+20
+00:02:08,917 --> 00:02:14,989
+Now the security review asks him to show they held, with three questions about the last 90 days.
+
+21
+00:02:16,489 --> 00:02:18,106
+Who signed in, and from where?
+
+22
+00:02:19,406 --> 00:02:22,531
+Who switched on admin power, and what did they do with it?
+
+23
+00:02:23,831 --> 00:02:26,171
+What changed production, and who approved it?
+
+24
+00:02:27,871 --> 00:02:31,306
+The answers are in four records, and each keeps its own time.
+
+25
+00:02:33,006 --> 00:02:35,144
+The platform's audit table keeps a year.
+
+26
+00:02:36,644 --> 00:02:41,714
+GitHub's audit log keeps six months, but who pushed or copied code, only a week.
+
+27
+00:02:43,414 --> 00:02:47,500
+The directory keeps its sign-ins, and each switch-on of power, for a month.
+
+28
+00:02:49,200 --> 00:02:52,638
+And the storage keeps a log only where someone has asked it to.
+
+29
+00:02:54,338 --> 00:02:57,893
+So for two of the questions, part of the answer is already gone.
+
+30
+00:03:01,393 --> 00:03:07,281
+So every record is now sent, as it's written, to one store apart, kept by the security team.
+
+31
+00:03:09,581 --> 00:03:15,797
+A locked copy is kept for a year: until then, no one can change or delete it, not even an admin.
+
+32
+00:03:18,097 --> 00:03:23,494
+Switching a record off is recorded too, and if one goes quiet, someone is told at once.
+
+33
+00:03:25,794 --> 00:03:31,816
+Everyone is in it under their own name, agents too, as AI agents in data work shows.
+
+34
+00:03:33,916 --> 00:03:41,175
+The record is about people, so it's kept like personal data: read by few, for a reason, and every search is recorded.
+
+35
+00:03:43,275 --> 00:03:45,707
+Warren's pilots feared a spy in the cockpit.
+
+36
+00:03:47,407 --> 00:03:52,389
+A record of who did what is read to find out what happened, not to watch the people in it.
+
+37
+00:03:55,689 --> 00:03:59,283
+A few moments ring a bell at once, and someone always answers it.
+
+38
+00:04:00,783 --> 00:04:02,012
+The first is power.
+
+39
+00:04:03,312 --> 00:04:09,275
+One morning, last night's load has gone wrong, and Jun has to put the learner table back as it was.
+
+40
+00:04:10,975 --> 00:04:17,363
+He switches on his admin account's power to restore a table, for an hour, with a reason, and Sam approves.
+
+41
+00:04:19,263 --> 00:04:23,684
+The platform team gets the alert at once, and checks it matches a known task.
+
+42
+00:04:25,384 --> 00:04:32,819
+The record keeps the rest: the switch-on, the restore, made by Jun's admin account, and the switch-off, twenty minutes later.
+
+43
+00:04:34,919 --> 00:04:40,378
+The other bells: a risky sign-in, an emergency account used, a record gone quiet.
+
+44
+00:04:42,278 --> 00:04:44,184
+Few bells, so none is ignored.
+
+45
+00:04:47,084 --> 00:04:51,088
+One evening, at twenty to ten, the bell rings for a risky sign-in.
+
+46
+00:04:52,788 --> 00:04:57,092
+Jun's session is in use from another country, at an hour he never works.
+
+47
+00:04:58,592 --> 00:05:02,028
+Jun is at home, and his laptop has been shut since six.
+
+48
+00:05:03,728 --> 00:05:09,530
+A browser add-on he'd used for a year had changed hands, and its last update copied his sign-ins.
+
+49
+00:05:11,430 --> 00:05:15,090
+Whoever holds a copied session is Jun, until the session ends.
+
+50
+00:05:16,790 --> 00:05:18,454
+So the first step is to end it.
+
+51
+00:05:19,754 --> 00:05:27,753
+The security team's on-call switches his account off, and ends all his sessions: in the directory, in GitHub, and on the platform.
+
+52
+00:05:29,853 --> 00:05:33,580
+Twelve minutes after the bell, GitHub and the platform refuse it.
+
+53
+00:05:36,680 --> 00:05:39,497
+Then they read, in the one store, what the copy did.
+
+54
+00:05:40,997 --> 00:05:44,336
+In GitHub, it downloaded the platform's code as a file.
+
+55
+00:05:46,036 --> 00:05:48,849
+No push, no change to a rule, no approval.
+
+56
+00:05:50,549 --> 00:05:54,362
+On the platform, nothing: it has no door on the open internet.
+
+57
+00:05:56,062 --> 00:05:59,022
+The code holds no secret and no learner's data.
+
+58
+00:06:00,522 --> 00:06:07,110
+That night, the add-on is taken off every browser; the next morning, Jun is back at work on a clean laptop.
+
+59
+00:06:09,010 --> 00:06:13,803
+Nothing was changed, so nothing has to be put back: the record is how they know.
+
+60
+00:06:15,703 --> 00:06:19,978
+The next day, a review without blame asks what made it possible, not who.
+
+61
+00:06:21,678 --> 00:06:29,206
+Now browsers take only add-ons the university approves, and GitHub takes requests only from the university's network.
+
+62
+00:06:31,106 --> 00:06:35,472
+A leaked secret gets the same steps: end it first, then read what it did.
+
+63
+00:06:38,572 --> 00:06:43,177
+Every admin power here is switched on for a task, and approved by someone else.
+
+64
+00:06:44,677 --> 00:06:49,317
+But what if the sign-in service fails, or a wrong rule locks every admin out?
+
+65
+00:06:51,017 --> 00:06:54,033
+For that, the directory has two emergency accounts.
+
+66
+00:06:55,533 --> 00:06:58,582
+They belong to no one, and their power is always on.
+
+67
+00:07:00,282 --> 00:07:05,121
+So they sign in only with security keys, kept in two safes, in two buildings.
+
+68
+00:07:06,821 --> 00:07:11,990
+No rule that could lock everyone out applies to them, and any sign-in rings every bell.
+
+69
+00:07:13,890 --> 00:07:19,347
+Every 90 days, two people open a safe, sign in, check it works, and lock the key away.
+
+70
+00:07:21,047 --> 00:07:24,283
+The bell rings then too, and everyone knows it's the test.
+
+71
+00:07:27,183 --> 00:07:29,373
+The last lock is on the data itself.
+
+72
+00:07:30,873 --> 00:07:34,774
+A table's own history can undo most mistakes, for seven days.
+
+73
+00:07:36,474 --> 00:07:41,116
+But what if a mistake is found too late, or someone deletes a table and its history?
+
+74
+00:07:42,816 --> 00:07:49,189
+Every night after the load, a copy of production's data goes to a place apart, with admins of its own.
+
+75
+00:07:51,089 --> 00:07:55,351
+For 30 days, no one can change or delete it, not even an admin.
+
+76
+00:07:57,051 --> 00:08:01,576
+Once a month, the team restores one beside the real table, and checks they match.
+
+77
+00:08:03,276 --> 00:08:08,454
+As Walls, doors and keys says, a copy nobody has restored is only a hope.
+
+78
+00:08:11,554 --> 00:08:14,812
+Three months on, the review asks its three questions again.
+
+79
+00:08:16,312 --> 00:08:19,256
+Sam answers them in an afternoon, from one place.
+
+80
+00:08:20,756 --> 00:08:25,413
+Of every sign-in, one was wrong: a copied session, stopped in twelve minutes.
+
+81
+00:08:27,113 --> 00:08:33,607
+Admin power was switched on 23 times, each with a reason, an approval, and a record of what was done.
+
+82
+00:08:35,307 --> 00:08:40,439
+Production changed 11 times, each change reviewed, and each release approved.
+
+83
+00:08:42,139 --> 00:08:45,314
+And every night at two, the job signed in as itself.
+
+84
+00:08:47,214 --> 00:08:49,627
+Warren's box doesn't keep a plane in the air.
+
+85
+00:08:50,927 --> 00:08:53,294
+It means no one has to guess what happened.
+
+86
+00:08:54,794 --> 00:08:57,014
+The record does the same for the platform.
+
+87
+00:08:58,514 --> 00:09:01,108
+If you can't see it, you can't say it's protected.

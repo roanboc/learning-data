@@ -43,7 +43,7 @@ const NARR={
  {"id":"didnt","gap":0.8,"text":"But Clara didn't ask for this. “I'm not technical,” she says."},
  {"id":"depends","gap":0.8,"text":"So Yusuf shows her who depends on it: the near-award dashboard, and every faculty that plans from it."},
  {"id":"worth","gap":0.8,"text":"What it's worth to them: a number on time, from someone they can ask."},
- {"id":"comes","gap":0.8,"text":"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, and any change to it needs her yes."},
+ {"id":"comes","gap":0.8,"text":"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, the data team reviews changes, and she's told what they touch."},
  {"id":"code","gap":0.8,"text":"She answers for the promise, not the code."}]},
 "steps":{"name":"Products and steps","lead":1.0,"tail":1.0,"vo":[
  {"id":"every","gap":0.8,"text":"Not every table is a product."},

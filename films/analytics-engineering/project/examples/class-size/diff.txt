@@ -1,0 +1,25 @@
+The class plan, from the agent's branch and from main, compared unit by unit, on the first push, Tuesday
+3 November 2026, and again on the second, with the same result: the second push adds only a warning. Main is what
+production is built from, so main's plan is production's, from the last release. The same three questions
+scripts/tools/diff_against_main.py asks, as skills/reconcile-and-diff/ says to ask them, on the pull request's
+schema and on production's. Counts only: no name, ID or value leaves the tables.
+
+$ python scripts/tools/diff_against_main.py ci_pr_412_marts.mart_planning__class_plan unit_offering_key
+ci_pr_412_marts.mart_planning__class_plan, by unit_offering_key
+  keys only in this branch: 0
+  keys only in main:        0
+  class_size: new in this branch
+  classes: 161 rows changed
+
+The script names every column that changed for a unit in both. It names class_size, which is new, and classes, in
+161 units, so no other value changed.
+
+$ dbt show --inline "select count(*) as units, count_if(b.classes > m.classes) as up, sum(b.classes - m.classes) as more from {{ ref('mart_planning__class_plan') }} as b inner join analytics.prod_marts.mart_planning__class_plan as m using (unit_offering_key) where b.classes <> m.classes"
+  units: 161 · up: 161 · more: 263
+
+$ dbt show --inline "select count(*) as units, sum(classes) as classes from {{ ref('mart_planning__class_plan') }}"
+  main (production):          1,236 units · 3,214 classes
+  agent/planning/class-size:  1,236 units · 3,477 classes
+
+No unit is in only one of them. One column is new. Classes changed in 161 units, each one up: 263 more. 1,236
+units before and after; 3,214 classes before, 3,477 after.

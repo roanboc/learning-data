@@ -266,8 +266,9 @@ project/
 │                             review for governance; and choose-the-skill, which picks one
 ├── databricks.yml            the bundle: the project's jobs, deployed the same way to test and to
 │                             production, after a review and Noor's approval (Databricks only)
-├── resources/                a file for each job the bundle deploys: payroll's export, and the
-│                             claims job, with the step that sends the hours to payroll
+├── resources/                a file for each job the bundle deploys: payroll's export, the
+│                             claims job, with the step that sends the hours to payroll, and the
+│                             build, which the release runs in test and production
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
@@ -406,3 +407,19 @@ databricks bundle validate -t dev
 databricks bundle deploy -t dev
 databricks bundle run -t dev payroll_export
 ```
+
+## Review and release
+
+Every change reaches production the same way, a person's or an agent's: a pull request; checks on
+what changed, with the impact report; a diff of the data (`scripts/tools/diff_against_main.py`); a
+review for reference by the governance review agent (`skills/review-for-governance/`); the data
+team's review of the code (`CODEOWNERS`); and a release that a second person, a release approver
+the map names, approves (GitHub's teams in `review-and-release/teams.yml`, written by
+`scripts/generate/teams.py` from the map's roles). Owners don't review pull requests: what a word
+means is decided first, in the glossary, and the impact report names who to tell. The release runs
+every night at 23:00, or when a person starts it: it builds `main` in test first, and production
+only once test has passed and a release approver has said yes. It deploys the bundle above, with
+the whole build as a job of its own (`resources/build.job.yml`), signed in to Databricks with no
+secret, as the release's own identity in each environment. `review-and-release/README.md` says what
+each rule stops and where it's set; `examples/class-size/` follows the planning agent's first pull
+request through all of it, as *Every change through review* tells it.

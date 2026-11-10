@@ -18,6 +18,8 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 | [People and groups](https://data.learn-all.org/locks-before-the-data/people-and-groups/) | Sign-in, groups and admin power | 8 min | 8 | 3 questions | [script](5-people-and-groups/script.md) · [source](5-people-and-groups/source/README.md) |
 | [Workloads without secrets](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/) | Workload identity | 9 min | 9 | 3 questions | [script](6-workloads-without-secrets/script.md) · [source](6-workloads-without-secrets/source/README.md) |
 | [Network, storage and keys](https://data.learn-all.org/locks-before-the-data/network-storage-and-keys/) | Doors to the data | 9½ min | 9 | 3 questions | [script](7-network-storage-and-keys/script.md) · [source](7-network-storage-and-keys/source/README.md) |
+| [From a branch to production](https://data.learn-all.org/locks-before-the-data/from-a-branch-to-production/) | A reviewed path to production | 9 min | 8 | 3 questions | [script](8-from-a-branch-to-production/script.md) · [source](8-from-a-branch-to-production/source/README.md) |
+| [Who did what](https://data.learn-all.org/locks-before-the-data/who-did-what/) | Seeing who did what | 9 min | 10 | 3 questions | [script](9-who-did-what/script.md) · [source](9-who-did-what/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

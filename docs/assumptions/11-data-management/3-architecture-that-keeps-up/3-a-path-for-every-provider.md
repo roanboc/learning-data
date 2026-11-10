@@ -16,5 +16,5 @@ Made on 10 November 2026 while Rodrigo was away, on the coordinator's relay of h
 6. **Mark on the title and end cards:** settled; the film draws the module's own mark, `dm_mark` (PR #242).
 7. **Sound:** the long string instrument (rubbed brass wires), reserved in palettes.md. It is a rubbed lengthwise sound like film 14's singing rod, but low and many-voiced; worth a listen.
 8. **Spanish:** "Borrado es borrado" for *Deleted means deleted*, whose Spanish title isn't set yet.
-9. **Audio release (for Rodrigo's checklist):** the MP3 is force-added in Git beside its audio.json (`media.py index --film a-path-for-every-provider-en`). The audio workflow was not run; copying the MP3 to its audio release is left for him.
+9. **Audio release:** the MP3 is tracked beside its audio.json (`media.py index --film a-path-for-every-provider-en`). Since #243 the Store audio outside Git workflow publishes it when the film reaches main, so nothing is left for Rodrigo here.
 10. **No render or review page** was made, by the project's film rule of 28 October and 3 November; the page carries the Draft label.

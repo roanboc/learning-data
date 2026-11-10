@@ -1,0 +1,38 @@
+{
+  "key": "who-did-what",
+  "title": "Who did what",
+  "sub": "The last film of Locks before the data, the first series of Data protection and privacy: a record of who did what, kept before anything goes wrong and out of reach of everyone in it, as David Warren's flight recorder kept a cockpit's last hours from 1954; the few alarms someone always answers; a copied session ended first, then read in the record; two emergency accounts for the day every lock jams; and a copy of the data nobody can delete.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Cyan is an identity, green allowed, coral denied or closed, amber power switched on and every alarm; a session or a key is always a sealed card of violet frost with a lock, never written out. Australia in the 1950s is painted in the same night light, with its place and year on a tag.",
+  "src": [
+    "wd_past.js",
+    "wd_pieces.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "seen",
+    "production",
+    4.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ]
+  ],
+  "story": [
+    "box",
+    "tail"
+  ],
+  "urgent": [
+    "night"
+  ],
+  "logos": true
+}

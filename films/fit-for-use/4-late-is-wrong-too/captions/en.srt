@@ -1,0 +1,279 @@
+1
+00:00:01,600 --> 00:00:06,394
+November 1970: the coast of East Pakistan, now Bangladesh.
+
+2
+00:00:07,094 --> 00:00:11,910
+Farming and fishing families live on low islands, where great rivers meet the sea.
+
+3
+00:00:13,010 --> 00:00:17,150
+On the twelfth, a cyclone comes ashore in the evening, with the high tide.
+
+4
+00:00:17,850 --> 00:00:23,899
+Forecasters warn of danger, and as it nears, the radio broadcasts a great danger signal.
+
+5
+00:00:24,999 --> 00:00:30,753
+On the islands it means little: survivors said later they took signal number one to be the worst.
+
+6
+00:00:31,453 --> 00:00:35,564
+Most people know a storm is coming, yet almost nobody takes shelter.
+
+7
+00:00:36,864 --> 00:00:41,985
+That night a storm surge, the sea driven inland by the wind, sweeps over the islands.
+
+8
+00:00:42,685 --> 00:00:46,400
+At least three hundred thousand people die, perhaps half a million.
+
+9
+00:00:48,500 --> 00:00:53,771
+A warning people can't read, or don't act on, is no warning. Something has to change.
+
+10
+00:00:55,471 --> 00:01:04,836
+In 1972, the Bangladesh Red Cross Society starts the Cyclone Preparedness Programme, run with the government from 1973.
+
+11
+00:01:05,536 --> 00:01:09,872
+Volunteers from the coast's own villages carry each warning the last mile.
+
+12
+00:01:10,572 --> 00:01:14,512
+They go house to house with megaphones, and lead people to shelters.
+
+13
+00:01:15,212 --> 00:01:21,135
+Their flags rise with the danger, one, then two, then three: a signal the whole village can read.
+
+14
+00:01:22,435 --> 00:01:31,280
+In November 2007, Cyclone Sidr strikes the same coast, with winds as strong as 1970's, though at low tide.
+
+15
+00:01:31,980 --> 00:01:36,723
+Warnings have gone out for days, and the highest signal has flown since the day before.
+
+16
+00:01:37,423 --> 00:01:42,787
+More than 40,000 volunteers carry them, and a million and a half people are in shelters.
+
+17
+00:01:43,887 --> 00:01:50,164
+About 3,400 die: still too many, and about one for every hundred in 1970.
+
+18
+00:01:52,064 --> 00:01:53,658
+Data has a last mile too.
+
+19
+00:01:54,358 --> 00:02:00,490
+In June 2026, the night's file doesn't come, and the graduation list is built without it.
+
+20
+00:02:01,190 --> 00:02:05,629
+Every check passes. 23 graduates are missing, and nothing says so.
+
+21
+00:02:07,129 --> 00:02:11,357
+This time, someone notices in time, and all 23 are on the list.
+
+22
+00:02:18,857 --> 00:02:27,183
+Each night at two, the student system sends its nightly file: the day's names and results, and the awards the exam boards approved.
+
+23
+00:02:28,283 --> 00:02:31,352
+At three, the night's update builds the graduation list.
+
+24
+00:02:32,652 --> 00:02:39,367
+On Wednesday night, 17 June, the file didn't come: a full disk on the student system's side held it.
+
+25
+00:02:40,667 --> 00:02:44,790
+At three, the list was built from what was there: the file of the night before.
+
+26
+00:02:45,890 --> 00:02:49,457
+689 graduates, and every check green.
+
+27
+00:02:50,957 --> 00:02:57,044
+Even the check against the boards' own lists passed: they come in the same transfer, so they were a day old too.
+
+28
+00:02:58,144 --> 00:03:01,693
+Missing: 23 graduates the boards approved on Wednesday.
+
+29
+00:03:03,393 --> 00:03:04,966
+Late data looks complete.
+
+30
+00:03:06,466 --> 00:03:10,051
+Each check looks at what's there. None can see what hasn't arrived.
+
+31
+00:03:12,951 --> 00:03:16,945
+Thursday, 8 am. The list is due at the printer at five.
+
+32
+00:03:18,045 --> 00:03:24,798
+Sam Okafor, who runs the platform, sees in Databricks' monitoring that the student system's tables are late.
+
+33
+00:03:25,498 --> 00:03:31,066
+dbt's freshness check says how late: the student system's data is thirty hours old.
+
+34
+00:03:32,366 --> 00:03:38,582
+There was a level, a warning after a day: set by the builders, agreed with nobody, and never run at night.
+
+35
+00:03:39,282 --> 00:03:43,519
+A level its users never agreed is a signal nobody understands.
+
+36
+00:03:45,019 --> 00:03:51,784
+Sam calls the student system team, and Malia Fonoti, who sends the list. Malia holds the send.
+
+37
+00:03:52,884 --> 00:04:00,081
+At 11:40 the file arrives; at 12:10 the list is built again, with 712 graduates.
+
+38
+00:04:00,781 --> 00:04:05,623
+Malia's team checks the 23 new names, and at 3:20 the list goes.
+
+39
+00:04:07,123 --> 00:04:14,911
+The December before, six graduates were left off the same way, and nobody saw. Their certificates were printed late, and posted.
+
+40
+00:04:17,811 --> 00:04:21,763
+On Monday, Malia and Sam meet Mei Tanaka, who owns the list.
+
+41
+00:04:23,263 --> 00:04:28,751
+The platform can see that a table is late. Only its users can say when late is too late.
+
+42
+00:04:30,651 --> 00:04:35,399
+The certificates can't wait: they need that night's files when the list goes to the printer.
+
+43
+00:04:37,099 --> 00:04:41,926
+Seating the Great Hall can: it's counted a week before, from a list a few days old.
+
+44
+00:04:43,626 --> 00:04:47,906
+Planning's count for the government comes after the year's end: weeks are fine.
+
+45
+00:04:49,606 --> 00:04:54,789
+One list, three clocks. The strictest sets the level: a day old at most, at the send.
+
+46
+00:04:56,489 --> 00:05:01,902
+A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves.
+
+47
+00:05:03,602 --> 00:05:07,694
+Malia agrees it, Mei owns it, and it goes in the list's contract.
+
+48
+00:05:09,394 --> 00:05:14,510
+Rules that run left timeliness in pencil, with no checks. This is its first rule.
+
+49
+00:05:17,410 --> 00:05:19,817
+From now on, the list says how old it is.
+
+50
+00:05:21,117 --> 00:05:25,544
+Every row carries its sources' age: when the files it was built from arrived.
+
+51
+00:05:26,844 --> 00:05:33,882
+Each source has its own. That Thursday, it would have said: student system, Wednesday at two; portal, Thursday at two.
+
+52
+00:05:35,582 --> 00:05:39,119
+It's shown wherever the list is, first of all in the printer's file.
+
+53
+00:05:40,419 --> 00:05:44,093
+Like the volunteers' flags, it's a signal everyone can read.
+
+54
+00:05:45,593 --> 00:05:52,116
+Too good to be true labelled a number from the night before. Here, every list says its age, on good nights too.
+
+55
+00:05:53,616 --> 00:05:56,630
+Data that says its age can be trusted to be old.
+
+56
+00:05:57,930 --> 00:05:59,348
+Data that doesn't, can't.
+
+57
+00:06:02,448 --> 00:06:05,760
+Then Sam checks the age where it starts: at each source.
+
+58
+00:06:07,260 --> 00:06:14,249
+dbt reads when each night's file arrived, not the newest row, which can be days old when no board has met.
+
+59
+00:06:15,949 --> 00:06:19,813
+One level on each: older than twenty-four hours, the check fails.
+
+60
+00:06:21,313 --> 00:06:23,640
+Each night, the update runs that check first.
+
+61
+00:06:24,940 --> 00:06:30,087
+If it fails, Sam and Malia hear at once, and the list is still built, saying its age.
+
+62
+00:06:31,587 --> 00:06:35,366
+That's the warning: nothing stops, and the people who need to know, know.
+
+63
+00:06:37,266 --> 00:06:40,771
+The send to the printer is a job too, and runs the same check.
+
+64
+00:06:42,271 --> 00:06:47,775
+It sends only if the check passes; if not, the list waits, and Malia is told why.
+
+65
+00:06:49,475 --> 00:06:51,745
+The data isn't stopped. The send is.
+
+66
+00:06:54,645 --> 00:07:01,189
+The volunteers can't stop a storm. They make sure the warning arrives in time, in words people understand.
+
+67
+00:07:02,489 --> 00:07:08,702
+A list can't make a late file come. It can say how old it is, and the send can wait until it's fresh.
+
+68
+00:07:10,002 --> 00:07:13,826
+Since June, no graduate has been left off a list by a late file.
+
+69
+00:07:15,326 --> 00:07:18,840
+Agree how fresh it must be, and always say how old it is.
+
+70
+00:07:20,940 --> 00:07:26,860
+Fit for use ends here: a use, a measure, a reference and a clock. Next, Quality as a habit.

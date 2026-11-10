@@ -12,13 +12,13 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `hr` | 16/16 | 7/7 | 6/6 | 4/4 |  | 33/33 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 17/17 | 7/7 | 8/8 | 6/6 |  | 38/38 |
+| `registrar` | 21/21 | 9/9 | 8/8 | 6/6 |  | 44/44 |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
 | `student` | 25/25 | 18/18 | 8/8 | 18/18 | 4/4 (2 warn) | 73/73 (2 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 87/87 (1 warn) | 58/58 | 39/39 | 44/44 | 6/6 (2 warn) | 234/234 (3 warn) |
+| **All** | 91/91 (1 warn) | 60/60 | 39/39 | 44/44 | 6/6 (2 warn) | 240/240 (3 warn) |
 
 ## Not passed
 

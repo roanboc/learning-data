@@ -377,7 +377,7 @@ No film source yet.
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 
 ### Architecture that keeps up
 

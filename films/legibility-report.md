@@ -110,6 +110,7 @@
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
+| Everyone at the table | 318 | 0% | 0 | 28.3 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |

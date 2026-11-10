@@ -11,6 +11,7 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Everyone at the table](https://data.learn-all.org/making-the-case/everyone-at-the-table/) | Every stakeholder, one story | 9½ min | 6 | 3 questions | [script](3-everyone-at-the-table/script.md) · [source](3-everyone-at-the-table/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

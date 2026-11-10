@@ -188,11 +188,12 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),pri
    Monday 22 June: Sam, Malia and Mei behind the bench. The platform sees a table is late (steel, over Sam); only its users say when
    late is too late (brass, over Malia and Mei). The bench from above: the three uses as cards, each with its clock, a dial whose brass
    range is how old the list may be for it: the certificates, that night's files at the send; the seating, a few days; Planning, weeks.
-   The strictest sets the level. The contract's rule, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
+   The strictest sets the level. The list's rule in its model's YAML, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
    timeliness in pencil, inked by its first rule. */
-const LW_CONTRACT=["- name: student_system_as_of",[["  …",DQ.soft]],"  quality:","  - name: student_system_at_most_a_day_old_at_the_send",[["    …",DQ.soft]],
-  [["    dimension: ",null],["timeliness","brass"]],[["    …",DQ.soft]],"    - property: level",[["      value: ",null],["At most 24 hours old, at the send","brass"]],
-  "    - property: agreedWith","      value: Malia Fonoti, graduations office"];
+// the rule as the list's model YAML has it (models/marts/graduations/_graduations__models.yml, lines 166 to 191), its other lines left out
+const LW_CONTRACT=["- name: student_system_as_of",[["  …",DQ.soft]],"  config:","    meta:","      quality:","        - name: student_system_at_most_a_day_old_at_the_send",
+  [["          dimension: ",null],["timeliness","brass"]],[["          …",DQ.soft]],[["          level: ",null],["At most 24 hours old, at the send","brass"]],
+  "          agreed_with: \"Malia Fonoti, graduations office\""];
 function lw_meet(x,tt,c,P){const G=P.g0+tt,K0=c.knows-0.2;
   lw_who(x,"sam",330,G,1);lw_who(x,"malia",1100,G,1);lw_who(x,"mei",1590,G,ag_in(tt,P.mei-0.4,0.6),{flip:true});
   dq_nameTag(x,470,410,"sam",{a:ag_io(tt,P.samW,K0,0.4)});dq_nameTag(x,975,410,"malia",{align:"right",a:ag_io(tt,P.maliaW,K0,0.4)});
@@ -210,7 +211,7 @@ function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.plannin
   // a nightly file meets it; for fresher data, Hot, warm, cold
   q=lw_pop(tt,P.hwc-0.1,U0);dq_textCard(x,1384,704,440,{kick:"See",title:"Hot, warm, cold"},{on:"granite",k:q.k,a:q.a});}
 function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,R0);
-  lw_yml(x,340,130,1240,{logo:null,product:"Data contract",title:"the graduation list",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[9,10]:[],k:q.k,a:q.a});
+  lw_yml(x,340,130,1240,{title:"models/marts/graduations/_graduations__models.yml",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[8,9]:[],k:q.k,a:q.a});
   const c1=dq_chip(x,340,790,"agreed: Malia Fonoti",{icon:"people",col:"brass",on:"granite",a:ag_io(tt,P.agrees,R0,0.4)});
   dq_chip(x,c1.x+c1.w+20,790,"owner: Mei Tanaka",{icon:"person",on:"granite",a:ag_io(tt,P.owns,R0,0.4)});
   q=lw_pop(tt,c.pencil,null);lw_dims(x,340,260,{first:ag_in(tt,P.first,0.8),on:"granite",k:q.k,a:q.a});}

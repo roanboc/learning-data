@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.113
+Principios de los años noventa.
+
+00:00:04.613 --> 00:00:08.492
+Los bosques tropicales se talan mucho más rápido que diez años antes.
+
+00:00:09.792 --> 00:00:15.420
+En Europa y Norteamérica, la gente hace campaña contra la madera tropical, y se niega a comprarla.
+
+00:00:16.720 --> 00:00:19.706
+Pero ningún comprador puede saber dónde creció un tablón, ni cómo.
+
+00:00:20.806 --> 00:00:24.694
+La madera de un bosque arrasado se ve igual que la de uno bien cuidado.
+
+00:00:25.994 --> 00:00:32.136
+Así que la tala sigue: desaparecen especies, y las comunidades que viven de esos bosques reciben un duro golpe.
+
+00:00:33.836 --> 00:00:39.251
+En 1992, en la Cumbre de la Tierra en Río, los gobiernos no logran acordar detenerla.
+
+00:00:40.551 --> 00:00:41.991
+Algo tiene que cambiar.
+
+00:00:44.091 --> 00:00:53.864
+En 1993, 130 personas de 26 países se reúnen en Toronto: grupos forestales y de derechos humanos, madereros, silvicultores.
+
+00:00:55.164 --> 00:00:57.148
+Fundan el Consejo de Administración Forestal.
+
+00:00:58.448 --> 00:01:02.201
+Un auditor independiente certifica un bosque según sus reglas.
+
+00:01:03.501 --> 00:01:09.991
+Luego se certifica cada empresa que compra, asierra, fabrica o vende la madera, y cada una pasa la declaración.
+
+00:01:11.891 --> 00:01:16.626
+Un producto lleva la etiqueta solo si cada empresa de la cadena está certificada.
+
+00:01:17.926 --> 00:01:22.946
+Donde la madera certificada se mezcla con otra, una regla fijada de antemano dice cómo se etiqueta.
+
+00:01:24.446 --> 00:01:34.144
+A fines de 2025, más de 171 millones de hectáreas de bosque están certificadas, y más de 68,000 certificados cubren la cadena.
+
+00:01:35.644 --> 00:01:38.795
+Y un comprador puede saber, por una etiqueta, dónde empezó la madera.
+
+00:01:40.695 --> 00:01:45.873
+Los datos de una universidad también viajan, de la tabla de estudiantes a cada tabla hecha a partir de ella.
+
+00:01:47.173 --> 00:01:51.518
+Si sus clases no van con ellos, un nombre oculto en el origen se ve en una copia.
+
+00:01:53.018 --> 00:01:57.071
+Si van, cada copia dice lo que guarda, y se protege como corresponde.
+
+00:02:04.171 --> 00:02:06.172
+Martes 13 de octubre.
+
+00:02:07.272 --> 00:02:13.201
+En Conoce lo que guardas, Mei nombró una clase para cada columna de la tabla de estudiantes, y un nivel para la tabla.
+
+00:02:14.301 --> 00:02:16.194
+Ahora la plataforma tiene que leerlos.
+
+00:02:17.294 --> 00:02:22.573
+Sam Okafor, que dirige la plataforma, hace de cada uno una etiqueta gobernada en Databricks.
+
+00:02:23.873 --> 00:02:28.880
+Datos personales toma cuatro valores: especial, directa, seudónima e indirecta.
+
+00:02:30.180 --> 00:02:31.703
+Ninguna es, sin más, no tener etiqueta.
+
+00:02:33.003 --> 00:02:37.060
+Nivel toma cuatro más, de pública a restringida, solo en tablas.
+
+00:02:38.360 --> 00:02:43.423
+Y facultad, sin valores, marca la columna que guarda la facultad de cada fila.
+
+00:02:44.723 --> 00:02:49.333
+Gobernada significa solo esos valores, puestos solo por quienes pueden asignarlos.
+
+00:02:50.633 --> 00:02:56.609
+Aquí, es el cargador de la oficina de registro, desde los archivos del proyecto, así que nadie pone una clase a mano.
+
+00:03:00.109 --> 00:03:03.583
+Antes de que Mei las confirme, la plataforma echa su propio vistazo.
+
+00:03:04.683 --> 00:03:10.552
+La clasificación de datos revisa el catálogo de la oficina de registro, y propone lo que reconoce.
+
+00:03:11.852 --> 00:03:15.881
+En la tabla de estudiantes, encuentra un nombre, un correo y una fecha de nacimiento.
+
+00:03:17.181 --> 00:03:20.336
+Mei las confirma: directa, directa e indirecta.
+
+00:03:21.836 --> 00:03:26.540
+No propone nada para el número de estudiante, un formato propio de la universidad.
+
+00:03:27.840 --> 00:03:33.016
+Ni para el apoyo en exámenes, en la tabla de apoyos: más tiempo no nombra ninguna enfermedad.
+
+00:03:34.316 --> 00:03:38.807
+Solo Mei sabe que se da por una discapacidad, así que ella misma le da la clase especial.
+
+00:03:40.307 --> 00:03:41.544
+El escaneo propone.
+
+00:03:42.644 --> 00:03:45.664
+El dueño decide, y agrega lo que ningún escaneo puede ver.
+
+00:03:49.164 --> 00:03:52.029
+Su palabra entra al proyecto, en dbt.
+
+00:03:53.129 --> 00:03:57.553
+Jun Park escribe cada clase junto a su columna, en el archivo de la tabla de estudiantes.
+
+00:03:58.853 --> 00:04:02.496
+El equipo de datos revisa el código, y a Mei le avisan qué toca.
+
+00:04:03.796 --> 00:04:08.133
+Después de cada ejecución, dbt pone cada clase como etiqueta en su columna.
+
+00:04:09.433 --> 00:04:13.401
+Luego la etiqueta de facultad, y al final, el nivel de la tabla: confidencial.
+
+00:04:14.701 --> 00:04:18.550
+Una columna marcada ninguna no recibe etiqueta, y se le quita la que tenía.
+
+00:04:19.850 --> 00:04:22.913
+Cambia el archivo, y la siguiente ejecución cambia las etiquetas.
+
+00:04:24.213 --> 00:04:28.672
+Aquí empiezan las etiquetas: en la tabla de estudiantes, la primera que la gente lee.
+
+00:04:32.172 --> 00:04:36.857
+Luego Sam activa la propagación de etiquetas, para las clases y la etiqueta de facultad.
+
+00:04:38.357 --> 00:04:45.337
+Ahora cada etiqueta sigue a su columna por el linaje: el registro de la plataforma de lo que leyó cada consulta, y lo que hizo.
+
+00:04:46.637 --> 00:04:53.842
+Esa tarde, el cargador de la oficina de registro hace la copia del estudio: los 2,614 estudiantes de Salud.
+
+00:04:55.142 --> 00:05:01.949
+En minutos llegan sus etiquetas: seudónima para el código, indirecta para el año de nacimiento, como sus orígenes.
+
+00:05:03.449 --> 00:05:05.119
+Curso y resultados no traen ninguna.
+
+00:05:06.219 --> 00:05:07.763
+Nadie etiqueta la copia.
+
+00:05:09.263 --> 00:05:12.039
+Hasta que sus etiquetas están ahí, una política no puede verlas.
+
+00:05:13.139 --> 00:05:17.794
+Así que Mei revisa que las clases estén, y le da a la copia su nivel: confidencial.
+
+00:05:19.094 --> 00:05:22.967
+El estudio recibe su espacio recién al día siguiente, con la copia dentro.
+
+00:05:24.467 --> 00:05:28.251
+Y cada tabla que Anil haga a partir de ella llevará las mismas clases.
+
+00:05:31.751 --> 00:05:34.011
+La propagación nunca baja una clase.
+
+00:05:35.311 --> 00:05:38.967
+Supón que la propia copia hiciera el código, a partir del número de estudiante.
+
+00:05:40.267 --> 00:05:43.322
+El linaje traería la clase del número de estudiante: directa.
+
+00:05:44.622 --> 00:05:46.373
+El archivo de Mei dice seudónima.
+
+00:05:47.473 --> 00:05:50.816
+Una columna, dos valores para una etiqueta: un conflicto.
+
+00:05:52.316 --> 00:05:58.144
+La plataforma no puede elegir, así que aplica el valor que Sam fijó de antemano: especial, la más estricta.
+
+00:05:59.644 --> 00:06:03.351
+Como la regla de la madera mezclada, se fija antes de mezclar nada.
+
+00:06:04.851 --> 00:06:09.806
+No se ve nada que no deba, pero ahora la columna dice algo equivocado, y lo pasa adelante.
+
+00:06:11.306 --> 00:06:15.344
+Por eso un valor que dice menos lo hace una vez su dueño, en el origen.
+
+00:06:16.644 --> 00:06:22.147
+La tabla de estudiantes guarda el código junto al número de estudiante, y cada tabla posterior toma el código.
+
+00:06:23.647 --> 00:06:25.336
+Y un nivel no viaja en absoluto.
+
+00:06:26.436 --> 00:06:31.862
+Une una tabla pública con una confidencial, y cada tabla hecha a partir de ellas sería un conflicto.
+
+00:06:33.162 --> 00:06:35.384
+El nivel de cada tabla sigue siendo decisión de su dueño.
+
+00:06:38.884 --> 00:06:41.459
+Una etiqueta solo viaja dentro de la plataforma.
+
+00:06:42.559 --> 00:06:46.816
+Un archivo descargado, o una copia en otra herramienta, no lleva ninguna etiqueta.
+
+00:06:48.116 --> 00:06:51.265
+Por eso el espacio de los estudios tiene las descargas desactivadas.
+
+00:06:52.565 --> 00:06:59.724
+Dentro, las etiquetas viajan solo donde el linaje puede seguir: a tablas y vistas que hace el cómputo sin servidor de la plataforma.
+
+00:07:01.024 --> 00:07:06.280
+Los totales por curso de Anil se cuentan a partir de cursos y resultados, que no llevan clase.
+
+00:07:07.380 --> 00:07:08.978
+Así que nada viaja hacia ellos.
+
+00:07:10.078 --> 00:07:13.011
+Mei los revisa, y les da su nivel: pública.
+
+00:07:16.511 --> 00:07:22.705
+Se puede confiar en la etiqueta de una silla porque cada empresa pasó la declaración, con reglas acordadas antes.
+
+00:07:24.205 --> 00:07:26.425
+Mei nombró cada clase una vez, en el origen.
+
+00:07:27.725 --> 00:07:34.163
+La plataforma la lleva a cada tabla hecha a partir de ahí, y donde dos se encuentran, decide una regla fijada de antemano.
+
+00:07:35.663 --> 00:07:39.126
+Después, una política lee esas etiquetas, dondequiera que lleguen.
+
+00:07:40.426 --> 00:07:41.788
+Etiqueta una vez en el origen.
+
+00:07:42.888 --> 00:07:44.455
+La etiqueta sigue a los datos.

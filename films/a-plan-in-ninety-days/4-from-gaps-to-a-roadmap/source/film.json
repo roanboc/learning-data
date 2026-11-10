@@ -1,0 +1,33 @@
+{
+  "key": "from-gaps-to-a-roadmap",
+  "title": "From gaps to a roadmap",
+  "sub": "Film 4 of 4 of A plan in ninety days: plan, the roadmap. In Switzerland, from 1982, the trains ran by the clock, and Rail 2000 built only the stretches the timetable needed, in stages. A year from now, Helena Novak, a university's new data manager, and her team turn the nine gaps between today and the target into six work packages and three stages that each work on their own, on one page the data council approves.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's room in daylight, with sheets pinned to the wall. Its colours mean the same in every film of the module: blue is design and plans (the timetable, the target, the work packages and the stages), green is done or value (a stretch built, a plan approved), amber is risk, cost or waiting (the gaps, the old warehouse's licence), orange is data, and violet only an agent.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "gr_swiss.js",
+    "gr_plan.js",
+    "gr_scenes.js"
+  ],
+  "poster": [
+    "stages",
+    "rail",
+    4.6
+  ],
+  "say": [
+    ["\\bZürich\\b", "Zurich"],
+    ["\\bTOGAF's\\b", "Toe-gaff's"],
+    ["\\bArchiMate\\b", "Arky-mate"],
+    ["\\bNovak\\b", "Noh-vak"],
+    ["\\bHR\\b", "H R"],
+    ["\\bNoor's\\b", "Nuur's"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bJun's\\b", "Joon's"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "clock"
+  ],
+  "urgent": []
+}

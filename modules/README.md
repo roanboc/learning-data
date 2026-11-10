@@ -87,12 +87,14 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -172,7 +174,10 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
-No film source yet.
+- [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
+- [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
+- [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
+- [Small, every week](../films/quality-as-a-habit/4-small-every-week/) — `small-every-week`
 
 ## Enterprise architecture
 
@@ -269,7 +274,13 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
+- [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
+- [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
+- [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
+- [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
+- [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 
 ### Only what you may see
 
@@ -279,6 +290,10 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
+- [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
+- [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
+- [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
+- [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
 ### Kept for a reason
 
@@ -345,24 +360,34 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
+- [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
-No film source yet.
+- [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
+- [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
+- [Saying no, and what instead](../films/working-with-people/3-saying-no/) — `saying-no`
 
 ### Leading a data team
 
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
-No film source yet.
+- [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
+- [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
+- [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
+- [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
 ### Ownership and performance
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
+- [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
+- [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
 
 ## Data management
 
@@ -372,25 +397,32 @@ Module: `data-management` · [metadata](data-management/module.json)
 
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
-No film source yet.
+- [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
+- [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
+- [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
 
 ### Making the case
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
+- [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
+- [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 
 ### Architecture that keeps up
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
-No film source yet.
+- [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
+- [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
 
 ### Small steps, measured
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
-No film source yet.
+- [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
+- [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
 
 ## Making of and supplementary films
 

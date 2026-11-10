@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>People and groups · Locks before the data · Learning Data</title>
+<meta name="description" content="A film about people, groups and admin power on a data platform, the fifth of Locks before the data, and the first to show the tools: Moss, Norway, in the 1970s, where Tor Sørnes made a hotel lock that a punched card opens, set anew for each guest, so the last guest's card opens nothing; a workspace given people by hand, groups the directory knew nothing of, admins on everyday accounts and a personal token with no end date; Microsoft Entra ID's people and groups read by Azure Databricks, each workspace given groups, never people; one sign-in with a passkey, after the confidentiality agreement; admin power in groups no one is in, switched on with privileged identity management for one task, with a reason, an approval and an alert; and the command line signing in through the browser, with personal tokens turned off.">
+<meta property="og:title" content="People and groups · Locks before the data · Learning Data"><meta property="og:description" content="People and groups from one directory, a passkey for every sign-in, and admin power switched on only for a task."><meta property="og:image" content="https://data.learn-all.org/assets/people-and-groups-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/locks-before-the-data/people-and-groups/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/locks-before-the-data/people-and-groups/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../../">Start here</a><a href="../../topics/" aria-current="true">Topics</a><a href="../../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../../es/locks-before-the-data/people-and-groups/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/people-and-groups-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../../topics/#data-protection">Data protection and privacy</a> › <a href="../">Locks before the data</a></p>
+<h1>People and groups: keys that end with the stay</h1>
+<p class="lead">The university's workspace was given 214 people by hand, and nineteen who had moved on still got in. Eleven admins worked from the accounts they read email with, everyone signed in with a password and a text code, and Jun's token had no end date. How does every key end with the stay?</p>
+<p class="note draft"><b>Draft</b> · The author hasn't reviewed it yet, so some details may change.</p>
+</section>
+<section class="module" id="watch" data-store="ld-people-and-groups" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../assets/people-and-groups/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/people-and-groups-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 8 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: People and groups"></canvas>
+<div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Stop at the end of three chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Chapters"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/people-and-groups.mp4">Download the video</a><a href="https://github.com/roanboc/learning-data/tree/main/films/locks-before-the-data/5-people-and-groups/captions">Caption files</a><a href="https://github.com/roanboc/learning-data/blob/main/films/locks-before-the-data/5-people-and-groups/script.md">Read the script</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">Where next?</p><h3>You've seen people and groups come from one directory, everyone sign in once with a passkey, and admin power switched on for a task and off again. Next: workloads without secrets, where the nightly job gets its own way in and Jun's token ends.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Think it through: 3 questions</a><a class="btn" href="../workloads-without-secrets/">Next in the series: Workloads without secrets</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Watch again</button></div></div></template>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Think it through</h2><p>The three Pause and think questions, for a class or a team. Open one to see the answer.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="elsewhere" aria-labelledby="elsewhere-h">
+<div class="mhead"><div><h2 id="elsewhere-h">Read the docs yourself</h2><p>The film shows each step once. These are the public pages it follows, from Microsoft Learn.</p></div></div>
+<ul class="repo-list">
+<li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/admin/users-groups/automatic-identity-management">Automatic identity management</a></b><span>How Azure Databricks reads people and groups from Microsoft Entra ID for itself, groups inside groups included.</span></li>
+<li><b><a href="https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/concept-pim-for-groups">Privileged Identity Management for Groups</a></b><span>How an account is made eligible for a group, never in it, and switches it on for a task, with a reason and an approval.</span></li>
+<li><b><a href="https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-enable-passkey-fido2">Passkeys (FIDO2) in Microsoft Entra ID</a></b><span>How to turn passkeys on, on a phone or a security key, and require them with a rule of Conditional Access.</span></li>
+<li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/admin/access-control/tokens">Monitor and revoke personal access tokens</a></b><span>Where the account's token report is, and how to turn personal tokens off in each workspace.</span></li>
+<li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/dev-tools/cli/authentication">Authentication for the Databricks CLI</a></b><span>How the command line signs in through the browser and keeps its own short passes, with nothing to paste.</span></li>
+</ul>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">In the series: <a href="../">Locks before the data</a></h2><p>Film 5 of 9.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../../assets/power-you-switch-on-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Previous · Film 4 of 9</p>
+<h3><a href="../power-you-switch-on/">Power you switch on</a></h3>
+<p>A second account for each specialist, its power off until it's switched on for a task, with a reason, a yes and a record.</p>
+<p class="meta">8½ min · Pause and think · Locks before the data</p>
+<p class="tc-progress" data-progress="ld-power-you-switch-on" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/workloads-without-secrets-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Next · Film 6 of 9 →</p>
+<h3><a href="../workloads-without-secrets/">Workloads without secrets</a></h3>
+<p>A job that signs in as itself: a name of its own, a signed note for each deploy, and one password in a vault.</p>
+<p class="meta">9 min · Pause and think · Locks before the data</p>
+<p class="tc-progress" data-progress="ld-workloads-without-secrets" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Every film of the series">
+<li><a href="../who-is-it-really/"><span class="n">1</span>Who is it, really?</a></li>
+<li><a href="../no-secret-to-lose/"><span class="n">2</span>No secret to lose</a></li>
+<li><a href="../walls-doors-and-keys/"><span class="n">3</span>Walls, doors and keys</a></li>
+<li><a href="../power-you-switch-on/"><span class="n">4</span>Power you switch on</a></li>
+<li><a href="../people-and-groups/" aria-current="page"><span class="n">5</span>People and groups</a></li>
+<li><a href="../workloads-without-secrets/"><span class="n">6</span>Workloads without secrets</a></li>
+<li><a href="../network-storage-and-keys/"><span class="n">7</span>Network, storage and keys</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../../assets/people-and-groups/film.js"></script>
+<script src="../../assets/people-and-groups/think.en.js"></script>
+<script src="../../assets/learn/think.js"></script>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/learn/next.js"></script>
+<script src="../../assets/seek.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "key": "no-secret-to-lose",
+  "title": "No secret to lose",
+  "sub": "The second film of Locks before the data, the first series of Data protection and privacy: why a sign-in secret is bearer paper, as the City of London's money markets learned in 1990; the ways a job proves who it is, ranked by who holds a secret and for how long, up to an identity the platform gives it; and the same ladder for people, up to a passkey that answers only the real site.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Cyan is an identity, green allowed, coral denied or closed; a secret is always a sealed card of violet frost with a lock, never written out. The City of London of 1990 is painted in the same night light, with its place and year on a tag.",
+  "src": [
+    "ns_city.js",
+    "ns_bank.js",
+    "ns_kit.js",
+    "ns_ladder.js",
+    "ns_things.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "ladder",
+    "goal",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ]
+  ],
+  "story": [
+    "city",
+    "bank"
+  ],
+  "urgent": [
+    "city"
+  ]
+}

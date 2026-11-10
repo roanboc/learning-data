@@ -309,8 +309,10 @@ person domain's conceptual model (`models/core/person/`) is a draft, and
 
 The graduation list has a slice of its own: 23 graduates and 25 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
+(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
+student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
+award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

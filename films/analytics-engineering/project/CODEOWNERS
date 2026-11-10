@@ -88,3 +88,6 @@
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
+
+# The exam boards' approved lists, kept apart from the student system
+/sources/exam_boards/                                    registrar@uni.example jun.park@uni.example

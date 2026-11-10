@@ -9,3 +9,11 @@ data_tests:
     description: Every graduate the alumni office knows has a student ID the student system issued, in its current table or its archive.
     config:
       meta: {owner: Alumni office, dimension: consistency}
+
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and at most 30 characters. It measures validity:
+      it has no reference but its rule, so it says a name is allowed, never that it's right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}

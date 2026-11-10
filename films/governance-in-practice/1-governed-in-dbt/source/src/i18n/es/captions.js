@@ -31,8 +31,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En un minuto, le responde a Jun: no hay dueño, y cómo agregar uno.",
 "He adds two lines, and the check turns green.":
 "Agrega dos líneas, y el control se pone en verde.",
-"The change goes to Planning for review, by itself.":
-"El cambio va solo a Planificación, para su revisión.",
+"It goes to the data team for review, with nothing missing.":
+"Va a revisión del equipo de datos, sin que le falte nada.",
 "An action the council carried for four months is now a check that takes a minute.":
 "Una acción que el consejo arrastró cuatro meses es ahora un control que tarda un minuto.",
 "And for Jun, the rules arrive first, while he can still fix them.":
@@ -73,24 +73,32 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "la primera versión de credenciales se retira el 31 de marzo de 2027.",
 "And exposures name who uses each table, and who answers for each use.":
 "Y las exposiciones nombran quién usa cada tabla, y quién responde por cada uso.",
+"Only the canonical tables, the shared core, also have an enterprise contract, in an open standard.":
+"Solo las tablas canónicas, el núcleo compartido, tienen además un contrato empresarial, en un estándar abierto.",
+"Data governance's information architect writes it first, and the data team builds to it.":
+"Quien hace la arquitectura de información en gobernanza de datos lo escribe primero, y el equipo de datos construye según él.",
+"A check compares the two, and if they differ, data governance looks at how the change got there.":
+"Un control compara los dos, y si difieren, gobernanza de datos revisa cómo llegó ahí el cambio.",
 "Each pull request also says what it touches.":
 "Cada solicitud de cambio también dice a qué afecta.",
+"The meaning comes first: on Monday, Mei changed what award means, in the glossary.":
+"Primero va el significado: el lunes, Mei cambió qué significa título, en el glosario.",
 "On Tuesday, Jun's first draft relabelled microcredentials of 6 credit points or more as awards.":
 "El martes, la primera versión de Jun reetiquetaba como títulos las microcredenciales de 6 créditos o más.",
-"The impact check wrote it into the pull request: five reports and apps depend on it, four owners to ask.":
-"El control de impacto lo escribió en la solicitud de cambio: cinco informes y apps dependen de ella, cuatro dueños a consultar.",
-"Mei said a change of meaning breaks, even when the columns don't.":
-"Mei dijo que un cambio de significado rompe, aunque las columnas no se rompan.",
+"The impact check wrote it into the pull request: five reports and apps depend on it, four owners to tell.":
+"El control de impacto lo escribió en la solicitud de cambio: cinco informes y apps dependen de ella, cuatro dueños a quienes avisar.",
+"The data team's review said a change of meaning breaks, even when the columns don't.":
+"La revisión del equipo de datos dijo que un cambio de significado rompe, aunque las columnas no se rompan.",
 "So Jun added a column instead: counts as an award.":
 "Así que Jun agregó una columna en su lugar: cuenta como título.",
 "The check called it additive, with three owners to tell.":
 "El control lo llamó aditivo, con tres dueños a quienes avisar.",
 "A renamed column would fail: a breaking change needs a new version.":
 "Una columna renombrada fallaría: un cambio que rompe necesita una versión nueva.",
-"Who reviews what is made from the same owners.":
-"Quién revisa qué sale de los mismos dueños.",
-"A script writes the reviewers file: the registrar's office for credentials, Planning for its tables, Clara for her product.":
-"Un script escribe el archivo de revisores: la oficina de registro para credenciales, Planificación para sus tablas, Clara para su producto.",
+"Owners don't review pull requests: they decide what words mean, in the glossary, before any code.":
+"Los dueños no revisan solicitudes de cambio: deciden qué significan las palabras, en el glosario, antes de cualquier código.",
+"So a script writes the reviewers file: the data team for the code, and data governance for its own files.":
+"Así que un script escribe el archivo de revisores: el equipo de datos para el código, y gobernanza de datos para sus propios archivos.",
 "GitHub asks them on every pull request, and a check fails if the file falls behind.":
 "GitHub se lo pide en cada solicitud de cambio, y un control falla si el archivo se queda atrás.",
 "Decisions are files too, with who decided, when and why.":
@@ -113,10 +121,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la primera solicitud de Anil, la lista de llamadas de su facultad, encontró: sin dueño, diez columnas sin clase, y una regla sin prueba.",
 "It drafted each, with counts as evidence, never values, and said who decides.":
 "Redactó cada uno, con conteos como evidencia, nunca valores, y dijo quién decide.",
-"The agent never approves. People decide.":
-"El agente nunca aprueba. Deciden las personas.",
-"Jun's table goes in, with its owner, its classes, its contract and Planning's yes.":
-"La tabla de Jun entra, con su dueño, sus clases, su contrato y el sí de Planificación.",
+"The agent never approves. People decide, and the data team approves the code.":
+"El agente nunca aprueba. Deciden las personas, y el equipo de datos aprueba el código.",
+"Jun's table goes in, with its owner, its classes, its contract and the data team's yes.":
+"La tabla de Jun entra, con su dueño, sus clases, su contrato y el sí del equipo de datos.",
 "On Noor's map, the project is the home of owners, classes, contracts, tests and decisions,":
 "En el mapa de Noor, el proyecto es la casa de dueños, clases, contratos, pruebas y decisiones,",
 "and their copies flow one way, to the platform and the catalogue.":

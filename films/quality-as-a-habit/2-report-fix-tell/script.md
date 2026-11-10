@@ -204,7 +204,7 @@ The series has no labs yet. Two the film could hand over to, for when it does:
 
 ## What the example project has
 
-Added in place, so no line another film cites moves (the student system's sources at lines 10 to 13 and 17 to 19, CODEOWNERS' lines 77 and 78, `docs/databricks-governance.md`'s lines 123 to 142), in `films/analytics-engineering/project/`:
+Added in place, so no line another film cites moves (the student system's sources at lines 10 to 13 and 17 to 19, `docs/databricks-governance.md`'s lines 123 to 142), in `films/analytics-engineering/project/`:
 
 - **When a name was born.** The student system's graduates (`data/student_system/graduations.csv`) gain `record_created_on`, the day each graduate's record, and the name in it, was first made: on paper forms before 2015, by the old online form from 2015 to 2018 (A to Z, in capitals), by the current form since 2019. Andrés (`S-16874`) is a 2018 record; his name is corrected in a new version from the night of 15 October 2026. João Ribeiro (`S-16220`, a 2017 record, December 2026) joins the slice. Described in the source (`_student_system__sources.yml`) and taken by the staging model, with a `not_null` test.
 - **Reports, answered and told.** The portal's answers (`data/portal/name_confirmations.csv`) gain `answered_at` and `told_at`. February's corrections are answered and told; Andrés's report, `NC-12688`, made on Monday 12 October 2026 at 19:42, has two versions: as he made it, and checked, answered (14 October, 10:20) and told (10:21).
@@ -212,7 +212,7 @@ Added in place, so no line another film cites moves (the student system's source
 - **The old form's check**, `tests/rules/old_form_names_not_yet_confirmed.sql`: a name the old form made (a record first made before 2019), still in plain letters A to Z, not yet confirmed by its graduate, on rounds whose list hasn't gone to the printer as at the night's data; `severity: warn` and `store_failures: true`, so dbt keeps what it holds in a table the registrar's office reads; its owner and dimension (accuracy) in `tests/rules/_rules__tests.yml`. On the example data it holds one name, João Ribeiro's; the film's 83 is the university's whole December list.
 - **The morning alert**: its query, `analyses/alerts/name_reports_due_today.sql`, and how to set it up on Databricks (the condition, the schedule, the email to the office and only to it, and the bundle's `alerts` resource) in section 12 of `docs/databricks-governance.md`.
 - **The list's contract** says where to report a problem: a `support` channel in `governance/4-data-products/graduation_list.yml`, "This isn't my name", scope `issues`, as the Open Data Contract Standard writes it.
-- Generated again from those: the contracts and descriptors, CODEOWNERS (the new product in `LATER`), the graduation list's physical model, and the scorecard (the old form's check, one warning). The project's README tells Andrés's report and fix.
+- Generated again from those: the contracts and descriptors, the graduation list's physical model, and the scorecard (the old form's check, one warning). CODEOWNERS doesn't change: the data team reviews the new files like every other, and Mei Tanaka, who owns the product, is in the owner register, so the impact check tells her what a change touches. The project's README tells Andrés's report and fix.
 
 ## Sources, checked 5 November 2026 (the Databricks alerts again on 10 November 2026)
 

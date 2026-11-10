@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "The new skills",
+  "title_es": "Las nuevas habilidades",
+  "planned": 3,
+  "lead": "The first series of Leading data people. In 2027 Ivy Reyes joins the university's data team, straight from her degree, and Graham Ellis, the new Director of Facilities, asks for a dashboard of room use. What does a data person need to be good at now?",
+  "lead_es": "La primera serie de Liderar equipos de datos. En 2027 Ivy Reyes entra al equipo de datos de la universidad, recién graduada, y Graham Ellis, el nuevo director de Instalaciones, pide un tablero del uso de las aulas. ¿En qué tiene que ser buena hoy una persona de datos?",
+  "description": "Three films on the skills data work needs now: the generalist, who goes deep in one thing and learns enough of the others to see the whole; framing, checking and deciding when an agent writes the first draft; and learning on the real work, beside someone who knows, then teaching it.",
+  "description_es": "Tres películas sobre las habilidades que hoy pide el trabajo con datos: la persona generalista, que profundiza en una cosa y aprende lo suficiente de las demás para ver el conjunto; plantear, revisar y decidir cuando un agente escribe el primer borrador; y aprender sobre el trabajo real, junto a alguien que sabe, y luego enseñarlo.",
+  "card": "Go deep in one thing and see the whole, frame and check an agent's draft, and keep learning on the real work.",
+  "card_es": "Profundiza en una cosa y mira el conjunto, plantea y revisa el borrador de un agente, y sigue aprendiendo con trabajo real.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: a year with the data team, and Graham's rooms",
+  "thread_h_es": "Un hilo: un año con el equipo de datos, y las aulas de Graham",
+  "thread": "In 2027, a year from now, Helena Novak leads the university's data team, and Ivy Reyes joins it in March. Graham Ellis asks for a dashboard of room use; the question behind it is whether to ask the University Council for a new teaching building. Film by film, Ivy learns the whole route from his decision back to the rooms' sensors, frames work for an agent, and learns beside the people who know.",
+  "thread_es": "En 2027, dentro de un año, Helena Novak dirige el equipo de datos de la universidad, e Ivy Reyes entra en marzo. Graham Ellis pide un tablero del uso de las aulas; la pregunta de fondo es si pedir al Consejo Universitario un nuevo edificio de aulas. Película a película, Ivy aprende el recorrido entero, desde su decisión hasta los sensores de las aulas, plantea trabajo para un agente y aprende junto a quienes saben.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Asks for a dashboard",
+      "Graham Ellis, the new Director of Facilities, who must advise the University Council on a new teaching building"
+    ],
+    [
+      "biz",
+      "Keeps the timetable",
+      "Mei Tanaka, in the registrar's office, who owns the timetable and its bookings"
+    ],
+    [
+      "tech",
+      "Leads the team",
+      "Helena Novak, the data manager, a generalist who leads the team day to day"
+    ],
+    [
+      "tech",
+      "New to the team",
+      "Ivy Reyes, a graduate data analyst in her first job, from March 2027"
+    ],
+    [
+      "tech",
+      "Knows the platform",
+      "Sam Okafor, who runs the data platform and the rooms' sensor data"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Pide un tablero",
+      "Graham Ellis, el nuevo director de Instalaciones, que debe aconsejar al Consejo Universitario sobre un nuevo edificio de aulas"
+    ],
+    [
+      "biz",
+      "Lleva el horario",
+      "Mei Tanaka, de la oficina de registro académico, dueña del horario y de sus reservas"
+    ],
+    [
+      "tech",
+      "Dirige el equipo",
+      "Helena Novak, la gestora de datos, una generalista que dirige el equipo día a día"
+    ],
+    [
+      "tech",
+      "Recién llegada",
+      "Ivy Reyes, analista de datos recién graduada, en su primer trabajo desde marzo de 2027"
+    ],
+    [
+      "tech",
+      "Conoce la plataforma",
+      "Sam Okafor, que opera la plataforma de datos y los datos de los sensores de las aulas"
+    ]
+  ]
+}

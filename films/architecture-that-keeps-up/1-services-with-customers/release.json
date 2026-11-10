@@ -22,6 +22,7 @@
       "films/architecture-that-keeps-up/1-services-with-customers/source",
       ":(exclude)films/architecture-that-keeps-up/1-services-with-customers/source/src/i18n/es/captions.js",
       "films/the-new-skills/shared",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
       "films/what-an-agent-is/shared",
       "films/from-words-to-data/shared/tools",
       "films/data-governance/shared/tools/names.py",

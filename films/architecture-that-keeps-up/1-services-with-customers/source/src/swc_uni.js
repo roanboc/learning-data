@@ -9,8 +9,7 @@
      swc_map             Noor's map on a screen: the four services and the four groups of customers among the map's other boxes
      swc_layers          one service walked down five layers, a picture each, the customers it serves at the top
      swc_reports         the old warehouse's 38 reports, the 17 no one opened in a year in amber
-     swc_door            the front door's requests landing on the four services, and the three that land on none
-     swc_mark            the module's mark for Data management in this film: five layers drawing themselves, one over another */
+     swc_door            the front door's requests landing on the four services, and the three that land on none */
 
 AG_PLACES.swcMay=c=>lp_paintRoom(c,{light:"morning",seed:5});
 AG_PLACES.swcJune=c=>lp_paintRoom(c,{light:"grey",seed:7});
@@ -112,12 +111,3 @@ function swc_door(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.
 function swc_flyer(ctx,sx,sy,i,u){if(u<=0||u>=1)return;const tx=SWC_TRAYX[i]+SWC_TRAYW/2,ty=SWC_TRAYY+20,p=ag_sine(u),x=lerp(sx,tx,p),y=lerp(sy,ty,p)-Math.sin(Math.PI*p)*120;
   ctx.save();ctx.globalAlpha*=Math.min(1,u*6)*Math.min(1,(1-u)*6);ctx.fillStyle=rgba(LP.paper,1);ctx.shadowColor="rgba(52,36,30,0.25)";ctx.shadowBlur=8;ctx.shadowOffsetX=-4;ctx.shadowOffsetY=4;
   ctx.fillRect(x-30,y-22,60,44);ctx.shadowColor="transparent";ctx.fillStyle=rgba(LP.green,1);ctx.fillRect(x-30,y-22,60,6);ctx.restore();}
-
-/* ---------------------------------------------------------------- the mark */
-// five layers, drawn one over another from the top, then joined by one line down their left edge: a service walked down every layer
-function swc_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;
-  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.8);g.addColorStop(0,rgba(LP.sun,0.5*ag_sine(p/0.6)));g.addColorStop(1,rgba(LP.sun,0));ctx.fillStyle=g;ctx.fillRect(cx-r*1.8,cy-r*1.8,r*3.6,r*3.6);
-  ctx.strokeStyle=rgba(LP.ink,1);ctx.lineCap="round";ctx.lineWidth=Math.max(2,r*0.09);
-  for(let i=0;i<5;i++){const f=ag_sine(clamp(p*5-i*0.7,0,1)),y=cy-r*0.8+i*r*0.4,hw=r*(1-0.08*i);if(f<=0)continue;ctx.beginPath();ctx.moveTo(cx-hw,y);ctx.lineTo(cx-hw+2*hw*f,y);ctx.stroke();}
-  const d=ag_sine(clamp(p*1.6-0.6,0,1));if(d>0){ctx.fillStyle=rgba(LP.ink,1);ctx.beginPath();ctx.arc(cx,cy-r*0.8-r*0.32,r*0.16*d,0,TAU);ctx.fill();}
-  ctx.restore();}

@@ -1837,6 +1837,24 @@ function lp_secRoom(ctx,r,st){const lit=st.lit==null?0:st.lit;ctx.save();ctx.beg
   ctx.restore();
   if(st.edge){ctx.save();ctx.strokeStyle=rgba(st.edge,st.edgeA==null?1:st.edgeA);ctx.lineWidth=6;ctx.strokeRect(r.x+3,r.y+3,r.w-6,r.h-6);ctx.restore();}}
 
+/* ===== Data management: the module's mark =====
+   Every film of the module draws the same mark on its title and its end: five layers drawing themselves, one under another (strategy,
+   business, information, application, technology), and a dot above them for the people they serve. Services with customers drew it
+   first; it lives here so every film draws it the same way.
+   A film bundles this file first in its film.json "src" ("../../../../a-plan-in-ninety-days/shared/src/mark.js"), names it in its
+   release.json "paths" ("films/a-plan-in-ninety-days/shared/src/mark.js"), and passes it to the kit's title and end cards:
+     lp_title(ctx, S, t, t0, title, sub, line, {module: "Data management", mark: dm_mark})
+     lp_end(ctx, S, t, t0, title, line, "Film 1 of 4", series, {module: "Data management", mark: dm_mark})
+   It takes the kit's mark arguments (films/the-new-skills/shared/src/cards.js, lp_mark): the centre, the size r, p from 0 to 1 as it
+   draws, and a for its alpha. In ink, as the kit's own mark is: it wears none of the module's colours. A change here is a new version
+   of every film of the module. */
+function dm_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.8);g.addColorStop(0,rgba(LP.sun,0.5*ag_sine(p/0.6)));g.addColorStop(1,rgba(LP.sun,0));ctx.fillStyle=g;ctx.fillRect(cx-r*1.8,cy-r*1.8,r*3.6,r*3.6);
+  ctx.strokeStyle=rgba(LP.ink,1);ctx.lineCap="round";ctx.lineWidth=Math.max(2,r*0.09);
+  for(let i=0;i<5;i++){const f=ag_sine(clamp(p*5-i*0.7,0,1)),y=cy-r*0.8+i*r*0.4,hw=r*(1-0.08*i);if(f<=0)continue;ctx.beginPath();ctx.moveTo(cx-hw,y);ctx.lineTo(cx-hw+2*hw*f,y);ctx.stroke();}
+  const d=ag_sine(clamp(p*1.6-0.6,0,1));if(d>0){ctx.fillStyle=rgba(LP.ink,1);ctx.beginPath();ctx.arc(cx,cy-r*0.8-r*0.32,r*0.16*d,0,TAU);ctx.fill();}
+  ctx.restore();}
+
 /* ===== Services with customers: Madurai, from 1976 =====
    The film's own places and pictures for its opening story, in the module's matte, sunlit language, lit from the right as its rooms are
    (prefix swc_). Nothing here is a likeness of a real person or a copy of a photograph: the hospital, the fields and the clothes are drawn
@@ -2006,8 +2024,7 @@ const SWC_PEOPLE={
      swc_map             Noor's map on a screen: the four services and the four groups of customers among the map's other boxes
      swc_layers          one service walked down five layers, a picture each, the customers it serves at the top
      swc_reports         the old warehouse's 38 reports, the 17 no one opened in a year in amber
-     swc_door            the front door's requests landing on the four services, and the three that land on none
-     swc_mark            the module's mark for Data management in this film: five layers drawing themselves, one over another */
+     swc_door            the front door's requests landing on the four services, and the three that land on none */
 
 AG_PLACES.swcMay=c=>lp_paintRoom(c,{light:"morning",seed:5});
 AG_PLACES.swcJune=c=>lp_paintRoom(c,{light:"grey",seed:7});
@@ -2110,15 +2127,6 @@ function swc_flyer(ctx,sx,sy,i,u){if(u<=0||u>=1)return;const tx=SWC_TRAYX[i]+SWC
   ctx.save();ctx.globalAlpha*=Math.min(1,u*6)*Math.min(1,(1-u)*6);ctx.fillStyle=rgba(LP.paper,1);ctx.shadowColor="rgba(52,36,30,0.25)";ctx.shadowBlur=8;ctx.shadowOffsetX=-4;ctx.shadowOffsetY=4;
   ctx.fillRect(x-30,y-22,60,44);ctx.shadowColor="transparent";ctx.fillStyle=rgba(LP.green,1);ctx.fillRect(x-30,y-22,60,6);ctx.restore();}
 
-/* ---------------------------------------------------------------- the mark */
-// five layers, drawn one over another from the top, then joined by one line down their left edge: a service walked down every layer
-function swc_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;
-  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.8);g.addColorStop(0,rgba(LP.sun,0.5*ag_sine(p/0.6)));g.addColorStop(1,rgba(LP.sun,0));ctx.fillStyle=g;ctx.fillRect(cx-r*1.8,cy-r*1.8,r*3.6,r*3.6);
-  ctx.strokeStyle=rgba(LP.ink,1);ctx.lineCap="round";ctx.lineWidth=Math.max(2,r*0.09);
-  for(let i=0;i<5;i++){const f=ag_sine(clamp(p*5-i*0.7,0,1)),y=cy-r*0.8+i*r*0.4,hw=r*(1-0.08*i);if(f<=0)continue;ctx.beginPath();ctx.moveTo(cx-hw,y);ctx.lineTo(cx-hw+2*hw*f,y);ctx.stroke();}
-  const d=ag_sine(clamp(p*1.6-0.6,0,1));if(d>0){ctx.fillStyle=rgba(LP.ink,1);ctx.beginPath();ctx.arc(cx,cy-r*0.8-r*0.32,r*0.16*d,0,TAU);ctx.fill();}
-  ctx.restore();}
-
 /* ===== Services with customers: the chapters, shot by shot =====
    Every time comes from the voice: a line's start (sc.cues) or a word in it (wAt), so the pictures stay with the voice if it's recorded
    again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
@@ -2196,7 +2204,7 @@ scene("sight",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,off
       swc_sheet(x,tt,w("data","team",-0.2),560,180,800,{kick:"A data team",title:"Who is each service for?"},{col:LP.blue,light:"day",out:c.breath+0.2});
       const l0=w("design","layer",-0.6);if(tt>=l0-0.2)swc_layers(x,560,390,800,{a:1-ag_in(tt,c.breath+0.2,0.8),u:SWC_LAYERS.map((_,i)=>ag_in(tt,l0+i*0.18,0.6)),compact:1,light:"day"});}}
   ]);
-  lp_title(ctx,S,t,c.breath+0.2,SWC_TITLE,"Know who each service is for, then design every layer","Data management · Architecture that keeps up",{mark:swc_mark});
+  lp_title(ctx,S,t,c.breath+0.2,SWC_TITLE,"Know who each service is for, then design every layer","Data management · Architecture that keeps up",{module:"Data management",mark:dm_mark});
 });
 
 /* ---------------------------------------------------------------- 2. Four services, one page */
@@ -2319,7 +2327,7 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         x.restore();}
       const l0=w("take","layer",-0.6);if(tt>=c.take-0.2)swc_layers(x,560,290,800,{a:ag_in(tt,c.take-0.2,0.6)*(1-ag_in(tt,e0,0.8)),u:SWC_LAYERS.map((_,i)=>ag_in(tt,l0+i*0.15,0.6)),compact:1,top:ag_in(tt,w("take","who",-0.1),0.6),light:"morning"});}}
   ]);
-  lp_end(ctx,S,t,e0,SWC_TITLE,SWC_LAST,"Film 1 of 3","Architecture that keeps up",{mark:swc_mark});
+  lp_end(ctx,S,t,e0,SWC_TITLE,SWC_LAST,"Film 1 of 3","Architecture that keeps up",{module:"Data management",mark:dm_mark});
   swc_kick(ctx,S,1-ag_in(t,e0,0.8));
 });
 ag_cutInto(["customers","layers"]);

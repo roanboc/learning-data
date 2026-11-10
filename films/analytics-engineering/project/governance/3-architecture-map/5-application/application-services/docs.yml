@@ -1,0 +1,7 @@
+name: docs
+kind: application service
+definition: 'Reads, as text, the map, the models'' descriptions and contracts, and the business rules.'
+owner: Sam, platform team
+relationships:
+- serving: draft the change
+status: confirmed

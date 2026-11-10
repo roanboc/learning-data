@@ -1,0 +1,267 @@
+1
+00:00:03,000 --> 00:00:08,179
+Victoria, 1856: la colonia está por elegir su primer parlamento.
+
+2
+00:00:09,479 --> 00:00:16,591
+Hasta entonces, un hombre decía su voto en voz alta, y cualquiera podía saberlo: su patrón, su casero, un candidato.
+
+3
+00:00:18,291 --> 00:00:22,404
+Un voto en su contra podía costarle a un trabajador su empleo, o a un inquilino su casa.
+
+4
+00:00:23,904 --> 00:00:27,792
+Así que un hombre podía no atreverse a votar como quería. Algo tenía que cambiar.
+
+5
+00:00:29,292 --> 00:00:35,151
+Ese marzo, la colonia aprobó el voto secreto, ideado por Henry Chapman, uno de sus legisladores.
+
+6
+00:00:36,651 --> 00:00:42,553
+Un funcionario marcaba al votante en el padrón y le daba una papeleta impresa con el nombre de cada candidato.
+
+7
+00:00:44,253 --> 00:00:48,916
+A solas, tachaba los nombres que no quería, la doblaba y la metía en la urna.
+
+8
+00:00:51,016 --> 00:00:54,307
+Al final, se contaban las papeletas y se anunciaban los totales.
+
+9
+00:00:56,207 --> 00:01:02,974
+Ahora un trabajador o un inquilino podía votar como quería: nadie veía su voto, así que nadie podía castigarlo por él.
+
+10
+00:01:04,674 --> 00:01:10,896
+Gran Bretaña lo adoptó en 1872; para 1892, también 38 estados de Estados Unidos.
+
+11
+00:01:12,396 --> 00:01:17,514
+El padrón dice quién votó, y nada de cómo. La urna dice cómo, y nada de quién.
+
+12
+00:01:19,414 --> 00:01:25,189
+Hoy, en la universidad, Anil Kurian estudia cómo avanzan los estudiantes de la Facultad de Salud.
+
+13
+00:01:26,489 --> 00:01:34,278
+Sus registros, tal como se guardan, le mostrarían mucho más: nombres, cumpleaños y qué estudiantes de su facultad tienen una discapacidad.
+
+14
+00:01:35,978 --> 00:01:40,076
+Si se oculta todo, el estudio no puede seguir a nadie de un año al siguiente.
+
+15
+00:01:41,376 --> 00:01:47,428
+Así que Mei Tanaka, dueña de los registros, elige para cada columna una forma de ocultarla que conserve lo que el estudio necesita.
+
+16
+00:01:48,728 --> 00:01:55,057
+El estudio sigue a 2,614 estudiantes, año tras año, y nunca ve quiénes son.
+
+17
+00:01:56,757 --> 00:01:59,992
+Y para los datos: muestra lo mínimo que aún responde la pregunta.
+
+18
+00:02:06,292 --> 00:02:14,052
+El acuerdo dice qué puede tener el estudio: curso y resultados de cada estudiante, su año de nacimiento y un código en lugar de quién es.
+
+19
+00:02:15,552 --> 00:02:19,385
+Y nunca nada que nombre a un estudiante, ni nada sobre su salud.
+
+20
+00:02:20,885 --> 00:02:26,146
+Cada columna ya tiene la clase que le dio su dueña: directa, indirecta, especial o ninguna.
+
+21
+00:02:28,246 --> 00:02:32,952
+¿Qué forma debe ocultar cada una? Hay nueve, y tres preguntas las distinguen.
+
+22
+00:02:35,252 --> 00:02:36,470
+¿Qué ve quien lee?
+
+23
+00:02:37,970 --> 00:02:39,754
+¿Se puede deshacer, y quién puede?
+
+24
+00:02:41,254 --> 00:02:43,106
+¿Y qué puede todavía calcular quien lee?
+
+25
+00:02:46,206 --> 00:02:49,491
+El apoyo en exámenes es sobre salud, y el acuerdo dice nunca.
+
+26
+00:02:50,591 --> 00:02:53,992
+Así que se deja fuera: al estudio no se le da la tabla de apoyos.
+
+27
+00:02:55,692 --> 00:03:02,669
+Los nombres y correos nombran a un estudiante: la oficina de registro los necesita, el estudio nunca, así que se enmascaran enteros.
+
+28
+00:03:03,769 --> 00:03:09,664
+Las columnas siguen, pero para el estudio cada valor se lee como asteriscos, y los asteriscos no se pueden revertir.
+
+29
+00:03:11,364 --> 00:03:15,641
+La mesa de ayuda necesita un poco más: comprobar que tiene al estudiante correcto al teléfono.
+
+30
+00:03:16,741 --> 00:03:20,333
+Así que se enmascaran en parte: los dos últimos dígitos y la primera letra.
+
+31
+00:03:22,033 --> 00:03:25,300
+Lo bastante para reconocer un registro, muy poco para buscar a alguien.
+
+32
+00:03:26,400 --> 00:03:36,348
+La fecha de nacimiento ayuda a ver cómo la edad influye en el avance, así que se generaliza: 14 de mayo de 1987 pasa a 1987.
+
+33
+00:03:38,048 --> 00:03:40,472
+El día y el mes desaparecen, y no pueden volver.
+
+34
+00:03:41,572 --> 00:03:46,867
+Pero oculto no es anónimo: en un curso pequeño, un año de nacimiento puede corresponder a un solo estudiante.
+
+35
+00:03:48,767 --> 00:03:51,807
+Así que sigue siendo indirecta, y sigue detrás del acuerdo.
+
+36
+00:03:53,107 --> 00:04:00,091
+Por último, filtrar filas: el estudio recibe solo a los 2,614 estudiantes de la Facultad de Salud.
+
+37
+00:04:01,791 --> 00:04:05,072
+Eso no oculta ningún valor; deja fuera las filas de otras personas.
+
+38
+00:04:08,572 --> 00:04:13,500
+El estudio debe seguir a cada estudiante de un año a otro, así que el número de estudiante se vuelve un código.
+
+39
+00:04:15,000 --> 00:04:22,984
+El código de estudiante que ya viste codifica el número, y codificado no es anónimo: con la lista de registro, cualquiera puede emparejarlo.
+
+40
+00:04:25,084 --> 00:04:28,731
+Así que el código del estudio mezcla una clave secreta: un hash con clave.
+
+41
+00:04:30,431 --> 00:04:32,723
+Sin la clave, la lista no empareja nada.
+
+42
+00:04:34,423 --> 00:04:42,121
+Con ella, la oficina de registro puede saber de quién es el código: se deshace, pero solo con la clave, sellada y lejos del estudio.
+
+43
+00:04:44,021 --> 00:04:46,982
+Así que el código sigue siendo seudónimo, detrás del acuerdo.
+
+44
+00:04:48,682 --> 00:04:57,750
+En el voto británico de 1872, cada papeleta tenía un número, unido al votante solo en un paquete sellado, abierto solo ante un fraude.
+
+45
+00:05:00,050 --> 00:05:08,033
+Un token es un sustituto, unido al valor real en una bóveda: solo su dueño puede revertirlo, para volver a contactar a la persona.
+
+46
+00:05:10,333 --> 00:05:13,394
+Este estudio no contacta a nadie, así que usa el hash con clave.
+
+47
+00:05:15,094 --> 00:05:22,867
+Y el cifrado guarda el valor entero donde se almacena o se mueve: ilegible sin la clave, completo para quien puede leerlo.
+
+48
+00:05:25,967 --> 00:05:30,373
+Cuando el estudio termine, puede publicar totales, con toda cifra menor que 10 oculta.
+
+49
+00:05:31,473 --> 00:05:34,644
+Aquí, estudiantes que dejaron tras su primer año, por curso.
+
+50
+00:05:36,544 --> 00:05:41,705
+El 4 de Partería es una cifra pequeña: en una clase de ese tamaño, se sabría quién se fue.
+
+51
+00:05:43,205 --> 00:05:45,075
+Así que dice: menos de 10.
+
+52
+00:05:46,775 --> 00:05:53,260
+Pero el total de la facultad también está: 80, menos 38, 21 y 17, devuelve el 4.
+
+53
+00:05:55,360 --> 00:05:58,702
+Así que se oculta una cifra más, y el 4 no se puede calcular.
+
+54
+00:06:00,402 --> 00:06:07,737
+Los totales no se pueden deshacer, y aún responden la pregunta: cerca de 9 de cada 10 estudiantes de primer año pasaron a segundo.
+
+55
+00:06:09,437 --> 00:06:14,442
+Como en 1856: todos ven los totales, y nadie ve un voto.
+
+56
+00:06:18,142 --> 00:06:22,635
+Así, para cada línea del acuerdo, Mei elige la forma que conserva lo que el estudio necesita.
+
+57
+00:06:23,735 --> 00:06:26,376
+Un código en lugar de quién es: un hash con clave.
+
+58
+00:06:27,276 --> 00:06:29,331
+Su año de nacimiento: generalizar.
+
+59
+00:06:30,231 --> 00:06:32,686
+Nada que nombre a un estudiante: enmascararlo entero.
+
+60
+00:06:33,586 --> 00:06:35,875
+Nada sobre su salud: dejarlo fuera.
+
+61
+00:06:36,775 --> 00:06:44,004
+Solo sus 2,614 estudiantes: filtrar filas. Y solo salen totales, con las cifras pequeñas ocultas.
+
+62
+00:06:45,104 --> 00:06:50,193
+Cada columna nueva recibe de ella su clase: el código, seudónima; el año, aún indirecta.
+
+63
+00:06:51,493 --> 00:06:57,325
+Las próximas películas construyen estas formas en la plataforma, para ocultar cada clase igual, siempre.
+
+64
+00:06:58,425 --> 00:07:02,435
+Y un agente que ayuda al estudio ve lo que ve el estudio, nunca más.
+
+65
+00:07:03,735 --> 00:07:08,771
+El padrón, la urna y los totales: cada uno muestra lo mínimo que aún responde su pregunta.
+
+66
+00:07:10,271 --> 00:07:15,087
+La fila de Samuel ahora responde la pregunta del estudio, y no dice nada de quién es.
+
+67
+00:07:16,387 --> 00:07:18,716
+Muestra lo mínimo que aún responde la pregunta.

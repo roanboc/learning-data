@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Hot, warm, cold, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (hot, warm, cold), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "hot":{q:"La app de horas debe ver un cambio de contrato en un minuto, así que los contratos se guardan calientes. ¿Por qué no guardar calientes todos los datos de la universidad, por si acaso?",
+    opts:[{t:"Pocas preguntas necesitan el minuto, pero un flujo no cuesta más que una carga nocturna.",near:true},{t:"Lo caliente es lo más caro, porque algo corre todo el tiempo, y pocas preguntas necesitan el minuto.",ok:true},{t:"Una tabla de streaming guarda un solo tipo de dato, así que cada tipo necesitaría su propia plataforma."}],
+    why:"Para tener datos frescos al minuto, algo tiene que correr todo el tiempo: aquí, el pipeline, en modo continuo. Vale la pena donde un minuto importa, como un contrato que la app revisa antes del mediodía del lunes, y se desperdicia donde bastan las cifras de ayer. Donde trabajas, ¿qué datos necesitan de verdad el minuto?"},
+  "warm":{q:"Lo que gastó cada facultad es ahora una vista materializada, calculada cada noche a las dos. ¿Por qué es mejor que leer el libro mayor en cada consulta?",
+    opts:[{t:"Las cifras de ayer bastan, así que la respuesta se calcula una vez y queda lista para leer.",ok:true},{t:"Una vista siempre está más fresca que el libro mayor, porque cambia apenas Finanzas registra algo."},{t:"Las cifras de ayer bastan, así que la vista guarda una copia entera del libro mayor para leer.",near:true}],
+    why:"Finanzas y los gerentes de las facultades miran cada mañana, y las cifras de ayer les responden. Calculada una vez por noche, leyendo el libro mayor en su sitio, la vista guarda solo la respuesta, una fila por facultad: cada consulta es rápida, y el libro mayor queda en paz mientras Finanzas trabaja en él. Donde trabajas, ¿qué informe se lee mucho más a menudo de lo que cambian sus datos?"},
+  "cold":{q:"Los registros de pago de más de un año están ahora en el nivel de archivo, el más barato de la nube. ¿Qué cede la universidad a cambio?",
+    opts:[{t:"El derecho a borrarlos: una vez archivados, los registros deben guardarse para siempre, más de siete años."},{t:"Nada: un año archivado se lee tan rápido como uno reciente, porque la tabla sabe dónde están sus archivos.",near:true},{t:"Rapidez: un año archivado tarda horas en recuperarse antes de leerse, lo que está bien para una auditoría.",ok:true}],
+    why:"El nivel de archivo es el lugar más barato para guardar datos, y el más lento para leerlos: un archivo ahí no se puede leer hasta recuperarlo, lo que toma horas. Para registros de pago que se leen de vez en cuando, para una auditoría, es un buen trato, y aun así se borran cuando se cumplen sus siete años. Donde trabajas, ¿qué se guarda por años pero casi no se lee?"}
+  }}};

@@ -6,7 +6,7 @@
 #    reports, and on to the page, the setting and the one count that came instead; after it, only at a chapter's turn, under a
 #    moment on screen or in a pause without words.
 #  - The mandolin marks what lands, close and soft, and its marks mean the same all through: two notes rising a third when a copy
-#    comes into step with its home, a single low note when a copy has drifted, and a falling fourth when an owner approves.
+#    comes into step with its home, a single low note when a copy has drifted, and a falling fourth when a pull request is approved.
 #  - The opening's problem is in the consort: Mei's line falls as she says she never sees her words used, and is left unresolved;
 #    as the five glossaries' three meanings light, each player comes in on a note of its own; the two reports' numbers on two
 #    players, and under the question nobody could answer the bass is left alone, on the fifth. "Something had to change" stops
@@ -172,7 +172,7 @@ def drift(s, g=0.9):
     """a copy has drifted: a single low note"""
     mand(57, s, g)
 def approve(s, g=0.8):
-    """an owner approves: a falling fourth"""
+    """a pull request is approved: a falling fourth"""
     mand(67, s, g); mand(62, s + 0.3, g * 0.9)
 def mark(s, g=0.75, step=0.42):
     """the series' mark, 1-5-4-8: the bass viol, and the mandolin an octave above"""
@@ -362,7 +362,7 @@ strike(back, 0.009, px(1300), 0.6)
 
 # 4. The nightly sync: the sixth at the turn, the room empty; the check reading line by line, keys typed by nobody, and Monday's change
 #    found: the mandolin's low note; the pull request it opened, the old words struck and the new typed; what they touch, a box each;
-#    Tuesday morning on the home chord, Mei's approval with the falling fourth, and data governance's; a thread to each place her
+#    Tuesday morning on the home chord, the data team's approval with the falling fourth, and Mei told; a thread to each place her
 #    words are used
 sw_ = lambda lid, word, off=0: W('sync', lid, word, off)
 sc_ = lambda lid, off=0: G('sync', lid, off)
@@ -377,7 +377,7 @@ strike(on, 0.009, px(700), 0.7); keys(on + 0.5, 6, 0.007, px(1100), 0.15)
 marker(wt, 0.007, px(960), 0.5)
 for k, w_ in enumerate(('Three tables', 'eight definitions', 'the code', 'three reports')):
     paper(sw_('three', w_), 0.010, px([550, 1370, 550, 1370][k]), 0.3)
-tu, ap, cf = sc_('tuesday', -0.3), sw_('tuesday', 'Mei approved'), sw_('tuesday', 'data governance confirmed')
+tu, ap, cf = sc_('tuesday', -0.3), sw_('tuesday', 'the data team reviewed'), sw_('tuesday', 'Mei was told')
 chord(I, tu + 0.1, cf + 1.2, 0.5, step=0.2, att=0.6, rel=0.8)
 stamp(ap + 0.15, 0.018, px(1500)); approve(ap + 0.15)
 stamp(cf + 0.15, 0.014, px(1500))
@@ -387,7 +387,7 @@ for i in range(4):
 
 # 5. A number is a setting: the fourth at the turn; the number in the new words, and its line on vars, lit; the vars sheet, the setting
 #    lit and a thread to its dial, set; Jun's column, a thread from the dial, and one to every count of awards; another number, the
-#    pull request and its reviewer asked; and, without words, the needle turned to it and back, the tenor going up a step with it and
+#    glossary first, then the line, the pull request and its reviewer asked; and, without words, the needle turned to it and back, the tenor going up a step with it and
 #    coming back, over home
 gw = lambda lid, word, off=0: W('setting', lid, word, off)
 gc = lambda lid, off=0: G('setting', lid, off)
@@ -400,9 +400,9 @@ pencil(mn - 0.2, 0.008, px(1300), 0.9); tap(mn + 0.3, 0.008, px(1500))
 rd = gc('reads', -0.3)
 paper(rd + 0.1, 0.014, px(800), 0.4); marker(gw('reads', "Jun's new column"), 0.007, px(700), 0.5); tap(rd + 0.9, 0.007, px(1100))
 pencil(gw('reads', 'reads it'), 0.008, px(1100), 0.9); pencil(gw('reads', 'every count of awards'), 0.008, px(700), 0.9)
-rv = gw('agree', 'a reviewed pull request')
+rv = gw('agree', 'the data team reviews')
 pencil(gw('agree', 'another number'), 0.008, px(560), 0.6)
-paper(gw('agree', 'one line changes') - 0.1, 0.012, px(1390), 0.35)
+paper(gw('agree', 'the glossary changes first') - 0.1, 0.012, px(1390), 0.35); pencil(gw('agree', 'then one line'), 0.007, px(1390), 0.5)
 keys(rv, 5, 0.007, px(1390), 0.14); knock(rv + 1.0, 0.010, px(1390), 300)
 turn = END('setting', 'agree') + 0.2
 chord({'ba': 38, 'tr': 66}, turn - 0.2, turn + 3.0, 0.5, step=0.15, att=0.6, rel=0.9)
@@ -410,7 +410,7 @@ line('te', [(turn, turn + 0.9, 57, 1.0), (turn + 0.9, turn + 1.8, 59, 1.0), (tur
 tap(turn + 1.2, 0.006, px(560)); tap(turn + 2.4, 0.006, px(560))
 
 # 6. Counted once: the fifth at the turn; the ledger, its rule pencilled a line at a time; the metric view's sheet, what it counts lit;
-#    its pull request, its checks, and Mei's approval, the falling fourth; a thread to each report that reads it; Planning's own count
+#    its pull request, its checks, and the data team's approval, the falling fourth; a thread to each report that reads it; Planning's own count
 #    struck through, and the metric's in its place: in step, on the home chord
 kw = lambda lid, word, off=0: W('count', lid, word, off)
 kc = lambda lid, off=0: G('count', lid, off)

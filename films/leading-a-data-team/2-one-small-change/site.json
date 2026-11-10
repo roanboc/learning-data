@@ -1,0 +1,99 @@
+{
+  "kicker": "Kaizen in a team",
+  "kicker_es": "Kaizen en un equipo",
+  "title_es": "Un cambio pequeño cada vez",
+  "h1": "One small change at a time: improve your own work, and check each step",
+  "h1_es": "Un cambio pequeño cada vez: mejora tu propio trabajo y verifica cada paso",
+  "lead": "In July 2027 Ivy Reyes spends two hours every Monday checking her room data by hand, and until she's done, readers may see a wrong number. Helena Novak asks what's in the way and gives her the time. Ivy measures, drops what nobody needs, writes the rest down and automates one step at a time.",
+  "lead_es": "En julio de 2027 Ivy Reyes pasa dos horas cada lunes revisando a mano sus datos de aulas, y hasta que termina, los lectores pueden ver una cifra equivocada. Helena Novak pregunta qué obstáculos hay y le da el tiempo. Ivy mide, deja lo que nadie necesita, escribe el resto y automatiza paso a paso.",
+  "description": "A film about kaizen in leading a team, the second of Leading a data team in the module Leading data people: improvement is everyone's job, on their own work, in small steps, each run through one cycle: plan a change, do it, check it, then keep it or drop it. Its roots are named once: Walter Shewhart's cycle of 1939, which W. Edwards Deming taught in Japan in 1950 and Japanese managers made plan, do, check, act, and Masaaki Imai's book of 1986, which took the word kaizen around the world. In July 2027 Ivy Reyes spends two hours every Monday checking Teaching space use by hand. Helena Novak asks what's in the way, and gives it Ivy's Thursday learning time. Ivy measures first (six steps, a hundred and twenty minutes), drops the two steps nobody needs, writes the four left as one checklist that Jun follows to the same result, and only then turns one step a week into a check inside the job, each reviewed by Sam: by October the refresh takes ten minutes, checked, and nobody opens the page to a wrong number. Helena's part is three things: she asks what's in the way, gives the time, and shows the small wins. It opens in Colombo in 2000, where the staff of a public maternity hospital improved their own wards with 5S, then kaizen, and infections after a Caesarean fell by half in two years.",
+  "description_es": "Una película sobre el kaizen al dirigir un equipo, la segunda de Liderar un equipo de datos en el módulo Liderar equipos de datos: mejorar es tarea de todos, cada uno en su propio trabajo, a pasos pequeños, y cada paso sigue un ciclo: planear un cambio, hacerlo, verificarlo, y luego conservarlo o descartarlo. Nombra una vez sus raíces: el ciclo de Walter Shewhart de 1939, que W. Edwards Deming enseñó en Japón en 1950 y que los directivos japoneses convirtieron en planear, hacer, verificar, actuar, y el libro de Masaaki Imai de 1986, que llevó la palabra kaizen por el mundo. En julio de 2027 Ivy Reyes pasa dos horas cada lunes revisando a mano Uso de los espacios docentes. Helena Novak pregunta qué obstáculos hay, y le da para eso su tiempo de aprendizaje de los jueves. Ivy mide primero (seis pasos, ciento veinte minutos), deja los dos pasos que nadie necesita, escribe los cuatro que quedan en una lista de verificación que Jun sigue con el mismo resultado, y solo entonces convierte un paso por semana en un control dentro del proceso, cada uno revisado por Sam: en octubre la actualización es cosa de minutos, verificada, y nadie abre la página para encontrarse un número equivocado. La parte de Helena son tres cosas: pregunta qué obstáculos hay, da el tiempo y muestra los pequeños logros. Empieza en Colombo en 2000, donde el personal de una maternidad pública mejoró sus propias salas con las 5S, y luego con el kaizen, y las infecciones tras una cesárea se redujeron a la mitad en dos años.",
+  "card": "Ivy turns two hours of Monday checks into ten minutes, one small change at a time, with the time Helena gives her.",
+  "card_es": "Ivy convierte dos horas de revisiones de los lunes en unos minutos, un cambio pequeño cada vez, con el tiempo que le da Helena.",
+  "chapters_es": {
+    "wards": "Sala por sala",
+    "hours": "Dos horas cada lunes",
+    "measure": "Medir, luego simplificar",
+    "automate": "Estandarizar, luego automatizar",
+    "leader": "La parte de quien lidera",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Colombo, Sri Lanka, 2000 to 2002: ward by ward",
+    "At the Castle Street Hospital for Women, too many mothers caught an infection after a Caesarean, and at first the ministry gave no money for a fix. The director brought in 5S, a way of working from Japanese factories, and the staff of each ward improved their own corner of the work, then went on with kaizen. In two years, infections after a Caesarean fell by half."
+  ],
+  "past_es": [
+    "Colombo, Sri Lanka, de 2000 a 2002: sala por sala",
+    "En el Hospital de Mujeres de Castle Street, demasiadas madres contraían una infección después de una cesárea, y al principio el ministerio no daba dinero para arreglarlo. El director trajo las 5S, una forma de trabajar de las fábricas japonesas, y el personal de cada sala mejoró su propio rincón del trabajo, y luego siguió con el kaizen. En dos años, las infecciones tras una cesárea se redujeron a la mitad."
+  ],
+  "next_h": "You've seen how to improve your own work, one small change at a time. Next: a team that holds, where nobody is alone and nobody is the only one who knows.",
+  "next_h_es": "Viste cómo mejorar tu propio trabajo, un cambio pequeño cada vez. Después: un equipo que se sostiene, donde nadie está solo ni es el único que sabe.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Change Management for Hospitals through Stepwise Approach, 5S-KAIZEN-TQM",
+        "title_es": "Change Management for Hospitals through Stepwise Approach, 5S-KAIZEN-TQM (en inglés)",
+        "line": "The textbook of the way Castle Street began in 2000: 5S first, then kaizen, and how it reached fifteen African countries. On the materials page of Japan's aid agency, JICA.",
+        "line_es": "El libro de la forma que Castle Street empezó en 2000: primero las 5S, luego el kaizen, y cómo llegó a quince países africanos. En la página de materiales de la agencia de cooperación de Japón, JICA.",
+        "href": "https://www.jica.go.jp/english/our_work/thematic_issues/health/case_materials.html",
+        "href_es": "https://www.jica.go.jp/english/our_work/thematic_issues/health/case_materials.html"
+      },
+      {
+        "title": "Applicability of the 5S management method for quality improvement in health-care facilities: a review",
+        "title_es": "La aplicación del método 5S para mejorar la calidad en centros de salud: una revisión (en inglés)",
+        "line": "Shogo Kanamori, Akira Shibanuma and Masamine Jimba, in Tropical Medicine and Health, 2016: 5S in hospitals round the world, with Castle Street's results.",
+        "line_es": "Shogo Kanamori, Akira Shibanuma y Masamine Jimba, en Tropical Medicine and Health, 2016: las 5S en hospitales de todo el mundo, con los resultados de Castle Street.",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4950714/",
+        "href_es": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4950714/"
+      },
+      {
+        "title": "Kaizen",
+        "title_es": "Kaizen",
+        "line": "The Japanese word for change for the better, and how Masaaki Imai's book of 1986 took it around the world.",
+        "line_es": "La palabra japonesa para el cambio para mejor, y cómo el libro de Masaaki Imai de 1986 la llevó por el mundo.",
+        "href": "https://en.wikipedia.org/wiki/Kaizen",
+        "href_es": "https://es.wikipedia.org/wiki/Kaizen"
+      },
+      {
+        "title": "PDCA, plan, do, check, act",
+        "title_es": "El círculo de Deming: planear, hacer, verificar, actuar",
+        "line": "The cycle every small step runs through, from Walter Shewhart's circle to W. Edwards Deming's teaching in Japan.",
+        "line_es": "El ciclo que sigue cada paso pequeño, desde el círculo de Walter Shewhart hasta lo que W. Edwards Deming enseñó en Japón.",
+        "href": "https://en.wikipedia.org/wiki/PDCA",
+        "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
+      },
+      {
+        "title": "5S",
+        "title_es": "5S",
+        "line": "The five steps the staff at Castle Street began with: sort, set in order, shine, standardise and sustain.",
+        "line_es": "Los cinco pasos con que empezó el personal de Castle Street: separar, ordenar, limpiar, estandarizar y mantener.",
+        "href": "https://en.wikipedia.org/wiki/5S_(methodology)",
+        "href_es": "https://es.wikipedia.org/wiki/5S"
+      }
+    ],
+    "more": [
+      {
+        "text": "The PDSA cycle, as The W. Edwards Deming Institute tells it: Deming's later name for the cycle, with study in place of check",
+        "text_es": "El ciclo PDSA, como lo cuenta The W. Edwards Deming Institute: el nombre que Deming le dio después, con estudiar en lugar de verificar (en inglés)",
+        "href": "https://deming.org/explore/pdsa/",
+        "href_es": "https://deming.org/explore/pdsa/"
+      },
+      {
+        "text": "Kaizen, a resource guide from the Lean Enterprise Institute",
+        "text_es": "Kaizen, una guía del Lean Enterprise Institute (en inglés)",
+        "href": "https://www.lean.org/lexicon-terms/kaizen/",
+        "href_es": "https://www.lean.org/lexicon-terms/kaizen/"
+      },
+      {
+        "text": "The history of the Castle Street Hospital for Women, on its own site: from 2000, a project to improve productivity and quality",
+        "text_es": "La historia del Hospital de Mujeres de Castle Street, en su propio sitio: desde 2000, un proyecto para mejorar la productividad y la calidad (en inglés)",
+        "href": "https://www.cshw.health.gov.lk/hisotry/",
+        "href_es": "https://www.cshw.health.gov.lk/hisotry/"
+      }
+    ]
+  }
+}

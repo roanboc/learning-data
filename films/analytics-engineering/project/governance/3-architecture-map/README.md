@@ -58,7 +58,7 @@ relationships:
     what a word means: 1
 ```
 
-A step is a step whoever does it, a person or an agent: Planning's change process, the service *change a data product*, has seven steps, and the role *planning contributor* is assigned only the three that draft a change. People keep the others: the analytics engineer reviews the code, the product owner approves the change and the release approver releases it, so whoever drafts a change never approves or releases it. The map holds three agents: the planning agent, the workload agent and the governance review agent.
+A step is a step whoever does it, a person or an agent: Planning's change process, the service *change a data product*, has seven steps, and the role *planning contributor* is assigned only the three that draft a change. People keep the others: the requester raises the ticket, the analytics engineer reviews the code, and the release approver approves the change and releases it (no owner or steward reviews or approves a pull request), so whoever drafts a change never approves or releases it. The map holds three agents: the planning agent, the workload agent and the governance review agent.
 
 The check also fails if an agent has no owner, no assignment to a role, or no stage from 1 to 5 for each kind of task on its assignment, or if a `stage:` sits anywhere but on an agent's assignment. *From helper to colleague*'s *A place on the map* adds them.
 

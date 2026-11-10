@@ -4,7 +4,7 @@
    Words as in Who may see it, Show the least and Governed in Unity Catalog: the classes are directa, indirecta, especial, seudónima and ninguna; a policy una política;
    a tag una etiqueta; a mask una máscara, and its stars asteriscos; a shelf (schema) un estante; a grant un permiso; the registrar's office la oficina de registro;
    the help desk la mesa de ayuda; the study el estudio; a row filter un filtro de filas. The ways: enmascararlo entero, enmascararlo en parte, generalizar, filtrar filas,
-   dejarlo fuera. The guidebook la guía; a guide (its orange page) una guía; Guide 111 la Guía 111. The films: Conoce lo que guardas, Muestra lo mínimo, Permisos diseñados,
+   dejarlo fuera. The guidebook la guía; a guide (its orange page) una guía; Guide 111 la Guía 111. The films: Conoce lo que guardas, Muestra lo mínimo, Permisos por diseño,
    Gobernanza en Unity Catalog, Etiquetas que viajan, Agentes de IA en el trabajo con datos, Prueba de que se cumplió, Copias que mantienen las reglas. Numbers keep the
    picture's comma (2,000); tool names (registrar-loader, Databricks Runtime) as written. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
@@ -57,7 +57,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "By hand, that's 140 masks, set one table at a time, by someone who remembers.":
 "A mano, son 140 máscaras, puestas tabla por tabla, por alguien que se acuerde.",
 "But Grants by design gives each shelf its readers, so a new table is read from its first minute.":
-"Pero Permisos diseñados da a cada estante sus lectores: una tabla nueva se lee desde su primer minuto.",
+"Pero Permisos por diseño da a cada estante sus lectores: una tabla nueva se lee desde su primer minuto.",
 "A mask set by hand comes later, if at all,":
 "Una máscara puesta a mano llega después, si llega,",
 "and until then, everyone on the shelf reads every name.":

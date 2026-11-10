@@ -96,7 +96,7 @@ A mano, son 140 máscaras, puestas tabla por tabla, por alguien que se acuerde.
 
 25
 00:02:25,934 --> 00:02:31,511
-Pero Permisos diseñados da a cada estante sus lectores: una tabla nueva se lee desde su primer minuto.
+Pero Permisos por diseño da a cada estante sus lectores: una tabla nueva se lee desde su primer minuto.
 
 26
 00:02:33,111 --> 00:02:35,661

@@ -371,6 +371,7 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
+- [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
 
 ### Ownership and performance
 

@@ -10,15 +10,15 @@
   "description_es": "Una película sobre entrar sin ningún secreto que alguien guarde, la segunda de Cerraduras antes que los datos: la City de Londres en 1990, donde robaron el maletín de un mensajero con papel al portador por 292 millones de libras, y la oficina del Banco de Inglaterra que guardó el papel en una bóveda y quién era su dueño en un registro; por qué una contraseña, un token o una clave también son papel al portador; un proceso nocturno que aún entra con el token de una persona, creado sin fecha de fin y copiado en tres sitios; las formas en que un proceso puede probar quién es, del token de una persona a una identidad que le da la plataforma, ordenadas según quién guarda un secreto y por cuánto tiempo; el proceso llevado a la cima y el token anulado; y la escalera de las personas, de una cuenta compartida a una llave de acceso que solo responde al sitio real.",
   "card": "The ways a job or a person signs in, ranked from worst to best by who holds a secret, and for how long.",
   "card_es": "Las formas en que un proceso o una persona entra, de peor a mejor, según quién guarda un secreto y por cuánto tiempo.",
-  "chapters_es": [
-    "Papel al portador",
-    "En los registros del Banco",
-    "El token de Jun",
-    "¿Quién guarda un secreto?",
-    "Escalera arriba",
-    "Una escalera para las personas",
-    "Nada que llevar"
-  ],
+  "chapters_es": {
+    "city": "Papel al portador",
+    "bank": "En los registros del Banco",
+    "token": "El token de Jun",
+    "ladder": "¿Quién guarda un secreto?",
+    "climb": "Escalera arriba",
+    "people": "Una escalera para las personas",
+    "close": "Nada que llevar"
+  },
   "past": [
     "London, 1990: a messenger's case of bearer paper, and the Bank of England's vault",
     "The best secret is the one nobody holds."

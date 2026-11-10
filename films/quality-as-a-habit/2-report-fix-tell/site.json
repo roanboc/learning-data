@@ -82,12 +82,12 @@
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/sql/user/alerts/"
       },
       {
-        "title": "The Open Data Contract Standard",
-        "title_es": "El Open Data Contract Standard (en inglés)",
-        "line": "Where a contract says how to report a problem with the data: its support channels, such as the portal's \"This isn't my name\".",
-        "line_es": "Dónde dice un contrato cómo avisar de un problema con los datos: sus canales de soporte, como «Este no es mi nombre» en el portal.",
-        "href": "https://bitol-io.github.io/open-data-contract-standard/v3.1.0/",
-        "href_es": "https://bitol-io.github.io/open-data-contract-standard/v3.1.0/"
+        "title": "The Open Data Product Standard",
+        "title_es": "El Open Data Product Standard (en inglés)",
+        "line": "Where a data product says how to report a problem with its data: its support channels, such as the portal's \"This isn't my name\".",
+        "line_es": "Dónde dice un producto de datos cómo avisar de un problema con sus datos: sus canales de soporte, como «Este no es mi nombre» en el portal.",
+        "href": "https://bitol-io.github.io/open-data-product-standard/v1.0.0/#support-and-communication-channels",
+        "href_es": "https://bitol-io.github.io/open-data-product-standard/v1.0.0/#support-and-communication-channels"
       },
       {
         "title": "dbt's data tests",

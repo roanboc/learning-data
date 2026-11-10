@@ -9,8 +9,9 @@
     (analyses/quality/checks_by_night.sql).
 
     Tests in tests/governance/ check the project, not the data, and aren't kept, as the scorecard
-    doesn't score them. A run with no checks, such as dbt run, adds nothing. The same SQL runs on
-    DuckDB and on Databricks.
+    doesn't score them. A run with no checks, such as dbt run, adds nothing, and nor does one that
+    only compiles them (dbt compile, whose checks have no result). The same SQL runs on DuckDB and
+    on Databricks.
 -#}
 
 {% macro keep_check_results(results) -%}
@@ -20,6 +21,7 @@
     {%- set rows = [] -%}
     {%- for res in results
           if res.node.resource_type == 'test'
+          and res.status in ['pass', 'warn', 'fail', 'error', 'skipped']
           and not res.node.original_file_path.startswith('tests/governance/') -%}
         {%- set meta = res.node.meta or {} -%}
         {%- do rows.append('(' ~ [

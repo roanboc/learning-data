@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Small, every week",
+    "key": "small-every-week-en",
+    "dir": "films/quality-as-a-habit/4-small-every-week/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/small-every-week/film.js",
+    "video": "dist/small-every-week.mp4",
+    "file": "small-every-week.mp4",
+    "captions": [
+      [
+        "films/quality-as-a-habit/4-small-every-week/captions/en.srt",
+        "small-every-week.en.srt"
+      ],
+      [
+        "films/quality-as-a-habit/4-small-every-week/captions/es.srt",
+        "small-every-week.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/quality-as-a-habit/4-small-every-week/source",
+      ":(exclude)films/quality-as-a-habit/4-small-every-week/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 304,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

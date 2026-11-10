@@ -11,6 +11,7 @@ Documents as data and as context. Finance receives about 3,860 supplier invoices
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Files as data and as context](https://data.learn-all.org/documents-as-data/files-as-data-and-context/) | Invoices, contracts and claims | 7½ min | 5 | 3 questions | [script](1-files-as-data-and-context/script.md) · [source](1-files-as-data-and-context/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

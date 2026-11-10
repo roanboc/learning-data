@@ -1,0 +1,71 @@
+{
+  "key": "files-as-data-and-context",
+  "title": "Files as data and as context",
+  "sub": "The single film of Documents as data, the last series of Modern data basics: a document is data to read and context to cite. Supplier invoices, written for people, are read into a table with the platform's functions, each row keeping its file, and checked like any other data; signed contracts are kept as they were signed, with their metadata beside them, so a person or an agent finds the right version and cites it; and what the university's own applications write, they write as data, in standard structures, so nobody has to read it back.",
+  "howto": "The film is drawn in the module's look: the university's night map, its parts as dark glass. Light blue is data moving and the platform's structure, gold what people agree on (a contract, a form, a definition), green a check that passes, red one that fails, amber a person's turn, and lilac personal data, always with a lock. The opening, in Washington in 1842 and Brussels in 1853, is lamp-lit, with the oceans drawn as a chart of the time.",
+  "src": [
+    "fd_world.js",
+    "fd_docs.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "invoices",
+    "path",
+    1.0
+  ],
+  "logos": true,
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Nwin"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bDesai's\\b",
+      "Deh-sigh's"
+    ],
+    [
+      "\\bDesai\\b",
+      "Deh-sigh"
+    ],
+    [
+      "\\bQuetelet\\b",
+      "Ket-lay"
+    ],
+    [
+      "\\bYAML\\b",
+      "Yammel"
+    ]
+  ],
+  "story": [
+    "logs"
+  ],
+  "urgent": []
+}

@@ -442,7 +442,7 @@ knock(R('space', 'health progress', 1.1), 0.009, px(884), 220)
 tap(R('space', 'made for', -0.2), 0.007, px(700)); tap(R('space', 'deleted', -0.2), 0.007, px(700))
 walk((G3, Eb3), R('look', 'Look', 0.0), 0.8, 0.75, -0.3, last=1.8)
 
-# 8. Written once, kept as code: E-flat, low, as GitHub's page comes in; the two files lit; the plan's lines; Mei's yes, B-flat to
+# 8. Written once, kept as code: E-flat, low, as GitHub's page comes in; the two files lit; the plan's lines; the data team's review, B-flat to
 #    E-flat and its steel; the contract and its lines; the policies first, then the grant, a tick each; the path to production, three
 #    rods rising with its ticks; Catalog Explorer, where nobody grants by hand, a lock; the admin account, switched on
 C = lambda lid, word, off=0: W('code', lid, word, off)
@@ -453,10 +453,10 @@ knock(c0 + 2.4, 0.010, px(510), 230)
 tap(C('files', 'two files', -0.2), 0.008, px(300)); tap(C('files', "the job's code", -0.2), 0.007, px(300))
 paper(G('code', 'lines', -0.2), 0.009, px(510), 0.4)
 tap(C('lines', 'a few lines', -0.2), 0.007, px(510))
-tap(C('yes', 'owns', -0.3), 0.007, px(500))
-knock(C('yes', 'owns', 0.3), 0.010, px(1430), 230)
-bas(Bb3, C('yes', 'her yes', 0.0), 0.7, 0.42, px(1430)); bas(Eb4, C('yes', 'her yes', 0.45), 1.4, 0.45, px(1500))
-steel(Eb3, C('yes', 'her yes', 0.8), C('yes', 'her yes', 2.8), 0.45, att=0.7, rel=1.0)
+tap(C('yes', 'reviews', -0.3), 0.007, px(500))
+knock(C('yes', 'reviews', 0.3), 0.010, px(1430), 230)
+bas(Bb3, C('yes', 'change', 0.1), 0.7, 0.42, px(1430)); bas(Eb4, C('yes', 'change', 0.55), 1.4, 0.45, px(1500))
+steel(Eb3, C('yes', 'told', 0.3), C('yes', 'told', 2.3), 0.45, att=0.7, rel=1.0)
 paper(G('code', 'contract', 0.1), 0.009, px(510), 0.4)
 knock(C('contract', "agreement's contract", -0.2), 0.010, px(1430), 230)
 air(C('contract', "agreement's contract", 0.1), 0.8, 0.005, px(980), 150, 800)

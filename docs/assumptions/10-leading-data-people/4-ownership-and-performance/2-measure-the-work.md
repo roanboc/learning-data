@@ -1,8 +1,8 @@
 # Measure the work, not the people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 2 · open, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250)
+*Leading data people* · *Ownership and performance*, film 2 of 4 · merged, PR #250 · [pull request](https://github.com/roanboc/learning-data/pull/250)
 
-On the site once PR #250 merges: https://data.learn-all.org/ownership-and-performance/measure-the-work/
+[Watch it on the site](https://data.learn-all.org/ownership-and-performance/measure-the-work/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

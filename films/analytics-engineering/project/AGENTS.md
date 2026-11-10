@@ -193,3 +193,21 @@ of your kinds of task. A kind of task not listed there is at stage 1: suggest, a
   gate again. Your other kinds of task keep theirs.
 - **Whatever the stage,** a change to production is approved by a person who didn't make it; you
   never approve, never weaken a check, and never grant yourself rights.
+
+## On a person's sign-in
+
+An agent with a name of its own works as its own service principal (*Your access*). A helper in an
+editor or a chat, at stages 1 to 3 (*Your stage*), works on the sign-in of the person using it: it
+borrows their rights, every step it takes reads as theirs, and no tool can narrow or stop it on its
+own. So on a person's sign-in, whatever that person may do:
+
+- **Work in development, with tools that only read.** None of them writes outside your sandbox,
+  approves, merges or grants a right.
+- **Draft only in your sandbox:** a schema of your person's in development, and a branch.
+- **Samples: 20 rows at most, names masked**, as the Query tool gives them (*Your tools*).
+- **Approving, merging and production stay your person's,** and so do changing an approved test and
+  granting a right. Never ask to take one of those steps on their sign-in; leave it to them.
+- **At stage 3, work within a plan whose checks are set before you start,** with what you may and
+  may not do written on it, and bring your evidence with your result (*Evidence*).
+- **A helper that works for the team asks for a name of its own:** its own identity, an owner, and a
+  place on the map, the gate to stage 4 in [`docs/stages.md`](docs/stages.md).

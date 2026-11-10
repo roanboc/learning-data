@@ -12,6 +12,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Five stages, not a switch](https://data.learn-all.org/from-helper-to-colleague/five-stages/) | Earned autonomy | 8½ min | 6 | 3 questions | [script](1-five-stages/script.md) · [source](1-five-stages/source/README.md) |
+| [Borrowed rights](https://data.learn-all.org/from-helper-to-colleague/borrowed-rights/) | On a person's sign-in | 8½ min | 7 | 3 questions | [script](2-borrowed-rights/script.md) · [source](2-borrowed-rights/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

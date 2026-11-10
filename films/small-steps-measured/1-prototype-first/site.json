@@ -1,0 +1,88 @@
+{
+  "draft": true,
+  "kicker": "Prototype and iterate",
+  "kicker_es": "Prototipar e iterar",
+  "title_es": "Primero, un prototipo",
+  "h1": "Prototype first: something real in front of the person who decides",
+  "h1_es": "Primero, un prototipo: algo real frente a quien decide",
+  "lead": "Graham Ellis asks for a dashboard of room use by Easter. Behind it is whether to ask for a new building, and requests wait 41 working days. Helena's team puts something real in front of him within two weeks, with governed data, and improves it a round at a time until his decision is served.",
+  "lead_es": "Graham Ellis pide un tablero del uso de las aulas para Pascua. Detrás está si pedir un edificio nuevo, y las solicitudes esperan 41 días hábiles. El equipo de Helena le pone algo real delante en dos semanas, con datos gobernados, y lo mejora ronda a ronda hasta que basta para decidir.",
+  "description": "A film on delivering data work in small steps, the first of Small steps, measured, the last series of Data management: put something real in front of the person who decides within two weeks, learn from what they do with it, and do it again. Graham Ellis, the university's new director of Facilities, asks in February 2027 for a dashboard of room use by Easter; the question behind it is whether to ask the University Council for a new teaching building, about A$140 million, and requests wait 41 working days on average. On Tuesday 30 March 2027 the team takes it up the new way, from Ivy Reyes's page of its whole route, with all 186 rooms: real data from the first day, thirteen weeks of bookings and head counts from the rooms' sensors, governed as counts per room and per hour, never a person. The Agile Manifesto's working software over comprehensive documentation, said once. The first round asks one thing; the team's agent drafts a first model that counts booked hours as used, and Ivy catches it herself, reading its notes to the end and checking the draft against the sensors; room use, as Graham means it, goes into the glossary, the model is built from it and Jun reviews Ivy's change. On Friday 9 April Graham sees a heat map of the week on a dashboard in Databricks, and Helena asks the question she asks every round: what would change your mind? Three rounds of a week, each ending on a Friday with the person who decides and the real thing, Scrum's sprint review named once; first used on Wednesday 14 April, eleven working days from the start, against 41; rooms booked 38% of the week but 93% at the peak, and one booked hour in five with nobody there. The third round's answer is plain: move about one peak class in six and release the bookings nobody uses, and the forecast to 2030 is met without a new building. The decision is served, so the rounds stop; the definition and the reviewed model stay in the product, and the dashboard becomes a product of its own, which Ivy owns from July. In June the University Council puts the building off for two years. It opens in Curitiba in 1972, where a street was given to people on foot in a weekend.",
+  "description_es": "Una película sobre entregar el trabajo con datos en pasos pequeños, la primera de Pasos pequeños, medidos, la última serie de Gestión de datos: poner algo real frente a quien decide en dos semanas, aprender de lo que hace con ello, y volver a hacerlo. Graham Ellis, el nuevo director de Instalaciones de la universidad, pide en febrero de 2027 un tablero del uso de las aulas para Pascua; la pregunta de fondo es si pedir al Consejo Universitario un nuevo edificio de aulas, de unos A$140 millones, y las solicitudes esperan 41 días hábiles en promedio. El martes 30 de marzo de 2027 el equipo la toma de la nueva manera, desde la página de Ivy Reyes con todo su recorrido, con las 186 aulas: datos reales desde el primer día, trece semanas de reservas y conteos de personas de los sensores de las aulas, gobernados como conteos por aula y por hora, nunca una persona. El software funcionando sobre documentación extensiva del Manifiesto Ágil, dicho una vez. La primera ronda pregunta una sola cosa; el agente del equipo redacta un primer modelo que cuenta las horas reservadas como usadas, e Ivy lo detecta ella misma, leyendo sus notas hasta el final y contrastando el borrador con los sensores; el uso de aulas, tal como lo entiende Graham, entra al glosario, el modelo se construye a partir de él y Jun revisa el cambio de Ivy. El viernes 9 de abril Graham ve un mapa de calor de la semana en un tablero de Databricks, y Helena le hace la pregunta que le hará en cada ronda: ¿qué le haría cambiar de opinión? Tres rondas de una semana, cada una termina un viernes con quien decide y lo real delante, la revisión del sprint de Scrum nombrada una vez; usado por primera vez el miércoles 14 de abril, once días hábiles desde el inicio, contra 41; aulas reservadas el 38% de la semana pero el 93% en el pico, y en una de cada cinco horas reservadas no llega nadie. La respuesta de la tercera ronda es clara: mover cerca de una de cada seis clases del pico y liberar las reservas que nadie usa cubre la proyección hasta 2030 sin un edificio nuevo. La decisión ya tiene lo que necesita, así que las rondas paran; la definición y el modelo revisado se quedan en el producto, y el tablero se vuelve un producto propio, del que Ivy es dueña desde julio. En junio, el Consejo Universitario posterga el edificio dos años. Empieza en Curitiba en 1972, donde una calle se entregó a la gente a pie en un fin de semana.",
+  "card": "Graham asks for a dashboard. The team puts something real in front of him in two weeks, and three short rounds settle a question worth A$140 million.",
+  "card_es": "Graham pide un tablero. El equipo le pone algo real delante en dos semanas, y tres rondas cortas resuelven una pregunta de A$140 millones.",
+  "chapters_es": {
+    "street": "Una calle en un fin de semana",
+    "question": "La pregunta detrás del tablero",
+    "real": "Algo real en dos semanas",
+    "rounds": "Tres rondas, de una semana cada una",
+    "enough": "Parar cuando basta",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Curitiba, 1972: a street in a weekend",
+    "The shopkeepers feared that a street closed to cars would empty their shops, and no plan on paper could show them otherwise. The city built the street in a weekend, and within days their sales were up. Something real settles what a plan on paper can't."
+  ],
+  "past_es": [
+    "Curitiba, 1972: una calle en un fin de semana",
+    "Los comerciantes temían que una calle cerrada a los autos vaciara sus tiendas, y ningún plan en papel podía mostrarles lo contrario. La ciudad hizo la calle en un fin de semana, y en pocos días sus ventas subieron. Algo real resuelve lo que un plan en papel no puede."
+  ],
+  "next_h": "You've seen why something real beats a plan on paper. Next: a few measures of what people get, each with a baseline and the decision it serves.",
+  "next_h_es": "Viste por qué algo real le gana a un plan en papel. Después: pocas medidas de lo que la gente recibe, cada una con su línea de base y la decisión a la que sirve.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Agile Manifesto",
+        "title_es": "El Manifiesto Ágil",
+        "line": "Four values and twelve principles, written in 2001, among them working software over comprehensive documentation.",
+        "line_es": "Cuatro valores y doce principios, escritos en 2001, entre ellos software funcionando sobre documentación extensiva.",
+        "href": "https://agilemanifesto.org/",
+        "href_es": "https://agilemanifesto.org/iso/es/manifesto.html"
+      },
+      {
+        "title": "The Scrum Guide",
+        "title_es": "La Guía de Scrum",
+        "line": "Scrum's own short guide, with the sprint review: the people who matter see what was made, and decide what comes next.",
+        "line_es": "La guía breve del propio Scrum, con la revisión del sprint: quienes importan ven lo que se hizo y deciden qué sigue.",
+        "href": "https://scrumguides.org/scrum-guide.html",
+        "href_es": "https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Spanish-Latin-South-American.pdf"
+      },
+      {
+        "title": "Software prototyping",
+        "title_es": "Prototipo",
+        "line": "The idea in software: a working model built early, put in front of the people who will use it, and changed by what they do.",
+        "line_es": "La idea: un modelo que funciona, hecho pronto, puesto frente a quienes lo van a usar, y cambiado según lo que hacen.",
+        "href": "https://en.wikipedia.org/wiki/Software_prototyping",
+        "href_es": "https://es.wikipedia.org/wiki/Prototipo"
+      },
+      {
+        "title": "Dashboards in Databricks",
+        "title_es": "Tableros en Databricks (en inglés)",
+        "line": "Databricks' documentation on building a dashboard from data on the platform, and sharing it with the people who decide.",
+        "line_es": "La documentación de Databricks sobre cómo hacer un tablero con datos de la plataforma y compartirlo con quienes deciden.",
+        "href": "https://docs.databricks.com/aws/en/dashboards/",
+        "href_es": "https://docs.databricks.com/aws/en/dashboards/"
+      },
+      {
+        "title": "Curitiba and hope, by Bill McKibben",
+        "title_es": "Curitiba and hope, de Bill McKibben (en inglés)",
+        "line": "An account of the city's way of working, with Jaime Lerner's own words about the weekend its main street changed.",
+        "line_es": "Un relato de la forma de trabajar de la ciudad, con las palabras de Jaime Lerner sobre el fin de semana en que cambió su calle principal.",
+        "href": "https://www.motherjones.com/environment/2005/11/curitiba-and-hope/",
+        "href_es": "https://www.motherjones.com/environment/2005/11/curitiba-and-hope/"
+      }
+    ],
+    "more": [
+      {
+        "text": "The street's first forty years, by Raul Guilherme Urban, for the city of Curitiba, 2012 (in Portuguese)",
+        "text_es": "Los primeros cuarenta años de la calle, por Raul Guilherme Urban, para la ciudad de Curitiba, 2012 (en portugués)",
+        "href": "https://mid.curitiba.pr.gov.br/2012/00118814.pdf",
+        "href_es": "https://mid.curitiba.pr.gov.br/2012/00118814.pdf"
+      }
+    ]
+  }
+}

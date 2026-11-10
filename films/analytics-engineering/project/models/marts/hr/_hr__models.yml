@@ -1,0 +1,101 @@
+models:
+
+  - name: mart_hr__tutors_mailing_list
+    description: >
+      HR's tutors' mailing list: each casual tutor of the last two years whose answer about news of
+      tutoring work is yes, as it is on the day of the build, with the name and email the mailing
+      tool sends to. HR's job builds it again at the start of each teaching period, from HR's
+      records, so a no is kept on the person's record in HR's system, never only here. The mailing
+      tool copies it each night.
+    config:
+      group: hr
+      # Databricks only: a delete marks the row in a deletion vector, so the deletion job purges it
+      # (macros/privacy/erase.sql). DuckDB ignores it.
+      tblproperties: {delta.enableDeletionVectors: 'true'}
+      meta:
+        grain: One row per staff member on the list
+        owner: HR
+        domain: hr
+        consumer: The mailing tool
+        # The deletion job deletes a request's rows by this column, from the HR key set's keys in
+        # privacy.request_keys (macros/privacy/erase.sql).
+        erase_by: {key_set: HR, column: staff_id}
+    constraints:
+      - type: primary_key
+        name: pk_mart_hr__tutors_mailing_list
+        columns: [staff_id]
+        warn_unenforced: false
+    columns:
+      - name: staff_id
+        description: The staff ID HR issues, like E-4417.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: HR}
+        config:
+          meta: {personal_data: direct}
+      - name: given_name
+        description: The given name the newsletter greets them by, as HR holds it.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: email
+        description: The work email HR holds, trimmed and lower case, that the mailing tool sends to.
+        data_type: string
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: HR}
+        config:
+          meta: {personal_data: direct}
+
+  - name: mart_hr__tutor_news_sent
+    description: >
+      HR's send log: who was sent each newsletter, a row for each newsletter and each person on the
+      tutors' mailing list the day it went. It only adds rows, and can't be built again from the
+      start (full_refresh: false), so rebuilding the list never touches it: a request's rows are
+      deleted here by the deletion job, as from the list.
+    config:
+      group: hr
+      tblproperties: {delta.enableDeletionVectors: 'true'}
+      meta:
+        grain: One row per newsletter and staff member sent it
+        owner: HR
+        domain: hr
+        consumer: HR
+        erase_by: {key_set: HR, column: staff_id}
+    constraints:
+      - type: primary_key
+        name: pk_mart_hr__tutor_news_sent
+        columns: [newsletter, staff_id]
+        warn_unenforced: false
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [newsletter, staff_id]
+          config:
+            meta: {owner: HR}
+    columns:
+      - name: newsletter
+        description: The newsletter, like 2026-S2 news (seeds/reference/hr/newsletters.csv).
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none}
+      - name: staff_id
+        description: The staff ID HR issues of someone it was sent to, like E-4417.
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: direct}
+      - name: sent_on
+        description: The day the mailing tool sent it.
+        data_type: date
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: HR}
+        config:
+          meta: {personal_data: none}

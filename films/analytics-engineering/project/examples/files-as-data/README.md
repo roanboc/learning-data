@@ -24,8 +24,8 @@ adapt, implement, iterate.
 | `claims_contract.yaml` | The claims app's contract with the platform, in the Open Data Contract Standard (v3.1.0, the version the project pins in `governance/7-standards/`): what each field of a claim means, for the fields of the app's own table, which the project reads in place as the source `claims_app`, and who answers for it, Ingrid Holm, by name (`team`). The app's team keeps it with the app's code; the film shows its first lines and the field `hours` |
 
 Like `../hr-system-interface/hr_system.yaml`, the claims contract is an input's: written by hand and agreed with the
-system's owner, not generated with the project's own contracts in `governance/5-data-contracts/`. To check it against the
-standard, from the project's folder, with the requirements installed:
+system's owner. The contracts in `governance/5-data-contracts/` are the canonical tables', written by data governance's
+information architect, so it isn't there. To check it against the standard, from the project's folder, with the requirements installed:
 
 ```sh
 python -c "import json, yaml, jsonschema; s = json.load(open('governance/7-standards/open-data-contract-standard-3.1.0.schema.json')); c = yaml.safe_load(open('examples/files-as-data/claims_contract.yaml')); jsonschema.Draft201909Validator(s).validate(c); print('valid')"

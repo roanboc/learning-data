@@ -11,6 +11,7 @@ Four ideas to lead a data team by, one in each film, each taught from its own so
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Less, on purpose](https://data.learn-all.org/leading-a-data-team/less-on-purpose/) | Minimalism in a team | 9 min | 7 | 3 questions | [script](1-less-on-purpose/script.md) · [source](1-less-on-purpose/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

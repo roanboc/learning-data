@@ -2670,7 +2670,7 @@ scene("report",(ctx,S,t,sc)=>{const c=sc.cues,T=rf_once(sc,"T",()=>({
       dq_textCard(cx,1220,262,620,{kick:"1980",title:"The world free of smallpox"},{a:ag_in(tt,T.y80,0.5),k:tt-T.y80});}},
     // the university: a name printed wrong, and printed again
     {at:atUni,place:"benchTop",keys:[[0,960,540,1.0],[T.again-0.3,1010,520,1.05]],d:2.2,push:0.02,dis:0.8,draw:(cx,tt)=>{
-      rf_cert(cx,200,170,760,{on:"granite",name:"Renee Dubois",award:"Bachelor of Arts",ring:clamp((tt-T.wrong)/0.9,0,1),ringK:4});
+      rf_cert(cx,200,170,760,{on:"granite",name:"Renee Dubois",award:"Bachelor of Arts",ring:clamp((tt-T.wrong)/0.9,0,1),ringK:3});
       dq_chip(cx,580,780,"Printed wrong",{align:"center",a:ag_in(tt,T.wrong+0.4,0.45),on:"granite"});
       rf_cert(cx,980,210,760,{on:"granite",name:"Renée Dubois",award:"Bachelor of Arts",a:ag_in(tt,T.again-0.2,0.5),k:tt-T.again+0.2,angle:0.03});
       dq_chip(cx,1360,820,"Printed again",{align:"center",a:ag_in(tt,T.again+0.4,0.45),on:"granite"});}},

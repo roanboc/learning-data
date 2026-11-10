@@ -1,0 +1,74 @@
+{
+  "kicker": "Identity as the boundary",
+  "kicker_es": "La identidad como frontera",
+  "title_es": "¿Quién es, en realidad?",
+  "h1": "Who is it, really? Every request proves who it is",
+  "h1_es": "¿Quién es, en realidad? Toda solicitud prueba quién es",
+  "lead": "Every night at two, a job loads the registrar's records onto the university's data platform. It signs in with Jun Park's personal token, from a workspace open to the internet, so to the platform, the job is Jun. What should every request prove, and where should its rights come from?",
+  "lead_es": "Cada noche a las dos, un proceso carga los datos del registro en la plataforma de la universidad. Entra con el token personal de Jun Park, desde un espacio de trabajo abierto a internet: para la plataforma, el proceso es Jun. ¿Qué debe probar cada solicitud, y de dónde deben venir sus permisos?",
+  "description": "A film about zero trust, the first of Locks before the data: China in the Warring States, where an order to raise troops counted only when the two halves of a bronze tiger matched, and the prince who had the king's half taken; why a request to a data platform is an order too, trusted for nothing but its proof; people, workloads and agents, each with a name of its own and a person who answers for it; rights from a role, never a person; joiners, movers and leavers, and the confidentiality agreement signed before any access; thinking like an attacker before building; and a nightly job that signed in as a person, given a name and a role of its own.",
+  "description_es": "Una película sobre la confianza cero, la primera de Cerraduras antes que los datos: China en los Reinos Combatientes, donde una orden de levantar tropas solo valía si encajaban las dos mitades de un tigre de bronce, y el príncipe que hizo sacar la mitad del rey; por qué una solicitud a una plataforma de datos también es una orden, en la que no se confía sin su prueba; personas, cargas de trabajo y agentes, cada uno con un nombre propio y una persona que responde por él; permisos que vienen de un rol, nunca de una persona; quien entra, cambia de puesto o se va, y el acuerdo de confidencialidad firmado antes de cualquier acceso; pensar como un atacante antes de construir; y un proceso nocturno que entraba como una persona, con un nombre y un rol propios.",
+  "card": "Why every request to a platform proves who it is, and why its rights come from a role, never a person.",
+  "card_es": "Por qué toda solicitud a una plataforma prueba quién es, y por qué sus permisos vienen de un rol, nunca de una persona.",
+  "chapters_es": {
+    "halves": "Dos mitades",
+    "match": "Cuando las mitades encajan",
+    "trust": "Nada se confía sin prueba",
+    "who": "Tres tipos de quién",
+    "role": "Permisos de un rol",
+    "change": "Entrar, cambiar, irse",
+    "attacker": "Pensar como un atacante",
+    "own": "Un nombre propio"
+  },
+  "past": [
+    "China, the Warring States: a bronze tiger in two halves, and an order that counted only when they matched",
+    "Trust nothing without proof, and give each identity the least it needs."
+  ],
+  "past_es": [
+    "China, los Reinos Combatientes: un tigre de bronce en dos mitades, y una orden que solo valía si encajaban",
+    "No confíes en nada sin prueba, y da a cada identidad lo mínimo que necesita."
+  ],
+  "next_h": "You've seen why every request must prove who it is, and why rights come from a role, never a person. Next: no secret to lose, where the ways a job and a person sign in are ranked by who holds a secret, and for how long.",
+  "next_h_es": "Viste por qué toda solicitud debe probar quién es, y por qué los permisos vienen de un rol, nunca de una persona. Sigue: ningún secreto que perder, donde las formas de entrar de un proceso y de una persona se ordenan según quién guarda un secreto y por cuánto tiempo.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film names no product, and one framework, once. These are the public guides it follows, from the bodies that write them.",
+    "p_es": "La película no nombra ningún producto, y nombra un marco una sola vez. Estas son las guías públicas que sigue, de quienes las escriben.",
+    "links": [
+      {
+        "title": "NIST SP 800-207: Zero Trust Architecture",
+        "title_es": "NIST SP 800-207: arquitectura de confianza cero",
+        "line": "The United States' guide to zero trust: no request is trusted for where it comes from, each is checked, and each gets the least it needs.",
+        "line_es": "La guía de Estados Unidos sobre la confianza cero: no se confía en una solicitud por su origen, cada una se comprueba, y cada una recibe lo mínimo que necesita.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/207/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/207/final"
+      },
+      {
+        "title": "NIST Cybersecurity Framework 2.0",
+        "title_es": "Marco de Ciberseguridad 2.0 del NIST",
+        "line": "The framework the film names once: under Protect, identities for users, services and devices, checked, and given the least they need.",
+        "line_es": "El marco que la película nombra una vez: en Proteger, identidades para usuarios, servicios y dispositivos, comprobadas, y con lo mínimo que necesitan.",
+        "href": "https://www.nist.gov/cyberframework",
+        "href_es": "https://www.nist.gov/cyberframework"
+      },
+      {
+        "title": "Threat Modeling Manifesto",
+        "title_es": "Manifiesto del modelado de amenazas",
+        "line": "Where the four questions come from: what are we working on, what can go wrong, what are we going to do about it, and did we do a good enough job?",
+        "line_es": "De donde vienen las cuatro preguntas: en qué trabajamos, qué puede salir mal, qué vamos a hacer al respecto, y si lo hicimos bastante bien.",
+        "href": "https://www.threatmodelingmanifesto.org/",
+        "href_es": "https://www.threatmodelingmanifesto.org/"
+      },
+      {
+        "title": "OWASP: Non-Human Identities Top 10",
+        "title_es": "OWASP: los 10 riesgos de las identidades no humanas",
+        "line": "The ten commonest risks of the identities that jobs and services sign in with, from secrets that never end to one identity shared by many.",
+        "line_es": "Los diez riesgos más comunes de las identidades con que entran procesos y servicios, de los secretos que nunca vencen a una identidad compartida por muchos.",
+        "href": "https://owasp.org/www-project-non-human-identities-top-10/",
+        "href_es": "https://owasp.org/www-project-non-human-identities-top-10/"
+      }
+    ]
+  },
+  "draft": true
+}

@@ -275,11 +275,11 @@ function po_jobPen(tt,P){const a=gv_io(tt,P.book+0.9,P.fac+2.5,0.35);if(a<=0.01)
 // the table from above: the product's card, smaller now, the three cards that go down by it, and the change request that slides in
 function po_jobTable(x,tt,P,o){o=o||{};po_cardSmall(x,{sign:o.sign||0,pen:o.pen||0});
   [["jun","Jun","builds it",P.jun,-0.03],["noor","Noor","designs it",P.noor,0.02],["sam","Sam","runs it",P.sam,-0.015]].forEach(([id,n,r,t0,rot],i)=>{const [cx,cy]=PO_JB.cards[i];po_jobCard(x,cx,cy,id,n,r,clamp((tt-t0)/0.6,0,1),rot);});
-  const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",rows:[{l:"needs:",v:"Clara's yes"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
+  const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",lines:1,rows:[{l:"review:",v:"the data team"},{l:"tell:",v:"Clara"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
 scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{im:w("didnt","I'm")-0.15,book:c.depends-0.4,dep:w("depends","who depends"),dash:w("depends","near-award")-0.1,fac:w("depends","every faculty")-0.1,
       worth:c.worth-0.3,num:w("worth","a number"),ask:w("worth","someone"),glide:c.comes-1.3,table:c.comes+0.1,jun:w("comes","Jun")-0.1,noor:w("comes","Noor")-0.1,sam:w("comes","Sam")-0.1,
-      chg:w("comes","any change")-0.1,yes:w("comes","her yes"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
+      chg:w("comes","the data team")-0.1,yes:w("comes","told"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning's room: Clara stands by the window, arms folded: "I'm not technical"
     {at:0,place:"planning",keys:[[0,1224,520,1.38],[0.1,1214,520,1.42]],d:5,draw:(x,tt)=>{po_jobRoom(x,tt,{yusuf:{carry:heldNotebook},clara:{expr:"concerned"}});

@@ -265,7 +265,7 @@ No film source yet.
 
 Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal: `/only-what-you-may-see/`
 
-No film source yet.
+- [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
 
 ### Kept for a reason
 

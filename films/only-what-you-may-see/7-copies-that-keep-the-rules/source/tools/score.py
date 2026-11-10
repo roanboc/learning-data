@@ -314,7 +314,7 @@ tTable = rw('runs', 'one table')
 glass(tTable + 0.05, 0.012, px(1700))
 chord((D3, A3, D4), tTable + 0.1, 0.8, px(1500))
 tap(rw('answer', 'Twelve weeks', 0.05), 0.006, px(1700)); tap(rw('answer', 'four to seven', 0.05), 0.006, px(1700))
-glass(rc('lascaux', 0.05), 0.012, px(920))
+glass(rc('lascaux', 0.45), 0.012, px(920))
 
 # 6. No other way out: no handpan, no copy. Elena's card and her ask; the laptop, coral, and the rules it keeps none of; the agreement's
 #    line; the studies' workspace, every way out off, one by one; the switches kept as code; the network; a photo of a screen, and her

@@ -11,6 +11,7 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Copies that keep the rules](https://data.learn-all.org/only-what-you-may-see/copies-that-keep-the-rules/) | Copies of people's data | 8½ min | 7 | 3 questions | [script](7-copies-that-keep-the-rules/script.md) · [source](7-copies-that-keep-the-rules/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

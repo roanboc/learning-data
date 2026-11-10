@@ -271,6 +271,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 
 ### Only what you may see
 

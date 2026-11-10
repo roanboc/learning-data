@@ -1,0 +1,5 @@
+name: ticket
+kind: business object
+owner: Clara Jensen, Planning
+home: tracker
+status: confirmed

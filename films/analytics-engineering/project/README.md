@@ -46,7 +46,7 @@ Then, if you like:
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
-| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
+| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
 | `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
@@ -181,7 +181,7 @@ project/
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
 │   ├── 3-architecture-map/   the governance part of Noor's map, one file per element, by layer;
-│   │                         6-views/ [generated]: services and promises, who does what
+│   │                         6-views/ [generated]: services and promises, who does what, each role's rights
 │   ├── 4-data-products/      each product: owner, domain, status, outputs, service levels, support
 │   ├── 5-data-contracts/     [generated] each output's contract, in the open contract standard
 │   ├── 6-product-descriptors/ [generated] each product, in the open product standard

@@ -1,8 +1,8 @@
 # Files as data and as context: questions and assumptions
 
-*Modern data basics* · *Documents as data*, film 1 · open, PR #181 · [pull request](https://github.com/roanboc/learning-data/pull/181)
+*Modern data basics* · *Documents as data*, film 1 · merged, PR #181 · [pull request](https://github.com/roanboc/learning-data/pull/181)
 
-On the site once PR #181 merges: https://data.learn-all.org/documents-as-data/files-as-data-and-context/
+[Watch it on the site](https://data.learn-all.org/documents-as-data/files-as-data-and-context/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

@@ -44,6 +44,8 @@ LATER = {"The graduation list: its owner, its sources, its ceremonies and the pe
          "Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products":
          ("/models/core/staff/", "/seeds/reference/course/units.csv", "/seeds/reference/staff/",
           "/governance/4-data-products/claims.yml", "/governance/4-data-products/payroll_export.yml"),
+         "The hours to pay: the claims job's mart, its product and the payroll system that reads it":
+         ("/models/marts/payroll/", "/governance/4-data-products/hours_to_pay.yml", "/exposures/payroll/"),
          "The workload agent's mart, its product and its mandate: its owner, and the data architect for the mandate":
          ("/models/marts/workload/", "/governance/4-data-products/teaching_workload.yml", "/governance/8-mandates/")}
 

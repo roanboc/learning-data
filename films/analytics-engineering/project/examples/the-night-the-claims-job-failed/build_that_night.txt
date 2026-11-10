@@ -1,0 +1,91 @@
+Running with dbt=1.12.5
+Registered adapter: duckdb=1.11.0
+Found 40 models, 17 analyses, 213 data tests, 10 seeds, 1 operation, 17 sources, 10 exposures, 2 metrics, 527 macros, 5 groups, 1 semantic model, 8 unit tests
+
+Concurrency: 4 threads (target='duckdb')
+
+1 of 1 START hook: credentials.on-run-start.0 .................................. [RUN]
+1 of 1 OK hook: credentials.on-run-start.0 ..................................... [OK in 0.01s]
+
+1 of 37 START sql view model dev_staging.stg_claims_app__claims ................ [RUN]
+2 of 37 START sql view model dev_staging.stg_hr_system__contracts .............. [RUN]
+3 of 37 START seed file dev_reference.pay_days ................................. [RUN]
+3 of 37 OK loaded seed file dev_reference.pay_days ............................. [INSERT 23 in 0.15s]
+1 of 37 OK created sql view model dev_staging.stg_claims_app__claims ........... [OK in 0.16s]
+2 of 37 OK created sql view model dev_staging.stg_hr_system__contracts ......... [OK in 0.16s]
+4 of 37 START test not_null_pay_days_claims_close_at ........................... [RUN]
+5 of 37 START test not_null_pay_days_pay_day ................................... [RUN]
+6 of 37 START test not_null_pay_days_pay_run_closes_at ......................... [RUN]
+7 of 37 START test unique_pay_days_claims_close_at ............................. [RUN]
+5 of 37 PASS not_null_pay_days_pay_day ......................................... [PASS in 0.10s]
+8 of 37 START test unique_pay_days_pay_day ..................................... [RUN]
+4 of 37 PASS not_null_pay_days_claims_close_at ................................. [PASS in 0.11s]
+7 of 37 PASS unique_pay_days_claims_close_at ................................... [PASS in 0.11s]
+6 of 37 PASS not_null_pay_days_pay_run_closes_at ............................... [PASS in 0.11s]
+9 of 37 START test accepted_values_stg_claims_app__claims_duty__tutorial__marking__consultation__training  [RUN]
+10 of 37 START test accepted_values_stg_claims_app__claims_status__submitted__approved__returned  [RUN]
+11 of 37 START test not_null_stg_claims_app__claims_claim_bk ................... [RUN]
+8 of 37 PASS unique_pay_days_pay_day ........................................... [PASS in 0.08s]
+12 of 37 START test not_null_stg_claims_app__claims_contract_bk ................ [RUN]
+9 of 37 PASS accepted_values_stg_claims_app__claims_duty__tutorial__marking__consultation__training  [PASS in 0.08s]
+13 of 37 START test not_null_stg_claims_app__claims_hours ...................... [RUN]
+11 of 37 PASS not_null_stg_claims_app__claims_claim_bk ......................... [PASS in 0.08s]
+10 of 37 PASS accepted_values_stg_claims_app__claims_status__submitted__approved__returned  [PASS in 0.08s]
+14 of 37 START test not_null_stg_claims_app__claims_staff_bk ................... [RUN]
+15 of 37 START test not_null_stg_claims_app__claims_unit_code .................. [RUN]
+12 of 37 PASS not_null_stg_claims_app__claims_contract_bk ...................... [PASS in 0.08s]
+16 of 37 START test not_null_stg_claims_app__claims_worked_on .................. [RUN]
+14 of 37 PASS not_null_stg_claims_app__claims_staff_bk ......................... [PASS in 0.07s]
+15 of 37 PASS not_null_stg_claims_app__claims_unit_code ........................ [PASS in 0.07s]
+17 of 37 START test positive_stg_claims_app__claims_hours ...................... [RUN]
+13 of 37 ERROR not_null_stg_claims_app__claims_hours ........................... [ERROR in 0.10s]
+18 of 37 START test relationships_stg_claims_app__claims_staff_bk__staff_bk__ref_stg_hr_system__staff_  [RUN]
+19 of 37 START test unique_stg_claims_app__claims_claim_bk ..................... [RUN]
+16 of 37 PASS not_null_stg_claims_app__claims_worked_on ........................ [PASS in 0.08s]
+20 of 37 START test accepted_values_stg_hr_system__contracts_pay_type__CAS__FT__CON  [RUN]
+18 of 37 PASS relationships_stg_claims_app__claims_staff_bk__staff_bk__ref_stg_hr_system__staff_  [PASS in 0.08s]
+17 of 37 ERROR positive_stg_claims_app__claims_hours ........................... [ERROR in 0.09s]
+19 of 37 PASS unique_stg_claims_app__claims_claim_bk ........................... [PASS in 0.07s]
+21 of 37 START test accepted_values_stg_hr_system__contracts_position_type__Casual_Academic__Academic  [RUN]
+22 of 37 START test not_null_stg_hr_system__contracts_contract_bk .............. [RUN]
+23 of 37 START test not_null_stg_hr_system__contracts_staff_bk ................. [RUN]
+20 of 37 PASS accepted_values_stg_hr_system__contracts_pay_type__CAS__FT__CON .. [PASS in 0.05s]
+24 of 37 START test not_null_stg_hr_system__contracts_starts_on ................ [RUN]
+21 of 37 PASS accepted_values_stg_hr_system__contracts_position_type__Casual_Academic__Academic  [PASS in 0.07s]
+25 of 37 START test relationships_stg_claims_app__claims_contract_bk__contract_bk__ref_stg_hr_system__contracts_  [RUN]
+24 of 37 PASS not_null_stg_hr_system__contracts_starts_on ...................... [PASS in 0.06s]
+23 of 37 PASS not_null_stg_hr_system__contracts_staff_bk ....................... [PASS in 0.08s]
+22 of 37 PASS not_null_stg_hr_system__contracts_contract_bk .................... [PASS in 0.09s]
+26 of 37 START test relationships_stg_hr_system__contracts_staff_bk__staff_bk__ref_stg_hr_system__staff_  [RUN]
+27 of 37 START test unique_combination_stg_hr_system__contracts_contract_bk__recorded_from  [RUN]
+25 of 37 PASS relationships_stg_claims_app__claims_contract_bk__contract_bk__ref_stg_hr_system__contracts_  [PASS in 0.07s]
+27 of 37 PASS unique_combination_stg_hr_system__contracts_contract_bk__recorded_from  [PASS in 0.03s]
+26 of 37 PASS relationships_stg_hr_system__contracts_staff_bk__staff_bk__ref_stg_hr_system__staff_  [PASS in 0.05s]
+28 of 37 SKIP relation dev_core.core_claim ..................................... [SKIP]
+30 of 37 SKIP test not_null_core_claim_v1_pay_type ............................. [SKIP]
+31 of 37 SKIP test relationships_core_claim_v1_unit_code__unit_code__ref_units_  [SKIP]
+32 of 37 SKIP test unique_core_claim_v1_claim_key .............................. [SKIP]
+29 of 37 SKIP test approved_claims_have_a_pay_day .............................. [SKIP]
+33 of 37 SKIP relation dev_marts.mart_payroll__hours_to_pay .................... [SKIP]
+34 of 37 SKIP test relationships_mart_finance__casual_pay_paid_pay_day__pay_day__ref_pay_days_  [SKIP]
+36 of 37 SKIP test relationships_mart_payroll__hours_to_pay_pay_day__pay_day__ref_pay_days_  [SKIP]
+35 of 37 SKIP test positive_mart_payroll__hours_to_pay_hours ................... [SKIP]
+37 of 37 SKIP test unique_mart_payroll__hours_to_pay_claim_key ................. [SKIP]
+
+Finished running 1 project hook, 1 seed, 2 table models, 32 data tests, 2 view models in 0 hours 0 minutes and 1.01 seconds (1.01s).
+
+Completed with 2 errors, 0 partial successes, and 0 warnings:
+
+[ERROR]: in test not_null_stg_claims_app__claims_hours (models/staging/claims_app/_claims_app__models.yml)
+  Runtime Error in test not_null_stg_claims_app__claims_hours (models/staging/claims_app/_claims_app__models.yml)
+  Conversion Error: Could not convert string "1:30" to DECIMAL(5,2) when casting from source column hours
+
+  compiled code at target/compiled/credentials/models/staging/claims_app/_claims_app__models.yml/not_null_stg_claims_app__claims_hours.sql
+
+[ERROR]: in test positive_stg_claims_app__claims_hours (models/staging/claims_app/_claims_app__models.yml)
+  Runtime Error in test positive_stg_claims_app__claims_hours (models/staging/claims_app/_claims_app__models.yml)
+  Conversion Error: Could not convert string "1:30" to DECIMAL(5,2) when casting from source column hours
+
+  compiled code at target/compiled/credentials/models/staging/claims_app/_claims_app__models.yml/positive_stg_claims_app__claims_hours.sql
+
+Done. PASS=26 WARN=0 ERROR=2 SKIP=10 NO-OP=0 REUSED=0 TOTAL=38

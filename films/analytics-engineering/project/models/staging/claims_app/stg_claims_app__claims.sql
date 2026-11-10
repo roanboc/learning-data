@@ -15,7 +15,7 @@ renamed as (
         upper(trim(unit_code)) as unit_code,
         lower(trim(duty)) as duty,
         cast(work_date as date) as worked_on,
-        cast(hours as decimal(5, 2)) as hours,
+        {{ decimal_hours('hours') }} as hours,
         cast(amount as decimal(9, 2)) as amount,
         lower(trim(status)) as status,
         cast(approved_at as timestamp) as approved_at,

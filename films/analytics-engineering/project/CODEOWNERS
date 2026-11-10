@@ -95,6 +95,11 @@
 /governance/4-data-products/claims.yml                   hr@uni.example
 /governance/4-data-products/payroll_export.yml           hr@uni.example
 
+# The hours to pay: the claims job's mart, its product and the payroll system that reads it
+/models/marts/payroll/_payroll__models.yml               hr@uni.example jun.park@uni.example
+/governance/4-data-products/hours_to_pay.yml             hr@uni.example
+/exposures/payroll/                                      hr@uni.example
+
 # The workload agent's mart, its product and its mandate: its owner, and the data architect for the mandate
 /models/marts/workload/_workload__models.yml             anil.kurian@uni.example jun.park@uni.example
 /governance/4-data-products/teaching_workload.yml        anil.kurian@uni.example

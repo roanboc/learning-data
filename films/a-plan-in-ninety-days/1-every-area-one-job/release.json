@@ -38,6 +38,13 @@
       "films/inner-life-of-data/source/src/ui3.js",
       "films/inner-life-of-data/source/src/engine3.js",
       "films/inner-life-of-data/source/fonts"
-    ]
+    ],
+    "legibility": {
+      "texts": 313,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
   }
 ]

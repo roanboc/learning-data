@@ -1,6 +1,6 @@
 # A plan in ninety days · Every area, one job: script
 
-*The script of *Every area, one job*, film 1 of 4 of *A plan in ninety days*, the first series of the module *Data management*, in six chapters, in English, drawn in the module's sunlit plaster. Written on 10 November 2026 from the series' plan (`../proposal.md`), the module's numbers and this film's brief in the module's working folder. Made on assumptions while the author was away; this film's questions and assumptions are in the module's working folder (`/mnt/project-files/data-management/1-every-area-one-job/assumptions.md`), for his final checklist.*
+*The script of *Every area, one job*, film 1 of 4 of *A plan in ninety days*, the first series of the module *Data management*, in six chapters, in English, drawn in the module's sunlit plaster. Written on 10 November 2026 from the series' plan (`../proposal.md`), the module's numbers and this film's brief in the module's working folder. Made on assumptions while the author was away; this film's questions and assumptions are in the module's working folder (`/mnt/project-files/data-management/1-every-area-one-job/assumptions.md`), for the author's final checklist.*
 
 ## The promise
 

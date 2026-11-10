@@ -23,6 +23,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-CLM-01](../sources/claims_app/_claims_app__decisions.yml) | source `claims_app` | **The claims are read where the app writes them.** The project reads the claims app's own table in place, through Unity Catalog, where the app's database is registered as the catalog claims_app. Nothing copies the claims in, by a nightly job or by change capture, so there's no _loaded_at, and freshness reads updated_at, the app's own time of a claim's last change. | Expected: Payroll, Finance and the claims job read the claims as the app wrote them. Found: The app keeps its claims in its own Postgres database on Lakebase, which Unity Catalog reads in place, with its permissions, lineage and audit. A copy would add a pipeline to run, a second place to govern, and a delay in which the copy falls behind the app. | Noor, data architect, with HR | 5 Nov 2026 | agreed |
 | [DEC-PRJ-01](../models/_shared/_shared__decisions.yml) | project | **Keys are qualified by their key set.** Keys are qualified by where they come from: key sets SIS, LMS and SC. Every hash is kept beside its readable key. | Two systems can use the same-looking key for different people. A hash alone can't be read or checked. | Noor, data architect | 5 Oct 2026 | agreed |
 | [DEC-SIS-04](../sources/student_system/_student_system__decisions.yml) | source `student_system` | **Records closed before November 2024 come from the archive.** The student system's records closed before 1 November 2024, when its history here starts, are read from its archive, as their own table, past_learners. The learner doesn't read it, since the questions it answers start in 2025. The person domain will, to find who a new record already is. | Expected: Every student record the student system holds. Found: Its history here starts on 1 November 2024, so graduates and withdrawals from before then are only in its archive (analyses/profiling/profile_keys_held.sql). |  |  | proposed |
 | [DEC-STU-03](../models/core/student/_student__decisions.yml) | domain `student` | **The learner's business key is the student ID.** The learner's business key is the student ID, which the registrar's office issues. A learner the student system doesn't know keeps the key of the first system that knew them. | The student system is the system of record for learners. Short-course customers and platform-only learners still need a key. | Mei Tanaka and Noor | 5 Oct 2026 | agreed |
@@ -33,6 +34,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
 | [DEC-FIN-02](../models/marts/finance/_finance__decisions.yml) (was Q-FIN-01) | consumer `finance` | **Tuition is saved in the enrolled award only.** Recognised credit saves tuition only in the award the learner is enrolled in on census day, counted once, at that award's published rate for the census year. | The core counts recognised credit towards every award it could count towards. A learner pays tuition for one award; counted across all of them, the saving would be two or three times too big. | Finance | 21 Oct 2026 | agreed |
+| [DEC-FIN-04](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **Payroll's export is a model in the project, counted by the pay day that pays each claim.** Payroll's export to Finance is mart_finance__casual_pay_paid, built from the claims approved in the claims app. Each approved claim is paid on the first pay day whose claims close at or after its approval (pay_day_for(), on HR's calendar, pay_days), and the export counts pay days up to the day of the build. Totals by pay day, faculty and unit, with no names or IDs. Accepted as LIM-FIN-02 and LIM-FIN-03, on the mart. | The export ran for years as a script on one person's laptop, with payroll's rule inside it, and when the claims moved into the claims app nobody could change it safely. As a model, the rule is written once with its owner, tested before every change, and reviewed by someone other than its author. | Ingrid Holm, HR, with Rohan Desai, Finance | 4 Mar 2026 | agreed |
 | [DEC-PLN-02](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Planning's mart is as it was at census.** Planning's mart is as it was at census, dated by when things took effect. | Planning compares with the census report. It builds on the same core as the wallet. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 | [DEC-WAL-01](../models/marts/wallet/_wallet__decisions.yml) | consumer `wallet` | **The wallet's marts are as they are now.** The wallet's marts are as they are now. | The wallet shows the learner today. It builds on the same core as Planning. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 
@@ -67,6 +69,12 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 | [DEC-PRJ-09](../models/_shared/_shared__decisions.yml) | project | **Primary and foreign keys declared on Databricks only.** Primary and foreign keys are declared for Databricks and left out on DuckDB. Tests check keys on both. | Databricks records them as information and doesn't enforce them. DuckDB enforces them, and won't rename or drop a table a foreign key points to, which dbt does to rebuild it. |  |  | agreed |
 | [DEC-STU-08](../models/core/student/_student__decisions.yml) | domain `student` | **core_credential version 2 is incremental, merged on credential_key.** core_credential version 2 is incremental, merged on credential_key, on both engines. | One strategy, merge, that both engines support. |  |  | agreed |
 
+## `review_and_ship`
+
+| ID | Scope | Decision | Why | Who | When | Status |
+|---|---|---|---|---|---|---|
+| [DEC-PRJ-16](../models/_shared/_shared__decisions.yml) | project | **Every job is code in the project, and reaches production the same way, after two people.** The project's jobs are written as files in a Declarative Automation Bundle (databricks.yml, and a file for each job in resources/), next to the models they run. A change goes on a branch, then a pull request whose checks build and test it; someone other than its author reviews and approves it; once merged, the same files are deployed to test and run there, then to production after Noor approves, under the platform's service principal, never a person's account. Nobody deploys from a laptop. The workflow is examples/scripts-became-software/release.yml. | Payroll's export ran for years from one person's laptop; when it had to change, nobody else could change it safely. A job kept as code is versioned, tested and reviewed like the models, and the same files deployed the same way every time can't drift between test and production. | Noor, data architect, with Sam Okafor, who runs the data platform | 4 Mar 2026 | agreed |
+
 ## `written_once`
 
 | ID | Scope | Decision | Why | Who | When | Status |
@@ -80,6 +88,8 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-CLM-02](../sources/claims_app/_claims_app__decisions.yml) | source `claims_app` | **Hours are read in either form the app sends.** Staging reads the claims app's hours as decimal hours in either form they come in, decimal hours as its contract says (1.50) or hours and minutes as tutors say them (1:30), with one macro, decimal_hours(), and a unit test of both forms. Minutes are rounded to the hundredth of an hour. Any other form still fails the build, before payroll reads it. | Expected: Hours in decimal hours, as the claims app's contract with the platform says. Found: At 15:02 on Monday 2 November 2026 a new version of the app, which lets tutors type their hours as they say them, began sending 1:30 where it sent 1.50, with no change to its contract. At 22:03 the claims job failed on the first claim in the new form, CL-104287, and the hours for the pay run of Thursday 5 November waited. Genie ZeroOps traced the cause and proposed this fix; Sam reviewed it and opened the pull request, and Noor approved it at 09:05 on Tuesday (examples/the-night-the-claims-job-failed/). | Sam, platform team, with Noor, data architect | 3 Nov 2026 | agreed |
+| [DEC-CLM-03](../sources/claims_app/_claims_app__decisions.yml) | source `claims_app` | **The contract changes first.** A change to what the claims app sends the platform, a field's form, type or meaning, is agreed in its contract first, by HR as the claims' owner, and reaches everyone who reads the claims before the app changes. The contract would then say whether hours may come as 1:30, and DEC-CLM-02 would follow it. | Expected: The claims app's contract says what each field holds, and everyone who reads the claims works from it. Found: The app's change of 2 November 2026 was a good one for tutors, but its contract still said decimal hours, so the claims job learned of the change by failing (DEC-CLM-02). The fix mended the night, not its cause. Asked of Ingrid Holm in Sam's pull request of 3 November 2026. |  |  | proposed |
 | [DEC-LMS-03](../sources/learning_platform/_learning_platform__decisions.yml) | source `learning_platform` | **A microcredential badge carries credit points.** Every microcredential badge (badge_code starting MC-) carries more than 0 credit points. A test stops the build when one doesn't. | A platform update once sent half the new badges with zero credit, and every test passed: not_null on credit_points was satisfied. Monitoring on the platform saw the share of badges with no credit jump from about 1 in 12 (the welcome badges) to 1 in 2, and told the learning team, the owner in the metadata. They fixed it at the platform and sent the badges again. Once confirmed, the surprise became a rule. | Learning team, with data governance | 20 Oct 2026 | agreed |
 | [DEC-PRJ-02](../models/_shared/_shared__decisions.yml) | project | **Every core model is versioned.** Every core model is versioned, from version 1, and consumers pin the version they read. | A breaking change then arrives as a new version beside the old one, with a deprecation date, not as a surprise. | Noor, data architect | 10 Oct 2026 | agreed |
 | [DEC-PRJ-12](../models/_shared/_shared__decisions.yml) | project | **Governance's rules run as a check on every pull request.** Four of data governance's rules run as a check, scripts/check/governance.py, in CI and before every pull request: an owner on every domain, entity and shared model; a glossary term, or governance's confirmation that there's none, for every core entity; every column of a public model or mart classified as direct, pseudonymous or none; every test with an owner and a quality dimension. Data governance owns what the rules ask; the data architect owns the check's code; each owner named in the metadata answers for their own. | A policy that lives only in a document isn't followed. Written into the work, it is checked on every change, at the moment someone can still fix it, and it measures itself. | Yusuf Demir, data governance lead, with Noor, data architect | 20 Oct 2026 | agreed |
@@ -94,15 +104,16 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 How many decisions each log holds at each step. A domain's project, when it has one, takes its logs with it.
 
-| Scope | `scope` | `source_reality` | `consumer_output` | `gaps_and_contracts` | `tests` | `build` | `written_once` | `operate_and_evolve` |
-|---|---|---|---|---|---|---|---|---|
-| project | 1 | 1 |  |  |  | 4 | 4 | 5 |
-| domain `course` |  |  |  |  |  | 1 |  |  |
-| domain `person` | 3 |  |  |  |  |  |  |  |
-| domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
-| consumer `finance` | 1 |  | 1 | 1 |  |  |  |  |
-| consumer `planning` | 1 |  | 1 |  |  |  |  |  |
-| consumer `wallet` |  |  | 1 |  |  |  |  |  |
-| source `learning_platform` |  |  |  | 2 |  |  |  | 1 |
-| source `short_courses` |  |  |  | 2 | 1 |  |  | 1 |
-| source `student_system` |  | 1 |  | 3 |  |  |  | 1 |
+| Scope | `scope` | `source_reality` | `consumer_output` | `gaps_and_contracts` | `tests` | `build` | `review_and_ship` | `written_once` | `operate_and_evolve` |
+|---|---|---|---|---|---|---|---|---|---|
+| project | 1 | 1 |  |  |  | 4 | 1 | 4 | 5 |
+| domain `course` |  |  |  |  |  | 1 |  |  |  |
+| domain `person` | 3 |  |  |  |  |  |  |  |  |
+| domain `student` | 4 | 2 |  | 1 |  | 1 |  |  | 1 |
+| consumer `finance` | 1 |  | 2 | 1 |  |  |  |  |  |
+| consumer `planning` | 1 |  | 1 |  |  |  |  |  |  |
+| consumer `wallet` |  |  | 1 |  |  |  |  |  |  |
+| source `claims_app` |  | 1 |  |  |  |  |  |  | 2 |
+| source `learning_platform` |  |  |  | 2 |  |  |  |  | 1 |
+| source `short_courses` |  |  |  | 2 | 1 |  |  |  | 1 |
+| source `student_system` |  | 1 |  | 3 |  |  |  |  | 1 |

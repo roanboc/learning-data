@@ -50,7 +50,7 @@
         "line": "Ask questions of your data in your own words, with dashboards and apps in one place.",
         "line_es": "Haz preguntas a tus datos con tus palabras, con tableros y aplicaciones en un solo lugar.",
         "href": "https://docs.databricks.com/aws/en/genie-one/",
-        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-one"
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-one/"
       },
       {
         "title": "Genie Agents",
@@ -65,7 +65,7 @@
         "title_es": "Optimiza un Genie Agent eficaz",
         "line": "Start small, let a domain expert define it, and be its first user.",
         "line_es": "Empieza con poco, que lo defina quien conoce el tema, y sé su primer usuario.",
-        "href": "https://docs.databricks.com/aws/en/genie/best-practices",
+        "href": "https://docs.databricks.com/aws/en/genie-agents/best-practices",
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-agents/best-practices"
       },
       {
@@ -73,7 +73,7 @@
         "title_es": "Prueba y supervisión de un agente de Genie",
         "line": "Benchmarks: questions with their SQL answers, run after each change and rated Good or Bad.",
         "line_es": "Pruebas comparativas: preguntas con su respuesta en SQL, que se corren tras cada cambio y se califican Bueno o Malo.",
-        "href": "https://docs.databricks.com/aws/en/genie/benchmarks",
+        "href": "https://docs.databricks.com/aws/en/genie-agents/monitor",
         "href_es": "https://learn.microsoft.com/es-es/azure/databricks/genie-agents/monitor"
       },
       {
@@ -89,8 +89,8 @@
         "title_es": "Actualizaciones y suscripciones programadas del panel",
         "line": "Refresh a dashboard on a schedule, and send it to the people who act on it.",
         "line_es": "Actualiza un tablero con un calendario y envíalo a las personas que actúan con él.",
-        "href": "https://docs.databricks.com/aws/en/dashboards/schedule-subscribe",
-        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/schedule-subscribe"
+        "href": "https://docs.databricks.com/aws/en/dashboards/share/schedule-subscribe",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/share/schedule-subscribe"
       },
       {
         "title": "Genie Agents with dashboards",
@@ -105,8 +105,8 @@
         "title_es": "Vistas de métricas del catálogo de Unity",
         "line": "A measure defined once, then queried from dashboards, Genie Agents and SQL, grouped by any of its fields.",
         "line_es": "Una medida definida una vez, y consultada desde tableros, Genie Agents y SQL, agrupada por cualquiera de sus campos.",
-        "href": "https://docs.databricks.com/aws/en/metric-views/",
-        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/metric-views/"
+        "href": "https://docs.databricks.com/aws/en/uc-semantics/metric-views",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/uc-semantics/metric-views/"
       }
     ]
   }

@@ -158,6 +158,8 @@ Checked on 5 November 2026.
 
 ## Sources, checked 5 November 2026
 
+The page's docs links were checked again on 10 November 2026, before merging: all sixteen open, and five of Databricks' pages had moved (their old addresses redirect), so the links and the list below use the new ones.
+
 - Hansard, *Telephone Time Signal*, House of Commons, 26 April 1937: https://api.parliament.uk/historic-hansard/commons/1937/apr/26/telephone-time-signal
 - Hansard, *Telephone Time Signal*, House of Commons, 3 May 1937: https://api.parliament.uk/historic-hansard/commons/1937/may/03/telephone-time-signal
 - Hansard, *Tim Service*, written answers, 24 and 31 July 1939: https://api.parliament.uk/historic-hansard/written-answers/1939/jul/24/tim-service and https://api.parliament.uk/historic-hansard/written-answers/1939/jul/31/tim-service
@@ -167,12 +169,12 @@ Checked on 5 November 2026.
 - Stephen Few, *Dashboard Confusion* (2004): https://www.perceptualedge.com/articles/ie/dashboard_confusion.pdf
 - Databricks, *Use Genie One* (updated 3 November 2026; some of its account-level parts in Beta, not shown): https://docs.databricks.com/aws/en/genie-one/
 - Databricks, *Genie Agents* (updated 2 November 2026; volumes in Public Preview and connectors in Beta, not shown): https://docs.databricks.com/aws/en/genie-agents/
-- Databricks, *Create and manage a Genie Agent* (updated 9 October 2026): https://docs.databricks.com/aws/en/genie/set-up
-- Databricks, *Curate an effective Genie Agent* (updated 11 September 2026): https://docs.databricks.com/aws/en/genie/best-practices
-- Databricks, *Test and monitor a Genie Agent* (updated 17 September 2026): https://docs.databricks.com/aws/en/genie/benchmarks
-- Databricks, *Unity Catalog metric views* (updated 29 October 2026; relationships between metric views in Beta, not shown): https://docs.databricks.com/aws/en/metric-views/
+- Databricks, *Create and manage a Genie Agent* (updated 9 October 2026): https://docs.databricks.com/aws/en/genie-agents/set-up
+- Databricks, *Curate an effective Genie Agent* (updated 11 September 2026): https://docs.databricks.com/aws/en/genie-agents/best-practices
+- Databricks, *Test and monitor a Genie Agent* (updated 17 September 2026): https://docs.databricks.com/aws/en/genie-agents/monitor
+- Databricks, *Unity Catalog metric views* (updated 29 October 2026; relationships between metric views in Beta, not shown): https://docs.databricks.com/aws/en/uc-semantics/metric-views
 - Databricks, *Dashboards* (updated 11 September 2026; no release status on the page): https://docs.databricks.com/aws/en/dashboards/
-- Databricks, *Manage scheduled dashboard updates and subscriptions*: https://docs.databricks.com/aws/en/dashboards/schedule-subscribe
+- Databricks, *Manage scheduled dashboard updates and subscriptions*: https://docs.databricks.com/aws/en/dashboards/share/schedule-subscribe
 - Databricks, *Genie Agents with dashboards* (updated 16 October 2026; Dashboard Insights in Beta, not shown): https://docs.databricks.com/aws/en/dashboards/genie-spaces
 - The example project, `films/analytics-engineering/project/`: its `examples/reports-on-demand/`, and on the branch of *Defined in the open*, the metric view `casual_teaching_cost` and the fact `mart_finance__casual_claims`
 - The module's brief, openings, palettes and shared numbers (the project's files, `modern-data-basics/`), and this film's assumptions for Rodrigo's review (`modern-data-basics/6-reports-on-demand/assumptions.md`)

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/many-hats/soundtrack.mp3",
+      "size": 7167312,
+      "sha256": "2fcdfb4a1e1c6db528611c7a086be9d01d5e5befde235793cfee08354dd8e397",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-many-hats-f6147862d2ba82e91d8d/2fcdfb4a1e1c6db528611c7a086be9d01d5e5befde235793cfee08354dd8e397.mp3"
+    }
+  ]
+}

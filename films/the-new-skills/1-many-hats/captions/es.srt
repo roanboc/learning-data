@@ -1,0 +1,291 @@
+1
+00:00:03,000 --> 00:00:07,652
+Kaifeng, la capital de China bajo la dinastía Song, en el año 1015.
+
+2
+00:00:09,552 --> 00:00:13,145
+Una noche, se declara un incendio en el palacio del emperador, y se extiende.
+
+3
+00:00:14,645 --> 00:00:20,453
+Al mediodía siguiente, ha quemado dos puertas, un gran salón, un almacén del tesoro y la biblioteca imperial.
+
+4
+00:00:22,153 --> 00:00:29,451
+Ding Wei, un alto ministro que ha dirigido las finanzas del Estado y la construcción de un palacio, queda a cargo de las obras.
+
+5
+00:00:30,951 --> 00:00:34,522
+Reconstruir supone tres trabajos, cada uno lento y costoso.
+
+6
+00:00:36,022 --> 00:00:39,230
+La tierra para construir hay que cavarla lejos, y traerla.
+
+7
+00:00:40,730 --> 00:00:44,156
+La madera, que llega por agua, hay que arrastrarla por las calles.
+
+8
+00:00:45,656 --> 00:00:47,936
+Y los escombros quemados hay que sacarlos en carros.
+
+9
+00:00:49,436 --> 00:00:57,483
+Cada trabajo son carros cruzando una ciudad llena, carga tras carga: lento para el palacio, caro para el Estado y un estorbo para todos.
+
+10
+00:00:59,383 --> 00:01:00,823
+Algo tiene que cambiar.
+
+11
+00:01:02,723 --> 00:01:05,359
+El plan de Ding Wei hace de los tres trabajos uno solo.
+
+12
+00:01:06,859 --> 00:01:11,243
+Manda cavar las calles principales para sacar tierra, y en pocos días son zanjas profundas.
+
+13
+00:01:12,943 --> 00:01:18,664
+Luego rompe la orilla del canal Bian, la vía de agua que abastece la ciudad, y deja entrar el agua.
+
+14
+00:01:20,564 --> 00:01:24,794
+Balsas de madera y barcas con materiales llegan flotando hasta la puerta del palacio.
+
+15
+00:01:26,694 --> 00:01:31,276
+Terminada la obra, los escombros llenan las zanjas, y las calles vuelven a ser calles.
+
+16
+00:01:33,176 --> 00:01:39,419
+Una sola acción, y tres trabajos hechos, escribió Shen Kuo, un erudito que contó la historia unos setenta años después.
+
+17
+00:01:40,919 --> 00:01:46,357
+El ahorro del Estado, en sus palabras, llegó a cientos de millones, y la ciudad recuperó sus calles.
+
+18
+00:01:48,257 --> 00:01:53,800
+Los cavadores, los barqueros y los carreteros conocían bien su trabajo. Ding Wei vio los tres como uno solo.
+
+19
+00:01:55,700 --> 00:02:00,009
+Los datos también tienen sus partes, cada una en manos de quien la conoce a fondo.
+
+20
+00:02:01,509 --> 00:02:06,648
+Quien aprende lo suficiente de cada una para verlas como un todo encuentra lo que queda entre ellas.
+
+21
+00:02:14,948 --> 00:02:19,842
+El trabajo con datos pide hoy nuevas habilidades, y liderar a quienes lo hacen también es una habilidad.
+
+22
+00:02:21,742 --> 00:02:27,599
+Estas películas muestran una práctica a la vez, en un equipo de datos de una universidad, dentro de un año.
+
+23
+00:02:29,499 --> 00:02:36,482
+Lunes 1 de marzo de 2027: Ivy Reyes se une al equipo, como analista de datos recién graduada.
+
+24
+00:02:38,182 --> 00:02:40,824
+Estudió estadística: eso es lo que conoce a fondo.
+
+25
+00:02:42,324 --> 00:02:48,951
+Helena Novak, la gestora de datos, ha tenido ella misma muchos roles: arquitecta, líder de datos, responsable de producto.
+
+26
+00:02:50,651 --> 00:02:56,303
+Le da a Ivy un mes para conocer el trabajo del equipo, y una pregunta real para seguir a través de todo él.
+
+27
+00:02:58,003 --> 00:03:05,278
+Viene de Graham Ellis, el nuevo director de Instalaciones: ¿debe pedir al Consejo Universitario un nuevo edificio de aulas?
+
+28
+00:03:06,978 --> 00:03:12,545
+Su pregunta, acordada con él por escrito: ¿tenemos pocas aulas, o pocas a ciertas horas?
+
+29
+00:03:14,645 --> 00:03:18,930
+En su primera semana, Ivy escribe sus primeros objetivos, y Helena los acuerda con ella.
+
+30
+00:03:20,430 --> 00:03:24,385
+El primero: para Semana Santa, conocer todo el recorrido de una pregunta.
+
+31
+00:03:27,085 --> 00:03:28,865
+Empieza donde nacen los datos.
+
+32
+00:03:30,365 --> 00:03:38,940
+En la oficina de registro, Mei Tanaka lleva el horario: cada clase, reservada en una de 186 aulas, hora por hora.
+
+33
+00:03:40,840 --> 00:03:48,050
+Sam Okafor gestiona la plataforma de datos y el flujo del sensor de cada aula, que cuenta a las personas presentes cada hora.
+
+34
+00:03:49,950 --> 00:03:55,384
+Yusuf Demir, que lidera el gobierno de datos, fijó la regla de ese flujo: conteos, nunca personas.
+
+35
+00:03:57,284 --> 00:04:02,570
+Noor Rahman, la arquitecta de datos, mantiene el mapa de dónde nacen los datos y adónde van.
+
+36
+00:04:04,470 --> 00:04:09,464
+Jun Park construye los modelos que convierten los datos en bruto en tablas confiables.
+
+37
+00:04:10,964 --> 00:04:15,057
+Cada día, Ivy pasa una hora a su lado, cambiando modelos reales.
+
+38
+00:04:16,757 --> 00:04:23,723
+Cómo se mueven los datos y cómo se dibuja el mapa tienen sus propias películas: La vida interior de los datos, y El mapa antes de los datos.
+
+39
+00:04:25,623 --> 00:04:28,528
+Cada uno conoce a fondo una parte, y tiene razón en ella.
+
+40
+00:04:30,228 --> 00:04:35,067
+Ivy aprende lo suficiente de cada parte para seguirla: sus palabras, sus herramientas y lo que les preocupa.
+
+41
+00:04:36,767 --> 00:04:41,250
+Y a cada uno le hace la misma pregunta: ¿quién usa esto, y para qué decisión?
+
+42
+00:04:43,950 --> 00:04:50,096
+En su cuarta semana, dibuja todo el recorrido de la pregunta de Graham en una página, empezando por su decisión.
+
+43
+00:04:51,796 --> 00:04:57,758
+Arriba, la decisión: si pedir el edificio, que el Consejo Universitario evalúa en junio.
+
+44
+00:04:59,458 --> 00:05:03,912
+Debajo, la pregunta que hay detrás: ¿pocas aulas, o pocas a ciertas horas?
+
+45
+00:05:05,612 --> 00:05:10,511
+Luego, los datos que la responden: las reservas de cada aula, junto a las personas contadas en ella.
+
+46
+00:05:12,211 --> 00:05:15,484
+Dónde nacen esos datos: el horario y los sensores.
+
+47
+00:05:16,984 --> 00:05:21,614
+Quién los cuida: Mei, Sam, Jun y Noor. Y la regla: conteos, nunca personas.
+
+48
+00:05:23,314 --> 00:05:26,825
+Donde las reservas se juntan con los conteos, ve lo que ninguna parte sola podía ver.
+
+49
+00:05:28,525 --> 00:05:33,548
+Los dos deben nombrar cada aula igual, y en 172 aulas, lo hacen.
+
+50
+00:05:35,248 --> 00:05:41,193
+En 14, no: esas aulas se renumeraron en el horario después de que les pusieran sus sensores.
+
+51
+00:05:42,893 --> 00:05:52,249
+Unidos tal cual, esas 14 quedarían fuera sin aviso, y la respuesta de Graham cubriría 172 aulas, no 186.
+
+52
+00:05:54,349 --> 00:06:00,765
+Nadie se equivocó: el horario estaba bien, y los sensores también. Nunca se habían puesto lado a lado.
+
+53
+00:06:03,465 --> 00:06:08,335
+Ivy no necesitaba conocer el horario como Mei, ni los sensores como Sam.
+
+54
+00:06:10,035 --> 00:06:16,537
+Necesitaba conocer a fondo lo suyo, la estadística, y lo suficiente del negocio, los sistemas y los datos para unirlos.
+
+55
+00:06:18,437 --> 00:06:23,589
+Esa forma tiene nombre: en forma de T. Un trazo profundo, y una barra ancha arriba.
+
+56
+00:06:25,689 --> 00:06:33,447
+Los marcos describen el trabajo: SFIA reúne mucho más de cien habilidades, y el cuerpo de conocimiento de DAMA nombra los roles de datos.
+
+57
+00:06:35,347 --> 00:06:38,482
+Nadie las domina todas a fondo, y nadie lo necesita.
+
+58
+00:06:40,182 --> 00:06:46,826
+En su libro Range, David Epstein sostiene que los especialistas ganan donde las reglas no cambian, como en el ajedrez.
+
+59
+00:06:48,326 --> 00:06:51,287
+Donde los problemas son enredados, a quien tiene amplitud le va mejor.
+
+60
+00:06:53,187 --> 00:06:59,803
+Como los cavadores y los barqueros, los especialistas siguen siendo esenciales: Mei y Sam emparejaron las 14 aulas en un día.
+
+61
+00:07:01,703 --> 00:07:03,660
+Pero alguien tiene que ver el conjunto.
+
+62
+00:07:06,360 --> 00:07:12,945
+El jueves 25 de marzo, justo antes de Semana Santa, Ivy cumple su primer objetivo: conoce todo el recorrido.
+
+63
+00:07:14,645 --> 00:07:21,083
+Cuando el equipo retoma la pregunta de Graham la semana siguiente, parte de su página, con las 186 aulas.
+
+64
+00:07:22,783 --> 00:07:26,475
+Desde abril, el catálogo dibuja buena parte de ese recorrido por sí solo.
+
+65
+00:07:27,975 --> 00:07:34,077
+Su linaje va de las reservas y los conteos en bruto, por los modelos de Jun, hasta la página que lee Graham.
+
+66
+00:07:35,977 --> 00:07:41,467
+Lo que no puede dibujar es la decisión, ni la pregunta que hay detrás. Eso queda en la página de Ivy.
+
+67
+00:07:44,167 --> 00:07:51,851
+En Kaifeng, Ding Wei no cavaba, ni traía madera, ni acarreaba escombros mejor que quienes lo hacían. Vio los tres trabajos como uno.
+
+68
+00:07:53,751 --> 00:07:59,720
+Ivy hizo lo mismo con los datos: vio las partes como un todo, y mantuvo 14 aulas en la respuesta de Graham.
+
+69
+00:08:01,620 --> 00:08:03,826
+El lunes, sigue profundizando en una cosa.
+
+70
+00:08:05,326 --> 00:08:08,639
+Aprende las palabras de los demás, y pasa tiempo con cada uno.
+
+71
+00:08:10,139 --> 00:08:13,850
+Toma una pregunta real, y dibuja todo su recorrido en una página.
+
+72
+00:08:15,350 --> 00:08:18,988
+Pregunta, en cada parte: ¿quién usa esto, y para qué decisión?
+
+73
+00:08:20,688 --> 00:08:24,184
+Profundiza en una cosa; aprende lo suficiente de las demás para ver el todo.

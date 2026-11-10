@@ -1,0 +1,291 @@
+1
+00:00:03,000 --> 00:00:07,652
+Kaifeng, China's capital under the Song dynasty, in the year 1015.
+
+2
+00:00:09,552 --> 00:00:13,145
+One night, a fire breaks out in the emperor's palace, and spreads.
+
+3
+00:00:14,645 --> 00:00:20,453
+By noon the next day, it has burned two gates, a great hall, a treasury and the imperial library.
+
+4
+00:00:22,153 --> 00:00:29,451
+A senior minister, Ding Wei, who has run the state's finances and the building of a palace, is put in charge of the repairs.
+
+5
+00:00:30,951 --> 00:00:34,522
+Rebuilding means three jobs, each one slow and costly.
+
+6
+00:00:36,022 --> 00:00:39,230
+Earth to build with must be dug far away, and carried in.
+
+7
+00:00:40,730 --> 00:00:44,156
+Timber, arriving by water, must be hauled through the streets.
+
+8
+00:00:45,656 --> 00:00:47,936
+And the burned rubble must be carted away.
+
+9
+00:00:49,436 --> 00:00:57,483
+Each job means carts crossing a crowded city, load after load: slow for the palace, costly for the state, and in everyone's way.
+
+10
+00:00:59,383 --> 00:01:00,823
+Something has to change.
+
+11
+00:01:02,723 --> 00:01:05,359
+Ding Wei's plan makes the three jobs one.
+
+12
+00:01:06,859 --> 00:01:11,243
+He has the main streets dug up for earth, and within days they're deep trenches.
+
+13
+00:01:12,943 --> 00:01:18,664
+Then he breaks the bank of the Bian canal, the waterway that supplies the city, and lets its water in.
+
+14
+00:01:20,564 --> 00:01:24,794
+Rafts of timber and boats of materials float right up to the palace gate.
+
+15
+00:01:26,694 --> 00:01:31,276
+When the work is done, the rubble fills the trenches, and the streets are streets again.
+
+16
+00:01:33,176 --> 00:01:39,419
+One move, and three jobs done, wrote Shen Kuo, a scholar who told the story some seventy years later.
+
+17
+00:01:40,919 --> 00:01:46,357
+The state's saving, in his words, ran to hundreds of millions, and the city got its streets back.
+
+18
+00:01:48,257 --> 00:01:53,800
+The diggers, the boatmen and the carters each knew their job well. Ding Wei saw the three as one.
+
+19
+00:01:55,700 --> 00:02:00,009
+Data work has its parts too, each kept by someone who knows it deeply.
+
+20
+00:02:01,509 --> 00:02:06,648
+Someone who learns enough of each to see them as one picture finds what falls between them.
+
+21
+00:02:14,948 --> 00:02:19,842
+Data work now asks for new skills, and leading the people who do it is a skill too.
+
+22
+00:02:21,742 --> 00:02:27,599
+These films take one practice at a time, in a data team at a university, a year from now.
+
+23
+00:02:29,499 --> 00:02:36,482
+Monday 1 March 2027: Ivy Reyes joins the team, as a graduate data analyst.
+
+24
+00:02:38,182 --> 00:02:40,824
+Her degree is in statistics: that's her depth.
+
+25
+00:02:42,324 --> 00:02:48,951
+Helena Novak, the data manager, has worn many hats herself: architect, data lead, product owner.
+
+26
+00:02:50,651 --> 00:02:56,303
+She gives Ivy a month to learn the team's work, and one real question to follow through all of it.
+
+27
+00:02:58,003 --> 00:03:05,278
+It comes from Graham Ellis, the new Director of Facilities: should he ask the University Council for a new teaching building?
+
+28
+00:03:06,978 --> 00:03:12,545
+His question, agreed with him in writing: do we have too few rooms, or too few at some hours?
+
+29
+00:03:14,645 --> 00:03:18,930
+In her first week, Ivy writes her first goals, and Helena agrees them.
+
+30
+00:03:20,430 --> 00:03:24,385
+The first: by Easter, know the whole route of one question's data.
+
+31
+00:03:27,085 --> 00:03:28,865
+She starts where the data is born.
+
+32
+00:03:30,365 --> 00:03:38,940
+In the registrar's office, Mei Tanaka keeps the timetable: every class, booked into one of 186 rooms, hour by hour.
+
+33
+00:03:40,840 --> 00:03:48,050
+Sam Okafor runs the data platform, and the feed from each room's sensor, which counts the people in it every hour.
+
+34
+00:03:49,950 --> 00:03:55,384
+Yusuf Demir, who leads data governance, set the rule for that feed: counts, never people.
+
+35
+00:03:57,284 --> 00:04:02,570
+Noor Rahman, the data architect, keeps the map of where data is born and where it goes.
+
+36
+00:04:04,470 --> 00:04:09,464
+Jun Park builds the models that turn raw data into tables people can trust.
+
+37
+00:04:10,964 --> 00:04:15,057
+Every day, Ivy spends an hour beside him, changing real ones.
+
+38
+00:04:16,757 --> 00:04:23,723
+How data moves, and how the map is drawn, have films of their own: The Inner Life of Data, and The map before the data.
+
+39
+00:04:25,623 --> 00:04:28,528
+Each of them is deep in one part, and right about it.
+
+40
+00:04:30,228 --> 00:04:35,067
+Ivy learns enough of each to follow: their words, their tools, and what worries them.
+
+41
+00:04:36,767 --> 00:04:41,250
+And she asks each the same question: who uses this, and for which decision?
+
+42
+00:04:43,950 --> 00:04:50,096
+In her fourth week, she draws the whole route of Graham's question on one page, starting from his decision.
+
+43
+00:04:51,796 --> 00:04:57,758
+At the top, the decision: whether to ask for the building, which the University Council weighs in June.
+
+44
+00:04:59,458 --> 00:05:03,912
+Under it, the question behind it: too few rooms, or too few at some hours?
+
+45
+00:05:05,612 --> 00:05:10,511
+Then the data that answers it: each room's bookings, beside the people counted in it.
+
+46
+00:05:12,211 --> 00:05:15,484
+Where that data is born: the timetable, and the sensors.
+
+47
+00:05:16,984 --> 00:05:21,614
+Who keeps it: Mei, Sam, Jun and Noor. And the rule: counts, never people.
+
+48
+00:05:23,314 --> 00:05:26,825
+Where the bookings meet the counts, she sees what no one part could.
+
+49
+00:05:28,525 --> 00:05:33,548
+The two must name each room the same way, and for 172 rooms, they do.
+
+50
+00:05:35,248 --> 00:05:41,193
+For 14, they don't: those rooms were renumbered in the timetable after their sensors went in.
+
+51
+00:05:42,893 --> 00:05:52,249
+Joined as they were, those 14 would drop out without a word, and Graham's answer would cover 172 rooms, not 186.
+
+52
+00:05:54,349 --> 00:06:00,765
+Nobody was wrong: the timetable was right, and so were the sensors. They had never been put side by side.
+
+53
+00:06:03,465 --> 00:06:08,335
+Ivy didn't need to know the timetable as Mei does, or the sensors as Sam does.
+
+54
+00:06:10,035 --> 00:06:16,537
+She needed depth of her own, in statistics, and enough of the business, the systems and the data to join them.
+
+55
+00:06:18,437 --> 00:06:23,589
+That shape has a name: T-shaped. One deep stroke, and a wide bar across the top.
+
+56
+00:06:25,689 --> 00:06:33,447
+Frameworks map the work: SFIA lists well over a hundred skills, and DAMA's body of knowledge names the roles of data work.
+
+57
+00:06:35,347 --> 00:06:38,482
+Nobody holds them all deeply, and nobody needs to.
+
+58
+00:06:40,182 --> 00:06:46,826
+In his book Range, David Epstein argues that specialists win where the rules stay fixed, as in chess.
+
+59
+00:06:48,326 --> 00:06:51,287
+Where problems are messy, people with range do better.
+
+60
+00:06:53,187 --> 00:06:59,803
+Like the diggers and the boatmen, the specialists stay essential: Mei and Sam matched the 14 rooms in a day.
+
+61
+00:07:01,703 --> 00:07:03,660
+But someone has to see across them.
+
+62
+00:07:06,360 --> 00:07:12,945
+On Thursday 25 March, just before Easter, Ivy's first goal is met: she knows the whole route.
+
+63
+00:07:14,645 --> 00:07:21,083
+When the team takes up Graham's question the next week, it starts from her page, with all 186 rooms.
+
+64
+00:07:22,783 --> 00:07:26,475
+From April, the catalog draws much of that route by itself.
+
+65
+00:07:27,975 --> 00:07:34,077
+Its lineage runs from the raw bookings and counts, through Jun's models, to the page Graham reads.
+
+66
+00:07:35,977 --> 00:07:41,467
+What it can't draw is the decision, and the question behind it. Those stay on Ivy's page.
+
+67
+00:07:44,167 --> 00:07:51,851
+In Kaifeng, Ding Wei didn't dig, float timber or cart rubble better than the people who did. He saw the three jobs as one.
+
+68
+00:07:53,751 --> 00:07:59,720
+Ivy did the same with data: she saw the parts as one, and kept 14 rooms in Graham's answer.
+
+69
+00:08:01,620 --> 00:08:03,826
+On Monday, keep your depth in one thing.
+
+70
+00:08:05,326 --> 00:08:08,639
+Learn the words of the others, and spend time with each of them.
+
+71
+00:08:10,139 --> 00:08:13,850
+Take one real question, and draw its whole route on one page.
+
+72
+00:08:15,350 --> 00:08:18,988
+Ask, of every part: who uses this, and for which decision?
+
+73
+00:08:20,688 --> 00:08:24,184
+Go deep in one thing; learn enough of the others to see the whole.

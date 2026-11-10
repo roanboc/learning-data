@@ -1,6 +1,6 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Two wordless moments: the coast at dawn in 2007 and then the title; and the list's age on the printer's page, then the end card. */
+   Two wordless moments: the title card after the opening, and the end card after the film's line. */
 const BREATH={
 "story":{"hold":{"islands":0.4,"radio":0.4,"stay":0.6,"toll":1.4,"after":1.0,"flags":0.6,"shelter":0.4,"died":1.2,"passed":0.8},"breathe":4.4},
 "green":{"hold":{"night":0.4,"build":0.6,"wed":0.6,"anyway":0.4,"green":0.8,"boards":0.4,"missing":1.0,"looks":0.8}},

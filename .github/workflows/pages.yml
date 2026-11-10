@@ -1,4 +1,5 @@
-# Publishes the exact main commit that passed Checks, or an explicitly requested deployment.
+# Publishes the exact main commit that passed Checks, or an explicitly requested deployment. Main's Checks runs finish in
+# any order, so a commit older than the one already live is skipped.
 # One-time setting: Settings → Pages → Build and deployment → Source: GitHub Actions.
 name: Publish site
 
@@ -13,6 +14,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  deployments: read
 
 jobs:
   deploy:
@@ -31,24 +33,50 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
+      - name: Skip a commit older than the one already live
+        id: newer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          live=""
+          for id in $(gh api "repos/$GITHUB_REPOSITORY/deployments?environment=github-pages&per_page=20" --jq '.[].id'); do
+            state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses?per_page=1" --jq '.[0].state // ""')
+            if [ "$state" = success ]; then
+              live=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id" --jq .sha); break
+            fi
+          done
+          status=ahead
+          if [ -n "$live" ]; then
+            status=$(gh api "repos/$GITHUB_REPOSITORY/compare/$live...$HEAD_SHA" --jq .status || echo ahead)
+          fi
+          echo "Live: ${live:-none}; $HEAD_SHA is $status"
+          if [ "$status" = behind ] || [ "$status" = identical ]; then echo go=false; else echo go=true; fi >> "$GITHUB_OUTPUT"
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-      - uses: actions/setup-python@v7
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Restore and verify the published audio
+        if: steps.newer.outputs.go == 'true'
         run: python site-tools/media.py fetch
       - name: Validate the assembled site
+        if: steps.newer.outputs.go == 'true'
         run: |
           pip install markdown
           python site-tools/check_site.py
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/configure-pages@v6
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
       # The site is about 500 MB; GitHub's syncing has taken over the default 10 minutes (01:15 and 03:12 UTC, 10 Nov).
       - id: deployment
+        if: steps.newer.outputs.go == 'true'
         uses: actions/deploy-pages@v5
         with:
           timeout: 1800000

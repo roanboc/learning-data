@@ -3,7 +3,7 @@
   "kicker_es": "Formas para leer",
   "title_es": "Muchas formas de leer",
   "h1": "Many ways to read: a normalised core, a data vault, stars and wide tables",
-  "h1_es": "Muchas formas de leer: un núcleo normalizado, un data vault, estrellas y tablas anchas",
+  "h1_es": "Muchas formas de leer: un núcleo normalizado, un data vault y estrellas",
   "lead": "Four engineers argue for four shapes, while credentials from a new source wait to be added. The film follows them through each job, integrating, presenting and serving, and puts each shape in its place on the platform.",
   "lead_es": "Cuatro ingenieros defienden cuatro formas, mientras esperan credenciales de una fuente nueva. La película las sigue por cada trabajo, integrar, presentar y servir, y pone cada forma en su lugar en la plataforma.",
   "description": "A film about the shapes for reading data: a normalised core or a data vault to integrate sources, conformed stars to present them, wide tables to serve one entity, and where each lives on a lakehouse.",

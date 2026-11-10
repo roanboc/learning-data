@@ -11,6 +11,7 @@ Serving data to people, agents and systems. Rohan Desai, in Finance, asks what c
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Reports on demand](https://data.learn-all.org/from-tables-to-decisions/reports-on-demand/) | Answers on demand | 6½ min | 5 | 3 questions | [script](1-reports-on-demand/script.md) · [source](1-reports-on-demand/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

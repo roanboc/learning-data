@@ -1,0 +1,53 @@
+{
+  "key": "late-is-wrong-too",
+  "title": "Late is wrong too",
+  "sub": "The last film of Fit for use, the first series of Data quality: timeliness, the dimension the scorecard left out. Late data looks complete, so agree with the people who use it how fresh each use needs it, say how old it is wherever it's shown, and check its age at the source: warn first, then hold the send, never the data. It opens on Bangladesh's cyclone warnings, from 1970 to 2007.",
+  "howto": "The film is drawn in the module's look, the quality bench: a wall of warm limestone over a granite bench, lit from a window on the right. Records are cream index cards, and results are tags tied on with string: green passes, amber holds for a person, red stops, grey wasn't checked. Brass is what good means for this use, steel blue a measure taken. The scenes of the Bangladesh coast, in 1970 and 2007, are painted full-frame, with the place and year on a card.",
+  "src": [
+    "lw_coast.js",
+    "lw_bench.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "age",
+    "flags",
+    3.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMalia\\b",
+      "Mah-lee-ah"
+    ],
+    [
+      "\\bFonoti\\b",
+      "Fo-no-tee"
+    ],
+    [
+      "\\bAndr(é|e)s\\b",
+      "Ahn-dress"
+    ],
+    [
+      "\\bPe(ñ|n)aloza\\b",
+      "Pen-yah-lo-sah"
+    ]
+  ],
+  "story": [
+    "story"
+  ],
+  "urgent": [
+    "hours"
+  ],
+  "logos": true
+}

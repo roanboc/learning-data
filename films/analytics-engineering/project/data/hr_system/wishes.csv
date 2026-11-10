@@ -1,0 +1,4 @@
+staff_id,purpose,answer,given_on,given_how,_valid_from,_valid_to,_is_current,_loaded_at
+E-4417,News of tutoring work,yes,2023-01-16,tutor application form,2024-11-01 02:00:00,2026-11-26 02:00:00,false,2026-11-26 02:00:00
+E-4417,News of tutoring work,no,2026-11-24,privacy office form,2026-11-26 02:00:00,,true,2026-11-26 02:00:00
+E-4602,News of tutoring work,yes,2025-07-07,tutor application form,2025-07-11 02:00:00,,true,2026-11-26 02:00:00

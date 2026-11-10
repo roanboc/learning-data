@@ -20,6 +20,8 @@ erDiagram
         date ceremony_on
         boolean is_attending
         date added_on
+        timestamp student_system_as_of
+        timestamp portal_as_of
     }
 ```
 

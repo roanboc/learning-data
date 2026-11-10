@@ -71,3 +71,27 @@ models:
         description: '{{ doc("is_current_version") }}'
       - name: loaded_at
         description: '{{ doc("loaded_at") }}'
+
+  - name: stg_portal__nightly_files
+    description: >
+      One row per file the student portal's nightly feed sent, and when it arrived on the
+      platform. In the group graduations, so the graduation list can say its age.
+    config:
+      group: graduations
+      meta: {owner: "Mei Tanaka, registrar's office", domain: registrar}
+    columns:
+      - name: file_name
+        description: The file's name, with the day of the answers it brings.
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+      - name: received_at
+        description: When the file arrived on the platform. The night's files are due at 02:00.
+        data_tests:
+          - not_null:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}

@@ -1,16 +1,16 @@
 # Less, on purpose: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 1 · open, PR #259 · [pull request](https://github.com/roanboc/learning-data/pull/259)
+*Leading data people* · *Leading a data team*, film 1 of 4 · merged, PR #259 · [pull request](https://github.com/roanboc/learning-data/pull/259)
 
-On the site once PR #259 merges: https://data.learn-all.org/leading-a-data-team/less-on-purpose/
+[Watch it on the site](https://data.learn-all.org/leading-a-data-team/less-on-purpose/)
 
-> Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
+> Copied from the film thread's notes on 10 November 2026. Paths such as `openings.md` and `numbers.md` point to the module's working folder, not to this repository.
 
-Film 1 of *Leading a data team*, film 7 of the module *Leading data people*. Made on 10 November 2026 while Rodrigo was away, on his instruction to work on assumptions and merge with a draft label. Each line: the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in `../assumptions.md` (its row 6, on where minimalism comes from, holds for this film).
+Film 1 of 4 of *Leading a data team*, film 7 of the module *Leading data people*. Made on 10 November 2026 while Rodrigo was away, on his instruction to work on assumptions and merge with a draft label. Each line: the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in its `0-module.md` (its row 6, on where minimalism comes from, holds for this film).
 
 | # | Question | Assumption | Where it shows |
 |---|---|---|---|
-| 1 | When does this film merge? | After *Many hats, one picture* (merged as #238), as the first film of *Leading a data team*: it brings the series onto the site with its release note. The series' other three films merge after it, in order. | The pull request; `films/leading-a-data-team/release-note.md` |
+| 1 | When does this film merge? | After *Many hats, one picture* (merged as #238), as the opening film of *Leading a data team*: it brings the series onto the site with its release note. The series' other three films merge after it, in order. | The pull request; `films/leading-a-data-team/release-note.md` |
 | 2 | Is the opening story right, as the sources tell it? | Checked line by line against Martha Lane Fox's letter of 14 October 2010, the *Government design principles* (first published 3 April 2012) and the Government Digital Service's and the Cabinet Office's own posts of 2012 and 2013, each quoted in the script's *Rigour*. | Chapter 1, and the script's *Rigour* |
 | 3 | `openings.md` says "tens of thousands of pages became a few thousand". Can the film say it? | No: no count of the old sites' pages was found in an official source. The film says "far fewer pages: about 3,800 pieces of content" (GDS, June 2013) and gives no number for before. | Chapter 1, "launch" line |
 | 4 | How to tell the harm, when the letter speaks of duplication and an inconsistent experience? | In a person's words, with no number: to renew a passport or pay a tax, people first work out which part of government does it and which site to trust; the same advice sits on several sites in different words; they lose time and can't be sure which page is right. `openings.md`'s "fees, missed dates and hours on the phone" isn't said, as no source gives them. The cost is the letter's own: around 560 million pounds a year. | Chapter 1, "need", "same" and "cost" lines |

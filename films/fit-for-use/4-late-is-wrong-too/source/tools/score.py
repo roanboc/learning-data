@@ -305,7 +305,8 @@ tap(H('december', 'posted', 0.0), 0.008, px(760))
 # 4. How fresh, for what: Monday, Sam, Malia and Mei: a large E-flat, and a bell as Mei comes in. The platform sees a table is late;
 #    its users say when late is too late. The three uses, a card each; three clocks, a bell for each dial as it sweeps (the
 #    certificates' B-flat, the seating's F, Planning's D); the strictest sets the level: the certificates' bell again, over the large
-#    B-flat. The contract's rule, agreed and owned. Timeliness, in pencil, inked by its first rule: E-flat, warm
+#    B-flat. A nightly file meets it; Hot, warm, cold, a card. The contract's rule, agreed and owned. Timeliness, in pencil, inked by
+#    its first rule: E-flat, warm
 R = lambda lid, word, off=0: W('fresh', lid, word, off)
 r0 = S0('fresh')
 big(Eb3, G('fresh', 'monday', -0.2), 0.6)
@@ -321,6 +322,7 @@ for i, m in enumerate((Bb4, F4, D4)):
 tSt = R('clocks', 'The strictest', 0.0)
 big(Bb2, tSt, 0.6); ice(Bb4, tSt + 0.35, 0.5, px(400), ring=0.7)
 knock(R('clocks', 'a day old', 0.0), 0.012, px(960))
+knock(R('moves', 'Hot', -0.1), 0.011, px(1600))
 paper(G('fresh', 'contract', 0.1), 0.011, px(960), 0.45)
 tap(R('contract', 'Malia agrees', 0.0), 0.008, px(500)); tap(R('contract', 'Mei owns', 0.0), 0.008, px(860))
 paper(G('fresh', 'pencil', 0.0), 0.010, px(960), 0.4)
@@ -328,7 +330,7 @@ tFr = R('pencil', 'This is its first rule', 0.0)
 big(Eb3, tFr, 0.55); ice(G4, tFr + 0.45, 0.45, 0.0); ice(Eb4, tFr + 1.0, 0.4, 0.2, ring=0.6)
 
 # 5. Say how old it is: from now on the list says how old it is: B-flat, as the chapter turns. Every row carries its sources' age.
-#    That Thursday: the student system's, thirty hours, its bell dull; the portal's, six hours, its own bell clear. Shown wherever the
+#    That Thursday, over a large B-flat: the student system's, thirty hours, its bell dull; the portal's, six hours, its own bell clear. Shown wherever the
 #    list is, first in the printer's file. Like the flags: the three bells, quicker now. On good nights too. Data that says its age:
 #    F; data that doesn't, can't: a large low G, alone
 A = lambda lid, word, off=0: W('age', lid, word, off)
@@ -336,7 +338,7 @@ a0 = S0('age')
 knock(G('age', 'says', 0.0), 0.012, px(700)); big(Bb2, G('age', 'says', -0.2), 0.6); ice(F4, G('age', 'says', 0.35), 0.45, 0.0)
 tap(G('age', 'row', 0.0), 0.008, px(700)); tap(A('row', 'age', 0.0), 0.008, px(1100)); tap(G('age', 'row', 0.8), 0.008, px(1150))
 tSs = A('own', 'student system', 0.0); tPo = A('own', 'portal', 0.0)
-tap(tSs, 0.008, px(1000)); dull(tSs + 0.05, 0.75, px(1000))
+big(Bb2, tSs - 0.1, 0.45); tap(tSs, 0.008, px(1000)); dull(tSs + 0.05, 0.75, px(1000))
 tap(tPo, 0.008, px(1410)); clear(tPo + 0.05, 0.75, px(1410), m=PORTAL)
 paper(G('age', 'shown', 0.0), 0.011, px(800), 0.45)
 knock(G('age', 'flags', 0.0), 0.011, px(1670))

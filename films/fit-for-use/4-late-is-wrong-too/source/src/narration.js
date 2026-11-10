@@ -54,6 +54,7 @@ const NARR={
  {"id":"seats","gap":0.8,"text":"Seating the Great Hall can: it's counted a week before, from a list a few days old."},
  {"id":"planning","gap":0.8,"text":"Planning's count for the government comes after the year's end: weeks are fine."},
  {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, at the send."},
+ {"id":"moves","gap":0.8,"text":"A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves."},
  {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes in the list's contract."},
  {"id":"pencil","gap":1.0,"text":"Rules that run left timeliness in pencil, with no checks. This is its first rule."}
 ]},

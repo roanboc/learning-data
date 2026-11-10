@@ -206,7 +206,9 @@ function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.plannin
   LW_USES.forEach(([k,ti,sub,ic,d],i)=>{const q=lw_pop(tt,ts[i]+0.2,U0),dim=i?1-0.55*st:1;
     x.save();x.globalAlpha*=dim;dq_textCard(x,150+i*560,150,500,{kick:k,title:ti,sub},{icon:ic,edge:"brass",on:"granite",k:q.k,a:q.a});
     const dq=lw_pop(tt,P.three+i*0.3,U0);dq_dial(x,400+i*560,520,140,Object.assign({u:ag_in(tt,P.three+i*0.3+0.3,0.9),readCol:"brass",on:"granite",k:dq.k,a:dq.a},d));x.restore();});
-  const q=lw_pop(tt,P.level,U0);dq_textCard(x,560,760,800,{title:"The level: a day old at most, at the send"},{edge:"brass",on:"granite",k:q.k,a:q.a});}
+  let q=lw_pop(tt,P.level,U0);dq_textCard(x,560,704,800,{title:"The level: a day old at most, at the send"},{edge:"brass",on:"granite",k:q.k,a:q.a});
+  // a nightly file meets it; for fresher data, Hot, warm, cold
+  q=lw_pop(tt,P.hwc-0.1,U0);dq_textCard(x,1384,704,440,{kick:"See",title:"Hot, warm, cold"},{on:"granite",k:q.k,a:q.a});}
 function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,R0);
   lw_yml(x,340,130,1240,{logo:null,product:"Data contract",title:"the graduation list",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[9,10]:[],k:q.k,a:q.a});
   const c1=dq_chip(x,340,790,"agreed: Malia Fonoti",{icon:"people",col:"brass",on:"granite",a:ag_io(tt,P.agrees,R0,0.4)});
@@ -214,7 +216,7 @@ function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,
   q=lw_pop(tt,c.pencil,null);lw_dims(x,340,260,{first:ag_in(tt,P.first,0.8),on:"granite",k:q.k,a:q.a});}
 scene("fresh",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),maliaW:wAt(sc,"monday","Malia"),samW:wAt(sc,"monday","Sam"),mei:wAt(sc,"monday","Mei Tanaka"),
     platform:wAt(sc,"knows","The platform"),users:wAt(sc,"knows","its users"),three:wAt(sc,"clocks","three clocks"),strictest:wAt(sc,"clocks","The strictest"),
-    level:wAt(sc,"clocks","a day old"),agrees:wAt(sc,"contract","Malia agrees"),owns:wAt(sc,"contract","Mei owns"),first:wAt(sc,"pencil","This is its first rule")}));
+    level:wAt(sc,"clocks","a day old"),hwc:wAt(sc,"moves","Hot"),agrees:wAt(sc,"contract","Malia agrees"),owns:wAt(sc,"contract","Mei owns"),first:wAt(sc,"pencil","This is its first rule")}));
   const T0=c.certs-0.5;
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",later:true,dis:0.6,keys:[[0,960,540,1]],draw:(x,tt)=>lw_meet(x,tt,c,P)},
     {at:T0,place:"benchTop",keys:[[0,960,540,1]],draw:(x,tt)=>{lw_uses(x,tt,c,P);lw_rule(x,tt,c,P);}}]);

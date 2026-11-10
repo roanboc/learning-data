@@ -5,7 +5,7 @@ const BREATH={
 "story":{"hold":{"islands":0.4,"radio":0.4,"stay":0.6,"toll":1.4,"after":1.0,"flags":0.6,"shelter":0.4,"died":1.2,"passed":0.8},"breathe":4.4},
 "green":{"hold":{"night":0.4,"build":0.6,"wed":0.6,"anyway":0.4,"green":0.8,"boards":0.4,"missing":1.0,"looks":0.8}},
 "hours":{"hold":{"eight":0.4,"thirty":0.6,"signal":0.8,"calls":0.4,"goes":0.8}},
-"fresh":{"hold":{"monday":0.8,"knows":1.2,"certs":1.0,"seats":1.0,"planning":1.0,"clocks":1.6,"contract":1.0}},
+"fresh":{"hold":{"monday":0.8,"knows":1.2,"certs":1.0,"seats":1.0,"planning":1.0,"clocks":1.0,"moves":1.0,"contract":1.0}},
 "age":{"hold":{"says":0.6,"row":0.6,"own":1.0,"shown":0.6,"flags":0.8,"labelled":0.8,"trust":0.6}},
 "stop":{"hold":{"source":0.8,"arrived":1.0,"level":0.8,"first":0.6,"tells":0.8,"warn":1.2,"send":0.8,"waits":1.0}},
 "time":{"hold":{"storm":0.6,"list":0.6,"since":0.8,"take":1.2},"breathe":5.0}

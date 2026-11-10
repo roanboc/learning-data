@@ -1,0 +1,50 @@
+[
+  {
+    "name": "One copy, one platform",
+    "key": "one-copy-one-platform-en",
+    "dir": "films/data-that-moves/3-one-copy-one-platform/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/one-copy-one-platform/film.js",
+    "video": "dist/one-copy-one-platform.mp4",
+    "file": "one-copy-one-platform.mp4",
+    "captions": [
+      [
+        "films/data-that-moves/3-one-copy-one-platform/captions/en.srt",
+        "one-copy-one-platform.en.srt"
+      ],
+      [
+        "films/data-that-moves/3-one-copy-one-platform/captions/es.srt",
+        "one-copy-one-platform.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-that-moves/3-one-copy-one-platform/source",
+      ":(exclude)films/data-that-moves/3-one-copy-one-platform/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 223,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

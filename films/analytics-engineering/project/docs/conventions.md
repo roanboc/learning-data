@@ -26,7 +26,7 @@ three kinds, and the project's folders follow them:
 
 | Kind | What it is | Here | Folders |
 |---|---|---|---|
-| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
+| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system and the claims app), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
 | Data domain | What the facts mean, following the reference model | `person`, `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
 | Business domain | Who decides with the data | `planning`, `wallet`, `finance` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
 
@@ -209,7 +209,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform), `HR` (HR system), `RES` (research system), `ALU` (alumni system). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them, in the order the project first read each (`since`).
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform), `HR` (HR system), `RES` (research system), `ALU` (alumni system), `CLM` (claims app). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them, in the order the project first read each (`since`).
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/shared/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.

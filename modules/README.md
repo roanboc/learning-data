@@ -71,6 +71,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
 - [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
+- [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 
 ### Data as software
 
@@ -273,6 +274,7 @@ No film source yet.
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
 
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
+- [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 
 ## AI agents in data work
 

@@ -87,12 +87,14 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -172,7 +174,8 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
-No film source yet.
+- [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
+- [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
 
 ## Enterprise architecture
 
@@ -270,6 +273,9 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
+- [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
+- [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 
 ### Only what you may see
 
@@ -344,12 +350,15 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
+- [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
-No film source yet.
+- [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
+- [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 
 ### Leading a data team
 
@@ -361,7 +370,8 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 
 ## Data management
 
@@ -371,7 +381,9 @@ Module: `data-management` · [metadata](data-management/module.json)
 
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
-No film source yet.
+- [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
+- [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 
 ### Making the case
 
@@ -383,7 +395,7 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
-No film source yet.
+- [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 
 ### Small steps, measured
 

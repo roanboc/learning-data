@@ -110,10 +110,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y Mei es dueña de cada nivel, porque responde por la lista.",
 "How a check warns or stops, and whom it tells, is set in advance too: Rules that run and Too good to be true show how.":
 "También se fija antes cómo avisa o detiene un control, y a quién: lo muestran Reglas que se ejecutan y Demasiado bueno para ser verdad.",
-"Jun wrote it all down beside the data, in the list's data contract.":
-"Jun lo escribió todo junto a los datos, en el contrato de datos de la lista.",
-"Each use is a quality rule, in the open standard's own words: its dimension, its level, who agreed it, and what a failure costs.":
-"Cada uso es una regla de calidad, en palabras del estándar abierto: su dimensión, su nivel, quién la acordó y qué cuesta un fallo.",
+"Jun wrote it all down beside the data, in the file that describes the list.":
+"Jun lo escribió todo junto a los datos, en el archivo que describe la lista.",
+"Each use is a quality rule, written in words: its dimension, its level, who agreed it, and what a failure costs.":
+"Cada uso es una regla de calidad, escrita en palabras: su dimensión, su nivel, quién la acordó y qué cuesta un fallo.",
 "The columns each use can't do without are marked as critical data.":
 "Las columnas imprescindibles para cada uso se marcan como datos críticos.",
 "In dbt, every check on the list names its dimension and its owner.":

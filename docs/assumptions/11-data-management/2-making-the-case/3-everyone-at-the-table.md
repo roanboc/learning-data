@@ -1,8 +1,8 @@
 # Everyone at the table: questions and assumptions
 
-*Data management* · *Making the case*, film 3 of 4 · open, PR #279 · [pull request](https://github.com/roanboc/learning-data/pull/279)
+*Data management* · *Making the case*, film 3 of 4 · merged, PR #279 · [pull request](https://github.com/roanboc/learning-data/pull/279)
 
-On the site once PR #279 merges: https://data.learn-all.org/making-the-case/everyone-at-the-table/
+[Watch it on the site](https://data.learn-all.org/making-the-case/everyone-at-the-table/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -24,7 +24,7 @@ Film 3 of 4 of *Making the case* (film 7 of *Data management*), made on 10 Novem
 | 12 | What does payroll's year mean, in plain words? | The financial year ends on 30 June and payroll's last returns go out by mid-July (`../numbers.md`): "July is the month payroll can least afford a surprise". No tax office or law is named. | Chapter 5 |
 | 13 | An example of "not hearing yes"? | Clara's forecast, which will wait its turn on the one list in July with a reason and a date (*One list, not twenty*'s assumptions: asked on 12 July). The conversation itself is the leading data people module's. | Chapter 6 |
 | 14 | How do the quiet ones see they were heard? | The July page tells everyone that an old extract with personal fields nobody needed was left behind: *Risks, said out loud*'s early sign for R3, in the move's first weeks. | Chapter 6 |
-| 15 | Name *Explaining so people can decide* and *Saying no, and what instead*? | Not on main today, so the narration says "the leading data people module". The page can name them once they're on main. | Chapter 6 |
+| 15 | Name *Explaining so people can decide* and *Saying no, and what instead*? | Neither was on main when the film was made, so the narration says "the leading data people module". *Explaining so people can decide* reached main before this film (#263); *Saying no, and what instead* hasn't yet (#256). The page can name both once they're on main. | Chapter 6 |
 | 16 | Name *Teachers of data*? | Yes, in one line ("Getting people to take part comes first in governance too, as Teachers of data showed"): it's on main, in *Governance principles*. | Chapter 3 |
 | 17 | The reference, and its year | A power and interest grid, "after Aubrey Mendelow's work", named once, with no year, in the voice and on the grid's card. Textbooks cite "Mendelow (1991), *Stakeholder mapping*, Proceedings of the 2nd International Conference on Information Systems, Cambridge, Massachusetts", but the second ICIS was held in 1981, and the paper the AIS library holds is Mendelow's "Environmental Scanning: The Impact of the Stakeholder Concept", ICIS 1981; the year looks misprinted, so the film doesn't say one. "Power" is glossed as how much someone can shape the plan, "interest" as how much it touches them; the grid's four usual treatments are left out, and "low on the grid isn't off the list". Mendelow's paper isn't free to read, so the page links free guides instead (Wikipedia's *Stakeholder analysis*, the Association for Project Management's *Stakeholder engagement*). | Chapter 2 and the page |
 | 18 | The score | Whistling (reserved 10 November in `../palettes.md`): five whistlers round the table, each placing one note of a tune passed round, and a lower, darker partner who holds the last note and whistles alone under the opening's problem. E major, C-sharp minor for the opening's problem, a constraint and bad news, tuned pure from E. The mark: B, E, G-sharp and B passed round, one whistler each, then whistled by everyone together over the partner's E, four times. `quiet.py`: music 17% of the time after the opening, once every 18.2 s. | `source/tools/score.py` |

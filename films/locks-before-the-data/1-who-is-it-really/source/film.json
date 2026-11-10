@@ -1,0 +1,37 @@
+{
+  "key": "who-is-it-really",
+  "title": "Who is it, really?",
+  "sub": "Film 1 of 9 of Locks before the data: zero trust, where every request says who it is and gets the least it needs. In the Warring States, an order to raise troops counted only when the two halves of a bronze tiger matched. At the university, a nightly job signs in as Jun Park, from a workspace open to the internet; people, jobs and agents each get a name of their own, rights come from a role, never a person, and the job becomes registrar-loader.",
+  "howto": "The film is drawn in the module's night glass. Its colours mean the same in every film: cyan is an identity (a badge, a name, the light that reads it), green allowed, coral denied or closed, gold only the chip that says a card is genuine, and violet a secret, always shown sealed.",
+  "src": [
+    "wi_past.js",
+    "wi_hall.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "match",
+    "needn",
+    3.3
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"],
+    ["\\bOkafor\\b", "Oh-kah-for"],
+    ["\\bMei\\b", "May"],
+    ["\\bQin\\b", "Chin"],
+    ["\\bZhao\\b", "Jow"],
+    ["\\bHandan\\b", "Hahn-dahn"],
+    ["\\bWei\\b", "Way"],
+    ["\\bXinling\\b", "Shin-ling"],
+    ["\\bJin Bi\\b", "Jin Bee"],
+    ["\\bXi'an\\b", "Shee-ahn"],
+    ["\\bNIST's\\b", "Nist's"],
+    ["\\bregistrar-loader\\b", "registrar loader"]
+  ],
+  "story": [
+    "halves",
+    "match"
+  ],
+  "urgent": []
+}

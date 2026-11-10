@@ -14,6 +14,7 @@ The team fixed the data first, then the words:
 | Noor finds where the paper form is recorded, in the student system | The student system's applications to graduate, each on the paper form or in the portal: `data/student_system/graduation_applications.csv`, its source in `sources/student_system/` and `models/staging/student_system/stg_student_system__graduation_applications.sql` |
 | Jun adds a column that says how each name was confirmed | `name_confirmed_how` on the graduation list (`models/marts/graduations/`): portal, paper, or empty for not yet |
 | He writes the description in Mei's words, for a reader who can't ask | `name_confirmed_on` and `name_confirmed_how` in `_graduations__models.yml`: what each means, what empty means, and who answers for it. dbt writes them into Unity Catalog on every run (`persist_docs` in `dbt_project.yml`), where the agent reads them |
+| Jun's check from *Report, fix, tell*, pointed at the new column | `tests/rules/old_form_names_not_yet_confirmed.sql` reads `name_confirmed_how`, so a name confirmed on the paper form counts as confirmed. On the example data it holds João Ribeiro's name alone, as before: the two who confirmed on paper have records made after 2019 |
 | Genie Code proposes three checks, Jun reviews them and Mei sets the levels | [`genie_code_review.md`](genie_code_review.md), and where each one went |
 | A name that isn't the one its graduate gave stops the printer's file | `tests/rules/printers_file_has_the_names_graduates_gave.sql` (error), on the printer's file, `mart_graduations__certificates_file` |
 | The two confirmation columns agree, or it holds for Jun | `tests/rules/name_confirmation_columns_agree.sql` (warn) |
@@ -21,7 +22,7 @@ The team fixed the data first, then the words:
 | The graduations team's agent | [`graduations_agent.md`](graduations_agent.md), Databricks only |
 
 The numbers are the film's: the example data holds a slice of December 2026's graduates, two who
-confirmed on paper, three in the portal and four not yet. The follow-up and the printer's file hold
+confirmed on paper, four in the portal and four not yet. The follow-up and the printer's file hold
 the rounds whose names haven't gone to the printer yet, as at the build. To see them as on the
 film's day:
 

@@ -79,173 +79,181 @@ In September, Noor, the data architect, asked each data owner two questions.
 How fresh must it be? And how often is it read?
 
 21
-00:02:26,128 --> 00:02:32,415
-Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used.
+00:02:26,128 --> 00:02:32,403
+The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept.
 
 22
-00:02:33,915 --> 00:02:38,761
-Fresh to the hour or the day, and read often: warm. Work it out on a schedule.
+00:02:33,903 --> 00:02:40,190
+Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used.
 
 23
-00:02:40,261 --> 00:02:45,115
-Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted.
+00:02:41,690 --> 00:02:46,536
+Fresh to the hour or the day, and read often: warm. Work it out on a schedule.
 
 24
-00:02:46,615 --> 00:02:51,426
-Each answer goes into the data's contract: how fresh, and how long it's kept.
+00:02:48,036 --> 00:02:52,890
+Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted.
 
 25
-00:02:54,926 --> 00:03:01,620
-Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday.
+00:02:54,390 --> 00:02:59,201
+Each answer goes into the data's contract: how fresh, and how long it's kept.
 
 26
-00:03:02,920 --> 00:03:07,973
-The app checks each claim against the tutor's contract, which comes from the HR system.
+00:03:02,701 --> 00:03:09,395
+Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday.
 
 27
-00:03:09,073 --> 00:03:15,047
-Contracts change at short notice, and Ingrid's team in HR often records one on a Monday morning.
+00:03:10,695 --> 00:03:15,748
+The app checks each claim against the tutor's contract, which comes from the HR system.
 
 28
-00:03:16,347 --> 00:03:22,017
-Until September, the platform took in those changes once a night, so the app saw them on Tuesday.
+00:03:16,848 --> 00:03:22,822
+Contracts change at short notice, and Ingrid's team in HR often records one on a Monday morning.
 
 29
-00:03:23,317 --> 00:03:28,426
-Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.
+00:03:24,122 --> 00:03:29,792
+Until September, the platform took in those changes once a night, so the app saw them on Tuesday.
 
 30
-00:03:29,926 --> 00:03:35,190
-Now the HR system pushes each change as it's made, through Zerobus Ingest.
+00:03:31,092 --> 00:03:36,201
+Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.
 
 31
-00:03:36,690 --> 00:03:43,149
-A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands.
+00:03:37,701 --> 00:03:42,965
+Now the HR system pushes each change as it's made, through Zerobus Ingest.
 
 32
-00:03:44,649 --> 00:03:46,660
-The app sees each change within a minute.
+00:03:44,465 --> 00:03:50,924
+A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands.
 
 33
-00:03:48,160 --> 00:03:54,356
-This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.
+00:03:52,424 --> 00:03:54,435
+The app sees each change within a minute.
 
 34
-00:03:55,856 --> 00:04:01,628
-Hot costs the most, because something is always running: keep hot only what's needed within minutes.
+00:03:55,935 --> 00:04:02,131
+This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.
 
 35
-00:04:05,128 --> 00:04:12,789
-Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget.
+00:04:03,631 --> 00:04:10,582
+Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes.
 
 36
-00:04:14,089 --> 00:04:21,235
-Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked.
+00:04:14,082 --> 00:04:21,743
+Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget.
 
 37
-00:04:22,735 --> 00:04:29,608
-Yesterday's figures are fresh enough, so now it's a materialized view, worked out each night at two and ready to read.
+00:04:23,043 --> 00:04:30,189
+Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked.
 
 38
-00:04:31,108 --> 00:04:35,821
-It's a dbt model Jun wrote, with its schedule, tested like any other.
+00:04:31,689 --> 00:04:38,562
+Yesterday's figures are fresh enough, so now it's a materialized view, worked out each night at two and ready to read.
 
 39
-00:04:36,921 --> 00:04:40,058
-It keeps only the answer, never a copy of the ledger.
+00:04:40,062 --> 00:04:44,775
+It's a dbt model Jun wrote, with its schedule, tested like any other.
 
 40
-00:04:41,358 --> 00:04:48,146
-Most of the university's data is warm, and should stay so: few questions need the minute, and hot costs more.
+00:04:45,875 --> 00:04:49,012
+It keeps only the answer, never a copy of the ledger.
 
 41
-00:04:51,446 --> 00:04:57,891
-Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked.
+00:04:50,312 --> 00:04:57,100
+Most of the university's data is warm, and should stay so: few questions need the minute, and hot costs more.
 
 42
-00:04:58,991 --> 00:05:05,668
-Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read.
+00:05:00,400 --> 00:05:06,845
+Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked.
 
 43
-00:05:06,768 --> 00:05:15,185
-Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.
+00:05:07,945 --> 00:05:14,622
+Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read.
 
 44
-00:05:16,485 --> 00:05:21,915
-Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest.
+00:05:15,722 --> 00:05:24,139
+Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.
 
 45
-00:05:23,615 --> 00:05:27,296
-Like the copies on Svalbard, they sleep until someone needs them.
+00:05:25,439 --> 00:05:33,409
+The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is.
 
 46
-00:05:28,996 --> 00:05:36,697
-The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back.
+00:05:34,909 --> 00:05:40,339
+Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest.
 
 47
-00:05:38,197 --> 00:05:41,527
-Bringing them back takes hours, which is fine for an audit.
+00:05:42,039 --> 00:05:45,720
+Like the copies on Svalbard, they sleep until someone needs them.
 
 48
-00:05:42,627 --> 00:05:49,186
-When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good.
+00:05:47,420 --> 00:05:55,121
+The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back.
 
 49
-00:05:50,686 --> 00:05:54,890
-In October, the oldest records, more than seven years old, were deleted.
+00:05:56,621 --> 00:05:59,951
+Bringing them back takes hours, which is fine for an audit.
 
 50
-00:05:56,190 --> 00:05:59,531
-How to delete well is for the films on data protection.
+00:06:01,051 --> 00:06:07,610
+When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good.
 
 51
-00:06:03,031 --> 00:06:05,751
-One piece of data can cool as it ages.
+00:06:09,110 --> 00:06:13,314
+In October, the oldest records, more than seven years old, were deleted.
 
 52
-00:06:07,251 --> 00:06:11,162
-On Monday morning, Linh's claim for last week's tutorials was hot.
+00:06:14,614 --> 00:06:17,955
+How to delete well is for the films on data protection.
 
 53
-00:06:12,462 --> 00:06:18,320
-Payroll's list of claims still waiting read it in place, in the app, until her coordinator approved it.
+00:06:21,455 --> 00:06:24,175
+One piece of data can cool as it ages.
 
 54
-00:06:20,020 --> 00:06:24,498
-Paid today, it turns warm: part of what Health has spent, worked out each night.
+00:06:25,675 --> 00:06:29,586
+On Monday morning, Linh's claim for last week's tutorials was hot.
 
 55
-00:06:26,198 --> 00:06:32,680
-A year from now, it turns cold: her hours, in her pay record in the archive, until the seven years are up.
+00:06:30,886 --> 00:06:36,744
+Payroll's list of claims still waiting read it in place, in the app, until her coordinator approved it.
 
 56
-00:06:34,380 --> 00:06:37,944
-At each step, where it lives and how it moves follow how it's used.
+00:06:38,444 --> 00:06:42,922
+Paid today, it turns warm: part of what Health has spent, worked out each night.
 
 57
-00:06:41,644 --> 00:06:48,231
-On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again.
+00:06:44,622 --> 00:06:51,104
+A year from now, it turns cold: her hours, in her pay record in the archive, until the seven years are up.
 
 58
-00:06:49,731 --> 00:06:58,345
-At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted.
+00:06:52,804 --> 00:06:56,368
+At each step, where it lives and how it moves follow how it's used.
 
 59
-00:06:59,645 --> 00:07:07,636
-Today, 2,960 people are paid, 856 of them casual staff, Linh among them.
+00:07:00,068 --> 00:07:06,655
+On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again.
 
 60
-00:07:09,136 --> 00:07:12,889
-Freshness and reading decide how data moves and where it lives.
+00:07:08,155 --> 00:07:16,769
+At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted.
 
 61
-00:07:14,589 --> 00:07:18,373
-Storage has had tiers for years: there's no wheel to reinvent.
+00:07:18,069 --> 00:07:26,060
+Today, 2,960 people are paid, 856 of them casual staff, Linh among them.
 
 62
-00:07:19,473 --> 00:07:24,080
-Start from the official docs, then investigate, adapt, implement, iterate.
+00:07:27,560 --> 00:07:31,593
+Freshness decides how data moves; reading decides where it lives.
 
 63
-00:07:25,380 --> 00:07:29,063
+00:07:33,293 --> 00:07:37,077
+Storage has had tiers for years: there's no wheel to reinvent.
+
+64
+00:07:38,177 --> 00:07:42,784
+Start from the official docs, then investigate, adapt, implement, iterate.
+
+65
+00:07:44,084 --> 00:07:47,767
 Next: one copy of the claims, for the app and for Finance.

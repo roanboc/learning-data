@@ -42,6 +42,21 @@ exposures:
     depends_on:
       - ref('mart_graduations__graduation_list')
 
+  - name: reports_due_today
+    label: Reports due today
+    type: application
+    maturity: medium
+    description: >
+      The registrar's office's morning alert, on Databricks: at 8:00 every morning, the name
+      reports due that day, or overdue, that haven't been answered, emailed to the office when
+      there are any (analyses/alerts/name_reports_due_today.sql; docs/databricks-governance.md,
+      section 14).
+    owner:
+      name: "Mei Tanaka, registrar's office"
+      email: mei.tanaka@uni.example
+    depends_on:
+      - ref('mart_graduations__name_reports')
+
   - name: names_to_confirm_each_week
     label: Names still to confirm
     type: analysis

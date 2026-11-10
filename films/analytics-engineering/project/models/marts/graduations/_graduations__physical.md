@@ -33,6 +33,19 @@ erDiagram
         timestamp portal_as_of
         string name_confirmed_how
     }
+    mart_graduations__name_reports {
+        string report_bk PK
+        string student_bk
+        string ceremony_id
+        string name_given
+        timestamp reported_at
+        string owner
+        date due_on
+        timestamp answered_at
+        timestamp told_at
+        boolean answered_in_time
+        string record_made_by
+    }
     mart_graduations__names_to_confirm {
         string student_bk PK
         string ceremony_id PK
@@ -46,4 +59,5 @@ erDiagram
 |---|---|---|---|
 | `mart_graduations__certificates_file` | One row per certificate of a round whose names haven't gone to the printer yet. | protected | enforced |
 | `mart_graduations__graduation_list` | One row per certificate, a graduate, an award and a ceremony. | protected | enforced |
+| `mart_graduations__name_reports` | One row per report, a graduate's correction of their name for a ceremony. | protected | enforced |
 | `mart_graduations__names_to_confirm` | One row per graduate and ceremony, of a round whose names haven't gone to the printer yet, not confirmed yet. | protected | enforced |

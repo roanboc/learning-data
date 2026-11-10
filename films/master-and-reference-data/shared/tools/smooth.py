@@ -68,7 +68,9 @@ PASS = """async ({ step, width, pub, slow, edgeEvery, edgeLimit }) => {
       // every EDGE_EVERY moments, the same moment drawn again with every spare canvas emptied must be the same picture: nothing an
       // earlier moment left in one may show (a line along the right and bottom of a person, 10 November 2026). It runs before what
       // was painted this moment is decoded, so both draws show the same pictures
-      if (times.length % edgeEvery === 0) { const A = x.getImageData(0, 0, cv.width, cv.height).data;
+      // (the moment is drawn once more first, and that is compared: a few things drawn depend on the moment before, such as a
+      // dashed line in Lists everyone uses, and those are not left in a canvas)
+      if (times.length % edgeEvery === 0) { x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, now); const A = x.getImageData(0, 0, cv.width, cv.height).data;
         for (const k in WC.buf) { const c = WC.buf[k], g = c.getContext('2d'); g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); g.restore(); }
         x.setTransform(1, 0, 0, 1, 0, 0); renderFrame(x, width / W, now); const B = x.getImageData(0, 0, cv.width, cv.height).data;
         let n = 0, x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;

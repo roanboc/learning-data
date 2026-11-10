@@ -7,7 +7,7 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   qs:{
   "four":{stop:"home",q:"El tooltip está bien. ¿Por qué no es la solución?",
     opts:[{t:"Está bien por suerte: es una copia que coincide con la definición del modelo conceptual del dominio de cursos, y nada la mantiene así.",ok:true},{t:"Está bien, así que la solución es copiar sus palabras en las otras tres y comparar las cuatro entre sí cada periodo.",near:true},{t:"La gente lee el catálogo, no el tooltip, así que primero se arregla el catálogo, y el tooltip lo sigue después."}],
-    why:"El tooltip coincide con el hogar, la definición que Mei aprobó en _course__conceptual.yml, pero nada lo mantiene así. Arreglar a mano las tres copias malas solo vuelve a dar cuatro copias; cada una tiene que generarse desde el hogar."},
+    why:"El tooltip coincide con el hogar, la definición que Mei aprobó en el glosario, copiada en _course__conceptual.yml, pero nada lo mantiene así. Arreglar a mano las tres copias malas solo vuelve a dar cuatro copias; cada una tiene que generarse desde el hogar."},
   "where":{stop:"where",q:"¿Un registro de decisiones es duplicación?",
     opts:[{t:"Sí, en parte: el registro repite lo que dice el YAML, pero se guarda para los auditores.",near:true},{t:"No: el YAML de un modelo dice qué es cierto ahora; el registro dice por qué, cuándo y quién lo decidió.",ok:true},{t:"Solo cuando el YAML tiene una descripción que repite la misma decisión."}],
     why:"El YAML de un modelo no tiene lugar para el porqué. Sin el registro, la próxima persona reabre la decisión."},

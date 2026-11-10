@@ -1,0 +1,91 @@
+{
+  "kicker": "Workload identity",
+  "kicker_es": "Identidad de carga de trabajo",
+  "title_es": "Cargas sin secretos",
+  "h1": "Workloads without secrets: a job that proves who it is",
+  "h1_es": "Cargas sin secretos: un proceso que prueba quién es",
+  "lead": "Every night at two, a job loads the registrar's records, and it still runs on Jun Park's personal token, with copies in its settings, in a notebook in GitHub and on his laptop. How can it prove who it is each time it runs, with nothing anyone could copy?",
+  "lead_es": "Cada noche a las dos, un proceso carga los datos del registro, y aún corre con el token personal de Jun Park, con copias en su configuración, en un notebook en GitHub y en su laptop. ¿Cómo puede probar quién es cada vez que corre, sin nada que alguien pueda copiar?",
+  "description": "A film about workloads that sign in with no secret anyone keeps, the sixth of Locks before the data: the Netherlands in the 1990s, where about one car in two hundred was stolen each year, started with a wire or a copied key, until every new car had to ask its key's chip for a code before the engine would run; then the same for a nightly job that still ran on a person's token: a service principal of its own in Microsoft Entra ID, run by Azure Databricks as itself; deployed from GitHub Actions with a note GitHub signs for each run, checked against a federation policy, instead of a token; managed identities whose credentials nobody sees; the Databricks GitHub app instead of people's own tokens; one password left in Azure Key Vault, read through a secret scope and changed each month by a function; and secret scanning and push protection for the copies already made.",
+  "description_es": "Una película sobre cargas de trabajo que entran sin ningún secreto que alguien guarde, la sexta de Cerraduras antes que los datos: los Países Bajos en los años noventa, donde cada año robaban más o menos uno de cada doscientos autos, arrancados con un cable o una llave copiada, hasta que todo auto nuevo tuvo que pedirle un código al chip de su llave antes de arrancar; y lo mismo para un proceso nocturno que aún corría con el token de una persona: una entidad de servicio propia en Microsoft Entra ID, que Azure Databricks ejecuta como sí misma; desplegado desde GitHub Actions con una nota que GitHub firma en cada ejecución, comparada con una directiva de federación, en lugar de un token; identidades administradas cuyas credenciales nadie ve; la app de Databricks para GitHub en lugar de los tokens de cada persona; una sola contraseña en Azure Key Vault, leída a través de un ámbito de secretos y cambiada cada mes por una función; y el análisis de secretos y la protección de inserción para las copias ya hechas.",
+  "card": "A job that signs in as itself: a name of its own, a signed note for each deploy, and one password in a vault.",
+  "card_es": "Un proceso que entra como sí mismo: un nombre propio, una nota firmada en cada despliegue y una contraseña en un almacén.",
+  "chapters_es": {
+    "copy": "Una llave que cualquiera podía copiar",
+    "asks": "El auto le pregunta a la llave",
+    "noend": "Una llave sin fecha de fin",
+    "name": "Un nombre propio",
+    "asked": "Preguntado, no guardado",
+    "nokeys": "Ninguna llave que guardar",
+    "vault": "Una contraseña, un almacén",
+    "found": "Copias en el código",
+    "close": "Nada que copiar"
+  },
+  "past": [
+    "The Netherlands, 1990s: a car that asks its key for a code before the engine runs",
+    "A workload proves who it is without a password."
+  ],
+  "past_es": [
+    "Países Bajos, años noventa: un auto que le pide un código a su llave antes de arrancar",
+    "Una carga prueba quién es sin una contraseña."
+  ],
+  "next_h": "You've seen the nightly job sign in as itself, deploy with a note signed for each run, and leave one password in one vault. Next: network, storage and keys, where the workspace leaves the internet and the registrar's files open only through the catalog.",
+  "next_h_es": "Viste al proceso nocturno entrar como sí mismo, desplegarse con una nota firmada en cada ejecución y dejar una sola contraseña en un almacén. Sigue: red, almacenamiento y claves, donde el espacio de trabajo sale de internet y los archivos del registro solo se abren a través del catálogo.",
+  "elsewhere": {
+    "h": "Read the docs yourself",
+    "h_es": "Lee la documentación por tu cuenta",
+    "p": "The official pages behind each step the film shows, from Microsoft and GitHub.",
+    "p_es": "Las páginas oficiales detrás de cada paso que muestra la película, de Microsoft y GitHub.",
+    "links": [
+      {
+        "title": "Azure Databricks: Service principals",
+        "title_es": "Azure Databricks: entidades de servicio",
+        "line": "An identity for a job or a tool, not a person, and why a job should run as one.",
+        "line_es": "Una identidad para un proceso o una herramienta, no para una persona, y por qué un proceso debe correr como una.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/users-groups/service-principals",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/users-groups/service-principals"
+      },
+      {
+        "title": "Azure Databricks: Workload identity federation for GitHub Actions",
+        "title_es": "Azure Databricks: federación de identidades de carga de trabajo para GitHub Actions",
+        "line": "How a workflow signs in with a note GitHub signs for each run, matched against a policy, with no secret stored.",
+        "line_es": "Cómo un flujo de trabajo entra con una nota que GitHub firma en cada ejecución, comparada con una directiva, sin guardar ningún secreto.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/provider-github",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/auth/provider-github"
+      },
+      {
+        "title": "Microsoft Entra ID: Managed identities for Azure resources",
+        "title_es": "Microsoft Entra ID: identidades administradas para recursos de Azure",
+        "line": "An identity Azure gives a resource, whose credentials Azure keeps and changes, and nobody sees.",
+        "line_es": "Una identidad que Azure le da a un recurso, cuyas credenciales Azure guarda y cambia, y nadie ve.",
+        "href": "https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview",
+        "href_es": "https://learn.microsoft.com/es-es/entra/identity/managed-identities-azure-resources/overview"
+      },
+      {
+        "title": "Azure Databricks: Secret management",
+        "title_es": "Azure Databricks: administración de secretos",
+        "line": "Secret scopes backed by Azure Key Vault, who may read them, and why a printed secret shows as redacted.",
+        "line_es": "Ámbitos de secretos respaldados por Azure Key Vault, quién puede leerlos, y por qué un secreto impreso aparece como redactado.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/secrets/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/secrets/"
+      },
+      {
+        "title": "GitHub: About secret scanning",
+        "title_es": "GitHub: acerca del análisis de secretos",
+        "line": "How GitHub reads a repository's whole history for secrets, checks whether they still work, and raises an alert.",
+        "line_es": "Cómo GitHub lee toda la historia de un repositorio en busca de secretos, comprueba si aún funcionan y crea una alerta.",
+        "href": "https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning",
+        "href_es": "https://docs.github.com/es/code-security/secret-scanning/introduction/about-secret-scanning"
+      },
+      {
+        "title": "GitHub: About push protection",
+        "title_es": "GitHub: acerca de la protección de inserción",
+        "line": "How a push with a secret in it is stopped before it lands, and what it takes to push past it.",
+        "line_es": "Cómo se detiene una inserción con un secreto antes de que llegue, y qué hace falta para pasarla por alto.",
+        "href": "https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection",
+        "href_es": "https://docs.github.com/es/code-security/secret-scanning/introduction/about-push-protection"
+      }
+    ]
+  },
+  "draft": true
+}

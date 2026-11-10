@@ -89,8 +89,8 @@
       {
         "title": "Service levels in the Open Data Contract Standard",
         "title_es": "Los niveles de servicio en el Open Data Contract Standard (en inglés)",
-        "line": "How a data contract writes how fresh a product must be, as the list's 24 hours at the send.",
-        "line_es": "Cómo un contrato de datos escribe cuán fresco debe estar un producto, como las 24 horas de la lista al enviarla.",
+        "line": "How an open data contract writes how fresh data must be; the list keeps its 24 hours in its product file.",
+        "line_es": "Cómo un contrato de datos abierto escribe cuán frescos deben estar los datos; la lista guarda sus 24 horas en su archivo de producto.",
         "href": "https://bitol-io.github.io/open-data-contract-standard/latest/service-level-agreement/",
         "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/service-level-agreement/"
       }

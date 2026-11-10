@@ -11,7 +11,7 @@
 | define what words mean | Yusuf Demir, data governance lead | amber | one glossary term synced (award); the other core entities have governance's confirmation there's none (project: governance.py, sync-the-glossary) · 20 Oct 2026 |
 | govern data | Yusuf Demir, data governance lead | amber | the seven beneath it · 20 Oct 2026 |
 | keep data fit for use | Yusuf Demir, data governance lead | green | every test has an owner and a dimension; the scorecard is read from the run; emails checked where they're typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026 |
-| protect who sees what | Yusuf Demir, data governance lead | amber | every column of a shared model classified, and tagged and masked on the platform from that class (project: governance.py, DEC-PRJ-13); no access requests with a purpose and an end date yet · 20 Oct 2026 |
+| protect who sees what | Yusuf Demir, data governance lead | green | every column of a shared model classified, tagged and masked from its class, one policy for each class (project: governance.py, DEC-PRJ-13, DEC-PRJ-17); access asked for with a purpose and an end date, reviewed each quarter, and a check every morning for a personal column with no class (project: databricks-governance.md sections 8, 17 and 18, morning_check.sql) · 10 Nov 2026 |
 | provide data products | Yusuf Demir, data governance lead | amber | six products, with descriptors and contracts in the open standards (project: governance/4-data-products/); no catalogue or access requests yet · 20 Oct 2026 |
 | teach | Yusuf Demir, data governance lead | red | nothing yet: no guidance, no community of practice, no onboarding · 20 Oct 2026 |
 

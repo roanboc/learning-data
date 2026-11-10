@@ -1000,7 +1000,7 @@ def main():
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"
-            for m in re.finditer(r"\d½", src):
+            for m in re.finditer(r"\d+½", src):  # the whole number, so a film of 10½ min reads as 10½, not 0½
                 if m.group(0) not in HALVES[lg] and not (mk and m.group(0) == "4½"):
                     t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\" (this language's films are {' and '.join(sorted(HALVES[lg]))} min)")
     if allowed:
@@ -1010,6 +1010,10 @@ def main():
     docs = 0
     for md in sorted(ROOT.rglob("*.md")):
         if any(part in ("build", "dist", "models", "node_modules", ".git") for part in md.relative_to(ROOT).parts):
+            continue
+        # The films' questions and assumptions are the author's review notes, copied from each film's
+        # thread, and name films by their number in a series; nothing in them reaches the site.
+        if md.relative_to(ROOT).parts[:2] == ("docs", "assumptions"):
             continue
         docs += 1
         for i, line in enumerate(md.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
@@ -1306,6 +1310,10 @@ def main():
     for rel, text in build_series.lists():
         if (ROOT / rel).read_text() != text:
             s["fails"].append(f"{rel}: its table is not what build_series.py makes from the films' own rows (decided.md, release.json): run python site-tools/build_series.py")
+    rep_md = (ROOT / "films" / "legibility-report.md").read_text()
+    if build_series.fill(rep_md, build_series.LEGIBLE, [build_series.LEGIBLE_NOTE]) != rep_md:
+        s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
+                          "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
 
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():

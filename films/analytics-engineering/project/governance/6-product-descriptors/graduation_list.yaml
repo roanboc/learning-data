@@ -12,7 +12,7 @@ description:
     the degree certificate, for every ceremony in the Great Hall.
   usage: For the graduations office, to seat the hall, print the programme and send the certificates to
     the printer, and for Planning's count of awards for the government. Each use, and the level it needs,
-    is a quality rule in the contract.
+    is a requirement in the model's YAML (meta.quality).
 inputPorts:
 - name: core_award_v1
   version: 1.0.0
@@ -21,6 +21,11 @@ outputPorts:
 - name: mart_graduations__graduation_list
   description: 'The graduation list: who graduates, at which ceremony, with which award, and their name
     as it will be printed on the degree certificate.'
+  type: table
+  version: 1.0.0
+- name: mart_graduations__certificates_file
+  description: 'The printer''s file: each certificate of a round whose names haven''t gone to the printer
+    yet, with what the certificate prints, from the graduation list.'
   type: table
   version: 1.0.0
 team:
@@ -34,10 +39,18 @@ support:
   tool: email
   url: mailto:graduations@uni.example
   scope: issues
+- channel: This isn't my name
+  tool: other
+  url: https://portal.uni.example/graduation/name
+  scope: issues
+  description: For a graduate's own name, the button beside it in the student portal, where they see it
+    as it will be printed. The registrar's office answers within two working days, and tells them.
 customProperties:
 - property: consumers
   value:
   - exposure awards_return
   - exposure ceremony_programme
   - exposure certificates
+  - exposure graduations_agent
   - exposure seating_plan
+  - product names_to_confirm

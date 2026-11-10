@@ -1,0 +1,46 @@
+{
+  "key": "one-small-change",
+  "title": "One small change at a time",
+  "sub": "Film 2 of Leading a data team, the third series of Leading data people: kaizen. Improvement is everyone's job, on their own work, in small steps, each one checked. An analyst takes her Monday refresh from two hours by hand to ten minutes, checked: she measures it, simplifies it, standardises it, then automates it, while her manager asks what's in the way, gives the time and shows the small wins.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the cycle's plan, the checklist, the time Helena gives), orange is data and the job that loads it, green is something done or kept (the infections halved, the ten minutes, checked), and amber a cost or a risk (the infections, the two hours by hand, a number nobody has checked).",
+  "src": [
+    "kz_hospital.js",
+    "kz_uni.js",
+    "kz_scenes.js"
+  ],
+  "poster": [
+    "automate",
+    "ten",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bShewhart\\b",
+      "Shoohart"
+    ],
+    [
+      "\\bW\\. Edwards Deming\\b",
+      "W Edwards Deming"
+    ],
+    [
+      "\\bMasaaki Imai's\\b",
+      "Mahsah-ahki Eemai's"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ]
+  ],
+  "story": [
+    "wards"
+  ],
+  "urgent": []
+}

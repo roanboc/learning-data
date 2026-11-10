@@ -315,7 +315,8 @@ tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its 
    early, even by an admin (on Azure, for example, immutable storage with a locked time-based
    retention policy): a person's rows stay in the copies made before the delete, out of use, until
    each is removed. A restored copy is read by no one until the job has run every answered request
-   against it again.
+   against it again, so a request's keys stay in `privacy.request_keys` until the last locked copy
+   that can hold its rows is gone (for request 2026-117, on 24 December).
 7. **Cold, until its day.** Payroll's pay records (`examples/hot-warm-cold/pay_records_archive.sql`)
    are kept 7 years after each contract ends, and once a contract has ended, only HR's records team
    reads its records. A year after they're written, their files move to Azure Storage's archive

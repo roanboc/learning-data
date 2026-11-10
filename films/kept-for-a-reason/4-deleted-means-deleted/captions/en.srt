@@ -1,0 +1,343 @@
+1
+00:00:02,000 --> 00:00:05,474
+Kanesh, in Anatolia, about 1900 BC.
+
+2
+00:00:06,774 --> 00:00:12,100
+Merchants from Ashur, weeks away by donkey caravan, bring tin and cloth to sell here.
+
+3
+00:00:13,400 --> 00:00:14,987
+And they lend each other silver.
+
+4
+00:00:16,087 --> 00:00:20,698
+Each loan is written on a clay tablet: who owes whom, how much, and by when.
+
+5
+00:00:21,998 --> 00:00:29,340
+The tablet is sealed inside an envelope of clay, rolled with the witnesses' seals, so nobody can change it unseen.
+
+6
+00:00:30,640 --> 00:00:33,126
+The lender keeps it: it's the proof of the debt.
+
+7
+00:00:34,626 --> 00:00:37,454
+But paying the debt doesn't make the tablet go away.
+
+8
+00:00:38,554 --> 00:00:42,690
+It can sit on a shelf in Kanesh, or in a house in Ashur, for years.
+
+9
+00:00:43,990 --> 00:00:49,479
+If it turns up later, it can be used to claim the silver again, and the borrower pays twice.
+
+10
+00:00:50,779 --> 00:00:54,504
+Every borrower carries that risk, for every debt they've ever paid.
+
+11
+00:00:55,804 --> 00:00:57,161
+Something has to be done.
+
+12
+00:01:01,261 --> 00:01:05,510
+So, when a debt is paid, the lender hands the tablet back, and it's broken.
+
+13
+00:01:07,010 --> 00:01:13,580
+And when it can't be handed back, because it's still in Ashur, the lender has a receipt written, sealed before witnesses.
+
+14
+00:01:14,880 --> 00:01:19,864
+The debt is paid, it says, and any tablet of it that turns up is void: worth nothing.
+
+15
+00:01:21,364 --> 00:01:24,479
+A paid debt stays paid, and nobody pays twice.
+
+16
+00:01:25,779 --> 00:01:31,807
+More than twenty thousand tablets have been found in the merchants' houses, and receipts like these are among them.
+
+17
+00:01:33,307 --> 00:01:35,103
+Data has the same problem.
+
+18
+00:01:36,603 --> 00:01:41,098
+Deleting a person's data writes the receipt: the table now says they're gone.
+
+19
+00:01:42,198 --> 00:01:48,926
+But the old copies are still there, like tablets on a shelf, until each one is broken, or can never be used again.
+
+20
+00:01:50,226 --> 00:01:53,210
+Then a person who asks to be deleted stays deleted.
+
+21
+00:02:00,910 --> 00:02:04,689
+Linh Nguyen has tutored at the university since 2023.
+
+22
+00:02:05,789 --> 00:02:09,904
+On 24 November, she asked to come off the tutors' mailing list.
+
+23
+00:02:11,004 --> 00:02:16,443
+The privacy office logged it as request 2026-117, and approved it.
+
+24
+00:02:17,743 --> 00:02:21,998
+Every night at one, a job deletes what the privacy office has approved.
+
+25
+00:02:23,098 --> 00:02:27,434
+On Wednesday the 25th, it deletes her row from the mailing list's table.
+
+26
+00:02:28,734 --> 00:02:31,847
+The table's history records the delete, like a receipt.
+
+27
+00:02:33,347 --> 00:02:37,937
+But the platform keeps a table's old versions, so you can go back to yesterday's.
+
+28
+00:02:39,237 --> 00:02:42,606
+Ask for the list as it was on the 24th, and she's there.
+
+29
+00:02:44,106 --> 00:02:47,236
+On this table, a delete doesn't even rewrite the file.
+
+30
+00:02:48,336 --> 00:02:53,386
+To save time, it only marks her row as deleted, in a file that still holds it.
+
+31
+00:02:54,686 --> 00:02:57,267
+So the job rewrites those files, without her.
+
+32
+00:02:58,567 --> 00:03:02,625
+The old files are kept for seven days, so a mistake can be undone.
+
+33
+00:03:04,225 --> 00:03:11,283
+Then the job cleans up, with a command called VACUUM: each night, it removes old files more than seven days old.
+
+34
+00:03:12,783 --> 00:03:15,351
+On Wednesday 2 December, hers go.
+
+35
+00:03:16,851 --> 00:03:19,208
+From then on, no query can bring her back.
+
+36
+00:03:22,708 --> 00:03:24,745
+Deleting her row alone wouldn't last.
+
+37
+00:03:25,845 --> 00:03:31,398
+Each semester, the list is rebuilt from HR's records, taking the tutors who said yes.
+
+38
+00:03:32,098 --> 00:03:35,424
+Her yes from 2023 would bring her straight back.
+
+39
+00:03:36,724 --> 00:03:41,383
+So her no goes where the list is made from: on her record, in HR's system.
+
+40
+00:03:42,483 --> 00:03:46,477
+Ingrid Holm, who owns HR's records, puts it there that morning.
+
+41
+00:03:47,777 --> 00:03:49,959
+Then every table made from it follows.
+
+42
+00:03:51,059 --> 00:03:56,411
+One of them only ever adds rows: the send log, which keeps who was sent each newsletter.
+
+43
+00:03:57,111 --> 00:04:00,688
+Rebuilding the list never touches it, so it gets its own delete.
+
+44
+00:04:02,188 --> 00:04:03,795
+And the job never names her.
+
+45
+00:04:04,495 --> 00:04:10,026
+Her numbers are in a restricted table that only the privacy office and its jobs can read.
+
+46
+00:04:11,126 --> 00:04:15,495
+The job's code says only: request 2026-117.
+
+47
+00:04:18,995 --> 00:04:20,016
+Where else is she?
+
+48
+00:04:21,116 --> 00:04:27,267
+The platform shows every table made from HR's records, and each column's tag says what it holds.
+
+49
+00:04:28,567 --> 00:04:30,075
+Her email is in the list.
+
+50
+00:04:30,775 --> 00:04:32,773
+Her staff number is in the send log.
+
+51
+00:04:34,073 --> 00:04:39,017
+One line leaves the platform: the mailing tool, which copies the list each night.
+
+52
+00:04:40,317 --> 00:04:43,786
+When her row goes, the tool drops her too, at four that morning.
+
+53
+00:04:45,086 --> 00:04:48,791
+Its contract says its own backups lose her within thirty days.
+
+54
+00:04:50,491 --> 00:04:52,401
+Some copies don't show here at all.
+
+55
+00:04:53,701 --> 00:04:59,252
+Every night, a copy of the platform's data goes to a place apart, locked for thirty days.
+
+56
+00:05:00,752 --> 00:05:03,567
+Nobody can delete it early, even when they should.
+
+57
+00:05:05,067 --> 00:05:11,782
+So her row stays in the copies made before the 25th, out of use, until each one is removed by itself.
+
+58
+00:05:13,382 --> 00:05:15,633
+The last goes on 24 December.
+
+59
+00:05:17,333 --> 00:05:23,595
+And if a copy is ever restored, the job applies every answered request again, before anyone reads it.
+
+60
+00:05:25,295 --> 00:05:29,050
+Like the receipt in Kanesh: any copy that turns up is void.
+
+61
+00:05:32,550 --> 00:05:33,970
+Some of her data must stay.
+
+62
+00:05:35,070 --> 00:05:41,642
+Her contracts and hours are pay records, and the law says to keep them seven years after each contract ends.
+
+63
+00:05:42,942 --> 00:05:48,292
+Once a contract has ended, its pay records are open only to HR's records team.
+
+64
+00:05:48,992 --> 00:05:55,219
+A year after they're written, the table's files go to the storage's archive tier: the cheapest, and offline.
+
+65
+00:05:56,519 --> 00:06:02,233
+A file there can't be read, even to delete rows from it, until it's brought back, which takes hours.
+
+66
+00:06:02,933 --> 00:06:04,190
+But cold isn't gone.
+
+67
+00:06:05,490 --> 00:06:08,880
+So its files are grouped by the year each contract ended.
+
+68
+00:06:10,180 --> 00:06:15,182
+Every January, a clean-up job brings back the year whose seven years have passed.
+
+69
+00:06:16,682 --> 00:06:20,157
+Then it deletes that year, whole, unless a hold keeps part of it.
+
+70
+00:06:20,857 --> 00:06:26,805
+Linh's records go in four steps, from January 2031 to January 2034.
+
+71
+00:06:30,305 --> 00:06:32,767
+Copies also hide in what people type.
+
+72
+00:06:34,067 --> 00:06:38,492
+The platform keeps the text of every query for a year, and nobody can edit it.
+
+73
+00:06:39,992 --> 00:06:46,393
+Had someone typed her email into a query, it would sit there for a year, for the platform's admins to read.
+
+74
+00:06:48,093 --> 00:06:52,231
+So deletes, checks and searches name the request, never the person.
+
+75
+00:06:53,931 --> 00:06:55,741
+Agents keep what they're told, too.
+
+76
+00:06:57,041 --> 00:07:03,093
+An agent's trace records each prompt and each answer, and the gateway that carries them keeps its own table.
+
+77
+00:07:04,593 --> 00:07:12,229
+So email addresses are masked before a trace is saved, and traces and the gateway's tables are deleted after thirty days.
+
+78
+00:07:14,129 --> 00:07:16,956
+And the ticket in the repository names no one.
+
+79
+00:07:18,256 --> 00:07:24,542
+What's written there is hard to take back: an issue keeps its edits, and every commit is copied to every clone.
+
+80
+00:07:28,842 --> 00:07:35,825
+Wednesday 2 December: her row is gone from the list, the send log, every old file, and the mailing tool.
+
+81
+00:07:37,125 --> 00:07:40,492
+24 December: the last locked copy goes.
+
+82
+00:07:41,792 --> 00:07:45,197
+January 2034: the last of her pay records.
+
+83
+00:07:46,497 --> 00:07:49,757
+Every copy had a date, and every step is on the record.
+
+84
+00:07:51,457 --> 00:07:57,520
+In Kanesh, a paid debt stayed paid, because its tablet was broken, or void wherever it turned up.
+
+85
+00:07:59,020 --> 00:08:05,344
+At the university, Linh stays off the list, because every copy of her row is gone, or can never be used.
+
+86
+00:08:06,844 --> 00:08:09,414
+Deleting is done when the last copy is gone.

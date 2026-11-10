@@ -11,11 +11,11 @@ What the university decided in *Governance principles* ([`../data-governance/`](
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
-| [Governed in dbt](https://data.learn-all.org/governance-in-practice/governed-in-dbt/) | Governance in the code | 6 min | 9 | 3 questions | [script](1-governed-in-dbt/script.md) · [source](1-governed-in-dbt/source/README.md) |
+| [Governed in dbt](https://data.learn-all.org/governance-in-practice/governed-in-dbt/) | Governance in the code | 6½ min | 9 | 3 questions | [script](1-governed-in-dbt/script.md) · [source](1-governed-in-dbt/source/README.md) |
 | [Governed in Unity Catalog](https://data.learn-all.org/governance-in-practice/governed-in-unity-catalog/) | Access, masks and audit | 6 min | 9 | 3 questions | [script](2-governed-in-unity-catalog/script.md) · [source](2-governed-in-unity-catalog/source/README.md) |
 | [Meaning on the platform](https://data.learn-all.org/governance-in-practice/meaning-on-the-platform/) | Glossary and metrics | 6 min | 9 | 3 questions | [script](3-meaning-on-the-platform/script.md) · [source](3-meaning-on-the-platform/source/README.md) |
 | [Quality on the platform](https://data.learn-all.org/governance-in-practice/quality-on-the-platform/) | Quality checks and monitoring | 6½ min | 9 | 3 questions | [script](4-quality-on-the-platform/script.md) · [source](4-quality-on-the-platform/source/README.md) |
-| [Products in open formats](https://data.learn-all.org/governance-in-practice/products-in-open-formats/) | Open standards | 6 min | 9 | 3 questions | [script](5-products-in-open-formats/script.md) · [source](5-products-in-open-formats/source/README.md) |
+| [Products in open formats](https://data.learn-all.org/governance-in-practice/products-in-open-formats/) | Open standards | 6½ min | 9 | 3 questions | [script](5-products-in-open-formats/script.md) · [source](5-products-in-open-formats/source/README.md) |
 | [The marketplace](https://data.learn-all.org/governance-in-practice/the-marketplace/) | Finding and asking for data | 6½ min | 9 | 3 questions | [script](6-the-marketplace/script.md) · [source](6-the-marketplace/source/README.md) |
 
 For the whole series, on the site: [9 labs](https://data.learn-all.org/governance-in-practice/labs/) and [9 scenarios](https://data.learn-all.org/governance-in-practice/scenarios/), in English and Spanish, from the words in [site/assets/governance-in-practice/](../../site/assets/governance-in-practice/).

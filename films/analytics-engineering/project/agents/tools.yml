@@ -1,0 +1,71 @@
+# Where each thing on Noor's map lives in each tool, and each agent's name there: the platform team's
+# file (Sam Okafor, data platform). It holds no right. An agent's rights come only from its role's
+# steps on the map (governance/3-architecture-map/): what each step reads and writes, and the tools it
+# calls. scripts/generate/agents.py reads the map and this file, and writes each agent's folder,
+# agents/<agent>/, from them. A step that reads, writes or calls something with no line here stops
+# the script, which says which.
+#
+# Nothing here is secret: the IDs are public, and no key or token is kept here (agents/README.md).
+# The names are the university's, fictional.
+
+databricks:
+  workspace: https://uni-example-dev.cloud.databricks.com   # the development workspace: agents run here, and from here production is read only
+  account: 0d7f3a52-6c1e-4b8a-9f2d-5e7a1c3b9d40             # each run's pass is made out to it: the federation policy's audience
+  warehouse: /sql/1.0/warehouses/5e1f0a9c2b7d4e38           # the SQL warehouse the agents' builds run on
+  rights reader: 9b2e6d10-3f4a-4c7e-8d15-7a0c2e9f4b61       # the service principal the nightly check runs as: it reads grants, and changes nothing
+  memory keeper: 2c8a4e71-90b5-4d3f-a6e2-1f7b5c0d8e39       # made the team's memory store and runs its pipeline; only it may list the store's grants
+  production: analytics                                    # the production catalog: prod_core, prod_marts, as the release builds them
+  development: analytics_dev                               # the development catalog, where each agent builds in schemas of its own
+
+github:
+  organization: uni-example
+  repository: credentials                                  # this project
+  token service: https://tokens.uni.example/github         # hands each run its App's token; the App's key stays in a vault
+
+# What a step calls: each application service on the map, and what calling it takes. Each tool
+# server and model is a service in Unity Gateway, part of Unity Catalog, that only those granted
+# EXECUTE on it may call.
+services:
+  tickets:        {unity gateway: {mcp service: ai.tools.tickets}}
+  docs:           {unity gateway: {mcp service: ai.tools.docs}}
+  catalog:        {unity gateway: {mcp service: ai.tools.catalog}}
+  query:          {unity gateway: {mcp service: ai.tools.query}}
+  memory:         {unity gateway: {mcp service: ai.tools.memory}}
+  repository:     {unity gateway: {mcp service: ai.tools.repository}, github: its App}
+  build:          {unity gateway: {mcp service: ai.tools.build}, dbt: its target}
+  language model: {unity gateway: {model service: ai.models.drafting}}
+
+# What a step reads or writes: each business object on the map, and where an agent reaches it.
+#   through        the tools a step reads or writes it with: the step must call one of them
+#   unity catalog  what it takes where the data lives: schemas read, or a catalog to build in
+#   github         what writing it takes in the repository
+#   memory store   the store it's kept in, which is read only for every agent
+objects:
+  ticket:                 {through: [tickets]}
+  role and its steps:     {through: [docs]}                    # the map
+  business term:          {through: [docs, catalog]}           # the business glossary, Unity Catalog's Glossary
+  business rule:          {through: [docs, repository]}        # the models' YAML and docs
+  data contract:          {through: [docs, repository]}
+  owner and column class: {through: [catalog]}                 # tags and owners on the tables, in Unity Catalog
+  data product:
+    through: [catalog, query, build]
+    unity catalog: {read: [prod_core, prod_marts]}             # in the production catalog; names masked for every group but the readers
+  team memory:
+    through: [memory]
+    memory store: team-memory                                  # in Lakebase; kept by the platform, second to the governed definitions
+  change draft:
+    through: [repository, build]                               # on its own branch, which the build tool builds
+    github: {contents: its branches}
+  test and its result:
+    through: [build, repository]                               # the tests are on its branch, and the build gives their results
+    unity catalog: {build: development}                        # its own schemas: it creates them, and owns only those
+  pull request:
+    through: [repository]
+    github: {pull requests: its own}
+
+# Each agent that works under its own name, and its name in each tool. Sam makes these once the agent
+# has its place on the map, for its owner (AGENTS.md, Under your own name). Its App is named after it,
+# planning-agent; its branches start agent/planning/; its dbt schema is planning_agent.
+agents:
+  planning agent:
+    service principal: 4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73   # its application ID; made Monday 26 October 2026

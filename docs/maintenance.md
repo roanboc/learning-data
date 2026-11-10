@@ -62,7 +62,9 @@ Generate or copy the MP3 to its usual site path, then run `python site-tools/med
 
 `python site-tools/media.py publish --film off-the-shelf-en` uploads missing checksum-named assets, resumes an interrupted release and verifies only the selected film. It never uses `--clobber`; existing wrong-size assets fail, authentication errors are not treated as missing releases, and a partial film selection cannot create the shared initial release. `verify-remote`, `check`, `fetch` and `untrack` also accept repeatable `--film` and optional `--tag` filters. The default untracking command still verifies every replacement before removing anything from Git.
 
-Publish from the machine holding the new MP3s before merging their pointers. The manual workflow is useful when source MP3s are still present in its checkout (the initial migration); future ignored audio must be uploaded from the author's machine. Keep audio releases for as long as any manifest references them.
+Nobody needs to publish by hand. Commit the new MP3 with `git add -f` beside its `audio.json`, since Git ignores MP3s otherwise. When the change reaches main, the *Store audio outside Git* workflow runs on its own: it creates each missing release from the MP3s in the repository, skips assets already uploaded, and then downloads and verifies every pointer's copy, so it takes a few minutes. It also runs once a day, to publish anything an earlier run missed. Once a copy verifies, `media.py untrack` can take its MP3 out of Git's index. Keep audio releases for as long as any manifest references them.
+
+To publish by hand, for example to resume, run `python site-tools/media.py publish` with no film or tag, or run the workflow with its tag left blank. Both publish every release that is missing. The workflow can only upload MP3s that are in the repository.
 
 If GitHub CLI is not signed in, use the browser profile that already has access. Take the content-based tag printed by `index` (replace `TAG` below), and stage just its assets:
 

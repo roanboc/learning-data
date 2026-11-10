@@ -1,0 +1,243 @@
+1
+00:00:01,600 --> 00:00:09,149
+Duisburg, 1569. The mapmaker Gerardus Mercator publishes a new chart of the world, made for sailors.
+
+2
+00:00:10,449 --> 00:00:16,884
+At sea, a pilot steered by compass, on a bearing: one fixed angle to north, held hour after hour.
+
+3
+00:00:18,384 --> 00:00:23,677
+But on the charts of the time, a straight line between two ports wasn't a bearing a ship could hold.
+
+4
+00:00:24,977 --> 00:00:28,667
+Steer the angle the chart showed, and the ship slowly left the line.
+
+5
+00:00:30,567 --> 00:00:37,135
+On a long crossing, it could miss the coast it was making for, and its crew spend days more at sea, short of water.
+
+6
+00:00:38,235 --> 00:00:39,623
+Something had to change.
+
+7
+00:00:41,723 --> 00:00:49,402
+Mercator stretched his chart towards the poles, a little more at every degree, so every course on one bearing is a straight line.
+
+8
+00:00:51,702 --> 00:00:56,873
+On his chart, a pilot could rule a line between two ports, read its angle, and steer it.
+
+9
+00:00:58,773 --> 00:01:05,355
+Thirty years later, Edward Wright worked out the stretch exactly, and most charts for sailors are still drawn this way.
+
+10
+00:01:06,655 --> 00:01:11,445
+The price was chosen on purpose: far from the equator, every country swells.
+
+11
+00:01:12,545 --> 00:01:16,494
+Greenland looks as big as Africa, which is fourteen times larger.
+
+12
+00:01:18,394 --> 00:01:23,222
+Right for steering, wrong for comparing countries: one chart, made for one use.
+
+13
+00:01:24,922 --> 00:01:32,154
+Data is the same. In December 2025, a university's graduation list seated its Great Hall well.
+
+14
+00:01:33,254 --> 00:01:36,980
+And still, 41 of its degree certificates had to be printed again.
+
+15
+00:01:38,480 --> 00:01:43,101
+So the people who use the list, answer for it and build it wrote down what it's for.
+
+16
+00:01:44,201 --> 00:01:48,008
+Now each use has its own level, agreed with the people who use it.
+
+17
+00:01:56,308 --> 00:02:04,209
+December 2025, at the university: six ceremonies in the Great Hall, for 2,031 graduates.
+
+18
+00:02:05,509 --> 00:02:12,508
+The graduation list says who graduates, at which ceremony, with which award, and the name printed on each certificate.
+
+19
+00:02:13,608 --> 00:02:20,970
+It goes to the printer about four weeks before the first ceremony. After that, any change means a certificate printed again.
+
+20
+00:02:22,270 --> 00:02:24,964
+That December, the list passed every check on it.
+
+21
+00:02:26,464 --> 00:02:35,311
+Still, 41 certificates were printed again: 26 had a wrong name, 9 a wrong award, and 6 graduates were missing from the list.
+
+22
+00:02:37,011 --> 00:02:44,197
+Each cost about 120 dollars with its courier, and a graduate might cross the stage holding an empty folder.
+
+23
+00:02:45,697 --> 00:02:51,184
+The same list had seated the hall well: every ceremony's count was right to within a few seats.
+
+24
+00:02:52,684 --> 00:02:58,952
+Next December, Andrés Peñaloza will cross the same stage, with a Master of Data Analytics.
+
+25
+00:03:00,252 --> 00:03:05,138
+The student system holds his name as Andres Penaloza, without its accents.
+
+26
+00:03:06,638 --> 00:03:12,208
+For seating, that's one graduate and one seat: right. On his certificate, it isn't his name.
+
+27
+00:03:13,508 --> 00:03:16,318
+So, was the list good? That depends what it's for.
+
+28
+00:03:20,218 --> 00:03:24,141
+In January 2026, three people sat down with the list.
+
+29
+00:03:25,241 --> 00:03:29,405
+Malia Fonoti, the graduations officer, who uses it most.
+
+30
+00:03:30,505 --> 00:03:35,235
+Mei Tanaka, in the registrar's office, who answers for its names and awards.
+
+31
+00:03:36,335 --> 00:03:37,976
+And Jun Park, who builds it.
+
+32
+00:03:39,276 --> 00:03:41,384
+They didn't start by asking if it was good.
+
+33
+00:03:42,484 --> 00:03:46,767
+They asked who uses it, for what, and what goes wrong, for whom, when it's wrong.
+
+34
+00:03:48,267 --> 00:03:55,622
+The seating plan needs each ceremony's count. Within 2% is good enough: a few seats spare, or a few more chairs.
+
+35
+00:03:57,122 --> 00:04:05,048
+The certificates need every name, award and date exactly right. Zero wrong: one mistake is a certificate printed again.
+
+36
+00:04:06,548 --> 00:04:13,439
+The printed programme needs the same names as the certificates. A change after it's printed goes on a slip.
+
+37
+00:04:14,939 --> 00:04:20,864
+And the government's count of awards, which Planning sends, needs each award counted once, exactly.
+
+38
+00:04:22,364 --> 00:04:24,501
+One list, four uses, four levels.
+
+39
+00:04:26,201 --> 00:04:30,225
+The quality pioneer Joseph Juran called quality fitness for use.
+
+40
+00:04:31,725 --> 00:04:35,881
+Data is no different: good enough always means good enough for a use.
+
+41
+00:04:39,581 --> 00:04:43,939
+For each use, they named the few things it can't do without: its critical data.
+
+42
+00:04:45,439 --> 00:04:49,844
+Seating needs each graduate once, their ceremony, and whether they'll be there.
+
+43
+00:04:51,144 --> 00:04:55,920
+A certificate needs the name as printed, the award, and the date it was conferred.
+
+44
+00:04:57,420 --> 00:05:03,836
+Then they asked six questions of each. Is it complete? Unique? Valid? Consistent? Accurate? On time?
+
+45
+00:05:05,536 --> 00:05:12,535
+These are DAMA's six dimensions of data quality. An ISO standard names fifteen; six are enough to start.
+
+46
+00:05:14,035 --> 00:05:18,943
+Each use leans on different ones, as Mercator's chart chose angles over sizes.
+
+47
+00:05:20,243 --> 00:05:24,744
+Seating needs the list complete: every graduate who crosses the stage, once.
+
+48
+00:05:26,044 --> 00:05:30,029
+A certificate needs it accurate: the name its graduate really has.
+
+49
+00:05:31,529 --> 00:05:38,124
+Each level was agreed with the people who use it: Malia for the ceremonies, Planning for the government's count.
+
+50
+00:05:39,424 --> 00:05:42,706
+And Mei owns every level, because she answers for the list.
+
+51
+00:05:44,206 --> 00:05:51,594
+How a check warns or stops, and whom it tells, is set in advance too: Rules that run and Too good to be true show how.
+
+52
+00:05:55,294 --> 00:05:59,323
+Jun wrote it all down beside the data, in the list's data contract.
+
+53
+00:06:00,823 --> 00:06:08,799
+Each use is a quality rule, in the open standard's own words: its dimension, its level, who agreed it, and what a failure costs.
+
+54
+00:06:10,499 --> 00:06:14,677
+The columns each use can't do without are marked as critical data.
+
+55
+00:06:16,177 --> 00:06:20,753
+In dbt, every check on the list names its dimension and its owner.
+
+56
+00:06:22,453 --> 00:06:29,978
+And on Databricks, each critical column carries a governed tag, so whoever finds the table sees what its uses depend on.
+
+57
+00:06:31,678 --> 00:06:38,826
+If quality keeps failing anyway, look first at your governance, who owns the data and decides, and then at your tools.
+
+58
+00:06:40,726 --> 00:06:45,002
+Mercator's chart said what it was for, in its title: for the use of sailors.
+
+59
+00:06:46,502 --> 00:06:51,203
+The graduation list now says what it's for, too: four uses, each with its level.
+
+60
+00:06:52,703 --> 00:06:56,333
+Next, the team looks at a hundred of its records, one by one.
+
+61
+00:06:57,633 --> 00:06:59,825
+Ask what it's for before you ask if it's good.

@@ -1,0 +1,239 @@
+1
+00:00:02,000 --> 00:00:09,436
+Hoy, en la universidad. Cuando Planificación necesita un cambio en sus tablas, una columna nueva o un filtro, escribe un encargo.
+
+2
+00:00:11,136 --> 00:00:19,273
+Todo el año, esos encargos fueron al ayudante de Jun Park: un agente de código en su editor, con su acceso, su nombre y sus permisos.
+
+3
+00:00:21,173 --> 00:00:28,546
+Desde el lunes, van a un agente nuevo, el agente de Planificación. Su dueña es Clara Jensen, de Planificación, y responde por lo que hace.
+
+4
+00:00:30,246 --> 00:00:36,069
+En octubre, los auditores de la universidad, que comprueban que sus registros sean confiables, hicieron una pregunta.
+
+5
+00:00:37,369 --> 00:00:42,937
+De los 214 cambios de este año en las tablas de Planificación, ¿cuáles había redactado un agente?
+
+6
+00:00:44,837 --> 00:00:49,967
+Todos decían Jun Park: en el historial del código y en la bitácora de consultas de la plataforma.
+
+7
+00:00:51,867 --> 00:00:56,564
+Jun pasó dos días revisándolos de memoria, y de nueve no pudo estar seguro.
+
+8
+00:00:58,664 --> 00:01:05,715
+Así que la universidad no pudo responder del todo. Y si uno de los nueve estaba mal, nadie sabía a quién preguntar ni qué más revisar.
+
+9
+00:01:07,815 --> 00:01:15,079
+Además, el ayudante podía hacer todo lo que Jun podía, mucho más de lo que pide un encargo. Y para detenerlo, había que detener a Jun.
+
+10
+00:01:17,379 --> 00:01:18,767
+Algo tenía que cambiar.
+
+11
+00:01:20,467 --> 00:01:29,098
+Antes de su primer encargo, el agente tuvo un lugar en el mapa de la universidad: un rol, una dueña y solo los permisos que su trabajo pide.
+
+12
+00:01:30,998 --> 00:01:39,912
+Y Sam Okafor, que administra la plataforma, llevó ese lugar a cada herramienta, con el nombre propio del agente: Databricks, GitHub y dbt.
+
+13
+00:01:42,012 --> 00:01:48,701
+Desde el lunes, cada cambio que hace dice planning-agent[bot], y cada consulta que ejecuta nombra al agente de Planificación.
+
+14
+00:01:50,601 --> 00:01:59,215
+El miércoles, Sam probó el interruptor: el agente paró diez minutos, y Jun, Lucía y el agente de carga docente de Anil siguieron trabajando.
+
+15
+00:02:01,315 --> 00:02:05,273
+Si los auditores vuelven a preguntar, la respuesta es una búsqueda, no dos días.
+
+16
+00:02:06,973 --> 00:02:14,305
+Y para los datos: cada cambio dice quién lo hizo, persona o agente, y ninguna herramienta deja a un agente hacer más de lo que dice el mapa.
+
+17
+00:02:21,605 --> 00:02:24,382
+Una persona tiene un solo nombre en cada herramienta que usa.
+
+18
+00:02:25,682 --> 00:02:27,470
+Ahora el agente de Planificación también.
+
+19
+00:02:28,770 --> 00:02:36,707
+En Databricks, es una entidad de servicio: una identidad hecha para un programa, como la que ya tiene el agente de carga docente de Anil.
+
+20
+00:02:38,407 --> 00:02:44,188
+En GitHub, donde vive el código del proyecto, es una App, y su trabajo dice planning-agent[bot].
+
+21
+00:02:45,888 --> 00:02:52,051
+En dbt, que construye las tablas de Planificación, sus ejecuciones entran como esa misma entidad de servicio.
+
+22
+00:02:53,951 --> 00:02:59,526
+Para entrar, un programa suele necesitar un secreto, y un secreto que un agente puede leer, lo puede filtrar.
+
+23
+00:03:01,426 --> 00:03:09,129
+Así que sus ejecuciones entran con pases de corta duración: GitHub avala cada una, y recibe a cambio tokens que vencen solos.
+
+24
+00:03:11,229 --> 00:03:13,382
+No guarda ningún secreto que pueda ver o filtrar.
+
+25
+00:03:17,282 --> 00:03:20,792
+Su nombre dice quién es. Lo que puede hacer está en el mapa de Noor.
+
+26
+00:03:22,492 --> 00:03:30,660
+Allí, su rol, colaborador de Planificación, hace los pasos de redacción de sus cambios, y cada paso dice qué lee, qué escribe y a qué llama.
+
+27
+00:03:32,960 --> 00:03:39,956
+Sam no teclea esos permisos en cada herramienta. Un script lee el mapa y escribe desde él la configuración de cada una, en un solo sentido.
+
+28
+00:03:42,256 --> 00:03:50,670
+En Unity Catalog, el grupo del rol tiene los permisos: leer producción, con los nombres enmascarados, y construir solo en sus esquemas.
+
+29
+00:03:52,970 --> 00:03:58,967
+El agente de Planificación es su único miembro, así que un segundo agente en el rol tendría los mismos permisos, y nada más.
+
+30
+00:04:01,067 --> 00:04:08,138
+En Unity Gateway, parte del catálogo, el grupo puede llamar al único modelo de sus pasos y a los servidores de herramientas que nombran.
+
+31
+00:04:10,438 --> 00:04:17,020
+En GitHub, su App recibe un repositorio y dos permisos. En dbt, un target propio.
+
+32
+00:04:19,120 --> 00:04:26,276
+Lo que lee primero está gobernado: las definiciones del glosario y las reglas de datos, de solo lectura, a través de Unity Catalog.
+
+33
+00:04:28,176 --> 00:04:34,560
+Su memoria, que la plataforma guarda en Lakebase, va en segundo lugar: donde las dos no coinciden, gana la definición.
+
+34
+00:04:36,860 --> 00:04:41,842
+Cada noche, una verificación lee los permisos que tiene cada herramienta y los compara con el mapa.
+
+35
+00:04:43,742 --> 00:04:50,247
+El martes, para ahorrar un día, a su grupo se le dio a mano el permiso de cambiar las tablas de producción de Planificación.
+
+36
+00:04:52,147 --> 00:04:57,233
+Esa noche, la verificación falló: un permiso que no está en el mapa. Por la mañana, Sam lo retiró.
+
+37
+00:04:59,533 --> 00:05:05,730
+Si su trabajo necesita un permiso nuevo, primero cambia el mapa, con revisión, y las herramientas lo siguen, nunca al revés.
+
+38
+00:05:10,030 --> 00:05:15,939
+El mapa también dice dónde puede trabajar: un lugar propio, donde sus borradores no pueden tocar los de nadie más.
+
+39
+00:05:17,639 --> 00:05:25,600
+En GitHub, su herramienta escribe solo en ramas llamadas agent/planning, y abre un pull request. No puede hacer push a main.
+
+40
+00:05:27,700 --> 00:05:34,485
+No fusiona, y su aprobación nunca cuenta donde las reglas piden una persona. La próxima película muestra esas reglas.
+
+41
+00:05:36,585 --> 00:05:44,205
+En Databricks, trabaja en el espacio de desarrollo, donde producción solo se puede leer: ni un permiso equivocado puede escribir ahí.
+
+42
+00:05:46,305 --> 00:05:55,082
+En desarrollo, puede crear esquemas propios. dbt construye uno por capa, así que las tablas de Planificación quedan en planning_agent_marts.
+
+43
+00:05:57,182 --> 00:06:04,471
+Es dueño de lo que crea, y de nada más: no sobrescribe el trabajo de nadie, y ningún borrador suyo pasa por el de otro.
+
+44
+00:06:08,371 --> 00:06:10,562
+Ahora cada bitácora dice de quién es el trabajo.
+
+45
+00:06:11,862 --> 00:06:18,927
+En GitHub, sus commits y pull requests dicen planning-agent[bot], y el trabajo de cada otro agente lleva su propio nombre.
+
+46
+00:06:20,827 --> 00:06:27,396
+Cualquiera podría escribir ese nombre en un commit. Los suyos se hacen a través de su App, así que GitHub los marca como verificados.
+
+47
+00:06:29,296 --> 00:06:34,689
+En Databricks, cada consulta que ejecuta está en el historial de consultas, bajo su entidad de servicio.
+
+48
+00:06:36,389 --> 00:06:42,278
+Y la tabla de la bitácora de auditoría lista todo lo demás que hace: cada tabla que lee, cada esquema que crea.
+
+49
+00:06:44,178 --> 00:06:50,995
+Así, la pregunta de los auditores es una búsqueda: cada pull request de planning-agent[bot], y lo que cambió cada uno.
+
+50
+00:06:53,095 --> 00:06:55,595
+Y el nombre de Jun está solo en lo que hizo Jun.
+
+51
+00:06:59,295 --> 00:07:04,593
+Por último, el interruptor. Un ayudante con el acceso de Jun solo se podía detener deteniendo a Jun.
+
+52
+00:07:06,093 --> 00:07:10,710
+El agente de Planificación se puede detener en cada herramienta por separado, y nadie se detiene con él.
+
+53
+00:07:12,210 --> 00:07:19,065
+En Databricks, Sam desactiva su entidad de servicio: no puede entrar, y conserva sus permisos para cuando vuelva.
+
+54
+00:07:20,965 --> 00:07:28,052
+En GitHub, Sam suspende la instalación de su App: la App ya no puede llegar a los repositorios de la universidad.
+
+55
+00:07:29,952 --> 00:07:35,038
+El miércoles, Sam probó ambas, diez minutos. La siguiente llamada del agente de Planificación falló.
+
+56
+00:07:36,738 --> 00:07:44,291
+Jun, Lucía y el agente de carga docente de Anil siguieron trabajando. Reactivado, el agente tenía todos sus permisos de antes.
+
+57
+00:07:46,191 --> 00:07:54,658
+Lo que nunca cambia: Clara es su dueña y responde por su trabajo. Nunca aprueba un cambio, y menos uno propio, ni se concede un permiso.
+
+58
+00:07:56,558 --> 00:08:01,662
+¿De quién fue ese cambio? Ahora cada bitácora lo dice, y la pregunta de los auditores es una búsqueda.
+
+59
+00:08:03,362 --> 00:08:06,633
+El mapa dice qué puede hacer; cada herramienta se lo hace cumplir.
+
+60
+00:08:08,933 --> 00:08:10,959
+Después: cada cambio pasa por revisión.

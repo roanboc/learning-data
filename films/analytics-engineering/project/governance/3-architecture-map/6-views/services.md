@@ -7,7 +7,7 @@
 | Capability | Owner | Heat | Evidence |
 |---|---|---|---|
 | change without surprises | Yusuf Demir, data governance lead | green | impact report on every pull request; versioned contracts (project: impact.py, DEC-PRJ-02) · 20 Oct 2026 |
-| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; CODEOWNERS generated from them (project: governance.py, codeowners.py) · 20 Oct 2026 |
+| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; the impact check tells them what a change touches (project: governance.py, impact.py) · 10 Nov 2026 |
 | define what words mean | Yusuf Demir, data governance lead | amber | one glossary term synced (award); the other core entities have governance's confirmation there's none (project: governance.py, sync-the-glossary) · 20 Oct 2026 |
 | govern data | Yusuf Demir, data governance lead | amber | the seven beneath it · 20 Oct 2026 |
 | keep data fit for use | Yusuf Demir, data governance lead | green | every test has an owner and a dimension; the scorecard is read from the run; emails checked where they're typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026 |
@@ -33,13 +33,13 @@ Its steps aren't on the map yet.
 
 | Step | Who does it | Reads | Writes | Then |
 |---|---|---|---|---|
-| raise a ticket | requester |  |  | draft the change |
-| draft the change | planning contributor |  |  | build it in development |
-| build it in development | planning contributor |  |  | open a pull request |
-| open a pull request | planning contributor |  |  | review the code |
-| review the code | analytics engineer |  |  | approve the change |
-| approve the change | product owner |  |  | release to production |
-| release to production | release approver |  |  |  |
+| raise a ticket | requester |  | ticket | draft the change |
+| draft the change | planning contributor | ticket, role and its steps, business term, business rule, data contract, owner and column class, data product, team memory | change draft | build it in development |
+| build it in development | planning contributor | change draft, data product | test and its result | open a pull request |
+| open a pull request | planning contributor | change draft, test and its result | pull request | review the code |
+| review the code | analytics engineer | pull request, change draft, test and its result | code review | approve the change |
+| approve the change | release approver | pull request, code review | approval | release to production |
+| release to production | release approver | approval, pull request | data product |  |
 
 ### Define or change a term
 

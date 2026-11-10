@@ -4,7 +4,7 @@ On Monday, the registrar's office changes what *award* means: a microcredential 
 credit points now counts. Mei Tanaka owns the meaning, and data governance publishes the term to
 the glossary. That night, the sync (`skills/sync-the-glossary/`) compares the conceptual model's
 copy with the glossary, finds the drift, and writes the report that becomes a pull request's body:
-on Tuesday morning, Mei approves the meaning and data governance confirms the term. Jun's Tuesday
+on Tuesday morning, the data team reviews the code, and Mei is told what it touches. Jun's Tuesday
 change, in `../counts-as-award/`, adds `counts_as_award`, which reads the setting
 `min_award_credit_points: 6`; and the data team counts awards once, as a metric view on
 Databricks, which the draft submission and Planning's census report read. *Meaning on the

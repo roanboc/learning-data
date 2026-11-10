@@ -1,0 +1,63 @@
+{
+  "key": "how-long-and-then-what",
+  "title": "How long, and then what",
+  "sub": "The second film of Kept for a reason, the third series of Data protection and privacy: why every record needs an end date decided before it's needed, as Washington learned in 1943, when the war's papers piled up faster than anyone could decide what to keep; a record's lives, in use, archived, then deleted or kept for good; one schedule by kind of record, each row with its owner, its reason, how long and then what; a clock that starts at an event; and a hold that stops it for a claim.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, with cards of near-clear frost and bright rims. Green is a reason to keep a record, or a step approved; coral is closed: a hold, a record lost too soon or kept too long. Washington in 1943 is painted in the same night light, with its place and year on a tag.",
+  "src": [
+    "hl_past.js",
+    "hl_open.js",
+    "hl_uni.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "schedule",
+    "signed",
+    3.8
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Nwin"
+    ]
+  ],
+  "story": [
+    "flood",
+    "before"
+  ]
+}

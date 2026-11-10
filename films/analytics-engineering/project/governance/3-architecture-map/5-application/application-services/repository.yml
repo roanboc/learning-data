@@ -1,0 +1,10 @@
+name: repository
+kind: application service
+definition: Branches, commits and pull requests, with their reviews and approvals.
+owner: Sam, platform team
+relationships:
+- serving: draft the change
+- serving: open a pull request
+- serving: review the code
+- serving: approve the change
+status: confirmed

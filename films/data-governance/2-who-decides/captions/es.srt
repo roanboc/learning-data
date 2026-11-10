@@ -139,61 +139,65 @@ Yusuf lleva el registro: si cambia un nombre ahí, todas las hojas de ruta lo si
 La siguiente solicitud de cambio de Jun mapea título a la definición del gobierno.
 
 36
-00:03:44,705 --> 00:03:50,121
-Su hoja de ruta la envía a Mei, por nombre, y luego a Noor y a Yusuf. Nadie tuvo que acordarse.
+00:03:44,705 --> 00:03:49,518
+Su hoja de ruta la envía primero a Mei, por nombre, para fijar qué significa título, en el glosario.
 
 37
-00:03:51,621 --> 00:03:56,827
-Como la cuerda en la línea: el trabajo llama a quien decide, en el momento en que importa.
+00:03:50,818 --> 00:03:55,983
+Luego el equipo de Noor lo construye y revisa el código. A los dueños se les avisa, no se les pide revisar.
 
 38
-00:04:00,527 --> 00:04:05,834
-Cuando Mei decide, su decisión queda anotada donde está el trabajo: qué, quién, cuándo y por qué.
+00:03:57,483 --> 00:04:02,689
+Como la cuerda en la línea: el trabajo llama a quien decide, en el momento en que importa.
 
 39
-00:04:07,434 --> 00:04:14,348
-Ya lleva una bitácora de qué registros son el mismo estudiante. El mapeo irá al libro de decisiones del área de cursos.
+00:04:06,389 --> 00:04:11,696
+Cuando Mei decide, su decisión queda anotada donde está el trabajo: qué, quién, cuándo y por qué.
 
 40
-00:04:16,048 --> 00:04:19,549
-Cada área lleva el suyo, para que la próxima persona encuentre el porqué.
+00:04:13,296 --> 00:04:20,210
+Ya lleva una bitácora de qué registros son el mismo estudiante. El mapeo irá al libro de decisiones del área de cursos.
 
 41
-00:04:21,149 --> 00:04:23,766
-No en un hilo de correo que nadie encuentra.
+00:04:21,910 --> 00:04:25,411
+Cada área lleva el suyo, para que la próxima persona encuentre el porqué.
 
 42
-00:04:27,466 --> 00:04:31,301
-Mei no pidió ser dueña. La nombraron porque siempre respondía.
+00:04:27,011 --> 00:04:29,628
+No en un hilo de correo que nadie encuentra.
 
 43
-00:04:32,901 --> 00:04:36,998
-Así que Yusuf le pide a su jefa el tiempo que hace falta: dos horas a la semana.
+00:04:33,328 --> 00:04:37,163
+Mei no pidió ser dueña. La nombraron porque siempre respondía.
 
 44
-00:04:38,498 --> 00:04:43,290
-Mantiene su alcance pequeño y claro: título, no cada palabra que usa su oficina.
+00:04:38,763 --> 00:04:42,860
+Así que Yusuf le pide a su jefa el tiempo que hace falta: dos horas a la semana.
 
 45
-00:04:44,690 --> 00:04:49,064
-Y tiene a quién preguntar: a Yusuf, o al consejo, cuando los dueños no coinciden.
+00:04:44,360 --> 00:04:49,152
+Mantiene su alcance pequeño y claro: título, no cada palabra que usa su oficina.
 
 46
-00:04:50,464 --> 00:04:53,213
-Un rol sin tiempo es un nombre en una hoja de cálculo.
+00:04:50,552 --> 00:04:54,926
+Y tiene a quién preguntar: a Yusuf, o al consejo, cuando los dueños no coinciden.
 
 47
-00:04:56,913 --> 00:05:02,308
-En la línea, la cuerda traía a alguien que podía decidir. Aquí, cada cambio le pregunta a su dueño.
+00:04:56,326 --> 00:04:59,075
+Un rol sin tiempo es un nombre en una hoja de cálculo.
 
 48
-00:05:03,008 --> 00:05:05,816
-Un derecho a decidir es real cuando el trabajo lo pide.
+00:05:02,775 --> 00:05:08,668
+En la línea, la cuerda traía a alguien que podía decidir. Aquí, cada cambio de significado le pregunta a su dueño.
 
 49
-00:05:07,416 --> 00:05:12,219
-Entonces Mei abre la solicitud de cambio de Jun, y hace una pregunta que nadie esperaba.
+00:05:09,368 --> 00:05:12,176
+Un derecho a decidir es real cuando el trabajo lo pide.
 
 50
-00:05:13,319 --> 00:05:18,277
+00:05:13,776 --> 00:05:18,579
+Entonces Mei abre la solicitud de cambio de Jun, y hace una pregunta que nadie esperaba.
+
+51
+00:05:19,679 --> 00:05:24,637
 ¿De qué título es dueña? Lo encontró definido en cinco lugares, y no coinciden.

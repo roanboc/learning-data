@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Late is wrong too",
+    "key": "late-is-wrong-too-en",
+    "dir": "films/fit-for-use/4-late-is-wrong-too/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/late-is-wrong-too/film.js",
+    "video": "dist/late-is-wrong-too.mp4",
+    "file": "late-is-wrong-too.mp4",
+    "captions": [
+      [
+        "films/fit-for-use/4-late-is-wrong-too/captions/en.srt",
+        "late-is-wrong-too.en.srt"
+      ],
+      [
+        "films/fit-for-use/4-late-is-wrong-too/captions/es.srt",
+        "late-is-wrong-too.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/fit-for-use/4-late-is-wrong-too/source",
+      ":(exclude)films/fit-for-use/4-late-is-wrong-too/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 286,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

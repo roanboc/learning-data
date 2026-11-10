@@ -1,0 +1,72 @@
+{
+  "kicker": "Ways to hide a value",
+  "kicker_es": "Formas de ocultar un valor",
+  "title_es": "Muestra lo mínimo",
+  "h1": "Show the least that still answers the question",
+  "h1_es": "Muestra lo mínimo que aún responde la pregunta",
+  "lead": "Anil Kurian studies how learners in the Faculty of Health progress. The records, as kept, would show him names, birthdays, and who has a disability; hide it all, and he can't follow anyone. So Mei Tanaka picks a way to hide each column, and the study never sees who they are.",
+  "lead_es": "Anil Kurian estudia cómo avanzan los estudiantes de la Facultad de Salud. Los registros, tal como se guardan, le mostrarían nombres, cumpleaños y quién tiene una discapacidad; si se oculta todo, no puede seguir a nadie. Mei Tanaka elige cómo ocultar cada columna, y el estudio nunca ve quiénes son.",
+  "description": "A film about the ways to hide a value, with no product named: leave a column out, mask it whole or in part, generalise it, a keyed hash, a token, encryption, totals with small counts hidden, and filtering rows; three questions for each, what the reader sees, whether it can be undone and by whom, and what still works; why a way that can be undone keeps data personal, why hidden isn't anonymous, and why a small count needs one more hidden beside it. It opens in Victoria in 1856, where a secret ballot let a worker or a tenant vote as he wished, and only the totals were announced.",
+  "description_es": "Una película sobre las formas de ocultar un valor, sin nombrar productos: dejar fuera una columna, enmascararla entera o en parte, generalizarla, un hash con clave, un token, el cifrado, totales con las cifras pequeñas ocultas y filtrar filas; tres preguntas para cada una, qué ve quien lee, si se puede deshacer y quién puede, y qué sigue funcionando; por qué una forma que se puede deshacer mantiene los datos como personales, por qué oculto no es anónimo, y por qué una cifra pequeña necesita otra oculta a su lado. Empieza en Victoria en 1856, donde el voto secreto dejó a un trabajador o a un inquilino votar como quería, y solo se anunciaban los totales.",
+  "card": "A study needs learners' records without knowing who they are. Each column gets a way to hide it that keeps what the study needs.",
+  "card_es": "Un estudio necesita registros de estudiantes sin saber quiénes son. Cada columna se oculta de forma que conserve lo necesario.",
+  "chapters_es": {
+    "ballot": "El padrón y la urna",
+    "questions": "Tres preguntas",
+    "oneway": "Formas que no se pueden deshacer",
+    "undo": "Formas que se pueden deshacer",
+    "totals": "Totales, con cifras pequeñas ocultas",
+    "least": "Muestra lo mínimo"
+  },
+  "past": [
+    "Victoria, 1856: a vote nobody could see",
+    "Each column is hidden the way that keeps what the question needs, so a study follows its learners and never sees who they are."
+  ],
+  "past_es": [
+    "Victoria, 1856: un voto que nadie podía ver",
+    "Cada columna se oculta de la forma que conserva lo que la pregunta necesita, así que un estudio sigue a sus estudiantes y nunca ve quiénes son."
+  ],
+  "next_h": "You've seen the ways to hide a value and when each fits. Next: grants by design, who may reach which data on the platform.",
+  "next_h_es": "Viste las formas de ocultar un valor y cuándo conviene cada una. Después: permisos diseñados, quién puede llegar a qué datos en la plataforma.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más lejos",
+    "p": "The film names no product. These pages go further into its story and its ideas: a museum's account of the secret ballot, Europe's guidance on codes in place of names, and two public guides to hiding values.",
+    "p_es": "La película no nombra productos. Estas páginas van más lejos en su historia y sus ideas: el relato de un museo sobre el voto secreto, la guía europea sobre códigos en lugar de nombres, y dos guías públicas para ocultar valores.",
+    "links": [
+      {
+        "title": "What is the secret ballot?",
+        "title_es": "What is the secret ballot? (en inglés)",
+        "line": "The Museum of Australian Democracy on open voting, the ballot of 1856 and how it spread.",
+        "line_es": "El Museo de la Democracia Australiana sobre el voto a viva voz, el voto secreto de 1856 y cómo se extendió.",
+        "href": "https://www.moadoph.gov.au/explore/democracy/what-is-the-secret-ballot",
+        "href_es": "https://www.moadoph.gov.au/explore/democracy/what-is-the-secret-ballot"
+      },
+      {
+        "title": "Guidelines 01/2025 on pseudonymisation",
+        "title_es": "Directrices 01/2025 sobre seudonimización",
+        "line": "The European Data Protection Board on codes in place of names, and why data that a key can bring back stays personal.",
+        "line_es": "El Comité Europeo de Protección de Datos sobre códigos en lugar de nombres, y por qué los datos que una clave puede revertir siguen siendo personales.",
+        "href": "https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2025/guidelines-012025-pseudonymisation_en",
+        "href_es": "https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2025/guidelines-012025-pseudonymisation_es"
+      },
+      {
+        "title": "Pseudonymisation techniques and best practices",
+        "title_es": "Pseudonymisation techniques and best practices (en inglés)",
+        "line": "ENISA, the EU's cybersecurity agency, on plain and keyed hashes, tokens and encryption, and the attacks each must withstand.",
+        "line_es": "ENISA, la agencia de ciberseguridad de la UE, sobre hashes simples y con clave, tokens y cifrado, y los ataques que cada uno debe resistir.",
+        "href": "https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices",
+        "href_es": "https://www.enisa.europa.eu/publications/pseudonymisation-techniques-and-best-practices"
+      },
+      {
+        "title": "De-identifying government datasets (SP 800-188)",
+        "title_es": "De-identifying government datasets, SP 800-188 (en inglés)",
+        "line": "NIST's guide to removing identifiers, generalising values and publishing totals with small counts hidden.",
+        "line_es": "La guía del NIST para quitar identificadores, generalizar valores y publicar totales con las cifras pequeñas ocultas.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/188/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/188/final"
+      }
+    ]
+  },
+  "draft": true
+}

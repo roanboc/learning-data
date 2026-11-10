@@ -74,6 +74,7 @@ domains:
     entities:
       - {name: staff_member, status: planned, reference: Staff}
       - {name: appointment, status: planned, reference: Staff appointment}
+      - {name: claim, status: modelled, reference: "Extension: a casual staff member's claim for hours worked, from the claims app"}
 
   - name: research
     owner: Graduate research school
@@ -98,6 +99,7 @@ relationships:
   - [credential, counts towards, award]
   - [learner, is admitted to, course_admission]
   - [course_admission, in, award]
+  - [staff_member, makes, claim]
   - [course_admission, enrols in, unit_enrolment]
   - [course_admission, recognises, prior_credit]
   - [unit_enrolment, in, unit_offering]

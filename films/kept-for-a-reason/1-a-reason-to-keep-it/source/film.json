@@ -1,0 +1,50 @@
+{
+  "key": "a-reason-to-keep-it",
+  "title": "A reason to keep it",
+  "sub": "The first film of five in Kept for a reason: why each piece of personal data needs a reason you can say, the six reasons a law allows, asking only for what a reason needs, a yes that means it, and a short check before a new use.",
+  "howto": "The film is drawn in the module's Night glass: a dark hall of frosted panes, and Oregon in 1986 in the same night light. Green is allowed (the reason that lets HR keep a piece), violet hidden personal data, coral what has no reason or went wrong, cyan who or what something is.",
+  "src": [
+    "rk_oregon.js",
+    "rk_hall.js",
+    "scenes.js"
+  ],
+  "story": [
+    "number"
+  ],
+  "urgent": [],
+  "poster": [
+    "six",
+    "mei",
+    2.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Win"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ]
+  ]
+}

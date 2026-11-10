@@ -1,6 +1,6 @@
 # The open standards' schemas
 
-Copies of the JSON schemas `scripts/generate/products.py` validates the generated files against,
+Copies of the JSON schemas `scripts/generate/products.py` validates the descriptors and contracts against,
 so the check runs with no network:
 
 | File | Standard | From | Read on |

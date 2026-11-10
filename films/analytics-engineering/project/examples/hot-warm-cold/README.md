@@ -28,6 +28,6 @@ Azure, which moves each data file to the archive tier 365 days after it's writte
 continuous mode, one of its settings; and the way the platform serves the table of contracts to the
 claims app, which *One copy, one platform* shows.
 
-The contracts in `governance/5-data-contracts/` are generated from the data products, and every one
-of them is warm: built each night, ready by 7 a.m. That's where the film starts. How to delete well
+The data products' tables, and the enterprise contracts in `governance/5-data-contracts/`, are all
+warm: built each night, ready by 7 a.m. That's where the film starts. How to delete well
 (who decides, what else holds a copy, and proving it's gone) is for the films on data protection.

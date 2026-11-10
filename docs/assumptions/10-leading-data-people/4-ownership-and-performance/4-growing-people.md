@@ -1,8 +1,8 @@
 # Growing people: questions and assumptions
 
-*Leading data people* · *Ownership and performance*, film 4 · open, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261)
+*Leading data people* · *Ownership and performance*, film 4 of 4 · merged, PR #261 · [pull request](https://github.com/roanboc/learning-data/pull/261)
 
-On the site once PR #261 merges: https://data.learn-all.org/ownership-and-performance/growing-people/
+[Watch it on the site](https://data.learn-all.org/ownership-and-performance/growing-people/)
 
 Film 4 of 4 of *Ownership and performance*, and the last film of *Leading data people*. It was made on 10 November 2026 while the author was away, from section 13 of the module's brief and the module's notes on openings, sounds and numbers, which are in the module's working folder (`leading-data-people/` in the project's shared files, not in this repository). Each question below was decided on the stated assumption, for the author to confirm or correct after watching the film. The rows follow the film; a time is where that line starts. The film's reasons and sources are in its [script](https://github.com/roanboc/learning-data/blob/main/films/ownership-and-performance/4-growing-people/script.md), and its decisions in its [`decided.md`](https://github.com/roanboc/learning-data/blob/main/films/ownership-and-performance/4-growing-people/decided.md).
 

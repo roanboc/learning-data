@@ -11,6 +11,7 @@ Privacy and the life of data. Linh Nguyen's tutoring contract ends, and she asks
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A person asks](https://data.learn-all.org/kept-for-a-reason/a-person-asks/) | A request, end to end | 9 min | 8 | 3 questions | [script](5-a-person-asks/script.md) · [source](5-a-person-asks/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -282,6 +282,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 - [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 - [From a branch to production](../films/locks-before-the-data/8-from-a-branch-to-production/) — `from-a-branch-to-production`
+- [Who did what](../films/locks-before-the-data/9-who-did-what/) — `who-did-what`
 
 ### Only what you may see
 

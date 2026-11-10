@@ -1,0 +1,92 @@
+{
+  "kicker": "Seeing who did what",
+  "kicker_es": "Ver quién hizo qué",
+  "title_es": "Quién hizo qué",
+  "h1": "Who did what: a record nobody in it can change",
+  "h1_es": "Quién hizo qué: un registro que nadie en él puede cambiar",
+  "lead": "Sam has locked the platform's sign-ins, doors, admin power and changes. Now the security review asks him to show they held over the last 90 days, but the answers sit in four records, and one keeps only a month. Where should the record live, and what should ring a bell at once?",
+  "lead_es": "Sam ha cerrado los accesos, las puertas, el poder de administrador y los cambios de la plataforma. La revisión de seguridad le pide demostrar que aguantaron 90 días, pero las respuestas están en cuatro registros, y uno guarda solo un mes. ¿Dónde debe vivir el registro, y qué debe sonar al instante?",
+  "description": "A film about seeing who did what on a data platform, the last of Locks before the data: David Warren's flight recorder, proposed in Australia in 1954 after Comet jetliners were lost with no one left to say why, a box that keeps the cockpit's last hours where a crash is least likely to reach it; the three questions a security review asks of the last 90 days, and the four records that hold the answers, each kept for its own time; every record sent as it's written to one store the security team keeps, with a copy locked for a year that no one it records can change, and every search of it recorded; a few alarms that someone always answers, such as admin power switched on; a copied browser session ended everywhere first, then read in the record, then closed off by a review without blame; two emergency accounts for the day every lock jams, kept in two safes and tested every 90 days; and a nightly copy of the data, locked for 30 days and restored every month.",
+  "description_es": "Una película sobre ver quién hizo qué en una plataforma de datos, la última de Cerraduras antes que los datos: la grabadora de vuelo de David Warren, propuesta en Australia en 1954 tras perderse aviones Comet sin nadie que dijera por qué, una caja que guarda las últimas horas de la cabina donde es menos probable que llegue un accidente; las tres preguntas que una revisión de seguridad hace sobre los últimos 90 días, y los cuatro registros que tienen las respuestas, cada uno guardado por su propio tiempo; cada registro enviado al escribirse a un almacén que guarda el equipo de seguridad, con una copia bloqueada un año que nadie de quienes registra puede cambiar, y cada búsqueda en él registrada; unas pocas alarmas que alguien siempre atiende, como el poder de administrador encendido; una sesión del navegador copiada, terminada primero en todas partes, luego leída en el registro y después cerrada con una revisión sin culpas; dos cuentas de emergencia para el día en que se traban todas las cerraduras, guardadas en dos cajas fuertes y probadas cada 90 días; y una copia nocturna de los datos, bloqueada 30 días y restaurada cada mes.",
+  "card": "A record nobody in it can change, an alarm for admin power, a stolen session stopped, and a copy nobody can delete.",
+  "card_es": "Un registro que nadie en él cambia, una alarma para el poder de administrador, una sesión robada detenida y una copia imborrable.",
+  "chapters_es": {
+    "box": "Una caja que sobrevive",
+    "tail": "Donde no llega ningún accidente",
+    "questions": "Tres preguntas, cuatro memorias",
+    "store": "Un registro fuera de alcance",
+    "bell": "Una alarma para el gran poder",
+    "night": "La noche en que copiaron una sesión",
+    "showed": "Lo que mostró el registro",
+    "glass": "El cristal que se rompe",
+    "copy": "Una copia que nadie puede borrar",
+    "seen": "Visto"
+  },
+  "past": [
+    "Australia, 1954: a box that keeps a cockpit's last hours, where a crash is least likely to reach it",
+    "If you can't see it, you can't say it's protected."
+  ],
+  "past_es": [
+    "Australia, 1954: una caja que guarda las últimas horas de una cabina, donde es menos probable que llegue un accidente",
+    "Si no puedes verlo, no puedes decir que está protegido."
+  ],
+  "next_h": "You've seen how the platform keeps a record of who did what, out of reach of everyone in it, and what happens the night a lock is passed. Next, Only what you may see begins with an agreement first: what each person signs before they see a learner's data.",
+  "next_h_es": "Viste cómo la plataforma guarda un registro de quién hizo qué, fuera del alcance de todos los que aparecen en él, y qué pasa la noche en que alguien pasa una cerradura. Sigue Solo lo que puedes ver, que empieza con un acuerdo primero: lo que cada persona firma antes de ver los datos de un estudiante.",
+  "draft": true,
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film shows Databricks, GitHub and Azure as their own documentation describes them. These are the pages its record, its alarms, its emergency accounts and its locked copies follow.",
+    "p_es": "La película muestra Databricks, GitHub y Azure como los describe su propia documentación. Estas son las páginas que siguen su registro, sus alarmas, sus cuentas de emergencia y sus copias bloqueadas.",
+    "links": [
+      {
+        "title": "Databricks: the audit log system table",
+        "title_es": "Databricks: la tabla de sistema del registro de auditoría",
+        "line": "What the platform records of each sign-in, change and read, how long it keeps it, and the columns to search it by.",
+        "line_es": "Qué registra la plataforma de cada acceso, cambio y lectura, cuánto tiempo lo guarda, y las columnas para buscar en él.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/audit-logs",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/system-tables/audit-logs"
+      },
+      {
+        "title": "GitHub: streaming the audit log",
+        "title_es": "GitHub: enviar el registro de auditoría",
+        "line": "How GitHub's record of who did what goes, as it's written, to storage you keep, for longer than GitHub keeps it.",
+        "line_es": "Cómo el registro de quién hizo qué en GitHub va, al escribirse, a un almacenamiento que guardas tú, por más tiempo que GitHub.",
+        "href": "https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise",
+        "href_es": "https://docs.github.com/es/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise"
+      },
+      {
+        "title": "Microsoft Entra: emergency access accounts",
+        "title_es": "Microsoft Entra: cuentas de acceso de emergencia",
+        "line": "Two accounts for the day every lock jams: how to keep them, sign in with them, watch them and test them.",
+        "line_es": "Dos cuentas para el día en que se traban todas las cerraduras: cómo guardarlas, entrar con ellas, vigilarlas y probarlas.",
+        "href": "https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/security-emergency-access",
+        "href_es": "https://learn.microsoft.com/es-es/entra/identity/role-based-access-control/security-emergency-access"
+      },
+      {
+        "title": "Microsoft Entra: revoke access in an emergency",
+        "title_es": "Microsoft Entra: revocar el acceso en una emergencia",
+        "line": "The steps to end a person's access at once, and why each app's own sessions must be ended too.",
+        "line_es": "Los pasos para terminar de inmediato el acceso de una persona, y por qué hay que terminar también las sesiones de cada aplicación.",
+        "href": "https://learn.microsoft.com/en-us/entra/identity/users/users-revoke-access",
+        "href_es": "https://learn.microsoft.com/es-es/entra/identity/users/users-revoke-access"
+      },
+      {
+        "title": "Azure Storage: immutable storage",
+        "title_es": "Azure Storage: almacenamiento inmutable",
+        "line": "Copies locked for a set time, which no one can change or delete before then, not even an admin.",
+        "line_es": "Copias bloqueadas por un tiempo fijo, que nadie puede cambiar ni borrar antes, ni siquiera un administrador.",
+        "href": "https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-storage-overview",
+        "href_es": "https://learn.microsoft.com/es-es/azure/storage/blobs/immutable-storage-overview"
+      },
+      {
+        "title": "NIST SP 800-61 Rev. 3: incident response",
+        "title_es": "NIST SP 800-61 Rev. 3: respuesta a incidentes (en inglés)",
+        "line": "How to detect, respond to and recover from an incident, as part of everyday risk management.",
+        "line_es": "Cómo detectar un incidente, responder y recuperarse, como parte de la gestión diaria del riesgo.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+      }
+    ]
+  }
+}

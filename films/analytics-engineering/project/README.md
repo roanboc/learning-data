@@ -47,7 +47,7 @@ Then, if you like:
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, agents under the same rules, and the registrar's office's morning alert: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -193,7 +193,8 @@ project/
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
-│   ├── rules/                business rules that must hold: identity decisions
+│   ├── rules/                business rules that must hold: identity decisions; the old form's
+│   │                         names, held for the registrar's office
 │   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
 ├── analyses/
@@ -203,8 +204,10 @@ project/
 │   ├── validation/           checking the result: reconcile with the census and tuition reports,
 │   │                         as-was and as-is
 │   ├── governance/           on Databricks: who read a table, and the access review
-│   └── quality/              on Databricks: the platform's checks for the scorecard, and the
-│                             badges' alert
+│   ├── quality/              on Databricks: the platform's checks for the scorecard, and the
+│   │                         badges' alert
+│   └── alerts/               on Databricks: the registrar's office's morning alert, the name
+│                             reports due today
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
@@ -307,7 +310,7 @@ her a contract each semester to tutor a first-year unit; `R-3082` at the researc
 person domain's conceptual model (`models/core/person/`) is a draft, and
 `analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
 
-The graduation list has a slice of its own: 23 graduates and 25 certificates, at the ceremonies of
+The graduation list has a slice of its own: 24 graduates and 26 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
 (`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
 (`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
@@ -315,7 +318,14 @@ don't change. Their names are as the platform received them: no accents before S
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz
 Fonseca de Albuquerque Cavalcanti's. Hamid Karimi's double degree is two certificates; Andrés
-Peñaloza (`S-16874`), who graduates in December 2026, is held as Andres Penaloza.
+Peñaloza (`S-16874`), who graduates in December 2026, was held as Andres Penaloza.
+
+On 12 October 2026 Andrés reported his name in the portal ("This isn't my name"), and two days
+later the registrar's office corrected it in the student system itself, which the list then took.
+Every report, with when it was due, answered and told, is in `mart_graduations__name_reports`; the
+promise of an answer within two working days is tracked there, never failed as a test. João
+Ribeiro's record (`S-16220`), made by the old online form in 2017, is still Joao Ribeiro, and the
+old form's check holds it for the registrar's office (`tests/rules/old_form_names_not_yet_confirmed.sql`).
 
 ## A new version, and who it touches
 

@@ -88,7 +88,7 @@ scene("mine",(ctx,S,t,sc)=>{const T=rf_once(sc,"T",()=>({
     {at:atScreen,place:"rfScreen",keys:[[0,960,540,1.0],[T.accent-0.4,700,420,1.32],[T.press-1.4,960,540,1.0]],d:1.6,push:0.015,dis:0.8,draw:(cx,tt)=>{
       const mv=ag_sine(clamp((tt-(T.press-1.5))/1.3,0,1)),cur=[lerp(1460,bx+8,mv),lerp(820,by+6,mv),rf_io(tt,T.press-1.6,T.types+2.8,0.4)];
       rf_portal(cx,{t:tt,ringE:clamp((tt-T.accent)/0.8,0,1),ringN:clamp((tt-T.tilde)/0.8,0,1),cursor:cur,press:ag_in(tt,T.press,0.25),field:ag_in(tt,T.press+0.5,0.5),
-        typed:clamp((tt-T.types)/2.4,0,1),caret:tt>T.press+0.6});}},
+        typed:clamp((tt-T.types)/1.8,0,1),caret:tt>T.press+0.6});}},
     // the bench: his record in the student system, every check passed, and where its name was born
     {at:atRec,place:"benchTop",keys:[[0,960,540,1.0],[T.form-0.3,940,520,1.05]],d:2,push:0.02,cut:true,draw:(cx,tt)=>{
       const rows=[{k:"Name",v:"Andres Penaloza"},{k:"First recorded",v:"2018 · online form, A to Z"},{k:"As first typed",v:"ANDRES PENALOZA"},{k:"Since 2025",v:"retyped by hand, as ordinary letters"}],

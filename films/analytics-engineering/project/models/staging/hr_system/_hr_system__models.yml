@@ -48,9 +48,13 @@ models:
         description: '{{ doc("loaded_at") }}'
 
   - name: stg_hr_system__contracts
-    description: One row per version of a contract of employment, as the HR system recorded it. In the group hr, so HR's marts can read it.
+    description: >
+      One row per version of a contract of employment, as the HR system recorded it. In the group
+      hr, so HR's marts can read it, and protected, so the staff domain's claims and the claims
+      app's tests can too.
     config:
       group: hr
+      access: protected
       meta: {owner: HR, domain: hr}
     data_tests:
       - unique_combination:

@@ -42,8 +42,6 @@ const LP_CROWD=[
   {key:"lpCrowd8",name:"",skin:[204,164,128],hair:{style:"bob",c:[52,36,30]},glasses:[44,40,40],top:{kind:"sweater",c:[188,176,160]},breath:0.32}];
 const lp_crowd=i=>LP_CROWD[((i%LP_CROWD.length)+LP_CROWD.length)%LP_CROWD.length];
 const lp_who=who=>typeof who==="string"&&LP_CAST[who]?LP_CAST[who]:who;
-// the agent films' ag_person as it was when the films loaded: a check that follows people (steady.py, jump.py, twice.py) wraps it
-const LP_AGP=ag_person;
 
 /* ---------------------------------------------------------------- a person in the room */
 function lp_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha*(o.a==null?1:o.a);if(a<0.004)return null;const W0=lp_who(who),
@@ -65,9 +63,6 @@ function lp_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha*(o.a==null?1
   g.addColorStop(0,rgba(LP.shade,L0.shade));g.addColorStop(0.5,rgba(LP.shade,L0.shade*0.25));g.addColorStop(0.62,rgba(Lt.col,0));g.addColorStop(1,rgba(Lt.col,L0.warm*(Lt.a>0?1:0.5)));
   px.fillStyle=g;px.fillRect(L,T0,w,h);px.globalCompositeOperation="source-over";
   ctx.globalAlpha=a;ctx.drawImage(pc,L,T0,w,h,L,T0,w,h);ctx.restore();
-  // while a check follows people, hand the person to it on the frame itself too, unseen (clipped to nothing): steady.py only looks
-  // there, and would miss everyone drawn on a canvas of their own
-  if(ag_person!==LP_AGP){ctx.save();ctx.globalAlpha=a;ctx.beginPath();ctx.rect(0,0,0,0);ctx.clip();try{ag_person(ctx,W0,x,y,s,Object.assign({},o,{light:undefined,a:undefined}));}finally{ctx.restore();}}
   return hands;}
 
 // a person's name, and the line under it (their role)

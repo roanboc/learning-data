@@ -312,7 +312,8 @@ Source: [films/agents-at-work-on-data](../films/agents-at-work-on-data/) · Port
 
 Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · Portal: `/from-helper-to-colleague/`
 
-No film source yet.
+- [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
+- [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 
 ## Leading data people
 

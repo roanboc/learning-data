@@ -1310,6 +1310,10 @@ def main():
     for rel, text in build_series.lists():
         if (ROOT / rel).read_text() != text:
             s["fails"].append(f"{rel}: its table is not what build_series.py makes from the films' own rows (decided.md, release.json): run python site-tools/build_series.py")
+    rep_md = (ROOT / "films" / "legibility-report.md").read_text()
+    if build_series.fill(rep_md, build_series.LEGIBLE, [build_series.LEGIBLE_NOTE]) != rep_md:
+        s["fails"].append("films/legibility-report.md: keep only the note between its marks; the table is made when it's printed "
+                          "(python site-tools/build_series.py --legibility), so films merging at once don't clash on it")
 
     s = rep.check("A series' own labs and scenarios: the same in both languages, each lab on one of its film's chapters, each scenario on a lab")
     for S, SL in SERIES_LEARN.values():

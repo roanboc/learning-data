@@ -276,6 +276,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 - [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
+- [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 
 ### Only what you may see
@@ -361,6 +362,7 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 
 - [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
 - [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
+- [Saying no, and what instead](../films/working-with-people/3-saying-no/) — `saying-no`
 
 ### Leading a data team
 
@@ -405,6 +407,7 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
 - [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
+- [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
 
 ## Making of and supplementary films
 

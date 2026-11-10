@@ -1,4 +1,4 @@
-/* Learning Data: "Pause and think" for Measure the work, not the people, in Spanish (Medir el trabajo, no a las personas). Keep the keys in step with think.en.js.
+/* Learning Data: "Pause and think" for Measure the work, not the people, in Spanish (Mide el trabajo, no a las personas). Keep the keys in step with think.en.js.
    The same three stops (read, pairs, target), the right answer in the same place as in English, and the same words as the captions: una medida,
    devuelto, promesas cumplidas, la carga, una meta (Goodhart's target), sus propios objetivos (a person's own). */
 window.LEARN={lang:"es",

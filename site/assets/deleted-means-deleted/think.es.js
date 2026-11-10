@@ -1,0 +1,20 @@
+/* Learning Data: "Pausa para pensar" de Deleted means deleted, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de cuatro capítulos (receipt, source, copies, logs), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  receipt:{q:"El 26 de noviembre, una consulta de la lista como estaba el 24 todavía encuentra a Linh. ¿Por qué?",
+    opts:[{t:"La purga solo corre la octava noche, así que su fila sigue en los archivos actuales.",near:true},{t:"La plataforma guarda siete días los archivos viejos de la tabla, y aún tienen su fila.",ok:true},{t:"La consulta lee la copia de la herramienta de correo, que la guarda hasta sus respaldos."},{t:"Los borrados esperan una semana en una cola antes de correr, así que nada cambió aún."}],
+    why:"El trabajo borró su fila y la purgó enseguida, el 25 de noviembre: los archivos actuales ya no la tienen. Pero los archivos viejos se guardan siete días, para poder deshacer un error, y una consulta del 24 los lee. El 2 de diciembre, el VACUUM del trabajo los quita, y la misma consulta ya no encuentra nada."},
+  source:{q:"El próximo semestre la lista se rehace a partir de los registros de RR. HH. ¿Qué mantiene a Linh fuera?",
+    opts:[{t:"El borrado del 25 de noviembre, que la reconstrucción lee antes de volver a añadir a nadie.",near:true},{t:"La lista de bajas de la herramienta de correo, que la reconstrucción revisa primero."},{t:"Su no, guardado en su registro del sistema de RR. HH., que es donde lee la reconstrucción.",ok:true},{t:"Las copias bloqueadas, que guardan la lista como quedó después de borrar su fila."}],
+    why:"Una reconstrucción empieza otra vez desde las fuentes, y un borrado hecho en la lista no es una de ellas: su sí de 2023 la traería de vuelta enseguida. Por eso Ingrid anota su no en su registro del sistema de RR. HH., de donde sale la lista, y todas las tablas que salen de él lo siguen."},
+  copies:{q:"Una copia bloqueada hecha el 20 de noviembre todavía tiene la fila de Linh. ¿Qué lo hace aceptable?",
+    opts:[{t:"Nadie la usa, se va a los 30 días, y una restauración vuelve a aplicar su petición.",ok:true},{t:"El VACUUM de la noche la alcanza el 2 de diciembre y quita su fila con lo demás.",near:true},{t:"Un administrador la borra antes, en cuanto se envía la respuesta a Linh el 7 de diciembre."},{t:"Su fila está cifrada en la copia, así que nadie podría volver a leerla nunca."}],
+    why:"Nadie puede borrar una copia bloqueada antes de tiempo, ni siquiera cuando debería. Así que su fila se queda en ella, fuera de uso, hasta que la copia se quita sola, 30 días después de hecha; y si alguna vez se restaura, el trabajo vuelve a aplicar cada petición respondida antes de que nadie la lea. VACUUM quita los archivos viejos de una tabla, nunca las copias del lugar aparte."},
+  logs:{q:"Jun quiere comprobar que las filas de la petición 2026-117 ya no están. ¿Cómo debe encontrarlas su consulta?",
+    opts:[{t:"Por su correo, escrito en la consulta, y luego quitado del historial de consultas."},{t:"Preguntando al agente del equipo, ya que el agente enmascara los correos en su traza.",near:true},{t:"Por su número de empleada, escrito en la consulta, ya que un número solo no nombra a nadie."},{t:"Por el número de petición, unido a la tabla restringida con las claves de la petición.",ok:true}],
+    why:"La plataforma guarda el texto de cada consulta durante un año, y nadie puede editarlo, así que una consulta nombra la petición, nunca a la persona: sus números se quedan en la tabla restringida. Un agente enmascara los correos en su traza, pero la consulta que ejecuta igual entra en el historial con lo que se le dio."}
+  }}};

@@ -1,6 +1,6 @@
 # Everyone at the table: questions and assumptions
 
-*Data management* · *Making the case*, film 3 · open, PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Data management* · *Making the case*, film 3 of 4 · open, PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
 
 On the site once PR #NNN merges: https://data.learn-all.org/making-the-case/everyone-at-the-table/
 

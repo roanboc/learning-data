@@ -4,7 +4,7 @@
 
 ## The promise
 
-Every line passes two tests: someone new to data work can follow it, and a data manager, a product owner or a programme lead finds nothing wrong in it. Its idea: a plan for data has stakeholders, everyone it touches or who can shape it. List them all, not only the loudest; place each by how much they can shape the plan and how much it touches them, and keep the quiet ones on the list; ask each what they want from data, and write it down in their words, since it's what they'll judge the plan by; decide who speaks to each, and how often; send everyone the same page every month, bad news too; and when someone shows a real constraint, change the plan, and say why. It is the series' third film: the case is funded, its risks are named, and now everyone it touches is at the table.
+Every line passes two tests: someone new to data work can follow it, and a data manager, a product owner or a programme lead finds nothing wrong in it. Its idea: a plan for data has stakeholders, everyone it touches or who can shape it. List them all, not only the loudest; place each by how much they can shape the plan and how much it touches them, and keep the quiet ones on the list; ask each what they want from data, and write it down in their words, since it's what they'll judge the plan by; decide who speaks to each, and how often; send everyone the same page every month, bad news too; and when someone shows a real constraint, change the plan, and say why. It follows the series' thread: the case is funded, its risks are named, and now everyone it touches is at the table.
 
 **Takeaway:** "Know what each person needs from data; tell everyone the same story."
 

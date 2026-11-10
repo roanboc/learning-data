@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Strategy is a habit, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (july, moves, year), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  july:{q:"At the first review nothing needs to move, and the minutes say so: reviewed, no change. Why does that review still count?",
+    opts:[{t:"The measures, the risks and the map's history were all read, so everyone now knows the plan still holds, and why.",ok:true},{t:"The measures were read and are getting better, so everyone now knows the plan still holds, and the risks can wait.",near:true},{t:"A review that changes nothing shows the plan was right from the start, so the next reviews can be shorter, or skipped."}],
+    why:"A review reads three things: what the measures say, what the risks say, and what has changed around you. In July all three were read, and nothing asked for a change. That's a result too: everyone knows the plan still holds, and why. Reading only the measures because they look good is how a plan goes stale without anyone noticing. What would your next review read?"},
+  moves:{q:"The University Council decides to offer short online courses from 2028. What does the steering group do with the data strategy?",
+    opts:[{t:"Writes a new strategy around the courses, from a fresh diagnosis, and asks the data council to approve it by December."},{t:"Moves the products the faculties' choice needs up to December, and adds the agents' mandates on top, so nothing has to wait.",near:true},{t:"Moves the products the faculties' choice needs up to December, lets the agents' mandates wait to March, and says why.",ok:true}],
+    why:"The diagnosis grew, but the guiding policy held, so the plan didn't need replacing: its actions moved. With half the team's time on the plan, it couldn't do both by December, so one thing moved up and one waited, and the risk of the wait was read at every review. It was written on the one page, and everyone it touched heard why that week. When your organisation's plans change, what moves up, what waits, and who hears it from you?"},
+  year:{q:"At the first year's review, four data partners are still to come, and two faculties haven't named one. What does Helena do with it?",
+    opts:[{t:"Says it as plainly as the measures that improved, and leaves it on the risk register where it was, to read again in April.",near:true},{t:"Says it as plainly as the measures that improved, sees both deans in February, and moves that risk to the top of the register.",ok:true},{t:"Leaves it out of the year's review, so the results aren't spoiled, and emails the two faculties for a name in the meantime."}],
+    why:"Promised beside delivered includes what didn't work, said as plainly as what did. Leaving it out would start the next year from a story, not from what happened; leaving it where it was would let it slip again. So the miss gets an action, Helena sees both deans, and a place at the top of the register. What did your last plan promise that it didn't deliver, and who knows?"}
+  }}};

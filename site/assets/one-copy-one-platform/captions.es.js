@@ -2,7 +2,7 @@
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as in the series' page and the module's other captions: Nómina (the team) and la nómina (a pay run), Finanzas, RR. HH., el día de pago, la docencia ocasional,
-   una declaración de horas for a casual claim (las declaraciones), una planilla for a spreadsheet, en su sitio for in place; Noor is la arquitecta de datos, as on every page.
+   una declaración de horas for a casual claim (las declaraciones), una planilla for a spreadsheet, una segunda forma for a second form; Noor is la arquitecta de datos, as on every page.
    In 1609: el libro for the bank's ledger, florines for guilders, letras de cambio for bills, el ayuntamiento for the town hall; the Wisselbank keeps its name.
    The platform's names stay as they are on screen: Lakebase, Postgres, the lakehouse, Unity Catalog, Databricks. Other films by their Spanish titles, in «»:
    «Las dos cosas a la vez», «Una plataforma que se vigila sola» and «Mover es fácil, acordar es el trabajo». Tú, as the film's last lines speak to the viewer.
@@ -56,16 +56,16 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La app de declaraciones está hecha sobre Lakebase, la base de datos Postgres de Databricks.",
 "Linh writes each claim once, as a row, and her coordinator approves it in that same row.":
 "Linh escribe cada declaración una vez, como fila, y su coordinación la aprueba en esa misma fila.",
-"Postgres serves the app, and the lakehouse reads the same rows for analysis, in place, without slowing it.":
-"Postgres atiende a la app, y el lakehouse lee las mismas filas para analizarlas, en su sitio, sin hacerla más lenta.",
+"Postgres serves the app. The platform keeps the same rows in a second form for analysis, so the lakehouse reads them without slowing it.":
+"Postgres atiende a la app. La plataforma guarda las mismas filas en una segunda forma para análisis, y el lakehouse las lee sin frenarla.",
 "Payroll's list of claims still waiting and the job that builds the hours to pay both read that copy.":
 "La lista de Nómina de declaraciones pendientes y el proceso que arma las horas a pagar leen esa copia.",
 "So does Finance's casual teaching cost, and all three read through Unity Catalog.":
 "También el costo de la docencia ocasional de Finanzas, y los tres leen a través de Unity Catalog.",
 "Each table has one writer. The app writes the claims.":
 "Cada tabla tiene un solo escritor: la app escribe las declaraciones.",
-"The lakehouse writes the contracts from the HR system, and serves them to the app, which checks each claim against its contract.":
-"El lakehouse escribe los contratos del sistema de RR. HH. y se los sirve a la app, que valida cada declaración con su contrato.",
+"The lakehouse writes the contracts from the HR system, and a copy goes to the app, which checks each claim against its contract.":
+"El lakehouse escribe los contratos del sistema de RR. HH., y una copia va a la app, que valida cada declaración con su contrato.",
 "As in Amsterdam's ledger, a claim is written once, and read where it's written.":
 "Como en el libro de Ámsterdam, una declaración se escribe una vez, y se lee donde se escribe.",
 "What's gone: the pipeline, the second database, and the work of keeping two copies in step.":
@@ -100,8 +100,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En Ámsterdam, un pago pasó a ser una línea movida en un solo libro, y el mismo libro mostraba lo que tenía cada uno.",
 "At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it.":
 "En la universidad, la declaración de Linh es una fila: ella la escribe, su coordinación la aprueba, Nómina la paga y Finanzas la cuenta.",
-"Today, 856 casual staff are paid from rows like hers, and not one claim was copied to get there.":
-"Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, sin copiar ni una declaración.",
+"Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.":
+"Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, y ningún equipo tuvo que copiar una declaración.",
 "Keep one copy, governed once.":
 "Guarda una copia, gobernada una vez."
 });

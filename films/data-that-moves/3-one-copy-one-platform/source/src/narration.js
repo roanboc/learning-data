@@ -28,11 +28,11 @@ const NARR={
  {"id":"noor","gap":0.8,"text":"Noor, the data architect, chose one copy on one platform instead."},
  {"id":"lakebase","gap":0.8,"text":"The claims app is built on Lakebase, the Postgres database in Databricks."},
  {"id":"once","gap":0.8,"text":"Linh writes each claim once, as a row, and her coordinator approves it in that same row."},
- {"id":"engines","gap":0.8,"text":"Postgres serves the app, and the lakehouse reads the same rows for analysis, in place, without slowing it."},
+ {"id":"engines","gap":0.8,"text":"Postgres serves the app. The platform keeps the same rows in a second form for analysis, so the lakehouse reads them without slowing it."},
  {"id":"readers","gap":0.8,"text":"Payroll's list of claims still waiting and the job that builds the hours to pay both read that copy."},
  {"id":"finance","gap":0.8,"text":"So does Finance's casual teaching cost, and all three read through Unity Catalog."},
  {"id":"writer","gap":0.8,"text":"Each table has one writer. The app writes the claims."},
- {"id":"contracts","gap":0.8,"text":"The lakehouse writes the contracts from the HR system, and serves them to the app, which checks each claim against its contract."},
+ {"id":"contracts","gap":0.8,"text":"The lakehouse writes the contracts from the HR system, and a copy goes to the app, which checks each claim against its contract."},
  {"id":"written","gap":0.8,"text":"As in Amsterdam's ledger, a claim is written once, and read where it's written."}]},
 "fewer":{"name":"Fewer platforms","lead":1.2,"tail":1.0,"vo":[
  {"id":"gone","gap":0.8,"text":"What's gone: the pipeline, the second database, and the work of keeping two copies in step."},
@@ -53,6 +53,6 @@ const NARR={
 "row":{"name":"The same row","lead":1.2,"tail":1.0,"vo":[
  {"id":"amsterdam","gap":0.8,"text":"In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held."},
  {"id":"onerow","gap":0.8,"text":"At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it."},
- {"id":"paid","gap":0.8,"text":"Today, 856 casual staff are paid from rows like hers, and not one claim was copied to get there.","say":"Today, eight hundred and fifty-six casual staff are paid from rows like hers, and not one claim was copied to get there."},
+ {"id":"paid","gap":0.8,"text":"Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.","say":"Today, eight hundred and fifty-six casual staff are paid from rows like hers, and no team had to copy a claim to get there."},
  {"id":"takeaway","gap":0.8,"text":"Keep one copy, governed once."}]}
 };

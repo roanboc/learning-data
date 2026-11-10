@@ -1,0 +1,107 @@
+{
+  "kicker": "Doors to the data",
+  "kicker_es": "Puertas a los datos",
+  "title_es": "Red, almacenamiento y llaves",
+  "h1": "Network, storage and keys: one door to the data",
+  "h1_es": "Red, almacenamiento y llaves: una sola puerta a los datos",
+  "lead": "Production's files sit in Azure storage, and Unity Catalog is meant to be the only way to them. Sam Okafor finds nine ways around it: two account keys, a link signed with one, and six people with a role on the storage. Every door is open to the internet. He shuts all but one.",
+  "lead_es": "Los archivos de producción están en el almacenamiento de Azure, y Unity Catalog debe ser su único camino. Sam Okafor encuentra nueve rodeos: dos llaves de la cuenta, un enlace firmado con una y seis personas con un rol en el almacenamiento. Todas las puertas dan a internet. Cierra todas menos una.",
+  "description": "A film about the paths to a data platform's files, the seventh of Locks before the data, in Azure Databricks and Microsoft Azure: in Rome, in the year 97, the water commissioner Sextus Julius Frontinus found about ten thousand measures of water drawn off on the way, through holes in the channels and secret pipes under the pavements, and held the city to its rules: water drawn only at a distribution tank, through a bronze nozzle stamped with the size granted, every grant in the records, and the gangs' work written down; he wrote that the supply almost doubled. At the university, production's files sit in an Azure storage account, and Unity Catalog is meant to be the only way to them, where each grant is checked and every mask and filter applied; Sam Okafor counts nine ways around it (two account keys, a link signed with one, and six people with a role on the storage), and every door is open to the internet. He gives each workspace a private endpoint and, after two weeks of an IP access list, switches public access off; serverless compute may reach only the catalog's own storage and a short list, after a week in dry run; the storage's public access and account keys go off, the six roles go, and one identity keeps a role on the files, the catalog's own access connector; each catalog is bound to its own workspace; the one door left, a group that may only read the storage, stays empty until an admin account is switched on for a task, approved and recorded; and the key is the university's own, kept by its security team. It builds Walls, doors and keys and Power you switch on.",
+  "description_es": "Una película sobre los caminos a los archivos de una plataforma de datos, la séptima de Cerraduras antes que los datos, en Azure Databricks y Microsoft Azure: en Roma, en el año 97, el comisario de las aguas Sexto Julio Frontino encontró unas diez mil medidas de agua sacadas por el camino, por agujeros en los canales y ramales secretos bajo el pavimento, e hizo cumplir sus reglas a la ciudad: el agua se toma solo en un depósito de distribución, por una boquilla de bronce marcada con el tamaño concedido, cada concesión en los registros, y el trabajo de las cuadrillas anotado; escribió que el caudal casi se duplicó. En la universidad, los archivos de producción están en una cuenta de almacenamiento de Azure, y Unity Catalog debería ser el único camino hacia ellos, donde se revisa cada permiso y se aplica cada máscara y cada filtro; Sam Okafor cuenta nueve rodeos (dos llaves de la cuenta, un enlace firmado con una y seis personas con un rol en el almacenamiento), y todas las puertas dan a internet. Le da a cada espacio de trabajo un punto de conexión privado y, tras dos semanas de una lista de acceso por IP, apaga el acceso público; el cómputo sin servidor solo puede llegar al almacenamiento del catálogo y a una lista corta, tras una semana en modo de prueba; se apagan el acceso público y las llaves de la cuenta del almacenamiento, se van los seis roles, y una sola identidad conserva un rol en los archivos, el conector de acceso del propio catálogo; cada catálogo queda vinculado a su propio espacio de trabajo; la única puerta que queda, un grupo que solo puede leer el almacenamiento, sigue vacía hasta que se enciende una cuenta de administrador para una tarea, aprobada y registrada; y la llave es de la universidad, guardada por su equipo de seguridad. Construye Muros, puertas y llaves y Poder que se enciende.",
+  "card": "Private doors, a short list out, one identity at the files, and one way around the catalog that you switch on and watch.",
+  "card_es": "Puertas privadas, una lista corta de salida, una identidad en los archivos y un solo rodeo al catálogo, encendido y vigilado.",
+  "chapters_es": {
+    "holes": "Agujeros en los canales",
+    "tank": "Solo en el depósito",
+    "around": "Nueve rodeos",
+    "paths": "Puertas de entrada, una lista corta de salida",
+    "files": "Una sola identidad en los archivos",
+    "walls": "Cada catálogo en su espacio de trabajo",
+    "switch": "La puerta que se enciende",
+    "key": "La llave propia de la universidad",
+    "end": "Solo por el catálogo"
+  },
+  "past": [
+    "Rome, in the year 97: holes in the channels, and water drawn only at the tank",
+    "No path to the data skips the catalog, except the one you switch on and watch."
+  ],
+  "past_es": [
+    "Roma, en el año 97: agujeros en los canales, y el agua tomada solo en el depósito",
+    "Ningún camino a los datos se salta el catálogo, salvo el que enciendes y vigilas."
+  ],
+  "next_h": "You've seen how the platform's files are reached only through the catalog: private doors in, a short list out, one identity at the files, each catalog in its own workspace, and a key of the university's own. Next: from a branch to production, where every change to that platform takes one reviewed path.",
+  "next_h_es": "Viste cómo a los archivos de la plataforma solo se llega por el catálogo: puertas privadas de entrada, una lista corta de salida, una sola identidad en los archivos, cada catálogo en su espacio de trabajo y una llave propia de la universidad. Sigue: de una rama a producción, donde cada cambio a esa plataforma toma un solo camino revisado.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film shows Azure Databricks and Azure Storage as their docs did on 5 November 2026. These are the pages it follows, one for each path it closes and for the key; links checked on 10 November 2026.",
+    "p_es": "La película muestra Azure Databricks y Azure Storage como los mostraba su documentación el 5 de noviembre de 2026. Estas son las páginas que sigue, una por cada camino que cierra y por la llave; enlaces revisados el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Private Link concepts",
+        "title_es": "Conceptos de Private Link",
+        "line": "The private doors in: from people to the workspace, and from the machines that run the jobs to Databricks.",
+        "line_es": "Las puertas privadas de entrada: de las personas al espacio de trabajo, y de las máquinas que ejecutan los procesos a Databricks.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/network/concepts/privatelink-concepts",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/network/concepts/privatelink-concepts"
+      },
+      {
+        "title": "Manage IP access lists",
+        "title_es": "Administrar listas de acceso por IP",
+        "line": "Let in only known addresses while a public door remains, and what changes once there's a private one.",
+        "line_es": "Dejar entrar solo direcciones conocidas mientras quede una puerta pública, y qué cambia cuando hay una privada.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/network/front-end/ip-access-list",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/network/front-end/ip-access-list"
+      },
+      {
+        "title": "What is serverless egress control?",
+        "title_es": "¿Qué es el control de salida sin servidor?",
+        "line": "A network policy with restricted access, so data leaves only for places on the list, tried first in dry run.",
+        "line_es": "Una política de red con acceso restringido, para que los datos salgan solo hacia lugares de la lista, probada antes en modo de prueba.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/network/serverless-network-security/network-policies",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/network/serverless-network-security/network-policies"
+      },
+      {
+        "title": "Prevent authorization with Shared Key",
+        "title_es": "Evitar la autorización con clave compartida",
+        "line": "Switch off a storage account's keys, so nothing signed with them, a link included, opens a file again.",
+        "line_es": "Apagar las llaves de una cuenta de almacenamiento, para que nada firmado con ellas, ni un enlace, vuelva a abrir un archivo.",
+        "href": "https://learn.microsoft.com/en-us/azure/storage/common/shared-key-authorization-prevent",
+        "href_es": "https://learn.microsoft.com/es-es/azure/storage/common/shared-key-authorization-prevent"
+      },
+      {
+        "title": "Use Azure managed identities in Unity Catalog to access storage",
+        "title_es": "Usar identidades administradas de Azure en Unity Catalog para acceder al almacenamiento",
+        "line": "The access connector: the catalog's own identity at the files, with no secret anyone holds.",
+        "line_es": "El conector de acceso: la identidad propia del catálogo en los archivos, sin un secreto que alguien guarde.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/connect/unity-catalog/cloud-storage/azure-managed-identities",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/connect/unity-catalog/cloud-storage/azure-managed-identities"
+      },
+      {
+        "title": "Workspace-catalog binding",
+        "title_es": "Vincular catálogos a espacios de trabajo",
+        "line": "Bind each catalog to its own workspace, so from any other a grant isn't enough.",
+        "line_es": "Vincular cada catálogo a su propio espacio de trabajo, para que desde otro un permiso no baste.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/access-control/workspace-catalog-binding",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/access-control/workspace-catalog-binding"
+      },
+      {
+        "title": "Customer-managed keys for encryption",
+        "title_es": "Claves administradas por el cliente para el cifrado",
+        "line": "A key of your own for the workspace's notebooks, queries and disks, and what happens if it's taken back.",
+        "line_es": "Una llave propia para los notebooks, las consultas y los discos del espacio de trabajo, y qué pasa si se retira.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/keys/customer-managed-keys",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/keys/customer-managed-keys"
+      },
+      {
+        "title": "Customer-managed keys for account encryption",
+        "title_es": "Claves administradas por el cliente para el cifrado de cuentas",
+        "line": "The storage's own key, kept in a vault: the storage uses it, and picks up each new version.",
+        "line_es": "La llave propia del almacenamiento, guardada en una bóveda: el almacenamiento la usa y toma cada versión nueva.",
+        "href": "https://learn.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview",
+        "href_es": "https://learn.microsoft.com/es-es/azure/storage/common/customer-managed-keys-overview"
+      }
+    ]
+  },
+  "draft": true
+}

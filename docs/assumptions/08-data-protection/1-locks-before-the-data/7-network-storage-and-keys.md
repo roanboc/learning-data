@@ -1,8 +1,8 @@
 # Network, storage and keys: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 7 · open, PR #195 · [pull request](https://github.com/roanboc/learning-data/pull/195)
+*Data protection and privacy* · *Locks before the data*, film 7 · merged, PR #195 · [pull request](https://github.com/roanboc/learning-data/pull/195)
 
-On the site once PR #195 merges: https://data.learn-all.org/locks-before-the-data/network-storage-and-keys/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/network-storage-and-keys/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

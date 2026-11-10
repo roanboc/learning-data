@@ -78,7 +78,7 @@ area, as domains. After each table other teams read builds, dbt sets its model's
 (`macros/governance/domain_tag.sql`, DEC-PRJ-15). Nothing to set in the build. Once, on the platform:
 
 1. Someone with `MANAGE DISCOVER` (account and workspace admins have it) creates a domain for each
-   area, `student`, `course`, `learning`, `planning`, `finance` and `wallet`, each on a governed
+   area, `student`, `course`, `staff`, `learning`, `planning`, `finance` and `wallet`, each on a governed
    tag of its name. A table joins its domain when it carries the tag.
 2. Give the identity that runs dbt `ASSIGN` on each of those tags.
 

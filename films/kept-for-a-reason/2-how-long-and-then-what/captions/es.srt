@@ -1,0 +1,303 @@
+1
+00:00:01,400 --> 00:00:03,516
+Washington, 1943.
+
+2
+00:00:04,816 --> 00:00:10,891
+El país está en guerra, y cada oficina nueva produce papeles: órdenes, contratos, nóminas y cartas.
+
+3
+00:00:11,991 --> 00:00:16,240
+Llenan archivadores de acero, de cuatro cajones cada uno, luego salas enteras, luego pisos.
+
+4
+00:00:17,740 --> 00:00:24,345
+El jefe de los Archivos Nacionales lo llama una inundación: cada año, papel para llenar un edificio como el de los Archivos.
+
+5
+00:00:26,045 --> 00:00:30,712
+Y casi todo no tiene valor duradero: un 80%, calculan los Archivos.
+
+6
+00:00:32,012 --> 00:00:36,305
+Pero un papel solo puede destruirse si está en una lista que aprueba el Congreso,
+
+7
+00:00:36,505 --> 00:00:41,430
+y una lista cubre solo los papeles que ya existen: cada pila nueva necesita una lista nueva.
+
+8
+00:00:42,730 --> 00:00:48,032
+Así que casi todo se guarda sin más: nadie tiene tiempo de revisarlo, ni el encargo de decidir.
+
+9
+00:00:49,132 --> 00:00:53,025
+Guardarlo todo cuesta millones en alquiler, personal y archivadores de acero.
+
+10
+00:00:54,125 --> 00:01:00,193
+Y cuando cierren las oficinas de la guerra, sus papeles se enviarán lejos o se perderán, lo valioso con lo inútil:
+
+11
+00:01:00,393 --> 00:01:04,431
+papeles que alguien necesitará un día para probar una reclamación o su servicio.
+
+12
+00:01:05,931 --> 00:01:07,371
+Algo tiene que cambiar.
+
+13
+00:01:11,171 --> 00:01:19,078
+El 7 de julio de 1943, el presidente firma una ley que los Archivos Nacionales redactaron con una comisión del Congreso.
+
+14
+00:01:20,378 --> 00:01:22,535
+Cada oficina escribe ahora un calendario, una vez:
+
+15
+00:01:22,735 --> 00:01:26,554
+para cada tipo de registro, cuánto tiempo se guarda, y qué se hace con él después.
+
+16
+00:01:27,854 --> 00:01:32,440
+El Archivista y el Congreso lo aprueban, y cubre papeles aún no escritos.
+
+17
+00:01:33,740 --> 00:01:36,623
+Así, la decisión se toma antes de que los papeles se acumulen.
+
+18
+00:01:38,123 --> 00:01:44,187
+Una regla: los papeles sobre dinero reclamado, por el gobierno o al gobierno, se quedan hasta resolver la reclamación.
+
+19
+00:01:45,487 --> 00:01:48,326
+Otra: ningún papel puede destruirse de otra manera.
+
+20
+00:01:49,626 --> 00:01:57,571
+En 1944, solo en las Fuerzas Aéreas del Ejército, el programa de registros ahorra 927,000 dólares,
+
+21
+00:01:57,771 --> 00:02:01,215
+casi tanto como todo el presupuesto de los Archivos Nacionales ese año.
+
+22
+00:02:02,715 --> 00:02:07,483
+Hoy, solo del 1 al 3% de los papeles del gobierno se guardan para siempre,
+
+23
+00:02:07,683 --> 00:02:11,451
+donde las familias encuentran su historia, y los veteranos prueban su servicio.
+
+24
+00:02:13,151 --> 00:02:21,371
+Los datos se acumulan igual: en la universidad, la plataforma guarda cada registro sin fecha de fin, porque nadie lo ha decidido.
+
+25
+00:02:22,871 --> 00:02:29,554
+Como los calendarios de 1943, cada tipo de registro puede tener su fecha de fin, decidida antes de necesitarla.
+
+26
+00:02:36,554 --> 00:02:38,446
+Octubre de 2026.
+
+27
+00:02:39,546 --> 00:02:46,618
+Ingrid Holm, dueña de los registros de RR. HH., mira lo que guarda la plataforma, con Yusuf Demir, de gobierno de datos.
+
+28
+00:02:47,718 --> 00:02:54,541
+Nóminas desde 2016, y candidaturas de personas nunca contratadas, desde 2017.
+
+29
+00:02:55,841 --> 00:03:00,770
+Nunca se ha borrado nada: cada registro se guarda como si estuviera en uso, para siempre.
+
+30
+00:03:02,070 --> 00:03:03,715
+Pero un registro tiene tres vidas.
+
+31
+00:03:04,815 --> 00:03:10,305
+Primero, está en uso, se lee y se cambia a menudo, como las nóminas de Linh Nguyen de este año.
+
+32
+00:03:11,405 --> 00:03:17,698
+Luego se archiva: guardado en frío, leído rara vez, por menos personas, como sus nóminas de años pasados.
+
+33
+00:03:18,998 --> 00:03:21,217
+Después, en su fecha de fin, se borra.
+
+34
+00:03:22,517 --> 00:03:27,674
+O, para los pocos con valor duradero, se guarda para siempre, como sus títulos y calificaciones.
+
+35
+00:03:28,974 --> 00:03:35,256
+Cada año de más que se guarda un registro es un año en que los datos de alguien podrían filtrarse, o usarse mal.
+
+36
+00:03:36,756 --> 00:03:41,905
+Pero borrar sin un plan no es más seguro: también podría irse una nómina que la ley exige.
+
+37
+00:03:45,505 --> 00:03:49,841
+Decidir registro por registro no terminaría nunca, como las listas de Washington.
+
+38
+00:03:51,141 --> 00:03:54,511
+Así que la universidad escribe un calendario, por tipo de registro.
+
+39
+00:03:55,611 --> 00:04:00,736
+Cada fila nombra un tipo de registro, su dueño y su razón, cuánto tiempo, y luego qué.
+
+40
+00:04:02,236 --> 00:04:09,527
+Cada dueño decide sus filas, Ingrid las de RR. HH. y Mei Tanaka las de la oficina de registro, y Yusuf lleva el calendario.
+
+41
+00:04:10,827 --> 00:04:18,708
+Nóminas, con los contratos, las horas y la paga: la ley las exige, así que 7 años tras el fin de cada contrato, y luego se borran.
+
+42
+00:04:20,208 --> 00:04:26,440
+Registros académicos, los títulos y calificaciones: para siempre, para que un egresado siempre pueda probar su título.
+
+43
+00:04:27,740 --> 00:04:32,888
+La lista de correo de tutores y las candidaturas no seleccionadas también tienen sus filas.
+
+44
+00:04:34,188 --> 00:04:40,056
+Cada razón viene de Una razón para guardarlo; cada plazo es lo que esa razón necesita, y no más.
+
+45
+00:04:41,556 --> 00:04:44,699
+El miércoles 14 de octubre, los dueños lo firman.
+
+46
+00:04:46,399 --> 00:04:49,886
+Más tarde ese mes, la primera limpieza borra lo que ya pasó su fecha,
+
+47
+00:04:50,086 --> 00:04:56,060
+nóminas de 2016 a 2018, y viejas candidaturas de personas nunca contratadas.
+
+48
+00:04:59,860 --> 00:05:03,577
+El plazo se cuenta desde un hecho, no desde el día en que se creó el registro.
+
+49
+00:05:04,877 --> 00:05:07,744
+Para las nóminas, es el fin de cada contrato.
+
+50
+00:05:08,844 --> 00:05:15,668
+Linh ha tenido ocho contratos desde 2023, uno por semestre, así que sus nóminas tienen ocho fechas de fin.
+
+51
+00:05:17,168 --> 00:05:24,267
+Su primer contrato terminó en junio de 2023: sus registros se guardan hasta el 23 de junio de 2030.
+
+52
+00:05:25,567 --> 00:05:33,680
+El último termina el 20 de noviembre de 2026: sus registros, hasta el 20 de noviembre de 2033.
+
+53
+00:05:35,180 --> 00:05:40,903
+Para una candidatura, el hecho es la decisión; para la lista de correo, el último contacto, o un no.
+
+54
+00:05:42,203 --> 00:05:46,013
+Una vez registrado el hecho, la fecha de fin sale sola.
+
+55
+00:05:47,513 --> 00:05:51,365
+El viernes 20 de noviembre termina el último contrato de Linh.
+
+56
+00:05:52,665 --> 00:05:57,519
+Nadie se reúne, y nadie tiene que decidir: sus registros ya saben sus fechas.
+
+57
+00:05:59,219 --> 00:06:02,816
+Decidido antes de necesitarlo, como en 1943.
+
+58
+00:06:06,416 --> 00:06:09,124
+A veces un registro debe quedarse pasada su fecha.
+
+59
+00:06:10,624 --> 00:06:16,347
+Una extutora dice que no le pagaron todas sus horas en 2019, y su reclamación no está resuelta.
+
+60
+00:06:17,847 --> 00:06:23,015
+Sus nóminas de 2019 deben irse en enero, con el resto de las de ese año.
+
+61
+00:06:24,515 --> 00:06:28,235
+Si se fueran, ni ella ni la universidad podrían mostrar qué se pagó.
+
+62
+00:06:29,735 --> 00:06:32,575
+Así que la oficina jurídica pone una retención.
+
+63
+00:06:34,475 --> 00:06:39,176
+Una retención nombra los registros que guarda, su razón, quién la puso, y quién puede levantarla.
+
+64
+00:06:40,876 --> 00:06:44,323
+Mientras está puesta, la limpieza se salta esos registros, y solo esos.
+
+65
+00:06:46,023 --> 00:06:50,616
+Una retención es para una reclamación, una auditoría o un juicio, nunca por si acaso.
+
+66
+00:06:52,116 --> 00:06:57,835
+Resuelta la reclamación, la oficina jurídica levanta la retención, y sus registros se van en la siguiente limpieza.
+
+67
+00:06:59,535 --> 00:07:03,909
+Como en 1943: los papeles de una reclamación se quedan hasta resolverla.
+
+68
+00:07:07,509 --> 00:07:12,625
+Borrado demasiado pronto, un registro rompe una promesa: una tutora no puede mostrar qué le pagaron.
+
+69
+00:07:13,925 --> 00:07:18,102
+Guardado demasiado tiempo, es un riesgo para la persona de quien trata, sin nada a cambio.
+
+70
+00:07:19,402 --> 00:07:24,964
+Muchas leyes de privacidad lo hacen regla: no guardes datos personales más de lo que su razón necesita.
+
+71
+00:07:26,464 --> 00:07:32,377
+Así, nada se borra fuera del calendario, y nada se queda más allá de su fecha, salvo con una retención.
+
+72
+00:07:33,877 --> 00:07:39,556
+La fecha vale para cada copia: las tablas de la plataforma, el archivo, las versiones antiguas, los logs.
+
+73
+00:07:41,056 --> 00:07:44,217
+Cómo se va la última copia es Borrado es borrado.
+
+74
+00:07:45,717 --> 00:07:53,198
+En 1943, Washington dejó de decidir pila por pila, y decidió una vez, antes de que los papeles se acumularan.
+
+75
+00:07:54,698 --> 00:07:57,888
+Los pocos valiosos se guardaron, y el resto se fue a tiempo.
+
+76
+00:07:59,588 --> 00:08:04,653
+En la universidad, cada registro tiene ahora una fecha de fin, decidida antes de necesitarla.

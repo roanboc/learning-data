@@ -107,113 +107,113 @@ Así que el control propuso el cambio, en una solicitud de cambio: las palabras 
 Tres tablas, ocho definiciones que nombran título, el código que las construye, y tres informes y aplicaciones por avisar.
 
 28
-00:03:01,281 --> 00:03:05,970
-El martes por la mañana, Mei aprobó el significado, y gobernanza de datos confirmó el término.
+00:03:01,281 --> 00:03:06,278
+El martes por la mañana, el equipo de datos revisó el código, y a Mei le avisaron qué toca.
 
 29
-00:03:07,470 --> 00:03:09,844
+00:03:07,778 --> 00:03:10,152
 Esta vez, vio dónde se usan sus palabras.
 
 30
-00:03:12,744 --> 00:03:15,482
+00:03:13,052 --> 00:03:15,790
 Las palabras nuevas tienen un número: 6 créditos.
 
 31
-00:03:16,782 --> 00:03:21,127
+00:03:17,090 --> 00:03:21,435
 Así que se guarda en un solo lugar, como parámetro: min award credit points, 6.
 
 32
-00:03:22,827 --> 00:03:28,763
+00:03:23,135 --> 00:03:29,071
 La nueva columna de Jun, cuenta como título, lo lee, y cada conteo de títulos lee esa columna.
 
 33
-00:03:30,463 --> 00:03:37,014
-Si Mei y las facultades acuerdan otro número, cambia una línea, en una solicitud de cambio revisada.
+00:03:30,771 --> 00:03:39,630
+Si Mei y las facultades acuerdan otro número, cambia primero el glosario, luego una línea, en una solicitud que revisa el equipo de datos.
 
 34
-00:03:41,714 --> 00:03:45,594
+00:03:44,330 --> 00:03:48,210
 Un conteo también es un significado: qué credenciales cuentan, y en qué año.
 
 35
-00:03:47,094 --> 00:03:54,589
+00:03:49,710 --> 00:03:57,205
 Así, títulos otorgados se cuenta una vez, como vista de métricas: un conteo que la plataforma define una vez, para toda herramienta.
 
 36
-00:03:56,289 --> 00:04:00,491
+00:03:58,905 --> 00:04:03,107
 Cuenta las credenciales que cuentan como título, por el año en que se emitieron.
 
 37
-00:04:01,991 --> 00:04:06,165
+00:04:04,607 --> 00:04:08,781
 El proyecto la construye como a sus modelos, así que cada cambio en ella se revisa.
 
 38
-00:04:07,665 --> 00:04:11,416
+00:04:10,281 --> 00:04:14,032
 El borrador de la entrega la lee, y también el informe del censo de Planificación.
 
 39
-00:04:13,116 --> 00:04:15,616
+00:04:15,732 --> 00:04:18,232
 Ya ninguno cuenta los títulos a su manera.
 
 40
-00:04:18,516 --> 00:04:21,043
+00:04:21,132 --> 00:04:23,659
 Y los agentes de la plataforma leen el mismo significado.
 
 41
-00:04:22,143 --> 00:04:28,296
+00:04:24,759 --> 00:04:30,912
 Clara le pregunta a Genie One, el asistente de la plataforma, cuántos títulos otorgó la universidad este año.
 
 42
-00:04:29,996 --> 00:04:37,248
+00:04:32,612 --> 00:04:39,864
 Responde 4,867, desde la métrica, y cita la página de título para decir qué es un título.
 
 43
-00:04:39,148 --> 00:04:43,257
+00:04:41,764 --> 00:04:45,873
 Prefiere la página a su propia suposición, y muestra de dónde salió su respuesta.
 
 44
-00:04:44,757 --> 00:04:48,644
+00:04:47,373 --> 00:04:51,260
 Un agente que el equipo de datos construye sobre la métrica da la misma respuesta.
 
 45
-00:04:50,144 --> 00:04:53,420
+00:04:52,760 --> 00:04:56,036
 Personas y agentes leen un solo significado, y les da una sola cifra.
 
 46
-00:04:56,320 --> 00:05:01,967
+00:04:58,936 --> 00:05:04,583
 El significado viene en tres capas: qué significa una palabra, cómo se cuenta un número, y cómo se relacionan las cosas.
 
 47
-00:05:03,467 --> 00:05:04,676
+00:05:06,083 --> 00:05:07,292
 Cada una tiene un solo lugar.
 
 48
-00:05:05,976 --> 00:05:09,393
+00:05:08,592 --> 00:05:12,009
 Las palabras viven en el mapa de Noor, y el glosario las copia.
 
 49
-00:05:10,893 --> 00:05:14,431
+00:05:13,509 --> 00:05:17,047
 Cómo se relacionan las cosas también vive allí, copiado al proyecto.
 
 50
-00:05:15,931 --> 00:05:20,296
+00:05:18,547 --> 00:05:22,912
 Y los conteos viven en el proyecto, que la plataforma sirve como vistas de métricas.
 
 51
-00:05:21,796 --> 00:05:24,986
+00:05:24,412 --> 00:05:27,602
 Cada copia se compara con su lugar, o se construye a partir de él.
 
 52
-00:05:28,686 --> 00:05:33,475
+00:05:31,302 --> 00:05:36,091
 Ahora Mei ve sus palabras en uso, en cada tabla, conteo y respuesta que las contiene.
 
 53
-00:05:34,975 --> 00:05:39,723
+00:05:37,591 --> 00:05:42,339
 Ella decide qué significa título, una vez, y la plataforma lo lleva a todo lugar donde se lee.
 
 54
-00:05:41,423 --> 00:05:51,478
+00:05:44,039 --> 00:05:54,094
 El día de la entrega, el borrador y el informe del censo dicen 4,867, contados con la misma métrica y las mismas palabras.
 
 55
-00:05:53,178 --> 00:05:56,364
+00:05:55,794 --> 00:05:58,980
 Un solo significado, leído por personas, informes y agentes.

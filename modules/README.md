@@ -372,6 +372,7 @@ Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/
 
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
 - [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
+- [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 
 ### Ownership and performance
 
@@ -399,6 +400,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
 - [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
+- [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
 
 ### Architecture that keeps up
 

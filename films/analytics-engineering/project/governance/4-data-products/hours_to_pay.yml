@@ -1,6 +1,6 @@
 # A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
-# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
-# for each output, from this file and the dbt contracts.
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models; only a canonical table has an enterprise contract, written by data governance.
 
 name: hours_to_pay
 title: The hours to pay

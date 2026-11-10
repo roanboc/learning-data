@@ -1,8 +1,8 @@
 # One small change at a time: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 2 of 4 · open, PR #268 · [pull request](https://github.com/roanboc/learning-data/pull/268)
+*Leading data people* · *Leading a data team*, film 2 of 4 · merged, PR #268 · [pull request](https://github.com/roanboc/learning-data/pull/268)
 
-On the site once PR #268 merges: https://data.learn-all.org/leading-a-data-team/one-small-change/
+[Watch it on the site](https://data.learn-all.org/leading-a-data-team/one-small-change/)
 
 > Copied from the film thread's notes on 10 November 2026. Files such as `numbers.md`, `openings.md` and `palettes.md` are in the module's working folder, not in this repository.
 

@@ -6,6 +6,17 @@ The mart models of the finance domain (a consumer contract), at their latest ver
 
 ```mermaid
 erDiagram
+    mart_finance__casual_pay_paid {
+        date pay_day PK
+        string faculty_code
+        string faculty_name
+        string unit_code PK
+        string unit_name
+        int casual_staff_paid
+        int claims_paid
+        decimal_9_2 hours_paid
+        decimal_12_2 casual_pay_paid
+    }
     mart_finance__tuition_forgone {
         string learner_award_key PK
         date census_date
@@ -29,4 +40,5 @@ erDiagram
 
 | Model | Grain | Access | Contract |
 |---|---|---|---|
+| `mart_finance__casual_pay_paid` | One row per pay day and unit. | protected | enforced |
 | `mart_finance__tuition_forgone` | One row per learner per award they're enrolled in, as at census date. | protected | enforced |

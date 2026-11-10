@@ -1,0 +1,53 @@
+{
+  "key": "know-what-you-hold",
+  "title": "Know what you hold",
+  "sub": "From Only what you may see, in Data protection and privacy: why data has to be named before it can be protected, as Chile's front-of-pack warnings showed in 2016; five classes for a column, the strictest that applies, and four levels for a table, set once at the source by the data's owner; and the class following the column into everything made from it.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Violet is personal data: each column's class is a chip, violet for a class of personal data and grey for none; a table's level is how frosted its pane is. Chile in 2012 and 2016 is painted in the same night light, with its place and year on a tag.",
+  "src": [
+    "kw_world.js",
+    "kw_chile.js",
+    "kw_hall.js",
+    "scenes.js",
+    "scenes2.js",
+    "scenes3.js"
+  ],
+  "poster": [
+    "follows",
+    "goes",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bAnil\\b",
+      "Ah-neel"
+    ],
+    [
+      "\\bKurian\\b",
+      "Koo-ree-an"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ]
+  ],
+  "story": [
+    "high"
+  ],
+  "urgent": []
+}

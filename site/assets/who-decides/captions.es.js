@@ -75,8 +75,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Yusuf lleva el registro: si cambia un nombre ahí, todas las hojas de ruta lo siguen.",
 "Jun's next change request maps award to the government's definition.":
 "La siguiente solicitud de cambio de Jun mapea título a la definición del gobierno.",
-"Its slip sends it to Mei, by name, then to Noor and Yusuf. Nobody had to remember to.":
-"Su hoja de ruta la envía a Mei, por nombre, y luego a Noor y a Yusuf. Nadie tuvo que acordarse.",
+"Its slip sends it first to Mei, by name, to settle what award means, in the glossary.":
+"Su hoja de ruta la envía primero a Mei, por nombre, para fijar qué significa título, en el glosario.",
+"Then Noor's team builds it, and reviews the code. Owners are told, not asked to review.":
+"Luego el equipo de Noor lo construye y revisa el código. A los dueños se les avisa, no se les pide revisar.",
 "Like the cord on the line: the work calls the person who decides, at the moment it matters.":
 "Como la cuerda en la línea: el trabajo llama a quien decide, en el momento en que importa.",
 "When Mei decides, her decision is written down where the work is: what, who, when and why.":
@@ -97,8 +99,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Y tiene a quién preguntar: a Yusuf, o al consejo, cuando los dueños no coinciden.",
 "A role without time is a name in a spreadsheet.":
 "Un rol sin tiempo es un nombre en una hoja de cálculo.",
-"On the line, the cord brought someone who could decide. Here, every change asks its owner.":
-"En la línea, la cuerda traía a alguien que podía decidir. Aquí, cada cambio le pregunta a su dueño.",
+"On the line, the cord brought someone who could decide. Here, every change of meaning asks its owner.":
+"En la línea, la cuerda traía a alguien que podía decidir. Aquí, cada cambio de significado le pregunta a su dueño.",
 "A decision right is real when the work asks for it.":
 "Un derecho a decidir es real cuando el trabajo lo pide.",
 "Then Mei opens Jun's change request, and asks a question nobody expected.":

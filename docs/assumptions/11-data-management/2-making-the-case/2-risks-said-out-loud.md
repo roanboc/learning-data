@@ -1,8 +1,8 @@
 # Risks, said out loud: questions and assumptions
 
-*Data management* · *Making the case*, film 2 of 4 · open, PR #272 · [pull request](https://github.com/roanboc/learning-data/pull/272)
+*Data management* · *Making the case*, film 2 of 4 · merged, PR #272 · [pull request](https://github.com/roanboc/learning-data/pull/272)
 
-On the site once PR #272 merges: https://data.learn-all.org/making-the-case/risks-said-out-loud/
+[Watch it on the site](https://data.learn-all.org/making-the-case/risks-said-out-loud/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../numbers.md` point to the thread's working folder, not to this repository.
 

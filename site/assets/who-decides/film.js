@@ -451,7 +451,8 @@ const NARR={
  {"id":"slip","gap":0.8,"text":"Next, every change request gets a routing slip, filled in from the register."},
  {"id":"keeps","gap":0.8,"text":"Yusuf keeps the register: change a name there, and every slip follows."},
  {"id":"jun","gap":0.8,"text":"Jun's next change request maps award to the government's definition."},
- {"id":"mei","gap":0.8,"text":"Its slip sends it to Mei, by name, then to Noor and Yusuf. Nobody had to remember to."},
+ {"id":"mei","gap":0.8,"text":"Its slip sends it first to Mei, by name, to settle what award means, in the glossary."},
+ {"id":"code","gap":0.8,"text":"Then Noor's team builds it, and reviews the code. Owners are told, not asked to review."},
  {"id":"like","gap":0.8,"text":"Like the cord on the line: the work calls the person who decides, at the moment it matters."}]},
 "logged":{"name":"Where the work is","lead":1.0,"tail":1.0,"vo":[
  {"id":"written","gap":0.8,"text":"When Mei decides, her decision is written down where the work is: what, who, when and why."},
@@ -465,13 +466,13 @@ const NARR={
  {"id":"someone","gap":0.8,"text":"And she has someone to ask: Yusuf, or the council, when owners disagree."},
  {"id":"name","gap":0.8,"text":"A role without time is a name in a spreadsheet."}]},
 "which":{"name":"Which award?","lead":1.0,"tail":1.0,"vo":[
- {"id":"line","gap":0.8,"text":"On the line, the cord brought someone who could decide. Here, every change asks its owner."},
+ {"id":"line","gap":0.8,"text":"On the line, the cord brought someone who could decide. Here, every change of meaning asks its owner."},
  {"id":"real","gap":0.8,"text":"A decision right is real when the work asks for it."},
  {"id":"opens","gap":0.8,"text":"Then Mei opens Jun's change request, and asks a question nobody expected."},
  {"id":"five","gap":0.8,"text":"Which award does she own? She has found it defined in five places, and they don't agree."}]}
 };
 
-const VODUR={"cord/c1960": 5.89, "cord/cord": 4.725, "cord/lamp": 5.535, "cord/stops": 5.281, "cord/did": 2.453, "cord/reach": 3.475, "cord/data": 2.26, "tbc/opens": 2.997, "tbc/says": 5.591, "tbc/register": 5.567, "tbc/email": 2.675, "tbc/thread": 7.043, "written/asks": 3.754, "written/list": 6.936, "written/award": 3.709, "written/built": 3.42, "written/confirm": 4.883, "roles/sorts": 3.812, "roles/owner": 4.249, "roles/steward": 6.939, "roles/both": 1.96, "roles/custodian": 7.56, "domains/own": 2.368, "domains/shared": 6.359, "domains/council": 5.859, "domains/limit": 3.223, "domains/rest": 2.859, "required/required": 2.688, "required/sheet": 7.715, "required/back": 5.181, "required/signs": 3.661, "required/closed": 3.62, "asked/slip": 4.471, "asked/keeps": 4.167, "asked/jun": 4.32, "asked/mei": 5.316, "asked/like": 5.106, "logged/written": 5.207, "logged/logs": 6.814, "logged/next": 3.401, "logged/not": 2.517, "time/ask": 3.735, "time/hours": 3.997, "time/scope": 4.692, "time/someone": 4.274, "time/name": 2.649, "which/line": 5.295, "which/real": 2.708, "which/opens": 4.703, "which/five": 4.858};
+const VODUR={"cord/c1960": 5.89, "cord/cord": 4.725, "cord/lamp": 5.535, "cord/stops": 5.281, "cord/did": 2.453, "cord/reach": 3.475, "cord/data": 2.26, "tbc/opens": 2.997, "tbc/says": 5.591, "tbc/register": 5.567, "tbc/email": 2.675, "tbc/thread": 7.043, "written/asks": 3.754, "written/list": 6.936, "written/award": 3.709, "written/built": 3.42, "written/confirm": 4.883, "roles/sorts": 3.812, "roles/owner": 4.249, "roles/steward": 6.939, "roles/both": 1.96, "roles/custodian": 7.56, "domains/own": 2.368, "domains/shared": 6.359, "domains/council": 5.859, "domains/limit": 3.223, "domains/rest": 2.859, "required/required": 2.688, "required/sheet": 7.715, "required/back": 5.181, "required/signs": 3.661, "required/closed": 3.62, "asked/slip": 4.471, "asked/keeps": 4.167, "asked/jun": 4.32, "asked/mei": 4.713, "asked/code": 5.065, "asked/like": 5.106, "logged/written": 5.207, "logged/logs": 6.814, "logged/next": 3.401, "logged/not": 2.517, "time/ask": 3.735, "time/hours": 3.997, "time/scope": 4.692, "time/someone": 4.274, "time/name": 2.649, "which/line": 5.793, "which/real": 2.708, "which/opens": 4.703, "which/five": 4.858};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -483,7 +484,7 @@ const BREATH={
 "roles":{"hold":{"sorts":0.7,"owner":0.8,"steward":0.9,"both":0.7,"custodian":0.6}},
 "domains":{"hold":{"own":0.4,"shared":0.6,"council":0.4,"limit":0.6}},
 "required":{"hold":{"sheet":0.4,"back":1.4,"signs":1.2,"closed":0.6}},
-"asked":{"hold":{"slip":1.0,"keeps":0.8,"jun":0.4,"mei":0.8,"like":1.0}},
+"asked":{"hold":{"slip":1.0,"keeps":0.8,"jun":0.4,"mei":0.6,"code":0.8,"like":1.0}},
 "logged":{"hold":{"written":0.9,"logs":1.0,"next":0.9,"not":1.0}},
 "time":{"hold":{"ask":0.9,"hours":0.8,"scope":0.7,"someone":0.7,"name":1.0}},
 "which":{"hold":{"real":0.9,"opens":0.4},"breathe":5.0}
@@ -3317,7 +3318,8 @@ function wd_req(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s
     o.title.forEach((l,i)=>wc_T(ctx,l,40,262+i*50,{w:800,size:40,col:WC_DARK}));
     wc_T(ctx,"area: "+o.area,40,384,{w:600,size:30,col:WC_INK});gv_lines(ctx,40,428,610,3,28,0.9);
     if(o.slip)wd_slip(ctx,o.slip,o);});ctx.restore();}
-// its routing slip: amber paper, clipped on, who the request goes to in turn, as the register names them. o.names(i) brings a line in
+// its routing slip: amber paper, clipped on, who the request goes to in turn, as the register names them: the owner first, for the
+// meaning, then the data team, who build it and review the code (owners are told, never asked to review); as tall as its lines. o.names(i) brings a line in
 // (0 to 1), o.lit(i) washes it gold; o.edit {i, to, p} changes line i's name as the register's changes (p, 0 to 1), a gold flash
 // with it; o.amber (0 to 1) warms the slip as a lamp lights; o.slipP brings the slip in. Where line i sits on the request: wd_slipAt
 const WD_AMBER=[250,214,138],WD_SLINK=[118,78,16];
@@ -3325,7 +3327,7 @@ const wd_slipAt=i=>[WD_RQ.slip[0]-170+58,WD_RQ.slip[1]-125+112+50*i-10];
 function wd_slip(ctx,names,o){const sp=o.slipP==null?1:o.slipP;if(sp<=0)return;const e=easeCam(clamp(sp,0,1)),am=o.amber||0,[cx,cy]=WD_RQ.slip;
   ctx.save();ctx.translate(cx,cy-40*(1-e));ctx.rotate(0.04);ctx.translate(-170,-125);withA(ctx,clamp(sp*2,0,1),()=>{
     if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";wc_glowAt(ctx,170,125,320,[255,206,110],0.65*am);ctx.restore();}
-    gv_sheet(ctx,0,0,340,250,{col:WD_AMBER});if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle=rgba([255,236,170],0.35*am);ctx.fillRect(0,0,340,250);ctx.restore();}
+    const sh=78+50*names.length;gv_sheet(ctx,0,0,340,sh,{col:WD_AMBER});if(am>0.01){ctx.save();ctx.globalCompositeOperation="screen";ctx.fillStyle=rgba([255,236,170],0.35*am);ctx.fillRect(0,0,340,sh);ctx.restore();}
     wc_T(ctx,"Routing slip",24,46,{w:800,size:28,col:WD_SLINK});ctx.save();ctx.strokeStyle=rgba(WD_SLINK,0.45);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(24,62);ctx.lineTo(316,62);ctx.stroke();ctx.restore();
     names.forEach((n,i)=>{const a=o.names?o.names(i):1;if(a<=0.01)return;const ly=112+50*i,l=o.lit?o.lit(i):0,ed=o.edit&&o.edit.i===i?o.edit:null,
         fit=s2=>clamp(30*256/Math.max(1,tw(ctx,s2,30,700)),26,30);
@@ -3347,7 +3349,7 @@ function wd_heldReq(am){return(cx,P_,hands)=>{const [hx,hy]=hands[1],R=WD_HR;cx.
   cx.save();cx.fillStyle=rgba(WC_DARK,0.6);cx.fillRect(R.x+14,R.y+60,118,9);cx.fillRect(R.x+14,R.y+78,92,9);cx.restore();gv_lines(cx,R.x+14,R.y+116,R.w-30,4,18,0.9);
   cx.save();cx.translate(R.slip[0],R.slip[1]);cx.rotate(0.08);cx.shadowColor="rgba(60,50,40,0.22)";cx.shadowBlur=6;cx.shadowOffsetY=3;
   cx.fillStyle=rgba(mix(WD_AMBER,[255,240,186],0.65*am),1);cx.fillRect(-36,-28,72,56);cx.shadowColor="transparent";cx.fillStyle=rgba(WD_SLINK,0.7);
-  cx.fillRect(-26,-16,40,5);for(let i=0;i<3;i++)cx.fillRect(-26,-2+i*10,48-i*6,3.5);cx.restore();
+  cx.fillRect(-26,-16,40,5);for(let i=0;i<2;i++)cx.fillRect(-26,-2+i*10,48-i*6,3.5);cx.restore();
   cx.restore();fingers(cx,P_,[[hx+2,hy-4]]);};}
 
 /* ---------- 8 · Where the work is: what, who, when and why, in the books where Mei keeps them ---------- */
@@ -3411,7 +3413,7 @@ function wd_sheetName(ctx,p,lit,grey){wd_drop(ctx,p,()=>{const S_=WD_SS,[c0,c1,c
   wc_T(ctx,"award",gx+c0+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,WC_MUTED,grey)});
   wc_T(ctx,"Mei Tanaka",gx+c0+c1+14,gy+40+rh+44,{w:600,size:34,col:mix(WC_DARK,[180,178,172],grey)});ctx.restore();});}
 
-/* ---------- 10 · Which award? Every change asks its owner; Mei reads Jun's, and award turns out to be defined in five places ---------- */
+/* ---------- 10 · Which award? Every change of meaning asks its owner; Mei reads Jun's, and award turns out to be defined in five places ---------- */
 // a head in one of award's three meanings' colours (the series' GV_MEAN and GV_MEANINK: violet, rose, olive): "award", the wash coming
 // in as col goes from 0 to 1
 function wd_head(ctx,x,y,w,m,col){if(col>0.01)gv_tint(ctx,x,y,w,58,GV_MEAN[m],0.9*col);wc_T(ctx,"award",x+16,y+43,{w:800,size:40,col:mix(WC_DARK,GV_MEANINK[m],col)});}
@@ -3731,13 +3733,14 @@ scene("required",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(s
     {at:P.min,place:"deskTop",keys:[[P.min,960,540,1],[P.min+0.2,1050,590,1.1]],d:3.2,push:0.01,draw:(x,tt)=>wd_minutes(x,tt,1,fin(tt,P.cl-0.05,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 7 · Asked by name: every change request gets a routing slip from the register; Jun's goes to Mei, by name ----
+// ---- 7 · Asked by name: every change request gets a routing slip from the register; Jun's goes to Mei first, for the meaning, then
+// to Noor's team, who build it and review the code. Owners are told, never asked to review ----
 POSE.wd_meiDown=Object.assign({},POSE.stand,{gaze:[-0.4,1],look:1,tilt:0.09,turn:-0.2});
 POSE.wd_meiUp=Object.assign({},POSE.stand,{gaze:[1,-0.3],look:0,tilt:-0.03,turn:0.4});
 POSE.wd_meiRead=Object.assign({},POSE.hold,{L:[0.14,-1.9],R:[0.7,2.75],gaze:[0.8,-0.15],look:0,tilt:-0.04,turn:0.25});
 // the two requests: one for admissions, whose slip changes when the register does; Jun's, on award
-const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admissions report"],area:"admissions",slip:["Admissions office","Noor Rahman","Yusuf Demir"]};
-const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman","Yusuf Demir"]};
+const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admissions report"],area:"admissions",slip:["Admissions office","Noor Rahman"]};
+const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman"]};
 // Mei at her desk, holding Jun's request up beside her face to read it (am: its slip lit like a lamp, 0 to 1); her screen shows her own
 // work. The slip's light falls round it, drawn over the picture where her hand holds the request
 function wd_meiHolds(x,tt,am,o){const [sx,s]=GV_RX.seat,q=Object.assign({pose:"wd_meiRead",t:tt,carry:wd_heldReq(am),wide:true},o||{});gv_behind(x,"mei",sx,GV_RX.top,s,q);
@@ -3752,7 +3755,7 @@ function wd_callAt(x,tt,t0,i,off){const N=WD_LN,wx=wd_stX(i),up=gv_io(tt,t0-0.4,
 const WD_RQAT=[140,250];
 scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"slip","routing"),fill:wAt(sc,"slip","filled"),reg:wAt(sc,"slip","register"),
     keeps:c.keeps-0.3,kp:wAt(sc,"keeps","keeps"),chg:wAt(sc,"keeps","change"),name:wAt(sc,"keeps","name"),fol:wAt(sc,"keeps","follows"),
-    jun:c.jun-0.3,aw:wAt(sc,"jun","award"),mei:c.mei-0.3,ms:["Mei","Noor","Yusuf"].map(k=>wAt(sc,"mei",k)),nob:wAt(sc,"mei","Nobody"),like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
+    jun:c.jun-0.3,aw:wAt(sc,"jun","award"),mei:c.mei-0.3,ms:[wAt(sc,"mei","Mei"),wAt(sc,"code","Noor")],nob:wAt(sc,"code","told"),like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
   // Yusuf's desk: the binder open at the register, the admissions request on the left-hand page; its slip clips on, and its first line
   // comes from the register: the admissions steward's cell and the slip's line lit gold together. The register's keeper is written at
   // its foot; the steward's name in it changes, and the slip's line with it, in a gold flash
@@ -3768,7 +3771,8 @@ scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"s
     // register, and it goes, up and out of the frame, to Mei
     {cut:true,at:P.jun,place:"junTop",keys:[[P.jun,960,520,1.04],[P.jun+0.2,960,525,1.08]],d:2.6,push:0.004,draw:(x,tt)=>{const go=easeCam(fin(tt,P.mei-0.7,0.8)),sl=P.mei-1.9;
       wd_req(x,610,250-1000*go,1,Object.assign({award:fin(tt,P.aw-0.1,0.6),slipP:fin(tt,sl,0.6),names:i=>fin(tt,sl+0.3+0.2*i,0.4)},WD_AWREQ));}},
-    // Mei's desk from above: his request comes to her, its slip naming her first, then Noor and Yusuf, each lit as the voice says it
+    // Mei's desk from above: his request comes to her, its slip naming her first, for the meaning, then Noor, whose team builds and reviews
+    // the code, each lit as the voice says it
     {cut:true,at:P.mei,place:"meiTop",keys:[[P.mei,960,520,1.08],[P.nob,960,530,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
       const u=easeCam(fin(tt,P.mei+0.1,0.9));wd_req(x,610,200+900*(1-u),1,Object.assign({lit:i=>gv_io(tt,P.ms[i]-0.1,P.ms[i]+0.9,0.3)},WD_AWREQ));}},
     // like the cord on the line: a hand pulls it, the lamp lights, the supervisor comes
@@ -3838,7 +3842,7 @@ scene("time",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({q:[1.1,2.4,3.
       wd_dkCard(x,WD_DK.time,"Mei's time",["2 h a week"],fin(tt,P.desk+0.2,0.6),{seed:190,dy:-720*easeCam(out),rot:-0.12*out});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 10 · Which award? Every change asks its owner; Mei reads Jun's, and finds award defined in five places ----
+// ---- 10 · Which award? Every change of meaning asks its owner; Mei reads Jun's, and finds award defined in five places ----
 // a face between calm and worried (u, 0 to 1)
 const wd_worry=u=>{const a=EXPR.calm,b=EXPR.worried,E={};new Set([...Object.keys(a),...Object.keys(b)]).forEach(k=>E[k]=lerp(a[k]||0,b[k]||0,u));return E;};
 scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({cord:wAt(sc,"line","cord"),here:wAt(sc,"line","Here")-0.35,own:wAt(sc,"line","owner"),

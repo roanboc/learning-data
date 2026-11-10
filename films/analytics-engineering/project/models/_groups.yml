@@ -31,6 +31,12 @@ groups:
       name: "Mei Tanaka, registrar's office"
       email: mei.tanaka@uni.example
 
+  - name: hr
+    description: HR's marts for the tutors' newsletters, built from the HR system.
+    owner:
+      name: HR
+      email: hr@uni.example
+
   - name: workload
     description: Who teaches under a contract that holds today, for the Faculty of Health's heads of school; the workload agent's folders.
     owner:

@@ -272,6 +272,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
 - [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
+- [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 
 ### Kept for a reason
 

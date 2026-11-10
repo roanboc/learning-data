@@ -27,7 +27,7 @@ three kinds, and the project's folders follow them:
 | Kind | What it is | Here | Folders |
 |---|---|---|---|
 | Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system and the claims app), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
-| Data domain | What the facts mean, following the reference model | `person`, `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
+| Data domain | What the facts mean, following the reference model | `person`, `student`, `course`, `staff` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
 | Business domain | Who decides with the data | `planning`, `wallet`, `finance` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
 
 Staging is split by source system, because one system can feed several data domains.
@@ -38,17 +38,17 @@ and business domains:
 |---|---|---|---|
 | `person` | `models/core/person/` | The person behind every role, the roles they hold, how to reach them, the numbers each system knows them by (a draft: no model yet) | TCSI Student and Staff packets, extended to one person in any role |
 | `student` | `models/intermediate/student/`, `models/core/student/`, `seeds/reference/student/` | Learners, the credentials they hold, the credit they hold towards an award | TCSI Student packet, extended to learners with no award and to microcredentials and badges |
-| `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
+| `course` | `models/core/course/`, `seeds/reference/course/` | The awards the university offers, and its units, each with its faculty | TCSI Course packet |
+| `staff` | `models/core/staff/`, `seeds/reference/staff/` | Casual staff's claims for the hours they work, and HR's calendar of pay days | TCSI Staff packet, extended to casual staff's claims |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
 | `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
-| `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts, as at census, and the tuition rates it publishes | |
+| `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts: tuition forgone, as at census, and payroll's export, by pay day; and the tuition rates it publishes | |
 | shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets seed (generated from the sources), the version columns, the time spine | |
 
 The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check it, adopt
 what fits, extend where the business needs more, and record each extension in the domain's conceptual model.
 
-Sources, models and exposures each have their own top-level folder, so what comes in, what's
-built and who uses it are never lost in each other's YAML:
+Sources, models and exposures each have their own top-level folder, so what comes in, what's built and who uses it are never lost in each other's YAML:
 
 | Folder | Holds |
 |---|---|

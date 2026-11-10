@@ -11,6 +11,7 @@ What "good" means for data, and how to measure it. The graduation list says who 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Good enough for what?](https://data.learn-all.org/fit-for-use/good-enough-for-what/) | Fitness for use | 7 min | 5 | 3 questions | [script](1-good-enough-for-what/script.md) · [source](1-good-enough-for-what/source/README.md) |
 | [Valid isn't true](https://data.learn-all.org/fit-for-use/valid-isnt-true/) | Accuracy and references | 9 min | 7 | 4 questions | [script](3-valid-isnt-true/script.md) · [source](3-valid-isnt-true/source/README.md) |
 <!-- /films -->
 

@@ -1,0 +1,9 @@
+{
+  "oidc_policy": {
+    "issuer": "https://token.actions.githubusercontent.com",
+    "audiences": [
+      "0d7f3a52-6c1e-4b8a-9f2d-5e7a1c3b9d40"
+    ],
+    "subject": "repo:uni-example/credentials:environment:planning-agent"
+  }
+}

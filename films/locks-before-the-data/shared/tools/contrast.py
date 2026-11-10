@@ -10,7 +10,11 @@ opacity, with its colour's, at least 0.95), it measures its colour against what 
 of every hundred of their pixels), and keeps the lowest ratio it finds for each word in each chapter. It lists every word under --min,
 with its worst ratio and when, and fails if there is any. Decoration ({deco:1}, as legible.py skips it) isn't measured, nor are words
 drawn anywhere but on the frame (in a dissolve's buffer, a chapter fading out, a hidden value under frost): they are drawn as they
-are, as part of what is behind."""
+are, as part of what is behind, but one: a word drawn again at the place where the frame draws the same word, in a picture the frame's
+size, is the same word drawn twice, not something behind it. A chapter that glides on in one room lays the last one's end over its first
+0.8 s, and a dissolve in one room lays one shot over the other, each with every word that stays, so that only what changes fades; measured
+against itself, a lasting word read as if a faint copy of it stood behind it (10 November 2026). That word goes with the frame's: magenta
+with it, and gone with it."""
 import argparse
 from lang import *
 from playwright.sync_api import sync_playwright
@@ -28,19 +32,27 @@ JS = r"""([EV,MIN])=>{const worst={};let sid="",mode=0,deco=0,rec=[];
  const colOf=st=>{if(typeof st!=="string")return null;let m=st.match(/^#([0-9a-f]{6})$/i);if(m){const v=parseInt(m[1],16);return [v>>16&255,v>>8&255,v&255,1];}
    m=st.match(/rgba?\(([^)]+)\)/);if(m){const p=m[1].split(",").map(parseFloat);return [p[0],p[1],p[2],p.length>3?p[3]:1];}return null;};
  // mode 1: the frame's own words in pure magenta (their opacity kept), so where each one shows, and whether something covers it, can be
- // seen; mode 2: no words on the frame at all, so what is behind them can be measured. Words drawn anywhere else are drawn as they are.
- P.fillText=function(s,X,Y){if(this.canvas!==c)return F0.apply(this,arguments);if(s==null||!String(s).trim())return;const col=colOf(this.fillStyle);
-   if(mode===1){this.save();this.fillStyle="rgba(255,0,255,"+(col?col[3]:1)+")";this.shadowColor="rgba(0,0,0,0)";F0.apply(this,arguments);this.restore();return;}
+ // seen; mode 2: no words on the frame at all, so what is behind them can be measured. Words drawn anywhere else are drawn as they are,
+ // but the same word drawn again where the frame draws it, in a picture the frame's size (what stays, in a chapter fading out or a
+ // dissolve in one room): magenta with the frame's in mode 1, and not drawn in mode 2
+ const boxOf=(g,s,X,Y)=>{const m=g.getTransform();if(Math.abs(m.b)>1e-6||Math.abs(m.c)>1e-6)return null;const k=Math.sqrt(Math.abs(m.a*m.d)),
+   fm=g.font.match(/([\d.]+)px/),sz=(fm?parseFloat(fm[1]):10)*k,w=g.measureText(s).width*k,fx=m.a*X+m.e,fy=m.d*Y+m.f,al=g.textAlign,bl=g.textBaseline;
+   return {x0:al==="center"?fx-w/2:(al==="right"||al==="end")?fx-w:fx,top:bl==="middle"?fy-sz*0.5:bl==="top"||bl==="hanging"?fy:fy-sz*0.8,w,sz};};
+ let seen=[];const same=(s,b)=>!!b&&seen.some(q=>q.s===s&&Math.abs(q.x0-b.x0)<=2&&Math.abs(q.top-b.top)<=2&&Math.abs(q.sz-b.sz)<=1);
+ const magenta=(g,col,args)=>{g.save();g.fillStyle="rgba(255,0,255,"+(col?col[3]:1)+")";g.shadowColor="rgba(0,0,0,0)";F0.apply(g,args);g.restore();};
+ P.fillText=function(s,X,Y){
+   if(this.canvas!==c){if(mode&&s!=null&&String(s).trim()&&this.canvas.width===c.width&&this.canvas.height===c.height&&same(String(s),boxOf(this,String(s),X,Y))){
+       if(mode===1)magenta(this,colOf(this.fillStyle),arguments);return;}
+     return F0.apply(this,arguments);}
+   if(s==null||!String(s).trim())return;const col=colOf(this.fillStyle);
+   if(mode===1){const b=boxOf(this,String(s),X,Y);if(b)seen.push(Object.assign({s:String(s)},b));magenta(this,col,arguments);return;}
    const m=this.getTransform();if(deco||!col||Math.abs(m.b)>1e-6||Math.abs(m.c)>1e-6)return;const a=this.globalAlpha*col[3];if(a<0.95)return;
-   const k=Math.sqrt(Math.abs(m.a*m.d)),fm=this.font.match(/([\d.]+)px/),sz=(fm?parseFloat(fm[1]):10)*k,w=this.measureText(s).width*k;
-   const fx=m.a*X+m.e,fy=m.d*Y+m.f,al=this.textAlign,bl=this.textBaseline,x0=al==="center"?fx-w/2:(al==="right"||al==="end")?fx-w:fx,
-         top=bl==="middle"?fy-sz*0.5:bl==="top"||bl==="hanging"?fy:fy-sz*0.8;
-   rec.push({s:String(s),col,x0:x0-2,y0:top-2,w:w+4,h:sz*1.05+4,sz});};
+   const b=boxOf(this,String(s),X,Y);rec.push({s:String(s),col,x0:b.x0-2,y0:b.top-2,w:b.w+4,h:b.sz*1.05+4,sz:b.sz});};
  const L=v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);},LT=new Float32Array(256);for(let i=0;i<256;i++)LT[i]=L(i);
  const lum=(r,g,b)=>0.2126*LT[r|0]+0.7152*LT[g|0]+0.0722*LT[b|0],ratio=(p,q)=>(Math.max(p,q)+0.05)/(Math.min(p,q)+0.05);
  const draw=()=>{x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.clearRect(0,0,1920,1080);renderFrame(x,1,tnow);};
  let n=0,covered=0,tnow=0;
- for(let t=0;t<TL.total;t+=EV){tnow=t;sid=SCENES[sceneIndex(t)].id;rec=[];mode=1;draw();const dm=x.getImageData(0,0,1920,1080).data;mode=2;draw();if(!rec.length)continue;
+ for(let t=0;t<TL.total;t+=EV){tnow=t;sid=SCENES[sceneIndex(t)].id;rec=[];seen=[];mode=1;draw();const dm=x.getImageData(0,0,1920,1080).data;mode=2;draw();if(!rec.length)continue;
    const db=x.getImageData(0,0,1920,1080).data;
    for(const r of rec){const X0=Math.max(0,Math.floor(r.x0)),Y0=Math.max(0,Math.floor(r.y0)),X1=Math.min(1920,Math.ceil(r.x0+r.w)),Y1=Math.min(1080,Math.ceil(r.y0+r.h));
      if(X1-X0<4||Y1-Y0<4)continue;let foot=0;const core=[];

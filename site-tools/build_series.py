@@ -1067,7 +1067,9 @@ def readme(S=FW):
 # ---------------------------------------------------------------- the lists every film has a row in
 # Each film keeps its rows in its own folder, so two films never edit the same line: its Decided rows in decided.md, and its
 # videos with their legibility in release.json (which .github/scripts/films.py also gathers for the release workflow). lists()
-# makes the shared lists from them: each series' Decided table in its proposal.md, and the table of films/legibility-report.md.
+# makes the shared lists from them: each series' Decided table in its proposal.md. The table of films/legibility-report.md, which
+# every film adds a row to, isn't committed, so films merging at once don't clash: legibility() makes the report with it, printed
+# by `python site-tools/build_series.py --legibility` and shown in the summary of every site publish.
 DECIDED = ("<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->", "<!-- /decided -->")
 LEGIBLE = ("<!-- films: made by site-tools/build_series.py from each film's release.json -->", "<!-- /films -->")
 MONTHS = "January February March April May June July August September October November December".split()
@@ -1102,8 +1104,13 @@ def decided(folder):
     return fill((folder / "proposal.md").read_text(), DECIDED, ["| Date | Decision |", "|---|---|"] + [r for _, r in rows])
 
 
+LEGIBLE_NOTE = ("The table isn't kept in this file, so films that merge at once don't clash on it. Each film's row is `legibility` in its "
+                "`release.json`: `python site-tools/build_series.py --legibility` prints this report with its table, and every publish "
+                "of the site shows it in its run's summary.")
+
+
 def legibility():
-    """films/legibility-report.md, with its table of films made from each film's release.json."""
+    """films/legibility-report.md, with its table of films made from each film's release.json (the committed file holds LEGIBLE_NOTE)."""
     sys.path.insert(0, str(ROOT / ".github" / "scripts"))
     import films as release_films
     rows = ["| Film | Texts | Under 28 px | Under 20 px | Median | Status |", "|---|---|---|---|---|---|"]
@@ -1118,7 +1125,7 @@ def lists():
     """Every shared list made from the films' own rows: (path from the repository's root, text)."""
     out = [(p.parent / "proposal.md", decided(p.parent)) for p in sorted((ROOT / "films").glob("*/proposal.md"))
            if DECIDED[0] in p.read_text()]
-    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out] + [("films/legibility-report.md", legibility())]
+    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out]
 
 
 def pages():
@@ -1143,6 +1150,8 @@ def pages():
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--legibility"]:
+        print(legibility()); sys.exit()
     n = 0
     for rel, text in pages() + blocks():
         p = WEB / rel

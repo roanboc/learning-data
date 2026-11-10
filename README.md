@@ -101,7 +101,7 @@ Every film has a row in a few lists, and two films that edit the same list at on
 | A series' films, on its pages and in its README | its numbered folders (`<n>-<film>/source/film.json`), not a list in `series.json` |
 | A series page's *Every film opens somewhere else* rows | each film's `site.json` (`past`, `past_es`) |
 | A series' *Decided* table, in its `proposal.md` | the series' `decided.md`, and each film's `decided.md` (a decision a film's thread makes, even for the whole series, goes in the film's file) |
-| The films in `films/legibility-report.md` | `legibility` in each film's `release.json` |
+| The films in `films/legibility-report.md` (not committed: `build_series.py --legibility` prints it, and each publish of the site shows it in its summary) | `legibility` in each film's `release.json` |
 | The series pages, Topics and the home page's series cards | all of the above, through `build_series.py` |
 
 When two branches clash in one of these lists or pages, take either side, merge the rows in the films' own files, and run `python site-tools/build_series.py` again.

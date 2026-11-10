@@ -38,6 +38,8 @@ TARGET = ROOT / "CODEOWNERS"
 LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
           "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
+         "The claims app: its owner, for the claims read where the app writes them":
+         ("/sources/claims_app/",),
          "The exam boards' approved lists, kept apart from the student system": ("/sources/exam_boards/",)}
 
 

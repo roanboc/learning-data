@@ -82,6 +82,7 @@
 | Context and memory, governed | 393 | 0% | 0 | 28.2 | Drawn to the rule |
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
+| One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Valid isn't true | 254 | 0% | 0 | 28.6 | Drawn to the rule |
 | Five stages, not a switch | 309 | 0% | 0 | 30.0 | Drawn to the rule |

@@ -96,7 +96,8 @@ scene("before",(ctx,S,t,sc)=>{
     // fills only after; 1943's payrolls, about money claimed, under a band; nothing any other way; the savings: the drawers of 1943's
     // orders and letters are emptied, one after the other, as their schedules say; the payrolls under the band stay
     {at:tWall,place:"hlWall",dis:0.9,push:0.0,keys:[[tWall,1120,560,1.2],[tOpen,960,540,1]],d:1.8,draw:(x,tt)=>{
-      const open=ag_eo(clamp((tt-tOpen)/0.8,0,1)),emptied=([i,te,l])=>({i,big:true,label:l,out:open*(1-ag_eo(clamp((tt-te-0.7)/0.6,0,1))),full:1-ag_in(tt,te,0.6)});
+      const open=ag_eo(clamp((tt-tOpen)/0.8,0,1)),emptied=([i,te,l])=>({i,big:true,label:l,out:open*(1-ag_eo(clamp((tt-te-0.7)/0.6,0,1))),full:1-ag_in(tt,te,0.6),
+        eyeX:i===4?hl_wallX(4)+HL_WALL.w/2:null});// the drawer at the frame's right edge comes out straight towards us, so its label stays in the frame
       // the drawers, the most open drawn last (an open drawer stands in front of its shut neighbours)
       const dr=[{i:0},emptied(empties[0]),{i:2,big:true,label:"Payrolls · 1943",full:1},
         {i:3,big:true,label:label.slice(0,typed),typeOf:label,out:ag_eo(clamp((tt-tLabel-1.2)/0.6,0,1))*(1-ag_in(tt,tFill+1.2,0.6)),full:ag_in(tt,tFill,0.9)},emptied(empties[1])];
@@ -105,7 +106,7 @@ scene("before",(ctx,S,t,sc)=>{
       const fu=clamp((tt-tLabel-1.4)/1.6,0,1);if(fu>0&&fu<1){const fx=d.x+d.w/2,fy=lerp(d.y-250,d.y+150,ag_sine(fu));x.save();x.globalAlpha*=Math.min(1,fu*5);
         x.beginPath();x.rect(d.x-40,0,d.w+80,d.y);x.clip();x.setLineDash([12,9]);x.strokeStyle=rgba(DP.ice,0.95);x.lineWidth=3;
         x.beginPath();x.moveTo(fx-120,fy+80);x.lineTo(fx-120,fy-60);x.lineTo(fx+10,fy-60);x.lineTo(fx+22,fy-84);x.lineTo(fx+100,fy-84);x.lineTo(fx+112,fy-60);x.lineTo(fx+120,fy-60);x.lineTo(fx+120,fy+80);x.stroke();x.restore();}
-      hl_bandAcross(x,d2.x-40,d2.y+100,d2.w+80,58,"closed","Kept until the claim is settled",ag_in(tt,tBand,0.8));
+      hl_bandAcross(x,d2.x-40,d2.y+96,d2.w+80,58,"closed",["Until the claim","is settled"],ag_in(tt,tBand,0.8));
       dp_card(x,1100,130,720,{title:"No paper destroyed any other way"},{a:hl_v(tt,tOther,tSaves-0.3,0.6),k:ag_spr(tt,tOther,0.9)});
       const cs=dp_card(x,1160,110,640,{title:"$927,000 saved",sub:"Army Air Forces alone · 1944"},{a:ag_in(tt,tSaves,0.6),k:ag_spr(tt,tSaves,0.9)});
       dp_slip(x,1160,cs.y+cs.h+14,"About the Archives' whole budget","grey",{a:ag_in(tt,tBudget,0.6),ink:true});}},
@@ -253,7 +254,7 @@ scene("hold",(ctx,S,t,sc)=>{
     dp_card(x,1060,560,420,{title:"Next clean-up"},{a:hl_v(tt,tNext-0.4,t43-0.2,0.6),k:ag_spr(tt,tNext-0.4,0.9),behind:"hlHall"});
     // as in 1943: the drawer kept until the claim is settled, for a moment
     const m=hl_v(tt,t43,sc.dur,0.7);hl_inset1943(x,1100,300,700,282,[715,590,490,197],cc=>hl_wallDrawer(cc,2,{big:true,label:"Payrolls · 1943",full:1}),m);
-    hl_bandAcross(x,1090,486,720,58,"closed","Kept until the claim is settled",ag_in(tt,t43+0.5,0.8)*m);}}]);
+    hl_bandAcross(x,1090,446,720,58,"closed",["Until the claim","is settled"],ag_in(tt,t43+0.5,0.8)*m);}}]);
 });
 
 /* ---------------------------------------------------------------- 7 · An end date for every record */

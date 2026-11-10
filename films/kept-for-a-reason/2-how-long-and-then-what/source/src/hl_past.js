@@ -373,7 +373,7 @@ function hl_paintWall(c,w,h){const R=hl_rnd(4318),T=HL_WALL.top;
   g=c.createRadialGradient(1100,520,420,1100,520,1300);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,4,6,0.5)");c.fillStyle=g;c.fillRect(0,0,w,h);}
 // a top drawer of cabinet i, drawn live: out (0 shut, 1 pulled 0.25 m towards us), its label card (words, or null), how full (0 to 1),
 // o.a its light. Returns its front's box and its handle, for a hand or a folder. Drawn about the eye, as the place's own perspective.
-function hl_wallDrawer(c,i,o){o=o||{};const x=hl_wallX(i)+14,w=HL_WALL.w-28,y=HL_WALL.dTop,h=HL_WALL.dH,E=HL_WALL.eye,k=1+0.12*clamp(o.out||0,0,1.6),
+function hl_wallDrawer(c,i,o){o=o||{};const x=hl_wallX(i)+14,w=HL_WALL.w-28,y=HL_WALL.dTop,h=HL_WALL.dH,E=o.eyeX==null?HL_WALL.eye:[o.eyeX,HL_WALL.eye[1]],k=1+0.12*clamp(o.out||0,0,1.6),
     P=(px,py)=>[E[0]+(px-E[0])*k,E[1]+(py-E[1])*k],a=P(x,y),b=P(x+w,y+h),lit=o.lit==null?1:o.lit,warm=Math.max(0.3,1-Math.abs(x+w/2-1600)/1400);
   if(k>1.001){// the drawer's sides and the inside, seen from above
     c.fillStyle="rgb(14,14,12)";c.beginPath();c.moveTo(x,y);c.lineTo(x+w,y);c.lineTo(b[0],a[1]);c.lineTo(a[0],a[1]);c.closePath();c.fill();

@@ -47,12 +47,14 @@ function hl_pane(c,x,y,w,h,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)retur
 // words struck through with a line of coral, drawn on by p
 function hl_strike(c,x,y,w,p){if(p<=0)return;c.save();c.strokeStyle=rgba(DP.F.coral,1);c.lineWidth=5;c.lineCap="round";c.shadowColor=rgba(DP.F.coral,0.8);c.shadowBlur=10;
   c.beginPath();c.moveTo(x,y);c.lineTo(x+w*clamp(p,0,1),y-4*clamp(p,0,1));c.stroke();c.restore();}
-// a band of solid colour across something, its word in dark capitals (the kit's band), settling in by u
-function hl_bandAcross(c,x,y,w,h,col,text,u){if(u<=0)return;const tw=dp_tw(c,String(text).toUpperCase(),{w:800,size:30,ls:5})+64;if(w<tw){x-=(tw-w)/2;w=tw;}
+// a band of solid colour across something, its words in dark capitals (the kit's band), settling in by u; text a line, or an array of
+// lines (each centred, 40 apart, the band as tall as they need); it widens, round its middle, to fit its longest line
+function hl_bandAcross(c,x,y,w,h,col,text,u){if(u<=0)return;const L=(Array.isArray(text)?text:[text]).map(s=>String(s).toUpperCase()),q={w:800,size:30,ls:5};
+  const tw=Math.max(...L.map(s=>dp_tw(c,s,q)))+64;if(w<tw){x-=(tw-w)/2;w=tw;}h=Math.max(h,24+L.length*40);
   c.save();c.globalAlpha*=clamp(u*2,0,1);const k=ag_spr(u,0,1),yy=y-(1-k)*30;
   c.save();c.shadowColor=rgba(dp_f(col),0.7);c.shadowBlur=20;rr(c,x,yy,w,h,10);c.fillStyle=rgba(dp_f(col),1);c.fill();c.restore();
   const g=c.createLinearGradient(0,yy,0,yy+h);g.addColorStop(0,"rgba(255,255,255,0.28)");g.addColorStop(0.5,"rgba(255,255,255,0)");rr(c,x,yy,w,h,10);c.fillStyle=g;c.fill();
-  dp_T(c,String(text).toUpperCase(),x+w/2,yy+h/2+10,{w:800,size:30,ls:5,align:"center",col:DP.on});c.restore();}
+  L.forEach((s,i)=>dp_T(c,s,x+w/2,yy+h/2+10+(i-(L.length-1)/2)*40,Object.assign({align:"center",col:DP.on},q)));c.restore();}
 
 /* ---------------------------------------------------------------- the retention schedule */
 // The university's schedule: a frosted table, its five columns, its rows coming in (rows[i] 0 to 1), each row's reason a green pill

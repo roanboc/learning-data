@@ -231,73 +231,73 @@ Decidido antes de necesitarlo, como en 1943.
 A veces un registro debe quedarse pasada su fecha.
 
 59
-00:06:10,224 --> 00:06:15,947
+00:06:10,624 --> 00:06:16,347
 Una extutora dice que no le pagaron todas sus horas en 2019, y su reclamación no está resuelta.
 
 60
-00:06:17,247 --> 00:06:22,415
+00:06:17,847 --> 00:06:23,015
 Sus nóminas de 2019 deben irse en enero, con el resto de las de ese año.
 
 61
-00:06:23,715 --> 00:06:27,435
+00:06:24,515 --> 00:06:28,235
 Si se fueran, ni ella ni la universidad podrían mostrar qué se pagó.
 
 62
-00:06:28,735 --> 00:06:31,575
+00:06:29,735 --> 00:06:32,575
 Así que la oficina jurídica pone una retención.
 
 63
-00:06:32,875 --> 00:06:37,576
+00:06:34,475 --> 00:06:39,176
 Una retención nombra los registros que guarda, su razón, quién la puso, y quién puede levantarla.
 
 64
-00:06:39,276 --> 00:06:42,723
+00:06:40,876 --> 00:06:44,323
 Mientras está puesta, la limpieza se salta esos registros, y solo esos.
 
 65
-00:06:44,423 --> 00:06:49,016
+00:06:46,023 --> 00:06:50,616
 Una retención es para una reclamación, una auditoría o un juicio, nunca por si acaso.
 
 66
-00:06:50,516 --> 00:06:56,235
+00:06:52,116 --> 00:06:57,835
 Resuelta la reclamación, la oficina jurídica levanta la retención, y sus registros se van en la siguiente limpieza.
 
 67
-00:06:57,935 --> 00:07:02,309
+00:06:59,535 --> 00:07:03,909
 Como en 1943: los papeles de una reclamación se quedan hasta resolverla.
 
 68
-00:07:05,909 --> 00:07:11,025
+00:07:07,509 --> 00:07:12,625
 Borrado demasiado pronto, un registro rompe una promesa: una tutora no puede mostrar qué le pagaron.
 
 69
-00:07:12,325 --> 00:07:16,502
+00:07:13,925 --> 00:07:18,102
 Guardado demasiado tiempo, es un riesgo para la persona de quien trata, sin nada a cambio.
 
 70
-00:07:17,802 --> 00:07:23,364
+00:07:19,402 --> 00:07:24,964
 Muchas leyes de privacidad lo hacen regla: no guardes datos personales más de lo que su razón necesita.
 
 71
-00:07:24,864 --> 00:07:30,777
+00:07:26,464 --> 00:07:32,377
 Así, nada se borra fuera del calendario, y nada se queda más allá de su fecha, salvo con una retención.
 
 72
-00:07:32,277 --> 00:07:37,956
+00:07:33,877 --> 00:07:39,556
 La fecha vale para cada copia: las tablas de la plataforma, el archivo, las versiones antiguas, los logs.
 
 73
-00:07:39,456 --> 00:07:42,617
+00:07:41,056 --> 00:07:44,217
 Cómo se va la última copia es Borrado es borrado.
 
 74
-00:07:44,117 --> 00:07:51,598
+00:07:45,717 --> 00:07:53,198
 En 1943, Washington dejó de decidir pila por pila, y decidió una vez, antes de que los papeles se acumularan.
 
 75
-00:07:53,098 --> 00:07:56,288
+00:07:54,698 --> 00:07:57,888
 Los pocos valiosos se guardaron, y el resto se fue a tiempo.
 
 76
-00:07:57,988 --> 00:08:03,053
+00:07:59,588 --> 00:08:04,653
 En la universidad, cada registro tiene ahora una fecha de fin, decidida antes de necesitarla.

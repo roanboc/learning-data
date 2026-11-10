@@ -447,7 +447,7 @@ scene("found",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
     dp_tag(x,600,544,"Still here, opens nothing","grey",{a:Hs*ag_in(tt,T.opens-0.2,0.5),to:[512,725]});
     // the alert: Jun's token, in a notebook pushed in March 2024, still working; then closed as revoked
     const Al=ag_in(tt,T.jt-0.2,0.6)*(1-ag_in(tt,T.pp-0.7,0.5)),gone=ag_in(tt,T.nothing,0.6);
-    if(Al>0){dp_page(x,90,140,1010,360,{tool:"github",name:"GitHub",where:"Security · Secret scanning",title:"Databricks access token",a:Al});
+    if(Al>0){dp_page(x,90,140,1010,360,{tool:"github",name:"GitHub",where:"Security · Secret scanning",title:"Databricks API Token",a:Al});
       dp_T(x,"registrar/notebooks/check_load.py",122,346,{w:500,size:28,f:"mono",a:Al});
       dp_T(x,"Pushed in March 2024",122,394,{w:600,size:28,col:"mut",a:Al*ag_in(tt,T.march-0.2,0.5)});
       dp_T(x,"Validity",122,456,{w:600,size:28,col:"mut",a:Al*ag_in(tt,T.works-0.3,0.5)});

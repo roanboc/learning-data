@@ -3,7 +3,7 @@
    windows lit, trees, street lamps and a row of small cars of the time parked along a wet road (wsStreet); the same street at dawn,
    one car gone (wsDawn); and inside a car, its steering wheel and the ignition lock on the column (wsCabin). No car has a make or a
    badge, and no thief is drawn: only a wire. The owner who finds her car gone is an invented composite, a woman of about forty in a
-   raincoat of the time. Each place paints in well under two seconds. */
+   stone-coloured jacket of the time. Each place paints in well under two seconds. */
 
 // the cars along the road: x of each car's front, its colour; the third (k = 2) is the one taken in the night
 const WS_CARS=[[-90,[52,60,74]],[300,[86,44,46]],[760,[38,66,84]],[1180,[70,74,62]],[1580,[58,52,70]]],WS_ROADY=812,WS_GAP=2;
@@ -169,7 +169,7 @@ function ws_wire(ctx,t,touch,a){if(a<=0)return;const c=dp_f("coral"),u=ag_sine(t
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the owner, at dawn
-   An invented composite: a woman of about forty, short dark-blonde hair, a raincoat of the 1990s over a pale jumper. */
+   An invented composite: a woman of about forty, short dark-blonde hair, a stone-coloured jacket of the 1990s over a pale jumper. */
 const WS_OWNER={key:"wsOwner",name:"The owner",role:"",skin:[232,198,176],hair:{style:"bob",c:[150,118,80]},top:{kind:"blazer",c:[150,132,100],inner:[214,210,200]},breath:0.3};
 // the light of the street at dawn, from the pale sky in front of her
 const WS_DAWN={key:[640,420],kr:860,kk:0.9,amb:0.4,kc:[1.0,1.0,1.04],shade:[0.66,0.74,0.88],rim:[200,214,236],rimA:0.55,rimW:5};

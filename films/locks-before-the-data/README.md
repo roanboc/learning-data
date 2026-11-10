@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Workloads without secrets](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/) | Workload identity | 9 min | 9 | 3 questions | [script](6-workloads-without-secrets/script.md) · [source](6-workloads-without-secrets/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

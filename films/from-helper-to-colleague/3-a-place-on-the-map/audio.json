@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-place-on-the-map/soundtrack.mp3",
+      "size": 7670900,
+      "sha256": "8c3589cf5ad2b11d0e4319c8f8ca82f62d1ca0f825a46f18591a0e2999f3db30",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-a-place-on-the-map-8e54157bb55523959b15/8c3589cf5ad2b11d0e4319c8f8ca82f62d1ca0f825a46f18591a0e2999f3db30.mp3"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "key": "rules-to-decide",
+  "title": "Rules that let people decide",
+  "sub": "The fourth film of Leading a data team, the third series of Leading data people: decentralisation and emergence. Don't make every decision yourself: give people a few clear rules, each with its reason, good tools and trust, and let decisions be made where the knowledge is. Four faculties plan their own rooms, and Engineering finds what nobody had asked about.",
+  "howto": "The film is drawn in the module's sunlit plaster: Bali's terraces in the opening, then the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the temples' calendar, the rules, the template), orange is data (Teaching space use, its bookings and counts, the new lab measure), green is something done or of value (harvests, the plans sent, the labs released), and amber a cost, a risk or a wait (the pests, the queue of room reports, the old copy).",
+  "src": [
+    "rd_bali.js",
+    "rd_uni.js",
+    "rd_scenes.js"
+  ],
+  "poster": [
+    "labs",
+    "empty",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bsubaks\\b",
+      "soo-bahks"
+    ],
+    [
+      "\\bsubak\\b",
+      "soo-bahk"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "subak"
+  ],
+  "urgent": []
+}

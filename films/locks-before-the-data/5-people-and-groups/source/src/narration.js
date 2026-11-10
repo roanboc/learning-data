@@ -57,7 +57,7 @@ const NARR={
  {"id":"lives","gap":0.8,"text":"It lives on their own phone, in the Authenticator app, or on a security key."},
  {"id":"mei","gap":0.8,"text":"Mei Tanaka, who owns the registrar's data, signs in with her phone: her face unlocks the passkey, and she's in."},
  {"id":"none","gap":0.8,"text":"There's no password to type, and none a fake page could use."},
- {"id":"agree","gap":0.8,"text":"The same rule asks for each person's confidentiality agreement, from the series' first film."},
+ {"id":"agree","gap":0.8,"text":"The same rule asks for each person's confidentiality agreement, as Who is it, really? showed.","say":"The same rule asks for each person's confidentiality agreement, as Who is it really showed."},
  {"id":"before","gap":0.8,"text":"No one reaches the platform before accepting it, and everyone accepts it again each year."},
  {"id":"keeps","gap":0.8,"text":"The directory keeps who accepted it, and when."}
 ]},

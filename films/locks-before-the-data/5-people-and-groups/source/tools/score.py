@@ -365,7 +365,7 @@ vcs(F4, S5('mei', "she's in", -0.1), S5('mei', "she's in", 2.6), 0.5, pan=px(900
 dull(S5('none', 'a fake page could use', -0.1), 0.010, px(500))
 tAg = G('signin', 'agree')
 paper(S5('agree', 'confidentiality agreement', 0.3), 0.008, px(1320))
-knock(S5('agree', 'first film', -0.2), 0.010, px(960), 240)
+knock(S5('agree', 'Who is it', -0.2), 0.010, px(960), 240)
 tAc = S5('before', 'before accepting it', 0.2)
 tap(tAc + 0.5, 0.008, px(1320))
 vcs(Db4, tAc + 0.5, tAc + 2.8, 0.45, pan=px(1200)); vcs(Gb4, tAc + 1.4, tAc + 2.8, 0.42, pan=px(1200))

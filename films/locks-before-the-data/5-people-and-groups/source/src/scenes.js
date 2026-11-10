@@ -194,7 +194,7 @@ scene("signin",(ctx,S,t,sc)=>{const C=sc.cues;
   const tRule=C.rule,tNo=wAt(sc,"rule","lets no one"),tReach=wAt(sc,"rule","reach Azure Databricks"),tPass=wAt(sc,"rule","without a passkey"),tFake=wAt(sc,"rule","no fake page can catch"),
     tLives=C.lives,tPhone=wAt(sc,"lives","their own phone"),tAuth=wAt(sc,"lives","the Authenticator app"),tKey=wAt(sc,"lives","a security key"),
     tMei=C.mei,tSigns=wAt(sc,"mei","signs in with her phone"),tFace=wAt(sc,"mei","her face unlocks"),tUnl=wAt(sc,"mei","unlocks the passkey"),tIn=wAt(sc,"mei","she's in"),
-    tNone=C.none,tCould=wAt(sc,"none","a fake page could use"),tAgree=C.agree,tConf=wAt(sc,"agree","confidentiality agreement"),tFirst=wAt(sc,"agree","first film"),
+    tNone=C.none,tCould=wAt(sc,"none","a fake page could use"),tAgree=C.agree,tConf=wAt(sc,"agree","confidentiality agreement"),tFirst=wAt(sc,"agree","Who is it"),
     tAcc=wAt(sc,"before","before accepting it"),tYear=wAt(sc,"before","again each year"),tKeeps=C.keeps,tWhen=wAt(sc,"keeps","and when");
   const aDir=1-ag_in(t,tRule-0.2,0.5),aRule=ag_in(t,tRule+0.35,0.5)*(1-ag_in(t,tLives-0.3,0.5)),aKit=1-ag_in(t,tMei-1.0,0.5),tKit=Math.max(tPhone-0.2,tLives+0.25);
   const shots=[

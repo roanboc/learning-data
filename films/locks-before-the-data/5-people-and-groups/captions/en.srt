@@ -187,105 +187,105 @@ Mei Tanaka, who owns the registrar's data, signs in with her phone: her face unl
 There's no password to type, and none a fake page could use.
 
 48
-00:04:59,371 --> 00:05:04,888
-The same rule asks for each person's confidentiality agreement, from the series' first film.
+00:04:59,371 --> 00:05:04,919
+The same rule asks for each person's confidentiality agreement, as Who is it, really? showed.
 
 49
-00:05:05,988 --> 00:05:11,132
+00:05:06,019 --> 00:05:11,163
 No one reaches the platform before accepting it, and everyone accepts it again each year.
 
 50
-00:05:12,432 --> 00:05:14,873
+00:05:12,463 --> 00:05:14,904
 The directory keeps who accepted it, and when.
 
 51
-00:05:18,573 --> 00:05:21,593
+00:05:18,604 --> 00:05:21,624
 Great power goes to groups too, and no one is in them.
 
 52
-00:05:23,293 --> 00:05:30,726
+00:05:23,324 --> 00:05:30,757
 Every admin role, in the Databricks account, in each workspace and in Azure, belongs to a group whose name starts with admin.
 
 53
-00:05:32,426 --> 00:05:40,515
+00:05:32,457 --> 00:05:40,546
 Only two people can switch one on, Sam and Jun, each from a second account kept for it, signed in only with a security key.
 
 54
-00:05:42,415 --> 00:05:49,938
+00:05:42,446 --> 00:05:49,969
 The switch is Microsoft Entra privileged identity management: those accounts are eligible for the groups, never in them.
 
 55
-00:05:52,038 --> 00:06:01,043
+00:05:52,069 --> 00:06:01,074
 On 19 October, Sam needs to know who still has personal tokens: the account's token report, which only an account admin can read.
 
 56
-00:06:02,743 --> 00:06:06,822
+00:06:02,774 --> 00:06:06,853
 So he switches on the account's settings group for one hour, and types why.
 
 57
-00:06:08,522 --> 00:06:09,531
+00:06:08,553 --> 00:06:09,562
 Jun approves.
 
 58
-00:06:11,231 --> 00:06:14,119
+00:06:11,262 --> 00:06:14,150
 Within seconds his admin account is in the group.
 
 59
-00:06:15,819 --> 00:06:21,304
+00:06:15,850 --> 00:06:21,335
 And an alert reaches the platform team: who, which group, why, who approved, until when.
 
 60
-00:06:23,204 --> 00:06:28,436
+00:06:23,235 --> 00:06:28,467
 Databricks reads his groups as he signs in, and for this hour, he can read the report.
 
 61
-00:06:30,136 --> 00:06:35,434
+00:06:30,167 --> 00:06:35,465
 Then he signs out, and when the hour is up, the directory takes his admin account out of the group.
 
 62
-00:06:37,134 --> 00:06:42,164
+00:06:37,165 --> 00:06:42,195
 Like a new pattern in the hotel's lock, each switch-on opens one stay, and ends with it.
 
 63
-00:06:46,064 --> 00:06:51,752
+00:06:46,095 --> 00:06:51,783
 The report shows seven personal tokens: six people's, for their command lines, and Jun's.
 
 64
-00:06:53,052 --> 00:06:57,275
+00:06:53,083 --> 00:06:57,306
 But the command line can sign in through the browser now, with the same passkey.
 
 65
-00:06:58,575 --> 00:07:07,455
+00:06:58,606 --> 00:07:07,486
 The Databricks CLI keeps its own short passes, each an hour long, in the computer's secure store: nothing to copy, nothing to paste.
 
 66
-00:07:08,955 --> 00:07:12,118
+00:07:08,986 --> 00:07:12,149
 So the six sign in that way, and end their own tokens.
 
 67
-00:07:13,618 --> 00:07:21,825
+00:07:13,649 --> 00:07:21,856
 Jun's runs the nightly job, until Workloads without secrets gives the job its own way in, and ends it on 3 November.
 
 68
-00:07:23,325 --> 00:07:31,080
+00:07:23,356 --> 00:07:31,111
 That afternoon, Sam switches on the workspaces' settings for thirty minutes, Jun approves, and Sam turns personal tokens off.
 
 69
-00:07:32,780 --> 00:07:36,010
+00:07:32,811 --> 00:07:36,041
 Now no one can make a personal token, or use one.
 
 70
-00:07:39,710 --> 00:07:45,839
+00:07:39,741 --> 00:07:45,870
 In the hotels of the 1970s, a new pattern for each guest meant a lost card opened nothing.
 
 71
-00:07:47,339 --> 00:07:53,724
+00:07:47,370 --> 00:07:53,755
 At the university, a place on the platform now ends with the job, and admin power ends with the task.
 
 72
-00:07:54,824 --> 00:07:57,860
+00:07:54,855 --> 00:07:57,891
 And no personal token is left to outlive anyone.
 
 73
-00:07:59,560 --> 00:08:04,309
+00:07:59,591 --> 00:08:04,340
 People sign in once, with no password to steal; power is borrowed, not kept.

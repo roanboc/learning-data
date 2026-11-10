@@ -54,7 +54,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "It lives on their own phone, in the Authenticator app, or on a security key.":"Vive en su propio teléfono, en la aplicación Authenticator, o en una llave de seguridad.",
 "Mei Tanaka, who owns the registrar's data, signs in with her phone: her face unlocks the passkey, and she's in.":"Mei Tanaka, dueña de los datos del registro, entra con su teléfono: su cara desbloquea la llave de acceso, y ya está dentro.",
 "There's no password to type, and none a fake page could use.":"No hay contraseña que escribir, ni ninguna que una página falsa pueda usar.",
-"The same rule asks for each person's confidentiality agreement, from the series' first film.":"La misma regla pide el acuerdo de confidencialidad de cada persona, de la primera película de la serie.",
+"The same rule asks for each person's confidentiality agreement, as Who is it, really? showed.":"Como mostró ¿Quién es, de verdad?, la misma regla pide el acuerdo de confidencialidad de cada persona.",
 "No one reaches the platform before accepting it, and everyone accepts it again each year.":"Nadie llega a la plataforma antes de aceptarlo, y todos lo vuelven a aceptar cada año.",
 "The directory keeps who accepted it, and when.":"El directorio guarda quién lo aceptó, y cuándo.",
 "Great power goes to groups too, and no one is in them.":"El gran poder también va a grupos, y nadie está en ellos.",

@@ -1,0 +1,86 @@
+{
+  "draft": true,
+  "title": "Working with people",
+  "title_es": "Trabajar con personas",
+  "planned": 3,
+  "lead": "The second series of Leading data people. Graham Ellis asks for a dashboard of room use by Easter. Behind his request is a decision worth about A$140 million: whether the university needs a new teaching building. The skills that help most here have little to do with tools.",
+  "lead_es": "La segunda serie de Liderar equipos de datos. Graham Ellis pide un tablero del uso de las aulas para Semana Santa. Detrás del pedido hay una decisión de unos 140 millones de dólares australianos: si la universidad necesita un nuevo edificio de aulas. Las habilidades que más ayudan aquí tienen poco que ver con herramientas.",
+  "description": "Three films on working with the people who ask for data: listening for the question behind a request and agreeing it in writing; explaining an answer so people can decide, starting with the decision; and saying no to a date or a scope without saying no to the person.",
+  "description_es": "Tres películas sobre trabajar con quienes piden datos: escuchar la pregunta que hay detrás de un pedido y acordarla por escrito; explicar una respuesta para que la gente pueda decidir, empezando por la decisión; y decir que no a una fecha o a un alcance sin decirle que no a la persona.",
+  "card": "Find the question behind the request, explain so people can decide, and never give a bare no.",
+  "card_es": "Encuentra la pregunta detrás del pedido, explica para que la gente decida, y nunca digas un no a secas.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: Graham's dashboard, and the decision behind it",
+  "thread_h_es": "Un hilo: el tablero de Graham, y la decisión detrás",
+  "thread": "On 11 February 2027 Graham asks for a dashboard of room use by Easter. In half an hour with Helena and Noor, the real question appears: should he ask the University Council for a new teaching building? The team answers it from the bookings and the rooms' sensors, explains it on one page, and says what it can do well, and when, instead of a dashboard nobody would use.",
+  "thread_es": "El 11 de febrero de 2027 Graham pide un tablero del uso de las aulas para Semana Santa. En media hora con Helena y Noor aparece la pregunta real: ¿debe pedir al Consejo Universitario un nuevo edificio de aulas? El equipo la responde con las reservas y los sensores de las aulas, la explica en una página y dice qué puede hacer bien, y cuándo, en lugar de un tablero que nadie usaría.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Asks, and decides",
+      "Graham Ellis, the new Director of Facilities, who advises the University Council on a new teaching building"
+    ],
+    [
+      "biz",
+      "Keeps the timetable",
+      "Mei Tanaka, in the registrar's office, who owns the timetable and its bookings"
+    ],
+    [
+      "biz",
+      "Forecasts the students",
+      "Clara Jensen, in Planning, who forecasts how many students will come"
+    ],
+    [
+      "tech",
+      "Leads the team",
+      "Helena Novak, the data manager, who listens first"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who traces where each number is born"
+    ],
+    [
+      "tech",
+      "Learns the craft",
+      "Ivy Reyes, a graduate data analyst, who writes the one page"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Pide, y decide",
+      "Graham Ellis, el nuevo director de Instalaciones, que aconseja al Consejo Universitario sobre un nuevo edificio de aulas"
+    ],
+    [
+      "biz",
+      "Lleva el horario",
+      "Mei Tanaka, de la oficina de registro académico, dueña del horario y de sus reservas"
+    ],
+    [
+      "biz",
+      "Prevé los estudiantes",
+      "Clara Jensen, de Planificación, que prevé cuántos estudiantes vendrán"
+    ],
+    [
+      "tech",
+      "Dirige el equipo",
+      "Helena Novak, la gestora de datos, que primero escucha"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que rastrea dónde nace cada número"
+    ],
+    [
+      "tech",
+      "Aprende el oficio",
+      "Ivy Reyes, analista de datos recién graduada, que escribe la página única"
+    ]
+  ]
+}

@@ -35,8 +35,8 @@ Its steps aren't on the map yet.
 |---|---|---|---|---|
 | raise a ticket | requester |  | ticket | draft the change |
 | draft the change | planning contributor | ticket, role and its steps, business term, business rule, data contract, owner and column class, data product, team memory | change draft | build it in development |
-| build it in development | planning contributor | change draft, data product | test and its result | open a pull request |
-| open a pull request | planning contributor | change draft, test and its result | pull request | review the code |
+| build it in development | planning contributor, workload contributor | change draft, data product | test and its result | open a pull request |
+| open a pull request | planning contributor, workload contributor | change draft, test and its result | pull request | review the code |
 | review the code | analytics engineer | pull request, change draft, test and its result | code review | approve the change |
 | approve the change | product owner | pull request, code review | approval | release to production |
 | release to production | release approver | approval, pull request | data product |  |
@@ -54,6 +54,16 @@ Its steps aren't on the map yet.
 | decide | data owner | term draft | term decision | publish in the glossary |
 | publish in the glossary | data governance lead | term decision | business term | sync to every tool |
 | sync to every tool | analytics engineer | business term | business term |  |
+
+### Fix a failed night build
+
+**Promise.** When the night build fails in test, its cause is found and a fix proposed by morning, checked by every test and reported to the owner; production gets the fix only through review and a second person's yes.
+
+**How to ask.** Automatic, when the night build fails in test. **Owner:** Yusuf Demir, data governance lead. **Realizes:** change without surprises.
+
+| Step | Who does it | Reads | Writes | Then |
+|---|---|---|---|---|
+| find why the night build failed | workload contributor | test and its result, data product, pull request, business rule | change draft | build it in development |
 
 ### Fix it where it starts
 

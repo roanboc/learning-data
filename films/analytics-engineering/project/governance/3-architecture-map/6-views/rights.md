@@ -55,8 +55,8 @@ What it reads, and who answers for it:
 | data contract | Noor, data architect | none on this map |
 | owner and column class | Noor, data architect | none on this map |
 | data product | Noor, data architect | release to production (release approver) |
-| change draft | Clara Jensen, Planning | draft the change (planning contributor) |
-| test and its result | Noor, data architect | build it in development (planning contributor) |
+| change draft | Clara Jensen, Planning | draft the change (planning contributor), find why the night build failed (workload contributor) |
+| test and its result | Noor, data architect | build it in development (planning contributor, workload contributor) |
 | team memory, second | Yusuf Demir, data governance lead | none on this map |
 
 What's left out, and why:
@@ -64,6 +64,55 @@ What's left out, and why:
 | Step | Whose it is | Why it isn't this role's |
 |---|---|---|
 | raise a ticket | requester: Clara Jensen | another role's step |
+| review the code | analytics engineer: Jun Park | another role's step, and only people do it |
+| approve the change | product owner: Clara Jensen | another role's step, and only people do it |
+| release to production | release approver: Noor | another role's step, and only people do it |
+
+So it writes no ticket, code review, approval or data product: only the steps left out do.
+
+### Workload contributor
+
+Filled by the workload agent, an agent, whose owner is Anil Kurian, Faculty of Health.
+
+| Step | In the service | Reads | Writes | Calls |
+|---|---|---|---|---|
+| build it in development | change a data product | change draft, data product | test and its result | build, language model, query |
+| open a pull request | change a data product | change draft, test and its result | pull request | language model, repository |
+| find why the night build failed | fix a failed night build | test and its result, data product, pull request, business rule | change draft | build, language model, query, repository |
+
+Each right, with the step it comes from:
+
+| Right | Kept in | From the step |
+|---|---|---|
+| reads change draft | code repository | build it in development, open a pull request |
+| reads data product | dbt project | build it in development, find why the night build failed |
+| writes test and its result | dbt project | build it in development |
+| calls build | dbt project | build it in development, find why the night build failed |
+| calls language model | data platform | build it in development, open a pull request, find why the night build failed |
+| calls query | data platform | build it in development, find why the night build failed |
+| reads test and its result | dbt project | open a pull request, find why the night build failed |
+| writes pull request | code repository | open a pull request |
+| calls repository | code repository | open a pull request, find why the night build failed |
+| reads pull request | code repository | find why the night build failed |
+| reads business rule | dbt project | find why the night build failed |
+| writes change draft | code repository | find why the night build failed |
+
+What it reads, and who answers for it:
+
+| It reads | Owner | Written in the step |
+|---|---|---|
+| change draft | Clara Jensen, Planning | draft the change (planning contributor), find why the night build failed (workload contributor) |
+| data product | Noor, data architect | release to production (release approver) |
+| test and its result | Noor, data architect | build it in development (planning contributor, workload contributor) |
+| pull request | Clara Jensen, Planning | open a pull request (planning contributor, workload contributor) |
+| business rule | Mei Tanaka, registrar's office | none on this map |
+
+What's left out, and why:
+
+| Step | Whose it is | Why it isn't this role's |
+|---|---|---|
+| raise a ticket | requester: Clara Jensen | another role's step |
+| draft the change | planning contributor: the planning agent, an agent, whose owner is Clara Jensen, Planning | another role's step |
 | review the code | analytics engineer: Jun Park | another role's step, and only people do it |
 | approve the change | product owner: Clara Jensen | another role's step, and only people do it |
 | release to production | release approver: Noor | another role's step, and only people do it |
@@ -132,4 +181,4 @@ Filled by Clara Jensen.
 
 ## Roles with no steps on the map yet
 
-Data architect, data custodian, governance reviewer and workload contributor: no rights are made from steps for them yet.
+Data architect, data custodian and governance reviewer: no rights are made from steps for them yet.

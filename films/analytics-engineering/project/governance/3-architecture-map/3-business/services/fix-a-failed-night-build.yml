@@ -1,0 +1,9 @@
+name: fix a failed night build
+kind: business service
+promise: When the night build fails in test, its cause is found and a fix proposed by morning, checked by every
+  test and reported to the owner; production gets the fix only through review and a second person's yes.
+how_to_ask: automatic, when the night build fails in test
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: change without surprises
+status: confirmed

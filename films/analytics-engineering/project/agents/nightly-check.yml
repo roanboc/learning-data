@@ -1,0 +1,83 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The check each night: the rights each tool holds for the agents, against what Noor's map gives them. In the
+# project's own repository it would be .github/workflows/agents-nightly-check.yml. It runs as the platform's rights
+# reader, a service principal that may read grants and permissions and change nothing, signed in with no secret;
+# the team's memory store lists its grants only to its creator, the memory keeper, so that one step signs in as
+# it; and GitHub's side is read with the token service's read-only token. It fails on a right a tool holds that
+# the map doesn't give, and on one the map gives that a tool doesn't hold, and the platform team sees it in the
+# morning. Nobody fixes drift in the tool: the right is taken back, or the map changes first, through review.
+name: agents' rights against the map
+
+on:
+  schedule:
+    - cron: "0 2 * * *"        # 02:00 UTC, every night
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: rights-reader
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: https://uni-example-dev.cloud.databricks.com
+      DATABRICKS_CLIENT_ID: 9b2e6d10-3f4a-4c7e-8d15-7a0c2e9f4b61   # the rights reader's application ID
+    steps:
+      - uses: actions/checkout@v7
+      - uses: databricks/setup-cli@main
+      - run: pip install pyyaml databricks-sdk "databricks-agentbricks>=0.8.0"
+      - name: Unity Catalog, the grants each agent's group holds (rights-held.sql)
+        run: |
+          mkdir -p held
+          jq -n --rawfile sql agents/rights-held.sql --arg w "5e1f0a9c2b7d4e38" \
+            '{statement: $sql, warehouse_id: $w, wait_timeout: "50s", disposition: "INLINE", format: "JSON_ARRAY"}' > held/request.json
+          databricks api post /api/2.0/sql/statements --json @held/request.json |
+            jq '[.result.data_array[] | {grantee: .[0], privilege: .[1], securable_type: .[2], securable: .[3]}]' > held/unity-catalog.json
+      - name: Unity Catalog, each group's members, by their application IDs
+        run: |
+          for group in planning_contributors workload_contributors; do
+            ids=$(databricks groups list --filter "displayName eq \"$group\"" -o json | jq -r '.[0].members[]?.value')
+            for id in $ids; do databricks service-principals get "$id" -o json | jq -r '.applicationId // empty'; done |
+              jq -R . | jq -s --arg g "$group" '{($g): .}'
+          done | jq -s 'add // {}' > held/groups.json
+      - name: Unity Gateway, who may call each model and tool server
+        run: |
+          for service in mcp_service/ai.tools.build mcp_service/ai.tools.catalog mcp_service/ai.tools.docs mcp_service/ai.tools.memory mcp_service/ai.tools.query mcp_service/ai.tools.repository mcp_service/ai.tools.tickets model_service/ai.models.drafting; do
+            databricks api get "/api/2.1/unity-catalog/permissions/$service" |
+              jq --arg s "${service#*/}" '[.privilege_assignments[]? | {securable: $s, principal, privileges}]'
+          done | jq -s 'add // []' > held/unity-gateway.json
+      - name: The team's memory, who may read each store, listed by its creator
+        env:
+          DATABRICKS_CLIENT_ID: 2c8a4e71-90b5-4d3f-a6e2-1f7b5c0d8e39   # the memory keeper's application ID
+        run: |
+          python - <<'PY'
+          import json
+          from databricks.sdk import WorkspaceClient
+          from databricks_agentkit import AgentKitClient
+          client = AgentKitClient(WorkspaceClient())
+          rows = [{"store": store, "principal": grant.principal.name,
+                   "permission": getattr(grant.permission, "value", grant.permission)}
+                  for store in "team-memory".split() for grant in client.memory_stores.get(store).list_permissions(page_size=100)]
+          json.dump(rows, open("held/memory.json", "w"))
+          PY
+      - name: GitHub, each App's installation, its repositories and permissions
+        run: |
+          pass=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://tokens.uni.example/github" | jq -r .value)
+          export GH_TOKEN=$(curl -sSf -X POST -H "Authorization: Bearer $pass" https://tokens.uni.example/github/rights-reader | jq -r .token)
+          echo "::add-mask::$GH_TOKEN"
+          for app in planning-agent workload-agent; do
+            install=$(gh api "/orgs/uni-example/installations" --paginate --jq ".installations[] | select(.app_slug == \"$app\")")
+            [ -z "$install" ] && continue
+            if [ "$(jq -r .repository_selection <<< "$install")" = all ]; then repos='["all"]'
+            else repos=$(gh api "/orgs/uni-example/installations/$(jq -r .id <<< "$install")/repositories" --paginate \
+              --jq '[.repositories[].full_name]' | jq -s 'add'); fi
+            jq -n --arg app "$app" --argjson i "$install" --argjson r "$repos" '{app: $app, repositories: $r, permissions: $i.permissions}'
+          done | jq -s . > held/github.json
+      - name: Against the map
+        run: python scripts/generate/agents.py --drift held/

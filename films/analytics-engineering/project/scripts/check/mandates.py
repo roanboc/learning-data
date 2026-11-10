@@ -20,8 +20,8 @@ that holds one of its lines, and fails if:
   Gateway above its budget, or none.
 
 It runs in CI beside the other governance checks, so nothing that widens what an agent may do merges without
-it. Until the project writes each agent's settings from the map (agents/), it checks the page, the map and the
-ruleset, and says that the rest waits.
+it. Where nothing writes the agents' settings from the map (scripts/generate/agents.py), it checks the page,
+the map and the ruleset, and says that the rest waits.
 
     python scripts/check/mandates.py
 """

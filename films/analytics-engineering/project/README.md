@@ -250,7 +250,9 @@ project/
 │                             checked, a signed contract found by its metadata, and the claims app's
 │                             data contract (Databricks only);
 │                             more-readers-than-people/: casual teaching cost's five readers, each as
-│                             itself, and the share outside (Databricks only)
+│                             itself, and the share outside (Databricks only);
+│                             read-by-an-agent/: an agent's 412, the paper form behind it, and the
+│                             checks Genie Code proposed
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -336,12 +338,13 @@ her a contract each semester to tutor a first-year unit; `R-3082` at the researc
 person domain's conceptual model (`models/core/person/`) is a draft, and
 `analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
 
-The graduation list has a slice of its own: 24 graduates and 26 certificates, at the ceremonies of
+The graduation list has a slice of its own: 30 graduates and 32 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
-student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
-award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`) and its applications to graduate, on the paper form or in
+the portal (`data/student_system/graduation_applications.csv`), the portal's answers to "Is this
+your name?" (`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart
+from the student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled
+with, award by award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

@@ -133,6 +133,7 @@
 | When someone falls behind | 211 | 0% | 0 | 28.3 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
+| Read by an agent | 334 | 0% | 0 | 28.4 | Drawn to the rule |
 | Prototype first | 295 | 0% | 0 | 28.2 | Drawn to the rule |
 | Measures that matter | 322 | 0% | 0 | 28.3 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |

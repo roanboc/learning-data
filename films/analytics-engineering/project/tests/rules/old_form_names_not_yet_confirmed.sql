@@ -68,5 +68,6 @@ where records.record_created_on < cast('2019-01-01' as date)
         '{{ dbt.escape_single_quotes("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -'") }}',
         ''
     ) = ''
-    and list.name_confirmed_on is null
+    -- not confirmed in the portal, nor on the paper form (Read by an agent)
+    and list.name_confirmed_how is null
     and ceremonies.list_due_at > night.loaded_at

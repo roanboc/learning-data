@@ -233,8 +233,10 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({sec:wAt(sc,
           {l:"Approve",cross:ag_in(tt,P.capp,0.4),a:ag_in(tt,P.capp-0.3,0.4)},{l:"Request changes",r:"to block",cross:ag_in(tt,P.cblock,0.4),a:ag_in(tt,P.cblock-0.3,0.4)}],
         a:ag_in(tt,c.comment,0.5)*r4,k:ag_spr(tt,c.comment)});
       ec_pillL(x,RX,500,"only for reference",tt,P.ref,c.yusuf-0.3,{col:AG.violet});
-      // Yusuf decides: yes; the planning agent adds the warning, in a second push: its pull request, with its two pushes
-      ec_card(x,RX,150,RW,{kick:"Yusuf decides",title:"yes"},{a:ag_in(tt,P.yes,0.5),k:ag_spr(tt,P.yes),edge:AG.green,icon:"tick"});
+      // Yusuf decides: yes; the planning agent adds the warning, in a second push: its pull request, with its two pushes. The card comes in
+      // once the review has left, as the line starts, and its tick at "yes"
+      ec_card(x,RX,150,RW,{kick:"Yusuf decides",title:"yes"},{a:ag_in(tt,c.yusuf+0.1,0.5),k:ag_spr(tt,c.yusuf+0.1),edge:AG.green});
+      withA(x,ag_in(tt,P.yes,0.3),()=>ag_tick(x,RX+RW-46,150+46,26,rgba(AG.green,1),4));
       ec_pr(x,RX,350,RW,{title:EC_TITLE,who:"by planning-agent[bot]",rows:[{text:"First push: the change",icon:"push",col:AG.violet,a:ag_in(tt,P.adds-0.4,0.4)},
           {text:"Second push: the warning",icon:"push",col:AG.violet,hl:ag_in(tt,P.push,0.5),a:ag_in(tt,P.adds,0.4)}],a:ag_in(tt,P.adds-0.6,0.5),k:ag_spr(tt,P.adds-0.6)});}},
     // two agents worked together only through the pull request, and a person decided between them (later:true: Yusuf and the review agent

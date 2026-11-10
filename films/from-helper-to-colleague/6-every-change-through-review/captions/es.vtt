@@ -36,140 +36,140 @@ El agente entrega su evidencia. Las verificaciones construyen lo que cambió, y 
 00:01:11.839 --> 00:01:19.904
 Otro agente lo revisa, como referencia. Las personas lo aprueban, cada una en su rol del mapa, y una segunda persona lo libera a producción.
 
-00:01:21.404 --> 00:01:29.352
-Así, Jun, Clara, Mei y Noor vieron exactamente qué cambiaría: más clases en 161 asignaturas, y nada más.
+00:01:21.404 --> 00:01:28.223
+Así, Jun y Noor vieron exactamente qué cambiaría: más clases en 161 asignaturas, y nada más.
 
-00:01:30.652 --> 00:01:37.134
+00:01:29.523 --> 00:01:36.005
 Las facultades pueden contratar a tiempo tutores para 263 clases más, con lugar para cada estudiante.
 
-00:01:38.634 --> 00:01:45.806
+00:01:37.505 --> 00:01:44.677
 Y para los datos: un agente propone, una persona libera, y nada llega a producción sin que una persona lo haya visto.
 
-00:01:53.306 --> 00:01:59.549
+00:01:52.177 --> 00:01:58.420
 El lunes, su primer día, Clara pidió el cambio: las clases de cada asignatura según su propio tamaño de clase.
 
-00:02:01.249 --> 00:02:08.357
+00:02:00.120 --> 00:02:07.228
 El agente leyó primero el glosario. El tamaño de clase es el máximo de estudiantes de una clase, fijado por la escuela de la asignatura.
 
-00:02:10.057 --> 00:02:15.255
+00:02:08.928 --> 00:02:14.126
 Trabajó en su propia rama, en su propio esquema de desarrollo. Producción, solo puede leerla.
 
-00:02:16.955 --> 00:02:21.786
+00:02:15.826 --> 00:02:20.657
 Para los encargos de Planificación, el mapa lo pone en la etapa cuatro: un colaborador que propone.
 
-00:02:23.286 --> 00:02:30.245
+00:02:22.157 --> 00:02:29.116
 Antes del cambio, escribió dos pruebas: cada estudiante tiene lugar en una clase, y no se planifica ninguna clase que no haga falta.
 
-00:02:31.945 --> 00:02:37.413
+00:02:30.816 --> 00:02:36.284
 Su pull request dice qué cambió y por qué, y copia las palabras del glosario con su fuente.
 
-00:02:38.713 --> 00:02:41.951
+00:02:37.584 --> 00:02:40.822
 Muestra su evidencia: las clases, antes y después.
 
-00:02:43.651 --> 00:02:49.527
+00:02:42.522 --> 00:02:48.398
 Y dice de qué no estaba seguro: 31 asignaturas no tienen tamaño de clase, así que las dejó en 25.
 
-00:02:53.427 --> 00:02:59.867
+00:02:52.298 --> 00:02:58.738
 Las verificaciones no reconstruyen todo el proyecto: dbt construye lo que cambió, y todo lo que depende de ello.
 
-00:03:01.567 --> 00:03:08.348
+00:03:00.438 --> 00:03:07.219
 Aquí, eso es el plan de clases y, tras él, las clases por facultad, que lee la contratación. Todas las pruebas pasan.
 
-00:03:10.048 --> 00:03:15.049
-El informe de impacto: se agrega una columna, así que nada de lo que lee la tabla se rompe.
+00:03:08.919 --> 00:03:15.489
+El informe de impacto: se agrega una columna, así que nada de lo que lee la tabla se rompe. Y nombra a quién avisar.
 
-00:03:16.549 --> 00:03:24.143
+00:03:16.989 --> 00:03:24.583
 Luego el diff: la misma tabla, desde la rama del agente y desde main, de la que sale producción, comparada asignatura por asignatura.
 
-00:03:26.043 --> 00:03:36.226
+00:03:26.483 --> 00:03:36.666
 Ninguna asignatura está en una sola. Una columna es nueva. Y las clases cambiaron en 161 asignaturas, todas hacia arriba: 263 más.
 
-00:03:38.126 --> 00:03:42.211
+00:03:38.566 --> 00:03:42.651
 Así, quien revisa ve lo que el cambio hace a los datos, no solo al código.
 
-00:03:45.911 --> 00:03:52.620
+00:03:46.351 --> 00:03:53.060
 Luego, un segundo agente lee el pull request: el agente de revisión de gobernanza, de Yusuf, con un nombre propio.
 
-00:03:54.320 --> 00:04:01.729
+00:03:54.760 --> 00:04:02.169
 Verifica las reglas de gobernanza: un dueño, palabras del glosario con su fuente, una prueba por regla, el impacto nombrado.
 
-00:04:03.229 --> 00:04:09.800
+00:04:03.669 --> 00:04:10.240
 Una cosa no tiene verificación: las 31 asignaturas sin tamaño de clase quedan en 25, y nadie se entera.
 
-00:04:11.100 --> 00:04:18.379
+00:04:11.540 --> 00:04:18.819
 Cada escuela debería fijarlo, así que sugiere un aviso cada noche que las liste para las facultades, no una verificación que falle.
 
-00:04:20.079 --> 00:04:25.423
-Dice quién decide: Clara, la dueña del plan. Y publica su revisión como un comentario.
+00:04:20.519 --> 00:04:27.585
+Dice quién decide: gobernanza de datos, donde un cambio y el glosario difieren. Y publica su revisión como un comentario.
 
-00:04:26.723 --> 00:04:31.129
+00:04:28.885 --> 00:04:33.291
 Nunca aprueba, y nunca bloquea: su revisión es solo una referencia.
 
-00:04:32.829 --> 00:04:37.753
-Clara decide: sí. El agente de Planificación agrega el aviso, en un segundo push.
+00:04:34.991 --> 00:04:40.030
+Yusuf decide: sí. El agente de Planificación agrega el aviso, en un segundo push.
 
-00:04:39.453 --> 00:04:44.799
+00:04:41.730 --> 00:04:47.076
 Dos agentes trabajaron juntos solo a través del pull request, y una persona decidió entre ellos.
 
-00:04:48.699 --> 00:04:53.457
+00:04:50.976 --> 00:04:55.734
 Quién aprueba está en el mapa. Después de un pull request, cada paso es de una persona.
 
-00:04:54.957 --> 00:05:01.794
-El ingeniero de analítica revisa el código. El dueño del producto aprueba el cambio. El aprobador de liberación lo libera.
+00:04:57.234 --> 00:05:03.195
+El ingeniero de analítica revisa el código. El aprobador de liberación aprueba el cambio, y lo libera.
 
-00:05:03.494 --> 00:05:05.842
-Y lo que significa una palabra queda con su dueño de datos.
+00:05:04.895 --> 00:05:10.854
+Los dueños no revisan pull requests. Lo que significa una palabra lo decide primero su dueño, en el glosario.
 
-00:05:07.342 --> 00:05:12.397
+00:05:12.354 --> 00:05:17.409
 Los pasos del colaborador de Planificación terminan en el pull request. El agente no tiene ninguno de estos.
 
-00:05:14.097 --> 00:05:21.263
-En GitHub, los dueños del código y los equipos se escriben a partir de esos roles. Cuando alguien asume un rol, las revisiones lo siguen.
+00:05:19.109 --> 00:05:25.811
+En GitHub, los equipos que aprueban se escriben a partir de esos roles. Cuando alguien asume un rol, las aprobaciones lo siguen.
 
-00:05:22.963 --> 00:05:28.414
+00:05:27.511 --> 00:05:32.962
 Y las reglas de main valen para todos: nadie puede saltárselas, ni siquiera un administrador.
 
-00:05:29.714 --> 00:05:35.842
-Un dueño es una persona, o un equipo de personas. Un agente no puede serlo, así que su aprobación nunca cuenta.
+00:05:34.262 --> 00:05:40.492
+Quien revisa es una persona, o un equipo de personas. Un agente no puede serlo, así que su aprobación nunca cuenta.
 
-00:05:37.542 --> 00:05:43.826
+00:05:42.192 --> 00:05:48.476
 Nadie puede aprobar su propio pull request, y el último push debe aprobarlo alguien que no lo hizo.
 
-00:05:45.526 --> 00:05:51.236
-Así que, tras el segundo push, Jun aprueba el código, Clara el cambio, y Mei la palabra que copia.
+00:05:50.176 --> 00:05:56.704
+Así que, tras el segundo push, Jun aprueba el código otra vez, y a Clara y a las facultades se les avisa qué toca.
 
-00:05:55.136 --> 00:06:02.083
-Aprobado, el cambio entra en main. Jun lo fusiona; los agentes no fusionan. Y fusionar no es liberar.
+00:06:00.604 --> 00:06:08.322
+Con el código aprobado, el cambio entra en main. Jun lo fusiona; los agentes no fusionan. Y fusionar no es liberar.
 
-00:06:03.783 --> 00:06:09.453
+00:06:10.022 --> 00:06:15.692
 Esa noche, la liberación compila main en pruebas. Solo si pasa en pruebas, sigue a producción.
 
-00:06:11.153 --> 00:06:16.438
+00:06:17.392 --> 00:06:22.677
 Ahí espera, en un entorno llamado production, hasta que un aprobador de liberación dice que sí.
 
-00:06:18.138 --> 00:06:23.707
-El miércoles por la mañana, Noor aprueba. Quien inicia una liberación no puede aprobarla, aunque sea aprobador.
+00:06:24.377 --> 00:06:30.722
+El miércoles por la mañana, Noor aprueba el cambio. Quien inicia una liberación no puede aprobarla, aunque sea aprobador.
 
-00:06:25.607 --> 00:06:31.886
+00:06:32.622 --> 00:06:38.901
 Solo entonces la liberación puede entrar en Databricks, como su propia entidad de servicio, sin ningún secreto que robar.
 
-00:06:33.586 --> 00:06:37.546
+00:06:40.601 --> 00:06:44.561
 Despliega el proyecto como un bundle, y ejecuta la compilación en producción.
 
-00:06:39.446 --> 00:06:47.013
+00:06:46.461 --> 00:06:54.028
 La identidad propia del agente de Planificación solo lee producción. Escribir ahí es tarea de la liberación, tras el sí de una persona.
 
-00:06:50.913 --> 00:07:00.552
+00:06:57.928 --> 00:07:07.567
 Desde el miércoles, las facultades tienen su plan: 263 clases más, lugar para cada estudiante, y la lista de las 31 asignaturas por definir.
 
-00:07:02.252 --> 00:07:07.633
+00:07:09.267 --> 00:07:14.648
 Todo cambio sigue el mismo camino: evidencia, verificaciones, un diff, y una revisión como referencia.
 
-00:07:08.733 --> 00:07:12.560
+00:07:15.748 --> 00:07:19.575
 Luego, la aprobación de los roles del mapa, y la liberación de una segunda persona.
 
-00:07:14.460 --> 00:07:16.229
+00:07:21.475 --> 00:07:23.244
 Para agentes, como para personas.
 
-00:07:17.529 --> 00:07:20.230
+00:07:24.544 --> 00:07:27.245
 Un agente propone. Una persona libera.

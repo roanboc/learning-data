@@ -47,185 +47,185 @@ The agent hands in its evidence. Checks build what changed, and a diff shows the
 Another agent reviews it, for reference. People approve it, each in their role on the map, and a second person releases it to production.
 
 13
-00:01:21,404 --> 00:01:29,352
-So Jun, Clara, Mei and Noor saw exactly what would change: more classes in 161 units, and nothing else.
+00:01:21,404 --> 00:01:28,223
+So Jun and Noor saw exactly what would change: more classes in 161 units, and nothing else.
 
 14
-00:01:30,652 --> 00:01:37,134
+00:01:29,523 --> 00:01:36,005
 The faculties can hire tutors for 263 more classes in time, with a place for every student.
 
 15
-00:01:38,634 --> 00:01:45,806
+00:01:37,505 --> 00:01:44,677
 And for data: an agent proposes, a person releases, and nothing reaches production that a person hasn't seen.
 
 16
-00:01:53,306 --> 00:01:59,549
+00:01:52,177 --> 00:01:58,420
 On Monday, its first day, Clara asked for the change: each unit's classes from its own class size.
 
 17
-00:02:01,249 --> 00:02:08,357
+00:02:00,120 --> 00:02:07,228
 The agent read the glossary first. A class size is the most students one class may hold, set by the unit's school.
 
 18
-00:02:10,057 --> 00:02:15,255
+00:02:08,928 --> 00:02:14,126
 It worked on its own branch, in its own development schema. Production, it can only read.
 
 19
-00:02:16,955 --> 00:02:21,786
+00:02:15,826 --> 00:02:20,657
 For Planning's tickets, the map puts it at stage four: a contributor that proposes.
 
 20
-00:02:23,286 --> 00:02:30,245
+00:02:22,157 --> 00:02:29,116
 Before the change, it wrote two tests: every student has a place in a class, and no class is planned that isn't needed.
 
 21
-00:02:31,945 --> 00:02:37,413
+00:02:30,816 --> 00:02:36,284
 Its pull request says what changed and why, and copies the glossary's words with their source.
 
 22
-00:02:38,713 --> 00:02:41,951
+00:02:37,584 --> 00:02:40,822
 It shows its evidence: the classes, before and after.
 
 23
-00:02:43,651 --> 00:02:49,527
+00:02:42,522 --> 00:02:48,398
 And it says what it wasn't sure of: 31 units have no class size, so it left them at 25.
 
 24
-00:02:53,427 --> 00:02:59,867
+00:02:52,298 --> 00:02:58,738
 The checks don't rebuild the whole project: dbt builds what changed, and everything that depends on it.
 
 25
-00:03:01,567 --> 00:03:08,348
+00:03:00,438 --> 00:03:07,219
 Here, that's the class plan, and after it the classes by faculty, which hiring reads. Every test passes.
 
 26
-00:03:10,048 --> 00:03:15,049
-The impact report: a column is added, so nothing that reads the table breaks.
+00:03:08,919 --> 00:03:15,489
+The impact report: a column is added, so nothing that reads the table breaks. And it names who to tell.
 
 27
-00:03:16,549 --> 00:03:24,143
+00:03:16,989 --> 00:03:24,583
 Then the diff: the same table, from the agent's branch and from main, which production is built from, compared unit by unit.
 
 28
-00:03:26,043 --> 00:03:36,226
+00:03:26,483 --> 00:03:36,666
 No unit is in only one of them. One column is new. And classes changed in 161 units, each one up: 263 more.
 
 29
-00:03:38,126 --> 00:03:42,211
+00:03:38,566 --> 00:03:42,651
 So a reviewer sees what the change does to the data, not only to the code.
 
 30
-00:03:45,911 --> 00:03:52,620
+00:03:46,351 --> 00:03:53,060
 Next, a second agent reads the pull request: the governance review agent, Yusuf's, with a name of its own.
 
 31
-00:03:54,320 --> 00:04:01,729
+00:03:54,760 --> 00:04:02,169
 It checks governance's rules: an owner, words from the glossary with their source, a test for each rule, the impact named.
 
 32
-00:04:03,229 --> 00:04:09,800
+00:04:03,669 --> 00:04:10,240
 One thing has no check: the 31 units with no class size stay at 25, and nobody is told.
 
 33
-00:04:11,100 --> 00:04:18,379
+00:04:11,540 --> 00:04:18,819
 Each unit's school should set one, so it suggests a warning every night that lists them for the faculties, not a failing check.
 
 34
-00:04:20,079 --> 00:04:25,423
-It says who decides: Clara, who owns the plan. And it posts its review as a comment.
+00:04:20,519 --> 00:04:27,585
+It says who decides: data governance, where a change and the glossary differ. And it posts its review as a comment.
 
 35
-00:04:26,723 --> 00:04:31,129
+00:04:28,885 --> 00:04:33,291
 It never approves, and it never blocks: its review is only for reference.
 
 36
-00:04:32,829 --> 00:04:37,753
-Clara decides: yes. The planning agent adds the warning, in a second push.
+00:04:34,991 --> 00:04:40,030
+Yusuf decides: yes. The planning agent adds the warning, in a second push.
 
 37
-00:04:39,453 --> 00:04:44,799
+00:04:41,730 --> 00:04:47,076
 Two agents worked together only through the pull request, and a person decided between them.
 
 38
-00:04:48,699 --> 00:04:53,457
+00:04:50,976 --> 00:04:55,734
 Who approves is on the map. After a pull request, every step is a person's.
 
 39
-00:04:54,957 --> 00:05:01,794
-The analytics engineer reviews the code. The product owner approves the change. The release approver releases it.
+00:04:57,234 --> 00:05:03,195
+The analytics engineer reviews the code. The release approver approves the change, and releases it.
 
 40
-00:05:03,494 --> 00:05:05,842
-And what a word means stays with its data owner.
+00:05:04,895 --> 00:05:10,854
+Owners don't review pull requests. What a word means, its owner decides first, in the glossary.
 
 41
-00:05:07,342 --> 00:05:12,397
+00:05:12,354 --> 00:05:17,409
 The planning contributor's steps end at the pull request. So the agent holds none of these.
 
 42
-00:05:14,097 --> 00:05:21,263
-In GitHub, the code owners and the teams are written from those roles. When someone takes over a role, the reviews follow.
+00:05:19,109 --> 00:05:25,811
+In GitHub, the teams that approve are written from those roles. When someone takes over a role, the approvals follow.
 
 43
-00:05:22,963 --> 00:05:28,414
+00:05:27,511 --> 00:05:32,962
 And the rules on main hold for everyone: nobody can skip them, not even an administrator.
 
 44
-00:05:29,714 --> 00:05:35,842
-An owner is a person, or a team of people. An agent can't be one, so its approval never counts.
+00:05:34,262 --> 00:05:40,492
+A reviewer is a person, or a team of people. An agent can't be one, so its approval never counts.
 
 45
-00:05:37,542 --> 00:05:43,826
+00:05:42,192 --> 00:05:48,476
 Nobody can approve their own pull request, and the latest push must be approved by someone who didn't push it.
 
 46
-00:05:45,526 --> 00:05:51,236
-So after the second push, Jun approves the code, Clara the change, and Mei the word it copies.
+00:05:50,176 --> 00:05:56,704
+So after the second push, Jun approves the code again, and Clara and the faculties are told what it touches.
 
 47
-00:05:55,136 --> 00:06:02,083
-Approved, the change goes into main. Jun merges it; the agents don't merge. And merging isn't the release.
+00:06:00,604 --> 00:06:08,322
+With the code approved, the change goes into main. Jun merges it; the agents don't merge. And merging isn't the release.
 
 48
-00:06:03,783 --> 00:06:09,453
+00:06:10,022 --> 00:06:15,692
 That night, the release builds main in test. Only if test passes does it go on to production.
 
 49
-00:06:11,153 --> 00:06:16,438
+00:06:17,392 --> 00:06:22,677
 There it waits, at an environment called production, until a release approver says yes.
 
 50
-00:06:18,138 --> 00:06:23,707
-On Wednesday morning, Noor approves. Whoever starts a release can't approve it, even an approver.
+00:06:24,377 --> 00:06:30,722
+On Wednesday morning, Noor approves the change. Whoever starts a release can't approve it, even an approver.
 
 51
-00:06:25,607 --> 00:06:31,886
+00:06:32,622 --> 00:06:38,901
 Only then can the release sign in to Databricks, as its own service principal, with no secret to steal.
 
 52
-00:06:33,586 --> 00:06:37,546
+00:06:40,601 --> 00:06:44,561
 It deploys the project as a bundle, and runs the build in production.
 
 53
-00:06:39,446 --> 00:06:47,013
+00:06:46,461 --> 00:06:54,028
 The planning agent's own identity only reads production. Writing there is the release's job, after a person's yes.
 
 54
-00:06:50,913 --> 00:07:00,552
+00:06:57,928 --> 00:07:07,567
 Since Wednesday, the faculties have their plan: 263 more classes, a place for every student, and a list of the 31 units still to set.
 
 55
-00:07:02,252 --> 00:07:07,633
+00:07:09,267 --> 00:07:14,648
 Every change takes the same path: evidence, checks, a diff, and a review for reference.
 
 56
-00:07:08,733 --> 00:07:12,560
+00:07:15,748 --> 00:07:19,575
 Then approval from the roles on the map, and a second person's release.
 
 57
-00:07:14,460 --> 00:07:16,229
+00:07:21,475 --> 00:07:23,244
 For agents, as for people.
 
 58
-00:07:17,529 --> 00:07:20,230
+00:07:24,544 --> 00:07:27,245
 An agent proposes. A person releases.

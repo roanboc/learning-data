@@ -418,7 +418,7 @@ const NARR={
  {"id":"review","gap":0.8,"text":"Now every change, an agent's or a person's, goes through review, and the rules are set in the tools."},
  {"id":"path","gap":0.8,"text":"The agent hands in its evidence. Checks build what changed, and a diff shows the data before and after."},
  {"id":"release","gap":0.8,"text":"Another agent reviews it, for reference. People approve it, each in their role on the map, and a second person releases it to production."},
- {"id":"saw","gap":0.8,"text":"So Jun, Clara, Mei and Noor saw exactly what would change: more classes in 161 units, and nothing else.","say":"So Jun, Clara, Mei and Noor saw exactly what would change: more classes in a hundred and sixty-one units, and nothing else."},
+ {"id":"saw","gap":0.8,"text":"So Jun and Noor saw exactly what would change: more classes in 161 units, and nothing else.","say":"So Jun and Noor saw exactly what would change: more classes in a hundred and sixty-one units, and nothing else."},
  {"id":"answer","gap":0.8,"text":"The faculties can hire tutors for 263 more classes in time, with a place for every student.","say":"The faculties can hire tutors for two hundred and sixty-three more classes in time, with a place for every student."},
  {"id":"data","gap":0.8,"text":"And for data: an agent proposes, a person releases, and nothing reaches production that a person hasn't seen."}]},
 "hands":{"name":"What the agent hands in","lead":1.0,"tail":1.0,"vo":[
@@ -433,7 +433,7 @@ const NARR={
 "checks":{"name":"What changed, and what it touches","lead":1.0,"tail":1.0,"vo":[
  {"id":"only","gap":0.8,"text":"The checks don't rebuild the whole project: dbt builds what changed, and everything that depends on it."},
  {"id":"here","gap":0.8,"text":"Here, that's the class plan, and after it the classes by faculty, which hiring reads. Every test passes."},
- {"id":"impact","gap":0.8,"text":"The impact report: a column is added, so nothing that reads the table breaks."},
+ {"id":"impact","gap":0.8,"text":"The impact report: a column is added, so nothing that reads the table breaks. And it names who to tell."},
  {"id":"diff","gap":0.8,"text":"Then the diff: the same table, from the agent's branch and from main, which production is built from, compared unit by unit."},
  {"id":"none","gap":0.8,"text":"No unit is in only one of them. One column is new. And classes changed in 161 units, each one up: 263 more.","say":"No unit is in only one of them. One column is new. And classes changed in a hundred and sixty-one units, each one up: two hundred and sixty-three more."},
  {"id":"sees","gap":0.8,"text":"So a reviewer sees what the change does to the data, not only to the code."}]},
@@ -442,25 +442,25 @@ const NARR={
  {"id":"rules","gap":0.8,"text":"It checks governance's rules: an owner, words from the glossary with their source, a test for each rule, the impact named."},
  {"id":"missing","gap":0.8,"text":"One thing has no check: the 31 units with no class size stay at 25, and nobody is told.","say":"One thing has no check: the thirty-one units with no class size stay at twenty-five, and nobody is told."},
  {"id":"suggests","gap":0.8,"text":"Each unit's school should set one, so it suggests a warning every night that lists them for the faculties, not a failing check."},
- {"id":"who","gap":0.8,"text":"It says who decides: Clara, who owns the plan. And it posts its review as a comment."},
+ {"id":"who","gap":0.8,"text":"It says who decides: data governance, where a change and the glossary differ. And it posts its review as a comment."},
  {"id":"comment","gap":0.8,"text":"It never approves, and it never blocks: its review is only for reference."},
- {"id":"clara","gap":0.8,"text":"Clara decides: yes. The planning agent adds the warning, in a second push."},
+ {"id":"yusuf","gap":0.8,"text":"Yusuf decides: yes. The planning agent adds the warning, in a second push."},
  {"id":"together","gap":0.8,"text":"Two agents worked together only through the pull request, and a person decided between them."}]},
 "rules":{"name":"Who approves, from the map","lead":1.0,"tail":1.0,"vo":[
  {"id":"map","gap":0.8,"text":"Who approves is on the map. After a pull request, every step is a person's."},
- {"id":"steps","gap":0.8,"text":"The analytics engineer reviews the code. The product owner approves the change. The release approver releases it."},
- {"id":"word","gap":0.8,"text":"And what a word means stays with its data owner."},
+ {"id":"steps","gap":0.8,"text":"The analytics engineer reviews the code. The release approver approves the change, and releases it."},
+ {"id":"word","gap":0.8,"text":"Owners don't review pull requests. What a word means, its owner decides first, in the glossary."},
  {"id":"none","gap":0.8,"text":"The planning contributor's steps end at the pull request. So the agent holds none of these."},
- {"id":"written","gap":0.8,"text":"In GitHub, the code owners and the teams are written from those roles. When someone takes over a role, the reviews follow."},
+ {"id":"written","gap":0.8,"text":"In GitHub, the teams that approve are written from those roles. When someone takes over a role, the approvals follow."},
  {"id":"main","gap":0.8,"text":"And the rules on main hold for everyone: nobody can skip them, not even an administrator."},
- {"id":"person","gap":0.8,"text":"An owner is a person, or a team of people. An agent can't be one, so its approval never counts."},
+ {"id":"person","gap":0.8,"text":"A reviewer is a person, or a team of people. An agent can't be one, so its approval never counts."},
  {"id":"own","gap":0.8,"text":"Nobody can approve their own pull request, and the latest push must be approved by someone who didn't push it."},
- {"id":"again","gap":0.8,"text":"So after the second push, Jun approves the code, Clara the change, and Mei the word it copies."}]},
+ {"id":"again","gap":0.8,"text":"So after the second push, Jun approves the code again, and Clara and the faculties are told what it touches."}]},
 "release":{"name":"A person releases","lead":1.0,"tail":1.0,"vo":[
- {"id":"merge","gap":0.8,"text":"Approved, the change goes into main. Jun merges it; the agents don't merge. And merging isn't the release."},
+ {"id":"merge","gap":0.8,"text":"With the code approved, the change goes into main. Jun merges it; the agents don't merge. And merging isn't the release."},
  {"id":"night","gap":0.8,"text":"That night, the release builds main in test. Only if test passes does it go on to production."},
  {"id":"waits","gap":0.8,"text":"There it waits, at an environment called production, until a release approver says yes."},
- {"id":"noor","gap":0.8,"text":"On Wednesday morning, Noor approves. Whoever starts a release can't approve it, even an approver."},
+ {"id":"noor","gap":0.8,"text":"On Wednesday morning, Noor approves the change. Whoever starts a release can't approve it, even an approver."},
  {"id":"signs","gap":0.8,"text":"Only then can the release sign in to Databricks, as its own service principal, with no secret to steal."},
  {"id":"bundle","gap":0.8,"text":"It deploys the project as a bundle, and runs the build in production."},
  {"id":"reads","gap":0.8,"text":"The planning agent's own identity only reads production. Writing there is the release's job, after a person's yes."}]},
@@ -472,7 +472,7 @@ const NARR={
  {"id":"lesson","gap":0.8,"text":"An agent proposes. A person releases."}]}
 };
 
-const VODUR={"first/place": 5.583, "first/what": 5.056, "first/plan": 5.426, "first/tutors": 2.081, "first/labs": 6.03, "first/stakes": 2.143, "first/wrong": 7.981, "first/own": 4.705, "first/change": 2.468, "first/review": 6.135, "first/path": 6.231, "first/release": 7.965, "first/saw": 7.848, "first/answer": 6.382, "first/data": 7.072, "hands/ticket": 6.143, "hands/glossary": 7.008, "hands/branch": 5.098, "hands/stage": 4.731, "hands/tests": 6.859, "hands/says": 5.368, "hands/evidence": 3.138, "hands/unsure": 5.776, "checks/only": 6.34, "checks/here": 6.681, "checks/impact": 4.901, "checks/diff": 7.494, "checks/none": 10.083, "checks/sees": 3.985, "review/second": 6.609, "review/rules": 7.309, "review/missing": 6.471, "review/suggests": 7.179, "review/who": 5.244, "review/comment": 4.306, "review/clara": 4.824, "review/together": 5.246, "rules/map": 4.658, "rules/steps": 6.737, "rules/word": 2.248, "rules/none": 4.955, "rules/written": 7.066, "rules/main": 5.351, "rules/person": 6.028, "rules/own": 6.184, "rules/again": 5.61, "release/merge": 6.847, "release/night": 5.57, "release/waits": 5.185, "release/noor": 5.469, "release/signs": 6.179, "release/bundle": 3.86, "release/reads": 7.467, "close/faculties": 9.539, "close/path": 5.281, "close/roles": 3.727, "close/both": 1.669, "close/lesson": 2.601};
+const VODUR={"first/place": 5.583, "first/what": 5.056, "first/plan": 5.426, "first/tutors": 2.081, "first/labs": 6.03, "first/stakes": 2.143, "first/wrong": 7.981, "first/own": 4.705, "first/change": 2.468, "first/review": 6.135, "first/path": 6.231, "first/release": 7.965, "first/saw": 6.719, "first/answer": 6.382, "first/data": 7.072, "hands/ticket": 6.143, "hands/glossary": 7.008, "hands/branch": 5.098, "hands/stage": 4.731, "hands/tests": 6.859, "hands/says": 5.368, "hands/evidence": 3.138, "hands/unsure": 5.776, "checks/only": 6.34, "checks/here": 6.681, "checks/impact": 6.47, "checks/diff": 7.494, "checks/none": 10.083, "checks/sees": 3.985, "review/second": 6.609, "review/rules": 7.309, "review/missing": 6.471, "review/suggests": 7.179, "review/who": 6.966, "review/comment": 4.306, "review/yusuf": 4.939, "review/together": 5.246, "rules/map": 4.658, "rules/steps": 5.861, "rules/word": 5.859, "rules/none": 4.955, "rules/written": 6.602, "rules/main": 5.351, "rules/person": 6.13, "rules/own": 6.184, "rules/again": 6.428, "release/merge": 7.618, "release/night": 5.57, "release/waits": 5.185, "release/noor": 6.245, "release/signs": 6.179, "release/bundle": 3.86, "release/reads": 7.467, "close/faculties": 9.539, "close/path": 5.281, "close/roles": 3.727, "close/both": 1.669, "close/lesson": 2.601};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -481,7 +481,7 @@ const BREATH={
 "first":{"hold":{"place":0.6,"what":0.8,"plan":0.6,"tutors":0.6,"labs":1.0,"stakes":0.4,"wrong":0.8,"own":0.6,"change":1.2,"review":0.4,"path":0.6,"release":0.8,"saw":0.6,"answer":0.8,"data":0.4},"breathe":4.4},
 "hands":{"hold":{"ticket":1.0,"glossary":1.0,"branch":1.0,"stage":0.8,"tests":1.0,"says":0.6,"evidence":1.0,"unsure":1.2}},
 "checks":{"hold":{"only":1.0,"here":1.0,"impact":0.8,"diff":1.2,"none":1.2,"sees":1.0}},
-"review":{"hold":{"second":1.0,"rules":0.8,"missing":0.6,"suggests":1.0,"who":0.6,"comment":1.0,"clara":1.0,"together":1.2}},
+"review":{"hold":{"second":1.0,"rules":0.8,"missing":0.6,"suggests":1.0,"who":0.6,"comment":1.0,"yusuf":1.0,"together":1.2}},
 "rules":{"hold":{"map":0.8,"steps":1.0,"word":0.8,"none":1.0,"written":1.0,"main":0.6,"person":1.0,"own":1.0,"again":1.2}},
 "release":{"hold":{"merge":1.0,"night":1.0,"waits":1.0,"noor":1.2,"signs":1.0,"bundle":1.2,"reads":1.2}},
 "close":{"hold":{"faculties":1.0,"path":0.4,"roles":1.2,"both":0.6,"lesson":0.8},"breathe":4.6}
@@ -1979,7 +1979,8 @@ function ec_schema(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,f={w:500,size
   if(o.lock)ag_lock(ctx,x+w-36,y+36,26,rgba(AG.mut,1));ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the five stages: the series' picture, copied whole from Five
-   stages, not a switch (fs_stages, as its branch had it on 5 November 2026), under this film's prefix, with its look, words and colours.
+   stages, not a switch (fs_stages, as its branch had it on 5 November 2026), under this film's prefix, with its look, words and colours;
+   stage 4's person reads "Owns it; the data team reviews it" since 10 November 2026 (owners never review a pull request).
    ec_stages(ctx, x, y, w, o): five oak steps rising from left to right on the floor, each with its number and a card with its name, and
    a slim gate before each; x, y the left end of the floor line, w their width; o.a, o.k [5], o.lit [5], o.dim, o.col [5], o.short,
    o.gates [5] or true, o.passed [5], o.gate {i, a, k, x, y, w}, o.facts {i, a, x, y, w}. It returns each stage's card and each gate. */
@@ -1991,7 +1992,7 @@ function ec_stages(ctx,x,y,w,o){o=o||{};
     FACTS=[["Yours, but it uses none","Drafts in a chat; runs nothing","Accepts or rejects every line"],
       ["Yours, delegated","Runs queries in your session, read only","Approves each action"],
       ["Yours, narrowed","Works alone; drafts only in a sandbox","Checks it against the checks set first"],
-      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it, and reviews every change"],
+      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it; the data team reviews it"],
       ["Its own","In test, agreed tasks alone, then a report","Another person approves production"]],
     BLUE=[38,102,132],GREEN=[50,116,80],OAK={base:[208,188,156],dark:[156,136,106],hi:[242,233,216]};
   const a=o.a==null?1:o.a,k=w/1660,bw=300*k,gap=40*k,rise=86*k,depth=16*k,ch=128,sm=o.short===true?1:clamp(o.short||0,0,1),arr=(v,i,d)=>v==null?d:(v===true?1:(Array.isArray(v)?(v[i]==null?d:v[i]):v));
@@ -2115,10 +2116,10 @@ function ec_side(ctx,x,y,w,head,sub,rows,o){o=o||{};const a=o.a==null?1:o.a,h=13
 
 /* ---------------------------------------------------------------- the map's steps for a change to a data product
    ec_steps(ctx, x, y, w, o): the seven steps of "change a data product" on the map, each with the role that does it (3.3's names);
-   o.lit [7] each lit; o.agent (0 to 1) the planning agent's badge by its role's three steps; o.people (0 to 1) "a person" by the steps
+   o.lit [7] each lit (a person approves the change as the release approver since 10 November 2026: owners never review); o.agent (0 to 1) the planning agent's badge by its role's three steps; o.people (0 to 1) "a person" by the steps
    after the pull request; o.none (0 to 1) those three crossed for the agent; o.a, o.k. Returns the rows' boxes. */
 const EC_STEPS=[["raise a ticket","requester",0],["draft the change","planning contributor",1],["build it in development","planning contributor",1],["open a pull request","planning contributor",1],
-  ["review the code","analytics engineer",2],["approve the change","product owner",2],["release to production","release approver",2]];
+  ["review the code","analytics engineer",2],["approve the change","release approver",2],["release to production","release approver",2]];
 function ec_steps(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=62,y0=y+110,h=110+EC_STEPS.length*rh+22,out=EC_STEPS.map((s,i)=>({x,y:y0+i*rh,w,h:rh}));if(a<=0)return out;
   ctx.save();ctx.globalAlpha*=a;ec_springAbout(ctx,x,y,w,h,o.k);ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.55});
   ag_T(ctx,"ON THE MAP",x+28,y+52,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"Change a data product",x+28,y+94,{w:700,size:32});
@@ -2195,7 +2196,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({uni:wAt(sc,"
     agents:wAt(sc,"review","an agent's"),persons:wAt(sc,"review","a person's"),through:wAt(sc,"review","goes through review"),rules:wAt(sc,"review","the rules are set"),
     evid:wAt(sc,"path","its evidence"),checks:wAt(sc,"path","Checks build"),diff:wAt(sc,"path","a diff shows"),
     another:wAt(sc,"release","Another agent"),people:wAt(sc,"release","People approve"),second:wAt(sc,"release","a second person"),
-    jun:wAt(sc,"saw","Jun"),clara:wAt(sc,"saw","Clara"),mei:wAt(sc,"saw","Mei"),noor:wAt(sc,"saw","Noor"),more:wAt(sc,"saw","more classes"),nothing:wAt(sc,"saw","nothing else"),
+    jun:wAt(sc,"saw","Jun"),noor:wAt(sc,"saw","Noor"),more:wAt(sc,"saw","more classes"),nothing:wAt(sc,"saw","nothing else"),
     n263:wAt(sc,"answer","two hundred"),time:wAt(sc,"answer","in time"),place:wAt(sc,"answer","a place for every student"),
     proposes:wAt(sc,"data","an agent proposes"),releases:wAt(sc,"data","a person releases"),seen:wAt(sc,"data","nothing reaches production")}));
   const planAgent=(x,tt,a)=>ec_theAgent(x,tt,Object.assign({},EC_AL,{badge:"planning agent"}),{a,think:0.3});
@@ -2203,7 +2204,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({uni:wAt(sc,"
   const PX=150,PY=250,PW=1620;
   const path=(x,tt,a)=>{const L=[P.evid,P.checks,P.diff,P.another,P.people,P.second];
     return ec_path(x,PX,PY,PW,{a,k:L.map((t0,i)=>ag_spr(tt,c.path+0.1+i*0.08)),lit:L.map(t0=>ag_in(tt,t0,0.5)),chipA:ag_in(tt,P.evid,0.4),
-      chip:L.reduce((s,t0,i)=>s+(i?ag_sine(clamp((tt-t0+0.6)/0.8,0,1)):0),0),names:[[4,"Jun · Clara · Mei",ag_in(tt,P.jun,0.4)],[5,"Noor",ag_in(tt,P.noor,0.4)]]});};
+      chip:L.reduce((s,t0,i)=>s+(i?ag_sine(clamp((tt-t0+0.6)/0.8,0,1)):0),0),names:[[4,"Jun",ag_in(tt,P.jun,0.4)],[5,"Noor",ag_in(tt,P.noor,0.4)]]});};
   const tools=(x,tt,a)=>{if(!(a>0))return;const ws=[["github","GitHub"],["databricks","Databricks"],["dbt","dbt"]].map(([k,n])=>[k,n,ec_toolW(x,n)]),tw=ws.reduce((s,w)=>s+w[2],0)+2*24;
     let xx=960-tw/2;withA(x,a,()=>{ag_label(x,960,700,"The rules, set in the tools",{align:"center",col:AG.kick});ws.forEach(([k,n,w],i)=>{ec_tool(x,xx,770,k,n,{edge:AG.blue});xx+=w+24;});});};
   ag_shots(ctx,S,t,sc.dur,[
@@ -2321,13 +2322,13 @@ scene("hands",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({mon:wAt(sc,"
 /* ---------------------------------------------------------------- 3 · What changed, and what it touches */
 scene("checks",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({whole:wAt(sc,"only","the whole project"),dbt:wAt(sc,"only","dbt builds"),changed:wAt(sc,"only","what changed"),
     depends:wAt(sc,"only","everything that depends"),plan:wAt(sc,"here","the class plan"),fac:wAt(sc,"here","the classes by faculty"),hiring:wAt(sc,"here","which hiring reads"),
-    pass:wAt(sc,"here","Every test passes"),report:wAt(sc,"impact","The impact report"),added:wAt(sc,"impact","a column is added"),breaks:wAt(sc,"impact","nothing that reads"),
+    pass:wAt(sc,"here","Every test passes"),report:wAt(sc,"impact","The impact report"),added:wAt(sc,"impact","a column is added"),breaks:wAt(sc,"impact","nothing that reads"),tell:wAt(sc,"impact","who to tell"),
     same:wAt(sc,"diff","the same table"),abr:wAt(sc,"diff","the agent's branch"),main:wAt(sc,"diff","from main"),prodb:wAt(sc,"diff","which production"),cmp:wAt(sc,"diff","compared unit by unit"),
     noone:wAt(sc,"none","No unit"),col:wAt(sc,"none","One column is new"),ch:wAt(sc,"none","classes changed"),up:wAt(sc,"none","each one up"),more:wAt(sc,"none","two hundred and sixty-three"),
     data:wAt(sc,"sees","to the data"),code:wAt(sc,"sees","to the code")}));
   ag_shots(ctx,S,t,sc.dur,[
     // the pull request's checks: dbt builds what changed, and everything that depends on it; here, the class plan and the classes by
-    // faculty, which hiring reads; every test passes; the impact report: a column added, nothing breaks (later:true: the agent and
+    // faculty, which hiring reads; every test passes; the impact report: a column added, nothing breaks, and who to tell (later:true: the agent and
     // its pull request leave; the project's lineage comes in)
     {later:true,at:0,place:"ecLab",keys:[[0,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
       ag_label(x,150,200,"The pull request's checks",{col:AG.kick,a:ag_in(tt,0.3,0.5)});
@@ -2336,7 +2337,8 @@ scene("checks",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({whole:wAt(s
       ec_mono(x,700,610,880,{kick:"dbt · on the pull request",logo:"dbt",lines:[{text:"dbt build --select state:modified+"}],a:ag_in(tt,P.dbt,0.5)*(1-ag_in(tt,c.impact-0.3,0.4)),k:ag_spr(tt,P.dbt)});
       ec_pillL(x,1360,520,"every test passes",tt,P.pass,null,{col:AG.green,icon:"tick"});
       ec_mono(x,700,610,1060,{kick:"Impact report",lines:[{text:"mart_planning__class_plan: column added, class_size",a:ag_in(tt,P.added,0.4)},
-        {text:"contract: additive · nothing that reads it breaks",col:AG.green,a:ag_in(tt,P.breaks,0.4)}],a:ag_in(tt,P.report,0.5),k:ag_spr(tt,P.report)});}},
+        {text:"contract: additive · nothing that reads it breaks",col:AG.green,a:ag_in(tt,P.breaks,0.4)},
+        {text:"who to tell: Clara Jensen, Planning; The faculties",col:AG.blue,a:ag_in(tt,P.tell,0.4)}],a:ag_in(tt,P.report,0.5),k:ag_spr(tt,P.report)});}},
     // then the diff: the same table from the agent's branch and from main, which production is built from, compared unit by unit
     // (later:true: the lineage leaves; the two tables come in)
     {later:true,at:c.diff,place:"ecLab",keys:[[c.diff,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
@@ -2362,14 +2364,16 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({sec:wAt(sc,
     yusuf:wAt(sc,"second","Yusuf's"),name:wAt(sc,"second","a name of its own"),rules:wAt(sc,"rules","governance's rules"),owner:wAt(sc,"rules","an owner"),words:wAt(sc,"rules","words from the glossary"),
     test:wAt(sc,"rules","a test for each rule"),impact:wAt(sc,"rules","the impact named"),thing:wAt(sc,"missing","One thing"),n31:wAt(sc,"missing","thirty-one units"),stay:wAt(sc,"missing","stay at"),
     told:wAt(sc,"missing","nobody is told"),school:wAt(sc,"suggests","Each unit's school"),warn:wAt(sc,"suggests","a warning every night"),lists:wAt(sc,"suggests","lists them"),
-    notf:wAt(sc,"suggests","not a failing check"),decides:wAt(sc,"who","who decides"),clara:wAt(sc,"who","Clara"),posts:wAt(sc,"who","posts its review"),comment:wAt(sc,"who","as a comment"),
-    capp:wAt(sc,"comment","never approves"),cblock:wAt(sc,"comment","never blocks"),ref:wAt(sc,"comment","only for reference"),yes:wAt(sc,"clara","yes"),adds:wAt(sc,"clara","adds the warning"),
-    push:wAt(sc,"clara","a second push"),two:wAt(sc,"together","Two agents"),through:wAt(sc,"together","only through the pull request"),person:wAt(sc,"together","a person decided")}));
+    notf:wAt(sc,"suggests","not a failing check"),decides:wAt(sc,"who","who decides"),posts:wAt(sc,"who","posts its review"),comment:wAt(sc,"who","as a comment"),
+    capp:wAt(sc,"comment","never approves"),cblock:wAt(sc,"comment","never blocks"),ref:wAt(sc,"comment","only for reference"),yes:wAt(sc,"yusuf","yes"),adds:wAt(sc,"yusuf","adds the warning"),
+    push:wAt(sc,"yusuf","a second push"),two:wAt(sc,"together","Two agents"),through:wAt(sc,"together","only through the pull request"),person:wAt(sc,"together","a person decided")}));
   const RX=1290,RW=570;
   ag_shots(ctx,S,t,sc.dur,[
     // a second agent reads the pull request: the governance review agent, Yusuf's, with a name of its own; it checks governance's
-    // rules, finds what has no check, suggests a warning, says who decides, and posts its review as a comment, only for reference
-    // (later:true: the diff leaves; Yusuf and his agent come in)
+    // rules, finds what has no check, suggests a warning, says who decides (data governance, where a change and the glossary differ),
+    // and posts its review as a comment, only for reference; Yusuf decides: yes, and the planning agent adds the warning, in a second
+    // push. Yusuf and the review agent stay put while the cards on the right change, one leaving before the next comes in (later:true: the diff
+    // leaves; Yusuf and the review agent come in)
     {later:true,at:0,place:"ecLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
       ec_theAgent(x,tt,Object.assign({},EC_RV,EC_REVIEWER,{bk:(tt-P.gra)/0.9,tk:(tt-P.yusuf)/0.8}),{think:0.4,a:ag_in(tt,P.sec-0.2,0.6)});
       ec_person(x,"yusuf",tt,{});ag_roomLight(x,1);ec_personCard(x,"yusuf",ag_in(tt,0.4,0.5));
@@ -2389,83 +2393,88 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({sec:wAt(sc,
       ec_card(x,RX,150,RW,{kick:"It suggests",title:"a warning, every night",sub:"that lists the 31 units for the faculties"},{a:r3,k:ag_spr(tt,c.suggests),edge:AG.violet,kickCol:AG.violet});
       ec_pillL(x,RX,440,"each unit's school sets one",tt,Math.max(P.school,c.suggests+0.2),c.comment-0.3,{col:AG.ink});
       ec_pillL(x,RX,520,"not a failing check",tt,P.notf,c.comment-0.3,{col:AG.mut});
-      ec_card(x,RX,590,RW,{kick:"Who decides",title:"Clara, who owns the plan"},{a:ag_in(tt,P.decides,0.5)*(1-ag_in(tt,c.comment-0.3,0.4)),k:ag_spr(tt,P.decides),edge:AG.green});
+      ec_card(x,RX,572,RW,{kick:"Who decides",title:"Data governance",sub:"the change and the glossary differ"},{a:ag_in(tt,P.decides,0.5)*(1-ag_in(tt,c.comment-0.3,0.4)),k:ag_spr(tt,P.decides),edge:AG.green});
       ec_pillL(x,RX,790,"posted as a comment",tt,P.comment,c.comment-0.3,{col:AG.violet});
       // its review on GitHub: a comment; by its rules it never approves and never blocks; for reference only
+      const r4=1-ag_in(tt,c.yusuf-0.3,0.4);
       ec_rows(x,RX,150,RW,{kick:"Its review, on GitHub",logo:"github",rows:[{l:"Comment",lw:700,icon:"comment",iconCol:AG.violet,hl:1,col:AG.violet},
           {l:"Approve",cross:ag_in(tt,P.capp,0.4),a:ag_in(tt,P.capp-0.3,0.4)},{l:"Request changes",r:"to block",cross:ag_in(tt,P.cblock,0.4),a:ag_in(tt,P.cblock-0.3,0.4)}],
-        a:ag_in(tt,c.comment,0.5),k:ag_spr(tt,c.comment)});
-      ec_pillL(x,RX,500,"only for reference",tt,P.ref,null,{col:AG.violet});}},
-    // Clara decides: yes; the planning agent adds the warning, in a second push (later:true: Yusuf and his agent leave; Clara and the
-    // planning agent come in)
-    {later:true,at:c.clara,place:"ecLab",keys:[[c.clara,960,540,1]],push:0.02,draw:(x,tt)=>{
-      ec_theAgent(x,tt,EC_PLANNING,{think:0.3});ec_person(x,"clara",tt,{});ag_roomLight(x,1);ec_personCard(x,"clara",ag_in(tt,c.clara+0.3,0.5));
-      ec_card(x,1296,170,570,{kick:"Clara decides",title:"yes"},{a:ag_in(tt,P.yes,0.5),k:ag_spr(tt,P.yes),edge:AG.green,icon:"tick"});
-      ec_rows(x,1296,380,570,{kick:"The pull request · pushes",rows:[{l:"the change",r:"first",icon:"push",iconCol:AG.violet,a:ag_in(tt,P.adds-0.4,0.4)},
-          {l:"the warning",r:"second",icon:"push",iconCol:AG.violet,hl:ag_in(tt,P.push,0.5),col:AG.violet,a:ag_in(tt,P.adds,0.4)}],a:ag_in(tt,P.adds-0.6,0.5),k:ag_spr(tt,P.adds-0.6)});}},
-    // two agents worked together only through the pull request, and a person decided between them (later:true: Clara and the planning
-    // agent leave; then the two agents, one at either side, and the pull request between them)
+        a:ag_in(tt,c.comment,0.5)*r4,k:ag_spr(tt,c.comment)});
+      ec_pillL(x,RX,500,"only for reference",tt,P.ref,c.yusuf-0.3,{col:AG.violet});
+      // Yusuf decides: yes; the planning agent adds the warning, in a second push: its pull request, with its two pushes. The card comes in
+      // once the review has left, as the line starts, and its tick at "yes"
+      ec_card(x,RX,150,RW,{kick:"Yusuf decides",title:"yes"},{a:ag_in(tt,c.yusuf+0.1,0.5),k:ag_spr(tt,c.yusuf+0.1),edge:AG.green});
+      withA(x,ag_in(tt,P.yes,0.3),()=>ag_tick(x,RX+RW-46,150+46,26,rgba(AG.green,1),4));
+      ec_pr(x,RX,350,RW,{title:EC_TITLE,who:"by planning-agent[bot]",rows:[{text:"First push: the change",icon:"push",col:AG.violet,a:ag_in(tt,P.adds-0.4,0.4)},
+          {text:"Second push: the warning",icon:"push",col:AG.violet,hl:ag_in(tt,P.push,0.5),a:ag_in(tt,P.adds,0.4)}],a:ag_in(tt,P.adds-0.6,0.5),k:ag_spr(tt,P.adds-0.6)});}},
+    // two agents worked together only through the pull request, and a person decided between them (later:true: Yusuf and the review agent
+    // leave; then the two agents, one at either side, and the pull request between them)
     {later:true,at:c.together,place:"ecLab",keys:[[c.together,960,540,1]],push:0.02,draw:(x,tt)=>withA(x,1,()=>{
       ec_theAgent(x,tt,Object.assign({},EC_LA,{badge:"planning agent"}),{think:0.3,key:"L"});
       ec_theAgent(x,tt,Object.assign({},EC_RA,{badge:"governance review agent"}),{think:0.3,key:"R"});ag_roomLight(x,1);
       const pr=ec_pr(x,600,260,720,{title:EC_TITLE,who:"by planning-agent[bot]",a:ag_in(tt,P.through-0.3,0.5),k:ag_spr(tt,P.through-0.3)});
       ec_line(x,EC_LA.x+EC_LA.R+14,EC_LA.y,592,360,clamp((tt-P.through)/0.6,0,1),{col:AG.violet,dash:[10,8],lw:3});
       ec_line(x,EC_RA.x-EC_RA.R-14,EC_RA.y,1328,360,clamp((tt-P.through-0.3)/0.6,0,1),{col:AG.violet,dash:[10,8],lw:3});
-      ec_pillAt(x,960,pr.y+pr.h+70,"a person decides · Clara Jensen",tt,P.person,null,{col:AG.green,icon:"tick"});})}
+      ec_pillAt(x,960,pr.y+pr.h+70,"a person decides · Yusuf Demir",tt,P.person,null,{col:AG.green,icon:"tick"});})}
   ],0.6);
   ec_kick(ctx,S,1);});
 
 /* ---------------------------------------------------------------- 5 · Who approves, from the map */
 scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({who:wAt(sc,"map","Who approves"),onmap:wAt(sc,"map","on the map"),after:wAt(sc,"map","After a pull request"),
-    persons:wAt(sc,"map","a person's"),ae:wAt(sc,"steps","The analytics engineer"),po:wAt(sc,"steps","The product owner"),ra:wAt(sc,"steps","The release approver"),
-    word:wAt(sc,"word","what a word means"),dow:wAt(sc,"word","its data owner"),pc:wAt(sc,"none","The planning contributor's steps"),end:wAt(sc,"none","end at the pull request"),
-    holds:wAt(sc,"none","holds none"),gh:wAt(sc,"written","In GitHub"),co:wAt(sc,"written","the code owners"),teams:wAt(sc,"written","the teams"),from:wAt(sc,"written","written from those roles"),
-    takes:wAt(sc,"written","takes over a role"),follow:wAt(sc,"written","the reviews follow"),rmain:wAt(sc,"main","the rules on main"),every:wAt(sc,"main","for everyone"),
+    persons:wAt(sc,"map","a person's"),ae:wAt(sc,"steps","The analytics engineer"),ra:wAt(sc,"steps","The release approver"),rel:wAt(sc,"steps","releases it"),
+    owners:wAt(sc,"word","Owners don't review"),word:wAt(sc,"word","What a word means"),gloss:wAt(sc,"word","in the glossary"),pc:wAt(sc,"none","The planning contributor's steps"),
+    end:wAt(sc,"none","end at the pull request"),holds:wAt(sc,"none","holds none"),gh:wAt(sc,"written","In GitHub"),teams:wAt(sc,"written","the teams that approve"),
+    from:wAt(sc,"written","written from those roles"),takes:wAt(sc,"written","takes over a role"),follow:wAt(sc,"written","the approvals follow"),rmain:wAt(sc,"main","the rules on main"),every:wAt(sc,"main","for everyone"),
     skip:wAt(sc,"main","nobody can skip"),admin:wAt(sc,"main","not even an administrator"),op:wAt(sc,"person","a person"),team:wAt(sc,"person","a team of people"),
     agent:wAt(sc,"person","An agent can't"),never:wAt(sc,"person","never counts"),ownpr:wAt(sc,"own","their own pull request"),latest:wAt(sc,"own","the latest push"),
-    didnt:wAt(sc,"own","didn't push it"),second:wAt(sc,"again","the second push"),jun:wAt(sc,"again","Jun approves"),clara:wAt(sc,"again","Clara the change"),mei:wAt(sc,"again","Mei the word")}));
+    didnt:wAt(sc,"own","didn't push it"),second:wAt(sc,"again","the second push"),jun:wAt(sc,"again","Jun approves"),clara:wAt(sc,"again","Clara"),
+    fac:wAt(sc,"again","the faculties"),told:wAt(sc,"again","are told")}));
   ag_shots(ctx,S,t,sc.dur,[
-    // who approves is on the map: after a pull request every step is a person's, each by its role; what a word means stays with its
-    // data owner; the planning contributor's steps end at the pull request, so the agent holds none of the others (later:true: the two
-    // agents and their pull request leave; the map's steps come in)
+    // who approves is on the map: after a pull request every step is a person's, each by its role: the analytics engineer reviews the
+    // code, the release approver approves the change and releases it; owners don't review pull requests, and what a word means its owner
+    // decides first, in the glossary; the planning contributor's steps end at the pull request, so the agent holds none of the others
+    // (later:true: the two agents and their pull request leave; the map's steps come in)
     {later:true,at:0,place:"ecLab",keys:[[0,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
       ec_steps(x,210,150,1500,{a:ag_in(tt,P.onmap-0.3,0.5),k:ag_spr(tt,P.onmap-0.3),lit:[0,ag_io(tt,P.pc,c.written,0.4),ag_io(tt,P.pc+0.2,c.written,0.4),ag_io(tt,P.pc+0.4,c.written,0.4),
-          ag_in(tt,P.ae,0.4),ag_in(tt,P.po,0.4),ag_in(tt,P.ra,0.4)],people:ag_in(tt,P.persons,0.5),agent:ag_in(tt,P.end,0.5),none:ag_in(tt,P.holds,0.5)});
-      ec_pillAt(x,960,790,"what a word means · its data owner",tt,P.word,null,{col:AG.blue,size:30});}},
-    // in GitHub, the code owners and the teams are written from those roles; when someone takes over a role, the reviews follow
-    // (later:true: the steps leave; the map's roles and GitHub's teams come in)
+          ag_in(tt,P.ae,0.4),ag_in(tt,P.ra,0.4),ag_in(tt,P.rel,0.4)],people:ag_in(tt,P.persons,0.5),agent:ag_in(tt,P.end,0.5),none:ag_in(tt,P.holds,0.5)});
+      // owners don't review pull requests; what a word means, its owner decides first, in the glossary: two pills, laid out from their size
+      const o1="owners don't review pull requests",o2="what a word means · the glossary, first",w1=ec_pillW(x,o1),w2=ec_pillW(x,o2),ox=960-(w1+40+w2)/2;
+      ec_pillAt(x,ox+w1/2,790,o1,tt,P.owners,null,{col:AG.ink});ec_pillAt(x,ox+w1+40+w2/2,790,o2,tt,P.gloss,null,{col:AG.blue});}},
+    // in GitHub, the teams that approve are written from those roles; when someone takes over a role, the approvals follow (no team for
+    // an owner: owners don't review pull requests) (later:true: the steps leave; the map's roles and GitHub's teams come in)
     {later:true,at:c.written,place:"ecLab",keys:[[c.written,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
-      ec_rows(x,130,230,700,{kick:"On the map · roles",rows:[{l:"analytics engineer",r:"Jun Park"},{l:"product owner",r:"Clara Jensen"},{l:"data owner",r:"Mei Tanaka"},
-        {l:"release approver",r:"Noor Rahman",hl:ag_io(tt,P.takes,P.takes+2.4,0.4)}],a:ag_in(tt,c.written+0.2,0.5),k:ag_spr(tt,c.written+0.2)});
-      ec_line(x,850,390,1010,390,clamp((tt-P.from)/0.6,0,1),{col:AG.blue,lw:3.4});ec_pillAt(x,930,340,"written from",tt,P.from,null,{col:AG.blue});
-      ec_mono(x,1030,230,760,{kick:"CODEOWNERS",logo:"github",lines:[{text:"# the code: the analytics engineer",col:AG.mut},{text:"*    jun.park@uni.example"}],a:ag_in(tt,P.co,0.5),k:ag_spr(tt,P.co)});
-      ec_rows(x,1030,480,760,{kick:"GitHub · teams",logo:"github",rows:[{l:"product-owners",mono:true,r:"Clara Jensen"},{l:"data-owners",mono:true,r:"Mei Tanaka"},
-        {l:"release-approvers",mono:true,r:"Noor Rahman",hl:ag_io(tt,P.takes+0.4,P.takes+2.8,0.4)}],a:ag_in(tt,P.teams,0.5),k:ag_spr(tt,P.teams)});
-      ec_pillL(x,130,620,"someone new in a role",tt,P.takes,null,{col:AG.blue});ec_pillL(x,130,700,"the reviews follow",tt,P.follow,null,{col:AG.green,icon:"tick"});}},
-    // the rules on main hold for everyone, not even an administrator skips them; an owner is a person or a team of people, so an
+      ec_rows(x,130,250,700,{kick:"On the map · roles",rows:[{l:"release approver",r:"Noor Rahman",hl:ag_io(tt,P.takes,P.takes+2.4,0.4)},{l:"data governance lead",r:"Yusuf Demir"},
+        {l:"data custodian",r:"the platform team"}],a:ag_in(tt,c.written+0.2,0.5),k:ag_spr(tt,c.written+0.2)});
+      ec_line(x,850,400,1010,400,clamp((tt-P.from)/0.6,0,1),{col:AG.blue,lw:3.4});ec_pillAt(x,930,350,"written from",tt,P.from,null,{col:AG.blue});
+      ec_rows(x,1030,250,760,{kick:"GitHub · teams",logo:"github",rows:[{l:"release-approvers",mono:true,r:"Noor Rahman",hl:ag_io(tt,P.takes+0.4,P.takes+2.8,0.4)},
+        {l:"data-governance-leads",mono:true,r:"Yusuf Demir"},{l:"data-custodians",mono:true,r:"the platform team"}],a:ag_in(tt,P.teams,0.5),k:ag_spr(tt,P.teams)});
+      ec_pillL(x,130,620,"someone new in a role",tt,P.takes,null,{col:AG.blue});ec_pillL(x,130,700,"the approvals follow",tt,P.follow,null,{col:AG.green,icon:"tick"});}},
+    // the rules on main hold for everyone, not even an administrator skips them; a reviewer is a person or a team of people, so an
     // agent's approval never counts; nobody approves their own pull request, and the latest push is approved by someone who didn't push
     // it (later:true: the roles and teams leave; the rules on main come in)
     {later:true,at:c.main,place:"ecLab",keys:[[c.main,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
-      ec_rows(x,130,240,760,{kick:"GitHub · the rules on main",logo:"github",rows:[{l:"every change as a pull request",tick:1},{l:"the code owners approve",tick:1},
+      ec_rows(x,130,240,760,{kick:"GitHub · the rules on main",logo:"github",rows:[{l:"every change as a pull request",tick:1},{l:"the data team approves the code",tick:1},
         {l:"the checks pass",tick:1},{l:"who may skip them",r:"nobody",rcol:AG.blue,rw:700,hl:ag_in(tt,P.skip,0.5)}],a:ag_in(tt,P.rmain,0.5),k:ag_spr(tt,P.rmain)});
       ec_pillL(x,130,630,"not even an administrator",tt,P.admin,null,{col:AG.blue,icon:"lock"});
       const r2=1-ag_in(tt,c.own-0.3,0.4);
-      ec_rows(x,1000,240,780,{kick:"An owner is",rows:[{l:"a person",tick:ag_in(tt,P.op,0.3),a:ag_in(tt,P.op-0.2,0.3)},{l:"or a team of people",tick:ag_in(tt,P.team,0.3),a:ag_in(tt,P.team-0.2,0.3)},
+      ec_rows(x,1000,240,780,{kick:"A reviewer is",rows:[{l:"a person",tick:ag_in(tt,P.op,0.3),a:ag_in(tt,P.op-0.2,0.3)},{l:"or a team of people",tick:ag_in(tt,P.team,0.3),a:ag_in(tt,P.team-0.2,0.3)},
           {l:"an agent",cross:ag_in(tt,P.agent+0.4,0.4),crossCol:AG.amber,a:ag_in(tt,P.agent,0.3)}],a:ag_in(tt,c.person,0.5)*r2,k:ag_spr(tt,c.person)});
       ec_pillL(x,1000,570,"its approval never counts",tt,P.never,c.own-0.3,{col:AG.mut});
       ec_rows(x,1000,240,780,{kick:"Approving",rows:[{l:"your own pull request",r:"nobody may",cross:ag_in(tt,P.ownpr+0.3,0.4),a:ag_in(tt,P.ownpr-0.2,0.3)},
           {l:"the latest push",r:"someone who didn't push it",tick:ag_in(tt,P.didnt,0.4),a:ag_in(tt,P.latest,0.3)}],a:ag_in(tt,c.own-0.1,0.5),k:ag_spr(tt,c.own-0.1)});}},
-    // so after the second push, Jun approves the code, Clara the change, and Mei the word it copies (later:true)
+    // so after the second push, Jun approves the code again, and Clara and the faculties are told what it touches, from the impact
+    // report (later:true)
     {later:true,at:c.again,place:"ecLab",keys:[[c.again,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
-      ec_pr(x,460,230,1000,{title:EC_TITLE,who:"by planning-agent[bot] · second push",a:ag_in(tt,P.second-0.2,0.5),k:ag_spr(tt,P.second-0.2)});
-      ec_rows(x,460,480,1000,{kick:"Approved",rows:[{l:"Jun Park",lw:700,r:"the code",tick:ag_in(tt,P.jun+0.3,0.4),a:ag_in(tt,P.jun,0.4)},
-          {l:"Clara Jensen",lw:700,r:"the change",tick:ag_in(tt,P.clara+0.3,0.4),a:ag_in(tt,P.clara,0.4)},{l:"Mei Tanaka",lw:700,r:"the word it copies",tick:ag_in(tt,P.mei+0.3,0.4),a:ag_in(tt,P.mei,0.4)}],
-        edge:AG.green,a:ag_in(tt,P.jun-0.3,0.5),k:ag_spr(tt,P.jun-0.3)});}}
+      ec_pr(x,460,200,1000,{title:EC_TITLE,who:"by planning-agent[bot] · second push",a:ag_in(tt,P.second-0.2,0.5),k:ag_spr(tt,P.second-0.2)});
+      ec_rows(x,460,440,1000,{kick:"Approved",rows:[{l:"Jun Park",lw:700,r:"the code",tick:ag_in(tt,P.jun+0.3,0.4),a:ag_in(tt,P.jun,0.4)}],
+        edge:AG.green,a:ag_in(tt,P.jun-0.3,0.5),k:ag_spr(tt,P.jun-0.3)});
+      ec_rows(x,460,620,1000,{kick:"Told what it touches",rows:[{l:"Clara Jensen",lw:700,r:"the class plan",icon:"comment",iconCol:AG.blue,a:ag_in(tt,P.clara,0.4)},
+          {l:"The faculties",lw:700,r:"their tutor hiring",icon:"comment",iconCol:AG.blue,a:ag_in(tt,P.fac,0.4)}],a:ag_in(tt,P.clara-0.3,0.5),k:ag_spr(tt,P.clara-0.3)});}}
   ],0.6);
   ec_kick(ctx,S,1);});
 
 /* ---------------------------------------------------------------- 6 · A person releases */
-scene("release",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({appr:wAt(sc,"merge","Approved"),into:wAt(sc,"merge","goes into main"),jm:wAt(sc,"merge","Jun merges it"),
+scene("release",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({appr:wAt(sc,"merge","the code approved"),into:wAt(sc,"merge","goes into main"),jm:wAt(sc,"merge","Jun merges it"),
     dont:wAt(sc,"merge","the agents don't merge"),isnt:wAt(sc,"merge","merging isn't the release"),night:wAt(sc,"night","That night"),builds:wAt(sc,"night","builds main in test"),
     only:wAt(sc,"night","Only if test passes"),goes:wAt(sc,"night","go on to production"),waits:wAt(sc,"waits","it waits"),env:wAt(sc,"waits","an environment called production"),
     until:wAt(sc,"waits","until a release approver"),wed:wAt(sc,"noor","On Wednesday morning"),na:wAt(sc,"noor","Noor approves"),whoever:wAt(sc,"noor","Whoever starts"),
@@ -2473,7 +2482,7 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({appr:wAt(s
     nosec:wAt(sc,"signs","no secret to steal"),deploys:wAt(sc,"bundle","deploys the project"),bun:wAt(sc,"bundle","as a bundle"),runs:wAt(sc,"bundle","runs the build"),
     ident:wAt(sc,"reads","own identity"),ronly:wAt(sc,"reads","only reads production"),writing:wAt(sc,"reads","Writing there"),job:wAt(sc,"reads","the release's job"),yes:wAt(sc,"reads","a person's yes")}));
   ag_shots(ctx,S,t,sc.dur,[
-    // approved, the change goes into main: Jun merges it, the agents don't; and merging isn't the release (later:true: the approvals
+    // with the code approved, the change goes into main: Jun merges it, the agents don't; and merging isn't the release (later:true: the approvals
     // leave; Jun and the branches come in)
     {later:true,at:0,place:"ecLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{
       ec_person(x,"jun",tt,{});ag_roomLight(x,1);ec_personCard(x,"jun",ag_in(tt,0.4,0.5));
@@ -2481,7 +2490,7 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({appr:wAt(s
       ec_pillL(x,560,620,"Jun merges it",tt,P.jm,null,{col:AG.green,icon:"tick"});ec_pillL(x,880,620,"the agents don't merge",tt,P.dont,null,{col:AG.ink});
       ec_card(x,560,690,640,{kick:"And",title:"merging isn't the release"},{a:ag_in(tt,P.isnt,0.5),k:ag_spr(tt,P.isnt),edge:AG.blue});}},
     // that night the release builds main in test; only if test passes does it go on to production, where it waits, at the environment
-    // production, for a release approver; on Wednesday morning Noor approves (whoever starts a release can't approve it); only then
+    // production, for a release approver; on Wednesday morning Noor approves the change (whoever starts a release can't approve it); only then
     // can the release sign in to Databricks, as its own service principal, with no secret; it deploys the bundle and runs the build
     // (later:true: Jun and the branches leave; the release's card comes in on the right, and later Noor at the left)
     {later:true,at:c.night,place:"ecLab",keys:[[c.night,960,540,1]],push:0.015,draw:(x,tt)=>{

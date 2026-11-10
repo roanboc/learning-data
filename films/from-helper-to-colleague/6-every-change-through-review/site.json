@@ -45,13 +45,14 @@
       "review-and-release/README.md",
       "review-and-release/rulesets/main.json",
       "review-and-release/teams.yml",
-      "scripts/generate/codeowners.py",
+      "scripts/generate/teams.py",
       "CODEOWNERS"
     ],
     "release": [
       "review-and-release/release.yml",
       "review-and-release/production.json",
       "databricks.yml",
+      "resources/build.job.yml",
       "examples/class-size/release.md"
     ]
   },

@@ -324,7 +324,7 @@ card(rc('comment', 0.0), 0.011, px(1575))
 stop(rw('comment', 'never approves', 0.1), 0.01, px(1350)); stop(rw('comment', 'never blocks', 0.1), 0.01, px(1350))
 tap(rw('comment', 'only for reference', 0.05), 0.008, px(1450))
 # Yusuf decides: yes; the planning agent adds the warning, in a second push
-card(rw('yusuf', 'yes', 0.0), 0.012, px(1580))
+card(rc('yusuf', 0.1), 0.012, px(1580)); tick(rw('yusuf', 'yes', 0.1), 0.009, px(1814))
 pot(C4, rw('yusuf', 'yes', 0.05), 0.85, px(1080)); nail(E5, rw('yusuf', 'yes', 0.15), rw('yusuf', 'yes', 2.0), 0.8, px(1580))
 card(rw('yusuf', 'adds the warning', -0.6), 0.011, px(1580)); knock(C4, rw('yusuf', 'a second push', 0.05), 0.75, px(1080))
 # two agents worked together only through the pull request, and a person decided between them

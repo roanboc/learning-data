@@ -1,0 +1,43 @@
+[
+  {
+    "name": "People and groups",
+    "key": "people-and-groups-en",
+    "dir": "films/locks-before-the-data/5-people-and-groups/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/people-and-groups/film.js",
+    "video": "dist/people-and-groups.mp4",
+    "file": "people-and-groups.mp4",
+    "captions": [
+      [
+        "films/locks-before-the-data/5-people-and-groups/captions/en.srt",
+        "people-and-groups.en.srt"
+      ],
+      [
+        "films/locks-before-the-data/5-people-and-groups/captions/es.srt",
+        "people-and-groups.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/locks-before-the-data/5-people-and-groups/source",
+      ":(exclude)films/locks-before-the-data/5-people-and-groups/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 313,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

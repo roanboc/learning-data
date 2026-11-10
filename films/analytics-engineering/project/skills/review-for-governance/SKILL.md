@@ -31,7 +31,7 @@ never weaken a test.
    owner goes in `governance/2-owners/owners.yml` too, with where the impact check's note reaches
    them (owners are told what a change touches; the data team reviews the code). A new mart must also be an output of a
    data product, with an owner who answers for it: draft `governance/4-data-products/<name>.yml`, and
-   `scripts/generate/products.py` writes its contracts and product descriptor.
+   `scripts/generate/products.py` writes its product descriptor (a mart has no enterprise contract).
 3. **A glossary term, or a confirmed absence.** For each new entity in a core domain, ask data
    governance which glossary term applies. If one does, take its words as they are, with
    `source:` (`skills/sync-the-glossary/`, DEC-PRJ-11). If governance confirms there's none, add

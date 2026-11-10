@@ -1,0 +1,243 @@
+1
+00:00:03,000 --> 00:00:05,424
+Gran Bretaña, a finales de los años noventa.
+
+2
+00:00:07,324 --> 00:00:12,757
+Ordnance Survey, la agencia cartográfica nacional, tiene los mapas más detallados del país.
+
+3
+00:00:14,257 --> 00:00:19,418
+Sus mapas de papel se han vuelto digitales, y se han cortado en cuadros, uno a uno.
+
+4
+00:00:21,118 --> 00:00:27,589
+Pero en un cuadro, un edificio son solo líneas en un dibujo. No tiene nombre, ni número, nada a qué apuntar.
+
+5
+00:00:29,489 --> 00:00:36,434
+Los ayuntamientos, las compañías de agua y los servicios de emergencia llevan cada uno sus registros de los mismos edificios y calles.
+
+6
+00:00:37,934 --> 00:00:40,865
+Cada uno une sus registros a las líneas a su manera.
+
+7
+00:00:42,365 --> 00:00:47,171
+Así, una escuela puede ser una cosa en los registros de un ayuntamiento, y otra en los de una compañía de agua.
+
+8
+00:00:48,671 --> 00:00:51,716
+Nadie puede estar seguro de que dos registros hablen del mismo lugar.
+
+9
+00:00:53,616 --> 00:00:58,014
+Y cuando se construye una calle nueva, cada uno tiene que encontrarla, y cambiarla, por su cuenta.
+
+10
+00:00:59,914 --> 00:01:01,354
+Algo tiene que cambiar.
+
+11
+00:01:03,254 --> 00:01:11,968
+En 2001, Ordnance Survey lanza OS MasterMap: una sola base de datos continua de todo el país, en lugar de cuadros.
+
+12
+00:01:13,868 --> 00:01:21,783
+Cada elemento, unos 440 millones al principio, recibe su propio identificador, un TOID, con una versión y una fecha.
+
+13
+00:01:23,683 --> 00:01:29,770
+Topógrafos, en el terreno y desde el aire, la mantienen al día, y los usuarios reciben solo lo que cambió.
+
+14
+00:01:31,470 --> 00:01:38,705
+Ahora un ayuntamiento y una compañía de agua pueden señalar el mismo edificio por su identificador, sin dudar de cuál hablan.
+
+15
+00:01:40,605 --> 00:01:45,731
+Cada cambio lleva su versión y su fecha, así que cualquiera puede ver qué cambió, y cuándo.
+
+16
+00:01:47,231 --> 00:01:51,072
+En 2016, tiene más de 500 millones de elementos.
+
+17
+00:01:52,772 --> 00:02:00,014
+La arquitectura de un equipo de datos tiene el mismo problema: una imagen de su plataforma, guardada en copias que se separan.
+
+18
+00:02:01,714 --> 00:02:05,481
+Guarda una sola fuente, pon fecha a cada cambio, y saca de ella cada copia.
+
+19
+00:02:13,581 --> 00:02:19,220
+Estas películas son el lado de dueña de producto del trabajo de una gestora de datos, tomado de la arquitectura.
+
+20
+00:02:20,920 --> 00:02:29,110
+Una universidad, en la primavera de 2027. Helena Novak, la gestora de datos, tiene una imagen objetivo de la plataforma de datos.
+
+21
+00:02:30,810 --> 00:02:38,095
+Existe tres veces: el mapa de Noor en la herramienta de arquitectura, una página en la wiki, y las diapositivas para el consejo de datos.
+
+22
+00:02:39,995 --> 00:02:45,261
+Cada una era correcta el día en que se hizo. Desde entonces, cada una se ha cambiado a mano, por su cuenta.
+
+23
+00:02:46,961 --> 00:02:52,319
+El martes 25 de mayo, Helena pide al consejo retirar el viejo almacén de datos.
+
+24
+00:02:54,019 --> 00:02:57,680
+La diapositiva del consejo aún muestra el viejo almacén en el objetivo.
+
+25
+00:02:59,580 --> 00:03:03,058
+¿Qué imagen es la verdadera? Nadie en la sala puede decirlo con certeza.
+
+26
+00:03:04,958 --> 00:03:10,479
+Los jefes de proyecto tienen el mismo problema: quién hace qué, cuándo y cómo, está en una presentación de marzo.
+
+27
+00:03:12,179 --> 00:03:18,012
+Noor, la arquitecta de datos, dice lo que descubrió Ordnance Survey: las copias se separan. Guarda una sola fuente.
+
+28
+00:03:20,712 --> 00:03:27,360
+En junio, la fuente del mapa pasa al repositorio del equipo de datos, como archivos, junto al código de la plataforma.
+
+29
+00:03:29,060 --> 00:03:35,586
+Noor lo escribe en el formato de intercambio de ArchiMate, un lenguaje estándar de arquitectura, de The Open Group.
+
+30
+00:03:37,286 --> 00:03:44,058
+Añade solo lo propio del equipo, como el dueño de cada producto. Primero los estándares; luego lo que te importa a ti.
+
+31
+00:03:45,958 --> 00:03:54,215
+Los diagramas también se guardan como texto, en Mermaid o como archivos de draw.io, así que un cambio en un dibujo es un cambio que se lee.
+
+32
+00:03:56,115 --> 00:04:03,353
+Cada noche, todo lo demás sale de él: las vistas de la herramienta de arquitectura, la wiki y el dibujo de la página mensual.
+
+33
+00:04:05,053 --> 00:04:08,516
+Y la página de los jefes de proyecto sobre quién hace qué, cuándo y cómo.
+
+34
+00:04:10,216 --> 00:04:17,528
+De los siete lugares del equipo para su trabajo, de Dónde vive cada pieza, la fuente del mapa ahora vive en uno: el repositorio.
+
+35
+00:04:19,228 --> 00:04:23,542
+La wiki y las diapositivas ya no pueden contradecir al mapa. Salen de él.
+
+36
+00:04:26,242 --> 00:04:32,280
+Cada cambio del mapa es una pull request, con su motivo, revisada por alguien que no es su autor.
+
+37
+00:04:33,980 --> 00:04:40,823
+Noor, Helena y los ingenieros principales, Sam y Jun, revisan. Los socios de datos de las facultades proponen.
+
+38
+00:04:42,523 --> 00:04:46,508
+En julio, el equipo de Sam añade a la plataforma el flujo de los sensores de las aulas.
+
+39
+00:04:48,008 --> 00:04:53,880
+La misma pull request añade el flujo al estado actual del mapa. El código y el mapa cambian juntos.
+
+40
+00:04:55,780 --> 00:04:59,029
+Y una comprobación falla si una fuente nueva no tiene lugar en el mapa.
+
+41
+00:05:00,729 --> 00:05:05,326
+Nadie espera a un proyecto con fondos para actualizar el estado actual y el objetivo.
+
+42
+00:05:06,826 --> 00:05:10,436
+Si se espera a eso, el equipo acaba construyendo el legado de mañana.
+
+43
+00:05:12,336 --> 00:05:20,499
+Una decisión grande lleva al lado un registro breve, como propuso Michael Nygard en 2011: qué se decidió, y por qué.
+
+44
+00:05:23,199 --> 00:05:29,764
+En agosto, Helena pide al agente del equipo que redacte, desde sus notas, el cambio que retira el viejo almacén.
+
+45
+00:05:31,464 --> 00:05:35,898
+En minutos, escribe el nuevo estado objetivo, y dibuja su diagrama, como texto.
+
+46
+00:05:37,598 --> 00:05:39,611
+Noor lo revisa, línea por línea.
+
+47
+00:05:41,111 --> 00:05:46,990
+Una relación está mal: los informes de nómina aún leen del viejo almacén, cuando ya no existe.
+
+48
+00:05:48,890 --> 00:05:51,415
+Pide la corrección, la revisa, y aprueba.
+
+49
+00:05:53,115 --> 00:05:58,139
+Las películas de agentes tienen la misma regla: un agente propone, y una persona decide.
+
+50
+00:06:00,839 --> 00:06:06,782
+El mapa no es trabajo de una sola persona. Empieza con Helena: ella abrió su primera pull request.
+
+51
+00:06:08,482 --> 00:06:13,261
+Los ingenieros principales lo cuidan con ella, y cualquiera del equipo puede proponer un cambio.
+
+52
+00:06:14,961 --> 00:06:24,037
+El viernes 17 de diciembre, el viejo almacén está retirado, y 63 cambios del año están en la historia del mapa, cada uno con su motivo.
+
+53
+00:06:25,937 --> 00:06:30,810
+En sus revisiones, el consejo lee esa historia, no una diapositiva hecha la noche anterior.
+
+54
+00:06:33,510 --> 00:06:41,683
+Ordnance Survey dejó de guardar su mapa en pedazos: una base de datos, cada elemento con su identificador, cada cambio con su fecha.
+
+55
+00:06:43,583 --> 00:06:49,324
+El equipo de Helena hizo lo mismo con su arquitectura: un solo mapa, y cada otra imagen sale de él.
+
+56
+00:06:51,224 --> 00:06:56,558
+El lunes, pon tu arquitectura en un repositorio, como archivos, en un lenguaje estándar.
+
+57
+00:06:58,058 --> 00:07:03,850
+Revisa cada cambio como el código, y actualiza el estado actual y el objetivo en el cambio que los mueve.
+
+58
+00:07:05,350 --> 00:07:08,716
+Saca de él la wiki, las diapositivas y las páginas de quién hace qué.
+
+59
+00:07:10,216 --> 00:07:14,478
+Deja que los agentes redacten la estructura y los diagramas, y revisa lo que redactan.
+
+60
+00:07:15,978 --> 00:07:19,410
+Y haz de la arquitectura el trabajo de todos, empezando por el tuyo.
+
+61
+00:07:21,110 --> 00:07:26,116
+Un solo mapa en el repositorio; cada cambio lo actualiza; todo lo demás sale de él.

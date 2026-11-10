@@ -1,0 +1,227 @@
+1
+00:00:03,000 --> 00:00:05,556
+La Antártida, febrero de 1911.
+
+2
+00:00:07,456 --> 00:00:15,709
+Ese mismo año, Roald Amundsen y cuatro de su equipo irán al Polo Sur y volverán en esquís: unos tres mil kilómetros.
+
+3
+00:00:17,409 --> 00:00:21,919
+Primero, dejan comida sobre el hielo a lo largo del camino, en tres reservas llamadas depósitos.
+
+4
+00:00:23,619 --> 00:00:31,232
+Pero el hielo es plano y blanco por cientos de kilómetros. Con niebla, podrías pasar a un kilómetro de un depósito sin llegar a verlo.
+
+5
+00:00:33,132 --> 00:00:37,072
+Si pasan uno de largo al volver, se quedan sin comida, lejos de toda ayuda.
+
+6
+00:00:39,172 --> 00:00:44,899
+Las marcas a lo largo de la ruta se pasan por alto fácilmente, y si te desvías de la línea, quizá no vuelvas a encontrarla.
+
+7
+00:00:46,599 --> 00:00:47,987
+Algo tenía que cambiar.
+
+8
+00:00:49,887 --> 00:00:56,212
+Así que lo hablaron, y marcaron cada depósito a lo ancho de la ruta, hasta nueve kilómetros a cada lado.
+
+9
+00:00:57,912 --> 00:01:03,361
+En el primero, veinte banderas negras, numeradas para decir de qué lado estaba el depósito, y a qué distancia.
+
+10
+00:01:05,061 --> 00:01:08,896
+Aun desviados, cruzarían la línea, y una bandera les señalaría el camino.
+
+11
+00:01:10,996 --> 00:01:18,727
+Noventa y nueve días después de partir, el 25 de enero de 1912, los cinco estaban de vuelta, bien, y con comida de sobra.
+
+12
+00:01:20,627 --> 00:01:25,821
+“La victoria espera a quien lo tiene todo en orden”, escribió Amundsen. “La gente lo llama suerte”.
+
+13
+00:01:27,921 --> 00:01:33,808
+El equipo de Helena está por trasladar 21 reportes del viejo almacén de datos de la universidad.
+
+14
+00:01:35,308 --> 00:01:42,177
+Sus riesgos también son difíciles de ver, hasta que se escapa uno: un reporte que se detiene, o datos personales donde no deben estar.
+
+15
+00:01:43,877 --> 00:01:48,470
+Dichos en voz alta, cada uno con un dueño y una señal temprana, se pueden encontrar a tiempo.
+
+16
+00:01:56,770 --> 00:02:03,678
+Abril de 2027. Antes de escribir un solo riesgo, Helena le hace una pregunta al consejo de datos.
+
+17
+00:02:05,178 --> 00:02:07,435
+¿Cuánto riesgo aceptarán, y en qué?
+
+18
+00:02:08,935 --> 00:02:11,693
+La respuesta es el apetito de riesgo del consejo.
+
+19
+00:02:12,993 --> 00:02:15,345
+Bajo para datos personales y seguridad.
+
+20
+00:02:16,645 --> 00:02:17,994
+Medio para retrasos.
+
+21
+00:02:19,294 --> 00:02:22,930
+Y alto para probar nuevas formas de entregar, como un prototipo.
+
+22
+00:02:24,230 --> 00:02:28,058
+Así que un riesgo para los datos personales se debe evitar, no solo vigilar.
+
+23
+00:02:29,558 --> 00:02:33,884
+El equipo nombra los riesgos. Quienes deciden dicen cuánto es demasiado.
+
+24
+00:02:36,784 --> 00:02:44,210
+En mayo, el equipo escribe los riesgos del traslado en un registro, cada uno en una frase: una causa, qué podría pasar y qué causaría.
+
+25
+00:02:45,910 --> 00:02:53,010
+La licencia vence el 31 de diciembre, así que un reporte sin trasladar para entonces se detendría, y sus lectores lo perderían.
+
+26
+00:02:55,110 --> 00:02:59,962
+Cada riesgo tiene un solo dueño, una persona, no un equipo, y una fecha para volver a revisarlo.
+
+27
+00:03:01,462 --> 00:03:05,463
+¿Qué tan probable es, y qué tan grave sería? Bajo, medio o alto.
+
+28
+00:03:06,963 --> 00:03:14,424
+Luego, una respuesta: evitarlo, reducirlo, compartirlo o aceptarlo. R1 se reduce: los reportes más usados se trasladan primero.
+
+29
+00:03:16,124 --> 00:03:21,731
+Y una señal temprana: lo que verías primero. Para R1, un reporte con dos semanas de atraso sobre su fecha.
+
+30
+00:03:23,831 --> 00:03:30,332
+La ISO 31000, la norma internacional para gestionar el riesgo, usa palabras como estas.
+
+31
+00:03:31,832 --> 00:03:38,994
+R8, la exportación de nómina en manos de una persona, se redujo hace tiempo, como mostró Los scripts se volvieron software.
+
+32
+00:03:40,694 --> 00:03:45,711
+El 25 de mayo, el caso llega al consejo con ocho riesgos, y el consejo dice que sí.
+
+33
+00:03:47,611 --> 00:03:53,303
+Pero uno de ellos, R3, aún es solo una preocupación: datos personales podrían exponerse en el traslado.
+
+34
+00:03:56,603 --> 00:04:02,604
+Martes 1 de junio: empieza el traslado. Helena pide al equipo de ocho que imagine que ya terminó.
+
+35
+00:04:04,104 --> 00:04:07,903
+Es enero de 2028, y el traslado fracasó. ¿Por qué?
+
+36
+00:04:09,803 --> 00:04:14,933
+Es un pre-mortem, como lo describió el psicólogo Gary Klein en 2007.
+
+37
+00:04:16,433 --> 00:04:21,806
+Si el fracaso se da por hecho, la gente encuentra sus causas más fácilmente, y las dice con más libertad.
+
+38
+00:04:23,306 --> 00:04:27,867
+Cada uno escribe sus razones a solas por cinco minutos, y luego lee una en voz alta, por turnos.
+
+39
+00:04:29,367 --> 00:04:35,722
+Cada reporte antiguo lee un extracto: una copia tomada de otro sistema, como la lista de personal de RR. HH.
+
+40
+00:04:37,222 --> 00:04:42,892
+Ivy, la más nueva, lee la suya: los extractos antiguos copian tablas enteras, campos personales incluidos.
+
+41
+00:04:44,592 --> 00:04:51,744
+Ahora R3 tiene una causa, y una señal temprana: un extracto con campos personales que su reporte nunca muestra.
+
+42
+00:04:53,444 --> 00:05:00,811
+Yusuf, su dueño, escribe la respuesta esa misma tarde: antes de trasladar un extracto, se revisa con las reglas de protección.
+
+43
+00:05:02,111 --> 00:05:04,419
+Lo que ningún reporte necesita se queda atrás.
+
+44
+00:05:07,319 --> 00:05:14,226
+Miércoles 16 de junio, tercera semana del traslado. Sigue el reporte de Instalaciones de quién tiene tarjeta de acceso.
+
+45
+00:05:15,926 --> 00:05:21,018
+Su extracto antiguo trae 42 columnas de la lista de personal. El reporte muestra cinco.
+
+46
+00:05:22,918 --> 00:05:29,591
+La revisión lee las etiquetas del catálogo: el domicilio y la fecha de nacimiento son personales, y ningún reporte los usa.
+
+47
+00:05:31,291 --> 00:05:36,449
+Así que el extracto se queda atrás, y el reporte se rehace con la única lista de personal gobernada.
+
+48
+00:05:38,349 --> 00:05:45,193
+De haberse trasladado esos campos, R3 sería un problema: ya no algo que podría pasar, sino algo que ya pasó.
+
+49
+00:05:47,093 --> 00:05:51,526
+Etiquetas como estas, y las cerraduras tras ellas, se enseñan en Cerraduras antes que los datos.
+
+50
+00:05:54,426 --> 00:06:00,645
+Martes 29 de junio. La página del mes del consejo de datos tiene lugar para tres riesgos.
+
+51
+00:06:02,145 --> 00:06:10,940
+R1, la licencia. R4, un equipo dividido entre el traslado y nuevas solicitudes. Y R3: su señal apareció, así que ahora es probable.
+
+52
+00:06:12,840 --> 00:06:18,557
+R8 se cierra: la exportación de nómina corre desde el proyecto cada día de pago desde hace más de un año.
+
+53
+00:06:20,057 --> 00:06:25,943
+R7, un agente con más permisos de los que su tarea pide, sigue vigilado, como explica Cómo sale mal.
+
+54
+00:06:27,443 --> 00:06:30,813
+Dicho a tiempo, un riesgo genera confianza. Oculto, la gasta.
+
+55
+00:06:32,913 --> 00:06:37,229
+Las banderas de Amundsen también eran señales tempranas, puestas donde se cruzarían a tiempo.
+
+56
+00:06:38,929 --> 00:06:45,215
+El lunes, toma tus tres riesgos más grandes y escribe cada uno en una frase, con un dueño y una señal temprana.
+
+57
+00:06:46,915 --> 00:06:50,014
+Nombra cada riesgo, dale un dueño, vigila su señal temprana.

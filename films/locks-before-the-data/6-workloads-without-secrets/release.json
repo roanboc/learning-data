@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Workloads without secrets",
+    "key": "workloads-without-secrets-en",
+    "dir": "films/locks-before-the-data/6-workloads-without-secrets/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/workloads-without-secrets/film.js",
+    "video": "dist/workloads-without-secrets.mp4",
+    "file": "workloads-without-secrets.mp4",
+    "captions": [
+      [
+        "films/locks-before-the-data/6-workloads-without-secrets/captions/en.srt",
+        "workloads-without-secrets.en.srt"
+      ],
+      [
+        "films/locks-before-the-data/6-workloads-without-secrets/captions/es.srt",
+        "workloads-without-secrets.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/locks-before-the-data/6-workloads-without-secrets/source",
+      ":(exclude)films/locks-before-the-data/6-workloads-without-secrets/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 278,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.5,
+      "status": "Drawn to the rule"
+    }
+  }
+]

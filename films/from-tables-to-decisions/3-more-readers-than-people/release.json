@@ -1,0 +1,50 @@
+[
+  {
+    "name": "More readers than people",
+    "key": "more-readers-than-people-en",
+    "dir": "films/from-tables-to-decisions/3-more-readers-than-people/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/more-readers-than-people/film.js",
+    "video": "dist/more-readers-than-people.mp4",
+    "file": "more-readers-than-people.mp4",
+    "captions": [
+      [
+        "films/from-tables-to-decisions/3-more-readers-than-people/captions/en.srt",
+        "more-readers-than-people.en.srt"
+      ],
+      [
+        "films/from-tables-to-decisions/3-more-readers-than-people/captions/es.srt",
+        "more-readers-than-people.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-tables-to-decisions/3-more-readers-than-people/source",
+      ":(exclude)films/from-tables-to-decisions/3-more-readers-than-people/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 297,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -52,6 +52,15 @@ sources:
               For a correction, the day the registrar's office checked it against the identity
               document seen at enrolment and accepted it. Empty for a confirmation, and for a
               correction still waiting for its check.
+          - name: answered_at
+            description: >
+              For a correction, when the registrar's office answered it in the portal: put right
+              once checked, or asked for the document that shows a new name. Empty for a
+              confirmation, and until the office answers.
+          - name: told_at
+            description: >
+              For a correction, when the portal told the graduate the office's answer, on the page
+              and by email. Empty for a confirmation, and until the graduate is told.
       - name: nightly_files
         description: >
           The receipts of the portal's nightly feed: one row for each file it sends, and when it

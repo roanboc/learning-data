@@ -3,6 +3,8 @@
 -- The name is the one the graduate confirmed in the portal for that ceremony (a correction once
 -- the registrar's office has checked it), else the student system's. What each use of the list
 -- needs, and the level agreed for it, is in its YAML and its contract (Good enough for what?).
+-- How each name was confirmed: in the portal, or on the paper graduation form the student system
+-- holds, which kept no date; empty means not yet (Read by an agent).
 
 with
 
@@ -15,6 +17,12 @@ graduations as (
 confirmations as (
 
     select * from {{ ref('stg_portal__name_confirmations') }}
+
+),
+
+applications as (
+
+    select * from {{ ref('stg_student_system__graduation_applications') }}
 
 ),
 
@@ -34,6 +42,14 @@ current_graduations as (
 
     select *
     from graduations
+    where is_current_version
+
+),
+
+current_applications as (
+
+    select *
+    from applications
     where is_current_version
 
 ),
@@ -78,7 +94,11 @@ select
     current_graduations.ceremony_id,
     ceremonies.ceremony_on,
     current_graduations.attendance_code = 'ATT' as is_attending,
-    cast(first_recorded.added_at as date) as added_on, ages.student_system_as_of, ages.portal_as_of
+    cast(first_recorded.added_at as date) as added_on, ages.student_system_as_of, ages.portal_as_of,
+    case
+        when latest_answers.confirmation_bk is not null then 'portal'
+        when current_applications.application_form = 'paper' then 'paper'
+    end as name_confirmed_how
 from current_graduations
 inner join first_recorded
     on current_graduations.graduation_bk = first_recorded.graduation_bk
@@ -97,3 +117,6 @@ cross join (
         (select max(received_at) from {{ ref('stg_student_system__nightly_files') }}) as student_system_as_of,
         (select max(received_at) from {{ ref('stg_portal__nightly_files') }}) as portal_as_of
 ) as ages
+left join current_applications
+    on current_graduations.student_bk = current_applications.student_bk
+    and current_graduations.ceremony_id = current_applications.ceremony_id

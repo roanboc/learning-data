@@ -1,0 +1,12 @@
+# Decided: *No secret to lose*
+
+This film's rows of the series' *Decided* table in [proposal.md](../proposal.md), which `python site-tools/build_series.py` makes from this file, the series' `decided.md` and the other films'. Add a row at the end, with its date.
+
+| Date | Decision |
+|---|---|
+| 5 November 2026 | *No secret to lose* follows *Who is it, really?* in the series, made on assumptions while the author is away, as he asked on 5 November 2026; each question and the assumption taken are listed for his review. It ranks the ways a job, then a person, signs in, from worst to best, by one question: who holds a secret, and for how long. The top two rungs are the goal: nobody makes, keeps, copies or changes a secret. |
+| 5 November 2026 | Its opening story is the City of London, 2 May 1990: a money broker's messenger robbed near the Bank of England of 301 Treasury bills and certificates of deposit, worth £292 million, bearer paper; and the Bank of England's Central Moneymarkets Office, opened on 1 October 1990, which kept the paper in a vault and who owned it in its records. Checked against the Bank's *Quarterly Bulletin* of November 1990, which names the theft. The messenger isn't named, and the thief isn't shown. |
+| 5 November 2026 | It picks up where *Who is it, really?* ends, as the two films' threads agreed: the job has its own identity, `registrar-loader`, owned by Sam, its rights from the loader role, but still signs in with Jun's personal token. It ends with the job vouched for by the platform, its code's deployments signed for each run by the build service, and Jun's token ended. How each rung is built is left to *Workloads without secrets* and *People and groups*. |
+| 5 November 2026 | Its sound is an English concertina (Wheatstone, London, 1829), for the City and each rung of the ladder, and a prepared piano, muted: a short sealed note for each secret, silent once the secret is gone. Neither is in any score on main or on a branch. |
+| 5 November 2026 | The author's rule of 5 November 2026: the film isn't rendered in the session and has no review page; its pull request merges into main with a Draft label once its checks pass, after *Who is it, really?*, and that merge is its release. |
+| 5 November 2026 | Jun ends his own token once the job no longer needs it, as *Workloads without secrets* tells it; this film shows no date. The paper of 1990 is drawn without its words, with one slip, "Pay the bearer", laid across it and later across the job's secret; a secret is always the kit's sealed card, never written out. |

@@ -28,8 +28,8 @@ the contract's names are invented, as everywhere in this project; T-26188 is Lin
 in `data/hr_system/contracts.csv`.
 
 This contract is an input's, so it's written by hand and agreed with the system's owner. The
-contracts in `governance/5-data-contracts/` are the project's own outputs, written by
-`scripts/generate/products.py` from the dbt models: don't move this one there.
+contracts in `governance/5-data-contracts/` are the project's canonical tables', written by data
+governance's information architect and checked against the dbt models: don't move this one there.
 
 ## Check it against the standard
 

@@ -159,8 +159,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El plan se escribe una vez, en dos archivos junto al código del proceso en GitHub.",
 "Each shelf and its readers take a few lines.":
 "Cada estante y sus lectores ocupan unas pocas líneas.",
-"Mei's team owns those files, so no change to who may see her records goes in without her yes.":
-"Esos archivos son del equipo de Mei, así que nada cambia quién ve sus registros sin su sí.",
+"The data team reviews each change to those files, and Mei is told what it touches.":
+"El equipo de datos revisa cada cambio en esos archivos, y a Mei le avisan qué toca.",
 "A study's grant is made from its agreement's contract, and names it: 2026-14, until 30 June 2027.":
 "El permiso de un estudio sale del contrato de su acuerdo, y lo nombra: 2026-14, hasta el 30 de junio de 2027.",
 "The study's policies go in first, and its grant after them, so it never reads the table unmasked.":

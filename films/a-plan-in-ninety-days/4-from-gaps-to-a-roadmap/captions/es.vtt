@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.705
+Suiza, en los años setenta: un país de valles y pueblos pequeños, unidos por sus ferrocarriles.
+
+00:00:09.405 --> 00:00:16.598
+Más gente viajaba en auto, por autopistas nuevas: en diez años, la parte del tren en los viajes cayó de más de un cuarto a un sexto.
+
+00:00:18.098 --> 00:00:24.293
+Los trenes salían a minutos distintos cada hora, y un transbordo podía significar una larga espera en el andén.
+
+00:00:25.793 --> 00:00:32.396
+Para quienes no tenían auto, estudiantes, trabajadores y personas mayores, cada viaje era buscar horarios, y esperar.
+
+00:00:33.896 --> 00:00:36.954
+Viajaba menos gente, y los ferrocarriles perdían dinero.
+
+00:00:38.654 --> 00:00:47.696
+En 1972, tres jóvenes ingenieros ferroviarios escribieron que los trenes ya no daban lo que la gente quería, y que el horario era la clave.
+
+00:00:49.196 --> 00:00:56.947
+El plan de los ferrocarriles, nuevas líneas rápidas por todo el país, costaría miles de millones, y a inicios de los ochenta se abandonó.
+
+00:00:58.447 --> 00:00:59.835
+Algo tenía que cambiar.
+
+00:01:01.735 --> 00:01:09.348
+Desde el 23 de mayo de 1982, los trenes siguieron el reloj: cada línea, cada hora, a los mismos minutos.
+
+00:01:11.248 --> 00:01:17.489
+Luego los ferrocarriles le dieron la vuelta a la planificación: Rail 2000 partió del horario que la gente quería.
+
+00:01:18.789 --> 00:01:27.169
+En las grandes estaciones, los nodos, trenes de todas partes llegarían justo antes de la hora y saldrían justo después: todos transbordan.
+
+00:01:29.069 --> 00:01:34.046
+Donde los trenes entre dos nodos eran demasiado lentos para llegar a tiempo, ese tramo era una brecha.
+
+00:01:35.746 --> 00:01:37.246
+Solo se construiría en las brechas.
+
+00:01:38.746 --> 00:01:42.683
+Su lema: tan rápido como sea necesario, no tan rápido como sea posible.
+
+00:01:44.383 --> 00:01:48.270
+Los votantes lo aprobaron el 6 de diciembre de 1987.
+
+00:01:49.570 --> 00:01:57.122
+Al subir los costos, se construyó por etapas, y la primera conservó una de las cuatro líneas nuevas: la que el horario más necesitaba.
+
+00:01:58.822 --> 00:02:09.028
+El 12 de diciembre de 2004 se inauguró la primera etapa: unos 130 proyectos, con la nueva línea entre Berna y Olten en su centro.
+
+00:02:10.728 --> 00:02:14.407
+De Berna a Zúrich ya había menos de una hora, y los dos nodos se conectaron.
+
+00:02:16.107 --> 00:02:22.427
+En Berna, cada media hora, trenes de todas partes llenan los andenes, y la gente transborda en minutos.
+
+00:02:24.327 --> 00:02:32.715
+En 2019, los suizos viajaban en tren más que nadie en Europa: unos 2,500 kilómetros por persona, en un año.
+
+00:02:34.415 --> 00:02:41.062
+Con los datos pasa lo mismo: parte de lo que la gente necesita, encuentra las brechas y construye por etapas que funcionen solas.
+
+00:02:42.562 --> 00:02:48.448
+Dentro de un año, en una universidad, la situación deseada está dibujada, y entre ella y hoy hay nueve brechas.
+
+00:02:49.948 --> 00:02:56.033
+Construida de una vez, llevaría años, y si el dinero se acabara a mitad de camino, nadie tendría nada que usar.
+
+00:02:57.533 --> 00:03:04.291
+Su gestora de datos y su equipo convierten las brechas en tres etapas, cada una útil por sí sola, y consiguen que se apruebe el plan.
+
+00:03:12.191 --> 00:03:21.102
+Lunes 5 de abril de 2027. Helena Novak, gestora de datos de la universidad, tiene la situación deseada dibujada y tres semanas para el plan.
+
+00:03:22.202 --> 00:03:28.185
+Para el lunes 26 de abril: una hoja de ruta y una estrategia de datos, listas para el consejo de datos.
+
+00:03:29.285 --> 00:03:34.964
+Noor, la arquitecta de datos, pone en su mapa la situación actual junto a la deseada, capa por capa.
+
+00:03:36.664 --> 00:03:38.736
+Donde las dos difieren, hay una brecha.
+
+00:03:40.236 --> 00:03:47.450
+El método de TOGAF y ArchiMate nombran los pasos: brechas, paquetes de trabajo y mesetas, los estados estables del camino.
+
+00:03:48.550 --> 00:03:52.257
+El mapa antes de los datos los dibuja, en Hoy, y hacia dónde va.
+
+00:03:53.357 --> 00:03:58.728
+Estrategia: entregar datos es lento, 41 días hábiles, y nadie lo mide.
+
+00:04:00.228 --> 00:04:09.124
+Negocio: once vías para pedir; solicitudes en once lugares, sin orden; y unas 40 personas trabajando con datos solas, en hojas de cálculo.
+
+00:04:10.824 --> 00:04:15.915
+Información: tres copias de la lista de personal, e informes y productos sin responsable.
+
+00:04:17.415 --> 00:04:26.004
+Aplicación: informes en dos lugares, los 38 del antiguo almacén junto a los de la plataforma; y agentes trabajando sin un mandato escrito.
+
+00:04:27.704 --> 00:04:31.051
+Tecnología: los servidores del antiguo almacén, todavía encendidos.
+
+00:04:32.551 --> 00:04:37.593
+Nueve brechas: demasiadas para cerrarlas a la vez, y algunas no pueden empezar hasta que se cierren otras.
+
+00:04:40.893 --> 00:04:47.559
+Helena y el equipo las agrupan en paquetes de trabajo: piezas que un equipo puede terminar, cada una con responsable y fecha.
+
+00:04:48.859 --> 00:04:54.163
+Las brechas que se cierran juntas comparten uno: los informes del antiguo almacén y sus servidores van juntos.
+
+00:04:55.463 --> 00:04:59.443
+Una puerta de entrada y una lista única, para el 30 de junio: de Helena.
+
+00:05:00.643 --> 00:05:04.536
+Retirar el antiguo almacén, para el 17 de diciembre: de Sam.
+
+00:05:05.736 --> 00:05:11.169
+Referentes de datos: tres para septiembre, los siete para marzo de 2028: de Jun.
+
+00:05:12.369 --> 00:05:17.426
+Un responsable y una promesa para cada producto, para marzo de 2028: de Yusuf.
+
+00:05:18.626 --> 00:05:21.550
+Las medidas, en una página, desde julio: de Noor.
+
+00:05:22.750 --> 00:05:26.613
+Y agentes, cada uno con un mandato escrito, para diciembre: también de Yusuf.
+
+00:05:27.813 --> 00:05:32.761
+Cada uno termina en algo que la gente puede ver: una puerta que se abre, un servidor apagado.
+
+00:05:35.861 --> 00:05:40.955
+Luego, el orden: no según quién pide más fuerte, sino según lo que cada uno desbloquea, y lo que vale.
+
+00:05:42.255 --> 00:05:49.101
+La puerta de entrada va primero: cuando cada solicitud entra por una sola vía, puede haber una lista única, y se pueden contar los días.
+
+00:05:50.601 --> 00:06:00.767
+Retirar el antiguo almacén es lo que más vale: cuesta 310,000 dólares australianos al año, y su licencia vence el 31 de diciembre.
+
+00:06:02.467 --> 00:06:05.868
+El primer borrador de Helena empieza a mover los informes en junio.
+
+00:06:07.168 --> 00:06:15.035
+Sam, que lleva la plataforma, ve el problema: un informe sin responsable no se puede mover, porque nadie puede decir si sigue estando bien.
+
+00:06:16.735 --> 00:06:20.852
+Así que los 21 informes en uso reciben primero su responsable, y luego se mueven.
+
+00:06:22.352 --> 00:06:26.776
+Los paquetes se esperan unos a otros: la lista, a la puerta; la mudanza, a sus responsables.
+
+00:06:28.476 --> 00:06:33.787
+Como el horario decidió qué construiría Suiza, la situación deseada decide qué va primero.
+
+00:06:36.887 --> 00:06:41.403
+Luego Helena coloca los paquetes en mesetas: aquí, simplemente, etapas.
+
+00:06:42.703 --> 00:06:48.475
+Cada una debe pasar una prueba: si el dinero se acabara después de ella, ¿tendría la gente algo que usa?
+
+00:06:50.375 --> 00:06:54.006
+Su primer borrador mueve la mitad de los informes antiguos para septiembre.
+
+00:06:55.306 --> 00:07:00.603
+Media mudanza no sirve por sí sola: informes en dos lugares, y la licencia todavía pagada.
+
+00:07:02.303 --> 00:07:07.642
+Así que toda la mudanza pasa a la etapa dos, y la etapa uno se queda con lo que la gente puede usar enseguida.
+
+00:07:09.142 --> 00:07:17.119
+Etapa uno, para el jueves 30 de septiembre: una puerta de entrada, una lista única, la página de medidas y los tres primeros referentes.
+
+00:07:18.819 --> 00:07:27.451
+Etapa dos, para fines de marzo de 2028: una sola plataforma, sin el antiguo almacén; cada producto con responsable; agentes con mandatos.
+
+00:07:29.151 --> 00:07:34.449
+Etapa tres, para fines de 2028: los siete referentes construyendo sus propios productos.
+
+00:07:36.149 --> 00:07:42.378
+La etapa cercana tiene fecha exacta; las lejanas, solo un mes o un año, porque van a cambiar.
+
+00:07:44.078 --> 00:07:50.265
+Tan rápido como sea necesario, no tan rápido como sea posible: el antiguo almacén se va antes de que venza su licencia.
+
+00:07:51.565 --> 00:07:55.360
+Los referentes crecen tan rápido como las facultades pueden ceder un día a la semana.
+
+00:07:56.860 --> 00:08:00.466
+Como la primera etapa de Rail 2000, cada una funciona por sí sola.
+
+00:08:03.566 --> 00:08:05.862
+Luego, la estrategia de datos, en una página.
+
+00:08:07.162 --> 00:08:13.032
+Hacia dónde va la universidad: sus cuatro objetivos, de estudiantes que tienen éxito a finanzas que duran.
+
+00:08:14.532 --> 00:08:20.223
+Lo que los datos deben hacer por ellos: llegar a quienes deciden, rápido, desde una sola copia confiable.
+
+00:08:21.723 --> 00:08:23.870
+Los cinco principios con que se diseña.
+
+00:08:25.370 --> 00:08:27.051
+La situación deseada, en una imagen.
+
+00:08:28.551 --> 00:08:33.037
+La hoja de ruta: tres etapas, seis paquetes, cada uno con responsable y fecha.
+
+00:08:34.537 --> 00:08:40.039
+Y las medidas: días de la solicitud al primer uso, productos con responsable, y las personas que los usan.
+
+00:08:41.539 --> 00:08:46.260
+Una página, para que quienes la financian y quienes la usan lean el mismo plan.
+
+00:08:49.560 --> 00:08:55.440
+Lunes 26 de abril: el hito del plan. La estrategia y su hoja de ruta están listas.
+
+00:08:56.540 --> 00:09:04.284
+Martes 27 de abril: se reúne el consejo de datos, con el profesor David Mensah, el vicerrector, presente.
+
+00:09:05.584 --> 00:09:11.904
+Alrededor de la mesa están quienes la financiarán y la usarán: las facultades, las oficinas y los responsables de datos.
+
+00:09:13.204 --> 00:09:17.689
+La decana de Artes pregunta por qué Artes espera a 2028 para tener referente.
+
+00:09:18.989 --> 00:09:23.999
+Porque las fechas lejanas son flexibles: cuando Artes pueda ceder un día a la semana, empieza su referente.
+
+00:09:25.699 --> 00:09:28.550
+El consejo aprueba la estrategia y la hoja de ruta.
+
+00:09:30.450 --> 00:09:37.404
+Un paquete necesita dinero primero: mover los informes del antiguo almacén. Su caso de negocio llega al consejo el mes que viene.
+
+00:09:38.704 --> 00:09:43.440
+Los noventa días de Helena terminan con un plan que cualquiera en la universidad puede leer.
+
+00:09:45.140 --> 00:09:50.909
+En Suiza, la primera etapa construyó solo las brechas que el horario necesitaba, y los nodos se conectaron.
+
+00:09:52.609 --> 00:09:59.982
+En la universidad, la etapa uno da a la gente una puerta, una lista y una medida que se ve, aunque el dinero se acabara ahí.
+
+00:10:01.682 --> 00:10:06.982
+Una hoja de ruta termina; cuidar bien los datos no, como muestra Una capacidad, no un proyecto.
+
+00:10:08.682 --> 00:10:11.651
+Convierte las brechas en etapas que funcionen por sí solas.

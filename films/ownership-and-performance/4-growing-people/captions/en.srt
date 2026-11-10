@@ -1,0 +1,271 @@
+1
+00:00:03,000 --> 00:00:08,430
+Japan, in 1872. The new government sets out to give every child a school.
+
+2
+00:00:10,130 --> 00:00:15,379
+Teaching is new work, with new subjects and new methods, and few teachers are trained for it.
+
+3
+00:00:16,679 --> 00:00:23,893
+By 1877, four schools in ten have a single teacher, and nearly one in three has a single classroom.
+
+4
+00:00:25,793 --> 00:00:31,994
+A teacher alone with a class can't see what each child has understood, and nobody sees the lesson to help.
+
+5
+00:00:33,494 --> 00:00:38,587
+When a lesson loses the children, they fall behind, and the teacher may never learn why.
+
+6
+00:00:40,487 --> 00:00:41,875
+Something had to change.
+
+7
+00:00:43,975 --> 00:00:46,363
+Teachers opened their classrooms to each other.
+
+8
+00:00:47,663 --> 00:00:53,604
+From the first year, new teachers learned by watching lessons, and teachers formed groups to learn together.
+
+9
+00:00:55,104 --> 00:01:02,398
+A visitor watched the children, not the teacher: how they answered, whether they were interested, and whether the questions suited them.
+
+10
+00:01:04,298 --> 00:01:10,157
+Afterwards, in a reflection session, they talked about what the children had learned, and where they got stuck.
+
+11
+00:01:11,857 --> 00:01:16,911
+In the 1880s, the groups began lesson study: jugyō kenkyū, in Japanese.
+
+12
+00:01:18,411 --> 00:01:21,150
+Teachers choose a goal, and plan a lesson together.
+
+13
+00:01:22,250 --> 00:01:27,384
+One teaches it, while the others watch the children. Then they improve it, for next time.
+
+14
+00:01:29,284 --> 00:01:38,146
+Lesson study spread to schools across Japan. Today, 99 in 100 primary teachers there say they took part in the past year.
+
+15
+00:01:40,046 --> 00:01:44,084
+After 1999, a book about it carried it to many countries.
+
+16
+00:01:45,384 --> 00:01:50,267
+In a trial in the United States, 39 teams of teachers were split at random.
+
+17
+00:01:51,167 --> 00:01:55,828
+Some used it for about three months, with research on how children learn fractions.
+
+18
+00:01:56,928 --> 00:02:01,658
+Their students understood fractions better than those of teams who trained another way.
+
+19
+00:02:03,558 --> 00:02:11,815
+At work, a new analyst can be alone too: nobody sees her work until it's done, and she hears how she's doing once a year, as a grade.
+
+20
+00:02:13,515 --> 00:02:21,054
+People grow as those teachers did: with goals they help set, feedback every week about the work and its effect, and a next step.
+
+21
+00:02:29,754 --> 00:02:39,568
+At the university, a year from now, Ivy Reyes joins the data team on Monday 1 March. It's her first job, after a degree in statistics.
+
+22
+00:02:41,068 --> 00:02:45,053
+Helena Novak, the data manager, doesn't hand her a list of goals.
+
+23
+00:02:46,353 --> 00:02:52,363
+She asks Ivy to write three of her own, in her first week. On Friday 5 March, they agree them.
+
+24
+00:02:53,863 --> 00:02:57,631
+One: to know the whole route of one question's data, by Easter.
+
+25
+00:02:58,931 --> 00:03:01,455
+Two: to have a pull request merged, by May.
+
+26
+00:03:02,755 --> 00:03:05,939
+Three: to own a data product, by the middle of the year.
+
+27
+00:03:07,639 --> 00:03:15,544
+Helena's part is real work to grow on: a question from Graham Ellis, the Director of Facilities, about the teaching rooms.
+
+28
+00:03:17,044 --> 00:03:22,237
+Her goals are her own. The team's measures stay the team's, and never become her targets.
+
+29
+00:03:23,937 --> 00:03:27,395
+Like the teachers choosing their goal, she chose what to grow in.
+
+30
+00:03:28,895 --> 00:03:37,863
+On Thursday 25 March, the first goal is met: the whole route of Graham's question, from his decision back to the sensors, on one page.
+
+31
+00:03:41,763 --> 00:03:48,933
+Every Tuesday, Ivy and Helena meet for thirty minutes. It's Ivy's time, about her, and never a status report.
+
+32
+00:03:50,633 --> 00:03:57,995
+In 1996, Avraham Kluger and Angelo DeNisi brought together more than six hundred results on feedback.
+
+33
+00:03:59,295 --> 00:04:04,148
+On average, feedback helped. But more than a third of the time, it made the work worse.
+
+34
+00:04:05,848 --> 00:04:09,413
+It helped least when it turned attention from the task to the person.
+
+35
+00:04:11,513 --> 00:04:19,161
+So Helena's feedback has three parts. The Center for Creative Leadership calls them situation, behaviour and impact.
+
+36
+00:04:20,661 --> 00:04:28,350
+Tuesday 13 April. Last Wednesday, reviewing the agent's draft, you checked it against Graham's own word for “used”.
+
+37
+00:04:29,450 --> 00:04:32,491
+So his answer counts people in rooms, not bookings.
+
+38
+00:04:34,591 --> 00:04:39,205
+Not “you're brilliant”, which is about who she is: what she did, and what it changed.
+
+39
+00:04:41,105 --> 00:04:49,920
+Hard feedback works the same way. Kim Scott's Radical Candor, in 2017, puts it as: care personally, and challenge directly.
+
+40
+00:04:51,620 --> 00:04:58,188
+Tuesday 25 May. Last week, you kept your change to yourself for four days, to make it perfect.
+
+41
+00:04:59,288 --> 00:05:02,820
+Jun had one afternoon to review it, so the review was rushed.
+
+42
+00:05:04,720 --> 00:05:07,583
+Ask for a review when it works, not when it's perfect.
+
+43
+00:05:09,483 --> 00:05:14,245
+Small and often, while the work is fresh. Nothing waits for a review once a year.
+
+44
+00:05:17,545 --> 00:05:21,497
+Helena asks for feedback on herself too: what should I do differently?
+
+45
+00:05:22,997 --> 00:05:28,539
+In June, Ivy tells her: when I bring you a question, you answer it at once, and I stop looking.
+
+46
+00:05:30,239 --> 00:05:34,214
+Helena thanks her. From then on, she first asks what Ivy has tried.
+
+47
+00:05:36,114 --> 00:05:43,001
+In lesson study, the group planned the lesson together, so the talk afterwards is about the lesson and the children's learning.
+
+48
+00:05:44,701 --> 00:05:52,219
+On Thursday 24 June, the University Council puts off the new teaching building, and Graham writes to thank Helena.
+
+49
+00:05:53,719 --> 00:05:56,488
+At the next review, she reads his note to the team.
+
+50
+00:05:57,588 --> 00:06:03,201
+She says who did each part: Ivy's route, Jun's models, Sam's sensors, and Mei's bookings.
+
+51
+00:06:04,901 --> 00:06:06,928
+The credit is the team's, in public.
+
+52
+00:06:10,228 --> 00:06:20,244
+From Thursday 1 July, Ivy owns her first data product: Teaching space use, the counts per room per hour, refreshed every Monday by seven.
+
+53
+00:06:21,944 --> 00:06:27,654
+On Tuesday 20 July, they look back at her half year, and forward. All three goals are met.
+
+54
+00:06:29,154 --> 00:06:35,676
+What went well: Graham's page for the University Council. What she'd do differently: ask for review earlier.
+
+55
+00:06:37,376 --> 00:06:42,285
+And what she wants next: to make her Monday refresh better, and to teach what she learns.
+
+56
+00:06:43,985 --> 00:06:48,849
+A growth conversation looks forward: where she wants to go, and what she needs to get there.
+
+57
+00:06:50,749 --> 00:06:55,962
+On Tuesday 14 December, she has owned Teaching space use for nearly six months.
+
+58
+00:06:57,462 --> 00:07:02,367
+Her next goal is one she chose: to coach the next graduate, in 2028.
+
+59
+00:07:04,267 --> 00:07:07,842
+Analyst, then owner, then coach: each step with more to own.
+
+60
+00:07:11,342 --> 00:07:15,400
+In Japan's schools, teachers have grown this way for a century and a half.
+
+61
+00:07:16,500 --> 00:07:21,168
+A goal they chose, eyes on the children's learning, and a better lesson next time.
+
+62
+00:07:23,068 --> 00:07:28,977
+Helena did the same for Ivy: goals of her own, feedback every week about the work, and the next step.
+
+63
+00:07:30,877 --> 00:07:34,106
+On Monday, let people write their own goals, then agree them.
+
+64
+00:07:35,606 --> 00:07:39,936
+Give feedback every week: the situation, what they did, and its effect.
+
+65
+00:07:41,436 --> 00:07:43,852
+Ask for feedback on yourself, and act on it.
+
+66
+00:07:45,352 --> 00:07:49,802
+Look forward in growth conversations, and give the team the credit, in public.
+
+67
+00:07:51,302 --> 00:07:55,610
+Data work needs new skills. Leading the people who do it is a skill too.
+
+68
+00:07:57,510 --> 00:08:00,791
+Their goals, weekly feedback about the work, the next step.

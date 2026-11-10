@@ -1,0 +1,267 @@
+1
+00:00:01,600 --> 00:00:04,054
+Vienna, November 1968.
+
+2
+00:00:05,354 --> 00:00:08,647
+More people than ever drive from one country into the next.
+
+3
+00:00:09,347 --> 00:00:14,125
+At a United Nations conference, countries have spent a month on the rules of the road.
+
+4
+00:00:14,825 --> 00:00:20,284
+But their signs still differ. Many give their message in words, in the country's own language.
+
+5
+00:00:20,984 --> 00:00:25,729
+A driver from abroad can pass a warning of a sharp bend, and never know what it said.
+
+6
+00:00:26,429 --> 00:00:29,311
+And on the road, a missed warning can end in a crash.
+
+7
+00:00:30,811 --> 00:00:32,251
+Something has to change.
+
+8
+00:00:33,751 --> 00:00:40,325
+So, on the 8th of November, 31 countries sign a treaty: the Convention on Road Signs and Signals.
+
+9
+00:00:41,025 --> 00:00:45,081
+It defines each sign once: by its shape, its colour and its symbol.
+
+10
+00:00:45,781 --> 00:00:53,879
+A triangle edged in red warns. A circle edged in red forbids, or sets a limit. A blue circle says what you must do.
+
+11
+00:00:55,779 --> 00:01:02,116
+Today, 75 countries keep it, and a driver reads the same signs from one country to the next.
+
+12
+00:01:03,816 --> 00:01:07,585
+And the signs have readers nobody planned for in 1968.
+
+13
+00:01:08,285 --> 00:01:15,591
+Since July 2024, every new car in the European Union must read the speed limit off the signs it passes.
+
+14
+00:01:17,491 --> 00:01:20,008
+Data has readers nobody planned for, too.
+
+15
+00:01:21,508 --> 00:01:30,379
+Casual teaching cost, defined once at the university, is read by people, Finance's reports, an app, an agent, and a partner outside.
+
+16
+00:01:32,079 --> 00:01:38,697
+A reader that can't reach the definition counts its own way. One that reads as someone else sees what it shouldn't.
+
+17
+00:01:40,597 --> 00:01:46,737
+Read where it's defined, each as itself, every reader gives the same number, and sees only what it may.
+
+18
+00:01:55,437 --> 00:01:59,875
+Today, at the university, it's pay day: Thursday, the 5th of November.
+
+19
+00:02:00,575 --> 00:02:07,260
+Rohan Desai, in Finance, owns casual teaching cost: what a semester's casual teaching costs.
+
+20
+00:02:07,960 --> 00:02:12,568
+In September, it was defined once, as a metric view in Unity Catalog.
+
+21
+00:02:13,268 --> 00:02:20,534
+Genie One reads it there when he asks: for the Faculty of Health, 1.84 million dollars so far this semester.
+
+22
+00:02:21,834 --> 00:02:28,563
+But in this morning's budget pack, a Power BI report said 1.56 million, under the same name.
+
+23
+00:02:30,463 --> 00:02:39,107
+Finance's analysts build their reports in Power BI, which reads the university's catalog through a mirror in Microsoft Fabric.
+
+24
+00:02:40,407 --> 00:02:45,827
+The mirror shows tables, and reads their data where it lives. But metric views don't appear in it.
+
+25
+00:02:47,527 --> 00:02:53,885
+So the report, built where the measure can't be seen, summed the pay paid, and called it casual teaching cost.
+
+26
+00:02:55,585 --> 00:03:02,141
+And through the mirror, every query runs as the one sign-in that set it up. The catalog's rights stay behind.
+
+27
+00:03:04,041 --> 00:03:12,061
+So the report now reads the measure from Databricks itself, through Power BI's connector, each analyst signed in as themselves.
+
+28
+00:03:12,761 --> 00:03:18,245
+It asks for the measure by name, and gets 1.84 million, as Genie One does.
+
+29
+00:03:19,745 --> 00:03:27,564
+Noor, the data architect, writes the rule down: mirror only what every reader there may see, and read a measure where it's defined.
+
+30
+00:03:31,264 --> 00:03:35,522
+In the Faculty of Health, Anil Kurian is planning next semester's tutors.
+
+31
+00:03:36,822 --> 00:03:40,896
+The faculties plan in an app the data team built with Databricks Apps.
+
+32
+00:03:41,596 --> 00:03:47,412
+It shows what casual teaching cost the faculty so far, beside the hours each unit will need.
+
+33
+00:03:49,312 --> 00:03:52,713
+Every faculty uses it, and each may see only its own.
+
+34
+00:03:54,413 --> 00:04:01,894
+An app can read in two ways: as itself, so everyone using it shares the app's rights, or as the person using it.
+
+35
+00:04:04,194 --> 00:04:07,932
+This one reads as the person, and may only run queries for them.
+
+36
+00:04:09,832 --> 00:04:15,029
+And the claims behind the measure carry a filter by faculty, set in Unity Catalog.
+
+37
+00:04:16,929 --> 00:04:21,760
+So Anil sees Health's numbers, and nothing in the app's code decides who sees what.
+
+38
+00:04:23,860 --> 00:04:28,406
+Let an app read as the person using it, and keep the rules where the data lives.
+
+39
+00:04:32,506 --> 00:04:38,025
+Every pay day, Rohan sends the deans each faculty's casual teaching cost so far.
+
+40
+00:04:38,725 --> 00:04:41,980
+Now Finance's pay-day agent drafts the note for him.
+
+41
+00:04:43,480 --> 00:04:50,187
+It asks Genie One through a tool server, as any agent can, and Genie One answers from the same definition.
+
+42
+00:04:52,287 --> 00:04:59,693
+Its instructions say sessional teaching cost, and Genie One knows the word: it's one of the synonyms Rohan gave the measure.
+
+43
+00:05:01,793 --> 00:05:09,931
+Like a car reading the signs it passes, an agent reads the words a measure is given: its name, its description, its synonyms.
+
+44
+00:05:12,231 --> 00:05:18,003
+The agent works alone, on a schedule, so it has a name of its own, under the same rules as people.
+
+45
+00:05:19,903 --> 00:05:27,099
+It may ask Genie One, and read the measure. It can't read the claims themselves: who worked which hours, and what they were paid.
+
+46
+00:05:29,399 --> 00:05:32,201
+It drafts. Rohan checks the note, and sends it.
+
+47
+00:05:34,101 --> 00:05:38,994
+Give every reader that works alone a name of its own, and only what its job reads.
+
+48
+00:05:43,094 --> 00:05:51,613
+Some readers are outside the university: a group of universities compares what teaching costs, faculty by faculty, each semester.
+
+49
+00:05:53,113 --> 00:06:00,448
+Sam shares it with them through OpenSharing: their own system reads it where it lives, so there's no copy to keep up to date.
+
+50
+00:06:02,148 --> 00:06:08,975
+Ingrid, who answers for HR's data, asks for one more rule: totals by faculty, never by unit.
+
+51
+00:06:09,675 --> 00:06:13,232
+A unit with one tutor would give away what that tutor was paid.
+
+52
+00:06:15,132 --> 00:06:22,824
+So the share holds one small table, made from the measure: casual teaching cost by faculty, for semesters that have ended.
+
+53
+00:06:24,524 --> 00:06:28,050
+The group reads the same definition's numbers, and nothing more.
+
+54
+00:06:29,350 --> 00:06:34,323
+Outside the platform, share the least a partner needs, and make it from the definition.
+
+55
+00:06:37,823 --> 00:06:40,607
+Back in Finance, pay day ends with one number.
+
+56
+00:06:41,307 --> 00:06:49,365
+1.84 million dollars for Health so far: in Genie One, in Power BI, in the app, and in the agent's draft.
+
+57
+00:06:51,065 --> 00:06:53,111
+And each reader sees only what it may.
+
+58
+00:06:54,611 --> 00:07:00,731
+Like the signs agreed in Vienna, the definition was made once, for people, and machines read it too.
+
+59
+00:07:02,431 --> 00:07:07,980
+But unlike a road sign, data isn't for anyone who passes: every reader shows who it is.
+
+60
+00:07:09,680 --> 00:07:15,298
+And every reader is written down in the data project, so a change to the measure names who it touches.
+
+61
+00:07:17,198 --> 00:07:20,734
+Read each measure where it's defined, through a door that carries it.
+
+62
+00:07:21,834 --> 00:07:27,042
+Let each reader read as the person it acts for, or as itself, with only what it needs.
+
+63
+00:07:28,142 --> 00:07:29,659
+And outside, share the least.
+
+64
+00:07:31,359 --> 00:07:35,083
+There are standards for all of this already, so don't reinvent the wheel.
+
+65
+00:07:36,383 --> 00:07:40,931
+Investigate, adapt, implement, iterate, starting from the official docs.
+
+66
+00:07:42,431 --> 00:07:47,840
+Even the road signs' convention keeps improving: a new text comes into force next week.
+
+67
+00:07:49,340 --> 00:07:54,029
+Next, the module's last film: files, read as data and as context.

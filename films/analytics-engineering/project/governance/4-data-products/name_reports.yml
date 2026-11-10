@@ -1,0 +1,22 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models; only a canonical table has an enterprise contract, written by data governance.
+
+name: name_reports
+title: Name reports
+owner: "Mei Tanaka, registrar's office"
+domain: registrar
+status: active
+version: 1.0.0
+description:
+  purpose: Every report a graduate makes about their own name, through the portal's "This isn't my
+    name", with when it's due and when it was answered and the graduate told, so the registrar's
+    office keeps its promise of an answer within two working days.
+  usage: For the registrar's office, its morning alert and its weekly review of the promise. It
+    names the graduates who reported, for the office that owns their names.
+outputs:
+  - {model: mart_graduations__name_reports}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+support:
+  - {channel: registrar-data, tool: email, url: "mailto:registrar@uni.example", scope: issues}

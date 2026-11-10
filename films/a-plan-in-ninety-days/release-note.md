@@ -1,0 +1,1 @@
+*A plan in ninety days*, the first series of the module Data management, on a data manager's first ninety days: every area of data seen as one job, listening before designing, a simple target, and a roadmap in stages: four films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

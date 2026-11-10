@@ -11,6 +11,8 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Prototype first](https://data.learn-all.org/small-steps-measured/prototype-first/) | Prototype and iterate | 7½ min | 6 | 3 questions | [script](1-prototype-first/script.md) · [source](1-prototype-first/source/README.md) |
+| [Measures that matter](https://data.learn-all.org/small-steps-measured/measures-that-matter/) | Measuring what people get | 8 min | 7 | 3 questions | [script](2-measures-that-matter/script.md) · [source](2-measures-that-matter/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

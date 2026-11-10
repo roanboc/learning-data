@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Report, fix, tell, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (owner, source, check), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  owner:{q:"The registrar's office promises an answer within two working days. How does the team know it keeps that promise?",
+    opts:[{t:"A dbt check on the reports, which fails the night's update whenever a report is late.",near:true},{t:"A count of the month's reports, sent to the admissions team with their monthly note."},{t:"A model of the reports, each with its owner and due date, which Mei's team reviews every week.",ok:true}],
+    why:"Answering in time is about what people do, not whether the data is right, so the promise is tracked in a model of its own: every report with its owner, when it came, when it's due, and when it was answered and told. Mei's team reviews it every week, and an alert each morning lists the reports due that day. A dbt check says whether the data is right; failing the night's update over a late answer would stop the list for everyone. Which of your promises are about what people do?"},
+  source:{q:"Mei's team could have corrected Andrés's name in the graduation list, where it will be printed. Why correct it in the student system?",
+    opts:[{t:"The list is built again from the student system every night, so a fix in the list would be undone.",ok:true},{t:"The list is built again from the student system every night, so a fix in the list would reach the printer a day late.",near:true},{t:"Only the registrar's office may change the list, and the student system is the only place its team can edit."}],
+    why:"The list, the portal and the printer's file are all built from the student system every night. A fix in the list would be undone by the next night's update, and a fix in a spreadsheet would be wrong again next year. Corrected in the student system itself, the name reaches every copy at once, and stays right. Where would a fix in your data be undone?"},
+  check:{q:"No check can see a missing accent. What does Jun's new check look for instead?",
+    opts:[{t:"Names typed in capitals only, since the old online form typed every name in capitals."},{t:"A name the old form made, still in plain letters, and not yet confirmed by its graduate.",ok:true},{t:"A name the old form made, still in plain letters, and already confirmed by its graduate.",near:true}],
+    why:"A check can't know that Peñaloza should have a tilde: Andres Penaloza is a perfectly allowed name, and its capitals were retyped as ordinary letters long ago. It can see where a name was born: the old online form took only A to Z, so a name it made that's still in plain letters, and that its graduate hasn't confirmed, may have lost its accents. The check holds those for Mei's team, and dbt keeps them in a table her team reads. What do your reports say about where errors are born?"}
+  }}};

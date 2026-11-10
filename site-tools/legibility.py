@@ -4,8 +4,8 @@ renders (each film's release.json), it draws the film once a second and records 
 the camera's zoom and the phone layer (films/from-words-to-data/shared/src/phone.js), while clearly visible. A phone held sideways
 shows the 1920-pixel frame about 850 pixels wide, so text under about 28 px in the frame is too small to read there (each film's
 tools/legible.py checks one film, frame by frame, and the playbook has the rule). Text drawn as decoration is skipped.
-Each film's row in films/legibility-report.md comes from "legibility" in its release.json: write the numbers there, and run
-site-tools/build_series.py, which makes the report's table."""
+Each film's row in films/legibility-report.md comes from "legibility" in its release.json: write the numbers there. The table isn't
+committed; python site-tools/build_series.py --legibility prints the report with it."""
 import argparse, json, pathlib, re, statistics, sys
 from playwright.sync_api import sync_playwright
 ap = argparse.ArgumentParser(description=__doc__); ap.add_argument('--json'); A = ap.parse_args()

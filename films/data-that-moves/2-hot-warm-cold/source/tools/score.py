@@ -206,7 +206,7 @@ chord(A2, (E5,), Q('contract', 'how fresh', 0.0), Q('contract', 'how fresh', 2.0
 # 3. Hot: the claims app set down, and pay day's card. The HR system: a tap. Until September, once a night: a tap at each stop on the
 #    timeline. 23 tutors waited: a low knock, C sharp minor. Now each change pushed as it's made: its air, arriving. The streaming
 #    table: the hot tube. Within a minute: a tap. This Monday, every claim approved by noon: a tap for each row, and E major. Hot
-#    costs the most, because something is always running: the hot tube, held over the flame
+#    fresh to the minute costs the most, because the pipeline is always running: the hot tube, held over the flame
 H = lambda lid, word, off=0: W('hot', lid, word, off)
 h0 = S0('hot')
 knock(h0 + 0.4, 0.012, px(1540), 250)
@@ -286,7 +286,7 @@ chord(E2, (Gs4, B4), L('follow', 'follow how', 0.0), L('follow', 'follow how', 2
 
 # 7. Kept as it's used: on Svalbard the vault stays cold and still: the low E and the cold tube. In Lebanon and Morocco the bank sends
 #    out its seeds again: A major, and the seeds' air. At the university: contracts, spending, old pay records: hot, warm and cold, each
-#    as its row lights. Today, 2,960 paid: pay day's card, and E major. Freshness and reading decide: B over the low E. The docs: a tap
+#    as its row lights. Today, 2,960 paid: pay day's card, and E major. Freshness decides how data moves; reading, where it lives: B over the low E. The docs: a tap
 #    for each word. Next: a card. The end card: the low E, and the mark
 Z = lambda lid, word, off=0: W('close', lid, word, off)
 chord(E2, (COLD,), Z('svalbard', 'cold and still', -0.1), Z('svalbard', 'cold and still', 2.2), 0.5, px(1280))

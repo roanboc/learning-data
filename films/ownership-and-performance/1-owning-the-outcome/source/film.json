@@ -1,0 +1,38 @@
+{
+  "key": "owning-the-outcome",
+  "title": "Owning the outcome",
+  "sub": "Film 1 of Ownership and performance, in Leading data people: owning a data product means answering for what it's for, not only for the job that runs it. Know who uses it, notice first, say so first, and fix it or raise it, where nobody is blamed.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and rules (the product's promise, the owner's authority), orange is data (the rooms' counts), green is something done or of value (a tree counted alive, a fix reviewed), and amber a risk or a cost (the drop in forty rooms, and the rooms that would be lost).",
+  "src": [
+    "oo_kenya.js",
+    "oo_uni.js",
+    "oo_scenes.js"
+  ],
+  "poster": [
+    "monday",
+    "empty",
+    5.0
+  ],
+  "say": [
+    [
+      "\\bMaathai\\b",
+      "Mah-thy"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "trees"
+  ],
+  "urgent": []
+}

@@ -23,6 +23,7 @@ const NARR={
 "two":{"name":"Two questions","lead":0.8,"tail":1.0,"vo":[
  {"id":"noor","gap":0.8,"text":"In September, Noor, the data architect, asked each data owner two questions."},
  {"id":"ask","gap":0.8,"text":"How fresh must it be? And how often is it read?"},
+ {"id":"split","gap":0.8,"text":"The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept."},
  {"id":"hot","gap":0.8,"text":"Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used."},
  {"id":"warm","gap":0.8,"text":"Fresh to the hour or the day, and read often: warm. Work it out on a schedule."},
  {"id":"cold","gap":0.8,"text":"Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted."},
@@ -37,7 +38,7 @@ const NARR={
  {"id":"table","gap":0.8,"text":"A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands."},
  {"id":"minute","gap":0.8,"text":"The app sees each change within a minute."},
  {"id":"monday","gap":0.8,"text":"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon."},
- {"id":"costs","gap":0.8,"text":"Hot costs the most, because something is always running: keep hot only what's needed within minutes."}]},
+ {"id":"costs","gap":0.8,"text":"Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes."}]},
 "warm":{"name":"Warm","lead":0.8,"tail":1.0,"vo":[
  {"id":"rohan","gap":0.8,"text":"Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget."},
  {"id":"before","gap":0.8,"text":"Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked."},
@@ -49,6 +50,7 @@ const NARR={
  {"id":"records","gap":0.8,"text":"Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked."},
  {"id":"law","gap":0.8,"text":"Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read."},
  {"id":"before","gap":0.8,"text":"Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them."},
+ {"id":"tiers","gap":0.8,"text":"The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is."},
  {"id":"archive","gap":0.8,"text":"Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest."},
  {"id":"vault","gap":0.8,"text":"Like the copies on Svalbard, they sleep until someone needs them."},
  {"id":"told","gap":0.8,"text":"The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back."},
@@ -67,7 +69,7 @@ const NARR={
  {"id":"svalbard","gap":0.8,"text":"On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again."},
  {"id":"university","gap":0.8,"text":"At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted."},
  {"id":"today","gap":0.8,"text":"Today, 2,960 people are paid, 856 of them casual staff, Linh among them.","say":"Today, two thousand, nine hundred and sixty people are paid, eight hundred and fifty-six of them casual staff, Linh among them."},
- {"id":"takeaway","gap":0.8,"text":"Freshness and reading decide how data moves and where it lives."},
+ {"id":"takeaway","gap":0.8,"text":"Freshness decides how data moves; reading decides where it lives."},
  {"id":"wheel","gap":0.8,"text":"Storage has had tiers for years: there's no wheel to reinvent."},
  {"id":"docs","gap":0.8,"text":"Start from the official docs, then investigate, adapt, implement, iterate."},
  {"id":"next","gap":0.8,"text":"Next: one copy of the claims, for the app and for Finance."}]}

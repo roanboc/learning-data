@@ -1,0 +1,343 @@
+1
+00:00:02,000 --> 00:00:05,474
+Kanesh, en Anatolia, hacia 1900 a. C.
+
+2
+00:00:06,774 --> 00:00:12,100
+Mercaderes de Asur, a semanas de aquí en caravana de burros, traen estaño y telas para vender.
+
+3
+00:00:13,400 --> 00:00:14,987
+Y se prestan plata entre ellos.
+
+4
+00:00:16,087 --> 00:00:20,698
+Cada préstamo se escribe en una tablilla de arcilla: quién debe a quién, cuánto y para cuándo.
+
+5
+00:00:21,998 --> 00:00:29,340
+La tablilla se cierra en un sobre de arcilla, con los sellos de los testigos, para que nadie la cambie sin que se note.
+
+6
+00:00:30,640 --> 00:00:33,126
+El prestamista la guarda: es la prueba de la deuda.
+
+7
+00:00:34,626 --> 00:00:37,454
+Pero pagar la deuda no hace desaparecer la tablilla.
+
+8
+00:00:38,554 --> 00:00:42,690
+Puede quedarse años en un estante de Kanesh, o en una casa de Asur.
+
+9
+00:00:43,990 --> 00:00:49,479
+Si aparece después, puede usarse para reclamar la plata otra vez, y quien pidió prestado paga dos veces.
+
+10
+00:00:50,779 --> 00:00:54,504
+Quien pide prestado corre ese riesgo, por cada deuda que haya pagado.
+
+11
+00:00:55,804 --> 00:00:57,161
+Hay que hacer algo.
+
+12
+00:01:01,261 --> 00:01:05,510
+Así que, cuando se paga una deuda, el prestamista devuelve la tablilla, y se rompe.
+
+13
+00:01:07,010 --> 00:01:13,580
+Y cuando no puede devolverla, porque sigue en Asur, el prestamista manda escribir un recibo, sellado ante testigos.
+
+14
+00:01:14,880 --> 00:01:19,864
+La deuda está pagada, dice, y cualquier tablilla de ella que aparezca es nula: no vale nada.
+
+15
+00:01:21,364 --> 00:01:24,479
+Una deuda pagada sigue pagada, y nadie paga dos veces.
+
+16
+00:01:25,779 --> 00:01:31,807
+Se han hallado más de veinte mil tablillas en las casas de los mercaderes, y entre ellas hay recibos como estos.
+
+17
+00:01:33,307 --> 00:01:35,103
+Los datos tienen el mismo problema.
+
+18
+00:01:36,603 --> 00:01:41,098
+Borrar los datos de una persona escribe el recibo: la tabla ahora dice que ya no está.
+
+19
+00:01:42,198 --> 00:01:48,926
+Pero las copias viejas siguen ahí, como tablillas en un estante, hasta que cada una se rompe o ya nunca puede usarse.
+
+20
+00:01:50,226 --> 00:01:53,210
+Entonces, una persona que pide ser borrada sigue borrada.
+
+21
+00:02:00,910 --> 00:02:04,689
+Linh Nguyen es tutora en la universidad desde 2023.
+
+22
+00:02:05,789 --> 00:02:09,904
+El 24 de noviembre pidió salir de la lista de correo de tutores.
+
+23
+00:02:11,004 --> 00:02:16,443
+La oficina de privacidad la registró como la petición 2026-117, y la aprobó.
+
+24
+00:02:17,743 --> 00:02:21,998
+Cada noche a la una, un trabajo borra lo que la oficina de privacidad ha aprobado.
+
+25
+00:02:23,098 --> 00:02:27,434
+El miércoles 25 borra su fila de la tabla de la lista de correo.
+
+26
+00:02:28,734 --> 00:02:31,847
+El historial de la tabla registra el borrado, como un recibo.
+
+27
+00:02:33,347 --> 00:02:37,937
+Pero la plataforma guarda las versiones antiguas de una tabla, y puedes volver a la de ayer.
+
+28
+00:02:39,237 --> 00:02:42,606
+Pide la lista como estaba el 24, y ahí está ella.
+
+29
+00:02:44,106 --> 00:02:47,236
+En esta tabla, borrar ni siquiera reescribe el archivo.
+
+30
+00:02:48,336 --> 00:02:53,386
+Para ahorrar tiempo, solo marca su fila como borrada, en un archivo que todavía la guarda.
+
+31
+00:02:54,686 --> 00:02:57,267
+Así que el trabajo reescribe esos archivos, sin ella.
+
+32
+00:02:58,567 --> 00:03:02,625
+Los archivos viejos se guardan siete días, para poder deshacer un error.
+
+33
+00:03:04,225 --> 00:03:11,283
+Después el trabajo limpia, con un comando llamado VACUUM: cada noche quita los archivos viejos de más de siete días.
+
+34
+00:03:12,783 --> 00:03:15,351
+El miércoles 2 de diciembre, se van los suyos.
+
+35
+00:03:16,851 --> 00:03:19,208
+Desde entonces, ninguna consulta puede recuperarla.
+
+36
+00:03:22,708 --> 00:03:24,745
+Borrar solo su fila no duraría.
+
+37
+00:03:25,845 --> 00:03:31,398
+Cada semestre, la lista se reconstruye con los registros de RR. HH., con los tutores que dijeron que sí.
+
+38
+00:03:32,098 --> 00:03:35,424
+Su sí de 2023 la traería de vuelta enseguida.
+
+39
+00:03:36,724 --> 00:03:41,383
+Así que su no va adonde se hace la lista: a su registro, en el sistema de RR. HH.
+
+40
+00:03:42,483 --> 00:03:46,477
+Ingrid Holm, dueña de los registros de RR. HH., lo anota ahí esa misma mañana.
+
+41
+00:03:47,777 --> 00:03:49,959
+Luego le siguen todas las tablas que salen de él.
+
+42
+00:03:51,059 --> 00:03:56,411
+Una de ellas solo añade filas: el registro de envíos, que guarda a quién se envió cada boletín.
+
+43
+00:03:57,111 --> 00:04:00,688
+Reconstruir la lista nunca lo toca, así que tiene su propio borrado.
+
+44
+00:04:02,188 --> 00:04:03,795
+Y el trabajo nunca la nombra.
+
+45
+00:04:04,495 --> 00:04:10,026
+Sus números están en una tabla restringida que solo la oficina de privacidad y sus trabajos pueden leer.
+
+46
+00:04:11,126 --> 00:04:15,495
+El código del trabajo solo dice: petición 2026-117.
+
+47
+00:04:18,995 --> 00:04:20,016
+¿Dónde más está?
+
+48
+00:04:21,116 --> 00:04:27,267
+La plataforma muestra cada tabla hecha con los registros de RR. HH., y la etiqueta de cada columna dice qué guarda.
+
+49
+00:04:28,567 --> 00:04:30,075
+Su correo está en la lista.
+
+50
+00:04:30,775 --> 00:04:32,773
+Su número de empleada está en el registro de envíos.
+
+51
+00:04:34,073 --> 00:04:39,017
+Una línea sale de la plataforma: la herramienta de correo, que copia la lista cada noche.
+
+52
+00:04:40,317 --> 00:04:43,786
+Cuando su fila se va, la herramienta también la quita, a las cuatro de esa mañana.
+
+53
+00:04:45,086 --> 00:04:48,791
+Su contrato dice que sus propias copias de respaldo la pierden en treinta días.
+
+54
+00:04:50,491 --> 00:04:52,401
+Algunas copias ni siquiera aparecen aquí.
+
+55
+00:04:53,701 --> 00:04:59,252
+Cada noche, una copia de los datos de la plataforma va a un lugar aparte, bloqueada treinta días.
+
+56
+00:05:00,752 --> 00:05:03,567
+Nadie puede borrarla antes de tiempo, ni siquiera cuando debería.
+
+57
+00:05:05,067 --> 00:05:11,782
+Así que su fila sigue en las copias hechas antes del 25, fuera de uso, hasta que cada una se elimina sola.
+
+58
+00:05:13,382 --> 00:05:15,633
+La última se va el 24 de diciembre.
+
+59
+00:05:17,333 --> 00:05:23,595
+Y si alguna vez se restaura una copia, el trabajo vuelve a aplicar cada petición respondida, antes de que nadie la lea.
+
+60
+00:05:25,295 --> 00:05:29,050
+Como el recibo de Kanesh: cualquier copia que aparezca es nula.
+
+61
+00:05:32,550 --> 00:05:33,970
+Algunos de sus datos deben quedarse.
+
+62
+00:05:35,070 --> 00:05:41,642
+Sus contratos y horas son registros de nómina, y la ley manda guardarlos siete años tras el fin de cada contrato.
+
+63
+00:05:42,942 --> 00:05:48,292
+Cuando un contrato termina, sus registros de nómina solo los abre el equipo de registros de RR. HH.
+
+64
+00:05:48,992 --> 00:05:55,219
+Un año después de escritos, los archivos de la tabla pasan al nivel de archivo del almacenamiento: el más barato, y fuera de línea.
+
+65
+00:05:56,519 --> 00:06:02,233
+Un archivo ahí no puede leerse, ni siquiera para borrar filas, hasta que se recupera, y eso tarda horas.
+
+66
+00:06:02,933 --> 00:06:04,190
+Pero frío no es borrado.
+
+67
+00:06:05,490 --> 00:06:08,880
+Así que sus archivos se agrupan por el año en que terminó cada contrato.
+
+68
+00:06:10,180 --> 00:06:15,182
+Cada enero, un trabajo de limpieza recupera el año cuyos siete años ya pasaron.
+
+69
+00:06:16,682 --> 00:06:20,157
+Luego borra ese año entero, salvo la parte que guarde una retención.
+
+70
+00:06:20,857 --> 00:06:26,805
+Los registros de Linh se van en cuatro pasos, de enero de 2031 a enero de 2034.
+
+71
+00:06:30,305 --> 00:06:32,767
+También hay copias en lo que la gente escribe.
+
+72
+00:06:34,067 --> 00:06:38,492
+La plataforma guarda el texto de cada consulta durante un año, y nadie puede editarlo.
+
+73
+00:06:39,992 --> 00:06:46,393
+Si alguien hubiera escrito su correo en una consulta, quedaría ahí un año, a la vista de los administradores de la plataforma.
+
+74
+00:06:48,093 --> 00:06:52,231
+Por eso borrados, comprobaciones y búsquedas nombran la petición, nunca a la persona.
+
+75
+00:06:53,931 --> 00:06:55,741
+Los agentes también guardan lo que se les dice.
+
+76
+00:06:57,041 --> 00:07:03,093
+La traza de un agente registra cada prompt y cada respuesta, y el gateway por el que pasan guarda su propia tabla.
+
+77
+00:07:04,593 --> 00:07:12,229
+Por eso los correos se enmascaran antes de guardar una traza, y las trazas y las tablas del gateway se borran a los treinta días.
+
+78
+00:07:14,129 --> 00:07:16,956
+Y el ticket del repositorio no nombra a nadie.
+
+79
+00:07:18,256 --> 00:07:24,542
+Lo que se escribe ahí es difícil de retirar: un issue guarda sus ediciones, y cada commit se copia en cada clon.
+
+80
+00:07:28,842 --> 00:07:35,825
+Miércoles 2 de diciembre: su fila ya no está en la lista, el registro de envíos, los archivos viejos ni la herramienta de correo.
+
+81
+00:07:37,125 --> 00:07:40,492
+24 de diciembre: se va la última copia bloqueada.
+
+82
+00:07:41,792 --> 00:07:45,197
+Enero de 2034: lo último de sus registros de nómina.
+
+83
+00:07:46,497 --> 00:07:49,757
+Cada copia tuvo su fecha, y cada paso queda registrado.
+
+84
+00:07:51,457 --> 00:07:57,520
+En Kanesh, una deuda pagada seguía pagada, porque su tablilla se rompía, o era nula dondequiera que apareciera.
+
+85
+00:07:59,020 --> 00:08:05,344
+En la universidad, Linh sigue fuera de la lista, porque cada copia de su fila se fue, o ya nunca puede usarse.
+
+86
+00:08:06,844 --> 00:08:09,414
+Borrar termina cuando se va la última copia.

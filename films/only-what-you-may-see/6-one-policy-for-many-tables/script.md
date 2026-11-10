@@ -241,7 +241,7 @@ New files only, so no cited line moves, in `films/analytics-engineering/project/
 - `registrar/policies/studies.sql`: the study's shelf, the four classes masked whole, the study's group let through.
 - `registrar/policies/check.sql`: run after the policies: fails the job if a table on the core shelf has learners' rows and no column tagged `faculty`, or if a table with personal data has no level.
 - `registrar/resources/policies.job.yml`: the bundle's job, one SQL task per file, in order.
-- `docs/databricks-governance.md`: a new section before its sources, *12. One policy for each class*, pointing to the example, and its sources added to the list (numbered on the day it merges, after the films before it). Section 3 (one policy for `direct`) stays as it is.
+- `docs/databricks-governance.md`: a new section before its sources, *13. One policy for each class*, pointing to the example, and its sources added to the list (numbered on the day it merges, after the films before it: *Deleted means deleted* took section 12 on 10 November). Section 3 (one policy for `direct`) stays as it is.
 
 ## Labs (candidates, for the module's set)
 

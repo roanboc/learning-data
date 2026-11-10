@@ -45,5 +45,6 @@
     ]
   },
   "next_h": "You've seen where an agent's rights come from: its role's steps on the map. Next: how every tool holds it to that.",
-  "next_h_es": "Viste de dónde vienen los permisos de un agente: de los pasos de su rol en el mapa. Después: cómo cada herramienta lo hace cumplir."
+  "next_h_es": "Viste de dónde vienen los permisos de un agente: de los pasos de su rol en el mapa. Después: cómo cada herramienta lo hace cumplir.",
+  "draft": true
 }

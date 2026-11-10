@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/hot-warm-cold/soundtrack.mp3",
+      "size": 6398580,
+      "sha256": "e18f56f70161d31533c635760a67fc475b63dd3fc993cfd01f98301f3d4e028b",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-hot-warm-cold-13f4d640718e5f954770/e18f56f70161d31533c635760a67fc475b63dd3fc993cfd01f98301f3d4e028b.mp3"
+    }
+  ]
+}

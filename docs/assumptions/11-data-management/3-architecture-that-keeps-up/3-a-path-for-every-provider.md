@@ -1,8 +1,8 @@
 # A path for every provider: questions and assumptions
 
-*Data management* · *Architecture that keeps up*, film 3 · open, PR #230 · [pull request](https://github.com/roanboc/learning-data/pull/230)
+*Data management* · *Architecture that keeps up*, film 3 · merged, PR #230 · [pull request](https://github.com/roanboc/learning-data/pull/230)
 
-On the site once PR #230 merges: https://data.learn-all.org/architecture-that-keeps-up/a-path-for-every-provider/
+[Watch it on the site](https://data.learn-all.org/architecture-that-keeps-up/a-path-for-every-provider/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

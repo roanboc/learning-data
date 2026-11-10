@@ -1,8 +1,8 @@
 # Defined in the open: questions and assumptions
 
-*Modern data basics* · *From tables to decisions*, film 2 · open, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167)
+*Modern data basics* · *From tables to decisions*, film 2 of 3 · merged, PR #167 · [pull request](https://github.com/roanboc/learning-data/pull/167)
 
-On the site once PR #167 merges: https://data.learn-all.org/from-tables-to-decisions/define-it-once/
+[Watch it on the site](https://data.learn-all.org/from-tables-to-decisions/define-it-once/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

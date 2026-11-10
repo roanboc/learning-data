@@ -45,7 +45,13 @@ AG_PLACES.ddVault=c=>dp_paintHall(c,{seed:57,horizon:800,vx:960,lights:10,panes:
 // words in the frame, for a close shot: drawn under the frame's own transform; the frost behind them is the place as the camera sees it
 const DD_VIEWS={};
 function dd_view(place,cam){let v=DD_VIEWS[place];if(!v)v=DD_VIEWS[place]={c:mkCanvas(480,270),key:""};const key=cam.x.toFixed(1)+","+cam.y.toFixed(1)+","+cam.z.toFixed(4);
-  if(v.key!==key){v.key=key;const x=v.c.getContext("2d"),src=dp_place0(place),w=W/cam.z,h=H/cam.z;x.drawImage(src,cam.x-w/2,cam.y-h/2,w,h,0,0,480,270);DP_FROSTED.delete(v.c);}return v.c;}
+  if(v.key!==key){v.key=key;const x=v.c.getContext("2d"),src=dp_place0(place),w=W/cam.z,h=H/cam.z;x.drawImage(src,cam.x-w/2,cam.y-h/2,w,h,0,0,480,270);
+    if(DD_WARM[place]){x.fillStyle=DD_WASH;x.fillRect(0,0,480,270);}DP_FROSTED.delete(v.c);}return v.c;}
+// the opening story's rooms are lit by a lamp and the sun: glass there is smoked, darker than the room, so its words read on it
+const DD_WARM={ddRoom:1,ddAshur:1,ddRoad:1},DD_WASH="rgba(14,8,4,0.7)",DD_DARK={};
+// a whole warm place, smoked, for glass drawn under the shot's camera (behind: dd_dark(place))
+function dd_dark(place){let c=DD_DARK[place];if(c)return c;c=DD_DARK[place]=mkCanvas(480,270);const x=c.getContext("2d");x.imageSmoothingQuality="high";
+  x.drawImage(dp_place0(place),0,0,W,H,0,0,480,270);x.fillStyle=DD_WASH;x.fillRect(0,0,480,270);return c;}
 function dd_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);fn();ctx.restore();}
 // a phase: 0 before t0, rising to 1 over d
 const dd_k=(t,t0,d)=>clamp((t-t0)/(d||0.5),0,1);

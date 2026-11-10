@@ -97,7 +97,7 @@ scene("tablet",(ctx,S,t,sc)=>{
     {at:0,place:"ddRoom",keys:[dd_key(0,"WIDE")],push:0.03,draw:(c,tt,cam)=>room(c,tt,cam,{tin:null,cloth:null,mine:null,n:0})},
     {at:T.mer-0.3,place:"ddRoad",keys:[[0,960,540,1]],push:0.03,draw:(c,tt,cam)=>{dd_seen("ddRoad",cam);
       dd_caravan(c,lerp(0.04,0.6,ag_sine((tt-T.mer+0.6)/(T.bring-T.mer+1.2))),tt,1);
-      dp_tag(c,1080,300,"Ashur · weeks away","cyan",{a:ag_in(tt,T.weeks-0.1,0.4),to:[1620,552],p:ag_sine((tt-T.weeks)/0.6)});}},
+      dp_tag(c,1080,300,"Ashur · weeks away","cyan",{behind:dd_dark("ddRoad"),a:ag_in(tt,T.weeks-0.1,0.4),to:[1620,552],p:ag_sine((tt-T.weeks)/0.6)});}},
     {at:T.bring-0.3,place:"ddRoom",d:1.9,push:0,keys:[dd_key(0,"TABLE"),dd_key(T.loan-0.4,"WRITE"),dd_key(T.keeps+0.1,"SHELF"),dd_key(T.paying-0.3,"MID"),dd_key(T.sit-0.5,"SHELF")],
       draw:(c,tt,cam)=>room(c,tt,cam,{mine:tt<T.loan-0.1?null:mine(tt)})},
     {at:T.house-0.3,place:"ddAshur",keys:[dd_key(0,"ASHUR")],push:0.03,draw:(c,tt,cam)=>{dd_seen("ddAshur",cam);dd_ashurLive(c,tt,{});}},
@@ -138,12 +138,12 @@ scene("void",(ctx,S,t,sc)=>{
       dd_ashurLive(c,tt,{hl:1-ag_in(tt,T.voidW,0.5),grey:ag_in(tt,T.voidW,0.6),stamp:tt-T.voidW-0.1});}},
     {at:T.stays-0.35,place:"ddRoom",d:2.0,push:0.02,keys:[dd_key(0,"WIDE"),dd_key(T.more,"MID")],draw:(c,tt,cam)=>room(c,tt,cam,{})},
     {at:T.data-0.3,place:"ddHall",keys:[[0,960,540,1]],push:0.025,draw:(c,tt,cam)=>{dd_seen("ddHall",cam);
-      dd_hallShelf(c,tt,{n:clamp((tt-T.data+0.1)/0.9*6,0,6),mine:1,now:ag_in(tt,T.gone-0.1,0.6),glow:ag_in(tt,T.old,0.5)*(1-ag_in(tt,T.staysD,0.5)),
+      dd_hallShelf(c,tt,{n:clamp((tt-T.data+0.1)/2.4*6,0,6),mine:1,now:ag_in(tt,T.gone-0.1,0.6),glow:ag_in(tt,T.old,0.5)*(1-ag_in(tt,T.staysD,0.5)),
         crack:[clamp((tt-T.broke2)/0.9,0,1),clamp((tt-T.broke2-0.35)/0.9,0,1)],grey:ag_in(tt,T.never,0.8)});
       dd_history(c,520,150,620,[["DELETE · her row","ink",clamp((tt-T.writes)/0.6,0,1)]],{a:ag_in(tt,T.writes-0.2,0.4),k:Math.min(1,ag_spr(tt,T.writes-0.2,0.5))});
-      dd_pillAt(c,1120,680,"Gone","green",tt,T.gone,null,{align:"center",size:28});
-      dp_tag(c,250,690,"Old copies, still there","violet",{a:dd_io(tt,T.old+0.2,T.staysD-0.3,0.4),to:[520,560],p:ag_sine((tt-T.old-0.3)/0.5)});
-      dd_pillAt(c,820,780,"Stays deleted","green",tt,T.staysD,null,{align:"center",size:30});}}
+      dd_pillAt(c,1120,680,"Gone","green",tt,T.gone,sc.cues.breath+0.6,{align:"center",size:28});
+      dp_tag(c,150,320,"Old copies, still there","violet",{a:dd_io(tt,T.old+0.2,T.staysD-0.3,0.4),to:[524,488],p:ag_sine((tt-T.old-0.3)/0.5)});
+      dd_pillAt(c,820,780,"Stays deleted","green",tt,T.staysD,sc.cues.breath+0.6,{align:"center",size:30});}}
   ]);
   dd_frameCard(ctx,S,96,130,620,{kick:"Paid",title:"Handed back, and broken"},t,T.broken+0.2,T.handed-0.6,{col:"green"});
   dd_frameCard(ctx,S,96,130,700,{kick:"The receipt",title:"Paid. Any tablet of it that turns up is void."},t,T.any-0.2,T.stays-0.5);
@@ -248,7 +248,7 @@ scene("source",(ctx,S,t,sc)=>{
       dd_cardAt(c,60,150,440,{title:"Ingrid Holm",sub:"Owns HR's records"},tt,T.ingrid,adds-0.4);
       // HR's record, and the list made from it each semester
       dd_hrPane(c,560,150,{a:ag_in(tt,T.semester-0.3,0.4)*p1(tt),hl:ag_in(tt,T.yes,0.4),no:clamp((tt-T.puts)/0.5,0,1)});
-      dd_tablePage(c,1220,150,650,300,{a:ag_in(tt,0.2,0.4)*p1(tt),name:"hr.mart_hr__tutors_mailing_list",cols:[{t:"staff_id",w:200},{t:"given_name",w:240}],
+      dd_tablePage(c,1220,150,650,340,{a:ag_in(tt,0.2,0.4)*p1(tt),name:"hr.mart_hr__tutors_mailing_list",cols:[{t:"staff_id",w:200},{t:"given_name",w:240}],
         rows:[{cells:["E-4602","Ethan"]},{cells:["E-4417","Linh"],dash:true,a:ag_in(tt,T.straight-0.3,0.4)*(1-ag_in(tt,T.follows,0.6))}]});
       dd_link(c,[1140,330],[1220,330],"cyan",clamp((tt-T.rebuilt)/0.5,0,1),ag_in(tt,T.rebuilt,0.3)*p1(tt));
       dp_tag(c,1000,560,"Rebuilt each semester","cyan",{a:dd_io(tt,T.rebuilt+0.2,T.no-0.3,0.4),to:[1180,330],p:ag_sine((tt-T.rebuilt-0.3)/0.5)});
@@ -312,7 +312,7 @@ scene("copies",(ctx,S,t,sc)=>{
       dp_slip(c,700,520,"25 Nov, 04:00","cyan",{a:ag_in(tt,T.four-0.1,0.4)*p1});
       dd_cardAt(c,700,640,640,{kick:"The tool's contract",title:"Its own backups lose her within 30 days"},tt,T.contract,show-0.3);
       // the place apart: a copy each night, locked for 30 days
-      DD_COPIES.forEach(([lab,her],i)=>{const k=ag_in(tt,T.copy+0.15*(4-i),0.4),gone=i>=3?ag_in(tt,T.removed+0.4*(i-3),0.6):0,x=DD_CX,y=DD_CY+i*DD_CDY;
+      DD_COPIES.forEach(([lab,her],i)=>{const k=ag_in(tt,T.copy+0.3*(4-i),0.4),gone=i>=3?ag_in(tt,T.removed+0.4*(i-3),0.6):0,x=DD_CX,y=DD_CY+i*DD_CDY;
         // the restored copy goes to the platform's door, and back as void
         const mv=i===2?ag_sine(clamp((tt-T.restored)/1.6,0,1)):0,cx=lerp(x,1240,mv),cy=lerp(y,520,mv);
         dd_copy(c,cx,cy,{a:k*(1-gone),mine:her?ag_in(tt,T.row,0.5):0,label:mv>0.05?null:lab,labelCol:her&&tt>T.row?"violet":"mut"});
@@ -499,7 +499,7 @@ scene("gone",(ctx,S,t,sc)=>{
       // Linh, off the list: only Ethan is on it now
       const la=ag_in(tt,T.off,0.7);if(la>0){c.save();c.globalAlpha*=la;dp_person(c,"linh",560,650,0.9,{t:tt,gaze:[3,-1]});c.restore();}
       dd_listPage(c,820,200,{a:ag_in(tt,T.off+0.3,0.5),out:1});
-      dd_pillAt(c,820,640,"Off the list","green",tt,T.offW,null,{size:30});}}
+      dd_pillAt(c,820,640,"Off the list","green",tt,T.offW,sc.cues.breath+0.6,{size:30});}}
   ]);
   dd_where(ctx,S,"Kanesh, Anatolia · about 1900 BC",dd_io(t,T.kanesh,T.off-0.5,0.5));
   dp_end(ctx,S,t,sc.cues.breath,"Deleted means deleted","Deleting is done when the last copy is gone.","Film 4 of 5","Kept for a reason");

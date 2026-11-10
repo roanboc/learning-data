@@ -1,0 +1,18 @@
+/* Learning Data: "Pausa para pensar" de Copies that keep the rules, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (madeup, share, room), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  madeup:{q:"Jun quiere probar su cambio con los expedientes de los estudiantes, en desarrollo. ¿Qué copia debe recibir desarrollo?",
+    opts:[{t:"Una copia enmascarada, escrita a través de las políticas, con cada valor ya oculto.",near:true},{t:"Un clon, hecho por alguien que las políticas excluyen, ya que solo Jun lo leerá."},{t:"Estudiantes inventados, con las columnas y clases de producción, y ninguno real.",ok:true}],
+    why:"Un clon se le niega a quien cubren las políticas, y uno hecho por alguien que ellas excluyen guarda cada valor real y ninguna clase en sus columnas, así que ninguna política lo alcanza. Una copia enmascarada sigue siendo de personas reales, y una columna que nadie ha clasificado pasa tal cual. Los estudiantes inventados son fieles a los reales, y ninguno es nadie. ¿Qué guardan hoy tus datos de desarrollo?"},
+  share:{q:"El hospital universitario, que también usa Databricks, quiere planear sus plazas con los expedientes. ¿Qué debe compartirle la universidad?",
+    opts:[{t:"Una tabla de totales, con las cifras pequeñas ya ocultas: sus políticas no viajan.",ok:true},{t:"La tabla de estudiantes misma, porque sus políticas ocultan cada clase donde se lea.",near:true},{t:"Un archivo de la tabla de estudiantes, enviado una vez por correo, ya firmado el acuerdo."}],
+    why:"Las políticas viven en el catálogo de la universidad. Quien comparte una tabla debe quedar fuera de ellas, y el hospital la lee en su propia plataforma, donde nunca se aplican, así que una tabla de estudiantes compartida mostraría cada nombre. Se comparte solo una tabla que ya muestra lo que puede salir, y un proceso quita el acceso en la fecha de fin del acuerdo. ¿Cuál de lo que compartes mostraría cada valor?"},
+  room:{q:"En la sala limpia, el código del hospital cuenta cuántos estudiantes aprobaron. ¿Qué impide que salga una cifra menor que 10?",
+    opts:[{t:"El hospital, que lee solo los totales que pidió y deja fuera todo lo demás."},{t:"El código aprobado: oculta toda cifra menor que 10 antes de que algo salga.",ok:true},{t:"La sala limpia, que oculta por sí sola las cifras pequeñas en todo lo que sale.",near:true}],
+    why:"Una sala limpia le muestra a cada lado solo los nombres de las columnas del otro, y corre solo código que los demás aprobaron, pero no oculta nada por sí sola: lo que sale es lo que escribe el código aprobado. Por eso la universidad lee el código antes de aprobarlo, y el código oculta toda cifra menor que 10. ¿Quién lee el código antes de que tus datos se encuentren con los de otros?"}
+  }}
+};

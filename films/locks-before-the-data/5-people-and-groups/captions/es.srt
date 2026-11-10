@@ -1,0 +1,291 @@
+1
+00:00:01,800 --> 00:00:05,239
+Moss, en un fiordo de Noruega, en los años setenta.
+
+2
+00:00:06,939 --> 00:00:09,417
+Aquí, una fábrica hace cerraduras, y patines de hielo.
+
+3
+00:00:10,717 --> 00:00:12,703
+Tor Sørnes dirige su investigación.
+
+4
+00:00:14,203 --> 00:00:16,227
+Los hoteles tienen un problema con sus llaves.
+
+5
+00:00:17,527 --> 00:00:21,276
+Los huéspedes olvidan devolverlas al irse, o las pierden en el camino.
+
+6
+00:00:22,776 --> 00:00:27,439
+Y una llave sigue abriendo su puerta, la tenga quien la tenga, mucho después de terminada la estancia.
+
+7
+00:00:29,139 --> 00:00:35,033
+Quien encontrara una, o se la quedara, podía entrar en la habitación del siguiente huésped mientras dormía.
+
+8
+00:00:36,733 --> 00:00:38,173
+Algo tiene que cambiar.
+
+9
+00:00:42,273 --> 00:00:45,324
+Sørnes hace una cerradura que se abre con una tarjeta de plástico perforada.
+
+10
+00:00:46,624 --> 00:00:50,429
+Dentro de cada cerradura hay una tarjeta patrón, puesta desde dentro de la habitación.
+
+11
+00:00:51,929 --> 00:00:57,560
+Para cada huésped nuevo, el hotel pone un patrón nuevo, y le da al huésped una tarjeta perforada que coincide.
+
+12
+00:00:59,260 --> 00:01:01,344
+La tarjeta del huésped anterior no abre nada.
+
+13
+00:01:03,244 --> 00:01:09,955
+En 1978, las primeras se instalan en un gran hotel nuevo de Atlanta, que había sufrido robos.
+
+14
+00:01:11,655 --> 00:01:18,061
+Ahora una tarjeta perdida no abre nada en cuanto llega el siguiente huésped, y cambiar la cerradura solo pide una tarjeta nueva.
+
+15
+00:01:19,561 --> 00:01:27,984
+Para 2011, según la empresa, sus cerraduras de tarjeta están en seis millones y medio de habitaciones de hotel, en 166 países.
+
+16
+00:01:29,684 --> 00:01:31,215
+Una llave que termina con la estancia.
+
+17
+00:01:33,315 --> 00:01:40,897
+En la universidad, un lugar en la plataforma podía durar más que el puesto de alguien, y el poder de un administrador, más que la tarea.
+
+18
+00:01:41,997 --> 00:01:44,684
+Y un token personal no tenía ninguna fecha de fin.
+
+19
+00:01:46,384 --> 00:01:53,124
+Esta película construye la respuesta a partir de tres películas anteriores, en Microsoft Entra ID y Azure Databricks.
+
+20
+00:02:00,624 --> 00:02:04,019
+Sam Okafor cuida la plataforma de datos de la universidad.
+
+21
+00:02:05,119 --> 00:02:11,855
+Sus tablas ya dan sus permisos a grupos del directorio de la universidad, como mostró Gobernanza en Unity Catalog.
+
+22
+00:02:13,355 --> 00:02:16,027
+Pero quién podía entrar siquiera era una lista llevada a mano.
+
+23
+00:02:17,327 --> 00:02:22,175
+Al espacio de trabajo se le habían dado personas, una por una: 214.
+
+24
+00:02:23,675 --> 00:02:27,423
+Diecinueve se habían ido a puestos que no lo necesitaban, y seguían entrando.
+
+25
+00:02:28,923 --> 00:02:33,644
+Se habían creado cuatro grupos dentro del espacio de trabajo, y el directorio no sabía nada de ellos.
+
+26
+00:02:35,144 --> 00:02:39,702
+Once personas eran sus administradores, con las mismas cuentas con que leían su correo.
+
+27
+00:02:41,002 --> 00:02:44,513
+Una página falsa que atrapara uno de sus accesos atraparía a un administrador.
+
+28
+00:02:46,213 --> 00:02:50,148
+Todos entraban con una contraseña y un código por SMS.
+
+29
+00:02:51,448 --> 00:02:57,177
+Y el token personal de Jun, creado en 2024 sin fecha de fin, ejecutaba el proceso nocturno.
+
+30
+00:02:58,877 --> 00:03:03,997
+Como las llaves de hotel antes de la tarjeta, cada uno seguía abriendo su puerta, mucho después de la estancia.
+
+31
+00:03:07,897 --> 00:03:13,292
+El directorio de la universidad es Microsoft Entra ID, y lo alimentan los registros de Recursos Humanos.
+
+32
+00:03:14,592 --> 00:03:18,719
+Cuando alguien llega, se crea su cuenta, ya en los grupos de su equipo.
+
+33
+00:03:20,019 --> 00:03:24,197
+Cuando cambia de puesto, cambian sus grupos; cuando se va, su cuenta se desactiva.
+
+34
+00:03:25,697 --> 00:03:32,691
+Ahora Azure Databricks lee el directorio por sí mismo: sus personas y sus grupos, también grupos dentro de grupos.
+
+35
+00:03:34,191 --> 00:03:39,162
+Sam activa su administración automática de identidades, una vez, para toda la cuenta.
+
+36
+00:03:40,862 --> 00:03:44,024
+Luego, a cada espacio de trabajo se le dan grupos, nunca personas.
+
+37
+00:03:45,324 --> 00:03:51,577
+A producción se le da el equipo de datos, la oficina del registro, y los lectores que permite el dueño de cada área.
+
+38
+00:03:53,077 --> 00:03:57,818
+Los cuatro grupos hechos a mano ya no están: sus personas están ahora en los grupos del directorio.
+
+39
+00:03:59,318 --> 00:04:02,464
+Los grupos se cambian en un solo lugar: el directorio.
+
+40
+00:04:03,964 --> 00:04:07,746
+Cada vez que alguien entra, Databricks vuelve a leer sus grupos.
+
+41
+00:04:09,046 --> 00:04:13,538
+Así, cuando alguien pasa a otro equipo, la plataforma lo sigue en su próximo acceso.
+
+42
+00:04:15,038 --> 00:04:21,021
+Y cuando alguien se va, Databricks desactiva su usuario en la siguiente sincronización, y nada puede entrar en su nombre.
+
+43
+00:04:24,721 --> 00:04:28,193
+Todos entran de la misma forma, una vez, a través del directorio.
+
+44
+00:04:29,293 --> 00:04:37,776
+Allí, una directiva de acceso condicional no deja a nadie llegar a Azure Databricks sin llave de acceso, que ninguna página falsa atrapa.
+
+45
+00:04:39,476 --> 00:04:43,970
+Vive en su propio teléfono, en la aplicación Authenticator, o en una llave de seguridad.
+
+46
+00:04:45,270 --> 00:04:52,472
+Mei Tanaka, dueña de los datos del registro, entra con su teléfono: su cara desbloquea la llave de acceso, y ya está dentro.
+
+47
+00:04:54,172 --> 00:04:57,671
+No hay contraseña que escribir, ni ninguna que una página falsa pueda usar.
+
+48
+00:04:59,371 --> 00:05:04,919
+Como mostró ¿Quién es, de verdad?, la misma regla pide el acuerdo de confidencialidad de cada persona.
+
+49
+00:05:06,019 --> 00:05:11,163
+Nadie llega a la plataforma antes de aceptarlo, y todos lo vuelven a aceptar cada año.
+
+50
+00:05:12,463 --> 00:05:14,904
+El directorio guarda quién lo aceptó, y cuándo.
+
+51
+00:05:18,604 --> 00:05:21,624
+El gran poder también va a grupos, y nadie está en ellos.
+
+52
+00:05:23,324 --> 00:05:30,757
+Cada rol de administrador, en la cuenta de Databricks, en cada espacio de trabajo y en Azure, es de un grupo cuyo nombre empieza por admin.
+
+53
+00:05:32,457 --> 00:05:40,546
+Solo dos personas pueden encender uno, Sam y Jun, cada uno desde una segunda cuenta para eso, que entra solo con llave de seguridad.
+
+54
+00:05:42,446 --> 00:05:49,969
+El interruptor es Privileged Identity Management de Microsoft Entra: esas cuentas son aptas para los grupos, nunca están en ellos.
+
+55
+00:05:52,069 --> 00:06:01,074
+El 19 de octubre, Sam necesita saber quién aún tiene tokens personales: el informe de tokens, que solo lee un administrador de la cuenta.
+
+56
+00:06:02,774 --> 00:06:06,853
+Así que enciende el grupo de la configuración de la cuenta por una hora, y escribe por qué.
+
+57
+00:06:08,553 --> 00:06:09,562
+Jun lo aprueba.
+
+58
+00:06:11,262 --> 00:06:14,150
+En segundos, su cuenta de administrador está en el grupo.
+
+59
+00:06:15,850 --> 00:06:21,335
+Y una alerta llega al equipo de la plataforma: quién, qué grupo, por qué, quién lo aprobó, hasta cuándo.
+
+60
+00:06:23,235 --> 00:06:28,467
+Databricks lee sus grupos cuando entra, y durante esta hora puede leer el informe.
+
+61
+00:06:30,167 --> 00:06:35,465
+Luego sale, y cuando se cumple la hora, el directorio saca su cuenta de administrador del grupo.
+
+62
+00:06:37,165 --> 00:06:42,195
+Como un patrón nuevo en la cerradura del hotel, cada encendido abre una estancia, y termina con ella.
+
+63
+00:06:46,095 --> 00:06:51,783
+El informe muestra siete tokens personales: seis de personas, para su línea de comandos, y el de Jun.
+
+64
+00:06:53,083 --> 00:06:57,306
+Pero la línea de comandos ya puede entrar a través del navegador, con la misma llave de acceso.
+
+65
+00:06:58,606 --> 00:07:07,486
+La CLI de Databricks guarda sus propios pases breves, de una hora cada uno, en el almacén seguro del equipo: nada que copiar ni pegar.
+
+66
+00:07:08,986 --> 00:07:12,149
+Así que los seis entran de esa forma, y anulan sus propios tokens.
+
+67
+00:07:13,649 --> 00:07:21,856
+El de Jun ejecuta el proceso nocturno, hasta que Cargas sin secretos le da al proceso su propia entrada, y lo anula el 3 de noviembre.
+
+68
+00:07:23,356 --> 00:07:31,111
+Esa tarde, Sam enciende la configuración de los espacios de trabajo por treinta minutos, Jun lo aprueba, y Sam apaga los tokens personales.
+
+69
+00:07:32,811 --> 00:07:36,041
+Ahora nadie puede crear un token personal, ni usarlo.
+
+70
+00:07:39,741 --> 00:07:45,870
+En los hoteles de los años setenta, un patrón nuevo para cada huésped hacía que una tarjeta perdida no abriera nada.
+
+71
+00:07:47,370 --> 00:07:53,755
+En la universidad, un lugar en la plataforma ahora termina con el puesto, y el poder de administrador termina con la tarea.
+
+72
+00:07:54,855 --> 00:07:57,891
+Y no queda ningún token personal que dure más que nadie.
+
+73
+00:07:59,591 --> 00:08:04,340
+Las personas entran una vez, sin contraseña que robar; el poder se toma prestado, no se guarda.

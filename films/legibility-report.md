@@ -119,6 +119,7 @@
 | No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
 | Walls, doors and keys | 177 | 0% | 0 | 31.4 | Drawn to the rule |
 | Power you switch on | 205 | 0% | 0 | 28.0 | Drawn to the rule |
+| People and groups | 313 | 0% | 0 | 28.3 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |

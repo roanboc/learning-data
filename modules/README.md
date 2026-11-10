@@ -269,7 +269,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
 
 ### Only what you may see
 
@@ -361,7 +361,7 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 
 ## Data management
 

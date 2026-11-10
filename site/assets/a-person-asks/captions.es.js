@@ -86,8 +86,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La oficina de Mei guarda el registro maestro de Linh, P-10482.",
 "From its links come her numbers in every system: six in all.":
 "De sus vínculos salen sus números en cada sistema: seis en total.",
-"In the data project, dbt lists every model built from those five systems: twenty-nine.":
-"En el proyecto de datos, dbt lista cada modelo hecho a partir de esos cinco sistemas: veintinueve.",
+"In the data project, dbt lists every model built from those five systems: more than thirty.":
+"En el proyecto de datos, dbt lista cada modelo hecho a partir de esos cinco sistemas: más de treinta.",
 "On the platform, lineage adds the rest: a notebook's table, a dashboard, another team's job.":
 "En la plataforma, el linaje agrega el resto: la tabla de un notebook, un panel, el trabajo de otro equipo.",
 "And the tags from Know what you hold point to each column that names a person, or holds a code for one.":
@@ -160,8 +160,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una respuesta atrasada no son datos erróneos: es trabajo pendiente.",
 "On 7 December, Linh's answer is ready, seventeen days early, and she opens it by signing in.":
 "El 7 de diciembre, la respuesta de Linh está lista, diecisiete días antes, y ella la abre al iniciar sesión.",
-"The ticket closes, and her numbers leave the table of keys.":
-"El ticket se cierra, y sus números salen de la tabla de claves.",
+"The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on 24 December.":
+"El ticket se cierra. Sus números siguen en la tabla de claves hasta que no quede ninguna copia bloqueada, el 24 de diciembre.",
 "In 1679, a keeper answered the writ with the body, and the true causes, within days.":
 "En 1679, un carcelero respondía al habeas corpus con el cuerpo, y las causas verdaderas, en días.",
 "Here, it's what's held, the true reasons, on time, and proof of each step.":

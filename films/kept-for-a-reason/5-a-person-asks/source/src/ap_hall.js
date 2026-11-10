@@ -90,10 +90,12 @@ function ap_num(c,x,y,i,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const 
   if(v<1)dp_slip(c,x,y,s,"cyan",{a:a*(1-v),size:28});if(v>0)dp_slip(c,x,y,s,"violet",{a:a*v,size:28});}
 // dbt's terminal: the example project's command, typed (u 0 to 1), and what it lists
 const AP_DBT=["$ dbt ls --resource-type model --select","    source:hr_system+ source:student_system+","    source:alumni_system+ source:research_system+","    source:learning_platform+"];
-const AP_MODELS=29;
+// the block of models on the lineage: 36 tables, what dbt lists once Deleted means deleted is in (10 Nov 2026). The words say
+// "more than 30", which stays true as the example project grows, so the film needn't change when another film adds a model
+const AP_MODELS=36,AP_COUNT="More than 30 models";
 function ap_term(c,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.globalAlpha*=a;const b=dp_page(c,x,y,w,h,{tool:"dbt",name:"dbt",where:"The data project",col:"cyan"});
   const all=AP_DBT.join("\n");let n=Math.round(clamp(o.u||0,0,1)*all.length);AP_DBT.forEach((l,i)=>{if(n<=0)return;dp_T(c,l.slice(0,n),b.x,b.y+40+i*48,{w:500,size:28,f:"mono",col:i?"ink":"cyan"});n-=l.length+1;});
-  if(o.res>0){c.save();c.globalAlpha*=o.res;dp_T(c,AP_MODELS+" models",b.x,b.y+300,{w:800,size:48});dp_T(c,"built from those five systems",b.x+dp_tw(c,AP_MODELS+" models",{w:800,size:48})+28,b.y+300,{w:600,size:28,col:"mut"});c.restore();}
+  if(o.res>0){c.save();c.globalAlpha*=o.res;dp_T(c,AP_COUNT,b.x,b.y+300,{w:800,size:48});dp_T(c,"built from those five systems",b.x+dp_tw(c,AP_COUNT,{w:800,size:48})+28,b.y+300,{w:600,size:28,col:"mut"});c.restore();}
   c.restore();}
 // the platform's lineage: five systems, the models dbt builds from them, the marts, and (rest 0 to 1) what lineage adds
 const AP_SRC=["hr_system","student_system","alumni_system","research_system","learning_platform"];
@@ -112,8 +114,9 @@ function ap_lineage(c,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const L=
   AP_REST.forEach(([s,m],i)=>dp_link(c,[L.mart.x+40+dp_tw(c,AP_MARTS[m],{w:500,size:28,f:"mono"})+20,my(m)-10],[L.rest.x-14,ry(i)-10],"cyan",rest(i),{lw:1.6,alpha:0.55,dot:false}));
   AP_SRC.forEach((s,i)=>{ap_tableIcon(c,L.src.x,sy(i),"cyan");dp_T(c,s,L.src.x+44,sy(i),{w:500,size:28,f:"mono"});});
   // the models dbt builds, as a block of small tables
-  for(let k=0;k<AP_MODELS;k++){const gx=L.blk.x+(k%6)*36,gy=L.blk.y-72+Math.floor(k/6)*30;c.fillStyle=rgba(DP.F.cyan,0.18+0.5*lit(k));rr(c,gx,gy,28,22,4);c.fill();c.strokeStyle=rgba(DP.F.cyan,0.7);c.lineWidth=1.4;c.stroke();}
-  dp_T(c,AP_MODELS+" models",L.blk.x,L.blk.y+124,{w:700,size:28,col:"mut"});
+  const top=L.blk.y-72-(Math.ceil(AP_MODELS/6)-5)*15;  // the block stays centred on its links, whatever the count
+  for(let k=0;k<AP_MODELS;k++){const gx=L.blk.x+(k%6)*36,gy=top+Math.floor(k/6)*30;c.fillStyle=rgba(DP.F.cyan,0.18+0.5*lit(k));rr(c,gx,gy,28,22,4);c.fill();c.strokeStyle=rgba(DP.F.cyan,0.7);c.lineWidth=1.4;c.stroke();}
+  dp_T(c,"More than 30",L.blk.x,L.blk.y+124,{w:700,size:28,col:"mut"});dp_T(c,"models",L.blk.x,L.blk.y+160,{w:700,size:28,col:"mut"});  // two lines: one would run into the marts
   AP_MARTS.forEach((s,i)=>{ap_tableIcon(c,L.mart.x,my(i),"cyan");dp_T(c,s,L.mart.x+40,my(i),{w:500,size:28,f:"mono"});});
   AP_REST.forEach(([s,m],i)=>{const q=rest(i);if(q<=0)return;c.save();c.globalAlpha*=q;ap_tableIcon(c,L.rest.x,ry(i),"cyan");dp_T(c,s,L.rest.x+44,ry(i),{w:600,size:28});c.restore();});
   c.restore();}
@@ -123,7 +126,8 @@ function ap_classes(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sa
   [["staff_id","personal_data: direct","violet"],["learner_key","personal_data: pseudonymous","violet"],["unit_code","none","grey"]].forEach(([col,cls,k],i)=>{const yy=y+118+i*102,q=o.each?o.each(i):1;if(q<=0)return;
     c.save();c.globalAlpha*=q;dp_T(c,col,x+30,yy,{w:500,size:28,f:"mono"});dp_pill(c,x+30,yy+52,cls,k,{glow:8});c.restore();});c.restore();}
 // the search job's badge: its own identity, owned by a person, for a logged request only
-function ap_finder(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-finder",lines:[["owned by Jun Park"],["for a logged request only"]],pic:dp_gearPic,t:o.t,a:o.a,scan:o.scan});}
+function ap_finder(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-finder",lines:[["owned by Jun Park"],["for a logged request only"]],pic:dp_gearPic,t:o.t,a:o.a});  // the light reads its picture, where no words are, so it never passes over a line of text
+  const a=o.a==null?1:o.a;if(o.scan>0&&o.scan<1&&a>0){c.save();c.globalAlpha*=a;dp_scan(c,x+28,y+88,150,176,o.scan,"cyan",12);c.restore();}}
 function ap_deleter(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-deleter",lines:[["owned by Sam Okafor"],["for an approved request only"]],pic:dp_gearPic,t:o.t,a:o.a});}
 // the search, table by table: each table, ticked when her numbers are found, and the marts where she's only a code
 const AP_STG=["stg_hr_system__staff","stg_student_system__learners","stg_alumni_system__alumni","stg_research_system__researchers","stg_learning_platform__users"];

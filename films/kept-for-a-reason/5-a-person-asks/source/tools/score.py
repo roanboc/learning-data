@@ -244,7 +244,7 @@ lock(C('oneplace', 'one place', 0.1), 0.010, px(990))
 virginal(G2, C('oneplace', 'one place', 0.1), 0.45, px(1240), ring=1.6); virginal(D3, C('oneplace', 'privacy office', 0.0), 0.42, px(1700), ring=1.4)
 
 # 4. Every place she is. Mei keeps the master record: a card. Her six numbers land in the table of keys: a note for each record found,
-#    rising (G, A, B, D, G, B). dbt lists twenty-nine: a few keys, and one note. Lineage adds the rest: a tap each. The tags: two taps.
+#    rising (G, A, B, D, G, B). dbt lists more than thirty: a few keys, and one note. Lineage adds the rest: a tap each. The tags: two taps.
 #    The job, as itself: a click. Table by table, each table found a note (D, F sharp, A, D, F sharp: D major); the marts, only a code:
 #    the low B-flat; a search for her numbers would miss them: one knock; the codes found: four notes rising on G major. Never typed:
 #    a page; each query joins the keys: a lock. Outside the platform, each owner searches their own: a tap each
@@ -254,7 +254,7 @@ tL = P('six', 'six in all', -0.8)
 for i, m in enumerate((G3, A3, B3, D4, G4, B4)):
     virginal(m, tL + 0.25 * i, 0.4, px(1170), ring=0.9)
 keys(P('dbt', 'dbt', 0.0), 4, 0.006, px(1260), 0.5)
-virginal(B3, P('dbt', 'twenty-nine', 0.0), 0.42, px(900))
+virginal(B3, P('dbt', 'more than thirty', 0.0), 0.42, px(900))
 for w_ in ("notebook's", 'dashboard', "another team's job"):
     tap(P('lineage', w_, -0.1), 0.007, px(1500))
 for w_ in ('names a person', 'code for one'):
@@ -319,8 +319,8 @@ roll((G2, D3, Bb3), O('alone', 'brought her back', 0.0), 0.16, 0.42, ring=1.6)
 
 # 7. Proof, on time. Each box ticked: a tap, as each is; the run, the history and the audit log: a page each. The table of requests:
 #    a page; a request near its date: one note, E-flat, its ring. Linh's answer ready, seventeen days early, and opened: she is
-#    answered: B-flat major and the basset horn's fourth. The ticket closes: a knock; her numbers leave the table of keys: a breath of
-#    air. 1679: the keeper answered with the body, the true causes, within days: the Act's note, the basset horn on B-flat. Here: G
+#    answered: B-flat major and the basset horn's fourth. The ticket closes: a knock; her numbers, lit where they stay in the table of keys: a
+#    tap; kept until the last locked copy is gone: a sheet laid down. 1679: the keeper answered with the body, the true causes, within days: the Act's note, the basset horn on B-flat. Here: G
 #    major, a note for each of the three things, and the low G
 F = lambda lid, word, off=0: W('proof', lid, word, off)
 for t_ in (F('ticked', 'ticked', 0.3), END('proof', 'run') + 0.2, F('history', 'history', 0.2), END('proof', 'audit') + 0.2):
@@ -335,7 +335,8 @@ roll((Bb2, F3, Bb3, D4), F('ready', 'seventeen days early', 0.0), 0.13, 0.5, rin
 answer(F('ready', 'signing in', 0.3), 0.72, hold=1.5, pan=px(900), lo=F3, hi=Bb3)
 tap(G('proof', 'closes', 0.2), 0.008, px(80))
 knock(F('closes', 'closes', -0.1), 0.010, px(520), 230)
-air(F('closes', 'her numbers', 0.5), 0.9, 0.007, px(1240), 200, 900)
+tap(F('closes', 'Her numbers', 0.4), 0.007, px(1180))
+paper(F('closes', 'until the last locked copy', -0.1), 0.008, px(520), 0.4)
 basset(Bb2, F('n1679', 'the body', -0.2), F('n1679', 'within days', 1.2), 0.62, att=0.6, rel=1.0)
 virginal(Bb3, F('n1679', 'true causes', 0.0), 0.4, px(1300))
 for w_, m in (("what's held", G3), ('true reasons', B3), ('on time', D4)):

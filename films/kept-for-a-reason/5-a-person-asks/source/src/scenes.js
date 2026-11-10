@@ -149,7 +149,7 @@ scene("clock",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
 
 /* ---------------------------------------------------------------- 4 · Every place she is */
 scene("places",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
-    master:wAt(sc,"master","master record"),nums:wAt(sc,"six","her numbers"),sixAll:wAt(sc,"six","six in all"),dbt:wAt(sc,"dbt","dbt"),n29:wAt(sc,"dbt","twenty-nine"),
+    master:wAt(sc,"master","master record"),nums:wAt(sc,"six","her numbers"),sixAll:wAt(sc,"six","six in all"),dbt:wAt(sc,"dbt","dbt"),nModels:wAt(sc,"dbt","more than thirty"),
     lineage:wAt(sc,"lineage","lineage"),nb:wAt(sc,"lineage","notebook's"),dash:wAt(sc,"lineage","dashboard"),other:wAt(sc,"lineage","another team's job"),
     tags:wAt(sc,"tags","tags"),person:wAt(sc,"tags","names a person"),code:wAt(sc,"tags","code for one"),job:wAt(sc,"job","job"),
     table:wAt(sc,"looks","Table by table"),codes:wAt(sc,"looks","codes"),marts:wAt(sc,"marts","marts"),asCode:wAt(sc,"marts","only as a code"),miss:wAt(sc,"miss","miss"),
@@ -170,7 +170,7 @@ scene("places",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     // Jun, and dbt's list of every model built from those five systems
     {at:c.dbt-0.4,place:"apRepo",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       dp_person(cx,"jun",330,650,1.0,{t:tt});
-      ap_term(cx,640,170,1240,520,{u:clamp((tt-T.dbt)/2.4,0,1),res:ag_in(tt,T.n29-0.1,0.5)});}},
+      ap_term(cx,640,170,1240,520,{u:clamp((tt-T.dbt)/2.4,0,1),res:ag_in(tt,T.nModels-0.1,0.5)});}},
     // the platform's lineage adds the rest; the tags point to the columns that name a person, or hold a code for one
     {at:c.lineage-0.4,place:"apPlatform",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
       ap_lineage(cx,{lines:ag_sine(clamp((tt-T.lineage)/1.2,0,1)),rest:i=>ag_in(tt,[T.nb,T.dash,T.other][i]-0.1,0.5)*(1-ag_in(tt,T.tags-0.6,0.5))});
@@ -232,7 +232,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     {at:c.morning-0.4,place:"apOffice",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       ap_who_at(cx,"ingrid",330,650,1.0,1-ag_in(tt,c.rebuilt-0.6,0.6),{t:tt});
       ap_person(cx,1120,140,{});
-      const sw=ag_sine(clamp((tt-T.no)/0.8,0,1));ap_wish(cx,1120,430,true,{a:1-ag_in(sw,0.3,0.7),dy:30*sw});ap_wish(cx,1120,430,false,{a:ag_in(sw,0.2,0.6),dy:-30*(1-sw)});
+      const sw=clamp((tt-T.no)/1.0,0,1),go=ag_in(sw,0,0.45),come=ag_in(sw,0.55,0.45);ap_wish(cx,1120,430,true,{a:1-go,dy:24*go});ap_wish(cx,1120,430,false,{a:come,dy:-24*(1-come)});  // the yes leaves, then the no comes: never both at once, so no words show twice
       ap_up(cx,tt,T.rebuilt-0.2,()=>ap_rule(cx,90,150,{each:i=>ag_in(tt,[T.rebuilt,T.casual,T.whose][i]-0.1,0.5),dbt:ag_in(tt,T.whose+0.6,0.6)}));
       const lp=ag_sine(clamp((tt-T.leaves+0.2)/0.9,0,1));if(lp>0){dp_link(cx,[890,290],[1110,520],"coral",lp,{lw:2.6,dot:false});if(lp>=1)dp_cross(cx,1110,520,"coral",ag_in(tt,T.leaves+0.7,0.4));}}},
     // the table's old versions keep her row seven days more, until they're cleaned up; deleting the row alone would not have been enough
@@ -256,7 +256,7 @@ scene("proof",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     proof:wAt(sc,"every","proof"),ticked:wAt(sc,"ticked","ticked"),run:wAt(sc,"run","run"),hist:wAt(sc,"history","history"),del:wAt(sc,"history","deleted"),clean:wAt(sc,"history","cleaned up"),
     audit:wAt(sc,"audit","audit log"),only:wAt(sc,"audit","only the office"),table:wAt(sc,"table","table of every request"),near:wAt(sc,"near","near its date"),late:wAt(sc,"late","late answer"),
     dec7:wAt(sc,"ready","seventh of December"),early:wAt(sc,"ready","seventeen days early"),opens:wAt(sc,"ready","she opens"),sign:wAt(sc,"ready","signing in"),
-    closes:wAt(sc,"closes","closes"),nums:wAt(sc,"closes","her numbers"),body:wAt(sc,"n1679","the body"),causes:wAt(sc,"n1679","true causes"),days:wAt(sc,"n1679","within days"),
+    closes:wAt(sc,"closes","closes"),nums:wAt(sc,"closes","Her numbers"),until:wAt(sc,"closes","until the last locked copy"),dec24:wAt(sc,"closes","twenty-fourth"),body:wAt(sc,"n1679","the body"),causes:wAt(sc,"n1679","true causes"),days:wAt(sc,"n1679","within days"),
     held:wAt(sc,"here","what's held"),reasons:wAt(sc,"here","true reasons"),onTime:wAt(sc,"here","on time")}));
   const ticks=tt=>[ag_in(tt,T.ticked+0.3,0.6),ag_in(tt,sc.ends.run+0.2,0.6),ag_in(tt,T.hist+0.2,0.6),ag_in(tt,sc.ends.audit+0.2,0.6),ag_in(tt,c.closes+0.2,0.6)];
   const issue=(cx,tt)=>{const k=ticks(tt);ap_issue(cx,40,110,1000,760,{rows:5,noone:1,ticks:k,links:k.map(v=>ag_in(v,0.5,0.5)),closed:ag_in(tt,T.closes-0.1,0.6)});};
@@ -277,9 +277,12 @@ scene("proof",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
       ap_up(cx,tt,T.sign+0.6,()=>ap_answer(cx,900,400,{}),{d:0.7});}},
     // the ticket closes
     {at:c.closes-0.3,place:"apRepo",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{issue(cx,tt);proofs(cx,tt);}},
-    // her numbers leave the table of keys; its lock stays
+    // her numbers stay in the table of keys, under its lock, until the last locked copy that can hold her rows is gone: a copy
+    // restored before then has her request applied again (Deleted means deleted)
     {at:T.nums-0.1,place:"apOffice",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
-      ap_keys(cx,{rows:i=>1-ag_in(tt,T.nums+0.5+i*0.15,0.6)});ap_readers(cx,{});}},
+      const out=1-ag_in(tt,c.n1679-0.9,0.5);if(out<=0)return;cx.save();cx.globalAlpha*=out;ap_keys(cx,{glow:i=>ag_io(tt,T.nums+0.3+i*0.12,T.nums+1.6+i*0.12,0.3)});ap_readers(cx,{});  // all of it leaves before 1679 comes in
+      ap_up(cx,tt,T.until,()=>dp_slip(cx,200,420,"Kept until the last locked copy is gone","grey",{ink:true}));
+      ap_up(cx,tt,T.dec24,()=>dp_slip(cx,200,516,"Thu 24 Dec","grey",{ink:true}));cx.restore();}},
     // 1679: a keeper answered with the body, the true causes, within days
     {at:c.n1679-0.3,place:"apTable",keys:[[0,960,540,1.04]],push:0.012,draw:(cx,tt)=>{ap_roll(cx,250,170,780,600,1);
       ap_up(cx,tt,T.body,()=>dp_slip(cx,1160,170,"the body","grey",{ink:true}));

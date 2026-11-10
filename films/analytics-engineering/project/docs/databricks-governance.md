@@ -296,7 +296,10 @@ within 30 days, the university's own rule. Nothing here runs in the build.
    (`analyses/privacy/who_read_the_keys.sql`), each owner's check, the answer. The office tracks
    every request's due date with `analyses/privacy/requests_due.sql`: a request near its date is
    work still to do, not a failing test.
-5. **Close it.** When the answer is sent, the request's rows leave `privacy.request_keys`.
+5. **Close it.** When the answer is sent, the issue closes. The request's rows stay in
+   `privacy.request_keys` until the last locked copy that can hold the person's rows is gone (for
+   request 2026-117, on 24 December), so a copy restored before then has the request applied again
+   before anyone reads it; then they leave.
 
 ## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; and *Query history system table* to the end, for section 12, on 5 November 2026)
 

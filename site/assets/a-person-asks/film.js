@@ -483,7 +483,7 @@ const NARR={
 "places":{"name":"Every place she is","lead":1.4,"tail":1.0,"vo":[
  {"id":"master","gap":0.8,"text":"Mei's office keeps Linh's master record, P-10482.","say":"Mei's office keeps Linh's master record, P, one oh four eight two."},
  {"id":"six","gap":0.8,"text":"From its links come her numbers in every system: six in all."},
- {"id":"dbt","gap":0.8,"text":"In the data project, dbt lists every model built from those five systems: twenty-nine."},
+ {"id":"dbt","gap":0.8,"text":"In the data project, dbt lists every model built from those five systems: more than thirty."},
  {"id":"lineage","gap":0.8,"text":"On the platform, lineage adds the rest: a notebook's table, a dashboard, another team's job."},
  {"id":"tags","gap":0.8,"text":"And the tags from Know what you hold point to each column that names a person, or holds a code for one."},
  {"id":"job","gap":0.8,"text":"Then a job runs, as its own identity."},
@@ -523,7 +523,7 @@ const NARR={
  {"id":"near","gap":0.8,"text":"A request near its date shows up there, for the office to work through."},
  {"id":"late","gap":0.8,"text":"A late answer isn't wrong data: it's work still to do."},
  {"id":"ready","gap":0.8,"text":"On 7 December, Linh's answer is ready, seventeen days early, and she opens it by signing in.","say":"On the seventh of December, Linh's answer is ready, seventeen days early, and she opens it by signing in."},
- {"id":"closes","gap":0.8,"text":"The ticket closes, and her numbers leave the table of keys."},
+ {"id":"closes","gap":0.8,"text":"The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on 24 December.","say":"The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on the twenty-fourth of December."},
  {"id":"n1679","gap":0.8,"text":"In 1679, a keeper answered the writ with the body, and the true causes, within days.","say":"In sixteen seventy-nine, a keeper answered the writ with the body, and the true causes, within days."},
  {"id":"here","gap":0.8,"text":"Here, it's what's held, the true reasons, on time, and proof of each step."}]},
 "reason":{"name":"Kept for a reason","lead":1.4,"tail":1.0,"vo":[
@@ -538,7 +538,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: AI agents in data work, where agents work under the same rules."}]}
 };
 
-const VODUR={"summer/london": 2.474, "summer/jenkes": 3.55, "summer/guildhall": 4.496, "summer/council": 7.967, "summer/noday": 1.036, "summer/copy": 3.843, "summer/stalls": 1.931, "summer/bail": 4.532, "summer/refused": 0.761, "summer/writ": 2.023, "summer/latin": 5.729, "summer/holiday": 4.872, "summer/august": 5.075, "summer/months": 4.662, "summer/change": 1.288, "days/act": 4.185, "days/three": 7.599, "days/far": 5.054, "days/anyjudge": 3.917, "days/sixhours": 2.785, "days/pays": 3.152, "days/second": 3.056, "days/learns": 5.942, "days/century": 4.405, "days/today": 4.63, "days/inbox": 4.218, "days/trusted": 5.206, "clock/writes": 3.745, "clock/ended": 2.456, "clock/signedin": 7.354, "clock/asks": 4.119, "clock/logs": 4.398, "clock/due": 4.633, "clock/ingrid": 3.798, "clock/ticket": 2.914, "clock/noone": 4.358, "clock/oneplace": 6.531, "places/master": 4.025, "places/six": 3.306, "places/dbt": 5.6, "places/lineage": 5.905, "places/tags": 5.827, "places/job": 2.312, "places/looks": 5.236, "places/marts": 4.627, "places/miss": 2.44, "places/typed": 4.809, "places/joins": 4.304, "places/owners": 7.786, "copy/pile": 2.347, "copy/written": 2.62, "copy/part": 5.305, "copy/causes": 5.623, "copy/contract": 2.32, "copy/law": 7.655, "copy/task": 3.268, "copy/research": 3.572, "copy/others": 4.26, "copy/check": 8.551, "off/first": 1.719, "off/night": 7.398, "off/sync": 2.179, "off/morning": 5.807, "off/rebuilt": 8.32, "off/leaves": 1.76, "off/versions": 8.638, "off/alone": 6.048, "proof/every": 1.317, "proof/ticked": 2.45, "proof/run": 3.386, "proof/history": 4.664, "proof/audit": 4.818, "proof/table": 3.977, "proof/near": 3.588, "proof/late": 3.244, "proof/ready": 6.446, "proof/closes": 3.237, "proof/n1679": 5.732, "proof/here": 3.963, "reason/five": 1.985, "reason/say": 1.911, "reason/end": 3.305, "reason/ask": 2.74, "reason/gone": 2.47, "reason/time": 2.403, "reason/module": 5.09, "reason/three": 3.582, "reason/next": 4.577};
+const VODUR={"summer/london": 2.474, "summer/jenkes": 3.55, "summer/guildhall": 4.496, "summer/council": 7.967, "summer/noday": 1.036, "summer/copy": 3.843, "summer/stalls": 1.931, "summer/bail": 4.532, "summer/refused": 0.761, "summer/writ": 2.023, "summer/latin": 5.729, "summer/holiday": 4.872, "summer/august": 5.075, "summer/months": 4.662, "summer/change": 1.288, "days/act": 4.185, "days/three": 7.599, "days/far": 5.054, "days/anyjudge": 3.917, "days/sixhours": 2.785, "days/pays": 3.152, "days/second": 3.056, "days/learns": 5.942, "days/century": 4.405, "days/today": 4.63, "days/inbox": 4.218, "days/trusted": 5.206, "clock/writes": 3.745, "clock/ended": 2.456, "clock/signedin": 7.354, "clock/asks": 4.119, "clock/logs": 4.398, "clock/due": 4.633, "clock/ingrid": 3.798, "clock/ticket": 2.914, "clock/noone": 4.358, "clock/oneplace": 6.531, "places/master": 4.025, "places/six": 3.306, "places/dbt": 5.954, "places/lineage": 5.905, "places/tags": 5.827, "places/job": 2.312, "places/looks": 5.236, "places/marts": 4.627, "places/miss": 2.44, "places/typed": 4.809, "places/joins": 4.304, "places/owners": 7.786, "copy/pile": 2.347, "copy/written": 2.62, "copy/part": 5.305, "copy/causes": 5.623, "copy/contract": 2.32, "copy/law": 7.655, "copy/task": 3.268, "copy/research": 3.572, "copy/others": 4.26, "copy/check": 8.551, "off/first": 1.719, "off/night": 7.398, "off/sync": 2.179, "off/morning": 5.807, "off/rebuilt": 8.32, "off/leaves": 1.76, "off/versions": 8.638, "off/alone": 6.048, "proof/every": 1.317, "proof/ticked": 2.45, "proof/run": 3.386, "proof/history": 4.664, "proof/audit": 4.818, "proof/table": 3.977, "proof/near": 3.588, "proof/late": 3.244, "proof/ready": 6.446, "proof/closes": 7.489, "proof/n1679": 5.732, "proof/here": 3.963, "reason/five": 1.985, "reason/say": 1.911, "reason/end": 3.305, "reason/ask": 2.74, "reason/gone": 2.47, "reason/time": 2.403, "reason/module": 5.09, "reason/three": 3.582, "reason/next": 4.577};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2122,10 +2122,12 @@ function ap_num(c,x,y,i,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const 
   if(v<1)dp_slip(c,x,y,s,"cyan",{a:a*(1-v),size:28});if(v>0)dp_slip(c,x,y,s,"violet",{a:a*v,size:28});}
 // dbt's terminal: the example project's command, typed (u 0 to 1), and what it lists
 const AP_DBT=["$ dbt ls --resource-type model --select","    source:hr_system+ source:student_system+","    source:alumni_system+ source:research_system+","    source:learning_platform+"];
-const AP_MODELS=29;
+// the block of models on the lineage: 36 tables, what dbt lists once Deleted means deleted is in (10 Nov 2026). The words say
+// "more than 30", which stays true as the example project grows, so the film needn't change when another film adds a model
+const AP_MODELS=36,AP_COUNT="More than 30 models";
 function ap_term(c,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.globalAlpha*=a;const b=dp_page(c,x,y,w,h,{tool:"dbt",name:"dbt",where:"The data project",col:"cyan"});
   const all=AP_DBT.join("\n");let n=Math.round(clamp(o.u||0,0,1)*all.length);AP_DBT.forEach((l,i)=>{if(n<=0)return;dp_T(c,l.slice(0,n),b.x,b.y+40+i*48,{w:500,size:28,f:"mono",col:i?"ink":"cyan"});n-=l.length+1;});
-  if(o.res>0){c.save();c.globalAlpha*=o.res;dp_T(c,AP_MODELS+" models",b.x,b.y+300,{w:800,size:48});dp_T(c,"built from those five systems",b.x+dp_tw(c,AP_MODELS+" models",{w:800,size:48})+28,b.y+300,{w:600,size:28,col:"mut"});c.restore();}
+  if(o.res>0){c.save();c.globalAlpha*=o.res;dp_T(c,AP_COUNT,b.x,b.y+300,{w:800,size:48});dp_T(c,"built from those five systems",b.x+dp_tw(c,AP_COUNT,{w:800,size:48})+28,b.y+300,{w:600,size:28,col:"mut"});c.restore();}
   c.restore();}
 // the platform's lineage: five systems, the models dbt builds from them, the marts, and (rest 0 to 1) what lineage adds
 const AP_SRC=["hr_system","student_system","alumni_system","research_system","learning_platform"];
@@ -2144,8 +2146,9 @@ function ap_lineage(c,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const L=
   AP_REST.forEach(([s,m],i)=>dp_link(c,[L.mart.x+40+dp_tw(c,AP_MARTS[m],{w:500,size:28,f:"mono"})+20,my(m)-10],[L.rest.x-14,ry(i)-10],"cyan",rest(i),{lw:1.6,alpha:0.55,dot:false}));
   AP_SRC.forEach((s,i)=>{ap_tableIcon(c,L.src.x,sy(i),"cyan");dp_T(c,s,L.src.x+44,sy(i),{w:500,size:28,f:"mono"});});
   // the models dbt builds, as a block of small tables
-  for(let k=0;k<AP_MODELS;k++){const gx=L.blk.x+(k%6)*36,gy=L.blk.y-72+Math.floor(k/6)*30;c.fillStyle=rgba(DP.F.cyan,0.18+0.5*lit(k));rr(c,gx,gy,28,22,4);c.fill();c.strokeStyle=rgba(DP.F.cyan,0.7);c.lineWidth=1.4;c.stroke();}
-  dp_T(c,AP_MODELS+" models",L.blk.x,L.blk.y+124,{w:700,size:28,col:"mut"});
+  const top=L.blk.y-72-(Math.ceil(AP_MODELS/6)-5)*15;  // the block stays centred on its links, whatever the count
+  for(let k=0;k<AP_MODELS;k++){const gx=L.blk.x+(k%6)*36,gy=top+Math.floor(k/6)*30;c.fillStyle=rgba(DP.F.cyan,0.18+0.5*lit(k));rr(c,gx,gy,28,22,4);c.fill();c.strokeStyle=rgba(DP.F.cyan,0.7);c.lineWidth=1.4;c.stroke();}
+  dp_T(c,"More than 30",L.blk.x,L.blk.y+124,{w:700,size:28,col:"mut"});dp_T(c,"models",L.blk.x,L.blk.y+160,{w:700,size:28,col:"mut"});  // two lines: one would run into the marts
   AP_MARTS.forEach((s,i)=>{ap_tableIcon(c,L.mart.x,my(i),"cyan");dp_T(c,s,L.mart.x+40,my(i),{w:500,size:28,f:"mono"});});
   AP_REST.forEach(([s,m],i)=>{const q=rest(i);if(q<=0)return;c.save();c.globalAlpha*=q;ap_tableIcon(c,L.rest.x,ry(i),"cyan");dp_T(c,s,L.rest.x+44,ry(i),{w:600,size:28});c.restore();});
   c.restore();}
@@ -2155,7 +2158,8 @@ function ap_classes(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sa
   [["staff_id","personal_data: direct","violet"],["learner_key","personal_data: pseudonymous","violet"],["unit_code","none","grey"]].forEach(([col,cls,k],i)=>{const yy=y+118+i*102,q=o.each?o.each(i):1;if(q<=0)return;
     c.save();c.globalAlpha*=q;dp_T(c,col,x+30,yy,{w:500,size:28,f:"mono"});dp_pill(c,x+30,yy+52,cls,k,{glow:8});c.restore();});c.restore();}
 // the search job's badge: its own identity, owned by a person, for a logged request only
-function ap_finder(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-finder",lines:[["owned by Jun Park"],["for a logged request only"]],pic:dp_gearPic,t:o.t,a:o.a,scan:o.scan});}
+function ap_finder(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-finder",lines:[["owned by Jun Park"],["for a logged request only"]],pic:dp_gearPic,t:o.t,a:o.a});  // the light reads its picture, where no words are, so it never passes over a line of text
+  const a=o.a==null?1:o.a;if(o.scan>0&&o.scan<1&&a>0){c.save();c.globalAlpha*=a;dp_scan(c,x+28,y+88,150,176,o.scan,"cyan",12);c.restore();}}
 function ap_deleter(c,x,y,o){o=o||{};dp_badge(c,x,y,560,372,{kind:"Service principal",col:"cyan",title:"privacy-deleter",lines:[["owned by Sam Okafor"],["for an approved request only"]],pic:dp_gearPic,t:o.t,a:o.a});}
 // the search, table by table: each table, ticked when her numbers are found, and the marts where she's only a code
 const AP_STG=["stg_hr_system__staff","stg_student_system__learners","stg_alumni_system__alumni","stg_research_system__researchers","stg_learning_platform__users"];
@@ -2431,7 +2435,7 @@ scene("clock",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
 
 /* ---------------------------------------------------------------- 4 · Every place she is */
 scene("places",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
-    master:wAt(sc,"master","master record"),nums:wAt(sc,"six","her numbers"),sixAll:wAt(sc,"six","six in all"),dbt:wAt(sc,"dbt","dbt"),n29:wAt(sc,"dbt","twenty-nine"),
+    master:wAt(sc,"master","master record"),nums:wAt(sc,"six","her numbers"),sixAll:wAt(sc,"six","six in all"),dbt:wAt(sc,"dbt","dbt"),nModels:wAt(sc,"dbt","more than thirty"),
     lineage:wAt(sc,"lineage","lineage"),nb:wAt(sc,"lineage","notebook's"),dash:wAt(sc,"lineage","dashboard"),other:wAt(sc,"lineage","another team's job"),
     tags:wAt(sc,"tags","tags"),person:wAt(sc,"tags","names a person"),code:wAt(sc,"tags","code for one"),job:wAt(sc,"job","job"),
     table:wAt(sc,"looks","Table by table"),codes:wAt(sc,"looks","codes"),marts:wAt(sc,"marts","marts"),asCode:wAt(sc,"marts","only as a code"),miss:wAt(sc,"miss","miss"),
@@ -2452,7 +2456,7 @@ scene("places",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     // Jun, and dbt's list of every model built from those five systems
     {at:c.dbt-0.4,place:"apRepo",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       dp_person(cx,"jun",330,650,1.0,{t:tt});
-      ap_term(cx,640,170,1240,520,{u:clamp((tt-T.dbt)/2.4,0,1),res:ag_in(tt,T.n29-0.1,0.5)});}},
+      ap_term(cx,640,170,1240,520,{u:clamp((tt-T.dbt)/2.4,0,1),res:ag_in(tt,T.nModels-0.1,0.5)});}},
     // the platform's lineage adds the rest; the tags point to the columns that name a person, or hold a code for one
     {at:c.lineage-0.4,place:"apPlatform",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
       ap_lineage(cx,{lines:ag_sine(clamp((tt-T.lineage)/1.2,0,1)),rest:i=>ag_in(tt,[T.nb,T.dash,T.other][i]-0.1,0.5)*(1-ag_in(tt,T.tags-0.6,0.5))});
@@ -2514,7 +2518,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     {at:c.morning-0.4,place:"apOffice",cut:true,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       ap_who_at(cx,"ingrid",330,650,1.0,1-ag_in(tt,c.rebuilt-0.6,0.6),{t:tt});
       ap_person(cx,1120,140,{});
-      const sw=ag_sine(clamp((tt-T.no)/0.8,0,1));ap_wish(cx,1120,430,true,{a:1-ag_in(sw,0.3,0.7),dy:30*sw});ap_wish(cx,1120,430,false,{a:ag_in(sw,0.2,0.6),dy:-30*(1-sw)});
+      const sw=clamp((tt-T.no)/1.0,0,1),go=ag_in(sw,0,0.45),come=ag_in(sw,0.55,0.45);ap_wish(cx,1120,430,true,{a:1-go,dy:24*go});ap_wish(cx,1120,430,false,{a:come,dy:-24*(1-come)});  // the yes leaves, then the no comes: never both at once, so no words show twice
       ap_up(cx,tt,T.rebuilt-0.2,()=>ap_rule(cx,90,150,{each:i=>ag_in(tt,[T.rebuilt,T.casual,T.whose][i]-0.1,0.5),dbt:ag_in(tt,T.whose+0.6,0.6)}));
       const lp=ag_sine(clamp((tt-T.leaves+0.2)/0.9,0,1));if(lp>0){dp_link(cx,[890,290],[1110,520],"coral",lp,{lw:2.6,dot:false});if(lp>=1)dp_cross(cx,1110,520,"coral",ag_in(tt,T.leaves+0.7,0.4));}}},
     // the table's old versions keep her row seven days more, until they're cleaned up; deleting the row alone would not have been enough
@@ -2538,7 +2542,7 @@ scene("proof",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
     proof:wAt(sc,"every","proof"),ticked:wAt(sc,"ticked","ticked"),run:wAt(sc,"run","run"),hist:wAt(sc,"history","history"),del:wAt(sc,"history","deleted"),clean:wAt(sc,"history","cleaned up"),
     audit:wAt(sc,"audit","audit log"),only:wAt(sc,"audit","only the office"),table:wAt(sc,"table","table of every request"),near:wAt(sc,"near","near its date"),late:wAt(sc,"late","late answer"),
     dec7:wAt(sc,"ready","seventh of December"),early:wAt(sc,"ready","seventeen days early"),opens:wAt(sc,"ready","she opens"),sign:wAt(sc,"ready","signing in"),
-    closes:wAt(sc,"closes","closes"),nums:wAt(sc,"closes","her numbers"),body:wAt(sc,"n1679","the body"),causes:wAt(sc,"n1679","true causes"),days:wAt(sc,"n1679","within days"),
+    closes:wAt(sc,"closes","closes"),nums:wAt(sc,"closes","Her numbers"),until:wAt(sc,"closes","until the last locked copy"),dec24:wAt(sc,"closes","twenty-fourth"),body:wAt(sc,"n1679","the body"),causes:wAt(sc,"n1679","true causes"),days:wAt(sc,"n1679","within days"),
     held:wAt(sc,"here","what's held"),reasons:wAt(sc,"here","true reasons"),onTime:wAt(sc,"here","on time")}));
   const ticks=tt=>[ag_in(tt,T.ticked+0.3,0.6),ag_in(tt,sc.ends.run+0.2,0.6),ag_in(tt,T.hist+0.2,0.6),ag_in(tt,sc.ends.audit+0.2,0.6),ag_in(tt,c.closes+0.2,0.6)];
   const issue=(cx,tt)=>{const k=ticks(tt);ap_issue(cx,40,110,1000,760,{rows:5,noone:1,ticks:k,links:k.map(v=>ag_in(v,0.5,0.5)),closed:ag_in(tt,T.closes-0.1,0.6)});};
@@ -2559,9 +2563,12 @@ scene("proof",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
       ap_up(cx,tt,T.sign+0.6,()=>ap_answer(cx,900,400,{}),{d:0.7});}},
     // the ticket closes
     {at:c.closes-0.3,place:"apRepo",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{issue(cx,tt);proofs(cx,tt);}},
-    // her numbers leave the table of keys; its lock stays
+    // her numbers stay in the table of keys, under its lock, until the last locked copy that can hold her rows is gone: a copy
+    // restored before then has her request applied again (Deleted means deleted)
     {at:T.nums-0.1,place:"apOffice",cut:true,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
-      ap_keys(cx,{rows:i=>1-ag_in(tt,T.nums+0.5+i*0.15,0.6)});ap_readers(cx,{});}},
+      const out=1-ag_in(tt,c.n1679-0.9,0.5);if(out<=0)return;cx.save();cx.globalAlpha*=out;ap_keys(cx,{glow:i=>ag_io(tt,T.nums+0.3+i*0.12,T.nums+1.6+i*0.12,0.3)});ap_readers(cx,{});  // all of it leaves before 1679 comes in
+      ap_up(cx,tt,T.until,()=>dp_slip(cx,200,420,"Kept until the last locked copy is gone","grey",{ink:true}));
+      ap_up(cx,tt,T.dec24,()=>dp_slip(cx,200,516,"Thu 24 Dec","grey",{ink:true}));cx.restore();}},
     // 1679: a keeper answered with the body, the true causes, within days
     {at:c.n1679-0.3,place:"apTable",keys:[[0,960,540,1.04]],push:0.012,draw:(cx,tt)=>{ap_roll(cx,250,170,780,600,1);
       ap_up(cx,tt,T.body,()=>dp_slip(cx,1160,170,"the body","grey",{ink:true}));

@@ -44,7 +44,7 @@ const NARR={
 "places":{"name":"Every place she is","lead":1.4,"tail":1.0,"vo":[
  {"id":"master","gap":0.8,"text":"Mei's office keeps Linh's master record, P-10482.","say":"Mei's office keeps Linh's master record, P, one oh four eight two."},
  {"id":"six","gap":0.8,"text":"From its links come her numbers in every system: six in all."},
- {"id":"dbt","gap":0.8,"text":"In the data project, dbt lists every model built from those five systems: twenty-nine."},
+ {"id":"dbt","gap":0.8,"text":"In the data project, dbt lists every model built from those five systems: more than thirty."},
  {"id":"lineage","gap":0.8,"text":"On the platform, lineage adds the rest: a notebook's table, a dashboard, another team's job."},
  {"id":"tags","gap":0.8,"text":"And the tags from Know what you hold point to each column that names a person, or holds a code for one."},
  {"id":"job","gap":0.8,"text":"Then a job runs, as its own identity."},
@@ -84,7 +84,7 @@ const NARR={
  {"id":"near","gap":0.8,"text":"A request near its date shows up there, for the office to work through."},
  {"id":"late","gap":0.8,"text":"A late answer isn't wrong data: it's work still to do."},
  {"id":"ready","gap":0.8,"text":"On 7 December, Linh's answer is ready, seventeen days early, and she opens it by signing in.","say":"On the seventh of December, Linh's answer is ready, seventeen days early, and she opens it by signing in."},
- {"id":"closes","gap":0.8,"text":"The ticket closes, and her numbers leave the table of keys."},
+ {"id":"closes","gap":0.8,"text":"The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on 24 December.","say":"The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on the twenty-fourth of December."},
  {"id":"n1679","gap":0.8,"text":"In 1679, a keeper answered the writ with the body, and the true causes, within days.","say":"In sixteen seventy-nine, a keeper answered the writ with the body, and the true causes, within days."},
  {"id":"here","gap":0.8,"text":"Here, it's what's held, the true reasons, on time, and proof of each step."}]},
 "reason":{"name":"Kept for a reason","lead":1.4,"tail":1.0,"vo":[

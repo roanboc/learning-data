@@ -30,4 +30,5 @@ number ([`docs/databricks-governance.md`](../../docs/databricks-governance.md), 
 
 Who read the keys this month: `privacy-finder`, `privacy-deleter` and the privacy office, and no one
 else ([`who_read_the_keys.sql`](../../analyses/privacy/who_read_the_keys.sql)). The request's rows
-left `privacy.request_keys` when it closed.
+stay in `privacy.request_keys` until the last locked copy that can hold hers is gone, on 24 December,
+so a copy restored before then has this request applied again; then they leave.

@@ -155,197 +155,197 @@ La oficina de Mei guarda el registro maestro de Linh, P-10482.
 De sus vínculos salen sus números en cada sistema: seis en total.
 
 40
-00:03:54,825 --> 00:04:00,525
-En el proyecto de datos, dbt lista cada modelo hecho a partir de esos cinco sistemas: veintinueve.
+00:03:54,825 --> 00:04:00,879
+En el proyecto de datos, dbt lista cada modelo hecho a partir de esos cinco sistemas: más de treinta.
 
 41
-00:04:02,225 --> 00:04:08,230
+00:04:02,579 --> 00:04:08,584
 En la plataforma, el linaje agrega el resto: la tabla de un notebook, un panel, el trabajo de otro equipo.
 
 42
-00:04:09,930 --> 00:04:15,857
+00:04:10,284 --> 00:04:16,211
 Y las etiquetas de Conoce lo que guardas señalan cada columna que nombra a una persona, o guarda un código de una.
 
 43
-00:04:17,557 --> 00:04:19,969
+00:04:17,911 --> 00:04:20,323
 Luego corre un trabajo, con identidad propia.
 
 44
-00:04:21,269 --> 00:04:26,605
+00:04:21,623 --> 00:04:26,959
 Tabla por tabla, busca en esas columnas sus números, y los códigos hechos con ellos.
 
 45
-00:04:28,305 --> 00:04:33,032
+00:04:28,659 --> 00:04:33,386
 En los marts de la billetera, la planificación y las finanzas, ella está solo como un código.
 
 46
-00:04:34,332 --> 00:04:36,872
+00:04:34,686 --> 00:04:37,226
 Una búsqueda solo por sus números los pasaría todos por alto.
 
 47
-00:04:38,572 --> 00:04:43,481
+00:04:38,926 --> 00:04:43,835
 Y ninguno de sus números se escribe en una consulta, cuyo texto la plataforma guarda un año.
 
 48
-00:04:44,581 --> 00:04:48,985
+00:04:44,935 --> 00:04:49,339
 En cambio, cada consulta se une a la tabla de claves, por el número de la petición.
 
 49
-00:04:50,685 --> 00:04:58,571
+00:04:51,039 --> 00:04:58,925
 El linaje solo ve la plataforma: los dueños de la nómina, la app de horas, la herramienta de correo y sus contratos buscan en lo suyo.
 
 50
-00:05:02,671 --> 00:05:05,118
+00:05:03,025 --> 00:05:05,472
 Lo que Linh recibe no es un montón de tablas.
 
 51
-00:05:06,218 --> 00:05:08,938
+00:05:06,572 --> 00:05:09,292
 Es una copia de lo que se guarda, escrita para que ella la lea.
 
 52
-00:05:10,238 --> 00:05:15,643
+00:05:10,592 --> 00:05:15,997
 Para cada parte: qué es, por qué se guarda, de dónde vino, quién más la recibe, y hasta cuándo.
 
 53
-00:05:17,743 --> 00:05:23,466
+00:05:18,097 --> 00:05:23,820
 Como las causas verdaderas en la respuesta del carcelero, cada razón es simple, de Una razón para guardarlo.
 
 54
-00:05:24,966 --> 00:05:27,386
+00:05:25,320 --> 00:05:27,740
 Un contrato, para sus contratos y horas.
 
 55
-00:05:28,486 --> 00:05:36,241
+00:05:28,840 --> 00:05:36,595
 Una ley, para sus registros de pago: siete años después de cada contrato, el último hasta el 20 de noviembre de 2033.
 
 56
-00:05:37,741 --> 00:05:41,109
+00:05:38,095 --> 00:05:41,463
 Una tarea pública, para sus títulos y resultados, guardados para siempre.
 
 57
-00:05:42,209 --> 00:05:45,881
+00:05:42,563 --> 00:05:46,235
 Los datos de su proyecto de investigación, mientras lo pidan sus reglas.
 
 58
-00:05:47,181 --> 00:05:51,541
+00:05:47,535 --> 00:05:51,895
 Todo lo que trata de otras personas queda fuera, como las notas que puso a sus estudiantes.
 
 59
-00:05:53,441 --> 00:06:02,092
+00:05:53,795 --> 00:06:02,446
 El 3 de diciembre, cada dueño revisa su parte: Ingrid, la de RR. HH.; Mei, los expedientes; la oficina de investigación, su proyecto.
 
 60
-00:06:06,392 --> 00:06:08,211
+00:06:06,746 --> 00:06:08,565
 Su segundo pedido se hizo primero.
 
 61
-00:06:09,511 --> 00:06:17,009
+00:06:09,865 --> 00:06:17,363
 En la noche del 25 de noviembre, el trabajo de borrado saca su fila de la tabla de la lista, y de su registro de envíos.
 
 62
-00:06:18,909 --> 00:06:21,188
+00:06:19,263 --> 00:06:21,542
 La herramienta de correo la quita al sincronizar.
 
 63
-00:06:22,688 --> 00:06:28,595
+00:06:23,042 --> 00:06:28,949
 Esa mañana, Ingrid pone su no en la persona, en lugar del sí que dio en 2023.
 
 64
-00:06:30,495 --> 00:06:38,915
+00:06:30,849 --> 00:06:39,269
 La lista se rehace cada semestre con los contratos ocasionales de los últimos dos años, y toma solo a quienes tienen un sí en la persona.
 
 65
-00:06:40,615 --> 00:06:42,475
+00:06:40,969 --> 00:06:42,829
 Así, la próxima reconstrucción la deja fuera.
 
 66
-00:06:44,175 --> 00:06:52,913
+00:06:44,529 --> 00:06:53,267
 Las versiones antiguas de la tabla guardan su fila siete días más, y luego se limpian, el 2 de diciembre, como mostró Borrado es borrado.
 
 67
-00:06:54,813 --> 00:07:00,961
+00:06:55,167 --> 00:07:01,315
 Borrar solo su fila no habría bastado: con su sí todavía ahí, la próxima reconstrucción la habría traído de vuelta.
 
 68
-00:07:06,461 --> 00:07:07,878
+00:07:06,815 --> 00:07:08,232
 Cada paso deja una prueba.
 
 69
-00:07:08,978 --> 00:07:11,528
+00:07:09,332 --> 00:07:11,882
 En el ticket, cada casilla se marca con un enlace.
 
 70
-00:07:13,028 --> 00:07:16,514
+00:07:13,382 --> 00:07:16,868
 La ejecución de la búsqueda muestra quién la hizo: el trabajo mismo.
 
 71
-00:07:18,014 --> 00:07:22,778
+00:07:18,368 --> 00:07:23,132
 El historial de la tabla de la lista muestra su fila borrada, y las versiones antiguas limpiadas.
 
 72
-00:07:24,478 --> 00:07:29,396
+00:07:24,832 --> 00:07:29,750
 El registro de auditoría muestra quién leyó la tabla de claves: solo la oficina y sus trabajos.
 
 73
-00:07:31,096 --> 00:07:35,173
+00:07:31,450 --> 00:07:35,527
 La oficina de privacidad lleva una tabla de cada petición y el día en que vence.
 
 74
-00:07:36,473 --> 00:07:40,161
+00:07:36,827 --> 00:07:40,515
 Una petición cerca de su fecha aparece ahí, para que la oficina la atienda.
 
 75
-00:07:41,461 --> 00:07:44,805
+00:07:41,815 --> 00:07:45,159
 Una respuesta atrasada no son datos erróneos: es trabajo pendiente.
 
 76
-00:07:46,505 --> 00:07:53,051
+00:07:46,859 --> 00:07:53,405
 El 7 de diciembre, la respuesta de Linh está lista, diecisiete días antes, y ella la abre al iniciar sesión.
 
 77
-00:07:54,951 --> 00:07:58,288
-El ticket se cierra, y sus números salen de la tabla de claves.
+00:07:55,305 --> 00:08:02,894
+El ticket se cierra. Sus números siguen en la tabla de claves hasta que no quede ninguna copia bloqueada, el 24 de diciembre.
 
 78
-00:07:59,988 --> 00:08:05,820
+00:08:04,594 --> 00:08:10,426
 En 1679, un carcelero respondía al habeas corpus con el cuerpo, y las causas verdaderas, en días.
 
 79
-00:08:07,320 --> 00:08:11,383
+00:08:11,926 --> 00:08:15,989
 Aquí, es lo que se guarda, las razones verdaderas, a tiempo, y la prueba de cada paso.
 
 80
-00:08:14,483 --> 00:08:16,568
+00:08:19,089 --> 00:08:21,174
 Cinco películas, los datos de una persona.
 
 81
-00:08:17,868 --> 00:08:19,879
+00:08:22,474 --> 00:08:24,485
 Guarda los datos por una razón que puedas decir.
 
 82
-00:08:21,179 --> 00:08:24,584
+00:08:25,785 --> 00:08:29,190
 Cada registro tiene una fecha de fin, decidida antes de necesitarla.
 
 83
-00:08:25,884 --> 00:08:28,724
+00:08:30,490 --> 00:08:33,330
 Una persona puede preguntar, y tú debes poder responder.
 
 84
-00:08:30,024 --> 00:08:32,594
+00:08:34,630 --> 00:08:37,200
 Borrar termina cuando ya no queda la última copia.
 
 85
-00:08:33,894 --> 00:08:36,397
+00:08:38,500 --> 00:08:41,003
 Y una petición se responde a tiempo, con pruebas.
 
 86
-00:08:38,097 --> 00:08:43,287
+00:08:42,703 --> 00:08:47,893
 Con Cerraduras antes que los datos y Solo lo que puedes ver, eso es protección de datos y privacidad.
 
 87
-00:08:44,787 --> 00:08:48,469
+00:08:49,393 --> 00:08:53,075
 Quién puede entrar, qué puede ver cada uno, y cuánto tiempo se queda cada cosa.
 
 88
-00:08:50,169 --> 00:08:54,846
+00:08:54,775 --> 00:08:59,452
 Después: Agentes de IA en el trabajo con datos, con las mismas reglas.

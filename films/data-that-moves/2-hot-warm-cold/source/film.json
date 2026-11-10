@@ -1,0 +1,32 @@
+{
+  "key": "hot-warm-cold",
+  "title": "Hot, warm, cold",
+  "sub": "The second film of Data that moves, in Modern data basics: in 2015, a gene bank driven from Aleppo by war asks the seed vault on Svalbard for the copies it kept frozen there; at the university, how fresh each kind of data must be and how often it's read decide how it moves and where it's kept: contract changes pushed as they're made, each faculty's spending worked out every night, and old pay records kept cheaply until the day they're deleted.",
+  "howto": "The film is drawn as the platform map up close: a dark navy night with lanes of light. Light blue is data moving and the platform, gold what people agree, green a check that passes, amber a person's turn, lilac with a lock what is personal. Temperature is shown by where data lives: hot data near the top, bright and close to the app that uses it; warm data in the middle, worked out on a schedule; cold data deep below, frosted and still. The tools' pages are drawn for the film.",
+  "src": [
+    "hw_look.js",
+    "hw_places.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "two",
+    "cold",
+    1.2
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bRohan\\b", "Roe-han"],
+    ["\\bSvalbard\\b", "Svahlbar"],
+    ["\\bZerobus\\b", "Zero bus"]
+  ],
+  "story": [
+    "vault"
+  ],
+  "urgent": [],
+  "logos": true
+}

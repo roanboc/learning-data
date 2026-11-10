@@ -251,6 +251,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 2. **Take it apart:** one hands-on lab per chapter.
 3. **Make the call:** scenarios that ask people to decide.
 
+- **One pack per series, not one per film (10 November 2026).** The author asked for the labs and the scenarios of a whole series in one pack, not a set on every film's page: under ten labs and ten situations, one lab for each film's main idea, the most hands-on, and one situation for each lab. A film's page links to its lab in the pack; the pack's two pages are the series'. In *From words to data* and *In the weeds of data crafting* each lab is still its film's own: the series' pack names them, and the engine (`site/assets/from-words-to-data/learn.js`) fetches a film's words and bundle only when a visitor opens one of its labs or situations.
 - **Give each page one job.** Keeping practice apart from the labs makes people recall rather than look up, and the change of page is a natural pause.
 - **Give each lab one mechanism, and let people break it.** Take Zerobus offline, plant a missing ID, rename a mart column, change the original record. The consequence teaches; the explanation confirms it.
 - **Keep the page to what people use.** Notes on how to read a film's colours and conventions went unread next to the film itself: the film has to explain itself.

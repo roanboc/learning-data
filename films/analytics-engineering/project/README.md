@@ -241,7 +241,10 @@ project/
 │                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
 │                             the fortnightly dashboard (Databricks only);
 │                             a-late-file/: the night a file came late, its freshness check on the
-│                             receipts, and the send that waits
+│                             receipts, and the send that waits;
+│                             files-as-data/: supplier invoices read with the platform's functions and
+│                             checked, a signed contract found by its metadata, and the claims app's
+│                             data contract (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root

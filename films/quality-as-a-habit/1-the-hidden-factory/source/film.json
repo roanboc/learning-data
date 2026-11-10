@@ -1,0 +1,37 @@
+{
+  "key": "the-hidden-factory",
+  "title": "The hidden factory",
+  "sub": "The first film of Quality as a habit, the second series of Data quality: two people put the graduation list's names right by hand before every ceremony, in a copy, and the same errors come back every year. The team counts that hidden work, three ways, asks why five times, draws every cause on a fishbone, and fixes each one where the names are born, with checks that hold a doubt for a person and stop a night that loses letters.",
+  "howto": "The film is drawn in the module's look: the data team's workroom, a wall of warm limestone and a granite bench, light from a window on the right. Green is a check that passes, amber a name held for a person to look at, red a check that stops the update, grey what nobody checked. Brass is what good means for this use, such as a name as its owner writes it, and steel blue a measure taken. Washington in 1899, 1943 and 1963 is painted full-frame, with the place and year on a tag.",
+  "src": [
+    "hf_past.js",
+    "hf_office.js",
+    "hf_bench.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "dead",
+    "collins",
+    4.7
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bA I\\b", "AI"],
+    ["\\bMalia\\b", "Mah-lee-ah"],
+    ["\\bFonoti\\b", "Fo-no-tee"],
+    ["\\bAndr(é|e)s\\b", "Ahn-dress"],
+    ["\\bPe(ñ|n)aloza\\b", "Pen-yah-lo-sah"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bBeatriz\\b", "Bayah-treez"],
+    ["\\bFonseca\\b", "Fon-sayka"],
+    ["\\bCavalcanti\\b", "Kahval-kahnti"],
+    ["\\bFeigenbaum\\b", "Fygunbaum"],
+    ["\\bKaoru\\b", "Kah-oh-roo"]
+  ],
+  "story": [
+    "dead"
+  ],
+  "urgent": [],
+  "logos": true
+}

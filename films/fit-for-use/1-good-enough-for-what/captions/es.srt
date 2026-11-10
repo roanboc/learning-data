@@ -47,197 +47,197 @@ Groenlandia parece tan grande como África, que es catorce veces mayor.
 Correcta para navegar, incorrecta para comparar países: una carta, hecha para un uso.
 
 13
-00:01:24,922 --> 00:01:32,154
+00:01:24,922 --> 00:01:32,156
 Con los datos, igual. En diciembre de 2025, la lista de graduación de una universidad acomodó bien su Aula Magna.
 
 14
-00:01:33,254 --> 00:01:36,980
+00:01:33,256 --> 00:01:36,982
 Y aun así, 41 de sus diplomas tuvieron que imprimirse de nuevo.
 
 15
-00:01:38,480 --> 00:01:43,101
+00:01:38,482 --> 00:01:43,103
 Así que quienes usan la lista, responden por ella y la construyen escribieron para qué sirve.
 
 16
-00:01:44,201 --> 00:01:48,008
+00:01:44,203 --> 00:01:48,010
 Ahora cada uso tiene su propio nivel, acordado con quienes la usan.
 
 17
-00:01:56,308 --> 00:02:04,209
+00:01:56,310 --> 00:02:04,211
 Diciembre de 2025, en la universidad: seis ceremonias en el Aula Magna, para 2,031 graduados.
 
 18
-00:02:05,509 --> 00:02:12,508
+00:02:05,511 --> 00:02:12,509
 La lista de graduación dice quién se gradúa, en qué ceremonia, con qué título y el nombre impreso en cada diploma.
 
 19
-00:02:13,608 --> 00:02:20,970
+00:02:13,609 --> 00:02:20,971
 Va a la imprenta unas cuatro semanas antes de la primera ceremonia. Después, cualquier cambio es un diploma impreso de nuevo.
 
 20
-00:02:22,270 --> 00:02:24,964
+00:02:22,271 --> 00:02:24,965
 Ese diciembre, la lista pasó todos sus controles.
 
 21
-00:02:26,464 --> 00:02:35,311
+00:02:26,465 --> 00:02:35,312
 Aun así, 41 diplomas se imprimieron de nuevo: 26 con el nombre mal, 9 con el título mal, y 6 graduados faltaban en la lista.
 
 22
-00:02:37,011 --> 00:02:44,197
+00:02:37,012 --> 00:02:44,198
 Cada uno costó unos 120 dólares con su mensajería, y un graduado podía cruzar el escenario con una carpeta vacía.
 
 23
-00:02:45,697 --> 00:02:51,184
+00:02:45,698 --> 00:02:51,185
 La misma lista había acomodado bien el Aula Magna: cada ceremonia contó bien, con pocos asientos de diferencia.
 
 24
-00:02:52,684 --> 00:02:58,952
+00:02:52,685 --> 00:02:58,953
 El próximo diciembre, Andrés Peñaloza cruzará el mismo escenario, con un Máster en Analítica de Datos.
 
 25
-00:03:00,252 --> 00:03:05,138
+00:03:00,253 --> 00:03:05,139
 El sistema de estudiantes guarda su nombre como Andres Penaloza, sin sus tildes.
 
 26
-00:03:06,638 --> 00:03:12,208
+00:03:06,639 --> 00:03:12,209
 Para los asientos, es un graduado y un asiento: correcto. En su diploma, no es su nombre.
 
 27
-00:03:13,508 --> 00:03:16,318
+00:03:13,509 --> 00:03:16,319
 Entonces, ¿la lista era buena? Depende de para qué sirva.
 
 28
-00:03:20,218 --> 00:03:24,141
+00:03:20,219 --> 00:03:24,142
 En enero de 2026, tres personas se sentaron con la lista.
 
 29
-00:03:25,241 --> 00:03:29,405
+00:03:25,242 --> 00:03:29,406
 Malia Fonoti, la responsable de graduaciones, quien más la usa.
 
 30
-00:03:30,505 --> 00:03:35,235
+00:03:30,506 --> 00:03:35,236
 Mei Tanaka, de la oficina de registro, que responde por sus nombres y títulos.
 
 31
-00:03:36,335 --> 00:03:37,976
+00:03:36,336 --> 00:03:37,977
 Y Jun Park, que la construye.
 
 32
-00:03:39,276 --> 00:03:41,384
+00:03:39,277 --> 00:03:41,385
 No empezaron preguntando si era buena.
 
 33
-00:03:42,484 --> 00:03:46,767
+00:03:42,485 --> 00:03:46,768
 Preguntaron quién la usa, para qué, y qué sale mal, y para quién, cuando está mal.
 
 34
-00:03:48,267 --> 00:03:55,622
+00:03:48,268 --> 00:03:55,623
 El plano de asientos necesita el conteo de cada ceremonia. Con un 2% basta: algunos asientos de sobra, o unas sillas más.
 
 35
-00:03:57,122 --> 00:04:05,048
+00:03:57,123 --> 00:04:05,049
 Los diplomas necesitan cada nombre, título y fecha exactos. Cero errores: un error es un diploma impreso de nuevo.
 
 36
-00:04:06,548 --> 00:04:13,439
+00:04:06,549 --> 00:04:13,440
 El programa impreso necesita los mismos nombres que los diplomas. Un cambio posterior va en una nota suelta.
 
 37
-00:04:14,939 --> 00:04:20,864
+00:04:14,940 --> 00:04:20,865
 Y el conteo de títulos que Planificación envía al gobierno necesita cada título contado una sola vez, exacto.
 
 38
-00:04:22,364 --> 00:04:24,501
+00:04:22,365 --> 00:04:24,502
 Una lista, cuatro usos, cuatro niveles.
 
 39
-00:04:26,201 --> 00:04:30,225
+00:04:26,202 --> 00:04:30,226
 Joseph Juran, pionero de la calidad, la llamó aptitud para el uso.
 
 40
-00:04:31,725 --> 00:04:35,881
+00:04:31,726 --> 00:04:35,882
 En datos es igual: lo bastante bueno siempre es lo bastante bueno para un uso.
 
 41
-00:04:39,581 --> 00:04:43,939
+00:04:39,582 --> 00:04:43,940
 Para cada uso, nombraron lo poco que le es imprescindible: sus datos críticos.
 
 42
-00:04:45,439 --> 00:04:49,844
+00:04:45,440 --> 00:04:49,845
 Los asientos necesitan a cada graduado una vez, su ceremonia y si va a asistir.
 
 43
-00:04:51,144 --> 00:04:55,920
+00:04:51,145 --> 00:04:55,921
 Un diploma necesita el nombre tal como se imprime, el título y la fecha en que se otorgó.
 
 44
-00:04:57,420 --> 00:05:03,836
+00:04:57,421 --> 00:05:03,837
 Luego preguntaron seis cosas de cada uno. ¿Completo? ¿Único? ¿Válido? ¿Coherente? ¿Exacto? ¿A tiempo?
 
 45
-00:05:05,536 --> 00:05:12,535
+00:05:05,537 --> 00:05:12,536
 Son las seis dimensiones de calidad de datos de DAMA. Una norma ISO nombra quince; seis bastan para empezar.
 
 46
-00:05:14,035 --> 00:05:18,943
+00:05:14,036 --> 00:05:18,944
 Cada uso se apoya en distintas, como la carta de Mercator: ángulos antes que tamaños.
 
 47
-00:05:20,243 --> 00:05:24,744
+00:05:20,244 --> 00:05:24,745
 Los asientos necesitan la lista completa: cada graduado que cruza el escenario, una vez.
 
 48
-00:05:26,044 --> 00:05:30,029
+00:05:26,045 --> 00:05:30,030
 Un diploma la necesita exacta: el nombre que su graduado tiene de verdad.
 
 49
-00:05:31,529 --> 00:05:38,124
+00:05:31,530 --> 00:05:38,125
 Cada nivel se acordó con quienes la usan: Malia para las ceremonias, Planificación para el conteo del gobierno.
 
 50
-00:05:39,424 --> 00:05:42,706
+00:05:39,425 --> 00:05:42,707
 Y Mei es dueña de cada nivel, porque responde por la lista.
 
 51
-00:05:44,206 --> 00:05:51,594
+00:05:44,207 --> 00:05:51,595
 También se fija antes cómo avisa o detiene un control, y a quién: lo muestran Reglas que se ejecutan y Demasiado bueno para ser verdad.
 
 52
-00:05:55,294 --> 00:05:59,323
-Jun lo escribió todo junto a los datos, en el contrato de datos de la lista.
+00:05:55,295 --> 00:05:59,679
+Jun lo escribió todo junto a los datos, en el archivo que describe la lista.
 
 53
-00:06:00,823 --> 00:06:08,799
-Cada uso es una regla de calidad, en palabras del estándar abierto: su dimensión, su nivel, quién la acordó y qué cuesta un fallo.
+00:06:01,179 --> 00:06:08,030
+Cada uso es una regla de calidad, escrita en palabras: su dimensión, su nivel, quién la acordó y qué cuesta un fallo.
 
 54
-00:06:10,499 --> 00:06:14,677
+00:06:09,730 --> 00:06:13,908
 Las columnas imprescindibles para cada uso se marcan como datos críticos.
 
 55
-00:06:16,177 --> 00:06:20,753
+00:06:15,408 --> 00:06:19,984
 En dbt, cada control de la lista nombra su dimensión y su responsable.
 
 56
-00:06:22,453 --> 00:06:29,978
+00:06:21,684 --> 00:06:29,209
 Y en Databricks, cada columna crítica lleva una etiqueta gobernada, para que quien encuentre la tabla vea de qué dependen sus usos.
 
 57
-00:06:31,678 --> 00:06:38,826
+00:06:30,909 --> 00:06:38,057
 Si la calidad sigue fallando, mira primero tu gobierno de datos, quién es dueño de los datos y decide, y luego tus herramientas.
 
 58
-00:06:40,726 --> 00:06:45,002
+00:06:39,957 --> 00:06:44,233
 La carta de Mercator decía para qué era, en su título: para el uso de los navegantes.
 
 59
-00:06:46,502 --> 00:06:51,203
+00:06:45,733 --> 00:06:50,434
 La lista de graduación ahora también dice para qué es: cuatro usos, cada uno con su nivel.
 
 60
-00:06:52,703 --> 00:06:56,333
+00:06:51,934 --> 00:06:55,564
 Después, el equipo revisa cien de sus registros, uno por uno.
 
 61
-00:06:57,633 --> 00:06:59,825
+00:06:56,864 --> 00:06:59,056
 Pregunta para qué es antes de preguntar si es bueno.

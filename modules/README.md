@@ -281,6 +281,8 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 - [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
+- [From a branch to production](../films/locks-before-the-data/8-from-a-branch-to-production/) — `from-a-branch-to-production`
+- [Who did what](../films/locks-before-the-data/9-who-did-what/) — `who-did-what`
 
 ### Only what you may see
 
@@ -293,6 +295,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
 - [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 - [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
+- [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
 ### Kept for a reason
 
@@ -385,6 +388,7 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 - [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 - [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 - [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
+- [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
 
 ## Data management
 
@@ -405,6 +409,7 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 
 - [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 - [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
+- [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 
 ### Architecture that keeps up
 
@@ -412,6 +417,7 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 
 - [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 - [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
+- [A path for every provider](../films/architecture-that-keeps-up/3-a-path-for-every-provider/) — `a-path-for-every-provider`
 
 ### Small steps, measured
 
@@ -419,6 +425,7 @@ Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: 
 
 - [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
 - [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
+- [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
 
 ## Making of and supplementary films
 

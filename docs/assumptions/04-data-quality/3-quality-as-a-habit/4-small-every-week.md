@@ -1,8 +1,8 @@
 # Small, every week: questions and assumptions
 
-*Data quality* · *Quality as a habit*, film 4 · open, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218)
+*Data quality* · *Quality as a habit*, film 4 · merged, PR #218 · [pull request](https://github.com/roanboc/learning-data/pull/218)
 
-On the site once PR #218 merges: https://data.learn-all.org/quality-as-a-habit/small-every-week/
+[Watch it on the site](https://data.learn-all.org/quality-as-a-habit/small-every-week/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

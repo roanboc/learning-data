@@ -1,0 +1,71 @@
+{
+  "kicker": "Improving how the team works",
+  "kicker_es": "Mejorar cómo trabaja el equipo",
+  "title_es": "Mejor cada semana",
+  "h1": "Better every week: improve how the team works, one change at a time",
+  "h1_es": "Mejor cada semana: mejora cómo trabaja el equipo, un cambio a la vez",
+  "lead": "In September 2027, a request to Helena's team waits six working days for its first question back, and nobody stops to look. She keeps half an hour every Friday: one measure, one small change, tried for a week, then kept or dropped out loud. By December, fourteen changes are kept.",
+  "lead_es": "En septiembre de 2027, una solicitud al equipo de Helena espera seis días hábiles su primera pregunta, y nadie se para a mirar. Ella reserva media hora cada viernes: una medida, un pequeño cambio, probado una semana, y conservado o descartado en voz alta. En diciembre, se conservan catorce.",
+  "description": "A film on improving a data team's own way of working a little every week, the third of Small steps, measured, the fourth series of Data management. From Friday 3 September 2027, Helena Novak protects half an hour every week for how the team works: one measure, one small change, tried for a week, then kept or dropped, out loud, the cycle of plan, do, check, act. On the first Friday, Noor Rahman finds the longest wait in the tracker: a request through the front door waits six working days for its first question back. The team breaks the request's path into its steps, as the pocket card's first step does, and questions each one: why wait for Monday's planning? Ivy Reyes proposes one change, the next free person reads each new request the day it lands and asks within a working day, while Monday's planning still sets the order of the work; a week later every request's first question comes back within a day, and the team keeps it, and says so. The second change, ten minutes every morning, is dropped out loud: dropped is a result too. By 17 December, fifteen changes are tried and fourteen kept, each written that same day into the procedure it changed, with the date and why, so someone new learns it from the page and it holds while its author is away; days from ask to first use are down to 14, from 24 in June, with July's fixes, and work sent back to 6 in 100. Named once: Training Within Industry's Job Methods, kaizen, and plan, do, check, act. It opens in the United States in 1940, where a government course taught supervisors to improve the jobs they knew best, in four steps on a pocket card whose last step said: use it until a better way is developed.",
+  "description_es": "Una película sobre mejorar la propia forma de trabajar de un equipo de datos un poco cada semana, la tercera de Pasos pequeños, medidos, la cuarta serie de Gestión de datos. Desde el viernes 3 de septiembre de 2027, Helena Novak protege media hora cada semana para cómo trabaja el equipo: una medida, un pequeño cambio, probado una semana, y conservado o descartado en voz alta, el ciclo de planificar, hacer, verificar y actuar. El primer viernes, Noor Rahman encuentra en el gestor de solicitudes la espera más larga: una solicitud por la puerta de entrada espera seis días hábiles su primera pregunta de vuelta. El equipo divide el camino de la solicitud en sus pasos, como hace el primer paso de la tarjeta de bolsillo, y cuestiona cada uno: ¿por qué esperar a la planificación del lunes? Ivy Reyes propone un cambio, la siguiente persona libre lee cada solicitud nueva el día que llega y pregunta en un día hábil, mientras la planificación del lunes sigue fijando el orden del trabajo; una semana después, la primera pregunta de cada solicitud vuelve en un día, y el equipo lo conserva, y lo dice. El segundo cambio, una reunión corta cada mañana, se descarta en voz alta: descartar también es un resultado. Al 17 de diciembre, se han probado quince cambios y conservado catorce, cada uno escrito ese mismo día en el procedimiento que cambió, con la fecha y el porqué, para que alguien nuevo lo aprenda de la página y se mantenga aunque quien lo pensó no esté; los días de la solicitud al primer uso bajan a 14, desde 24 en junio, con los arreglos de julio, y el trabajo devuelto a 6 de cada 100. Nombrados una vez: Job Methods de Training Within Industry, el kaizen, y planificar, hacer, verificar, actuar. Empieza en Estados Unidos en 1940, donde un curso del gobierno enseñó a los supervisores a mejorar los trabajos que mejor conocían, en cuatro pasos en una tarjeta de bolsillo cuyo último paso decía: úsalo hasta que se desarrolle una forma mejor.",
+  "card": "Helena keeps half an hour every Friday for how the team works: one measure, one small change, kept or dropped out loud.",
+  "card_es": "Helena reserva media hora cada viernes para cómo trabaja el equipo: una medida, un pequeño cambio, conservado o descartado en voz alta.",
+  "chapters_es": {
+    "card": "Una forma mejor, en una tarjeta",
+    "friday": "Media hora los viernes",
+    "six": "De seis días a uno",
+    "kept": "Conservar o descartar, en voz alta",
+    "written": "Escrito en el procedimiento",
+    "monday": "El lunes"
+  },
+  "past": [
+    "The United States, 1940: a better way, on a card",
+    "Factories had to make far more, with millions of new workers. A government course taught supervisors to improve the jobs they knew best, in four steps on a pocket card: use it until a better way is developed. A data team's way of working gets better the same way."
+  ],
+  "past_es": [
+    "Estados Unidos, 1940: una forma mejor, en una tarjeta",
+    "Las fábricas debían producir mucho más, con millones de obreros nuevos. Un curso del gobierno enseñó a los supervisores a mejorar los trabajos que mejor conocían, en cuatro pasos en una tarjeta de bolsillo: úsalo hasta que se desarrolle una forma mejor. La forma de trabajar de un equipo de datos mejora igual."
+  ],
+  "next_h": "You've seen how a team gets better a little every week. Next: review the plan every quarter, and move it out loud when the university's plans change.",
+  "next_h_es": "Viste cómo un equipo mejora un poco cada semana. Después: revisar el plan cada trimestre, y moverlo en voz alta cuando cambian los planes de la universidad.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Training Within Industry Report, 1940-1945",
+        "title_es": "El informe de Training Within Industry, 1940-1945 (en inglés)",
+        "line": "The service's own record, from September 1945: how its courses were made and taught, the radio shield example, and the results plants reported.",
+        "line_es": "El registro del propio servicio, de septiembre de 1945: cómo se hicieron y enseñaron sus cursos, el ejemplo del blindaje de radio y los resultados que informaron las plantas.",
+        "href": "https://www.govinfo.gov/content/pkg/GOVPUB-PR32_5200-00275cf1fd80a1d51995ae716fd38f34/html/GOVPUB-PR32_5200-00275cf1fd80a1d51995ae716fd38f34.htm",
+        "href_es": "https://www.govinfo.gov/content/pkg/GOVPUB-PR32_5200-00275cf1fd80a1d51995ae716fd38f34/html/GOVPUB-PR32_5200-00275cf1fd80a1d51995ae716fd38f34.htm"
+      },
+      {
+        "title": "The roots of lean: Training Within Industry",
+        "title_es": "Las raíces de lean: Training Within Industry (en inglés)",
+        "line": "Jim Huntzinger's article of 2002: the four steps of each course, and how they reached Japan after the war and became one root of kaizen.",
+        "line_es": "El artículo de Jim Huntzinger, de 2002: los cuatro pasos de cada curso, y cómo llegaron a Japón después de la guerra y fueron una raíz del kaizen.",
+        "href": "https://www.twi-institute.com/resources/the-roots-of-lean-training-within-industry-the-origin-of-kaizen/",
+        "href_es": "https://www.twi-institute.com/resources/the-roots-of-lean-training-within-industry-the-origin-of-kaizen/"
+      },
+      {
+        "title": "Kaizen",
+        "title_es": "Kaizen",
+        "line": "Improving a little at a time, by everyone: where the word and the idea come from, and how organisations use it.",
+        "line_es": "Mejorar un poco cada vez, entre todos: de dónde vienen la palabra y la idea, y cómo la usan las organizaciones.",
+        "href": "https://en.wikipedia.org/wiki/Kaizen",
+        "href_es": "https://es.wikipedia.org/wiki/Kaizen"
+      },
+      {
+        "title": "Plan, do, check, act",
+        "title_es": "Planificar, hacer, verificar, actuar",
+        "line": "The cycle of trying one change, checking it against what you expected, and keeping or dropping it: where it comes from.",
+        "line_es": "El ciclo de probar un cambio, verificarlo contra lo esperado, y conservarlo o descartarlo: de dónde viene.",
+        "href": "https://en.wikipedia.org/wiki/PDCA",
+        "href_es": "https://es.wikipedia.org/wiki/C%C3%ADrculo_de_Deming"
+      }
+    ]
+  }
+}

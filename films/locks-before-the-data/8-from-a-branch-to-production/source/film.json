@@ -1,0 +1,53 @@
+{
+  "key": "from-a-branch-to-production",
+  "title": "From a branch to production",
+  "sub": "The eighth film of Locks before the data, the first series of Data protection and privacy: why South Africa's constitution of 1996 could be trusted by every side, written by an elected assembly against principles fixed before, and certified by a court that hadn't written it; and the same for production: rules set before the change that it can't loosen, a reviewer who didn't write it, a release approver's yes, and a deploy by the job's own identity, which signs in only from the job that waited; with the actions it runs pinned to the commits that were checked.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, with three glass rooms, development, test and production, and a glass track between them whose gates appear as the film sets them. GitHub's and Databricks' pages are drawn as their docs show them, with their logos. Cyan is an identity, green allowed, coral denied or closed, amber power switched on, violet hidden personal data. South Africa in 1993 to 1997 is painted in the same night light, with its place and year on a tag; no one's likeness is drawn.",
+  "src": [
+    "bp_kit.js",
+    "bp_africa.js",
+    "bp_path.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "door",
+    "only",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bapartheid\\b",
+      "apart hate"
+    ]
+  ],
+  "story": [
+    "principles",
+    "sent"
+  ],
+  "urgent": [],
+  "logos": true
+}

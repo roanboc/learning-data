@@ -49,7 +49,8 @@ const wc_aura=e=>e[0]>200&&e[1]>200&&e[2]>200?WC_SIDE.none:e===TECH?WC_SIDE.tech
    at the size of the page, often half the video's or less, and painting every person at full video size each frame made the
    watercolour films play at a few frames a second on a laptop (4 November 2026). The video, stills and checks (and any frame at full size) keep K at 1,
    so their pictures are exactly as before; the blur, wash and pencil buffers keep their sizes in the film's own units. */
-function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&&WC.tooth&&ctx.getTransform)return wc_outlinedLive(ctx,draw,x,y,s,edge,box);
+  const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=!window.__RENDER__&&ctx.getTransform?ctx.getTransform():null,K=m?Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))):1,wd=K<1?Math.ceil(w*K):w,hd=K<1?Math.ceil(h*K):h;
   const [c,cx]=pcanvas("p",wd,hd);if(K<1)cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
   if(WC_RAW){ctx.drawImage(c,ox,oy,w,h);return;}
@@ -65,6 +66,27 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,
   const [tc,tx]=wc_buf("figT"+wd+"x"+hd,wd,hd);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
   ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy,w,h);ctx.restore();
   ctx.drawImage(fc,ox,oy,w,h);}
+/* The site's player washes people in fewer layers, so a film with several people on screen keeps up on a laptop or a phone (5 November
+   2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
+   wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
+   asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
+  const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
+  // the wash behind: the silhouette in the side's colour, shrunk, then grown again
+  const q=8,sw=Math.max(2,Math.ceil(w/q)),sh=Math.max(2,Math.ceil(h/q)),[ac,ax]=wc_bufAt("lvA",sw,sh);ax.drawImage(c,0,0,wd,hd,0,0,sw,sh);
+  ax.globalCompositeOperation="source-atop";ax.fillStyle=rgba(wc_aura(edge),1);ax.fillRect(0,0,sw,sh);
+  ctx.save();ctx.globalAlpha*=0.3;ctx.globalCompositeOperation="multiply";ctx.imageSmoothingEnabled=true;ctx.drawImage(ac,0,0,sw,sh,ox-10*s-q,oy+6*s-q,w+2*q,h+2*q);ctx.restore();
+  // the grain and the dry, in one pass, at the frame's scale
+  const tw=Math.min(W,wd/k),th=Math.min(H,hd/k);cx.setTransform(1,0,0,1,0,0);cx.globalCompositeOperation="source-atop";cx.drawImage(WC.tooth,0,0,tw,th,0,0,tw*k,th*k);cx.globalCompositeOperation="source-over";
+  // the paint bleeding past the line, then the pencil line, a little off in four directions, under the paint
+  const bw=Math.ceil(w/4),bh=Math.ceil(h/4),[bc,bx]=wc_bufAt("lvB",bw,bh);bx.drawImage(c,0,0,wd,hd,0,0,bw,bh);
+  ctx.save();ctx.globalAlpha*=0.4;ctx.drawImage(bc,0,0,bw,bh,ox+2*s,oy+1*s,w,h);ctx.restore();
+  const [tc,tx]=wc_bufAt("lvT",wd,hd);tx.drawImage(c,0,0,wd,hd,0,0,wd,hd);tx.globalCompositeOperation="source-atop";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
+  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,0,0,wd,hd,ox+dx,oy+dy,w,h);ctx.restore();
+  ctx.drawImage(c,0,0,wd,hd,ox,oy,w,h);}
 // k: the canvas's scale against the film's units (1 at full size), so the grain and the dry keep their size on the figure
 function wc_wpaint(c,w,h,k){k=k||1;const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;
   if(k<1)fx.drawImage(WC.gran,0,0,W*k,H*k);else fx.drawImage(WC.gran,0,0);

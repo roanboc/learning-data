@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/declare-it-then-build-it/soundtrack.mp3",
+      "size": 4797849,
+      "sha256": "aab362fd37ae5a95b4a3c1b1ff8ae2b93456e00e212f166ab003f133d3b5e758",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/aab362fd37ae5a95b4a3c1b1ff8ae2b93456e00e212f166ab003f133d3b5e758.mp3"
+    }
+  ]
+}

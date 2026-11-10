@@ -1000,7 +1000,7 @@ def main():
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"
-            for m in re.finditer(r"\d½", src):
+            for m in re.finditer(r"\d+½", src):  # the whole number, so a film of 10½ min reads as 10½, not 0½
                 if m.group(0) not in HALVES[lg] and not (mk and m.group(0) == "4½"):
                     t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\" (this language's films are {' and '.join(sorted(HALVES[lg]))} min)")
     if allowed:

@@ -14,6 +14,7 @@ A data manager's first ninety days. Helena Novak starts as the university's data
 | [Every area, one job](https://data.learn-all.org/a-plan-in-ninety-days/every-area-one-job/) | A first ninety days | 8½ min | 6 | 3 questions | [script](1-every-area-one-job/script.md) · [source](1-every-area-one-job/source/README.md) |
 | [Listen first](https://data.learn-all.org/a-plan-in-ninety-days/listen-first/) | Discovery, before design | 8½ min | 6 | 3 questions | [script](2-listen-first/script.md) · [source](2-listen-first/source/README.md) |
 | [Design it simple](https://data.learn-all.org/a-plan-in-ninety-days/design-it-simple/) | Define the target state | 9 min | 6 | 3 questions | [script](3-design-it-simple/script.md) · [source](3-design-it-simple/source/README.md) |
+| [From gaps to a roadmap](https://data.learn-all.org/a-plan-in-ninety-days/from-gaps-to-a-roadmap/) | Planning, in stages | 10½ min | 7 | 3 questions | [script](4-from-gaps-to-a-roadmap/script.md) · [source](4-from-gaps-to-a-roadmap/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

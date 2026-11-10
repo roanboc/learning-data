@@ -1,0 +1,43 @@
+[
+  {
+    "name": "No secret to lose",
+    "key": "no-secret-to-lose-en",
+    "dir": "films/locks-before-the-data/2-no-secret-to-lose/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/no-secret-to-lose/film.js",
+    "video": "dist/no-secret-to-lose.mp4",
+    "file": "no-secret-to-lose.mp4",
+    "captions": [
+      [
+        "films/locks-before-the-data/2-no-secret-to-lose/captions/en.srt",
+        "no-secret-to-lose.en.srt"
+      ],
+      [
+        "films/locks-before-the-data/2-no-secret-to-lose/captions/es.srt",
+        "no-secret-to-lose.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/locks-before-the-data/2-no-secret-to-lose/source",
+      ":(exclude)films/locks-before-the-data/2-no-secret-to-lose/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 195,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -14,7 +14,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-  deployments: read
 
 jobs:
   deploy:
@@ -31,26 +30,23 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.retry.outputs.page_url }}
     steps:
+      # The live site names the commit it was built from in version.txt (a Pages deployment records the workflow's
+      # commit instead, which for a Checks run is main's newest commit, not the one deployed).
       - name: Skip a commit older than the one already live
         id: newer
         env:
           GH_TOKEN: ${{ github.token }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
-          live=""
-          for id in $(gh api "repos/$GITHUB_REPOSITORY/deployments?environment=github-pages&per_page=20" --jq '.[].id'); do
-            state=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id/statuses?per_page=1" --jq '.[0].state // ""')
-            if [ "$state" = success ]; then
-              live=$(gh api "repos/$GITHUB_REPOSITORY/deployments/$id" --jq .sha); break
-            fi
-          done
+          url=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .html_url || true)
+          live=$(curl -fsS "${url%/}/version.txt?t=$(date +%s)" 2>/dev/null | tr -dc '0-9a-f' || true)
           status=ahead
           if [ -n "$live" ]; then
             status=$(gh api "repos/$GITHUB_REPOSITORY/compare/$live...$HEAD_SHA" --jq .status || echo ahead)
           fi
-          echo "Live: ${live:-none}; $HEAD_SHA is $status"
+          echo "Live: ${live:-unknown}; $HEAD_SHA is $status"
           if [ "$status" = behind ] || [ "$status" = identical ]; then echo go=false; else echo go=true; fi >> "$GITHUB_OUTPUT"
       - if: steps.newer.outputs.go == 'true'
         uses: actions/checkout@v7
@@ -68,15 +64,21 @@ jobs:
         run: |
           pip install markdown
           python site-tools/check_site.py
+      - name: Name the commit the site is built from
+        if: steps.newer.outputs.go == 'true'
+        run: git rev-parse HEAD > site/version.txt
       - if: steps.newer.outputs.go == 'true'
         uses: actions/configure-pages@v6
       - if: steps.newer.outputs.go == 'true'
         uses: actions/upload-pages-artifact@v5
         with:
           path: site
-      # The site is about 500 MB; GitHub's syncing has taken over the default 10 minutes (01:15 and 03:12 UTC, 10 Nov).
+      # The site is over 500 MB, and GitHub's syncing sometimes takes longer than deploy-pages waits (10 minutes at
+      # most; 01:15, 03:12 and 06:01 UTC, 10 Nov). A deployment that times out is tried once more with the same upload.
       - id: deployment
         if: steps.newer.outputs.go == 'true'
+        continue-on-error: true
         uses: actions/deploy-pages@v5
-        with:
-          timeout: 1800000
+      - id: retry
+        if: steps.newer.outputs.go == 'true' && steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v5

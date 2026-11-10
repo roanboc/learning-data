@@ -69,7 +69,12 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("    concurrency:\n      group: pages\n      cancel-in-progress: false\n", deploy)
         # Main's runs finish in any order: an older commit than the live one never replaces it.
         self.assertIn("compare/$live...$HEAD_SHA", deploy)
-        self.assertRegex(deploy, r"if: steps.newer.outputs.go == 'true'\n        uses: actions/deploy-pages@v\d+\n        with:\n          timeout: \d{7,}\n")
+        # The live commit comes from the site itself: a Pages deployment records main's newest commit, not the built one.
+        self.assertIn('/version.txt?t=', deploy)
+        self.assertIn("git rev-parse HEAD > site/version.txt", deploy)
+        # deploy-pages waits 10 minutes at most, so a deployment that times out is tried once more.
+        self.assertRegex(deploy, r"id: deployment\n        if: steps.newer.outputs.go == 'true'\n        continue-on-error: true\n        uses: actions/deploy-pages@v\d+\n")
+        self.assertIn("if: steps.newer.outputs.go == 'true' && steps.deployment.outcome == 'failure'\n        uses: actions/deploy-pages@", deploy)
 
 
 if __name__ == "__main__":

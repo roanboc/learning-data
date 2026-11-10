@@ -108,10 +108,14 @@
 | How long, and then what | 203 | 0% | 0 | 28.4 | Drawn to the rule |
 | Forgetting a person | 240 | 0% | 0 | 30.0 | Drawn to the rule |
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
+| A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
+| Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
+| No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
+| Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |

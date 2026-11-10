@@ -129,6 +129,7 @@
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | The draft and the decision | 244 | 0% | 0 | 28.5 | Drawn to the rule |
+| Learning while doing | 291 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

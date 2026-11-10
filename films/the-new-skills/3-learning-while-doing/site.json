@@ -1,0 +1,100 @@
+{
+  "kicker": "Learning on the job",
+  "kicker_es": "Aprender en el trabajo",
+  "title_es": "Aprender haciendo",
+  "h1": "Learning while doing: learn on the real work, beside someone, then teach it",
+  "h1_es": "Aprender haciendo: en el trabajo real, junto a alguien, y luego enseñarlo",
+  "lead": "Ivy Reyes joins the university's data team in March 2027. For six weeks she pairs with Jun an hour a day on the team's real models, one small change at a time. From April the team keeps two hours every Thursday for learning. In May she teaches what she learned, and by June every job has two names.",
+  "lead_es": "Ivy Reyes entra al equipo de datos en marzo de 2027. Seis semanas trabaja en pareja con Jun una hora al día en los modelos reales, un cambio pequeño a la vez. Desde abril, el equipo guarda dos horas cada jueves para aprender. En mayo enseña lo que aprendió, y en junio cada trabajo tiene dos nombres.",
+  "description": "A film about learning on the job, the last of The new skills, the first series of Leading data people: skills grow fastest on the real work, a small step at a time, beside someone who knows; teaching what you learn makes it last, and spreads it; and learning needs time kept for it, because the tools change every month and their official docs change with them. Ivy Reyes, a new graduate data analyst, joins the university's data team on Monday 1 March 2027; for her first six weeks she pairs with Jun Park an hour a day on the team's real models, one small change a day, each reviewed by someone else, twenty-five in six weeks, and by the sixth she writes them on her own; from Thursday 1 April the whole team keeps two hours every Thursday afternoon for learning, free of meetings, starting from dbt's and Databricks' own docs; on Thursday 13 May Ivy teaches the team what one sensor count means, and learns it best while getting ready; in May the team lists the nine jobs that must keep running, five with only one name, and by Wednesday 30 June every job has at least two, Ivy's on two of them. Jean Lave and Etienne Wenger's apprentices, Anders Ericsson's practice, pairing from extreme programming, and the 70-20-10 rule, named as a rule of thumb, point the same way. It opens in Angicos, Brazil, in 1963, where adults learned to read from their own words in Paulo Freire's culture circles.",
+  "description_es": "Una película sobre aprender en el trabajo, la última de Las nuevas habilidades, la primera serie de Liderar equipos de datos: las habilidades crecen más rápido en el trabajo real, paso a paso, junto a alguien que sabe; enseñar lo que aprendes hace que perdure, y lo comparte; y aprender necesita tiempo reservado, porque las herramientas cambian cada mes y su documentación oficial cambia con ellas. Ivy Reyes, analista de datos recién graduada, se une al equipo de datos de la universidad el lunes 1 de marzo de 2027; sus primeras seis semanas trabaja en pareja con Jun Park una hora al día en los modelos reales del equipo, un cambio pequeño al día, cada uno revisado por otra persona, veinticinco en seis semanas, y en la sexta ya los escribe por su cuenta; desde el jueves 1 de abril, todo el equipo reserva dos horas cada jueves por la tarde para aprender, sin reuniones, partiendo de la documentación oficial de dbt y de Databricks; el jueves 13 de mayo Ivy le enseña al equipo qué significa un conteo de los sensores, y lo aprende mejor al prepararse; en mayo el equipo anota los nueve trabajos que no pueden parar, cinco con un solo nombre, y para el miércoles 30 de junio cada uno tiene al menos dos, el de Ivy en dos de ellos. Los aprendices de Jean Lave y Etienne Wenger, la práctica de Anders Ericsson, el trabajo en pareja de la programación extrema y la regla 70-20-10, nombrada como regla práctica, apuntan en la misma dirección. Empieza en Angicos, Brasil, en 1963, donde adultos aprendieron a leer con sus propias palabras en los círculos de cultura de Paulo Freire.",
+  "card": "Ivy learns the team's work beside Jun, a small change a day, teaches what she learned, and by June every job has two names.",
+  "card_es": "Ivy aprende el trabajo del equipo junto a Jun, un cambio pequeño al día, enseña lo que aprendió, y en junio cada trabajo tiene dos nombres.",
+  "chapters_es": {
+    "circles": "Sus propias palabras",
+    "beside": "Junto a Jun, una hora al día",
+    "thursday": "Dos horas cada jueves",
+    "teach": "Enseñarlo para que perdure",
+    "two": "Que nadie sea el único",
+    "why": "Por qué funciona",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Angicos, 1963: their own words",
+    "Adults who couldn't read or write learned from their own words, in a culture circle each evening, one small step at a time, with someone beside them. After forty hours, the organisers counted about 300 who could read and write. Skills grow fastest on real work, beside someone."
+  ],
+  "past_es": [
+    "Angicos, 1963: sus propias palabras",
+    "Adultos que no sabían leer ni escribir aprendieron con sus propias palabras, en un círculo de cultura cada noche, un paso pequeño a la vez, con alguien al lado. Tras cuarenta horas, los organizadores contaron unas 300 personas que ya leían y escribían. Las habilidades crecen más rápido en el trabajo real, junto a alguien."
+  ],
+  "next_h": "You've seen how skills grow on the real work, and spread. Next, in Working with people: the question behind the request.",
+  "next_h_es": "Viste cómo crecen las habilidades en el trabajo real, y cómo se comparten. Después, en Trabajar con personas: la pregunta detrás del pedido.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Communities of practice",
+        "title_es": "Comunidades de práctica",
+        "line": "Jean Lave and Etienne Wenger's idea, from their book Situated Learning: apprentices, from tailors in Liberia to midwives in Mexico, learn by taking part in real work, first at its edge.",
+        "line_es": "La idea de Jean Lave y Etienne Wenger, de su libro Situated Learning: quien llega aprende participando en el trabajo real de una comunidad, primero en su periferia.",
+        "href": "https://en.wikipedia.org/wiki/Community_of_practice",
+        "href_es": "https://es.wikipedia.org/wiki/Comunidad_de_pr%C3%A1ctica"
+      },
+      {
+        "title": "Deliberate practice",
+        "title_es": "Práctica deliberada",
+        "line": "Anders Ericsson's idea: skill grows from practice aimed at what you can't do yet, with quick feedback from someone who can.",
+        "line_es": "La idea de Anders Ericsson: la destreza crece con práctica dirigida a lo que aún no puedes hacer, con retroalimentación rápida de quien sí puede.",
+        "href": "https://en.wikipedia.org/wiki/Practice_(learning_method)",
+        "href_es": "https://es.wikipedia.org/wiki/Pr%C3%A1ctica_deliberada"
+      },
+      {
+        "title": "Pair programming",
+        "title_es": "Programación en pareja",
+        "line": "Two people at one keyboard, one typing, one reviewing and thinking ahead, swapping often: the practice extreme programming made popular.",
+        "line_es": "Dos personas en un teclado, una escribe y la otra revisa y piensa adelante, y se turnan a menudo: la práctica que popularizó la programación extrema.",
+        "href": "https://en.wikipedia.org/wiki/Pair_programming",
+        "href_es": "https://es.wikipedia.org/wiki/Programaci%C3%B3n_en_pareja"
+      },
+      {
+        "title": "The 70-20-10 rule, from the Center for Creative Leadership",
+        "title_es": "La regla 70-20-10, del Center for Creative Leadership (en inglés)",
+        "line": "Where the rule of thumb comes from: research with managers on where learning at work happens, from hard tasks, other people and courses.",
+        "line_es": "De dónde viene la regla práctica: una investigación con gerentes sobre dónde se aprende en el trabajo, en tareas difíciles, con otras personas y en cursos.",
+        "href": "https://www.ccl.org/articles/leading-effectively-articles/70-20-10-rule/",
+        "href_es": "https://www.ccl.org/articles/leading-effectively-articles/70-20-10-rule/"
+      },
+      {
+        "title": "Paulo Freire",
+        "title_es": "Paulo Freire",
+        "line": "The Brazilian educator: his literacy work with adults, the coup of 1964, his exile, and Pedagogy of the Oppressed.",
+        "line_es": "El educador brasileño: su trabajo de alfabetización con adultos, el golpe de 1964, su exilio y Pedagogía del oprimido.",
+        "href": "https://en.wikipedia.org/wiki/Paulo_Freire",
+        "href_es": "https://es.wikipedia.org/wiki/Paulo_Freire"
+      }
+    ],
+    "more": [
+      {
+        "text": "The forty hours of Angicos, fifty years on, from those who were there (in Portuguese)",
+        "text_es": "Las cuarenta horas de Angicos, cincuenta años después, contadas por quienes estuvieron (en portugués)",
+        "href": "https://www.scielo.br/j/rbedu/a/RhJLhbnWswrbK6RC3cJbkGf/?lang=pt",
+        "href_es": "https://www.scielo.br/j/rbedu/a/RhJLhbnWswrbK6RC3cJbkGf/?lang=pt"
+      },
+      {
+        "text": "dbt's official docs",
+        "text_es": "La documentación oficial de dbt (en inglés)",
+        "href": "https://docs.getdbt.com/",
+        "href_es": "https://docs.getdbt.com/"
+      },
+      {
+        "text": "Databricks' official docs",
+        "text_es": "La documentación oficial de Databricks (en inglés)",
+        "href": "https://docs.databricks.com/",
+        "href_es": "https://docs.databricks.com/"
+      }
+    ]
+  }
+}

@@ -28,8 +28,8 @@ never weaken a test.
 2. **An owner.** For each new entity, kind, model, source or seed with no owner, find who decides
    what it means: the owner of the domain on the university's map (`_shared__conceptual.yml`), or
    the team whose system it comes from. Draft it; if it isn't clear, ask data governance. A new
-   owner goes in `governance/2-owners/owners.yml` too, with where their reviews go, and
-   `scripts/generate/codeowners.py` regenerates `CODEOWNERS`. A new mart must also be an output of a
+   owner goes in `governance/2-owners/owners.yml` too, with where the impact check's note reaches
+   them (owners are told what a change touches; the data team reviews the code). A new mart must also be an output of a
    data product, with an owner who answers for it: draft `governance/4-data-products/<name>.yml`, and
    `scripts/generate/products.py` writes its product descriptor (a mart has no enterprise contract).
 3. **A glossary term, or a confirmed absence.** For each new entity in a core domain, ask data

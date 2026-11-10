@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00:02.400 --> 00:00:07.944
+Dublin, 1899. A young chemist, William Gosset, joins a large brewery.
+
+00:00:09.444 --> 00:00:13.524
+It wants better barley: which kind to grow, and how, for the best beer.
+
+00:00:14.824 --> 00:00:20.771
+But a trial means sowing a few plots and waiting a whole season, so it gives only a handful of results.
+
+00:00:22.271 --> 00:00:29.533
+And a handful can mislead. The brewery could choose the wrong barley and live with it for a year, or turn good barley away.
+
+00:00:31.033 --> 00:00:37.763
+The mathematics of the day worked for large numbers of measurements. Nobody could say how far a few could be trusted.
+
+00:00:39.263 --> 00:00:40.651
+Something had to change.
+
+00:00:42.351 --> 00:00:47.200
+So Gosset worked out how much a few results can tell you, and how sure of it you can be.
+
+00:00:48.700 --> 00:00:57.333
+Before he could prove it on paper, he tried it by hand: 3,000 measurements on 3,000 cards, shuffled, and drawn four at a time.
+
+00:00:58.833 --> 00:01:07.390
+In 1908 he published it, with tables anyone could use, as Student: the brewery let its staff publish, but not under their own names.
+
+00:01:08.890 --> 00:01:14.014
+Now a few careful trials were enough to decide, and his tables said when more were needed.
+
+00:01:15.314 --> 00:01:24.060
+In his paper, eleven pairs of trials showed that seed dried in a kiln probably gave a little more grain, and almost certainly worse barley.
+
+00:01:25.760 --> 00:01:32.025
+His way is still used wherever people can't measure everything: in medicine, in farming, in factories.
+
+00:01:33.325 --> 00:01:38.276
+And for data: a few records, looked at closely, can say how good a whole list is.
+
+00:01:39.776 --> 00:01:47.449
+At the university, the graduation list passed every check. Yet in December, 41 degree certificates were printed again.
+
+00:01:49.149 --> 00:01:54.127
+So, on a Friday in February, three people looked closely at a hundred of its records.
+
+00:01:55.427 --> 00:02:01.850
+79 were perfect: an honest number, and a map of where to look, before a single new check was written.
+
+00:02:10.150 --> 00:02:14.282
+Friday, 6 February, two o'clock, at the data team's bench.
+
+00:02:15.382 --> 00:02:24.793
+Malia Fonoti runs the ceremonies. Mei Tanaka, in the registrar's office, answers for names and awards. Jun Park builds the list.
+
+00:02:25.893 --> 00:02:33.379
+In January, they agreed what the list is for, and what each use needs. A certificate needs every name exactly right.
+
+00:02:34.679 --> 00:02:40.375
+Jun brings December's list, the last one built in full, and its hundred most recent records.
+
+00:02:41.075 --> 00:02:48.987
+For each, the fields a certificate and a ceremony need: the names, the award, the ceremony, and the date the degree is conferred.
+
+00:02:50.087 --> 00:02:56.408
+They go through them one by one, and mark every field that's wrong. A record with nothing marked is perfect.
+
+00:02:57.908 --> 00:03:00.481
+Two hours later: 79 perfect.
+
+00:03:02.581 --> 00:03:05.890
+21 have at least one error, 26 errors in all.
+
+00:03:06.990 --> 00:03:12.578
+15 are in names: accents lost, names cut short, given and family names swapped.
+
+00:03:13.278 --> 00:03:16.378
+6 are in awards, 3 in ceremonies, 2 in dates.
+
+00:03:17.878 --> 00:03:23.243
+Thomas Redman, a pioneer of data quality, calls this the Friday afternoon measurement.
+
+00:03:23.943 --> 00:03:29.161
+It needs no special tools: a hundred records, the people who know them, and an afternoon.
+
+00:03:32.461 --> 00:03:38.187
+December's list has 2,031 graduates. Can a hundred records speak for them all?
+
+00:03:39.487 --> 00:03:42.862
+It's Gosset's question again: how far can a few be trusted?
+
+00:03:44.362 --> 00:03:52.786
+If the hundred are like the rest, the answer is good to about eight either way: between 71 and 87 perfect in every hundred.
+
+00:03:54.486 --> 00:03:58.876
+Not exact. But enough to act on: about one record in five is wrong.
+
+00:04:00.176 --> 00:04:05.544
+Why the most recent? They show the list as it's made now, not as it was made years ago.
+
+00:04:06.244 --> 00:04:09.413
+And everyone understands 79 of a hundred.
+
+00:04:10.713 --> 00:04:16.614
+It also raises a puzzle. December's 41 reprints were about 2 certificates in 100.
+
+00:04:17.914 --> 00:04:23.697
+The hundred say 21 records in 100 have an error: over 400 on December's list.
+
+00:04:25.397 --> 00:04:31.458
+So someone had been putting most of them right by hand before the list went, and nobody counted that work.
+
+00:04:32.758 --> 00:04:35.336
+The hidden factory, a later film, follows it.
+
+00:04:38.036 --> 00:04:42.468
+A hundred records say how good the list is, not where to look among two thousand.
+
+00:04:43.168 --> 00:04:45.850
+So Jun has the platform describe the whole list.
+
+00:04:46.950 --> 00:04:54.584
+A notebook shows a quick profile in one click. For one the team keeps and refreshes, he sets up Databricks' data profiling.
+
+00:04:55.284 --> 00:04:58.024
+It reads every row and describes each column.
+
+00:04:58.724 --> 00:05:04.648
+How many values are empty, how many are different, which are shortest and longest, and which come up most.
+
+00:05:05.948 --> 00:05:10.309
+He profiles December's list, all 2,031 graduates.
+
+00:05:11.409 --> 00:05:12.680
+Two things stand out.
+
+00:05:14.180 --> 00:05:21.419
+The longest family name is exactly 30 characters: the length of the field in the student system. Names cut short.
+
+00:05:23.119 --> 00:05:29.149
+And among the most frequent family names, the same name twice: once as written, once in capitals.
+
+00:05:30.849 --> 00:05:33.964
+So Jun adds counts of his own, as custom metrics.
+
+00:05:35.064 --> 00:05:38.751
+41 family names exactly 30 characters long.
+
+00:05:39.851 --> 00:05:45.447
+312 in capitals only, every one of a student admitted before 2020.
+
+00:05:46.747 --> 00:05:54.330
+And not one name with a letter outside A to Z. Eight in the hundred had lost their accents. Here, every accent is gone.
+
+00:05:56.230 --> 00:06:01.041
+The hundred had none in capitals: all of them were students admitted since 2020.
+
+00:06:01.741 --> 00:06:04.935
+Only the profile, which reads every row, could see them.
+
+00:06:06.235 --> 00:06:09.438
+The hundred said how good. The profile said where to look.
+
+00:06:13.738 --> 00:06:17.736
+Only now does Jun write checks, starting with what the profile showed.
+
+00:06:19.236 --> 00:06:23.019
+A family name exactly as long as the field may have been cut short.
+
+00:06:24.519 --> 00:06:26.467
+A family name in capitals only.
+
+00:06:27.967 --> 00:06:31.771
+And a list of more than 200 names without a single accent.
+
+00:06:33.071 --> 00:06:37.080
+Eight in the hundred had lost theirs, so a list with none isn't chance.
+
+00:06:38.580 --> 00:06:42.821
+Mei owns all three. Before any ran, she and Malia agreed their level.
+
+00:06:44.321 --> 00:06:48.171
+Each holds the list for a person to look; none stops it on its own.
+
+00:06:49.871 --> 00:06:54.916
+Jun writes them in the project, with dbt. From Monday, they run every night.
+
+00:06:56.416 --> 00:07:03.715
+The platform's monitoring watches the rest, such as whether each table arrives on time, as Quality on the platform showed.
+
+00:07:05.415 --> 00:07:08.650
+But some of the hundred's errors, no check of the list can see.
+
+00:07:10.350 --> 00:07:16.534
+The swapped names, the awards, the ceremonies and the dates were all allowed values. Allowed, and wrong.
+
+00:07:18.634 --> 00:07:23.534
+To find those, the list needs something outside it to compare with. That's the next film.
+
+00:07:27.234 --> 00:07:34.911
+Back in Dublin, Gosset never tried every barley. A few careful trials were enough, and his tables said when more were needed.
+
+00:07:36.211 --> 00:07:43.350
+The team did the same with its list: a hundred records, looked at by the people who know them, then the whole list described.
+
+00:07:44.650 --> 00:07:51.276
+79 is where they start. Each time they measure again, the number will say whether their changes worked.
+
+00:07:52.576 --> 00:07:57.818
+And because they measured first, the checks go where the errors are, not where checks are easy to write.
+
+00:07:59.318 --> 00:08:02.459
+Look at a hundred records before you write a single check.

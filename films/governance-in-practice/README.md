@@ -11,7 +11,7 @@ What the university decided in *Governance principles* ([`../data-governance/`](
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
-| [Governed in dbt](https://data.learn-all.org/governance-in-practice/governed-in-dbt/) | Governance in the code | 6 min | 9 | 3 questions | [script](1-governed-in-dbt/script.md) · [source](1-governed-in-dbt/source/README.md) |
+| [Governed in dbt](https://data.learn-all.org/governance-in-practice/governed-in-dbt/) | Governance in the code | 6½ min | 9 | 3 questions | [script](1-governed-in-dbt/script.md) · [source](1-governed-in-dbt/source/README.md) |
 | [Governed in Unity Catalog](https://data.learn-all.org/governance-in-practice/governed-in-unity-catalog/) | Access, masks and audit | 6 min | 9 | 3 questions | [script](2-governed-in-unity-catalog/script.md) · [source](2-governed-in-unity-catalog/source/README.md) |
 | [Meaning on the platform](https://data.learn-all.org/governance-in-practice/meaning-on-the-platform/) | Glossary and metrics | 6 min | 9 | 3 questions | [script](3-meaning-on-the-platform/script.md) · [source](3-meaning-on-the-platform/source/README.md) |
 | [Quality on the platform](https://data.learn-all.org/governance-in-practice/quality-on-the-platform/) | Quality checks and monitoring | 6½ min | 9 | 3 questions | [script](4-quality-on-the-platform/script.md) · [source](4-quality-on-the-platform/source/README.md) |

@@ -11,6 +11,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A place on the map](https://data.learn-all.org/from-helper-to-colleague/a-place-on-the-map/) | Agents on the map | 9 min | 7 | 3 questions | [script](3-a-place-on-the-map/script.md) · [source](3-a-place-on-the-map/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

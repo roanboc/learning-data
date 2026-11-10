@@ -1,0 +1,46 @@
+{
+  "kicker": "Agents on the map",
+  "kicker_es": "Agentes en el mapa",
+  "title_es": "Un lugar en el mapa",
+  "h1": "A place on the map, before an agent works alone",
+  "h1_es": "Un lugar en el mapa, antes de que un agente trabaje solo",
+  "lead": "On Monday 2 November, the planning agent joins Planning, to work on its own. If it simply started, nobody could say what it may do, who answers for it, or who can stop it. So it takes its place on the university's map first: a role on three of Planning's seven steps, an owner, and a gate to pass.",
+  "lead_es": "El lunes 2 de noviembre, el agente de Planificación llega para trabajar por su cuenta. Si empezara sin más, nadie sabría qué puede hacer, quién responde por él ni quién puede detenerlo. Así que antes toma su lugar en el mapa: un rol en tres de los siete pasos, una dueña y una puerta que pasar.",
+  "description": "A film about designing an AI agent into the organisation before it works alone, the third of From helper to colleague: two newcomers in Planning, Lucía Ortega and the planning agent, welcomed the same way, line by line, a badge and an identity of its own, a role, a manager and an owner who answers for it, rights from a group and never an admin's, and a confidentiality agreement its owner signs; its place on the university's enterprise map, starting from the work, the capability Planning's tickets serve, the process every ticket goes through, seven steps from a ticket to production, each assigned to a role, and a new role, planning contributor, on the three steps that draft a change, while people keep the others, so whoever drafts a change never approves or releases it; the agent assigned to that role, with Clara Jensen as its owner, its role saying what it may do, what it may not and whom it asks, and its stage for each kind of task written on its assignment, beside Anil Kurian's workload agent and Yusuf's governance review agent; its gate, Planning's last forty tickets redone in a sandbox against a bar set first, thirty-seven matched, three asked and none confidently wrong, and a check that fails any agent on the map without an owner, a role or a stage for each kind of task; and who may own an agent, set it up and stop it. It opens in Southern California in 1970, where crews from five hundred agencies fought the fires each its own way, until the Incident Command System gave them one structure to join.",
+  "description_es": "Una película sobre cómo se integra un agente de IA en la organización antes de que trabaje solo, la tercera de De ayudante a colega: dos recién llegados a Planificación, Lucía Ortega y el agente de Planificación, que reciben la misma bienvenida, línea por línea, una credencial y una identidad propia, un rol, un jefe y una dueña que responde por él, permisos de un grupo y nunca de administrador, y un acuerdo de confidencialidad que firma su dueña; su lugar en el mapa de arquitectura empresarial de la universidad, empezando por el trabajo, la capacidad a la que sirven los encargos de Planificación, el proceso por el que pasa cada encargo, siete pasos de un encargo a producción, cada uno asignado a un rol, y un rol nuevo, colaborador de Planificación, en los tres pasos que redactan un cambio, mientras las personas conservan los demás, así que quien redacta un cambio nunca lo aprueba ni lo libera; el agente asignado a ese rol, con Clara Jensen como su dueña, su rol diciendo qué puede hacer, qué no y a quién consulta, y su etapa para cada tipo de tarea escrita en su asignación, junto al agente de carga de trabajo de Anil Kurian y al agente de revisión de gobernanza de Yusuf; su puerta, los últimos cuarenta encargos de Planificación rehechos en un sandbox frente a una meta fijada antes, treinta y siete coincidieron, en tres preguntó y ninguno estuvo mal sin decirlo, y una verificación que rechaza a cualquier agente del mapa sin dueño, sin rol o sin una etapa para cada tipo de tarea; y quién puede ser dueño de un agente, crearlo y detenerlo. Empieza en el sur de California en 1970, donde cuadrillas de quinientas agencias combatían los incendios cada una a su manera, hasta que el Sistema de Comando de Incidentes les dio una estructura a la cual sumarse.",
+  "card": "Planning's new agent will work alone. First it takes its place on the map: a role on three of seven steps, an owner, a gate.",
+  "card_es": "El nuevo agente de Planificación trabajará solo. Antes, su lugar en el mapa: un rol en tres de siete pasos, una dueña, una puerta.",
+  "chapters_es": {
+    "first": "Trece días de 1970",
+    "scope": "Una forma de trabajar",
+    "monday": "Dos recién llegados",
+    "map": "Un lugar en el mapa",
+    "gate": "La puerta",
+    "stop": "Quién es su dueño, y quién puede detenerlo",
+    "close": "Una estructura a la cual sumarse"
+  },
+  "past": [
+    "Southern California, 1970: one structure to join",
+    "Crews from five hundred agencies, each with its own words and channels, became one team once everyone checked in and took a place on one board. An agent joins the same way: it takes its place on the map before it works alone."
+  ],
+  "past_es": [
+    "El sur de California, 1970: una estructura a la cual sumarse",
+    "Cuadrillas de quinientas agencias, cada una con sus palabras y sus canales, fueron un solo equipo cuando todos se registraron y ocuparon un lugar en un tablero. Un agente se suma igual: toma su lugar en el mapa antes de trabajar solo."
+  ],
+  "repo": {
+    "map": [
+      "governance/3-architecture-map/3-business/services/change-a-data-product.yml",
+      "governance/3-architecture-map/3-business/process-steps/",
+      "governance/3-architecture-map/3-business/roles/planning-contributor.yml",
+      "governance/3-architecture-map/5-application/application-components/planning-agent.yml",
+      "governance/3-architecture-map/5-application/application-components/workload-agent.yml"
+    ],
+    "gate": [
+      "governance/3-architecture-map/5-application/application-components/planning-agent.yml",
+      "scripts/check/architecture_map.py",
+      "governance/3-architecture-map/README.md"
+    ]
+  },
+  "next_h": "You've seen an agent take its place on the map before it works alone. Next: rights that come from the work, and not from a person's.",
+  "next_h_es": "Viste a un agente tomar su lugar en el mapa antes de trabajar solo. Después: permisos que vienen del trabajo, no de una persona."
+}

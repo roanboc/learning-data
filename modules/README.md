@@ -350,6 +350,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
+- [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
 - [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 
 ### Leading a data team

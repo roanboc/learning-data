@@ -259,7 +259,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 
 ### Only what you may see
 

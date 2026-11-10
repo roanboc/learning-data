@@ -2,7 +2,7 @@
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the title card after the opening, and the end card. The longer holds let a picture finish: the land cut away to the channel,
    the coral marks along it, the dry spout, the cuts closing, the stamped nozzle, the lead stacking up, the coral line past the tank, the counter reaching 9,
-   the internet's doors shutting, "Refused" landing on the keys, the one role left, the binding, "Not in this workspace", the amber door glowing and going out,
+   the internet's doors shutting, the keys and the link struck through, the one role left, the binding, "A grant isn't enough", the amber door glowing and going out,
    the key's new version, and the last line. */
 const BREATH={
 "holes":{"hold":{"rome":0.6,"aqueducts":1.4,"uses":1.0,"office":0.8,"measures":1.2,"drawn":0.6,"watermen":0.8,"gardens":0.8,"pavements":1.2,"stop":1.0,"nobody":0.8,"change":1.4}},

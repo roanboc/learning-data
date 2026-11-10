@@ -196,15 +196,17 @@ scene("paths",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({pe:wAt(sc,"e
     for(let i=0;i<3;i++){const u=clamp((tt-P.pp-i*0.35)/1.4,0,1),y=NW_H.rooms[i].y+86;if(u>0&&u<1){const px=lerp(420,800,ag_sine(u));withA(x,Math.sin(Math.PI*u),()=>{dp_halo(x,px,y,30,"green",0.5);x.fillStyle=rgba(dp_f("green"),1);x.beginPath();x.arc(px,y,7,0,TAU);x.fill();});}}
     if(tt>P.mach)dp_link(x,[205,336],[640,404],"green",ag_sine((tt-P.mach-0.3)/0.7),{lw:2.4,alpha:0.85*(1-ag_in(tt,c.out,0.6))});
     if(tt>P.build)dp_link(x,[491,336],[640,404],"green",ag_sine((tt-P.build-0.3)/0.7),{lw:2.4,alpha:0.85*(1-ag_in(tt,c.out,0.6))});
-    // for two weeks, the university's addresses only
-    nw_cardAt(x,tt,P.list,P.off-0.2,1470,106,410,{kick:"IP access list",title:"The university's addresses",sub:"for two weeks"},"grey");
+    // for two weeks, the university's addresses only: in the left column, under the university's network, clear of the internet's
+    // words; it leaves before the workspace's setting comes to the same place
+    nw_cardAt(x,tt,P.list,P.off-0.45,60,430,560,{kick:"IP access list",title:"The university's addresses",sub:"for two weeks"},"grey");
     // public access off, in all three workspaces
     nw_pg(x,60,380,560,340,{tool:"azure",name:"Microsoft Azure",where:"Networking",title:"Workspace: production"},ag_in(tt,P.off,0.5)*(1-ag_in(tt,c.nodoor+1.4,0.5)),(c2,b)=>{
       dp_T(c2,"Allow Public Network Access",b.x,b.y+26,{w:600,size:28,col:"mut"});const u=ag_in(tt,P.off+0.9,0.6);dp_switch(c2,b.x,b.y+50,1-u,{col:"coral"});
       nw_swap(c2,"Enabled","Disabled",b.x+92,b.y+80,u,{w:600,size:28});dp_pill(c2,b.x,b.y+158,"All three workspaces","grey",{size:28,a:ag_in(tt,P.all3,0.5),glow:8});});
-    // a notebook's table, sent anywhere, through serverless compute
-    {const u=clamp((tt-P.send)/2.4,0,1);if(u>0&&u<1){const C=NW_H.cloud,q=NW_OUT[5],a=Math.sin(Math.PI*u),p1=ag_sine(u*2),p2=ag_sine(u*2-1),
-      px=u<0.5?lerp(900,C.x,p1):lerp(C.x,q[0],p2),py=u<0.5?lerp(600,C.y,p1):lerp(C.y,q[1],p2);dp_slip(x,px,py-30,"A table","grey",{align:"center",a});}}
+    // a notebook's table, sent anywhere, through serverless compute: from production, just under the cloud (clear of its words), and
+    // out into the internet, under its words too
+    {const u=clamp((tt-P.send)/2.4,0,1);if(u>0&&u<1){const C=NW_H.cloud,M=[C.x+10,C.y+184],q=NW_OUT[6],a=Math.sin(Math.PI*u),p1=ag_sine(u*2),p2=ag_sine(u*2-1),
+      px=u<0.5?lerp(900,M[0],p1):lerp(M[0],q[0],p2),py=u<0.5?lerp(600,M[1],p1):lerp(M[1],q[1],p2);dp_slip(x,px,py-30,"A table","grey",{align:"center",a});}}
     // production's network policy: restricted access; a week in dry run, then on
     nw_cardAt(x,tt,P.pol,sc.dur-1.2,60,380,560,{kick:"Network policy",title:"production: restricted access",sub:"only its own storage, and a short list"},"green");
     dp_tag(x,1500,300,"api.uni.example","grey",{size:28,a:ag_in(tt,P.short+0.4,0.5)*(1-ag_in(tt,sc.dur-1.2,0.4)),to:NW_API,p:1});
@@ -241,7 +243,7 @@ scene("files",(ctx,S,t,sc)=>{const c=sc.cues,P=nw_once(sc,"P",()=>({pub:wAt(sc,"
       if(mi>0)dp_rows(c2,b.x,b.y,[{t:"",w:400},{t:"",w:286}],[[{mono:true,t:"catalog-connector-prod",a:mi},{pill:"Managed identity",col:"cyan",a:mi}]],{lh:56,line:false});
       dp_pill(c2,b.x,b.y+150,"No secret anyone holds","green",{size:28,a:ag_in(tt,P.nosec,0.5),glow:8});});
     dp_tag(x,1086,736,"Access connector","cyan",{a:ag_in(tt,P.conn,0.5)*(1-ag_in(tt,P.thru2-0.6,0.4)),to:[1425,NW_H.tank.y+NW_H.tank.h/2],p:ag_sine((tt-P.conn-0.3)/0.5)});
-    nw_pg(x,PX,PY,PW,PH,{tool:"databricks",name:"Catalog Explorer",where:"External data",title:"Storage credential"},pg(P.cred,P.rt-0.6),(c2,b)=>{
+    nw_pg(x,PX,PY,PW,PH,{tool:"databricks",name:"Catalog Explorer",where:"Connect › Credentials",title:"Storage credential"},pg(P.cred,P.rt-0.6),(c2,b)=>{
       dp_rows(c2,b.x,b.y,[{t:"Name",w:400},{t:"Type",w:286}],[[{mono:true,t:"catalog_connector_prod"},{pill:"Managed identity",col:"cyan"}]],{lh:56});
       dp_T(c2,"External locations: one for each area",b.x,b.y+152,{w:600,size:28,a:ag_in(tt,P.ext,0.5)});});
     // every read through the catalog: a light from production, through the tank, its checks lit, into the files

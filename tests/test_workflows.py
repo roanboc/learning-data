@@ -42,6 +42,19 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual(result.stdout, expected or "|")
 
+    def test_audio_workflow_publishes_when_audio_reaches_main(self):
+        workflow = (ROOT / ".github/workflows/audio.yml").read_text(encoding="utf-8")
+        triggers = workflow.split("\non:\n", 1)[1].split("\npermissions:\n", 1)[0]
+        push = triggers.split("  push:\n", 1)[1].split("  schedule:\n", 1)[0]
+        self.assertIn("    branches: [main]\n", push)
+        for path in ("films/**/audio.json", "site/assets/**/*.mp3", "site-tools/media.py", ".github/workflows/audio.yml"):
+            self.assertIn(f"      - '{path}'\n", push)
+        self.assertRegex(triggers, r"  schedule:\n    - cron: '[0-9*/,-]+( [0-9*/,-]+){4}'\n")
+        self.assertIn("  workflow_dispatch:\n", triggers)
+        # A push or a scheduled run has no inputs: it publishes everything missing, in the blank run's queue.
+        self.assertIn("group: audio-release-${{ inputs.tag || 'all' }}\n", workflow)
+        self.assertIn("cancel-in-progress: false\n", workflow)
+
 
 if __name__ == "__main__":
     unittest.main()

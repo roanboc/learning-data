@@ -1,6 +1,6 @@
 # Tags that travel: questions and assumptions
 
-*Data protection and privacy* · *Only what you may see*, film 5 of 8 · merged, PR #235 · [pull request](https://github.com/roanboc/learning-data/pull/235)
+*Data protection and privacy* · *Only what you may see*, film 5 · merged, PR #235 · [pull request](https://github.com/roanboc/learning-data/pull/235)
 
 [Watch it on the site](https://data.learn-all.org/only-what-you-may-see/tags-that-travel/)
 

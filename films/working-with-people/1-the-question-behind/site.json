@@ -1,0 +1,79 @@
+{
+  "kicker": "Listening first",
+  "kicker_es": "Escuchar primero",
+  "title_es": "La pregunta detrás del pedido",
+  "h1": "The question behind the request: ask what it's for, and agree it in writing",
+  "h1_es": "La pregunta detrás del pedido: pregunta para qué es y acuérdalo por escrito",
+  "lead": "Graham Ellis, the new Director of Facilities, asks for a dashboard of room use by Easter. In half an hour, mostly listening, Helena and Noor find the decision behind it, whether to ask for a new teaching building, and agree the question with him in writing, beside his words.",
+  "lead_es": "Graham Ellis, el nuevo director de Instalaciones, pide un tablero del uso de las aulas para Semana Santa. En media hora, sobre todo escuchando, Helena y Noor encuentran la decisión que hay detrás, si pedir un nuevo edificio de aulas, y acuerdan con él la pregunta por escrito, junto a sus palabras.",
+  "description": "A film about listening for the question behind a request, the first of Working with people, the second series of Leading data people: a request usually names someone's guess at a solution, and listening finds the decision behind it (what will you decide with it, by when, who else decides, what do you already trust, what would change your mind); then say back what you heard, agree the question in writing, and keep the request's words beside it; Edgar Schein's humble inquiry and Carl Rogers and Richard Farson's active listening, named once, and the five whys, asked with care; on Thursday 11 February 2027 Graham Ellis, the new Director of Facilities, asks for a dashboard of room use by Easter; on Tuesday 16 February, in half an hour, Helena Novak, the data manager, and Noor, the data architect, find the decision behind it: whether to ask the University Council for a new teaching building of forty rooms, about A$140 million, which it decides on 24 June; Graham stops Helena at one word, used, by which he means people in the room, and that word decides the data, the bookings beside each room's head counts; Noor writes the question with him on one page, beside his words: do we have too few rooms, or too few at some hours?; by 23 April the answer: rooms booked 38% of the week but 93% at the peak, and one booked hour in five, nobody there; not too few rooms, but too few at some hours; and what to do on Monday. It opens in Pisa, where from 1990 to 2001 an international committee saved the Leaning Tower by first agreeing what saving it would mean.",
+  "description_es": "Una película sobre escuchar la pregunta que hay detrás de un pedido, la primera de Trabajar con personas, la segunda serie de Liderar equipos de datos: un pedido suele nombrar lo que alguien supone que es la solución, y escuchar encuentra la decisión que hay detrás (qué decidirá con esto, para cuándo, quién más decide, en qué confía ya, qué le haría cambiar de idea); luego, repetir lo que oíste, acordar la pregunta por escrito y dejar junto a ella las palabras del pedido; la indagación humilde de Edgar Schein y la escucha activa de Carl Rogers y Richard Farson, nombradas una vez, y los cinco porqués, preguntados con cuidado; el jueves 11 de febrero de 2027 Graham Ellis, el nuevo director de Instalaciones, pide un tablero del uso de las aulas para Semana Santa; el martes 16 de febrero, en media hora, Helena Novak, la gestora de datos, y Noor, la arquitecta de datos, encuentran la decisión detrás: si pedir al Consejo Universitario un nuevo edificio de cuarenta aulas, unos 140 millones de dólares australianos, que decide el 24 de junio; Graham detiene a Helena en una palabra, uso, con la que quiere decir personas en el aula, y esa palabra decide los datos, las reservas junto a los conteos de personas de cada aula; Noor escribe con él la pregunta en una página, junto a sus palabras: ¿tenemos muy pocas aulas, o muy pocas a algunas horas?; para el 23 de abril, la respuesta: aulas reservadas el 38% de la semana pero el 93% en la hora pico, y en una de cada cinco horas reservadas, nadie; no muy pocas aulas, sino muy pocas a algunas horas; y qué hacer el lunes. Empieza en Pisa, donde de 1990 a 2001 un comité internacional salvó la torre inclinada acordando primero qué sería salvarla.",
+  "card": "Graham asks for a dashboard by Easter; half an hour of listening finds the decision behind it, and a question agreed in writing.",
+  "card_es": "Graham pide un tablero para Semana Santa; media hora escuchando encuentra la decisión detrás, y una pregunta acordada por escrito.",
+  "chapters_es": {
+    "tower": "Salvar una torre inclinada",
+    "ask": "Un tablero para Semana Santa",
+    "listen": "Media hora, sobre todo escuchando",
+    "agree": "Repetirlo y ponerlo por escrito",
+    "answer": "Lo que dio la pregunta",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Pisa, 1990 to 2001: first, what saving means",
+    "The Leaning Tower was closed for fear it would fall, and any work on it was a risk. Before choosing how, an international committee agreed what saving it would mean: about half a degree, too little to see. Agree what a request is for before the work starts."
+  ],
+  "past_es": [
+    "Pisa, 1990 a 2001: primero, qué es salvarla",
+    "La torre inclinada se cerró por miedo a que cayera, y cualquier obra era un riesgo. Antes de elegir cómo, un comité internacional acordó qué sería salvarla: cerca de medio grado, demasiado poco para verlo. Acuerda para qué es un pedido antes de empezar el trabajo."
+  ],
+  "next_h": "You've seen how to find the question behind a request. Next: explaining the answer, so the people who decide can.",
+  "next_h_es": "Viste cómo encontrar la pregunta detrás de un pedido. Después: explicar la respuesta para que quienes deciden puedan hacerlo.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Edgar Schein, who wrote Humble Inquiry",
+        "title_es": "Edgar Schein, autor de Humble Inquiry (en inglés)",
+        "line": "The organisational psychologist and his books, among them Humble Inquiry (2013): the gentle art of asking instead of telling.",
+        "line_es": "El psicólogo organizacional y sus libros, entre ellos Humble Inquiry (2013): el arte de preguntar en lugar de decir.",
+        "href": "https://en.wikipedia.org/wiki/Edgar_Schein",
+        "href_es": "https://en.wikipedia.org/wiki/Edgar_Schein"
+      },
+      {
+        "title": "Active listening",
+        "title_es": "Escucha activa",
+        "line": "The practice Carl Rogers and Richard Farson named: hearing the whole meaning of what someone says, and saying it back.",
+        "line_es": "La práctica que nombraron Carl Rogers y Richard Farson: oír todo el significado de lo que alguien dice, y repetirlo.",
+        "href": "https://en.wikipedia.org/wiki/Active_listening",
+        "href_es": "https://es.wikipedia.org/wiki/Escucha_activa"
+      },
+      {
+        "title": "Five whys",
+        "title_es": "Los cinco porqués",
+        "line": "Asking \"why?\" again and again to reach a cause: where it comes from, and where it falls short.",
+        "line_es": "Preguntar \"¿por qué?\" una y otra vez hasta llegar a una causa: de dónde viene, y dónde se queda corta.",
+        "href": "https://en.wikipedia.org/wiki/Five_whys",
+        "href_es": "https://es.wikipedia.org/wiki/Los_cinco_%C2%BFPor_qu%C3%A9%3F"
+      },
+      {
+        "title": "Leaning Tower of Pisa",
+        "title_es": "Torre de Pisa",
+        "line": "The tower's story, from 1173 to its closing in 1990, the work to steady it, and its reopening in December 2001.",
+        "line_es": "La historia de la torre, desde 1173 hasta su cierre en 1990, la obra para estabilizarla y su reapertura en diciembre de 2001.",
+        "href": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
+        "href_es": "https://es.wikipedia.org/wiki/Torre_de_Pisa"
+      },
+      {
+        "title": "The engineers' own account",
+        "title_es": "El relato de los propios ingenieros (en inglés)",
+        "line": "Three of the committee's engineers, in an open paper of 2009: the half a degree they aimed for, the signed daily instructions, and how the tower has moved since.",
+        "line_es": "Tres de los ingenieros del comité, en un artículo abierto de 2009: el medio grado que buscaban, las instrucciones diarias firmadas y cómo se ha movido la torre desde entonces.",
+        "href": "https://www.geocasehistoriesjournal.org/issues/volume-1-3/leaning-tower-of-pisa-behaviour-after-stabilization-operations",
+        "href_es": "https://www.geocasehistoriesjournal.org/issues/volume-1-3/leaning-tower-of-pisa-behaviour-after-stabilization-operations"
+      }
+    ]
+  }
+}

@@ -343,53 +343,53 @@ El control de títulos mide la exactitud, contra las listas aprobadas por las ju
 Para los nombres, la referencia es el graduado, y la lista guarda la fecha en que se confirmó cada uno.
 
 87
-00:07:53,932 --> 00:08:01,721
-El contrato de datos también lo dice: su regla para títulos nombra la dimensión, exactitud, y el método, conciliación.
+00:07:53,932 --> 00:07:58,796
+Y la prueba que ejecuta nombra su método: conciliación, título por título.
 
 88
-00:08:03,421 --> 00:08:06,537
+00:08:00,496 --> 00:08:03,612
 Y el cuadro de mando los cuenta por separado: permitido, y cierto.
 
 89
-00:08:08,237 --> 00:08:10,521
+00:08:05,312 --> 00:08:07,596
 Un control es tan cierto como su referencia.
 
 90
-00:08:11,821 --> 00:08:17,158
+00:08:08,896 --> 00:08:14,233
 Di cuál usa, y quien lea el resultado sabrá qué le puede decir, y qué no.
 
 91
-00:08:20,058 --> 00:08:24,615
+00:08:17,133 --> 00:08:21,690
 Los equipos de Ino recorrían la costa de día, y la comprobaban con las estrellas de noche.
 
 92
-00:08:26,115 --> 00:08:27,935
+00:08:23,190 --> 00:08:25,010
 El camino decía cuánto habían avanzado.
 
 93
-00:08:29,035 --> 00:08:31,514
+00:08:26,110 --> 00:08:28,589
 Las estrellas decían cuán al norte estaban de verdad.
 
 94
-00:08:33,414 --> 00:08:37,452
+00:08:30,489 --> 00:08:34,527
 El jueves 26 de febrero, la lista de marzo salió hacia la imprenta
 
 95
-00:08:38,152 --> 00:08:43,856
+00:08:35,227 --> 00:08:40,931
 con 88 nombres corregidos por los propios graduados, y dos títulos hallados en las listas de las juntas.
 
 96
-00:08:45,556 --> 00:08:47,558
+00:08:42,631 --> 00:08:44,633
 Cada nombre estuvo permitido todo el tiempo.
 
 97
-00:08:48,858 --> 00:08:54,069
+00:08:45,933 --> 00:08:51,144
 Ahora 1,013 los había confirmado la persona a quien pertenecen.
 
 98
-00:08:55,769 --> 00:08:57,197
+00:08:52,844 --> 00:08:54,272
 Un control dice que está permitido.
 
 99
-00:08:58,297 --> 00:08:59,990
+00:08:55,372 --> 00:08:57,065
 Solo una referencia dice que es cierto.

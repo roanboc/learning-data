@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and section 11 on 5 November, and section 12 on 10 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11 and 13 on 5 November, and sections 12 and 14 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -62,7 +62,7 @@ Some of ABAC is in Beta (policies on views, on the whole metastore): check what'
 Ontos, from Databricks Labs, is a business catalogue for Unity Catalog: data products, data contracts,
 glossaries and semantic models, with review workflows. It runs as a Databricks App (its README:
 `databricks bundle deploy`, then `databricks apps deploy`). It follows ODCS v3.1.0, the version of the
-contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
+enterprise contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
 `governance/6-product-descriptors/` does. Load the
 contracts and products from there; the files in this repository stay their home, and the catalogue
 keeps a copy (Noor's map: *data contract* and *data product* in `governance/3-architecture-map/4-information/`).
@@ -240,9 +240,9 @@ The model's YAML names them: a column's `meta.critical_for` lists the uses that 
 (the graduation list's printed name for the certificates and the programme; its ceremony and
 attendance for the seating plan). After the table builds, dbt tags each of those columns with the
 key-only tag `critical_data`, and takes the tag off a column no use needs any more
-(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
-(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
-the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+(`macros/governance/critical_data.sql`). The model's YAML names them (`meta.critical_for`), and its
+`meta.quality` says what each use needs, at the level agreed with the people who use it
+(`docs/conventions.md`, *What each use needs*). Once, on the platform:
 
 1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
    *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can
@@ -330,7 +330,72 @@ tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its 
    the inference tables' rows are deleted after 30 days, the university's rule. A ticket names no
    one: an issue keeps its edits, and every commit is copied to every clone.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; and *Prepare your data for GDPR compliance* to the end, for section 12, on 10 November 2026)
+## 13. A person's request
+
+How the data team does its part of a request the privacy office has logged: a person asks what the
+university holds about them, to correct or erase something, or to stop a use. The office answers
+within 30 days, the university's own rule. Nothing here runs in the build.
+
+1. **The ticket names no one.** The office logs the request with its number and the day it's due,
+   and the data team opens an issue from `examples/a-person-asks/privacy-request.yml`: the number,
+   the due date and the steps, as a task list. The person's numbers go only into the restricted
+   table `privacy.request_keys` (`request`, `system`, `key`; `system` is the key set, as
+   `macros/shared/keys.sql` writes it), which the office's group and two service principals may
+   read: `privacy-finder`, which searches, and `privacy-deleter`, the nightly deletion job of
+   section 12. Never into an issue, a chat or a query's text: `system.query.history` keeps each
+   query's text for a year, readable by account admins and the `databricks_pii_access` group.
+2. **Where to look.** Every model built from the systems the numbers come from, from the project:
+
+   ```bash
+   dbt ls --resource-type model --profiles-dir . --select \
+       source:hr_system+ source:student_system+ source:alumni_system+ \
+       source:research_system+ source:learning_platform+
+   ```
+
+   And, on the platform, everything built from those systems' tables, by notebooks, jobs and
+   dashboards too, with its columns classed `direct` or `pseudonymous`:
+   `analyses/privacy/where_a_person_is.sql`. Lineage records only what it can infer, and only on
+   the platform: systems outside it are searched by their owners.
+3. **Look, by number and by code.** For each column, `analyses/privacy/find_a_person.sql` counts the
+   rows that hold one of the numbers as the system writes it, as the project's key, or as the code
+   made from it (`hash_key`, the sha-256 of the key in upper case). The wallet, planning and finance
+   marts hold a learner only as that code. `privacy-finder` has to see real values to match them,
+   so the masks' policy (section 3) lists it among the identities it doesn't mask; it reads, and
+   never deletes.
+4. **Prove it.** Each step of the issue is ticked with a link: the search's run, the table's history
+   (`DESCRIBE HISTORY`) for a delete, the reads of the keys table from the audit log
+   (`analyses/privacy/who_read_the_keys.sql`), each owner's check, the answer. The office tracks
+   every request's due date with `analyses/privacy/requests_due.sql`: a request near its date is
+   work still to do, not a failing test.
+5. **Close it.** When the answer is sent, the issue closes. The request's rows stay in
+   `privacy.request_keys` until the last locked copy that can hold the person's rows is gone (for
+   request 2026-117, on 24 December), so a copy restored before then has the request applied again
+   before anyone reads it; then they leave.
+
+## 14. Reports due today, every morning
+
+When a graduate presses "This isn't my name" in the portal, the registrar's office promises an
+answer within two working days. That's a rule about what people do, not about whether the data is
+right, so it's tracked in a model of its own, `mart_graduations__name_reports`, reviewed every week
+and never failed as a test (`docs/conventions.md`, *Tests*). The office hears what's due from a
+Databricks SQL alert, which runs a query on a schedule and notifies when its result meets a
+condition. Once, on the platform:
+
+1. Compile the alert's query, `analyses/alerts/name_reports_due_today.sql`
+   (`dbt compile --target databricks --select name_reports_due_today --profiles-dir .`), and create
+   an alert with it. An alert keeps its own query: a saved query can't be reused.
+2. The condition: the sum of `reports_due` is greater than 0. Set *Empty result state* to OK, so a
+   morning with nothing due sends nothing.
+3. The schedule: every day at 8:00, in Quartz cron syntax `0 0 8 * * ?`.
+4. The notification: the registrar's office's email destination, with a custom template that
+   includes `{{QUERY_RESULT_TABLE}}`, the list itself (its first 100 rows; only email shows it).
+   The names in it are direct personal data (section 3), so it goes to the office that owns them,
+   and to no one else.
+
+The alert can also be written as code, an `alerts` resource in a bundle, so a change to it is
+reviewed like any other change to the project.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; and *Databricks SQL alerts* to the end, for section 14, on 10 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -421,3 +486,20 @@ tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its 
 - dbt, *Incremental models*: https://docs.getdbt.com/docs/build/incremental-models
 - GitHub, *Removing sensitive data from a repository* (clones and forks keep their copies):
   https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- Databricks, *Query history system table* (a query's text is kept, readable only by account admins and
+  the `databricks_pii_access` group, since it can hold personal data): https://docs.databricks.com/aws/en/admin/system-tables/query-history
+- Databricks, *Prepare your data for GDPR compliance* (a table of requests that drives a scheduled job):
+  https://docs.databricks.com/aws/en/ldp/gdpr
+- Databricks, *Common table expression (CTE)* (a recursive query needs Databricks SQL or Databricks
+  Runtime 17.0 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-qry-select-cte
+- Databricks, *DESCRIBE HISTORY* (each version of a table, its operation and who made it):
+  https://docs.databricks.com/aws/en/sql/language-manual/delta-describe-history
+- dbt, *Graph operators* (`source:name+`, a source and everything built from it):
+  https://docs.getdbt.com/reference/node-selection/graph-operators
+- GitHub, *Syntax for issue forms*: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-discussions/syntax-for-issue-forms
+- Databricks, *Databricks SQL alerts* (a query on a schedule, and a notice when its result meets a
+  condition; a saved query can't be reused): https://docs.databricks.com/aws/en/sql/user/alerts/
+- Databricks, *Create an alert* (the condition, *Empty result state*, Quartz cron, and the template
+  variables, `QUERY_RESULT_TABLE` among them): https://docs.databricks.com/aws/en/sql/user/alerts/create
+- Databricks, *Declarative Automation Bundles resources* (an alert, `alerts` in a bundle):
+  https://docs.databricks.com/aws/en/dev-tools/bundles/resources

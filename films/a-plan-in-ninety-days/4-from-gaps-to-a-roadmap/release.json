@@ -1,0 +1,50 @@
+[
+  {
+    "name": "From gaps to a roadmap",
+    "key": "from-gaps-to-a-roadmap-en",
+    "dir": "films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/from-gaps-to-a-roadmap/film.js",
+    "video": "dist/from-gaps-to-a-roadmap.mp4",
+    "file": "from-gaps-to-a-roadmap.mp4",
+    "captions": [
+      [
+        "films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/captions/en.srt",
+        "from-gaps-to-a-roadmap.en.srt"
+      ],
+      [
+        "films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/captions/es.srt",
+        "from-gaps-to-a-roadmap.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/source",
+      ":(exclude)films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 338,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

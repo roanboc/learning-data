@@ -1,0 +1,81 @@
+{
+  "draft": true,
+  "kicker": "Planning, in stages",
+  "kicker_es": "Planificar por etapas",
+  "title_es": "De las brechas a la hoja de ruta",
+  "h1": "From gaps to a roadmap: stages that each work on their own",
+  "h1_es": "De las brechas a la hoja de ruta: etapas que funcionan por sí solas",
+  "lead": "In April 2027 Helena and the team set today's state beside the target and find nine gaps. They turn them into six work packages, each with an owner and a date, and three stages that each work on their own. On 27 April the data council approves a data strategy on one page.",
+  "lead_es": "En abril de 2027, Helena y el equipo ponen la situación actual junto a la deseada y encuentran nueve brechas. Las convierten en seis paquetes de trabajo, cada uno con responsable y fecha, y en tres etapas que funcionan solas. El 27 de abril, el consejo de datos aprueba una estrategia de una página.",
+  "description": "A film about planning, the last of A plan in ninety days, the first series of Data management: set the current state beside the target and list the gaps; group them into work packages a team can finish, each with an owner and a date; order them by what each unlocks and what it's worth; set them in stages that each work on their own, so that if the money stopped after the first, people would still have something they use; date the near stage to the day and the far ones loosely; then the data strategy on one page, approved by the people who'll fund it and use it. TOGAF's migration planning and ArchiMate's gaps, work packages and plateaus are named once, as Today, and where it's going draws them. In April 2027 Helena Novak and the team find nine gaps on Noor Rahman's map, layer by layer, and turn them into six packages: one front door and one list, by 30 June (Helena's); retire the old warehouse, by 17 December (Sam's); data partners, three by September and all seven by March 2028 (Jun's); an owner and a promise for every product, by March 2028 (Yusuf's); the measures on one page, from July (Noor's); and agents, each with a written mandate, by December (Yusuf's too). The front door comes first; the old warehouse is worth the most to retire, at 310,000 Australian dollars a year, its licence ending on 31 December; Sam sees that a report nobody owns can't be moved, so the 21 reports people use get their owners first. Helena's first draft, with half the reports moved in stage one, fails her own test, so the whole move goes into stage two. Three stages: by 30 September 2027, one door, one list, the measures page and the first three data partners; by the end of March 2028, one platform with the old warehouse gone, every product owned and agents with mandates; by the end of 2028, all seven partners building their own products. On Tuesday 27 April the data council approves the one-page strategy and its roadmap, with Professor David Mensah there; the dean of Arts asks why Arts waits, and hears that the far dates are loose; the money for the move is the next series' case. It opens in Switzerland, where from 1982 the trains ran by the clock, and Rail 2000 started from the timetable people wanted, then built only the gaps, in stages: as fast as necessary, not as fast as possible.",
+  "description_es": "Una película sobre planificar, la última de Un plan en noventa días, la primera serie de Gestión de datos: poner la situación actual junto a la deseada y anotar las brechas; agruparlas en paquetes de trabajo que un equipo pueda terminar, cada uno con responsable y fecha; ordenarlos por lo que cada uno desbloquea y lo que vale; colocarlos en etapas que funcionen por sí solas, para que, si el dinero se acabara tras la primera, la gente siguiera teniendo algo que usa; fechar al día la etapa cercana y con holgura las lejanas; y luego la estrategia de datos en una página, aprobada por quienes la financiarán y la usarán. La planificación de la migración de TOGAF y las brechas, los paquetes de trabajo y las mesetas de ArchiMate se nombran una vez, como los dibuja Hoy, y hacia dónde va. En abril de 2027, Helena Novak y el equipo encuentran nueve brechas en el mapa de Noor Rahman, capa por capa, y las convierten en seis paquetes: una puerta de entrada y una lista única, para el 30 de junio (de Helena); retirar el antiguo almacén, para el 17 de diciembre (de Sam); referentes de datos, tres para septiembre y los siete para marzo de 2028 (de Jun); un responsable y una promesa para cada producto, para marzo de 2028 (de Yusuf); las medidas en una página, desde julio (de Noor); y agentes, cada uno con un mandato escrito, para diciembre (también de Yusuf). La puerta de entrada va primero; retirar el antiguo almacén es lo que más vale, a 310,000 dólares australianos al año, con su licencia que vence el 31 de diciembre; Sam ve que un informe sin responsable no se puede mover, así que los 21 informes en uso reciben primero su responsable. El primer borrador de Helena, con la mitad de los informes movidos en la etapa uno, no pasa su propia prueba, así que toda la mudanza pasa a la etapa dos. Tres etapas: para el 30 de septiembre de 2027, una puerta, una lista, la página de medidas y los tres primeros referentes de datos; para fines de marzo de 2028, una sola plataforma sin el antiguo almacén, cada producto con responsable y agentes con mandatos; para fines de 2028, los siete referentes construyendo sus propios productos. El martes 27 de abril, el consejo de datos aprueba la estrategia de una página y su hoja de ruta, con el profesor David Mensah presente; la decana de Artes pregunta por qué Artes espera, y oye que las fechas lejanas son flexibles; el dinero de la mudanza es el caso de la serie siguiente. Empieza en Suiza, donde desde 1982 los trenes siguieron el reloj, y Rail 2000 partió del horario que la gente quería y construyó solo las brechas, por etapas: tan rápido como sea necesario, no tan rápido como sea posible.",
+  "card": "Nine gaps, six work packages, three stages that each work on their own, and a data strategy on one page, approved.",
+  "card_es": "Nueve brechas, seis paquetes de trabajo, tres etapas que funcionan solas y una estrategia de datos de una página, aprobada.",
+  "chapters_es": {
+    "clock": "Cada hora, a los mismos minutos",
+    "gaps": "Nueve brechas",
+    "work": "Seis piezas de trabajo",
+    "order": "Lo que cada uno desbloquea",
+    "stages": "Cada etapa por sí sola",
+    "page": "En una página",
+    "yes": "Aprobado"
+  },
+  "past": [
+    "Switzerland, 1982 to 2004: every hour, at the same minutes",
+    "From 1982 the trains ran by the clock. Then Rail 2000 started from the timetable people wanted, found the slow stretches between its hubs, and built only those, in stages that each worked on their own. A data roadmap works the same way."
+  ],
+  "past_es": [
+    "Suiza, de 1982 a 2004: cada hora, a los mismos minutos",
+    "Desde 1982 los trenes siguieron el reloj. Luego Rail 2000 partió del horario que la gente quería, encontró los tramos lentos entre sus nodos y construyó solo esos, por etapas que funcionaban por sí solas. Una hoja de ruta de datos funciona igual."
+  ],
+  "next_h": "You've seen nine gaps become three stages that each work on their own. Next, a new series: Making the case, starting with the case for retiring the old warehouse.",
+  "next_h_es": "Viste nueve brechas convertidas en tres etapas que funcionan por sí solas. Después, una nueva serie: Construir el caso, empezando por el caso para retirar el antiguo almacén.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The TOGAF Standard",
+        "title_es": "El estándar TOGAF (en inglés)",
+        "line": "The Open Group's method for enterprise architecture, whose migration planning turns the gaps into work packages and steps between today and the target.",
+        "line_es": "El método de The Open Group para la arquitectura empresarial, cuya planificación de la migración convierte las brechas en paquetes de trabajo y pasos entre hoy y lo deseado.",
+        "href": "https://www.opengroup.org/togaf",
+        "href_es": "https://www.opengroup.org/togaf"
+      },
+      {
+        "title": "ArchiMate",
+        "title_es": "ArchiMate (en inglés)",
+        "line": "The Open Group's notation, which draws the gaps, the work packages and the plateaus, the steady states along the way.",
+        "line_es": "La notación de The Open Group, que dibuja las brechas, los paquetes de trabajo y las mesetas, los estados estables del camino.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      },
+      {
+        "title": "Rail 2000",
+        "title_es": "Rail 2000 (en inglés)",
+        "line": "Switzerland's plan that started from the timetable, its hubs and the vote of 1987, and the first stage, opened in 2004.",
+        "line_es": "El plan suizo que partió del horario, sus nodos y la votación de 1987, y la primera etapa, inaugurada en 2004.",
+        "href": "https://en.wikipedia.org/wiki/Rail_2000",
+        "href_es": "https://en.wikipedia.org/wiki/Rail_2000"
+      },
+      {
+        "title": "Clock-face scheduling",
+        "title_es": "El horario cadenciado (en inglés)",
+        "line": "Trains every hour at the same minutes past, as Switzerland's railways ran them from 1982, and where else they run that way.",
+        "line_es": "Trenes cada hora a los mismos minutos, como los hicieron circular los ferrocarriles suizos desde 1982, y dónde más circulan así.",
+        "href": "https://en.wikipedia.org/wiki/Clock-face_scheduling",
+        "href_es": "https://en.wikipedia.org/wiki/Clock-face_scheduling"
+      },
+      {
+        "title": "The Swiss path to the Railway of the Future",
+        "title_es": "El camino suizo al ferrocarril del futuro (en inglés)",
+        "line": "Gisela Hürlimann's history of the Swiss railways from the 1960s to 2000, from the fast lines dropped to Rail 2000 (2005).",
+        "line_es": "La historia de los ferrocarriles suizos de los años sesenta a 2000, de Gisela Hürlimann, de las líneas rápidas abandonadas a Rail 2000 (2005).",
+        "href": "https://www.strc.ch/2005/Huerlimann.pdf",
+        "href_es": "https://www.strc.ch/2005/Huerlimann.pdf"
+      }
+    ]
+  }
+}

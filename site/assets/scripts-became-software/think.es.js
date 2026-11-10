@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Scripts became software, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (laptop, project, release), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  laptop:{q:"La exportación de nómina funcionó durante años, y nadie tiene la culpa. Entonces, ¿por qué nadie pudo cambiarla sin riesgo cuando dejaron de llegar las planillas?",
+    opts:[{t:"Su autor se había ido a otro equipo, y solo quien escribe un script puede cambiarlo."},{t:"Era una sola copia, sin historial de por qué funcionaba así, y sin pruebas que dijeran si un cambio la rompía.",ok:true},{t:"Era una sola copia, y nadie conocía aún la app de solicitudes, aunque sus pruebas mostraban qué rompería un cambio.",near:true}],
+    why:"El script hacía su trabajo, pero todo lo que sabía vivía en una sola copia, en un portátil: sin historial de por qué estaba cada línea, y sin pruebas que dijeran si un cambio lo rompía. Así que cuando las solicitudes cambiaron, nadie podía tocarlo sin arriesgar el día de pago. Donde trabajas, ¿qué tarea corre desde la máquina de una persona, sin que nadie sepa qué rompería un cambio?"},
+  project:{q:"Jun escribió primero las pruebas, en el límite de la regla: una solicitud aprobada el lunes a las 11:59 y otra a las 12:01. ¿Por qué probar justo ahí?",
+    opts:[{t:"Ahí la regla cambia su respuesta: un minuto decide si una solicitud se paga ese jueves o dos semanas después.",ok:true},{t:"Ahí la regla cambia su respuesta, así que una prueba ahí comprueba que el reloj de la app de solicitudes esté en hora.",near:true},{t:"La mayoría de las solicitudes se aprueba cerca del mediodía del lunes, así que esos minutos cubren casi todo lo pagado."}],
+    why:"Una regla falla con más facilidad donde su respuesta cambia. Aprobada el lunes a las 11:59, una solicitud se paga ese jueves; a las 12:01, dos semanas después. Una prueba a cada lado del límite, escrita antes que el modelo, avisa enseguida si un cambio lo mueve. ¿Qué regla de tus datos tiene un límite así, y está probada ahí?"},
+  release:{q:"Cuando Noor aprueba, los mismos archivos van a producción por los mismos pasos que a prueba. ¿Por qué importa?",
+    opts:[{t:"Así producción puede saltarse su propia corrida: el trabajo ya corrió en prueba, y sus resultados se copian."},{t:"Lo que corrió en prueba corre en producción, siempre que quien lo despliega entre con su propia cuenta.",near:true},{t:"Lo que corrió en prueba es lo que corre en producción: no pueden desviarse, y nadie despliega desde un portátil.",ok:true}],
+    why:"El bundle lista los trabajos del proyecto y dónde corre cada uno, así que prueba y producción reciben los mismos archivos, por los mismos pasos, cada vez. El trabajo corre con la cuenta propia de la plataforma, nunca con la de una persona, así que ningún portátil ni inicio de sesión forma parte de una publicación. Donde trabajas, ¿podrían prueba y producción diferir hoy sin que nadie lo note?"}
+  }}};

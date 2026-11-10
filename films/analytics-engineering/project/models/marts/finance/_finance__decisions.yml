@@ -43,3 +43,21 @@ decisions:
     status: agreed
     implemented_in: [mart_finance__tuition_forgone]
     relates_to: [LIM-FIN-01]
+
+  - id: DEC-FIN-04
+    step: consumer_output
+    title: Payroll's export is a model in the project, counted by the pay day that pays each claim
+    text: Payroll's export to Finance is mart_finance__casual_pay_paid, built from the claims approved in the
+      claims app. Each approved claim is paid on the first pay day whose claims close at or after its
+      approval (pay_day_for(), on HR's calendar, pay_days), and the export counts pay days up to the day
+      of the build. Totals by pay day, faculty and unit, with no names or IDs. Accepted as LIM-FIN-02 and
+      LIM-FIN-03, on the mart.
+    why: The export ran for years as a script on one person's laptop, with payroll's rule inside it, and
+      when the claims moved into the claims app nobody could change it safely. As a model, the rule is
+      written once with its owner, tested before every change, and reviewed by someone other than its
+      author.
+    decided_by: Ingrid Holm, HR, with Rohan Desai, Finance
+    decided_on: 2026-03-04
+    status: agreed
+    implemented_in: [mart_finance__casual_pay_paid, pay_day.sql]
+    relates_to: [DEC-PRJ-16, LIM-FIN-02, LIM-FIN-03]

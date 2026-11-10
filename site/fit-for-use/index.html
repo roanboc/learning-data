@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fit for use · Learning Data</title>
+<meta name="description" content="Short films on what data quality means and how to measure it: quality as fitness for a use, with a level for each use agreed with the people who use the data; a hundred records looked at by hand, and the whole table profiled, before any check is written; accuracy, which only a reference outside the data can show; and timeliness, agreed and always shown. In dbt and Databricks, with the official docs for the rest.">
+<meta property="og:title" content="Fit for use · Learning Data"><meta property="og:description" content="The first series of Data quality. The graduation list says who graduates, at which ceremony, and the name printed on each certificate. It passed every check, and still 41 certificates were printed again. So the team asks what the list is for, and what good enough means for each use."><meta property="og:image" content="https://data.learn-all.org/assets/good-enough-for-what-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/fit-for-use/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/fit-for-use/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/fit-for-use/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/good-enough-for-what-poster.jpg" alt=""><img src="../assets/a-hundred-records-poster.jpg" alt=""><img src="../assets/valid-isnt-true-poster.jpg" alt=""><img src="../assets/good-enough-for-what-poster.jpg" alt=""><img src="../assets/a-hundred-records-poster.jpg" alt=""><img src="../assets/valid-isnt-true-poster.jpg" alt=""><img src="../assets/good-enough-for-what-poster.jpg" alt=""><img src="../assets/a-hundred-records-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#data-quality">Data quality</a> › Fit for use</p>
+<h1>Fit for use</h1>
+<p class="lead">The first series of Data quality. The graduation list says who graduates, at which ceremony, and the name printed on each certificate. It passed every check, and still 41 certificates were printed again. So the team asks what the list is for, and what good enough means for each use.</p>
+<p class="note draft"><b>Draft</b> · The author hasn't reviewed it yet, so some details may change.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order: each film builds on the one before.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/good-enough-for-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 4 · Fitness for use</p>
+<h3><a href="good-enough-for-what/">Good enough for what?</a></h3>
+<p>The graduation list seated the Great Hall well and still sent 41 certificates to be printed again. Good depends on the use.</p>
+<p class="meta">7 min · Pause and think · Fit for use</p>
+<p class="tc-progress" data-progress="ld-good-enough-for-what" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/a-hundred-records-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 2 of 4 · Measuring quality</p>
+<h3><a href="a-hundred-records/">A hundred records</a></h3>
+<p>The list passed every check. A hundred records looked at by hand said how good it was; a profile of all of it said where to look.</p>
+<p class="meta">8 min · Pause and think · Fit for use</p>
+<p class="tc-progress" data-progress="ld-a-hundred-records" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/valid-isnt-true-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 3 of 4 · Accuracy and references</p>
+<h3><a href="valid-isnt-true/">Valid isn't true</a></h3>
+<p>Every name passed the checks, and 88 were still wrong. Only a reference outside the data, such as the graduate, says what's true.</p>
+<p class="meta">9 min · Pause and think · Fit for use</p>
+<p class="tc-progress" data-progress="ld-valid-isnt-true" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">One thread: the graduation list, and a name on a certificate</h2><p>In December 2025, 41 degree certificates had to be printed again: names that lost their accents or were cut short, a double degree printed as one award, graduates missing from the list. Over the next six months, the people who use the list, answer for it and build it write down what it's for and what each use needs, look at a hundred of its records, check its names against the graduates themselves, and agree how fresh it must be.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Every film opens somewhere else, at another time</h2></div></div>
+<div class="prose"><table><thead><tr><th>Film</th><th>Opens with</th><th>Still true today</th></tr></thead><tbody>
+<tr><td>Good enough for what?</td><td>Duisburg, 1569: a world chart made for sailors</td><td>Mercator stretched his chart so that a course on one bearing is a straight line: right for steering, wrong for comparing countries. One chart, made for one use.</td></tr>
+<tr><td>A hundred records</td><td>Dublin, from 1899 to 1908: a brewery's chemist and a few careful trials</td><td>A few careful trials were enough to decide, and Gosset's tables, published as Student, said when more were needed. His way is still used wherever people can't measure everything.</td></tr>
+<tr><td>Valid isn't true</td><td>Japan, 1800 to 1821: a survey checked by the stars</td><td>Ino Tadataka's teams measured the coast on foot by day and the stars on clear nights, and corrected the walk by them: a map of all Japan, the base of its maps for decades.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Who's at the table</h2><p>Cyan outlines are technical; gold outlines are business.</p></div></div>
+<div class="four">
+<div class="card biz"><h3>Uses the list</h3><p>Malia Fonoti, the graduations officer, who runs the ceremonies and sends the list to the certificate printer</p></div>
+<div class="card biz"><h3>Answers for names and awards</h3><p>Mei Tanaka, in the registrar's office, who decides what's right for a name and sets the level each use needs</p></div>
+<div class="card biz"><h3>The person the data is about</h3><p>Andrés Peñaloza, a graduate of the Master of Data Analytics, whose name the list holds without its accents</p></div>
+<div class="card tech"><h3>Builds the list</h3><p>Jun Park, who builds the list's models and its checks in the data project</p></div>
+<div class="card tech"><h3>Runs the platform</h3><p>Sam Okafor, who runs the nightly update and watches how fresh each source is</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the film are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js"></script>
+<script src="../assets/ambient.js"></script>
+</body>
+</html>

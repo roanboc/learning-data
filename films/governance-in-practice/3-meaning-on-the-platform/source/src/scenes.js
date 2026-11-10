@@ -114,11 +114,11 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({own:wAt(sc,"k
     {at:P.sd,place:"big",keys:[[P.sd,960,540,1]],push:0.02,draw:(x,tt)=>gm_comment(x,tt,{ar:clamp((tt-P.build)/0.9,0,1),c:clamp((tt-P.desc)/1.0,0,1),back:clamp((tt-P.back+0.2)/1.0,0,1)})}],sc.dur));});
 
 // ---- 4 · The nightly sync: the data team's room at night; the check comparing the copy with the glossary, and Monday's change found;
-// the pull request it opens, with the old words and the new and what they touch; Tuesday's reviews; Mei seeing where her words are used ----
+// the pull request it opens, with the old words and the new and what they touch; Tuesday's review by the data team, and Mei told; Mei seeing where her words are used ----
 scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"every","each copy")-0.3,chg:wAt(sc,"monday","had changed"),
     op:c.opened-0.3,on:wAt(sc,"opened","the old words"),wt:wAt(sc,"opened","what the new words touch"),
     th:c.three-0.3,t1:wAt(sc,"three","Three tables"),t2:wAt(sc,"three","eight definitions"),t3:wAt(sc,"three","the code"),t4:wAt(sc,"three","three reports"),
-    tu:c.tuesday-0.3,ap:wAt(sc,"tuesday","Mei approved"),cf:wAt(sc,"tuesday","data governance confirmed"),sw:c.saw-0.3,used:wAt(sc,"saw","where her words are used")}));
+    tu:c.tuesday-0.3,ap:wAt(sc,"tuesday","the data team reviewed"),cf:wAt(sc,"tuesday","Mei was told"),sw:c.saw-0.3,used:wAt(sc,"saw","where her words are used")}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
     // every night, in the data team's room: nobody there, the screens lit
     {at:0,place:"dataNight",keys:[[0,1100,520,1.1],[0.1,1200,520,1.2]],d:3,draw:(x,tt)=>gm_nightMon(x,0)},
@@ -129,8 +129,8 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
     // what the new words touch, opened: a box each, filled and lit as it's said
     {at:P.th,place:"bigNight",keys:[[P.th,960,540,1]],push:0.02,draw:(x,tt)=>gm_touches(x,{u:[P.t1,P.t2,P.t3,P.t4].map(w=>clamp((tt-w)/0.9,0,1)),
       lit:[gv_io(tt,P.t1,P.t2,0.4),gv_io(tt,P.t2,P.t3,0.4),gv_io(tt,P.t3,P.t4,0.4),gv_io(tt,P.t4,P.tu,0.4)]})},
-    // Tuesday morning: Mei approves the meaning, and data governance confirms the term
-    {at:P.tu,place:"bigReg",keys:[[P.tu,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reviews(x,{mei:clamp((tt-P.ap)/0.8,0,1),yus:clamp((tt-P.cf)/0.8,0,1)});
+    // Tuesday morning: the data team approves the code, and Mei is told what it touches
+    {at:P.tu,place:"bigReg",keys:[[P.tu,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reviews(x,{team:clamp((tt-P.ap)/0.8,0,1),mei:clamp((tt-P.cf)/0.8,0,1)});
       gu_filmTag(x,1770,170,"Who does what, end to end",fin(tt,P.tu+0.6,0.5),{align:"right"});}},
     // the registrar's office: Mei at her desk, and a thread from her screen to each place her words are used
     {cut:true,at:P.sw,place:"registrar",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},bar:"GitHub · pull request",draw:gm_prSmall});
@@ -139,11 +139,12 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
   wc_year(ctx,56,72,"Tuesday morning",gv_io(t,P.sw+0.3,sc.dur,0.4));});
 
 // ---- 5 · A number is a setting: the 6 credit points in the new words; kept once, in dbt_project.yml; Jun's column reading it, and every
-// count of awards reading the column; if Mei and the faculties ever agree on another number, one line, in a reviewed pull request ----
+// count of awards reading the column; if Mei and the faculties ever agree on another number, the glossary first, then one line, in a pull
+// request the data team reviews ----
 scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc,"number","six credit points"),vars:sc.ends.number+0.3,
     kp:c.kept-0.3,set:wAt(sc,"kept","as a setting"),min:wAt(sc,"kept","min award credit points"),
     rd:c.reads-0.3,jun:wAt(sc,"reads","Jun's new column"),it:wAt(sc,"reads","reads it"),every:wAt(sc,"reads","every count of awards"),
-    ag:c.agree-0.3,another:wAt(sc,"agree","another number"),line:wAt(sc,"agree","one line changes"),rev:wAt(sc,"agree","a reviewed pull request"),turn:sc.ends.agree+0.2}));
+    ag:c.agree-0.3,another:wAt(sc,"agree","another number"),gl:wAt(sc,"agree","the glossary changes first"),line:wAt(sc,"agree","then one line"),rev:wAt(sc,"agree","the data team reviews"),turn:sc.ends.agree+0.2}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
     // the sync's report again, on Jun's screen by day: the number in the new words, and its line on vars: a number may belong in one
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_varsReport(x,{six:fin(tt,P.six,0.5),vars:fin(tt,P.vars,0.6)})},
@@ -157,11 +158,11 @@ scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc
       if(f.rows.length>6){gm_thread(x,[vx,634],[vx,f.rows[5]+20],clamp((tt-P.it)/0.9,0,1),{bend:0});
         gm_thread(x,[f.tx+gu_mw(x,"        as counts_as_award,")+16,f.rows[6]],[560,690],clamp((tt-P.every)/0.9,0,1),{bend:-20});}
       gu_tagAt(x,tt,P.every+0.5,null,560,720,"every count of awards",{size:30});gu_filmTag(x,1830,640,"Governed in dbt",fin(tt,P.rd+0.6,0.5),{align:"right"});}},
-    // if Mei and the faculties ever agree on another number: the setting's dial, a pencil needle where it could go; one line, in a pull
-    // request they review; then, without words, the needle turns to it and back
+    // if Mei and the faculties ever agree on another number: the setting's dial, a pencil needle where it could go; the glossary first,
+    // then one line, in a pull request the data team reviews; then, without words, the needle turns to it and back
     {at:P.ag,place:"desk",keys:[[P.ag,960,500,1]],push:0.02,draw:(x,tt)=>{const b=Math.sin(Math.PI*easeCam(clamp((tt-P.turn)/2.4,0,1)));
       gm_dial(x,560,470,170,6+2*b,{label:"min_award_credit_points",mono:true,ghost:8,ga:fin(tt,P.another,0.6)*(1-b)});
-      gm_maybe(x,{a:fin(tt,P.line-0.2,0.6),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}],sc.dur));});
+      gm_maybe(x,{a:fin(tt,P.gl-0.2,0.6),ln:fin(tt,P.line,0.5),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}],sc.dur));});
 
 // ---- 6 · Counted once: a count is a meaning too, a ledger with its rule; awards conferred, a metric view the project builds; its pull
 // request, tested and reviewed; the two reports that read it; and Planning's report giving up its own count ----
@@ -175,7 +176,7 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
     // gives way to the metric view's sheet
     {at:0,place:"deskGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_ledger(x,{r1:clamp((tt-P.which)/1.2,0,1),r2:clamp((tt-P.yr)/1.2,0,1),yr:clamp((tt-P.once+0.5)/0.9,0,1)})},
     // the metric view, as the project builds it: what it counts, lit as it's said; beside it, its pull request, tested and approved by
-    // its owner
+    // the data team
     {at:P.mv,place:"desk",keys:[[P.mv,960,500,1]],push:0.02,draw:(x,tt)=>{gm_mvSheet(x,{u:clamp((tt-P.mv)/0.9,0,1),
         lit:[gv_io(tt,P.mv+0.4,P.counts,0.4),fin(tt,P.cred,0.5),fin(tt,P.aw,0.5),fin(tt,P.by,0.5),fin(tt,P.counts,0.5)]});
       gm_mvPR(x,tt,{a:fin(tt,P.bd,0.6),ck:clamp((tt-P.bd-0.4)/1.6,0,1),ok:clamp((tt-P.rv)/0.8,0,1)});}},

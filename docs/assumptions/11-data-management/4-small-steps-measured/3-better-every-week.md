@@ -1,8 +1,8 @@
 # Better every week: questions and assumptions
 
-*Data management* · *Small steps, measured*, film 3 of 4 · open, PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Data management* · *Small steps, measured*, film 3 of 4 · open, PR #276 · [pull request](https://github.com/roanboc/learning-data/pull/276)
 
-On the site once PR #NNN merges: https://data.learn-all.org/small-steps-measured/better-every-week/
+On the site once PR #276 merges: https://data.learn-all.org/small-steps-measured/better-every-week/
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `numbers.md`, `openings.md` and `palettes.md` point to the module's working folder, not to this repository.
 

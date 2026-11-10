@@ -11,6 +11,7 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Prototype first](https://data.learn-all.org/small-steps-measured/prototype-first/) | Prototype and iterate | 7½ min | 6 | 3 questions | [script](1-prototype-first/script.md) · [source](1-prototype-first/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

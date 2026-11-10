@@ -1840,6 +1840,24 @@ function lp_secRoom(ctx,r,st){const lit=st.lit==null?0:st.lit;ctx.save();ctx.beg
   ctx.restore();
   if(st.edge){ctx.save();ctx.strokeStyle=rgba(st.edge,st.edgeA==null?1:st.edgeA);ctx.lineWidth=6;ctx.strokeRect(r.x+3,r.y+3,r.w-6,r.h-6);ctx.restore();}}
 
+/* ===== Data management: the module's mark =====
+   Every film of the module draws the same mark on its title and its end: five layers drawing themselves, one under another (strategy,
+   business, information, application, technology), and a dot above them for the people they serve. Services with customers drew it
+   first; it lives here so every film draws it the same way.
+   A film bundles this file first in its film.json "src" ("../../../../a-plan-in-ninety-days/shared/src/mark.js"), names it in its
+   release.json "paths" ("films/a-plan-in-ninety-days/shared/src/mark.js"), and passes it to the kit's title and end cards:
+     lp_title(ctx, S, t, t0, title, sub, line, {module: "Data management", mark: dm_mark})
+     lp_end(ctx, S, t, t0, title, line, "Film 1 of 4", series, {module: "Data management", mark: dm_mark})
+   It takes the kit's mark arguments (films/the-new-skills/shared/src/cards.js, lp_mark): the centre, the size r, p from 0 to 1 as it
+   draws, and a for its alpha. In ink, as the kit's own mark is: it wears none of the module's colours. A change here is a new version
+   of every film of the module. */
+function dm_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;
+  const g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.8);g.addColorStop(0,rgba(LP.sun,0.5*ag_sine(p/0.6)));g.addColorStop(1,rgba(LP.sun,0));ctx.fillStyle=g;ctx.fillRect(cx-r*1.8,cy-r*1.8,r*3.6,r*3.6);
+  ctx.strokeStyle=rgba(LP.ink,1);ctx.lineCap="round";ctx.lineWidth=Math.max(2,r*0.09);
+  for(let i=0;i<5;i++){const f=ag_sine(clamp(p*5-i*0.7,0,1)),y=cy-r*0.8+i*r*0.4,hw=r*(1-0.08*i);if(f<=0)continue;ctx.beginPath();ctx.moveTo(cx-hw,y);ctx.lineTo(cx-hw+2*hw*f,y);ctx.stroke();}
+  const d=ag_sine(clamp(p*1.6-0.6,0,1));if(d>0){ctx.fillStyle=rgba(LP.ink,1);ctx.beginPath();ctx.arc(cx,cy-r*0.8-r*0.32,r*0.16*d,0,TAU);ctx.fill();}
+  ctx.restore();}
+
 /* ===== One map, in the repo: the opening's pictures, Great Britain from the late 1990s =====
    The film's own pictures for its story from outside data (prefix om_), drawn in the module's matte language, lit from the right like
    the rooms; never a copy of an Ordnance Survey map, its symbols or its styles: a small invented town, drawn plainly.
@@ -2126,8 +2144,7 @@ function om_history(c,x,y,w,h,o){o=o||{};const u=o.u==null?1:o.u,lh=60,n=OM_LOG.
    again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
    a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
 
-const OM_LAST="One map in the repository; every change updates it; everything else comes from it.";
-const OM_MOD={module:"Data management"};
+const OM_MOD={module:"Data management",mark:dm_mark};
 // the film's number and title at the top left, from the second chapter on
 function om_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"2","One map, in the repo",{a});}
 // a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
@@ -2408,7 +2425,9 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         x.restore();}
       om_fan(x,{light:"morning",a:ag_in(tt,c.take-0.2,0.6)*(1-ag_in(tt,e0,0.8)),u:1,k:tt-c.take,lit:[0,1,2,3].map(i=>ag_in(tt,w("take","everything",-0.3)+i*0.2,0.8))});}}
   ]);
-  lp_end(ctx,S,t,e0,"One map, in the repo",OM_LAST,"Film 2 of 3","Architecture that keeps up",OM_MOD);
+  // the last line is too wide for one line of the end card, so it is drawn here in two, at the card's size and with its fade
+  lp_end(ctx,S,t,e0,"One map, in the repo",null,"Film 2 of 3","Architecture that keeps up",OM_MOD);
+  {const tA=ag_in(t,e0+0.6,0.9);if(tA>0){setScreen(ctx,S);withA(ctx,tA,()=>{lp_T(ctx,"One map in the repository; every change updates it;",960,296,{w:700,size:48,align:"center"});lp_T(ctx,"everything else comes from it.",960,358,{w:700,size:48,align:"center"});});}}
   om_kick(ctx,S,1-ag_in(t,e0,0.8));
 });
 ag_cutInto(["copies","agent"]);

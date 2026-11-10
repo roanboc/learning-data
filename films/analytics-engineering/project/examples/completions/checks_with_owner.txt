@@ -22,7 +22,7 @@ $ python scripts/check/impact.py --base before-completions
 
 1 test(s) on it and downstream. `dbt build --select mart_planning__completions+ --profiles-dir .` runs them.
 
-## Who to ask
+## Who to tell
 
 Planning
 

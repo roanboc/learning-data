@@ -3,8 +3,7 @@
    again; the score (tools/score.py) takes the same words. In one room the camera glides and only what changes fades; a later moment in
    a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
 
-const OM_LAST="One map in the repository; every change updates it; everything else comes from it.";
-const OM_MOD={module:"Data management"};
+const OM_MOD={module:"Data management",mark:dm_mark};
 // the film's number and title at the top left, from the second chapter on
 function om_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"2","One map, in the repo",{a});}
 // a sheet of words that springs in at t0 (and goes from o.out): lp_textSheet's words and options
@@ -285,7 +284,9 @@ scene("monday",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,of
         x.restore();}
       om_fan(x,{light:"morning",a:ag_in(tt,c.take-0.2,0.6)*(1-ag_in(tt,e0,0.8)),u:1,k:tt-c.take,lit:[0,1,2,3].map(i=>ag_in(tt,w("take","everything",-0.3)+i*0.2,0.8))});}}
   ]);
-  lp_end(ctx,S,t,e0,"One map, in the repo",OM_LAST,"Film 2 of 3","Architecture that keeps up",OM_MOD);
+  // the last line is too wide for one line of the end card, so it is drawn here in two, at the card's size and with its fade
+  lp_end(ctx,S,t,e0,"One map, in the repo",null,"Film 2 of 3","Architecture that keeps up",OM_MOD);
+  {const tA=ag_in(t,e0+0.6,0.9);if(tA>0){setScreen(ctx,S);withA(ctx,tA,()=>{lp_T(ctx,"One map in the repository; every change updates it;",960,296,{w:700,size:48,align:"center"});lp_T(ctx,"everything else comes from it.",960,358,{w:700,size:48,align:"center"});});}}
   om_kick(ctx,S,1-ag_in(t,e0,0.8));
 });
 ag_cutInto(["copies","agent"]);

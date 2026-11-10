@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Scripts became software",
+    "key": "scripts-became-software-en",
+    "dir": "films/data-as-software/1-scripts-became-software/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/scripts-became-software/film.js",
+    "video": "dist/scripts-became-software.mp4",
+    "file": "scripts-became-software.mp4",
+    "captions": [
+      [
+        "films/data-as-software/1-scripts-became-software/captions/en.srt",
+        "scripts-became-software.en.srt"
+      ],
+      [
+        "films/data-as-software/1-scripts-became-software/captions/es.srt",
+        "scripts-became-software.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-as-software/1-scripts-became-software/source",
+      ":(exclude)films/data-as-software/1-scripts-became-software/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 269,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

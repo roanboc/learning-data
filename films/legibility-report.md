@@ -97,6 +97,7 @@
 | Rights follow the role | 291 | 0% | 0 | 30.0 | Drawn to the rule |
 | The map, enforced | 353 | 0% | 0 | 28.2 | Drawn to the rule |
 | Reports on demand | 293 | 0% | 0 | 28.0 | Drawn to the rule |
+| Defined in the open | 253 | 0% | 0 | 28.5 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -113,6 +114,7 @@
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
 | No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
+| Walls, doors and keys | 177 | 0% | 0 | 31.4 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
@@ -132,6 +134,7 @@
 | What they tell us about ourselves | 288 | 0% | 0 | 32.0 | Drawn to the rule |
 | Many agents, and what emerges | 232 | 0% | 0 | 30.0 | Drawn to the rule |
 | The question behind the request | 271 | 0% | 0 | 28.4 | Drawn to the rule |
+| Explaining so people can decide | 310 | 0% | 0 | 28.3 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

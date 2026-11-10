@@ -87,6 +87,7 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 
 ### Documents as data
 
@@ -271,6 +272,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
 - [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
+- [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 
 ### Only what you may see
 
@@ -352,6 +354,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
 - [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
+- [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 
 ### Leading a data team
 

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/listen-first/soundtrack.mp3",
+      "size": 7279586,
+      "sha256": "daaf0aa0ab5fd7ed536306c738c9f8510f34d0cdba3f4634e256f4b2263379af",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-listen-first-576c4e435fbc348419fb/daaf0aa0ab5fd7ed536306c738c9f8510f34d0cdba3f4634e256f4b2263379af.mp3"
+    }
+  ]
+}

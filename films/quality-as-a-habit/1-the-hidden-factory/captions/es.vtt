@@ -1,0 +1,250 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.727
+Washington, 1899.
+
+00:00:05.627 --> 00:00:11.428
+Más de seis millones de cartas y paquetes al año terminan en una oficina: la Oficina de Cartas Muertas.
+
+00:00:13.128 --> 00:00:16.765
+Una carta muerta es una que el correo no puede entregar ni devolver.
+
+00:00:18.265 --> 00:00:21.659
+Casi siempre, la gente se mudó sin dejar una dirección.
+
+00:00:22.759 --> 00:00:27.907
+O una carta a una ciudad no lleva calle ni número, o un pueblo está escrito como suena.
+
+00:00:29.407 --> 00:00:33.370
+En una sala, empleados, muchos de ellos mujeres, averiguan adónde debía ir cada una.
+
+00:00:35.070 --> 00:00:39.144
+La más conocida, Patti Lyle Collins, resuelve unas mil al día.
+
+00:00:41.044 --> 00:00:45.514
+Es un trabajo experto, que los remitentes no ven, y nunca arregla la carta siguiente.
+
+00:00:47.014 --> 00:00:50.895
+Casi tres millones al año se destruyen: noticias que alguien nunca recibe.
+
+00:00:52.795 --> 00:00:56.586
+Algo tiene que cambiar donde se escribe la dirección, no donde termina la carta.
+
+00:00:58.286 --> 00:01:07.018
+En 1943, con los expertos en la guerra, las ciudades grandes tienen zonas: un número que pone el remitente, y los nuevos clasifican por él.
+
+00:01:08.718 --> 00:01:15.253
+En 1963, el correo crea el código ZIP: cinco dígitos en cada carta, escritos por el remitente.
+
+00:01:16.753 --> 00:01:20.428
+Ahora cualquiera, y pronto las máquinas, clasifica una carta por su número.
+
+00:01:21.928 --> 00:01:28.203
+En 1969 lo usa el 83% de los estadounidenses; desde entonces, ha ahorrado miles de millones.
+
+00:01:29.503 --> 00:01:34.005
+El arreglo pasó al principio: escrito una vez, por la persona que conoce la dirección.
+
+00:01:35.905 --> 00:01:43.250
+En la universidad, dos personas corrigen a mano los nombres de la lista de graduación antes de cada ceremonia, en una copia.
+
+00:01:44.750 --> 00:01:47.262
+Así que cada lista nueva trae de vuelta los mismos errores.
+
+00:01:48.762 --> 00:01:54.660
+Cuenta ese trabajo, arregla cada error donde nace, y un nombre se corrige una vez, para todas las listas siguientes.
+
+00:02:03.360 --> 00:02:11.413
+Malia Fonoti lleva las graduaciones. Antes de que cada lista vaya a la imprenta, ella y alguien de su equipo revisan cada nombre a mano.
+
+00:02:12.713 --> 00:02:22.287
+El lunes 20 de octubre de 2025, descargan la lista de diciembre de la plataforma a una hoja de cálculo: 2,031 nombres.
+
+00:02:23.787 --> 00:02:29.560
+Cada uno se compara con los documentos vistos en la matrícula; si no coincide, llaman al graduado.
+
+00:02:30.860 --> 00:02:35.185
+Corrigen la hoja de cálculo, y el 13 de noviembre va a la imprenta.
+
+00:02:36.285 --> 00:02:39.983
+En diciembre, aún hay que imprimir de nuevo 41 diplomas.
+
+00:02:41.283 --> 00:02:46.604
+Pero en febrero, una revisión detallada de cien registros de la lista halló 21 con un error.
+
+00:02:47.704 --> 00:02:52.748
+¿Un registro de cada cinco, pero solo 41 diplomas de 2,031?
+
+00:02:53.648 --> 00:02:59.091
+Como los empleados de Washington, el equipo de Malia corrige el resto al final, sin que nadie lo vea.
+
+00:03:02.391 --> 00:03:07.820
+Thomas Redman, que ha dedicado su carrera a la calidad de datos, llama a esto una fábrica oculta de datos:
+
+00:03:08.020 --> 00:03:12.322
+los pasos extra que un equipo añade para corregir los datos que hace otro equipo.
+
+00:03:13.822 --> 00:03:18.630
+Décadas antes, en las fábricas, Armand Feigenbaum la llamó la planta oculta.
+
+00:03:20.330 --> 00:03:23.468
+Es un trabajo cuidadoso y, mientras sigan los errores, hace falta.
+
+00:03:24.968 --> 00:03:26.318
+Pero esconde tres cosas.
+
+00:03:27.618 --> 00:03:29.779
+Las horas, porque nadie las cuenta.
+
+00:03:31.079 --> 00:03:35.533
+Qué tan buenos son de verdad los datos, porque la imprenta solo ve lo que se escapa.
+
+00:03:37.033 --> 00:03:41.192
+Y la causa, porque ningún arreglo llega al lugar donde nacen los errores.
+
+00:03:42.892 --> 00:03:47.662
+El consejo de Redman: cuéntalo, y lleva lo que encuentres a las personas que hacen los datos.
+
+00:03:51.362 --> 00:03:57.593
+En agosto de 2026, Noor Rahman, la arquitecta de datos, lo cuenta con Malia, de tres maneras.
+
+00:03:58.893 --> 00:04:06.812
+Las horas, del propio calendario del equipo: unas 240 para la lista de diciembre, 50 para la de marzo, 30 para la de julio.
+
+00:04:08.512 --> 00:04:12.586
+320 horas al año: dos meses de trabajo de una persona.
+
+00:04:14.286 --> 00:04:16.801
+Las rondas, de las tablas de sistema de Databricks:
+
+00:04:17.001 --> 00:04:23.688
+su historial de consultas y su registro de auditoría muestran la lista consultada y descargada tres lunes, uno antes de cada lista.
+
+00:04:25.388 --> 00:04:32.059
+Y las correcciones: la copia de diciembre, tal como fue a la imprenta, frente a la lista que la plataforma armó la noche anterior.
+
+00:04:33.359 --> 00:04:40.824
+517 nombres se habían cambiado a mano, y otros 26 se les habían escapado: los nombres impresos de nuevo.
+
+00:04:42.524 --> 00:04:50.278
+Así que 543 de 2,031 nombres estaban mal al salir de la plataforma: uno de cada cuatro.
+
+00:04:51.978 --> 00:04:59.617
+Un nombre correcto tarda unos dos minutos en revisarse. Uno mal, unos veinte: buscar el documento, llamar, escribirlo otra vez.
+
+00:05:00.917 --> 00:05:06.064
+Así que los nombres mal se llevaron unas 170 de las 240 horas de diciembre.
+
+00:05:07.564 --> 00:05:14.318
+La regla del diez de Redman, una regla práctica: un registro con un error cuesta unas diez veces más terminarlo.
+
+00:05:18.018 --> 00:05:26.637
+Beatriz Fonseca de Albuquerque Cavalcanti se gradúa dos veces este año: un certificado de posgrado en marzo y una maestría en diciembre.
+
+00:05:28.137 --> 00:05:30.568
+Su apellido tiene 33 caracteres.
+
+00:05:32.268 --> 00:05:37.893
+En febrero, el portal lo mostraba cortado, y ella lo corrigió: el diploma de marzo salió bien.
+
+00:05:39.593 --> 00:05:43.529
+En agosto, su maestría entra en la lista de diciembre: el apellido, cortado otra vez.
+
+00:05:45.229 --> 00:05:49.063
+Con Mei y Malia, Noor y Jun preguntan por qué, cinco veces.
+
+00:05:50.563 --> 00:05:56.372
+¿Por qué está cortado? La lista toma el nombre del sistema de estudiantes, salvo que ella lo confirme para esa ceremonia.
+
+00:05:57.872 --> 00:06:02.954
+¿Por qué sigue cortado allí? Su corrección fue a la lista de marzo, no al sistema de estudiantes.
+
+00:06:04.454 --> 00:06:09.506
+¿Por qué? Solo la oficina de registro académico cambia el sistema de estudiantes, y nada la envió allí.
+
+00:06:11.006 --> 00:06:15.249
+¿Por qué se cortó? El campo del apellido admite 30 caracteres.
+
+00:06:16.749 --> 00:06:21.170
+¿Por qué 30? Se fijó cuando se construyó el sistema, y entonces cabían la mayoría de los nombres.
+
+00:06:22.670 --> 00:06:25.565
+Dos causas: un campo muy corto, y ningún camino de vuelta.
+
+00:06:27.465 --> 00:06:33.218
+Dentro de la plataforma, el linaje de Unity Catalog dibuja el mismo camino, columna por columna:
+
+00:06:33.418 --> 00:06:36.805
+desde el nombre en la lista hasta el apellido del sistema de estudiantes.
+
+00:06:38.705 --> 00:06:41.687
+Antes de la plataforma y después, te lo tienen que decir las personas.
+
+00:06:45.387 --> 00:06:53.839
+Para ver las causas, el equipo traza una espina de pescado, como enseñó Kaoru Ishikawa: el problema en la cabeza, las causas en las espinas.
+
+00:06:55.339 --> 00:07:02.180
+Cuatro espinas: personas, proceso, sistemas e interfaces, donde los datos pasan de un sistema a otro.
+
+00:07:03.480 --> 00:07:11.429
+Personas: los formularios en papel de antes de 2015 tenían una casilla para todo el nombre, dividido al teclearlo: 35 invertidos.
+
+00:07:12.729 --> 00:07:16.337
+Proceso: cada arreglo hecho en una copia, sin camino de vuelta.
+
+00:07:17.437 --> 00:07:29.048
+Sistemas: el campo de 30 caracteres, 39 nombres cortados; y hasta 2019, un formulario web solo de la A a la Z, en mayúsculas: 312 nombres.
+
+00:07:30.348 --> 00:07:37.374
+Interfaces: el archivo nocturno a la plataforma, en una codificación antigua que convertía la é en e.
+
+00:07:38.474 --> 00:07:42.920
+143 nombres guardados bien perdieron sus tildes al entrar.
+
+00:07:44.220 --> 00:07:48.080
+Nadie hizo nada mal. Cada causa tenía sentido cuando se creó.
+
+00:07:51.580 --> 00:07:55.395
+Como mostró Arreglado en el origen: se arregla en el origen, con su dueño.
+
+00:07:56.695 --> 00:08:02.792
+La noche del lunes 14 de septiembre, el equipo del sistema de estudiantes, con Sam, cambia dos cosas:
+
+00:08:02.992 --> 00:08:08.029
+el archivo nocturno conserva cada letra, y el campo del apellido admite 100 caracteres.
+
+00:08:09.729 --> 00:08:17.775
+Desde ese día, la oficina de Mei hace cada corrección una vez, en el sistema de estudiantes; el equipo de graduaciones no guarda copia.
+
+00:08:19.475 --> 00:08:24.556
+Los nombres viejos se corrigen cuando cada graduado confirma el suyo, primero quienes se gradúan antes.
+
+00:08:26.056 --> 00:08:33.476
+Y Jun agrega controles en dbt donde nacen los nombres: sobre los registros del sistema de estudiantes, cada noche, a cargo de Mei.
+
+00:08:35.176 --> 00:08:42.539
+Un apellido de exactamente 30 caracteres, o solo en mayúsculas, queda retenido para su oficina: una lista por revisar.
+
+00:08:44.439 --> 00:08:52.370
+Un archivo sin una letra fuera de la A a la Z detiene la actualización: la lista guarda los nombres de la noche anterior y se avisa a Sam.
+
+00:08:54.670 --> 00:09:00.140
+Una duda sobre un nombre espera a una persona; un archivo que pierde letras para todos se detiene.
+
+00:09:04.040 --> 00:09:12.518
+En la mañana del martes 15 de septiembre, 161 nombres de la lista de diciembre recuperan sus tildes, y nadie las escribió.
+
+00:09:14.418 --> 00:09:20.316
+El control retiene el nombre de Beatriz, y la oficina de Mei lo escribe entero, una vez, para cada lista siguiente.
+
+00:09:22.216 --> 00:09:27.629
+Las horas de cada ronda van al cuadro de mando, junto a los controles, para que todos las vean bajar.
+
+00:09:29.329 --> 00:09:35.558
+El correo dejó de ubicar las cartas una por una, y les puso un código al principio, escrito por quien lo sabía.
+
+00:09:37.058 --> 00:09:42.261
+En la universidad, cada nombre se corrige ahora donde nace, por las personas a cargo de él.
+
+00:09:43.561 --> 00:09:47.573
+Cuenta el trabajo de corregir datos a mano. Luego arregla donde nace.

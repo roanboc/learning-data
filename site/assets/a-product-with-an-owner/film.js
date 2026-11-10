@@ -451,7 +451,7 @@ const NARR={
  {"id":"didnt","gap":0.8,"text":"But Clara didn't ask for this. “I'm not technical,” she says."},
  {"id":"depends","gap":0.8,"text":"So Yusuf shows her who depends on it: the near-award dashboard, and every faculty that plans from it."},
  {"id":"worth","gap":0.8,"text":"What it's worth to them: a number on time, from someone they can ask."},
- {"id":"comes","gap":0.8,"text":"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, and any change to it needs her yes."},
+ {"id":"comes","gap":0.8,"text":"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, the data team reviews changes, and she's told what they touch."},
  {"id":"code","gap":0.8,"text":"She answers for the promise, not the code."}]},
 "steps":{"name":"Products and steps","lead":1.0,"tail":1.0,"vo":[
  {"id":"every","gap":0.8,"text":"Not every table is a product."},
@@ -479,7 +479,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next, Anil makes a list of his own, for the faculty's advisers. It will need an owner too."}]}
 };
 
-const VODUR={"bazaar/y1461": 1.946, "bazaar/hall": 6.037, "bazaar/streets": 1.805, "bazaar/y1520": 3.796, "bazaar/harm": 7.095, "bazaar/lose": 4.021, "bazaar/order": 1.73, "bazaar/named": 3.239, "bazaar/guild": 3.437, "bazaar/check": 3.867, "bazaar/short": 2.165, "bazaar/buyer": 4.428, "bazaar/back": 0.935, "bazaar/data": 6.296, "late/policy": 6.516, "late/anil": 4.57, "late/census": 4.705, "late/needed": 3.033, "late/asked": 1.834, "late/round": 5.37, "late/nobody": 2.432, "late/again": 2.21, "promise/sit": 2.873, "promise/question": 3.827, "promise/write": 3.594, "promise/for": 3.779, "promise/contract": 3.235, "promise/levels": 4.387, "promise/ask": 1.994, "promise/product": 4.038, "answers/clara": 5.746, "answers/mei": 2.324, "answers/guild": 6.232, "answers/two": 4.149, "job/didnt": 3.578, "job/depends": 6.07, "job/worth": 3.723, "job/comes": 6.601, "job/code": 2.092, "steps/every": 1.744, "steps/models": 7.511, "steps/rest": 2.998, "steps/goods": 8.888, "steps/kinds": 4.937, "readers/knows": 6.284, "readers/three": 6.202, "readers/mei": 3.735, "life/life": 1.34, "life/draft": 4.703, "life/dep": 5.977, "life/old": 1.948, "life/first": 7.373, "found/finds": 6.861, "found/like": 5.236, "found/late": 2.564, "found/runs": 3.824, "found/gives": 7.307, "found/own": 1.974, "found/next": 5.621};
+const VODUR={"bazaar/y1461": 1.946, "bazaar/hall": 6.037, "bazaar/streets": 1.805, "bazaar/y1520": 3.796, "bazaar/harm": 7.095, "bazaar/lose": 4.021, "bazaar/order": 1.73, "bazaar/named": 3.239, "bazaar/guild": 3.437, "bazaar/check": 3.867, "bazaar/short": 2.165, "bazaar/buyer": 4.428, "bazaar/back": 0.935, "bazaar/data": 6.296, "late/policy": 6.516, "late/anil": 4.57, "late/census": 4.705, "late/needed": 3.033, "late/asked": 1.834, "late/round": 5.37, "late/nobody": 2.432, "late/again": 2.21, "promise/sit": 2.873, "promise/question": 3.827, "promise/write": 3.594, "promise/for": 3.779, "promise/contract": 3.235, "promise/levels": 4.387, "promise/ask": 1.994, "promise/product": 4.038, "answers/clara": 5.746, "answers/mei": 2.324, "answers/guild": 6.232, "answers/two": 4.149, "job/didnt": 3.578, "job/depends": 6.07, "job/worth": 3.723, "job/comes": 8.465, "job/code": 2.092, "steps/every": 1.744, "steps/models": 7.511, "steps/rest": 2.998, "steps/goods": 8.888, "steps/kinds": 4.937, "readers/knows": 6.284, "readers/three": 6.202, "readers/mei": 3.735, "life/life": 1.34, "life/draft": 4.703, "life/dep": 5.977, "life/old": 1.948, "life/first": 7.373, "found/finds": 6.861, "found/like": 5.236, "found/late": 2.564, "found/runs": 3.824, "found/gives": 7.307, "found/own": 1.974, "found/next": 5.621};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue. */
@@ -4518,11 +4518,11 @@ function po_jobPen(tt,P){const a=gv_io(tt,P.book+0.9,P.fac+2.5,0.35);if(a<=0.01)
 // the table from above: the product's card, smaller now, the three cards that go down by it, and the change request that slides in
 function po_jobTable(x,tt,P,o){o=o||{};po_cardSmall(x,{sign:o.sign||0,pen:o.pen||0});
   [["jun","Jun","builds it",P.jun,-0.03],["noor","Noor","designs it",P.noor,0.02],["sam","Sam","runs it",P.sam,-0.015]].forEach(([id,n,r,t0,rot],i)=>{const [cx,cy]=PO_JB.cards[i];po_jobCard(x,cx,cy,id,n,r,clamp((tt-t0)/0.6,0,1),rot);});
-  const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",rows:[{l:"needs:",v:"Clara's yes"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
+  const u=easeCam(clamp((tt-P.chg)/0.7,0,1)),[rx,ry,rw,rh]=PO_JB.cr;if(u>0)po_changeReq(x,rx+(1-u)*760,ry,rw,rh,{rot:0.008-0.03*(1-u),name:"Learners near an award",lines:1,rows:[{l:"review:",v:"the data team"},{l:"tell:",v:"Clara"}],box:true,boxLit:gv_io(tt,P.yes-0.1,P.yes+1.6,0.4)});}
 scene("job",(ctx,S,t,sc)=>{const c=sc.cues,P=po_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{im:w("didnt","I'm")-0.15,book:c.depends-0.4,dep:w("depends","who depends"),dash:w("depends","near-award")-0.1,fac:w("depends","every faculty")-0.1,
       worth:c.worth-0.3,num:w("worth","a number"),ask:w("worth","someone"),glide:c.comes-1.3,table:c.comes+0.1,jun:w("comes","Jun")-0.1,noor:w("comes","Noor")-0.1,sam:w("comes","Sam")-0.1,
-      chg:w("comes","any change")-0.1,yes:w("comes","her yes"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
+      chg:w("comes","the data team")-0.1,yes:w("comes","told"),room:sc.ends.comes+0.1,sign:c.code+0.25,prom:w("code","promise"),not:w("code","not the")};});
   gv_shots(ctx,S,t,sc.dur,[
     // Planning's room: Clara stands by the window, arms folded: "I'm not technical"
     {at:0,place:"planning",keys:[[0,1224,520,1.38],[0.1,1214,520,1.42]],d:5,draw:(x,tt)=>{po_jobRoom(x,tt,{yusuf:{carry:heldNotebook},clara:{expr:"concerned"}});

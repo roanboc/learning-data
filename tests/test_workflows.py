@@ -60,13 +60,29 @@ class WorkflowTests(unittest.TestCase):
         # Cancelling main's Checks runs left Publish site with no passing run to publish (10 Nov).
         checks = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
         block = checks.split("\nconcurrency:\n", 1)[1].split("\njobs:\n", 1)[0]
+        self.assertIn("group: checks-${{ github.ref }}\n", block)
         self.assertIn("cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}\n", block)
         pages = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
         # Only a deployment that will run joins the queue, so a skipped run can't replace a waiting one.
         self.assertNotIn("\nconcurrency:", pages)
         deploy = pages.split("  deploy:\n", 1)[1]
         self.assertIn("    concurrency:\n      group: pages\n      cancel-in-progress: false\n", deploy)
-        self.assertRegex(deploy, r"uses: actions/deploy-pages@v\d+\n        with:\n          timeout: \d{7,}\n")
+        # Main's runs finish in any order: an older commit than the live one never replaces it.
+        self.assertIn("compare/$live...$target", deploy)
+        # The queue keeps only the newest waiting run, whatever commit it started for, so each run deploys the newest
+        # commit whose Checks passed, and checks out and deploys that same commit.
+        self.assertIn("checks.yml/runs?branch=main&event=push&status=success&per_page=1", deploy)
+        self.assertEqual(deploy.count("${{ steps.newer.outputs.sha }}"), 2)
+        # The live commit comes from the site itself: a Pages deployment records main's newest commit, not the built one.
+        self.assertIn('/version.txt?t=', deploy)
+        self.assertIn("git rev-parse HEAD > site/version.txt", deploy)
+        # deploy-pages gives up after 10 minutes and cancels; the deploy step waits for the sync itself.
+        self.assertNotIn("actions/deploy-pages", deploy)
+        self.assertIn('gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -', deploy)
+        self.assertIn("succeed) return 0", deploy)
+        # A stalled deployment is cancelled and tried once more, not left holding the queue.
+        self.assertIn("/cancel", deploy)
+        self.assertIn("attempt || attempt", deploy)
 
 
 if __name__ == "__main__":

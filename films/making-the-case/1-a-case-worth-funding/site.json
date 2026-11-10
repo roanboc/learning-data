@@ -1,0 +1,80 @@
+{
+  "kicker": "Funding data work",
+  "kicker_es": "Financiar el trabajo con datos",
+  "title_es": "Un caso que merece financiarse",
+  "h1": "A case worth funding: options, costs, benefits and one clear ask",
+  "h1_es": "Un caso que merece financiarse: opciones, costos, beneficios y una petición",
+  "lead": "The old warehouse costs A$310,000 a year, and its licence renews unless someone decides. Helena Novak, with Rohan Desai from Finance, asks the data council to retire it: three options, one carrying on as now; costs once and every year; benefits with owners and dates; one clear ask, on one page.",
+  "lead_es": "El viejo almacén de datos cuesta A$310,000 al año, y su licencia se renueva sola. Helena Novak, con Rohan Desai de Finanzas, pide al consejo de datos retirarlo: tres opciones, una de ellas seguir igual; costos únicos y de cada año; beneficios con dueño y fecha; una petición clara, en una página.",
+  "description": "A film about making a business case for data work, the first of Making the case: in New York State in 1816, moving a ton from Buffalo to New York City cost about a hundred dollars and took weeks, so farms out west could grow plenty and still not sell it at a price that paid; the federal government wouldn't pay for a canal, and critics called it Clinton's Ditch; DeWitt Clinton and the canal commissioners made the case to the state's legislature, where it would run, what it would cost and how taxes and tolls would repay it, and on 15 April 1817 it said yes; the Erie Canal opened on 26 October 1825, two years ahead of plan, across the homelands of the Haudenosaunee nations; a ton then cost under nine dollars and took days, and the tolls paid back the seven million within ten years; at the university in May 2027, the old warehouse costs A$310,000 a year and its licence renews for three years unless someone decides; Helena Novak, the data manager, starts from the decision she needs, uses the Five Case Model's five questions as a checklist, not a form, and puts three options on the page, one of them carrying on as now: renew the licence (A$930,000), move all 38 reports (A$520,000 once), or move the 21 people use, rebuilt from governed products, and retire the 17 nobody opens (A$380,000 once), the one she recommends; she counts what it costs once and every year (about A$40,000 a year to run, from the platform's own cost records), a saving of A$270,000 a year from January 2028, paid back in about 17 months, A$970,000 over five years, every figure checked by Rohan Desai in Finance; each benefit has an owner and a date, and the council will see them every quarter, as benefits management asks; on Tuesday 25 May she has ten minutes and one page, asks plainly for A$380,000, two of the team for six months and a decision that day, answers Mei's question from the page, and the council says yes.",
+  "description_es": "Una película sobre cómo presentar un caso de negocio para el trabajo con datos, la primera de Construir el caso: en el estado de Nueva York en 1816, llevar una tonelada de Buffalo a la ciudad de Nueva York costaba unos cien dólares y tardaba semanas, así que las granjas del oeste podían cosechar mucho y aun así no venderlo a un precio que compensara; el gobierno federal no quiso pagar un canal, y los críticos lo llamaban la Zanja de Clinton; DeWitt Clinton y los comisionados del canal presentaron el caso a la legislatura del estado, por dónde iría, cuánto costaría y cómo lo pagarían impuestos y peajes, y el 15 de abril de 1817 dijo que sí; el canal de Erie se inauguró el 26 de octubre de 1825, dos años antes de lo previsto, a través de las tierras de las naciones haudenosaunee; una tonelada pasó a costar menos de nueve dólares y a tardar días, y los peajes devolvieron los siete millones en diez años; en la universidad, en mayo de 2027, el viejo almacén de datos cuesta A$310,000 al año y su licencia se renueva por tres años si nadie decide; Helena Novak, la gestora de datos, empieza por la decisión que necesita, usa las cinco preguntas del modelo de cinco casos como lista de control, no como formulario, y pone tres opciones en la página, una de ellas seguir como hasta ahora: renovar la licencia (A$930,000), mover los 38 reportes (A$520,000 una vez), o mover los 21 que la gente usa, reconstruidos con productos gobernados, y retirar los 17 que nadie abre (A$380,000 una vez), la que ella recomienda; cuenta lo que cuesta una vez y cada año (unos A$40,000 al año para mantenerlos, según los registros de costos de la propia plataforma), un ahorro de A$270,000 al año desde enero de 2028, recuperado en unos 17 meses, A$970,000 en cinco años, cada cifra revisada por Rohan Desai, de Finanzas; cada beneficio tiene un dueño y una fecha, y el consejo los verá cada trimestre, como pide la gestión de beneficios; el martes 25 de mayo, con una sola página, pide con claridad A$380,000, dos personas del equipo por seis meses y una decisión ese día, responde con la página la pregunta de Mei, y el consejo dice que sí.",
+  "card": "Three options, one of them carrying on as now; costs once and every year; benefits with owners; and one clear ask, on one page.",
+  "card_es": "Tres opciones, una de ellas seguir igual; costos únicos y de cada año; beneficios con dueño; y una petición clara, en una página.",
+  "chapters_es": {
+    "ditch": "La Zanja de Clinton",
+    "decide": "Primero, la decisión",
+    "options": "Tres opciones",
+    "costs": "Una vez, y cada año",
+    "benefits": "Beneficios con dueño",
+    "ask": "Una página, una petición",
+    "monday": "El lunes"
+  },
+  "past": [
+    "New York State, from 1816 to 1825: the case for the Erie Canal",
+    "A case that put the route, the cost and the repayment plainly won a yes. Moving a ton fell from about a hundred dollars to under nine, and the tolls paid back the cost within ten years."
+  ],
+  "past_es": [
+    "El estado de Nueva York, de 1816 a 1825: el caso del canal de Erie",
+    "Un caso que planteaba con claridad la ruta, el costo y cómo se pagaría obtuvo un sí. Llevar una tonelada pasó de unos cien dólares a menos de nueve, y los peajes devolvieron el costo en diez años."
+  ],
+  "next_h": "You've seen a case made on one page, and a decision that day. Next: the move's risks, said out loud, each with an owner and an early sign.",
+  "next_h_es": "Viste un caso hecho en una página, y una decisión ese mismo día. Después: los riesgos del traslado, dichos en voz alta, cada uno con su dueño y una señal temprana.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The guidance and sources behind the film: the UK Treasury's business case guidance, the platform's cost records, and the Erie Canal's history. Checked on 10 November 2026.",
+    "p_es": "La guía y las fuentes detrás de la película: la guía de casos de negocio del Tesoro británico, los registros de costos de la plataforma y la historia del canal de Erie. Revisada el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Guidance on developing business cases",
+        "title_es": "Guía para desarrollar casos de negocio (en inglés)",
+        "line": "The UK Treasury's Five Case Model, step by step: why carrying on as now is always an option, and why every benefit needs an owner.",
+        "line_es": "El modelo de cinco casos del Tesoro británico, paso a paso: por qué seguir como hasta ahora siempre es una opción, y por qué cada beneficio necesita un dueño.",
+        "href": "https://www.gov.uk/government/publications/guidance-on-developing-business-cases",
+        "href_es": "https://www.gov.uk/government/publications/guidance-on-developing-business-cases"
+      },
+      {
+        "title": "Monitor costs using system tables, in Databricks",
+        "title_es": "Monitorear costos con las tablas del sistema de Databricks (en inglés)",
+        "line": "The platform's own cost records: what each workload costs, as Helena's case counts the 21 rebuilt reports.",
+        "line_es": "Los registros de costos de la propia plataforma: lo que cuesta cada carga de trabajo, como el caso de Helena cuenta los 21 reportes reconstruidos.",
+        "href": "https://docs.databricks.com/aws/en/admin/usage/system-tables",
+        "href_es": "https://docs.databricks.com/aws/en/admin/usage/system-tables"
+      },
+      {
+        "title": "The Erie Canal's history",
+        "title_es": "La historia del canal de Erie (en inglés)",
+        "line": "The New York State Canal Corporation's history: the yes of 15 April 1817, the seven million dollars and the 363 miles.",
+        "line_es": "La historia de la New York State Canal Corporation: el sí del 15 de abril de 1817, los siete millones de dólares y las 363 millas.",
+        "href": "https://www.canals.ny.gov/About/History",
+        "href_es": "https://www.canals.ny.gov/About/History"
+      },
+      {
+        "title": "Little Short of Madness, in American Heritage",
+        "title_es": "Little Short of Madness, en American Heritage (en inglés)",
+        "line": "Edwin G. Burrows on how the canal was won, dug and paid for: a ton for under nine dollars, and tolls that paid the bill.",
+        "line_es": "Edwin G. Burrows cuenta cómo se ganó, se cavó y se pagó el canal: una tonelada por menos de nueve dólares, y peajes que pagaron la cuenta.",
+        "href": "https://www.americanheritage.com/little-short-madness",
+        "href_es": "https://www.americanheritage.com/little-short-madness"
+      },
+      {
+        "title": "The Haudenosaunee and the canal",
+        "title_es": "Los haudenosaunee y el canal (en inglés)",
+        "line": "The Erie Canalway National Heritage Corridor on the homelands the canal crossed, and what it meant for the nations who lived there.",
+        "line_es": "El Erie Canalway National Heritage Corridor sobre las tierras que cruzó el canal, y lo que significó para las naciones que vivían allí.",
+        "href": "https://eriecanalway.org/learn/history-culture/native-americans",
+        "href_es": "https://eriecanalway.org/learn/history-culture/native-americans"
+      }
+    ]
+  }
+}

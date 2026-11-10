@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Everyone at the table, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (map, page, june), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  map:{q:"El personal y los estudiantes rara vez piden, así que quedan abajo en la matriz. ¿Qué hace Helena con ellos?",
+    opts:[{t:"Los deja fuera de la lista por ahora, pues la matriz los pone donde un plan necesita menos tiempo de nadie."},{t:"Les envía la página mensual, para que sepan qué significa el traslado para ellos, aunque nadie les pregunte nada.",near:true},{t:"Les pregunta también, por medio de sus representantes, qué quieren de los datos: el traslado lleva sus datos.",ok:true}],
+    why:"Abajo en la matriz no es fuera de la lista. Una matriz de poder e interés muestra cuánto puede influir cada uno en un plan, y cuánto le afecta; no dice a quién dejar fuera. El personal y los estudiantes rara vez piden, pero los datos son suyos, así que Helena les pregunta también, por medio de sus representantes, y sus palabras van en el mapa junto a las de los demás. ¿Quién de la lista de tu plan nunca pide nada?"},
+  page:{q:"Todos reciben la misma página el primer lunes de cada mes. ¿Por qué la misma página para todos?",
+    opts:[{t:"Para que todos lean la misma historia, y nadie se entere de sus noticias de segunda mano, en otra versión.",ok:true},{t:"Para que todos sepan las buenas noticias a la vez; las malas esperan a la próxima página, ya resueltas.",near:true},{t:"Para que el vicerrector apruebe cada línea antes de que la página salga a las otras trece partes."}],
+    why:"Catorce partes interesadas, contadas de catorce maneras, pronto se enteran de segunda mano, en versiones que no coinciden. Una página, la misma para todos: dónde está el plan, las medidas, los tres riesgos principales, las decisiones pendientes y una línea para cada una de las catorce. Las malas noticias también van en ella, en cuanto se saben, y por eso se creen las buenas. ¿Qué diría tu página este mes?"},
+  june:{q:"Los reportes de RR. HH. debían trasladarse en julio. ¿Por qué el plan los pasa a agosto?",
+    opts:[{t:"El equipo tiene demasiado trabajo en julio, así que pasa los reportes que RR. HH. más usa a un mes más tranquilo."},{t:"Julio es cuando la nómina menos puede permitirse una sorpresa: un hecho del trabajo, no una preferencia.",ok:true},{t:"RR. HH. pidió agosto, y RR. HH. está alto en la matriz, así que lo que prefiere decide cuándo pasan sus reportes.",near:true}],
+    why:"Ingrid le muestra a Jun el año de la nómina: el ejercicio termina el 30 de junio, y las últimas declaraciones de nómina salen a mediados de julio. Es una restricción real, un hecho del trabajo, no una preferencia, ni cuestión de quién habla más fuerte o está más alto en la matriz. Así que el plan la rodea, como el techo se alzó sobre los olmos, y la página de julio les dice a todos por qué. ¿Qué fechas de tu plan caen en las semanas más duras de otra persona?"}
+  }}};

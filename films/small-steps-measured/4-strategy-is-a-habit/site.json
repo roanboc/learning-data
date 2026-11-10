@@ -1,0 +1,79 @@
+{
+  "kicker": "Reviewing the strategy",
+  "kicker_es": "Revisar la estrategia",
+  "title_es": "La estrategia es un hábito",
+  "h1": "Strategy is a habit: review the plan every quarter, and move it out loud",
+  "h1_es": "La estrategia es un hábito: revísala cada trimestre y muévela en voz alta",
+  "lead": "Helena's data strategy is approved in April 2027, and she puts its reviews in the calendar. In October the university decides to offer short online courses, and the plan must move: one part moves up, one waits, and everyone it touches hears why. In January, promised sits beside delivered.",
+  "lead_es": "La estrategia de datos de Helena se aprueba en abril de 2027, y ella pone sus revisiones en el calendario. En octubre, la universidad decide ofrecer cursos cortos en línea, y el plan debe moverse: una parte sube, otra espera, y se dice por qué. En enero, lo prometido junto a lo entregado.",
+  "description": "A film on keeping a data strategy alive, the last of Small steps, measured and of Data management: review it on a fixed rhythm, move it out loud when the world moves, and end each year with what was promised beside what was delivered. Helena Novak's strategy is approved on 27 April 2027, on one page, with the core Richard Rumelt names (a diagnosis, a guiding policy and actions that fit together). Before anyone leaves, she puts the year's reviews in the calendar, at the data council the deputy vice-chancellor chairs as the steering group. The first, on 27 July, reads the measures, the eight risks and the map's history in the repository, and changes nothing. On 14 October the University Council decides to offer short online courses for working adults from 2028; twelve days later the plan moves: an owner and a promise for the products that choice needs move up to December, the agents' written mandates wait to March, and everyone it touches hears why that week. Noor adds the courses' platform to the target on her map, and TOGAF's change management is named once. On 31 January 2028, the first year's review: days from ask to first use from 41 to 14, promises met from 58% to 86%, 340 to 910 people a month, the old warehouse retired, three data partners named, and what didn't work, said as plainly. It opens with the Montreal Protocol of 1987, whose first step was modest, and whose habit of looking again at the science made it enough.",
+  "description_es": "Una película sobre cómo mantener viva una estrategia de datos, la última de Pasos pequeños, medidos y de Gestión de datos: revisarla con un ritmo fijo, moverla en voz alta cuando el mundo se mueve y cerrar cada año con lo prometido junto a lo entregado. La estrategia de Helena Novak se aprueba el 27 de abril de 2027, en una página, con el núcleo que nombra Richard Rumelt (un diagnóstico, una política guía y acciones que encajan). Antes de que nadie se vaya, pone en el calendario las revisiones del año, en el consejo de datos que el vicerrector adjunto preside como grupo directivo. La primera, el 27 de julio, lee las medidas, los ocho riesgos y el historial del mapa en el repositorio, y no cambia nada. El 14 de octubre, el Consejo Universitario decide ofrecer cursos cortos en línea para adultos que trabajan desde 2028; doce días después el plan se mueve: un dueño y una promesa para los productos que esa decisión necesita suben a diciembre, los mandatos escritos de los agentes esperan a marzo, y a quien afecta se le dice por qué esa misma semana. Noor añade la plataforma de los cursos a la situación deseada de su mapa, y se nombra una vez la gestión del cambio de TOGAF. El 31 de enero de 2028, la revisión del primer año: días de la solicitud al primer uso de 41 a 14, promesas cumplidas del 58% al 86%, de 340 a 910 personas al mes, el almacén antiguo retirado, tres referentes de datos nombrados, y lo que no funcionó, dicho igual de claro. Empieza con el Protocolo de Montreal de 1987, cuyo primer paso fue modesto, y cuyo hábito de volver a mirar la ciencia lo hizo suficiente.",
+  "card": "Helena reviews the data strategy every quarter, moves it out loud when the university moves, and ends the year with promised beside delivered.",
+  "card_es": "Helena revisa la estrategia de datos cada trimestre, la mueve en voz alta cuando la universidad se mueve y cierra el año con lo prometido junto a lo entregado.",
+  "chapters_es": {
+    "ozone": "Volver a mirar",
+    "dates": "Las revisiones, en el calendario",
+    "july": "La primera revisión",
+    "moves": "Cuando el mundo se mueve",
+    "year": "Lo prometido junto a lo entregado",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Montreal, 1987: the treaty that looked again",
+    "Countries signed a modest first cut in the gases thinning the ozone layer, and built in a habit: look at the science again, at least every four years. In London and Copenhagen they went further, out loud, and the layer is healing. A data strategy lives the same way."
+  ],
+  "past_es": [
+    "Montreal, 1987: el tratado que volvió a mirar",
+    "Los países firmaron un primer recorte modesto de los gases que adelgazaban la capa de ozono, e incorporaron un hábito: volver a mirar la ciencia, al menos cada cuatro años. En Londres y Copenhague fueron más lejos, en voz alta, y la capa se recupera. Una estrategia de datos vive igual."
+  ],
+  "next_h": "You've seen the whole of Data management, from the first ninety days to a strategy kept as a habit. On Monday, put the year's reviews in the calendar.",
+  "next_h_es": "Viste todo Gestión de datos, de los primeros noventa días a una estrategia que se mantiene como hábito. El lunes, pon en el calendario las revisiones del año.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Montreal Protocol",
+        "title_es": "El Protocolo de Montreal (en inglés)",
+        "line": "The UN Ozone Secretariat's page on the treaty: what it controls, and how its parties have amended it since 1987.",
+        "line_es": "La página de la Secretaría del Ozono de la ONU sobre el tratado: qué controla, y cómo sus partes lo han enmendado desde 1987.",
+        "href": "https://ozone.unep.org/treaties/montreal-protocol",
+        "href_es": "https://ozone.unep.org/treaties/montreal-protocol"
+      },
+      {
+        "title": "International Day for the Preservation of the Ozone Layer",
+        "title_es": "Día Internacional de la Preservación de la Capa de Ozono",
+        "line": "The UN's page on the ozone layer and the treaty: its phase-outs, its fund, and the first treaty every country joined.",
+        "line_es": "La página de la ONU sobre la capa de ozono y el tratado: sus calendarios de eliminación, su fondo, y el primer tratado al que se unieron todos los países.",
+        "href": "https://www.un.org/en/observances/ozone-day",
+        "href_es": "https://www.un.org/es/observances/ozone-day"
+      },
+      {
+        "title": "Scientific Assessment of Ozone Depletion: 2022",
+        "title_es": "Evaluación científica del agotamiento del ozono: 2022 (en inglés)",
+        "line": "The scientists' assessment the treaty asks for every four years, with when the layer should be back to its 1980 thickness.",
+        "line_es": "La evaluación científica que el tratado pide cada cuatro años, con cuándo debería volver la capa a su grosor de 1980.",
+        "href": "https://csl.noaa.gov/assessments/ozone/2022/",
+        "href_es": "https://csl.noaa.gov/assessments/ozone/2022/"
+      },
+      {
+        "title": "The Nobel Prize in Chemistry 1995",
+        "title_es": "El Premio Nobel de Química 1995 (en inglés)",
+        "line": "The Academy's account of how Molina, Rowland and Crutzen showed what the gases do to the ozone layer.",
+        "line_es": "El relato de la Academia sobre cómo Molina, Rowland y Crutzen mostraron lo que los gases le hacen a la capa de ozono.",
+        "href": "https://www.nobelprize.org/prizes/chemistry/1995/press-release/",
+        "href_es": "https://www.nobelprize.org/prizes/chemistry/1995/press-release/"
+      },
+      {
+        "title": "The TOGAF Standard",
+        "title_es": "El estándar TOGAF (en inglés)",
+        "line": "The Open Group's page for its enterprise architecture standard, whose method closes each cycle with change management.",
+        "line_es": "La página de The Open Group para su estándar de arquitectura empresarial, cuyo método cierra cada ciclo con la gestión del cambio.",
+        "href": "https://www.opengroup.org/togaf",
+        "href_es": "https://www.opengroup.org/togaf"
+      }
+    ]
+  }
+}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Una copia, una plataforma · Datos que se mueven · Learning Data</title>
-<meta name="description" content="Una película sobre el trabajo transaccional y el analítico sobre una sola copia de los datos, gobernada una vez. En Ámsterdam, en 1609, los mercaderes dejan de pesar bolsas de monedas recortadas: el Wisselbank anota una vez la moneda de cada uno, en su propia página, y un pago pasa a ser una línea movida en un solo libro. En la universidad, la app de declaraciones de horas está hecha sobre Lakebase, la base de datos Postgres de Databricks: cada declaración se escribe una vez, como fila, y Postgres atiende a la app mientras el lakehouse lee las mismas filas en su sitio, para la lista de Nómina, el proceso que arma las horas a pagar y el costo de la docencia ocasional de Finanzas, todo a través de Unity Catalog. Desaparecen el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas; una sola cosa se sigue moviendo, a propósito, bajo un contrato. Liviana a propósito, con la documentación oficial para el resto.">
+<meta name="description" content="Una película sobre el trabajo transaccional y el analítico sobre una sola copia de los datos, gobernada una vez. En Ámsterdam, en 1609, los mercaderes dejan de pesar bolsas de monedas recortadas: el Wisselbank anota una vez la moneda de cada uno, en su propia página, y un pago pasa a ser una línea movida en un solo libro. En la universidad, la app de declaraciones de horas está hecha sobre Lakebase, la base de datos Postgres de Databricks: cada declaración se escribe una vez, como fila, y Postgres atiende a la app mientras la plataforma guarda las mismas filas en una segunda forma que lee el lakehouse, para la lista de Nómina, el proceso que arma las horas a pagar y el costo de la docencia ocasional de Finanzas, todo a través de Unity Catalog. Desaparecen el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas; una sola cosa se sigue moviendo, a propósito, bajo un contrato. Liviana a propósito, con la documentación oficial para el resto.">
 <meta property="og:title" content="Una copia, una plataforma · Datos que se mueven · Learning Data"><meta property="og:description" content="Nómina y Finanzas guardaban cada una su copia de las declaraciones. Ahora cada una se escribe una vez, y todos leen esa fila."><meta property="og:image" content="https://data.learn-all.org/assets/one-copy-one-platform-poster.jpg"><meta property="og:locale" content="es_419">
 <link rel="alternate" hreflang="en" href="https://data.learn-all.org/data-that-moves/one-copy-one-platform/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/data-that-moves/one-copy-one-platform/">
 <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
@@ -18,13 +18,13 @@
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/one-copy-one-platform-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#modern-data-basics">Lo básico de los datos modernos</a> › <a href="../">Datos que se mueven</a></p>
 <h1>Una copia, una plataforma: cada declaración, escrita una vez</h1>
-<p class="lead">En la universidad, las declaraciones de horas iban por correo, y Nómina y Finanzas guardaban cada una su copia, que nunca cuadraba. La nueva app escribe cada declaración una vez, en Lakebase, y Nómina, el proceso de horas y Finanzas leen esa fila con Unity Catalog. Sin pipeline ni segunda plataforma.</p>
+<p class="lead">En la universidad, las declaraciones de horas iban por correo, y Nómina y Finanzas guardaban sus copias, y nunca cuadraban. La nueva app escribe cada declaración una vez, en Lakebase, y Nómina, el proceso de horas y Finanzas leen esa fila con Unity Catalog. Sin pipeline ni segunda plataforma.</p>
 <p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
 <section class="module" id="watch" data-store="ld-one-copy-one-platform" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
 <div class="player" data-labs="">
-<audio id="snd" preload="metadata" src="../../../assets/one-copy-one-platform/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/one-copy-one-platform-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 5½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: One copy, one platform"></canvas>
+<audio id="snd" preload="metadata" src="../../../assets/one-copy-one-platform/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/one-copy-one-platform-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 6 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: One copy, one platform"></canvas>
 <div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Detenerse al final de tres capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
@@ -57,8 +57,8 @@
 <div class="tc-body">
 <p class="kicker">← Anterior · Película 2 de 3</p>
 <h3><a href="../hot-warm-cold/">Caliente, tibio, frío</a></h3>
-<p>Caliente, tibio o frío: cuán frescos deben estar los datos y cuán a menudo se leen deciden cómo se mueven y dónde viven.</p>
-<p class="meta">7½ min · Pausa para pensar · Datos que se mueven · En inglés</p>
+<p>Caliente, tibio o frío: cuán frescos deben estar los datos decide cómo se mueven; cuán a menudo se leen, dónde viven.</p>
+<p class="meta">8 min · Pausa para pensar · Datos que se mueven · En inglés</p>
 <p class="tc-progress" data-progress="ld-hot-warm-cold" hidden></p>
 </div>
 </article>

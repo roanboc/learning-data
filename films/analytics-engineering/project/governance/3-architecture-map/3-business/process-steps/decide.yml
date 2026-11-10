@@ -1,6 +1,7 @@
 name: decide
 kind: business process
 owner: Yusuf Demir, data governance lead
+people only: 'yes'
 relationships:
 - assignment: data owner
 - access (reads): term draft

@@ -1,0 +1,32 @@
+{
+  "key": "one-copy-one-platform",
+  "title": "One copy, one platform",
+  "sub": "The third film of Data that moves, the first series of Modern data basics: in Amsterdam in 1609, merchants stop carrying coin and pay each other in one ledger; at the university, the casual claims app writes each claim once, on Lakebase, and payroll's list, the job that builds the hours to pay and Finance's casual teaching cost read that one copy through Unity Catalog, so the copies, the pipeline and the second platform between them go.",
+  "howto": "Amsterdam in 1609 is painted in warm lamplight; the university is drawn in the module's look, the intro's platform map up close, dark navy with lanes of light, and its people lit for the dark. Light blue is data moving and the platform, gold what people agree on, from the bank's ledger to a contract, green what passes or is paid, red an error or a copy that drifts, and amber a person's turn or a question. The tools' pages are drawn for the film, each with its product's name and logo.",
+  "src": [
+    "ledger.js",
+    "claims.js",
+    "scenes.js"
+  ],
+  "logos": true,
+  "poster": [
+    "copy",
+    "readers",
+    1.2
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"],
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bRohan\\b", "Roe-han"],
+    ["\\bWisselbank\\b", "Vissel-bank"]
+  ],
+  "story": [
+    "ledger"
+  ],
+  "urgent": []
+}

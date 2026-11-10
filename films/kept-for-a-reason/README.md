@@ -11,6 +11,7 @@ Privacy and the life of data. Linh Nguyen's tutoring contract ends, and she asks
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A reason to keep it](https://data.learn-all.org/kept-for-a-reason/a-reason-to-keep-it/) | Purpose and consent | 8 min | 7 | 3 questions | [script](1-a-reason-to-keep-it/script.md) · [source](1-a-reason-to-keep-it/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

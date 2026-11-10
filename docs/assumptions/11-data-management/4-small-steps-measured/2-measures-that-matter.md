@@ -1,8 +1,8 @@
 # Measures that matter: questions and assumptions
 
-*Data management* · *Small steps, measured*, film 2 of 4 · open, PR #270 · [pull request](https://github.com/roanboc/learning-data/pull/270)
+*Data management* · *Small steps, measured*, film 2 of 4 · merged, PR #270 · [pull request](https://github.com/roanboc/learning-data/pull/270)
 
-On the site once PR #270 merges: https://data.learn-all.org/small-steps-measured/measures-that-matter/
+[Watch it on the site](https://data.learn-all.org/small-steps-measured/measures-that-matter/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../numbers.md` point to the thread's working folder, not to this repository.
 
@@ -16,7 +16,7 @@ One line each: the question I would have asked Rodrigo, the assumption I took in
 | 4 | What are the two questions to stakeholders? | "Did our work help a decision you made?" and "Was it easy to get what you needed?", asked of the fourteen stakeholders on the map, twice a year; no results shown yet | *Three groups, few measures* |
 | 5 | Should the measures page be a model in the example dbt project? | No: the project has no tracker or request source, and adding one for one film would be a new source system the other films don't use. The film draws the page as a dashboard on the platform and one definition in the catalog's glossary; the page's `repo` is empty | *A baseline and a decision* and *The trend, not one number*, `site.json` |
 | 6 | Who owns the measures' definitions and the page? | Helena, the data manager: the definitions in the catalog's glossary, the page a small governed product | *A baseline and a decision*, `../numbers.md` |
-| 7 | Name the leading data people film that tells how the team reads the measures together? | It isn't on main yet, so the film says "the leading data people module", as the briefs ask | *For the team, never a target* |
+| 7 | Name the leading data people film that tells how the team reads the measures together? | It wasn't on main when the voice was made, so the film says "the leading data people module", as the briefs ask. *Measure the work, not the people* reached main before this film merged, so its page links that film under *Go further*; the narration keeps the module's name rather than a new voice line and soundtrack for one name | *For the team, never a target*, `site.json` |
 | 8 | How much of 12 August (promises met 82%, load nine against six) to tell? | The numbers, as agreed, and one line on what the team did (finished before it started; six again by mid-September); the how is the leading data people module's | *The trend, not one number* |
 | 9 | Which pages should the film's page link under *Go further*? | Five, each checked on 10 November 2026: Apgar's 1953 paper (as neonatology.net reproduces it), the National Library of Medicine's profile, the Balanced Scorecard Institute's overview (free to read, where the 1992 *Harvard Business Review* article needs an account), Goodhart's law on the English Wikipedia (the Spanish page couldn't be checked, so the Spanish page links the English one, marked *en inglés*), and *Teachers of data*, which the narration names | `site.json` |
 | 10 | Show all three of the CDC's numbers for newborn deaths (1950, 1980, 2016)? | Two bars, 1950 (20.5) and 2016 (3.9), each growing as the voice says it; 1980's 8.5 is in the script's sources, not on screen, so no bar waits without a word | *The first minute* |

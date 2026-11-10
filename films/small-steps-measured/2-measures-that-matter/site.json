@@ -74,6 +74,14 @@
         "line_es": "La película de gobierno de datos donde la gobernanza se mide desde el trabajo cada día, con los chequeos de cada noche y con la gente, no con una nota anual.",
         "href": "https://data.learn-all.org/data-governance/teachers-of-data/",
         "href_es": "https://data.learn-all.org/es/data-governance/teachers-of-data/"
+      },
+      {
+        "title": "Measure the work, not the people",
+        "title_es": "Mide el trabajo, no a las personas",
+        "line": "The leading data people film where the team reads this page together every second Thursday, and asks what slowed the work, never who.",
+        "line_es": "La película de Liderar equipos de datos donde el equipo lee esta página cada dos jueves y pregunta qué frenó el trabajo, nunca quién.",
+        "href": "https://data.learn-all.org/ownership-and-performance/measure-the-work/",
+        "href_es": "https://data.learn-all.org/es/ownership-and-performance/measure-the-work/"
       }
     ]
   }

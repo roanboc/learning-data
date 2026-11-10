@@ -61,7 +61,10 @@ LATER = {"The graduation list: its owner, its sources, its ceremonies and the pe
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
           "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
          "The claims app: its owner, for the claims read where the app writes them":
-         ("/sources/claims_app/",)}
+         ("/sources/claims_app/",),
+         "Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products":
+         ("/models/core/staff/", "/seeds/reference/course/units.csv", "/seeds/reference/staff/",
+          "/governance/4-data-products/claims.yml", "/governance/4-data-products/payroll_export.yml")}
 
 
 def load(path):

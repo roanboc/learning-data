@@ -1,87 +1,67 @@
-# The project as a Declarative Automation Bundle (formerly Databricks Asset Bundles): one job that runs the dbt build,
-# and three targets. Only the release deploys `test` and `production`, each as its own service principal: every night
-# it builds main in test first, and production only after test has passed and a release approver has said yes
-# (review-and-release/README.md). A person may deploy `dev`, a copy under their own name, to try the job.
+# The project's jobs, as a Declarative Automation Bundle (formerly Databricks Asset Bundles): each job
+# written as a file in resources/, next to the models it runs, and deployed the same way to each
+# target (DEC-PRJ-16). Databricks only: the project's checks run on DuckDB, and nothing here runs in
+# this repository's CI. The workflow that deploys it is examples/scripts-became-software/release.yml.
 #
-# The workspace isn't named here: in the release, each environment's DATABRICKS_HOST names it
-# (review-and-release/release.yml); on your laptop, your own Databricks profile does. Nothing in this file is secret.
+#   databricks bundle validate -t test
+#   databricks bundle deploy -t dev                     # your own copy: names prefixed, schedules paused
+#   databricks bundle deploy -t test                    # by the release workflow, after a merge
+#   databricks bundle run -t test payroll_export
+#   databricks bundle deploy -t prod                    # by the release workflow, once Noor approves
 #
-#   databricks bundle validate                  # dev, the default
-#   databricks bundle deploy --var="warehouse_id=<id>" --var="catalog=<development catalog>"
-#   databricks bundle run build
+# Nobody deploys to test or production from a laptop: the release workflow does, as the platform's
+# service principal.
+
 bundle:
-  name: credentials
+  name: data_project
+
+include:
+  - resources/*.yml
 
 variables:
   warehouse_id:
-    description: The SQL warehouse the build runs its SQL on
+    description: The SQL warehouse that runs the SQL dbt generates, found by its name.
+    lookup:
+      warehouse: Data platform
   catalog:
-    description: The catalog the build writes to
+    description: The Unity Catalog catalog the project builds into.
   schema:
-    description: The schema the build writes to; dbt adds each layer's suffix (prod_core, prod_marts)
-    default: dev
-  release:
-    description: >
-      The release's service principal for the target, by its application ID: "release test" in test, "release" in
-      production. The release sets it; test and production stop without it.
-    default: ""
-
-resources:
-  jobs:
-    build:
-      name: Build
-      tasks:
-        - task_key: dbt
-          environment_key: default
-          dbt_task:
-            project_directory: ./
-            # With a warehouse, Databricks writes the dbt profile itself, for whoever the job runs as
-            warehouse_id: ${var.warehouse_id}
-            catalog: ${var.catalog}
-            schema: ${var.schema}
-            commands:
-              # As docs/databricks-governance.md runs it: direct personal data masked for everyone outside
-              # personal_data_readers (the identity that runs dbt is in that group, DEC-PRJ-13), and the Planning
-              # marts granted to their readers
-              - 'dbt build --vars "{personal_data_readers: personal_data_readers, planning_readers: [learners_near_an_award_readers]}"'
-      environments:
-        - environment_key: default
-          spec:
-            environment_version: "5"
-            dependencies:
-              - dbt-databricks==1.12.5   # the same as requirements-databricks.txt: change both together
+    description: The schema dbt builds into, before each layer's suffix (prod gives prod_marts).
+  service_principal:
+    description: The platform's service principal, found by its name; test and production run as it.
+    lookup:
+      service_principal: data-platform
 
 targets:
+
+  # Each person's own copy, for trying a change: the bundle prefixes every name with theirs and
+  # pauses every schedule.
   dev:
-    # A copy under your own name: what it deploys is named "[dev <your name>]", and nothing runs on a schedule
     mode: development
     default: true
+    variables:
+      catalog: dev
+      schema: ${workspace.current_user.short_name}
 
+  # The same files, deployed after a merge and run on test's data first.
   test:
-    # Production's build, on the test catalog: the release builds main here each night before production. Production
-    # mode stops a deploy from any branch but main
-    mode: production
-    git:
-      branch: main
     workspace:
-      # One copy, in the release's own folder
-      root_path: /Workspace/Users/${var.release}/.bundle/${bundle.name}/${bundle.target}
-    variables:
-      schema: prod
-    # The job runs as the release's test identity, which writes only the test catalog
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     run_as:
-      service_principal_name: ${var.release}
+      service_principal_name: ${var.service_principal}
+    variables:
+      catalog: test
+      schema: test
 
-  production:
-    # Production mode stops a deploy from any branch but main
+  # Production: only from main, only once Noor approves, as the service principal, never a person.
+  prod:
     mode: production
     git:
       branch: main
     workspace:
-      # One copy, in the release's own folder
-      root_path: /Workspace/Users/${var.release}/.bundle/${bundle.name}/${bundle.target}
-    variables:
-      schema: prod
-    # The job runs as the release's own service principal, the identity that deployed it
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
     run_as:
-      service_principal_name: ${var.release}
+      service_principal_name: ${var.service_principal}
+    variables:
+      catalog: university
+      schema: prod

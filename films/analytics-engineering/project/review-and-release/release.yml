@@ -7,8 +7,9 @@
 # same commit, in the environment production (production.json): it waits until a release approver approves it, and
 # whoever started the run can't approve it (Prevent self-review). Only then does it sign in to Databricks, as the
 # release's own service principal, with no secret: workload identity federation, whose policy accepts only a job of
-# this repository in that environment. Each job deploys the bundle (databricks.yml) to its target and runs the build
-# there. No agent's identity can do either: the agents' groups only read production.
+# this repository in that environment. Each job deploys the bundle (databricks.yml) to its target, test or prod, and
+# runs the build there (resources/build.job.yml), as the release's own identity in that environment. No agent's identity
+# can do either: the agents' groups only read production.
 name: Release
 
 on:
@@ -33,14 +34,14 @@ jobs:
     environment: test
     env:
       # None of these is secret. Each is a variable of the job's own environment, set once by the platform team: the
-      # workspace, the identity's application ID ("release test" here, "release" in production) and where the build
-      # goes. BUNDLE_VAR_ sets the bundle's variables (databricks.yml).
+      # workspace, and the identity's application ID ("release test" here, "release" in production). The bundle's jobs
+      # run as it too: BUNDLE_VAR_service_principal sets the bundle's variable, in place of the platform's service
+      # principal that databricks.yml looks up by name (a variable that has a value skips its lookup). The catalog and
+      # the warehouse are the target's, in databricks.yml.
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
       DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
-      BUNDLE_VAR_release: ${{ vars.RELEASE_CLIENT_ID }}
-      BUNDLE_VAR_catalog: ${{ vars.CATALOG }}
-      BUNDLE_VAR_warehouse_id: ${{ vars.WAREHOUSE_ID }}
+      BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v7
 
@@ -64,19 +65,17 @@ jobs:
       DATABRICKS_AUTH_TYPE: github-oidc
       DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
       DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
-      BUNDLE_VAR_release: ${{ vars.RELEASE_CLIENT_ID }}
-      BUNDLE_VAR_catalog: ${{ vars.CATALOG }}
-      BUNDLE_VAR_warehouse_id: ${{ vars.WAREHOUSE_ID }}
+      BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v7
 
       - uses: databricks/setup-cli@main
 
       - name: Check the bundle
-        run: databricks bundle validate -t production
+        run: databricks bundle validate -t prod
 
       - name: Deploy the bundle to production
-        run: databricks bundle deploy -t production
+        run: databricks bundle deploy -t prod
 
       - name: Run the build in production
-        run: databricks bundle run -t production build
+        run: databricks bundle run -t prod build

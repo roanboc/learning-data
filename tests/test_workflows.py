@@ -60,13 +60,16 @@ class WorkflowTests(unittest.TestCase):
         # Cancelling main's Checks runs left Publish site with no passing run to publish (10 Nov).
         checks = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
         block = checks.split("\nconcurrency:\n", 1)[1].split("\njobs:\n", 1)[0]
+        self.assertIn("group: checks-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}\n", block)
         self.assertIn("cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}\n", block)
         pages = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
         # Only a deployment that will run joins the queue, so a skipped run can't replace a waiting one.
         self.assertNotIn("\nconcurrency:", pages)
         deploy = pages.split("  deploy:\n", 1)[1]
         self.assertIn("    concurrency:\n      group: pages\n      cancel-in-progress: false\n", deploy)
-        self.assertRegex(deploy, r"uses: actions/deploy-pages@v\d+\n        with:\n          timeout: \d{7,}\n")
+        # Main's runs finish in any order: an older commit than the live one never replaces it.
+        self.assertIn("compare/$live...$HEAD_SHA", deploy)
+        self.assertRegex(deploy, r"if: steps.newer.outputs.go == 'true'\n        uses: actions/deploy-pages@v\d+\n        with:\n          timeout: \d{7,}\n")
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@
    a room (later:true) lets what was there leave first; between rooms a shot dissolves. Sizes in the 1920 x 1080 frame. */
 
 const PP_LAST="One preferred way, a path for every provider, and value first.";
-const PP_MOD={module:"Data management"};
+const PP_MOD={module:"Data management",mark:dm_mark};
 // the film's number and title at the top left, from the second chapter on
 function pp_kick(ctx,S,a){if(a<=0.004)return;setScreen(ctx,S);lp_kicker(ctx,"3","A path for every provider",{a});}
 

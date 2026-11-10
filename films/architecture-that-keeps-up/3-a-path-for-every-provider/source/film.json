@@ -4,6 +4,7 @@
   "sub": "The third film of Architecture that keeps up, in Data management: one preferred way for data to arrive, and a path for every provider that can't meet it. The team writes its preferred way on one page, draws a decision tree for the rest, finds what a new timetable bought as a service never says, and keeps Graham's room counts true from the first week.",
   "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the preferred way, the decision tree's questions), orange is data and where it comes from (the providers and their bookings, counts and files), green is something done or kept true (the preferred path, the counts Graham can trust), and amber a cost, a risk or a wait (what the timetable never says, the file cut short, each provider's next step).",
   "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
     "pp_port.js",
     "pp_uni.js",
     "pp_scenes.js"

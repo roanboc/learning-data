@@ -23,6 +23,7 @@
       ":(exclude)films/architecture-that-keeps-up/3-a-path-for-every-provider/source/src/i18n/es/captions.js",
       "films/the-new-skills/shared",
       "films/what-an-agent-is/shared",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
       "films/from-words-to-data/shared/tools",
       "films/data-governance/shared/tools/names.py",
       "films/data-governance/shared/tools/cues.py",

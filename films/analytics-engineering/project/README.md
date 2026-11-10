@@ -44,7 +44,7 @@ Then, if you like:
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
-| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
+| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
 | `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
@@ -110,7 +110,7 @@ export DATABRICKS_SCHEMA=<your schema>   # optional; dev if not set
 dbt build --target databricks --profiles-dir .
 ```
 
-`requirements-databricks.txt` installs dbt-databricks 1.12.5, which brings dbt-core 1.12.3.
+`requirements-databricks.txt` installs dbt-databricks 1.12.8, which brings dbt-core 1.12.5.
 
 ### Adding a Databricks job to CI
 
@@ -236,7 +236,7 @@ project/
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
 │                             insight by morning, the fix and the pull request a person approved
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
+├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
 ├── memory/                   the team's memory, kept by the platform and second to what's governed:
 │                             who owns it and may read or write it; removed.md, what was deleted, why
@@ -320,8 +320,10 @@ person domain's conceptual model (`models/core/person/`) is a draft, and
 
 The graduation list has a slice of its own: 23 graduates and 25 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
+(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
+student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
+award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

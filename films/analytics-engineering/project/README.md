@@ -229,12 +229,12 @@ project/
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the count of active research projects as a
-│                             function, a Genie Agent and an agent's evaluation cases (Databricks only)
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only); hr-system-interface/: the HR system's data contract, agreed with its owner
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root
-├── memory/                   the team's memory: in entries/, each lesson agents learned and people
-│                             approved, a file each; removed.md, those removed, and why
+├── memory/                   the team's memory, kept by the platform and second to what's governed:
+│                             who owns it and may read or write it; removed.md, what was deleted, why
 ├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
 │                             a model, reconcile and diff, review metadata, sync the glossary,
 │                             review for governance; and choose-the-skill, which picks one

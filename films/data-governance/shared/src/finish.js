@@ -9,11 +9,15 @@
    on a fast machine and several times that on a laptop or phone, and keeps a full-size picture (8 MB) in memory: these films have
    10 to 38 places, against master data's 5 to 8, so painting them all as the page opened froze the page again and again while
    the visitor was only reading it (2 November 2026).
+   Where the film was published with its places drawn as pictures (places/ beside film.js, master data's wash.js), the player paints
+   none: it waits for the pictures of the moment it starts at, and shows each place as its picture. Painted while the film played,
+   they froze it again and again on a laptop, the soundtrack running on (5 November 2026).
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
    of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
    the grain. */
 async function prepAssets(){await fontsReady3();await loadLogos();if(window.__RENDER__)wc_prep();else await wc_prepSoft();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(gv_place);return;}
+  if(await wc_picsLoad()){await wc_picsReady(window.FILM&&FILM.time?FILM.time():0);return;}
   const cv0=document.getElementById("film");if(ks.length&&cv0){await new Promise(r=>setTimeout(r,0));gv_place(ks[0]);}let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
   const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
   // a page without a player (labs, scenarios) paints a place only when it first draws it (the kept picture is made then), never all of
@@ -26,3 +30,4 @@ if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySele
     for(let i=0;i<MB;i++){const tt=Math.max(0,t-SHUT*i/(MB-1));mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";renderFrame(mx,1,tt);ax.globalAlpha=1/(i+1);ax.drawImage(M,0,0);}
     ax.globalAlpha=1;ox.setTransform(1,0,0,1,0,0);ox.globalAlpha=1;ox.globalCompositeOperation="source-over";ox.drawImage(A,0,0);
     return out.toDataURL("image/jpeg",q||0.9);};})();}
+if(!window.__RENDER__)renderFrame=wc_liveFrame(renderFrame);

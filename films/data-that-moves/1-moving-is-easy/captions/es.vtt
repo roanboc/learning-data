@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:09.018
+Junio de 1883, en el río Murray, la frontera entre dos colonias británicas: Nueva Gales del Sur y Victoria.
+
+00:00:10.118 --> 00:00:15.253
+En Albury, un puente nuevo une el ferrocarril de Sídney con el ferrocarril de Melbourne.
+
+00:00:16.553 --> 00:00:21.916
+Pero cada colonia había construido su ferrocarril con su propio ancho de vía: la distancia entre los dos rieles.
+
+00:00:23.016 --> 00:00:28.236
+Los rieles de Victoria estaban casi un palmo más separados: ningún tren podía circular por ambos.
+
+00:00:29.736 --> 00:00:36.751
+En Albury, cada pasajero tenía que cambiar de tren, y cada cajón y fardo de lana se pasaba a mano a otro vagón.
+
+00:00:38.051 --> 00:00:41.690
+Costaba tiempo a los viajeros, y dinero a los comerciantes, en cada viaje.
+
+00:00:42.790 --> 00:00:51.447
+Cada colonia tuvo sus razones: Nueva Gales del Sur cambió de ancho con un ingeniero nuevo; Victoria mantuvo el que ambas eligieron antes.
+
+00:00:52.747 --> 00:00:57.420
+Durante 79 años, todo se detuvo en Albury. Algo tenía que cambiar.
+
+00:00:59.120 --> 00:01:08.992
+En 1962, el gobierno de Australia, con Nueva Gales del Sur y Victoria, abrió una línea de Albury a Melbourne, con un solo ancho acordado.
+
+00:01:10.292 --> 00:01:17.128
+La carga pasó sin detenerse ese enero, y desde abril también los pasajeros, sin que nadie cambiara de tren.
+
+00:01:18.428 --> 00:01:21.422
+En un año, la carga que transportaba había crecido un tercio.
+
+00:01:23.122 --> 00:01:29.068
+En la universidad, los contratos de RR. HH. llegaban antes a Finanzas como un archivo cada periodo lectivo.
+
+00:01:29.768 --> 00:01:34.074
+El equipo de Rohan Desai pasaba dos días averiguando qué significaba cada columna.
+
+00:01:35.374 --> 00:01:40.881
+Mover los datos nunca fue lo difícil. Acuerda qué significan, una vez, y pasan sin detenerse.
+
+00:01:48.181 --> 00:01:51.841
+Lo básico de los datos modernos trata de lo que las herramientas hoy facilitan.
+
+00:01:52.541 --> 00:02:00.089
+Mover datos, operar una plataforma, servir datos a personas y agentes, y leer documentos antes exigía equipos enteros.
+
+00:02:01.189 --> 00:02:04.021
+Hoy Databricks y dbt hacen gran parte de eso.
+
+00:02:05.321 --> 00:02:11.821
+Cada película muestra qué se facilitó, qué aún requiere que las personas acuerden, y adónde te lleva la documentación oficial.
+
+00:02:13.121 --> 00:02:18.488
+No profundizamos, a propósito: eso lo hacen los cursos y la documentación oficial, que se mantienen al día.
+
+00:02:19.588 --> 00:02:24.604
+Estas películas dan el consejo de arquitectura: qué importa, qué elegir y por qué.
+
+00:02:26.304 --> 00:02:34.813
+Nuestra historia sigue un contrato. Linh Nguyen es tutora de HI101 este semestre, con el contrato T-26188.
+
+00:02:36.113 --> 00:02:42.424
+Nació en el sistema de RR. HH., que envía sus datos en dos formas, como muestra La vida interior de los datos.
+
+00:02:43.524 --> 00:02:52.025
+Eventos: cada cambio en cuanto se hace. RR. HH. registró el contrato de Linh el 14 de julio, y llegó a la plataforma como un cambio.
+
+00:02:53.325 --> 00:03:00.885
+Y lotes: el 20 de julio, primer día del periodo lectivo, el sistema de RR. HH. volvió a enviar su archivo completo.
+
+00:03:02.185 --> 00:03:09.601
+Eventos, mensajes y lotes tienen nombre desde Enterprise Integration Patterns, de Hohpe y Woolf, hace más de veinte años.
+
+00:03:10.901 --> 00:03:13.649
+Lo que cambió es lo poco que hoy cuesta moverlos.
+
+00:03:16.349 --> 00:03:19.137
+Un conector gestionado trae los datos de un sistema.
+
+00:03:20.237 --> 00:03:25.532
+Sam Okafor, que dirige la plataforma, eligió el sistema de RR. HH. y las tablas que traer.
+
+00:03:26.632 --> 00:03:31.868
+El conector lee solo lo que cambió, reintenta cuando una lectura falla y no pierde su lugar.
+
+00:03:33.168 --> 00:03:37.386
+El contrato de Linh llega a bronce, tal como lo envió el sistema de RR. HH.
+
+00:03:38.886 --> 00:03:42.540
+Una consulta en su sitio lee otro sistema sin copiarlo.
+
+00:03:43.640 --> 00:03:50.104
+El libro mayor de Finanzas se queda en el sistema financiero, y la plataforma lo lee ahí, sin cambiarlo.
+
+00:03:51.404 --> 00:03:56.150
+Para grandes volúmenes, o respuestas rápidas, la documentación recomienda un conector.
+
+00:03:57.650 --> 00:04:04.363
+Un espejo va en sentido contrario: muestra el catálogo de la universidad en la herramienta de otro equipo, sin copiarlo.
+
+00:04:05.463 --> 00:04:11.167
+Rohan trabaja en Microsoft Fabric, y las tablas de la plataforma aparecen ahí, leídas donde viven.
+
+00:04:12.667 --> 00:04:18.732
+Compartir le da a un socio los datos donde viven, como mostraron Productos en formatos abiertos y El mercado de datos.
+
+00:04:20.032 --> 00:04:25.254
+Y una API sirve datos a pedido: una aplicación pregunta y recibe justo lo que necesita.
+
+00:04:26.554 --> 00:04:30.863
+Cada una hace lo que antes los equipos hacían y arreglaban a mano. Mover ya es fácil.
+
+00:04:34.563 --> 00:04:40.605
+¿Qué les queda a las personas? El contrato en cada interfaz: qué significan los datos donde se unen dos sistemas.
+
+00:04:41.905 --> 00:04:45.670
+Ingrid Holm, de RR. HH., es dueña de sus datos.
+
+00:04:46.370 --> 00:04:50.048
+Noor Rahman, la arquitecta de datos, acuerda con ella su contrato.
+
+00:04:51.148 --> 00:04:57.337
+Primero, qué significa cada campo. pay_type tiene tres valores: CAS, FT y CON.
+
+00:04:58.437 --> 00:05:05.262
+CON significa continuo, no contrato. Si se lee mal, Finanzas cuenta al personal continuo como ocasional.
+
+00:05:06.762 --> 00:05:09.563
+Segundo, quién responde: Ingrid, con nombre propio.
+
+00:05:10.863 --> 00:05:15.649
+Tercero, qué significa un borrado. Cuando se cancela un contrato, RR. HH. lo borra.
+
+00:05:16.749 --> 00:05:24.366
+Así que el contrato dice cómo llega: como un cambio, con su hora, nunca como una fila que solo falta en el próximo archivo.
+
+00:05:25.666 --> 00:05:29.215
+Luego la plataforma cierra ese contrato y conserva su historial.
+
+00:05:30.515 --> 00:05:35.795
+Cuarto, qué es personal. Nombres, fechas de nacimiento y correos pasan, marcados como personales.
+
+00:05:36.895 --> 00:05:40.111
+Datos bancarios y tarifas de pago nunca salen de RR. HH.
+
+00:05:41.611 --> 00:05:47.580
+Lo escriben en el Open Data Contract Standard, y las pruebas de Jun Park revisan cada fila contra él.
+
+00:05:48.880 --> 00:05:54.873
+Cambio silencioso muestra qué pasa cuando llega un valor nuevo y solo un lado sabe qué significa.
+
+00:05:55.973 --> 00:06:01.455
+Y Una plataforma que se vigila a sí misma muestra una noche en que un campo cambia y su contrato no.
+
+00:06:05.155 --> 00:06:10.632
+En Albury, los trenes siempre circularon. Lo que tomó 79 años fue acordar el ancho de vía.
+
+00:06:12.132 --> 00:06:20.563
+Hoy los contratos de RR. HH. llegan a Rohan en Fabric el día en que se hacen, con el sentido que les da RR. HH., y nadie pierde dos días.
+
+00:06:22.063 --> 00:06:23.789
+Ya existen estándares para esto.
+
+00:06:24.689 --> 00:06:31.316
+Enterprise Integration Patterns para cómo se mueven los datos, y el Open Data Contract Standard para qué significan.
+
+00:06:32.616 --> 00:06:39.133
+No reinventes la rueda. Investiga, adapta, implementa e itera, partiendo de la documentación oficial.
+
+00:06:40.433 --> 00:06:47.670
+Si estas bases aún te cuestan donde trabajas, mira primero tu gobierno de datos o tus herramientas: otros módulos de aquí muestran ambos.
+
+00:06:49.170 --> 00:06:52.133
+Deja que las herramientas lo muevan; dedica tu tiempo al contrato.

@@ -3,7 +3,7 @@ First From words to data's checks, unchanged: every moment draws, 30 a second, a
 drawn smaller than 28 px after the camera's zoom, the smallest that reads on a phone (legible.py there). Then the module's own: every
 word stands out at least 4.5 to 1 from what is behind it (contrast.py, here); each place the film paints (AG_PLACES) and its frost,
 painted again from nothing, leaves the page drawing again within LIMIT seconds; and each person the film lists in DP_PEOPLE, painted
-again in their light, picture by picture, within PERSON seconds each. The site's player makes these one at a time while the film
+again in their light, picture by picture, within PERSON seconds each (the quickest of TRIES paints, so a busy machine doesn't fail it). The site's player makes these one at a time while the film
 plays, so a picture that keeps the browser busy holds up the film, its soundtrack and the whole page; a phone is about four times
 slower than the machine that checks. Last, the governance films' checks that nothing shows twice where the film changes shot or
 chapter (films/data-governance/shared/tools/twice.py), that nobody's arm jumps in one frame (steady.py there) and that nothing jumps
@@ -16,6 +16,7 @@ from playwright.sync_api import sync_playwright
 
 LIMIT = 2.0    # seconds from a place's first stroke until two frames after it
 PERSON = 0.12  # seconds for each picture of a person in their light (a head, or a body): on a phone, about half a second
+TRIES = 3      # each picture of a person is painted this many times, and the quickest counts
 
 failed = []
 for f in (FW / 'check.py', FW / 'legible.py', HERE / 'contrast.py'):
@@ -28,7 +29,7 @@ for f in (FW / 'check.py', FW / 'legible.py', HERE / 'contrast.py'):
 with sync_playwright() as p:
     b, pg = render_page(p)
     edges.watch(pg)  # from here on each person's pictures are made again as the checks draw them, and edges.check looks at them
-    r = pg.evaluate("""async () => {
+    r = pg.evaluate("""async (TRIES) => {
       const frame = () => new Promise(f => requestAnimationFrame(() => f()));
       const c = document.createElement('canvas'); c.width = 480; c.height = 270; document.body.appendChild(c); const x = c.getContext('2d');
       const time = async (k, f) => { await frame(); await frame(); const a = performance.now(); f(); await frame(); await frame(); return [k, (performance.now() - a) / 1000]; };
@@ -36,10 +37,15 @@ with sync_playwright() as p:
       for (const k of Object.keys(AG_PLACES)) { delete AG_KEPT['place:' + k];
         places.push(await time(k, () => x.drawImage(ag_place(k), 0, 0, 480, 270)));
         DP_FROSTED.delete(ag_place(k)); places.push(await time(k + ' frost', () => x.drawImage(dp_frostPlace(k), 0, 0, 480, 270))); }
-      for (const q of DP_PEOPLE) { const [who, light] = Array.isArray(q) ? q : [q], N = dp_night(who, light); delete AG_PEOPLE[N.key];
+      // each picture of a person is painted three times from nothing, and the quickest counts: one paint can take half as long again
+      // when the machine is busy with something else (film 17's thread measured 0.08 to 0.13 s for the same body), and the best of three
+      // measures the paint, not the machine. A body is timed alone: its head is made first, untimed
+      for (const q of DP_PEOPLE) { const [who, light] = Array.isArray(q) ? q : [q], N = dp_night(who, light);
         const st = dp_prepSteps(who, light), what = ['head', 'body', 'body holding'];
-        for (let i = 0; i < st.length; i++) people.push(await time(N.key + ' ' + what[i], st[i])); }
-      return {places, people}; }""")
+        for (let i = 0; i < st.length; i++) { let best = Infinity;
+          for (let k = 0; k < TRIES; k++) { delete AG_PEOPLE[N.key]; if (i) ag_fig(N); best = Math.min(best, (await time('', st[i]))[1]); }
+          people.push([N.key + ' ' + what[i], best]); } }
+      return {places, people}; }""", TRIES)
     tw = twice.check(pg)
     st = steady.check(pg)
     jp = jump.check(pg)

@@ -11,6 +11,7 @@ What it means to own an outcome, how a team should measure its work, what to do 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Growing people](https://data.learn-all.org/ownership-and-performance/growing-people/) | How people grow at work | 8 min | 6 | 3 questions | [script](4-growing-people/script.md) · [source](4-growing-people/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

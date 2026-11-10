@@ -11,6 +11,7 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Better every week](https://data.learn-all.org/small-steps-measured/better-every-week/) | Improving how the team works | 6½ min | 6 | 3 questions | [script](3-better-every-week/script.md) · [source](3-better-every-week/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

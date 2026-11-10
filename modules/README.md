@@ -389,7 +389,7 @@ No film source yet.
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
-No film source yet.
+- [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
 
 ## Making of and supplementary films
 

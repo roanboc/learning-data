@@ -12,13 +12,13 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `hr` | 16/16 | 7/7 | 6/6 | 4/4 |  | 33/33 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 22/22 | 10/10 | 12/12 (2 warn) | 6/6 |  | 50/50 (2 warn) |
+| `registrar` | 24/24 | 11/11 | 13/13 (2 warn) | 7/7 |  | 55/55 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 26/26 | 19/19 | 8/8 | 19/19 | 5/5 (3 warn) | 77/77 (3 warn) |
+| `student` | 26/26 | 21/21 | 9/9 | 20/20 | 6/6 (3 warn) | 82/82 (3 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 103/103 (1 warn) | 66/66 | 43/43 (2 warn) | 45/45 | 7/7 (3 warn) | 264/264 (6 warn) |
+| **All** | 105/105 (1 warn) | 69/69 | 45/45 (2 warn) | 47/47 | 8/8 (3 warn) | 274/274 (6 warn) |
 
 ## Not passed
 
@@ -44,6 +44,7 @@ A test measures accuracy only against a reference outside the data, such as a re
 | `student` | `graduation_list_family_name_at_30` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_in_capitals` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `old_form_names_not_yet_confirmed` | the graduate | Mei Tanaka, registrar's office |
+| `student` | `printers_file_has_the_names_graduates_gave` | The graduate, through their last answer in the portal | Mei Tanaka, registrar's office |
 
 ## Hand-check hours
 

@@ -176,6 +176,7 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 
 - [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
+- [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 
 ## Enterprise architecture
 

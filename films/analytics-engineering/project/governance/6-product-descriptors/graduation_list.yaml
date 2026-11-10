@@ -23,6 +23,11 @@ outputPorts:
     as it will be printed on the degree certificate.'
   type: table
   version: 1.0.0
+- name: mart_graduations__certificates_file
+  description: 'The printer''s file: each certificate of a round whose names haven''t gone to the printer
+    yet, with what the certificate prints, from the graduation list.'
+  type: table
+  version: 1.0.0
 team:
   name: Mei Tanaka, registrar's office
   members:
@@ -46,4 +51,6 @@ customProperties:
   - exposure awards_return
   - exposure ceremony_programme
   - exposure certificates
+  - exposure graduations_agent
   - exposure seating_plan
+  - product names_to_confirm

@@ -1,0 +1,20 @@
+/* Learning Data: "Pause and think" for Valid isn't true, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of four chapters (allowed, ask, apart, which), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The module's labs come later, as one set, so no question
+   has a "stop", and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  allowed:{q:"All 1,064 names pass the checks that say a name is allowed. What does that tell you about them?",
+    opts:[{t:"Each name is allowed; whether it's true needs the first checks, from a hundred records.",near:true},{t:"Each name is allowed; whether it's true needs a reference outside the list.",ok:true},{t:"Each name is true, since a wrong name would have broken one of the rules."}],
+    why:"These checks can only say a value is allowed: not empty, the right characters, not too long. Zoë Lefèvre's name without its accents passes them all, and so does a name cut short or swapped. The first checks raise doubts, twelve names exactly 30 characters long and not one accent on the list, but they can't say which names are wrong, or what they should be. Only a reference outside the list can. Which of your checks say a value is allowed, and which say it's true?"},
+  ask:{q:"Zoë corrected her name in the portal. Why did Mei's team still check her correction against the document seen at enrolment?",
+    opts:[{t:"Her certificate carries her legal name, and the document is the next reference.",ok:true},{t:"Her certificate carries her legal name, and the student system holds it too.",near:true},{t:"Graduates often type names that aren't theirs, so no answer is trusted."}],
+    why:"The graduate is the closest reference to their own name, but a certificate carries their legal name, so Mei's team checks each correction against the next reference: the document seen at enrolment. 84 matched; 4 graduates had changed their name since, and each sent the document that shows the new one. The student system can't settle it: it's where the wrong name came from. Who could confirm the data you hold about people?"},
+  apart:{q:"Why could the boards' approved lists find the two missing Arts awards, when a copy of the student system couldn't?",
+    opts:[{t:"They're made from the student system's own awards, but kept apart from the list.",near:true},{t:"They're read by more people each night, so their own errors are found sooner."},{t:"They're made from the boards' own decisions, kept apart from the student system.",ok:true}],
+    why:"A reference works only if the data's errors can't reach it. The boards' lists come from the boards' own decisions, so they hold the two Bachelor of Arts awards the student system recorded as Laws only. A copy of the student system shares its gap: it would agree with the list, and both would be wrong. Consistent isn't accurate. What do you compare your data with, and is it really kept apart?"},
+  which:{q:"The name checks and the awards check all pass. Why does the scorecard count them apart?",
+    opts:[{t:"Name checks measure validity, by their rule; the awards check, accuracy, by the boards' lists.",ok:true},{t:"Name checks measure validity, by the graduates; the awards check, accuracy, by the boards' lists.",near:true},{t:"Name checks run every night; the awards check runs once, before the list goes to the printer."}],
+    why:"The name checks have no reference but their own rule, so they measure validity: allowed. The awards check compares the list with the boards' approved lists, so it measures accuracy: true. Counted together, \"every check passes\" would claim more than the checks can show. So each accuracy check names its reference, beside its owner and what it measures. Which reference would you write beside your most important check?"}
+  }}};

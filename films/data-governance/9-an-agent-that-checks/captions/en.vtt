@@ -57,116 +57,119 @@ It's one page, in plain words, for anyone to read.
 00:02:09.819 --> 00:02:12.358
 The rules no longer live with one person.
 
-00:02:13.858 --> 00:02:20.652
-Run the checks. Find the owner. Take each definition from the glossary, or have governance confirm there's none.
+00:02:13.858 --> 00:02:21.218
+Start from the glossary: take each definition from it, or have governance confirm there's none. Find the owner. Run the checks.
 
-00:02:22.352 --> 00:02:28.915
+00:02:22.918 --> 00:02:29.481
 Classify every column, with evidence. Check each rule about the data; track the ones about what people do.
 
-00:02:30.615 --> 00:02:34.477
+00:02:31.181 --> 00:02:35.043
 Name what it touches. Then report, once, to the people who decide.
 
-00:02:35.977 --> 00:02:41.376
+00:02:36.543 --> 00:02:41.942
 And it never approves, edits the glossary, weakens a check, or shows a value from the data.
 
-00:02:42.876 --> 00:02:45.929
+00:02:43.442 --> 00:02:46.495
 It's the page the agent followed on the night we imagined.
 
-00:02:49.429 --> 00:02:54.026
+00:02:49.995 --> 00:02:54.592
 The data team's AI agent reviews Anil's change. Two things pass.
 
-00:02:55.726 --> 00:03:02.235
+00:02:56.292 --> 00:03:02.801
 Then three findings, each with where it is and the rule, and what the checks couldn't say: a draft, and who decides.
 
-00:03:03.935 --> 00:03:08.236
-One: nobody answers for it, so no owner would be asked to review a change.
+00:03:04.501 --> 00:03:08.996
+One: nobody answers for it, so no owner would be told what a change touches.
 
-00:03:09.736 --> 00:03:13.414
+00:03:10.496 --> 00:03:14.174
 Two: ten columns don't say whether they identify a person.
 
-00:03:14.914 --> 00:03:20.458
+00:03:15.674 --> 00:03:21.218
 It counts, and shows no values: all seven rows of the email column look like an email.
 
-00:03:22.158 --> 00:03:28.203
+00:03:22.918 --> 00:03:28.963
 Three, which no check could find: the faculty wrote a rule, only its own awards, and nothing checks it.
 
-00:03:29.303 --> 00:03:31.922
+00:03:30.063 --> 00:03:32.682
 The draft checks that every row's faculty is Health.
 
-00:03:35.622 --> 00:03:37.788
+00:03:36.382 --> 00:03:38.548
 Where the agent wasn't sure, it said so.
 
-00:03:38.488 --> 00:03:42.222
+00:03:39.248 --> 00:03:42.982
 Two columns look alike: long codes. One stands for a learner.
 
-00:03:43.522 --> 00:03:48.852
+00:03:44.282 --> 00:03:49.612
 The other has two values for seven learners, and its description says it's made from the award.
 
-00:03:50.352 --> 00:03:56.182
+00:03:51.112 --> 00:03:56.942
 Maybe not a person at all. But when in doubt, the checklist says, draft the stricter class, and ask.
 
-00:03:57.682 --> 00:04:00.351
+00:03:58.442 --> 00:04:01.111
 Anil confirms: a course, not a person.
 
-00:04:01.651 --> 00:04:06.094
+00:04:02.411 --> 00:04:06.854
 So it's classed as identifying no one, with Anil's reason in the review.
 
-00:04:07.594 --> 00:04:14.234
-Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, how it's built.
+00:04:08.354 --> 00:04:15.500
+Then the meaning is written first: the faculty puts its classes and its rule in the glossary, and Yusuf names the new owner.
 
-00:04:16.134 --> 00:04:17.694
+00:04:16.600 --> 00:04:22.353
+Jun, in the data team, reviews the change against them, and the owners are told what it touches.
+
+00:04:24.253 --> 00:04:25.813
 The advisers get their list.
 
-00:04:18.994 --> 00:04:24.396
+00:04:27.113 --> 00:04:32.515
 The agent decided nothing. It brought each decision to the right person, with the evidence.
 
-00:04:27.696 --> 00:04:32.850
+00:04:35.815 --> 00:04:40.969
 Binder 26 says: AI use follows the organisation's data policies.
 
-00:04:33.950 --> 00:04:37.625
+00:04:42.069 --> 00:04:45.744
 The agent is governed too, by the rules for AI helpers.
 
-00:04:39.125 --> 00:04:45.079
+00:04:47.244 --> 00:04:53.198
 It has its own identity, reads only what Sam grants it, and writes only in its own workspace.
 
-00:04:46.579 --> 00:04:52.495
+00:04:54.698 --> 00:05:00.614
 It works from counts and small samples, never bulk personal data, and only reads the glossary.
 
-00:04:53.995 --> 00:04:57.876
-And it can't approve: owners sign off, and the agent owns nothing.
+00:05:02.114 --> 00:05:06.163
+And it can't approve: the data team does, and the agent owns nothing.
 
-00:04:59.376 --> 00:05:02.698
+00:05:07.663 --> 00:05:10.985
 That's why, on the night we imagined, it only left a note.
 
-00:05:04.198 --> 00:05:10.753
-So the binder's line goes green: it runs, in the agent's access, its checklist, and the owners' approvals.
+00:05:12.485 --> 00:05:19.219
+So the binder's line goes green: it runs, in the agent's access, its checklist, and the data team's approval.
 
-00:05:14.253 --> 00:05:18.278
+00:05:22.719 --> 00:05:26.744
 An agent can only follow what's written down, plainly enough to check.
 
-00:05:19.378 --> 00:05:25.835
+00:05:27.844 --> 00:05:34.301
 Remember policy 12's last line: “Staff take care to use terms correctly.” No agent can check care.
 
-00:05:27.435 --> 00:05:31.663
+00:05:35.901 --> 00:05:40.129
 And the checklist itself is open: anyone can read it, and argue with it.
 
-00:05:32.863 --> 00:05:39.500
+00:05:41.329 --> 00:05:47.966
 A change to the checklist is reviewed like any other: data governance approves it, and the next review follows it.
 
-00:05:40.800 --> 00:05:44.093
+00:05:49.266 --> 00:05:52.559
 People trust a review they can read, question and overrule.
 
-00:05:47.393 --> 00:05:51.021
+00:05:55.859 --> 00:05:59.487
 That night, a few years from now, is made of what you've just seen:
 
-00:05:51.221 --> 00:05:58.634
-a checklist in plain words, rules for AI helpers, a register of who signs off what, and people who decide.
+00:05:59.687 --> 00:06:06.624
+a checklist in plain words, rules for AI helpers, a register of who owns what, and people who decide.
 
-00:06:00.334 --> 00:06:07.802
+00:06:08.324 --> 00:06:15.792
 What data governance gains: every change checked against the same rules, at any hour, and no one waiting for one person.
 
-00:06:09.102 --> 00:06:16.077
-Personal data marked before anyone sees it, and each decision made by its owner, with the evidence, written down.
+00:06:17.092 --> 00:06:24.418
+Personal data marked before anyone sees it, and each decision made by the right person, with the evidence, written down.
 
-00:06:17.777 --> 00:06:20.568
+00:06:26.118 --> 00:06:28.909
 An agent checks what's written. People decide.

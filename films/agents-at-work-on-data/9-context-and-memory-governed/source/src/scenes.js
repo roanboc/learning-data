@@ -63,7 +63,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     glossaryW:wAt(sc,"glossary","glossary"),offering:wAt(sc,"glossary","unit offering"),both:wAt(sc,"glossary","online or both"),
     nothing:wAt(sc,"still","Nothing told"),first:wAt(sc,"still","which comes first"),change:wAt(sc,"still","Something"),
     order:wAt(sc,"govern","set an order"),
-    first1:wAt(sc,"governed","First"),defs:wAt(sc,"governed","definitions"),rules:wAt(sc,"governed","data rules"),owner:wAt(sc,"governed","an owner"),
+    first1:wAt(sc,"governed","First"),defs:wAt(sc,"governed","definitions"),rules:wAt(sc,"governed","data rules"),owner:wAt(sc,"governed","reviewed by"),
     second:wAt(sc,"second","Second"),platform:wAt(sc,"second","the platform keeps"),noApprove:wAt(sc,"second","nobody approves"),
     disagree:wAt(sc,"wins","disagree"),wins:wAt(sc,"wins","the definition wins"),flags:wAt(sc,"wins","flags the line"),
     nowW:wAt(sc,"now","Now"),lists:wAt(sc,"now","lists all"),says:wAt(sc,"now","says which definition"),
@@ -131,7 +131,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       cm_reads(cx,1000,670,e.x+e.w*0.4,e.y+e.h+6,ag_sine(clamp((tt-T.nothing)/0.8,0,1))*aa,{t:tt,bend:-30});
       const pb=cm_pillAt(cx,960,560,"which comes first?",tt,T.first-0.1,null,{col:AG.amber,icon:"warn"});
       if(pb&&tt>T.change){cx.save();cx.globalAlpha*=0.5*(pulse-0.2)*ag_io(tt,T.change,T.change+1.8,0.3);cx.strokeStyle=rgba(AG.amber,0.9);cx.lineWidth=3;rr(cx,pb.x-6,pb.y-6,pb.w+12,pb.h+12,(pb.h+12)/2);cx.stroke();cx.restore();}}},
-    // so the team set an order: first what's governed, each with an owner who reviews every change; second the memory, kept by the
+    // so the team set an order: first what's governed, its meaning decided by owners and its code reviewed by the data team; second the memory, kept by the
     // platform with no one approving each line; when the two disagree, the definition wins and the agent flags the line
     {later:true,at:T.order-0.6,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       ag_label(cx,960,112,"The team's order",{align:"center",a:ag_in(tt,T.order-0.3,0.4)});
@@ -196,16 +196,16 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
   CM_KICK(ctx,1);});
 
 /* ---------------------------------------------------------------- 3 · Context, reviewed like code */
-// the team's project, as the example project names its files, and its owners, as CODEOWNERS lists them there
+// the team's project, as the example project names its files, and its reviewers, as CODEOWNERS lists them there
 const CM_REPO=[{name:"AGENTS.md",note:"the page for agents"},{name:"skills/",note:"the skills",folder:1},{name:"models/",note:"dbt's descriptions",folder:1,logo:"dbt"},
-  {name:"governance/5-data-contracts/",note:"the contracts",folder:1},{name:"CODEOWNERS",note:"who owns each file"}];
-const CM_OWN=[["*","jun.park@uni.example"],["/models/marts/planning/_planning__models.yml","planning@uni.example jun.park@uni.example"],["/skills/review-for-governance/","data.governance@uni.example noor@uni.example"]];
+  {name:"governance/5-data-contracts/",note:"the contracts",folder:1},{name:"CODEOWNERS",note:"who reviews each file"}];
+const CM_OWN=[["*","data.team@uni.example"],["/models/_shared/","noor@uni.example"],["/skills/review-for-governance/","data.governance@uni.example noor@uni.example"]];
 // the table agents read on Databricks, as dbt describes it in the example project (models/staging/student_system/)
 const CM_TABLE={name:"stg_student_system__unit_offerings",comment:"A unit taught in a semester, on campus, online or both.",col:["delivery_mode","How the unit is taught that semester: on campus, online or both."]};
 scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     repo:wAt(sc,"lives","repository"),gh:wAt(sc,"lives","on GitHub"),page:wAt(sc,"lives","the page for agents"),skills:wAt(sc,"lives","the skills"),dbt:wAt(sc,"lives","dbt's descriptions"),contracts:wAt(sc,"lives","the contracts"),
-    owner:wAt(sc,"owner","an owner"),list:wAt(sc,"owner","a list"),meta:wAt(sc,"owner","its own metadata"),
-    pr:wAt(sc,"pull","pull request"),reviews:wAt(sc,"pull","its owner reviews"),prod:wAt(sc,"pull","production"),second:wAt(sc,"pull","second person's"),
+    owner:wAt(sc,"owner","its reviewers"),list:wAt(sc,"owner","a list"),meta:wAt(sc,"owner","its own metadata"),
+    pr:wAt(sc,"pull","pull request"),reviews:wAt(sc,"pull","the data team reviews"),prod:wAt(sc,"pull","production"),second:wAt(sc,"pull","second person's"),
     propose:wAt(sc,"propose","propose"),never:wAt(sc,"propose","never approve"),
     history:wAt(sc,"history","history"),who:wAt(sc,"history","who changed"),why:wAt(sc,"history","and why"),
     gloss:wAt(sc,"glossary","business glossary"),owners:wAt(sc,"glossary","their owners"),gdbx:wAt(sc,"glossary","Databricks"),
@@ -215,7 +215,7 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
     gw:wAt(sc,"skills","Unity Gateway"),obj:wAt(sc,"object","Unity Catalog object"),sOwner:wAt(sc,"object","an owner"),perm:wAt(sc,"object","permissions"),rec:wAt(sc,"object","a record"),
     nobody:wAt(sc,"nobody","Nobody"),starts:wAt(sc,"nobody","A change starts")}));
   ag_shots(ctx,S,t,sc.dur,[
-    // the repository, on GitHub, each thing lit as it's named; at the right, the owners' list, then a change, then its history
+    // the repository, on GitHub, each thing lit as it's named; at the right, the reviewers' list, then a change, then its history
     {later:true,at:0,place:"cmBoard",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{const lit=[T.page,T.skills,T.dbt,T.contracts,T.list];
       const rows=CM_REPO.map((r,i)=>Object.assign({},r,{a:i<4?1:ag_in(tt,T.list-0.3,0.4),lit:i===4?ag_io(tt,T.list-0.2,T.pr-0.6,0.3):ag_io(tt,lit[i]-0.15,lit[i]+1.4,0.3),
         noteA:ag_in(tt,lit[i]-0.1,0.4)}));
@@ -224,11 +224,11 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,T=cm_once(sc,"T",()=>({
       const oa=ag_in(tt,T.owner-0.2,0.4)*(1-ag_in(tt,T.pr-0.75,0.35));
       if(oa>0){const r4=R.rows[4];cm_arrow(cx,[r4.x+r4.w+4,r4.y+r4.h/2,r4.x+r4.w+24,r4.y+r4.h/2,r4.x+r4.w+30,r4.y+r4.h/2,r4.x+r4.w+40,r4.y+r4.h/2],ag_in(tt,T.list,0.4),{col:AG.blue,lw:3,head:10,a:oa});
         cm_owners(cx,960,150,880,CM_OWN.map((l,i)=>[l[0],l[1],ag_in(tt,T.owner+i*0.3,0.4)]),{a:oa,k:Math.min(1,ag_spr(tt,T.owner-0.2,0.5)),subA:ag_in(tt,T.meta-0.3,0.4)});}
-      // the change: Jun's agent opened it; its owner reviews it, a second person approves it; the agent can't
+      // the change: Jun's agent opened it; the data team reviews it, a second person approves it; the agent can't
       const pa=ag_in(tt,T.pr-0.3,0.4)*(1-ag_in(tt,T.history-0.65,0.35));
       if(pa>0)cm_pr(cx,960,150,880,{title:"Check every unit list against the student system",by:"Opened by Jun's agent",byPen:1,byGlow:ag_io(tt,T.propose-0.2,T.never+1.2,0.3),
         files:[["skills/reconcile-and-diff/SKILL.md"]],
-        rows:[{text:"Its owner reviews it: Jun Park",state:"wait",tick:ag_in(tt,T.reviews+0.5,0.35),a:ag_in(tt,T.reviews-0.2,0.4)},
+        rows:[{text:"The data team reviews it: Jun Park",state:"wait",tick:ag_in(tt,T.reviews+0.5,0.35),a:ag_in(tt,T.reviews-0.2,0.4)},
               {text:"A second person approves it: Noor Rahman",state:"wait",tick:ag_in(tt,T.second+0.5,0.35),a:ag_in(tt,T.prod-0.2,0.4)},
               {text:"Jun's agent can't approve it",state:"lock",a:ag_in(tt,T.never-0.1,0.4)}],a:pa,k:Math.min(1,ag_spr(tt,T.pr-0.3,0.5))});
       // and its history: who, when, and why

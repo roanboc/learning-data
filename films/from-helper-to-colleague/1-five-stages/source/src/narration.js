@@ -33,7 +33,7 @@ const NARR={
  {"id":"s2","gap":0.8,"text":"Stage two: it acts for you, step by step, on your sign-in, and you approve each action."},
  {"id":"s3","gap":0.3,"text":"Stage three: it acts for you within limits, alone, with drafts only in a sandbox,"},
  {"id":"s3b","gap":0.8,"text":"and you check the result against the checks you set first."},
- {"id":"s4","gap":0.8,"text":"Stage four: a contributor that proposes, under its own identity. Its owner reviews every change."},
+ {"id":"s4","gap":0.8,"text":"Stage four: a contributor that proposes, under its own identity. The data team reviews every change."},
  {"id":"s5","gap":0.3,"text":"Stage five: a contributor with a mandate, written and signed by its owner. In test, it does agreed tasks alone, and reports;"},
  {"id":"s5b","gap":0.8,"text":"in production, it drafts the fix, and another person approves every change."},
  {"id":"gates","gap":0.3,"text":"And before each stage, a gate: what must be true before it moves up."},

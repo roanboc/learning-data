@@ -1,5 +1,5 @@
 /* ===== Context and memory, governed: what's governed, and what comes second =====
-   The pieces for the order the team sets: the glossary's definitions and the data rules first, each with an owner who reviews every
+   The pieces for the order the team sets: the glossary's definitions and the data rules first, meaning decided by owners, code reviewed
    change; the memory the platform keeps second, with nobody approving each line. Where the voice names a tool, its official logo stands
    beside the name, unaltered (The Inner Life of Data's logos.js: Databricks and dbt; this film's marks.js: GitHub).
      cm_mark(ctx, k, x, y, h, a)      a tool's logo, h high, its top at y; returns its width (0 until the logos are loaded)
@@ -7,7 +7,7 @@
      cm_flag(ctx, x, y, s, col)       a small flag on a pole, its foot at (x, y): a line an agent flagged
      cm_term(ctx, x, y, w, o)         a term in the business glossary, on Databricks: the term, its definition, its owner; o.hl lights the
                                       definition; o.edge, o.edgeA, o.a, o.k; returns its box
-     cm_order(ctx, x, y, w, o)        the order: FIRST, what's governed (the glossary's definitions, the data rules, an owner who reviews
+     cm_order(ctx, x, y, w, o)        the order: FIRST, what's governed (the glossary's definitions, the data rules, owners deciding meaning and the data team reviewing
                                       every change), and SECOND, the memory (kept by the platform, nobody approves each line); o.a1, o.a2
                                       (each tier), o.items(i) (the two governed things), o.rev, o.kept, o.noOne, o.line ({text, glow,
                                       flag}: a line in the memory, shown in its tier), o.win (the governed tier lit green); returns both boxes
@@ -47,7 +47,7 @@ function cm_order(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,a1=(o.a1==null?1:
     ag_T(ctx,"1",x+44,y+66,{w:800,size:48,align:"center",col:AG.green});ag_label(ctx,x+86,y+56,"First · what's governed",{col:AG.green});
     [["The glossary's definitions",x+86],["The data rules",x+86+ag_tw(ctx,"The glossary's definitions",{w:700,size:30})+90]].forEach((p,i)=>{const ia=it(i);if(ia<=0)return;
       ctx.save();ctx.globalAlpha*=ia;const bw=ag_tw(ctx,p[0],{w:700,size:30})+56;ag_box(ctx,p[1],y+94,bw,62,31,{edge:AG.green,edgeA:0.6});ag_T(ctx,p[0],p[1]+28,y+136,{w:700,size:30});ctx.restore();});
-    const ra=o.rev==null?1:o.rev;if(ra>0){ctx.save();ctx.globalAlpha*=ra;ag_tick(ctx,x+104,y+194,24,rgba(AG.green,1),4);ag_T(ctx,"Each with an owner who reviews every change",x+134,y+204,{w:600,size:28,col:AG.ink});ctx.restore();}
+    const ra=o.rev==null?1:o.rev;if(ra>0){ctx.save();ctx.globalAlpha*=ra;ag_tick(ctx,x+104,y+194,24,rgba(AG.green,1),4);ag_T(ctx,"Owners decide the meaning; the data team reviews the code",x+134,y+204,{w:600,size:28,col:AG.ink});ctx.restore();}
     ctx.restore();}
   // SECOND: the memory the platform keeps
   if(a2>0){const yy=t2.y;ctx.save();ctx.globalAlpha*=a2;if(o.k2!=null)ag_about(ctx,x+w/2,yy+t2.h/2,lerp(0.7,1,o.k2));

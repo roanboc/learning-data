@@ -109,7 +109,7 @@ scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
 scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{bc:w("skill","as a checklist")-0.35,as:w("skill","a checklist"),steps:w("skill","the steps"),chg:sc.ends.skill,pg:c.file-0.4,
       op:c.oneplace-0.4,one:w("oneplace","one person"),st0:c.steps1-0.4,
-      st:[c.steps1,w("steps1","Find"),w("steps1","Take"),c.steps2,w("steps2","Check each"),c.steps3,w("steps3","Then report")],
+      st:[c.steps1,w("steps1","Find"),w("steps1","Run"),c.steps2,w("steps2","Check each"),c.steps3,w("steps3","Then report")],
       dn:[w("never","approves"),w("never","edits"),w("never","weakens"),w("never","shows")],nt:w("night","the night")-0.5};});
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's office: Noor and Yusuf at his board, Anil's sheet and Jun's page pinned up and a fresh page beside them; binder 26 is
@@ -139,7 +139,7 @@ scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
 scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{big:w("reviews","Two things")-0.3,two:w("reviews","Two things"),thr:c.findings,
       part:[w("findings","where"),w("findings","the rule"),w("findings","a draft"),w("findings","who decides")],what:w("findings","what the checks"),
-      one:c.one,nob:w("one","nobody"),own:w("one","so no owner"),ask:w("one","asked"),t2:c.two,col:w("two","ten columns"),iden:w("two","identify"),
+      one:c.one,nob:w("one","nobody"),own:w("one","so no owner"),ask:w("one","told"),t2:c.two,col:w("two","ten columns"),iden:w("two","identify"),
       ty:c.tally-0.4,counts:w("tally","counts"),look:w("tally","look like"),t3:c.rule-0.4,only:w("rule","only its own"),noth:w("rule","nothing checks"),
       dr:c.draft,rows:w("draft","row's"),hl:sc.ends.draft};});
   const seat=GV_FX.seat,dim=tt=>{const f1=fin(tt,P.one-0.3,0.4),f2=fin(tt,P.t2-0.3,0.4);return[1-0.55*f2,1-0.55*f1+0.55*f2,1-0.55*f1];};
@@ -163,12 +163,12 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,
       read:clamp((tt-P.only+0.2)/1.2,0,1),readA:gv_io(tt,P.only-0.3,P.noth+0.6,0.3),draft:fin(tt,P.dr-0.1,0.6),pass:fin(tt,P.rows,0.5),who:clamp((tt-P.hl-0.1)/1.0,0,1)})}]);
   wc_paperOver(ctx,S);});
 
-// ---- 5 · People decide: where the agent wasn't sure it said so; Anil answers; the owners approve; the agent decided nothing ----
+// ---- 5 · People decide: where the agent wasn't sure it said so; Anil answers; the meaning is written first, then the data team reviews; the agent decided nothing ----
 scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{unsure:w("unsure","wasn't sure"),tb:c.keys-0.4,long:w("keys","long codes"),one:w("keys","One stands"),two:w("other","two values"),desc:w("other","description"),
       maybe:c.doubt,but:w("doubt","But when"),ck:w("doubt","the checklist"),draft:w("doubt","draft the"),ask:w("doubt","and ask"),an:c.confirms-0.4,conf:w("confirms","confirms"),
       cl:c.classed-0.4,classed:w("classed","classed"),reason:w("classed","Anil's reason"),ow:c.owners-0.4,fac:w("owners","the faculty"),yusuf:w("owners","Yusuf"),
-      jun:w("owners","Jun"),sig:sc.ends.owners-0.3,calls:c.calls-0.4,nothing:c.decided-0.4,brought:w("decided","brought")};});
+      jun:w("teamrev","Jun"),sig:sc.ends.teamrev-0.3,calls:c.calls-0.4,nothing:c.decided-0.4,brought:w("decided","brought")};});
   const seat=GV_FX.seat,A=AC_AD;
   gv_shots(ctx,S,t,sc.dur,[
     // the review's table of classes: two are marked "not sure"
@@ -184,7 +184,7 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       ac_facDesk(x);ac_smallReply(x,tt,{a:fin(tt,P.conf-0.3,0.4),typed:clamp((tt-P.conf)/1.6,0,1)});}},
     // the table again: award code identifies no one, with Anil's reason; name stays direct
     {at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,okAt:P.classed-0.2,why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
-    // Yusuf's desk: the sign-off sheet, filled from the drafts; the owners approve, each for their part, in gold; then it's signed
+    // Yusuf's desk: the sign-off sheet, filled from the drafts; the faculty and Yusuf write the meaning first, then Jun's data team approves the change, each in gold; then it's signed
     {at:P.ow,place:"paperDesk",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>ac_signed(x,tt,{p:clamp((tt-P.ow-0.1)/0.9,0,1),
       ap:[fin(tt,P.fac-0.2,0.9),fin(tt,P.yusuf-0.2,0.9),fin(tt,P.jun-0.2,0.9)],signed:fin(tt,P.sig,0.6)})},
     // the advisers' desk: the list is in the tray, and an adviser lifts the phone
@@ -199,8 +199,8 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
 scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{ag:w("governed","The agent"),gov:w("governed","governed"),pl:sc.ends.governed+0.3,fm:w("own","reads")-0.3,id:w("own","identity"),
       rows:[w("own","reads"),w("own","writes"),w("own","workspace")+0.4,w("samples","counts"),w("samples","never bulk"),w("samples","only reads")],
-      rev:w("samples","glossary")-0.1,ans:w("samples","glossary")+0.2,who:c.approve-0.4,cant:w("approve","can't"),owners:w("approve","owners sign"),owns:w("approve","owns nothing"),
-      nt:c.note-0.4,gr:c.green-0.5,green:w("green","green"),hw:[w("green","agent's access"),w("green","its checklist"),w("green","owners' approvals")]};});
+      rev:w("samples","glossary")-0.1,ans:w("samples","glossary")+0.2,who:c.approve-0.4,cant:w("approve","can't"),owners:w("approve","data team"),owns:w("approve","owns nothing"),
+      nt:c.note-0.4,gr:c.green-0.5,green:w("green","green"),hw:[w("green","agent's access"),w("green","its checklist"),w("green","data team's approval")]};});
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's desk, from above: binder 26 open at its line; the rules for AI helpers are laid beside it, and the agent's star comes onto them
     {at:0,place:"desk26",keys:[[0,1050,420,1.45],[P.ag-0.5,960,540,1]],d:1.6,draw:(x,tt)=>{ac_open26(x,tt);
@@ -212,9 +212,9 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     // as it's said; reviewed with everyone's; and Sam's answer, in gold
     {at:P.fm,place:"form",keys:[[P.fm,960,520,1.04],[P.rows[3]-0.6,960,560,1.08]],d:1.8,draw:(x,tt)=>ac_accessForm(x,tt,{id:fin(tt,P.id-0.4,0.5),
       rows:P.rows.map(s=>clamp((tt-s+0.1)/0.6,0,1)),rev:fin(tt,P.rev,0.5),ans:clamp((tt-P.ans)/1.2,0,1)})},
-    // who signs off what: the owners; the agent owns nothing, and its approve is crossed
+    // who owns what: the owners; the data team approves, the agent owns nothing, and its approve is crossed
     {at:P.who,place:"paperDesk",keys:[[P.who,960,540,1]],push:0.02,draw:(x,tt)=>{ac_whoPage(x,tt,{own:fin(tt,P.owners-0.2,0.6)});
-      ac_agentCard(x,tt,1260,380,fin(tt,P.cant-0.3,0.5),clamp((tt-P.cant)/0.6,0,1));ac_tagAt(x,tt,P.owns-0.1,null,1540,650,"owners only",{size:34,wash:GV.gold,washA:0.35});}},
+      ac_agentCard(x,tt,1260,380,fin(tt,P.cant-0.3,0.5),clamp((tt-P.cant)/0.6,0,1));ac_tagAt(x,tt,P.owns-0.1,null,1540,650,"people only",{size:34,wash:GV.gold,washA:0.35});}},
     // the night we imagined: the agent's note, and the empty signature line, ringed in pencil
     {at:P.nt,place:"screenNight",keys:[[P.nt,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{q:1,draft:1,ring:clamp((tt-P.nt-0.6)/1.0,0,1)});ac_note(x,tt,{});}},
     // the desk again: the binder's line goes green, and Yusuf writes where it runs
@@ -241,7 +241,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       person(x,"anil",380,905,0.8,{pose:"ac_pointUp",t:tt});person(x,"jun",965,905,0.8,{pose:"ac_readUp",flip:true,t:tt,nod:ac_nod(tt,P.rm+0.9)});}},
     // the board, close: anyone can read the steps, and argue with them: Anil's question, in pencil, beside step 4
     {at:P.bc,place:"boardData",keys:[[P.bc,960,500,1.04],[P.bc+0.1,980,500,1.08]],d:3,push:0.02,draw:(x,tt)=>ac_boardCheck(x,tt,{note:clamp((tt-P.argue+0.3)/1.4,0,1)})},
-    // who signs off what: the checklist's line, data governance with Noor; data governance approves a change to it
+    // who owns what: the checklist's line, data governance with Noor; data governance approves a change to it
     {at:P.who,place:"paperDesk",keys:[[P.who,960,540,1]],push:0.02,draw:(x,tt)=>{const r=ac_whoPage(x,tt,{focus:4,dim:fin(tt,P.who+0.4,0.6),hiA:fin(tt,P.dg-0.2,0.6)});
       ac_tagAt(x,tt,P.dg,null,AC_WX.x+700,r.rows[4]+96,"data governance approves",{size:34,wash:GV.gold,washA:0.35});}},
     // the checklist again: the next review follows it, step by step
@@ -277,9 +277,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     // personal data marked before anyone sees it: the date of birth's class, direct, ringed in gold
     {at:P.pd,place:"screenMorning",keys:[[P.pd,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{clsAt:-99,ok:1});
       ac_tagAt(x,tt,P.pd+0.3,null,1390,AC_F.y0+4*AC_F.dy-11,"personal data marked before anyone sees it",{size:34,wash:GV_CLASS.direct,washA:0.3});}},
-    // each decision by its owner, with the evidence, written down: the sheet, signed, and the register's page
+    // each decision by the right person, with the evidence, written down: the sheet, signed, and the register's page
     {at:P.each,place:"paperDesk",keys:[[P.each,960,540,1]],push:0.02,draw:(x,tt)=>{ac_sheetPic(x,150,262,760,-0.02,true);ac_whoPic(x,990,300,820,0.02);
-      ac_tagAt(x,tt,P.each+0.3,null,960,176,"each decision by its owner, with the evidence, written down",{size:34,wash:GV.gold,washA:0.35});}},
+      ac_tagAt(x,tt,P.each+0.3,null,960,176,"each decision by the right person, with the evidence, written down",{size:34,wash:GV.gold,washA:0.35});}},
     // the same screen in the morning light: the checks passed, the note ticked; people decide; it clears for the end card
     {at:P.last,place:"screenMorning",keys:[[P.last,960,540,1]],push:0.02,draw:(x,tt)=>{
       const cl=fin(tt,P.end-0.6,0.6);gv_halo(x,AC_F.cls-40,AC_F.y0+4*AC_F.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6)*(1-cl));

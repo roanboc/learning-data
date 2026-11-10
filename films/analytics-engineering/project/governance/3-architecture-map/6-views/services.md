@@ -38,7 +38,7 @@ Its steps aren't on the map yet.
 | build it in development | planning contributor, workload contributor | change draft, data product | test and its result | open a pull request |
 | open a pull request | planning contributor, workload contributor | change draft, test and its result | pull request | review the code |
 | review the code | analytics engineer | pull request, change draft, test and its result | code review | approve the change |
-| approve the change | product owner | pull request, code review | approval | release to production |
+| approve the change | release approver | pull request, code review | approval | release to production |
 | release to production | release approver | approval, pull request | data product |  |
 
 ### Define or change a term

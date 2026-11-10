@@ -446,7 +446,7 @@ const NARR={
  {"id":"process","gap":0.8,"text":"Each ticket goes through one process, change a data product: seven steps, from a ticket to production."},
  {"id":"roles","gap":0.8,"text":"Each step is assigned to a role, whoever fills it: a person or an agent."},
  {"id":"contrib","gap":0.8,"text":"One new role, planning contributor, drafts the change, builds it in development, and opens a pull request."},
- {"id":"people","gap":0.8,"text":"People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production."},
+ {"id":"people","gap":0.8,"text":"People keep the rest. Clara raises the ticket, Jun reviews the code, and Noor approves the change and releases it."},
  {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
  {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place."},
  {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
@@ -458,7 +458,7 @@ const NARR={
  {"id":"workload","gap":0.8,"text":"The same day, Noor placed Anil Kurian's workload agent. It had its own identity since September, but no place on the map."},
  {"id":"stages","gap":0.8,"text":"Its stage for each kind of task went on its assignment."},
  {"id":"three","gap":0.8,"text":"Now the map holds three agents, each with a role and an owner."},
- {"id":"third","gap":0.8,"text":"The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them."}]},
+ {"id":"third","gap":0.8,"text":"The third, Yusuf's governance review agent, was already there: it checks pull requests against the glossary, and never approves them."}]},
 "gate":{"name":"The gate","lead":1.0,"tail":1.0,"vo":[
  {"id":"before","gap":0.8,"text":"One thing came before it worked alone: its gate."},
  {"id":"redo","gap":0.8,"text":"The week before, in a sandbox, where nothing it did could reach anyone, it redid Planning's last forty tickets."},
@@ -484,7 +484,7 @@ const NARR={
  {"id":"next","gap":0.8,"text":"Next: rights that come from the work, and not from a person's."}]}
 };
 
-const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 1.288, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 6.644, "map/sod": 5.987, "map/agent": 7.483, "map/may": 6.733, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 6.776, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
+const VODUR={"first/place": 6.744, "first/lost": 4.655, "first/came": 7.325, "first/own": 5.89, "first/reach": 5.212, "first/picture": 3.325, "first/send": 5.894, "first/best": 6.456, "first/change": 1.288, "scope/began": 7.734, "scope/door": 4.739, "scope/card": 5.129, "scope/role": 2.982, "scope/seven": 1.98, "scope/plain": 3.417, "scope/wide": 8.888, "scope/national": 7.185, "scope/team": 6.423, "scope/uni": 7.981, "scope/alone": 6.978, "scope/checks": 8.166, "monday/two": 4.617, "monday/tickets": 8.056, "monday/same": 2.715, "monday/badge": 6.31, "monday/role": 4.91, "monday/owner": 6.202, "monday/rights": 6.892, "monday/admin": 5.86, "monday/signed": 8.802, "monday/differ": 5.245, "monday/alone": 3.439, "map/noor": 5.561, "map/work": 5.06, "map/process": 6.263, "map/roles": 4.34, "map/contrib": 6.549, "map/people": 7.267, "map/sod": 5.987, "map/agent": 7.483, "map/may": 6.733, "map/build": 4.425, "map/maynot": 7.663, "map/asks": 6.81, "map/guess": 3.837, "map/ahead": 3.277, "map/workload": 7.743, "map/stages": 2.954, "map/three": 3.537, "map/third": 8.034, "gate/before": 2.749, "gate/redo": 6.585, "gate/bar": 7.416, "gate/result": 5.399, "gate/matters": 5.908, "gate/audit": 4.715, "gate/stage": 5.096, "gate/word": 6.128, "gate/check": 6.485, "stop/written": 2.523, "stop/own": 8.176, "stop/set": 5.828, "stop/stop": 4.18, "stop/anyone": 5.892, "close/back": 4.921, "close/since": 4.782, "close/now": 7.288, "close/so": 4.153, "close/lesson": 3.546, "close/next": 3.497};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land, or a picture needs a moment to build.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2132,17 +2132,18 @@ const cj_at=(b,side,f)=>{f=f==null?0.5:f;return side==="top"?[b.x+b.w*f,b.y]:sid
 /* ---------------------------------------------------------------- Planning's change process, on the map
    The work first: the capability Planning's tickets serve, at the top left; the service that changes a data product beside it; under
    it the service's seven steps, in order, from a ticket to production; under each step the role assigned to it; and under each role
-   who fills it. The planning contributor has the three drafting steps; people keep the rest. The planning agent comes in under its
+   who fills it. The planning contributor has the three drafting steps; people keep the rest: Clara raises the ticket, Jun
+   reviews the code, and Noor, the release approver, approves the change and releases it (no owner approves a pull request). The planning agent comes in under its
    role, owned by Clara (a dashed line under the people). The names are the map's own (governance/3-architecture-map/ in the project).
      cj_process(ctx, o)   o.cap, o.srv, o.srvLine (0 to 1); o.step(i), o.bracket; o.role(k), o.roleLine(k); o.who(k), o.whoLine(k);
                           o.agent, o.agentLine, o.owner; o.tint(i) [colour, 0 to 1]; o.glow(key) a colour (keys "cap", "srv", "s0"
-                          to "s6", "r0" to "r4", "jun", "clara", "noor", "agent"); o.divide (0 to 1); o.dim (0 to 1) and o.keep(key) */
+                          to "s6", "r0" to "r3", "jun", "clara", "noor", "agent"); o.divide (0 to 1); o.dim (0 to 1) and o.keep(key) */
 const CJ_STEPS=["raise a ticket","draft the change","build it in development","open a pull request","review the code","approve the change","release to production"];
 const CJ_SW=248,CJ_SG=10,CJ_SX=60,CJ_SY=246,CJ_SH=110,CJ_PT=24,CJ_EH=116,CJ_RY=412,CJ_WY=592;
 const cj_stepX=i=>CJ_SX+i*(CJ_SW+CJ_SG);
-const CJ_ROLES=[["requester",0,0],["planning contributor",1,3],["analytics engineer",4,4],["product owner",5,5],["release approver",6,6]];
+const CJ_ROLES=[["requester",0,0],["planning contributor",1,3],["analytics engineer",4,4],["release approver",5,6]];
 const cj_roleBox=k=>{const r=CJ_ROLES[k],x=cj_stepX(r[1]);return{x,y:CJ_RY,w:cj_stepX(r[2])+CJ_SW-x,h:CJ_EH};};
-const CJ_WHO=[["jun","Jun Park",2],["clara","Clara Jensen",3],["noor","Noor",4]];
+const CJ_WHO=[["clara","Clara Jensen",0],["jun","Jun Park",2],["noor","Noor",3]];
 const cj_whoBox=k=>{const b=cj_roleBox(CJ_WHO[k][2]);return{x:b.x,y:CJ_WY,w:b.w,h:CJ_EH};};
 const CJ_CAP={x:60,y:100,w:470},CJ_SRV={x:610,y:100,w:1250},CJ_PAG={x:520,y:CJ_WY,w:360,h:CJ_EH};
 // where the divide between the drafting steps and the people's steps runs
@@ -2177,7 +2178,7 @@ function cj_process(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;con
   // the planning agent, under its role, and Clara's line to it, under the people
   const ag=clamp(v("agent")(),0,1);if(ag>0.01){const P=CJ_PAG;cj_el(ctx,P.x,P.y,P.w,{kind:"agent",name:"planning agent",h:CJ_EH,a:ag*D("agent"),k:ag_eo(clamp(ag*1.2,0,1)),glow:glow("agent"),glowA:0.9});
     cj_assign(ctx,[P.x+P.w/2,P.y],[P.x+P.w/2,CJ_RY+CJ_EH+4],clamp(v("agentLine")(),0,1),{a:D("agent")});
-    const cl=cj_whoBox(1),oy=CJ_WY+CJ_EH+44;cj_owns(ctx,[cl.x+cl.w/2,cl.y+cl.h],[P.x+P.w/2,P.y+P.h],clamp(v("owner")(),0,1),{via:[[cl.x+cl.w/2,oy],[P.x+P.w/2,oy]],a:D("agent"),lx:-250});}
+    const cl=cj_whoBox(0),oy=CJ_WY+CJ_EH+44;cj_owns(ctx,[cl.x+cl.w/2,cl.y+cl.h],[P.x+P.w/2,P.y+P.h],clamp(v("owner")(),0,1),{via:[[cl.x+cl.w/2,oy],[P.x+P.w/2,oy]],a:D("agent"),lx:0});}
   // the divide: the drafting steps on its left, the people's on its right
   const dv=clamp(v("divide")(),0,1);if(dv>0.01){ctx.save();ctx.strokeStyle=rgba(AG.ink,0.42);ctx.lineWidth=3;ctx.setLineDash([12,10]);ctx.beginPath();
     ctx.moveTo(CJ_DIV,CJ_SY-6);ctx.lineTo(CJ_DIV,lerp(CJ_SY-6,CJ_WY+CJ_EH+20,ag_sine(dv)));ctx.stroke();ctx.restore();}
@@ -2497,7 +2498,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     ticket:wAt(sc,"process","Each ticket"),cadp:wAt(sc,"process","change a data product"),seven:wAt(sc,"process","seven steps"),prod:wAt(sc,"process","to production"),
     step:wAt(sc,"roles","Each step"),role:wAt(sc,"roles","to a role"),person:wAt(sc,"roles","a person or an agent"),
     newr:wAt(sc,"contrib","One new role"),drafts:wAt(sc,"contrib","drafts the change"),builds:wAt(sc,"contrib","builds it"),opens:wAt(sc,"contrib","opens a pull request"),
-    rest:wAt(sc,"people","People keep the rest"),jun:wAt(sc,"people","Jun reviews"),clara:wAt(sc,"people","Clara approves"),noor:wAt(sc,"people","Noor releases"),
+    rest:wAt(sc,"people","People keep the rest"),clara:wAt(sc,"people","Clara raises"),jun:wAt(sc,"people","Jun reviews"),noor:wAt(sc,"people","Noor approves"),rel:wAt(sc,"people","releases it"),
     so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
     then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),had:wAt(sc,"agent","it had its place"),
     may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
@@ -2508,7 +2509,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     same:wAt(sc,"workload","The same day"),wl:wAt(sc,"workload","workload agent"),ident:wAt(sc,"workload","its own identity"),noplace:wAt(sc,"workload","no place on the map"),
     st:wAt(sc,"stages","Its stage"),ass:wAt(sc,"stages","on its assignment"),
     three:wAt(sc,"three","three agents"),role3:wAt(sc,"three","a role"),owner3:wAt(sc,"three","an owner"),third:wAt(sc,"third","The third"),never3:wAt(sc,"third","never approves")}));
-  const who=[T.jun,T.clara,T.noor];
+  const who=[T.clara,T.jun,T.noor],stepWho=[T.clara,0,0,0,T.jun,T.noor,T.rel];
   ag_shots(ctx,S,t,sc.dur,[
     // a week before it started, Noor, the data architect, gives the planning agent a place on the university's map
     {later:true,at:0,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);
@@ -2526,14 +2527,14 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       ag_roomLight(cx,1);
       // Planning's tickets, under the capability they serve; gone before the steps come in where they lie
       cj_tickets(cx,70,256,{a:ag_in(tt,T.tix-0.2,0.4)*(1-ag_in(tt,T.seven-0.9,0.4)),k:Math.min(1,ag_spr(tt,T.tix-0.2,0.5))});
-      const dim=ag_in(tt,T.may-0.6,0.6),drafting=i=>i>=1&&i<=3,people=i=>i>=4;
+      const dim=ag_in(tt,T.may-0.6,0.6),drafting=i=>i>=1&&i<=3,people=i=>i===0||i>=4;
       cj_process(cx,{spring:true,dim,keep:k=>["r1","s1","s2","s3","agent"].indexOf(k)>=0,
         cap:ag_in(tt,T.cap-0.2,0.5),srv:ag_in(tt,T.cadp-0.3,0.5),srvLine:clamp((tt-T.cadp-0.2)/0.9,0,1),
         step:i=>ag_in(tt,T.seven-0.3+i*0.16,0.4),bracket:clamp((tt-T.prod+0.2)/1.2,0,1),
         role:k=>ag_in(tt,T.role-0.2+k*0.18,0.4),roleLine:k=>clamp((tt-(T.role+0.3+k*0.18))/0.7,0,1),
         who:k=>ag_in(tt,who[k]-0.15,0.4),whoLine:k=>clamp((tt-(who[k]+0.25))/0.6,0,1),
         agent:ag_in(tt,T.assigned-0.1,0.5),agentLine:clamp((tt-T.that)/0.9,0,1),owner:clamp((tt-T.owner+0.1)/1.2,0,1),
-        tint:i=>drafting(i)?[AG.blue,ag_in(tt,[T.drafts,T.builds,T.opens][i-1]-0.15,0.4)]:people(i)?[AG.green,ag_in(tt,who[i-4]-0.15,0.4)]:null,
+        tint:i=>drafting(i)?[AG.blue,ag_in(tt,[T.drafts,T.builds,T.opens][i-1]-0.15,0.4)]:people(i)?[AG.green,ag_in(tt,stepWho[i]-0.15,0.4)]:null,
         divide:clamp((tt-T.so+0.2)/1.0,0,1),
         glow:k=>(k==="r1"&&ag_io(tt,T.newr-0.1,T.rest-0.2,0.4)>0.5)||(drafting(+k.slice(1))&&k[0]==="s"&&ag_io(tt,T.where-0.1,T.same+2,0.4)>0.5)?AG.blue:
           k==="agent"&&ag_io(tt,T.assigned,T.may-0.4,0.4)>0.5?AG.violet:null});

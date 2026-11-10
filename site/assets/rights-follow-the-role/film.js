@@ -461,8 +461,8 @@ const NARR={
  {"id":"four","gap":0.8,"text":"The other four steps belong to other roles."},
  {"id":"ticket","gap":0.8,"text":"Raising a ticket is the requester's: Clara's."},
  {"id":"review","gap":0.8,"text":"Reviewing the code is the analytics engineer's: Jun's."},
- {"id":"approve","gap":0.8,"text":"Approving the change is the product owner's: Clara's again."},
- {"id":"release","gap":0.8,"text":"Releasing to production is the release approver's: Noor's."},
+ {"id":"approve","gap":0.8,"text":"Approving the change is the release approver's: Noor's."},
+ {"id":"release","gap":0.8,"text":"And releasing it to production is Noor's too."},
  {"id":"word","gap":0.8,"text":"And what a word means is decided by its owner, such as Mei for the students' words, before it goes into the glossary."},
  {"id":"never","gap":0.8,"text":"So it never approves, never releases, never changes what a word means, and never writes to production."},
  {"id":"falls","gap":0.8,"text":"Nobody had to forbid each one: separation of duties falls out of the steps."},
@@ -486,7 +486,7 @@ const NARR={
  {"id":"lesson","gap":0.8,"text":"An agent's rights come from its work, not from a person's."}]}
 };
 
-const VODUR={"ward/ward": 3.345, "ward/stock": 5.346, "ward/pour": 3.98, "ward/order": 6.292, "ward/wrong": 7.712, "ward/reach": 4.429, "ward/change": 1.288, "ward/arkansas": 7.585, "ward/drawer": 7.848, "ward/each": 3.726, "ward/fell": 5.609, "ward/day": 6.801, "ward/spread": 3.943, "ward/uni": 6.481, "ward/shelf": 7.635, "ward/fill": 6.277, "ward/slip": 2.511, "borrowed/ask": 4.892, "borrowed/quote": 2.214, "borrowed/helper": 6.094, "borrowed/many": 2.491, "borrowed/today": 5.03, "borrowed/person": 4.421, "borrowed/old": 6.12, "borrowed/twice": 1.666, "borrowed/wide": 5.365, "borrowed/history": 5.636, "borrowed/other": 3.345, "steps/monday": 5.956, "steps/service": 5.461, "steps/three": 6.518, "steps/each": 3.87, "steps/draft": 5.59, "steps/build": 6.288, "steps/open": 5.527, "steps/exactly": 4.233, "steps/like": 3.0, "steps/short": 4.538, "steps/grants": 3.67, "reads/part": 3.321, "reads/first": 7.517, "reads/owner": 2.81, "reads/second": 5.346, "reads/wrong": 3.724, "reads/wins": 3.778, "reads/says": 3.897, "reads/original": 5.369, "left/left": 2.652, "left/four": 2.151, "left/ticket": 2.773, "left/review": 3.137, "left/approve": 3.292, "left/release": 3.4, "left/word": 6.698, "left/never": 6.118, "left/falls": 4.474, "left/ward": 3.098, "left/check": 5.473, "change/follow": 3.565, "change/say": 5.024, "change/step": 5.081, "change/agree": 4.095, "change/view": 3.324, "change/tools": 3.034, "change/asks": 6.911, "change/goes": 2.215, "change/drift": 4.378, "close/drawer": 4.691, "close/here": 4.094, "close/reason": 4.902, "close/jun": 1.578, "close/lesson": 3.163};
+const VODUR={"ward/ward": 3.345, "ward/stock": 5.346, "ward/pour": 3.98, "ward/order": 6.292, "ward/wrong": 7.712, "ward/reach": 4.429, "ward/change": 1.288, "ward/arkansas": 7.585, "ward/drawer": 7.848, "ward/each": 3.726, "ward/fell": 5.609, "ward/day": 6.801, "ward/spread": 3.943, "ward/uni": 6.481, "ward/shelf": 7.635, "ward/fill": 6.277, "ward/slip": 2.511, "borrowed/ask": 4.892, "borrowed/quote": 2.214, "borrowed/helper": 6.094, "borrowed/many": 2.491, "borrowed/today": 5.03, "borrowed/person": 4.421, "borrowed/old": 6.12, "borrowed/twice": 1.666, "borrowed/wide": 5.365, "borrowed/history": 5.636, "borrowed/other": 3.345, "steps/monday": 5.956, "steps/service": 5.461, "steps/three": 6.518, "steps/each": 3.87, "steps/draft": 5.59, "steps/build": 6.288, "steps/open": 5.527, "steps/exactly": 4.233, "steps/like": 3.0, "steps/short": 4.538, "steps/grants": 3.67, "reads/part": 3.321, "reads/first": 7.517, "reads/owner": 2.81, "reads/second": 5.346, "reads/wrong": 3.724, "reads/wins": 3.778, "reads/says": 3.897, "reads/original": 5.369, "left/left": 2.652, "left/four": 2.151, "left/ticket": 2.773, "left/review": 3.137, "left/approve": 3.159, "left/release": 2.381, "left/word": 6.698, "left/never": 6.118, "left/falls": 4.474, "left/ward": 3.098, "left/check": 5.473, "change/follow": 3.565, "change/say": 5.024, "change/step": 5.081, "change/agree": 4.095, "change/view": 3.324, "change/tools": 3.034, "change/asks": 6.911, "change/goes": 2.215, "change/drift": 4.378, "close/drawer": 4.691, "close/here": 4.094, "close/reason": 4.902, "close/jun": 1.578, "close/lesson": 3.163};
 
 /* Pauses: the film stops where an idea needs a moment to land, or a picture needs time to be read.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2055,7 +2055,7 @@ function rf_rows(ctx,x,y,w,head,rows,o){o=o||{};const a=o.a==null?1:o.a,pad=28,l
    col [7] each box's colour (null: none), ek [7] how much of that colour its edge and words take (0 to 1, so a colour comes in, never
    switches), lit [7] how lit (0 to 1), dim [7], roles (0 to 1), who [7] (0 to 1), bracket (0 to 1); returns each box */
 const RF_STEPS=[{n:"Raise a ticket",role:"requester",who:"Clara"},{n:"Draft the change",pc:1},{n:"Build it in development",pc:1},{n:"Open a pull request",pc:1},
-  {n:"Review the code",role:"analytics engineer",who:"Jun"},{n:"Approve the change",role:"product owner",who:"Clara"},{n:"Release to production",role:"release approver",who:"Noor"}];
+  {n:"Review the code",role:"analytics engineer",who:"Jun"},{n:"Approve the change",role:"release approver",who:"Noor"},{n:"Release to production",role:"release approver",who:"Noor"}];
 function rf_box(i){const C=RL.chain;return{x:C.x+i*(C.w+C.gap),y:C.y,w:C.w,h:C.h,cx:C.x+i*(C.w+C.gap)+C.w/2};}
 function rf_chain(ctx,o){o=o||{};const C=RL.chain,A=o.a==null?1:o.a,g=(v,i,d)=>v==null?d:(Array.isArray(v)?(v[i]==null?d:v[i]):v),out=[];if(A<=0)return RF_STEPS.map((_,i)=>rf_box(i));
   ctx.save();ctx.globalAlpha*=A;
@@ -2399,7 +2399,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
 
 /* ---------------------------------------------------------------- 5 · What's left out, and why */
 scene("left",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({left:wAt(sc,"left","written down"),four:wAt(sc,"four","other four steps"),
-    roles:wAt(sc,"four","other roles"),tk:c.ticket,tkw:wAt(sc,"ticket","Clara's"),rv:c.review,rvw:wAt(sc,"review","Jun's"),ap:c.approve,apw:wAt(sc,"approve","Clara's again"),
+    roles:wAt(sc,"four","other roles"),tk:c.ticket,tkw:wAt(sc,"ticket","Clara's"),rv:c.review,rvw:wAt(sc,"review","Jun's"),ap:c.approve,apw:wAt(sc,"approve","Noor's"),
     rl:c.release,rlw:wAt(sc,"release","Noor's"),wd:wAt(sc,"word","what a word means"),mei:wAt(sc,"word","such as Mei"),gl:wAt(sc,"word","the glossary"),
     n1:wAt(sc,"never","never approves"),n2:wAt(sc,"never","never releases"),n3:wAt(sc,"never","never changes"),n4:wAt(sc,"never","never writes"),
     forbid:wAt(sc,"falls","forbid"),sod:wAt(sc,"falls","separation of duties"),ord:wAt(sc,"ward","one ordered"),chk:wAt(sc,"check","a check fails"),

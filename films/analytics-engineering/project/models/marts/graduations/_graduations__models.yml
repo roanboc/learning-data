@@ -107,7 +107,7 @@ models:
               config:
                 meta: {owner: "Mei Tanaka, registrar's office"}
         config:
-          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme]}
+          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme], reference: the graduate, confirmed_on: name_confirmed_on}
       - name: name_confirmed_on
         description: >
           The day the graduate confirmed their name, or corrected it, in the portal for this
@@ -163,3 +163,22 @@ models:
         data_type: date
         config:
           meta: {personal_data: none}
+    data_tests:
+      - reconciles_with:
+          name: awards_match_the_boards
+          description: >
+            Every certificate on the list is an award a faculty's exam board approved, with the day
+            the board approved it as its conferral date, and every award the boards approved is on
+            the list: award by award, against the boards' own register, kept apart from the student
+            system. A copy of the student system couldn't do this: it would share any gap the list
+            has, and agree with it.
+          arguments:
+            to: ref('stg_exam_boards__approved_awards')
+            keys: [student_bk, award_code]
+            compare: [conferred_on]
+            to_where: is_current_version
+          config:
+            meta:
+              owner: "Mei Tanaka, registrar's office"
+              dimension: accuracy
+              reference: the exam boards' approved lists

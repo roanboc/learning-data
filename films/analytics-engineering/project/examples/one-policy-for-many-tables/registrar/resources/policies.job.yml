@@ -1,0 +1,46 @@
+# The registrar's policies, as code: a job in the registrar's bundle, beside its grants (catalog.yml and
+# schemas.yml) and its nightly load. Bundles have no resource for a policy, so a SQL task runs each file,
+# in order, on a serverless SQL warehouse (warehouse_id, a variable in the bundle's databricks.yml). It runs as the
+# identity that deploys the bundle: registrar-loader in production, never a person. The deploy workflow
+# runs it after each deploy: test first, then production after a release approver (From a branch to
+# production). Every change is a pull request the data team reviews; Mei Tanaka, the registrar's data
+# owner, decides who is let through and is told what each change touches.
+#
+# The policies go in before any grant that opens a door to them: on 14 October 2026 this job ran in the
+# morning, and the study's grant came that afternoon, in a second pull request.
+
+resources:
+  jobs:
+    registrar_policies:
+      name: registrar_policies
+      description: The registrar's ways to hide a value and its policies by tag, then a check that every table can be protected.
+      tasks:
+        - task_key: functions
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../policies/functions.sql
+
+        - task_key: policies
+          depends_on:
+            - task_key: functions
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../policies/policies.sql
+
+        - task_key: studies
+          depends_on:
+            - task_key: policies
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../policies/studies.sql
+
+        - task_key: check
+          depends_on:
+            - task_key: studies
+          sql_task:
+            warehouse_id: ${var.warehouse_id}
+            file:
+              path: ../policies/check.sql

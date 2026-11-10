@@ -304,7 +304,7 @@ after each table builds, every classified column gets a Unity Catalog tag, `pers
 class; and when the var `personal_data_readers` names a group, each column of direct personal data
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
-with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
+with one policy by tag instead of a mask per column (or one for each class), each table's area as a tag (DEC-PRJ-15), who
 read a table, the access review, the product catalogue, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md`.
 
 ### What each use needs

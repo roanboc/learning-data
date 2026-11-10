@@ -12,6 +12,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [A place on the map](https://data.learn-all.org/from-helper-to-colleague/a-place-on-the-map/) | Agents on the map | 9 min | 7 | 3 questions | [script](3-a-place-on-the-map/script.md) · [source](3-a-place-on-the-map/source/README.md) |
+| [Rights follow the role](https://data.learn-all.org/from-helper-to-colleague/rights-follow-the-role/) | Rights from the work | 8 min | 7 | 3 questions | [script](4-rights-follow-the-role/script.md) · [source](4-rights-follow-the-role/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -1,0 +1,25 @@
+# Decisions about the claims_app source: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: source, name: claims_app, code: CLM}
+
+decisions:
+
+  - id: DEC-CLM-01
+    step: source_reality
+    title: The claims are read where the app writes them
+    text: The project reads the claims app's own table in place, through Unity Catalog, where the app's
+      database is registered as the catalog claims_app. Nothing copies the claims in, by a nightly job or
+      by change capture, so there's no _loaded_at, and freshness reads updated_at, the app's own time of a
+      claim's last change.
+    why: 'Expected: Payroll, Finance and the claims job read the claims as the app wrote them. Found: The
+      app keeps its claims in its own Postgres database on Lakebase, which Unity Catalog reads in place,
+      with its permissions, lineage and audit. A copy would add a pipeline to run, a second place to
+      govern, and a delay in which the copy falls behind the app.'
+    decided_by: Noor, data architect, with HR
+    decided_on: 2026-11-05
+    status: agreed
+    implemented_in: [stg_claims_app__claims]
+    relates_to: [LIM-CLM-01]

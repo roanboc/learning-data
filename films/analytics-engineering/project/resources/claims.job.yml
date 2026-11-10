@@ -1,0 +1,51 @@
+# The claims job: at 22:00 every Monday, Sydney time, dbt builds and tests the hours to pay and
+# everything they read (+mart_payroll__hours_to_pay); then a second task sends them to the payroll
+# system, which needs them by noon on Tuesday to pay them on Thursday. Pay days are every second
+# Thursday: on a Monday that isn't before one, no pay run is open, the model is empty, and nothing
+# is sent. A failing build or test stops the job before the second task, so nothing wrong reaches
+# payroll and the hours wait: examples/the-night-the-claims-job-failed/ has the night it did.
+#
+# On the platform, Genie ZeroOps watches it with the pay run's tables: when it fails, the platform
+# team finds the cause, what the failure touches and a proposed fix by morning, and a person
+# decides (DEC-CLM-02). Written as a file, reviewed in a pull request, and deployed by the bundle
+# (databricks.yml) the same way to test and to production, as payroll's export is (DEC-PRJ-16).
+
+resources:
+  jobs:
+    claims:
+      name: The claims job
+      description: The hours to pay on the coming pay day, built and tested, then sent to the payroll system (mart_payroll__hours_to_pay).
+      schedule:
+        quartz_cron_expression: "0 0 22 ? * MON"
+        timezone_id: Australia/Sydney
+      email_notifications:
+        on_failure: [platform@uni.example]
+      tasks:
+        - task_key: build_the_hours_to_pay
+          description: Build and test the hours to pay and everything they read.
+          environment_key: dbt
+          dbt_task:
+            project_directory: ../
+            warehouse_id: ${var.warehouse_id}
+            catalog: ${var.catalog}
+            schema: ${var.schema}
+            # unit tests run before the merge, in CI, as dbt's docs advise; the job tests the data
+            commands:
+              - dbt build --select +mart_payroll__hours_to_pay --exclude-resource-type unit_test
+        - task_key: send_to_the_payroll_system
+          description: Send the hours to pay to the payroll system's inbox, only once they've passed their tests.
+          depends_on:
+            - task_key: build_the_hours_to_pay
+          environment_key: python
+          spark_python_task:
+            python_file: ./send_hours_to_payroll.py
+            parameters: ["--catalog", "${var.catalog}", "--schema", "${var.schema}"]
+      environments:
+        - environment_key: dbt
+          spec:
+            client: "2"
+            dependencies:
+              - dbt-databricks==1.12.5
+        - environment_key: python
+          spec:
+            client: "2"

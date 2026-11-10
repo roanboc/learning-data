@@ -1,0 +1,50 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The planning agent's calls through Unity Gateway: EXECUTE for its role's group, planning_contributors, on each model
+# and tool server its steps call, and no other. The platform team applies each entry as the body of
+# PATCH /api/2.1/unity-catalog/permissions/<securable type>/<full name> (grants.sql gives the group USE
+# CATALOG and USE SCHEMA on their catalog and schemas).
+
+group: planning_contributors
+services:
+  - securable type: model_service
+    full name: ai.models.drafting
+    for: the language model
+    called by: [draft the change, build it in development, open a pull request]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.build
+    for: the build tool
+    called by: [build it in development]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.catalog
+    for: the catalog tool
+    called by: [draft the change]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.docs
+    for: the docs tool
+    called by: [draft the change]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.memory
+    for: the memory tool
+    called by: [draft the change]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.query
+    for: the query tool
+    called by: [build it in development]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.repository
+    for: the repository tool
+    called by: [draft the change, open a pull request]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}
+  - securable type: mcp_service
+    full name: ai.tools.tickets
+    for: the tickets tool
+    called by: [draft the change]
+    body: {changes: [{principal: planning_contributors, add: [EXECUTE]}]}

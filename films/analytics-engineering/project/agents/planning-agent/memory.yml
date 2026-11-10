@@ -1,0 +1,14 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The team's memory, which the platform keeps in Lakebase: agents read it, second to the governed
+# definitions, and none writes it. A store's permissions don't take groups, so it's granted to each
+# agent the map assigns to the role, by its application ID, read only, by the store's creator, the
+# platform's memory keeper, with the AgentKit SDK:
+#     memory_stores.get(<store>).grant_permission(<application ID>, principal_type="SERVICE_PRINCIPAL",
+#                                                   permission="READ")
+
+store: team-memory
+read by: [draft the change]
+grants:
+  - {principal: 4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73, agent: planning agent, permission: READ}

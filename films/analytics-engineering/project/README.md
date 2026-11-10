@@ -110,7 +110,7 @@ export DATABRICKS_SCHEMA=<your schema>   # optional; dev if not set
 dbt build --target databricks --profiles-dir .
 ```
 
-`requirements-databricks.txt` installs dbt-databricks 1.12.5, which brings dbt-core 1.12.3.
+`requirements-databricks.txt` installs dbt-databricks 1.12.8, which brings dbt-core 1.12.5.
 
 ### Adding a Databricks job to CI
 

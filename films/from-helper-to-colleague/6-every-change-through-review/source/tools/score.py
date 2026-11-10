@@ -237,7 +237,7 @@ pot(E4, w('path', 'Checks build', 0.05), 0.75, STN[1]); pot(G4, w('path', 'a dif
 pot(A4, w('release', 'Another agent', 0.05), 0.7, STN[3])
 pot(C5, w('release', 'People approve', 0.05), 0.8, STN[4]); nail(E5, w('release', 'People approve', 0.1), w('release', 'People approve', 2.1), 0.8, STN[4])
 pot(C4, w('release', 'a second person', 0.05), 0.9, STN[5]); nail(G5, w('release', 'a second person', 0.15), w('release', 'a second person', 2.4), 0.8, STN[5])
-# Jun, Clara, Mei and Noor saw exactly what would change: their names, under the bow; more classes in 161 units, and nothing else
+# Jun and Noor saw exactly what would change: their names, under the bow; more classes in 161 units, and nothing else
 tap(w('saw', 'Jun', 0.05), 0.007, STN[4]); tap(w('saw', 'Noor', 0.05), 0.007, STN[5])
 nail(A5, w('saw', 'Jun', 0.0), w('saw', 'Jun', 1.9), 0.65, px(1450))
 card(w('saw', 'more classes', -0.2), 0.012, px(530)); pots((F4, C5), w('saw', 'more classes', -0.15), 0.7, stag=0.3)
@@ -293,6 +293,7 @@ tap(cw('only', 'what changed', 0.05), 0.008, px(830)); tap(cw('only', 'everythin
 pots((G4, B4, D5), cw('here', 'Every test passes', -0.05), 0.7, stag=0.2); tick(cw('here', 'Every test passes', 0.1), 0.009, px(1500))
 card(cw('impact', 'The impact report', 0.0), 0.011, px(1230))
 tap(cw('impact', 'a column is added', 0.05), 0.008, px(1230)); tap(cw('impact', 'nothing that reads', 0.05), 0.008, px(1230))
+tap(cw('impact', 'who to tell', 0.05), 0.008, px(1230))
 card(cw('diff', 'the same table', 0.0), 0.011, px(460)); card(cw('diff', 'from main', 0.0), 0.011, px(1460))
 slide(cw('diff', 'compared unit by unit', 0.0), 1.2, 0.007, px(780), px(1140)); pot(E4, cw('diff', 'compared unit by unit', 0.05), 0.65, px(960))
 card(cc('none', -0.3), 0.011, px(960)); keys(cc('none', -0.2), cw('none', 'classes changed', 0.9), 0.015, px(700))
@@ -302,7 +303,8 @@ card(cw('sees', 'to the data', -0.3), 0.011, px(600)); pot(G5, cw('sees', 'to th
 # =============================================================================================================================
 # 4. An agent's review, for reference: the governance review agent comes in, Yusuf beside it: E minor, an agent's chord, no bow. Its
 #    rules ticked one by one; the 31 units with no class size: A minor; its suggestion: one pot; who decides, posted as a comment; it
-#    never approves, never blocks. Clara decides yes: the pot lifted and the nail violin, a person's decision; the second push set down,
+#    never approves, never blocks. Yusuf decides yes, for data governance, where the change and the glossary differ: the pot lifted and
+#    the nail violin, a person's decision; the second push set down,
 #    a knock. Two agents, only through the pull request, and a person between them: the bow again, over C
 rw = lambda lid, word, off=0: W('review', lid, word, off)
 rc = lambda lid, off=0: G('review', lid, off)
@@ -321,10 +323,10 @@ card(rw('who', 'who decides', 0.0), 0.011, px(1575)); tap(rw('who', 'as a commen
 card(rc('comment', 0.0), 0.011, px(1575))
 stop(rw('comment', 'never approves', 0.1), 0.01, px(1350)); stop(rw('comment', 'never blocks', 0.1), 0.01, px(1350))
 tap(rw('comment', 'only for reference', 0.05), 0.008, px(1450))
-# Clara decides: yes; the planning agent adds the warning, in a second push
-card(rw('clara', 'yes', 0.0), 0.012, px(1580))
-pot(C4, rw('clara', 'yes', 0.05), 0.85, px(1080)); nail(E5, rw('clara', 'yes', 0.15), rw('clara', 'yes', 2.0), 0.8, px(1580))
-card(rw('clara', 'adds the warning', -0.6), 0.011, px(1580)); knock(C4, rw('clara', 'a second push', 0.05), 0.75, px(1080))
+# Yusuf decides: yes; the planning agent adds the warning, in a second push
+card(rw('yusuf', 'yes', 0.0), 0.012, px(1580))
+pot(C4, rw('yusuf', 'yes', 0.05), 0.85, px(1080)); nail(E5, rw('yusuf', 'yes', 0.15), rw('yusuf', 'yes', 2.0), 0.8, px(1580))
+card(rw('yusuf', 'adds the warning', -0.6), 0.011, px(1580)); knock(C4, rw('yusuf', 'a second push', 0.05), 0.75, px(1080))
 # two agents worked together only through the pull request, and a person decided between them
 card(rw('together', 'only through the pull request', -0.3), 0.011, px(960))
 pencil(rw('together', 'only through the pull request', 0.0), 0.6, 0.007, px(500)); pencil(rw('together', 'only through the pull request', 0.3), 0.6, 0.007, px(1420))
@@ -333,10 +335,11 @@ pots((C4, G4), rw('together', 'a person decided', 0.0), 0.7, stag=0.3); nail(C6,
 
 # =============================================================================================================================
 # 5. Who approves, from the map: the map's steps come in, at the chapter's turn: F. After a pull request, every step a person's: a bow
-#    for each as it's named, the analytics engineer, the product owner, the release approver, rising; what a word means stays with its
-#    data owner, ticked. The planning contributor's steps end at the pull request: a knock, and nothing lifted. GitHub's code owners and teams,
+#    for each as it's named, the analytics engineer, the release approver who approves the change, and releases it, rising; owners don't
+#    review pull requests, a tap, and what a word means is decided first in the glossary, ticked. The planning contributor's steps end at
+#    the pull request: a knock, and nothing lifted. GitHub's teams,
 #    written from the roles; the rules on main, locked for everyone; an agent's approval never counts. After the second push, set down:
-#    Jun, Clara and Mei approve, the pot lifted and a bow for each
+#    Jun approves the code again, the pot lifted and a bow; Clara and the faculties are told what it touches, a tap for each
 uw = lambda lid, word, off=0: W('rules', lid, word, off)
 uc = lambda lid, off=0: G('rules', lid, off)
 sheet(uw('map', 'on the map', -0.3), 0.013, px(960), 0.5)
@@ -344,29 +347,28 @@ pots((F3, C4, A4, F4), uw('map', 'on the map', -0.25), 0.75, stag=0.25)
 for i in range(3):
     tap(uw('map', "a person's", 0.05 + 0.15 * i), 0.007, px(1620))
 nail(C5, uw('steps', 'The analytics engineer', 0.05), uw('steps', 'The analytics engineer', 1.3), 0.7, px(1100))
-nail(E5, uw('steps', 'The product owner', 0.05), uw('steps', 'The product owner', 1.3), 0.7, px(1100))
-nail(G5, uw('steps', 'The release approver', 0.05), uw('steps', 'The release approver', 1.6), 0.7, px(1100))
-tap(uw('word', 'what a word means', 0.05), 0.008, px(960)); tick(uw('word', 'its data owner', 0.1), 0.008, px(960))
+nail(E5, uw('steps', 'The release approver', 0.05), uw('steps', 'The release approver', 1.3), 0.7, px(1100))
+nail(G5, uw('steps', 'releases it', 0.05), uw('steps', 'releases it', 1.6), 0.7, px(1100))
+tap(uw('word', "Owners don't review", 0.05), 0.008, px(610)); tick(uw('word', 'in the glossary', 0.1), 0.008, px(1260))
 for i in range(3):
     tap(uw('none', "The planning contributor's steps", 0.05 + 0.2 * i), 0.007, px(1100))
 knock(C4, uw('none', 'end at the pull request', 0.05), 0.8, px(1550)); stop(uw('none', 'holds none', 0.1), 0.01, px(1550))
 card(uc('written', 0.2), 0.011, px(480)); pencil(uw('written', 'written from those roles', 0.0), 0.6, 0.007, px(930))
-card(uw('written', 'the code owners', 0.0), 0.011, px(1410)); keys(uw('written', 'the code owners', 0.3), uw('written', 'the code owners', 1.3), 0.014, px(1410))
-card(uw('written', 'the teams', 0.0), 0.011, px(1410))
-tap(uw('written', 'takes over a role', 0.05), 0.008, px(480)); tick(uw('written', 'the reviews follow', 0.1), 0.009, px(480))
+card(uw('written', 'the teams that approve', 0.0), 0.011, px(1410))
+tap(uw('written', 'takes over a role', 0.05), 0.008, px(300)); tick(uw('written', 'the approvals follow', 0.1), 0.009, px(300))
 card(uw('main', 'the rules on main', 0.0), 0.011, px(510)); lock(uw('main', 'not even an administrator', 0.05), 0.012, px(400))
 card(uc('person', 0.0), 0.011, px(1390))
 tick(uw('person', 'a person', 0.05), 0.008, px(1100)); tick(uw('person', 'a team of people', 0.05), 0.008, px(1100))
 stop(uw('person', "An agent can't", 0.45), 0.01, px(1100)); tap(uw('person', 'never counts', 0.05), 0.008, px(1150))
 card(uc('own', -0.1), 0.011, px(1390)); stop(uw('own', 'their own pull request', 0.35), 0.01, px(1100))
 tick(uw('own', "didn't push it", 0.1), 0.009, px(1100))
-# after the second push: Jun approves the code, Clara the change, Mei the word it copies
+# after the second push: Jun approves the code again; Clara and the faculties are told what it touches
 card(uw('again', 'the second push', -0.2), 0.011, px(960)); knock(C4, uw('again', 'the second push', -0.15), 0.75, px(960))
 card(uw('again', 'Jun approves', -0.3), 0.011, px(960))
 pot(C4, uw('again', 'Jun approves', 0.3), 0.8, px(600)); nail(C5, uw('again', 'Jun approves', 0.35), uw('again', 'Jun approves', 1.6), 0.65, px(600))
 tick(uw('again', 'Jun approves', 0.3), 0.008, px(500))
-nail(E5, uw('again', 'Clara the change', 0.35), uw('again', 'Clara the change', 1.6), 0.65, px(700)); tick(uw('again', 'Clara the change', 0.3), 0.008, px(500))
-nail(G5, uw('again', 'Mei the word', 0.35), uw('again', 'Mei the word', 2.2), 0.65, px(800)); tick(uw('again', 'Mei the word', 0.3), 0.008, px(500))
+card(uw('again', 'Clara', -0.3), 0.011, px(960))
+tap(uw('again', 'Clara', 0.05), 0.008, px(600)); tap(uw('again', 'the faculties', 0.05), 0.008, px(600))
 
 # =============================================================================================================================
 # 6. A person releases: Jun merges, at the chapter's turn: C, low, as the branch joins main; merging isn't the release. That night

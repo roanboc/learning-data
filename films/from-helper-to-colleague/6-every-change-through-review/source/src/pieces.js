@@ -266,7 +266,8 @@ function ec_schema(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,f={w:500,size
   if(o.lock)ag_lock(ctx,x+w-36,y+36,26,rgba(AG.mut,1));ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the five stages: the series' picture, copied whole from Five
-   stages, not a switch (fs_stages, as its branch had it on 5 November 2026), under this film's prefix, with its look, words and colours.
+   stages, not a switch (fs_stages, as its branch had it on 5 November 2026), under this film's prefix, with its look, words and colours;
+   stage 4's person reads "Owns it; the data team reviews it" since 10 November 2026 (owners never review a pull request).
    ec_stages(ctx, x, y, w, o): five oak steps rising from left to right on the floor, each with its number and a card with its name, and
    a slim gate before each; x, y the left end of the floor line, w their width; o.a, o.k [5], o.lit [5], o.dim, o.col [5], o.short,
    o.gates [5] or true, o.passed [5], o.gate {i, a, k, x, y, w}, o.facts {i, a, x, y, w}. It returns each stage's card and each gate. */
@@ -278,7 +279,7 @@ function ec_stages(ctx,x,y,w,o){o=o||{};
     FACTS=[["Yours, but it uses none","Drafts in a chat; runs nothing","Accepts or rejects every line"],
       ["Yours, delegated","Runs queries in your session, read only","Approves each action"],
       ["Yours, narrowed","Works alone; drafts only in a sandbox","Checks it against the checks set first"],
-      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it, and reviews every change"],
+      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it; the data team reviews it"],
       ["Its own","In test, agreed tasks alone, then a report","Another person approves production"]],
     BLUE=[38,102,132],GREEN=[50,116,80],OAK={base:[208,188,156],dark:[156,136,106],hi:[242,233,216]};
   const a=o.a==null?1:o.a,k=w/1660,bw=300*k,gap=40*k,rise=86*k,depth=16*k,ch=128,sm=o.short===true?1:clamp(o.short||0,0,1),arr=(v,i,d)=>v==null?d:(v===true?1:(Array.isArray(v)?(v[i]==null?d:v[i]):v));
@@ -402,10 +403,10 @@ function ec_side(ctx,x,y,w,head,sub,rows,o){o=o||{};const a=o.a==null?1:o.a,h=13
 
 /* ---------------------------------------------------------------- the map's steps for a change to a data product
    ec_steps(ctx, x, y, w, o): the seven steps of "change a data product" on the map, each with the role that does it (3.3's names);
-   o.lit [7] each lit; o.agent (0 to 1) the planning agent's badge by its role's three steps; o.people (0 to 1) "a person" by the steps
+   o.lit [7] each lit (a person approves the change as the release approver since 10 November 2026: owners never review); o.agent (0 to 1) the planning agent's badge by its role's three steps; o.people (0 to 1) "a person" by the steps
    after the pull request; o.none (0 to 1) those three crossed for the agent; o.a, o.k. Returns the rows' boxes. */
 const EC_STEPS=[["raise a ticket","requester",0],["draft the change","planning contributor",1],["build it in development","planning contributor",1],["open a pull request","planning contributor",1],
-  ["review the code","analytics engineer",2],["approve the change","product owner",2],["release to production","release approver",2]];
+  ["review the code","analytics engineer",2],["approve the change","release approver",2],["release to production","release approver",2]];
 function ec_steps(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rh=62,y0=y+110,h=110+EC_STEPS.length*rh+22,out=EC_STEPS.map((s,i)=>({x,y:y0+i*rh,w,h:rh}));if(a<=0)return out;
   ctx.save();ctx.globalAlpha*=a;ec_springAbout(ctx,x,y,w,h,o.k);ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.55});
   ag_T(ctx,"ON THE MAP",x+28,y+52,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,"Change a data product",x+28,y+94,{w:700,size:32});

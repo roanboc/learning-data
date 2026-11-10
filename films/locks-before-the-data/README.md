@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Walls, doors and keys](https://data.learn-all.org/locks-before-the-data/walls-doors-and-keys/) | Boundaries, paths and keys | 8½ min | 9 | 3 questions | [script](3-walls-doors-and-keys/script.md) · [source](3-walls-doors-and-keys/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -269,7 +269,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
 
 ### Only what you may see
 
@@ -288,6 +288,7 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 - [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 - [Forgetting a person](../films/kept-for-a-reason/3-forgetting-a-person/) — `forgetting-a-person`
 - [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
+- [A person asks](../films/kept-for-a-reason/5-a-person-asks/) — `a-person-asks`
 
 ## AI agents in data work
 
@@ -360,7 +361,7 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 
 ## Data management
 

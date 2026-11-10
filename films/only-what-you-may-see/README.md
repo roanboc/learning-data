@@ -11,6 +11,8 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [An agreement first](https://data.learn-all.org/only-what-you-may-see/an-agreement-first/) | Agreements before access | 7½ min | 6 | 3 questions | [script](1-an-agreement-first/script.md) · [source](1-an-agreement-first/source/README.md) |
+| [Know what you hold](https://data.learn-all.org/only-what-you-may-see/know-what-you-hold/) | Data classification | 7 min | 8 | 3 questions | [script](2-know-what-you-hold/script.md) · [source](2-know-what-you-hold/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -1,0 +1,73 @@
+{
+  "kicker": "Signing in without secrets",
+  "kicker_es": "Entrar sin secretos",
+  "title_es": "Ningún secreto que perder",
+  "h1": "No secret to lose: a sign-in nobody has to keep",
+  "h1_es": "Ningún secreto que perder: un acceso que nadie guarda",
+  "lead": "Every night at two, a job loads the registrar's records, and it signs in with Jun's personal token, made in 2024 with no end date. Whoever holds that token is Jun to the platform, and Sam finds it in three places. Which ways of signing in leave no secret for anyone to keep?",
+  "lead_es": "Cada noche a las dos, un proceso carga los datos del registro, y entra con el token personal de Jun, creado en 2024 sin fecha de fin. Quien tenga ese token es Jun para la plataforma, y Sam lo encuentra en tres sitios. ¿Qué formas de entrar no dejan ningún secreto que alguien tenga que guardar?",
+  "description": "A film about signing in with no secret anyone keeps, the second of Locks before the data: the City of London in 1990, where a messenger's case of bearer paper worth £292 million was stolen, and the Bank of England's office that kept the paper in a vault and who owned it in a record; why a password, a token or a key is bearer paper too; a nightly job that still signs in with a person's token, made with no end date and copied to three places; the ways a job can prove who it is, from a person's token to an identity the platform gives it, ranked by who holds a secret and for how long; the job moved to the top and the token ended; and the ladder for people, from a shared account to a passkey that answers only the real site.",
+  "description_es": "Una película sobre entrar sin ningún secreto que alguien guarde, la segunda de Cerraduras antes que los datos: la City de Londres en 1990, donde robaron el maletín de un mensajero con papel al portador por 292 millones de libras, y la oficina del Banco de Inglaterra que guardó el papel en una bóveda y quién era su dueño en un registro; por qué una contraseña, un token o una clave también son papel al portador; un proceso nocturno que aún entra con el token de una persona, creado sin fecha de fin y copiado en tres sitios; las formas en que un proceso puede probar quién es, del token de una persona a una identidad que le da la plataforma, ordenadas según quién guarda un secreto y por cuánto tiempo; el proceso llevado a la cima y el token anulado; y la escalera de las personas, de una cuenta compartida a una llave de acceso que solo responde al sitio real.",
+  "card": "The ways a job or a person signs in, ranked from worst to best by who holds a secret, and for how long.",
+  "card_es": "Las formas en que un proceso o una persona entra, de peor a mejor, según quién guarda un secreto y por cuánto tiempo.",
+  "chapters_es": [
+    "Papel al portador",
+    "En los registros del Banco",
+    "El token de Jun",
+    "¿Quién guarda un secreto?",
+    "Escalera arriba",
+    "Una escalera para las personas",
+    "Nada que llevar"
+  ],
+  "past": [
+    "London, 1990: a messenger's case of bearer paper, and the Bank of England's vault",
+    "The best secret is the one nobody holds."
+  ],
+  "past_es": [
+    "Londres, 1990: el maletín de papel al portador de un mensajero, y la bóveda del Banco de Inglaterra",
+    "El mejor secreto es el que nadie guarda."
+  ],
+  "next_h": "You've seen why a sign-in secret is bearer paper, and how a job and a person climb from a borrowed token to a sign-in nobody keeps. Next: walls, doors and keys, where the platform's few doors are drawn, each with a lock you can see.",
+  "next_h_es": "Viste por qué un secreto para entrar es papel al portador, y cómo un proceso y una persona suben de un token prestado a un acceso que nadie guarda. Sigue: muros, puertas y llaves, donde se dibujan las pocas puertas de la plataforma, cada una con una cerradura a la vista.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film names no product and no standard. These are the public guides its two ladders follow, from the bodies that write them.",
+    "p_es": "La película no nombra ningún producto ni ninguna norma. Estas son las guías públicas que siguen sus dos escaleras, de quienes las escriben.",
+    "links": [
+      {
+        "title": "NIST SP 800-63B-4: Authentication",
+        "title_es": "NIST SP 800-63B-4: autenticación",
+        "line": "The United States' standard for signing in: which authenticators resist a fake page, and why a password alone isn't enough.",
+        "line_es": "La norma de Estados Unidos para la autenticación: qué autenticadores resisten una página falsa, y por qué una contraseña sola no basta.",
+        "href": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+        "href_es": "https://pages.nist.gov/800-63-4/sp800-63b.html"
+      },
+      {
+        "title": "CISA: Implementing phishing-resistant MFA",
+        "title_es": "CISA: autenticación resistente al phishing",
+        "line": "A short fact sheet that ranks the second factors people use, from codes by text to keys that answer only the real site.",
+        "line_es": "Una ficha breve que ordena los segundos factores que usa la gente, de los códigos por SMS a las llaves que solo responden al sitio real.",
+        "href": "https://www.cisa.gov/resources-tools/resources/implementing-phishing-resistant-mfa",
+        "href_es": "https://www.cisa.gov/resources-tools/resources/implementing-phishing-resistant-mfa"
+      },
+      {
+        "title": "FIDO Alliance: Passkeys",
+        "title_es": "FIDO Alliance: llaves de acceso",
+        "line": "How a passkey works: a key that stays on your device, unlocked by your face, your fingerprint or a PIN, and shared with no one.",
+        "line_es": "Cómo funciona una llave de acceso: una clave que se queda en tu dispositivo, que desbloqueas con tu cara, tu huella o un PIN, y que no compartes con nadie.",
+        "href": "https://fidoalliance.org/passkeys/",
+        "href_es": "https://fidoalliance.org/passkeys/"
+      },
+      {
+        "title": "OWASP: Non-Human Identities Top 10",
+        "title_es": "OWASP: los 10 riesgos de las identidades no humanas",
+        "line": "The ten commonest risks of the identities that jobs and services sign in with, from leaked secrets to secrets that never end.",
+        "line_es": "Los diez riesgos más comunes de las identidades con que entran procesos y servicios, de los secretos filtrados a los que nunca vencen.",
+        "href": "https://owasp.org/www-project-non-human-identities-top-10/",
+        "href_es": "https://owasp.org/www-project-non-human-identities-top-10/"
+      }
+    ]
+  },
+  "draft": true
+}

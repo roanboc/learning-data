@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [No secret to lose](https://data.learn-all.org/locks-before-the-data/no-secret-to-lose/) | Signing in without secrets | 9 min | 7 | 3 questions | [script](2-no-secret-to-lose/script.md) · [source](2-no-secret-to-lose/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

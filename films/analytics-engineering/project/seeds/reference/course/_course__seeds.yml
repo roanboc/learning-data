@@ -1,0 +1,36 @@
+seeds:
+
+  - name: units
+    description: >
+      One row per unit of study the university teaches, with the faculty that teaches it: the
+      registrar's list, kept with the faculties. Reference data; changes come through a pull
+      request they approve. Payroll's export and Finance's casual teaching cost find each claim's
+      faculty here, by its unit. Each test names its owner in its own meta: the owners by folder
+      in dbt_project.yml are cited by line, so the folder isn't added there.
+    config:
+      column_types: {unit_code: string, unit_name: string, faculty_code: string, faculty_name: string}
+      meta: {owner: "Registrar's office, with the faculties", domain: course, purpose: reference}
+    columns:
+      - name: unit_code
+        description: The registrar's code for the unit, like HI101.
+        data_tests:
+          - unique:
+              config: {meta: {owner: "Registrar's office, with the faculties"}}
+          - not_null:
+              config: {meta: {owner: "Registrar's office, with the faculties"}}
+      - name: unit_name
+        description: The unit's name.
+      - name: faculty_code
+        description: The code of the faculty that teaches the unit, like HLT.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Registrar's office, with the faculties"}}
+          - accepted_values:
+              arguments:
+                values: [AED, BUS, EIT, HLT]
+              config: {meta: {owner: "Registrar's office, with the faculties"}}
+      - name: faculty_name
+        description: The name of the faculty that teaches the unit, like Faculty of Health.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Registrar's office, with the faculties"}}

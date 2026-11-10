@@ -107,7 +107,7 @@ scene("three",(ctx,S,t,sc)=>{
 /* ---------------------------------------------------------------- 3 · Its owner, its words, its rules */
 scene("once",(ctx,S,t,sc)=>{
   const T={like:wAt(sc,"like","Like"),onedef:wAt(sc,"like","one definition"),sept:wAt(sc,"sept","September"),rohan:wAt(sc,"sept","Rohan"),jun:wAt(sc,"sept","Jun"),
-    owner:wAt(sc,"owner","owner"),approves:wAt(sc,"owner","approves"),words:wAt(sc,"words","words"),also:wAt(sc,"words","Also called"),rules:wAt(sc,"rules","claims approved"),
+    owner:wAt(sc,"owner","owner"),words:wAt(sc,"words","words"),also:wAt(sc,"words","Also called"),rules:wAt(sc,"rules","claims approved"),
     casual:wAt(sc,"rules","by casual staff"),teach:wAt(sc,"rules","for teaching"),oncost:wAt(sc,"rules","plus on costs"),counted:wAt(sc,"period","Counted"),
     claims:wAt(sc,"ingrid","The claims"),ingrid:wAt(sc,"ingrid","Ingrid"),names:wAt(sc,"names","names"),hours:wAt(sc,"names","casual hours contracted"),paid:wAt(sc,"names","casual pay paid")};
   ag_shots(ctx,S,t,sc.dur,[
@@ -144,7 +144,7 @@ scene("near",(ctx,S,t,sc)=>{
   const T={mv:wAt(sc,"home","metric view"),uc:wAt(sc,"home","Unity Catalog"),beside:wAt(sc,"home","beside"),holds:wAt(sc,"view","holds"),how:wAt(sc,"view","however"),
     fac:wAt(sc,"view","by faculty"),unit:wAt(sc,"view","unit"),per:wAt(sc,"view","teaching period"),gov:wAt(sc,"gov","governs"),who:wAt(sc,"gov","who may read"),what:wAt(sc,"gov","what reads"),
     every:wAt(sc,"every","every tool"),jun:wAt(sc,"yaml","Jun"),yaml:wAt(sc,"yaml","YAML"),builds:wAt(sc,"yaml","which builds"),meaning:wAt(sc,"yaml","as Meaning"),
-    rohan:wAt(sc,"review","Rohan"),pr:wAt(sc,"review","pull request"),noor:wAt(sc,"review","Noor"),prod:wAt(sc,"review","the change to production"),
+    pr:wAt(sc,"review","pull request"),noor:wAt(sc,"review","Noor"),prod:wAt(sc,"review","for production"),told:wAt(sc,"told","is told"),
     words:wAt(sc,"meta","Its words"),name:wAt(sc,"meta","a name to show"),desc:wAt(sc,"meta","a description"),syn:wAt(sc,"meta","synonyms"),fmt:wAt(sc,"meta","its format")};
   ag_shots(ctx,S,t,sc.dur,[
     // the platform: the fact and the metric view side by side in Unity Catalog; grouped any way; governed; read by every tool
@@ -160,13 +160,13 @@ scene("near",(ctx,S,t,sc)=>{
       // what reads it: every tool on the platform
       [["SQL editor","query"],["Dashboard","table"],["Genie","eye"],["Alert","warn"]].forEach(([nm,ic],i)=>{const k=ag_in(tt,(i===0?T.what:T.every)+i*0.3-0.3,0.4);if(k<=0)return;const y=170+i*170;
         md_lane(c,md_curve(m.r,[1330,y+42],{bend:0.6}),MD.flow,0.6*k,{u:ag_sine(clamp(k*1.2,0,1))});md_reader(c,1330,y,500,{title:nm,icon:ic,a:k,lit:ag_in(tt,T.every+i*0.3,0.3)*(1-ag_in(tt,T.every+i*0.3+0.6,0.4))});});}},
-    // the definition as code, in the data project; reviewed for its meaning and for production; its words go with it
+    // the definition as code, in the data project; the data team reviews it, Noor approves it for production, and Rohan is told; its words go with it
     {at:T.jun-0.15,cut:true,place:"night",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
       md_window(c,90,80,1100,800,{logo:"dbt",product:"dbt",title:"models/marts/finance/casual_teaching_cost.sql",a:ag_in(tt,T.jun,0.5),k:dn_k(tt,T.jun),draw:(cc,b)=>{
         const W=DN_YAML_WORDS,lit=i=>i<W?0:ag_in(tt,[T.name,T.desc,T.syn,T.fmt][i-W],0.4),dim=ag_in(tt,T.words,0.5);
         dn_code(cc,b.x+20,b.y+44,DN_YAML.map(([s,ind],i)=>({s,ind,k:clamp((tt-T.yaml+0.3-i*0.14)/0.4,0,1),lit:lit(i),dim:i<W?dim:dim*(1-lit(i))})),{lh:36,size:28});}});
       dn_card(c,1250,620,600,[{s:"as Meaning on the platform",size:30,w:700},{s:"built awards conferred",size:30,w:700}],{a:dn_io(tt,T.meaning,T.words-0.3,0.5,0.4),k:dn_k(tt,T.meaning)});
-      dn_pr(c,1250,190,600,{a:ag_in(tt,T.pr-0.2,0.5),k:dn_k(tt,T.pr-0.2),ok:[clamp((tt-T.pr-0.7)/0.6,0,1),clamp((tt-T.prod-0.3)/0.6,0,1)]});}}
+      dn_pr(c,1250,190,600,{a:ag_in(tt,T.pr-0.2,0.5),k:dn_k(tt,T.pr-0.2),ok:[clamp((tt-T.pr-0.7)/0.6,0,1),clamp((tt-T.prod-0.3)/0.6,0,1)],told:clamp((tt-T.told-0.1)/0.6,0,1)});}}
   ],0.5);
 });
 

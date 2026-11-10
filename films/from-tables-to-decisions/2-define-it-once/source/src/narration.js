@@ -29,7 +29,7 @@ const NARR={
 "once":{"name":"Its owner, its words, its rules","lead":1.0,"tail":1.0,"vo":[
  {"id":"like","gap":0.8,"text":"Like the kilogram, it needed one definition that no single tool held."},
  {"id":"sept","gap":0.8,"text":"In September, Rohan defined it once, with Jun Park, who builds the data project."},
- {"id":"owner","gap":0.8,"text":"Its owner is Rohan: he decides what it means, and approves every change to it."},
+ {"id":"owner","gap":0.8,"text":"Its owner is Rohan: he decides what it means, in the glossary, before any code."},
  {"id":"words","gap":0.8,"text":"Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost."},
  {"id":"rules","gap":0.8,"text":"Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.","say":"Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on costs."},
  {"id":"period","gap":0.8,"text":"Counted by the teaching period the teaching was done in, not the day it was paid."},
@@ -41,7 +41,8 @@ const NARR={
  {"id":"gov","gap":0.8,"text":"Unity Catalog governs it like a table: who may read it, and what reads it."},
  {"id":"every","gap":0.8,"text":"So every tool on the platform reads this one."},
  {"id":"yaml","gap":0.8,"text":"Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred."},
- {"id":"review","gap":0.8,"text":"Rohan approves its meaning in a pull request, and Noor Rahman, the data architect, approves the change to production."},
+ {"id":"review","gap":0.8,"text":"The data team reviews the code in a pull request, and Noor Rahman, the data architect, approves it for production."},
+ {"id":"told","gap":0.8,"text":"Rohan, the measure's owner, is told what the change touches."},
  {"id":"meta","gap":0.8,"text":"Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars."}]},
 "dbt":{"name":"The same idea in dbt","lead":1.0,"tail":1.0,"vo":[
  {"id":"old","gap":0.8,"text":"None of this is new: for decades, BI tools have kept a layer of business definitions over the tables."},

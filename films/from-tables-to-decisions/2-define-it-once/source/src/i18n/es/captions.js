@@ -61,8 +61,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Como el kilogramo, necesitaba una sola definición que no guardara ninguna herramienta.",
 "In September, Rohan defined it once, with Jun Park, who builds the data project.":
 "En septiembre, Rohan la definió una vez, con Jun Park, que construye el proyecto de datos.",
-"Its owner is Rohan: he decides what it means, and approves every change to it.":
-"Su dueño es Rohan: él decide qué significa y aprueba cada cambio que se le hace.",
+"Its owner is Rohan: he decides what it means, in the glossary, before any code.":
+"Su dueño es Rohan: él decide qué significa, en el glosario, antes de cualquier código.",
 "Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost.":
 "Sus palabras: lo que cuesta la docencia ocasional de un período lectivo. También se le dice costo de la docencia por sesión.",
 "Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.":
@@ -84,8 +84,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así, todas las herramientas de la plataforma leen esta.",
 "Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred.":
 "Jun la escribe en unas líneas de YAML en el proyecto de datos, que la construye, como títulos otorgados en El significado en la plataforma.",
-"Rohan approves its meaning in a pull request, and Noor Rahman, the data architect, approves the change to production.":
-"Rohan aprueba su significado en un pull request, y Noor Rahman, la arquitecta de datos, aprueba el cambio a producción.",
+"The data team reviews the code in a pull request, and Noor Rahman, the data architect, approves it for production.":
+"El equipo de datos revisa el código en un pull request, y Noor Rahman, la arquitecta de datos, lo aprueba para producción.",
+"Rohan, the measure's owner, is told what the change touches.":
+"A Rohan, dueño de la medida, se le avisa a qué afecta el cambio.",
 "Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars.":
 "Sus palabras van con ella: un nombre para mostrar, una descripción, sinónimos para Genie y su formato, en dólares australianos.",
 

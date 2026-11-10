@@ -457,7 +457,7 @@ const NARR={
 "once":{"name":"Its owner, its words, its rules","lead":1.0,"tail":1.0,"vo":[
  {"id":"like","gap":0.8,"text":"Like the kilogram, it needed one definition that no single tool held."},
  {"id":"sept","gap":0.8,"text":"In September, Rohan defined it once, with Jun Park, who builds the data project."},
- {"id":"owner","gap":0.8,"text":"Its owner is Rohan: he decides what it means, and approves every change to it."},
+ {"id":"owner","gap":0.8,"text":"Its owner is Rohan: he decides what it means, in the glossary, before any code."},
  {"id":"words","gap":0.8,"text":"Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost."},
  {"id":"rules","gap":0.8,"text":"Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.","say":"Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on costs."},
  {"id":"period","gap":0.8,"text":"Counted by the teaching period the teaching was done in, not the day it was paid."},
@@ -469,7 +469,8 @@ const NARR={
  {"id":"gov","gap":0.8,"text":"Unity Catalog governs it like a table: who may read it, and what reads it."},
  {"id":"every","gap":0.8,"text":"So every tool on the platform reads this one."},
  {"id":"yaml","gap":0.8,"text":"Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred."},
- {"id":"review","gap":0.8,"text":"Rohan approves its meaning in a pull request, and Noor Rahman, the data architect, approves the change to production."},
+ {"id":"review","gap":0.8,"text":"The data team reviews the code in a pull request, and Noor Rahman, the data architect, approves it for production."},
+ {"id":"told","gap":0.8,"text":"Rohan, the measure's owner, is told what the change touches."},
  {"id":"meta","gap":0.8,"text":"Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars."}]},
 "dbt":{"name":"The same idea in dbt","lead":1.0,"tail":1.0,"vo":[
  {"id":"old","gap":0.8,"text":"None of this is new: for decades, BI tools have kept a layer of business definitions over the tables."},
@@ -496,7 +497,7 @@ const NARR={
  {"id":"close","gap":0.8,"text":"The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs."}]}
 };
 
-const VODUR={"kilo/place": 7.074, "kilo/copies": 5.734, "kilo/only": 7.008, "kilo/drift": 5.396, "kilo/which": 6.445, "kilo/rests": 6.152, "kilo/change": 1.288, "kilo/vote": 5.866, "kilo/constant": 7.127, "kilo/make": 8.124, "kilo/same": 4.926, "kilo/us": 5.788, "kilo/uni": 2.867, "kilo/three": 7.845, "kilo/now": 5.662, "three/what": 6.454, "three/asked": 4.573, "three/sheet": 5.952, "three/payroll": 5.484, "three/finance": 9.931, "three/right": 4.575, "three/short": 9.53, "three/inside": 6.386, "once/like": 4.163, "once/sept": 5.202, "once/owner": 4.712, "once/words": 5.96, "once/rules": 7.701, "once/period": 4.308, "once/ingrid": 5.077, "once/names": 7.764, "near/home": 4.985, "near/view": 8.38, "near/gov": 4.385, "near/every": 2.445, "near/yaml": 7.64, "near/review": 7.229, "near/meta": 6.917, "dbt/old": 6.492, "dbt/own": 6.34, "dbt/mf": 6.508, "dbt/planning": 4.577, "dbt/source": 3.563, "dbt/choose": 5.993, "open/common": 5.153, "open/began": 9.005, "open/conv": 7.699, "open/writes": 7.649, "open/travel": 7.344, "open/inside": 2.928, "open/check": 3.19, "same/today": 2.938, "same/asks": 7.886, "same/dash": 4.418, "same/last": 6.347, "same/budget": 4.821, "same/kilo": 7.466, "same/close": 7.963};
+const VODUR={"kilo/place": 7.074, "kilo/copies": 5.734, "kilo/only": 7.008, "kilo/drift": 5.396, "kilo/which": 6.445, "kilo/rests": 6.152, "kilo/change": 1.288, "kilo/vote": 5.866, "kilo/constant": 7.127, "kilo/make": 8.124, "kilo/same": 4.926, "kilo/us": 5.788, "kilo/uni": 2.867, "kilo/three": 7.845, "kilo/now": 5.662, "three/what": 6.454, "three/asked": 4.573, "three/sheet": 5.952, "three/payroll": 5.484, "three/finance": 9.931, "three/right": 4.575, "three/short": 9.53, "three/inside": 6.386, "once/like": 4.163, "once/sept": 5.202, "once/owner": 4.876, "once/words": 5.96, "once/rules": 7.701, "once/period": 4.308, "once/ingrid": 5.077, "once/names": 7.764, "near/home": 4.985, "near/view": 8.38, "near/gov": 4.385, "near/every": 2.445, "near/yaml": 7.64, "near/review": 6.967, "near/told": 3.376, "near/meta": 6.917, "dbt/old": 6.492, "dbt/own": 6.34, "dbt/mf": 6.508, "dbt/planning": 4.577, "dbt/source": 3.563, "dbt/choose": 5.993, "open/common": 5.153, "open/began": 9.005, "open/conv": 7.699, "open/writes": 7.649, "open/travel": 7.344, "open/inside": 2.928, "open/check": 3.19, "same/today": 2.938, "same/asks": 7.886, "same/dash": 4.418, "same/last": 6.347, "same/budget": 4.821, "same/kilo": 7.466, "same/close": 7.963};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2010,7 +2011,7 @@ function dn_placeTag(ctx,S,text,a){if(a<=0.01)return;setScreen(ctx,S);md_label(c
      dn_def      the definition of casual teaching cost: its owner, its words, its rules, filling in a part at a time
      dn_named    a smaller gold card: one of the other two counts, under a name of its own
      dn_code     lines of code in IBM Plex Mono, each coming in, lit gold or dimmed
-     dn_pr       a pull request with its two approvals
+     dn_pr       a pull request: the data team's review, Noor's approval for production, and its owner told
      dn_bi       a BI tool of the past, its definitions in marks of its own that no other tool reads
      dn_home     one of a measure's two homes: a metric view in Unity Catalog, or MetricFlow in dbt
      dn_hub      Apache Ossie in the middle, its converters on the spokes to each tool's own format
@@ -2052,7 +2053,7 @@ function dn_budget(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retu
     if(o.empty>0)md_T(ctx,"no money for a tutor",tx+228,ty+74+42,{w:700,size:28,col:MD.fail,a:ag_in(o.empty,0.3,0.5)});}
   ctx.restore();}
 
-/* ---------------------------------------------------------------- the definition, defined once */
+/* ---------------------------------------------------------------- the definition, defined once, in the glossary, before any code */
 // at (x, y), 860 wide: o.n (0 to 9) how many of its parts have come in: owner, words, also called, the three rules, on-costs, and
 // the period (two lines); o.a, o.k, o.empty (0 to 1: only its outline, dashed, as it waits for its words); returns its box
 const DN_DEF=[{h:"owner"},{s:"Rohan Desai, Finance"},{h:"words"},{s:"what the casual teaching in a teaching period costs"},{s:"also called: sessional teaching cost",col:MD.soft},
@@ -2063,7 +2064,7 @@ const DN_DEF_PART=[1,1,2,2,3,4,4,5,6,7,8,8];
 function dn_def(ctx,x,y,o){o=o||{};const n=o.n||0,w=o.w||860,lines=[{s:"casual teaching cost",size:40,w:800,lh:54}];
   DN_DEF.forEach((d,i)=>{const k=clamp(n-DN_DEF_PART[i]+1,0,1);lines.push(d.h?{s:d.h.toUpperCase(),size:28,w:800,col:MD.agreed,k,lh:37}:{s:d.s,size:30,w:600,col:d.col,k,lh:39});});
   if(o.empty>0){const ea=clamp(o.empty,0,1);ctx.save();ctx.globalAlpha*=ea*(o.a==null?1:o.a);md_card(ctx,x,y,w,o.emptyH||150,{edge:MD.agreed,dash:[12,10]});ctx.restore();if(ea>=1)return{x,y,w,h:150};}
-  return dn_card(ctx,x,y,w,lines,{edge:MD.agreed,kick:"measure",kickCol:MD.agreed,a:o.a,k:o.k});}
+  return dn_card(ctx,x,y,w,lines,{edge:MD.agreed,kick:"glossary",kickCol:MD.agreed,a:o.a,k:o.k});}
 // one of the other counts, under a name of its own: a smaller gold card
 function dn_named(ctx,x,y,w,title,sub,o){o=o||{};return md_textCard(ctx,x,y,w,{title,sub},{edge:MD.agreed,a:o.a,k:o.k,glow:0.6});}
 
@@ -2075,16 +2076,20 @@ function dn_code(ctx,x,y,lines,o){o=o||{};const lh=o.lh||44,size=o.size||30,cw=m
       ctx.strokeStyle=rgba(MD.agreed,0.7);ctx.lineWidth=1.6;rr(ctx,lx-10,by-size*0.92,tw+20,size*1.32,8);ctx.stroke();ctx.restore();}
     md_T(ctx,l.s,lx,by,{w:500,size,f:"mono",col:lit>0.5?MD.agreed:(l.col||MD.ink),a:k*(1-0.6*dm)});});}
 
-/* ---------------------------------------------------------------- a pull request, and its two approvals */
-// at (x, y), w wide: o.ok [meaning, production] (0 to 1 each: amber, waiting, to green, given); o.a, o.k; returns its box
-function dn_pr(ctx,x,y,w,o){o=o||{};const ok=o.ok||[0,0],h=296,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
+/* ---------------------------------------------------------------- a pull request, reviewed by the data team */
+// at (x, y), w wide: o.ok [the code, production] (0 to 1 each: amber, waiting, to green, given): the data team reviews the code and
+// Noor approves it for production; o.told (0 to 1): its owner is told what it touches, in his side's colour, a note and never an
+// approval, since owners and stewards don't review pull requests (the author, 10 November 2026); o.a, o.k; returns its box
+function dn_pr(ctx,x,y,w,o){o=o||{};const ok=o.ok||[0,0],told=clamp(o.told||0,0,1),h=350,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));md_card(ctx,x,y,w,h,{edge:MD.flow,glow:0.5});
   md_T(ctx,"PULL REQUEST",x+MD_PAD,y+MD_PAD+24,{w:800,size:28,ls:4,col:MD.flow});md_T(ctx,"Finance: casual teaching cost,",x+MD_PAD,y+MD_PAD+76,{w:700,size:32});
   md_T(ctx,"defined once",x+MD_PAD,y+MD_PAD+116,{w:700,size:32});
-  [["Rohan Desai · meaning",ok[0]],["Noor Rahman · production",ok[1]]].forEach(([s,k],i)=>{const ry=y+MD_PAD+176+i*54,col=mix(MD.wait,MD.pass,ag_sine(clamp(k,0,1)));
-    ctx.save();ctx.fillStyle=rgba(col,0.18);ctx.beginPath();ctx.arc(x+MD_PAD+20,ry-10,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const dot=(ry,col)=>{ctx.save();ctx.fillStyle=rgba(col,0.18);ctx.beginPath();ctx.arc(x+MD_PAD+20,ry-10,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;ctx.stroke();ctx.restore();};
+  [["Data team · the code",ok[0]],["Noor Rahman · production",ok[1]]].forEach(([s,k],i)=>{const ry=y+MD_PAD+176+i*54,col=mix(MD.wait,MD.pass,ag_sine(clamp(k,0,1)));dot(ry,col);
     md_icon(ctx,"clock",x+MD_PAD+20,ry-10,26,MD.wait,{a:1-ag_in(k,0,0.4)});md_icon(ctx,"tick",x+MD_PAD+20,ry-10,26,MD.pass,{a:ag_in(k,0,0.4)});
     md_T(ctx,s,x+MD_PAD+56,ry,{w:600,size:28,col:k>0.5?MD.ink:MD.soft});});
+  const ta=ag_in(told,0,0.6);if(ta>0){const ry=y+MD_PAD+176+2*54;ctx.save();ctx.globalAlpha*=ta;dot(ry,MD.dom.finance);
+    md_icon(ctx,"doc",x+MD_PAD+20,ry-10,26,MD.dom.finance);md_T(ctx,"Rohan Desai · told what it touches",x+MD_PAD+56,ry,{w:600,size:28,col:MD.ink});ctx.restore();}
   ctx.restore();return bb;}
 
 /* ---------------------------------------------------------------- BI tools of the past */
@@ -2259,7 +2264,7 @@ scene("three",(ctx,S,t,sc)=>{
 /* ---------------------------------------------------------------- 3 · Its owner, its words, its rules */
 scene("once",(ctx,S,t,sc)=>{
   const T={like:wAt(sc,"like","Like"),onedef:wAt(sc,"like","one definition"),sept:wAt(sc,"sept","September"),rohan:wAt(sc,"sept","Rohan"),jun:wAt(sc,"sept","Jun"),
-    owner:wAt(sc,"owner","owner"),approves:wAt(sc,"owner","approves"),words:wAt(sc,"words","words"),also:wAt(sc,"words","Also called"),rules:wAt(sc,"rules","claims approved"),
+    owner:wAt(sc,"owner","owner"),words:wAt(sc,"words","words"),also:wAt(sc,"words","Also called"),rules:wAt(sc,"rules","claims approved"),
     casual:wAt(sc,"rules","by casual staff"),teach:wAt(sc,"rules","for teaching"),oncost:wAt(sc,"rules","plus on costs"),counted:wAt(sc,"period","Counted"),
     claims:wAt(sc,"ingrid","The claims"),ingrid:wAt(sc,"ingrid","Ingrid"),names:wAt(sc,"names","names"),hours:wAt(sc,"names","casual hours contracted"),paid:wAt(sc,"names","casual pay paid")};
   ag_shots(ctx,S,t,sc.dur,[
@@ -2296,7 +2301,7 @@ scene("near",(ctx,S,t,sc)=>{
   const T={mv:wAt(sc,"home","metric view"),uc:wAt(sc,"home","Unity Catalog"),beside:wAt(sc,"home","beside"),holds:wAt(sc,"view","holds"),how:wAt(sc,"view","however"),
     fac:wAt(sc,"view","by faculty"),unit:wAt(sc,"view","unit"),per:wAt(sc,"view","teaching period"),gov:wAt(sc,"gov","governs"),who:wAt(sc,"gov","who may read"),what:wAt(sc,"gov","what reads"),
     every:wAt(sc,"every","every tool"),jun:wAt(sc,"yaml","Jun"),yaml:wAt(sc,"yaml","YAML"),builds:wAt(sc,"yaml","which builds"),meaning:wAt(sc,"yaml","as Meaning"),
-    rohan:wAt(sc,"review","Rohan"),pr:wAt(sc,"review","pull request"),noor:wAt(sc,"review","Noor"),prod:wAt(sc,"review","the change to production"),
+    pr:wAt(sc,"review","pull request"),noor:wAt(sc,"review","Noor"),prod:wAt(sc,"review","for production"),told:wAt(sc,"told","is told"),
     words:wAt(sc,"meta","Its words"),name:wAt(sc,"meta","a name to show"),desc:wAt(sc,"meta","a description"),syn:wAt(sc,"meta","synonyms"),fmt:wAt(sc,"meta","its format")};
   ag_shots(ctx,S,t,sc.dur,[
     // the platform: the fact and the metric view side by side in Unity Catalog; grouped any way; governed; read by every tool
@@ -2312,13 +2317,13 @@ scene("near",(ctx,S,t,sc)=>{
       // what reads it: every tool on the platform
       [["SQL editor","query"],["Dashboard","table"],["Genie","eye"],["Alert","warn"]].forEach(([nm,ic],i)=>{const k=ag_in(tt,(i===0?T.what:T.every)+i*0.3-0.3,0.4);if(k<=0)return;const y=170+i*170;
         md_lane(c,md_curve(m.r,[1330,y+42],{bend:0.6}),MD.flow,0.6*k,{u:ag_sine(clamp(k*1.2,0,1))});md_reader(c,1330,y,500,{title:nm,icon:ic,a:k,lit:ag_in(tt,T.every+i*0.3,0.3)*(1-ag_in(tt,T.every+i*0.3+0.6,0.4))});});}},
-    // the definition as code, in the data project; reviewed for its meaning and for production; its words go with it
+    // the definition as code, in the data project; the data team reviews it, Noor approves it for production, and Rohan is told; its words go with it
     {at:T.jun-0.15,cut:true,place:"night",keys:[[0,960,540,1]],push:0.02,draw:(c,tt)=>{
       md_window(c,90,80,1100,800,{logo:"dbt",product:"dbt",title:"models/marts/finance/casual_teaching_cost.sql",a:ag_in(tt,T.jun,0.5),k:dn_k(tt,T.jun),draw:(cc,b)=>{
         const W=DN_YAML_WORDS,lit=i=>i<W?0:ag_in(tt,[T.name,T.desc,T.syn,T.fmt][i-W],0.4),dim=ag_in(tt,T.words,0.5);
         dn_code(cc,b.x+20,b.y+44,DN_YAML.map(([s,ind],i)=>({s,ind,k:clamp((tt-T.yaml+0.3-i*0.14)/0.4,0,1),lit:lit(i),dim:i<W?dim:dim*(1-lit(i))})),{lh:36,size:28});}});
       dn_card(c,1250,620,600,[{s:"as Meaning on the platform",size:30,w:700},{s:"built awards conferred",size:30,w:700}],{a:dn_io(tt,T.meaning,T.words-0.3,0.5,0.4),k:dn_k(tt,T.meaning)});
-      dn_pr(c,1250,190,600,{a:ag_in(tt,T.pr-0.2,0.5),k:dn_k(tt,T.pr-0.2),ok:[clamp((tt-T.pr-0.7)/0.6,0,1),clamp((tt-T.prod-0.3)/0.6,0,1)]});}}
+      dn_pr(c,1250,190,600,{a:ag_in(tt,T.pr-0.2,0.5),k:dn_k(tt,T.pr-0.2),ok:[clamp((tt-T.pr-0.7)/0.6,0,1),clamp((tt-T.prod-0.3)/0.6,0,1)],told:clamp((tt-T.told-0.1)/0.6,0,1)});}}
   ],0.5);
 });
 

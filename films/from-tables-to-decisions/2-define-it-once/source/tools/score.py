@@ -261,8 +261,8 @@ reed(G4, ow('names', 'casual pay paid', 0.05), 0.4, 0.55, px(1210))
 
 # 4. Near the data, built as code: the platform comes up, low C and E at the turn; the metric view and the fact beside it, each set
 #    down; grouped by faculty, unit and teaching period; Finance's lock; every tool reads it, a short line; the data project's window,
-#    its YAML typed; built as Meaning built awards conferred; the pull request, Rohan's approval and Noor's, a line that settles; its
-#    words, each line lit
+#    its YAML typed; built as Meaning built awards conferred; the pull request, the data team's approval and Noor's, and a line that
+#    settles as Rohan is told; its words, each line lit
 nw = lambda lid, word, off=0: W('near', lid, word, off)
 n0 = S0('near')
 air(n0 + 0.2, 0.9, 0.007, px(650), 150, 800)
@@ -280,8 +280,8 @@ keys(nw('yaml', 'YAML', -0.2), 8, 2.4, 0.006, px(640))
 knock(nw('yaml', 'as Meaning', 0.0), 0.011, px(1550), 240)
 knock(nw('review', 'pull request', -0.2), 0.012, px(1550), 230)
 tap(nw('review', 'pull request', 0.75), 0.008, px(1550))
-tap(nw('review', 'the change to production', 0.35), 0.008, px(1550))
-line(((E4, 0.0, 0.25), (G4, 0.3, 0.25), (C5, 0.6, 0.5)), nw('review', 'the change to production', 0.4), 0.6, px(1550))
+tap(nw('review', 'for production', 0.35), 0.008, px(1550))
+line(((E4, 0.0, 0.25), (G4, 0.3, 0.25), (C5, 0.6, 0.5)), nw('told', 'is told', 0.1), 0.6, px(1550))
 for word in ('a name to show', 'a description', 'synonyms', 'its format'):
     tap(nw('meta', word, 0.0), 0.007, px(640))
 

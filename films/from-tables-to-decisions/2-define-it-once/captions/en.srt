@@ -99,133 +99,137 @@ Like the kilogram, it needed one definition that no single tool held.
 In September, Rohan defined it once, with Jun Park, who builds the data project.
 
 26
-00:03:15,352 --> 00:03:20,164
-Its owner is Rohan: he decides what it means, and approves every change to it.
+00:03:15,352 --> 00:03:20,328
+Its owner is Rohan: he decides what it means, in the glossary, before any code.
 
 27
-00:03:21,464 --> 00:03:27,524
+00:03:21,628 --> 00:03:27,688
 Its words: what the casual teaching in a teaching period costs. Also called sessional teaching cost.
 
 28
-00:03:28,824 --> 00:03:36,625
+00:03:28,988 --> 00:03:36,789
 Its rules: claims approved, by casual staff, for teaching: tutorials, marking and consultation, plus on-costs.
 
 29
-00:03:37,925 --> 00:03:42,333
+00:03:38,089 --> 00:03:42,497
 Counted by the teaching period the teaching was done in, not the day it was paid.
 
 30
-00:03:43,833 --> 00:03:49,010
+00:03:43,997 --> 00:03:49,174
 The claims are HR's data: Ingrid Holm answers for what each of their fields means.
 
 31
-00:03:50,310 --> 00:03:58,174
+00:03:50,474 --> 00:03:58,338
 And the other two numbers get names of their own: casual hours contracted, for planning, and casual pay paid, for each pay day.
 
 32
-00:04:01,474 --> 00:04:06,559
+00:04:01,638 --> 00:04:06,723
 Its home is a metric view in Unity Catalog, beside the tables it's counted from.
 
 33
-00:04:08,059 --> 00:04:16,539
+00:04:08,223 --> 00:04:16,703
 A metric view holds a measure's definition once, and works out the right number however it's grouped: by faculty, unit or teaching period.
 
 34
-00:04:18,239 --> 00:04:22,724
+00:04:18,403 --> 00:04:22,888
 Unity Catalog governs it like a table: who may read it, and what reads it.
 
 35
-00:04:24,024 --> 00:04:26,569
+00:04:24,188 --> 00:04:26,733
 So every tool on the platform reads this one.
 
 36
-00:04:28,269 --> 00:04:36,009
+00:04:28,433 --> 00:04:36,173
 Jun writes it as a few lines of YAML in the data project, which builds it, as Meaning on the platform built awards conferred.
 
 37
-00:04:37,509 --> 00:04:44,838
-Rohan approves its meaning in a pull request, and Noor Rahman, the data architect, approves the change to production.
+00:04:37,673 --> 00:04:44,740
+The data team reviews the code in a pull request, and Noor Rahman, the data architect, approves it for production.
 
 38
-00:04:46,538 --> 00:04:53,555
-Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars.
+00:04:46,440 --> 00:04:49,916
+Rohan, the measure's owner, is told what the change touches.
 
 39
-00:04:57,055 --> 00:05:03,647
-None of this is new: for decades, BI tools have kept a layer of business definitions over the tables.
+00:04:50,616 --> 00:04:57,633
+Its words go with it: a name to show, a description, synonyms for Genie, and its format, in Australian dollars.
 
 40
-00:05:05,147 --> 00:05:11,587
-But each kept them in its own format, so no other tool could read them, and a new tool meant writing them all again.
+00:05:01,133 --> 00:05:07,725
+None of this is new: for decades, BI tools have kept a layer of business definitions over the tables.
 
 41
-00:05:13,287 --> 00:05:19,895
-dbt has a semantic layer too, MetricFlow, which reads measures defined in the project's YAML.
+00:05:09,225 --> 00:05:15,665
+But each kept them in its own format, so no other tool could read them, and a new tool meant writing them all again.
 
 42
-00:05:21,395 --> 00:05:26,072
-Planning counts learners near a graduate certificate with it, in the same project.
+00:05:17,365 --> 00:05:23,973
+dbt has a semantic layer too, MetricFlow, which reads measures defined in the project's YAML.
 
 43
-00:05:27,572 --> 00:05:31,235
-MetricFlow is open source, so other tools can build on it.
+00:05:25,473 --> 00:05:30,150
+Planning counts learners near a graduate certificate with it, in the same project.
 
 44
-00:05:32,735 --> 00:05:38,828
-Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice.
+00:05:31,650 --> 00:05:35,313
+MetricFlow is open source, so other tools can build on it.
 
 45
-00:05:42,528 --> 00:05:47,781
-For tools to read each other's definitions, they need a common format: Apache Ossie.
+00:05:36,813 --> 00:05:42,906
+Either can be a measure's home. Choose one for each, near most of its readers, and never define it twice.
 
 46
-00:05:49,081 --> 00:05:58,186
-It began as the Open Semantic Interchange, and more than fifty organisations now stand behind it, Databricks and dbt Labs among them.
+00:05:46,606 --> 00:05:51,859
+For tools to read each other's definitions, they need a common format: Apache Ossie.
 
 47
-00:05:59,686 --> 00:06:07,485
-Converters translate a definition between Ossie and each tool's own format: a metric view, MetricFlow, and many others.
+00:05:53,159 --> 00:06:02,264
+It began as the Open Semantic Interchange, and more than fifty organisations now stand behind it, Databricks and dbt Labs among them.
 
 48
-00:06:08,985 --> 00:06:16,734
-dbt writes the project's measures in Ossie each time it reads the project, and it reads Ossie definitions too.
+00:06:03,764 --> 00:06:11,563
+Converters translate a definition between Ossie and each tool's own format: a metric view, MetricFlow, and many others.
 
 49
-00:06:18,234 --> 00:06:25,678
-So casual teaching cost can go to any tool that reads Ossie, with its words and its rules, and nobody types it again.
+00:06:13,063 --> 00:06:20,812
+dbt writes the project's measures in Ossie each time it reads the project, and it reads Ossie definitions too.
 
 50
-00:06:27,178 --> 00:06:30,206
-Keep each rule inside the measure, so it travels with it.
+00:06:22,312 --> 00:06:29,756
+So casual teaching cost can go to any tool that reads Ossie, with its words and its rules, and nobody types it again.
 
 51
-00:06:31,706 --> 00:06:34,996
-And check what arrives: a converter says what it can't carry.
+00:06:31,256 --> 00:06:34,284
+Keep each rule inside the measure, so it travels with it.
 
 52
-00:06:38,296 --> 00:06:41,334
-Today, Thursday the fifth of November, is pay day.
+00:06:35,784 --> 00:06:39,074
+And check what arrives: a converter says what it can't carry.
 
 53
-00:06:42,634 --> 00:06:50,620
-Rohan asks Genie One what casual teaching has cost Health this semester so far: 1.84 million dollars.
+00:06:42,374 --> 00:06:45,412
+Today, Thursday the fifth of November, is pay day.
 
 54
-00:06:52,120 --> 00:06:56,638
-The fortnightly dashboard's Ask Genie gives the same, from the same definition.
+00:06:46,712 --> 00:06:54,698
+Rohan asks Genie One what casual teaching has cost Health this semester so far: 1.84 million dollars.
 
 55
-00:06:57,938 --> 00:07:04,385
-Last semester's is 2.21 million, with the other two numbers beside it, each under its own name.
+00:06:56,198 --> 00:07:00,716
+The fortnightly dashboard's Ask Genie gives the same, from the same definition.
 
 56
-00:07:05,885 --> 00:07:10,806
-Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it.
+00:07:02,016 --> 00:07:08,463
+Last semester's is 2.21 million, with the other two numbers beside it, each under its own name.
 
 57
-00:07:12,306 --> 00:07:19,872
-Like the kilogram, casual teaching cost is one definition, written where anyone can read it, and held by no single tool.
+00:07:09,963 --> 00:07:14,884
+Rohan sets Health's budget for next year on the cost, with every tutorial's tutor in it.
 
 58
-00:07:21,772 --> 00:07:29,835
+00:07:16,384 --> 00:07:23,950
+Like the kilogram, casual teaching cost is one definition, written where anyone can read it, and held by no single tool.
+
+59
+00:07:25,850 --> 00:07:33,913
 The standards already exist, so don't reinvent them: investigate, adapt, implement, iterate, starting from the official docs.

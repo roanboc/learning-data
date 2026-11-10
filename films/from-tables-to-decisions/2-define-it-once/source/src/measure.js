@@ -8,7 +8,7 @@
      dn_def      the definition of casual teaching cost: its owner, its words, its rules, filling in a part at a time
      dn_named    a smaller gold card: one of the other two counts, under a name of its own
      dn_code     lines of code in IBM Plex Mono, each coming in, lit gold or dimmed
-     dn_pr       a pull request with its two approvals
+     dn_pr       a pull request: the data team's review, Noor's approval for production, and its owner told
      dn_bi       a BI tool of the past, its definitions in marks of its own that no other tool reads
      dn_home     one of a measure's two homes: a metric view in Unity Catalog, or MetricFlow in dbt
      dn_hub      Apache Ossie in the middle, its converters on the spokes to each tool's own format
@@ -50,7 +50,7 @@ function dn_budget(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retu
     if(o.empty>0)md_T(ctx,"no money for a tutor",tx+228,ty+74+42,{w:700,size:28,col:MD.fail,a:ag_in(o.empty,0.3,0.5)});}
   ctx.restore();}
 
-/* ---------------------------------------------------------------- the definition, defined once */
+/* ---------------------------------------------------------------- the definition, defined once, in the glossary, before any code */
 // at (x, y), 860 wide: o.n (0 to 9) how many of its parts have come in: owner, words, also called, the three rules, on-costs, and
 // the period (two lines); o.a, o.k, o.empty (0 to 1: only its outline, dashed, as it waits for its words); returns its box
 const DN_DEF=[{h:"owner"},{s:"Rohan Desai, Finance"},{h:"words"},{s:"what the casual teaching in a teaching period costs"},{s:"also called: sessional teaching cost",col:MD.soft},
@@ -61,7 +61,7 @@ const DN_DEF_PART=[1,1,2,2,3,4,4,5,6,7,8,8];
 function dn_def(ctx,x,y,o){o=o||{};const n=o.n||0,w=o.w||860,lines=[{s:"casual teaching cost",size:40,w:800,lh:54}];
   DN_DEF.forEach((d,i)=>{const k=clamp(n-DN_DEF_PART[i]+1,0,1);lines.push(d.h?{s:d.h.toUpperCase(),size:28,w:800,col:MD.agreed,k,lh:37}:{s:d.s,size:30,w:600,col:d.col,k,lh:39});});
   if(o.empty>0){const ea=clamp(o.empty,0,1);ctx.save();ctx.globalAlpha*=ea*(o.a==null?1:o.a);md_card(ctx,x,y,w,o.emptyH||150,{edge:MD.agreed,dash:[12,10]});ctx.restore();if(ea>=1)return{x,y,w,h:150};}
-  return dn_card(ctx,x,y,w,lines,{edge:MD.agreed,kick:"measure",kickCol:MD.agreed,a:o.a,k:o.k});}
+  return dn_card(ctx,x,y,w,lines,{edge:MD.agreed,kick:"glossary",kickCol:MD.agreed,a:o.a,k:o.k});}
 // one of the other counts, under a name of its own: a smaller gold card
 function dn_named(ctx,x,y,w,title,sub,o){o=o||{};return md_textCard(ctx,x,y,w,{title,sub},{edge:MD.agreed,a:o.a,k:o.k,glow:0.6});}
 
@@ -73,16 +73,20 @@ function dn_code(ctx,x,y,lines,o){o=o||{};const lh=o.lh||44,size=o.size||30,cw=m
       ctx.strokeStyle=rgba(MD.agreed,0.7);ctx.lineWidth=1.6;rr(ctx,lx-10,by-size*0.92,tw+20,size*1.32,8);ctx.stroke();ctx.restore();}
     md_T(ctx,l.s,lx,by,{w:500,size,f:"mono",col:lit>0.5?MD.agreed:(l.col||MD.ink),a:k*(1-0.6*dm)});});}
 
-/* ---------------------------------------------------------------- a pull request, and its two approvals */
-// at (x, y), w wide: o.ok [meaning, production] (0 to 1 each: amber, waiting, to green, given); o.a, o.k; returns its box
-function dn_pr(ctx,x,y,w,o){o=o||{};const ok=o.ok||[0,0],h=296,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
+/* ---------------------------------------------------------------- a pull request, reviewed by the data team */
+// at (x, y), w wide: o.ok [the code, production] (0 to 1 each: amber, waiting, to green, given): the data team reviews the code and
+// Noor approves it for production; o.told (0 to 1): its owner is told what it touches, in his side's colour, a note and never an
+// approval, since owners and stewards don't review pull requests (the author, 10 November 2026); o.a, o.k; returns its box
+function dn_pr(ctx,x,y,w,o){o=o||{};const ok=o.ok||[0,0],told=clamp(o.told||0,0,1),h=350,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));md_card(ctx,x,y,w,h,{edge:MD.flow,glow:0.5});
   md_T(ctx,"PULL REQUEST",x+MD_PAD,y+MD_PAD+24,{w:800,size:28,ls:4,col:MD.flow});md_T(ctx,"Finance: casual teaching cost,",x+MD_PAD,y+MD_PAD+76,{w:700,size:32});
   md_T(ctx,"defined once",x+MD_PAD,y+MD_PAD+116,{w:700,size:32});
-  [["Rohan Desai · meaning",ok[0]],["Noor Rahman · production",ok[1]]].forEach(([s,k],i)=>{const ry=y+MD_PAD+176+i*54,col=mix(MD.wait,MD.pass,ag_sine(clamp(k,0,1)));
-    ctx.save();ctx.fillStyle=rgba(col,0.18);ctx.beginPath();ctx.arc(x+MD_PAD+20,ry-10,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  const dot=(ry,col)=>{ctx.save();ctx.fillStyle=rgba(col,0.18);ctx.beginPath();ctx.arc(x+MD_PAD+20,ry-10,20,0,TAU);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;ctx.stroke();ctx.restore();};
+  [["Data team · the code",ok[0]],["Noor Rahman · production",ok[1]]].forEach(([s,k],i)=>{const ry=y+MD_PAD+176+i*54,col=mix(MD.wait,MD.pass,ag_sine(clamp(k,0,1)));dot(ry,col);
     md_icon(ctx,"clock",x+MD_PAD+20,ry-10,26,MD.wait,{a:1-ag_in(k,0,0.4)});md_icon(ctx,"tick",x+MD_PAD+20,ry-10,26,MD.pass,{a:ag_in(k,0,0.4)});
     md_T(ctx,s,x+MD_PAD+56,ry,{w:600,size:28,col:k>0.5?MD.ink:MD.soft});});
+  const ta=ag_in(told,0,0.6);if(ta>0){const ry=y+MD_PAD+176+2*54;ctx.save();ctx.globalAlpha*=ta;dot(ry,MD.dom.finance);
+    md_icon(ctx,"doc",x+MD_PAD+20,ry-10,26,MD.dom.finance);md_T(ctx,"Rohan Desai · told what it touches",x+MD_PAD+56,ry,{w:600,size:28,col:MD.ink});ctx.restore();}
   ctx.restore();return bb;}
 
 /* ---------------------------------------------------------------- BI tools of the past */

@@ -49,3 +49,8 @@ entities:
       - Counted by the teaching period the teaching was done in, not the day it was paid.
       - Two other counts have names of their own, casual hours contracted (the hours the contracts allow, for planning) and casual pay paid (the pay paid on each pay day).
     history: As the claims stand now. A claim approved late changes its teaching period's cost (LIM-FIN-04).
+    source:
+      glossary: the university's Unity Catalog Glossary, on Databricks
+      term: Casual teaching cost
+      named_by: data governance
+      synced_on: 2026-09-15

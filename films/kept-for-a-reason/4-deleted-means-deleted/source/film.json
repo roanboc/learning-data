@@ -1,0 +1,32 @@
+{
+  "key": "deleted-means-deleted",
+  "title": "Deleted means deleted",
+  "sub": "Film 4 of 5 of Kept for a reason, the third series of Data protection and privacy: in Kanesh, about 1900 BC, a paid debt's tablet was broken, or made void by a sealed receipt wherever it turned up. A delete in a table is that receipt: Linh's row on the tutors' mailing list, deleted by the nightly job, still sits in the table's old files for seven days, in a send log that only adds rows, in the mailing tool, in locked copies for thirty days, in a cold archive for years, and in what people type. Each copy gets a date, and a way to know it went.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted glass panes, frosted where what's behind may not be read and clear where it may. Cyan is an identity (the deletion job's badge, the agent), green what's done, coral what's denied or closed, violet personal data that's hidden or held out of use. A table's files are drawn as small tablets of glass. Kanesh, about 1900 BC, is painted by lamplight; its people are never drawn. Where the voice names Databricks, dbt, GitHub or Azure, its official logo stands beside the name.",
+  "src": [
+    "dd_kanesh.js",
+    "dd_platform.js",
+    "scenes.js"
+  ],
+  "logos": true,
+  "poster": [
+    "receipt",
+    "seven",
+    1.0
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"],
+    ["\\bNguyen\\b", "Win"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bKanesh\\b", "Kaanesh"],
+    ["\\bAshur\\b", "Ahshoor"]
+  ],
+  "story": [
+    "tablet",
+    "void"
+  ],
+  "urgent": []
+}

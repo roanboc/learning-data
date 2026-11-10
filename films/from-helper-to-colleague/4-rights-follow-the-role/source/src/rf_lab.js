@@ -90,7 +90,7 @@ function rf_rows(ctx,x,y,w,head,rows,o){o=o||{};const a=o.a==null?1:o.a,pad=28,l
    col [7] each box's colour (null: none), ek [7] how much of that colour its edge and words take (0 to 1, so a colour comes in, never
    switches), lit [7] how lit (0 to 1), dim [7], roles (0 to 1), who [7] (0 to 1), bracket (0 to 1); returns each box */
 const RF_STEPS=[{n:"Raise a ticket",role:"requester",who:"Clara"},{n:"Draft the change",pc:1},{n:"Build it in development",pc:1},{n:"Open a pull request",pc:1},
-  {n:"Review the code",role:"analytics engineer",who:"Jun"},{n:"Approve the change",role:"product owner",who:"Clara"},{n:"Release to production",role:"release approver",who:"Noor"}];
+  {n:"Review the code",role:"analytics engineer",who:"Jun"},{n:"Approve the change",role:"release approver",who:"Noor"},{n:"Release to production",role:"release approver",who:"Noor"}];
 function rf_box(i){const C=RL.chain;return{x:C.x+i*(C.w+C.gap),y:C.y,w:C.w,h:C.h,cx:C.x+i*(C.w+C.gap)+C.w/2};}
 function rf_chain(ctx,o){o=o||{};const C=RL.chain,A=o.a==null?1:o.a,g=(v,i,d)=>v==null?d:(Array.isArray(v)?(v[i]==null?d:v[i]):v),out=[];if(A<=0)return RF_STEPS.map((_,i)=>rf_box(i));
   ctx.save();ctx.globalAlpha*=A;

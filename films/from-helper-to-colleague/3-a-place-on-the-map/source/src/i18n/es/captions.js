@@ -81,8 +81,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Cada paso se asigna a un rol, sin importar quién lo ocupe: una persona o un agente.",
 "One new role, planning contributor, drafts the change, builds it in development, and opens a pull request.":
 "Un rol nuevo, colaborador de Planificación, redacta el cambio, lo construye en desarrollo y abre un pull request.",
-"People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production.":
-"Las personas conservan el resto. Jun revisa el código, Clara aprueba el cambio y Noor lo libera a producción.",
+"People keep the rest. Clara raises the ticket, Jun reviews the code, and Noor approves the change and releases it.":
+"Las personas conservan el resto. Clara abre el ticket, Jun revisa el código, y Noor aprueba el cambio y lo libera.",
 "So whoever drafts a change never approves or releases it: separation of duties, on the map.":
 "Así, quien redacta un cambio nunca lo aprueba ni lo libera: separación de funciones, en el mapa.",
 "Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place.":
@@ -105,8 +105,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Su etapa para cada tipo de tarea quedó escrita en su asignación.",
 "Now the map holds three agents, each with a role and an owner.":
 "Ahora el mapa tiene tres agentes, cada uno con un rol y un dueño.",
-"The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them.":
-"El tercero, el agente de revisión de gobernanza de Yusuf, ya estaba: revisa pull requests y nunca los aprueba.",
+"The third, Yusuf's governance review agent, was already there: it checks pull requests against the glossary, and never approves them.":
+"El tercero, el agente de revisión de gobernanza de Yusuf, ya estaba: contrasta los pull requests con el glosario y nunca los aprueba.",
 "One thing came before it worked alone: its gate.":
 "Antes de trabajar solo, tuvo que pasar por su puerta.",
 "The week before, in a sandbox, where nothing it did could reach anyone, it redid Planning's last forty tickets.":

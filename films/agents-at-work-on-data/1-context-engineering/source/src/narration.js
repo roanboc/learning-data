@@ -61,9 +61,9 @@ const NARR={
 "team":{"name":"One context for the team","lead":1.0,"tail":1.0,"vo":[
  {"id":"before","gap":0.8,"text":"Until now, each person on the team wired up their own agent, with notes of their own."},
  {"id":"masters","gap":0.8,"text":"Like the chant books named after their masters, each agent was its owner's: what one was told, no other knew."},
- {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project, reviewed like code, with an owner for every meaning."},
+ {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project: the data team reviews it like code, and every meaning has an owner."},
  {"id":"same","gap":0.8,"text":"Every agent, and every person, reads the same page."},
- {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, and everyone reads the new one."}
+ {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, in the glossary, and everyone reads the new one."}
 ]},
 "verse":{"name":"A verse never heard","lead":1.0,"tail":1.0,"vo":[
  {"id":"again","gap":0.8,"text":"Jun asks his agent again."},

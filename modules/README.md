@@ -88,6 +88,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 

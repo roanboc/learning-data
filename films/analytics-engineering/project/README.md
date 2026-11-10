@@ -241,6 +241,9 @@ project/
 ├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
 │                             a model, reconcile and diff, review metadata, sync the glossary,
 │                             review for governance; and choose-the-skill, which picks one
+├── databricks.yml            the bundle: the project's jobs, deployed the same way to test and to
+│                             production, after a review and Noor's approval (Databricks only)
+├── resources/                a file for each job the bundle deploys: payroll's export
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
@@ -257,6 +260,7 @@ project/
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
 | *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the award's definition taken from the business glossary (`source:`, `skills/sync-the-glossary/`), the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Scripts became software* | Payroll's export: `mart_finance__casual_pay_paid`, on the claims' core (`core_claim`), with its unit test of the Monday-noon close (approved at 11:59 and at 12:01); `pay_day_for()` on HR's calendar of pay days (`seeds/reference/staff/pay_days.csv`) and the units seed; the bundle, `databricks.yml` and `resources/payroll_export.job.yml`; and, in `examples/scripts-became-software/`, the release workflow and the laptop script it replaced |
 
 ## What differs between engines
 
@@ -333,3 +337,19 @@ dbt ls --select core_credential+ --resource-type exposure --profiles-dir .
 A consumer still on version 1, such as a model that selects
 `credential_key, is_revoked from {{ ref('core_credential', v=1) }}`, gets dbt's warning on every
 parse: version 1 is slated for deprecation, and version 2 is available.
+
+## Its jobs, deployed as a bundle
+
+The project's jobs are files too. `databricks.yml` is a Declarative Automation Bundle (formerly
+Databricks Asset Bundles), and `resources/` holds a file for each job, such as payroll's export,
+which runs every Thursday at 06:00, Sydney time. Nobody deploys them to test or production from a
+laptop: once a pull request is reviewed and merged, a release workflow deploys the same files to
+test and runs them there, then deploys them to production when Noor approves (DEC-PRJ-16).
+`examples/scripts-became-software/` has the workflow, the script the export replaced, and the road
+step by step. To try a change in a copy of your own, its names prefixed and its schedules paused:
+
+```sh
+databricks bundle validate -t dev
+databricks bundle deploy -t dev
+databricks bundle run -t dev payroll_export
+```

@@ -71,12 +71,13 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
 - [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
+- [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 
 ### Data as software
 
 Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-as-software/`
 
-No film source yet.
+- [Scripts became software](../films/data-as-software/1-scripts-became-software/) — `scripts-became-software`
 
 ### From tables to decisions
 
@@ -266,13 +267,14 @@ No film source yet.
 
 Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal: `/only-what-you-may-see/`
 
-No film source yet.
+- [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
 
 ### Kept for a reason
 
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
 
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
+- [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 
 ## AI agents in data work
 

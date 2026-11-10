@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/teachers-of-data/soundtrack.mp3",
+      "size": 6084432,
+      "sha256": "3d4d315c2c337c165b00b07aa2d8a80f444779c97f90d3ad51b571fbcb714740",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/3d4d315c2c337c165b00b07aa2d8a80f444779c97f90d3ad51b571fbcb714740.mp3"
+    }
+  ]
+}

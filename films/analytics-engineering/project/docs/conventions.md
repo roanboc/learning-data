@@ -239,7 +239,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 - `meta.domain`: the domain that owns the model, seed or source: `registrar`, `learning`, `hr`, `research` or `alumni` (application domains: the teams whose systems are the sources), `person`, `student` or `course` (data domains), `planning`, `wallet` or `finance` (business domains), or `shared`.
 - `meta.glossary_term`: the term in the domain's conceptual model a model or key holds.
 - `meta.limitations` on a model or a source table: what anyone using it needs to know and can't change, as `[{id: LIM-<SCOPE>-<nn>, text}]`, with `was:` naming the gap it came from, if any. An accepted gap ends here, with the decision that accepted it in the scope's log.
-- `meta.personal_data` on every column of a public model or mart: `direct` (identifies a person: name, email, student ID, or a key that contains one), `pseudonymous` (a hash of one) or `none` (identifies no one). Elsewhere, a column with neither holds no personal data.
+- `meta.personal_data` on every column of a public model or mart, the strictest that applies: `special` (could harm a person if it got out: health, disability, faith), `direct` (identifies a person: name, email, student ID, or a key that contains one), `pseudonymous` (a hash of one, or a code that leads back only with a key kept elsewhere), `indirect` (names no one alone, but with other columns can single one person out: a date of birth, a home postcode) or `none` (identifies no one). On Databricks, `none` is no tag (DEC-PRJ-17). Elsewhere, a column with neither holds no personal data. A model's `meta.level` (`public`, `internal`, `confidential` or `restricted`) is its table's level, by folder in `dbt_project.yml` unless the model says another.
 - A description used in more than one place is a doc block, written once, in the folder of the domain that owns it (`_<domain>__columns.md`), or in `models/_shared/_shared__columns.md` when every domain shares it. A definition is written once, in the domain's conceptual model, or taken from the glossary term it names in `source:`.
 
 ### Definitions from the business glossary
@@ -263,7 +263,7 @@ models and the marts.
 |---|---|---|
 | An owner | `owner:` on every domain, entity, kind and relationship; `meta.owner` and `meta.domain` on every public model and mart | The map (`_shared__conceptual.yml`), each domain's conceptual model, the model's YAML |
 | A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
-| Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
+| Classified columns | `meta.personal_data`: `special`, `direct`, `pseudonymous`, `indirect` or `none` | Each column of a public model or mart |
 | Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six; for accuracy, `meta.reference`: what it's checked against (*Which reference*) | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
 | Described columns | A `description` | Each column of a public model or mart. A warning until 1 December 2026, then an error |
 
@@ -305,7 +305,7 @@ class; and when the var `personal_data_readers` names a group, each column of di
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
-read a table, the access review, the product catalogue, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md`.
+read a table, the access review, the product catalogue, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md`.
 
 ### What each use needs
 

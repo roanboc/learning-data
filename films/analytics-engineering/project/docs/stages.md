@@ -15,7 +15,7 @@ until it passes the gate again.
 | 1. Suggests | Drafts code, tests and docs in a chat or an editor; runs nothing | The person's, but it uses none | None | Writes the work: accepts or rejects every line | The conventions and the glossary, written down as files the agent reads |
 | 2. Acts for you, step by step | Runs queries and commands in the person's session | The person's, delegated | Read-only tools only | Approves each action | A development environment, with samples and no sensitive or protected data |
 | 3. Acts for you, within limits | Works on a task alone, writing drafts only in a sandbox | The person's, narrowed | A short list of tools; read-only outside the sandbox | Checks the result against the checks set in the plan | What it may and may not do, written down; how it will be checked, defined before it starts ([`plan.md`](plan.md)); evidence with every claim |
-| 4. A contributor that proposes | Picks up a task (a ticket, a failing check) and opens a pull request from its own isolated environment | Its own, with no secret it can see | Its role's rights, set on the map; read-only on production; no sensitive data | Owns it, and reviews every change | On the map, with an owner and a role; the owner signs the confidentiality agreement and the responsibility for its data on its behalf; the rules for AI helpers; evaluations passed; audit on; never an admin account |
+| 4. A contributor that proposes | Picks up a task (a ticket, a failing check) and opens a pull request from its own isolated environment | Its own, with no secret it can see | Its role's rights, set on the map; read-only on production; no sensitive data | Owns it; the data team reviews it | On the map, with an owner and a role; the owner signs the confidentiality agreement and the responsibility for its data on its behalf; the rules for AI helpers; evaluations passed; audit on; never an admin account |
 | 5. A contributor with a mandate | In test, does agreed kinds of task alone and reports. In production it only finds the cause and drafts the fix, as at stage 4, so a kind of task in production is set at stage 4 at most; it never just reruns (a plain job does that) | Its own | Its role's rights and its mandate; still no writing to production | Reads its reports and its measures; another person approves every change to production, as for people's changes | A track record over a set time; a mandate, written and signed by its owner; a switch that stops it; every change can be undone |
 
 ## What never changes
@@ -66,7 +66,7 @@ Clara Jensen owns it. It works under its own name, since Monday 2 November 2026.
 
 | Kind of task | Where | Stage | What the person does |
 |---|---|---|---|
-| Planning's tickets: a change to Planning's marts | Its own branch and development schema | 4: proposes a pull request | Clara says what Planning needs; Jun reviews the code, and a word's owner any meaning it touches (Mei for students, HR for staff); Noor approves the change to production |
+| Planning's tickets: a change to Planning's marts | Its own branch and development schema | 4: proposes a pull request | Clara says what Planning needs; a meaning it touches is decided first in the glossary, by the word's owner (Mei for students, HR for staff); Jun reviews the code; Noor approves the change to production |
 
 Before it, Jun's helper drafted these tickets on Jun's own sign-in, at stages 1 to 3.
 

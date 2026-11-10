@@ -1,0 +1,82 @@
+{
+  "draft": true,
+  "kicker": "Deleting every copy",
+  "kicker_es": "Borrar cada copia",
+  "title_es": "Borrado es borrado",
+  "h1": "Deleted means deleted: every copy, on its date",
+  "h1_es": "Borrado es borrado: cada copia, en su fecha",
+  "lead": "Linh asked to come off the tutors' mailing list. One night's job deleted her row, but the table kept old versions, a send log kept her number, the mailing tool had its own list, and locked copies held her for a month. Where does each copy live, and when does the last one go?",
+  "lead_es": "Linh pidió salir de la lista de correo de tutores. Un trabajo nocturno borró su fila, pero la tabla guardaba versiones antiguas, el registro de envíos tenía su número, la herramienta de correo su propia lista y las copias bloqueadas la guardaron un mes. ¿Dónde vive cada copia y cuándo se va la última?",
+  "description": "A film about deleting a person's data so that it stays deleted: Kanesh, in Anatolia, about 1900 BC, where a loan of silver was written on a clay tablet that the lender kept, and a paid debt's tablet could turn up years later and be used to claim the silver again, until the merchants broke a paid tablet, or, when it was out of reach in Ashur, sealed a receipt that made it void wherever it turned up; at the university, Linh's row on the tutors' mailing list, deleted by a nightly job that names only the request, while the table's history records the delete like a receipt; the old files kept seven days so a mistake can be undone, a purge where a delete only marks the row, and VACUUM; her no kept on her record in HR's system, where the list is made from, and a send log that only adds rows given its own delete; lineage and tags that show every copy, the mailing tool and its backups, and locked copies that nobody can delete early, kept out of use until each goes, with every answered request applied again on a restore; pay records kept seven years in the archive tier, grouped by the year each contract ended, so each January a year is deleted whole; and copies in what people type: the query history, agents' traces and the gateway's tables, and the ticket.",
+  "description_es": "Una película sobre borrar los datos de una persona para que sigan borrados: Kanesh, en Anatolia, hacia 1900 a. C., donde un préstamo de plata se escribía en una tablilla de arcilla que guardaba el prestamista, y la tablilla de una deuda pagada podía aparecer años después y servir para reclamar la plata otra vez, hasta que los mercaderes rompían la tablilla pagada o, si estaba lejos, en Asur, sellaban un recibo que la anulaba dondequiera que apareciera; en la universidad, la fila de Linh en la lista de correo de tutores, borrada por un trabajo nocturno que solo nombra la petición, mientras el historial de la tabla registra el borrado como un recibo; los archivos viejos guardados siete días para poder deshacer un error, una purga donde borrar solo marca la fila, y VACUUM; su no guardado en su registro del sistema de RR. HH., de donde sale la lista, y un registro de envíos que solo añade filas con su propio borrado; el linaje y las etiquetas que muestran cada copia, la herramienta de correo y sus respaldos, y las copias bloqueadas que nadie puede borrar antes de tiempo, fuera de uso hasta que se va cada una, con cada petición respondida aplicada otra vez al restaurar; los registros de nómina guardados siete años en el nivel de archivo, agrupados por el año en que terminó cada contrato, para borrar cada enero un año entero; y las copias en lo que la gente escribe: el historial de consultas, las trazas de los agentes, las tablas del gateway y el ticket.",
+  "card": "A delete is only the receipt: old files, logs, archives and copies each need an end, and proof that it came.",
+  "card_es": "Borrar es solo el recibo: archivos viejos, logs, el archivo frío y las copias necesitan un final, y la prueba de que llegó.",
+  "chapters_es": {
+    "tablet": "La tablilla que aparece",
+    "void": "Rota, o nula",
+    "receipt": "Borrar escribe un recibo",
+    "source": "Borrar donde empieza",
+    "copies": "Cada copia",
+    "cold": "En frío, hasta su día",
+    "logs": "Fuera de los logs",
+    "gone": "Ya no está"
+  },
+  "past": [
+    "Kanesh's sealed receipts, about 1900 BC",
+    "A paid debt's tablet was broken, or a sealed receipt made it void wherever it turned up."
+  ],
+  "past_es": [
+    "Los recibos sellados de Kanesh, hacia 1900 a. C.",
+    "La tablilla de una deuda pagada se rompía, o un recibo sellado la anulaba dondequiera que apareciera."
+  ],
+  "next_h": "You've seen how a delete is only the receipt, and how every copy gets its own end and a way to know it went. Next: a person's request answered end to end, on time, with proof.",
+  "next_h_es": "Viste que borrar es solo el recibo, y cómo cada copia recibe su propio final y una forma de saber que se fue. Después: la petición de una persona respondida de principio a fin, a tiempo, con pruebas.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The platforms' own guides say it in their words: delete where the data starts, then clean up every old file, archive, trace and copy.",
+    "p_es": "Las guías de las propias plataformas lo dicen con sus palabras: borra donde empiezan los datos y luego limpia cada archivo viejo, archivo frío, traza y copia.",
+    "links": [
+      {
+        "title": "Prepare your data for GDPR compliance, Azure Databricks",
+        "title_es": "Prepare your data for GDPR compliance, Azure Databricks (en inglés)",
+        "line": "Delete at the start, from a scheduled job driven by a table of requests, then purge and VACUUM.",
+        "line_es": "Borra al principio, con un trabajo programado que lee una tabla de peticiones, y luego purga y VACUUM.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/privacy/gdpr-delta",
+        "href_es": "https://learn.microsoft.com/en-us/azure/databricks/security/privacy/gdpr-delta"
+      },
+      {
+        "title": "Deletion vectors, and VACUUM, Azure Databricks",
+        "title_es": "Deletion vectors y VACUUM, Azure Databricks (en inglés)",
+        "line": "Why a delete may only mark a row, and how old files are removed once their seven days are up.",
+        "line_es": "Por qué borrar puede solo marcar una fila, y cómo se quitan los archivos viejos cuando pasan sus siete días.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/delta/deletion-vectors",
+        "href_es": "https://learn.microsoft.com/en-us/azure/databricks/delta/deletion-vectors"
+      },
+      {
+        "title": "Access tiers for blob data, Azure Storage",
+        "title_es": "Access tiers for blob data, Azure Storage (en inglés)",
+        "line": "Hot, cool, cold and archive: why a file in the archive tier must be brought back before it can be read.",
+        "line_es": "Los niveles hot, cool, cold y archive: por qué un archivo en el nivel de archivo debe recuperarse antes de leerlo.",
+        "href": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
+        "href_es": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview"
+      },
+      {
+        "title": "Redacting sensitive data from traces, MLflow",
+        "title_es": "Redacting sensitive data from traces, MLflow (en inglés)",
+        "line": "Mask personal data in an agent's trace before it's saved, so it never leaves the application.",
+        "line_es": "Enmascara los datos personales en la traza de un agente antes de guardarla, para que nunca salgan de la aplicación.",
+        "href": "https://mlflow.org/docs/latest/genai/tracing/observe-with-traces/masking/",
+        "href_es": "https://mlflow.org/docs/latest/genai/tracing/observe-with-traces/masking/"
+      },
+      {
+        "title": "Removing sensitive data from a repository, GitHub",
+        "title_es": "Removing sensitive data from a repository, GitHub (en inglés)",
+        "line": "Why what's written in a repository is hard to take back: every clone keeps its own copy.",
+        "line_es": "Por qué lo escrito en un repositorio es difícil de retirar: cada clon guarda su propia copia.",
+        "href": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository",
+        "href_es": "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository"
+      }
+    ]
+  }
+}

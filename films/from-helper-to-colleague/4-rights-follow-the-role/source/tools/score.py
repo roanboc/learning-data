@@ -286,7 +286,7 @@ lw = lambda lid, word, off=0: W('left', lid, word, off)
 lc = lambda lid, off=0: G('left', lid, off)
 slide(lc('left'), 1.0, 0.006, px(960)); paper(lw('left', 'written down'), 0.011, px(1030))
 brake(D4, lw('four', 'other four steps', 0.3), 0.7, px(1200), 0.2)
-for lid, w_, x_ in (('ticket', "Clara's", 210), ('review', "Jun's", 1210), ('approve', "Clara's again", 1460), ('release', "Noor's", 1710)):
+for lid, w_, x_ in (('ticket', "Clara's", 210), ('review', "Jun's", 1210), ('approve', "Noor's", 1460), ('release', "Noor's", 1710)):
     tap(lw(lid, w_), 0.007, px(x_))
 paper(lw('word', 'what a word means'), 0.011, px(1070))
 for w_ in ('never approves', 'never releases', 'never changes', 'never writes'):

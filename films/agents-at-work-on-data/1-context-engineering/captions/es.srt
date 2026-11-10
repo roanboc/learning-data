@@ -195,33 +195,33 @@ Hasta ahora, cada persona del equipo armaba su propio agente, con sus propias no
 Como los libros de canto con el nombre de sus maestros, cada agente era de su dueño: lo que a uno le decían, ningún otro lo sabía.
 
 50
-00:05:49,035 --> 00:05:55,186
-Ahora el equipo mantiene un solo contexto, en el proyecto, revisado como el código, con un dueño para cada significado.
+00:05:49,035 --> 00:05:56,346
+Ahora el equipo mantiene un solo contexto, en el proyecto: el equipo de datos lo revisa como código, y cada significado tiene un dueño.
 
 51
-00:05:57,086 --> 00:06:00,439
+00:05:58,246 --> 00:06:01,599
 Cada agente, y cada persona, lee la misma página.
 
 52
-00:06:02,139 --> 00:06:07,044
-Cuando un significado cambia, su dueño lo cambia una vez, y todos leen el nuevo.
+00:06:03,299 --> 00:06:09,137
+Cuando un significado cambia, su dueño lo cambia una vez, en el glosario, y todos leen el nuevo.
 
 53
-00:06:09,744 --> 00:06:11,439
+00:06:11,837 --> 00:06:13,532
 Jun le pregunta otra vez a su agente.
 
 54
-00:06:12,739 --> 00:06:18,563
+00:06:14,832 --> 00:06:20,656
 Esta vez busca la palabra, cuenta 6,212 y cita la definición de Mei.
 
 55
-00:06:20,263 --> 00:06:25,682
+00:06:22,356 --> 00:06:27,775
 Una analista nueva, que llegó a Planificación esta semana, lee la misma definición que lee su agente.
 
 56
-00:06:27,182 --> 00:06:30,809
+00:06:29,275 --> 00:06:32,902
 Como los niños de Guido, ambos pueden cantar un canto que nunca han oído.
 
 57
-00:06:32,709 --> 00:06:35,894
+00:06:34,802 --> 00:06:37,987
 Escríbelo una vez, y lo usan tanto las personas como los agentes.

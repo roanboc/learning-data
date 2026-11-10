@@ -1,0 +1,88 @@
+{
+  "kicker": "The generalist",
+  "kicker_es": "La persona generalista",
+  "title_es": "Muchos roles, una sola mirada",
+  "h1": "Many hats, one picture: go deep in one thing, and see the whole",
+  "h1_es": "Muchos roles, una sola mirada: profundiza en una cosa y mira el todo",
+  "lead": "Ivy Reyes joins the university's data team in March 2027, with a degree in statistics. In her first month she spends a few days with each part of the team's work, and follows one real question through all of it. On one page, from Graham's decision back to the sensors, she sees what no one part could: 14 rooms named two ways.",
+  "lead_es": "Ivy Reyes entra al equipo de datos de la universidad en marzo de 2027, con un título en estadística. En su primer mes pasa unos días con cada parte del trabajo del equipo, y sigue una pregunta real a través de todas. En una página, desde la decisión de Graham hasta los sensores, ve lo que ninguna parte podía ver: 14 aulas con dos nombres.",
+  "description": "A film about the generalist, the first of The new skills and of the module Leading data people: depth in one thing, and enough of the business, the systems and the data to join them into one picture of a decision; the T-shaped person, named once, beside SFIA's skills, DAMA's roles and David Epstein's Range; Ivy Reyes, a new graduate data analyst, spends her first month, from Monday 1 March 2027, a few days with each part of the team's work (Mei's timetable, Sam's platform and the rooms' sensors, Yusuf's rule of counts, never people, Noor's map, Jun's models), and follows one real question through all of it: Graham Ellis's, on whether to ask the University Council for a new teaching building; on one page, from his decision back to the sensors, she sees what no one part could: 14 of the 186 rooms were renumbered in the timetable after their sensors went in, so a join by name would drop them without a word; nobody was wrong, and the specialists stay essential: Mei and Sam matched the 14 rooms in a day; and what to do on Monday: keep your depth, learn the others' words, draw one real question's whole route on one page, and ask of every part who uses it, for which decision. It opens in Kaifeng in 1015, where Ding Wei rebuilt a burned palace by making three slow jobs one.",
+  "description_es": "Una película sobre la persona generalista, la primera de Las nuevas habilidades y del módulo Liderar equipos de datos: profundidad en una cosa, y lo suficiente del negocio, los sistemas y los datos para unirlos en una sola mirada sobre una decisión; la persona en forma de T, nombrada una vez, junto a las habilidades de SFIA, los roles de DAMA y Range, de David Epstein; Ivy Reyes, analista de datos recién graduada, pasa su primer mes, desde el lunes 1 de marzo de 2027, unos días con cada parte del trabajo del equipo (el horario de Mei, la plataforma de Sam y los sensores de las aulas, la regla de Yusuf de conteos, nunca personas, el mapa de Noor, los modelos de Jun), y sigue una pregunta real a través de todas: la de Graham Ellis, sobre si pedir al Consejo Universitario un nuevo edificio de aulas; en una página, desde su decisión hasta los sensores, ve lo que ninguna parte podía ver: 14 de las 186 aulas se renumeraron en el horario después de instalar sus sensores, así que unirlas por nombre las haría desaparecer sin aviso; nadie se equivocó, y los especialistas siguen siendo esenciales: Mei y Sam emparejaron las 14 aulas en un día; y qué hacer el lunes: seguir profundizando en lo tuyo, aprender las palabras de los demás, dibujar en una página todo el recorrido de una pregunta real, y preguntar en cada parte quién la usa y para qué decisión. Empieza en Kaifeng en 1015, donde Ding Wei reconstruyó un palacio quemado haciendo de tres trabajos lentos uno solo.",
+  "card": "Ivy follows one question through every part of the team's work, and on one page finds 14 rooms that no one part could see.",
+  "card_es": "Ivy sigue una pregunta por cada parte del trabajo del equipo y, en una página, encuentra 14 aulas que ninguna parte veía.",
+  "chapters_es": {
+    "trench": "Un movimiento, tres trabajos",
+    "question": "Una pregunta que seguir",
+    "parts": "Unos días con cada uno",
+    "page": "El recorrido entero, en una página",
+    "shape": "A fondo en una, lo suficiente del resto",
+    "kept": "Desde su página",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Kaifeng, 1015: one move, three jobs",
+    "A burned palace needed earth dug and carried in, timber hauled and rubble carted away: three slow jobs. Ding Wei saw them as one, and a trench in the street did all three. Someone who sees across a team's parts finds what falls between them."
+  ],
+  "past_es": [
+    "Kaifeng, 1015: un movimiento, tres trabajos",
+    "Un palacio quemado necesitaba traer tierra, acarrear madera y sacar los escombros: tres trabajos lentos. Ding Wei los vio como uno, y una zanja en la calle hizo los tres. Quien ve las partes de un equipo como un todo encuentra lo que queda entre ellas."
+  ],
+  "next_h": "You've seen why someone has to see across the parts. Next: when an agent writes the first draft, framing, checking and deciding are yours.",
+  "next_h_es": "Viste por qué alguien tiene que ver las partes como un todo. Después: cuando un agente escribe el primer borrador, plantear, revisar y decidir te toca a ti.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "SFIA 9, the skills framework",
+        "title_es": "SFIA 9, el marco de habilidades",
+        "line": "147 skills of digital and data work, each described at levels of responsibility. A way to see where your depth is, and what sits beside it.",
+        "line_es": "147 habilidades del trabajo digital y de datos, cada una descrita por niveles de responsabilidad. Una forma de ver dónde está tu profundidad, y qué hay a su lado.",
+        "href": "https://sfia-online.org/en/sfia-9",
+        "href_es": "https://sfia-online.org/es/sfia-9"
+      },
+      {
+        "title": "T-shaped skills",
+        "title_es": "Habilidades en forma de T",
+        "line": "Where the shape's name comes from: one deep stroke in one field, and a bar of working knowledge across the others.",
+        "line_es": "De dónde viene el nombre de la forma: un trazo profundo en un campo, y una barra de conocimiento práctico de los demás.",
+        "href": "https://en.wikipedia.org/wiki/T-shaped_skills",
+        "href_es": "https://es.wikipedia.org/wiki/Habilidades_en_forma_de_T"
+      },
+      {
+        "title": "DAMA-DMBOK, the data management body of knowledge",
+        "title_es": "DAMA-DMBOK, el cuerpo de conocimiento de la gestión de datos (en inglés)",
+        "line": "DAMA's guide to the parts of data management, and the functions and roles that do the work.",
+        "line_es": "La guía de DAMA sobre las partes de la gestión de datos, y las funciones y los roles que hacen el trabajo.",
+        "href": "https://dama.org/learning-resources/dama-data-management-body-of-knowledge-dmbok/",
+        "href_es": "https://dama.org/learning-resources/dama-data-management-body-of-knowledge-dmbok/"
+      },
+      {
+        "title": "Range, by David Epstein",
+        "title_es": "Range, de David Epstein (en inglés)",
+        "line": "The author's page for the book: why, where problems are complex and unpredictable, people with range often do better than specialists.",
+        "line_es": "La página del autor sobre el libro: por qué, donde los problemas son complejos e impredecibles, a quien tiene amplitud a menudo le va mejor que a los especialistas.",
+        "href": "https://davidepstein.com/range/",
+        "href_es": "https://davidepstein.com/range/"
+      },
+      {
+        "title": "Shen Kuo, who told Ding Wei's story",
+        "title_es": "Shen Kuo, quien contó la historia de Ding Wei",
+        "line": "The Song dynasty scholar and official, and his Dream Pool Essays, where the story of the palace is told.",
+        "line_es": "El erudito y funcionario de la dinastía Song, y sus Ensayos del estanque de los sueños, donde se cuenta la historia del palacio.",
+        "href": "https://en.wikipedia.org/wiki/Shen_Kuo",
+        "href_es": "https://es.wikipedia.org/wiki/Shen_Kuo"
+      }
+    ],
+    "more": [
+      {
+        "text": "The story in Shen Kuo's own words, in the essays' supplement, book 2 (in Chinese)",
+        "text_es": "La historia en palabras de Shen Kuo, en el suplemento de los ensayos, libro 2 (en chino)",
+        "href": "https://zh.wikisource.org/wiki/%E5%A4%A2%E6%BA%AA%E7%AD%86%E8%AB%87/%E8%A3%9C%E7%AD%86%E8%AB%87",
+        "href_es": "https://zh.wikisource.org/wiki/%E5%A4%A2%E6%BA%AA%E7%AD%86%E8%AB%87/%E8%A3%9C%E7%AD%86%E8%AB%87"
+      }
+    ]
+  }
+}

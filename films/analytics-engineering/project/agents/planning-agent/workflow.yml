@@ -1,0 +1,63 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The planning agent's run, in GitHub Actions: in the project's own repository it would be
+# .github/workflows/planning-agent.yml. It signs in with no secret the agent can see or leak. GitHub vouches for the
+# run with a short-lived pass, which Databricks takes because the service principal's federation policy names this
+# repository and this environment (federation-policy.json), and the token service takes to hand back the App's
+# token. The agent's loop is the platform team's runner, the same for every agent; this run gives it its name, its
+# tools and its dbt target, and nothing else.
+name: planning agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticket:
+        description: The ticket it's given
+        required: true
+
+permissions:
+  contents: read
+  id-token: write              # its pass: GitHub vouches for this run
+
+concurrency: planning-agent
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: planning-agent
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: https://uni-example-dev.cloud.databricks.com
+      DATABRICKS_CLIENT_ID: 4f1c9a2e-7b3d-4e61-a8c5-2d9f0b6e1a73   # its service principal's application ID: public, not a secret
+      DATABRICKS_HTTP_PATH: /sql/1.0/warehouses/5e1f0a9c2b7d4e38
+      DATABRICKS_CATALOG: analytics_dev
+      DBT_AGENT_SCHEMA: planning_agent           # dbt's agent target builds planning_agent_marts and the other layers here
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: dbt for Databricks, and the platform team's runner
+        run: |
+          pip install -r requirements-databricks.txt
+          pip install --index-url https://packages.uni.example/simple agent-runner
+      - name: Its pass for dbt, which signs in with it (profiles.yml, the agent output)
+        # A pass lasts minutes, so the runner writes a new one here before each build, the same way
+        run: |
+          curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=0d7f3a52-6c1e-4b8a-9f2d-5e7a1c3b9d40" | jq -r .value > "$RUNNER_TEMP/pass"
+          echo "DATABRICKS_OIDC_TOKEN_FILEPATH=$RUNNER_TEMP/pass" >> "$GITHUB_ENV"
+      - name: Its App's token, for one repository and its permissions, for an hour
+        id: app
+        run: |
+          pass=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://tokens.uni.example/github" | jq -r .value)
+          token=$(curl -sSf -X POST -H "Authorization: Bearer $pass" https://tokens.uni.example/github/planning-agent | jq -r .token)
+          echo "::add-mask::$token"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+      - name: The planning agent, on its ticket
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          TICKET: ${{ inputs.ticket }}
+        run: agent-runner --agent "planning agent" --ticket "$TICKET" --branches "agent/planning/*" --dbt-target agent

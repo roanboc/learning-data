@@ -1,0 +1,16 @@
+exposures:
+
+  - name: mailing_tool
+    label: The tutors' newsletters
+    type: application
+    maturity: medium
+    description: >
+      The mailing tool HR sends its newsletters with. It copies the tutors' mailing list each night
+      at 04:00, after the platform's 02:00 load, and drops anyone no longer on it. It isn't on the
+      platform: its contract with the university says its own backups lose a dropped contact within
+      30 days, and HR checks that, as the owner of the copy.
+    owner:
+      name: HR
+      email: hr@uni.example
+    depends_on:
+      - ref('mart_hr__tutors_mailing_list')

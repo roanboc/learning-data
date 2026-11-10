@@ -251,7 +251,7 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>
 
 /* ---------------------------------------------------------------- 5 · What's left out, and why */
 scene("left",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=>({left:wAt(sc,"left","written down"),four:wAt(sc,"four","other four steps"),
-    roles:wAt(sc,"four","other roles"),tk:c.ticket,tkw:wAt(sc,"ticket","Clara's"),rv:c.review,rvw:wAt(sc,"review","Jun's"),ap:c.approve,apw:wAt(sc,"approve","Clara's again"),
+    roles:wAt(sc,"four","other roles"),tk:c.ticket,tkw:wAt(sc,"ticket","Clara's"),rv:c.review,rvw:wAt(sc,"review","Jun's"),ap:c.approve,apw:wAt(sc,"approve","Noor's"),
     rl:c.release,rlw:wAt(sc,"release","Noor's"),wd:wAt(sc,"word","what a word means"),mei:wAt(sc,"word","such as Mei"),gl:wAt(sc,"word","the glossary"),
     n1:wAt(sc,"never","never approves"),n2:wAt(sc,"never","never releases"),n3:wAt(sc,"never","never changes"),n4:wAt(sc,"never","never writes"),
     forbid:wAt(sc,"falls","forbid"),sod:wAt(sc,"falls","separation of duties"),ord:wAt(sc,"ward","one ordered"),chk:wAt(sc,"check","a check fails"),

@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Reports on demand, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (ask, context, back), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). El módulo todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "ask":{q:"Rohan fija el presupuesto de Salud con la respuesta de Genie One, A$1.84 millones. ¿Qué le permite confiar en ella para eso?",
+    opts:[{t:"El equipo de datos lee cada respuesta de Genie antes de que llegue a quien preguntó."},{t:"Dice qué contó, y muestra la consulta que corrió, para que cualquiera revise el número.",ok:true},{t:"Dice qué contó, horas y cargas sociales, así que el número no necesita otra revisión.",near:true}],
+    why:"Genie One responde desde el Genie Agent que configuró el equipo de datos, y dice qué contó: las declaraciones de horas aprobadas de docencia ocasional, más las cargas sociales. También muestra la consulta que corrió, para que Rohan, o cualquiera, revise el número antes de apoyar un presupuesto en él. Nadie lee cada respuesta antes: la confianza viene del modelo y sus reglas, y de mostrar el trabajo. Donde trabajas, ¿qué respuestas traen una forma de revisarlas?"},
+  "context":{q:"La regla de Ingrid es solo totales, nunca el sueldo de una persona. ¿Cómo la cumple el Genie Agent?",
+    opts:[{t:"Sus instrucciones le dicen a Genie que nunca muestre un sueldo, así que deja fuera esas filas.",near:true},{t:"Cada respuesta se compara con la lista de personal de RR. HH., y se le quita cualquier nombre."},{t:"Sus datos son una medida, por facultad, asignatura y período, así que nunca lee una declaración.",ok:true}],
+    why:"La regla la cumplen los propios datos: los únicos datos del agente son la medida, el costo de la docencia ocasional, por facultad, asignatura y período lectivo, así que lee totales y nunca las declaraciones de nadie. Una instrucción sola le pide a Genie que se porte bien; unos datos que no tienen el sueldo de nadie no pueden mostrarlo. Y cada respuesta se ejecuta como la persona que pregunta, que ve solo lo que puede leer. Donde trabajas, ¿qué reglas viven en los datos, y cuáles solo en palabras?"},
+  "back":{q:"¿Qué pregunta merece un tablero propio, según la regla práctica de la película?",
+    opts:[{t:"Cuántas declaraciones esperan aprobación, que nómina pregunta cada día de pago para reclamarlas.",ok:true},{t:"Cuánto costó la docencia ocasional en Salud este semestre, que Rohan pide para el presupuesto."},{t:"Cuántas declaraciones se pagaron hace un año, cada día de pago, aunque nadie actúa según lo que muestra.",near:true}],
+    why:"Una pregunta merece un tablero cuando vuelve con un calendario fijo, y alguien actúa según lo que muestra. Las declaraciones que esperan vuelven cada día de pago, y nómina las reclama antes de que cierre la corrida. La pregunta de Rohan llega una vez, para una decisión: la hace cuando la necesita. Las declaraciones pagadas hace un año también vuelven con un calendario, pero nadie actúa con ellas, así que tampoco merecen un tablero. ¿Con cuáles de tus tableros actúa alguien?"}
+  }}};

@@ -7,7 +7,7 @@ think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",ski
   qs:{
   "four":{stop:"home",q:"The tooltip is right. Why isn't it the fix?",
     opts:[{t:"It's right by luck: a copy that happens to match the definition in the course domain's conceptual model, and nothing keeps it so.",ok:true},{t:"It's right, so the fix is to copy its words into the other three and check all four against each other every term.",near:true},{t:"People read the catalog, not the tooltip, so the catalog has to be fixed first, and the tooltip can follow later."}],
-    why:"The tooltip matches the home, the definition Mei approved in _course__conceptual.yml, but nothing keeps it that way. Fixing the three wrong copies by hand only makes four copies again; each has to be driven from the home."},
+    why:"The tooltip matches the home, the definition Mei approved in the glossary, copied in _course__conceptual.yml, but nothing keeps it that way. Fixing the three wrong copies by hand only makes four copies again; each has to be driven from the home."},
   "where":{stop:"where",q:"Is a decision log duplication?",
     opts:[{t:"Yes, partly: the log repeats the YAML, but it's kept for the auditors.",near:true},{t:"No: a model's YAML says what is true now; the log says why, when and who decided.",ok:true},{t:"Only when the YAML has a description that repeats the decision."}],
     why:"A model's YAML has no place for why. Without the log, the next person reopens the decision."},

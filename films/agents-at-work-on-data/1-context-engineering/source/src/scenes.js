@@ -310,7 +310,7 @@ function ce_note(x,cx,cy,w,o){const a=o.a==null?1:o.a;if(a<=0)return;const lh=44
 // ---- 6 · One context for the team: each agent its owner's, with notes of its own; then one context, reviewed like code, owned ----
 const CE_TEAM=[["jun",360,"Jun's notes","commencing: enrolled this year"],["clara",960,"Clara's notes","commencing: a new student number"],["sam",1560,"Sam's notes","commencing: first year of a degree"]];
 scene("team",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({wired:wAt(sc,"before","wired"),notes:wAt(sc,"before","notes"),chant:wAt(sc,"masters","chant"),
-    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviewed"),owner2:wAt(sc,"one","owner"),
+    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviews it"),owner2:wAt(sc,"one","owner"),
     every:wAt(sc,"same","agent"),reads:wAt(sc,"same","reads"),change:c.change,changes:wAt(sc,"change","changes"),once:wAt(sc,"change","once"),new_:wAt(sc,"change","new")}));
   ce_shots(ctx,S,t,sc.dur,[
     // until now: each person's own agent, with notes of its own, each a little different, like the chant books named after their masters

@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:04.288
+The Galápagos, in the late 1960s.
+
+00:00:05.788 --> 00:00:11.920
+Volcanic islands, about a thousand kilometres west of Ecuador, whose animals don't fear people.
+
+00:00:13.420 --> 00:00:15.824
+Now boats bring visitors, more each year.
+
+00:00:17.324 --> 00:00:20.381
+Scientists and guides fear what all those feet will do.
+
+00:00:21.481 --> 00:00:26.537
+Visitors could walk anywhere, a step from nesting birds, iguanas and sea lions.
+
+00:00:28.037 --> 00:00:33.002
+Nests could be trampled and the lava worn down, and coral is already being carried off.
+
+00:00:34.702 --> 00:00:39.111
+Birds could leave for good, and many of the islands' animals live nowhere else.
+
+00:00:40.611 --> 00:00:43.965
+Something has to change, before visitors come in thousands.
+
+00:00:45.865 --> 00:00:52.201
+So the national park, on the Darwin Research Station's advice, plans the visits once, for the whole park.
+
+00:00:53.701 --> 00:00:56.243
+Most of the park gets no visitors at all.
+
+00:00:57.743 --> 00:01:01.686
+A few sites near the coast are open, each along its own marked trail.
+
+00:01:02.986 --> 00:01:05.021
+Every group walks with a trained guide.
+
+00:01:06.321 --> 00:01:12.100
+And the rules are the same for everyone: keep to the trail; touch nothing, feed nothing, take nothing.
+
+00:01:13.800 --> 00:01:18.761
+A new boat, a new guide, a new visitor: each fits the plan the day they arrive.
+
+00:01:20.461 --> 00:01:26.459
+In 1982, twenty-five thousand people visit, and the sites they walk are near pristine.
+
+00:01:27.959 --> 00:01:33.374
+Flamingos have nested again beside a visited lagoon, for the first time in fourteen years.
+
+00:01:35.074 --> 00:01:42.564
+In 2025, 290,404 people came, still on the trails, still with a guide.
+
+00:01:44.264 --> 00:01:46.691
+A university's data has visitors too.
+
+00:01:47.791 --> 00:01:53.110
+Opened one table at a time, some wait for what they need, and some reach what they shouldn't.
+
+00:01:54.610 --> 00:01:59.160
+So, as on the islands, its grants are designed once, by area and role.
+
+00:02:00.460 --> 00:02:04.473
+Every person and every new table fits the plan from its first day.
+
+00:02:11.773 --> 00:02:17.129
+At the university, the data platform keeps each area's records in Unity Catalog.
+
+00:02:18.229 --> 00:02:24.149
+In Governed in Unity Catalog, every table sat in one catalog, and its readers were groups.
+
+00:02:25.449 --> 00:02:29.454
+But each grant was made by hand, on one table, when someone asked.
+
+00:02:31.154 --> 00:02:35.512
+Fifty-eight tables, a hundred and sixty-three grants, each made on its own.
+
+00:02:37.212 --> 00:02:40.830
+A new table waited six days, on average, for its first reader.
+
+00:02:42.730 --> 00:02:48.270
+And whoever made a table owned it: nine belonged to a person, and two of those people had left.
+
+00:02:49.970 --> 00:02:53.226
+To say who could read what, someone had to read every grant.
+
+00:02:55.326 --> 00:03:00.942
+Now each area has a catalog of its own, and the registrar's tables are moving into theirs.
+
+00:03:02.242 --> 00:03:07.988
+Mei Tanaka owns them, for the registrar's office, and asks for a plan before a single grant.
+
+00:03:11.288 --> 00:03:15.856
+In Unity Catalog, a table sits in a schema, and a schema in a catalog.
+
+00:03:17.156 --> 00:03:20.826
+Think of the catalog as a room, and each schema as a shelf in it.
+
+00:03:22.126 --> 00:03:27.506
+To read a table, a group needs three rights: into the room, onto the shelf, and into the table.
+
+00:03:29.406 --> 00:03:31.741
+USE CATALOG, USE SCHEMA and SELECT.
+
+00:03:34.041 --> 00:03:37.447
+Like a landing, a trail and a site: all three, or none.
+
+00:03:39.547 --> 00:03:42.804
+SELECT on a table, without the first two, opens nothing.
+
+00:03:45.104 --> 00:03:48.477
+One more right lets everyone look without reading: BROWSE.
+
+00:03:49.977 --> 00:03:54.651
+With it, anyone can find a table, see what it holds and who owns it, and ask for it.
+
+00:03:58.551 --> 00:04:04.057
+So the plan starts from who reads what, as the islands' plan started from where people may walk.
+
+00:04:05.357 --> 00:04:09.788
+Every area's catalog gets the same shelves, one for each set of readers.
+
+00:04:11.088 --> 00:04:15.490
+Staging and intermediate hold the build's own steps, and nobody reads them.
+
+00:04:16.990 --> 00:04:22.726
+Core holds the area's records; reference, the lists they use; published, totals for everyone.
+
+00:04:24.226 --> 00:04:30.165
+And the registrar's catalog has one more: support, for the exam support only a few may see.
+
+00:04:31.865 --> 00:04:35.715
+Then each shelf gets its readers, always a group, never a person.
+
+00:04:37.015 --> 00:04:43.147
+The registrar's office reads core and reference; the few who arrange exam support read support.
+
+00:04:44.847 --> 00:04:49.812
+The help desk and Planning read core, and the policies decide what each of them sees.
+
+00:04:51.512 --> 00:04:57.073
+The data team builds in development, on made-up records, so here it holds nothing of its own.
+
+00:04:58.773 --> 00:05:02.412
+A grant goes on a catalog or a shelf, never on one table.
+
+00:05:03.712 --> 00:05:07.193
+A table that needs other readers belongs on another shelf.
+
+00:05:10.693 --> 00:05:16.075
+A grant on a shelf reaches every table on it: those there today, and every one made later.
+
+00:05:18.175 --> 00:05:23.806
+When a new version of the credential table arrives, the readers of core read it from its first minute.
+
+00:05:25.906 --> 00:05:28.114
+Nobody asks, and nobody grants.
+
+00:05:30.014 --> 00:05:37.146
+When the exam support table arrives, it goes on its own shelf, and only those who arrange exam support can read it.
+
+00:05:39.646 --> 00:05:43.988
+The help desk, Planning and the study read core, so none of them ever sees it.
+
+00:05:46.288 --> 00:05:50.309
+Like a new boat at the islands, it keeps the plan from the day it arrives.
+
+00:05:54.409 --> 00:06:00.923
+Every catalog, shelf and table has an owner, and the owner can do anything with it, even let anyone read it.
+
+00:06:02.823 --> 00:06:04.760
+Whoever makes it is its first owner.
+
+00:06:06.460 --> 00:06:12.171
+So the registrar's catalog, and everything in it, is handed to a group: registrar owners.
+
+00:06:14.071 --> 00:06:20.647
+No person is in it, only registrar-loader, the identity that builds the tables and deploys the plan.
+
+00:06:22.747 --> 00:06:28.132
+When someone leaves, no table is left without its owner, and no one person can open one up.
+
+00:06:30.232 --> 00:06:35.312
+Mei still decides who may see the records: she owns them, for the registrar's office.
+
+00:06:36.612 --> 00:06:41.334
+Two kinds of owner: Mei says who may see them, and the group is who may change them.
+
+00:06:45.434 --> 00:06:52.689
+In Network, storage and keys, each catalog was bound to its own workspace, so a grant isn't enough from anywhere else.
+
+00:06:54.589 --> 00:07:01.385
+Anil Kurian's study works in a workspace of its own, studies, where nothing can be downloaded or copied out.
+
+00:07:03.285 --> 00:07:06.780
+The registrar's catalog is bound there too, but read only.
+
+00:07:08.480 --> 00:07:15.719
+From there, the study reads the learner table, as far as its grants allow, and can never write to it, whatever a grant says.
+
+00:07:17.819 --> 00:07:24.140
+What it makes goes in its own space, health progress, made for its agreement and deleted when the agreement ends.
+
+00:07:25.840 --> 00:07:28.364
+Look, don't touch, as on the islands' trails.
+
+00:07:31.864 --> 00:07:36.300
+The plan is written once, as two files beside the job's code in GitHub.
+
+00:07:37.600 --> 00:07:40.051
+Each shelf and its readers take a few lines.
+
+00:07:41.551 --> 00:07:47.381
+Mei's team owns those files, so no change to who may see her records goes in without her yes.
+
+00:07:49.081 --> 00:07:58.741
+A study's grant is made from its agreement's contract, and names it: 2026-14, until 30 June 2027.
+
+00:08:00.441 --> 00:08:06.428
+The study's policies go in first, and its grant after them, so it never reads the table unmasked.
+
+00:08:08.128 --> 00:08:14.696
+Then the path of From a branch to production: test first, then production, once a release approver says yes.
+
+00:08:16.396 --> 00:08:22.707
+And nobody can grant by hand: only the owners' group can, and its one member deploys only from main.
+
+00:08:24.207 --> 00:08:28.590
+Anything else takes an admin account, switched on, approved and recorded.
+
+00:08:32.090 --> 00:08:36.997
+On the islands, the plan came first, and every visitor since has walked inside it.
+
+00:08:38.697 --> 00:08:41.372
+At the university, the plan comes first too.
+
+00:08:42.472 --> 00:08:50.677
+The registrar's office reads its records; the study, only what its agreement allows; everyone else can find what exists, and ask.
+
+00:08:52.377 --> 00:08:56.678
+Every new table, and every new person, fits the plan from its first day.
+
+00:08:58.178 --> 00:09:00.659
+Design the grants once, by area and role.

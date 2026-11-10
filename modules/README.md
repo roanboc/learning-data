@@ -84,7 +84,7 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
-No film source yet.
+- [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
 
 ### Documents as data
 
@@ -161,6 +161,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 - [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 - [A hundred records](../films/fit-for-use/2-a-hundred-records/) — `a-hundred-records`
+- [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
 
 ### Quality as a habit
 
@@ -272,6 +273,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
 - [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
+- [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 
 ### Kept for a reason
 
@@ -280,6 +282,7 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
 - [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 - [Forgetting a person](../films/kept-for-a-reason/3-forgetting-a-person/) — `forgetting-a-person`
+- [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
 
 ## AI agents in data work
 
@@ -324,6 +327,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
+- [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 
 ## Leading data people
 
@@ -333,7 +337,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
-No film source yet.
+- [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 
 ### Working with people
 

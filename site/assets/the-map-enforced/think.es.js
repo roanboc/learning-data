@@ -1,0 +1,20 @@
+/* Learning Data: "Pausa para pensar" de The map, enforced, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de cuatro capítulos (map, own, logs, stop), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  map:{q:"El próximo periodo, el trabajo del agente de Planificación necesita leer una tabla más. ¿Qué debe pasar primero?",
+    opts:[{t:"Sam le da el permiso a su grupo en Unity Catalog, y Noor lo agrega al mapa ese mismo día.",near:true},{t:"Clara le da el permiso ella misma, porque es su dueña y responde por lo que hace el agente."},{t:"El paso que lo necesita cambia en el mapa, con revisión, y el script escribe el permiso.",ok:true}],
+    why:"Los permisos van en un solo sentido: primero cambia el mapa, con revisión, y el script escribe desde él la configuración de cada herramienta. Dado a mano primero, un permiso se salta la revisión del mapa, y hasta que el mapa lo alcance, la verificación de cada noche falla. Donde trabajas, ¿qué permisos se dieron a mano y nunca se escribieron?"},
+  own:{q:"El martes, un permiso dado a mano dejó al grupo del agente cambiar las tablas de producción de Planificación. ¿Por qué el agente no pudo usarlo?",
+    opts:[{t:"Trabaja en el espacio de desarrollo, donde producción solo se puede leer, digan lo que digan sus permisos.",ok:true},{t:"La verificación de cada noche retira todo permiso que el mapa no da, así que su grupo nunca lo tuvo.",near:true},{t:"Sus pull requests necesitan la aprobación de una persona, así que un cambio suyo en producción la esperaría."}],
+    why:"La verificación de cada noche solo lee: falló, y Sam retiró el permiso por la mañana, así que el grupo lo tuvo un día. Lo que protegió producción fue dónde trabaja el agente: el espacio de desarrollo, donde producción solo se puede leer, así que ni un permiso equivocado puede escribir ahí. ¿Cuáles de tus protecciones aguantarían si un permiso estuviera mal?"},
+  logs:{q:"Cualquiera podría escribir planning-agent[bot] como autor de un commit. ¿Cómo distingue quien revisa los commits del propio agente?",
+    opts:[{t:"Van firmados con una clave secreta propia, que solo el agente de Planificación puede leer.",near:true},{t:"Se hacen a través de su App, así que GitHub los marca como verificados, y un nombre escrito no.",ok:true},{t:"Nombran a su dueña, Clara Jensen, en cada mensaje, algo que un nombre escrito nunca hace."}],
+    why:"Un nombre escrito en un commit es solo texto. Los commits del agente de Planificación se hacen a través de su App, así que GitHub los marca como verificados, y no guarda ningún secreto para hacerlo: cada ejecución entra con un pase que dura minutos. Así, la pregunta de los auditores es una búsqueda. Donde trabajas, ¿qué nombres de tus bitácoras podría haber escrito cualquiera?"},
+  stop:{q:"Sam desactiva por unos minutos la entidad de servicio del agente de Planificación. ¿Qué pasa?",
+    opts:[{t:"No puede entrar, y le quitan sus permisos, así que el mapa debe dárselos otra vez cuando vuelva.",near:true},{t:"Todos los agentes de su grupo se detienen también, porque entran con la única identidad del grupo."},{t:"No puede entrar, y conserva sus permisos, mientras Jun, Lucía y el agente de carga docente siguen.",ok:true}],
+    why:"Cada agente tiene su propio nombre en cada herramienta, así que cada uno se puede detener por separado. Una entidad de servicio desactivada no puede entrar, y sus permisos quedan para cuando se reactive. El miércoles, su siguiente llamada falló, y nadie más se detuvo. Un ayudante con el acceso de Jun solo se podía detener deteniendo a Jun. ¿Cómo detendrías a uno de tus agentes, y solo a él?"}
+  }}};

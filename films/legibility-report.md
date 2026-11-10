@@ -72,6 +72,7 @@
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | Every area, one job | 313 | 0% | 0 | 28.3 | Drawn to the rule |
+| Listen first | 313 | 0% | 0 | 28.5 | Drawn to the rule |
 | From gaps to a roadmap | 338 | 0% | 0 | 28.0 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
 | Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
@@ -115,12 +116,14 @@
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
 | No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
+| Walls, doors and keys | 177 | 0% | 0 | 31.4 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
+| Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
@@ -133,6 +136,7 @@
 | What they tell us about ourselves | 288 | 0% | 0 | 32.0 | Drawn to the rule |
 | Many agents, and what emerges | 232 | 0% | 0 | 30.0 | Drawn to the rule |
 | The question behind the request | 271 | 0% | 0 | 28.4 | Drawn to the rule |
+| Explaining so people can decide | 310 | 0% | 0 | 28.3 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

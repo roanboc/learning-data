@@ -98,7 +98,7 @@ const NARR={
  {"id":"nomore","gap":0.8,"text":"so they can say a name is allowed, and no more."},
  {"id":"awards","gap":0.8,"text":"The awards check measures accuracy, against the boards' approved lists."},
  {"id":"graduate","gap":0.8,"text":"For names, the reference is the graduate, and the list keeps the date each name was confirmed."},
- {"id":"contract","gap":0.8,"text":"The data contract says it too: its rule for awards names the dimension, accuracy, and the method, reconciliation."},
+ {"id":"contract","gap":0.8,"text":"And the test it runs names its method: reconciliation, award by award."},
  {"id":"scorecard","gap":0.8,"text":"And the scorecard counts them apart: allowed, and true."},
  {"id":"only","gap":0.8,"text":"A check is only as true as its reference."},
  {"id":"say","gap":0.8,"text":"Say which one it uses, and whoever reads the result knows what it can tell them, and what it can't."}

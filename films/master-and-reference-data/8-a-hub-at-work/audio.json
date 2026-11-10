@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-hub-at-work/soundtrack.mp3",
+      "size": 3634877,
+      "sha256": "34b913c25ff94871dc0b050afc8c58042384da5b70af8557eb01deb11968091a",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/34b913c25ff94871dc0b050afc8c58042384da5b70af8557eb01deb11968091a.mp3"
+    }
+  ]
+}

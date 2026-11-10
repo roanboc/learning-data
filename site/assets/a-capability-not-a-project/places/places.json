@@ -1,0 +1,528 @@
+{
+ "player": "9208232e9a1296a1",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:polderWet": {
+   "file": "polderWet.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     8.75
+    ]
+   ]
+  },
+  "place:section": {
+   "file": "section.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     8.0,
+     16.25
+    ]
+   ]
+  },
+  "cpHi:crest": {
+   "file": "cpHi_crest.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     15.5,
+     22.5
+    ]
+   ]
+  },
+  "place:breach": {
+   "file": "breach.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     21.75,
+     24.0
+    ]
+   ]
+  },
+  "place:breachSky": {
+   "file": "breachSky.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     22.75,
+     24.0
+    ]
+   ]
+  },
+  "place:polderBreach": {
+   "file": "polderBreach.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     23.25,
+     26.0
+    ]
+   ]
+  },
+  "place:farmFlood": {
+   "file": "farmFlood.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     25.25,
+     31.25
+    ]
+   ]
+  },
+  "cpVigBack0": {
+   "file": "cpVigBack0.webp",
+   "w": 600,
+   "h": 360,
+   "shows": [
+    [
+     30.5,
+     35.5
+    ]
+   ]
+  },
+  "cpHi:polder": {
+   "file": "cpHi_polder.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     34.75,
+     39.5
+    ]
+   ]
+  },
+  "place:crestKept": {
+   "file": "crestKept.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     38.75,
+     43.25
+    ],
+    [
+     174.25,
+     178.75
+    ]
+   ]
+  },
+  "place:bank": {
+   "file": "bank.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     42.5,
+     45.0
+    ],
+    [
+     54.75,
+     59.5
+    ],
+    [
+     310.0,
+     315.75
+    ]
+   ]
+  },
+  "place:aerial": {
+   "file": "aerial.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     44.75,
+     49.25
+    ],
+    [
+     73.0,
+     76.0
+    ],
+    [
+     178.0,
+     181.75
+    ]
+   ]
+  },
+  "cpAerialThings": {
+   "file": "cpAerialThings.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     44.75,
+     49.25
+    ]
+   ]
+  },
+  "place:bankWalk": {
+   "file": "bankWalk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.5,
+     55.0
+    ],
+    [
+     122.75,
+     126.5
+    ],
+    [
+     266.0,
+     270.75
+    ]
+   ]
+  },
+  "cpHi:farm": {
+   "file": "cpHi_farm.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     59.25,
+     65.5
+    ]
+   ]
+  },
+  "place:charter": {
+   "file": "charter.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     64.75,
+     69.25
+    ]
+   ]
+  },
+  "place:today": {
+   "file": "today.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     68.5,
+     73.75
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     75.25,
+     79.25
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     78.5,
+     96.25
+    ],
+    [
+     125.75,
+     130.5
+    ],
+    [
+     367.5,
+     386.5
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     78.5,
+     96.25
+    ],
+    [
+     125.75,
+     130.5
+    ],
+    [
+     367.5,
+     386.5
+    ]
+   ]
+  },
+  "place:dvc": {
+   "file": "dvc.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     95.5,
+     113.25
+    ],
+    [
+     119.75,
+     123.5
+    ],
+    [
+     334.5,
+     338.75
+    ],
+    [
+     359.75,
+     364.75
+    ]
+   ]
+  },
+  "cpDvcDesk": {
+   "file": "cpDvcDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     95.5,
+     113.25
+    ],
+    [
+     119.75,
+     123.5
+    ],
+    [
+     334.5,
+     338.75
+    ],
+    [
+     359.75,
+     364.75
+    ]
+   ]
+  },
+  "cpHi:desk": {
+   "file": "cpHi_desk.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     113.0,
+     120.5
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     129.75,
+     136.5
+    ],
+    [
+     210.0,
+     218.75
+    ],
+    [
+     319.5,
+     335.25
+    ]
+   ]
+  },
+  "place:noor": {
+   "file": "noor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     135.5,
+     143.0
+    ],
+    [
+     148.25,
+     151.0
+    ]
+   ]
+  },
+  "cpHi:mapClose": {
+   "file": "cpHi_mapClose.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     142.75,
+     148.5
+    ],
+    [
+     150.75,
+     175.0
+    ],
+    [
+     181.0,
+     186.25
+    ]
+   ]
+  },
+  "place:band": {
+   "file": "band.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     186.0,
+     210.25
+    ],
+    [
+     218.5,
+     266.75
+    ],
+    [
+     345.25,
+     351.0
+    ],
+    [
+     364.0,
+     368.25
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     270.0,
+     275.25
+    ]
+   ]
+  },
+  "place:services": {
+   "file": "services.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     274.25,
+     278.75
+    ],
+    [
+     338.5,
+     345.5
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     278.0,
+     280.25
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     279.5,
+     282.5
+    ]
+   ]
+  },
+  "place:facultyDesk": {
+   "file": "facultyDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     279.5,
+     282.5
+    ]
+   ]
+  },
+  "cpHi:services": {
+   "file": "cpHi_services.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     281.75,
+     310.75
+    ]
+   ]
+  },
+  "place:meeting": {
+   "file": "meeting.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     315.0,
+     320.5
+    ]
+   ]
+  },
+  "place:meetingTable": {
+   "file": "meetingTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     315.0,
+     320.5
+    ]
+   ]
+  },
+  "place:storm": {
+   "file": "storm.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     350.0,
+     352.75
+    ]
+   ]
+  },
+  "place:barrier": {
+   "file": "barrier.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     352.0,
+     357.25
+    ]
+   ]
+  },
+  "cpHi:today": {
+   "file": "cpHi_today.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     356.5,
+     360.5
+    ]
+   ]
+  }
+ }
+}

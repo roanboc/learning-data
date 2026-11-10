@@ -1,0 +1,451 @@
+{
+ "player": "4a36b0e146492a20",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:line": {
+   "file": "line.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     45.0
+    ],
+    [
+     231.25,
+     233.75
+    ],
+    [
+     295.75,
+     300.5
+    ]
+   ]
+  },
+  "place:lineFront": {
+   "file": "lineFront.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     45.0
+    ],
+    [
+     231.25,
+     233.75
+    ],
+    [
+     295.75,
+     300.5
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     44.75,
+     49.25
+    ]
+   ]
+  },
+  "place:officeDesk": {
+   "file": "officeDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     44.75,
+     49.25
+    ]
+   ]
+  },
+  "place:deskTop": {
+   "file": "deskTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.5,
+     63.5
+    ],
+    [
+     104.5,
+     111.75
+    ],
+    [
+     199.75,
+     219.0
+    ],
+    [
+     278.0,
+     296.75
+    ]
+   ]
+  },
+  "wd_open2": {
+   "file": "wd_open2.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.5,
+     63.5
+    ],
+    [
+     104.5,
+     111.75
+    ],
+    [
+     206.0,
+     219.0
+    ]
+   ]
+  },
+  "wd_cover2": {
+   "file": "wd_cover2.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     48.5,
+     50.5
+    ]
+   ]
+  },
+  "place:screenGov": {
+   "file": "screenGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     62.75,
+     77.75
+    ],
+    [
+     260.75,
+     267.5
+    ]
+   ]
+  },
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     76.75,
+     86.75
+    ],
+    [
+     96.25,
+     101.75
+    ],
+    [
+     173.5,
+     178.5
+    ]
+   ]
+  },
+  "place:boardData": {
+   "file": "boardData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     86.0,
+     97.0
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     101.5,
+     104.75
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     101.5,
+     104.75
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     110.75,
+     117.5
+    ],
+    [
+     145.0,
+     157.75
+    ],
+    [
+     168.5,
+     174.5
+    ]
+   ]
+  },
+  "place:regClose": {
+   "file": "regClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     116.75,
+     125.5
+    ],
+    [
+     131.25,
+     135.5
+    ],
+    [
+     233.0,
+     247.25
+    ],
+    [
+     266.25,
+     273.25
+    ],
+    [
+     299.75,
+     307.25
+    ],
+    [
+     312.75,
+     325.0
+    ]
+   ]
+  },
+  "place:regDesk": {
+   "file": "regDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     116.75,
+     125.5
+    ],
+    [
+     131.25,
+     135.5
+    ],
+    [
+     233.0,
+     247.25
+    ],
+    [
+     266.25,
+     273.25
+    ],
+    [
+     299.75,
+     307.25
+    ],
+    [
+     312.75,
+     325.0
+    ]
+   ]
+  },
+  "place:meiTop": {
+   "file": "meiTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     124.75,
+     132.0
+    ],
+    [
+     224.25,
+     232.0
+    ],
+    [
+     247.0,
+     261.5
+    ],
+    [
+     307.0,
+     313.5
+    ]
+   ]
+  },
+  "wd_bookdec": {
+   "file": "wd_bookdec.webp",
+   "w": 1100,
+   "h": 680,
+   "shows": [
+    [
+     124.75,
+     132.0
+    ],
+    [
+     224.25,
+     232.0
+    ],
+    [
+     247.0,
+     261.5
+    ],
+    [
+     307.0,
+     313.5
+    ]
+   ]
+  },
+  "wd_booklog": {
+   "file": "wd_booklog.webp",
+   "w": 1100,
+   "h": 680,
+   "shows": [
+    [
+     124.75,
+     132.0
+    ],
+    [
+     224.25,
+     232.0
+    ],
+    [
+     247.0,
+     261.5
+    ],
+    [
+     307.0,
+     313.5
+    ]
+   ]
+  },
+  "place:platClose": {
+   "file": "platClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     134.75,
+     146.0
+    ]
+   ]
+  },
+  "place:platDesk": {
+   "file": "platDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     134.75,
+     146.0
+    ]
+   ]
+  },
+  "place:meeting": {
+   "file": "meeting.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     157.0,
+     160.75
+    ],
+    [
+     167.25,
+     169.25
+    ]
+   ]
+  },
+  "place:meetTable": {
+   "file": "meetTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     157.0,
+     160.75
+    ],
+    [
+     167.25,
+     169.25
+    ]
+   ]
+  },
+  "place:meetBoard": {
+   "file": "meetBoard.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     160.5,
+     167.5
+    ]
+   ]
+  },
+  "place:junTop": {
+   "file": "junTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     177.75,
+     194.75
+    ],
+    [
+     197.25,
+     200.5
+    ],
+    [
+     218.75,
+     224.5
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     194.0,
+     198.0
+    ]
+   ]
+  },
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     272.5,
+     276.0
+    ]
+   ]
+  },
+  "place:wdCal": {
+   "file": "wdCal.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     275.25,
+     278.75
+    ]
+   ]
+  }
+ }
+}

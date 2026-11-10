@@ -44,7 +44,7 @@ const NARR={
  {"id":"bypass","gap":0.8,"text":"And nobody may bypass it, not even an owner of the organisation."},
  {"id":"decides","gap":0.8,"text":"Who owns what was decided in Who decides."},
  {"id":"file","gap":0.8,"text":"The code owners file names the platform team for the job."},
- {"id":"both","gap":0.8,"text":"The platform team and data governance own the workflows, and the file itself."},
+ {"id":"both","gap":0.8,"text":"The platform team and the release approvers own the workflows, and the file itself."},
  {"id":"reads","gap":0.8,"text":"GitHub reads that file from main, not from the pull request, so no change picks its own reviewers."},
  {"id":"loosen","gap":0.8,"text":"And the ruleset isn't in the code at all: no pull request can loosen it."}]},
 "review":{"name":"Sent back, fixed, checked again","lead":0.6,"tail":0.6,"vo":[

@@ -131,7 +131,7 @@ scene("nogate",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
 scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     principles:wAt(sc,"sets","principles"),pr:wAt(sc,"ruleset","pull request"),rewrites:wAt(sc,"ruleset","rewrites"),deletes:wAt(sc,"ruleset","deletes"),
     owner:wAt(sc,"owner","code owner"),last:wAt(sc,"owner","last push"),nobody:wAt(sc,"bypass","nobody"),whoD:wAt(sc,"decides","Who decides"),
-    platform:wAt(sc,"file","platform team"),gov:wAt(sc,"both","data governance"),fromMain:wAt(sc,"reads","from main"),notPR:wAt(sc,"reads","not from"),
+    platform:wAt(sc,"file","platform team"),rel:wAt(sc,"both","release approvers"),fromMain:wAt(sc,"reads","from main"),notPR:wAt(sc,"reads","not from"),
     code:wAt(sc,"loosen","in the code")}));
   const back=Math.min(sc.ends.loosen+0.5,sc.dur-1.8),hall={rooms:1,doorLit:1,recs:{a:1,flow:1,lit:1},track:{a:1},main:1};
   ag_shots(ctx,S,t,sc.dur,[
@@ -140,7 +140,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     // GitHub's ruleset on main, each rule ticked as it's said; then the code owners file, read from main, never from a pull request
     {at:c.ruleset-0.3,place:"bpDesk",cut:true,keys:[[0,960,540,1.0]],draw:(x,t)=>{
       bp_ghRuleset(x,80,60,{a:1-ag_in(t,c.decides-0.2,0.5),ticks:[ag_in(t,P.pr,0.5),ag_in(t,P.rewrites,0.5),ag_in(t,P.deletes,0.5),ag_in(t,P.owner,0.5),ag_in(t,P.last,0.5),ag_in(t,c.checks+0.3,0.5)],bypass:ag_in(t,P.nobody,0.5)});
-      bp_ghOwners(x,80,60,{a:ag_in(t,c.decides+0.5,0.5),lines:[ag_in(t,P.platform-0.2,0.5),ag_in(t,P.gov-0.2,0.5)],main:ag_in(t,P.fromMain,0.5)});
+      bp_ghOwners(x,80,60,{a:ag_in(t,c.decides+0.5,0.5),lines:[ag_in(t,P.platform-0.2,0.5),ag_in(t,P.rel-0.2,0.5)],main:ag_in(t,P.fromMain,0.5)});
       const wd=ag_io(t,P.whoD-0.2,c.reads-0.2,0.5);if(wd>0)dp_tag(x,80,500,"From Who decides","grey",{a:wd});
       bp_ghOwnersCopy(x,80,520,{a:ag_in(t,P.notPR-0.2,0.6),not:ag_in(t,P.notPR+0.9,0.5)});
       const cd=ag_in(t,P.code-0.2,0.6);if(cd>0)dp_card(x,740,520,480,{kick:"In Settings",title:"main: every change through review",sub:"Not in the code"},{col:"cyan",a:cd,k:ag_spr(t,P.code-0.2,0.6)});

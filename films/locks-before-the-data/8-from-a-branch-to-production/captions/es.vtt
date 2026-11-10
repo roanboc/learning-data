@@ -117,146 +117,146 @@ Quién es dueño de qué se decidió en Quién decide.
 00:04:17.027 --> 00:04:20.382
 El archivo CODEOWNERS nombra al equipo de plataforma para el proceso.
 
-00:04:21.082 --> 00:04:25.493
-Plataforma y gobernanza de datos son dueños de los flujos de trabajo y del propio archivo.
+00:04:21.082 --> 00:04:25.868
+Plataforma y quienes aprueban las entregas son dueños de los flujos y del propio archivo.
 
-00:04:27.193 --> 00:04:33.494
+00:04:27.568 --> 00:04:33.869
 GitHub lee ese archivo de main, no del pull request, así que ningún cambio elige quién lo revisa.
 
-00:04:35.594 --> 00:04:39.871
+00:04:35.969 --> 00:04:40.246
 Y el conjunto de reglas no está en el código: ningún pull request puede aflojarlo.
 
-00:04:42.971 --> 00:04:44.506
+00:04:43.346 --> 00:04:44.881
 Jun tiene el próximo cambio.
 
-00:04:45.206 --> 00:04:49.312
+00:04:45.581 --> 00:04:49.687
 Una mañana, en Poder que se enciende, la carga se detuvo en una fila que no podía leer.
 
-00:04:50.012 --> 00:04:53.588
+00:04:50.387 --> 00:04:53.963
 Jun encendió su cuenta de administrador para abrir el archivo de esa noche.
 
-00:04:55.088 --> 00:04:58.683
+00:04:55.463 --> 00:04:59.058
 Ahora el proceso debe apartar una fila así, y cargar el resto.
 
-00:05:00.383 --> 00:05:06.402
+00:05:00.758 --> 00:05:06.777
 Jun lo escribe en una rama, y lo prueba en desarrollo, en una copia a su nombre, con datos inventados.
 
-00:05:08.302 --> 00:05:10.018
+00:05:08.677 --> 00:05:10.393
 Luego abre un pull request.
 
-00:05:11.318 --> 00:05:14.432
+00:05:11.693 --> 00:05:14.807
 Corren los checks: las pruebas del proceso y el análisis de código.
 
-00:05:15.932 --> 00:05:17.013
+00:05:16.307 --> 00:05:17.388
 Sam lo revisa.
 
-00:05:17.713 --> 00:05:21.995
+00:05:18.088 --> 00:05:22.370
 Una línea escribe cada fila apartada en el log del proceso, con nombres y todo.
 
-00:05:23.695 --> 00:05:28.442
+00:05:24.070 --> 00:05:28.817
 Un log guarda lo que recibe, fuera de las máscaras de la tabla, durante 30 días.
 
-00:05:30.342 --> 00:05:32.157
+00:05:30.717 --> 00:05:32.532
 Sam pide quitar esa línea.
 
-00:05:33.457 --> 00:05:37.565
+00:05:33.832 --> 00:05:37.940
 Jun la quita y vuelve a subir, y Sam aprueba este último push.
 
-00:05:39.465 --> 00:05:41.441
+00:05:39.840 --> 00:05:41.816
 Devuelto, corregido, revisado otra vez.
 
-00:05:43.141 --> 00:05:44.268
+00:05:43.516 --> 00:05:44.643
 Jun lo fusiona.
 
-00:05:46.168 --> 00:05:48.074
+00:05:46.543 --> 00:05:48.449
 Fusionarlo no lo pone en producción.
 
-00:05:49.374 --> 00:05:54.237
+00:05:49.749 --> 00:05:54.612
 El despliegue corre en máquinas de GitHub ubicadas dentro de la red de la universidad.
 
-00:05:54.937 --> 00:05:59.677
+00:05:55.312 --> 00:06:00.052
 Así llega a los espacios de trabajo por el camino privado de Red, almacenamiento y llaves.
 
-00:06:01.377 --> 00:06:02.828
+00:06:01.752 --> 00:06:03.203
 Primero va a pruebas.
 
-00:06:03.528 --> 00:06:12.708
+00:06:03.903 --> 00:06:13.083
 Entra como registrar-loader-test, despliega el paquete, el proceso y su configuración en archivos, y lo corre una vez en pruebas.
 
-00:06:14.408 --> 00:06:15.309
+00:06:14.783 --> 00:06:15.684
 Pasa.
 
-00:06:16.609 --> 00:06:19.948
+00:06:16.984 --> 00:06:20.323
 Luego producción espera a quien aprueba las entregas: Noor Rahman.
 
-00:06:21.648 --> 00:06:25.673
+00:06:22.023 --> 00:06:26.048
 Quien inició la ejecución no puede aprobarla, y solo main puede desplegar aquí.
 
-00:06:27.573 --> 00:06:31.887
+00:06:27.948 --> 00:06:32.262
 Noor ve qué cambió, quién lo revisó y la ejecución en pruebas, y aprueba.
 
-00:06:33.987 --> 00:06:38.244
+00:06:34.362 --> 00:06:38.619
 Ahora el flujo de trabajo pide a Databricks entrar como registrar-loader.
 
-00:06:39.544 --> 00:06:46.419
+00:06:39.919 --> 00:06:46.794
 Databricks deja entrar solo al trabajo de este repositorio en el entorno production: el que esperó a Noor.
 
-00:06:48.719 --> 00:06:54.425
+00:06:49.094 --> 00:06:54.800
 El paquete se despliega desde main, en modo producción, y el proceso corre como registrar-loader.
 
-00:06:56.125 --> 00:06:58.564
+00:06:56.500 --> 00:06:58.939
 Allí, las personas pueden mirarlo, nunca cambiarlo.
 
-00:07:00.064 --> 00:07:02.922
+00:07:00.439 --> 00:07:03.297
 Dos personas dijeron sí, y una máquina hizo el resto.
 
-00:07:04.822 --> 00:07:09.045
+00:07:05.197 --> 00:07:09.420
 Una entrada se pasa por alto: código que nadie en la universidad escribió.
 
-00:07:10.545 --> 00:07:18.095
+00:07:10.920 --> 00:07:18.470
 El despliegue usa dos acciones, pequeños programas de otros: una trae el código, otra instala la herramienta de Databricks.
 
-00:07:19.795 --> 00:07:21.997
+00:07:20.170 --> 00:07:22.372
 Corren justo al lado de la llave de producción.
 
-00:07:23.697 --> 00:07:30.103
+00:07:24.072 --> 00:07:30.478
 Una acción nombrada por una etiqueta o una rama corre lo que ese nombre señale ese día, y el nombre se puede mover.
 
-00:07:32.203 --> 00:07:36.863
+00:07:32.578 --> 00:07:37.238
 El análisis de código lee también los flujos, y marca la que no es de GitHub.
 
-00:07:38.563 --> 00:07:44.003
+00:07:38.938 --> 00:07:44.378
 Sam fija las dos, también la de GitHub, al commit que revisó, con su versión escrita al lado.
 
-00:07:45.903 --> 00:07:47.235
+00:07:46.278 --> 00:07:47.610
 Un commit no puede cambiar.
 
-00:07:48.935 --> 00:07:57.557
+00:07:49.310 --> 00:07:57.932
 Dependabot propone cada versión nueva, y cada arreglo de un fallo conocido en las bibliotecas del proceso, como un pull request revisado.
 
-00:07:59.457 --> 00:08:05.459
+00:07:59.832 --> 00:08:05.834
 Y el token del flujo de trabajo solo puede leer: solo los dos trabajos que despliegan pueden pedir entrar.
 
-00:08:09.359 --> 00:08:12.832
+00:08:09.734 --> 00:08:13.207
 A las dos de la mañana del miércoles, el proceso corre el código revisado.
 
-00:08:14.532 --> 00:08:17.031
+00:08:14.907 --> 00:08:17.406
 Una semana después, otra fila no se puede leer.
 
-00:08:18.331 --> 00:08:22.827
+00:08:18.706 --> 00:08:23.202
 El proceso la aparta, y todos los demás registros están cargados a las dos y cuarto.
 
-00:08:24.527 --> 00:08:30.395
+00:08:24.902 --> 00:08:30.770
 La oficina del registro corrige la fila antes de las nueve y media, y nadie encendió ningún poder para verla.
 
-00:08:32.495 --> 00:08:40.030
+00:08:32.870 --> 00:08:40.405
 Como en Sudáfrica, las reglas vinieron primero, alguien que no escribió el cambio lo revisó, y solo valió cuando ambos terminaron.
 
-00:08:42.130 --> 00:08:48.218
+00:08:42.505 --> 00:08:48.593
 En una emergencia, el mismo camino, más rápido, o una cuenta de administrador encendida, aprobada y registrada.
 
-00:08:49.918 --> 00:08:54.553
+00:08:50.293 --> 00:08:54.928
 El cambio de un agente sigue el mismo camino, como muestra Cada cambio, revisado.
 
-00:08:56.053 --> 00:08:58.836
+00:08:56.428 --> 00:08:59.211
 Producción cambia solo por un camino revisado.

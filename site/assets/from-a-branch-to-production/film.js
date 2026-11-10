@@ -483,7 +483,7 @@ const NARR={
  {"id":"bypass","gap":0.8,"text":"And nobody may bypass it, not even an owner of the organisation."},
  {"id":"decides","gap":0.8,"text":"Who owns what was decided in Who decides."},
  {"id":"file","gap":0.8,"text":"The code owners file names the platform team for the job."},
- {"id":"both","gap":0.8,"text":"The platform team and data governance own the workflows, and the file itself."},
+ {"id":"both","gap":0.8,"text":"The platform team and the release approvers own the workflows, and the file itself."},
  {"id":"reads","gap":0.8,"text":"GitHub reads that file from main, not from the pull request, so no change picks its own reviewers."},
  {"id":"loosen","gap":0.8,"text":"And the ruleset isn't in the code at all: no pull request can loosen it."}]},
 "review":{"name":"Sent back, fixed, checked again","lead":0.6,"tail":0.6,"vo":[
@@ -537,7 +537,7 @@ const NARR={
  {"id":"path","gap":0.8,"text":"Production changes only through a reviewed path."}]}
 };
 
-const VODUR={"principles/sa": 2.139, "principles/apartheid": 7.035, "principles/vote": 5.102, "principles/seats": 3.602, "principles/fear": 7.364, "principles/elected": 6.197, "principles/change": 3.145, "principles/first": 6.649, "principles/fixed": 8.18, "principles/assembly": 4.786, "principles/court": 7.346, "sent/adopts": 6.646, "sent/declines": 4.818, "sent/nine": 1.875, "sent/rights": 2.991, "sent/officials": 4.514, "sent/weeks": 6.219, "sent/certifies": 2.561, "sent/signs": 8.715, "sent/still": 3.384, "sent/trust": 3.964, "sent/both": 7.791, "sent/same": 2.568, "nogate/job": 4.657, "nogate/walls": 5.841, "nogate/key": 7.669, "nogate/guards": 1.529, "nogate/main": 5.664, "nogate/anyone": 4.919, "nogate/unread": 5.463, "nogate/stole": 3.505, "nogate/gate": 2.306, "rules/sets": 6.062, "rules/ruleset": 7.217, "rules/owner": 5.157, "rules/checks": 1.178, "rules/bypass": 3.914, "rules/decides": 2.355, "rules/file": 3.255, "rules/both": 4.311, "rules/reads": 6.201, "rules/loosen": 4.177, "review/next": 1.435, "review/morning": 4.006, "review/switched": 3.476, "review/aside": 3.495, "review/branch": 5.919, "review/opens": 1.616, "review/run": 3.014, "review/sam": 0.981, "review/line": 4.182, "review/log": 4.647, "review/asks": 1.715, "review/again": 4.008, "review/fixed": 1.876, "review/merges": 1.027, "door/merging": 1.806, "door/runner": 4.763, "door/private": 4.64, "door/test": 1.351, "door/signs": 9.08, "door/passes": 0.801, "door/waits": 3.239, "door/self": 3.925, "door/noor": 4.214, "door/asks": 4.157, "door/only": 6.775, "door/deploys": 5.606, "door/look": 2.339, "door/machine": 2.758, "supply/miss": 4.123, "supply/actions": 7.45, "supply/beside": 2.102, "supply/tag": 6.306, "supply/flags": 4.56, "supply/pins": 5.34, "supply/commit": 1.232, "supply/dependabot": 8.522, "supply/token": 5.902, "force/two": 3.373, "force/week": 2.399, "force/rest": 4.396, "force/office": 5.768, "force/africa": 7.435, "force/emergency": 5.988, "force/agent": 4.535, "force/path": 2.683};
+const VODUR={"principles/sa": 2.139, "principles/apartheid": 7.035, "principles/vote": 5.102, "principles/seats": 3.602, "principles/fear": 7.364, "principles/elected": 6.197, "principles/change": 3.145, "principles/first": 6.649, "principles/fixed": 8.18, "principles/assembly": 4.786, "principles/court": 7.346, "sent/adopts": 6.646, "sent/declines": 4.818, "sent/nine": 1.875, "sent/rights": 2.991, "sent/officials": 4.514, "sent/weeks": 6.219, "sent/certifies": 2.561, "sent/signs": 8.715, "sent/still": 3.384, "sent/trust": 3.964, "sent/both": 7.791, "sent/same": 2.568, "nogate/job": 4.657, "nogate/walls": 5.841, "nogate/key": 7.669, "nogate/guards": 1.529, "nogate/main": 5.664, "nogate/anyone": 4.919, "nogate/unread": 5.463, "nogate/stole": 3.505, "nogate/gate": 2.306, "rules/sets": 6.062, "rules/ruleset": 7.217, "rules/owner": 5.157, "rules/checks": 1.178, "rules/bypass": 3.914, "rules/decides": 2.355, "rules/file": 3.255, "rules/both": 4.686, "rules/reads": 6.201, "rules/loosen": 4.177, "review/next": 1.435, "review/morning": 4.006, "review/switched": 3.476, "review/aside": 3.495, "review/branch": 5.919, "review/opens": 1.616, "review/run": 3.014, "review/sam": 0.981, "review/line": 4.182, "review/log": 4.647, "review/asks": 1.715, "review/again": 4.008, "review/fixed": 1.876, "review/merges": 1.027, "door/merging": 1.806, "door/runner": 4.763, "door/private": 4.64, "door/test": 1.351, "door/signs": 9.08, "door/passes": 0.801, "door/waits": 3.239, "door/self": 3.925, "door/noor": 4.214, "door/asks": 4.157, "door/only": 6.775, "door/deploys": 5.606, "door/look": 2.339, "door/machine": 2.758, "supply/miss": 4.123, "supply/actions": 7.45, "supply/beside": 2.102, "supply/tag": 6.306, "supply/flags": 4.56, "supply/pins": 5.34, "supply/commit": 1.232, "supply/dependabot": 8.522, "supply/token": 5.902, "force/two": 3.373, "force/week": 2.399, "force/rest": 4.396, "force/office": 5.768, "force/africa": 7.435, "force/emergency": 5.988, "force/agent": 4.535, "force/path": 2.683};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2181,7 +2181,7 @@ function bp_ghRuleset(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 // that says GitHub reads it from main
 function bp_ghOwners(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
   const b=dp_page(ctx,x,y,BP_PW,400,{tool:"github",name:"GitHub",where:"main",title:".github/CODEOWNERS"});
-  const L=[["registrar/","@uni-example/platform"],[".github/","@uni-example/platform @uni-example/data-governance"]];
+  const L=[["registrar/","@uni-example/platform"],[".github/","@uni-example/platform @uni-example/release-approvers"]];
   L.forEach((l,i)=>{const la=o.lines?clamp(o.lines[i]||0,0,1):1;if(la<=0)return;dp_T(ctx,l[0],b.x+10,b.y+40+i*58,{w:500,size:28,f:"mono",col:"cyan",a:la});dp_T(ctx,l[1],b.x+200,b.y+40+i*58,{w:500,size:28,f:"mono",a:la});});
   if(o.main>0)dp_pill(ctx,b.x+10,b.y+184,"Read from main","green",{size:28,a:o.main});
   ctx.restore();}
@@ -2358,7 +2358,7 @@ scene("nogate",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
 scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     principles:wAt(sc,"sets","principles"),pr:wAt(sc,"ruleset","pull request"),rewrites:wAt(sc,"ruleset","rewrites"),deletes:wAt(sc,"ruleset","deletes"),
     owner:wAt(sc,"owner","code owner"),last:wAt(sc,"owner","last push"),nobody:wAt(sc,"bypass","nobody"),whoD:wAt(sc,"decides","Who decides"),
-    platform:wAt(sc,"file","platform team"),gov:wAt(sc,"both","data governance"),fromMain:wAt(sc,"reads","from main"),notPR:wAt(sc,"reads","not from"),
+    platform:wAt(sc,"file","platform team"),rel:wAt(sc,"both","release approvers"),fromMain:wAt(sc,"reads","from main"),notPR:wAt(sc,"reads","not from"),
     code:wAt(sc,"loosen","in the code")}));
   const back=Math.min(sc.ends.loosen+0.5,sc.dur-1.8),hall={rooms:1,doorLit:1,recs:{a:1,flow:1,lit:1},track:{a:1},main:1};
   ag_shots(ctx,S,t,sc.dur,[
@@ -2367,7 +2367,7 @@ scene("rules",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     // GitHub's ruleset on main, each rule ticked as it's said; then the code owners file, read from main, never from a pull request
     {at:c.ruleset-0.3,place:"bpDesk",cut:true,keys:[[0,960,540,1.0]],draw:(x,t)=>{
       bp_ghRuleset(x,80,60,{a:1-ag_in(t,c.decides-0.2,0.5),ticks:[ag_in(t,P.pr,0.5),ag_in(t,P.rewrites,0.5),ag_in(t,P.deletes,0.5),ag_in(t,P.owner,0.5),ag_in(t,P.last,0.5),ag_in(t,c.checks+0.3,0.5)],bypass:ag_in(t,P.nobody,0.5)});
-      bp_ghOwners(x,80,60,{a:ag_in(t,c.decides+0.5,0.5),lines:[ag_in(t,P.platform-0.2,0.5),ag_in(t,P.gov-0.2,0.5)],main:ag_in(t,P.fromMain,0.5)});
+      bp_ghOwners(x,80,60,{a:ag_in(t,c.decides+0.5,0.5),lines:[ag_in(t,P.platform-0.2,0.5),ag_in(t,P.rel-0.2,0.5)],main:ag_in(t,P.fromMain,0.5)});
       const wd=ag_io(t,P.whoD-0.2,c.reads-0.2,0.5);if(wd>0)dp_tag(x,80,500,"From Who decides","grey",{a:wd});
       bp_ghOwnersCopy(x,80,520,{a:ag_in(t,P.notPR-0.2,0.6),not:ag_in(t,P.notPR+0.9,0.5)});
       const cd=ag_in(t,P.code-0.2,0.6);if(cd>0)dp_card(x,740,520,480,{kick:"In Settings",title:"main: every change through review",sub:"Not in the code"},{col:"cyan",a:cd,k:ag_spr(t,P.code-0.2,0.6)});

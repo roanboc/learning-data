@@ -146,7 +146,7 @@ function bp_ghRuleset(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 // that says GitHub reads it from main
 function bp_ghOwners(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
   const b=dp_page(ctx,x,y,BP_PW,400,{tool:"github",name:"GitHub",where:"main",title:".github/CODEOWNERS"});
-  const L=[["registrar/","@uni-example/platform"],[".github/","@uni-example/platform @uni-example/data-governance"]];
+  const L=[["registrar/","@uni-example/platform"],[".github/","@uni-example/platform @uni-example/release-approvers"]];
   L.forEach((l,i)=>{const la=o.lines?clamp(o.lines[i]||0,0,1):1;if(la<=0)return;dp_T(ctx,l[0],b.x+10,b.y+40+i*58,{w:500,size:28,f:"mono",col:"cyan",a:la});dp_T(ctx,l[1],b.x+200,b.y+40+i*58,{w:500,size:28,f:"mono",a:la});});
   if(o.main>0)dp_pill(ctx,b.x+10,b.y+184,"Read from main","green",{size:28,a:o.main});
   ctx.restore();}

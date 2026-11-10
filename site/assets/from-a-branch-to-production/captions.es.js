@@ -86,8 +86,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Quién es dueño de qué se decidió en Quién decide.",
 "The code owners file names the platform team for the job.":
 "El archivo CODEOWNERS nombra al equipo de plataforma para el proceso.",
-"The platform team and data governance own the workflows, and the file itself.":
-"Plataforma y gobernanza de datos son dueños de los flujos de trabajo y del propio archivo.",
+"The platform team and the release approvers own the workflows, and the file itself.":
+"Plataforma y quienes aprueban las entregas son dueños de los flujos y del propio archivo.",
 "GitHub reads that file from main, not from the pull request, so no change picks its own reviewers.":
 "GitHub lee ese archivo de main, no del pull request, así que ningún cambio elige quién lo revisa.",
 "And the ruleset isn't in the code at all: no pull request can loosen it.":

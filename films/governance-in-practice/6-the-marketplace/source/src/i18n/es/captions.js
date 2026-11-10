@@ -106,8 +106,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Anil también agrega el plan de prácticas de la facultad al registro de quién usa qué, en el proyecto.",
 "So when someone next changes Clara's table, the impact check names the Faculty of Health beside Planning's census dashboard.":
 "Así, cuando alguien cambie la tabla de Clara, el control de impacto nombra a la Facultad de Salud junto al tablero del censo.",
-"Both are asked before the change ships.":
-"A los dos se les pregunta antes de que el cambio salga.",
+"Both hear about it before the change ships.":
+"Los dos se enteran antes de que el cambio salga.",
 "A reader who's known is a reader who's told.":
 "Un lector conocido es un lector avisado.",
 "Outside the university, the same rules hold.":

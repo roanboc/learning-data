@@ -11,6 +11,7 @@ A data manager's first ninety days. Helena Novak starts as the university's data
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [From gaps to a roadmap](https://data.learn-all.org/a-plan-in-ninety-days/from-gaps-to-a-roadmap/) | Planning, in stages | 10½ min | 7 | 3 questions | [script](4-from-gaps-to-a-roadmap/script.md) · [source](4-from-gaps-to-a-roadmap/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

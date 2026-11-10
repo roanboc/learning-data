@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Every change through review",
+    "key": "every-change-through-review-en",
+    "dir": "films/from-helper-to-colleague/6-every-change-through-review/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/every-change-through-review/film.js",
+    "video": "dist/every-change-through-review.mp4",
+    "file": "every-change-through-review.mp4",
+    "captions": [
+      [
+        "films/from-helper-to-colleague/6-every-change-through-review/captions/en.srt",
+        "every-change-through-review.en.srt"
+      ],
+      [
+        "films/from-helper-to-colleague/6-every-change-through-review/captions/es.srt",
+        "every-change-through-review.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-helper-to-colleague/6-every-change-through-review/source",
+      ":(exclude)films/from-helper-to-colleague/6-every-change-through-review/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 420,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

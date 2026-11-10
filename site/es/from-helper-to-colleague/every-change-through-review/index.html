@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cada cambio pasa por revisión · De ayudante a colega · Learning Data</title>
+<meta name="description" content="Una película sobre cómo llega un cambio a producción cuando lo propone un agente de IA, la sexta de De ayudante a colega: el primer pull request del agente de Planificación, con su propio nombre, cambia el plan de clases del próximo semestre, con el que las facultades contratan tutores, para que las clases de cada asignatura salgan de su propio tamaño de clase, porque en un laboratorio caben 16, no 25; entrega su evidencia, sus dos pruebas y lo que no tenía claro; dbt construye solo lo que cambió y lo que depende de ello, el informe de impacto muestra una columna nueva, y un diff de los datos, asignatura por asignatura, muestra más clases en 161 asignaturas y nada más; el agente de revisión de gobernanza lo revisa, como referencia, con un comentario que nunca aprueba ni bloquea, encuentra 31 asignaturas sin tamaño de clase y sugiere un aviso, y decide gobernanza de datos, donde el cambio y el glosario difieren; los dueños no revisan pull requests: lo que significa una palabra se decide primero, en el glosario, y a sus dueños se les avisa qué toca un cambio; quién revisa el código y quién aprueba el cambio sale de los roles del mapa de la universidad, llevados a los equipos de GitHub; las reglas de main valen para todos, nadie aprueba su propio pull request y la aprobación de un agente nunca cuenta; y la liberación construye main en pruebas cada noche, espera en producción hasta que un aprobador de liberación que no la inició dice que sí, y entra en Databricks como su propia entidad de servicio, sin secreto, para desplegar el bundle. Un agente propone; una persona libera.">
+<meta property="og:title" content="Cada cambio pasa por revisión · De ayudante a colega · Learning Data"><meta property="og:description" content="El agente de Planificación propone más clases en 161 asignaturas. Jun revisa el código, y una segunda persona aprueba y lo libera."><meta property="og:image" content="https://data.learn-all.org/assets/every-change-through-review-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/from-helper-to-colleague/every-change-through-review/">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../../"><img src="../../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../../">Empieza aquí</a><a href="../../topics/" aria-current="true">Temas</a><a href="../../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../../from-helper-to-colleague/every-change-through-review/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/every-change-through-review-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#ai-agents">Agentes de IA en el trabajo con datos</a> › <a href="../">De ayudante a colega</a></p>
+<h1>Cada cambio pasa por revisión, de agentes y de personas</h1>
+<p class="lead">El primer pull request del agente de Planificación cambia el plan de clases con el que las facultades contratan tutores. Entrega su evidencia, se construye lo que cambió, un diff muestra los datos, otro agente revisa como referencia, Jun revisa el código y Noor aprueba y lo libera.</p>
+<p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
+</section>
+<section class="module" id="watch" data-store="ld-every-change-through-review" aria-labelledby="watch-h">
+<div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
+<div class="player" data-labs="">
+<audio id="snd" preload="metadata" src="../../../assets/every-change-through-review/soundtrack.mp3"></audio><div class="poster"><img src="../../../assets/every-change-through-review-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Ver la película · 7½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Película animada, en inglés: Every change through review"></canvas>
+<div class="bar"><button id="play">Reproducir</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Buscar"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Detenerse al final de cuatro capítulos, con una pregunta cada vez">Pausa para pensar</button><button id="cc" class="on" aria-pressed="true">Subtítulos</button><button id="fs">Pantalla completa</button></div>
+</div>
+<div class="chapters" id="chapters" aria-label="Capítulos"></div>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/every-change-through-review.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/from-helper-to-colleague/6-every-change-through-review/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/from-helper-to-colleague/6-every-change-through-review/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
+<template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste cómo llega cada cambio a producción: un agente propone, una persona libera. Después: lo que un agente puede hacer solo, escrito en un mandato que firma su dueño.</h3>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 4 preguntas</a><a class="btn" href="../">Toda la serie: De ayudante a colega</a></div>
+<div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
+</section>
+
+<section class="module" id="in-the-project" aria-labelledby="project-h">
+<div class="mhead"><div><h2 id="project-h">Míralo en el proyecto</h2><p>Cada tarjeta de la película muestra un archivo real del proyecto de dbt de ejemplo. Abre en GitHub los que muestra cada capítulo, o ejecuta tú el proyecto entero. Cómo se construyó, paso a paso, lo cuenta <a href="../../in-the-weeds/"><i>En las entrañas del oficio de datos</i></a>.</p></div></div>
+<ul class="repo-list">
+<li><b>Lo que entrega el agente</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/README.md"><code>examples/class-size/README.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/pull_request.md"><code>examples/class-size/pull_request.md</code></a></span></li>
+<li><b>Qué cambió y qué toca</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/checks.txt"><code>examples/class-size/checks.txt</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/diff.txt"><code>examples/class-size/diff.txt</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/tools/diff_against_main.py"><code>scripts/tools/diff_against_main.py</code></a></span></li>
+<li><b>La revisión de un agente, como referencia</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/governance_review.md"><code>examples/class-size/governance_review.md</code></a> <a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project/skills/review-for-governance"><code>skills/review-for-governance/</code></a></span></li>
+<li><b>Quién aprueba, según el mapa</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/review-and-release/README.md"><code>review-and-release/README.md</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/review-and-release/rulesets/main.json"><code>review-and-release/rulesets/main.json</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/review-and-release/teams.yml"><code>review-and-release/teams.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/scripts/generate/teams.py"><code>scripts/generate/teams.py</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/CODEOWNERS"><code>CODEOWNERS</code></a></span></li>
+<li><b>Una persona libera</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/review-and-release/release.yml"><code>review-and-release/release.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/review-and-release/production.json"><code>review-and-release/production.json</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/databricks.yml"><code>databricks.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/resources/build.job.yml"><code>resources/build.job.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/examples/class-size/release.md"><code>examples/class-size/release.md</code></a></span></li>
+</ul>
+<p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
+</section>
+
+<section class="module" id="think-it-through" aria-labelledby="think-h">
+<div class="mhead"><div><h2 id="think-h">Piénsalo</h2><p>Las cuatro preguntas de Pausa para pensar, para una clase o un equipo. Abre una para ver la respuesta.</p></div></div>
+<div id="think-list"></div>
+</section>
+
+<section class="module" id="in-the-series" aria-labelledby="series-h">
+<div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">De ayudante a colega</a></h2><p>Película 6 de 7.</p></div></div>
+<div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../../assets/the-map-enforced-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">← Anterior · Película 5 de 7</p>
+<h3><a href="../the-map-enforced/">El mapa, aplicado</a></h3>
+<p>Todo cambio decía Jun. Ahora el agente de Planificación tiene nombre propio en cada herramienta y permisos escritos desde el mapa.</p>
+<p class="meta">8½ min · Pausa para pensar · De ayudante a colega · En inglés</p>
+<p class="tc-progress" data-progress="ld-the-map-enforced" hidden></p>
+</div>
+</article>
+</div>
+<ol class="series-list" aria-label="Todas las películas de la serie">
+<li><a href="../five-stages/"><span class="n">1</span>Cinco etapas, no un interruptor</a></li>
+<li><a href="../borrowed-rights/"><span class="n">2</span>Permisos prestados</a></li>
+<li><a href="../a-place-on-the-map/"><span class="n">3</span>Un lugar en el mapa</a></li>
+<li><a href="../rights-follow-the-role/"><span class="n">4</span>Los permisos siguen al rol</a></li>
+<li><a href="../the-map-enforced/"><span class="n">5</span>El mapa, aplicado</a></li>
+<li><a href="../every-change-through-review/" aria-current="page"><span class="n">6</span>Cada cambio pasa por revisión</a></li>
+</ol>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script>window.L10N={ui:{play:"Reproducir",pause:"Pausa",load:"Cargando…",fs:"Pantalla completa",fsExit:"Salir de pantalla completa"}};</script>
+<script src="../../../assets/every-change-through-review/captions.es.js"></script>
+<script src="../../../assets/every-change-through-review/film.js"></script>
+<script>/* the film is in English; its chapter buttons and the Pause and think kicker use these Spanish names */
+{const N={"first": "El primer pull request del agente", "hands": "Lo que entrega el agente", "checks": "Qué cambió y qué toca", "review": "La revisión de un agente, como referencia", "rules": "Quién aprueba, según el mapa", "release": "Una persona libera", "close": "Un agente propone, una persona libera"};SCENES.forEach(s=>{if(N[s.id])s.name=N[s.id];});}</script>
+<script src="../../../assets/every-change-through-review/think.es.js"></script>
+<script src="../../../assets/learn/think.js"></script>
+<script src="../../../assets/learn/path.js"></script>
+<script src="../../../assets/learn/next.js"></script>
+<script src="../../../assets/seek.js"></script>
+<script src="../../../assets/ambient.js"></script>
+</body>
+</html>

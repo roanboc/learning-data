@@ -95,97 +95,97 @@ La app de declaraciones está hecha sobre Lakebase, la base de datos Postgres de
 Linh escribe cada declaración una vez, como fila, y su coordinación la aprueba en esa misma fila.
 
 25
-00:02:52,510 --> 00:02:58,860
-Postgres atiende a la app, y el lakehouse lee las mismas filas para analizarlas, en su sitio, sin hacerla más lenta.
+00:02:52,510 --> 00:03:00,744
+Postgres atiende a la app. La plataforma guarda las mismas filas en una segunda forma para análisis, y el lakehouse las lee sin frenarla.
 
 26
-00:03:00,360 --> 00:03:06,392
+00:03:02,244 --> 00:03:08,276
 La lista de Nómina de declaraciones pendientes y el proceso que arma las horas a pagar leen esa copia.
 
 27
-00:03:07,092 --> 00:03:12,263
+00:03:08,976 --> 00:03:14,147
 También el costo de la docencia ocasional de Finanzas, y los tres leen a través de Unity Catalog.
 
 28
-00:03:13,763 --> 00:03:16,990
+00:03:15,647 --> 00:03:18,874
 Cada tabla tiene un solo escritor: la app escribe las declaraciones.
 
 29
-00:03:17,690 --> 00:03:25,233
-El lakehouse escribe los contratos del sistema de RR. HH. y se los sirve a la app, que valida cada declaración con su contrato.
+00:03:19,574 --> 00:03:27,272
+El lakehouse escribe los contratos del sistema de RR. HH., y una copia va a la app, que valida cada declaración con su contrato.
 
 30
-00:03:26,733 --> 00:03:31,283
+00:03:28,772 --> 00:03:33,322
 Como en el libro de Ámsterdam, una declaración se escribe una vez, y se lee donde se escribe.
 
 31
-00:03:35,183 --> 00:03:40,530
+00:03:37,222 --> 00:03:42,569
 Lo que desaparece: el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas.
 
 32
-00:03:41,830 --> 00:03:46,963
+00:03:43,869 --> 00:03:49,002
 Los servicios de integración que corrían entre plataformas separadas se juntan en una sola.
 
 33
-00:03:48,463 --> 00:03:56,355
+00:03:50,502 --> 00:03:58,394
 Un catálogo gobierna quién puede leer las declaraciones para análisis, con los mismos permisos, linaje y auditoría que las demás tablas.
 
 34
-00:03:57,655 --> 00:04:03,886
+00:03:59,694 --> 00:04:05,925
 ¿Qué se sigue moviendo? Nómina paga desde un sistema de nómina que la universidad compra, y que no está en la plataforma.
 
 35
-00:04:04,586 --> 00:04:10,967
+00:04:06,625 --> 00:04:13,006
 Así que en cada nómina, las horas a pagar salen de la plataforma antes del mediodía del martes, bajo un contrato con Nómina.
 
 36
-00:04:12,267 --> 00:04:15,937
+00:04:14,306 --> 00:04:17,976
 Se mueve una sola cosa, a propósito, en vez de una copia de todo.
 
 37
-00:04:17,437 --> 00:04:21,199
+00:04:19,476 --> 00:04:23,238
 La noche en que falla llega después, en «Una plataforma que se vigila sola».
 
 38
-00:04:24,699 --> 00:04:26,036
+00:04:26,738 --> 00:04:28,075
 Entonces, ¿qué conviene elegir?
 
 39
-00:04:26,736 --> 00:04:32,158
+00:04:28,775 --> 00:04:34,197
 Guarda una sola copia donde puedas, y mueve datos solo cuando quien los lee de verdad los necesita en otro lugar.
 
 40
-00:04:33,458 --> 00:04:37,052
+00:04:35,497 --> 00:04:39,091
 Decide qué sistema escribe cada tabla, y deja que los demás la lean.
 
 41
-00:04:38,352 --> 00:04:46,288
+00:04:40,391 --> 00:04:48,327
 Si un sistema comprado guarda su copia, acuerda el contrato en esa interfaz, como mostró «Mover es fácil, acordar es el trabajo».
 
 42
-00:04:47,588 --> 00:04:53,770
+00:04:49,627 --> 00:04:55,809
 «Las dos cosas a la vez» mostró una base de datos que escribe y lee. Aquí, una sola copia sirve a toda una plataforma.
 
 43
-00:04:55,270 --> 00:04:58,555
+00:04:57,309 --> 00:05:00,594
 Ya hay estándares para esto, así que no reinventes la rueda.
 
 44
-00:04:59,255 --> 00:05:03,953
+00:05:01,294 --> 00:05:05,992
 Investiga, adapta, implementa e itera, partiendo de la documentación oficial.
 
 45
-00:05:07,853 --> 00:05:14,482
+00:05:09,892 --> 00:05:16,521
 En Ámsterdam, un pago pasó a ser una línea movida en un solo libro, y el mismo libro mostraba lo que tenía cada uno.
 
 46
-00:05:15,982 --> 00:05:23,928
+00:05:18,021 --> 00:05:25,967
 En la universidad, la declaración de Linh es una fila: ella la escribe, su coordinación la aprueba, Nómina la paga y Finanzas la cuenta.
 
 47
-00:05:25,428 --> 00:05:32,989
-Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, sin copiar ni una declaración.
+00:05:27,467 --> 00:05:35,254
+Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, y ningún equipo tuvo que copiar una declaración.
 
 48
-00:05:34,689 --> 00:05:36,730
+00:05:36,954 --> 00:05:38,995
 Guarda una copia, gobernada una vez.

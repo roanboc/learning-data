@@ -1,0 +1,32 @@
+# The whole build, as a job: dbt builds and tests the project, as docs/databricks-governance.md runs it. It has no
+# schedule of its own: the release (review-and-release/release.yml) deploys the bundle (databricks.yml) and runs this
+# job every night, in test first, then in production, only once test has passed and a release approver has said yes.
+#
+# It runs as the identity the target names: the release sets it to its own, "release test" in test and "release" in
+# production (BUNDLE_VAR_service_principal, in place of the platform's service principal that databricks.yml looks
+# up), so the build in test can't write production.
+
+resources:
+  jobs:
+    build:
+      name: Build
+      description: The whole project, built and tested, with its masks and grants (docs/databricks-governance.md).
+      tasks:
+        - task_key: dbt
+          environment_key: dbt
+          dbt_task:
+            project_directory: ../
+            # With a warehouse, Databricks writes the dbt profile itself, for whoever the job runs as
+            warehouse_id: ${var.warehouse_id}
+            catalog: ${var.catalog}
+            schema: ${var.schema}
+            commands:
+              # Direct personal data masked for everyone outside personal_data_readers (the identity that runs dbt
+              # is in that group, DEC-PRJ-13), and the Planning marts granted to their readers
+              - 'dbt build --vars "{personal_data_readers: personal_data_readers, planning_readers: [learners_near_an_award_readers]}"'
+      environments:
+        - environment_key: dbt
+          spec:
+            environment_version: "5"
+            dependencies:
+              - dbt-databricks==1.12.5   # the same as requirements-databricks.txt: change both together

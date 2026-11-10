@@ -1,0 +1,347 @@
+1
+00:00:01,600 --> 00:00:03,839
+Sudáfrica, 1993.
+
+2
+00:00:05,339 --> 00:00:12,474
+Tras décadas de apartheid, los partidos que negocian su fin deben acordar cómo se escribirá una nueva constitución.
+
+3
+00:00:13,774 --> 00:00:18,976
+En abril de 1994, todos los sudafricanos votarán juntos por primera vez.
+
+4
+00:00:21,076 --> 00:00:24,778
+Los ganadores tendrán la mayoría de los escaños del parlamento que la escriba.
+
+5
+00:00:26,278 --> 00:00:33,742
+Los partidos pequeños temen lo que escribiría una mayoría: derechos que otra votación podría quitar, tribunales al servicio de un partido.
+
+6
+00:00:35,642 --> 00:00:41,939
+Y el partido que se espera que gane no aceptará una constitución escrita por negociadores que nadie eligió.
+
+7
+00:00:43,439 --> 00:00:46,684
+Algo tiene que cambiar en cómo se hace una constitución.
+
+8
+00:00:48,784 --> 00:00:55,533
+Así que acuerdan primero los principios: 34, desde derechos para todos hasta jueces que ningún partido controla.
+
+9
+00:00:57,433 --> 00:01:05,713
+Los escriben en una constitución provisional, vigente desde el 27 de abril de 1994, y nadie puede cambiarlos.
+
+10
+00:01:07,413 --> 00:01:12,299
+El nuevo parlamento, reunido como Asamblea Constitucional, escribirá el texto final.
+
+11
+00:01:13,799 --> 00:01:21,245
+Solo valdrá cuando el nuevo Tribunal Constitucional, que no lo escribió, certifique que cada parte cumple cada principio.
+
+12
+00:01:23,145 --> 00:01:29,891
+El 8 de mayo de 1996, la Asamblea aprueba su texto, con el 86 por ciento de sus miembros.
+
+13
+00:01:31,391 --> 00:01:36,309
+El 6 de septiembre, los jueces del Tribunal, todos de acuerdo, se niegan a certificarlo.
+
+14
+00:01:38,209 --> 00:01:40,184
+En nueve puntos, no cumple.
+
+15
+00:01:41,884 --> 00:01:44,975
+Entre ellos, sus derechos podían cambiarse con demasiada facilidad.
+
+16
+00:01:45,675 --> 00:01:50,289
+Y quienes vigilan al gobierno y su dinero no están lo bastante protegidos frente a él.
+
+17
+00:01:51,789 --> 00:01:58,108
+En cinco semanas, la Asamblea corrige los nueve, y el 11 de octubre aprueba el texto enmendado.
+
+18
+00:01:59,808 --> 00:02:02,469
+El 4 de diciembre, el Tribunal lo certifica.
+
+19
+00:02:04,569 --> 00:02:13,384
+El presidente Mandela la firma el 10 de diciembre de 1996, y entra en vigor el 4 de febrero de 1997.
+
+20
+00:02:15,084 --> 00:02:18,568
+Casi treinta años después, sigue siendo la constitución del país.
+
+21
+00:02:19,868 --> 00:02:23,932
+Todas las partes podían confiar en ella, porque ninguna podía ponerla en vigor sola.
+
+22
+00:02:25,432 --> 00:02:33,323
+La escribieron personas elegidas; jueces que no la escribieron la revisaron frente a promesas fijadas antes; y solo valió con ambos.
+
+23
+00:02:35,223 --> 00:02:37,891
+Un cambio en producción puede funcionar igual.
+
+24
+00:02:44,191 --> 00:02:48,948
+En la universidad, un proceso carga los datos del registro cada noche a las dos.
+
+25
+00:02:50,248 --> 00:02:56,189
+En Muros, puertas y llaves, su único espacio de trabajo se volvió tres: desarrollo, pruebas y producción.
+
+26
+00:02:57,689 --> 00:03:05,458
+En Cargas sin secretos, su despliegue recibió una llave sin ningún secreto: la identidad propia del proceso, registrar-loader.
+
+27
+00:03:07,158 --> 00:03:08,787
+Pero nada vigila la entrada.
+
+28
+00:03:10,287 --> 00:03:16,051
+Todo lo que llega a main, la rama de GitHub de la que sale producción, pasa directo a producción.
+
+29
+00:03:17,551 --> 00:03:22,570
+Cualquiera del equipo puede subir cambios, a cualquier hora, y nadie más tiene que leerlos.
+
+30
+00:03:24,270 --> 00:03:29,833
+Un cambio sin leer podría impedir que se cargue el registro de cada estudiante, o mandarlo adonde no debe.
+
+31
+00:03:31,533 --> 00:03:35,138
+Y quien robara el acceso de alguien del equipo podría hacer lo mismo.
+
+32
+00:03:36,838 --> 00:03:39,244
+Producción necesita una sola entrada, con un control.
+
+33
+00:03:41,144 --> 00:03:47,306
+Así que, antes del próximo cambio, Sam fija las reglas, como Sudáfrica fijó primero sus principios.
+
+34
+00:03:48,806 --> 00:03:56,123
+Un conjunto de reglas en main: cada cambio llega como un pull request, y nadie sube a main, ni la reescribe ni la borra.
+
+35
+00:03:58,023 --> 00:04:03,280
+Un propietario del código aprueba cada cambio, y el último push lo aprueba alguien que no lo hizo.
+
+36
+00:04:04,980 --> 00:04:06,258
+Los checks deben pasar.
+
+37
+00:04:07,558 --> 00:04:11,572
+Y nadie puede saltárselo, ni siquiera un propietario de la organización.
+
+38
+00:04:13,272 --> 00:04:15,727
+Quién es dueño de qué se decidió en Quién decide.
+
+39
+00:04:17,027 --> 00:04:20,382
+El archivo CODEOWNERS nombra al equipo de plataforma para el proceso.
+
+40
+00:04:21,082 --> 00:04:25,868
+Plataforma y quienes aprueban las entregas son dueños de los flujos y del propio archivo.
+
+41
+00:04:27,568 --> 00:04:33,869
+GitHub lee ese archivo de main, no del pull request, así que ningún cambio elige quién lo revisa.
+
+42
+00:04:35,969 --> 00:04:40,246
+Y el conjunto de reglas no está en el código: ningún pull request puede aflojarlo.
+
+43
+00:04:43,346 --> 00:04:44,881
+Jun tiene el próximo cambio.
+
+44
+00:04:45,581 --> 00:04:49,687
+Una mañana, en Poder que se enciende, la carga se detuvo en una fila que no podía leer.
+
+45
+00:04:50,387 --> 00:04:53,963
+Jun encendió su cuenta de administrador para abrir el archivo de esa noche.
+
+46
+00:04:55,463 --> 00:04:59,058
+Ahora el proceso debe apartar una fila así, y cargar el resto.
+
+47
+00:05:00,758 --> 00:05:06,777
+Jun lo escribe en una rama, y lo prueba en desarrollo, en una copia a su nombre, con datos inventados.
+
+48
+00:05:08,677 --> 00:05:10,393
+Luego abre un pull request.
+
+49
+00:05:11,693 --> 00:05:14,807
+Corren los checks: las pruebas del proceso y el análisis de código.
+
+50
+00:05:16,307 --> 00:05:17,388
+Sam lo revisa.
+
+51
+00:05:18,088 --> 00:05:22,370
+Una línea escribe cada fila apartada en el log del proceso, con nombres y todo.
+
+52
+00:05:24,070 --> 00:05:28,817
+Un log guarda lo que recibe, fuera de las máscaras de la tabla, durante 30 días.
+
+53
+00:05:30,717 --> 00:05:32,532
+Sam pide quitar esa línea.
+
+54
+00:05:33,832 --> 00:05:37,940
+Jun la quita y vuelve a subir, y Sam aprueba este último push.
+
+55
+00:05:39,840 --> 00:05:41,816
+Devuelto, corregido, revisado otra vez.
+
+56
+00:05:43,516 --> 00:05:44,643
+Jun lo fusiona.
+
+57
+00:05:46,543 --> 00:05:48,449
+Fusionarlo no lo pone en producción.
+
+58
+00:05:49,749 --> 00:05:54,612
+El despliegue corre en máquinas de GitHub ubicadas dentro de la red de la universidad.
+
+59
+00:05:55,312 --> 00:06:00,052
+Así llega a los espacios de trabajo por el camino privado de Red, almacenamiento y llaves.
+
+60
+00:06:01,752 --> 00:06:03,203
+Primero va a pruebas.
+
+61
+00:06:03,903 --> 00:06:13,083
+Entra como registrar-loader-test, despliega el paquete, el proceso y su configuración en archivos, y lo corre una vez en pruebas.
+
+62
+00:06:14,783 --> 00:06:15,684
+Pasa.
+
+63
+00:06:16,984 --> 00:06:20,323
+Luego producción espera a quien aprueba las entregas: Noor Rahman.
+
+64
+00:06:22,023 --> 00:06:26,048
+Quien inició la ejecución no puede aprobarla, y solo main puede desplegar aquí.
+
+65
+00:06:27,948 --> 00:06:32,262
+Noor ve qué cambió, quién lo revisó y la ejecución en pruebas, y aprueba.
+
+66
+00:06:34,362 --> 00:06:38,619
+Ahora el flujo de trabajo pide a Databricks entrar como registrar-loader.
+
+67
+00:06:39,919 --> 00:06:46,794
+Databricks deja entrar solo al trabajo de este repositorio en el entorno production: el que esperó a Noor.
+
+68
+00:06:49,094 --> 00:06:54,800
+El paquete se despliega desde main, en modo producción, y el proceso corre como registrar-loader.
+
+69
+00:06:56,500 --> 00:06:58,939
+Allí, las personas pueden mirarlo, nunca cambiarlo.
+
+70
+00:07:00,439 --> 00:07:03,297
+Dos personas dijeron sí, y una máquina hizo el resto.
+
+71
+00:07:05,197 --> 00:07:09,420
+Una entrada se pasa por alto: código que nadie en la universidad escribió.
+
+72
+00:07:10,920 --> 00:07:18,470
+El despliegue usa dos acciones, pequeños programas de otros: una trae el código, otra instala la herramienta de Databricks.
+
+73
+00:07:20,170 --> 00:07:22,372
+Corren justo al lado de la llave de producción.
+
+74
+00:07:24,072 --> 00:07:30,478
+Una acción nombrada por una etiqueta o una rama corre lo que ese nombre señale ese día, y el nombre se puede mover.
+
+75
+00:07:32,578 --> 00:07:37,238
+El análisis de código lee también los flujos, y marca la que no es de GitHub.
+
+76
+00:07:38,938 --> 00:07:44,378
+Sam fija las dos, también la de GitHub, al commit que revisó, con su versión escrita al lado.
+
+77
+00:07:46,278 --> 00:07:47,610
+Un commit no puede cambiar.
+
+78
+00:07:49,310 --> 00:07:57,932
+Dependabot propone cada versión nueva, y cada arreglo de un fallo conocido en las bibliotecas del proceso, como un pull request revisado.
+
+79
+00:07:59,832 --> 00:08:05,834
+Y el token del flujo de trabajo solo puede leer: solo los dos trabajos que despliegan pueden pedir entrar.
+
+80
+00:08:09,734 --> 00:08:13,207
+A las dos de la mañana del miércoles, el proceso corre el código revisado.
+
+81
+00:08:14,907 --> 00:08:17,406
+Una semana después, otra fila no se puede leer.
+
+82
+00:08:18,706 --> 00:08:23,202
+El proceso la aparta, y todos los demás registros están cargados a las dos y cuarto.
+
+83
+00:08:24,902 --> 00:08:30,770
+La oficina del registro corrige la fila antes de las nueve y media, y nadie encendió ningún poder para verla.
+
+84
+00:08:32,870 --> 00:08:40,405
+Como en Sudáfrica, las reglas vinieron primero, alguien que no escribió el cambio lo revisó, y solo valió cuando ambos terminaron.
+
+85
+00:08:42,505 --> 00:08:48,593
+En una emergencia, el mismo camino, más rápido, o una cuenta de administrador encendida, aprobada y registrada.
+
+86
+00:08:50,293 --> 00:08:54,928
+El cambio de un agente sigue el mismo camino, como muestra Cada cambio, revisado.
+
+87
+00:08:56,428 --> 00:08:59,211
+Producción cambia solo por un camino revisado.

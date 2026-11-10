@@ -1,0 +1,32 @@
+{
+  "key": "strategy-is-a-habit",
+  "title": "Strategy is a habit",
+  "sub": "The last film of Small steps, measured, and of Data management: a strategy kept as a habit. Helena puts the year's reviews in the calendar the day her strategy is approved; the first changes nothing, the second moves the plan out loud when the university decides to offer short online courses, and the year ends with what was promised beside what was delivered.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the treaty, the one-page strategy, the reviews in the calendar, the roadmap and Noor's map), green is value or something done (what was delivered, a review that held), orange is data, and amber a risk or something that waits (the thinning ozone, the risks, what didn't work).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "sih_ozone.js",
+    "sih_uni.js",
+    "sih_scenes.js"
+  ],
+  "poster": [
+    "moves",
+    "waits",
+    4.0
+  ],
+  "say": [
+    ["\\bCFCs\\b", "C F Cs"],
+    ["\\bRumelt\\b", "Roo-melt"],
+    ["\\bTOGAF\\b", "Toe-gaff"],
+    ["\\bNovak's\\b", "Noh-vak's"],
+    ["\\bShanklin\\b", "Shank-lin"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bHR\\b", "H R"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "ozone"
+  ],
+  "urgent": []
+}

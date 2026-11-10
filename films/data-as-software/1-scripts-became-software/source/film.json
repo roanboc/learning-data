@@ -1,0 +1,55 @@
+{
+  "key": "scripts-became-software",
+  "title": "Scripts became software",
+  "sub": "The film that opens Data as software, the second series of Modern data basics: in 1940 a bridge built to the best theory of its day falls in the wind, and its replacement is tested first, as a model in a wind tunnel; at the university, payroll's export, a script on one person's laptop for years, moves into the data project, where it's versioned, tested, reviewed by someone else and deployed the same way every time.",
+  "howto": "The film is drawn as the module's platform map, up close: a dark navy map with glass cards, and people lit for the dark. Blue is the platform and its structure, gold what people agree on, such as a rule, green a check that passes, amber a person's turn, such as a review or an approval, and red what breaks. The tools' pages are drawn for the film, each with a small bar naming the product.",
+  "src": [
+    "sb_bridge.js",
+    "sb_work.js",
+    "scenes.js"
+  ],
+  "logos": true,
+  "poster": [
+    "gertie",
+    "opens50",
+    4.6
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bDesai\\b",
+      "Deh-sigh"
+    ],
+    [
+      "\\bFarquharson\\b",
+      "Far-kwar-son"
+    ]
+  ],
+  "story": [
+    "gertie"
+  ],
+  "urgent": []
+}

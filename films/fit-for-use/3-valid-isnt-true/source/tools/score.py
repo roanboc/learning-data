@@ -344,7 +344,7 @@ for w_ in ('missing', 'spelled'):
 
 # 6. Say which reference: the project's file of checks; its lines as Jun writes them. No reference but the rule itself: the arc's E,
 #    alone. The awards check's reference, the boards' lists: the terpodion's B. For names, the graduate: the terpodion's G sharp. The
-#    contract; the scorecard counts them apart: allowed, the arc's E; true, the terpodion's G sharp. Only as true as its reference: the two
+#    test's method; the scorecard counts them apart: allowed, the arc's E; true, the terpodion's G sharp. Only as true as its reference: the two
 #    together
 H_ = lambda lid, word, off=0: W('which', lid, word, off)
 air(G('which', 'every', 0.2), 0.9, 0.007, px(1160), 200, 900); knock(G('which', 'every', 0.35), 0.012, px(1160), 240)
@@ -355,7 +355,7 @@ terp(B3, G('which', 'awards', 0.1), G('which', 'awards', 1.8), 0.5, att=0.3, rel
 tap(G('which', 'graduate', 0.0), 0.009, px(800))
 terp(Gs3, G('which', 'graduate', 0.4), G('which', 'graduate', 2.0), 0.5, att=0.3, rel=0.9, pan=px(800))
 knock(G('which', 'contract', 0.1), 0.012, px(1160), 240)
-for w_ in ('the dimension', 'the method'):
+for w_ in ('its method', 'reconciliation'):
     tap(H_('contract', w_, 0.0), 0.008, px(900))
 knock(G('which', 'scorecard', 0.1), 0.012, px(1060), 240)
 arc(E3, H_('scorecard', 'allowed', -0.1), H_('scorecard', 'allowed', 0.9), 0.4, rel=0.4, pan=px(1100))

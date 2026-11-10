@@ -292,12 +292,12 @@ implemented in them, the exposures, and the owners to ask. CI writes it into the
 
 Every public model and mart is an output of one data product, in `governance/4-data-products/<name>.yml`: its owner,
 domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
-and support, written by its owner. `scripts/generate/products.py` writes each product in the open
-standards, from that file and the dbt contracts: a product descriptor (`governance/6-product-descriptors/`) and a
-contract for each output (`governance/5-data-contracts/`), with the columns, types, keys, classes, tests and known
-limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
-if they're out of date, don't validate against the standards' schemas, or a shared model is in no
-product.
+and support, written by its owner. `scripts/generate/products.py` writes each product's descriptor in the
+open standard, from that file and the dbt models (`governance/6-product-descriptors/`), with the consumers from
+the lineage. Only canonical tables, the public models, have an enterprise contract (`governance/5-data-contracts/`):
+data governance's information architect writes it first, and the data team builds the model to it. The
+script fails if a model differs from its contract, a canonical table has none, a file doesn't validate
+against its standard's schema, or a shared model is in no product; `--check` in CI, if a descriptor is out of date.
 
 On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
 after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
@@ -305,7 +305,7 @@ class; and when the var `personal_data_readers` names a group, each column of di
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
-read a table, the access review, the product catalogue, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md`.
+read a table, the access review, the product catalogue, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md`.
 
 ### What each use needs
 
@@ -315,9 +315,9 @@ Each use is an exposure. In the model's YAML, `meta.quality` holds one requireme
 the `level` agreed (`Zero wrong`, `Within 2% at each ceremony`), who it was agreed with
 (`agreed_with`) and what goes wrong when it isn't met (`business_impact`). The model's owner owns
 the levels. A column a use can't do without names that use in `meta.critical_for`: the use's
-critical data. `scripts/generate/products.py` writes each requirement into the contract as a
-quality rule in words (`type: text`), with its use, level and who agreed it, until a check
-measures it, and each critical column as a critical data element (`criticalDataElement: true`).
+critical data. Each requirement stays in the model's YAML, in words, with its use, level and who
+agreed it, until a check measures it; for a canonical table, the information architect writes it
+into the enterprise contract too, as a quality rule and its critical data elements.
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.
@@ -340,7 +340,7 @@ boards make from their own decisions. A check against a copy of the same source 
 consistency, not accuracy: the copy shares the source's gaps, and agrees with them. So every
 accuracy test names its reference in `meta.reference`, beside its owner and dimension; a
 reconciliation, row by row, is the generic test `reconciles_with` (`tests/generic/`), whose method,
-`reconciliation`, goes into the contract with the reference (`scripts/generate/products.py`); and
+`reconciliation`, sits in its `meta` beside the reference (and in an enterprise contract, too); and
 the scorecard lists each accuracy test with its reference. A column whose values a reference
 confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
 `name_as_printed`, the graduate, on `name_confirmed_on`.

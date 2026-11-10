@@ -1,0 +1,15 @@
+/* Learning Data: "Pause and think" for When someone falls behind, in Latin American Spanish. Keep the keys in step with think.en.js,
+   and each right answer in the same place as in English. Words as the module's numbers.md has them. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un laboratorio",off:"Quitar las pausas",right:"Correcto.",wrong:"No exactamente.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  cause:{q:"El trabajo de Tomás se queda atrás del equipo. Antes de juzgar, ¿qué busca Helena primero?",
+    opts:[{t:"Lo que él podría hacer mejor por su cuenta: más horas, más cuidado y más esfuerzo en las semanas que volvieron.",near:true},{t:"Lo que rodea su trabajo: lo que le enseñaron, lo que le estorba y lo que se le pide hacer.",ok:true},{t:"Cuál de sus compañeros es el más rápido, para mostrarle el ritmo que lleva el resto del equipo."}],
+    why:"Mager y Pipe preguntaban si podría hacerlo si tuviera que hacerlo, y Gilbert decía mirar lo que rodea al trabajo antes que a la persona. Helena le preguntó a Tomás qué le estorbaba, y encontró tres causas que él no podía despejar solo: nadie le había enseñado las nuevas herramientas, su fuerte eran los lectores más que el código, y un momento difícil en casa. ¿El trabajo de quién, a tu alrededor, podría estar frenado por lo que lo rodea?"},
+  gap:{q:"De febrero a junio, Tomás pasó de 40 días a 35, y el equipo de 41 a 24. ¿Cómo se mide su brecha?",
+    opts:[{t:"Contra el propio cambio del equipo, porque las herramientas ayudaron a todos, y queda entre él y Helena.",ok:true},{t:"Contra la persona más rápida del equipo, porque muestra lo que las nuevas herramientas le permiten a él.",near:true},{t:"Contra los 40 días que tardaba en febrero, porque mejoró, así que no hay una brecha real de qué hablar."}],
+    why:"Sí mejoró, pero el equipo mejoró más rápido, porque las herramientas ayudaron a todos. Por eso su brecha se mide contra el propio cambio del equipo, no contra lo que Helena espera, nunca contra un compañero, y queda entre los dos. ¿Qué diría el propio cambio de tu equipo sobre alguien que te preocupa?"},
+  time:{q:"En diciembre la brecha se ha cerrado más o menos a la mitad, y los avances siguen desiguales. ¿Qué le dice Helena a Tomás?",
+    opts:[{t:"Que la brecha ya está bastante cerrada, así que el plan puede terminar y su carga volver a lo normal.",near:true},{t:"Que la próxima vez que un octubre salga mal, el equipo le quitará sus informes y se los dará a otra persona."},{t:"Que el plan sigue en 2028, y que si construir no es su fuerte, hablarán de otro rol para él.",ok:true}],
+    why:"Mejorar el trabajo de alguien puede llevar meses, o incluso años, y llega de forma desigual: septiembre fue bien, en octubre un informe volvió dos veces. Helena dice con claridad que el plan sigue, y hacia dónde puede ir, para que lo escuche ahora y no más tarde. Sus medidas siguen siendo suyas, y sus razones, privadas. ¿Qué le dirías con honestidad, ahora, a alguien cuyo plan no ha terminado?"}
+  }}};

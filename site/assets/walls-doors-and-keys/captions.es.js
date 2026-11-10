@@ -5,7 +5,7 @@
    la plataforma, el espacio de trabajo for a workspace, el catálogo, el almacenamiento for storage, los archivos for the files; un camino privado for a private path;
    la puerta trasera for the back door; una cuenta de administrador, encendida, as the series says "switched on"; desarrollo, pruebas y producción;
    la llave for the data's key (a key that opens a lock, not a sign-in key); el equipo de seguridad; las copias de seguridad and un respaldo for backups;
-   RR. HH. for HR; and the other films' Spanish titles as their pages give them (check at build: ¿Quién es, de verdad?, Poder que se enciende,
+   RR. HH. for HR; and the other films' Spanish titles as their pages give them (checked 10 November 2026: ¿Quién es, en realidad?, Poder que se enciende,
    De una rama a producción, Borrado es borrado; Quién decide is on the site). */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Ragusa, on the Adriatic coast, in the 1370s.":
@@ -87,7 +87,7 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "They follow the areas on the university's map, each with the owner Who decides wrote down.":
 "Siguen las áreas del mapa de la universidad, cada una con el dueño que anotó Quién decide.",
 "A wall doesn't make anyone inside it trusted: every request is still checked, as Who is it, really? showed.":
-"Un muro no vuelve de confianza a nadie dentro: cada petición se sigue revisando, como mostró ¿Quién es, de verdad?",
+"Un muro no vuelve de confianza a nadie dentro: cada petición se sigue revisando, como mostró ¿Quién es, en realidad?",
 "But walls keep the ways in few and the rooms small, so a mistake, or an intruder, stays where it started.":
 "Pero los muros dejan pocas entradas y salas pequeñas, y así un error, o un intruso, se queda donde empezó.",
 "Then, the doors.":

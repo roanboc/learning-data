@@ -156,7 +156,7 @@ Siguen las áreas del mapa de la universidad, cada una con el dueño que anotó 
 
 40
 00:04:03,637 --> 00:04:09,993
-Un muro no vuelve de confianza a nadie dentro: cada petición se sigue revisando, como mostró ¿Quién es, de verdad?
+Un muro no vuelve de confianza a nadie dentro: cada petición se sigue revisando, como mostró ¿Quién es, en realidad?
 
 41
 00:04:11,493 --> 00:04:17,568

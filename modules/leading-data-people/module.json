@@ -1,0 +1,22 @@
+{
+  "order": 10,
+  "id": "leading-data-people",
+  "items": [
+    "the-new-skills",
+    "working-with-people",
+    "leading-a-data-team",
+    "ownership-and-performance"
+  ],
+  "name": {
+    "en": "Leading data people",
+    "es": "Liderar equipos de datos"
+  },
+  "who": {
+    "en": "For anyone who works in data, and anyone who leads the people who do",
+    "es": "Para quien trabaja con datos, y para quien lidera a las personas que lo hacen"
+  },
+  "line": {
+    "en": "The skills data work needs now, and leading the people who do it: seeing the whole, working beside agents, listening, explaining, saying no well, leading a team, owning an outcome, and growing people.",
+    "es": "Las habilidades que hoy pide el trabajo con datos, y cómo liderar a quienes lo hacen: ver el conjunto, trabajar junto a agentes, escuchar, explicar, decir que no bien, liderar un equipo, hacerse cargo de un resultado, y ayudar a crecer a las personas."
+  }
+}

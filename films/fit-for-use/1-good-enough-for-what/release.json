@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Good enough for what?",
+    "key": "good-enough-for-what-en",
+    "dir": "films/fit-for-use/1-good-enough-for-what/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/good-enough-for-what/film.js",
+    "video": "dist/good-enough-for-what.mp4",
+    "file": "good-enough-for-what.mp4",
+    "captions": [
+      [
+        "films/fit-for-use/1-good-enough-for-what/captions/en.srt",
+        "good-enough-for-what.en.srt"
+      ],
+      [
+        "films/fit-for-use/1-good-enough-for-what/captions/es.srt",
+        "good-enough-for-what.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/fit-for-use/1-good-enough-for-what/source",
+      ":(exclude)films/fit-for-use/1-good-enough-for-what/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 231,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -17,7 +17,8 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `student` | 25/25 | 18/18 | 8/8 | 18/18 |  | 69/69 |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 63/63 (1 warn) | 46/46 | 30/30 | 37/37 | 2/2 | 178/178 (1 warn) |
+| `workload` |  | 1/1 |  |  |  | 1/1 |
+| **All** | 63/63 (1 warn) | 47/47 | 30/30 | 37/37 | 2/2 | 179/179 (1 warn) |
 
 ## Not passed
 

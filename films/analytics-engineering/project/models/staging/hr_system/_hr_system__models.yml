@@ -47,6 +47,9 @@ models:
     description: One row per version of a contract of employment, as the HR system recorded it.
     config:
       meta: {owner: HR, domain: hr}
+      # Protected, not private like the rest of staging: other teams' models read HR's contracts from
+      # here, as the workload agent's mart does (models/marts/workload/). Only HR's staging changes them.
+      access: protected
     data_tests:
       - unique_combination:
           arguments:

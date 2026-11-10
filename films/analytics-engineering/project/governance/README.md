@@ -11,6 +11,7 @@ What data governance defines that isn't dbt's: who owns what, the architecture m
 | `5-data-contracts/` | Each product output's contract, in the Open Data Contract Standard | Generated from the dbt contracts (`scripts/generate/products.py`) |
 | `6-product-descriptors/` | Each product, in the Open Data Product Standard | Generated, the same way |
 | `7-standards/` | The two standards' schemas, that the generated files are checked against | Copied from the standards |
+| `8-mandates/` | Each agent's mandate: the one kind of task it may do alone, and where, and what holds each line | Each agent's owner, approved by a second person |
 
 The folders are numbered in the order to read them. Files are named after what they hold, never by a code.
 

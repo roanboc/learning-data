@@ -1,0 +1,29 @@
+{
+  "key": "forgetting-a-person",
+  "title": "Forgetting a person",
+  "sub": "The third film of Kept for a reason, the third series of Data protection and privacy: people can ask to see the data held about them, to correct it, to have it deleted and to stop a use of it; to answer, an organisation must find every place a person's data lives, by every number and form of their name and through lineage, before anyone asks; and what can't be deleted is said, with its reason and its end date.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes. Cyan is who someone is, such as a person's number; green is allowed, or kept for a reason; coral is refused or removed; violet is personal data that must stay hidden. The opening, Spain from 1998 to 2014, is drawn at night, with the place and year on a tag.",
+  "src": [
+    "fp.js",
+    "story.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "story",
+    "stays",
+    3.5
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"],
+    ["\\bNguyen\\b", "Win"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bCosteja\\b", "Costéha"],
+    ["\\bGDPR\\b", "G D P R"]
+  ],
+  "story": [
+    "story"
+  ],
+  "urgent": []
+}

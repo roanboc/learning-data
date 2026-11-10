@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Design it simple",
+    "key": "design-it-simple-en",
+    "dir": "films/a-plan-in-ninety-days/3-design-it-simple/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/design-it-simple/film.js",
+    "video": "dist/design-it-simple.mp4",
+    "file": "design-it-simple.mp4",
+    "captions": [
+      [
+        "films/a-plan-in-ninety-days/3-design-it-simple/captions/en.srt",
+        "design-it-simple.en.srt"
+      ],
+      [
+        "films/a-plan-in-ninety-days/3-design-it-simple/captions/es.srt",
+        "design-it-simple.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/a-plan-in-ninety-days/3-design-it-simple/source",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
+      ":(exclude)films/a-plan-in-ninety-days/3-design-it-simple/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 294,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

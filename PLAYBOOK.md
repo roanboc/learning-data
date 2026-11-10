@@ -272,6 +272,7 @@ A film makes people feel they understand; learning comes from using the ideas. T
 - **Link everything back.** Each lab plays its chapter of the film, and each scenario points to its lab. Trying the scenarios before the labs is fine: guessing first makes the answer stick.
 - **Remember progress for the person, not about them.** Progress stays in the browser; nothing is sent anywhere.
 - **Make every picture operable without a mouse.** Every canvas interaction also has a button.
+- **A lab never waits for the film.** Since the films make their pictures only when a visitor reaches for the player (4 November 2026), *The Inner Life of Data*'s labs page, which holds a player for "Watch this part", left every lab stage blank until the player was touched (5 November, PR #170). A lab draws on its own and only repaints when the film's pictures arrive. `smoke.py`'s `labs-drawn` opens every labs page, on a phone and a laptop, without touching a player, and fails a blank picture.
 
 *Ask: what will someone be able to decide after this that they couldn't before?*
 

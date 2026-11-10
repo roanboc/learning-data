@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Walls, doors and keys, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (who, doors, copies), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "who":{q:"Los datos de la universidad están en los edificios de un proveedor de nube. ¿A quién le toca decidir quién puede leerlos?",
+    opts:[{t:"A la universidad: quién entra y qué puede hacer cada uno es siempre cosa suya.",ok:true},{t:"Al proveedor de nube: protege los edificios, las máquinas y la red."},{t:"A quienes hacen la plataforma: su software revisa cada solicitud que llega.",near:true},{t:"A quien nombre el contrato: un contrato puede dejar los datos en otras manos."}],
+    why:"El proveedor de nube protege sus edificios, sus máquinas y la red entre ellas; quienes hacen la plataforma protegen el software, y cómo revisa cada solicitud, con las reglas que se le dan. Quién entra y qué puede hacer cada uno lo decide la universidad, diga lo que diga el contrato: proteger los datos siempre le toca a ella. ¿Quién fija hoy esas reglas para tus datos?"},
+  "doors":{q:"Alguien lee los archivos de los datos directamente del almacenamiento. ¿Qué se ha saltado?",
+    opts:[{t:"Casi nada: el almacenamiento aplica las reglas del catálogo, archivo por archivo."},{t:"La lista corta: el almacenamiento puede enviar sus archivos a cualquier sitio."},{t:"Las revisiones del catálogo: el almacenamiento guarda archivos, sin máscaras ni reglas.",ok:true},{t:"Solo las máscaras: el almacenamiento sigue aplicando todas las demás reglas.",near:true}],
+    why:"El almacenamiento guarda archivos, y puede decir quién lee un archivo, pero no sabe nada de columnas, máscaras ni reglas para las filas: eso lo aplica el catálogo, en cada solicitud que pasa por él. Quien lee los archivos directamente del almacenamiento se lo salta todo; por eso la puerta trasera sigue cerrada, y solo la abre una cuenta de administrador encendida para la tarea. ¿Quién puede leer hoy tu almacenamiento directamente?"},
+  "copies":{q:"Un atacante se adueña de una cuenta de administrador en el lugar aparte de las copias. ¿Por qué no puede borrarlas?",
+    opts:[{t:"Las copias están cifradas, así que sin la llave no se pueden encontrar."},{t:"Cada copia está bloqueada treinta días: nadie puede borrarla, ni un administrador.",ok:true},{t:"Las copias están en un lugar aparte, con sus propios administradores.",near:true},{t:"Cada mes se restaura una copia, así que cualquier copia borrada vuelve."}],
+    why:"El lugar aparte deja a los administradores de producción lejos de las copias, pero este atacante es uno de los administradores del propio lugar. Lo que lo detiene es el bloqueo: durante treinta días nadie puede cambiar ni borrar una copia, tampoco un administrador. La restauración de cada mes prueba que una copia funciona; no devuelve una que ya no está. ¿Podría hoy alguien con tus permisos de administrador borrar tus copias de seguridad?"}
+  }}};

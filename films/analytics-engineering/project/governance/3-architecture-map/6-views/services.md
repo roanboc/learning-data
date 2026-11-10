@@ -33,13 +33,13 @@ Its steps aren't on the map yet.
 
 | Step | Who does it | Reads | Writes | Then |
 |---|---|---|---|---|
-| raise a ticket | requester |  |  | draft the change |
-| draft the change | planning contributor |  |  | build it in development |
-| build it in development | planning contributor |  |  | open a pull request |
-| open a pull request | planning contributor |  |  | review the code |
-| review the code | analytics engineer |  |  | approve the change |
-| approve the change | product owner |  |  | release to production |
-| release to production | release approver |  |  |  |
+| raise a ticket | requester |  | ticket | draft the change |
+| draft the change | planning contributor | ticket, role and its steps, business term, business rule, data contract, owner and column class, data product, team memory | change draft | build it in development |
+| build it in development | planning contributor | change draft, data product | test and its result | open a pull request |
+| open a pull request | planning contributor | change draft, test and its result | pull request | review the code |
+| review the code | analytics engineer | pull request, change draft, test and its result | code review | approve the change |
+| approve the change | product owner | pull request, code review | approval | release to production |
+| release to production | release approver | approval, pull request | data product |  |
 
 ### Define or change a term
 

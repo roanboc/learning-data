@@ -23,6 +23,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
+| [DEC-CLM-01](../sources/claims_app/_claims_app__decisions.yml) | source `claims_app` | **The claims are read where the app writes them.** The project reads the claims app's own table in place, through Unity Catalog, where the app's database is registered as the catalog claims_app. Nothing copies the claims in, by a nightly job or by change capture, so there's no _loaded_at, and freshness reads updated_at, the app's own time of a claim's last change. | Expected: Payroll, Finance and the claims job read the claims as the app wrote them. Found: The app keeps its claims in its own Postgres database on Lakebase, which Unity Catalog reads in place, with its permissions, lineage and audit. A copy would add a pipeline to run, a second place to govern, and a delay in which the copy falls behind the app. | Noor, data architect, with HR | 5 Nov 2026 | agreed |
 | [DEC-PRJ-01](../models/_shared/_shared__decisions.yml) | project | **Keys are qualified by their key set.** Keys are qualified by where they come from: key sets SIS, LMS and SC. Every hash is kept beside its readable key. | Two systems can use the same-looking key for different people. A hash alone can't be read or checked. | Noor, data architect | 5 Oct 2026 | agreed |
 | [DEC-SIS-04](../sources/student_system/_student_system__decisions.yml) | source `student_system` | **Records closed before November 2024 come from the archive.** The student system's records closed before 1 November 2024, when its history here starts, are read from its archive, as their own table, past_learners. The learner doesn't read it, since the questions it answers start in 2025. The person domain will, to find who a new record already is. | Expected: Every student record the student system holds. Found: Its history here starts on 1 November 2024, so graduates and withdrawals from before then are only in its archive (analyses/profiling/profile_keys_held.sql). |  |  | proposed |
 | [DEC-STU-03](../models/core/student/_student__decisions.yml) | domain `student` | **The learner's business key is the student ID.** The learner's business key is the student ID, which the registrar's office issues. A learner the student system doesn't know keeps the key of the first system that knew them. | The student system is the system of record for learners. Short-course customers and platform-only learners still need a key. | Mei Tanaka and Noor | 5 Oct 2026 | agreed |
@@ -103,6 +104,7 @@ How many decisions each log holds at each step. A domain's project, when it has 
 | consumer `finance` | 1 |  | 1 | 1 |  |  |  |  |
 | consumer `planning` | 1 |  | 1 |  |  |  |  |  |
 | consumer `wallet` |  |  | 1 |  |  |  |  |  |
+| source `claims_app` |  | 1 |  |  |  |  |  |  |
 | source `learning_platform` |  |  |  | 2 |  |  |  | 1 |
 | source `short_courses` |  |  |  | 2 | 1 |  |  | 1 |
 | source `student_system` |  | 1 |  | 3 |  |  |  | 1 |

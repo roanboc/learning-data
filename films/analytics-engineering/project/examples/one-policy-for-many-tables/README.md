@@ -67,4 +67,4 @@ older compute is refused. The job runs on a serverless SQL warehouse. Policies u
 account admin, so only the classes above can be set, and only by those allowed to.
 
 How the project tags each column, and the first policy by tag it wrote, are in
-`docs/databricks-governance.md`, sections 1 and 3; section 16 points here.
+`docs/databricks-governance.md`, sections 1, 3 and 16; section 17 points here.

@@ -40,7 +40,7 @@ The last step of every change is a check that keeps it: without one, a change la
 
 | The change, and the film that shows it | What keeps it |
 |---|---|
-| *Good enough for what?* | The uses and their levels, in the list's contract |
+| *Good enough for what?* | The uses and their levels, written beside the list |
 | *A hundred records* | The checks the profile led to |
 | *Valid isn't true* | Each graduate's confirmation; the reconciliation with the boards |
 | *Late is wrong too* | Each source's age, shown on the list and checked before the send |

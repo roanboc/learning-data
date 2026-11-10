@@ -2402,7 +2402,7 @@ function sw_order(ctx,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const slot
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the year's ledger: each change, and what keeps it */
-const SW_LEDGER=[["Good enough for what?","The uses and their levels, in the list's contract"],["A hundred records","The checks the profile led to"],
+const SW_LEDGER=[["Good enough for what?","The uses and their levels, written beside the list"],["A hundred records","The checks the profile led to"],
   ["Valid isn't true","Each graduate's confirmation; the reconciliation with the boards"],["Late is wrong too","Each source's age, shown on the list and checked before the send"],
   ["The hidden factory","Names fixed and checked at the source, each night"],["Report, fix, tell","Every report answered in two working days; the old form's check"],
   ["Read by an agent","What empty means, written down; two columns that must agree"],["Small, every week","The hand checks, kept by the hundred records"]];

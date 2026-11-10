@@ -161,6 +161,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 - [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 - [A hundred records](../films/fit-for-use/2-a-hundred-records/) — `a-hundred-records`
+- [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
 
 ### Quality as a habit
 
@@ -325,6 +326,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
+- [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 
 ## Leading data people
 

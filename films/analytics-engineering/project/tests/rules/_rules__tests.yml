@@ -17,6 +17,14 @@ data_tests:
     config:
       meta: {owner: HR, dimension: completeness}
 
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and no longer than its field (DEC-SIS-07). It
+      measures validity: it has no reference but its rule, so it says a name is allowed, never right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
   # each night, on stg_student_system__graduations
   - name: family_name_may_be_cut_short
     description: >

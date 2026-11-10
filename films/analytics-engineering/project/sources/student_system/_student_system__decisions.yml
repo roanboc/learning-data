@@ -105,4 +105,4 @@ decisions:
     decided_on: 2026-09-14
     status: agreed
     sources: [student_system]
-    implemented_in: [night_file_keeps_every_letter, family_name_may_be_cut_short]
+    implemented_in: [night_file_keeps_every_letter, family_name_may_be_cut_short, names_are_allowed]

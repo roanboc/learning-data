@@ -496,10 +496,10 @@ function gk_exposure(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),n=GK_EX
   if(F.rows.length&&o.hand>0.01)wc_hand(ctx,"a new reader, written in the project",1600,F.rows[0]-60,{size:36,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand,0,1)});
   if(o.tag>0.01)gu_filmTag(ctx,120,820,"Change without surprises",clamp(o.tag,0,1));}
 // a change to Clara's table, on its pull request: the impact check's report, as its description shows it; who uses it, the faculty's plan
-// lit (o.who), and who to ask (o.ask)
+// lit (o.who), and who to tell (o.ask)
 const GK_RNR=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`mart_planning__near_award`: **breaking**: removed faculty_code, added faculty. Needs a new",col:GV.redInk},
   {cont:1,s:"version, with a deprecation date for this one",col:GV.redInk},{h:2,s:"Who uses it"},{li:"`census_dashboard`, owned by Planning"},{li:"`health_placements_plan`, owned by Faculty of Health"},
-  {fold:1},{h:2,s:"Who to ask"},{s:"Faculty of Health; Planning"}];
+  {fold:1},{h:2,s:"Who to tell"},{s:"Faculty of Health; Planning"}];
 function gk_impact(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:"Rename faculty_code to faculty",titleSize:40,state:["Open",GV.green],
     sub:"Jun Park wants to merge into main"});gu_box(ctx,150,248,1620,596,null,{seed:1021});
   gk_md(ctx,150,248,1620,GK_RNR.map((it,i)=>Object.assign({},it,{lit:i===7?clamp(o.who||0,0,1):i===10?clamp(o.ask||0,0,1):0,p:i>=5?clamp(o.u==null?1:o.u,0,1):1})));}

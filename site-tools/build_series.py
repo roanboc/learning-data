@@ -1153,11 +1153,26 @@ def legibility():
     return fill((ROOT / "films" / "legibility-report.md").read_text(), LEGIBLE, rows)
 
 
+TOPIC_ROWS = ("<!-- topics: made by site-tools/build_series.py from the topics and each module's module.json -->", "<!-- /topics -->")
+
+
+def readme_topics():
+    """README.md, with its table of topics made from the topics, their series and each module's "who", so a film never edits
+    it: a row names a topic's films and series, not what each film covers (that is on the series' pages)."""
+    who = {m["id"]: m["who"]["en"] for m in load_modules()}
+    rows = [f"The site has {say_n('en', len(live()))} big topics. Start with the first, the overview; then pick the topic you need, "
+            "in any order. Each topic holds films and series.", "", "| Topic | What it covers | Films and series | For |", "|---|---|---|---|"]
+    for t in live():
+        items = ", ".join(f"[{entry('en', i)['title']}]({BASE}{entry('en', i)['href']})" for i in shown(t))
+        rows.append(f"| {t['name']['en']} | {t['line']['en']} | {items} | {who.get(t['id'], '')} |")
+    return fill((ROOT / "README.md").read_text(), TOPIC_ROWS, rows)
+
+
 def lists():
     """Every shared list made from the films' own rows: (path from the repository's root, text)."""
     out = [(p.parent / "proposal.md", decided(p.parent)) for p in sorted((ROOT / "films").glob("*/proposal.md"))
            if DECIDED[0] in p.read_text()]
-    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out]
+    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out] + [("README.md", readme_topics())]
 
 
 def pages():

@@ -154,7 +154,7 @@ AG_PLACES.swSheet=c=>sw_paintSheet(c);
    Flat land to low hills, an irrigation canal running straight away from us, fields in parcels; the low winter sun on the right; and a
    table of plain boards along the bottom of the frame, where people stand behind it, cut at its back edge (SW_TABLE.back). */
 const SW_TABLE={back:806,front:880},SW_VALLEY={k:12200,f:1000};   // the ground: a point py px below the horizon is k/py metres away
-function sw_paintValley(c){c.fillStyle=rgba(SWC.sky1,1);c.fillRect(0,0,W,H);const hz=470;
+function sw_paintValley(c,o){o=o||{};const table=o.table!==false,yEnd=table?SW_TABLE.back+6:H;c.fillStyle=rgba(SWC.sky1,1);c.fillRect(0,0,W,H);const hz=470;
   sw_sky(c,[184,198,206],[240,230,212],0,hz,9);dq_pool(c,1880,260,800,[255,226,180],0.22,0.6);
   // low hills far off, a Sierra in the haze
   c.save();const hill=[[-20,hz-34],[200,hz-60],[420,hz-48],[640,hz-70],[900,hz-52],[1100,hz-80],[1320,hz-64],[1560,hz-96],[1760,hz-72],[1940,hz-84]];
@@ -162,14 +162,14 @@ function sw_paintValley(c){c.fillStyle=rgba(SWC.sky1,1);c.fillRect(0,0,W,H);cons
   // the flat valley, seen from a person's height: parcels of young wheat, wheat in rows, ploughed and fallow earth, each a rectangle on
   // the ground, so they narrow and crowd towards the horizon; field roads between them; rows within them where they're near enough to see
   const nz=dq_noise(113),Z=py=>SW_VALLEY.k/Math.max(0.5,py-hz),crops=[[132,146,82],[156,158,94],[170,148,112],[184,170,128],[124,140,80],[160,150,100]];
-  dq_field(c,0,hz,W,SW_TABLE.back+6-hz,1,(px,py,out)=>{const z=Z(py),X=(px-960)*z/SW_VALLEY.f,i=Math.floor(X/120+500),j=Math.floor(z/170),hsh=((i*73856093)^(j*19349663))>>>0,
+  dq_field(c,0,hz,W,yEnd-hz,1,(px,py,out)=>{const z=Z(py),X=(px-960)*z/SW_VALLEY.f,i=Math.floor(X/120+500),j=Math.floor(z/170),hsh=((i*73856093)^(j*19349663))>>>0,
       cr=crops[hsh%crops.length],fx=((X/120+500)%1+1)%1,fz=(z/170)%1,lane=Math.min(fx,1-fx)*120<3.2||Math.min(fz,1-fz)*170<4,
       rows=Math.sin(X/1.6*TAU)*0.05*clamp(1-z/150,0,1),m=nz(px/300,py/60,3),far=sstep(200,2400,z),
       base=lane?[196,182,148]:cr,k=(0.9+0.12*m+rows)*(1+0.05*sstep(0,W,px));
     const b=mix(base,[206,202,190],far*0.75);out[0]=b[0]*k;out[1]=b[1]*k;out[2]=b[2]*k;});
   let h=c.createLinearGradient(0,hz-6,0,hz+120);h.addColorStop(0,"rgba(236,230,216,0.8)");h.addColorStop(1,"rgba(236,230,216,0)");c.fillStyle=h;c.fillRect(0,hz-6,W,126);
   // the canal: a straight line of still water on the ground, X from 12 to 18 m, running to the horizon, the sky's light in it, its banks raised
-  const at=(X,py)=>960+X*SW_VALLEY.f/Z(py),y1=SW_TABLE.back+4;
+  const at=(X,py)=>960+X*SW_VALLEY.f/Z(py),y1=table?SW_TABLE.back+4:H;
   c.beginPath();c.moveTo(at(10.6,hz+1.5),hz+1.5);c.lineTo(at(19.4,hz+1.5),hz+1.5);c.lineTo(at(19.4,y1),y1);c.lineTo(at(10.6,y1),y1);c.closePath();c.fillStyle="rgba(176,160,120,1)";c.fill();
   c.beginPath();c.moveTo(at(12,hz+1.5),hz+1.5);c.lineTo(at(18,hz+1.5),hz+1.5);c.lineTo(at(18,y1),y1);c.lineTo(at(12,y1),y1);c.closePath();
   const wg=c.createLinearGradient(0,hz,0,y1);wg.addColorStop(0,"rgba(222,228,226,1)");wg.addColorStop(1,"rgba(176,190,192,1)");c.fillStyle=wg;c.fill();
@@ -178,7 +178,7 @@ function sw_paintValley(c){c.fillStyle=rgba(SWC.sky1,1);c.fillRect(0,0,W,H);cons
   const r=ag_rnd(131);for(let k=0;k<9;k++){const z=260+k*k*120+r()*60,py=hz+SW_VALLEY.k/z,x=at(21+r()*4,py),s=clamp(1400/z,1.2,14);
     ag_soft(c,cc=>cc.ellipse(x,py-s*1.6,s*1.1,s*1.6,0,0,TAU),mix(SWC.tree,SWC.haze,0.3+0.4*sstep(300,3000,z)),mix(SWC.tree,[230,226,200],0.55),x+s*0.4,py-s*2.4,s*2,null);}
   // the table: plain boards, its top seen a little from above; its front edge; under it, the trestles and the ground in shade
-  const T=SW_TABLE;c.fillStyle="rgba(96,78,56,1)";c.fillRect(0,T.front,W,H-T.front);let tg=c.createLinearGradient(0,T.front,0,H);tg.addColorStop(0,"rgba(40,28,16,0.55)");tg.addColorStop(1,"rgba(40,28,16,0.25)");c.fillStyle=tg;c.fillRect(0,T.front,W,H-T.front);
+  if(!table)return;const T=SW_TABLE;c.fillStyle="rgba(96,78,56,1)";c.fillRect(0,T.front,W,H-T.front);let tg=c.createLinearGradient(0,T.front,0,H);tg.addColorStop(0,"rgba(40,28,16,0.55)");tg.addColorStop(1,"rgba(40,28,16,0.25)");c.fillStyle=tg;c.fillRect(0,T.front,W,H-T.front);
   for(const lx of [150,1730]){c.fillStyle=rgba(SWC.woodDk,1);c.fillRect(lx,T.front+20,40,H-T.front-20);c.fillStyle="rgba(255,236,206,0.12)";c.fillRect(lx+30,T.front+20,6,H-T.front-20);}
   tg=c.createLinearGradient(0,T.back,0,T.front);tg.addColorStop(0,rgba(SWC.woodHi,1));tg.addColorStop(1,rgba(SWC.wood,1));c.fillStyle=tg;c.fillRect(0,T.back,W,T.front-T.back);
   c.strokeStyle="rgba(80,54,32,0.35)";c.lineWidth=2;for(const y of [T.back+24,T.back+50]){c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke();}
@@ -186,6 +186,7 @@ function sw_paintValley(c){c.fillStyle=rgba(SWC.sky1,1);c.fillRect(0,0,W,H);cons
   c.fillStyle="rgba(255,240,214,0.35)";c.fillRect(0,T.back,W,2);
   tg=c.createLinearGradient(0,T.front,0,T.front+30);tg.addColorStop(0,rgba(SWC.wood,1));tg.addColorStop(1,rgba(SWC.woodDk,1));c.fillStyle=tg;c.fillRect(0,T.front,W,30);c.fillStyle="rgba(255,236,206,0.3)";c.fillRect(0,T.front,W,1.5);}
 AG_PLACES.swValley=c=>sw_paintValley(c);
+AG_PLACES.swValley2=c=>sw_paintValley(c,{table:false});   // the same valley, no table: the field day of 1954
 
 /* ---------------------------------------------------------------- small things: a sprig, a seed envelope, a sack of grain
    sw_sprig(ctx, x, y, h, o): a small wheat plant standing at (x, y), h tall (o.rust 0 to 1, o.ripe, o.a, o.k: it grows up from the

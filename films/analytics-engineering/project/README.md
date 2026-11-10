@@ -42,7 +42,7 @@ Then, if you like:
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
 | `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
-| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/`. The scorecard is the last run; every run also keeps each check's result in `check_results`, night after night, for the week: `docs/every-week.md` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
@@ -209,8 +209,8 @@ project/
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
-├── docs/                     how the work is done: the process, the conventions, the one-page plan;
-│                             decisions.md [generated], the index of every decision log; scorecard.md
+├── docs/                     how the work is done: the process, the conventions, the one-page plan,
+│                             every week; decisions.md [generated], the index of every decision log; scorecard.md
 │                             [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py

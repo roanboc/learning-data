@@ -27,7 +27,8 @@ function sw_hat(c,col,band,o){o=o||{};const straw=!!o.straw;
 
 /* ---------------------------------------------------------------- the people
    The team, 1945 to 1948: three young Mexican agronomists and Norman Borlaug, in field shirts; two wear field hats. The farmers at the
-   field day of 1954, and at the table in 1955: in plain shirts and work clothes, two in straw hats, one woman with her hair tied back. */
+   field day of 1954, and at the table in 1955: in plain shirts and work clothes, two in straw hats, one woman with her hair tied back.
+   At the university: a graduate of December 2025 in her gown, and an admissions officer. */
 const SW_P={
   agr1:{key:"sw_agr1",name:"a young agronomist",skin:[186,136,102],hair:{style:"side",c:[26,22,22]},top:{kind:"shirt",c:[224,216,196]},
     hat:{paint:(c,P)=>sw_hat(c,[150,124,92],[70,54,40])},breath:0.29},
@@ -40,5 +41,11 @@ const SW_P={
   farmer2:{key:"sw_farmer2",name:"a farmer",skin:[182,130,96],hair:{style:"bun",c:[28,24,24]},earrings:[200,180,140],top:{kind:"tunic",c:[206,184,160]},breath:0.31},
   farmer3:{key:"sw_farmer3",name:"a farmer",skin:[150,104,76],hair:{style:"side",c:[40,34,30]},top:{kind:"shirt",c:[190,170,146]},
     hat:{paint:(c,P)=>sw_hat(c,[200,176,128],[104,82,56],{straw:true})},breath:0.26},
-  farmer4:{key:"sw_farmer4",name:"a farmer",skin:[176,124,90],hair:{style:"side",c:[52,44,38]},top:{kind:"shirt",c:[212,204,188]},breath:0.24}
+  farmer4:{key:"sw_farmer4",name:"a farmer",skin:[176,124,90],hair:{style:"side",c:[52,44,38]},top:{kind:"shirt",c:[212,204,188]},breath:0.24},
+  // at the university: a graduate in December 2025, in the plain black gown with the hood of her award (the kit's dq_hood), no cap; and
+  // the admissions officer asked to a Thursday, who makes each student's first record: older, her short hair grey, no glasses, so she is
+  // never taken for anyone of the four
+  grad:{key:"sw_grad",name:"a graduate",skin:[226,184,150],hair:{style:"bob",c:[92,62,40]},earrings:[226,216,200],
+    top:{kind:"blazer",c:[30,29,33],inner:[238,236,232],hood:DQ_HOOD},over:dq_hood,breath:0.29},
+  adm:{key:"sw_adm",name:"Admissions",skin:[208,164,130],hair:{style:"cropped",c:[196,190,182]},earrings:[214,206,194],top:{kind:"blazer",c:[118,100,92],inner:[230,224,214]},breath:0.27}
 };

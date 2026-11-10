@@ -135,3 +135,8 @@ data_tests:
 # data (macros/governance/personal_data.sql, DEC-PRJ-13).
 on-run-start:
   - "{{ create_personal_data_mask() }}"
+
+# The last step of every run: each check's result kept, night after night, in check_results
+# (macros/governance/keep_check_results.sql; Small, every week). The scorecard shows the last run.
+on-run-end:
+  - "{{ keep_check_results(results) }}"

@@ -10,7 +10,8 @@ and tests they define, and through them:
   version, beside the old one, with a deprecation date (DEC-PRJ-02); additive changes are preferred;
 - the meaning: a conceptual model's changed entities, and the models that hold them;
 - the decisions implemented in what changed, still to be true;
-- who to ask: the owners in the metadata of everything above.
+- who to tell: the owners in the metadata of everything above. They decided its meaning in the
+  glossary; they are told what the change reaches, and the data team reviews the code.
 
 It needs target/manifest.json for the branch (dbt parse) and, to compare contracts, the base's
 manifest (dbt parse on the base, into another target path). It fails only on a breaking change to
@@ -181,7 +182,7 @@ def main():
     if touched:
         select = " ".join(sorted({nodes[u]["name"] + "+" for u in touched}))
         lines += ["## Tests", "", f"{len(tests)} test(s) on it and downstream. `dbt build --select {select} --profiles-dir .` runs them.", ""]
-    lines += ["## Who to ask", "", "; ".join(ask) if ask else "Nobody named: a change to code only, reviewed by the analytics engineer.", ""]
+    lines += ["## Who to tell", "", "; ".join(ask) if ask else "Nobody named: a change to code only, reviewed by the data team.", ""]
     text = "\n".join(lines)
     print(text)
     if args.report:

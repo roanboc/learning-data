@@ -142,7 +142,7 @@ where it lives).
    the directory ends the membership: Unity Catalog's grants have no end date of their own.
 5. **A known reader.** A team that keeps using a product adds what it builds from it to `exposures/`,
    in its own folder, as the Faculty of Health's placements plan is (`exposures/health/`). The impact
-   check then names it among who to tell, and `CODEOWNERS` asks it to review a change to its file.
+   check then names it among who to tell when a change reaches it.
 
 Outside the university, a product that holds no one's personal data, such as *Awards*, can be
 shared with a partner through OpenSharing: a share of its output tables, which the partner reads
@@ -205,7 +205,7 @@ for people.
 ## 10. Context and memory, one way
 
 What agents read is governed like any data (`AGENTS.md`, *Context and memory are data*). Context's
-home is the repository, where every change is a pull request its owner reviews (`CODEOWNERS`); the
+home is the repository, where every change is a pull request the data team reviews (`CODEOWNERS`); the
 glossary's definitions come from Unity Catalog's Glossary, kept there by their owners, and a skill
 copies each into the conceptual models with its `source:` (`skills/sync-the-glossary/`). From the
 repository, context goes one way, to where agents read it on Databricks, and nobody edits it there.

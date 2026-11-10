@@ -18,7 +18,7 @@ models:
         consumer: The graduations office
         # The list's four uses, each an exposure, and the level each needs: agreed in January 2026
         # with the people who use it, and owned by the person who answers for the list. Each is a
-        # rule in words in the contract until a check measures it (scripts/generate/products.py).
+        # rule in words here, the data team's, until a check measures it (no enterprise contract: a mart).
         # A column a use can't do without names it in its critical_for.
         quality:
           - name: seating_plan_count_per_ceremony

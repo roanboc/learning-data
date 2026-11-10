@@ -71,6 +71,7 @@
 | A product with an owner | 264 | 0% | 0 | 33.8 | Drawn to the rule |
 | An agent that checks | 451 | 0% | 0 | 30.3 | Drawn to the rule |
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
+| Every area, one job | 313 | 0% | 0 | 28.3 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
 | Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
 | Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |
@@ -85,6 +86,7 @@
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
 | One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |
+| Files as data and as context | 364 | 0% | 0 | 28.2 | Drawn to the rule |
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | A hundred records | 312 | 0% | 0 | 28.2 | Drawn to the rule |
 | Valid isn't true | 254 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -95,6 +97,7 @@
 | Rights follow the role | 291 | 0% | 0 | 30.0 | Drawn to the rule |
 | The map, enforced | 353 | 0% | 0 | 28.2 | Drawn to the rule |
 | Reports on demand | 293 | 0% | 0 | 28.0 | Drawn to the rule |
+| Defined in the open | 253 | 0% | 0 | 28.5 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -116,6 +119,7 @@
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
+| The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
@@ -127,6 +131,8 @@
 | Why we govern them | 252 | 0% | 0 | 30.0 | Drawn to the rule |
 | What they tell us about ourselves | 288 | 0% | 0 | 32.0 | Drawn to the rule |
 | Many agents, and what emerges | 232 | 0% | 0 | 30.0 | Drawn to the rule |
+| The question behind the request | 271 | 0% | 0 | 28.4 | Drawn to the rule |
+| Explaining so people can decide | 310 | 0% | 0 | 28.3 | Drawn to the rule |
 | Saying no, and what instead | 255 | 0% | 0 | 28.1 | Drawn to the rule |
 <!-- /films -->
 

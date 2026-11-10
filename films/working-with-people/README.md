@@ -11,6 +11,8 @@ The skills that help most when someone asks for data have little to do with tool
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [The question behind the request](https://data.learn-all.org/working-with-people/the-question-behind/) | Listening first | 8½ min | 6 | 3 questions | [script](1-the-question-behind/script.md) · [source](1-the-question-behind/source/README.md) |
+| [Explaining so people can decide](https://data.learn-all.org/working-with-people/explaining-to-decide/) | Explaining for a decision | 9½ min | 7 | 3 questions | [script](2-explaining-to-decide/script.md) · [source](2-explaining-to-decide/source/README.md) |
 | [Saying no, and what instead](https://data.learn-all.org/working-with-people/saying-no/) | When too much is asked | 8 min | 7 | 3 questions | [script](3-saying-no/script.md) · [source](3-saying-no/source/README.md) |
 <!-- /films -->
 

@@ -1,12 +1,12 @@
 # Saying no, and what instead: questions and assumptions
 
-*Leading data people* · *Working with people*, film 3 of 3 · open, PR #256 · [pull request](https://github.com/roanboc/learning-data/pull/256)
+*Leading data people* · *Working with people*, film 3 of 3 · merged, PR #256 · [pull request](https://github.com/roanboc/learning-data/pull/256)
 
-On the site once PR #256 merges: https://data.learn-all.org/working-with-people/saying-no/
+[Watch it on the site](https://data.learn-all.org/working-with-people/saying-no/)
 
-> Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
+> From the film thread's notes, 10 November 2026. The module's briefs, openings, palettes and numbers are in its working folder, outside this repository, so paths such as `../numbers.md` point there.
 
-Film 3 of 3 of *Working with people* (film 6 of *Leading data people*), made on 10 November 2026 while Rodrigo was away, from the brief in `../briefs.md` (section 6), `../openings.md`, `../palettes.md` and `../numbers.md`. Each question below was decided on the stated assumption, for his final checklist.
+The last of three films of *Working with people*, in the module *Leading data people* (film 6 in the module's numbering). Made on 10 November 2026 while the author was away, on the author's instruction to work on assumptions and merge with a draft label, from the module's brief (section 6), openings, palettes and numbers. Each line: the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in [0-module.md](../0-module.md).
 
 | # | Question | Assumption | Where it shows |
 |---|---|---|---|
@@ -23,7 +23,7 @@ Film 3 of 3 of *Working with people* (film 6 of *Leading data people*), made on 
 | 11 | Card numbering | "Film 3 of 3", as the series has three films. | End card |
 | 12 | Spanish title | *Decir que no, y qué ofrecer a cambio*. | Captions and page |
 | 13 | Render and review page | Not made in the session (the film merge rule). The MP3 is committed beside its `audio.json` (`media.py index --film saying-no-en`), and *Store audio outside Git* publishes its release when the film reaches main, so nobody runs it by hand. | |
-| 14 | Merge order | The brief says each series' films merge in their series' order after *Many hats, one picture*; the coordinator's note said "module order 1-13". This film merges after *Many hats, one picture* (merged on 10 November, #238) and the series' first two films are on main; if 4 and 5 are far behind, it waits for them rather than jump the order. | The pull request |
+| 14 | Merge order | The brief says each series' films merge in their series' order after *Many hats, one picture*; the coordinator's note said "module order 1-13". So it waited for *Many hats, one picture* (#238) and the series' first two films, *The question behind the request* (#262) and *Explaining so people can decide* (#263), and merged after them on 10 November, on that day's main. | The pull request |
 | 15 | Come back to the opening along the way, as AGENTS.md asks, and where? | In *A no, and what instead*, as Ury's positive no is named: "The Kok-Aral dam was one: a yes to the part that could be saved, and a plain no to the whole sea." The opening's two pills come back, then leave for Helena's yes and no in the same places. And at the close, with its benefit for data. | Chapters 5 and 7 |
 | 16 | The one list in chapter 2 shows what each ask is for. What does Clara's row say before Helena has asked? | "Not asked yet", in grey: the film shouldn't show the answer before the question. Chapter 4's list has it filled in ("Early warning, for admissions"). | Chapters 2 and 4 |
 | 17 | Film 7's title in Spanish, which this film's last line names? | *Menos, a propósito*, assumed (film 7's thread may choose another; the caption is one line to change). | Spanish captions, chapter 7 |

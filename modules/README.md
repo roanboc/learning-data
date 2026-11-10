@@ -312,6 +312,7 @@ Source: [films/agents-at-work-on-data](../films/agents-at-work-on-data/) · Port
 
 Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · Portal: `/from-helper-to-colleague/`
 
+- [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 

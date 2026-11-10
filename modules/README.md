@@ -92,7 +92,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -172,6 +172,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
+- [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
 
 ## Enterprise architecture
@@ -270,6 +271,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 
 ### Only what you may see
 

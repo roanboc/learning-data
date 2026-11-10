@@ -46,6 +46,9 @@
     ],
     "stop": [
       "governance/8-mandates/workload-agent.yml"
+    ],
+    "close": [
+      "docs/stages.md"
     ]
   },
   "next_h": "You've seen what an agent may do alone, written in a mandate and held in every tool, and the series' seven lessons. Next: a colleague that isn't a person.",

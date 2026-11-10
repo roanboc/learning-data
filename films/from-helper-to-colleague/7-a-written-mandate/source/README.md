@@ -4,7 +4,7 @@
 
 | File | What it holds |
 |---|---|
-| `film.json` | The film's key, title, subtitle and colour note, its own source files, the words the voice respells (Anil Kurian, Anil, Jun, Noor, HR and "A I", as the series says them), its opening story's chapter, no urgent chapter, the tools' logos (`"logos": true`), and the moment its poster shows (the page being written). |
+| `film.json` | The film's key, title, subtitle and colour note, its own source files, the words the voice respells (Anil Kurian, Anil, Jun, Noor, HR and "A I", as the series says them), its opening story's chapter, no urgent chapter, the tools' logos (`"logos": true`), and the moment its poster shows (the page, signed and approved, beside the agent's stages). |
 | `src/narration.js` | The narration, one line per id, following the chapters of [the script](../script.md). The film re-times itself to the voice. |
 | `src/vodur.js` | The voiced length of each line, written by `tools/tts.py`. |
 | `src/breath.js` | The few longer pauses: holds after some lines, and the wordless moments (the title card after the opening, and the end card). |

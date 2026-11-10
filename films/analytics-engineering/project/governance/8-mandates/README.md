@@ -1,6 +1,6 @@
 # Mandates
 
-A mandate is one page that says the one kind of task an agent may do alone, and where: its task, the folders it may change, the checks it runs, its limits on rounds, time and money, a switch that stops it, and a way to undo each change. An agent works alone only within one. Anything a mandate doesn't give it, it asks for, as at any lower stage (`docs/stages.md`, when it's there: the five stages and their gates).
+A mandate is one page that says the one kind of task an agent may do alone, and where: its task, the folders it may change, the checks it runs, its limits on rounds, time and money, a switch that stops it, and a way to undo each change. An agent works alone only within one. Anything a mandate doesn't give it, it asks for, as at any lower stage ([`docs/stages.md`](../../docs/stages.md): the five stages and their gates).
 
 | File | Agent | Task | Owner | Status |
 |---|---|---|---|---|

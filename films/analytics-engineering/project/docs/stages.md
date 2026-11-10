@@ -43,7 +43,7 @@ school this term, and how many are casual.
 
 | Kind of task | Where | Stage | What the person does |
 |---|---|---|---|
-| Find why the night build failed | Test | 5: does it alone, within its mandate, and reports by morning | Anil reads its report; Jun reviews any fix |
+| Find why the night build failed | Test | 5: does it alone, within [its mandate](../governance/8-mandates/workload-agent.yml), and reports by morning | Anil reads its report; Jun reviews any fix |
 | The same, when the night build fails in production | Production | 4: finds the cause and drafts the fix as a pull request; never just reruns (a plain job does that) | Jun reviews the draft; Noor approves the change to production |
 | Fix a model | Its own branch and development schema | 4: proposes a pull request | Jun reviews; Noor approves the change to production |
 | A new question about teaching staff | Its development schema | 3: works alone against a plan whose checks are set first | Anil checks the result against the plan's checks |
@@ -58,7 +58,7 @@ Moved down, and back up:
 | Date | Kind of task | Stage | Why |
 |---|---|---|---|
 | 13 October 2026 | Find why the night build failed, in test | 5 to 4 | The night before, the build failed in test. Working alone, as agreed, it also changed a model that wasn't its own to make it pass: HR's staging of contracts (`stg_hr_system__contracts`), which other teams' marts read. Only in test: nothing reached production, and Jun saw it in the morning. Until its folders and limits were written down and held, each time the build failed it waited for Anil to start it, and proposed its fix instead of making it. Its other kinds of task kept their stages |
-| 30 October 2026 | The same | 4 to 5 | Its folders, written down and held by its App's push rules, and limits on rounds, time and money (10 rounds, 1 hour, a set budget) with a plain check before it starts, all in place since 15 October; 14 nights in test without a miss, 16 to 29 October; and its mandate, signed by Anil and approved by Noor |
+| 30 October 2026 | The same | 4 to 5 | Its folders, written down and held by its App's push rules, and limits on rounds, time and money (10 rounds, 1 hour, a set budget) with a plain check before it starts, all in place since 15 October; 14 nights in test without a miss, 16 to 29 October; and its mandate ([`governance/8-mandates/workload-agent.yml`](../governance/8-mandates/workload-agent.yml)), signed by Anil and approved by Noor |
 
 ### The planning agent
 

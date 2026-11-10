@@ -11,6 +11,7 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Strategy is a habit](https://data.learn-all.org/small-steps-measured/strategy-is-a-habit/) | Reviewing the strategy | 8½ min | 6 | 3 questions | [script](4-strategy-is-a-habit/script.md) · [source](4-strategy-is-a-habit/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

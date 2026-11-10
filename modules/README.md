@@ -388,7 +388,7 @@ No film source yet.
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
-No film source yet.
+- [Strategy is a habit](../films/small-steps-measured/4-strategy-is-a-habit/) — `strategy-is-a-habit`
 
 ## Making of and supplementary films
 

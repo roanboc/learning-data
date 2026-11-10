@@ -42,6 +42,41 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual(result.stdout, expected or "|")
 
+    def test_audio_workflow_publishes_when_audio_reaches_main(self):
+        workflow = (ROOT / ".github/workflows/audio.yml").read_text(encoding="utf-8")
+        triggers = workflow.split("\non:\n", 1)[1].split("\npermissions:\n", 1)[0]
+        push = triggers.split("  push:\n", 1)[1].split("  schedule:\n", 1)[0]
+        self.assertIn("    branches: [main]\n", push)
+        for path in ("films/**/audio.json", "site/assets/**/*.mp3", "site-tools/media.py", ".github/workflows/audio.yml"):
+            self.assertIn(f"      - '{path}'\n", push)
+        self.assertRegex(triggers, r"  schedule:\n    - cron: '[0-9*/,-]+( [0-9*/,-]+){4}'\n")
+        self.assertIn("  workflow_dispatch:\n", triggers)
+        # A push or a scheduled run has no inputs: it publishes everything missing, in the blank run's queue.
+        self.assertIn("group: audio-release-${{ inputs.tag || 'all' }}\n", workflow)
+        self.assertIn("cancel-in-progress: false\n", workflow)
+
+
+    def test_pushes_to_main_are_never_cancelled_and_publish_queues(self):
+        # Cancelling main's Checks runs left Publish site with no passing run to publish (10 Nov).
+        checks = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
+        block = checks.split("\nconcurrency:\n", 1)[1].split("\njobs:\n", 1)[0]
+        self.assertIn("group: checks-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}\n", block)
+        self.assertIn("cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}\n", block)
+        pages = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
+        # Only a deployment that will run joins the queue, so a skipped run can't replace a waiting one.
+        self.assertNotIn("\nconcurrency:", pages)
+        deploy = pages.split("  deploy:\n", 1)[1]
+        self.assertIn("    concurrency:\n      group: pages\n      cancel-in-progress: false\n", deploy)
+        # Main's runs finish in any order: an older commit than the live one never replaces it.
+        self.assertIn("compare/$live...$HEAD_SHA", deploy)
+        # The live commit comes from the site itself: a Pages deployment records main's newest commit, not the built one.
+        self.assertIn('/version.txt?t=', deploy)
+        self.assertIn("git rev-parse HEAD > site/version.txt", deploy)
+        # deploy-pages gives up after 10 minutes and cancels; the deploy step waits for the sync itself.
+        self.assertNotIn("actions/deploy-pages", deploy)
+        self.assertIn('gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -', deploy)
+        self.assertIn("succeed) exit 0", deploy)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -86,7 +86,7 @@ const NARR={
 "code":{"name":"Written once, kept as code","lead":0.8,"tail":1.0,"vo":[
  {"id":"files","gap":0.8,"text":"The plan is written once, as two files beside the job's code in GitHub."},
  {"id":"lines","gap":0.8,"text":"Each shelf and its readers take a few lines."},
- {"id":"yes","gap":0.8,"text":"Mei's team owns those files, so no change to who may see her records goes in without her yes."},
+ {"id":"yes","gap":0.8,"text":"The data team reviews each change to those files, and Mei is told what it touches."},
  {"id":"contract","gap":0.8,"text":"A study's grant is made from its agreement's contract, and names it: 2026-14, until 30 June 2027.","say":"A study's grant is made from its agreement's contract, and names it: agreement twenty twenty-six fourteen, until the thirtieth of June, twenty twenty-seven."},
  {"id":"after","gap":0.8,"text":"The study's policies go in first, and its grant after them, so it never reads the table unmasked."},
  {"id":"path","gap":0.8,"text":"Then the path of From a branch to production: test first, then production, once a release approver says yes."},

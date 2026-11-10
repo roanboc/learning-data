@@ -465,9 +465,9 @@ const NARR={
 "team":{"name":"One context for the team","lead":1.0,"tail":1.0,"vo":[
  {"id":"before","gap":0.8,"text":"Until now, each person on the team wired up their own agent, with notes of their own."},
  {"id":"masters","gap":0.8,"text":"Like the chant books named after their masters, each agent was its owner's: what one was told, no other knew."},
- {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project, reviewed like code, with an owner for every meaning."},
+ {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project: the data team reviews it like code, and every meaning has an owner."},
  {"id":"same","gap":0.8,"text":"Every agent, and every person, reads the same page."},
- {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, and everyone reads the new one."}
+ {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, in the glossary, and everyone reads the new one."}
 ]},
 "verse":{"name":"A verse never heard","lead":1.0,"tail":1.0,"vo":[
  {"id":"again","gap":0.8,"text":"Jun asks his agent again."},
@@ -478,7 +478,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"lines/when": 2.914, "lines/school": 5.486, "lines/ear": 3.455, "lines/signs": 6.081, "lines/far": 6.472, "lines/master": 3.112, "lines/books": 7.479, "lines/years": 5.18, "lines/change": 1.34, "lines/lines": 5.543, "lines/colour": 5.811, "lines/page": 5.375, "lines/days": 3.942, "lines/ten": 5.142, "lines/pope": 7.043, "lines/staff": 3.301, "lines/agent": 5.083, "lines/head": 4.026, "lines/put": 3.639, "word/today": 5.75, "word/ask": 4.985, "word/gives": 5.192, "word/reads": 5.457, "word/nothing": 2.263, "word/names": 5.467, "word/count": 5.934, "inbox/query": 4.628, "inbox/asks": 2.368, "inbox/knows": 5.249, "inbox/back": 6.441, "inbox/right": 8.0, "inbox/harm": 3.877, "inbox/email": 6.851, "inbox/inbox": 3.821, "inbox/careless": 3.939, "reads/context": 5.973, "reads/code": 5.014, "reads/meta": 4.997, "reads/skills": 2.899, "reads/tools": 2.548, "reads/missing": 5.95, "reads/engineering": 5.062, "page/glossary": 6.165, "page/copy": 5.44, "page/test": 8.206, "page/contract": 3.825, "page/rule": 6.86, "team/before": 5.145, "team/masters": 6.505, "team/one": 6.051, "team/same": 3.253, "team/change": 4.805, "verse/again": 1.595, "verse/looks": 5.724, "verse/new": 5.319, "verse/boys": 3.527, "verse/once": 3.085};
+const VODUR={"lines/when": 2.914, "lines/school": 5.486, "lines/ear": 3.455, "lines/signs": 6.081, "lines/far": 6.472, "lines/master": 3.112, "lines/books": 7.479, "lines/years": 5.18, "lines/change": 1.34, "lines/lines": 5.543, "lines/colour": 5.811, "lines/page": 5.375, "lines/days": 3.942, "lines/ten": 5.142, "lines/pope": 7.043, "lines/staff": 3.301, "lines/agent": 5.083, "lines/head": 4.026, "lines/put": 3.639, "word/today": 5.75, "word/ask": 4.985, "word/gives": 5.192, "word/reads": 5.457, "word/nothing": 2.263, "word/names": 5.467, "word/count": 5.934, "inbox/query": 4.628, "inbox/asks": 2.368, "inbox/knows": 5.249, "inbox/back": 6.441, "inbox/right": 8.0, "inbox/harm": 3.877, "inbox/email": 6.851, "inbox/inbox": 3.821, "inbox/careless": 3.939, "reads/context": 5.973, "reads/code": 5.014, "reads/meta": 4.997, "reads/skills": 2.899, "reads/tools": 2.548, "reads/missing": 5.95, "reads/engineering": 5.062, "page/glossary": 6.165, "page/copy": 5.44, "page/test": 8.206, "page/contract": 3.825, "page/rule": 6.86, "team/before": 5.145, "team/masters": 6.505, "team/one": 7.211, "team/same": 3.253, "team/change": 5.738, "verse/again": 1.595, "verse/looks": 5.724, "verse/new": 5.319, "verse/boys": 3.527, "verse/once": 3.085};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2378,8 +2378,8 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({context:wAt(
 // ---- 5 · On the page: Mei writes it once, in the glossary; the project copies it, with its source; a test; the contract; a rule ----
 const CE_YAML=["- name: commencing_student","  owner: Mei Tanaka, registrar's office","  source:","    term: Commencing student","    synced_on: 2026-11-04"];
 const CE_COL=["is_commencing      boolean","  {{ doc(\"commencing_student\") }}"];
-const CE_CONTRACT=["- name: is_commencing","  logicalType: boolean","  required: true","  description: 'True when the learner was a commencing student in this",
-  "    award on the census date. **Commencing student.** A student who","    started a course at the university for the first time in the year …'"];
+const CE_CONTRACT=["- name: is_commencing","  data_type: boolean","  constraints: [{type: not_null}]","  description: >","    True when the learner was a commencing student in this award",
+  "    on the census date. {{ doc(\"commencing_student\") }}","  meta: {glossary_term: commencing_student}"];
 const CE_RULE=["Before you count by a word, look up what it means: in the business","glossary, and in the conceptual model that copies its term with",
   "source: (decision DEC-PRJ-11). A column's name is a hint, not a meaning.","If the word isn't there, don't guess: ask its owner."];
 // the glossary's definition, word for word (the example project's skills/sync-the-glossary/example_glossary.json)
@@ -2407,9 +2407,9 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({writes:wAt(sc
     {cut:true,at:P.test,place:"lab",keys:[[P.test,960,540,1],[P.test+0.1,960,530,1.02]],d:10,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
       const p=ce_pop(tt,P.test+0.2,null);ce_tests(x,360,190,1200,[ag_in(tt,P.new_,0.4),ag_in(tt,P.back,0.4),ag_in(tt,P.second,0.4),ag_in(tt,P.last,0.4)],{k:p.k,a:p.a});
       ag_pill(x,960,700,"4 of 4 pass",{icon:"tick",col:AG.green,a:ag_in(tt,P.last+1.2,0.4)});}},
-    // Planning's contract promises the column, and what it means
+    // Planning's contract, the model's YAML that dbt enforces, promises the column, and what it means
     {cut:true,at:P.contract,place:"lab",keys:[[P.contract,960,540,1],[P.contract+0.1,960,530,1.02]],d:6,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
-      const p=ce_pop(tt,P.contract+0.2,null);ce_code(x,230,220,1460,"governance/5-data-contracts/mart_planning__near_award.yaml",CE_CONTRACT,{path:true,k:p.k,a:p.a,hi:{from:3,to:5,col:AG.blue,a:ag_in(tt,P.says-0.2,0.5)}});}},
+      const p=ce_pop(tt,P.contract+0.2,null);ce_code(x,230,220,1460,"models/marts/planning/_planning__models.yml",CE_CONTRACT,{path:true,k:p.k,a:p.a,hi:{from:3,to:6,col:AG.blue,a:ag_in(tt,P.says-0.2,0.5)}});}},
     // the notes for agents gain a rule
     {cut:true,at:P.rule,place:"lab",keys:[[P.rule,960,540,1],[P.rule+0.1,960,530,1.02]],d:8,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
       const p=ce_pop(tt,P.rule+0.2,null);ce_note(x,230,220,1460,{k:p.k,a:p.a,hi:ag_in(tt,P.ask-0.3,0.5)});}}]);
@@ -2423,7 +2423,7 @@ function ce_note(x,cx,cy,w,o){const a=o.a==null?1:o.a;if(a<=0)return;const lh=44
 // ---- 6 · One context for the team: each agent its owner's, with notes of its own; then one context, reviewed like code, owned ----
 const CE_TEAM=[["jun",360,"Jun's notes","commencing: enrolled this year"],["clara",960,"Clara's notes","commencing: a new student number"],["sam",1560,"Sam's notes","commencing: first year of a degree"]];
 scene("team",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({wired:wAt(sc,"before","wired"),notes:wAt(sc,"before","notes"),chant:wAt(sc,"masters","chant"),
-    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviewed"),owner2:wAt(sc,"one","owner"),
+    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviews it"),owner2:wAt(sc,"one","owner"),
     every:wAt(sc,"same","agent"),reads:wAt(sc,"same","reads"),change:c.change,changes:wAt(sc,"change","changes"),once:wAt(sc,"change","once"),new_:wAt(sc,"change","new")}));
   ce_shots(ctx,S,t,sc.dur,[
     // until now: each person's own agent, with notes of its own, each a little different, like the chant books named after their masters

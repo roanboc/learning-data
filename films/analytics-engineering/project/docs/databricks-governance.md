@@ -330,7 +330,49 @@ tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its 
    the inference tables' rows are deleted after 30 days, the university's rule. A ticket names no
    one: an issue keeps its edits, and every commit is copied to every clone.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; and *Prepare your data for GDPR compliance* to the end, for section 12, on 10 November 2026)
+## 13. A person's request
+
+How the data team does its part of a request the privacy office has logged: a person asks what the
+university holds about them, to correct or erase something, or to stop a use. The office answers
+within 30 days, the university's own rule. Nothing here runs in the build.
+
+1. **The ticket names no one.** The office logs the request with its number and the day it's due,
+   and the data team opens an issue from `examples/a-person-asks/privacy-request.yml`: the number,
+   the due date and the steps, as a task list. The person's numbers go only into the restricted
+   table `privacy.request_keys` (`request`, `system`, `key`; `system` is the key set, as
+   `macros/shared/keys.sql` writes it), which the office's group and two service principals may
+   read: `privacy-finder`, which searches, and `privacy-deleter`, the nightly deletion job of
+   section 12. Never into an issue, a chat or a query's text: `system.query.history` keeps each
+   query's text for a year, readable by account admins and the `databricks_pii_access` group.
+2. **Where to look.** Every model built from the systems the numbers come from, from the project:
+
+   ```bash
+   dbt ls --resource-type model --profiles-dir . --select \
+       source:hr_system+ source:student_system+ source:alumni_system+ \
+       source:research_system+ source:learning_platform+
+   ```
+
+   And, on the platform, everything built from those systems' tables, by notebooks, jobs and
+   dashboards too, with its columns classed `direct` or `pseudonymous`:
+   `analyses/privacy/where_a_person_is.sql`. Lineage records only what it can infer, and only on
+   the platform: systems outside it are searched by their owners.
+3. **Look, by number and by code.** For each column, `analyses/privacy/find_a_person.sql` counts the
+   rows that hold one of the numbers as the system writes it, as the project's key, or as the code
+   made from it (`hash_key`, the sha-256 of the key in upper case). The wallet, planning and finance
+   marts hold a learner only as that code. `privacy-finder` has to see real values to match them,
+   so the masks' policy (section 3) lists it among the identities it doesn't mask; it reads, and
+   never deletes.
+4. **Prove it.** Each step of the issue is ticked with a link: the search's run, the table's history
+   (`DESCRIBE HISTORY`) for a delete, the reads of the keys table from the audit log
+   (`analyses/privacy/who_read_the_keys.sql`), each owner's check, the answer. The office tracks
+   every request's due date with `analyses/privacy/requests_due.sql`: a request near its date is
+   work still to do, not a failing test.
+5. **Close it.** When the answer is sent, the issue closes. The request's rows stay in
+   `privacy.request_keys` until the last locked copy that can hold the person's rows is gone (for
+   request 2026-117, on 24 December), so a copy restored before then has the request applied again
+   before anyone reads it; then they leave.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; and *Query history system table* to the end, for section 13, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -421,3 +463,14 @@ tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its 
 - dbt, *Incremental models*: https://docs.getdbt.com/docs/build/incremental-models
 - GitHub, *Removing sensitive data from a repository* (clones and forks keep their copies):
   https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- Databricks, *Query history system table* (a query's text is kept, readable only by account admins and
+  the `databricks_pii_access` group, since it can hold personal data): https://docs.databricks.com/aws/en/admin/system-tables/query-history
+- Databricks, *Prepare your data for GDPR compliance* (a table of requests that drives a scheduled job):
+  https://docs.databricks.com/aws/en/ldp/gdpr
+- Databricks, *Common table expression (CTE)* (a recursive query needs Databricks SQL or Databricks
+  Runtime 17.0 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-qry-select-cte
+- Databricks, *DESCRIBE HISTORY* (each version of a table, its operation and who made it):
+  https://docs.databricks.com/aws/en/sql/language-manual/delta-describe-history
+- dbt, *Graph operators* (`source:name+`, a source and everything built from it):
+  https://docs.getdbt.com/reference/node-selection/graph-operators
+- GitHub, *Syntax for issue forms*: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-discussions/syntax-for-issue-forms

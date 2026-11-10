@@ -1,0 +1,42 @@
+{
+  "key": "rights-follow-the-role",
+  "title": "Rights follow the role",
+  "sub": "Film 4 of 7 of From helper to colleague: an agent's rights come from its work, not from a person's. In the 1960s, hospital pharmacists began to fill a drawer for each patient from the doctor's order, instead of leaving every medicine on the ward's shelf. Planning's agent gets its rights the same way: each step of its role says what it reads, writes and calls, and what's left out is another role's step.",
+  "howto": "The film is drawn in the module's marble and oak; the hospitals of the 1950s and 1960s are painted full-frame, matte and soft-lit, with the place and the years on a tag. Its colours mean the same in every film: blue is tools and structure (the steps, the role and its rights), violet the model thinking, orange data coming back, green a check that passes, and amber a check that fails, or what is left out.",
+  "src": [
+    "rf_past.js",
+    "rf_lab.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "steps",
+    "exactly",
+    6.1
+  ],
+  "say": [
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ]
+  ],
+  "story": [
+    "ward"
+  ],
+  "urgent": []
+}

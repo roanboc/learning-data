@@ -1,0 +1,85 @@
+models:
+
+  # Each test names its owner, HR, in its own meta: the owners by folder in dbt_project.yml are
+  # cited by line, so the folder isn't added there.
+  - name: stg_claims_app__claims
+    description: One row per claim, as it stands now in the claims app, read in place.
+    config:
+      meta: {owner: HR, domain: hr}
+    columns:
+      - name: claim_key
+        description: The hash of claim_bk.
+      - name: claim_bk
+        description: '{{ doc("qualified_key") }}'
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+          - unique:
+              config: {meta: {owner: HR}}
+      - name: staff_bk
+        description: The staff member who worked the hours.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+          - relationships:
+              arguments:
+                to: ref('stg_hr_system__staff')
+                field: staff_bk
+              config: {meta: {owner: HR}}
+        config:
+          meta: {personal_data: direct}
+      - name: contract_bk
+        description: The contract the hours are claimed under.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+          - relationships:
+              arguments:
+                to: ref('stg_hr_system__contracts')
+                field: contract_bk
+              config: {meta: {owner: HR}}
+      - name: claim_id
+        description: The claim ID the app issues, like CL-104233.
+      - name: staff_id
+        description: The staff ID HR issues, like E-4417.
+        config:
+          meta: {personal_data: direct}
+      - name: contract_id
+        description: The contract ID HR issues, like T-26188.
+      - name: unit_code
+        description: The unit the hours were worked for, like HI101.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+      - name: duty
+        description: '{{ doc("claim_duty") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [tutorial, marking, consultation, training]
+              config: {meta: {owner: HR}}
+      - name: worked_on
+        description: The day the hours were worked.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+      - name: hours
+        description: '{{ doc("claim_hours") }}'
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+          - positive:
+              config: {meta: {owner: HR}}
+      - name: amount
+        description: '{{ doc("claim_amount") }}'
+      - name: status
+        description: '{{ doc("claim_status") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [submitted, approved, returned]
+              config: {meta: {owner: HR}}
+      - name: approved_at
+        description: When the unit's coordinator approved the claim. Null until then.
+      - name: updated_at
+        description: When the app last changed the claim, its own time. Nothing is loaded, so there's no loaded_at.

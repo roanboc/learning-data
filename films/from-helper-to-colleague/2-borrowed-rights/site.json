@@ -1,0 +1,41 @@
+{
+  "kicker": "On a person's sign-in",
+  "kicker_es": "Con el acceso de una persona",
+  "title_es": "Permisos prestados",
+  "h1": "Borrowed rights: for learning, in a sandbox",
+  "h1_es": "Permisos prestados: para aprender, en un sandbox",
+  "lead": "Jun's AI helper drafts Planning's tickets on his sign-in, with everything Jun may do. One Friday in October, its next step was to approve another agent's fix as Jun Park, and he said no. Narrowed, the helper learns safely in a sandbox; working for the team, it needs a name of its own.",
+  "lead_es": "El ayudante de IA de Jun redacta los encargos de Planificación con su acceso y todos sus permisos. Un viernes de octubre, su siguiente paso era aprobar la corrección de otro agente como Jun Park, y él dijo que no. Acotado, aprende sin riesgo en un sandbox; para el equipo, necesita un nombre propio.",
+  "description": "A film about an AI helper on a person's sign-in, the second of From helper to colleague: a helper in an editor or a chat starts on the sign-in of the person using it, with nothing to set up and everything that person may do, and the first three of the five stages all work that way; Jun's helper drafted Planning's tickets all year with his wide rights, until Friday 16 October 2026, when its next step, the thirty-eighth he was asked to allow that day, was to approve Anil's workload agent's fix as Jun Park; he said no, reviewed it himself on Monday, and Noor approved it for production, but a yes would have had an agent's change approved by an agent, with a person's name on it; on a person's sign-in every step reads as that person's, the helper can't be narrowed or stopped on its own, and Norm Hardy's confused deputy and excessive agency name the risk; from 19 October Jun and Sam narrowed it, as Saltzer and Schroeder's fewest rights ask, to a development workspace, tools that only read, drafts in a sandbox of its own, samples of twenty rows with names masked, and approving, merging and production kept Jun's, written on the project's page for agents; one maker calls a helper's own setting a productivity feature, not a security boundary, so the boundary is in its tools; Lucía's helper is narrowed the same way from her first day; and borrowed rights are for learning, so once a helper works for the team it needs a name of its own, as the planning agent did. It opens in Britain before 1840, where a member of parliament's name on a letter's cover let it travel free, until the penny post made every letter pay its own way.",
+  "description_es": "Una película sobre un ayudante de IA que trabaja con el acceso de una persona, la segunda de De ayudante a colega: un ayudante en un editor o un chat empieza con el acceso de quien lo usa, sin nada que configurar y con todo lo que esa persona puede hacer, y las tres primeras de las cinco etapas trabajan así; el ayudante de Jun redactó los encargos de Planificación todo el año con sus amplios permisos, hasta el viernes 16 de octubre de 2026, cuando su siguiente paso, el número 38 que le pedían permitir ese día, era aprobar la corrección del agente de carga docente de Anil como Jun Park; él dijo que no, la revisó él mismo el lunes y Noor la aprobó para producción, pero un sí habría hecho que un agente aprobara el cambio de otro agente, con el nombre de una persona; con el acceso de una persona cada paso queda como de esa persona, el ayudante no se puede acotar ni detener por separado, y el delegado confundido de Norm Hardy y la agencia excesiva nombran el riesgo; desde el 19 de octubre Jun y Sam lo acotaron, como piden los menos permisos de Saltzer y Schroeder, a un espacio de desarrollo, herramientas que solo leen, borradores en un sandbox propio, muestras de veinte filas con los nombres enmascarados, y aprobar, fusionar y producción para Jun, escrito en la página del proyecto para agentes; un fabricante llama al ajuste propio de un ayudante una función de productividad, no un límite de seguridad, así que el límite está en sus herramientas; el ayudante de Lucía se acota igual desde su primer día; y los permisos prestados son para aprender, así que cuando un ayudante trabaja para el equipo necesita un nombre propio, como el agente de Planificación. Empieza en Gran Bretaña antes de 1840, donde el nombre de un miembro del Parlamento en la cubierta de una carta la hacía viajar gratis, hasta que el correo del penique hizo que cada carta pagara su propio porte.",
+  "card": "Jun's helper works on his sign-in, with all his rights. One step would have approved another agent's fix as Jun.",
+  "card_es": "El ayudante de Jun trabaja con su acceso y todos sus permisos. Un paso habría aprobado la corrección de otro agente como Jun.",
+  "chapters_es": {
+    "frank": "Un nombre que viaja gratis",
+    "start": "Donde todos empiezan",
+    "wide": "Todo lo que Jun puede hacer",
+    "who": "¿Quién hizo qué?",
+    "narrow": "Acotado",
+    "checked": "Permitido, y luego verificado",
+    "learning": "Para aprender, en un sandbox"
+  },
+  "past": [
+    "Britain, 1764 to 1840: the free frank",
+    "A member's name on a letter's cover let it travel free, so whoever held a signed cover held his privilege. Rules narrowed it; the penny post ended it, every letter paying its own way. A helper's borrowed rights are for learning, in a sandbox."
+  ],
+  "past_es": [
+    "Gran Bretaña, de 1764 a 1840: la franquicia postal",
+    "El nombre de un miembro del Parlamento en la cubierta de una carta la hacía viajar gratis, así que quien tenía una cubierta firmada tenía su privilegio. Las reglas lo acotaron; el correo del penique lo terminó, y cada carta pagó su porte. Los permisos prestados de un ayudante son para aprender, en un sandbox."
+  ],
+  "repo": {
+    "narrow": [
+      "AGENTS.md"
+    ],
+    "learning": [
+      "AGENTS.md"
+    ]
+  },
+  "next_h": "You've seen what a helper borrows on your sign-in, and how to narrow it. Next: the place on the map an agent of the team is given.",
+  "next_h_es": "Viste lo que toma prestado un ayudante con tu acceso, y cómo acotarlo. Después: el lugar en el mapa que recibe un agente del equipo.",
+  "draft": true
+}

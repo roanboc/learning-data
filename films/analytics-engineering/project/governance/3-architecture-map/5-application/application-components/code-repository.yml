@@ -1,0 +1,7 @@
+name: code repository
+kind: application component
+definition: 'GitHub: the project''s branches, pull requests, code reviews and approvals.'
+owner: Sam, platform team
+relationships:
+- realization: repository
+status: confirmed

@@ -14,3 +14,19 @@ exposures:
       email: finance@uni.example
     depends_on:
       - ref('mart_finance__tuition_forgone')
+
+  - name: payroll_export
+    label: Payroll's export
+    type: application
+    maturity: high
+    description: >
+      The figures Finance receives every pay day: what casual staff are paid, by faculty and unit.
+      For years a script on one person's laptop made them; since March 2026 the job payroll_export
+      builds them at 06:00 on each pay day, deployed from the bundle the same way every time
+      (databricks.yml, resources/payroll_export.job.yml). A change to the export reaches Finance
+      through a pull request, and the lineage names Finance among who to tell.
+    owner:
+      name: Finance
+      email: finance@uni.example
+    depends_on:
+      - ref('mart_finance__casual_pay_paid')

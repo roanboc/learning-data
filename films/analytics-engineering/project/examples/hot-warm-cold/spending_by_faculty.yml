@@ -1,0 +1,29 @@
+# The warm view's description and tests, as any model in the project has them. Databricks only; CI doesn't run it.
+version: 2
+
+models:
+  - name: spending_by_faculty
+    description: >
+      What each faculty has spent this year against its budget, from the finance system's ledger, worked
+      out each night at 02:00, Sydney time, and read each morning by Finance and the faculties' managers.
+      One row per faculty; only the answer, never a copy of the ledger. Yesterday's figures: fresh to the day.
+    config:
+      meta:
+        owner: Finance
+        temperature: warm
+    columns:
+      - name: faculty
+        description: The faculty, as the finance system names it, such as Faculty of Health.
+        data_tests:
+          - not_null
+          - unique
+      - name: spent_this_year
+        description: What the faculty's cost centres have spent since 1 January, as the ledger had it at 02:00.
+        data_tests:
+          - not_null
+      - name: budget_this_year
+        description: The faculty's budget for the year, from the finance system.
+        data_tests:
+          - not_null
+      - name: share_of_budget_spent
+        description: spent_this_year over budget_this_year, to three decimals.

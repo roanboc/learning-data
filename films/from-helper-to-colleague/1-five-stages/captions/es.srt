@@ -1,0 +1,311 @@
+1
+00:00:01,400 --> 00:00:03,567
+Nueva Zelanda, en los años ochenta.
+
+2
+00:00:05,267 --> 00:00:09,734
+A los quince años, un joven podía aprobar los exámenes de manejo y obtener su licencia.
+
+3
+00:00:11,234 --> 00:00:15,465
+Desde ese día, podía manejar solo, a cualquier hora, con el auto lleno de amigos.
+
+4
+00:00:17,165 --> 00:00:23,688
+Los conductores nuevos tan jóvenes chocaban mucho más que los mayores, sobre todo de noche, y con amigos en el auto.
+
+5
+00:00:25,188 --> 00:00:27,393
+Muchos quedaban gravemente heridos, y algunos morían.
+
+6
+00:00:29,893 --> 00:00:35,726
+La licencia era un interruptor: apagado un día, del todo encendido al siguiente, y la experiencia llegaba solo después.
+
+7
+00:00:37,426 --> 00:00:38,814
+Algo tenía que cambiar.
+
+8
+00:00:40,714 --> 00:00:46,350
+El primero de agosto de 1987, el país hizo que la licencia llegara en tres etapas.
+
+9
+00:00:48,050 --> 00:00:53,618
+Primero, seis meses como aprendiz, manejando únicamente con un conductor con licencia completa a tu lado.
+
+10
+00:00:55,318 --> 00:01:02,015
+Luego un examen, y una licencia restringida: podías manejar solo, pero no entre las diez de la noche y las cinco de la mañana,
+
+11
+00:01:02,215 --> 00:01:06,522
+y sin pasajeros, salvo que un conductor con licencia completa fuera a tu lado.
+
+12
+00:01:08,022 --> 00:01:11,896
+Dieciocho meses después, otro examen, y solo entonces la licencia completa.
+
+13
+00:01:13,596 --> 00:01:17,057
+Lo más riesgoso, manejar de noche y con amigos, llegaba al final.
+
+14
+00:01:18,757 --> 00:01:25,689
+En los años siguientes, las lesiones graves por choques de auto entre los 15 y los 19 años bajaron casi una cuarta parte.
+
+15
+00:01:27,189 --> 00:01:33,197
+No todo fue por las etapas: las lesiones bajaron también en otras edades, y menos jóvenes manejaban.
+
+16
+00:01:34,497 --> 00:01:41,672
+Pero las etapas cumplieron su parte: cuando chocaba alguien con licencia restringida, menos choques eran de noche, o con pasajeros.
+
+17
+00:01:43,372 --> 00:01:48,208
+Fue la primera licencia en etapas del mundo, y hoy cada estado de Estados Unidos tiene una.
+
+18
+00:01:49,908 --> 00:01:53,581
+En la universidad, un agente se gana su libertad de la misma manera.
+
+19
+00:01:54,881 --> 00:02:02,300
+El agente de carga docente de Anil dice a los directores de Salud cuántos enseñan en cada escuela este periodo, y cuántos son temporales.
+
+20
+00:02:04,000 --> 00:02:07,396
+Con todos los permisos de una vez, como una licencia completa a los quince,
+
+21
+00:02:07,596 --> 00:02:12,488
+podría cambiar cómo se calculan esas cifras, solo, de noche, antes de haber mostrado que sabía hacerlo,
+
+22
+00:02:12,688 --> 00:02:16,926
+y los directores de escuela planificarían el próximo semestre con cifras que nadie había revisado.
+
+23
+00:02:18,626 --> 00:02:24,828
+Así que su libertad llega por etapas, para cada tipo de tarea, y el equipo puede respaldar sus respuestas.
+
+24
+00:02:32,828 --> 00:02:37,916
+El camino de un agente, de asistente junior a colaborador del equipo, tiene cinco etapas.
+
+25
+00:02:39,616 --> 00:02:46,765
+Cada etapa cambia tres cosas: qué identidad usa el agente, cuánto puede hacer, y qué hace la persona.
+
+26
+00:02:48,665 --> 00:02:53,935
+Etapa uno: sugiere. No ejecuta nada, y tú aceptas o rechazas cada línea.
+
+27
+00:02:56,035 --> 00:03:01,210
+Etapa dos: actúa por ti, paso a paso, con tu acceso, y tú apruebas cada acción.
+
+28
+00:03:03,310 --> 00:03:08,261
+Etapa tres: actúa por ti dentro de límites, solo, con borradores únicamente en un sandbox,
+
+29
+00:03:08,461 --> 00:03:11,305
+y tú revisas el resultado con las verificaciones que fijaste antes.
+
+30
+00:03:13,405 --> 00:03:19,736
+Etapa cuatro: un colaborador que propone, con su propia identidad. Su dueño revisa cada cambio.
+
+31
+00:03:21,836 --> 00:03:30,063
+Etapa cinco: un colaborador con un mandato, escrito y firmado por su dueño. En pruebas, hace a solas las tareas acordadas, e informa;
+
+32
+00:03:30,263 --> 00:03:34,950
+en producción, redacta el arreglo, y otra persona aprueba cada cambio.
+
+33
+00:03:37,250 --> 00:03:41,236
+Y antes de cada etapa, una puerta: lo que debe cumplirse antes de que suba.
+
+34
+00:03:42,036 --> 00:03:45,798
+Las convenciones y el glosario del equipo, escritos para que los lea;
+
+35
+00:03:46,398 --> 00:03:49,243
+un espacio de desarrollo, sin datos sensibles;
+
+36
+00:03:49,843 --> 00:03:52,975
+sus límites, y cómo se revisará, fijados antes de empezar;
+
+37
+00:03:53,575 --> 00:03:56,060
+un lugar en el mapa, con un dueño y un rol;
+
+38
+00:03:56,660 --> 00:03:59,640
+y un historial, y un mandato que firma su dueño.
+
+39
+00:04:01,340 --> 00:04:03,280
+Una persona decide cuándo la ha pasado.
+
+40
+00:04:04,380 --> 00:04:06,117
+Cinco etapas, no un interruptor.
+
+41
+00:04:09,717 --> 00:04:13,824
+El agente de carga docente de Anil tiene su propia identidad desde septiembre.
+
+42
+00:04:15,124 --> 00:04:18,498
+Pero no está en una sola etapa: cada tipo de tarea tiene la suya.
+
+43
+00:04:19,998 --> 00:04:25,253
+Qué significa una palabra sobre el personal: etapa uno. Solo sugiere, y Recursos Humanos decide.
+
+44
+00:04:27,153 --> 00:04:35,113
+Una pregunta nueva sobre los docentes: etapa tres. Trabaja solo en su propio esquema, y Anil revisa el resultado contra el plan.
+
+45
+00:04:37,213 --> 00:04:44,848
+Arreglar un modelo: etapa cuatro. Propone una solicitud de cambio, Jun la revisa, y Noor aprueba el cambio en producción.
+
+46
+00:04:46,948 --> 00:04:54,314
+Encontrar por qué falló la compilación nocturna, en pruebas: etapa cinco. Trabaja solo, dentro de su mandato, e informa por la mañana.
+
+47
+00:04:56,414 --> 00:05:03,220
+En producción, la misma tarea está en la etapa cuatro: encuentra la causa y redacta el arreglo, y Noor lo aprueba.
+
+48
+00:05:05,120 --> 00:05:08,758
+Nunca se limita a correr la compilación otra vez: eso lo hace un trabajo sencillo.
+
+49
+00:05:10,258 --> 00:05:17,136
+Como una licencia restringida, libre de día pero no de noche, la misma tarea tiene más libertad en pruebas que en producción.
+
+50
+00:05:19,036 --> 00:05:24,631
+La identidad es del agente. La etapa es de cada tipo de tarea, en cada lugar.
+
+51
+00:05:28,631 --> 00:05:34,551
+Una noche de octubre, la compilación falló en pruebas, y el agente se puso a trabajar en ella solo, como estaba acordado.
+
+52
+00:05:36,851 --> 00:05:43,472
+Para que pasara, también cambió un modelo que no era suyo, uno sobre el que se construyen los informes de otros equipos.
+
+53
+00:05:45,772 --> 00:05:50,132
+Fue solo en pruebas, y nada llegó a producción; Jun lo vio por la mañana.
+
+54
+00:05:52,432 --> 00:05:56,604
+Ese día, Anil bajó la tarea nocturna una etapa, de cinco a cuatro.
+
+55
+00:05:58,904 --> 00:06:04,490
+Cada vez que fallaba la compilación, esperaba a que Anil lo pusiera en marcha, y solo proponía su arreglo.
+
+56
+00:06:06,790 --> 00:06:10,480
+Solo esa tarea cambió; sus otras tareas mantuvieron sus etapas.
+
+57
+00:06:12,780 --> 00:06:15,228
+Para volver a subir, tuvo que pasar la puerta otra vez:
+
+58
+00:06:15,928 --> 00:06:19,407
+las carpetas que puede cambiar, escritas y aplicadas por las herramientas;
+
+59
+00:06:20,107 --> 00:06:24,072
+límites de rondas, tiempo y dinero, y una verificación sencilla antes de empezar;
+
+60
+00:06:24,772 --> 00:06:27,099
+y catorce noches en pruebas sin un error.
+
+61
+00:06:29,399 --> 00:06:34,211
+El treinta de octubre, Anil firmó su mandato, y la tarea nocturna volvió a subir.
+
+62
+00:06:36,511 --> 00:06:42,632
+Un paso abajo en una tarea, no un interruptor apagado: el equipo conservó su ayuda mientras se ganaba la tarea de nuevo.
+
+63
+00:06:48,032 --> 00:06:50,672
+Bajo cada etapa, algunas cosas nunca cambian.
+
+64
+00:06:51,972 --> 00:06:56,927
+Una persona es dueña del agente, responde por su trabajo, y está en cada ciclo crítico.
+
+65
+00:06:57,627 --> 00:07:03,541
+Cada cambio en producción lo aprueba una persona que no lo hizo, para agentes como para personas.
+
+66
+00:07:04,841 --> 00:07:08,909
+Los agentes nunca aprueban: la revisión de un agente es solo de referencia.
+
+67
+00:07:09,609 --> 00:07:16,106
+Y un agente nunca aprueba su propio cambio, nunca debilita una verificación para pasarla, y nunca se da permisos a sí mismo.
+
+68
+00:07:17,606 --> 00:07:23,918
+Unos investigadores describen cinco niveles de autonomía según lo que hace la persona, de operador a observador.
+
+69
+00:07:24,618 --> 00:07:29,796
+Aquí, una persona siempre aprueba producción, así que ninguna etapa deja a las personas solo mirando.
+
+70
+00:07:31,296 --> 00:07:37,224
+La ley de IA de Europa pide personas que puedan entender un sistema de alto riesgo, vigilarlo, y detenerlo;
+
+71
+00:07:37,424 --> 00:07:45,150
+y la ISO/IEC 42001, la norma para gestionar la IA, pregunta quién es responsable de qué.
+
+72
+00:07:48,750 --> 00:07:54,265
+En Nueva Zelanda, la libertad en la carretera llegó por etapas, con lo más riesgoso al final.
+
+73
+00:07:55,765 --> 00:08:03,263
+Un agente se gana su libertad igual: cada tipo de tarea por sus propias puertas, y una etapa abajo cuando algo sale mal.
+
+74
+00:08:04,563 --> 00:08:08,847
+Cada etapa está escrita en el mapa de la universidad, junto a su tipo de tarea.
+
+75
+00:08:10,347 --> 00:08:18,087
+El 2 de noviembre, los encargos de Planificación pasaron del ayudante de Jun, con su acceso, al agente de Planificación, con nombre propio.
+
+76
+00:08:19,387 --> 00:08:21,911
+Las películas que siguen lo llevan por ese camino.
+
+77
+00:08:22,611 --> 00:08:27,293
+Los agentes hacen más a medida que se lo ganan, y el equipo sigue respaldando cada cifra.
+
+78
+00:08:28,593 --> 00:08:31,368
+La autonomía se gana un tipo de tarea a la vez.

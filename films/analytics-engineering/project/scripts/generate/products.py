@@ -8,7 +8,8 @@
   Contract Standard 3.1.0, generated from the model's YAML: each column with its type, whether it's
   required, the primary key, its class (meta.personal_data), whether a use can't do without it
   (meta.critical_for), its description, and its tests and each use's level (meta.quality) as quality rules
-  (their dimension: the standard calls validity "conformity"); the limitations; service levels, team, support.
+  (their dimension: the standard calls validity "conformity"; a test's method and, for accuracy, its
+  reference, from its meta); the limitations; service levels, team, support.
 
 Both standards are Bitol's, at the Linux Foundation. Contract standard 3.1.0 is the version Ontos
 reads and writes; their JSON schemas are kept in governance/7-standards/ (README there, with the newer
@@ -79,6 +80,12 @@ def quality(test):
     rule["severity"] = test["config"].get("severity", "error").lower()
     if test.get("description"):
         rule["description"] = " ".join(test["description"].split())
+    # How it measures, such as reconciliation; and, for accuracy, what it checks against. The standard
+    # has no field for a reference, so it's a custom property.
+    if meta.get("method"):
+        rule["method"] = meta["method"]
+    if meta.get("reference"):
+        rule["customProperties"] = [{"property": "reference", "value": meta["reference"]}]
     return rule
 
 
@@ -164,7 +171,8 @@ def main():
             schema_object = {"name": port_name(node), "physicalName": node["alias"], "logicalType": "object",
                              "physicalType": "table", "description": " ".join(node["description"].split()),
                              "properties": properties}
-            object_rules = [quality(t) for t in tests if not t.get("column_name")] + requirements(meta)
+            # What each use needs first, then the checks on the whole model, so a new check adds lines after them.
+            object_rules = requirements(meta) + [quality(t) for t in tests if not t.get("column_name")]
             if object_rules:
                 schema_object["quality"] = object_rules
             limitations = " ".join(f"{lim['id']}: {' '.join(lim['text'].split())}" for lim in meta.get("limitations", []))

@@ -44,8 +44,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una sola página, en palabras simples, para cualquiera.",
 "The rules no longer live with one person.":
 "Las reglas ya no dependen de una sola persona.",
-"Run the checks. Find the owner. Take each definition from the glossary, or have governance confirm there's none.":
-"Ejecuta las verificaciones. Busca al dueño. Toma cada definición del glosario, o que gobernanza confirme que no hay ninguna.",
+"Start from the glossary: take each definition from it, or have governance confirm there's none. Find the owner. Run the checks.":
+"Empieza por el glosario: toma de él cada definición, o que gobernanza confirme que no hay. Busca al dueño. Ejecuta las verificaciones.",
 "Classify every column, with evidence. Check each rule about the data; track the ones about what people do.":
 "Clasifica cada columna, con evidencia. Verifica cada regla sobre los datos; da seguimiento a las de lo que hace la gente.",
 "Name what it touches. Then report, once, to the people who decide.":
@@ -58,8 +58,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El agente de IA del equipo de datos revisa el cambio de Anil. Dos cosas pasan.",
 "Then three findings, each with where it is and the rule, and what the checks couldn't say: a draft, and who decides.":
 "Luego, tres hallazgos, cada uno con dónde está y la regla, y lo que las verificaciones no decían: un borrador y quién decide.",
-"One: nobody answers for it, so no owner would be asked to review a change.":
-"Uno: nadie responde por ella, así que a ningún dueño se le pediría revisar un cambio.",
+"One: nobody answers for it, so no owner would be told what a change touches.":
+"Uno: nadie responde por ella, así que a ningún dueño se le avisaría de lo que toca un cambio.",
 "Two: ten columns don't say whether they identify a person.":
 "Dos: diez columnas no dicen si identifican a una persona.",
 "It counts, and shows no values: all seven rows of the email column look like an email.":
@@ -80,8 +80,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Anil confirma: un programa, no una persona.",
 "So it's classed as identifying no one, with Anil's reason in the review.":
 "Así que se clasifica como que no identifica a nadie, con la razón de Anil en la revisión.",
-"Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, how it's built.":
-"Luego deciden los dueños: la facultad, sus clases y su regla; Yusuf, el nuevo dueño; Jun, cómo se construye.",
+"Then the meaning is written first: the faculty puts its classes and its rule in the glossary, and Yusuf names the new owner.":
+"Luego, primero se escribe el significado: la facultad pone sus clases y su regla en el glosario, y Yusuf nombra al nuevo dueño.",
+"Jun, in the data team, reviews the change against them, and the owners are told what it touches.":
+"Jun, del equipo de datos, revisa el cambio contra ellos, y a los dueños se les avisa de lo que toca.",
 "The advisers get their list.":
 "Los asesores reciben su lista.",
 "The agent decided nothing. It brought each decision to the right person, with the evidence.":
@@ -94,12 +96,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Tiene su propia identidad, lee solo lo que Sam le concede y escribe solo en su propio espacio de trabajo.",
 "It works from counts and small samples, never bulk personal data, and only reads the glossary.":
 "Trabaja con conteos y muestras pequeñas, nunca con datos personales en masa, y solo lee el glosario.",
-"And it can't approve: owners sign off, and the agent owns nothing.":
-"Y no puede aprobar: firman los dueños, y el agente no es dueño de nada.",
+"And it can't approve: the data team does, and the agent owns nothing.":
+"Y no puede aprobar: lo hace el equipo de datos, y el agente no es dueño de nada.",
 "That's why, on the night we imagined, it only left a note.":
 "Por eso, en la noche que imaginamos, solo dejó una nota.",
-"So the binder's line goes green: it runs, in the agent's access, its checklist, and the owners' approvals.":
-"Así que la línea de la carpeta se pone verde: se ejecuta en los accesos del agente, su lista y las aprobaciones de los dueños.",
+"So the binder's line goes green: it runs, in the agent's access, its checklist, and the data team's approval.":
+"Así que la línea de la carpeta se pone verde: se ejecuta en los accesos del agente, su lista y la aprobación del equipo de datos.",
 "An agent can only follow what's written down, plainly enough to check.":
 "Un agente solo puede seguir lo escrito con claridad, lo bastante para verificarlo.",
 "Remember policy 12's last line: “Staff take care to use terms correctly.” No agent can check care.":
@@ -112,12 +114,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La gente confía en una revisión que puede leer, cuestionar y anular.",
 "That night, a few years from now, is made of what you've just seen:":
 "Esa noche, dentro de unos años, está hecha de lo que acabas de ver:",
-"a checklist in plain words, rules for AI helpers, a register of who signs off what, and people who decide.":
-"una lista de verificación simple, reglas para asistentes de IA, un registro de quién firma qué, y personas que deciden.",
+"a checklist in plain words, rules for AI helpers, a register of who owns what, and people who decide.":
+"una lista de verificación simple, reglas para asistentes de IA, un registro de quién es dueño de qué, y personas que deciden.",
 "What data governance gains: every change checked against the same rules, at any hour, and no one waiting for one person.":
 "Lo que gana la gobernanza de datos: cada cambio verificado con las mismas reglas, a toda hora, sin esperar a una sola persona.",
-"Personal data marked before anyone sees it, and each decision made by its owner, with the evidence, written down.":
-"Datos personales marcados antes de que alguien los vea, y cada decisión tomada por su dueño, con la evidencia, por escrito.",
+"Personal data marked before anyone sees it, and each decision made by the right person, with the evidence, written down.":
+"Datos personales marcados antes de que alguien los vea, y cada decisión tomada por la persona indicada, con la evidencia, por escrito.",
 "An agent checks what's written. People decide.":
 "Un agente revisa lo escrito. Las personas deciden."
 });

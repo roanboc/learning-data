@@ -66,8 +66,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Etapa tres: actúa por ti dentro de límites, solo, con borradores únicamente en un sandbox,",
 "and you check the result against the checks you set first.":
 "y tú revisas el resultado con las verificaciones que fijaste antes.",
-"Stage four: a contributor that proposes, under its own identity. Its owner reviews every change.":
-"Etapa cuatro: un colaborador que propone, con su propia identidad. Su dueño revisa cada cambio.",
+"Stage four: a contributor that proposes, under its own identity. The data team reviews every change.":
+"Etapa cuatro: un colaborador que propone, con su propia identidad. El equipo de datos revisa cada cambio.",
 "Stage five: a contributor with a mandate, written and signed by its owner. In test, it does agreed tasks alone, and reports;":
 "Etapa cinco: un colaborador con un mandato, escrito y firmado por su dueño. En pruebas, hace a solas las tareas acordadas, e informa;",
 "in production, it drafts the fix, and another person approves every change.":

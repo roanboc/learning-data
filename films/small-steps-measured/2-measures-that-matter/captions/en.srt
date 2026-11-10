@@ -1,0 +1,263 @@
+1
+00:00:03,000 --> 00:00:07,955
+New York, 1952: a delivery room at the Sloane Hospital for Women.
+
+2
+00:00:09,855 --> 00:00:16,191
+Dr Virginia Apgar is there for the mothers: she's an anaesthetist, the doctor who keeps them out of pain.
+
+3
+00:00:17,891 --> 00:00:25,827
+In America, about one baby in fifty dies in its first four weeks, and deaths in the first day have hardly fallen in twenty years.
+
+4
+00:00:27,727 --> 00:00:34,808
+At least half of those deaths come from a lack of oxygen: a baby who can't breathe well, and needs help in its first minutes.
+
+5
+00:00:36,508 --> 00:00:42,141
+But in the room, everyone looks after the mother, and the newborn is left to the most junior doctor.
+
+6
+00:00:43,841 --> 00:00:51,060
+Is the baby well? Each doctor judges by eye, in words like mild or severe, and each means something different.
+
+7
+00:00:52,760 --> 00:00:58,713
+So a baby in trouble can be missed until it's too late, and no hospital can tell whether what it does helps.
+
+8
+00:01:00,813 --> 00:01:02,253
+Something has to change.
+
+9
+00:01:04,153 --> 00:01:10,917
+In 1952, Apgar proposes a score that anyone in the room can take, the same way every time.
+
+10
+00:01:12,617 --> 00:01:20,384
+One minute after birth, five signs: the heartbeat, breathing, how firmly the baby moves, how it reacts when touched, and its colour.
+
+11
+00:01:22,284 --> 00:01:26,015
+Each gets zero, one or two. Ten is a baby doing well.
+
+12
+00:01:27,715 --> 00:01:32,432
+She tries it on over a thousand babies, and publishes it in 1953.
+
+13
+00:01:34,132 --> 00:01:38,889
+Now a baby in trouble shows at once, as a low score, to everyone in the room.
+
+14
+00:01:40,589 --> 00:01:42,674
+And doctors can compare what they do.
+
+15
+00:01:43,574 --> 00:01:50,582
+After a caesarean, babies whose mothers were put to sleep scored five on average; with a spinal anaesthetic, eight.
+
+16
+00:01:52,482 --> 00:01:59,612
+By the early 1960s many hospitals used it; today most score every baby at one minute, and again at five.
+
+17
+00:02:01,312 --> 00:02:08,941
+Newborn deaths fell, for many reasons, from about twenty in a thousand in 1950 to under four by 2016.
+
+18
+00:02:10,841 --> 00:02:15,787
+A data team can be busy every day, and still not know whether people get what they need.
+
+19
+00:02:17,287 --> 00:02:20,618
+A few measures, taken the same way every month, can show it.
+
+20
+00:02:28,718 --> 00:02:36,710
+July 2027, at the university. Helena Novak's data strategy promised the team's measures on one page.
+
+21
+00:02:38,610 --> 00:02:44,762
+The easy things to count are what keeps a team busy: requests closed, hours worked, reports built.
+
+22
+00:02:46,462 --> 00:02:50,116
+Each of them can rise while the people who asked are still waiting.
+
+23
+00:02:52,016 --> 00:02:56,774
+So Helena starts from what people get, and from the decisions the measures will serve.
+
+24
+00:02:58,474 --> 00:03:03,697
+For every measure, one question: when it moves, what will we do differently, and who decides?
+
+25
+00:03:05,597 --> 00:03:11,085
+Data governance already measures itself this way, from the work, as Teachers of data showed.
+
+26
+00:03:13,785 --> 00:03:18,933
+In 1992, Robert Kaplan and David Norton called it a balanced scorecard:
+
+27
+00:03:19,133 --> 00:03:23,605
+a few measures, in groups, so a gain in one place can't hide a loss in another.
+
+28
+00:03:25,505 --> 00:03:27,383
+Helena's page has three groups.
+
+29
+00:03:28,683 --> 00:03:35,334
+Delivery: days from ask to first use, what's sent back for changes, and how much work is open at once.
+
+30
+00:03:37,034 --> 00:03:40,719
+Data management: products with an owner, and their promise met.
+
+31
+00:03:42,419 --> 00:03:48,652
+And value: benefits against each case, decisions informed, people using the products each month,
+
+32
+00:03:48,852 --> 00:03:52,449
+and two questions, twice a year, to the people the team serves.
+
+33
+00:03:54,349 --> 00:03:57,849
+Eight measures on one page. Apgar needed five signs.
+
+34
+00:03:59,749 --> 00:04:03,161
+Anything else can still be counted; it just stays off the page.
+
+35
+00:04:05,861 --> 00:04:11,907
+Each measure gets four things: a baseline, one definition, a reader, and the decision it serves.
+
+36
+00:04:13,607 --> 00:04:21,574
+Take days from ask to first use. Its baseline came first, from February, before anything changed: 41 working days.
+
+37
+00:04:23,474 --> 00:04:26,787
+Its one definition lives in the catalog's glossary:
+
+38
+00:04:26,987 --> 00:04:32,423
+working days from a request reaching the one list to its first use by the person who asked.
+
+39
+00:04:34,323 --> 00:04:39,161
+Its readers: the team, every second Thursday, and the data council, every month.
+
+40
+00:04:40,661 --> 00:04:43,715
+And its decision: where to take the waiting out of the work.
+
+41
+00:04:45,415 --> 00:04:53,799
+Beside it sits a quality measure, sent back: the share of finished work that people send back for changes. In July, one piece in eight.
+
+42
+00:04:55,699 --> 00:04:59,973
+Without it, speed could hide rework: half-done work sent out, and back again.
+
+43
+00:05:01,673 --> 00:05:05,640
+The page itself is a small governed product, and Helena owns it.
+
+44
+00:05:08,340 --> 00:05:12,094
+By June, days from ask to first use had fallen to 24.
+
+45
+00:05:13,794 --> 00:05:21,429
+On the page, each measure is a line across the months, its baseline drawn beneath it, never one number lit red or green.
+
+46
+00:05:23,329 --> 00:05:30,164
+On Thursday 12 August, products' promises met stood at 82 percent, up from 58 in March.
+
+47
+00:05:31,864 --> 00:05:40,756
+Alone, that looked fine. Beside it, nine pieces of work were open against a limit of six: new work was starting before old work finished.
+
+48
+00:05:42,856 --> 00:05:47,690
+So the team finished before it started, and by mid-September the load was six again.
+
+49
+00:05:49,590 --> 00:05:59,052
+Value has its lines too. A decision informed: on 24 June, the University Council deferred a new building, using the rooms' data.
+
+50
+00:06:00,952 --> 00:06:09,922
+And a benefit against its case: retiring the old warehouse should save 270,000 Australian dollars a year from January,
+
+51
+00:06:10,122 --> 00:06:12,664
+owned by the director of digital services.
+
+52
+00:06:15,364 --> 00:06:24,729
+Every measure carries a risk. Goodhart's law, from 1975, as it's often put: when a measure becomes a target, it stops being a good measure.
+
+53
+00:06:26,829 --> 00:06:34,682
+Apgar saw it in the delivery room: doctors scored their own babies several points higher than others did, so someone else took the score.
+
+54
+00:06:36,782 --> 00:06:41,969
+Helena's measures are counted the same way: from the tracker and the platform's own logs.
+
+55
+00:06:43,469 --> 00:06:48,371
+And first use is confirmed by the person who asked, never by the person who built it.
+
+56
+00:06:50,071 --> 00:06:55,475
+And every measure is the team's: never one person's number, and never a target for anyone.
+
+57
+00:06:57,375 --> 00:07:02,070
+How the team reads its measures together is told in the leading data people module.
+
+58
+00:07:04,770 --> 00:07:11,187
+In New York, five signs, taken the same way, by someone else, made every baby seen in its first minute.
+
+59
+00:07:13,087 --> 00:07:21,580
+By December, Helena's page showed what people got: 14 days from ask to first use, not 41, and half as much sent back.
+
+60
+00:07:23,280 --> 00:07:29,219
+Promises met: 86 percent. People using the products each month: 910.
+
+61
+00:07:30,919 --> 00:07:36,544
+And the old warehouse was retired on 17 December, its saving starting in January.
+
+62
+00:07:38,444 --> 00:07:41,430
+On Monday, list the decisions your measures will serve.
+
+63
+00:07:42,530 --> 00:07:44,019
+Keep them few, in groups.
+
+64
+00:07:45,119 --> 00:07:49,630
+Take a baseline before you change anything, and write one definition for each.
+
+65
+00:07:50,730 --> 00:07:54,372
+Put a quality measure beside every speed measure, and show the trend.
+
+66
+00:07:55,872 --> 00:07:59,630
+And keep every measure for the team, never a target for one person.

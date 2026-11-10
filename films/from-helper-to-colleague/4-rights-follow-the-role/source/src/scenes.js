@@ -310,7 +310,7 @@ scene("change",(ctx,S,t,sc)=>{const c=sc.cues,FT=t+sc.start,P=rf_once(sc,"P",()=
       rf_pillL(x,760,600,"Clara agrees",{icon:"tick",col:AG.green,a:ag_io(tt,P.clara,c.tools-0.3,0.4)});
       rf_pillL(x,760,680,"the owners of what it reads agree",{icon:"tick",col:AG.green,a:ag_io(tt,P.owners+0.3,c.tools-0.3,0.4)});
       // then its rights follow: new lines, each with the new step; when the step goes, its rights go with it
-      rf_rows(x,720,240,1100,{kick:"Its rights"},[{t:"six rights, from its three steps",mute:true},
+      rf_rows(x,720,240,1100,{kick:"Its rights"},[{t:"its rights from its three steps",mute:true},
         {t:"read Planning's questions",chip:"answer a question",a:ag_in(tt,P.lines,0.4)*(1-gone)},{t:"write its answers",chip:"answer a question",a:ag_in(tt,P.lines+0.4,0.4)*(1-gone)}],
         {a:ag_in(tt,P.rights-0.2,0.4),k:ag_spr(tt,P.rights-0.2)});
       // and the tools follow the rights, never a grant by hand

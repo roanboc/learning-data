@@ -6,6 +6,15 @@ The mart models of the graduations domain (a consumer contract), at their latest
 
 ```mermaid
 erDiagram
+    mart_graduations__certificates_file {
+        string graduation_bk PK
+        string name_as_printed
+        string award_name
+        date conferred_on
+        string ceremony_id
+        timestamp student_system_as_of
+        timestamp portal_as_of
+    }
     mart_graduations__graduation_list {
         string graduation_bk PK
         string student_bk
@@ -22,6 +31,7 @@ erDiagram
         date added_on
         timestamp student_system_as_of
         timestamp portal_as_of
+        string name_confirmed_how
     }
     mart_graduations__name_reports {
         string report_bk PK
@@ -36,9 +46,18 @@ erDiagram
         boolean answered_in_time
         string record_made_by
     }
+    mart_graduations__names_to_confirm {
+        string student_bk PK
+        string ceremony_id PK
+        date ceremony_on
+        date names_due_on
+        int days_left
+    }
 ```
 
 | Model | Grain | Access | Contract |
 |---|---|---|---|
+| `mart_graduations__certificates_file` | One row per certificate of a round whose names haven't gone to the printer yet. | protected | enforced |
 | `mart_graduations__graduation_list` | One row per certificate, a graduate, an award and a ceremony. | protected | enforced |
 | `mart_graduations__name_reports` | One row per report, a graduate's correction of their name for a ceremony. | protected | enforced |
+| `mart_graduations__names_to_confirm` | One row per graduate and ceremony, of a round whose names haven't gone to the printer yet, not confirmed yet. | protected | enforced |

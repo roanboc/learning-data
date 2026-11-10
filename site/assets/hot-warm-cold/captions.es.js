@@ -44,6 +44,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En septiembre, Noor, la arquitecta de datos, le hizo dos preguntas a cada dueño de datos.",
 "How fresh must it be? And how often is it read?":
 "¿Qué tan frescos deben estar? ¿Y cada cuánto se leen?",
+"The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept.":
+"La primera decide cómo se mueven: al cambiar, o con un horario. La segunda decide dónde se guardan.",
 "Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used.":
 "Se necesitan en segundos o minutos y se leen todo el tiempo: calientes. Que sean pocos y estén cerca de donde se usan.",
 "Fresh to the hour or the day, and read often: warm. Work it out on a schedule.":
@@ -70,8 +72,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La app ve cada cambio en menos de un minuto.",
 "This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.":
 "Este lunes, once contratos cambiaron en la mañana, y todo lo declarado contra ellos se aprobó antes del mediodía.",
-"Hot costs the most, because something is always running: keep hot only what's needed within minutes.":
-"Lo caliente es lo más caro, porque siempre hay algo en ejecución: deja caliente solo lo que se necesita en minutos.",
+"Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes.":
+"Lo fresco al minuto es lo más caro, porque el pipeline siempre está en ejecución: deja caliente solo lo que se necesita en minutos.",
 "Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget.":
 "Cada mañana, Rohan, de Finanzas, y los gerentes de las facultades revisan lo que cada facultad gastó este año contra su presupuesto.",
 "Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked.":
@@ -90,6 +92,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La ley australiana pide a los empleadores guardar los registros de pago siete años, y después del primero casi no se leen.",
 "Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.":
 "Hasta septiembre, cada registro iba al almacenamiento más caro y nunca se borraba: un costo, y un riesgo para todas las personas en él.",
+"The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is.":
+"La nube guarda en niveles según cuánto se leen los datos: frecuente para lo que se lee a menudo, archivo para lo que casi nunca.",
 "Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest.":
 "Ahora, un año después de escrito, cada archivo pasa al nivel de archivo de la nube, el más barato.",
 "Like the copies on Svalbard, they sleep until someone needs them.":
@@ -122,8 +126,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la universidad, los datos se guardan igual: contratos en un minuto, gastos cada noche, pagos antiguos baratos hasta que se borran.",
 "Today, 2,960 people are paid, 856 of them casual staff, Linh among them.":
 "Hoy cobran 2,960 personas, 856 de ellas del personal ocasional, entre ellas Linh.",
-"Freshness and reading decide how data moves and where it lives.":
-"La frescura y la lectura deciden cómo se mueven los datos y dónde viven.",
+"Freshness decides how data moves; reading decides where it lives.":
+"La frescura decide cómo se mueven los datos; la lectura, dónde viven.",
 "Storage has had tiers for years: there's no wheel to reinvent.":
 "El almacenamiento ya tiene niveles hace años: no hay rueda que reinventar.",
 "Start from the official docs, then investigate, adapt, implement, iterate.":

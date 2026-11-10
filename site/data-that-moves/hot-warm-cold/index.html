@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hot, warm, cold · Data that moves · Learning Data</title>
-<meta name="description" content="A film about data temperature: how fresh each kind of data must be, and how often it's read, decide how it moves and where it's kept. In 2015, a gene bank driven from Aleppo by war asked the seed vault on Svalbard for the copies it kept frozen there, the first to do so. At the university, contracts are hot, pushed from the HR system as they change and kept as a streaming table within a minute; each faculty's spending is warm, a materialized view worked out each night; old pay records are cold, moved to the archive tier after a year and deleted at seven. Light on purpose, with the official docs for the rest.">
-<meta property="og:title" content="Hot, warm, cold · Data that moves · Learning Data"><meta property="og:description" content="Hot, warm or cold: how fresh data must be, and how often it's read, decide how it moves and where it's kept."><meta property="og:image" content="https://data.learn-all.org/assets/hot-warm-cold-poster.jpg">
+<meta name="description" content="A film about data temperature: how fresh each kind of data must be decides how it moves, and how often it's read decides where it's kept. In 2015, a gene bank driven from Aleppo by war asked the seed vault on Svalbard for the copies it kept frozen there, the first to do so. At the university, contracts are hot, pushed from the HR system as they change and kept as a streaming table within a minute; each faculty's spending is warm, a materialized view worked out each night; old pay records are cold, moved to the archive tier after a year and deleted at seven. Light on purpose, with the official docs for the rest.">
+<meta property="og:title" content="Hot, warm, cold · Data that moves · Learning Data"><meta property="og:description" content="Hot, warm or cold: how fresh data must be decides how it moves; how often it's read decides where it's kept."><meta property="og:image" content="https://data.learn-all.org/assets/hot-warm-cold-poster.jpg">
 <link rel="alternate" hreflang="en" href="https://data.learn-all.org/data-that-moves/hot-warm-cold/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/data-that-moves/hot-warm-cold/">
 <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,14 +17,14 @@
 <main>
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../assets/hot-warm-cold-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Topics</a> › <a href="../../topics/#modern-data-basics">Modern data basics</a> › <a href="../">Data that moves</a></p>
-<h1>Freshness and reading decide where data lives</h1>
+<h1>Freshness decides how data moves; reading, where it lives</h1>
 <p class="lead">Until September, nobody at the university had asked how fresh each kind of data must be. Contract changes came in once a night, and 23 tutors were paid two weeks late; old pay records sat in the costliest storage, never deleted. Now each kind of data has its own temperature.</p>
 <p class="note draft"><b>Draft</b> · The author hasn't reviewed it yet, so some details may change.</p>
 </section>
 <section class="module" id="watch" data-store="ld-hot-warm-cold" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Watch the film</h2><p><b>Pause and think</b> is on: the film stops for one question at the end of chapters.</p></div></div>
 <div class="player" data-labs="">
-<audio id="snd" preload="metadata" src="../../assets/hot-warm-cold/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/hot-warm-cold-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 7½ min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Hot, warm, cold"></canvas>
+<audio id="snd" preload="metadata" src="../../assets/hot-warm-cold/soundtrack.mp3"></audio><div class="poster"><img src="../../assets/hot-warm-cold-poster.jpg" alt="" width="1280" height="720" data-play><div class="poster-cta"><button type="button" class="play-badge" data-play>▶ Play the film · 8 min</button></div></div><canvas id="film" width="1280" height="720" aria-label="Animated film: Hot, warm, cold"></canvas>
 <div class="bar"><button id="play">Play</button><input id="scrub" type="range" min="0" step="0.01" value="0" aria-label="Seek"><span id="time">0:00</span><button id="think" aria-pressed="true" title="Stop at the end of three chapters, with one question each">Pause and think</button><button id="cc" class="on" aria-pressed="true">Captions</button><button id="fs">Full screen</button></div>
 </div>
 <div class="chapters" id="chapters" aria-label="Chapters"></div>
@@ -59,7 +59,7 @@
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/ldp/concepts/materialized-views">Materialized views</a></b><span>Work out an answer on a schedule, and keep it ready to read.</span></li>
 <li><b><a href="https://docs.getdbt.com/reference/resource-configs/databricks-configs">Databricks configurations in dbt</a></b><span>A materialized view as a dbt model, with its schedule in its config.</span></li>
 <li><b><a href="https://learn.microsoft.com/en-us/azure/databricks/optimizations/archive-delta">Archival support in Azure Databricks</a></b><span>Tell a table which files have gone to the archive tier, and find the ones a query needs back.</span></li>
-<li><b><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview">Access tiers for blob data</a></b><span>The cloud's tiers, from hot to archive: what each costs to keep and to read, and how long it takes to bring back.</span></li>
+<li><b><a href="https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview">Access tiers for blob data</a></b><span>The cloud's storage tiers, named by how often data is read, from hot to archive: what each costs to keep and to read, and how long it takes to bring back.</span></li>
 </ul>
 </section>
 

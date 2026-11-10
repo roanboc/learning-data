@@ -404,6 +404,7 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
 - [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
+- [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
 
 ## Making of and supplementary films
 

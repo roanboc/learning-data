@@ -109,10 +109,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Abrir un encargo es de quien lo solicita: de Clara.",
 "Reviewing the code is the analytics engineer's: Jun's.":
 "Revisar el código es del ingeniero de analítica: de Jun.",
-"Approving the change is the product owner's: Clara's again.":
-"Aprobar el cambio es de la dueña del producto: otra vez de Clara.",
-"Releasing to production is the release approver's: Noor's.":
-"Liberar a producción es de quien aprueba la liberación: de Noor.",
+"Approving the change is the release approver's: Noor's.":
+"Aprobar el cambio es de quien aprueba la liberación: de Noor.",
+"And releasing it to production is Noor's too.":
+"Y liberarlo a producción también es de Noor.",
 "And what a word means is decided by its owner, such as Mei for the students' words, before it goes into the glossary.":
 "Y lo que significa una palabra lo decide su dueño, como Mei para las palabras de los estudiantes, antes de que entre al glosario.",
 "So it never approves, never releases, never changes what a word means, and never writes to production.":

@@ -1,6 +1,6 @@
 {
   "kicker": "Workload identity",
-  "kicker_es": "Identidad de las cargas de trabajo",
+  "kicker_es": "Identidad de carga de trabajo",
   "title_es": "Cargas sin secretos",
   "h1": "Workloads without secrets: a job that proves who it is",
   "h1_es": "Cargas sin secretos: un proceso que prueba quién es",

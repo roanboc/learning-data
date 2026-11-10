@@ -150,6 +150,55 @@ schema:
     required: false
     classification: none
     description: The day the certificate's row first joined the list, the night after its award was approved.
+  - name: student_system_as_of
+    logicalType: timestamp
+    physicalType: timestamp
+    required: false
+    classification: none
+    description: 'How old the list''s student system data is: when the student system''s nightly file
+      it was built from arrived, the newest in that system''s receipts. The same on every row, and in
+      the header of the printer''s file. After a night when the file doesn''t come, it''s the night before''s,
+      and says so.'
+    quality:
+    - name: student_system_at_most_a_day_old_at_the_send
+      type: text
+      description: 'For the certificates: the student system''s data from that night''s file when the
+        list goes to the printer, so every graduate the exam boards approved the day before is on it.'
+      dimension: timeliness
+      severity: error
+      businessImpact: A graduate the boards approved left off the list, and their certificate printed
+        late and posted.
+      customProperties:
+      - property: use
+        value: certificates
+      - property: level
+        value: At most 24 hours old, at the send
+      - property: agreedWith
+        value: Malia Fonoti, graduations office
+  - name: portal_as_of
+    logicalType: timestamp
+    physicalType: timestamp
+    required: false
+    classification: none
+    description: 'How old the list''s names from the portal are: when the portal''s nightly file it was
+      built from arrived, the newest in the portal''s receipts. The same on every row, and in the header
+      of the printer''s file.'
+    quality:
+    - name: portal_at_most_a_day_old_at_the_send
+      type: text
+      description: 'For the certificates: the names graduates confirmed in the portal, from that night''s
+        file when the list goes to the printer.'
+      dimension: timeliness
+      severity: error
+      businessImpact: A name a graduate corrected printed as it was before, and their certificate printed
+        again.
+      customProperties:
+      - property: use
+        value: certificates
+      - property: level
+        value: At most 24 hours old, at the send
+      - property: agreedWith
+        value: Malia Fonoti, graduations office
   quality:
   - name: seating_plan_count_per_ceremony
     type: text
@@ -209,11 +258,28 @@ schema:
       value: Exact
     - property: agreedWith
       value: Planning
+  - id: awards_match_the_boards
+    type: custom
+    engine: dbt
+    implementation: 'reconciles_with: awards_match_the_boards'
+    dimension: accuracy
+    severity: error
+    description: 'Every certificate on the list is an award a faculty''s exam board approved, with the
+      day the board approved it as its conferral date, and every award the boards approved is on the list:
+      award by award, against the boards'' own register, kept apart from the student system. A copy of
+      the student system couldn''t do this: it would share any gap the list has, and agree with it.'
+    method: reconciliation
+    customProperties:
+    - property: reference
+      value: the exam boards' approved lists
 slaProperties:
 - property: latency
-  value: 1
-  unit: d
-  description: Built every night.
+  value: 24
+  unit: h
+  element: mart_graduations__graduation_list.student_system_as_of, mart_graduations__graduation_list.portal_as_of
+  driver: operational
+  description: Built every night; each source at most 24 hours old when the list goes to the printer,
+    as agreed with Malia Fonoti on 22 June 2026.
 team:
   name: Mei Tanaka, registrar's office
   members:

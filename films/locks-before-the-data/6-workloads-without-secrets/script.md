@@ -206,7 +206,7 @@ The film can stop at the end of three chapters, with one question each (`site/as
 
 `site.json`, in the short style (a short kicker, an h1 of 40 to 60 characters, a lead of 250 to 300 characters about the university's situation, a card of 100 to 130 characters), in English and Spanish.
 
-- **Kicker:** Workload identity · *Identidad de las cargas de trabajo*
+- **Kicker:** Workload identity · *Identidad de carga de trabajo*
 - **h1:** Workloads without secrets: a job that proves who it is · *Cargas sin secretos: un proceso que prueba quién es*
 - **Lead:** Every night at two, a job loads the registrar's records, and it still runs on Jun Park's personal token, with copies in its settings, in a notebook in GitHub and on his laptop. How can it prove who it is each time it runs, with nothing anyone could copy? · *Cada noche a las dos, un proceso carga los datos del registro, y aún corre con el token personal de Jun Park, con copias en su configuración, en un notebook en GitHub y en su laptop. ¿Cómo puede probar quién es cada vez que corre, sin nada que alguien pueda copiar?*
 - **Card:** A job that signs in as itself: a name of its own, a signed note for each deploy, and one password in a vault. · *Un proceso que entra como sí mismo: un nombre propio, una nota firmada en cada despliegue y una contraseña en un almacén.*

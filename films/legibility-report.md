@@ -74,6 +74,7 @@
 | Every area, one job | 313 | 0% | 0 | 28.3 | Drawn to the rule |
 | Listen first | 313 | 0% | 0 | 28.5 | Drawn to the rule |
 | Design it simple | 294 | 0% | 0 | 28.4 | Drawn to the rule |
+| From gaps to a roadmap | 338 | 0% | 0 | 28.0 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
 | Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
 | Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |

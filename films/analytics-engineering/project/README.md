@@ -242,6 +242,9 @@ project/
 │                             the fortnightly dashboard (Databricks only);
 │                             a-late-file/: the night a file came late, its freshness check on the
 │                             receipts, and the send that waits;
+│                             files-as-data/: supplier invoices read with the platform's functions and
+│                             checked, a signed contract found by its metadata, and the claims app's
+│                             data contract (Databricks only);
 │                             one-policy-for-many-tables/: the registrar's policies by tag, as code
 │                             (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access

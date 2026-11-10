@@ -1,6 +1,6 @@
 # One policy for many tables: questions and assumptions
 
-*Data protection and privacy* · *Only what you may see*, film 6 of 8 · merged, PR #212 · [pull request](https://github.com/roanboc/learning-data/pull/212)
+*Data protection and privacy* · *Only what you may see*, film 6 · merged, PR #212 · [pull request](https://github.com/roanboc/learning-data/pull/212)
 
 [Watch it on the site](https://data.learn-all.org/only-what-you-may-see/one-policy-for-many-tables/)
 

@@ -28,8 +28,8 @@ never weaken a test.
 2. **An owner.** For each new entity, kind, model, source or seed with no owner, find who decides
    what it means: the owner of the domain on the university's map (`_shared__conceptual.yml`), or
    the team whose system it comes from. Draft it; if it isn't clear, ask data governance. A new
-   owner goes in `governance/2-owners/owners.yml` too, with where their reviews go, and
-   `scripts/generate/codeowners.py` regenerates `CODEOWNERS`. A new mart must also be an output of a
+   owner goes in `governance/2-owners/owners.yml` too, with where the impact check's note reaches
+   them (owners are told what a change touches; the data team reviews the code). A new mart must also be an output of a
    data product, with an owner who answers for it: draft `governance/4-data-products/<name>.yml`, and
    `scripts/generate/products.py` writes its contracts and product descriptor.
 3. **A glossary term, or a confirmed absence.** For each new entity in a core domain, ask data
@@ -44,8 +44,8 @@ never weaken a test.
    ```
    It counts what each column holds (emails, person IDs, keys that hold one, hashes) and never
    shows a value. Propose `meta.personal_data` (`direct`, `pseudonymous` or `none`) in the pull
-   request, with the evidence line, for the model's owner to approve. When the name or the counts
-   disagree, say so and ask; when in doubt, propose the stricter class.
+   request, with the evidence line, for the data team's review; the owner is told. When the name or
+   the counts disagree, say so and ask; when in doubt, propose the stricter class.
 5. **A test, or a tracking model, for each stated rule.** Read the rules the change adds or
    touches: `rules:` and `identity:` in the conceptual models, and decisions that say what must be
    true. A rule about the data (a value in a set, a key that matches, a number that adds up) has a
@@ -58,8 +58,8 @@ never weaken a test.
    breaking change is a new version, with a deprecation date for the old one; prefer an additive
    change when there's one.
 7. **Report.** One comment on the pull request: what passed, each finding with its file, what you
-   drafted and the evidence, and who must approve each (the owner of the meaning, the data
-   architect for the model, data governance for terms). Mark what you weren't sure of.
+   drafted and the evidence, and who decides each: data governance where the change and the
+   glossary differ; the owners are told. Mark what you weren't sure of.
 
 ## Don't
 

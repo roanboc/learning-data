@@ -34,6 +34,7 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 | ID | Scope | Decision | Why | Who | When | Status |
 |---|---|---|---|---|---|---|
 | [DEC-FIN-02](../models/marts/finance/_finance__decisions.yml) (was Q-FIN-01) | consumer `finance` | **Tuition is saved in the enrolled award only.** Recognised credit saves tuition only in the award the learner is enrolled in on census day, counted once, at that award's published rate for the census year. | The core counts recognised credit towards every award it could count towards. A learner pays tuition for one award; counted across all of them, the saving would be two or three times too big. | Finance | 21 Oct 2026 | agreed |
+| [DEC-FIN-04](../models/marts/finance/_finance__decisions.yml) | consumer `finance` | **Payroll's export is a model in the project, counted by the pay day that pays each claim.** Payroll's export to Finance is mart_finance__casual_pay_paid, built from the claims approved in the claims app. Each approved claim is paid on the first pay day whose claims close at or after its approval (pay_day_for(), on HR's calendar, pay_days), and the export counts pay days up to the day of the build. Totals by pay day, faculty and unit, with no names or IDs. Accepted as LIM-FIN-02 and LIM-FIN-03, on the mart. | The export ran for years as a script on one person's laptop, with payroll's rule inside it, and when the claims moved into the claims app nobody could change it safely. As a model, the rule is written once with its owner, tested before every change, and reviewed by someone other than its author. | Ingrid Holm, HR, with Rohan Desai, Finance | 4 Mar 2026 | agreed |
 | [DEC-PLN-02](../models/marts/planning/_planning__decisions.yml) | consumer `planning` | **Planning's mart is as it was at census.** Planning's mart is as it was at census, dated by when things took effect. | Planning compares with the census report. It builds on the same core as the wallet. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 | [DEC-WAL-01](../models/marts/wallet/_wallet__decisions.yml) | consumer `wallet` | **The wallet's marts are as they are now.** The wallet's marts are as they are now. | The wallet shows the learner today. It builds on the same core as Planning. | Planning, the wallet app team and Noor | 8 Oct 2026 | agreed |
 
@@ -68,6 +69,12 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 | [DEC-PRJ-09](../models/_shared/_shared__decisions.yml) | project | **Primary and foreign keys declared on Databricks only.** Primary and foreign keys are declared for Databricks and left out on DuckDB. Tests check keys on both. | Databricks records them as information and doesn't enforce them. DuckDB enforces them, and won't rename or drop a table a foreign key points to, which dbt does to rebuild it. |  |  | agreed |
 | [DEC-STU-08](../models/core/student/_student__decisions.yml) | domain `student` | **core_credential version 2 is incremental, merged on credential_key.** core_credential version 2 is incremental, merged on credential_key, on both engines. | One strategy, merge, that both engines support. |  |  | agreed |
 
+## `review_and_ship`
+
+| ID | Scope | Decision | Why | Who | When | Status |
+|---|---|---|---|---|---|---|
+| [DEC-PRJ-16](../models/_shared/_shared__decisions.yml) | project | **Every job is code in the project, and reaches production the same way, after two people.** The project's jobs are written as files in a Declarative Automation Bundle (databricks.yml, and a file for each job in resources/), next to the models they run. A change goes on a branch, then a pull request whose checks build and test it; someone other than its author reviews and approves it; once merged, the same files are deployed to test and run there, then to production after Noor approves, under the platform's service principal, never a person's account. Nobody deploys from a laptop. The workflow is examples/scripts-became-software/release.yml. | Payroll's export ran for years from one person's laptop; when it had to change, nobody else could change it safely. A job kept as code is versioned, tested and reviewed like the models, and the same files deployed the same way every time can't drift between test and production. | Noor, data architect, with Sam Okafor, who runs the data platform | 4 Mar 2026 | agreed |
+
 ## `written_once`
 
 | ID | Scope | Decision | Why | Who | When | Status |
@@ -95,16 +102,16 @@ What was decided, why, and who decided, for every source, domain and consumer, a
 
 How many decisions each log holds at each step. A domain's project, when it has one, takes its logs with it.
 
-| Scope | `scope` | `source_reality` | `consumer_output` | `gaps_and_contracts` | `tests` | `build` | `written_once` | `operate_and_evolve` |
-|---|---|---|---|---|---|---|---|---|
-| project | 1 | 1 |  |  |  | 4 | 4 | 5 |
-| domain `course` |  |  |  |  |  | 1 |  |  |
-| domain `person` | 3 |  |  |  |  |  |  |  |
-| domain `student` | 4 | 2 |  | 1 |  | 1 |  | 1 |
-| consumer `finance` | 1 |  | 1 | 1 |  |  |  |  |
-| consumer `planning` | 1 |  | 1 |  |  |  |  |  |
-| consumer `wallet` |  |  | 1 |  |  |  |  |  |
-| source `claims_app` |  | 1 |  |  |  |  |  |  |
-| source `learning_platform` |  |  |  | 2 |  |  |  | 1 |
-| source `short_courses` |  |  |  | 2 | 1 |  |  | 1 |
-| source `student_system` |  | 1 |  | 3 |  |  |  | 1 |
+| Scope | `scope` | `source_reality` | `consumer_output` | `gaps_and_contracts` | `tests` | `build` | `review_and_ship` | `written_once` | `operate_and_evolve` |
+|---|---|---|---|---|---|---|---|---|---|
+| project | 1 | 1 |  |  |  | 4 | 1 | 4 | 5 |
+| domain `course` |  |  |  |  |  | 1 |  |  |  |
+| domain `person` | 3 |  |  |  |  |  |  |  |  |
+| domain `student` | 4 | 2 |  | 1 |  | 1 |  |  | 1 |
+| consumer `finance` | 1 |  | 2 | 1 |  |  |  |  |  |
+| consumer `planning` | 1 |  | 1 |  |  |  |  |  |  |
+| consumer `wallet` |  |  | 1 |  |  |  |  |  |  |
+| source `claims_app` |  | 1 |  |  |  |  |  |  |  |
+| source `learning_platform` |  |  |  | 2 |  |  |  |  | 1 |
+| source `short_courses` |  |  |  | 2 | 1 |  |  |  | 1 |
+| source `student_system` |  | 1 |  | 3 |  |  |  |  | 1 |

@@ -280,6 +280,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
+- [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 
 ### Only what you may see
 
@@ -292,6 +293,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
 - [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 - [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
+- [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
 ### Kept for a reason
 
@@ -404,6 +406,7 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 
 - [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 - [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
+- [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 
 ### Architecture that keeps up
 

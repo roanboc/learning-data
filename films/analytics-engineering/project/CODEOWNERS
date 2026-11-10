@@ -29,3 +29,7 @@
 
 # The team's memory: data governance, which owns it as a whole
 /memory/                            data.governance@uni.example
+
+# Each agent's settings in the tools, written from the map: the platform team
+/agents/                            platform@uni.example
+/scripts/generate/agents.py         platform@uni.example noor@uni.example

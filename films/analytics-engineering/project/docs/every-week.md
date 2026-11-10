@@ -13,7 +13,7 @@ It began in January 2026, after 41 certificates were printed again in December 2
 ## The results
 
 - **The checks, every night, kept.** The last step of every run, `on-run-end` in [`dbt_project.yml`](../dbt_project.yml), adds each check's result to one table, `check_results` ([`macros/governance/keep_check_results.sql`](../macros/governance/keep_check_results.sql)): when the run started, the check, its status, how many rows it held or failed, its owner and its dimension. The scorecard ([`scorecard.md`](scorecard.md)) shows the last run; [`analyses/quality/checks_by_night.sql`](../analyses/quality/checks_by_night.sql) shows the week, night by night. A check that holds more rows each night is something to look at, even while every night passes.
-- **What people count:** graduates' reports, the hours of hand work in each round before a list goes to the printer, and the hundred records (how many of a hundred records, drawn at random, are perfect).
+- **What people count:** graduates' reports, the hours of hand work in each round before a list goes to the printer ([`hand_check_rounds.csv`](../seeds/reference/graduations/hand_check_rounds.csv), on the scorecard: December 2026's round, 78 names of 2,140 in 26 hours), and the hundred records (how many of a hundred records, drawn at random, are perfect).
 - **On Databricks,** one dashboard reads both on Thursdays: the week of checks from `check_results`, beside the counts. It isn't in this project: the dashboard is kept on the platform.
 
 ## The order

@@ -48,7 +48,13 @@ def files():
 
 def films():
     """The FILMS list: every video, in order."""
-    return [e for f in files() for e in json.loads(f.read_text())]
+    return [e for f in files() for e in entries(f)]
+
+
+def entries(path):
+    """Shared production dependencies are declared once, rather than edited into every film's rows."""
+    return [dict(e, paths=list(dict.fromkeys(e["paths"] + ["site-tools/voice_cache.py"])))
+            for e in json.loads(path.read_text(encoding="utf-8"))]
 
 
 def notes():

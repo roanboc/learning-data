@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "Small steps, measured",
+  "title_es": "Pasos pequeños, medidos",
+  "planned": 4,
+  "lead": "The third series of Data management. Facilities asks for a dashboard of room use by Easter; the real question is whether to build. The team shows a prototype in two weeks, then measures what people get, improves a little every week, and reviews the strategy each quarter.",
+  "lead_es": "La tercera serie de Gestión de datos. Instalaciones pide un tablero del uso de las aulas para Pascua; la pregunta real es si hay que construir. El equipo muestra un prototipo en dos semanas, luego mide lo que la gente recibe, mejora un poco cada semana y revisa la estrategia cada trimestre.",
+  "description": "Short films on delivering and improving data work in small steps: a prototype in front of the person who decides within two weeks, with real data, improved in short rounds; a few measures of what people get, each with a baseline and a decision it serves; one small change to the team's way of working every week; and a data strategy reviewed every quarter, and moved out loud when the university's own strategy moves.",
+  "description_es": "Películas cortas sobre cómo entregar y mejorar el trabajo con datos en pasos pequeños: un prototipo delante de quien decide en dos semanas, con datos reales, mejorado en rondas cortas; unas pocas medidas de lo que la gente recibe, cada una con su línea de base y la decisión a la que sirve; un pequeño cambio en la forma de trabajar del equipo cada semana; y una estrategia de datos revisada cada trimestre, que se mueve en voz alta cuando se mueve la estrategia de la propia universidad.",
+  "card": "A prototype in two weeks, a few measures that matter, one change a week, and a strategy reviewed every quarter.",
+  "card_es": "Un prototipo en dos semanas, pocas medidas que importan, un cambio por semana y una estrategia revisada cada trimestre.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: from a dashboard request to a habit of improving",
+  "thread_h_es": "Un hilo: de una solicitud de tablero a un hábito de mejora",
+  "thread": "Graham Ellis, the new Director of Facilities, asks for a dashboard of room use by Easter. His real question is whether the University Council should fund a new teaching building. The team shows him a prototype within two weeks of taking it up, first used eleven working days after they started. From July the team's measures go on one page; from September a Friday half-hour improves one thing a week; and every quarter the data council reviews the strategy, and moves it when the university's plans change.",
+  "thread_es": "Graham Ellis, el nuevo director de Instalaciones, pide un tablero del uso de las aulas para Pascua. Su pregunta real es si el Consejo Universitario debe financiar un nuevo edificio de aulas. El equipo le muestra un prototipo a las dos semanas de tomar el pedido, usado por primera vez once días hábiles después de empezar. Desde julio, las medidas del equipo van en una página; desde septiembre, una media hora de los viernes mejora una cosa por semana; y cada trimestre el consejo de datos revisa la estrategia, y la mueve cuando cambian los planes de la universidad.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Decides about the rooms",
+      "Graham Ellis, the new Director of Facilities, who must tell the University Council whether it needs a new teaching building"
+    ],
+    [
+      "biz",
+      "Chairs the reviews",
+      "Prof. David Mensah, the deputy vice-chancellor, who reviews the data strategy with the data council every quarter"
+    ],
+    [
+      "tech",
+      "Leads the data work",
+      "Helena Novak, the data manager, who puts the team's measures on one page and keeps the strategy moving"
+    ],
+    [
+      "tech",
+      "Builds the prototype",
+      "Ivy Reyes, a graduate data analyst, who builds the rooms' prototype with the team and later owns it"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who brings the rooms' sensor counts onto the platform: counts, never people"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Decide sobre las aulas",
+      "Graham Ellis, el nuevo director de Instalaciones, que debe decirle al Consejo Universitario si necesita un nuevo edificio de aulas"
+    ],
+    [
+      "biz",
+      "Preside las revisiones",
+      "El profesor David Mensah, vicerrector adjunto, que revisa la estrategia de datos con el consejo de datos cada trimestre"
+    ],
+    [
+      "tech",
+      "Lidera el trabajo con datos",
+      "Helena Novak, la gestora de datos, que pone las medidas del equipo en una página y mantiene la estrategia en movimiento"
+    ],
+    [
+      "tech",
+      "Construye el prototipo",
+      "Ivy Reyes, analista de datos recién graduada, que construye el prototipo de las aulas con el equipo y luego es su dueña"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que lleva a la plataforma los conteos de los sensores de las aulas: conteos, nunca personas"
+    ]
+  ]
+}

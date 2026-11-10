@@ -1,0 +1,100 @@
+{
+ "player": "03f23614384ae5d5",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:valley": {
+   "file": "valley.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     38.0
+    ],
+    [
+     132.75,
+     133.25
+    ],
+    [
+     264.25,
+     271.25
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     37.0,
+     65.5
+    ],
+    [
+     196.0,
+     238.0
+    ],
+    [
+     270.0,
+     285.25
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     64.5,
+     118.75
+    ],
+    [
+     181.0,
+     197.0
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     117.75,
+     143.5
+    ],
+    [
+     157.25,
+     182.0
+    ],
+    [
+     236.75,
+     265.25
+    ]
+   ]
+  },
+  "bern": {
+   "file": "bern.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     132.75,
+     143.5
+    ]
+   ]
+  },
+  "place:plainB": {
+   "file": "plainB.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     142.5,
+     158.25
+    ]
+   ]
+  }
+ }
+}

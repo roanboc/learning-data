@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/unity-catalog-and-ai-gateway/soundtrack.mp3",
+      "size": 6976043,
+      "sha256": "a54f3972fd4dc038f9c0fd1f77d1d316bd863ed8ad36e1566a9461c55dae9f61",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/a54f3972fd4dc038f9c0fd1f77d1d316bd863ed8ad36e1566a9461c55dae9f61.mp3"
+    }
+  ]
+}

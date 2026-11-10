@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/context-engineering/soundtrack.mp3",
+      "size": 5651426,
+      "sha256": "9e3e94fab131114d422d6aba3ff65f5fc429e76e7f54041aac53b78806321822",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/9e3e94fab131114d422d6aba3ff65f5fc429e76e7f54041aac53b78806321822.mp3"
+    }
+  ]
+}

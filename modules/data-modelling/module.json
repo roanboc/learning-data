@@ -1,0 +1,20 @@
+{
+  "order": 1,
+  "id": "data-modelling",
+  "items": [
+    "sketch",
+    "from-words-to-data"
+  ],
+  "name": {
+    "en": "Data modelling",
+    "es": "Modelado de datos"
+  },
+  "who": {
+    "en": "For anyone who designs models, definitions or reports",
+    "es": "Para quien diseña modelos, definiciones o reportes"
+  },
+  "line": {
+    "en": "What the numbers mean, and the shapes that hold them: words and definitions first, then models, before any system.",
+    "es": "Lo que significan las cifras, y las formas que las contienen: primero las palabras y las definiciones, luego los modelos, antes que cualquier sistema."
+  }
+}

@@ -11,7 +11,7 @@ owner to review it, without anyone remembering to.
     a seed the business owns                the seed's owner
     a consumer's exposures                  the consumer
     governance's check and its tests        data governance and the data architect (DEC-PRJ-12)
-    the team's memory, memory/              data governance; each entry, the owner it names
+    the team's memory, memory/              data governance, which owns the memory as a whole
 
 Owners are named as people know them; governance/2-owners/owners.yml says where each one's
 review request goes. An owner that isn't there stops the script: every owner must be reachable.
@@ -32,16 +32,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
 TARGET = ROOT / "CODEOWNERS"
+# Paths added after films cited CODEOWNERS by line: each goes in a section of its own at the end,
+# not in its section's place, so the cited lines keep their numbers (AGENTS.md, Keep cited lines in
+# place). Add a new folder or file here, with the section's title, when its place would move them.
+LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
+         ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
+          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/")}
 
 
 def load(path):
     return yaml.safe_load(path.read_text()) or {}
-
-
-def front_matter(path):
-    """The YAML at the top of a Markdown file, between its two --- lines."""
-    text = path.read_text()
-    return (yaml.safe_load(text[4:text.index("\n---", 4)]) or {}) if text.startswith("---\n") else {}
 
 
 def meta(item):
@@ -62,7 +62,7 @@ def main():
     register = load(REGISTER)
     emails = {owner["name"]: owner["email"] for owner in register["owners"]}
     reviewers = {role: person["email"] for role, person in register["reviewers"].items()}
-    # The reviewers own things too, such as an entry in the team's memory.
+    # The reviewers can own things too, as data governance owns the team's memory.
     emails.update({person["name"]: person["email"] for person in register["reviewers"].values()})
     unknown = set()
 
@@ -130,10 +130,13 @@ def main():
         rules.append((path, [reviewers["governance"], reviewers["model"]], None))
 
     # Last, so the lines above keep their numbers.
-    rules.append((None, None, "The team's memory: data governance, and each entry's owner"))
+    rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
-    for entry in sorted((ROOT / "memory" / "entries").glob("*.md")):
-        rules.append(("/" + entry.relative_to(ROOT).as_posix(), reach(front_matter(entry).get("owner")), None))
+
+    # Then what came after the films cited the lines above, each section in the order it came.
+    for title, prefixes in LATER.items():
+        later = [rule for rule in rules if rule[0] and rule[0].startswith(prefixes)]
+        rules = [rule for rule in rules if rule not in later] + [(None, None, title)] + later
 
     if unknown:
         raise SystemExit(f"{REGISTER.relative_to(ROOT)} doesn't say how to reach: {', '.join(sorted(unknown))}. "

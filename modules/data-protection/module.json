@@ -1,0 +1,21 @@
+{
+  "order": 8,
+  "id": "data-protection",
+  "items": [
+    "locks-before-the-data",
+    "only-what-you-may-see",
+    "kept-for-a-reason"
+  ],
+  "name": {
+    "en": "Data protection and privacy",
+    "es": "Protección de datos y privacidad"
+  },
+  "who": {
+    "en": "For platform teams, data owners and anyone who gives or gets access to data",
+    "es": "Para equipos de plataforma, dueños de datos y quien da o recibe acceso a datos"
+  },
+  "line": {
+    "en": "Who and what may reach the data, what each person may see, and how long personal data is kept: each lock built from a role, a boundary or a rule already decided.",
+    "es": "Quién y qué puede llegar a los datos, qué puede ver cada persona, y cuánto se guardan los datos personales: cada cerradura hecha a partir de un rol, una frontera o una regla ya decididos."
+  }
+}

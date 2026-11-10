@@ -1,0 +1,1 @@
+*The new skills*, the first series of the module Leading data people, on the skills data work needs now: three films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

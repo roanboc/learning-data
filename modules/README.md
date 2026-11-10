@@ -77,7 +77,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-as-software/`
 
-No film source yet.
+- [Scripts became software](../films/data-as-software/1-scripts-became-software/) — `scripts-became-software`
 
 ### From tables to decisions
 
@@ -268,6 +268,7 @@ No film source yet.
 Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal: `/only-what-you-may-see/`
 
 - [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
+- [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 
 ### Kept for a reason

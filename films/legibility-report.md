@@ -118,6 +118,7 @@
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
+| The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
@@ -129,6 +130,7 @@
 | Why we govern them | 252 | 0% | 0 | 30.0 | Drawn to the rule |
 | What they tell us about ourselves | 288 | 0% | 0 | 32.0 | Drawn to the rule |
 | Many agents, and what emerges | 232 | 0% | 0 | 30.0 | Drawn to the rule |
+| The question behind the request | 271 | 0% | 0 | 28.4 | Drawn to the rule |
 <!-- /films -->
 
 ## What's left

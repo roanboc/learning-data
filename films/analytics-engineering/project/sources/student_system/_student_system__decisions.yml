@@ -71,3 +71,38 @@ decisions:
     decided_by: Mei Tanaka, registrar's office
     decided_on: 2026-10-22
     status: agreed
+
+  - id: DEC-SIS-06
+    step: operate_and_evolve
+    title: A name is corrected once, in the student system, by the registrar's office
+    text: From 14 September 2026, every correction to a name is made once, in the student system, by the
+      registrar's office, checked against the document seen at enrolment. Whoever finds a wrong name, a
+      graduate in the portal or the graduations team, sends it there, and nobody keeps a corrected copy.
+      The old names, from the online form before 2019 and the paper forms before 2015, are put right as
+      each graduate confirms theirs, those due to graduate first. Two checks hold the doubtful ones for
+      the office each night, a family name exactly 30 characters long and one in capitals only.
+    why: 'Expected: A name corrected once stays corrected. Found: The graduations team corrected every list
+      by hand in a copy, a spreadsheet, about 320 hours a year, and the student system never heard: in
+      August 2026, Beatriz Fonseca de Albuquerque Cavalcanti''s master''s joined December''s list cut short
+      again, after she had corrected her name in the portal for March''s.'
+    decided_by: Mei Tanaka, registrar's office, with Malia Fonoti, graduations office
+    decided_on: 2026-09-14
+    status: agreed
+    sources: [student_system, portal]
+    implemented_in: [family_name_may_be_cut_short, family_name_in_capitals_only, hand_check_rounds]
+
+  - id: DEC-SIS-07
+    step: operate_and_evolve
+    title: The nightly file keeps every letter, and a family name holds 100 characters
+    text: From the night of 14 September 2026, the student system's nightly file to the platform keeps
+      every letter, accents and all, and its family name field holds 100 characters, not 30. A night's
+      file of more than 200 names with not one letter outside A to Z stops the night's update, so the
+      graduation list keeps the night before's names, and the night's job tells Sam Okafor.
+    why: 'Expected: A name arrives on the platform as the student system holds it. Found: The nightly file''s
+      old encoding turned é into e, so December 2025''s list of 2,031 names had not one accent (143 names
+      stored right lost theirs on the way in), and the 30-character field had cut 39 family names short.'
+    decided_by: Student system team, with Sam Okafor, data platform, and Mei Tanaka, registrar's office
+    decided_on: 2026-09-14
+    status: agreed
+    sources: [student_system]
+    implemented_in: [night_file_keeps_every_letter, family_name_may_be_cut_short, names_are_allowed]

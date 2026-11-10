@@ -73,6 +73,7 @@
 | Teachers of data | 370 | 0% | 0 | 32.3 | Drawn to the rule |
 | Every area, one job | 313 | 0% | 0 | 28.3 | Drawn to the rule |
 | Listen first | 313 | 0% | 0 | 28.5 | Drawn to the rule |
+| Design it simple | 294 | 0% | 0 | 28.4 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
 | Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
 | Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |
@@ -121,9 +122,11 @@
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
+| Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
+| The draft and the decision | 244 | 0% | 0 | 28.5 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

@@ -25,6 +25,22 @@
 
 Its steps aren't on the map yet.
 
+### Change a data product
+
+**Promise.** A change to a data product goes from a ticket to production: drafted with its evidence, reviewed and approved by people other than whoever drafted it, and released by a second person.
+
+**How to ask.** A ticket in the tracker. **Owner:** Yusuf Demir, data governance lead. **Realizes:** provide data products.
+
+| Step | Who does it | Reads | Writes | Then |
+|---|---|---|---|---|
+| raise a ticket | requester |  |  | draft the change |
+| draft the change | planning contributor |  |  | build it in development |
+| build it in development | planning contributor |  |  | open a pull request |
+| open a pull request | planning contributor |  |  | review the code |
+| review the code | analytics engineer |  |  | approve the change |
+| approve the change | product owner |  |  | release to production |
+| release to production | release approver |  |  |  |
+
 ### Define or change a term
 
 **Promise.** A term decided by its owner within ten working days, published in the glossary and synced to every tool that reads it.

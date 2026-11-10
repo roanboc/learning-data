@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Five stages, not a switch, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (stages, tasks, down), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  stages:{q:"An agent has done good work at stage three for months. What has to happen before it works at stage four?",
+    opts:[{t:"It asks for the rights that stage four needs, and since its record is good, the tools grant them to it at once."},{t:"It passes the gate: a place on the map, with an owner and a role. Then the tools move it up as soon as it passes.",near:true},{t:"It passes the gate: a place on the map, with an owner and a role. Then a person decides that it has passed.",ok:true}],
+    why:"Each stage has a gate: what must be true before the agent moves up. For stage four, it's a place on the map, with an owner and a role; from there it works under its own identity, and its owner reviews every change. Passing isn't automatic: a person decides when it has passed, and an agent never grants itself rights. Which of your helpers or agents moved up a stage without anyone deciding?"},
+  tasks:{q:"Finding why the night build failed is at stage five in test, but at stage four in production. Why doesn't the agent have one stage?",
+    opts:[{t:"The stage belongs to each kind of task, in each place, and the same task gets less freedom where the risk is higher.",ok:true},{t:"The stage belongs to its identity, and the agent has one identity in test and another one in production.",near:true},{t:"Production needs a faster agent, so the slower work of stage five is kept for nights in test, when nobody waits."}],
+    why:"Identity belongs to the agent: the workload agent has one, its own, since September. The stage belongs to each kind of task, in each place. In test it finds the cause alone and reports by morning; in production it finds the cause and drafts the fix, and Noor approves it. Like a restricted driver, free by day but not at night. Which of your tasks would you give more freedom in test than in production?"},
+  down:{q:"One night in October, the agent changed a model that wasn't its own. Why did Anil move one task down a stage, not switch it off?",
+    opts:[{t:"Nothing reached production, so each of its tasks went down one stage, and none of them was switched off.",near:true},{t:"Only the night task went wrong, so a step down for it kept the agent's help on its other tasks while it earned it back.",ok:true},{t:"Switching an agent off needs a second person's approval, and Noor was away, so a step down was all Anil could do."}],
+    why:"It went wrong on one kind of task, so only that task moved down, from five to four: each time the build failed, it waited for Anil to start it, and proposed its fix. Its other tasks kept their stages, so the team kept its help. To go back up, it passed the gate again: its folders written down and held by the tools, limits and a plain check, and fourteen nights in test without a miss. Which task would you step down first, if an agent of yours went wrong?"}
+  }}};

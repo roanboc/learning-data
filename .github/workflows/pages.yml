@@ -76,6 +76,14 @@ jobs:
         run: |
           pip install markdown
           python site-tools/check_site.py
+      # The legibility report's table isn't committed (every film adds a row, so film branches clashed on it): show it here.
+      - name: Show how the films read on a phone
+        if: steps.newer.outputs.go == 'true'
+        run: python site-tools/build_series.py --legibility >> "$GITHUB_STEP_SUMMARY"
+      # The home and Scenarios pages are committed without each series' count of films, which every film changed: fill it in.
+      - name: Count each series' films on the home and Scenarios pages
+        if: steps.newer.outputs.go == 'true'
+        run: python site-tools/build_series.py --publish
       - name: Name the commit the site is built from
         if: steps.newer.outputs.go == 'true'
         run: git rev-parse HEAD > site/version.txt
@@ -96,20 +104,28 @@ jobs:
           ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
           BUILD: ${{ steps.newer.outputs.sha }}
         run: |
-          oidc=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
-          created=$(jq -n --arg a "$ARTIFACT_ID" --arg v "$BUILD" --arg o "$oidc" \
-              '{artifact_id: ($a|tonumber), pages_build_version: $v, oidc_token: $o}' |
-            gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -)
-          id=$(jq -r .id <<<"$created")
-          echo "page_url=$(jq -r .page_url <<<"$created")" >> "$GITHUB_OUTPUT"
-          echo "Deployment $id for $BUILD"
-          for i in $(seq 1 160); do
-            sleep 15
-            state=$(gh api "repos/$GITHUB_REPOSITORY/pages/deployments/$id" --jq .status || echo unknown)
-            echo "$(date -u +%H:%M:%S) $state"
-            case "$state" in
-              succeed) exit 0 ;;
-              deployment_failed|deployment_content_failed|deployment_cancelled|deployment_lost|deployment_attempt_error) exit 1 ;;
-            esac
-          done
-          echo "Still not live after 40 minutes"; exit 1
+          # One attempt: create the deployment and wait up to 20 minutes. 0 = live, 1 = failed or stalled.
+          attempt() {
+            oidc=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
+            created=$(jq -n --arg a "$ARTIFACT_ID" --arg v "$BUILD" --arg o "$oidc" \
+                '{artifact_id: ($a|tonumber), pages_build_version: $v, oidc_token: $o}' |
+              gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -) || return 1
+            id=$(jq -r .id <<<"$created")
+            echo "page_url=$(jq -r .page_url <<<"$created")" >> "$GITHUB_OUTPUT"
+            echo "Deployment $id for $BUILD"
+            for i in $(seq 1 80); do
+              sleep 15
+              state=$(gh api "repos/$GITHUB_REPOSITORY/pages/deployments/$id" --jq .status || echo unknown)
+              echo "$(date -u +%H:%M:%S) $state"
+              case "$state" in
+                succeed) return 0 ;;
+                deployment_failed|deployment_content_failed|deployment_cancelled|deployment_lost|deployment_attempt_error) return 1 ;;
+              esac
+            done
+            echo "Not live after 20 minutes; cancelling deployment $id"
+            gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments/$id/cancel" >/dev/null || true
+            return 1
+          }
+          # GitHub has stalled a deployment with no status for 30 minutes (09:19 UTC, 10 Nov), so a stalled or failed
+          # one is cancelled and tried once more instead of holding the queue.
+          attempt || attempt

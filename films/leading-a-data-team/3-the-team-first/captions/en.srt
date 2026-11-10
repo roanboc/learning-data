@@ -1,0 +1,323 @@
+1
+00:00:03,000 --> 00:00:06,018
+Johannesburg, South Africa, in the 1930s.
+
+2
+00:00:07,918 --> 00:00:12,910
+In crowded yards of rooms near the city live women who have come from the countryside.
+
+3
+00:00:13,610 --> 00:00:18,208
+They earn what they can, washing, sewing and selling, for low and irregular pay.
+
+4
+00:00:19,708 --> 00:00:24,643
+Eight or ten of them, who know and trust each other, form a stokvel: a savings group.
+
+5
+00:00:26,343 --> 00:00:34,179
+At every meeting, each pays the same sum into one pot, and one member takes it all, in turn, until every member has had hers.
+
+6
+00:00:36,079 --> 00:00:41,594
+Few Black South Africans had a bank account then, or for decades after, under apartheid.
+
+7
+00:00:43,094 --> 00:00:51,169
+Banks wouldn't lend to them: their pay was low and irregular, and the law kept them from owning property a bank would take as security.
+
+8
+00:00:52,669 --> 00:01:00,909
+With no safe place to save and no one to borrow from, one funeral, a term's school fees or a lost wage could ruin a family.
+
+9
+00:01:02,809 --> 00:01:07,783
+Something had to change. They didn't wait for a bank: they built their own way, out of trust.
+
+10
+00:01:09,483 --> 00:01:17,958
+Each group agrees its rules together: how much to pay, how often to meet, whose turn comes next, and what happens if someone can't pay.
+
+11
+00:01:19,658 --> 00:01:26,708
+Every member answers to the others, and almost nobody fails to pay: being trusted is worth more than any one pot.
+
+12
+00:01:28,408 --> 00:01:33,478
+The most common kind, the burial society, carries a member's family through a funeral.
+
+13
+00:01:34,978 --> 00:01:38,353
+And when one member falls on hard times, the group carries her.
+
+14
+00:01:40,253 --> 00:01:48,461
+Behind it is an idea from Southern Africa, Ubuntu, and a saying in isiZulu: a person is a person through other people.
+
+15
+00:01:50,561 --> 00:01:55,672
+For decades, these groups were many families' savings, their credit and their safety net.
+
+16
+00:01:57,372 --> 00:02:04,006
+Today, by the National Stokvel Association's count, more than 11 million South Africans belong to one.
+
+17
+00:02:04,706 --> 00:02:07,663
+Together, they put in over 50 billion rand a year.
+
+18
+00:02:09,563 --> 00:02:15,395
+A team can hold its people the same way. When everyone pays in, nobody carries the work alone.
+
+19
+00:02:17,095 --> 00:02:20,046
+And when one of them has to step away, the group holds.
+
+20
+00:02:28,346 --> 00:02:36,730
+At a university, a year from now, Helena Novak starts as the data manager on Monday 1 February 2027.
+
+21
+00:02:38,430 --> 00:02:40,729
+Before she judges anyone, she watches.
+
+22
+00:02:42,429 --> 00:02:47,495
+Every week, she has half an hour with each person: about them, never a status report.
+
+23
+00:02:49,195 --> 00:02:52,607
+She asks how they are, what's in their way, and what they're proud of.
+
+24
+00:02:54,507 --> 00:02:59,985
+Then she reads the team as a whole: what it achieves together, and each person's work beside it.
+
+25
+00:03:00,685 --> 00:03:05,208
+She measures it all against what this team really does, not what her last team did.
+
+26
+00:03:07,308 --> 00:03:10,086
+Measured against her last team, they might look slow.
+
+27
+00:03:10,786 --> 00:03:15,896
+But this one takes requests in eleven different ways, and keeps a platform running day and night.
+
+28
+00:03:17,796 --> 00:03:23,759
+Managing and leading are both her job, but for Helena, leading weighs a little more, every time.
+
+29
+00:03:24,459 --> 00:03:28,125
+The people are the team's first strength, so their wellbeing comes first.
+
+30
+00:03:30,225 --> 00:03:37,546
+Wellbeing isn't only comfort. Sometimes one person needs more support, a better tool, encouragement or a push.
+
+31
+00:03:38,246 --> 00:03:41,973
+That way the team keeps working together, and no big gap opens.
+
+32
+00:03:44,073 --> 00:03:47,263
+In her first weeks, she finds the gap that matters most.
+
+33
+00:03:48,963 --> 00:03:53,602
+Every alert the platform raises at night goes to one person: Sam Okafor.
+
+34
+00:03:55,302 --> 00:04:00,187
+About sixty a week, most needing nothing, and only Sam knows how to answer them.
+
+35
+00:04:02,087 --> 00:04:08,067
+Sam doesn't complain. But the team leans on one person, and that person has nobody to lean on.
+
+36
+00:04:10,767 --> 00:04:17,332
+In April, Ivy Reyes, a new graduate analyst, reviews a model the team's agent drafted for her.
+
+37
+00:04:18,832 --> 00:04:23,588
+It counts booked hours as used ones, when used means people actually in the room.
+
+38
+00:04:25,288 --> 00:04:27,121
+She catches it, but only just.
+
+39
+00:04:28,621 --> 00:04:32,787
+At stand-up the next morning, she says it out loud: I nearly let it through.
+
+40
+00:04:34,687 --> 00:04:40,378
+Nobody blames her. Jun thanks her, and Helena asks what would make it easier to catch next time.
+
+41
+00:04:42,078 --> 00:04:47,260
+Ivy's answer: what used means, written in the glossary, so the next draft starts from it.
+
+42
+00:04:48,960 --> 00:04:51,606
+That week, two more people say what they nearly missed.
+
+43
+00:04:53,506 --> 00:04:57,423
+The researcher Amy Edmondson calls this psychological safety.
+
+44
+00:04:58,123 --> 00:05:04,020
+It means a shared belief that the team is safe for taking risks with each other, like admitting a mistake.
+
+45
+00:05:05,920 --> 00:05:12,765
+In hospital teams she studied, some nurses talked openly about mistakes with medicines, and how to avoid them.
+
+46
+00:05:13,465 --> 00:05:15,786
+In others, people kept them to themselves.
+
+47
+00:05:17,486 --> 00:05:23,466
+In 51 work teams, those that felt safer learned more, and the teams that learned more did better.
+
+48
+00:05:25,166 --> 00:05:29,389
+A mistake said out loud, and thanked, is one the whole team learns from.
+
+49
+00:05:32,089 --> 00:05:37,291
+By June, the platform's alerts are down to about twelve a week, and every one needs someone.
+
+50
+00:05:39,191 --> 00:05:48,080
+So the team pairs on the platform. Through June, Sam works beside Noor, Jun and Erin Walsh, the platform engineer, one alert at a time.
+
+51
+00:05:49,980 --> 00:05:56,967
+Each time they answer one together, they write down how: a runbook, step by step, that anyone on the team can follow.
+
+52
+00:05:58,867 --> 00:06:02,993
+By the end of June, four people can answer every night alert, not one.
+
+53
+00:06:04,893 --> 00:06:09,886
+From Monday 5 July, they share the nights in a rota, one week in four each.
+
+54
+00:06:11,786 --> 00:06:17,828
+Sam had answered alone every night until then. Now, three weeks in four, his phone stays quiet.
+
+55
+00:06:19,728 --> 00:06:23,895
+Across the team, two people can now do each job that matters most.
+
+56
+00:06:25,795 --> 00:06:31,985
+Desmond Tutu wrote that a person with Ubuntu does not feel threatened that others are able and good.
+
+57
+00:06:34,085 --> 00:06:37,552
+Sam taught three people his nights, and lost nothing by it.
+
+58
+00:06:40,252 --> 00:06:46,364
+On Sunday 1 August, Sam's mother is taken into hospital, and he calls Helena that evening.
+
+59
+00:06:48,064 --> 00:06:50,777
+She tells him to go, and to switch his phone off.
+
+60
+00:06:52,477 --> 00:06:56,271
+It's his week on the rota, and Jun and Erin take it between them.
+
+61
+00:06:57,971 --> 00:07:05,020
+Helena moves his other work: the platform's upgrade waits two weeks, and she tells the people who asked, with a new date.
+
+62
+00:07:06,720 --> 00:07:11,730
+Twice that fortnight, an alert comes in the night. Both are answered from the runbooks.
+
+63
+00:07:13,630 --> 00:07:14,815
+Nobody calls him.
+
+64
+00:07:17,115 --> 00:07:23,955
+When Sam comes back on Monday 16 August, Helena's first question is about his mother, not the platform.
+
+65
+00:07:25,855 --> 00:07:31,784
+Like a stokvel carrying a member through hard times, the team carried Sam, because everyone had paid in.
+
+66
+00:07:34,484 --> 00:07:38,688
+Every week, the one-to-ones go on, about each person, not their tasks.
+
+67
+00:07:40,188 --> 00:07:47,038
+In September, Jun says he's fine, but he's teaching two people, building models and taking his turn on the rota.
+
+68
+00:07:48,738 --> 00:07:55,309
+Helena moves one of his projects to November, and tells the people who asked, before the load can wear him down.
+
+69
+00:07:57,009 --> 00:08:03,244
+At the quarterly review in October, she gives the team the credit, by name, and answers herself for what slipped.
+
+70
+00:08:04,944 --> 00:08:07,686
+The team first, then each person, then herself.
+
+71
+00:08:09,786 --> 00:08:17,672
+Philosophers in South Africa, Mogobe Ramose and Thaddeus Metz among them, have written Ubuntu down as an ethic.
+
+72
+00:08:19,172 --> 00:08:25,069
+Metz reads it as two things held together: sharing a life with others, and caring how their lives go.
+
+73
+00:08:26,969 --> 00:08:30,766
+Helena's team shares the work, and cares how each of them is doing.
+
+74
+00:08:33,466 --> 00:08:40,777
+In a stokvel, everyone pays in, and everyone's turn comes. When one member falls on hard times, the group carries her.
+
+75
+00:08:42,677 --> 00:08:48,898
+Helena's team did the same: four people learned the nights, and when Sam had to go, nobody called him.
+
+76
+00:08:50,798 --> 00:08:56,232
+On Monday, pair until two people can do each job that matters most, and write down how.
+
+77
+00:08:57,732 --> 00:09:01,038
+Protect leave: when someone is away, nobody calls them.
+
+78
+00:09:02,538 --> 00:09:04,939
+Thank the person who says: I got it wrong.
+
+79
+00:09:06,439 --> 00:09:09,835
+In one-to-ones, ask how people are, not only what they did.
+
+80
+00:09:11,335 --> 00:09:15,842
+And if you're new, watch first: judge the team's shared work before anyone's own.
+
+81
+00:09:17,542 --> 00:09:20,473
+Nobody alone, nobody the only one who knows.

@@ -1,0 +1,247 @@
+1
+00:00:03,000 --> 00:00:05,692
+Colombo, Sri Lanka, en el año 2000.
+
+2
+00:00:07,392 --> 00:00:15,445
+En el Hospital de Mujeres de Castle Street, un hospital público donde las madres van a dar a luz, el director es el Dr. Wimal Karandagoda.
+
+3
+00:00:17,145 --> 00:00:24,808
+Demasiadas madres contraen ahí una infección después de una cesárea, un parto por operación, y demasiados recién nacidos también.
+
+4
+00:00:26,308 --> 00:00:35,189
+Una infección son gérmenes en una herida o en el cuerpo de un bebé: fiebre y dolor, más días en el hospital y peligro real para los dos.
+
+5
+00:00:37,089 --> 00:00:41,443
+Y no hay dinero para arreglarlo: al principio, el ministerio no da nada para eso.
+
+6
+00:00:42,943 --> 00:00:44,383
+Algo tiene que cambiar.
+
+7
+00:00:46,283 --> 00:00:54,934
+El director trae una forma de trabajar de las fábricas japonesas, que ya usan empresas de Sri Lanka: cinco pasos, llamados 5S.
+
+8
+00:00:56,434 --> 00:01:05,205
+Separa lo que no se necesita. Ordena el resto. Limpia. Estandariza: acuerda una forma y ponla por escrito. Y mantenlo.
+
+9
+00:01:07,505 --> 00:01:11,379
+Cuesta poco, y todos pueden ver el cambio con sus propios ojos.
+
+10
+00:01:12,879 --> 00:01:17,337
+El personal de cada sala lo hace por sí mismo, empezando por su propio rincón del trabajo.
+
+11
+00:01:18,837 --> 00:01:25,140
+Luego viene el kaizen: cambios pequeños que el propio personal propone, prueba, verifica, y conserva o descarta.
+
+12
+00:01:26,840 --> 00:01:31,523
+Al principio, no todos lo quieren. Sala por sala, se extiende por el hospital.
+
+13
+00:01:33,623 --> 00:01:39,827
+En dos años, las infecciones tras una cesárea se reducen a la mitad, y en los recién nacidos, en más de la mitad.
+
+14
+00:01:41,727 --> 00:01:51,879
+El método llega a más hospitales de Sri Lanka y, desde 2007, con la cooperación japonesa, a hospitales públicos de quince países africanos.
+
+15
+00:01:53,779 --> 00:01:59,455
+A nadie se le pidió esforzarse más: quienes hacían el trabajo lo mejoraron, un paso pequeño cada vez.
+
+16
+00:02:01,155 --> 00:02:07,406
+El trabajo con datos también tiene sus tareas semanales, y cuando se hacen a mano, se cuelan errores y se van las horas.
+
+17
+00:02:08,906 --> 00:02:14,923
+Quien hace el trabajo puede mejorarlo igual: un cambio pequeño cada vez, cada uno verificado.
+
+18
+00:02:23,023 --> 00:02:32,692
+Desde el jueves 1 de julio de 2027, Ivy Reyes es dueña de Uso de los espacios docentes: los datos del equipo sobre el uso de las aulas.
+
+19
+00:02:34,392 --> 00:02:41,582
+Su promesa a sus lectores: se actualiza cada lunes antes de las siete de la mañana, con las reservas y los conteos de la semana anterior.
+
+20
+00:02:43,282 --> 00:02:47,179
+A las seis, un proceso carga los datos de la semana y publica la página.
+
+21
+00:02:48,679 --> 00:02:54,526
+Luego, desde las ocho y media, Ivy pasa dos horas revisándola a mano y arreglando lo que encuentra.
+
+22
+00:02:56,226 --> 00:03:02,636
+Hasta que termina, quien abra la página puede leer un número equivocado. Y se le va la mañana del lunes.
+
+23
+00:03:04,536 --> 00:03:10,477
+El martes 20 de julio, en su conversación de mitad de año, Helena le pregunta qué quiere ahora.
+
+24
+00:03:11,977 --> 00:03:17,045
+Ivy tiene dos respuestas: mejorar su actualización de los lunes, y enseñar lo que aprende.
+
+25
+00:03:18,545 --> 00:03:24,716
+Luego Helena pregunta qué obstáculos hay. Mis mañanas de los lunes, dice Ivy: dos horas de revisiones, cada semana.
+
+26
+00:03:26,416 --> 00:03:32,400
+Así que Helena le da para eso su tiempo de aprendizaje del jueves: dos horas semanales, ya suyas, ahora para esto.
+
+27
+00:03:34,100 --> 00:03:40,247
+Es la primera idea del kaizen: mejorar es tarea de todos, cada uno en su propio trabajo, a pasos pequeños.
+
+28
+00:03:42,947 --> 00:03:49,234
+Cada paso pequeño sigue un ciclo: planea un cambio, hazlo, verifícalo, y luego actúa: consérvalo o descártalo.
+
+29
+00:03:51,134 --> 00:03:55,206
+Walter Shewhart dibujó el ciclo como un círculo en 1939.
+
+30
+00:03:56,106 --> 00:04:02,705
+W. Edwards Deming lo enseñó en Japón en 1950, donde los directivos lo convirtieron en planear, hacer, verificar, actuar.
+
+31
+00:04:04,405 --> 00:04:13,432
+En 1986, el libro de Masaaki Imai llevó por el mundo la palabra japonesa para esta forma de mejorar: kaizen, cambio para mejor.
+
+32
+00:04:15,332 --> 00:04:24,151
+Ivy empieza por medir. El lunes 26 de julio, cronometra cada paso de su actualización: seis pasos, ciento veinte minutos.
+
+33
+00:04:26,251 --> 00:04:32,684
+Como el personal de Castle Street, empieza por su propio rincón del trabajo, y de cada paso pregunta: ¿quién lo necesita?
+
+34
+00:04:34,184 --> 00:04:38,541
+Cada lunes, revisa a mano catorce aulas que alguna vez tuvieron dos nombres.
+
+35
+00:04:39,441 --> 00:04:43,602
+Pero desde abril, una prueba en los modelos de Jun revisa esas mismas catorce.
+
+36
+00:04:45,102 --> 00:04:51,628
+Así que un lunes se salta su revisión y lee la prueba en su lugar. Cubre las catorce. Conserva el cambio.
+
+37
+00:04:53,328 --> 00:05:00,819
+Luego, la copia que hace para Instalaciones: desde julio, Instalaciones lee la página del producto. Pregunta, y deja de hacerla.
+
+38
+00:05:02,519 --> 00:05:05,580
+Se fueron dos pasos que nadie necesitaba: noventa minutos.
+
+39
+00:05:08,280 --> 00:05:14,262
+Después, escribe los cuatro pasos que quedan en una lista de verificación: cada paso, en orden, y cómo se ve si está bien.
+
+40
+00:05:16,362 --> 00:05:20,495
+Los mismos pasos cada lunes le muestran qué cambia, y permiten que cualquiera lo haga.
+
+41
+00:05:22,395 --> 00:05:27,988
+Para probar la lista, Jun la sigue un lunes, y obtiene el mismo resultado en el mismo tiempo.
+
+42
+00:05:30,088 --> 00:05:34,268
+Solo entonces automatiza: si automatizas un desorden, obtienes un desorden más rápido.
+
+43
+00:05:36,568 --> 00:05:42,559
+En septiembre, en su tiempo de aprendizaje de los jueves, convierte un paso por semana en un control dentro del proceso.
+
+44
+00:05:44,459 --> 00:05:52,249
+Sam revisa cada cambio antes de que entre. Y cada control nuevo corre un lunes junto a su revisión a mano, antes de retirarla.
+
+45
+00:05:54,549 --> 00:06:02,461
+Ahora el proceso revisa los datos antes de publicar. Si un control falla, la página mantiene las cifras anteriores y se avisa a Ivy.
+
+46
+00:06:04,761 --> 00:06:11,861
+Para octubre, su actualización del lunes toma diez minutos, verificada: lee lo que hallaron los controles y escribe una nota a los lectores.
+
+47
+00:06:14,161 --> 00:06:17,167
+Y nadie abre la página para encontrarse un número equivocado.
+
+48
+00:06:19,867 --> 00:06:23,875
+Helena no hizo ninguno de estos cambios ella misma. Su parte fueron tres cosas.
+
+49
+00:06:25,775 --> 00:06:32,120
+Cada martes, preguntó qué obstáculos había. Cuando la semana de Sam estaba llena, le hizo lugar para las revisiones.
+
+50
+00:06:34,220 --> 00:06:39,299
+Dio el tiempo: las tardes de los jueves, para esto, sin que ninguna reunión pudiera quitarlas.
+
+51
+00:06:41,399 --> 00:06:49,634
+Y mostró los pequeños logros: en la revisión del jueves 7 de octubre, puso el gráfico de Ivy frente a quienes usan el producto.
+
+52
+00:06:50,734 --> 00:06:53,619
+Nombró a quienes hicieron el trabajo: Ivy, Jun y Sam.
+
+53
+00:06:55,719 --> 00:07:00,725
+Sin metas, sin programa, sin discursos sobre el cambio: preguntas, tiempo y un gráfico.
+
+54
+00:07:02,825 --> 00:07:11,312
+Desde el 3 de septiembre, la media hora de los viernes hace de los cambios pequeños un hábito de todos: una medida, un cambio por semana.
+
+55
+00:07:13,212 --> 00:07:18,207
+Las películas de Gestión de datos cuentan esa historia; las de Calidad de datos, una propia.
+
+56
+00:07:20,907 --> 00:07:29,644
+En Castle Street, nadie esperó una gran reforma. El personal cambió sus propias salas, paso a paso, y las infecciones bajaron a la mitad.
+
+57
+00:07:31,544 --> 00:07:35,720
+Ivy hizo lo mismo con su lunes: dos horas se volvieron diez minutos, con todo verificado.
+
+58
+00:07:37,620 --> 00:07:40,782
+El lunes, elige una tarea tuya y cronometra cada paso.
+
+59
+00:07:42,282 --> 00:07:46,396
+Deja lo que nadie necesita, y escribe el resto, igual cada vez.
+
+60
+00:07:47,896 --> 00:07:51,719
+Automatiza un paso a la vez, y verifica cada uno antes de confiar en él.
+
+61
+00:07:53,219 --> 00:07:57,527
+Y si lideras, pregunta qué obstáculos hay, da el tiempo y muestra los pequeños logros.
+
+62
+00:07:59,227 --> 00:08:01,953
+Cambia una cosa pequeña, verifícala, conserva lo que funciona.

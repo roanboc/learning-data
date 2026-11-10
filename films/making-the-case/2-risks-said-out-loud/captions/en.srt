@@ -1,0 +1,227 @@
+1
+00:00:03,000 --> 00:00:05,556
+Antarctica, February 1911.
+
+2
+00:00:07,456 --> 00:00:15,709
+Later that year, Roald Amundsen and four of his team will go to the South Pole and back on skis: about three thousand kilometres.
+
+3
+00:00:17,409 --> 00:00:21,919
+First, they leave food on the ice along the way, in three stores called depots.
+
+4
+00:00:23,619 --> 00:00:31,232
+But the ice is flat and white for hundreds of kilometres. In fog, you could pass a depot a kilometre away, and never see it.
+
+5
+00:00:33,132 --> 00:00:37,072
+Miss one on the way home, and they run out of food, far from any help.
+
+6
+00:00:39,172 --> 00:00:44,899
+Marks set along the route are easily missed, and once you drift off the line, you may not find it again.
+
+7
+00:00:46,599 --> 00:00:47,987
+Something had to change.
+
+8
+00:00:49,887 --> 00:00:56,212
+So they talked it through, and marked each depot across the route instead, nine kilometres out on each side.
+
+9
+00:00:57,912 --> 00:01:03,361
+At the first, twenty black flags, each numbered to tell which side the depot lay, and how far.
+
+10
+00:01:05,061 --> 00:01:08,896
+Even off course, they would cross the line, and a flag would point them in.
+
+11
+00:01:10,996 --> 00:01:18,727
+Ninety-nine days after setting out, on 25 January 1912, all five were home, well, with food to spare.
+
+12
+00:01:20,627 --> 00:01:25,821
+“Victory awaits him who has everything in order,” Amundsen wrote. “Luck, people call it.”
+
+13
+00:01:27,921 --> 00:01:33,808
+Helena's team is about to move 21 reports off the university's old data warehouse.
+
+14
+00:01:35,308 --> 00:01:42,177
+Its risks are hard to see too, until one is missed: a report that stops, or personal data where it shouldn't be.
+
+15
+00:01:43,877 --> 00:01:48,470
+Said out loud, each with an owner and an early sign, they can be found in time.
+
+16
+00:01:56,770 --> 00:02:03,678
+April 2027. Before a single risk is written down, Helena asks the data council a question.
+
+17
+00:02:05,178 --> 00:02:07,435
+How much risk will you take, and on what?
+
+18
+00:02:08,935 --> 00:02:11,693
+The answer is the council's appetite for risk.
+
+19
+00:02:12,993 --> 00:02:15,345
+Low for personal data and security.
+
+20
+00:02:16,645 --> 00:02:17,994
+Medium for delays.
+
+21
+00:02:19,294 --> 00:02:22,930
+And high for trying new ways to deliver, such as a prototype.
+
+22
+00:02:24,230 --> 00:02:28,058
+So a risk to personal data must be avoided, not just watched.
+
+23
+00:02:29,558 --> 00:02:33,884
+The team names the risks. The people who decide say how much is too much.
+
+24
+00:02:36,784 --> 00:02:44,210
+In May, the team writes the move's risks in a register, each in one sentence: a cause, what could happen, and what it would do.
+
+25
+00:02:45,910 --> 00:02:53,010
+The licence ends on 31 December, so a report not moved by then would stop, and its readers would lose it.
+
+26
+00:02:55,110 --> 00:02:59,962
+Each risk has one owner, a person, not a team, and a date to look at it again.
+
+27
+00:03:01,462 --> 00:03:05,463
+How likely is it, and how bad would it be? Low, medium or high.
+
+28
+00:03:06,963 --> 00:03:14,424
+Then a response: avoid it, reduce it, share it, or accept it. R1 is reduced: the busiest reports move first.
+
+29
+00:03:16,124 --> 00:03:21,731
+And an early sign: what you would see first. For R1, a report two weeks behind its date.
+
+30
+00:03:23,831 --> 00:03:30,332
+ISO 31000, the international standard for managing risk, uses words like these.
+
+31
+00:03:31,832 --> 00:03:38,994
+R8, payroll's export kept by one person, was reduced long before, as Scripts became software showed.
+
+32
+00:03:40,694 --> 00:03:45,711
+On 25 May, the case goes to the council with eight risks, and it says yes.
+
+33
+00:03:47,611 --> 00:03:53,303
+But one of them, R3, is still only a worry: personal data could be exposed in the move.
+
+34
+00:03:56,603 --> 00:04:02,604
+Tuesday 1 June: the move begins. Helena asks the team of eight to imagine it's over.
+
+35
+00:04:04,104 --> 00:04:07,903
+It's January 2028, and the move has failed. Why?
+
+36
+00:04:09,803 --> 00:04:14,933
+It's a pre-mortem, as the psychologist Gary Klein described it in 2007.
+
+37
+00:04:16,433 --> 00:04:21,806
+Once failure is a given, people find its reasons more easily, and say them more freely.
+
+38
+00:04:23,306 --> 00:04:27,867
+Each writes their reasons alone for five minutes, then reads one out, in turn.
+
+39
+00:04:29,367 --> 00:04:35,722
+Every old report reads an extract: a copy taken from another system, such as HR's staff list.
+
+40
+00:04:37,222 --> 00:04:42,892
+Ivy, the newest, reads hers: the old extracts take whole tables, personal fields and all.
+
+41
+00:04:44,592 --> 00:04:51,744
+Now R3 has a cause, and an early sign: an extract carrying personal fields its report never shows.
+
+42
+00:04:53,444 --> 00:05:00,811
+Yusuf, its owner, writes the response that afternoon: before an extract moves, it's checked against the protection rules.
+
+43
+00:05:02,111 --> 00:05:04,419
+Whatever no report needs stays behind.
+
+44
+00:05:07,319 --> 00:05:14,226
+Wednesday 16 June, the move's third week. Next is Facilities' report of who holds an access card.
+
+45
+00:05:15,926 --> 00:05:21,018
+Its old extract brings 42 columns of the staff list. The report shows five.
+
+46
+00:05:22,918 --> 00:05:29,591
+The check reads the catalog's tags: home address and date of birth are personal, and no report uses them.
+
+47
+00:05:31,291 --> 00:05:36,449
+So the extract stays behind, and the report is rebuilt from the one governed staff list.
+
+48
+00:05:38,349 --> 00:05:45,193
+Had those fields moved, R3 would have become an issue: no longer something that might happen, but something that had.
+
+49
+00:05:47,093 --> 00:05:51,526
+Tags like these, and the locks behind them, are taught in Locks before the data.
+
+50
+00:05:54,426 --> 00:06:00,645
+Tuesday 29 June. The data council's one page for the month has room for three risks.
+
+51
+00:06:02,145 --> 00:06:10,940
+R1, the licence. R4, a team stretched between the move and new requests. And R3: its sign has shown, so it's now likely.
+
+52
+00:06:12,840 --> 00:06:18,557
+R8 is closed: payroll's export has run from the project every pay day for over a year.
+
+53
+00:06:20,057 --> 00:06:25,943
+R7, an agent with more rights than its job, stays watched, as How it goes wrong explains.
+
+54
+00:06:27,443 --> 00:06:30,813
+Said early, a risk builds trust. Hidden, it spends it.
+
+55
+00:06:32,913 --> 00:06:37,229
+Amundsen's flags were early signs too, set where they'd be crossed in time.
+
+56
+00:06:38,929 --> 00:06:45,215
+On Monday, take your three biggest risks, and write each in one sentence, with an owner and an early sign.
+
+57
+00:06:46,915 --> 00:06:50,014
+Name each risk, give it an owner, watch its early sign.

@@ -1,0 +1,93 @@
+{
+  "kicker": "Every stakeholder, one story",
+  "kicker_es": "Cada voz, una misma historia",
+  "title_es": "Todos en la mesa",
+  "h1": "Everyone at the table: each one heard, everyone told the same story",
+  "h1_es": "Todos en la mesa: cada uno escuchado, y la misma historia para todos",
+  "lead": "Fourteen people and groups want different things from retiring the old warehouse. Helena Novak maps them by power and interest, asks each what they want from data, in their words, and sends everyone the same page every month. When HR shows a real constraint, the plan moves, and everyone hears why.",
+  "lead_es": "Catorce personas y grupos esperan algo distinto del retiro del viejo almacén. Helena Novak los ubica por poder e interés, les pregunta qué quieren de los datos, con sus palabras, y envía a todos la misma página cada mes. Si RR. HH. muestra una restricción real, el plan cambia y todos saben por qué.",
+  "description": "A film about stakeholders, the third of Making the case, in the module Data management: on Tuesday 25 May 2027 the data council says yes to retiring the old warehouse by December, the 21 reports people use moving to the platform and the 17 nobody opens retired; the next morning Helena Novak, the data manager, lists everyone the plan touches, past the people who ask most often and most loudly: who uses the data, who makes it, who pays for it, who decides, and whose data it is; fourteen people and groups, each placed by how much they can shape the plan and how much it touches them, a power and interest grid, after Aubrey Mendelow's work; the quiet ones, staff and students, asked too, through their representatives; each asked what they want from data, the answer written down in their own words beside their name, as what they will judge the plan by; one person speaking for the team to each, so nobody hears two versions; one page for everyone on the first Monday of every month, from Monday 7 June, with where the plan is, the measures, the top three risks, the decisions needed and a line for each of the fourteen, bad news included; and on Wednesday 2 June Ingrid, in HR, shows that July is the month payroll can least afford a surprise, so HR's reports move in August, the data council agrees on Tuesday 29 June, and the July page tells everyone why. It opens in London in 1850, where Joseph Paxton answered the worry of everyone with a stake in the Great Exhibition's building, showed them all the same picture, and kept three old elms standing inside it, under the glass.",
+  "description_es": "Una película sobre las partes interesadas, la tercera de Construir el caso, en el módulo Gestión de datos: el martes 25 de mayo de 2027 el consejo de datos aprueba retirar el viejo almacén de datos en diciembre, los 21 reportes que la gente usa pasan a la plataforma y los 17 que nadie abre se retiran; a la mañana siguiente Helena Novak, la gestora de datos, hace la lista de todos a quienes el plan afecta, más allá de quienes piden más seguido y más fuerte: quién usa los datos, quién los produce, quién los paga, quién decide y de quién son; catorce personas y grupos, cada uno ubicado según cuánto puede influir en el plan y cuánto le afecta, una matriz de poder e interés, por el trabajo de Aubrey Mendelow; a los callados, el personal y los estudiantes, también se les pregunta, por medio de sus representantes; a cada uno se le pregunta qué quiere de los datos, y su respuesta se escribe con sus propias palabras junto a su nombre, como aquello con lo que juzgará el plan; una sola persona habla por el equipo con cada uno, para que nadie oiga dos versiones; una página para todos el primer lunes de cada mes, desde el lunes 7 de junio, con dónde está el plan, las medidas, los tres riesgos principales, las decisiones pendientes y una línea para cada una de las catorce, las malas noticias incluidas; y el miércoles 2 de junio Ingrid, de RR. HH., muestra que julio es el mes en que la nómina menos puede permitirse una sorpresa, así que los reportes de RR. HH. pasan a agosto, el consejo de datos lo aprueba el martes 29 de junio y la página de julio les dice a todos por qué. Empieza en Londres en 1850, donde Joseph Paxton respondió a la preocupación de cada uno de los que tenían algo en juego en el edificio de la Gran Exposición, les mostró a todos la misma imagen y dejó tres viejos olmos en pie dentro de él, bajo el vidrio.",
+  "card": "Helena asks each of fourteen stakeholders what they want from data, in their words, and tells everyone the same story, every month.",
+  "card_es": "Helena pregunta a cada una de las catorce partes interesadas qué quiere de los datos, con sus palabras, y cuenta a todos la misma historia, cada mes.",
+  "chapters_es": {
+    "elms": "Los olmos de Hyde Park",
+    "map": "Todos a quienes afecta",
+    "words": "Con sus propias palabras",
+    "page": "Una página, cada mes",
+    "june": "Una restricción real",
+    "heard": "Escuchados"
+  },
+  "past": [
+    "London, 1850: three elms under glass",
+    "Everyone with a stake in the Great Exhibition's building had a worry of their own: the park's old elms, any building in Hyde Park, millions of bricks for a hall meant to come down. Paxton answered each worry, and showed everyone the same picture. A plan for data needs the same: each one heard, and one story for all."
+  ],
+  "past_es": [
+    "Londres, 1850: tres olmos bajo el vidrio",
+    "Todos los que tenían algo en juego en el edificio de la Gran Exposición temían algo: los viejos olmos del parque, cualquier edificio en Hyde Park, millones de ladrillos para una nave que debía desmontarse. Paxton respondió a cada preocupación, y mostró a todos la misma imagen. Un plan de datos necesita lo mismo: escuchar a cada uno, y una sola historia para todos."
+  ],
+  "next_h": "You've seen each stakeholder heard, and everyone told the same story. Next: one front door, and one list for all of a data team's work.",
+  "next_h_es": "Viste a cada parte interesada escuchada, y a todos con la misma historia. Después: una sola puerta de entrada, y una lista única para todo el trabajo del equipo de datos.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Stakeholder analysis",
+        "title_es": "Análisis de partes interesadas",
+        "line": "How to list and map everyone a plan touches, with the power and interest grid named after Aubrey Mendelow.",
+        "line_es": "Cómo hacer la lista de todos a quienes un plan afecta, y ubicarlos en una matriz de poder e interés.",
+        "href": "https://en.wikipedia.org/wiki/Stakeholder_analysis",
+        "href_es": "https://es.wikipedia.org/wiki/An%C3%A1lisis_de_partes_interesadas"
+      },
+      {
+        "title": "Stakeholder engagement, from the Association for Project Management",
+        "title_es": "La relación con las partes interesadas, de la APM (en inglés)",
+        "line": "What engaging stakeholders means: consulting, communicating, negotiating and building relationships, in ten key principles.",
+        "line_es": "Qué significa relacionarse con las partes interesadas: consultar, comunicar, negociar y construir relaciones, en diez principios.",
+        "href": "https://www.apm.org.uk/resources/find-a-resource/stakeholder-engagement/",
+        "href_es": "https://www.apm.org.uk/resources/find-a-resource/stakeholder-engagement/"
+      },
+      {
+        "title": "The Crystal Palace",
+        "title_es": "El Palacio de Cristal",
+        "line": "Paxton's hall of iron and glass for the Great Exhibition: its design, its building in months, and the elms inside it.",
+        "line_es": "La nave de hierro y vidrio de Paxton para la Gran Exposición: su diseño, su construcción en meses y los olmos dentro de ella.",
+        "href": "https://en.wikipedia.org/wiki/The_Crystal_Palace",
+        "href_es": "https://es.wikipedia.org/wiki/Palacio_de_Cristal_(Londres)"
+      },
+      {
+        "title": "Paxton's first sketch, at the V&A",
+        "title_es": "El primer boceto de Paxton, en el V&A (en inglés)",
+        "line": "The sheet of pink blotting paper he drew the hall on, at a railway meeting in Derby, on 11 June 1850.",
+        "line_es": "La hoja de papel secante rosa en la que dibujó la nave, en una reunión ferroviaria en Derby, el 11 de junio de 1850.",
+        "href": "https://collections.vam.ac.uk/item/O18167/the-great-exhibition-building-architectural-sketch-paxton-joseph-sir/",
+        "href_es": "https://collections.vam.ac.uk/item/O18167/the-great-exhibition-building-architectural-sketch-paxton-joseph-sir/"
+      },
+      {
+        "title": "The Great Exhibition of 1851, at the V&A",
+        "title_es": "La Gran Exposición de 1851, en el V&A (en inglés)",
+        "line": "How the exhibition came about: the committee's own design and how it was mocked, then Paxton's, and the arched roof for the elms.",
+        "line_es": "Cómo nació la exposición: el diseño del propio comité y las burlas que recibió, luego el de Paxton, y el techo abovedado para los olmos.",
+        "href": "https://www.vam.ac.uk/articles/the-great-exhibition-of-1851",
+        "href_es": "https://www.vam.ac.uk/articles/the-great-exhibition-of-1851"
+      }
+    ],
+    "more": [
+      {
+        "text": "The Great Exhibition of 1851 in Hyde Park, from the Royal Parks",
+        "text_es": "La Gran Exposición de 1851 en Hyde Park, de los Parques Reales (en inglés)",
+        "href": "https://www.royalparks.org.uk/read-watch-listen/great-exhibition-1851-hyde-park",
+        "href_es": "https://www.royalparks.org.uk/read-watch-listen/great-exhibition-1851-hyde-park"
+      },
+      {
+        "text": "London's parks and gardens, 1907: the Great Exhibition in Hyde Park, and its one condition, the three elms",
+        "text_es": "Los parques y jardines de Londres, 1907: la Gran Exposición en Hyde Park, y su única condición, los tres olmos (en inglés)",
+        "href": "https://www.gardenvisit.com/book/london_parks_and_gardens_1907/chapter_2_hyde_park/great_exhibition_of_1851_in_hyde_park",
+        "href_es": "https://www.gardenvisit.com/book/london_parks_and_gardens_1907/chapter_2_hyde_park/great_exhibition_of_1851_in_hyde_park"
+      }
+    ]
+  }
+}

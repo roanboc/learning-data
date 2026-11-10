@@ -108,6 +108,7 @@
 | How long, and then what | 203 | 0% | 0 | 28.4 | Drawn to the rule |
 | Forgetting a person | 240 | 0% | 0 | 30.0 | Drawn to the rule |
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
+| One small change at a time | 253 | 0% | 0 | 28.4 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |

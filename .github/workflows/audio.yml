@@ -1,10 +1,22 @@
-# Run explicitly after committing new audio.json pointers. Audio releases are prereleases,
-# so they never replace the video release used by the site's latest-download links.
-# Leave the tag blank to publish every missing audio release whose MP3 is in the repository,
-# and verify every pointer's copy; existing assets are never uploaded again or replaced.
+# Publishes a film's audio release when the film reaches main, so nobody runs it by hand. Every push
+# to main that adds or changes an audio.json pointer or an MP3 publishes every missing audio release
+# whose MP3 is in the repository, then downloads and verifies every pointer's copy. It also runs once
+# a day, to publish anything an earlier run missed. Audio releases are prereleases, so they never
+# replace the video release used by the site's latest-download links, and existing assets are never
+# uploaded again or replaced. Run it by hand only to resume, or for one tag or film; a blank tag
+# publishes every missing release.
 name: Store audio outside Git
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'films/**/audio.json'
+      - 'site/assets/**/*.mp3'
+      - 'site-tools/media.py'
+      - '.github/workflows/audio.yml'
+  schedule:
+    - cron: '17 4 * * *'
   workflow_dispatch:
     inputs:
       tag:
@@ -18,6 +30,7 @@ on:
 permissions:
   contents: read
 
+# Pushes and scheduled runs have no inputs, so they queue with a blank manual run instead of racing it.
 concurrency:
   group: audio-release-${{ inputs.tag || 'all' }}
   cancel-in-progress: false

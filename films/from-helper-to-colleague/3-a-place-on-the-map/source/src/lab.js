@@ -97,17 +97,18 @@ const cj_at=(b,side,f)=>{f=f==null?0.5:f;return side==="top"?[b.x+b.w*f,b.y]:sid
 /* ---------------------------------------------------------------- Planning's change process, on the map
    The work first: the capability Planning's tickets serve, at the top left; the service that changes a data product beside it; under
    it the service's seven steps, in order, from a ticket to production; under each step the role assigned to it; and under each role
-   who fills it. The planning contributor has the three drafting steps; people keep the rest. The planning agent comes in under its
+   who fills it. The planning contributor has the three drafting steps; people keep the rest: Clara raises the ticket, Jun
+   reviews the code, and Noor, the release approver, approves the change and releases it (no owner approves a pull request). The planning agent comes in under its
    role, owned by Clara (a dashed line under the people). The names are the map's own (governance/3-architecture-map/ in the project).
      cj_process(ctx, o)   o.cap, o.srv, o.srvLine (0 to 1); o.step(i), o.bracket; o.role(k), o.roleLine(k); o.who(k), o.whoLine(k);
                           o.agent, o.agentLine, o.owner; o.tint(i) [colour, 0 to 1]; o.glow(key) a colour (keys "cap", "srv", "s0"
-                          to "s6", "r0" to "r4", "jun", "clara", "noor", "agent"); o.divide (0 to 1); o.dim (0 to 1) and o.keep(key) */
+                          to "s6", "r0" to "r3", "jun", "clara", "noor", "agent"); o.divide (0 to 1); o.dim (0 to 1) and o.keep(key) */
 const CJ_STEPS=["raise a ticket","draft the change","build it in development","open a pull request","review the code","approve the change","release to production"];
 const CJ_SW=248,CJ_SG=10,CJ_SX=60,CJ_SY=246,CJ_SH=110,CJ_PT=24,CJ_EH=116,CJ_RY=412,CJ_WY=592;
 const cj_stepX=i=>CJ_SX+i*(CJ_SW+CJ_SG);
-const CJ_ROLES=[["requester",0,0],["planning contributor",1,3],["analytics engineer",4,4],["product owner",5,5],["release approver",6,6]];
+const CJ_ROLES=[["requester",0,0],["planning contributor",1,3],["analytics engineer",4,4],["release approver",5,6]];
 const cj_roleBox=k=>{const r=CJ_ROLES[k],x=cj_stepX(r[1]);return{x,y:CJ_RY,w:cj_stepX(r[2])+CJ_SW-x,h:CJ_EH};};
-const CJ_WHO=[["jun","Jun Park",2],["clara","Clara Jensen",3],["noor","Noor",4]];
+const CJ_WHO=[["clara","Clara Jensen",0],["jun","Jun Park",2],["noor","Noor",3]];
 const cj_whoBox=k=>{const b=cj_roleBox(CJ_WHO[k][2]);return{x:b.x,y:CJ_WY,w:b.w,h:CJ_EH};};
 const CJ_CAP={x:60,y:100,w:470},CJ_SRV={x:610,y:100,w:1250},CJ_PAG={x:520,y:CJ_WY,w:360,h:CJ_EH};
 // where the divide between the drafting steps and the people's steps runs
@@ -142,7 +143,7 @@ function cj_process(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;con
   // the planning agent, under its role, and Clara's line to it, under the people
   const ag=clamp(v("agent")(),0,1);if(ag>0.01){const P=CJ_PAG;cj_el(ctx,P.x,P.y,P.w,{kind:"agent",name:"planning agent",h:CJ_EH,a:ag*D("agent"),k:ag_eo(clamp(ag*1.2,0,1)),glow:glow("agent"),glowA:0.9});
     cj_assign(ctx,[P.x+P.w/2,P.y],[P.x+P.w/2,CJ_RY+CJ_EH+4],clamp(v("agentLine")(),0,1),{a:D("agent")});
-    const cl=cj_whoBox(1),oy=CJ_WY+CJ_EH+44;cj_owns(ctx,[cl.x+cl.w/2,cl.y+cl.h],[P.x+P.w/2,P.y+P.h],clamp(v("owner")(),0,1),{via:[[cl.x+cl.w/2,oy],[P.x+P.w/2,oy]],a:D("agent"),lx:-250});}
+    const cl=cj_whoBox(0),oy=CJ_WY+CJ_EH+44;cj_owns(ctx,[cl.x+cl.w/2,cl.y+cl.h],[P.x+P.w/2,P.y+P.h],clamp(v("owner")(),0,1),{via:[[cl.x+cl.w/2,oy],[P.x+P.w/2,oy]],a:D("agent"),lx:0});}
   // the divide: the drafting steps on its left, the people's on its right
   const dv=clamp(v("divide")(),0,1);if(dv>0.01){ctx.save();ctx.strokeStyle=rgba(AG.ink,0.42);ctx.lineWidth=3;ctx.setLineDash([12,10]);ctx.beginPath();
     ctx.moveTo(CJ_DIV,CJ_SY-6);ctx.lineTo(CJ_DIV,lerp(CJ_SY-6,CJ_WY+CJ_EH+20,ag_sine(dv)));ctx.stroke();ctx.restore();}

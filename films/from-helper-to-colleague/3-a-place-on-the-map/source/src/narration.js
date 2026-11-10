@@ -42,7 +42,7 @@ const NARR={
  {"id":"process","gap":0.8,"text":"Each ticket goes through one process, change a data product: seven steps, from a ticket to production."},
  {"id":"roles","gap":0.8,"text":"Each step is assigned to a role, whoever fills it: a person or an agent."},
  {"id":"contrib","gap":0.8,"text":"One new role, planning contributor, drafts the change, builds it in development, and opens a pull request."},
- {"id":"people","gap":0.8,"text":"People keep the rest. Jun reviews the code, Clara approves the change, and Noor releases it to production."},
+ {"id":"people","gap":0.8,"text":"People keep the rest. Clara raises the ticket, Jun reviews the code, and Noor approves the change and releases it."},
  {"id":"sod","gap":0.8,"text":"So whoever drafts a change never approves or releases it: separation of duties, on the map."},
  {"id":"agent","gap":0.8,"text":"Then Noor assigned the planning agent to that role, with Clara as its owner. Like a crew's card on the board, it had its place."},
  {"id":"may","gap":0.8,"text":"Its role says what it may do: read the project and production, with names masked, and draft on its own branches."},
@@ -54,7 +54,7 @@ const NARR={
  {"id":"workload","gap":0.8,"text":"The same day, Noor placed Anil Kurian's workload agent. It had its own identity since September, but no place on the map."},
  {"id":"stages","gap":0.8,"text":"Its stage for each kind of task went on its assignment."},
  {"id":"three","gap":0.8,"text":"Now the map holds three agents, each with a role and an owner."},
- {"id":"third","gap":0.8,"text":"The third, Yusuf's governance review agent, was already there: it reviews pull requests, and never approves them."}]},
+ {"id":"third","gap":0.8,"text":"The third, Yusuf's governance review agent, was already there: it checks pull requests against the glossary, and never approves them."}]},
 "gate":{"name":"The gate","lead":1.0,"tail":1.0,"vo":[
  {"id":"before","gap":0.8,"text":"One thing came before it worked alone: its gate."},
  {"id":"redo","gap":0.8,"text":"The week before, in a sandbox, where nothing it did could reach anyone, it redid Planning's last forty tickets."},

@@ -13,8 +13,8 @@ From the steps on the map: who **does** each step (the role assigned to it), who
 | decide |  |  | told | does, answers |  |  |  |  |  |
 | build it in development | told | answers |  |  |  | does, told |  |  |  |
 | publish in the glossary | told |  | does | answers | told | told |  |  |  |
-| open a pull request | told |  |  |  |  | does | answers, told | told | answers |
+| open a pull request | told |  |  |  |  | does | answers | told | answers |
 | sync to every tool | does |  |  | answers | told | told |  |  |  |
-| review the code | does, answers |  |  |  |  |  | told |  |  |
-| approve the change |  |  |  |  |  |  | does, answers | told | answers |
+| review the code | does, answers |  |  |  |  |  |  | told |  |
+| approve the change |  |  |  |  |  |  | answers | does, told | answers |
 | release to production |  | answers |  |  |  | told |  | does |  |

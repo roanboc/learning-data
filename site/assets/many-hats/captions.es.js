@@ -57,8 +57,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Lunes 1 de marzo de 2027: Ivy Reyes se une al equipo, como analista de datos recién graduada.",
 "Her degree is in statistics: that's her depth.":
 "Estudió estadística: eso es lo que conoce a fondo.",
-"Helena Novak, the data manager, has worn many hats herself: architect, data lead, product owner.":
-"Helena Novak, la gestora de datos, ha tenido ella misma muchos roles: arquitecta, líder de datos, responsable de producto.",
+"Helena Novak, the data manager, wears two hats: product owner of the team's services, who thinks like an architect, and people leader.":
+"Helena Novak, la gestora de datos, tiene dos roles: responsable de producto de los servicios, con mirada de arquitecta, y líder de personas.",
+"For her, managing and leading are two sides of one role, not rivals: the plans, the dates and the measures serve the people.":
+"Para ella, gestionar y liderar son dos caras del mismo trabajo, no rivales: los planes, las fechas y las métricas sirven a las personas.",
 "She gives Ivy a month to learn the team's work, and one real question to follow through all of it.":
 "Le da a Ivy un mes para conocer el trabajo del equipo, y una pregunta real para seguir a través de todo él.",
 "It comes from Graham Ellis, the new Director of Facilities: should he ask the University Council for a new teaching building?":

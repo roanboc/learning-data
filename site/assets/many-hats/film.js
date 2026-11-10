@@ -432,7 +432,8 @@ const NARR={
  {"id":"films","gap":0.8,"text":"These films take one practice at a time, in a data team at a university, a year from now."},
  {"id":"ivy","gap":0.8,"text":"Monday 1 March 2027: Ivy Reyes joins the team, as a graduate data analyst.","say":"Monday the first of March, twenty twenty-seven: Ivy Reyes joins the team, as a graduate data analyst."},
  {"id":"depth","gap":0.8,"text":"Her degree is in statistics: that's her depth."},
- {"id":"helena","gap":0.8,"text":"Helena Novak, the data manager, has worn many hats herself: architect, data lead, product owner."},
+ {"id":"helena","gap":0.8,"text":"Helena Novak, the data manager, wears two hats: product owner of the team's services, who thinks like an architect, and people leader."},
+ {"id":"role","gap":0.8,"text":"For her, managing and leading are two sides of one role, not rivals: the plans, the dates and the measures serve the people."},
  {"id":"month","gap":0.8,"text":"She gives Ivy a month to learn the team's work, and one real question to follow through all of it."},
  {"id":"graham","gap":0.8,"text":"It comes from Graham Ellis, the new Director of Facilities: should he ask the University Council for a new teaching building?"},
  {"id":"q","gap":0.8,"text":"His question, agreed with him in writing: do we have too few rooms, or too few at some hours?"},
@@ -494,7 +495,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"trench/when": 4.552, "trench/fire": 3.493, "trench/burns": 5.708, "trench/ding": 7.198, "trench/jobs": 3.471, "trench/earth": 3.108, "trench/timber": 3.326, "trench/rubble": 2.18, "trench/cost": 7.947, "trench/change": 1.34, "trench/plan": 2.536, "trench/dig": 4.284, "trench/canal": 5.621, "trench/boats": 4.13, "trench/fill": 4.482, "trench/shen": 6.143, "trench/saving": 5.338, "trench/one": 5.443, "trench/data": 4.209, "trench/see": 5.039, "question/promise": 4.794, "question/films": 5.757, "question/ivy": 6.883, "question/depth": 2.542, "question/helena": 6.527, "question/month": 5.552, "question/graham": 7.175, "question/q": 5.467, "question/goals": 4.185, "question/first": 3.855, "parts/born": 1.68, "parts/mei": 8.475, "parts/sam": 7.11, "parts/yusuf": 5.334, "parts/noor": 5.186, "parts/jun": 4.894, "parts/pair": 3.993, "parts/films": 6.866, "parts/deep": 2.805, "parts/learn": 4.739, "parts/ask": 4.383, "page/draw": 6.046, "page/decision": 5.862, "page/question": 4.354, "page/data": 4.799, "page/born": 3.173, "page/keeps": 4.53, "page/join": 3.411, "page/names": 4.923, "page/fourteen": 5.845, "page/drop": 9.256, "page/nobody": 6.316, "shape/needed": 4.77, "shape/own": 6.402, "shape/t": 5.052, "shape/lists": 7.658, "shape/nobody": 3.035, "shape/range": 6.544, "shape/messy": 2.861, "shape/essential": 6.516, "shape/across": 1.857, "kept/goal": 6.485, "kept/team": 6.338, "kept/catalog": 3.592, "kept/lineage": 6.002, "kept/cant": 5.39, "monday/back": 7.584, "monday/ivy": 5.869, "monday/depth": 2.106, "monday/words": 3.213, "monday/route": 3.611, "monday/ask": 3.538, "monday/take": 3.396};
+const VODUR={"trench/when": 4.552, "trench/fire": 3.493, "trench/burns": 5.708, "trench/ding": 7.198, "trench/jobs": 3.471, "trench/earth": 3.108, "trench/timber": 3.326, "trench/rubble": 2.18, "trench/cost": 7.947, "trench/change": 1.34, "trench/plan": 2.536, "trench/dig": 4.284, "trench/canal": 5.621, "trench/boats": 4.13, "trench/fill": 4.482, "trench/shen": 6.143, "trench/saving": 5.338, "trench/one": 5.443, "trench/data": 4.209, "trench/see": 5.039, "question/promise": 4.794, "question/films": 5.757, "question/ivy": 6.883, "question/depth": 2.542, "question/helena": 8.209, "question/role": 7.706, "question/month": 5.552, "question/graham": 7.175, "question/q": 5.467, "question/goals": 4.185, "question/first": 3.855, "parts/born": 1.68, "parts/mei": 8.475, "parts/sam": 7.11, "parts/yusuf": 5.334, "parts/noor": 5.186, "parts/jun": 4.894, "parts/pair": 3.993, "parts/films": 6.866, "parts/deep": 2.805, "parts/learn": 4.739, "parts/ask": 4.383, "page/draw": 6.046, "page/decision": 5.862, "page/question": 4.354, "page/data": 4.799, "page/born": 3.173, "page/keeps": 4.53, "page/join": 3.411, "page/names": 4.923, "page/fourteen": 5.845, "page/drop": 9.256, "page/nobody": 6.316, "shape/needed": 4.77, "shape/own": 6.402, "shape/t": 5.052, "shape/lists": 7.658, "shape/nobody": 3.035, "shape/range": 6.544, "shape/messy": 2.861, "shape/essential": 6.516, "shape/across": 1.857, "kept/goal": 6.485, "kept/team": 6.338, "kept/catalog": 3.592, "kept/lineage": 6.002, "kept/cant": 5.39, "monday/back": 7.584, "monday/ivy": 5.869, "monday/depth": 2.106, "monday/words": 3.213, "monday/route": 3.611, "monday/ask": 3.538, "monday/take": 3.396};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -502,7 +503,7 @@ const VODUR={"trench/when": 4.552, "trench/fire": 3.493, "trench/burns": 5.708, 
    as it becomes the end card. */
 const BREATH={
 "trench":{"hold":{"when":1.2,"fire":0.8,"burns":1.0,"ding":0.8,"jobs":0.8,"earth":0.8,"timber":0.8,"rubble":0.8,"cost":1.2,"change":1.2,"plan":0.8,"dig":1.0,"canal":1.2,"boats":1.2,"fill":1.2,"shen":0.8,"saving":1.2,"one":1.2,"data":0.8},"breathe":5.6},
-"question":{"hold":{"promise":1.2,"films":1.2,"ivy":1.0,"depth":0.8,"helena":1.0,"month":1.0,"graham":1.0,"q":1.4,"goals":0.8}},
+"question":{"hold":{"promise":1.2,"films":1.2,"ivy":1.0,"depth":0.8,"helena":1.2,"role":1.4,"month":1.0,"graham":1.0,"q":1.4,"goals":1.0}},
 "parts":{"hold":{"born":0.8,"mei":1.2,"sam":1.2,"yusuf":1.2,"noor":1.2,"jun":0.8,"pair":1.0,"films":1.2,"deep":1.0,"learn":1.0}},
 "page":{"hold":{"draw":1.0,"decision":1.0,"question":1.0,"data":1.0,"born":0.8,"keeps":1.0,"join":1.0,"names":1.0,"fourteen":1.0,"drop":1.4}},
 "shape":{"hold":{"needed":1.0,"own":1.2,"t":1.4,"lists":1.2,"nobody":1.0,"range":0.8,"messy":1.2,"essential":1.2}},
@@ -2513,6 +2514,35 @@ function mh_goals(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,G=MH_GOALS.map(g=
     ctx.restore();yy+=18;});
   ctx.restore();return{x,y,w,h};}
 
+/* ---------------------------------------------------------------- Helena's one role, two sides (the author's advice, 10 November 2026)
+   One sheet, creased down the middle: managing on one side (plans, dates, measures) and leading on the other (people), in the same
+   colour and weight, as neither outranks the other; as the voice says they serve the people, a brace gathers the three and an arrow
+   crosses the crease to the people. (x, y) its top left, w its width (540); o.a, o.k (its spring), o.light, o.t (the shot's time),
+   o.left (when each word on the managing side comes in), o.right (when the people come in), o.arrow (when the brace and arrow draw). */
+const MH_SIDES={kick:"One role",title:"Two sides, not rivals",left:["Managing","Plans","Dates","Measures"],right:["Leading","People"]};
+function mh_sides(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=392;if(a<=0.004)return{x,y,w,h};
+  const cx=x+w/2,lx=x+36,rx=cx+66,row=i=>y+270+i*42,fade=t0=>t0==null?1:ag_sine(ag_in(o.t,t0,0.5));
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  lp_sheet(ctx,x,y,w,h,{light:o.light});
+  lp_T(ctx,MH_SIDES.kick.toUpperCase(),lx,y+80,{w:800,size:28,ls:3,col:LP.mut});
+  lp_T(ctx,MH_SIDES.title,lx,y+152,{w:800,size:40});
+  // the crease: a shaded line, and a lit one beside it, from under the title to the foot of the sheet
+  ctx.lineWidth=2;ctx.strokeStyle="rgba(60,44,32,0.24)";ctx.beginPath();ctx.moveTo(cx-1,y+188);ctx.lineTo(cx-1,y+h-26);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.55)";ctx.beginPath();ctx.moveTo(cx+1,y+188);ctx.lineTo(cx+1,y+h-26);ctx.stroke();
+  lp_T(ctx,MH_SIDES.left[0].toUpperCase(),lx,y+222,{w:800,size:28,ls:3,col:LP.mut});
+  lp_T(ctx,MH_SIDES.right[0].toUpperCase(),rx,y+222,{w:800,size:28,ls:3,col:LP.mut});
+  MH_SIDES.left.slice(1).forEach((s,i)=>{ctx.save();ctx.globalAlpha*=fade(o.left&&o.left[i]);lp_T(ctx,s,lx,row(i),{w:600,size:28});ctx.restore();});
+  ctx.save();ctx.globalAlpha*=fade(o.right);lp_T(ctx,MH_SIDES.right[1],rx,row(1),{w:600,size:28});ctx.restore();
+  // they serve the people: a brace gathers the three, then an arrow from its point crosses the crease, drawn from left to right
+  const b=o.arrow==null?1:ag_in(o.t,o.arrow,0.3),p=o.arrow==null?1:ag_sine(ag_in(o.t,o.arrow+0.15,0.6));
+  if(b>0.004){const top=row(0)-30,bot=row(2)+6,mid=(top+bot)/2,bx=cx-56;ctx.save();ctx.globalAlpha*=b;ctx.strokeStyle=rgba(LP.mut,1);ctx.lineWidth=3;
+    ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(bx-10,top);ctx.quadraticCurveTo(bx,top,bx,top+10);ctx.lineTo(bx,mid-10);
+    ctx.quadraticCurveTo(bx,mid,bx+10,mid);ctx.quadraticCurveTo(bx,mid,bx,mid+10);ctx.lineTo(bx,bot-10);ctx.quadraticCurveTo(bx,bot,bx-10,bot);ctx.stroke();
+    if(p>0.004){const x0=bx+10,x1=x0+(cx+40-x0)*p;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x0,mid);ctx.lineTo(x1,mid);ctx.stroke();
+      if(p>0.6){const q=ag_in(p,0.6,0.4)*10;ctx.beginPath();ctx.moveTo(x1-q,mid-q*0.9);ctx.lineTo(x1,mid);ctx.lineTo(x1-q,mid+q*0.9);ctx.stroke();}}
+    ctx.restore();}
+  ctx.restore();return{x,y,w,h};}
+
 /* ---------------------------------------------------------------- a print of Kaifeng, on the team room's wall
    The opening's street with the canal's water in its trenches, the raft and the boat at the gate, kept once, in a timber frame on a
    paper mount. (x, y) its top left, w its width; o.a. */
@@ -2643,10 +2673,12 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
       mh_sheet(x,tt,w("ivy","Ivy",-0.1),1000,170,640,{kick:"Monday 1 March 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["Her depth: statistics"]},
         {light:"morning",u:ag_in(tt,w("depth","statistics",-0.1),0.5)});
       ivy(x,tt);}},
-    // Helena, and Ivy's first month
+    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), and Ivy's first month
     {at:c.helena-0.3,place:"mhMorning",keys:[[c.helena-0.3,960,540,1.0]],draw:(x,tt)=>{
-      mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Has worn many hats",lines:["Architect","Data lead","Product owner"]},
-        {light:"morning",out:c.month-0.5,u:mh_u(tt,[w("helena","architect",-0.1),w("helena","lead",-0.1),w("helena","product",-0.1)])});
+      mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Two hats",lines:["Product owner, who thinks like an architect","People leader"]},
+        {light:"morning",out:c.role-0.5,u:mh_u(tt,[w("helena","product",-0.1),w("helena","people",-0.1)])});
+      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.month-0.5,0.4)),k:tt-r0,light:"morning",
+        left:[w("role","plans",-0.1),w("role","dates",-0.1),w("role","measures",-0.1)],right:w("role","people",-0.1),arrow:w("role","serve",-0.1)});
       mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn the team's work","Follow one real question through all of it"]},
         {col:LP.blue,light:"morning",u:mh_u(tt,[w("month","learn",-0.1),w("month","question",-0.1)])});
       ivy(x,tt);lp_person(x,"helena",1420,640,1.0,{t:tt,flip:true,light:mo});}},

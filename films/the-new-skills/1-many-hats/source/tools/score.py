@@ -270,8 +270,9 @@ tapn(D5, ow('see', 'between', 0.1), 0.5, 0.1, ring=2.0)
 chord((D2, A2, D3, Fs3, A3, D4), oc('breath', 0.3), 0.7, step=0.18, ring=4.6, until=END)
 
 # 2. One question to follow: the university, a year from now: the chapter turns on G major, and the module's promise laid down. Ivy's
-#    card, and the left hand's low D under her depth; Helena's card, then her plan for Ivy's month; Graham's cards; his question, and B
-#    and D together, a question left open; Ivy's goals written, Helena's agreement set down; the first, and A, D and F sharp rising
+#    card, and the left hand's low D under her depth; Helena's card, then the card of her one role, and one D in both hands at once, two
+#    octaves apart, under "one role" (two sides of one role); her plan for Ivy's month; Graham's cards; his question, and B and D
+#    together, a question left open; Ivy's goals written, Helena's agreement set down; the first, and A, D and F sharp rising
 LV[0] = 0.9
 qw = lambda lid, word, off=0: W('question', lid, word, off)
 qc = lambda lid, off=0: G('question', lid, off)
@@ -280,6 +281,8 @@ card(S0('question') + 1.0, 0.004, px(960))
 card(qw('ivy', 'Ivy', -0.1), 0.004, px(1320))
 low(D2, qw('depth', 'statistics', -0.1), 0.7, None, ring=2.0)
 card(qc('helena', 0.4), 0.004, px(990))
+card(qw('role', 'managing', -0.2), 0.0035, px(990))
+low(D2, qw('role', 'one', -0.05), 0.6, None, ring=1.8); tapn(D4, qw('role', 'one', -0.05), 0.45, None, ring=1.8)
 card(qw('month', 'month', -0.1), 0.0035, px(990))
 card(qw('graham', 'Graham', -0.1), 0.004, px(1320)); card(qw('graham', 'Council', -0.2), 0.0035, px(1320))
 card(qw('q', 'question', -0.1), 0.004, px(1320))

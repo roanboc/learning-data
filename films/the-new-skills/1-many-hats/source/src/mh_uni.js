@@ -221,6 +221,35 @@ function mh_goals(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,G=MH_GOALS.map(g=
     ctx.restore();yy+=18;});
   ctx.restore();return{x,y,w,h};}
 
+/* ---------------------------------------------------------------- Helena's one role, two sides (the author's advice, 10 November 2026)
+   One sheet, creased down the middle: managing on one side (plans, dates, measures) and leading on the other (people), in the same
+   colour and weight, as neither outranks the other; as the voice says they serve the people, a brace gathers the three and an arrow
+   crosses the crease to the people. (x, y) its top left, w its width (540); o.a, o.k (its spring), o.light, o.t (the shot's time),
+   o.left (when each word on the managing side comes in), o.right (when the people come in), o.arrow (when the brace and arrow draw). */
+const MH_SIDES={kick:"One role",title:"Two sides, not rivals",left:["Managing","Plans","Dates","Measures"],right:["Leading","People"]};
+function mh_sides(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=392;if(a<=0.004)return{x,y,w,h};
+  const cx=x+w/2,lx=x+36,rx=cx+66,row=i=>y+270+i*42,fade=t0=>t0==null?1:ag_sine(ag_in(o.t,t0,0.5));
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  lp_sheet(ctx,x,y,w,h,{light:o.light});
+  lp_T(ctx,MH_SIDES.kick.toUpperCase(),lx,y+80,{w:800,size:28,ls:3,col:LP.mut});
+  lp_T(ctx,MH_SIDES.title,lx,y+152,{w:800,size:40});
+  // the crease: a shaded line, and a lit one beside it, from under the title to the foot of the sheet
+  ctx.lineWidth=2;ctx.strokeStyle="rgba(60,44,32,0.24)";ctx.beginPath();ctx.moveTo(cx-1,y+188);ctx.lineTo(cx-1,y+h-26);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.55)";ctx.beginPath();ctx.moveTo(cx+1,y+188);ctx.lineTo(cx+1,y+h-26);ctx.stroke();
+  lp_T(ctx,MH_SIDES.left[0].toUpperCase(),lx,y+222,{w:800,size:28,ls:3,col:LP.mut});
+  lp_T(ctx,MH_SIDES.right[0].toUpperCase(),rx,y+222,{w:800,size:28,ls:3,col:LP.mut});
+  MH_SIDES.left.slice(1).forEach((s,i)=>{ctx.save();ctx.globalAlpha*=fade(o.left&&o.left[i]);lp_T(ctx,s,lx,row(i),{w:600,size:28});ctx.restore();});
+  ctx.save();ctx.globalAlpha*=fade(o.right);lp_T(ctx,MH_SIDES.right[1],rx,row(1),{w:600,size:28});ctx.restore();
+  // they serve the people: a brace gathers the three, then an arrow from its point crosses the crease, drawn from left to right
+  const b=o.arrow==null?1:ag_in(o.t,o.arrow,0.3),p=o.arrow==null?1:ag_sine(ag_in(o.t,o.arrow+0.15,0.6));
+  if(b>0.004){const top=row(0)-30,bot=row(2)+6,mid=(top+bot)/2,bx=cx-56;ctx.save();ctx.globalAlpha*=b;ctx.strokeStyle=rgba(LP.mut,1);ctx.lineWidth=3;
+    ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(bx-10,top);ctx.quadraticCurveTo(bx,top,bx,top+10);ctx.lineTo(bx,mid-10);
+    ctx.quadraticCurveTo(bx,mid,bx+10,mid);ctx.quadraticCurveTo(bx,mid,bx,mid+10);ctx.lineTo(bx,bot-10);ctx.quadraticCurveTo(bx,bot,bx-10,bot);ctx.stroke();
+    if(p>0.004){const x0=bx+10,x1=x0+(cx+40-x0)*p;ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x0,mid);ctx.lineTo(x1,mid);ctx.stroke();
+      if(p>0.6){const q=ag_in(p,0.6,0.4)*10;ctx.beginPath();ctx.moveTo(x1-q,mid-q*0.9);ctx.lineTo(x1,mid);ctx.lineTo(x1-q,mid+q*0.9);ctx.stroke();}}
+    ctx.restore();}
+  ctx.restore();return{x,y,w,h};}
+
 /* ---------------------------------------------------------------- a print of Kaifeng, on the team room's wall
    The opening's street with the canal's water in its trenches, the raft and the boat at the gate, kept once, in a timber frame on a
    paper mount. (x, y) its top left, w its width; o.a. */

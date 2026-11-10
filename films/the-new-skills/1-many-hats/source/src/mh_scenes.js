@@ -103,10 +103,12 @@ scene("question",(ctx,S,t,sc)=>{const c=sc.cues,w=(id,word,off)=>wAt(sc,id,word,
       mh_sheet(x,tt,w("ivy","Ivy",-0.1),1000,170,640,{kick:"Monday 1 March 2027",title:"Ivy Reyes",sub:"Graduate data analyst",lines:["Her depth: statistics"]},
         {light:"morning",u:ag_in(tt,w("depth","statistics",-0.1),0.5)});
       ivy(x,tt);}},
-    // Helena, and Ivy's first month
+    // Helena's two hats, two sides of one role (the author's advice, 10 November 2026), and Ivy's first month
     {at:c.helena-0.3,place:"mhMorning",keys:[[c.helena-0.3,960,540,1.0]],draw:(x,tt)=>{
-      mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Has worn many hats",lines:["Architect","Data lead","Product owner"]},
-        {light:"morning",out:c.month-0.5,u:mh_u(tt,[w("helena","architect",-0.1),w("helena","lead",-0.1),w("helena","product",-0.1)])});
+      mh_sheet(x,tt,c.helena+0.4,780,170,420,{kick:"The data manager",title:"Helena Novak",sub:"Two hats",lines:["Product owner, who thinks like an architect","People leader"]},
+        {light:"morning",out:c.role-0.5,u:mh_u(tt,[w("helena","product",-0.1),w("helena","people",-0.1)])});
+      const r0=w("role","managing",-0.2);if(tt>=r0)mh_sides(x,720,170,540,{t:tt,a:ag_in(tt,r0,0.35)*(1-ag_in(tt,c.month-0.5,0.4)),k:tt-r0,light:"morning",
+        left:[w("role","plans",-0.1),w("role","dates",-0.1),w("role","measures",-0.1)],right:w("role","people",-0.1),arrow:w("role","serve",-0.1)});
       mh_sheet(x,tt,w("month","month",-0.1),780,170,420,{kick:"Ivy's first month",lines:["Learn the team's work","Follow one real question through all of it"]},
         {col:LP.blue,light:"morning",u:mh_u(tt,[w("month","learn",-0.1),w("month","question",-0.1)])});
       ivy(x,tt);lp_person(x,"helena",1420,640,1.0,{t:tt,flip:true,light:mo});}},

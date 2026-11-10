@@ -314,6 +314,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 
 - [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
+- [A mandate, written and enforced](../films/from-helper-to-colleague/7-a-written-mandate/) — `a-written-mandate`
 
 ## Data management
 

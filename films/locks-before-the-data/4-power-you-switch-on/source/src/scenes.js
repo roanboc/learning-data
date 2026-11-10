@@ -44,8 +44,10 @@ function pw_shelf(ctx,v,o){PW_POWERS.forEach((l,i)=>{const q=o(i);if(!q)return;c
 // the shelf's power hanging from both everyday badges (p draws the lines on, a their opacity)
 const PW_SHELF_IN=[PW_T.S,PW_T.shelfY[1]+28];
 function pw_hangE(ctx,p,a){if(!(a>0)||!(p>0))return;ctx.save();ctx.globalAlpha*=a;for(const w of ["jun","sam"])pw_hang(ctx,pw_eR(w),PW_SHELF_IN,p);ctx.restore();}
-// someone in the dark takes one of Jun's accounts: a coral dotted line from above the frame into the top of its badge
-function pw_take(ctx,x,p,a){pw_reach(ctx,[x,-30],[x,PW_T.row.jun],p,{a});}
+// someone in the dark takes one of Jun's accounts: a coral tag, "Taken", comes down from above the frame on a dotted line, which
+// goes on into the top of the badge (p draws it on, a its opacity)
+function pw_take(ctx,x,p,a){if(!(p>0)||!(a>0))return;pw_reach(ctx,[x,-30],[x,PW_T.row.jun],p,{a});
+  dp_pill(ctx,x,lerp(-20,62,ag_eo(clamp(p/0.6,0,1))),"Taken","coral",{align:"center",a});}
 // Jun's daily work on his everyday account: green pills under its badge (a(i) each one's opacity; glow a green light under them)
 function pw_work(ctx,a,glow){let px=PW_T.E;["Code","Tests","Jobs"].forEach((s,i)=>{const w=dp_pill(ctx,px,352,s,"green",{a:a(i)});if(glow>0)dp_halo(ctx,px+w/2,340,90,"green",0.22*glow*a(i));px+=w+14;});}
 // Jun's passkey: a sealed card with its gold chip, under his admin badge (k springs it in)
@@ -165,7 +167,7 @@ scene("clock",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       const dial=ag_keys(t,[[tTurns,0],[tTurns+0.8,1.3],[tTurns+1.6,-0.5],[tTurns+2.4,0.8]]),slots=clamp((t-tTurns-0.1)/0.8,0,3);
       pw_door(ctx,V.x,V.y,V.r,{dial,slots,held:ag_in(t,tWont-0.2,0.5)*(1-ag_in(t,tShut,0.8)),cut:ag_in(t,tHolds-0.2,0.8),hours:9});
       dp_pill(ctx,1600,470,"Opens at 9:00","amber",{a:ag_in(t,tHolds+0.3,0.5)});
-      dp_card(ctx,72,170,480,{title:"Fitted on Tuesday",sub:"The robbers came on Friday"},{a:ag_in(t,tThree-0.2,0.5),k:ag_spr(t,tThree-0.2,0.6)});
+      ctx.save();setScreen(ctx,S);dp_card(ctx,72,170,480,{title:"Fitted on Tuesday",sub:"The robbers came on Friday"},{a:ag_in(t,tThree-0.2,0.5),k:ag_spr(t,tThree-0.2,0.6)});ctx.restore();
       const lu=clamp((t-tFled+0.2)/1.8,0,1);pw_lantern(ctx,lerp(470,-80,ag_sine(lu)),lerp(612,560,lu),ag_in(t,tTurns-0.3,0.4)*(1-ag_in(t,tFled+1.2,0.5)),{r:90,ring:18});
       const va=ag_in(t,tShut,0.5);if(va>0){dp_tick(ctx,1622,546,"green",ag_in(t,tShut,0.6));dp_pill(ctx,1656,560,"Vault held","green",{a:va});}}},
     // now, taking a banker from his home at night opens nothing: the windows warm, no rims; the lock sells in the thousands
@@ -176,12 +178,14 @@ scene("clock",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
     {at:tSame-0.4,place:"pwTeam",keys:[[0,960,540,1.0]],push:0,draw(ctx,t){const T=t+sc.start;
       pw_two(ctx,T);
       const rOut=1-ag_in(t,tShutU,0.6),off=ag_in(t,tShutU+0.2,1.2);
-      pw_hangE(ctx,ag_in(t,tGreat,0.8),1-off);
-      pw_everyday(ctx,"sam",{});pw_everyday(ctx,"jun",{coral:ag_in(t,tWho+0.8,0.4)*rOut});
-      pw_take(ctx,PW_TAKE_E,ag_in(t,tWho-0.1,1.0),rOut);
-      const on=ag_in(t,tGreat-0.2,0.6)*(1-off);
-      pw_day(ctx,PW_T.S,400,PW_T.sw,24*ag_in(t,tHour-0.1,2.4),{a:ag_in(t,tHour-0.3,0.4)*(1-off),label:"Every hour",la:ag_in(t,tHour+0.6,0.5)});
-      pw_shelf(ctx,0,i=>({a:ag_in(t,tGreat-0.2+i*0.15,0.5),k:ag_spr(t,tGreat-0.2+i*0.15,0.6),on,coral:ag_in(t,tAll-0.2+i*0.12,0.4)*rOut}));}}];
+      // the badges and the shelf leave before the title comes in over the room, so no word shows under it
+      withA(ctx,1-ag_in(t,br-0.7,0.6),()=>{
+        pw_hangE(ctx,ag_in(t,tGreat,0.8),1-off);
+        pw_everyday(ctx,"sam",{});pw_everyday(ctx,"jun",{coral:ag_in(t,tWho+0.8,0.4)*rOut});
+        pw_take(ctx,PW_TAKE_E,ag_in(t,tWho-0.1,1.0),rOut);
+        const on=ag_in(t,tGreat-0.2,0.6)*(1-off);
+        pw_day(ctx,PW_T.S,400,PW_T.sw,24*ag_in(t,tHour-0.1,2.4),{a:ag_in(t,tHour-0.3,0.4)*(1-off),label:"Every hour",la:ag_in(t,tHour+0.6,0.5)});
+        pw_shelf(ctx,0,i=>({a:ag_in(t,tGreat-0.2+i*0.15,0.5),k:ag_spr(t,tGreat-0.2+i*0.15,0.6),on,coral:ag_in(t,tAll-0.2+i*0.12,0.4)*rOut}));});}}];
   const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);
   const where=["Rochester, New York · 1874",null,"Great Barrington, Massachusetts · May 1875","Great Barrington, Massachusetts · May 1875",null,"The university"][si];
   if(where)pw_where(ctx,S,where,si===0?ag_in(t,0.9,0.6):si===5?ag_in(t,tSame+0.4,0.6)*(1-ag_in(t,br-0.6,0.4)):1);
@@ -198,11 +202,11 @@ scene("great",(ctx,S,t,sc)=>{const C=sc.cues;
     // the storage under it, every file in the clear; the back door; the admin settings; a table's history; the three powers by them
     {at:0,place:"pwPlat",keys:[[0,960,540,1.0]],push:0.015,draw(ctx,t){
       pw_catalog(ctx,ag_in(t,0.2,0.8),{glow:ag_io(t,tReq-0.2,tShows+0.4,0.4)});
-      const ma=ag_in(t,C.catalog+0.1,0.5)*(1-ag_in(t,tCant,0.6));
+      const ma=ag_in(t,C.catalog+0.1,0.5)*(1-ag_in(t,tStore-0.6,0.6));
       if(ma>0){const A=[M[0]+PW_P.bw,M[1]+75],B=[R[0]-R[2],R[1]];withA(ctx,ma,()=>{dp_link(ctx,A,B,"cyan",ag_in(t,tGoes-0.3,0.7));
         const u=(t-tReq)/1.0;if(u>0&&u<1)dp_halo(ctx,lerp(A[0],B[0],u),lerp(A[1],B[1],u),34,"cyan",0.9);});}
       pw_id(ctx,M[0],M[1],PW_P.bw,{a:ma,k:ag_spr(t,C.catalog+0.1,0.6),kind:"REGISTRAR'S OFFICE",name:"Mei Tanaka"});
-      const ta=ag_in(t,tGoes+0.2,0.6)*(1-ag_in(t,tCant,0.6)),tb=pw_table(ctx,...TB,{a:ta,k:ag_spr(t,tGoes+0.2,0.6)});
+      const ta=ag_in(t,tGoes+0.2,0.6)*(1-ag_in(t,tStore-0.6,0.6)),tb=pw_table(ctx,...TB,{a:ta,k:ag_spr(t,tGoes+0.2,0.6)});
       if(ta>0)dp_halo(ctx,tb.x+390,tb.y+140,240,"violet",0.22*ag_io(t,tMask-0.2,tMask+1.6,0.4)*ta);
       pw_store(ctx,ag_in(t,tStore-0.3,0.6),{file:ag_in(t,tNoMask-0.4,0.6)});
       // a file opened: every name and every date of birth, in the clear
@@ -262,7 +266,7 @@ scene("second",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
 scene("switched",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
   const tWhatFor=wAt(sc,"what","what for"),tRead=wAt(sc,"which","read the storage"),tChange=wAt(sc,"which","change the settings"),tRestore=wAt(sc,"which","restore a table"),tMove=sc.ends.which-0.2;
   const tWords=wAt(sc,"reason","in words"),tFour=wAt(sc,"time","four hours"),tSamOK=wAt(sc,"approves","Sam approves Jun's"),tNoOne=wAt(sc,"approves","no one approves");
-  const tOn=C.alert,tGets=wAt(sc,"alert","gets an alert"),tRec=wAt(sc,"recorded","is recorded"),tOwn=wAt(sc,"recorded","its own name"),tUp=C.off,tBy=wAt(sc,"off","switches off by itself"),tDone=wAt(sc,"off","as soon as");
+  const tOn=sc.ends.approves+0.4,tGets=wAt(sc,"alert","gets an alert"),tRec=wAt(sc,"recorded","is recorded"),tOwn=wAt(sc,"recorded","its own name"),tUp=C.off,tBy=wAt(sc,"off","switches off by itself"),tDone=wAt(sc,"off","as soon as");
   const tLock=C.lock,tHour=wAt(sc,"lock","at its hour"),tTask=wAt(sc,"task","only for a task"),tYes=wAt(sc,"task","someone else says yes");
   const tOut=wAt(sc,"slow","keeps them out"),tMin=wAt(sc,"costs","a minute"),tAYes=wAt(sc,"costs","a yes");
   const K=PW_T.card,P1=pw_cardTok();
@@ -288,8 +292,9 @@ scene("switched",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       pw_admin(ctx,"sam",{glow:ag_io(t,tSamOK-0.2,tNoOne,0.4)},vA);pw_admin(ctx,"jun",{on:lit},vA);
       // the shelf: only the one power the task needs goes into the card
       const glow=[tRead,tChange,tRestore];
-      pw_shelf(ctx,vS,i=>i===0&&mv>0?null:{on:0});
+      // each power glows as it is named, from under its token, so its words stay on their own glass
       PW_POWERS.forEach((l,i)=>{const p=pw_shelfXY(i,vS);dp_halo(ctx,p[0]+145,p[1]+28,190,"amber",0.22*ag_io(t,glow[i]-0.2,glow[i]+1.0,0.3)*(i===0?1-mv:1));});
+      pw_shelf(ctx,vS,i=>i===0&&mv>0?null:{on:0});
       card({a:ca,k:ag_spr(t,tWhatFor-0.3,0.6),on:lit,aR:ag_in(t,tWords-0.2,0.5),aT:ag_in(t,tFour-0.2,0.5),day:4*ag_in(t,tFour,1.0),aA:ag_in(t,tSamOK,0.5),tick:ag_in(t,tSamOK+0.3,0.6),
         left:t>=tUp-0.2&&t<tBy+0.6?1-ag_in(t,tUp,tBy+0.2-tUp):null});
       if(mv>0){const p=pw_tokAt(mv);pw_token(ctx,p[0],p[1],"Read the storage",{on:lit});}
@@ -312,8 +317,8 @@ scene("switched",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
       card({gP:ag_io(t,tTask-0.2,tYes-0.4,0.4),gR:ag_io(t,tMin-0.2,tMin+1.2,0.4),gA:Math.max(ag_io(t,tYes-0.2,tYes+1.4,0.4),ag_io(t,tAYes-0.2,tAYes+1.4,0.4))});
       pw_token(ctx,P1[0],P1[1],"Read the storage",{});dp_pill(ctx,P1[0]+306,P1[1]+40,"Off","grey",{});
       pw_team(ctx,{a:1-out,alert:["Power switched on","Jun Park (admin)"],al:1});record(1-out,[1,1,1]);
-      dp_pill(ctx,K[0],500,"Kept out too","coral",{a:ag_in(t,tOut,0.5)});
-      dp_slip(ctx,K[0],560,"1 minute · 1 yes","grey",{ink:true,a:ag_in(t,tMin-0.3,0.5)});}}];
+      dp_pill(ctx,PW_T.A2+PW_T.bw/2,366,"Kept out too","coral",{align:"center",a:ag_in(t,tOut,0.5)});
+      dp_slip(ctx,K[0]+K[2]/2,470,"1 minute · 1 yes","grey",{align:"center",ink:true,a:ag_in(t,tMin-0.3,0.5)});}}];
   const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);
   pw_kick(ctx,S,si===1?0:1);});
 
@@ -359,7 +364,7 @@ scene("morning",(ctx,S,t,sc)=>{const C=sc.cues;
       pw_fileView(ctx,230,290,860,{a:ag_in(t,tOpens+0.8,0.5)*(1-ag_in(t,tOffS,0.6)),k:ag_spr(t,tOpens+0.8,0.6),run:clamp((t-tStraight+0.2)/2.2,0,1),hot:ag_in(t,tThirty-0.2,0.5)});
       pw_office(ctx,ag_in(t,tTells-0.1,0.5),{k:ag_spr(t,tTells-0.1,0.6)});
       const nu=ag_sine(clamp((t-tWhich)/1.4,0,1)),na=ag_in(t,tWhich-0.3,0.4);
-      dp_card(ctx,lerp(560,1475,nu),lerp(420,170,nu),380,{title:"Fix S-21877",sub:"Date of birth"},{a:na,k:ag_spr(t,tWhich-0.3,0.5)});
+      dp_card(ctx,lerp(1120,1475,nu),lerp(400,170,nu),380,{title:"Fix S-21877",sub:"Date of birth"},{a:na,k:ag_spr(t,tWhich-0.3,0.5)});
       dp_slip(ctx,660,400,"Switched off · 09:19 · 14 minutes","grey",{align:"center",ink:true,a:ag_in(t,tFourteen-0.4,0.5)});}},
     // the record keeps it all: who switched on, why, who said yes, what was read, and when it ended
     {cut:true,at:tRec-0.3,place:"pwTeam",keys:[[0,960,540,1.0]],push:0.01,draw(ctx,t){const T=t+sc.start;
@@ -444,7 +449,8 @@ scene("hour",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
     // on the platform, the right account isn't enough either: its power is off until it's switched on for a task, and someone else
     // says yes; whoever takes Jun's everyday account gets his everyday work, and nothing more; great power is a separate account
     {at:tAcc-0.4,place:"pwTeam",keys:[[0,960,540,1.0]],push:0.01,draw(ctx,t){const T=t+sc.start;
-      const fin=ag_in(t,br-0.9,0.8),opn=ag_io(t,tTask-0.2,tYes+1.6,0.5);
+      // after the last line, in the quiet before the end card: Jun's power switched on for a task, held a moment, and off again
+      const tEnd=sc.ends.great,fin=ag_in(t,br-0.9,0.8),opn=Math.max(ag_io(t,tTask-0.2,tYes+1.6,0.5),ag_in(t,tEnd+0.2,0.5)*(1-ag_in(t,tEnd+1.9,0.5)));
       pw_two(ctx,T);
       withA(ctx,1-fin,()=>{
         pw_everyday(ctx,"sam",{icons:1});pw_everyday(ctx,"jun",{icons:1,coral:ag_io(t,tTakes+0.8,tGreat-0.2,0.4)});
@@ -458,7 +464,8 @@ scene("hour",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
         dp_pill(ctx,1590,150,"A task","amber",{a:ag_io(t,tTask-0.2,tYes+1.6,0.4)});dp_pill(ctx,1740,150,"A yes","green",{a:ag_io(t,tYes-0.2,tYes+1.6,0.4)});
         for(const w of ["jun","sam"]){const p=pw_adminXY(w,0);dp_halo(ctx,p[0]+200,p[1]+75,300,"amber",0.18*ag_in(t,tSep-0.2,0.6));}});}}];
   const si=ag_shots(ctx,S,t,sc.dur,shots,0.6);
-  if(si===0)pw_where(ctx,S,"Great Barrington, Massachusetts · 1875",ag_in(t,0.9,0.6));
+  // the place's name leaves with its shot, over the dissolve into the team room
+  pw_where(ctx,S,"Great Barrington, Massachusetts · 1875",ag_in(t,0.9,0.6)*(1-ease(clamp((t-shots[1].at)/0.6,0,1))));
   pw_kick(ctx,S,si>=1?ag_in(t,tAcc+0.3,0.6)*(1-ag_in(t,br-0.6,0.5)):0);
   dp_end(ctx,S,t,br,PW_TITLE,"Great power is a separate account, switched on for a task.","Film 4 of 9","Locks before the data");});
 

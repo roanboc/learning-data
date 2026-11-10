@@ -22,7 +22,7 @@ const PW_T={jun:[222,770,0.95],sam:[452,748,0.9],bw:400,bh:150,row:{jun:130,sam:
   E:640,A:1110,S:1580,sw:290,shelfY:[177,249,321],A2:640,shelfY2:[600,672,744],lock1:[1075,205],lock2:[1545,205],
   card:[1110,96,740],team:[1110,450,740,196],rec:[1110,670,740,206]};
 // the platform's room
-const PW_P={ring:[1080,214,270,56],table:[790,300,580],mei:[72,260],clara:[72,500],bw:400,store:[440,640,860,170],door:[1320,600,92,240],
+const PW_P={ring:[1080,214,270,56],table:[790,300,600],mei:[72,232],clara:[72,470],bw:400,store:[440,640,860,170],door:[1320,600,92,240],
   settings:[1450,96,430,262],history:[1450,444,430,196],office:[1450,96,430,250]};
 const PW_POWERS=["Read the storage","Admin settings","Restore a table"];
 
@@ -30,22 +30,23 @@ const PW_POWERS=["Read the storage","Admin settings","Restore a table"];
    pw_id(ctx, x, y, w, o): a badge of glass, 150 tall: its kind on a band of the identity's cyan ("EVERYDAY ACCOUNT", "ADMIN ACCOUNT",
    or o.kind), a person drawn in light, the name (o.name), and for an admin account a thin amber outline that brightens while its
    power is on (o.amber 0 to 1, o.on 0 to 1); o.coral a coral rim (taken, or kept out); o.glow a cyan glow (named, or chosen); o.k springs
-   it in; o.icons draws the account's email and the web on it (0 to 1), o.iconCross strikes them out */
+   it in; o.icons draws the account's email and the web at its right end, one over the other (0 to 1), o.iconCross strikes them out */
 function pw_id(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=150;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,clamp(o.k,0,1.15)));
   const on=clamp(o.on||0,0,1),am=clamp(o.amber||0,0,1);if(on>0)dp_halo(ctx,x+w/2,y+h/2,w*0.75,"amber",0.16*on);if(o.glow>0)dp_halo(ctx,x+w/2,y+h/2,w*0.7,"cyan",0.16*o.glow);
   dp_panel(ctx,x,y,w,h,{col:"cyan",r:20,glowA:0.8});dp_band(ctx,x,y,w,46,20,"cyan",o.kind||"EVERYDAY ACCOUNT");
   ctx.save();ctx.translate(x+62,y+104);ctx.scale(0.6,0.6);dp_personPic(ctx,0,4,"cyan");ctx.restore();
   if(o.name)dp_T(ctx,o.name,x+118,y+114,{w:700,size:34});
-  if(o.icons>0)pw_mailWeb(ctx,x+w-104,y+100,o.icons,o.iconCross);
+  if(o.icons>0)pw_mailWeb(ctx,x+w-48,y,o.icons,o.iconCross);
   if(am>0){ctx.save();ctx.globalAlpha*=am;ctx.shadowColor=rgba(DP.F.amber,0.5+0.5*on);ctx.shadowBlur=10+14*on;ctx.strokeStyle=rgba(mix(DP.F.amber,[255,255,255],0.2*on),1);ctx.lineWidth=3+2*on;rr(ctx,x-6,y-6,w+12,h+12,25);ctx.stroke();ctx.restore();}
   if(o.coral>0){ctx.save();ctx.globalAlpha*=clamp(o.coral,0,1);ctx.shadowColor=rgba(DP.F.coral,0.8);ctx.shadowBlur=14;ctx.strokeStyle=rgba(DP.F.coral,1);ctx.lineWidth=4;rr(ctx,x-12,y-12,w+24,h+24,30);ctx.stroke();ctx.restore();}
   ctx.restore();}
-// an envelope and a link, drawn in light: email and the web (a from 0 to 1; cross 0 to 1 strikes them in coral)
-function pw_mailWeb(ctx,x,y,a,cross){if(!(a>0))return;ctx.save();ctx.globalAlpha*=a;const c=DP.T.mut;ctx.strokeStyle=rgba(c,1);ctx.lineWidth=3;ctx.lineJoin="round";ctx.lineCap="round";
-  rr(ctx,x-24,y-18,48,34,5);ctx.stroke();ctx.beginPath();ctx.moveTo(x-22,y-15);ctx.lineTo(x,y+2);ctx.lineTo(x+22,y-15);ctx.stroke();
-  const lx=x+58;ctx.save();ctx.translate(lx,y);ctx.rotate(-0.7);rr(ctx,-24,-8,28,16,8);ctx.stroke();rr(ctx,-4,-8,28,16,8);ctx.stroke();ctx.restore();
+// an envelope over a link, drawn in light at a badge's right end: email and the web (x their middle, y the badge's top; a from 0 to 1;
+// cross 0 to 1 strikes them both out in coral). One over the other, so the longest name still has room beside them
+function pw_mailWeb(ctx,x,y,a,cross){if(!(a>0))return;ctx.save();ctx.globalAlpha*=a;const c=DP.T.mut;ctx.strokeStyle=rgba(c,1);ctx.lineWidth=2.6;ctx.lineJoin="round";ctx.lineCap="round";
+  const ey=y+80;rr(ctx,x-20,ey-14,40,28,4);ctx.stroke();ctx.beginPath();ctx.moveTo(x-18,ey-12);ctx.lineTo(x,ey+2);ctx.lineTo(x+18,ey-12);ctx.stroke();
+  ctx.save();ctx.translate(x,y+122);ctx.rotate(-0.7);rr(ctx,-21,-7,24,14,7);ctx.stroke();rr(ctx,-3,-7,24,14,7);ctx.stroke();ctx.restore();
   if(cross>0){ctx.globalAlpha*=clamp(cross,0,1);ctx.strokeStyle=rgba(DP.F.coral,1);ctx.shadowColor=rgba(DP.F.coral,0.8);ctx.shadowBlur=8;ctx.lineWidth=4;
-    ctx.beginPath();ctx.moveTo(x-34,y+26);ctx.lineTo(lx+34,y-28);ctx.stroke();}
+    ctx.beginPath();ctx.moveTo(x-26,y+142);ctx.lineTo(x+26,y+58);ctx.stroke();}
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the tokens of great power
@@ -125,9 +126,9 @@ function pw_catalog(ctx,a,o){o=o||{};if(!(a>0))return;const [cx,cy,rx,ry]=PW_P.r
 // a table seen through the catalog: its name, its columns, and a row, the personal columns under violet frost unless o.clear
 function pw_table(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[["S-20412","Samuel Osei","14 May 1987"]],h=118+rows.length*60;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,clamp(o.k,0,1.15)));dp_panel(ctx,x,y,w,h,{col:o.col||"cyan",r:20});dp_T(ctx,o.title||"Learners",x+28,y+48,{w:700,size:32});
-  const cols=[x+28,x+200,x+372];["Student","Name","Date of birth"].forEach((s,i)=>dp_T(ctx,s,cols[i],y+96,{w:600,size:28,col:"mut"}));
+  const cols=[x+28,x+182,x+390];["Student","Name","Date of birth"].forEach((s,i)=>dp_T(ctx,s,cols[i],y+96,{w:600,size:28,col:"mut"}));
   rows.forEach((r,j)=>{const by=y+150+j*60;dp_T(ctx,r[0],cols[0],by,{w:700,size:28});for(let i=1;i<3;i++){if(o.clear)dp_T(ctx,r[i],cols[i],by,{w:700,size:28,col:o.hot===i?"coral":"ink"});
-    else dp_frost(ctx,cols[i]-6,by-32,i===1?150:180,42,c=>dp_T(c,r[i],cols[i],by,{w:700,size:28}),{r:10});}});
+    else dp_frost(ctx,cols[i]-6,by-32,i===1?172:178,42,c=>dp_T(c,r[i],cols[i],by,{w:700,size:28}),{r:10});}});
   ctx.restore();return{x,y,w,h};}
 // the storage: a long channel of frosted glass, its files in a row (o.file lights one: last night's file, the tenth)
 const PW_FILE=[PW_P.store[0]+40+9*66+22,PW_P.store[1]+72+33];

@@ -6,7 +6,7 @@
 -- Each row is a column to look at: a count may rightly hold no class, but a code made after the
 -- source should be made once, at the source, by its owner, and taken from there. Lineage records
 -- what the platform can infer, on the platform: a copy made elsewhere isn't in it. Databricks only
--- (docs/databricks-governance.md, section 15). Here: every table in the catalog the project builds into.
+-- (docs/databricks-governance.md, section 16). Here: every table in the catalog the project builds into.
 -- Compile it, then run the SQL in target/compiled/ on a SQL warehouse:
 --
 --     dbt compile --target databricks --select classes_against_lineage --profiles-dir .

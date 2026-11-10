@@ -11,10 +11,10 @@ think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar
   "name":{stop:"blueprint",q:"dbt te muestra un archivo llamado modelo. ¿Qué contiene en realidad?",
     opts:[{t:"El modelo de datos: lo que los datos deben ser.",near:true},{t:"La tabla misma, con sus columnas y sus filas."},{t:"Una consulta: un paso que hace una tabla o una vista.",ok:true}],
     why:"Un modelo de dbt es un SELECT y su configuración: un paso de la obra. El modelo de datos es lo que esa tabla debe ser, declarado a su lado."},
-  "lives":{stop:"lives",q:"Necesitas saber qué significa una fila de una tabla. ¿Dónde miras?",
+  "lives":{q:"Necesitas saber qué significa una fila de una tabla. ¿Dónde miras?",
     opts:[{t:"En su YAML (la granularidad, la clave, el contrato) y en el modelo conceptual a su lado.",ok:true},{t:"Solo en su YAML: la granularidad, la clave y el contrato dicen todo lo que significa una fila.",near:true},{t:"En el SQL que la construye, porque la consulta decide qué contiene cada fila."}],
     why:"El SQL dice cómo se hace la tabla, no qué debe ser una fila. La granularidad y las claves se declaran en el YAML del modelo, y el significado en el modelo conceptual del dominio, junto al código."},
-  "steps":{stop:"steps",q:"Un agente redacta tus pruebas y tu SQL. ¿Qué sigue siendo tuyo?",
+  "steps":{q:"Un agente redacta tus pruebas y tu SQL. ¿Qué sigue siendo tuyo?",
     opts:[{t:"Escribir el mensaje del commit, porque los borradores y las pruebas del agente llevan todo lo demás."},{t:"Aprobar: el significado, el contrato y el cambio. El agente redacta y comprueba, con evidencia.",ok:true},{t:"Comprobar: vuelves a correr tú las pruebas del agente, y si pasan, el cambio puede entrar.",near:true}],
     why:"El agente recomienda; las personas aprueban. Redactar ya es barato; juzgar el borrador, y ser dueño del significado, sigue siendo el trabajo."}
   }}};

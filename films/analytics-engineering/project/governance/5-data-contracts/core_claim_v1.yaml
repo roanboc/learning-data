@@ -168,4 +168,5 @@ customProperties:
   value: core_claim_v1
 - property: consumers
   value:
+  - product hours_to_pay
   - product payroll_export

@@ -81,6 +81,7 @@
 | Why Unity Catalog and Unity Gateway govern them | 315 | 0% | 0 | 28.3 | Drawn to the rule |
 | Context and memory, governed | 393 | 0% | 0 | 28.2 | Drawn to the rule |
 | Scripts became software | 269 | 0% | 0 | 28.0 | Drawn to the rule |
+| A platform that watches itself | 327 | 0% | 0 | 28.3 | Drawn to the rule |
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
 | One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |

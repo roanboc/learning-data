@@ -11,6 +11,7 @@ Four ideas to lead a data team by, one in each film, each taught from its own so
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [The team comes first](https://data.learn-all.org/leading-a-data-team/the-team-first/) | A team that holds | 9½ min | 7 | 3 questions | [script](3-the-team-first/script.md) · [source](3-the-team-first/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

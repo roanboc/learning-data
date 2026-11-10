@@ -84,3 +84,30 @@ decisions:
     status: agreed
     implemented_in: [mart_finance__casual_claims, casual_teaching_cost]
     relates_to: [DEC-FIN-04, LIM-FIN-04]
+
+  - id: DEC-FIN-06
+    step: operate_and_evolve
+    title: Every reader reads casual teaching cost where it's defined, as the person it acts for or as itself, with only what it may see
+    text: Casual teaching cost is read from the metric view casual_teaching_cost by every reader, each
+      written down as an exposure with its owner. Genie One reads it through the data team's Genie Agent,
+      as the person asking. Finance's budget pack, a Power BI report, reads it through the Azure Databricks
+      connector in DirectQuery, with a native query that asks for MEASURE(casual_teaching_cost), and single
+      sign-on, so each analyst reads as themselves. The faculties' planning app reads as the person using
+      it, with the sql scope only. Finance's pay-day agent works as a service principal of its own,
+      finance-payday-agent, with EXECUTE on Genie One's MCP server and SELECT on the metric view, never on
+      the claims; it drafts and Rohan sends. Who reads which faculty is a row filter on
+      mart_finance__casual_claims, in Unity Catalog, so it holds through the metric view for every reader.
+      Outside, a group of universities reads mart_finance__faculty_totals through the OpenSharing share
+      teaching_costs, totals by faculty for the teaching periods Finance has reported (reported_periods),
+      never by unit. Microsoft Fabric's mirror holds only what every reader there may see.
+    why: On pay day, 5 November 2026, Genie One gave the Faculty of Health A$1.84 million so far this
+      semester, and the budget pack A$1.56 million under the same name. Built through the Fabric mirror,
+      where metric views don't appear, the report had summed the pay paid; and through the mirror every
+      query runs as the one sign-in that set it up, so the catalog's rights stay behind. A rule kept where
+      the data lives holds for every reader, however it reads, and no reader's code has to repeat it. A
+      unit with one tutor would give away that tutor's pay, so only totals by faculty go outside.
+    decided_by: Noor, data architect, with Rohan Desai, Finance, and Ingrid Holm, HR
+    decided_on: 2026-11-05
+    status: agreed
+    implemented_in: [mart_finance__casual_claims, mart_finance__faculty_totals, reported_periods, faculty_row_filter.sql]
+    relates_to: [DEC-FIN-05, LIM-FIN-04]

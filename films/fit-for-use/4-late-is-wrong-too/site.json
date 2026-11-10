@@ -1,0 +1,99 @@
+{
+  "kicker": "Timeliness",
+  "kicker_es": "Puntualidad",
+  "title_es": "Tarde también es un error",
+  "h1": "Late is wrong too: one list, three clocks",
+  "h1_es": "Tarde también es un error: una lista, tres relojes",
+  "lead": "On Wednesday night, 17 June 2026, the student system's nightly file didn't come. The graduation list was built from the night before's: every check green, and 23 graduates missing. Malia Fonoti, Sam Okafor and Mei Tanaka agree how fresh each use needs it, and the list starts saying its age.",
+  "lead_es": "La noche del miércoles 17 de junio de 2026, no llegó el archivo nocturno del sistema de estudiantes. La lista de graduación se hizo con el anterior: todo en verde, y faltaban 23 graduados. Malia Fonoti, Sam Okafor y Mei Tanaka acuerdan cuán fresca la necesita cada uso, y la lista dice su antigüedad.",
+  "description": "A film about timeliness, the last of Fit for use: in November 1970, a cyclone came ashore on the coast of East Pakistan, now Bangladesh, and the radio broadcast a great danger signal that meant little on the islands, where most people knew a storm was coming and almost nobody took shelter; at least 300,000 people died. From 1972, the Cyclone Preparedness Programme's volunteers, from the coast's own villages, carried each warning the last mile, house to house, with flags everyone could read, and in 2007 Cyclone Sidr, with winds as strong, killed about one for every hundred. At the university, on Wednesday night, 17 June 2026, the student system's nightly file didn't come, and the graduation list was built from the night before's: 689 graduates, every check green, even the check against the exam boards' lists, which were a day old too, and 23 graduates missing. On Thursday at 8 am, Sam Okafor saw the student system's tables late in Databricks' monitoring, and dbt's freshness check said thirty hours; Malia Fonoti held the send, and the list went at 3:20 pm with 712. The December before, six graduates were left off the same way, and nobody saw. On Monday, Malia, Sam and Mei Tanaka, who owns the list, agree how fresh each use needs it: the certificates that night's files at the send, seating a few days, Planning weeks; the strictest sets the level, a day old at most at the send, the list's first timeliness rule. Every row now says its sources' age, shown first in the printer's file. dbt checks the age at each source, on when each file arrived; in Lakeflow Jobs, the night's update warns when the check fails and still builds the list, and the send to the printer waits until the list is fresh. The data isn't stopped; the send is.",
+  "description_es": "Una película sobre la puntualidad, la última de Apto para su uso: en noviembre de 1970, un ciclón tocó tierra en la costa de Pakistán Oriental, hoy Bangladés, y la radio emitió una señal de gran peligro que significó poco en las islas, donde la mayoría sabía que venía una tormenta y casi nadie buscó refugio; murieron al menos 300.000 personas. Desde 1972, los voluntarios del Programa de Preparación ante Ciclones, de las propias aldeas de la costa, llevaron cada aviso la última milla, casa por casa, con banderas que todos podían leer, y en 2007 el ciclón Sidr, con vientos igual de fuertes, mató a cerca de uno por cada cien. En la universidad, el miércoles 17 de junio de 2026 por la noche, el archivo nocturno del sistema de estudiantes no llegó, y la lista de graduación se construyó con el de la noche anterior: 689 graduados, todos los controles en verde, incluso el control contra las listas de las juntas de examen, que también eran del día anterior, y faltaban 23 graduados. El jueves a las 8, Sam Okafor vio en el monitoreo de Databricks que las tablas del sistema de estudiantes estaban atrasadas, y el control de frescura de dbt dijo treinta horas; Malia Fonoti detuvo el envío, y la lista salió a las 15:20 con 712. El diciembre anterior, seis graduados quedaron fuera de la misma forma, y nadie lo vio. El lunes, Malia, Sam y Mei Tanaka, a cargo de la lista, acuerdan cuán fresca la necesita cada uso: los diplomas, los archivos de esa noche al enviarla; los asientos, unos días; Planificación, semanas; el más estricto fija el nivel, un día como máximo al enviarla, la primera regla de puntualidad de la lista. Cada fila dice ahora la antigüedad de sus fuentes, a la vista primero en el archivo para la imprenta. dbt revisa la antigüedad en cada fuente, según cuándo llegó cada archivo; en Lakeflow Jobs, la actualización nocturna avisa cuando el control falla y construye la lista igual, y el envío a la imprenta espera hasta que la lista esté fresca. No se detienen los datos; se detiene el envío.",
+  "card": "The night's file didn't come, every check passed, and 23 graduates were missing. Agree how fresh, and say how old.",
+  "card_es": "El archivo de la noche no llegó, todo pasó, y faltaban 23 graduados. Acuerda cuán frescos, y di su antigüedad.",
+  "chapters_es": {
+    "story": "La última milla",
+    "green": "Todo en verde",
+    "hours": "Treinta horas",
+    "fresh": "Cuán fresca, y para qué",
+    "age": "Di su antigüedad",
+    "stop": "Primero avisa, luego detén el envío",
+    "time": "A tiempo"
+  },
+  "past": [
+    "Bangladesh, 1970 to 2007: a cyclone warning's last mile",
+    "In 1970, a great danger signal meant little on the islands, and almost nobody took shelter. From 1972, village volunteers carried each warning the last mile, with flags everyone could read."
+  ],
+  "past_es": [
+    "Bangladés, de 1970 a 2007: la última milla de un aviso de ciclón",
+    "En 1970, una señal de gran peligro significó poco en las islas, y casi nadie buscó refugio. Desde 1972, voluntarios de las aldeas llevaron cada aviso la última milla, con banderas que todos podían leer."
+  ],
+  "next_h": "You've seen a list that says how old it is, and a send that waits until it's fresh. Next, Quality as a habit: the hidden work behind every list.",
+  "next_h_es": "Viste una lista que dice su antigüedad, y un envío que espera hasta que esté fresca. Después, La calidad como hábito: el trabajo oculto tras cada lista.",
+  "repo": {
+    "green": [
+      "data/student_system/nightly_files.csv"
+    ],
+    "hours": [
+      "sources/student_system/_student_system__sources.yml"
+    ],
+    "fresh": [
+      "models/marts/graduations/_graduations__models.yml",
+      "governance/4-data-products/graduation_list.yml"
+    ],
+    "age": [
+      "models/marts/graduations/mart_graduations__graduation_list.sql"
+    ],
+    "stop": [
+      "sources/portal/_portal__sources.yml",
+      "examples/a-late-file/README.md"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film shows what each tool checks; the docs show how, and stay up to date as the tools change. Checked on 10 November 2026.",
+    "p_es": "La película muestra qué revisa cada herramienta; la documentación muestra cómo, y se mantiene al día a medida que cambian las herramientas. Revisada el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "freshness in dbt",
+        "title_es": "freshness en dbt (en inglés)",
+        "line": "How dbt tells how old a source is, from when its data arrived, and the age at which it warns or fails.",
+        "line_es": "Cómo dbt sabe la antigüedad de una fuente, según cuándo llegaron sus datos, y a qué edad avisa o falla.",
+        "href": "https://docs.getdbt.com/reference/resource-properties/freshness",
+        "href_es": "https://docs.getdbt.com/reference/resource-properties/freshness"
+      },
+      {
+        "title": "Anomaly detection",
+        "title_es": "Detección de anomalías",
+        "line": "How Databricks learns when each table usually arrives, and shows which are late, as Sam saw that Thursday.",
+        "line_es": "Cómo Databricks aprende cuándo suele llegar cada tabla, y muestra cuáles están atrasadas, como vio Sam ese jueves.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-quality-monitoring/anomaly-detection/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-quality-monitoring/anomaly-detection/"
+      },
+      {
+        "title": "Task dependencies in Lakeflow Jobs",
+        "title_es": "Dependencias de tareas en Lakeflow Jobs",
+        "line": "How a task runs only if the ones before it succeeded, or once they're all done, as the send and the night's update do.",
+        "line_es": "Cómo una tarea se ejecuta solo si las anteriores tuvieron éxito, o cuando todas terminaron, como el envío y la actualización nocturna.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/jobs/run-if",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/jobs/run-if"
+      },
+      {
+        "title": "Notifications on a job",
+        "title_es": "Notificaciones en un trabajo",
+        "line": "How a task that fails tells the people who need to know, as the freshness check tells Sam and Malia.",
+        "line_es": "Cómo una tarea que falla avisa a quienes necesitan saberlo, como el control de frescura avisa a Sam y a Malia.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/jobs/notifications",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/jobs/notifications"
+      },
+      {
+        "title": "Service levels in the Open Data Contract Standard",
+        "title_es": "Los niveles de servicio en el Open Data Contract Standard (en inglés)",
+        "line": "How a data contract writes how fresh a product must be, as the list's 24 hours at the send.",
+        "line_es": "Cómo un contrato de datos escribe cuán fresco debe estar un producto, como las 24 horas de la lista al enviarla.",
+        "href": "https://bitol-io.github.io/open-data-contract-standard/latest/service-level-agreement/",
+        "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/service-level-agreement/"
+      }
+    ]
+  }
+}

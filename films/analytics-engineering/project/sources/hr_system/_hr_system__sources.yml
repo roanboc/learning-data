@@ -49,3 +49,20 @@ sources:
             description: The contract ID HR issues, like T-26041.
           - name: pay_type
             description: '{{ doc("pay_type") }}'
+      - name: wishes
+        description: >
+          One row per version of a staff member's answer about being contacted for one purpose,
+          like news of tutoring work: yes or no, the day they gave it and how. HR records it on the
+          person's record, so every list made from HR's records follows it. It stands in for the
+          person's wishes on the person until the project has a person hub. The system key is the
+          staff ID and the purpose.
+        config:
+          meta:
+            system_key: [staff_id, purpose]
+        columns:
+          - name: staff_id
+            description: The staff ID HR issues, like E-4417.
+          - name: purpose
+            description: '{{ doc("wish_purpose") }}'
+          - name: answer
+            description: '{{ doc("wish_answer") }}'

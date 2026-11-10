@@ -64,7 +64,7 @@ python scripts/generate/definitions.py --check   # the doc blocks match the conc
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
 python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners in the metadata
-python scripts/generate/products.py --check      # the products' contracts and descriptors match the models
+python scripts/generate/products.py --check      # the descriptors are up to date; each enterprise contract matches its model
 python scripts/generate/scorecard.py             # the scorecard, from the build above
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
 python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests, descriptions
@@ -157,7 +157,7 @@ for, and *When nobody knows the answer*, at the end, what its checks can say.
 ## Context and memory are data
 
 What you read shapes what you do. This page, the skills, the models' descriptions, the contracts,
-the glossary's definitions and the data rules each have an owner, who reviews every change to them.
+the glossary's definitions and the data rules each have an owner, who decides them; the data team reviews the code.
 
 - **What's governed comes first.** Read the glossary's definitions and the data rules first, and the
   team's memory second: the platform keeps it, and nobody approves each line ([`memory/`](memory/)).

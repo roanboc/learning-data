@@ -1,0 +1,67 @@
+{
+  "key": "the-map-enforced",
+  "title": "The map, enforced",
+  "sub": "Film 5 of 7 of From helper to colleague: the map says what an agent may do, and every tool holds it to that. All year, Jun's helper drafted Planning's changes on his own sign-in, so every change said Jun, and it could do whatever he could. The planning agent has its own name in every tool, a service principal in Databricks, an App in GitHub and the same sign-in in dbt, with no secret it can see or leak. A script writes its rights into each tool from its place on the map, a check finds a right the map doesn't hold, and it works in a place of its own, under its own name in every log, with a switch that stops it alone.",
+  "howto": "The film is drawn in the module's marble and oak. Its colours mean the same in every film: blue is tools and structure (the map, the tools, the group and its grants, the locks), violet the model and what an agent does (its band, its own lines in a log), orange data coming back, green a check that passes, and amber something wrong (the changes nobody could place, a right the map doesn't hold, a call refused). The agents look alike: each wears its badge, with its name on it.",
+  "src": [
+    "marks.js",
+    "pieces.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "whose",
+    "three",
+    9.2
+  ],
+  "logos": true,
+  "say": [
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bAnil's\\b",
+      "Unnil's"
+    ],
+    [
+      "\\bNoor's\\b",
+      "Nuur's"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bLucía\\b",
+      "Lu-ceeah"
+    ],
+    [
+      "\\bMei's\\b",
+      "May's"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bdbt\\b",
+      "dee bee tee"
+    ],
+    [
+      "\\bJun's\\b",
+      "Joon's"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "whose"
+  ],
+  "urgent": []
+}

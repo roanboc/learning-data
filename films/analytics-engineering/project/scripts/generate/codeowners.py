@@ -12,6 +12,8 @@ change touches (scripts/check/impact.py).
     map, products, contracts, standards     (the directory, the architecture tool, the catalogue)
     governance's check and its tests        data governance and the data architect (DEC-PRJ-12)
     the team's memory, memory/              data governance, which owns the memory as a whole
+    each agent's settings, agents/          the platform team, which applies them; the script that
+                                            writes them, the platform team and the data architect
 
 Every owner the metadata names must still be in governance/2-owners/owners.yml, so the impact
 check can reach them: an owner that isn't there stops the script.
@@ -106,6 +108,13 @@ def main():
 
     rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
+
+    # Each agent's settings in the tools, which scripts/generate/agents.py writes from the map: the platform team
+    # applies them, and the script that writes them reads the data architect's map. An agent's owner answers for
+    # its work, and doesn't review pull requests.
+    rules.append((None, None, "Each agent's settings in the tools, written from the map: the platform team"))
+    rules.append(("/agents/", reach("Sam, platform team"), None))
+    rules.append(("/scripts/generate/agents.py", reach("Sam, platform team") + [reviewers["model"]], None))
 
     if unknown:
         raise SystemExit(f"{REGISTER.relative_to(ROOT)} doesn't say how to reach: {', '.join(sorted(unknown))}. "

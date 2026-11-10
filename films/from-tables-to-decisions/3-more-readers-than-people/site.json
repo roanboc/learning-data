@@ -28,6 +28,28 @@
   ],
   "next_h": "You've seen one definition read by people, reports, an app, an agent and a partner, each as itself. Next: files, read as data and as context.",
   "next_h_es": "Viste una definición leída por personas, reportes, una app, un agente y un socio, cada uno con su identidad. Después: los archivos, leídos como datos y como contexto.",
+  "repo": {
+    "door": [
+      "models/marts/finance/casual_teaching_cost.sql",
+      "examples/more-readers-than-people/budget_pack.sql"
+    ],
+    "app": [
+      "macros/finance/faculty_row_filter.sql",
+      "examples/more-readers-than-people/tutor_planning_app.md"
+    ],
+    "agent": [
+      "examples/more-readers-than-people/finance_payday_agent.md"
+    ],
+    "share": [
+      "models/marts/finance/mart_finance__faculty_totals.sql",
+      "seeds/reference/finance/reported_periods.csv",
+      "examples/more-readers-than-people/faculty_totals_share.sql"
+    ],
+    "close": [
+      "exposures/finance/_finance__exposures.yml",
+      "examples/more-readers-than-people/README.md"
+    ]
+  },
   "elsewhere": {
     "h": "Go further in the official docs",
     "h_es": "Más en la documentación oficial",

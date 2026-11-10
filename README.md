@@ -6,7 +6,7 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-The site has ten big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
+The site has eleven big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
 
 | Topic | Films and series | For |
 |---|---|---|
@@ -51,7 +51,7 @@ flowchart TB
 ## How the site is organised
 
 - **Header, the same on every page:** *Start here · Topics · Making of*, then *EN/ES*, and icon links to learn-all.org and to the author on LinkedIn; every link stays visible on phones. It is made in one place, `header()` in `site-tools/build_series.py`, for every page: the series' pages, the hand-written pages listed in `HAND_PAGES` (it writes over their header) and the Markdown pages. Change it there and run `build_series.py` and `build_pages.py`, never on a page. The footer's one link is the source on GitHub. The header never lists a film's own steps. The Topics link is marked as current on every page under a topic.
-- **Topics:** ten big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Modern data basics*, *Analytics engineering*, *Data quality*, *Enterprise architecture*, *Master and reference data*, *Data governance*, *Data protection and privacy* and *AI agents in data work*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
+- **Topics:** eleven big topics, set in `TOPICS` in `site-tools/build_series.py`, each holding films and series: *Data platforms* (the overview, where everyone starts), *Data modelling*, *Modern data basics*, *Analytics engineering*, *Data quality*, *Enterprise architecture*, *Master and reference data*, *Data governance*, *Data protection and privacy*, *AI agents in data work* and *Data management*. The Topics page has a section per topic, with who it's for and a card per film or series (a series' card counts how many of its films were watched); the home page shows the topics after the first as tiles, each listing its films and series, and so does the end of the intro's scenarios.
 - **Stepper, on a film's own pages:** the film's steps, such as *Watch · Take it apart · Make the call*, as an `ol.path` under the title. Only a film with labs or scenarios has one; Silent change has none yet, and Too good to be true has one.
 - **Breadcrumbs:** every film, labs, scenarios and series page starts with one that names its topic, such as *Topics › Data modelling › From words to data*; the topic links to its section of the Topics page.
 - **Guidance after a film:** a "Where next?" panel when the film ends (`next.js` shows the page's `<template id="next-panel">`), "Go deeper" on the home page and at the end of the scenarios of *The Inner Life of Data*, and "Go further" on each topic's page.

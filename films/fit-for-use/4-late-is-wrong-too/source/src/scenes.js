@@ -144,8 +144,8 @@ scene("green",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),fil
    tables late. dbt's freshness check: thirty hours old, a steel tag. The level there was: a warning after a day, set by the builders,
    agreed with nobody, never run at night; a signal nobody understands. Malia, and an amber HOLD on the send. 11:40 the file; 12:10 the
    list again, 712; the 23 new names ticked; 3:20, sent. Then the December before, a later moment: six certificates, posted late. */
-const LW_OLD=["student_system:",[["  loaded_at_field: ",null],["_loaded_at",null]],"  freshness:",[["    warn_after: ",null],["{count: 1, period: day}","hold"]],
-  [["    error_after: ",null],["{count: 3, period: day}",null]]];
+const LW_OLD=["- name: student_system","  config:",[["    loaded_at_field: ",null],['"cast(_loaded_at as timestamp)"',null]],"    freshness:",
+  [["      warn_after: ",null],["{count: 1, period: day}","hold"]],[["      error_after: ",null],["{count: 3, period: day}",null]]];
 function lw_hours(x,tt,c,P){const G=P.g0+tt,M0=c.december-0.5;
   dq_clock(x,1760,150,62,0,ag_keys(tt,[[0,480],[P.c1140,480],[P.c1140+1.4,700],[P.c1210,700],[P.c1210+1.0,730],[P.c320,730],[P.c320+1.6,920]]),{});
   lw_who(x,"sam",300,G,1);dq_nameTag(x,440,410,"sam",{a:ag_io(tt,P.sam,c.thirty-0.4,0.4)});
@@ -158,10 +158,10 @@ function lw_hours(x,tt,c,P){const G=P.g0+tt,M0=c.december-0.5;
     lineA:(l,i)=>ag_in(tt,c.thirty+0.4+i*0.35,0.3)});
   q=lw_pop(tt,P.hours,c.level-0.3);dq_tag(x,1500,690,"steel",{text:"30 HOURS OLD",icon:"clock",to:[1480,630],k:q.k,a:q.a});
   // the level there was, and who set it
-  q=lw_pop(tt,c.level,c.signal-0.3);lw_yml(x,560,300,1100,{title:"sources · as it was",lines:LW_OLD,lit:tt>P.warnAfter?[3]:[],k:q.k,a:q.a});
-  const out=c.signal-0.3,b1=dq_chip(x,560,722,"set by the builders",{icon:"tools",a:ag_io(tt,P.builders,out,0.4)}),
-    b2=dq_chip(x,b1.x+b1.w+16,722,"agreed with nobody",{icon:"people",col:"none",a:ag_io(tt,P.nobody,out,0.4)});
-  dq_chip(x,b2.x+b2.w+16,722,"never run at night",{icon:"clock",col:"none",a:ag_io(tt,P.never,out,0.4)});
+  q=lw_pop(tt,c.level,c.signal-0.3);lw_yml(x,560,280,1100,{title:"sources · as it was",lines:LW_OLD,lit:tt>P.warnAfter?[4]:[],k:q.k,a:q.a});
+  const out=c.signal-0.3,b1=dq_chip(x,560,744,"set by the builders",{icon:"tools",a:ag_io(tt,P.builders,out,0.4)}),
+    b2=dq_chip(x,b1.x+b1.w+16,744,"agreed with nobody",{icon:"people",col:"none",a:ag_io(tt,P.nobody,out,0.4)});
+  dq_chip(x,b2.x+b2.w+16,744,"never run at night",{icon:"clock",col:"none",a:ag_io(tt,P.never,out,0.4)});
   q=lw_pop(tt,c.signal,c.calls-0.3);dq_textCard(x,560,330,900,{title:"A level its users never agreed is a signal nobody understands"},{k:q.k,a:q.a});
   // Malia holds the send; the file comes, the list again, the new names checked, sent
   q=lw_pop(tt,P.holds,P.goesW);dq_tag(x,1300,300,"hold",{to:[1330,232],k:q.k,a:q.a});
@@ -190,9 +190,9 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),pri
    range is how old the list may be for it: the certificates, that night's files at the send; the seating, a few days; Planning, weeks.
    The strictest sets the level. The contract's rule, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
    timeliness in pencil, inked by its first rule. */
-const LW_CONTRACT=["quality:","  - name: certificates_from_that_nights_files",[["    dimension: ",null],["timeliness","brass"]],
-  [["    level: ",null],["each source at most 24 hours old, at the send","brass"]],[["    agreedWith: ",null],["Malia Fonoti, graduations office",null]],
-  "slaProperties:",[["  - property: ",null],["latency",null]],[["    value: ",null],["24","brass"],["    unit: ",null],["h","brass"]]];
+const LW_CONTRACT=["- name: student_system_as_of",[["  …",DQ.soft]],"  quality:","  - name: student_system_at_most_a_day_old_at_the_send",[["    …",DQ.soft]],
+  [["    dimension: ",null],["timeliness","brass"]],[["    …",DQ.soft]],"    - property: level",[["      value: ",null],["At most 24 hours old, at the send","brass"]],
+  "    - property: agreedWith","      value: Malia Fonoti, graduations office"];
 function lw_meet(x,tt,c,P){const G=P.g0+tt,K0=c.knows-0.2;
   lw_who(x,"sam",330,G,1);lw_who(x,"malia",1100,G,1);lw_who(x,"mei",1590,G,ag_in(tt,P.mei-0.4,0.6),{flip:true});
   dq_nameTag(x,470,410,"sam",{a:ag_io(tt,P.samW,K0,0.4)});dq_nameTag(x,975,410,"malia",{align:"right",a:ag_io(tt,P.maliaW,K0,0.4)});
@@ -208,9 +208,9 @@ function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.plannin
     const dq=lw_pop(tt,P.three+i*0.3,U0);dq_dial(x,400+i*560,520,140,Object.assign({u:ag_in(tt,P.three+i*0.3+0.3,0.9),readCol:"brass",on:"granite",k:dq.k,a:dq.a},d));x.restore();});
   const q=lw_pop(tt,P.level,U0);dq_textCard(x,560,760,800,{title:"The level: a day old at most, at the send"},{edge:"brass",on:"granite",k:q.k,a:q.a});}
 function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,R0);
-  lw_yml(x,340,150,1240,{logo:null,product:"Data contract",title:"the graduation list",lines:LW_CONTRACT,lit:tt>P.agrees?[4]:[],k:q.k,a:q.a});
-  const c1=dq_chip(x,340,770,"agreed: Malia Fonoti",{icon:"people",col:"brass",on:"granite",a:ag_io(tt,P.agrees,R0,0.4)});
-  dq_chip(x,c1.x+c1.w+20,770,"owner: Mei Tanaka",{icon:"person",on:"granite",a:ag_io(tt,P.owns,R0,0.4)});
+  lw_yml(x,340,130,1240,{logo:null,product:"Data contract",title:"the graduation list",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[9,10]:[],k:q.k,a:q.a});
+  const c1=dq_chip(x,340,790,"agreed: Malia Fonoti",{icon:"people",col:"brass",on:"granite",a:ag_io(tt,P.agrees,R0,0.4)});
+  dq_chip(x,c1.x+c1.w+20,790,"owner: Mei Tanaka",{icon:"person",on:"granite",a:ag_io(tt,P.owns,R0,0.4)});
   q=lw_pop(tt,c.pencil,null);lw_dims(x,340,260,{first:ag_in(tt,P.first,0.8),on:"granite",k:q.k,a:q.a});}
 scene("fresh",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),maliaW:wAt(sc,"monday","Malia"),samW:wAt(sc,"monday","Sam"),mei:wAt(sc,"monday","Mei Tanaka"),
     platform:wAt(sc,"knows","The platform"),users:wAt(sc,"knows","its users"),three:wAt(sc,"clocks","three clocks"),strictest:wAt(sc,"clocks","The strictest"),
@@ -250,8 +250,8 @@ scene("age",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),ageW:
    steel), not the newest row. One level on each: the source's file, error after 24 hours. The night's job: the check first, then the
    build, run if all done; the check fails, Sam and Malia hear at once, the list is still built, saying its age. The warning. The send's
    job: the same check, then the send, run if all succeeded; the check fails, the send waits, Malia is told why. */
-const LW_NEW=["sources:","  - name: student_system","    tables:","      - name: nightly_files",[["        loaded_at_field: ",null],["received_at","steel"]],"        freshness:",
-  [["          error_after: ",null],["{count: 24, period: hour}","brass"]]];
+const LW_NEW=["tables:","  - name: nightly_files","    config:",[["      loaded_at_field: ",null],['"cast(received_at as timestamp)"',"steel"]],"      freshness:",
+  [["        warn_after: ",null],["null","brass"]],[["        error_after: ",null],["{count: 24, period: hour}","brass"]]];
 function lw_receipts(x,X,y,title,rows,o){const a=o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,X+290,y+150,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(x,X,y,580,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
   dq_rows(x,X+DQ_PAD,y+116,[{h:"Received at",w:520,f:"mono"}],rows,{rh:56,lit:o.lit,litCol:"steel"});x.restore();}
@@ -259,8 +259,8 @@ function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x
   let q=lw_pop(tt,c.source+0.2,c.level-0.3);lw_receipts(x,560,200,"Student system",[["Tue 16 Jun, 02:00"],["Wed 17 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
   q=lw_pop(tt,c.source+0.5,c.level-0.3);lw_receipts(x,1200,200,"Portal",[["Wed 17 Jun, 02:00"],["Thu 18 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
   dq_chip(x,560,560,"not the newest row: days old when no board has met",{icon:"dash",col:"none",a:ag_io(tt,P.newest,c.level-0.3,0.4)});
-  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1060,{title:"sources",lines:LW_NEW,lit:tt>P.h24?[6]:[],k:q.k,a:q.a});
-  dq_chip(x,560,690,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,J0,0.4)});
+  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1060,{title:"sources/student_system",lines:LW_NEW,lit:tt>P.h24?[5,6]:[],k:q.k,a:q.a});
+  dq_chip(x,560,712,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,J0,0.4)});
   // the night's job: the check first; it fails, two people hear, the list is still built
   const fail1=ag_in(tt,c.tells+0.2,0.3)>0.5,built=tt>P.built;q=lw_pop(tt,c.first,J1);
   lw_job(x,560,200,{job:"the night's update",tasks:["Check the sources' age","Build the list"],runIf:"All done",states:[fail1?"stop":null,built?"pass":null],

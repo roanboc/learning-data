@@ -321,3 +321,11 @@ measures it, and each critical column as a critical data element (`criticalDataE
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.
+
+A requirement about how old the data may be, timeliness, sits on the column that says its age.
+The graduation list has two, `student_system_as_of` and `portal_as_of`: when the night's files
+it was built from arrived, from each source's receipts (`nightly_files`). Each carries its level
+in its own `meta.quality`, and the product's latency names them as its `element`. The freshness
+check that measures it is on the receipts, at the same level: `error_after` only, with
+`warn_after: null`, because the night's job runs the check first and its failure is the warning
+(`examples/a-late-file/`).

@@ -107,9 +107,9 @@ function lw_monitor(ctx,x,y,o){o=o||{};return dq_window(ctx,x,y,1100,440,{logo:"
 // dbt's freshness check, as it prints: o.lines [[verdict, table], ...], o.lineA(line, i), o.cmd (the command), o.title
 function lw_cli(ctx,x,y,o){o=o||{};const L=[[["$ dbt source freshness",DQ.soft]]].concat((o.lines||[]).map(([v,s])=>[[v==="pass"?"PASS":v==="warn"?"WARN":"ERROR STALE",v==="pass"?"pass":v==="warn"?"hold":"stop"],["  freshness of "+s,null]]));
   return dq_window(ctx,x,y,1100,o.h||360,{logo:"dbt",product:"dbt",title:o.title||"freshness",a:o.a,k:o.k,draw:(c,b)=>dq_code(c,b.x+12,b.y,L,{lh:50,w:b.w-24,lit:o.lit,lineA:(l,i)=>i&&o.lineA?o.lineA(l,i-1):1})});}
-// a project file, typed, in dbt's window: o.lines (as dq_code takes them), o.lit, o.lineA, o.title, o.h
-function lw_yml(ctx,x,y,w,o){o=o||{};return dq_window(ctx,x,y,w,o.h||(o.lines.length*48+130),{logo:o.logo===undefined?"dbt":o.logo,product:o.product||"dbt",title:o.title,a:o.a,k:o.k,edge:o.edge,
-  draw:(c,b)=>dq_code(c,b.x+12,b.y,o.lines,{lh:48,w:b.w-24,lit:o.lit,lineA:o.lineA})});}
+// a project file, typed, in dbt's window: o.lines (as dq_code takes them), o.lit, o.lineA, o.title, o.h, o.lh (48)
+function lw_yml(ctx,x,y,w,o){o=o||{};const lh=o.lh||48;return dq_window(ctx,x,y,w,o.h||(o.lines.length*lh+130),{logo:o.logo===undefined?"dbt":o.logo,product:o.product||"dbt",title:o.title,a:o.a,k:o.k,edge:o.edge,
+  draw:(c,b)=>dq_code(c,b.x+12,b.y,o.lines,{lh,w:b.w-24,lit:o.lit,lineA:o.lineA})});}
 
 /* ---------------------------------------------------------------- the send to the printer
    A card for the send: when it's due, and where it goes; a tag on it says whether it's held, waiting or sent. */

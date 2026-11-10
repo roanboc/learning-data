@@ -61,7 +61,7 @@ report has no number for that date.
 
 Source freshness isn't part of `dbt build`. `dbt source freshness --profiles-dir .` checks it, and
 since the sample files don't change, it reports every source as stale (`ERROR STALE`). CI doesn't
-run it.
+run it. The student system's and the portal's receipts (`nightly_files`) carry the level the graduation list's users agreed, older than 24 hours fails, and a night's job runs that check before the build: `examples/a-late-file/`.
 
 ## Run it on Databricks
 
@@ -232,7 +232,9 @@ project/
 │                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
 │                             hr-system-interface/: the HR system's data contract, agreed with its owner;
 │                             hot-warm-cold/: a streaming table, a materialized view and an archive,
-│                             data kept hot, warm and cold, with their service levels (Databricks only)
+│                             data kept hot, warm and cold, with their service levels (Databricks only);
+│                             a-late-file/: the night a file came late, its freshness check on the
+│                             receipts, and the send that waits
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

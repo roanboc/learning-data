@@ -4,7 +4,7 @@ owner to review it, without anyone remembering to.
     the code, everywhere                    the analytics engineer
     the university's map, the conventions   the data architect (and data governance)
     governance/: owners, map, products      data governance and the data architect
-    a mandate, governance/8-mandates/       the data architect, and its agent's owner
+    a mandate, governance/8-mandates/       the data architect, who approves it; its owner asks for it
     a domain's conceptual model and log     the owners of its entities and kinds, the data
                                             architect, and data governance, which names the terms
     a core or mart model's YAML             the owners in its models' meta.owner, and the engineer
@@ -138,11 +138,9 @@ def main():
     rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
 
-    # Each agent's mandate: the data architect, who approves it as a second person, and the agent's owner,
-    # who signs it (governance/8-mandates/README.md).
+    # Each agent's mandate: the data architect, who approves it as a second person. Its owner signs it by
+    # asking for it, in the pull request that adds or changes it, and doesn't review it (governance/8-mandates/README.md).
     rules.append(("/governance/8-mandates/", [reviewers["model"]], None))
-    for spec in sorted((ROOT / "governance" / "8-mandates").glob("*.yml")):
-        rules.append((f"/governance/8-mandates/{spec.name}", reach(load(spec).get("owner")) + [reviewers["model"]], None))
 
     # Then what came after the films cited the lines above, each section in the order it came.
     for title, prefixes in LATER.items():

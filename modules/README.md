@@ -165,6 +165,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 - [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 - [A hundred records](../films/fit-for-use/2-a-hundred-records/) — `a-hundred-records`
+- [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
 
 ### Quality as a habit
 
@@ -339,7 +340,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
-No film source yet.
+- [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 
 ### Working with people
 

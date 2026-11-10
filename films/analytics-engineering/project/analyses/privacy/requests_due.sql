@@ -1,5 +1,5 @@
 -- Privacy: the privacy office's requests, and when each is due (docs/databricks-governance.md,
--- section 11). A person's request is answered within 30 days, the university's own rule. A request
+-- "A person's request"). Each request is answered within 30 days, the university's own rule. A request
 -- close to its date isn't wrong data: it's work the office still has to do, so this is a list for
 -- the office to work through, not a test that fails a build (PLAYBOOK, "Test the data; track the
 -- business"). From the office's log, privacy.requests: each request's number, what was asked, and

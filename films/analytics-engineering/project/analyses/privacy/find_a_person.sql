@@ -1,6 +1,6 @@
 -- Privacy: one column of one table, for a request: how many rows hold the person, by one of their
 -- numbers or by the code made from it, so a table that keeps only codes is found too
--- (docs/databricks-governance.md, section 11). The search job, privacy-finder, runs it for each
+-- (docs/databricks-governance.md, "A person's request"). The search job, privacy-finder, runs it for each
 -- column where_a_person_is.sql lists. The numbers come from the restricted table
 -- privacy.request_keys, joined by the request's number: no one's number is ever typed into a
 -- query, whose text the platform keeps for a year (system.query.history). A number is matched as

@@ -3,7 +3,7 @@
 *An issue in the data team's repository, made from the issue form
 [`privacy-request.yml`](privacy-request.yml), as it stood when it closed. It names no one: the
 person's numbers are only in the restricted table `privacy.request_keys`, under the request's
-number ([`docs/databricks-governance.md`](../../docs/databricks-governance.md), section 11).*
+number ([`docs/databricks-governance.md`](../../docs/databricks-governance.md), *A person's request*).*
 
 **Label:** privacy request · **Opened** Tuesday 24 November 2026 · **Closed** Monday 7 December 2026, completed
 

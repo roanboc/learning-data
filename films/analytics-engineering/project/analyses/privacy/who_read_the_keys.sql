@@ -1,6 +1,6 @@
 -- Privacy: who read the table of a request's keys, and when, from the audit log, as
 -- analyses/governance/who_read_a_table.sql does for the learner table (docs/databricks-governance.md,
--- sections 6 and 11). Only the privacy office's group and its two jobs, privacy-finder and
+-- "Who read it" and "A person's request"). Only the privacy office's group and its two jobs, privacy-finder and
 -- privacy-deleter, may read privacy.request_keys; anyone else in this list is a question for the
 -- platform team. A read is a getTable event, with the table's full name in
 -- request_params.full_name_arg. Databricks only.

@@ -1,4 +1,4 @@
--- Privacy: where to look for a person, for a request (docs/databricks-governance.md, section 11).
+-- Privacy: where to look for a person, for a request (docs/databricks-governance.md, "A person's request").
 -- Every table built from the tables of the five systems a person's numbers come from, through the
 -- platform's lineage, which follows what dbt builds and what notebooks, jobs and dashboards build
 -- too; and in each one, the columns whose class says they name a person or hold a code for one

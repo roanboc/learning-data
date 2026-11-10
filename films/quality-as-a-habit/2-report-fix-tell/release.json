@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Report, fix, tell",
+    "key": "report-fix-tell-en",
+    "dir": "films/quality-as-a-habit/2-report-fix-tell/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/report-fix-tell/film.js",
+    "video": "dist/report-fix-tell.mp4",
+    "file": "report-fix-tell.mp4",
+    "captions": [
+      [
+        "films/quality-as-a-habit/2-report-fix-tell/captions/en.srt",
+        "report-fix-tell.en.srt"
+      ],
+      [
+        "films/quality-as-a-habit/2-report-fix-tell/captions/es.srt",
+        "report-fix-tell.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/quality-as-a-habit/2-report-fix-tell/source",
+      ":(exclude)films/quality-as-a-habit/2-report-fix-tell/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 293,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.8,
+      "status": "Drawn to the rule"
+    }
+  }
+]

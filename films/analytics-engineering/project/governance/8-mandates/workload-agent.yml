@@ -1,0 +1,52 @@
+name: the workload agent's mandate
+kind: requirement
+owner: Anil Kurian, Faculty of Health
+task: find why the night build failed, in test
+status: in force
+agent: workload agent
+definition: The one kind of task the workload agent may do alone, and where; what it may change, the checks it runs,
+  its limits, and how it's stopped and undone. Whatever this page doesn't give it, it asks for.
+
+# Its lines, as the page says them. Each is held by a tool (held by, below), and scripts/check/mandates.py
+# fails when a tool allows more than the page.
+in test:
+  writes: only schemas of its own; it reads the rest
+  does: Find why the night build failed. If the cause is in its own models, fix it on its own branch, build and
+    check the fix in its own schema, and open a pull request. If the cause is anywhere else, tell that part's owner
+    and change nothing.
+  reports: to its owner, by 06:00
+in production:
+  writes: nothing; it reads
+  does: Find the cause and draft the fix as a pull request, for people to review and approve (its stage 4 there).
+    Never rerun a build; a plain job does that.
+folders:
+  - models/marts/workload/
+  - models/intermediate/workload/
+  - analyses/workload/
+never: a test, a seed, a contract or a definition; a question of meaning goes to its owner
+checks:
+  first: Has tonight's copy arrived? If not, nothing starts, and Sam is told.
+  after: every test, and the counts against HR's own report
+limits:
+  rounds: 10
+  minutes: 60
+  tokens a minute: 50000
+  the same error twice: stop and report
+switch: Sam deactivates its service principal and suspends its App's installation. Anil or Sam may stop it at any
+  hour, without asking first.
+undo: Its pull request reverted, with one more pull request; a table restored to its version before (seven days of
+  versions, by default).
+
+held by:
+  where it writes: Unity Catalog's grants, to its role's group (agents/workload-agent/grants.sql)
+  its folders: its App's push ruleset (review-and-release/rulesets/workload-agent-folders.json)
+  the hour: its run's timeout (agents/workload-agent/workflow.yml)
+  its rounds: the plain code that runs it, which stops at the limit (agents/workload-agent/workflow.yml)
+  its budget: a rate limit in Unity Gateway, on its own service principal (agents/workload-agent/unity-gateway.yml)
+  the plain check: its run's first step (agents/workload-agent/workflow.yml)
+  this page: governance/, where its App can't push
+
+signed: {by: "Anil Kurian, Faculty of Health", date: 2026-10-30}
+approved: {by: Noor Rahman, as: a second person, date: 2026-10-30}
+review: each December, with the access review (docs/databricks-governance.md, 7. The access review)
+change: Its owner narrows or withdraws it in a pull request, and the task waits for its owner again.

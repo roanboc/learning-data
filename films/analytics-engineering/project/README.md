@@ -218,7 +218,7 @@ project/
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
 │   │                         only open requirements, with what shows they're done; governance.py:
 │   │                         data governance's rules, and their measures; impact.py: what a pull
-│   │                         request touches, and who to tell; all in CI
+│   │                         request touches, and who to tell; mandates.py: no tool allows an agent more than its mandate; all in CI
 │   ├── tools/                diff_against_main.py: a branch's table against main's, for review
 │   └── setup/                load_databricks.sql: loads the sample sources into Databricks; or
 │                             loading_pipeline.sql, each night, with a check on each row; and
@@ -229,7 +229,7 @@ project/
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the count of active research projects as a
-│                             function, a Genie Agent and an agent's evaluation cases (Databricks only); hr-system-interface/: the HR system's data contract, agreed with its owner
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only); hr-system-interface/: the HR system's data contract, agreed with its owner; night-in-test/: the workload agent's night in test, under its mandate
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

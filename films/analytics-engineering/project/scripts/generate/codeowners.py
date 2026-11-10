@@ -4,6 +4,7 @@ owner to review it, without anyone remembering to.
     the code, everywhere                    the analytics engineer
     the university's map, the conventions   the data architect (and data governance)
     governance/: owners, map, products      data governance and the data architect
+    a mandate, governance/8-mandates/       the data architect, and its agent's owner
     a domain's conceptual model and log     the owners of its entities and kinds, the data
                                             architect, and data governance, which names the terms
     a core or mart model's YAML             the owners in its models' meta.owner, and the engineer
@@ -37,7 +38,9 @@ TARGET = ROOT / "CODEOWNERS"
 # place). Add a new folder or file here, with the section's title, when its place would move them.
 LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
-          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/")}
+          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
+         "The workload agent's mart, its product and its mandate: its owner, and the data architect for the mandate":
+         ("/models/marts/workload/", "/governance/4-data-products/teaching_workload.yml", "/governance/8-mandates/")}
 
 
 def load(path):
@@ -132,6 +135,12 @@ def main():
     # Last, so the lines above keep their numbers.
     rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
+
+    # Each agent's mandate: the data architect, who approves it as a second person, and the agent's owner,
+    # who signs it (governance/8-mandates/README.md).
+    rules.append(("/governance/8-mandates/", [reviewers["model"]], None))
+    for spec in sorted((ROOT / "governance" / "8-mandates").glob("*.yml")):
+        rules.append((f"/governance/8-mandates/{spec.name}", reach(load(spec).get("owner")) + [reviewers["model"]], None))
 
     # Then what came after the films cited the lines above, each section in the order it came.
     for title, prefixes in LATER.items():

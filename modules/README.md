@@ -290,6 +290,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
 - [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
+- [Copies that keep the rules](../films/only-what-you-may-see/7-copies-that-keep-the-rules/) — `copies-that-keep-the-rules`
 
 ### Kept for a reason
 
@@ -372,6 +373,7 @@ Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/
 
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
 - [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
+- [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 
 ### Ownership and performance
 

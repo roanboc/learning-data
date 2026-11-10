@@ -1026,7 +1026,10 @@ def tiles(lg, R):
         for i in shown(t):
             e = entry(lg, i)
             lang = ' lang="en"' if lg == "es" and e["title_lang"] == "en" else ""
-            small = e["kicker"] if e["kind"] == "series" else f'{e["kicker"]} · {e["len"]} min'
+            # A series' count of films ("3 of 4 films") changes with every film, and the tiles of a topic's series sit on
+            # neighbouring lines, so film branches of different series clashed on these pages. The committed pages say only
+            # "Series"; the site's publish fills in the count (python site-tools/build_series.py --publish).
+            small = (e["kicker"] if PUBLISH else T(lg, "Series", "Serie")) if e["kind"] == "series" else f'{e["kicker"]} · {e["len"]} min'
             rows.append(f'<li><a href="{RL}{e["href"]}"><img src="{R}assets/{e["posters"][0]}" alt="" width="1280" height="720" loading="lazy">'
                         f'<span><b{lang}>{E(e["title"])}</b><small>{E(small)}</small></span></a></li>')
         out.append(f'<div class="topic-tile">\n<h3><a href="{RL}topics/#{t["id"]}">{E(t["name"][lg])}</a></h3>\n<p>{E(t["line"][lg])}</p>\n'
@@ -1041,6 +1044,7 @@ def marks(S):
 OPEN, CLOSE = marks(FW)
 BLOCKS = FW["blocks"]  # kept for callers that count From words to data's blocks
 # the hand-written pages that show the topics as tiles: (path under site/, language, the path from that page to the site's root)
+PUBLISH = "--publish" in sys.argv[1:]  # the site's publish: the tiles carry each series' count of films
 TILES = [("index.html", "en", ""), ("es/index.html", "es", "../"), ("scenarios/index.html", "en", "../"), ("es/scenarios/index.html", "es", "../../")]
 TILE_MARKS = ('<!-- topics: made by site-tools/build_series.py -->', '<!-- /topics -->')
 
@@ -1095,7 +1099,9 @@ def readme(S=FW):
 # ---------------------------------------------------------------- the lists every film has a row in
 # Each film keeps its rows in its own folder, so two films never edit the same line: its Decided rows in decided.md, and its
 # videos with their legibility in release.json (which .github/scripts/films.py also gathers for the release workflow). lists()
-# makes the shared lists from them: each series' Decided table in its proposal.md, and the table of films/legibility-report.md.
+# makes the shared lists from them: each series' Decided table in its proposal.md. The table of films/legibility-report.md, which
+# every film adds a row to, isn't committed, so films merging at once don't clash: legibility() makes the report with it, printed
+# by `python site-tools/build_series.py --legibility` and shown in the summary of every site publish.
 DECIDED = ("<!-- decided: made by site-tools/build_series.py from decided.md, the series' and each film's -->", "<!-- /decided -->")
 LEGIBLE = ("<!-- films: made by site-tools/build_series.py from each film's release.json -->", "<!-- /films -->")
 MONTHS = "January February March April May June July August September October November December".split()
@@ -1130,8 +1136,13 @@ def decided(folder):
     return fill((folder / "proposal.md").read_text(), DECIDED, ["| Date | Decision |", "|---|---|"] + [r for _, r in rows])
 
 
+LEGIBLE_NOTE = ("The table isn't kept in this file, so films that merge at once don't clash on it. Each film's row is `legibility` in its "
+                "`release.json`: `python site-tools/build_series.py --legibility` prints this report with its table, and every publish "
+                "of the site shows it in its run's summary.")
+
+
 def legibility():
-    """films/legibility-report.md, with its table of films made from each film's release.json."""
+    """films/legibility-report.md, with its table of films made from each film's release.json (the committed file holds LEGIBLE_NOTE)."""
     sys.path.insert(0, str(ROOT / ".github" / "scripts"))
     import films as release_films
     rows = ["| Film | Texts | Under 28 px | Under 20 px | Median | Status |", "|---|---|---|---|---|---|"]
@@ -1146,7 +1157,7 @@ def lists():
     """Every shared list made from the films' own rows: (path from the repository's root, text)."""
     out = [(p.parent / "proposal.md", decided(p.parent)) for p in sorted((ROOT / "films").glob("*/proposal.md"))
            if DECIDED[0] in p.read_text()]
-    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out] + [("films/legibility-report.md", legibility())]
+    return [(p.relative_to(ROOT).as_posix(), s) for p, s in out]
 
 
 def pages():
@@ -1175,6 +1186,14 @@ def pages():
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--legibility"]:
+        print(legibility()); sys.exit()
+    if PUBLISH:  # only at publish time, after check_site.py: never commit what this writes
+        tiled = {rel for rel, _, _ in TILES}
+        for rel, text in blocks():
+            if rel in tiled:
+                (WEB / rel).write_text(text)
+        print(f"filled the series' counts of films in {len(tiled)} pages"); sys.exit()
     n = 0
     for rel, text in pages() + blocks():
         p = WEB / rel

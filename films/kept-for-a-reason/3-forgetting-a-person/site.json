@@ -1,0 +1,38 @@
+{
+  "kicker": "Rights over your data",
+  "kicker_es": "Derechos sobre tus datos",
+  "title_es": "Olvidar a una persona",
+  "h1": "A person can ask, and you must be able to answer",
+  "h1_es": "Una persona puede pedir, y hay que poder responder",
+  "lead": "Linh Nguyen's tutoring contract ends on 20 November. Four days later she asks what the university holds about her, and to leave the tutors' mailing list. Her data sits under six numbers, in documents and copies too. To answer in 30 days, the university must find it all, with a reason for every part.",
+  "lead_es": "El contrato de tutora de Linh Nguyen termina el 20 de noviembre. Cuatro días después pregunta qué guarda la universidad de ella y pide dejar la lista de tutores. Sus datos están bajo seis números, en documentos y copias. Para responder en 30 días, debe hallarlo todo, con una razón para cada parte.",
+  "description": "A film about people's rights over their data, the third of Kept for a reason: Barcelona, 1998 to 2014, where a true notice of a lawyer's auction, for debts he had long settled, came up whenever anyone searched his name, until the European Union's Court of Justice ruled that the page could stay but the link from his name must go; the rights to see, correct, erase and object, in four sentences; checking that a request is hers with what the university already trusts, and nothing more; finding every place her data lives, by her six numbers, the three ways her name is written, and lineage, on a map kept before anyone asked; a copy that says why each part is held, where it came from, who else gets it and until when, without other people's data; her no kept on the person, so the tutors' list can't add her back; and what stays, with its reason and its date.",
+  "description_es": "Una película sobre los derechos de las personas sobre sus datos, la tercera de Guardado por una razón: Barcelona, de 1998 a 2014, donde un aviso cierto de la subasta de un abogado, por deudas saldadas hacía años, aparecía cada vez que alguien buscaba su nombre, hasta que el Tribunal de Justicia de la Unión Europea resolvió que la página podía quedarse pero el enlace desde su nombre debía irse; los derechos a ver, corregir, borrar y oponerse, en cuatro frases; comprobar que la petición es suya con lo que la universidad ya conoce, y nada más; encontrar cada lugar donde están sus datos, por sus seis números, las tres formas en que se escribe su nombre y el linaje, en un mapa hecho antes de que nadie preguntara; una copia que dice por qué se guarda cada parte, de dónde vino, quién más la recibe y hasta cuándo, sin datos de otras personas; su no, guardado en la persona, para que la lista de tutores no pueda volver a añadirla; y lo que se queda, con su razón y su fecha.",
+  "card": "Linh asks what the university holds about her. To answer, it must find her in every system, and give a reason for each part.",
+  "card_es": "Linh pregunta qué guarda la universidad de ella. Para responder, hay que hallarla en cada sistema y dar una razón para cada parte.",
+  "chapters_es": {
+    "story": "Encontrado por su nombre",
+    "four": "Cuatro frases",
+    "her": "¿Es ella de verdad?",
+    "places": "Cada lugar donde está",
+    "copy": "Más que una copia",
+    "list": "Fuera de la lista",
+    "stays": "Lo que se queda, y por qué",
+    "reason": "Una razón para cada parte"
+  },
+  "past": [
+    "Barcelona, 1998 to 2014: found by his name",
+    "A true notice about debts he had long settled came up whenever anyone searched his name, until a court let the page stay and took the link away."
+  ],
+  "past_es": [
+    "Barcelona, de 1998 a 2014: encontrado por su nombre",
+    "Un aviso cierto sobre deudas saldadas hacía años aparecía cada vez que alguien buscaba su nombre, hasta que un tribunal dejó la página y quitó el enlace."
+  ],
+  "next_h": "You've seen what a person can ask, and how to answer. Next: on the platform, a delete isn't done until the last copy is gone.",
+  "next_h_es": "Viste qué puede pedir una persona y cómo responder. Después: en la plataforma, borrar no termina hasta que se va la última copia.",
+  "fiction": "The university, its people and their numbers are invented, and so are the two people who look him up in 2009; the history, its dates and figures are real, with their sources in the script.",
+  "fiction_es": "La universidad, su gente y sus cifras son inventadas, y también las dos personas que lo buscan en 2009; la historia, sus fechas y cifras son reales, con sus fuentes en el guion.",
+  "fiction_series": "In Forgetting a person, the opening's history, its dates and figures are real, with their sources in its script.",
+  "fiction_series_es": "En Olvidar a una persona, la historia del inicio, sus fechas y cifras son reales, con sus fuentes en su guion.",
+  "draft": true
+}

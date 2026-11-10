@@ -25,11 +25,11 @@ on:
 permissions:
   contents: read
 
-# A newer push to a pull request cancels its older run. Pushes to main are never cancelled: Publish site waits for a
-# passing run on main, so with frequent merges cancelling them meant nothing ever published. Main's runs queue instead
-# (one running, the newest waiting).
+# A newer push to a pull request cancels its older run. Every push to main runs on its own and is never cancelled or
+# replaced: Publish site waits for a passing run on main, and with frequent merges a shared queue (one waiting run,
+# replaced by the next) still left most merges without a finished run.
 concurrency:
-  group: checks-${{ github.ref }}
+  group: checks-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:

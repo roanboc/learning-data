@@ -1,0 +1,287 @@
+1
+00:00:03,000 --> 00:00:06,396
+Chile, el desierto de Atacama, 5 de agosto de 2010.
+
+2
+00:00:08,296 --> 00:00:14,562
+Treinta y tres mineros trabajan en lo hondo de la mina San José, una mina de cobre y oro cerca de Copiapó.
+
+3
+00:00:16,262 --> 00:00:23,170
+Esa tarde la roca cede: un bloque de unas setecientas mil toneladas cierra la rampa, su camino de salida.
+
+4
+00:00:25,270 --> 00:00:31,716
+Quedan atrapados a unos setecientos metros, con un pequeño refugio y comida de emergencia para dos o tres días.
+
+5
+00:00:33,616 --> 00:00:38,889
+Arriba, nadie sabe si están vivos. Sus familias llegan a la entrada de la mina, y esperan.
+
+6
+00:00:40,789 --> 00:00:45,604
+Sin ayuda, los hombres morirán de hambre allá abajo, y sus familias quizá nunca sepan qué pasó.
+
+7
+00:00:47,304 --> 00:00:50,368
+Hay que encontrarlos y sacarlos, antes de que sea demasiado tarde.
+
+8
+00:00:52,068 --> 00:00:58,892
+Eso pide perforar, medicina, comida, ingeniería y la confianza de las familias, todo a la vez, y cualquier plan podría fallar.
+
+9
+00:01:00,792 --> 00:01:05,787
+El gobierno pone a un ingeniero de minas, André Sougarret, a cargo del rescate.
+
+10
+00:01:07,287 --> 00:01:14,286
+Cada parte tiene a alguien que la conoce: ingenieros en las perforadoras, médicos en la salud, ministros con las familias.
+
+11
+00:01:15,786 --> 00:01:19,852
+Las familias esperan en un campamento junto a la entrada, al que llaman Esperanza.
+
+12
+00:01:21,752 --> 00:01:26,497
+Bajo tierra, el jefe de turno, Luis Urzúa, mantiene unidos a los treinta y tres.
+
+13
+00:01:27,997 --> 00:01:31,568
+La comida pensada para dos o tres días se reparte para que dure dos semanas.
+
+14
+00:01:33,068 --> 00:01:40,394
+Las decisiones se votan, y cada hombre tiene una tarea: uno cuida a los enfermos, otro guía las oraciones, otro lleva un diario.
+
+15
+00:01:42,094 --> 00:01:49,033
+El día diecisiete, una sonda estrecha vuelve a subir con una nota atada: «Estamos bien en el refugio los 33».
+
+16
+00:01:51,333 --> 00:01:57,063
+Por ese agujero bajan comida, agua, medicinas y cartas, en tubos que llaman palomas.
+
+17
+00:01:58,763 --> 00:02:04,493
+Además, tres grandes perforadoras trabajan a la vez, cada una a su modo: el rescate nunca depende de una.
+
+18
+00:02:06,393 --> 00:02:08,875
+El 9 de octubre, una de ellas logra abrirse paso.
+
+19
+00:02:10,575 --> 00:02:17,323
+El 13 de octubre, tras sesenta y nueve días, los treinta y tres suben, uno a uno, en una cápsula estrecha.
+
+20
+00:02:19,423 --> 00:02:22,315
+Sus familias, en el campamento desde agosto, los tienen de vuelta.
+
+21
+00:02:24,215 --> 00:02:31,056
+Nadie solo perforó, los curó y los alimentó. Cada parte tuvo a alguien que la conocía, y todas avanzaron a la vez.
+
+22
+00:02:32,956 --> 00:02:36,572
+El trabajo de una gestora de datos es más calmo, pero con la misma forma.
+
+23
+00:02:38,072 --> 00:02:45,573
+Helena Novak empieza en una universidad con cuarenta y seis solicitudes, de todas las áreas de datos, y alguien esperando cada una.
+
+24
+00:02:47,273 --> 00:02:53,077
+Para el viernes tiene un plan para sus primeros noventa días, en tres carriles, que avanzan lado a lado.
+
+25
+00:02:54,577 --> 00:02:57,275
+Y todos los que esperan saben en qué punto está su solicitud.
+
+26
+00:03:05,375 --> 00:03:12,559
+Estas películas siguen el primer año de una gestora de datos: todas las áreas de datos a la vez, y el trabajo de gestión alrededor.
+
+27
+00:03:14,259 --> 00:03:19,522
+Lunes 1 de febrero de 2027, dentro de un año, en la universidad.
+
+28
+00:03:21,222 --> 00:03:27,739
+Helena Novak empieza como su gestora de datos. Ha sido arquitecta, líder de datos y dueña de producto.
+
+29
+00:03:29,239 --> 00:03:33,647
+Hay cuarenta y seis solicitudes abiertas, en el registro y en los correos del equipo.
+
+30
+00:03:35,347 --> 00:03:39,286
+La más antigua espera desde el 14 de agosto de 2026.
+
+31
+00:03:40,786 --> 00:03:46,813
+Un informe para Planificación, un arreglo a la lista del personal, acceso para un investigador: alguien espera cada una.
+
+32
+00:03:48,513 --> 00:03:53,637
+Es tentador empezar por la más antigua, o por la que más se oye, o cambiarlo todo de una vez.
+
+33
+00:03:55,337 --> 00:03:59,787
+Helena no hace nada de eso todavía. Primero las ordena, para ver el trabajo entero.
+
+34
+00:04:02,487 --> 00:04:10,552
+Quienes gestionan datos comparten un mapa del trabajo: la rueda del DAMA-DMBOK, el cuerpo de conocimiento de la Data Management Association.
+
+35
+00:04:12,252 --> 00:04:19,302
+El gobierno de datos está en el centro, con diez áreas alrededor, de la arquitectura y el modelado a la calidad y la seguridad.
+
+36
+00:04:21,202 --> 00:04:24,918
+Helena pone cada solicitud en la rueda, donde está la mayor parte de su trabajo.
+
+37
+00:04:26,418 --> 00:04:33,091
+Almacén de datos e inteligencia de negocio: diez. Calidad de datos: siete. Seguridad de datos: cinco.
+
+38
+00:04:34,791 --> 00:04:41,048
+Luego gobierno e integración, cuatro cada una, y tres o menos en cada una de las demás: cuarenta y cuatro en total.
+
+39
+00:04:42,748 --> 00:04:49,915
+Dos quedan junto a la rueda: un agente para preguntas de horarios, y un modelo de pronóstico, que este sitio aún no enseña.
+
+40
+00:04:51,615 --> 00:04:58,899
+La mayoría toca tres o cuatro áreas: un informe nuevo necesita sus datos modelados, revisados en calidad y protegidos.
+
+41
+00:05:00,799 --> 00:05:06,750
+Así que ninguna solicitud es de otro. Las áreas son un solo sistema, y el trabajo las abarca todas.
+
+42
+00:05:08,650 --> 00:05:11,064
+Las otras películas del sitio profundizan en cada área.
+
+43
+00:05:12,364 --> 00:05:18,991
+De las palabras a los datos en modelado, Apto para su uso en calidad, El mismo, en todas partes en datos maestros, y más.
+
+44
+00:05:21,691 --> 00:05:25,513
+Nadie es experto en las once áreas, tampoco Helena.
+
+45
+00:05:27,013 --> 00:05:34,039
+Y su trabajo incluye lo que hace toda gerencia: estrategia, dinero, riesgo, personas, partes interesadas y entrega.
+
+46
+00:05:35,939 --> 00:05:37,797
+Así que busca quién domina cada una.
+
+47
+00:05:39,097 --> 00:05:45,819
+Noor, la arquitecta de datos, en arquitectura y modelado. Sam, en la plataforma, el almacenamiento y la integración.
+
+48
+00:05:47,319 --> 00:05:52,795
+Jun, en el almacén y sus informes. Yusuf, en gobierno, metadatos y calidad.
+
+49
+00:05:54,295 --> 00:05:57,430
+Donde nadie del equipo domina un área, también lo anota.
+
+50
+00:05:59,130 --> 00:06:05,085
+Su parte es ver las áreas como un solo sistema, saber quién domina cada una y decidir por dónde empezar.
+
+51
+00:06:06,985 --> 00:06:11,719
+La habilidad generalista, ver el todo, tiene su propia película: Muchos roles, una sola mirada.
+
+52
+00:06:14,419 --> 00:06:22,799
+Para sus tres primeros meses, toma la forma del libro de Michael Watkins, Los primeros 90 días: aprender rápido y lograr victorias pronto.
+
+53
+00:06:24,499 --> 00:06:29,799
+Su plan tiene tres carriles, lado a lado: personas, estrategia y operaciones.
+
+54
+00:06:31,499 --> 00:06:36,245
+Personas, las doce semanas: el equipo, los dueños de los datos y quienes los usan.
+
+55
+00:06:37,745 --> 00:06:43,198
+Estrategia, en tres pasos: descubrir lo que hay, definir lo que debería haber y planificar cómo llegar.
+
+56
+00:06:44,698 --> 00:06:51,425
+Cada paso termina en una fecha que se le puede exigir: 15 de marzo, 5 de abril y 26 de abril.
+
+57
+00:06:53,125 --> 00:06:56,198
+Operaciones sostiene el trabajo de hoy mientras ella aprende.
+
+58
+00:06:57,498 --> 00:07:05,774
+Las dos primeras semanas, lo urgente. Desde el 15 de febrero, entregas en sprints de dos semanas, con los procedimientos actuales.
+
+59
+00:07:07,474 --> 00:07:12,478
+Solo en la semana seis propone mejores formas, y las prueba de la semana nueve a la doce.
+
+60
+00:07:14,178 --> 00:07:18,088
+No cambies todo el primer día, y no esperes noventa días para ayudar.
+
+61
+00:07:19,988 --> 00:07:25,005
+En la mina, las grandes perforadoras tardaron semanas, pero la comida bajaba siempre por el agujero estrecho.
+
+62
+00:07:27,705 --> 00:07:30,206
+El viernes, el plan cabe en una página.
+
+63
+00:07:31,706 --> 00:07:36,560
+Se lo muestra a David Mensah, el vicerrector adjunto, y luego a su equipo.
+
+64
+00:07:38,060 --> 00:07:42,330
+No promete arreglos antes de escuchar, y sí fechas que se le pueden exigir.
+
+65
+00:07:44,030 --> 00:07:50,233
+Quien espera una solicitud sabe en qué punto está, y al final de los noventa días, cada una tiene respuesta.
+
+66
+00:07:52,133 --> 00:07:57,496
+En Atacama, cada parte del rescate tuvo a alguien que la conocía, y los treinta y tres subieron.
+
+67
+00:07:59,396 --> 00:08:05,725
+Los noventa días de Helena funcionan igual: todas las áreas son un solo trabajo, y nadie espera sin respuesta.
+
+68
+00:08:07,425 --> 00:08:10,294
+El lunes, mantén en marcha el trabajo de hoy mientras aprendes.
+
+69
+00:08:11,394 --> 00:08:15,515
+Pon tu plan en una página, en tres carriles, con fechas que se te puedan exigir.
+
+70
+00:08:16,615 --> 00:08:20,013
+Aprende las palabras de cada área, y quién de tu equipo domina cada una.
+
+71
+00:08:21,313 --> 00:08:24,407
+Lo primero que hace Helena es escuchar. Esa es la próxima película.
+
+72
+00:08:25,907 --> 00:08:29,897
+Ve las áreas como un solo trabajo; planea noventa días en tres carriles.

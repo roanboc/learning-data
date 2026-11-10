@@ -162,9 +162,9 @@ scene("reader",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({ad:c.adds,w
     // the record of who uses what: the faculty's plan, a new file in the project
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_exposure(x,tt,{u:fin(tt,0.2,0.8),p:clamp((tt-P.ad-0.2)/3.6,0,1),
       lit:[fin(tt,P.ad+3.2,0.6),fin(tt,Math.max(P.wu,P.ad+4.0),0.6)],hand:fin(tt,P.ip,0.8),tag:fin(tt,P.ip+0.6,0.6)})},
-    // the next change to Clara's table: the impact check names the faculty's plan beside the census dashboard, and who to ask
+    // the next change to Clara's table: the impact check names the faculty's plan beside the census dashboard, and who to tell
     {cut:true,at:P.nx,place:"big",keys:[[P.nx,960,540,1]],push:0.02,draw:(x,tt)=>gk_impact(x,tt,{u:clamp((tt-P.nx-0.2)/1.2,0,1),who:fin(tt,P.nm,0.6),ask:fin(tt,P.cd+0.4,0.6)})},
-    // both asked before the change ships: a letter to each
+    // both hear about it before the change ships: a letter to each
     {at:P.bo,place:"campus",keys:[[P.bo,960,540,1]],push:0.02,draw:(x,tt)=>gk_tell(x,tt,{go:clamp((tt-P.bt)/2.2,0,1)})}],sc.dur,1));});
 
 // ---- 8 · Outside the university: a partner far off; its request for Mei's Awards; each award, its credit points and its faculty, no

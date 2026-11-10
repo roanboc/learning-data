@@ -3,8 +3,8 @@
 -- study only the Faculty of Health's learners. Databricks only.
 --
 -- A policy covers everyone it names in TO except the groups in EXCEPT: owning a table isn't enough, nor
--- is an admin account. Who is on each list is the data owner's decision (Mei Tanaka, the code owner of
--- this file). registrar_owners, whose only member is registrar-loader, is let through every one, or each
+-- is an admin account. Who is on each list is the data owner's decision (Mei Tanaka's; the data team
+-- reviews this file). registrar_owners, whose only member is registrar-loader, is let through every one, or each
 -- table it builds would hold stars. Each reader gets one mask for each column: two different masks for
 -- one person stop the query with an error, so the help desk is let through hide_direct and given
 -- direct_in_part. An agent is never on a list: it reads with its own role's rights.

@@ -286,8 +286,8 @@ Its files, as the film *One policy for many tables* shows them, are in
    until its owner levels it. A policy hides only what has a tag: a column no one has classed shows as
    it is, until its owner classes it, so look for such columns every day.
 6. **Kept as code.** Bundles have no resource for a policy, so a job in the registrar's bundle runs the
-   files with a SQL task, as the identity that deploys it, after the data owner approves the pull
-   request. The policies go in before the grant that lets a reader in.
+   files with a SQL task, as the identity that deploys it, once the data team reviews the pull request;
+   the data owner is told what it touches. The policies go in before the grant that lets a reader in.
 
 `SHOW EFFECTIVE POLICIES ON TABLE <catalog>.<schema>.<table>` lists every policy that applies to a
 table, with those on its schema and catalog. Don't also run section 3's policy on a catalog with these:

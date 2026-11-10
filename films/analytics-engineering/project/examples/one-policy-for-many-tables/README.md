@@ -25,7 +25,7 @@ same pull request.
 
 A policy covers everyone in its `TO` list except the groups in `EXCEPT`, and nothing else gets past it:
 owning a table isn't enough, nor is an admin account. Who is on each list is the data owner's decision,
-Mei Tanaka's, who is the code owner of these files.
+Mei Tanaka's; the data team reviews these files, and she is told what each change touches.
 
 | Policy | What it does | Let through |
 |---|---|---|

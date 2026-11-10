@@ -309,11 +309,11 @@ phrase(((D3, 0.5), (Fs3, 0.5)), A6('until', 'gives', 0.25), 0.65, ring=2.4)
 tap(A6('tag', 'tag', -0.2), 0.006, px(900))
 tap(A6('check', 'check', -0.2), 0.006, px(900))
 
-# 7. Kept as code: B, C sharp, D at the turn, rising. The pull request; the new files, one breath; the grants already there; Mei's
-#    approval: F sharp, A, answered. The job, its runs, run as registrar-loader; each file replaces its policy whole; the day: morning,
-#    afternoon. On the road, the new chemical's line runs to its guide: one A, answered. Here, the new table's tags, and the spheres
-#    answer in every octave; the sweep; the study's view. The take-away; the next film; the end card: D, F sharp, A, D, the A answered
-#    in every octave, ringing on as the film ends
+# 7. Kept as code: B, C sharp, D at the turn, rising. The pull request; the new files, one breath; the grants already there; the data
+#    team's approval: F sharp, A, answered; Mei told what it touches. The job, its runs, run as registrar-loader; each file replaces its
+#    policy whole; the day: morning, afternoon. On the road, the new chemical's line runs to its guide: one A, answered. Here, the new
+#    table's tags, and the spheres answer in every octave; the sweep; the study's view. The take-away; the next film; the end card: D, F
+#    sharp, A, D, the A answered in every octave, ringing on as the film ends
 K7 = lambda lid, word, off=0: W('code', lid, word, off)
 k0 = S0('code')
 phrase(((B2, 0.45), (Cs3, 0.45), (D3, 0.45)), k0 + 0.25, 0.7, ring=2.4)
@@ -321,8 +321,9 @@ paper(k0 + 0.6, 0.008, px(600), 0.4)
 air(K7('kept', 'code', 0.2), 1.0, 0.005, px(400), 200, 1100)
 tap(K7('kept', 'grants', -0.1), 0.006, px(500))
 tap(G('code', 'review', -0.1), 0.006, px(400))
-tap(K7('review', 'approves', -0.1), 0.006, px(300))
-phrase(((Fs3, 0.5), (A3, 0.5)), K7('review', 'approves', 0.0), 0.65, ring=2.4)
+tap(K7('review', 'reviews', -0.1), 0.006, px(300))
+phrase(((Fs3, 0.5), (A3, 0.5)), K7('review', 'reviews', 0.0), 0.65, ring=2.4)
+tap(K7('review', 'told', -0.1), 0.005, px(300))
 paper(G('code', 'runs', -0.2), 0.008, px(1515), 0.4)
 tap(K7('runs', 'test', 0.3), 0.006, px(1500))
 tap(K7('runs', 'registrar-loader', -0.1), 0.006, px(1450))

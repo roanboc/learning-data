@@ -3,8 +3,8 @@
 # in order, on a serverless SQL warehouse (warehouse_id, a variable in the bundle's databricks.yml). It runs as the
 # identity that deploys the bundle: registrar-loader in production, never a person. The deploy workflow
 # runs it after each deploy: test first, then production after a release approver (From a branch to
-# production). Mei Tanaka, the registrar's data owner, is the code owner of these files, so every change
-# is a pull request she approves.
+# production). Every change is a pull request the data team reviews; Mei Tanaka, the registrar's data
+# owner, decides who is let through and is told what each change touches.
 #
 # The policies go in before any grant that opens a door to them: on 14 October 2026 this job ran in the
 # morning, and the study's grant came that afternoon, in a second pull request.

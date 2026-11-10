@@ -87,7 +87,7 @@ const NARR={
 ]},
 "code":{"name":"Kept as code","lead":1.2,"tail":1.0,"vo":[
  {"id":"kept","gap":0.8,"text":"The policies are code, kept beside the grants, in the registrar's bundle."},
- {"id":"review","gap":0.8,"text":"A change is a pull request that Mei approves, as the code owner."},
+ {"id":"review","gap":0.8,"text":"A change is a pull request the data team reviews, and Mei is told what it touches."},
  {"id":"runs","gap":0.8,"text":"It runs in test, then in production after a release approver, as registrar-loader, never a person."},
  {"id":"whole","gap":0.8,"text":"Each file replaces its policy whole, so what the repository says is what runs."},
  {"id":"order","gap":0.3,"text":"On 14 October, the policies went in that morning, and the study's grant that afternoon:","say":"On the fourteenth of October, the policies went in that morning, and the study's grant that afternoon:"},

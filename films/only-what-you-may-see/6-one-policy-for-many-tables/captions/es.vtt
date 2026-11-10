@@ -219,32 +219,32 @@ Una columna sin clase se ve tal cual, hasta que la revisión matutina de Prueba 
 00:07:01.089 --> 00:07:05.415
 Las políticas son código, guardadas junto a los permisos, en el paquete de registro.
 
-00:07:06.515 --> 00:07:10.137
-Un cambio es un pull request que Mei aprueba, como dueña del código.
+00:07:06.515 --> 00:07:11.612
+Un cambio es un pull request que revisa el equipo de datos, y a Mei le avisan qué toca.
 
-00:07:11.437 --> 00:07:17.801
+00:07:12.912 --> 00:07:19.276
 Corre en pruebas y luego en producción tras quien aprueba la entrega, como registrar-loader, nunca una persona.
 
-00:07:19.101 --> 00:07:24.278
+00:07:20.576 --> 00:07:25.753
 Cada archivo reemplaza su política entera: lo que dice el repositorio es lo que corre.
 
-00:07:25.578 --> 00:07:31.068
+00:07:27.053 --> 00:07:32.543
 El 14 de octubre, las políticas entraron esa mañana, y el permiso del estudio esa tarde:
 
-00:07:31.268 --> 00:07:32.898
+00:07:32.743 --> 00:07:34.373
 primero las reglas, luego la puerta.
 
-00:07:34.598 --> 00:07:39.196
+00:07:36.073 --> 00:07:40.671
 En la carretera, una guía se escribe una vez, y una sustancia nueva solo necesita una línea.
 
-00:07:40.296 --> 00:07:44.767
+00:07:41.771 --> 00:07:46.242
 Aquí, una política se escribe una vez, y una tabla nueva solo necesita sus etiquetas.
 
-00:07:46.067 --> 00:07:52.224
+00:07:47.542 --> 00:07:53.699
 Así, el nombre de un estudiante sigue oculto llegue a donde llegue, y el estudio ve solo a los de su facultad.
 
-00:07:53.524 --> 00:07:57.975
+00:07:54.999 --> 00:07:59.450
 La política sigue a la etiqueta: las tablas nuevas quedan protegidas el día en que aparecen.
 
-00:08:00.075 --> 00:08:02.114
+00:08:01.550 --> 00:08:03.589
 Siguiente: Copias que mantienen las reglas.

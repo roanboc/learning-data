@@ -526,7 +526,7 @@ const NARR={
 ]},
 "code":{"name":"Kept as code","lead":1.2,"tail":1.0,"vo":[
  {"id":"kept","gap":0.8,"text":"The policies are code, kept beside the grants, in the registrar's bundle."},
- {"id":"review","gap":0.8,"text":"A change is a pull request that Mei approves, as the code owner."},
+ {"id":"review","gap":0.8,"text":"A change is a pull request the data team reviews, and Mei is told what it touches."},
  {"id":"runs","gap":0.8,"text":"It runs in test, then in production after a release approver, as registrar-loader, never a person."},
  {"id":"whole","gap":0.8,"text":"Each file replaces its policy whole, so what the repository says is what runs."},
  {"id":"order","gap":0.3,"text":"On 14 October, the policies went in that morning, and the study's grant that afternoon:","say":"On the fourteenth of October, the policies went in that morning, and the study's grant that afternoon:"},
@@ -539,7 +539,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"page/place": 2.368, "page/crash": 6.628, "page/page": 3.894, "page/find": 3.645, "page/cab": 3.197, "page/none": 2.625, "page/wrong": 5.257, "page/homes": 2.025, "page/change": 1.288, "page/book": 4.255, "page/share": 4.7, "page/number": 2.985, "page/line": 4.067, "page/unknown": 4.632, "page/today": 6.838, "page/upwind": 3.071, "page/knows": 4.067, "page/same": 6.506, "page/tag": 6.256, "page/lands": 2.837, "mask/day": 7.537, "mask/least": 5.394, "mask/tables": 5.676, "mask/hand": 5.886, "mask/grants": 5.477, "mask/later": 2.45, "mask/every": 3.185, "mask/sam": 5.962, "parts/four": 1.534, "parts/where": 6.077, "parts/whom": 3.154, "parts/finds": 4.578, "parts/does": 1.663, "parts/before": 2.674, "parts/each": 5.426, "parts/rows": 5.661, "parts/shelf": 5.731, "parts/needs": 4.991, "parts/without": 2.233, "ways/small": 4.808, "ways/whole": 4.46, "ways/part": 4.67, "ways/general": 4.241, "ways/type": 5.034, "ways/filter": 5.136, "ways/other": 1.478, "ways/code": 4.318, "ways/out": 4.071, "through/covers": 3.102, "through/owner": 3.128, "through/decide": 4.581, "through/loader": 5.512, "through/help": 3.345, "through/given": 1.985, "through/one": 2.353, "through/two": 3.763, "through/study": 2.886, "through/allows": 3.118, "through/agent": 6.754, "through/compute": 7.895, "through/older": 1.688, "appears/day": 7.384, "appears/classes": 4.365, "appears/level": 1.567, "appears/nine": 2.937, "appears/first": 5.198, "appears/study": 3.351, "appears/road": 5.372, "appears/here": 4.978, "appears/until": 1.51, "appears/tag": 2.346, "appears/check": 5.225, "code/kept": 4.226, "code/review": 3.522, "code/runs": 6.264, "code/whole": 5.077, "code/order": 5.39, "code/door": 1.53, "code/road": 4.498, "code/here": 4.371, "code/lands": 6.057, "code/take": 4.351, "code/next": 1.939};
+const VODUR={"page/place": 2.368, "page/crash": 6.628, "page/page": 3.894, "page/find": 3.645, "page/cab": 3.197, "page/none": 2.625, "page/wrong": 5.257, "page/homes": 2.025, "page/change": 1.288, "page/book": 4.255, "page/share": 4.7, "page/number": 2.985, "page/line": 4.067, "page/unknown": 4.632, "page/today": 6.838, "page/upwind": 3.071, "page/knows": 4.067, "page/same": 6.506, "page/tag": 6.256, "page/lands": 2.837, "mask/day": 7.537, "mask/least": 5.394, "mask/tables": 5.676, "mask/hand": 5.886, "mask/grants": 5.477, "mask/later": 2.45, "mask/every": 3.185, "mask/sam": 5.962, "parts/four": 1.534, "parts/where": 6.077, "parts/whom": 3.154, "parts/finds": 4.578, "parts/does": 1.663, "parts/before": 2.674, "parts/each": 5.426, "parts/rows": 5.661, "parts/shelf": 5.731, "parts/needs": 4.991, "parts/without": 2.233, "ways/small": 4.808, "ways/whole": 4.46, "ways/part": 4.67, "ways/general": 4.241, "ways/type": 5.034, "ways/filter": 5.136, "ways/other": 1.478, "ways/code": 4.318, "ways/out": 4.071, "through/covers": 3.102, "through/owner": 3.128, "through/decide": 4.581, "through/loader": 5.512, "through/help": 3.345, "through/given": 1.985, "through/one": 2.353, "through/two": 3.763, "through/study": 2.886, "through/allows": 3.118, "through/agent": 6.754, "through/compute": 7.895, "through/older": 1.688, "appears/day": 7.384, "appears/classes": 4.365, "appears/level": 1.567, "appears/nine": 2.937, "appears/first": 5.198, "appears/study": 3.351, "appears/road": 5.372, "appears/here": 4.978, "appears/until": 1.51, "appears/tag": 2.346, "appears/check": 5.225, "code/kept": 4.226, "code/review": 4.997, "code/runs": 6.264, "code/whole": 5.077, "code/order": 5.39, "code/door": 1.53, "code/road": 4.498, "code/here": 4.371, "code/lands": 6.057, "code/take": 4.351, "code/next": 1.939};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2520,12 +2520,13 @@ scene("appears",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
 const OP_TREE=[["registrar/resources/catalog.yml",false],["registrar/resources/schemas.yml",false],["registrar/resources/policies.job.yml",true],
   ["registrar/policies/functions.sql",true],["registrar/policies/policies.sql",true],["registrar/policies/studies.sql",true],["registrar/policies/check.sql",true]];
 scene("code",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
-    codeW:wAt(sc,"kept","code"),grants:wAt(sc,"kept","grants"),review:c.review,approves:wAt(sc,"review","approves"),
+    codeW:wAt(sc,"kept","code"),grants:wAt(sc,"kept","grants"),review:c.review,reviews:wAt(sc,"review","reviews"),told:wAt(sc,"review","told"),
     runs:c.runs,test:wAt(sc,"runs","test"),prod:wAt(sc,"runs","production"),appr:wAt(sc,"runs","approver"),rl:wAt(sc,"runs","registrar-loader"),
     whole:c.whole,replaces:wAt(sc,"whole","replaces"),order:c.order,morning:wAt(sc,"order","morning"),afternoon:wAt(sc,"order","afternoon"),
     road:c.road,once:wAt(sc,"road","once"),line:wAt(sc,"road","line"),here:c.here,tags:wAt(sc,"here","tags"),lands:c.lands,hidden:wAt(sc,"lands","hidden"),
     studyW:wAt(sc,"lands","study"),only:wAt(sc,"lands","only"),take:c.take,next:c.next,fin:c.breath}));
-  // the pull request on GitHub, Mei's review, the job that deploys it, and the day it went in
+  // the pull request on GitHub, the data team's review, Mei told what it touches (owners never review a pull request), the job that
+  // deploys it, and the day it went in
   const hallA=(x,tt)=>{const ga=ag_in(tt,0.6,0.6);
       if(ga>0){dp_page(x,60,120,1080,700,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"Policies by tag for the registrar",a:ga,behind:"opHall"});
         withA(x,ga,()=>{const tr=1-ag_in(tt,P.whole-0.2,0.4);
@@ -2536,8 +2537,11 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
           const cd=ag_in(tt,P.whole+0.4,0.5);
           if(cd>0)withA(x,cd,()=>{dp_T(x,"registrar/policies/policies.sql",92,330,{w:500,size:28,f:"mono",col:"mut"});
             op_code(x,120,400,OP_SQL.slice(0,3).concat(["…"]),{lit:{0:["cyan",ag_in(tt,P.replaces,0.4)]}});});
-          dp_T(x,"Review required · @uni-example/registrar-data-owners",92,690,{w:600,size:28,col:"mut",a:ag_in(tt,P.review-0.1,0.4)});
-          const ap=ag_in(tt,P.approves-0.1,0.4);if(ap>0){dp_tick(x,112,736,"green",ap);withA(x,ap,()=>dp_T(x,"Mei Tanaka approved these changes",148,746,{w:600,size:28,col:"green"}));}});}
+          // the review asked of the data team leaves, then its approval comes in its place; then Mei is told what it touches
+          const ap=ag_in(tt,P.reviews-0.1,0.6),rq=ag_in(tt,P.review-0.1,0.4)*(1-clamp(ap/0.45,0,1)),ok=clamp((ap-0.55)/0.45,0,1);
+          if(rq>0)dp_T(x,"Review required · data team",92,690,{w:600,size:28,col:"mut",a:rq});
+          if(ok>0){dp_tick(x,112,680,"green",ok);withA(x,ok,()=>dp_T(x,"Approved by the data team",148,690,{w:600,size:28,col:"green"}));}
+          const tl=ag_in(tt,P.told-0.1,0.4);if(tl>0)withA(x,tl,()=>{const pw=dp_pill(x,92,746,"Told","cyan",{size:28});dp_T(x,"Mei Tanaka · what it touches",112+pw,746,{w:600,size:28});});});}
       const ja=ag_in(tt,P.runs-0.2,0.6);
       if(ja>0){dp_page(x,1170,120,690,520,{tool:"databricks",name:"Databricks",where:"Jobs & Pipelines",a:ja,behind:"opHall"});
         withA(x,ja,()=>{dp_T(x,"registrar_policies",1202,270,{w:500,size:30,f:"mono"});

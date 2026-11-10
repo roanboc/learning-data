@@ -154,8 +154,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una columna sin clase se ve tal cual, hasta que la revisión matutina de Prueba de que se cumplió la encuentra.",
 "The policies are code, kept beside the grants, in the registrar's bundle.":
 "Las políticas son código, guardadas junto a los permisos, en el paquete de registro.",
-"A change is a pull request that Mei approves, as the code owner.":
-"Un cambio es un pull request que Mei aprueba, como dueña del código.",
+"A change is a pull request the data team reviews, and Mei is told what it touches.":
+"Un cambio es un pull request que revisa el equipo de datos, y a Mei le avisan qué toca.",
 "It runs in test, then in production after a release approver, as registrar-loader, never a person.":
 "Corre en pruebas y luego en producción tras quien aprueba la entrega, como registrar-loader, nunca una persona.",
 "Each file replaces its policy whole, so what the repository says is what runs.":

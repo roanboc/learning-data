@@ -343,12 +343,13 @@ scene("appears",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
 const OP_TREE=[["registrar/resources/catalog.yml",false],["registrar/resources/schemas.yml",false],["registrar/resources/policies.job.yml",true],
   ["registrar/policies/functions.sql",true],["registrar/policies/policies.sql",true],["registrar/policies/studies.sql",true],["registrar/policies/check.sql",true]];
 scene("code",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
-    codeW:wAt(sc,"kept","code"),grants:wAt(sc,"kept","grants"),review:c.review,approves:wAt(sc,"review","approves"),
+    codeW:wAt(sc,"kept","code"),grants:wAt(sc,"kept","grants"),review:c.review,reviews:wAt(sc,"review","reviews"),told:wAt(sc,"review","told"),
     runs:c.runs,test:wAt(sc,"runs","test"),prod:wAt(sc,"runs","production"),appr:wAt(sc,"runs","approver"),rl:wAt(sc,"runs","registrar-loader"),
     whole:c.whole,replaces:wAt(sc,"whole","replaces"),order:c.order,morning:wAt(sc,"order","morning"),afternoon:wAt(sc,"order","afternoon"),
     road:c.road,once:wAt(sc,"road","once"),line:wAt(sc,"road","line"),here:c.here,tags:wAt(sc,"here","tags"),lands:c.lands,hidden:wAt(sc,"lands","hidden"),
     studyW:wAt(sc,"lands","study"),only:wAt(sc,"lands","only"),take:c.take,next:c.next,fin:c.breath}));
-  // the pull request on GitHub, Mei's review, the job that deploys it, and the day it went in
+  // the pull request on GitHub, the data team's review, Mei told what it touches (owners never review a pull request), the job that
+  // deploys it, and the day it went in
   const hallA=(x,tt)=>{const ga=ag_in(tt,0.6,0.6);
       if(ga>0){dp_page(x,60,120,1080,700,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"Policies by tag for the registrar",a:ga,behind:"opHall"});
         withA(x,ga,()=>{const tr=1-ag_in(tt,P.whole-0.2,0.4);
@@ -359,8 +360,11 @@ scene("code",(ctx,S,t,sc)=>{const c=sc.cues,P=op_once(sc,"P",()=>({
           const cd=ag_in(tt,P.whole+0.4,0.5);
           if(cd>0)withA(x,cd,()=>{dp_T(x,"registrar/policies/policies.sql",92,330,{w:500,size:28,f:"mono",col:"mut"});
             op_code(x,120,400,OP_SQL.slice(0,3).concat(["…"]),{lit:{0:["cyan",ag_in(tt,P.replaces,0.4)]}});});
-          dp_T(x,"Review required · @uni-example/registrar-data-owners",92,690,{w:600,size:28,col:"mut",a:ag_in(tt,P.review-0.1,0.4)});
-          const ap=ag_in(tt,P.approves-0.1,0.4);if(ap>0){dp_tick(x,112,736,"green",ap);withA(x,ap,()=>dp_T(x,"Mei Tanaka approved these changes",148,746,{w:600,size:28,col:"green"}));}});}
+          // the review asked of the data team leaves, then its approval comes in its place; then Mei is told what it touches
+          const ap=ag_in(tt,P.reviews-0.1,0.6),rq=ag_in(tt,P.review-0.1,0.4)*(1-clamp(ap/0.45,0,1)),ok=clamp((ap-0.55)/0.45,0,1);
+          if(rq>0)dp_T(x,"Review required · data team",92,690,{w:600,size:28,col:"mut",a:rq});
+          if(ok>0){dp_tick(x,112,680,"green",ok);withA(x,ok,()=>dp_T(x,"Approved by the data team",148,690,{w:600,size:28,col:"green"}));}
+          const tl=ag_in(tt,P.told-0.1,0.4);if(tl>0)withA(x,tl,()=>{const pw=dp_pill(x,92,746,"Told","cyan",{size:28});dp_T(x,"Mei Tanaka · what it touches",112+pw,746,{w:600,size:28});});});}
       const ja=ag_in(tt,P.runs-0.2,0.6);
       if(ja>0){dp_page(x,1170,120,690,520,{tool:"databricks",name:"Databricks",where:"Jobs & Pipelines",a:ja,behind:"opHall"});
         withA(x,ja,()=>{dp_T(x,"registrar_policies",1202,270,{w:500,size:30,f:"mono"});

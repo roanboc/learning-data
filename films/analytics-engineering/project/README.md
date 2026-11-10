@@ -44,7 +44,7 @@ Then, if you like:
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner, and the hours spent checking the graduation list by hand. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
-| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
+| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
 | `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
@@ -236,7 +236,7 @@ project/
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
 │                             insight by morning, the fix and the pull request a person approved
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
+├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
 ├── memory/                   the team's memory, kept by the platform and second to what's governed:
 │                             who owns it and may read or write it; removed.md, what was deleted, why

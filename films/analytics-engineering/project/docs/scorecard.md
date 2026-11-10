@@ -16,9 +16,9 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 26/26 | 19/19 | 8/8 | 19/19 |  | 72/72 |
+| `student` | 26/26 | 19/19 | 8/8 | 19/19 | 3/3 (2 warn) | 75/75 (2 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 79/79 (1 warn) | 54/54 | 40/40 (2 warn) | 43/43 | 2/2 | 218/218 (3 warn) |
+| **All** | 79/79 (1 warn) | 54/54 | 40/40 (2 warn) | 43/43 | 5/5 (2 warn) | 221/221 (5 warn) |
 
 ## Not passed
 
@@ -27,6 +27,8 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
 | warn | `registrar` | validity | `family_name_in_capitals_only` | Mei Tanaka, registrar's office | 3 |
 | warn | `registrar` | validity | `family_name_may_be_cut_short` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |
 
 ## Hand-check hours
 

@@ -41,8 +41,8 @@ seeds:
       day the round's list went, how many names were on it, how many the team checked against the
       documents seen at enrolment, and the hours, from the team's calendar. The hidden work,
       counted, so the scorecard can show it beside the checks and everyone can watch it fall
-      (The hidden factory). Owned by the graduations office; a new round comes through a pull
-      request they approve.
+      (The hidden factory). Owned by the graduations office, who count each round; the data team
+      reviews the pull request that adds it.
     config:
       column_types:
         ceremony_round: string

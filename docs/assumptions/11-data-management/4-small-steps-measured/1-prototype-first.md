@@ -1,6 +1,6 @@
 # Prototype first: questions and assumptions
 
-*Data management* · *Small steps, measured*, film 1 of 4 · merged, PR #266 · [pull request](https://github.com/roanboc/learning-data/pull/266)
+*Data management* · *Small steps, measured*, film 1 · merged, PR #266 · [pull request](https://github.com/roanboc/learning-data/pull/266)
 
 [Watch it on the site](https://data.learn-all.org/small-steps-measured/prototype-first/)
 

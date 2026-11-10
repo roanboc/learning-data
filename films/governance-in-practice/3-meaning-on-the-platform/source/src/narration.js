@@ -32,13 +32,13 @@ const NARR={
  {"id":"monday","gap":0.8,"text":"On Monday night, award had changed."},
  {"id":"opened","gap":0.8,"text":"So the check proposed the change, in a pull request: the old words and the new, and what the new words touch."},
  {"id":"three","gap":0.8,"text":"Three tables, eight definitions that name award, the code that builds them, and three reports and apps to tell."},
- {"id":"tuesday","gap":0.8,"text":"On Tuesday morning, Mei approved the meaning, and data governance confirmed the term."},
+ {"id":"tuesday","gap":0.8,"text":"On Tuesday morning, the data team reviewed the code, and Mei was told what it touches."},
  {"id":"saw","gap":0.8,"text":"This time, she saw where her words are used."}]},
 "setting":{"name":"A number is a setting","lead":0.8,"tail":0.8,"vo":[
  {"id":"number","gap":0.8,"text":"The new words hold a number: 6 credit points.","say":"The new words hold a number: six credit points."},
  {"id":"kept","gap":0.8,"text":"So it's kept in one place, as a setting: min award credit points, 6.","say":"So it's kept in one place, as a setting: min award credit points, six."},
  {"id":"reads","gap":0.8,"text":"Jun's new column, counts as an award, reads it, and every count of awards reads the column."},
- {"id":"agree","gap":0.8,"text":"If Mei and the faculties ever agree on another number, one line changes, in a reviewed pull request."}]},
+ {"id":"agree","gap":0.8,"text":"If Mei and the faculties ever agree on another number, the glossary changes first, then one line, in a pull request the data team reviews."}]},
 "count":{"name":"Counted once","lead":0.8,"tail":0.8,"vo":[
  {"id":"meaning","gap":0.8,"text":"A count is a meaning too: which credentials count, and in which year."},
  {"id":"once","gap":0.8,"text":"So awards conferred is counted once, as a metric view: a count the platform defines once, for every tool that asks."},

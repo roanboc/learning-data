@@ -1,0 +1,72 @@
+// Decades in the making, the opening film of What an agent is. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"story":{"name":"An idea that waited","lead":1.6,"tail":1.0,"vo":[
+ {"id":"europe","gap":0.8,"text":"Europe, in the 1440s. Every book is copied by hand, letter by letter.","say":"Europe, in the fourteen-forties. Every book is copied by hand, letter by letter."},
+ {"id":"rare","gap":0.8,"text":"So books are slow to make, and rare."},
+ {"id":"cambridge","gap":0.8,"text":"In 1424, the University of Cambridge's library held 122 books.","say":"In fourteen twenty-four, the University of Cambridge's library held a hundred and twenty-two books."},
+ {"id":"mistakes","gap":0.8,"text":"And every new copy can add new mistakes."},
+ {"id":"change","gap":0.8,"text":"Something has to change."},
+ {"id":"old","gap":0.8,"text":"The idea that will change it is already four hundred years old."},
+ {"id":"clay","gap":0.8,"text":"In China, in the 1040s, Bi Sheng made a piece of baked clay for each character.","say":"In China, in the ten-forties, Bee Shung made a piece of baked clay for each character."},
+ {"id":"frame","gap":0.8,"text":"He set them in an iron frame, printed a page, and used them again."},
+ {"id":"korea","gap":0.8,"text":"In Korea, in 1377, monks printed a book with characters cast in metal: the oldest that survives.","say":"In Korea, in thirteen seventy-seven, monks printed a book with characters cast in metal: the oldest that survives."},
+ {"id":"mainz","gap":0.8,"text":"In Mainz, around 1450, a metalworker, Johannes Gutenberg, brought the other pieces together.","say":"In Mainz, around fourteen fifty, a metalworker, Yohannes Gootenberg, brought the other pieces together."},
+ {"id":"pieces","gap":0.8,"text":"Letters cast in metal, all alike; an ink that clings to them; a press, like a wine press; and paper, now made in Germany."},
+ {"id":"fust","gap":0.8,"text":"And a lender, Johann Fust, put up the money for years of trying.","say":"And a lender, Yohann Foost, put up the money for years of trying."},
+ {"id":"towns","gap":0.8,"text":"By 1500, presses in more than two hundred towns had printed some thirty thousand different books.","say":"By fifteen hundred, presses in more than two hundred towns had printed some thirty thousand different books."},
+ {"id":"cheaper","gap":0.8,"text":"And books grew cheaper, reaching far more readers."},
+ {"id":"seemed","gap":0.8,"text":"Printing seemed to arrive all at once. It had taken four hundred years."},
+ {"id":"agent","gap":0.8,"text":"This term, an AI agent joins Jun Park's data team: software that works through tasks, step by step."},
+ {"id":"nowhere","gap":0.8,"text":"To some, it's come from nowhere. Some fear it; some expect magic."},
+ {"id":"ideas","gap":0.8,"text":"But its ideas are decades old, and seen as long work, it's something they can understand."}]},
+"learns":{"name":"A machine that learns","lead":1.2,"tail":1.0,"vo":[
+ {"id":"road","gap":0.8,"text":"Our road starts in July 1958.","say":"Our road starts in July, nineteen fifty-eight."},
+ {"id":"navy","gap":0.8,"text":"The US Navy showed reporters a perceptron, a program by the psychologist Frank Rosenblatt that learns from examples."},
+ {"id":"cards","gap":0.8,"text":"Shown cards marked on the left or the right, it guessed, and each wrong guess nudged its numbers."},
+ {"id":"fifty","gap":0.8,"text":"After fifty tries, it could tell them apart by itself."},
+ {"id":"paper","gap":0.8,"text":"A newspaper said the Navy expected it to walk, talk, and be conscious of its existence."},
+ {"id":"layer","gap":0.8,"text":"But a single layer can't learn some patterns at all, as a book showed in 1969, and money moved elsewhere.","say":"But a single layer can't learn some patterns at all, as a book showed in nineteen sixty-nine, and money moved elsewhere."}]},
+"mistakes":{"name":"Learning from mistakes","lead":1.2,"tail":1.0,"vo":[
+ {"id":"layers","gap":0.8,"text":"In 1986, three researchers showed how a network with several layers can learn.","say":"In nineteen eighty-six, three researchers showed how a network with several layers can learn."},
+ {"id":"guess","gap":0.8,"text":"It makes a guess, and measures how wrong it is."},
+ {"id":"back","gap":0.8,"text":"The error is passed back, layer by layer, and every connection is nudged to make it smaller."},
+ {"id":"patterns","gap":0.8,"text":"Over many examples, the layers in between find patterns no one told them to look for."},
+ {"id":"small","gap":0.8,"text":"But computers were slow and examples few, and for twenty years these networks stayed small."}]},
+"power":{"name":"The power to run","lead":1.2,"tail":1.0,"vo":[
+ {"id":"together","gap":0.8,"text":"In 2012, the pieces came together.","say":"In twenty twelve, the pieces came together."},
+ {"id":"photos","gap":0.8,"text":"A team in Toronto trained a much bigger network on more than a million labelled photos."},
+ {"id":"chips","gap":0.8,"text":"It ran on two graphics chips, made for video games, which do hundreds of small sums at once."},
+ {"id":"contest","gap":0.8,"text":"In an image contest, its five best guesses missed the answer 15 times in a hundred.","say":"In an image contest, its five best guesses missed the answer fifteen times in a hundred."},
+ {"id":"next","gap":0.8,"text":"The next best entry missed 26.","say":"The next best entry missed twenty-six."},
+ {"id":"new","gap":0.8,"text":"The ideas were old. What was new was the power to run them."}]},
+"attention":{"name":"Attention","lead":1.2,"tail":1.0,"vo":[
+ {"id":"paper","gap":0.8,"text":"In 2017, a paper called Attention Is All You Need changed how these networks read.","say":"In twenty seventeen, a paper called Attention Is All You Need changed how these networks read."},
+ {"id":"before","gap":0.8,"text":"Before, they read a sentence one word at a time."},
+ {"id":"once","gap":0.8,"text":"Its design, the transformer, takes in all the words at once, and learns which matter to each other."},
+ {"id":"report","gap":0.8,"text":"In \"The team fixed the report because it was wrong\", it learns that \"it\" is the report."},
+ {"id":"bigger","gap":0.8,"text":"Reading all at once splits the work across many chips, so models could grow far bigger."}]},
+"web":{"name":"The written web","lead":1.2,"tail":1.0,"vo":[
+ {"id":"text","gap":0.8,"text":"From 2018 to 2020, researchers trained transformers on huge collections of text from the web and books.","say":"From twenty eighteen to twenty twenty, researchers trained transformers on huge collections of text from the web and books."},
+ {"id":"task","gap":0.8,"text":"The task was simple: guess the next word, check it, and adjust."},
+ {"id":"billions","gap":0.8,"text":"Billions of times over, a model picked up grammar, facts and ways of writing."},
+ {"id":"largest","gap":0.8,"text":"The largest, in 2020, had 175 billion numbers to tune.","say":"The largest, in twenty twenty, had a hundred and seventy-five billion numbers to tune."},
+ {"id":"help","gap":0.8,"text":"It wrote fluently, but it wasn't trying to help: it only carried on the text."}]},
+"helpful":{"name":"Helpful, with hands","lead":1.2,"tail":1.0,"vo":[
+ {"id":"rank","gap":0.8,"text":"In 2022, researchers asked people to rank a model's answers, from best to worst.","say":"In twenty twenty-two, researchers asked people to rank a model's answers, from best to worst."},
+ {"id":"trained","gap":0.8,"text":"Then they trained it to give the kind of answers people preferred."},
+ {"id":"smaller","gap":0.8,"text":"People preferred its answers to those of a model a hundred times bigger."},
+ {"id":"steps","gap":0.8,"text":"Since 2024, models have also been trained to work through a problem step by step before they answer.","say":"Since twenty twenty-four, models have also been trained to work through a problem step by step before they answer."},
+ {"id":"tools","gap":0.8,"text":"And they can use tools: search, run a query, read a file, and work with what comes back."},
+ {"id":"agent","gap":0.8,"text":"A model that reasons, with hands for tools, in a loop: that's an agent."}]},
+"sudden":{"name":"Why it seemed sudden","lead":1.2,"tail":1.0,"vo":[
+ {"id":"why","gap":0.8,"text":"So why did it seem so sudden?"},
+ {"id":"three","gap":0.8,"text":"Because three things arrived together."},
+ {"id":"compute","gap":0.8,"text":"Computing power: since 2010, the computing used to train the largest models has doubled about every six months.","say":"Computing power: since twenty ten, the computing used to train the largest models has doubled about every six months."},
+ {"id":"data","gap":0.8,"text":"Data: the web, and millions of labelled examples."},
+ {"id":"money","gap":0.8,"text":"And money: the first transformer cost about nine hundred dollars to train; by 2023, the biggest cost tens of millions or more.","say":"And money: the first transformer cost about nine hundred dollars to train; by twenty twenty-three, the biggest cost tens of millions or more."},
+ {"id":"long","gap":0.8,"text":"It wasn't a sudden discovery. It was long work that finally had the power to run."},
+ {"id":"printing","gap":0.8,"text":"Printing waited four hundred years for metal letters, paper, a press and a lender."},
+ {"id":"decades","gap":0.8,"text":"These ideas waited decades for chips, data and money."},
+ {"id":"team","gap":0.8,"text":"So nobody on Jun's team expects magic from the agent, or needs to fear it: they know where it came from."}]}
+};

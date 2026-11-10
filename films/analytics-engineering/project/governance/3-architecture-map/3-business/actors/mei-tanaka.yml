@@ -1,0 +1,7 @@
+name: Mei Tanaka
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data owner
+status: confirmed

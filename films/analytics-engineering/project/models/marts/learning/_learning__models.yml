@@ -1,0 +1,52 @@
+models:
+
+  - name: mart_learning__enrolments_to_follow_up
+    description: >
+      The learning team's follow-up list: each current short-course enrolment with no email, so
+      not yet matched to a learner. The team works through it, finding who each one is and adding
+      their email at the platform; an enrolment leaves the list when it has one (DEC-SC-01). A rule
+      about what people do, tracked here, not failed as a test.
+    config:
+      meta:
+        grain: One row per current short-course enrolment with no email
+        owner: Learning team
+        domain: learning
+        consumer: The learning team
+    constraints:
+      - type: primary_key
+        name: pk_mart_learning__enrolments_to_follow_up
+        columns: [enrolment_bk]
+        warn_unenforced: false
+    columns:
+      - name: enrolment_bk
+        description: The enrolment's key, qualified by its key set, like SC|E-7010. It holds no person.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+        config:
+          meta: {personal_data: none}
+      - name: course_code
+        description: The short course's code, like SC-FA.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: course_name
+        description: The short course's name.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: enrolment_status
+        description: Where the enrolment is, as the platform records it (enrolled, completed).
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: enrolled_on
+        description: The day the platform first recorded the enrolment.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: days_open
+        description: Days since the enrolment was recorded, as at the build (var as_is_date, or today). The longer, the harder to find who it is.
+        data_type: int
+        config:
+          meta: {personal_data: none}

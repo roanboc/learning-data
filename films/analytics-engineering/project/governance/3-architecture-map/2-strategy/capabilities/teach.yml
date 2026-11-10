@@ -1,0 +1,9 @@
+name: teach
+kind: capability
+definition: People know what governance asks, why, and how to do it, where they work.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: govern data
+heat: red
+evidence: 'nothing yet: no guidance, no community of practice, no onboarding · 20 Oct 2026'
+status: confirmed

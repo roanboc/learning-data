@@ -1,0 +1,34 @@
+seeds:
+
+  - name: tuition_rates
+    description: >
+      One row per award type per year: the tuition rate per credit point that Finance publishes
+      for that year. Reference data, owned by Finance; changes come through a pull request Finance
+      approves.
+    config:
+      column_types:
+        award_type: string
+        rate_year: int
+        rate_per_credit_point: int
+        currency: string
+        published_by: string
+        published_on: date
+      meta: {owner: Finance, domain: finance, purpose: reference}
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [award_type, rate_year]
+    columns:
+      - name: award_type
+        description: '{{ doc("award_type") }}'
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [graduate certificate, master]
+      - name: rate_year
+        description: The calendar year the rate applies to.
+      - name: rate_per_credit_point
+        description: The published tuition for one credit point, in whole dollars.
+        data_tests: [not_null]
+      - name: published_on
+        description: When Finance published the rate.

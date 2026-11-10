@@ -1,0 +1,21 @@
+{
+  "key": "now-the-questions-appear",
+  "title": "Now the questions appear",
+  "sub": "The map before the data, a series on enterprise architecture and why it matters for data: a backlog of requests traced up to the decisions and goals they serve, or to nothing; goals traced down to decisions, questions and measures; each measure defined once, given a home on the map and an owner; and data products scoped by capability and domain, not by request.",
+  "howto": "Paper on a wall is a draft or a request; glass in the layers' colours is the confirmed model. Purple is motivation, where goals live; amber is strategy, where capabilities live; yellow is the business layer, where decisions are made; peach is information, where questions and measures live. Cyan outlines the technical side, gold the business side.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["kerala", "phones", 5.6],
+  "say": [
+    [
+      "\\bTomás's\\b",
+      "Toh-mahs's"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahs"
+    ]
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "key": "a-hub-at-work",
+  "title": "A hub at work",
+  "sub": "The same one, everywhere, a series on master and reference data: a master data hub on the platform, on a Monday morning. Rules act on a weekend's changes, an AI helper drafts a note on the first of eight cases too close to call, and Mei decides, with a reason the hub keeps; then the change is published for each system to read, every value shows where it came from, a colleague checks the checkers on Friday, and the film ends with five questions to ask of any hub.",
+  "howto": "The film is drawn in watercolour. Each system wears its role's colour: the student system teal, the alumni office green, HR violet, the research office coral, and an application amber. The person, as the master record, is left as white paper and banded in his roles' colours. A pencil line is the rules, a dashed cyan card is the AI helper's draft, and gold is a person's decision.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "monday",
+    "hub",
+    3.0
+  ],
+  "story": [
+    "monday"
+  ],
+  "say": [
+    [
+      "\\bRafael\\b",
+      "Rafa-ell"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ]
+  ]
+}

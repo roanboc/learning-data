@@ -1,0 +1,33 @@
+{
+  "key": "a-capability-not-a-project",
+  "title": "A capability, not a project",
+  "sub": "Film 1 of 3 of Governance on the map, the second series on data governance: governance lasts only as something the university always does, so it's drawn on the architecture map as a capability, coloured by evidence, with services people can ask for, each with a promise.",
+  "howto": "The film is painted in watercolour, in the university's own rooms, and on the land behind a dike in Holland, around 1300. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions; on the heat map, green runs in the work, amber is what people still have to remember, and red is what nobody does yet.",
+  "src": [
+    "plan.js",
+    "past.js",
+    "holland.js",
+    "board.js",
+    "storm.js",
+    "uni.js",
+    "scenes.js"
+  ],
+  "story": [
+    "dike"
+  ],
+  "poster": [
+    "dike",
+    "walks",
+    2.0
+  ],
+  "say": [
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

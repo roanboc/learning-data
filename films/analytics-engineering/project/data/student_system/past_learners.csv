@@ -1,0 +1,7 @@
+student_id,given_name,family_name,email,status_code,award_code,effective_date,_valid_from,_valid_to,_is_current,_loaded_at
+S-16511,Rosa,Delgado,rosa.delgado@mail.example,ENR,BHIM,2018-02-26,2018-02-27 02:00:00,2021-12-15 02:00:00,false,2024-11-01 02:00:00
+S-16511,Rosa,Delgado,rosa.delgado@mail.example,CMP,BHIM,2021-12-14,2021-12-15 02:00:00,,true,2024-11-01 02:00:00
+S-17142,Thi Linh,Nguyen,linh.nguyen2001@mail.example,ENR,BHIM,2019-02-25,2019-02-26 02:00:00,2022-12-16 02:00:00,false,2024-11-01 02:00:00
+S-17142,Thi Linh,Nguyen,linh.nguyen2001@mail.example,CMP,BHIM,2022-12-15,2022-12-16 02:00:00,,true,2024-11-01 02:00:00
+S-17820,Tariq,Aziz,tariq.aziz@mail.example,ENR,BIT,2020-02-24,2020-02-25 02:00:00,2021-05-04 02:00:00,false,2024-11-01 02:00:00
+S-17820,Tariq,Aziz,tariq.aziz@mail.example,WD,BIT,2021-05-03,2021-05-04 02:00:00,,true,2024-11-01 02:00:00

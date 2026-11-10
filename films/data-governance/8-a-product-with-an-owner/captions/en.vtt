@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:03.446
+Istanbul, 1461.
+
+00:00:04.546 --> 00:00:10.683
+Sultan Mehmed the Second has a stone hall built for the city's most precious goods: the bedesten.
+
+00:00:11.983 --> 00:00:13.888
+Shops spread into the streets around it.
+
+00:00:14.888 --> 00:00:18.784
+By the 1520s, nearly eight hundred stand outside its walls.
+
+00:00:20.084 --> 00:00:27.279
+With so many, a buyer can lose hours searching, pay for poor goods, or be sold short, given less than they paid for.
+
+00:00:28.479 --> 00:00:32.600
+When no one answers for it, buyers stop coming, and the traders lose them.
+
+00:00:33.300 --> 00:00:35.130
+A market this big needs order.
+
+00:00:36.430 --> 00:00:39.769
+In time, each trade has its own street, named after it.
+
+00:00:41.069 --> 00:00:44.606
+And each has its guild, with rules for what its goods must be.
+
+00:00:45.306 --> 00:00:49.273
+The guild's officers check the goods, and so does the market inspector.
+
+00:00:50.373 --> 00:00:52.638
+A master who sells short answers for it.
+
+00:00:53.938 --> 00:00:58.466
+So a buyer knows where to find a thing, what it will be, and who stands behind it.
+
+00:00:59.566 --> 00:01:00.601
+And they come back.
+
+00:01:02.101 --> 00:01:08.497
+Data has the same problem, and the same answer: a product, with a promise, and someone who answers for it.
+
+00:01:15.797 --> 00:01:22.413
+Today, Yusuf takes down another policy: data is managed as an asset, with clear accountability.
+
+00:01:23.713 --> 00:01:28.383
+Anil, an analyst in the Faculty of Health, tells him what happened last March.
+
+00:01:29.483 --> 00:01:34.288
+On census day, Planning's count of learners near an award wasn't ready at seven.
+
+00:01:35.388 --> 00:01:38.521
+The faculty needed it to plan next semester's places.
+
+00:01:39.621 --> 00:01:41.555
+Anil asked Jun, who built it.
+
+00:01:42.055 --> 00:01:47.525
+Jun said Noor designed it. Noor said Planning asked for it. And Planning said Jun builds it.
+
+00:01:49.025 --> 00:01:51.557
+One table, and nobody who answered for it.
+
+00:01:52.257 --> 00:01:54.567
+Until someone does, it can happen again.
+
+00:01:58.467 --> 00:02:01.440
+Yusuf sits down with Noor and Clara, from Planning.
+
+00:02:02.540 --> 00:02:06.467
+One question: what does this table promise, and who keeps the promise?
+
+00:02:08.067 --> 00:02:11.761
+They write it on a card, and list it in the university's catalogue.
+
+00:02:12.961 --> 00:02:16.840
+What it's for, and how to use it. Its owner: Clara, for Planning.
+
+00:02:18.040 --> 00:02:21.375
+What's in it, column by column, and the checks it must pass.
+
+00:02:22.575 --> 00:02:27.062
+Its service levels: built every night, and ready by seven on census day.
+
+00:02:28.262 --> 00:02:30.356
+Where to ask, a version, and a status.
+
+00:02:31.556 --> 00:02:35.694
+That's a data product: data, with a promise, and an owner who keeps it.
+
+00:02:39.994 --> 00:02:45.840
+Clara answers for the product: that it's on time, that it keeps its promise, and that its users are heard.
+
+00:02:47.340 --> 00:02:49.764
+What award means is still Mei's to decide.
+
+00:02:51.064 --> 00:02:57.396
+As in the bazaar, where the guild's rules said what the goods must be, and each master answered for his stall.
+
+00:02:58.996 --> 00:03:03.245
+The meaning has an owner, and so does the product. They can be different people.
+
+00:03:07.745 --> 00:03:11.423
+But Clara didn't ask for this. “I'm not technical,” she says.
+
+00:03:13.123 --> 00:03:19.293
+So Yusuf shows her who depends on it: the near-award dashboard, and every faculty that plans from it.
+
+00:03:20.593 --> 00:03:24.416
+What it's worth to them: a number on time, from someone they can ask.
+
+00:03:25.916 --> 00:03:32.617
+And what comes with it: Jun still builds it, Noor designs it, Sam runs it, and any change to it needs her yes.
+
+00:03:33.917 --> 00:03:36.109
+She answers for the promise, not the code.
+
+00:03:40.409 --> 00:03:42.253
+Not every table is a product.
+
+00:03:43.553 --> 00:03:51.164
+The data team keeps thirty-three tables. Ten are used by other teams, and each of those belongs to one of six products.
+
+00:03:52.464 --> 00:03:55.562
+The rest are steps, which only the data team needs.
+
+00:03:56.862 --> 00:04:05.850
+Every change is checked, like goods in the bazaar: a table other teams use must belong to exactly one product, or the change goes back.
+
+00:04:07.350 --> 00:04:12.387
+Some products stay close to one system, some join several, and some serve one use.
+
+00:04:15.087 --> 00:04:21.471
+Each product also knows who uses it: not from a mailing list, but from the record of who uses what.
+
+00:04:22.871 --> 00:04:29.173
+The registrar's learner records are used by three other products: the wallet's, Planning's and Finance's.
+
+00:04:30.473 --> 00:04:34.308
+Mei publishes them for everyone to build on, and she knows who does.
+
+00:04:38.008 --> 00:04:39.448
+And a product has a life.
+
+00:04:40.648 --> 00:04:45.451
+It's a draft until its owner says it's ready, and active while people rely on it.
+
+00:04:46.751 --> 00:04:52.828
+When it's no longer needed, it's deprecated: it gets a date to go, and its users are asked to move.
+
+00:04:54.328 --> 00:04:56.376
+An old edition goes the same way.
+
+00:04:57.076 --> 00:05:04.549
+The first edition of the registrar's credentials has no users now, so at the end of March 2027 it's retired.
+
+00:05:08.249 --> 00:05:15.210
+Now Anil finds Planning's product in the catalogue, among the others: its promise, its owner, and where to ask.
+
+00:05:16.510 --> 00:05:21.846
+Like a buyer in the bazaar, he knows where to find it, what it will be, and who stands behind it.
+
+00:05:23.346 --> 00:05:26.010
+If it's ever late again, Clara answers for it.
+
+00:05:27.310 --> 00:05:31.234
+The policy runs in the work now: a product, an owner, and a check.
+
+00:05:32.734 --> 00:05:40.141
+Order kept the bazaar's buyers coming back. Governance does the same for data: people find it, trust it, and build on it.
+
+00:05:41.641 --> 00:05:43.715
+Own the product, not only the meaning.
+
+00:05:45.615 --> 00:05:51.336
+Next, Anil makes a list of his own, for the faculty's advisers. It will need an owner too.

@@ -1,0 +1,432 @@
+From cfa39d0d120a2dde92948a0544b61889ac29dfc7 Mon Sep 17 00:00:00 2001
+From: "Anil Kurian (scratch)" <anil@uni.example>
+Date: Wed, 21 Oct 2026 00:47:24 +0000
+Subject: [PATCH] Health: the review's drafts, as the owners approved them
+
+---
+ .../analytics-engineering/project/CODEOWNERS  |   3 +
+ .../project/dbt_project.yml                   |   3 +
+ .../project/docs/scorecard.md                 |   3 +-
+ .../project/models/_groups.yml                |   6 +
+ .../models/_shared/_shared__owners.yml        |   1 +
+ .../models/marts/health/_health__models.yml   |  16 +++
+ .../products/health_learner_progress.yml      |  20 +++
+ .../products/odcs/core_award_v1.odcs.yaml     |   1 +
+ .../core_credit_towards_award_v1.odcs.yaml    |   1 +
+ .../products/odcs/core_learner_v1.odcs.yaml   |   1 +
+ .../mart_health__learner_progress.odcs.yaml   | 117 ++++++++++++++++++
+ .../project/products/odps/awards.odps.yaml    |   1 +
+ .../odps/health_learner_progress.odps.yaml    |  44 +++++++
+ .../products/odps/learner_records.odps.yaml   |   1 +
+ 14 files changed, 217 insertions(+), 1 deletion(-)
+ create mode 100644 films/analytics-engineering/project/products/health_learner_progress.yml
+ create mode 100644 films/analytics-engineering/project/products/odcs/mart_health__learner_progress.odcs.yaml
+ create mode 100644 films/analytics-engineering/project/products/odps/health_learner_progress.odps.yaml
+
+diff --git a/films/analytics-engineering/project/CODEOWNERS b/films/analytics-engineering/project/CODEOWNERS
+index bcce41e..948ab37 100644
+--- a/films/analytics-engineering/project/CODEOWNERS
++++ b/films/analytics-engineering/project/CODEOWNERS
+@@ -27,6 +27,8 @@
+ /models/marts/finance/_finance__conceptual.yml           finance@uni.example noor@uni.example
+ /models/marts/finance/_finance__decisions.yml            finance@uni.example noor@uni.example
+ /models/marts/finance/_finance__models.yml               finance@uni.example jun.park@uni.example
++/models/marts/health/_health__conceptual.yml             health.data@uni.example noor@uni.example
++/models/marts/health/_health__models.yml                 health.data@uni.example jun.park@uni.example
+ /models/marts/planning/_planning__conceptual.yml         planning@uni.example noor@uni.example
+ /models/marts/planning/_planning__decisions.yml          planning@uni.example noor@uni.example
+ /models/marts/planning/_planning__models.yml             planning@uni.example jun.park@uni.example
+@@ -52,6 +54,7 @@
+ 
+ # Data products: each product's owner
+ /products/awards.yml                                     mei.tanaka@uni.example
++/products/health_learner_progress.yml                    health.data@uni.example
+ /products/learner_records.yml                            mei.tanaka@uni.example
+ /products/learner_wallet.yml                             wallet@uni.example
+ /products/learners_near_an_award.yml                     clara.jensen@uni.example
+diff --git a/films/analytics-engineering/project/dbt_project.yml b/films/analytics-engineering/project/dbt_project.yml
+index 42f0bc2..3fca241 100644
+--- a/films/analytics-engineering/project/dbt_project.yml
++++ b/films/analytics-engineering/project/dbt_project.yml
+@@ -66,6 +66,8 @@ models:
+         +group: wallet
+       finance:
+         +group: finance
++      health:
++        +group: health
+ 
+     # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
+     # and metrics live with its marts.
+@@ -122,6 +124,7 @@ data_tests:
+       planning: {+meta: {owner: Planning}}
+       wallet: {+meta: {owner: Wallet app team}}
+       finance: {+meta: {owner: Finance}}
++      health: {+meta: {owner: Faculty of Health}}
+     reference:
+       student: {+meta: {owner: "Mei Tanaka, registrar's office"}}
+       finance: {+meta: {owner: Finance}}
+diff --git a/films/analytics-engineering/project/docs/scorecard.md b/films/analytics-engineering/project/docs/scorecard.md
+index 6ff3b16..ad111a2 100644
+--- a/films/analytics-engineering/project/docs/scorecard.md
++++ b/films/analytics-engineering/project/docs/scorecard.md
+@@ -9,6 +9,7 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
+ | `alumni` | 3/3 | 1/1 |  | 1/1 |  | 5/5 |
+ | `course` |  | 1/1 | 1/1 | 1/1 |  | 3/3 |
+ | `finance` | 1/1 | 4/4 | 2/2 | 1/1 | 1/1 | 9/9 |
++| `health` |  |  | 1/1 |  |  | 1/1 |
+ | `hr` | 4/4 | 2/2 | 2/2 | 1/1 |  | 9/9 |
+ | `learning` | 7/7 (1 warn) | 4/4 | 7/7 | 3/3 |  | 21/21 (1 warn) |
+ | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
+@@ -17,7 +18,7 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
+ | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
+ | `student` | 21/21 | 16/16 | 8/8 | 18/18 |  | 63/63 |
+ | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
+-| **All** | 54/54 (1 warn) | 41/41 | 28/28 | 34/34 | 2/2 | 159/159 (1 warn) |
++| **All** | 54/54 (1 warn) | 41/41 | 29/29 | 34/34 | 2/2 | 160/160 (1 warn) |
+ 
+ ## Not passed
+ 
+diff --git a/films/analytics-engineering/project/models/_groups.yml b/films/analytics-engineering/project/models/_groups.yml
+index 69a5260..061f1c5 100644
+--- a/films/analytics-engineering/project/models/_groups.yml
++++ b/films/analytics-engineering/project/models/_groups.yml
+@@ -24,3 +24,9 @@ groups:
+     owner:
+       name: Finance
+       email: finance@uni.example
++
++  - name: health
++    description: The Faculty of Health's marts, built on the core.
++    owner:
++      name: Faculty of Health
++      email: health.data@uni.example
+diff --git a/films/analytics-engineering/project/models/_shared/_shared__owners.yml b/films/analytics-engineering/project/models/_shared/_shared__owners.yml
+index 4b60973..b4befbd 100644
+--- a/films/analytics-engineering/project/models/_shared/_shared__owners.yml
++++ b/films/analytics-engineering/project/models/_shared/_shared__owners.yml
+@@ -21,6 +21,7 @@ owners:
+   - {name: Planning, email: planning@uni.example}
+   - {name: "Clara Jensen, Planning", email: clara.jensen@uni.example}
+   - {name: Finance, email: finance@uni.example}
++  - {name: Faculty of Health, email: health.data@uni.example}
+   - {name: Wallet app team, email: wallet@uni.example}
+   - {name: "Sam, platform team", email: platform@uni.example}
+   - {name: "Noor, data architect", email: noor@uni.example}
+diff --git a/films/analytics-engineering/project/models/marts/health/_health__models.yml b/films/analytics-engineering/project/models/marts/health/_health__models.yml
+index 93fc4ad..2d44aed 100644
+--- a/films/analytics-engineering/project/models/marts/health/_health__models.yml
++++ b/films/analytics-engineering/project/models/marts/health/_health__models.yml
+@@ -8,35 +8,51 @@ models:
+       meta:
+         grain: One row per learner studying for one of the faculty's awards, today
+         glossary_term: learner_progress
++        owner: Faculty of Health
++        domain: health
+         consumer: Student advisers' call list
+     columns:
+       - name: learner_key
+         description: '{{ doc("learner_key") }}'
+         data_type: string
++        config: {meta: {personal_data: pseudonymous}}
+       - name: full_name
+         description: The learner's name, now.
+         data_type: string
++        config: {meta: {personal_data: direct}}
+       - name: email
+         description: The learner's email, now.
+         data_type: string
++        config: {meta: {personal_data: direct}}
+       - name: award_key
+         description: '{{ doc("award_key") }}'
+         data_type: string
++        config: {meta: {personal_data: none}}
+       - name: award_code
+         description: '{{ doc("award_code") }}'
+         data_type: string
++        config: {meta: {personal_data: none}}
+       - name: award_name
+         description: '{{ doc("award_name") }}'
+         data_type: string
++        config: {meta: {personal_data: none}}
+       - name: faculty_code
+         description: '{{ doc("faculty_code") }}'
+         data_type: string
++        data_tests:
++          - accepted_values:
++              arguments:
++                values: [HLT]
++        config: {meta: {personal_data: none}}
+       - name: credit_points_required
+         description: '{{ doc("credit_points_required") }}'
+         data_type: int
++        config: {meta: {personal_data: none}}
+       - name: credit_points_earned
+         description: '{{ doc("credit_points_earned") }} Now, towards the award the learner is enrolled in.'
+         data_type: int
++        config: {meta: {personal_data: none}}
+       - name: credit_points_remaining
+         description: '{{ doc("credit_points_remaining") }}'
+         data_type: int
++        config: {meta: {personal_data: none}}
+diff --git a/films/analytics-engineering/project/products/health_learner_progress.yml b/films/analytics-engineering/project/products/health_learner_progress.yml
+new file mode 100644
+index 0000000..9914487
+--- /dev/null
++++ b/films/analytics-engineering/project/products/health_learner_progress.yml
+@@ -0,0 +1,20 @@
++# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
++# owned by its owner. scripts/generate/products.py writes its ODPS descriptor and an ODCS contract
++# for each output, from this file and the dbt contracts.
++
++name: health_learner_progress
++title: The Faculty of Health's call list
++owner: Faculty of Health
++domain: health
++status: active
++version: 1.0.0
++description:
++  purpose: Every learner studying for one of the faculty's awards today, and how far each is from
++    finishing it.
++  usage: For the faculty's student advisers, who call first the learners with the most still to do.
++outputs:
++  - {model: mart_health__learner_progress}
++service_levels:
++  - {property: latency, value: 1, unit: d, description: Built every night.}
++support:
++  - {channel: health-data, tool: email, url: "mailto:health.data@uni.example", scope: issues}
+diff --git a/films/analytics-engineering/project/products/odcs/core_award_v1.odcs.yaml b/films/analytics-engineering/project/products/odcs/core_award_v1.odcs.yaml
+index 3640f13..522ae33 100644
+--- a/films/analytics-engineering/project/products/odcs/core_award_v1.odcs.yaml
++++ b/films/analytics-engineering/project/products/odcs/core_award_v1.odcs.yaml
+@@ -147,6 +147,7 @@ customProperties:
+   value: core_award_v1
+ - property: consumers
+   value:
++  - product health_learner_progress
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/products/odcs/core_credit_towards_award_v1.odcs.yaml b/films/analytics-engineering/project/products/odcs/core_credit_towards_award_v1.odcs.yaml
+index b27f9f6..381e7ce 100644
+--- a/films/analytics-engineering/project/products/odcs/core_credit_towards_award_v1.odcs.yaml
++++ b/films/analytics-engineering/project/products/odcs/core_credit_towards_award_v1.odcs.yaml
+@@ -172,6 +172,7 @@ customProperties:
+   value: core_credit_towards_award_v1
+ - property: consumers
+   value:
++  - product health_learner_progress
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/products/odcs/core_learner_v1.odcs.yaml b/films/analytics-engineering/project/products/odcs/core_learner_v1.odcs.yaml
+index 54eccd4..ad4fc85 100644
+--- a/films/analytics-engineering/project/products/odcs/core_learner_v1.odcs.yaml
++++ b/films/analytics-engineering/project/products/odcs/core_learner_v1.odcs.yaml
+@@ -205,6 +205,7 @@ customProperties:
+   value: core_learner_v1
+ - property: consumers
+   value:
++  - product health_learner_progress
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/products/odcs/mart_health__learner_progress.odcs.yaml b/films/analytics-engineering/project/products/odcs/mart_health__learner_progress.odcs.yaml
+new file mode 100644
+index 0000000..d2ac2e8
+--- /dev/null
++++ b/films/analytics-engineering/project/products/odcs/mart_health__learner_progress.odcs.yaml
+@@ -0,0 +1,117 @@
++# Generated by scripts/generate/products.py from products/health_learner_progress.yml and the dbt contracts. Don't edit it:
++# change those, then run the script. CI fails if it's out of date.
++apiVersion: v3.1.0
++kind: DataContract
++id: 68b05427-fc24-536a-8420-c16040529fe4
++name: mart_health__learner_progress
++version: 1.0.0
++status: active
++domain: health
++dataProduct: health_learner_progress
++description:
++  purpose: Every learner studying for one of the faculty's awards today, and how far each is from finishing
++    it.
++  usage: For the faculty's student advisers, who call first the learners with the most still to do.
++schema:
++- name: mart_health__learner_progress
++  physicalName: mart_health__learner_progress
++  logicalType: object
++  physicalType: table
++  description: 'Every learner studying for one of the Faculty of Health''s awards today, and how far they
++    are from finishing it, with their name and email: the faculty''s advisers call them.'
++  properties:
++  - name: learner_key
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: pseudonymous
++    description: 'The learner''s hash key: the sha-256 of `learner_bk`, as 64 hex characters. The same
++      learner has the same key in every model, on every engine.'
++  - name: full_name
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: direct
++    description: The learner's name, now.
++  - name: email
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: direct
++    description: The learner's email, now.
++  - name: award_key
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: 'The award''s hash key: the sha-256 of `award_bk`.'
++  - name: award_code
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: The registrar's code for the award, like `GCDA`.
++  - name: award_name
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: The award's name.
++  - name: faculty_code
++    logicalType: string
++    physicalType: string
++    required: false
++    classification: none
++    description: The code of the faculty that offers the award, like `EIT`.
++    quality:
++    - id: accepted_values_mart_health__learner_progress_faculty_code__HLT
++      metric: invalidValues
++      mustBe: 0
++      unit: rows
++      arguments:
++        validValues:
++        - HLT
++      dimension: conformity
++      severity: error
++  - name: credit_points_required
++    logicalType: integer
++    physicalType: int
++    required: false
++    classification: none
++    description: The credit points the award requires, as the student system holds it.
++  - name: credit_points_earned
++    logicalType: integer
++    physicalType: int
++    required: false
++    classification: none
++    description: Credit points from units and microcredentials that count towards the award, under the
++      rule in the credit towards an award definition. Now, towards the award the learner is enrolled in.
++  - name: credit_points_remaining
++    logicalType: integer
++    physicalType: int
++    required: false
++    classification: none
++    description: 'Credit points still needed for the award: required minus earned, and never below zero.'
++slaProperties:
++- property: latency
++  value: 1
++  unit: d
++  description: Built every night.
++team:
++  name: Faculty of Health
++  members:
++  - username: health.data@uni.example
++    name: Faculty of Health
++    role: owner
++support:
++- channel: health-data
++  tool: email
++  url: mailto:health.data@uni.example
++  scope: issues
++customProperties:
++- property: grain
++  value: One row per learner studying for one of the faculty's awards, today
++- property: dbtModel
++  value: mart_health__learner_progress
++- property: consumers
++  value: []
+diff --git a/films/analytics-engineering/project/products/odps/awards.odps.yaml b/films/analytics-engineering/project/products/odps/awards.odps.yaml
+index 91b0a28..c526267 100644
+--- a/films/analytics-engineering/project/products/odps/awards.odps.yaml
++++ b/films/analytics-engineering/project/products/odps/awards.odps.yaml
+@@ -31,6 +31,7 @@ support:
+ customProperties:
+ - property: consumers
+   value:
++  - product health_learner_progress
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+diff --git a/films/analytics-engineering/project/products/odps/health_learner_progress.odps.yaml b/films/analytics-engineering/project/products/odps/health_learner_progress.odps.yaml
+new file mode 100644
+index 0000000..2123ce4
+--- /dev/null
++++ b/films/analytics-engineering/project/products/odps/health_learner_progress.odps.yaml
+@@ -0,0 +1,44 @@
++# Generated by scripts/generate/products.py from products/health_learner_progress.yml and the dbt contracts. Don't edit it:
++# change those, then run the script. CI fails if it's out of date.
++apiVersion: v1.0.0
++kind: DataProduct
++id: 056ce7e5-4ca9-5bc5-9a51-aa0679174d5e
++name: The Faculty of Health's call list
++version: 1.0.0
++status: active
++domain: health
++description:
++  purpose: Every learner studying for one of the faculty's awards today, and how far each is from finishing
++    it.
++  usage: For the faculty's student advisers, who call first the learners with the most still to do.
++inputPorts:
++- name: core_learner_v1
++  version: 1.0.0
++  contractId: 7f4e3b17-5f84-50e5-8580-d6f86325f4da
++- name: core_award_v1
++  version: 1.0.0
++  contractId: fab34f97-92b9-5722-b517-8d61b24e5e23
++- name: core_credit_towards_award_v1
++  version: 1.0.0
++  contractId: d631cc43-6031-5772-b7ae-b11f51a443a6
++outputPorts:
++- name: mart_health__learner_progress
++  description: 'Every learner studying for one of the Faculty of Health''s awards today, and how far they
++    are from finishing it, with their name and email: the faculty''s advisers call them.'
++  type: table
++  version: 1.0.0
++  contractId: 68b05427-fc24-536a-8420-c16040529fe4
++team:
++  name: Faculty of Health
++  members:
++  - username: health.data@uni.example
++    name: Faculty of Health
++    role: owner
++support:
++- channel: health-data
++  tool: email
++  url: mailto:health.data@uni.example
++  scope: issues
++customProperties:
++- property: consumers
++  value: []
+diff --git a/films/analytics-engineering/project/products/odps/learner_records.odps.yaml b/films/analytics-engineering/project/products/odps/learner_records.odps.yaml
+index a7d6233..603cdba 100644
+--- a/films/analytics-engineering/project/products/odps/learner_records.odps.yaml
++++ b/films/analytics-engineering/project/products/odps/learner_records.odps.yaml
+@@ -50,6 +50,7 @@ support:
+ customProperties:
+ - property: consumers
+   value:
++  - product health_learner_progress
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+-- 
+2.43.0
+

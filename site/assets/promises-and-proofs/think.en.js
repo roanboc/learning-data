@@ -1,0 +1,20 @@
+/* Learning Data: "Pause and think" for Promises and proofs, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of four chapters (gaps, enterprise, tests, levels), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A "stop" is this film's lab in the series' pack, which teaches the same idea;
+   the page's .player data-labs says where those labs are. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  "gaps":{q:"Why is “accept and document” a real decision, not giving up?",
+    opts:[{t:"The owner makes it, with a reason, and it tells every consumer what the data can't do.",ok:true},{t:"It's a placeholder until someone has time to write a rule."},{t:"The data team makes it, with a reason, so the gap doesn't block the build.",near:true}],
+    why:"Gap 10: no source records an expiry, so nothing in the model can say a credential has expired. It leaves the register as a known limitation on core_credential, which says so to everyone who reads it. An unwritten gap surprises someone later."},
+  "enterprise":{q:"Who can change a public contract, and how?",
+    opts:[{t:"Its owner, by editing the YAML in place, and telling every consumer the same day.",near:true},{t:"Anyone who needs a column changed, through a pull request."},{t:"Its owner, with a new version beside the old one, and a date for the old one to go.",ok:true}],
+    why:"A breaking change isn't an edit in place: it arrives as a new version, and consumers move in their own time. A later film shows how."},
+  "tests":{stop:"catch",q:"Why write the tests before the model?",
+    opts:[{t:"They say what the code must do, so the tests can be changed to match the code when it's done.",near:true},{t:"They say what done is, in a form a machine can check; the code's job is then to turn them green.",ok:true},{t:"Because dbt won't build a model until every one of its tests has been written."}],
+    why:"Written first, and reviewed by the people who own the data, the tests fix what done means. Nobody can quietly redefine done to fit the code."},
+  "levels":{q:"Who sets a test's severity?",
+    opts:[{t:"The data's owner, with a reason, written in the test's description and in its source's decision log.",ok:true},{t:"The engineer who writes the test, with a reason, written in the test's description.",near:true},{t:"Nobody: every failing test stops the build, whatever it checks and whoever owns it."}],
+    why:"Here the learning team decided: warn on any enrolment with no email, stop above five. Not the person whose build it's blocking."}
+  }}};

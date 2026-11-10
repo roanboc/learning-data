@@ -1,0 +1,8 @@
+data_tests:
+
+  - name: models_do_not_read_expected_seeds
+    description: >
+      No model refs a seed in seeds/expected/. Expected values are only for tests, analyses and
+      scripts that reconcile against them. Checks the project's graph, so it needs no data.
+    config:
+      meta: {owner: "Noor, data architect"}

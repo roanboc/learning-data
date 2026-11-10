@@ -1,0 +1,66 @@
+{
+  "kicker": "Nerve cells and models",
+  "kicker_es": "Neuronas y modelos",
+  "title_es": "Tomado del cerebro",
+  "h1": "Borrowed from the brain: what models took, and didn't",
+  "h1_es": "Tomado del cerebro: lo que los modelos tomaron, y no",
+  "lead": "In 1888, nobody could see how a brain was wired: under the microscope it was a thicket. Santiago Ramón y Cajal made a stain work and drew separate cells passing messages one way. Machines borrowed that picture. Why do they, like brains, fill a gap with what's likely?",
+  "lead_es": "En 1888, nadie podía ver cómo estaba conectado un cerebro: al microscopio era una maraña. Santiago Ramón y Cajal hizo funcionar una tinción y dibujó células separadas que pasan mensajes en un sentido. Las máquinas tomaron esa imagen. ¿Por qué rellenan, como los cerebros, un hueco con lo probable?",
+  "description": "A film about where models came from, the second of What an agent is: why Rosenblatt modelled the perceptron on a nerve cell, as the Wright brothers took a buzzard's twist for their wings; Santiago Ramón y Cajal in 1888, who made Golgi's stain work on young birds' brains and drew separate cells where others saw one net, so a message has a direction and a brain can learn; how a nerve cell fires, all or nothing, and how its connections change, in a jellyfish, a sea slug, a bee, an octopus, a finch and us; a brain that fills its blind spot with what's likely; what models borrowed, units that add up weighted inputs in layers, and what they didn't; why the same question can bring a different answer, a wheel of chances and its temperature; and why a model fills a missing fact with a likely one, so a fluent answer isn't a checked one.",
+  "description_es": "Una película sobre de dónde vienen los modelos, la segunda de Qué es un agente: por qué Rosenblatt basó el perceptrón en una célula nerviosa, como los hermanos Wright tomaron de las rapaces la torsión de sus alas; Santiago Ramón y Cajal en 1888, que logró que la tinción de Golgi funcionara en cerebros de aves jóvenes y dibujó células separadas donde otros veían una sola red, de modo que un mensaje tiene un sentido y un cerebro puede aprender; cómo se dispara una célula nerviosa, todo o nada, y cómo cambian sus conexiones, en una medusa, una babosa de mar, una abeja, un pulpo, un pinzón y nosotros; un cerebro que rellena su punto ciego con lo probable; lo que los modelos tomaron prestado, unidades que suman entradas con pesos en capas, y lo que no; por qué la misma pregunta puede dar otra respuesta, una ruleta de posibilidades y su temperatura; y por qué un modelo rellena un dato que falta con uno probable, así que una respuesta fluida no está verificada.",
+  "card": "Why the first learning machine copied a nerve cell, what models took from brains, and why they fill gaps with likely words.",
+  "card_es": "Por qué la primera máquina que aprendía copió una neurona, qué tomaron los modelos del cerebro y por qué rellenan con lo probable.",
+  "chapters_es": {
+    "nature": "Por qué mirar a la naturaleza",
+    "cajal": "Una maraña",
+    "cell": "Dentro de una célula nerviosa",
+    "animals": "Las pruebas de la naturaleza",
+    "gaps": "Rellenar los huecos",
+    "borrowed": "Prestado, no copiado",
+    "likely": "Palabras probables",
+    "sure": "Seguro, y equivocado",
+    "held": "Una imagen que se sostuvo"
+  },
+  "past": [
+    "Barcelona, 1888: Santiago Ramón y Cajal draws separate nerve cells",
+    "Models borrowed an idea, not a brain: a likely answer isn't a checked one."
+  ],
+  "past_es": [
+    "Barcelona, 1888: Santiago Ramón y Cajal dibuja células nerviosas separadas",
+    "Los modelos tomaron una idea, no un cerebro: una respuesta probable no está verificada."
+  ],
+  "next_h": "You've seen why the first learning machine was modelled on a nerve cell, what models took from brains and what they didn't, and why their answers vary and fill gaps. Next: what an agent is: a model that reasons, with hands, in a loop.",
+  "next_h_es": "Viste por qué la primera máquina que aprendía se basó en una célula nerviosa, qué tomaron los modelos del cerebro y qué no, y por qué sus respuestas varían y rellenan huecos. Después: qué es un agente: un modelo que razona, con manos, en un ciclo.",
+  "elsewhere": {
+    "h": "Watch nerve cells learn for yourself",
+    "h_es": "Mira aprender a las neuronas por tu cuenta",
+    "p": "Learning Systems, another learn-all.org site, runs small living worlds you can watch and change. In these, nets of nerve cells and the first brains learn from what they meet, with no one to tell them.",
+    "p_es": "Learning Systems, otro sitio de learn-all.org, ejecuta pequeños mundos vivos que puedes mirar y cambiar. En estos, redes de células nerviosas y los primeros cerebros aprenden de lo que encuentran, sin que nadie les diga nada.",
+    "links": [
+      {
+        "title": "Nerve nets",
+        "title_es": "Redes nerviosas",
+        "line": "A net of nerve cells with no centre: one cell tastes richer food and fires, the signal spreads, and the whole body moves toward the food.",
+        "line_es": "Una red de células nerviosas sin centro: una célula prueba comida más rica y se activa, la señal se extiende, y todo el cuerpo se mueve hacia la comida.",
+        "href": "https://systems.learn-all.org/world/#nerves",
+        "href_es": "https://systems.learn-all.org/world/?lang=es#nerves"
+      },
+      {
+        "title": "Brains",
+        "title_es": "Cerebros",
+        "line": "The same coast, about 540 million years ago: creatures with eyes and brains see green and violet plants, and learn which colour is food and which is poison.",
+        "line_es": "La misma costa, hace unos 540 millones de años: criaturas con ojos y cerebro ven plantas verdes y violetas, y aprenden qué color es comida y cuál es veneno.",
+        "href": "https://systems.learn-all.org/world/#brains",
+        "href_es": "https://systems.learn-all.org/world/?lang=es#brains"
+      },
+      {
+        "title": "Learning a colour",
+        "title_es": "Aprender un color",
+        "line": "A guided lab: how one connection, changed by what each bite brings, turns into a creature that knows what to eat.",
+        "line_es": "Un lab guiado: cómo una conexión, que cambia con lo que trae cada bocado, se vuelve una criatura que sabe qué comer.",
+        "href": "https://systems.learn-all.org/environments/forager-worlds/#lab=learning-colour",
+        "href_es": "https://systems.learn-all.org/environments/forager-worlds/?lang=es#lab=learning-colour"
+      }
+    ]
+  }
+}

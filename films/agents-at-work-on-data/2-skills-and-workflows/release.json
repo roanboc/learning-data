@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Skills and workflows",
+    "key": "skills-and-workflows-en",
+    "dir": "films/agents-at-work-on-data/2-skills-and-workflows/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/skills-and-workflows/film.js",
+    "video": "dist/skills-and-workflows.mp4",
+    "file": "skills-and-workflows.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/2-skills-and-workflows/captions/en.srt",
+        "skills-and-workflows.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/2-skills-and-workflows/captions/es.srt",
+        "skills-and-workflows.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/2-skills-and-workflows/source",
+      ":(exclude)films/agents-at-work-on-data/2-skills-and-workflows/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 433,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 29.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -1,0 +1,80 @@
+"""Check the film before a long render: python tools/check.py
+First From words to data's checks, unchanged: every moment draws, 30 a second, as the video does (check.py there), and no text is
+drawn smaller than 28 px after the camera's zoom, the smallest that reads on a phone (legible.py there). Then one of the module's own:
+each place the film paints (AG_PLACES), painted again from nothing (with the oak and the grain it shares), leaves the page drawing
+again within LIMIT seconds. The site's player paints the places one by one while the film plays, so a place that keeps the browser
+busy for seconds holds up the film, its soundtrack and the whole page. Paint what is soft anyway at a lower resolution and scale it up,
+as room.js does with the marble. Last, the governance films' checks that nothing shows twice where the film changes shot or chapter
+(films/data-governance/shared/tools/twice.py), that nobody's arm jumps in one frame (steady.py there) and that nothing jumps
+where the film changes shot or chapter (jump.py there), and this module's own check that nothing painted for a person, such as a
+hat, reaches past the edge of their picture, where it would be cut off in a straight line (edges.py, here)."""
+import edges, jump, runpy, steady, twice
+from lang import *
+from run import FW
+from playwright.sync_api import sync_playwright
+
+LIMIT = 2.0  # seconds from a place's first stroke until two frames after it; the lab takes about half a second
+
+failed = []
+for tool in ('check.py', 'legible.py'):
+    try:  # twice.py runs below, with this check's own, so From words to data's check.py leaves it (TWICE)
+        runpy.run_path(str(FW / tool), init_globals={'TWICE': False}, run_name='__main__')
+    except SystemExit as e:
+        if e.code:
+            failed.append(str(e.code))
+
+with sync_playwright() as p:
+    b, pg = render_page(p)
+    edges.watch(pg)  # from here on each person's pictures are made again as the checks draw them, and edges.check looks at them
+    r = pg.evaluate("""async () => {
+      const frame = () => new Promise(f => requestAnimationFrame(() => f()));
+      const ks = Object.keys(AG_PLACES), out = [];
+      const c = document.createElement('canvas'); c.width = 480; c.height = 270; document.body.appendChild(c); const x = c.getContext('2d');
+      for (const k of ks) { for (const q of Object.keys(AG_KEPT)) if (q === 'place:' + k || q === 'oak' || q.startsWith('grain:')) delete AG_KEPT[q];
+        await frame(); await frame();
+        const a = performance.now(); x.drawImage(ag_place(k), 0, 0, 480, 270); await frame(); await frame();
+        out.push([k, (performance.now() - a) / 1000]); }
+      return out; }""")
+    tw = twice.check(pg)
+    st = steady.check(pg)
+    jp = jump.check(pg)
+    ed = edges.check(pg)
+    b.close()
+slow = [(k, s) for k, s in r if s > LIMIT]
+print('painted %d places, each in %s s' % (len(r), ' '.join('%s %.2f' % (k, s) for k, s in r)) if r else 'no places to paint')
+for k, s in slow:
+    print('  %-12s held the page for %.1f s (at most %.1f)' % (k, s, LIMIT))
+if slow:
+    failed.append('%s held the page too long while painting' % ', '.join(k for k, s in slow))
+else:
+    print('every place paints without holding the page')
+print(tw[0])
+for l in tw[1]:
+    print('  ' + l)
+if tw[1]:
+    failed.append('%d changes of shot or chapter show something twice' % len(tw[1]))
+else:
+    print('nothing shows twice where the film changes shot or chapter')
+print(st[0])
+for l in st[1]:
+    print('  ' + l)
+if st[1]:
+    failed.append('%d arms jump in one frame' % len(st[1]))
+else:
+    print('no arm jumps in one frame')
+print(jp[0])
+for l in jp[1]:
+    print('  ' + l)
+if jp[1]:
+    failed.append('%d moments jump where the film changes shot or chapter' % len(jp[1]))
+else:
+    print('nothing jumps where the film changes shot or chapter')
+print(ed[0])
+for l in ed[1]:
+    print('  ' + l)
+if ed[1]:
+    failed.append("people's pictures that cut off what is painted past their edge: %d" % len(ed[1]))
+else:
+    print("nothing painted for a person reaches past their picture's edge")
+if failed:
+    raise SystemExit('; '.join(failed))

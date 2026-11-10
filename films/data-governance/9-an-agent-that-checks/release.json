@@ -1,0 +1,45 @@
+[
+  {
+    "name": "An agent that checks",
+    "key": "an-agent-that-checks-en",
+    "dir": "films/data-governance/9-an-agent-that-checks/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/an-agent-that-checks/film.js",
+    "video": "dist/an-agent-that-checks.mp4",
+    "file": "an-agent-that-checks.mp4",
+    "captions": [
+      [
+        "films/data-governance/9-an-agent-that-checks/captions/en.srt",
+        "an-agent-that-checks.en.srt"
+      ],
+      [
+        "films/data-governance/9-an-agent-that-checks/captions/es.srt",
+        "an-agent-that-checks.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-governance/9-an-agent-that-checks/source",
+      ":(exclude)films/data-governance/9-an-agent-that-checks/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 451,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

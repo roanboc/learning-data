@@ -1,0 +1,282 @@
+models:
+
+  - name: mart_finance__tuition_forgone
+    description: >
+      Every award a learner was enrolled in on the census date, with the credit recognised towards
+      it and the tuition that credit saves them, at the published rate for the census year. As it
+      was: every entity is read at its version on the census date. No names or emails: Finance
+      adds up money, it doesn't need to know who.
+    config:
+      meta:
+        grain: One row per learner per award they're enrolled in, as at census date
+        glossary_term: tuition_forgone
+        owner: Finance
+        domain: finance
+        consumer: Revenue forecast
+        limitations:
+          - id: LIM-FIN-01
+            text: >
+              Tuition forgone is worked out at the published rate per credit point, not from what
+              each learner was charged: scholarships, discounts and fee waivers aren't in. Finance
+              adjusts for them in the forecast itself.
+    constraints:
+      - type: primary_key
+        name: pk_mart_finance__tuition_forgone
+        columns: [learner_award_key]
+        warn_unenforced: false
+    data_tests:
+      # the grain, tested as a key
+      - unique_combination:
+          arguments:
+            columns: [learner_key, award_key]
+    columns:
+      - name: learner_award_key
+        description: '{{ doc("learner_award_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests: [unique]
+        config:
+          meta: {personal_data: pseudonymous}
+      - name: census_date
+        description: '{{ doc("census_date") }}'
+        data_type: date
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: learner_key
+        description: '{{ doc("learner_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('core_learner')
+                field: learner_key
+        config:
+          meta: {glossary_term: learner, personal_data: pseudonymous}
+      - name: award_key
+        description: '{{ doc("award_key") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {glossary_term: award, personal_data: none}
+      - name: award_code
+        description: '{{ doc("award_code") }}'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: award_name
+        description: '{{ doc("award_name") }} On the census date.'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: award_type
+        description: '{{ doc("award_type") }}'
+        data_type: string
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [graduate certificate, master]
+        config: {meta: {personal_data: none}}
+      - name: faculty_code
+        description: '{{ doc("faculty_code") }}'
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: faculty_name
+        description: '{{ doc("faculty_name") }}'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: credit_points_recognised
+        description: >
+          Credit points recognised towards this award on the census date, from microcredentials and
+          short-course certificates. Units passed aren't in: they're paid for.
+        data_type: int
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: rate_year
+        description: The year of the published rate used, the census date's year.
+        data_type: int
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: rate_per_credit_point
+        description: Finance's published tuition for one credit point of this award type, in that year.
+        data_type: int
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: tuition_forgone
+        description: '{{ doc("tuition_forgone") }} In whole dollars.'
+        data_type: int
+        constraints: [{type: not_null}]
+        config:
+          meta: {glossary_term: tuition_forgone, personal_data: none}
+
+  - name: mart_finance__casual_pay_paid
+    description: >
+      Payroll's export to Finance: what casual staff are paid on each pay day, by faculty and unit,
+      from the claims approved for it. A claim approved by noon on the Monday before a pay day is
+      paid that Thursday, and one approved later waits for the next (pay_day_for(), on payroll's
+      calendar, the seed pay_days). Pay days up to the day of the build only: pay that has been
+      paid. Totals only: no names, no IDs. For years a script on one person's laptop made it; since
+      March 2026 it's this model, built at 06:00 on each pay day by the job payroll_export
+      (databricks.yml, resources/payroll_export.job.yml). Its tests name their owner, HR, in their
+      own meta: what payroll's figures mean is HR's to answer for.
+    config:
+      meta:
+        grain: One row per pay day and unit
+        owner: HR
+        domain: finance
+        consumer: Payroll's export
+        limitations:
+          - id: LIM-FIN-02
+            text: >
+              Pay as the approved claims give it, not the payroll system's pay slips: tax, on-costs
+              and corrections made in the payroll system aren't in. Finance adds on-costs in its own
+              measure, casual teaching cost.
+          - id: LIM-FIN-03
+            text: >
+              Totals by unit: where only one person's claims are paid for a unit on a pay day, the
+              unit's total is that person's pay. Finance reads the export under payroll's rules, and
+              reports it by faculty.
+    constraints:
+      - type: primary_key
+        name: pk_mart_finance__casual_pay_paid
+        columns: [pay_day, unit_code]
+        warn_unenforced: false
+    data_tests:
+      # the grain, tested as a key
+      - unique_combination:
+          arguments:
+            columns: [pay_day, unit_code]
+          config: {meta: {owner: HR}}
+    columns:
+      - name: pay_day
+        description: The pay day that pays the claims, a Thursday from payroll's calendar.
+        data_type: date
+        constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('pay_days')
+                field: pay_day
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: faculty_code
+        description: The code of the faculty that teaches the unit, like HLT, from the registrar's list of units.
+        data_type: string
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: faculty_name
+        description: The name of the faculty that teaches the unit.
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: unit_code
+        description: The unit the hours were worked for, like HI101.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: unit_name
+        description: The unit's name, from the registrar's list.
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: casual_staff_paid
+        description: How many casual staff are paid for the unit on the pay day.
+        data_type: int
+        constraints: [{type: not_null}]
+        data_tests:
+          - positive:
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: claims_paid
+        description: How many approved claims the pay day pays for the unit.
+        data_type: int
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: hours_paid
+        description: The hours those claims pay, in decimal hours.
+        data_type: decimal(9,2)
+        constraints: [{type: not_null}]
+        data_tests:
+          - positive:
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: casual_pay_paid
+        description: >
+          What those claims pay, in Australian dollars, before tax and on-costs: casual pay paid,
+          as payroll counts it. A total, never shown for one person.
+        data_type: decimal(12,2)
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+
+unit_tests:
+
+  - name: recognised_credit_saves_tuition_in_the_enrolled_award_only
+    description: >
+      A learner enrolled in a graduate certificate holds 10 recognised credit points that also count
+      towards a master. The saving is counted once, in the award they're enrolled in, at its 2026
+      rate. A learner with no recognised credit saves nothing.
+    model: mart_finance__tuition_forgone
+    given:
+      - input: ref('core_learner', v=1)
+        format: csv
+        rows: |
+          learner_key,learner_bk,enrolled_award_key,valid_from,valid_to
+          L1,SIS|S-1,A1,2026-01-01,
+          L2,SIS|S-2,A1,2026-01-01,
+      - input: ref('core_award', v=1)
+        format: csv
+        rows: |
+          award_key,award_bk,award_code,award_name,award_type,faculty_code,faculty_name,valid_from,valid_to
+          A1,SIS|GC,GC,A graduate certificate,graduate certificate,EIT,Faculty of Engineering and IT,2025-01-01,
+          A2,SIS|M,M,A master,master,EIT,Faculty of Engineering and IT,2025-01-01,
+      - input: ref('core_credit_towards_award', v=1)
+        format: csv
+        rows: |
+          learner_key,award_key,credit_points_from_microcredentials,valid_from,valid_to
+          L1,A1,10,2026-02-01,
+          L1,A2,10,2026-02-01,
+      - input: ref('tuition_rates')
+        format: csv
+        rows: |
+          award_type,rate_year,rate_per_credit_point
+          graduate certificate,2026,420
+          master,2026,480
+    expect:
+      format: csv
+      rows: |
+        learner_key,award_key,credit_points_recognised,rate_per_credit_point,tuition_forgone
+        L1,A1,10,420,4200
+        L2,A1,0,420,0
+
+  - name: a_claim_approved_by_monday_noon_is_paid_that_thursday
+    description: >
+      Payroll's rule, tested before it runs: a claim approved at 11:59 on the Monday before a pay day
+      is paid that Thursday, and one approved at 12:01 waits for the next pay day, two weeks on. A
+      claim still waiting for its coordinator isn't paid at all.
+    model: mart_finance__casual_pay_paid
+    overrides:
+      vars: {as_is_date: "2026-11-19"}
+    given:
+      - input: ref('core_claim', v=1)
+        format: csv
+        rows: |
+          staff_bk,unit_code,hours,amount,status,approved_at
+          HR|E-1,HI101,1.00,100.00,approved,2026-11-02 11:59:00
+          HR|E-2,HI101,2.00,200.00,approved,2026-11-02 12:01:00
+          HR|E-1,HI101,1.50,150.00,submitted,
+      - input: ref('pay_days')
+        format: csv
+        rows: |
+          pay_day,claims_close_at
+          2026-11-05,2026-11-02 12:00:00
+          2026-11-19,2026-11-16 12:00:00
+      - input: ref('units')
+        format: csv
+        rows: |
+          unit_code,unit_name,faculty_code,faculty_name
+          HI101,Introduction to Health Informatics,HLT,Faculty of Health
+    expect:
+      format: csv
+      rows: |
+        pay_day,unit_code,casual_staff_paid,claims_paid,hours_paid
+        2026-11-05,HI101,1,1,1.00
+        2026-11-19,HI101,1,1,2.00

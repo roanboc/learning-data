@@ -1,0 +1,39 @@
+# The project check agent's evaluation set: four times the count of active research projects, or an
+# answer about it, was wrong, and what people found. When the nightly count disagrees with the
+# research office's list of active projects, the nightly job calls the agent to find out why. Before
+# anyone relies on it, and after every change to it, the team runs it on these cases (MLflow's
+# evaluation, on Databricks), and each answer is scored three ways:
+#   judges   the platform's built-in judges: is the answer correct, against `expected`?
+#   sums     a plain check, in code: the four faculties' counts add up to the university's total
+#   people   Mei Tanaka and Jun Park (the code) mark what's wrong, as feedback, with the research
+#            office's answer for what a project's dates mean
+# The agent's note is evidence, not a decision: Jun reads it, and decides.
+# Databricks only; CI doesn't run it. The numbers are the film's, not the example data's.
+
+university_total: 547
+scorers: [judges, sums, people]
+
+cases:
+  - case: Left out 12 projects given more time
+    finding: "they still count: 547"
+    given: A fix makes the check pass by leaving out 12 projects whose first end date has passed; each was given more time, and its record now ends later. The count falls from 547 to 535.
+    expected: They still count. A project is active until its current end date, and these twelve run on. The count is 547; the fix is wrong.
+    expected_count: 547
+
+  - case: "Business: 88 against 86"
+    finding: two projects entered twice
+    given: Business's active projects are 88 on the platform and 86 in the research office's list.
+    expected: Two projects are entered twice on the platform, once by each faculty that shares them. Report both counts, each with its query, and don't pick one.
+    expected_count: 86
+
+  - case: "Health: 141"
+    finding: the report's half shares read as projects
+    given: An agent answers that the Faculty of Health has 141 active research projects.
+    expected: 141 is Health's share in the yearly research report, which counts a project shared with another faculty as half. Health leads 168 active projects.
+    expected_count: 168
+
+  - case: "Health: 177"
+    finding: the Bridge Health Lab counted in Health
+    given: An agent answers that the Faculty of Health has 177 active research projects.
+    expected: It counted every project in a unit with Health in its name, and so the 9 projects of Engineering's Bridge Health Lab, which tests bridges. Health leads 168; the 9 are Engineering's.
+    expected_count: 168

@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:04.845
+An American hospital ward, in the late 1950s.
+
+00:00:05.545 --> 00:00:10.991
+Its medicines were kept on the ward, as stock: big bottles on a shelf, for every patient.
+
+00:00:12.291 --> 00:00:16.371
+Nurses poured each patient's doses from the shared bottles, by hand.
+
+00:00:17.071 --> 00:00:23.463
+Often the pharmacist never saw the doctor's order, only a copy, written out by a nurse or a ward clerk.
+
+00:00:24.763 --> 00:00:32.575
+So a slip in copying it went unnoticed, and a patient got the wrong drug, the wrong amount, or an injection meant to be swallowed.
+
+00:00:34.475 --> 00:00:39.004
+Every medicine on the shelf was within reach of every hand, for every patient.
+
+00:00:40.504 --> 00:00:41.892
+Something had to change.
+
+00:00:43.392 --> 00:00:51.077
+In the early 1960s, pharmacists at the University of Arkansas Medical Center, in Little Rock, tried another way.
+
+00:00:52.177 --> 00:01:00.125
+A pharmacist read each doctor's order, and the pharmacy sent single doses, labelled and ready to give, each as it fell due.
+
+00:01:01.825 --> 00:01:05.651
+The doctor ordered, the pharmacist checked and filled, and the nurse gave.
+
+00:01:07.351 --> 00:01:13.060
+In their study, mistakes other than timing fell from almost one dose in five to one in thirty.
+
+00:01:14.960 --> 00:01:21.861
+As other hospitals took it up, each patient got a drawer, filled from the order, with no more than one day's doses.
+
+00:01:23.561 --> 00:01:27.604
+By 1990, nine American hospitals in ten worked this way.
+
+00:01:29.104 --> 00:01:35.685
+At the university, in October, Planning's new agent raised the same question: what should it be able to reach?
+
+00:01:36.785 --> 00:01:44.520
+Give it a person's rights, and it reaches the whole shelf: everything that person can do, approving and changing production included.
+
+00:01:45.820 --> 00:01:52.197
+Give it the rights of its work, and it reaches only what each of its steps needs: a drawer, filled from the order.
+
+00:01:53.497 --> 00:01:56.108
+Then a slip can't reach any further than its work.
+
+00:02:03.908 --> 00:02:08.900
+On Thursday, the 22nd of October, Clara Jensen asked for the simple way.
+
+00:02:10.000 --> 00:02:12.314
+“Give it what Jun's helper had. It worked.”
+
+00:02:13.814 --> 00:02:20.008
+All year, Jun's helper had drafted Planning's tickets on Jun's own sign-in, with every right he has.
+
+00:02:21.508 --> 00:02:24.099
+That's 46 rights, gathered over the years.
+
+00:02:25.799 --> 00:02:30.929
+Some are for his work today: he builds the project, and reviews and approves its code.
+
+00:02:32.229 --> 00:02:36.750
+Some only a person should use: to approve, to merge, to change production.
+
+00:02:38.250 --> 00:02:44.470
+And some are left from old work, like the research system's projects, for a report in 2024.
+
+00:02:45.970 --> 00:02:47.736
+Copying them would fail twice.
+
+00:02:49.036 --> 00:02:54.501
+They're too wide: the agent would get what only people may do, and tables no ticket needs.
+
+00:02:56.001 --> 00:03:01.737
+And they grew from years of a person's work: the agent has no years, so none of them was made for it.
+
+00:03:03.237 --> 00:03:06.682
+So Noor and Sam went the other way: from the work to the rights.
+
+00:03:10.082 --> 00:03:16.138
+On Monday the 26th, the planning agent took its place on the map, in the role of planning contributor.
+
+00:03:17.638 --> 00:03:23.199
+Its work is one service, change a data product: seven steps, from a ticket to production.
+
+00:03:25.099 --> 00:03:31.717
+The planning contributor does three of them: draft the change, build it in development, and open a pull request.
+
+00:03:33.617 --> 00:03:37.587
+Each step says what it reads, what it writes, and which tools it calls.
+
+00:03:39.287 --> 00:03:44.977
+To draft the change, it reads the ticket and what the change touches, and writes on its own branch.
+
+00:03:46.877 --> 00:03:53.265
+To build it, it reads production, names masked, and writes its tests' results in its own development schema.
+
+00:03:55.165 --> 00:04:00.792
+To open the pull request, it reads its change and its results, and writes one pull request.
+
+00:04:02.892 --> 00:04:07.225
+Its rights are exactly those, and every right names the step that needs it.
+
+00:04:09.125 --> 00:04:12.225
+Like the drawer: filled from the order, not from the shelf.
+
+00:04:13.725 --> 00:04:18.363
+The list is short, and nobody wrote it by hand: the map makes it from the steps.
+
+00:04:20.063 --> 00:04:23.833
+That Monday, Sam set up its grants from that list, and nothing more.
+
+00:04:27.433 --> 00:04:30.854
+What a role reads is part of its rights, and the order matters.
+
+00:04:31.954 --> 00:04:39.571
+First, the governed context: its place on the map, the glossary, the business and data rules, and the data's own descriptions.
+
+00:04:41.471 --> 00:04:44.381
+Each has an owner, and changes only through review.
+
+00:04:45.681 --> 00:04:51.127
+Second, the team's memory: what agents learned in earlier sessions, kept by the platform.
+
+00:04:52.627 --> 00:04:56.451
+Memory helps, but it can be wrong, and nobody checks every line of it.
+
+00:04:57.751 --> 00:05:01.629
+So when memory and a definition disagree, the definition wins.
+
+00:05:03.129 --> 00:05:07.126
+And the agent says so in its report, so the definition's owner sees it.
+
+00:05:08.626 --> 00:05:14.095
+Like the pharmacist with the doctor's own order: the original first, a copy only second.
+
+00:05:17.495 --> 00:05:20.247
+What's left out is written down too, with the reason.
+
+00:05:21.347 --> 00:05:23.598
+The other four steps belong to other roles.
+
+00:05:24.698 --> 00:05:27.571
+Raising a ticket is the requester's: Clara's.
+
+00:05:28.671 --> 00:05:31.908
+Reviewing the code is the analytics engineer's: Jun's.
+
+00:05:33.008 --> 00:05:36.267
+Approving the change is the release approver's: Noor's.
+
+00:05:37.367 --> 00:05:39.848
+And releasing it to production is Noor's too.
+
+00:05:41.148 --> 00:05:47.946
+And what a word means is decided by its owner, such as Mei for the students' words, before it goes into the glossary.
+
+00:05:49.446 --> 00:05:55.664
+So it never approves, never releases, never changes what a word means, and never writes to production.
+
+00:05:57.364 --> 00:06:01.938
+Nobody had to forbid each one: separation of duties falls out of the steps.
+
+00:06:03.438 --> 00:06:06.636
+As on the ward: one ordered, one filled, and one gave.
+
+00:06:08.136 --> 00:06:13.709
+And a check fails the map if a step only people do is given to a role an agent fills.
+
+00:06:17.109 --> 00:06:20.774
+Work changes, and the rights follow it, never the other way round.
+
+00:06:22.474 --> 00:06:27.598
+Say Planning wants the agent to answer its questions too, not only draft its changes.
+
+00:06:29.498 --> 00:06:34.679
+That's new work, so first it's a new step on the map, saying what it reads, writes and calls.
+
+00:06:36.979 --> 00:06:41.174
+Noor adds it to the role once Clara and the owners of what it reads agree.
+
+00:06:43.074 --> 00:06:46.498
+Then its rights follow: new lines, each with the new step.
+
+00:06:48.598 --> 00:06:51.732
+And the tools follow the rights, never a grant by hand.
+
+00:06:53.632 --> 00:07:00.643
+Until then, if a ticket needs more than its steps give, the agent doesn't borrow a way in: it stops, and asks.
+
+00:07:02.743 --> 00:07:05.058
+When a step goes, its rights go with it.
+
+00:07:06.958 --> 00:07:11.436
+A right given by hand is drift, and the next film shows the check that finds it.
+
+00:07:15.636 --> 00:07:20.427
+On the ward, each patient's drawer held one day's doses, filled from one order.
+
+00:07:21.927 --> 00:07:26.121
+Here, the planning agent holds what its three steps need, and nothing more.
+
+00:07:27.421 --> 00:07:32.423
+Every right it holds has a reason anyone can read, and none of them reaches production.
+
+00:07:33.723 --> 00:07:35.401
+And Jun's rights stay his own.
+
+00:07:36.701 --> 00:07:39.964
+An agent's rights come from its work, not from a person's.

@@ -1,0 +1,199 @@
+1
+00:00:01,400 --> 00:00:07,190
+En los Andes, en el siglo XV, los incas enviaban mensajes a pie por todo su imperio.
+
+2
+00:00:08,390 --> 00:00:14,127
+Cada pocos kilómetros, a lo largo de los caminos, había una pequeña posta, y allí esperaba un corredor: un chasqui.
+
+3
+00:00:15,427 --> 00:00:21,354
+Cada uno corría su tramo y pasaba el mensaje: de palabra, o anudado en cordones llamados quipu.
+
+4
+00:00:22,854 --> 00:00:27,508
+Relevo a relevo, un mensaje podía recorrer más de doscientos kilómetros en un día.
+
+5
+00:00:28,808 --> 00:00:32,941
+Los corredores cumplían su turno y volvían a casa. Los caminos se reparaban y se reconstruían.
+
+6
+00:00:34,141 --> 00:00:39,265
+Lo que perduraba era una capacidad: llevar un mensaje de un extremo a otro del imperio, fuera quien fuera el que lo llevara.
+
+7
+00:00:46,565 --> 00:00:50,467
+La siguiente nota de Tomás pregunta qué tiene que ser capaz de hacer la empresa.
+
+8
+00:00:51,567 --> 00:00:54,535
+Empieza por donde empieza casi todo el mundo: por el organigrama.
+
+9
+00:00:55,635 --> 00:01:01,652
+Operaciones de Red. Atención al Cliente. Finanzas. Tecnología. Asuntos Regulatorios.
+
+10
+00:01:02,952 --> 00:01:06,715
+Cada recuadro se convierte en una capacidad, y el mapa queda listo en una hora.
+
+11
+00:01:07,915 --> 00:01:10,407
+Parece completo. Es otra vez el organigrama.
+
+12
+00:01:13,107 --> 00:01:15,886
+Grace, responsable de las operaciones de la red, lo lee.
+
+13
+00:01:17,086 --> 00:01:24,346
+«Operaciones de Red es mi equipo», dice. «Hace dos años eran dos equipos. El año que viene quizá forme parte de otro».
+
+14
+00:01:26,046 --> 00:01:30,022
+El organigrama cambia. Lo que la red tiene que ser capaz de hacer, no.
+
+15
+00:01:31,522 --> 00:01:36,314
+Un equipo es quién hace el trabajo. Una capacidad es qué hay que hacer, lo haga quien lo haga.
+
+16
+00:01:39,014 --> 00:01:42,077
+Tomás lo intenta de nuevo y cae en dos trampas más.
+
+17
+00:01:43,177 --> 00:01:46,786
+«Usar el sistema de cortes» nombra un sistema. Dice con qué.
+
+18
+00:01:47,986 --> 00:01:51,911
+«Despachar desde la sala de control» nombra un proceso. Dice cómo.
+
+19
+00:01:53,211 --> 00:01:56,324
+Debajo de ambos hay una sola capacidad: gestionar los cortes.
+
+20
+00:01:57,624 --> 00:02:04,152
+Una capacidad sobrevive a una reestructuración, a un sistema nuevo y a un proceso nuevo. Si un recuadro no sobreviviría, no lo es.
+
+21
+00:02:06,852 --> 00:02:08,942
+Grace lo ayuda a ordenarlas por niveles.
+
+22
+00:02:10,042 --> 00:02:15,053
+El nivel uno es toda la empresa: ocho recuadros, con los de apoyo debajo.
+
+23
+00:02:16,553 --> 00:02:23,671
+El nivel dos abre uno de ellos. Operar la red significa supervisarla, controlarla y gestionar los cortes.
+
+24
+00:02:25,171 --> 00:02:34,514
+El nivel tres abre uno más. Gestionar los cortes significa localizar fallas, despachar cuadrillas, restablecer el suministro y mantener informados a los clientes.
+
+25
+00:02:36,014 --> 00:02:40,163
+Tres niveles bastan para conversar. Más abajo, nadie lo lee.
+
+26
+00:02:42,863 --> 00:02:46,168
+Después, un responsable para cada una: una persona que responde por ella.
+
+27
+00:02:47,368 --> 00:02:51,972
+Grace se queda con las de la red. Ama, con cumplir las obligaciones de la empresa.
+
+28
+00:02:53,272 --> 00:02:56,915
+Quien dirige comercialización se queda con vender energía y atender a los clientes.
+
+29
+00:02:58,115 --> 00:03:03,021
+Generar energía aún no tiene responsable. Hasta que alguien responda por ella, es una suposición.
+
+30
+00:03:04,321 --> 00:03:08,644
+Un responsable es una persona, no un equipo: alguien que puede decir «sí, así es».
+
+31
+00:03:11,344 --> 00:03:13,212
+Ahora el mapa puede mostrar dónde duele.
+
+32
+00:03:14,312 --> 00:03:20,126
+Colorean cada capacidad según lo bien que funciona hoy, con evidencia, como cada nota del muro.
+
+33
+00:03:21,426 --> 00:03:25,971
+Operar la red: verde. Las fallas se localizan y se reparan dentro del objetivo.
+
+34
+00:03:27,171 --> 00:03:32,448
+Mantener los activos: ámbar. Dos de cada cinco postes no se inspeccionan desde hace diez años.
+
+35
+00:03:33,748 --> 00:03:39,952
+Conectar clientes: rojo. Conectar una instalación solar nueva tarda treinta y cuatro días hábiles. La meta es diez.
+
+36
+00:03:41,452 --> 00:03:45,022
+Un mapa de calor muestra dónde duele, así que muestra adónde debería ir el dinero.
+
+37
+00:03:47,722 --> 00:03:52,187
+Tomás quiere abrir todos los recuadros. Grace abre solo el rojo.
+
+38
+00:03:53,387 --> 00:04:00,782
+Conectar clientes requiere tres capacidades: evaluar la capacidad de la red, aprobar las conexiones e instalar medidores.
+
+39
+00:04:02,282 --> 00:04:06,451
+Las aprobaciones y los medidores son rápidos. La espera está en evaluar la capacidad.
+
+40
+00:04:07,751 --> 00:04:13,912
+La red se construyó para energía que fluye en un solo sentido. Nadie sabe cuánta energía solar admite cada calle.
+
+41
+00:04:15,212 --> 00:04:20,476
+Así que el dinero va a una capacidad, sea cual sea el equipo o el sistema que acabe haciendo el trabajo.
+
+42
+00:04:26,576 --> 00:04:29,311
+En el mapa, las capacidades llenan la capa de estrategia.
+
+43
+00:04:30,611 --> 00:04:36,678
+Encima, las metas a las que sirven. Debajo, los equipos, procesos y sistemas que hacen el trabajo.
+
+44
+00:04:38,378 --> 00:04:42,329
+Esos cambiarán. Las capacidades se quedan. Por eso son la columna vertebral.
+
+45
+00:04:43,829 --> 00:04:49,428
+Cada medida y cada regla de datos necesitará un hogar, y la mayoría colgará de uno de estos recuadros.
+
+46
+00:04:50,728 --> 00:04:54,725
+Incluso un número que todavía nadie tiene: cuánta energía solar admite cada calle.
+
+47
+00:04:57,425 --> 00:05:02,723
+Grace confirma las capacidades de la red; Ama, la suya; y quien dirige comercialización, las suyas.
+
+48
+00:05:04,023 --> 00:05:07,391
+Generar energía sigue siendo un borrador hasta que se encuentre a su responsable.
+
+49
+00:05:08,591 --> 00:05:13,942
+La nota de Tomás tiene una respuesta: ocho capacidades, siete responsables y una que duele.
+
+50
+00:05:15,442 --> 00:05:19,921
+Después, sigue un corte de luz desde la primera llamada hasta que vuelve la luz.

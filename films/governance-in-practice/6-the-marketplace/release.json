@@ -1,0 +1,46 @@
+[
+  {
+    "name": "The marketplace",
+    "key": "the-marketplace-en",
+    "dir": "films/governance-in-practice/6-the-marketplace/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/the-marketplace/film.js",
+    "video": "dist/the-marketplace.mp4",
+    "file": "the-marketplace.mp4",
+    "captions": [
+      [
+        "films/governance-in-practice/6-the-marketplace/captions/en.srt",
+        "the-marketplace.en.srt"
+      ],
+      [
+        "films/governance-in-practice/6-the-marketplace/captions/es.srt",
+        "the-marketplace.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-in-practice/6-the-marketplace/source",
+      ":(exclude)films/governance-in-practice/6-the-marketplace/source/src/i18n/es/captions.js",
+      "films/governance-in-practice/shared",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 431,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

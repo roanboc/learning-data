@@ -1,0 +1,20 @@
+{
+  "key": "whats-in-a-word",
+  "title": "What's in a word",
+  "sub": "From words to data: how minds, words and definitions make the first data model, before any technology.",
+  "howto": "The past is drawn warm, like clay and parchment; the present is the films' dark glass. Each office's colour follows its number. The pale blue triangle joins a word, an idea and a thing.",
+  "src": [
+    "whats.js",
+    "land.js",
+    "beasts.js",
+    "birds.js",
+    "body.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "words",
+    "root",
+    4.8
+  ],
+  "say": []
+}

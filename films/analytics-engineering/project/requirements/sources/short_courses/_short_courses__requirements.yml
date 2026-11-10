@@ -1,0 +1,21 @@
+# What's still open about the short_courses source: watched until it's done, then deleted.
+# The schema is in requirements/README.md.
+
+scope: {kind: source, name: short_courses, code: SC}
+
+items:
+
+  - id: REQ-SC-01
+    type: requirement
+    step: operate_and_evolve
+    title: Emails typed before the fix, corrected at the source
+    text: The learning team corrects the emails recorded before 2 November 2026, which still have spaces
+      or capitals, in the platform itself. Then staging stops cleaning emails, and entered_clean checks
+      every row, not only the ones since.
+    owner: Learning team
+    status: in_progress
+    done_when: profile_emails_as_typed.sql finds no email as typed before 2 November 2026; the trim and
+      lower-casing of emails leave stg_short_courses__learners and stg_short_courses__enrolments, and
+      entered_clean loses its since.
+    evidence: [analyses/profiling/profile_emails_as_typed.sql]
+    relates_to: [DEC-SC-04, DEC-SC-02]

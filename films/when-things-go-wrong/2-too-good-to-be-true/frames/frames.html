@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Too good to be true · style frames</title>
+<link rel="stylesheet" href="../../../inner-life-of-data/source/fonts/fonts.css">
+<style>body{margin:0;background:#05080f;color:#ecf3ff;font:16px Manrope,system-ui,sans-serif}h2{font-weight:700;margin:24px auto 8px;max-width:1920px;padding:0 16px}canvas{display:block;width:100%;max-width:1920px;margin:0 auto 24px}</style>
+</head>
+<body>
+<!-- Opened in a browser, this page shows every style frame. render.py uses the same functions to save the images. -->
+<script src="../../../inner-life-of-data/source/src/core.js"></script>
+<script src="../../../inner-life-of-data/source/src/logos.js"></script>
+<script src="../../../inner-life-of-data/source/src/style2.js"></script>
+<script src="../../../inner-life-of-data/source/src/ui3.js"></script>
+<script src="../../../a-sharper-sketch/source/src/sketch3.js"></script>
+<script src="../../characters/people.js"></script>
+<script src="../../1-silent-change/source/src/silent.js"></script>
+<script src="../source/src/good.js"></script>
+<script src="frames.js"></script>
+<script>
+window.__FRAMES__=(async()=>{await document.fonts.ready;await Promise.all(["600 40px Manrope","700 22px Manrope","800 34px Manrope","500 18px Manrope","500 15px 'IBM Plex Mono'"].map(f=>document.fonts.load(f)));
+  if(typeof loadLogos==="function")await loadLogos();if(window.__RENDER__)return;
+  FRAMES.forEach(([id,title,sub])=>{const h=document.createElement("h2");h.textContent=title+" · "+sub;document.body.appendChild(h);
+    const c=document.createElement("canvas");c.width=1920;c.height=1080;DRAW[id](c.getContext("2d"),2);document.body.appendChild(c);});})();
+</script>
+</body>
+</html>

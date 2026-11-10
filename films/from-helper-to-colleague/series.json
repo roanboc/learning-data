@@ -1,0 +1,96 @@
+{
+  "draft": true,
+  "title": "From helper to colleague",
+  "title_es": "De ayudante a colega",
+  "planned": 7,
+  "lead": "The third series on AI agents in data work. Planning's tickets pass from Jun's helper, on his own sign-in, to an agent with a place on the university's map: a role, an owner, and rights that come from its work. Four films show the ideas; three build them in Databricks, GitHub and dbt.",
+  "lead_es": "La tercera serie sobre agentes de IA en el trabajo con datos. Los encargos de Planificación pasan del ayudante de Jun, con su acceso, a un agente con su lugar en el mapa: un rol, una dueña y permisos que vienen de su trabajo. Cuatro películas muestran las ideas; tres, en Databricks, GitHub y dbt.",
+  "description": "Short films on the road from a helper that uses a person's rights to a colleague with its own place on the university's map: five stages and their gates, borrowed rights, a place on the map with a role and an owner, and rights that follow the role; then the same in Databricks, GitHub and dbt: the map enforced in every tool, every change through review, and a written, revocable mandate.",
+  "description_es": "Películas cortas sobre el camino de un ayudante que usa los permisos de una persona a un colega con su propio lugar en el mapa de la universidad: cinco etapas y sus puertas, permisos prestados, un lugar en el mapa con un rol y una dueña, y permisos que siguen al rol; luego lo mismo en Databricks, GitHub y dbt: el mapa aplicado en cada herramienta, cada cambio revisado y un mandato escrito y revocable.",
+  "card": "Planning's agent goes from a helper on Jun's sign-in to a colleague with a place on the map, and rights from its role.",
+  "card_es": "El agente de Planificación pasa de ayudante con el acceso de Jun a colega con un lugar en el mapa y permisos de su rol.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: Planning's agent, from helper to colleague",
+  "thread_h_es": "Un hilo: el agente de Planificación, de ayudante a colega",
+  "thread": "Planning's tickets, drafted all year by Jun's helper on his own sign-in, pass to the planning agent, a colleague owned by Clara. Film by film, the team sees what a helper borrows, puts the agent on the map in a role, gives it only the rights its work needs, writes them into every tool, sends every change through review, and writes down what an agent may do alone, before the next series runs a team of people and agents.",
+  "thread_es": "Los encargos de Planificación, que el ayudante de Jun redactó todo el año con el acceso de Jun, pasan al agente de Planificación, un colega cuya dueña es Clara. Película a película, el equipo ve lo que un ayudante toma prestado, pone al agente en el mapa con un rol, le da solo los permisos que su trabajo necesita, los lleva a cada herramienta, hace revisar cada cambio y escribe lo que un agente puede hacer solo, antes de que la siguiente serie dirija un equipo de personas y agentes.",
+  "past_h": "Where each film begins",
+  "past_h_es": "Dónde empieza cada película",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Builds the data project",
+      "Jun Park, whose helper drafted Planning's tickets on his own sign-in, with every right he has"
+    ],
+    [
+      "biz",
+      "Owns an agent",
+      "Clara Jensen, in Planning, who answers for the planning agent and everything it does"
+    ],
+    [
+      "biz",
+      "Starts where everyone starts",
+      "Lucía Ortega, new in Planning, whose helper works on her own sign-in, with her rights"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect, who puts each agent's work and role on the map and approves every change to production"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who writes what the map allows into every tool, and can stop an agent with one switch"
+    ],
+    [
+      "biz",
+      "Owns a meaning",
+      "Mei Tanaka, in the registrar's office, who decides what a word means, never an agent"
+    ],
+    [
+      "biz",
+      "Signs a mandate",
+      "Anil Kurian, in the Faculty of Health, whose workload agent may work alone in test, under a mandate he signs"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Construye el proyecto de datos",
+      "Jun Park, cuyo ayudante redactó los encargos de Planificación con su propio acceso y todos sus permisos"
+    ],
+    [
+      "biz",
+      "Es dueña de un agente",
+      "Clara Jensen, de Planificación, que responde por el agente de Planificación y por todo lo que hace"
+    ],
+    [
+      "biz",
+      "Empieza donde empiezan todos",
+      "Lucía Ortega, nueva en Planificación, cuyo ayudante trabaja con su propio acceso y sus permisos"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos, que pone en el mapa el trabajo y el rol de cada agente y aprueba cada cambio en producción"
+    ],
+    [
+      "tech",
+      "Gestiona la plataforma",
+      "Sam Okafor, que lleva a cada herramienta lo que el mapa permite y puede detener a un agente con un solo interruptor"
+    ],
+    [
+      "biz",
+      "Es dueña de un significado",
+      "Mei Tanaka, de la oficina de registro, que decide qué significa una palabra, nunca un agente"
+    ],
+    [
+      "biz",
+      "Firma un mandato",
+      "Anil Kurian, de la Facultad de Salud, cuyo agente de carga docente puede trabajar solo en pruebas, con un mandato que él firma"
+    ]
+  ]
+}

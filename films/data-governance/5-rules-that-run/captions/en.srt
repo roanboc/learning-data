@@ -1,0 +1,287 @@
+1
+00:00:01,400 --> 00:00:04,345
+Fustat, in what is now Cairo, in 861.
+
+2
+00:00:05,445 --> 00:00:08,229
+Egypt's harvest depends on the Nile's summer flood.
+
+3
+00:00:08,929 --> 00:00:16,318
+When the flood is low, the fields stay dry, and a land tax set by guess would take the grain a farmer's family needs to eat.
+
+4
+00:00:17,718 --> 00:00:19,227
+A fair tax needs a measure.
+
+5
+00:00:20,827 --> 00:00:27,582
+On Roda Island, a new Nilometer is finished: a well open to the Nile, and a column marked in cubits.
+
+6
+00:00:28,882 --> 00:00:32,866
+The keeper reads the water every day, and the officials get the readings.
+
+7
+00:00:35,166 --> 00:00:37,849
+At sixteen cubits, the tax is due in full.
+
+8
+00:00:38,349 --> 00:00:39,548
+Below it, it isn't.
+
+9
+00:00:40,648 --> 00:00:45,597
+So farmers pay what the river allows, and officials know the tax before the harvest.
+
+10
+00:00:46,897 --> 00:00:54,502
+That's what a quality score should be: a measure every day, a level set in advance, so those who decide know which data to trust.
+
+11
+00:01:01,602 --> 00:01:05,513
+At the university, binder nine says data quality is monitored.
+
+12
+00:01:06,213 --> 00:01:08,108
+Here, monitored means a survey.
+
+13
+00:01:08,808 --> 00:01:12,816
+Each spring, every system's owner rates its data from one to five.
+
+14
+00:01:13,816 --> 00:01:15,892
+The short-course platform: four.
+
+15
+00:01:16,392 --> 00:01:17,998
+Average: 3.9.
+
+16
+00:01:20,298 --> 00:01:23,692
+David asks: can we trust the number we send to the government?
+
+17
+00:01:24,792 --> 00:01:26,060
+The survey can't say.
+
+18
+00:01:26,760 --> 00:01:31,579
+Like a guess at the flood, it measures how people feel about their data, not the data.
+
+19
+00:01:32,879 --> 00:01:34,250
+Yusuf needs a measure.
+
+20
+00:01:36,950 --> 00:01:40,511
+But like the keeper, the data team already measures, every night.
+
+21
+00:01:41,511 --> 00:01:46,224
+As the night's update brings in each system's data, a hundred and sixty checks run.
+
+22
+00:01:47,724 --> 00:01:49,298
+Every learner has an ID.
+
+23
+00:01:49,798 --> 00:01:51,378
+No learner appears twice.
+
+24
+00:01:51,878 --> 00:01:54,620
+Planning's number matches the census report.
+
+25
+00:01:55,320 --> 00:01:57,596
+Each check passes, warns or fails.
+
+26
+00:01:58,696 --> 00:02:00,592
+But a result names only the check.
+
+27
+00:02:01,092 --> 00:02:04,048
+Not whose it is, or what kind of quality it checks.
+
+28
+00:02:07,348 --> 00:02:09,878
+So Yusuf asks for two things on every check.
+
+29
+00:02:10,578 --> 00:02:13,154
+An owner: whoever owns the data it checks.
+
+30
+00:02:13,854 --> 00:02:16,249
+The short-course checks belong to the learning team.
+
+31
+00:02:17,249 --> 00:02:19,851
+And a dimension: the kind of quality it checks.
+
+32
+00:02:20,551 --> 00:02:26,826
+There are six common ones: completeness, uniqueness, validity, consistency, accuracy and timeliness.
+
+33
+00:02:28,126 --> 00:02:32,752
+A check for empty values is about completeness; for duplicates, uniqueness.
+
+34
+00:02:33,752 --> 00:02:37,439
+Jun writes both into the rule register, beside every check.
+
+35
+00:02:40,939 --> 00:02:44,236
+Now the scorecard writes itself, from last night's checks.
+
+36
+00:02:46,536 --> 00:02:52,800
+A row for each area, a column for each dimension, and in each cell, how many checks passed, of how many.
+
+37
+00:02:53,500 --> 00:02:55,822
+Under it, what didn't pass, and whose it is.
+
+38
+00:02:56,922 --> 00:02:59,099
+And David's question has an answer.
+
+39
+00:02:59,799 --> 00:03:04,026
+Planning's number matches the census report, faculty by faculty.
+
+40
+00:03:04,726 --> 00:03:07,473
+That check is Planning's, and last night, it passed.
+
+41
+00:03:10,973 --> 00:03:13,012
+Each check needs its sixteen cubits.
+
+42
+00:03:14,112 --> 00:03:15,347
+But who sets the level?
+
+43
+00:03:15,847 --> 00:03:17,633
+Not governance: its owner.
+
+44
+00:03:18,333 --> 00:03:24,690
+An enrolment with no email: one or two walk-ins a term are normal, and the learning team follows them up.
+
+45
+00:03:25,690 --> 00:03:29,724
+So they chose: warn on any, and stop the night's update above five.
+
+46
+00:03:31,024 --> 00:03:32,551
+Planning chose the opposite.
+
+47
+00:03:33,051 --> 00:03:37,875
+Any difference from the census report stops it, because that number goes to the government.
+
+48
+00:03:38,875 --> 00:03:44,361
+Each owner signs the rule, with its level and reason; the data team writes it into the check.
+
+49
+00:03:45,861 --> 00:03:49,840
+A rule its owner doesn't understand gets ignored, then switched off.
+
+50
+00:03:53,540 --> 00:03:56,716
+At Thursday's office hours, Tom reads the learning row.
+
+51
+00:03:57,416 --> 00:04:03,029
+One amber cell he knows: a walk-in from February, whose certificate still can't reach anyone.
+
+52
+00:04:04,329 --> 00:04:10,240
+And one he's never seen: emails typed with spaces and capitals, warning every night for a year.
+
+53
+00:04:11,240 --> 00:04:13,838
+The night's update cleans them, so nothing broke.
+
+54
+00:04:15,138 --> 00:04:17,681
+Nobody owned the warning, so nobody read it.
+
+55
+00:04:18,381 --> 00:04:19,588
+Now it's his team's.
+
+56
+00:04:23,088 --> 00:04:25,271
+Following up the walk-ins isn't a check.
+
+57
+00:04:26,271 --> 00:04:32,705
+It's about what people do, not the data, so it never stops the update: it's a list the learning team works through.
+
+58
+00:04:36,405 --> 00:04:39,449
+One night, five more walk-ins arrive with no email.
+
+59
+00:04:40,149 --> 00:04:43,455
+That's six, over the learning team's five, so the check fails.
+
+60
+00:04:44,755 --> 00:04:50,036
+Everything built from the short courses stops, and keeps yesterday's numbers, Planning's too.
+
+61
+00:04:51,536 --> 00:04:56,541
+In the morning, the scorecard has one red cell, and the learning team an issue, with a date.
+
+62
+00:04:57,841 --> 00:04:59,271
+Tom knows what it means.
+
+63
+00:04:59,771 --> 00:05:01,156
+His team chose the level.
+
+64
+00:05:01,656 --> 00:05:03,055
+Their list shows the six.
+
+65
+00:05:04,355 --> 00:05:07,170
+By noon, they've registered them, with their emails.
+
+66
+00:05:08,670 --> 00:05:10,240
+That night, the cell is green.
+
+67
+00:05:13,940 --> 00:05:21,734
+Binder nine's line runs now: every rule a check, with an owner, a level and a reason, and a scorecard read from what ran.
+
+68
+00:05:23,034 --> 00:05:26,973
+From now on, a rule without an owner and a dimension is sent back.
+
+69
+00:05:28,973 --> 00:05:32,321
+Like the Nilometer, the scorecard is a measure, not a guess.
+
+70
+00:05:33,421 --> 00:05:39,135
+The university knows each morning which data it can trust, what's held back, and who fixes it.
+
+71
+00:05:40,635 --> 00:05:43,198
+Where problems like these start is the next film.
+
+72
+00:05:44,498 --> 00:05:46,650
+A quality rule is a check with an owner.

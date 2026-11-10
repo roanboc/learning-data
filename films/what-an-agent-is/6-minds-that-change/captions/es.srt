@@ -1,0 +1,339 @@
+1
+00:00:01,600 --> 00:00:04,387
+El norte de la India, hace unos tres mil años.
+
+2
+00:00:05,887 --> 00:00:11,846
+Familias de poetas y sacerdotes guardan el Rigveda: más de mil himnos, sus palabras más sagradas.
+
+3
+00:00:13,146 --> 00:00:14,551
+Nada está escrito.
+
+4
+00:00:15,651 --> 00:00:18,960
+Cada himno vive en la memoria, y pasa de maestro a alumno.
+
+5
+00:00:20,260 --> 00:00:21,643
+Pero la memoria cambia.
+
+6
+00:00:22,743 --> 00:00:26,727
+Cada vez que recordamos algo, lo reconstruimos, y se puede colar un error.
+
+7
+00:00:28,027 --> 00:00:30,656
+Enseñado a un alumno, el error se vuelve el himno.
+
+8
+00:00:32,156 --> 00:00:37,577
+Sin una página con qué comparar, en pocas generaciones las familias podrían perder sus himnos para siempre.
+
+9
+00:00:39,277 --> 00:00:41,073
+Algo tenía que mantenerlos exactos.
+
+10
+00:00:42,373 --> 00:00:46,865
+Así que, a lo largo de los siglos, sus maestros crearon varios patrones para cada himno:
+
+11
+00:00:47,065 --> 00:00:51,386
+tal como se recita, palabra por palabra, en pares, y trenzado, de ida y vuelta.
+
+12
+00:00:53,286 --> 00:00:57,305
+Las palabras tenían que coincidir en todos los patrones, así que un error se notaría.
+
+13
+00:00:59,205 --> 00:00:59,983
+Funcionó.
+
+14
+00:01:00,883 --> 00:01:07,488
+Tres mil años después, los recitadores aún aprenden los himnos así, y las palabras han llegado casi sin cambios.
+
+15
+00:01:08,988 --> 00:01:10,961
+Los estudiosos las comparan con una grabación.
+
+16
+00:01:12,261 --> 00:01:14,113
+No se confiaba en una sola memoria.
+
+17
+00:01:15,013 --> 00:01:16,161
+Se revisaba el trabajo.
+
+18
+00:01:17,461 --> 00:01:18,835
+Con los datos pasa lo mismo.
+
+19
+00:01:19,735 --> 00:01:22,766
+Toda mente cambia, la de una persona y la de un agente.
+
+20
+00:01:23,866 --> 00:01:28,631
+Revisa cada respuesta de más de una forma, y un cambio se nota antes de que alguien actúe.
+
+21
+00:01:36,331 --> 00:01:38,012
+Hoy, en la universidad.
+
+22
+00:01:39,112 --> 00:01:44,969
+Clara, de Planificación, escribe el informe sobre dónde deben ir dos nuevos asesores para estudiantes de primer año.
+
+23
+00:01:46,269 --> 00:01:50,478
+Necesita saber qué facultad perdió más estudiantes de primer año en el primer semestre.
+
+24
+00:01:51,778 --> 00:01:54,222
+El lunes, Jun le pregunta al agente por ella.
+
+25
+00:01:55,122 --> 00:01:58,812
+Responde: Ingeniería y TI, 131.
+
+26
+00:02:00,312 --> 00:02:03,295
+El martes, Clara le pregunta ella misma, en un chat nuevo.
+
+27
+00:02:04,195 --> 00:02:11,217
+Responde: Salud, 126, como muestra la revisión de retención 2025 de la universidad.
+
+28
+00:02:12,917 --> 00:02:14,406
+Tiene sentido, piensa Clara.
+
+29
+00:02:15,306 --> 00:02:17,191
+Salud también perdió más el año pasado.
+
+30
+00:02:18,291 --> 00:02:20,926
+Pero a Jun le dijo Ingeniería y TI.
+
+31
+00:02:22,026 --> 00:02:23,701
+Así que pregunta: ¿estás seguro?
+
+32
+00:02:25,001 --> 00:02:29,927
+El agente se disculpa, y da una tercera respuesta: Negocios, 140.
+
+33
+00:02:31,627 --> 00:02:35,657
+Tres respuestas, cada una tan segura como la anterior, y ninguna dice de dónde salió.
+
+34
+00:02:36,957 --> 00:02:39,662
+Y no existe ninguna revisión de retención 2025.
+
+35
+00:02:43,362 --> 00:02:45,647
+Es fácil decir que el agente inventa cosas.
+
+36
+00:02:46,547 --> 00:02:47,954
+Nuestra memoria también.
+
+37
+00:02:49,054 --> 00:02:53,357
+El propio informe de Clara del año pasado dice Ingeniería y TI, no Salud.
+
+38
+00:02:54,657 --> 00:02:56,169
+Salud fue el año anterior.
+
+39
+00:02:57,069 --> 00:03:00,504
+Su memoria había unido dos años en uno, y ella estaba segura.
+
+40
+00:03:02,204 --> 00:03:08,387
+Hace un siglo, en Cambridge, el psicólogo Frederic Bartlett pidió a varias personas volver a contar un cuento popular
+
+41
+00:03:08,587 --> 00:03:12,322
+de una cultura muy lejana a la suya, una y otra vez, durante años.
+
+42
+00:03:13,622 --> 00:03:18,309
+Cada versión era más corta, y más parecida a su propio mundo: una canoa se volvió un bote.
+
+43
+00:03:19,809 --> 00:03:23,780
+Seis años y medio después, un hombre agregó un tótem y una peregrinación.
+
+44
+00:03:25,280 --> 00:03:28,870
+Ninguno estaba en el cuento, y era justo de eso de lo que estaba más seguro.
+
+45
+00:03:30,770 --> 00:03:37,676
+En Seattle, en 1974, Elizabeth Loftus y John Palmer mostraron a estudiantes películas de choques de autos.
+
+46
+00:03:38,976 --> 00:03:42,426
+A unos les preguntaron a qué velocidad iban los autos cuando se golpearon.
+
+47
+00:03:43,526 --> 00:03:45,594
+A otros, cuando se estrellaron uno contra otro.
+
+48
+00:03:46,894 --> 00:03:48,523
+El segundo grupo calculó más velocidad.
+
+49
+00:03:50,023 --> 00:03:53,119
+Una semana después, un tercio de ellos recordaba vidrios rotos.
+
+50
+00:03:54,419 --> 00:03:55,219
+No había ninguno.
+
+51
+00:03:56,719 --> 00:03:58,695
+La pregunta había cambiado el recuerdo.
+
+52
+00:04:02,595 --> 00:04:05,026
+Nuestra memoria no reproduce una grabación.
+
+53
+00:04:06,326 --> 00:04:11,178
+Cada vez, la reconstruimos con unos pocos detalles, y llenamos el resto con lo que parece probable.
+
+54
+00:04:12,878 --> 00:04:14,886
+Un modelo tampoco reproduce una.
+
+55
+00:04:15,986 --> 00:04:20,275
+Escribe palabras probables, una a la vez, a partir de lo que aprendió y de lo que recibe.
+
+56
+00:04:21,975 --> 00:04:26,178
+Pregunta otra vez en un chat nuevo, y puede tomar otro camino hacia otra respuesta.
+
+57
+00:04:27,878 --> 00:04:32,372
+Donde ninguno sabe, algo probable llena el vacío, y sale tan seguro como un hecho.
+
+58
+00:04:34,072 --> 00:04:35,833
+Y los dos se acomodan a la pregunta.
+
+59
+00:04:36,933 --> 00:04:42,967
+En un estudio de 2023, ante un "¿estás seguro?", los modelos cambiaron de respuesta casi la mitad de las veces.
+
+60
+00:04:44,867 --> 00:04:46,122
+Nada de esto es mentir.
+
+61
+00:04:47,222 --> 00:04:49,142
+Así funcionan la memoria y los modelos.
+
+62
+00:04:50,442 --> 00:04:52,585
+El problema no es una mente que cambia.
+
+63
+00:04:53,685 --> 00:04:56,069
+Es un cambio cuya razón no podemos ver.
+
+64
+00:04:59,969 --> 00:05:01,320
+No se culpa a nadie.
+
+65
+00:05:02,220 --> 00:05:06,267
+En cambio, el equipo revisa el trabajo, igual para personas y agentes.
+
+66
+00:05:07,567 --> 00:05:13,226
+Cada respuesta muestra de dónde salió: la consulta y las filas detrás, o el informe del año pasado.
+
+67
+00:05:14,726 --> 00:05:18,379
+Cada número se obtiene de una segunda forma, como los patrones de los recitadores.
+
+68
+00:05:19,679 --> 00:05:25,318
+El agente cuenta con las inscripciones de la plataforma de datos, y con el propio informe del sistema de estudiantes.
+
+69
+00:05:26,818 --> 00:05:30,581
+No coinciden: 134 y 131.
+
+70
+00:05:32,081 --> 00:05:33,919
+Tres estudiantes se contaron dos veces.
+
+71
+00:05:35,219 --> 00:05:37,723
+El agente lo dice, en vez de elegir uno.
+
+72
+00:05:38,823 --> 00:05:44,669
+Una vez corregido, ambos dicen 131, y el agente cambia su respuesta, con la razón.
+
+73
+00:05:46,169 --> 00:05:49,464
+Una mente que cambia con la evidencia está haciendo su trabajo.
+
+74
+00:05:50,964 --> 00:05:55,718
+La respuesta del lunes era correcta, pero sin su evidencia, nadie podía saberlo.
+
+75
+00:05:57,018 --> 00:06:00,631
+Ahora una verificación simple busca cada noche a quien esté contado dos veces.
+
+76
+00:06:02,131 --> 00:06:09,132
+Lo revisado queda por escrito para todo el equipo, fuera de cualquier chat o cabeza, y el siguiente chat parte de ahí.
+
+77
+00:06:10,632 --> 00:06:14,186
+Y una persona aprueba: Clara lee la evidencia y firma.
+
+78
+00:06:15,486 --> 00:06:17,127
+El agente nunca aprueba.
+
+79
+00:06:18,227 --> 00:06:24,194
+El próximo semestre, los dos nuevos asesores empiezan en Ingeniería y TI, donde más alumnos de primer año se fueron.
+
+80
+00:06:27,894 --> 00:06:30,794
+Los recitadores nunca preguntaron quién recordaba mejor.
+
+81
+00:06:32,094 --> 00:06:38,143
+Cada himno se revisaba, en cada patrón, cada vez, y sus palabras han durado tres mil años.
+
+82
+00:06:39,643 --> 00:06:41,017
+Con los datos pasa lo mismo.
+
+83
+00:06:41,917 --> 00:06:44,735
+Una mente cambiará, sea de una persona o de un agente.
+
+84
+00:06:45,835 --> 00:06:49,264
+Revisado contra la evidencia, de más de una forma, el trabajo se sostiene.
+
+85
+00:06:50,764 --> 00:06:53,246
+No confíes a ciegas en ninguna mente. Revisa el trabajo.

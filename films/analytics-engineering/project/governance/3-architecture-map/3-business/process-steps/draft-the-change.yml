@@ -1,0 +1,17 @@
+name: draft the change
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: planning contributor
+- access (reads): ticket
+- access (reads): role and its steps
+- access (reads): business term
+- access (reads): business rule
+- access (reads): data contract
+- access (reads): owner and column class
+- access (reads): data product
+- access (reads): team memory
+- access (writes): change draft
+- realization: change a data product
+- triggering: build it in development
+status: confirmed

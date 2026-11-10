@@ -1,0 +1,28 @@
+{
+  "kicker": "Why data governance",
+  "kicker_es": "Por qué la gobernanza de datos",
+  "title_es": "Fuera del estante",
+  "h1": "Off the shelf: where does each policy run?",
+  "h1_es": "Fuera del estante: ¿dónde se ejecuta cada política?",
+  "lead": "Yusuf starts as the university's data governance lead and inherits a shelf of thirty-four policies. The same week, two reports disagree on how many awards were conferred, and nobody has decided which goes to the government. He listens first, then asks every policy one question: where does it run?",
+  "lead_es": "Yusuf empieza como líder de gobernanza de datos de la universidad y hereda un estante de treinta y cuatro políticas. Esa semana, dos informes no coinciden en cuántos títulos se otorgaron, y nadie ha decidido cuál va al gobierno. Primero escucha, y luego pregunta a cada política: ¿dónde se ejecuta?",
+  "description": "A film about data governance: a surgical checklist read aloud in 2008, and why it worked; a shelf of policies and a maturity score; two numbers for the same awards; who decides; what governance is for, and how it differs from management; listening before writing; where each policy line runs; and what's worth keeping, and who decides and acts on it.",
+  "description_es": "Una película sobre gobernanza de datos: una lista de verificación quirúrgica leída en voz alta en 2008, y por qué funcionó; un estante de políticas y una puntuación de madurez; dos números para los mismos títulos; quién decide; para qué es la gobernanza, y en qué se diferencia de la gestión; escuchar antes de escribir; dónde se ejecuta cada línea de una política; y lo que vale la pena mantener, y quién decide y actúa.",
+  "card": "Thirty-four policies on a shelf, and two numbers that disagree. Ask every policy one question: where does it run?",
+  "card_es": "Treinta y cuatro políticas en un estante, y dos números que no coinciden. Hazle a cada política una pregunta: ¿dónde se ejecuta?",
+  "chapters_es": {
+    "checklist": "La lista de verificación",
+    "shelf": "El estante",
+    "numbers": "Dos números",
+    "decides": "¿Quién decide?",
+    "for": "Para qué es la gobernanza",
+    "listen": "Primero, escuchar",
+    "runs": "¿Dónde se ejecuta?",
+    "keep": "Lo que vale la pena mantener",
+    "series": "La serie"
+  },
+  "next_h": "You've seen what's worth keeping, and who keeps it.",
+  "next_h_es": "Viste lo que vale la pena mantener, y quién lo mantiene.",
+  "past": ["Eight hospitals in eight countries, 2008: a surgical checklist read aloud", "A rule works when it's all there together: one agreed list, a copy where the work happens, and someone who checks every step."],
+  "past_es": ["Ocho hospitales en ocho países, 2008: una lista de verificación quirúrgica leída en voz alta", "Una regla funciona cuando está todo junto: una lista acordada, una copia donde se hace el trabajo y alguien que verifica cada paso."]
+}

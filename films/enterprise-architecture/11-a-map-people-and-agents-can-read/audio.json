@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-map-people-and-agents-can-read/soundtrack.mp3",
+      "size": 7297506,
+      "sha256": "3dce7bb5346d247dad0c9d8e37cf5610b32bfa0ac34cad13b1b51e8c646f0b26",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/3dce7bb5346d247dad0c9d8e37cf5610b32bfa0ac34cad13b1b51e8c646f0b26.mp3"
+    }
+  ]
+}

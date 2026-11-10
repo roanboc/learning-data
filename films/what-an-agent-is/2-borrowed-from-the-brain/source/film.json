@@ -1,0 +1,61 @@
+{
+  "key": "borrowed-from-the-brain",
+  "title": "Borrowed from the brain",
+  "sub": "The second film of What an agent is, a series on what an AI agent is and what it isn't: why the first learning machine was modelled on a nerve cell; how nerve cells carry messages and learn, in a jellyfish, a bee, an octopus and us; what models borrowed from them and what they didn't; and why a model's answer changes, and fills a missing fact with a likely one.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right, and nature painted full-frame, matte and soft-lit. Living nerve cells are warm, the colour of ink and lamplight; the units people built on them are violet, the model's colour. A signal on its way is a spark of warm light; orange is data and where it came from, green what is checked, amber a guess. Each scene from the past has its place and year on a tag.",
+  "src": [
+    "bb_kit.js",
+    "bb_past.js",
+    "bb_life.js",
+    "bb_model.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "cajal",
+    "whole",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bRamón y Cajal\\b",
+      "Rah mone ee Ka hahl"
+    ],
+    [
+      "\\bCajal's\\b",
+      "Ka hahl's"
+    ],
+    [
+      "\\bCajal\\b",
+      "Ka hahl"
+    ],
+    [
+      "\\bCamillo\\b",
+      "Kahmeelo"
+    ],
+    [
+      "\\bGolgi\\b",
+      "Goaljee"
+    ],
+    [
+      "\\bMcCulloch\\b",
+      "Mac Cullock"
+    ],
+    [
+      "\\bWiesel\\b",
+      "Veezel"
+    ],
+    [
+      "\\bKandel\\b",
+      "Kan dell"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "nature",
+    "cajal"
+  ],
+  "urgent": []
+}

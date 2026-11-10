@@ -314,6 +314,52 @@ models:
         domain: finance
         glossary_term: casual_teaching_cost
 
+  - name: mart_finance__faculty_totals
+    description: >
+      Casual teaching cost by faculty, for the teaching periods Finance has reported (the seed
+      reported_periods): the one table the university shares outside, with a group of universities
+      that compares teaching costs, through OpenSharing (DEC-FIN-06). Made from the metric view
+      casual_teaching_cost, so it counts the measure as it's defined; never by unit, since a unit
+      with one tutor would give away that tutor's pay (Ingrid Holm, HR). A table and not the metric
+      view itself: a metric view can't be shared when the table under it has a row filter, and a
+      recipient outside Databricks can't read one. On Databricks only, as the metric view is.
+    config:
+      meta:
+        grain: One row per faculty and teaching period Finance has reported
+        owner: "Rohan Desai, Finance"
+        domain: finance
+        consumer: A group of universities, through the share teaching_costs
+        glossary_term: casual_teaching_cost
+    constraints:
+      - type: primary_key
+        name: pk_mart_finance__faculty_totals
+        columns: [faculty_name, teaching_period]
+        warn_unenforced: false
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [faculty_name, teaching_period]
+          config:
+            enabled: "{{ target.type == 'databricks' }}"
+            meta: {owner: "Rohan Desai, Finance"}
+    columns:
+      - name: faculty_name
+        description: The faculty that teaches the units, from the registrar's list of units.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: teaching_period
+        description: A teaching period Finance has reported, like 2026-S1.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: casual_teaching_cost
+        description: >
+          The faculty's casual teaching cost for the period, in Australian dollars: the measure
+          casual_teaching_cost, as the metric view defines it, totalled by faculty.
+        data_type: decimal(14,2)
+        config: {meta: {personal_data: none}}
+
 unit_tests:
 
   - name: recognised_credit_saves_tuition_in_the_enrolled_award_only

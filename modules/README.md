@@ -88,6 +88,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 
@@ -275,6 +276,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
 - [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 - [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
+- [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 
 ### Only what you may see
 
@@ -369,6 +371,7 @@ No film source yet.
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
 - [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 
 ## Data management
 
@@ -380,6 +383,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 
 ### Making the case
 

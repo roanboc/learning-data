@@ -70,6 +70,7 @@ Module: `modern-data-basics` · [metadata](modern-data-basics/module.json)
 Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-that-moves/`
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
+- [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 
 ### Data as software
 

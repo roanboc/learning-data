@@ -177,7 +177,7 @@ project/
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses, HR's mailing tool
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses, HR's mailing tool, casual teaching cost's five readers
 ├── governance/               what isn't dbt's, and could live in another tool or repository:
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
@@ -192,6 +192,7 @@ project/
 │   ├── planning/             Planning's near-award rule and count, written once
 │   ├── governance/           on Databricks: each column's class, each critical column and each table's area as tags, the policy
 │   ├── privacy/              on Databricks: the nightly deletion job's steps, by request
+│   ├── finance/              on Databricks: the row filter by faculty on Finance's claims
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
@@ -247,7 +248,11 @@ project/
 │                             receipts, and the send that waits;
 │                             files-as-data/: supplier invoices read with the platform's functions and
 │                             checked, a signed contract found by its metadata, and the claims app's
-│                             data contract (Databricks only)
+│                             data contract (Databricks only);
+│                             more-readers-than-people/: casual teaching cost's five readers, each as
+│                             itself, and the share outside (Databricks only);
+│                             read-by-an-agent/: an agent's 412, the paper form behind it, and the
+│                             checks Genie Code proposed
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -278,6 +283,7 @@ project/
 | *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the award's definition taken from the business glossary (`source:`, `skills/sync-the-glossary/`), the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
 | *Scripts became software* | Payroll's export: `mart_finance__casual_pay_paid`, on the claims' core (`core_claim`), with its unit test of the Monday-noon close (approved at 11:59 and at 12:01); `pay_day_for()` on HR's calendar of pay days (`seeds/reference/staff/pay_days.csv`) and the units seed; the bundle, `databricks.yml` and `resources/payroll_export.job.yml`; and, in `examples/scripts-became-software/`, the release workflow and the laptop script it replaced |
 | *A platform that watches itself* | The claims job, `resources/claims.job.yml`, and its second task, `send_hours_to_payroll.py`; the hours to pay, `mart_payroll__hours_to_pay`, with its unit test of the open pay run, its product and the exposure `payroll_system`; the claim in the new form, CL-104287, read by `decimal_hours()` (`macros/hr/decimal_hours.sql`) in `stg_claims_app__claims`, with its unit test of both forms; DEC-CLM-02, the fix, and DEC-CLM-03, the contract first, proposed; and, in `examples/the-night-the-claims-job-failed/`, the failed build, the insight, the patch and the pull request |
+| *More readers than people* | Casual teaching cost's five readers, each an exposure with its owner (`exposures/finance/`): Genie One, Finance's budget pack, the faculties' tutor planning, Finance's pay-day agent and the share outside; the row filter by faculty on `mart_finance__casual_claims` (`macros/finance/faculty_row_filter.sql`); `mart_finance__faculty_totals`, the totals by faculty for the periods Finance has reported (`seeds/reference/finance/reported_periods.csv`); DEC-FIN-06; and, in `examples/more-readers-than-people/`, how each reader reads (Databricks only) |
 
 ## What differs between engines
 
@@ -292,6 +298,7 @@ project/
 | Schemas | `dev_staging`, `dev_intermediate`, `dev_core`, `dev_marts`, `dev_reference` | The same suffixes on your target schema |
 | Core tables | One per version: `core_learner_v1`, `core_credential_v2`, ... | The same |
 | Grants | None | On the Planning marts, when the `planning_readers` var names groups |
+| Row filters | None | On Finance's claims, by faculty, when the `faculty_readers` var names groups |
 | Semantic layer | Parsed, validated, and queried with MetricFlow in CI (`scripts/check/check_metric.py`) | Queried through dbt Cloud's Semantic Layer, on plans that include it |
 
 ## Engine and dbt workarounds
@@ -331,12 +338,13 @@ her a contract each semester to tutor a first-year unit; `R-3082` at the researc
 person domain's conceptual model (`models/core/person/`) is a draft, and
 `analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
 
-The graduation list has a slice of its own: 24 graduates and 26 certificates, at the ceremonies of
+The graduation list has a slice of its own: 30 graduates and 32 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
-student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
-award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`) and its applications to graduate, on the paper form or in
+the portal (`data/student_system/graduation_applications.csv`), the portal's answers to "Is this
+your name?" (`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart
+from the student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled
+with, award by award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

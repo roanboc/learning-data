@@ -267,6 +267,7 @@ No film source yet.
 
 Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal: `/only-what-you-may-see/`
 
+- [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 
 ### Kept for a reason
@@ -274,6 +275,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
 
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
+- [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 
 ## AI agents in data work
 

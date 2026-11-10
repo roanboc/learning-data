@@ -98,6 +98,8 @@
 | Who does what, end to end | 496 | 0% | 0 | 30.0 | Drawn to the rule |
 | Where each piece lives | 327 | 0% | 0 | 30.1 | Drawn to the rule |
 | A reason to keep it | 223 | 0% | 0 | 30.0 | Drawn to the rule |
+| How long, and then what | 203 | 0% | 0 | 28.4 | Drawn to the rule |
+| An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |

@@ -5,10 +5,10 @@
 window.LEARN={lang:"es",
 think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
   qs:{
-  "skills":{stop:"rule",q:"¿Por qué guardar las reglas y las skills del agente como archivos en el proyecto, y no en un prompt largo?",
+  "skills":{q:"¿Por qué guardar las reglas y las skills del agente como archivos en el proyecto, y no en un prompt largo?",
     opts:[{t:"Los archivos están versionados, se revisan en pull requests como el código, y los lee igual cada persona y cada agente.",ok:true},{t:"Los archivos cargan más rápido que un prompt, así que el agente lee sus reglas antes de cada paso sin ir más lento.",near:true},{t:"Los archivos son privados de cada agente, así que ninguna otra persona ni agente puede cambiar sus reglas por error."}],
     why:"Un prompt vive en una sesión y cambia sin que nadie lo vea. AGENTS.md y los archivos de skills cambian por pull request, y todos leen la misma versión."},
-  "evidence":{stop:"claims",q:"¿Qué convierte una afirmación sobre los datos en una suposición?",
+  "evidence":{q:"¿Qué convierte una afirmación sobre los datos en una suposición?",
     opts:[{t:"Tener consulta, pero no la firma del dueño.",near:true},{t:"Venir de un agente, no de una persona."},{t:"No tener al lado ni consulta ni resultado.",ok:true}],
     why:"Quien revisa puede volver a ejecutar una consulta; no puede volver a ejecutar una frase. Incluso un número correcto, sin su consulta, es una suposición."},
   "shortcut":{stop:"review",q:"La conciliación falló. ¿De quién es la decisión de cambiar lo que espera la prueba?",

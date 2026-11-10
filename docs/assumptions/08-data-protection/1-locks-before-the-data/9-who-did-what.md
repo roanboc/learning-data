@@ -1,8 +1,8 @@
 # Who did what: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 9 · open, PR #180 · [pull request](https://github.com/roanboc/learning-data/pull/180)
+*Data protection and privacy* · *Locks before the data*, film 9 of 9 · merged, PR #180 · [pull request](https://github.com/roanboc/learning-data/pull/180)
 
-On the site once PR #180 merges: https://data.learn-all.org/locks-before-the-data/who-did-what/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/who-did-what/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -28,6 +28,5 @@ Film 9 of *Locks before the data* (the module's film 9, the last of the series).
 | 16 | Quotes on screen | The two speech cards quote Warren's account word for word (IEEE Spectrum, 18 June 2021): the pilots, “A spy flying alongside”, and his boss, “Get on with blowing up fuel tanks”. The voice says them in short ("Pilots fear a spy in the cockpit, and his boss tells him to get on with fuel tanks"), without quotation marks | *Kept where no crash can reach*, *One record, out of reach* |
 | 17 | Where the urgent pulse plays | Only in *The night a session was copied*, in two short runs: from the bell to "from another country", and while the on-call ends the sessions. The bell itself is the lujon's lowest plate struck twice, at the effects' level, the same each time. Music elsewhere only at a chapter's turn or under a moment on screen; `quiet.py` passes | The score |
 | 18 | How people and secrets are drawn | Warren in a grey suit jacket of the 1950s, hands out of sight; no one's hands touch anything; Jun's copied session and the leaked token are violet sealed cards that say what they are and whose ("Jun's session · GitHub and the platform", "A token found in code"), never a character of either | Every chapter |
-| 19 | When it merges | Built and checked on main of 5 November (51821fb8). Its pull request carries the Draft label and waits for films 1 to 8 of the module to merge first, then merges on green on the latest main (the merge is the release; release.yml is never run) | The pull request |
+| 19 | When it merges | Built on main of 5 November, then rebuilt and checked again on the latest main before it merged. Its pull request carries the Draft label and merged after films 1 to 8 of the series, on green (the merge is the release; release.yml is never run) | The pull request |
 | 20 | Dates on screen | None for the film's own story: the nightly copies read "Production · Friday" to "Monday", by day, not by date, so this film adds nothing to the open question on the module's October and November dates (dp-dates item in the final checklist). Only the opening's history is dated (1953 to 1963) | *A copy nobody can delete* |
-| 21 | The soundtrack, after the 9 November change that keeps audio out of Git | The film's `audio.json` points at a new prerelease, `audio-who-did-what-f6a26c8dcc42d798e314`, and the exact MP3 is staged in this folder's `audio-release/`, inside a tar (this shared folder adds a C2PA frame to any loose MP3, which changes its checksum), with a README. This session can't create GitHub releases, so Rodrigo (or anyone with release access) creates that prerelease, uploads the MP3, and runs `python site-tools/media.py verify-remote --film who-did-what-en --tag audio-who-did-what-f6a26c8dcc42d798e314`. The pull request merges only after that, and after films 1 to 8 | The pull request; `audio.json` |

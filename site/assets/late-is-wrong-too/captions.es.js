@@ -1,7 +1,7 @@
 /* Late is wrong too: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
-   Words as in the module's pages (films/fit-for-use/series.json) and film 1's captions: la lista de graduación, el diploma for a degree certificate, el título for an
+   Words as in the module's pages (films/fit-for-use/series.json) and Good enough for what?'s captions: la lista de graduación, el diploma for a degree certificate, el título for an
    award, el control for a check, la imprenta for the printer, el sistema de estudiantes, el Aula Magna, Planificación, la actualización nocturna for the night's update,
    la frescura (dbt's freshness) and la puntualidad (the dimension, timeliness), as the series' page says. New here: la antigüedad for how old the data is ("la lista
    dice su antigüedad"), el archivo nocturno for the nightly file, atrasado for late, las juntas de examen for the exam boards, el envío for the send, un trabajo for a

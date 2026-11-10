@@ -8,9 +8,12 @@ saw in the platform's monitoring that the student system's tables were late; the
 11:40, the list was built again at 12:10 with 712 graduates, and it went to the printer at 3:20 pm,
 before its 5 pm deadline. *Late is wrong too*, film 4 of *Fit for use*, follows that night.
 
-Late data looks complete: every row in it is right, and the checks that read the rows pass. What
-was wrong was the list's age, and nothing said it. So the people who use the list agreed how old it
-may be for each use, on Monday 22 June, and the project now says how old it is, and checks it.
+Late data looks complete: every row in it is right, and the checks that read the rows pass. Even
+the check against the exam boards' approved lists passed: they come in the same night's transfer as
+the student system's file, so they were a day old too, and the student system's receipt is their
+age as well. What was wrong was the list's age, and nothing said it. So the people who use the list
+agreed how old it may be for each use, on Monday 22 June, and the project now says how old it is,
+and checks it.
 
 | Where | What it holds |
 |---|---|
@@ -54,4 +57,5 @@ The night's job never stops the data: if the check fails, its task fails, the tw
 are told at once, and the list is built anyway (*All done*), saying how old it is. That failure is
 the warning. dbt's own warning level isn't used: a warning exits as a success, so no failure notice
 would go out. The send is what stops: its job runs the same check, and sends only if it passes
-(*All succeeded*).
+(*All succeeded*). Each check tells its people with a notification on its own task, on failure: a
+job's notice isn't sent while a failed task is retried, and a task's is.

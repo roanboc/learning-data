@@ -11,17 +11,17 @@
   "description_es": "Una película sobre diseñar quién puede leer qué en Unity Catalog, la cuarta de Solo lo que puedes ver: las Galápagos desde fines de los años sesenta, donde el parque nacional, aconsejado por la Estación Científica Charles Darwin, planificó las visitas una vez para todo el parque, casi todo cerrado, unos pocos sitios con senderos marcados, un guía con cada grupo y las mismas reglas para todos, así que las islas pudieron recibir 25,000 visitantes en 1982 y 290,404 en 2025 con los sitios que recorren casi intactos; tres derechos para leer una tabla, y uno más para encontrarla; estantes según quién los lee, y un permiso solo para un grupo y solo en un catálogo o un estante, así que cada tabla nueva la leen las personas correctas desde su primer minuto; propietarios que son grupos, no personas; catálogos vinculados a los espacios de trabajo desde donde se pueden leer, solo para lectura en el caso de un estudio; y todo el plan guardado como código, aprobado por la dueña de los datos.",
   "card": "Three rights to read a table, a shelf for each set of readers, groups as owners, and the plan kept as code.",
   "card_es": "Tres derechos para leer una tabla, un estante por cada conjunto de lectores, grupos como propietarios, y el plan guardado como código.",
-  "chapters_es": [
-    "El plan para las islas",
-    "Una tabla a la vez",
-    "Tres puertas hacia una tabla",
-    "Estantes según quién los lee",
-    "Una tabla hecha mañana",
-    "Propietarios que no se van",
-    "Desde dónde se puede leer",
-    "Escrito una vez, guardado como código",
-    "De vuelta a las islas"
-  ],
+  "chapters_es": {
+    "islands": "El plan para las islas",
+    "one": "Una tabla a la vez",
+    "doors": "Tres puertas hacia una tabla",
+    "shelves": "Estantes según quién los lee",
+    "tomorrow": "Una tabla hecha mañana",
+    "owners": "Propietarios que no se van",
+    "where": "Desde dónde se puede leer",
+    "code": "Escrito una vez, guardado como código",
+    "back": "De vuelta a las islas"
+  },
   "past": [
     "The Galápagos, from the late 1960s: the visits planned once, for the whole park",
     "The plan came first, and every visitor since has walked inside it."

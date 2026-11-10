@@ -1,0 +1,5 @@
+name: product catalogue
+kind: application component
+definition: 'Where products are found and access is requested: Ontos, over Unity Catalog.'
+owner: Sam, platform team
+status: confirmed

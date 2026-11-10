@@ -1,0 +1,95 @@
+From ddbae69992ab28eca1a7efef19e18bafc2273d61 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 18:00:00 +0000
+Subject: [PATCH] Course: awards conferred, counted once, as a metric view on
+ Databricks
+
+The credentials that count as an award, by the year they were issued, as a
+Unity Catalog metric view the project builds (dbt-databricks). The census
+report and the draft submission say they count with it on Databricks.
+---
+ .../planning/_planning__exposures.yml         |  3 ++-
+ .../registrar/_registrar__exposures.yml       |  3 ++-
+ .../core/course/_core_course__models.yml      | 11 ++++++++++
+ .../models/core/course/awards_conferred.sql   | 22 +++++++++++++++++++
+ 4 files changed, 37 insertions(+), 2 deletions(-)
+ create mode 100644 films/analytics-engineering/project/models/core/course/awards_conferred.sql
+
+diff --git a/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml b/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
+index 3ab43ef3..d8983096 100644
+--- a/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
++++ b/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
+@@ -20,7 +20,8 @@ exposures:
+     maturity: high
+     description: >
+       Planning's census report, published each April: the learners and the awards conferred at
+-      each faculty, as at census date. The census dashboard reconciles with it.
++      each faculty, as at census date. The census dashboard reconciles with it. On Databricks it
++      counts awards with the metric view awards_conferred.
+     owner:
+       name: Planning
+       email: planning@uni.example
+diff --git a/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml b/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
+index d3bb44cb..39da8157 100644
+--- a/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
++++ b/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
+@@ -6,7 +6,8 @@ exposures:
+     maturity: high
+     description: >
+       The registrar's office's draft of the awards the university reports each year: every award
+-      conferred, checked by the office before it's submitted.
++      conferred, checked by the office before it's submitted. On Databricks it counts awards with
++      the metric view awards_conferred.
+     owner:
+       name: Mei Tanaka, registrar's office
+       email: mei.tanaka@uni.example
+diff --git a/films/analytics-engineering/project/models/core/course/_core_course__models.yml b/films/analytics-engineering/project/models/core/course/_core_course__models.yml
+index ac2a1889..1cbd565b 100644
+--- a/films/analytics-engineering/project/models/core/course/_core_course__models.yml
++++ b/films/analytics-engineering/project/models/core/course/_core_course__models.yml
+@@ -85,3 +85,14 @@ models:
+     versions:
+       - v: 1
+         defined_in: core_award
++
++  - name: awards_conferred
++    description: >
++      Awards conferred, counted once for every report, dashboard and agent: the credentials that
++      count as an award (counts_as_award), by the year they were issued. A Unity Catalog metric view,
++      on Databricks only.
++    config:
++      meta:
++        owner: Mei Tanaka, registrar's office
++        domain: course
++        glossary_term: award
+diff --git a/films/analytics-engineering/project/models/core/course/awards_conferred.sql b/films/analytics-engineering/project/models/core/course/awards_conferred.sql
+new file mode 100644
+index 00000000..2e1c6aa3
+--- /dev/null
++++ b/films/analytics-engineering/project/models/core/course/awards_conferred.sql
+@@ -0,0 +1,22 @@
++{#-
++    Databricks only: awards conferred, counted once, as a Unity Catalog metric view (dbt-databricks).
++    The body is the metric view's YAML, not SQL. Reports, dashboards and Genie read it with
++    MEASURE(awards_conferred). DuckDB has no metric views, so there the model is turned off.
++-#}
++{{ config(
++    materialized='metric_view',
++    enabled=target.type == 'databricks',
++    contract={'enforced': false}
++) }}
++
++version: 1.1
++comment: The credentials that count as an award, by the year they were issued. Owned by Mei Tanaka, registrar's office.
++source: "{{ ref('core_credential', v=2) }}"
++filter: counts_as_award
++dimensions:
++  - name: year_issued
++    expr: year(issued_on)
++measures:
++  - name: awards_conferred
++    expr: count(1)
++    synonyms: [awards, awards granted]
+-- 
+2.43.0
+

@@ -1,0 +1,26 @@
+{
+  "key": "the-marketplace",
+  "title": "The marketplace",
+  "sub": "Film 6 of 6 of Governance you can use: the marketplace. The university's data products sit in one catalogue: you read a product's promise, ask its owner with a reason and an end date, get access through a group until that date, and become a reader the impact check names; outside the university, a product is shared through OpenSharing and read where it lives.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side. Each product keeps one colour on every tile and file, and its owner's chip is gold; codes that can lead back to a learner are pale plum. A small key with a date on its tag is access until that date. Files are paper sheets, copied from the example project; the catalogue's and the platform's pages are drawn as forms.",
+  "src": [
+    "../../../shared/src/tools.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "asking",
+    "find",
+    4.8
+  ],
+  "say": [
+    [
+      "\\bOntos\\b",
+      "Ontoss"
+    ],
+    [
+      "\\bOpenSharing\\b",
+      "Open Sharing"
+    ]
+  ]
+}

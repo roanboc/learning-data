@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:06.434
+Europe, in the 1440s. Every book is copied by hand, letter by letter.
+
+00:00:07.534 --> 00:00:09.511
+So books are slow to make, and rare.
+
+00:00:10.211 --> 00:00:16.546
+In 1424, the University of Cambridge's library held 122 books.
+
+00:00:17.846 --> 00:00:20.223
+And every new copy can add new mistakes.
+
+00:00:21.523 --> 00:00:22.963
+Something has to change.
+
+00:00:24.663 --> 00:00:28.046
+The idea that will change it is already four hundred years old.
+
+00:00:29.346 --> 00:00:34.384
+In China, in the 1040s, Bi Sheng made a piece of baked clay for each character.
+
+00:00:35.084 --> 00:00:38.992
+He set them in an iron frame, printed a page, and used them again.
+
+00:00:40.192 --> 00:00:47.391
+In Korea, in 1377, monks printed a book with characters cast in metal: the oldest that survives.
+
+00:00:48.691 --> 00:00:54.976
+In Mainz, around 1450, a metalworker, Johannes Gutenberg, brought the other pieces together.
+
+00:00:55.676 --> 00:01:03.477
+Letters cast in metal, all alike; an ink that clings to them; a press, like a wine press; and paper, now made in Germany.
+
+00:01:04.777 --> 00:01:08.628
+And a lender, Johann Fust, put up the money for years of trying.
+
+00:01:10.128 --> 00:01:16.454
+By 1500, presses in more than two hundred towns had printed some thirty thousand different books.
+
+00:01:18.154 --> 00:01:20.894
+And books grew cheaper, reaching far more readers.
+
+00:01:22.194 --> 00:01:26.349
+Printing seemed to arrive all at once. It had taken four hundred years.
+
+00:01:28.049 --> 00:01:34.872
+This term, an AI agent joins Jun Park's data team: software that works through tasks, step by step.
+
+00:01:35.572 --> 00:01:39.591
+To some, it's come from nowhere. Some fear it; some expect magic.
+
+00:01:40.891 --> 00:01:46.107
+But its ideas are decades old, and seen as long work, it's something they can understand.
+
+00:01:53.407 --> 00:01:56.211
+Our road starts in July 1958.
+
+00:01:56.911 --> 00:02:04.705
+The US Navy showed reporters a perceptron, a program by the psychologist Frank Rosenblatt that learns from examples.
+
+00:02:05.805 --> 00:02:11.187
+Shown cards marked on the left or the right, it guessed, and each wrong guess nudged its numbers.
+
+00:02:13.487 --> 00:02:16.768
+After fifty tries, it could tell them apart by itself.
+
+00:02:18.268 --> 00:02:23.824
+A newspaper said the Navy expected it to walk, talk, and be conscious of its existence.
+
+00:02:25.124 --> 00:02:31.945
+But a single layer can't learn some patterns at all, as a book showed in 1969, and money moved elsewhere.
+
+00:02:34.845 --> 00:02:39.929
+In 1986, three researchers showed how a network with several layers can learn.
+
+00:02:40.629 --> 00:02:43.073
+It makes a guess, and measures how wrong it is.
+
+00:02:44.173 --> 00:02:49.442
+The error is passed back, layer by layer, and every connection is nudged to make it smaller.
+
+00:02:51.342 --> 00:02:56.588
+Over many examples, the layers in between find patterns no one told them to look for.
+
+00:02:58.088 --> 00:03:03.450
+But computers were slow and examples few, and for twenty years these networks stayed small.
+
+00:03:06.350 --> 00:03:08.792
+In 2012, the pieces came together.
+
+00:03:09.492 --> 00:03:14.843
+A team in Toronto trained a much bigger network on more than a million labelled photos.
+
+00:03:16.143 --> 00:03:22.023
+It ran on two graphics chips, made for video games, which do hundreds of small sums at once.
+
+00:03:23.523 --> 00:03:28.844
+In an image contest, its five best guesses missed the answer 15 times in a hundred.
+
+00:03:30.144 --> 00:03:32.167
+The next best entry missed 26.
+
+00:03:33.667 --> 00:03:37.077
+The ideas were old. What was new was the power to run them.
+
+00:03:39.977 --> 00:03:45.742
+In 2017, a paper called Attention Is All You Need changed how these networks read.
+
+00:03:47.242 --> 00:03:49.939
+Before, they read a sentence one word at a time.
+
+00:03:51.239 --> 00:03:56.836
+Its design, the transformer, takes in all the words at once, and learns which matter to each other.
+
+00:03:58.836 --> 00:04:03.906
+In "The team fixed the report because it was wrong", it learns that "it" is the report.
+
+00:04:05.606 --> 00:04:10.652
+Reading all at once splits the work across many chips, so models could grow far bigger.
+
+00:04:13.552 --> 00:04:20.634
+From 2018 to 2020, researchers trained transformers on huge collections of text from the web and books.
+
+00:04:21.334 --> 00:04:24.823
+The task was simple: guess the next word, check it, and adjust.
+
+00:04:26.523 --> 00:04:31.162
+Billions of times over, a model picked up grammar, facts and ways of writing.
+
+00:04:32.262 --> 00:04:37.505
+The largest, in 2020, had 175 billion numbers to tune.
+
+00:04:38.205 --> 00:04:42.395
+It wrote fluently, but it wasn't trying to help: it only carried on the text.
+
+00:04:46.095 --> 00:04:51.786
+In 2022, researchers asked people to rank a model's answers, from best to worst.
+
+00:04:53.086 --> 00:04:56.583
+Then they trained it to give the kind of answers people preferred.
+
+00:04:57.283 --> 00:05:01.404
+People preferred its answers to those of a model a hundred times bigger.
+
+00:05:02.904 --> 00:05:09.337
+Since 2024, models have also been trained to work through a problem step by step before they answer.
+
+00:05:10.837 --> 00:05:15.787
+And they can use tools: search, run a query, read a file, and work with what comes back.
+
+00:05:17.287 --> 00:05:21.494
+A model that reasons, with hands for tools, in a loop: that's an agent.
+
+00:05:25.394 --> 00:05:27.083
+So why did it seem so sudden?
+
+00:05:27.783 --> 00:05:29.660
+Because three things arrived together.
+
+00:05:30.760 --> 00:05:38.107
+Computing power: since 2010, the computing used to train the largest models has doubled about every six months.
+
+00:05:39.407 --> 00:05:42.614
+Data: the web, and millions of labelled examples.
+
+00:05:43.314 --> 00:05:52.025
+And money: the first transformer cost about nine hundred dollars to train; by 2023, the biggest cost tens of millions or more.
+
+00:05:53.525 --> 00:05:58.286
+It wasn't a sudden discovery. It was long work that finally had the power to run.
+
+00:06:00.386 --> 00:06:05.356
+Printing waited four hundred years for metal letters, paper, a press and a lender.
+
+00:06:06.456 --> 00:06:09.809
+These ideas waited decades for chips, data and money.
+
+00:06:11.309 --> 00:06:17.882
+So nobody on Jun's team expects magic from the agent, or needs to fear it: they know where it came from.

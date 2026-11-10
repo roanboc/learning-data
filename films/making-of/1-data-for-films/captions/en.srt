@@ -1,0 +1,191 @@
+1
+00:00:04,200 --> 00:00:08,123
+This is The Inner Life of Data, two minutes and thirty-one seconds in.
+
+2
+00:00:08,823 --> 00:00:10,731
+Let's stop it here, and look closer.
+
+3
+00:00:11,431 --> 00:00:12,141
+Closer.
+
+4
+00:00:13,441 --> 00:00:18,830
+The picture breaks into tiny squares: pixels. And each pixel is only three numbers.
+
+5
+00:00:20,030 --> 00:00:25,797
+How much red, how much green and how much blue, each from zero to two hundred and fifty-five.
+
+6
+00:00:32,297 --> 00:00:39,171
+A frame is a grid of these numbers: nineteen hundred and twenty pixels across, and a thousand and eighty down.
+
+7
+00:00:39,871 --> 00:00:44,107
+That's about two million pixels, and six million numbers, in one frame.
+
+8
+00:00:45,407 --> 00:00:47,753
+The film shows thirty frames every second.
+
+9
+00:00:48,453 --> 00:00:51,485
+Nobody typed those numbers. So where do they come from?
+
+10
+00:00:54,185 --> 00:00:58,892
+From code. And code doesn't say which pixels to colour. It describes shapes.
+
+11
+00:00:59,592 --> 00:01:02,154
+Fill a rectangle here, this wide, in this colour.
+
+12
+00:01:03,454 --> 00:01:05,857
+A circle. A line. A curve. A word.
+
+13
+00:01:07,557 --> 00:01:10,397
+The browser works out which pixels each shape covers.
+
+14
+00:01:11,497 --> 00:01:17,699
+Where an edge cuts through a pixel, that pixel gets part of the colour, so the edge looks smooth instead of jagged.
+
+15
+00:01:19,599 --> 00:01:25,079
+The film's real code is denser, but it's the same idea: shapes, positions and colours.
+
+16
+00:01:27,779 --> 00:01:31,545
+Take one of the film's data tiles. It's drawn in five layers.
+
+17
+00:01:32,245 --> 00:01:36,803
+A dark card, a piece of the picture, a frame, corner marks, and a timestamp.
+
+18
+00:01:38,303 --> 00:01:42,798
+Order matters. Whatever is drawn later covers what came before, like paint.
+
+19
+00:01:43,898 --> 00:01:47,029
+Draw the picture last, and the timestamp disappears.
+
+20
+00:01:48,329 --> 00:01:54,372
+Light is different. Where two glows overlap, the code adds their numbers together, as real light does.
+
+21
+00:01:55,472 --> 00:01:56,933
+That's how the lenses shine.
+
+22
+00:01:58,233 --> 00:02:04,689
+And a raw tile's glitch is done with the numbers too: the code slides the red and blue a few pixels sideways.
+
+23
+00:02:07,989 --> 00:02:11,669
+Nobody draws each tile by hand. The tile is a function.
+
+24
+00:02:12,369 --> 00:02:17,952
+Give it a position, a size, a piece of the picture and how clean it is, and it draws itself.
+
+25
+00:02:19,252 --> 00:02:22,186
+Feed it ten rows of data, and you get ten tiles.
+
+26
+00:02:23,686 --> 00:02:28,001
+Here's the real one: two lines, called in almost every frame of the film.
+
+27
+00:02:30,101 --> 00:02:36,382
+The film, the labs and the scenarios call the same functions. Fix one, and the fix lands everywhere.
+
+28
+00:02:39,482 --> 00:02:43,530
+The whole platform is drawn at its own size, much bigger than the screen.
+
+29
+00:02:44,230 --> 00:02:50,123
+So the camera isn't a lens. It's three numbers: where to look, across and down, and how far to zoom.
+
+30
+00:02:50,823 --> 00:02:54,218
+One instruction applies them before anything is drawn.
+
+31
+00:02:55,718 --> 00:03:00,281
+Change the numbers smoothly, and we fly from the whole platform into one housing.
+
+32
+00:03:04,481 --> 00:03:07,080
+So far, one frame. But a film moves.
+
+33
+00:03:07,780 --> 00:03:12,713
+Every frame is a function of time. Give the code a moment, and it draws that moment.
+
+34
+00:03:14,013 --> 00:03:18,945
+Where is this tile now? It set off from here, at this speed, this long ago. So it's there.
+
+35
+00:03:20,245 --> 00:03:24,457
+Go back, or jump ahead, and the code simply draws that moment instead.
+
+36
+00:03:25,757 --> 00:03:31,637
+Motion needs care. At a constant speed, it looks mechanical. Eased in and out, it looks calm.
+
+37
+00:03:33,337 --> 00:03:38,832
+Even what looks random isn't. Which tiles are glitched or duplicated comes from a formula.
+
+38
+00:03:39,932 --> 00:03:44,131
+So the same moment draws the same way, every time, on any computer.
+
+39
+00:03:47,431 --> 00:03:49,437
+That gives the films two ways to play.
+
+40
+00:03:50,437 --> 00:04:00,475
+On the site, your browser downloads the code and the soundtrack. Each time your screen refreshes, it asks the soundtrack how far it has played, and draws that moment.
+
+41
+00:04:01,975 --> 00:04:09,154
+For a video file, a browser with no window draws every frame, thirty for each second, and hands them to an encoder.
+
+42
+00:04:10,254 --> 00:04:13,852
+The encoder mostly keeps what changed from one frame to the next.
+
+43
+00:04:15,352 --> 00:04:25,714
+Stored as raw numbers, The Inner Life of Data would take about eighty gigabytes. The video takes about two hundred megabytes. The code and the sound, about seven.
+
+44
+00:04:28,014 --> 00:04:35,809
+A flipbook keeps every page. The live film keeps none: it's the recipe. The video is a flipbook, made from that recipe.
+
+45
+00:04:39,109 --> 00:04:41,072
+Now let's put the frame back together.
+
+46
+00:04:41,772 --> 00:04:45,124
+Numbers. Shapes. Layers. Components. A camera. And time.
+
+47
+00:04:46,424 --> 00:04:47,735
+And the film plays on.
+
+48
+00:04:48,835 --> 00:04:51,551
+A picture is data. A film is a function.

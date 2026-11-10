@@ -1,0 +1,259 @@
+1
+00:00:01,600 --> 00:00:11,095
+En 1686, la ley de la Iglesia de Suecia pidió a cada párroco llevar un libro de cada hogar: quién vivía ahí, cuándo nació, si sabía leer.
+
+2
+00:00:12,695 --> 00:00:17,909
+Si alguien se mudaba, llevaba un certificado a su nueva parroquia, y el libro siguiente lo acogía.
+
+3
+00:00:19,509 --> 00:00:23,719
+En 1947, el registro dio a cada persona un número para toda la vida.
+
+4
+00:00:25,019 --> 00:00:28,583
+Una persona, anotada una sola vez, seguida adondequiera que fuera.
+
+5
+00:00:35,883 --> 00:00:40,774
+Hoy, en la universidad. Linh Nguyen se graduó aquí en 2022.
+
+6
+00:00:42,074 --> 00:00:45,127
+El año pasado, volvió a estudiar informática en salud.
+
+7
+00:00:46,227 --> 00:00:48,910
+Postuló en línea y recibió otro número de estudiante.
+
+8
+00:00:50,410 --> 00:00:53,156
+Nada lo vinculaba al número con el que se graduó.
+
+9
+00:00:55,656 --> 00:00:58,325
+Ahora la universidad tiene cinco registros de ella.
+
+10
+00:00:59,425 --> 00:01:02,669
+Dos en el sistema de estudiantes: el número antiguo y el nuevo.
+
+11
+00:01:03,969 --> 00:01:07,314
+Uno en la oficina de egresados, que solo conoce el antiguo.
+
+12
+00:01:08,614 --> 00:01:12,236
+Uno en RR. HH., que le paga por dar tutorías en primer año.
+
+13
+00:01:13,436 --> 00:01:17,167
+Y uno en la oficina de investigación, por un proyecto de este año.
+
+14
+00:01:18,567 --> 00:01:23,257
+Así que su solicitud pidió el certificado de notas del título que la misma universidad le dio.
+
+15
+00:01:24,957 --> 00:01:29,617
+Y la oficina de egresados la invita a volver, para una maestría. Ya está haciendo una.
+
+16
+00:01:31,317 --> 00:01:35,478
+Cinco registros, cinco Linhs, y nadie ve que es una sola persona.
+
+17
+00:01:38,178 --> 00:01:44,636
+Linh es un dato maestro: una de las cosas de las que trata la universidad, compartida por todos sus procesos y sistemas.
+
+18
+00:01:45,936 --> 00:01:50,331
+Las listas que la clasifican, como «tutora eventual» o un país, son datos de referencia.
+
+19
+00:01:51,531 --> 00:01:55,915
+Lo que le pasa, una matrícula o un recibo de sueldo, son datos transaccionales.
+
+20
+00:01:57,015 --> 00:01:59,657
+Y la definición de estudiante es un metadato.
+
+21
+00:02:00,357 --> 00:02:04,231
+Esta serie trata de los dos primeros, y la próxima película los distingue.
+
+22
+00:02:06,931 --> 00:02:11,612
+Noor, la arquitecta de datos de la universidad, abre el modelo propio de la universidad.
+
+23
+00:02:12,312 --> 00:02:17,872
+Tiene un estudiante. Uno bueno, con claves de tres sistemas y una decisión para cada coincidencia.
+
+24
+00:02:19,172 --> 00:02:24,073
+Pero un estudiante no es alguien. Es cómo alguien se relaciona con la universidad, por un tiempo.
+
+25
+00:02:25,673 --> 00:02:29,280
+El modelo no tiene persona. Ella lo dice, y lo anota.
+
+26
+00:02:31,780 --> 00:02:33,610
+Así que separa cuatro cosas.
+
+27
+00:02:34,310 --> 00:02:36,013
+La persona: alguien, una sola vez.
+
+28
+00:02:37,213 --> 00:02:42,055
+Los roles: estudiante, tutora, investigadora, cada uno con un inicio, un fin y un responsable.
+
+29
+00:02:43,355 --> 00:02:49,183
+Los puntos de contacto: un correo o una dirección, cada uno con un propósito, y algunos compartidos por dos personas.
+
+30
+00:02:50,483 --> 00:02:56,393
+Y los identificadores: un número de estudiante pertenece al sistema de estudiantes; un número de personal, a RR. HH.
+
+31
+00:02:57,493 --> 00:02:59,048
+Ninguno de ellos es la persona.
+
+32
+00:03:00,548 --> 00:03:09,700
+Los arquitectos empresariales lo dibujan igual: una persona, un equipo o una organización es un actor, asignado a uno o más roles, por un tiempo.
+
+33
+00:03:14,600 --> 00:03:16,967
+Luego Noor y Mei anotan quién mantiene qué.
+
+34
+00:03:17,667 --> 00:03:20,748
+Para cada rol, qué sistema lo crea y quién es su responsable.
+
+35
+00:03:21,748 --> 00:03:24,762
+Para cada dato de la persona, en qué sistema se confía.
+
+36
+00:03:25,862 --> 00:03:28,402
+La oficina de registro mantiene el nombre legal.
+
+37
+00:03:29,102 --> 00:03:32,217
+Linh mantiene ella misma su nombre preferido y su dirección.
+
+38
+00:03:32,917 --> 00:03:34,712
+RR. HH. mantiene sus datos laborales.
+
+39
+00:03:35,412 --> 00:03:40,659
+Y la oficina de Mei cuida a la persona: quién es alguien, y si dos registros son uno.
+
+40
+00:03:43,759 --> 00:03:45,286
+Cada industria tiene una Linh.
+
+41
+00:03:45,986 --> 00:03:49,164
+Una enfermera ingresada como paciente, en el mismo hospital.
+
+42
+00:03:50,464 --> 00:03:53,237
+Una clienta del banco que avala el préstamo de un amigo.
+
+43
+00:03:54,537 --> 00:03:59,521
+Un hogar donde el titular de la cuenta se mudó, y la persona que se queda necesita seguir con luz.
+
+44
+00:04:00,921 --> 00:04:02,911
+Otras palabras, las mismas cuatro cosas.
+
+45
+00:04:05,411 --> 00:04:10,379
+El cuerpo de conocimiento de la gestión de datos, DAMA, llama a esto datos de referencia y maestros.
+
+46
+00:04:11,679 --> 00:04:21,709
+Nombra cuatro formas de mantenerlos: un registro que solo enlaza, una copia para análisis, un maestro que los sistemas vuelven a leer, o un único lugar donde se crean las personas.
+
+47
+00:04:23,209 --> 00:04:26,349
+La serie elige una más adelante, y muestra sus herramientas.
+
+48
+00:04:28,849 --> 00:04:30,817
+No solo las personas son datos maestros.
+
+49
+00:04:31,517 --> 00:04:38,030
+La universidad también tiene empleadores y universidades asociadas, títulos y materias, sedes y aulas.
+
+50
+00:04:38,730 --> 00:04:41,815
+Un hospital tiene pacientes, profesionales y salas.
+
+51
+00:04:42,315 --> 00:04:45,550
+Un banco, clientes, cuentas y las firmas con las que opera.
+
+52
+00:04:46,050 --> 00:04:49,059
+Una eléctrica, medidores, puntos de conexión y postes.
+
+53
+00:04:49,559 --> 00:04:52,048
+Una tienda, productos, proveedores y locales.
+
+54
+00:04:53,248 --> 00:04:56,132
+¿Cuáles son datos maestros? Haz cuatro preguntas.
+
+55
+00:04:57,232 --> 00:05:00,535
+¿Es algo de lo que trata el negocio, y no algo que pasa?
+
+56
+00:05:01,635 --> 00:05:03,761
+¿Lo usa más de un proceso?
+
+57
+00:05:04,861 --> 00:05:09,446
+¿Se crea o se cambia en más de un lugar, de modo que las copias pueden no coincidir?
+
+58
+00:05:10,546 --> 00:05:14,921
+¿Y importa cuando no coinciden: dinero, seguridad, la ley o la confianza de alguien?
+
+59
+00:05:16,221 --> 00:05:17,837
+Cuatro síes: dato maestro.
+
+60
+00:05:20,337 --> 00:05:22,628
+Siguen ocho películas más, en cuatro partes.
+
+61
+00:05:23,728 --> 00:05:28,250
+Quién es alguien. Roles y listas. Compartirlo con seguridad. Y mantenerlo bien.
+
+62
+00:05:32,750 --> 00:05:36,451
+Esta vez, cuando Linh postula, la universidad la encuentra primero.
+
+63
+00:05:37,951 --> 00:05:39,692
+Agrega un rol, no una persona.
+
+64
+00:05:41,292 --> 00:05:44,932
+Su título ya está ahí, y la oficina de egresados ve que volvió.
+
+65
+00:05:46,532 --> 00:05:48,504
+Conoce a la persona, no solo el rol.

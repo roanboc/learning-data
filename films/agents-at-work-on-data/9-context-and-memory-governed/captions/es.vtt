@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:06.684
+Hoy, en la universidad. El lunes, Lucía Ortega entró al equipo de Planificación.
+
+00:00:07.784 --> 00:00:14.351
+Su agente empieza cada día con la memoria del equipo: lo que sus agentes aprendieron en sus sesiones, guardado por la plataforma.
+
+00:00:15.651 --> 00:00:20.894
+Su primer trabajo, para la biblioteca: ¿qué unidades se dictan el próximo semestre, para comprar sus libros electrónicos?
+
+00:00:21.994 --> 00:00:25.973
+El borrador de su agente listaba 1,142.
+
+00:00:26.873 --> 00:00:32.248
+Una verificación sencilla lo detuvo: el sistema de estudiantes registra 1,236.
+
+00:00:33.748 --> 00:00:36.903
+Las 94 que dejó fuera se dictan todas solo en línea.
+
+00:00:38.003 --> 00:00:44.044
+La biblioteca no habría comprado libros electrónicos para ellas: sus estudiantes son justo los que no pueden venir por un libro.
+
+00:00:45.944 --> 00:00:52.119
+La evidencia del agente mostró por qué: una línea en la memoria del equipo. Cuenta solo las unidades que se dictan en el campus.
+
+00:00:53.419 --> 00:00:59.651
+En julio, se guardó así: Para reservar salas, cuenta solo las unidades que se dictan en el campus. Correcto, para las salas.
+
+00:01:00.751 --> 00:01:06.116
+Desde la semana pasada, había perdido las tres palabras que la hacían correcta, y nadie la había visto cambiar.
+
+00:01:07.816 --> 00:01:15.004
+Pero el glosario ya decía qué es una oferta de unidad: una unidad que se dicta en un semestre, en el campus, en línea o ambos.
+
+00:01:16.504 --> 00:01:20.342
+Nada le decía al agente qué va primero. Algo tenía que cambiar.
+
+00:01:22.242 --> 00:01:23.607
+Así que el equipo fijó un orden.
+
+00:01:24.507 --> 00:01:32.056
+Primero, lo gobernado: las definiciones del glosario, que deciden sus dueños, y las reglas de datos, que revisa el equipo de datos.
+
+00:01:33.156 --> 00:01:37.378
+Segundo, la memoria: la plataforma la guarda, y nadie aprueba cada línea.
+
+00:01:38.478 --> 00:01:42.804
+Cuando los dos no coinciden, gana la definición, y el agente marca la línea.
+
+00:01:44.304 --> 00:01:51.394
+Ahora el agente de Lucía lista las 1,236 unidades, y dice qué definición siguió.
+
+00:01:52.494 --> 00:01:56.632
+La biblioteca compra libros electrónicos para todas, en línea o en el campus.
+
+00:01:58.132 --> 00:02:04.008
+Y para los datos: la memoria ayuda, pero lo gobernado decide, así que una línea errónea no puede cambiar una respuesta.
+
+00:02:11.308 --> 00:02:18.152
+Esta serie empezó con lo que lee un agente: cuatro tipos de contexto, código, metadatos, habilidades y herramientas.
+
+00:02:20.452 --> 00:02:25.483
+A esos se suma la memoria: la sesión en la que está, y lo que el equipo guarda de las sesiones.
+
+00:02:27.383 --> 00:02:32.740
+Todo eso da forma a lo que hace el agente, así que todo es dato, y recibe lo que recibe cualquier dato.
+
+00:02:34.640 --> 00:02:35.535
+¿De quién es?
+
+00:02:36.435 --> 00:02:38.421
+¿Quién puede leerlo, y quién puede cambiarlo?
+
+00:02:39.321 --> 00:02:41.688
+¿Quién revisa un cambio antes de que los agentes lo usen?
+
+00:02:42.588 --> 00:02:43.892
+¿Cuánto tiempo se guarda?
+
+00:02:44.792 --> 00:02:47.923
+Y cuando se borra, ¿desaparece de todos los lugares donde se guarda?
+
+00:02:50.023 --> 00:02:53.182
+Una nota en el chat de una persona no responde bien ninguna.
+
+00:02:54.682 --> 00:02:57.033
+El contexto del equipo responde las cinco.
+
+00:02:58.533 --> 00:03:04.249
+La memoria responde cuatro: nadie revisa cada línea antes de que los agentes la usen. Por eso va después.
+
+00:03:08.549 --> 00:03:17.563
+El contexto del equipo vive en su repositorio, en GitHub: la página para agentes, las habilidades, las descripciones de dbt y los contratos.
+
+00:03:19.063 --> 00:03:24.093
+Cada archivo tiene sus revisores, en una lista que el proyecto escribe a partir de sus propios metadatos.
+
+00:03:25.593 --> 00:03:32.794
+Un cambio es un pull request: el equipo de datos lo revisa, y un cambio a producción necesita la aprobación de una segunda persona.
+
+00:03:34.294 --> 00:03:37.371
+Los agentes pueden proponer un cambio. Nunca aprueban uno.
+
+00:03:38.671 --> 00:03:41.466
+Y el historial guarda quién cambió qué, cuándo y por qué.
+
+00:03:42.766 --> 00:03:47.733
+Sus definiciones vienen del glosario de negocio, que sus dueños mantienen en Databricks.
+
+00:03:49.033 --> 00:03:52.813
+Una habilidad copia cada una al proyecto, indicando de dónde viene.
+
+00:03:54.313 --> 00:03:57.960
+Desde ahí, va en un solo sentido a donde los agentes lo leen, en Databricks.
+
+00:03:59.460 --> 00:04:05.646
+dbt escribe las descripciones en Unity Catalog, como comentarios en cada tabla y columna.
+
+00:04:06.946 --> 00:04:08.711
+Las habilidades van a Unity Gateway.
+
+00:04:10.211 --> 00:04:16.765
+Cada una es un objeto de Unity Catalog, con un dueño, permisos y un registro de quién la leyó o la cambió.
+
+00:04:17.465 --> 00:04:22.447
+Nadie edita el contexto en la plataforma. Un cambio empieza en el repositorio.
+
+00:04:25.747 --> 00:04:28.624
+La memoria es distinta: la escriben los propios agentes.
+
+00:04:30.124 --> 00:04:36.377
+En Databricks, las sesiones y la memoria duradera se guardan en almacenes en Lakebase, la base de datos de la plataforma.
+
+00:04:38.277 --> 00:04:44.694
+Un paso que corre una vez al día lee las sesiones, y guarda lo que parece valer la pena, sin preguntarle a nadie.
+
+00:04:46.594 --> 00:04:53.445
+Así perdió sus palabras la línea del campus: el paso la fusionó con otras líneas sobre contar unidades; para eso está hecho.
+
+00:04:55.745 --> 00:05:02.603
+Y un almacén es un solo cuarto: quien puede escribir en él puede cambiar cualquier entrada, y nada registra lo que decía antes.
+
+00:05:04.903 --> 00:05:08.063
+Aprobar cada línea a mano funciona para unas pocas lecciones.
+
+00:05:09.363 --> 00:05:14.061
+Pero el paso guarda cientos por semana: más de lo que nadie puede leer, o mantener al día.
+
+00:05:15.961 --> 00:05:20.801
+Así que la plataforma guarda la memoria, y el equipo gobierna en qué deben basarse las respuestas.
+
+00:05:22.301 --> 00:05:26.920
+Los agentes leen primero las definiciones y las reglas de datos, y después la memoria.
+
+00:05:28.420 --> 00:05:34.200
+Cuando una línea no coincide con una definición, el agente sigue la definición, y marca la línea.
+
+00:05:36.100 --> 00:05:43.064
+Yusuf, de gobernanza de datos, es el dueño de la memoria en su conjunto: quién puede leer y escribir cada almacén, y cuánto se guarda.
+
+00:05:44.764 --> 00:05:48.312
+Cada línea marcada le llega a él, y la borra si está mal.
+
+00:05:49.812 --> 00:05:54.896
+Todo agente puede leer el almacén del equipo, y ninguno puede cambiarlo: solo el paso escribe ahí.
+
+00:05:58.996 --> 00:06:01.320
+Guardar y borrar también son decisiones.
+
+00:06:03.220 --> 00:06:07.498
+El equipo guarda las sesiones treinta días; luego un trabajo programado las borra.
+
+00:06:09.598 --> 00:06:15.616
+Borrar tiene trampas. Cuando se encontró la línea del campus, lo primero que se pensó fue borrar el chat del que salió.
+
+00:06:17.716 --> 00:06:23.535
+Eso no borra nada de ella: borrar una sesión, dice la documentación, no borra la memoria que se guardó de ella.
+
+00:06:25.835 --> 00:06:29.547
+Y la sincronización que copia las habilidades a la plataforma nunca borra ninguna.
+
+00:06:31.847 --> 00:06:39.603
+Así, el equipo borra donde algo se guarda: la línea, en el almacén del equipo, y una habilidad en la plataforma y también en el repositorio.
+
+00:06:41.903 --> 00:06:48.402
+Yusuf registra qué borró, y por qué, en el repositorio. Ningún agente volverá a leer esa línea.
+
+00:06:52.702 --> 00:06:54.913
+En Planificación, Lucía vuelve a preguntar.
+
+00:06:56.213 --> 00:07:05.132
+Su agente lista las 1,236 unidades, con su evidencia: las ofertas de unidad que leyó, y la definición que siguió.
+
+00:07:06.632 --> 00:07:10.820
+La biblioteca compra libros electrónicos para cada unidad, en línea o en el campus.
+
+00:07:12.120 --> 00:07:17.900
+Cada agente, y cada persona que llega, ahora parte de las mismas definiciones, con la memoria como ayuda.
+
+00:07:19.200 --> 00:07:24.080
+Ahí empezó esta serie: con lo que lee un agente. Nueve películas, nueve lecciones.
+
+00:07:25.780 --> 00:07:28.965
+Escríbelo una vez, y lo usan tanto las personas como los agentes.
+
+00:07:29.665 --> 00:07:31.958
+Resuélvelo una vez, escríbelo, reutilízalo.
+
+00:07:32.658 --> 00:07:36.116
+Solo lectura por defecto. Escribe solo borradores, en lugar seguro.
+
+00:07:36.816 --> 00:07:39.971
+Deja que el agente aprenda del equipo, no de una sola persona.
+
+00:07:40.671 --> 00:07:43.232
+Decide cómo vas a verificar antes de que el agente empiece.
+
+00:07:43.932 --> 00:07:47.095
+Cómo sale mal: prevé estas fallas, y diseña para ellas.
+
+00:07:47.795 --> 00:07:52.638
+La plataforma da a los agentes los mismos datos y herramientas que usan las personas, en un solo lugar.
+
+00:07:53.338 --> 00:07:58.482
+Unas mismas reglas para personas y agentes, aplicadas donde viven los datos y los modelos.
+
+00:07:59.182 --> 00:08:02.559
+Gobierna lo que los agentes deben acertar. La memoria va después.
+
+00:08:04.059 --> 00:08:11.108
+Esta serie es una parte de un camino más largo: de un agente que ayuda a una persona, a uno que trabaja junto al equipo.
+
+00:08:12.608 --> 00:08:14.547
+Después: de ayudante a colega.

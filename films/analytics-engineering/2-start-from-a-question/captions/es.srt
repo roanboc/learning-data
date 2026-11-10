@@ -1,0 +1,159 @@
+1
+00:00:01,400 --> 00:00:06,186
+En 1854, el cólera mató a cientos de personas en unas pocas calles del Soho.
+
+2
+00:00:06,886 --> 00:00:10,705
+John Snow se hizo una pregunta: ¿de dónde sacaban el agua los muertos?
+
+3
+00:00:11,405 --> 00:00:16,652
+Marcó cada muerte en su dirección, y las muertes se agruparon alrededor de una bomba, en Broad Street.
+
+4
+00:00:17,952 --> 00:00:20,339
+Su mapa mostraba solo lo que la pregunta necesitaba.
+
+5
+00:00:21,839 --> 00:00:25,743
+El modelo de Jun empieza igual: con una pregunta, de Planificación.
+
+6
+00:00:32,043 --> 00:00:33,975
+Paso uno: empieza por una pregunta.
+
+7
+00:00:35,075 --> 00:00:41,859
+¿Cuántos estudiantes están a 15 créditos o menos de un certificado de posgrado, por facultad, a la fecha del censo?
+
+8
+00:00:43,559 --> 00:00:51,331
+Detrás hay una decisión: cuántos cupos ofrecer en las últimas unidades del certificado de posgrado de cada facultad el próximo semestre.
+
+9
+00:00:52,831 --> 00:00:57,889
+Un segundo consumidor, la app de billetera del estudiante, leerá los mismos hechos, tal como son hoy.
+
+10
+00:00:59,089 --> 00:01:05,993
+La decisión dice cómo se ve el trabajo terminado. El informe del censo contó doce. El modelo tiene que llegar al mismo número.
+
+11
+00:01:07,293 --> 00:01:16,713
+El código y los datos en pantalla son reales. Corren en dbt Core, con DuckDB, en el repositorio de la serie, así que cualquiera puede correrlos.
+
+12
+00:01:18,013 --> 00:01:24,774
+La plataforma de la universidad es Databricks, con dbt Cloud, y el mismo proyecto también corre allí.
+
+13
+00:01:25,974 --> 00:01:30,996
+Solo cambian la conexión y una función: la que convierte una clave en un hash.
+
+14
+00:01:34,496 --> 00:01:40,436
+El glosario de la universidad tiene un término para todo lo que hace: aranceles, horarios, salas, personal.
+
+15
+00:01:41,136 --> 00:01:48,120
+La pregunta toca cuatro: un estudiante, una credencial, un título, y los créditos que un estudiante tiene hacia un título.
+
+16
+00:01:49,620 --> 00:01:52,394
+Todo lo demás queda fuera, por central que parezca.
+
+17
+00:01:53,694 --> 00:02:01,717
+Noor acordó ese alcance con Planificación y dejó escrito por qué. Si modelas la universidad, nunca terminas. Una pregunta, sí la terminas.
+
+18
+00:02:05,817 --> 00:02:08,425
+Cada una de las cuatro se escribe una sola vez, en YAML.
+
+19
+00:02:09,625 --> 00:02:13,186
+El estudiante: una definición, un responsable y la regla de su clave.
+
+20
+00:02:14,486 --> 00:02:22,901
+La definición está en palabras del negocio, no de un sistema: una persona que la universidad registró aprendiendo con ella, en cualquiera de sus sistemas.
+
+21
+00:02:24,401 --> 00:02:31,020
+Al lado, un diagrama hecho a mano: un estudiante tiene credenciales, y tiene créditos hacia un título.
+
+22
+00:02:32,320 --> 00:02:35,912
+El YAML guarda el significado. El diagrama deja que cualquiera lo lea.
+
+23
+00:02:39,212 --> 00:02:44,135
+Luego, qué identifica a cada una en términos del negocio, antes de que nadie abra una fuente.
+
+24
+00:02:45,335 --> 00:02:54,538
+Un estudiante es su ID de estudiante, que emite la oficina de registro. Un título es su código. Una credencial es el ID que le dio su emisor.
+
+25
+00:02:56,038 --> 00:03:03,217
+Cada clave lleva la marca del sistema de donde viene: el sistema de estudiantes, la plataforma de aprendizaje o la de cursos cortos.
+
+26
+00:03:04,517 --> 00:03:14,520
+Y cada significado tiene un responsable. Mei, en la oficina de registro, es dueña de estudiante, credencial y título. El equipo de aprendizaje, de microcredenciales e insignias.
+
+27
+00:03:16,020 --> 00:03:20,950
+Las fuentes no van a coincidir. El responsable es la persona que decide qué significado gana.
+
+28
+00:03:24,450 --> 00:03:29,561
+Luego, una decisión más difícil. ¿Una microcredencial es un tipo de credencial, o algo aparte?
+
+29
+00:03:30,261 --> 00:03:37,968
+Compara qué la identifica: el identificador propio del emisor. Compara su vida: emitida en una fecha, y quizá revocada.
+
+30
+00:03:39,268 --> 00:03:42,724
+Ambas coinciden con cualquier credencial. Solo difieren los créditos.
+
+31
+00:03:44,024 --> 00:03:51,495
+Misma identidad, mismo ciclo de vida: una entidad, con tipos. Otra identidad, granularidad o ciclo de vida, y separas.
+
+32
+00:03:53,195 --> 00:03:59,448
+Un certificado de asistencia pide entrar. Dice que alguien estuvo ahí, no lo que sabe hacer. Queda fuera.
+
+33
+00:04:02,748 --> 00:04:08,905
+Jun no escribe todo esto solo. Un agente de IA hace el borrador, siguiendo una skill guardada en el proyecto.
+
+34
+00:04:10,105 --> 00:04:16,224
+Escribe primero la pregunta. Enumera solo lo que toca. Propón unir o separar, con las razones.
+
+35
+00:04:17,524 --> 00:04:21,670
+El borrador definió la credencial, pero dejó entrar los certificados de asistencia.
+
+36
+00:04:22,770 --> 00:04:26,355
+Mei agrega una cláusula: un certificado de asistencia no es una.
+
+37
+00:04:27,655 --> 00:04:34,057
+El agente redacta. La responsable aprueba el significado, y la decisión va al registro, con su nombre y la fecha.
+
+38
+00:04:37,757 --> 00:04:42,300
+Una pregunta. Cuatro cosas que modelar. Dos responsables del significado. Nada más.
+
+39
+00:04:43,600 --> 00:04:44,719
+Ahora, las fuentes.
+
+40
+00:04:45,919 --> 00:04:51,255
+El modelo dice que un estudiante es una persona. Las fuentes dicen que una estudiante, Aisha, es tres.

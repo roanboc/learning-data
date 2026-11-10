@@ -1,0 +1,41 @@
+{
+  "key": "who-decides",
+  "title": "Who decides",
+  "sub": "The second film of a series on data governance: owners are named where the work is, every change asks them by name, and a right to decide becomes real.",
+  "howto": "The film is painted in watercolour, in the university's own rooms. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is a name confirmed or a decision someone owns; red is a gap still to fill; green is signed.",
+  "src": [
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "cord",
+    "lamp",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bYusuf Demir\\b",
+      "Yoosoof Demeer"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bandon\\b",
+      "ahndohn"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

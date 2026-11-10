@@ -1,0 +1,34 @@
+# The wallet's conceptual model: the question the learner's wallet app answers, and the one concept
+# it adds to the core.
+#
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a doc
+# block in _wallet__definitions.md, next to this file, and checks that every entity it uses is defined
+# in a core domain. The diagram is drawn by hand in _wallet__conceptual.md.
+
+domain: wallet
+kind: mart
+
+question:
+  asked_by: The learner's wallet app
+  text: >
+    What does this learner hold now, and how far are they from the award they're enrolled in?
+  decision: >
+    What the app shows a learner, and what they can share with an employer.
+
+# The core's entities this mart reads, at their version valid today.
+uses: [learner, credential, award, credit_towards_award]
+
+entities:
+
+  - name: learner_wallet
+    label: learner's wallet
+    definition: >
+      What a learner holds now: their credentials, valid, expired or revoked, and their progress
+      towards the award they're enrolled in.
+    owner: Wallet app team
+    business_key:
+      rule: The learner's business key.
+    rules:
+      - As it is now (var as_is_date, or the day of the build) - every entity is read at its version valid that day.
+      - A revoked credential stays, marked revoked.
+    history: None kept. The wallet shows today; the core keeps the history.

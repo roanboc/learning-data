@@ -1,0 +1,208 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.571
+Oxford, in the 1400s.
+
+00:00:05.271 --> 00:00:10.988
+A duke gives the university his books, and scholars read them in a long room built to hold them.
+
+00:00:12.888 --> 00:00:18.985
+Then, in 1550, in years of religious upheaval, the books are taken away, sold or lost.
+
+00:00:21.085 --> 00:00:23.933
+By 1556, even the desks are sold.
+
+00:00:25.833 --> 00:00:30.984
+Each had been copied by hand, and some had no other copy: once gone, gone for good.
+
+00:00:32.684 --> 00:00:35.970
+For half a century, the university has no library.
+
+00:00:37.870 --> 00:00:42.854
+A library is only as safe as the hands that can reach it. Something has to change.
+
+00:00:44.754 --> 00:00:53.342
+In 1598, Thomas Bodley, a retired diplomat, offers to restore it at his own cost, with seats, and shelves, and desks.
+
+00:00:55.042 --> 00:00:59.070
+It opens on the 8th of November, 1602, on one rule.
+
+00:01:00.570 --> 00:01:02.381
+Read here. Take no book away.
+
+00:01:03.881 --> 00:01:07.287
+Mark none: your notes go in your own book. And bring no flame.
+
+00:01:08.987 --> 00:01:15.183
+Every reader promises to keep it, and the books are chained to their shelves: read at the desk, and nowhere else.
+
+00:01:17.283 --> 00:01:19.048
+The rule holds, whoever asks.
+
+00:01:19.748 --> 00:01:26.079
+In 1645, King Charles the First, at war and living in Oxford, asks to borrow a book.
+
+00:01:27.579 --> 00:01:31.613
+The librarian shows him the rule. The king agrees, and the book stays.
+
+00:01:33.513 --> 00:01:40.143
+Four hundred years on, the books are still there for every reader, with more than 13 million printed items today.
+
+00:01:41.843 --> 00:01:44.128
+And every new reader still makes the promise.
+
+00:01:45.828 --> 00:01:51.994
+Jun's agent reads in a library too: the university's data. Every tool it's given is a hand.
+
+00:01:53.494 --> 00:01:58.185
+Give each hand only what its work needs, and the data stays safe, whoever asks.
+
+00:02:05.485 --> 00:02:14.599
+Jun's agent works on the census-day count, the number the university reports to the government: 18,412 students.
+
+00:02:16.099 --> 00:02:21.817
+It reads tickets, the catalog and the team's docs, queries the data, and writes and builds code.
+
+00:02:23.717 --> 00:02:31.880
+Each hand is a tool server: a small program that gives an agent its tools through an open standard, the Model Context Protocol.
+
+00:02:33.580 --> 00:02:36.071
+Whatever a tool can do, the agent can do.
+
+00:02:37.571 --> 00:02:43.670
+And an agent works for whoever gives it words: a line hidden in what it reads, or a thief with its key.
+
+00:02:45.570 --> 00:02:48.807
+So for each hand, ask for the least this job needs.
+
+00:02:50.307 --> 00:02:55.939
+Security engineers have said it since 1975: the fewest rights the work needs.
+
+00:02:58.839 --> 00:03:01.345
+Bodley's library kept its books two ways.
+
+00:03:02.045 --> 00:03:06.524
+The promise asked each reader. The chain held the book, whatever the reader meant.
+
+00:03:08.424 --> 00:03:09.741
+An agent has both.
+
+00:03:11.041 --> 00:03:15.976
+Its rules, in a file for agents, say: read, draft, never write to production.
+
+00:03:17.476 --> 00:03:21.742
+But rules are words, and words can be argued with, or hidden in a ticket.
+
+00:03:23.242 --> 00:03:30.065
+So its rights are set where the data lives, on its own account: what a tool can't do, no instruction can make it.
+
+00:03:32.165 --> 00:03:37.691
+Sam, who runs the platform, sets up each hand with the team's rules for AI helpers.
+
+00:03:39.191 --> 00:03:41.455
+Its own identity, never a person's.
+
+00:03:42.155 --> 00:03:44.809
+Read only, unless the job needs to write.
+
+00:03:45.509 --> 00:03:48.209
+Writes only drafts, in a sandbox of its own.
+
+00:03:48.909 --> 00:03:51.552
+Counts and small samples, with names masked.
+
+00:03:52.252 --> 00:03:56.815
+And no way out: nothing it can send outside, and no way into production.
+
+00:04:00.915 --> 00:04:03.060
+So the census agent gets six hands.
+
+00:04:03.760 --> 00:04:08.140
+Tickets: it reads the ticket it's given, and can't close or pass one on.
+
+00:04:09.440 --> 00:04:16.213
+Catalog and Docs: it reads tables, owners, lineage, the glossary and the skills, and changes none of them.
+
+00:04:17.513 --> 00:04:23.727
+Query: counts, and samples of at most 20 rows, with names masked. It reads the data where it lives.
+
+00:04:25.227 --> 00:04:31.501
+Repository: it writes only to branches of its own, so every change arrives as a pull request.
+
+00:04:33.001 --> 00:04:37.723
+And Build: it runs its drafts in its own sandbox, where nobody else reads.
+
+00:04:39.423 --> 00:04:43.410
+Read here. Take nothing away. Mark nothing: write in your own book.
+
+00:04:44.910 --> 00:04:50.166
+And bring no flame: no hand can delete a table, send anything out, or touch production.
+
+00:04:54.266 --> 00:04:57.215
+So how does the agent's work ever reach the real count?
+
+00:04:57.915 --> 00:04:59.480
+Through people, always two.
+
+00:05:00.780 --> 00:05:06.494
+The agent opens a pull request, with the query behind every claim and the result it gave.
+
+00:05:07.994 --> 00:05:10.974
+Jun reviews it. Noor approves it for production.
+
+00:05:12.674 --> 00:05:16.641
+Then the team's release puts it live. The agent's hands never touch it.
+
+00:05:18.341 --> 00:05:21.230
+Two people, for an agent's change as for anyone's.
+
+00:05:24.930 --> 00:05:30.334
+One Monday, Clara, in Planning, asks for the census-day count by faculty, for the board.
+
+00:05:31.834 --> 00:05:36.024
+She pastes in the email from outside the university that asked her for it.
+
+00:05:37.524 --> 00:05:41.736
+At its foot, in white letters on white, is a line no person would see.
+
+00:05:43.636 --> 00:05:50.767
+It tells any AI assistant to send the full student list, with names, to an outside address, and not to mention it.
+
+00:05:52.867 --> 00:05:55.650
+The agent reads every word, the white ones too.
+
+00:05:57.350 --> 00:06:00.842
+But its rules say that what it reads is data, never orders.
+
+00:06:02.342 --> 00:06:05.683
+So it does the count, and tells Jun about the line, quoting it.
+
+00:06:07.583 --> 00:06:13.009
+And had it obeyed, its hands couldn't: names come masked, and no hand sends anything out.
+
+00:06:14.709 --> 00:06:21.370
+Three things together make a leak, a security writer says: private data, words from strangers, and a way out.
+
+00:06:23.070 --> 00:06:27.366
+Tickets always bring strangers' words, so the team took away the other two.
+
+00:06:29.066 --> 00:06:33.336
+Jun passes it to Sam, who checks: nothing left the university.
+
+00:06:37.236 --> 00:06:45.099
+Clara's count goes to the board: 18,412 students, by faculty, each number with its evidence.
+
+00:06:46.999 --> 00:06:50.865
+Nothing left the university, and nothing changed without two people.
+
+00:06:52.565 --> 00:07:00.010
+In 1645, the rule held, even for a king. The agent's rights hold the same way, whoever writes the words.
+
+00:07:01.710 --> 00:07:03.619
+Bodley's books are still on their shelves.
+
+00:07:05.719 --> 00:07:09.297
+Read-only by default. Write only drafts, somewhere safe.
+
+00:07:11.397 --> 00:07:16.800
+Then a team can give its agent the whole library to read, and the data stays where it belongs.

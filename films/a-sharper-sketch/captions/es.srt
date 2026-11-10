@@ -1,0 +1,223 @@
+1
+00:00:03,800 --> 00:00:11,133
+En La vida interior de los datos, dibujamos un boceto de la universidad: un estudiante, una clase, una inscripción, un periodo y una carrera.
+
+2
+00:00:11,833 --> 00:00:16,410
+Era una simplificación excesiva. Bastaba para empezar, no para contar.
+
+3
+00:00:18,110 --> 00:00:23,354
+Es normal. Todo modelo empieza sencillo, y gana precisión cuando una pregunta real lo necesita.
+
+4
+00:00:26,054 --> 00:00:30,368
+Tras la fecha de corte, la dirección de la Escuela le hace a Genie una pregunta simple.
+
+5
+00:00:31,068 --> 00:00:35,578
+¿Cuántos estudiantes estaban inscritos en Data Science 101 a la fecha de corte?
+
+6
+00:00:36,278 --> 00:00:41,851
+Genie dice 131. El reporte certificado de la fecha de corte dice 118.
+
+7
+00:00:44,051 --> 00:00:47,007
+Ambas cifras vienen de datos limpios. Todas las pruebas pasaron.
+
+8
+00:00:47,707 --> 00:00:50,504
+La diferencia no está en los datos. Está en el significado.
+
+9
+00:00:51,204 --> 00:00:57,097
+Así que, antes de cambiar nada, hacemos una pregunta más amplia: ¿cómo funciona, en general, este tipo de negocio?
+
+10
+00:00:57,797 --> 00:01:03,236
+En muchas industrias, alguien ya lo modeló, y su modelo es una buena primera plantilla.
+
+11
+00:01:03,936 --> 00:01:08,792
+A menudo hay más de uno para elegir, así que también importa cuál eliges, y por qué.
+
+12
+00:01:09,492 --> 00:01:17,577
+TCSI podría ser una opción: es público, y describe los datos que las universidades australianas reportan al gobierno.
+
+13
+00:01:18,277 --> 00:01:26,516
+En la práctica, muchas universidades usan MortarCAPS, el estándar de datos del propio sector. Aquí, compararemos nuestro boceto con TCSI.
+
+14
+00:01:27,216 --> 00:01:33,532
+Es una referencia para comparar, no un modelo para copiar. Veremos dónde encaja con nuestro negocio, y dónde no.
+
+15
+00:01:39,832 --> 00:01:41,828
+Primera pregunta: ¿qué es una clase?
+
+16
+00:01:42,528 --> 00:01:48,670
+Pon la referencia sobre nuestro boceto: no tiene ninguna clase. Tiene unidades de estudio, e inscripciones en ellas.
+
+17
+00:01:49,370 --> 00:01:51,488
+Nuestra única caja escondía tres cosas.
+
+18
+00:01:52,988 --> 00:01:56,599
+La unidad: Data Science 101, la materia en sí.
+
+19
+00:01:57,299 --> 00:02:03,573
+La oferta: esa unidad, en un periodo lectivo, en un campus. En esto se inscriben los estudiantes.
+
+20
+00:02:04,273 --> 00:02:08,907
+Y la clase: la tutoría del martes a las 9, un lugar en el horario.
+
+21
+00:02:09,607 --> 00:02:13,569
+Genie contó lugares en tutorías, y algunos estudiantes asisten a dos.
+
+22
+00:02:14,269 --> 00:02:18,207
+Así que di exactamente qué representa una fila. Eso se llama granularidad.
+
+23
+00:02:23,707 --> 00:02:25,972
+Siguiente: ¿dónde vive la fecha de corte?
+
+24
+00:02:26,672 --> 00:02:29,636
+Nuestro boceto la puso en el periodo: una fecha para todos.
+
+25
+00:02:30,336 --> 00:02:36,331
+La referencia la registra en cada inscripción a una unidad, porque cada unidad de estudio tiene su propia fecha de corte.
+
+26
+00:02:37,031 --> 00:02:43,389
+Un intensivo de verano de Data Science 101 tiene una fecha de corte a semanas de la del semestre.
+
+27
+00:02:45,089 --> 00:02:49,998
+Pon cada dato en la cosa que realmente describe. Aquí, adoptamos la referencia.
+
+28
+00:02:52,498 --> 00:02:54,967
+Ahora, dos estudiantes se cuentan dos veces.
+
+29
+00:02:55,667 --> 00:02:59,289
+Cada uno estudia una doble titulación: ciencia de datos, y negocios.
+
+30
+00:02:59,989 --> 00:03:04,799
+Nuestro boceto decía que un estudiante pertenece a una carrera. Así no funciona la universidad.
+
+31
+00:03:05,499 --> 00:03:11,809
+La referencia ya tiene la respuesta: una admisión a una carrera. Un estudiante, en una carrera, desde una fecha de inicio.
+
+32
+00:03:13,709 --> 00:03:19,178
+Cada inscripción a una unidad cuenta para una admisión a una carrera, así que cada estudiante se cuenta una vez.
+
+33
+00:03:19,878 --> 00:03:24,274
+Cuando dos cosas se conectan de muchos a muchos, el vínculo suele merecer su propia caja.
+
+34
+00:03:26,774 --> 00:03:28,777
+Última pregunta: ¿inscrito cuándo?
+
+35
+00:03:29,477 --> 00:03:33,725
+Genie contó hoy. El reporte de corte contó en la fecha de corte.
+
+36
+00:03:34,425 --> 00:03:39,640
+Las inscripciones cambian. Un estudiante queda en lista de espera, luego se inscribe, y después se retira.
+
+37
+00:03:40,340 --> 00:03:46,016
+La referencia guarda el estado actual de cada inscripción. Necesitamos su historial, así que extendemos el modelo.
+
+38
+00:03:46,716 --> 00:03:51,965
+Cada cambio se guarda con su fecha, y el conteo de corte se vuelve una foto de un día.
+
+39
+00:03:55,465 --> 00:03:58,152
+El boceto es más preciso. Pero sigue siendo un boceto.
+
+40
+00:03:58,852 --> 00:04:04,495
+Este es el modelo conceptual: las cosas que importan, y cómo se conectan, acordado con el negocio.
+
+41
+00:04:05,195 --> 00:04:12,262
+Acércate, y se vuelve el modelo lógico: qué identifica a cada cosa, sus datos, y cuántas hay de cada una.
+
+42
+00:04:13,962 --> 00:04:19,139
+Acércate otra vez, y se vuelve el modelo físico: las tablas reales en la plataforma.
+
+43
+00:04:20,839 --> 00:04:28,299
+El mismo significado, tres niveles de detalle. El negocio es dueño del primero, los ingenieros del último, y los tres deben coincidir.
+
+44
+00:04:29,799 --> 00:04:32,943
+Cómo construir esas tablas es tema de otra película.
+
+45
+00:04:35,443 --> 00:04:38,478
+Retira la referencia, y verás cómo encaja todo.
+
+46
+00:04:39,178 --> 00:04:42,756
+Revisar: antes de inventar algo, búscalo en un modelo de referencia.
+
+47
+00:04:43,456 --> 00:04:47,246
+Adoptar: donde encaja con el negocio, usa sus ideas y sus palabras.
+
+48
+00:04:48,546 --> 00:04:52,245
+Extender: donde el negocio necesita más, agrégalo, con el mismo estilo.
+
+49
+00:04:53,545 --> 00:04:59,747
+Registrar: anota cada diferencia y su motivo, para que la próxima persona sepa qué es estándar y qué es nuestro.
+
+50
+00:05:01,447 --> 00:05:07,353
+Una referencia es un punto de partida, no una jaula. Donde el negocio es realmente distinto, gana el negocio.
+
+51
+00:05:09,853 --> 00:05:11,343
+La dirección vuelve a preguntar.
+
+52
+00:05:12,043 --> 00:05:17,303
+Esta vez, Genie repregunta: ¿inscritos a la fecha de corte, en la oferta del Semestre 1?
+
+53
+00:05:18,003 --> 00:05:21,536
+Luego responde: 118, y muestra cómo contó.
+
+54
+00:05:23,436 --> 00:05:27,057
+El boceto tiene una nueva versión, y una nota que dice por qué cambió.
+
+55
+00:05:27,757 --> 00:05:31,463
+No será la última. Los modelos evolucionan: no a menudo, pero siempre.
+
+56
+00:05:32,163 --> 00:05:34,374
+Revisa la referencia. Ajústala al negocio.

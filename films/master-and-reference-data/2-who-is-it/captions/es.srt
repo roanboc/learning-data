@@ -1,0 +1,207 @@
+1
+00:00:01,600 --> 00:00:07,778
+En 1548, Martin Guerre dejó su aldea en el sur de Francia, y a su esposa, Bertrande.
+
+2
+00:00:09,178 --> 00:00:15,485
+Ocho años después, un hombre volvió como Martin. Conocía la casa, la familia, sus historias, y lo acogieron.
+
+3
+00:00:16,985 --> 00:00:21,983
+Su tío empezó a dudar de él. En el juicio, ciento cincuenta testigos no se pusieron de acuerdo.
+
+4
+00:00:23,383 --> 00:00:29,386
+En la apelación, mientras los jueces se inclinaban por él, entró un hombre con pata de palo: el verdadero Martin Guerre.
+
+5
+00:00:30,986 --> 00:00:33,885
+Dos personas, tomadas por una, porque coincidía tanto.
+
+6
+00:00:40,985 --> 00:00:42,240
+Primero, dos palabras.
+
+7
+00:00:43,240 --> 00:00:48,680
+Los datos maestros son las cosas de las que trata el negocio: Linh, un título, un proveedor, un medidor.
+
+8
+00:00:49,980 --> 00:00:53,237
+Muchas filas, siempre en aumento, y cotejadas entre sistemas.
+
+9
+00:00:54,437 --> 00:01:02,989
+Los datos de referencia son las listas cortas que los clasifican: países, tipos de rol, estados. Pocas filas, casi sin cambios, a menudo de fuera.
+
+10
+00:01:04,389 --> 00:01:08,615
+¿Alguna vez preguntarías «¿es este el mismo que aquel?»? Entonces es un dato maestro.
+
+11
+00:01:09,715 --> 00:01:13,045
+Si solo eliges un valor de una lista, es un dato de referencia.
+
+12
+00:01:14,445 --> 00:01:19,667
+Y una lista que gana responsables y vida propia, como las facultades, se vuelve dato maestro.
+
+13
+00:01:22,167 --> 00:01:26,252
+Lo que construye el cotejo es un registro maestro, a menudo llamado registro dorado.
+
+14
+00:01:27,752 --> 00:01:31,663
+Un ID propio, que nunca cambia y nunca se reutiliza.
+
+15
+00:01:33,263 --> 00:01:36,852
+Para cada dato, el mejor valor, etiquetado con su origen.
+
+16
+00:01:38,552 --> 00:01:42,266
+Y vínculos a cada registro del que viene, cada uno guardado tal como llegó.
+
+17
+00:01:43,766 --> 00:01:47,907
+Así se puede explicar, valor por valor, y deshacer, vínculo por vínculo.
+
+18
+00:01:50,407 --> 00:01:53,288
+Linh volvió a estudiar con un nuevo número de estudiante.
+
+19
+00:01:54,588 --> 00:02:00,795
+Este semestre, por primera vez, la oficina de registro busca duplicados en los sistemas de la universidad.
+
+20
+00:02:02,295 --> 00:02:05,627
+Cincuenta mil registros darían más de mil millones de pares.
+
+21
+00:02:07,127 --> 00:02:14,527
+Así que solo compara registros que comparten algo: un correo, un número, o un año de nacimiento y un apellido que suena parecido.
+
+22
+00:02:16,027 --> 00:02:20,638
+Propone pares a la oficina de Mei, encargada de la persona. Aquí hay tres.
+
+23
+00:02:23,138 --> 00:02:27,525
+El primer par: sus dos números de estudiante. Mismo nombre, misma fecha de nacimiento.
+
+24
+00:02:29,025 --> 00:02:33,873
+Sobre cien, obtiene 93: por encima de la línea donde un par se vincula solo.
+
+25
+00:02:35,673 --> 00:02:40,719
+Pero este primer semestre, la oficina de Mei también revisa los vínculos automáticos, para probar las reglas.
+
+26
+00:02:42,119 --> 00:02:45,020
+Y la postulación de Linh dice que ya estudió aquí.
+
+27
+00:02:46,320 --> 00:02:48,622
+Así que Mei los vincula, y anota por qué.
+
+28
+00:02:50,122 --> 00:02:53,311
+La oficina de registro fusiona los dos números en su propio sistema.
+
+29
+00:02:55,811 --> 00:03:01,050
+El segundo par es más difícil: su nuevo número de estudiante y su registro de tutora en RR. HH.
+
+30
+00:03:02,250 --> 00:03:05,010
+Cada cosa comparada suma peso, o lo resta.
+
+31
+00:03:06,010 --> 00:03:11,463
+Nombre, igual: más 3,2. Apellido, igual, pero común: más 2.
+
+32
+00:03:12,763 --> 00:03:19,225
+Fecha de nacimiento, un dígito distinta, quizá una errata: más 2,4. Correo, distinto: menos 0,4.
+
+33
+00:03:20,625 --> 00:03:24,456
+En total, 74: entre las dos líneas, así que decide una persona.
+
+34
+00:03:26,056 --> 00:03:30,069
+Si las fechas de nacimiento coincidieran, obtendría 93, como el primer par.
+
+35
+00:03:32,569 --> 00:03:41,242
+Un asistente de IA redacta una nota para Mei, con los nombres ocultos: fechas de nacimiento a un dígito, y el correo de RR. HH. en el dominio de la universidad.
+
+36
+00:03:42,942 --> 00:03:48,082
+Sugiere; Mei decide. Le pregunta a RR. HH., y revisan su contrato: una errata.
+
+37
+00:03:49,682 --> 00:03:51,349
+Los vincula, con ese motivo.
+
+38
+00:03:52,049 --> 00:03:55,108
+Qué fecha de nacimiento creer es la pregunta de la próxima película.
+
+39
+00:03:57,608 --> 00:04:02,830
+El tercer par parece fácil: una cuenta de la plataforma de aprendizaje con el número de Aisha Karimi.
+
+40
+00:04:04,130 --> 00:04:08,291
+Pero la cuenta es de Aisha Rahman, y el número se escribió por error.
+
+41
+00:04:09,791 --> 00:04:14,699
+Si se vinculan, una estudiante ve los resultados de la otra. Dos personas, tomadas por una.
+
+42
+00:04:16,299 --> 00:04:18,831
+Una fusión falsa cuesta más que una coincidencia perdida.
+
+43
+00:04:20,331 --> 00:04:24,283
+Así que Mei las mantiene separadas, y su «no son la misma» obliga al cotejo.
+
+44
+00:04:26,783 --> 00:04:30,297
+Dos decisiones, y los cinco registros de Linh apuntan a una persona.
+
+45
+00:04:31,797 --> 00:04:39,203
+Nada se destruyó: cada registro queda tal como llegó. Así, si alguna vez entra un Martin verdadero, cualquier vínculo se puede deshacer.
+
+46
+00:04:40,603 --> 00:04:46,079
+Y ninguna regla dice que dos números de estudiante nunca son una persona. Quien vuelve a estudiar tiene dos.
+
+47
+00:04:50,179 --> 00:04:56,521
+Los hospitales también cotejan personas. Si fusionan dos pacientes por error, un resultado sigue al equivocado.
+
+48
+00:04:58,421 --> 00:05:04,305
+Por eso guardan cada identificador con el sistema que lo emitió, y deshacer una fusión es parte del trabajo.
+
+49
+00:05:07,205 --> 00:05:15,719
+Donde se transforman los datos, una consulta propone los pares sin comparar a todos, y la tabla de decisiones se vuelve la cola de la persona.
+
+50
+00:05:17,019 --> 00:05:21,635
+Una prueba falla cuando un par espera más de una semana: la cola tiene un responsable, y un límite.
+
+51
+00:05:22,935 --> 00:05:27,789
+En la plataforma, los registros maestros y sus vínculos, cada uno con quién decidió y por qué.
+
+52
+00:05:29,189 --> 00:05:31,787
+Decide una coincidencia una vez, con un motivo, y consérvala.

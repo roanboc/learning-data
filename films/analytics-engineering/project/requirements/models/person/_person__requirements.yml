@@ -1,0 +1,47 @@
+# What's still open about the person domain: watched until it's done, then deleted.
+# The schema is in requirements/README.md.
+
+scope: {kind: domain, name: person, code: PER}
+
+items:
+
+  - id: GAP-PER-01
+    type: gap
+    step: gaps_and_contracts
+    title: One person's records aren't linked
+    expectation: One person, known once, whatever roles they hold.
+    reality: Each system keeps its own number, and only some records hold another's. Platform accounts and
+      alumni records hold a student ID, and research records a staff ID. No key joins a student to a staff
+      member, or one student ID to another (analyses/profiling/profile_keys_held.sql). A graduate who comes
+      back to study gets a new student ID that nothing links to the old one.
+    resolution: [rule_in_model]
+    text: Link each record to one person, by a rule the registrar's office agrees, or by its recorded decision.
+    owner: Mei Tanaka, registrar's office
+    status: open
+    done_when: A person model holds one row per person, every record links to exactly one, and a test fails
+      while a proposed pair waits undecided.
+    sources: [student_system, hr_system, research_system, alumni_system]
+    evidence: [analyses/profiling/profile_keys_held.sql]
+    relates_to: [DEC-PER-01]
+
+  - id: REQ-PER-01
+    type: requirement
+    step: written_once
+    title: The glossary's word on the person
+    text: Data governance confirms the business glossary has no term for person, role, contact point or
+      identifier, or names the term that applies (DEC-PRJ-11).
+    owner: Data governance
+    status: open
+    done_when: Each of the four is confirmed as the project's to define, or takes the glossary's words, with
+      source:.
+    relates_to: [DEC-PRJ-11]
+
+  - id: Q-PER-01
+    type: question
+    step: scope
+    title: Which alumni are studying here again?
+    text: Which of our alumni are studying with us again, so we don't invite them to what they're already doing?
+    owner: Alumni office
+    status: open
+    done_when: A mart answers it from the person and their roles, and the question moves to that mart's
+      conceptual model.

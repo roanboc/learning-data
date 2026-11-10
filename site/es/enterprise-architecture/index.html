@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El mapa antes de los datos · Learning Data</title>
+<meta name="description" content="Películas cortas sobre arquitectura empresarial para datos: una organización en capas, sus clientes y ofertas, por qué tiene que cambiar, sus capacidades, sus flujos de valor y procesos, quién hace el trabajo y dónde cambia el significado, qué la hace funcionar hoy y hacia dónde va, qué preguntas importan, por qué cada regla de datos necesita un lugar en el mapa, y qué significa para los datos un cambio de estrategia.">
+<meta property="og:title" content="El mapa antes de los datos · Learning Data"><meta property="og:description" content="Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace el trabajo y qué la hace funcionar."><meta property="og:image" content="https://data.learn-all.org/assets/day-one-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/enterprise-architecture/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/enterprise-architecture/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../enterprise-architecture/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/day-one-poster.jpg" alt=""><img src="../../assets/who-it-serves-poster.jpg" alt=""><img src="../../assets/why-it-moves-poster.jpg" alt=""><img src="../../assets/what-it-must-do-poster.jpg" alt=""><img src="../../assets/how-value-reaches-people-poster.jpg" alt=""><img src="../../assets/who-does-it-poster.jpg" alt=""><img src="../../assets/today-and-where-its-going-poster.jpg" alt=""><img src="../../assets/now-the-questions-appear-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Temas</a> › <a href="../topics/#enterprise-architecture">Arquitectura empresarial</a> › El mapa antes de los datos</p>
+<h1>El mapa antes de los datos</h1>
+<p class="lead">Una serie sobre arquitectura empresarial, y por qué importa para los datos. Tomás, arquitecto empresarial recién llegado a una empresa pública de energía, aprende cómo funciona antes de preguntar qué deberían responder sus datos: a quién sirve, por qué tiene que cambiar, qué tiene que ser capaz de hacer, cómo llega el valor a la gente, quién hace el trabajo y qué la hace funcionar.</p>
+</section>
+<nav class="course" aria-label="Curso: El mapa antes de los datos"><div class="course-in"><p class="course-t"><small>Serie · Arquitectura empresarial</small>El mapa antes de los datos</p><ol class="path" data-store="ld-enterprise-architecture" data-labs="12" data-quiz="26" data-series="ld-day-one ld-who-it-serves ld-why-it-moves ld-what-it-must-do ld-how-value-reaches-people ld-who-does-it ld-today-and-where-its-going ld-now-the-questions-appear ld-rules-with-a-home ld-when-strategy-moves ld-a-map-people-and-agents-can-read" data-text='{"watched": "Vista", "films": "{n} de 11 películas vistas", "labs": "{n} de 12 labs explorados", "quiz": "{n} de 26 respondidas · {ok} correctas"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>Las películas</b><span>Once películas</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Desarma</b><span>Doce labs interactivos</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Tú decides</b><span>26 situaciones reales</span></a></li>
+</ol></div></nav>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película agrega una capa al mapa.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/day-one-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 1 de 11 · Por qué arquitectura empresarial</p>
+<h3><a href="day-one/">El primer día</a></h3>
+<p>Un organigrama, 140 sistemas y una lista de pedidos: todo cierto, y nada de eso es el lugar. Entiende cómo funciona antes de hacer las preguntas.</p>
+<p class="meta">5 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-day-one" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/who-it-serves-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 2 de 11 · Clientes y ofertas</p>
+<h3><a href="who-it-serves/">A quién sirve, y cómo se paga</a></h3>
+<p>Los clientes de Edison querían luz, no electricidad. Quién paga, quién usa y quién decide, y un lienzo para cada uno.</p>
+<p class="meta">5 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-it-serves" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/why-it-moves-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 3 de 11 · Motivación</p>
+<h3><a href="why-it-moves/">Qué la mueve</a></h3>
+<p>Tres cartas tiran de la empresa en tres direcciones. A quién le importa, qué empuja, qué debe llegar a ser cierto, y un principio para resolverlo.</p>
+<p class="meta">4½ min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-why-it-moves" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/what-it-must-do-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 4 de 11 · Capacidades</p>
+<h3><a href="what-it-must-do/">Lo que tiene que ser capaz de hacer</a></h3>
+<p>Cambiaron los corredores; la capacidad de llevar un mensaje se quedó. Una capacidad dura más que quien la realiza, cómo y con qué.</p>
+<p class="meta">5½ min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-what-it-must-do" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/how-value-reaches-people-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 5 de 11 · Flujos de valor y procesos</p>
+<h3><a href="how-value-reaches-people/">Cómo llega el valor a la gente</a></h3>
+<p>Un almuerzo cruza Mumbai, de mano en mano. La luz vuelve a cuarenta casas. El valor desde el lado del cliente, y detalle solo donde importa el orden.</p>
+<p class="meta">6 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-how-value-reaches-people" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/who-does-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 6 de 11 · Actores, roles y dominios</p>
+<h3><a href="who-does-it/">Quién lo hace, y dónde cambia el significado</a></h3>
+<p>Japón funciona con dos frecuencias. Una empresa tiene dos tipos de cliente. Roles, actores, y una traducción en el borde.</p>
+<p class="meta">6 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-does-it" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/today-and-where-its-going-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 7 de 11 · Sistemas y un objetivo</p>
+<h3><a href="today-and-where-its-going/">Hoy, y hacia dónde va</a></h3>
+<p>Una calle imaginada en 2045. Los 140 sistemas de hoy en el mapa. Un objetivo, y el camino hacia él, con sus razones.</p>
+<p class="meta">5 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-today-and-where-its-going" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/now-the-questions-appear-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 8 de 11 · Preguntas y medidas</p>
+<h3><a href="now-the-questions-appear/">Ahora aparecen las preguntas</a></h3>
+<p>Los pescadores de Kerala, 1997. Cuarenta y dos pedidos, la prueba del capitán. Metas seguidas hasta las medidas que las comprueban.</p>
+<p class="meta">6 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-now-the-questions-appear" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/rules-with-a-home-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 9 de 11 · Objetos, dueños y reglas</p>
+<h3><a href="rules-with-a-home/">Reglas con un hogar</a></h3>
+<p>Una factura nunca corregida, y una regla escrita de cinco maneras. Cada regla escrita una vez, con un responsable y una razón.</p>
+<p class="meta">8 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-rules-with-a-home" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/when-strategy-moves-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 10 de 11 · Cambio, responsables y contratos</p>
+<h3><a href="when-strategy-moves/">Cuando la estrategia se mueve</a></h3>
+<p>Una tarifa social para todo hogar elegible. Un cambio, recorrido capa por capa hasta sus responsables, reglas y contratos.</p>
+<p class="meta">7 min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-when-strategy-moves" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/a-map-people-and-agents-can-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 11 de 11 · Mantener el mapa</p>
+<h3><a href="a-map-people-and-agents-can-read/">Un mapa que personas y agentes pueden leer</a></h3>
+<p>Un mapa en una herramienta, alimentado por otros sistemas, revisado y versionado. Los agentes redactan; las personas confirman.</p>
+<p class="meta">8½ min · Pausa para pensar · El mapa antes de los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-a-map-people-and-agents-can-read" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Desarma, y luego tú decides</h2><p>Doce labs interactivos, uno por película y uno sobre ArchiMate 4, y luego 26 situaciones de todas las películas. Tu avance queda en este navegador.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Desarma: 12 labs interactivos →</a><a class="btn" href="scenarios/">Tú decides: 26 situaciones</a></p>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">Un hilo: las primeras semanas</h2><p>El primer día trae una credencial, un organigrama, una lista de 140 sistemas y una invitación a una reunión sobre “el programa de transición”. Película a película, Tomás arma un mapa de la empresa, desde por qué existe hasta qué la hace funcionar. Solo entonces puede decir qué preguntas necesita responder, dónde va cada regla de datos y qué significa para los datos un cambio de estrategia.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
+<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
+<tr><td>El primer día</td><td>El catastro de Domesday, Inglaterra, 1086</td><td>Antes de gobernar un lugar, hay que saber qué es.</td></tr>
+<tr><td>A quién sirve, y cómo se paga</td><td>Los clientes de Edison en Pearl Street, 1882</td><td>La gente compra lo que una oferta hace por ella: luz, no electricidad.</td></tr>
+<tr><td>Qué la mueve</td><td>El apagón del noreste, 1965</td><td>Cuando nadie ve el conjunto, las reglas compartidas lo sostienen.</td></tr>
+<tr><td>Lo que tiene que ser capaz de hacer</td><td>Los corredores de relevo incas, los Andes, siglo XV</td><td>Cambian los corredores y los caminos; la capacidad de llevar un mensaje se queda.</td></tr>
+<tr><td>Cómo llega el valor a la gente</td><td>Los dabbawalas de Mumbai, desde 1890</td><td>El valor llega a la gente a través de traspasos, y el detalle vive ahí.</td></tr>
+<tr><td>Quién lo hace, y dónde cambia el significado</td><td>Las dos frecuencias de Japón, década de 1890 y 2011</td><td>La misma palabra puede significar algo distinto a cada lado de una línea; lo que cruza hay que traducirlo.</td></tr>
+<tr><td>Hoy, y hacia dónde va</td><td>Una mañana imaginada en la región de la empresa, 2045</td><td>Hacia dónde va se dibuja con el mismo cuidado que dónde está, y el camino entre los dos es su propio dibujo.</td></tr>
+<tr><td>Ahora aparecen las preguntas</td><td>Los pescadores de Kerala, 1997</td><td>Una pregunta importa cuando alguien va a actuar a partir de su respuesta, a tiempo.</td></tr>
+<tr><td>Reglas con un hogar</td><td>Un nacimiento en Tartu, Estonia, hoy</td><td>Cada hecho tiene un solo hogar y un solo responsable, así que se pide una vez.</td></tr>
+<tr><td>Cuando la estrategia se mueve</td><td>M-Pesa en Kenia, 2007</td><td>Una estrategia cabe en una frase; hacerla realidad llega a cada capa, hasta el mostrador.</td></tr>
+<tr><td>Un mapa que personas y agentes pueden leer</td><td>El viaje de Hōkūleʻa a Tahití, 1976</td><td>Un mapa vive mientras la gente lo usa, lo mantiene fiel y puede transmitirlo.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Quién conoce el lugar</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Dibuja el mapa</h3><p>Tomás, el arquitecto empresarial recién llegado, el guía de la serie</p></div>
+<div class="card biz"><h3>Hace funcionar la red</h3><p>Grace, dueña de las operaciones de la red</p></div>
+<div class="card biz"><h3>Habla por los clientes</h3><p>Farah, la defensora de los clientes</p></div>
+<div class="card biz"><h3>Conoce las reglas</h3><p>Ama, la responsable regulatoria</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La empresa de energía, las personas, las cifras y los registros de las películas, los labs y las situaciones son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. TOGAF y ArchiMate son marcas de The Open Group, y Zachman de Zachman International, nombradas solo para identificar esos marcos; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

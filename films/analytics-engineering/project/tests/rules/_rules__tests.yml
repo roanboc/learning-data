@@ -1,0 +1,87 @@
+data_tests:
+
+  - name: keys_decided_different_stay_apart
+    description: A decision that two keys are different people holds, whatever the matching rules do.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: consistency}
+
+  - name: alumni_graduated_under_a_known_student_id
+    description: Every graduate the alumni office knows has a student ID the student system issued, in its current table or its archive.
+    config:
+      meta: {owner: Alumni office, dimension: consistency}
+
+  - name: approved_claims_have_a_pay_day
+    description: >
+      Every approved claim has a pay day in payroll's calendar, so none waits for a pay day that
+      isn't there. HR adds the next year's pay days before the last close of this one.
+    config:
+      meta: {owner: HR, dimension: completeness}
+
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and no longer than its field (DEC-SIS-07). It
+      measures validity: it has no reference but its rule, so it says a name is allowed, never right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  # each night, on stg_student_system__graduations
+  - name: family_name_may_be_cut_short
+    description: >
+      A family name exactly 30 characters long, the length of the student system's field until
+      14 September 2026, may have been cut short. It holds for the registrar's office, a list to
+      work through, one row per graduate; it never stops the night's update (DEC-SIS-06).
+    config:
+      severity: warn
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  - name: family_name_in_capitals_only
+    description: >
+      A family name in capitals only, as the online form took it until 2019. It holds for the
+      registrar's office, a list to work through, one row per graduate; it never stops the night's
+      update (DEC-SIS-06).
+    config:
+      severity: warn
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  - name: night_file_keeps_every_letter
+    description: >
+      The night's file, with more than 200 names and not one letter outside A to Z, is losing
+      letters on the way in. It stops: dbt build skips what's built from the student system's
+      graduations, so the graduation list keeps the night before's names (DEC-SIS-07).
+    config:
+      severity: error
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  # on the graduation list, before it goes to the printer
+  - name: old_form_names_not_yet_confirmed
+    description: >
+      A name the old form made, still in plain letters A to Z, not yet confirmed by its graduate:
+      on a list not yet sent to the printer, a record first made before 2019, a printed name with
+      no letter outside A to Z, and no confirmation from the graduate. It can't see a missing
+      accent; it sees where a name was born. A warning, agreed with Mei: each name is held for the
+      registrar's office, which writes to the graduate, and dbt keeps them in a table the office
+      reads (store_failures). Added on 14 October 2026, after the first reports (Report, fix, tell).
+      It reads name_confirmed_how since 10 November 2026, so a name confirmed on the paper form
+      counts as confirmed (Read by an agent).
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: the graduate}
+
+  # on the printer's file, and the list's two confirmation columns (Read by an agent)
+  - name: printers_file_has_the_names_graduates_gave
+    description: >
+      Each name in the printer's file is the name its graduate last gave in the portal for that
+      ceremony, a correction still waiting for its check included. Genie Code proposed it and Jun
+      Park reviewed it; Mei set it to stop the printer's file (error) until a person settles each
+      name. It checks the names in the certificates' level, zero wrong (the graduation list's
+      certificates_exactly_right).
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: "The graduate, through their last answer in the portal"}
+
+  - name: name_confirmation_columns_agree
+    description: >
+      The graduation list's two confirmation columns agree: a day in name_confirmed_on exactly when
+      name_confirmed_how is portal. Genie Code proposed it; Mei set it to warn and hold for Jun Park,
+      as a difference is a fault in the code, not in what graduates did.
+    config:
+      meta: {owner: "Jun Park, analytics engineer", dimension: consistency}

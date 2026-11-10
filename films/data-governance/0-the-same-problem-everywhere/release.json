@@ -1,0 +1,15 @@
+[
+  {
+    "name": "The same problem, everywhere",
+    "key": "the-same-problem-everywhere-en",
+    "dir": "films/data-governance/0-the-same-problem-everywhere/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/the-same-problem-everywhere/film.js",
+    "video": "dist/the-same-problem-everywhere.mp4",
+    "file": "the-same-problem-everywhere.mp4",
+    "captions": [["films/data-governance/0-the-same-problem-everywhere/captions/en.srt", "the-same-problem-everywhere.en.srt"], ["films/data-governance/0-the-same-problem-everywhere/captions/es.srt", "the-same-problem-everywhere.es.srt"]],
+    "paths": ["films/data-governance/0-the-same-problem-everywhere/source", ":(exclude)films/data-governance/0-the-same-problem-everywhere/source/src/i18n/es/captions.js", "films/data-governance/shared", "films/master-and-reference-data/shared", "films/analytics-engineering/shared", "films/from-words-to-data/shared", "films/when-things-go-wrong/characters", "films/a-sharper-sketch/source/src", "films/inner-life-of-data/source/src/core.js", "films/inner-life-of-data/source/src/logos.js", "films/inner-life-of-data/source/src/style2.js", "films/inner-life-of-data/source/src/ui3.js", "films/inner-life-of-data/source/src/engine3.js", "films/inner-life-of-data/source/fonts"],
+    "legibility": {"texts": 237, "under_28": "0%", "under_20": 0, "median": 32.5, "status": "Drawn to the rule"}
+  }
+]

@@ -1,0 +1,139 @@
+1
+00:00:01,600 --> 00:00:10,270
+For most of the twentieth century, a library's card catalogue filed each book three times: under its author, its title and its subject.
+
+2
+00:00:10,970 --> 00:00:13,158
+One book on the shelf. Three ways in.
+
+3
+00:00:14,458 --> 00:00:19,031
+Every card had to be kept in step with the book, or readers went to the wrong shelf.
+
+4
+00:00:20,431 --> 00:00:25,536
+Data for reading works the same way: copies arranged for the questions people ask.
+
+5
+00:00:31,836 --> 00:00:41,668
+Ask four data engineers how to shape data for reading, and you may get four answers: a normalised core, a data vault, a star, or one wide table.
+
+6
+00:00:42,968 --> 00:00:49,930
+The arguments have names: Inmon's integrated core, Kimball's stars, Linstedt's data vault, and one big table.
+
+7
+00:00:51,330 --> 00:00:55,989
+This week, there's a new source to add: credentials from the short-course platform.
+
+8
+00:00:56,689 --> 00:00:59,739
+There's no best shape. There's a best shape for each job.
+
+9
+00:01:02,439 --> 00:01:06,154
+The first job is to bring many sources together, under one meaning.
+
+10
+00:01:06,854 --> 00:01:12,118
+One way is a normalised core: a shape built to write, but for the whole university.
+
+11
+00:01:13,418 --> 00:01:23,115
+Another is a data vault. Hubs hold the business keys, the things that identify a learner or a credential. Links hold the relationships between them.
+
+12
+00:01:24,615 --> 00:01:30,949
+Satellites hold the descriptions, and every change to them, with the source and the time each change arrived.
+
+13
+00:01:32,349 --> 00:01:36,867
+A new source just adds new satellites. Nothing that exists has to change.
+
+14
+00:01:38,167 --> 00:01:42,653
+It's built for change, and for audit. It isn't built for people to query.
+
+15
+00:01:45,353 --> 00:01:50,303
+For people, there's the star: one for awards, one for enrolments, one for fees.
+
+16
+00:01:51,503 --> 00:01:59,905
+They share the same learner and the same calendar, so one question can cross them: awards and fees, for the same learners, in the same year.
+
+17
+00:02:01,405 --> 00:02:06,208
+These shared dimensions are called conformed. They make the stars agree with each other.
+
+18
+00:02:07,508 --> 00:02:15,360
+Engineers plan them on a grid called a bus matrix: the business processes down the side, the shared dimensions across the top.
+
+19
+00:02:18,060 --> 00:02:21,240
+Some questions are always about one thing: one learner.
+
+20
+00:02:21,940 --> 00:02:28,570
+So build one wide row per learner: their current course, their credit so far, every credential, and what's next.
+
+21
+00:02:29,970 --> 00:02:36,549
+It's easy for people, for machine learning and for AI assistants. Most questions become a single lookup.
+
+22
+00:02:37,649 --> 00:02:44,252
+Which learners are close to a graduate certificate? With a wide table, that's one filter, not five joins.
+
+23
+00:02:45,752 --> 00:02:51,520
+The cost: many columns to maintain, and the same measure defined twice, unless you're careful.
+
+24
+00:02:54,220 --> 00:02:58,113
+On the platform from The Inner Life of Data, each shape has its place.
+
+25
+00:02:58,813 --> 00:03:02,065
+Silver integrates, in a normalised core or a vault.
+
+26
+00:03:03,165 --> 00:03:07,290
+Gold presents stars for people, and serves wide tables to tools.
+
+27
+00:03:08,490 --> 00:03:13,554
+And a semantic layer can sit on top, so every tool asks for the same definitions.
+
+28
+00:03:19,254 --> 00:03:24,871
+Many sources that keep changing, and auditors who ask where each value came from: a vault.
+
+29
+00:03:25,971 --> 00:03:29,951
+Many processes that share the same context: conformed stars.
+
+30
+00:03:31,051 --> 00:03:36,025
+One entity, asked about in many ways, by people and by AI: wide tables.
+
+31
+00:03:37,325 --> 00:03:43,536
+And don't copy for its own sake. Every shape is another copy to keep in step, like the library's cards.
+
+32
+00:03:44,736 --> 00:03:49,002
+Choose per question, not per fashion. Most platforms use more than one.
+
+33
+00:03:51,702 --> 00:03:56,676
+The short-course credentials arrived this week. The vault took them without changing a thing.
+
+34
+00:03:57,876 --> 00:04:02,397
+The award star gained new rows, and each learner's wide row gained a column.
+
+35
+00:04:03,697 --> 00:04:07,429
+Next: what if the app and the analysts used the same database?

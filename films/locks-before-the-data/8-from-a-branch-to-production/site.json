@@ -1,0 +1,106 @@
+{
+  "draft": true,
+  "kicker": "A reviewed path to production",
+  "kicker_es": "Un camino revisado a producción",
+  "title_es": "De una rama a producción",
+  "h1": "From a branch to production: one way in, with a gate",
+  "h1_es": "De una rama a producción: una sola entrada, con control",
+  "lead": "The nightly job signs in with no secret now, but whatever reaches main goes straight to production, and anyone on the team can push to it. Sam sets the rules first, Jun's change is sent back and fixed, and production waits for Noor's yes. Who may change production, and how?",
+  "lead_es": "El proceso nocturno ya entra sin secretos, pero todo lo que llega a main pasa directo a producción, y cualquiera del equipo puede subir cambios. Sam fija primero las reglas, el cambio de Jun vuelve y se corrige, y producción espera el sí de Noor. ¿Quién puede cambiar producción, y cómo?",
+  "description": "A film about the one way into production, the eighth of Locks before the data: South Africa's constitution of 1996, written by an elected assembly against 34 principles fixed before and nobody could change, sent back by a court that hadn't written it on nine points, and certified once all nine were fixed; a nightly job whose code went straight from main to production; a ruleset on main that nobody may bypass, and code owners read from main, so no change picks its own reviewers; a change tried in a copy of its author's own, sent back for a line that wrote students' rows to a log, and approved on its last push; a deploy that goes to test first, waits for a release approver who didn't start it, and signs in to Databricks only from the job that waited; actions pinned to the commits that were checked, updated through review; and a token that only reads.",
+  "description_es": "Una película sobre la única entrada a producción, la octava de Cerraduras antes que los datos: la constitución de Sudáfrica de 1996, escrita por una asamblea elegida frente a 34 principios fijados antes y que nadie podía cambiar, devuelta en nueve puntos por un tribunal que no la escribió, y certificada cuando se corrigieron los nueve; un proceso nocturno cuyo código pasaba directo de main a producción; un conjunto de reglas en main que nadie puede saltarse, y propietarios del código leídos de main, para que ningún cambio elija quién lo revisa; un cambio probado en una copia propia de su autor, devuelto por una línea que escribía filas de estudiantes en un log, y aprobado en su último push; un despliegue que va primero a pruebas, espera a quien aprueba las entregas sin haberlo iniciado, y entra en Databricks solo desde el trabajo que esperó; acciones fijadas a los commits revisados, actualizadas con revisión; y un token que solo lee.",
+  "card": "Rules set before the change, a reviewer who didn't write it, and a machine that deploys only after a second yes.",
+  "card_es": "Reglas fijadas antes del cambio, alguien que no lo escribió lo revisa, y una máquina despliega solo tras un segundo sí.",
+  "chapters_es": {
+    "principles": "Primero los principios",
+    "sent": "Devuelto",
+    "nogate": "Todavía sin control",
+    "rules": "Primero las reglas",
+    "review": "Devuelto, corregido, revisado otra vez",
+    "door": "La llave abre una sola puerta",
+    "supply": "Código de otros",
+    "force": "En vigor a las dos"
+  },
+  "past": [
+    "South Africa, 1993 to 1997: principles fixed first, and a constitution certified by a court that hadn't written it",
+    "Production changes only through a reviewed path."
+  ],
+  "past_es": [
+    "Sudáfrica, de 1993 a 1997: primero los principios, y una constitución certificada por un tribunal que no la escribió",
+    "Producción cambia solo por un camino revisado."
+  ],
+  "next_h": "You've seen how a change reaches production by one reviewed path: rules set before it, a reviewer who didn't write it, a release approver's yes, and a machine that deploys it. Next: who did what, where every step on that path, and every switch-on, is kept for when someone asks.",
+  "next_h_es": "Viste cómo un cambio llega a producción por un solo camino revisado: reglas fijadas antes, alguien que no lo escribió lo revisa, el sí de quien aprueba las entregas, y una máquina que lo despliega. Sigue: quién hizo qué, donde cada paso de ese camino, y cada encendido, queda guardado para cuando alguien pregunte.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film shows GitHub and Databricks as their docs did on 5 November 2026. These are the pages it follows, and the list of what goes wrong in a path to production.",
+    "p_es": "La película muestra GitHub y Databricks como los describían sus documentos el 5 de noviembre de 2026. Estas son las páginas que sigue, y la lista de lo que falla en un camino a producción.",
+    "links": [
+      {
+        "title": "GitHub: managing environments for deployment",
+        "title_es": "GitHub: administrar entornos de despliegue",
+        "line": "Required reviewers, Prevent self-review, deployment branches, and why administrators shouldn't bypass them.",
+        "line_es": "Revisores obligatorios, Prevent self-review, ramas de despliegue, y por qué los administradores no deberían saltárselos.",
+        "href": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+        "href_es": "https://docs.github.com/es/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments"
+      },
+      {
+        "title": "GitHub: available rules for rulesets",
+        "title_es": "GitHub: reglas disponibles para los conjuntos de reglas",
+        "line": "Pull requests, code owners' reviews, the last push approved by someone else, status checks, and the bypass list.",
+        "line_es": "Pull requests, revisiones de propietarios del código, el último push aprobado por otra persona, checks, y la lista de quién puede saltárselas.",
+        "href": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets",
+        "href_es": "https://docs.github.com/es/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets"
+      },
+      {
+        "title": "GitHub: about code owners",
+        "title_es": "GitHub: acerca de los propietarios del código",
+        "line": "Who is asked to review, and why the file on the base branch decides it.",
+        "line_es": "A quién se le pide revisar, y por qué lo decide el archivo de la rama base.",
+        "href": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+        "href_es": "https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners"
+      },
+      {
+        "title": "GitHub: secure use reference",
+        "title_es": "GitHub: referencia de uso seguro",
+        "line": "Pinning actions to a full commit; workflow dependency lockfiles, which also pin the actions an action calls; and keeping the workflow's token to the least it needs.",
+        "line_es": "Fijar acciones a un commit completo; los lockfiles de dependencias de flujos, que fijan también las acciones que llama una acción; y dejar al token del flujo lo mínimo que necesita.",
+        "href": "https://docs.github.com/en/actions/reference/security/secure-use",
+        "href_es": "https://docs.github.com/es/actions/reference/security/secure-use"
+      },
+      {
+        "title": "GitHub: keeping your actions up to date with Dependabot",
+        "title_es": "GitHub: mantener tus acciones al día con Dependabot",
+        "line": "How Dependabot proposes new versions of actions pinned to a commit, as pull requests.",
+        "line_es": "Cómo Dependabot propone versiones nuevas de acciones fijadas a un commit, como pull requests.",
+        "href": "https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot",
+        "href_es": "https://docs.github.com/es/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot"
+      },
+      {
+        "title": "Databricks: deployment modes for bundles",
+        "title_es": "Databricks: modos de despliegue de los paquetes",
+        "line": "Development mode's own copies, and production mode, deployed from one branch by a service principal.",
+        "line_es": "Las copias propias del modo desarrollo, y el modo producción, desplegado desde una rama por una entidad de servicio.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/dev-tools/bundles/deployment-modes",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/bundles/deployment-modes"
+      },
+      {
+        "title": "Databricks: workload identity federation for GitHub Actions",
+        "title_es": "Databricks: federación de identidades de carga de trabajo para GitHub Actions",
+        "line": "A federation policy whose subject names one environment, so only that environment's job signs in.",
+        "line_es": "Una política de federación cuyo sujeto nombra un entorno, para que solo entre el trabajo de ese entorno.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/provider-github",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/auth/provider-github"
+      },
+      {
+        "title": "OWASP: Top 10 CI/CD security risks",
+        "title_es": "OWASP: los 10 riesgos de seguridad de CI/CD (en inglés)",
+        "line": "The list of what goes wrong in a path to production, from flow control to third-party code.",
+        "line_es": "La lista de lo que falla en un camino a producción, del control del flujo al código de terceros.",
+        "href": "https://owasp.org/www-project-top-10-ci-cd-security-risks/",
+        "href_es": "https://owasp.org/www-project-top-10-ci-cd-security-risks/"
+      }
+    ]
+  }
+}

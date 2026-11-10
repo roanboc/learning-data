@@ -1,0 +1,42 @@
+[
+  {
+    "name": "A model, reasoning, hands and a loop",
+    "key": "a-model-reasoning-hands-and-a-loop-en",
+    "dir": "films/what-an-agent-is/3-a-model-reasoning-hands-and-a-loop/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/a-model-reasoning-hands-and-a-loop/film.js",
+    "video": "dist/a-model-reasoning-hands-and-a-loop.mp4",
+    "file": "a-model-reasoning-hands-and-a-loop.mp4",
+    "captions": [
+      [
+        "films/what-an-agent-is/3-a-model-reasoning-hands-and-a-loop/captions/en.srt",
+        "a-model-reasoning-hands-and-a-loop.en.srt"
+      ],
+      [
+        "films/what-an-agent-is/3-a-model-reasoning-hands-and-a-loop/captions/es.srt",
+        "a-model-reasoning-hands-and-a-loop.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/what-an-agent-is/3-a-model-reasoning-hands-and-a-loop/source",
+      ":(exclude)films/what-an-agent-is/3-a-model-reasoning-hands-and-a-loop/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 303,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

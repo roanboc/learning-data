@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00:01.400 --> 00:00:07.536
+El primero de junio de 1890. Estados Unidos contó a su gente tal como estaba ese único día.
+
+00:00:08.836 --> 00:00:14.969
+Contar llevó semanas, pero un bebé nacido después del primero no se contó. Alguien que murió después, sí.
+
+00:00:16.469 --> 00:00:20.927
+Cada persona se volvió una tarjeta perforada, contada por las máquinas de Herman Hollerith.
+
+00:00:22.127 --> 00:00:26.463
+Una tarjeta por persona, a un solo día. La pregunta de Planificación necesita las dos cosas.
+
+00:00:32.763 --> 00:00:36.570
+Antes de escribir SQL, la tabla de Jun para Planificación recibe una oración.
+
+00:00:37.270 --> 00:00:40.328
+Una fila por estudiante por título, a la fecha del censo.
+
+00:00:42.028 --> 00:00:46.781
+Esa oración es el grano. Dice qué es una fila y qué día describe.
+
+00:00:48.081 --> 00:00:54.544
+El agente la redacta a partir de la pregunta de Planificación y el informe del censo. Noor, dueña del modelo, la aprueba.
+
+00:00:55.844 --> 00:01:00.380
+Luego se vuelve una prueba: no hay dos filas con el mismo estudiante y el mismo título.
+
+00:01:03.880 --> 00:01:08.991
+Por eso importa. En julio, un certificado de posgrado en Salud cambió de nombre.
+
+00:01:09.691 --> 00:01:13.085
+Así que el título tiene dos versiones: el nombre viejo y el nuevo.
+
+00:01:14.285 --> 00:01:19.219
+Une los créditos al título solo por su clave, y cada estudiante encuentra las dos versiones.
+
+00:01:19.919 --> 00:01:26.397
+Ocho estudiantes se vuelven dieciséis filas. Ciento ochenta y cinco créditos se vuelven trescientos setenta.
+
+00:01:28.097 --> 00:01:33.216
+Nada falla, y cada fila parece correcta. Solo la prueba del grano lo nota.
+
+00:01:34.716 --> 00:01:39.084
+Une la versión vigente el día del censo, y vuelven a ser ocho filas.
+
+00:01:42.384 --> 00:01:51.169
+Esas versiones vienen de las fuentes. Nada se sobrescribe: cada cambio llega como una fila nueva, con la fecha en que empezó y la fecha en que terminó.
+
+00:01:52.769 --> 00:02:00.675
+Pero esas fechas dicen cuándo la plataforma vio un cambio, no cuándo fue cierto. Donde un sistema dice cuándo pasó algo, el modelo usa esa fecha.
+
+00:02:02.375 --> 00:02:14.285
+El núcleo arma sus propias versiones con esos hechos fechados. Los créditos de Aisha para su certificado tienen seis. Cinco en octubre, cuarenta y cinco a fines de febrero y sesenta en julio.
+
+00:02:15.985 --> 00:02:23.471
+Así que el grano del núcleo es: una fila por estudiante, por título, por versión. Una prueba verifica que no se solapen dos versiones.
+
+00:02:26.971 --> 00:02:31.216
+Ahora dos consumidores leen las mismas versiones y preguntan por días distintos.
+
+00:02:31.916 --> 00:02:40.327
+Planificación pregunta por el día del censo, el 31 de marzo. Aisha tenía cuarenta y cinco de sesenta créditos, le faltaban quince. Cuenta.
+
+00:02:41.827 --> 00:02:47.602
+La app de billetera pregunta por hoy. Aisha terminó en julio, y su billetera muestra el certificado.
+
+00:02:48.902 --> 00:02:57.236
+Haz la pregunta de Planificación, estudiantes a quince créditos o menos de un certificado, como era el día del censo: doce. Hazla hoy: nueve.
+
+00:02:58.736 --> 00:03:01.379
+Las dos son correctas. Responden sobre días distintos.
+
+00:03:03.479 --> 00:03:08.453
+Así que cada salida declara su día, y una pequeña macro elige la versión vigente ese día.
+
+00:03:11.753 --> 00:03:15.659
+Un estudiante vive en tres sistemas, y cada uno guarda sus propias versiones.
+
+00:03:16.859 --> 00:03:24.885
+Primero llegó la cuenta de Aisha en la plataforma. Su registro de estudiante rigió seis días después. Una cuenta de cursos cortos llegó en enero.
+
+00:03:26.185 --> 00:03:31.404
+Jun corta los tres en cada fecha en que alguno cambió, y une una sola línea de tiempo.
+
+00:03:32.904 --> 00:03:38.178
+En cada fecha gana el valor del sistema de estudiantes, luego el de la plataforma, luego el de cursos cortos.
+
+00:03:39.478 --> 00:03:45.339
+Un cambio que no altera nada de lo que guarda el modelo no crea versión. Cuatro fechas le dan a Aisha tres.
+
+00:03:48.639 --> 00:03:54.811
+Por último, Priya. Se retiró de su certificado el 27 de marzo, cuatro días antes del censo.
+
+00:03:56.111 --> 00:03:59.795
+El sistema de estudiantes lo registró el 3 de abril, una semana tarde.
+
+00:04:01.095 --> 00:04:09.182
+Fechado por cuándo se registró, aún estaría estudiando el día del censo, y Negocios contaría cuatro. El informe del censo dice tres.
+
+00:04:10.882 --> 00:04:19.254
+Fechado por cuándo rigió, Negocios cuenta tres. Como en 1890, la respuesta describe el día, no el día en que se anotó.
+
+00:04:20.954 --> 00:04:26.480
+Las plataformas solo dicen cuándo registraron un cambio. Esa brecha se acepta y queda por escrito.
+
+00:04:29.780 --> 00:04:33.710
+Una fila de qué, y cuándo. Declarado antes de escribir SQL, y probado.
+
+00:04:35.010 --> 00:04:39.948
+Dos consumidores, un núcleo. Antes de más código, escribe qué se le promete a cada uno.

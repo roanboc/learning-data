@@ -1,0 +1,231 @@
+1
+00:00:01,600 --> 00:00:04,617
+Un futuro imaginado: la universidad, dentro de unos años.
+
+2
+00:00:05,917 --> 00:00:13,837
+Antes de irse, Anil Kurian, analista de la Facultad de Salud, agrega una columna a una lista: la fecha de nacimiento de cada estudiante.
+
+3
+00:00:15,537 --> 00:00:22,889
+Nada la marca como dato personal, así que nada la oculta: quien pueda abrir la lista vería cuándo nació cada estudiante.
+
+4
+00:00:24,589 --> 00:00:29,847
+En malas manos, con un nombre y un correo, puede ayudar a alguien a hacerse pasar por ese estudiante.
+
+5
+00:00:31,547 --> 00:00:37,113
+Alguien tiene que detectarlo, y hoy eso significa esperar a la única persona que conoce las reglas.
+
+6
+00:00:38,813 --> 00:00:43,920
+A las tres de esa noche, un agente de IA lee el cambio frente a las reglas escritas de gobernanza.
+
+7
+00:00:45,620 --> 00:00:52,428
+No edita el cambio ni lo aprueba. Deja una nota: dónde, la regla, quién decide y una corrección a considerar.
+
+8
+00:00:54,128 --> 00:00:58,741
+A las ocho, Anil lo lee, está de acuerdo y marca la columna como dato personal.
+
+9
+00:01:00,241 --> 00:01:03,813
+Nadie tuvo que esperar, y nadie vio una fecha de nacimiento que no debía.
+
+10
+00:01:05,513 --> 00:01:13,787
+Lo que muestra: reglas tan claras que se pueden verificar, que un agente aplica a cada cambio, a cualquier hora, y una persona que decide.
+
+11
+00:01:21,287 --> 00:01:24,695
+Volvamos a hoy, y al primer cambio de Anil: la lista en sí.
+
+12
+00:01:25,395 --> 00:01:32,480
+Cada estudiante que cursa uno de los títulos de la facultad, cuánto le falta para terminar, y un nombre y un correo para contactarlo.
+
+13
+00:01:33,980 --> 00:01:36,173
+Las verificaciones lo devuelven: cuatro vacíos.
+
+14
+00:01:37,673 --> 00:01:42,219
+Cada una dice qué falta. Ninguna dice qué es lo correcto para esta lista, ni quién decide.
+
+15
+00:01:43,719 --> 00:01:46,920
+Anil le pregunta a Jun, que conoce las reglas, y espera.
+
+16
+00:01:48,420 --> 00:01:53,583
+Todo cambio sin otro dueño espera a Jun, y los asesores esperan su lista.
+
+17
+00:01:57,083 --> 00:02:03,863
+Así que Yusuf y Noor escriben las reglas como una lista de verificación: los pasos que un agente sigue en cada cambio.
+
+18
+00:02:05,163 --> 00:02:08,319
+Una sola página, en palabras simples, para cualquiera.
+
+19
+00:02:09,819 --> 00:02:12,358
+Las reglas ya no dependen de una sola persona.
+
+20
+00:02:13,858 --> 00:02:21,218
+Empieza por el glosario: toma de él cada definición, o que gobernanza confirme que no hay. Busca al dueño. Ejecuta las verificaciones.
+
+21
+00:02:22,918 --> 00:02:29,481
+Clasifica cada columna, con evidencia. Verifica cada regla sobre los datos; da seguimiento a las de lo que hace la gente.
+
+22
+00:02:31,181 --> 00:02:35,043
+Nombra lo que afecta. Luego informa, una sola vez, a las personas que deciden.
+
+23
+00:02:36,543 --> 00:02:41,942
+Y nunca aprueba, ni edita el glosario, ni debilita una verificación, ni muestra un valor de los datos.
+
+24
+00:02:43,442 --> 00:02:46,495
+Es la página que siguió el agente en la noche que imaginamos.
+
+25
+00:02:49,995 --> 00:02:54,592
+El agente de IA del equipo de datos revisa el cambio de Anil. Dos cosas pasan.
+
+26
+00:02:56,292 --> 00:03:02,801
+Luego, tres hallazgos, cada uno con dónde está y la regla, y lo que las verificaciones no decían: un borrador y quién decide.
+
+27
+00:03:04,501 --> 00:03:08,996
+Uno: nadie responde por ella, así que a ningún dueño se le avisaría de lo que toca un cambio.
+
+28
+00:03:10,496 --> 00:03:14,174
+Dos: diez columnas no dicen si identifican a una persona.
+
+29
+00:03:15,674 --> 00:03:21,218
+Cuenta, y no muestra valores: las siete filas de la columna de correo parecen un correo.
+
+30
+00:03:22,918 --> 00:03:28,963
+Tres, que ninguna verificación podía hallar: la facultad escribió una regla, solo sus títulos, y nada la verifica.
+
+31
+00:03:30,063 --> 00:03:32,682
+El borrador verifica que cada fila sea de Salud.
+
+32
+00:03:36,382 --> 00:03:38,548
+Donde el agente no estaba seguro, lo dijo.
+
+33
+00:03:39,248 --> 00:03:42,982
+Dos columnas se parecen: códigos largos. Una representa a un estudiante.
+
+34
+00:03:44,282 --> 00:03:49,612
+La otra tiene dos valores para siete estudiantes, y su descripción dice que sale del título.
+
+35
+00:03:51,112 --> 00:03:56,942
+Quizá no sea una persona. Pero ante la duda, dice la lista de verificación, propón la clase más estricta, y pregunta.
+
+36
+00:03:58,442 --> 00:04:01,111
+Anil confirma: un programa, no una persona.
+
+37
+00:04:02,411 --> 00:04:06,854
+Así que se clasifica como que no identifica a nadie, con la razón de Anil en la revisión.
+
+38
+00:04:08,354 --> 00:04:15,500
+Luego, primero se escribe el significado: la facultad pone sus clases y su regla en el glosario, y Yusuf nombra al nuevo dueño.
+
+39
+00:04:16,600 --> 00:04:22,353
+Jun, del equipo de datos, revisa el cambio contra ellos, y a los dueños se les avisa de lo que toca.
+
+40
+00:04:24,253 --> 00:04:25,813
+Los asesores reciben su lista.
+
+41
+00:04:27,113 --> 00:04:32,515
+El agente no decidió nada. Llevó cada decisión a la persona indicada, con la evidencia.
+
+42
+00:04:35,815 --> 00:04:40,969
+La carpeta 26 dice: el uso de IA sigue las políticas de datos de la organización.
+
+43
+00:04:42,069 --> 00:04:45,744
+También al agente lo gobiernan las reglas para asistentes de IA.
+
+44
+00:04:47,244 --> 00:04:53,198
+Tiene su propia identidad, lee solo lo que Sam le concede y escribe solo en su propio espacio de trabajo.
+
+45
+00:04:54,698 --> 00:05:00,614
+Trabaja con conteos y muestras pequeñas, nunca con datos personales en masa, y solo lee el glosario.
+
+46
+00:05:02,114 --> 00:05:06,163
+Y no puede aprobar: lo hace el equipo de datos, y el agente no es dueño de nada.
+
+47
+00:05:07,663 --> 00:05:10,985
+Por eso, en la noche que imaginamos, solo dejó una nota.
+
+48
+00:05:12,485 --> 00:05:19,219
+Así que la línea de la carpeta se pone verde: se ejecuta en los accesos del agente, su lista y la aprobación del equipo de datos.
+
+49
+00:05:22,719 --> 00:05:26,744
+Un agente solo puede seguir lo escrito con claridad, lo bastante para verificarlo.
+
+50
+00:05:27,844 --> 00:05:34,301
+Recuerda la última línea de la política 12: “El personal cuida de usar bien los términos”. Ningún agente puede verificar el cuidado.
+
+51
+00:05:35,901 --> 00:05:40,129
+Y la lista de verificación está a la vista: cualquiera puede leerla y discutirla.
+
+52
+00:05:41,329 --> 00:05:47,966
+Un cambio a la lista se revisa como cualquier otro: lo aprueba gobernanza de datos, y la siguiente revisión lo sigue.
+
+53
+00:05:49,266 --> 00:05:52,559
+La gente confía en una revisión que puede leer, cuestionar y anular.
+
+54
+00:05:55,859 --> 00:05:59,487
+Esa noche, dentro de unos años, está hecha de lo que acabas de ver:
+
+55
+00:05:59,687 --> 00:06:06,624
+una lista de verificación simple, reglas para asistentes de IA, un registro de quién es dueño de qué, y personas que deciden.
+
+56
+00:06:08,324 --> 00:06:15,792
+Lo que gana la gobernanza de datos: cada cambio verificado con las mismas reglas, a toda hora, sin esperar a una sola persona.
+
+57
+00:06:17,092 --> 00:06:24,418
+Datos personales marcados antes de que alguien los vea, y cada decisión tomada por la persona indicada, con la evidencia, por escrito.
+
+58
+00:06:26,118 --> 00:06:28,909
+Un agente revisa lo escrito. Las personas deciden.

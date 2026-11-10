@@ -1,0 +1,8 @@
+name: Clara Jensen
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: product owner
+- assignment: requester
+status: confirmed

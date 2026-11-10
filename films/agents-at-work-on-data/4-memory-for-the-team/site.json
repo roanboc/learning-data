@@ -1,0 +1,32 @@
+{
+  "kicker": "Memory for the team",
+  "kicker_es": "Memoria para el equipo",
+  "title_es": "Memoria: de un chat al equipo",
+  "h1": "Memory: let every agent learn from every chat",
+  "h1_es": "Memoria: que cada agente aprenda de cada chat",
+  "lead": "In April, Jun's agent counted 37 students short on census day, and learned why in one chat. In June, Clara's agent made the same mistake, and her budget figures nearly went out short. So the team keeps such lessons in one memory every agent reads: each approved by a person, with no names.",
+  "lead_es": "En abril, al agente de Jun le faltaron 37 estudiantes en el censo, y en un chat supo por qué. En junio, el de Clara repitió el error, y sus cifras de presupuesto casi salen cortas. Ahora el equipo guarda cada lección en una memoria que leen todos los agentes, aprobada por una persona y sin nombres.",
+  "description": "A film about memory for AI agents, the fourth of Agents at work on data: near Washington in 1974, a jet struck a ridge in cloud after its crew read \"cleared for the approach\" as leave to go down at once, six weeks after another airline's crew had narrowly missed the same ridge and warned only its own pilots; from 1976, a reporting system where every pilot, controller and mechanic could tell what went wrong in confidence, without a penalty for an honest mistake, to NASA, which took out the names and sent what mattered to everyone who needed it; at the university, a lesson Jun's agent learned in one chat never reaches Clara's; Tulving's two kinds of memory, and what an agent keeps: a session's record, and lasting facts, preferences and decisions; memory the team shares, proposed by an agent and approved by a person, without names, and corrected when it's wrong; and memory poisoning, a planted line a person turns down.",
+  "description_es": "Una película sobre la memoria de los agentes de IA, la cuarta de Agentes trabajando con datos: cerca de Washington, en 1974, un avión chocó contra una cresta entre las nubes después de que su tripulación entendiera «autorizados para la aproximación» como permiso para descender de inmediato, seis semanas después de que la tripulación de otra aerolínea casi chocara contra la misma cresta y avisara solo a sus propios pilotos; desde 1976, un sistema de reportes donde cada piloto, controlador y mecánico podía contar en confianza lo que salió mal, sin castigo por un error honesto, a la NASA, que quitaba los nombres y enviaba lo importante a quien lo necesitaba; en la universidad, una lección que el agente de Jun aprendió en un chat nunca llega al de Clara; los dos tipos de memoria de Tulving, y lo que guarda un agente: el registro de una sesión, y hechos, preferencias y decisiones duraderos; una memoria que comparte el equipo, propuesta por un agente y aprobada por una persona, sin nombres, y corregida cuando se equivoca; y el envenenamiento de memoria, una línea plantada que una persona rechaza.",
+  "card": "A lesson Jun's agent learned in one chat never reached Clara's. The team's memory, approved by a person, now reaches every agent.",
+  "card_es": "Lo que aprendió el agente de Jun en un chat no llegó al de Clara. La memoria del equipo, aprobada por una persona, llega a todos.",
+  "chapters_es": {
+    "approach": "Autorizados para la aproximación",
+    "onechat": "Un chat",
+    "weeks": "Semanas después",
+    "kinds": "Una sesión, y lo que perdura",
+    "team": "Memoria para el equipo",
+    "wrong": "Cuando la memoria se equivoca",
+    "every": "Cada tripulación"
+  },
+  "past": [
+    "Virginia and California, 1974 to 1976: a crash, and a reporting system for every crew",
+    "A lesson one crew keeps can't save the next. Told in confidence, read by a person and shared without names, it reaches every crew."
+  ],
+  "past_es": [
+    "Virginia y California, 1974 a 1976: un accidente, y un sistema de reportes para cada tripulación",
+    "Una lección que guarda una tripulación no salva a la siguiente. Contada en confianza, leída por una persona y compartida sin nombres, llega a todas."
+  ],
+  "next_h": "You've seen how what one chat learns can reach every agent: reviewed by a person, kept without names, corrected when it's wrong. Next: plan, define the check, do, check.",
+  "next_h_es": "Viste cómo lo que aprende un chat puede llegar a todos los agentes: revisado por una persona, guardado sin nombres, corregido cuando se equivoca. Después: planificar, definir la comprobación, hacer, comprobar."
+}

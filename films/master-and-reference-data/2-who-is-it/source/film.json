@@ -1,0 +1,21 @@
+{
+  "key": "who-is-it",
+  "title": "Who is it?",
+  "sub": "The same one, everywhere, a series on master and reference data: a village takes the wrong man for Martin Guerre; master and reference data, told apart; what a master, or golden, record is; a duplicate check that compares only records that share something; Linh's two student numbers, linked by a steward, with a reason; HR's record of her, scored weight by weight, its birth date one digit apart; two students who share a number but are two people; why a false merge costs more than a missed match; links that can be undone; and the queue, the test and the tables that keep each decision.",
+  "howto": "The film is drawn in watercolour. Each role has its own colour: student teal, applicant amber, tutor violet, researcher coral, alumna green. A record wears its role's colour; the master record is left as white paper. Gold is the steward's: the band where a person decides, and each decision card. A cross is red ink.",
+  "src": [
+    "fonts.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": ["guerre", "two", -0.3],
+  "say": [
+    ["\\bNguyen\\b", "Nwin"],
+    ["\\bLinh's\\b", "Lin's"],
+    ["\\bLinh\\b", "Lin"],
+    ["\\bHR's\\b", "H R's"],
+    ["\\bHR\\b", "H R"],
+    ["\\bGuerre\\b", "Gair"],
+    ["\\bBertrande\\b", "Bair-trahnd"]
+  ]
+}

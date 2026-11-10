@@ -1,0 +1,195 @@
+1
+00:00:01,600 --> 00:00:09,346
+Es semana de graduación, y el vicerrector quiere una cifra para su discurso: ¿cuántas credenciales otorgamos este año?
+
+2
+00:00:10,046 --> 00:00:12,400
+Cuatro oficinas responden, con cuatro cifras.
+
+3
+00:00:13,100 --> 00:00:27,276
+Registro académico dice 7.420. Cursos cortos, 10.600. Empleabilidad, 14.650. La plataforma de aprendizaje, 26.900.
+
+4
+00:00:28,576 --> 00:00:33,579
+Nadie se equivoca. Cada oficina cuenta una idea distinta, bajo la misma palabra.
+
+5
+00:00:34,779 --> 00:00:39,550
+Para entenderlo, hay que volver atrás. Antes de las computadoras, antes de la escritura, antes de las palabras.
+
+6
+00:00:45,850 --> 00:00:55,606
+En los años sesenta, unos investigadores mostraron cientos de fotos a palomas. Aprendieron a picotear las que tenían personas, incluso fotos que nunca habían visto.
+
+7
+00:00:56,906 --> 00:01:02,980
+Las abejas pueden aprender la idea de igual y distinto, y aplicarla a colores y patrones que nunca vieron.
+
+8
+00:01:04,280 --> 00:01:08,089
+Ni una palabra. Y aun así, cada una ordena el mundo en clases.
+
+9
+00:01:09,289 --> 00:01:12,732
+Primero vienen los conceptos. Las palabras llegan después, para señalarlos.
+
+10
+00:01:15,432 --> 00:01:19,097
+Los monos vervet dan distintas llamadas de alarma para distintos cazadores.
+
+11
+00:01:19,797 --> 00:01:22,556
+La llamada del leopardo manda al grupo a los árboles.
+
+12
+00:01:23,456 --> 00:01:26,867
+La del águila los hace mirar arriba y meterse entre los arbustos.
+
+13
+00:01:27,767 --> 00:01:30,706
+La de la serpiente los hace pararse y revisar el pasto.
+
+14
+00:01:31,706 --> 00:01:36,042
+Cada llamada representa una clase de cosa, y todos los que la oyen saben qué hacer.
+
+15
+00:01:37,342 --> 00:01:44,649
+Algunos animales van más allá. Delfines, elefantes y titíes usan llamadas que funcionan como nombres, para un solo individuo.
+
+16
+00:01:45,949 --> 00:01:52,378
+Una clase de cosa, y una cosa en particular: categorías e identificadores. Todo modelo de datos necesita ambos.
+
+17
+00:01:55,078 --> 00:01:58,950
+Un bebé señala antes de hablar, para compartir contigo lo que está mirando.
+
+18
+00:02:00,150 --> 00:02:04,089
+Esa atención compartida es la raíz de toda palabra: este, aquí, ese.
+
+19
+00:02:05,389 --> 00:02:13,257
+Las palabras humanas van más allá que cualquier llamada. Se combinan sin límite, y alcanzan lo que no está aquí: ayer, una promesa, una regla.
+
+20
+00:02:14,657 --> 00:02:20,970
+Incluso lo que alguien sabe. No se ve. Por eso siempre hemos necesitado palabras, y después registros, para mostrarlo.
+
+21
+00:02:22,370 --> 00:02:27,224
+¿Cuándo empezó el habla? Nadie lo sabe con exactitud. Las palabras no dejan fósiles.
+
+22
+00:02:29,924 --> 00:02:39,401
+En el cerebro humano, se han encontrado neuronas que responden a una sola persona: a sus fotos, a un dibujo suyo, incluso a su nombre escrito.
+
+23
+00:02:40,501 --> 00:02:42,000
+Muchas formas, una idea.
+
+24
+00:02:43,300 --> 00:02:50,503
+Piénsalo como un triángulo. Una palabra apunta a una idea en la mente de alguien, y la idea apunta a cosas del mundo.
+
+25
+00:02:51,703 --> 00:02:56,705
+La palabra nunca toca la cosa directamente. En esa distancia viven los malentendidos.
+
+26
+00:02:59,405 --> 00:03:04,715
+Un filósofo imaginó a un desconocido que señala un conejo que corre y dice: ¡gavagai!
+
+27
+00:03:05,415 --> 00:03:08,555
+¿Quiere decir el conejo? ¿Sus orejas? ¿Este momento de carrera?
+
+28
+00:03:10,055 --> 00:03:13,616
+Los niños resuelven esto todos los días. Primero suponen la cosa entera.
+
+29
+00:03:14,316 --> 00:03:19,537
+Pero toda palabra esconde una decisión: qué cuenta como uno. En modelado de datos se le llama el grano.
+
+30
+00:03:20,737 --> 00:03:29,551
+Las credenciales también tienen grano. Mei tiene un título y dos microcredenciales. Si cuentas egresados, es una. Si cuentas credenciales, son tres.
+
+31
+00:03:32,851 --> 00:03:39,577
+Pide a la gente que imagine un pájaro, y casi todos pensarán en un petirrojo o un gorrión. Casi nadie piensa en un pingüino.
+
+32
+00:03:40,277 --> 00:03:43,911
+Las categorías tienen miembros típicos en el centro, y bordes difusos.
+
+33
+00:03:44,611 --> 00:03:47,373
+En el centro estamos de acuerdo. En los bordes discutimos.
+
+34
+00:03:48,473 --> 00:03:57,615
+¿Un título es una credencial? Claro. ¿Una microcredencial? Probablemente. ¿Una insignia por asistir a un taller? Ahí las cuatro oficinas se separan.
+
+35
+00:04:03,315 --> 00:04:05,925
+Las palabras también se mueven. En inglés, nice antes quería decir tonto.
+
+36
+00:04:06,625 --> 00:04:15,004
+Credencial viene del latín creer. Enrolar era escribir un nombre en un rollo. Un diploma era una hoja de papel doblada en dos.
+
+37
+00:04:16,204 --> 00:04:22,645
+Los embajadores aún presentan sus cartas credenciales: cartas que piden al anfitrión confiar en quien las lleva.
+
+38
+00:04:23,345 --> 00:04:27,433
+El significado se mueve despacio, y la historia de una palabra suele explicar sus bordes.
+
+39
+00:04:30,133 --> 00:04:35,795
+De vuelta en la universidad, no hay ningún sistema a la vista. Solo cuatro oficinas y una hoja de papel.
+
+40
+00:04:36,895 --> 00:04:43,923
+Primero, ¿qué es una credencial? Una declaración confiable, que otros pueden verificar, de que alguien demostró lo que sabe o sabe hacer.
+
+41
+00:04:45,523 --> 00:04:53,341
+Los títulos y las microcredenciales son credenciales. También las insignias, si el aprendizaje se evaluó. Una insignia por asistir no lo es.
+
+42
+00:04:54,841 --> 00:04:59,602
+La receta es de Aristóteles: nombra la clase de cosa, y luego di qué la distingue.
+
+43
+00:05:00,902 --> 00:05:07,103
+Cada palabra recibe un responsable y una fecha, y el boceto gana una caja, a lápiz. Versión tres, borrador.
+
+44
+00:05:08,303 --> 00:05:14,930
+La respuesta para el discurso es 11.890. Y cada una de las cuatro cifras ahora tiene nombre.
+
+45
+00:05:16,030 --> 00:05:26,110
+Dos de ellas contaron cosas que no son credenciales: insignias por asistir y certificados de finalización. Nadie mintió. Hasta hoy, no había una pregunta acordada.
+
+46
+00:05:28,810 --> 00:05:38,580
+Nada de esto necesitó una computadora. Los contratos empiezan con sus definiciones. Las fusiones se traban en qué cuenta como cliente. El financiamiento depende de a quién se cuenta.
+
+47
+00:05:39,280 --> 00:05:46,189
+Ponerse de acuerdo en las palabras es trabajo de verdad: personas con necesidades distintas, concesiones y tiempo. No hacerlo cuesta mucho más.
+
+48
+00:05:47,489 --> 00:05:54,147
+Hace unos cinco mil años, la gente empezó a marcar la arcilla, para guardar registros que duraran más que la memoria.
+
+49
+00:05:55,647 --> 00:06:01,459
+De las mentes a las marcas, y a los sistemas. Pero antes de contar algo, hay que acordar qué es.

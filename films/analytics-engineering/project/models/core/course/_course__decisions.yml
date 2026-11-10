@@ -1,0 +1,17 @@
+# Decisions about the course domain: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: domain, name: course, code: CRS}
+
+decisions:
+
+  - id: DEC-CRS-01
+    step: build
+    title: The award needs no intermediate step
+    text: The award has one source and nothing to resolve, so core_award reads its staging model directly.
+    why: An intermediate step is for matching keys, stitching timelines and applying rules; the award needs
+      none of them (docs/conventions.md, Layers).
+    status: agreed
+    implemented_in: [core_award]

@@ -1,0 +1,35 @@
+# Three targets. DuckDB runs anywhere, with no account; Databricks is for the author's workspace; agent, below.
+# dbt Cloud ignores this file: there, the connection and credentials live in the environment.
+credentials:
+  target: duckdb
+  outputs:
+
+    duckdb:
+      type: duckdb
+      path: target/credentials.duckdb
+      schema: dev
+      threads: 4
+
+    databricks:
+      type: databricks
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      catalog: "{{ env_var('DATABRICKS_CATALOG') }}"
+      schema: "{{ env_var('DATABRICKS_SCHEMA', 'dev') }}"
+      threads: 4
+
+    # An agent's run, under its own name: its service principal signs in with a pass GitHub gives the run, which
+    # the run writes to a file (agents/<agent>/workflow.yml) and Databricks takes because the service principal's
+    # federation policy names the repository and the run's environment. There's no secret for the agent to see or
+    # leak: a pass lasts minutes. It builds only in schemas of its own in the development catalog, as its grants allow.
+    agent:
+      type: databricks
+      auth_type: file-oidc
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+      client_id: "{{ env_var('DATABRICKS_CLIENT_ID') }}"
+      oidc_token_filepath: "{{ env_var('DATABRICKS_OIDC_TOKEN_FILEPATH') }}"
+      catalog: "{{ env_var('DATABRICKS_CATALOG') }}"
+      schema: "{{ env_var('DBT_AGENT_SCHEMA') }}"
+      threads: 4

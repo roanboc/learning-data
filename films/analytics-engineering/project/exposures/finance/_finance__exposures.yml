@@ -1,0 +1,124 @@
+exposures:
+
+  - name: revenue_forecast
+    label: Revenue forecast
+    type: analysis
+    maturity: medium
+    description: >
+      Finance's revenue forecast for next year: the tuition that recognised credit saves learners,
+      by faculty, as at census date. Declared with the question, before anything was built. Its
+      mart pins the core versions it reads, so a new version reaches Finance as a choice, with a
+      date, and the lineage names Finance among who to tell.
+    owner:
+      name: Finance
+      email: finance@uni.example
+    depends_on:
+      - ref('mart_finance__tuition_forgone')
+
+  - name: payroll_export
+    label: Payroll's export
+    type: application
+    maturity: high
+    description: >
+      The figures Finance receives every pay day: what casual staff are paid, by faculty and unit.
+      For years a script on one person's laptop made them; since March 2026 the job payroll_export
+      builds them at 06:00 on each pay day, deployed from the bundle the same way every time
+      (databricks.yml, resources/payroll_export.job.yml). A change to the export reaches Finance
+      through a pull request, and the lineage names Finance among who to tell.
+    owner:
+      name: Finance
+      email: finance@uni.example
+    depends_on:
+      - ref('mart_finance__casual_pay_paid')
+
+  # Casual teaching cost's readers (DEC-FIN-06): each reads the measure where it's defined, the
+  # metric view, as the person it acts for or as itself, with only what it may see. Databricks only,
+  # as the metric view is.
+  - name: casual_teaching_genie
+    label: Genie One, on casual teaching cost
+    type: application
+    maturity: high
+    description: >
+      Genie One answering Finance's questions about casual teaching cost, from the data team's Genie
+      Agent *Casual teaching cost* (examples/reports-on-demand/), whose one dataset is the metric view.
+      Each answer runs as the person asking, with their own Unity Catalog rights, and the row filter on
+      the claims shows a faculty's people their own faculty only.
+    owner:
+      name: "Sam, platform team"
+      email: platform@uni.example
+    depends_on:
+      - ref('casual_teaching_cost')
+    config:
+      enabled: "{{ target.type == 'databricks' }}"
+
+  - name: budget_pack
+    label: Finance's budget pack
+    type: dashboard
+    maturity: high
+    description: >
+      Finance's budget pack, a Power BI report. Since pay day, 5 November 2026, it reads the measure from
+      Databricks itself, through Power BI's Azure Databricks connector, in DirectQuery, with a native
+      query that asks for MEASURE(casual_teaching_cost) by name (examples/more-readers-than-people/),
+      each analyst signed in as themselves. Built through the Fabric mirror, where metric views don't
+      appear, it had summed the pay paid under the measure's name.
+    owner:
+      name: "Rohan Desai, Finance"
+      email: rohan.desai@uni.example
+    depends_on:
+      - ref('casual_teaching_cost')
+    config:
+      enabled: "{{ target.type == 'databricks' }}"
+
+  - name: tutor_planning
+    label: The faculties' tutor planning
+    type: application
+    maturity: high
+    description: >
+      The app the faculties plan their tutors in, built by the data team with Databricks Apps: what
+      casual teaching has cost the faculty so far, beside the tutor hours each unit will need. It reads
+      as the person using it (user authorization, with the sql scope, so it may only run queries for
+      them), and the row filter on the claims shows each faculty its own numbers: nothing in the app's
+      code decides who sees what (examples/more-readers-than-people/).
+    owner:
+      name: The faculties
+      email: faculties@uni.example
+    depends_on:
+      - ref('casual_teaching_cost')
+    config:
+      enabled: "{{ target.type == 'databricks' }}"
+
+  - name: finance_payday_agent
+    label: Finance's pay-day agent
+    type: application
+    maturity: medium
+    description: >
+      The agent that drafts Rohan's pay-day note to the deans, each faculty's casual teaching cost so
+      far. It works alone, on a schedule, as a service principal of its own, finance-payday-agent, and
+      asks Genie One through Genie One's MCP server: it may use that server and read the metric view,
+      never the claims under it (examples/more-readers-than-people/). Its instructions say "sessional
+      teaching cost", one of the measure's synonyms. It drafts; Rohan checks the note and sends it.
+    owner:
+      name: "Rohan Desai, Finance"
+      email: rohan.desai@uni.example
+    depends_on:
+      - ref('casual_teaching_cost')
+    config:
+      enabled: "{{ target.type == 'databricks' }}"
+
+  - name: faculty_totals_share
+    label: The share with a group of universities
+    type: application
+    maturity: high
+    description: >
+      What a group of universities that compares teaching costs reads, through the OpenSharing share
+      teaching_costs (examples/more-readers-than-people/): casual teaching cost by faculty, for the
+      teaching periods Finance has reported, from mart_finance__faculty_totals. Their own system reads
+      it where it lives, so there's no copy to keep up to date. Totals by faculty, never by unit: a unit
+      with one tutor would give away that tutor's pay (Ingrid Holm, HR).
+    owner:
+      name: "Sam, platform team"
+      email: platform@uni.example
+    depends_on:
+      - ref('mart_finance__faculty_totals')
+    config:
+      enabled: "{{ target.type == 'databricks' }}"

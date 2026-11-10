@@ -1,0 +1,207 @@
+1
+00:00:01,400 --> 00:00:08,466
+Kenia, 2007. Un hombre que trabaja en Nairobi envía parte de su sueldo a su familia, en el interior.
+
+2
+00:00:09,766 --> 00:00:13,847
+El dinero va con un conductor de autobús o con un amigo, y no todo llega.
+
+3
+00:00:15,347 --> 00:00:19,970
+Un operador celular fija una nueva estrategia: llevar dinero, además de llamadas.
+
+4
+00:00:21,470 --> 00:00:27,127
+En marzo, lanza M-Pesa: dinero enviado desde un teléfono, confirmado con un mensaje de texto.
+
+5
+00:00:28,427 --> 00:00:32,369
+Esa estrategia cabe en una frase. Hacerla realidad exige mucho más.
+
+6
+00:00:33,669 --> 00:00:37,942
+El banco central lo permite, con el dinero de los clientes en fideicomiso en un banco.
+
+7
+00:00:39,042 --> 00:00:44,179
+Las tiendas que venden recargas se vuelven agentes: cambian efectivo por dinero móvil, y al revés.
+
+8
+00:00:45,279 --> 00:00:50,773
+Los clientes se registran con su identificación, y un menú corto funciona en los teléfonos más simples.
+
+9
+00:00:52,073 --> 00:00:57,106
+Esa sola frase llega a cada capa, hasta el mostrador de la tienda, donde la gente la encuentra.
+
+10
+00:01:04,206 --> 00:01:08,455
+La nota de Tomás pregunta qué implica para los datos un cambio de estrategia.
+
+11
+00:01:09,755 --> 00:01:13,569
+En noviembre, el gobierno, dueño de la empresa, envía una directiva.
+
+12
+00:01:14,269 --> 00:01:22,598
+Desde el primero de julio, todo hogar elegible recibe una tarifa social, un descuento en su factura, automáticamente y sin formularios.
+
+13
+00:01:24,198 --> 00:01:30,663
+Quién es elegible lo sabe otra organización, la agencia de servicios sociales, no la empresa.
+
+14
+00:01:32,163 --> 00:01:35,312
+El despacho del ministro pregunta qué hará falta, para mañana.
+
+15
+00:01:38,012 --> 00:01:41,035
+Como con M-Pesa, la frase es la parte fácil.
+
+16
+00:01:42,335 --> 00:01:45,059
+Tomás la sigue mapa abajo, capa por capa.
+
+17
+00:01:46,159 --> 00:01:52,994
+En la motivación: un nuevo impulsor, la directiva, bajo una meta que la empresa ya tiene, mantener las facturas asequibles.
+
+18
+00:01:54,294 --> 00:01:57,819
+Y un resultado que comprobar: hogares elegibles con la tarifa.
+
+19
+00:01:59,319 --> 00:02:05,367
+En la estrategia, tres capacidades: vender energía, atender a los clientes y cumplir las obligaciones.
+
+20
+00:02:06,667 --> 00:02:12,675
+En el negocio: un producto nuevo, un paso nuevo en la facturación y un nuevo socio, la agencia, con un acuerdo.
+
+21
+00:02:13,975 --> 00:02:18,461
+En la información: un nuevo objeto de negocio, la elegibilidad, con sus fechas.
+
+22
+00:02:19,761 --> 00:02:25,976
+Y en lo que la hace funcionar: el sistema de facturación, el de clientes y un intercambio seguro con la agencia.
+
+23
+00:02:27,276 --> 00:02:32,424
+Cada elemento que toca tiene un responsable. Así, el recorrido es también la lista de quién debe aprobar.
+
+24
+00:02:37,924 --> 00:02:46,410
+La agencia ya sabe quién es elegible. Solo una vez, como en Tartu: no hacer que un hogar demuestre lo que el gobierno ya sabe.
+
+25
+00:02:48,010 --> 00:02:57,656
+Así que el acuerdo pide lo mínimo. La empresa envía los datos de sus titulares para el cruce. La agencia responde solo: elegible, desde esta fecha.
+
+26
+00:02:59,156 --> 00:03:01,161
+Nunca qué ayuda recibe un hogar.
+
+27
+00:03:02,661 --> 00:03:07,538
+Y el acuerdo se empieza hoy: acordarlo tomará más tiempo que cambiar los sistemas.
+
+28
+00:03:10,238 --> 00:03:16,393
+El primer borrador de Tomás envía la lista también a la red, para aplicar el descuento sobre el cargo de red.
+
+29
+00:03:17,893 --> 00:03:23,804
+Ama lo contrasta con el tercer principio: la información de los clientes se queda en el negocio que la recogió.
+
+30
+00:03:25,104 --> 00:03:27,830
+La lista cruzaría el muro. Ella la tacha.
+
+31
+00:03:29,430 --> 00:03:35,807
+La decisión queda escrita, con su porqué: comercialización aplica todo el descuento, y nada nuevo cruza el muro.
+
+32
+00:03:37,407 --> 00:03:42,068
+Contrastada primero con los principios, una decisión difícil se resuelve siempre igual.
+
+33
+00:03:44,768 --> 00:03:49,445
+La elegibilidad trae reglas nuevas, y cada una recibe un hogar, un responsable y una razón.
+
+34
+00:03:50,745 --> 00:03:56,665
+El descuento se aplica a cada factura desde la fecha que da la agencia. Su razón es la directiva.
+
+35
+00:03:58,165 --> 00:04:02,675
+Una respuesta se guarda solo hasta el siguiente cruce. Su razón es el acuerdo.
+
+36
+00:04:04,175 --> 00:04:10,317
+Y solo la facturación la lee. En el catálogo, el centro de llamadas ve «con tarifa social», y nada más.
+
+37
+00:04:13,017 --> 00:04:19,198
+Luego, hasta el mostrador, donde llega a los hogares: una línea en la factura, una carta y la respuesta del centro de llamadas.
+
+38
+00:04:21,098 --> 00:04:28,975
+Farah pregunta a quién dejará fuera el cruce: inquilinos con la cuenta a nombre del dueño. La agencia los conoce; la empresa, no.
+
+39
+00:04:31,075 --> 00:04:36,620
+Detectados ahora, y no en las primeras facturas, tienen una segunda vía: una solicitud, más adelante en el año.
+
+40
+00:04:39,720 --> 00:04:48,814
+Las facturas llevan ahora una línea de descuento: el producto de cuentas y facturas suma una columna para ella. «Total a pagar» conserva su sentido: lo que paga el hogar.
+
+41
+00:04:50,714 --> 00:05:00,804
+Una columna nueva no rompe a quienes leen el producto, así que el contrato sigue en la versión uno. Una segunda versión es el último recurso, para quitar o redefinir una columna.
+
+42
+00:05:02,704 --> 00:05:12,037
+El linaje encuentra a quien lo lee: una medida, un informe para el regulador y un proceso de cobranza. Cada responsable se entera antes de las primeras facturas.
+
+43
+00:05:13,937 --> 00:05:20,122
+El intercambio con la agencia también tiene su propio contrato: qué se envía, qué vuelve y cada cuánto.
+
+44
+00:05:22,822 --> 00:05:27,014
+El camino se dibuja en mesetas, en el orden que permiten sus dependencias.
+
+45
+00:05:28,314 --> 00:05:36,734
+Para el primero de julio: el cruce, las facturas y la respuesta del centro de llamadas. Para diciembre: la segunda vía. El año próximo: el resultado, medido.
+
+46
+00:05:39,434 --> 00:05:47,109
+Por la mañana, el despacho del ministro tiene una página: qué cambia, quién responde por cada cambio, qué estará listo en julio y qué no.
+
+47
+00:05:48,709 --> 00:05:53,633
+Lo que una organización con mapa responde en un día, una sin mapa lo descubre en producción.
+
+48
+00:05:56,333 --> 00:06:03,830
+El primero de julio, las primeras facturas llevan el descuento. Cerca de nueve de cada diez hogares elegibles lo reciben sin pedirlo.
+
+49
+00:06:05,330 --> 00:06:14,110
+Y quien dirige comercialización confirma la medida que Farah pide desde 2024: hogares que se atrasan. Ahora la meta se puede dirigir.
+
+50
+00:06:15,710 --> 00:06:22,736
+En Kenia, en pocos años, la mayoría de los hogares tenía a alguien que usaba M-Pesa, y el dinero enviado a casa llegaba en minutos.
+
+51
+00:06:24,436 --> 00:06:34,213
+La nota de Tomás tiene una respuesta: un cambio de estrategia llega a cada capa y, recorrido mapa abajo, es una lista de responsables, reglas y contratos, en orden.
+
+52
+00:06:35,813 --> 00:06:41,205
+Pero un mapa que se usa cada semana se desactualiza. Después: un mapa que pueden leer personas y agentes.

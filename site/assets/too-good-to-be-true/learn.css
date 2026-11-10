@@ -1,0 +1,21 @@
+/* Too good to be true: the few lab pieces site.css doesn't have. Labs are always dark, like the film (site.css: .lab). */
+.tg-sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 18px}
+.tg-sliders label{display:grid;gap:4px}
+.tg-sliders input[type=range]{width:100%;accent-color:#ffbe5a}
+.tg-sliders label:last-child input[type=range]{accent-color:#ff6a60}
+.tg-sliders .lbl b{color:var(--sfg);font-family:var(--mono);font-weight:500;margin-left:4px}
+.tg-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 16px 12px}
+.tg-stats p{margin:0;padding:10px 12px;border-radius:12px;background:rgba(16,26,50,.7);border:1px solid var(--sline);display:grid;gap:2px}
+.tg-stats b{font-size:26px;line-height:1.1}
+.tg-stats span{font-size:13px;color:var(--smuted)}
+.tg-stats .ok{border-color:rgba(127,240,180,.55)}.tg-stats .ok b{color:#7ff0b4}
+.tg-stats .no{border-color:rgba(255,143,134,.6)}.tg-stats .no b{color:#ff8f86}
+@media (max-width:520px){.tg-stats{grid-template-columns:1fr}}
+.tg-checks{display:flex;flex-wrap:wrap;gap:6px 14px}
+.tg-checks label{display:inline-flex;gap:6px;align-items:center;font-size:14px;color:var(--sfg);cursor:pointer}
+.tg-checks input{accent-color:#78c8ff;width:18px;height:18px}
+.tg-list{list-style:none;margin:0;padding:0 16px 12px;display:grid;gap:6px}
+.tg-list li{padding:8px 12px 8px 36px;border-radius:10px;background:rgba(16,26,50,.7);border:1px solid var(--sline);position:relative;font-size:14px}
+.tg-list li::before{position:absolute;left:12px;top:7px;font-weight:800}
+.tg-list li.ok{border-color:rgba(127,240,180,.55)}.tg-list li.ok::before{content:"✓";color:#7ff0b4}
+.tg-list li.no{border-color:rgba(255,143,134,.6)}.tg-list li.no::before{content:"✗";color:#ff8f86}

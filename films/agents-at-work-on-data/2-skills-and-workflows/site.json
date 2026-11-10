@@ -1,0 +1,32 @@
+{
+  "kicker": "Playbooks for agents",
+  "kicker_es": "Guías para agentes",
+  "title_es": "Skills y flujos de trabajo",
+  "h1": "Skills and workflows: solve it once, reuse it",
+  "h1_es": "Skills y flujos de trabajo: resolver una vez, reutilizar",
+  "lead": "Each time Jun's team reconciled the census-day count, the agent started from nothing: the causes found before stayed in one chat, one note, one email. Now one skill holds them, a router picks it, and a nightly workflow calls the agent only when the numbers don't agree, and a person decides.",
+  "lead_es": "Cada vez que el equipo de Jun conciliaba el conteo del día del censo, el agente empezaba de cero: las causas ya halladas quedaban en un chat, una nota, un correo. Ahora una skill las guarda, un router la elige y un flujo nocturno llama al agente solo si las cifras no coinciden, y decide una persona.",
+  "description": "A film about turning a data team's know-how into skills and workflows that agents reuse: al-Khwarizmi's book of completion and balancing, written in Baghdad about 820, where two moves bring any problem to one of six forms, each with its own steps, proved with a drawn square and earned on real cases of inheritance; a census-day count reconciled again and again, its causes found before and settled by a person, but kept in one chat, one note, one email, so the agent starts from nothing and may settle a cause another way; a skill earned by doing the job once more by hand, with its name, the line that says when to use it, its steps and every cause met so far, how it shows, what settled it and who decided; an agent that reads only each skill's name and line, and loads its steps when a job needs them; a router, a skill whose only job is to choose, which says so when no skill fits and asks a person; a workflow that runs the known steps every night, the same way every time, and calls the agent only when the numbers don't agree; and a night in October when a new cause turns up, a person decides, and it's written down, so it's never solved twice.",
+  "description_es": "Una película sobre cómo convertir lo que sabe un equipo de datos en skills y flujos de trabajo que los agentes reutilizan: el libro de al-Juarismi sobre completar y equilibrar, escrito en Bagdad hacia el año 820, donde dos movimientos llevan cualquier problema a una de seis formas, cada una con sus pasos, probados con un cuadrado dibujado y aprendidos en casos reales de herencias; un conteo del día del censo conciliado una y otra vez, con causas ya halladas y resueltas por una persona, pero guardadas en un chat, una nota, un correo, así que el agente empieza de cero y puede resolver una causa de otra forma; una skill que se gana haciendo la tarea una vez más a mano, con su nombre, la línea que dice cuándo usarla, sus pasos y cada causa vista hasta ahora: cómo se nota, qué la resolvió y quién decidió; un agente que lee solo el nombre y la línea de cada skill, y carga sus pasos cuando una tarea los necesita; un router, una skill cuya única tarea es elegir, que lo dice cuando ninguna skill sirve y le pregunta a una persona; un flujo de trabajo que ejecuta cada noche los pasos conocidos, siempre de la misma forma, y llama al agente solo cuando las cifras no coinciden; y una noche de octubre en que aparece una causa nueva, decide una persona y queda escrita, para que nunca se resuelva dos veces.",
+  "card": "A job done once by hand becomes a skill every agent reuses; a nightly workflow calls the agent only when the numbers differ.",
+  "card_es": "Lo hecho una vez a mano se vuelve una skill que todo agente reutiliza; un flujo nocturno llama al agente si las cifras difieren.",
+  "chapters_es": {
+    "book": "Completar y equilibrar",
+    "again": "Resuelto otra vez, desde cero",
+    "skill": "Una skill, ganada a mano",
+    "router": "Un router elige la skill",
+    "workflow": "Un flujo de trabajo ejecuta lo conocido",
+    "night": "Una noche, un caso nuevo",
+    "close": "Resuélvelo una vez"
+  },
+  "past": [
+    "Baghdad, about 820: al-Khwarizmi's book of completion and balancing",
+    "Solve it once, write it down, reuse it."
+  ],
+  "past_es": [
+    "Bagdad, hacia el año 820: el libro de al-Juarismi sobre completar y equilibrar",
+    "Resuélvelo una vez, escríbelo, reutilízalo."
+  ],
+  "next_h": "You've seen how a job solved once by hand becomes a skill every agent reuses, picked by a router and run by a workflow that calls the agent only where thinking is needed. Next: tools are hands, and every hand is a permission.",
+  "next_h_es": "Viste cómo una tarea resuelta una vez a mano se vuelve una skill que todo agente reutiliza, elegida por un router y ejecutada por un flujo de trabajo que llama al agente solo donde hace falta pensar. Después: las herramientas son manos, y cada mano es un permiso."
+}

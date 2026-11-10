@@ -1,0 +1,243 @@
+1
+00:00:01,600 --> 00:00:10,109
+El 18 de junio de 1914, una multitud bordea el río Sena, a las afueras de París, para un concurso de seguridad aérea.
+
+2
+00:00:11,409 --> 00:00:17,092
+El último en volar es Lawrence Sperry, un joven estadounidense, con su mecánico francés, Emil Cachin.
+
+3
+00:00:18,392 --> 00:00:20,471
+Volar es un trabajo duro y agotador.
+
+4
+00:00:21,571 --> 00:00:26,796
+Cuando una ráfaga inclina un ala, el piloto tiene que nivelarla otra vez, enseguida, durante todo el vuelo.
+
+5
+00:00:28,296 --> 00:00:30,759
+En un vuelo largo, le duelen los brazos y la espalda.
+
+6
+00:00:32,059 --> 00:00:36,572
+Y si está cansado, o es lento, un avión inclinado puede resbalar de lado, y caer.
+
+7
+00:00:38,272 --> 00:00:39,712
+Algo tiene que cambiar.
+
+8
+00:00:41,412 --> 00:00:49,968
+La respuesta de Sperry: una caja de cuatro giroscopios, ruedas que giran tan rápido que apuntan siempre igual, aunque el avión se mueva.
+
+9
+00:00:51,468 --> 00:00:56,978
+Cada vez que el avión se inclina, la caja lo nota, y unos pistones movidos por aire lo nivelan otra vez.
+
+10
+00:00:58,678 --> 00:01:01,952
+Sobre el río, Sperry suelta los mandos, y levanta las manos.
+
+11
+00:01:03,652 --> 00:01:05,436
+Cachin sale y camina por el ala.
+
+12
+00:01:06,536 --> 00:01:09,875
+El avión se hunde bajo su peso, y la caja lo endereza.
+
+13
+00:01:11,575 --> 00:01:16,134
+Los jueces dan el primer premio a Sperry: ahora un piloto puede soltar los mandos y descansar.
+
+14
+00:01:17,434 --> 00:01:24,851
+Su caja se convirtió en el piloto automático: hoy, los pilotos de línea vuelan a mano solo unos minutos de un vuelo típico.
+
+15
+00:01:26,351 --> 00:01:28,956
+Y siguen en sus asientos, para vigilar, y decidir.
+
+16
+00:01:30,456 --> 00:01:37,434
+La caja de Sperry tiene manos, una verificación y un bucle, pero no un modelo: hace un solo trabajo conocido, siempre igual.
+
+17
+00:01:38,934 --> 00:01:42,659
+Pon un modelo que razona dentro de ese bucle, y tienes un agente.
+
+18
+00:01:49,959 --> 00:01:56,110
+Hoy, en la universidad, Planificación pregunta a Jun cómo cambió el conteo del día del censo desde el año pasado.
+
+19
+00:01:57,410 --> 00:02:02,436
+El día del censo, el 31 de marzo, es cuando la universidad cuenta quién está estudiando.
+
+20
+00:02:03,936 --> 00:02:10,411
+A mano, es una tarde de pequeñas correcciones: buscar las tablas, leer las reglas, consultar, verificar, corregir.
+
+21
+00:02:12,111 --> 00:02:18,313
+Así que Jun se lo encarga a un agente, que da los pasos y verifica su propio trabajo, mientras él revisa y decide.
+
+22
+00:02:21,613 --> 00:02:24,655
+Un agente tiene cuatro partes, y la primera es un modelo.
+
+23
+00:02:26,555 --> 00:02:31,219
+Ha aprendido de una enorme cantidad de textos, y escribe lo que probablemente viene después.
+
+24
+00:02:33,519 --> 00:02:40,136
+Pídele el conteo del día del censo, y lo mejor que escribirá es una conjetura: nunca vio los registros de la universidad.
+
+25
+00:02:42,436 --> 00:02:46,182
+Por sí solo, un modelo no puede consultar nada, ni verificar lo que escribió.
+
+26
+00:02:50,082 --> 00:02:51,800
+La segunda parte es el razonamiento.
+
+27
+00:02:52,900 --> 00:02:57,380
+Antes de actuar, el modelo escribe un plan: buscar las tablas, contar los estudiantes,
+
+28
+00:02:57,580 --> 00:03:01,964
+y comparar el total con el informe del censo, el conteo oficial de la universidad.
+
+29
+00:03:03,464 --> 00:03:11,652
+Compara el plan con las reglas del equipo de Jun: solo herramientas de la universidad, solo leer, y evidencia para cada respuesta.
+
+30
+00:03:13,152 --> 00:03:17,287
+Lee cada resultado como retroalimentación, y cambia el plan si hace falta.
+
+31
+00:03:18,387 --> 00:03:21,247
+Razonar es retroalimentación, y verificar contra reglas.
+
+32
+00:03:24,547 --> 00:03:28,849
+La tercera parte son las manos: un modelo no abre una tabla; las herramientas, sí.
+
+33
+00:03:30,349 --> 00:03:38,769
+El agente de Jun tiene tres: Catalog, que lista las tablas; Query, que lee los datos; y Docs, con las definiciones de la universidad.
+
+34
+00:03:40,469 --> 00:03:44,702
+Cada una la ofrece un servidor de herramientas: un pequeño programa para agentes.
+
+35
+00:03:46,202 --> 00:03:52,960
+Se conectan con un estándar abierto, el Model Context Protocol, así que cualquier agente que lo siga puede usarlas.
+
+36
+00:03:54,660 --> 00:04:00,949
+Este trabajo solo necesita leer, así que estas tres solo pueden leer: su cuenta no puede cambiar ni una fila.
+
+37
+00:04:04,649 --> 00:04:09,641
+La cuarta parte es un bucle: planificar, actuar, verificar, y otra vuelta, hasta cumplir el objetivo.
+
+38
+00:04:11,341 --> 00:04:15,542
+El agente encuentra la tabla de estudiantes en Catalog, y cuenta con Query.
+
+39
+00:04:17,042 --> 00:04:21,791
+Luego la verificación: a su total le faltan 476 frente al informe del censo.
+
+40
+00:04:23,691 --> 00:04:27,749
+El modelo lee esa retroalimentación: ¿contó a los estudiantes como están hoy?
+
+41
+00:04:29,249 --> 00:04:34,669
+Lee la regla del censo en Docs: contar a cada estudiante según su registro el día del censo.
+
+42
+00:04:36,169 --> 00:04:40,134
+Una nueva consulta, con esa fecha, da 18,412.
+
+43
+00:04:41,634 --> 00:04:45,108
+Su total coincide con el informe del censo, y la verificación pasa.
+
+44
+00:04:47,008 --> 00:04:52,198
+A diferencia de la caja de Sperry, que solo sabe contrarrestar, el modelo decide qué probar después.
+
+45
+00:04:53,698 --> 00:04:58,468
+El bucle para cuando pasan las verificaciones, en su límite de intentos, o cuando necesita a una persona.
+
+46
+00:05:01,968 --> 00:05:10,200
+El agente le trae a Jun su respuesta: 18,412 estudiantes el día del censo, 454 más que el año pasado.
+
+47
+00:05:11,300 --> 00:05:17,215
+Y su evidencia: las tablas que leyó, la regla, las dos consultas, y la verificación que falló, y luego pasó.
+
+48
+00:05:18,915 --> 00:05:24,085
+Su verificación es evidencia, no aprobación: Jun la lee, y decide qué va a Planificación.
+
+49
+00:05:27,385 --> 00:05:31,381
+El próximo marzo, Planificación querrá el mismo conteo, y ahora los pasos se conocen.
+
+50
+00:05:32,881 --> 00:05:39,991
+Así que Jun guarda la consulta como receta en el proyecto, con una prueba contra el informe del censo, y Noor la aprueba.
+
+51
+00:05:41,891 --> 00:05:48,493
+Cada día del censo, corre en segundos, casi sin costo, siempre de la misma forma, como la caja de Sperry.
+
+52
+00:05:50,593 --> 00:05:55,376
+El agente tardó cuatro minutos y doce pasos. Repetirlo tal cual no necesita un agente.
+
+53
+00:05:57,276 --> 00:06:03,422
+Un agente también puede dar un rodeo: uno de los agentes del equipo buscó una vez en la web las reglas del censo,
+
+54
+00:06:03,622 --> 00:06:06,935
+aunque Docs las tenía, porque su plan no nombraba sus herramientas.
+
+55
+00:06:09,035 --> 00:06:13,985
+Ahora cada plan nombra sus herramientas, y le da al agente solo las que el trabajo necesita.
+
+56
+00:06:15,685 --> 00:06:18,930
+Donde los pasos se pueden escribir, deja que un script sencillo los ejecute.
+
+57
+00:06:20,630 --> 00:06:24,401
+Guarda los agentes para el trabajo cuyos pasos nadie puede escribir de antemano.
+
+58
+00:06:28,501 --> 00:06:33,922
+La caja de Sperry mantenía nivelado el avión, lo único que sabía hacer, mientras el piloto seguía en su asiento.
+
+59
+00:06:35,422 --> 00:06:40,267
+El agente de Jun dio los pasos de una pregunta nueva, y le trajo la evidencia para decidir.
+
+60
+00:06:41,767 --> 00:06:45,221
+Un agente es un modelo que razona, con manos, en un bucle.
+
+61
+00:06:46,921 --> 00:06:49,703
+Úsalo solo donde un script sencillo no pueda hacer el trabajo.

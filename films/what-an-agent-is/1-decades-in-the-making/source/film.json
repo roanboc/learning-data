@@ -1,0 +1,32 @@
+{
+  "key": "decades-in-the-making",
+  "title": "Decades in the making",
+  "sub": "The opening film of What an agent is: how today's AI models came about, from the first learning machine in 1958 to models that reason and use tools, and why it seemed so sudden. It opens on printing, an idea that waited four hundred years for its time.",
+  "howto": "The film is drawn in matte shapes in a white lab, with an oak timeline along its marble wall. Each scene from the past has its place and year in the corner. Blue is tools and chips, violet the model thinking, orange data, green a check that passes, and amber a mistake.",
+  "src": [
+    "dm_kit.js",
+    "dm_past.js",
+    "dm_map.js",
+    "dm_lab.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "sudden",
+    "long",
+    -0.6
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "story"
+  ],
+  "urgent": []
+}

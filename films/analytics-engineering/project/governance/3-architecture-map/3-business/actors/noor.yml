@@ -1,0 +1,8 @@
+name: Noor
+kind: business actor
+actor: person
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: data architect
+- assignment: release approver
+status: confirmed

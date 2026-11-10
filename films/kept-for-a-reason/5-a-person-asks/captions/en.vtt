@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:05.574
+London, June 1676.
+
+00:00:06.874 --> 00:00:10.524
+Francis Jenkes, a linen draper, sits on the City's council.
+
+00:00:11.824 --> 00:00:16.420
+At the Guildhall, he stands up and asks for a new Parliament, to mend the City's trade.
+
+00:00:17.920 --> 00:00:25.987
+Four days later, the King's Council sends him to the Gatehouse, a prison at Westminster, to be kept there until the law sets him free.
+
+00:00:27.687 --> 00:00:28.823
+It names no day.
+
+00:00:30.523 --> 00:00:34.466
+He asks the keeper for a copy of the warrant, the order that holds him.
+
+00:00:35.566 --> 00:00:37.597
+The keeper promises it, and stalls.
+
+00:00:39.297 --> 00:00:43.929
+His friends offer bail, a pledge of money, so he can wait for his trial at home.
+
+00:00:45.029 --> 00:00:45.890
+Refused.
+
+00:00:47.590 --> 00:00:49.713
+They ask a judge for habeas corpus.
+
+00:00:50.813 --> 00:00:56.642
+It's Latin for "have the body": an order to bring the prisoner before a judge, and say why he's held.
+
+00:00:58.342 --> 00:01:03.314
+The judge refuses, for one reason only: the courts are on their summer holiday.
+
+00:01:05.214 --> 00:01:10.389
+In August, Jenkes is still inside, writing of his great loss, and the harm to his health.
+
+00:01:12.089 --> 00:01:16.851
+Without that order, a person could be held for months, with no judge to hear why.
+
+00:01:18.351 --> 00:01:19.739
+Something had to change.
+
+00:01:23.839 --> 00:01:28.124
+In 1679, Parliament passes the Habeas Corpus Act.
+
+00:01:29.824 --> 00:01:37.523
+Once the order is served, the keeper has three days to bring the prisoner before a judge, and certify the true causes of holding him.
+
+00:01:39.023 --> 00:01:44.177
+Ten days if the prison is more than twenty miles away, twenty if it's more than a hundred.
+
+00:01:45.677 --> 00:01:49.694
+The courts' holiday is no excuse: any judge must grant the order.
+
+00:01:51.194 --> 00:01:54.079
+A copy of the warrant, within six hours of asking.
+
+00:01:55.579 --> 00:01:58.831
+And a keeper who stalls pays the prisoner a hundred pounds.
+
+00:02:00.131 --> 00:02:03.287
+The second time, two hundred, and he loses his post.
+
+00:02:04.987 --> 00:02:11.029
+So a prisoner learns why he's held within hours, and stands before a judge within days, not a summer.
+
+00:02:12.729 --> 00:02:17.234
+A century later, the United States writes the writ into its Constitution.
+
+00:02:18.734 --> 00:02:23.464
+Today, a person can ask a university too: what do you hold about me, and why?
+
+00:02:25.164 --> 00:02:29.482
+Left in an inbox, a request waits, and nobody can show what was searched.
+
+00:02:30.782 --> 00:02:36.088
+Given a clock, the true reasons and proof, it's answered on time, and the answer can be trusted.
+
+00:02:42.388 --> 00:02:46.233
+On 24 November, Linh Nguyen writes to the university.
+
+00:02:47.333 --> 00:02:49.889
+Her tutoring contract ended four days ago.
+
+00:02:50.989 --> 00:02:58.443
+She's signed in with her student account, on the privacy office's form, so the office knows it's her, and asks for nothing more.
+
+00:02:59.943 --> 00:03:04.162
+"Please tell me what you hold about me, and take me off the tutors' mailing list."
+
+00:03:05.862 --> 00:03:10.360
+The privacy office logs it: request 2026-117.
+
+00:03:11.660 --> 00:03:16.393
+Like the writ, it has a clock: thirty days, so it's due on 24 December.
+
+00:03:18.093 --> 00:03:21.991
+Ingrid Holm, who owns HR's data, takes HR's part.
+
+00:03:23.291 --> 00:03:26.305
+The data team gets a ticket in its repository.
+
+00:03:27.405 --> 00:03:31.863
+It names no one: just the request's number, the date it's due, and the steps.
+
+00:03:33.363 --> 00:03:39.994
+Her numbers go in one place: a table on the platform that only the privacy office and its jobs may read.
+
+00:03:44.094 --> 00:03:48.219
+Mei's office keeps Linh's master record, P-10482.
+
+00:03:49.519 --> 00:03:52.925
+From its links come her numbers in every system: six in all.
+
+00:03:54.825 --> 00:04:00.879
+In the data project, dbt lists every model built from those five systems: more than thirty.
+
+00:04:02.579 --> 00:04:08.584
+On the platform, lineage adds the rest: a notebook's table, a dashboard, another team's job.
+
+00:04:10.284 --> 00:04:16.211
+And the tags from Know what you hold point to each column that names a person, or holds a code for one.
+
+00:04:17.911 --> 00:04:20.323
+Then a job runs, as its own identity.
+
+00:04:21.623 --> 00:04:26.959
+Table by table, it looks in those columns, for her numbers, and for the codes made from them.
+
+00:04:28.659 --> 00:04:33.386
+In the marts built for the wallet, planning and finance, she's there only as a code.
+
+00:04:34.686 --> 00:04:37.226
+A search for her numbers alone would miss them all.
+
+00:04:38.926 --> 00:04:43.835
+And none of her numbers is typed into a query, whose text the platform keeps for a year.
+
+00:04:44.935 --> 00:04:49.339
+Instead, each query joins the table of keys, by the request's number.
+
+00:04:51.039 --> 00:04:58.925
+Lineage only sees the platform, so the owners of payroll, the claims app, the mailing tool and her signed contracts search their own.
+
+00:05:03.025 --> 00:05:05.472
+What Linh gets back isn't a pile of tables.
+
+00:05:06.572 --> 00:05:09.292
+It's a copy of what's held, written for her to read.
+
+00:05:10.592 --> 00:05:15.997
+For each part: what it is, why it's held, where it came from, who else gets it, and until when.
+
+00:05:18.097 --> 00:05:23.820
+Like the true causes on the keeper's answer, each reason is a plain one, from A reason to keep it.
+
+00:05:25.320 --> 00:05:27.740
+A contract, for her contracts and hours.
+
+00:05:28.840 --> 00:05:36.595
+A law, for her pay records: seven years after each contract, the last until 20 November 2033.
+
+00:05:38.095 --> 00:05:41.463
+A public task, for her degrees and results, kept for good.
+
+00:05:42.563 --> 00:05:46.235
+Her research project's data, as long as its rules require.
+
+00:05:47.535 --> 00:05:51.895
+Anything about other people is left out, such as the marks she gave her students.
+
+00:05:53.795 --> 00:06:02.446
+On 3 December, each owner checks their part: Ingrid for HR, Mei for the registrar's records, the research office for her project.
+
+00:06:06.746 --> 00:06:08.565
+Her second ask was done first.
+
+00:06:09.865 --> 00:06:17.363
+In the night of 25 November, the deletion job takes her row out of the list's table, and out of its log of what was sent.
+
+00:06:19.263 --> 00:06:21.542
+The mailing tool drops her at its next sync.
+
+00:06:23.042 --> 00:06:28.949
+That morning, Ingrid puts her no on the person, in place of the yes she gave in 2023.
+
+00:06:30.849 --> 00:06:39.269
+The list is rebuilt each semester from HR's casual contracts of the last two years, and takes only those whose yes is on the person.
+
+00:06:40.969 --> 00:06:42.829
+So the next rebuild leaves her out.
+
+00:06:44.529 --> 00:06:53.267
+The table's old versions hold her row for seven days more, then they're cleaned up, on 2 December, as Deleted means deleted showed.
+
+00:06:55.167 --> 00:07:01.315
+Deleting her row alone wouldn't have been enough: with her yes still there, the next rebuild would have brought her back.
+
+00:07:06.815 --> 00:07:08.232
+Every step leaves proof.
+
+00:07:09.332 --> 00:07:11.882
+In the ticket, each box is ticked with a link.
+
+00:07:13.382 --> 00:07:16.868
+The search's run shows who ran it: the job, as itself.
+
+00:07:18.368 --> 00:07:23.132
+The list table's history shows her row deleted, and the old versions cleaned up.
+
+00:07:24.832 --> 00:07:29.750
+The audit log shows who read the table of keys: only the office and its jobs.
+
+00:07:31.450 --> 00:07:35.527
+The privacy office keeps a table of every request and the day it's due.
+
+00:07:36.827 --> 00:07:40.515
+A request near its date shows up there, for the office to work through.
+
+00:07:41.815 --> 00:07:45.159
+A late answer isn't wrong data: it's work still to do.
+
+00:07:46.859 --> 00:07:53.405
+On 7 December, Linh's answer is ready, seventeen days early, and she opens it by signing in.
+
+00:07:55.305 --> 00:08:02.894
+The ticket closes. Her numbers stay in the table of keys until the last locked copy is gone, on 24 December.
+
+00:08:04.594 --> 00:08:10.426
+In 1679, a keeper answered the writ with the body, and the true causes, within days.
+
+00:08:11.926 --> 00:08:15.989
+Here, it's what's held, the true reasons, on time, and proof of each step.
+
+00:08:19.089 --> 00:08:21.174
+Five films, one person's data.
+
+00:08:22.474 --> 00:08:24.485
+Keep data for a reason you can say.
+
+00:08:25.785 --> 00:08:29.190
+Every record has an end date, decided before it's needed.
+
+00:08:30.490 --> 00:08:33.330
+A person can ask, and you must be able to answer.
+
+00:08:34.630 --> 00:08:37.200
+Deleting is done when the last copy is gone.
+
+00:08:38.500 --> 00:08:41.003
+And a request is answered on time, with proof.
+
+00:08:42.703 --> 00:08:47.893
+With Locks before the data and Only what you may see, that's data protection and privacy.
+
+00:08:49.393 --> 00:08:53.075
+Who may come in, what each may see, and how long anything stays.
+
+00:08:54.775 --> 00:08:59.452
+Next: AI agents in data work, where agents work under the same rules.

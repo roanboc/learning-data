@@ -1,0 +1,271 @@
+1
+00:00:03,000 --> 00:00:06,355
+Port Newark, Nueva Jersey, en abril de 1956.
+
+2
+00:00:08,255 --> 00:00:15,989
+Un transportista, Malcom McLean, envía un viejo petrolero, el Ideal X, a Houston con 58 cajas de metal en cubierta.
+
+3
+00:00:17,689 --> 00:00:23,666
+Cada caja se sube y se baja entera, con una grúa, en vez de saco a saco y cajón a cajón.
+
+4
+00:00:25,366 --> 00:00:32,330
+Según las cifras de McLean, cargar cuesta menos de 16 centavos por tonelada, frente a 5,83 dólares a mano.
+
+5
+00:00:34,430 --> 00:00:38,555
+Pero una caja necesita una grúa con fuerza para alzarla, en los dos extremos del viaje.
+
+6
+00:00:40,255 --> 00:00:45,057
+Pocos puertos tienen una, y construirla lleva años y dinero que la mayoría no tiene.
+
+7
+00:00:46,557 --> 00:00:54,201
+Para esos puertos, la caja no cambia nada: los barcos pasan días en el muelle, se descargan a mano, y sus mercancías cuestan más.
+
+8
+00:00:56,101 --> 00:01:00,069
+Algo tiene que cambiar, o la caja se detendrá donde se detengan las grúas.
+
+9
+00:01:01,969 --> 00:01:09,473
+En octubre de 1957, la empresa de McLean hace zarpar un barco reformado, el Gateway City, con dos grúas propias.
+
+10
+00:01:11,173 --> 00:01:14,597
+Corren sobre rieles a lo largo de la cubierta y se extienden sobre el muelle.
+
+11
+00:01:16,497 --> 00:01:19,805
+Ahora un puerto con muelle puede recibir cajas, tenga grúa o no.
+
+12
+00:01:21,705 --> 00:01:27,122
+Con los años, los puertos construyen sus propias grúas, y allí ya no hacen falta las de los barcos.
+
+13
+00:01:28,822 --> 00:01:32,185
+Los barcos con grúas propias aún hacen escala en puertos que no tienen.
+
+14
+00:01:33,885 --> 00:01:40,409
+El ahorro de la caja llegó a cada puerto antes de que pudiera cumplir el estándar, y cada puerto se sumó al estándar cuando pudo.
+
+15
+00:01:42,309 --> 00:01:46,371
+Los datos también tienen sus formas estándar, y proveedores que aún no pueden cumplirlas.
+
+16
+00:01:47,871 --> 00:01:53,430
+Un camino para cada uno deja que sus datos lleguen ya, no cuando todos se pongan al día.
+
+17
+00:02:01,530 --> 00:02:08,521
+Estas películas toman de la arquitectura para dirigir los servicios de un equipo de datos. Esta trata de los datos que llegan.
+
+18
+00:02:10,221 --> 00:02:14,058
+Junio de 2027, en una universidad, dentro de un año.
+
+19
+00:02:15,758 --> 00:02:24,287
+Helena Novak, la gestora de datos, y Noor Rahman, la arquitecta de datos, escriben en una página la forma preferida de recibir datos.
+
+20
+00:02:25,987 --> 00:02:30,864
+La fuente publica sus datos como un producto gobernado, con un dueño y un contrato.
+
+21
+00:02:32,564 --> 00:02:35,829
+Envía cada cambio como un evento, en el momento en que ocurre.
+
+22
+00:02:37,529 --> 00:02:41,339
+Y dice qué se borró, para que un borrado llegue a cada copia.
+
+23
+00:02:43,039 --> 00:02:50,419
+Los contratos y los borrados tienen sus propias películas: Mover es fácil, acordar es el trabajo, y Borrado es borrado.
+
+24
+00:02:52,319 --> 00:02:58,039
+Sam Okafor, que lleva la plataforma de datos, enumera los sistemas de los que el equipo toma datos.
+
+25
+00:02:59,539 --> 00:03:01,394
+Los sensores de las aulas pueden hacerlo todo.
+
+26
+00:03:02,894 --> 00:03:07,235
+La nómina, en un sistema de 2004, envía un archivo cada noche.
+
+27
+00:03:08,735 --> 00:03:15,832
+El horario nuevo, comprado como servicio en 2026, puede dar sus cambios, pero no puede decir qué se borró.
+
+28
+00:03:17,332 --> 00:03:21,332
+Y la Facultad de Salud reserva sus nueve laboratorios clínicos en una hoja de cálculo.
+
+29
+00:03:23,032 --> 00:03:26,714
+Los sistemas viejos no llegan a la forma preferida, y los nuevos tampoco.
+
+30
+00:03:29,414 --> 00:03:34,547
+Así que la página tiene una segunda mitad: un árbol de decisión, para los proveedores que no pueden cumplirla.
+
+31
+00:03:36,247 --> 00:03:40,051
+Primero: ¿puede enviar cada cambio como un evento? Entonces usa los eventos.
+
+32
+00:03:41,951 --> 00:03:46,564
+Si no, ¿puede dar sus cambios desde un momento dado? Entonces tráelos cada hora.
+
+33
+00:03:48,464 --> 00:03:55,906
+¿Puede decir qué se borró? Si no, compara cada noche su lista completa con la nuestra. Lo que falta en su lista se borró.
+
+34
+00:03:58,006 --> 00:04:02,288
+¿Solo un archivo? Toma el archivo entero cada noche y compáralo igual.
+
+35
+00:04:04,188 --> 00:04:08,694
+¿Una hoja de cálculo? Un referente de datos la pasa a una tabla gobernada, con un dueño.
+
+36
+00:04:10,594 --> 00:04:15,437
+Los primeros caminos tienen nombre: integración por eventos y captura de cambios de datos.
+
+37
+00:04:17,137 --> 00:04:22,378
+Cada rama termina en una recomendación, y cada camino mantiene un contrato con un dueño.
+
+38
+00:04:24,078 --> 00:04:29,017
+El árbol se guarda como texto en el repositorio del equipo, y su imagen se dibuja a partir de él.
+
+39
+00:04:31,717 --> 00:04:35,231
+Lunes 14 de junio: Sam prueba el horario nuevo.
+
+40
+00:04:36,731 --> 00:04:42,587
+Mei Tanaka, de la oficina de registro, cancela una clase. Los cambios de cada hora nunca lo mencionan.
+
+41
+00:04:44,487 --> 00:04:46,752
+Así que en la plataforma, la clase sigue reservada.
+
+42
+00:04:48,452 --> 00:04:56,584
+Graham Ellis, director de Instalaciones, vería un aula reservada y vacía: un aula que parece desperdiciada, cuando siempre estuvo libre.
+
+43
+00:04:58,484 --> 00:05:04,147
+El proveedor puede sumar los borrados a sus cambios, pero no antes de su renovación, en 2028.
+
+44
+00:05:05,847 --> 00:05:11,263
+El árbol tiene la respuesta: los cambios cada hora, y la lista completa de reservas cada noche.
+
+45
+00:05:12,963 --> 00:05:17,805
+Cada noche, una reserva de la plataforma que falta en la lista completa se marca como borrada.
+
+46
+00:05:19,705 --> 00:05:23,323
+El horario nuevo entra en servicio el lunes 19 de julio.
+
+47
+00:05:24,823 --> 00:05:34,546
+Al viernes 30 de julio, primera semana de clases, la comparación nocturna ya halló 212 reservas borradas que los cambios no mencionaron.
+
+48
+00:05:36,446 --> 00:05:41,835
+212 horas que habrían parecido reservadas y vacías en la página de Graham quedan fuera de ella.
+
+49
+00:05:44,535 --> 00:05:49,246
+Los sensores de las aulas siguen la forma preferida: el conteo de cada hora llega como un evento.
+
+50
+00:05:50,946 --> 00:05:56,417
+El archivo de la nómina se toma entero cada noche y se compara, para los costos de personal eventual de Finanzas.
+
+51
+00:05:58,117 --> 00:06:00,097
+Un camino más débil se revisa más a menudo.
+
+52
+00:06:01,597 --> 00:06:07,211
+Si el archivo de una noche es mucho más pequeño que el de la anterior, la comparación se detiene y pregunta a una persona.
+
+53
+00:06:08,911 --> 00:06:17,945
+El martes 24 de agosto, el archivo de la nómina llega cortado, y la revisión lo detiene antes de que 2400 empleados se den por idos.
+
+54
+00:06:20,045 --> 00:06:27,220
+Anil Kurian, referente de datos de la Facultad de Salud, pasa la hoja de los laboratorios a una tabla gobernada, y es su dueño.
+
+55
+00:06:29,120 --> 00:06:32,723
+Y a cada proveedor se le pide, por escrito, su siguiente paso hacia arriba.
+
+56
+00:06:34,223 --> 00:06:44,083
+El horario: sus borrados, en la renovación de 2028. La nómina: un archivo de cambios, en su próxima mejora. Los laboratorios: al horario.
+
+57
+00:06:46,783 --> 00:06:50,854
+El equipo eleva a sus proveedores hacia la forma preferida, paso a paso.
+
+58
+00:06:52,354 --> 00:06:55,505
+Pero nunca retiene los datos esperando lo ideal.
+
+59
+00:06:57,405 --> 00:07:05,477
+El jueves 30 de septiembre, la página de Graham muestra cada aula y cada laboratorio, de cuatro fuentes, por cuatro caminos.
+
+60
+00:07:07,377 --> 00:07:10,802
+Graham no ve los caminos. Ve conteos en los que puede confiar.
+
+61
+00:07:12,702 --> 00:07:18,608
+Y la página de Helena sigue siendo una: la forma preferida, el árbol y el siguiente paso de cada proveedor.
+
+62
+00:07:21,308 --> 00:07:27,879
+El Gateway City llevó sus propias grúas a puertos que no tenían, y la caja les llegó años antes que sus grúas.
+
+63
+00:07:29,779 --> 00:07:35,937
+El equipo de Helena hizo lo mismo: un camino para cada proveedor, y los conteos de Graham ciertos desde la primera semana.
+
+64
+00:07:37,837 --> 00:07:40,713
+El lunes, escribe tu forma preferida en una página.
+
+65
+00:07:42,213 --> 00:07:46,945
+Dibuja el árbol para los proveedores que no pueden cumplirla, cada rama con su recomendación.
+
+66
+00:07:48,445 --> 00:07:52,857
+Pide a cada proveedor su siguiente paso hacia arriba, en su contrato o en su renovación.
+
+67
+00:07:54,357 --> 00:07:57,690
+Revisa más a menudo los caminos más débiles, y no retengas el valor.
+
+68
+00:07:59,390 --> 00:08:03,217
+Una forma preferida, un camino para cada proveedor, y el valor primero.

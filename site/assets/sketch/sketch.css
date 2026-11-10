@@ -1,0 +1,4 @@
+/* A Sharper Sketch: small additions to site.css for the labs, which sit on the film's dark stage in both themes */
+.lab .qsort .row{background:rgba(16,26,50,.7);border-color:var(--sline);color:var(--sfg)}
+.lab .qsort .row.ok{border-color:#7ff0b4}.lab .qsort .row.no{border-color:#ff8f86}
+.lab .qsort{padding:0}

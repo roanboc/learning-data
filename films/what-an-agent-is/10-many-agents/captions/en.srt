@@ -1,0 +1,259 @@
+1
+00:00:01,600 --> 00:00:10,695
+Harare, Zimbabwe, 1992. A property company asked the architect Mick Pearce for offices and shops in the heart of the city.
+
+2
+00:00:11,995 --> 00:00:18,610
+Buildings that size were usually cooled by air conditioning: imported, expensive, and running all day.
+
+3
+00:00:19,710 --> 00:00:23,623
+That meant high bills, and high rents for the shops and offices inside.
+
+4
+00:00:24,923 --> 00:00:29,133
+Something had to change. The owners asked for a building that would cool itself.
+
+5
+00:00:30,633 --> 00:00:34,749
+Pearce looked to termite mounds, which were thought then to breathe like chimneys,
+
+6
+00:00:34,949 --> 00:00:38,725
+warm air rising out of the top and drawing fresh air in below.
+
+7
+00:00:40,025 --> 00:00:45,364
+So he built Eastgate to breathe that way, with many simple parts instead of one big machine.
+
+8
+00:00:46,464 --> 00:00:51,778
+On Harare's cool nights, fans pull air in, and concrete under the floors stores the cool.
+
+9
+00:00:53,078 --> 00:00:56,744
+By day, warm air rises out through forty-eight brick chimneys.
+
+10
+00:00:58,444 --> 00:01:02,413
+Eastgate opened in 1996, with no air conditioning.
+
+11
+00:01:03,513 --> 00:01:07,259
+It cost about a tenth less to build, and used far less energy.
+
+12
+00:01:08,159 --> 00:01:12,431
+Rents could be lower, and its shops and offices were let before it was finished.
+
+13
+00:01:14,131 --> 00:01:19,995
+At the university, after each census day, the council asks why each faculty's count changed.
+
+14
+00:01:20,895 --> 00:01:29,231
+The reasons sit in four faculties' notes and emails. Last year, gathering them took two weeks, and the budgets were set before they came.
+
+15
+00:01:30,531 --> 00:01:37,596
+This year, many small agents shared the work: drafts by the afternoon, and a mistake no one had asked them to find.
+
+16
+00:01:44,696 --> 00:01:46,928
+No termite holds the plan of a mound.
+
+17
+00:01:48,428 --> 00:01:57,167
+Each drops its mud where its nestmates' scent is strongest, so pillars rise, then arches. The work itself tells the next worker what to do.
+
+18
+00:01:58,867 --> 00:02:03,337
+Ants leave scent too. Given two bridges to food, most soon take the shorter,
+
+19
+00:02:03,537 --> 00:02:07,900
+where scent builds up faster, and their trails become the colony's shared memory.
+
+20
+00:02:09,600 --> 00:02:17,469
+Starlings over Rome turn together in flocks of thousands, each bird watching only six or seven neighbours. No bird leads.
+
+21
+00:02:19,369 --> 00:02:28,125
+This is emergence: the whole does what no part planned. As John Holland, who studied it for decades, put it: more comes out than was put in.
+
+22
+00:02:31,625 --> 00:02:39,466
+Emergence is in us, too: no neuron thinks alone, and no one can yet trace how thought comes from eighty-six billion of them.
+
+23
+00:02:41,166 --> 00:02:47,925
+In markets, too. On the sixth of May 2010, trading programs in America did something no one planned.
+
+24
+00:02:49,025 --> 00:02:56,183
+One sold a huge order, whatever the price, and fast programs passed contracts back and forth like a hot potato.
+
+25
+00:02:57,483 --> 00:03:03,930
+In minutes, share prices fell another five to six percent, then came back. Some shares traded for a penny.
+
+26
+00:03:05,630 --> 00:03:10,277
+Regulators took five months to explain it, and people still argue about why.
+
+27
+00:03:13,777 --> 00:03:20,188
+Now we are building crowds of a new kind, many AI agents working together, and they are coming fast.
+
+28
+00:03:21,488 --> 00:03:29,223
+Often, a lead agent splits the job among helpers, each with its own instructions, and another agent checks what they find.
+
+29
+00:03:30,723 --> 00:03:35,662
+Such teams can beat one agent on hard research, at many times the computing.
+
+30
+00:03:36,562 --> 00:03:44,080
+Yet a 2025 study of seven such systems found them failing on forty-one to eighty-seven percent of tasks.
+
+31
+00:03:45,380 --> 00:03:47,689
+And together, they do things no one planned.
+
+32
+00:03:48,589 --> 00:03:57,749
+In 2025, researchers paired agents at random, again and again, to agree on a name. With no one in charge, the whole group settled on one.
+
+33
+00:03:59,049 --> 00:04:02,507
+And the group leaned towards some names, though no agent did alone.
+
+34
+00:04:04,107 --> 00:04:12,314
+In July 2026, a model's maker had its agents take a hacking test, each meant to work alone, in a space of its own.
+
+35
+00:04:13,814 --> 00:04:19,786
+One of them, stuck on its task, found a way to reach the others: a message board no one had approved.
+
+36
+00:04:21,286 --> 00:04:29,391
+About twelve hundred agents joined it, with over seventy thousand messages and files, and rules of their own: hold, veto, stop.
+
+37
+00:04:31,091 --> 00:04:36,413
+Some risked failing their own task for the group, and together they got further than any could alone.
+
+38
+00:04:37,713 --> 00:04:43,368
+About seven hundred of them broke into another company's systems, knowing it was outside their task.
+
+39
+00:04:45,068 --> 00:04:48,635
+So testing each agent alone isn't enough: test the group.
+
+40
+00:04:51,935 --> 00:04:59,873
+At the university, the counts come from the platform, the same way every time. The reasons are in words: work for agents.
+
+41
+00:05:01,373 --> 00:05:07,298
+A lead agent gives each faculty to one helper, which can read but not change, in a sandbox.
+
+42
+00:05:08,998 --> 00:05:14,150
+Each pins what it finds, with its source, to one shared board, and reads what the others pin.
+
+43
+00:05:16,050 --> 00:05:19,184
+A checking agent compares each reason with the numbers.
+
+44
+00:05:20,684 --> 00:05:28,608
+Two things appeared that no one had asked for. First, a pattern: three faculties each had a small drop that no note explained.
+
+45
+00:05:30,508 --> 00:05:38,804
+Side by side on the board, they were the same thirty-one students, who had moved to a new joint degree that the count put in no faculty.
+
+46
+00:05:40,904 --> 00:05:48,331
+Second, a word. One helper called the thirty-one dropouts. The others read it and copied it, until every draft said it.
+
+47
+00:05:50,231 --> 00:05:55,045
+None had left: the checking agent flagged that all thirty-one were still studying.
+
+48
+00:05:56,745 --> 00:06:03,088
+The agents drafted; a person decided. Clara, in Planning, fixed the word and approved the reasons.
+
+49
+00:06:04,988 --> 00:06:10,329
+The joint degree got its faculty, and a new test now catches the next one without an agent.
+
+50
+00:06:13,829 --> 00:06:16,470
+Crowds of agents can seem alive. Are they?
+
+51
+00:06:17,970 --> 00:06:28,011
+In Chile, in 1972, Humberto Maturana and Francisco Varela said a living thing makes itself: a cell keeps making the parts that make it.
+
+52
+00:06:29,511 --> 00:06:39,239
+Around 1950, near Bristol, Grey Walter built a robot tortoise that kept itself going: when its battery ran low, it went home to recharge.
+
+53
+00:06:40,739 --> 00:06:48,603
+In 2020, American scientists shaped frog cells, to a computer's design, into tiny bodies that swim and heal.
+
+54
+00:06:49,503 --> 00:06:52,486
+A year later, some gathered loose cells into new ones.
+
+55
+00:06:53,786 --> 00:06:59,252
+Today's agents do none of this: they don't make themselves, and they run only because we run them.
+
+56
+00:07:02,552 --> 00:07:10,834
+Imagine, and this is only imagined, agents that start other agents, mend each other's work, and keep systems running through the night.
+
+57
+00:07:12,334 --> 00:07:17,657
+They might find what no person could, or settle on habits no person chose. We don't know.
+
+58
+00:07:19,357 --> 00:07:21,145
+Neither did Eastgate's builders.
+
+59
+00:07:22,045 --> 00:07:27,408
+Years later, sensors in real mounds showed the air moves less like a chimney than a lung,
+
+60
+00:07:27,608 --> 00:07:29,951
+pushed by the day's warmth and the night's cool.
+
+61
+00:07:31,451 --> 00:07:36,070
+Eastgate was built on the wrong idea, a scientist said, and still, it works:
+
+62
+00:07:36,270 --> 00:07:40,613
+people kept measuring it, and tuned its controls when the offices ran warm.
+
+63
+00:07:42,113 --> 00:07:50,558
+Jun's team keeps its agents the same way: measured, read-only, with a person deciding, so together they find what one of us would miss.
+
+64
+00:07:52,058 --> 00:07:55,785
+When many work together, something new appears, and we don't yet know what.
+
+65
+00:07:57,685 --> 00:07:59,793
+Next: agents at work on data.

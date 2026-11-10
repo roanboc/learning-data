@@ -1,0 +1,11 @@
+alumni_id,student_id,given_name,family_name,email,award_name,graduated_on,_valid_from,_valid_to,_is_current,_loaded_at
+A-58830,S-16511,Rosa,Delgado,rosa.delgado@mail.example,Bachelor of Health Information Management,2021-12-14,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+A-61207,S-17142,Thi Linh,Nguyen,linh.nguyen2001@mail.example,Bachelor of Health Information Management,2022-12-15,2024-11-01 02:00:00,,true,2024-11-01 02:00:00
+A-64418,S-20408,Mateo,Lopez,mateo.lopez@mail.example,Graduate Certificate in Business Administration,2025-12-10,2025-12-17 02:00:00,,true,2025-12-17 02:00:00
+A-64952,S-20414,Emily,Walker,emily.walker@mail.example,Graduate Certificate in Cyber Security,2026-03-20,2026-03-27 02:00:00,,true,2026-03-27 02:00:00
+A-65301,S-20403,Wei,Chen,wei.chen.au@mail.example,Graduate Certificate in Data Analytics,2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00
+A-65302,S-20405,Hannah,Schmidt,hannah.schmidt@mail.example,Graduate Certificate in Data Analytics,2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00
+A-65303,S-20417,Aisha,Karimi,aisha.k@mail.example,Graduate Certificate in Data Analytics,2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00
+A-65304,S-20428,Chloe,Dubois,chloe.dubois@mail.example,Graduate Certificate in Health Informatics,2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00
+A-65305,S-20432,Tom,Becker,tom.becker@mail.example,Graduate Certificate in Business Administration,2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00
+A-65306,S-20437,Noah,Williams,noah.williams@mail.example,Graduate Certificate in Education (Digital Learning),2026-07-20,2026-07-27 02:00:00,,true,2026-07-27 02:00:00

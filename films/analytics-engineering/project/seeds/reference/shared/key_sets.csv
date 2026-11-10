@@ -1,0 +1,10 @@
+key_set,system_name,owner
+LMS,learning platform,Learning team
+SC,short-course platform,Learning team
+SIS,student system,Registrar's office
+ALU,alumni system,Alumni office
+HR,HR system,HR
+RES,research system,Research office
+CLM,claims app,HR
+SP,student portal,"Mei Tanaka, registrar's office"
+EB,exam boards' register,"Registrar's office, with the faculties"

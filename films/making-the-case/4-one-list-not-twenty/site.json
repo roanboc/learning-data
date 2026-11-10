@@ -1,0 +1,94 @@
+{
+  "kicker": "One list for all the work",
+  "kicker_es": "Una lista para todo el trabajo",
+  "title_es": "Una lista, no veinte",
+  "h1": "One list, not twenty: one door for every request, ordered in the open",
+  "h1_es": "Una lista, no veinte: una puerta para cada solicitud, ordenada a la vista",
+  "lead": "Requests reach Helena's team in eleven places, and whoever reaches it first is answered first. From 7 June 2027, one front door and one list: 61 requests become 45, ordered in the open by value, urgency, risk and effort, six at most in progress, and every not now with a reason and a date.",
+  "lead_es": "Las solicitudes llegan al equipo de Helena por once vías, y se atiende antes a quien llega antes. Desde el 7 de junio de 2027, una puerta y una lista: 61 solicitudes quedan en 45, ordenadas a la vista por valor, urgencia, riesgo y esfuerzo, seis en curso a lo sumo, y cada ahora no con razón y fecha.",
+  "description": "A film about one way in and one list for all of a data team's work, the last of Making the case, in the module Data management: requests that reach Helena Novak's team in eleven places, so people ask twice to be heard and the team answers whoever reaches it first, while bigger needs wait unseen; one front door from Monday 7 June 2027, a form of five questions that asks what the work is for, not what to build, and every side door closed kindly, with a note; 61 requests on one list, nine duplicates joined to their twins and seven closed with thanks, so 45 are left, in the tracker the team already uses; the list ordered in the open by what waiting costs, a request's value, its urgency and the risk while it waits (Donald Reinertsen's cost of delay), divided by the effort, and never by who asks, or how loudly: Anil's small request goes near the top, and a dashboard asked for three times waits, with a note saying why and when it's looked at again; one board, open to everyone and read by the data council every month; the team's time split on purpose, half for the roadmap, a third for requests and the rest for running and improving; at most six pieces of work in progress, Kanban's limit on work in progress, as David J. Anderson set it out; and every not now with a reason and a date, as Clara hears for her forecast model. It opens on the Rhine in 1792, where Dominique-Jean Larrey built the flying ambulance, so the wounded no longer waited a day for help.",
+  "description_es": "Una película sobre una sola entrada y una lista única para todo el trabajo de un equipo de datos, la última de Construir el caso, en el módulo Gestión de datos: solicitudes que llegan al equipo de Helena Novak por once lugares, así que la gente pide dos veces para que la oigan y el equipo atiende a quien llega primero, mientras las necesidades mayores esperan sin que nadie las vea; una puerta de entrada desde el lunes 7 de junio de 2027, un formulario de cinco preguntas que pregunta para qué es el trabajo, no qué construir, y cada puerta lateral cerrada con amabilidad, con una nota; 61 solicitudes en una lista, nueve duplicadas unidas a sus gemelas y siete cerradas con agradecimiento, así que quedan 45, en el gestor de tareas que el equipo ya usa; la lista ordenada a la vista por lo que cuesta esperar, el valor de una solicitud, su urgencia y el riesgo mientras espera (el costo de la demora de Donald Reinertsen), dividido por el esfuerzo, y nunca por quién pide, ni por cuán fuerte: la pequeña solicitud de Anil queda entre las primeras, y un panel pedido tres veces espera, con una nota que dice por qué y cuándo se volverá a ver; un tablero, abierto a todos y que el consejo de datos lee cada mes; el tiempo del equipo repartido adrede, la mitad para la hoja de ruta, un tercio para solicitudes y el resto para operar y mejorar lo que hay; como mucho seis trabajos en curso, el límite al trabajo en curso de Kanban, como lo planteó David J. Anderson; y cada ahora no con una razón y una fecha, como el que recibe Clara para su modelo de previsión. Empieza en el Rin en 1792, donde Dominique-Jean Larrey construyó la ambulancia volante, para que los heridos ya no esperaran un día la ayuda.",
+  "card": "Helena brings every request in through one door, onto one list, and orders it in the open: never by who asks, or how loudly.",
+  "card_es": "Helena hace entrar cada solicitud por una sola puerta, a una lista única, y la ordena a la vista: nunca por quién pide, ni por cuán fuerte.",
+  "chapters_es": {
+    "flying": "Ambulancias volantes",
+    "doors": "Once maneras de pedir",
+    "door": "Una sola puerta de entrada",
+    "order": "Ordenada a la vista",
+    "six": "Seis a la vez",
+    "when": "Ahora no, y cuándo",
+    "monday": "El lunes"
+  },
+  "past": [
+    "The Rhine, 1792: help where they fall",
+    "The army's field hospital stayed a league behind the fighting, and the wounded waited a day or more for help. Larrey built a light carriage that followed the front line, and the wounded were bandaged where they fell. A data team's requests need the same: one way in, and the most needed first."
+  ],
+  "past_es": [
+    "El Rin, 1792: ayuda donde caen",
+    "El hospital de campaña del ejército quedaba a una legua del combate, y los heridos esperaban un día o más. Larrey construyó un carruaje ligero que seguía la línea del frente, y los heridos se vendaban donde caían. Las solicitudes de un equipo de datos necesitan lo mismo: una sola entrada, y lo más necesario primero."
+  ],
+  "next_h": "You've seen why all of a team's work belongs on one list. Next: run the team's services as a business, with suppliers and customers.",
+  "next_h_es": "Viste por qué todo el trabajo de un equipo va en una sola lista. Después: llevar los servicios del equipo como un negocio, con proveedores y clientes.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Dominique-Jean Larrey",
+        "title_es": "Dominique-Jean Larrey",
+        "line": "The surgeon of the opening: his flying ambulance, his campaigns, and the rule that the most dangerously wounded come first.",
+        "line_es": "El cirujano del comienzo: su ambulancia volante, sus campañas y la regla de atender primero a los heridos más graves.",
+        "href": "https://en.wikipedia.org/wiki/Dominique_Jean_Larrey",
+        "href_es": "https://es.wikipedia.org/wiki/Dominique-Jean_Larrey"
+      },
+      {
+        "title": "The Australasian Triage Scale",
+        "title_es": "La escala de triaje de Australasia (en inglés)",
+        "line": "The emergency physicians' own policy: five categories, each with a longest wait, from at once to two hours.",
+        "line_es": "La política de los propios médicos de urgencias: cinco categorías, cada una con su espera máxima, de inmediato a dos horas.",
+        "href": "https://acem.org.au/getmedia/484b39f1-7c99-427b-b46e-005b0cd6ac64/P06_Policy_Australasian_Triage_Scale",
+        "href_es": "https://acem.org.au/getmedia/484b39f1-7c99-427b-b46e-005b0cd6ac64/P06_Policy_Australasian_Triage_Scale"
+      },
+      {
+        "title": "Cost of delay",
+        "title_es": "El costo de la demora (en inglés)",
+        "line": "What waiting costs, as Donald Reinertsen put it, and why dividing it by the effort puts small, urgent, valuable work first.",
+        "line_es": "Lo que cuesta esperar, como lo planteó Donald Reinertsen, y por qué dividirlo por el esfuerzo pone primero el trabajo pequeño, urgente y valioso.",
+        "href": "https://en.wikipedia.org/wiki/Cost_of_delay",
+        "href_es": "https://en.wikipedia.org/wiki/Cost_of_delay"
+      },
+      {
+        "title": "The Kanban Method, its official guide",
+        "title_es": "Kanban en el desarrollo de software",
+        "line": "One board for the work, a limit on work in progress, and pulling the next piece in only when one is done.",
+        "line_es": "Un tablero para el trabajo, un límite al trabajo en curso, y tomar la siguiente pieza solo cuando una termina.",
+        "href": "https://kanban.university/kanban-guide/",
+        "href_es": "https://es.wikipedia.org/wiki/Kanban_(desarrollo)"
+      },
+      {
+        "title": "Triage",
+        "title_es": "Triaje",
+        "line": "How emergency care sorts people by need, the word's French root, and how the practice grew from the battlefield.",
+        "line_es": "Cómo la atención de urgencias ordena a las personas según su necesidad, la raíz francesa de la palabra y cómo nació en el campo de batalla.",
+        "href": "https://en.wikipedia.org/wiki/Triage",
+        "href_es": "https://es.wikipedia.org/wiki/Triaje"
+      }
+    ],
+    "more": [
+      {
+        "text": "Larrey's memoirs in English, 1814, volume 1: the Rhine, the flying ambulance and Aboukir",
+        "text_es": "Las memorias de Larrey en inglés, 1814, tomo 1: el Rin, la ambulancia volante y Aboukir",
+        "href": "https://collections.nlm.nih.gov/catalog/nlm:nlmuid-2561003RX1-mvpart",
+        "href_es": "https://collections.nlm.nih.gov/catalog/nlm:nlmuid-2561003RX1-mvpart"
+      },
+      {
+        "text": "Volume 2: Jena, and his rule for who is treated first (pages 122 and 123)",
+        "text_es": "Tomo 2: Jena, y su regla sobre a quién se atiende primero (páginas 122 y 123)",
+        "href": "https://collections.nlm.nih.gov/catalog/nlm:nlmuid-2561003RX2-mvpart",
+        "href_es": "https://collections.nlm.nih.gov/catalog/nlm:nlmuid-2561003RX2-mvpart"
+      }
+    ]
+  }
+}

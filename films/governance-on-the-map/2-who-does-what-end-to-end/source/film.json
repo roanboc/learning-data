@@ -1,0 +1,40 @@
+{
+  "key": "who-does-what-end-to-end",
+  "title": "Who does what, end to end",
+  "sub": "Film 2 of 3 of Governance on the map, the second series on data governance: one request followed from start to finish, each step done by a role, each role filled by a person or an agent with its rights written down, and the glossary run as a product.",
+  "howto": "The film is painted in watercolour, in the university's own rooms, and in Madrid, Lima and Mexico City between 1892 and 1956. Behind each person, a soft wash of their side: gold for the business side, cyan for the technical side, warm umber for the people of the past. Gold is governance's decisions; dashed cyan is the agent, which is software, never a face; green is what runs in the work, and grey what can go.",
+  "src": [
+    "plan.js",
+    "past.js",
+    "dict.js",
+    "uni.js",
+    "map.js",
+    "scenes.js"
+  ],
+  "story": [
+    "words"
+  ],
+  "poster": [
+    "words",
+    "down",
+    3.5
+  ],
+  "say": [
+    [
+      "\\bPalma\\b",
+      "Pahlma"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

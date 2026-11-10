@@ -1,0 +1,31 @@
+{
+  "kicker": "The person behind the role",
+  "kicker_es": "La persona detrás del rol",
+  "title_es": "Una persona, muchos roles",
+  "h1": "One person, many roles: the person behind five records",
+  "h1_es": "Una persona, muchos roles: la persona detrás de cinco registros",
+  "lead": "Linh graduated from the university and came back for a master's, under a new student number. Now five records in four systems hold one person, and none of them knows the others. Keep the person apart from her roles, and ask four questions to know what needs mastering.",
+  "lead_es": "Linh se graduó en la universidad y volvió para una maestría, con un nuevo número de estudiante. Ahora cinco registros en cuatro sistemas guardan a una sola persona, y ninguno sabe de los otros. Separa a la persona de sus roles, y haz cuatro preguntas para saber qué es un dato maestro.",
+  "description": "A film about master and reference data: one person held as five records in four systems, under two student numbers; the kinds of data; a model with a learner but no person; the person kept apart from her roles, contact points and identifiers; who keeps each piece; the same pattern in a hospital, a bank and an energy utility; DAMA's four ways to keep master data; and four questions that say what needs mastering.",
+  "description_es": "Una película sobre datos maestros y de referencia: una persona guardada como cinco registros en cuatro sistemas, con dos números de estudiante; los tipos de datos; un modelo con un estudiante pero sin persona; la persona separada de sus roles, sus puntos de contacto y sus identificadores; quién mantiene cada dato; el mismo patrón en un hospital, un banco y una empresa de energía; las cuatro formas de mantener datos maestros según DAMA; y cuatro preguntas que dicen qué hay que gestionar como dato maestro.",
+  "card": "One person, four systems, five records. Keep the person apart from the roles, and ask four questions to know what needs mastering.",
+  "card_es": "Una persona, cuatro sistemas, cinco registros. Separa a la persona de sus roles, y haz cuatro preguntas para saber qué es un dato maestro.",
+  "chapters_es": {
+    "parish": "Un registro, vayas donde vayas",
+    "back": "De vuelta a estudiar",
+    "five": "Cinco registros, cinco Linhs",
+    "kinds": "Los tipos de datos",
+    "role": "El rol, llamado persona",
+    "apart": "Cuatro cosas, separadas",
+    "keeps": "Quién mantiene qué",
+    "elsewhere": "En otros lugares",
+    "dama": "Nombrado una vez",
+    "entities": "No solo personas",
+    "series": "La serie",
+    "found": "Encontrada primero"
+  },
+  "next_h": "You've met the person behind the roles.",
+  "next_h_es": "Conociste a la persona detrás de los roles.",
+  "past": ["Sweden's parish books, 1686, and a number for life, 1947", "One person, written down once, and followed wherever they go."],
+  "past_es": ["Los libros parroquiales de Suecia, 1686, y un número para toda la vida, 1947", "Una persona, anotada una sola vez, y seguida adondequiera que vaya."]
+}

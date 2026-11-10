@@ -1,0 +1,11 @@
+# The plan's second check: every student has exactly one level. One row per student on census day
+# (unique), each with a level (not null). Written by the agent before any model, approved by Jun
+# Park on 2 November 2026; from then on, only a person changes it. A student missing altogether is
+# the first check's to catch: the levels would no longer add up.
+models:
+  - name: mart_planning__census_day_levels
+    columns:
+      - name: learner_key
+        data_tests: [unique, not_null]
+      - name: level_of_study
+        data_tests: [not_null]

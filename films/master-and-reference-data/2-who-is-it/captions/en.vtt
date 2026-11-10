@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:07.778
+In 1548, Martin Guerre left his village in the south of France, and his wife, Bertrande.
+
+00:00:09.178 --> 00:00:15.485
+Eight years later, a man came back as Martin. He knew the house, the family, their stories, and they took him in.
+
+00:00:16.985 --> 00:00:21.983
+His uncle came to doubt him. In court, a hundred and fifty witnesses couldn't agree.
+
+00:00:23.383 --> 00:00:29.386
+On appeal, as the judges leaned his way, a man with a wooden leg walked in: the real Martin Guerre.
+
+00:00:30.986 --> 00:00:33.885
+Two people, taken for one, because so much matched.
+
+00:00:40.985 --> 00:00:42.240
+First, two words.
+
+00:00:43.240 --> 00:00:48.680
+Master data is the things the business is about: Linh, an award, a supplier, a meter.
+
+00:00:49.980 --> 00:00:53.237
+Many rows, always growing, and matched across systems.
+
+00:00:54.437 --> 00:01:02.989
+Reference data is the short lists that sort them: countries, role types, statuses. Few rows, rarely changing, often from outside.
+
+00:01:04.389 --> 00:01:08.615
+Would you ever ask, “is this the same one as that?” Then it's master data.
+
+00:01:09.715 --> 00:01:13.045
+If you only pick a value from a list, it's reference data.
+
+00:01:14.445 --> 00:01:19.667
+And a list that gets owners and a life of its own, like faculties, becomes master data.
+
+00:01:22.167 --> 00:01:26.252
+What matching builds is a master record, often called a golden record.
+
+00:01:27.752 --> 00:01:31.663
+An ID of its own, which never changes and is never reused.
+
+00:01:33.263 --> 00:01:36.852
+For each detail, the best value, labelled with where it came from.
+
+00:01:38.552 --> 00:01:42.266
+And links to every record it came from, each kept as it arrived.
+
+00:01:43.766 --> 00:01:47.907
+So it can be explained, value by value, and undone, link by link.
+
+00:01:50.407 --> 00:01:53.288
+Linh came back to study under a new student number.
+
+00:01:54.588 --> 00:02:00.795
+This term, for the first time, the registry runs a duplicate check across the university's systems.
+
+00:02:02.295 --> 00:02:05.627
+Fifty thousand records would make over a billion pairs.
+
+00:02:07.127 --> 00:02:14.527
+So it compares only records that share something: an email, a number, or a birth year and a family name that sounds alike.
+
+00:02:16.027 --> 00:02:20.638
+It proposes pairs for Mei's office, the steward of the person. Here are three.
+
+00:02:23.138 --> 00:02:27.525
+The first pair is her two student numbers. Same name, same birth date.
+
+00:02:29.025 --> 00:02:33.873
+Out of a hundred, it scores 93: over the line where a pair links on its own.
+
+00:02:35.673 --> 00:02:40.719
+But in this first term, Mei's office checks the automatic links too, to test the rules.
+
+00:02:42.119 --> 00:02:45.020
+And Linh's application says she studied here before.
+
+00:02:46.320 --> 00:02:48.622
+So Mei links them, and writes down why.
+
+00:02:50.122 --> 00:02:53.311
+The registry merges the two numbers in its own system.
+
+00:02:55.811 --> 00:03:01.050
+The second pair is harder: her new student number, and HR's record of her as a tutor.
+
+00:03:02.250 --> 00:03:05.010
+Each thing compared adds weight, or takes it away.
+
+00:03:06.010 --> 00:03:11.463
+Given name, the same: plus 3.2. Family name, the same, but common: plus 2.
+
+00:03:12.763 --> 00:03:19.225
+Birth date, one digit apart, maybe a typo: plus 2.4. Email, different: minus 0.4.
+
+00:03:20.625 --> 00:03:24.456
+Together, 74: between the lines, so a person decides.
+
+00:03:26.056 --> 00:03:30.069
+If the birth dates agreed, it would score 93, like the first pair.
+
+00:03:32.569 --> 00:03:41.242
+An AI helper drafts a note for Mei, with the names hidden: birth dates one digit apart, and the HR email on the university's domain.
+
+00:03:42.942 --> 00:03:48.082
+It suggests; Mei decides. She asks HR, and they check her contract: a typo.
+
+00:03:49.682 --> 00:03:51.349
+She links them, with that reason.
+
+00:03:52.049 --> 00:03:55.108
+Which birth date to trust is the next film's question.
+
+00:03:57.608 --> 00:04:02.830
+The third pair looks easy: a learning platform account with Aisha Karimi's student number.
+
+00:04:04.130 --> 00:04:08.291
+But the account is Aisha Rahman's, and the number was typed in by mistake.
+
+00:04:09.791 --> 00:04:14.699
+Link them, and one student sees the other's results. Two people, taken for one.
+
+00:04:16.299 --> 00:04:18.831
+A false merge costs more than a missed match.
+
+00:04:20.331 --> 00:04:24.283
+So Mei keeps them apart, and her “not the same” binds the matcher.
+
+00:04:26.783 --> 00:04:30.297
+Two decisions, and Linh's five records point to one person.
+
+00:04:31.797 --> 00:04:39.203
+Nothing was destroyed: each record stays as it arrived. So if a real Martin ever walks in, any link can be undone.
+
+00:04:40.603 --> 00:04:46.079
+And no rule says two student numbers are never one person. A student who comes back has two.
+
+00:04:50.179 --> 00:04:56.521
+Hospitals match people too. Merge two patients by mistake, and a test result follows the wrong one.
+
+00:04:58.421 --> 00:05:04.305
+So they keep each identifier with the system that issued it, and undoing a merge is part of the job.
+
+00:05:07.205 --> 00:05:15.719
+Where the data is transformed, a query proposes the pairs without comparing everyone, and the decisions table becomes the person's queue.
+
+00:05:17.019 --> 00:05:21.635
+A test fails when a pair waits more than a week: the queue has an owner, and a limit.
+
+00:05:22.935 --> 00:05:27.789
+On the platform, the master records and their links, each with who decided and why.
+
+00:05:29.189 --> 00:05:31.787
+Decide a match once, with a reason, and keep it.

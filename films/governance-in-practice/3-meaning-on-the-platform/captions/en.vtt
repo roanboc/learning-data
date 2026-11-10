@@ -1,0 +1,166 @@
+WEBVTT
+
+00:00:01.200 --> 00:00:03.344
+Monday, in the registrar's office.
+
+00:00:04.644 --> 00:00:09.970
+Mei Tanaka owns what award means: the qualifications the university confers.
+
+00:00:11.270 --> 00:00:18.655
+Today, the meaning changes: microcredentials, the certificates of short courses, count too, from 6 credit points.
+
+00:00:20.355 --> 00:00:25.796
+When Yusuf asked what slowed her down, Mei said: I approve the words, then never see them used.
+
+00:00:27.696 --> 00:00:34.201
+Until now, award was kept in five glossaries, lists of what words mean, with three meanings between them.
+
+00:00:35.701 --> 00:00:47.653
+So two reports counted awards two ways: Planning's census report said 4,812, the draft submission to the government 4,867.
+
+00:00:49.353 --> 00:00:52.896
+The university could have sent the government a number it couldn't explain.
+
+00:00:54.596 --> 00:00:55.984
+Something had to change.
+
+00:00:57.484 --> 00:01:02.777
+Now award has one page, on the platform, and every copy is checked against it each night.
+
+00:01:04.277 --> 00:01:07.092
+The 6 credit points are kept once, as a setting.
+
+00:01:08.392 --> 00:01:12.900
+And awards conferred is counted once, for every report and every agent.
+
+00:01:14.400 --> 00:01:20.212
+That night, the check finds Monday's change, and on Tuesday morning, Mei sees everything her words touch.
+
+00:01:21.712 --> 00:01:26.765
+On submission day, both reports say 4,867.
+
+00:01:28.265 --> 00:01:31.950
+Her words reach the work, and the university sends one number.
+
+00:01:39.450 --> 00:01:42.506
+On the platform, each term of the glossary is a page.
+
+00:01:44.006 --> 00:01:48.288
+Award's page has its words, its owner, Mei, and its domain, course.
+
+00:01:49.788 --> 00:01:53.074
+It lists the tables that hold it, and where its words come from.
+
+00:01:54.774 --> 00:02:00.480
+It's published from Noor's map, where each term is kept, so a change is made there, never on the page.
+
+00:02:02.380 --> 00:02:04.080
+People read it beside the data.
+
+00:02:05.180 --> 00:02:09.070
+So does the platform's assistant, and it cites the page when it answers.
+
+00:02:11.970 --> 00:02:19.958
+The data team keeps its own copy of each term, beside the models, so the tables that hold award describe it in the same words.
+
+00:02:21.658 --> 00:02:25.807
+The copy names its source: the glossary's term, and the day it was synced.
+
+00:02:27.707 --> 00:02:32.368
+Each build then sends the descriptions on to the catalog, one way, never back.
+
+00:02:35.468 --> 00:02:39.514
+Every night, a check compares each copy with its term in the glossary.
+
+00:02:41.814 --> 00:02:43.846
+On Monday night, award had changed.
+
+00:02:45.146 --> 00:02:51.314
+So the check proposed the change, in a pull request: the old words and the new, and what the new words touch.
+
+00:02:53.014 --> 00:02:59.381
+Three tables, eight definitions that name award, the code that builds them, and three reports and apps to tell.
+
+00:03:01.281 --> 00:03:06.278
+On Tuesday morning, the data team reviewed the code, and Mei was told what it touches.
+
+00:03:07.778 --> 00:03:10.152
+This time, she saw where her words are used.
+
+00:03:13.052 --> 00:03:15.790
+The new words hold a number: 6 credit points.
+
+00:03:17.090 --> 00:03:21.435
+So it's kept in one place, as a setting: min award credit points, 6.
+
+00:03:23.135 --> 00:03:29.071
+Jun's new column, counts as an award, reads it, and every count of awards reads the column.
+
+00:03:30.771 --> 00:03:39.630
+If Mei and the faculties ever agree on another number, the glossary changes first, then one line, in a pull request the data team reviews.
+
+00:03:44.330 --> 00:03:48.210
+A count is a meaning too: which credentials count, and in which year.
+
+00:03:49.710 --> 00:03:57.205
+So awards conferred is counted once, as a metric view: a count the platform defines once, for every tool that asks.
+
+00:03:58.905 --> 00:04:03.107
+It counts the credentials that count as an award, by the year they were issued.
+
+00:04:04.607 --> 00:04:08.781
+The project builds it like its models, so every change to it is reviewed.
+
+00:04:10.281 --> 00:04:14.032
+The draft submission reads it, and so does Planning's census report.
+
+00:04:15.732 --> 00:04:18.232
+Neither counts awards its own way any more.
+
+00:04:21.132 --> 00:04:23.659
+And the platform's agents read the same meaning.
+
+00:04:24.759 --> 00:04:30.912
+Clara asks Genie One, the platform's assistant, how many awards the university conferred this year.
+
+00:04:32.612 --> 00:04:39.864
+It answers 4,867, from the metric, and cites award's page for what an award is.
+
+00:04:41.764 --> 00:04:45.873
+It prefers the page to its own guess, and shows where its answer came from.
+
+00:04:47.373 --> 00:04:51.260
+An agent the data team builds on the metric gives the same answer.
+
+00:04:52.760 --> 00:04:56.036
+People and agents read one meaning, so they get one number.
+
+00:04:58.936 --> 00:05:04.583
+Meaning comes in three layers: what a word means, how a number is counted, and how things relate.
+
+00:05:06.083 --> 00:05:07.292
+Each has one home.
+
+00:05:08.592 --> 00:05:12.009
+The words live on Noor's map, and the glossary copies them.
+
+00:05:13.509 --> 00:05:17.047
+How things relate lives there too, copied into the project.
+
+00:05:18.547 --> 00:05:22.912
+And the counts live in the project, which the platform serves as metric views.
+
+00:05:24.412 --> 00:05:27.602
+Every copy is checked against its home, or built from it.
+
+00:05:31.302 --> 00:05:36.091
+Mei sees her words used now, in every table, count and answer that holds them.
+
+00:05:37.591 --> 00:05:42.339
+She decides what award means, once, and the platform carries it everywhere it's read.
+
+00:05:44.039 --> 00:05:54.094
+On submission day, the draft and Planning's census report both say 4,867, counted by the same metric, with the same words.
+
+00:05:55.794 --> 00:05:58.980
+One meaning, read by people, reports and agents.

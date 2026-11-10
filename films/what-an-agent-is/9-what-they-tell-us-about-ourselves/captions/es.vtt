@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00:02.200 --> 00:00:04.934
+Melbourne, Australia, 1978.
+
+00:00:05.734 --> 00:00:08.746
+Rod Saunders había perdido la audición en un accidente de auto.
+
+00:00:09.846 --> 00:00:13.431
+Podía leerle los labios a su esposa, Margaret, pero no podía oír su voz.
+
+00:00:14.531 --> 00:00:20.336
+Un audífono solo sube el volumen, y sus oídos internos ya no le pasaban ningún sonido al cerebro.
+
+00:00:21.636 --> 00:00:26.233
+Para quienes, como Rod, quedaban sordos de adultos, era una vida aislada de las voces.
+
+00:00:28.333 --> 00:00:36.857
+Incluso un pionero del campo dudó, en 1966, de que un cerebro adulto pudiera aprender a entender el habla a partir de señales eléctricas:
+
+00:00:37.057 --> 00:00:38.920
+un ‘idioma extranjero’, lo llamó.
+
+00:00:40.020 --> 00:00:41.408
+Algo tenía que cambiar.
+
+00:00:42.808 --> 00:00:46.226
+El cirujano Graeme Clark había visto a su propio padre quedarse sordo.
+
+00:00:47.926 --> 00:00:51.967
+Durante diez años, él y su equipo trabajaron en una copia tosca del oído interno:
+
+00:00:52.167 --> 00:00:58.266
+un implante, un cable fino con diez electrodos, para llevar el sonido al nervio como pulsos eléctricos.
+
+00:00:59.966 --> 00:01:03.234
+El 1 de agosto de 1978, se lo implantaron.
+
+00:01:04.734 --> 00:01:07.893
+Cuando el equipo puso ‘Waltzing Matilda’, Rod se puso a cantarla.
+
+00:01:10.193 --> 00:01:13.364
+Para diciembre, entendía palabras sin labios que leer.
+
+00:01:14.864 --> 00:01:22.058
+La copia era tosca: diez electrodos, donde un oído sano tiene miles de células diminutas que convierten el sonido en señales.
+
+00:01:23.358 --> 00:01:27.569
+El cerebro de Rod hizo el resto: con práctica, aprendió el ‘idioma extranjero’.
+
+00:01:29.269 --> 00:01:34.135
+Para 2019, se habían colocado más de setecientos mil implantes en el mundo.
+
+00:01:35.635 --> 00:01:38.405
+Lo mismo pasa con los agentes que creamos para los datos.
+
+00:01:39.005 --> 00:01:42.582
+También son copias toscas, de neuronas y de lo que la gente escribió.
+
+00:01:43.682 --> 00:01:48.481
+Ver en qué se parecen a nosotros, y en qué no, le muestra a un equipo qué encargarles, y qué conservar.
+
+00:01:56.381 --> 00:01:58.062
+Hoy, en la universidad.
+
+00:01:58.762 --> 00:02:06.124
+El agente contó los estudiantes de este semestre, 18,412, y mostró la consulta detrás del número.
+
+00:02:07.624 --> 00:02:10.890
+Mei, en la oficina de registro, lo verificó y firmó.
+
+00:02:12.190 --> 00:02:14.221
+Con un café, empiezan las preguntas.
+
+00:02:15.521 --> 00:02:17.954
+Jun se pregunta si nuestro cerebro funciona así.
+
+00:02:18.854 --> 00:02:21.041
+Mei, si podría tener una idea propia.
+
+00:02:21.941 --> 00:02:24.758
+Noor, si una copia perfecta de un cerebro sería una mente.
+
+00:02:25.658 --> 00:02:27.352
+Sam, si siente algo.
+
+00:02:28.252 --> 00:02:30.612
+Y Yusuf pregunta qué nos hace humanos, entonces.
+
+00:02:31.912 --> 00:02:34.683
+Algunas de estas preguntas todavía no tienen respuesta.
+
+00:02:38.783 --> 00:02:41.504
+Primero: ¿qué nos enseñó construirlos sobre el cerebro?
+
+00:02:42.804 --> 00:02:51.239
+En 1958, el psicólogo Frank Rosenblatt describió el perceptrón, una máquina que aprende, hecha como copia tosca de las neuronas,
+
+00:02:51.439 --> 00:02:54.781
+para entender cómo un cerebro percibe, recuerda y actúa.
+
+00:02:56.081 --> 00:03:00.294
+Los modelos de hoy descienden de él, y aprenden sobre todo adivinando la siguiente palabra.
+
+00:03:01.794 --> 00:03:07.462
+En 2022, unos científicos registraron el cerebro de nueve personas que escuchaban un pódcast.
+
+00:03:08.562 --> 00:03:11.712
+Antes de que llegara cada palabra, su cerebro ya la estaba adivinando.
+
+00:03:13.212 --> 00:03:19.748
+Karl Friston y Andy Clark sostenían desde hacía tiempo que eso hace el cerebro: predecir, y aprender de los errores.
+
+00:03:21.048 --> 00:03:26.086
+El cerebro de Rod hizo algo parecido: unió diez señales toscas con las voces que recordaba.
+
+00:03:27.586 --> 00:03:29.100
+Pero la copia se detiene en algún punto.
+
+00:03:29.800 --> 00:03:34.722
+Un cerebro adivina en muchos niveles a la vez, desde la siguiente palabra hasta adónde va la historia.
+
+00:03:36.022 --> 00:03:41.329
+Para imitar un tipo de célula cerebral, los investigadores necesitaron una red de cinco a ocho capas.
+
+00:03:42.629 --> 00:03:45.843
+Y cómo aprende un cerebro de sus errores, nadie lo sabe todavía.
+
+00:03:51.143 --> 00:03:55.688
+Segundo: cuando un modelo escribe un poema, ¿está creando, o mezclando lo que aprendió?
+
+00:03:56.988 --> 00:04:00.198
+Nosotros también aprendemos de otros, y mezclamos lo aprendido de formas nuevas.
+
+00:04:02.098 --> 00:04:10.333
+En 1843, Ada Lovelace escribió que el primer diseño de una computadora solo podía hacer ‘lo que sepamos ordenarle que haga’.
+
+00:04:11.833 --> 00:04:17.021
+En 1990, la filósofa Margaret Boden describió tres maneras de ser creativo:
+
+00:04:17.221 --> 00:04:21.771
+combinar ideas, explorar un estilo, y cambiar las propias reglas del estilo.
+
+00:04:23.271 --> 00:04:26.263
+Un modelo puede combinar ideas y explorar un estilo.
+
+00:04:27.563 --> 00:04:32.759
+Pero una persona aporta lo que una mezcla quizá no: una vida, una intención, una razón para hacerlo.
+
+00:04:34.259 --> 00:04:36.000
+La razón de Clark fue su padre.
+
+00:04:37.900 --> 00:04:43.904
+Boden dijo que si una computadora puede ser de verdad creativa no es algo que la ciencia pueda resolver sola.
+
+00:04:45.004 --> 00:04:48.607
+En parte depende de lo que queremos decir, y en parte es una decisión que tendremos que tomar.
+
+00:04:53.507 --> 00:04:57.448
+Tercero: si copiáramos un cerebro, cable por cable, ¿tendríamos una mente?
+
+00:04:58.748 --> 00:05:04.545
+Para 1986, ya se habían mapeado las conexiones de las 302 neuronas de un gusano diminuto.
+
+00:05:05.845 --> 00:05:11.675
+Desde 2011, un proyecto abierto, OpenWorm, trabaja en una copia de él en una computadora.
+
+00:05:12.375 --> 00:05:17.422
+Se retuerce, pero poco más: un mapa no dice cómo funciona cada conexión, ni cuándo.
+
+00:05:18.722 --> 00:05:26.521
+En 2024, se mapeó el cerebro completo de una mosca, 139,255 neuronas,
+
+00:05:26.721 --> 00:05:30.533
+y un modelo hecho a partir del mapa predijo cuáles responden al azúcar.
+
+00:05:32.033 --> 00:05:33.770
+Nosotros tenemos unos 86 mil millones.
+
+00:05:35.270 --> 00:05:37.908
+Y una copia puede actuar como nosotros sin funcionar como nosotros.
+
+00:05:39.008 --> 00:05:42.997
+El implante de Rod hacía parte del trabajo de un oído, pero no como lo hace un oído:
+
+00:05:43.197 --> 00:05:48.066
+estaba hecho para el habla, y a muchas personas con implantes la música todavía les suena pobre.
+
+00:05:49.566 --> 00:05:52.251
+¿Una copia que funcionara exactamente como nosotros sería una mente?
+
+00:05:53.551 --> 00:06:00.221
+El filósofo John Searle escribió que nadie supone que una tormenta simulada ‘nos dejará a todos empapados’.
+
+00:06:01.521 --> 00:06:05.602
+Otros dicen que una mente es lo que hace un cerebro, así que una copia perfecta lo sería.
+
+00:06:06.702 --> 00:06:08.188
+Nadie sabe quién tiene razón.
+
+00:06:13.088 --> 00:06:16.615
+Cuarto, y lo más difícil: ¿por qué ser nosotros se siente como algo?
+
+00:06:18.015 --> 00:06:20.202
+El implante convertía el sonido en pulsos.
+
+00:06:21.302 --> 00:06:22.499
+No oía nada.
+
+00:06:24.399 --> 00:06:25.250
+Rod sí.
+
+00:06:27.550 --> 00:06:32.384
+En 1995, el filósofo David Chalmers llamó a esto el problema difícil:
+
+00:06:32.584 --> 00:06:36.597
+‘¿Por qué el procesamiento físico habría de dar lugar a una rica vida interior?’
+
+00:06:37.797 --> 00:06:39.248
+Los científicos tienen teorías.
+
+00:06:39.848 --> 00:06:43.951
+Una dice que la experiencia viene de cuán unidas trabajan las partes de un sistema.
+
+00:06:44.951 --> 00:06:48.231
+Otra, de noticias compartidas por todo el cerebro a la vez.
+
+00:06:49.331 --> 00:06:59.140
+En 2025, una prueba de ambas, con 256 personas y reglas acordadas antes por los dos bandos, cuestionó partes clave de cada una.
+
+00:07:00.240 --> 00:07:01.676
+La ciencia todavía no lo sabe.
+
+00:07:04.976 --> 00:07:06.348
+¿Podría sentir una máquina, entonces?
+
+00:07:07.648 --> 00:07:15.364
+El neurocientífico colombiano Rodolfo Llinás descubrió que, despierto y soñando, el cerebro oscila unas cuarenta veces por segundo.
+
+00:07:16.864 --> 00:07:20.148
+Pensaba que este ritmo une lo que percibimos en un solo momento.
+
+00:07:21.148 --> 00:07:22.593
+En el sueño profundo, se apaga.
+
+00:07:24.093 --> 00:07:31.948
+Roger Penrose y Stuart Hameroff miran más hondo, a efectos cuánticos en los microtúbulos, tubos diminutos dentro de nuestras neuronas.
+
+00:07:33.448 --> 00:07:38.222
+Los críticos dicen que un cerebro tibio y húmedo borraría esos efectos demasiado rápido para que importen.
+
+00:07:39.222 --> 00:07:42.421
+Penrose y Hameroff no están de acuerdo, y las pruebas siguen.
+
+00:07:43.721 --> 00:07:48.689
+En 2001, Llinás escribió que dudaba sinceramente de la idea cuántica.
+
+00:07:49.689 --> 00:07:54.511
+Pero en 2007, dijo que no sabía qué en nuestras células produce el sentir.
+
+00:07:54.911 --> 00:07:57.884
+‘¿Filamentos? ¿Microtúbulos? ¿Mecánica cuántica?’
+
+00:07:59.584 --> 00:08:07.496
+En 2023, diecinueve investigadores buscaron en la IA actual catorce señales de conciencia, tomadas de las principales teorías.
+
+00:08:08.496 --> 00:08:14.363
+Ningún sistema parecía consciente, pero nada evidente impide construir sistemas que muestren esas señales.
+
+00:08:15.863 --> 00:08:19.071
+Si mostrarlas significa sentir algo, nadie lo sabe.
+
+00:08:24.171 --> 00:08:26.022
+Por último: ¿qué nos hace humanos, entonces?
+
+00:08:27.322 --> 00:08:33.748
+En 1637, René Descartes escribió que una máquina nunca podría ordenar sus palabras de distintas maneras,
+
+00:08:33.948 --> 00:08:37.806
+para responder a lo que se le diga, como puede hacerlo hasta la persona más torpe.
+
+00:08:39.106 --> 00:08:40.445
+Hoy, las máquinas lo hacen.
+
+00:08:41.945 --> 00:08:43.564
+Si no es el lenguaje, ¿entonces qué?
+
+00:08:44.564 --> 00:08:45.924
+¿Un cuerpo que puede sufrir daño?
+
+00:08:46.624 --> 00:08:48.043
+¿Una vida vivida con otros?
+
+00:08:48.743 --> 00:08:49.516
+¿Los sentimientos?
+
+00:08:50.216 --> 00:08:52.520
+¿Elegir lo que importa, y responder por ello?
+
+00:08:53.820 --> 00:08:55.155
+Nadie lo ha resuelto.
+
+00:08:56.655 --> 00:09:01.281
+Rod volvió a oír la voz de Margaret, con diez electrodos y un cerebro que aprendió.
+
+00:09:03.581 --> 00:09:10.418
+Construir copias nos sigue enseñando sobre nosotros: en qué se parecen a nosotros, en qué no, y cuánto aún no sabemos.
+
+00:09:11.718 --> 00:09:16.096
+Ver eso ayuda al equipo de Jun a decidir qué encargarle al agente, y qué conservar.
+
+00:09:17.396 --> 00:09:18.944
+Todavía no tenemos las respuestas.
+
+00:09:19.944 --> 00:09:20.906
+Sigue preguntándote.

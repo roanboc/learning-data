@@ -1,0 +1,38 @@
+{
+  "key": "memory-for-the-team",
+  "title": "Memory: from one chat to the team",
+  "sub": "The fourth film of Agents at work on data, the second series on AI agents in data work: what one person's agent learns in a chat stays there, and a colleague's agent repeats the mistake; a session is an episode, and lasting memory keeps the facts, preferences and decisions it teaches; memory the team shares, reviewed, without names and corrected when wrong, lets every agent learn from every chat.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, violet the model, orange the data and its evidence, green what is checked and agrees, amber a slip or a doubt. The places of the opening story are painted full-frame, matte and soft-lit, with the place and year on a tag.",
+  "src": [
+    "places.js",
+    "memory.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "team",
+    "shared",
+    6.9
+  ],
+  "say": [
+    [
+      "\\bTulving\\b",
+      "Toolving"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "approach"
+  ],
+  "urgent": []
+}

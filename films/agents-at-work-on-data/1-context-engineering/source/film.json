@@ -1,0 +1,38 @@
+{
+  "key": "context-engineering",
+  "title": "Context engineering",
+  "sub": "The opening film of Agents at work on data, the second series on AI agents in data work: what an agent reads decides what it writes. Its context comes in four kinds, code, metadata, skills and tools; a meaning nobody wrote down becomes a confident guess; and a team keeps one context, written once, that people and agents both read.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, violet the model and its guesses, orange the data coming back, green a check that passes, amber one that fails. The scenes of Arezzo and Rome, about 1025, are painted full-frame, matte and soft-lit, with the place and year on a tag.",
+  "src": [
+    "past.js",
+    "plan.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "lines",
+    "page",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bArezzo\\b",
+      "Arretso"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "lines"
+  ],
+  "urgent": []
+}

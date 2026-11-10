@@ -1,0 +1,80 @@
+{
+  "kicker": "Letting people decide",
+  "kicker_es": "Dejar decidir a la gente",
+  "title_es": "Reglas que dejan decidir",
+  "h1": "Rules that let people decide: a few clear rules, good tools, and trust",
+  "h1_es": "Reglas que dejan decidir: pocas reglas claras, herramientas y confianza",
+  "lead": "From October 2027, the four faculties plan their own rooms from the data, instead of waiting two weeks for each report. Three rules, each with its reason, a template that makes the right way the easy way, and one box that says who decides what. Then Engineering finds what nobody had asked about.",
+  "lead_es": "Desde octubre de 2027, las cuatro facultades planifican sus aulas con los datos, sin esperar dos semanas por cada reporte. Tres reglas, cada una con su razón, una plantilla que hace fácil lo correcto y un recuadro que dice quién decide qué. Luego Ingeniería encuentra lo que nadie había preguntado.",
+  "description": "A film about decentralisation and emergence, the last of Leading a data team: don't make every decision yourself; give people a few clear rules, each with its reason, good tools and trust, and let decisions be made where the knowledge is; Elinor Ostrom's commons that lasted, data mesh and Team Topologies, each named once; from July to September 2027 the faculties ask the data team for 27 room reports, each about a day and a half to make and two weeks in the list, and Helena Novak, the data manager, decides whose rooms come first, so she decides to stop deciding; Yusuf Demir's first list of eleven rules comes down to the three needed now (room use means one thing for everyone, the product's promise holds, ask its owner before publishing a new measure), agreed with the four faculties' timetable officers, not for them; Ivy Reyes and Jun Park's template makes the right way the easy way, with one box that says who decides what; from Monday 4 October the officers plan their own rooms, and Lucy Tran, Engineering's officer, finds nine of its twelve teaching labs booked and empty every Monday morning, which no report had shown; Health and Arts copy her page within three weeks, and nobody sent an instruction; by Friday 26 November the four faculties have sent their plans for February, moving one peak class in six; one real problem brings a fourth rule out of the drawer: share the live page, not a copy; and what to do on Monday: write few rules, each with its reason, make the right way the easy way, say who decides what, watch what emerges, and add a rule only when a real problem shows. It opens in Bali, where the subaks and their water temples have shared water for a thousand years, and a plan to plant as fast as possible brought pests and dry fields until the temples' calendar came back.",
+  "description_es": "Una película sobre descentralizar y lo que emerge, la última de Liderar un equipo de datos: no tomar cada decisión tú; dar a la gente unas pocas reglas claras, cada una con su razón, buenas herramientas y confianza, y dejar que se decida donde está el conocimiento; los bienes comunes que perduraron de Elinor Ostrom, data mesh y Team Topologies, cada uno nombrado una vez; de julio a septiembre de 2027 las facultades piden al equipo de datos 27 reportes de aulas, cada uno de un día y medio de trabajo y dos semanas en la lista, y Helena Novak, la gestora de datos, decide qué aulas van primero, así que decide dejar de decidir; la primera lista de once reglas de Yusuf Demir se reduce a las tres que hacen falta ahora (el uso de un aula significa lo mismo para todos, la promesa del producto se cumple, consultar a su dueña antes de publicar una medida nueva), acordadas con las personas responsables de horarios de las cuatro facultades, no en su lugar; la plantilla de Ivy Reyes y Jun Park hace fácil el camino correcto, con un recuadro que dice quién decide qué; desde el lunes 4 de octubre las facultades planifican sus aulas, y Lucy Tran, responsable de horarios de Ingeniería, encuentra nueve de sus doce laboratorios docentes reservados y vacíos cada lunes por la mañana, algo que ningún reporte había mostrado; Salud y Artes copian su página en tres semanas, sin que nadie enviara una instrucción; para el viernes 26 de noviembre las cuatro facultades han enviado sus planes para febrero, y mueven una de cada seis clases de hora pico; un problema real saca del cajón una cuarta regla: compartir la página viva, no una copia; y qué hacer el lunes: escribir pocas reglas, cada una con su razón, hacer fácil el camino correcto, decir quién decide qué, observar lo que surge y agregar una regla solo cuando aparezca un problema real. Empieza en Bali, donde los subaks y sus templos del agua comparten el agua desde hace mil años, y un plan para sembrar lo más rápido posible trajo plagas y campos secos hasta que volvió el calendario de los templos.",
+  "card": "Four faculties plan their own rooms with a few clear rules and a template, and Engineering finds labs nobody had asked about.",
+  "card_es": "Cuatro facultades planifican sus aulas con pocas reglas claras y una plantilla, e Ingeniería encuentra laboratorios que nadie veía.",
+  "chapters_es": {
+    "subak": "El agua, compartida",
+    "door": "Cada pregunta, una sola puerta",
+    "rules": "Tres reglas, cada una con su razón",
+    "tools": "El camino correcto, el camino fácil",
+    "labs": "Laboratorios un lunes",
+    "watch": "Observar lo que surge",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Bali, the 1970s and 1980s: water, shared",
+    "For a thousand years, Bali's farmers have shared their water through subaks and water temples. Told to plant as often as they could, they lost harvests to pests and dry fields; when the temples' calendar came back, so did the harvests. A few rules, made where the work is, can do better than a central plan."
+  ],
+  "past_es": [
+    "Bali, décadas de 1970 y 1980: el agua, compartida",
+    "Desde hace mil años, los arroceros de Bali comparten el agua con los subaks y los templos del agua. Cuando se les dijo que sembraran tan seguido como pudieran, perdieron cosechas por las plagas y los campos secos; cuando volvió el calendario de los templos, volvieron las cosechas. Unas pocas reglas, hechas donde está el trabajo, pueden más que un plan central."
+  ],
+  "next_h": "You've seen how a few clear rules let people decide where the work is. Next: owning the outcome, not only the task.",
+  "next_h_es": "Viste cómo unas pocas reglas claras dejan decidir a la gente donde está el trabajo. Después: hacerse cargo del resultado, no solo de la tarea.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Beyond Markets and States, Elinor Ostrom's Nobel lecture",
+        "title_es": "Más allá de los mercados y los Estados, la conferencia Nobel de Elinor Ostrom (en inglés)",
+        "line": "Her lecture of 2009: how people who share fisheries, forests and water make rules that last, and why one rule for everywhere often fails.",
+        "line_es": "Su conferencia de 2009: cómo quienes comparten pesquerías, bosques y agua hacen reglas que duran, y por qué una misma regla para todas partes suele fallar.",
+        "href": "https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom/lecture/",
+        "href_es": "https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom/lecture/"
+      },
+      {
+        "title": "Elinor Ostrom, and her design principles",
+        "title_es": "Elinor Ostrom y sus principios de diseño",
+        "line": "Her life and work, and the eight design principles she found in commons that lasted.",
+        "line_es": "Su vida y su obra, y los ocho principios de diseño que encontró en los bienes comunes que perduran.",
+        "href": "https://en.wikipedia.org/wiki/Elinor_Ostrom",
+        "href_es": "https://es.wikipedia.org/wiki/Elinor_Ostrom"
+      },
+      {
+        "title": "Subak, Bali's way of sharing water",
+        "title_es": "El subak, la forma de Bali de compartir el agua",
+        "line": "How the subaks and their water temples share water down the rivers, and their listing as World Heritage in 2012.",
+        "line_es": "Cómo los subaks y sus templos del agua reparten el agua a lo largo de los ríos, y su inscripción como Patrimonio de la Humanidad en 2012.",
+        "href": "https://en.wikipedia.org/wiki/Subak_(irrigation)",
+        "href_es": "https://es.wikipedia.org/wiki/Subak"
+      },
+      {
+        "title": "Data Mesh Principles and Logical Architecture, by Zhamak Dehghani",
+        "title_es": "Data Mesh Principles and Logical Architecture, de Zhamak Dehghani (en inglés)",
+        "line": "Data mesh's four principles: data owned by the people who know it, served as products, on a self-serve platform, with governance shared across them.",
+        "line_es": "Los cuatro principios de data mesh: datos a cargo de quienes los conocen, servidos como productos, en una plataforma de autoservicio, con un gobierno compartido entre todos.",
+        "href": "https://martinfowler.com/articles/data-mesh-principles.html",
+        "href_es": "https://martinfowler.com/articles/data-mesh-principles.html"
+      },
+      {
+        "title": "Team Topologies' key concepts",
+        "title_es": "Los conceptos clave de Team Topologies (en inglés)",
+        "line": "Four kinds of team and three ways they work together, among them a platform that makes the hard parts easy for the teams that use it.",
+        "line_es": "Cuatro tipos de equipo y tres formas de trabajar juntos, entre ellas una plataforma que facilita lo difícil a los equipos que la usan.",
+        "href": "https://teamtopologies.com/key-concepts",
+        "href_es": "https://teamtopologies.com/key-concepts"
+      }
+    ]
+  }
+}

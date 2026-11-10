@@ -1,0 +1,283 @@
+1
+00:00:02,200 --> 00:00:03,727
+Berlín, 1904.
+
+2
+00:00:05,627 --> 00:00:11,810
+Cada día a mediodía, Wilhelm von Osten, profesor de matemáticas jubilado, mostraba su caballo en un patio.
+
+3
+00:00:13,310 --> 00:00:16,978
+Llevaba cuatro años enseñando a Hans, como se enseña a los niños en la escuela.
+
+4
+00:00:18,478 --> 00:00:22,237
+Hans respondía golpeando con el casco: sumas, fracciones, la fecha.
+
+5
+00:00:24,337 --> 00:00:26,227
+Los periódicos lo llamaron Hans el Listo.
+
+6
+00:00:27,927 --> 00:00:29,499
+Pero ¿cómo podía un caballo hacer sumas?
+
+7
+00:00:31,399 --> 00:00:35,709
+Algunos diarios llamaron farsante a von Osten, por hacerle señas secretas.
+
+8
+00:00:37,009 --> 00:00:39,084
+Estaba en juego el buen nombre de un anciano.
+
+9
+00:00:40,984 --> 00:00:44,063
+Trece expertos vinieron a juzgar, y no hallaron truco.
+
+10
+00:00:45,763 --> 00:00:47,615
+Muchos entendieron que Hans podía pensar.
+
+11
+00:00:49,315 --> 00:00:51,922
+Pero en cada prueba, alguien allí sabía la respuesta.
+
+12
+00:00:53,622 --> 00:00:57,243
+Algo tenía que cambiar: no el caballo, sino la forma de examinarlo.
+
+13
+00:00:59,543 --> 00:01:05,432
+Ese otoño, un joven psicólogo, Oskar Pfungst, examinó a Hans como a un caballo, no como a un alumno.
+
+14
+00:01:06,932 --> 00:01:09,424
+Cuando nadie allí sabía la respuesta, Hans fallaba.
+
+15
+00:01:11,124 --> 00:01:16,543
+Con grandes anteojeras, sin poder ver a quien preguntaba, acertaba 6 de cada 100.
+
+16
+00:01:18,643 --> 00:01:20,471
+Cuando podía verlo, 89.
+
+17
+00:01:22,571 --> 00:01:24,685
+Hans había estado mirando a quien preguntaba.
+
+18
+00:01:26,385 --> 00:01:29,463
+Así que von Osten no hacía trampa, y Hans no sabía contar.
+
+19
+00:01:30,963 --> 00:01:34,281
+Pero veía movimientos demasiado pequeños para que ningún experto los notara.
+
+20
+00:01:35,781 --> 00:01:39,356
+Desde entonces, las pruebas cuidadosas ocultan la respuesta a quien pregunta.
+
+21
+00:01:41,256 --> 00:01:46,323
+El equipo de datos de Jun trabaja con otra cosa que no es lo que parece: un agente de IA.
+
+22
+00:01:47,823 --> 00:01:52,284
+Supervisado por lo que es, les da más de lo que daría un junior, y con seguridad.
+
+23
+00:01:59,884 --> 00:02:03,338
+Un agente es un modelo que razona, con manos, en un bucle.
+
+24
+00:02:05,038 --> 00:02:10,273
+A los equipos que empiezan con uno se les suele decir: trátalo como a un junior que necesita supervisión.
+
+25
+00:02:12,173 --> 00:02:16,797
+Un junior sabe un poco, trabaja despacio y hace tareas pequeñas que alguien revisa.
+
+26
+00:02:18,497 --> 00:02:22,306
+Recuerda lo que se le dice, así que mes a mes lo revisas menos.
+
+27
+00:02:24,006 --> 00:02:26,688
+Y tiene cuidado, porque un error le costaría caro.
+
+28
+00:02:28,388 --> 00:02:31,440
+Pero, como Hans, el agente solo se parece a esa imagen.
+
+29
+00:02:33,140 --> 00:02:36,972
+Es más que un junior en dos cosas, y menos que una persona en tres.
+
+30
+00:02:41,072 --> 00:02:47,286
+Una mañana, Jun le pregunta cómo se construye el conteo de títulos, de los registros de estudiantes al informe para el gobierno.
+
+31
+00:02:48,786 --> 00:02:54,428
+Lee todo el proyecto, 33 tablas y su código, y dibuja el camino en un minuto.
+
+32
+00:02:56,728 --> 00:02:58,859
+Un junior nuevo necesitaría una semana.
+
+33
+00:03:00,559 --> 00:03:03,821
+Ha leído más de lo que cualquiera de nosotros podría leer en mil vidas.
+
+34
+00:03:05,921 --> 00:03:09,097
+Así que la imagen del junior se queda corta, y esconde un peligro.
+
+35
+00:03:10,597 --> 00:03:16,426
+Con las riendas sueltas, podría cambiar todas las tablas en un minuto: mal, tan rápido como bien.
+
+36
+00:03:18,726 --> 00:03:24,136
+El ritmo de un junior hace pequeños sus errores. El del agente no, así que algo más debe hacerlo.
+
+37
+00:03:28,436 --> 00:03:31,431
+Más tarde, Jun le pide el conteo de títulos de este año.
+
+38
+00:03:32,131 --> 00:03:35,717
+Cuenta 4,812, y muestra cómo.
+
+39
+00:03:37,217 --> 00:03:43,222
+Jun le señala el glosario: aquí, las microcredenciales de seis créditos o más también cuentan.
+
+40
+00:03:44,322 --> 00:03:48,087
+Vuelve a contar: 4,867.
+
+41
+00:03:49,587 --> 00:03:54,289
+A la mañana siguiente, Jun abre una sesión nueva y pide los títulos por facultad.
+
+42
+00:03:54,989 --> 00:04:01,523
+Sus facultades vuelven a sumar 4,812: ha dejado fuera las microcredenciales.
+
+43
+00:04:03,023 --> 00:04:05,124
+Un junior, con decírselo una vez, lo recordaría.
+
+44
+00:04:05,824 --> 00:04:09,504
+El agente no tiene memoria de ayer, a menos que se la demos.
+
+45
+00:04:10,604 --> 00:04:15,969
+Así que Jun añade la lección a las notas del equipo para agentes, que cada sesión lee al empezar.
+
+46
+00:04:16,669 --> 00:04:19,662
+Antes de contar una palabra, lee su significado en el glosario.
+
+47
+00:04:21,362 --> 00:04:25,128
+Desde entonces, cuenta como dice el glosario, abra quien abra la sesión.
+
+48
+00:04:28,028 --> 00:04:31,011
+Otro día, Jun le pide que acelere el proceso nocturno.
+
+49
+00:04:32,511 --> 00:04:36,416
+Encuentra tres tablas, construidas cada noche, que nada parece leer.
+
+50
+00:04:38,116 --> 00:04:41,008
+En segundos, propone un cambio que las borra.
+
+51
+00:04:42,908 --> 00:04:47,408
+Un junior habría preguntado antes, con su nombre en el trabajo y una carrera por delante.
+
+52
+00:04:48,908 --> 00:04:52,483
+El agente no tiene carrera, y ningún error le cuesta nada.
+
+53
+00:04:53,983 --> 00:04:56,474
+No es descuidado. No tiene nada que perder.
+
+54
+00:04:58,574 --> 00:05:05,464
+Así que su prudencia viene de sus permisos: lee, y solo escribe borradores en un sandbox, donde esperan a una persona.
+
+55
+00:05:07,564 --> 00:05:12,832
+Jun pregunta: una de las tres se lee una vez al año, para el informe al gobierno.
+
+56
+00:05:14,732 --> 00:05:19,919
+Así que el cambio sigue con dos. Jun lo revisa, y Noor lo aprueba para producción.
+
+57
+00:05:22,019 --> 00:05:27,774
+Un junior llega a ser quien aprueba. El agente nunca: su revisión es solo de referencia.
+
+58
+00:05:31,674 --> 00:05:34,702
+De vuelta en Berlín, Pfungst descubrió qué miraba Hans.
+
+59
+00:05:36,202 --> 00:05:42,037
+En el número justo, la cabeza de quien preguntaba se levantaba: en von Osten, un quinto de milímetro como mucho.
+
+60
+00:05:44,137 --> 00:05:46,563
+Nadie sabía que lo hacía, ni siquiera Pfungst.
+
+61
+00:05:48,463 --> 00:05:55,048
+Los investigadores de IA aún usan el nombre de Hans para un modelo que saca la respuesta de una pista, no del problema.
+
+62
+00:05:56,548 --> 00:06:03,546
+En pruebas desde 2023, una pista como «creo que es la B» inclinó a los modelos hacia la B, y su razonamiento casi nunca lo dijo.
+
+63
+00:06:05,446 --> 00:06:09,684
+Así que Jun pregunta como preguntaba Pfungst: sin la respuesta en la pregunta.
+
+64
+00:06:11,184 --> 00:06:14,606
+Mira cómo llegó al resultado: la consulta, y las filas que leyó.
+
+65
+00:06:16,306 --> 00:06:23,070
+Y lo compara con un conteo que no hizo: el borrador para el gobierno también dice 4,867.
+
+66
+00:06:27,370 --> 00:06:31,914
+Hans nunca fue un alumno: era un caballo, con un don que nadie había buscado.
+
+67
+00:06:33,814 --> 00:06:37,391
+El agente no es un junior. Sabe más, y trabaja más rápido.
+
+68
+00:06:38,891 --> 00:06:43,914
+Y es menos que una persona: sin carrera, sin nada que perder, sin memoria de ayer.
+
+69
+00:06:45,414 --> 00:06:51,107
+Así que su prudencia está en sus permisos, su memoria en las notas del equipo, y cada sí en una persona.
+
+70
+00:06:53,007 --> 00:07:00,657
+Esta semana, el equipo de Jun ganó un camino en un minuto, un conteo revisado dos veces, la tabla anual a salvo y una lección por sesión.
+
+71
+00:07:02,557 --> 00:07:05,668
+Supervísalo por lo que es, no por lo que parece.

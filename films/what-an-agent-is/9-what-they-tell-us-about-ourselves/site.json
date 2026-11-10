@@ -1,0 +1,33 @@
+{
+  "kicker": "Agents and the mind",
+  "kicker_es": "Los agentes y la mente",
+  "title_es": "Lo que nos dicen de nosotros mismos",
+  "h1": "What building agents teaches us about ourselves",
+  "h1_es": "Lo que construir agentes nos enseña sobre nosotros",
+  "lead": "The university's agent counts this term's students and shows its query, and Mei, in the registrar's office, signs. Over coffee, Jun's team asks what people have asked for centuries: do our brains work like this? Could it have ideas of its own, or feel? And what makes us human, then?",
+  "lead_es": "El agente de la universidad cuenta los estudiantes de este semestre y muestra su consulta, y Mei, de la oficina de registro, firma. Con un café, el equipo de Jun se hace preguntas de hace siglos: ¿funciona así nuestro cerebro? ¿Podría tener ideas propias, o sentir? ¿Y qué nos hace humanos, entonces?",
+  "description": "A film about what building agents teaches us about ourselves: Melbourne in 1978, where Rod Saunders, deaf after a car accident, understood speech again through a rough copy of the inner ear, ten electrodes where an ear has thousands of cells, because his brain learned the rest, as a pioneer had doubted it could; agents as rough copies too, of neurons and of what people wrote; this term's count of students, checked and signed by a person; and five questions over coffee, each from a named thinker or study: what building them has taught us about the brain, from the perceptron of 1958 to brains that guess the next word; whether creating is more than mixing, with Lovelace and Boden; whether a brain copied wire by wire would be a mind, from a worm's 302 neurons to a fly's 139,255 and Searle's rainstorm; why it feels like anything, Chalmers's hard problem and a 2025 test of two theories; whether a machine could feel, with Llinás's rhythm, Penrose and Hameroff's microtubules and a 2023 report on AI; and what makes us human, now that machines answer whatever we say. We don't have the answers yet.",
+  "description_es": "Una película sobre lo que construir agentes nos enseña sobre nosotros: Melbourne en 1978, donde Rod Saunders, sordo tras un accidente de auto, volvió a entender el habla con una copia tosca del oído interno, diez electrodos donde un oído tiene miles de células, porque su cerebro aprendió el resto, como un pionero había dudado que pudiera; los agentes como copias toscas también, de las neuronas y de lo que la gente escribió; el conteo de estudiantes de este semestre, revisado y firmado por una persona; y cinco preguntas con un café, cada una de un pensador o un estudio con nombre: qué nos ha enseñado construirlos sobre el cerebro, del perceptrón de 1958 a cerebros que adivinan la palabra siguiente; si crear es más que mezclar, con Lovelace y Boden; si un cerebro copiado cable por cable sería una mente, de las 302 neuronas de un gusano a las 139,255 de una mosca y la tormenta de Searle; por qué ser nosotros se siente como algo, el problema difícil de Chalmers y una prueba de dos teorías en 2025; si una máquina podría sentir, con el ritmo de Llinás, los microtúbulos de Penrose y Hameroff y un informe de 2023 sobre la IA; y qué nos hace humanos, ahora que las máquinas responden a lo que les digamos. Todavía no tenemos las respuestas.",
+  "card": "Five open questions agents raise about us: the brain, creativity, copying a mind, feeling, and what makes us human.",
+  "card_es": "Cinco preguntas abiertas que los agentes nos plantean: el cerebro, crear, copiar una mente, sentir y qué nos hace humanos.",
+  "chapters_es": {
+    "rough": "Una copia tosca",
+    "five": "Cinco preguntas",
+    "taught": "Lo que nos enseñó la copia",
+    "mixing": "¿Mezclar o crear?",
+    "wire": "Cable por cable",
+    "feels": "Por qué se siente como algo",
+    "machine": "¿Podría sentir una máquina?",
+    "human": "¿Qué nos hace humanos?"
+  },
+  "past": [
+    "Melbourne, 1978: Rod Saunders and a rough copy of the inner ear",
+    "Ten electrodes did part of an ear's work, and Rod's brain learned the rest. Building the copy taught us about ourselves."
+  ],
+  "past_es": [
+    "Melbourne, 1978: Rod Saunders y una copia tosca del oído interno",
+    "Diez electrodos hicieron parte del trabajo de un oído, y el cerebro de Rod aprendió el resto. Construir la copia nos enseñó sobre nosotros."
+  ],
+  "next_h": "You've seen what building agents teaches us about ourselves, and five questions still open. Next: many agents together, and what emerges.",
+  "next_h_es": "Viste lo que construir agentes nos enseña sobre nosotros, y cinco preguntas aún abiertas. Después: muchos agentes juntos, y lo que surge."
+}

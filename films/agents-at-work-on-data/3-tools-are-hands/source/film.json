@@ -1,0 +1,39 @@
+{
+  "key": "tools-are-hands",
+  "title": "Tools are hands, and every hand is a permission",
+  "sub": "The third film of nine in Agents at work on data: every tool an agent gets is a hand, and every hand is a permission; the fewest rights for each, set on the agent's own account; a pull request that two people approve; and a line hidden in a ticket that meets hands that can't do what it asks.",
+  "howto": "The film is drawn in the module's matte style: the lab's grey marble wall and oak floor, and Oxford's old library in the same light. Blue is tools and structure, violet the model thinking, orange data coming back, green a check that passes, and amber a check that fails or a warning.",
+  "src": [
+    "th_kit.js",
+    "th_past.js",
+    "th_things.js",
+    "th_lab.js",
+    "scenes.js"
+  ],
+  "story": [
+    "rule"
+  ],
+  "poster": [
+    "rule",
+    "shows",
+    1.6
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ]
+  ]
+}

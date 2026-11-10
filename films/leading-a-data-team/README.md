@@ -1,0 +1,27 @@
+# Leading a data team
+
+*The third series of the module Leading data people.*
+
+Four ideas to lead a data team by, one in each film, each taught from its own sources. In 2027 the university's data team keeps 38 old reports, spends about eight hours a week each in meetings and gets about sixty alerts a week, most needing nothing. Four films: *Less, on purpose* (keep what people use, and stop the rest, together); *One small change at a time* (change one small thing, check it, keep what works); *The team comes first* (nobody alone, nobody the only one who knows); and *Rules that let people decide* (a few clear rules, good tools, and trust). *Working with people* comes before it, and *Ownership and performance* follows. The plan for the module is in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md); this series' own part is in its [proposal](proposal.md).
+
+**Status:** set up on 5 November 2026, on assumptions the author reviews later; the films are being made, each marked draft on the site, and appear in the table below as each one is out. On the site, the series sits under the topic *Leading data people*, after *Working with people*, at `leading-a-data-team/`, once its opening film is out.
+
+## The films
+
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+| [Less, on purpose](https://data.learn-all.org/leading-a-data-team/less-on-purpose/) | Minimalism in a team | 9 min | 7 | 3 questions | [script](1-less-on-purpose/script.md) · [source](1-less-on-purpose/source/README.md) |
+| [One small change at a time](https://data.learn-all.org/leading-a-data-team/one-small-change/) | Kaizen in a team | 8 min | 6 | 3 questions | [script](2-one-small-change/script.md) · [source](2-one-small-change/source/README.md) |
+| [The team comes first](https://data.learn-all.org/leading-a-data-team/the-team-first/) | A team that holds | 9½ min | 7 | 3 questions | [script](3-the-team-first/script.md) · [source](3-the-team-first/source/README.md) |
+| [Rules that let people decide](https://data.learn-all.org/leading-a-data-team/rules-to-decide/) | Letting people decide | 10 min | 7 | 3 questions | [script](4-rules-to-decide/script.md) · [source](4-rules-to-decide/source/README.md) |
+<!-- /films -->
+
+## The look and the sound
+
+- **Sunlit plaster**, the module's look, assumed on 5 November 2026 for the author to review (the module's *Decided* table, in [`../the-new-skills/proposal.md`](../the-new-skills/proposal.md)). The kit is in [`../the-new-skills/shared/`](../the-new-skills/shared/), and this series bundles it as it is.
+- **Its own sound in each film.** A lead instrument the site doesn't have, reserved for each film. Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
+
+## How the films are made
+
+Like the site's other series, each film is generated from code, with the engine, components, fonts and voice of *The Inner Life of Data*, *A Sharper Sketch*'s scenes, *From words to data*'s tools and the agent films' kit, and checked with the governance and agent films' checks (`twice.py`, `steady.py`, `jump.py`, `edges.py`, `legible.py`, `quiet.py` with `held.py`). A film keeps its own pictures and helpers in its own source. The films are about people, so tools appear only where the story's work happens in them, at the level of what people do. Each film's page links what a newcomer can read next.

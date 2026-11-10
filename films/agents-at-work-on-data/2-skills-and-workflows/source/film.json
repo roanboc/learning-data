@@ -1,0 +1,42 @@
+{
+  "key": "skills-and-workflows",
+  "title": "Skills and workflows",
+  "sub": "The second film of Agents at work on data, a series on putting AI agents to work on data: a skill is a playbook, earned by doing a job once by hand and refined at every new case, so nothing is solved twice; a router picks the right skill; and a workflow runs the known steps the same way every time, calling the agent only where thinking is needed.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is a tool, a skill or a fixed step, violet the model, orange data coming back, green a check that passes, amber one that fails, or a loop. The scenes of Baghdad are painted full-frame, matte and soft-lit, with the place and the time on a tag.",
+  "src": [
+    "sw_past.js",
+    "sw_lab.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "book",
+    "ex2",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bal-Khwarizmi\\b",
+      "al Kwaarizmee"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "book"
+  ],
+  "urgent": []
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "Who does what, end to end",
+    "key": "who-does-what-end-to-end-en",
+    "dir": "films/governance-on-the-map/2-who-does-what-end-to-end/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/who-does-what-end-to-end/film.js",
+    "video": "dist/who-does-what-end-to-end.mp4",
+    "file": "who-does-what-end-to-end.mp4",
+    "captions": [
+      [
+        "films/governance-on-the-map/2-who-does-what-end-to-end/captions/en.srt",
+        "who-does-what-end-to-end.en.srt"
+      ],
+      [
+        "films/governance-on-the-map/2-who-does-what-end-to-end/captions/es.srt",
+        "who-does-what-end-to-end.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/governance-on-the-map/2-who-does-what-end-to-end/source",
+      ":(exclude)films/governance-on-the-map/2-who-does-what-end-to-end/source/src/i18n/es/captions.js",
+      "films/data-governance/shared",
+      "films/master-and-reference-data/shared",
+      "films/analytics-engineering/shared",
+      "films/from-words-to-data/shared",
+      "films/when-things-go-wrong/characters",
+      "films/a-sharper-sketch/source/src",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 496,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -1,0 +1,2 @@
+# For the databricks and agent targets with dbt Core. dbt-databricks 1.12.8 brings dbt-core 1.12.5.
+dbt-databricks==1.12.8

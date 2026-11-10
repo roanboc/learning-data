@@ -1,6 +1,6 @@
 /* ===== Context and memory, governed: the repository and the platform =====
    The team's context as code (the example project, films/analytics-engineering/project/, as its files are named there), how a change
-   comes in (a pull request, its owner's review, a second person's approval for production), and where agents read it on Databricks.
+   comes in (a pull request, the data team's review, a second person's approval for production), and where agents read it on Databricks.
    Each tool's official logo stands beside what it keeps or does, unaltered: GitHub's on the repository, dbt's on its descriptions,
    Databricks' on the platform's parts (o.mark, cm_mark in govern.js).
      cm_repo(ctx, x, y, w, rows, o)     the repository: rows [{name, note, folder, lit, a, logo, logoA}], each a file or a folder; o.mark

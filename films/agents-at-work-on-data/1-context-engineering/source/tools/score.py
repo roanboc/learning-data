@@ -391,7 +391,7 @@ for i in range(3):
 book(tw('masters', 'chant', -0.2), 0.003, px(960))
 for i, m in enumerate((F2, C3, D3)):
     guess(m, tw('masters', "owner's", 0.9 * i), 0.7, px(510 + 600 * i))
-card(tw('one', 'keeps', -0.2), 0.0035, px(960)); ticked(tw('one', 'reviewed', -0.2), 0.0035, px(770))
+card(tw('one', 'keeps', -0.2), 0.0035, px(960)); ticked(tw('one', 'reviews it', -0.2), 0.0035, px(770))
 for i in range(3):
     joint(tw('same', 'agent', -0.4 + 0.12 * i), 0.003, px(510 + 600 * i))
 mark(B3, (B2, Gs3, B3, E4), tw('same', 'page', -0.1), 0.75, ring=2.6)

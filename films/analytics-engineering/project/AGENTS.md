@@ -157,7 +157,7 @@ for, and *When nobody knows the answer*, at the end, what its checks can say.
 ## Context and memory are data
 
 What you read shapes what you do. This page, the skills, the models' descriptions, the contracts,
-the glossary's definitions and the data rules each have an owner, who reviews every change to them.
+the glossary's definitions and the data rules each have an owner, who decides them; the data team reviews the code.
 
 - **What's governed comes first.** Read the glossary's definitions and the data rules first, and the
   team's memory second: the platform keeps it, and nobody approves each line ([`memory/`](memory/)).

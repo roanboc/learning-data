@@ -47,7 +47,7 @@ Then, if you like:
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, or one for each class, who read a table, the access review, Ontos, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -250,7 +250,11 @@ project/
 │                             checked, a signed contract found by its metadata, and the claims app's
 │                             data contract (Databricks only);
 │                             more-readers-than-people/: casual teaching cost's five readers, each as
-│                             itself, and the share outside (Databricks only)
+│                             itself, and the share outside (Databricks only);
+│                             read-by-an-agent/: an agent's 412, the paper form behind it, and the
+│                             checks Genie Code proposed;
+│                             one-policy-for-many-tables/: the registrar's policies by tag, as code
+│                             (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -336,12 +340,13 @@ her a contract each semester to tutor a first-year unit; `R-3082` at the researc
 person domain's conceptual model (`models/core/person/`) is a draft, and
 `analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
 
-The graduation list has a slice of its own: 24 graduates and 26 certificates, at the ceremonies of
+The graduation list has a slice of its own: 30 graduates and 32 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
-student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
-award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`) and its applications to graduate, on the paper form or in
+the portal (`data/student_system/graduation_applications.csv`), the portal's answers to "Is this
+your name?" (`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart
+from the student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled
+with, award by award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

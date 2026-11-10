@@ -1,8 +1,29 @@
 # Data quality: the module's own questions and assumptions
 
-> Kept by the module's setup thread, "Build the data quality module", and brought up to date on 10 November 2026, after the films merged. Files named without a path, such as `numbers.md`, `openings.md` or `palettes.md`, are that thread's working notes, outside this repository.
+> Kept by the module's setup thread, "Build the data quality module", from 5 November 2026, and brought up to date on 10 November, after all eight films merged. Files named without a path, such as `numbers.md`, `openings.md` or `palettes.md`, are that thread's working notes, outside this repository.
 
-Kept by the module's setup thread ("Build the data quality module"), from 5 November 2026. Rodrigo asked, at 11:53 that day, away for the night: "Work on the films with assumptions and merge them all. Give me a final checklist with the questions you had for each topic and the assumption and I will later review the entire report and will fix when I see the assumption was incorrect." So every question below was answered with the best-reasoned option instead of waiting, and is listed here for him to review. Each film's own questions are in its file beside this one. The rows below number the films 1 to 8 across the module: films 1 to 4 are *Fit for use* (`2-fit-for-use/`), films 5 to 8 are *Quality as a habit* (`3-quality-as-a-habit/`).
+Rodrigo asked, at 11:53 on 5 November, away for the night: "Work on the films with assumptions and merge them all. Give me a final checklist with the questions you had for each topic and the assumption and I will later review the entire report and will fix when I see the assumption was incorrect." So every question below was answered with the best-reasoned option instead of waiting, and is listed here for him to review.
+
+## The films
+
+All eight are on main with the Draft label, merged in order on 10 November. Each film's own questions are in its file:
+
+| Film | Pull request | Its questions and assumptions |
+|---|---|---|
+| 1. *Good enough for what?* | [#203](https://github.com/roanboc/learning-data/pull/203) | [33 rows](2-fit-for-use/1-good-enough-for-what.md) |
+| 2. *A hundred records* | [#213](https://github.com/roanboc/learning-data/pull/213) | [34 rows](2-fit-for-use/2-a-hundred-records.md) |
+| 3. *Valid isn't true* | [#211](https://github.com/roanboc/learning-data/pull/211) | [34 rows](2-fit-for-use/3-valid-isnt-true.md) |
+| 4. *Late is wrong too* | [#226](https://github.com/roanboc/learning-data/pull/226) | [35 rows](2-fit-for-use/4-late-is-wrong-too.md) |
+| 5. *The hidden factory* | [#231](https://github.com/roanboc/learning-data/pull/231) | [41 rows](3-quality-as-a-habit/1-the-hidden-factory.md) |
+| 6. *Report, fix, tell* | [#209](https://github.com/roanboc/learning-data/pull/209) | [40 rows](3-quality-as-a-habit/2-report-fix-tell.md) |
+| 7. *Read by an agent* | [#196](https://github.com/roanboc/learning-data/pull/196) | [43 rows](3-quality-as-a-habit/3-read-by-an-agent.md) |
+| 8. *Small, every week* | [#218](https://github.com/roanboc/learning-data/pull/218) | [36 rows](3-quality-as-a-habit/4-small-every-week.md) |
+
+The rows below number the films 1 to 8 across the module: films 1 to 4 are *Fit for use*, films 5 to 8 *Quality as a habit*.
+
+## Where to start
+
+If he reads only a few rows, these shape the most: R3 (his own practice in data quality, which wasn't asked), W1 (the graduation list as the one story), L1 (the quality bench look), O1 (the eight opening stories) and M4 (where the module sits on the site).
 
 ## The module
 

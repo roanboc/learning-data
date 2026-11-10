@@ -93,6 +93,7 @@
 | A place on the map | 314 | 0% | 0 | 29.7 | Drawn to the rule |
 | Rights follow the role | 291 | 0% | 0 | 30.0 | Drawn to the rule |
 | The map, enforced | 353 | 0% | 0 | 28.2 | Drawn to the rule |
+| Reports on demand | 293 | 0% | 0 | 28.0 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -110,6 +111,7 @@
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | One policy for many tables | 430 | 0% | 0 | 28.1 | Drawn to the rule |
+| Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

@@ -1,0 +1,32 @@
+data_tests:
+  - name: graduation_list_family_name_at_30
+    config:
+      severity: warn
+      meta:
+        owner: "Mei Tanaka, registrar's office"
+        dimension: accuracy
+    description: >
+      A family name exactly as long as the student system's field, 30 characters, may have been cut
+      short there. It holds the list for the registrar's office to look; it never stops the list on
+      its own, the level Mei Tanaka and Malia Fonoti agreed before it ran (A hundred records).
+
+  - name: graduation_list_family_name_in_capitals
+    config:
+      severity: warn
+      meta:
+        owner: "Mei Tanaka, registrar's office"
+        dimension: accuracy
+    description: >
+      A family name in capitals only, as older records were entered: printed so, it isn't the name as
+      the graduate writes it. It holds the list for a person to look; it never stops it on its own.
+
+  - name: graduation_list_accents_all_gone
+    config:
+      severity: warn
+      meta:
+        owner: "Mei Tanaka, registrar's office"
+        dimension: accuracy
+    description: >
+      A ceremony season's list of more than 200 graduates in which not one name has a letter outside
+      A to Z: eight in the hundred had lost their accents, so a list with none isn't chance. It holds
+      the list for a person to look; it never stops it on its own.

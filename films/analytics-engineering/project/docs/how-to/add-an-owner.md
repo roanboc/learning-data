@@ -2,13 +2,13 @@
 
 **What the check asks.** Everything other teams read has an owner: each domain, each entity in a conceptual model, and each shared model.
 
-**Why.** When a number is wrong or a meaning changes, someone has to decide. The owner is that person, and changes reach them for review.
+**Why.** When a number is wrong or a meaning changes, someone has to decide. The owner is that person: a change of meaning starts with them, in the glossary, before any code.
 
 **How.**
 
 1. Open the file the message names.
 2. Find the line it names, and add who decides what it means, as people know them.
-3. If that owner is new, add them to `governance/2-owners/owners.yml`, with the email their reviews go to.
+3. If that owner is new, add them to `governance/2-owners/owners.yml`, with the email the impact check writes to.
 
 For a shared model, both an owner and a domain:
 

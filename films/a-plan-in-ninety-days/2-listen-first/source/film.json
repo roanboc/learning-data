@@ -1,0 +1,74 @@
+{
+  "key": "listen-first",
+  "title": "Listen first",
+  "sub": "Film 2 of 4 of A plan in ninety days: discovery, before designing anything. In Accra in the early 1930s, the mothers of the Ga people already had a name for the sickness that was killing their children, and Cicely Williams listened. A year from now, Helena Novak, a university's new data manager, spends six weeks listening to 31 people, reading what's written and counting from the systems, then writes the current state in five layers and sends it back to everyone she heard.",
+  "howto": "The film is drawn in the module's sunlit plaster. Its colours mean the same in every film of the module: blue is design and plans, green done or value, amber risk, cost or waiting, orange data, and violet only an agent.",
+  "src": [
+    "accra.js",
+    "layers.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "layers",
+    "own",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bAccra\\b",
+      "Uh-krah"
+    ],
+    [
+      "\\bCicely\\b",
+      "Sissily"
+    ],
+    [
+      "\\bkwashiorkor\\b",
+      "kwashi-orkor"
+    ],
+    [
+      "\\bgenchi genbutsu\\b",
+      "gen-chee gen-boo-tsoo"
+    ],
+    [
+      "\\bTOGAF's\\b",
+      "Toe-gaff's"
+    ],
+    [
+      "\\bArchiMate\\b",
+      "Arky-mate"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "word"
+  ],
+  "urgent": []
+}

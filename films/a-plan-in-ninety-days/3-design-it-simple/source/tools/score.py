@@ -260,14 +260,14 @@ two(D3, D5, ow('wrong', 'wrong', 0.1), 0.5, gap=0.35, bow=1.6, until=oc('change'
 # the king starts from what people need: F major
 two(F3, C5, ow('start', 'needed', 0.0), 0.55, gap=0.4, bow=1.8)
 # the 28 letters drawn from the mouth and throat: a brush stroke for each basic shape as it draws itself, and the lead's A
-card(ow('made', 'twenty-eight', -0.1), 0.0035, px(1300))
+card(oc('made', 0.1), 0.0035, px(460))
 saw(A4, ow('made', 'twenty-eight', 0.2), 0.5, bow=1.4)
 brush(ow('made', 'mouth', 0.0), 2.0, 0.0035, px(1200), 5)
 # five basic shapes; a stroke added for a stronger sound
 card(ow('shapes', 'Five', -0.1), 0.0035, px(1100))
 brush(ow('shapes', 'stroke', 0.0), 0.3, 0.004, px(1300), 1)
 # the vowels' three marks, a note for each: heaven high, the earth low, a person standing between them
-for w, x in (('heaven', 760), ('earth', 960), ('person', 1160)):
+for w, x in (('heaven', 1075), ('earth', 1275), ('person', 1475)):
     brush(ow('vowels', w, -0.1), 0.25, 0.0035, px(x), 1)
 saw(C5, ow('vowels', 'heaven', 0.1), 0.5, bow=1.0)
 bass(F3, ow('vowels', 'earth', 0.1), 0.55, bow=1.2)
@@ -311,17 +311,17 @@ saw(C5, oc('breath', 0.6), 0.55, bow=2.6, until=OEND)
 LV[0] = 0.9
 rw = lambda lid, word, off=0: W('rules', lid, word, off)
 two(Bb3, F4, S0('rules') + 0.2, 0.5, bow=1.6)
-tap(rw('define', 'define', 0.0), 0.003, px(1240))
-card(rw('write', 'five', -0.1), 0.0035, px(960))
+card(G('rules', 'define', 0.1), 0.0035, px(620))
+card(G('rules', 'write', 0.1), 0.0035, px(1560))
 for lid, w in (('p1', 'One'), ('p2', 'Two'), ('p3', 'Three'), ('p4', 'Four'), ('p5', 'Five')):
-    card(rw(lid, w, -0.1), 0.0035, px(1100))
+    card(rw(lid, w, -0.1), 0.0035, px(665))
 saw(A4, rw('p1', 'decision', 0.1), 0.45, bow=1.2)
 tap(rw('out', 'rules', 0.0), 0.003, px(1100))
 two(D3, A4, END('rules', 'out', 0.1), 0.45, bow=1.4)
-card(rw('why', 'Why', -0.1), 0.0035, px(1400))
-tap(rw('anyone', 'check', 0.0), 0.003, px(900))
-card(rw('tool', 'tool', -0.1), 0.0035, px(800)); tap(rw('tool', 'platform', 0.0), 0.003, px(1240))
-card(rw('copy', 'copy', -0.1), 0.0035, px(800)); tap(rw('copy', 'One', 0.0), 0.003, px(1240))
+card(rw('why', 'map', -0.2), 0.0035, px(1560))
+tap(rw('anyone', 'check', 0.0), 0.003, px(1560))
+card(rw('tool', 'tool', -0.1), 0.0035, px(1560)); tap(rw('tool', 'platform', 0.0), 0.003, px(1560))
+card(rw('copy', 'copy', -0.1), 0.0035, px(1560)); tap(rw('copy', 'One', 0.0), 0.003, px(1560))
 two(F3, C5, rw('copy', 'everyone', 0.0), 0.45, bow=1.4)
 mark(rw('shapes', 'Five', 0.0), 0.7, until=E('rules'))
 
@@ -349,20 +349,20 @@ card(tw('same', 'The', -0.1), 0.0035, px(800)); card(tw('product', 'promise', 0.
 LV[0] = 0.9
 mw = lambda lid, word, off=0: W('team', lid, word, off)
 bass(D3, mw('who', 'worst', -0.1), 0.5, bow=1.6)
-card(mw('centre', 'forty-one', -0.1), 0.0035, px(960))
-card(mw('edges', 'three', -0.1), 0.0035, px(1400)); tap(mw('edges', 'disagree', 0.0), 0.003, px(1400))
-card(mw('between', 'mesh', -0.1), 0.0035, px(1400))
-for w in ('platform', 'standards', 'shared', 'guardrails'):
-    tap(mw('core', w, 0.0), 0.003, px(960))
+card(mw('centre', 'forty-one', -0.1), 0.0035, px(480))
+card(mw('edges', 'copies', -0.1), 0.0035, px(1440)); tap(mw('edges', 'disagree', 0.0), 0.003, px(1440))
+card(mw('between', 'mesh', -0.1), 0.0035, px(1630))
+for w, x in (('platform', 476), ('standards', 970), ('shared', 410), ('guardrails', 1000)):
+    tap(mw('core', w, 0.0), 0.003, px(x))
 saw(C5, mw('core', 'helps', 0.1), 0.45, bow=1.2)
-tiles(mw('partners', 'Seven', -0.1), 1.4, 0.003, px(960))
+tiles(mw('partners', 'Seven', -0.1), 1.4, 0.003, px(720))
 two(F3, A4, END('team', 'partners', 0.1), 0.45, bow=1.4)
-tap(mw('day', 'day', 0.0), 0.003, px(1300))
-card(mw('ldp', 'leading', -0.1), 0.0035, px(1400))
-slide(mw('draft', 'sends', -0.1), 1.0, 0.003, px(1100))
-card(mw('draft', 'writes', -0.1), 0.0035, px(1300))
+card(mw('day', 'day', -0.2), 0.0035, px(1630))
+card(mw('ldp', 'leading', -0.1), 0.0035, px(1630))
+slide(mw('draft', 'sends', -0.1), 1.0, 0.003, px(1400))
+card(mw('draft', 'writes', -0.1), 0.0035, px(1390))
 two(A3, E4, END('team', 'draft', 0.1), 0.45, bow=1.4)
-tiles(mw('forty', 'forty', -0.1), 1.2, 0.003, px(960))
+tiles(mw('forty', 'forty', -0.1), 1.2, 0.003, px(530))
 two(F3, C5, END('team', 'answer', 0.1), 0.45, bow=1.4)
 bass(Bb3, mw('argue', 'argued', 0.0), 0.45, bow=1.4, until=E('team'))
 saw(D5, mw('argue', 'letters', 0.0), 0.45, bow=1.2, until=E('team'))
@@ -374,25 +374,25 @@ saw(D5, mw('argue', 'letters', 0.0), 0.45, bow=1.2, until=E('team'))
 #    everyone: F major
 LV[0] = 0.9
 pw = lambda lid, word, off=0: W('pages', lid, word, off)
-tiles(pw('six', 'six', -0.1), 1.2, 0.003, px(960))
+tiles(G('pages', 'six', 0.2), 1.6, 0.003, px(960))
 two(C3, G4, END('pages', 'six', 0.1), 0.45, bow=1.4)
-for w, x in (('asks', 700), ('decides', 880), ('builds', 1060), ('checks', 1240)):
-    tap(pw('roles', w, 0.0), 0.003, px(x))
-slide(pw('picture', 'passes', -0.2), 1.0, 0.003, px(1200))
+for w in ('asks', 'steps', 'behind'):
+    tap(pw('roles', w, -0.1), 0.003, px(520))
+card(pw('picture', 'picture', -0.5), 0.0035, px(1400)); slide(pw('picture', 'picture', 0.0), 2.0, 0.003, px(1400))
 two(C3, E4, END('pages', 'picture', 0.1), 0.45, bow=1.2)
-card(pw('door', 'form', -0.1), 0.0035, px(1100))
+card(pw('door', 'form', -0.1), 0.0035, px(1450))
 two(F3, A4, pw('door', 'front', 0.0), 0.45, bow=1.4)
 for w in ('What', 'By', 'Who', 'data', 'else'):
-    tap(pw('q', w, 0.0), 0.003, px(1100))
-tap(pw('opens', 'seventh', 0.0), 0.003, px(1300))
-card(pw('gov', 'governance', -0.1), 0.0035, px(1400))
-card(pw('anil', 'Anil', -0.1), 0.0035, px(700))
-slide(pw('build', 'builds', -0.1), 0.9, 0.003, px(1100)); pen(pw('build', 'page', 0.0), 0.6, 0.004, px(1200), 2)
-tap(pw('step', 'Step', 0.0), 0.003, px(1200))
-card(pw('waited', 'four', -0.1), 0.0035, px(1300))
+    tap(pw('q', w, 0.0), 0.003, px(1450))
+tap(pw('opens', 'seventh', -0.3), 0.003, px(1450))
+card(pw('gov', 'governance', -0.1), 0.0035, px(320))
+tap(pw('tries', 'partner', -0.1), 0.003, px(700)); card(pw('anil', 'spreadsheet', -0.2), 0.0035, px(560))
+card(pw('build', 'builds', -0.1), 0.0035, px(560)); tap(pw('build', 'page', -0.1), 0.003, px(1090))
+tap(pw('step', 'Step', 0.0), 0.003, px(520))
+card(pw('waited', 'four', -0.1), 0.0035, px(1600))
 bass(D3, pw('waited', 'waited', 0.0), 0.5, bow=1.6)
 saw(A4, pw('waited', 'everyone', 0.0), 0.45, bow=1.2)
-pen(pw('fix', 'reviewer', -0.1), 0.9, 0.004, px(1200), 3)
+pen(pw('fix', 'reviewer', -0.1), 0.9, 0.004, px(520), 3)
 two(F3, C5, pw('tried', 'fixed', 0.0), 0.45, bow=1.6, until=E('pages'))
 
 # 6. Simple enough to run: the milestone, F major; the whole design laid out, one soft texture, and a tap as each part lights. Every part
@@ -402,18 +402,18 @@ two(F3, C5, pw('tried', 'fixed', 0.0), 0.45, bow=1.6, until=E('pages'))
 LV[0] = 0.9
 uw = lambda lid, word, off=0: W('run', lid, word, off)
 uc = lambda lid, off=0: G('run', lid, off)
-tap(uw('milestone', 'milestone', 0.0), 0.003, px(1300))
+tap(uw('milestone', 'milestone', 0.0), 0.003, px(960))
 two(F3, A4, uw('milestone', 'milestone', 0.1), 0.45, bow=1.4)
-tiles(uw('all', 'target', -0.1), 1.2, 0.003, px(960))
-for w, x in (('principles', 700), ('small', 900), ('six', 1100), ('door', 1300)):
+tiles(uw('all', 'target', -0.1), 1.2, 0.003, px(380))
+for w, x in (('principles', 670), ('small', 960), ('six', 1250), ('door', 1540)):
     tap(uw('all', w, 0.0), 0.003, px(x))
 mark(uw('simple', 'simple', 0.0), 0.7)
-card(uw('anil', 'Anil', -0.1), 0.0035, px(800))
+card(uw('anil', 'Anil', -0.1), 0.0035, px(720))
 bass(F3, uw('back', 'fourteen', 0.0), 0.5, bow=2.0)
 line((A4, C5), uw('back', 'morning', -0.2), 0.45, step=1.3, last=1.6)
-for w, x in (('ask', 760), ('build', 960), ('check', 1160)):
-    tap(uw('uni', w, 0.0), 0.003, px(x))
-card(uw('next', 'Next', -0.1), 0.0035, px(1300))
+for w, x in (('ask', 700), ('build', 960), ('check', 1220)):
+    tap(uw('uni', w, -0.1), 0.003, px(x))
+card(uw('next', 'Next', -0.1), 0.0035, px(1530))
 mark(uc('breath', 0.3), 0.7, last=2.4, under=F3, until=TOT)
 saw(A4, uc('breath', 0.3) + 3 * 0.9 + 2.6, 0.45, bow=1.6, until=TOT)
 

@@ -85,6 +85,7 @@
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
 | One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |
+| Files as data and as context | 364 | 0% | 0 | 28.2 | Drawn to the rule |
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | A hundred records | 312 | 0% | 0 | 28.2 | Drawn to the rule |
 | Valid isn't true | 254 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -111,6 +112,7 @@
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | Less, on purpose | 237 | 0% | 0 | 28.5 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
+| No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |

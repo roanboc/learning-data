@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/files-as-data-and-context/soundtrack.mp3",
+      "size": 6170740,
+      "sha256": "8a2d3221d560cec1ed473b8786a326bbcef82ac0f2f285ddc2e275b690d853df",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-files-as-data-and-context-af8c1dfa7eaeaf360664/8a2d3221d560cec1ed473b8786a326bbcef82ac0f2f285ddc2e275b690d853df.mp3"
+    }
+  ]
+}

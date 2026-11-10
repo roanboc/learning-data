@@ -293,7 +293,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),two
 /* ---------------------------------------------------------------- 6 · Say which reference
    Jun, and the project's file of the list's checks, beside each its owner, its dimension and, for the awards check, its reference;
    the name checks have no reference but the rule. For names, the reference is the graduate, with the date each was confirmed. The
-   data contract's rule for awards names its dimension and its method; the scorecard counts allowed and true apart. A check is only as
+   generic test the awards check runs names its method, reconciliation; the scorecard counts allowed and true apart. A check is only as
    true as its reference: say which, and the reader knows what it can tell, and what it can't. */
 const VT_CHECKS=["names_are_allowed","  owner: Mei Tanaka","  dimension: validity","awards_match_the_boards","  owner: Mei Tanaka","  dimension: accuracy",
   [["  reference: ",null],["the exam boards' approved lists","brass"]],"name_as_printed",[["  reference: ",null],["the graduate","brass"]],"  confirmed_on: name_confirmed_on"];
@@ -304,11 +304,10 @@ function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4
   dq_window(x,480,140,1360,600,{logo:"dbt",product:"dbt",title:"the list's checks",a:wa,draw:(cx,b)=>{dq_code(cx,b.x+12,b.y,VT_CHECKS,{lh:46,w:b.w-24,lit,lineA:(l,i)=>ag_in(tt,at[i],0.4)});
     dq_chip(cx,b.x+560,b.y+46*2+23,"no reference but the rule itself",{col:"none",a:ag_io(tt,c.validity+0.6,c.awards-0.2,0.4)});
     dq_chip(cx,b.x+560,b.y+46*2+23,"a name is allowed, and no more",{a:ag_io(tt,c.nomore+0.2,c.awards-0.2,0.4)*0});}});
-  // the data contract
-  // the rule as the contract has it (governance/5-data-contracts/mart_graduations__graduation_list.yaml), its other lines left out
-  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.dim-0.1?[]:tt<P.method-0.1?[3]:[4];
-  dq_window(x,480,160,1360,460,{product:"Data contract",title:"the graduation list",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["quality:","  - id: awards_match_the_boards","    …",
-    [["    dimension: ",null],["accuracy","steel"]],[["    method: ",null],["reconciliation","steel"]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,c.contract+0.3,c.contract+0.3,P.dim,P.method][i],0.4)})});
+  // the generic test the awards check runs, and its method (the example project's tests/generic/reconciles_with.sql, lines 14 and 15)
+  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.method-0.1?[]:[1];
+  dq_window(x,480,160,1360,240,{logo:"dbt",product:"dbt",title:"tests/generic/reconciles_with.sql",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["{% test reconciles_with(model, to, keys, compare=[], to_where=none) %}",
+    [["    {{ config(meta={'method': '",null],["reconciliation","steel"],["'}) }}",null]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,P.dim][i],0.4)})});
   // the scorecard: allowed, and true
   const sa=ag_in(tt,c.scorecard+0.1,0.4);if(sa>0.004){x.save();x.globalAlpha*=sa;dq_card(x,480,190,1160,300,{});dq_label(x,508,242,"Scorecard · the graduation list",{});
     dq_rows(x,508,268,[{h:"Dimension",w:250},{h:"Says",w:220},{h:"Check",w:520,f:"mono"},{h:"",w:110}],
@@ -318,7 +317,7 @@ function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4
   dq_chip(x,480,700,"what it can tell",{icon:"tick",col:"pass",a:ag_in(tt,P.tell-0.2,0.5)});
   const w1=dq_tw(x,"what it can tell",{w:700,size:28})+84;dq_chip(x,480+w1+20,700,"what it can't",{icon:"dash",col:"none",a:ag_in(tt,P.cant-0.2,0.5)});}
 scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),owner:wAt(sc,"beside","owner"),measures:wAt(sc,"beside","what it measures"),
-    ref:wAt(sc,"beside","its reference"),date:wAt(sc,"graduate","the date"),dim:wAt(sc,"contract","the dimension"),method:wAt(sc,"contract","the method"),
+    ref:wAt(sc,"beside","its reference"),date:wAt(sc,"graduate","the date"),dim:wAt(sc,"contract","its method"),method:wAt(sc,"contract","reconciliation"),
     allowedW:wAt(sc,"scorecard","allowed"),trueW:wAt(sc,"scorecard","true"),tell:wAt(sc,"say","what it can tell"),cant:wAt(sc,"say","what it can't")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],d:2.4,draw:(x,tt)=>vt_which(x,tt,c,P)}]);
   setScreen(ctx,S);dq_kicker(ctx,"6","Say which reference",{a:ag_in(t,0.8,0.5)});});

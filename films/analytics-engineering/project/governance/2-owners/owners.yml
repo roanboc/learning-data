@@ -26,6 +26,7 @@ owners:
   - {name: "Noor, data architect", email: noor@uni.example}
   - {name: Faculty of Health, email: health.data@uni.example}
   - {name: "Malia Fonoti, graduations office", email: malia.fonoti@uni.example}
+  - {name: "Anil Kurian, Faculty of Health", email: anil.kurian@uni.example}
 reviewers:  # The people the map's roles name to review what no owner owns, and where reviews go.
   code: {name: "Jun Park, analytics engineer", email: jun.park@uni.example}
   model: {name: "Noor, data architect", email: noor@uni.example}

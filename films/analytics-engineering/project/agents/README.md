@@ -76,6 +76,10 @@ service takes one to hand back a token for the App, for one repository and its p
 The App's private key stays in a vault, and only the token service signs with it. Nothing in this folder is
 secret: the IDs are public.
 
+The policy names the repository as GitHub's pass does: `repo:uni-example/credentials:environment:<environment>`
+for this repository, which is older than 15 July 2026. A repository made, renamed or moved since then carries
+its numeric IDs in the pass (`repo:<organization>@<ID>/<repository>@<ID>:...`), and its policy must match them.
+
 ## What an agent builds
 
 dbt's `agent` target signs in as the agent's service principal and builds in schemas of its own in the

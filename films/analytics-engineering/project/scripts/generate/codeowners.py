@@ -45,6 +45,12 @@ def load(path):
     return yaml.safe_load(path.read_text()) or {}
 
 
+def front_matter(path):
+    """The YAML between the --- lines that open a Markdown file, such as an agent's README."""
+    text = path.read_text()
+    return (yaml.safe_load(text.split("---\n", 2)[1]) or {}) if text.startswith("---\n") else {}
+
+
 def meta(item):
     return (item.get("config") or {}).get("meta") or item.get("meta") or {}
 

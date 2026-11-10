@@ -506,14 +506,14 @@ jobs:
       - name: Unity Catalog, the grants each agent's group holds (rights-held.sql)
         run: |
           mkdir -p held
-          jq -n --rawfile sql agents/rights-held.sql --arg w "{dbx['warehouse'].rsplit('/', 1)[-1]}" \
+          jq -n --rawfile sql agents/rights-held.sql --arg w "{dbx['warehouse'].rsplit('/', 1)[-1]}" \\
             '{{statement: $sql, warehouse_id: $w, wait_timeout: "50s", disposition: "INLINE", format: "JSON_ARRAY"}}' > held/request.json
           databricks api post /api/2.0/sql/statements --json @held/request.json |
             jq '[.result.data_array[] | {{grantee: .[0], privilege: .[1], securable_type: .[2], securable: .[3]}}]' > held/unity-catalog.json
       - name: Unity Catalog, each group's members, by their application IDs
         run: |
           for group in {groups}; do
-            ids=$(databricks groups list --filter "displayName eq \"$group\"" -o json | jq -r '.[0].members[]?.value')
+            ids=$(databricks groups list --filter "displayName eq \\"$group\\"" -o json | jq -r '.[0].members[]?.value')
             for id in $ids; do databricks service-principals get "$id" -o json | jq -r '.applicationId // empty'; done |
               jq -R . | jq -s --arg g "$group" '{{($g): .}}'
           done | jq -s 'add // {{}}' > held/groups.json
@@ -539,15 +539,15 @@ jobs:
           PY
       - name: GitHub, each App's installation, its repositories and permissions
         run: |
-          pass=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+          pass=$(curl -sSf -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \\
             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience={gh['token service']}" | jq -r .value)
           export GH_TOKEN=$(curl -sSf -X POST -H "Authorization: Bearer $pass" {gh['token service']}/rights-reader | jq -r .token)
           echo "::add-mask::$GH_TOKEN"
           for app in {apps}; do
-            install=$(gh api "/orgs/{gh['organization']}/installations" --paginate --jq ".installations[] | select(.app_slug == \"$app\")")
+            install=$(gh api "/orgs/{gh['organization']}/installations" --paginate --jq ".installations[] | select(.app_slug == \\"$app\\")")
             [ -z "$install" ] && continue
             if [ "$(jq -r .repository_selection <<< "$install")" = all ]; then repos='["all"]'
-            else repos=$(gh api "/orgs/{gh['organization']}/installations/$(jq -r .id <<< "$install")/repositories" --paginate \
+            else repos=$(gh api "/orgs/{gh['organization']}/installations/$(jq -r .id <<< "$install")/repositories" --paginate \\
               --jq '[.repositories[].full_name]' | jq -s 'add'); fi
             jq -n --arg app "$app" --argjson i "$install" --argjson r "$repos" '{{app: $app, repositories: $r, permissions: $i.permissions}}'
           done | jq -s . > held/github.json

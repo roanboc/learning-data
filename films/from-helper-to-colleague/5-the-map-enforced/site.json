@@ -28,15 +28,17 @@
   ],
   "repo": {
     "name": [
-      "profiles.yml",
-      "agents/tools.yml"
+      "agents/tools.yml",
+      "agents/planning-agent/federation-policy.json",
+      "profiles.yml"
     ],
     "map": [
       "scripts/generate/agents.py",
-      "agents/",
-      "agents/README.md"
+      "agents/planning-agent/",
+      "agents/nightly-check.yml"
     ],
     "own": [
+      "agents/planning-agent/grants.sql",
       "profiles.yml"
     ],
     "logs": [

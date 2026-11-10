@@ -86,4 +86,5 @@
 
 # Each agent's settings in the tools, written from the map: the platform team, and each agent's owner
 /agents/                                                 platform@uni.example
+/agents/planning-agent/                                  platform@uni.example clara.jensen@uni.example
 /scripts/generate/agents.py                              platform@uni.example noor@uni.example

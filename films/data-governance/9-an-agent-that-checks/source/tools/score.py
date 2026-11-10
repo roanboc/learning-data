@@ -9,8 +9,8 @@
 #    as it's governed and as it reads the checklist; until the author's review of What an agent is, 4 November 2026, it played nine
 #    times, five in 35 seconds, the same two notes within seconds of themselves). For each thing the agent can't do (approve, edit the
 #    glossary, weaken a test, show a value, write to production, read in bulk, check "care"), one low note, the same each time.
-#  - An alto flute is a person deciding: three notes falling home, 3-2-1, when Anil marks the column, when he confirms, as the owners
-#    approve one by one, when data governance approves a step, and when he can overrule. Where nobody has decided yet ("who decides?"),
+#  - An alto flute is a person deciding: three notes falling home, 3-2-1, when Anil marks the column, when he confirms, as the meaning is
+#    written and the data team approves, when data governance approves a step, and when he can overrule. Where nobody has decided yet ("who decides?"),
 #    it falls 3-2 and stops.
 #  - The series' mark, 1-5-4-8, plays at the title and on the end card on the flute, a person, with the agent's piano an octave under it.
 # A major for the imagined night, then and at the end; D major for today, which shares every note of A major but B.
@@ -245,10 +245,11 @@ one = W('skill', 'oneplace', 'one person')
 paper(one - 0.55, 0.014, -0.2, 0.5)
 for i in range(3):
     pin(one + 0.4 + 0.35 * i, 0.024 * (1 if i < 1 else 0.8), -0.3 + 0.3 * i)
-lit = [G('skill', 'steps1'), W('skill', 'steps1', 'Find'), W('skill', 'steps1', 'Take'), G('skill', 'steps2'), W('skill', 'steps2', 'Check each'),
+lit = [G('skill', 'steps1'), W('skill', 'steps1', 'Find'), W('skill', 'steps1', 'Run'), G('skill', 'steps2'), W('skill', 'steps2', 'Check each'),
        G('skill', 'steps3'), W('skill', 'steps3', 'Then report')]
+# since 10 November 2026, steps 2 and 5 light without a note: the glossary-first line is longer, and seven notes came in too often
 for i, (t, m) in enumerate(zip(lit, [62, 64, 66, 69, 71, 74, 76])):
-    guitar(hz(m, 'D'), t - 0.1, 0.05, -0.05 + 0.04 * i)
+    if i not in (1, 4): guitar(hz(m, 'D'), t - 0.1, 0.05, -0.05 + 0.04 * i)
 for i, w in enumerate(['approves', 'edits', 'weakens', 'shows']):
     t = W('skill', 'never', w, -0.05); cross(t, 0.015 * (1 if i < 2 else 0.75), 0.35); cant(t, 'D', 0.04 * 0.85 ** i)
 agent(W('skill', 'night', 'the night', 0.1), 'D', 0.034)
@@ -256,7 +257,7 @@ nv = E_('skill', 'night', 1.0)
 roll(ASUS, nv, 'D', 0.048); guitar(hz(61, 'D'), nv + 1.3, 0.04, 0.0)
 
 # 4. Three findings: the agent's review comes in; a tick for each of the two things that pass; a knock for each finding's card; the
-#    sheet, with what the checks couldn't say; a low knock for "asked"; the email column counted, a tick a row, softer after the first;
+#    sheet, with what the checks couldn't say; a low knock for "told"; the email column counted, a tick a row, softer after the first;
 #    the agent's sign as it drafts finding 3's check (since 4 November 2026 not also as it reads Anil's change, four seconds after the
 #    last, as it counts the column and as it reads the rule: three times in nine seconds); a note home as the draft passes
 #    on every row; "who decides", the flute falling 3-2 and stopping; F sharp minor into People decide
@@ -267,7 +268,7 @@ tick(two + 0.55, 0.013, 0.0); tick(two + 0.95, 0.013, 0.0)
 for i in range(3):
     knock(G('review', 'findings', 0.15 * i + 0.05), 0.02, -0.4 + 0.4 * i, 270 + 20 * i)
 paper(W('review', 'findings', 'what the checks', -0.1), 0.016, 0.2, 0.5)
-knock(W('review', 'one', 'asked', -0.15), 0.02, -0.4, 190)
+knock(W('review', 'one', 'told', -0.15), 0.02, -0.4, 190)
 cn = W('review', 'tally', 'counts')
 for i in range(7):
     tick(cn + 1.5 * i / 7 + 0.08, 0.012 * (1 if i < 3 else 0.7), -0.3)
@@ -282,7 +283,7 @@ roll(FSM7D, hl + 1.3, 'D', 0.046)
 # 5. People decide: the agent marks two classes "not sure"; a knock for the tag over the two codes, and for the grey question; the
 #    checklist's step slid in; the agent drafts the stricter class and asks (since 4 November 2026 without its sign, here seven and 25
 #    seconds after the last); Anil's answer typed, the flute falling home
-#    under G and D; a highlighter as the class changes; the sheet filled, the three approvals, the flute falling a note with each, and
+#    under G and D; a highlighter as the class changes; the sheet filled, the meaning written and the data team's approval, the flute falling a note with each, and
 #    their stamps; the sheet's own stamp, signed; the list in the advisers' tray, and the phone lifted; air as the gold threads are
 #    drawn; G into Governed, too
 knock(W('decides', 'keys', 'long codes', -0.05), 0.018, 0.2, 300)
@@ -295,12 +296,12 @@ decide([W('decides', 'confirms', 'a course', -0.1), W('decides', 'confirms', 'no
 roll([43, 50, 59, 62], W('decides', 'confirms', 'a course', -0.15), 'D', 0.04); roll([38, 45, 54, 57], W('decides', 'confirms', 'person', -0.15), 'D', 0.042)
 marker(W('decides', 'classed', 'classed', -0.15), 0.6, 0.014, 0.0)
 slide(G('decides', 'owners', -0.3), 0.8, 0.014, -0.2)
-ap = [W('decides', 'owners', w, -0.2) for w in ['the faculty', 'Yusuf', 'Jun']]
+ap = [W('decides', 'owners', 'the faculty', -0.2), W('decides', 'owners', 'Yusuf', -0.2), W('decides', 'teamrev', 'Jun', -0.2)]
 decide(ap, 'D', last=2.4)
 for i, t in enumerate(ap):
     stamp(t + 0.55, 0.034 * (1 - 0.12 * i), 0.3)
 roll(DD, ap[2] + 0.05, 'D', 0.044)
-stamp(E_('decides', 'owners', -0.05), 0.03, -0.3)
+stamp(E_('decides', 'teamrev', -0.05), 0.03, -0.3)
 cl = G('decides', 'calls', -0.4)
 paper(cl + 0.2, 0.016, 0.2, 0.5); knock(cl + 1.0, 0.016, -0.3, 230)
 s_air(W('decides', 'decided', 'brought', -0.1), 2.0, 0.016, 0.0, 200, 900)
@@ -308,7 +309,7 @@ roll(G9, E_('decides', 'decided', 0.45), 'D', 0.046)
 
 # 6. Governed, too: the rules for AI helpers slid onto the desk, and the agent's sign as its star comes on; a tick for each thing the
 #    agent may do, and for each it may not, a cross and its low note; Sam's answer in his hand, and the flute, a person deciding; its
-#    low note again, and a cross, by its approve, the flute as the owners light gold, a knock for "owners only"; the pencil ring round
+#    low note again, and a cross, by its approve, the flute as the owners light gold, a knock for "people only"; the pencil ring round
 #    the night's empty signature; the highlighter along binder 26's line, a chord as it goes green, and the pen; G, then A suspended,
 #    into Only what's written
 slide(W('agent', 'governed', 'The agent', -0.4), 0.9, 0.018, 0.35); agent(W('agent', 'governed', 'governed', -0.1), 'D')
@@ -323,12 +324,12 @@ sam = W('agent', 'samples', 'glossary', 0.2)
 pencil(sam, 1.2, 0.012, 0.25, 500, 1800); decide([sam + 0.1, sam + 0.5, sam + 0.9], 'D', last=1.6, g=0.032)
 cn6 = W('agent', 'approve', "can't")
 cross(cn6, 0.014, 0.3); cant(cn6, 'D', 0.036)
-decide([W('agent', 'approve', 'owners sign', -0.15), W('agent', 'approve', 'owners sign', 0.35)], 'D', deg=(2, 0), last=1.6, g=0.036)
+decide([W('agent', 'approve', 'data team', -0.15), W('agent', 'approve', 'data team', 0.35)], 'D', deg=(2, 0), last=1.6, g=0.036)
 knock(W('agent', 'approve', 'owns nothing', -0.05), 0.022, 0.3, 280)
 stroke(G('agent', 'note', 0.2), 0.9, 0.012, 0.0)
 gr = W('agent', 'green', 'green', -0.2)
 marker(gr, 0.9, 0.016, 0.1); roll(DD, gr + 0.1, 'D', 0.048)
-for i, w in enumerate(["agent's access", 'its checklist', "owners' approvals"]):
+for i, w in enumerate(["agent's access", 'its checklist', "data team's approval"]):
     pencil(W('agent', 'green', w, -0.1), 0.75, 0.012 * (1 if i < 1 else 0.8), 0.25, 500, 1800)
 ag = E_('agent', 'green', 0.9)
 roll(GM7, ag, 'D', 0.046); roll(ASUS, ag + 1.4, 'D', 0.04)

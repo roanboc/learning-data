@@ -8,7 +8,7 @@ const BREATH={
 "who":{"hold":{"writes": 0.4, "cloud": 0.6, "makers": 0.6, "rest": 0.8, "contract": 0.8, "map": 1.0, "trusted": 0.8}},
 "doors":{"hold":{"then": 0.4, "internet": 1.0, "storage": 0.6, "out": 1.0, "files": 0.8, "catalog": 1.0, "back": 0.4, "admin": 1.0}},
 "rooms":{"hold":{"three": 0.8, "try": 0.4, "prod": 0.6, "own": 0.6, "masked": 0.8, "mistake": 1.0, "path": 1.0}},
-"keys":{"hold":{"locks": 0.4, "encrypted": 0.8, "who": 0.4, "until": 0.6, "own": 0.8, "use": 0.8, "back": 1.4, "lose": 1.2, "rector": 1.0}},
-"copies":{"hold":{"last": 0.4, "first": 1.2, "night": 0.8, "locked": 1.0, "restore": 1.0}},
+"keys":{"hold":{"locks": 0.6, "encrypted": 0.8, "who": 0.8, "until": 1.0, "own": 1.2, "use": 1.2, "back": 1.4, "lose": 1.2, "rector": 1.0}},
+"copies":{"hold":{"last": 0.8, "first": 1.4, "night": 1.2, "locked": 1.4, "restore": 1.6}},
 "again":{"hold":{"walks": 0.6, "nodoor": 0.8, "stolen": 0.8, "no": 1.4, "ragusa": 1.0, "open": 0.6},"breathe":5.0}
 };

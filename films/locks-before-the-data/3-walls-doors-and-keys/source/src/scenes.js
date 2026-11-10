@@ -252,7 +252,7 @@ scene("rooms",(ctx,S,t,sc)=>{
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"wdHall",keys:[[0,930,420,1.16],[T.three,930,360,1.3],[T.own-0.2,930,470,1.24],[T.path-0.4,1100,450,1.2]],d:2,push:0,draw:(c,tt)=>{
       const sp=wd_on(tt,T.three+0.3,2.4),own=ag_in(tt,T.own,0.6),vl=ag_in(tt,T.masked,0.8);
-      const s=wd_state(6,{catalog:1-ag_in(tt,T.three+0.2,0.5)},{split:sp,sections:ag_in(tt,T.own,0.8),work:ag_in(tt,T.try,0.6),test:ag_in(tt,T.test,0.6),finished:ag_in(tt,T.run,0.8),job:ag_in(tt,T.nightly,0.6),real:ag_in(tt,T.real,0.6),
+      const s=wd_state(6,{catalog:1-ag_in(tt,T.three+0.2,0.5),store:1-ag_in(tt,T.masked+0.3,0.4)*(1-ag_in(tt,T.mistake-0.4,0.5))},{split:sp,sections:ag_in(tt,T.own,0.8),work:ag_in(tt,T.try,0.6),test:ag_in(tt,T.test,0.6),finished:ag_in(tt,T.run,0.8),job:ag_in(tt,T.nightly,0.6),real:ag_in(tt,T.real,0.6),
         lit:(e,i)=>e===2?0.15+0.6*own*Math.max(0,Math.sin(Math.min(Math.PI,(tt-T.own-i*0.15)*2))):0.15+0.5*own*Math.max(0,Math.sin(Math.min(Math.PI,(tt-T.own-0.4-e*0.3-i*0.12)*2))),
         veil:e=>e<2?vl:0,coral:(e,i)=>e===0&&i===2?ag_in(tt,T.mistake,0.6)*(1-ag_in(tt,T.path-0.6,0.6)):0});
       wd_hallWorld(c,tt,s);
@@ -263,7 +263,7 @@ scene("rooms",(ctx,S,t,sc)=>{
       // one reviewed path: development, test, production
       const pa=wd_on(tt,T.path+0.2,1.6),pf=1-ag_in(tt,T.islet-0.6,0.5);if(pa>0&&pf>0){c.save();c.globalAlpha*=pf;const y=92,half=[101,46,91];for(let e=0;e<2;e++){const a=wd_roomBox(e,1),b=wd_roomBox(e+1,1),u=clamp(pa*2-e,0,1);
           if(u>0)dp_link(c,[a.x+a.w/2+half[e],y],[b.x+b.w/2-half[e+1],y],"green",ag_sine(u),{lw:4});}
-        dp_T(c,"one reviewed path",935,46,{w:700,size:28,align:"center",col:"green",a:ag_in(pa,0.8,0.2)});c.restore();}
+        wd_T(c,"one reviewed path",935,46,{w:700,size:28,align:"center",col:"green",a:ag_in(pa,0.8,0.2)});c.restore();}
       wd_cardAt(c,1424,520,420,{kick:"built in",title:"From a branch to production"},tt,T.builds,T.islet-0.6,{col:"green"});}},
     // the coast: what isn't trusted yet waits apart, then comes in only through the gate
     {at:T.islet-0.3,place:"wdCoast",keys:[[0,860,560,1.04]],push:0.03,draw:(c,tt)=>{const M=WD_MAP,isl=[1270,742],gate=[M.gate[0]+8,M.gate[1]+14],ship=[700,800];
@@ -285,7 +285,7 @@ scene("keys",(ctx,S,t,sc)=>{
     {at:0,place:"wdHall",keys:[[0,930,420,1.12],[T.encrypted-0.4,930,450,1.2],[T.until-0.6,960,400,1.0],[T.use-0.4,1420,330,1.14],[T.back-0.3,1180,380,1.06],
         [T.lose-0.2,1240,330,1.12]],d:1.8,push:0,draw:(c,tt)=>{
       const ku=wd_on(tt,T.own+0.2,2.4),taken=ag_io(tt,T.back+0.6,T.nobody+2.6,0.6),dim=ag_io(tt,T.lose,T.rec+0.6,0.6);
-      const s=wd_state(7,{prov:1-ag_in(tt,T.team+1.0,0.8),vault:ag_in(tt,T.own,0.8),keyU:ku,keyDim:dim,vaultCoral:taken,corLabel:0},
+      const s=wd_state(7,{prov:1-ag_in(tt,T.team+1.0,0.8),vault:ag_in(tt,T.own,0.8),keyU:ku,keyDim:dim,vaultCoral:taken,corLabel:0,store:1-ag_in(tt,T.encrypted+0.4,0.4)*(1-ag_in(tt,T.who-0.2,0.5))},
         {cipher:ag_in(tt,T.encrypted,1.0),full:taken,dim:dim});
       wd_hallWorld(c,tt,s);
       wd_cardAt(c,520,560,560,{kick:"encrypted",title:"on disk, and on the move"},tt,T.encrypted+0.4,T.who-0.2,{col:"violet"});
@@ -379,8 +379,9 @@ scene("again",(ctx,S,t,sc)=>{
       wd_ship(c,1450,786,0.3,{t:tt,seed:1});wd_ship(c,1340,792,0.26,{t:tt,seed:2,flip:true});
       for(const [i,x0,y0,s] of [[0,1560,800,0.34],[1,1640,812,0.3]]){const u=ag_eo(wd_on(tt,T.ragusa+0.6+i*0.8,4));wd_ship(c,lerp(x0+520,x0,u),y0,s,{t:tt,seed:5+i,flip:true,sail:1-0.8*u});}
       wd_scr(c,S,()=>wd_tag(c,"Ragusa · 1377",ag_in(tt,T.ragusa,0.5)));}},
-    // the university's data, open to the people and jobs that need it
-    {at:T.open-0.4,place:"wdHall",keys:[[0,1180,420,1.1]],push:0.03,draw:(c,tt)=>{const s=wd_state(9,{flow:1},{lit:(e,i)=>e===2?0.45+0.35*Math.sin(tt*1.4+i):0.2});wd_hallWorld(c,tt,s);}}
+    // the university's data, open to the people and jobs that need it; the network's name leaves as the end card comes in, so the end
+    // card's line, on the same row, has it to itself
+    {at:T.open-0.4,place:"wdHall",keys:[[0,1180,420,1.1]],push:0.03,draw:(c,tt)=>{const s=wd_state(9,{flow:1,corLabel:1-ag_in(tt,T.few-0.4,0.8)},{lit:(e,i)=>e===2?0.45+0.35*Math.sin(tt*1.4+i):0.2});wd_hallWorld(c,tt,s);}}
   ]);
   dp_end(ctx,S,t,T.few-0.4,"Walls, doors and keys",null,"Film 3 of 9","Locks before the data");
   const la=ag_in(t,T.few-0.4+0.6,0.9);if(la>0){setScreen(ctx,S);dp_T(ctx,"Few doors, each with a lock you can see.",960,360,{w:700,size:48,align:"center",a:la});}

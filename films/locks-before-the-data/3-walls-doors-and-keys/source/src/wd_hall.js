@@ -67,7 +67,7 @@ function wd_pane(c,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;con
   const g=c.createLinearGradient(0,y,0,y+h);g.addColorStop(0,rgba(mix(col,[160,220,225],0.55),0.16+0.12*lit));g.addColorStop(1,rgba(mix(col,[160,220,225],0.55),0.05+0.06*lit));c.fillStyle=g;c.fillRect(x,y,w,h);
   const hg=c.createLinearGradient(0,y,0,y+40);hg.addColorStop(0,"rgba(225,250,250,0.14)");hg.addColorStop(1,"rgba(225,250,250,0)");c.fillStyle=hg;c.fillRect(x,y,w,40);c.restore();
   rr(c,x+1,y+1,w-2,h-2,8);c.strokeStyle=rgba(mix(col,[255,255,255],0.35),0.5+0.45*lit);c.lineWidth=1.8+1.2*lit;c.stroke();
-  if(o.label&&o.la!==0)dp_T(c,o.label,x+w/2,y+44,{w:700,size:28,align:"center",a:o.la==null?1:o.la});
+  if(o.label&&o.la!==0)wd_T(c,o.label,x+w/2,y+44,{w:700,size:28,align:"center",a:o.la==null?1:o.la});
   c.restore();}
 // a fine even frost laid over a pane, the data encrypted (a, 0 to 1): a grain of small marks, and a violet film; full (0 to 1) frosts it
 // over completely, so nothing behind it shows
@@ -138,8 +138,8 @@ function wd_block(c,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const B=
   // what is in the room: people's half-finished work, and the nightly job with the real records
   wd_work(c,t,f("work"),sp,o.finished||0,o.test==null?1:f("test"));wd_job(c,t,f("job"),sp,f("real"));
   // the rooms' names, over the block
-  if(f("rooms")>0){const ra=f("rooms");if(sp<0.5)dp_tag(c,R.x,40,"one workspace","cyan",{a:ra*(1-ag_in(sp,0,0.3)),size:28});
-    if(sp>0.3)for(let e=0;e<3;e++){const b=wd_roomBox(e,1);dp_T(c,WD_ENV[e],b.x+b.w/2,92,{w:700,size:30,align:"center",col:e===2?"ink":"mut",a:ra*ag_in(sp,0.55,0.4)});}}
+  if(f("rooms")>0){const ra=f("rooms");if(sp<0.5){const tw=dp_tw(c,"one workspace",{w:700,size:28})+44;dp_tag(c,R.x,40,"one workspace","cyan",{a:ra*(1-ag_in(sp,0,0.3))*wd_boxA(c,R.x,40,R.x+tw,100),size:28});}
+    if(sp>0.3)for(let e=0;e<3;e++){const b=wd_roomBox(e,1);wd_T(c,WD_ENV[e],b.x+b.w/2,92,{w:700,size:30,align:"center",col:e===2?"ink":"mut",a:ra*ag_in(sp,0.55,0.4)});}}
   c.restore();}
 // the ways down: a tube of glass from each room through the catalog's band to the files, with a ring round it
 function wd_ways(c,t,sp,ring,shaft){const n=sp>0.001?3:1;for(let e=3-n;e<3;e++){const b=wd_roomBox(e,sp),a=e===2?1:ag_in(sp,0.35,0.5);if(a<=0)continue;
@@ -214,16 +214,26 @@ function wd_job(c,t,a,sp,real){if(a<=0)return;c.save();c.globalAlpha*=a;const u=
   if(real>0)dp_slip(c,x,y+80,"the real records","violet",{size:28,a:real});
   c.restore();}
 
+/* ---------------------------------------------------------------- words near the frame's edge
+   The hall is bigger than most shots: when the camera comes in on the block, the names round it (the open internet, the cases, the
+   corridor, the rooms' names over it) would be cut by the frame's edge. wd_boxA gives how far a box (x0, y0 to x1, y1, in the hall's
+   coordinates) is inside the frame, wherever the camera puts it: 1 from 48 px in, 0 at the edge; wd_T draws words like dp_T, faded by
+   it. The camera glides, so they fade smoothly, and words cut by the frame are never seen. */
+function wd_boxA(c,x0,y0,x1,y1){const m=c.getTransform(),cw=c.canvas.width,ch=c.canvas.height,k=cw/W,
+  l=m.a*x0+m.c*y0+m.e,r=m.a*x1+m.c*y0+m.e,t=m.b*x0+m.d*y0+m.f,b=m.b*x0+m.d*y1+m.f;return clamp((Math.min(l,cw-r,t,ch-b)-4*k)/(44*k),0,1);}
+function wd_edgeA(c,s,x,y,o){const tw=dp_tw(c,s,o),sz=o.size||28,x0=o.align==="center"?x-tw/2:x;return wd_boxA(c,x0,y-sz*0.75,x0+tw,y+sz*0.2);}
+function wd_T(c,s,x,y,o){const e=wd_edgeA(c,s,x,y,o);if(e>0)dp_T(c,s,x,y,Object.assign({},o,{a:(o.a==null?1:o.a)*e}));}
+
 /* ---------------------------------------------------------------- round the block */
 // the key: a sealed card with a gold chip, never a character of the key itself; (x, y) its top left, 300 wide, 96 tall
 function wd_key(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.globalAlpha*=a;dp_halo(c,x+150,y+48,190,"violet",0.08);
-  dp_sealed(c,x,y,300,"the key",{behind:o.behind});dp_chip(c,x+212,y+20);
+  dp_sealed(c,x,y,300,"",{behind:o.behind});wd_T(c,"the key",x+100,y+58,{w:700,size:30});dp_chip(c,x+212,y+20);
   if(o.dim>0){c.save();rr(c,x,y,300,96,18);c.fillStyle=rgba([2,8,10],0.6*o.dim);c.fill();c.restore();}c.restore();}
 // a case of glass where a key is kept: its words at the top (title 36 px, or a line of 28), the key under them
 function wd_case(c,B,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.save();c.globalAlpha*=a;
   dp_panel(c,B.x,B.y,B.w,B.h,{col:o.col||"grey",r:20,glowR:30});
-  if(o.title){dp_T(c,o.title,B.x+30,B.y+56,{w:700,size:36});if(o.sub)dp_T(c,o.sub,B.x+30,B.y+96,{w:600,size:28,col:"mut"});}
-  else if(o.sub)dp_T(c,o.sub,B.x+30,B.y+50,{w:700,size:28});
+  if(o.title){wd_T(c,o.title,B.x+30,B.y+56,{w:700,size:36});if(o.sub)wd_T(c,o.sub,B.x+30,B.y+96,{w:600,size:28,col:"mut"});}
+  else if(o.sub)wd_T(c,o.sub,B.x+30,B.y+50,{w:700,size:28});
   c.restore();}
 // where the key's card sits in each case
 const WD_KEY0=[WD_PROV.x+60,WD_PROV.y+90],WD_KEY1=[WD_VAULT.x+60,WD_VAULT.y+128];
@@ -233,7 +243,7 @@ function wd_corridor(c,t,a,flow,o){if(a<=0)return;o=o||{};const y=WD_COR.y,h=WD_
   const xa=lerp(x1,x0,u);c.save();rr(c,xa,y,x1-xa+20,h,14);c.clip();const g=c.createLinearGradient(0,y,0,y+h);g.addColorStop(0,"rgba(120,215,225,0.16)");g.addColorStop(0.5,"rgba(120,215,225,0.05)");g.addColorStop(1,"rgba(120,215,225,0.12)");
   c.fillStyle=g;c.fillRect(xa,y,x1-xa,h);c.strokeStyle="rgba(190,245,245,0.12)";c.lineWidth=1.2;for(let x=x1-((t*40)%120);x>xa;x-=120){c.beginPath();c.moveTo(x,y);c.lineTo(x-20,y+h);c.stroke();}c.restore();
   c.save();c.shadowColor="rgba(104,216,230,0.8)";c.shadowBlur=10;c.fillStyle="rgba(200,250,250,0.85)";c.fillRect(xa,y,x1-xa,2);c.fillRect(xa,y+h-2,x1-xa,2);c.restore();
-  if(o.label!==false)dp_T(c,"the university's network",1452,y-16,{w:700,size:28,a:ag_in(a,0.6,0.4)*(o.la==null?1:o.la)});
+  if(o.label!==false)wd_T(c,"the university's network",1452,y-16,{w:700,size:28,a:ag_in(a,0.6,0.4)*(o.la==null?1:o.la)});
   if(flow>0)for(let k=0;k<4;k++){const p=((t*0.16+k*0.25)%1),x=lerp(x1+30,x0+40,p),fa=Math.min(1,p*6,(1-p)*6)*flow;if(fa<=0.01||x<xa+20)continue;
     c.save();c.globalAlpha*=fa;wd_mini(c,x,y+h/2+2,k===2?"gear":"person","cyan",0.82);c.restore();}
   c.restore();}
@@ -280,7 +290,7 @@ function wd_request(c,cx,p,o){o=o||{};if(p<=0||p>=1.7)return;const k=o.k||1,y0=W
      block      wd_block's own options */
 const WD_THREAD=[[640,226],[470,226],[340,290],[244,420]];
 function wd_hallWorld(c,t,s){const f=k=>clamp(s[k]||0,0,1);
-  if(f("inet")>0)dp_T(c,"the open internet",44,282,{w:700,size:28,col:"mut",a:f("inet")});
+  if(f("inet")>0)wd_T(c,"the open internet",44,282,{w:700,size:28,col:"mut",a:f("inet")});
   if(f("prov")>0)wd_case(c,WD_PROV,{col:"grey",sub:"kept by the cloud provider",a:f("prov")});
   if(f("vault")>0){const vc=f("vaultCoral");wd_case(c,WD_VAULT,{col:vc>0.5?"coral":"cyan",title:"the university's key",sub:"kept by the security team",a:f("vault")});
     if(vc>0){c.save();c.globalAlpha*=vc;dp_halo(c,WD_VAULT.x+WD_VAULT.w/2,WD_VAULT.y+WD_VAULT.h/2,300,"coral",0.18);c.restore();}}
@@ -302,7 +312,7 @@ function wd_thread(c,t,a,cut,la){if(a<=0)return;const P=WD_THREAD;c.save();const
   c.save();c.shadowColor="rgba(104,216,230,0.8)";c.shadowBlur=10;c.strokeStyle="rgba(190,245,245,0.9)";c.lineWidth=3;path(0,Math.min(u,uw));c.stroke();c.restore();
   // outside: the same light, turning coral and fading as it's cut
   const oa=1-ag_in(cut,0.35,0.65);if(u>uw&&oa>0){c.save();c.globalAlpha*=oa;const col=mix([190,245,245],DP.F.coral,ag_in(cut,0,0.35));c.shadowColor=rgba(col,0.8);c.shadowBlur=10;c.strokeStyle=rgba(col,0.9);c.lineWidth=3;path(uw,u);c.stroke();
-    if(u>=0.999){c.fillStyle=rgba(mix(col,[255,255,255],0.3),1);c.beginPath();c.arc(P[3][0],P[3][1],6,0,TAU);c.fill();dp_T(c,"anywhere",P[3][0]-24,P[3][1]+52,{w:700,size:28,align:"center",a:la*ag_in(a,0.85,0.15)});}c.restore();}
+    if(u>=0.999){c.fillStyle=rgba(mix(col,[255,255,255],0.3),1);c.beginPath();c.arc(P[3][0],P[3][1],6,0,TAU);c.fill();wd_T(c,"anywhere",P[3][0]-24,P[3][1]+52,{w:700,size:28,align:"center",a:la*ag_in(a,0.85,0.15)});}c.restore();}
   if(cut>0){c.save();c.globalAlpha*=ag_in(cut,0,0.3);const x=P[1][0],y=P[1][1];c.strokeStyle=rgba(DP.F.coral,1);c.lineWidth=3.4;c.lineCap="round";c.shadowColor=rgba(DP.F.coral,0.9);c.shadowBlur=10;
     c.beginPath();c.moveTo(x-12,y-14);c.lineTo(x-12,y+14);c.stroke();c.restore();}
   c.restore();}

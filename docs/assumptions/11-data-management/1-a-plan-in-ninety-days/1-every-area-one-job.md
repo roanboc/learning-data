@@ -1,12 +1,10 @@
 # Every area, one job: questions and assumptions
 
-*Data management* · *A plan in ninety days*, film 1 · open, PR #253 · [pull request](https://github.com/roanboc/learning-data/pull/253)
+*Data management* · *A plan in ninety days*, film 1 · merged, PR #253 · [pull request](https://github.com/roanboc/learning-data/pull/253)
 
-On the site once PR #253 merges: https://data.learn-all.org/a-plan-in-ninety-days/every-area-one-job/
+[Watch it on the site](https://data.learn-all.org/a-plan-in-ninety-days/every-area-one-job/)
 
-> Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
-
-Film 1 of 4 of *A plan in ninety days* (`films/a-plan-in-ninety-days/1-every-area-one-job`), the module's opening film, kept by the film's thread ("Make data management film 1 Every area, one job"). Rodrigo, 5 November 2026: "Work on the films with assumptions and merge them all." Each question I would have asked, the assumption I made instead, where it shows, and what changes if it's wrong. The module's own are in `../assumptions.md`.
+Film 1 of 4 of *A plan in ninety days* (`films/a-plan-in-ninety-days/1-every-area-one-job`), the module's opening film, made while Rodrigo was away (5 November 2026: "Work on the films with assumptions and merge them all"). Each question I would have asked, the assumption I made instead, where it shows, and what changes if it's wrong. The module's own questions are in [`../0-module.md`](../0-module.md). `openings.md` and `numbers.md` are the module's shared notes in the project's working folder, not files in this repository.
 
 Written 10 November 2026.
 
@@ -20,7 +18,7 @@ Written 10 November 2026.
 | 6 | What does the film say about the two beside the wheel? | "An agent for timetable questions, and a forecast model, which this site doesn't teach yet", as the module's numbers say | *One wheel* | One line |
 | 7 | Who on the team is deep in each area? (new, not in the shared numbers before) | Noor in architecture and modelling; Sam in the platform, storage and integration; Jun in the warehouse and its reports; Yusuf in governance, metadata and quality. Added to `numbers.md` (row "Who is deep in each area") for later films | *Who is deep in each* | Four sheets and two lines |
 | 8 | Where is no one on the team deep? (new) | Three areas, written down on an amber sheet: security, reference and master data, and documents and content. The university's security team holds security, as the data protection films have it (said in the shared numbers, not in the film) | *Who is deep in each* | One sheet |
-| 9 | Which of the site's films are named on the wheel? | Only those on main, by title: *From words to data*, *Fit for use* and *The same one, everywhere* in the voice; *Governance principles*, *The map before the data*, *Data that moves* and *Only what you may see* on screen. *Locks before the data* (the brief's film for security) has no film on main yet, so security points to *Only what you may see* | *One wheel* | One tag on the wheel |
+| 9 | Which of the site's films are named on the wheel? | Only those on main, by title: *From words to data*, *Fit for use* and *The same one, everywhere* in the voice; *Governance principles*, *The map before the data*, *Data that moves* and *Locks before the data* on screen. *Locks before the data*, the brief's series for security, reached main on 10 November (#217) while this film was being made; until then the tag pointed to *Only what you may see* | *One wheel* | One tag on the wheel |
 | 10 | Name *Many hats, one picture* by title? | Yes: it reached main on 10 November (#238) while this film was being made, so the line became "The generalist's skill, seeing the whole, has its own film: Many hats, one picture.", with a tag | *Who is deep in each*, its last line | One line and its tag |
 | 11 | How much of Watkins's *The First 90 Days*? | Only its shape, named once: learn fast, and secure early wins. Not its transition types or its talks with the boss. The voice says "The First Ninety Days"; the caption shows "90" | *Ninety days, three lanes* | One line |
 | 12 | Her background, said once? | "She has been an architect, a data lead and a product owner", from the module's people | *Her first day* | One line |
@@ -33,5 +31,5 @@ Written 10 November 2026.
 | 19 | How long? | 8:37, six chapters, 129 words a minute (every chapter 124 to 134); about as long as *Many hats, one picture* (8:43) and *Listen first* (8:38) | The film | Lines cut |
 | 20 | Pause and think | Three questions, after *One wheel*, *Who is deep in each* and *Ninety days, three lanes*; right answers at options 3, 1 and 2, one near miss each | The film's page | The packs |
 | 21 | The poster | Helena's one page once the strategy lane's three steps are in (discover, define, plan) | The series page and the film's card | `film.json`'s poster moment |
-| 22 | The README's topics | A Data management row after *AI agents in data work*, naming *A plan in ninety days* first, and "ten big topics". *Data protection* and *Leading data people* have no row there yet. *Services with customers* (#240) adds a row too: whichever merges second joins the two | `README.md` | One row |
+| 22 | The README's topics | A Data management row after *AI agents in data work*, naming *A plan in ninety days* first, and the count to eleven (*Data protection and privacy* got its row with #217); *Leading data people* has no row there yet. *Services with customers* (#240) adds a row too: whichever merges second joins the two | `README.md` | One row |
 | 23 | The soundtrack's release | Nothing to run by hand: `audio.json` with the MP3 beside it (`git add -f`); since 10 November *Store audio outside Git* publishes and verifies the release when the film reaches main. Once it verifies, `python site-tools/media.py untrack` can take the MP3 out of Git, for every film at once | The film's page plays the MP3 from Git until then | Only where the MP3 is kept |

@@ -417,6 +417,7 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 
 - [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 - [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
+- [A path for every provider](../films/architecture-that-keeps-up/3-a-path-for-every-provider/) — `a-path-for-every-provider`
 
 ### Small steps, measured
 

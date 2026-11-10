@@ -11,6 +11,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Five stages, not a switch](https://data.learn-all.org/from-helper-to-colleague/five-stages/) | Earned autonomy | 8½ min | 6 | 3 questions | [script](1-five-stages/script.md) · [source](1-five-stages/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

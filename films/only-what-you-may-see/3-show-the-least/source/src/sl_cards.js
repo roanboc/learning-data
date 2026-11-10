@@ -182,4 +182,5 @@ function sl_pane(ctx,x,y,w,h,label,paint,o){o=o||{};const a=o.a==null?1:o.a;if(a
 // part of a place, filling a pane's frame: the place's sx, sy, sw, sh
 const sl_crop=(place,sx,sy,sw,sh)=>(c,x,y,w,h)=>c.drawImage(dp_place0(place),sx,sy,sw,sh,x,y,w,h);
 // a corner tag over the past: where and when, top left
-function sl_where(ctx,top,title,a){dp_kicker(ctx,top,title,{a});}
+// where and when a shot is: the kit's kicker, held still on the screen (S) while the camera glides in under it
+function sl_where(ctx,S,top,title,a){if(a<=0)return;ctx.save();setScreen(ctx,S);dp_kicker(ctx,top,title,{a});ctx.restore();}

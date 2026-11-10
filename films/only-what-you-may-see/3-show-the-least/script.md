@@ -1,6 +1,6 @@
 # Only what you may see · Show the least: script
 
-*The script of* Show the least*, film 12 of 22 of* Data protection and privacy *and film 3 of 8 of* Only what you may see*, in English, in the module's Night glass look (variant GA, "Frosted glass, solid colour"). Written on 5 November 2026 from the module's briefs (`/mnt/project-files/data-protection/briefs.md`, film 12), overnight, on the assumptions in this folder's `assumptions.md`, as Rodrigo asked at 11:53 UTC. An ideas film: it names no product, no cloud and no tool. It follows the four-beat rule for every opening (AGENTS.md, *Story and world*). Every claim is checked against its source (`research.md` here; *Rigour*, *Sources*). The university, its people and its numbers are the module's invented ones (`numbers.md`). This is the draft written before the film is built; when it is built, the narration lives in `source/src/narration.js` and the pauses in `source/src/breath.js`, the times below are replaced by the built ones, and where this page and those files differ, the source wins.*
+*The script of* Show the least*, film 12 of 22 of* Data protection and privacy *and film 3 of 8 of* Only what you may see*, in English, in the module's Night glass look (variant GA, "Frosted glass, solid colour"). Written on 5 November 2026 from the module's briefs (`/mnt/project-files/data-protection/briefs.md`, film 12), overnight, on the assumptions in this folder's `assumptions.md`, as Rodrigo asked at 11:53 UTC. An ideas film: it names no product, no cloud and no tool. It follows the four-beat rule for every opening (AGENTS.md, *Story and world*). Every claim is checked against its source (`research.md` here; *Rigour*, *Sources*). The university, its people and its numbers are the module's invented ones (`numbers.md`). Built on 5 and 10 November 2026: the narration lives in `source/src/narration.js`, the pauses in `source/src/breath.js`, the pictures in `source/src/sl_past.js`, `sl_cards.js` and `scenes.js`, and the sound in `source/tools/score.py`; the times below are the built ones, and where this page and those files differ, the source wins.*
 
 ## The promise
 
@@ -45,20 +45,20 @@ The practice behind it: a practitioner starts from the question and the agreemen
 
 | Object | Stands for |
 |---|---|
-| The roll, 1856 (a ledger on the official's table, a tick by a name) | Who: kept by the official, apart from the votes |
+| The roll, 1856 (a ledger on the official's desk, a tick by a name) | Who: kept by the official, apart from the votes |
 | The printed paper, names crossed out, folded | A value hidden from everyone but its owner |
 | The box | Values with no names: how, nothing about who |
 | The count board, chalk tallies under "Totals" | Published totals |
 | The paper's number and its stub in a sealed packet, 1872 | A way back to the person that only the holder of the seal can open: the key |
 | Samuel's row | One learner's record, column by column, as each reader sees it |
-| Gold chips (`direct`, `indirect`, `special`, `none`, `pseudonymous`) | Each column's class, set by its owner (*Know what you hold*) |
-| Level chips (`confidential`, `restricted`, `public`) | Each table's level |
+| Violet chips (`direct`, `special` and `pseudonymous` solid, `indirect` lighter, `none` an outline) | Each column's class, set by its owner (*Know what you hold*): the stricter, the stronger |
+| Level pills of glass (`confidential`, `restricted` rimmed in violet, `public`) | Each table's level |
 | The nine way tiles | The ways to hide a value, named exactly as `numbers.md` writes them |
-| Three question pills | What the reader sees; can it be undone; what still works |
+| The three questions, numbered on a card | What the reader sees; can it be undone, and by whom; what the reader can still work out |
 | Violet stars and codes | Hidden personal data |
 | A coral, closed card | What a reader isn't given (the support table), or a match that leaks |
 | The sealed key card | The keyed hash's key, never drawn, kept by the registrar's office |
-| The vault card, pairs of token and value | The token's vault, kept by the registrar's office |
+| The vault, a sealed card | The token's vault, kept by the registrar's office; its pairs never drawn |
 | Frost over a value | Encryption: all there, unreadable without the key |
 | The agreement card, 2026-14 | What the study may have, in plain words (*An agreement first*) |
 | The totals card, "fewer than 10", "hidden" | Published totals, small counts hidden, and one more beside them |
@@ -66,102 +66,102 @@ The practice behind it: a practitioner starts from the question and the agreemen
 
 ## The look
 
-Night glass, variant GA (`films/locks-before-the-data/shared/`, the module's kit): a dark petrol hall of frosted glass panes, light along their edges, ice words, every word at least 28 px as seen and at least 4.5 to 1; nothing below y 890. Cyan is an identity (a person's or an agent's label, the roll's "who"); green allowed; coral denied or closed (the support table not given, a match that leaks, the sum that gives a count back); violet hidden personal data (stars, codes, "fewer than 10", "hidden"); gold the chip. Amber (power switched on) isn't used. The way tiles are clear ice glass; the one in use is lit brighter, never coloured, so a tile never reads as allowed or denied. Frost has one meaning here, encryption; masked values are stars, as the example project's mask writes them (the style prototype's still f2 drew a masked name under frost; this film keeps frost for one meaning).
+Night glass, variant GA (`films/locks-before-the-data/shared/`, the module's kit): a dark petrol hall of frosted glass panes, light along their edges, ice words, every word at least 28 px as seen and at least 4.5 to 1; nothing below y 890. Cyan is an identity (a person's or an agent's label, the roll's "who"); green allowed; coral denied or closed (the support table not given, a match that leaks, the sum that gives a count back); violet hidden personal data (stars, codes, "fewer than 10", "hidden") and the class chips, stronger for stricter; grey what needs no protection ("Everyone sees the totals"). Gold, the kit's chip on a genuine card, and amber (power switched on) aren't used. The way tiles are clear ice glass; the one in use is lit brighter, never coloured, so a tile never reads as allowed or denied. Frost has one meaning here, encryption; masked values are stars, as the example project's mask writes them (the style prototype's still f2 drew a masked name under frost; this film keeps frost for one meaning).
 
 Three places, each painted once when the player asks for it, under 2 s:
 
-1. **The polling room, 1856.** A timber room by lamplight at dusk, deep blue at the windows: a long table with the roll and an inkstand, the official behind it; a doorway to a small side room with a writing slope, pen, ink and blotting paper; a wooden box with a slot, on a stand in view of the table. Before 1856, the same table without the side room and the box, three onlookers behind the voter. Its later moment (`later:true`): the count, papers in piles, a board of chalk tallies. In the style of the prototype's town gate (`stills/GA_f4.jpg`): night, warm lamplight, cool rim.
+1. **The polling room, 1856.** A timber room by lamplight at dusk, deep blue at the windows: the official's tall desk, its top of dark green cloth, with the roll, an inkstand and an oil lamp; the official standing behind it, the voter facing him, their eyes on one eye line; at the back, a rail where the public stands. Before the Act, three onlookers stand behind the rail. After it, a booth on the right, its curtain drawn across while the voter is in it, with a writing slope, ink and pen; and the box, dark wood with a slot, on a stand by the desk. Its later moment (`later:true`): the count, papers in piles, the box open, a board of chalk tallies. In the style of the prototype's town gate (`stills/GA_f4.jpg`): night, warm lamplight, with only a faint cool edge from the windows (`SL_LAMP`), since a rim of the hall's light read as an outline in a room with no glass.
 2. **A table, 1872.** Close: a ballot paper turned over, its number on the back; the counterfoil left in the official's book; a packet tied and sealed. One shot, cut in and out.
-3. **The university's glass hall.** Cards on the left two thirds (x 80 to 1250), people on the right (x 1300 to 1800). Mei and Anil from the kit's cast (`mei`, `anil`); the agent's sphere from the kit.
+3. **The university's glass hall.** Cards from the left (x 80 to 1880), people on the right (x 1390 to 1800). Mei and Anil from the kit's cast (`mei`, `anil`); the agent's sphere from the kit.
 
-People: one three-quarter head, the kit's geometry and face table; arms down; a hand only on the story's object (`hold`): the voter's printed paper, the official's pen on the roll. 1850s men, no hats indoors: the official in a dark frock coat, high white collar and black cravat, with side whiskers; the voter, a worker, in shirt, brown waistcoat and dark neckerchief, with a beard; the employer with a watch chain, the landlord in a greatcoat, the candidate in a frock coat. Clothes clear of the meaning colours. No real person is drawn: Henry Chapman is a name on the Act's card. The period clothes are this film's own helpers (`source/src/sl_people.js`, `sl_` prefix), never a change to the kit. Each person reaches the frame's bottom edge or stands behind the table. Every new head is looked at full size, facing both ways, before the film uses it.
+People: one three-quarter head, the kit's geometry and face table; arms down; a hand only on the story's object (`hold`): the printed paper, from the official's hand to the voter's, and into the box. 1850s men, no hats indoors, in the kit's shapes coloured for their time (`SL_CAST` in `source/src/sl_past.js`, the `sl_` prefix, never a change to the kit): the official clean-shaven, in a dark suit, white shirt and black tie; the voter, a worker, bearded, in a blue serge overshirt over a plain shirt; behind the rail, his employer, grey-bearded, in a brown suit, his landlord, with a moustache, in a grey coat, and a candidate in a dark suit. Side whiskers were drawn first and read as a grey patch, so the official is clean-shaven and the employer has the grey beard. Clothes clear of the meaning colours. No real person is drawn: Henry Chapman is a name on the Act's card. Each person reaches the frame's bottom edge or stands behind the desk or the rail. Every head was looked at full size, facing both ways, before the film used it.
 
-Motion: in one room the camera glides (at least 1.4 s, sine ease) and only what changes fades; the onlookers leave as whole pictures before the side room and the box come in (`later:true`); cuts only between rooms (1856 to the hall in chapter 1; the hall to 1872 and back in chapter 4; the hall to 1856 and back across chapters 5 and 6). Values change in their cells: the old fades as the new comes in, in the same place, never two at once readable.
+Motion: in one room the camera glides (at least 1.4 s, sine ease) and only what changes fades; the onlookers leave as whole pictures before the booth and the box come in; the paper stays in one hand at a time, from the official's to the voter's, and slides from his fingers into the box; cuts only between rooms (1856 to the hall in chapter 1; the hall to 1872 and back in chapter 4; the hall to 1856 in chapter 5), and one dissolve, from 1856 to the hall into chapter 6, where the whole picture changes. Values change in their cells: the old fades as the new comes in, in the same place, never two at once readable. The place labels (a kicker and a title, top left) stay still on the screen while the camera glides under them, and the cards leave before the title and end cards come in, so no words sit under their veil.
 
 ## Script
 
-Times are estimates, from about 128 words a minute and 0.8 s after each sentence; the build replaces them.
+Times are the built ones (`build/timeline.json`): 7:24.8 in all, 967 words, 130 words a minute, the voice 71% of the time (`tools/pace.py`).
 
-### 1 · The roll and the box · 0:00–about 2:20
+### 1 · The roll and the box · 0:00–2:05
 
 Key `ballot`. Music under the 1856 part (*Sound*).
 
 | Line | Narration | Picture |
 |---|---|---|
-| `v1856` | Victoria, 1856: the colony is about to elect its first parliament. | The polling room at dusk. Kicker "OPENING STORY", title "Victoria, 1856", top left. The table, the roll, the official seated behind it, lamplit |
-| `aloud` | Until then, a man said his vote out loud, so anyone could learn it: his employer, his landlord, a candidate. | The camera glides in. The voter at the table, facing left to the official; behind him three onlookers come in, each with a cyan label: "his employer", "his landlord", "a candidate" |
-| `cost` | A vote against them could cost a worker his job, or a tenant his home. | Two coral pills beside the voter: "his job", "his home" |
+| `v1856` | Victoria, 1856: the colony is about to elect its first parliament. | The polling room at dusk. Kicker "OPENING STORY", title "Victoria, 1856", top left. The official standing behind his desk, the roll and a lamp on it; the voter facing him |
+| `aloud` | Until then, a man said his vote out loud, so anyone could learn it: his employer, his landlord, a candidate. | Behind the rail, three onlookers come in, each with a cyan label: "his employer", "his landlord", "a candidate"; a coral slip, "His vote, out loud" |
+| `cost` | A vote against them could cost a worker his job, or a tenant his home. | Two coral pills over the voter: "his job", "his home" |
 | `dare` | So a man might not dare vote as he wished. Something had to change. | The voter's head lowers a little (a nod, 0.4 s). Hold |
-| `passed` | That March, the colony passed a secret ballot, worked out by Henry Chapman, one of its lawmakers. | The onlookers leave, each faded whole (`later:true`); the pills go. A card on the left: "A secret ballot · passed March 1856", under it "worked out by Henry Chapman" |
-| `roll` | An official marked the voter off the roll, and handed him a printed paper with every candidate's name. | The card leaves. The side room's doorway and the box come in. The official's pen ticks the roll (a hand on the roll); the voter takes the paper (`hold`): "Candidates", four names drawn as decoration |
-| `alone` | Alone, he crossed out the names he didn't want, folded it, and put it in the box. | The camera glides to the side room: the voter at the writing slope; three names struck through, one at a time; the paper folds; then at the box, the paper goes in |
-| `count` | At the end, the papers were counted, and the totals announced. | Later moment (`later:true`): the voter leaves; lamplight lower; papers in piles; a board, "Totals", four rows of chalk tallies (decoration) |
-| `free` | Now a worker or a tenant could vote as he wished: nobody could see his vote, so nobody could punish him for it. | The camera glides back to the box, closed, by the board |
-| `spread` | Britain took it up in 1872; by 1892, so had 38 American states. | A card: "1872 · Britain", "1892 · 38 American states", under them "“the Australian ballot”" |
-| `who` | The roll says who voted, and nothing about how. The box says how, and nothing about who. | The card leaves; the roll and the box side by side, labels: "The roll: who voted, nothing about how" (cyan), "The box: how, nothing about who" (violet) |
-| `today` | Today, at the university, Anil Kurian studies how learners in the Faculty of Health progress. | Cut to the glass hall. Anil on the right, facing left; his label "Anil Kurian · Faculty of Health" |
-| `kept` | Their records, as kept, would show him far more: names, birthdays, and which of his own faculty's learners have a disability. | A card, "Learner records, as kept": Student number, Name, Email, Date of birth, Course, Results; Samuel's row: S-20412 · Samuel Osei · samuel.osei@mail.example · 14 May 1987 · Public health · 90 of 120. Below, a second card, "Support table", one column, "Exam support", its values not drawn |
-| `all` | Hide it all, and the study can't follow anyone from one year to the next. | Every value in Samuel's row turns to stars; beside the card, "2025 → 2026", the arrow broken (coral) |
-| `mei` | So Mei Tanaka, who owns the records, picks a way to hide each column that keeps what the study needs. | The stars clear back. Mei comes in beside Anil, facing left, her label "Mei Tanaka · Registrar's office" |
-| `follows` | The study follows 2,614 learners, year by year, and never sees who they are. | Samuel's row as the study sees it: a7772705… · *** · *** · 1987 · Public health · 90 of 120 (code and stars violet); the arrow "2025 → 2026 → 2027" whole, green |
-| `data` | And for data: show the least that still answers the question. | Title card: kicker "ONLY WHAT YOU MAY SEE", title "Show the least" |
+| `passed` | That March, the colony passed a secret ballot, worked out by Henry Chapman, one of its lawmakers. | The onlookers leave, each faded whole; the pills go. A card: "March 1856 · A secret ballot · Worked out by Henry Chapman, one of the colony's lawmakers" |
+| `roll` | An official marked the voter off the roll, and handed him a printed paper with every candidate's name. | The card leaves; the booth and the box come in. The official ticks the roll and hands the voter the printed paper: it stays in his hand until the voter's takes it (`hold`) |
+| `alone` | Alone, he crossed out the names he didn't want, folded it, and put it in the box. | The voter steps into the booth and its curtain closes: three names struck through, one at a time, and the paper folded, heard, not seen; the curtain opens, and the folded paper slides from his fingers into the box |
+| `count` | At the end, the papers were counted, and the totals announced. | Later moment (`later:true`): the men leave; papers in piles, the box open; a board, "Totals", four rows of chalk tallies (decoration) |
+| `free` | Now a worker or a tenant could vote as he wished: nobody could see his vote, so nobody could punish him for it. | A green card: "Now · Free to vote as he wished · Nobody could see his vote, so nobody could punish him for it" |
+| `spread` | Britain took it up in 1872; by 1892, so had 38 American states. | A card: "The Australian ballot · Britain, 1872 · 38 American states, by 1892" |
+| `who` | The roll says who voted, and nothing about how. The box says how, and nothing about who. | Two cards, each with a line of light to what it names: "The roll · Who voted, nothing about how" (cyan) and "The box · How, nothing about who" (violet) |
+| `today` | Today, at the university, Anil Kurian studies how learners in the Faculty of Health progress. | Cut to the glass hall. Anil on the right, facing left; kicker "TODAY", title "At the university"; his label "Anil Kurian"; a card, "A study · How learners in the Faculty of Health progress" |
+| `kept` | Their records, as kept, would show him far more: names, birthdays, and which of his own faculty's learners have a disability. | A card, "Learner records, as kept": Student number, Name, Email, Date of birth, Course, Results; Samuel's row: S-20412 · Samuel Osei · samuel.osei@mail.example · 14 May 1987 · Public health · 90 of 120, the names and birthdays lit as they're said. Below, a second card, "Support table", `restricted`, one column, "Exam support", its values never drawn, lit at "disability" |
+| `all` | Hide it all, and the study can't follow anyone from one year to the next. | Every value in Samuel's row turns to stars; a coral slip: "The study can't follow anyone" |
+| `mei` | So Mei Tanaka, who owns the records, picks a way to hide each column that keeps what the study needs. | The stars clear back. Mei comes in beside Anil, facing left, her label "Mei Tanaka · owns the records" |
+| `follows` | The study follows 2,614 learners, year by year, and never sees who they are. | A green slip, "2,614 learners, year by year"; on "never", the card becomes "What the study sees": a7772705… · *** · *** · 1987 · Public health · 90 of 120 (code and stars violet), and the support table closes, coral: "Not given to the study" |
+| `data` | And for data: show the least that still answers the question. | The cards leave. Title card: "Show the least", "The ways to hide a value", "FILM 3 OF 8 · ONLY WHAT YOU MAY SEE" |
 
-### 2 · Three questions · about 2:20–3:10
+### 2 · Three questions · 2:05–2:45
 
 Key `questions`. In the hall; the camera glides on.
 
 | Line | Narration | Picture |
 |---|---|---|
-| `may` | The study's agreement says what it may have: each learner's course and results, their year of birth, and a code in place of who they are. | The agreement card, top left: "Data sharing agreement 2026-14", "For a study in the Faculty of Health"; one line lit: "May have · Each learner's course and results; their year of birth; a code in place of who they are". A small label: "From *An agreement first*" |
+| `may` | The study's agreement says what it may have: each learner's course and results, their year of birth, and a code in place of who they are. | The agreement card, top left: "Data sharing agreement 2026-14", "For a study in the Faculty of Health"; one line lit: "May have · Each learner's course and results; their year of birth; a code in place of who they are". A line under it: "From the film An agreement first" |
 | `never` | And never anything that names a learner, or anything about their health. | The line "Never · Anything that names a learner; anything about their health" lit |
-| `class` | Each column already has the class its owner set: direct, indirect, special, or none. | The learner records card, a gold chip on each column: Student number, Name and Email `direct`; Date of birth `indirect`; Course and Results `none`; the card's level chip `confidential`. The support table: Exam support `special`, level `restricted`. Label: "From *Know what you hold*" |
-| `nine` | So which way should hide each one? There are nine, and three questions tell them apart. | The cards move left and shrink; nine tiles come in, one after another, in three rows: Leave it out · Mask it whole · Mask it in part / Generalise · Keyed hash · Token / Encryption · Totals, small counts hidden · Filter rows |
-| `see` | What does the reader see? | A pill above the tiles: "What does the reader see?" |
-| `undo` | Can it be undone, and by whom? | A second pill: "Can it be undone?" |
-| `works` | And what can the reader still work out? | A third pill: "What still works?" |
+| `class` | Each column already has the class its owner set: direct, indirect, special, or none. | The learner records card, a violet chip on each column: Student number, Name and Email `direct`; Date of birth `indirect`; Course and Results `none`; the card's level `confidential`. The support table: Exam support `special`, level `restricted`. A line: "Classes from the film Know what you hold" |
+| `nine` | So which way should hide each one? There are nine, and three questions tell them apart. | The cards leave; nine tiles come in, in three rows across the top: Leave it out · Mask it whole · Mask it in part / Generalise · Keyed hash · Token / Encryption · Totals, small counts hidden · Filter rows |
+| `see` | What does the reader see? | A card under the tiles, "Three questions": 1, "What does the reader see?" |
+| `undo` | Can it be undone, and by whom? | 2, "Can it be undone, and by whom?" |
+| `works` | And what can the reader still work out? | 3, "What can the reader still work out?" |
 
-### 3 · Ways that can't be undone · about 3:10–4:45
+### 3 · Ways that can't be undone · 2:45–4:07
 
 Key `oneway`. In the hall. Each way comes forward as its tile, its three answers under it, while its column changes in Samuel's row.
 
 | Line | Narration | Picture |
 |---|---|---|
-| `health` | Exam support is about health, and the agreement says never. | The support table's card comes forward; its `special` chip; the agreement's "Never" line beside it |
-| `out` | So leave it out: the study isn't given the support table. | The card closes, coral: "Not given". Tile "Leave it out": "Sees: nothing" · "Undone: no" · "Still works: nothing on it" |
+| `health` | Exam support is about health, and the agreement says never. | Samuel's record and the support table, its `special` chip lit; the agreement's "Never" line beside them |
+| `out` | So leave it out: the study isn't given the support table. | The support table closes, coral: "Not given to the study". A card, "A way to hide a value · Leave it out": Sees nothing · Undone no · Still works nothing on it |
 | `names` | Names and emails name a learner: the registrar's office needs them, the study never does, so mask them whole. | Samuel's row; Name and Email lit |
-| `stars` | The columns stay, but for the study every value reads as stars, and stars can't be turned back. | Name and Email turn to violet `***`. Tile "Mask it whole": "Sees: stars" · "Undone: no" · "Still works: counting rows" |
-| `desk` | The help desk needs a little more: to check it has the right learner on the phone. | A second, small card under the row: "As the help desk sees it" |
-| `part` | So mask them in part: the last two digits, and the first letter. | In it: S-***12 · s***@mail.example. Tile "Mask it in part": "Sees: a part" · "Undone: no" · "Still works: recognising a record" |
-| `enough` | Enough to recognise a record, too little to look anyone up. | Hold; the help desk's card dims |
-| `born` | The date of birth helps the study see how age shapes progress, so generalise it: 14 May 1987 becomes 1987. | Date of birth lit; "14 May" fades, "1987" stays. Tile "Generalise": "Sees: a year" · "Undone: no" · "Still works: trends by group" |
+| `stars` | The columns stay, but for the study every value reads as stars, and stars can't be turned back. | Name and Email turn to violet `***`. The card: "Mask it whole": Sees stars · Undone no · Still works counting rows |
+| `desk` | The help desk needs a little more: to check it has the right learner on the phone. | A second card under the way's: "As the help desk sees it", Student number and Email |
+| `part` | So mask them in part: the last two digits, and the first letter. | In it: S-***12 · s***@mail.example. The card: "Mask it in part": Sees a part · Undone no · Still works recognising a record |
+| `enough` | Enough to recognise a record, too little to look anyone up. | Hold |
+| `born` | The date of birth helps the study see how age shapes progress, so generalise it: 14 May 1987 becomes 1987. | Date of birth lit; "14 May 1987" becomes "1987". The card: "Generalise": Sees a year · Undone no · Still works trends by group |
 | `gone` | The day and month are gone, and can't come back. | Hold |
-| `anon` | But hidden isn't anonymous: in a small course, one year of birth may fit only one learner. | A small card: "A small course", five rows' years, 1991 · 1987 · 1995 · 2001 · 1993; 1987 ringed in coral |
-| `stays` | So it stays indirect, and stays behind the agreement. | The small card goes; the year's `indirect` chip glows |
-| `rows` | Last, filter rows: the study gets only the Faculty of Health's 2,614 learners. | Samuel's row becomes a table of six rows; three from other faculties slide away; the table's label "Faculty of Health · 2,614 learners". Tile "Filter rows": "Sees: only your rows" · "Undone: not needed" · "Still works: everything, on your rows" |
+| `anon` | But hidden isn't anonymous: in a small course, one year of birth may fit only one learner. | A small card: "A small course · year of birth": 1991 · 1987 · 1995 · 2001 · 1993; 1987 ringed in coral |
+| `stays` | So it stays indirect, and stays behind the agreement. | The small card goes; the year's `indirect` chip lit |
+| `rows` | Last, filter rows: the study gets only the Faculty of Health's 2,614 learners. | A card, "Learners · every faculty": six courses and their faculties; the three from other faculties leave, and it reads "Faculty of Health · 2,614 learners". The card: "Filter rows": Sees only your rows · Undone not needed · Still works everything, on your rows |
 | `others` | That hides no value; it leaves out other people's rows. | Hold |
 
 Pause and think: `oneway`.
 
-### 4 · Ways that can be undone · about 4:45–6:25
+### 4 · Ways that can be undone · 4:07–5:25
 
 Key `undo`. In the hall; a cut to 1872 and back.
 
 | Line | Narration | Picture |
 |---|---|---|
-| `follow` | The study must follow each learner from year to year, so the student number becomes a code. | Samuel's row; Student number lit |
-| `plain` | The learner code you've seen before scrambles the number, and scrambled isn't anonymous: with the registrar's list, anyone can match it. | S-20412 becomes e69dec44… (label "Scrambled · from *Governed in Unity Catalog*"). Beside it, the registrar's list: S-20410 5440b46d… · S-20411 459c5ea5… · S-20412 e69dec44… · S-20413 dfed4e0e… · S-20414 4a088fa6…; a coral line joins S-20412 to the code |
-| `keyed` | So the study's code mixes in a secret key: a keyed hash. | A sealed card comes in, "Key · sealed · registrar's office"; e69dec44… becomes a7772705… (violet) |
-| `nothing` | Without the key, the list matches nothing. | The list's codes against a7772705…: no line joins; a coral "No match" |
-| `with` | With it, the registrar's office can find whose code it is: undone, but only with the key, kept sealed, apart from the study. | The sealed card moves right, to Mei's side; a thin line from it to a7772705… and to S-20412, on her side only. Tile "Keyed hash": "Sees: a stable code" · "Undone: only with the key" · "Still works: joins and counts per person" |
-| `still` | So the code stays pseudonymous, behind the agreement. | The column's chip turns from `direct` to `pseudonymous`; its header becomes "Learner code" |
-| `n1872` | In Britain's ballot of 1872, each paper had a number, matched to its voter only in a sealed packet, opened only to trace a fraud. | Cut to the 1872 table: a paper turned over, "No. 1209" on its back; the counterfoil in the book, "No. 1209" and a line of decoration for the voter's number; the counterfoils tied in a packet, sealed. Label: "Sealed · opened only to trace a fraud". Cut back to the hall |
-| `token` | A token is a stand-in, paired with the real value in a vault: only the vault's owner can turn it back, to reach the person again. | The Email column: *** becomes TKN-0381 (violet). A vault card on Mei's side, "Vault · registrar's office": "TKN-0381 ↔ samuel.osei@mail.example". Tile "Token": "Sees: a token" · "Undone: yes, by the vault's owner" · "Still works: joins; the real value on request" |
-| `noone` | This study reaches no one, so it takes the keyed hash. | TKN-0381 turns back to ***; the vault card goes; the token tile dims, the keyed hash's stays lit |
-| `lock` | And encryption keeps the whole value where it's stored or moved: unreadable without the key, all there for anyone allowed to read it. | A card, "Stored": a value under frost; a label "The university's key · *Walls, doors and keys*"; the frost clears for an allowed reader, comes back. Tile "Encryption": "Sees: unreadable text" · "Undone: yes, with the key" · "Still works: nothing until it's opened" |
+| `follow` | The study must follow each learner from year to year, so the student number becomes a code. | Samuel's record; Student number lit |
+| `plain` | The learner code you've seen before scrambles the number, and scrambled isn't anonymous: with the registrar's list, anyone can match it. | Beside the record, "The registrar's list, scrambled": S-20410 5440b46d… · S-20411 459c5ea5… · S-20412 e69dec44… · S-20413 dfed4e0e… · S-20414 4a088fa6…; the student number becomes e69dec44…, and a coral line joins it to S-20412's row |
+| `keyed` | So the study's code mixes in a secret key: a keyed hash. | A sealed card comes in, "The study's key · Kept sealed by the registrar's office"; e69dec44… becomes a7772705… |
+| `nothing` | Without the key, the list matches nothing. | A slip: "The list matches nothing" |
+| `with` | With it, the registrar's office can find whose code it is: undone, but only with the key, kept sealed, apart from the study. | A dashed violet line from the sealed key to the code. The card: "Keyed hash": Sees a stable code · Undone only with the key · Still works joins and counts per person |
+| `still` | So the code stays pseudonymous, behind the agreement. | The column's chip turns from `direct` to `pseudonymous`; its name becomes "Learner code" |
+| `n1872` | In Britain's ballot of 1872, each paper had a number, matched to its voter only in a sealed packet, opened only to trace a fraud. | Cut to the 1872 table: kicker "Britain, 1872", title "A number on each paper"; a paper turned over, "No. 1209" on its back; the counterfoil in the book with the same number; the counterfoils tied in a packet and sealed; a violet slip, "Opened only to trace a fraud". Cut back to the hall |
+| `token` | A token is a stand-in, paired with the real value in a vault: only the vault's owner can turn it back, to reach the person again. | The Email column: *** becomes TKN-0381 (violet); a sealed card, "The vault · Kept by the registrar's office". The card: "Token": Sees a token · Undone yes, by the vault's owner · Still works joins; the real value on request |
+| `noone` | This study reaches no one, so it takes the keyed hash. | TKN-0381 turns back to ***; the vault goes; the card turns back to "Keyed hash" |
+| `lock` | And encryption keeps the whole value where it's stored or moved: unreadable without the key, all there for anyone allowed to read it. | A card, "Stored, encrypted": Samuel Osei under violet frost, clearing for "An allowed reader" (green), then frosted again. The card: "Encryption": Sees unreadable text · Undone yes, with the key · Still works nothing, until it's opened |
 
 Pause and think: `undo`.
 
-### 5 · Totals, small counts hidden · about 6:25–7:25
+### 5 · Totals, small counts hidden · 5:25–6:17
 
 Key `totals`. In the hall; a cut to 1856 at the end.
 
@@ -170,32 +170,32 @@ Key `totals`. In the hall; a cut to 1856 at the end.
 | `publish` | When the study is done, it may publish totals, with any count under 10 hidden. | The agreement's line "May leave · Totals, with any count under 10 hidden" lit |
 | `left` | Here, learners who left after their first year, by course. | A card, level chip `public`: "Left after first year · by course": Nursing 38 · Midwifery 4 · Public health 21 · Health sciences 17 · Faculty of Health 80 |
 | `small` | Midwifery's 4 is a small count: in a class that size, people would know who left. | Midwifery's row lit |
-| `fewer` | So it reads: fewer than 10. | 4 becomes "fewer than 10" (violet). Tile "Totals, small counts hidden": "Sees: totals" · "Undone: no" · "Still works: totals" |
-| `back` | But the faculty's total is there too: 80, less 38, 21 and 17, gives the 4 back. | A line under the card, coral: "80 − 38 − 21 − 17 = 4" |
+| `fewer` | So it reads: fewer than 10. | 4 becomes "fewer than 10" (violet). The card: "Totals, small counts hidden": Sees totals · Undone no · Still works totals |
+| `back` | But the faculty's total is there too: 80, less 38, 21 and 17, gives the 4 back. | The rows lit, and a coral slip under the card: "80 − 38 − 21 − 17 = 4" |
 | `more` | So one more count is hidden, and the 4 can't be worked out. | 17 becomes "hidden" (violet); the coral line fades |
-| `answer` | Totals can't be undone, and they still answer the question: about 9 in 10 first-year learners went on to second year. | Under the card: "About 9 in 10 first-year learners went on to second year" |
-| `vote` | As in 1856: everyone sees the totals, and nobody sees a vote. | Cut to the polling room's later moment: the board of tallies, the box closed by it |
+| `answer` | Totals can't be undone, and they still answer the question: about 9 in 10 first-year learners went on to second year. | A card: "The answer · About 9 in 10 first-year learners went on to second year" |
+| `vote` | As in 1856: everyone sees the totals, and nobody sees a vote. | Cut to the polling room's later moment: kicker "Victoria, 1856", title "The count"; the board of tallies and the box; two labels: "Everyone sees the totals" (grey, to the board) and "Nobody sees a vote" (violet, to the box) |
 
 Pause and think: `totals`.
 
-### 6 · Show the least · about 7:25–8:30
+### 6 · Show the least · 6:17–7:25
 
 Key `least`. A cut back to the hall.
 
 | Line | Narration | Picture |
 |---|---|---|
-| `each` | So for each line of the agreement, Mei picks the way that keeps what the study needs. | The agreement card on the left; Mei on the right, facing left |
-| `code` | A code in place of who they are: a keyed hash. | An arrow from the line "a code in place of who they are" to the tile "Keyed hash" |
-| `year` | Their year of birth: generalise. | "their year of birth" → "Generalise" |
-| `nonames` | Nothing that names a learner: mask it whole. | "Anything that names a learner" → "Mask it whole" |
-| `nohealth` | Nothing about their health: leave it out. | "anything about their health" → "Leave it out" |
-| `faculty` | Only its 2,614 learners: filter rows. And only totals leave, with small counts hidden. | "2,614 learners" → "Filter rows"; "Totals, with any count under 10 hidden" → "Totals, small counts hidden" |
-| `newclass` | Each new column gets its class from her: the code pseudonymous, the year still indirect. | The study's row card: Learner code `pseudonymous`, Year of birth `indirect` |
-| `build` | Later films build these ways on the platform, so each class is hidden the same way, every time. | A label: "Built in *One policy for many tables*" |
-| `agent` | And an agent helping the study sees what the study sees, never more. | The agent's sphere beside Anil, its band cyan, its label "Sees what the study sees"; a small label "*AI agents in data work*" |
-| `least` | The roll, the box and the totals: each shows the least that still answers its question. | The sphere goes. Three small pictures on a pane: the roll, the box, the board |
-| `samuel` | Samuel's row now answers the study's question, and says nothing about who he is. | Samuel's row as the study sees it: a7772705… · *** · *** · 1987 · Public health · 90 of 120 |
-| `end` | Show the least that still answers the question. | Title card: "Show the least that still answers the question." |
+| `each` | So for each line of the agreement, Mei picks the way that keeps what the study needs. | The agreement card, all four lines: May have, Never, From, May leave; Mei on the right, facing left |
+| `code` | A code in place of who they are: a keyed hash. | A tile, "Keyed hash", joined by a line of light to "May have" |
+| `year` | Their year of birth: generalise. | "Generalise", joined to "May have" |
+| `nonames` | Nothing that names a learner: mask it whole. | "Mask it whole", joined to "Never" |
+| `nohealth` | Nothing about their health: leave it out. | "Leave it out", joined to "Never" |
+| `faculty` | Only its 2,614 learners: filter rows. And only totals leave, with small counts hidden. | "Filter rows", joined to "From"; then "Totals, small counts hidden", joined to "May leave" |
+| `newclass` | Each new column gets its class from her: the code pseudonymous, the year still indirect. | The study's row, "What the study sees": Learner code `pseudonymous` and Year of birth `indirect` lit |
+| `build` | Later films build these ways on the platform, so each class is hidden the same way, every time. | A card: "Later in this series · One policy for many tables · Each class hidden the same way, every time" |
+| `agent` | And an agent helping the study sees what the study sees, never more. | Anil, and the agent's sphere beside him, its label "Sees what the study sees"; a line: "More in AI agents in data work" |
+| `least` | The roll, the box and the totals: each shows the least that still answers its question. | The agent leaves. Three panes, each a picture of 1856: "The roll: who", "The box: how", "The totals" |
+| `samuel` | Samuel's row now answers the study's question, and says nothing about who he is. | The panes go. Two slips beside the study's row: "Answers the study's question" (green), "Says nothing about who he is" (violet) |
+| `end` | Show the least that still answers the question. | The row and its slips leave. End card: "Show the least that still answers the question.", the module's mark, "Show the least", "Film 3 of 8 · Only what you may see · Learning Data" |
 
 ## Sound
 
@@ -204,9 +204,9 @@ A new palette (`/mnt/project-files/data-protection/palettes.md`, reserved 5 Nove
 - **Lead: a keyed bugle**, the brass bugle with keys over its tone holes that bands played in the first half of the 1800s: soft, one voice, no vibrato, mellow (a conical bore, few high partials, under 2.5 kHz). The public count: each total a short plain phrase.
 - **Partner: a baryton**, the bowed bass of the 1700s with wire strings hidden in its neck that ring unbowed behind the played ones: low, soft, its hidden strings a faint shimmer after each note. Only where a hidden value can be brought back: the sealed key, the 1872 packet, the vault.
 
-Music under the opening story (the 1856 part): the bugle alone, a slow tune of a few phrases, sparse under the problem, resolving at the box; a two-note figure under "The roll says who voted" (the roll, then the box). At the cut to the hall, one held note, then silence. After that, only now and then: a short bugle phrase at each chapter's turn, each one different; the baryton under the sealed key card (`keyed`), the 1872 packet (`n1872`) and the vault (`token`), never under the voice for more than a held note; a bugle phrase at the cut back to the board (`vote`), recalling the opening's without repeating it; bugle and baryton together on the last title. No pulse: nothing in the film is urgent.
+Music under the opening story (the 1856 part): the bugle alone, a few short phrases, each one different, in B flat major, tuned pure so no chord beats: rising to F on election eve; one low D as the last onlooker is named; E flat falling to D under what a vote could cost; C rising to F, left open, at "Something had to change"; F, B flat, D as the Act passes; A rising to B flat as the paper goes into the box, the tune home; a plain phrase at the count; D, F, B flat under "free to vote"; G falling to F for Britain and America; F then D, the roll then the box. At the cut to the hall, one held B flat, then silence under the voice; D falling to B flat under the title. After that, only now and then: a short bugle phrase at each chapter's turn, each one different (C, D, F; E flat, D, B flat; D, E flat, D; B flat, D; G, F, D); the baryton under the study's sealed key (B flat), the 1872 packet (low F, as the seal is pressed) and the vault (D), never under the voice for more than a held note; F, A, B flat under the answer, about 9 in 10; the opening's rising tune, on to the octave, at the cut back to the count (`vote`); and on the end card, the bugle's B flat, F, B flat over the baryton's low B flat, its hidden strings ringing on. No pulse: nothing in the film is urgent. `tools/quiet.py` passes: after the opening, music sounds 8% of the time and comes in 10 times; its loud moments sit at -29.4 dB, its loudest notes at -27.3 dB; the room moves a held note by at most 0.1 dB.
 
-Effects, each tied to something on screen, one at a time, soft, under 2.5 kHz: the official's pen ticking the roll; three pen strokes through names, spaced; the paper folding; the paper dropping into the box (a soft wooden knock); chalk on the board (one soft texture, not a burst); a soft tap as each way's tile comes forward; one soft tick where a column changes (never one per character); the support card closing (a dull glass knock); the seal pressed (a soft thump); the frost forming (a soft breath of noise). Held notes at even levels, the room's echo set by what it rings where the notes are (`_band`, `_held`); mixed to -16 LUFS; no louder than the governance films.
+Effects, each tied to something on screen, one at a time, soft, under 2.5 kHz: the official's pen ticking the roll; the paper handed over; behind the curtain, three pen strokes, spaced, and the fold; the curtain drawn and drawn back (a breath of air); the paper dropping into the box (a soft wooden knock); chalk on the board (one soft texture, not a burst); a soft tap as each way's card comes forward and where a column changes (never one per character); the nine tiles as one soft breath; the support table closing (a dull glass knock); the seal pressed (a soft thump); the frost forming and clearing. 85 effects, at most 3 in any second, the loudest at -46.1 dB. Held notes at even levels, the room's echo set by what it rings where the notes are (`_band`, `_held`); mixed to -16 LUFS (the soundtrack measures -16.4); no louder than the governance films.
 
 ## Pause and think
 

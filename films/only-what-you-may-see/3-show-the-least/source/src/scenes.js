@@ -100,7 +100,7 @@ scene("ballot",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>{const P={
     {at:0,place:"slRoom",keys:[[0,960,560,1],[c.aloud,1000,540,1.04]],d:2.4,draw:(x,tt)=>{
       sl_watchers(x,tt,[0,1,2].map(i=>{const tin=[P.cand,P.land,P.emp][i];return ag_in(tt,tin-0.4,0.5)*(1-ag_in(tt,c.passed-0.4+i*0.2,0.5));}));
       room(x,tt);
-      sl_where(x,"Opening story","Victoria, 1856",ag_io(tt,0.8,c.aloud+1.2,0.6));
+      sl_where(x,S,"Opening story","Victoria, 1856",ag_io(tt,0.8,c.aloud+1.2,0.6));
       dp_slip(x,mid,166,"His vote, out loud","coral",{align:"center",ink:true,a:ag_io(tt,P.said-0.1,c.cost-0.1,0.4),behind:"slRoom"});
       const tg=tt0=>ag_in(tt,tt0-0.2,0.4)*(1-ag_in(tt,c.passed-0.45,0.4));
       sl_headTag(x,2,"his employer",1240,196,tg(P.emp),ag_in(tt,P.emp,0.5));
@@ -133,7 +133,7 @@ scene("ballot",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>{const P={
       const ea=1-ag_in(tt,c.breath-0.2,0.6);  // the cards leave as the title comes in, so no words sit under its veil
       dp_person(x,"anil",1390,600,1.0,{t:tt,flip:true});
       const ma=ag_in(tt,c.mei+0.3,0.7);if(ma>0)withA(x,ma,()=>dp_person(x,"mei",1740+(1-ag_eo(ma))*60,600,1.0,{t:tt,flip:true}));
-      sl_where(x,"Today","At the university",ag_io(tt,c.today+0.3,c.kept-0.5,0.5));
+      sl_where(x,S,"Today","At the university",ag_io(tt,c.today+0.3,c.kept-0.5,0.5));
       dp_tag(x,1150,150,"Anil Kurian","cyan",{a:ag_io(tt,c.today+0.6,c.kept,0.4),to:[1386,300],p:ag_in(tt,c.today+0.9,0.5)});
       const sa=ag_io(tt,c.today+1.2,c.kept-0.2,0.4);if(sa>0)dp_card(x,80,250,920,{kick:"A study",title:"How learners in the Faculty of Health progress"},{a:sa,k:ag_spr(tt,c.today+1.2,0.6)});
       // the record as kept, its rows lit as they're named; all of it hidden, then shown again; then as the study sees it
@@ -156,11 +156,11 @@ scene("questions",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>({
     nine:wAt(sc,"nine","There are nine")}));
   ag_shots(ctx,S,t,sc.dur,[
     {at:0,place:"slHall",later:true,keys:[[0,960,540,1]],d:1.8,draw:(x,tt)=>{
-      const aa=1-ag_in(tt,c.class-0.4,0.4);if(aa>0)sl_agree(x,80,130,1000,["May have","Never"],{a:aa,lit:{"May have":ag_io(tt,c.may+0.4,c.never,0.5),"Never":ag_in(tt,c.never+0.2,0.5)},dim:0.7,from:"From An agreement first"});
+      const aa=1-ag_in(tt,c.class-0.4,0.4);if(aa>0)sl_agree(x,80,130,1000,["May have","Never"],{a:aa,lit:{"May have":ag_io(tt,c.may+0.4,c.never,0.5),"Never":ag_in(tt,c.never+0.2,0.5)},dim:0.7,from:"From the film An agreement first"});
       // each column's class, as its owner set it: the chips come in as each class is named
       const ra=ag_in(tt,c.class,0.4)*(1-ag_in(tt,P.nine-0.5,0.4));if(ra>0){const ch=i=>ag_in(tt,[P.direct,P.direct+0.15,P.direct+0.3,P.indirect,P.none,P.none+0.15][i]-0.1,0.4);
         withA(x,ra,()=>{const [rx,ry,rw]=SL_RECAT,rows=sl_samRows(tt).map((r,i)=>Object.assign(r,{chipA:ch(i)}));sl_record(x,rx,ry,rows,{w:rw,title:"Learner records, as kept",level:"confidential",levelA:ag_in(tt,c.class+0.6,0.4),k:ag_spr(tt,c.class,0.6)});
-          sl_sup(x,{chipA:ag_in(tt,P.special-0.1,0.4)});dp_T(x,"Classes from Know what you hold",80,866,{w:600,size:28,col:"mut",a:ag_in(tt,c.class+1.0,0.5)});});}
+          sl_sup(x,{chipA:ag_in(tt,P.special-0.1,0.4)});dp_T(x,"Classes from the film Know what you hold",80,866,{w:600,size:28,col:"mut",a:ag_in(tt,c.class+1.0,0.5)});});}
       // nine ways, and three questions that tell them apart
       sl_tiles(x,80,120,{a:1,p:SL_WAYS.map((n,i)=>clamp((tt-P.nine-0.1-i*0.2)/0.6,0,1))});
       sl_questions(x,460,520,1000,{a:ag_in(tt,c.see-0.4,0.4),p:[ag_in(tt,c.see,0.4),ag_in(tt,c.undo,0.4),ag_in(tt,c.works,0.4)]});}}
@@ -227,7 +227,7 @@ scene("undo",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>({
     {at:0,place:"slHall",keys:[[0,960,540,1]],d:1.8,draw:hall},
     // Britain, 1872: a number on the back of each paper, the same number on its counterfoil, the counterfoils sealed in a packet
     {at:c.n1872-0.3,place:"slTable",keys:[[c.n1872-0.3,960,540,1.06],[c.n1872+2,960,540,1]],d:2.4,draw:(x,tt)=>{
-      sl_where(x,"Britain, 1872","A number on each paper",ag_in(tt,c.n1872+0.2,0.5));
+      sl_where(x,S,"Britain, 1872","A number on each paper",ag_in(tt,c.n1872+0.2,0.5));
       sl_1872(x,tt,{paper:ag_in(tt,c.n1872+0.4,0.5),stub:ag_in(tt,P.matched-0.3,0.5),packet:ag_in(tt,P.packet-0.4,0.5),seal:clamp((tt-P.packet)/0.6,0,1)});
       dp_slip(x,360,700,"Opened only to trace a fraud","violet",{ink:true,a:ag_in(tt,P.fraud-0.3,0.4),behind:"slTable"});}},
     {at:c.token-0.3,place:"slHall",keys:[[c.token-0.3,960,540,1]],d:1.8,draw:hall}
@@ -249,7 +249,7 @@ scene("totals",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>({
     // as in 1856: the totals on the board for everyone, and no vote for anyone
     {at:c.vote-0.3,place:"slCount",keys:[[c.vote-0.3,960,560,1.05],[c.vote+1.5,960,560,1]],d:2.4,draw:(x,tt)=>{
       sl_box(x,...SL_R.box);
-      sl_where(x,"Victoria, 1856","The count",ag_in(tt,c.vote+0.2,0.5));
+      sl_where(x,S,"Victoria, 1856","The count",ag_in(tt,c.vote+0.2,0.5));
       dp_tag(x,1250,520,"Everyone sees the totals","grey",{a:ag_in(tt,P.sees-0.2,0.4),to:[SL_R.board[0]+SL_R.board[2],SL_R.board[1]+SL_R.board[3]-40],p:ag_in(tt,P.sees,0.5),behind:"slCount"});
       dp_tag(x,1180,650,"Nobody sees a vote","violet",{a:ag_in(tt,P.nob-0.2,0.4),to:[SL_R.box[0]+SL_R.box[2]-10,SL_R.box[1]+20],p:ag_in(tt,P.nob,0.5),behind:"slCount"});}}
   ]);});

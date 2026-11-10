@@ -60,7 +60,7 @@ class WorkflowTests(unittest.TestCase):
         # Cancelling main's Checks runs left Publish site with no passing run to publish (10 Nov).
         checks = (ROOT / ".github/workflows/checks.yml").read_text(encoding="utf-8")
         block = checks.split("\nconcurrency:\n", 1)[1].split("\njobs:\n", 1)[0]
-        self.assertIn("group: checks-${{ github.ref == 'refs/heads/main' && github.sha || github.ref }}\n", block)
+        self.assertIn("group: checks-${{ github.ref }}\n", block)
         self.assertIn("cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}\n", block)
         pages = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
         # Only a deployment that will run joins the queue, so a skipped run can't replace a waiting one.
@@ -68,7 +68,11 @@ class WorkflowTests(unittest.TestCase):
         deploy = pages.split("  deploy:\n", 1)[1]
         self.assertIn("    concurrency:\n      group: pages\n      cancel-in-progress: false\n", deploy)
         # Main's runs finish in any order: an older commit than the live one never replaces it.
-        self.assertIn("compare/$live...$HEAD_SHA", deploy)
+        self.assertIn("compare/$live...$target", deploy)
+        # The queue keeps only the newest waiting run, whatever commit it started for, so each run deploys the newest
+        # commit whose Checks passed, and checks out and deploys that same commit.
+        self.assertIn("checks.yml/runs?branch=main&event=push&status=success&per_page=1", deploy)
+        self.assertEqual(deploy.count("${{ steps.newer.outputs.sha }}"), 2)
         # The live commit comes from the site itself: a Pages deployment records main's newest commit, not the built one.
         self.assertIn('/version.txt?t=', deploy)
         self.assertIn("git rev-parse HEAD > site/version.txt", deploy)

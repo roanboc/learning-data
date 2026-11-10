@@ -465,8 +465,8 @@ const NARR={
  {"id":"owner","gap":0.8,"text":"And Mei owns every level, because she answers for the list."},
  {"id":"films","gap":0.8,"text":"How a check warns or stops, and whom it tells, is set in advance too: Rules that run and Too good to be true show how."}]},
 "written":{"name":"Written beside the data","lead":1.2,"tail":1.0,"vo":[
- {"id":"contract","gap":0.8,"text":"Jun wrote it all down beside the data, in the list's data contract."},
- {"id":"rule","gap":0.8,"text":"Each use is a quality rule, in the open standard's own words: its dimension, its level, who agreed it, and what a failure costs."},
+ {"id":"contract","gap":0.8,"text":"Jun wrote it all down beside the data, in the file that describes the list."},
+ {"id":"rule","gap":0.8,"text":"Each use is a quality rule, written in words: its dimension, its level, who agreed it, and what a failure costs."},
  {"id":"critical","gap":0.8,"text":"The columns each use can't do without are marked as critical data."},
  {"id":"dbt","gap":0.8,"text":"In dbt, every check on the list names its dimension and its owner."},
  {"id":"tag","gap":0.8,"text":"And on Databricks, each critical column carries a governed tag, so whoever finds the table sees what its uses depend on."},
@@ -477,7 +477,7 @@ const NARR={
  {"id":"take","gap":0.8,"text":"Ask what it's for before you ask if it's good."}]}
 };
 
-const VODUR={"chart/place": 7.449, "chart/bearing": 6.335, "chart/plane": 5.193, "chart/drift": 3.59, "chart/landfall": 6.468, "chart/change": 1.288, "chart/stretch": 7.579, "chart/ruler": 5.071, "chart/wright": 6.482, "chart/price": 4.69, "chart/greenland": 3.849, "chart/perfect": 4.728, "chart/data": 7.132, "chart/still": 3.626, "chart/benefit": 4.521, "chart/levels": 3.707, "reprint/dec": 7.801, "reprint/list": 6.899, "reprint/printer": 7.262, "reprint/passed": 2.594, "reprint/reprints": 8.747, "reprint/cost": 7.086, "reprint/seats": 5.387, "reprint/andres": 6.168, "reprint/held": 4.786, "reprint/seat": 5.47, "reprint/what": 2.71, "uses/jan": 3.823, "uses/malia": 4.064, "uses/mei": 4.63, "uses/jun": 1.541, "uses/ask": 2.008, "uses/ask2": 4.183, "uses/seating": 7.255, "uses/certs": 7.826, "uses/prog": 6.791, "uses/count": 5.825, "uses/four": 2.037, "uses/juran": 3.924, "uses/same": 4.056, "needs/few": 4.258, "needs/seatneeds": 4.305, "needs/certneeds": 4.676, "needs/ask6": 6.316, "needs/dama": 6.899, "needs/lean": 4.808, "needs/seatdim": 4.401, "needs/certdim": 3.885, "needs/agreed": 6.495, "needs/owner": 3.182, "needs/films": 7.288, "written/contract": 3.929, "written/rule": 7.876, "written/critical": 4.078, "written/dbt": 4.476, "written/tag": 7.425, "written/gov": 7.048, "written/back": 4.176, "written/list": 4.601, "written/next": 3.53, "written/take": 2.092};
+const VODUR={"chart/place": 7.449, "chart/bearing": 6.335, "chart/plane": 5.193, "chart/drift": 3.59, "chart/landfall": 6.468, "chart/change": 1.288, "chart/stretch": 7.579, "chart/ruler": 5.071, "chart/wright": 6.482, "chart/price": 4.69, "chart/greenland": 3.849, "chart/perfect": 4.728, "chart/data": 7.134, "chart/still": 3.626, "chart/benefit": 4.521, "chart/levels": 3.707, "reprint/dec": 7.801, "reprint/list": 6.898, "reprint/printer": 7.262, "reprint/passed": 2.594, "reprint/reprints": 8.747, "reprint/cost": 7.086, "reprint/seats": 5.387, "reprint/andres": 6.168, "reprint/held": 4.786, "reprint/seat": 5.47, "reprint/what": 2.71, "uses/jan": 3.823, "uses/malia": 4.064, "uses/mei": 4.63, "uses/jun": 1.541, "uses/ask": 2.008, "uses/ask2": 4.183, "uses/seating": 7.255, "uses/certs": 7.826, "uses/prog": 6.791, "uses/count": 5.825, "uses/four": 2.037, "uses/juran": 3.924, "uses/same": 4.056, "needs/few": 4.258, "needs/seatneeds": 4.305, "needs/certneeds": 4.676, "needs/ask6": 6.316, "needs/dama": 6.899, "needs/lean": 4.808, "needs/seatdim": 4.401, "needs/certdim": 3.885, "needs/agreed": 6.495, "needs/owner": 3.182, "needs/films": 7.288, "written/contract": 4.284, "written/rule": 6.751, "written/critical": 4.078, "written/dbt": 4.476, "written/tag": 7.425, "written/gov": 7.048, "written/back": 4.176, "written/list": 4.601, "written/next": 3.53, "written/take": 2.092};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2184,7 +2184,7 @@ function ge_person(ctx,who,x,y,s,o,a){a=a==null?1:a;if(a<=0.004)return null;ctx.
   // dq_person lays the person down as one picture when it has light to lay over them: a trace of it here, for every person
   const h=dq_person(ctx,who,x,y,s,Object.assign({},o,{warm:Math.max((o&&o.warm)||0,1e-4)}));ctx.restore();return h;}
 
-// the list's four uses, as Malia, Mei and Jun wrote them down in January 2026 (the example project's meta.quality, and its contract)
+// the list's four uses, as Malia, Mei and Jun wrote them down in January 2026 (the example project's meta.quality)
 const GE_USES=[
   {icon:"seat",use:"Seating plan",need:"Each ceremony's count",level:"Within 2%",who:"Malia Fonoti"},
   {icon:"certificate",use:"Certificates",need:"Every name, award and date",level:"Zero wrong",who:"Malia Fonoti"},
@@ -2407,28 +2407,28 @@ scene("needs",(ctx,S,t,sc)=>{const c=sc.cues,T=ge_once(sc,"T",()=>({
   ag_shots(ctx,S,t,sc.dur,shots);ge_kick(ctx,t,shots,sc.dur);});
 
 /* ---------------------------------------------------------------- 5 · Written beside the data */
-// the list's contract (governance/5-data-contracts/mart_graduations__graduation_list.yaml): the certificates' rule, then three of the
-// columns a use can't do without; its dbt models file and the dimension a built-in check records; its columns on Databricks
-const GE_RULE=["quality:","- name: certificates_exactly_right","  type: text","  description: 'For the certificates: each name exactly as the graduate…'","  dimension: accuracy",
-  "  severity: error","  businessImpact: A certificate printed again, about 120 dollars…","  customProperties:","  - property: level","    value: Zero wrong",
-  "  - property: agreedWith","    value: Malia Fonoti, graduations office"];
-const GE_COLS=["- name: award_name","  logicalType: string","  classification: none","  criticalDataElement: true","- name: conferred_on","  logicalType: date",
-  "  classification: none","  criticalDataElement: true","- name: ceremony_id","  logicalType: string","  classification: none","  criticalDataElement: true"];
+// the list's model file in dbt (models/marts/graduations/_graduations__models.yml): the certificates' rule in its meta.quality, then three
+// of the columns a use can't do without; its checks and the dimension a built-in check records; its columns on Databricks
+const GE_RULE=["quality:","  - name: certificates_exactly_right","    use: certificates","    dimension: accuracy","    description: >",
+  "      For the certificates: each name exactly as the graduate…","    level: Zero wrong","    agreed_with: \"Malia Fonoti, graduations office\"",
+  "    business_impact: >","      A certificate printed again, about 120 dollars…"];
+const GE_COLS=["- name: award_name","  data_type: string","  config:","    meta: {critical_for: [certificates, ceremony_programme]}","- name: conferred_on","  data_type: date",
+  "  config:","    meta: {critical_for: [certificates, awards_return]}","- name: ceremony_id","  data_type: string","  config:","    meta: {critical_for: [seating_plan, ceremony_programme]}"];
 const GE_DBT=["- name: name_as_printed","  data_tests:","    - not_null:","        config:","          meta: {owner: \"Mei Tanaka, registrar's office\"}","  config:",
   "    meta: {personal_data: direct, critical_for: [certificates, ceremony_programme]}"];
 const GE_SQL=["{% test not_null(model, column_name) %}","    {{ config(meta={'dimension': 'completeness'}) }}"];
 const GE_UC=[["graduation_bk",1],["student_bk",1],["given_name",0],["family_name",0],["name_as_printed",1],["award_code",1],["award_name",1]];
 scene("written",(ctx,S,t,sc)=>{const c=sc.cues,T=ge_once(sc,"T",()=>({
-    dc:wAt(sc,"contract","data contract"),qr:wAt(sc,"rule","quality rule"),dim:wAt(sc,"rule","its dimension"),lvl:wAt(sc,"rule","its level"),
+    dc:wAt(sc,"contract","the file"),qr:wAt(sc,"rule","quality rule"),dim:wAt(sc,"rule","its dimension"),lvl:wAt(sc,"rule","its level"),
     agr:wAt(sc,"rule","who agreed"),cost:wAt(sc,"rule","what a failure"),critical:c.critical,marked:wAt(sc,"critical","marked"),
     dbt:c.dbt,dimension:wAt(sc,"dbt","its dimension"),owner:wAt(sc,"dbt","its owner"),tag:c.tag,governed:wAt(sc,"tag","governed tag"),finds:wAt(sc,"tag","whoever finds"),
     gov:c.gov,governance:wAt(sc,"gov","governance"),tools:wAt(sc,"gov","your tools"),back:c.back,title:wAt(sc,"back","in its title"),sailors:wAt(sc,"back","for the use"),
     list:c.list,four:wAt(sc,"list","four uses"),next:c.next,take:c.take}));
   const shots=[
-    // the contract: the certificates' rule, as the open standard writes it; then the columns marked as critical data
+    // the list's model file: the certificates' rule, written in words; then the columns each use can't do without
     {at:0,place:"bench",keys:[[0,960,500,1.0]],push:0.02,draw:(cx,tt)=>{const sw=ag_in(tt,T.critical-0.5,0.45),inn=ag_in(tt,T.critical,0.5);
-      dq_window(cx,230,140,1460,660,{product:"Data contract",title:"mart_graduations__graduation_list.yaml",a:ag_in(tt,T.dc-0.3,0.5),k:clamp((tt-T.dc+0.3)/1.0,0,1),draw:(c2,b)=>{
-        const lit=[[4,T.dim],[8,T.lvl],[9,T.lvl],[10,T.agr],[11,T.agr],[6,T.cost]].filter(([i,at])=>tt>at-0.15).map(([i])=>i);
+      dq_window(cx,230,140,1460,660,{logo:"dbt",product:"dbt",title:"models/marts/graduations/_graduations__models.yml",a:ag_in(tt,T.dc-0.3,0.5),k:clamp((tt-T.dc+0.3)/1.0,0,1),draw:(c2,b)=>{
+        const lit=[[3,T.dim],[6,T.lvl],[7,T.agr],[8,T.cost],[9,T.cost]].filter(([i,at])=>tt>at-0.15).map(([i])=>i);
         dq_code(c2,b.x+12,b.y+6,GE_RULE,{lit,w:b.w-24,a:1-sw});
         dq_code(c2,b.x+12,b.y+6,GE_COLS,{lit:tt>T.marked-0.2?[3,7,11]:[],w:b.w-24,a:inn});}});}},
     // dbt: the list's checks name their owner, and every built-in check its dimension

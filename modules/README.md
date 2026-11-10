@@ -364,7 +364,7 @@ Module: `data-management` · [metadata](data-management/module.json)
 
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
-No film source yet.
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 
 ### Making the case
 

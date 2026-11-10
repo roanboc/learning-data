@@ -88,6 +88,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
 - [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 
@@ -350,6 +351,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 - [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 
@@ -370,6 +372,7 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 
 - [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 - [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
+- [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
 - [Growing people](../films/ownership-and-performance/4-growing-people/) — `growing-people`
 
 ## Data management
@@ -394,7 +397,7 @@ No film source yet.
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
-No film source yet.
+- [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 
 ### Small steps, measured
 

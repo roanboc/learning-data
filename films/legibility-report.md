@@ -100,6 +100,7 @@
 | The map, enforced | 353 | 0% | 0 | 28.2 | Drawn to the rule |
 | Reports on demand | 293 | 0% | 0 | 28.0 | Drawn to the rule |
 | Defined in the open | 253 | 0% | 0 | 28.5 | Drawn to the rule |
+| More readers than people | 297 | 0% | 0 | 28.3 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -124,11 +125,13 @@
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
+| When someone falls behind | 211 | 0% | 0 | 28.3 | Drawn to the rule |
 | Growing people | 217 | 0% | 0 | 28.6 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | The draft and the decision | 244 | 0% | 0 | 28.5 | Drawn to the rule |
+| Learning while doing | 291 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

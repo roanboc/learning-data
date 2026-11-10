@@ -1,0 +1,19 @@
+{
+  "order": 6,
+  "id": "master-data",
+  "items": [
+    "master-and-reference-data"
+  ],
+  "name": {
+    "en": "Master and reference data",
+    "es": "Datos maestros y de referencia"
+  },
+  "who": {
+    "en": "For data stewards and architects, and anyone whose data lives in many systems",
+    "es": "Para custodios y arquitectos de datos, y para quien tiene sus datos en muchos sistemas"
+  },
+  "line": {
+    "en": "The people and things a business is about, kept once and shared across its systems, and the lists that sort them.",
+    "es": "Las personas y las cosas de las que trata un negocio, guardadas una vez y compartidas entre sus sistemas, y las listas que las clasifican."
+  }
+}

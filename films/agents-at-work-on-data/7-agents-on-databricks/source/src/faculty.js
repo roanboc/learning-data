@@ -2,10 +2,10 @@
    The opening's and the close's place: the faculty's office, painted once in the module's matte language (the marble wall over the
    oak floor, a tall window on the right, a pinboard of plain cards on the left, three oak desks in a row), and what stands on it,
    drawn live: Anil and his two colleagues at their desks, each person's own agent (the module's sphere) on their desk, each wired
-   by a short grey cable to that person's own copy of the data: a spreadsheet on Anil's screen, a laptop with a copy of the student
+   by a short grey cable to that person's own copy of the data: a spreadsheet on Anil's screen, a laptop with a copy of the projects
    table, a folder of reports. Then the cards of the story: the question, the three answers (each with an empty slot where its
-   evidence should be, or, a week later, its evidence clipped in), Anil's plan, the spreadsheet of student load, the copy of the
-   student table and the folder, close.
+   evidence should be, or, a week later, its evidence clipped in), Anil's plan, the spreadsheet made for the yearly research report, the copy of
+   the projects table and the folder, close.
    Every name here starts with od_ or OD_. Sizes are in the 1920 x 1080 frame; a close shot (OD_Z1, OD_Z2, OD_Z3) is 1.35 to 1.45
    times the frame, and its cards are drawn in the frame (od_scr in scenes.js), at 28 px or more, so they keep their size whatever
    the camera does. The cables to each person's own copy are grey: nothing of the
@@ -154,7 +154,7 @@ function od_answer(ctx,cx,y,num,o){o=o||{};const w=o.w||od_ansW(ctx),h=OD_ANS_H,
   if(o.from&&u<1){const e=ag_eo(u),k=lerp(0.2,1,Math.min(1,ag_spr(u,0,0.42))),px=lerp(o.from[0],cx,e),py=lerp(o.from[1],y+h/2,e);ctx.translate(px,py);ctx.scale(k,k);ctx.translate(-cx,-(y+h/2));}
   ag_box(ctx,x,y,w,h,22,{edge:o.tick>0.5?AG.green:null});
   ag_T(ctx,num,x+28,y+70,{w:800,size:54,col:AG.orange,a:o.numA==null?1:o.numA});
-  ag_T(ctx,o.sub||"Health's students",x+28,y+108,{w:600,size:28,col:AG.mut});
+  ag_T(ctx,o.sub||"Health's active projects",x+28,y+108,{w:600,size:28,col:AG.mut});
   if(o.tick>0)ag_tick(ctx,x+w-50,y+48,30,rgba(AG.green,o.tick),5);
   const sy=y+128,sh=56;
   if(o.none>0){ctx.save();ctx.globalAlpha*=o.none;ctx.setLineDash([9,8]);ctx.strokeStyle=rgba(AG.mut,0.7);ctx.lineWidth=2.2;rr(ctx,x+24,sy,w-48,sh,12);ctx.stroke();ctx.setLineDash([]);
@@ -166,38 +166,38 @@ function od_answer(ctx,cx,y,num,o){o=o||{};const w=o.w||od_ansW(ctx),h=OD_ANS_H,
 // a card of the story, springing up from its foot's middle: k (0 to 1)
 function od_spring(ctx,x,y,w,h,k){if(k!=null)ag_about(ctx,x+w/2,y+h,lerp(0.6,1,Math.min(1,ag_spr(k,0,0.5))));}
 
-// the spreadsheet on Anil's screen, shown large: student load, made for the funding bid, by faculty, in full-time equivalents.
-// rows 0 to 1 the rows come in; pick 0 to 1 Health's row is picked out; half (0 to 1) two half-time students close into one. 760 wide
+// the spreadsheet on Anil's screen, shown large: made for the yearly research report, each faculty's share of projects, where a
+// project shared with another faculty counts as half. rows 0 to 1 the rows come in; pick 0 to 1 Health's row is picked out; half
+// (0 to 1) one project splits in two, Health's half turning orange. 760 wide
 function od_sheet(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=760,h=o.half!=null?452:372;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
-  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Student load · for the funding bid",x+32,y+54,{w:700,size:32});
+  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Yearly research report",x+32,y+54,{w:700,size:32});
   ctx.fillStyle="rgba(60,50,40,0.14)";ctx.fillRect(x+26,y+80,w-52,1.5);
-  ag_T(ctx,"faculty",x+32,y+124,{w:600,size:28,col:AG.mut});ag_T(ctx,"full-time equivalents",x+w-32,y+124,{w:600,size:28,col:AG.mut,align:"right"});
+  ag_T(ctx,"faculty",x+32,y+124,{w:600,size:28,col:AG.mut});ag_T(ctx,"share of projects",x+w-32,y+124,{w:600,size:28,col:AG.mut,align:"right"});
   const fac=["Arts and Education","Business","Engineering and IT","Health"];
   fac.forEach((f,i)=>{const k=clamp((o.rows==null?1:o.rows)*4-i,0,1);if(k<=0)return;const yy=y+182+i*50;ctx.save();ctx.globalAlpha*=k;
     if(i===3&&o.pick>0){ctx.fillStyle=rgba(AG.orange,0.14*o.pick);rr(ctx,x+18,yy-34,w-36,48,10);ctx.fill();}
     ag_T(ctx,f,x+32,yy,{w:i===3?700:500,size:28,col:i===3?AG.ink:AG.mut});
     if(i<3){ctx.fillStyle="rgba(86,92,100,0.22)";rr(ctx,x+w-32-90,yy-16,90,14,7);ctx.fill();}
-    else ag_T(ctx,"2,160",x+w-32,yy,{w:800,size:32,col:AG.orange,align:"right"});ctx.restore();});
-  if(o.half!=null&&o.half>-1){const hy=y+h-46,ha=ag_in(o.half,-0.4,0.4),k=ag_sine(clamp(o.half,0,1)),gap=lerp(52,0,k),r=22,hx=x+86;
-    ctx.save();ctx.globalAlpha*=ha;ctx.fillStyle="rgba(60,50,40,0.1)";ctx.fillRect(x+26,y+h-96,w-52,1.5);ctx.fillStyle=rgba(AG.mut,0.55);
-    for(const sd of [-1,1]){ctx.beginPath();ctx.arc(hx+sd*gap/2,hy,r,sd<0?Math.PI/2:-Math.PI/2,sd<0?Math.PI*1.5:Math.PI/2);ctx.closePath();ctx.fill();}
-    if(k>0.98){ctx.strokeStyle=rgba(AG.mut,0.8);ctx.lineWidth=2;ctx.beginPath();ctx.arc(hx,hy,r,0,TAU);ctx.stroke();}
-    ag_T(ctx,"two half-time students = 1 in load",x+152,hy+10,{w:600,size:28,col:AG.ink});ctx.restore();}
+    else ag_T(ctx,"141",x+w-32,yy,{w:800,size:32,col:AG.orange,align:"right"});ctx.restore();});
+  if(o.half!=null&&o.half>-1){const hy=y+h-46,ha=ag_in(o.half,-0.4,0.4),k=ag_sine(clamp(o.half,0,1)),gap=lerp(0,52,k),r=22,hx=x+86;
+    ctx.save();ctx.globalAlpha*=ha;ctx.fillStyle="rgba(60,50,40,0.1)";ctx.fillRect(x+26,y+h-96,w-52,1.5);
+    for(const sd of [-1,1]){ctx.fillStyle=sd<0?rgba(mix(AG.mut,AG.orange,k),lerp(0.55,0.9,k)):rgba(AG.mut,0.55);ctx.beginPath();ctx.arc(hx+sd*gap/2,hy,r,sd<0?Math.PI/2:-Math.PI/2,sd<0?Math.PI*1.5:Math.PI/2);ctx.closePath();ctx.fill();}
+    ag_T(ctx,"a shared project counts as half",x+152,hy+10,{w:600,size:28,col:AG.ink});ctx.restore();}
   ctx.restore();}
 
-// the copy of the student table on the laptop, shown large: Health's degrees, each with Health in its name, as the student system
-// names them (the example project's awards), and the joint degree in no faculty. o.hl (0 to 3): the word Health lit in each row in
-// turn; o.joint 0 to 1: the last row widens, amber; o.names 0 to 1: the rows become a list of names, blurred on purpose. 820 wide
-const OD_DEG=[["Master of Public ","Health",""],["Graduate Certificate in ","Health"," Informatics"],["","Health"," data"]];
+// the copy of the projects table on the laptop, shown large: the units whose projects it counts, each with Health in its name,
+// and Engineering's Bridge Health Lab, which tests bridges. o.hl (0 to 3): the word Health lit in each row in turn; o.joint 0 to 1:
+// the last row widens, amber; o.names 0 to 1: the rows become a list of researchers' names, blurred on purpose. 820 wide
+const OD_DEG=[["School of Public ","Health",""],["","Health"," Informatics Lab"],["Bridge ","Health"," Lab"]];
 function od_tableCard(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=820,h=312;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
-  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Copy of the student table",x+32,y+54,{w:700,size:32});ctx.fillStyle="rgba(60,50,40,0.14)";ctx.fillRect(x+26,y+80,w-52,1.5);
+  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Copy of the projects table",x+32,y+54,{w:700,size:32});ctx.fillStyle="rgba(60,50,40,0.14)";ctx.fillRect(x+26,y+80,w-52,1.5);
   const nm=o.names||0;
   if(nm<1){ctx.save();ctx.globalAlpha*=1-nm;OD_DEG.forEach((d,i)=>{const yy=y+142+i*62,k=clamp((o.rows==null?1:o.rows)*3-i,0,1);if(k<=0)return;ctx.save();ctx.globalAlpha*=k;
       const jo=i===2?(o.joint||0):0,f={w:500,size:30},x0=x+32,w0=ag_tw(ctx,d[0],f),w1=ag_tw(ctx,d[1],Object.assign({},f,{w:700}));
       if(jo>0){ctx.fillStyle=rgba(AG.amber,0.12*jo);rr(ctx,x+16,yy-38,w-32,54,10);ctx.fill();ctx.strokeStyle=rgba(AG.amber,0.7*jo);ctx.lineWidth=2;rr(ctx,x+16,yy-38,w-32,54,10);ctx.stroke();}
       const hl=clamp((o.hl||0)-i,0,1);if(hl>0){ctx.fillStyle=rgba(i===2&&jo>0?AG.amber:AG.orange,0.2*hl);rr(ctx,x0+w0-6,yy-28,w1+12,38,8);ctx.fill();}
       ag_T(ctx,d[0],x0,yy,f);ag_T(ctx,d[1],x0+w0,yy,Object.assign({},f,{w:700,col:hl>0.5?(i===2&&jo>0?AG.amber:AG.orange):AG.ink}));ag_T(ctx,d[2],x0+w0+w1,yy,f);
-      if(jo>0)ag_T(ctx," · joint degree · no faculty · 31",x0+w0+w1+ag_tw(ctx,d[2],f),yy,{w:500,size:30,col:AG.amber,a:jo});
+      if(jo>0)ag_T(ctx," · Engineering · 9 projects",x0+w0+w1+ag_tw(ctx,d[2],f),yy,{w:500,size:30,col:AG.amber,a:jo});
       ctx.restore();});ctx.restore();}
   if(nm>0){ctx.save();ctx.globalAlpha*=nm;ctx.filter="blur(5px)";const R=ag_rnd(7);for(let i=0;i<5;i++){const yy=y+112+i*38;ctx.fillStyle="rgba(60,64,72,0.42)";
       rr(ctx,x+34,yy,140+R()*110,18,9);ctx.fill();rr(ctx,x+250+R()*40,yy,180+R()*150,18,9);ctx.fill();ctx.fillStyle="rgba(60,64,72,0.24)";rr(ctx,x+w-170,yy,120,18,9);ctx.fill();}
@@ -206,23 +206,25 @@ function od_tableCard(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
 
 // the folder of reports, opened: its tab "Reports", and pages fanning out of it, their grey lines decoration. 760 wide
 function od_reports(ctx,x,y,open,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=760,h=300;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
-  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Reports",x+32,y+54,{w:700,size:32});ag_T(ctx,"Health's student numbers, by term",x+w-32,y+54,{w:500,size:28,col:AG.mut,align:"right"});
+  ag_box(ctx,x,y,w,h,20,{});ag_T(ctx,"Reports",x+32,y+54,{w:700,size:32});ag_T(ctx,"Health's projects, by quarter",x+w-32,y+54,{w:500,size:28,col:AG.mut,align:"right"});
   for(let i=0;i<6;i++){const k=clamp(open*6-i*0.8,0,1),e=Math.min(1,ag_spr(k,0,0.5));if(k<=0)continue;const px=x+40+i*118,py=y+96+(1-e)*30;ctx.save();ctx.translate(px+50,py+86);ctx.rotate((i-2.5)*0.045*e);
     ctx.shadowColor="rgba(46,38,28,0.2)";ctx.shadowBlur=8;ctx.shadowOffsetX=-2;ctx.shadowOffsetY=4;ctx.fillStyle="#FAF9F6";ctx.fillRect(-50,-82,100,164);ctx.shadowColor="transparent";
     ctx.fillStyle="rgba(86,92,100,0.28)";ctx.fillRect(-36,-64,58,7);for(let l=0;l<7;l++)ctx.fillRect(-36,-42+l*16,(l%2?52:70),4);ctx.restore();}
   ctx.restore();}
 
-// Anil's plan for next year's places: the students, the places, and the gap. lo 0 to 1: planned for the lowest answer, the places
-// stop short and a dashed amber gap shows, "720 students with no place"; ok 0 to 1: the places reach every student, green. 760 wide
+// Anil's plan for next year's lab space: the active projects, the space, and the gap. lo 0 to 1: planned for the lowest answer
+// (141 of 168), the space stops short and a dashed amber gap shows, "27 projects with no lab space"; ok 0 to 1: the space reaches
+// every project, green. 760 wide
+const OD_LO=141/168;
 function od_plan(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const w=760,h=332,bw=w-64,ok=o.ok||0,lo=o.lo||0;ctx.save();ctx.globalAlpha*=a;od_spring(ctx,x,y,w,h,o.k);
   ag_box(ctx,x,y,w,h,20,{});if(ok>0){ctx.save();ctx.strokeStyle=rgba(AG.green,0.9*ok);ctx.lineWidth=2.4;ctx.beginPath();ag_rect(ctx,x,y,w,h,20);ctx.stroke();ctx.restore();}
-  ag_T(ctx,"Next year's places",x+32,y+54,{w:700,size:32});if(ok>0)ag_tick(ctx,x+w-52,y+42,30,rgba(AG.green,ok),5);
-  ag_T(ctx,"students on census day",x+32,y+112,{w:500,size:28,col:AG.mut});ctx.fillStyle=rgba(AG.mut,0.18);rr(ctx,x+32,y+128,bw,32,9);ctx.fill();
+  ag_T(ctx,"Next year's lab space",x+32,y+54,{w:700,size:32});if(ok>0)ag_tick(ctx,x+w-52,y+42,30,rgba(AG.green,ok),5);
+  ag_T(ctx,"active research projects",x+32,y+112,{w:500,size:28,col:AG.mut});ctx.fillStyle=rgba(AG.mut,0.18);rr(ctx,x+32,y+128,bw,32,9);ctx.fill();
   ctx.strokeStyle=rgba(AG.mut,0.55);ctx.lineWidth=2;rr(ctx,x+32,y+128,bw,32,9);ctx.stroke();
-  const fr=lerp(0.75,1,ok),fw=bw*fr,col=mix([120,124,132],AG.green,ok);  // the places grow to every student and turn green as they grow
+  const fr=lerp(OD_LO,1,ok),fw=bw*fr,col=mix([120,124,132],AG.green,ok);  // the space grows to every project and turns green as it grows
   const o1=clamp(1-2*ok,0,1),o2=clamp(2*ok-1,0,1);  // the old words fade out, then the new ones in: nothing swaps in one frame, and the two never overlap
-  if(o1>0)ag_T(ctx,"places for 2,160",x+32,y+212,{w:700,size:28,a:o1});if(o2>0)ag_T(ctx,"a place for every student",x+32,y+212,{w:700,size:28,col:AG.green,a:o2});
+  if(o1>0)ag_T(ctx,"space for 141",x+32,y+212,{w:700,size:28,a:o1});if(o2>0)ag_T(ctx,"space for every project",x+32,y+212,{w:700,size:28,col:AG.green,a:o2});
   ctx.fillStyle=rgba(col,0.85);rr(ctx,x+32,y+228,fw,32,9);ctx.fill();
-  if(lo>0&&ok<1){ctx.save();ctx.globalAlpha*=lo*(1-ok);const gx=x+32+bw*0.75+5,gw=bw*0.25-5;ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(AG.amber,0.95);ctx.lineWidth=2.5;rr(ctx,gx,y+228,gw,32,9);ctx.stroke();ctx.setLineDash([]);
-    ag_T(ctx,"720 students with no place",x+w-32,y+300,{w:700,size:28,col:AG.amber,align:"right"});ctx.restore();}
+  if(lo>0&&ok<1){ctx.save();ctx.globalAlpha*=lo*(1-ok);const gx=x+32+bw*OD_LO+5,gw=bw*(1-OD_LO)-5;ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(AG.amber,0.95);ctx.lineWidth=2.5;rr(ctx,gx,y+228,gw,32,9);ctx.stroke();ctx.setLineDash([]);
+    ag_T(ctx,"27 projects with no lab space",x+w-32,y+300,{w:700,size:28,col:AG.amber,align:"right"});ctx.restore();}
   ctx.restore();}

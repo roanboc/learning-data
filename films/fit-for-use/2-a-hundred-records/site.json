@@ -1,0 +1,101 @@
+{
+  "kicker": "Measuring quality",
+  "kicker_es": "Medir la calidad",
+  "title_es": "Cien registros",
+  "h1": "A hundred records: measure before you write checks",
+  "h1_es": "Cien registros: medir antes de escribir controles",
+  "lead": "The graduation list passed every check, yet 41 certificates were printed again. On a Friday in February, Malia Fonoti, Mei Tanaka and Jun Park look at its hundred most recent records: 79 are perfect. Then the platform profiles all 2,031 graduates, and only then does Jun write the first checks.",
+  "lead_es": "La lista de graduación pasaba todos los controles, pero se reimprimieron 41 diplomas. Un viernes de febrero, Malia Fonoti, Mei Tanaka y Jun Park revisan sus cien registros más recientes: 79 están perfectos. Luego se perfilan los 2,031 graduados, y solo entonces Jun escribe los primeros controles.",
+  "description": "A film about measuring data quality before writing rules, the second of Fit for use: in Dublin, from 1899, William Gosset, a chemist at a large brewery, worked out how far a few trials can be trusted, tried it by hand with 3,000 measurements on 3,000 cards drawn four at a time, and in 1908 published it as Student, with tables anyone could use, so a few careful trials were enough to decide; at the university, the graduation list passed every check, yet 41 degree certificates were printed again in December; on Friday 6 February 2026, Malia Fonoti, who runs the ceremonies, Mei Tanaka, who answers for names and awards, and Jun Park, who builds the list, go through its hundred most recent records field by field: 79 are perfect, and the other 21 hold 26 errors, most of them in names, the measurement Thomas Redman calls the Friday afternoon measurement; a hundred is good to about eight either way, and set beside December's 41 reprints it shows work nobody counted; then Databricks' data profiling describes every column of all 2,031 graduates, and Jun's custom metrics count 41 family names cut at the field's 30 characters, 312 in capitals only, and not one accent left; only then does Jun write three checks with dbt, which Mei owns and which hold the list for a person to look; and the errors that are allowed values, and wrong, wait for a reference outside the list, in the next film.",
+  "description_es": "Una película sobre medir la calidad de los datos antes de escribir reglas, la segunda de Apto para su uso: en Dublín, desde 1899, William Gosset, químico de una gran cervecería, calculó cuánto se puede confiar en unas pocas pruebas, lo ensayó a mano con 3,000 mediciones en 3,000 fichas sacadas de cuatro en cuatro y en 1908 lo publicó como Student, con tablas que cualquiera podía usar, así que unas pocas pruebas cuidadosas bastaban para decidir; en la universidad, la lista de graduación pasaba todos los controles, y aun así en diciembre se reimprimieron 41 diplomas; el viernes 6 de febrero de 2026, Malia Fonoti, que organiza las ceremonias, Mei Tanaka, que responde por nombres y títulos, y Jun Park, que construye la lista, revisan campo por campo sus cien registros más recientes: 79 están perfectos, y los otros 21 tienen 26 errores, casi todos en los nombres, la medición que Thomas Redman llama la medición del viernes por la tarde; cien registros valen con unos ocho de margen, y junto a los 41 diplomas reimpresos muestran un trabajo que nadie contaba; luego el perfilado de datos de Databricks describe cada columna de los 2,031 graduados, y las métricas personalizadas de Jun cuentan 41 apellidos cortados en los 30 caracteres del campo, 312 solo en mayúsculas y ni una tilde; solo entonces Jun escribe tres controles con dbt, de los que responde Mei y que retienen la lista para que una persona la revise; y los errores que son valores permitidos, y erróneos, esperan una referencia fuera de la lista, en la próxima película.",
+  "card": "The list passed every check. A hundred records looked at by hand said how good it was; a profile of all of it said where to look.",
+  "card_es": "La lista pasaba todos los controles. Cien registros revisados a mano dijeron qué tan buena era; un perfil completo, dónde mirar.",
+  "chapters_es": {
+    "first": "Unas pocas pruebas cuidadosas",
+    "look": "Cien, a mano",
+    "sure": "¿Bastan cien?",
+    "profile": "Toda la lista, descrita",
+    "checks": "Después, los controles",
+    "close": "Mirar primero"
+  },
+  "past": [
+    "Dublin, from 1899 to 1908: a brewery's chemist and a few careful trials",
+    "A few careful trials were enough to decide, and Gosset's tables, published as Student, said when more were needed. His way is still used wherever people can't measure everything."
+  ],
+  "past_es": [
+    "Dublín, de 1899 a 1908: el químico de una cervecería y unas pocas pruebas cuidadosas",
+    "Unas pocas pruebas cuidadosas bastaban para decidir, y las tablas de Gosset, publicadas como Student, decían cuándo hacían falta más. Su método aún se usa donde no se puede medir todo."
+  ],
+  "next_h": "You've seen a hundred records looked at by hand, and the whole list described. Next: the errors no check of the list can see, and the reference that shows them.",
+  "next_h_es": "Viste cien registros revisados a mano y toda la lista descrita. Después: los errores que ningún control de la lista ve, y la referencia que los muestra.",
+  "repo": {
+    "look": [
+      "analyses/quality/hundred_most_recent.sql"
+    ],
+    "profile": [
+      "analyses/profiling/profile_graduation_list.sql"
+    ],
+    "checks": [
+      "tests/quality/_quality__tests.yml",
+      "tests/quality/graduation_list_family_name_at_30.sql",
+      "tests/quality/graduation_list_family_name_in_capitals.sql",
+      "tests/quality/graduation_list_accents_all_gone.sql"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The docs and sources behind the film: the platform's profiles and custom metrics, dbt's checks, Redman's measurement and Student's paper. Checked on 10 November 2026.",
+    "p_es": "La documentación y las fuentes detrás de la película: los perfiles y las métricas personalizadas de la plataforma, los controles de dbt, la medición de Redman y el artículo de Student. Revisada el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Data profiling, in Databricks",
+        "title_es": "El perfilado de datos de Databricks (en inglés)",
+        "line": "A profile the team keeps and refreshes: every column of a table described, as Jun's profile of the graduation list.",
+        "line_es": "Un perfil que el equipo guarda y actualiza: cada columna de una tabla descrita, como el perfil de Jun de la lista de graduación.",
+        "href": "https://docs.databricks.com/aws/en/data-quality-monitoring/data-profiling/",
+        "href_es": "https://docs.databricks.com/aws/en/data-quality-monitoring/data-profiling/"
+      },
+      {
+        "title": "Custom metrics for a profile",
+        "title_es": "Métricas personalizadas para un perfil (en inglés)",
+        "line": "Counts of your own beside the profile's, such as Jun's family names exactly 30 characters long.",
+        "line_es": "Conteos propios junto a los del perfil, como los apellidos de Jun de exactamente 30 caracteres.",
+        "href": "https://docs.databricks.com/aws/en/data-quality-monitoring/data-profiling/custom-metrics",
+        "href_es": "https://docs.databricks.com/aws/en/data-quality-monitoring/data-profiling/custom-metrics"
+      },
+      {
+        "title": "A quick profile in a notebook",
+        "title_es": "Un perfil rápido en un cuaderno (en inglés)",
+        "line": "Click + and Data Profile beside a table's results, before any profile is set up to keep.",
+        "line_es": "Haz clic en + y Data Profile junto a los resultados de una tabla, antes de configurar un perfil para guardar.",
+        "href": "https://docs.databricks.com/aws/en/notebooks/eda-tutorial#df-profile",
+        "href_es": "https://docs.databricks.com/aws/en/notebooks/eda-tutorial#df-profile"
+      },
+      {
+        "title": "dbt's data tests, and their severity",
+        "title_es": "Las pruebas de datos de dbt y su severidad (en inglés)",
+        "line": "Write a check as a query that finds the rows that break it, and let it warn rather than stop.",
+        "line_es": "Escribir un control como una consulta que encuentra las filas que lo incumplen, y dejar que avise en vez de detener.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/severity",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/severity"
+      },
+      {
+        "title": "Thomas Redman: the Friday afternoon measurement",
+        "title_es": "Thomas Redman: la medición del viernes por la tarde (en inglés)",
+        "line": "A hundred records, the people who know them, and an afternoon, in Harvard Business Review in 2016.",
+        "line_es": "Cien registros, las personas que los conocen y una tarde, en Harvard Business Review en 2016.",
+        "href": "https://hbr.org/2016/07/assess-whether-you-have-a-data-quality-problem",
+        "href_es": "https://hbr.org/2016/07/assess-whether-you-have-a-data-quality-problem"
+      },
+      {
+        "title": "Student's paper of 1908",
+        "title_es": "El artículo de Student de 1908 (en inglés)",
+        "line": "The probable error of a mean, Gosset's tables for a few careful trials, in a retyped copy.",
+        "line_es": "The probable error of a mean, las tablas de Gosset para unas pocas pruebas cuidadosas, en una copia transcrita.",
+        "href": "https://www.york.ac.uk/depts/maths/histstat/student.pdf",
+        "href_es": "https://www.york.ac.uk/depts/maths/histstat/student.pdf"
+      }
+    ]
+  }
+}

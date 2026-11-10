@@ -17,6 +17,13 @@ data_tests:
     config:
       meta: {owner: HR, dimension: completeness}
 
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and at most 30 characters. It measures validity:
+      it has no reference but its rule, so it says a name is allowed, never that it's right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
   - name: old_form_names_not_yet_confirmed
     description: >
       A name the old form made, still in plain letters A to Z, not yet confirmed by its graduate:
@@ -26,4 +33,4 @@ data_tests:
       registrar's office, which writes to the graduate, and dbt keeps them in a table the office
       reads (store_failures). Added on 14 October 2026, after the first reports (Report, fix, tell).
     config:
-      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy}
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: the graduate}

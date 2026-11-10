@@ -226,6 +226,27 @@ class MediaTests(unittest.TestCase):
                 media.publish({audio["path"]: audio}, {audio["path"]: audio, other["path"]: other})
             upload.assert_not_called()
 
+    def test_publishing_everything_creates_only_the_missing_releases(self):
+        done = entry()
+        new = dict(entry(b"new audio"), path="site/assets/new/soundtrack.mp3")
+        new["url"] = media.BASE + "audio-new/" + new["sha256"] + ".mp3"
+        everything = {done["path"]: done, new["path"]: new}
+        releases = {"audio-test": dict(isPrerelease=True, assets=[dict(name=done["sha256"] + ".mp3", size=done["size"])]),
+                    "audio-new": None}
+        with tempfile.TemporaryDirectory() as tmp:
+            root = pathlib.Path(tmp)
+            path = root / new["path"]
+            path.parent.mkdir(parents=True)
+            path.write_bytes(b"new audio")
+            with patch.object(media, "ROOT", root), patch.object(media, "remote_release", side_effect=releases.get), \
+                 patch.object(media.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, "", "")) as gh, patch.object(media, "verify_remote") as verify:
+                media.publish(media.scoped(everything), everything)
+                self.assertEqual(gh.call_count, 1)
+                command = gh.call_args.args[0]
+                self.assertEqual(command[:4], ["gh", "release", "create", "audio-new"])
+                self.assertNotIn("--clobber", command)
+                self.assertEqual([call.args[0] for call in verify.call_args_list], [{new["path"]: new}, {done["path"]: done}])
+
     def test_failed_authentication_is_not_treated_as_a_missing_release(self):
         result = subprocess.CompletedProcess([], 1, "", "HTTP 401: bad credentials")
         with patch.object(media.subprocess, "run", return_value=result) as command:

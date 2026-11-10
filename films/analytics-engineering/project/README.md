@@ -47,7 +47,7 @@ Then, if you like:
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, agents under the same rules, and the registrar's office's morning alert: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -110,7 +110,7 @@ export DATABRICKS_SCHEMA=<your schema>   # optional; dev if not set
 dbt build --target databricks --profiles-dir .
 ```
 
-`requirements-databricks.txt` installs dbt-databricks 1.12.5, which brings dbt-core 1.12.3.
+`requirements-databricks.txt` installs dbt-databricks 1.12.8, which brings dbt-core 1.12.5.
 
 ### Adding a Databricks job to CI
 
@@ -147,7 +147,7 @@ project/
 ├── seeds/
 │   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
 │   │                         identity decisions, credit recognition), finance (tuition rates),
-│   │                         graduations (ceremonies), shared (key sets [generated] from each source's meta.key_set)
+│   │                         graduations (ceremonies), hr (newsletters), shared (key sets [generated] from each source's meta.key_set)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report), finance (Finance's tuition report). No model
 │                             reads them
@@ -169,14 +169,15 @@ project/
 │   ├── marts/planning/       as at census; the semantic model and metric
 │   ├── marts/wallet/         as it is now
 │   ├── marts/finance/        as at census: the tuition recognised credit saves
-│   └── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
+│   ├── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
+│   └── marts/hr/             the tutors' mailing list and its send log, each erased by request (meta.erase_by)
 │                             Each core domain and mart folder also holds:
 │                               _<domain>__conceptual.yml and .md   its conceptual model
 │                               _<domain>__decisions.yml            its decision log
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses, HR's mailing tool
 ├── governance/               what isn't dbt's, and could live in another tool or repository:
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
@@ -190,6 +191,7 @@ project/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
 │   ├── governance/           on Databricks: each column's class, each critical column and each table's area as tags, the policy
+│   ├── privacy/              on Databricks: the nightly deletion job's steps, by request
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
@@ -204,6 +206,7 @@ project/
 │   ├── validation/           checking the result: reconcile with the census and tuition reports,
 │   │                         as-was and as-is
 │   ├── governance/           on Databricks: who read a table, and the access review
+│   ├── privacy/              on Databricks: whether a request's data is gone, now and from the old files
 │   ├── quality/              on Databricks: the platform's checks for the scorecard, and the
 │   │                         badges' alert
 │   └── alerts/               on Databricks: the registrar's office's morning alert, the name
@@ -237,7 +240,9 @@ project/
 │                             hot-warm-cold/: a streaming table, a materialized view and an archive,
 │                             data kept hot, warm and cold, with their service levels (Databricks only);
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
-│                             insight by morning, the fix and the pull request a person approved
+│                             insight by morning, the fix and the pull request a person approved;
+│                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
+│                             the fortnightly dashboard (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -323,8 +328,10 @@ person domain's conceptual model (`models/core/person/`) is a draft, and
 
 The graduation list has a slice of its own: 24 graduates and 26 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
+(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
+student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
+award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz

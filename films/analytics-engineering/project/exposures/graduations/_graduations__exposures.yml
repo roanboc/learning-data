@@ -50,7 +50,7 @@ exposures:
       The registrar's office's morning alert, on Databricks: at 8:00 every morning, the name
       reports due that day, or overdue, that haven't been answered, emailed to the office when
       there are any (analyses/alerts/name_reports_due_today.sql; docs/databricks-governance.md,
-      section 12).
+      section 13).
     owner:
       name: "Mei Tanaka, registrar's office"
       email: mei.tanaka@uni.example

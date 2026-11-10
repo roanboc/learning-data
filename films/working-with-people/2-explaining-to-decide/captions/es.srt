@@ -1,0 +1,311 @@
+1
+00:00:03,000 --> 00:00:11,249
+En 1950, la Fuerza Aérea de los Estados Unidos midió a más de cuatro mil de sus aviadores: 132 medidas a cada uno.
+
+2
+00:00:12,549 --> 00:00:18,989
+Las cifras fueron a quienes diseñaban lo que los aviadores visten y dónde se sientan: trajes, cascos, cabinas.
+
+3
+00:00:20,089 --> 00:00:25,117
+Muchos diseñadores tomaron de ellas una sola cifra: el hombre promedio, de unos 5 pies y 9 pulgadas.
+
+4
+00:00:26,617 --> 00:00:29,626
+Parecía el aviador más fácil de acomodar, y el más común.
+
+5
+00:00:30,726 --> 00:00:34,125
+Pero una puerta hecha a su altura haría agacharse a cerca de la mitad de los hombres.
+
+6
+00:00:35,825 --> 00:00:43,064
+En una cabina es peor: un mando fuera de alcance, o un pedal demasiado lejos, y un piloto no puede volar seguro.
+
+7
+00:00:44,764 --> 00:00:46,152
+Algo tenía que cambiar.
+
+8
+00:00:48,252 --> 00:00:54,634
+En 1952, el teniente Gilbert Daniels era científico en la sección de antropología de la Fuerza Aérea.
+
+9
+00:00:55,534 --> 00:00:58,773
+Hizo una pregunta sencilla: ¿cuántos aviadores son promedio?
+
+10
+00:01:00,073 --> 00:01:02,521
+Tomó diez medidas usadas para las tallas de ropa.
+
+11
+00:01:03,421 --> 00:01:08,969
+En cada una, un hombre contaba como promedio si estaba en el treinta por ciento del medio: una franja generosa.
+
+12
+00:01:10,469 --> 00:01:15,822
+De 4,063 hombres, 1,055 eran promedio en estatura.
+
+13
+00:01:16,922 --> 00:01:20,089
+De ellos, 302 eran promedio también en el pecho.
+
+14
+00:01:21,189 --> 00:01:27,349
+Cada medida dejaba menos: 143, 73, 28, 12, 6, 3, 2.
+
+15
+00:01:29,249 --> 00:01:31,353
+Promedio en las diez: ni uno.
+
+16
+00:01:33,553 --> 00:01:41,539
+Su nota, de siete páginas, lo decía al empezar: es prácticamente imposible encontrar un hombre promedio en la Fuerza Aérea.
+
+17
+00:01:43,439 --> 00:01:50,562
+Luego mostraba de qué depende un diseño: el rango. De 5 pies y 5 pulgadas a 6 pies y 1 caben nueve aviadores de cada diez.
+
+18
+00:01:52,262 --> 00:01:55,047
+Los diseñadores pasaron a ajustarse al rango, no al promedio.
+
+19
+00:01:56,347 --> 00:02:02,422
+Para los años setenta, la Fuerza Aérea diseñaba sus cabinas para los noventa pilotos del medio de cada cien.
+
+20
+00:02:03,322 --> 00:02:06,061
+Los asientos suben y bajan, y los pedales se mueven.
+
+21
+00:02:07,561 --> 00:02:09,719
+El asiento de un auto se corre por lo mismo.
+
+22
+00:02:11,219 --> 00:02:17,628
+Los datos también tienen sus hombres promedio: un número que parece describirlo todo, y casi no describe nada.
+
+23
+00:02:18,928 --> 00:02:25,704
+Empieza por la decisión, muestra la parte de los datos de la que depende, y quienes deciden verán lo que eligen.
+
+24
+00:02:34,004 --> 00:02:39,032
+En una universidad, dentro de un año, Graham Ellis es el director de Instalaciones.
+
+25
+00:02:39,932 --> 00:02:48,226
+Debe decidir si pedir al Consejo Universitario un nuevo edificio de aulas: cuarenta aulas, unos A$140 millones.
+
+26
+00:02:50,126 --> 00:02:52,989
+Se propuso porque las aulas siempre están llenas.
+
+27
+00:02:54,489 --> 00:03:01,794
+En febrero, el equipo de datos acordó con él su pregunta, por escrito: ¿tenemos pocas aulas, o pocas a ciertas horas?
+
+28
+00:03:03,894 --> 00:03:07,796
+A fines de abril, tenían la respuesta: pocas, solo a ciertas horas.
+
+29
+00:03:09,696 --> 00:03:15,155
+Ahora debe presentarla al Consejo Universitario en una página, para el martes 1 de junio.
+
+30
+00:03:16,855 --> 00:03:21,922
+Ivy Reyes, analista de datos, la redacta con Helena Novak, la gestora de datos.
+
+31
+00:03:23,422 --> 00:03:31,752
+Su primer borrador ocupa doce páginas, en el orden del trabajo: los datos, el método, las revisiones y, en la página nueve, la respuesta.
+
+32
+00:03:33,652 --> 00:03:38,322
+Su primer gráfico es el promedio de la semana: aulas reservadas el 38% del tiempo.
+
+33
+00:03:40,022 --> 00:03:43,061
+Así se escribe una tesis, y nada en él está mal.
+
+34
+00:03:45,161 --> 00:03:49,560
+Helena hace una pregunta: ¿quién lo leerá, y qué decidirá con él?
+
+35
+00:03:52,260 --> 00:03:57,889
+Los miembros del Consejo Universitario leen una pila de documentos antes de cada reunión, y deciden sobre cada uno.
+
+36
+00:03:59,589 --> 00:04:02,507
+Así que la página empieza donde ellos empiezan: con la decisión.
+
+37
+00:04:04,607 --> 00:04:11,128
+Barbara Minto lo llamó la pirámide: la respuesta arriba, luego las razones, luego la evidencia bajo cada una.
+
+38
+00:04:13,228 --> 00:04:17,667
+La página de Ivy abre con la decisión: ¿un nuevo edificio ahora, o todavía no?
+
+39
+00:04:19,567 --> 00:04:26,951
+Luego la respuesta a la pregunta acordada, en una frase: faltan aulas solo de diez a dos, de martes a jueves.
+
+40
+00:04:29,051 --> 00:04:34,629
+Debajo, tres líneas: el pico, las reservas que nadie usó, y qué haría falta para no construir.
+
+41
+00:04:36,529 --> 00:04:40,675
+El método y los otros gráficos pasan al final, para quien los quiera.
+
+42
+00:04:42,375 --> 00:04:46,560
+También un hallazgo cierto: cuando la gente vino, las aulas estaban a medio llenar.
+
+43
+00:04:47,660 --> 00:04:51,558
+La decisión no depende de él: un aula a medio llenar igual alberga una clase.
+
+44
+00:04:54,258 --> 00:04:59,594
+Ahora el gráfico. El promedio semanal, 38%, esconde de qué depende la decisión.
+
+45
+00:05:01,294 --> 00:05:09,784
+Ivy dibuja la semana entera: un mapa de calor, los días al costado, las horas a lo ancho, cada hora tan oscura como sus aulas reservadas.
+
+46
+00:05:11,684 --> 00:05:18,847
+De diez a dos, de martes a jueves, se reserva el 93% de las aulas. Casi todas las otras horas, una de cada cinco.
+
+47
+00:05:21,147 --> 00:05:24,965
+Los académicos que decían que las aulas siempre están llenas tenían razón, en el pico.
+
+48
+00:05:26,465 --> 00:05:31,600
+También Instalaciones, que veía pasillos vacíos los lunes por la mañana y los viernes por la tarde.
+
+49
+00:05:33,500 --> 00:05:37,063
+Como el conteo de Daniels, una imagen muestra lo que el promedio escondía.
+
+50
+00:05:39,163 --> 00:05:43,892
+Y reservada no es usada: en una de cada cinco horas reservadas, los sensores no contaron a nadie.
+
+51
+00:05:45,992 --> 00:05:49,988
+El consejo de Edward Tufte para los gráficos: ante todo, muestra los datos.
+
+52
+00:05:51,688 --> 00:05:56,426
+El de Cole Nussbaumer Knaflic: sabe a quién se lo muestras, y lo único que necesita ver.
+
+53
+00:05:58,326 --> 00:06:06,667
+Así que Ivy dibuja la imagen mientras escribe la página, nunca después: la página dice qué decidir, y la imagen, de qué depende.
+
+54
+00:06:08,567 --> 00:06:15,833
+Helena, que piensa como arquitecta, sigue la misma regla para todo lo que cruza equipos: su recorrido, en una imagen.
+
+55
+00:06:18,533 --> 00:06:27,079
+Junto a la imagen, qué haría falta para no construir: pasar una de cada seis clases del pico a otras horas, y liberar reservas sin uso.
+
+56
+00:06:29,179 --> 00:06:33,254
+Eso cubre el pronóstico de Planificación a 2030: un 6% más de estudiantes.
+
+57
+00:06:35,354 --> 00:06:40,424
+Lo que no se sabe también va en la página: cuántos estudiantes habrá en realidad para 2030.
+
+58
+00:06:42,524 --> 00:06:49,384
+Así que dice hasta dónde vale la respuesta: aunque los estudiantes crecieran el doble de rápido, el pico no estaría más lleno que hoy.
+
+59
+00:06:51,484 --> 00:06:56,543
+Antes de enviarla, Ivy la prueba con Mei, de la oficina de registro académico, que no participó en el trabajo.
+
+60
+00:06:58,443 --> 00:07:00,771
+Mei la lee en dos minutos, y la explica con sus palabras.
+
+61
+00:07:02,871 --> 00:07:09,516
+Se detiene en una palabra: utilización. Para ella, son asientos ocupados. En la página, eran aulas reservadas.
+
+62
+00:07:11,616 --> 00:07:16,123
+Así que la página dice reservada y usada, cada una con lo que significa, en una línea.
+
+63
+00:07:18,023 --> 00:07:22,587
+Luego pregunta lo que preguntará el Consejo Universitario: ¿qué clases se moverían?
+
+64
+00:07:23,687 --> 00:07:30,562
+La página responde: la oficina de registro académico lo planearía con las facultades, desde el primer semestre de 2028.
+
+65
+00:07:32,462 --> 00:07:39,840
+Todos reciben la misma página, con los mismos números: el Consejo Universitario, las facultades y la oficina de registro académico.
+
+66
+00:07:42,540 --> 00:07:48,549
+El martes 1 de junio, Graham envía la página con su propio nombre, con la imagen de la semana al lado.
+
+67
+00:07:50,449 --> 00:07:54,388
+El jueves 24 de junio, se reúne el Consejo Universitario.
+
+68
+00:07:56,088 --> 00:08:01,668
+Sus miembros preguntan qué tan seguro es el crecimiento, y qué clases se moverían: la página responde ambas cosas.
+
+69
+00:08:03,568 --> 00:08:12,514
+Aplazan el edificio dos años, y piden el cambio de horario desde el primer semestre de 2028, con una revisión en junio de 2029.
+
+70
+00:08:14,614 --> 00:08:19,277
+Después, Graham dice que en la reunión se discutió la elección, no los números.
+
+71
+00:08:21,177 --> 00:08:25,039
+La página no decidió por ellos. Les dejó ver lo que estaban eligiendo.
+
+72
+00:08:27,739 --> 00:08:34,997
+Daniels no diseñó una cabina. Contó, dijo con claridad lo que significaba el conteo, y dejó el diseño a los diseñadores.
+
+73
+00:08:36,897 --> 00:08:44,037
+La página de Ivy hizo lo mismo: la decisión primero, el pico junto al promedio, y la elección en manos de quienes la toman.
+
+74
+00:08:46,137 --> 00:08:50,135
+El lunes, empieza por la decisión, y luego la respuesta, en una frase.
+
+75
+00:08:51,835 --> 00:08:56,378
+Muestra de qué depende, el pico y la dispersión, en una imagen que dibujas mientras escribes.
+
+76
+00:08:58,078 --> 00:09:02,428
+Di lo que no sabes, con las palabras de tus lectores, y los mismos números para todos.
+
+77
+00:09:04,128 --> 00:09:09,149
+Pruébala con alguien que no estuvo en el trabajo. Luego deja que decidan quienes deciden.
+
+78
+00:09:11,049 --> 00:09:13,601
+Empieza por la decisión; muestra de qué depende.

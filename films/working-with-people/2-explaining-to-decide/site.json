@@ -1,0 +1,88 @@
+{
+  "kicker": "Explaining for a decision",
+  "kicker_es": "Explicar para decidir",
+  "title_es": "Explicar para que la gente decida",
+  "h1": "Explaining so people can decide: the decision first, and what it turns on",
+  "h1_es": "Explicar para que la gente decida: primero la decisión, y de qué depende",
+  "lead": "In May 2027, Graham Ellis must put one choice to the University Council, on one page: a new teaching building now, or not yet? Ivy Reyes's first draft runs to twelve pages, with the answer on page nine. With Helena, she starts the page with the decision, and draws the week's picture beside it.",
+  "lead_es": "En mayo de 2027, Graham Ellis debe llevar una decisión al Consejo Universitario en una página: ¿un nuevo edificio de aulas ya, o todavía no? El primer borrador de Ivy Reyes tiene doce páginas; la respuesta, en la nueve. Con Helena, empieza por la decisión y dibuja al lado la imagen de la semana.",
+  "description": "A film about explaining for a decision, the second of Working with people, in the module Leading data people: start with the decision and the answer, then the evidence; show the part of the data the decision turns on (the peak, the spread), not only the average; say what isn't known; one page in the readers' words, with the same numbers for everyone; then let the people who decide, decide. Barbara Minto's pyramid, Edward Tufte's \"above all else, show the data\" and Cole Nussbaumer Knaflic's \"know who you're showing\" are named once. Ivy Reyes, a graduate data analyst, and Helena Novak, the data manager, turn a twelve-page draft, written in the order the work was done, into one page for the University Council by Tuesday 1 June 2027: the decision first (a new teaching building now, or not yet?); the answer in one sentence (rooms are short only from 10:00 to 14:00, Tuesday to Thursday); the peak, 93% of rooms booked, beside the week's average of 38%; one booked hour in five in which nobody came; and what it would take not to build (move about one peak class in six to other hours, and release booked rooms nobody uses). Ivy draws the week's heat map as she writes the page, never after. The page says what isn't known (how many students there will be by 2030) and how far the answer holds; Mei, from the registrar's office, who wasn't in the work, reads it first, and the word utilisation becomes booked and used. On Thursday 24 June the University Council defers the building for two years and asks for the timetable change from Semester 1 2028, with a review in June 2029; the meeting argues about the choice, not the numbers. It opens with the United States Air Force's flyers, 1950 to 1952, where Lieutenant Gilbert Daniels counted how many of 4,063 men were average on ten measurements, and found not one.",
+  "description_es": "Una película sobre explicar para una decisión, la segunda de Trabajar con personas, en el módulo Liderar equipos de datos: empezar por la decisión y la respuesta, y después la evidencia; mostrar la parte de los datos de la que depende la decisión (el pico, la dispersión), no solo el promedio; decir lo que no se sabe; una página con las palabras de quien la lee, con los mismos números para todos; y dejar que decida quien decide. La pirámide de Barbara Minto, el \"ante todo, muestra los datos\" de Edward Tufte y el \"sabe a quién le muestras\" de Cole Nussbaumer Knaflic se nombran una vez. Ivy Reyes, analista de datos recién graduada, y Helena Novak, la gestora de datos, convierten un borrador de doce páginas, escrito en el orden en que se hizo el trabajo, en una página para el Consejo Universitario para el martes 1 de junio de 2027: primero la decisión (¿un nuevo edificio de aulas ahora, o todavía no?); la respuesta en una frase (faltan aulas solo de 10:00 a 14:00, de martes a jueves); el pico, 93% de las aulas reservadas, junto al promedio de la semana, 38%; una de cada cinco horas reservadas en que no llegó nadie; y lo que haría falta para no construir (mover a otras horas cerca de una clase de cada seis del pico, y liberar las aulas reservadas que nadie usa). Ivy dibuja el mapa de calor de la semana mientras escribe la página, nunca después. La página dice lo que no se sabe (cuántos estudiantes habrá en 2030) y hasta dónde vale la respuesta; Mei, de la oficina de registro académico, que no participó en el trabajo, la lee primero, y la palabra utilización se vuelve reservada y usada. El jueves 24 de junio el Consejo Universitario aplaza el edificio dos años y pide el cambio de horario desde el primer semestre de 2028, con una revisión en junio de 2029; la reunión discute la decisión, no los números. Empieza con los aviadores de la Fuerza Aérea de los Estados Unidos, de 1950 a 1952, cuando el teniente Gilbert Daniels contó cuántos de 4,063 hombres eran promedio en diez medidas, y no encontró ninguno.",
+  "card": "Ivy turns twelve pages into one for the University Council: the decision first, and the week's picture beside it.",
+  "card_es": "Ivy convierte doce páginas en una para el Consejo Universitario: primero la decisión, y al lado la imagen de la semana.",
+  "chapters_es": {
+    "pilot": "Ningún piloto promedio",
+    "page": "Una página para el Consejo Universitario",
+    "first": "Primero, la decisión",
+    "turns": "De qué depende",
+    "unknown": "Lo que no se sabe, en sus palabras",
+    "decide": "Ellos deciden",
+    "monday": "El lunes"
+  },
+  "past": [
+    "The United States Air Force, 1950 to 1952: no average pilot",
+    "Designers sized what flyers wear and where they sit to the average man. Gilbert Daniels counted 4,063 flyers on ten measurements, and not one was average on all ten. His note said so in its first lines, and showed the range to design for. Show what a decision turns on, not only the average."
+  ],
+  "past_es": [
+    "La Fuerza Aérea de los Estados Unidos, de 1950 a 1952: ningún piloto promedio",
+    "Los diseñadores hacían lo que los aviadores visten y dónde se sientan a la medida del hombre promedio. Gilbert Daniels contó a 4,063 aviadores en diez medidas, y ninguno era promedio en las diez. Su nota lo dijo en sus primeras líneas, y mostró el rango para el que diseñar. Muestra de qué depende una decisión, no solo el promedio."
+  ],
+  "next_h": "You've seen how to explain an answer so people can decide. Next: saying no to a date or a scope, without saying no to the person.",
+  "next_h_es": "Viste cómo explicar una respuesta para que la gente pueda decidir. Después: decir que no a una fecha o a un alcance, sin decirle que no a la persona.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The “Average Man”?, Gilbert Daniels's note of 1952",
+        "title_es": "The “Average Man”?, la nota de Gilbert Daniels de 1952 (en inglés)",
+        "line": "The seven-page technical note itself, scanned: his count of 4,063 flyers on ten measurements, and the range it says to design for.",
+        "line_es": "La nota técnica de siete páginas, escaneada: su conteo de 4,063 aviadores en diez medidas, y el rango para el que dice diseñar.",
+        "href": "https://archive.org/details/DTIC_AD0010203",
+        "href_es": "https://archive.org/details/DTIC_AD0010203"
+      },
+      {
+        "title": "The Minto Pyramid Principle",
+        "title_es": "El principio de la pirámide de Minto (en inglés)",
+        "line": "Barbara Minto's own page on the pyramid: the main point first, and the ideas that support it grouped under it.",
+        "line_es": "La página de Barbara Minto sobre la pirámide: primero la idea principal, y debajo, agrupadas, las ideas que la sostienen.",
+        "href": "https://www.barbaraminto.com/",
+        "href_es": "https://www.barbaraminto.com/"
+      },
+      {
+        "title": "storytelling with data, by Cole Nussbaumer Knaflic",
+        "title_es": "storytelling with data, de Cole Nussbaumer Knaflic (en inglés)",
+        "line": "Her site's free articles, examples and podcast on showing data so the people you show it to see the one thing that matters.",
+        "line_es": "Los artículos, ejemplos y el podcast gratuitos de su sitio sobre mostrar datos para que quien los ve vea lo único que importa.",
+        "href": "https://www.storytellingwithdata.com/",
+        "href_es": "https://www.storytellingwithdata.com/"
+      },
+      {
+        "title": "Edward Tufte",
+        "title_es": "Edward Tufte",
+        "line": "The statistician and designer whose books taught a generation to show data plainly and honestly.",
+        "line_es": "El estadístico y diseñador cuyos libros enseñaron a una generación a mostrar los datos con claridad y honestidad.",
+        "href": "https://en.wikipedia.org/wiki/Edward_Tufte",
+        "href_es": "https://es.wikipedia.org/wiki/Edward_Tufte"
+      },
+      {
+        "title": "Heat map",
+        "title_es": "Mapa de calor",
+        "line": "What a heat map is: a grid of values, each cell as dark as its number, like the week's picture of rooms booked.",
+        "line_es": "Qué es un mapa de calor: una cuadrícula de valores, cada celda tan oscura como su número, como la imagen de la semana de aulas reservadas.",
+        "href": "https://en.wikipedia.org/wiki/Heat_map",
+        "href_es": "https://es.wikipedia.org/wiki/Mapa_de_calor"
+      }
+    ],
+    "more": [
+      {
+        "text": "How the Air Force came to design its cockpits for the middle 90 in every 100: Kenneth Kennedy's paper on cockpit design, scanned",
+        "text_es": "Cómo la Fuerza Aérea llegó a diseñar sus cabinas para los 90 del medio de cada 100: el artículo de Kenneth Kennedy sobre el diseño de cabinas, escaneado (en inglés)",
+        "href": "https://archive.org/details/DTIC_ADA027801",
+        "href_es": "https://archive.org/details/DTIC_ADA027801"
+      }
+    ]
+  }
+}

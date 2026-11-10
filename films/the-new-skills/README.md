@@ -11,6 +11,8 @@ What a data person needs to be good at now. In 2027, a year from now, Ivy Reyes 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Many hats, one picture](https://data.learn-all.org/the-new-skills/many-hats/) | The generalist | 8½ min | 7 | 3 questions | [script](1-many-hats/script.md) · [source](1-many-hats/source/README.md) |
+| [The draft and the decision](https://data.learn-all.org/the-new-skills/draft-and-decision/) | Working with an agent | 9 min | 7 | 3 questions | [script](2-draft-and-decision/script.md) · [source](2-draft-and-decision/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -172,7 +172,7 @@ Four questions, at the ends of *Who could read it*, *A class and a policy*, *Whe
 
 | Field | English | Spanish |
 |---|---|---|
-| kicker | Proving the protection held | Probar que la protección se cumplió |
+| kicker | Proving the protection held | Probar que la protección cumplió |
 | title | Proof it held | Prueba de que se cumplió |
 | h1 | Proof it held: read from records, not memory | Prueba de que se cumplió: en registros, no en la memoria |
 | card | A review, a morning check, lineage and the audit log: proof, read from records, that the study's protection held. | Una revisión, una comprobación cada mañana, el linaje y la auditoría: la prueba, en registros, de que se cumplió. |
@@ -187,7 +187,7 @@ New files, so no cited line moves (`films/analytics-engineering/project/`):
 - `analyses/governance/morning_check.sql`: the two gaps the alert looks for every morning, on the shelves people read (`core`, `support`, `published` and the studies' own spaces; the raw tables and the build's views carry no class, as *Tags that travel* sets them): a column that `system.data_classification.results` finds personal, with no `personal_data` tag in `information_schema.column_tags`; and a class that has to be hidden, on a column, with no column mask policy whose tags name it in `information_schema.abac_policy_definitions`. It reads names and classes only, never classification's sample values. A Databricks SQL alert runs it at 07:00 and emails Yusuf Demir and Sam Okafor when it returns a row.
 - `analyses/governance/who_read_in_a_window.sql`: who read a table's data in a window of time, from `system.access.audit`, by the event logged when the platform hands a reader a credential for the table (`generateTemporaryTableCredential`): here, the exam support table in the 31 hours.
 - `analyses/governance/where_a_column_went.sql`: what was made from one column, from `system.access.column_lineage`: here, `mobile`.
-- `docs/databricks-governance.md`: a new section, *12. Proof it held*, after the numbered sections and before the sources, with its own sources at the end of the list, so no cited line moves (renumbered on the day it merges if *Tags that travel* or *One policy for many tables* has added a section before it): the check every morning and its alert; the directory's access review of the study's access package (quarterly, open 7 days, unanswered removes access, results applied when it closes); access that ends on its date (the access package's expiration); who read; where a column went; the proofs kept with the agreement in Yusuf's register.
+- `docs/databricks-governance.md`: a new section, *16. Proof it held*, after the numbered sections and before the sources, with its own sources at the end of the list, so no cited line moves (renumbered on the day it merges if *Tags that travel* or *One policy for many tables* has added a section before it): the check every morning and its alert, set up as section 14's is; the directory's access review of the study's access package (quarterly, open 7 days, unanswered removes access, results applied when it closes); access that ends on its date (the access package's expiration); who read; where a column went; the proofs kept with the agreement in Yusuf's register.
 
 ## Rigour
 

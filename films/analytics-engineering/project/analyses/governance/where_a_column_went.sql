@@ -4,7 +4,7 @@
 -- from the column. One step at a time: ask again about a column it lists, to follow that one on.
 -- Lineage records what the platform can infer, on the platform, for about a year: a copy made
 -- elsewhere isn't in it. Databricks only, like the policy (docs/databricks-governance.md,
--- section 12). Here: the learner table's email; to ask about another column, name it:
+-- section 16). Here: the learner table's email; to ask about another column, name it:
 --
 --     dbt compile --target databricks --select where_a_column_went --profiles-dir . --vars \
 --         '{lineage_table: registrar.support.exam_support, lineage_column: mobile}'

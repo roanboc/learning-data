@@ -3,7 +3,7 @@
 -- for a table's files, it logs generateTemporaryTableCredential, with the table's full name and
 -- whether the credential can also write (operation): who read what, and when. Section 6's getTable
 -- counts each look-up of a table; this counts each read of its data. Databricks only, like the
--- policy (docs/databricks-governance.md, section 12). event_time is in UTC. Here: who read the
+-- policy (docs/databricks-governance.md, section 16). event_time is in UTC. Here: who read the
 -- learner table in the last seven days; to ask about another table and window, name them:
 --
 --     dbt compile --target databricks --select who_read_in_a_window --profiles-dir . --vars \

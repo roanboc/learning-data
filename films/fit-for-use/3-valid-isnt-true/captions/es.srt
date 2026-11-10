@@ -1,0 +1,395 @@
+1
+00:00:01,600 --> 00:00:03,336
+Japón, en 1800.
+
+2
+00:00:04,636 --> 00:00:10,413
+Ino Tadataka, un comerciante retirado de 55 años, salió de Edo, la actual Tokio,
+
+3
+00:00:10,613 --> 00:00:14,437
+para cartografiar la costa de Ezo, la isla del norte que hoy se llama Hokkaido.
+
+4
+00:00:15,737 --> 00:00:21,868
+Los mapas de la época se dibujaban sobre todo a partir de estimaciones: un cabo podía quedar a millas de donde estaba.
+
+5
+00:00:23,568 --> 00:00:29,640
+Y con barcos rusos apareciendo en el norte, el gobierno, el shogunato, quería un mapa fiel de esa costa.
+
+6
+00:00:31,140 --> 00:00:37,180
+Sus equipos la midieron a pie: cada tramo con una cuerda o una cadena, y su dirección con una brújula.
+
+7
+00:00:38,880 --> 00:00:40,863
+Pero cada tramo suma un pequeño error.
+
+8
+00:00:41,963 --> 00:00:46,439
+Los errores se acumulan, sin verse, porque cada medida parece bien por sí sola.
+
+9
+00:00:48,339 --> 00:00:54,983
+Un mapa hecho solo con sus propias medidas puede coincidir consigo mismo, línea tras línea, y aun así desviar un cabo millas.
+
+10
+00:00:57,083 --> 00:01:01,463
+Algo tenía que cambiar: el levantamiento necesitaba una referencia que sus errores no pudieran alcanzar.
+
+11
+00:01:03,163 --> 00:01:07,467
+Así que, de día, midieron la costa; y en las noches despejadas, midieron las estrellas.
+
+12
+00:01:09,567 --> 00:01:16,118
+La altura de una estrella, cuando cruza el sur, dice cuán al norte estás, y ningún error del camino puede cambiarla.
+
+13
+00:01:18,218 --> 00:01:21,628
+Donde el camino y las estrellas no coincidían, corregían el camino.
+
+14
+00:01:23,928 --> 00:01:26,049
+Sus equipos caminaron durante diecisiete años.
+
+15
+00:01:27,549 --> 00:01:35,432
+En 1821, tres años después de su muerte, terminaron el mapa de todo Japón, la base de los mapas del país durante décadas.
+
+16
+00:01:37,332 --> 00:01:43,361
+Su longitud para un grado de latitud, de norte a sur, está a una fracción del uno por ciento de la de hoy.
+
+17
+00:01:45,061 --> 00:01:53,182
+En la universidad, en febrero de 2026, cada nombre de la lista de graduación pasó los controles que dicen si un nombre está permitido.
+
+18
+00:01:54,282 --> 00:01:55,704
+Ochenta y ocho seguían mal.
+
+19
+00:01:57,204 --> 00:01:58,739
+La lista necesitaba sus estrellas.
+
+20
+00:02:00,239 --> 00:02:05,226
+Los propios graduados corrigieron los 88, antes de que se imprimiera un solo diploma.
+
+21
+00:02:13,126 --> 00:02:15,010
+Febrero de 2026.
+
+22
+00:02:16,110 --> 00:02:20,643
+La lista de las ceremonias de marzo tiene 1,064 graduados.
+
+23
+00:02:21,943 --> 00:02:25,198
+Cada noche, los controles de Jun preguntan si cada nombre está permitido:
+
+24
+00:02:25,398 --> 00:02:29,580
+que no esté vacío, que solo tenga letras, espacios, guiones y apóstrofos,
+
+25
+00:02:29,780 --> 00:02:33,435
+y como mucho 30 caracteres, la longitud del campo del sistema de estudiantes.
+
+26
+00:02:34,935 --> 00:02:37,181
+Los 1,064 pasan.
+
+27
+00:02:38,881 --> 00:02:41,757
+En palabras de la calidad de datos, cada nombre es válido.
+
+28
+00:02:42,857 --> 00:02:44,597
+Pero válido solo quiere decir permitido.
+
+29
+00:02:46,097 --> 00:02:49,272
+El nombre de Zoë Lefèvre, sin sus tildes, está permitido.
+
+30
+00:02:50,572 --> 00:02:54,571
+También un nombre cortado, o un nombre de pila donde debería ir el apellido.
+
+31
+00:02:56,271 --> 00:02:59,666
+Los primeros controles del equipo, de cien registros, plantean dos dudas:
+
+32
+00:02:59,866 --> 00:03:04,789
+doce nombres de 30 caracteres exactos, y ni una tilde en toda la lista.
+
+33
+00:03:06,489 --> 00:03:11,112
+Pero ningún control puede decir cuáles de los doce quedaron cortados, ni a quién le faltan tildes.
+
+34
+00:03:12,612 --> 00:03:15,434
+Esa es una pregunta sobre el mundo, no sobre los datos.
+
+35
+00:03:18,334 --> 00:03:19,595
+Ino tenía las estrellas.
+
+36
+00:03:20,895 --> 00:03:27,655
+Una lista también necesita una referencia: algo fuera de los datos que sepa la verdad, y que sus errores no puedan alcanzar.
+
+37
+00:03:29,155 --> 00:03:31,775
+La lista tiene tres, de la más cercana a la verdad.
+
+38
+00:03:32,875 --> 00:03:34,961
+El graduado, que conoce su propio nombre.
+
+39
+00:03:36,261 --> 00:03:41,358
+El documento de identidad visto en la matrícula, revisado una vez por la oficina de registro.
+
+40
+00:03:42,658 --> 00:03:49,083
+Y un registro aparte: las listas aprobadas por las juntas examinadoras, que dicen quién completó cada título, y cuándo.
+
+41
+00:03:50,783 --> 00:03:54,874
+Cuanto más cercana la referencia, más te puede decir, y más difícil es llegar a ella.
+
+42
+00:03:56,574 --> 00:04:00,920
+Un graduado puede decirte todo sobre su nombre, pero hay que preguntarle, y esperar.
+
+43
+00:04:02,220 --> 00:04:05,600
+Las listas de las juntas están ahí cada noche, y no saben nada de ortografía.
+
+44
+00:04:07,100 --> 00:04:11,432
+Comparar los datos con una referencia mide su exactitud: si son ciertos.
+
+45
+00:04:14,332 --> 00:04:16,232
+Así que la oficina de registro preguntó.
+
+46
+00:04:17,332 --> 00:04:23,549
+Del lunes 9 al viernes 20 de febrero, mientras los graduados se inscribían en las ceremonias de marzo,
+
+47
+00:04:23,749 --> 00:04:27,388
+el portal le mostró a cada uno su nombre, tal como se imprimiría,
+
+48
+00:04:27,588 --> 00:04:31,021
+y dos botones: “Este es mi nombre” y “Este no es mi nombre”.
+
+49
+00:04:32,521 --> 00:04:38,690
+Zoë Lefèvre vio el suyo sin tildes, pulsó “Este no es mi nombre” y lo escribió como ella lo escribe.
+
+50
+00:04:40,590 --> 00:04:46,327
+Respondieron 1,013 de los 1,064: el 95 por ciento.
+
+51
+00:04:47,627 --> 00:04:51,179
+925 confirmaron su nombre tal como estaba.
+
+52
+00:04:52,279 --> 00:04:58,605
+88 lo corrigieron: 51 habían perdido sus tildes, 19 tenían el nombre y el apellido invertidos,
+
+53
+00:04:58,805 --> 00:05:01,525
+11 estaban cortados, y 7 mal escritos.
+
+54
+00:05:03,025 --> 00:05:04,628
+Los 88 estaban permitidos.
+
+55
+00:05:06,128 --> 00:05:08,757
+Un diploma lleva el nombre legal del graduado,
+
+56
+00:05:08,957 --> 00:05:14,871
+así que el equipo de Mei comparó cada corrección con la siguiente referencia: el documento visto en la matrícula.
+
+57
+00:05:16,171 --> 00:05:17,337
+84 coincidieron.
+
+58
+00:05:18,437 --> 00:05:23,479
+Cuatro graduados se habían cambiado el nombre desde entonces, y cada uno envió el documento que muestra el nuevo.
+
+59
+00:05:24,979 --> 00:05:28,669
+La lista tomó cada nombre tal como lo confirmó su graduado, con la fecha.
+
+60
+00:05:30,169 --> 00:05:34,440
+Los 51 que no respondieron se imprimieron tal como los tenía el sistema de estudiantes.
+
+61
+00:05:35,740 --> 00:05:42,581
+Uno estaba entre los doce de 30 caracteres exactos, y el documento lo resolvió: ese nombre de verdad es así de largo.
+
+62
+00:05:44,281 --> 00:05:45,737
+Un control puede plantear una duda.
+
+63
+00:05:46,637 --> 00:05:48,312
+Solo una referencia puede resolverla.
+
+64
+00:05:51,412 --> 00:05:52,533
+Luego, los títulos.
+
+65
+00:05:53,633 --> 00:05:58,835
+Un graduado de una doble titulación, como Artes y Derecho, tiene dos títulos, y dos diplomas.
+
+66
+00:06:00,135 --> 00:06:07,648
+El lunes 23 de febrero, el nuevo control de Jun comparó la lista con las listas aprobadas por las juntas, título por título.
+
+67
+00:06:09,148 --> 00:06:11,690
+Las juntas habían aprobado 1,101.
+
+68
+00:06:12,790 --> 00:06:15,203
+La lista tenía 1,099.
+
+69
+00:06:16,503 --> 00:06:18,990
+Los dos que faltaban eran títulos de Licenciatura en Artes,
+
+70
+00:06:19,190 --> 00:06:23,834
+de dos graduados de Artes y Derecho que el sistema de estudiantes tenía solo con Derecho.
+
+71
+00:06:25,534 --> 00:06:29,694
+Cada fila de la lista pasó sus controles: lo que estaba mal era lo que no estaba.
+
+72
+00:06:31,394 --> 00:06:35,929
+Se encontró tres días antes de que la lista saliera, y se imprimieron los dos diplomas de Artes.
+
+73
+00:06:37,429 --> 00:06:40,007
+Los demás títulos, y todas las fechas, coincidieron.
+
+74
+00:06:41,507 --> 00:06:44,703
+Las listas de las juntas podían ver el hueco porque se llevan aparte,
+
+75
+00:06:44,903 --> 00:06:48,540
+hechas con las propias decisiones de las juntas, no con el sistema de estudiantes.
+
+76
+00:06:49,840 --> 00:06:54,165
+Una copia del sistema de estudiantes habría coincidido con la lista, y las dos estarían mal:
+
+77
+00:06:54,365 --> 00:06:57,533
+consistentes, en palabras de la calidad de datos, no exactas.
+
+78
+00:06:59,233 --> 00:07:03,196
+Y como las estrellas de Ino, cada referencia ve unas cosas y no otras.
+
+79
+00:07:04,496 --> 00:07:11,695
+Las estrellas fijaban cuán al norte, no cuán al este: eso pedía un reloj exacto que sus equipos pudieran llevar, y no tenían.
+
+80
+00:07:13,595 --> 00:07:17,634
+Las listas de las juntas pueden decir que falta un título, no cómo se escribe un nombre.
+
+81
+00:07:20,534 --> 00:07:23,208
+Así que ahora cada control dice qué referencia usa.
+
+82
+00:07:24,308 --> 00:07:31,324
+Junto a cada control del proyecto, Jun escribe su responsable, qué mide, y, si es de exactitud, su referencia.
+
+83
+00:07:32,824 --> 00:07:37,185
+Los controles de nombres miden la validez: no tienen más referencia que la propia regla,
+
+84
+00:07:37,385 --> 00:07:39,994
+así que pueden decir que un nombre está permitido, y nada más.
+
+85
+00:07:41,494 --> 00:07:45,484
+El control de títulos mide la exactitud, contra las listas aprobadas por las juntas.
+
+86
+00:07:46,984 --> 00:07:52,432
+Para los nombres, la referencia es el graduado, y la lista guarda la fecha en que se confirmó cada uno.
+
+87
+00:07:53,932 --> 00:07:58,796
+Y la prueba que ejecuta nombra su método: conciliación, título por título.
+
+88
+00:08:00,496 --> 00:08:03,612
+Y el cuadro de mando los cuenta por separado: permitido, y cierto.
+
+89
+00:08:05,312 --> 00:08:07,596
+Un control es tan cierto como su referencia.
+
+90
+00:08:08,896 --> 00:08:14,233
+Di cuál usa, y quien lea el resultado sabrá qué le puede decir, y qué no.
+
+91
+00:08:17,133 --> 00:08:21,690
+Los equipos de Ino recorrían la costa de día, y la comprobaban con las estrellas de noche.
+
+92
+00:08:23,190 --> 00:08:25,010
+El camino decía cuánto habían avanzado.
+
+93
+00:08:26,110 --> 00:08:28,589
+Las estrellas decían cuán al norte estaban de verdad.
+
+94
+00:08:30,489 --> 00:08:34,527
+El jueves 26 de febrero, la lista de marzo salió hacia la imprenta
+
+95
+00:08:35,227 --> 00:08:40,931
+con 88 nombres corregidos por los propios graduados, y dos títulos hallados en las listas de las juntas.
+
+96
+00:08:42,631 --> 00:08:44,633
+Cada nombre estuvo permitido todo el tiempo.
+
+97
+00:08:45,933 --> 00:08:51,144
+Ahora 1,013 los había confirmado la persona a quien pertenecen.
+
+98
+00:08:52,844 --> 00:08:54,272
+Un control dice que está permitido.
+
+99
+00:08:55,372 --> 00:08:57,065
+Solo una referencia dice que es cierto.

@@ -61,6 +61,8 @@ Source: [films/from-words-to-data](../films/from-words-to-data/) · Portal: `/fr
   Labs and assessments: [learn.en.js](../site/assets/keeping-it-true/learn.en.js), [learn.es.js](../site/assets/keeping-it-true/learn.es.js)
 
 
+Labs and assessments: [site/assets/from-words-to-data/learn.en.js](../site/assets/from-words-to-data/learn.en.js), [site/assets/from-words-to-data/learn.es.js](../site/assets/from-words-to-data/learn.es.js)
+
 ## Modern data basics
 
 Module: `modern-data-basics` · [metadata](modern-data-basics/module.json)
@@ -84,13 +86,15 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
-No film source yet.
+- [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
+- [More readers than people](../films/from-tables-to-decisions/3-more-readers-than-people/) — `more-readers-than-people`
 
 ### Documents as data
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -141,6 +145,8 @@ Source: [films/analytics-engineering](../films/analytics-engineering/) · Portal
   Labs and assessments: [learn.en.js](../site/assets/end-to-end/learn.en.js), [learn.es.js](../site/assets/end-to-end/learn.es.js)
 
 
+Labs and assessments: [site/assets/in-the-weeds/learn.en.js](../site/assets/in-the-weeds/learn.en.js), [site/assets/in-the-weeds/learn.es.js](../site/assets/in-the-weeds/learn.es.js)
+
 ## Data quality
 
 Module: `data-quality` · [metadata](data-quality/module.json)
@@ -161,12 +167,15 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 - [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 - [A hundred records](../films/fit-for-use/2-a-hundred-records/) — `a-hundred-records`
+- [Valid isn't true](../films/fit-for-use/3-valid-isnt-true/) — `valid-isnt-true`
+- [Late is wrong too](../films/fit-for-use/4-late-is-wrong-too/) — `late-is-wrong-too`
 
 ### Quality as a habit
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
-No film source yet.
+- [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
+- [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
 
 ## Enterprise architecture
 
@@ -263,7 +272,10 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
+- [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
+- [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 
 ### Only what you may see
 
@@ -282,6 +294,8 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
 - [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
 - [Forgetting a person](../films/kept-for-a-reason/3-forgetting-a-person/) — `forgetting-a-person`
+- [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
+- [A person asks](../films/kept-for-a-reason/5-a-person-asks/) — `a-person-asks`
 
 ## AI agents in data work
 
@@ -326,6 +340,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
+- [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 
 ## Leading data people
 
@@ -335,13 +350,15 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
-No film source yet.
+- [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
+- [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
 
 ### Working with people
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
-No film source yet.
+- [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
+- [Explaining so people can decide](../films/working-with-people/2-explaining-to-decide/) — `explaining-to-decide`
 
 ### Leading a data team
 
@@ -353,7 +370,8 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 
 ## Data management
 
@@ -363,7 +381,9 @@ Module: `data-management` · [metadata](data-management/module.json)
 
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
-No film source yet.
+- [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
+- [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 
 ### Making the case
 

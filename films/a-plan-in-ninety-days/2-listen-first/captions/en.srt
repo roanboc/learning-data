@@ -1,0 +1,347 @@
+1
+00:00:01,400 --> 00:00:06,761
+Accra, in the early 1930s, on the Gold Coast, then a British colony, now Ghana.
+
+2
+00:00:08,261 --> 00:00:13,921
+Cicely Williams, a doctor from Jamaica, cares for the Ga people's children, with their mothers.
+
+3
+00:00:15,021 --> 00:00:21,709
+Children of one to four were falling sick: their hands and feet swelled, their skin peeled, and they wasted away.
+
+4
+00:00:23,209 --> 00:00:26,231
+Unless it was treated early, it nearly always killed them.
+
+5
+00:00:28,131 --> 00:00:34,655
+Many doctors took it for pellagra, a disease of a missing vitamin; treated that way, children kept dying.
+
+6
+00:00:35,755 --> 00:00:38,238
+Williams couldn't find it in any medical book.
+
+7
+00:00:39,338 --> 00:00:40,727
+Something had to change.
+
+8
+00:00:42,427 --> 00:00:46,442
+So she listened: to mothers and grandmothers, to nurses and healers.
+
+9
+00:00:47,542 --> 00:00:51,600
+For three years, nobody said its name in front of her: the word was feared.
+
+10
+00:00:52,900 --> 00:00:55,128
+Then the mothers told her: kwashiorkor.
+
+11
+00:00:57,028 --> 00:01:02,759
+In Ga, the disease of the displaced child: the one moved from the breast when the next baby comes.
+
+12
+00:01:04,259 --> 00:01:06,720
+It came when that child ate little but maize.
+
+13
+00:01:07,820 --> 00:01:12,860
+Williams described it in 1933, and two years later gave it the mothers' word.
+
+14
+00:01:13,960 --> 00:01:19,672
+Three children she saw early were given milk, eggs and fruit, and each went home apparently cured.
+
+15
+00:01:21,172 --> 00:01:23,984
+Doctors everywhere still call it by the mothers' name.
+
+16
+00:01:25,084 --> 00:01:28,970
+They once blamed too little protein; today they know it's more than that.
+
+17
+00:01:30,070 --> 00:01:31,793
+But the mothers had seen when it comes.
+
+18
+00:01:33,493 --> 00:01:37,862
+Data is the same: the people who live with a problem often know it best.
+
+19
+00:01:38,962 --> 00:01:48,260
+A year from now, at a university, a request for data takes 41 working days, on average, to be used, and nobody sees the whole picture.
+
+20
+00:01:49,360 --> 00:01:55,581
+Its new data manager listens first: 31 people, three questions, and what the systems count.
+
+21
+00:01:56,681 --> 00:02:02,825
+Six weeks on, everyone can see where things stand, in their own words, with seven ways to do better.
+
+22
+00:02:10,225 --> 00:02:15,781
+February 2027. Helena Novak is the university's new data manager.
+
+23
+00:02:16,881 --> 00:02:20,278
+Her plan for ninety days starts with six weeks of listening.
+
+24
+00:02:21,378 --> 00:02:26,433
+Thirty-one conversations, from the deputy vice-chancellor to each of her own team.
+
+25
+00:02:27,733 --> 00:02:30,126
+She asks everyone the same three questions.
+
+26
+00:02:31,226 --> 00:02:32,347
+What do you decide?
+
+27
+00:02:33,447 --> 00:02:34,879
+What data do you trust?
+
+28
+00:02:35,979 --> 00:02:37,213
+What slows you down?
+
+29
+00:02:38,713 --> 00:02:43,436
+Asked of everyone, the same questions give answers she can lay side by side.
+
+30
+00:02:44,536 --> 00:02:49,218
+She goes to where people work: the registrar's counter, Finance, Facilities.
+
+31
+00:02:50,318 --> 00:02:55,750
+Lean thinking calls it go and see, genchi genbutsu: the real place, and the real thing.
+
+32
+00:02:57,050 --> 00:03:01,897
+She writes down what she hears in people's own words, as Williams kept the mothers' word.
+
+33
+00:03:02,997 --> 00:03:06,607
+Clara, in Planning: “I ask for one number, and I get three.”
+
+34
+00:03:07,707 --> 00:03:11,622
+Ingrid, in HR: “Our staff list is right. It's the copies.”
+
+35
+00:03:12,722 --> 00:03:17,227
+Anil, in the Faculty of Health: “I keep my own spreadsheet. I can't wait.”
+
+36
+00:03:18,327 --> 00:03:23,036
+Mei, at the registrar's office: “Our Thursday fifteen minutes works. Keep it.”
+
+37
+00:03:24,336 --> 00:03:30,991
+Graham Ellis, in Facilities, emails for a dashboard of room use by Easter: it waits its turn with the rest.
+
+38
+00:03:32,091 --> 00:03:37,705
+The leading data people module follows that one request, in The question behind the request.
+
+39
+00:03:40,705 --> 00:03:43,944
+Before proposing anything, she reads what's already written.
+
+40
+00:03:45,044 --> 00:03:48,383
+The university's strategy to 2030 has four goals:
+
+41
+00:03:48,583 --> 00:03:54,571
+students who succeed, research that reaches people, a campus used well, and finances that last.
+
+42
+00:03:56,071 --> 00:04:01,570
+The digital strategy serves it, and measures data quality, integration and satisfaction.
+
+43
+00:04:02,670 --> 00:04:08,151
+An earlier assessment found twelve decisions the university makes with data every year.
+
+44
+00:04:09,251 --> 00:04:16,030
+The budget, casual staff, the timetable and rooms, which courses to offer, research reporting, and seven more.
+
+45
+00:04:17,330 --> 00:04:22,318
+Every answer she hears can now be tied to a decision, and every decision to a goal.
+
+46
+00:04:25,518 --> 00:04:28,622
+People show where it hurts; the systems show how much.
+
+47
+00:04:29,722 --> 00:04:36,691
+The tracker: for the requests closed in February, 41 working days, on average, from the ask to first use.
+
+48
+00:04:37,991 --> 00:04:44,381
+The old warehouse's own logs: 38 reports, on the university's own servers since 2012.
+
+49
+00:04:45,481 --> 00:04:47,835
+Seventeen haven't been opened in a year.
+
+50
+00:04:48,935 --> 00:04:52,772
+The other 21 are used, by about 260 people.
+
+51
+00:04:53,872 --> 00:05:01,181
+It costs 310,000 Australian dollars a year, and its licence ends on 31 December.
+
+52
+00:05:02,281 --> 00:05:05,636
+Laid beside what people said, three findings stand out.
+
+53
+00:05:06,736 --> 00:05:11,044
+Requests arrive in eleven ways, from two inboxes to the agents' queue.
+
+54
+00:05:12,144 --> 00:05:17,904
+The staff list lives in three copies: HR's, the warehouse's, and a faculty's spreadsheet.
+
+55
+00:05:19,004 --> 00:05:25,134
+And about 40 people in faculties and offices do data work part of their week, mostly in spreadsheets.
+
+56
+00:05:26,234 --> 00:05:34,238
+One thing already works: since January 2026, the graduation list's team has met for fifteen minutes every Thursday.
+
+57
+00:05:35,338 --> 00:05:38,272
+Reprinted certificates fell from 41 to 3.
+
+58
+00:05:39,572 --> 00:05:41,568
+The data quality module tells how.
+
+59
+00:05:42,668 --> 00:05:45,443
+Write down what works too, so nobody breaks it.
+
+60
+00:05:48,443 --> 00:05:54,066
+Then she writes down what is: the current state, or, as TOGAF's method calls it, the baseline.
+
+61
+00:05:55,366 --> 00:06:00,705
+She writes it in the five layers architects use, each a page, with its picture beside it.
+
+62
+00:06:02,005 --> 00:06:09,089
+Strategy: the four goals, and what the university must be able to do. Governing data works; delivering it is slow.
+
+63
+00:06:10,789 --> 00:06:16,679
+Business: the twelve decisions, the services people can ask for, the processes, and who does what.
+
+64
+00:06:17,979 --> 00:06:23,460
+Its ways of working too: eleven ways to ask, and 41 working days to first use.
+
+65
+00:06:24,960 --> 00:06:28,892
+Information: what the data is about, and where each piece is born.
+
+66
+00:06:29,992 --> 00:06:33,338
+Staff are born in HR's system, then copied twice.
+
+67
+00:06:34,838 --> 00:06:40,819
+Application: the systems and reports, the old warehouse's 38 beside the platform's.
+
+68
+00:06:42,319 --> 00:06:46,672
+Technology: where they run, the university's own servers and the cloud.
+
+69
+00:06:48,172 --> 00:06:51,985
+ArchiMate, the architects' notation, has no information layer:
+
+70
+00:06:52,185 --> 00:06:57,680
+it keeps what the data is about in its business layer, and the data itself in its application layer.
+
+71
+00:06:58,980 --> 00:07:03,253
+Helena gives information a layer of its own, because data is her job.
+
+72
+00:07:04,553 --> 00:07:07,612
+Noor puts each page on her map, ready for the target.
+
+73
+00:07:08,712 --> 00:07:12,571
+The map before the data shows that map, in Today, and where it's going.
+
+74
+00:07:15,771 --> 00:07:18,072
+Any finding could read as someone's fault.
+
+75
+00:07:19,172 --> 00:07:21,445
+So she writes each one as an opportunity.
+
+76
+00:07:22,545 --> 00:07:25,412
+Not “requests get lost”, but one way to ask.
+
+77
+00:07:26,512 --> 00:07:31,937
+Not “faculties keep their own copies”, but data partners in faculties and offices.
+
+78
+00:07:33,237 --> 00:07:40,598
+Seven opportunities in all: one way to ask; retire the old warehouse; an owner for every report and product;
+
+79
+00:07:40,798 --> 00:07:46,668
+data partners; measure delivery; write down the critical procedures; and agents with mandates.
+
+80
+00:07:48,168 --> 00:07:51,612
+Monday, 15 March: the discovery milestone.
+
+81
+00:07:52,712 --> 00:07:56,065
+The current state in five layers, and seven opportunities.
+
+82
+00:07:57,365 --> 00:08:02,951
+She sends a summary back to everyone she spoke to: this is what I heard; tell me what I got wrong.
+
+83
+00:08:04,451 --> 00:08:06,884
+A few write back, and the pages change.
+
+84
+00:08:08,184 --> 00:08:14,482
+In Accra, the mothers knew their children's sickness, and when it came; Williams asked, and wrote it in their word.
+
+85
+00:08:15,982 --> 00:08:22,694
+At the university, the people who live with data knew too: in their words, the current state is one they recognise.
+
+86
+00:08:23,994 --> 00:08:26,190
+Next, she designs the target with them.
+
+87
+00:08:27,290 --> 00:08:30,814
+Ask people, count from the systems, and write down what is.

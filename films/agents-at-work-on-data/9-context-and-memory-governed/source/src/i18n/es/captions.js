@@ -34,8 +34,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Nada le decía al agente qué va primero. Algo tenía que cambiar.",
 "So the team set an order.":
 "Así que el equipo fijó un orden.",
-"First, what's governed: the glossary's definitions and the data rules, each with an owner who reviews every change.":
-"Primero, lo gobernado: las definiciones del glosario y las reglas de datos, cada una con un dueño que revisa cada cambio.",
+"First, what's governed: the glossary's definitions, decided by their owners, and the data rules, reviewed by the data team.":
+"Primero, lo gobernado: las definiciones del glosario, que deciden sus dueños, y las reglas de datos, que revisa el equipo de datos.",
 "Second, memory: the platform keeps it, and nobody approves each line.":
 "Segundo, la memoria: la plataforma la guarda, y nadie aprueba cada línea.",
 "When the two disagree, the definition wins, and the agent flags the line.":
@@ -70,10 +70,10 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La memoria responde cuatro: nadie revisa cada línea antes de que los agentes la usen. Por eso va después.",
 "The team's context lives in its repository, on GitHub: the page for agents, the skills, dbt's descriptions and the contracts.":
 "El contexto del equipo vive en su repositorio, en GitHub: la página para agentes, las habilidades, las descripciones de dbt y los contratos.",
-"Every file has an owner, in a list the project writes from its own metadata.":
-"Cada archivo tiene un dueño, en una lista que el proyecto escribe a partir de sus propios metadatos.",
-"A change is a pull request: its owner reviews it, and a change to production needs a second person's approval.":
-"Un cambio es un pull request: su dueño lo revisa, y un cambio a producción necesita la aprobación de una segunda persona.",
+"Every file has its reviewers, in a list the project writes from its own metadata.":
+"Cada archivo tiene sus revisores, en una lista que el proyecto escribe a partir de sus propios metadatos.",
+"A change is a pull request: the data team reviews it, and a change to production needs a second person's approval.":
+"Un cambio es un pull request: el equipo de datos lo revisa, y un cambio a producción necesita la aprobación de una segunda persona.",
 "Agents may propose a change. They never approve one.":
 "Los agentes pueden proponer un cambio. Nunca aprueban uno.",
 "And the history keeps who changed what, when, and why.":

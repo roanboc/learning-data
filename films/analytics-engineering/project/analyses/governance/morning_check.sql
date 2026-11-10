@@ -2,7 +2,7 @@
 -- classification finds personal, with no class from its owner (no personal_data tag); and a column
 -- whose class has to be hidden, with no column mask policy over it whose tags name that class. It
 -- reads names and classes only: classification's results also keep sample values, never selected
--- here. Databricks only, like the policy (docs/databricks-governance.md, section 12). A Databricks
+-- here. Databricks only, like the policy (docs/databricks-governance.md, section 16). A Databricks
 -- SQL alert runs it each morning at seven, and emails data governance and the platform team when
 -- it returns a row. Here: the project's core and marts schemas, and the class direct, which
 -- section 3's policy hides. A platform with more catalogs and classes names them (null: every
@@ -53,7 +53,7 @@ masks as (
 )
 
 select 'found personal, with no class' as gap,
-       f.catalog_name, f.schema_name, f.table_name, f.column_name, f.found_as as detail
+       f.catalog_name, f.schema_name, f.table_name, f.column_name, f.found_as as detail, 1 as found
 from found as f
 left anti join classed as c
     on c.catalog_name = f.catalog_name and c.schema_name = f.schema_name
@@ -62,7 +62,7 @@ left anti join classed as c
 union all
 
 select 'a class to hide, with no policy' as gap,
-       c.catalog_name, c.schema_name, c.table_name, c.column_name, c.class as detail
+       c.catalog_name, c.schema_name, c.table_name, c.column_name, c.class as detail, 1 as found
 from classed as c
 -- a policy counts if it's on the whole metastore, the column's catalog, its schema or its table
 left anti join masks as m

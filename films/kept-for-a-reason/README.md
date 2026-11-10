@@ -11,6 +11,7 @@ Privacy and the life of data. Linh Nguyen's tutoring contract ends, and she asks
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Forgetting a person](https://data.learn-all.org/kept-for-a-reason/forgetting-a-person/) | Rights over your data | 9 min | 8 | 4 questions | [script](3-forgetting-a-person/script.md) · [source](3-forgetting-a-person/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

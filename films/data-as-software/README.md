@@ -11,6 +11,7 @@ Running a data platform, kept light because it's no longer new. Payroll's export
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Scripts became software](https://data.learn-all.org/data-as-software/scripts-became-software/) | Data work as software | 6½ min | 7 | 3 questions | [script](1-scripts-became-software/script.md) · [source](1-scripts-became-software/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

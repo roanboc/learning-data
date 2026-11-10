@@ -1,6 +1,6 @@
 {#-
     Databricks only (DEC-PRJ-15). Each table other teams read carries its area, its model's
-    meta.domain, as a key-only Unity Catalog tag of the same name (student, course, learning,
+    meta.domain, as a key-only Unity Catalog tag of the same name (student, course, staff, learning,
     planning, finance or wallet), so the Discover page lays the tables out by area: there a domain
     is built on a governed tag of its name, created once, and a table joins it by carrying the tag
     (docs/databricks-governance.md, section 5). The identity that runs dbt needs ASSIGN on each.

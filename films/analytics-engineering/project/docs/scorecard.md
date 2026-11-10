@@ -12,15 +12,25 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `hr` | 10/10 | 3/3 | 5/5 | 3/3 |  | 21/21 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 14/14 | 6/6 | 7/7 | 5/5 |  | 32/32 |
+| `registrar` | 14/14 | 6/6 | 10/10 (2 warn) | 5/5 |  | 35/35 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
-| `student` | 25/25 | 18/18 | 8/8 | 18/18 |  | 69/69 |
+| `student` | 26/26 | 19/19 | 8/8 | 19/19 |  | 72/72 |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 69/69 (1 warn) | 47/47 | 33/33 | 39/39 | 2/2 | 190/190 (1 warn) |
+| **All** | 70/70 (1 warn) | 48/48 | 36/36 (2 warn) | 40/40 | 2/2 | 196/196 (3 warn) |
 
 ## Not passed
 
 | Status | Domain | Dimension | Test | Owner | Rows |
 |---|---|---|---|---|---|
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
+| warn | `registrar` | validity | `family_name_in_capitals_only` | Mei Tanaka, registrar's office | 3 |
+| warn | `registrar` | validity | `family_name_may_be_cut_short` | Mei Tanaka, registrar's office | 2 |
+
+## Hand-check hours
+
+The hidden work, counted: the hours the graduations team spent checking the graduation list's names by hand before each round's list went to the printer, from its calendar (`seeds/reference/graduations/hand_check_rounds.csv`). Beside the tests, so everyone can watch them fall as names are put right where they're born.
+
+| Year | Rounds | Names checked by hand | Hours |
+|---|---|---|---|
+| 2025–26 | 3 | 3,807 of 3,807 | 320 |

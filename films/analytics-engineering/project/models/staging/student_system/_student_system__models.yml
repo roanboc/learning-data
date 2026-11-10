@@ -197,7 +197,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: family_name
-        description: As the student system holds it, in a field of 30 characters.
+        description: As the student system holds it, in a field of 100 characters since 14 September 2026, 30 before.
         config:
           meta: {personal_data: direct}
       - name: conferred_on

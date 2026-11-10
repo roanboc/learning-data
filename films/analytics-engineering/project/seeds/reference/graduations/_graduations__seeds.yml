@@ -33,3 +33,48 @@ seeds:
         description: When the ceremony starts, in the university's time.
       - name: list_due_at
         description: When its round's list goes to the certificate printer. A change after it means a certificate printed again.
+
+  - name: hand_check_rounds
+    description: >
+      One row per round of checking the graduation list's names by hand before it goes to the
+      certificate printer: the day the graduations team downloaded the list from the platform, the
+      day the round's list went, how many names were on it, how many the team checked against the
+      documents seen at enrolment, and the hours, from the team's calendar. The hidden work,
+      counted, so the scorecard can show it beside the checks and everyone can watch it fall
+      (The hidden factory). Owned by the graduations office; a new round comes through a pull
+      request they approve.
+    config:
+      column_types:
+        ceremony_round: string
+        downloaded_on: date
+        sent_on: date
+        names_on_list: integer
+        names_checked: integer
+        hours: integer
+      meta: {owner: "Malia Fonoti, graduations office", domain: student, purpose: reference}
+    columns:
+      - name: ceremony_round
+        description: The round of ceremonies whose list was checked, like December 2025 (ceremonies.csv).
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Malia Fonoti, graduations office"}
+          - not_null:
+              config:
+                meta: {owner: "Malia Fonoti, graduations office"}
+          - relationships:
+              arguments:
+                to: ref('ceremonies')
+                field: ceremony_round
+              config:
+                meta: {owner: "Malia Fonoti, graduations office"}
+      - name: downloaded_on
+        description: The day the graduations team downloaded the list from the platform to start the round, as the platform's query history and audit log show it.
+      - name: sent_on
+        description: The day the round's list went to the certificate printer.
+      - name: names_on_list
+        description: How many graduates were on the list.
+      - name: names_checked
+        description: How many of their names the team checked by hand, against the documents seen at enrolment.
+      - name: hours
+        description: The hours the round took, from the graduations team's calendar, rounded.

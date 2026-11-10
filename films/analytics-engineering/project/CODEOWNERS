@@ -81,6 +81,7 @@
 /models/marts/graduations/_graduations__models.yml       mei.tanaka@uni.example jun.park@uni.example
 /sources/portal/                                         mei.tanaka@uni.example jun.park@uni.example
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
+/seeds/reference/graduations/hand_check_rounds.csv       malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
 

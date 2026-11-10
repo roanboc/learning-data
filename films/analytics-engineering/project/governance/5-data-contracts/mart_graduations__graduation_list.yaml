@@ -63,7 +63,7 @@ schema:
     required: false
     classification: direct
     description: 'The family name to be printed: the one the graduate confirmed in the portal for this
-      ceremony, else the student system''s, which holds 30 characters.'
+      ceremony, else the student system''s, which holds 100 characters since 14 September 2026, 30 before.'
   - name: name_as_printed
     logicalType: string
     physicalType: string

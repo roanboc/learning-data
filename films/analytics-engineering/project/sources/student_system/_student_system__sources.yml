@@ -98,8 +98,8 @@ sources:
             description: The student ID the registrar's office issued, like S-16874.
           - name: family_name
             description: >
-              The family name the student system holds: its field takes 30 characters, so a longer
-              name was cut when it was typed in.
+              The family name the student system holds: its field took 30 characters until 14 September
+              2026, so a longer name typed in before then was cut; it takes 100 now (DEC-SIS-07).
           - name: conferral_date
             description: The date the faculty's exam board approved the award, printed on the certificate.
           - name: ceremony_id

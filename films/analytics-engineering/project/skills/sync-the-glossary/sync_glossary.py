@@ -23,7 +23,7 @@ SKILL.md. For each entity with a source, it:
 
 --write changes only the definition and synced_on of each drifted entity, then runs
 scripts/generate/definitions.py. Open the change as a pull request with the report as its body:
-the owner of the meaning approves it, and data governance confirms the term. It never writes to
+the data team reviews it, and the owners of the meaning and its readers are told. It never writes to
 the glossary.
 """
 import argparse
@@ -259,7 +259,7 @@ def main():
     if args.report and (drifted or missing):
         head = [f"# Sync from the glossary: {len(drifted)} term(s) drifted", "",
                 f"Compared on {today} with `{Path(args.glossary).name}`, read from the glossary. "
-                "Approve: the owner of each meaning; confirm the term: data governance (DEC-PRJ-11).", ""]
+                "The meaning was decided in the glossary. The data team reviews the code; owners are told (DEC-PRJ-11).", ""]
         tail = ["## Not in the export", ""] + [f"- {m}" for m in missing] + [""] if missing else []
         Path(args.report).write_text("\n".join(head + report + tail))
         print(f"wrote {args.report}")

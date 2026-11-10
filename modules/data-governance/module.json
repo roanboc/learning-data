@@ -1,0 +1,21 @@
+{
+  "order": 7,
+  "id": "data-governance",
+  "items": [
+    "data-governance",
+    "governance-on-the-map",
+    "governance-in-practice"
+  ],
+  "name": {
+    "en": "Data governance",
+    "es": "Gobernanza de datos"
+  },
+  "who": {
+    "en": "For governance teams and data owners, and anyone asked to make the rules work",
+    "es": "Para equipos de gobernanza y dueños de datos, y para quien debe hacer que las reglas funcionen"
+  },
+  "line": {
+    "en": "Who decides what, and how each decision reaches the work: policies that run as checks, owners and tests, not on a shelf.",
+    "es": "Quién decide qué, y cómo cada decisión llega al trabajo: políticas que se ejecutan como controles, dueños y pruebas, no en un estante."
+  }
+}

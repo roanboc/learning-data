@@ -180,8 +180,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El control de títulos mide la exactitud, contra las listas aprobadas por las juntas.",
 "For names, the reference is the graduate, and the list keeps the date each name was confirmed.":
 "Para los nombres, la referencia es el graduado, y la lista guarda la fecha en que se confirmó cada uno.",
-"The data contract says it too: its rule for awards names the dimension, accuracy, and the method, reconciliation.":
-"El contrato de datos también lo dice: su regla para títulos nombra la dimensión, exactitud, y el método, conciliación.",
+"And the test it runs names its method: reconciliation, award by award.":
+"Y la prueba que ejecuta nombra su método: conciliación, título por título.",
 "And the scorecard counts them apart: allowed, and true.":
 "Y el cuadro de mando los cuenta por separado: permitido, y cierto.",
 "A check is only as true as its reference.":

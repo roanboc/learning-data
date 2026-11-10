@@ -1,0 +1,29 @@
+{
+  "key": "report-fix-tell",
+  "title": "Report, fix, tell",
+  "sub": "The second film of Quality as a habit, in Data quality: people find errors no check can see, so make it easy to report one where they see the data, send each report to its owner with a promise of when, fix it where it started, tell the person who reported it and the people who made the data, and turn each kind of error into a check.",
+  "howto": "The film is drawn in the module's look, the quality bench: a limestone wall over a granite bench, lit from a window on the right. Records are cream cards, and results are tags tied on with string: green passes, amber holds for a person, red stops, grey wasn't checked. Brass is what good means, here a promise and its due date; steel blue is a measure, such as a count of reports.",
+  "src": [
+    "rf_india.js",
+    "rf_home.js",
+    "rf_cards.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "mine",
+    "presses",
+    1.0
+  ],
+  "say": [
+    ["\\bJun\\b", "Joon"],
+    ["\\bMei\\b", "May"],
+    ["\\bA I\\b", "AI"],
+    ["\\bAndr(é|e)s\\b", "Ahn-dress"],
+    ["\\bPe(ñ|n)aloza\\b", "Pen-yah-lo-sah"]
+  ],
+  "story": [
+    "report"
+  ],
+  "urgent": [],
+  "logos": true
+}

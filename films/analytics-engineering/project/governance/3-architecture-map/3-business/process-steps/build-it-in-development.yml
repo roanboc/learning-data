@@ -1,0 +1,8 @@
+name: build it in development
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: planning contributor
+- realization: change a data product
+- triggering: open a pull request
+status: confirmed

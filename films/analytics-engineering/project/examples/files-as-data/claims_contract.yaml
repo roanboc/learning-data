@@ -1,0 +1,89 @@
+# The claims app's contract with the platform: what each field of a claim means, in the Open Data Contract Standard
+# (v3.1.0, the schema in governance/7-standards/). The app's team keeps it with the app's own code; this is a copy, for
+# *Files as data and as context*, whose *Written as data* shows its first lines and the field it follows, hours.
+# The fields are the app's own table's, which the project reads in place as the source claims_app (on DuckDB,
+# data/claims_app/claims.csv). The film never shows a claim's amount: it's a person's pay.
+apiVersion: v3.1.0
+kind: DataContract
+id: claims
+name: claims
+version: 1.0.0
+status: active
+domain: hr
+description:
+  purpose: Claims for hours worked by casual staff, as the claims app writes each one, the moment it's made.
+  usage: Read the claims where the app writes them, through Unity Catalog. HR, as Ingrid Holm, answers for what
+    each field means.
+team:
+  name: HR
+  description: Who answers for what each field of a claim means.
+  members:
+    - username: ingrid.holm@uni.example
+      name: Ingrid Holm
+      role: owner
+      description: Answers for what each field of a claim means, by name.
+schema:
+- name: claims
+  physicalType: table
+  description: One row for each claim, as it stands now, with who claimed, on which contract, whether it's
+    approved, and when.
+  properties:
+  - name: claim_id
+    logicalType: string
+    physicalType: text
+    required: true
+    primaryKey: true
+    primaryKeyPosition: 1
+    description: The claim ID the app issues, such as CL-103807
+  - name: staff_id
+    logicalType: string
+    physicalType: text
+    required: true
+    description: Who worked the hours, by the staff ID HR issues, such as E-4417
+  - name: contract_id
+    logicalType: string
+    physicalType: text
+    required: true
+    description: The contract the hours are claimed under, as HR issues it, such as T-26188
+  - name: unit_code
+    logicalType: string
+    physicalType: text
+    required: true
+    description: The unit the hours were worked for, such as HI101
+  - name: duty
+    logicalType: string
+    physicalType: text
+    required: true
+    description: What the hours were for, tutorial, marking or consultation, which are teaching, or training,
+      which isn't
+  - name: work_date
+    logicalType: date
+    physicalType: date
+    required: true
+    description: The day the hours were worked
+  - name: hours
+    logicalType: number
+    description: Hours worked, in decimal hours
+    physicalType: text
+    required: true
+  - name: amount
+    logicalType: number
+    physicalType: numeric(10,2)
+    required: true
+    description: What the claim pays, in Australian dollars, before on-costs; a person's pay, shown only in
+      totals, never for one person
+  - name: status
+    logicalType: string
+    physicalType: text
+    required: true
+    description: Where the claim stands, submitted (waiting for the unit's coordinator), approved, or returned
+      for a correction
+  - name: approved_at
+    logicalType: timestamp
+    physicalType: timestamp
+    description: When the unit's coordinator approved the claim; empty until then
+  - name: updated_at
+    logicalType: timestamp
+    physicalType: timestamp
+    required: true
+    description: When the app last changed the claim, in its own time

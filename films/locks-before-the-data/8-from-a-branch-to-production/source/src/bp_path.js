@@ -66,7 +66,8 @@ function bp_station(ctx,x,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return
    st holds, for each thing, its alpha (0 hides it) or an object with its alpha (a) and what it needs:
      rooms (a, or [dev, test, prod]): the rooms' names, inside each at its top left; glow [dev, test, prod] lights each room
      two {a, text, x, y}: the time on a slip over production; doorLit; lock {a, lit, open}
-     recs {a, flow, aside: [i, u], bad: [i, u], lit}: the registrar's records in production; tray (the "Set aside" tray); leak
+     recs {a, flow, aside: [i, u], bad: [i, u], lit}: the registrar's records in production; tray (the "Set aside" tray);
+     trayName (0 to 1, times tray: its name, shown only while no row passes under it); leak
      track {a, lay, glow, lit}; main (the station); gates [{x, label, a, lit, k}]; noGate (production's door rimmed in coral)
      repo (GitHub's page at the left), mainLine (0 to 1, the branch from it to the production door), team {a, lines, thief}
      branch (Jun's branch, 0 to 1, from main up to development), branchJoin (0 to 1: merged, the line solid and fading into main)
@@ -86,7 +87,7 @@ function bp_hall(ctx,t,st){st=st||{};const A=v=>v==null?0:typeof v==="number"?v:
   // (the tray's name is written over the records, so a row on its way to the tray passes under it)
   if(A(st.tray)>0)bp_tray(ctx,1406,576,136,null,A(st.tray));
   if(st.recs&&A(st.recs)>0){const R=st.recs;bp_rows(ctx,pbx+40,364,{a:A(R),n:8,w:pbw-80,h:14,gap:10,flow:R.flow,aside:R.aside,bad:R.bad,tray:[1416,593],from:[P.door,pby+pbh-30],lit:R.lit});}
-  if(A(st.tray)>0)dp_T(ctx,"Set aside",1474,558,{w:700,size:28,align:"center",col:"violet",a:A(st.tray)});
+  {const tn=A(st.tray)*(st.trayName==null?1:A(st.trayName));if(tn>0)dp_T(ctx,"Set aside",1474,558,{w:700,size:28,align:"center",col:"violet",a:tn});}
   if(A(st.leak)>0){const u=A(st.leak);ctx.save();ctx.strokeStyle=rgba(DP.F.coral,1);ctx.lineWidth=3.4;ctx.shadowColor=rgba(DP.F.coral,0.8);ctx.shadowBlur=12;ctx.setLineDash([12,8]);
     ag_bzPath(ctx,[P.door,590,P.door+150,530,P.x+P.w+40,380,P.x+P.w+110,290],0,u);ctx.stroke();ctx.restore();}
   // the track, its stations and gates, and the lock on production's door
@@ -116,8 +117,9 @@ function bp_hall(ctx,t,st){st=st||{};const A=v=>v==null?0:typeof v==="number"?v:
   if(st.runner&&A(st.runner)>0){const R=st.runner,a=A(R),x=lerp(-180,350,ag_eo(R.u==null?1:R.u));ctx.save();ctx.globalAlpha*=a;dp_panel(ctx,x,520,150,110,{col:"cyan",r:16});
     ctx.save();ctx.translate(x+75,582);ctx.scale(0.5,0.5);dp_gearPic(ctx,0,0,"cyan");ctx.restore();ctx.restore();}
   // the note GitHub gives the deploy for one sign-in, sealed; and one from another branch, which stops short
-  if(st.other&&A(st.other)>0){const O=st.other;dp_sealed(ctx,O.x,O.y,450,"registrar-loader",{sub:"From another branch",col:"grey",a:A(O)});if(O.stop>0)dp_cross(ctx,O.x+410,O.y+60,"coral",O.stop);}
-  if(st.note&&A(st.note)>0){const N=st.note;dp_sealed(ctx,N.x,N.y,450,"registrar-loader",{sub:N.sub||"From GitHub Actions",a:A(N)});}
+  // (the notes are sealed cards without the hall frosted in them: over the lit rooms, the frost left their lower line too faint)
+  if(st.other&&A(st.other)>0){const O=st.other;dp_sealed(ctx,O.x,O.y,450,"registrar-loader",{sub:"From another branch",col:"grey",a:A(O),behind:false});if(O.stop>0)dp_cross(ctx,O.x+410,O.y+60,"coral",O.stop);}
+  if(st.note&&A(st.note)>0){const N=st.note;dp_sealed(ctx,N.x,N.y,450,"registrar-loader",{sub:N.sub||"From GitHub Actions",a:A(N),behind:false});}
   if(A(st.agent)>0){ag_model(ctx,BP_AT.main-110,BP_TRACK-70,38,{t,a:A(st.agent)});}
   if(st.badge&&A(st.badge)>0){const B=st.badge;ctx.save();ctx.translate(B.x,B.y);ctx.scale(B.s,B.s);
     dp_badge(ctx,0,0,600,372,{kind:"Workload identity",title:"registrar-loader",lines:[["Owned by Sam Okafor"],["Deploys and runs production"]],pic:dp_gearPic,t,a:A(B),behind:"bpHall"});ctx.restore();}}

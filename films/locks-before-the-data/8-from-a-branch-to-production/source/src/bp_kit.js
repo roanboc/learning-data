@@ -18,7 +18,9 @@ function bp_kick(ctx,S,t,top,title,t0,t1){const a=bp_io(t,t0,t1,0.6);if(a<=0)ret
 const BP_LESSONS=["Rules set before the change","Checked by someone who didn't write it","In force only once both are done"];
 function bp_lessons(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const u=o.u||0,lit=o.lit||[1,1,1],each=o.each||[1,1,1],by=o.by==null?640:o.by;
   BP_LESSONS.forEach((s,i)=>{const ea=a*each[i];if(ea<=0)return;const L=lit[i];
-    if(u<0.5){ctx.save();ctx.globalAlpha*=ea;dp_card(ctx,130+i*570,by,520,{kick:"0"+(i+1),title:s},{col:L>0.5?"cyan":"grey",behind:o.behind});ctx.restore();return;}
+    // (a dark layer under each big card, so its number reads over the lit seats and benches seen through it)
+    if(u<0.5){ctx.save();ctx.globalAlpha*=ea;const cx=130+i*570,wd={kick:"0"+(i+1),title:s},co={col:L>0.5?"cyan":"grey",behind:o.behind},bb=dp_card(ctx,cx,by,520,wd,Object.assign({measure:true},co));
+      rr(ctx,bb.x,bb.y,bb.w,bb.h,20);ctx.fillStyle="rgba(3,12,16,0.6)";ctx.fill();dp_card(ctx,cx,by,520,wd,co);ctx.restore();return;}
     const size=28,w=dp_tw(ctx,s,{w:700,size})+48,sx=1880-w,sy=60+i*74;ctx.save();ctx.globalAlpha*=ea;
     dp_slip(ctx,sx,sy,s,L>0.5?"cyan":"grey",{size,ink:L>0.5,behind:o.behind});if(L>0.02)dp_tick(ctx,sx-30,sy+34,"green",L);ctx.restore();});}
 

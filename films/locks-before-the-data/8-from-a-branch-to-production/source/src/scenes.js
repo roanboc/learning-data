@@ -47,8 +47,8 @@ scene("principles",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
         if(r1>0)dp_tag(x,250,ty+40,"Rights for everyone","ink",{a:r1,to:sp[0],p:ag_in(t,P.rights,0.5)});
         if(r2>0)dp_tag(x,1300,ty+40,"Judges no party controls","ink",{a:r2,to:sp[1],p:ag_in(t,P.judges,0.5)});}
       const tg=ag_in(t,P.temp-0.2,0.5);if(tg>0)dp_slip(x,960,ty+452,"The interim Constitution · in force 27 April 1994","grey",{a:tg,ink:true,align:"center"});
-      const nb=ag_in(t,P.fixedN-0.2,0.5);if(nb>0){x.save();x.globalAlpha*=nb;const bx=760,by=ty+330;dp_panel(x,bx,by,400,66,{col:"coral",r:14,glowR:26});dp_lock(x,bx+42,by+34,34,"coral",0);
-        dp_T(x,"Nobody may change them",bx+80,by+44,{w:700,size:28,col:"coral"});x.restore();}}},
+      const nb=ag_in(t,P.fixedN-0.2,0.5);if(nb>0){x.save();x.globalAlpha*=nb;const pw=dp_tw(x,"Nobody may change them",{w:700,size:28})+36,gx=960-(pw+56)/2,by=ty+330;
+        dp_lock(x,gx+18,by+29,34,"coral",0);dp_pill(x,gx+56,by+44,"Nobody may change them","coral",{size:28});x.restore();}}},
     // the Assembly will write the text; it counts only once the Court, which didn't write it, certifies it keeps every principle
     {at:c.assembly-0.3,place:"bpChamber",cut:true,keys:[[c.assembly-0.3,960,540,1.0]],d:2.0,draw:(x,t)=>{
       const all=ag_in(t,c.assembly+0.2,1.4);bp_seatsLit(x,{blocks:BP_PARTY.map(()=>0.6),all});
@@ -162,13 +162,14 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
   const gates=bp_gates(t,{a:[1,1,1,0]});
   ag_shots(ctx,S,t,sc.dur,[
     // the hall: Jun at the left; the morning the load stopped on a row it couldn't read; now the job sets such a row aside
-    {at:0,place:"bpHall",d:2.2,keys:[[0,960,540,1.0],[c.branch+0.3,800,600,1.2]],draw:(x,t)=>{
-      bp_hall(x,t,{rooms:1,doorLit:1,track:{a:1},main:1,gates,branch:ag_in(t,P.branchW-0.2,1.6),
-        recs:{a:1,flow:1,lit:1,bad:[3,ag_in(t,P.read-0.2,0.5)],aside:[3,ag_in(t,P.asideW,1.1)]},tray:ag_in(t,P.asideW-0.5,0.5)});
+    {at:0,place:"bpHall",d:2.2,keys:[[0,960,540,1.0],[c.branch+0.3,800,600,1.2]],draw:(x,t)=>{const dv=ag_in(t,P.dev+0.2,0.6);
+      // (the development room's name is under Jun's page, so it leaves as the page comes in; the tray's name comes once the row is in it)
+      bp_hall(x,t,{rooms:[1-dv,1,1],doorLit:1,track:{a:1},main:1,gates,branch:ag_in(t,P.branchW-0.2,1.6),
+        recs:{a:1,flow:1,lit:1,bad:[3,ag_in(t,P.read-0.2,0.5)],aside:[3,ag_in(t,P.asideW,1.1)]},tray:ag_in(t,P.asideW-0.5,0.5),trayName:ag_in(t,P.asideW+1.0,0.5)});
       bp_left(x,"sam",t,1-ag_in(t,0,0.5));bp_left(x,"jun",t,ag_in(t,0.7,0.6));
       const am=ag_io(t,P.admin-0.4,c.aside+0.2,0.5);if(am>0)dp_card(x,700,110,560,{kick:"Power you switch on",title:"Jun's admin account",sub:"Switched on to read last night's file"},{col:"amber",a:am,k:ag_spr(t,P.admin-0.4,0.6)});
       // in development: Jun's own copy of the job, its schedule paused, on made-up records
-      const dv=ag_in(t,P.dev+0.2,0.6);if(dv>0){const b=bp_dbJob(x,380,180,830,250,{a:dv,where:"development",title:"[dev jun_park] registrar_nightly_load"});
+      if(dv>0){const b=bp_dbJob(x,380,180,830,250,{a:dv,where:"development",title:"[dev jun_park] registrar_nightly_load"});
         dp_pill(x,b.x,b.y+46,"Schedule paused","grey",{size:28,a:dv});
         const mu=ag_in(t,P.madeUp-0.2,0.5);if(mu>0)dp_tag(x,420,470,"Made-up records","green",{a:mu,to:[805,560]});}}},
     // his pull request: its checks; Sam's review of one line; changes requested, the line taken out, the last push approved; merged
@@ -212,7 +213,8 @@ scene("door",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
       const rt=ag_io(t,P.machines+0.6,c.private+0.4,0.5);if(rt>0)dp_tag(x,362,140,"Runner group · university-network","cyan",{a:rt,to:[425,520]});
       const nk=ag_io(t,P.nsk-0.2,c.test-0.4,0.5);if(nk>0)dp_tag(x,1100,140,"From Network, storage and keys","grey",{a:nk,to:[1300,214]});}},
     // GitHub's run: test first, as registrar-loader-test; production waits for a release approver; the box that asks Noor
-    {at:c.test-0.2,place:"bpDesk",keys:[[0,960,540,1.0]],draw:(x,t)=>{
+    // (a cut, both ways: the run's jobs are named test and production, as the hall's rooms are, and a dissolve would show both)
+    {at:c.test-0.2,place:"bpDesk",cut:true,keys:[[0,960,540,1.0]],draw:(x,t)=>{
       // the run leaves before the box that asks a release approver comes in, so the two pages' words never show at once
       const ro=ag_in(t,c.self-0.7,0.45);x.save();x.globalAlpha*=1-ro;
       const b=bp_ghRun(x,80,60,{}),tp=ag_in(t,c.passes,0.5),pw=ag_in(t,c.waits+0.2,0.4);
@@ -234,7 +236,7 @@ scene("door",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
       bp_right(x,"noor",t,ag_in(t,P.noorW-0.2,0.6),{nod:0.07*Math.sin(Math.PI*clamp((t-P.approves)/0.9,0,1))});}},
     // the hall: the note for one sign-in fits production's lock; one from another branch stops short; the bundle deploys, the job
     // runs as registrar-loader, and people may only look
-    {at:c.asks-0.3,place:"bpHall",d:2.2,keys:[[c.asks-0.3,1209,570,1.35],[c.deploys-0.3,1209,590,1.35],[P.two-0.4,960,540,1.0]],draw:(x,t)=>{
+    {at:c.asks-0.3,place:"bpHall",cut:true,d:2.2,keys:[[c.asks-0.3,1209,570,1.35],[c.deploys-0.3,1209,590,1.35],[P.two-0.4,960,540,1.0]],draw:(x,t)=>{
       const nu=ag_sine(clamp((t-c.asks-0.2)/2.2,0,1)),inn=ag_in(t,c.deploys-0.4,0.8),ou=ag_sine(clamp((t-P.thisRepo)/1.6,0,1));
       bp_hall(x,t,Object.assign({},base,{outline:1,runner:{a:1,u:1},priv:0.35,track:{a:1,lit:[0,ag_in(t,P.machineW,1.6),1]},
         gates:bp_gates(t,{lit:[0,1,2,3].map(i=>ag_in(t,P.two+i*0.3,0.5))}),lock:{a:1,lit:ag_in(t,P.letsIn,0.6),open:ag_in(t,c.deploys-0.2,0.6)},
@@ -260,10 +262,11 @@ scene("supply",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     // one way in is easy to miss: code from outside the university, running on the runner
     {at:0,place:"bpHall",keys:[[0,960,540,1.0]],draw:(x,t)=>{bp_hall(x,t,hall);
       const ou=ag_in(t,P.nobodyU-0.3,1.4);if(ou>0){bp_poly(x,[[0,575],[348,575]],ou,"grey",{dash:[10,9],alpha:0.9,lw:2.6});
-        dp_tag(x,40,400,"Code nobody at the university wrote","grey",{a:ag_in(t,P.nobodyU,0.5),size:28});}}},
+        dp_slip(x,40,396,"Code nobody at the university wrote","grey",{a:ag_in(t,P.nobodyU,0.5),size:28,ink:true});}}},
     // the workflow on GitHub: two actions beside the production key; a tag that moves; CodeQL's flag; pinned to commits; then
     // Dependabot's pull requests; then what the workflow's token may do
-    {at:c.actions-0.2,place:"bpDesk",keys:[[0,960,540,1.0]],draw:(x,t)=>{
+    // (a cut: the page names the branch main, as the hall's track does)
+    {at:c.actions-0.2,place:"bpDesk",cut:true,keys:[[0,960,540,1.0]],draw:(x,t)=>{
       const f1=1-ag_in(t,c.dependabot-0.2,0.5);
       if(f1>0){const b=bp_ghFile(x,80,60,".github/workflows/deploy.yml",{a:f1,h:700}),fl=ag_io(t,P.flagsW-0.2,c.pins-0.1,0.5),old=1-ag_in(t,c.pins+1.0,0.4),nw=ag_in(t,c.pins+1.4,0.5),gl=ag_io(t,c.commit,c.commit+1.6,0.5);
         const hi=(w)=>ag_in(t,w-0.2,0.5)*(1-fl);
@@ -310,7 +313,7 @@ scene("force",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
       const sl=ag_in(t,P.setsAside,1.1)-ag_in(t,P.fixesW+0.4,1.1),bad=n2?ag_in(t,P.unread-0.2,0.5)*(1-ag_in(t,P.fixesW+0.8,0.6)):0;
       const two=t<c.week+0.25?{a:ag_io(t,0.4,c.week-0.3,0.5),text:"Wednesday 11 November · 02:00",y:215}:{a:ag_io(t,c.week+0.3,c.office-0.3,0.5),text:"Wednesday 18 November · 02:00",y:215};
       bp_hall(x,t,{rooms:1,doorLit:1,main:1,track:{a:1,lit:[0,1,1]},gates:bp_gates(t,{lit:[1,1,1,1]}),lock:{a:1,lit:1,open:1},two,
-        recs:{a:ra,flow:fl,lit:1,bad:[5,bad],aside:[5,clamp(sl,0,1)]},tray:ag_in(t,P.setsAside-0.5,0.5)*(1-ag_in(t,P.nine+0.6,0.6)),
+        recs:{a:ra,flow:fl,lit:1,bad:[5,bad],aside:[5,clamp(sl,0,1)]},tray:ag_in(t,P.setsAside-0.5,0.5)*(1-ag_in(t,P.nine+0.6,0.6)),trayName:ag_in(t,P.setsAside+1.0,0.5)*(1-ag_in(t,P.fixesW+0.2,0.4)),
         pulse:{u:t<P.ecr?ag_in(t,P.faster-0.2,1.8):ag_in(t,P.ecr+0.6,3.4),a:ag_io(t,P.faster-0.2,P.faster+1.8,0.3)+ag_io(t,P.ecr+0.6,P.ecr+4.0,0.3)},
         agent:ag_in(t,P.agentW-0.2,0.6)});
       const ev=ag_io(t,P.quarter-0.3,c.office-0.4,0.5);if(ev>0)dp_card(x,620,200,660,{kick:"Wednesday 18 November",title:"Every other record in by 02:15"},{col:"green",a:ev,k:ag_spr(t,P.quarter-0.3,0.6)});
@@ -326,4 +329,4 @@ scene("force",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
   bp_kickU(ctx,S,t,"In force at two");
   dp_end(ctx,S,t,c.breath,BP_FILM,"Production changes only through a reviewed path.","Film 8 of 9","Locks before the data");});
 
-ag_cutInto(["sent","nogate","rules","review","supply"]);
+ag_cutInto(["sent","nogate","rules","review","supply","force"]);

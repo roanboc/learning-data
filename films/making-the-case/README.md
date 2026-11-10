@@ -11,6 +11,7 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Risks, said out loud](https://data.learn-all.org/making-the-case/risks-said-out-loud/) | A risk register that lives | 7 min | 6 | 3 questions | [script](2-risks-said-out-loud/script.md) · [source](2-risks-said-out-loud/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

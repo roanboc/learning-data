@@ -1,0 +1,36 @@
+# The staff domain's conceptual model: the university's staff and the work they're paid for. Owned
+# by HR, which answers for what payroll's figures mean.
+#
+# Not parsed by dbt (.dbtignore). scripts/generate/definitions.py turns each definition into a
+# doc block in _staff__definitions.md, next to this file, which the dbt YAML shows with doc() and
+# Databricks pushes to Unity Catalog. The diagram is drawn by hand in _staff__conceptual.md.
+# The university's map, with this domain on it, is in models/_shared/; the questions are in each
+# mart's conceptual model. Only the claim is modelled so far: the staff member and the appointment
+# are on the map, planned.
+
+domain: staff
+reference:
+  model: TCSI
+  packet: Staff
+  adopted: Nothing yet. TCSI's Staff packet reports staff and their appointments, which are planned here.
+  extended:
+    - A claim for hours worked is the university's own, not in TCSI. It is what casual staff are paid from.
+
+entities:
+
+  - name: claim
+    definition: >
+      A casual staff member's claim for hours they worked: for one unit, one duty and one day,
+      under their contract for that teaching period. The unit's coordinator approves it, or
+      returns it for a correction; an approved claim is paid on a pay day.
+    owner: HR
+    business_key:
+      issued_by: The claims app
+      rule: The claim ID the app issues, qualified by its key set, CLM|CL-104233.
+    rules:
+      - Hours are decimal hours, as the claims app's contract says, 1.50 for an hour and a half.
+      - Only an approved claim is paid. A submitted claim waits for its coordinator, and a returned one for a correction.
+      - A claim approved by noon on the Monday before a pay day is paid that Thursday, and one approved later on the next pay day (pay_day_for(), on payroll's calendar, the seed pay_days).
+      - The contract it's claimed under gives its pay type and its teaching period.
+    history: As it stands now. The claims app changes a claim in place, from submitted to approved or returned, and keeps no versions.
+    no_glossary_term: {confirmed_by: data governance, confirmed_on: 2026-03-04}

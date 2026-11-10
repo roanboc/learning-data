@@ -71,6 +71,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
 - [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
+- [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 
 ### Data as software
 

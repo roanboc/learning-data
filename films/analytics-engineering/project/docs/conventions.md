@@ -292,12 +292,12 @@ implemented in them, the exposures, and the owners to ask. CI writes it into the
 
 Every public model and mart is an output of one data product, in `governance/4-data-products/<name>.yml`: its owner,
 domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
-and support, written by its owner. `scripts/generate/products.py` writes each product in the open
-standards, from that file and the dbt contracts: a product descriptor (`governance/6-product-descriptors/`) and a
-contract for each output (`governance/5-data-contracts/`), with the columns, types, keys, classes, tests and known
-limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
-if they're out of date, don't validate against the standards' schemas, or a shared model is in no
-product.
+and support, written by its owner. `scripts/generate/products.py` writes each product's descriptor in the
+open standard, from that file and the dbt models (`governance/6-product-descriptors/`), with the consumers from
+the lineage. Only canonical tables, the public models, have an enterprise contract (`governance/5-data-contracts/`):
+data governance's information architect writes it first, and the data team builds the model to it. The
+script fails if a model differs from its contract, a canonical table has none, a file doesn't validate
+against its standard's schema, or a shared model is in no product; `--check` in CI, if a descriptor is out of date.
 
 On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
 after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
@@ -315,12 +315,20 @@ Each use is an exposure. In the model's YAML, `meta.quality` holds one requireme
 the `level` agreed (`Zero wrong`, `Within 2% at each ceremony`), who it was agreed with
 (`agreed_with`) and what goes wrong when it isn't met (`business_impact`). The model's owner owns
 the levels. A column a use can't do without names that use in `meta.critical_for`: the use's
-critical data. `scripts/generate/products.py` writes each requirement into the contract as a
-quality rule in words (`type: text`), with its use, level and who agreed it, until a check
-measures it, and each critical column as a critical data element (`criticalDataElement: true`).
+critical data. Each requirement stays in the model's YAML, in words, with its use, level and who
+agreed it, until a check measures it; for a canonical table, the information architect writes it
+into the enterprise contract too, as a quality rule and its critical data elements.
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.
+
+A requirement about how old the data may be, timeliness, sits on the column that says its age.
+The graduation list has two, `student_system_as_of` and `portal_as_of`: when the night's files
+it was built from arrived, from each source's receipts (`nightly_files`). Each carries its level
+in its own `meta.quality`, and the product's latency names them as its `element`. The freshness
+check that measures it is on the receipts, at the same level: `error_after` only, with
+`warn_after: null`, because the night's job runs the check first and its failure is the warning
+(`examples/a-late-file/`).
 
 ### Which reference
 
@@ -332,7 +340,7 @@ boards make from their own decisions. A check against a copy of the same source 
 consistency, not accuracy: the copy shares the source's gaps, and agrees with them. So every
 accuracy test names its reference in `meta.reference`, beside its owner and dimension; a
 reconciliation, row by row, is the generic test `reconciles_with` (`tests/generic/`), whose method,
-`reconciliation`, goes into the contract with the reference (`scripts/generate/products.py`); and
+`reconciliation`, sits in its `meta` beside the reference (and in an enterprise contract, too); and
 the scorecard lists each accuracy test with its reference. A column whose values a reference
 confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
 `name_as_printed`, the graduate, on `name_confirmed_on`.

@@ -88,6 +88,7 @@
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | A hundred records | 312 | 0% | 0 | 28.2 | Drawn to the rule |
 | Valid isn't true | 254 | 0% | 0 | 28.6 | Drawn to the rule |
+| Late is wrong too | 286 | 0% | 0 | 28.4 | Drawn to the rule |
 | Five stages, not a switch | 309 | 0% | 0 | 30.0 | Drawn to the rule |
 | Borrowed rights | 329 | 0% | 0 | 30.0 | Drawn to the rule |
 | A place on the map | 314 | 0% | 0 | 29.7 | Drawn to the rule |
@@ -107,6 +108,7 @@
 | How long, and then what | 203 | 0% | 0 | 28.4 | Drawn to the rule |
 | Forgetting a person | 240 | 0% | 0 | 30.0 | Drawn to the rule |
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
+| A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |

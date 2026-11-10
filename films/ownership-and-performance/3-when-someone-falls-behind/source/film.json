@@ -1,0 +1,42 @@
+{
+  "key": "when-someone-falls-behind",
+  "title": "When someone falls behind",
+  "sub": "Film 3 of Ownership and performance, in Leading data people: when one person's work falls behind the team's. Find the cause before you judge: training, fit for the role, or a hard time. Clear what's in the way, measure the gap against the team's own change, and give it time.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (Tomás's own plan), orange is data (the days from a request to first use), green is something done or a blocker cleared, and amber a risk or a gap (the gap between his work and the team's).",
+  "src": [
+    "fb_plant.js",
+    "fb_uni.js",
+    "fb_scenes.js"
+  ],
+  "poster": [
+    "gap",
+    "june",
+    2.6
+  ],
+  "say": [
+    [
+      "\\bNUMMI\\b",
+      "New-me"
+    ],
+    [
+      "\\bTomás\\b",
+      "Toh-mahss"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMager\\b",
+      "Mayger"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "nummi"
+  ],
+  "urgent": []
+}

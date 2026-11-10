@@ -1,0 +1,251 @@
+1
+00:00:03,000 --> 00:00:12,248
+Pisa, Italy. Its marble bell tower, begun in 1173, has leaned since it was being built, because the ground beneath it is soft.
+
+2
+00:00:14,148 --> 00:00:21,136
+By 1990, its top hangs about four and a half metres out past its base, and each year it leans a little further.
+
+3
+00:00:22,836 --> 00:00:31,212
+In March 1989, a medieval tower in another Italian city, Pavia, had suddenly collapsed, killing four people.
+
+4
+00:00:32,912 --> 00:00:38,607
+In January 1990, Pisa's tower was closed to visitors, for fear it could fall too.
+
+5
+00:00:40,307 --> 00:00:47,413
+Its stone was fragile: a fall could kill anyone near it, and take from the city the tower people cross the world to see.
+
+6
+00:00:49,113 --> 00:00:54,943
+And any work was a risk: the slightest disturbance to the ground on its leaning side could bring it down.
+
+7
+00:00:56,643 --> 00:00:59,839
+Something had to change, without the work itself toppling it.
+
+8
+00:01:01,739 --> 00:01:09,433
+That spring, Italy's government appointed an international committee: engineers, architects and experts in old monuments.
+
+9
+00:01:10,933 --> 00:01:18,429
+Before choosing how, they agreed what saving it would mean: a small change, about half a degree, too little for anyone to see.
+
+10
+00:01:20,129 --> 00:01:24,109
+But enough to ease the strain on its stone, and steady the ground beneath it.
+
+11
+00:01:26,009 --> 00:01:31,996
+Their method: draw a little soil from under the high, north side, so the tower would settle back towards it.
+
+12
+00:01:33,696 --> 00:01:38,730
+They tried it first on a test footing, while lead weights on the north side held the tower still.
+
+13
+00:01:40,430 --> 00:01:47,412
+From February 1999, they did it under the tower itself, a little at a time, and it began to lean back.
+
+14
+00:01:49,312 --> 00:01:55,989
+Every day, the engineer in charge signed a note: how the tower had moved, and exactly what to take out next.
+
+15
+00:01:57,889 --> 00:02:06,383
+By the summer of 2001, its top had come back about 45 centimetres, to the lean it had in the early 1800s.
+
+16
+00:02:08,083 --> 00:02:13,929
+In December 2001, it reopened to visitors, still leaning, as it always has.
+
+17
+00:02:15,629 --> 00:02:20,140
+Its engineers expect at least two hundred years before it leans as far again.
+
+18
+00:02:22,040 --> 00:02:29,339
+At a university, a request for a dashboard hid a decision worth about A$140 million.
+
+19
+00:02:30,839 --> 00:02:37,611
+Half an hour of listening found it, and one page, agreed in writing, turned it into a question the team could answer.
+
+20
+00:02:45,911 --> 00:02:49,698
+These three films are about working with the people who ask for data.
+
+21
+00:02:51,398 --> 00:02:59,706
+Thursday 11 February 2027: Graham Ellis, new this year as Director of Facilities, emails the data team.
+
+22
+00:03:01,206 --> 00:03:03,705
+“Could I have a dashboard of room use, by Easter?”
+
+23
+00:03:05,605 --> 00:03:07,831
+It sounds clear: a thing, and a date.
+
+24
+00:03:09,331 --> 00:03:14,483
+But a request usually names someone's guess at a solution. What it's for, it doesn't say.
+
+25
+00:03:16,383 --> 00:03:21,380
+Build exactly what was asked, and a team can deliver on time and still help nobody.
+
+26
+00:03:23,280 --> 00:03:29,985
+So Helena Novak, the data manager, asks Graham for half an hour, with Noor, the team's data architect.
+
+27
+00:03:32,685 --> 00:03:39,449
+Tuesday 16 February, in Graham's office. They ask a few open questions, then mostly listen.
+
+28
+00:03:41,149 --> 00:03:49,947
+What will you decide with it? Whether to ask the University Council for a new teaching building: forty rooms, about A$140 million.
+
+29
+00:03:51,847 --> 00:04:01,243
+By when? His paper is due on 1 June, and the University Council decides on 24 June. Easter was a guess at a safe date.
+
+30
+00:04:03,143 --> 00:04:11,699
+Who else decides? The University Council, on his advice. And the academics will read it closely: they say the rooms are always full.
+
+31
+00:04:13,599 --> 00:04:20,340
+What do you already trust? What he has seen on his walks: empty corridors on Monday mornings and Friday afternoons.
+
+32
+00:04:22,240 --> 00:04:29,078
+What would change your mind? If rooms are short at every hour, he'll ask to build. If only at some hours, perhaps not.
+
+33
+00:04:31,178 --> 00:04:38,259
+Edgar Schein called this humble inquiry: asking what you don't already know, out of real interest in the other person.
+
+34
+00:04:39,959 --> 00:04:46,888
+Carl Rogers and Richard Farson called the other half active listening: hearing the whole meaning, then saying it back.
+
+35
+00:04:48,588 --> 00:04:56,796
+Some teams ask “why?” five times over. Asked bluntly, it can sound like doubt; “what will you decide with it?” gets there kindly.
+
+36
+00:04:59,496 --> 00:05:06,475
+Near the end, Helena says back what she heard: a decision about a building, and a question about how the rooms are used.
+
+37
+00:05:08,175 --> 00:05:13,946
+Graham stops her at one word: by “used”, he means people in the room. A booking isn't use.
+
+38
+00:05:16,046 --> 00:05:22,455
+That one word decides the data: the timetable's bookings, beside the head counts from each room's sensor.
+
+39
+00:05:24,355 --> 00:05:30,982
+In Pisa, saving meant half a degree, not a straight tower. Here, use means people in the room, not bookings.
+
+40
+00:05:32,682 --> 00:05:36,035
+Then Noor writes the question down with him, on one page.
+
+41
+00:05:37,535 --> 00:05:40,297
+“Do we have too few rooms, or too few at some hours?”
+
+42
+00:05:42,397 --> 00:05:48,057
+Under it go the decision, the dates, who decides, what would change his mind, and what “used” means.
+
+43
+00:05:49,757 --> 00:05:55,508
+His own words stay at the top, beside the question, so anyone can see how one became the other.
+
+44
+00:05:57,408 --> 00:06:01,172
+That afternoon, Graham replies to the page: “Yes, that's it.”
+
+45
+00:06:03,872 --> 00:06:10,254
+Then the request waits its turn, like every other, until the team takes it up on Tuesday 30 March.
+
+46
+00:06:11,954 --> 00:06:19,329
+In March, Ivy Reyes, a new graduate analyst, follows that question through the team's work, starting from the page.
+
+47
+00:06:21,029 --> 00:06:27,342
+On 30 March, the team starts from the same page, and by 23 April it has an answer.
+
+48
+00:06:29,042 --> 00:06:33,306
+Across the whole week, the rooms are booked only 38% of the time.
+
+49
+00:06:35,006 --> 00:06:39,888
+But between 10:00 and 14:00, Tuesday to Thursday, 93% of them are booked.
+
+50
+00:06:41,788 --> 00:06:45,367
+And one booked hour in five, the sensors counted nobody there.
+
+51
+00:06:47,267 --> 00:06:51,947
+So the answer to his question: not too few rooms, but too few at some hours.
+
+52
+00:06:54,047 --> 00:07:00,248
+The academics were right about the peak, and Graham about Monday mornings: the week's average had hidden both.
+
+53
+00:07:02,148 --> 00:07:06,107
+A dashboard by Easter might have shown that average, and settled nothing.
+
+54
+00:07:07,807 --> 00:07:13,352
+Instead, he had an answer to the question his decision turned on, weeks before his paper was due.
+
+55
+00:07:16,052 --> 00:07:21,690
+In Pisa, the committee didn't start by digging. It first agreed what saving the tower would mean.
+
+56
+00:07:23,390 --> 00:07:27,599
+Then every day, a signed note said how it had moved, and what to do next.
+
+57
+00:07:29,299 --> 00:07:36,143
+Graham's request got the same care: the decision found, the question agreed in writing, and an answer in time.
+
+58
+00:07:38,043 --> 00:07:46,131
+From June, the team's front door, a form, asks five questions like these. A form can ask; listening hears what the answers mean.
+
+59
+00:07:48,031 --> 00:07:54,093
+On Monday, when someone asks you for a report or a dashboard, ask what they'll decide with it, and by when.
+
+60
+00:07:55,593 --> 00:07:59,876
+Ask who else decides, what they already trust, and what would change their mind.
+
+61
+00:08:01,376 --> 00:08:04,109
+Listen more than you talk, and say back what you heard.
+
+62
+00:08:05,609 --> 00:08:09,212
+Then write the question down beside their words, and agree it with them.
+
+63
+00:08:10,912 --> 00:08:13,259
+Ask what it's for, and agree it in writing.

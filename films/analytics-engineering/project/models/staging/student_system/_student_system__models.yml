@@ -197,7 +197,7 @@ models:
         config:
           meta: {personal_data: direct}
       - name: family_name
-        description: As the student system holds it, in a field of 30 characters.
+        description: As the student system holds it, in a field of 100 characters since 14 September 2026, 30 before.
         config:
           meta: {personal_data: direct}
       - name: conferred_on
@@ -216,6 +216,9 @@ models:
           - accepted_values:
               arguments:
                 values: [ATT, ABS]
+      - name: record_created_on
+        description: The day the student's record was first made. A student who comes back keeps it, and the name it was made with.
+        data_tests: [not_null]
       - name: recorded_from
         description: '{{ doc("recorded_from") }}'
       - name: recorded_to

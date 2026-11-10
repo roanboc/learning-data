@@ -23,8 +23,22 @@ erDiagram
         timestamp student_system_as_of
         timestamp portal_as_of
     }
+    mart_graduations__name_reports {
+        string report_bk PK
+        string student_bk
+        string ceremony_id
+        string name_given
+        timestamp reported_at
+        string owner
+        date due_on
+        timestamp answered_at
+        timestamp told_at
+        boolean answered_in_time
+        string record_made_by
+    }
 ```
 
 | Model | Grain | Access | Contract |
 |---|---|---|---|
 | `mart_graduations__graduation_list` | One row per certificate, a graduate, an award and a ceremony. | protected | enforced |
+| `mart_graduations__name_reports` | One row per report, a graduate's correction of their name for a ceremony. | protected | enforced |

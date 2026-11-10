@@ -168,5 +168,6 @@ customProperties:
   value: core_claim_v1
 - property: consumers
   value:
+  - product casual_teaching_cost
   - product hours_to_pay
   - product payroll_export

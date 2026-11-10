@@ -1,0 +1,29 @@
+{
+  "key": "explaining-to-decide",
+  "title": "Explaining so people can decide",
+  "sub": "The second film of Working with people, the second series of Leading data people: explaining so people can decide. Lead with the decision, show the part of the data it turns on, say what isn't known, and let the people who decide, decide. A data analyst turns a twelve-page draft into one page for the University Council, with the week's heat map beside it.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the designers' range, and the decision on the page), orange is data (the flyers' measurements, and the week's bookings), green is something that fits or is decided (nine flyers in ten, and the University Council's decision), and amber a risk or what isn't known (the men who stoop, the peak, and growth to 2030).",
+  "src": [
+    "ed_pilot.js",
+    "ed_uni.js",
+    "ed_scenes.js"
+  ],
+  "poster": [
+    "turns",
+    "peak",
+    6.4
+  ],
+  "say": [
+    ["\\bReyes\\b", "Rayess"],
+    ["\\bMei\\b", "May"],
+    ["\\bTufte's\\b", "Tuftee's"],
+    ["\\bKnaflic's\\b", "Naflick's"],
+    ["\\bNussbaumer\\b", "Noosbowmer"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "pilot"
+  ],
+  "urgent": []
+}

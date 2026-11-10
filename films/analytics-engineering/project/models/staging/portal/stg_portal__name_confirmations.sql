@@ -18,6 +18,8 @@ renamed as (
         trim(name_as_printed) as name_as_printed,
         cast(confirmed_at as timestamp) as confirmed_at,
         cast(checked_on as date) as checked_on,
+        cast(answered_at as timestamp) as answered_at,
+        cast(told_at as timestamp) as told_at,
         cast(_valid_from as timestamp) as recorded_from,
         cast(_valid_to as timestamp) as recorded_to,
         cast(_is_current as boolean) as is_current_version,

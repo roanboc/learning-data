@@ -1,0 +1,79 @@
+{
+  "kicker": "Discovery, before design",
+  "kicker_es": "Descubrir antes de diseñar",
+  "title_es": "Primero, escuchar",
+  "h1": "Listen first: ask people, count, and write down what is",
+  "h1_es": "Primero, escuchar: pregunta, cuenta y escribe lo que hay",
+  "lead": "In February 2027 Helena Novak becomes the university's data manager. Before designing anything, she spends six weeks listening: 31 people asked the same three questions, the strategy read, the systems counted. By 15 March the current state is in five layers, and sent back to everyone she heard.",
+  "lead_es": "En febrero de 2027, Helena Novak llega como gestora de datos de la universidad. Antes de diseñar nada, pasa seis semanas escuchando: 31 personas, las mismas tres preguntas, la estrategia leída, los sistemas contados. Para el 15 de marzo, la situación actual está en cinco capas, y vuelve a todos.",
+  "description": "A film about discovery, the second of A plan in ninety days and of the module Data management: before designing anything, find out what the organisation decides, what data it trusts and what slows it down, from people, from what's written and from the systems themselves; TOGAF's baseline (the current state) and lean's go and see (genchi genbutsu), named once; Helena Novak, the university's new data manager, spends her first six weeks, from February 2027, in 31 conversations with the same three questions (what do you decide, what data do you trust, what slows you down), going to where people work and writing down what she hears in their own words; she reads the strategy to 2030 and its four goals, the digital strategy and an earlier assessment's twelve decisions; she counts from the systems: 41 working days, on average, from a request to its first use, and the old warehouse's 38 reports, 17 not opened in a year and 21 used by about 260 people, at 310,000 Australian dollars a year, its licence ending on 31 December; three findings (eleven ways to ask for data, three copies of the staff list, about 40 people doing data work in spreadsheets) and one thing that already works (the graduation list's fifteen minutes every Thursday); she writes the current state in five layers, strategy, business, information, application and technology, each a page with its picture, giving information a layer of its own where ArchiMate keeps it in its business and application layers; she writes each finding as an opportunity, seven in all, and on Monday 15 March sends a summary back to everyone she spoke to: this is what I heard; tell me what I got wrong. It opens in Accra in the early 1930s, where the mothers of the Ga people had a name for the sickness that was killing their children, kwashiorkor, and Cicely Williams listened.",
+  "description_es": "Una película sobre el descubrimiento, la segunda de Un plan en noventa días y del módulo Gestión de datos: antes de diseñar nada, averiguar qué decide la organización, en qué datos confía y qué la frena, desde las personas, desde lo que está escrito y desde los propios sistemas; la línea base de TOGAF (la situación actual) e ir a ver, del pensamiento lean (genchi genbutsu), nombrados una vez; Helena Novak, la nueva gestora de datos de la universidad, pasa sus primeras seis semanas, desde febrero de 2027, en 31 conversaciones con las mismas tres preguntas (qué decides, en qué datos confías, qué te frena), yendo a donde trabaja la gente y anotando lo que oye con las palabras de cada persona; lee la estrategia hasta 2030 y sus cuatro objetivos, la estrategia digital y las doce decisiones de una evaluación anterior; cuenta desde los sistemas: 41 días hábiles, en promedio, de una solicitud a su primer uso, y los 38 informes del antiguo almacén de datos, 17 sin abrir en un año y 21 usados por unas 260 personas, a 310,000 dólares australianos al año, con su licencia que vence el 31 de diciembre; tres hallazgos (once vías para pedir datos, tres copias de la lista de personal, unas 40 personas que trabajan con datos en hojas de cálculo) y algo que ya funciona (los quince minutos de cada jueves de la lista de graduación); escribe la situación actual en cinco capas, estrategia, negocio, información, aplicación y tecnología, cada una una página con su dibujo, y le da a la información una capa propia donde ArchiMate la guarda en sus capas de negocio y de aplicación; escribe cada hallazgo como una oportunidad, siete en total, y el lunes 15 de marzo envía un resumen a todas las personas con quienes habló: esto es lo que oí; díganme en qué me equivoqué. Empieza en Acra a comienzos de los años treinta, donde las madres del pueblo ga tenían un nombre para la enfermedad que mataba a sus hijos, kwashiorkor, y Cicely Williams escuchó.",
+  "card": "Six weeks of listening: 31 people, three questions, the systems counted, and the current state in five layers, sent back.",
+  "card_es": "Seis semanas escuchando: 31 personas, tres preguntas, los sistemas contados y la situación actual en cinco capas, de vuelta.",
+  "chapters_es": {
+    "word": "La palabra de las madres",
+    "ask": "Tres preguntas",
+    "read": "Lo que está escrito",
+    "count": "Lo que cuentan los sistemas",
+    "layers": "Cinco capas",
+    "back": "De vuelta"
+  },
+  "past": [
+    "Accra, the early 1930s: the mothers' word",
+    "Children of one to four were dying of a sickness doctors took for pellagra. Cicely Williams listened to the mothers, who had a name for it, kwashiorkor, and knew when it came. The people who live with a problem often know it best."
+  ],
+  "past_es": [
+    "Acra, a comienzos de los años treinta: la palabra de las madres",
+    "Niños de uno a cuatro años morían de una enfermedad que los médicos tomaban por pelagra. Cicely Williams escuchó a las madres, que tenían un nombre para ella, kwashiorkor, y sabían cuándo llegaba. Quienes viven con un problema suelen conocerlo mejor."
+  ],
+  "next_h": "You've seen how to find out what is. Next: the target, designed from a few principles, with the fewest parts that serve the decisions.",
+  "next_h_es": "Viste cómo averiguar lo que hay. Después: la situación deseada, diseñada desde unos pocos principios, con las menos piezas que sirvan a las decisiones.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Cicely Williams' paper of 1933",
+        "title_es": "El artículo de Cicely Williams de 1933 (en inglés)",
+        "line": "A nutritional disease of childhood associated with a maize diet, in the Archives of Disease in Childhood: the sickness as she saw it in Accra, child by child.",
+        "line_es": "Una enfermedad nutricional de la infancia asociada a una dieta de maíz, en los Archives of Disease in Childhood: la enfermedad tal como la vio en Acra, niño por niño.",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1975318/",
+        "href_es": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1975318/"
+      },
+      {
+        "title": "Kwashiorkor, protein and the politics of nutrition",
+        "title_es": "El kwashiorkor, las proteínas y la política de la nutrición (en inglés)",
+        "line": "John Nott's history of the word and of what doctors made of it, in Social History of Medicine (2021), open to read.",
+        "line_es": "La historia de la palabra y de lo que los médicos hicieron con ella, de John Nott, en Social History of Medicine (2021), de libre lectura.",
+        "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8162845/",
+        "href_es": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8162845/"
+      },
+      {
+        "title": "The TOGAF Standard",
+        "title_es": "El estándar TOGAF (en inglés)",
+        "line": "The Open Group's method for enterprise architecture, where the current state is the baseline and the next one the target.",
+        "line_es": "El método de The Open Group para la arquitectura empresarial, donde la situación actual es la línea base y la siguiente, el objetivo.",
+        "href": "https://www.opengroup.org/togaf",
+        "href_es": "https://www.opengroup.org/togaf"
+      },
+      {
+        "title": "ArchiMate",
+        "title_es": "ArchiMate (en inglés)",
+        "line": "The Open Group's notation for drawing an enterprise in layers, and what each one holds.",
+        "line_es": "La notación de The Open Group para dibujar una organización en capas, y lo que cada una contiene.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      },
+      {
+        "title": "Genchi genbutsu, go and see",
+        "title_es": "Genchi genbutsu, ir a ver (en inglés)",
+        "line": "Lean thinking's habit of going to the real place to see the real thing, before deciding anything about it.",
+        "line_es": "La costumbre del pensamiento lean de ir al lugar real a ver la cosa real, antes de decidir nada sobre ella.",
+        "href": "https://www.lean.org/lexicon-terms/genchi-genbutsu/",
+        "href_es": "https://www.lean.org/lexicon-terms/genchi-genbutsu/"
+      }
+    ]
+  }
+}

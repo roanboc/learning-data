@@ -67,8 +67,13 @@ function ws_paintStreet(c,o){o=o||{};const dawn=!!o.dawn,w=W,h=H,R=ag_rnd(dawn?2
   g=c.createLinearGradient(0,WS_ROADY-110,0,h);g.addColorStop(0,dawn?"rgb(70,78,90)":"rgb(12,26,30)");g.addColorStop(1,dawn?"rgb(44,52,62)":"rgb(6,16,20)");c.fillStyle=g;c.fillRect(0,WS_ROADY-110,w,h-WS_ROADY+110);
   // trees between the houses and the road: tapering trunks, soft crowns
   for(const tx of [120,700,1350]){c.save();ag_taper(c,[tx,WS_ROADY-120],[tx+4,WS_ROADY-200],[tx-6,WS_ROADY-280],[tx+2,WS_ROADY-340],18,7,dawn?"rgb(46,44,46)":"rgb(10,20,22)");c.restore();
-    for(let k=0;k<7;k++){const cx=tx+(R()-0.5)*150,cy=WS_ROADY-380-R()*120,r=60+R()*50,cg=c.createRadialGradient(cx,cy,0,cx,cy,r);
-      cg.addColorStop(0,dawn?"rgba(56,70,66,0.75)":"rgba(14,32,34,0.85)");cg.addColorStop(1,dawn?"rgba(56,70,66,0)":"rgba(14,32,34,0)");c.fillStyle=cg;c.fillRect(cx-r,cy-r,2*r,2*r);}}
+    const blobs=[];for(let k=0;k<7;k++)blobs.push([tx+(R()-0.5)*150,WS_ROADY-380-R()*120,60+R()*50]);
+    blobs.forEach(([cx,cy,r])=>{const cg=c.createRadialGradient(cx,cy,0,cx,cy,r);
+      cg.addColorStop(0,dawn?"rgba(56,70,66,0.75)":"rgba(16,36,36,0.9)");cg.addColorStop(0.62,dawn?"rgba(56,70,66,0.5)":"rgba(16,36,36,0.72)");cg.addColorStop(1,dawn?"rgba(56,70,66,0)":"rgba(16,36,36,0)");c.fillStyle=cg;c.fillRect(cx-r,cy-r,2*r,2*r);});
+    // at night, the leaves nearest a lamp catch its warm light, so the crown reads as a tree, not a smudge
+    if(!dawn){const lamp=WS_LAMPS.reduce((b,lx)=>Math.abs(lx+37-tx)<Math.abs(b+37-tx)?lx:b,WS_LAMPS[0])+37,dir=Math.sign(lamp-tx)||1,near=clamp(1-Math.abs(lamp-tx)/520,0.25,1);
+      c.save();c.globalCompositeOperation="lighter";blobs.forEach(([cx,cy,r])=>{const hx=cx+dir*r*0.42,hy=cy+r*0.18,hr=r*0.75,hg=c.createRadialGradient(hx,hy,0,hx,hy,hr);
+        hg.addColorStop(0,"rgba(150,120,70,"+(0.07*near).toFixed(3)+")");hg.addColorStop(1,"rgba(150,120,70,0)");c.fillStyle=hg;c.fillRect(hx-hr,hy-hr,2*hr,2*hr);});c.restore();}}
   // street lamps: posts and, at night, warm lamps and their pools of light and streaks in the wet road
   for(const lx of WS_LAMPS){c.fillStyle=dawn?"rgb(40,44,50)":"rgb(14,24,28)";c.fillRect(lx-4,WS_ROADY-420,8,312);c.fillRect(lx-4,WS_ROADY-420,40,6);
     c.fillStyle=dawn?"rgba(200,190,170,0.6)":"rgba(255,214,150,0.95)";rr(c,lx+24,WS_ROADY-416,26,12,4);c.fill();
@@ -183,9 +188,9 @@ function ws_bars(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const
 /* ws_keyInset(ctx, cx, cy, r, o): the car's lock and a key in a round window of glass, r its radius, to look back at the opening story
    from the hall: o.copy draws the copy, o.chip the chip, o.turn turns it, o.ask and o.answer the car's question and the chip's answer,
    o.circuit (0 to 1) the circuit it closes in o.cc (coral for a copy, green for the right answer); o.col the window's rim */
-function ws_keyInset(ctx,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const c=dp_f(o.col||"cyan"),L=WS_LOCK,k=r/250;ctx.save();ctx.globalAlpha*=a;
+function ws_keyInset(ctx,cx,cy,r,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const c=dp_f(o.col||"cyan"),L=WS_LOCK,k=r/190;ctx.save();ctx.globalAlpha*=a;
   ctx.save();ctx.shadowColor=rgba(c,0.55);ctx.shadowBlur=26;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fillStyle="rgba(8,18,22,0.94)";ctx.fill();ctx.restore();
-  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.clip();ctx.translate(cx,cy+r*0.3);ctx.scale(k,k);ctx.translate(-L.x,-L.y);
+  ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.clip();ctx.translate(cx,cy+r*0.4);ctx.scale(k,k);ctx.translate(-L.x,-L.y);
   ws_lockFace(ctx);if(o.circuit>0)ws_circuit(ctx,o.circuit,o.cc||"coral");
   if(o.ask>0||o.answer>0)ws_ask(ctx,o.t||0,o.ask||0,o.answer||0,o.turn||0);
   ws_key(ctx,{copy:o.copy,chip:o.chip,turn:o.turn});ctx.restore();

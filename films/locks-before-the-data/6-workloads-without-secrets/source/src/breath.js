@@ -1,6 +1,6 @@
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
-   Three wordless moments: the title card after the opening story; the alert closing as revoked, at the end of "Copies in the code"; and the end card. */
+   Three wordless moments: the title card after the opening story; the job let in at the door as itself, at the end of "Copies in the code"; and the end card. */
 const BREATH={
 "copy":{"hold":{"n1995":1.2,"streets":1.2,"switch":1.0,"wire":1.2,"owner":1.2,"change":1.6}},
 "asks":{"hold":{"eu":1.2,"chip":0.6,"radio":1.0,"run":1.2,"nowire":1.2,"fifth":1.0,"forty":1.0,"fewer":1.2,"data":1.2,"still":0.8},"breathe":4.4},

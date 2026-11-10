@@ -58,8 +58,6 @@ function ws_pane(ctx,x,y,w,h,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)re
 function ws_sealedMini(ctx,cx,cy,o){o=o||{};const w=o.w||250,a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;
   dp_frost(ctx,cx-w/2,cy-40,w,80,null,{col:"violet",r:14,behind:o.behind});dp_lock(ctx,cx-w/2+40,cy-4,40,"violet",0);
   dp_T(ctx,o.label||"Jun's token",cx-w/2+74,cy+10,{w:700,size:28});
-  const rv=clamp(o.revoked||0,0,1);if(rv>0){const c=dp_f("coral");ctx.save();ctx.strokeStyle=rgba(c,1);ctx.shadowColor=rgba(c,0.8);ctx.shadowBlur=10;ctx.lineWidth=4;ctx.lineCap="round";
-    ctx.beginPath();ctx.moveTo(cx-w/2+14,cy+28);ctx.lineTo(cx-w/2+14+(w-28)*ag_sine(rv),cy+28-56*ag_sine(rv));ctx.stroke();ctx.restore();}
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the ladder of No secret to lose
@@ -110,3 +108,13 @@ function ws_flow(ctx,pts,t,a,col){if(!(a>0))return;const c=dp_f(col||"violet"),s
   ctx.restore();}
 // a person of the cast in the hall, faded as one picture: who, at (x, y), scale s, o.flip to face left, o.gaze
 function ws_who(ctx,who,t,a,x,y,s,o){if(!(a>0))return;o=o||{};ctx.save();ctx.globalAlpha*=clamp(a,0,1);dp_person(ctx,who,x,y,s,{t,flip:!!o.flip,gaze:o.gaze});ctx.restore();}
+
+/* ---------------------------------------------------------------- an ended secret
+   As No secret to lose shows it: a coral stamp, "Ended", lands on the card, and the card loses its colour where it is (its light kept,
+   so its words still stand out), never struck through. ws_ended(ctx, x, y, k, a) the stamp at (x, y), landing as k goes 0 to 1;
+   ws_grey(ctx, x, y, w, h, k) greys the card's box. */
+function ws_ended(ctx,x,y,k,a){if(!(k>0)||!(a>0))return;const s=lerp(1.7,1,ag_eo(Math.min(1,k*1.6))),al=Math.min(1,k*2.5)*a;ctx.save();ctx.globalAlpha*=al;ctx.translate(x,y);ctx.rotate(-0.12);ctx.scale(s,s);
+  const w=dp_tw(ctx,"Ended",{w:800,size:36})+48;ctx.shadowColor=rgba(DP.F.coral,0.8);ctx.shadowBlur=14;rr(ctx,-w/2,-32,w,64,10);ctx.fillStyle=rgba(DP.F.coral,1);ctx.fill();ctx.shadowBlur=0;
+  rr(ctx,-w/2+5,-27,w-10,54,7);ctx.strokeStyle=rgba(DP.on,0.55);ctx.lineWidth=2;ctx.stroke();dp_T(ctx,"Ended",0,13,{w:800,size:36,align:"center",col:DP.on});ctx.restore();}
+function ws_grey(ctx,x,y,w,h,k){if(!(k>0))return;ctx.save();rr(ctx,x,y,w,h,16);ctx.globalCompositeOperation="saturation";ctx.fillStyle="rgba(128,128,128,"+clamp(k,0,1).toFixed(3)+")";ctx.fill();
+  ctx.globalCompositeOperation="source-over";ctx.fillStyle="rgba(4,10,14,"+(0.22*clamp(k,0,1)).toFixed(3)+")";ctx.fill();ctx.restore();}

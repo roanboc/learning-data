@@ -245,7 +245,7 @@ scene("asked",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
   ag_shots(ctx,S,t,end,[{at:0,place:"wsHall",keys:[[0,960,540,1]],draw:(x,tt)=>{
     ws_platformLabel(x,1);const lv=1-ag_in(tt,end-1.0,0.6);
     // A: the code in GitHub, and until now, Jun's laptop and his token, each change deployed from there
-    const G=ag_in(tt,T.gh-0.3,0.6)*(1-ag_in(tt,T.note-0.8,0.5));
+    const G=ag_in(tt,0.5,0.6)*(1-ag_in(tt,T.note-0.8,0.5));
     if(G>0){dp_page(x,90,140,760,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar",a:G});
       ["databricks.yml","resources/","notebooks/"].forEach((f,i)=>dp_T(x,f,122,350+i*50,{w:500,size:28,f:"mono",a:G}));}
     const Lp=ag_in(tt,T.until-0.2,0.6)*(1-ag_in(tt,T.actions+0.6,0.6));
@@ -262,7 +262,7 @@ scene("asked",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
     ws_note(x,90,180,WS_NOTE.map((l,i)=>[l,"ink"]),{w:640,a:N,k:ws_k(tt,T.note-0.1),seal:clamp((tt-T.signs)/1.0,0,1),t:tt,used:ag_in(tt,T.minutes,0.6)*(1-fresh)});
     // the policy Sam set on registrar-loader, matched line by line
     const P=ag_in(tt,T.more-0.3,0.6)*(1-ag_in(tt,T.azure-0.7,0.5)),hiR=ag_in(tt,T.prepo-0.2,0.4),hiE=ag_in(tt,T.penv-0.2,0.4),ok=clamp((tt-T.match)/0.6,0,1);
-    if(P>0){dp_page(x,780,140,620,520,{tool:"databricks",name:"Azure Databricks",where:"Federation policy",title:"registrar-loader",a:P});
+    if(P>0){dp_page(x,780,140,620,560,{tool:"databricks",name:"Azure Databricks",where:"Federation policy",title:"registrar-loader",a:P});
       const rows=[["Issuer","GitHub Actions",0,0],["Organization","uni-example",1,hiR],["Repository","data-platform",1,hiR],["Entity type","Environment",0,hiE],["Environment","production",1,hiE]];
       rows.forEach(([l,v,m,h],i)=>{const ry=350+i*60;if(h>0){x.save();x.globalAlpha*=P*h;rr(x,800,ry-38,580,54,10);x.fillStyle=rgba(DP.F.cyan,0.14);x.fill();x.restore();}
         ws_row(x,812,ry,l,v,{mono:!!m,a:P});if(ok>0&&i>0){x.save();x.globalAlpha*=P;dp_tick(x,1352,ry-10,"green",ok);x.restore();}});
@@ -284,7 +284,7 @@ scene("asked",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
     dp_pill(x,90,580,"Stored in GitHub: nothing","green",{a:M*ag_in(tt,T.stored,0.4)});
     // Azure: Microsoft Entra ID trusts the same note, the same way
     const Z=ag_in(tt,T.entra-0.3,0.6)*(1-ag_in(tt,T.like-0.6,0.5)),zok=clamp((tt-T.same)/0.6,0,1);
-    if(Z>0){dp_page(x,780,140,620,520,{tool:"entra",name:"Microsoft Entra ID",where:"Federated credential",title:"registrar-loader",a:Z});
+    if(Z>0){dp_page(x,780,140,620,560,{tool:"entra",name:"Microsoft Entra ID",where:"Federated credential",title:"registrar-loader",a:Z});
       dp_T(x,"GitHub Actions deploying",812,350,{w:700,size:30,a:Z});dp_T(x,"Azure resources",812,394,{w:700,size:30,a:Z});
       [["Organization","uni-example",1],["Repository","data-platform",1],["Entity","Environment",0],["Environment","production",1]].forEach(([l,v,m],i)=>{const ry=460+i*56;
         ws_row(x,812,ry,l,v,{mono:!!m,a:Z});if(zok>0){x.save();x.globalAlpha*=Z;dp_tick(x,1352,ry-10,"green",zok);x.restore();}});}
@@ -316,7 +316,7 @@ scene("nokeys",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
     const A=ag_in(tt,T.res-0.3,0.6)*(1-ag_in(tt,T.git-0.7,0.5));
     if(A>0){dp_page(x,90,140,820,560,{tool:"managedIdentity",name:"Microsoft Azure",where:"Identity",title:"catalog-connector-prod",a:A});
       dp_T(x,"Access connector for Azure Databricks",122,350,{w:600,size:28,col:"mut",a:A*ag_in(tt,T.cat-0.2,0.5)});
-      dp_switch(x,122,384,ag_in(tt,T.mi,0.6),{col:"cyan",label:"An identity of its own: on",a:A});
+      dp_switch(x,122,384,ag_in(tt,T.mi,0.6),{col:"cyan",label:"An identity of its own",a:A});
       dp_sealed(x,122,460,640,"Its credentials",{sub:"Kept and changed by Azure",a:A*ag_in(tt,T.after-0.2,0.5)});
       dp_pill(x,122,642,"Seen by nobody","green",{a:A*ag_in(tt,T.nobody,0.4)});
       const F=A*ag_in(tt,T.files-0.4,0.6);
@@ -334,14 +334,170 @@ scene("nokeys",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
       dp_pill(x,bx.x,bx.y+260,"Jun's: every repository he can reach, no end date","coral",{a:B*jh});
       dp_sealed(x,bx.x,bx.y+214,760,"A pass from the app, for each person",{sub:"Ends after eight hours, and renews itself",col:"cyan",a:B*ag_in(tt,T.each-0.2,0.5)});}
     const Ap=ag_in(tt,T.alone-0.6,0.6)*(1-ag_in(tt,T.rule-0.6,0.5));
-    if(Ap>0){dp_page(x,1030,140,370,330,{tool:"github",name:"GitHub",title:"Databricks app",a:Ap});
+    if(Ap>0){dp_page(x,1030,140,370,390,{tool:"github",name:"GitHub",title:"Databricks app",a:Ap});
       dp_T(x,"Installed on",1062,350,{w:600,size:28,col:"mut",a:Ap});dp_T(x,"one repository:",1062,392,{w:600,size:28,col:"mut",a:Ap});
       dp_T(x,"uni-example/",1062,440,{w:500,size:28,f:"mono",a:Ap});dp_T(x,"data-platform",1062,480,{w:500,size:28,f:"mono",a:Ap});}
     // C: the rule
     const R=ag_in(tt,T.rule-0.2,0.6)*(1-ag_in(tt,end-1.0,0.6));
     dp_card(x,300,300,1000,{kick:"Tools that work in GitHub",title:"An app with only what it needs",sub:"Never a person's token"},{col:"cyan",a:R,k:ws_k(tt,T.rule-0.2)});}}]);});
 
-/* ---------------------------------------------------------------- the rest, for now: the hall */
-["vault","found","close"].forEach(id=>scene(id,(ctx,S,t,sc)=>{ag_shots(ctx,S,t,sc.dur,[{at:0,place:"wsHall",keys:[[0,960,540,1]],draw:(x,tt)=>{}}]);}));
+/* ---------------------------------------------------------------- 7 · One password, one vault
+   The student system at the left, its door still wanting a password; the password in one place, Azure Key Vault's kv-registrar-prod,
+   read through the platform's secret scope by registrar-loader alone; a notebook that prints it, and sees only the word redacted; the
+   function that changes it each month as its own managed identity; the exception, written down; and its rung on the ladder. */
+// the student system: a block of glass at the left (x 110 to 410, from y 330), its door at its foot, a lock on it in a meaning's colour
+const WS_SS={x:110,y:330,w:300,h:530};
+function ws_student(ctx,a,o){o=o||{};if(!(a>0))return;const P=WS_SS;ctx.save();ctx.globalAlpha*=a;
+  dp_panel(ctx,P.x,P.y,P.w,P.h,{col:"grey",r:10,glowR:24});
+  for(let k=1;k<5;k++){const fy=P.y+k*P.h/5;ctx.fillStyle="rgba(170,235,235,0.07)";ctx.fillRect(P.x+8,fy,P.w-16,1.4);for(let j=0;j<5;j++)dp_halo(ctx,P.x+40+j*55,fy-14,14,"violet",0.16);}
+  const dx=P.x+P.w/2-50,dy=P.y+P.h-210;ctx.fillStyle="rgba(4,14,18,0.85)";ctx.fillRect(dx,dy,100,210);
+  ctx.strokeStyle=rgba(dp_f(o.col||"coral"),0.9);ctx.lineWidth=2.4;ctx.strokeRect(dx,dy,100,210);dp_lock(ctx,dx+50,dy+90,44,o.col||"coral",0);
+  dp_T(ctx,"The student system",P.x+P.w/2,P.y-26,{w:700,size:30,align:"center",col:"mut"});ctx.restore();}
+scene("vault",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
+    wants:wAt(sc,"door","still wants a password"),from:wAt(sc,"door","come from"),
+    yet:wAt(sc,"yet","no other way"),
+    one:wAt(sc,"kv","one place"),vault:wAt(sc,"kv","a key vault"),alone:wAt(sc,"kv","for this job alone"),
+    scope:wAt(sc,"scope","secret scope"),only:wAt(sc,"scope","only registrar loader"),
+    prints:wAt(sc,"redacted","prints it"),word:wAt(sc,"redacted","the word redacted"),
+    month:wAt(sc,"month","Once a month"),fn:wAt(sc,"month","a small function"),ss:wAt(sc,"month","at the student system"),inv:wAt(sc,"month","in the vault"),mi:wAt(sc,"month","its own managed identity"),
+    written:wAt(sc,"written","written down"),
+    ladder:wAt(sc,"rung","ladder"),lower:wAt(sc,"rung","a lower rung"),until:wAt(sc,"rung","until the student system")}));
+  const end=sc.dur;
+  ag_shots(ctx,S,t,end,[{at:0,place:"wsHall",keys:[[0,960,540,1]],draw:(x,tt)=>{
+    ws_platformLabel(x,1);const lv=1-ag_in(tt,end-1.0,0.6);
+    ws_student(x,ag_in(tt,T.wants-0.8,0.7)*lv,{});
+    ws_flow(x,[[410,560],[1000,560],[1590,730]],tt,ag_io(tt,T.from-0.2,T.yet+0.8,0.6),"violet");
+    dp_pill(x,440,480,"No other way in, yet","coral",{a:ag_io(tt,T.yet-0.1,T.scope-0.6,0.4)});
+    // the password in one place: a key vault for this job alone
+    const K=ag_in(tt,T.vault-0.3,0.6)*(1-ag_in(tt,T.ladder-0.6,0.5));
+    if(K>0){dp_page(x,520,140,860,270,{tool:"keyVault",name:"Azure Key Vault",where:"kv-registrar-prod · Secrets",a:K});
+      dp_sealed(x,552,260,620,"The student system's password",{sub:"One copy, for this job alone",a:K});
+      dp_pill(x,1196,334,"Changed","green",{a:K*ag_io(tt,T.inv,T.written-0.6,0.4)});}
+    // read through the platform's secret scope, by registrar-loader alone
+    const Sc=ag_in(tt,T.scope-0.3,0.6)*(1-ag_in(tt,T.prints-0.7,0.5));
+    if(Sc>0){dp_page(x,520,450,860,250,{tool:"databricks",name:"Azure Databricks",where:"Secret scope",a:Sc});
+      dp_T(x,"student-system",552,596,{w:500,size:28,f:"mono",a:Sc});dp_T(x,"from kv-registrar-prod",820,596,{w:600,size:28,col:"mut",a:Sc});
+      x.save();x.globalAlpha*=Sc;dp_tick(x,572,646,"green",clamp((tt-T.only)/0.6,0,1));dp_link(x,[950,410],[950,450],"violet",clamp((tt-T.scope)/0.5,0,1));x.restore();
+      dp_T(x,"Only registrar-loader may read it",606,656,{w:700,size:28,col:"green",a:Sc*ag_in(tt,T.only,0.5)});}
+    // a notebook that prints it sees one word
+    const N=ag_in(tt,T.prints-0.3,0.6)*(1-ag_in(tt,T.month-0.7,0.5));
+    ws_code(x,520,450,["pw = dbutils.secrets.get(",'    "student-system", "password")',"print(pw)",""],{w:860,a:N,hi:[2,ag_in(tt,T.prints,0.4)]});
+    dp_T(x,"[REDACTED]",544,634,{w:500,size:30,f:"mono",col:"violet",a:N*ag_in(tt,T.word-0.2,0.4)});
+    // once a month, a function changes it, at the student system and in the vault, as its own managed identity
+    const F=ag_in(tt,T.fn-0.3,0.6)*(1-ag_in(tt,T.written-0.7,0.5));
+    if(F>0){dp_page(x,520,450,860,250,{tool:"azure",name:"Azure Functions",where:"registrar-rotate · Identity",a:F});
+      dp_switch(x,552,566,ag_in(tt,T.mi,0.6),{col:"cyan",label:"A managed identity of its own",a:F});
+      dp_T(x,"Runs on the first of each month",552,666,{w:600,size:28,col:"mut",a:F});
+      x.save();x.globalAlpha*=F;dp_link(x,[520,600],[412,700],"green",clamp((tt-T.ss)/0.7,0,1));dp_link(x,[1300,450],[1300,410],"green",clamp((tt-T.inv)/0.5,0,1));
+      dp_tick(x,360,618,"green",clamp((tt-T.ss-0.6)/0.6,0,1));x.restore();}
+    // the exception, written down
+    const X=ag_in(tt,T.written-0.3,0.6)*(1-ag_in(tt,T.ladder-0.6,0.5));
+    dp_card(x,520,450,860,{kick:"An exception, written down",title:"The student system's password",sub:"Why: the system takes only a password. Owner: Sam Okafor. Looked at again every six months."},{col:"violet",a:X,k:ws_k(tt,T.written-0.3)});
+    // its rung on the ladder: lower, kept only until the student system can climb
+    const L=ag_in(tt,T.ladder-0.2,0.7)*lv;
+    ws_ladder(x,520,220,760,{a:L,lit:[ag_in(tt,T.until,0.6),0,0,ag_in(tt,T.lower-0.2,0.5),0,0],cols:["cyan","cyan","cyan","violet","cyan","cyan"]});
+    dp_tag(x,520,760,"Kept until the student system can climb","violet",{a:L*ag_in(tt,T.until-0.2,0.5)});}}]);});
 
-ag_cutInto(["asks","noend","name","asked","nokeys"]);
+/* ---------------------------------------------------------------- 8 · Copies in the code
+   The two copies still out there; GitHub's settings for the repository, Secret Protection switched on by Sam on Tuesday 3 November;
+   the history, every branch, read back to the first commit; the alert: Jun's token in a notebook pushed in March 2024, still working;
+   Jun ends it in his settings, and the alert is closed as revoked; the token left in the history, opening nothing; a push with a
+   secret stopped before it lands, and what a bypass costs; personal tokens switched off; then, wordless, the job at the door. */
+const WS_MAIN=[150,220,290,360,430,500,570,640,710,780,850,920],WS_HY={top:520,main:670,b:745,c:815};
+function ws_history(ctx,t,a,o){o=o||{};if(!(a>0))return;const H=WS_HY;ctx.save();ctx.globalAlpha*=a;
+  dp_panel(ctx,90,H.top,900,350,{col:"grey",r:18,glowR:24});dp_T(ctx,"History · every branch",122,H.top+44,{w:700,size:28,col:"mut"});
+  dp_T(ctx,"First commit",122,H.main-34,{w:600,size:28,col:"mut"});
+  const ln=(pts,col)=>{ctx.save();ctx.strokeStyle=rgba(dp_f(col),0.7);ctx.lineWidth=3;ctx.beginPath();pts.forEach(([px,py],i)=>i?ctx.lineTo(px,py):ctx.moveTo(px,py));ctx.stroke();ctx.restore();};
+  ln([[150,H.main],[950,H.main]],"cyan");ln([[360,H.main],[430,H.b],[570,H.b],[640,H.main]],"cyan");ln([[640,H.main],[710,H.c],[920,H.c]],"cyan");
+  const dot=(px,py,col)=>{ctx.fillStyle=rgba(mix(dp_f(col),[255,255,255],0.3),1);ctx.beginPath();ctx.arc(px,py,9,0,TAU);ctx.fill();};
+  WS_MAIN.forEach(px=>dot(px,H.main,"cyan"));[430,500,570].forEach(px=>dot(px,H.b,"cyan"));[710,780,850,920].forEach(px=>dot(px,H.c,"cyan"));
+  // the scan, from the newest back to the first commit
+  const u=o.scan;if(u>0&&u<1){const sx=lerp(960,130,ag_sine(u));ctx.save();ctx.globalCompositeOperation="lighter";const g=ctx.createLinearGradient(sx-60,0,sx+6,0);g.addColorStop(0,rgba(DP.F.cyan,0));g.addColorStop(1,rgba(DP.F.cyan,0.5));ctx.fillStyle=g;ctx.fillRect(sx-60,H.top+64,66,272);ctx.restore();}
+  // the commit that holds the token
+  if(o.found>0){ctx.save();ctx.globalAlpha*=clamp(o.found,0,1);ctx.strokeStyle=rgba(dp_f(o.foundCol||"coral"),1);ctx.lineWidth=3;ctx.shadowColor=rgba(dp_f(o.foundCol||"coral"),0.8);ctx.shadowBlur=12;ctx.beginPath();ctx.arc(500,H.b,22,0,TAU);ctx.stroke();ctx.restore();}
+  ctx.restore();}
+scene("found",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
+    made:wAt(sc,"before","the copies already made"),
+    on:wAt(sc,"on","On Tuesday"),sam:wAt(sc,"on","Sam turns on"),gsp:wAt(sc,"on","GitHub Secret Protection"),
+    hist:wAt(sc,"reads","the whole history"),first:wAt(sc,"reads","the first commit"),
+    jt:wAt(sc,"finds","Jun's token"),march:wAt(sc,"finds","March"),works:wAt(sc,"finds","still works"),
+    does:wAt(sc,"does","It does"),
+    weeks:wAt(sc,"weeks","two weeks"),morning:wAt(sc,"weeks","that morning"),ends:wAt(sc,"weeks","Jun ends it"),
+    nothing:wAt(sc,"nothing","open nothing"),closes:wAt(sc,"nothing","closes the alert"),revoked:wAt(sc,"nothing","revoked"),
+    stays:wAt(sc,"history","stays in the history"),opens:wAt(sc,"history","opens nothing"),
+    pp:wAt(sc,"push","push protection"),stops:wAt(sc,"push","stops a push"),lands:wAt(sc,"push","before it lands"),
+    past:wAt(sc,"bypass","pushes past it"),reason:wAt(sc,"bypass","gives a reason"),alert:wAt(sc,"bypass","gets an alert"),
+    aft:wAt(sc,"afternoon","That afternoon"),pg:wAt(sc,"afternoon","People and groups"),off:wAt(sc,"afternoon","switched off")}));
+  const end=sc.dur;
+  ag_shots(ctx,S,t,end,[{at:0,place:"wsHall",keys:[[0,960,540,1]],draw:(x,tt)=>{
+    ws_platformLabel(x,1);
+    // the copies already made
+    const C0=ag_in(tt,0.3,0.6)*(1-ag_in(tt,T.on-0.6,0.5));
+    [["A notebook in GitHub",560],["Jun's laptop",900]].forEach(([lab,px])=>ws_pane(x,px,300,310,250,lab,{a:C0,paint:(cc,cx,cy)=>ws_sealedMini(cc,cx,cy,{label:"Jun's token"})}));
+    // GitHub's settings: Secret Protection on, by Sam, on Tuesday 3 November
+    const G=ag_in(tt,T.on-0.1,0.6)*(1-ag_in(tt,T.jt-0.7,0.5));
+    if(G>0){dp_page(x,90,140,900,360,{tool:"github",name:"GitHub",where:"Settings · Advanced Security",title:"uni-example/data-platform",a:G});
+      dp_switch(x,122,330,ag_in(tt,T.gsp+0.5,0.6),{col:"green",label:"Secret Protection",a:G});
+      dp_T(x,"Secret scanning, and push protection",122,436,{w:600,size:28,col:"mut",a:G*ag_in(tt,T.gsp+0.8,0.5)});}
+    dp_slip(x,1030,520,"Tuesday 3 November","cyan",{a:ag_io(tt,T.on-0.1,T.pp-0.7,0.5)});
+    ws_who(x,"sam",tt,ag_io(tt,T.sam-0.4,T.weeks-0.6,0.6),1190,860,0.78,{flip:true,gaze:[1.4,0.3]});
+    // the history, read back to the first commit; the commit with the token
+    const Hs=ag_in(tt,T.hist-0.4,0.6)*(1-ag_in(tt,T.weeks-0.7,0.5))+ag_in(tt,T.stays-0.1,0.6)*(1-ag_in(tt,T.aft-0.7,0.5));
+    ws_history(x,tt,Hs,{scan:clamp((tt-T.hist)/4.2,0,1),found:ag_in(tt,T.jt,0.5),foundCol:tt>T.nothing?"grey":"coral"});
+    dp_tag(x,600,544,"Still here, opens nothing","grey",{a:Hs*ag_in(tt,T.opens-0.2,0.5),to:[512,725]});
+    // the alert: Jun's token, in a notebook pushed in March 2024, still working; then closed as revoked
+    const Al=ag_in(tt,T.jt-0.2,0.6)*(1-ag_in(tt,T.pp-0.7,0.5)),gone=ag_in(tt,T.nothing,0.6);
+    if(Al>0){dp_page(x,90,140,1010,360,{tool:"github",name:"GitHub",where:"Security · Secret scanning",title:"Databricks access token",a:Al});
+      dp_T(x,"registrar/notebooks/check_load.py",122,346,{w:500,size:28,f:"mono",a:Al});
+      dp_T(x,"Pushed in March 2024",122,394,{w:600,size:28,col:"mut",a:Al*ag_in(tt,T.march-0.2,0.5)});
+      dp_T(x,"Validity",122,456,{w:600,size:28,col:"mut",a:Al*ag_in(tt,T.works-0.3,0.5)});
+      const vA=Al*ag_in(tt,T.works-0.3,0.5);
+      dp_pill(x,250,458,"Checking","grey",{a:vA*(1-ag_in(tt,T.does-0.2,0.3))});dp_pill(x,250,458,"Active","coral",{a:vA*ag_in(tt,T.does-0.1,0.3)*(1-gone)});dp_pill(x,250,458,"Inactive","grey",{a:vA*gone});
+      dp_pill(x,470,458,"Closed as revoked","green",{a:Al*ag_in(tt,T.revoked-0.2,0.4)});
+      ws_sealedMini(x,920,400,{label:"Jun's token",a:Al});
+      if(gone>0){x.save();x.globalAlpha*=Al;ws_grey(x,795,360,250,80,gone);ws_ended(x,980,346,clamp((tt-T.nothing)/0.7,0,1),1);x.restore();}}
+    // Jun ends his token, in his own settings, that morning
+    ws_who(x,"jun",tt,ag_io(tt,T.weeks+0.6,T.stays-0.6,0.6),1190,860,0.78,{flip:true,gaze:[1.4,0.3]});
+    const Tk=ag_in(tt,T.weeks-0.1,0.6)*(1-ag_in(tt,T.stays-0.7,0.5)),ek=clamp((tt-T.ends)/0.7,0,1);
+    if(Tk>0){const bx=dp_page(x,90,520,900,330,{tool:"databricks",name:"Azure Databricks",where:"Settings · Developer · Access tokens",a:Tk});
+      dp_rows(x,bx.x,bx.y-6,[{t:"Made",w:260},{t:"Ends",w:170},{t:"Last used",w:270},{t:"",w:130}],[["14 March 2024","Never","19 October",""]],{a:Tk});
+      if(ek>0){x.save();x.globalAlpha*=Tk;ws_grey(x,bx.x-10,bx.y+52,bx.w+20,58,ek);ws_ended(x,bx.x+760,bx.y+76,ek,1);x.restore();}}
+    // push protection: a push with a secret in it, stopped before it lands; a bypass gives a reason, and the team gets an alert
+    const Pp=ag_in(tt,T.pp-0.1,0.6)*(1-ag_in(tt,T.aft-0.7,0.5)),mv=ag_sine(clamp((tt-T.stops+0.6)/1.6,0,1))-0.04*Math.sin(clamp((tt-T.stops-1.0)/0.5,0,1)*Math.PI);
+    if(Pp>0){ws_pane(x,120+mv*380,200,340,230,"A push",{a:Pp,paint:(cc,cx,cy)=>ws_sealedMini(cc,cx,cy,{label:"A secret"})});
+      x.save();x.globalAlpha*=Pp;const wc=dp_f("coral");x.shadowColor=rgba(wc,0.9);x.shadowBlur=22;rr(x,880,170,14,300,7);x.fillStyle=rgba(wc,1);x.fill();x.restore();
+      dp_T(x,"Push protection",887,150,{w:700,size:28,col:"coral",align:"center",a:Pp});
+      dp_pill(x,930,340,"Stopped before it lands","coral",{a:Pp*ag_io(tt,T.lands-0.2,T.past-0.5,0.4)});
+      dp_card(x,930,200,460,{kick:"To push past it",title:"Give a reason",sub:"The team gets an alert"},{col:"amber",a:Pp*ag_in(tt,T.past-0.2,0.5)});}
+    // that afternoon, personal tokens switched off on the platform
+    const Of=ag_in(tt,T.aft-0.3,0.6)*(1-ag_in(tt,c.breath-0.4,0.6));
+    if(Of>0){dp_page(x,90,140,1000,300,{tool:"databricks",name:"Azure Databricks",where:"Settings · Advanced",title:"Personal access tokens",a:Of});
+      dp_switch(x,122,330,1-ag_in(tt,T.off,0.6),{col:"coral",label:"People may make their own tokens",a:Of});
+      dp_tag(x,90,500,"From People and groups","cyan",{a:Of*ag_in(tt,T.pg-0.2,0.5)});}
+    // wordless: the job at the door, let in as itself
+    const Bq=ag_in(tt,c.breath-0.2,0.8);
+    ws_badge(x,640,250,{a:Bq,t:tt,lines:[["Owned by Sam Okafor"],["Runs as itself"]]});ws_door(x,Bq,"cyan");
+    ws_flow(x,[[1240,436],[1300,436],[1590,730]],tt,Bq,"cyan");}}]);});
+
+/* ---------------------------------------------------------------- 9 · Nothing to copy
+   Back to the street at night: every car where it was left, a wire starting nothing, far fewer stolen; then the hall: the job proving
+   who it is each run, one password in one vault changed by a machine, a pushed secret stopped at the door; and the end card. */
+scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
+    asked:wAt(sc,"dutch","asked its key"),wire:wAt(sc,"dutch","a wire started nothing"),fewer:wAt(sc,"dutch","far fewer"),
+    univ:wAt(sc,"now","At the university"),proves:wAt(sc,"now","proves who it is"),nothing:wAt(sc,"now","nothing anyone"),
+    one:wAt(sc,"one","One password"),machine:wAt(sc,"one","changed by a machine"),pushed:wAt(sc,"one","a secret pushed"),stopped:wAt(sc,"one","stopped at the door"),
+    idea:wAt(sc,"idea","A workload")}));
+  ag_shots(ctx,S,t,sc.dur,[
+    {at:0,place:"wsStreet",keys:[[0,960,540,1.0],[4,980,560,1.04]],d:6,draw:(x,tt)=>{
+      dp_pill(x,960,300,"A wire starts nothing","green",{align:"center",a:ag_in(tt,T.wire,0.4)});
+      dp_pill(x,960,380,"Far fewer cars stolen","green",{align:"center",a:ag_in(tt,T.fewer,0.4)});}},
+    {at:T.univ-0.8,place:"wsHall",keys:[[0,960,540,1]],draw:(x,tt)=>{
+      ws_platformLabel(x,1);
+      ws_badge(x,640,250,{a:ag_in(tt,T.univ-0.4,0.6)*(1-ag_in(tt,c.breath-0.1,0.8)),t:tt,lines:[["Owned by Sam Okafor"],["Proves who it is, each run"]]});
+      const pr=ag_in(tt,T.proves,0.6);ws_door(x,pr,"cyan");ws_flow(x,[[1240,436],[1300,436],[1590,730]],tt,pr,"cyan");
+      dp_pill(x,640,690,"Nothing anyone could copy","green",{a:ag_io(tt,T.nothing,T.one-0.4,0.4)});
+      dp_sealed(x,100,690,620,"One password, in one vault",{sub:"Changed each month by a machine",a:ag_io(tt,T.one-0.2,T.idea-0.4,0.5)});
+      dp_pill(x,780,766,"A pushed secret: stopped","coral",{a:ag_io(tt,T.pushed-0.2,T.idea-0.4,0.4)});}}]);
+  dp_end(ctx,S,t,c.breath,"Workloads without secrets","A workload proves who it is without a password.","Film 6 of 9","Locks before the data");});
+
+ag_cutInto(["asks","noend","name","asked","nokeys","vault","found"]);

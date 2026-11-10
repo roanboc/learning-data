@@ -15,10 +15,10 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `registrar` | 14/14 | 6/6 | 7/7 | 5/5 |  | 32/32 |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
-| `staff` | 5/5 | 3/3 |  | 1/1 |  | 9/9 |
+| `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
 | `student` | 25/25 | 18/18 | 8/8 | 18/18 |  | 69/69 |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 84/84 (1 warn) | 56/56 | 37/37 | 42/42 | 2/2 | 221/221 (1 warn) |
+| **All** | 84/84 (1 warn) | 57/57 | 38/38 | 43/43 | 2/2 | 224/224 (1 warn) |
 
 ## Not passed
 

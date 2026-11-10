@@ -43,6 +43,8 @@ LATER = {"The graduation list: its owner, its sources, its ceremonies and the pe
          "Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products":
          ("/models/core/staff/", "/seeds/reference/course/units.csv", "/seeds/reference/staff/",
           "/governance/4-data-products/claims.yml", "/governance/4-data-products/payroll_export.yml"),
+         "The hours to pay: the claims job's mart, its product and the payroll system that reads it":
+         ("/models/marts/payroll/", "/governance/4-data-products/hours_to_pay.yml", "/exposures/payroll/"),
          "HR's tutors' newsletters: its owner, its newsletters and the mailing tool":
          ("/models/marts/hr/", "/seeds/reference/hr/", "/governance/4-data-products/tutor_newsletters.yml",
           "/exposures/hr/")}

@@ -3,13 +3,13 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12 and 14 on 10 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12, 14, 16 and 17 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
-Nothing to set up. After each table builds, every classified column gets a Unity Catalog tag,
-`personal_data`, with its class: `direct`, `pseudonymous` or `none`
-(`macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
+Nothing to set up in the build. After each table builds, every classified column gets the governed tag `personal_data`,
+with its class: `special`, `direct`, `pseudonymous` or `indirect` (`none` is no tag); then the faculty column gets `faculty`,
+and the table its `level` (section 16; `macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
 
 ```bash
 dbt build --target databricks --profiles-dir .
@@ -33,10 +33,10 @@ Unity Catalog's attribute-based access control (ABAC) masks by tag: one policy c
 tagged `personal_data = direct`, in every schema of the catalog, including tables built later. A
 column with its own mask conflicts with a policy on it, so use this or step 2, not both.
 
-1. An account admin makes `personal_data` a **governed tag**, with the allowed values `direct`,
-   `pseudonymous` and `none` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*).
-   Governed, only those three values can be set, and only by someone with `ASSIGN` on the tag:
-   give it to the identity that runs dbt.
+1. An account admin makes `personal_data` a **governed tag**, with the values `special`, `direct`,
+   `pseudonymous` and `indirect` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*;
+   section 16). Governed, only those four values can be set, and only by someone with `ASSIGN` on the
+   tag: give it to the identity that runs dbt.
 2. Build with the policy var, so the build tags and leaves masking to the policy:
 
    ```bash
@@ -417,10 +417,96 @@ the metric view and nothing under it (`examples/more-readers-than-people/`). One
 rule, so it's the table's own filter; attribute-based policies set the same kind of rule, by tag, on
 many tables at once (section 3 does it for masks).
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; and the last two, for section 15, on 5 November 2026)
+## 16. Tags that travel
+
+On Databricks, a column's class is one of five, the strictest that applies, as its `meta.personal_data`
+says: `special`, `direct`, `pseudonymous`, `indirect` or `none` (DEC-PRJ-17, amending DEC-PRJ-13). After
+each table builds (section 1), every classified column gets the governed tag `personal_data` with its
+class. A column the YAML marks `none` gets no tag, and the build takes an old one off: a `none` tag would
+meet a real class in any column made from both. Then the column that holds each row's faculty
+(`meta.faculty: true`) gets the key-only tag `faculty`, and last the table gets its `level` (`meta.level`:
+`public`, `internal`, `confidential` or `restricted`; in `dbt_project.yml`, `confidential` for the core
+and the marts and `internal` for `_shared`, unless a model's YAML says another). The build stops on a
+level under its two floors: a table with a column that points to a person (`direct`, `pseudonymous` or
+`indirect`) is never `public`, and one with anything `special` is `restricted`
+(`macros/governance/personal_data.sql`).
+
+Once, on the platform (checked 10 November 2026):
+
+1. An account admin makes three **governed tags** (Catalog Explorer: *Govern*, *Governed Tags*):
+   `personal_data`, with the values `special`, `direct`, `pseudonymous` and `indirect`; `level`, with
+   `public`, `internal`, `confidential` and `restricted`; and `faculty`, with no values. Governed, only
+   those values can be set, and only by someone with `ASSIGN` on the tag: give it to the identity that
+   runs dbt, and to no person. If `personal_data` was made with `none` among its values, set its values
+   again: a `none` tag already on a column stays until the next build takes it off.
+2. Someone with `MANAGE` on the tags turns on **tag propagation** for `personal_data`, with `special` as
+   its default propagation value, and for `faculty`; never for `level`, or a table joined from a public
+   table and a confidential one would be a conflict every time. Each class then follows its column
+   through lineage into the tables and views made from it on serverless compute, usually within
+   minutes, with nobody tagging them. Two values for one tag in one column is a conflict: the column
+   takes the default value. A policy can't see a tag until it has arrived. Propagation is in Beta on
+   10 November 2026: a workspace admin turns it on first, on the *Previews* page.
+3. Look for conflicts. `analyses/governance/classes_against_lineage.sql` lists every column whose class
+   differs from the class of a column it was made from. In this project, the marts'
+   `learner_award_key` is one: it's made from the learner table's `learner_bk` (`direct`), and its YAML
+   says `pseudonymous`, so with propagation on it takes `special`. A value that says less is made once,
+   at the source, by its owner, and every table after takes it.
+
+Tags start on the tables people read. Staging and intermediate are views nobody is granted, and they
+carry no tags, so `learner_key`, made there, arrives in the core with no class to conflict with its own.
+Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
+doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
+
+## 17. One policy for each class
+
+Section 3 writes one policy, for `direct`. The registrar's catalog, which the platform team keeps in its
+own bundle, outside this project, takes it further: one policy for each class that's hidden, on the
+whole catalog, so a table made tomorrow is protected the day it appears, with no mask written for it.
+Its files, as the film *One policy for many tables* shows them, are in
+`examples/one-policy-for-many-tables/`, with the rules in its README.
+
+1. **Governed tags.** Each column's class is `personal_data` (`special`, `direct`, `pseudonymous` or
+   `indirect`; a column with no personal data has no tag); each table has a `level`, set last, after
+   its columns' classes, and never on a catalog or a schema, which every table under it would inherit;
+   and the column that holds each learner's faculty has the key-only tag `faculty`.
+2. **A function for each way,** in the catalog's `policies` schema: words become `***` and anything
+   else is left empty (one function for every type, through `VARIANT`, since a mask gives back its
+   column's type or the query fails); part of a value, for the help desk; a date becomes the first of
+   January of its year; a yes or a no for each row's faculty; and no rows at all.
+3. **A policy for each class,** on the catalog, each to `account users` except the groups the data owner
+   lets through, and the builder's group on every list, or what it builds keeps the stars. Each reader
+   gets one mask for each column: two different ones stop the query with an error, so the help desk is
+   let through the policy that masks names whole and given the one that masks them in part.
+4. **A row filter on one schema:** the study sees only rows whose column tagged `faculty` holds `HLT`.
+   A table with no such column isn't filtered at all, so a check after the policies fails the job if a
+   table with learners in it has none.
+5. **A table with no level is closed** to all but its builder, by a row filter that returns no rows,
+   until its owner levels it. A policy hides only what has a tag: a column no one has classed shows as
+   it is, until its owner classes it, so look for such columns every day.
+6. **Kept as code.** Bundles have no resource for a policy, so a job in the registrar's bundle runs the
+   files with a SQL task, as the identity that deploys it, once the data team reviews the pull request;
+   the data owner is told what it touches. The policies go in before the grant that lets a reader in.
+
+`SHOW EFFECTIVE POLICIES ON TABLE <catalog>.<schema>.<table>` lists every policy that applies to a
+table, with those on its schema and catalog. Don't also run section 3's policy on a catalog with these:
+two masks on one column for one reader stop the query. Policies need serverless compute, or standard or
+dedicated compute on Databricks Runtime 16.4 or above (dedicated with fine-grained access control
+filtering on); older compute can't read the tables at all.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; *Row filters and column masks* and *Unity Catalog metric views*, for section 15, on 5 November 2026; and *Core concepts for attribute-based access control* to the end, for section 17, on 10 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
+- Databricks, *Governed tags* (allowed values, and who may assign them), checked 10 November 2026:
+  https://docs.databricks.com/aws/en/admin/governed-tags/
+- Databricks, *Tag propagation* (through lineage, per tag; a conflict takes the default propagation
+  value; serverless compute; not classic compute, volumes, or pipelines' streaming tables and
+  materialized views; a policy isn't enforced on a derived table until the tag appears), checked
+  10 November 2026: https://docs.databricks.com/aws/en/admin/governed-tags/tag-propagation
+- Databricks, *Data Classification* (a scan that proposes classes for the columns it recognises),
+  checked 10 November 2026: https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-classification
+- Databricks, *Lineage system tables reference* (`system.access.column_lineage`), checked 10 November
+  2026: https://docs.databricks.com/aws/en/admin/system-tables/lineage
 - Databricks, *ABAC tutorial (SQL)*: https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/tutorial-sql
 - Databricks, *Policy evaluation* (manual masks conflict with ABAC masks):
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policy-evaluation
@@ -528,3 +614,26 @@ many tables at once (section 3 does it for masks).
 - Databricks, *Row filters and column masks* (a row filter is a SQL function that sees who is asking,
   set on a table with `ALTER TABLE ... SET ROW FILTER`): https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks/
 - Databricks, *Unity Catalog metric views*: https://docs.databricks.com/aws/en/uc-semantics/metric-views
+- Databricks, *Core concepts for attribute-based access control (ABAC)* ("Policies act like future
+  grants"; a policy on a catalog covers every table in it; a table with no matching column isn't
+  covered): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/core-concepts
+- Databricks, *Create and manage row filter and column mask policies* (exempt principals see the full,
+  unmodified data): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
+- Databricks, *Row filter and column mask policy evaluation and runtime behavior* (one distinct mask per
+  column for each user, one row filter per table, or an error):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policy-evaluation
+- Databricks, *Requirements, quotas, and limitations for row filter and column mask policies* (governed
+  tags only; the compute; 100 policies per catalog, 20 principals per policy):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/requirements
+- Databricks, *Common patterns for row filtering and column masking* (a `VARIANT` mask for many types,
+  a table closed until it's classified, partial reveal without regular expressions, a row filter given
+  a constant): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/common-patterns
+- Databricks, *Performance considerations for row filter and column mask policies* (simple,
+  deterministic functions): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/performance
+- Databricks, *CREATE POLICY*: https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-policy
+- Databricks, *SHOW POLICIES* (`EFFECTIVE` adds the policies inherited from the schema and catalog):
+  https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-aux-show-policies
+- Databricks, *TABLE_TAGS* (the tags on each table):
+  https://docs.databricks.com/aws/en/sql/language-manual/information-schema/table_tags
+- Databricks, *SQL task for jobs* (a file of several statements, on a serverless or pro SQL warehouse):
+  https://docs.databricks.com/aws/en/jobs/sql

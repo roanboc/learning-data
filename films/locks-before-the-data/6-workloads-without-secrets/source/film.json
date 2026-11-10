@@ -1,0 +1,29 @@
+{
+  "key": "workloads-without-secrets",
+  "title": "Workloads without secrets",
+  "sub": "The sixth film of Locks before the data, the first series of Data protection and privacy: why the Netherlands' car thefts fell once every new car asked its key's chip for a code before the engine would run; and the same for a job: a name of its own in Microsoft Entra ID, run by Azure Databricks as itself, deployed from GitHub Actions with a signed note for each run instead of a token, GitHub's own app instead of people's tokens, one password left in a key vault, changed by a machine, and secret scanning and push protection for the copies.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, the data platform a tall block of clear glass with one lit door. Microsoft Entra ID's, Azure Databricks', Azure's and GitHub's pages are drawn as their docs show them, with their logos. Cyan is an identity, green allowed, coral denied or closed, violet hidden (a secret is always a sealed card, never its characters), gold the chip that says a card or a key is genuine. The Netherlands of the 1990s is painted in the same night light, with its place and year on a tag; no one's likeness is drawn.",
+  "src": [
+    "ws_kit.js",
+    "ws_car.js",
+    "ws_pages.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "asked",
+    "pass",
+    2.6
+  ],
+  "say": [
+    ["\\bOkafor\\b", "Oh-kah-for"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"],
+    ["\\bHR\\b", "H R"]
+  ],
+  "story": [
+    "copy",
+    "asks"
+  ],
+  "urgent": [],
+  "logos": true
+}

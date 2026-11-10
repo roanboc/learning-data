@@ -376,7 +376,7 @@ No film source yet.
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 
 ### Architecture that keeps up
 

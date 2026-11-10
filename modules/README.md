@@ -377,6 +377,7 @@ Module: `data-management` · [metadata](data-management/module.json)
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
+- [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
 
 ### Making the case
 

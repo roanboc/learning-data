@@ -12,7 +12,8 @@ owner to review it, without anyone remembering to.
     a consumer's exposures                  the consumer
     governance's check and its tests        data governance and the data architect (DEC-PRJ-12)
     the team's memory, memory/              data governance, which owns the memory as a whole
-    each agent's settings, agents/          the platform team; each agent's folder, its owner too
+    each agent's settings, agents/          the platform team (an owner answers for its agent, and never
+                                            reviews a pull request)
 
 Owners are named as people know them; governance/2-owners/owners.yml says where each one's
 review request goes. An owner that isn't there stops the script: every owner must be reachable.
@@ -45,12 +46,6 @@ LATER = {"The graduation list: its owner, its sources, its ceremonies and the pe
 
 def load(path):
     return yaml.safe_load(path.read_text()) or {}
-
-
-def front_matter(path):
-    """The YAML between the --- lines that open a Markdown file, such as an agent's README."""
-    text = path.read_text()
-    return (yaml.safe_load(text.split("---\n", 2)[1]) or {}) if text.startswith("---\n") else {}
 
 
 def meta(item):
@@ -149,10 +144,8 @@ def main():
 
     # Last again: each agent's settings in the tools, which scripts/generate/agents.py writes from the map. The
     # platform team applies them, and the script that writes them reads the data architect's map.
-    rules.append((None, None, "Each agent's settings in the tools, written from the map: the platform team, and each agent's owner"))
+    rules.append((None, None, "Each agent's settings in the tools, written from the map: the platform team"))
     rules.append(("/agents/", reach("Sam, platform team"), None))
-    for readme in sorted((ROOT / "agents").glob("*/README.md")):
-        rules.append((f"/agents/{readme.parent.name}/", reach("Sam, platform team", front_matter(readme).get("owner")), None))
     rules.append(("/scripts/generate/agents.py", reach("Sam, platform team") + [reviewers["model"]], None))
 
     if unknown:

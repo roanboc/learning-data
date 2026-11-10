@@ -87,7 +87,6 @@
 # The claims app: its owner, for the claims read where the app writes them
 /sources/claims_app/                                     hr@uni.example jun.park@uni.example
 
-# Each agent's settings in the tools, written from the map: the platform team, and each agent's owner
+# Each agent's settings in the tools, written from the map: the platform team
 /agents/                                                 platform@uni.example
-/agents/planning-agent/                                  platform@uni.example clara.jensen@uni.example
 /scripts/generate/agents.py                              platform@uni.example noor@uni.example

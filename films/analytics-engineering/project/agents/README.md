@@ -31,8 +31,9 @@ by hand, and no right is given by hand.
    doesn't say what it reads, writes or calls; on a step only people do, given to a role an agent fills; on
    anything a step reads, writes or calls that has no line in `tools.yml`; and on an agent in `tools.yml`
    that isn't on the map.
-4. **Review, then apply.** The pull request asks the platform team and the agent's owner to review the
-   folder (`CODEOWNERS`). Once it's merged, the platform team applies each file, as the table says.
+4. **Review, then apply.** The pull request asks the platform team to review the folder (`CODEOWNERS`).
+   The agent's owner answers for what it does, and doesn't review pull requests. Once it's merged, the
+   platform team applies each file, as the table says.
 
 To give an agent a new right, change its role's step on the map, through review. The script writes the
 files again, and the platform team applies them. Never the other way: a right given by hand in a tool is

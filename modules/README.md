@@ -289,6 +289,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
+- [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 
 ### Kept for a reason
 
@@ -370,6 +371,7 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
+- [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
 - [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 
 ### Ownership and performance
@@ -397,7 +399,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 
 ### Architecture that keeps up
 

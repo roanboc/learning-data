@@ -117,6 +117,7 @@
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
 | Less, on purpose | 237 | 0% | 0 | 28.5 | Drawn to the rule |
+| One small change at a time | 253 | 0% | 0 | 28.4 | Drawn to the rule |
 | The team comes first | 269 | 0% | 0 | 28.5 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
 | No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
@@ -129,6 +130,7 @@
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Tags that travel | 304 | 0% | 0 | 28.2 | Drawn to the rule |
+| One policy for many tables | 430 | 0% | 0 | 28.1 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
 | When someone falls behind | 211 | 0% | 0 | 28.3 | Drawn to the rule |

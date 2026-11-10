@@ -1,7 +1,7 @@
 /* Learning while doing: Latin American Spanish captions, over the English film. Each English narration line (the key, exactly as in src/narration.js) maps to its caption.
    Only the captions change: the picture, the voice and the timings stay English, so the site plays the same film, and the video, which has no captions on its picture, takes es.srt.
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
-   Words as the module's numbers.md and film 1 have them: el equipo, la gestora de datos, las aulas, los conteos, el flujo de los sensores, renumeradas,
+   Words as the module's numbers.md and Many hats, one picture have them: el equipo, la gestora de datos, las aulas, los conteos, el flujo de los sensores, renumeradas,
    "quedar fuera sin aviso". In Angicos, 1963: un pueblo, clases nocturnas, peones del campo, albañiles y lavanderas, las cartillas (Eva vio la uva,
    the primer line as Spanish readers know it), un círculo de cultura, un coordinador en lugar de un maestro, belota and its borlas, the book's
    Spanish title, Pedagogía del oprimido, and Freire's words as Spanish quotes them: quien enseña aprende al enseñar, y quien aprende enseña al

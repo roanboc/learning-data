@@ -1,8 +1,8 @@
 # Strategy is a habit: questions and assumptions
 
-*Data management* · *Small steps, measured*, film 4 · open, PR #269 · [pull request](https://github.com/roanboc/learning-data/pull/269)
+*Data management* · *Small steps, measured*, film 4 of 4 · merged, PR #269 · [pull request](https://github.com/roanboc/learning-data/pull/269)
 
-On the site once PR #269 merges: https://data.learn-all.org/small-steps-measured/strategy-is-a-habit/
+[Watch it on the site](https://data.learn-all.org/small-steps-measured/strategy-is-a-habit/)
 
 > Copied from the film thread's notes on 10 November 2026. `openings.md`, `numbers.md` and `palettes.md` are in the module's working folder, not in this repository; the script's *Rigour* is in the film's folder, `films/small-steps-measured/4-strategy-is-a-habit/`, and `tools/score.py` in its `source/`.
 

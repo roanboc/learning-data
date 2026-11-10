@@ -1,0 +1,74 @@
+# The road to production for the project, as GitHub Actions runs it (DEC-PRJ-16): every pull request
+# is built and tested, and the bundle validated; every merge to main is deployed to test and run
+# there; then the same files go to production, once Noor approves. An example: here it sits in
+# examples/, so it never runs. In the project's own repository it would be
+# .github/workflows/release.yml, with, in the repository's settings:
+#
+#   - main protected: changes only through a pull request; one approving review, from someone
+#     other than the person who pushed last ("Require approval of the most recent reviewable push");
+#     the check job below must pass ("Require status checks to pass before merging");
+#   - two environments, test and production; production's required reviewer is Noor, with
+#     "Prevent self-review" on, so nobody approves their own change;
+#   - the platform's service principal's token as the secret SP_TOKEN, never a person's: test's in
+#     the repository's secrets; production's in the production environment's, which only a job Noor
+#     approved can read (an environment's secret wins over the repository's of the same name).
+#
+# Databricks' page "GitHub Actions" (CI/CD on Databricks) shows the same steps.
+
+name: Release
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+
+  # Every change, before anyone reviews it: the whole build and every test, the unit tests included,
+  # on DuckDB, and the bundle validated.
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: dbt build --profiles-dir .
+      - uses: databricks/setup-cli@main
+      - run: databricks bundle validate -t test
+        env:
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+
+  # Once merged: the same files, deployed to test and run there, on test's data.
+  test:
+    if: github.event_name == 'push'
+    needs: check
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: databricks/setup-cli@main
+      - run: databricks bundle deploy -t test
+      - run: databricks bundle run -t test payroll_export
+
+  # Then production: the job waits here until Noor, the environment's required reviewer, approves.
+  production:
+    needs: test
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: databricks/setup-cli@main
+      - run: databricks bundle deploy -t prod

@@ -44,9 +44,9 @@ Then, if you like:
 | `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
 | `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
-| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS` from the owners in the metadata, so a change asks its owner to review it |
+| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
-| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, and who does what |
+| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
 | `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
@@ -181,7 +181,7 @@ project/
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
 │   ├── 3-architecture-map/   the governance part of Noor's map, one file per element, by layer;
-│   │                         6-views/ [generated]: services and promises, who does what
+│   │                         6-views/ [generated]: services and promises, who does what, each role's rights
 │   ├── 4-data-products/      each product: owner, domain, status, outputs, service levels, support
 │   ├── 5-data-contracts/     [generated] each output's contract, in the open contract standard
 │   ├── 6-product-descriptors/ [generated] each product, in the open product standard
@@ -229,15 +229,24 @@ project/
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the count of active research projects as a
-│                             function, a Genie Agent and an agent's evaluation cases (Databricks only); hr-system-interface/: the HR system's data contract, agreed with its owner
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
+│                             hr-system-interface/: the HR system's data contract, agreed with its owner;
+│                             hot-warm-cold/: a streaming table, a materialized view and an archive,
+│                             data kept hot, warm and cold, with their service levels (Databricks only);
+│                             the-night-the-claims-job-failed/: a job that failed, the platform's
+│                             insight by morning, the fix and the pull request a person approved
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
-├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
+├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
 ├── memory/                   the team's memory, kept by the platform and second to what's governed:
 │                             who owns it and may read or write it; removed.md, what was deleted, why
 ├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
 │                             a model, reconcile and diff, review metadata, sync the glossary,
 │                             review for governance; and choose-the-skill, which picks one
+├── databricks.yml            the bundle: the project's jobs, deployed the same way to test and to
+│                             production, after a review and Noor's approval (Databricks only)
+├── resources/                a file for each job the bundle deploys: payroll's export, and the
+│                             claims job, with the step that sends the hours to payroll
 └── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
 ```
 
@@ -254,6 +263,8 @@ project/
 | *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
 | *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
 | *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the award's definition taken from the business glossary (`source:`, `skills/sync-the-glossary/`), the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Scripts became software* | Payroll's export: `mart_finance__casual_pay_paid`, on the claims' core (`core_claim`), with its unit test of the Monday-noon close (approved at 11:59 and at 12:01); `pay_day_for()` on HR's calendar of pay days (`seeds/reference/staff/pay_days.csv`) and the units seed; the bundle, `databricks.yml` and `resources/payroll_export.job.yml`; and, in `examples/scripts-became-software/`, the release workflow and the laptop script it replaced |
+| *A platform that watches itself* | The claims job, `resources/claims.job.yml`, and its second task, `send_hours_to_payroll.py`; the hours to pay, `mart_payroll__hours_to_pay`, with its unit test of the open pay run, its product and the exposure `payroll_system`; the claim in the new form, CL-104287, read by `decimal_hours()` (`macros/hr/decimal_hours.sql`) in `stg_claims_app__claims`, with its unit test of both forms; DEC-CLM-02, the fix, and DEC-CLM-03, the contract first, proposed; and, in `examples/the-night-the-claims-job-failed/`, the failed build, the insight, the patch and the pull request |
 
 ## What differs between engines
 
@@ -330,3 +341,20 @@ dbt ls --select core_credential+ --resource-type exposure --profiles-dir .
 A consumer still on version 1, such as a model that selects
 `credential_key, is_revoked from {{ ref('core_credential', v=1) }}`, gets dbt's warning on every
 parse: version 1 is slated for deprecation, and version 2 is available.
+
+## Its jobs, deployed as a bundle
+
+The project's jobs are files too. `databricks.yml` is a Declarative Automation Bundle (formerly
+Databricks Asset Bundles), and `resources/` holds a file for each job, such as payroll's export,
+which runs every Thursday at 06:00, Sydney time, and the claims job, every Monday at 22:00. Nobody
+deploys them to test or production from a laptop: once a pull request is reviewed and merged, a
+release workflow deploys the same files to test and runs them there, then deploys them to
+production when Noor approves (DEC-PRJ-16).
+`examples/scripts-became-software/` has the workflow, the script the export replaced, and the road
+step by step. To try a change in a copy of your own, its names prefixed and its schedules paused:
+
+```sh
+databricks bundle validate -t dev
+databricks bundle deploy -t dev
+databricks bundle run -t dev payroll_export
+```

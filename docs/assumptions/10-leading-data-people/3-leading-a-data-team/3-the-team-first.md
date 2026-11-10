@@ -1,8 +1,8 @@
 # The team comes first: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 3 · open, PR #257 · [pull request](https://github.com/roanboc/learning-data/pull/257)
+*Leading data people* · *Leading a data team*, film 3 · merged, PR #257 · [pull request](https://github.com/roanboc/learning-data/pull/257)
 
-On the site once PR #257 merges: https://data.learn-all.org/leading-a-data-team/the-team-first/
+[Watch it on the site](https://data.learn-all.org/leading-a-data-team/the-team-first/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

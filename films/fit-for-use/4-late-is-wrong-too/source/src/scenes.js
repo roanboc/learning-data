@@ -83,10 +83,10 @@ function lw_chain(x,tt,c,P,day){let q=lw_pop(tt,c.data-0.1,null);dq_textCard(x,1
   const s1=1-ag_in(tt,P.doesnt,0.3);q=lw_pop(tt,c.data+0.3,null);
   if(!day){lw_file(x,590,326,{when:"each night, 2:00",k:q.k,a:q.a*s1});lw_file(x,590,326,{dash:true,dark:true,when:"didn't come",a:ag_in(tt,P.doesnt+0.3,0.3)});}
   else lw_file(x,590,326,{when:"came at 11:40",whenCol:DQ_TONE.hold.word});
-  q=lw_pop(tt,c.data+0.6,null);const L=lw_list(x,1030,200,{w:640,h:470,count:day?"712":"689",countA:day?1:ag_in(tt,P.without,0.5),ghost:day?0:ag_in(tt,P.n23,0.6),ghostText:"23 missing",
+  q=lw_pop(tt,c.data+0.6,null);const L=lw_list(x,1030,200,{w:640,h:520,count:day?"712":"689",countA:day?1:ag_in(tt,P.without,0.5),ghost:day?0:ag_in(tt,P.n23,0.6),ghostText:"23 missing",
     fill:day?1:0,k:q.k,a:q.a});
   q=lw_pop(tt,c.passed+0.2,null);dq_tag(x,1000,568,"pass",{text:"EVERY CHECK PASSES",to:[1030,520],flip:true,k:q.k,a:q.a});
-  if(!day)dq_chip(x,1030,724,"nothing says how old it is",{icon:"dash",col:"none",a:ag_in(tt,P.nothing,0.5)});
+  if(!day)dq_chip(x,1030,776,"nothing says how old it is",{icon:"dash",col:"none",a:ag_in(tt,P.nothing,0.5)});
   else{q=lw_pop(tt,P.all,null);dq_tag(x,1000,652,"pass",{text:"ALL 23 ON THE LIST",to:[1030,610],flip:true,k:q.k,a:q.a});
     dq_clock(x,1760,150,62,0,480,{a:ag_in(tt,P.notices-0.2,0.5)});dq_chip(x,1760,262,"in time",{align:"center",icon:"clock",col:"pass",a:ag_in(tt,P.notices+0.3,0.5)});}}
 scene("story",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),radio:wAt(sc,"radio","the radio"),knew:wAt(sc,"stay","know a storm"),nobody:wAt(sc,"stay","almost nobody"),
@@ -115,7 +115,7 @@ function lw_green(x,tt,c,P){
   // the clock: two, then three; Wednesday night, two again, then three
   const ca=ag_io(tt,0.4,c.wed-0.7,0.5)+ag_in(tt,c.wed+0.1,0.5),mins=tt<c.wed?lerp(120,180,ag_sine((tt-c.build)/1.2)):lerp(120,180,ag_sine((tt-c.anyway)/1.2));
   dq_clock(x,1760,150,62,0,mins,{a:Math.min(1,ca)});
-  let q=lw_pop(tt,0.6,null);dq_textCard(x,100,220,440,{kick:"Each night at 2:00",title:"Student system"},{icon:"table",k:q.k,a:q.a});
+  let q=lw_pop(tt,0.6,null);dq_textCard(x,100,220,480,{kick:"Each night at 2:00",title:"Student system"},{icon:"table",k:q.k,a:q.a});
   // the file that came, Wednesday's: its date in steel once it matters
   const bf=ag_in(tt,P.before,0.5);q=lw_pop(tt,P.file,null);lw_file(x,100,420,{when:"Wed 17 Jun, 02:00",whenA:bf,whenCol:DQ_TONE.steel.word,k:q.k,a:q.a});
   lw_arrow(x,462,495,1158,495,{dark:true,u:ag_in(tt,c.build,1.0)});lw_arrow(x,462,495,1158,495,{col:rgba(DQ_TONE.steel.dark,1),lw:5,u:ag_in(tt,P.before,1.0)});
@@ -123,13 +123,13 @@ function lw_green(x,tt,c,P){
   q=lw_pop(tt,P.didnt,null);lw_file(x,100,600,{dash:true,dark:true,title:"Thursday's file",when:"didn't come",a:q.a});
   dq_chip(x,100,800,"a full disk on the student system's side",{icon:"warn",a:ag_io(tt,P.disk,c.boards,0.5)});
   // the list, built at three; then from the file of the night before: 689, every check green, 23 missing
-  q=lw_pop(tt,c.build+0.5,null);lw_list(x,1170,250,{w:640,h:500,count:"689",countA:ag_in(tt,c.green,0.5),ghost:ag_in(tt,c.missing+0.2,0.6),ghostText:"23 missing",k:q.k,a:q.a});
+  q=lw_pop(tt,c.build+0.5,null);lw_list(x,1170,250,{w:640,h:520,count:"689",countA:ag_in(tt,c.green,0.5),ghost:ag_in(tt,c.missing+0.2,0.6),ghostText:"23 missing",k:q.k,a:q.a});
   q=lw_pop(tt,c.green+0.7,null);dq_tag(x,1140,640,"pass",{text:"EVERY CHECK PASSES",to:[1170,600],flip:true,k:q.k,a:q.a});
   // the boards' lists: the same transfer, a day old too; the check against them passes
-  q=lw_pop(tt,P.boards,c.looks-0.3);dq_textCard(x,580,220,540,{kick:"Same transfer",title:"The exam boards' approved lists"},{edge:"brass",k:q.k,a:q.a});
-  dq_chip(x,580,452,"a day old too",{icon:"clock",col:"steel",a:ag_io(tt,P.dayOld,c.looks-0.3,0.5)});
+  q=lw_pop(tt,P.boards,c.looks-0.3);dq_textCard(x,600,220,540,{kick:"Same transfer",title:"The exam boards' approved lists"},{edge:"brass",k:q.k,a:q.a});
+  dq_chip(x,600,452,"a day old too",{icon:"clock",col:"steel",a:ag_io(tt,P.dayOld,c.looks-0.3,0.5)});
   q=lw_pop(tt,P.passedB,null);dq_tag(x,1140,730,"pass",{text:"AGREES WITH THE BOARDS",to:[1170,690],flip:true,k:q.k,a:q.a});
-  q=lw_pop(tt,c.looks,null);dq_textCard(x,580,220,540,{title:"Late data looks complete"},{k:q.k,a:q.a});
+  q=lw_pop(tt,c.looks,null);dq_textCard(x,600,220,540,{title:"Late data looks complete"},{k:q.k,a:q.a});
   // each check looks at what's there; the file that isn't was never checked
   const la=ag_io(tt,c.see,P.none+0.6,0.4),lu=ag_sine((tt-c.see-0.2)/2.2);if(la>0.004)dq_icon(x,"lens",lerp(1240,1720,lu),lerp(470,580,lu),70,"steel",{dark:true,a:la,lw:4});
   q=lw_pop(tt,P.none,null);dq_tag(x,300,790,"none",{to:[275,750],k:q.k,a:q.a});}
@@ -148,11 +148,11 @@ const LW_OLD=["student_system:",[["  loaded_at_field: ",null],["_loaded_at",null
   [["    error_after: ",null],["{count: 3, period: day}",null]]];
 function lw_hours(x,tt,c,P){const G=P.g0+tt,M0=c.december-0.5;
   dq_clock(x,1760,150,62,0,ag_keys(tt,[[0,480],[P.c1140,480],[P.c1140+1.4,700],[P.c1210,700],[P.c1210+1.0,730],[P.c320,730],[P.c320+1.6,920]]),{});
-  lw_who(x,"sam",300,G,1);dq_nameTag(x,300,262,"sam",{align:"center",a:ag_io(tt,P.sam,c.thirty,0.4)});
-  lw_who(x,"malia",1680,G,ag_in(tt,P.malia-0.3,0.6),{flip:true});dq_nameTag(x,1680,262,"malia",{align:"center",a:ag_io(tt,P.malia,c.arrives,0.4)});
+  lw_who(x,"sam",300,G,1);dq_nameTag(x,440,410,"sam",{a:ag_io(tt,P.sam,c.thirty-0.4,0.4)});
+  lw_who(x,"malia",1680,G,ag_in(tt,P.malia-0.3,0.6),{flip:true});dq_nameTag(x,1520,410,"malia",{align:"right",a:ag_io(tt,P.malia,c.arrives,0.4)});
   let q=lw_pop(tt,P.printer,null);lw_send(x,1100,90,{w:520,k:q.k,a:q.a});
   // the monitoring: the student system's tables late
-  q=lw_pop(tt,P.monitoring-0.3,c.thirty-0.3);lw_monitor(x,560,300,{k:q.k,a:q.a,lit:tt>P.late?[0,1,2]:[]});
+  q=lw_pop(tt,P.monitoring-0.3,c.thirty-0.3);lw_monitor(x,680,300,{k:q.k,a:q.a,lit:tt>P.late?[0,1,2]:[]});
   // dbt's freshness check, line by line; thirty hours old
   q=lw_pop(tt,c.thirty,c.level-0.3);lw_cli(x,560,300,{k:q.k,a:q.a,h:330,lines:[["warn","student_system.graduations"],["warn","student_system.results"],["pass","portal.name_confirmations"]],
     lineA:(l,i)=>ag_in(tt,c.thirty+0.4+i*0.35,0.3)});
@@ -167,9 +167,9 @@ function lw_hours(x,tt,c,P){const G=P.g0+tt,M0=c.december-0.5;
   q=lw_pop(tt,P.holds,P.goesW);dq_tag(x,1300,300,"hold",{to:[1330,232],k:q.k,a:q.a});
   q=lw_pop(tt,P.goesW+0.4,M0);dq_tag(x,1300,300,"pass",{text:"SENT · 3:20 PM",to:[1330,232],k:q.k,a:q.a});
   q=lw_pop(tt,c.calls+0.4,M0);const sw=ag_in(tt,P.n712,0.25),fl=ag_in(tt,P.n712+0.3,0.6),tk=ag_in(tt,P.checks,1.8);
-  lw_list(x,560,330,{w:520,h:440,count:"689",countA:1-sw,fill:fl,ticks:tk,note:tk>0.5?"checked":"23 new names",noteCol:tk>0.5?"pass":"hold",
+  lw_list(x,560,290,{w:520,h:520,count:"689",countA:1-sw,fill:fl,ticks:tk,note:tk>0.5?"checked":"23 new names",noteCol:tk>0.5?"pass":"hold",
     noteA:fl*(tk>0.5?ag_in(tt,P.checks+0.9,0.3):1-ag_in(tt,P.checks+0.6,0.3)),k:q.k,a:q.a});
-  if(q.a>0.004){x.save();x.globalAlpha*=q.a;lw_count(x,560,330,"712",ag_in(tt,P.n712+0.25,0.25));x.restore();}
+  if(q.a>0.004){x.save();x.globalAlpha*=q.a;lw_count(x,560,290,"712",ag_in(tt,P.n712+0.25,0.25));x.restore();}
   q=lw_pop(tt,P.arrivesW,M0);lw_file(x,1110,470,{when:"Thu 18 Jun, 11:40",whenCol:DQ_TONE.hold.word,k:q.k,a:q.a});}
 function lw_december(x,tt,c,P){let q=lw_pop(tt,c.december,null);dq_textCard(x,560,230,820,{kick:"December 2025",title:"Six graduates left off the same way",sub:"and nobody saw"},{k:q.k,a:q.a});
   lw_posted(x,560,520,(tt-P.printedW)/1.6,ag_in(tt,P.printedW,0.4));dq_chip(x,560,700,"printed late, and posted",{icon:"mail",a:ag_in(tt,P.posted,0.5)});}
@@ -195,15 +195,16 @@ const LW_CONTRACT=["quality:","  - name: certificates_from_that_nights_files",[[
   "slaProperties:",[["  - property: ",null],["latency",null]],[["    value: ",null],["24","brass"],["    unit: ",null],["h","brass"]]];
 function lw_meet(x,tt,c,P){const G=P.g0+tt,K0=c.knows-0.2;
   lw_who(x,"sam",330,G,1);lw_who(x,"malia",1100,G,1);lw_who(x,"mei",1590,G,ag_in(tt,P.mei-0.4,0.6),{flip:true});
-  dq_nameTag(x,330,262,"sam",{align:"center",a:ag_io(tt,P.samW,K0,0.4)});dq_nameTag(x,1100,262,"malia",{align:"center",a:ag_io(tt,P.maliaW,K0,0.4)});
-  dq_nameTag(x,1590,262,"mei",{align:"center",role:"Owns the list",a:ag_io(tt,P.mei,K0,0.4)});
-  dq_chip(x,330,262,"sees that a table is late",{align:"center",icon:"lens",col:"steel",a:ag_in(tt,P.platform,0.5)});
-  dq_chip(x,1345,262,"its users say when late is too late",{align:"center",icon:"people",col:"brass",a:ag_in(tt,P.users,0.5)});}
-const LW_USES=[["Certificates","That night's files, at the send","certificate",{min:0,max:48,lo:0,hi:24,ticks:8,read:"24 hours"}],
-  ["Seating","A list a few days old","seat",{min:0,max:14,lo:0,hi:5,ticks:7,read:"days"}],["Planning","Weeks after the year's end","building",{min:0,max:12,lo:0,hi:8,ticks:6,read:"weeks"}]];
+  dq_nameTag(x,470,410,"sam",{a:ag_io(tt,P.samW,K0,0.4)});dq_nameTag(x,975,410,"malia",{align:"right",a:ag_io(tt,P.maliaW,K0,0.4)});
+  dq_nameTag(x,1450,410,"mei",{align:"right",role:"Owns the list",a:ag_io(tt,P.mei,K0,0.4)});
+  dq_chip(x,330,216,"sees that a table is late",{align:"center",icon:"lens",col:"steel",a:ag_in(tt,P.platform,0.5)});
+  dq_chip(x,1345,216,"its users say when late is too late",{align:"center",icon:"people",col:"brass",a:ag_in(tt,P.users,0.5)});}
+const LW_USES=[["Certificates","That night's files","when the list goes to the printer","certificate",{min:0,max:48,lo:0,hi:24,ticks:8,read:"24 hours"}],
+  ["Seating","A list a few days old","counted a week before","seat",{min:0,max:14,lo:0,hi:5,ticks:7,read:"days"}],
+  ["Planning","Weeks are fine","after the year's end","building",{min:0,max:12,lo:0,hi:8,ticks:6,read:"weeks"}]];
 function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.planning],st=ag_in(tt,P.strictest,0.6);
-  LW_USES.forEach(([k,ti,ic,d],i)=>{const q=lw_pop(tt,ts[i]+0.2,U0),dim=i?1-0.55*st:1;
-    x.save();x.globalAlpha*=dim;dq_textCard(x,150+i*560,150,500,{kick:k,title:ti},{icon:ic,edge:"brass",on:"granite",k:q.k,a:q.a});
+  LW_USES.forEach(([k,ti,sub,ic,d],i)=>{const q=lw_pop(tt,ts[i]+0.2,U0),dim=i?1-0.55*st:1;
+    x.save();x.globalAlpha*=dim;dq_textCard(x,150+i*560,150,500,{kick:k,title:ti,sub},{icon:ic,edge:"brass",on:"granite",k:q.k,a:q.a});
     const dq=lw_pop(tt,P.three+i*0.3,U0);dq_dial(x,400+i*560,520,140,Object.assign({u:ag_in(tt,P.three+i*0.3+0.3,0.9),readCol:"brass",on:"granite",k:dq.k,a:dq.a},d));x.restore();});
   const q=lw_pop(tt,P.level,U0);dq_textCard(x,560,760,800,{title:"The level: a day old at most, at the send"},{edge:"brass",on:"granite",k:q.k,a:q.a});}
 function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,R0);
@@ -218,7 +219,7 @@ scene("fresh",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),mal
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",later:true,dis:0.6,keys:[[0,960,540,1]],draw:(x,tt)=>lw_meet(x,tt,c,P)},
     {at:T0,place:"benchTop",keys:[[0,960,540,1]],draw:(x,tt)=>{lw_uses(x,tt,c,P);lw_rule(x,tt,c,P);}}]);
   setScreen(ctx,S);const top=ag_in(t,T0,0.5);dq_kicker(ctx,"4","How fresh, for what",{a:ag_in(t,0.9,0.6)*(1-top)});dq_kicker(ctx,"4","How fresh, for what",{dark:true,a:top});
-  lw_date(ctx,S,"Monday 22 June",ag_io(t,c.monday,c.certs-0.6,0.5));});
+  lw_date(ctx,S,"Monday 22 June",ag_io(t,c.monday,c.knows-0.4,0.5));});
 
 /* ---------------------------------------------------------------- 5 · Say how old it is
    The bench from above. From Tuesday 23 June the list says how old it is: two columns, each source's age, lit in steel; that
@@ -226,9 +227,9 @@ scene("fresh",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),mal
    volunteers' three flags beside it: a signal everyone can read. Too good to be true labelled a number from the night before; here,
    every list says its age, on a good night too. Data that says its age can be trusted to be old; data that doesn't, can't. */
 function lw_age(x,tt,c,P){const P0=c.shown-0.3,H0=P.here-0.2,E0=c.trust-0.3;
-  let q=lw_pop(tt,c.says,P0);lw_table(x,210,170,{cells:ag_in(tt,c.row,0.6),lit:ag_in(tt,P.ageW,0.6),ssCol:tt>P.ownW?DQ_TONE.hold.word:null,poCol:tt>P.ownW?DQ_TONE.pass.word:null,on:"granite",k:q.k,a:q.a});
-  const o1=ag_io(tt,P.ss,P0,0.4),o2=ag_io(tt,P.po,P0,0.4);dq_chip(x,918,620,"30 hours old",{icon:"clock",col:"hold",on:"granite",a:o1});dq_chip(x,1328,620,"6 hours old",{icon:"clock",col:"pass",on:"granite",a:o2});
-  dq_chip(x,918,700,"student_system_as_of · portal_as_of",{col:"steel",on:"granite",a:ag_io(tt,c.row+0.8,c.own-0.2,0.4)});
+  let q=lw_pop(tt,c.says,P0);lw_table(x,210,226,{cells:ag_in(tt,c.row,0.6),lit:ag_in(tt,P.ageW,0.6),ssCol:tt>P.ownW?DQ_TONE.hold.word:null,poCol:tt>P.ownW?DQ_TONE.pass.word:null,on:"granite",k:q.k,a:q.a});
+  const o1=ag_io(tt,P.ss,P0,0.4),o2=ag_io(tt,P.po,P0,0.4);dq_chip(x,918,676,"30 hours old",{icon:"clock",col:"hold",on:"granite",a:o1});dq_chip(x,1328,676,"6 hours old",{icon:"clock",col:"pass",on:"granite",a:o2});
+  dq_chip(x,918,756,"student_system_as_of · portal_as_of",{col:"steel",on:"granite",a:ag_io(tt,c.row+0.8,c.own-0.2,0.4)});
   // the printer's page; then a good night's
   q=lw_pop(tt,c.shown,H0);lw_page(x,440,160,{ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,on:"granite",k:q.k,a:q.a});
   q=lw_pop(tt,c.flags,E0);lw_flagCard(x,1540,220,tt,{on:"granite",k:q.k,a:q.a});
@@ -238,7 +239,7 @@ function lw_age(x,tt,c,P){const P0=c.shown-0.3,H0=P.here-0.2,E0=c.trust-0.3;
   dq_chip(x,840,660,"on a good night too",{icon:"tick",col:"pass",on:"granite",a:ag_io(tt,P.good,E0,0.4)});
   q=lw_pop(tt,c.trust,null);dq_textCard(x,460,300,1000,{title:"Data that says its age can be trusted to be old"},{edge:"brass",on:"granite",k:q.k,a:q.a});
   q=lw_pop(tt,c.cant,null);const b=dq_textCard(x,460,450,1000,{title:"Data that doesn't, can't"},{on:"granite",k:q.k,a:q.a});
-  dq_chip(x,460+1000-28,b.y+b.h/2,"as of ?",{icon:"why",col:"stop",align:"center",a:ag_in(tt,c.cant+0.5,0.4)});}
+  const cw=dq_tw(x,"as of ?",{w:700,size:28})+84;dq_chip(x,460+1000-28-cw,b.y+b.h/2,"as of ?",{icon:"why",col:"stop",a:ag_in(tt,c.cant+0.5,0.4)});}
 scene("age",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),ageW:wAt(sc,"row","age"),ownW:wAt(sc,"own","That Thursday"),ss:wAt(sc,"own","student system"),
     po:wAt(sc,"own","portal"),everyone:wAt(sc,"flags","everyone"),here:wAt(sc,"labelled","Here"),good:wAt(sc,"labelled","on good nights")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"benchTop",later:true,dis:0.6,keys:[[0,960,540,1]],draw:(x,tt)=>lw_age(x,tt,c,P)}]);
@@ -253,12 +254,12 @@ const LW_NEW=["sources:","  - name: student_system","    tables:","      - name:
   [["          error_after: ",null],["{count: 24, period: hour}","brass"]]];
 function lw_receipts(x,X,y,title,rows,o){const a=o.a;if(a<=0.004)return;x.save();x.globalAlpha*=a;if(o.k!=null)ag_about(x,X+290,y+150,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(x,X,y,580,300,{});dq_label(x,X+DQ_PAD,y+54,title,{});dq_T(x,"nightly_files",X+DQ_PAD,y+100,{w:500,size:28,f:"mono",col:DQ.soft});
-  dq_rows(x,X+DQ_PAD,y+116,[{h:"received_at",w:520,f:"mono"}],rows,{rh:56,lit:o.lit,litCol:"steel"});x.restore();}
+  dq_rows(x,X+DQ_PAD,y+116,[{h:"Received at",w:520,f:"mono"}],rows,{rh:56,lit:o.lit,litCol:"steel"});x.restore();}
 function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x,"sam",280,G,1);
   let q=lw_pop(tt,c.source+0.2,c.level-0.3);lw_receipts(x,560,200,"Student system",[["Tue 16 Jun, 02:00"],["Wed 17 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
   q=lw_pop(tt,c.source+0.5,c.level-0.3);lw_receipts(x,1200,200,"Portal",[["Wed 17 Jun, 02:00"],["Thu 18 Jun, 02:00"]],{lit:tt>P.arrivedW?[0,1]:[],k:q.k,a:q.a});
   dq_chip(x,560,560,"not the newest row: days old when no board has met",{icon:"dash",col:"none",a:ag_io(tt,P.newest,c.level-0.3,0.4)});
-  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1280,{title:"sources",lines:LW_NEW,lit:tt>P.h24?[6]:[],k:q.k,a:q.a});
+  q=lw_pop(tt,c.level,J0);lw_yml(x,560,200,1060,{title:"sources",lines:LW_NEW,lit:tt>P.h24?[6]:[],k:q.k,a:q.a});
   dq_chip(x,560,690,"the same on the portal's",{icon:"tick",a:ag_io(tt,P.each,J0,0.4)});
   // the night's job: the check first; it fails, two people hear, the list is still built
   const fail1=ag_in(tt,c.tells+0.2,0.3)>0.5,built=tt>P.built;q=lw_pop(tt,c.first,J1);
@@ -267,13 +268,13 @@ function lw_stop(x,tt,c,P){const G=P.g0+tt,J0=c.first-0.3,J1=c.send-0.3;lw_who(x
   dq_chip(x,1210,660,"the list says its age",{icon:"clock",col:"steel",a:ag_io(tt,P.saying,c.warn-0.3,0.4)});
   q=lw_pop(tt,c.warn,J1);dq_textCard(x,560,650,900,{kick:"That's the warning",title:"Nothing stops, and the people who need to know, know"},{edge:"hold",k:q.k,a:q.a});
   // the send's job: the same check; it fails, the send waits, Malia is told why
-  const fail2=tt>P.ifNot,wait=tt>P.waitsW;q=lw_pop(tt,P.sendW,null);
+  const fail2=tt>P.ifNot,wait=tt>P.waitsW;q=lw_pop(tt,c.send+0.1,null);
   lw_job(x,560,200,{job:"the send to the printer",tasks:["Check the sources' age","Send to the printer"],runIf:"All succeeded",states:[fail2?"stop":null,wait?"wait":null],
     who:"Malia Fonoti: told why",tell:ag_in(tt,P.told,0.5),k:q.k,a:q.a});
   q=lw_pop(tt,c.data,null);dq_textCard(x,560,660,900,{title:"The data isn't stopped. The send is."},{edge:"stop",k:q.k,a:q.a});}
 scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),arrivedW:wAt(sc,"arrived","arrived"),newest:wAt(sc,"arrived","not the newest row"),
     each:wAt(sc,"level","on each"),h24:wAt(sc,"level","twenty-four hours"),hear:wAt(sc,"tells","hear at once"),built:wAt(sc,"tells","still built"),saying:wAt(sc,"tells","saying its age"),
-    sendW:wAt(sc,"send","a job too"),ifNot:wAt(sc,"waits","if not"),waitsW:wAt(sc,"waits","the list waits"),told:wAt(sc,"waits","told why")}));
+    ifNot:wAt(sc,"waits","if not"),waitsW:wAt(sc,"waits","the list waits"),told:wAt(sc,"waits","told why")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],draw:(x,tt)=>lw_stop(x,tt,c,P)}]);
   setScreen(ctx,S);dq_kicker(ctx,"6","Warn first, then stop the send",{a:ag_in(t,0.9,0.6)});});
 
@@ -282,15 +283,16 @@ scene("stop",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),arri
    with its age, and the send, waiting until the list is fresh; since June, no graduate left off a list by a late file. The film's line,
    then a use, a measure, a reference and a clock, and the next series. */
 function lw_inTime(x,tt,c,P){const T0=c.take-0.3;
-  let q=lw_pop(tt,c.list+0.2,T0);lw_page(x,200,150,{w:960,ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,k:q.k,a:q.a});
+  let q=lw_pop(tt,c.list+0.2,T0);lw_page(x,200,150,{w:960,ssCol:DQ_TONE.hold.word,poCol:DQ_TONE.pass.word,ss2:"Thu 18 Jun, 11:40",ss2Col:DQ_TONE.pass.word,
+    ssU:ag_in(tt,P.fresh,0.6),k:q.k,a:q.a});
   q=lw_pop(tt,P.sendW,T0);lw_send(x,1260,170,{w:520,kick:"Due at 5 pm",k:q.k,a:q.a});
   dq_tag(x,1500,400,"hold",{text:"WAITS",icon:"hourglass",to:[1510,312],k:q.k,a:q.a*(1-ag_in(tt,P.fresh,0.3))});
   q=lw_pop(tt,P.fresh+0.3,T0);dq_tag(x,1500,400,"pass",{text:"FRESH · SENT",to:[1510,312],k:q.k,a:q.a});
   q=lw_pop(tt,c.since,T0);dq_figure(x,200,720,"0","graduates left off a list by a late file, since June",{size:96,col:"pass",a:q.a});
-  q=lw_pop(tt,c.take,null);dq_textCard(x,330,250,1260,{title:"Agree how fresh it must be, and always say how old it is."},{edge:"brass",k:q.k,a:q.a});
+  const E0=c.breath-0.15;q=lw_pop(tt,c.take,E0);dq_textCard(x,330,250,1260,{title:"Agree how fresh it must be, and always say how old it is."},{edge:"brass",k:q.k,a:q.a});
   const words=[["a use",P.use],["a measure",P.measure],["a reference",P.reference],["a clock",P.clock]];let cx=330;
-  words.forEach(([s,t0])=>{const b=dq_chip(x,cx,520,s,{a:ag_in(tt,t0,0.4)});cx=b.x+b.w+20;});
-  dq_chip(x,330,610,"Next: Quality as a habit",{icon:"refresh",col:"brass",a:ag_in(tt,P.next,0.5)});}
+  words.forEach(([s,t0])=>{const b=dq_chip(x,cx,520,s,{a:ag_io(tt,t0,E0,0.4)});cx=b.x+b.w+20;});
+  dq_chip(x,330,610,"Next: Quality as a habit",{icon:"refresh",col:"brass",a:ag_io(tt,P.next,E0,0.4)});}
 scene("time",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),sendW:wAt(sc,"list","the send"),fresh:wAt(sc,"list","fresh"),use:wAt(sc,"series","a use"),
     measure:wAt(sc,"series","a measure"),reference:wAt(sc,"series","a reference"),clock:wAt(sc,"series","a clock"),next:wAt(sc,"series","Next")}));
   const B0=c.list-0.5;

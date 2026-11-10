@@ -67,28 +67,32 @@ function lw_arrow(ctx,x0,y0,x1,y1,o){o=o||{};const a=o.a==null?1:o.a,u=o.u==null
   ctx.translate(xe,ye);ctx.rotate(an);ctx.beginPath();ctx.moveTo(4,0);ctx.lineTo(-18,-12);ctx.lineTo(-18,12);ctx.closePath();ctx.fill();ctx.restore();}
 
 /* ---------------------------------------------------------------- the graduation list
-   A card: its name, how many graduates (o.count, faded by o.countA, in o.countCol), and its rows, faint lines of names and awards (a
-   picture: no words). o.ghost (0 to 1) adds three dashed red rows under them, for those missing, with o.ghostText beside them; o.fill
-   (0 to 1) makes those rows solid, and o.ticks (0 to 1, o.fill by default) ticks each, green, as a person checks them; o.note, words
-   beside them once they're solid (o.noteCol, o.noteA). x, y its top left; o.w (640), o.h (470), o.on, o.edge, o.a, o.k */
+   A card: its name, how many graduates (o.count, faded by o.countA, in o.countCol), and its rows, faint bars of names and awards (a
+   picture: no words), in columns set by the card's width, with room for a tick at the right. o.ghost (0 to 1) adds three dashed red
+   rows under them, for those missing, and o.ghostText on the line under the rows; o.fill (0 to 1) makes those rows solid, and o.ticks
+   (0 to 1, o.fill by default) ticks each, green, as a person checks them; o.note, words on that same line once they're solid
+   (o.noteCol, o.noteA). x, y its top left; o.w (640), o.h (520), o.on, o.edge, o.a, o.k */
 function lw_count(ctx,x,y,s,a,col){if(!(a>0.004))return;dq_T(ctx,String(s),x+DQ_PAD,y+138,{w:800,size:64,col:col||DQ.ink,a});
   dq_T(ctx,"graduates",x+DQ_PAD+dq_tw(ctx,String(s),{w:800,size:64})+16,y+138,{w:600,size:30,col:DQ.soft,a});}
-function lw_list(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||640,h=o.h||470;if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+function lw_list(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||640,h=o.h||520;if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{on:o.on,edge:o.edge});dq_label(ctx,x+DQ_PAD,y+56,"The graduation list",{});dq_icon(ctx,"list",x+w-DQ_PAD-20,y+46,40,DQ.soft);
   if(o.count!=null)lw_count(ctx,x,y,o.count,o.countA==null?1:o.countA,o.countCol);
-  // the rows: a name and an award on each, as faint bars
-  const R=ag_rnd(689),y0=y+214,rh=40,bar=(bx,by,bw,col)=>{ctx.fillStyle=col;rr(ctx,bx,by-9,bw,18,9);ctx.fill();},rows=[];
-  for(let i=0;i<7;i++)rows.push([150+R()*140,110+R()*120]);
-  for(let i=0;i<4;i++){const ry=y0+i*rh;bar(x+DQ_PAD,ry,rows[i][0],"rgba(110,90,66,0.2)");bar(x+DQ_PAD+330,ry,rows[i][1],"rgba(110,90,66,0.14)");
-    ctx.fillStyle="rgba(110,90,66,0.12)";ctx.fillRect(x+DQ_PAD,ry+rh/2,w-2*DQ_PAD,1.2);}
+  // the rows: a name and an award on each, as faint bars; the name's column takes about half the width, the award's starts past it
+  const R=ag_rnd(689),iw=w-2*DQ_PAD,nx=x+DQ_PAD,ax=nx+Math.round(iw*0.56),nw=Math.round(iw*0.48),aw=Math.round(iw*0.3),y0=y+208,rh=38,
+    bar=(bx,by,bw,col)=>{ctx.fillStyle=col;rr(ctx,bx,by-9,bw,18,9);ctx.fill();},rows=[];
+  for(let i=0;i<7;i++)rows.push([nw*(0.55+R()*0.45),aw*(0.6+R()*0.4)]);
+  for(let i=0;i<4;i++){const ry=y0+i*rh;bar(nx,ry,rows[i][0],"rgba(110,90,66,0.2)");bar(ax,ry,rows[i][1],"rgba(110,90,66,0.14)");
+    ctx.fillStyle="rgba(110,90,66,0.12)";ctx.fillRect(nx,ry+rh/2,iw,1.2);}
   const g=clamp(o.ghost||0,0,1),f=clamp(o.fill||0,0,1),tk=clamp(o.ticks==null?f:o.ticks,0,1);
   for(let i=0;i<3;i++){const ry=y0+(4+i)*rh;if(g>0.004&&f<0.995){ctx.save();ctx.globalAlpha*=g*(1-f);ctx.strokeStyle=rgba(DQ_TONE.stop.col,0.95);ctx.lineWidth=2.4;ctx.setLineDash([9,7]);
-      rr(ctx,x+DQ_PAD,ry-11,300,22,11);ctx.stroke();rr(ctx,x+DQ_PAD+330,ry-11,170,22,11);ctx.stroke();ctx.restore();}
-    if(f>0.004){ctx.save();ctx.globalAlpha*=f;bar(x+DQ_PAD,ry,rows[4+i][0],"rgba(110,90,66,0.2)");bar(x+DQ_PAD+330,ry,rows[4+i][1],"rgba(110,90,66,0.14)");ctx.restore();}
-    const ti=clamp(tk*3-i,0,1);if(ti>0.004)dq_icon(ctx,"tick",x+w-DQ_PAD-18,ry,28,"pass",{a:ag_sine(ti)});}
-  if(o.ghostText&&g>0.004)dq_T(ctx,o.ghostText,x+w-DQ_PAD,y0+5*rh+10,{w:800,size:30,align:"right",col:"stop",a:g*(1-f)});
-  if(o.note)dq_T(ctx,o.note,x+w-DQ_PAD-46,y0+5*rh+10,{w:800,size:30,align:"right",col:o.noteCol||"hold",a:o.noteA==null?1:o.noteA});
+      rr(ctx,nx,ry-11,nw,22,11);ctx.stroke();rr(ctx,ax,ry-11,aw,22,11);ctx.stroke();ctx.restore();}
+    if(f>0.004){ctx.save();ctx.globalAlpha*=f;bar(nx,ry,rows[4+i][0],"rgba(110,90,66,0.2)");bar(ax,ry,rows[4+i][1],"rgba(110,90,66,0.14)");ctx.restore();}
+    const ti=clamp(tk*3-i,0,1);if(ti>0.004)dq_icon(ctx,"tick",x+w-DQ_PAD-14,ry,28,"pass",{a:ag_sine(ti)});}
+  // the line under the rows: those missing, or what is done with them
+  const ly=y0+6*rh+50;
+  if(o.ghostText&&g>0.004)dq_T(ctx,o.ghostText,nx,ly,{w:800,size:30,col:"stop",a:g*(1-f)});
+  if(o.note)dq_T(ctx,o.note,nx,ly,{w:800,size:30,col:o.noteCol||"hold",a:o.noteA==null?1:o.noteA});
   ctx.restore();return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the platform's monitoring, and dbt's freshness check
@@ -121,7 +125,7 @@ const LW_DIMS=["Completeness","Uniqueness","Validity","Consistency","Accuracy","
 function lw_dims(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=1240,h=310,fst=clamp(o.first||0,0,1);ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));dq_card(ctx,x,y,w,h,{on:o.on});
   dq_label(ctx,x+DQ_PAD,y+56,"The six dimensions · Rules that run",{});
-  LW_DIMS.forEach((s,i)=>{const cx=x+DQ_PAD+(i%3)*400,cy=y+120+Math.floor(i/3)*100,tl=i===5;
+  LW_DIMS.forEach((s,i)=>{const cx=x+DQ_PAD+(i%3)*360,cy=y+120+Math.floor(i/3)*100,tl=i===5;
     if(!tl){dq_chip(ctx,cx,cy,s,{icon:"tick"});return;}
     // timeliness: in pencil, then inked
     const tw=dq_tw(ctx,s,{w:700,size:28})+84,hh=54;if(fst<0.995){ctx.save();ctx.globalAlpha*=1-fst;ctx.strokeStyle=rgba(DQ.dim,1);ctx.lineWidth=2;ctx.setLineDash([7,7]);rr(ctx,cx,cy-hh/2,tw,hh,hh/2);ctx.stroke();
@@ -152,7 +156,10 @@ function lw_page(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;c
   dq_label(ctx,x+40,y+60,"To the printer",{});dq_icon(ctx,"printer",x+w-60,y+50,40,DQ.soft);
   dq_T(ctx,o.title||"Graduation list · July 2026 ceremonies",x+40,y+120,{w:800,size:34});
   if(o.none){dq_T(ctx,"As of ?",x+40,y+176,{w:800,size:30,col:"stop"});}
-  else{const f={w:600,size:28};dq_T(ctx,"Student system data as of",x+40,y+176,Object.assign({col:DQ.soft},f));dq_T(ctx,o.ss||"Wed 17 Jun, 02:00",x+40+dq_tw(ctx,"Student system data as of ",f),y+176,{w:500,size:28,f:"mono",col:o.ssCol||DQ.ink});
+  else{const f={w:600,size:28};dq_T(ctx,"Student system data as of",x+40,y+176,Object.assign({col:DQ.soft},f));const sx=x+40+dq_tw(ctx,"Student system data as of ",f),su=clamp(o.ssU||0,0,1);
+    // a newer age (o.ss2, in o.ss2Col) takes the place of the old one as o.ssU goes 0 to 1: the old leaves, then the new comes
+    if(su<0.5)dq_T(ctx,o.ss||"Wed 17 Jun, 02:00",sx,y+176,{w:500,size:28,f:"mono",col:o.ssCol||DQ.ink,a:1-ag_sine(su*2)});
+    if(o.ss2&&su>0.5)dq_T(ctx,o.ss2,sx,y+176,{w:500,size:28,f:"mono",col:o.ss2Col||DQ.ink,a:ag_sine(su*2-1)});
     dq_T(ctx,"Portal as of",x+40,y+220,Object.assign({col:DQ.soft},f));dq_T(ctx,o.po||"Thu 18 Jun, 02:00",x+40+dq_tw(ctx,"Portal as of ",f),y+220,{w:500,size:28,f:"mono",col:o.poCol||DQ.ink});}
   ctx.fillStyle="rgba(110,90,66,0.3)";ctx.fillRect(x+40,y+250,w-80,1.6);
   // the list under it, as faint lines (a picture: no words)

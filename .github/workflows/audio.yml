@@ -1,0 +1,41 @@
+# Run explicitly after committing new audio.json pointers. Audio releases are prereleases,
+# so they never replace the video release used by the site's latest-download links.
+name: Store audio outside Git
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "New immutable audio release tag (first migration: audio-v1)"
+        required: true
+        default: audio-v1
+      film:
+        description: "Optional film release key; blank publishes the whole tag for the initial migration"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: audio-release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Publish or resume the selected immutable audio assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+          FILM: ${{ inputs.film }}
+        run: |
+          args=(--tag "$TAG")
+          if [ -n "$FILM" ]; then args+=(--film "$FILM"); fi
+          python site-tools/media.py publish "${args[@]}"

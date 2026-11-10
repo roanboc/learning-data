@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/many-ways-to-read/soundtrack.mp3",
+      "size": 3561734,
+      "sha256": "f26b5164d68662ece4ad6127b372a8d71cf29a5314f71416c579ac207137e734",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/f26b5164d68662ece4ad6127b372a8d71cf29a5314f71416c579ac207137e734.mp3"
+    }
+  ]
+}

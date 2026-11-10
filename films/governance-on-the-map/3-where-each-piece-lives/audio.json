@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/where-each-piece-lives/soundtrack.mp3",
+      "size": 5274740,
+      "sha256": "6ccc2d8a80fcd67eca6b80ed96506dedaef667e2b0f92a12060c61eb75e290ee",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/6ccc2d8a80fcd67eca6b80ed96506dedaef667e2b0f92a12060c61eb75e290ee.mp3"
+    }
+  ]
+}

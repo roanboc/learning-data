@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-model-reasoning-hands-and-a-loop/soundtrack.mp3",
+      "size": 5844523,
+      "sha256": "c11e5916c92d03a4286bb4af623853ebee1890447a63a9569fc55b907818facc",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/c11e5916c92d03a4286bb4af623853ebee1890447a63a9569fc55b907818facc.mp3"
+    }
+  ]
+}

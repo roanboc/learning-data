@@ -175,7 +175,7 @@ def binned(s, g=0.012, pan=0.0):
 #    lights: its own note, B, with the sarrusophone's B. Kept in July: D major, and "Right, for rooms": a bar, D (the platform kept it,
 #    so no person's note). Lost since last week: three bars falling as the three words fall, then B minor held as nobody saw. The
 #    glossary: its card, and G major as the definition lights. Which comes first: the sarrusophone swells on A, and "Something had to
-#    change" is A major. The order: D major and the low D; what's governed, a bar for each, and an owner who reviews (a person's
+#    change" is A major. The order: D major and the low D; what's governed, a bar for each, and the data team's review (a person's
 #    approval, A to D); memory second, a lower bar; the definition wins: D major, gently; the flag, a tap. Now: the answer laid down, D
 #    major. All 1,236: G major to D as the units come in. For data: the tiers; D major, soft, as what's governed decides; the wrong
 #    line's own note, and a tap. The title card: the bars' home chord and the low D
@@ -233,14 +233,14 @@ roll((G3, B3, D4), F('glossary', 'online or both', -0.1), 0.12, 0.5, ring=1.6)
 # which comes first: the sarrusophone swells on A; something had to change: A major
 sarr(A2, F('still', 'which comes first', -0.2), F('govern', 'set an order', -0.6), 0.65, att=1.2, rel=0.8)
 roll((Cs4, E4), F('still', 'Something', 0.0), 0.14, 0.5, ring=1.6)
-# the order: D major and the low D; first what's governed, a bar for each, and an owner who reviews every change
+# the order: D major and the low D; first what's governed, a bar for each, its meaning decided by owners and its code reviewed by the data team
 tG = F('govern', 'set an order', -0.5)
 roll((D3, A3, D4, Fs4), tG, 0.12, 0.75, ring=2.0)
 sarr(D2, tG + 0.05, F('governed', 'First', 0.4), 0.7, att=0.5, rel=1.2)
 knock(F('governed', 'First', -0.2), 0.012, px(1110), 260)
 glass(D4, F('governed', 'definitions', -0.05), 0.5, px(700))
 glass(Fs4, F('governed', 'data rules', -0.05), 0.5, px(1060))
-approve(F('governed', 'an owner', 0.2), 0.75, hold=1.0, pan=px(700))
+approve(F('governed', 'reviewed by', 0.2), 0.75, hold=1.0, pan=px(700))
 # second, the memory the platform keeps: its tier, a lower bar
 knock(F('second', 'Second', -0.2), 0.012, px(1110), 240)
 glass(A3, F('second', 'the platform keeps', -0.05), 0.45, px(640))
@@ -287,7 +287,7 @@ sarr(D2, tAn + 0.1, tAn + 2.4, 0.6, att=0.6, rel=1.2)
 glass(B3, R('memory', 'no one reviews', -0.05), 0.45, px(1300), ring=1.2)
 
 # 3. Context, reviewed like code: the repository set down; a soft tap as each part of it lights; CODEOWNERS, its lines typed. A
-#    change: the pull request laid down; its owner reviews it (the sarrusophone's D), a second person approves it (A to D); the
+#    change: the pull request laid down; the data team reviews it (the sarrusophone's D), a second person approves it (A to D); the
 #    agent's lock. The history, a row at a time. The glossary, its owners, the skill that copies its terms. One way to Databricks: three bars rising as the arrow goes; the table and the skill
 #    set down, their rows; nobody edits there (a lock); a change starts in the repository: D major, gently
 C = lambda lid, word, off=0: W('code', lid, word, off)
@@ -295,10 +295,10 @@ c0 = S0('code')
 knock(c0 + 0.1, 0.012, px(495), 240)
 for w_ in ('the page for agents', 'the skills', "dbt's descriptions", 'the contracts'):
     tap(C('lives', w_, -0.1), 0.008, px(495))
-knock(C('owner', 'an owner', -0.15), 0.012, px(1400), 240)
-keys(C('owner', 'an owner', 0.05), 3, 0.007, px(1400), 0.3)
+knock(C('owner', 'its reviewers', -0.15), 0.012, px(1400), 240)
+keys(C('owner', 'its reviewers', 0.05), 3, 0.007, px(1400), 0.3)
 paper(C('pull', 'pull request', -0.3), 0.011, px(1400), 0.4)
-sarr(D3, C('pull', 'its owner reviews', 0.5), C('pull', 'its owner reviews', 1.6), 0.7, att=0.12, rel=0.7, pan=px(1400))
+sarr(D3, C('pull', 'the data team reviews', 0.5), C('pull', 'the data team reviews', 1.6), 0.7, att=0.12, rel=0.7, pan=px(1400))
 approve(C('pull', "second person's", 0.5), 0.85, hold=1.4, pan=px(1400))
 lock(C('propose', 'never approve', -0.05), 0.010, px(1400))
 paper(C('history', 'history', -0.3), 0.010, px(1400), 0.35)

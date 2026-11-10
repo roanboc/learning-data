@@ -147,201 +147,201 @@ Mei, en la oficina de registro: «Nuestros quince minutos de los jueves funciona
 Graham Ellis, de Instalaciones, pide por correo un panel del uso de aulas para Semana Santa: espera su turno con el resto.
 
 38
-00:03:32,091 --> 00:03:35,626
-El módulo Liderar equipos de datos sigue esa solicitud.
+00:03:32,091 --> 00:03:37,705
+El módulo Liderar equipos de datos sigue esa solicitud, en La pregunta detrás del pedido.
 
 39
-00:03:38,626 --> 00:03:41,865
+00:03:40,705 --> 00:03:43,944
 Antes de proponer nada, lee lo que ya está escrito.
 
 40
-00:03:42,965 --> 00:03:46,304
+00:03:45,044 --> 00:03:48,383
 La estrategia de la universidad hasta 2030 tiene cuatro objetivos:
 
 41
-00:03:46,504 --> 00:03:52,492
+00:03:48,583 --> 00:03:54,571
 estudiantes que tienen éxito, investigación que llega a la gente, un campus bien usado y finanzas que duran.
 
 42
-00:03:53,992 --> 00:03:59,491
+00:03:56,071 --> 00:04:01,570
 La estrategia digital está a su servicio, y mide la calidad de los datos, la integración y la satisfacción.
 
 43
-00:04:00,591 --> 00:04:06,072
+00:04:02,670 --> 00:04:08,151
 Una evaluación anterior encontró doce decisiones que la universidad toma con datos cada año.
 
 44
-00:04:07,172 --> 00:04:13,951
+00:04:09,251 --> 00:04:16,030
 El presupuesto, el personal temporal, el horario y las aulas, qué cursos ofrecer, los informes de investigación, y siete más.
 
 45
-00:04:15,251 --> 00:04:20,239
+00:04:17,330 --> 00:04:22,318
 Ahora cada respuesta que oye puede vincularse a una decisión, y cada decisión a un objetivo.
 
 46
-00:04:23,439 --> 00:04:26,543
+00:04:25,518 --> 00:04:28,622
 Las personas muestran dónde duele; los sistemas, cuánto.
 
 47
-00:04:27,643 --> 00:04:34,612
+00:04:29,722 --> 00:04:36,691
 El gestor de incidencias: para las solicitudes cerradas en febrero, 41 días hábiles, en promedio, de la solicitud al primer uso.
 
 48
-00:04:35,912 --> 00:04:42,302
+00:04:37,991 --> 00:04:44,381
 Los propios registros del antiguo almacén de datos: 38 informes, en los servidores de la universidad desde 2012.
 
 49
-00:04:43,402 --> 00:04:45,756
+00:04:45,481 --> 00:04:47,835
 Diecisiete no se han abierto en un año.
 
 50
-00:04:46,856 --> 00:04:50,693
+00:04:48,935 --> 00:04:52,772
 Los otros 21 los usan unas 260 personas.
 
 51
-00:04:51,793 --> 00:04:59,102
+00:04:53,872 --> 00:05:01,181
 Cuesta 310,000 dólares australianos al año, y su licencia vence el 31 de diciembre.
 
 52
-00:05:00,202 --> 00:05:03,557
+00:05:02,281 --> 00:05:05,636
 Puestos junto a lo que dijo la gente, destacan tres hallazgos.
 
 53
-00:05:04,657 --> 00:05:08,965
+00:05:06,736 --> 00:05:11,044
 Las solicitudes llegan por once vías, desde dos bandejas de entrada hasta la cola de los agentes.
 
 54
-00:05:10,065 --> 00:05:15,825
+00:05:12,144 --> 00:05:17,904
 La lista de personal vive en tres copias: la de Recursos Humanos, la del almacén y la hoja de cálculo de una facultad.
 
 55
-00:05:16,925 --> 00:05:23,055
+00:05:19,004 --> 00:05:25,134
 Y unas 40 personas en facultades y oficinas trabajan con datos parte de su semana, sobre todo en hojas de cálculo.
 
 56
-00:05:24,155 --> 00:05:32,159
+00:05:26,234 --> 00:05:34,238
 Algo ya funciona: desde enero de 2026, el equipo de la lista de graduación se reúne quince minutos cada jueves.
 
 57
-00:05:33,259 --> 00:05:36,193
+00:05:35,338 --> 00:05:38,272
 Los diplomas impresos de nuevo bajaron de 41 a 3.
 
 58
-00:05:37,493 --> 00:05:39,489
+00:05:39,572 --> 00:05:41,568
 El módulo de calidad de datos cuenta cómo.
 
 59
-00:05:40,589 --> 00:05:43,364
+00:05:42,668 --> 00:05:45,443
 Anota también lo que funciona, para que nadie lo rompa.
 
 60
-00:05:46,364 --> 00:05:51,987
+00:05:48,443 --> 00:05:54,066
 Luego escribe lo que hay: la situación actual, o, como la llama el método de TOGAF, la línea base.
 
 61
-00:05:53,287 --> 00:05:58,626
+00:05:55,366 --> 00:06:00,705
 La escribe en las cinco capas que usan los arquitectos, cada capa en una página, con su dibujo al lado.
 
 62
-00:05:59,926 --> 00:06:07,010
+00:06:02,005 --> 00:06:09,089
 Estrategia: los cuatro objetivos, y lo que la universidad debe poder hacer. La gobernanza de datos funciona; entregarlos es lento.
 
 63
-00:06:08,710 --> 00:06:14,600
+00:06:10,789 --> 00:06:16,679
 Negocio: las doce decisiones, los servicios que se pueden pedir, los procesos y quién hace qué.
 
 64
-00:06:15,900 --> 00:06:21,381
+00:06:17,979 --> 00:06:23,460
 También sus formas de trabajar: once vías para pedir, y 41 días hábiles hasta el primer uso.
 
 65
-00:06:22,881 --> 00:06:26,813
+00:06:24,960 --> 00:06:28,892
 Información: de qué tratan los datos, y dónde nace cada dato.
 
 66
-00:06:27,913 --> 00:06:31,259
+00:06:29,992 --> 00:06:33,338
 Los datos del personal nacen en Recursos Humanos, y se copian dos veces.
 
 67
-00:06:32,759 --> 00:06:38,740
+00:06:34,838 --> 00:06:40,819
 Aplicación: los sistemas y los informes, los 38 del antiguo almacén junto a los de la plataforma.
 
 68
-00:06:40,240 --> 00:06:44,593
+00:06:42,319 --> 00:06:46,672
 Tecnología: dónde funcionan, los servidores propios de la universidad y la nube.
 
 69
-00:06:46,093 --> 00:06:49,906
+00:06:48,172 --> 00:06:51,985
 ArchiMate, la notación de los arquitectos, no tiene capa de información:
 
 70
-00:06:50,106 --> 00:06:55,601
+00:06:52,185 --> 00:06:57,680
 guarda de qué tratan los datos en su capa de negocio, y los datos mismos en su capa de aplicación.
 
 71
-00:06:56,901 --> 00:07:01,174
+00:06:58,980 --> 00:07:03,253
 Helena le da a la información una capa propia, porque los datos son su trabajo.
 
 72
-00:07:02,474 --> 00:07:05,533
+00:07:04,553 --> 00:07:07,612
 Noor pone cada página en su mapa, lista para la situación deseada.
 
 73
-00:07:06,633 --> 00:07:10,492
+00:07:08,712 --> 00:07:12,571
 El mapa antes de los datos muestra ese mapa, en Hoy, y hacia dónde va.
 
 74
-00:07:13,692 --> 00:07:15,993
+00:07:15,771 --> 00:07:18,072
 Cualquier hallazgo podría leerse como la culpa de alguien.
 
 75
-00:07:17,093 --> 00:07:19,366
+00:07:19,172 --> 00:07:21,445
 Así que escribe cada uno como una oportunidad.
 
 76
-00:07:20,466 --> 00:07:23,333
+00:07:22,545 --> 00:07:25,412
 No «las solicitudes se pierden», sino una sola vía para pedir.
 
 77
-00:07:24,433 --> 00:07:29,858
+00:07:26,512 --> 00:07:31,937
 No «las facultades guardan sus propias copias», sino referentes de datos en facultades y oficinas.
 
 78
-00:07:31,158 --> 00:07:38,519
+00:07:33,237 --> 00:07:40,598
 Siete oportunidades en total: una sola vía para pedir; retirar el antiguo almacén; un responsable para cada informe y producto;
 
 79
-00:07:38,719 --> 00:07:44,589
+00:07:40,798 --> 00:07:46,668
 referentes de datos; medir la entrega; escribir los procedimientos críticos; y agentes con mandatos.
 
 80
-00:07:46,089 --> 00:07:49,533
+00:07:48,168 --> 00:07:51,612
 Lunes 15 de marzo: el hito del descubrimiento.
 
 81
-00:07:50,633 --> 00:07:53,986
+00:07:52,712 --> 00:07:56,065
 La situación actual en cinco capas, y siete oportunidades.
 
 82
-00:07:55,286 --> 00:08:00,872
+00:07:57,365 --> 00:08:02,951
 Envía un resumen a todas las personas con quienes habló: esto es lo que oí; díganme en qué me equivoqué.
 
 83
-00:08:02,372 --> 00:08:04,805
+00:08:04,451 --> 00:08:06,884
 Algunos responden, y las páginas cambian.
 
 84
-00:08:06,105 --> 00:08:12,403
+00:08:08,184 --> 00:08:14,482
 En Acra, las madres conocían la enfermedad de sus hijos, y cuándo llegaba; Williams preguntó, y la escribió con su palabra.
 
 85
-00:08:13,903 --> 00:08:20,615
+00:08:15,982 --> 00:08:22,694
 En la universidad, quienes viven con los datos también sabían: en sus palabras, la situación actual es una que reconocen.
 
 86
-00:08:21,915 --> 00:08:24,111
+00:08:23,994 --> 00:08:26,190
 Lo siguiente: diseña con ellos la situación deseada.
 
 87
-00:08:25,211 --> 00:08:28,735
+00:08:27,290 --> 00:08:30,814
 Pregunta a las personas, cuenta desde los sistemas y escribe lo que hay.

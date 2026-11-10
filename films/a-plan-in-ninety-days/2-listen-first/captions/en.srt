@@ -147,201 +147,201 @@ Mei, at the registrar's office: “Our Thursday fifteen minutes works. Keep it.�
 Graham Ellis, in Facilities, emails for a dashboard of room use by Easter: it waits its turn with the rest.
 
 38
-00:03:32,091 --> 00:03:35,626
-The leading data people module follows that one request.
+00:03:32,091 --> 00:03:37,705
+The leading data people module follows that one request, in The question behind the request.
 
 39
-00:03:38,626 --> 00:03:41,865
+00:03:40,705 --> 00:03:43,944
 Before proposing anything, she reads what's already written.
 
 40
-00:03:42,965 --> 00:03:46,304
+00:03:45,044 --> 00:03:48,383
 The university's strategy to 2030 has four goals:
 
 41
-00:03:46,504 --> 00:03:52,492
+00:03:48,583 --> 00:03:54,571
 students who succeed, research that reaches people, a campus used well, and finances that last.
 
 42
-00:03:53,992 --> 00:03:59,491
+00:03:56,071 --> 00:04:01,570
 The digital strategy serves it, and measures data quality, integration and satisfaction.
 
 43
-00:04:00,591 --> 00:04:06,072
+00:04:02,670 --> 00:04:08,151
 An earlier assessment found twelve decisions the university makes with data every year.
 
 44
-00:04:07,172 --> 00:04:13,951
+00:04:09,251 --> 00:04:16,030
 The budget, casual staff, the timetable and rooms, which courses to offer, research reporting, and seven more.
 
 45
-00:04:15,251 --> 00:04:20,239
+00:04:17,330 --> 00:04:22,318
 Every answer she hears can now be tied to a decision, and every decision to a goal.
 
 46
-00:04:23,439 --> 00:04:26,543
+00:04:25,518 --> 00:04:28,622
 People show where it hurts; the systems show how much.
 
 47
-00:04:27,643 --> 00:04:34,612
+00:04:29,722 --> 00:04:36,691
 The tracker: for the requests closed in February, 41 working days, on average, from the ask to first use.
 
 48
-00:04:35,912 --> 00:04:42,302
+00:04:37,991 --> 00:04:44,381
 The old warehouse's own logs: 38 reports, on the university's own servers since 2012.
 
 49
-00:04:43,402 --> 00:04:45,756
+00:04:45,481 --> 00:04:47,835
 Seventeen haven't been opened in a year.
 
 50
-00:04:46,856 --> 00:04:50,693
+00:04:48,935 --> 00:04:52,772
 The other 21 are used, by about 260 people.
 
 51
-00:04:51,793 --> 00:04:59,102
+00:04:53,872 --> 00:05:01,181
 It costs 310,000 Australian dollars a year, and its licence ends on 31 December.
 
 52
-00:05:00,202 --> 00:05:03,557
+00:05:02,281 --> 00:05:05,636
 Laid beside what people said, three findings stand out.
 
 53
-00:05:04,657 --> 00:05:08,965
+00:05:06,736 --> 00:05:11,044
 Requests arrive in eleven ways, from two inboxes to the agents' queue.
 
 54
-00:05:10,065 --> 00:05:15,825
+00:05:12,144 --> 00:05:17,904
 The staff list lives in three copies: HR's, the warehouse's, and a faculty's spreadsheet.
 
 55
-00:05:16,925 --> 00:05:23,055
+00:05:19,004 --> 00:05:25,134
 And about 40 people in faculties and offices do data work part of their week, mostly in spreadsheets.
 
 56
-00:05:24,155 --> 00:05:32,159
+00:05:26,234 --> 00:05:34,238
 One thing already works: since January 2026, the graduation list's team has met for fifteen minutes every Thursday.
 
 57
-00:05:33,259 --> 00:05:36,193
+00:05:35,338 --> 00:05:38,272
 Reprinted certificates fell from 41 to 3.
 
 58
-00:05:37,493 --> 00:05:39,489
+00:05:39,572 --> 00:05:41,568
 The data quality module tells how.
 
 59
-00:05:40,589 --> 00:05:43,364
+00:05:42,668 --> 00:05:45,443
 Write down what works too, so nobody breaks it.
 
 60
-00:05:46,364 --> 00:05:51,987
+00:05:48,443 --> 00:05:54,066
 Then she writes down what is: the current state, or, as TOGAF's method calls it, the baseline.
 
 61
-00:05:53,287 --> 00:05:58,626
+00:05:55,366 --> 00:06:00,705
 She writes it in the five layers architects use, each a page, with its picture beside it.
 
 62
-00:05:59,926 --> 00:06:07,010
+00:06:02,005 --> 00:06:09,089
 Strategy: the four goals, and what the university must be able to do. Governing data works; delivering it is slow.
 
 63
-00:06:08,710 --> 00:06:14,600
+00:06:10,789 --> 00:06:16,679
 Business: the twelve decisions, the services people can ask for, the processes, and who does what.
 
 64
-00:06:15,900 --> 00:06:21,381
+00:06:17,979 --> 00:06:23,460
 Its ways of working too: eleven ways to ask, and 41 working days to first use.
 
 65
-00:06:22,881 --> 00:06:26,813
+00:06:24,960 --> 00:06:28,892
 Information: what the data is about, and where each piece is born.
 
 66
-00:06:27,913 --> 00:06:31,259
+00:06:29,992 --> 00:06:33,338
 Staff are born in HR's system, then copied twice.
 
 67
-00:06:32,759 --> 00:06:38,740
+00:06:34,838 --> 00:06:40,819
 Application: the systems and reports, the old warehouse's 38 beside the platform's.
 
 68
-00:06:40,240 --> 00:06:44,593
+00:06:42,319 --> 00:06:46,672
 Technology: where they run, the university's own servers and the cloud.
 
 69
-00:06:46,093 --> 00:06:49,906
+00:06:48,172 --> 00:06:51,985
 ArchiMate, the architects' notation, has no information layer:
 
 70
-00:06:50,106 --> 00:06:55,601
+00:06:52,185 --> 00:06:57,680
 it keeps what the data is about in its business layer, and the data itself in its application layer.
 
 71
-00:06:56,901 --> 00:07:01,174
+00:06:58,980 --> 00:07:03,253
 Helena gives information a layer of its own, because data is her job.
 
 72
-00:07:02,474 --> 00:07:05,533
+00:07:04,553 --> 00:07:07,612
 Noor puts each page on her map, ready for the target.
 
 73
-00:07:06,633 --> 00:07:10,492
+00:07:08,712 --> 00:07:12,571
 The map before the data shows that map, in Today, and where it's going.
 
 74
-00:07:13,692 --> 00:07:15,993
+00:07:15,771 --> 00:07:18,072
 Any finding could read as someone's fault.
 
 75
-00:07:17,093 --> 00:07:19,366
+00:07:19,172 --> 00:07:21,445
 So she writes each one as an opportunity.
 
 76
-00:07:20,466 --> 00:07:23,333
+00:07:22,545 --> 00:07:25,412
 Not “requests get lost”, but one way to ask.
 
 77
-00:07:24,433 --> 00:07:29,858
+00:07:26,512 --> 00:07:31,937
 Not “faculties keep their own copies”, but data partners in faculties and offices.
 
 78
-00:07:31,158 --> 00:07:38,519
+00:07:33,237 --> 00:07:40,598
 Seven opportunities in all: one way to ask; retire the old warehouse; an owner for every report and product;
 
 79
-00:07:38,719 --> 00:07:44,589
+00:07:40,798 --> 00:07:46,668
 data partners; measure delivery; write down the critical procedures; and agents with mandates.
 
 80
-00:07:46,089 --> 00:07:49,533
+00:07:48,168 --> 00:07:51,612
 Monday, 15 March: the discovery milestone.
 
 81
-00:07:50,633 --> 00:07:53,986
+00:07:52,712 --> 00:07:56,065
 The current state in five layers, and seven opportunities.
 
 82
-00:07:55,286 --> 00:08:00,872
+00:07:57,365 --> 00:08:02,951
 She sends a summary back to everyone she spoke to: this is what I heard; tell me what I got wrong.
 
 83
-00:08:02,372 --> 00:08:04,805
+00:08:04,451 --> 00:08:06,884
 A few write back, and the pages change.
 
 84
-00:08:06,105 --> 00:08:12,403
+00:08:08,184 --> 00:08:14,482
 In Accra, the mothers knew their children's sickness, and when it came; Williams asked, and wrote it in their word.
 
 85
-00:08:13,903 --> 00:08:20,615
+00:08:15,982 --> 00:08:22,694
 At the university, the people who live with data knew too: in their words, the current state is one they recognise.
 
 86
-00:08:21,915 --> 00:08:24,111
+00:08:23,994 --> 00:08:26,190
 Next, she designs the target with them.
 
 87
-00:08:25,211 --> 00:08:28,735
+00:08:27,290 --> 00:08:30,814
 Ask people, count from the systems, and write down what is.

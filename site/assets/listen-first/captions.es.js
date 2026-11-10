@@ -86,8 +86,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Mei, en la oficina de registro: «Nuestros quince minutos de los jueves funcionan. Que sigan».",
 "Graham Ellis, in Facilities, emails for a dashboard of room use by Easter: it waits its turn with the rest.":
 "Graham Ellis, de Instalaciones, pide por correo un panel del uso de aulas para Semana Santa: espera su turno con el resto.",
-"The leading data people module follows that one request.":
-"El módulo Liderar equipos de datos sigue esa solicitud.",
+"The leading data people module follows that one request, in The question behind the request.":
+"El módulo Liderar equipos de datos sigue esa solicitud, en La pregunta detrás del pedido.",
 "Before proposing anything, she reads what's already written.":
 "Antes de proponer nada, lee lo que ya está escrito.",
 "The university's strategy to 2030 has four goals:":

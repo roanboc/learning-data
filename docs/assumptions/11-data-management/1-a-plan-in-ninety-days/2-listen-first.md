@@ -6,7 +6,7 @@
 
 Film 2 of 4 of *A plan in ninety days* (`films/a-plan-in-ninety-days/2-listen-first`), kept by the film's thread ("Make data management film 2 Listen first"). Rodrigo, 5 November 2026: "Work on the films with assumptions and merge them all." Each question I would have asked him, the assumption I made instead, where it shows, and what changes if it's wrong. The module's own questions are in [`../0-module.md`](../0-module.md).
 
-Written 10 November 2026; row 11 and row 17 updated the same day, when the line in row 11 was voiced again.
+Written 10 November 2026; rows 11, 12 and 17 updated the same day, when the lines in rows 11 and 12 were voiced again.
 
 | # | Question | Assumption made | Where it shows | If it's wrong |
 |---|---|---|---|---|
@@ -21,12 +21,12 @@ Written 10 November 2026; row 11 and row 17 updated the same day, when the line 
 | 9 | Which number for the opening's benefit? | The 1933 paper's: three children seen early, fed milk, eggs and fruit (with more), each "sent out of the hospital apparently cured". No source gives a death rate before and after | *The mothers' word* | One line |
 | 10 | Is "nobody had asked" (the seed) true? | Not as a claim about everyone, so the film says what the sources say: Williams couldn't find it in any medical book (1933: "which I have not found described"), and nobody said the word in front of her for three years (Stanton, via Cannon 2014) | *The mothers' word* | Two lines |
 | 11 | Name *Small, every week* (the data quality module) by title? | Not yet: it isn't on main, so the line says "The data quality module tells how." and its card names the module. Once that film is on main, the line can name it by title, and the card follows the line by itself | *What the systems count* | One line voiced again, and its card |
-| 12 | Name *The question behind the request* (leading data people) by title? | Not yet: it isn't on main, so the film says "The leading data people module follows that one request." | *Three questions* | One line, once that film is on main |
+| 12 | Name *The question behind the request* (leading data people) by title? | Yes, now that it is on main (10 November): "The leading data people module follows that one request, in The question behind the request." Its card names it too | *Three questions* | One line voiced again, and its card |
 | 13 | How should the voice say Helena? | As the voice says it unprompted ("heh-LEE-nuh"), the same as the leading data people module's first film, *Many hats, one picture*, which gives no respelling. The shared numbers' seed suggested "HEL-uh-nuh" only if the voice got it wrong | Every line with her name | A respelling in every film of both modules at once |
 | 14 | How are the opening's words said? | Respelled for the voice in `film.json`: Accra "Uh-krah", Cicely "Sissily", kwashiorkor "kwashi-orkor", genchi genbutsu "gen-chee gen-boo-tsoo", TOGAF "Toe-gaff"; Ga is said "Gah" without help | The voice | A respelling |
 | 15 | TOGAF's wording | "The current state, or, as TOGAF's method calls it, the baseline": The Open Group's pages asked for a sign-in on 10 November, so the wording rests on how *The map before the data* uses TOGAF's baseline and target | *Five layers* | One line |
 | 16 | Which partner for the bowed Chladni plate? | A second, larger plate, an octave lower: what the systems count beside what people say. Every other colour the site lacks belongs to another culture or sounds like one it has (checked 10 November against every palette and every score on all branches) | The score | The score's partner |
-| 17 | How long? | 8:37, six chapters: as long as the leading data people module's first film (8:43); every chapter between 120 and 134 words a minute | The film | Lines cut |
+| 17 | How long? | 8:39, six chapters: as long as the leading data people module's first film (8:43); every chapter between 120 and 134 words a minute | The film | Lines cut |
 | 18 | Who are the 31? | As the shared numbers have them: the deputy vice-chancellor, heads of school, the registrar's office, Planning, HR, Finance, Facilities, the research office, IT and each of her team; said as "from the deputy vice-chancellor to each of her own team", and shown as groups | *Three questions* | The sheet of marks |
 | 19 | Does the summary sent back get answers? | "A few write back, and the pages change": no number, so the shared numbers needn't hold one | *Sent back* | One line |
 | 20 | Spanish title | *Primero, escuchar*, as the module's assumption 5 has it | The Spanish page and captions | The Spanish files |

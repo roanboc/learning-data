@@ -1,8 +1,12 @@
 name: approve the change
 kind: business process
 owner: Yusuf Demir, data governance lead
+people only: 'yes'
 relationships:
 - assignment: product owner
+- access (reads): pull request
+- access (reads): code review
+- access (writes): approval
 - realization: change a data product
 - triggering: release to production
 status: confirmed

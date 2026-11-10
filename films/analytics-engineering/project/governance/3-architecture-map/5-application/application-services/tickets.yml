@@ -1,0 +1,8 @@
+name: tickets
+kind: application service
+definition: 'Reads Planning''s tickets in the tracker, and writes them.'
+owner: Sam, platform team
+relationships:
+- serving: raise a ticket
+- serving: draft the change
+status: confirmed

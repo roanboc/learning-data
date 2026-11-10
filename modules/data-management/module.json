@@ -1,9 +1,10 @@
 {
-  "order": 10,
+  "order": 11,
   "id": "data-management",
   "items": [
     "a-plan-in-ninety-days",
     "making-the-case",
+    "architecture-that-keeps-up",
     "small-steps-measured"
   ],
   "name": {

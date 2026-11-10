@@ -1,0 +1,5 @@
+name: business rule
+kind: business object
+owner: Mei Tanaka, registrar's office
+home: dbt project
+status: confirmed

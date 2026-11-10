@@ -59,9 +59,9 @@ const GD_PR={title:"Completions for Planning",sub:"Jun Park wants to merge into 
 const GD_LB=[150,336,1000,256],GD_RB=[1190,336,580,256],GD_CK=[150,612,1620,240];
 function gd_prHead(ctx,o){const [x,y,w,h]=GU_BIG;return gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:o.title||GD_PR.title,titleSize:o.titleSize,
   state:o.state||["Open",GV.green],sub:o.sub||GD_PR.sub,tabs:o.tabs||["Conversation","Files changed · 11","Checks · 5"],tab:o.tab||0});}
-// who reviews it: the code owners of the files it changes, asked by themselves as it opens (o.rev, 0 to 1): Planning, gold, for its
-// table, and the owners of the product and of governance's files; o.appr (0 to 1), Planning's yes
-const GD_REV=[["Planning",1],["Clara Jensen"],["data governance"],["Noor"]];
+// who reviews it: the code owners of the files it changes, asked by themselves as it opens (o.rev, 0 to 1): the data team, gold, for
+// the code, and data governance for its own file, the product; owners aren't reviewers. o.appr (0 to 1), the data team's yes
+const GD_REV=[["data team",1],["data governance"]];
 function gd_reviewers(ctx,o){const [x,y,w,h]=GD_RB,r=clamp(o.rev||0,0,1),ap=clamp(o.appr||0,0,1);gu_box(ctx,x,y,w,h,"Reviewers",{seed:72});
   if(r<0.25)withA(ctx,1-r*4,()=>wc_T(ctx,"none yet",x+30,y+112,{w:600,size:28,col:WC_MUTED}));
   if(r<=0.25)return;let px=x+30,py=y+100;
@@ -71,7 +71,7 @@ function gd_reviewers(ctx,o){const [x,y,w,h]=GD_RB,r=clamp(o.rev||0,0,1),ap=clam
       wc_panel(ctx,px,py-26,pw,52,{kind:"pill",wash:gold?GV.gold:null,washA:0.5,seed:44+i});wc_T(ctx,s,px+22,py+10,{w:700,size:28,col:WC_DARK});});ctx.restore();}
     px+=pw+16;});
   const ly=y+h-34;withA(ctx,clamp(r*2.4-1.2,0,1)*(1-ap),()=>wc_T(ctx,"review requested",x+30,ly,{w:600,size:28,col:WC_MUTED}));
-  if(ap>0.01)withA(ctx,ap,()=>{wc_tick(ctx,x+46,ly-10,30,GV.greenInk,ap);wc_T(ctx,"Planning approved",x+76,ly,{w:700,size:28,col:GV.greenInk});});}
+  if(ap>0.01)withA(ctx,ap,()=>{wc_tick(ctx,x+46,ly-10,30,GV.greenInk,ap);wc_T(ctx,"data team approved",x+76,ly,{w:700,size:28,col:GV.greenInk});});}
 function gd_pr(ctx,t,o){o=o||{};gd_prHead(ctx,o);
   if(o.tab===1){gd_prFiles(ctx,o);return;}
   const [lx,ly,lw,lh]=GD_LB;gu_box(ctx,lx,ly,lw,lh,null,{seed:71});
@@ -263,6 +263,29 @@ function gd_versions(ctx,t,o){o=o||{};const v2=o.v2||0,v1=o.v1||0,rd=o.rd||0;
     withA(ctx,v,()=>{wc_panel(ctx,260,y,490,74,{kind:"card",seed:175+i});wc_T(ctx,s,284,y+48,{w:500,size:28,f:"mono",col:WC_DARK});
       wc_T(ctx,"ref('core_credential', v=2)",790,y+48,{w:500,size:28,f:"mono",col:GV.greenInk});});
     gd_arrow(ctx,i?[262,y+30]:[400,y-4],i?[300,382]:[420,382],0,Math.min(clamp((v-0.4)/0.6,0,1),clamp(v2*1.5,0,1)),{col:GV.greenInk,bx:i?-110:0});});}
+// enterprise contracts: only the canonical tables, the shared core, have one, in an open standard, written first by data governance's
+// information architect; the data team's dbt contract builds to it, and a check compares the two. o.ent brings the enterprise contract,
+// o.core the canonical tables (the marts keep dbt contracts only), o.arch who writes it, o.team the dbt contract and who builds it,
+// o.cmp the check between them, o.diff a difference, and data governance looking at how it got there
+const GD_CORE=["core_learner","core_credential","core_award"];
+function gd_enterprise(ctx,t,o){o=o||{};const card=(a,x,w,wash,seed,title,code,note)=>{if(a<=0.01)return;const k=0.92+0.08*spring(clamp(a,0,1)),cx=x+w/2;
+    ctx.save();ctx.translate(cx,240);ctx.scale(k,k);ctx.translate(-cx,-240);withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,x,110,w,260,{kind:"card",wash,washA:0.18,seed});
+      gv_pin(ctx,cx,128,GV.red,1.1);wc_hand(ctx,title,x+40,204,{size:40,w:700,col:WC_DARK});wc_T(ctx,code,x+40,266,{w:500,size:28,f:"mono",col:WC_INK});
+      wc_T(ctx,note,x+40,322,{w:600,size:28,col:WC_MUTED});});ctx.restore();};
+  const d=clamp(o.diff||0,0,1),c=clamp(o.cmp||0,0,1);
+  card(o.ent||0,250,640,GV.gold,181,"enterprise contract","core_credential · version 2","Open Data Contract Standard");
+  card(o.team||0,1030,640,GV.green,182,"dbt contract","core_credential_v2","enforced on every build");
+  gu_nameCard(ctx,280,410,"Information architect","data governance · writes it first",clamp(o.arch||0,0,1));
+  gu_nameCard(ctx,1060,410,"Data team","builds to it",clamp((o.team||0)*1.6-0.6,0,1));
+  // the canonical tables, which have one; the marts keep dbt contracts only. They give way to data governance where the two differ
+  const cr=clamp(o.core||0,0,1)*(1-d);if(cr>0.01){let x=250;GD_CORE.forEach((n,i)=>{const v=clamp(cr*2-i*0.4,0,1),w=Math.round(gu_mw(ctx,n)+36);if(v>0.01)withA(ctx,v,()=>{
+      wc_panel(ctx,x,590,w,60,{kind:"pill",wash:GV.gold,washA:0.45,seed:190+i});wc_T(ctx,n,x+18,630,{w:500,size:28,f:"mono",col:WC_DARK});});x+=w+12;});
+    withA(ctx,clamp(cr*2-1,0,1),()=>wc_T(ctx,"the marts: dbt contracts only",250,710,{w:600,size:30,col:WC_MUTED}));}
+  if(c>0.01){gd_arrow(ctx,[894,240],[1026,240],0,c,{col:d>0.5?GV.redInk:GV.greenInk});
+    gu_checks(ctx,1030,580,640,{h:180,items:[{name:"contracts",st:d>0.5?"fail":c>=1?"pass":"run"}],t,summary:false,pop:[d*(1-fin(t,(o.diffAt||0)+1.2,0.6))]});}
+  if(d>0.01){const k=0.92+0.08*spring(d);ctx.save();ctx.translate(570,650);ctx.scale(k,k);ctx.translate(-570,-650);withA(ctx,clamp(d*2,0,1),()=>{
+    wc_panel(ctx,250,580,640,140,{kind:"card",wash:GV.gold,washA:0.3,seed:195});wc_T(ctx,"Data governance",290,636,{w:800,size:32,col:WC_DARK});
+    wc_T(ctx,"how did the change get here?",290,686,{w:600,size:28,col:WC_INK});});ctx.restore();}}
 // exposures: who uses each table, and who answers for each use; three files, one per consumer, each coming in (o.at[i]); o.use lights
 // each's name and kind, o.own its owner
 const GD_EXP=[["exposures/planning/_planning__exposures.yml",[{n:3,s:"  - name: census_dashboard"},{n:5,s:"    type: dashboard"},{fold:1},{n:10,s:"    owner:"},{n:11,s:"      name: Planning"}],[80,40,-0.012]],
@@ -274,6 +297,15 @@ function gd_exposures(ctx,o){o=o||{};GD_EXP.forEach(([path,rows,[x,y,r]],i)=>{co
 /* ---------- what this change touches ---------- */
 // Tuesday's pull request on the big screen: its title, and the tab that's open (0, the description; 1, the files changed, nf of them)
 const GD_TUE={title:"Count microcredentials of 6 credit points or more as awards",sub:"Tuesday · Jun Park wants to merge into main"};
+// the glossary's page for award, on the data platform, where its meaning is decided first: Monday's words, its owner; o.lit washes
+// what changed
+const GD_GLOS=["A qualification the university confers, such as a graduate certificate, a master or a","microcredential, for at least 6 credit points. When it's conferred on a learner, it's a credential too."];
+function gd_glossary(ctx,o){o=o||{};const [x,y,w,h]=GU_BIG,top=gu_page(ctx,x,y,w,h,{bar:"Data platform · glossary",title:"Award",state:["changed on Monday",GV.amber],
+    sub:"owner: Mei Tanaka, registrar's office · domain: course"});
+  const by=top+110,l=clamp(o.lit||0,0,1);if(l>0.01){gv_tint(ctx,x+48+tw(ctx,"A qualification the university confers, such as a graduate certificate, a master or a ",30,500)-8,by-30,tw(ctx,"a",30,500)+20,44,GV.gold,0.8*l);
+    gv_tint(ctx,x+40,by+56-30,tw(ctx,"microcredential, for at least 6 credit points.",30,500)+16,44,GV.gold,0.8*l);}
+  GD_GLOS.forEach((s,i)=>wc_T(ctx,s,x+48,by+i*56,{w:500,size:30,col:WC_DARK}));
+  wc_T(ctx,"Every copy of it, in the data team's project too, comes from this page.",x+48,by+200,{w:600,size:28,col:WC_MUTED,a:clamp(o.copy||0,0,1)});}
 function gd_tues(ctx,tab,nf){gd_prHead(ctx,{title:GD_TUE.title,titleSize:36,sub:GD_TUE.sub,tabs:["Conversation","Files changed · "+nf,"Checks · 5"],tab});}
 // the first draft's change, in int_credentials_unioned.sql: a kind of credential becomes "award" from 6 credit points (o.lit)
 const GD_REL=[{n:59,s:"        'LMS' as key_set,"},{s:"        case when latest_badges.credit_points > 0 then 'microcredential' …",del:1},{s:"        case",add:1},
@@ -297,31 +329,30 @@ function gd_md(ctx,x,y,w,items,o){o=o||{};let by=y+54;const out=[];items.forEach
         else if(it.h)wc_T(ctx,s,x+30,by,{w:800,size:sz,col:WC_DARK});
         else{if(it.li!=null)wc_T(ctx,"•",x+34,by,{w:800,size:28,col:it.col||WC_INK});gu_md(ctx,s,tx,by,{size:28,col:it.col});}});}
     out.push(by);by+=lh;});return{rows:out,end:by};}
-const GD_R0=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`mart_planning__completions`: new"},{h:2,s:"Who to ask"},{s:"Planning"}],
+const GD_R0=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`mart_planning__completions`: new"},{h:2,s:"Who to tell"},{s:"Planning"}],
   GD_R1=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Who uses it"},{li:"`census_dashboard`, owned by Planning"},{li:"`census_report`, owned by Planning"},
     {li:"`draft_submission`, owned by Mei Tanaka, registrar's office"},{li:"`revenue_forecast`, owned by Finance"},{li:"`wallet_app`, owned by Wallet app team"},
-    {h:2,s:"Who to ask"},{s:"Finance; Mei Tanaka, registrar's office; Planning; Wallet app team"}],
+    {h:2,s:"Who to tell"},{s:"Finance; Mei Tanaka, registrar's office; Planning; Wallet app team"}],
   GD_R2=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`core_credential v2`: additive: added counts_as_award",col:GV.greenInk,litCol:GV.green},{h:2,s:"Who uses it"},
     {li:"`census_report`, owned by Planning"},{li:"`draft_submission`, owned by Mei Tanaka, registrar's office"},{li:"`wallet_app`, owned by Wallet app team"},
-    {h:2,s:"Who to ask"},{s:"Mei Tanaka, registrar's office; Planning; Wallet app team"}],
+    {h:2,s:"Who to tell"},{s:"Mei Tanaka, registrar's office; Planning; Wallet app team"}],
   GD_R3=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`core_credential v2`: **breaking**: removed counts_as_award, added is_award. Needs a new",col:GV.redInk,litCol:GV.red},
     {cont:1,s:"version, with a deprecation date for this one",col:GV.redInk,litCol:GV.red}];
 // a report, its items shown as the times in at[] come (each 0 to 1 from its time); lit[] for a wash on an item
 function gd_report(ctx,t,items,at,o){o=o||{};const R=GD_LB[0],y=330;gu_box(ctx,R,y,1620,o.h||460,null,{seed:181});
   return gd_md(ctx,R,y,1620,items.map((it,i)=>Object.assign({},it,{p:at&&at[i]!=null?fin(t,at[i],0.35):1,lit:o.lit&&o.lit[i]!=null?o.lit[i]:it.lit})));}
 
-/* ---------- reviews go to the owners ---------- */
+/* ---------- who reviews what ---------- */
 // the reviewers file, generated: its header, and the three lines the film names, each lit as it's said (o.lit[k]); a person's card under
 // it for each (o.card[k]), joined to the sheet by a pencil thread
 const GD_CO=[{n:1,s:"# Generated by scripts/generate/codeowners.py from the owners in the project's …"},{n:2,s:"# governance/2-owners/owners.yml. Don't edit it: change the metadata, then run …"},{fold:1},
-  {n:26,s:"/models/core/student/_core_student__models.yml           mei.tanaka@uni.example …"},{fold:1},
-  {n:35,s:"/models/marts/planning/_planning__models.yml             planning@uni.example …"},{fold:1},
-  {n:60,s:"/governance/4-data-products/learners_near_an_award.yml   clara.jensen@uni.example"}],
-  GD_COP=[["Mei Tanaka","registrar's office",250],["Planning","Planning's tables",850],["Clara Jensen","Planning",1390]];
+  {n:10,s:"*                                   data.team@uni.example"},{fold:1},
+  {n:21,s:"/governance/                        data.governance@uni.example …"}],
+  GD_COP=[["Data team","the code",430],["Data governance","its own files",1050]];
 function gd_codeowners(ctx,o){o=o||{};const L=o.lit||[],R=gu_file(ctx,100,40,1720,{path:"CODEOWNERS",lines:GD_CO.map((r,i)=>i<2?Object.assign({},r,{lit:o.head||0}):
-    i===3?Object.assign({},r,{lit:L[0]||0}):i===5?Object.assign({},r,{lit:L[1]||0}):i===7?Object.assign({},r,{lit:L[2]||0}):r)});
-  GD_COP.forEach(([n,r,x],k)=>{const u=(o.card||[])[k]||0;if(u<=0.01)return;const ex=R.tx+gu_mw(ctx,"/models/core/student/_core_student__models.yml           ")+180;
-    wc_link(ctx,ex,522,x+130,640,WC_PENCIL,{p:clamp(u*1.6,0,1),vertical:true,a:0.8,lw:3});gu_nameCard(ctx,x,640,n,r,clamp((u-0.35)*2,0,1));});}
+    i===3?Object.assign({},r,{lit:L[0]||0}):i===5?Object.assign({},r,{lit:L[1]||0}):r)});
+  GD_COP.forEach(([n,r,x],k)=>{const u=(o.card||[])[k]||0;if(u<=0.01)return;const ex=R.tx+gu_mw(ctx,"/governance/                        ")+120;
+    wc_link(ctx,ex,R.rows[k?5:3]+20,x+130,640,WC_PENCIL,{p:clamp(u*1.6,0,1),vertical:true,a:0.8,lw:3});gu_nameCard(ctx,x,640,n,r,clamp((u-0.35)*2,0,1));});}
 // a project decision, as a file beside what it's about: who decided, when and why light in turn (o.lit: [who, when, why])
 const GD_DEC=[{n:143,s:"  - id: DEC-PRJ-12"},{n:145,s:"    title: Governance's rules run as a check on every pull request"},{fold:1},
   {n:152,s:"    why: A policy that lives only in a document isn't followed. …"},{n:154,s:"    decided_by: Yusuf Demir, data governance lead, with Noor, data architect"},{n:155,s:"    decided_on: 2026-10-20"}];
@@ -339,7 +370,7 @@ function gd_message(ctx,o){o=o||{};const R=gu_file(ctx,100,50,1720,{path:"$ pyth
   gd_mark(ctx,R.tx,R.rows[1],GD_MSG[1],"meta.owner or meta.domain",o.what);gd_mark(ctx,R.tx,R.rows[1],GD_MSG[1],"(how to: docs/how-to/add-an-owner.md)",o.link);return R;}
 // the page it links, as the project's docs show it: what the check asks, why, how, and who to ask (o.who lights the last); u brings it
 const GD_HOW=[{h:1,s:"Add an owner"},{s:"**What the check asks.** Everything other teams read has an owner: each domain, each"},{s:"entity in a conceptual model, and each shared model."},
-  {s:"**Why.** When a number is wrong or a meaning changes, someone has to decide. The owner"},{s:"is that person, and changes reach them for review."},{s:"**How.**"},{fold:1},
+  {s:"**Why.** When a number is wrong or a meaning changes, someone has to decide. The owner"},{s:"is that person: a change of meaning starts with them, in the glossary, before any code."},{s:"**How.**"},{fold:1},
   {s:"**Who to ask.** Data governance's office hours, Thursdays from 2 to 3 pm, or"},{s:"data.governance@uni.example. If you don't know who owns it, that's the question to bring."}];
 function gd_howto(ctx,u,who){if(u<=0.01)return;const e=easeCam(clamp(u,0,1)),y=lerp(H+60,320,e),x=100,w=1720;
   gv_sheet(ctx,x,y,w,520,{rot:0.004});wc_T(ctx,"docs/how-to/add-an-owner.md",x+30,y+54,{w:500,size:28,f:"mono",col:WC_MUTED});
@@ -397,14 +428,14 @@ function gd_skill(ctx,t,u,lit){if(u<=0.01)return null;const L=lit||[],e=easeCam(
   gu_star(ctx,1560,y+46,1.3,t,clamp(u*2,0,1));return R;}
 // Anil's first pull request, and the agent's comment on it: a dashed cyan card under its star. o.view: 0, its three findings (o.f[k]
 // lights each); 1, the second finding's classes, drafted with counts (o.rows), and who decides each (o.who[k]); 2, the approvals: the
-// agent's own line, with no tick, and each person's yes (o.yes[k])
+// agent's own line, with no tick, and the data team's yes (o.yes[k]); the owners decide in the glossary and the register, not here
 const GD_AP={title:"Faculty of Health call list",sub:"Anil Kurian wants to merge into main"},
   GD_FIND=["1. Nobody answers for it","2. Ten columns don't say whether they identify a person","3. A stated rule has no test"],
   GD_CLS=[["email","direct","7 rows, 6 distinct; 7 look like an email"],["learner_key","pseudonymous","7 rows, 7 distinct; 7 look like a hash"],
     ["award_key","pseudonymous","7 rows, only 2 distinct; … please confirm",1]],
   GD_WHO=["**Who decides:** data governance, for a new owner and the owner register.","**Who decides:** the Faculty of Health, as the mart's owner.",
     "**Who decides:** the Faculty of Health, for the rule; Jun, for the code."],
-  GD_YES=[["the Faculty of Health","for the classes and the rule"],["Yusuf Demir, data governance","for the faculty as a new owner"],["Jun Park","for the code"]];
+  GD_YES=[["Jun Park, data team","for the code"]];
 function gd_agentCard(ctx,t,x,y,w,h){wc_panel(ctx,x,y,w,h,{kind:"card",dashed:true,role:WC_SIDE.tech,seed:201});gu_star(ctx,x+44,y+46,1.1,t);
   wc_T(ctx,"Governance review",x+84,y+58,{w:800,size:34,col:WC_DARK});wc_T(ctx,"the agent",x+w-36,y+56,{w:600,size:28,col:GU_CYAN,align:"right"});}
 function gd_agentPR(ctx,t,o){o=o||{};const [X,Y,Wd,Hd]=GU_BIG;gu_page(ctx,X,Y,Wd,Hd,{bar:"GitHub · pull request",title:GD_AP.title,state:["Open",GV.green],sub:GD_AP.sub,
@@ -426,7 +457,8 @@ function gd_agentPR(ctx,t,o){o=o||{};const [X,Y,Wd,Hd]=GU_BIG;gu_page(ctx,X,Y,Wd
       ctx.save();ctx.strokeStyle=rgba(WC_PENCIL,0.6);ctx.lineWidth=3;ctx.beginPath();ctx.arc(x+w-80,y+128,20,0,TAU);ctx.stroke();ctx.restore();});
     GD_YES.forEach(([n,f],k)=>{const by=y+250+k*86,a=clamp((o.yes||[])[k]||0,0,1);if(a<=0.01)return;withA(ctx,clamp(a*2,0,1),()=>{
       wc_hand(ctx,n,x+50,by,{size:36,w:700,col:GV.goldInk,p:clamp(a*1.4,0,1)});wc_T(ctx,f,x+620,by,{w:600,size:28,col:WC_INK});});
-      wc_tick(ctx,x+w-80,by-10,44,GV.greenInk,clamp(a*1.5-0.4,0,1),6);});}}
+      wc_tick(ctx,x+w-80,by-10,44,GV.greenInk,clamp(a*1.5-0.4,0,1),6);});
+    const n=clamp(((o.yes||[])[0]||0)*1.5-0.5,0,1);if(n>0.01)wc_T(ctx,"Owners decide what the data is; the data team approves the code that says it.",x+50,y+380,{w:600,size:28,col:WC_MUTED,a:n});}}
 
 /* ---------- carried with the code ---------- */
 // Jun's speech bubble, as at the start, with its old line struck through (o.strike) before its new words come (o.mix)

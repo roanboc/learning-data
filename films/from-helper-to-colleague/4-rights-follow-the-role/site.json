@@ -1,0 +1,50 @@
+{
+  "kicker": "Rights from the work",
+  "kicker_es": "Permisos desde el trabajo",
+  "title_es": "Los permisos siguen al rol",
+  "h1": "Rights follow the role: from the work, not a person",
+  "h1_es": "Los permisos siguen al rol: del trabajo, no de una persona",
+  "lead": "Planning's new agent drafts changes to Planning's data. Clara asked for the simple way: give it what Jun's helper had, 46 rights gathered over his years. Noor and Sam started from its work instead: each of its role's three steps says what it reads, writes and calls, and its rights are exactly those.",
+  "lead_es": "El nuevo agente de Planificación redacta cambios en los datos de Planificación. Clara pidió lo simple: darle lo que tenía el ayudante de Jun, 46 permisos juntados en sus años. Noor y Sam partieron de su trabajo: cada uno de sus tres pasos dice qué lee, escribe y llama, y sus permisos son esos.",
+  "description": "A film about where an AI agent's rights come from, the fourth of From helper to colleague: not from a person, but from the work its role does. Planning's agent was about to get what Jun's helper had, 46 rights gathered over his years, some for his work today, some only a person should use, some left from old work; copying them would fail twice, since they're too wide and none was made for the agent's work. So Noor and Sam went from the work to the rights: the agent's work is one service, change a data product, in seven steps from a ticket to production, and its role, the planning contributor, does three of them; each step says what it reads, what it writes and which tools it calls, its rights are exactly those, each naming the step that needs it, and the map makes the list. What it reads is part of its rights, in order: the governed context first, the team's memory second, and when they disagree the definition wins and the agent says so. What's left out is written down with its reason: the other four steps are other roles', so it never approves, releases, changes what a word means or writes to production, and separation of duties falls out of the steps, with a check that fails the map if a step only people do is given to a role an agent fills. When the work changes, the step changes on the map first, and the rights and the tools follow. It opens on American hospital wards of the late 1950s, where every medicine sat on a shelf within every hand's reach, and on the pharmacists of Little Rock, who read each doctor's order and sent each patient's own doses.",
+  "description_es": "Una película sobre de dónde vienen los permisos de un agente de IA, la cuarta de De ayudante a colega: no de una persona, sino del trabajo que hace su rol. El agente de Planificación iba a recibir lo que tenía el ayudante de Jun, 46 permisos juntados en sus años, unos para su trabajo de hoy, otros que solo una persona debería usar y otros que quedaron de trabajos viejos; copiarlos fallaría dos veces, porque son demasiado amplios y ninguno se hizo para el trabajo del agente. Así que Noor y Sam fueron del trabajo a los permisos: el trabajo del agente es un servicio, cambiar un producto de datos, en siete pasos de un encargo a producción, y su rol, el colaborador de Planificación, hace tres; cada paso dice qué lee, qué escribe y qué herramientas llama, sus permisos son exactamente esos, cada uno con el paso que lo necesita, y el mapa hace la lista. Lo que lee es parte de sus permisos, en orden: primero el contexto gobernado, después la memoria del equipo, y si no coinciden gana la definición y el agente lo dice. Lo que queda fuera se escribe con su razón: los otros cuatro pasos son de otros roles, así que nunca aprueba, libera, cambia lo que significa una palabra ni escribe en producción, y la separación de funciones sale de los pasos, con una verificación que hace fallar el mapa si un paso que solo hacen personas se da a un rol que ocupa un agente. Cuando el trabajo cambia, el paso cambia primero en el mapa, y los permisos y las herramientas lo siguen. Empieza en las salas de los hospitales de Estados Unidos a fines de los cincuenta, donde cada medicina estaba en un estante al alcance de todas las manos, y en los farmacéuticos de Little Rock, que leían cada orden del médico y enviaban las dosis de cada paciente.",
+  "card": "Planning's agent gets its rights from the three steps of its role, not from Jun's 46. What it doesn't do is another role's step.",
+  "card_es": "El agente de Planificación recibe sus permisos de los tres pasos de su rol, no de los 46 de Jun. Lo demás es paso de otro rol.",
+  "chapters_es": {
+    "ward": "Un cajón llenado desde la orden",
+    "borrowed": "Lo que tenía el ayudante de Jun",
+    "steps": "Permisos desde los pasos",
+    "reads": "Lo que lee, y en qué orden",
+    "left": "Lo que queda fuera, y por qué",
+    "change": "Cuando cambia el trabajo",
+    "close": "Un cajón propio"
+  },
+  "past": [
+    "Little Rock, Arkansas, the early 1960s: each patient's own doses, from the doctor's order",
+    "On the wards, every medicine sat on a shelf within every hand's reach, and a copied order could hide a slip. Pharmacists began to read each order and send each patient's own doses, and later a drawer for each patient. An agent's rights come the same way: from its work, not from a person's."
+  ],
+  "past_es": [
+    "Little Rock, Arkansas, a principios de los sesenta: las dosis de cada paciente, desde la orden del médico",
+    "En las salas, cada medicina estaba en un estante al alcance de todas las manos, y una orden copiada podía esconder un error. Los farmacéuticos empezaron a leer cada orden y a enviar las dosis de cada paciente, y luego un cajón para cada uno. Los permisos de un agente vienen igual: de su trabajo, no del de una persona."
+  ],
+  "repo": {
+    "steps": [
+      "governance/3-architecture-map/3-business/process-steps/draft-the-change.yml",
+      "governance/3-architecture-map/6-views/rights.md"
+    ],
+    "reads": [
+      "governance/3-architecture-map/6-views/rights.md",
+      "governance/3-architecture-map/4-information/business-objects/team-memory.yml"
+    ],
+    "left": [
+      "governance/3-architecture-map/3-business/process-steps/approve-the-change.yml",
+      "scripts/check/architecture_map.py"
+    ],
+    "change": [
+      "governance/3-architecture-map/README.md"
+    ]
+  },
+  "next_h": "You've seen where an agent's rights come from: its role's steps on the map. Next: how every tool holds it to that.",
+  "next_h_es": "Viste de dónde vienen los permisos de un agente: de los pasos de su rol en el mapa. Después: cómo cada herramienta lo hace cumplir.",
+  "draft": true
+}

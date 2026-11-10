@@ -61,8 +61,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que el control propuso el cambio, en una solicitud de cambio: las palabras viejas y las nuevas, y lo que tocan las nuevas.",
 "Three tables, eight definitions that name award, the code that builds them, and three reports and apps to tell.":
 "Tres tablas, ocho definiciones que nombran título, el código que las construye, y tres informes y aplicaciones por avisar.",
-"On Tuesday morning, Mei approved the meaning, and data governance confirmed the term.":
-"El martes por la mañana, Mei aprobó el significado, y gobernanza de datos confirmó el término.",
+"On Tuesday morning, the data team reviewed the code, and Mei was told what it touches.":
+"El martes por la mañana, el equipo de datos revisó el código, y a Mei le avisaron qué toca.",
 "This time, she saw where her words are used.":
 "Esta vez, vio dónde se usan sus palabras.",
 "The new words hold a number: 6 credit points.":
@@ -71,8 +71,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Así que se guarda en un solo lugar, como parámetro: min award credit points, 6.",
 "Jun's new column, counts as an award, reads it, and every count of awards reads the column.":
 "La nueva columna de Jun, cuenta como título, lo lee, y cada conteo de títulos lee esa columna.",
-"If Mei and the faculties ever agree on another number, one line changes, in a reviewed pull request.":
-"Si Mei y las facultades acuerdan otro número, cambia una línea, en una solicitud de cambio revisada.",
+"If Mei and the faculties ever agree on another number, the glossary changes first, then one line, in a pull request the data team reviews.":
+"Si Mei y las facultades acuerdan otro número, cambia primero el glosario, luego una línea, en una solicitud que revisa el equipo de datos.",
 "A count is a meaning too: which credentials count, and in which year.":
 "Un conteo también es un significado: qué credenciales cuentan, y en qué año.",
 "So awards conferred is counted once, as a metric view: a count the platform defines once, for every tool that asks.":

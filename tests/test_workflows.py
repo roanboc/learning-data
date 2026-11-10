@@ -79,7 +79,10 @@ class WorkflowTests(unittest.TestCase):
         # deploy-pages gives up after 10 minutes and cancels; the deploy step waits for the sync itself.
         self.assertNotIn("actions/deploy-pages", deploy)
         self.assertIn('gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -', deploy)
-        self.assertIn("succeed) exit 0", deploy)
+        self.assertIn("succeed) return 0", deploy)
+        # A stalled deployment is cancelled and tried once more, not left holding the queue.
+        self.assertIn("/cancel", deploy)
+        self.assertIn("attempt || attempt", deploy)
 
 
 if __name__ == "__main__":

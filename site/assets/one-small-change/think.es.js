@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for One small change at a time, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (measure, automate, leader), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  measure:{q:"Antes de cambiar nada, Ivy cronometra cada paso de su actualización de los lunes. ¿Por qué medir primero?",
+    opts:[{t:"Para que Helena vea cuánto tarda la actualización, y compare el tiempo de Ivy con el del resto del equipo."},{t:"Para hallar el paso más lento y automatizarlo de inmediato, antes de tocar el resto de la actualización.",near:true},{t:"Para saber adónde se van las dos horas, y verificar que cada cambio ahorre tiempo sin perder nada.",ok:true}],
+    why:"Seis pasos, ciento veinte minutos: ahora Ivy puede preguntar de cada paso quién lo necesita, y verificar cada cambio contra ese número. Como el personal de Castle Street, empieza por su propio rincón del trabajo. Automatizar primero el paso más lento solo haría más rápido un desorden, y la medida es suya, nunca una comparación con nadie. ¿Qué paso de tu semana cronometrarías primero?"},
+  automate:{q:"Ivy escribe los cuatro pasos que quedan en una lista de verificación, y Jun la sigue con el mismo resultado, antes de que ella automatice nada. ¿Por qué en ese orden?",
+    opts:[{t:"Una lista se escribe más rápido que un proceso, así que le deja más tiempo de aprendizaje para enseñar."},{t:"Los mismos pasos cada vez muestran qué cambia, y solo vale la pena automatizar lo que funciona a mano.",ok:true},{t:"Una lista deja que cualquiera haga el trabajo; si Jun ya la siguió, los controles nuevos no necesitan revisión.",near:true}],
+    why:"Si automatizas un desorden, obtienes un desorden más rápido. La lista hace que cada lunes sea igual, así Ivy ve qué cambia, y el lunes de Jun muestra que cualquiera puede seguirla. Cualquiera puede hacer el trabajo, pero cada control nuevo entra con la revisión de Sam, y corre un lunes junto a su revisión a mano antes de retirarla. ¿Qué escribirías antes de automatizarlo?"},
+  leader:{q:"Helena no hizo ninguno de estos cambios ella misma. ¿Cuál fue su parte?",
+    opts:[{t:"Preguntó qué obstáculos había, dio el tiempo y lo protegió, y mostró los pequeños logros, nombrando a sus autores.",ok:true},{t:"Le puso a la actualización una meta de tiempo, y cada martes revisaba si Ivy se iba acercando a esa meta."},{t:"Dio el tiempo y lo protegió, y le dijo a Ivy qué dos pasos dejar, para que la actualización fuera más rápida.",near:true}],
+    why:"Preguntas, tiempo y un gráfico. Cada martes preguntó qué obstáculos había, e hizo lugar en la semana de Sam para las revisiones; dio las tardes de los jueves, sin dejar que ninguna reunión las tomara; y el 7 de octubre puso el gráfico de Ivy frente a quienes usan el producto, y nombró a Ivy, Jun y Sam. Ivy eligió qué dejar: quien hace el trabajo lo mejora. Sin metas, sin programa, sin discursos. ¿Qué obstáculos tiene alguien de tu equipo?"}
+  }}};

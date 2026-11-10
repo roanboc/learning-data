@@ -15,8 +15,8 @@ no nightly copy and no change capture between them (DEC-CLM-01). Each table has 
 writes the claims; the contracts it checks each claim against are the HR system's, which the
 platform serves to the app.
 
-On DuckDB, `data/claims_app/claims.csv` holds a few claims as they stood at noon on Monday 2
-November 2026, when the pay run of Thursday 5 November took its claims.
+On DuckDB, `data/claims_app/claims.csv` holds a few claims as they stood at 22:00 on Monday 2
+November 2026, when the claims job ran; the last came that afternoon as 1:30 (DEC-CLM-02).
 {% enddocs %}
 
 {% docs claim_duty %}

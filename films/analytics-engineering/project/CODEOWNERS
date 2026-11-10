@@ -53,8 +53,6 @@
 /seeds/expected/planning/census_report.csv               census@uni.example
 /seeds/reference/course/units.csv                        registrar@uni.example
 /seeds/reference/finance/tuition_rates.csv               finance@uni.example
-/seeds/reference/finance/teaching_duties.csv             rohan.desai@uni.example
-/seeds/reference/finance/on_cost_rates.csv               finance@uni.example
 /seeds/reference/staff/pay_days.csv                      hr@uni.example
 /seeds/reference/student/status_map.csv                  mei.tanaka@uni.example
 /seeds/reference/student/learner_identity_decisions.csv  mei.tanaka@uni.example
@@ -62,7 +60,6 @@
 
 # Data products: each product's owner
 /governance/4-data-products/awards.yml                   mei.tanaka@uni.example
-/governance/4-data-products/casual_teaching_cost.yml     rohan.desai@uni.example
 /governance/4-data-products/claims.yml                   hr@uni.example
 /governance/4-data-products/learner_records.yml          mei.tanaka@uni.example
 /governance/4-data-products/learner_wallet.yml           wallet@uni.example
@@ -93,3 +90,8 @@
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
+
+# Casual teaching cost: Finance's teaching duties and on-cost rates, and its product
+/seeds/reference/finance/teaching_duties.csv             rohan.desai@uni.example
+/seeds/reference/finance/on_cost_rates.csv               finance@uni.example
+/governance/4-data-products/casual_teaching_cost.yml     rohan.desai@uni.example

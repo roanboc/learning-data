@@ -110,9 +110,9 @@ models:
           meta: {personal_data: direct, critical_for: [certificates, ceremony_programme], reference: the graduate, confirmed_on: name_confirmed_on}
       - name: name_confirmed_on
         description: >
-          The day the graduate confirmed their name, or corrected it, in the portal for this
-          ceremony; a correction counts once the registrar's office has checked it. Empty when
-          they haven't confirmed it through the portal.
+          Means: the day of the graduate's answer in the portal, for this ceremony, once accepted (a correction,
+          once the registrar's office has checked it). Empty means: not confirmed in the portal; name_confirmed_how
+          says if it was on paper. Owner: Mei Tanaka, registrar's office.
         data_type: date
         config:
           meta: {personal_data: none}
@@ -211,6 +211,23 @@ models:
                 business_impact: >
                   A name a graduate corrected printed as it was before, and their certificate
                   printed again.
+      - name: name_confirmed_how
+        description: >
+          Means: how the graduate confirmed the name to be printed for this ceremony. portal, in the
+          portal, even after a paper form (name_confirmed_on is the day); paper, on the paper
+          graduation form only, used until the portal opened in February 2026, which kept no date.
+          Empty means: not confirmed yet, in the portal or on paper. Owner: Mei Tanaka, registrar's
+          office.
+        data_type: string
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [portal, paper]
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none}
+
     data_tests:
       - reconciles_with:
           name: awards_match_the_boards
@@ -230,3 +247,219 @@ models:
               owner: "Mei Tanaka, registrar's office"
               dimension: accuracy
               reference: the exam boards' approved lists
+
+  - name: mart_graduations__name_reports
+    description: >
+      Every report a graduate makes about their own name, through the portal's "This isn't my
+      name": who answers it, when it's due, and when it was answered and the graduate told. The
+      registrar's office, which owns names, promises an answer within two working days, Monday to
+      Friday. A rule about what people do, tracked here and reviewed every week, never failed as a
+      test (docs/conventions.md, Tests). Each morning a Databricks SQL alert tells the office which
+      reports are due (analyses/alerts/name_reports_due_today.sql). Read together, the reports show
+      where errors are born.
+    config:
+      group: graduations
+      meta:
+        grain: One row per report, a graduate's correction of their name for a ceremony
+        owner: "Mei Tanaka, registrar's office"
+        domain: registrar
+        consumer: The registrar's office
+    constraints:
+      - type: primary_key
+        name: pk_mart_graduations__name_reports
+        columns: [report_bk]
+        warn_unenforced: false
+    columns:
+      - name: report_bk
+        description: The report's key, the portal's answer ID qualified by its key set, like SP|NC-12688. It holds no person.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none}
+      - name: student_bk
+        description: '{{ doc("qualified_key") }} The graduate who made the report.'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: direct}
+      - name: ceremony_id
+        description: The ceremony the graduate registered for when they made the report, like DEC26-3.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: name_given
+        description: The whole name as the graduate writes it, in their own order, every letter kept.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: reported_at
+        description: When the graduate pressed "This isn't my name" and gave their name.
+        data_type: timestamp
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none}
+      - name: owner
+        description: Who answers the report. A name is the registrar's office's.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: due_on
+        description: >
+          The day the answer is due: two working days, Monday to Friday, after the day of the
+          report. A report on a Monday is due on the Wednesday; on a Thursday, the Monday. Public
+          holidays aren't counted yet.
+        data_type: date
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none}
+      - name: answered_at
+        description: >
+          When the registrar's office answered the report in the portal: put right in the student
+          system once checked against the document seen at enrolment, or asked for the document
+          that shows a new name. Empty until it answers.
+        data_type: timestamp
+        config:
+          meta: {personal_data: none}
+      - name: told_at
+        description: When the portal told the graduate the answer, on the page and by email. Empty until they're told.
+        data_type: timestamp
+        config:
+          meta: {personal_data: none}
+      - name: answered_in_time
+        description: True when the answer came on or before its due day; false when it came later; empty until it comes. Reviewed every week.
+        data_type: boolean
+        config:
+          meta: {personal_data: none}
+      - name: record_made_by
+        description: >
+          Where the graduate's record, and the name in it, was first made: paper form (before
+          2015), old online form (2015 to 2018, which took only A to Z, in capitals) or current
+          online form (from 2019). Read together, the reports show where errors are born.
+        data_type: string
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [paper form, old online form, current online form]
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: none}
+
+  - name: mart_graduations__certificates_file
+    description: >
+      The printer's file: each certificate of a round whose names haven't gone to the printer yet,
+      with what the certificate prints, from the graduation list. The graduations office sends it
+      at 5 pm on the round's Thursday (list_due_at, in the ceremonies). A check stops it while a
+      name on it isn't the name its graduate last gave in the portal: the night's build fails, and
+      the file isn't sent until a person settles each name (Read by an agent).
+    config:
+      group: graduations
+      meta:
+        grain: One row per certificate of a round whose names haven't gone to the printer yet
+        owner: "Mei Tanaka, registrar's office"
+        domain: student
+        consumer: The certificate printer, through the graduations office
+    constraints:
+      - type: primary_key
+        name: pk_mart_graduations__certificates_file
+        columns: [graduation_bk]
+        warn_unenforced: false
+    columns:
+      - name: graduation_bk
+        description: The certificate's key, the graduate and the award, qualified by its key set, like SIS|S-16874|MDA.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: "Mei Tanaka, registrar's office"}
+        config:
+          meta: {personal_data: direct}
+      - name: name_as_printed
+        description: The whole name as the certificate prints it, in the graduate's own order, from the graduation list.
+        data_type: string
+        config:
+          meta: {personal_data: direct}
+      - name: award_name
+        description: The award's name as it was on the day it was conferred, as the certificate prints it.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: conferred_on
+        description: The date the faculty's exam board approved the award, printed on the certificate.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: ceremony_id
+        description: The ceremony the graduate is presented at, like DEC26-3, so the certificates arrive sorted by ceremony.
+        data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: student_system_as_of
+        description: When the student system's nightly file the list was built from arrived, from the graduation list. The file's header shows it.
+        data_type: timestamp
+        config:
+          meta: {personal_data: none}
+      - name: portal_as_of
+        description: When the portal's nightly file the list was built from arrived, from the graduation list. The file's header shows it.
+        data_type: timestamp
+        config:
+          meta: {personal_data: none}
+
+  - name: mart_graduations__names_to_confirm
+    description: >
+      The graduations office's follow-up: each graduate of a round whose names haven't gone to the
+      printer yet who hasn't confirmed their name for that ceremony, in the portal or on the paper
+      form (name_confirmed_how empty on the graduation list). Malia Fonoti follows the count each
+      week and writes to each one; the graduations team's agent answers from it. A rule about what
+      people do, tracked here, not failed as a check (Read by an agent).
+    config:
+      group: graduations
+      meta:
+        grain: One row per graduate and ceremony, of a round whose names haven't gone to the printer yet, not confirmed yet
+        owner: "Malia Fonoti, graduations office"
+        domain: student
+        consumer: The graduations office
+    constraints:
+      - type: primary_key
+        name: pk_mart_graduations__names_to_confirm
+        columns: [student_bk, ceremony_id]
+        warn_unenforced: false
+    data_tests:
+      - unique_combination:
+          arguments:
+            columns: [student_bk, ceremony_id]
+          config:
+            meta: {owner: "Malia Fonoti, graduations office"}
+    columns:
+      - name: student_bk
+        description: '{{ doc("qualified_key") }} The graduate, once for each ceremony, though they may have two certificates.'
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: direct}
+      - name: ceremony_id
+        description: The ceremony the graduate is presented at, like DEC26-4.
+        data_type: string
+        constraints: [{type: not_null}]
+        config:
+          meta: {personal_data: none}
+      - name: ceremony_on
+        description: The day of that ceremony.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: names_due_on
+        description: The day the round's names go to the printer, at 5 pm; after it, a change is a certificate printed again.
+        data_type: date
+        config:
+          meta: {personal_data: none}
+      - name: days_left
+        description: Days from the build (var as_is_date, or today) to names_due_on; 0 on the day itself.
+        data_type: int
+        config:
+          meta: {personal_data: none}

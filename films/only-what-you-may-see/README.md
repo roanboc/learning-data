@@ -15,6 +15,9 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 | [Know what you hold](https://data.learn-all.org/only-what-you-may-see/know-what-you-hold/) | Data classification | 7 min | 8 | 3 questions | [script](2-know-what-you-hold/script.md) · [source](2-know-what-you-hold/source/README.md) |
 | [Show the least](https://data.learn-all.org/only-what-you-may-see/show-the-least/) | Ways to hide a value | 7½ min | 6 | 3 questions | [script](3-show-the-least/script.md) · [source](3-show-the-least/source/README.md) |
 | [Grants by design](https://data.learn-all.org/only-what-you-may-see/grants-by-design/) | Access by design | 9 min | 9 | 3 questions | [script](4-grants-by-design/script.md) · [source](4-grants-by-design/source/README.md) |
+| [Tags that travel](https://data.learn-all.org/only-what-you-may-see/tags-that-travel/) | Tag propagation | 8 min | 8 | 3 questions | [script](5-tags-that-travel/script.md) · [source](5-tags-that-travel/source/README.md) |
+| [One policy for many tables](https://data.learn-all.org/only-what-you-may-see/one-policy-for-many-tables/) | Policies by tag | 8 min | 7 | 4 questions | [script](6-one-policy-for-many-tables/script.md) · [source](6-one-policy-for-many-tables/source/README.md) |
+| [Copies that keep the rules](https://data.learn-all.org/only-what-you-may-see/copies-that-keep-the-rules/) | Copies of people's data | 8½ min | 7 | 3 questions | [script](7-copies-that-keep-the-rules/script.md) · [source](7-copies-that-keep-the-rules/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

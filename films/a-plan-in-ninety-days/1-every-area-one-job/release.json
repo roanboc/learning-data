@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Every area, one job",
+    "key": "every-area-one-job-en",
+    "dir": "films/a-plan-in-ninety-days/1-every-area-one-job/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/every-area-one-job/film.js",
+    "video": "dist/every-area-one-job.mp4",
+    "file": "every-area-one-job.mp4",
+    "captions": [
+      [
+        "films/a-plan-in-ninety-days/1-every-area-one-job/captions/en.srt",
+        "every-area-one-job.en.srt"
+      ],
+      [
+        "films/a-plan-in-ninety-days/1-every-area-one-job/captions/es.srt",
+        "every-area-one-job.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/a-plan-in-ninety-days/1-every-area-one-job/source",
+      ":(exclude)films/a-plan-in-ninety-days/1-every-area-one-job/source/src/i18n/es/captions.js",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 313,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

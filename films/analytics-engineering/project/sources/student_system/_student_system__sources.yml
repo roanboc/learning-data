@@ -106,6 +106,12 @@ sources:
             description: The ceremony the graduate is presented at, like DEC26-3 (seeds/reference/graduations/ceremonies.csv).
           - name: attendance_code
             description: ATT when the graduate crosses the stage; ABS when the award is conferred in absentia and the certificate posted.
+          - name: record_created_on
+            description: >
+              The day the student's record was first made in the student system. A student who
+              comes back keeps their record, and the name it was made with: records made before
+              2015 came from the paper forms, and from 2015 to 2018 from the old online form, which
+              took only A to Z, in capitals.
       - name: nightly_files
         description: >
           The receipts of the night's transfer: one row for each nightly file the student system
@@ -128,3 +134,26 @@ sources:
             description: The file's name, with the day of the records it brings, like nightly_2026-06-17.csv.
           - name: received_at
             description: When the file arrived on the platform. The night's files are due at 02:00.
+      - name: graduation_applications
+        description: >
+          The student system's applications to graduate: one row per version of a graduate's
+          application to be presented at a ceremony. Until the portal opened in February 2026, a
+          graduate applied on the paper graduation form, which asked them to confirm the name to be
+          printed and kept no date for it; since then they apply in the portal, and confirm their
+          name there (the portal's name_confirmations). The system key is the student ID and the
+          ceremony.
+        config:
+          meta:
+            system_key: [student_id, ceremony_id]
+        columns:
+          - name: student_id
+            description: The student ID of the graduate who applied, like S-17790.
+          - name: ceremony_id
+            description: The ceremony the graduate applied to be presented at, like DEC26-1.
+          - name: application_form
+            description: >
+              paper, the paper graduation form, on which the graduate confirmed the name to be
+              printed; portal, an application in the portal, where the graduate confirms their name
+              separately.
+          - name: received_on
+            description: The day the registrar's office received the application.

@@ -1,0 +1,295 @@
+1
+00:00:03,000 --> 00:00:10,338
+Hacia el año 2000, quienes escribían para las Naciones Unidas, la Unión Europea y la OTAN usaban correctores ortográficos.
+
+2
+00:00:11,638 --> 00:00:15,341
+Un corrector marca la palabra que no conoce y ofrece una que sí conoce.
+
+3
+00:00:16,641 --> 00:00:22,451
+Las listas de palabras de algunos correctores tenían co-operation, con guion, pero no cooperation, sin él.
+
+4
+00:00:23,951 --> 00:00:32,348
+Cuando alguien escribía cooperation, el corrector la marcaba mal y lo primero que ofrecía era Cupertino, una ciudad de California.
+
+5
+00:00:33,848 --> 00:00:35,405
+Quien tenía prisa la aceptaba.
+
+6
+00:00:37,105 --> 00:00:45,886
+Un informe de la OTAN de 1999 nombró la Organization for Security and Cupertino in Europe, y había que adivinar qué quería decir.
+
+7
+00:00:47,586 --> 00:00:52,474
+En 2006 se encontraban cientos en los sitios web de esas organizaciones.
+
+8
+00:00:53,974 --> 00:00:58,308
+Una máquina segura de sí, un hueco en lo que leía y nadie que leyera después.
+
+9
+00:01:00,208 --> 00:01:01,596
+Algo tenía que cambiar.
+
+10
+00:01:03,096 --> 00:01:08,600
+En 2000, los traductores al inglés de la Comisión Europea escribieron sobre ello en su revista.
+
+11
+00:01:09,300 --> 00:01:15,294
+Entre quienes redactaban y traducían para la Unión Europea, el fallo recibió un nombre: el efecto Cupertino.
+
+12
+00:01:16,594 --> 00:01:20,707
+El nombre era una advertencia: lee lo que ofrece el corrector antes de aceptarlo.
+
+13
+00:01:22,407 --> 00:01:27,265
+Y quienes hacían los correctores ampliaron sus listas, así que cooperation pasó a ser una palabra conocida.
+
+14
+00:01:28,565 --> 00:01:36,856
+En 2007, los correctores ya no solían ofrecer Cupertino por cooperation, y los lectores recibían la palabra que se quería decir.
+
+15
+00:01:38,756 --> 00:01:47,265
+En la universidad, en octubre de 2026, un agente leyó una columna vacía y respondió 412, con total seguridad.
+
+16
+00:01:48,765 --> 00:01:57,281
+Cuando los datos dijeron qué significa vacío, respondió 38, y a 374 graduados no se les volvió a pedir un nombre que ya habían dado.
+
+17
+00:02:05,581 --> 00:02:08,823
+Jueves 22 de octubre de 2026.
+
+18
+00:02:09,923 --> 00:02:13,632
+En tres semanas, la lista de las ceremonias de diciembre va a la imprenta.
+
+19
+00:02:14,332 --> 00:02:22,014
+Malia, que organiza las ceremonias, pregunta al agente del equipo de graduaciones qué graduados de diciembre no han confirmado su nombre.
+
+20
+00:02:22,714 --> 00:02:26,199
+Lee la lista y responde enseguida: 412.
+
+21
+00:02:27,699 --> 00:02:29,648
+Sin dudas, y sin ninguna pregunta.
+
+22
+00:02:31,148 --> 00:02:36,981
+Malia redacta un correo para los 412: por favor, confirma tu nombre antes de que se imprima.
+
+23
+00:02:38,281 --> 00:02:41,311
+Luego, antes de enviarlo, vuelve a leer la respuesta.
+
+24
+00:02:42,811 --> 00:02:45,200
+412 es la quinta parte de la lista.
+
+25
+00:02:46,500 --> 00:02:51,843
+En marzo, 95 de cada 100 graduados respondieron dentro de las dos semanas del portal.
+
+26
+00:02:52,543 --> 00:02:56,058
+Una quinta parte en silencio a los diez días no encaja con lo que sabe.
+
+27
+00:02:57,758 --> 00:03:01,941
+Así que, antes de escribir a nadie, le pregunta a Mei, que responde por la lista.
+
+28
+00:03:04,641 --> 00:03:08,868
+El agente había contado a los graduados cuya fecha de confirmación estaba vacía.
+
+29
+00:03:09,568 --> 00:03:11,910
+Mei sabe que ahí vacío significa dos cosas.
+
+30
+00:03:13,210 --> 00:03:16,139
+38 graduados aún no han confirmado su nombre.
+
+31
+00:03:16,839 --> 00:03:24,715
+374 lo confirmaron en el formulario en papel, antes de que el portal abriera en febrero, y ese formulario no tiene fecha en la lista.
+
+32
+00:03:26,215 --> 00:03:30,560
+La descripción de la columna decía solo: fecha en que el graduado confirmó su nombre.
+
+33
+00:03:31,860 --> 00:03:34,223
+Nadie había escrito qué significa vacío.
+
+34
+00:03:35,923 --> 00:03:40,388
+Mei se lo habría dicho a quien preguntara, pero el agente no puede acercarse a su escritorio.
+
+35
+00:03:41,088 --> 00:03:44,624
+Lee lo que está escrito y responde como si eso fuera todo.
+
+36
+00:03:45,924 --> 00:03:48,249
+Su 412 fue un Cupertino.
+
+37
+00:03:50,149 --> 00:03:53,523
+Así que la descripción de una columna es parte de la calidad de los datos.
+
+38
+00:03:54,223 --> 00:04:01,697
+Una norma internacional de calidad de datos lo llama comprensibilidad: datos que sus usuarios pueden leer e interpretar.
+
+39
+00:04:02,997 --> 00:04:08,333
+Que vacío signifique dos cosas es un fallo en los datos, y también lo es una descripción que no lo dice.
+
+40
+00:04:11,033 --> 00:04:13,006
+Así que el equipo arregla primero los datos.
+
+41
+00:04:14,306 --> 00:04:19,655
+Noor, la arquitecta de datos, encuentra dónde se registra el formulario en papel: en el sistema de estudiantes.
+
+42
+00:04:21,155 --> 00:04:28,276
+Con eso, Jun añade una columna que dice cómo se confirmó cada nombre: portal o papel, y vacío significa todavía no.
+
+43
+00:04:29,576 --> 00:04:33,799
+Luego escribe la descripción con las palabras de Mei, para un lector que no puede preguntar.
+
+44
+00:04:35,099 --> 00:04:40,748
+Qué significa: el día de la respuesta del graduado en el portal, para esa ceremonia, una vez aceptada.
+
+45
+00:04:42,048 --> 00:04:47,256
+Qué significa vacío: no confirmado en el portal; la nueva columna dice si fue en papel.
+
+46
+00:04:48,756 --> 00:04:52,192
+Y quién responde por ella: Mei, en la oficina de registro académico.
+
+47
+00:04:53,692 --> 00:04:58,817
+dbt la escribe en Unity Catalog en cada ejecución, donde la lee el agente.
+
+48
+00:05:00,317 --> 00:05:06,266
+Así, el equipo escribió lo que el agente necesitaba leer, como quienes hacían los correctores ampliaron sus listas.
+
+49
+00:05:07,766 --> 00:05:14,940
+Al preguntarle de nuevo, el agente responde 38 y muestra qué contó: graduados sin confirmación de ningún tipo.
+
+50
+00:05:16,640 --> 00:05:18,522
+Malia escribe a los 38.
+
+51
+00:05:20,022 --> 00:05:28,129
+El control de Jun de Avisar, arreglar, contar leía vacío igual; apuntado a la nueva columna, sus 76 nombres pasan a 7.
+
+52
+00:05:31,429 --> 00:05:36,556
+Jun le pide a su propio agente, Genie Code, que lea la lista y los controles que ya se ejecutan.
+
+53
+00:05:37,856 --> 00:05:43,445
+Perfila cada columna, redacta descripciones para las demás y propone tres controles nuevos.
+
+54
+00:05:44,945 --> 00:05:50,791
+Cada borrador es un comienzo: puede decir lo que sugiere el nombre de una columna, no lo que solo sabe su responsable.
+
+55
+00:05:52,291 --> 00:05:55,197
+Así que Jun revisa cada uno, y Mei fija los niveles.
+
+56
+00:05:56,697 --> 00:06:01,677
+El primero encuentra un nombre de la lista que no es el que su graduado dio en el portal.
+
+57
+00:06:02,977 --> 00:06:06,843
+Mei hace que detenga el archivo de la imprenta hasta que una persona resuelva cada nombre.
+
+58
+00:06:08,343 --> 00:06:13,155
+Encuentra tres: nombres cambiados desde la matrícula, que aún esperan un documento.
+
+59
+00:06:14,655 --> 00:06:19,799
+El segundo comprueba que las dos columnas de confirmación coincidan, y espera a Jun si no coinciden.
+
+60
+00:06:21,299 --> 00:06:25,020
+El tercero fallaría cada noche que un graduado aún no hubiera confirmado.
+
+61
+00:06:26,320 --> 00:06:30,561
+Jun dice que no: eso trata de lo que hace la gente, no de si los datos están bien.
+
+62
+00:06:32,061 --> 00:06:37,642
+Se convierte en un conteo que Malia sigue cada semana, y en la respuesta de confianza del agente a su pregunta.
+
+63
+00:06:39,142 --> 00:06:41,482
+El agente propone; las personas deciden.
+
+64
+00:06:45,182 --> 00:06:52,437
+Lo que ahorró a 374 graduados un correo que no necesitaban fue que Malia leyera la respuesta antes de actuar.
+
+65
+00:06:54,537 --> 00:07:00,173
+Lee la respuesta de un agente como la de un colega nuevo: ¿qué contó, y encaja con lo que sabes?
+
+66
+00:07:02,273 --> 00:07:08,128
+Pídele que muestre cómo llegó a ella, y cuando la respuesta no encaje, pregunta a quien responde por los datos.
+
+67
+00:07:10,028 --> 00:07:18,251
+Ingeniería de contexto mostró que lo que un agente lee decide lo que escribe, y Contexto y memoria, gobernados, cómo mantenerlo bien.
+
+68
+00:07:19,951 --> 00:07:26,753
+El paso de esta película va primero: la descripción de una columna es parte de los datos, y su calidad es la de los datos.
+
+69
+00:07:30,053 --> 00:07:33,041
+El lunes, elige la tabla que tu agente lee más.
+
+70
+00:07:33,741 --> 00:07:38,809
+Para cada columna, escribe qué significa, qué significa vacía, su unidad y quién responde por ella.
+
+71
+00:07:40,309 --> 00:07:43,960
+Donde vacío signifique dos cosas, arregla los datos, no solo las palabras.
+
+72
+00:07:45,260 --> 00:07:49,019
+Deja que los agentes redacten y propongan; que las personas revisen y decidan.
+
+73
+00:07:50,519 --> 00:07:57,020
+La cura del Cupertino tuvo dos mitades: completar lo que lee la máquina, y leer lo que ofrece antes de aceptarlo.
+
+74
+00:07:58,920 --> 00:08:01,478
+Describe tus datos para un lector que no puede preguntar.

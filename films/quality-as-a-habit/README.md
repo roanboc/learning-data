@@ -12,6 +12,8 @@ Keeping data good, and making it better. Every November, two people spend three 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [The hidden factory](https://data.learn-all.org/quality-as-a-habit/the-hidden-factory/) | Hidden work and root causes | 10 min | 8 | 4 questions | [script](1-the-hidden-factory/script.md) · [source](1-the-hidden-factory/source/README.md) |
+| [Report, fix, tell](https://data.learn-all.org/quality-as-a-habit/report-fix-tell/) | When a person reports an error | 7½ min | 7 | 3 questions | [script](2-report-fix-tell/script.md) · [source](2-report-fix-tell/source/README.md) |
+| [Read by an agent](https://data.learn-all.org/quality-as-a-habit/read-by-an-agent/) | Descriptions and agents | 8 min | 7 | 3 questions | [script](3-read-by-an-agent/script.md) · [source](3-read-by-an-agent/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

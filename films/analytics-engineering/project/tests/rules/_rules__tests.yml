@@ -52,3 +52,36 @@ data_tests:
     config:
       severity: error
       meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  # on the graduation list, before it goes to the printer
+  - name: old_form_names_not_yet_confirmed
+    description: >
+      A name the old form made, still in plain letters A to Z, not yet confirmed by its graduate:
+      on a list not yet sent to the printer, a record first made before 2019, a printed name with
+      no letter outside A to Z, and no confirmation from the graduate. It can't see a missing
+      accent; it sees where a name was born. A warning, agreed with Mei: each name is held for the
+      registrar's office, which writes to the graduate, and dbt keeps them in a table the office
+      reads (store_failures). Added on 14 October 2026, after the first reports (Report, fix, tell).
+      It reads name_confirmed_how since 10 November 2026, so a name confirmed on the paper form
+      counts as confirmed (Read by an agent).
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: the graduate}
+
+  # on the printer's file, and the list's two confirmation columns (Read by an agent)
+  - name: printers_file_has_the_names_graduates_gave
+    description: >
+      Each name in the printer's file is the name its graduate last gave in the portal for that
+      ceremony, a correction still waiting for its check included. Genie Code proposed it and Jun
+      Park reviewed it; Mei set it to stop the printer's file (error) until a person settles each
+      name. It checks the names in the certificates' level, zero wrong (the graduation list's
+      certificates_exactly_right).
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy, reference: "The graduate, through their last answer in the portal"}
+
+  - name: name_confirmation_columns_agree
+    description: >
+      The graduation list's two confirmation columns agree: a day in name_confirmed_on exactly when
+      name_confirmed_how is portal. Genie Code proposed it; Mei set it to warn and hold for Jun Park,
+      as a difference is a fault in the code, not in what graduates did.
+    config:
+      meta: {owner: "Jun Park, analytics engineer", dimension: consistency}

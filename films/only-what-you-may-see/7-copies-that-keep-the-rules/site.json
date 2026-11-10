@@ -1,0 +1,97 @@
+{
+  "kicker": "Copies of people's data",
+  "kicker_es": "Copias de datos de personas",
+  "title_es": "Copias que mantienen las reglas",
+  "h1": "Copies that keep the rules: protected, or not made",
+  "h1_es": "Copias que mantienen las reglas: protegidas, o no se hacen",
+  "lead": "This autumn, four copies of the learners' records are asked for: one to build with, one for the teaching hospital, an answer that needs both sides' rows, and one to take home. The rules live in the catalog, not in the records, so each copy keeps the protection, or isn't made.",
+  "lead_es": "Este otoño se piden cuatro copias de los expedientes: una para construir, una para el hospital universitario, una respuesta que pide las filas de ambos y una para llevar a casa. Las reglas viven en el catálogo, no en los expedientes: cada copia mantiene la protección, o no se hace.",
+  "description": "A film about copies of people's data: why a copy that leaves the catalog takes the records and none of the rules; made-up learners for development and test, never a clone; a share with a partner that holds only a table of totals, since the policies don't travel with it, and ends on the agreement's date; a clean room where neither side sees the other's rows and the approved code hides small counts; and every way to download or export switched off, kept as code.",
+  "description_es": "Una película sobre las copias de datos de personas: por qué una copia que sale del catálogo se lleva los expedientes y ninguna de las reglas; estudiantes inventados para desarrollo y pruebas, nunca un clon; lo compartido con un socio, que guarda solo una tabla de totales, porque las políticas no viajan con ello, y termina en la fecha del acuerdo; una sala limpia donde ninguno ve las filas del otro y el código aprobado oculta las cifras pequeñas; y cada forma de descargar o exportar desactivada, guardada como código.",
+  "card": "Made-up learners to build with, totals to share, a clean room for both sides, and no download: every copy keeps the rules.",
+  "card_es": "Estudiantes inventados para construir, totales para compartir, una sala limpia para ambos y ninguna descarga: cada copia en regla.",
+  "chapters_es": {
+    "cave": "Una copia para visitar",
+    "home": "Donde viven las reglas",
+    "madeup": "Inventados, para construir",
+    "share": "Protegido antes de salir",
+    "room": "Una sala para ambos",
+    "out": "Ninguna otra salida",
+    "kept": "Cada copia, en regla"
+  },
+  "past": [
+    "Lascaux, 1948 to 1983: a copy to visit",
+    "Visitors' breath was destroying the paintings, so the cave was closed and a copy built beside it let millions see them: so every copy of people's data keeps the protection, or isn't made."
+  ],
+  "past_es": [
+    "Lascaux, de 1948 a 1983: una copia para visitar",
+    "El aliento de los visitantes destruía las pinturas, así que se cerró la cueva y una copia hecha a su lado dejó que millones las vieran: por eso cada copia de datos de personas mantiene la protección, o no se hace."
+  ],
+  "next_h": "You've seen four copies keep the rules, or not be made. Next: proof it held, where reviews, the audit log and lineage show that the protection worked, until each agreement ends.",
+  "next_h_es": "Viste cuatro copias mantener las reglas, o no hacerse. Después: la prueba de que se cumplió, donde las revisiones, el registro de auditoría y el linaje muestran que la protección funcionó, hasta que termina cada acuerdo.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee la guía por tu cuenta",
+    "p": "The film shows Azure Databricks and dbt as their docs did on 10 November 2026. These are the pages it follows.",
+    "p_es": "La película muestra Azure Databricks y dbt como los describían sus documentos el 10 de noviembre de 2026. Estas son las páginas que sigue.",
+    "links": [
+      {
+        "title": "Azure Databricks: OpenSharing and ABAC",
+        "title_es": "Azure Databricks: OpenSharing y ABAC",
+        "line": "Why whoever shares a protected table must be left out of its policies, and why the recipient then sees every value unless it applies policies of its own.",
+        "line_es": "Por qué quien comparte una tabla protegida debe quedar fuera de sus políticas, y por qué quien la recibe ve entonces cada valor, salvo que aplique políticas propias.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/opensharing",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/opensharing"
+      },
+      {
+        "title": "Azure Databricks: requirements and limits of policies",
+        "title_es": "Azure Databricks: requisitos y límites de las políticas",
+        "line": "Clones of a table with policies aren't allowed, except for someone every policy leaves out, who sees every value unmasked.",
+        "line_es": "No se permiten clones de una tabla con políticas, salvo para alguien que todas las políticas excluyen, y que ve cada valor sin máscara.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/requirements",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/requirements"
+      },
+      {
+        "title": "Azure Databricks: what is Clean Rooms?",
+        "title_es": "Azure Databricks: ¿qué son las salas limpias?",
+        "line": "Partners work together on sensitive data without seeing each other's rows: each sees only the other's column names and types.",
+        "line_es": "Socios trabajan juntos sobre datos sensibles sin ver las filas del otro: cada uno ve solo los nombres y tipos de las columnas del otro.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/clean-rooms/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/clean-rooms/"
+      },
+      {
+        "title": "Azure Databricks: run notebooks in clean rooms",
+        "title_es": "Azure Databricks: ejecutar cuadernos en salas limpias",
+        "line": "Every collaborator but the one who uploaded it approves a notebook before it runs, and only the runner it names may run it.",
+        "line_es": "Cada colaborador, salvo quien lo subió, aprueba un cuaderno antes de que corra, y solo quien este designa puede ejecutarlo.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/clean-rooms/clean-room-notebook",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/clean-rooms/clean-room-notebook"
+      },
+      {
+        "title": "Azure Databricks: manage access to notebook features",
+        "title_es": "Azure Databricks: acceso a las funciones del cuaderno",
+        "line": "The workspace's switches for downloading results, exporting notebooks and copying tables to the clipboard, which start switched on.",
+        "line_es": "Los interruptores del espacio de trabajo para descargar resultados, exportar cuadernos y copiar tablas al portapapeles, que empiezan encendidos.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/workspace-settings/notebooks",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/workspace-settings/notebooks"
+      },
+      {
+        "title": "Azure Databricks: serverless egress control",
+        "title_es": "Azure Databricks: control de salida sin servidor",
+        "line": "A network policy that lets what runs on serverless compute reach only the catalog's storage and the places on a short list.",
+        "line_es": "Una política de red que deja a lo que corre sin servidor llegar solo al almacenamiento del catálogo y a los lugares de una lista corta.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/security/network/serverless-network-security/network-policies",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/security/network/serverless-network-security/network-policies"
+      },
+      {
+        "title": "dbt: unit tests",
+        "title_es": "dbt: pruebas unitarias (en inglés)",
+        "line": "Testing a model's logic on a few rows written for the test, so no real data is needed to check it.",
+        "line_es": "Probar la lógica de un modelo con unas pocas filas escritas para la prueba, sin necesitar datos reales.",
+        "href": "https://docs.getdbt.com/docs/build/unit-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/unit-tests"
+      }
+    ]
+  },
+  "draft": true
+}

@@ -1,0 +1,80 @@
+{
+  "kicker": "A team that holds",
+  "kicker_es": "Un equipo que se sostiene",
+  "title_es": "Primero el equipo",
+  "h1": "The team comes first: nobody alone, nobody the only one who knows",
+  "h1_es": "Primero el equipo: nadie solo, nadie el único que sabe",
+  "lead": "In February 2027 Helena Novak starts as the university's data manager. Before she judges anyone, she reads the team as a whole, and finds every night alert going to one person, Sam. The team pairs until four can answer them, so when Sam has to leave at a day's notice, nobody calls him.",
+  "lead_es": "En febrero de 2027 Helena Novak llega como gestora de datos de la universidad. Antes de juzgar a nadie, mira al equipo como un todo, y ve que cada alerta nocturna va a una sola persona, Sam. Trabajan en pareja hasta que cuatro saben responderlas, y cuando Sam debe irse de golpe, nadie lo llama.",
+  "description": "A film about putting the team first, the third of Leading a data team, in the module Leading data people: Ubuntu, a person is a person through other people, taught from Southern African writers (Desmond Tutu, Mogobe Ramose, Thaddeus Metz), with psychological safety, Amy Edmondson's word for part of it, named once; Helena Novak starts as the university's data manager on Monday 1 February 2027, watches before she judges anyone, has half an hour a week with each person, about them, never a status report, and reads the team as a whole, against what this team really does; for her, leading weighs a little more than managing, so the team's wellbeing comes first, and wellbeing isn't only comfort; she finds that every night alert goes to one person, Sam Okafor; in April Ivy Reyes says at stand-up that she nearly let an agent's wrong model through, and is thanked, not blamed; in June the team pairs on the platform until four people can answer every night alert, writing a runbook as it goes, and from Monday 5 July it shares the nights in a rota; on Sunday 1 August Sam's mother is taken into hospital, he goes, his phone off, and the rota and the runbooks hold: nobody calls him; in September Helena moves work before Jun's load wears him down, and in October she gives the team the credit, by name, and answers herself for what slipped; and what to do on Monday: pair until two people can do each job that matters most, and write down how, protect leave, thank the person who says I got it wrong, ask in one-to-ones how people are, and, if you're new, watch first. It opens in Johannesburg in the 1930s, where women whom no bank would serve saved together in stokvels, and carried each other through hard times.",
+  "description_es": "Una película sobre poner primero al equipo, la tercera de Liderar un equipo de datos, del módulo Liderar equipos de datos: Ubuntu, una persona es persona a través de otras personas, enseñado desde autores del sur de África (Desmond Tutu, Mogobe Ramose, Thaddeus Metz), con la seguridad psicológica, la palabra de Amy Edmondson para una parte de esa idea, nombrada una vez; Helena Novak llega como gestora de datos de la universidad el lunes 1 de febrero de 2027, observa antes de juzgar a nadie, pasa media hora a la semana con cada persona, sobre ella, nunca un informe de avance, y mira al equipo como un todo, frente a lo que este equipo hace de verdad; para ella, liderar pesa un poco más que gestionar, así que el bienestar del equipo va primero, y el bienestar no es solo comodidad; descubre que cada alerta nocturna va a una sola persona, Sam Okafor; en abril Ivy Reyes dice en la reunión diaria que casi deja pasar un modelo equivocado de un agente, y le dan las gracias, no la culpan; en junio el equipo trabaja en pareja sobre la plataforma hasta que cuatro personas pueden responder cada alerta nocturna, escribiendo una guía paso a paso, y desde el lunes 5 de julio se reparte las noches por turnos; el domingo 1 de agosto internan a la madre de Sam, él se va con el teléfono apagado, y los turnos y las guías aguantan: nadie lo llama; en septiembre Helena mueve trabajo antes de que la carga desgaste a Jun, y en octubre le da el mérito al equipo, con nombres, y responde ella misma por lo que se atrasó; y qué hacer el lunes: trabajar en pareja hasta que dos personas puedan hacer cada tarea que más importa, y escribir cómo, proteger las licencias, agradecer a quien dice me equivoqué, preguntar en las reuniones uno a uno cómo está la gente y, si recién llegas, observar primero. Empieza en Johannesburgo en la década de 1930, donde mujeres a quienes ningún banco atendía ahorraban juntas en stokvels, y se sostenían unas a otras en tiempos difíciles.",
+  "card": "Helena reads her team as a whole, finds one person answering every night alert, and makes sure nobody stands alone.",
+  "card_es": "Helena mira a su equipo como un todo, ve que una sola persona responde cada alerta nocturna y logra que nadie quede solo.",
+  "chapters_es": {
+    "stokvel": "A través de otras personas",
+    "whole": "El equipo como un todo",
+    "aloud": "Dicho en voz alta",
+    "pairs": "Nadie es el único",
+    "holds": "Los turnos aguantan",
+    "each": "Cada persona, cada semana",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Johannesburg, the 1930s: through other people",
+    "Women who earned little, and whom no bank would serve, formed stokvels: each paid the same into one pot, each took it in turn, and the group carried any member through hard times. When everyone pays in, nobody carries the work alone."
+  ],
+  "past_es": [
+    "Johannesburgo, década de 1930: a través de otras personas",
+    "Mujeres que ganaban poco, y a quienes ningún banco atendía, formaron stokvels: cada una ponía lo mismo en un fondo común, cada una lo recibía a su turno, y el grupo sostenía a cualquier socia en tiempos difíciles. Cuando todos aportan, nadie carga el trabajo solo."
+  ],
+  "next_h": "You've seen a team that holds its people. Next: a few clear rules that let people decide where the work is.",
+  "next_h_es": "Viste un equipo que sostiene a su gente. Después: unas pocas reglas claras que dejan decidir a la gente donde está el trabajo.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Ubuntu, the philosophy",
+        "title_es": "Ubuntu, la filosofía",
+        "line": "Where the idea comes from, the saying in several Southern African languages, and the writers who set it down, Desmond Tutu among them.",
+        "line_es": "De dónde viene la idea, el dicho en varias lenguas del sur de África, y quienes la pusieron por escrito, entre ellos Desmond Tutu.",
+        "href": "https://en.wikipedia.org/wiki/Ubuntu_philosophy",
+        "href_es": "https://es.wikipedia.org/wiki/Ubuntu_(filosof%C3%ADa)"
+      },
+      {
+        "title": "Desmond Tutu",
+        "title_es": "Desmond Tutu",
+        "line": "The archbishop who chaired South Africa's Truth and Reconciliation Commission, and wrote of Ubuntu in No Future Without Forgiveness (1999).",
+        "line_es": "El arzobispo que presidió la Comisión de la Verdad y la Reconciliación de Sudáfrica, y escribió sobre Ubuntu en No Future Without Forgiveness (1999).",
+        "href": "https://en.wikipedia.org/wiki/Desmond_Tutu",
+        "href_es": "https://es.wikipedia.org/wiki/Desmond_Tutu"
+      },
+      {
+        "title": "Psychological safety",
+        "title_es": "Seguridad psicológica (en inglés)",
+        "line": "Amy Edmondson's word for a team where people can admit a mistake or ask for help, and what the research since 1999 has found.",
+        "line_es": "La palabra de Amy Edmondson para un equipo donde se puede admitir un error o pedir ayuda, y lo que la investigación ha encontrado desde 1999.",
+        "href": "https://en.wikipedia.org/wiki/Psychological_safety",
+        "href_es": "https://en.wikipedia.org/wiki/Psychological_safety"
+      },
+      {
+        "title": "Rotating savings and credit associations",
+        "title_es": "Asociaciones de ahorro y crédito rotativo",
+        "line": "The family stokvels belong to: groups around the world where each member pays into one pot, and each takes it in turn.",
+        "line_es": "La familia a la que pertenecen los stokvels: grupos en todo el mundo donde cada miembro aporta a un fondo común, y cada uno lo recibe a su turno.",
+        "href": "https://en.wikipedia.org/wiki/Rotating_savings_and_credit_association",
+        "href_es": "https://es.wikipedia.org/wiki/Asociaci%C3%B3n_de_ahorro_y_cr%C3%A9dito_rotativo"
+      },
+      {
+        "title": "The National Stokvel Association of South Africa",
+        "title_es": "La Asociación Nacional de Stokvels de Sudáfrica (en inglés)",
+        "line": "The association, founded in 1988, that speaks for stokvels and keeps count of them.",
+        "line_es": "La asociación, fundada en 1988, que representa a los stokvels y lleva la cuenta de ellos.",
+        "href": "https://nasasa.co.za/",
+        "href_es": "https://nasasa.co.za/"
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "key": "many-hats",
+  "title": "Many hats, one picture",
+  "sub": "The opening film of The new skills, the first series of Leading data people: the generalist. Go deep in one thing, and learn enough of the business, the systems and the data to join them. A new analyst follows one real question through every part of the team's work, draws its whole route on one page, and finds 14 rooms that no one part could see.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (Ding Wei's plan, Noor's map, and the decision and question on Ivy's page), orange is data and where it's born, green is something done or matched, and amber a cost or a risk (the three jobs, and the 14 renumbered rooms).",
+  "src": [
+    "mh_kaifeng.js",
+    "mh_uni.js",
+    "mh_scenes.js"
+  ],
+  "poster": [
+    "page",
+    "fourteen",
+    3.2
+  ],
+  "say": [
+    [
+      "\\bKaifeng\\b",
+      "Kai-fung"
+    ],
+    [
+      "\\bDing Wei\\b",
+      "Ding Way"
+    ],
+    [
+      "\\bBian\\b",
+      "Bjen"
+    ],
+    [
+      "\\bShen Kuo\\b",
+      "Shun Kwaw"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bSFIA\\b",
+      "Sofia"
+    ],
+    [
+      "\\bDAMA's\\b",
+      "Dahma's"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "trench"
+  ],
+  "urgent": []
+}

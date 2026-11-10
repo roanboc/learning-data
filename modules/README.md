@@ -312,7 +312,7 @@ Source: [films/agents-at-work-on-data](../films/agents-at-work-on-data/) · Port
 
 Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · Portal: `/from-helper-to-colleague/`
 
-No film source yet.
+- [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 
 ## Data management
 

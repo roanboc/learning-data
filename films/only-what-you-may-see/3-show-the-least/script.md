@@ -51,22 +51,22 @@ The practice behind it: a practitioner starts from the question and the agreemen
 | The count board, chalk tallies under "Totals" | Published totals |
 | The paper's number and its stub in a sealed packet, 1872 | A way back to the person that only the holder of the seal can open: the key |
 | Samuel's row | One learner's record, column by column, as each reader sees it |
-| Violet chips (`direct`, `special` and `pseudonymous` solid, `indirect` lighter, `none` an outline) | Each column's class, set by its owner (*Know what you hold*): the stricter, the stronger |
-| Level pills of glass (`confidential`, `restricted` rimmed in violet, `public`) | Each table's level |
+| Class chips, as *Know what you hold* draws them: solid pills with dark words, `special`, `direct` and `pseudonymous` in violet (`special` with a second ring, `pseudonymous` with a small key), `indirect` in the quieter violet, `none` grey | Each column's class, set by its owner (*Know what you hold*) |
+| How far a table's pane is frosted (`public` clear, `confidential` 0.8, `restricted` all, rimmed in violet), with a slip: "LEVEL" and its name | Each table's level, as *Know what you hold* shows it |
 | The nine way tiles | The ways to hide a value, named exactly as `numbers.md` writes them |
 | The three questions, numbered on a card | What the reader sees; can it be undone, and by whom; what the reader can still work out |
 | Violet stars and codes | Hidden personal data |
 | A coral, closed card | What a reader isn't given (the support table), or a match that leaks |
 | The sealed key card | The keyed hash's key, never drawn, kept by the registrar's office |
 | The vault, a sealed card | The token's vault, kept by the registrar's office; its pairs never drawn |
-| Frost over a value | Encryption: all there, unreadable without the key |
+| Violet frost over one value | Encryption: all there, unreadable without the key |
 | The agreement card, 2026-14 | What the study may have, in plain words (*An agreement first*) |
 | The totals card, "fewer than 10", "hidden" | Published totals, small counts hidden, and one more beside them |
 | The agent's sphere, its band in cyan | An agent helping the study, with the study's view (*AI agents in data work*) |
 
 ## The look
 
-Night glass, variant GA (`films/locks-before-the-data/shared/`, the module's kit): a dark petrol hall of frosted glass panes, light along their edges, ice words, every word at least 28 px as seen and at least 4.5 to 1; nothing below y 890. Cyan is an identity (a person's or an agent's label, the roll's "who"); green allowed; coral denied or closed (the support table not given, a match that leaks, the sum that gives a count back); violet hidden personal data (stars, codes, "fewer than 10", "hidden") and the class chips, stronger for stricter; grey what needs no protection ("Everyone sees the totals"). Gold, the kit's chip on a genuine card, and amber (power switched on) aren't used. The way tiles are clear ice glass; the one in use is lit brighter, never coloured, so a tile never reads as allowed or denied. Frost has one meaning here, encryption; masked values are stars, as the example project's mask writes them (the style prototype's still f2 drew a masked name under frost; this film keeps frost for one meaning).
+Night glass, variant GA (`films/locks-before-the-data/shared/`, the module's kit): a dark petrol hall of frosted glass panes, light along their edges, ice words, every word at least 28 px as seen and at least 4.5 to 1; nothing below y 890. Cyan is an identity (a person's or an agent's label, the roll's "who"); green allowed; coral denied or closed (the support table not given, a match that leaks, the sum that gives a count back); violet hidden personal data (stars, codes, "fewer than 10", "hidden") and the classes of personal data, the quieter violet an indirect one; grey what needs no protection ("Everyone sees the totals", the `none` chip). Gold, the kit's chip on a genuine card, and amber (power switched on) aren't used. The way tiles are clear ice glass; the one in use is lit brighter, never coloured, so a tile never reads as allowed or denied. Frost over a value has one meaning here, encryption, and a table's pane is frosted as far as its level asks, as in *Know what you hold*; masked values are stars, as the example project's mask writes them (the style prototype's still f2 drew a masked name under frost; this film keeps frost over a value for one meaning).
 
 Three places, each painted once when the player asks for it, under 2 s:
 
@@ -114,7 +114,7 @@ Key `questions`. In the hall; the camera glides on.
 |---|---|---|
 | `may` | The study's agreement says what it may have: each learner's course and results, their year of birth, and a code in place of who they are. | The agreement card, top left: "Data sharing agreement 2026-14", "For a study in the Faculty of Health"; one line lit: "May have · Each learner's course and results; their year of birth; a code in place of who they are". A line under it: "From the film An agreement first" |
 | `never` | And never anything that names a learner, or anything about their health. | The line "Never · Anything that names a learner; anything about their health" lit |
-| `class` | Each column already has the class its owner set: direct, indirect, special, or none. | The learner records card, a violet chip on each column: Student number, Name and Email `direct`; Date of birth `indirect`; Course and Results `none`; the card's level `confidential`. The support table: Exam support `special`, level `restricted`. A line: "Classes from the film Know what you hold" |
+| `class` | Each column already has the class its owner set: direct, indirect, special, or none. | The learner records card, a class chip on each column: Student number, Name and Email `direct`; Date of birth `indirect`; Course and Results `none`; its slip "LEVEL confidential". The support table: Exam support `special`, "LEVEL restricted". A line: "Classes from the film Know what you hold" |
 | `nine` | So which way should hide each one? There are nine, and three questions tell them apart. | The cards leave; nine tiles come in, in three rows across the top: Leave it out · Mask it whole · Mask it in part / Generalise · Keyed hash · Token / Encryption · Totals, small counts hidden · Filter rows |
 | `see` | What does the reader see? | A card under the tiles, "Three questions": 1, "What does the reader see?" |
 | `undo` | Can it be undone, and by whom? | 2, "Can it be undone, and by whom?" |
@@ -168,7 +168,7 @@ Key `totals`. In the hall; a cut to 1856 at the end.
 | Line | Narration | Picture |
 |---|---|---|
 | `publish` | When the study is done, it may publish totals, with any count under 10 hidden. | The agreement's line "May leave · Totals, with any count under 10 hidden" lit |
-| `left` | Here, learners who left after their first year, by course. | A card, level chip `public`: "Left after first year · by course": Nursing 38 · Midwifery 4 · Public health 21 · Health sciences 17 · Faculty of Health 80 |
+| `left` | Here, learners who left after their first year, by course. | A card on clear glass, its slip "LEVEL public": "Left after first year · by course": Nursing 38 · Midwifery 4 · Public health 21 · Health sciences 17 · Faculty of Health 80 |
 | `small` | Midwifery's 4 is a small count: in a class that size, people would know who left. | Midwifery's row lit |
 | `fewer` | So it reads: fewer than 10. | 4 becomes "fewer than 10" (violet). The card: "Totals, small counts hidden": Sees totals · Undone no · Still works totals |
 | `back` | But the faculty's total is there too: 80, less 38, 21 and 17, gives the 4 back. | The rows lit, and a coral slip under the card: "80 − 38 − 21 − 17 = 4" |

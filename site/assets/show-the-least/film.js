@@ -1942,8 +1942,10 @@ function sl_1872(ctx,t,o){o=o||{};const [px,py,pw,ph]=SL_T.paper,[sx,sy,sw,sh]=S
 /* ===== Show the least: what is shown in the hall =====
    Cards of frosted glass in the module's hall (glass.js), each in the colour of what it means: violet hidden personal data (stars,
    codes, "fewer than 10"), coral closed or a match that leaks, cyan an identity, gold only the chip on the sealed key. Frost over a
-   value means one thing here: encryption. The class chips are drawn as Know what you hold draws them: solid pills with dark words,
-   special violet with a double rim, direct violet, pseudonymous lilac, indirect pale lilac, none clear ice with ice words.
+   value means one thing here: encryption. Classes and levels are drawn as Know what you hold draws them (its thread's note, 10
+   November 2026): a column's class is a solid pill with dark words, special, direct and pseudonymous in the violet of hidden data
+   (special with a second ring, pseudonymous with a small key), indirect in the quieter violet, none grey; a table's level is how far
+   its pane is frosted (public clear, internal 0.4, confidential 0.8, restricted 1 with a violet rim) and a slip, "LEVEL" and its name.
    Every value changes in its cell: the old one leaves before the new one comes in, so two are never readable at once. */
 
 AG_PLACES.slHall=c=>dp_paintHall(c,{seed:12,horizon:700,vx:1240,pools:[[1560,960,560,0.11],[620,900,700,0.06]]});
@@ -1952,19 +1954,57 @@ function sl_once(sc,k,fn){sc.__sl=sc.__sl||{};if(!(k in sc.__sl))sc.__sl[k]=fn()
 const sl_out=u=>1-ag_sine(clamp(u*2,0,1)),sl_inn=u=>ag_sine(clamp(u*2-1,0,1));
 
 /* ---------------------------------------------------------------- chips: a column's class, a table's level */
-const SL_CLS={special:{col:"violet",dbl:true},direct:{col:"violet"},pseudonymous:{col:[204,186,255]},indirect:{col:"violet2"},none:{glass:true}};
-// a class chip, its words' baseline at y; align "right" puts its right edge at x; returns its width
+const SL_CLS={special:{col:"violet",dbl:true},direct:{col:"violet"},pseudonymous:{col:"violet",key:true},indirect:{col:"violet2"},none:{col:"grey"}};
+// a pill as the kit draws one (dp_pill: solid colour, dark words, y the words' baseline), with room before its words for a small
+// picture when icon(ctx, x, y) draws one, its middle at x, y; returns its width
+function sl_pill(ctx,x0,y,text,col,o){o=o||{};const c=dp_f(col),size=o.size||28,ix=o.icon?38:0,w=dp_tw(ctx,text,{w:700,size})+36+ix,h=size+20,a=o.a==null?1:o.a;if(a<=0)return w;
+  ctx.save();ctx.globalAlpha*=a;
+  ctx.save();ctx.shadowColor=rgba(c,0.7);ctx.shadowBlur=o.glow==null?18:o.glow;rr(ctx,x0,y-h+12,w,h,h/2);
+  const g=ctx.createLinearGradient(0,y-h+12,0,y+12);g.addColorStop(0,rgba(mix(c,[255,255,255],0.16),1));g.addColorStop(1,rgba(c,1));ctx.fillStyle=g;ctx.fill();ctx.restore();
+  rr(ctx,x0+0.6,y-h+12.6,w-1.2,h-1.2,h/2-0.6);ctx.strokeStyle=rgba(mix(c,[255,255,255],0.5),0.9);ctx.lineWidth=1.2;ctx.stroke();
+  if(o.icon)o.icon(ctx,x0+30,y-h/2+12,24);
+  dp_T(ctx,text,x0+18+ix,y-1,{w:700,size,col:DP.on});ctx.restore();return w;}
+// a small key, in the dark of words on solid colour, its bow's middle at x, y, s about its length (as Know what you hold draws it)
+function sl_keyGlyph(ctx,x,y,s){s=s||24;ctx.save();ctx.strokeStyle=rgba(DP.on,1);ctx.lineWidth=Math.max(2.4,s*0.17);ctx.lineCap="round";
+  ctx.beginPath();ctx.arc(x-s*0.28,y,s*0.24,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(x-s*0.04,y);ctx.lineTo(x+s*0.62,y);
+  ctx.moveTo(x+s*0.42,y);ctx.lineTo(x+s*0.42,y+s*0.22);ctx.moveTo(x+s*0.6,y);ctx.lineTo(x+s*0.6,y+s*0.18);ctx.stroke();ctx.restore();}
+// a class chip, its words' baseline at y; align "right" puts its right edge at x; special has a second ring; returns its width
 function sl_chip(ctx,x,y,cls,o){o=o||{};const C=SL_CLS[cls],a=o.a==null?1:o.a,size=o.size||28;if(!C||a<=0)return 0;
-  const w=dp_tw(ctx,cls,{w:700,size})+36,h=size+20,x0=o.align==="right"?x-w:o.align==="center"?x-w/2:x;
-  if(!C.glass){dp_pill(ctx,x0,y,cls,C.col,{size,a,glow:o.glow});
-    if(C.dbl){ctx.save();ctx.globalAlpha*=a;rr(ctx,x0-5,y-h+7,w+10,h+10,h/2+5);ctx.strokeStyle=rgba(mix(dp_f("violet"),[255,255,255],0.3),1);ctx.lineWidth=2;ctx.stroke();ctx.restore();}
-    return w;}
-  ctx.save();ctx.globalAlpha*=a;rr(ctx,x0,y-h+12,w,h,h/2);ctx.fillStyle="rgba(8,26,32,0.72)";ctx.fill();ctx.strokeStyle=rgba(DP.ice,0.85);ctx.lineWidth=1.8;ctx.stroke();
-  dp_T(ctx,cls,x0+18,y-1,{w:700,size,col:"ink"});ctx.restore();return w;}
-// a table's level, on a glass pill: confidential, restricted (rimmed in violet), public
-function sl_level(ctx,x,y,lv,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return 0;const size=28,w=dp_tw(ctx,lv,{w:600,size})+36,h=48,x0=o.align==="right"?x-w:x;
-  ctx.save();ctx.globalAlpha*=a;rr(ctx,x0,y-h+12,w,h,12);ctx.fillStyle="rgba(8,26,32,0.8)";ctx.fill();ctx.strokeStyle=lv==="restricted"?rgba(dp_f("violet"),1):rgba(DP.F.grey,0.9);ctx.lineWidth=lv==="restricted"?2.6:1.6;ctx.stroke();
-  dp_T(ctx,lv,x0+18,y-1,{w:600,size,col:lv==="restricted"?"violet":"mut"});ctx.restore();return w;}
+  const w=dp_tw(ctx,cls,{w:700,size})+36+(C.key?38:0),h=size+20,x0=o.align==="right"?x-w:o.align==="center"?x-w/2:x,top=y-h+12;
+  sl_pill(ctx,x0,y,cls,C.col,{size,a,glow:o.glow,icon:C.key?sl_keyGlyph:null});
+  if(C.dbl){const c=dp_f(C.col),m=7,rw=w+2*m,rh=h+2*m;ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(c,0.85);ctx.shadowBlur=12;
+    ctx.strokeStyle=rgba(mix(c,[255,255,255],0.3),1);ctx.lineWidth=2.4;rr(ctx,x0-m,top-m,rw,rh,rh/2);ctx.stroke();ctx.restore();}
+  return w;}
+// a table's level, as Know what you hold shows it: a slip of glass, grey (violet for restricted), its top right at x, y, reading "LEVEL"
+// and the level's name; returns its width
+function sl_level(ctx,x,y,lv,o){o=o||{};const a=o.a==null?1:o.a,lw=dp_tw(ctx,"LEVEL",{w:800,size:28,ls:3}),w=24+lw+14+dp_tw(ctx,lv,{w:700,size:30})+24,h=62,x0=x-w;
+  if(a<=0)return w;ctx.save();ctx.globalAlpha*=a;
+  dp_panel(ctx,x0,y,w,h,{col:lv==="restricted"?"violet":"grey",r:16,glowR:24,glowA:0.7,behind:o.behind});
+  dp_T(ctx,"LEVEL",x0+24,y+42,{w:800,size:28,ls:3,col:"mut"});dp_T(ctx,lv,x0+24+lw+14,y+42,{w:700,size:30});ctx.restore();return w;}
+// a table's pane of glass, as Know what you hold draws it: frosted as far as its level asks (public clear, internal 0.4, confidential
+// 0.8, restricted 1 with a violet rim); its edges catch the light in ice; o.rim overrides the violet rim (0 to 1); o.r, o.a, o.behind
+const SL_LEVEL={public:{frost:0,rim:0},internal:{frost:0.4,rim:0},confidential:{frost:0.8,rim:0},restricted:{frost:1,rim:1}};
+function sl_tablePane(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.001)return;const L=SL_LEVEL[o.level]||SL_LEVEL.confidential,fr=L.frost,
+  rim=clamp(o.rim==null?L.rim:o.rim,0,1),r=o.r==null?24:o.r,ice=DP.ice;
+  ctx.save();ctx.globalAlpha*=clamp(a,0,1);
+  ctx.save();ctx.shadowColor=rgba(ice,0.10+0.16*fr);ctx.shadowBlur=44;rr(ctx,x,y,w,h,r);ctx.fillStyle=rgba([6,20,26],0.12+0.5*fr);ctx.fill();ctx.restore();
+  ctx.save();rr(ctx,x,y,w,h,r);ctx.clip();
+  if(fr>0){ctx.save();ctx.globalAlpha*=fr;dp_behind(ctx,o.behind);ctx.restore();}
+  ctx.fillStyle=rgba([6,20,26],0.10+0.20*fr);ctx.fillRect(x,y,w,h);
+  const tg=ctx.createLinearGradient(x,y,x+w*0.5,y+h);tg.addColorStop(0,rgba([170,228,232],0.035+0.14*fr));tg.addColorStop(1,rgba([170,228,232],0.015+0.06*fr));ctx.fillStyle=tg;ctx.fillRect(x,y,w,h);
+  // a sheen across clear glass
+  const sg=ctx.createLinearGradient(x,y,x+w,y+h);sg.addColorStop(0,"rgba(210,248,248,0.07)");sg.addColorStop(0.32,"rgba(210,248,248,0.0)");sg.addColorStop(0.5,"rgba(210,248,248,0.05)");sg.addColorStop(0.62,"rgba(210,248,248,0)");
+  ctx.fillStyle=sg;ctx.fillRect(x,y,w,h);
+  const hg=ctx.createLinearGradient(0,y,0,y+70);hg.addColorStop(0,"rgba(225,250,250,"+(0.06+0.1*fr).toFixed(3)+")");hg.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=hg;ctx.fillRect(x,y,w,70);
+  ctx.restore();
+  // its edges catch the light; a restricted table's rim is violet
+  const eg=ctx.createLinearGradient(x,y,x+w,y+h);eg.addColorStop(0,rgba(mix(ice,[255,255,255],0.4),0.95));eg.addColorStop(0.5,rgba(ice,0.55));eg.addColorStop(1,rgba(ice,0.75));
+  rr(ctx,x+1,y+1,w-2,h-2,r);ctx.strokeStyle=eg;ctx.lineWidth=2;ctx.stroke();
+  if(rim>0)sl_rim(ctx,x,y,w,h,r,"violet",rim);
+  ctx.restore();}
+// a rim of colour round a pane, with its glow: a restricted table's violet, or the coral of a table that's closed
+function sl_rim(ctx,x,y,w,h,r,col,a){const v=dp_f(col);ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(v,0.95);ctx.shadowBlur=22;rr(ctx,x-3,y-3,w+6,h+6,r+3);
+  ctx.strokeStyle=rgba(mix(v,[255,255,255],0.25),1);ctx.lineWidth=3.2;ctx.stroke();ctx.restore();}
 
 /* ---------------------------------------------------------------- Samuel's record, field by field
    rows: [{label, label2, lu, v, v2, u, mono, col, col2, chip, chip2, cu, chipA, lit, a, blank}]: v the value as it is, v2 what it
@@ -1975,13 +2015,13 @@ const SL_RW=58;
 function sl_recordH(rows){return 120+rows.length*SL_RW+8;}
 function sl_record(ctx,x,y,rows,o){o=o||{};const w=o.w||980,h=sl_recordH(rows),a=o.a==null?1:o.a;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
-  dp_panel(ctx,x,y,w,h,{col:o.col||"cyan",r:20,behind:o.behind});
+  const pl=o.level||o.paneLevel;if(pl)sl_tablePane(ctx,x,y,w,h,{level:pl,behind:o.behind});else dp_panel(ctx,x,y,w,h,{col:o.col||"cyan",r:20,behind:o.behind});
   // the title, which may change in place (title2, over tu)
   const tu=o.title2?clamp(o.tu||0,0,1):0;if(tu<1)dp_T(ctx,o.title||"Learner records",x+30,y+58,{w:700,size:36,a:o.title2?sl_out(tu):1});if(tu>0)dp_T(ctx,o.title2,x+30,y+58,{w:700,size:36,a:sl_inn(tu)});
-  if(o.level)sl_level(ctx,x+w-30,y+58,o.level,{align:"right",a:o.levelA==null?1:o.levelA});
+  if(o.level)sl_level(ctx,x+w-28,y+16,o.level,{a:o.levelA==null?1:o.levelA});
   ctx.fillStyle=rgba(DP.ice,0.25);ctx.fillRect(x+30,y+86,w-60,1.5);
   rows.forEach((r,i)=>{const by=y+138+i*SL_RW,ra=r.a==null?1:r.a;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ra;
-    if(r.lit>0){ctx.save();ctx.globalAlpha*=clamp(r.lit,0,1);rr(ctx,x+14,by-40,w-28,54,12);ctx.fillStyle="rgba(120,220,235,0.10)";ctx.fill();ctx.fillStyle=rgba(DP.F.cyan,0.95);ctx.fillRect(x+14,by-34,4,42);ctx.restore();}
+    if(r.lit>0){ctx.save();ctx.globalAlpha*=clamp(r.lit,0,1);rr(ctx,x+14,by-40,w-28,54,12);ctx.fillStyle="rgba(120,220,235,0.075)";ctx.fill();ctx.fillStyle=rgba(DP.F.cyan,0.95);ctx.fillRect(x+14,by-34,4,42);ctx.restore();}
     const lu=r.label2?(r.lu==null?r.u||0:r.lu):0;
     if(lu<1)dp_T(ctx,r.label,x+30,by,{w:600,size:28,col:"mut",a:r.label2?sl_out(lu):1});if(r.label2&&lu>0)dp_T(ctx,r.label2,x+30,by,{w:600,size:28,col:"mut",a:sl_inn(lu)});
     const u=r.v2!=null?clamp(r.u||0,0,1):0,vx=x+290;
@@ -2066,11 +2106,11 @@ function sl_agree(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,lines=[],inn
 /* ---------------------------------------------------------------- the other cards */
 // the support table: one column, exam support, its values never drawn; closed shows it isn't given (coral)
 function sl_support(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=196;if(a<=0)return{x,y,w,h};const cl=clamp(o.closed||0,0,1);ctx.save();ctx.globalAlpha*=a;
-  dp_panel(ctx,x,y,w,h,{col:cl>0.5?"coral":"violet",r:20});dp_T(ctx,"Support table",x+30,y+58,{w:700,size:36});
-  sl_level(ctx,x+w-30,y+58,"restricted",{align:"right"});
+  sl_tablePane(ctx,x,y,w,h,{level:"restricted",rim:1-cl});if(cl>0)sl_rim(ctx,x,y,w,h,24,"coral",cl);dp_T(ctx,"Support table",x+30,y+58,{w:700,size:36});
+  sl_level(ctx,x+w-28,y+16,"restricted");
   dp_T(ctx,"Exam support",x+30,y+136,{w:600,size:28,col:"mut"});ctx.fillStyle=rgba(DP.F.grey,0.35);rr(ctx,x+290,y+114,170,16,8);ctx.fill();
   if(o.chip!==false)sl_chip(ctx,x+w-30,y+136,"special",{align:"right",a:o.chipA==null?1:o.chipA});
-  if(cl>0){ctx.save();ctx.globalAlpha*=cl;rr(ctx,x,y,w,h,20);ctx.fillStyle="rgba(40,12,14,0.55)";ctx.fill();dp_pill(ctx,x+w/2,y+h/2+12,"Not given to the study","coral",{align:"center"});ctx.restore();}
+  if(cl>0){ctx.save();ctx.globalAlpha*=cl;rr(ctx,x,y,w,h,24);ctx.fillStyle="rgba(40,12,14,0.55)";ctx.fill();dp_pill(ctx,x+w/2,y+h/2+12,"Not given to the study","coral",{align:"center"});ctx.restore();}
   ctx.restore();return{x,y,w,h};}
 // a small card: a title and lines of words, each [text, colour, mono]
 function sl_note(ctx,x,y,w,title,lines,o){o=o||{};const a=o.a==null?1:o.a,h=86+lines.length*46;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
@@ -2102,11 +2142,11 @@ function sl_list(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=560,h=96+SL_LIST.l
   ctx.restore();return{x,y,w,h,row:i=>[x+w,y+104+i*46-10]};}
 // published totals: learners who left after their first year, by course; a cell may read "fewer than 10" or "hidden"
 const SL_TOT=[["Nursing","38"],["Midwifery","4"],["Public health","21"],["Health sciences","17"],["Faculty of Health","80"]];
-function sl_totals(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=760,h=118+SL_TOT.length*52;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
-  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));dp_panel(ctx,x,y,w,h,{col:"cyan",r:20});dp_T(ctx,"Left after first year · by course",x+30,y+58,{w:700,size:34});
-  sl_level(ctx,x+w-30,y+58,"public",{align:"right"});ctx.fillStyle=rgba(DP.ice,0.25);ctx.fillRect(x+30,y+84,w-60,1.5);
+function sl_totals(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=840,h=118+SL_TOT.length*52;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));sl_tablePane(ctx,x,y,w,h,{level:"public"});dp_T(ctx,"Left after first year · by course",x+30,y+58,{w:700,size:34});
+  sl_level(ctx,x+w-28,y+16,"public");ctx.fillStyle=rgba(DP.ice,0.25);ctx.fillRect(x+30,y+84,w-60,1.5);
   SL_TOT.forEach((r,i)=>{const by=y+130+i*52,tot=i===SL_TOT.length-1,lit=o.lit&&o.lit[i]||0;
-    if(lit>0){ctx.save();ctx.globalAlpha*=lit;rr(ctx,x+14,by-36,w-28,50,12);ctx.fillStyle="rgba(120,220,235,0.10)";ctx.fill();ctx.fillStyle=rgba(DP.F.cyan,0.95);ctx.fillRect(x+14,by-30,4,38);ctx.restore();}
+    if(lit>0){ctx.save();ctx.globalAlpha*=lit;rr(ctx,x+14,by-36,w-28,50,12);ctx.fillStyle="rgba(120,220,235,0.075)";ctx.fill();ctx.fillStyle=rgba(DP.F.cyan,0.95);ctx.fillRect(x+14,by-30,4,38);ctx.restore();}
     if(tot){ctx.fillStyle=rgba(DP.ice,0.25);ctx.fillRect(x+30,by-40,w-60,1.5);}
     dp_T(ctx,r[0],x+30,by,{w:tot?700:600,size:28,col:tot?"ink":"mut"});
     const u=o.u&&o.u[i]||0,nv=o.nv&&o.nv[i];if(u<1)dp_T(ctx,r[1],x+w-30,by,{w:700,size:30,align:"right",a:nv?sl_out(u):1});if(nv&&u>0)dp_T(ctx,nv,x+w-30,by,{w:700,size:30,align:"right",col:"violet",a:sl_inn(u)});});
@@ -2269,7 +2309,7 @@ scene("ballot",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>{const P={
         const rows={num:{v:hid[0].concat([[st,SL_VAL.code]])},name:{v:hid[1].concat([[st+0.15,SL_VAL.star]]),lit:sl_lit(P.names-0.2,P.bdays-0.2)},email:{v:hid[2].concat([[st+0.3,SL_VAL.star]])},
           dob:{v:hid[3].concat([[st+0.45,SL_VAL.year]]),lit:sl_lit(P.bdays-0.2,P.dis-0.2)},course:{v:[[0,SL_VAL.course],[P.hide+0.68,SL_VAL.star],[c.mei+0.68,SL_VAL.course]]},
           res:{v:[[0,SL_VAL.res],[P.hide+0.8,SL_VAL.star],[c.mei+0.8,SL_VAL.res]]}};
-        sl_rec(x,tt,{rows,chipA:0,title:"Learner records, as kept",title2:"What the study sees",tu:(tt-st)/0.8,a:ra,k:ag_spr(tt,c.kept+0.1,0.6)});}
+        sl_rec(x,tt,{rows,chipA:0,title:"Learner records, as kept",title2:"What the study sees",tu:(tt-st)/0.8,a:ra,k:ag_spr(tt,c.kept+0.1,0.6),paneLevel:"confidential"});}
       const pa=ea*ag_in(tt,P.dis-0.4,0.4);if(pa>0){const lit=ag_io(tt,P.dis-0.2,c.all,0.4);withA(x,pa,()=>{const bb=sl_sup(x,{chip:false,closed:ag_in(tt,P.never,0.6)});
         if(lit>0){x.save();x.globalAlpha*=lit;rr(x,bb.x-4,bb.y-4,bb.w+8,bb.h+8,24);x.strokeStyle=rgba(DP.F.cyan,0.9);x.lineWidth=3;x.stroke();x.restore();}});}
       dp_slip(x,1120,150,"The study can't follow anyone","coral",{ink:true,a:ag_io(tt,P.hide+0.6,c.mei-0.1,0.4)});

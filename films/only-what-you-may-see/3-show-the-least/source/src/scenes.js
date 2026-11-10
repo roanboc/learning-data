@@ -141,7 +141,7 @@ scene("ballot",(ctx,S,t,sc)=>{const c=sc.cues,P=sl_once(sc,"P",()=>{const P={
         const rows={num:{v:hid[0].concat([[st,SL_VAL.code]])},name:{v:hid[1].concat([[st+0.15,SL_VAL.star]]),lit:sl_lit(P.names-0.2,P.bdays-0.2)},email:{v:hid[2].concat([[st+0.3,SL_VAL.star]])},
           dob:{v:hid[3].concat([[st+0.45,SL_VAL.year]]),lit:sl_lit(P.bdays-0.2,P.dis-0.2)},course:{v:[[0,SL_VAL.course],[P.hide+0.68,SL_VAL.star],[c.mei+0.68,SL_VAL.course]]},
           res:{v:[[0,SL_VAL.res],[P.hide+0.8,SL_VAL.star],[c.mei+0.8,SL_VAL.res]]}};
-        sl_rec(x,tt,{rows,chipA:0,title:"Learner records, as kept",title2:"What the study sees",tu:(tt-st)/0.8,a:ra,k:ag_spr(tt,c.kept+0.1,0.6)});}
+        sl_rec(x,tt,{rows,chipA:0,title:"Learner records, as kept",title2:"What the study sees",tu:(tt-st)/0.8,a:ra,k:ag_spr(tt,c.kept+0.1,0.6),paneLevel:"confidential"});}
       const pa=ea*ag_in(tt,P.dis-0.4,0.4);if(pa>0){const lit=ag_io(tt,P.dis-0.2,c.all,0.4);withA(x,pa,()=>{const bb=sl_sup(x,{chip:false,closed:ag_in(tt,P.never,0.6)});
         if(lit>0){x.save();x.globalAlpha*=lit;rr(x,bb.x-4,bb.y-4,bb.w+8,bb.h+8,24);x.strokeStyle=rgba(DP.F.cyan,0.9);x.lineWidth=3;x.stroke();x.restore();}});}
       dp_slip(x,1120,150,"The study can't follow anyone","coral",{ink:true,a:ag_io(tt,P.hide+0.6,c.mei-0.1,0.4)});

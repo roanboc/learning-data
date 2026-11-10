@@ -506,7 +506,7 @@ const NARR={
  {"id":"nomore","gap":0.8,"text":"so they can say a name is allowed, and no more."},
  {"id":"awards","gap":0.8,"text":"The awards check measures accuracy, against the boards' approved lists."},
  {"id":"graduate","gap":0.8,"text":"For names, the reference is the graduate, and the list keeps the date each name was confirmed."},
- {"id":"contract","gap":0.8,"text":"The data contract says it too: its rule for awards names the dimension, accuracy, and the method, reconciliation."},
+ {"id":"contract","gap":0.8,"text":"And the test it runs names its method: reconciliation, award by award."},
  {"id":"scorecard","gap":0.8,"text":"And the scorecard counts them apart: allowed, and true."},
  {"id":"only","gap":0.8,"text":"A check is only as true as its reference."},
  {"id":"say","gap":0.8,"text":"Say which one it uses, and whoever reads the result knows what it can tell them, and what it can't."}
@@ -524,7 +524,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"stars/japan": 1.636, "stars/ino": 5.677, "stars/ezo": 3.724, "stars/maps": 6.031, "stars/ships": 5.972, "stars/foot": 5.94, "stars/error": 1.883, "stars/pile": 4.376, "stars/agree": 6.544, "stars/change": 4.28, "stars/night": 4.204, "stars/height": 6.451, "stars/corrected": 3.31, "stars/years": 2.021, "stars/map": 7.783, "stars/degree": 5.929, "stars/uni": 8.021, "stars/wrong": 1.322, "stars/needed": 1.435, "stars/right": 4.887, "allowed/feb": 1.784, "allowed/holds": 4.433, "allowed/checks": 3.155, "allowed/rules": 4.082, "allowed/thirty": 3.555, "allowed/pass": 2.146, "allowed/valid": 2.776, "allowed/means": 1.64, "allowed/zoe": 3.075, "allowed/short": 3.899, "allowed/doubts": 3.295, "allowed/twelve": 4.823, "allowed/cant": 4.523, "allowed/world": 2.722, "reference/had": 1.161, "reference/needs": 6.66, "reference/three": 2.52, "reference/graduate": 1.986, "reference/document": 4.997, "reference/boards": 6.325, "reference/closer": 3.991, "reference/ask": 4.246, "reference/every": 3.28, "reference/accuracy": 4.232, "ask/asked": 1.8, "ask/portal": 6.117, "ask/showed": 3.539, "ask/buttons": 3.333, "ask/zoe": 6.069, "ask/answered": 5.637, "ask/confirmed": 3.452, "ask/corrected": 6.226, "ask/cut": 2.62, "ask/allowed": 1.503, "ask/legal": 2.529, "ask/next": 5.814, "ask/matched": 1.066, "ask/four": 4.942, "ask/took": 3.59, "ask/didnt": 4.171, "ask/one": 6.741, "ask/doubt": 1.356, "ask/settle": 1.575, "apart/awards": 1.021, "apart/double": 5.102, "apart/monday": 7.413, "apart/approved": 2.442, "apart/held": 2.313, "apart/missing": 2.387, "apart/laws": 4.544, "apart/passed": 4.06, "apart/found": 4.435, "apart/agreed": 2.478, "apart/kept": 3.096, "apart/made": 3.537, "apart/copy": 4.225, "apart/consistent": 3.068, "apart/like": 3.863, "apart/east": 7.099, "apart/spelled": 3.939, "which/every": 2.574, "which/beside": 6.916, "which/validity": 4.261, "which/nomore": 2.509, "which/awards": 3.89, "which/graduate": 5.348, "which/contract": 7.689, "which/scorecard": 3.016, "which/only": 2.184, "which/say": 5.237, "true/walked": 4.457, "true/walk": 1.72, "true/stars": 2.379, "true/printer": 3.938, "true/put": 5.604, "true/along": 1.902, "true/now": 5.111, "true/check": 1.328, "true/reference": 1.593};
+const VODUR={"stars/japan": 1.636, "stars/ino": 5.677, "stars/ezo": 3.724, "stars/maps": 6.031, "stars/ships": 5.972, "stars/foot": 5.94, "stars/error": 1.883, "stars/pile": 4.376, "stars/agree": 6.544, "stars/change": 4.28, "stars/night": 4.204, "stars/height": 6.451, "stars/corrected": 3.31, "stars/years": 2.021, "stars/map": 7.783, "stars/degree": 5.929, "stars/uni": 8.021, "stars/wrong": 1.322, "stars/needed": 1.435, "stars/right": 4.887, "allowed/feb": 1.784, "allowed/holds": 4.433, "allowed/checks": 3.155, "allowed/rules": 4.082, "allowed/thirty": 3.555, "allowed/pass": 2.146, "allowed/valid": 2.776, "allowed/means": 1.64, "allowed/zoe": 3.075, "allowed/short": 3.899, "allowed/doubts": 3.295, "allowed/twelve": 4.823, "allowed/cant": 4.523, "allowed/world": 2.722, "reference/had": 1.161, "reference/needs": 6.66, "reference/three": 2.52, "reference/graduate": 1.986, "reference/document": 4.997, "reference/boards": 6.325, "reference/closer": 3.991, "reference/ask": 4.246, "reference/every": 3.28, "reference/accuracy": 4.232, "ask/asked": 1.8, "ask/portal": 6.117, "ask/showed": 3.539, "ask/buttons": 3.333, "ask/zoe": 6.069, "ask/answered": 5.637, "ask/confirmed": 3.452, "ask/corrected": 6.226, "ask/cut": 2.62, "ask/allowed": 1.503, "ask/legal": 2.529, "ask/next": 5.814, "ask/matched": 1.066, "ask/four": 4.942, "ask/took": 3.59, "ask/didnt": 4.171, "ask/one": 6.741, "ask/doubt": 1.356, "ask/settle": 1.575, "apart/awards": 1.021, "apart/double": 5.102, "apart/monday": 7.413, "apart/approved": 2.442, "apart/held": 2.313, "apart/missing": 2.387, "apart/laws": 4.544, "apart/passed": 4.06, "apart/found": 4.435, "apart/agreed": 2.478, "apart/kept": 3.096, "apart/made": 3.537, "apart/copy": 4.225, "apart/consistent": 3.068, "apart/like": 3.863, "apart/east": 7.099, "apart/spelled": 3.939, "which/every": 2.574, "which/beside": 6.916, "which/validity": 4.261, "which/nomore": 2.509, "which/awards": 3.89, "which/graduate": 5.348, "which/contract": 4.764, "which/scorecard": 3.016, "which/only": 2.184, "which/say": 5.237, "true/walked": 4.457, "true/walk": 1.72, "true/stars": 2.379, "true/printer": 3.938, "true/put": 5.604, "true/along": 1.902, "true/now": 5.111, "true/check": 1.328, "true/reference": 1.593};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2772,7 +2772,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),two
 /* ---------------------------------------------------------------- 6 · Say which reference
    Jun, and the project's file of the list's checks, beside each its owner, its dimension and, for the awards check, its reference;
    the name checks have no reference but the rule. For names, the reference is the graduate, with the date each was confirmed. The
-   data contract's rule for awards names its dimension and its method; the scorecard counts allowed and true apart. A check is only as
+   generic test the awards check runs names its method, reconciliation; the scorecard counts allowed and true apart. A check is only as
    true as its reference: say which, and the reader knows what it can tell, and what it can't. */
 const VT_CHECKS=["names_are_allowed","  owner: Mei Tanaka","  dimension: validity","awards_match_the_boards","  owner: Mei Tanaka","  dimension: accuracy",
   [["  reference: ",null],["the exam boards' approved lists","brass"]],"name_as_printed",[["  reference: ",null],["the graduate","brass"]],"  confirmed_on: name_confirmed_on"];
@@ -2783,11 +2783,10 @@ function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4
   dq_window(x,480,140,1360,600,{logo:"dbt",product:"dbt",title:"the list's checks",a:wa,draw:(cx,b)=>{dq_code(cx,b.x+12,b.y,VT_CHECKS,{lh:46,w:b.w-24,lit,lineA:(l,i)=>ag_in(tt,at[i],0.4)});
     dq_chip(cx,b.x+560,b.y+46*2+23,"no reference but the rule itself",{col:"none",a:ag_io(tt,c.validity+0.6,c.awards-0.2,0.4)});
     dq_chip(cx,b.x+560,b.y+46*2+23,"a name is allowed, and no more",{a:ag_io(tt,c.nomore+0.2,c.awards-0.2,0.4)*0});}});
-  // the data contract
-  // the rule as the contract has it (governance/5-data-contracts/mart_graduations__graduation_list.yaml), its other lines left out
-  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.dim-0.1?[]:tt<P.method-0.1?[3]:[4];
-  dq_window(x,480,160,1360,460,{product:"Data contract",title:"the graduation list",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["quality:","  - id: awards_match_the_boards","    …",
-    [["    dimension: ",null],["accuracy","steel"]],[["    method: ",null],["reconciliation","steel"]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,c.contract+0.3,c.contract+0.3,P.dim,P.method][i],0.4)})});
+  // the generic test the awards check runs, and its method (the example project's tests/generic/reconciles_with.sql, lines 14 and 15)
+  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.method-0.1?[]:[1];
+  dq_window(x,480,160,1360,240,{logo:"dbt",product:"dbt",title:"tests/generic/reconciles_with.sql",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["{% test reconciles_with(model, to, keys, compare=[], to_where=none) %}",
+    [["    {{ config(meta={'method': '",null],["reconciliation","steel"],["'}) }}",null]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,P.dim][i],0.4)})});
   // the scorecard: allowed, and true
   const sa=ag_in(tt,c.scorecard+0.1,0.4);if(sa>0.004){x.save();x.globalAlpha*=sa;dq_card(x,480,190,1160,300,{});dq_label(x,508,242,"Scorecard · the graduation list",{});
     dq_rows(x,508,268,[{h:"Dimension",w:250},{h:"Says",w:220},{h:"Check",w:520,f:"mono"},{h:"",w:110}],
@@ -2797,7 +2796,7 @@ function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4
   dq_chip(x,480,700,"what it can tell",{icon:"tick",col:"pass",a:ag_in(tt,P.tell-0.2,0.5)});
   const w1=dq_tw(x,"what it can tell",{w:700,size:28})+84;dq_chip(x,480+w1+20,700,"what it can't",{icon:"dash",col:"none",a:ag_in(tt,P.cant-0.2,0.5)});}
 scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),owner:wAt(sc,"beside","owner"),measures:wAt(sc,"beside","what it measures"),
-    ref:wAt(sc,"beside","its reference"),date:wAt(sc,"graduate","the date"),dim:wAt(sc,"contract","the dimension"),method:wAt(sc,"contract","the method"),
+    ref:wAt(sc,"beside","its reference"),date:wAt(sc,"graduate","the date"),dim:wAt(sc,"contract","its method"),method:wAt(sc,"contract","reconciliation"),
     allowedW:wAt(sc,"scorecard","allowed"),trueW:wAt(sc,"scorecard","true"),tell:wAt(sc,"say","what it can tell"),cant:wAt(sc,"say","what it can't")}));
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1]],d:2.4,draw:(x,tt)=>vt_which(x,tt,c,P)}]);
   setScreen(ctx,S);dq_kicker(ctx,"6","Say which reference",{a:ag_in(t,0.8,0.5)});});

@@ -1,0 +1,46 @@
+# Films' questions and assumptions
+
+Films made while the author was away were built on stated assumptions instead of waiting for answers. Each film's questions, and the assumption taken for each, are here, so the author can watch the film and confirm or correct them.
+
+## How it is laid out
+
+One file per film, in the films' natural order: a folder per module (numbered in the site's order), a folder per series (numbered in the module's order), and a file per film (numbered as its film folder is). A module's or series' own questions sit beside its films, in `0-module.md` or `0-series.md`. Each film's file starts with its pull request and a link to watch it on the site.
+
+To read everything as one file:
+
+```
+python site-tools/assumptions.py --out all-assumptions.md
+```
+
+## Adding or changing a film's assumptions
+
+A film's thread writes its questions and assumptions to that film's own file, in the film's own pull request: `docs/assumptions/<NN-module>/<n-series>/<film folder>.md`, named exactly as the film folder is (for example `04-data-quality/2-fit-for-use/1-good-enough-for-what.md`). One file per film keeps parallel film pull requests from editing the same lines. Keep the first lines as the other files have them: the title, then the module, series, film number, pull request and site link. This index lists modules and series only, so a new film doesn't change it.
+
+## Modules and series
+
+- [Modern data basics](02-modern-data-basics/)
+  - [Data that moves](02-modern-data-basics/1-data-that-moves/)
+  - [Data as software](02-modern-data-basics/2-data-as-software/)
+  - [From tables to decisions](02-modern-data-basics/3-from-tables-to-decisions/)
+  - [Documents as data](02-modern-data-basics/4-documents-as-data/)
+- [Data quality](04-data-quality/)
+  - [Fit for use](04-data-quality/2-fit-for-use/)
+  - [Quality as a habit](04-data-quality/3-quality-as-a-habit/)
+- [Data governance](07-data-governance/)
+  - [Governance principles](07-data-governance/1-data-governance/)
+- [Data protection and privacy](08-data-protection/)
+  - [Locks before the data](08-data-protection/1-locks-before-the-data/)
+  - [Only what you may see](08-data-protection/2-only-what-you-may-see/)
+  - [Kept for a reason](08-data-protection/3-kept-for-a-reason/)
+- [AI agents in data work](09-ai-agents/)
+  - [From helper to colleague](09-ai-agents/3-from-helper-to-colleague/)
+- [Leading data people](10-leading-data-people/)
+  - [The new skills](10-leading-data-people/1-the-new-skills/)
+  - [Working with people](10-leading-data-people/2-working-with-people/)
+  - [Leading a data team](10-leading-data-people/3-leading-a-data-team/)
+  - [Ownership and performance](10-leading-data-people/4-ownership-and-performance/)
+- [Data management](11-data-management/)
+  - [A plan in ninety days](11-data-management/1-a-plan-in-ninety-days/)
+  - [Making the case](11-data-management/2-making-the-case/)
+  - [Architecture that keeps up](11-data-management/3-architecture-that-keeps-up/)
+  - [Small steps, measured](11-data-management/4-small-steps-measured/)

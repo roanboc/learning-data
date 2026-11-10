@@ -1,0 +1,55 @@
+{
+  "key": "copies-that-keep-the-rules",
+  "title": "Copies that keep the rules",
+  "sub": "Film 7 of 8 of Only what you may see, the second series of Data protection and privacy: the university's rules protect the learners' records where they're read, in the catalog, so a copy that leaves takes the records and none of the rules, as Lascaux's visitors were harming a cave until a copy let them see it while the cave rests. Development and test get made-up learners, never a clone; the teaching hospital gets, by OpenSharing, only a table of totals that already shows no more than may leave; its harder question is answered in a clean room, by code the university approved; and in the studies' workspace, every way to download or export is switched off.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of frosted glass and bright rims. Cyan is an identity, green allowed, coral denied or closed, violet hidden personal data, and gold the chip of a column's class. The cave at Lascaux is painted in the same night light, its animals drawn as the film's own outlines; where the voice names Azure Databricks, OpenSharing, a clean room, dbt or GitHub, the tool's official logo stands beside its name.",
+  "src": [
+    "cp_cave.js",
+    "cp_pieces.js",
+    "scenes.js"
+  ],
+  "logos": true,
+  "poster": [
+    "cave",
+    "opens",
+    6.5
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bLascaux\\b",
+      "Lasko"
+    ],
+    [
+      "\\bMalraux\\b",
+      "Malroh"
+    ],
+    [
+      "\\bAnil\\b",
+      "Ah-neel"
+    ],
+    [
+      "\\bMidwifery\\b",
+      "mid-wiffery"
+    ],
+    [
+      "\\bOpenSharing\\b",
+      "Open Sharing"
+    ]
+  ],
+  "story": [
+    "cave"
+  ],
+  "urgent": []
+}

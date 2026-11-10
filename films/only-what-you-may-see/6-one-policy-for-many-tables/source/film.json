@@ -1,0 +1,43 @@
+{
+  "key": "one-policy-for-many-tables",
+  "title": "One policy for many tables",
+  "sub": "Film 6 of Only what you may see, the second series of Data protection and privacy: one policy for each class, found by its tag, protects every table that holds it, the day it appears, as North America's responders' guidebook gave chemicals that behave alike one guide, found by a number. In Databricks: policies on the registrar's catalog and its core shelf, a small function for each way to hide a value, the groups each policy lets through, a filter that shows the study only the Faculty of Health's learners, a table with no level closed until its owner gives it one, and the policies kept as code, reviewed by the data team, with the data's owner told what each change touches.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted glass panes, light along their edges. Cyan is a person, a group or the job that builds the tables, green what's allowed, coral what's closed or wrong, violet hidden personal data: each column's class is a violet chip (the quieter violet for indirect, grey for none), and violet frost over a value means a policy hides it. The registrar's catalog is a pane with a row for each shelf; Databricks and GitHub are drawn as their own pages, with their logos. The opening, a road at night, is painted in the warm light of a fire engine's lamp, and the guidebook in its own yellow and orange pages.",
+  "src": [
+    "op_road.js",
+    "op_catalog.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "parts",
+    "rows",
+    5.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bregistrar-loader\\b",
+      "registrar loader"
+    ]
+  ],
+  "story": [
+    "page"
+  ],
+  "urgent": [],
+  "logos": true
+}

@@ -50,7 +50,7 @@ models:
       +access: public
       +contract:
         enforced: true
-
+      +meta: {level: confidential}   # each table's level, set last; a model's YAML can say another (DEC-PRJ-17)
     marts:
       +materialized: table
       +schema: marts
@@ -66,7 +66,7 @@ models:
         +group: wallet
       finance:
         +group: finance
-
+      +meta: {level: confidential}
     # What every domain uses. Today: the time spine every metric needs. Planning's semantic model
     # and metrics live with its marts.
     _shared:
@@ -74,10 +74,10 @@ models:
       +schema: shared
       +group: credential_model
       +access: protected
-
+      +meta: {level: internal}
     # Databricks only: each column's class as a Unity Catalog tag, a mask on direct personal data
-    # when the var personal_data_readers names a group (DEC-PRJ-13), and each table's area (DEC-PRJ-15).
-    +post-hook: ["{{ apply_personal_data() }}", "{{ apply_domain_tag() }}"]
+    # when the var personal_data_readers names a group (DEC-PRJ-13), each table's area (DEC-PRJ-15), then its faculty column and level (DEC-PRJ-17).
+    +post-hook: ["{{ apply_personal_data() }}", "{{ apply_domain_tag() }}", "{{ apply_faculty_and_level() }}"]
 
 # Seeds are split by purpose first, then by domain. Never mix the two purposes in one folder.
 seeds:
@@ -135,3 +135,11 @@ data_tests:
 # data (macros/governance/personal_data.sql, DEC-PRJ-13).
 on-run-start:
   - "{{ create_personal_data_mask() }}"
+  # and, when the var faculty_readers names the groups, the row filter on Finance's claims
+  # (macros/finance/faculty_row_filter.sql, DEC-FIN-06)
+  - "{{ create_faculty_row_filter() }}"
+
+# The last step of every run: each check's result kept, night after night, in check_results
+# (macros/governance/keep_check_results.sql; Small, every week). The scorecard shows the last run.
+on-run-end:
+  - "{{ keep_check_results(results) }}"

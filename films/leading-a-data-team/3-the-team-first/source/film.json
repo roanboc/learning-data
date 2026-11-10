@@ -1,0 +1,58 @@
+{
+  "key": "the-team-first",
+  "title": "The team comes first",
+  "sub": "The third film of Leading a data team, the third series of Leading data people: Ubuntu, a person is a person through other people. A new data manager reads her team as a whole before judging anyone, and finds one person answering every night alert alone. The team pairs until four can answer them, and when he has to leave at a day's notice, the rota holds, and nobody calls him.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (a group's rules, the rota, a runbook, a definition in the glossary), green is something done or of value (savings, an alert answered, a mistake thanked), amber a cost or a risk (no bank to save in, one person answering every alert), orange is data, and violet only an agent.",
+  "src": [
+    "tf_joburg.js",
+    "tf_uni.js",
+    "tf_scenes.js"
+  ],
+  "poster": [
+    "pairs",
+    "four",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bstokvel\\b",
+      "stokfel"
+    ],
+    [
+      "\\bStokvel\\b",
+      "Stokfel"
+    ],
+    [
+      "\\bapartheid\\b",
+      "apart-ate"
+    ],
+    [
+      "\\bMogobe\\b",
+      "Moh-goh-beh"
+    ],
+    [
+      "\\bRamose\\b",
+      "Ra-mo-seh"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "stokvel"
+  ],
+  "urgent": []
+}

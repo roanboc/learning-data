@@ -129,7 +129,7 @@ def tap(s, g=0.009, pan=0.0):
     """a muffled tap: a tag, a chip, a row lit"""
     s_tap(s, g * FX, pan)
 def paper(s, g=0.011, pan=0.0, sec=0.4):
-    """a sheet laid down: a page, a file, a contract"""
+    """a sheet laid down: a page, a file"""
     x = tt(sec); X(filt(noise(sec), 'band', (250, 1700), 4)[:len(x)] * np.sin(np.pi * x / sec) ** 2, s, g * FX, pan)
 def air(s, sec=0.8, g=0.008, pan=0.0, lo=150, hi=900):
     """a breath of air: something moving across, a flag rising, a clock's hands"""
@@ -305,7 +305,7 @@ tap(H('december', 'posted', 0.0), 0.008, px(760))
 # 4. How fresh, for what: Monday, Sam, Malia and Mei: a large E-flat, and a bell as Mei comes in. The platform sees a table is late;
 #    its users say when late is too late. The three uses, a card each; three clocks, a bell for each dial as it sweeps (the
 #    certificates' B-flat, the seating's F, Planning's D); the strictest sets the level: the certificates' bell again, over the large
-#    B-flat. A nightly file meets it; Hot, warm, cold, a card. The contract's rule, agreed and owned. Timeliness, in pencil, inked by
+#    B-flat. A nightly file meets it; Hot, warm, cold, a card. The list's rule, agreed and owned. Timeliness, in pencil, inked by
 #    its first rule: E-flat, warm
 R = lambda lid, word, off=0: W('fresh', lid, word, off)
 r0 = S0('fresh')

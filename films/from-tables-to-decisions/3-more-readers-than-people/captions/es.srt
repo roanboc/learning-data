@@ -1,0 +1,267 @@
+1
+00:00:01,600 --> 00:00:04,054
+Viena, noviembre de 1968.
+
+2
+00:00:05,354 --> 00:00:08,647
+Más gente que nunca maneja de un país al siguiente.
+
+3
+00:00:09,347 --> 00:00:14,125
+En una conferencia de las Naciones Unidas, los países llevan un mes con las reglas del tránsito.
+
+4
+00:00:14,825 --> 00:00:20,284
+Pero sus señales aún difieren. Muchas dan su mensaje en palabras, en el idioma de cada país.
+
+5
+00:00:20,984 --> 00:00:25,729
+Un conductor extranjero puede pasar un aviso de curva peligrosa sin saber nunca qué decía.
+
+6
+00:00:26,429 --> 00:00:29,311
+Y en la ruta, un aviso que no se entiende puede terminar en un choque.
+
+7
+00:00:30,811 --> 00:00:32,251
+Algo tiene que cambiar.
+
+8
+00:00:33,751 --> 00:00:40,325
+Así, el 8 de noviembre, 31 países firman un tratado: la Convención sobre la Señalización Vial.
+
+9
+00:00:41,025 --> 00:00:45,081
+Define cada señal una vez: por su forma, su color y su símbolo.
+
+10
+00:00:45,781 --> 00:00:53,879
+Un triángulo con borde rojo advierte. Un círculo con borde rojo prohíbe o fija un límite. Un círculo azul dice qué hacer.
+
+11
+00:00:55,779 --> 00:01:02,116
+Hoy, 75 países la aplican, y un conductor lee las mismas señales de un país al siguiente.
+
+12
+00:01:03,816 --> 00:01:07,585
+Y las señales tienen lectores que nadie previó en 1968.
+
+13
+00:01:08,285 --> 00:01:15,591
+Desde julio de 2024, todo auto nuevo en la Unión Europea debe leer el límite de velocidad en las señales que pasa.
+
+14
+00:01:17,491 --> 00:01:20,008
+Los datos también tienen lectores que nadie previó.
+
+15
+00:01:21,508 --> 00:01:30,379
+El costo de la docencia ocasional, definido una vez, lo leen personas, los reportes de Finanzas, una app, un agente y un socio externo.
+
+16
+00:01:32,079 --> 00:01:38,697
+Un lector que no llega a la definición cuenta a su manera. Uno que lee como otro ve lo que no debería.
+
+17
+00:01:40,597 --> 00:01:46,737
+Leyendo donde está definido, cada uno como sí mismo, todo lector da el mismo número y ve solo lo que puede.
+
+18
+00:01:55,437 --> 00:01:59,875
+Hoy, en la universidad, es día de pago: jueves 5 de noviembre.
+
+19
+00:02:00,575 --> 00:02:07,260
+Rohan Desai, de Finanzas, es dueño del costo de la docencia ocasional: lo que cuesta la de un semestre.
+
+20
+00:02:07,960 --> 00:02:12,568
+En septiembre, se definió una vez, como una vista de métricas en Unity Catalog.
+
+21
+00:02:13,268 --> 00:02:20,534
+Genie One lo lee ahí cuando él pregunta: para la Facultad de Salud, A$1.84 millones en lo que va del semestre.
+
+22
+00:02:21,834 --> 00:02:28,563
+Pero en el paquete de presupuesto de esta mañana, un reporte de Power BI decía A$1.56 millones, con el mismo nombre.
+
+23
+00:02:30,463 --> 00:02:39,107
+Los analistas de Finanzas arman sus reportes en Power BI, que lee el catálogo de la universidad por un reflejo en Microsoft Fabric.
+
+24
+00:02:40,407 --> 00:02:45,827
+El reflejo muestra tablas y lee sus datos donde viven. Pero las vistas de métricas no aparecen en él.
+
+25
+00:02:47,527 --> 00:02:53,885
+Así que el reporte, hecho donde la medida no se ve, sumó el sueldo pagado y lo llamó costo de la docencia ocasional.
+
+26
+00:02:55,585 --> 00:03:02,141
+Y por el reflejo, cada consulta corre como el único inicio de sesión que lo configuró. Los permisos del catálogo se quedan atrás.
+
+27
+00:03:04,041 --> 00:03:12,061
+Así que ahora el reporte lee la medida desde el propio Databricks, con el conector de Power BI, cada analista con su propia sesión.
+
+28
+00:03:12,761 --> 00:03:18,245
+Pide la medida por su nombre y obtiene A$1.84 millones, igual que Genie One.
+
+29
+00:03:19,745 --> 00:03:27,564
+Noor, la arquitecta de datos, escribe la regla: refleja solo lo que todo lector ahí puede ver, y lee una medida donde está definida.
+
+30
+00:03:31,264 --> 00:03:35,522
+En la Facultad de Salud, Anil Kurian planifica los tutores del próximo semestre.
+
+31
+00:03:36,822 --> 00:03:40,896
+Las facultades planifican en una app que el equipo de datos hizo con Databricks Apps.
+
+32
+00:03:41,596 --> 00:03:47,412
+Muestra lo que la docencia ocasional le costó a la facultad hasta ahora, junto a las horas que necesitará cada asignatura.
+
+33
+00:03:49,312 --> 00:03:52,713
+Todas las facultades la usan, y cada una puede ver solo lo suyo.
+
+34
+00:03:54,413 --> 00:04:01,894
+Una app puede leer de dos maneras: como sí misma, y quienes la usan comparten sus permisos, o como la persona que la usa.
+
+35
+00:04:04,194 --> 00:04:07,932
+Esta lee como la persona, y solo puede hacer consultas por ella.
+
+36
+00:04:09,832 --> 00:04:15,029
+Y las declaraciones detrás de la medida llevan un filtro por facultad, puesto en Unity Catalog.
+
+37
+00:04:16,929 --> 00:04:21,760
+Así, Anil ve las cifras de Salud, y nada en el código de la app decide quién ve qué.
+
+38
+00:04:23,860 --> 00:04:28,406
+Haz que una app lea como la persona que la usa, y deja las reglas donde viven los datos.
+
+39
+00:04:32,506 --> 00:04:38,025
+Cada día de pago, Rohan les envía a los decanos el costo de la docencia ocasional de cada facultad hasta ahora.
+
+40
+00:04:38,725 --> 00:04:41,980
+Ahora el agente del día de pago de Finanzas le redacta la nota.
+
+41
+00:04:43,480 --> 00:04:50,187
+Le pregunta a Genie One por un servidor de herramientas, como puede cualquier agente, y Genie One responde desde la misma definición.
+
+42
+00:04:52,287 --> 00:04:59,693
+Sus instrucciones dicen «sessional teaching cost», y Genie One conoce la palabra: es uno de los sinónimos que Rohan le dio a la medida.
+
+43
+00:05:01,793 --> 00:05:09,931
+Como un auto que lee las señales que pasa, un agente lee las palabras de una medida: su nombre, su descripción, sus sinónimos.
+
+44
+00:05:12,231 --> 00:05:18,003
+El agente trabaja solo, con un horario, así que tiene un nombre propio, con las mismas reglas que las personas.
+
+45
+00:05:19,903 --> 00:05:27,099
+Puede preguntarle a Genie One y leer la medida. No puede leer las declaraciones: quién trabajó qué horas y cuánto se le pagó.
+
+46
+00:05:29,399 --> 00:05:32,201
+Redacta. Rohan revisa la nota y la envía.
+
+47
+00:05:34,101 --> 00:05:38,994
+Dale a todo lector que trabaja solo un nombre propio, y solo lo que su tarea lee.
+
+48
+00:05:43,094 --> 00:05:51,613
+Hay lectores fuera de la universidad: un grupo de universidades compara lo que cuesta la docencia, facultad por facultad, cada semestre.
+
+49
+00:05:53,113 --> 00:06:00,448
+Sam se lo comparte por OpenSharing: su propio sistema lo lee donde vive, así que no hay copia que mantener al día.
+
+50
+00:06:02,148 --> 00:06:08,975
+Ingrid, que responde por los datos de RR. HH., pide una regla más: totales por facultad, nunca por asignatura.
+
+51
+00:06:09,675 --> 00:06:13,232
+Una asignatura con un solo tutor revelaría cuánto se le pagó a ese tutor.
+
+52
+00:06:15,132 --> 00:06:22,824
+Así que se comparte una tabla pequeña, hecha desde la medida: el costo de la docencia ocasional por facultad, de semestres terminados.
+
+53
+00:06:24,524 --> 00:06:28,050
+El grupo lee las cifras de la misma definición, y nada más.
+
+54
+00:06:29,350 --> 00:06:34,323
+Fuera de la plataforma, comparte lo mínimo que un socio necesita, y hazlo desde la definición.
+
+55
+00:06:37,823 --> 00:06:40,607
+De vuelta en Finanzas, el día de pago termina con un número.
+
+56
+00:06:41,307 --> 00:06:49,365
+A$1.84 millones para Salud hasta ahora: en Genie One, en Power BI, en la app y en el borrador del agente.
+
+57
+00:06:51,065 --> 00:06:53,111
+Y cada lector ve solo lo que puede.
+
+58
+00:06:54,611 --> 00:07:00,731
+Como las señales acordadas en Viena, la definición se hizo una vez, para personas, y las máquinas también la leen.
+
+59
+00:07:02,431 --> 00:07:07,980
+Pero, a diferencia de una señal, los datos no son para cualquiera que pase: cada lector muestra quién es.
+
+60
+00:07:09,680 --> 00:07:15,298
+Y cada lector queda anotado en el proyecto de datos, así que un cambio en la medida dice a quién afecta.
+
+61
+00:07:17,198 --> 00:07:20,734
+Lee cada medida donde está definida, por una puerta que la lleve.
+
+62
+00:07:21,834 --> 00:07:27,042
+Que cada lector lea como la persona por la que actúa, o como sí mismo, con solo lo que necesita.
+
+63
+00:07:28,142 --> 00:07:29,659
+Y afuera, comparte lo mínimo.
+
+64
+00:07:31,359 --> 00:07:35,083
+Ya hay estándares para todo esto, así que no reinventes la rueda.
+
+65
+00:07:36,383 --> 00:07:40,931
+Investiga, adapta, implementa, itera, empezando por la documentación oficial.
+
+66
+00:07:42,431 --> 00:07:47,840
+Hasta la convención de las señales sigue mejorando: un texto nuevo entra en vigor la semana próxima.
+
+67
+00:07:49,340 --> 00:07:54,029
+Después, la última película del módulo: archivos, leídos como datos y como contexto.

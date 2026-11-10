@@ -1,0 +1,43 @@
+{
+  "key": "network-storage-and-keys",
+  "title": "Network, storage and keys",
+  "sub": "The seventh film of Locks before the data, the first series of Data protection and privacy: Rome's water in the year 97, drawn only at a tank, through a stamped nozzle, once its channels' holes were closed; a platform's files, reached nine ways around its catalog; private doors in and a short list out; one identity at the files, the catalog's own; each catalog bound to its own workspace; the one door you switch on and watch; and a key of the university's own.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Cyan is an identity, green allowed, coral denied or closed, amber power switched on; a secret, such as an account key, is always a sealed card with a gold chip, never written out. Rome in the year 97 is painted in the same night light, with its place and year on a tag; where the voice names Azure Databricks, Unity Catalog, Azure Storage or Key Vault, the tool's official logo stands beside its name.",
+  "src": [
+    "nw_rome.js",
+    "nw_hall.js",
+    "scenes.js"
+  ],
+  "logos": true,
+  "poster": [
+    "files",
+    "every",
+    1.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bIP\\b",
+      "I P"
+    ]
+  ],
+  "story": [
+    "holes",
+    "tank"
+  ]
+}

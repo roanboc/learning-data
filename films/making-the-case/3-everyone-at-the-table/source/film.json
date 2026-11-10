@@ -1,0 +1,55 @@
+{
+  "key": "everyone-at-the-table",
+  "title": "Everyone at the table",
+  "sub": "Film 3 of 4 of Making the case: stakeholders. In London in 1850, everyone with a stake in the Great Exhibition's building had a worry of their own, and Joseph Paxton answered each one and showed them all the same picture. A year from now, Helena Novak, a university's data manager, maps the fourteen stakeholders of her plan by power and interest, asks each what they want from data in their own words, and sends everyone the same page every month; when HR shows a real constraint, the plan changes, and everyone hears why.",
+  "howto": "The film is drawn in the module's sunlit plaster. Its colours mean the same in every film of the module: blue is design and plans, green done or value, amber risk, cost or waiting, orange data, and violet only an agent.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "et_park.js",
+    "et_uni.js",
+    "et_scenes.js"
+  ],
+  "poster": [
+    "map",
+    "asked",
+    5.6
+  ],
+  "say": [
+    [
+      "\\bDerby\\b",
+      "Darby"
+    ],
+    [
+      "\\bMendelow's\\b",
+      "Mendelo's"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "elms"
+  ],
+  "urgent": []
+}

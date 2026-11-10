@@ -1,0 +1,287 @@
+1
+00:00:03,000 --> 00:00:06,396
+Chile, the Atacama desert, 5 August 2010.
+
+2
+00:00:08,296 --> 00:00:14,562
+Thirty-three miners are at work deep in the San José mine, a copper and gold mine near Copiapó.
+
+3
+00:00:16,262 --> 00:00:23,170
+That afternoon the rock gives way: a block of about seven hundred thousand tonnes closes the ramp, their road out.
+
+4
+00:00:25,270 --> 00:00:31,716
+They are trapped about seven hundred metres down, with a small shelter and emergency food for two or three days.
+
+5
+00:00:33,616 --> 00:00:38,889
+Above, nobody knows if they are alive. Their families come to the mine's gate, and wait.
+
+6
+00:00:40,789 --> 00:00:45,604
+Without help, the men will starve down there, and their families may never know what happened.
+
+7
+00:00:47,304 --> 00:00:50,368
+They have to be found, and brought up, before it's too late.
+
+8
+00:00:52,068 --> 00:00:58,892
+That takes drilling, medicine, food, engineering and the families' trust, all at once, and any one plan could fail.
+
+9
+00:01:00,792 --> 00:01:05,787
+The government puts a mining engineer, André Sougarret, in charge of the rescue.
+
+10
+00:01:07,287 --> 00:01:14,286
+Each part has someone who knows it: engineers on the drills, doctors on the men's health, ministers with the families.
+
+11
+00:01:15,786 --> 00:01:19,852
+The families wait at a camp by the gate, which they call Esperanza, hope.
+
+12
+00:01:21,752 --> 00:01:26,497
+Underground, the shift foreman, Luis Urzúa, holds the thirty-three together.
+
+13
+00:01:27,997 --> 00:01:31,568
+Food meant for two or three days is shared out to last two weeks.
+
+14
+00:01:33,068 --> 00:01:40,394
+Decisions are put to a vote, and each man has a job: one cares for the sick, one leads prayers, one keeps a diary.
+
+15
+00:01:42,094 --> 00:01:49,033
+On day seventeen, a narrow drill comes back up with a note tied to it: "We are well in the shelter, the 33."
+
+16
+00:01:51,333 --> 00:01:57,063
+Through that hole go food, water, medicine and letters, in tubes they call palomas, doves.
+
+17
+00:01:58,763 --> 00:02:04,493
+Meanwhile, three big drills work at once, each a different way, so the rescue never hangs on one.
+
+18
+00:02:06,393 --> 00:02:08,875
+On 9 October, one of them breaks through.
+
+19
+00:02:10,575 --> 00:02:17,323
+On 13 October, after sixty-nine days, all thirty-three come up, one by one, in a narrow capsule.
+
+20
+00:02:19,423 --> 00:02:22,315
+Their families, at the camp since August, have them back.
+
+21
+00:02:24,215 --> 00:02:31,056
+No one person drilled, doctored and fed them. Each part had someone who knew it, and every part ran at once.
+
+22
+00:02:32,956 --> 00:02:36,572
+A data manager's work is calmer, but it's shaped the same way.
+
+23
+00:02:38,072 --> 00:02:45,573
+Helena Novak starts at a university with forty-six requests, from every area of data, and someone waiting on each.
+
+24
+00:02:47,273 --> 00:02:53,077
+By Friday she has one plan for her first ninety days, in three lanes, run side by side.
+
+25
+00:02:54,577 --> 00:02:57,275
+And everyone waiting hears where their request stands.
+
+26
+00:03:05,375 --> 00:03:12,559
+These films follow one data manager's first year: every area of data at once, and the management work around it.
+
+27
+00:03:14,259 --> 00:03:19,522
+Monday 1 February 2027, a year from now, at the university.
+
+28
+00:03:21,222 --> 00:03:27,739
+Helena Novak starts as its data manager. She has been an architect, a data lead and a product owner.
+
+29
+00:03:29,239 --> 00:03:33,647
+Forty-six requests are open, in the tracker and in the team's inboxes.
+
+30
+00:03:35,347 --> 00:03:39,286
+The oldest has waited since 14 August 2026.
+
+31
+00:03:40,786 --> 00:03:46,813
+A report for Planning, a fix to the staff list, access for a researcher: each has someone waiting.
+
+32
+00:03:48,513 --> 00:03:53,637
+It's tempting to start with the oldest, or the loudest, or to change everything at once.
+
+33
+00:03:55,337 --> 00:03:59,787
+Helena does none of that yet. First, she sorts them, to see the whole job.
+
+34
+00:04:02,487 --> 00:04:10,552
+Data managers share a map of the job: the wheel in DAMA-DMBOK, the Data Management Association's body of knowledge.
+
+35
+00:04:12,252 --> 00:04:19,302
+Data governance sits at its centre, with ten areas around it, from architecture and modelling to quality and security.
+
+36
+00:04:21,202 --> 00:04:24,918
+Helena puts each request on the wheel, where most of its work is.
+
+37
+00:04:26,418 --> 00:04:33,091
+Data warehousing and business intelligence: ten. Data quality: seven. Data security: five.
+
+38
+00:04:34,791 --> 00:04:41,048
+Then governance and integration, four each, and three or fewer in each of the rest: forty-four in all.
+
+39
+00:04:42,748 --> 00:04:49,915
+Two sit beside the wheel: an agent for timetable questions, and a forecast model, which this site doesn't teach yet.
+
+40
+00:04:51,615 --> 00:04:58,899
+Most requests touch three or four areas: a new report needs its data modelled, checked for quality, and kept safe.
+
+41
+00:05:00,799 --> 00:05:06,750
+So no request is someone else's. The areas are one system, and the job holds all of them.
+
+42
+00:05:08,650 --> 00:05:11,064
+The site's other films go deep in each area.
+
+43
+00:05:12,364 --> 00:05:18,991
+From words to data in modelling, Fit for use in quality, The same one, everywhere in master data, and more.
+
+44
+00:05:21,691 --> 00:05:25,513
+Nobody is expert in all eleven areas, Helena included.
+
+45
+00:05:27,013 --> 00:05:34,039
+And her job holds the work every manager does: strategy, money, risk, people, stakeholders and delivery.
+
+46
+00:05:35,939 --> 00:05:37,797
+So she finds who is deep in each.
+
+47
+00:05:39,097 --> 00:05:45,819
+Noor, the data architect, in architecture and modelling. Sam, in the platform, storage and integration.
+
+48
+00:05:47,319 --> 00:05:52,795
+Jun, in the warehouse and its reports. Yusuf, in governance, metadata and quality.
+
+49
+00:05:54,295 --> 00:05:57,430
+Where no one on the team is deep, she writes that down too.
+
+50
+00:05:59,130 --> 00:06:05,085
+Her part is to see the areas as one system, know who is deep in each, and decide where to start.
+
+51
+00:06:06,985 --> 00:06:11,719
+The generalist's skill, seeing the whole, has its own film: Many hats, one picture.
+
+52
+00:06:14,419 --> 00:06:22,799
+For her first three months, she borrows a shape from Michael Watkins's book, The First 90 Days: learn fast, and secure early wins.
+
+53
+00:06:24,499 --> 00:06:29,799
+Her plan has three lanes, run side by side: people, strategy and operations.
+
+54
+00:06:31,499 --> 00:06:36,245
+People, all twelve weeks: the team, the data's owners, and the people who use it.
+
+55
+00:06:37,745 --> 00:06:43,198
+Strategy, in three steps: discover what is, define what should be, and plan how to get there.
+
+56
+00:06:44,698 --> 00:06:51,425
+Each step ends on a date she can be held to: 15 March, 5 April and 26 April.
+
+57
+00:06:53,125 --> 00:06:56,198
+Operations keeps today's work going while she learns.
+
+58
+00:06:57,498 --> 00:07:05,774
+The first two weeks, the urgent problems. From 15 February, delivery in two-week sprints, with the team's procedures as they are.
+
+59
+00:07:07,474 --> 00:07:12,478
+Only in week six does she propose better ways, and she tests them in weeks nine to twelve.
+
+60
+00:07:14,178 --> 00:07:18,088
+Don't change everything on day one, and don't wait ninety days to help.
+
+61
+00:07:19,988 --> 00:07:25,005
+At the mine, the big drills took weeks, but food went down the narrow hole the whole time.
+
+62
+00:07:27,705 --> 00:07:30,206
+On Friday, the plan fits on one page.
+
+63
+00:07:31,706 --> 00:07:36,560
+She shows it to David Mensah, the deputy vice-chancellor, and then to her team.
+
+64
+00:07:38,060 --> 00:07:42,330
+It promises no fix before she has listened, and dates she can be held to.
+
+65
+00:07:44,030 --> 00:07:50,233
+Everyone waiting on a request hears where it stands, and by the end of the ninety days, each has an answer.
+
+66
+00:07:52,133 --> 00:07:57,496
+In the Atacama, every part of the rescue had someone who knew it, and all thirty-three came up.
+
+67
+00:07:59,396 --> 00:08:05,725
+Helena's ninety days work the same way: every area is one job, and no one waits without an answer.
+
+68
+00:08:07,425 --> 00:08:10,294
+On Monday, keep today's work running while you learn.
+
+69
+00:08:11,394 --> 00:08:15,515
+Put your plan on one page, in three lanes, with dates you can be held to.
+
+70
+00:08:16,615 --> 00:08:20,013
+Learn each area's words, and who on your team is deep in each.
+
+71
+00:08:21,313 --> 00:08:24,407
+What Helena does first is listen. That's the next film.
+
+72
+00:08:25,907 --> 00:08:29,897
+See every area as one job; plan ninety days in three lanes.

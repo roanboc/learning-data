@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Learning while doing, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (beside, teach, two), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  beside:{q:"Durante seis semanas, Ivy y Jun terminan un cambio pequeño al día en los modelos reales del equipo. ¿Por qué es una buena forma de aprender?",
+    opts:[{t:"Los modelos reales son muy riesgosos para alguien nuevo, así que cada cambio es práctica en una copia hasta que esté lista."},{t:"Cada cambio es trabajo real que termina en un día, y otra persona lo revisa: aprende haciendo, un paso a la vez.",ok:true},{t:"Cada cambio es trabajo real que termina en un día, y Jun mismo lo revisa, así que nadie más tiene que verlo.",near:true}],
+    why:"Jun no le dio un curso a Ivy: abrió los modelos reales del equipo. Cada día terminaban un cambio pequeño, una prueba, una descripción, el nombre de una columna, y como lo escribieron los dos, Noor o Sam lo revisaba antes de que entrara. Veinticinco en seis semanas; para la sexta, ya los escribía por su cuenta. ¿Qué cambio pequeño en tu trabajo real podría terminar a tu lado alguien nuevo esta semana?"},
+  teach:{q:"Ivy le enseña al equipo qué significa un conteo de los sensores. ¿En qué le sirve a ella enseñarlo?",
+    opts:[{t:"Al prepararse ve lo que aún no sabe explicar, así que deja esas partes fuera y sus veinte minutos quedan claros.",near:true},{t:"Casi en nada: el equipo aprende, pero ella aprendería más si pasara esas horas leyendo por su cuenta."},{t:"Al prepararse ve lo que aún no sabe explicar, así que pregunta y lo aprende, y enseñarlo hace que perdure.",ok:true}],
+    why:"Al prepararse, Ivy encontró dos cosas que no sabía explicar y le preguntó a Sam: ahí las aprendió de verdad. Logan Fiorella y Richard Mayer encontraron lo mismo: quienes prepararon una lección para enseñarla, y la enseñaron, la recordaron más después que quienes solo la estudiaron. Y ahora todo el equipo lee un conteo de la misma manera, no solo Sam. ¿Qué aprendiste hace poco que podrías enseñar en veinte minutos?"},
+  two:{q:"Para el 30 de junio, cada trabajo que no puede parar tiene al menos dos nombres. ¿Cómo lo logró el equipo?",
+    opts:[{t:"Trabajaron en pareja en cada trabajo con un solo nombre, uno a la vez, y escribieron cada uno, paso a paso.",ok:true},{t:"Escribieron cada trabajo, paso a paso, para que cualquiera pudiera operarlo con las notas sin haberlo hecho nunca.",near:true},{t:"Contrataron a alguien nuevo para cada trabajo con un solo nombre, para que quien lo hacía solo pudiera dejarlo."}],
+    why:"Cinco de los nueve trabajos tenían un solo nombre. Así que el equipo trabajó en pareja también ahí, un trabajo a la vez, y escribió cada uno, paso a paso. Un segundo nombre es alguien que ya hizo el trabajo junto a quien lo sabía, con los pasos escritos para la próxima vez. Para el 30 de junio cada trabajo tenía dos nombres, y cualquiera podía ausentarse. ¿Qué trabajo de tu equipo tiene un solo nombre?"}
+  }}};

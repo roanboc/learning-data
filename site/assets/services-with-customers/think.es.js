@@ -1,0 +1,15 @@
+/* Learning Data: "Pausa para pensar" de Servicios con clientes, en español. Las claves van al paso de think.en.js, y las respuestas
+   correctas y las casi correctas en los mismos lugares. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un laboratorio",off:"Quitar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  customers:{q:"Helena nombra a sus clientes en cuatro grupos. ¿Por qué escribir lo que le duele y lo que le mueve a cada grupo?",
+    opts:[{t:"Para que el equipo ordene los grupos y atienda primero al que más se queja de sus datos."},{t:"Para diseñar cada servicio según lo que el equipo cree que necesita cada grupo, por su larga experiencia.",near:true},{t:"Para diseñar cada servicio para una necesidad que un cliente dijo con sus palabras, no la que supone el equipo.",ok:true}],
+    why:"Lo que duele y lo que mueve viene de las 31 conversaciones de Escuchar primero, con las palabras de los clientes: dos cifras para lo mismo, semanas esperando acceso, no saber en qué tabla confiar. La experiencia del equipo importa, pero un servicio diseñado desde su suposición puede no dar lo que la gente necesita. ¿Qué problema de tus clientes podrías citar hoy?"},
+  layers:{q:"Al recorrer las capas, Helena encuentra 17 de los 38 informes del almacén antiguo que nadie abrió en un año. ¿Qué dice la película que hay que hacer?",
+    opts:[{t:"Preguntar por qué está cada uno: un sistema que no sirve a ningún cliente quizá ya no tenga razón para quedarse.",ok:true},{t:"Apagarlos todos esa noche, porque un informe que nadie abrió en un año no puede servir a nadie.",near:true},{t:"Sumar cada uno a un servicio, para que cada informe del almacén tenga un cliente nombrado en la página."}],
+    why:"Un sistema que no sirve a ningún cliente plantea una pregunta: ¿por qué está ahí? Primero se pregunta: un informe que se abre una vez al año, para una auditoría, puede tener aún una razón. Luego cada uno encuentra a su cliente o se va. ¿A cuál de tus sistemas te costaría darle un cliente?"},
+  door:{q:"Al abrirse la puerta de entrada, tres de las 45 solicitudes no caen en ninguno de los cuatro servicios. ¿Qué muestra eso?",
+    opts:[{t:"Que la puerta de entrada falló, porque una página de servicios bien escrita atraparía cada solicitud."},{t:"Dónde debe cambiar la página: un hueco que el equipo puede llenar, o trabajo que es de otros.",ok:true},{t:"Que la página necesita un quinto servicio, para que cada solicitud que llega tenga su propio lugar.",near:true}],
+    why:"Una solicitud que no cae en ningún servicio no es un fracaso: muestra dónde debe cambiar la página. Dos eran de servicios digitales y fueron allí con una nota; una, ayuda con una encuesta al personal, era un hueco que el equipo podía llenar dentro de asesoría y formación. Un servicio nuevo para cada solicitud suelta desdibujaría la página. ¿Qué no cayó en ninguno de tus servicios el mes pasado?"}
+  }}};

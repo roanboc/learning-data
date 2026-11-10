@@ -1,0 +1,63 @@
+{
+  "key": "one-map",
+  "title": "One map, in the repo",
+  "sub": "Film 2 of Architecture that keeps up, in Data management: the architecture of the platform and of the way data is delivered, kept as one source of truth in a git repository. Every change is a reviewed pull request that updates the current and target state, and the wiki, the slides and the who-does-what pages are made from it.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the map, its diagrams and its changes), orange is data and where it's born, green is something done or agreed, amber a risk (copies that disagree, a wrong line), and violet only the agent.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "om_os.js",
+    "om_uni.js",
+    "om_scenes.js"
+  ],
+  "poster": [
+    "repo",
+    "who",
+    3.8
+  ],
+  "say": [
+    [
+      "\\bTOIDs?\\b",
+      "toe-id"
+    ],
+    [
+      "\\bOS\\b",
+      "O S"
+    ],
+    [
+      "\\bArchiMate's\\b",
+      "Arky-mate's"
+    ],
+    [
+      "\\bArchiMate\\b",
+      "Arky-mate"
+    ],
+    [
+      "\\bdraw\\.io\\b",
+      "draw dot I O"
+    ],
+    [
+      "\\bNygard\\b",
+      "Nee-gard"
+    ],
+    [
+      "\\bNoor's\\b",
+      "Nuur's"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "tiles"
+  ],
+  "urgent": []
+}

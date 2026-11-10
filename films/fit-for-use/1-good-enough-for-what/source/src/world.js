@@ -14,7 +14,7 @@ function ge_person(ctx,who,x,y,s,o,a){a=a==null?1:a;if(a<=0.004)return null;ctx.
   // dq_person lays the person down as one picture when it has light to lay over them: a trace of it here, for every person
   const h=dq_person(ctx,who,x,y,s,Object.assign({},o,{warm:Math.max((o&&o.warm)||0,1e-4)}));ctx.restore();return h;}
 
-// the list's four uses, as Malia, Mei and Jun wrote them down in January 2026 (the example project's meta.quality, and its contract)
+// the list's four uses, as Malia, Mei and Jun wrote them down in January 2026 (the example project's meta.quality)
 const GE_USES=[
   {icon:"seat",use:"Seating plan",need:"Each ceremony's count",level:"Within 2%",who:"Malia Fonoti"},
   {icon:"certificate",use:"Certificates",need:"Every name, award and date",level:"Zero wrong",who:"Malia Fonoti"},

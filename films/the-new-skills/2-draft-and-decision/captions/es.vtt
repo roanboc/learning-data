@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:11.753
+Nueva York, mayo de 1997. El campeón mundial de ajedrez, Garry Kasparov, juega un match de seis partidas contra una computadora de ajedrez.
+
+00:00:13.653 --> 00:00:18.485
+Gana la computadora: es la primera vez que una máquina vence a un campeón mundial en un match.
+
+00:00:20.385 --> 00:00:22.464
+Muchos temen lo que eso significa para las personas.
+
+00:00:23.164 --> 00:00:26.849
+Los jugadores pasan años aprendiendo el juego, y muchos se ganan la vida con él.
+
+00:00:27.549 --> 00:00:31.157
+Si una máquina juega mejor que los mejores, ¿cuánto vale su habilidad?
+
+00:00:33.057 --> 00:00:34.497
+Algo tiene que cambiar.
+
+00:00:36.397 --> 00:00:42.583
+Un año después, en León, España, Kasparov prueba otro camino: jugar con la máquina, no contra ella.
+
+00:00:44.083 --> 00:00:50.938
+Él y su rival, Veselin Topalov, tienen cada uno una computadora a mano, con el programa de ajedrez que eligieron.
+
+00:00:52.638 --> 00:00:57.804
+Con la máquina revisando cada táctica, Kasparov descubre que puede dedicar su pensamiento al plan.
+
+00:00:59.704 --> 00:01:07.803
+En 2005, un torneo en línea va más allá: cualquiera puede inscribirse, en equipos, con todas las computadoras que quiera.
+
+00:01:09.303 --> 00:01:14.957
+Entran grandes maestros con sus computadoras. Una supercomputadora hecha para el ajedrez entra sola.
+
+00:01:16.657 --> 00:01:21.196
+Ganan dos jugadores aficionados de Estados Unidos, con tres computadoras.
+
+00:01:23.096 --> 00:01:29.070
+Por su propia experiencia, eligen qué jugadas vale la pena mirar, y comparan lo que dice cada programa.
+
+00:01:30.570 --> 00:01:34.528
+Hacen que los programas miren más a fondo donde importa, y luego deciden ellos dos.
+
+00:01:36.428 --> 00:01:44.657
+En la final vencen a un equipo dirigido por un gran maestro y ganan el primer premio. La supercomputadora, sola, no llega a cuartos.
+
+00:01:46.557 --> 00:01:53.119
+Kasparov sacó la lección: jugadores débiles, con una máquina y un mejor proceso, vencieron a una computadora fuerte sola.
+
+00:01:54.619 --> 00:01:58.393
+Y, más notable aún, a jugadores fuertes cuyo proceso era peor.
+
+00:02:00.493 --> 00:02:05.560
+La habilidad de los jugadores seguía contando. Lo que más contó fue cómo trabajaron con las máquinas.
+
+00:02:07.260 --> 00:02:13.310
+El trabajo con datos también tiene su máquina: un agente puede escribir el primer borrador de un modelo de datos en un minuto.
+
+00:02:14.810 --> 00:02:16.920
+Muchos se preguntan qué les queda a las personas.
+
+00:02:18.420 --> 00:02:25.450
+Como en el tablero, les queda la parte que decide: decir qué se quiere, contrastar el borrador con lo cierto, y elegir.
+
+00:02:27.150 --> 00:02:29.345
+Un borrador es barato. El criterio, no.
+
+00:02:37.445 --> 00:02:44.973
+En la universidad, dentro de un año, el equipo de datos trabaja en una pregunta de Graham Ellis, el director de Instalaciones.
+
+00:02:46.473 --> 00:02:50.991
+Él debe decidir si pedir al Consejo Universitario un nuevo edificio de aulas.
+
+00:02:52.491 --> 00:02:56.133
+Su pregunta: ¿tenemos pocas aulas, o pocas a ciertas horas?
+
+00:02:58.033 --> 00:03:08.612
+Miércoles 7 de abril de 2027. Ivy Reyes, analista recién graduada, en su sexta semana, hace el primer modelo: cuánto se usa cada aula.
+
+00:03:10.312 --> 00:03:16.857
+Le pide al agente del equipo un primer borrador: un modelo del uso de las aulas, para cada aula y cada hora de clase.
+
+00:03:18.557 --> 00:03:19.742
+En un minuto, ahí está.
+
+00:03:21.642 --> 00:03:26.795
+Está prolijo: el modelo, una descripción de cada columna y cuatro pruebas, que pasan todas.
+
+00:03:28.495 --> 00:03:35.341
+Su respuesta: las aulas se usan el 38% de la semana de clases, y el 93% en las horas de más demanda.
+
+00:03:37.241 --> 00:03:39.080
+Parece terminado, y suena seguro.
+
+00:03:40.580 --> 00:03:46.033
+Ivy está por abrir un pull request. Antes, lee las notas del agente hasta el final.
+
+00:03:48.733 --> 00:03:51.129
+Al final, el agente enumera lo que supuso.
+
+00:03:52.629 --> 00:03:56.276
+Una línea la detiene: una hora reservada cuenta como una hora usada.
+
+00:03:58.376 --> 00:04:03.128
+En febrero, Graham había dicho qué significa usada: gente en el aula, no una reserva.
+
+00:04:05.028 --> 00:04:11.101
+Las pruebas pasan porque revisan la forma de los datos: ningún aula contada dos veces, ninguna hora afuera.
+
+00:04:12.601 --> 00:04:14.685
+Ninguna prueba puede saber qué quiere decir Graham.
+
+00:04:16.585 --> 00:04:23.875
+Así que Ivy contrasta el borrador con algo que sabe que es cierto: los sensores, que cuentan a la gente en cada aula, cada hora.
+
+00:04:25.575 --> 00:04:31.432
+En una de cada cinco horas reservadas no contaron a nadie. El borrador llama usadas a todas esas horas.
+
+00:04:33.532 --> 00:04:37.652
+Graham habría evaluado un nuevo edificio con reservas, no con aulas que la gente usa.
+
+00:04:39.552 --> 00:04:45.310
+El agente no fue descuidado. Al armar horarios, uso suele querer decir reservado, y dijo lo que supuso.
+
+00:04:47.010 --> 00:04:50.516
+Le habían dado la tarea, pero no la decisión ni las palabras.
+
+00:04:53.216 --> 00:04:55.984
+Así que, antes de volver a pedirlo, Ivy plantea el trabajo.
+
+00:04:57.484 --> 00:05:05.650
+Primero, la palabra. Escribe uso de aulas en el glosario: la parte de horas de clase en que los sensores contaron al menos a una persona.
+
+00:05:07.350 --> 00:05:12.405
+Graham la aprueba ahí, como su dueño, así que cada modelo, y cada borrador, parte de ella.
+
+00:05:14.305 --> 00:05:17.849
+Luego vuelve a pedirlo, y le da al agente tres cosas, no una.
+
+00:05:19.349 --> 00:05:23.961
+La decisión a la que sirve: si pedir al Consejo Universitario un nuevo edificio.
+
+00:05:25.461 --> 00:05:28.765
+Las palabras que debe usar: uso de aulas, como lo define el glosario.
+
+00:05:30.265 --> 00:05:36.412
+Y qué cuenta: las horas de clase, de ocho a seis, de lunes a viernes, con reservadas y usadas lado a lado.
+
+00:05:38.112 --> 00:05:41.657
+El nuevo borrador mantiene las dos separadas, y vuelve a decir lo que supuso.
+
+00:05:43.357 --> 00:05:50.092
+Ivy lo contrasta con algo que sabe que es cierto: la semana de un aula, que calculó a mano, hora por hora.
+
+00:05:51.792 --> 00:05:53.250
+Las cincuenta horas coinciden.
+
+00:05:56.950 --> 00:06:03.025
+Ivy abre un pull request. Es su autora, así que responde por él, sin importar quién escribió el primer borrador.
+
+00:06:04.925 --> 00:06:11.498
+Con él guarda el razonamiento: qué pidió, qué supuso el agente, qué cambió ella y cómo lo comprobó.
+
+00:06:13.398 --> 00:06:18.553
+Jun lo revisa. Nadie aprueba su propio trabajo: ni Ivy, ni nunca el agente.
+
+00:06:20.453 --> 00:06:24.748
+Pregunta qué aula revisó a mano. La respuesta está en el pull request.
+
+00:06:26.648 --> 00:06:32.601
+Lo aprueba, y se fusiona. A Graham le avisan qué cambia: la primera respuesta a su pregunta.
+
+00:06:34.701 --> 00:06:41.684
+A la mañana siguiente, en la reunión diaria, Ivy cuenta lo que casi se le escapa: pidió la tarea, no la decisión ni las palabras.
+
+00:06:43.784 --> 00:06:48.029
+Helena le agradece por decirlo, y el equipo también empieza a pedir así.
+
+00:06:51.329 --> 00:06:56.345
+Cuando un agente hace el borrador, el trabajo no desaparece. Se mueve a cada lado del borrador.
+
+00:06:58.045 --> 00:07:05.131
+Antes: plantear la pregunta, con su decisión, sus palabras y lo que cuenta, y decir exactamente qué se quiere.
+
+00:07:06.831 --> 00:07:12.330
+Después: contrastar lo que vuelve con lo que sabes que es cierto, decidir y responder por ello.
+
+00:07:14.230 --> 00:07:23.891
+Los empleadores también lo ven. En el informe 2025 del Foro Económico Mundial sobre el empleo, lo que más buscan es pensamiento analítico.
+
+00:07:25.391 --> 00:07:27.690
+Siete de cada diez empresas lo consideran esencial.
+
+00:07:29.390 --> 00:07:35.803
+Las habilidades en IA y big data son las que más crecen; el pensamiento creativo y la curiosidad también crecen.
+
+00:07:37.503 --> 00:07:45.211
+Un agente puede hacer el borrador, probar su trabajo y decir lo que supuso. No puede quitarte la decisión, ni la responsabilidad.
+
+00:07:47.311 --> 00:07:54.902
+Cómo funcionan los agentes, y cómo los gobiernan los equipos de datos, tiene sus películas: Qué es un agente y Agentes trabajando con datos.
+
+00:07:57.602 --> 00:08:03.047
+En 2005, dos aficionados quedaron por delante de grandes maestros y de una supercomputadora.
+
+00:08:03.747 --> 00:08:09.542
+No por calcular más que las máquinas, sino por elegir qué mirar, comparar y decidir.
+
+00:08:10.842 --> 00:08:17.071
+Ivy hizo lo mismo con datos: el agente hizo el borrador en un minuto; ella planteó el trabajo, lo revisó y decidió.
+
+00:08:17.971 --> 00:08:21.388
+Y la respuesta de Graham cuenta gente en las aulas, no reservas.
+
+00:08:22.888 --> 00:08:27.974
+El lunes, dale al agente la decisión, las palabras y lo que cuenta, no solo la tarea.
+
+00:08:29.074 --> 00:08:30.954
+Lee lo que supuso, hasta el final.
+
+00:08:32.054 --> 00:08:34.519
+Contrasta su borrador con algo que sabes que es cierto.
+
+00:08:35.619 --> 00:08:39.183
+Nunca apruebes tu propio trabajo, y guarda el razonamiento junto al resultado.
+
+00:08:40.483 --> 00:08:43.540
+Que el agente haga el borrador; tú planteas, revisas y decides.

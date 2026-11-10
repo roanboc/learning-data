@@ -224,3 +224,25 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-12, DEC-FIN-04]
     implemented_in: [databricks.yml, payroll_export.job.yml, release.yml]
+
+  - id: DEC-PRJ-17
+    step: operate_and_evolve
+    title: On Databricks, five classes, a faculty tag and each table's level, carried by tag propagation
+    text: 'Amends DEC-PRJ-13. A column''s class is one of five, strictest first: special, direct,
+      pseudonymous, indirect or none, and only the first four are tags on the platform: a column marked
+      none gets no tag, and the build takes an old one off. After the classes, the build tags the column
+      that holds each row''s faculty with the key-only tag faculty (meta.faculty), and last sets the
+      table''s level (meta.level: public, internal, confidential or restricted), never under its two
+      floors. personal_data, faculty and level are governed tags only the identity that runs dbt may
+      assign. Tag propagation carries personal_data and faculty through lineage into every table made
+      from a tagged column, with special as the value where two meet; never level. On DuckDB, nothing:
+      it has no tags.'
+    why: A class set once at the source and carried by the platform protects every copy without anyone
+      tagging it, and can't drift from the owner's file. A none tag would meet a real class in any column
+      made from both, a conflict every time; a level carried by lineage would conflict in every join of a
+      public table and a confidential one, so each table's level stays its owner's call.
+    decided_by: Sam Okafor, who runs the data platform, with Mei Tanaka, registrar's office
+    decided_on: 2026-11-10
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-PRJ-13]
+    implemented_in: [personal_data.sql, dbt_project.yml, governance.py]

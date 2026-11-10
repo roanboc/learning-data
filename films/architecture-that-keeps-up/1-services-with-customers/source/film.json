@@ -1,0 +1,33 @@
+{
+  "key": "services-with-customers",
+  "title": "Services with customers",
+  "sub": "The opening film of Architecture that keeps up, the third series of Data management: run your team's services as a business. Helena writes her team's four services on one page, names its suppliers and its customers in four groups with what hurts and what drives each, and walks one service down five layers, a picture for each; when the front door opens, every request lands on a service, or shows a gap.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the hospital's purpose, the page of services, Noor's map and its five layers), green is value or something done (sight given back, a request that lands on a service), orange is data, and amber a cost or a risk (what an operation costs, and the reports no one opens).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "swc_madurai.js",
+    "swc_uni.js",
+    "swc_scenes.js"
+  ],
+  "poster": [
+    "layers",
+    "each",
+    1.6
+  ],
+  "say": [
+    ["\\bMadurai\\b", "Mah-dur-eye"],
+    ["\\bGovindappa\\b", "Go-vin-dahppa"],
+    ["\\bVenkataswamy\\b", "Venkata-swahmy"],
+    ["\\bAravind's\\b", "Ah-ra-vind's"],
+    ["\\bArchiMate's\\b", "Arky-mate's"],
+    ["\\bTOGAF's\\b", "Toe-gaff's"],
+    ["\\bNovak's\\b", "Noh-vak's"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "sight"
+  ],
+  "urgent": []
+}

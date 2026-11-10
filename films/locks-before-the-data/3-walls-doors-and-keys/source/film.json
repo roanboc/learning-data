@@ -1,0 +1,49 @@
+{
+  "key": "walls-doors-and-keys",
+  "title": "Walls, doors and keys",
+  "sub": "The third film of Locks before the data, the first series of Data protection and privacy: why walls still matter when identity is the boundary, as Ragusa's quarantine law of 1377 kept a trading port open through the plague years; who secures what among the cloud provider, the platform's makers and the university; walls drawn from the map's areas; private paths and a short list of ways out; the catalog as the files' only door; development, test and production kept apart; a key the university holds; and copies nobody can delete.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Cyan is an identity, green allowed, coral denied or closed, amber power switched on, violet hidden personal data; a key is always a sealed card with a gold chip, never written out. Ragusa in 1377 is painted in the same night light, with its place and year on a tag.",
+  "src": [
+    "wd_city.js",
+    "wd_hall.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "again",
+    "walks",
+    1.4
+  ],
+  "say": [
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMrkan\\b",
+      "Merkan"
+    ],
+    [
+      "\\bCavtat\\b",
+      "Tsavtat"
+    ]
+  ],
+  "story": [
+    "gates",
+    "apart"
+  ],
+  "urgent": [
+    "inside"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "kicker": "How people grow at work",
+  "kicker_es": "Cómo crecen las personas",
+  "title_es": "Hacer crecer a las personas",
+  "h1": "Growing people: their goals, weekly feedback about the work, the next step",
+  "h1_es": "Hacer crecer: sus objetivos, comentarios cada semana y el siguiente paso",
+  "lead": "In 2027 Ivy Reyes joins the university's data team, in her first job. Helena Novak asks her to write her own goals, gives her feedback every Tuesday about the work and what it changed, asks for feedback on herself, and looks forward with her to a next step with more to own.",
+  "lead_es": "En 2027 Ivy Reyes entra al equipo de datos de la universidad, en su primer empleo. Helena Novak le pide escribir sus objetivos, le da comentarios cada martes sobre el trabajo y lo que cambió, pide comentarios sobre sí misma, y mira con ella hacia un siguiente paso con más a su cargo.",
+  "description": "A film about how people grow at work, the last of Ownership and performance and of the module Leading data people: goals people help set, feedback every week about the work and its effect, never about who they are, and a next step with more to own; Avraham Kluger and Angelo DeNisi's review of feedback (1996), the Center for Creative Leadership's situation, behaviour and impact, and Kim Scott's Radical Candor (2017), each named once; Ivy Reyes, the data analyst, in 2027: three goals she writes in her first week and agrees with Helena, the first met on Thursday 25 March; thirty minutes every Tuesday, about her; feedback on her review of the agent's draft (what she did, and what it changed) and on a change she kept to herself too long (ask for review when it works); Helena asking for feedback on herself, and acting on it; the credit for Graham's decision given to the team, in public; her own data product from July, her mid-year conversation looking forward, and by December a next goal she chose: to coach the next graduate. It opens in Japan from 1872, where teachers alone in new schools opened their classrooms to each other, watched the children's learning, and began lesson study.",
+  "description_es": "Una película sobre cómo crecen las personas en el trabajo, la última de Responsabilidad y desempeño y del módulo Liderar equipos de datos: objetivos que la persona ayuda a fijar, comentarios cada semana sobre el trabajo y su efecto, nunca sobre quién es, y un siguiente paso con más a su cargo; la revisión de Avraham Kluger y Angelo DeNisi sobre la retroalimentación (1996), la situación, el comportamiento y el impacto del Center for Creative Leadership, y Radical Candor de Kim Scott (2017), nombrados una vez; Ivy Reyes, la analista de datos, en 2027: tres objetivos que escribe en su primera semana y acuerda con Helena, el primero cumplido el jueves 25 de marzo; treinta minutos cada martes, sobre ella; comentarios sobre su revisión del borrador del agente (lo que hizo y lo que cambió) y sobre un cambio que se guardó demasiado tiempo (pedir revisión cuando funciona); Helena pidiendo comentarios sobre sí misma, y actuando con ellos; el mérito de la decisión de Graham, dado al equipo, en público; su propio producto de datos desde julio, su conversación de medio año mirando adelante, y en diciembre un siguiente objetivo que eligió ella: ser mentora del próximo recién graduado. Empieza en Japón desde 1872, donde maestros solos en escuelas nuevas se abrieron sus salones unos a otros, miraron lo que aprendían los niños y empezaron el estudio de clases.",
+  "card": "Ivy writes her own goals, hears every Tuesday what her work changed, and grows into owning a product.",
+  "card_es": "Ivy escribe sus objetivos, oye cada martes lo que cambió su trabajo, y crece hasta ser dueña de un producto.",
+  "chapters_es": {
+    "lesson": "Mirar a los niños",
+    "goals": "Objetivos propios",
+    "tuesday": "Cada martes",
+    "both": "En los dos sentidos",
+    "next": "El siguiente paso",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Japan, from 1872: watching the children",
+    "When Japan set out to give every child a school, teaching was new work, and many teachers taught alone. They opened their classrooms to each other, watched how the children learned, and from the 1880s planned and improved lessons together: lesson study, which almost every primary teacher there still takes part in."
+  ],
+  "past_es": [
+    "Japón, desde 1872: mirar a los niños",
+    "Cuando Japón se propuso dar una escuela a cada niño, enseñar era un trabajo nuevo, y muchos maestros enseñaban solos. Se abrieron sus salones unos a otros, miraron cómo aprendían los niños y, desde la década de 1880, planearon y mejoraron clases juntos: el estudio de clases, en el que casi todos los maestros de primaria de allí siguen participando."
+  ],
+  "next_h": "That was the last film of Leading data people. On Monday, ask someone on your team what they want to grow in.",
+  "next_h_es": "Fue la última película de Liderar equipos de datos. El lunes, pregúntale a alguien de tu equipo en qué quiere crecer.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Lesson study",
+        "title_es": "Lesson study (en inglés)",
+        "line": "What teachers do in lesson study, a goal, a lesson planned together, taught while the others watch the children, and improved, and how it spread.",
+        "line_es": "Lo que hacen los maestros en el estudio de clases, un objetivo, una clase planeada juntos, dada mientras los demás miran a los niños, y mejorada, y cómo se extendió.",
+        "href": "https://en.wikipedia.org/wiki/Lesson_study",
+        "href_es": "https://en.wikipedia.org/wiki/Lesson_study"
+      },
+      {
+        "title": "Lesson study as professional culture in Japanese schools",
+        "title_es": "El estudio de clases como cultura profesional en las escuelas japonesas (en inglés)",
+        "line": "Its history from 1872: novice teachers watching lessons, visitors watching the children, reflection sessions, and the first lesson study groups of the 1880s.",
+        "line_es": "Su historia desde 1872: maestros nuevos viendo clases, visitantes mirando a los niños, sesiones de reflexión y los primeros grupos de estudio de clases de la década de 1880.",
+        "href": "https://nichibun.repo.nii.ac.jp/record/214/files/JN2207.pdf",
+        "href_es": "https://nichibun.repo.nii.ac.jp/record/214/files/JN2207.pdf"
+      },
+      {
+        "title": "Situation, behaviour, impact",
+        "title_es": "Situación, comportamiento, impacto (en inglés)",
+        "line": "The Center for Creative Leadership's way of giving feedback: when and where, what the person did, and what it changed.",
+        "line_es": "La forma del Center for Creative Leadership de dar retroalimentación: cuándo y dónde, lo que hizo la persona, y lo que cambió.",
+        "href": "https://www.ccl.org/articles/leading-effectively-articles/closing-the-gap-between-intent-vs-impact-sbii/",
+        "href_es": "https://www.ccl.org/articles/leading-effectively-articles/closing-the-gap-between-intent-vs-impact-sbii/"
+      },
+      {
+        "title": "Radical Candor",
+        "title_es": "Radical Candor (en inglés)",
+        "line": "Kim Scott's idea for hard feedback: care personally, and challenge directly.",
+        "line_es": "La idea de Kim Scott para los comentarios difíciles: preocuparse en lo personal, y desafiar de frente.",
+        "href": "https://www.radicalcandor.com/our-approach/",
+        "href_es": "https://www.radicalcandor.com/our-approach/"
+      }
+    ],
+    "more": [
+      {
+        "text": "Avraham Kluger and Angelo DeNisi, The effects of feedback interventions on performance (Psychological Bulletin, 1996): the review of more than six hundred results",
+        "text_es": "Avraham Kluger y Angelo DeNisi, The effects of feedback interventions on performance (Psychological Bulletin, 1996): la revisión de más de seiscientos resultados (en inglés)",
+        "href": "https://doi.org/10.1037/0033-2909.119.2.254",
+        "href_es": "https://doi.org/10.1037/0033-2909.119.2.254"
+      },
+      {
+        "text": "Catherine Lewis and Rebecca Perry, Lesson study to scale up research-based knowledge: a randomized, controlled trial of fractions learning (Journal for Research in Mathematics Education, 2017)",
+        "text_es": "Catherine Lewis y Rebecca Perry, Lesson study to scale up research-based knowledge: a randomized, controlled trial of fractions learning (Journal for Research in Mathematics Education, 2017) (en inglés)",
+        "href": "https://nctm.org/Publications/Journal-for-Research-in-Mathematics-Education/2017/Vol48/Issue3/Lesson-Study-to-Scale-Up-Research-Based-Knowledge_-A-Randomized,--Controlled-Trial-of-Fractions-Learning",
+        "href_es": "https://nctm.org/Publications/Journal-for-Research-in-Mathematics-Education/2017/Vol48/Issue3/Lesson-Study-to-Scale-Up-Research-Based-Knowledge_-A-Randomized,--Controlled-Trial-of-Fractions-Learning"
+      }
+    ]
+  }
+}

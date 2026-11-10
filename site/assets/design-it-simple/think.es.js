@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Design it simple, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (rules, team, pages), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  rules:{q:"Cada uno de los cinco principios dice lo que descarta. ¿Por qué importa eso?",
+    opts:[{t:"Para que los cinco suenen lo bastante estrictos y las facultades los tomen en serio y los sigan."},{t:"Para que Helena revise cada elección nueva con ellos y luego la decida ella misma por todos.",near:true},{t:"Para que cualquiera ponga a prueba una elección: un principio que nada incumple no decide nada.",ok:true}],
+    why:"Un principio se gana su lugar por lo que descarta. Simple antes que ingenioso le dice que no a una herramienta propia para las facultades, porque sirve la plataforma que ya opera el equipo; una copia, gobernada una vez, le dice que no a una lista de personal para cada facultad. Un principio que nada podría incumplir no decide una elección. Y cualquiera puede revisar una elección con ellos, sin preguntarle a Helena. ¿Qué descartaría uno de tus principios?"},
+  team:{q:"En la situación deseada, ¿quién construye los reportes propios de la Facultad de Salud?",
+    opts:[{t:"El referente de datos de Salud, un día por semana, con herramientas, estándares y ayuda del equipo.",ok:true},{t:"El equipo pequeño del centro, que mantiene la plataforma y construye en ella cada reporte.",near:true},{t:"Quien en Salud necesite un reporte, en su propia hoja de cálculo, para que nadie tenga que esperar."}],
+    why:"El equipo pequeño del centro mantiene la plataforma, los estándares, los productos compartidos y las barreras de protección, y ayuda. Si además construyera los reportes de cada área, volvería a ser la cola de 41 días; si cada quien construyera los suyos, volverían las tres listas de personal. Cada uno de los siete referentes de datos construye los productos de su área con las herramientas del equipo, cerca de un día por semana, que le da su decano o director. ¿Quién hace ya este trabajo donde estás, en hojas de cálculo?"},
+  pages:{q:"El cambio de Anil esperó cuatro días hábiles en el paso cuatro. ¿Qué cambió su prueba?",
+    opts:[{t:"El paso cuatro nombra a un revisor de Salud, que sabe mejor que nadie qué debe decir su reporte.",near:true},{t:"El paso cuatro nombra a un revisor por turnos, en dos días hábiles, nunca quien lo construyó.",ok:true},{t:"Los referentes revisan ahora sus propios cambios, así que nada espera al equipo pequeño."}],
+    why:"El paso cuatro solo decía «el equipo lo revisa», así que cada uno creía que otro lo tenía. Ahora nombra a un revisor de los turnos del equipo de datos, en dos días hábiles, y nunca a quien lo construyó. Lo que significa un reporte se decide antes de construirlo, en el glosario, con su dueño en el negocio; el revisor revisa el código. Probado por un referente, el hueco se arregló antes de que todos lo encontraran. ¿Qué paso de tu trabajo dice «el equipo» donde debería nombrar a una persona?"}
+  }}};

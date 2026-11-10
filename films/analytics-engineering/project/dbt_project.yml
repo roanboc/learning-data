@@ -138,3 +138,8 @@ on-run-start:
   # and, when the var faculty_readers names the groups, the row filter on Finance's claims
   # (macros/finance/faculty_row_filter.sql, DEC-FIN-06)
   - "{{ create_faculty_row_filter() }}"
+
+# The last step of every run: each check's result kept, night after night, in check_results
+# (macros/governance/keep_check_results.sql; Small, every week). The scorecard shows the last run.
+on-run-end:
+  - "{{ keep_check_results(results) }}"

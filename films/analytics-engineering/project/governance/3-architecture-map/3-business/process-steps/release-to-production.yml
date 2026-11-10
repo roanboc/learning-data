@@ -1,0 +1,7 @@
+name: release to production
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: release approver
+- realization: change a data product
+status: confirmed

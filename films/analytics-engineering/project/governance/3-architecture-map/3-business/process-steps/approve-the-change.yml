@@ -1,0 +1,8 @@
+name: approve the change
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: product owner
+- realization: change a data product
+- triggering: release to production
+status: confirmed

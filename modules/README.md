@@ -92,7 +92,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -270,6 +270,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 
 ### Only what you may see

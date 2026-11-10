@@ -1011,6 +1011,10 @@ def main():
     for md in sorted(ROOT.rglob("*.md")):
         if any(part in ("build", "dist", "models", "node_modules", ".git") for part in md.relative_to(ROOT).parts):
             continue
+        # The films' questions and assumptions are the author's review notes, copied from each film's
+        # thread, and name films by their number in a series; nothing in them reaches the site.
+        if md.relative_to(ROOT).parts[:2] == ("docs", "assumptions"):
+            continue
         docs += 1
         for i, line in enumerate(md.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
             for m in NUMBERING.finditer(line):

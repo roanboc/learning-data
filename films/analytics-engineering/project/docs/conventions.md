@@ -305,7 +305,7 @@ class; and when the var `personal_data_readers` names a group, each column of di
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
-read a table, the access review, the product catalogue, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md`.
+read a table, the access review, the product catalogue, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md`.
 
 ### What each use needs
 

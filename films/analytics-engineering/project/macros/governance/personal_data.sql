@@ -90,7 +90,7 @@
     two floors: a table with a column that points to a person (direct, pseudonymous or indirect) is
     never public, and one with anything special is restricted. Tag propagation never carries a
     level: two tables of different levels joined would be a conflict every time, so each table's
-    level is its owner's call (docs/databricks-governance.md, section 14).
+    level is its owner's call (docs/databricks-governance.md, section 15).
 
     It reads which columns carry the tags already, as apply_critical_data does: SET TAG fails on a
     tag already there. Tables only; DuckDB has no tags, so there it does nothing.

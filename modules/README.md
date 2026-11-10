@@ -351,6 +351,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 - [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
+- [Every change through review](../films/from-helper-to-colleague/6-every-change-through-review/) — `every-change-through-review`
 
 ## Leading data people
 

@@ -1,0 +1,15 @@
+/* Learning Data: "Pausa para pensar" de Medidas que importan, en español. Las claves van al paso de think.en.js, y las respuestas
+   correctas y las casi correctas en los mismos lugares. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un laboratorio",off:"Quitar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  baseline:{q:"Junto a los días de la solicitud al primer uso, Helena pone una medida de calidad, lo devuelto. ¿Contra qué protege?",
+    opts:[{t:"Contra que el consejo lea una cifra sola, así que cada medida de la página lleva otra a su lado."},{t:"Contra que la rapidez oculte el retrabajo: el trabajo a medias que sale rápido y vuelve se ve en lo devuelto.",ok:true},{t:"Contra quien construye lento: lo devuelto de cada persona muestra quién necesita ayuda, y le pone una meta.",near:true}],
+    why:"Sin ella, la rapidez podría ocultar el retrabajo: menos días al primer uso, pero más trabajo que vuelve para cambios. Lo devuelto es una medida del equipo, nunca de una persona: una meta para cada quien construye enseñaría a ocultar el retrabajo, no a reducirlo. ¿Cuál de tus medidas de rapidez no tiene una de calidad al lado?"},
+  trend:{q:"El 12 de agosto, las promesas cumplidas llegan al 82 por ciento, desde 58 en marzo. ¿Por qué la página muestra la carga a su lado?",
+    opts:[{t:"Para que el consejo vea lo ocupado que está el equipo, y le dé más personas cuando la carga pasa su límite."},{t:"Porque la carga explica la mejora: con nueve trabajos abiertos, el equipo estaba haciendo más que antes.",near:true},{t:"Porque una ganancia en un lugar puede ocultar una pérdida en otro: nueve trabajos abiertos, con un límite de seis.",ok:true}],
+    why:"Sola, el 82 por ciento parecía bien. A su lado, había nueve trabajos abiertos frente a un límite de seis: lo nuevo empezaba antes de terminar lo viejo, y eso lo frena todo. Más abierto no es más hecho. El equipo terminó antes de empezar más, y a mediados de septiembre la carga volvió a seis. ¿Cuál de tus medidas podría verse bien mientras otra empeora?"},
+  team:{q:"Los días de la solicitud al primer uso terminan cuando el trabajo se usa por primera vez. ¿Quién lo confirma, y por qué?",
+    opts:[{t:"Quien lo pidió: la medida trata de lo que recibió, y quien lo construyó estaría puntuando su propio trabajo.",ok:true},{t:"Alguien del equipo que revisa: una segunda persona mira el trabajo, y así nadie del equipo puntúa lo suyo.",near:true},{t:"Quien lo construyó: sabe cuándo está terminado el trabajo, y el gestor de incidencias ya guarda su fecha."}],
+    why:"En la sala de partos, los médicos daban varios puntos más a sus propios bebés, así que la puntuación la daba otra persona. El primer uso lo confirma quien lo pidió, porque la medida trata de lo que recibió. Alguien del equipo que revisa es otra persona, pero no aquella para quien era el trabajo. ¿Quién confirma que tu trabajo se usó?"}
+  }}};

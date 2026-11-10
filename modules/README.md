@@ -260,7 +260,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
-No film source yet.
+- [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 
 ### Only what you may see
 

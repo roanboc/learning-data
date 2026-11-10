@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Power you switch on](https://data.learn-all.org/locks-before-the-data/power-you-switch-on/) | Admin accounts | 8½ min | 8 | 3 questions | [script](4-power-you-switch-on/script.md) · [source](4-power-you-switch-on/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

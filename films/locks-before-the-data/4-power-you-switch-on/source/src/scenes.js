@@ -214,7 +214,7 @@ scene("great",(ctx,S,t,sc)=>{const C=sc.cues;
       if(fa>0){withA(ctx,fa,()=>dp_link(ctx,[PW_FILE[0],PW_FILE[1]-33],[PW_FILE[0],TB[1]+178],"cyan",ag_in(t,tName-0.3,0.6),{dot:false}));
         pw_table(ctx,...TB,{a:fa,k:ag_spr(t,tName-0.2,0.6),clear:true,title:"A file, in the clear"});}
       pw_door2(ctx,ag_in(t,tDoor-0.2,0.6),0,{glow:ag_io(t,tBack-0.2,tBack+1.2,0.3)});
-      dp_card(ctx,1450,660,430,{kick:"Film 3",title:"Walls, doors and keys"},{a:ag_io(t,tBack-0.4,tSet-0.4,0.5),k:ag_spr(t,tBack-0.4,0.6)});
+      dp_card(ctx,1450,660,430,{kick:"Film 3 of 9",title:"Walls, doors and keys"},{a:ag_io(t,tBack-0.4,tSet-0.4,0.5),k:ag_spr(t,tBack-0.4,0.6)});
       pw_settings(ctx,ag_in(t,tSet-0.1,0.6),{});
       pw_history(ctx,ag_in(t,tRest-0.1,0.6),{back:ag_in(t,tBack2,1.6)});
       pw_placeTokens(ctx,i=>({a:ag_in(t,tPower+0.1+i*0.25,0.5),k:ag_spr(t,tPower+0.1+i*0.25,0.6)}));
@@ -429,7 +429,7 @@ scene("who",(ctx,S,t,sc)=>{const C=sc.cues;
       if(pa>0)dp_tick(ctx,px+360-40,py+40,"green",ag_in(t,tDecides,0.6)*(1-gone));
       dp_card(ctx,1110,560,600,{kick:"Module",title:"AI agents in data work"},{a:ag_in(t,tRights-0.2,0.5)*(1-gone),k:ag_spr(t,tRights-0.2,0.6)});
       pw_breakGlass(ctx,1400,140,460,ag_in(t,tTwo-0.2,0.6));
-      dp_card(ctx,1400,480,460,{kick:"Film 9",title:"Who did what"},{a:ag_in(t,tWatched-0.2,0.5),k:ag_spr(t,tWatched-0.2,0.6)});}}];
+      dp_card(ctx,1400,480,460,{kick:"Film 9 of 9",title:"Who did what"},{a:ag_in(t,tWatched-0.2,0.5),k:ag_spr(t,tWatched-0.2,0.6)});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
   pw_kick(ctx,S,1);});
 

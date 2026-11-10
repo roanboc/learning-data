@@ -266,7 +266,7 @@ scene("second",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
 scene("switched",(ctx,S,t,sc)=>{const C=sc.cues,br=C.breath;
   const tWhatFor=wAt(sc,"what","what for"),tRead=wAt(sc,"which","read the storage"),tChange=wAt(sc,"which","change the settings"),tRestore=wAt(sc,"which","restore a table"),tMove=sc.ends.which-0.2;
   const tWords=wAt(sc,"reason","in words"),tFour=wAt(sc,"time","four hours"),tSamOK=wAt(sc,"approves","Sam approves Jun's"),tNoOne=wAt(sc,"approves","no one approves");
-  const tOn=sc.ends.approves+0.4,tGets=wAt(sc,"alert","gets an alert"),tRec=wAt(sc,"recorded","is recorded"),tOwn=wAt(sc,"recorded","its own name"),tUp=C.off,tBy=wAt(sc,"off","switches off by itself"),tDone=wAt(sc,"off","as soon as");
+  const tOn=sc.ends.approves+0.3,tGets=wAt(sc,"alert","gets an alert"),tRec=wAt(sc,"recorded","is recorded"),tOwn=wAt(sc,"recorded","its own name"),tUp=C.off,tBy=wAt(sc,"off","switches off by itself"),tDone=wAt(sc,"off","as soon as");
   const tLock=C.lock,tHour=wAt(sc,"lock","at its hour"),tTask=wAt(sc,"task","only for a task"),tYes=wAt(sc,"task","someone else says yes");
   const tOut=wAt(sc,"slow","keeps them out"),tMin=wAt(sc,"costs","a minute"),tAYes=wAt(sc,"costs","a yes");
   const K=PW_T.card,P1=pw_cardTok();
@@ -345,7 +345,7 @@ scene("morning",(ctx,S,t,sc)=>{const C=sc.cues;
       dp_pill(ctx,1450,612,"Refused","coral",{a:ag_in(t,tShutD+0.1,0.4)});}},
     // so he switches on his admin account's power to read the storage, for one hour; his reason; Sam reads it, and approves; the alert
     {cut:true,at:tSw-0.3,place:"pwTeam",keys:[[0,960,540,1.0]],push:0,draw(ctx,t){const T=t+sc.start;
-      const lit=ag_in(t,tApp+0.3,0.5),mv=clamp((t-tRead+0.2)/1.3,0,1),ca=ag_in(t,tSw,0.5);
+      const lit=ag_in(t,sc.ends.sam+0.1,0.5),mv=clamp((t-tRead+0.2)/1.3,0,1),ca=ag_in(t,tSw,0.5);   // on in the beat after Sam's yes
       pw_two(ctx,T,{samGaze:t>tSam-0.3?[3,-1]:[3,-2],samNod:0.1*ag_io(t,tApp-0.2,tApp+1.0,0.3)});
       withA(ctx,ca,()=>dp_link(ctx,pw_aR("jun",1),[K[0],PW_T.row.jun+75],"amber",ag_in(t,tSw+0.1,0.6),{dot:false}));
       withA(ctx,ag_io(t,tSam-0.2,tApp+1.4,0.4),()=>dp_link(ctx,pw_aR("sam",1),[K[0],pw_cardRow(3)-10],"cyan",ag_in(t,tSam-0.2,0.6)));

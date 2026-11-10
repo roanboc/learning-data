@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/draft-and-decision/soundtrack.mp3",
+      "size": 7435380,
+      "sha256": "201ef3571595cab288487d7ead2f299b36791dcbe60f721b0c8e1262bb1cee44",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-draft-and-decision-c881c425e569e7995094/201ef3571595cab288487d7ead2f299b36791dcbe60f721b0c8e1262bb1cee44.mp3"
+    }
+  ]
+}

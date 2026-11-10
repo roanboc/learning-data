@@ -1,0 +1,66 @@
+{
+  "draft": true,
+  "title": "Architecture that keeps up",
+  "title_es": "Una arquitectura al día",
+  "planned": 3,
+  "lead": "The third series of Data management. Helena Novak runs the team's services as a business, keeps the architecture in one map in a repository, updated with every change, and gives every data provider a path, even those that can't meet the preferred way.",
+  "lead_es": "La tercera serie de Gestión de datos. Helena Novak dirige los servicios del equipo como un negocio, guarda la arquitectura en un solo mapa en un repositorio, al día con cada cambio, y da a cada proveedor de datos un camino, incluso a los que no pueden seguir la forma preferida.",
+  "description": "Short films on the product owner's side of a data manager's job, borrowed from architecture: the team's services defined with their customers, their pains and drivers, and designed down every layer, from strategy to technology; the architecture kept in a git repository as one source of truth, reviewed like code and updated with every change, with every other document made from it; and a preferred platform architecture with a decision tree for every provider that can't reach it.",
+  "description_es": "Películas cortas sobre el lado de dueña de producto del trabajo de una gestora de datos, tomado de la arquitectura: los servicios del equipo definidos con sus clientes, sus problemas y sus motivaciones, y diseñados en cada capa, de la estrategia a la tecnología; la arquitectura guardada en un repositorio git como única fuente de verdad, revisada como el código y actualizada con cada cambio, de la que sale todo otro documento; y una arquitectura de plataforma preferida con un árbol de decisión para cada proveedor que no puede alcanzarla.",
+  "card": "Services with customers, one map in the repository kept current, and a path for every provider.",
+  "card_es": "Servicios con clientes, un solo mapa en el repositorio siempre al día y un camino para cada proveedor.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: from the team's services to a path for every provider",
+  "thread_h_es": "Un hilo: de los servicios del equipo a un camino para cada proveedor",
+  "thread": "After the data strategy is approved, Helena Novak writes the team's four services and who each is for, and walks one down every layer. In June the architecture's map moves into the team's repository, where every change is reviewed and everything else is made from it. Then the team gives every data provider a path: the rooms' sensors send events, while the timetable, bought as a service, never says what was deleted, so the team finds out every night.",
+  "thread_es": "Tras aprobarse la estrategia de datos, Helena Novak escribe los cuatro servicios del equipo y para quién es cada uno, y recorre uno por todas las capas. En junio el mapa de la arquitectura pasa al repositorio del equipo, donde cada cambio se revisa y de donde sale todo lo demás. Luego el equipo da a cada proveedor de datos un camino: los sensores de las aulas envían eventos, mientras que el horario, comprado como servicio, nunca dice qué se borró, así que el equipo lo averigua cada noche.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "tech",
+      "Leads the data work",
+      "Helena Novak, the data manager, who runs the team's services as a business and keeps the architecture current"
+    ],
+    [
+      "tech",
+      "Keeps the map",
+      "Noor Rahman, the data architect, who reviews every change to the map with the team's principal engineers"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who brings each provider's data onto the platform by the path it can offer"
+    ],
+    [
+      "biz",
+      "Decides about the rooms",
+      "Graham Ellis, the Director of Facilities, whose room counts must stay true whatever each system can send"
+    ]
+  ],
+  "people_es": [
+    [
+      "tech",
+      "Lidera el trabajo con datos",
+      "Helena Novak, la gestora de datos, que dirige los servicios del equipo como un negocio y mantiene la arquitectura al día"
+    ],
+    [
+      "tech",
+      "Cuida el mapa",
+      "Noor Rahman, la arquitecta de datos, que revisa cada cambio del mapa con los ingenieros principales del equipo"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que lleva a la plataforma los datos de cada proveedor por el camino que este puede ofrecer"
+    ],
+    [
+      "biz",
+      "Decide sobre las aulas",
+      "Graham Ellis, el director de Instalaciones, cuyos conteos de aulas deben seguir siendo ciertos, envíe lo que envíe cada sistema"
+    ]
+  ]
+}

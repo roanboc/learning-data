@@ -92,7 +92,7 @@ models:
       - name: family_name
         description: >
           The family name to be printed: the one the graduate confirmed in the portal for this
-          ceremony, else the student system's, which holds 30 characters.
+          ceremony, else the student system's, which holds 100 characters since 14 September 2026, 30 before.
         data_type: string
         config:
           meta: {personal_data: direct}

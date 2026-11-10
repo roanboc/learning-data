@@ -298,6 +298,10 @@ def films(S=FW):
         if think.exists() and (nt == 0 or nt != len(re.findall(r'[{,]\s*"?q"?\s*:', think.read_text()))):  # a quoted "q": counts none, and the page said "twelve"
             sys.exit(f"{think.relative_to(ROOT)}: write each question as q:\"...\", unquoted, as the other packs do: it is how the film's page counts them")
         N = load_obj(src / "src" / "narration.js"); starts, sec = timing(src)
+        es = site.get("chapters_es")
+        if not isinstance(es, dict) or set(es) != set(N):  # a list, or other ids, left the Spanish page's chapter buttons in English
+            sys.exit(f"{(S['root'] / d / 'site.json').relative_to(ROOT)}: write chapters_es as {{chapter id: Spanish name}}, one for each "
+                     f"chapter of narration.js ({', '.join(N)}), as the other films do: the Spanish page names its chapters by those ids")
         out.append(dict(dir=d, key=key, title=meta["title"], site=site, labs=nl, quiz=nq, think=nt, len=minutes(sec), sec=sec, starts=starts,
                         chapters=[(k, v["name"]) for k, v in N.items()], prefix="ld-" + key, index=number(d, i), series=S))
     return series, out

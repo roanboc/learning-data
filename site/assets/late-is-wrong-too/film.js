@@ -463,7 +463,7 @@ const NARR={
  {"id":"planning","gap":0.8,"text":"Planning's count for the government comes after the year's end: weeks are fine."},
  {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, at the send."},
  {"id":"moves","gap":0.8,"text":"A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves."},
- {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes in the list's contract."},
+ {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes beside the list's columns, in dbt."},
  {"id":"pencil","gap":1.0,"text":"Rules that run left timeliness in pencil, with no checks. This is its first rule."}
 ]},
 "age":{"name":"Say how old it is","lead":1.0,"tail":1.0,"vo":[
@@ -496,7 +496,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.654, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 5.171, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.745, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 7.688, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 4.648, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 3.992, "fresh/pencil": 5.016, "age/says": 2.307, "age/row": 4.327, "age/own": 6.938, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/arrived": 6.889, "stop/level": 3.764, "stop/first": 2.227, "stop/tells": 5.047, "stop/warn": 3.679, "stop/send": 3.405, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.724, "time/take": 3.414, "time/series": 5.82};
+const VODUR={"story/coast": 4.694, "story/islands": 4.716, "story/ashore": 4.04, "story/radio": 5.949, "story/little": 5.653, "story/stay": 4.011, "story/surge": 5.021, "story/toll": 3.615, "story/after": 5.171, "story/cpp": 9.265, "story/mile": 4.236, "story/house": 3.84, "story/flags": 5.823, "story/sidr": 8.744, "story/ahead": 4.643, "story/shelter": 5.264, "story/died": 6.177, "story/data": 1.494, "story/june": 6.032, "story/passed": 4.339, "story/heard": 4.128, "green/night": 8.226, "green/build": 2.969, "green/wed": 6.615, "green/anyway": 4.023, "green/green": 3.467, "green/boards": 5.987, "green/missing": 3.449, "green/looks": 1.473, "green/see": 3.485, "hours/eight": 3.894, "hours/sam": 6.653, "hours/thirty": 5.468, "hours/level": 6.116, "hours/signal": 4.137, "hours/calls": 6.665, "hours/arrives": 7.097, "hours/goes": 4.742, "hours/december": 7.688, "fresh/monday": 3.852, "fresh/knows": 5.388, "fresh/certs": 4.648, "fresh/seats": 4.727, "fresh/planning": 4.18, "fresh/clocks": 5.083, "fresh/moves": 5.313, "fresh/contract": 5.26, "fresh/pencil": 5.016, "age/says": 2.307, "age/row": 4.327, "age/own": 6.938, "age/shown": 3.437, "age/flags": 3.574, "age/labelled": 6.423, "age/trust": 2.914, "age/cant": 1.318, "stop/source": 3.212, "stop/arrived": 6.889, "stop/level": 3.764, "stop/first": 2.227, "stop/tells": 5.047, "stop/warn": 3.679, "stop/send": 3.405, "stop/waits": 5.404, "stop/data": 2.17, "time/storm": 6.444, "time/list": 6.113, "time/since": 3.724, "time/take": 3.414, "time/series": 5.82};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2223,7 +2223,7 @@ function lw_water(ctx,t,a){if(a<=0.004)return;const r=ag_rnd(151);ctx.save();ctx
 /* ===== Late is wrong too: the university's things, on the quality bench =====
    This film's own pictures for the bench, in the kit's look (films/fit-for-use/shared, never changed for one film): the bench at night
    under its lamp (lw_night, the same room as the bench by day, so the morning comes in a glide), the student system and its nightly
-   file, the graduation list, the platform's monitoring and dbt's freshness check, the uses and their clocks, the list's contract, the
+   file, the graduation list, the platform's monitoring and dbt's freshness check, the uses and their clocks, the list's rule in dbt, the
    six dimensions as Rules that run left them, the list with its age, the printer's page, and the jobs with their run conditions. Brass
    is the requirement (how fresh a use needs the list), steel blue a measure (how old the data is), the verdicts' colours their
    verdicts; nothing else here uses them. Every top-level name starts with lw_ or LW_. */
@@ -2596,11 +2596,12 @@ scene("hours",(ctx,S,t,sc)=>{const c=sc.cues,P=lw_once(sc,()=>({g0:lw_g0(sc),pri
    Monday 22 June: Sam, Malia and Mei behind the bench. The platform sees a table is late (steel, over Sam); only its users say when
    late is too late (brass, over Malia and Mei). The bench from above: the three uses as cards, each with its clock, a dial whose brass
    range is how old the list may be for it: the certificates, that night's files at the send; the seating, a few days; Planning, weeks.
-   The strictest sets the level. The contract's rule, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
+   The strictest sets the level. The list's rule in its model's YAML, agreed by Malia, owned by Mei. Then the six dimensions as Rules that run left them,
    timeliness in pencil, inked by its first rule. */
-const LW_CONTRACT=["- name: student_system_as_of",[["  …",DQ.soft]],"  quality:","  - name: student_system_at_most_a_day_old_at_the_send",[["    …",DQ.soft]],
-  [["    dimension: ",null],["timeliness","brass"]],[["    …",DQ.soft]],"    - property: level",[["      value: ",null],["At most 24 hours old, at the send","brass"]],
-  "    - property: agreedWith","      value: Malia Fonoti, graduations office"];
+// the rule as the list's model YAML has it (models/marts/graduations/_graduations__models.yml, lines 166 to 191), its other lines left out
+const LW_CONTRACT=["- name: student_system_as_of",[["  …",DQ.soft]],"  config:","    meta:","      quality:","        - name: student_system_at_most_a_day_old_at_the_send",
+  [["          dimension: ",null],["timeliness","brass"]],[["          …",DQ.soft]],[["          level: ",null],["At most 24 hours old, at the send","brass"]],
+  "          agreed_with: \"Malia Fonoti, graduations office\""];
 function lw_meet(x,tt,c,P){const G=P.g0+tt,K0=c.knows-0.2;
   lw_who(x,"sam",330,G,1);lw_who(x,"malia",1100,G,1);lw_who(x,"mei",1590,G,ag_in(tt,P.mei-0.4,0.6),{flip:true});
   dq_nameTag(x,470,410,"sam",{a:ag_io(tt,P.samW,K0,0.4)});dq_nameTag(x,975,410,"malia",{align:"right",a:ag_io(tt,P.maliaW,K0,0.4)});
@@ -2618,7 +2619,7 @@ function lw_uses(x,tt,c,P){const U0=c.contract-0.4,ts=[c.certs,c.seats,c.plannin
   // a nightly file meets it; for fresher data, Hot, warm, cold
   q=lw_pop(tt,P.hwc-0.1,U0);dq_textCard(x,1384,704,440,{kick:"See",title:"Hot, warm, cold"},{on:"granite",k:q.k,a:q.a});}
 function lw_rule(x,tt,c,P){const R0=c.pencil-0.4;let q=lw_pop(tt,c.contract+0.1,R0);
-  lw_yml(x,340,130,1240,{logo:null,product:"Data contract",title:"the graduation list",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[9,10]:[],k:q.k,a:q.a});
+  lw_yml(x,340,130,1240,{title:"models/marts/graduations/_graduations__models.yml",lines:LW_CONTRACT,lh:44,lit:tt>P.agrees?[8,9]:[],k:q.k,a:q.a});
   const c1=dq_chip(x,340,790,"agreed: Malia Fonoti",{icon:"people",col:"brass",on:"granite",a:ag_io(tt,P.agrees,R0,0.4)});
   dq_chip(x,c1.x+c1.w+20,790,"owner: Mei Tanaka",{icon:"person",on:"granite",a:ag_io(tt,P.owns,R0,0.4)});
   q=lw_pop(tt,c.pencil,null);lw_dims(x,340,260,{first:ag_in(tt,P.first,0.8),on:"granite",k:q.k,a:q.a});}

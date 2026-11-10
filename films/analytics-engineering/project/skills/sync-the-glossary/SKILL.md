@@ -45,8 +45,8 @@ flows one way: from the glossary into the project, never back.
    blocks. Open a pull request with the report as its body. If the new meaning changes what a
    model counts, say so: that's a decision in the domain's log, and a change to a public model's
    columns or meaning is a new version (`docs/conventions.md`).
-5. **Hand it to the owners.** The owner of the meaning in the conceptual model approves; data
-   governance confirms the term still applies; the exposures' owners are told.
+5. **Hand it to the data team.** The data team reviews the code against the glossary; the owner of
+   the meaning, who decided it there, and the exposures' owners are told. Owners don't review it.
 6. **Entities without a source.** Each says `no_glossary_term:`, governance's confirmation. Ask
    again whether the glossary has a term for it now. If it does, propose `source:` in its place.
 

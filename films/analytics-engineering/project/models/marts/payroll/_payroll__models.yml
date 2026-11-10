@@ -1,0 +1,115 @@
+models:
+
+  - name: mart_payroll__hours_to_pay
+    description: >
+      The hours to pay: each claim approved for the coming pay day, with the hours and pay it gives,
+      as the claims job sends them to the payroll system at 22:00 on the Monday before it
+      (resources/claims.job.yml). A claim approved by noon on that Monday is paid that Thursday
+      (pay_day_for(), on payroll's calendar, the seed pay_days). The pay run is open from the day
+      its claims close to the day payroll closes it, at noon on the Tuesday: built on any other day,
+      the model is empty and the job sends nothing. Payroll pays from its own system, which the
+      university buys and doesn't run on the platform; these rows are the one thing in the claims'
+      story that leaves the platform. Its tests name their owner, HR, in their own meta: the hours
+      and pay are HR's to answer for.
+    config:
+      meta:
+        grain: One row per claim approved for the open pay run
+        owner: HR
+        domain: staff
+        consumer: The payroll system
+    constraints:
+      - type: primary_key
+        name: pk_mart_payroll__hours_to_pay
+        columns: [claim_key]
+        warn_unenforced: false
+    columns:
+      - name: claim_key
+        description: The claim's hash key, the sha-256 of claim_bk.
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config: {meta: {owner: HR}}
+        config:
+          meta: {personal_data: pseudonymous}
+      - name: pay_day
+        description: The pay day that pays the claim, a Thursday from payroll's calendar.
+        data_type: date
+        constraints: [{type: not_null}]
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('pay_days')
+                field: pay_day
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: staff_bk
+        description: Who is paid, by the staff ID HR issues, HR|E-4417. The payroll system knows them by it.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: direct}}
+      - name: contract_bk
+        description: The contract the hours are paid under, HR|T-26188.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: pseudonymous}}
+      - name: unit_code
+        description: The unit the hours were worked for, like HI101.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: duty
+        description: '{{ doc("claim_duty") }}'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: worked_on
+        description: The day the hours were worked.
+        data_type: date
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: hours
+        description: The hours to pay, in decimal hours, 1.50 for an hour and a half, whichever form the claims app sent them in (DEC-CLM-02).
+        data_type: decimal(5,2)
+        constraints: [{type: not_null}]
+        data_tests:
+          - positive:
+              config: {meta: {owner: HR}}
+        config: {meta: {personal_data: none}}
+      - name: amount
+        description: '{{ doc("claim_amount") }}'
+        data_type: decimal(9,2)
+        config: {meta: {personal_data: none}}
+
+unit_tests:
+
+  - name: the_claims_job_sends_the_open_pay_runs_approved_claims_only
+    description: >
+      On Tuesday 3 November 2026, when the claims job ran again at 09:20, the pay run of Thursday 5
+      November was still open: its claims had closed at noon on Monday, and payroll closed it at noon
+      on Tuesday. Only the claims approved for it are sent: not one approved at 12:01 on Monday,
+      which waits for the next pay day, nor one still waiting for its coordinator, nor one already
+      paid on 22 October.
+    model: mart_payroll__hours_to_pay
+    overrides:
+      vars: {as_is_date: "2026-11-03"}
+    given:
+      - input: ref('core_claim', v=1)
+        format: csv
+        rows: |
+          claim_key,staff_bk,contract_bk,unit_code,duty,worked_on,hours,amount,status,approved_at
+          K1,HR|E-1,HR|T-1,HI101,marking,2026-10-27,3.50,210.00,approved,2026-11-02 10:47:00
+          K2,HR|E-2,HR|T-2,HI101,tutorial,2026-10-29,1.00,175.00,approved,2026-11-02 12:01:00
+          K3,HR|E-1,HR|T-1,HI101,consultation,2026-11-02,1.50,90.00,submitted,
+          K4,HR|E-1,HR|T-1,HI101,tutorial,2026-10-13,1.00,175.00,approved,2026-10-16 09:30:00
+      - input: ref('pay_days')
+        format: csv
+        rows: |
+          pay_day,claims_close_at,pay_run_closes_at
+          2026-10-22,2026-10-19 12:00:00,2026-10-20 12:00:00
+          2026-11-05,2026-11-02 12:00:00,2026-11-03 12:00:00
+          2026-11-19,2026-11-16 12:00:00,2026-11-17 12:00:00
+    expect:
+      format: csv
+      rows: |
+        claim_key,pay_day,hours
+        K1,2026-11-05,3.50

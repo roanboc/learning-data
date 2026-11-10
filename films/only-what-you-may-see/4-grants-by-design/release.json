@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Grants by design",
+    "key": "grants-by-design-en",
+    "dir": "films/only-what-you-may-see/4-grants-by-design/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/grants-by-design/film.js",
+    "video": "dist/grants-by-design.mp4",
+    "file": "grants-by-design.mp4",
+    "captions": [
+      [
+        "films/only-what-you-may-see/4-grants-by-design/captions/en.srt",
+        "grants-by-design.en.srt"
+      ],
+      [
+        "films/only-what-you-may-see/4-grants-by-design/captions/es.srt",
+        "grants-by-design.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/only-what-you-may-see/4-grants-by-design/source",
+      ":(exclude)films/only-what-you-may-see/4-grants-by-design/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 265,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

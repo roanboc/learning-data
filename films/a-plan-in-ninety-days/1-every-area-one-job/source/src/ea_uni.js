@@ -36,7 +36,7 @@ const EA_AREAS=[{l:"Architecture",n:2},{l:"Modelling and design",n:3},{l:"Storag
   {l:"Documents and content",n:1},{l:"Reference and master data",n:3},{l:"Warehousing and BI",n:10},{l:"Metadata",n:3},{l:"Quality",n:7}];
 const EA_GOV=4;
 // where the site's other films go deep, by area: the index in EA_AREAS (-1: governance, at the centre)
-const EA_FILMS=[{i:1,t:"From words to data"},{i:9,t:"Fit for use"},{i:6,t:"The same one, everywhere"},{i:-1,t:"Governance principles"},{i:0,t:"The map before the data"},{i:4,t:"Data that moves"},{i:3,t:"Only what you may see"}];
+const EA_FILMS=[{i:1,t:"From words to data"},{i:9,t:"Fit for use"},{i:6,t:"The same one, everywhere"},{i:-1,t:"Governance principles"},{i:0,t:"The map before the data"},{i:4,t:"Data that moves"},{i:3,t:"Locks before the data"}];
 const EA_W={cx:860,cy:500,R:262,r0:96};
 const ea_ang=i=>-Math.PI/2+(i+0.5)*TAU/10;
 // a dot's place in area i, the j-th of its requests: in rows across the slice, from the inside out, as many in a row as its width holds

@@ -374,6 +374,7 @@ Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
 - [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
 - [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
+- [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
 ### Ownership and performance
 

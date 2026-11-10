@@ -352,6 +352,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 - [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 
@@ -395,7 +396,7 @@ No film source yet.
 
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
-No film source yet.
+- [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
 
 ### Small steps, measured
 

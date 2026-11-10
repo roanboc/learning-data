@@ -293,7 +293,7 @@ tReg = gc('register', -0.3)
 glass(tReg + 0.25, 0.013, px(1300)); pen(tReg + 0.85, 0.8, 0.006, px(1100))
 organista(Em, gc('bletchley', -0.1), gw('bletchley', 'named', -0.6), 0.7)
 
-# 5. Access, made from the agreement: G as the agreement glows; the contract slides out from under it; its terms, a tap each; at Sam's
+# 5. Access, made from the agreement: G as the agreement glows; the contract is set down under it; its terms, a tap each; at Sam's
 #    desk the grant is made, D to G, the line of light out to the right; back in the hall it reaches the study's space, a soft click;
 #    "No agreement, no grant", a low knock; November's request slides in and stops at the platform's edge; E minor, low, as it doesn't
 #    stretch; the support team's new paper slides in

@@ -213,7 +213,7 @@ scene("agreement",(ctx,S,t,sc)=>{const c=sc.cues,P=af_once(sc,"P",()=>({purpose:
 
 /* ---------------------------------------------------------------- 5 · Access, made from the agreement */
 const AF_CON={x:80,y:345,w:780},AF_AGY=140;
-// the agreement and its contract, at the hall's left: the contract slides out from under the agreement (out 0 to 1)
+// the agreement and its contract, at the hall's left: the contract is set down under the agreement (con: its k and a, as af_pop gives them)
 function af_papersLeft(x,tt,o){const con=o.con||{k:1,a:1};
   if(con.a>0.003)af_contract(x,AF_CON.x,AF_CON.y,AF_CON.w,{hi:o.hi,ended:o.ended,a:con.a,k:con.k,behind:"afHall"});
   if(o.glow>0)dp_halo(x,AF_CON.x+AF_CON.w/2,AF_AGY+90,460,"cyan",0.22*o.glow);

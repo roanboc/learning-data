@@ -20,15 +20,17 @@ function rf_report(ctx,x,y,w,o){o=o||{};const rec=Object.assign({},RF_REPORT,{ro
   return dq_record(ctx,x,y,w,rec,Object.assign({labW:150,fixed:true},o));}
 
 /* ---------------------------------------------------------------- the ledger of reports: a dbt model of its own
-   rows: [came, name given, due, answered, told]; o.n rows shown (each comes in over 0.4 s from o.rowAt(i)), o.ans and o.told (0 to 1)
-   fill Andrés's last two cells, o.kind (0 to 1) turns the owner's column into where each error was born; o.lit a row's index. */
-const RF_LEDGER=[["12 Oct 19:42","Andrés Peñaloza","Old online form","14 Oct"],["12 Oct 20:05","Siobhán Kelly","Old online form","14 Oct"],["12 Oct 21:30","Min-jun Kim","Paper form, swapped","14 Oct"],
-  ["13 Oct 07:58","Zoë Hartmann","Old online form","15 Oct"],["13 Oct 09:12","Mariana dos Anjos Vasconcelos Pereira","Cut at 30","15 Oct"],["13 Oct 12:40","Joaquín Muñoz","Old online form","15 Oct"]];
+   rows: [came, name given, where it was born, due, answered (and told)]; o.n rows shown (each comes in over 0.4 s from o.rowAt(i)), o.ans
+   and o.told (0 to 1) fill Andrés's last two cells, or every row's with o.every; o.kind (0 to 1) turns the owner's column into where each
+   error was born; o.lit a row's index. The window is 1320 px wide at least, for its columns. */
+const RF_LEDGER=[["12 Oct 19:42","Andrés Peñaloza","Old online form","14 Oct","14 Oct"],["12 Oct 20:05","Siobhán Kelly","Old online form","14 Oct","13 Oct"],
+  ["12 Oct 21:30","Min-jun Kim","Paper form","14 Oct","14 Oct"],["13 Oct 07:58","Zoë Hartmann","Old online form","15 Oct","15 Oct"],
+  ["13 Oct 09:12","Mariana dos Anjos Vasconcelos Pereira","Paper form","15 Oct","14 Oct"],["13 Oct 12:40","Joaquín Muñoz","Old online form","15 Oct","15 Oct"]];
 function rf_ledger(ctx,x,y,w,h,o){o=o||{};const kind=o.kind||0,n=o.n==null?RF_LEDGER.length:o.n;
   return dq_window(ctx,x,y,w,h,{logo:"dbt",product:"dbt",title:"Name reports · October",on:o.on,a:o.a,k:o.k,draw:(c,b)=>{
-    const cols=[{h:"CAME",w:220,f:"mono"},{h:"NAME GIVEN",w:300},{h:kind>0.5?"BORN IN":"OWNER",w:280},{h:"DUE",w:120,f:"mono"},{h:"ANSWERED",w:190,f:"mono"},{h:"TOLD",w:150,f:"mono"}];
+    const cols=[{h:"CAME",w:220,f:"mono"},{h:"NAME GIVEN",w:290},{h:kind>0.5?"BORN IN":"OWNER",w:260},{h:"DUE",w:120,f:"mono"},{h:"ANSWERED",w:220,f:"mono"},{h:"TOLD",w:160,f:"mono"}];
     const rows=RF_LEDGER.slice(0,6).map((r,i)=>{const nm=r[1].length>18?r[1].slice(0,17)+"…":r[1],own=kind>0.5?r[2]:"Registrar's office";
-      const done=i===0?[o.ans||0,o.told||0]:[0,0];return[r[0],nm,own,r[3],{s:done[0]>0.5?"14 Oct":"",mark:done[0]>0.5?"pass":undefined},{s:done[1]>0.5?"14 Oct":"",mark:done[1]>0.5?"pass":undefined}];});
+      const done=i===0||o.every?[o.ans||0,o.told||0]:[0,0],d=r[4];return[r[0],nm,own,r[3],{s:done[0]>0.5?d:"",mark:done[0]>0.5?"pass":undefined},{s:done[1]>0.5?d:"",mark:done[1]>0.5?"pass":undefined}];});
     dq_rows(c,b.x,b.y+4,cols,rows,{rh:58,lit:o.lit,litCol:o.litCol,rowA:(r,i)=>i<n?(o.rowAt?ag_in(o.t||0,o.rowAt(i),0.4):1):0});}});}
 
 /* ---------------------------------------------------------------- the owner's morning alert, on Databricks */
@@ -52,7 +54,7 @@ function rf_frame(ctx,x,y,w,kind,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.00
 // the village scenes the film shows, and the frames recall: at the door (who reports, the register, the reward) and on the plan
 const RF_AT={worker:[640,590],mother:[1380,590]};
 function rf_door(ctx,t,o){o=o||{};ctx.drawImage(ag_place(o.dusk?"rfDoorDusk":"rfDoor"),0,0,W,H);
-  if(o.poster)rf_poster(ctx,120,150,300,o.poster,{a:o.posterA==null?1:o.posterA});
+  if(o.poster)rf_poster(ctx,120,230,300,o.poster,{a:o.posterA==null?1:o.posterA});
   const nt=o.note||0,wr=o.write||0,hold=(c,hd)=>{if(nt<1){c.save();c.globalAlpha*=1-nt;rf_register(c,hd,{write:wr});c.restore();}if(nt>0){c.save();c.globalAlpha*=nt;rf_note(c,hd);c.restore();}};
   dq_person(ctx,RF_PEOPLE.worker,RF_AT.worker[0]+(o.wx||0),RF_AT.worker[1],1,{t,pose:"hold",hold,gaze:[0.5,0.2],covered:o.covered});
   dq_person(ctx,RF_PEOPLE.mother,RF_AT.mother[0],RF_AT.mother[1],1,{t,flip:true,talk:o.talk||0,gaze:[0.4,0.1],covered:o.covered});}
@@ -90,7 +92,7 @@ function rf_laneChain(ctx,u,t,a){if(a<=0.01||u<=0)return;const D=RF_ROW.slice(0,
 /* ---------------------------------------------------------------- where a fix travels: from the student system to every copy
    Five cards, left to right and branching; the corrected name moves along (u, 0 to 1) and appears on each card as it reaches it. o.a,
    o.cardA(i), o.u; o.list (0 to 1): the list card's own fix, undone by the night's update (o.undo 0 to 1) */
-const RF_LINE=[{k:"Source",t:"Student system",x:80,y:250},{k:"Every night, 03:00",t:"The night's update",x:520,y:250},{k:"Built from it",t:"Graduation list",x:960,y:250},
+const RF_LINE=[{k:"Source",t:"Student system",x:80,y:250},{k:"Every night",t:"The 03:00 update",x:520,y:250},{k:"Built from it",t:"Graduation list",x:960,y:250},
   {k:"Shows it",t:"Portal",x:1400,y:130},{k:"Prints it",t:"Printer's file",x:1400,y:390}];
 function rf_line(ctx,o){o=o||{};const a=o.a==null?1:o.a,u=o.u||0;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;const w=380,B=[];
   RF_LINE.forEach((L,i)=>{B.push(dq_textCard(ctx,L.x,L.y,w,{kick:L.k,title:L.t},{measure:true}));});
@@ -120,7 +122,7 @@ function rf_month(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retur
 function rf_adNote(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,P=DQ_PAD,rows=[["Names from the old online form","38"],["Names from the paper forms","11"]],h=P*2+352+rows.length*54;
   if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{});dq_icon(ctx,"mail",x+P+22,y+P+22,40,DQ.ink);dq_label(ctx,x+P+62,y+P+32,"To the admissions team");
-  const ea=o.everyA==null?1:o.everyA;if(ea>0.01){const cw=dq_tw(ctx,"Every month",{w:700,size:28})+84;dq_chip(ctx,x+w-P-cw,y+P+22,"Every month",{icon:"calendar",a:ea});}
+  const ea=o.everyA==null?1:o.everyA;if(ea>0.01){const cw=dq_tw(ctx,"Every month",{w:700,size:28})+84;dq_chip(ctx,x+w-P-cw,y+P+288,"Every month",{icon:"calendar",a:ea});}
   const ca=o.costA==null?1:o.costA;if(ca>0.01){dq_T(ctx,"What it cost",x+P,y+P+106,{w:600,size:28,col:DQ.soft,a:ca});
     const ga=ca*(o.gradA==null?1:o.gradA);dq_T(ctx,"A graduate who had to find",x+P,y+P+156,{w:700,size:36,a:ga});dq_T(ctx,"their own name wrong",x+P,y+P+204,{w:700,size:36,a:ga});}
   const l0=o.lineA?o.lineA(0):1;if(l0>0.01){ctx.fillStyle=rgba([110,90,66],0.3*l0);ctx.fillRect(x+P,y+P+240,w-2*P,1.5);dq_T(ctx,"October",x+P,y+P+300,{w:800,size:36,a:l0});}
@@ -137,20 +139,20 @@ function rf_check(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;const h=DQ_PAD*2+
   dq_icon(ctx,"gauge",x+DQ_PAD+24,y+DQ_PAD+22,44,dq_col("brass"));dq_label(ctx,x+DQ_PAD+66,y+DQ_PAD+34,"Check",{col:dq_col("brass")});
   RF_RULE.forEach((l,i)=>{const la=o.lineA?o.lineA(i):1;if(la<=0.01)return;dq_T(ctx,l,x+DQ_PAD,y+DQ_PAD+104+i*50,{w:i?600:800,size:i?32:36,a:la});});
   const r=o.rule==null?1:o.rule;if(r>0.01){ctx.fillStyle=rgba(DQ.brass,0.9);ctx.fillRect(x+DQ_PAD,y+DQ_PAD+66,(w-2*DQ_PAD)*ag_sine(r),3);}
-  ctx.restore();const ta=o.tagA||0;if(ta>0.01)dq_tag(ctx,x+w-420,y+h+4,"hold",{text:"Holds for a person",to:[x+w-440,y+h-26],a:a*ta,k:o.tagK});
+  ctx.restore();const ta=o.tagA||0;if(ta>0.01){if(o.tagRight)dq_tag(ctx,x+w+44,y+h/2,"hold",{text:"Holds for a person",to:[x+w-14,y+h/2-30],a:a*ta,k:o.tagK});
+    else dq_tag(ctx,x+w-420,y+h+4,"hold",{text:"Holds for a person",to:[x+w-440,y+h-26],a:a*ta,k:o.tagK});}
   return{x,y,w,h};}
 
 /* ---------------------------------------------------------------- the names it holds
-   A deep stack of cream record cards, each an old-form name in plain letters, the top one showing its name, an amber tag tied on (it holds
-   for a person); o.tagA (0 to 1), o.n (the cards drawn, a few px apart). rf_seven: seven of them, four over three, each one's name
+   A deep stack of cream record cards, each an old-form name in plain letters, the top one showing its name (the check's amber tag says
+   they're held for a person); o.n (the cards drawn, a few px apart). rf_seven: seven of them, four over three, each one's name
    gaining the accents the old form took (o.turn(i), 0 to 1) as its edge turns from amber (held) to green. */
 const RF_SEVEN=[["Joaquin Munoz","Joaquín Muñoz"],["Chloe Lefevre","Chloé Lefèvre"],["Lukasz Wojcik","Łukasz Wójcik"],["Monica Ibanez","Mónica Ibáñez"],
   ["Bjorn Akesson","Björn Åkesson"],["Gulsen Yilmaz","Gülşen Yılmaz"],["Ines Conceicao","Inês Conceição"]];
 function rf_stack(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const n=o.n||14,w=520,h=150;ctx.save();ctx.globalAlpha*=a;
   for(let i=n-1;i>=0;i--)dq_card(ctx,x+i*3,y+i*9,w,h,{on:o.on,r:6});
   dq_card(ctx,x,y,w,h,{on:o.on,r:6,ruled:40,ruleTop:66});dq_T(ctx,"First recorded · 2016 · online form",x+24,y+44,{w:600,size:28,col:DQ.soft});
-  dq_T(ctx,"Joaquin Munoz",x+24,y+106,{w:700,size:36,f:"mono"});ctx.restore();
-  const ta=o.tagA==null?1:o.tagA;if(ta>0.01)dq_tag(ctx,x+w-30,y+h-26,"hold",{to:[x+w-56,y+h-52],a:a*ta,k:o.tagK,angle:0.12});}
+  dq_T(ctx,"Joaquin Munoz",x+24,y+106,{w:700,size:36,f:"mono"});ctx.restore();}
 function rf_seven(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const cw=300,ch=104,gx=24,gy=26;
   RF_SEVEN.forEach((nm,i)=>{const ca=o.cardA?o.cardA(i):1;if(ca<=0.01)return;const col=i%4,row=(i/4)|0,cx=x+col*(cw+gx)+(row?(cw+gx)/2:0),cy=y+row*(ch+gy),u=o.turn?o.turn(i):0;
     ctx.save();ctx.globalAlpha*=a*ca;dq_card(ctx,cx,cy,cw,ch,{on:o.on,r:6,edge:"hold"});if(u>0.01){ctx.lineWidth=3;ctx.strokeStyle=rgba(dq_tone("pass").col,u);rr(ctx,cx+1.5,cy+1.5,cw-3,ch-3,6);ctx.stroke();}
@@ -167,10 +169,10 @@ function rf_letter(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retu
 /* ---------------------------------------------------------------- the issue log, as Rules that run draws it, in this module's look */
 function rf_issueLog(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const h=330;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{ruled:58,ruleTop:150});dq_label(ctx,x+DQ_PAD,y+DQ_PAD+26,"Issue log · Data quality");
-  const cols=[["OPENED",0],["ISSUE",210],["OWNER",900],["DUE",1250]];cols.forEach(([s,cx])=>dq_T(ctx,s,x+DQ_PAD+cx,y+DQ_PAD+96,{w:700,size:28,ls:2,col:DQ.soft}));
+  const cols=[["OPENED",0],["ISSUE",200],["OWNER",880],["DUE",1160]];cols.forEach(([s,cx])=>dq_T(ctx,s,x+DQ_PAD+cx,y+DQ_PAD+96,{w:700,size:28,ls:2,col:DQ.soft}));
   const ra=o.row==null?1:o.row;if(ra>0.01){const yy=y+DQ_PAD+170;ctx.save();ctx.globalAlpha*=ra;dq_T(ctx,"14 Oct",x+DQ_PAD,yy,{w:600,size:30,f:"mono"});
-    dq_T(ctx,"Names from the old form, in plain letters",x+DQ_PAD+210,yy,{w:700,size:30});dq_T(ctx,"Registrar's office",x+DQ_PAD+900,yy,{w:600,size:30});
-    dq_T(ctx,"12 Nov",x+DQ_PAD+1250,yy,{w:700,size:30,f:"mono",col:dq_col("brass")});ctx.restore();}
+    dq_T(ctx,"Names from the old form, in plain letters",x+DQ_PAD+200,yy,{w:700,size:30});dq_T(ctx,"Registrar's office",x+DQ_PAD+880,yy,{w:600,size:30});
+    dq_T(ctx,"12 Nov",x+DQ_PAD+1160,yy,{w:700,size:30,f:"mono",col:dq_col("brass")});ctx.restore();}
   ctx.restore();}
 
 /* ---------------------------------------------------------------- the certificate
@@ -199,14 +201,17 @@ function rf_holdOver(ctx,x,y,s,flip,hands,fn){if(!hands)return;const A=AG_FIG.an
 const RF_GRAD={key:"rf_grad",name:"A graduate",skin:[176,124,96],hair:{style:"bob",c:[40,30,26]},top:{kind:"suit",c:[30,29,33],inner:[238,238,240],tie:[60,56,60],hood:[226,220,206]},over:dq_hood,breath:0.3};
 
 /* ---------------------------------------------------------------- the portal's button, on a card of its own (the opening's last moment) */
-function rf_button(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=620,h=190;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));
-  dq_card(ctx,x,y,w,h,{on:o.on});dq_label(ctx,x+DQ_PAD,y+DQ_PAD+26,"Your name, as it will be printed");
+function rf_button(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const L="Your name, as it will be printed",w=Math.max(620,dq_tw(ctx,L.toUpperCase(),{w:800,size:28,ls:4})+2*DQ_PAD+8),h=190;x-=(w-620)/2;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));
+  dq_card(ctx,x,y,w,h,{on:o.on});dq_label(ctx,x+DQ_PAD,y+DQ_PAD+26,L);
   rr(ctx,x+DQ_PAD,y+86,w-2*DQ_PAD,76,14);ctx.fillStyle="rgb(250,248,244)";ctx.fill();ctx.strokeStyle=rgba(DQ.ink,0.7);ctx.lineWidth=2.5;ctx.stroke();
   dq_T(ctx,"This isn't my name",x+w/2,y+136,{w:700,size:32,align:"center"});ctx.restore();}
 // the folder Mei keeps closed under her hand: what was seen at enrolment, never opened on screen; its tab says what it holds
-function rf_closedFolder(c,hands){const [hx,hy]=hands.near,x=hx+40,y=hy-10,w=300,h=200;
-  ag_soft(c,cc=>{cc.moveTo(x-w/2,y);cc.lineTo(x+w/2,y);cc.lineTo(x+w/2,y-h);cc.lineTo(x-w/2,y-h);cc.closePath();},[196,170,126],[226,204,160],x+80,y-h,240,"rgba(80,60,30,0.3)",8);
-  c.fillStyle="rgb(214,190,146)";rr(c,x-w/2+20,y-h-44,236,48,8);c.fill();dq_T(c,"Seen at enrolment",x-w/2+36,y-h-11,{w:700,size:28});}
+function rf_closedFolder(c,hands){const F={w:700,size:28},lab="Seen at enrolment",lw=dq_tw(c,lab,F)+44,[hx,hy]=hands.near,x=hx+56,y=hy+26,w=Math.max(310,lw+56),h=210;
+  // the back cover's edge and its tab, then the front cover over them, then the label stuck on the front
+  ag_soft(c,cc=>{cc.moveTo(x-w/2+4,y-h+6);cc.lineTo(x-w/2+4,y-h-18);cc.lineTo(x-w/2+96,y-h-18);cc.lineTo(x-w/2+112,y-h+6);cc.closePath();},[62,74,92],[86,100,120],x-60,y-h-18,120,"rgba(10,14,20,0.3)",6);
+  ag_soft(c,cc=>{cc.moveTo(x-w/2,y);cc.lineTo(x+w/2,y);cc.lineTo(x+w/2,y-h);cc.lineTo(x-w/2,y-h);cc.closePath();},[70,84,104],[100,116,138],x+80,y-h,260,"rgba(10,14,20,0.35)",8);
+  c.fillStyle="rgb(244,240,230)";rr(c,x-lw/2,y-h+40,lw,62,6);c.fill();c.strokeStyle="rgba(60,50,40,0.3)";c.lineWidth=1.2;c.stroke();
+  dq_T(c,lab,x-lw/2+22,y-h+81,F);}
 // dbt's stored failures: the names the check holds, kept in a table the registrar's office reads
 function rf_kept(ctx,x,y,w,o){o=o||{};const h=300;return dq_window(ctx,x,y,w,h,{logo:"dbt",product:"dbt",title:"Kept for the registrar's office",a:o.a,k:o.k,on:o.on,draw:(c,b)=>{
     const n=o.n==null?83:o.n;dq_T(c,String(Math.round(n)),b.x+170,b.y+130,{w:800,size:112,col:dq_col("steel"),align:"right"});

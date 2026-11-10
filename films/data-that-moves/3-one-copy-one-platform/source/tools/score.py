@@ -293,8 +293,8 @@ approve(tAp, 0.009, px(1250)); strike(C4, tAp, 0.45, px(1250))
 tSv = cw('engines', 'serves the app', 0.0)
 air(tSv - 0.2, 0.9, 0.006, px(704), 180, 900)
 knock(cw('engines', 'the lakehouse', -0.15), 0.011, px(1240), 260)
-air(cw('engines', 'in place', -0.2), 0.8, 0.006, px(1240), 180, 900)
-mark(tSv, cw('engines', 'the lakehouse', 0.0), cw('engines', 'in place', 0.4), C4, Eb4, Ab2, 0.9, px(704), px(1240))
+air(cw('engines', 'reads them', -0.2), 0.8, 0.006, px(1240), 180, 900)
+mark(tSv, cw('engines', 'the lakehouse', 0.0), cw('engines', 'reads them', 0.4), C4, Eb4, Ab2, 0.9, px(704), px(1240))
 tap(cw('engines', 'without slowing', 0.05), 0.008, px(820))
 # the readers, one after another, then Unity Catalog on each of their lanes
 tL = cw('readers', "Payroll's list", -0.2)
@@ -354,7 +354,7 @@ knock(hw('docs', 'official docs', -0.15), 0.012, px(960), 250)
 
 # 6. The same row: back in Amsterdam's ledger, the line moves from page to page again (the mark, apart) and the same ledger shows what
 #    everyone held (together); at the university, Linh's claim is one row: four tags, one for each who uses it, and the row lit for all
-#    of them (A flat and C together); not one claim copied; the end card: the mark, as on the title card
+#    of them (A flat and C together); no copy for a team to keep; the end card: the mark, as on the title card
 rw = lambda lid, word, off=0: W('row', lid, word, off)
 tM2 = rw('amsterdam', 'a line moved')
 quill(tM2 - 0.2, 0.6, 0.005, px(590))
@@ -366,6 +366,6 @@ for word, x in (('she writes it', 640), ('her coordinator approves', 1140), ('pa
     tap(rw('onerow', word, -0.05), 0.008, px(x))
 approve(rw('onerow', 'her coordinator approves', 0.3), 0.007, px(1120))
 strike((Ab3, C4), rw('onerow', 'Finance counts', 0.4), 0.5, px(1120), ring=1.4)
-tap(rw('paid', 'not one claim', 0.05), 0.008, px(1240))
+tap(rw('paid', 'no team', 0.05), 0.008, px(1240))
 tEnd = G('row', 'takeaway', -0.8)
 mark(tEnd + 0.3, tEnd + 0.85, tEnd + 1.4, C4, Eb4, Ab2, 0.9)

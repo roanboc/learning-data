@@ -456,11 +456,11 @@ const NARR={
  {"id":"noor","gap":0.8,"text":"Noor, the data architect, chose one copy on one platform instead."},
  {"id":"lakebase","gap":0.8,"text":"The claims app is built on Lakebase, the Postgres database in Databricks."},
  {"id":"once","gap":0.8,"text":"Linh writes each claim once, as a row, and her coordinator approves it in that same row."},
- {"id":"engines","gap":0.8,"text":"Postgres serves the app, and the lakehouse reads the same rows for analysis, in place, without slowing it."},
+ {"id":"engines","gap":0.8,"text":"Postgres serves the app. The platform keeps the same rows in a second form for analysis, so the lakehouse reads them without slowing it."},
  {"id":"readers","gap":0.8,"text":"Payroll's list of claims still waiting and the job that builds the hours to pay both read that copy."},
  {"id":"finance","gap":0.8,"text":"So does Finance's casual teaching cost, and all three read through Unity Catalog."},
  {"id":"writer","gap":0.8,"text":"Each table has one writer. The app writes the claims."},
- {"id":"contracts","gap":0.8,"text":"The lakehouse writes the contracts from the HR system, and serves them to the app, which checks each claim against its contract."},
+ {"id":"contracts","gap":0.8,"text":"The lakehouse writes the contracts from the HR system, and a copy goes to the app, which checks each claim against its contract."},
  {"id":"written","gap":0.8,"text":"As in Amsterdam's ledger, a claim is written once, and read where it's written."}]},
 "fewer":{"name":"Fewer platforms","lead":1.2,"tail":1.0,"vo":[
  {"id":"gone","gap":0.8,"text":"What's gone: the pipeline, the second database, and the work of keeping two copies in step."},
@@ -481,11 +481,11 @@ const NARR={
 "row":{"name":"The same row","lead":1.2,"tail":1.0,"vo":[
  {"id":"amsterdam","gap":0.8,"text":"In Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held."},
  {"id":"onerow","gap":0.8,"text":"At the university, Linh's claim is one row: she writes it, her coordinator approves it, payroll pays it and Finance counts it."},
- {"id":"paid","gap":0.8,"text":"Today, 856 casual staff are paid from rows like hers, and not one claim was copied to get there.","say":"Today, eight hundred and fifty-six casual staff are paid from rows like hers, and not one claim was copied to get there."},
+ {"id":"paid","gap":0.8,"text":"Today, 856 casual staff are paid from rows like hers, and no team had to copy a claim to get there.","say":"Today, eight hundred and fifty-six casual staff are paid from rows like hers, and no team had to copy a claim to get there."},
  {"id":"takeaway","gap":0.8,"text":"Keep one copy, governed once."}]}
 };
 
-const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 3.841, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.889, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 6.25, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.443, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 3.185, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.461, "row/takeaway": 1.941};
+const VODUR={"ledger/amst": 2.044, "ledger/quays": 4.141, "ledger/kinds": 7.355, "ledger/weigh": 4.794, "ledger/owed": 8.777, "ledger/change": 3.841, "ledger/bank": 6.85, "ledger/deposit": 6.825, "ledger/line": 7.764, "ledger/trust": 5.025, "ledger/century": 3.329, "ledger/data": 7.1, "ledger/claims": 7.46, "ledger/now": 4.558, "usual/payday": 4.776, "usual/linh": 5.889, "usual/sheets": 4.064, "usual/tally": 4.793, "usual/ready": 4.345, "usual/design": 6.961, "usual/cost": 6.137, "copy/noor": 4.256, "copy/lakebase": 4.401, "copy/once": 5.225, "copy/engines": 8.134, "copy/readers": 5.932, "copy/finance": 5.071, "copy/writer": 3.127, "copy/contracts": 7.598, "copy/written": 4.45, "fewer/gone": 5.247, "fewer/together": 5.033, "fewer/catalog": 7.792, "fewer/moves": 6.131, "fewer/tuesday": 6.281, "fewer/purpose": 3.57, "fewer/night": 3.662, "choose/so": 1.237, "choose/keep": 5.322, "choose/decide": 3.494, "choose/bought": 7.836, "choose/both": 6.082, "choose/wheel": 3.185, "choose/docs": 4.598, "row/amsterdam": 6.529, "row/onerow": 7.846, "row/paid": 7.687, "row/takeaway": 1.941};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2125,7 +2125,7 @@ function oc_bill(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
    What only this film draws of the university, in the module's look (look.js, cards.js, map.js, tools.js), each name with the prefix oc_:
    the old way of claiming (a spreadsheet by email, typed again), the usual design (the app on its own database, a pipeline copying each
    change to an analytics platform, reports on the copy), and the design Noor chose: the claims app on Lakebase, the Postgres database in
-   Databricks, one copy of its rows in the lake's open storage, Postgres serving the app and the lakehouse reading the same rows for
+   Databricks, one copy of its rows in the lake's open storage, kept by the platform in two forms, Postgres serving the app and the lakehouse reading the same rows for
    analysis, the readers that read that copy through Unity Catalog, the contracts the lakehouse writes and serves to the app, and the one
    thing that still leaves the platform: the hours to pay, for the payroll system the university buys. Everything is in the map's
    coordinates (1920 x 1080), with words of 28 px or more. A person's pay is never on screen: the claims show hours, never amounts. */
@@ -2198,7 +2198,7 @@ function oc_usual(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;co
    data is born; inside it, Lakebase (Postgres) and the lakehouse over one copy of the rows, its two tables (the claims, the contracts),
    the three readers of the claims, and Unity Catalog along its foot; outside on the right, the payroll system the university buys.
    oc_one(ctx, t, o) draws them; o.parts (each 0 to 1, coming in): app, plat, lakebase, lakehouse, copy, write (the app's lane to its
-   rows), read (the lakehouse reading in place), readers, uc (Unity Catalog lit on the readers' lanes), hr, contracts (the lakehouse
+   rows), read (the lakehouse reading the rows' second form, for analysis), readers, uc (Unity Catalog lit on the readers' lanes), hr, contracts (the lakehouse
    writing them), serve (served to the app), check (each claim checked against its contract), payroll, tuesday (the hours to pay leaving
    by noon on Tuesday); o.lit: what glows ("claims", "contracts", "lakebase", "lakehouse", "uc", "tuesday", "once"); o.dim (0 to 1) all
    but the hours' lane fade; o.writer (0 to 1 each: claims, contracts) each table's writer named; o.ucText; o.a */
@@ -2219,7 +2219,7 @@ function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null
   // one copy: the rows in the lake's open storage, two tables, each with one writer
   if(pa("copy")>0){const [x,y,w,h]=O.copy;withA(ctx,pa("copy")*dm,()=>{if(lit("once")>0)glow(ctx,x+w/2,y+h/2,w*0.7,MD.agreed,0.22*lit("once"));
       md_card(ctx,x,y,w,h,{edge:lit("once")>0?mix(MD.flow,MD.agreed,lit("once")):MD.flow,glow:0.7+0.7*lit("once"),r:18,fill:"rgba(8,14,30,0.9)"});
-      md_icon(ctx,"store",x+36,y+40,34,MD.flow);md_label(ctx,x+66,y+50,"One copy",{col:MD.ink});
+      md_icon(ctx,"store",x+36,y+40,34,MD.flow);md_label(ctx,x+66,y+50,"One copy, kept in two forms",{col:MD.ink});
       const [cx,cy,cw]=O.claims,[kx,ky,kw]=O.contracts;
       out.claims=md_table(ctx,cx,cy,cw,{name:"claims",kind:wr.claims>0?"the app writes it":"rows",lit:lit("claims")});
       if(pa("contracts")>0||wr.contracts>0)withA(ctx,Math.max(pa("contracts"),pa("hr")),()=>{out.contracts=md_table(ctx,kx,ky,kw,{name:"contracts",kind:wr.contracts>0?"the lakehouse writes it":"rows",lit:lit("contracts")});});});}
@@ -2227,7 +2227,7 @@ function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null
   // the app writes its claims through Postgres: a request out, an answer back; and its rows go down into the copy
   if(pa("write")>0){const [ax,ay,aw]=O.app,[lx,ly,lw]=O.lakebase;withA(ctx,dm,()=>{md_way(ctx,"api",[ax+aw,ay+55],[lx,ly+55],t,{u:pa("write")});
       const pts=md_path([[lx+340,ly+110],[lx+340,O.claims[1]]]);md_lane(ctx,pts,MD.flow,0.85,{u:pa("write")});if(pa("write")>=1)md_flow(ctx,pts,t,{every:1.4,dur:0.9});});}
-  // the lakehouse reads the same rows, in place: a dashed lane, a question down and the answer back, nothing kept
+  // the lakehouse reads the same rows, in the second form the platform keeps for analysis: a dashed lane, a question down and the answer back
   if(pa("read")>0){const [lx,ly,lw]=O.lakehouse;withA(ctx,dm,()=>md_way(ctx,"query",[lx+80,ly+110],[C[0]+C[2]-60,C[1]],t,{u:pa("read"),pts:md_path([[lx+80,ly+110],[lx+80,ly+140],[C[0]+C[2]-60,ly+140],[C[0]+C[2]-60,C[1]]])}));}
   // the readers, each reading that copy through Unity Catalog
   if(pa("readers")>0){O.readers.forEach(([x,y,title,sub,icon],i)=>{const k=clamp(pa("readers")*1.6-i*0.3,0,1);if(k<=0)return;const fin=title==="Finance";
@@ -2449,9 +2449,9 @@ scene("usual",(ctx,S,t,sc)=>{
 scene("copy",(ctx,S,t,sc)=>{
   const T=oc_once(sc,"T",()=>({tNoor:sc.cues.noor,tChose:wAt(sc,"noor","chose one copy"),tLb:sc.cues.lakebase,tLbW:wAt(sc,"lakebase","Lakebase"),tPg:wAt(sc,"lakebase","Postgres database"),
     tOnce:sc.cues.once,tRow:wAt(sc,"once","as a row"),tAppr:wAt(sc,"once","approves"),tSame:wAt(sc,"once","that same row"),
-    tEng:sc.cues.engines,tServes:wAt(sc,"engines","serves the app"),tLh:wAt(sc,"engines","the lakehouse"),tPlace:wAt(sc,"engines","in place"),tSlow:wAt(sc,"engines","without slowing"),
+    tEng:sc.cues.engines,tServes:wAt(sc,"engines","serves the app"),tLh:wAt(sc,"engines","the lakehouse"),tPlace:wAt(sc,"engines","reads them"),tSlow:wAt(sc,"engines","without slowing"),
     tReaders:sc.cues.readers,tList:wAt(sc,"readers","Payroll's list"),tJob:wAt(sc,"readers","the job"),tCost:wAt(sc,"finance","casual teaching cost"),tUC:wAt(sc,"finance","Unity Catalog"),
-    tWr:sc.cues.writer,tWrApp:wAt(sc,"writer","The app writes"),tCon:sc.cues.contracts,tHRw:wAt(sc,"contracts","HR system"),tServe:wAt(sc,"contracts","serves them"),tCheck:wAt(sc,"contracts","checks each claim"),
+    tWr:sc.cues.writer,tWrApp:wAt(sc,"writer","The app writes"),tCon:sc.cues.contracts,tHRw:wAt(sc,"contracts","HR system"),tServe:wAt(sc,"contracts","a copy goes"),tCheck:wAt(sc,"contracts","checks each claim"),
     tWritten:sc.cues.written,tWO:wAt(sc,"written","written once"),tWhere:wAt(sc,"written","read where")}));
   ag_shots(ctx,S,t,sc.dur,[
     // Noor, the data architect, chose one copy on one platform
@@ -2471,7 +2471,7 @@ scene("copy",(ctx,S,t,sc)=>{
       oc_scr(c,S,()=>{oc_kick(c,S,"3","One copy",ag_in(tt,T.tLb,0.6));
         if(win>0){if(tt<T.tEng)withA(c,win,()=>md_person(c,"linh",250,660,0.9,{t:tt,gaze:[4,0]}));
           oc_claimsWin(c,500,250,{a:win,k:(tt-T.tOnce+0.3)/0.5,write:clamp((tt-T.tOnce-0.4)/(T.tRow-T.tOnce+0.4),0,1),ok:ag_in(tt,T.tAppr+0.3,0.3),lit:1});}
-        oc_tagAt(c,820,804,"read in place: the app isn't slowed",tt,T.tSlow,T.tReaders-0.3,{col:MD.pass,icon:"tick",align:"center"});
+        oc_tagAt(c,820,804,"a second form for analysis: the app isn't slowed",tt,T.tSlow,T.tReaders-0.3,{col:MD.pass,icon:"tick",align:"center"});
         oc_tagAt(c,960,96,"written once, read where it's written",tt,T.tWO,null,{col:MD.agreed,icon:"doc",align:"center"});});}}
   ],0.6);
 });
@@ -2535,7 +2535,7 @@ scene("choose",(ctx,S,t,sc)=>{
 scene("row",(ctx,S,t,sc)=>{
   const T=oc_once(sc,"T",()=>({tMoved:wAt(sc,"amsterdam","a line moved"),tShowed:wAt(sc,"amsterdam","the same ledger"),
     tOneRow:sc.cues.onerow,tOneR:wAt(sc,"onerow","one row"),tShe:wAt(sc,"onerow","she writes it"),tCoord:wAt(sc,"onerow","her coordinator approves"),tPay:wAt(sc,"onerow","payroll pays"),tFin:wAt(sc,"onerow","Finance counts"),
-    tPaid:sc.cues.paid,t856:wAt(sc,"paid","eight hundred"),tRows:wAt(sc,"paid","rows like hers"),tNot:wAt(sc,"paid","not one claim"),tTake:sc.cues.takeaway,tBreath:sc.cues.breath}));
+    tPaid:sc.cues.paid,t856:wAt(sc,"paid","eight hundred"),tRows:wAt(sc,"paid","rows like hers"),tNot:wAt(sc,"paid","no team"),tTake:sc.cues.takeaway,tBreath:sc.cues.breath}));
   ag_shots(ctx,S,t,sc.dur,[
     // in Amsterdam, a payment became a line moved in one ledger, and the same ledger showed what everyone held
     {at:0,place:"ocHall",keys:[[0,1190,720,1.72]],push:0.03,draw:(c,tt)=>{const mv=clamp((tt-T.tMoved)/1.6,0,1),lit=ag_in(tt,T.tShowed,0.5);
@@ -2549,7 +2549,7 @@ scene("row",(ctx,S,t,sc)=>{
         [["she writes it",T.tShe,MD.ink,"person"],["her coordinator approves it",T.tCoord,MD.wait,"tick"],["payroll pays it",T.tPay,MD.pass,"tick"],["Finance counts it",T.tFin,MD.dom.finance,"contract"]]
           .forEach(([s,t0,col,icon],i)=>oc_tagAt(c,i%2?1140:640,i<2?250:520,s,tt,t0-0.1,null,{col,icon}));
         const na=ag_in(tt,T.t856-0.2,0.5);if(na>0){md_T(c,"856",900,720,{w:800,size:84,align:"right",col:MD.agreed,a:na});md_T(c,"casual staff paid from rows like hers",930,700,{w:700,size:32,a:na});}
-        oc_pillAt(c,1240,800,"not one claim copied",tt,T.tNot,null,{col:MD.pass,icon:"tick"});}));}}
+        oc_pillAt(c,1240,800,"no copy for a team to keep",tt,T.tNot,null,{col:MD.pass,icon:"tick"});}));}}
   ],0.6);
   md_end(ctx,S,t,T.tTake-0.8,"One copy, one platform","Keep one copy, governed once.","Film 3 of 3","Data that moves");
 });

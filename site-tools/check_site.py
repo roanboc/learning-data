@@ -29,6 +29,9 @@ What it checks, page by page (every .html under site/):
   to 300, in English and Spanish: on a laptop, one line, three lines and four lines at most, as on Day one.
 - release status: no film's voice, captions, page text or Pause and think says a feature is in preview, in beta or generally
   available, in English or Spanish; it changes, and the film would have to change with it (tools/check.py looks on screen).
+- no zero copy where the platform keeps one: a film that names Lakebase, LTAP, synced tables or a change data feed never says, in
+  its voice, captions, page or Pause and think, that nothing is copied ("zero copy", "in place", "not one claim was copied"):
+  the platform keeps the rows in a second form, or a managed copy; only a query sent to the source stores none.
 - Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
   longer than the longest wrong one, and clearly the longest in at most half a pack's questions), right answers spread across the options,
   and each Spanish pack's right answers and near misses in the English places.
@@ -204,6 +207,14 @@ BEATS_BEFORE = {"analytics-engineering": range(1, 11), "enterprise-architecture"
 STATUS = re.compile(r"\b(?:public |private )?preview\b|\bbeta\b|\bgenerally available\b|\bgeneral availability\b|\bversi[oó]n preliminar\b|"
                     r"\bvista previa\b|\bdisponib\w+ (?:de forma |en forma )?general\b|\bdisponibilidad general\b", re.I)
 STATUS_GA = re.compile(r"\bGA\b")
+
+
+# the platform's own copies (the author, 10 November 2026, on One copy, one platform): LTAP keeps "one logical copy", Postgres pages
+# for the app and Parquet in the lake for analysis; Lakebase's change data feed writes a managed Delta table; synced tables are "a
+# managed copy". A film about them says what copies and who keeps it, never that nothing is copied.
+COPY_KEPT = re.compile(r"\bLakebase\b|\bLTAP\b|\bsynced tables?\b|\bchange data feed\b|\btablas sincronizadas\b", re.I)
+NO_COPY = re.compile(r"\bzero[- ]cop(?:y|ies)\b|\bin place\b|\bnot (?:one|a single) \w+ (?:was |is |is ever )?copied\b|\bnothing (?:is |was )?copied\b|"
+                     r"\bno cop(?:y|ies)\b(?! (?:for|of) )|\bcero copias\b|\ben su sitio\b|\bsin copiar\b|\bsin copias?\b", re.I)
 
 
 def release_status(text):
@@ -1069,6 +1080,36 @@ def main():
         s["notes"].append("say what the feature does, and keep its release status, with its date, in the script's sources: it changes, "
                           "and the film would have to change with it")
     s["notes"].append(f"{len(st_voices)} films' voices, {len(st_caps)} caption files, {len(st_pages)} films' page text and {len(st_packs)} Pause and think packs")
+    s = rep.check("No zero copy where the platform keeps one: a film about Lakebase, LTAP, synced tables or a change data feed never says nothing is copied")
+    nc_films = 0
+    for f in st_pages:
+        film = f.parent
+        voice = film / "source" / "src" / "narration.js"
+        if not voice.exists():
+            continue
+        page = json.loads(f.read_text(encoding="utf-8"))
+        if not COPY_KEPT.search(voice.read_text(encoding="utf-8") + " " + " ".join(t for _, t in json_strings(page))):
+            continue
+        nc_films += 1
+        texts = [(f"{voice.relative_to(ROOT)}", m.group(1)) for m in re.finditer(r'"(?:text|say)"\s*:\s*"((?:[^"\\]|\\.)*)"', voice.read_text(encoding="utf-8"))]
+        texts += [(f"{c.relative_to(ROOT)}:{i}", line) for c in sorted((film / "captions").glob("*.vtt")) for i, line in enumerate(c.read_text(encoding="utf-8", errors="replace").splitlines(), 1)]
+        texts += [(f"{f.relative_to(ROOT)} {where}", t) for where, t in json_strings(page)]
+        key = None
+        fj = film / "source" / "film.json"
+        if fj.exists():
+            key = json.loads(fj.read_text(encoding="utf-8")).get("key")
+        for pk in sorted(WEB.glob(f"assets/{key}/think.*.js")) if key else []:
+            src = pk.read_text(encoding="utf-8")
+            for a, b in reversed(js_comment_spans(src)):
+                src = src[:a] + re.sub(r"[^\n]", " ", src[a:b]) + src[b:]
+            texts += [(f"{pk.relative_to(ROOT)}:{i}", line) for i, line in enumerate(src.splitlines(), 1)]
+        for where, t in texts:
+            for m in NO_COPY.finditer(plain_words(t)):
+                s["fails"].append(f"{where}: \"{m.group(0)}\" in \"{plain_words(t)[max(0, m.start() - 50):m.end() + 30].strip()}\"")
+    if s["fails"]:
+        s["notes"].append("say what copies and who keeps it: the platform keeps the rows in a second form, or a managed copy, with no pipeline "
+                          "a team runs; only a query sent to the source, as Lakehouse Federation does, stores no copy")
+    s["notes"].append(f"{nc_films} films that name Lakebase, LTAP, synced tables or a change data feed")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     for en_path in sorted(WEB.glob("assets/*/think.en.js")):

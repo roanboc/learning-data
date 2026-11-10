@@ -1,0 +1,43 @@
+exposures:
+
+  - name: seating_plan
+    label: Seating the Great Hall
+    type: analysis
+    maturity: high
+    description: >
+      The graduations office's plan for each ceremony in the Great Hall: how many graduates cross
+      the stage, and so how many seats, gowns and guests' tickets, and how long the ceremony runs.
+      Made a week before each round of ceremonies.
+    owner:
+      name: "Malia Fonoti, graduations office"
+      email: malia.fonoti@uni.example
+    depends_on:
+      - ref('mart_graduations__graduation_list')
+
+  - name: certificates
+    label: Degree certificates
+    type: application
+    maturity: high
+    description: >
+      The file the certificate printer prints every degree certificate from: each certificate's
+      name, award and conferral date. The graduations office sends it at 5 pm on the Thursday
+      about four weeks before a round's first ceremony; a change after that is a certificate
+      printed again.
+    owner:
+      name: "Malia Fonoti, graduations office"
+      email: malia.fonoti@uni.example
+    depends_on:
+      - ref('mart_graduations__graduation_list')
+
+  - name: ceremony_programme
+    label: The printed programme
+    type: application
+    maturity: high
+    description: >
+      The programme each guest is given at a ceremony: every graduate who crosses the stage, by
+      award, in the order they're presented. Printed with the certificates.
+    owner:
+      name: "Malia Fonoti, graduations office"
+      email: malia.fonoti@uni.example
+    depends_on:
+      - ref('mart_graduations__graduation_list')

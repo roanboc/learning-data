@@ -9,8 +9,8 @@
 #    chiff or a reed's buzz.
 #  - Three Wagner tubas (wtuba()), played softly, with no vibrato, each its own player on its own note, at its own desk's place in
 #    the stereo field: each person's own agent, with its own copy. In the opening each holds its own note as its agent answers, never
-#    with the others: 2,160 low (D flat 2), 2,911 high (A flat 3), 2,880 between (G flat 2). On "nobody can tell which" the three
-#    notes sound together once, unresolved, and stop. When all three answer 2,880 a week later, they play the same note, G flat, in
+#    with the others: 141 low (D flat 2), 177 high (A flat 3), 168 between (G flat 2). On "nobody can tell which" the three
+#    notes sound together once, unresolved, and stop. When all three answer 168 a week later, they play the same note, G flat, in
 #    octaves, over the organ's G flat major: the only time they agree. One tuba comes back alone, on G flat, as Anil's agent connects
 #    to the platform's tool servers.
 #  - The film's mark (mark()): three chords from the same wheels, G flat major, E flat minor and C flat major, which share one note,
@@ -60,8 +60,8 @@ GB_M = (42, 49, 54, 58)    # G flat major: G flat 2, D flat 3, G flat 3, B flat 
 EBM_M = (39, 51, 54, 58)   # E flat minor: E flat 2, E flat 3, G flat 3, B flat 3 (10:20:24:30)
 CB_M = (35, 51, 54, 59)    # C flat major: C flat 2, E flat 3, G flat 3, C flat 4 (4:10:12:16)
 # the tubas' notes, desk by desk (Anil's, the second, the third), and where each sits
-T_ANS, T_PAN = (37, 56, 42), (-0.35, 0.05, 0.45)   # 2,160, 2,911 and 2,880
-T_AGREE = (54, 66, 42)                               # 2,880 a week later: G flat 3, G flat 4 and G flat 2
+T_ANS, T_PAN = (37, 56, 42), (-0.35, 0.05, 0.45)   # 141, 177 and 168
+T_AGREE = (54, 66, 42)                               # 168 a week later: G flat 3, G flat 4 and G flat 2
 
 # ---- the levels: OL an organ key, TL a tuba, FX the effects. tools/quiet.py measures them against the governance films' sound
 OL, TL, FX = 0.016, 0.045, 1.5
@@ -169,22 +169,22 @@ def air(s, sec=0.8, g=0.010, pan=0.0, lo=150, hi=900):
     s_air(s, sec, g * FX, pan, lo, hi)
 
 # =============================================================================================================================
-# 1. Three answers: the opening, with music. Monday at the Faculty of Health: the organ swells in on E flat minor; on census day two
+# 1. Three answers: the opening, with music. Monday at the Faculty of Health: the organ swells in on E flat minor; on what active means two
 #    voices rise a half step (C flat major, over E flat), and the question is B flat minor. Each agent's answer is its own tuba, alone;
-#    on "nobody can tell which" the three sound together, and stop. The plan short of 720 places: a low E flat minor, and at the copy
+#    on "nobody can tell which" the three sound together, and stop. The plan short of 27 projects: a low E flat minor, and at the copy
 #    with every name, its G flat falls to F; then nothing, for "Something had to change". Sam and Jun: D flat major, and the mark as
 #    the agents are brought to the data, home to G flat major as their cables reach the platform. A week later: the three tubas on
 #    G flat, in octaves, over the organ's G flat major. When every agent reads the same data: D flat major, G flat major on "the
 #    answers agree", opening upward as the title comes in
 tw = lambda lid, word, off=0: W('three', lid, word, off)
 tc = lambda lid, off=0: G('three', lid, off)
-tCen, tAsk = tw('census', 'census day', -0.1), tw('asks', 'He asks', -0.2)
+tCen, tAsk = tw('active', 'those that', -0.1), tw('asks', 'He asks', -0.2)
 play([(0.5, (39, 46, 54, 58)), (tCen, (39, 47, 54, 59)), (tAsk, (41, 49, 53, 58))], tw('asks', 'own copy', 0.9), att=1.6, rel=1.4)
 paper(tw('anil', 'Anil', -0.05), 0.010, px(650))                    # Anil's name
 knock(tw('anil', "next year's", -0.05), 0.013, px(1590), 260)       # the card of next year's places
-for i, w_ in enumerate(('classes', 'labs', 'hospitals')):
+for i, w_ in enumerate(('lab space', 'equipment', 'research support')):
     flick(tw('anil', w_, -0.05), 0.006 - 0.001 * i, px(1440))       # its lines
-tap(tCen + 0.02, 0.010, px(1590))                                   # census day
+tap(tCen + 0.02, 0.010, px(1590))                                   # started, not yet ended
 paper(tAsk + 0.02, 0.012, px(960))                                  # the question
 for i, (s_, x_) in enumerate(((tw('asks', 'his agent'), 450), (tw('asks', 'two colleagues', 0.3), 1000), (tw('asks', 'theirs'), 1600))):
     tap(s_ + 0.05, 0.009 - 0.001 * i, px(x_))                       # each agent wakes
@@ -192,26 +192,26 @@ for i, x_ in enumerate((540, 1140, 1720)):
     plug(tw('asks', 'Each set up', 1.3 + 0.3 * i), 0.009, px(x_))   # each one's cable reaches its own copy
 flick(tw('asks', 'Each set up', 0.82), 0.006, px(400))              # "their own agent"
 flick(tw('asks', 'own copy', 0.02), 0.006, px(1150))                # "their own copy"
-# Anil's spreadsheet: student load; two half-time students become one; 2,160, on the first tuba
-paper(tw('load', 'spreadsheet', -0.28), 0.013, px(1300))
-tap(tw('load', 'funding bid', 0.42), 0.008, px(1200))
-tuck(tw('fte', 'as one', 0.6), 0.008, px(1250))
-t1 = tw('fte', 'takes it for people')
+# Anil's spreadsheet: the yearly research report; a shared project splits in half; 141, on the first tuba
+paper(tw('report', 'spreadsheet', -0.28), 0.013, px(1300))
+tap(tw('report', 'research report', 0.42), 0.008, px(1200))
+tuck(tw('half', 'as half', 0.6), 0.008, px(1250))
+t1 = tw('half', 'reads it as a count')
 wtuba(T_ANS[0], t1 + 0.1, tw('table', 'The second', -1.1), 0.9, pan=T_PAN[0])
 knock(t1 + 0.62, 0.012, px(1440), 240)
-# the second desk: the copy of the student table, every degree with Health in its name, the joint degree; 2,911, the second tuba
+# the second desk: the copy of the projects table, every unit with Health in its name, the Bridge Health Lab; 177, the second tuba
 paper(tw('table', 'The second', 0.42), 0.013, px(1450))
 for i in range(3):
     tap(tw('table', 'with Health', 0.03 + 0.45 * i), 0.008 - 0.001 * i, px(1300))
-tap(tw('joint', 'Health data', 0.05), 0.009, px(1300))
-t2 = tw('joint', 'two thousand', -0.9)
+tap(tw('bridge', 'Bridge Health', 0.05), 0.009, px(1300))
+t2 = tw('bridge', 'one hundred', -0.9)
 wtuba(T_ANS[1], t2 + 0.1, tw('folder', 'The third', -0.95), 0.75, pan=T_PAN[1])
 knock(t2 + 0.62, 0.012, px(1450), 240)
-# the third desk: the folder of reports, its pages; 2,880, the third tuba
+# the third desk: the folder of reports, its pages; 168, the third tuba
 paper(tw('folder', 'folder of reports', -0.28), 0.013, px(444))
 for i in (0, 2, 4):
     flick(tw('folder', 'folder of reports', 0.05 + 0.187 * i), 0.006 - 0.0008 * i, px(150 + 118 * i))
-t3 = tw('folder', 'two thousand', -0.9)
+t3 = tw('folder', 'one hundred', -0.9)
 wtuba(T_ANS[2], t3 + 0.1, tw('which', 'One is right', -0.55), 0.9, pan=T_PAN[2])
 knock(t3 + 0.62, 0.012, px(1630), 240)
 # nobody can tell which: the three together, once, unresolved, and they stop
@@ -220,11 +220,11 @@ for i in range(3):
     wtuba(T_ANS[i], tN + 0.05 * i, END('three', 'which') - 0.3, 0.65, att=0.35, rel=0.5, pan=T_PAN[i])
 # planned for the lowest: the plan, its gap; a low E flat minor, whose G flat falls to F at the copy with every name; then nothing
 knock(tw('short', 'Plan for', 0.05), 0.012, px(1440), 260)
-knock(tw('short', 'seven hundred', -0.05), 0.010, px(1440), 150)
-play([(tw('short', 'Plan for', 0.1), (39, 46, 54)), (tw('names', 'And a copy', -0.1), (39, 46, 53))], tw('names', 'every name', 2.3),
+knock(tw('short', 'twenty-seven', -0.05), 0.010, px(1440), 150)
+play([(tw('short', 'Plan for', 0.1), (39, 46, 54)), (tw('names', 'And a copy', -0.1), (39, 46, 53))], tw('names', "every researcher's", 2.3),
      att=1.0, rel=0.9)
 paper(tw('names', 'And a copy', 0.22), 0.008, px(1450), 0.6)
-tap(tw('names', 'every name', 0.02), 0.010, px(1450))
+tap(tw('names', "every researcher's", 0.02), 0.010, px(1450))
 # Sam and Jun bring the agents to the data: their cards; D flat major; the agents roll in, and the mark; G flat major as their
 # cables reach the platform's tools, and the locks: each reads only what its person may read
 paper(tw('bring', 'So Sam', 0.32), 0.010, px(1340))
@@ -246,10 +246,10 @@ for i in range(3):
 for j in range(3):          # the evidence under each: its query, its table, its definition
     for i in range(3):
         tap(tw('week', 'its query', -0.2 + 0.12 * j + 0.693 * i), 0.007 if j == 0 else 0.0035, px((400, 1000, 1600)[j] - 130 + 130 * i))
-# Anil checks it in a minute: the tick; the plan reaches every student. The copies fade, and are deleted
+# Anil checks it in a minute: the tick; the plan reaches every project. The copies fade, and are deleted
 stamp(tw('minute', 'Anil checks', 0.82), 0.012, px(1600))
-paper(tw('minute', 'plans a place', -0.28), 0.010, px(1440))
-stamp(tw('minute', 'plans a place', 0.35), 0.009, px(1440))
+paper(tw('minute', 'plans space', -0.28), 0.010, px(1440))
+stamp(tw('minute', 'plans space', 0.35), 0.009, px(1440))
 tD = tw('minute', 'The copies')
 air(tD + 0.3, 1.1, 0.012, px(1150), 140, 700)
 for i, x_ in enumerate((540, 1150, 1745)):
@@ -294,9 +294,9 @@ knock(aw('genie', 'business questions', 0.45), 0.012, px(630), 260)
 tap(aw('genie', 'where its words', -0.05), 0.009, px(560))
 flick(aw('genie', 'where its words', 0.95), 0.007, px(1450))
 air(aw('care', 'For questions', 0.25), 0.7, 0.009, px(1100), 180, 900)
-for s_ in (aw('census', 'governed table', -0.4), aw('instr', 'Its instructions', -0.2), aw('bench', 'Its tests', -0.2)):
+for s_ in (aw('projects', 'governed table', -0.4), aw('instr', 'Its instructions', -0.2), aw('bench', 'Its tests', -0.2)):
     tap(s_ + 0.05, 0.006, px(400))                                  # each part lit in turn
-paper(aw('census', 'governed table', -0.25), 0.010, px(1100))
+paper(aw('projects', 'governed table', -0.25), 0.010, px(1100))
 paper(aw('instr', 'Its instructions', -0.05), 0.010, px(1100))
 for i in range(3):
     paper(aw('bench', 'Its tests', -0.05 + 0.733 * i), 0.009 - 0.001 * i, px(1100), 0.3)
@@ -310,7 +310,7 @@ tap(aw('sql', 'shows its', 0.15), 0.008, px(700))
 
 # 4. Tools any agent can use: G flat major as the second way lights. The tool servers slide in, the agent's hand to them, the panel
 #    the platform runs them in, each named; Anil's agent signs in as Anil, and its tuba, G flat; it touches each tool in turn; the
-#    census count written once, reviewed and approved; the agents call it, and each gets 2,880; the open standard's plugs
+#    count of active projects written once, reviewed and approved; the agents call it, and each gets 168; the open standard's plugs
 ow = lambda lid, word, off=0: W('tools', lid, word, off)
 o0 = S0('tools')
 play([(o0 + 0.2, (42, 54, 58, 61))], o0 + 2.6, att=0.4, rel=0.8)
@@ -326,8 +326,8 @@ tCo = ow('anil', 'connects')
 wtuba(54, tCo, tCo + 2.9, 0.8, att=0.35, rel=0.7, pan=px(420))
 for i in range(4):
     tap(tCo + 0.5 + 0.55 * i, 0.008 - 0.001 * i, px(1232))
-air(ow('once', 'census count', -0.7), 1.0, 0.007, px(300), 150, 700)
-paper(ow('once', 'census count', 0.25), 0.012, px(456))
+air(ow('once', 'count of active', -0.7), 1.0, 0.007, px(300), 150, 700)
+paper(ow('once', 'count of active', 0.25), 0.012, px(456))
 stamp(ow('once', 'any faculty', 0.3), 0.010, px(600))
 stamp(ow('once', 'any faculty', 0.9), 0.009, px(700))
 tCa = ow('calls', 'Every agent')
@@ -336,22 +336,22 @@ for i in (1, 2, 3):
 plug(tCa + 0.8, 0.008, px(300))
 for i in range(4):
     st_ = tCa + (0.45 + 0.2 * i if i else 0)
-    tap(st_ + 1.6, 0.008 - 0.001 * i, px(300 + 220 * i))           # each gets 2,880
+    tap(st_ + 1.6, 0.008 - 0.001 * i, px(300 + 220 * i))           # each gets 168
 for i in range(5):
     plug(ow('mcp', 'open standard', 0.2 + 0.12 * i), 0.009 - 0.001 * i, px(1232))
 
-# 5. Agents the team builds. Night: the nightly job; its check fails, on a low E flat minor; "Why?"; the census check agent draws
+# 5. Agents the team builds. Night: the nightly job; its check fails, on a low E flat minor; "Why?"; the project check agent draws
 #    itself, built in code, Agent Bricks, Agent Runtime, the job's thread; each step reaching a tool. Morning: the evaluation, its
 #    cases, the judges', the sums' and Mei and Jun's marks, the first few, then softer, and a low knock where they mark what's wrong.
 #    The note for Jun, opened; one note as Jun decides
 bw = lambda lid, word, off=0: W('build', lid, word, off)
 b0 = S0('build')
 paper(b0 + 0.75, 0.010, px(366))
-tFa = bw('fails', 'fails its check')
+tFa = bw('fails', 'disagrees')
 knock(tFa + 0.05, 0.013, px(366), 150)
 play([(tFa, (39, 46, 51, 54))], tFa + 2.7, att=0.5, rel=1.0)
 flick(bw('fails', 'find out why', 0.05), 0.009, px(200))
-air(bw('bricks', 'census check agent', -0.2), 1.2, 0.009, px(980), 150, 800)
+air(bw('bricks', 'project check agent', -0.2), 1.2, 0.009, px(980), 150, 800)
 tap(bw('bricks', 'in code', 0.05), 0.008, px(1430))
 paper(bw('bricks', 'Agent Bricks', -0.05), 0.011, px(980))
 knock(bw('runtime', 'Agent Runtime'), 0.011, px(980), 220)
@@ -359,7 +359,7 @@ air(bw('runtime', 'the job calls', -0.1), 0.9, 0.007, px(800), 200, 900)
 for i in range(3):
     tap(bw('runtime', 'every step', 0.5 + 0.6 * i), 0.008 - 0.001 * i, px(1330))
 paper(bw('before', 'Before anyone', 0.05), 0.012, px(960))
-for i, (w_, o_) in enumerate((('thirty-seven', -0.2), ('Three students', -0.1), ("And Health's", -0.1), ("And Health's", 0.7))):
+for i, (w_, o_) in enumerate((('twelve', -0.2), ('Two projects', -0.1), ("And Health's", -0.1), ("And Health's", 0.7))):
     paper(bw('cases', w_, o_ + 0.05), 0.009 - 0.001 * i, px(600), 0.3)
 for c_, (w_, o_, x_) in enumerate((('Judges', 0.2, 1330), ('plain test', 0.1, 1500), ('Mei and Jun', 0.1, 1690))):
     for i in range(4):
@@ -407,7 +407,7 @@ stamp(cw('draft', 'a second person', 0.35), 0.012, px(700))
 air(cw('draft', 'production', -0.1), 1.3, 0.010, px(1100), 150, 800)
 
 # 7. The same answer: E flat minor, back at the faculty; G flat major as the three blue cables reach the platform, each plugging in;
-#    the question; a key of the organ for each answer as it rises, 2,880, and its evidence, softer than the first time; the plan; the
+#    the question; a key of the organ for each answer as it rises, 168, and its evidence, softer than the first time; the plan; the
 #    takeaway; an open fifth for the question left, whose reads and who pays; the next film's card; the mark over the end card
 sw = lambda lid, word, off=0: W('same', lid, word, off)
 s0 = S0('same')
@@ -417,7 +417,7 @@ play([(tRe, (42, 49, 58, 61))], tRe + 2.6, att=0.6, rel=1.0)
 for i, d_ in enumerate((1.01, 1.13, 1.33)):
     plug(tRe + d_, 0.008, px((416, 1036, 1640)[i]))
 paper(sw('asked', 'Asked for', -0.15), 0.010, px(960))
-tNs = sw('asked', 'two thousand', -0.8)
+tNs = sw('asked', 'one hundred', -0.8)
 for i, m in enumerate((54, 58, 61)):
     organ(m, tNs + 0.05 + 0.25 * i, tNs + 3.0, 0.95, att=0.3, rel=1.0, pan=px((400, 1000, 1600)[i]) * 0.6)
     knock(tNs + 0.62 + 0.25 * i, 0.008, px((400, 1000, 1600)[i]), 240)
@@ -425,7 +425,7 @@ for j in range(3):
     for i in range(3):
         tap(sw('asked', 'its query', -0.2 + 0.12 * j + (sw('asked', 'its definition') - sw('asked', 'its query') + 0.6) * i / 3), 0.0035,
             px((400, 1000, 1600)[j] - 130 + 130 * i))
-paper(sw('plans', 'Anil plans', -0.08), 0.010, px(1440))      # the plan as it now stands springs in, a place for every student
+paper(sw('plans', 'Anil plans', -0.08), 0.010, px(1440))      # the plan as it now stands springs in, space for every project
 knock(sw('takeaway', 'The platform', -0.25), 0.010, px(960), 260)
 tWh = sw('left', 'whose reads')
 flick(tWh - 0.05, 0.009, px(480))

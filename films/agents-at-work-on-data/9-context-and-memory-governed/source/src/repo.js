@@ -1,12 +1,16 @@
 /* ===== Context and memory, governed: the repository and the platform =====
    The team's context as code (the example project, films/analytics-engineering/project/, as its files are named there), how a change
    comes in (a pull request, its owner's review, a second person's approval for production), and where agents read it on Databricks.
-     cm_repo(ctx, x, y, w, rows, o)     the repository: rows [{name, note, folder, lit, a}], each a file or a folder; returns each row's box
+   Each tool's official logo stands beside what it keeps or does, unaltered: GitHub's on the repository, dbt's on its descriptions,
+   Databricks' on the platform's parts (o.mark, cm_mark in govern.js).
+     cm_repo(ctx, x, y, w, rows, o)     the repository: rows [{name, note, folder, lit, a, logo, logoA}], each a file or a folder; o.mark
+                                        (GitHub's logo after REPOSITORY, 0..1); returns each row's box
      cm_owners(ctx, x, y, w, lines, o)  CODEOWNERS: lines [[path, owner], ...], written from the project's metadata
      cm_pr(ctx, x, y, w, o)             a pull request: o.title, o.by, o.files, o.rows [{text, state: "tick"|"wait"|"lock"|"no", a}]
-     cm_history(ctx, x, y, w, rows, o)  the history: rows [[who and when, why], ...]
-     cm_zone(ctx, x, y, w, h, label, o) a soft panel for a place the agents read from (on Databricks), its name at the top
-     cm_table(ctx, x, y, w, o)          a table in Unity Catalog with its comments
+     cm_history(ctx, x, y, w, rows, o)  the history: rows [[who and when, why], ...]; o.kick, o.mark (a logo after it), o.file
+     cm_zone(ctx, x, y, w, h, label, o) a soft panel for a place the agents read from (on Databricks), its name at the top, o.mark's logo
+                                        before it
+     cm_table(ctx, x, y, w, o)          a table in Unity Catalog with its comments; o.by "dbt": its logo after "Comment", as the writer
      cm_skill(ctx, x, y, w, o)          a skill in Unity Gateway: a Unity Catalog object, with its owner, permissions and audit
      cm_quote(ctx, x, y, w, text, src, o)  a line quoted from the docs, with where it comes from
      cm_bin(ctx, x, y, s, col, open)    a bin, for deleting */
@@ -22,12 +26,15 @@ function cm_repo(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,nameW=o.nameW
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.7});
   ag_T(ctx,"REPOSITORY",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,o.title||"The team's project",x+28,y+94,{w:700,size:36});
+  if(o.mark>0){const mx=x+28+ag_tw(ctx,"REPOSITORY",{w:700,size:28,ls:4})+18;const mw=cm_mark(ctx,"github",mx,y+22,32,o.mark);
+    if(o.markText)ag_T(ctx,o.markText,mx+mw+12,y+50,{w:600,size:28,col:AG.mut,a:o.mark});}
   rows.forEach((r,i)=>{const ra=r.a==null?1:r.a;if(ra<=0)return;const b=out[i],lit=r.lit||0;ctx.save();ctx.globalAlpha*=ra;
     if(lit>0){ctx.fillStyle=rgba(r.col||AG.blue,0.1*lit);rr(ctx,b.x,b.y,b.w,b.h,12);ctx.fill();ctx.strokeStyle=rgba(r.col||AG.blue,0.55*lit);ctx.lineWidth=2;rr(ctx,b.x,b.y,b.w,b.h,12);ctx.stroke();}
     cm_fileIcon(ctx,b.x+30,b.y+b.h/2,rgba(r.col||AG.blue,0.9),r.folder);
     ag_T(ctx,r.name,b.x+62,b.y+b.h/2+10,{w:500,size:28,f:"mono",col:r.strike?AG.mut:AG.ink});
     if(r.strike>0){const tw=ag_tw(ctx,r.name,{w:500,size:28,f:"mono"});ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(b.x+58,b.y+b.h/2);ctx.lineTo(b.x+62+(tw+4)*clamp(r.strike,0,1),b.y+b.h/2);ctx.stroke();}
-    if(r.note)ag_T(ctx,r.note,b.x+62+nameW,b.y+b.h/2+10,{w:600,size:28,col:r.noteCol||AG.mut,a:r.noteA==null?1:r.noteA});ctx.restore();});
+    let nx=b.x+62+nameW;if(r.logo){const la=(r.logoA==null?1:r.logoA)*(r.noteA==null?1:r.noteA),lw=cm_mark(ctx,r.logo,nx,b.y+b.h/2-15,30,la);nx+=lw?lw+12:0;}
+    if(r.note)ag_T(ctx,r.note,nx,b.y+b.h/2+10,{w:600,size:28,col:r.noteCol||AG.mut,a:r.noteA==null?1:r.noteA});ctx.restore();});
   ctx.restore();return{bb,rows:out};}
 
 function cm_owners(ctx,x,y,w,lines,o){o=o||{};const a=o.a==null?1:o.a,h=132+lines.length*92+10;if(a<=0)return{x,y,w,h};
@@ -58,7 +65,9 @@ function cm_branchIcon(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.fillStyle
   ctx.beginPath();ctx.moveTo(x+8,y-8);ctx.bezierCurveTo(x+8,y+4,x-8,y+2,x-8,y+10);ctx.stroke();for(const [px,py] of [[x-8,y-14],[x-8,y+14],[x+8,y-10]]){ctx.beginPath();ctx.arc(px,py,4.5,0,TAU);ctx.fill();}ctx.restore();}
 
 function cm_history(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,h=96+rows.length*84;if(a<=0)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));
-  ag_box(ctx,x,y,w,h,22,{});ag_T(ctx,(o.kick||"History").toUpperCase(),x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
+  ag_box(ctx,x,y,w,h,22,{});const kk=(o.kick||"History").toUpperCase();ag_T(ctx,kk,x+28,y+50,{w:700,size:28,ls:4,col:AG.kick});
+  // where the record is kept: GitHub's logo and the file's path, after the kicker (o.mark, o.file)
+  if(o.mark||o.file){let mx=x+28+ag_tw(ctx,kk,{w:700,size:28,ls:4})+20;if(o.mark)mx+=cm_mark(ctx,o.mark,mx,y+22,32)+14;if(o.file)ag_T(ctx,o.file,mx,y+50,{w:500,size:28,f:"mono",col:AG.ink});}
   ctx.strokeStyle=rgba(AG.mut,0.35);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+40,y+92);ctx.lineTo(x+40,y+h-34);ctx.stroke();
   rows.forEach((r,i)=>{const ra=r[2]==null?1:r[2];if(ra<=0)return;const yy=y+108+i*84;ctx.save();ctx.globalAlpha*=ra;ctx.fillStyle=rgba(r[3]||AG.mut,1);ctx.beginPath();ctx.arc(x+40,yy-8,8,0,TAU);ctx.fill();
     ag_T(ctx,r[0],x+68,yy,{w:700,size:28});ag_T(ctx,r[1],x+68,yy+38,{w:500,size:28,col:AG.mut});ctx.restore();});ctx.restore();return{x,y,w,h};}
@@ -66,21 +75,24 @@ function cm_history(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,h=96+rows.
 // a soft panel: where the agents read the team's context on the platform
 function cm_zone(ctx,x,y,w,h,label,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.fillStyle="rgba(250,249,246,0.42)";rr(ctx,x,y,w,h,30);ctx.fill();
   ctx.setLineDash([3,9]);ctx.lineCap="round";ctx.strokeStyle=rgba(AG.blue,0.45);ctx.lineWidth=3;rr(ctx,x,y,w,h,30);ctx.stroke();ctx.setLineDash([]);
-  ag_label(ctx,x+30,y+52,label,{col:o.col||AG.blue});ctx.restore();}
+  cm_named(ctx,x+30,y+52,label,{col:o.col||AG.blue,mark:o.mark});ctx.restore();}
 
 function cm_table(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,inner=w-56,tl=o.comment?ag_wrap(ctx,o.comment,inner,{w:600,size:28}):[],
     cols=(o.cols||[]).map(c=>[c[0],ag_wrap(ctx,c[1],inner,{w:600,size:28}),c[2]==null?1:c[2]]);
   const h=112+(tl.length?44+tl.length*38:0)+cols.reduce((s,c)=>s+50+c[1].length*38,0)+28;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.6});
-  ag_T(ctx,"TABLE IN UNITY CATALOG",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,o.name||"",x+28,y+94,{w:500,size:28,f:"mono"});
+  cm_named(ctx,x+28,y+50,"Table in Unity Catalog",{mark:"databricks",h:32});ag_T(ctx,o.name||"",x+28,y+94,{w:500,size:28,f:"mono"});
   let yy=y+94;const ca=o.commentA==null?1:o.commentA;
-  if(tl.length){yy+=44;ag_T(ctx,"Comment",x+28,yy,{w:700,size:28,col:AG.mut,a:ca});tl.forEach(l=>{yy+=38;ag_T(ctx,l,x+28,yy,{w:600,size:28,a:ca});});}
+  if(tl.length){yy+=44;ag_T(ctx,"Comment",x+28,yy,{w:700,size:28,col:AG.mut,a:ca});
+    if(o.by){const ba=ca*(o.byA==null?1:o.byA),bx=x+28+ag_tw(ctx,"Comment",{w:700,size:28})+20;ag_T(ctx,"written by",bx,yy,{w:600,size:28,col:AG.mut,a:ba});
+      cm_mark(ctx,o.by,bx+ag_tw(ctx,"written by",{w:600,size:28})+12,yy-27,34,ba);}
+    tl.forEach(l=>{yy+=38;ag_T(ctx,l,x+28,yy,{w:600,size:28,a:ca});});}
   cols.forEach(c=>{yy+=50;ag_T(ctx,c[0],x+28,yy,{w:500,size:28,f:"mono",col:AG.blue,a:c[2]});c[1].forEach(l=>{yy+=38;ag_T(ctx,l,x+28,yy,{w:600,size:28,a:c[2]});});});
   ctx.restore();return{x,y,w,h};}
 
 function cm_skill(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,rows=o.rows||[],h=150+rows.length*48+14;if(a<=0)return{x,y,w,h};
   ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,o.k));ag_box(ctx,x,y,w,h,22,{edge:AG.blue,edgeA:0.6});
-  ag_T(ctx,"SKILL IN UNITY GATEWAY",x+28,y+50,{w:700,size:28,ls:4,col:AG.blue});ag_T(ctx,o.name||"",x+28,y+96,{w:500,size:32,f:"mono"});
+  cm_named(ctx,x+28,y+50,"Skill in Unity Gateway",{mark:"databricks",h:32});ag_T(ctx,o.name||"",x+28,y+96,{w:500,size:32,f:"mono"});
   rows.forEach((r,i)=>{const ra=r[1]==null?1:r[1];if(ra<=0)return;const yy=y+150+i*48;ctx.save();ctx.globalAlpha*=ra;ctx.fillStyle=rgba(AG.blue,0.85);ctx.beginPath();ctx.arc(x+40,yy-10,6,0,TAU);ctx.fill();
     ag_T(ctx,r[0],x+60,yy,{w:600,size:28});ctx.restore();});ctx.restore();return{x,y,w,h};}
 

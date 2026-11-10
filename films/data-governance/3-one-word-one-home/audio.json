@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/one-word-one-home/soundtrack.mp3",
+      "size": 5043609,
+      "sha256": "b565d5aa9a7acb67a02e1b09d25658db67ca6546ea6ecd2140672a26c395070d",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/b565d5aa9a7acb67a02e1b09d25658db67ca6546ea6ecd2140672a26c395070d.mp3"
+    }
+  ]
+}

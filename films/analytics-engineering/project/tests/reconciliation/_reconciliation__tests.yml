@@ -8,7 +8,7 @@ data_tests:
       learners by hand in April, and the registrar's office recorded those matches as D-001 and
       D-002 in October (LIM-PLN-01 on mart_planning__near_award).
     config:
-      meta: {owner: Planning, dimension: accuracy, reference: "The census team's published report"}
+      meta: {owner: Planning, dimension: accuracy, reference: "the census team's published report"}
 
   - name: reconcile_finance_with_tuition_report
     description: >

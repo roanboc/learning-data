@@ -32,5 +32,5 @@ A test measures accuracy only against a reference outside the data, such as a re
 | Domain | Test | Reference | Owner |
 |---|---|---|---|
 | `finance` | `reconcile_finance_with_tuition_report` | Finance's own tuition report | Finance |
-| `planning` | `reconcile_planning_with_census_report` | The census team's published report | Planning |
-| `student` | `awards_match_the_boards` | The exam boards' approved lists | Mei Tanaka, registrar's office |
+| `planning` | `reconcile_planning_with_census_report` | the census team's published report | Planning |
+| `student` | `awards_match_the_boards` | the exam boards' approved lists | Mei Tanaka, registrar's office |

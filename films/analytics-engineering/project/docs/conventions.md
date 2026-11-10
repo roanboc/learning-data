@@ -333,5 +333,6 @@ consistency, not accuracy: the copy shares the source's gaps, and agrees with th
 accuracy test names its reference in `meta.reference`, beside its owner and dimension; a
 reconciliation, row by row, is the generic test `reconciles_with` (`tests/generic/`), whose method,
 `reconciliation`, goes into the contract with the reference (`scripts/generate/products.py`); and
-the scorecard lists each accuracy test with its reference. A column that records when a reference
-confirmed a value names that reference too: the graduation list's `name_confirmed_on`, the graduate.
+the scorecard lists each accuracy test with its reference. A column whose values a reference
+confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
+`name_as_printed`, the graduate, on `name_confirmed_on`.

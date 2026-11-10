@@ -222,7 +222,7 @@ schema:
     method: reconciliation
     customProperties:
     - property: reference
-      value: The exam boards' approved lists
+      value: the exam boards' approved lists
 slaProperties:
 - property: latency
   value: 1

@@ -107,7 +107,7 @@ models:
               config:
                 meta: {owner: "Mei Tanaka, registrar's office"}
         config:
-          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme]}
+          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme], reference: the graduate, confirmed_on: name_confirmed_on}
       - name: name_confirmed_on
         description: >
           The day the graduate confirmed their name, or corrected it, in the portal for this
@@ -115,7 +115,7 @@ models:
           they haven't confirmed it through the portal.
         data_type: date
         config:
-          meta: {personal_data: none, reference: the graduate}
+          meta: {personal_data: none}
       - name: award_code
         description: The award's code, like MDA.
         data_type: string
@@ -181,4 +181,4 @@ models:
             meta:
               owner: "Mei Tanaka, registrar's office"
               dimension: accuracy
-              reference: The exam boards' approved lists
+              reference: the exam boards' approved lists

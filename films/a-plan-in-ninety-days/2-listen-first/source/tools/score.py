@@ -363,7 +363,7 @@ card(G('count', 'thurs', 0.25), 0.0035, px(430))
 for k in range(4):
     tap(G('count', 'fell', 0.3 + 0.45 * k), 0.003, px(960 + 227 * k))
 chord((D3, Fs4, A4), END('count', 'fell', 0.1), 0.5, step=0.3, bow=1.2)
-card(cw('small', 'Small', -0.2), 0.0035, px(430))
+card(cw('small', 'tells', -0.2), 0.0035, px(430))
 plate(A4, END('count', 'keep', 0.1), 0.45, bow=0.9, until=E('count'))
 
 # 5. Five layers: the mark, both plates, as the current state is written down: the small plate's D at "baseline", then the same note

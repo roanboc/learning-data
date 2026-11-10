@@ -171,92 +171,92 @@ Algo ya funciona: desde enero de 2026, el equipo de la lista de graduación se r
 00:05:33.259 --> 00:05:36.193
 Los diplomas impresos de nuevo bajaron de 41 a 3.
 
-00:05:37.493 --> 00:05:41.062
-El módulo de calidad de datos cuenta cómo, en Pequeño, cada semana.
+00:05:37.493 --> 00:05:39.489
+El módulo de calidad de datos cuenta cómo.
 
-00:05:42.162 --> 00:05:44.937
+00:05:40.589 --> 00:05:43.364
 Anota también lo que funciona, para que nadie lo rompa.
 
-00:05:47.937 --> 00:05:53.560
+00:05:46.364 --> 00:05:51.987
 Luego escribe lo que hay: la situación actual, o, como la llama el método de TOGAF, la línea base.
 
-00:05:54.860 --> 00:06:00.199
+00:05:53.287 --> 00:05:58.626
 La escribe en las cinco capas que usan los arquitectos, cada capa en una página, con su dibujo al lado.
 
-00:06:01.499 --> 00:06:08.583
+00:05:59.926 --> 00:06:07.010
 Estrategia: los cuatro objetivos, y lo que la universidad debe poder hacer. La gobernanza de datos funciona; entregarlos es lento.
 
-00:06:10.283 --> 00:06:16.173
+00:06:08.710 --> 00:06:14.600
 Negocio: las doce decisiones, los servicios que se pueden pedir, los procesos y quién hace qué.
 
-00:06:17.473 --> 00:06:22.954
+00:06:15.900 --> 00:06:21.381
 También sus formas de trabajar: once vías para pedir, y 41 días hábiles hasta el primer uso.
 
-00:06:24.454 --> 00:06:28.386
+00:06:22.881 --> 00:06:26.813
 Información: de qué tratan los datos, y dónde nace cada dato.
 
-00:06:29.486 --> 00:06:32.832
+00:06:27.913 --> 00:06:31.259
 Los datos del personal nacen en Recursos Humanos, y se copian dos veces.
 
-00:06:34.332 --> 00:06:40.313
+00:06:32.759 --> 00:06:38.740
 Aplicación: los sistemas y los informes, los 38 del antiguo almacén junto a los de la plataforma.
 
-00:06:41.813 --> 00:06:46.166
+00:06:40.240 --> 00:06:44.593
 Tecnología: dónde funcionan, los servidores propios de la universidad y la nube.
 
-00:06:47.666 --> 00:06:51.479
+00:06:46.093 --> 00:06:49.906
 ArchiMate, la notación de los arquitectos, no tiene capa de información:
 
-00:06:51.679 --> 00:06:57.174
+00:06:50.106 --> 00:06:55.601
 guarda de qué tratan los datos en su capa de negocio, y los datos mismos en su capa de aplicación.
 
-00:06:58.474 --> 00:07:02.747
+00:06:56.901 --> 00:07:01.174
 Helena le da a la información una capa propia, porque los datos son su trabajo.
 
-00:07:04.047 --> 00:07:07.106
+00:07:02.474 --> 00:07:05.533
 Noor pone cada página en su mapa, lista para la situación deseada.
 
-00:07:08.206 --> 00:07:12.065
+00:07:06.633 --> 00:07:10.492
 El mapa antes de los datos muestra ese mapa, en Hoy, y hacia dónde va.
 
-00:07:15.265 --> 00:07:17.566
+00:07:13.692 --> 00:07:15.993
 Cualquier hallazgo podría leerse como la culpa de alguien.
 
-00:07:18.666 --> 00:07:20.939
+00:07:17.093 --> 00:07:19.366
 Así que escribe cada uno como una oportunidad.
 
-00:07:22.039 --> 00:07:24.906
+00:07:20.466 --> 00:07:23.333
 No «las solicitudes se pierden», sino una sola vía para pedir.
 
-00:07:26.006 --> 00:07:31.431
+00:07:24.433 --> 00:07:29.858
 No «las facultades guardan sus propias copias», sino referentes de datos en facultades y oficinas.
 
-00:07:32.731 --> 00:07:40.092
+00:07:31.158 --> 00:07:38.519
 Siete oportunidades en total: una sola vía para pedir; retirar el antiguo almacén; un responsable para cada informe y producto;
 
-00:07:40.292 --> 00:07:46.162
+00:07:38.719 --> 00:07:44.589
 referentes de datos; medir la entrega; escribir los procedimientos críticos; y agentes con mandatos.
 
-00:07:47.662 --> 00:07:51.106
+00:07:46.089 --> 00:07:49.533
 Lunes 15 de marzo: el hito del descubrimiento.
 
-00:07:52.206 --> 00:07:55.559
+00:07:50.633 --> 00:07:53.986
 La situación actual en cinco capas, y siete oportunidades.
 
-00:07:56.859 --> 00:08:02.445
+00:07:55.286 --> 00:08:00.872
 Envía un resumen a todas las personas con quienes habló: esto es lo que oí; díganme en qué me equivoqué.
 
-00:08:03.945 --> 00:08:06.378
+00:08:02.372 --> 00:08:04.805
 Algunos responden, y las páginas cambian.
 
-00:08:07.678 --> 00:08:13.976
+00:08:06.105 --> 00:08:12.403
 En Acra, las madres conocían la enfermedad de sus hijos, y cuándo llegaba; Williams preguntó, y la escribió con su palabra.
 
-00:08:15.476 --> 00:08:22.188
+00:08:13.903 --> 00:08:20.615
 En la universidad, quienes viven con los datos también sabían: en sus palabras, la situación actual es una que reconocen.
 
-00:08:23.488 --> 00:08:25.684
+00:08:21.915 --> 00:08:24.111
 Lo siguiente: diseña con ellos la situación deseada.
 
-00:08:26.784 --> 00:08:30.308
+00:08:25.211 --> 00:08:28.735
 Pregunta a las personas, cuenta desde los sistemas y escribe lo que hay.

@@ -65,7 +65,7 @@ const NARR={
  {"id":"forty","gap":0.8,"text":"And about 40 people in faculties and offices do data work part of their week, mostly in spreadsheets.","say":"And about forty people in faculties and offices do data work part of their week, mostly in spreadsheets."},
  {"id":"thurs","gap":0.8,"text":"One thing already works: since January 2026, the graduation list's team has met for fifteen minutes every Thursday.","say":"One thing already works: since January twenty twenty-six, the graduation list's team has met for fifteen minutes every Thursday."},
  {"id":"fell","gap":0.8,"text":"Reprinted certificates fell from 41 to 3.","say":"Reprinted certificates fell from forty-one to three."},
- {"id":"small","gap":0.8,"text":"The data quality module tells how, in Small, every week."},
+ {"id":"small","gap":0.8,"text":"The data quality module tells how."},
  {"id":"keep","gap":0.8,"text":"Write down what works too, so nobody breaks it."}
 ]},
 "layers":{"name":"Five layers","lead":0.9,"tail":1.0,"vo":[

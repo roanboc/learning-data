@@ -126,8 +126,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Algo ya funciona: desde enero de 2026, el equipo de la lista de graduación se reúne quince minutos cada jueves.",
 "Reprinted certificates fell from 41 to 3.":
 "Los diplomas impresos de nuevo bajaron de 41 a 3.",
-"The data quality module tells how, in Small, every week.":
-"El módulo de calidad de datos cuenta cómo, en Pequeño, cada semana.",
+"The data quality module tells how.":
+"El módulo de calidad de datos cuenta cómo.",
 "Write down what works too, so nobody breaks it.":
 "Anota también lo que funciona, para que nadie lo rompa.",
 "Then she writes down what is: the current state, or, as TOGAF's method calls it, the baseline.":

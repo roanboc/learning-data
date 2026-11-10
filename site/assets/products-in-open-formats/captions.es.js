@@ -27,12 +27,14 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Algo tenía que cambiar.",
 "Now each promise is a file, kept with the code, in two open standards that any tool can read:":
 "Ahora cada promesa es un archivo, guardado con el código, en dos estándares abiertos que lee cualquier herramienta:",
-"one for the product, and one for its table's contract.":
-"uno para el producto, y otro para el contrato de su tabla.",
-"The contract is written from the table's own code, so the two can't disagree, and a change that would break it stops.":
-"El contrato se escribe desde el propio código de la tabla, así que no pueden diferir, y un cambio que lo rompería se detiene.",
-"When Jun added a column to credentials, its contract grew by a line, by itself, and no report broke.":
-"Cuando Jun agregó una columna a las credenciales, su contrato creció una línea, solo, y ningún informe se rompió.",
+"one for the product, and one for the contract of each core table it's built on.":
+"uno para el producto, y otro para el contrato de cada tabla central de la que está hecho.",
+"Data governance's information architect writes that contract first, and the data team builds to it.":
+"Quien hace la arquitectura de información en gobernanza de datos escribe ese contrato primero, y el equipo de datos construye según él.",
+"A check stops the two drifting apart.":
+"Un control impide que los dos se desvíen.",
+"When credentials needed a new column, its contract got the line first, Jun built it, and no report broke.":
+"Cuando las credenciales necesitaron una columna nueva, su contrato tuvo la línea primero, Jun la construyó, y ningún informe se rompió.",
 "All ten tables other teams read have a promise that's checked on every change.":
 "Las diez tablas que leen otros equipos tienen una promesa que se controla en cada cambio.",
 "And whichever catalogue shows them, the promises stay the university's.":
@@ -51,14 +53,22 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El contrato es la promesa sobre la tabla misma:",
 "each column, its type, whether it's always there, whether it can identify a person, and the tests it must pass.":
 "cada columna, su tipo, si siempre está, si puede identificar a una persona, y las pruebas que debe pasar.",
-"Nobody types it.":
-"Nadie lo escribe a mano.",
-"A script writes it from the model, the code that builds the table, and from the product's file, in the Open Data Contract Standard.":
-"Lo escribe un script, desde el modelo, el código que construye la tabla, y el archivo del producto, en el Open Data Contract Standard.",
-"Side by side, each line of the model has its line in the contract.":
-"Lado a lado, cada línea del modelo tiene su línea en el contrato.",
-"On every pull request, a check fails if they've drifted apart, or if the contract breaks the standard's rules.":
-"En cada solicitud de cambio, un control falla si se han desviado, o si el contrato rompe las reglas del estándar.",
+"Only the core tables have one: the shared tables that every product is built on.":
+"Solo las tablas centrales tienen uno: las tablas compartidas de las que está hecho cada producto.",
+"Data governance's information architect writes it first, in the Open Data Contract Standard.":
+"Quien hace la arquitectura de información en gobernanza de datos lo escribe primero, en el Open Data Contract Standard.",
+"The data team builds the model to it.":
+"El equipo de datos construye el modelo según él.",
+"Side by side, each line of the contract has its line in the model.":
+"Lado a lado, cada línea del contrato tiene su línea en el modelo.",
+"On every pull request, a check fails if the model has drifted from its contract, or if the contract breaks the standard's rules.":
+"En cada solicitud de cambio, un control falla si el modelo se desvió de su contrato, o si el contrato rompe las reglas del estándar.",
+"Then data governance looks at how the change got there: the contract changes first, and the code follows.":
+"Entonces gobernanza de datos mira cómo llegó ahí el cambio: el contrato cambia primero, y el código lo sigue.",
+"Clara's own table has no enterprise contract: its promise is in its code, the data team's.":
+"La tabla propia de Clara no tiene contrato empresarial: su promesa está en su código, del equipo de datos.",
+"So it can change without waiting on governance.":
+"Así puede cambiar sin esperar a gobernanza.",
 "Not every table is a product.":
 "No toda tabla es un producto.",
 "Of the data team's thirty-three tables, ten are read by other teams, and each is in exactly one of six products.":
@@ -67,8 +77,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "El mismo script también lo controla.",
 "A new table other teams read, in no product, stops its pull request until a product takes it in.":
 "Una tabla nueva que leen otros equipos, sin producto, detiene su solicitud de cambio hasta que un producto la incluya.",
-"When a model changes, its contract follows, by itself.":
-"Cuando un modelo cambia, su contrato lo sigue, solo.",
+"Clara's table keeps its promise in its code: change the model, and its contract changes with it.":
+"La tabla de Clara guarda su promesa en su código: cambia el modelo, y su contrato cambia con él.",
 "But some changes break the readers.":
 "Pero algunos cambios rompen a sus lectores.",
 "Rename a column in Clara's table, and the impact check fails: it's breaking, so it needs a new version.":
@@ -97,8 +107,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "En la plataforma, el catálogo de la universidad es Ontos, de Databricks Labs.",
 "It imports each contract from its file, and lays the products out by domain, each with its team.":
 "Importa cada contrato desde su archivo, y ordena los productos por dominio, cada uno con su equipo.",
-"A steward reviews a product before it's published.":
-"Un responsable de datos revisa un producto antes de que se publique.",
+"Governance doesn't review each product before it's published: its owner publishes it, and rules check them all.":
+"Gobernanza no revisa cada producto antes de publicarlo: lo publica su dueño, y unas reglas los controlan a todos.",
 "Each night, a policy checks every product: an active one with no owner is tagged, and governance is told.":
 "Cada noche, una política revisa cada producto: a uno activo sin dueño se le pone una etiqueta, y se avisa a gobernanza.",
 "And it can link each column to the business term it holds.":

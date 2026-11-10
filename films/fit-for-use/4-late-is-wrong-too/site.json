@@ -38,8 +38,7 @@
     ],
     "fresh": [
       "models/marts/graduations/_graduations__models.yml",
-      "governance/4-data-products/graduation_list.yml",
-      "governance/5-data-contracts/mart_graduations__graduation_list.yaml"
+      "governance/4-data-products/graduation_list.yml"
     ],
     "age": [
       "models/marts/graduations/mart_graduations__graduation_list.sql"

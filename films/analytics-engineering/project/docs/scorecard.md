@@ -53,3 +53,4 @@ The hidden work, counted: the hours the graduations team spent checking the grad
 | Year | Rounds | Names checked by hand | Hours |
 |---|---|---|---|
 | 2025–26 | 3 | 3,807 of 3,807 | 320 |
+| 2026–27 | 1 | 78 of 2,140 | 26 |

@@ -1,0 +1,14 @@
+name: planning agent
+kind: application component
+agent: 'yes'
+definition: Software that takes Planning's tickets under its own name, drafts each change in its own development
+  schema and proposes it as a pull request.
+owner: Clara Jensen, Planning
+relationships:
+- assignment: planning contributor
+  stage:
+    Planning's tickets: 4
+    what a word means: 1
+evidence: 'its gate in a sandbox, against a bar Clara Jensen and Jun Park set first: 37 of Planning''s last 40 tickets
+  done as a person had done them, 3 asked, none confidently wrong · 29 Oct 2026'
+status: confirmed

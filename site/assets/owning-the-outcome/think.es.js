@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Owning the outcome, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (owns, monday, blame), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). Los labs del módulo llegan después, como un solo conjunto, así que ninguna
+   pregunta tiene "stop", y el .player data-labs de la página está vacío. Las respuestas, en los mismos lugares que en inglés. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  owns:{q:"El producto de Ivy se actualiza cada lunes antes de las siete. ¿De qué se hace cargo ella?",
+    opts:[{t:"De los sensores, la plataforma y las revisiones, porque es la única persona que rinde cuentas por todo."},{t:"De que el cambio de horario se juzgue con conteos verdaderos, para quienes elegirán aulas con ellos.",ok:true},{t:"De que la actualización corra cada lunes antes de las siete, con la semana anterior, como promete el producto.",near:true}],
+    why:"Muchas personas hacen parte del trabajo: Instalaciones mantiene los sensores, Sam la plataforma, y Jun revisa sus cambios. Ivy responde por el resultado: el horario del próximo año moverá cerca de una de cada seis clases de hora pico y liberará aulas sin uso, y cuáles, lo elegirán los lectores con sus conteos. La actualización antes de las siete es la promesa; los conteos verdaderos son el fin. ¿Para qué sirve tu trabajo, y quién decide con él?"},
+  monday:{q:"La actualización corrió a las siete y todas las pruebas pasaron. ¿Por qué Ivy escribió a los lectores antes de saber la causa?",
+    opts:[{t:"Porque una prueba había fallado, y una actualización fallida se avisa a sus lectores el mismo día."},{t:"Para que los lectores revisaran ellos mismos las cuarenta aulas, y le dijeran qué conteos estaban mal.",near:true},{t:"Para que nadie usara aún los conteos de las cuarenta aulas: decirlo primero es parte de hacerse cargo.",ok:true}],
+    why:"Todas las pruebas pasaron, pero en cuarenta aulas los conteos habían bajado a cerca de una cuarta parte, y las horas reservadas sin nadie dentro habían saltado de una de cada cinco a más de la mitad. Si nadie lo notaba, el equipo de horarios liberaría aulas que las clases sí usan. Así que a las ocho y diez escribió: los conteos se ven mal; no los usen aún; los correctos, mañana. Encontrar el arreglo le tocaba a ella, no a los lectores. ¿A quién avisarías primero si tu trabajo se viera mal?"},
+  blame:{q:"Sensores mejores, una plataforma que cargó cada conteo, un paso correcto para sus datos. ¿Qué pregunta Helena primero?",
+    opts:[{t:"Qué pasó y qué necesita Ivy, para que la próxima vez las partes encajen mejor.",ok:true},{t:"Quién cambió los sensores sin avisar al equipo de datos, para que no vuelva a pasar.",near:true},{t:"Si detener la actualización del lunes hasta probar los nuevos conteos de cada sensor."}],
+    why:"Nadie hizo nada mal: cada parte tenía razón sobre lo que veía, y lo que falló fue cómo encajaban las partes. En una cultura justa, la primera pregunta es qué pasó y qué debe cambiar, no a quién culpar. Por eso Ivy pudo decirlo primero: donde no se culpa a nadie, decirlo pronto es seguro. ¿Qué haría seguro, en tu equipo, decir pronto que algo está mal?"}
+  }}};

@@ -11,6 +11,7 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Proof it held](https://data.learn-all.org/only-what-you-may-see/proof-it-held/) | Proving the protection held | 8½ min | 7 | 4 questions | [script](8-proof-it-held/script.md) · [source](8-proof-it-held/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

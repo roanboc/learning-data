@@ -1,0 +1,105 @@
+{
+  "draft": true,
+  "kicker": "Proving the protection held",
+  "kicker_es": "Probar que la protección se cumplió",
+  "title_es": "Prueba de que se cumplió",
+  "h1": "Proof it held: read from records, not memory",
+  "h1_es": "Prueba de que se cumplió: en registros, no en la memoria",
+  "lead": "Three months after Mei signed the agreement for Anil's study, its first review asks of each promise: can we prove it held? One member moved on and kept her place, and a new mobile column went 31 hours with no class. The records show who could read, and who did.",
+  "lead_es": "Tres meses después del acuerdo del estudio de Anil, su primera revisión pregunta por cada promesa: ¿podemos probar que se cumplió? Una integrante cambió de proyecto y siguió en el grupo, y una columna nueva de celulares pasó 31 horas sin clase. Los registros muestran quién podía leer, y quién leyó.",
+  "description": "A film about proving that data's protection held, the last of Only what you may see: the vaccine vial monitor, a square printed inside a circle on each vial's label that darkens with heat and never turns light again, asked for by the World Health Organization in 1979 and on polio vaccine from 1996, so a health worker could see at the moment of use whether the cold had held; the study's first review, three months after its agreement; grants made from the contract, to the study's group, and the directory's access review, which removes a member who moved to another project; a check every morning for a personal column with no class, or a class with no policy, which finds a new mobile column on the exam support table; lineage, which shows where each protected column went; the audit log, which shows who read; and access that ends on the agreement's date, checked the day after.",
+  "description_es": "Una película sobre probar que la protección de los datos se cumplió, la última de Solo lo que puedes ver: el monitor del vial de vacuna, un cuadrado impreso dentro de un círculo en la etiqueta de cada vial que se oscurece con el calor y nunca vuelve a aclararse, pedido por la Organización Mundial de la Salud en 1979 y en la vacuna contra la polio desde 1996, para que quien vacuna viera al usarla si el frío se había mantenido; la primera revisión del estudio, tres meses después de su acuerdo; permisos hechos desde el contrato, para el grupo del estudio, y la revisión de acceso del directorio, que saca a una integrante que pasó a otro proyecto; una comprobación cada mañana de columnas personales sin clase, o clases sin política, que encuentra una columna nueva de celulares en la tabla de apoyos; el linaje, que muestra adónde fue cada columna protegida; la auditoría, que muestra quién leyó; y un acceso que termina en la fecha del acuerdo, comprobado al día siguiente.",
+  "card": "A review, a morning check, lineage and the audit log: proof, read from records, that the study's protection held.",
+  "card_es": "Una revisión, una comprobación cada mañana, el linaje y la auditoría: la prueba, en registros, de que se cumplió.",
+  "chapters_es": {
+    "square": "El cuadrado del vial",
+    "promises": "Cuatro promesas",
+    "review": "Quién podía leerlo",
+    "gap": "Una clase y una política",
+    "reads": "Adónde fue y quién lo leyó",
+    "ends": "Hasta su fecha",
+    "held": "Prueba de que se cumplió"
+  },
+  "past": [
+    "From 1996: the vaccine vial monitor, a square on the label that shows whether the cold held",
+    "Protection you can't prove is protection you hope for."
+  ],
+  "past_es": [
+    "Desde 1996: el monitor del vial de vacuna, un cuadrado en la etiqueta que muestra si se mantuvo el frío",
+    "Protección que no puedes demostrar es protección que solo esperas."
+  ],
+  "next_h": "You've seen the study's protection proved from records: who could read, who did, where each column went, and that access ended on its date. Next: Kept for a reason, why data is kept, for how long, and how a person is forgotten.",
+  "next_h_es": "Viste probada la protección del estudio con registros: quién podía leer, quién leyó, adónde fue cada columna, y que el acceso terminó en su fecha. Después: Guardado por una razón, por qué se guardan los datos, por cuánto tiempo, y cómo se olvida a una persona.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film shows Microsoft Entra ID and Databricks as their docs did on 5 November 2026. These are the pages it follows, and the story of the vial monitor.",
+    "p_es": "La película muestra Microsoft Entra ID y Databricks como los describían sus documentos el 5 de noviembre de 2026. Estas son las páginas que sigue, y la historia del monitor del vial.",
+    "links": [
+      {
+        "title": "Microsoft Entra: create an access review of an access package",
+        "title_es": "Microsoft Entra: crear una revisión de acceso de un paquete de acceso",
+        "line": "How often a review runs, how long it's open, who reviews, and what happens if they don't answer.",
+        "line_es": "Cada cuánto se hace una revisión, cuánto dura, quién revisa, y qué pasa si no responde.",
+        "href": "https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-reviews-create",
+        "href_es": "https://learn.microsoft.com/es-es/entra/id-governance/entitlement-management-access-reviews-create"
+      },
+      {
+        "title": "Microsoft Entra: change lifecycle settings for an access package",
+        "title_es": "Microsoft Entra: cambiar la configuración del ciclo de vida de un paquete de acceso",
+        "line": "Access that ends on a date, and is taken away by the directory when it does.",
+        "line_es": "Un acceso que termina en una fecha, y que el directorio quita cuando llega.",
+        "href": "https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-lifecycle-policy",
+        "href_es": "https://learn.microsoft.com/es-es/entra/id-governance/entitlement-management-access-package-lifecycle-policy"
+      },
+      {
+        "title": "Databricks: data classification",
+        "title_es": "Databricks: clasificación de datos",
+        "line": "How the platform scans new columns and suggests what kind of personal data they hold.",
+        "line_es": "Cómo la plataforma revisa columnas nuevas y sugiere qué datos personales guardan.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-classification",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-classification"
+      },
+      {
+        "title": "Databricks: SQL alerts",
+        "title_es": "Databricks: alertas de SQL",
+        "line": "A query that runs on a schedule and tells someone when it finds what it looks for.",
+        "line_es": "Una consulta que se ejecuta con horario y avisa a alguien cuando encuentra lo que busca.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/sql/user/alerts/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/sql/user/alerts/"
+      },
+      {
+        "title": "Databricks: view data lineage",
+        "title_es": "Databricks: ver el linaje de los datos",
+        "line": "What each query read and made, down to the column, and where that record has gaps.",
+        "line_es": "Lo que cada consulta leyó e hizo, hasta la columna, y dónde ese registro tiene huecos.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-lineage",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-lineage"
+      },
+      {
+        "title": "Databricks: the audit log system table",
+        "title_es": "Databricks: la tabla del sistema del registro de auditoría",
+        "line": "Who did what on the platform, and when, kept for a year.",
+        "line_es": "Quién hizo qué en la plataforma, y cuándo, guardado por un año.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/audit-logs",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/admin/system-tables/audit-logs"
+      },
+      {
+        "title": "WHO: the vaccine vial monitor",
+        "title_es": "OMS: el monitor del vial de vacuna (en inglés)",
+        "line": "How the square and the circle are read: use, or don't use.",
+        "line_es": "Cómo se leen el cuadrado y el círculo: usar, o no usar.",
+        "href": "https://www.who.int/publications/m/item/vaccine-vial-monitor",
+        "href_es": "https://www.who.int/publications/m/item/vaccine-vial-monitor"
+      },
+      {
+        "title": "PATH: the vaccine vial monitor, the world's smartest sticker",
+        "title_es": "PATH: el monitor del vial de vacuna (en inglés)",
+        "line": "How it was made, what it costs, and the 50,000 doses it saved in Yogyakarta.",
+        "line_es": "Cómo se hizo, cuánto cuesta, y las 50.000 dosis que salvó en Yogyakarta.",
+        "href": "https://www.path.org/our-impact/articles/vaccine-vial-monitor-worlds-smartest-sticker/",
+        "href_es": "https://www.path.org/our-impact/articles/vaccine-vial-monitor-worlds-smartest-sticker/"
+      }
+    ]
+  }
+}

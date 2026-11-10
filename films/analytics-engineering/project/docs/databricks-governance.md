@@ -259,6 +259,64 @@ from information_schema.column_tags
 where tag_name = 'critical_data'
 ```
 
+## 12. Proof it held
+
+A protection is a promise until a record shows it held. The university proves each one from the
+platform's and the directory's own records, not from anyone's memory, and keeps each proof with the
+agreement it answers to. Nothing here runs in the build.
+
+1. **Every morning, two gaps.** `analyses/governance/morning_check.sql` looks, on the tables people
+   read, for a column the platform's data classification finds personal with no `personal_data` tag,
+   and for a column whose class has to be hidden with no column mask policy over it that names the
+   class. Save the SQL it compiles to as a query, and make it a Databricks SQL alert: run each day at
+   07:00, triggered when it returns any row, sent by email to data governance and the platform team.
+
+   ```bash
+   dbt compile --target databricks --profiles-dir . --select morning_check
+   ```
+
+   By default it reads the project's `core` and `marts` schemas, for the class `direct`, which
+   section 3's policy hides; the vars `morning_check_shelves` and `classes_to_hide` name others. Raw
+   tables and the build's views carry no class (section 1 tags tables), so they're left out. A table
+   loaded straight from a source system, outside the project, gets its classes from its owner's own
+   task, and a new column that task doesn't name arrives with no class: classification scans a new
+   column within about a day, and the next morning's check finds it.
+
+   Classification's results, `system.data_classification.results`, keep up to five sample values of
+   what they found, and at first only an account admin can read them. The check never selects the
+   samples: an admin can make a view of the results without them, grant the alert's owner that view,
+   and name it in the var `classification_results`. The information schema shows the alert's owner
+   only the tables they may see, so the alert belongs to the platform team.
+2. **Who could read.** On the platform, the grants answer it, with section 7's query: each to a
+   group, none to a person. Who is in the group lives in the directory, Microsoft Entra ID. An
+   agreement's group is given through an access package, whose assignments end on the agreement's
+   last day (*Access package assignments expire*: *On date*). Its access review, each quarter and open
+   for 7 days, asks whoever signed the agreement whether each member still needs it, with *If
+   reviewers don't respond* set to *Remove access*. A member who is denied is removed when the results
+   are applied, as the review closes. Access reviews need Microsoft Entra ID Governance or Microsoft
+   Entra Suite licences.
+3. **Who did read.** `analyses/governance/who_read_in_a_window.sql` lists who read a table's data in a
+   window of time. Each time the platform hands a reader a credential for the table's files, the
+   audit log records `generateTemporaryTableCredential`, with the table's full name. Section 6's
+   `getTable` counts each look-up of a table; this counts each read of its data.
+
+   ```bash
+   dbt compile --target databricks --profiles-dir . --select who_read_in_a_window \
+       --vars '{read_table: <catalog>.<schema>.<table>, read_from: "2027-01-07 02:04", read_to: "2027-01-08 09:30"}'
+   ```
+
+4. **Where a column went.** `analyses/governance/where_a_column_went.sql` lists every table and column
+   made from one column, from `system.access.column_lineage`, with who made each, and when. No rows:
+   nothing was made from it. Lineage records what the platform can infer, on the platform; a copy
+   made somewhere else isn't in it.
+5. **An end that's checked.** On the agreement's last day, the directory ends each member's place,
+   which takes them out of the group, and the grants made from its contract end on the same day. The
+   next day, whoever keeps the agreements checks it: the group is empty, no grant is left for the
+   agreement, and its own space is gone.
+6. **Kept with the agreement.** Each proof goes into the register of agreements, with its date, beside
+   the agreement it answers to: the review's results, each alert and what was done about it, who read,
+   where each column went, and the check at the end.
+
 ## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, and the last two, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
@@ -322,3 +380,25 @@ where tag_name = 'critical_data'
   there fails; Databricks Runtime 16.1 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-set-tag
 - Databricks, *COLUMN_TAGS* (the tags on each column, by catalog, schema and table):
   https://docs.databricks.com/aws/en/sql/language-manual/information-schema/column_tags
+
+Section 12's sources, read on 5 November 2026 and again on 10 November 2026:
+
+- Azure Databricks, *Data classification* (no status label for it; scanning views and excluding
+  detections are in Beta, and section 12 uses neither; new columns are typically scanned within
+  24 hours): https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-classification
+- Azure Databricks, *Data classification system table reference* (its sample values; confidence
+  `HIGH` or `LOW`): https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/data-classification
+- Azure Databricks, *ABAC_POLICY_DEFINITIONS* (in Public Preview; where each policy is attached, and
+  the tags it governs): https://learn.microsoft.com/en-us/azure/databricks/sql/language-manual/information-schema/abac_policy_definitions
+- Azure Databricks, *Databricks SQL alerts*: https://learn.microsoft.com/en-us/azure/databricks/sql/user/alerts/
+- Azure Databricks, *Diagnostic log reference* (`generateTemporaryTableCredential`, "to determine who
+  queried what and when"): https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/audit-logs
+- Azure Databricks, *Lineage system tables reference* (`system.access.column_lineage`, kept for a
+  rolling 395 days): https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/lineage
+- Microsoft Learn, *Create an access review of an access package in entitlement management*:
+  https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-reviews-create
+- Microsoft Learn, *Review access of an access package in entitlement management* (a denied user is
+  removed when the results are applied, after the review closes):
+  https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-reviews-review-access
+- Microsoft Learn, *Change lifecycle settings for an access package* (assignments that expire on a
+  date): https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-lifecycle-policy

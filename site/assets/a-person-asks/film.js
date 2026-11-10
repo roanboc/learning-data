@@ -2269,12 +2269,12 @@ function ap_answer(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sav
 const AP_FILMS=[["A reason to keep it","Keep data for a reason you can say"],["How long, and then what","An end date, decided before it's needed"],["Forgetting a person","A person can ask; you must be able to answer"],
   ["Deleted means deleted","Done when the last copy is gone"],["A person asks","On time, with proof"]];
 function ap_films(c,o){o=o||{};AP_FILMS.forEach(([t,l],i)=>{const x=150,y=120+i*140,w=1620,q=o.each?o.each(i):1;if(q<=0)return;const lw=o.line?o.line(i):1,me=i===4;c.save();c.globalAlpha*=q;
-  dp_panel(c,x,y,w,118,{col:me?"cyan":"grey",r:20,glowR:me?40:24});dp_T(c,"FILM "+(i+1),x+32,y+48,{w:800,size:28,ls:4,col:me?"cyan":"mut"});dp_T(c,t,x+32,y+94,{w:700,size:34});
+  dp_panel(c,x,y,w,118,{col:me?"cyan":"grey",r:20,glowR:me?40:24});dp_T(c,"FILM "+(i+1)+" OF 5",x+32,y+48,{w:800,size:28,ls:4,col:me?"cyan":"mut"});dp_T(c,t,x+32,y+94,{w:700,size:34});
   if(lw>0){const n=Math.round(lw*l.length);dp_T(c,l.slice(0,n),x+720,y+74,{w:600,size:30});}
   c.restore();});}
 const AP_SERIES=[["Locks before the data","who may come in"],["Only what you may see","what each may see"],["Kept for a reason","how long anything stays"]];
 function ap_series(c,o){o=o||{};AP_SERIES.forEach(([t,l],i)=>{const x=150+i*560,y=270,q=o.each?o.each(i):1;if(q<=0)return;c.save();c.globalAlpha*=q;dp_panel(c,x,y,500,300,{col:"cyan",r:22,glowR:36});
-  dp_T(c,"SERIES "+(i+1),x+30,y+58,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,t,x+30,y+120,{w:700,size:36});const lw=o.line?o.line(i):0;if(lw>0)dp_T(c,l,x+30,y+200,{w:600,size:30,col:"mut",a:lw});c.restore();});}
+  dp_T(c,"SERIES "+(i+1)+" OF 3",x+30,y+58,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,t,x+30,y+120,{w:700,size:36});const lw=o.line?o.line(i):0;if(lw>0)dp_T(c,l,x+30,y+200,{w:600,size:30,col:"mut",a:lw});c.restore();});}
 function ap_topics(c,o){o=o||{};const q=o.a==null?1:o.a;if(q<=0)return;c.save();c.globalAlpha*=q;
   dp_panel(c,210,330,700,260,{col:"grey",r:24,glowR:30});dp_T(c,"TOPIC",250,394,{w:800,size:28,ls:4,col:"mut"});dp_T(c,"Data protection and privacy",250,460,{w:700,size:40});dp_T(c,"Three series · 22 films",250,516,{w:600,size:28,col:"mut"});
   const n=o.next||0;dp_panel(c,1010,330,700,260,{col:"cyan",r:24,glowR:30+30*n,glowA:0.5+0.8*n});dp_T(c,"NEXT",1050,394,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,"AI agents in data work",1050,460,{w:700,size:40});
@@ -2525,7 +2525,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
       if(rest>0){cx.save();cx.globalAlpha*=rest;
         ap_clock(cx,1300,420,120,7,clamp((tt-T.seven)/1.0,0,1),{label:"7 days",size:36});
         ap_up(cx,tt,T.dec2,()=>dp_slip(cx,1200,600,"Wed 2 Dec","grey",{ink:true}));
-        ap_up(cx,tt,T.dmd,()=>dp_slip(cx,1200,696,"Film 4 · Deleted means deleted","grey",{ink:true}));cx.restore();}
+        ap_up(cx,tt,T.dmd,()=>dp_slip(cx,1200,696,"Film 4 of 5 · Deleted means deleted","grey",{ink:true}));cx.restore();}
       ap_up(cx,tt,T.dmd+1.0,()=>dp_slip(cx,200,770,"Locked backups · out of use · the last gone 24 Dec","grey",{ink:true}));
       // what would have happened: her yes still on her, and the next rebuild bringing her row back
       if(re>0){cx.save();cx.globalAlpha*=re;ap_wish(cx,1260,170,true,{});dp_link(cx,[1258,300],[764,520],"coral",ag_sine(clamp((tt-T.back+0.8)/0.8,0,1)),{lw:2.6});

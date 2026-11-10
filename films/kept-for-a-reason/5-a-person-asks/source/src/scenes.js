@@ -243,7 +243,7 @@ scene("off",(ctx,S,t,sc)=>{const c=sc.cues,T=ap_once(sc,"T",()=>({
       if(rest>0){cx.save();cx.globalAlpha*=rest;
         ap_clock(cx,1300,420,120,7,clamp((tt-T.seven)/1.0,0,1),{label:"7 days",size:36});
         ap_up(cx,tt,T.dec2,()=>dp_slip(cx,1200,600,"Wed 2 Dec","grey",{ink:true}));
-        ap_up(cx,tt,T.dmd,()=>dp_slip(cx,1200,696,"Film 4 · Deleted means deleted","grey",{ink:true}));cx.restore();}
+        ap_up(cx,tt,T.dmd,()=>dp_slip(cx,1200,696,"Film 4 of 5 · Deleted means deleted","grey",{ink:true}));cx.restore();}
       ap_up(cx,tt,T.dmd+1.0,()=>dp_slip(cx,200,770,"Locked backups · out of use · the last gone 24 Dec","grey",{ink:true}));
       // what would have happened: her yes still on her, and the next rebuild bringing her row back
       if(re>0){cx.save();cx.globalAlpha*=re;ap_wish(cx,1260,170,true,{});dp_link(cx,[1258,300],[764,520],"coral",ag_sine(clamp((tt-T.back+0.8)/0.8,0,1)),{lw:2.6});

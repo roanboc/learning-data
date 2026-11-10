@@ -237,12 +237,12 @@ function ap_answer(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sav
 const AP_FILMS=[["A reason to keep it","Keep data for a reason you can say"],["How long, and then what","An end date, decided before it's needed"],["Forgetting a person","A person can ask; you must be able to answer"],
   ["Deleted means deleted","Done when the last copy is gone"],["A person asks","On time, with proof"]];
 function ap_films(c,o){o=o||{};AP_FILMS.forEach(([t,l],i)=>{const x=150,y=120+i*140,w=1620,q=o.each?o.each(i):1;if(q<=0)return;const lw=o.line?o.line(i):1,me=i===4;c.save();c.globalAlpha*=q;
-  dp_panel(c,x,y,w,118,{col:me?"cyan":"grey",r:20,glowR:me?40:24});dp_T(c,"FILM "+(i+1),x+32,y+48,{w:800,size:28,ls:4,col:me?"cyan":"mut"});dp_T(c,t,x+32,y+94,{w:700,size:34});
+  dp_panel(c,x,y,w,118,{col:me?"cyan":"grey",r:20,glowR:me?40:24});dp_T(c,"FILM "+(i+1)+" OF 5",x+32,y+48,{w:800,size:28,ls:4,col:me?"cyan":"mut"});dp_T(c,t,x+32,y+94,{w:700,size:34});
   if(lw>0){const n=Math.round(lw*l.length);dp_T(c,l.slice(0,n),x+720,y+74,{w:600,size:30});}
   c.restore();});}
 const AP_SERIES=[["Locks before the data","who may come in"],["Only what you may see","what each may see"],["Kept for a reason","how long anything stays"]];
 function ap_series(c,o){o=o||{};AP_SERIES.forEach(([t,l],i)=>{const x=150+i*560,y=270,q=o.each?o.each(i):1;if(q<=0)return;c.save();c.globalAlpha*=q;dp_panel(c,x,y,500,300,{col:"cyan",r:22,glowR:36});
-  dp_T(c,"SERIES "+(i+1),x+30,y+58,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,t,x+30,y+120,{w:700,size:36});const lw=o.line?o.line(i):0;if(lw>0)dp_T(c,l,x+30,y+200,{w:600,size:30,col:"mut",a:lw});c.restore();});}
+  dp_T(c,"SERIES "+(i+1)+" OF 3",x+30,y+58,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,t,x+30,y+120,{w:700,size:36});const lw=o.line?o.line(i):0;if(lw>0)dp_T(c,l,x+30,y+200,{w:600,size:30,col:"mut",a:lw});c.restore();});}
 function ap_topics(c,o){o=o||{};const q=o.a==null?1:o.a;if(q<=0)return;c.save();c.globalAlpha*=q;
   dp_panel(c,210,330,700,260,{col:"grey",r:24,glowR:30});dp_T(c,"TOPIC",250,394,{w:800,size:28,ls:4,col:"mut"});dp_T(c,"Data protection and privacy",250,460,{w:700,size:40});dp_T(c,"Three series · 22 films",250,516,{w:600,size:28,col:"mut"});
   const n=o.next||0;dp_panel(c,1010,330,700,260,{col:"cyan",r:24,glowR:30+30*n,glowA:0.5+0.8*n});dp_T(c,"NEXT",1050,394,{w:800,size:28,ls:4,col:"cyan"});dp_T(c,"AI agents in data work",1050,460,{w:700,size:40});

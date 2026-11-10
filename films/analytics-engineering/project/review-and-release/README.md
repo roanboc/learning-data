@@ -16,6 +16,8 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | `rulesets/main.json` | The ruleset on `main`, as GitHub exports one |
 | `test.json`, `production.json` | The environments `test` and `production`, each as the body of GitHub's REST call that sets it |
 | `release.yml` | The release, every night at 23:00 or when a person starts it: it builds `main` in test; only if test passes does it go on to production, where it waits for a release approver, then signs in to Databricks with no secret, deploys the bundle (`../databricks.yml`) and runs the build (`../resources/build.job.yml`) |
+| `dependabot.yml` | Dependabot's settings: each week it proposes the new versions of the actions the workflows use, and of the project's Python libraries, each as a pull request, reviewed like any other change |
+| `codeql.yml` | Code scanning with CodeQL, on every pull request to `main` and on `main`: it reads the project's Python and its workflows, and what it finds shows on the pull request as a check |
 | `teams.yml` | GitHub's teams that the rules name, written from the roles on the map by `../scripts/generate/teams.py`. Don't edit it |
 
 `../examples/class-size/` follows one change through all of it: the planning agent's first pull request.
@@ -39,6 +41,7 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | Not even an administrator skips the release approver | A release forced through in a hurry | The environment's settings: *Allow administrators to bypass configured protection rules*, cleared |
 | Only `main` deploys, to test and to production | A branch released before its review | Each environment's one deployment branch, `main` |
 | The release signs in to Databricks with no secret, and only from its own environment's job | A secret that leaks, or another job writing to test or production | The federation policy on each of the release's two service principals: this repository's jobs in `test`, or in `production`, and nothing else |
+| Each action the workflows use is pinned to a full commit, its version in a comment beside it | An action's tag or branch moved to other code, which then runs with the release's rights | `release.yml` and `codeql.yml`. Dependabot proposes each new version as a pull request (`dependabot.yml`), and CodeQL flags an action from outside GitHub named by a tag or a branch |
 | Production is deployed from `main` only, and the build runs as the release | A deploy from a branch, or a build under someone else's rights | `../databricks.yml` (`prod`: `mode: production`, `git.branch: main`; `run_as` its variable `service_principal`, which the release sets to its own identity) |
 | The release builds production; the agents only read it | An agent changing production | Grants on Databricks: the release builds in the production catalog, and the agents' groups only read it (`../AGENTS.md`, *Your access*) |
 
@@ -136,6 +139,8 @@ approver all the same, and they can't approve it themselves.
    warehouse the bundle looks up, *Data platform*, and joins `personal_data_readers`, since the identity that runs
    dbt must be in it (DEC-PRJ-13). No agent's group gets anything but reading.
 6. **`CODEOWNERS`** goes in `.github/`, as its header says.
+7. **Updates and code scanning.** `dependabot.yml` goes in `.github/`, and `codeql.yml` in `.github/workflows/`, as
+   their headers say.
 
 ## What it needs
 
@@ -154,3 +159,5 @@ approver all the same, and they can't approve it themselves.
 - The Databricks CLI's source, `bundle/config/mutator/resolve_lookup_variables.go` (read 10 November 2026): a
   variable that already has a value skips its lookup, so the release's `BUNDLE_VAR_service_principal` wins over the
   bundle's lookup of the platform's service principal.
+- For the pinned actions, Dependabot and CodeQL: *From a branch to production*'s sources, read on 5 November 2026
+  (`../../../locks-before-the-data/8-from-a-branch-to-production/script.md`).

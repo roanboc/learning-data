@@ -43,10 +43,10 @@ jobs:
       DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
       BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # The Databricks CLI, as Databricks' own examples install it
-      - uses: databricks/setup-cli@main
+      # The Databricks CLI. Like the checkout above, pinned to a full commit, its version beside it (dependabot.yml)
+      - uses: databricks/setup-cli@9625fdde9ba2607df0087e0d3ec7449198bf2180 # v1.23.0
 
       - name: Check the bundle
         run: databricks bundle validate -t test
@@ -67,9 +67,9 @@ jobs:
       DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
       BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: databricks/setup-cli@main
+      - uses: databricks/setup-cli@9625fdde9ba2607df0087e0d3ec7449198bf2180 # v1.23.0
 
       - name: Check the bundle
         run: databricks bundle validate -t prod

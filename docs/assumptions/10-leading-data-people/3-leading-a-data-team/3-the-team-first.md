@@ -1,8 +1,8 @@
 # The team comes first: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 3 · open, PR #257 · [pull request](https://github.com/roanboc/learning-data/pull/257)
+*Leading data people* · *Leading a data team*, film 3 · merged, PR #257 · [pull request](https://github.com/roanboc/learning-data/pull/257)
 
-On the site once PR #257 merges: https://data.learn-all.org/leading-a-data-team/the-team-first/
+[Watch it on the site](https://data.learn-all.org/leading-a-data-team/the-team-first/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -34,6 +34,6 @@ Film 3 of *Leading a data team* (film 9 of the module *Leading data people*). Ma
 | 22 | Which links under *Go further*? | Wikipedia's *Ubuntu philosophy* and *Desmond Tutu* (both in Spanish too), *Psychological safety* (English only), *Rotating savings and credit association* (in Spanish too), and NASASA's site. All checked on 10 November 2026. | The film's page |
 | 23 | The poster? | The four who can answer every night alert, each with a green tick, 3 s into "By the end of June, four people can answer every night alert, not one". | The film's card and page |
 | 24 | How to publish the soundtrack? | As the films merged on 10 November did: the MP3 committed beside the player, and `audio.json` recording its checksum and release tag (`audio-the-team-first-5205cca2de9b23dbe712`). The audio workflow copies it to that release when the film reaches main; nothing for you to run. | `films/leading-a-data-team/3-the-team-first/audio.json` |
-| 25 | When does it merge? | In the module's order, after films 1 to 8, one at a time, on green, with the Draft label. On 10 November only film 1 had merged and films 2 to 8 had no pull request yet, so this one waits, kept up to date with main. | The pull request |
+| 25 | When does it merge? | In its series' order, as the module's other films merge since 10 November: after *Less, on purpose* (#259) and *One small change at a time* (#268), one at a time, on green, with the Draft label, kept up to date with main until then. *Rules that let people decide* (#260) merges after it. | The pull request |
 | 26 | A review page or a render? | Neither, by the standing rule for these threads (renders and review pages wait for you); the film is checked by its tools and by full-size stills, and you review it on the site, under its Draft label. | — |
 | 27 | Are the names said right? | The voice says "stokvel" as "stokfel", "apartheid" as "apart-ate", and "Mogobe Ramose" as "Moh-goh-beh Ra-mo-seh", by say rules in `film.json`, with the module's rules for Reyes, Jun and Noor. | The voice |

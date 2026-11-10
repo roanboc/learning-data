@@ -1,0 +1,69 @@
+{
+  "key": "small-every-week",
+  "title": "Small, every week",
+  "sub": "The fourth and last film of Quality as a habit, and the last of the module Data quality: in Mexico, from 1945, a small team of Mexican agronomists and Norman Borlaug beat the wheat's stem rust by growing two generations a year, in two fields far apart, and keeping the best each round; at the university, after 41 certificates were printed again, four people meet for fifteen minutes every Thursday, make one small change, measure it and keep it with a check, and a year later it is 3.",
+  "howto": "The film is drawn in the module's look, the quality bench: the data team's workroom, a wall of warm limestone over a granite bench, light from a window on the right; records are cream index cards, and results are tags tied on with string. Green is a check that passes, amber a name held for a person to look at, red a check that stops, grey not checked; brass is what good means for a use, and steel blue a measure taken. Mexico's wheat fields are painted in the same light, and the rust's red-brown is the rust's own.",
+  "src": [
+    "sw_map.js",
+    "sw_world.js",
+    "sw_people.js",
+    "sw_cards.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "stage",
+    "reads",
+    3.0
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMalia\\b",
+      "Mah-lee-ah"
+    ],
+    [
+      "\\bFonoti\\b",
+      "Fo-no-tee"
+    ],
+    [
+      "\\bAndr(é|e)s\\b",
+      "Ahn-dress"
+    ],
+    [
+      "\\bPe(ñ|n)aloza\\b",
+      "Pen-yah-lo-sah"
+    ],
+    [
+      "\\bdbt\\b",
+      "dee bee tee"
+    ],
+    [
+      "\\bShewhart\\b",
+      "Shoo-hart"
+    ],
+    [
+      "\\bBorlaug's\\b",
+      "Bor-log's"
+    ],
+    [
+      "\\bBorlaug\\b",
+      "Bor-log"
+    ]
+  ],
+  "story": [
+    "harvests"
+  ],
+  "urgent": [],
+  "logos": true
+}

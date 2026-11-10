@@ -12,6 +12,9 @@ Four ideas to lead a data team by, one in each film, each taught from its own so
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Less, on purpose](https://data.learn-all.org/leading-a-data-team/less-on-purpose/) | Minimalism in a team | 9 min | 7 | 3 questions | [script](1-less-on-purpose/script.md) · [source](1-less-on-purpose/source/README.md) |
+| [One small change at a time](https://data.learn-all.org/leading-a-data-team/one-small-change/) | Kaizen in a team | 8 min | 6 | 3 questions | [script](2-one-small-change/script.md) · [source](2-one-small-change/source/README.md) |
+| [The team comes first](https://data.learn-all.org/leading-a-data-team/the-team-first/) | A team that holds | 9½ min | 7 | 3 questions | [script](3-the-team-first/script.md) · [source](3-the-team-first/source/README.md) |
+| [Rules that let people decide](https://data.learn-all.org/leading-a-data-team/rules-to-decide/) | Letting people decide | 10 min | 7 | 3 questions | [script](4-rules-to-decide/script.md) · [source](4-rules-to-decide/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -13,6 +13,7 @@ Delivering and improving data work in small steps. Facilities asks for a dashboa
 |---|---|---|---|---|---|
 | [Prototype first](https://data.learn-all.org/small-steps-measured/prototype-first/) | Prototype and iterate | 7½ min | 6 | 3 questions | [script](1-prototype-first/script.md) · [source](1-prototype-first/source/README.md) |
 | [Measures that matter](https://data.learn-all.org/small-steps-measured/measures-that-matter/) | Measuring what people get | 8 min | 7 | 3 questions | [script](2-measures-that-matter/script.md) · [source](2-measures-that-matter/source/README.md) |
+| [Better every week](https://data.learn-all.org/small-steps-measured/better-every-week/) | Improving how the team works | 6½ min | 6 | 3 questions | [script](3-better-every-week/script.md) · [source](3-better-every-week/source/README.md) |
 | [Strategy is a habit](https://data.learn-all.org/small-steps-measured/strategy-is-a-habit/) | Reviewing the strategy | 8½ min | 6 | 3 questions | [script](4-strategy-is-a-habit/script.md) · [source](4-strategy-is-a-habit/source/README.md) |
 <!-- /films -->
 

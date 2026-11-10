@@ -18,7 +18,7 @@ Find a module, series or film in the generated [portal-to-source catalog](module
 
 Legacy hand-written entries in `HAND` also declare their `source` folder and any `learning` packs there, so the catalog reads the same registry as the portal.
 
-- **Generated files are generated.** Pages made by `site-tools/build_series.py`, the *Decided* tables in the series' `proposal.md` and the legibility report's table are never edited by hand: change the film's own rows (`decided.md`, `site.json`, `release.json`) and run `python site-tools/build_series.py`.
+- **Generated files are generated.** Pages made by `site-tools/build_series.py`, the *Decided* tables in the series' `proposal.md` are never edited by hand (the legibility report's table isn't committed: `python site-tools/build_series.py --legibility` prints it): change the film's own rows (`decided.md`, `site.json`, `release.json`) and run `python site-tools/build_series.py`.
 - **Each film keeps its own rows**, so two films never edit the same list; on a merge clash in a generated page, merge the rows in the films' own files and run `build_series.py` again. See *Each film keeps its own rows* in [README.md](README.md).
 - **Stay in the film's lane.** A series' shared source is bundled by every film in it; put a film's own helper in that film's source. A shared fix is a new version of every film that draws with it (AGENTS.md, *Rules that always apply*).
 - **Write the decision down** in the film's or series' `decided.md`, with its date.

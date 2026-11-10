@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for The team comes first, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (whole, aloud, holds), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  whole:{q:"Helena is new, and next to her last team this one might look slow. What does she do before she judges anyone?",
+    opts:[{t:"She sets her last team's targets in her first week, so everyone knows from the start what good looks like."},{t:"She reads the team as a whole, what it does together and each person's work, against what it really does.",ok:true},{t:"She goes through each person's task list with them every week, so she can see early who is slow, and help.",near:true}],
+    why:"She watches first. She reads what the team achieves together, with each person's work beside it, against what this team really does: requests in eleven different ways, and a platform running day and night. Her weekly half hour is about each person, never a status report. That's how she finds the gap that matters most: every night alert going to Sam. What would your team look like, measured against what it really does?"},
+  aloud:{q:"Ivy says at stand-up that she nearly let a wrong model through. What makes her mistake one the whole team learns from?",
+    opts:[{t:"She's thanked, then asked to check every draft twice from now on, so the same mistake can't get through again.",near:true},{t:"Helena talks it over with her alone after the meeting, so she isn't embarrassed in front of the whole team."},{t:"She's thanked, not blamed, and asked what would make it easier to catch: what used means goes in the glossary.",ok:true}],
+    why:"Said out loud and thanked, a mistake becomes the team's to learn from: that week, two more people say what they nearly missed. Helena doesn't ask who's to blame, or who should try harder: she asks what would make it easier to catch. Ivy's answer, what used means, written in the glossary, makes the next draft start from it. Amy Edmondson calls the shared belief behind it psychological safety. When did someone on your team last say I got it wrong, and what happened next?"},
+  holds:{q:"Until June, Sam answered every night alert alone. What let the team carry him when he had to go in August?",
+    opts:[{t:"Four people had learned the nights by pairing with him in June, writing runbooks as they went, so the rota held.",ok:true},{t:"Sam wrote a runbook for every alert on the evening he left, so whoever took his week could follow it step by step.",near:true},{t:"Helena told the people who asked to expect no help from the platform until Sam was back at work again."}],
+    why:"The team paid in before anyone needed it, like a stokvel. Through June, Sam worked beside Noor, Jun and Erin, one alert at a time, and each time they wrote down how. When his mother was taken into hospital, there was no time to write anything: Jun and Erin took his week from the runbooks, Helena moved his other work, and nobody called him. Which job on your team could only one person do tonight?"}
+  }}};

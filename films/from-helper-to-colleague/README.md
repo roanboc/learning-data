@@ -11,6 +11,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Every change through review](https://data.learn-all.org/from-helper-to-colleague/every-change-through-review/) | Review before release | 7½ min | 7 | 4 questions | [script](6-every-change-through-review/script.md) · [source](6-every-change-through-review/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

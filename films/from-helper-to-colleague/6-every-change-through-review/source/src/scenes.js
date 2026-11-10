@@ -21,7 +21,7 @@ function ec_when(ctx,x,y,old,neu,u,a){if(!(a>0))return;const w=Math.max(ag_tw(ct
 /* ---------------------------------------------------------------- 1 · The agent's first pull request */
 scene("first",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({uni:wAt(sc,"place","the university"),tue:wAt(sc,"place","On Tuesday"),agent:wAt(sc,"place","Planning's agent"),
     opened:wAt(sc,"place","opened its first pull request"),forward:wAt(sc,"what","a change put forward"),read:wAt(sc,"what","for people to read"),accept:wAt(sc,"what","to accept or not"),
-    plan:wAt(sc,"plan","class plan"),next:wAt(sc,"plan","next semester"),many:wAt(sc,"plan","how many classes"),hire:wAt(sc,"tutors","hire their tutors"),
+    plan:wAt(sc,"plan","class plan"),planning:wAt(sc,"plan","Planning's"),next:wAt(sc,"plan","next semester"),many:wAt(sc,"plan","how many classes"),hire:wAt(sc,"tutors","hire their tutors"),
     of25:wAt(sc,"labs","classes of twenty-five"),lab:wAt(sc,"labs","But a laboratory"),holds:wAt(sc,"labs","holds sixteen"),every:wAt(sc,"stakes","every faculty"),
     dropped:wAt(sc,"wrong","dropped a unit"),doubled:wAt(sc,"wrong","doubled its classes"),without:wAt(sc,"wrong","without a class"),pay:wAt(sc,"wrong","pay tutors"),
     approve:wAt(sc,"own","approve its own change"),put:wAt(sc,"own","put it there"),before:wAt(sc,"own","before anyone had looked"),had:wAt(sc,"change","had to change"),
@@ -52,7 +52,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({uni:wAt(sc,"
     // every faculty plans with it (later:true: the agent and its pull request leave, then the plan comes in)
     {later:true,at:c.plan,place:"ecLab",keys:[[c.plan,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
       const wr=ag_in(tt,c.wrong-0.2,0.4);
-      ec_plan(x,120,170,860,{a:ag_in(tt,P.plan-0.2,0.5),k:ag_spr(tt,P.plan-0.2),sub:"2027 Semester 1 · 1,236 units",col25:ag_io(tt,P.of25,c.stakes,0.5),lab:ag_io(tt,P.lab,c.stakes,0.5),
+      ec_plan(x,120,170,860,{a:ag_in(tt,P.planning-0.3,0.5),k:ag_spr(tt,P.planning-0.3),sub:"2027 Semester 1 · 1,236 units",col25:ag_io(tt,P.of25,c.stakes,0.5),lab:ag_io(tt,P.lab,c.stakes,0.5),
         drop:clamp((tt-P.dropped)/0.7,0,1),dbl:clamp((tt-P.doubled)/0.7,0,1)});
       ec_card(x,1080,200,560,{kick:"The faculties",title:"hire their tutors from it",sub:"in November, for February"},{a:ag_in(tt,P.hire,0.5)*(1-ag_in(tt,P.of25,0.4)),k:ag_spr(tt,P.hire),edge:AG.blue});
       ec_line(x,990,330,1066,330,clamp((tt-P.hire+0.2)/0.5,0,1)*(1-ag_in(tt,P.of25,0.4)),{col:AG.blue,lw:3});
@@ -175,7 +175,7 @@ scene("checks",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({whole:wAt(s
     {later:true,at:c.diff,place:"ecLab",keys:[[c.diff,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
       const out=ag_in(tt,c.sees-0.3,0.5),R1=[["DA501",5],["HI205",8],["ED220",5],["BA510",3]],R2=[["DA501",5],["HI205",5],["ED220",4],["BA510",3]];
       withA(x,1-out,()=>{ag_label(x,150,160,"The same table, unit by unit",{col:AG.kick,a:ag_in(tt,P.same,0.5)});
-        const L=ec_side(x,150,180,620,"agent/planning/class-size","the agent's branch",R1,{col:AG.violet,hl:[0,1,1,0],cmp:ag_in(tt,P.ch,0.5),a:ag_in(tt,P.abr,0.5),k:ag_spr(tt,P.abr)});
+        const L=ec_side(x,150,180,620,"agent/planning/class-size","the agent's branch",R1,{col:AG.violet,hl:[0,1,1,0],cmp:ag_in(tt,P.ch,0.5),a:ag_in(tt,P.same,0.5),k:ag_spr(tt,P.same)});
         const M=ec_side(x,1150,180,620,"main","production is built from it",R2,{a:ag_in(tt,P.main,0.5),k:ag_spr(tt,P.main)});
         // compared unit by unit: a line from each row to its row
         R1.forEach((r,i)=>ec_line(x,782,L.rowY(i),1138,M.rowY(i),clamp((tt-P.cmp-i*0.2)/0.5,0,1),{col:i===1||i===2?AG.green:AG.mut,dash:[8,8],head:false,lw:2.4}));
@@ -343,7 +343,7 @@ scene("release",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({appr:wAt(s
   ec_kick(ctx,S,1);});
 
 /* ---------------------------------------------------------------- 7 · An agent proposes, a person releases */
-scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({since:wAt(sc,"faculties","Since Wednesday"),plan:wAt(sc,"faculties","their plan"),n263:wAt(sc,"faculties","two hundred"),
+scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({since:wAt(sc,"faculties","Since Wednesday"),fac:wAt(sc,"faculties","the faculties"),plan:wAt(sc,"faculties","their plan"),n263:wAt(sc,"faculties","two hundred"),
     place:wAt(sc,"faculties","a place for every student"),list:wAt(sc,"faculties","a list of the thirty-one"),same:wAt(sc,"path","the same path"),e:wAt(sc,"path","evidence"),
     ch:wAt(sc,"path","checks"),d:wAt(sc,"path","a diff"),r:wAt(sc,"path","a review"),ap:wAt(sc,"roles","approval"),rel:wAt(sc,"roles","a second person's release"),
     ag:wAt(sc,"both","For agents"),pp:wAt(sc,"both","for people"),prop:wAt(sc,"lesson","An agent proposes"),rel2:wAt(sc,"lesson","A person releases")}));
@@ -352,16 +352,16 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ec_once(sc,"P",()=>({since:wAt(sc
     // set (later:true: the agent leaves; the plan comes in)
     {later:true,at:0,place:"ecLab",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>{ag_roomLight(x,1);
       ec_corner(x,"Since Wednesday",ag_in(tt,P.since,0.5));
-      ec_plan(x,120,170,860,{a:ag_in(tt,P.plan-0.2,0.5),k:ag_spr(tt,P.plan-0.2),sub:"2027 Semester 1 · 1,236 units",own:1,after:1,more:1});
-      ec_faculties(x,120,720,{a:ag_in(tt,P.plan,0.4),k:EC_FACULTIES.map((f,i)=>ag_spr(tt,P.plan+i*0.15))});
+      ec_plan(x,120,170,860,{a:ag_in(tt,P.fac-0.1,0.5),k:ag_spr(tt,P.fac-0.1),sub:"2027 Semester 1 · 1,236 units",own:1,after:1,more:1});
+      ec_faculties(x,120,720,{a:ag_in(tt,P.fac+0.3,0.4),k:EC_FACULTIES.map((f,i)=>ag_spr(tt,P.fac+0.3+i*0.15))});
       ec_big(x,1080,200,640,"263","more classes",{a:ag_in(tt,P.n263,0.5),k:ag_spr(tt,P.n263)});
       ec_pillL(x,1080,450,"a place for every student",tt,P.place,null,{col:AG.green,icon:"tick"});
       ec_card(x,1080,520,640,{kick:"Still to set",title:"31 units",sub:"a list for the faculties, every night"},{a:ag_in(tt,P.list,0.5),k:ag_spr(tt,P.list),edge:AG.amber,kickCol:AG.amber});}},
     // every change takes the same path; for agents, as for people (later:true: the plan leaves; the path comes in)
     {later:true,at:c.path,place:"ecLab",keys:[[c.path,960,540,1]],push:0.015,draw:(x,tt)=>{ag_roomLight(x,1);
       const L=[P.e,P.ch,P.d,P.r,P.ap,P.rel];
-      ag_label(x,960,200,"Every change, the same path",{align:"center",col:AG.kick,a:ag_in(tt,P.same,0.5)});
-      ec_path(x,150,250,1620,{a:ag_in(tt,P.same,0.4),k:L.map(t0=>ag_spr(tt,P.same+0.1)),lit:L.map(t0=>ag_in(tt,t0,0.5)),done:L.map(t0=>ag_in(tt,t0+0.4,0.4)),
+      ag_label(x,960,200,"Every change, the same path",{align:"center",col:AG.kick,a:ag_in(tt,c.path+0.1,0.5)});
+      ec_path(x,150,250,1620,{a:ag_in(tt,c.path+0.2,0.4),k:L.map(t0=>ag_spr(tt,c.path+0.3)),lit:L.map(t0=>ag_in(tt,t0,0.5)),done:L.map(t0=>ag_in(tt,t0+0.4,0.4)),
         chip:L.reduce((s,t0,i)=>s+(i?ag_sine(clamp((tt-t0+0.6)/0.8,0,1)):0),0),chipA:ag_in(tt,P.e,0.4)});
       ec_pillAt(x,700,660,"for agents",tt,P.ag,null,{col:AG.violet,size:34});ec_pillAt(x,1220,660,"as for people",tt,P.pp,null,{col:AG.green,size:34});}},
     // an agent proposes; a person releases (later:true; it all leaves before the end card's words come)

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/workloads-without-secrets/soundtrack.mp3",
+      "size": 7424043,
+      "sha256": "e1e2f27349a6d3462d3431e598d41bf7b80dae8dfc5e86976ca7ae9ee392a017",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-workloads-without-secrets-bec5e06fe34bd2059c57/e1e2f27349a6d3462d3431e598d41bf7b80dae8dfc5e86976ca7ae9ee392a017.mp3"
+    }
+  ]
+}

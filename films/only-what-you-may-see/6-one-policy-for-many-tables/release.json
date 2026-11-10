@@ -1,0 +1,51 @@
+[
+  {
+    "name": "One policy for many tables",
+    "key": "one-policy-for-many-tables-en",
+    "dir": "films/only-what-you-may-see/6-one-policy-for-many-tables/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/one-policy-for-many-tables/film.js",
+    "video": "dist/one-policy-for-many-tables.mp4",
+    "file": "one-policy-for-many-tables.mp4",
+    "captions": [
+      [
+        "films/only-what-you-may-see/6-one-policy-for-many-tables/captions/en.srt",
+        "one-policy-for-many-tables.en.srt"
+      ],
+      [
+        "films/only-what-you-may-see/6-one-policy-for-many-tables/captions/es.srt",
+        "one-policy-for-many-tables.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/only-what-you-may-see/6-one-policy-for-many-tables/source",
+      ":(exclude)films/only-what-you-may-see/6-one-policy-for-many-tables/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/people.js",
+      "films/what-an-agent-is/shared/tools/edges.py",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 430,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

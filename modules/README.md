@@ -176,6 +176,7 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 
 - [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
+- [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 
 ## Enterprise architecture
 
@@ -277,6 +278,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
+- [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 
 ### Only what you may see
 
@@ -287,6 +289,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
+- [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 
 ### Kept for a reason
 
@@ -368,6 +371,8 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
 - [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
+- [One small change at a time](../films/leading-a-data-team/2-one-small-change/) — `one-small-change`
+- [The team comes first](../films/leading-a-data-team/3-the-team-first/) — `the-team-first`
 - [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
 ### Ownership and performance
@@ -389,12 +394,14 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
 - [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
+- [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
 
 ### Making the case
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
+- [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
 
 ### Architecture that keeps up
 

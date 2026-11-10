@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Explaining so people can decide",
+    "key": "explaining-to-decide-en",
+    "dir": "films/working-with-people/2-explaining-to-decide/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/explaining-to-decide/film.js",
+    "video": "dist/explaining-to-decide.mp4",
+    "file": "explaining-to-decide.mp4",
+    "captions": [
+      [
+        "films/working-with-people/2-explaining-to-decide/captions/en.srt",
+        "explaining-to-decide.en.srt"
+      ],
+      [
+        "films/working-with-people/2-explaining-to-decide/captions/es.srt",
+        "explaining-to-decide.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/working-with-people/2-explaining-to-decide/source",
+      ":(exclude)films/working-with-people/2-explaining-to-decide/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 310,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

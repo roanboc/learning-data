@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Read by an agent",
+    "key": "read-by-an-agent-en",
+    "dir": "films/quality-as-a-habit/3-read-by-an-agent/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/read-by-an-agent/film.js",
+    "video": "dist/read-by-an-agent.mp4",
+    "file": "read-by-an-agent.mp4",
+    "captions": [
+      [
+        "films/quality-as-a-habit/3-read-by-an-agent/captions/en.srt",
+        "read-by-an-agent.en.srt"
+      ],
+      [
+        "films/quality-as-a-habit/3-read-by-an-agent/captions/es.srt",
+        "read-by-an-agent.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/quality-as-a-habit/3-read-by-an-agent/source",
+      ":(exclude)films/quality-as-a-habit/3-read-by-an-agent/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 334,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

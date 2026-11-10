@@ -451,6 +451,7 @@ const NARR={
 "two":{"name":"Two questions","lead":0.8,"tail":1.0,"vo":[
  {"id":"noor","gap":0.8,"text":"In September, Noor, the data architect, asked each data owner two questions."},
  {"id":"ask","gap":0.8,"text":"How fresh must it be? And how often is it read?"},
+ {"id":"split","gap":0.8,"text":"The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept."},
  {"id":"hot","gap":0.8,"text":"Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used."},
  {"id":"warm","gap":0.8,"text":"Fresh to the hour or the day, and read often: warm. Work it out on a schedule."},
  {"id":"cold","gap":0.8,"text":"Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted."},
@@ -465,7 +466,7 @@ const NARR={
  {"id":"table","gap":0.8,"text":"A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands."},
  {"id":"minute","gap":0.8,"text":"The app sees each change within a minute."},
  {"id":"monday","gap":0.8,"text":"This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon."},
- {"id":"costs","gap":0.8,"text":"Hot costs the most, because something is always running: keep hot only what's needed within minutes."}]},
+ {"id":"costs","gap":0.8,"text":"Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes."}]},
 "warm":{"name":"Warm","lead":0.8,"tail":1.0,"vo":[
  {"id":"rohan","gap":0.8,"text":"Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget."},
  {"id":"before","gap":0.8,"text":"Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked."},
@@ -477,6 +478,7 @@ const NARR={
  {"id":"records","gap":0.8,"text":"Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked."},
  {"id":"law","gap":0.8,"text":"Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read."},
  {"id":"before","gap":0.8,"text":"Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them."},
+ {"id":"tiers","gap":0.8,"text":"The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is."},
  {"id":"archive","gap":0.8,"text":"Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest."},
  {"id":"vault","gap":0.8,"text":"Like the copies on Svalbard, they sleep until someone needs them."},
  {"id":"told","gap":0.8,"text":"The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back."},
@@ -495,23 +497,23 @@ const NARR={
  {"id":"svalbard","gap":0.8,"text":"On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again."},
  {"id":"university","gap":0.8,"text":"At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted."},
  {"id":"today","gap":0.8,"text":"Today, 2,960 people are paid, 856 of them casual staff, Linh among them.","say":"Today, two thousand, nine hundred and sixty people are paid, eight hundred and fifty-six of them casual staff, Linh among them."},
- {"id":"takeaway","gap":0.8,"text":"Freshness and reading decide how data moves and where it lives."},
+ {"id":"takeaway","gap":0.8,"text":"Freshness decides how data moves; reading decides where it lives."},
  {"id":"wheel","gap":0.8,"text":"Storage has had tiers for years: there's no wheel to reinvent."},
  {"id":"docs","gap":0.8,"text":"Start from the official docs, then investigate, adapt, implement, iterate."},
  {"id":"next","gap":0.8,"text":"Next: one copy of the claims, for the app and for Finance."}]}
 };
 
-const VODUR={"vault/feb": 7.581, "vault/copies": 4.802, "vault/banks": 7.208, "vault/aleppo": 10.652, "vault/send": 3.983, "vault/lost": 6.278, "vault/war": 7.487, "vault/risk": 5.546, "vault/change": 1.288, "vault/ask": 5.647, "vault/sown": 7.283, "vault/gone": 3.528, "vault/few": 7.322, "vault/kept": 5.878, "vault/data": 1.6, "vault/alike": 7.048, "vault/slow": 6.273, "vault/now": 5.054, "two/noor": 4.936, "two/ask": 2.734, "two/hot": 6.187, "two/warm": 4.746, "two/cold": 4.754, "two/contract": 4.711, "hot/claims": 6.594, "hot/checks": 4.953, "hot/change": 5.874, "hot/night": 5.57, "hot/late": 5.009, "hot/push": 5.164, "hot/table": 6.359, "hot/minute": 1.911, "hot/monday": 6.096, "hot/costs": 5.672, "warm/rohan": 7.561, "warm/before": 7.046, "warm/mv": 6.773, "warm/dbt": 4.613, "warm/answer": 3.037, "warm/most": 6.688, "cold/records": 6.345, "cold/law": 6.577, "cold/before": 8.317, "cold/archive": 5.33, "cold/vault": 3.581, "cold/told": 7.601, "cold/hours": 3.23, "cold/seven": 6.459, "cold/october": 4.104, "cold/privacy": 3.241, "cools/cools": 2.62, "cools/linh": 3.811, "cools/list": 5.758, "cools/paid": 4.378, "cools/year": 6.382, "cools/follow": 3.464, "close/svalbard": 6.487, "close/university": 8.514, "close/today": 7.891, "close/takeaway": 3.653, "close/wheel": 3.684, "close/docs": 4.507, "close/next": 3.583};
+const VODUR={"vault/feb": 7.581, "vault/copies": 4.802, "vault/banks": 7.208, "vault/aleppo": 10.652, "vault/send": 3.983, "vault/lost": 6.278, "vault/war": 7.487, "vault/risk": 5.546, "vault/change": 1.288, "vault/ask": 5.647, "vault/sown": 7.283, "vault/gone": 3.528, "vault/few": 7.322, "vault/kept": 5.878, "vault/data": 1.6, "vault/alike": 7.048, "vault/slow": 6.273, "vault/now": 5.054, "two/noor": 4.936, "two/ask": 2.734, "two/split": 6.175, "two/hot": 6.187, "two/warm": 4.746, "two/cold": 4.754, "two/contract": 4.711, "hot/claims": 6.594, "hot/checks": 4.953, "hot/change": 5.874, "hot/night": 5.57, "hot/late": 5.009, "hot/push": 5.164, "hot/table": 6.359, "hot/minute": 1.911, "hot/monday": 6.096, "hot/costs": 6.851, "warm/rohan": 7.561, "warm/before": 7.046, "warm/mv": 6.773, "warm/dbt": 4.613, "warm/answer": 3.037, "warm/most": 6.688, "cold/records": 6.345, "cold/law": 6.577, "cold/before": 8.317, "cold/tiers": 7.87, "cold/archive": 5.33, "cold/vault": 3.581, "cold/told": 7.601, "cold/hours": 3.23, "cold/seven": 6.459, "cold/october": 4.104, "cold/privacy": 3.241, "cools/cools": 2.62, "cools/linh": 3.811, "cools/list": 5.758, "cools/paid": 4.378, "cools/year": 6.382, "cools/follow": 3.464, "close/svalbard": 6.487, "close/university": 8.514, "close/today": 7.891, "close/takeaway": 3.933, "close/wheel": 3.684, "close/docs": 4.507, "close/next": 3.583};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the university's three kinds of data, each found at its own temperature, giving way to the title card; and the end card. */
 const BREATH={
 "vault":{"hold":{"feb":0.6,"copies":0.4,"aleppo":0.6,"send":0.6,"war":0.6,"risk":0.6,"change":1.0,"sown":0.8,"few":0.8,"kept":1.0,"data":0.6,"slow":0.4,"now":0.6},"breathe":4.6},
-"two":{"hold":{"noor":0.4,"ask":1.0,"hot":0.8,"warm":0.8,"cold":0.8,"contract":1.0}},
+"two":{"hold":{"noor":0.4,"ask":1.0,"split":0.8,"hot":0.8,"warm":0.8,"cold":0.8,"contract":1.0}},
 "hot":{"hold":{"claims":0.6,"checks":0.4,"change":0.6,"night":0.6,"late":0.8,"push":0.8,"table":0.8,"minute":0.8,"monday":0.8,"costs":1.0}},
 "warm":{"hold":{"rohan":0.6,"before":0.8,"mv":0.8,"dbt":0.4,"answer":0.6,"most":0.8}},
-"cold":{"hold":{"records":0.4,"law":0.4,"before":0.6,"archive":1.0,"vault":1.0,"told":0.8,"hours":0.4,"seven":0.8,"october":0.6,"privacy":1.0}},
+"cold":{"hold":{"records":0.4,"law":0.4,"before":0.6,"tiers":0.8,"archive":1.0,"vault":1.0,"told":0.8,"hours":0.4,"seven":0.8,"october":0.6,"privacy":1.0}},
 "cools":{"hold":{"cools":0.8,"linh":0.6,"list":1.0,"paid":1.0,"year":1.0,"follow":1.2}},
 "close":{"hold":{"svalbard":0.8,"university":0.6,"today":0.8,"takeaway":1.0,"wheel":0.4,"docs":0.6,"next":0.6},"breathe":4.6}
 };
@@ -2324,7 +2326,7 @@ scene("hot",(ctx,S,t,sc)=>{
       hw_tagAt(c,930,380,"within a minute",tt,T.minute+0.2,T.costs,{col:MD.flow,icon:"clock"});
       hw_pillAt(c,960,640,"11 contracts changed · every claim approved by noon",tt,T.noon2,T.costs-0.1,{col:MD.pass,icon:"tick"});
       hw_tagAt(c,808,360,"always running",tt,T.running-0.2,1e9,{col:MD.flow,icon:"refresh"});
-      hw_cardAt(c,480,600,960,{kick:"Hot",title:"Costs the most: something is always running",sub:"keep hot only what's needed within minutes"},tt,T.costs+0.2,1e9,{edge:HW.heat,kickCol:HW.heat});});
+      hw_cardAt(c,480,600,960,{kick:"Hot",title:"The pipeline costs the most: it's always running",sub:"keep hot only what's needed within minutes"},tt,T.costs+0.2,1e9,{edge:HW.heat,kickCol:HW.heat});});
     hw_personAt(c,"ingrid",270,660,0.85,tt,T.ingrid-0.3,T.night-0.4,{gaze:[4,-1]});}}],0.6);
 });
 
@@ -2377,7 +2379,7 @@ scene("cold",(ctx,S,t,sc)=>{
   const PAY=[96,150,420],payP=[516,205],REC=[700,154,460],TOP=520,LOW=740;
   // the shelves, the years on them, and what sank, was read or went: the same picture before and after the vault
   const shelves=(c,tt)=>{
-    hw_shelf(c,60,TOP+6,1500,"Hot storage","the costliest",{a:ag_in(tt,T.costliest-0.4,0.5)});hw_shelf(c,60,LOW+6,1500,"Archive tier","the cheapest",{cold:true,a:ag_in(tt,T.tier-0.4,0.5)});
+    hw_shelf(c,60,TOP+6,1500,"Hot tier","read often, costliest",{a:ag_in(tt,T.costliest-0.4,0.5)});hw_shelf(c,60,LOW+6,1500,"Archive tier","rarely read, cheapest",{cold:true,a:ag_in(tt,T.tier-0.4,0.5)});
     const sink=HW_YEARS.map((y,i)=>i<10?ag_sine((tt-T.written-0.2-i*0.22)/1.0):0),gone=HW_YEARS.map((y,i)=>i<3?ag_in(tt,T.gone+i*0.3,0.8):0),
       read=HW_YEARS.map((y,i)=>i===10?ag_in(tt,T.rarely-0.2,0.5)*(1-ag_in(tt,T.before,0.5))+hw_io(tt,T.recent,T.archived,0.3,0.4):i===5?hw_io(tt,T.which,T.turn,0.3,0.5):0);
     const lift=ag_sine((tt-T.back-0.2)/1.4)*(1-ag_in(tt,T.turn,0.8));sink[5]=sink[5]*(1-0.35*lift);
@@ -2456,10 +2458,10 @@ scene("close",(ctx,S,t,sc)=>{
       hw_personAt(c,"linh",360,800,0.95,tt,-1,T.br,{gaze:[4,0]});
       hw_scr(c,S,()=>{hw_when(c,S,"Today · pay day",hw_io(tt,T.today,T.br,0.4,0.6));
         hw_cardAt(c,820,250,900,{kick:"Paid today",title:"2,960 people",sub:"856 of them casual staff, Linh among them"},tt,T.today+0.3,T.take-0.2,{edge:MD.pass});
-        // what the film found: freshness and reading decide how data moves and where it lives
+        // what the film found: freshness decides how data moves; reading decides where it lives
         const k=(tt-T.take)/0.9,a=hw_io(tt,T.take,T.wheel,0.5,0.5);
         if(a>0.004){c.save();c.globalAlpha*=a;ag_about(c,1270,420,lerp(0.85,1,Math.min(1,ag_spr(k,0,0.5))));md_card(c,820,300,900,220,{edge:MD.flow,glow:0.6});
-          md_T(c,"Freshness and reading decide",1270,388,{w:700,size:40,align:"center"});md_T(c,"how data moves and where it lives",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
+          md_T(c,"Freshness decides how data moves;",1270,388,{w:700,size:40,align:"center"});md_T(c,"reading decides where it lives",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
         // storage has had tiers for years: no wheel to reinvent
         const wa=hw_io(tt,T.wheel,T.docs,0.5,0.5);if(wa>0.004){md_mark(c,1270,380,80,(tt-T.wheel)/1.6,wa);md_T(c,"storage has had tiers for years",1270,540,{w:700,size:32,align:"center",col:MD.soft,a:wa});}
         // the official docs, then investigate, adapt, implement, iterate
@@ -2469,7 +2471,7 @@ scene("close",(ctx,S,t,sc)=>{
           let vx=880;["investigate","adapt","implement","iterate"].forEach((v,i)=>{md_T(c,v,vx,480,{w:700,size:32,col:MD.flow,a:ag_in(tt,T.verbs+i*0.35,0.4)});vx+=md_tw(c,v,{w:700,size:32})+56;});c.restore();}
         hw_cardAt(c,820,330,900,{kick:"Next",title:"One copy, one platform",sub:"one copy of the claims, for the app and for Finance"},tt,T.next+0.2,T.br,{edge:MD.flow});});}}
   ],0.6);
-  md_end(ctx,S,t,T.br,"Hot, warm, cold","Freshness and reading decide how data moves and where it lives.","Film 2 of 3","Data that moves");
+  md_end(ctx,S,t,T.br,"Hot, warm, cold","Freshness decides how data moves; reading decides where it lives.","Film 2 of 3","Data that moves");
 });
 
 // chapters that open in the room the one before ends in: the camera glides on, and what the last one shows leaves first

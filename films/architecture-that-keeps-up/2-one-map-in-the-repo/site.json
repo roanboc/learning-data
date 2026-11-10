@@ -1,0 +1,80 @@
+{
+  "kicker": "One source of truth",
+  "kicker_es": "Una sola fuente de verdad",
+  "title_es": "Un solo mapa, en el repositorio",
+  "h1": "One map, in the repo: keep the architecture where every change is made",
+  "h1_es": "Un solo mapa, en el repositorio: la arquitectura donde se hace cada cambio",
+  "lead": "In spring 2027, Helena's target picture exists three times, and the council's slide is out of date. In June the map's source moves into the team's repository. Every change is reviewed like code, an agent drafts and a person decides, and the wiki and the slides are made from it.",
+  "lead_es": "En la primavera de 2027, la imagen objetivo de Helena existe tres veces, y la diapositiva del consejo está desactualizada. En junio el mapa pasa al repositorio del equipo. Cada cambio se revisa como el código, un agente redacta y una persona decide, y la wiki y las diapositivas salen de él.",
+  "description": "A film about keeping a data team's architecture as one source of truth, the second of Architecture that keeps up in the module Data management: the map of the platform and of the way data is delivered, kept as files in a git repository, in a standard language (ArchiMate's exchange format, from The Open Group), with only what is the team's own added to it, and its diagrams kept as text (Mermaid, draw.io); every change a pull request with its reason, reviewed by someone other than its author, that updates the current and target state in the change that moves them, with a check that fails when a new source has no place on the map, and a short decision record (Michael Nygard, 2011) for a big choice; nobody waits for a funded project; the wiki, the slides and the project managers' who-does-what pages made from it each night; an agent drafts the change and its diagram, and Noor, the data architect, finds the wrong line and decides; and the map is everyone's job, starting with the manager's. Helena Novak's target picture exists three times in spring 2027, and on Tuesday 25 May the council's slide still shows the old warehouse; by Friday 17 December it is retired, with 63 changes of the year in the map's history. It opens in Great Britain in the late 1990s, where Ordnance Survey replaced its map tiles with OS MasterMap in 2001: one seamless database, every feature with its own identifier, a version and a date.",
+  "description_es": "Una película sobre guardar la arquitectura de un equipo de datos como una sola fuente de verdad, la segunda de Una arquitectura al día en el módulo Gestión de datos: el mapa de la plataforma y de la forma de entregar los datos, guardado como archivos en un repositorio git, en un lenguaje estándar (el formato de intercambio de ArchiMate, de The Open Group), con solo lo propio del equipo añadido, y sus diagramas guardados como texto (Mermaid, draw.io); cada cambio una pull request con su motivo, revisada por alguien que no es su autor, que actualiza el estado actual y el objetivo en el cambio que los mueve, con una comprobación que falla cuando una fuente nueva no tiene lugar en el mapa, y un registro breve de decisión (Michael Nygard, 2011) para una decisión grande; nadie espera a un proyecto con fondos; la wiki, las diapositivas y las páginas de quién hace qué de los jefes de proyecto salen de él cada noche; un agente redacta el cambio y su diagrama, y Noor, la arquitecta de datos, encuentra la línea equivocada y decide; y el mapa es trabajo de todos, empezando por la gestora. La imagen objetivo de Helena Novak existe tres veces en la primavera de 2027, y el martes 25 de mayo la diapositiva del consejo aún muestra el viejo almacén; el viernes 17 de diciembre está retirado, con 63 cambios del año en la historia del mapa. Empieza en Gran Bretaña a finales de los años noventa, donde Ordnance Survey sustituyó en 2001 sus cuadros de mapa por OS MasterMap: una sola base de datos continua, cada elemento con su propio identificador, una versión y una fecha.",
+  "card": "Helena's target picture exists three times. The team moves one map into its repository, and makes every other picture from it.",
+  "card_es": "La imagen objetivo de Helena existe tres veces. El equipo pasa un solo mapa a su repositorio y saca de él cada otra imagen.",
+  "chapters_es": {
+    "tiles": "Una base de datos, todos los mapas",
+    "copies": "Tres imágenes de un objetivo",
+    "repo": "El mapa pasa al repositorio",
+    "change": "Cada cambio, revisado",
+    "agent": "Un agente redacta, una persona decide",
+    "everyone": "Trabajo de todos, empezando por ella",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Great Britain, 2001: one map, not tiles",
+    "Councils, water companies and emergency services each matched their own records to the lines on Ordnance Survey's map tiles, and couldn't be sure two records meant the same place. OS MasterMap made it one database, every feature with its own identifier, a version and a date. A data team's architecture can do the same."
+  ],
+  "past_es": [
+    "Gran Bretaña, 2001: un mapa, no cuadros",
+    "Ayuntamientos, compañías de agua y servicios de emergencia unían cada uno sus registros a las líneas de los cuadros de mapa de Ordnance Survey, y no podían estar seguros de que dos registros hablaran del mismo lugar. OS MasterMap lo hizo una sola base de datos, cada elemento con su identificador, una versión y una fecha. La arquitectura de un equipo de datos puede hacer lo mismo."
+  ],
+  "next_h": "You've seen one map kept current, with every change reviewed. Next: a preferred way in for data, and a path for every provider that can't take it.",
+  "next_h_es": "Viste un solo mapa al día, con cada cambio revisado. Después: una forma preferida de traer los datos, y un camino para cada proveedor que no puede seguirla.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "OS MasterMap Topography Layer",
+        "title_es": "OS MasterMap Topography Layer (en inglés)",
+        "line": "Ordnance Survey's own page for the database: every feature with its TOID, its version and its date, and updates of only what changed.",
+        "line_es": "La página de Ordnance Survey sobre la base de datos: cada elemento con su TOID, su versión y su fecha, y actualizaciones solo de lo que cambió.",
+        "href": "https://www.ordnancesurvey.co.uk/products/os-mastermap-topography-layer",
+        "href_es": "https://www.ordnancesurvey.co.uk/products/os-mastermap-topography-layer"
+      },
+      {
+        "title": "ArchiMate, from The Open Group",
+        "title_es": "ArchiMate, de The Open Group (en inglés)",
+        "line": "The standard language for enterprise architecture, with its layers and the exchange format that lets a model live as a file.",
+        "line_es": "El lenguaje estándar de la arquitectura empresarial, con sus capas y el formato de intercambio que deja vivir un modelo como archivo.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      },
+      {
+        "title": "Mermaid, diagrams as text",
+        "title_es": "Mermaid, diagramas como texto (en inglés)",
+        "line": "Write a diagram in a few lines of text, and keep it beside the code, where a change to it can be read and reviewed.",
+        "line_es": "Escribe un diagrama en unas líneas de texto y guárdalo junto al código, donde un cambio se puede leer y revisar.",
+        "href": "https://mermaid.js.org/intro/",
+        "href_es": "https://mermaid.js.org/intro/"
+      },
+      {
+        "title": "draw.io",
+        "title_es": "draw.io (en inglés)",
+        "line": "A free diagram editor whose files are text, so they can live in a repository with the rest of the work.",
+        "line_es": "Un editor de diagramas gratuito cuyos archivos son texto, así que pueden vivir en un repositorio con el resto del trabajo.",
+        "href": "https://www.drawio.com/",
+        "href_es": "https://www.drawio.com/"
+      },
+      {
+        "title": "Documenting architecture decisions, by Michael Nygard",
+        "title_es": "Documenting architecture decisions, de Michael Nygard (en inglés)",
+        "line": "The 2011 post that proposed short decision records: the context, the decision, and what follows from it.",
+        "line_es": "El artículo de 2011 que propuso registros breves de decisión: el contexto, la decisión y lo que se sigue de ella.",
+        "href": "https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions",
+        "href_es": "https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions"
+      }
+    ]
+  }
+}

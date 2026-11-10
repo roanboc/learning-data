@@ -1,4 +1,6 @@
-# Publishes the exact main commit that passed Checks, or an explicitly requested deployment.
+# Publishes the newest main commit whose Checks passed, or the commit of an explicitly requested deployment. Main's
+# Checks runs finish in any order, and the queue below keeps only the newest waiting run, so each run looks up the newest
+# passing commit itself rather than deploying the one that started it; a commit not newer than the live one is skipped.
 # One-time setting: Settings → Pages → Build and deployment → Source: GitHub Actions.
 name: Publish site
 
@@ -14,10 +16,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   deploy:
     if: >-
@@ -25,26 +23,109 @@ jobs:
       (github.event.workflow_run.conclusion == 'success' &&
        github.event.workflow_run.event == 'push' &&
        github.event.workflow_run.head_repository.full_name == github.repository)
+    # On the job, not the workflow: a run for a cancelled or failed Checks run is skipped before it joins the queue, so it
+    # can't replace a waiting deployment of a commit that passed.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v7
+      # The live site names the commit it was built from in version.txt (a Pages deployment records the workflow's
+      # commit instead, which for a Checks run is main's newest commit, not the one deployed).
+      - name: Pick the newest passing commit, unless it is already live
+        id: newer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          FALLBACK: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          target=$FALLBACK
+          if [ "$EVENT" = workflow_run ]; then
+            newest=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/checks.yml/runs?branch=main&event=push&status=success&per_page=1" \
+              --jq '.workflow_runs[0].head_sha // empty' || true)
+            if [ -n "$newest" ]; then
+              order=$(gh api "repos/$GITHUB_REPOSITORY/compare/$FALLBACK...$newest" --jq .status || echo unknown)
+              if [ "$order" = ahead ]; then target=$newest; fi
+            fi
+          fi
+          url=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .html_url || true)
+          live=$(curl -fsS "${url%/}/version.txt?t=$(date +%s)" 2>/dev/null | tr -dc '0-9a-f' || true)
+          status=ahead
+          if [ -n "$live" ]; then
+            status=$(gh api "repos/$GITHUB_REPOSITORY/compare/$live...$target" --jq .status || echo ahead)
+          fi
+          echo "Live: ${live:-unknown}; newest passing $target is $status"
+          echo "sha=$target" >> "$GITHUB_OUTPUT"
+          if [ "$status" = behind ] || [ "$status" = identical ]; then echo go=false; else echo go=true; fi >> "$GITHUB_OUTPUT"
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-      - uses: actions/setup-python@v7
+          ref: ${{ steps.newer.outputs.sha }}
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - name: Restore and verify the published audio
+        if: steps.newer.outputs.go == 'true'
         run: python site-tools/media.py fetch
       - name: Validate the assembled site
+        if: steps.newer.outputs.go == 'true'
         run: |
           pip install markdown
           python site-tools/check_site.py
-      - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v5
+      # The legibility report's table isn't committed (every film adds a row, so film branches clashed on it): show it here.
+      - name: Show how the films read on a phone
+        if: steps.newer.outputs.go == 'true'
+        run: python site-tools/build_series.py --legibility >> "$GITHUB_STEP_SUMMARY"
+      # The home and Scenarios pages are committed without each series' count of films, which every film changed: fill it in.
+      - name: Count each series' films on the home and Scenarios pages
+        if: steps.newer.outputs.go == 'true'
+        run: python site-tools/build_series.py --publish
+      - name: Name the commit the site is built from
+        if: steps.newer.outputs.go == 'true'
+        run: git rev-parse HEAD > site/version.txt
+      - if: steps.newer.outputs.go == 'true'
+        uses: actions/configure-pages@v6
+      - id: upload
+        if: steps.newer.outputs.go == 'true'
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
+      # deploy-pages gives up after 10 minutes at most and cancels the deployment, and GitHub's syncing of the 560 MB
+      # site has taken longer since 06:00 UTC on 10 Nov (four deployments in a row; one reached finished_file_sync
+      # after 7 minutes). This makes the same request deploy-pages makes and waits up to 40 minutes.
       - id: deployment
-        uses: actions/deploy-pages@v5
+        if: steps.newer.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+          BUILD: ${{ steps.newer.outputs.sha }}
+        run: |
+          # One attempt: create the deployment and wait up to 20 minutes. 0 = live, 1 = failed or stalled.
+          attempt() {
+            oidc=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
+            created=$(jq -n --arg a "$ARTIFACT_ID" --arg v "$BUILD" --arg o "$oidc" \
+                '{artifact_id: ($a|tonumber), pages_build_version: $v, oidc_token: $o}' |
+              gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -) || return 1
+            id=$(jq -r .id <<<"$created")
+            echo "page_url=$(jq -r .page_url <<<"$created")" >> "$GITHUB_OUTPUT"
+            echo "Deployment $id for $BUILD"
+            for i in $(seq 1 80); do
+              sleep 15
+              state=$(gh api "repos/$GITHUB_REPOSITORY/pages/deployments/$id" --jq .status || echo unknown)
+              echo "$(date -u +%H:%M:%S) $state"
+              case "$state" in
+                succeed) return 0 ;;
+                deployment_failed|deployment_content_failed|deployment_cancelled|deployment_lost|deployment_attempt_error) return 1 ;;
+              esac
+            done
+            echo "Not live after 20 minutes; cancelling deployment $id"
+            gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments/$id/cancel" >/dev/null || true
+            return 1
+          }
+          # GitHub has stalled a deployment with no status for 30 minutes (09:19 UTC, 10 Nov), so a stalled or failed
+          # one is cancelled and tried once more instead of holding the queue.
+          attempt || attempt

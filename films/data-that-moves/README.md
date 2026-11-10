@@ -12,7 +12,7 @@ How data moves between applications today, and what still needs people. Linh Ngu
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Moving is easy, agreeing is the work](https://data.learn-all.org/data-that-moves/moving-is-easy/) | Moving data today | 7 min | 5 | 3 questions | [script](1-moving-is-easy/script.md) · [source](1-moving-is-easy/source/README.md) |
-| [Hot, warm, cold](https://data.learn-all.org/data-that-moves/hot-warm-cold/) | Data temperature | 7½ min | 7 | 3 questions | [script](2-hot-warm-cold/script.md) · [source](2-hot-warm-cold/source/README.md) |
+| [Hot, warm, cold](https://data.learn-all.org/data-that-moves/hot-warm-cold/) | Data temperature | 8 min | 7 | 3 questions | [script](2-hot-warm-cold/script.md) · [source](2-hot-warm-cold/source/README.md) |
 | [One copy, one platform](https://data.learn-all.org/data-that-moves/one-copy-one-platform/) | Two engines, one copy | 5½ min | 6 | 3 questions | [script](3-one-copy-one-platform/script.md) · [source](3-one-copy-one-platform/source/README.md) |
 <!-- /films -->
 

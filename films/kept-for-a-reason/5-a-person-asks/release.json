@@ -1,0 +1,52 @@
+[
+  {
+    "name": "A person asks",
+    "key": "a-person-asks-en",
+    "dir": "films/kept-for-a-reason/5-a-person-asks/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/a-person-asks/film.js",
+    "video": "dist/a-person-asks.mp4",
+    "file": "a-person-asks.mp4",
+    "captions": [
+      [
+        "films/kept-for-a-reason/5-a-person-asks/captions/en.srt",
+        "a-person-asks.en.srt"
+      ],
+      [
+        "films/kept-for-a-reason/5-a-person-asks/captions/es.srt",
+        "a-person-asks.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/kept-for-a-reason/5-a-person-asks/source",
+      ":(exclude)films/kept-for-a-reason/5-a-person-asks/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/people.js",
+      "films/what-an-agent-is/shared/tools/edges.py",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 372,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

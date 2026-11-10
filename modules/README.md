@@ -266,7 +266,7 @@ No film source yet.
 
 Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal: `/only-what-you-may-see/`
 
-No film source yet.
+- [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 
 ### Kept for a reason
 

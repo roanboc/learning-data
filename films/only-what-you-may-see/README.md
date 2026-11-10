@@ -11,6 +11,7 @@ Protecting data by what it is. The Faculty of Health asks for learners' records 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [One policy for many tables](https://data.learn-all.org/only-what-you-may-see/one-policy-for-many-tables/) | Policies by tag | 8 min | 7 | 4 questions | [script](6-one-policy-for-many-tables/script.md) · [source](6-one-policy-for-many-tables/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -1,0 +1,101 @@
+// One policy for many tables, film 6 of Only what you may see, the second series of Data protection and privacy. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and dates in words). The few longer stops are in breath.js.
+const NARR={
+"page":{"name":"A page for each","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"North America, in the 1970s.","say":"North America, in the nineteen-seventies."},
+ {"id":"crash","gap":0.8,"text":"When a truck or a train carrying dangerous chemicals crashed, the first to arrive were firefighters and police."},
+ {"id":"page","gap":0.8,"text":"Their guide gave each chemical a page of its own: a few dozen in all."},
+ {"id":"find","gap":0.3,"text":"To find the page, a crew had to know exactly what was inside,"},
+ {"id":"cab","gap":0.8,"text":"often from papers in the driver's cab, close to the wreck."},
+ {"id":"none","gap":0.8,"text":"And thousands of chemicals had no page at all."},
+ {"id":"wrong","gap":0.3,"text":"Guess wrong, and a crew might spray water on a chemical that gives off a poison gas when wet,"},
+ {"id":"homes","gap":0.8,"text":"with families still in the houses nearby."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"book","gap":0.8,"text":"In 1980, the US Department of Transportation changed the book.","say":"In nineteen-eighty, the U S Department of Transportation changed the book."},
+ {"id":"share","gap":0.8,"text":"Chemicals that behave alike in a fire or a spill share one guide, written once."},
+ {"id":"number","gap":0.3,"text":"Each chemical's four-digit number leads to its guide,"},
+ {"id":"line","gap":0.8,"text":"so a new chemical needs only one line: its number, and its guide."},
+ {"id":"unknown","gap":0.8,"text":"And a load no one can name gets Guide 111, which assumes every danger.","say":"And a load no one can name gets Guide one eleven, which assumes every danger."},
+ {"id":"today","gap":0.8,"text":"Today's book, from Canada, the United States and Mexico, has 62 guides for nearly 2,000 numbers.","say":"Today's book, from Canada, the United States and Mexico, has sixty-two guides for nearly two thousand numbers."},
+ {"id":"upwind","gap":0.3,"text":"A crew reads the number through binoculars, from upwind,"},
+ {"id":"knows","gap":0.8,"text":"and knows what to do, and how far back to keep people, before it goes near."},
+ {"id":"same","gap":0.8,"text":"Data has the same problem: a mask written table by table protects nothing until someone writes it."},
+ {"id":"tag","gap":0.8,"text":"One policy for each class, found by its tag, protects every table that holds it, the day it appears."},
+ {"id":"lands","gap":0.8,"text":"So a learner's name stays hidden, wherever it lands."}
+]},
+"mask":{"name":"A mask for every table","lead":1.2,"tail":1.4,"vo":[
+ {"id":"day","gap":0.8,"text":"On Tuesday 13 October, Mei Tanaka gave every column of the registrar's data its class, in Know what you hold.","say":"On Tuesday the thirteenth of October, Mei Tanaka gave every column of the registrar's data its class, in Know what you hold."},
+ {"id":"least","gap":0.8,"text":"Show the least chose how to hide each one: a name masked whole, a date of birth cut to its year."},
+ {"id":"tables","gap":0.8,"text":"Her catalog holds 38 tables with personal data: 140 columns to hide.","say":"Her catalog holds thirty-eight tables with personal data: a hundred and forty columns to hide."},
+ {"id":"hand","gap":0.8,"text":"By hand, that's 140 masks, set one table at a time, by someone who remembers.","say":"By hand, that's a hundred and forty masks, set one table at a time, by someone who remembers."},
+ {"id":"grants","gap":0.8,"text":"But Grants by design gives each shelf its readers, so a new table is read from its first minute."},
+ {"id":"later","gap":0.3,"text":"A mask set by hand comes later, if at all,"},
+ {"id":"every","gap":0.8,"text":"and until then, everyone on the shelf reads every name."},
+ {"id":"sam","gap":0.8,"text":"So Sam Okafor, who runs the platform, writes one policy for each class, on the whole catalog."}
+]},
+"parts":{"name":"A policy for each class","lead":1.2,"tail":1.2,"vo":[
+ {"id":"four","gap":0.8,"text":"A policy has four parts."},
+ {"id":"where","gap":0.8,"text":"Where it sits: on the registrar's catalog, it covers every shelf and every table, now and later."},
+ {"id":"whom","gap":0.8,"text":"Whom it covers: everyone, except the groups it lets through."},
+ {"id":"finds","gap":0.8,"text":"What it finds: each column whose class is direct, by its tag, in any table."},
+ {"id":"does","gap":0.8,"text":"And what it does: mask it whole."},
+ {"id":"before","gap":0.8,"text":"Governed in Unity Catalog wrote one like it."},
+ {"id":"each","gap":0.8,"text":"Sam writes one for each class that's hidden: special, direct, pseudonymous and indirect."},
+ {"id":"rows","gap":0.8,"text":"One more decides rows, not values: the study sees only the Faculty of Health's learners."},
+ {"id":"shelf","gap":0.8,"text":"It sits on the shelf the study reads, core, and finds each table's faculty column by its tag."},
+ {"id":"needs","gap":0.3,"text":"A filter needs its column, so every table with learners in it carries their faculty:"},
+ {"id":"without","gap":0.8,"text":"one without would show the study every learner."}
+]},
+"ways":{"name":"A function for each way","lead":1.2,"tail":1.6,"vo":[
+ {"id":"small","gap":0.8,"text":"Each way is a small function, written once, on the catalog's shelf for policies."},
+ {"id":"whole","gap":0.8,"text":"Mask it whole: words become three stars, and anything else is left empty."},
+ {"id":"part","gap":0.8,"text":"Mask it in part, for the help desk: the last two digits, and the email's first letter."},
+ {"id":"general","gap":0.8,"text":"Generalise: a date of birth becomes the first of January of its year."},
+ {"id":"type","gap":0.8,"text":"A mask gives back the column's own type: a date stays a date, or the query fails."},
+ {"id":"filter","gap":0.8,"text":"Filter rows: a yes or a no for each row: is this learner in the Faculty of Health?"},
+ {"id":"other","gap":0.8,"text":"The other ways aren't masks."},
+ {"id":"code","gap":0.8,"text":"The learner code is made at the source, with a key the registrar's office keeps."},
+ {"id":"out","gap":0.8,"text":"And exam support is left out: the study has no grant to its shelf."}
+]},
+"through":{"name":"Who is let through","lead":1.2,"tail":1.4,"vo":[
+ {"id":"covers","gap":0.3,"text":"A policy covers everyone but the groups it lets through:"},
+ {"id":"owner","gap":0.8,"text":"owning a table isn't enough, nor is an admin account."},
+ {"id":"decide","gap":0.8,"text":"Who's on each list is Mei's decision: her office sees the learner table whole."},
+ {"id":"loader","gap":0.8,"text":"The builder, registrar-loader, is let through too, or every table it built would hold stars."},
+ {"id":"help","gap":0.3,"text":"The help desk is let through the policy that masks names whole,"},
+ {"id":"given","gap":0.8,"text":"and given the one that masks them in part."},
+ {"id":"one","gap":0.3,"text":"Each reader gets one mask for each column:"},
+ {"id":"two","gap":0.8,"text":"two different masks for one person stop the query with an error."},
+ {"id":"study","gap":0.3,"text":"The study is let through the policy for the learner code:"},
+ {"id":"allows","gap":0.8,"text":"its agreement allows a code in place of who they are."},
+ {"id":"agent","gap":0.8,"text":"An agent is never on a list: it reads with its own role's rights, as AI agents in data work shows."},
+ {"id":"compute","gap":0.8,"text":"Only compute that applies policies can read these tables: serverless, or Databricks Runtime 16.4 and above.","say":"Only compute that applies policies can read these tables: serverless, or Databricks Runtime sixteen point four and above."},
+ {"id":"older","gap":0.8,"text":"Older compute is refused."}
+]},
+"appears":{"name":"The day a table appears","lead":1.2,"tail":1.6,"vo":[
+ {"id":"day","gap":0.8,"text":"On Wednesday 21 October, Jun's new model is built for the first time: each learner's progress, year by year.","say":"On Wednesday the twenty-first of October, Jun's new model is built for the first time: each learner's progress, year by year."},
+ {"id":"classes","gap":0.3,"text":"Its columns bring their classes from its sources, as Tags that travel showed,"},
+ {"id":"level","gap":0.8,"text":"and Mei's level comes with it."},
+ {"id":"nine","gap":0.8,"text":"It's the 39th table, and nobody writes a mask.","say":"It's the thirty-ninth table, and nobody writes a mask."},
+ {"id":"first","gap":0.8,"text":"From its first minute, the help desk sees part of each student number, and Planning sees stars."},
+ {"id":"study","gap":0.8,"text":"And the study sees only Health's learners, each by their code."},
+ {"id":"road","gap":0.8,"text":"On the road, a load no one can name gets Guide 111, which assumes every danger.","say":"On the road, a load no one can name gets Guide one eleven, which assumes every danger."},
+ {"id":"here","gap":0.3,"text":"Here, a table that comes without its level shows no rows to anyone but its builder,"},
+ {"id":"until","gap":0.8,"text":"until its owner gives it one."},
+ {"id":"tag","gap":0.8,"text":"But a policy hides only what has a tag."},
+ {"id":"check","gap":0.8,"text":"A column no one has classed shows as it is, until the morning check of Proof it held finds it."}
+]},
+"code":{"name":"Kept as code","lead":1.2,"tail":1.0,"vo":[
+ {"id":"kept","gap":0.8,"text":"The policies are code, kept beside the grants, in the registrar's bundle."},
+ {"id":"review","gap":0.8,"text":"A change is a pull request that Mei approves, as the code owner."},
+ {"id":"runs","gap":0.8,"text":"It runs in test, then in production after a release approver, as registrar-loader, never a person."},
+ {"id":"whole","gap":0.8,"text":"Each file replaces its policy whole, so what the repository says is what runs."},
+ {"id":"order","gap":0.3,"text":"On 14 October, the policies went in that morning, and the study's grant that afternoon:","say":"On the fourteenth of October, the policies went in that morning, and the study's grant that afternoon:"},
+ {"id":"door","gap":0.8,"text":"rules first, then the door."},
+ {"id":"road","gap":0.8,"text":"On the road, one guide is written once, and a new chemical needs only a line."},
+ {"id":"here","gap":0.8,"text":"Here, one policy is written once, and a new table needs only its tags."},
+ {"id":"lands","gap":0.8,"text":"So a learner's name stays hidden wherever it lands, and the study sees only its own faculty's learners."},
+ {"id":"take","gap":0.8,"text":"The policy follows the tag, so new tables are protected the day they appear."},
+ {"id":"next","gap":0.8,"text":"Next: Copies that keep the rules."}
+]}
+};

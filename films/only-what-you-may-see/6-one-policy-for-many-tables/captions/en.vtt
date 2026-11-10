@@ -1,0 +1,250 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:04.068
+North America, in the 1970s.
+
+00:00:05.368 --> 00:00:12.096
+When a truck or a train carrying dangerous chemicals crashed, the first to arrive were firefighters and police.
+
+00:00:13.196 --> 00:00:17.190
+Their guide gave each chemical a page of its own: a few dozen in all.
+
+00:00:18.490 --> 00:00:22.235
+To find the page, a crew had to know exactly what was inside,
+
+00:00:22.435 --> 00:00:25.732
+often from papers in the driver's cab, close to the wreck.
+
+00:00:27.032 --> 00:00:29.757
+And thousands of chemicals had no page at all.
+
+00:00:31.257 --> 00:00:36.614
+Guess wrong, and a crew might spray water on a chemical that gives off a poison gas when wet,
+
+00:00:36.814 --> 00:00:38.939
+with families still in the houses nearby.
+
+00:00:40.639 --> 00:00:42.027
+Something had to change.
+
+00:00:43.927 --> 00:00:48.282
+In 1980, the US Department of Transportation changed the book.
+
+00:00:49.582 --> 00:00:54.382
+Chemicals that behave alike in a fire or a spill share one guide, written once.
+
+00:00:55.682 --> 00:00:58.767
+Each chemical's four-digit number leads to its guide,
+
+00:00:58.967 --> 00:01:03.134
+so a new chemical needs only one line: its number, and its guide.
+
+00:01:04.634 --> 00:01:09.366
+And a load no one can name gets Guide 111, which assumes every danger.
+
+00:01:11.066 --> 00:01:18.004
+Today's book, from Canada, the United States and Mexico, has 62 guides for nearly 2,000 numbers.
+
+00:01:19.304 --> 00:01:22.475
+A crew reads the number through binoculars, from upwind,
+
+00:01:22.675 --> 00:01:26.842
+and knows what to do, and how far back to keep people, before it goes near.
+
+00:01:28.542 --> 00:01:35.148
+Data has the same problem: a mask written table by table protects nothing until someone writes it.
+
+00:01:36.448 --> 00:01:42.804
+One policy for each class, found by its tag, protects every table that holds it, the day it appears.
+
+00:01:44.304 --> 00:01:47.241
+So a learner's name stays hidden, wherever it lands.
+
+00:01:54.541 --> 00:02:02.178
+On Tuesday 13 October, Mei Tanaka gave every column of the registrar's data its class, in Know what you hold.
+
+00:02:03.678 --> 00:02:09.172
+Show the least chose how to hide each one: a name masked whole, a date of birth cut to its year.
+
+00:02:10.772 --> 00:02:16.548
+Her catalog holds 38 tables with personal data: 140 columns to hide.
+
+00:02:18.148 --> 00:02:24.134
+By hand, that's 140 masks, set one table at a time, by someone who remembers.
+
+00:02:25.934 --> 00:02:31.511
+But Grants by design gives each shelf its readers, so a new table is read from its first minute.
+
+00:02:33.111 --> 00:02:35.661
+A mask set by hand comes later, if at all,
+
+00:02:35.861 --> 00:02:39.146
+and until then, everyone on the shelf reads every name.
+
+00:02:40.846 --> 00:02:46.908
+So Sam Okafor, who runs the platform, writes one policy for each class, on the whole catalog.
+
+00:02:51.008 --> 00:02:52.642
+A policy has four parts.
+
+00:02:53.542 --> 00:02:59.719
+Where it sits: on the registrar's catalog, it covers every shelf and every table, now and later.
+
+00:03:01.019 --> 00:03:04.273
+Whom it covers: everyone, except the groups it lets through.
+
+00:03:05.373 --> 00:03:10.051
+What it finds: each column whose class is direct, by its tag, in any table.
+
+00:03:11.351 --> 00:03:13.114
+And what it does: mask it whole.
+
+00:03:15.014 --> 00:03:17.788
+Governed in Unity Catalog wrote one like it.
+
+00:03:18.688 --> 00:03:24.214
+Sam writes one for each class that's hidden: special, direct, pseudonymous and indirect.
+
+00:03:25.814 --> 00:03:31.575
+One more decides rows, not values: the study sees only the Faculty of Health's learners.
+
+00:03:33.075 --> 00:03:38.906
+It sits on the shelf the study reads, core, and finds each table's faculty column by its tag.
+
+00:03:40.406 --> 00:03:45.497
+A filter needs its column, so every table with learners in it carries their faculty:
+
+00:03:45.697 --> 00:03:48.030
+one without would show the study every learner.
+
+00:03:51.130 --> 00:03:56.038
+Each way is a small function, written once, on the catalog's shelf for policies.
+
+00:03:57.538 --> 00:04:02.098
+Mask it whole: words become three stars, and anything else is left empty.
+
+00:04:03.998 --> 00:04:08.768
+Mask it in part, for the help desk: the last two digits, and the email's first letter.
+
+00:04:10.668 --> 00:04:15.009
+Generalise: a date of birth becomes the first of January of its year.
+
+00:04:16.909 --> 00:04:22.043
+A mask gives back the column's own type: a date stays a date, or the query fails.
+
+00:04:24.143 --> 00:04:29.379
+Filter rows: a yes or a no for each row: is this learner in the Faculty of Health?
+
+00:04:31.479 --> 00:04:33.057
+The other ways aren't masks.
+
+00:04:34.357 --> 00:04:38.775
+The learner code is made at the source, with a key the registrar's office keeps.
+
+00:04:40.675 --> 00:04:44.846
+And exam support is left out: the study has no grant to its shelf.
+
+00:04:48.346 --> 00:04:51.548
+A policy covers everyone but the groups it lets through:
+
+00:04:51.748 --> 00:04:54.976
+owning a table isn't enough, nor is an admin account.
+
+00:04:56.676 --> 00:05:01.357
+Who's on each list is Mei's decision: her office sees the learner table whole.
+
+00:05:03.057 --> 00:05:08.669
+The builder, registrar-loader, is let through too, or every table it built would hold stars.
+
+00:05:10.569 --> 00:05:14.014
+The help desk is let through the policy that masks names whole,
+
+00:05:14.214 --> 00:05:16.299
+and given the one that masks them in part.
+
+00:05:17.999 --> 00:05:20.452
+Each reader gets one mask for each column:
+
+00:05:20.652 --> 00:05:24.515
+two different masks for one person stop the query with an error.
+
+00:05:26.415 --> 00:05:29.401
+The study is let through the policy for the learner code:
+
+00:05:29.601 --> 00:05:32.819
+its agreement allows a code in place of who they are.
+
+00:05:34.519 --> 00:05:41.373
+An agent is never on a list: it reads with its own role's rights, as AI agents in data work shows.
+
+00:05:43.073 --> 00:05:51.068
+Only compute that applies policies can read these tables: serverless, or Databricks Runtime 16.4 and above.
+
+00:05:52.368 --> 00:05:54.156
+Older compute is refused.
+
+00:05:57.456 --> 00:06:04.940
+On Wednesday 21 October, Jun's new model is built for the first time: each learner's progress, year by year.
+
+00:06:06.640 --> 00:06:11.105
+Its columns bring their classes from its sources, as Tags that travel showed,
+
+00:06:11.305 --> 00:06:12.972
+and Mei's level comes with it.
+
+00:06:14.472 --> 00:06:17.509
+It's the 39th table, and nobody writes a mask.
+
+00:06:19.609 --> 00:06:24.907
+From its first minute, the help desk sees part of each student number, and Planning sees stars.
+
+00:06:26.607 --> 00:06:30.058
+And the study sees only Health's learners, each by their code.
+
+00:06:31.958 --> 00:06:37.430
+On the road, a load no one can name gets Guide 111, which assumes every danger.
+
+00:06:39.330 --> 00:06:44.408
+Here, a table that comes without its level shows no rows to anyone but its builder,
+
+00:06:44.608 --> 00:06:46.218
+until its owner gives it one.
+
+00:06:48.318 --> 00:06:50.764
+But a policy hides only what has a tag.
+
+00:06:52.264 --> 00:06:57.589
+A column no one has classed shows as it is, until the morning check of Proof it held finds it.
+
+00:07:01.089 --> 00:07:05.415
+The policies are code, kept beside the grants, in the registrar's bundle.
+
+00:07:06.515 --> 00:07:10.137
+A change is a pull request that Mei approves, as the code owner.
+
+00:07:11.437 --> 00:07:17.801
+It runs in test, then in production after a release approver, as registrar-loader, never a person.
+
+00:07:19.101 --> 00:07:24.278
+Each file replaces its policy whole, so what the repository says is what runs.
+
+00:07:25.578 --> 00:07:31.068
+On 14 October, the policies went in that morning, and the study's grant that afternoon:
+
+00:07:31.268 --> 00:07:32.898
+rules first, then the door.
+
+00:07:34.598 --> 00:07:39.196
+On the road, one guide is written once, and a new chemical needs only a line.
+
+00:07:40.296 --> 00:07:44.767
+Here, one policy is written once, and a new table needs only its tags.
+
+00:07:46.067 --> 00:07:52.224
+So a learner's name stays hidden wherever it lands, and the study sees only its own faculty's learners.
+
+00:07:53.524 --> 00:07:57.975
+The policy follows the tag, so new tables are protected the day they appear.
+
+00:08:00.075 --> 00:08:02.114
+Next: Copies that keep the rules.

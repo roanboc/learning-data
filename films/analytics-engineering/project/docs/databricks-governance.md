@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and section 11 on 5 November, and section 12 on 10 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11 and 13 on 5 November, and sections 12 and 14 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -372,7 +372,30 @@ within 30 days, the university's own rule. Nothing here runs in the build.
    request 2026-117, on 24 December), so a copy restored before then has the request applied again
    before anyone reads it; then they leave.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; and *Query history system table* to the end, for section 13, on 5 November 2026)
+## 14. Reports due today, every morning
+
+When a graduate presses "This isn't my name" in the portal, the registrar's office promises an
+answer within two working days. That's a rule about what people do, not about whether the data is
+right, so it's tracked in a model of its own, `mart_graduations__name_reports`, reviewed every week
+and never failed as a test (`docs/conventions.md`, *Tests*). The office hears what's due from a
+Databricks SQL alert, which runs a query on a schedule and notifies when its result meets a
+condition. Once, on the platform:
+
+1. Compile the alert's query, `analyses/alerts/name_reports_due_today.sql`
+   (`dbt compile --target databricks --select name_reports_due_today --profiles-dir .`), and create
+   an alert with it. An alert keeps its own query: a saved query can't be reused.
+2. The condition: the sum of `reports_due` is greater than 0. Set *Empty result state* to OK, so a
+   morning with nothing due sends nothing.
+3. The schedule: every day at 8:00, in Quartz cron syntax `0 0 8 * * ?`.
+4. The notification: the registrar's office's email destination, with a custom template that
+   includes `{{QUERY_RESULT_TABLE}}`, the list itself (its first 100 rows; only email shows it).
+   The names in it are direct personal data (section 3), so it goes to the office that owns them,
+   and to no one else.
+
+The alert can also be written as code, an `alerts` resource in a bundle, so a change to it is
+reviewed like any other change to the project.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; and *Databricks SQL alerts* to the end, for section 14, on 10 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -474,3 +497,9 @@ within 30 days, the university's own rule. Nothing here runs in the build.
 - dbt, *Graph operators* (`source:name+`, a source and everything built from it):
   https://docs.getdbt.com/reference/node-selection/graph-operators
 - GitHub, *Syntax for issue forms*: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-discussions/syntax-for-issue-forms
+- Databricks, *Databricks SQL alerts* (a query on a schedule, and a notice when its result meets a
+  condition; a saved query can't be reused): https://docs.databricks.com/aws/en/sql/user/alerts/
+- Databricks, *Create an alert* (the condition, *Empty result state*, Quartz cron, and the template
+  variables, `QUERY_RESULT_TABLE` among them): https://docs.databricks.com/aws/en/sql/user/alerts/create
+- Databricks, *Declarative Automation Bundles resources* (an alert, `alerts` in a bundle):
+  https://docs.databricks.com/aws/en/dev-tools/bundles/resources

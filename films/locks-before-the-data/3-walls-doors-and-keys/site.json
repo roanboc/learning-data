@@ -1,0 +1,59 @@
+{
+  "draft": true,
+  "kicker": "Boundaries, paths and keys",
+  "kicker_es": "Límites, caminos y llaves",
+  "title_es": "Muros, puertas y llaves",
+  "h1": "Walls, doors and keys: few ways in, each one watched",
+  "h1_es": "Muros, puertas y llaves: pocas entradas, todas vigiladas",
+  "lead": "The nightly job no longer runs on Jun's token, but the platform still has one door on the open internet, one room for everything, a way straight to the files, and backups any admin could delete. If someone got in, how far could they go, and what would keep that small?",
+  "lead_es": "El proceso nocturno ya no usa el token de Jun, pero la plataforma aún tiene una puerta abierta a internet, una sala para todo, un acceso directo a los archivos y copias que cualquier administrador podría borrar. Si alguien entrara, ¿hasta dónde llegaría, y cómo se reduce ese alcance?",
+  "description": "A film about the platform's boundaries, the third of Locks before the data: Ragusa's law of 27 July 1377, which kept a trading port open through the plague years by making whoever came from a place with plague wait a month apart, on the islet of Mrkan or in Cavtat, before entering through its few gates; a platform with one door on the open internet, one workspace for everything, a way straight to the files, data free to leave, backups any admin could delete and a key someone else keeps; who secures what among the cloud provider, the platform's makers and the university; walls drawn from the areas on the university's map; private paths in and to the storage, and a short list of places data may go; the catalog as the files' only door, with the back door shut; development, test and production kept apart, with made-up or masked data outside production and one reviewed path between them; a key the university holds, kept by its security team; and nightly copies in a place apart, locked for thirty days, one restored each month.",
+  "description_es": "Una película sobre los límites de la plataforma, la tercera de Cerraduras antes que los datos: la ley de Ragusa del 27 de julio de 1377, que mantuvo abierto un puerto comercial en los años de la peste obligando a quien llegaba de un lugar con peste a esperar un mes aparte, en el islote de Mrkan o en Cavtat, antes de entrar por sus pocas puertas; una plataforma con una puerta abierta a internet, un espacio de trabajo para todo, un acceso directo a los archivos, datos libres de salir, copias que cualquier administrador podía borrar y una llave que guarda otro; quién protege qué entre el proveedor de nube, quienes hacen la plataforma y la universidad; muros trazados según las áreas del mapa de la universidad; caminos privados de entrada y al almacenamiento, y una lista corta de lugares adonde pueden ir los datos; el catálogo como única puerta a los archivos, con la puerta trasera cerrada; desarrollo, pruebas y producción separados, con datos inventados o enmascarados fuera de producción y un solo camino revisado entre ellos; una llave propia de la universidad, guardada por su equipo de seguridad; y copias cada noche en un lugar aparte, bloqueadas treinta días, con una restaurada cada mes.",
+  "card": "Who secures what, walls from the map's areas, private paths, rooms apart, keys the university holds and copies nobody can delete.",
+  "card_es": "Quién protege qué, muros según las áreas del mapa, caminos privados, salas aparte, llaves propias y copias que nadie puede borrar.",
+  "chapters_es": {
+    "gates": "Pocas puertas en la muralla",
+    "apart": "Un mes aparte",
+    "inside": "Si alguien entrara",
+    "who": "Quién protege qué",
+    "doors": "Pocas puertas",
+    "rooms": "Salas aparte",
+    "keys": "Llaves a la vista",
+    "copies": "Copias que nadie puede borrar",
+    "again": "El recorrido, otra vez"
+  },
+  "past": [
+    "Ragusa, 1377: a trading port kept open through the plague years, by a month apart before its few gates",
+    "Few doors, each with a lock you can see."
+  ],
+  "past_es": [
+    "Ragusa, 1377: un puerto comercial abierto en los años de la peste, con un mes aparte antes de sus pocas puertas",
+    "Pocas puertas, cada una con su cerradura a la vista."
+  ],
+  "next_h": "You've seen the platform's walls: few doors, rooms apart, a key the university holds, and copies nobody can delete. Next: the one key to the back door, an admin account switched on for a single task, approved by another specialist, and off again within hours.",
+  "next_h_es": "Viste los muros de la plataforma: pocas puertas, salas aparte, una llave propia de la universidad, y copias que nadie puede borrar. Sigue: la única llave de la puerta trasera, una cuenta de administrador que se enciende para una sola tarea, con el visto bueno de otro especialista, y se apaga a las pocas horas.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film follows two public guides, read on 5 November 2026: why a wall makes nobody trusted, and how to keep backups an attacker can't delete.",
+    "p_es": "La película sigue dos guías públicas, leídas el 5 de noviembre de 2026: por qué un muro no hace confiable a nadie, y cómo guardar copias de seguridad que un atacante no pueda borrar.",
+    "links": [
+      {
+        "title": "NIST: Zero Trust Architecture (SP 800-207)",
+        "title_es": "NIST: arquitectura de confianza cero (SP 800-207, en inglés)",
+        "line": "Why where a request comes from earns it no trust, and why every zone of trust should be as small as possible.",
+        "line_es": "Por qué el lugar de donde llega una solicitud no le da confianza, y por qué cada zona de confianza debe ser lo más pequeña posible.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/207/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/207/final"
+      },
+      {
+        "title": "NCSC: principles for ransomware-resistant cloud backups",
+        "title_es": "NCSC: principios para copias de seguridad en la nube resistentes al ransomware (en inglés)",
+        "line": "Copies nobody can change or delete once made, admins included, kept apart, and restores tried before they're needed.",
+        "line_es": "Copias que nadie puede cambiar ni borrar una vez hechas, tampoco los administradores, guardadas aparte, y restauraciones probadas antes de necesitarlas.",
+        "href": "https://www.ncsc.gov.uk/guidance/principles-for-ransomware-resistant-cloud-backups",
+        "href_es": "https://www.ncsc.gov.uk/guidance/principles-for-ransomware-resistant-cloud-backups"
+      }
+    ]
+  }
+}

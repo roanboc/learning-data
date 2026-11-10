@@ -1,0 +1,84 @@
+{
+  "kicker": "Hidden work and root causes",
+  "kicker_es": "Trabajo oculto y causas raíz",
+  "title_es": "La fábrica oculta",
+  "h1": "Every name fixed by hand, and the same errors back every year",
+  "h1_es": "Cada nombre corregido a mano, y los mismos errores de vuelta cada año",
+  "lead": "Before every ceremony, Malia Fonoti and a colleague checked every name on the graduation list by hand: about 320 hours a year, and the same errors came back. In August 2026 the team counts that hidden work, traces each error to where it's born, and fixes it there, with its owner.",
+  "lead_es": "Antes de cada ceremonia, Malia Fonoti y alguien de su equipo revisaban a mano cada nombre de la lista de graduación: unas 320 horas al año, y los mismos errores volvían. En agosto de 2026 el equipo cuenta ese trabajo oculto, sigue cada error hasta donde nace y lo arregla allí, con su responsable.",
+  "description": "A film about hidden work and root causes, the first of Quality as a habit: Washington, 1899, where the clerks of the Dead Letter Office worked out, one by one, where millions of letters a year should have gone, and nothing they did fixed the next letter, until the fix moved to the start, the ZIP Code of 1963, written by the sender; the graduation list, whose names two people checked by hand in a copy before every ceremony; that hidden work counted three ways, the hours from the team's calendar, the rounds from the platform's system tables, and the corrections, 517 of 2,031 names; the rule of ten, as a rule of thumb; five whys that follow one graduate's name, cut short twice; a fishbone of people, process, systems and interfaces; and each cause fixed where it starts, with its owner, with checks at the source that hold a doubtful name for a person and stop a night's file that loses letters.",
+  "description_es": "Una película sobre el trabajo oculto y las causas raíz, la primera de La calidad como hábito: Washington, 1899, donde los empleados de la Oficina de Cartas Muertas averiguaban, una a una, adónde debían haber ido millones de cartas al año, sin que nada de lo que hacían arreglara la carta siguiente, hasta que el arreglo pasó al principio, el código postal ZIP de 1963, escrito por el remitente; la lista de graduación, cuyos nombres dos personas revisaban a mano en una copia antes de cada ceremonia; ese trabajo oculto contado de tres maneras, las horas del calendario del equipo, las rondas en las tablas del sistema de la plataforma y las correcciones, 517 de 2,031 nombres; la regla de diez, como regla práctica; cinco porqués que siguen el nombre de una graduada, cortado dos veces; un diagrama de espina de pescado de personas, procesos, sistemas e interfaces; y cada causa arreglada donde empieza, con su responsable, con controles en el origen que retienen un nombre dudoso para una persona y detienen el archivo de una noche que pierde letras.",
+  "card": "Two people fixed every name by hand, 320 hours a year, and the same errors came back. Count the hidden work, then fix where it's born.",
+  "card_es": "Dos personas corregían cada nombre a mano, 320 horas al año, y los mismos errores volvían. Cuenta el trabajo oculto y arregla donde nace.",
+  "chapters_es": {
+    "dead": "Cartas muertas",
+    "hand": "Cada nombre, a mano",
+    "hidden": "Nadie lo cuenta",
+    "count": "Contarlo",
+    "back": "Cortado otra vez",
+    "bones": "Cuatro espinas",
+    "born": "Donde nace",
+    "once": "Corregido una vez"
+  },
+  "past": [
+    "Washington, 1899: the Dead Letter Office",
+    "Clerks worked out, one by one, where millions of letters a year should have gone, and nothing fixed the next letter; in 1963 the ZIP Code moved the fix to the start, written by the sender."
+  ],
+  "past_es": [
+    "Washington, 1899: la Oficina de Cartas Muertas",
+    "Sus empleados averiguaban, una a una, adónde debían haber ido millones de cartas al año, y nada arreglaba la carta siguiente; en 1963 el código ZIP llevó el arreglo al principio, escrito por el remitente."
+  ],
+  "repo": {
+    "count": [
+      "seeds/reference/graduations/hand_check_rounds.csv",
+      "analyses/quality/rounds_from_the_system_tables.sql"
+    ],
+    "back": [
+      "data/student_system/graduations.csv",
+      "analyses/quality/printed_name_lineage.sql"
+    ],
+    "born": [
+      "tests/rules/_rules__tests.yml",
+      "tests/rules/night_file_keeps_every_letter.sql",
+      "sources/student_system/_student_system__decisions.yml"
+    ],
+    "once": [
+      "docs/scorecard.md"
+    ]
+  },
+  "next_h": "You've seen hidden work counted and each error fixed where it's born. Next: a graduate reports his own name, and the report is answered, fixed where it started and told.",
+  "next_h_es": "Viste el trabajo oculto contado y cada error arreglado donde nace. Después: un graduado avisa de un error en su propio nombre, y el aviso se responde, se arregla donde empezó y se comunica.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The article and the docs behind the film's words and checks.",
+    "p_es": "El artículo y la documentación detrás de las palabras y los controles de la película.",
+    "links": [
+      {
+        "title": "The hidden data factory, by Thomas C. Redman",
+        "title_es": "La fábrica de datos oculta, de Thomas C. Redman (en inglés)",
+        "line": "Why people who fix data by hand hide its cost and its cause, and what to do instead: Harvard Business Review, 2016.",
+        "line_es": "Por qué quienes corrigen datos a mano esconden su costo y su causa, y qué hacer en su lugar: Harvard Business Review, 2016.",
+        "href": "https://hbr.org/2016/09/bad-data-costs-the-u-s-3-trillion-per-year",
+        "href_es": "https://hbr.org/2016/09/bad-data-costs-the-u-s-3-trillion-per-year"
+      },
+      {
+        "title": "Lineage in Unity Catalog",
+        "title_es": "El linaje en Unity Catalog (en inglés)",
+        "line": "Where each column of a table comes from, down to the column, captured as queries run on Databricks.",
+        "line_es": "De dónde viene cada columna de una tabla, hasta la columna, registrado a medida que se ejecutan las consultas en Databricks.",
+        "href": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-lineage",
+        "href_es": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-lineage"
+      },
+      {
+        "title": "A check's severity in dbt",
+        "title_es": "La severidad de un control en dbt (en inglés)",
+        "line": "A data test that warns, and one that stops what's built after it: the setting the film's checks at the source use.",
+        "line_es": "Una prueba de datos que avisa, y otra que detiene lo que se construye después: el ajuste que usan los controles en el origen de la película.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/severity",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/severity"
+      }
+    ]
+  },
+  "draft": true
+}

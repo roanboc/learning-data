@@ -408,6 +408,7 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
 - [Services with customers](../films/architecture-that-keeps-up/1-services-with-customers/) — `services-with-customers`
+- [One map, in the repo](../films/architecture-that-keeps-up/2-one-map-in-the-repo/) — `one-map`
 
 ### Small steps, measured
 

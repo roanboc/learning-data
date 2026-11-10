@@ -206,3 +206,21 @@ decisions:
     status: agreed
     relates_to: [DEC-PRJ-12, DEC-PRJ-13]
     implemented_in: [domain_tag.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-16
+    step: review_and_ship
+    title: Every job is code in the project, and reaches production the same way, after two people
+    text: 'The project''s jobs are written as files in a Declarative Automation Bundle (databricks.yml, and
+      a file for each job in resources/), next to the models they run. A change goes on a branch, then a
+      pull request whose checks build and test it; someone other than its author reviews and approves
+      it; once merged, the same files are deployed to test and run there, then to production after Noor
+      approves, under the platform''s service principal, never a person''s account. Nobody deploys from a
+      laptop. The workflow is examples/scripts-became-software/release.yml.'
+    why: Payroll's export ran for years from one person's laptop; when it had to change, nobody else could
+      change it safely. A job kept as code is versioned, tested and reviewed like the models, and the same
+      files deployed the same way every time can't drift between test and production.
+    decided_by: Noor, data architect, with Sam Okafor, who runs the data platform
+    decided_on: 2026-03-04
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-FIN-04]
+    implemented_in: [databricks.yml, payroll_export.job.yml, release.yml]

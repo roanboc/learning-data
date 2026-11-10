@@ -112,8 +112,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "La universidad agrega una vista, de un estante que nadie lee: el número, la carrera y el resultado de cada estudiante de Salud.",
 "The hospital writes the code that matches the two, and counts, by weeks on the wards, how many learners passed.":
 "El hospital escribe el código que une las dos y cuenta, por semanas en las salas, cuántos estudiantes aprobaron.",
-"Nothing runs until the university approves it: Jun reads it with Mei, and on 1 December she approves.":
-"Nada corre hasta que la universidad lo aprueba: Jun lo lee con Mei, y el 1 de diciembre ella lo aprueba.",
+"Nothing runs until the university approves it: Mei said yes in the agreement, and Jun reviews the code and approves it on 1 December.":
+"Nada corre hasta que la universidad lo aprueba: Mei dijo que sí en el acuerdo, y Jun revisa el código y lo aprueba el 1 de diciembre.",
 "The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under 10.":
 "La sala limpia no oculta nada por sí sola: sale lo que escribe el código aprobado, así que el código oculta toda cifra menor que 10.",
 "On 3 December, the hospital runs it, and gets one table of totals, kept for 30 days.":

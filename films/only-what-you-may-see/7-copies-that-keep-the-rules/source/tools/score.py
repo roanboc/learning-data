@@ -307,7 +307,7 @@ glass(rc('cleanroom', 0.05), 0.012, px(1010)); glass(rc('cleanroom', 0.85), 0.01
 glass(rc('view', 0.05), 0.010, px(765)); tap(rw('view', 'a shelf', 0.05), 0.006, px(800))
 glass(rc('code', 0.05), 0.012, px(1010))
 tap(rw('code', 'matches', 0.05), 0.006, px(1010)); tap(rw('code', 'counts', 0.05), 0.006, px(1010))
-glass(rw('approve', 'she approves', 0.1), 0.012, px(1300))
+glass(rw('approve', 'approves it on', 0.1), 0.012, px(1300))
 low(rw('hides', 'hides nothing', 0.05), 0.012, px(700)); tap(rw('hides', 'under ten', 0.05), 0.006, px(1010))
 tap(rc('runs', 0.35), 0.006, px(750))
 tTable = rw('runs', 'one table')

@@ -211,7 +211,7 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
 /* ---------------------------------------------------------------- 5. A room for both: the clean room */
 scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tNeither=A("both","neither"),tNames=A("cleanroom","only their columns"),tShelf=A("view","a shelf"),tMatch=A("code","matches"),tCounts=A("code","counts"),
-    tApp=A("approve","she approves"),tHides=A("hides","hides nothing"),tUnder=A("hides","under ten"),tTable=A("runs","one table"),tDays=A("runs","thirty days"),
+    tApp=A("approve","approves it on"),tMei=A("approve","Mei said"),tRev=A("approve","Jun reviews"),tHides=A("hides","hides nothing"),tUnder=A("hides","under ten"),tTable=A("runs","one table"),tDays=A("runs","thirty days"),
     t12=A("answer","Twelve weeks"),t47=A("answer","four to seven");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     const lasc=ag_in(tt,c.lascaux,0.7);
@@ -236,8 +236,11 @@ scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     cp_tag(x,500,812,"registrar.rooms: a shelf no one reads","grey",{a:cp_io(tt,tShelf,c.code)});
     cp_tag(x,500,812,"Hides nothing by itself","coral",{a:cp_io(tt,tHides,c.runs)});
     cp_tag(x,500,812,"Run by the hospital, 3 December","cyan",{a:cp_io(tt,c.runs+0.3,c.lascaux)});
-    // Jun reads it with Mei; she approves
-    const pp=cp_io(tt,c.approve-0.3,c.lascaux-0.2,0.7);cp_figure(x,"jun",345,684,0.79,tt,pp);cp_figure(x,"mei",130,672,0.82,tt,pp);
+    // the owner decides the use, the data team reviews the code (Rodrigo, 10 November 2026): Mei's yes is the agreement she signed;
+    // Jun reviews the hospital's code for the data team and approves it
+    cp_figure(x,"jun",345,684,0.79,tt,cp_io(tt,tRev-0.3,c.lascaux-0.2,0.7));cp_figure(x,"mei",130,672,0.82,tt,cp_io(tt,tMei-0.3,c.lascaux-0.2,0.7));
+    const yw=cp_tag(x,500,812,"Mei's yes: agreement 2026-21","grey",{a:cp_io(tt,tMei,c.hides-0.45)});
+    cp_tag(x,500+yw+24,812,"Code reviewed by the data team","grey",{a:cp_io(tt,tRev,c.hides-0.45)});
     // what comes out: one table of totals, to the hospital, kept 30 days
     cp_totals(x,1530,540,350,"Passed, by weeks",[["Under 4","hidden","violet"],["4 to 7","84 in 100"],["8 to 11","89 in 100"],["12 or more","91 in 100"]],
       {lh:46,sub:"Kept 30 days",subCol:tt<tDays?"mut":"cyan",a:ag_in(tt,tTable,0.5)*(1-0.6*lasc),k:ag_spr(tt,tTable,0.7),hi:{3:cp_io(tt,t12,c.lascaux),1:cp_io(tt,t47,c.lascaux)}});

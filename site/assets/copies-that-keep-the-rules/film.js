@@ -499,7 +499,7 @@ const NARR={
  {"id":"cleanroom","gap":0.8,"text":"So they meet in a clean room, on Azure Databricks, where neither can see the other's rows, only their columns' names."},
  {"id":"view","gap":0.8,"text":"The university adds one view, from a shelf no one reads: each Health learner's student number, course and result."},
  {"id":"code","gap":0.8,"text":"The hospital writes the code that matches the two, and counts, by weeks on the wards, how many learners passed."},
- {"id":"approve","gap":0.8,"text":"Nothing runs until the university approves it: Jun reads it with Mei, and on 1 December she approves.","say":"Nothing runs until the university approves it: Jun reads it with Mei, and on the first of December she approves."},
+ {"id":"approve","gap":0.8,"text":"Nothing runs until the university approves it: Mei said yes in the agreement, and Jun reviews the code and approves it on 1 December.","say":"Nothing runs until the university approves it: Mei said yes in the agreement, and Jun reviews the code and approves it on the first of December."},
  {"id":"hides","gap":0.8,"text":"The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under 10.","say":"The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under ten."},
  {"id":"runs","gap":0.8,"text":"On 3 December, the hospital runs it, and gets one table of totals, kept for 30 days.","say":"On the third of December, the hospital runs it, and gets one table of totals, kept for thirty days."},
  {"id":"answer","gap":0.8,"text":"Twelve weeks or more, 91 in 100 passed; four to seven weeks, 84.","say":"Twelve weeks or more, ninety-one in a hundred passed; four to seven weeks, eighty-four."},
@@ -525,7 +525,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 1.34, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 4.035, "madeup/script": 6.853, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.457, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 6.683, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
+const VODUR={"cave/place": 1.534, "cave/cave": 9.076, "cave/crowd": 4.35, "cave/air": 5.166, "cave/algae": 6.667, "cave/lost": 5.97, "cave/change": 1.34, "cave/closed": 5.751, "cave/copy": 6.184, "cave/paint": 5.953, "cave/opens": 5.299, "cave/millions": 3.251, "cave/rests": 5.139, "cave/records": 3.165, "cave/copies": 6.382, "cave/rules": 5.791, "home/kept": 3.788, "home/classes": 5.987, "home/policy": 5.412, "home/inside": 7.386, "home/catalog": 4.37, "home/leave": 3.995, "home/wrote": 4.029, "home/four": 2.072, "madeup/day": 1.829, "madeup/jun": 6.209, "madeup/ask": 4.983, "madeup/clone": 5.191, "madeup/exempt": 6.673, "madeup/masked": 7.43, "madeup/madeup": 4.035, "madeup/script": 6.853, "madeup/unit": 9.137, "madeup/never": 5.946, "madeup/lascaux": 3.457, "madeup/runs": 6.084, "share/day": 1.742, "share/hospital": 7.506, "share/agreement": 9.208, "share/opensharing": 6.022, "share/travel": 2.961, "share/why": 6.924, "share/every": 3.268, "share/totals": 6.558, "share/ends": 8.239, "room/harder": 6.083, "room/both": 7.689, "room/cleanroom": 6.689, "room/view": 6.938, "room/code": 6.238, "room/approve": 8.878, "room/hides": 7.694, "room/runs": 5.779, "room/answer": 5.065, "room/lascaux": 5.045, "out/day": 1.661, "out/elena": 7.17, "out/file": 5.061, "out/switches": 4.826, "out/ways": 5.793, "out/code": 5.998, "out/network": 7.636, "out/photo": 4.807, "out/clean": 4.13, "out/lascaux": 3.076, "kept/seen": 3.982, "kept/four": 2.122, "kept/each": 7.33, "kept/idea": 2.688};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2311,7 +2311,7 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
 /* ---------------------------------------------------------------- 5. A room for both: the clean room */
 scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   const tNeither=A("both","neither"),tNames=A("cleanroom","only their columns"),tShelf=A("view","a shelf"),tMatch=A("code","matches"),tCounts=A("code","counts"),
-    tApp=A("approve","she approves"),tHides=A("hides","hides nothing"),tUnder=A("hides","under ten"),tTable=A("runs","one table"),tDays=A("runs","thirty days"),
+    tApp=A("approve","approves it on"),tMei=A("approve","Mei said"),tRev=A("approve","Jun reviews"),tHides=A("hides","hides nothing"),tUnder=A("hides","under ten"),tTable=A("runs","one table"),tDays=A("runs","thirty days"),
     t12=A("answer","Twelve weeks"),t47=A("answer","four to seven");
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"cpHall",keys:[[0,960,540,1.0]],push:0.015,draw:(x,tt)=>{
     const lasc=ag_in(tt,c.lascaux,0.7);
@@ -2336,8 +2336,11 @@ scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     cp_tag(x,500,812,"registrar.rooms: a shelf no one reads","grey",{a:cp_io(tt,tShelf,c.code)});
     cp_tag(x,500,812,"Hides nothing by itself","coral",{a:cp_io(tt,tHides,c.runs)});
     cp_tag(x,500,812,"Run by the hospital, 3 December","cyan",{a:cp_io(tt,c.runs+0.3,c.lascaux)});
-    // Jun reads it with Mei; she approves
-    const pp=cp_io(tt,c.approve-0.3,c.lascaux-0.2,0.7);cp_figure(x,"jun",345,684,0.79,tt,pp);cp_figure(x,"mei",130,672,0.82,tt,pp);
+    // the owner decides the use, the data team reviews the code (Rodrigo, 10 November 2026): Mei's yes is the agreement she signed;
+    // Jun reviews the hospital's code for the data team and approves it
+    cp_figure(x,"jun",345,684,0.79,tt,cp_io(tt,tRev-0.3,c.lascaux-0.2,0.7));cp_figure(x,"mei",130,672,0.82,tt,cp_io(tt,tMei-0.3,c.lascaux-0.2,0.7));
+    const yw=cp_tag(x,500,812,"Mei's yes: agreement 2026-21","grey",{a:cp_io(tt,tMei,c.hides-0.45)});
+    cp_tag(x,500+yw+24,812,"Code reviewed by the data team","grey",{a:cp_io(tt,tRev,c.hides-0.45)});
     // what comes out: one table of totals, to the hospital, kept 30 days
     cp_totals(x,1530,540,350,"Passed, by weeks",[["Under 4","hidden","violet"],["4 to 7","84 in 100"],["8 to 11","89 in 100"],["12 or more","91 in 100"]],
       {lh:46,sub:"Kept 30 days",subCol:tt<tDays?"mut":"cyan",a:ag_in(tt,tTable,0.5)*(1-0.6*lasc),k:ag_spr(tt,tTable,0.7),hi:{3:cp_io(tt,t12,c.lascaux),1:cp_io(tt,t47,c.lascaux)}});

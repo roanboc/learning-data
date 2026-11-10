@@ -427,6 +427,7 @@ Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: 
 - [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
 - [Measures that matter](../films/small-steps-measured/2-measures-that-matter/) — `measures-that-matter`
 - [Better every week](../films/small-steps-measured/3-better-every-week/) — `better-every-week`
+- [Strategy is a habit](../films/small-steps-measured/4-strategy-is-a-habit/) — `strategy-is-a-habit`
 
 ## Making of and supplementary films
 

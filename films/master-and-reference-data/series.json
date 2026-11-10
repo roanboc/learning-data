@@ -30,10 +30,10 @@
     ["biz", "Cuida a la persona", "Mei, cuya oficina decide quién es alguien, y si dos registros son uno"],
     ["tech", "Construye el modelo", "Jun, de ingeniería analítica, que convierte lo decidido en código, con pruebas"]
   ],
-  "learn_p": "{Labs} hands-on labs, film by film, then {quiz} situations from every film.",
-  "learn_p_es": "{Labs} labs interactivos, película por película, y luego {quiz} situaciones de todas las películas.",
-  "labs_lead": "{Labs} hands-on labs, film by film. Each puts one idea from a film in your hands: change things and see what happens.",
-  "labs_lead_es": "{Labs} labs interactivos, película por película. Cada uno pone en tus manos una idea de una película: cambia cosas y mira qué pasa.",
+  "learn_p": "{Labs} hands-on labs for the whole series, then {quiz} situations from every film.",
+  "learn_p_es": "{Labs} labs interactivos para toda la serie, y luego {quiz} situaciones de todas las películas.",
+  "labs_lead": "{Labs} hands-on labs for the whole series. Each puts one idea from a film in your hands: change things and see what happens.",
+  "labs_lead_es": "{Labs} labs interactivos para toda la serie. Cada uno pone en tus manos una idea de una película: cambia cosas y mira qué pasa.",
   "quiz_lead": "{quiz} situations that the people who look after master data really face, from every film. Decide what you'd do; each answer explains why, and points back to the lab that covers it.",
   "quiz_lead_es": "{quiz} situaciones que de verdad enfrentan quienes cuidan los datos maestros, de todas las películas. Decide qué harías; cada respuesta explica por qué, y te lleva al lab que lo trata."
 }

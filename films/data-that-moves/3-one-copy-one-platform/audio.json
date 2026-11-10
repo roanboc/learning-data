@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/one-copy-one-platform/soundtrack.mp3",
+      "size": 4817232,
+      "sha256": "bd6553160162cf71ecbbc307548b64b8963318f836e6d069f2753c9e06efcfe0",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-one-copy-one-platform-37d988e8540bfe10b171/bd6553160162cf71ecbbc307548b64b8963318f836e6d069f2753c9e06efcfe0.mp3"
+    }
+  ]
+}

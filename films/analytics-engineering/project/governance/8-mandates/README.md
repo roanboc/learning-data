@@ -12,7 +12,7 @@ A mandate is a requirement, as Noor's map writes a rule with its home: what must
 
 ## Signed, approved, read again
 
-- **Signed** by the agent's owner, the person who answers for what it does, once its track record is in (for the workload agent, 14 nights in test without a miss). The owner asks for it in the pull request that adds it, and doesn't review that pull request: the data architect does (`CODEOWNERS`).
+- **Signed** by the agent's owner, the person who answers for what it does, once its track record is in (for the workload agent, 14 nights in test without a miss). The owner asks for it in the pull request that adds it, and doesn't review that pull request: like every file in `governance/`, data governance and the data architect do (`CODEOWNERS`).
 - **Approved** by a second person who isn't its owner: the data architect, for the workload agent.
 - **Read again** each December, with the access review (`docs/databricks-governance.md`, *7. The access review*).
 - **Narrowed or withdrawn** by its owner at any time, in a pull request. The task then moves down a stage and waits for its owner again.

@@ -1,0 +1,8 @@
+name: draft the change
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: planning contributor
+- realization: change a data product
+- triggering: build it in development
+status: confirmed

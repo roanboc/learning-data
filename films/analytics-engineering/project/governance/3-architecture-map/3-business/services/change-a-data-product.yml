@@ -1,0 +1,9 @@
+name: change a data product
+kind: business service
+promise: 'A change to a data product goes from a ticket to production: drafted with its evidence, reviewed and
+  approved by people other than whoever drafted it, and released by a second person.'
+how_to_ask: a ticket in the tracker
+owner: Yusuf Demir, data governance lead
+relationships:
+- realization: provide data products
+status: confirmed

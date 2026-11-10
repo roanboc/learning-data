@@ -1,0 +1,13 @@
+name: planning contributor
+kind: business role
+definition: Drafts changes to Planning's marts, builds them in development and proposes them as pull requests.
+  Never reviews, approves or releases.
+owner: Yusuf Demir, data governance lead
+rights:
+  may: read the project and production (names masked), draft on its own branches, build in its own development
+    schema, open a pull request
+  may not: approve, merge, change production, change an approved test, change what a word means, grant itself
+    rights
+  asks: Clara Jensen for what Planning needs, Mei Tanaka for what a word means, Noor for the model, Jun Park for
+    the code
+status: confirmed

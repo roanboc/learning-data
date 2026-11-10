@@ -210,8 +210,8 @@ project/
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
 ├── docs/                     how the work is done: the process, the conventions, the one-page plan,
-│                             every week; decisions.md [generated], the index of every decision log; scorecard.md
-│                             [generated], the data quality scorecard from the last run
+│                             every week, the stages; decisions.md [generated], the index of every decision log;
+│                             scorecard.md [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
 │   │                         and products.py: write the [generated] files; --check in CI
@@ -229,7 +229,10 @@ project/
 │                             platform-results/: a night's checks on the platform, in the scorecard;
 │                             census-by-level/: a job, from its one-page plan to its pull request;
 │                             agents-on-databricks/: the count of active research projects as a
-│                             function, a Genie Agent and an agent's evaluation cases (Databricks only); hr-system-interface/: the HR system's data contract, agreed with its owner
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
+│                             hr-system-interface/: the HR system's data contract, agreed with its owner;
+│                             hot-warm-cold/: a streaming table, a materialized view and an archive,
+│                             data kept hot, warm and cold, with their service levels (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change, from the owners in the metadata. An
 │                             example here: GitHub reads it only at a repository's root

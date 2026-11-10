@@ -1,0 +1,1 @@
+*Quality as a habit*, the second series of the module Data quality, on keeping data good and making it better: four films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

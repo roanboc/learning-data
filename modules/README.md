@@ -172,7 +172,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
-No film source yet.
+- [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
 
 ## Enterprise architecture
 

@@ -1,0 +1,271 @@
+1
+00:00:03,000 --> 00:00:13,160
+In the 1970s, fridges, spray cans and foam all over the world use gases called CFCs: cheap, safe to handle, and slow to break down.
+
+2
+00:00:14,860 --> 00:00:22,919
+In 1974, in California, two chemists, Mario Molina and Sherwood Rowland, ask where those gases end up.
+
+3
+00:00:24,219 --> 00:00:30,024
+Their answer: they drift up, over years, to the ozone layer, high above the clouds, and break it down.
+
+4
+00:00:31,524 --> 00:00:36,206
+That thin layer of gas stops most of the sun's harmful ultraviolet light.
+
+5
+00:00:37,506 --> 00:00:42,734
+Without it, more people get skin cancer, more eyes are damaged, and crops grow less.
+
+6
+00:00:44,634 --> 00:00:55,394
+In 1985, British scientists in Antarctica, Joe Farman, Brian Gardiner and Jonathan Shanklin, publish what they've measured there since 1957.
+
+7
+00:00:56,694 --> 00:01:02,084
+Each spring, the layer above them is now only about two thirds as thick as it once was.
+
+8
+00:01:03,784 --> 00:01:09,604
+Much is still unsure, but waiting until everyone is sure could be too late. Something has to change.
+
+9
+00:01:11,504 --> 00:01:18,582
+On 16 September 1987, in Montreal, countries sign a treaty: the Montreal Protocol.
+
+10
+00:01:20,082 --> 00:01:25,617
+Its first step is modest: cut the main CFCs by half, by 1998.
+
+11
+00:01:27,117 --> 00:01:35,054
+But it builds in a habit: from 1990, and at least every four years, look at the science again, and decide whether to go further.
+
+12
+00:01:36,954 --> 00:01:40,956
+In London, in 1990, with stronger evidence, they go further.
+
+13
+00:01:41,856 --> 00:01:48,096
+No more CFCs by 2000 in richer countries, and a fund to help poorer ones follow.
+
+14
+00:01:49,596 --> 00:01:54,750
+In Copenhagen, in 1992, they bring that forward to 1996.
+
+15
+00:01:56,250 --> 00:02:00,037
+Each time, the plan moves out loud, with the science behind it.
+
+16
+00:02:01,937 --> 00:02:08,197
+By 2023, nearly 99 per cent of the banned gases are no longer made or used.
+
+17
+00:02:09,697 --> 00:02:19,341
+The ozone layer is healing: back to its 1980 thickness around 2040 over most of the world, and around 2066 over Antarctica.
+
+18
+00:02:21,041 --> 00:02:27,661
+By 2030, UN scientists expect it to prevent up to two million cases of skin cancer a year.
+
+19
+00:02:29,561 --> 00:02:34,843
+A data strategy is written with what's known on the day, too, and the world won't wait for it.
+
+20
+00:02:36,143 --> 00:02:41,406
+Look at it again on a rhythm, move it out loud, and it stays the plan everyone works to.
+
+21
+00:02:49,506 --> 00:02:59,592
+A university, a year from now. On Tuesday 27 April 2027, the data council approves Helena Novak's data strategy.
+
+22
+00:03:01,292 --> 00:03:10,127
+On one page: where the university is going, what data must do for it, five principles, the target, six packages of work, and the measures.
+
+23
+00:03:12,027 --> 00:03:19,327
+Richard Rumelt says a good strategy has a core: a diagnosis, a guiding policy, and actions that fit together.
+
+24
+00:03:21,027 --> 00:03:28,154
+Helena's has all three: what slows data down, five principles to decide by, and six packages of work.
+
+25
+00:03:30,054 --> 00:03:34,126
+Before anyone leaves the room, she puts the year's reviews in the calendar.
+
+26
+00:03:35,626 --> 00:03:43,840
+The last Tuesday of July, October and January, when the deputy vice-chancellor chairs the council as the strategy's steering group.
+
+27
+00:03:44,940 --> 00:03:46,014
+No new committee.
+
+28
+00:03:47,714 --> 00:03:52,961
+And one more, for the whole year: Monday 31 January 2028.
+
+29
+00:03:54,661 --> 00:04:01,712
+Each review asks the same three questions: what do the measures say, what do the risks say, and what has changed around us?
+
+30
+00:04:04,412 --> 00:04:07,501
+Tuesday 27 July: the first review.
+
+31
+00:04:09,201 --> 00:04:15,519
+The measures page has its first readings: 24 days from ask to first use, down from 41.
+
+32
+00:04:17,419 --> 00:04:21,706
+The eight risks are read in turn, each with the early sign that would warn of it.
+
+33
+00:04:23,406 --> 00:04:31,129
+And the council reads the map's history in the repository: what changed in the current and target state since June, and why.
+
+34
+00:04:33,029 --> 00:04:36,880
+Nothing needs to move, and the minutes say so: reviewed, no change.
+
+35
+00:04:38,980 --> 00:04:44,022
+A review that changes nothing still counts: now everyone knows the plan still holds.
+
+36
+00:04:46,722 --> 00:04:55,505
+Thursday 14 October. The University Council decides to offer short online courses for working adults, from 2028.
+
+37
+00:04:57,405 --> 00:05:02,440
+A new kind of student: someone with a job, studying online, a few weeks at a time.
+
+38
+00:05:03,940 --> 00:05:10,675
+To choose which courses to offer, the faculties need data they can trust on who asks about what, by December.
+
+39
+00:05:12,575 --> 00:05:18,375
+Twelve days later, on Tuesday 26 October, the steering group reviews the strategy.
+
+40
+00:05:19,875 --> 00:05:24,469
+The diagnosis has grown. The guiding policy holds. The actions move.
+
+41
+00:05:26,369 --> 00:05:31,764
+Up: an owner and a promise for the products that choice needs, by December, not March.
+
+42
+00:05:33,464 --> 00:05:37,187
+Waits: the agents' written mandates, to March, not December.
+
+43
+00:05:38,887 --> 00:05:43,181
+The team gives half its time to the plan, and it can't do both by December.
+
+44
+00:05:44,881 --> 00:05:51,918
+Until then, no new agent starts, and the risk of an agent with more rights than its job is read at every review.
+
+45
+00:05:53,818 --> 00:05:59,027
+It's written on the one page, and everyone it touches hears why, and the new date, that week.
+
+46
+00:06:00,727 --> 00:06:06,385
+The same day, Noor adds the online courses' platform to the target on her map, with its reason.
+
+47
+00:06:08,085 --> 00:06:14,072
+When strategy moves, in The map before the data, walks a change like this down every layer of the map.
+
+48
+00:06:15,572 --> 00:06:21,922
+TOGAF calls this change management: some changes fit the plan, some move it, and some need a new one.
+
+49
+00:06:24,622 --> 00:06:29,329
+Monday 31 January 2028: the first year's review.
+
+50
+00:06:30,629 --> 00:06:34,878
+On one side, what the strategy promised; on the other, what was delivered.
+
+51
+00:06:36,178 --> 00:06:39,684
+Days from ask to first use: from 41 to 14.
+
+52
+00:06:40,984 --> 00:06:44,993
+Products whose promise is met: from 58 per cent to 86.
+
+53
+00:06:46,293 --> 00:06:51,314
+People using products each month: from 340 to 910.
+
+54
+00:06:52,614 --> 00:07:00,712
+The old warehouse, retired on Friday 17 December, saves A$270,000 a year from January.
+
+55
+00:07:02,212 --> 00:07:05,486
+Three data partners, named by September, as promised.
+
+56
+00:07:06,586 --> 00:07:13,008
+And what didn't work, said as plainly: four more partners are due by March, and two faculties haven't named one.
+
+57
+00:07:14,508 --> 00:07:19,580
+Helena will see both deans in February, and that risk goes to the top of the register.
+
+58
+00:07:21,080 --> 00:07:27,063
+The next year starts from here: the same three questions, asked again of the people she spoke to a year ago.
+
+59
+00:07:29,763 --> 00:07:34,340
+In Montreal, the first step was small. The habit of looking again made it enough.
+
+60
+00:07:36,240 --> 00:07:44,708
+Helena's strategy kept the same habit: read every quarter, moved out loud when the university moved, and set beside what it delivered.
+
+61
+00:07:46,608 --> 00:07:49,327
+On Monday, put the year's reviews in the calendar.
+
+62
+00:07:50,427 --> 00:07:54,244
+At each one, read the measures, the risks, and what's changed around you.
+
+63
+00:07:55,344 --> 00:07:59,984
+When the world moves, move the plan out loud: what moves up, what waits, and why.
+
+64
+00:08:01,284 --> 00:08:03,868
+Keep the one page current, and the map with it.
+
+65
+00:08:04,968 --> 00:08:09,666
+End the year with what you promised beside what you delivered, and start the next from there.
+
+66
+00:08:11,366 --> 00:08:18,755
+That's the whole job: every area at once, a plan in stages, each proved with something real, and everyone at the table.
+
+67
+00:08:20,655 --> 00:08:24,676
+Discover, define, plan. Deliver, measure, improve. And again.
+
+68
+00:08:26,376 --> 00:08:30,229
+Review the plan every quarter; move it out loud when the world moves.

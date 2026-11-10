@@ -1,0 +1,61 @@
+{
+  "kicker": "Review before release",
+  "kicker_es": "Revisión antes de producción",
+  "title_es": "Cada cambio pasa por revisión",
+  "h1": "Every change through review, for agents and people",
+  "h1_es": "Cada cambio pasa por revisión, de agentes y de personas",
+  "lead": "The planning agent's first pull request changes the class plan the faculties hire their tutors from. It hands in its evidence, checks build what changed, a diff shows the data, another agent reviews it for reference, Jun reviews the code, and Noor approves and releases it.",
+  "lead_es": "El primer pull request del agente de Planificación cambia el plan de clases con el que las facultades contratan tutores. Entrega su evidencia, se construye lo que cambió, un diff muestra los datos, otro agente revisa como referencia, Jun revisa el código y Noor aprueba y lo libera.",
+  "description": "A film about how a change reaches production when an AI agent proposes it, the sixth of From helper to colleague: the planning agent's first pull request, under its own name, changes Planning's class plan for next semester, which the faculties hire their tutors from, so each unit's classes come from its own class size, since a laboratory holds 16, not 25; it hands in its evidence, its two tests and what it wasn't sure of; dbt builds only what changed and what depends on it, the impact report shows a column added, and a diff of the data, unit by unit, shows more classes in 161 units and nothing else; the governance review agent reviews it, for reference, as a comment that never approves or blocks, finds 31 units with no class size and suggests a warning, and data governance decides, where the change and the glossary differ; owners don't review pull requests: what a word means is decided first, in the glossary, and its owners are told what a change touches; who reviews the code and who approves the change come from the roles on the university's map, written into GitHub's teams; the rules on main hold for everyone, nobody approves their own pull request, and an agent's approval never counts; and the release builds main in test each night, waits at production until a release approver who didn't start it says yes, and signs in to Databricks as its own service principal, with no secret, to deploy the bundle. An agent proposes; a person releases.",
+  "description_es": "Una película sobre cómo llega un cambio a producción cuando lo propone un agente de IA, la sexta de De ayudante a colega: el primer pull request del agente de Planificación, con su propio nombre, cambia el plan de clases del próximo semestre, con el que las facultades contratan tutores, para que las clases de cada asignatura salgan de su propio tamaño de clase, porque en un laboratorio caben 16, no 25; entrega su evidencia, sus dos pruebas y lo que no tenía claro; dbt construye solo lo que cambió y lo que depende de ello, el informe de impacto muestra una columna nueva, y un diff de los datos, asignatura por asignatura, muestra más clases en 161 asignaturas y nada más; el agente de revisión de gobernanza lo revisa, como referencia, con un comentario que nunca aprueba ni bloquea, encuentra 31 asignaturas sin tamaño de clase y sugiere un aviso, y decide gobernanza de datos, donde el cambio y el glosario difieren; los dueños no revisan pull requests: lo que significa una palabra se decide primero, en el glosario, y a sus dueños se les avisa qué toca un cambio; quién revisa el código y quién aprueba el cambio sale de los roles del mapa de la universidad, llevados a los equipos de GitHub; las reglas de main valen para todos, nadie aprueba su propio pull request y la aprobación de un agente nunca cuenta; y la liberación construye main en pruebas cada noche, espera en producción hasta que un aprobador de liberación que no la inició dice que sí, y entra en Databricks como su propia entidad de servicio, sin secreto, para desplegar el bundle. Un agente propone; una persona libera.",
+  "card": "The planning agent proposes more classes for 161 units. Jun reviews the code, and a second person approves and releases it.",
+  "card_es": "El agente de Planificación propone más clases en 161 asignaturas. Jun revisa el código, y una segunda persona aprueba y lo libera.",
+  "chapters_es": {
+    "first": "El primer pull request del agente",
+    "hands": "Lo que entrega el agente",
+    "checks": "Qué cambió y qué toca",
+    "review": "La revisión de un agente, como referencia",
+    "rules": "Quién aprueba, según el mapa",
+    "release": "Una persona libera",
+    "close": "Un agente propone, una persona libera"
+  },
+  "past": [
+    "Today, at the university: the planning agent's first pull request",
+    "A change to the plan the faculties hire their tutors from, proposed by an agent, its code reviewed by the data team, and approved and released by a second person."
+  ],
+  "past_es": [
+    "Hoy, en la universidad: el primer pull request del agente de Planificación",
+    "Un cambio al plan con el que las facultades contratan tutores, propuesto por un agente, con el código revisado por el equipo de datos, y aprobado y liberado por una segunda persona."
+  ],
+  "repo": {
+    "hands": [
+      "examples/class-size/README.md",
+      "examples/class-size/pull_request.md"
+    ],
+    "checks": [
+      "examples/class-size/checks.txt",
+      "examples/class-size/diff.txt",
+      "scripts/tools/diff_against_main.py"
+    ],
+    "review": [
+      "examples/class-size/governance_review.md",
+      "skills/review-for-governance/"
+    ],
+    "rules": [
+      "review-and-release/README.md",
+      "review-and-release/rulesets/main.json",
+      "review-and-release/teams.yml",
+      "scripts/generate/teams.py",
+      "CODEOWNERS"
+    ],
+    "release": [
+      "review-and-release/release.yml",
+      "review-and-release/production.json",
+      "databricks.yml",
+      "resources/build.job.yml",
+      "examples/class-size/release.md"
+    ]
+  },
+  "next_h": "You've seen how every change reaches production: an agent proposes, a person releases. Next: what an agent may do alone, written in a mandate its owner signs.",
+  "next_h_es": "Viste cómo llega cada cambio a producción: un agente propone, una persona libera. Después: lo que un agente puede hacer solo, escrito en un mandato que firma su dueño."
+}

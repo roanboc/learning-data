@@ -1,0 +1,61 @@
+{
+  "key": "a-hundred-records",
+  "title": "A hundred records",
+  "sub": "Film 2 of 4 of Fit for use, the first series of Data quality: measure before you write rules. The people who know the graduation list look closely at its hundred most recent records, and the platform describes every column of the whole list. Only then are the first checks written, from what the profile showed.",
+  "howto": "The film is drawn in the module's look, the quality bench: a limestone wall over a granite bench, records on cream index cards, results on tags tied on with string. Green passes, amber holds for a person to look, red stops, grey wasn't checked; brass is what good means for a use, and steel blue a measure taken. Its opening is a brewery's laboratory in Dublin, from 1899, and its barley plots.",
+  "src": [
+    "brewery.js",
+    "bench.js",
+    "profile.js",
+    "close.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "look",
+    "later",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMalia\\b",
+      "Mah-lee-ah"
+    ],
+    [
+      "\\bFonoti\\b",
+      "Fo-no-tee"
+    ],
+    [
+      "\\bAndr(é|e)s\\b",
+      "Ahn-dress"
+    ],
+    [
+      "\\bPe(ñ|n)aloza\\b",
+      "Pen-yah-lo-sah"
+    ],
+    [
+      "\\bGosset's\\b",
+      "Gossit's"
+    ],
+    [
+      "\\bGosset\\b",
+      "Gossit"
+    ]
+  ],
+  "story": [
+    "first"
+  ],
+  "urgent": [],
+  "logos": true
+}

@@ -296,7 +296,7 @@ scene("apart",(ctx,S,t,sc)=>{const c=sc.cues,P=vt_once(sc,()=>({g0:vt_g0(sc),two
    data contract's rule for awards names its dimension and its method; the scorecard counts allowed and true apart. A check is only as
    true as its reference: say which, and the reader knows what it can tell, and what it can't. */
 const VT_CHECKS=["names_are_allowed","  owner: Mei Tanaka","  dimension: validity","awards_match_the_boards","  owner: Mei Tanaka","  dimension: accuracy",
-  [["  reference: ",null],["the exam boards' approved lists","brass"]],"name_as_printed",[["  reference: ",null],["the graduate","brass"]],"  confirmed on: name_confirmed_on"];
+  [["  reference: ",null],["the exam boards' approved lists","brass"]],"name_as_printed",[["  reference: ",null],["the graduate","brass"]],"  confirmed_on: name_confirmed_on"];
 function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4;vt_who(x,"jun",280,G,1);
   // the file of checks: each line as it's said
   const at=[c.beside-0.2,P.owner,P.measures,c.beside,P.owner+0.2,P.measures+0.2,P.ref,c.graduate,c.graduate+0.4,P.date],wa=ag_io(tt,c.every+0.3,W0,0.4);
@@ -305,9 +305,10 @@ function vt_which(x,tt,c,P){const G=P.g0+tt,W0=c.contract-0.4,C1=c.scorecard-0.4
     dq_chip(cx,b.x+560,b.y+46*2+23,"no reference but the rule itself",{col:"none",a:ag_io(tt,c.validity+0.6,c.awards-0.2,0.4)});
     dq_chip(cx,b.x+560,b.y+46*2+23,"a name is allowed, and no more",{a:ag_io(tt,c.nomore+0.2,c.awards-0.2,0.4)*0});}});
   // the data contract
-  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.dim-0.1?[]:tt<P.method-0.1?[2]:[3];
-  dq_window(x,480,180,1360,420,{product:"Data contract",title:"the graduation list",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["quality:","  - name: awards_match_the_boards",
-    [["    dimension: ",null],["accuracy","steel"]],[["    method: ",null],["reconciliation","steel"]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,c.contract+0.3,P.dim,P.method][i],0.4)})});
+  // the rule as the contract has it (governance/5-data-contracts/mart_graduations__graduation_list.yaml), its other lines left out
+  const ca=ag_io(tt,c.contract+0.1,C1,0.4),cl=tt<P.dim-0.1?[]:tt<P.method-0.1?[3]:[4];
+  dq_window(x,480,160,1360,460,{product:"Data contract",title:"the graduation list",a:ca,draw:(cx,b)=>dq_code(cx,b.x+12,b.y,["quality:","  - id: awards_match_the_boards","    …",
+    [["    dimension: ",null],["accuracy","steel"]],[["    method: ",null],["reconciliation","steel"]]],{lh:46,w:b.w-24,lit:cl,lineA:(l,i)=>ag_in(tt,[c.contract+0.1,c.contract+0.3,c.contract+0.3,P.dim,P.method][i],0.4)})});
   // the scorecard: allowed, and true
   const sa=ag_in(tt,c.scorecard+0.1,0.4);if(sa>0.004){x.save();x.globalAlpha*=sa;dq_card(x,480,190,1160,300,{});dq_label(x,508,242,"Scorecard · the graduation list",{});
     dq_rows(x,508,268,[{h:"Dimension",w:250},{h:"Says",w:220},{h:"Check",w:520,f:"mono"},{h:"",w:110}],

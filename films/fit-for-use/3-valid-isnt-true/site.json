@@ -27,6 +27,21 @@
     "Japón, de 1800 a 1821: un levantamiento comprobado con las estrellas",
     "Los equipos de Ino Tadataka midieron la costa a pie de día y las estrellas en las noches despejadas, y corrigieron el camino con ellas: un mapa de todo Japón, la base de sus mapas durante décadas."
   ],
+  "repo": {
+    "ask": [
+      "sources/portal/_portal__sources.yml"
+    ],
+    "apart": [
+      "sources/exam_boards/_exam_boards__sources.yml",
+      "tests/generic/reconciles_with.sql"
+    ],
+    "which": [
+      "tests/rules/names_are_allowed.sql",
+      "models/marts/graduations/_graduations__models.yml",
+      "governance/5-data-contracts/mart_graduations__graduation_list.yaml",
+      "docs/scorecard.md"
+    ]
+  },
   "next_h": "You've seen why only a reference says what's true. Next: data that comes late, and looks complete.",
   "next_h_es": "Viste por qué solo una referencia dice qué es cierto. Después: datos que llegan tarde, y parecen completos.",
   "elsewhere": {
@@ -54,11 +69,12 @@
       {
         "title": "Data tests in dbt",
         "title_es": "Las pruebas de datos en dbt (en inglés)",
-        "line": "Singular data tests, which return the rows that fail, and the meta that says who owns each one.",
-        "line_es": "Las pruebas de datos singulares, que devuelven las filas que fallan, y el meta que dice quién es responsable de cada una.",
+        "line": "Data tests, singular and generic, which return the rows that fail, and the meta that says who owns each one and what it measures.",
+        "line_es": "Las pruebas de datos, singulares y genéricas, que devuelven las filas que fallan, y el meta que dice quién es responsable de cada una y qué mide.",
         "href": "https://docs.getdbt.com/docs/build/data-tests",
         "href_es": "https://docs.getdbt.com/docs/build/data-tests"
       }
     ]
-  }
+  },
+  "draft": true
 }

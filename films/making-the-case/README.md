@@ -12,6 +12,7 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [A case worth funding](https://data.learn-all.org/making-the-case/a-case-worth-funding/) | Funding data work | 8 min | 7 | 3 questions | [script](1-a-case-worth-funding/script.md) · [source](1-a-case-worth-funding/source/README.md) |
+| [Risks, said out loud](https://data.learn-all.org/making-the-case/risks-said-out-loud/) | A risk register that lives | 7 min | 6 | 3 questions | [script](2-risks-said-out-loud/script.md) · [source](2-risks-said-out-loud/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -39,7 +39,6 @@
       "models/marts/graduations/_graduations__models.yml"
     ],
     "written": [
-      "governance/5-data-contracts/mart_graduations__graduation_list.yaml",
       "tests/generic/builtin.sql",
       "macros/governance/critical_data.sql"
     ]

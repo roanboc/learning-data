@@ -1,0 +1,63 @@
+{
+  "key": "a-platform-that-watches-itself",
+  "title": "A platform that watches itself",
+  "sub": "Film 2 of 2 of Data as software: a platform that watches its own jobs, pipelines and tables, finds a failure, traces its cause through lineage, says what it touches and proposes a fix, which a person reviews and a second person approves. On Apollo 11, a computer built to watch itself raised the 1202 alarm, and people decided. On the night of Monday 2 November, the claims job fails; by morning Genie ZeroOps has traced it, and Sam and Noor take it from there.",
+  "howto": "The film is drawn in the module's look, the platform map of The Inner Life of Data drawn up close. Colour carries meaning: light blue is the platform and what moves on it, gold is an agreement (the contract, the alarms' rule, the document between two systems), red is a failure, amber is a person's turn to decide, and green is what passed or was paid. Apollo 11 is drawn in its own colours, under a black sky, with the computer's display lit as it was.",
+  "src": [
+    "pw_apollo.js",
+    "pw_night.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "watch",
+    "inbox",
+    1.0
+  ],
+  "logos": true,
+  "say": [
+    [
+      "\\bNoor's\\b",
+      "Nuur's"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Nwin"
+    ],
+    [
+      "\\bMIT\\b",
+      "M I T"
+    ],
+    [
+      "\\bZeroOps\\b",
+      "Zero Ops"
+    ]
+  ],
+  "story": [
+    "alarm"
+  ],
+  "urgent": []
+}

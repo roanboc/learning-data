@@ -15,16 +15,18 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | `registrar` | 17/17 | 7/7 | 8/8 | 6/6 |  | 38/38 |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
-| `staff` | 5/5 | 3/3 |  | 1/1 |  | 9/9 |
-| `student` | 25/25 | 18/18 | 8/8 | 18/18 | 1/1 | 70/70 |
+| `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
+| `student` | 25/25 | 18/18 | 8/8 | 18/18 | 4/4 (2 warn) | 73/73 (2 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 81/81 (1 warn) | 53/53 | 37/37 | 42/42 | 3/3 | 216/216 (1 warn) |
+| **All** | 81/81 (1 warn) | 54/54 | 38/38 | 43/43 | 6/6 (2 warn) | 222/222 (3 warn) |
 
 ## Not passed
 
 | Status | Domain | Dimension | Test | Owner | Rows |
 |---|---|---|---|---|---|
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
+| warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |
 
 ## What each accuracy test checks against
 
@@ -35,3 +37,6 @@ A test measures accuracy only against a reference outside the data, such as a re
 | `finance` | `reconcile_finance_with_tuition_report` | Finance's own tuition report | Finance |
 | `planning` | `reconcile_planning_with_census_report` | the census team's published report | Planning |
 | `student` | `awards_match_the_boards` | the exam boards' approved lists | Mei Tanaka, registrar's office |
+| `student` | `graduation_list_accents_all_gone` | **none named** | Mei Tanaka, registrar's office |
+| `student` | `graduation_list_family_name_at_30` | **none named** | Mei Tanaka, registrar's office |
+| `student` | `graduation_list_family_name_in_capitals` | **none named** | Mei Tanaka, registrar's office |

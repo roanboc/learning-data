@@ -155,9 +155,12 @@ function sw_week(ctx,b,t,o){const a=o.a==null?1:o.a;if(a<=0.004)return;const L=b
     dq_card(ctx,tx,ty,tw,th,{edge:"steel"});dq_T(ctx,tl.label,tx+DQ_PAD,ty+46,{w:600,size:28,col:DQ.soft});dq_T(ctx,tl.value,tx+DQ_PAD,ty+th-30,{w:800,size:44,col:"steel"});ctx.restore();});
   ctx.restore();}
 
-/* ---------------------------------------------------------------- the films' cards, at the end: each film's number and title */
+/* ---------------------------------------------------------------- the films' cards, at the end: each film's title, in a row under its series' name
+   (never a number: the site doesn't number its films, and each series numbers its own as "Film 2 of 4") */
 const SW_FILMS=["Good enough for what?","A hundred records","Valid isn't true","Late is wrong too","The hidden factory","Report, fix, tell","Read by an agent","Small, every week"];
-function sw_filmCard(ctx,i,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;dq_textCard(ctx,x,y,400,{kick:"Film "+(i+1),title:SW_FILMS[i]},{a,k:o.k,edge:o.edge});}
+const SW_SERIES=["Fit for use","Quality as a habit"];
+function sw_filmCard(ctx,i,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;dq_textCard(ctx,x,y,400,{title:SW_FILMS[i]},{a,k:o.k,edge:o.edge});}
+function sw_seriesLabel(ctx,j,x,y,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;dq_T(ctx,SW_SERIES[j].toUpperCase(),x,y,{w:800,size:28,ls:4,col:DQ.soft});ctx.restore();}
 
 /* ---------------------------------------------------------------- a list's card: its heading and names, typed */
 function sw_listCard(ctx,x,y,w,head,names,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const h=86+names.length*56+14;ctx.save();ctx.globalAlpha*=a;

@@ -163,7 +163,7 @@ Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/quality-as-a-habit/`
 
-No film source yet.
+- [Small, every week](../films/quality-as-a-habit/4-small-every-week/) — `small-every-week`
 
 ## Enterprise architecture
 

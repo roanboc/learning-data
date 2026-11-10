@@ -5,7 +5,7 @@
    académico, el sistema de estudiantes, el documento visto en la matrícula, un control (a check), el cuadro de mando (the scorecard), los cien registros (the hundred
    records), un aviso (a report); a check that holds a name, un control que retiene un nombre, and a held name, un nombre retenido; la revisión a mano (the hand checks)
    and la ronda (a round of them); plan, do, check, act as planificar, hacer, verificar, actuar, as Spanish quality texts give the cycle (PHVA); a change's keeper,
-   su guardián; the module's promise as its first film gives it, aptos para un uso. In Mexico: la roya del tallo (stem rust), el valle del Yaqui, las tierras altas,
+   su guardián; the module's promise as Good enough for what? gives it, aptos para un uso. In Mexico: la roya del tallo (stem rust), el valle del Yaqui, las tierras altas,
    la vuelta (a round of breeding), la estación de investigación; gravar, to tax. Tú, as the film's last lines speak to the viewer. Numbers keep the picture's comma
    (2,140), as the module's other Spanish captions do, so a viewer reads the same number in the caption and on screen. */
 window.CAPTIONS=Object.assign(window.CAPTIONS||{},{

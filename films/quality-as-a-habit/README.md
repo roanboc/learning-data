@@ -11,6 +11,7 @@ Keeping data good, and making it better. Every November, two people spend three 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Small, every week](https://data.learn-all.org/quality-as-a-habit/small-every-week/) | Continuous improvement | 8½ min | 7 | 4 questions | [script](4-small-every-week/script.md) · [source](4-small-every-week/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

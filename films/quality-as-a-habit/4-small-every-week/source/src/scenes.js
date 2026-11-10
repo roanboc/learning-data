@@ -283,7 +283,7 @@ scene("stage",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       dq_person(x,"mei",560,600,0.86,{t:tt,warm:1,cut:690-28*0.92,talk:tk});
       const u=ag_sine((tt-P.crosses+0.2)/2.8);dq_person(x,"andresGown",lerp(2160,1300,u),606,0.95,{t:tt,warm:1,flip:true});
       // the list's card leaves before the certificate comes in, so his name is never shown twice in the dissolve
-      const p=sw_pop(tt,P.name-0.2,P.cert-1.0);dq_textCard(x,130,110,460,{kick:"From the list",title:"Andrés Peñaloza"},{k:p.k,a:p.a});}},
+      const p=sw_pop(tt,P.name-0.2,P.cert-1.0);dq_textCard(x,130,170,460,{kick:"From the list",title:"Andrés Peñaloza"},{k:p.k,a:p.a});}},
     // his certificate, every letter; this December's 3, not 41, and why
     {at:P.cert-0.4,dis:1.0,place:"benchTop",keys:[[P.cert-0.4,960,540,1.0]],push:0.02,draw:(x,tt)=>{
       sw_cert(x,510,90,900,{name:"Andrés Peñaloza",award:"Master of Data Analytics",marks:[4,9],mu:ag_sine((tt-P.every+0.2)/0.8),on:"granite",a:1-ag_in(tt,P.three-0.4,0.4)});
@@ -310,7 +310,7 @@ scene("stage",(ctx,S,t,sc)=>{const c=sc.cues,P=sw_once(sc,"P",()=>({
       const p=sw_pop(tt,P.promise-0.2,null);if(p.a>0){x.save();x.globalAlpha*=p.a;dq_card(x,300,56,1320,196,{});
         dq_T(x,"Quality isn't a property of data.",360,138,{w:800,size:44});dq_T(x,"It's whether data is fit for a use.",360,200,{w:700,size:44,col:DQ.soft});x.restore();
         dq_mark(x,1520,154,58,(tt-P.promise-0.4)/1.8,p.a);}
-      P.films.forEach((ft,i)=>{const q=sw_pop(tt,ft-0.15,null);sw_filmCard(x,i,120+(i%4)*430,i<4?300:510,{k:q.k,a:q.a});});x.restore();}},
+      P.films.forEach((ft,i)=>{const q=sw_pop(tt,ft-0.15,null);if(i%4===0)sw_seriesLabel(x,i/4,120,i<4?318:560,q.a);sw_filmCard(x,i,120+(i%4)*430,i<4?338:580,{k:q.k,a:q.a});});x.restore();}},
   ],0.5);
   sw_tags(ctx,S,t,[[0.4,"Great Hall · 9 December 2026 · 10:00",1.0],[P.cert-0.4,null,1.0],[P.next-0.4,"The university · 17 December 2026",0.9],
     [P.mexico-0.4,"Mexico · 1956 to 1963",0.9],[P.y63-0.3,"Mexico · 1963",0.8],[P.promise-0.5,null,0.9]]);

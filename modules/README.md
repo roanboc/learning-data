@@ -333,6 +333,12 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 
 No film source yet.
 
+### Architecture that keeps up
+
+Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
+
+No film source yet.
+
 ### Small steps, measured
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`

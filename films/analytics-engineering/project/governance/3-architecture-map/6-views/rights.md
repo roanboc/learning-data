@@ -65,7 +65,7 @@ What's left out, and why:
 |---|---|---|
 | raise a ticket | requester: Clara Jensen | another role's step |
 | review the code | analytics engineer: Jun Park | another role's step, and only people do it |
-| approve the change | product owner: Clara Jensen | another role's step, and only people do it |
+| approve the change | release approver: Noor | another role's step, and only people do it |
 | release to production | release approver: Noor | another role's step, and only people do it |
 
 So it writes no ticket, code review, approval or data product: only the steps left out do.
@@ -105,20 +105,13 @@ Filled by Registrar's office stewards, a team.
 |---|---|---|---|---|
 | draft the definition | define or change a term | term request, business term | term draft |  |
 
-### Product owner
-
-Filled by Clara Jensen.
-
-| Step | In the service | Reads | Writes | Calls |
-|---|---|---|---|---|
-| approve the change (only people) | change a data product | pull request, code review | approval | repository |
-
 ### Release approver
 
 Filled by Noor.
 
 | Step | In the service | Reads | Writes | Calls |
 |---|---|---|---|---|
+| approve the change (only people) | change a data product | pull request, code review | approval | repository |
 | release to production (only people) | change a data product | approval, pull request | data product |  |
 
 ### Requester
@@ -132,4 +125,4 @@ Filled by Clara Jensen.
 
 ## Roles with no steps on the map yet
 
-Data architect, data custodian, governance reviewer and workload contributor: no rights are made from steps for them yet.
+Data architect, data custodian, governance reviewer, product owner and workload contributor: no rights are made from steps for them yet.

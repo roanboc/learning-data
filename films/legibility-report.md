@@ -86,6 +86,7 @@
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
 | One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
+| A hundred records | 312 | 0% | 0 | 28.2 | Drawn to the rule |
 | Five stages, not a switch | 309 | 0% | 0 | 30.0 | Drawn to the rule |
 | Borrowed rights | 329 | 0% | 0 | 30.0 | Drawn to the rule |
 | A place on the map | 314 | 0% | 0 | 29.7 | Drawn to the rule |

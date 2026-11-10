@@ -285,6 +285,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
+- [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
 - [Proof it held](../films/only-what-you-may-see/8-proof-it-held/) — `proof-it-held`
 
 ### Kept for a reason
@@ -373,6 +374,7 @@ Source: [films/ownership-and-performance](../films/ownership-and-performance/) �
 
 - [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 - [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
+- [When someone falls behind](../films/ownership-and-performance/3-when-someone-falls-behind/) — `when-someone-falls-behind`
 
 ## Data management
 
@@ -402,7 +404,7 @@ Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/)
 
 Source: [films/small-steps-measured](../films/small-steps-measured/) · Portal: `/small-steps-measured/`
 
-No film source yet.
+- [Prototype first](../films/small-steps-measured/1-prototype-first/) — `prototype-first`
 
 ## Making of and supplementary films
 

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/making-of/thats-not-quite-right.mp3",
+      "size": 3751906,
+      "sha256": "b99a32784815676aa171d97b6b10981c28931eec42dafe38dd0e29e46e491930",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/b99a32784815676aa171d97b6b10981c28931eec42dafe38dd0e29e46e491930.mp3"
+    }
+  ]
+}

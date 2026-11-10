@@ -1,0 +1,23 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: payroll_export
+title: Payroll's export
+owner: HR
+domain: finance
+status: active
+version: 1.0.0
+description:
+  purpose: What casual staff are paid on each pay day, by faculty and unit, from the claims approved
+    for it. Totals only.
+  usage: For Finance, every pay day, to follow what casual teaching costs as it's paid. Built at 06:00
+    on each pay day by the job payroll_export, deployed from the bundle (databricks.yml). For years a
+    script on one person's laptop made it; since March 2026 it's built and tested like the rest of the
+    project.
+outputs:
+  - {model: mart_finance__casual_pay_paid}
+service_levels:
+  - {property: latency, value: 3, unit: d, description: "Built at 06:00 on each pay day, from the claims approved by noon on the Monday before."}
+support:
+  - {channel: payroll-data, tool: email, url: "mailto:hr@uni.example", scope: issues}

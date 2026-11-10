@@ -1,0 +1,64 @@
+{
+  "kicker": "Agreements before access",
+  "kicker_es": "Acuerdos antes del acceso",
+  "title_es": "Primero, un acuerdo",
+  "h1": "An agreement first: two papers before any data",
+  "h1_es": "Primero, un acuerdo: dos papeles antes de los datos",
+  "lead": "A study in the Faculty of Health asks for the records of 2,614 learners. A plain yes would hand over names, results and who gets extra time. So two papers come first: each person's confidentiality agreement, and one for this use, signed by the owner. Access is made from it, and ends with it.",
+  "lead_es": "Un estudio de la Facultad de Salud pide los expedientes de 2,614 estudiantes. Un sí sin más entregaría nombres, resultados y quién tiene tiempo extra. Primero van dos papeles: el acuerdo de confidencialidad de cada persona y uno para este uso, firmado por la dueña. El acceso sale de él y termina con él.",
+  "description": "A film about what comes before access to people's data: each person's confidentiality agreement, signed before any access and renewed every year; for each use, a data sharing agreement that says what the data is for, what it may have and never have, who, where, what may leave and when it ends, signed by the data's owner; and the access made from the agreement, never by hand, ending with it.",
+  "description_es": "Una película sobre lo que va antes del acceso a datos de personas: el acuerdo de confidencialidad de cada persona, firmado antes de cualquier acceso y renovado cada año; para cada uso, un acuerdo para compartir datos que dice para qué son, qué puede tener y qué nunca, quién, dónde, qué puede salir y cuándo termina, firmado por la dueña de los datos; y el acceso hecho a partir del acuerdo, nunca a mano, que termina con él.",
+  "card": "Each person signs a promise, each use gets an agreement, and access is made from it: the end of an agreement, not the start.",
+  "card_es": "Cada persona firma una promesa, cada uso tiene un acuerdo, y el acceso sale de él: el final de un acuerdo, no el comienzo.",
+  "chapters_es": {
+    "first": "Firmado primero",
+    "asks": "Un estudio pide",
+    "promise": "Una promesa de cada persona",
+    "agreement": "Un acuerdo para cada uso",
+    "grant": "El acceso, hecho del acuerdo",
+    "ends": "Cuando termina"
+  },
+  "past": [
+    "Bletchley Park, 1939 to 1945: the promise before the secret",
+    "Everyone signed before being told anything, and the secret held for almost thirty years: so the promise and the terms come before the data."
+  ],
+  "past_es": [
+    "Bletchley Park, de 1939 a 1945: la promesa antes del secreto",
+    "Todos firmaban antes de saber nada, y el secreto se guardó casi treinta años: por eso la promesa y los términos van antes que los datos."
+  ],
+  "next_h": "You've seen the two papers that come before access. Next: know what you hold, a class for every column the agreement names.",
+  "next_h_es": "Viste los dos papeles que van antes del acceso. Después: conoce lo que guardas, una clase para cada columna que nombra el acuerdo.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee la guía por tu cuenta",
+    "p": "The film names one framework, the Five Safes, and no product. These official pages are where its two papers come from.",
+    "p_es": "La película nombra un marco, los Five Safes, y ningún producto. Estas páginas oficiales son el origen de sus dos papeles.",
+    "links": [
+      {
+        "title": "Data sharing agreements",
+        "title_es": "Acuerdos para compartir datos (en inglés)",
+        "line": "The UK Information Commissioner's code: what an agreement to share personal data should set out, from its purpose to what happens to the data at the end.",
+        "line_es": "El código de la autoridad de protección de datos del Reino Unido: qué debe fijar un acuerdo para compartir datos personales, de su propósito a qué pasa con los datos al final.",
+        "href": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/data-sharing-agreements/",
+        "href_es": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-sharing/data-sharing-a-code-of-practice/data-sharing-agreements/"
+      },
+      {
+        "title": "What is the Five Safes framework?",
+        "title_es": "¿Qué es el marco Five Safes? (en inglés)",
+        "line": "The UK Data Service: safe people, projects, settings, data and outputs, the five questions asked before researchers see sensitive data.",
+        "line_es": "El UK Data Service: personas, proyectos, entornos, datos y resultados seguros, las cinco preguntas antes de que alguien investigue con datos sensibles.",
+        "href": "https://ukdataservice.ac.uk/help/secure-lab/what-is-the-five-safes-framework/",
+        "href_es": "https://ukdataservice.ac.uk/help/secure-lab/what-is-the-five-safes-framework/"
+      },
+      {
+        "title": "Access agreements (PS-6)",
+        "title_es": "Acuerdos de acceso, PS-6 (en inglés)",
+        "line": "NIST's security controls: each person signs before access is granted, signs again when the agreement changes, and some duties outlast the job.",
+        "line_es": "Los controles de seguridad del NIST: cada persona firma antes de recibir acceso, vuelve a firmar si el acuerdo cambia, y algunos deberes duran más que el empleo.",
+        "href": "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home?element=PS-6",
+        "href_es": "https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home?element=PS-6"
+      }
+    ]
+  },
+  "draft": true
+}

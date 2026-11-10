@@ -234,7 +234,9 @@ project/
 │                             hot-warm-cold/: a streaming table, a materialized view and an archive,
 │                             data kept hot, warm and cold, with their service levels (Databricks only);
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
-│                             insight by morning, the fix and the pull request a person approved
+│                             insight by morning, the fix and the pull request a person approved;
+│                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
+│                             the fortnightly dashboard (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root

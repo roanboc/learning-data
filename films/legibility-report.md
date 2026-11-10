@@ -74,6 +74,7 @@
 | Every area, one job | 313 | 0% | 0 | 28.3 | Drawn to the rule |
 | Listen first | 313 | 0% | 0 | 28.5 | Drawn to the rule |
 | Design it simple | 294 | 0% | 0 | 28.4 | Drawn to the rule |
+| From gaps to a roadmap | 338 | 0% | 0 | 28.0 | Drawn to the rule |
 | Context engineering | 241 | 0% | 0 | 29.1 | Drawn to the rule |
 | Skills and workflows | 433 | 0% | 0 | 29.1 | Drawn to the rule |
 | Tools are hands, and every hand is a permission | 270 | 0% | 0 | 30.0 | Drawn to the rule |
@@ -115,11 +116,13 @@
 | Forgetting a person | 240 | 0% | 0 | 30.0 | Drawn to the rule |
 | Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
 | A person asks | 372 | 0% | 0 | 28.3 | Drawn to the rule |
+| Less, on purpose | 237 | 0% | 0 | 28.5 | Drawn to the rule |
 | Who is it, really? | 215 | 0% | 0 | 30.2 | Drawn to the rule |
 | No secret to lose | 195 | 0% | 0 | 30.2 | Drawn to the rule |
 | Walls, doors and keys | 177 | 0% | 0 | 31.4 | Drawn to the rule |
 | Power you switch on | 205 | 0% | 0 | 28.0 | Drawn to the rule |
 | People and groups | 313 | 0% | 0 | 28.3 | Drawn to the rule |
+| Workloads without secrets | 278 | 0% | 0 | 28.5 | Drawn to the rule |
 | Network, storage and keys | 343 | 0% | 0 | 28.1 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
@@ -131,6 +134,7 @@
 | When someone falls behind | 211 | 0% | 0 | 28.3 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
+| Read by an agent | 334 | 0% | 0 | 28.4 | Drawn to the rule |
 | Prototype first | 295 | 0% | 0 | 28.2 | Drawn to the rule |
 | Measures that matter | 322 | 0% | 0 | 28.3 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |

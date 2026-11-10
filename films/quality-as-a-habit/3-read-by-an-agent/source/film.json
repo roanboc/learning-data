@@ -1,0 +1,43 @@
+{
+  "key": "read-by-an-agent",
+  "title": "Read by an agent",
+  "sub": "Film 3 of Quality as a habit, the second series of the module Data quality: an agent reads only what's written down. An empty date meant two things, the column's description didn't say so, and the agent answered 412 with confidence. A column's description is part of the data, so its quality is the data's quality.",
+  "howto": "The film is drawn in the module's look, the quality bench: a limestone wall, a granite bench, records on cream cards. Green passes, amber holds for a person, red stops and grey wasn't checked; brass is what good means, and steel blue a measure. The agent is a ceramic sphere with a violet band, and only its words are violet. The opening is an office of about 2000.",
+  "src": [
+    "ra_places.js",
+    "ra_props.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "answer",
+    "sure",
+    0.6
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bMalia\\b",
+      "Mah-lee-ah"
+    ],
+    [
+      "\\bFonoti\\b",
+      "Fo-no-tee"
+    ]
+  ],
+  "story": [
+    "cupertino"
+  ],
+  "urgent": [],
+  "logos": true
+}

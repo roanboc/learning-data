@@ -176,6 +176,7 @@ Source: [films/quality-as-a-habit](../films/quality-as-a-habit/) · Portal: `/qu
 
 - [The hidden factory](../films/quality-as-a-habit/1-the-hidden-factory/) — `the-hidden-factory`
 - [Report, fix, tell](../films/quality-as-a-habit/2-report-fix-tell/) — `report-fix-tell`
+- [Read by an agent](../films/quality-as-a-habit/3-read-by-an-agent/) — `read-by-an-agent`
 
 ## Enterprise architecture
 
@@ -277,6 +278,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
+- [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
 - [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 
 ### Only what you may see
@@ -368,7 +370,7 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
-No film source yet.
+- [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
 
 ### Ownership and performance
 
@@ -389,6 +391,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
 - [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
+- [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
 
 ### Making the case
 

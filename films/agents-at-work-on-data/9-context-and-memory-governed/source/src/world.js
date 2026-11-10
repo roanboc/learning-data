@@ -11,8 +11,8 @@
      cm_wrap      words wrapped in as few lines as the width allows, even, and in two lines after a comma or a full stop where one is near
      cm_agent     an agent's sphere, with its light and its name
      cm_lucia     Lucía at her desk, her screen, the calendar on the desk, and her agent beside her
-     cm_people    the dots for students: on campus, and the 386 who study online
-     cm_library   the library's card: next year's e-books, and how many students they're for */
+     cm_people    the dots for next semester's units: taught on campus, and the 94 taught only online
+     cm_library   the library's card: next semester's e-books, and how many units they're for */
 
 AG_PLACES.cmLab=c=>ag_paintLab(c,{quiet:[[1440,380,520,260,0.75],[620,220,520,170,0.5],[960,560,700,200,0.3]]});
 AG_PLACES.cmBoard=c=>ag_paintLab(c,{seed:3,quiet:[[960,330,980,300,0.8],[960,620,900,160,0.4]]});
@@ -74,14 +74,15 @@ function cm_calendar(ctx,x,y,a){if(a<=0)return;ctx.save();ctx.globalAlpha*=a;con
   ag_T(ctx,"MON",x,y-h+31,{w:700,size:22,ls:2,align:"center",col:[246,244,240],deco:1});
   ag_T(ctx,"2",x,y-30,{w:800,size:48,align:"center",col:AG.ink,deco:1});ctx.restore();}
 
-/* ---------------------------------------------------------------- the students, as dots
-   A grid of soft dots for the students on campus, and a scatter of 386 who study online, away from it (drawn as about one dot in
-   ten, so the count is said by the label, not by counting). out 0..1: how far they're left out (grey, apart); in 0..1: they join. */
+/* ---------------------------------------------------------------- the units, as dots
+   A grid of soft dots for the units taught on campus, and a scatter of 14 for the 94 taught only online, away from it, each where its
+   students are (decoration: the count is said by the label, not by counting). out 0..1: how far they're left out (grey, apart); join
+   0..1: they join, taking the row under the block. */
 function cm_people(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const R=ag_rnd(41),join=o.join||0,out=o.out||0;ctx.save();ctx.globalAlpha*=a;
   // on campus: a block of dots, as a crowd seen from above
   for(let i=0;i<14;i++)for(let j=0;j<6;j++){const px=x+i*22+(j%2)*11,py=y+j*20;ctx.fillStyle=rgba(AG.ink,0.55);ctx.beginPath();ctx.arc(px,py,6.5,0,TAU);ctx.fill();}
-  // online: forty dots spread out to the right, each at home; joining, they take the rows under the block
-  for(let k=0;k<40;k++){const fx=x+400+R()*300,fy=y-20+R()*150,row=6+(k/14|0),tx=x+(k%14)*22+(row%2)*11,ty=y+row*20;
+  // online: fourteen dots spread out to the right, each where its students are; joining, they take the row under the block
+  for(let k=0;k<14;k++){const fx=x+400+R()*300,fy=y-20+R()*150,row=6+(k/14|0),tx=x+(k%14)*22+(row%2)*11,ty=y+row*20;
     const u=ag_sine(clamp(join*1.5-k*0.0125,0,1)),px=lerp(fx,tx,u),py=lerp(fy,ty,u),col=mix(AG.ink,[150,146,140],out*(1-u));
     ctx.fillStyle=rgba(col,0.55);ctx.beginPath();ctx.arc(px,py,6.5,0,TAU);ctx.fill();
     if(o.ring>0&&u<0.5){ctx.strokeStyle=rgba(AG.amber,0.6*o.ring*(1-2*u));ctx.lineWidth=2;ctx.beginPath();ctx.arc(px,py,11,0,TAU);ctx.stroke();}}
@@ -92,7 +93,7 @@ function cm_people(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;con
 function cm_library(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const h=o.note?232:186;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ag_box(ctx,x,y,w,h,22,{edge:o.col||null,edgeA:0.8});cm_bookIcon(ctx,x+52,y+58,o.col?rgba(o.col,1):rgba(AG.mut,1));
   ag_T(ctx,"THE LIBRARY",x+96,y+68,{w:700,size:28,ls:4,col:AG.kick});
-  ag_T(ctx,"Next year's e-books",x+28,y+122,{w:700,size:36});
+  ag_T(ctx,"Next semester's e-books",x+28,y+122,{w:700,size:36});
   ag_T(ctx,o.count,x+28,y+164,{w:600,size:30,col:AG.mut});
   if(o.note)ag_T(ctx,o.note,x+28,y+208,{w:700,size:28,col:o.col||AG.amber});ctx.restore();}
 function cm_bookIcon(ctx,x,y,col){ctx.save();ctx.strokeStyle=col;ctx.lineWidth=3;ctx.lineJoin="round";ctx.beginPath();ctx.moveTo(x,y-14);ctx.quadraticCurveTo(x-12,y-20,x-24,y-16);ctx.lineTo(x-24,y+14);

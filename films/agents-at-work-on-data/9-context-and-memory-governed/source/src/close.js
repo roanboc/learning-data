@@ -4,7 +4,8 @@
                                   (o.show(i)), orange coming back along it (o.back(i), o.backMem); o.memory 0..1 adds the fifth, the memory,
                                   under the sphere; o.gov 0..1 gives each card the mark of what's governed; o.at, o.r, o.think, o.a, o.t
      cm_govTable(ctx, x, y, o)    the five questions as a table: a row for each kind of context and the memory, a column for each
-                                  question (o.cols 0..1 each lit as it's asked), and o.chat (a note in one person's chat) as a last row
+                                  question (o.cols 0..1 each lit as it's asked), and o.chat (a note in one person's chat) as a last row;
+                                  o.cells(i, j) a tick, o.noCell(i, j) an amber "no" (nobody reviews each line of the memory), o.rowHl(i)
      CM_LESSONS                   the series' nine films, each with its lesson, as each film's end card says it
      cm_lessons(ctx, o)           the nine cards, three by three: o.show(i) 0..1 for each; o.slots, their empty places, dashed;
                                   o.deco when the camera makes them small
@@ -40,8 +41,11 @@ function cm_govTable(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c
   G.cols.forEach((c,j)=>{const lit=o.cols?o.cols[j]||0:0,cx=x+G.lab+j*G.cw;if(lit>0){ctx.fillStyle=rgba(AG.blue,0.1*lit);rr(ctx,cx+6,y+10,G.cw-12,h-20,14);ctx.fill();}
     ag_T(ctx,c,cx+G.cw/2,y+56,{w:700,size:28,align:"center",col:mix(AG.mut,AG.blue,lit)});});
   ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x+20,y+G.hh);ctx.lineTo(x+w-20,y+G.hh);ctx.stroke();
-  G.rows.forEach((r,i)=>{const ry=y+G.hh+i*G.rh,ra=o.rowA?o.rowA[i]:1;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ra;ag_T(ctx,r.toUpperCase(),x+30,ry+46,{w:700,size:28,ls:4,col:AG.blue});
-    G.cols.forEach((c,j)=>{const v=o.cells?o.cells(i,j):0;if(v>0){const cx=x+G.lab+j*G.cw+G.cw/2;ctx.save();ctx.globalAlpha*=clamp(v,0,1);ag_tick(ctx,cx,ry+36,24,rgba(AG.green,1),4);ctx.restore();}});
+  G.rows.forEach((r,i)=>{const ry=y+G.hh+i*G.rh,ra=o.rowA?o.rowA[i]:1;if(ra<=0)return;ctx.save();ctx.globalAlpha*=ra;
+    const hl=o.rowHl?o.rowHl(i):0;if(hl>0){ctx.fillStyle=rgba(AG.blue,0.09*hl);rr(ctx,x+12,ry+4,w-24,G.rh-8,12);ctx.fill();}
+    ag_T(ctx,r.toUpperCase(),x+30,ry+46,{w:700,size:28,ls:4,col:AG.blue});
+    G.cols.forEach((c,j)=>{const v=o.cells?o.cells(i,j):0,cx=x+G.lab+j*G.cw+G.cw/2;if(v>0){ctx.save();ctx.globalAlpha*=clamp(v,0,1);ag_tick(ctx,cx,ry+36,24,rgba(AG.green,1),4);ctx.restore();}
+      const nv=o.noCell?o.noCell(i,j):0;if(nv>0)ag_T(ctx,"no",cx,ry+46,{w:800,size:30,align:"center",col:AG.amber,a:clamp(nv,0,1)});});
     ctx.restore();});
   if(o.chat){const ry=y+G.hh+G.rows.length*G.rh,ca=o.chat;ctx.save();ctx.globalAlpha*=ca;ctx.strokeStyle="rgba(60,50,40,0.12)";ctx.beginPath();ctx.moveTo(x+20,ry+4);ctx.lineTo(x+w-20,ry+4);ctx.stroke();
     cm_bubble(ctx,x+46,ry+36,rgba(AG.amber,1));ag_T(ctx,"A note in a chat",x+80,ry+46,{w:600,size:28,col:AG.ink});
@@ -60,7 +64,7 @@ const CM_LESSONS=[["Context engineering","Write it down once, and people and age
   ["How it goes wrong","Expect these, and design for them."],
   ["Working with agents on Databricks","The platform gives agents the same data and tools people use, in one place."],
   ["Why Unity Catalog and Unity Gateway govern them","One set of rules for people and agents, enforced where the data and the models live."],
-  ["Context and memory, governed","The team's context and memory are governed assets, not private notes."]];
+  ["Context and memory, governed","Govern what agents must get right. Memory comes second."]];
 const CM_GRID={x:80,y:110,w:568,gx:28,gy:22};
 // the cards' sizes: each row as tall as its tallest card
 function cm_gridLayout(ctx){const G=CM_GRID,cells=[];const meas=CM_LESSONS.map(l=>({tl:cm_wrap(ctx,l[0],G.w-56,{w:600,size:28}),ll:cm_wrap(ctx,l[1],G.w-56,{w:700,size:30})}));

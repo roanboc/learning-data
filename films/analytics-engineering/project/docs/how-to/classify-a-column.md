@@ -28,6 +28,6 @@ When in doubt between two, choose the stronger: `special` over `direct`, `direct
   config: {meta: {personal_data: direct}}
 ```
 
-A step that changes what a column holds, such as a code made from a student ID, gets its new class from the data's owner, and is made once, at the source: made later, the platform would bring the student ID's class to it too, a conflict (`docs/databricks-governance.md`, section 1).
+A step that changes what a column holds, such as a code made from a student ID, gets its new class from the data's owner, and is made once, at the source: made later, the platform would bring the student ID's class to it too, a conflict (`docs/databricks-governance.md`, section 12).
 
 **Who to ask.** Data governance's office hours, Thursdays from 2 to 3 pm, or data.governance@uni.example.

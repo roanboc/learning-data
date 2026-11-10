@@ -7,46 +7,13 @@ status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8
 
 ## 1. Tags, every build
 
-Nothing to set up in the build. After each table builds, every classified column gets a Unity Catalog
-tag, `personal_data`, with its class: `special`, `direct`, `pseudonymous` or `indirect`. A column the
-YAML marks `none` gets no tag, and the build takes an old one off: a `none` tag would meet a real class
-in any column made from both. Then the column that holds each row's faculty (`meta.faculty: true`) gets
-the key-only tag `faculty`, and last the table gets its `level` (`meta.level`: `public`, `internal`,
-`confidential` or `restricted`; in `dbt_project.yml`, `confidential` for the core and the marts and
-`internal` for `_shared`, unless a model's YAML says another). The build stops on a level under its two
-floors: a table with a column that points to a person (`direct`, `pseudonymous` or `indirect`) is never
-`public`, and one with anything `special` is `restricted` (`macros/governance/personal_data.sql`,
-DEC-PRJ-17). Change the class in the YAML and the next build changes the tag.
+Nothing to set up in the build. After each table builds, every classified column gets the governed tag `personal_data`,
+with its class: `special`, `direct`, `pseudonymous` or `indirect` (`none` is no tag); then the faculty column gets `faculty`,
+and the table its `level` (section 12; `macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
 
 ```bash
 dbt build --target databricks --profiles-dir .
 ```
-
-Once, on the platform (checked 10 November 2026):
-
-1. An account admin makes three **governed tags** (Catalog Explorer: *Govern*, *Governed Tags*):
-   `personal_data`, with the values `special`, `direct`, `pseudonymous` and `indirect`; `level`, with
-   `public`, `internal`, `confidential` and `restricted`; and `faculty`, with no values. Governed, only
-   those values can be set, and only by someone with `ASSIGN` on the tag: give it to the identity that
-   runs dbt, and to no person. If `personal_data` was made with `none` among its values, set its values
-   again: a `none` tag already on a column stays until the next build takes it off.
-2. Someone with `MANAGE` on the tags turns on **tag propagation** for `personal_data`, with `special` as
-   its default propagation value, and for `faculty`; never for `level`, or a table joined from a public
-   table and a confidential one would be a conflict every time. Each class then follows its column
-   through lineage into the tables and views made from it on serverless compute, usually within
-   minutes, with nobody tagging them. Two values for one tag in one column is a conflict: the column
-   takes the default value. A policy can't see a tag until it has arrived. Propagation is in Beta on
-   10 November 2026: a workspace admin turns it on first, on the *Previews* page.
-3. Look for conflicts. `analyses/governance/classes_against_lineage.sql` lists every column whose class
-   differs from the class of a column it was made from. In this project, the marts'
-   `learner_award_key` is one: it's made from the learner table's `learner_bk` (`direct`), and its YAML
-   says `pseudonymous`, so with propagation on it takes `special`. A value that says less is made once,
-   at the source, by its owner, and every table after takes it.
-
-Tags start on the tables people read. Staging and intermediate are views nobody is granted, and they
-carry no tags, so `learner_key`, made there, arrives in the core with no class to conflict with its own.
-Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
-doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
 
 ## 2. Masks, one per column
 
@@ -68,7 +35,7 @@ column with its own mask conflicts with a policy on it, so use this or step 2, n
 
 1. An account admin makes `personal_data` a **governed tag**, with the values `special`, `direct`,
    `pseudonymous` and `indirect` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*;
-   section 1). Governed, only those four values can be set, and only by someone with `ASSIGN` on the
+   section 12). Governed, only those four values can be set, and only by someone with `ASSIGN` on the
    tag: give it to the identity that runs dbt.
 2. Build with the policy var, so the build tags and leaves masking to the policy:
 
@@ -291,6 +258,46 @@ select schema_name, table_name, column_name
 from information_schema.column_tags
 where tag_name = 'critical_data'
 ```
+
+## 12. Tags that travel
+
+On Databricks, a column's class is one of five, the strictest that applies, as its `meta.personal_data`
+says: `special`, `direct`, `pseudonymous`, `indirect` or `none` (DEC-PRJ-17, amending DEC-PRJ-13). After
+each table builds (section 1), every classified column gets the governed tag `personal_data` with its
+class. A column the YAML marks `none` gets no tag, and the build takes an old one off: a `none` tag would
+meet a real class in any column made from both. Then the column that holds each row's faculty
+(`meta.faculty: true`) gets the key-only tag `faculty`, and last the table gets its `level` (`meta.level`:
+`public`, `internal`, `confidential` or `restricted`; in `dbt_project.yml`, `confidential` for the core
+and the marts and `internal` for `_shared`, unless a model's YAML says another). The build stops on a
+level under its two floors: a table with a column that points to a person (`direct`, `pseudonymous` or
+`indirect`) is never `public`, and one with anything `special` is `restricted`
+(`macros/governance/personal_data.sql`).
+
+Once, on the platform (checked 10 November 2026):
+
+1. An account admin makes three **governed tags** (Catalog Explorer: *Govern*, *Governed Tags*):
+   `personal_data`, with the values `special`, `direct`, `pseudonymous` and `indirect`; `level`, with
+   `public`, `internal`, `confidential` and `restricted`; and `faculty`, with no values. Governed, only
+   those values can be set, and only by someone with `ASSIGN` on the tag: give it to the identity that
+   runs dbt, and to no person. If `personal_data` was made with `none` among its values, set its values
+   again: a `none` tag already on a column stays until the next build takes it off.
+2. Someone with `MANAGE` on the tags turns on **tag propagation** for `personal_data`, with `special` as
+   its default propagation value, and for `faculty`; never for `level`, or a table joined from a public
+   table and a confidential one would be a conflict every time. Each class then follows its column
+   through lineage into the tables and views made from it on serverless compute, usually within
+   minutes, with nobody tagging them. Two values for one tag in one column is a conflict: the column
+   takes the default value. A policy can't see a tag until it has arrived. Propagation is in Beta on
+   10 November 2026: a workspace admin turns it on first, on the *Previews* page.
+3. Look for conflicts. `analyses/governance/classes_against_lineage.sql` lists every column whose class
+   differs from the class of a column it was made from. In this project, the marts'
+   `learner_award_key` is one: it's made from the learner table's `learner_bk` (`direct`), and its YAML
+   says `pseudonymous`, so with propagation on it takes `special`. A value that says less is made once,
+   at the source, by its owner, and every table after takes it.
+
+Tags start on the tables people read. Staging and intermediate are views nobody is granted, and they
+carry no tags, so `learner_key`, made there, arrives in the core with no class to conflict with its own.
+Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
+doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
 
 ## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, and the last two, on 5 November 2026)
 

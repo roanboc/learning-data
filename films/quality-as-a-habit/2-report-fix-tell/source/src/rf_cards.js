@@ -147,7 +147,7 @@ function rf_check(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;const h=DQ_PAD*2+
    A deep stack of cream record cards, each an old-form name in plain letters, the top one showing its name (the check's amber tag says
    they're held for a person); o.n (the cards drawn, a few px apart). rf_seven: seven of them, four over three, each one's name
    gaining the accents the old form took (o.turn(i), 0 to 1) as its edge turns from amber (held) to green. */
-const RF_SEVEN=[["Joaquin Munoz","Joaquín Muñoz"],["Chloe Lefevre","Chloé Lefèvre"],["Lukasz Wojcik","Łukasz Wójcik"],["Monica Ibanez","Mónica Ibáñez"],
+const RF_SEVEN=[["Joaquin Munoz","Joaquín Muñoz"],["Helene Gagne","Hélène Gagné"],["Lukasz Wojcik","Łukasz Wójcik"],["Monica Ibanez","Mónica Ibáñez"],
   ["Bjorn Akesson","Björn Åkesson"],["Gulsen Yilmaz","Gülşen Yılmaz"],["Ines Conceicao","Inês Conceição"]];
 function rf_stack(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const n=o.n||14,w=520,h=150;ctx.save();ctx.globalAlpha*=a;
   for(let i=n-1;i>=0;i--)dq_card(ctx,x+i*3,y+i*9,w,h,{on:o.on,r:6});

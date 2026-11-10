@@ -225,6 +225,12 @@ support:
   tool: email
   url: mailto:graduations@uni.example
   scope: issues
+- channel: This isn't my name
+  tool: other
+  url: https://portal.uni.example/graduation/name
+  scope: issues
+  description: For a graduate's own name, the button beside it in the student portal, where they see it
+    as it will be printed. The registrar's office answers within two working days, and tells them.
 customProperties:
 - property: grain
   value: One row per certificate, a graduate, an award and a ceremony

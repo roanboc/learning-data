@@ -82,4 +82,7 @@
 /sources/portal/                                         mei.tanaka@uni.example jun.park@uni.example
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
-/exposures/graduations/                                  malia.fonoti@uni.example
+/exposures/graduations/                                  malia.fonoti@uni.example mei.tanaka@uni.example
+
+# Name reports: graduates' reports about their own names, and the registrar's office's answers
+/governance/4-data-products/name_reports.yml             mei.tanaka@uni.example

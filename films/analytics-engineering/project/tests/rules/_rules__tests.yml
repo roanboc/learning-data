@@ -9,3 +9,14 @@ data_tests:
     description: Every graduate the alumni office knows has a student ID the student system issued, in its current table or its archive.
     config:
       meta: {owner: Alumni office, dimension: consistency}
+
+  - name: old_form_names_not_yet_confirmed
+    description: >
+      A name the old form made, still in plain letters A to Z, not yet confirmed by its graduate:
+      on a list not yet sent to the printer, a record first made before 2019, a printed name with
+      no letter outside A to Z, and no confirmation from the graduate. It can't see a missing
+      accent; it sees where a name was born. A warning, agreed with Mei: each name is held for the
+      registrar's office, which writes to the graduate, and dbt keeps them in a table the office
+      reads (store_failures). Added on 14 October 2026, after the first reports (Report, fix, tell).
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: accuracy}

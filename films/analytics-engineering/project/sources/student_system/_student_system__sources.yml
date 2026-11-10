@@ -106,3 +106,9 @@ sources:
             description: The ceremony the graduate is presented at, like DEC26-3 (seeds/reference/graduations/ceremonies.csv).
           - name: attendance_code
             description: ATT when the graduate crosses the stage; ABS when the award is conferred in absentia and the certificate posted.
+          - name: record_created_on
+            description: >
+              The day the student's record was first made in the student system. A student who
+              comes back keeps their record, and the name it was made with: records made before
+              2015 came from the paper forms, and from 2015 to 2018 from the old online form, which
+              took only A to Z, in capitals.

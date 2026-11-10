@@ -71,3 +71,7 @@ models:
         description: '{{ doc("is_current_version") }}'
       - name: loaded_at
         description: '{{ doc("loaded_at") }}'
+      - name: answered_at
+        description: For a correction, when the registrar's office answered it in the portal. Empty until it answers.
+      - name: told_at
+        description: For a correction, when the portal told the graduate the answer. Empty until they're told.

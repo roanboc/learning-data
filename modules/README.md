@@ -323,6 +323,34 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 
+## Leading data people
+
+Module: `leading-data-people` · [metadata](leading-data-people/module.json)
+
+### The new skills
+
+Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
+
+No film source yet.
+
+### Working with people
+
+Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
+
+No film source yet.
+
+### Leading a data team
+
+Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
+
+No film source yet.
+
+### Ownership and performance
+
+Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
+
+No film source yet.
+
 ## Data management
 
 Module: `data-management` · [metadata](data-management/module.json)

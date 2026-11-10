@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for A case worth funding, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (options, costs, benefits), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  "options":{q:"Helena recommends C. Why does one of the three options always carry on as now?",
+    opts:[{t:"Because the Five Case Model's form has a box for it, and the council expects every box filled."},{t:"Because doing nothing has a price too: renewing the licence costs A$930,000 over three years.",ok:true},{t:"Because carrying on costs nothing, so it's the line every other option is measured against.",near:true}],
+    why:"If nobody decides, the licence renews for three more years: A$930,000, for an old version on old servers. Carrying on is a choice with a price, so the case shows it beside the others, and the council can see why C is better. It also answers the question someone always asks: when Mei asks what waiting a year would cost, waiting is option A, already counted. What would carrying on as now cost in your next case?"},
+  "costs":{q:"The old warehouse costs A$310,000 a year. Why is option C's saving A$270,000 a year, not A$310,000?",
+    opts:[{t:"Because Finance keeps back part of every saving, in case the move runs late or over budget."},{t:"Because the A$380,000 to move the reports is taken from the saving, a share of it each year.",near:true},{t:"Because running the 21 rebuilt reports on the platform costs about A$40,000 a year.",ok:true}],
+    why:"A case counts what each option costs once and every year. The licence, servers and support stop: A$310,000 a year. Running the 21 rebuilt reports on the platform starts: about A$40,000 a year, from the platform's own cost records. The saving is the difference, A$270,000 a year from January 2028. The A$380,000 is spent once, and the saving covers it in about 17 months, the payback: it doesn't make the yearly saving smaller. What would your new thing cost to run, every year?"},
+  "benefits":{q:"Each benefit in Helena's case has an owner and a date. What are they for?",
+    opts:[{t:"So the council can see each benefit against its date, every quarter after it says yes.",ok:true},{t:"So each owner can approve the case before it goes to the council for its decision.",near:true},{t:"So the saving can move into each owner's budget, from the month its date names."}],
+    why:"A case promises benefits; benefits management, as John Ward and Elizabeth Daniel describe it, adds the step most cases skip: tracking them after the decision. Each benefit has someone who will see it happen and a date to check it by: the saving, the director of digital services, from January 2028; one staff list, Ingrid Holm in HR, from December; an owner for every report, Helena, by March 2028. The council decides; each quarter it sees each benefit against its date. Without that, the case was only a pitch. Who would own each benefit in your case, and by when?"}
+  }}};

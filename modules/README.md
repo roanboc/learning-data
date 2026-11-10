@@ -289,6 +289,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
 - [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 - [Tags that travel](../films/only-what-you-may-see/5-tags-that-travel/) — `tags-that-travel`
+- [One policy for many tables](../films/only-what-you-may-see/6-one-policy-for-many-tables/) — `one-policy-for-many-tables`
 
 ### Kept for a reason
 
@@ -396,7 +397,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
-No film source yet.
+- [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 
 ### Architecture that keeps up
 

@@ -17,6 +17,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 | [Power you switch on](https://data.learn-all.org/locks-before-the-data/power-you-switch-on/) | Admin accounts | 8½ min | 8 | 3 questions | [script](4-power-you-switch-on/script.md) · [source](4-power-you-switch-on/source/README.md) |
 | [People and groups](https://data.learn-all.org/locks-before-the-data/people-and-groups/) | Sign-in, groups and admin power | 8 min | 8 | 3 questions | [script](5-people-and-groups/script.md) · [source](5-people-and-groups/source/README.md) |
 | [Workloads without secrets](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/) | Workload identity | 9 min | 9 | 3 questions | [script](6-workloads-without-secrets/script.md) · [source](6-workloads-without-secrets/source/README.md) |
+| [Network, storage and keys](https://data.learn-all.org/locks-before-the-data/network-storage-and-keys/) | Doors to the data | 9½ min | 9 | 3 questions | [script](7-network-storage-and-keys/script.md) · [source](7-network-storage-and-keys/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

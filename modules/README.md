@@ -280,6 +280,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 - [Power you switch on](../films/locks-before-the-data/4-power-you-switch-on/) — `power-you-switch-on`
 - [People and groups](../films/locks-before-the-data/5-people-and-groups/) — `people-and-groups`
 - [Workloads without secrets](../films/locks-before-the-data/6-workloads-without-secrets/) — `workloads-without-secrets`
+- [Network, storage and keys](../films/locks-before-the-data/7-network-storage-and-keys/) — `network-storage-and-keys`
 
 ### Only what you may see
 

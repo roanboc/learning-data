@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/which-value-wins/soundtrack.mp3",
+      "size": 5137597,
+      "sha256": "f11e2e459a5781e7b067198ea797dab2ba3eed0496566cec47614a7faf5bb8f4",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/f11e2e459a5781e7b067198ea797dab2ba3eed0496566cec47614a7faf5bb8f4.mp3"
+    }
+  ]
+}

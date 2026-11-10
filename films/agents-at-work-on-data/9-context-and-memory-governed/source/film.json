@@ -1,15 +1,18 @@
 {
   "key": "context-and-memory-governed",
   "title": "Context and memory, governed",
-  "sub": "The ninth and last film of Agents at work on data, the second series on AI agents in data work: what agents read is data too, so the team keeps its context in its repository, reviewed like code, and its memory where people approve every entry, with an owner, access, review, a time to keep it and a way to delete it.",
-  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is structure the agents read (a tool, a file, the team's memory), violet the model, orange the data and its evidence, green what a person approved or a check passed, amber what went wrong. The team's memory is an oak card file on the wall, one card for each lesson.",
+  "sub": "The ninth and last film of Agents at work on data, the second series on AI agents in data work: what agents read is data too, so the team governs what answers must rest on, the glossary's definitions and the data rules, each with an owner who reviews every change, and lets the platform keep the agents' memory, second to them, with an owner, access, a time to keep it and a way to delete it.",
+  "howto": "The film is drawn in the module's look: a pale marble wall over an oak floor, light from a window on the right. The agent is a ceramic sphere with a violet band, never a person. Blue is structure the agents read (a tool, a file, the team's memory), violet the model, orange the data and its evidence, green what's governed, what a person approved or a check passed, amber what went wrong. The team's memory is an oak card file on the wall, one card for each line the platform kept. Where the voice names Databricks, dbt or GitHub, its official logo stands beside the name.",
   "src": [
+    "marks.js",
     "world.js",
     "memory.js",
+    "govern.js",
     "repo.js",
     "close.js",
     "scenes.js"
   ],
+  "logos": true,
   "poster": [
     "first",
     "now",

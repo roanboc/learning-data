@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/agents-on-databricks/soundtrack.mp3",
+      "size": 6082237,
+      "sha256": "467c7103e5772e85543c437dc3c591469c9c4e0056e5eab726b3ff1ec04835c0",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/467c7103e5772e85543c437dc3c591469c9c4e0056e5eab726b3ff1ec04835c0.mp3"
+    }
+  ]
+}

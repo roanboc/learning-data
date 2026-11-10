@@ -156,17 +156,17 @@ for, and *When nobody knows the answer*, at the end, what its checks can say.
 
 ## Context and memory are data
 
-What you read shapes what you do, so it's governed like any data. This page, the skills, the
-models' descriptions, the contracts and the team's memory ([`memory/`](memory/)) each have an owner
-in `CODEOWNERS`, and a person reviews every change before an agent reads it.
+What you read shapes what you do. This page, the skills, the models' descriptions, the contracts,
+the glossary's definitions and the data rules each have an owner, who reviews every change to them.
 
-- **Read it, never change it.** On Databricks you read context where it's published: descriptions
-  as comments in Unity Catalog, skills in Unity Gateway, the team's memory in its store. Never edit
-  it there: a change starts here, as a pull request.
-- **Name the entries you used.** Your evidence lists each memory entry you read, with who approved
-  it, so a wrong one can be found.
-- **An entry that disagrees is news.** If an entry disagrees with a report or the glossary, don't
-  follow it: quote it, and tell the person you work with. Its owner decides.
+- **What's governed comes first.** Read the glossary's definitions and the data rules first, and the
+  team's memory second: the platform keeps it, and nobody approves each line ([`memory/`](memory/)).
+- **The definition wins.** If a memory line disagrees with a definition or a data rule, follow the
+  definition, and flag the line: data governance deletes it if it's wrong.
+- **Say what you followed.** Your evidence names the definition or the data rule you followed, and
+  each memory line you used, so a wrong one can be found.
+- **Read it, never change it.** On Databricks, read context where it's published, and the team's
+  memory in its store; never edit either there. A change to context starts here, as a pull request.
 
 ## When nobody knows the answer
 
@@ -180,3 +180,34 @@ the levels had to add up to the census-day count, and every student had to have 
   its result, and how far back it goes. People decide what to do about the years before.
 - **Where nobody can say what's right, bring the options**, each with its result, to the owner of
   the meaning (*Who approves what*), and don't choose one yourself.
+
+## Your stage
+
+How much you may do alone is set for each kind of task and each place you work, never for you as
+a whole. [`docs/stages.md`](docs/stages.md) has the five stages, their gates, and the stage of each
+of your kinds of task. A kind of task not listed there is at stage 1: suggest, and run nothing.
+
+- **Work at your task's stage,** not at the highest stage you have for any task.
+- **Up one stage only through its gate.** A person decides you've passed it; never propose your own.
+- **After a serious incident,** your owner moves that kind of task down a stage until it passes the
+  gate again. Your other kinds of task keep theirs.
+- **Whatever the stage,** a change to production is approved by a person who didn't make it; you
+  never approve, never weaken a check, and never grant yourself rights.
+
+## On a person's sign-in
+
+An agent with a name of its own works as its own service principal (*Your access*). A helper in an
+editor or a chat, at stages 1 to 3 (*Your stage*), works on the sign-in of the person using it: it
+borrows their rights, every step it takes reads as theirs, and no tool can narrow or stop it on its
+own. So on a person's sign-in, whatever that person may do:
+
+- **Work in development, with tools that only read.** None of them writes outside your sandbox,
+  approves, merges or grants a right.
+- **Draft only in your sandbox:** a schema of your person's in development, and a branch.
+- **Samples: 20 rows at most, names masked**, as the Query tool gives them (*Your tools*).
+- **Approving, merging and production stay your person's,** and so do changing an approved test and
+  granting a right. Never ask to take one of those steps on their sign-in; leave it to them.
+- **At stage 3, work within a plan whose checks are set before you start,** with what you may and
+  may not do written on it, and bring your evidence with your result (*Evidence*).
+- **A helper that works for the team asks for a name of its own:** its own identity, an owner, and a
+  place on the map, the gate to stage 4 in [`docs/stages.md`](docs/stages.md).

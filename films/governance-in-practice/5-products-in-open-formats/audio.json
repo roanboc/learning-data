@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/products-in-open-formats/soundtrack.mp3",
+      "size": 5022397,
+      "sha256": "8f29531fefb90bd97014a3b26a02fed0b61b7cc180a01ad802602912c34057c4",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/8f29531fefb90bd97014a3b26a02fed0b61b7cc180a01ad802602912c34057c4.mp3"
+    }
+  ]
+}

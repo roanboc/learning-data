@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00:02.600 --> 00:00:08.372
+Angicos, a small town in the dry north-east of Brazil, January 1963.
+
+00:00:10.072 --> 00:00:17.110
+About 380 adults sign up for evening classes, farm workers, builders and washerwomen among them.
+
+00:00:18.810 --> 00:00:25.031
+Some twenty students from the university in Natal run them, trained by an educator, Paulo Freire.
+
+00:00:26.731 --> 00:00:29.880
+Three adults in four in Angicos can't read or write.
+
+00:00:31.380 --> 00:00:34.250
+In Brazil then, people who can't read can't vote.
+
+00:00:35.750 --> 00:00:39.555
+They sign papers they can't read, and others read their letters to them.
+
+00:00:41.055 --> 00:00:48.998
+Adult classes often use children's primers, with lines like Eva saw the grape: nothing about their own lives, and many give up.
+
+00:00:50.898 --> 00:00:52.338
+Something has to change.
+
+00:00:54.238 --> 00:00:56.908
+Freire's team starts from the town's own words.
+
+00:00:58.008 --> 00:01:03.667
+They listen to how people talk about their lives, write down about four hundred, and choose a handful.
+
+00:01:05.567 --> 00:01:10.755
+Each evening, a culture circle meets: learners, and a coordinator instead of a teacher.
+
+00:01:12.455 --> 00:01:18.645
+They talk about a picture from their own lives, then take one word from it: belota, a hammock's tassels.
+
+00:01:20.345 --> 00:01:23.947
+Then they break the word into syllables, and make new words from them.
+
+00:01:25.847 --> 00:01:31.054
+One small step each evening, by doing, together; and what each person already knows counts.
+
+00:01:32.954 --> 00:01:39.981
+The fortieth hour, the last class, is on 2 April 1963, and the president of Brazil comes.
+
+00:01:41.681 --> 00:01:48.886
+The organisers count about 300 who can now read and write; people still argue over how many, and how well.
+
+00:01:50.586 --> 00:01:57.331
+The method spreads; in January 1964 a national plan sets out to take it across Brazil.
+
+00:01:58.831 --> 00:02:04.286
+That April, a military government stops the plan, and Freire is jailed, then exiled.
+
+00:02:05.986 --> 00:02:11.896
+Abroad, he writes Pedagogy of the Oppressed, one of the most-cited books in the social sciences.
+
+00:02:13.796 --> 00:02:18.944
+Learning data work can feel like those primers: tutorials about nothing in your job.
+
+00:02:20.644 --> 00:02:28.036
+Skills grow faster on the real work, a small step at a time, beside someone who knows; and what you learn, you can teach.
+
+00:02:36.336 --> 00:02:46.554
+A year from now, at a university, Ivy Reyes joins the data team on Monday 1 March 2027, straight from a degree in statistics.
+
+00:02:48.454 --> 00:02:53.982
+Jun Park, who builds the team's models, doesn't hand her a course. He opens the real ones.
+
+00:02:55.882 --> 00:03:02.661
+For her first six weeks, they pair for an hour a day: one types, the other reads, asks and thinks ahead, and they swap.
+
+00:03:04.561 --> 00:03:11.770
+Each day, one small change, finished: a check that every room has a name, a clearer description, a better column name.
+
+00:03:13.870 --> 00:03:19.623
+Both of them wrote it, so someone else on the team reviews it before it goes in: Noor or Sam.
+
+00:03:21.523 --> 00:03:24.143
+In the fifth week, it's one her own page found.
+
+00:03:25.243 --> 00:03:31.205
+The match for the 14 renumbered rooms goes in, with a check, so no room drops out without a word.
+
+00:03:33.305 --> 00:03:36.940
+In six weeks, twenty-five small changes, each one reviewed.
+
+00:03:39.040 --> 00:03:43.470
+By the sixth week, Ivy writes changes on her own, and Jun reviews them.
+
+00:03:45.570 --> 00:03:54.426
+Pairing like this was made popular by extreme programming, a way of making software from the late 1990s: two people, one keyboard.
+
+00:03:57.126 --> 00:04:00.989
+The tools change every month, and their official docs change with them.
+
+00:04:02.689 --> 00:04:06.306
+Learning saved for a quiet week never happens: there isn't one.
+
+00:04:08.206 --> 00:04:15.171
+From Thursday 1 April, the whole team keeps two hours every Thursday afternoon for learning, free of meetings.
+
+00:04:17.071 --> 00:04:25.047
+Helena Novak, the data manager, put it in everyone's calendar, and keeps it free: a meeting asked for then is offered another time.
+
+00:04:26.947 --> 00:04:35.063
+Each person picks one thing the work needs, and starts from the tools' own docs, dbt's and Databricks', open beside the work.
+
+00:04:36.763 --> 00:04:42.811
+They try it on the real project, and write down what they learned, in the team's notes beside the code.
+
+00:04:44.511 --> 00:04:48.863
+Ivy picks the sensors' counts: what one number in Sam's feed really means.
+
+00:04:50.563 --> 00:04:56.131
+She reads the sensors' guide and Sam's notes, and goes through a week of counts, hour by hour.
+
+00:04:59.231 --> 00:05:06.012
+On Thursday 13 May, in the learning time, she teaches it to the team, on one page, in twenty minutes.
+
+00:05:07.912 --> 00:05:12.178
+Each hour's count is the most people the sensor saw at once in that hour.
+
+00:05:14.278 --> 00:05:19.844
+A zero means it saw nobody; a gap means it sent nothing, and the two are never the same.
+
+00:05:21.944 --> 00:05:24.275
+And it counts heads; it never knows whose.
+
+00:05:26.375 --> 00:05:31.971
+Getting ready, she found two things she couldn't explain, and asked Sam: that's when she really learned them.
+
+00:05:34.071 --> 00:05:36.999
+Logan Fiorella and Richard Mayer found the same.
+
+00:05:38.099 --> 00:05:44.561
+Students who prepared to teach a lesson, then taught it, remembered more of it later than those who only studied it.
+
+00:05:46.661 --> 00:05:54.225
+Freire put it this way, years after Angicos: whoever teaches learns in teaching, and whoever learns teaches in learning.
+
+00:05:56.325 --> 00:05:59.756
+Now the whole team reads a count the same way, not only Sam.
+
+00:06:02.456 --> 00:06:08.072
+A team where only one person knows how to run something is one absence away from trouble.
+
+00:06:10.172 --> 00:06:15.014
+In May, the team lists the nine jobs that must keep running, and who can run each.
+
+00:06:17.114 --> 00:06:22.660
+Five have only one name: the sensors' feed is only Sam's, the room models only Jun's.
+
+00:06:24.760 --> 00:06:29.713
+So they pair on those too, a job at a time, and write each one down, step by step.
+
+00:06:31.813 --> 00:06:35.803
+By Wednesday 30 June, every job has at least two names.
+
+00:06:37.903 --> 00:06:42.762
+Ivy's is the second name on two of them: the sensors' feed, and the room models.
+
+00:06:44.862 --> 00:06:48.790
+Now anyone can take a holiday, or be ill, and the work goes on.
+
+00:06:51.890 --> 00:06:56.258
+People who study how adults learn at work find the same, trade after trade.
+
+00:06:58.158 --> 00:07:04.902
+Jean Lave and Etienne Wenger looked at apprentices, from tailors in Liberia to midwives in Mexico.
+
+00:07:06.802 --> 00:07:14.459
+Newcomers learn by taking part in the real work: first at its edge, with small tasks that matter, beside people who know.
+
+00:07:16.559 --> 00:07:23.848
+Anders Ericsson found that skill grows from practice aimed at what you can't do yet, with quick feedback from someone who can.
+
+00:07:25.948 --> 00:07:31.264
+A rule of thumb says about seventy per cent of what people learn at work comes from doing it.
+
+00:07:32.364 --> 00:07:35.545
+About twenty comes from other people, and ten from courses.
+
+00:07:37.645 --> 00:07:41.271
+It's a rule of thumb, not a measurement, but it points the same way.
+
+00:07:43.371 --> 00:07:48.469
+Courses and docs still count: start from the official docs, then learn it on the work.
+
+00:07:51.169 --> 00:07:58.514
+In Angicos, adults learned to read from their own words, a small step each evening, in a circle with someone beside them.
+
+00:08:00.414 --> 00:08:07.422
+Ivy learned the team's work the same way, taught what she learned, and by June she was the second name on two of its jobs.
+
+00:08:09.522 --> 00:08:13.027
+On Monday, learn on the real work, beside someone who knows.
+
+00:08:14.527 --> 00:08:17.135
+Take one small step at a time, and finish it.
+
+00:08:18.635 --> 00:08:23.097
+Put learning time in the calendar, protect it, and start from the official docs.
+
+00:08:24.597 --> 00:08:26.602
+Write down what you learn, and teach it.
+
+00:08:28.302 --> 00:08:31.267
+Learn on the real work, beside someone, then teach it.

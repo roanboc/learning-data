@@ -106,3 +106,25 @@ sources:
             description: The ceremony the graduate is presented at, like DEC26-3 (seeds/reference/graduations/ceremonies.csv).
           - name: attendance_code
             description: ATT when the graduate crosses the stage; ABS when the award is conferred in absentia and the certificate posted.
+      - name: nightly_files
+        description: >
+          The receipts of the night's transfer: one row for each nightly file the student system
+          sends, and when it arrived on the platform. The load writes the row as the file lands.
+          A file arrives every night, even one with few new records, so its age is the student
+          system's age; the newest row of a table can be days old after a night when no exam
+          board met. The graduation list says its age from it (student_system_as_of).
+        config:
+          loaded_at_field: "cast(received_at as timestamp)"
+          # The level the graduation list's users agreed on 22 June 2026, for the certificates: older
+          # than 24 hours, the check fails. One level, with no warning: the night's job runs this check
+          # first, and its failure tells Sam Okafor and Malia Fonoti (examples/a-late-file/).
+          freshness:
+            warn_after: null
+            error_after: {count: 24, period: hour}
+          meta:
+            system_key: [file_name]
+        columns:
+          - name: file_name
+            description: The file's name, with the day of the records it brings, like nightly_2026-06-17.csv.
+          - name: received_at
+            description: When the file arrived on the platform. The night's files are due at 02:00.

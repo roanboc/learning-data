@@ -1,0 +1,78 @@
+{
+  "kicker": "Working with an agent",
+  "kicker_es": "Trabajar con un agente",
+  "title_es": "El borrador y la decisión",
+  "h1": "The draft and the decision: the agent drafts; you frame, check and decide",
+  "h1_es": "El borrador y la decisión: el agente redacta; tú planteas, revisas, decides",
+  "lead": "Ivy Reyes, in her sixth week on the university's data team, asks the team's agent for a first draft of a model of room use. In a minute it's there: tidy, tested, sure, and wrong about one word. She catches it by reading what the agent assumed and checking the draft against what she knows is true.",
+  "lead_es": "Ivy Reyes, en su sexta semana en el equipo de datos, le pide al agente un primer borrador de un modelo del uso de las aulas. En un minuto ahí está: prolijo, probado, seguro, y equivocado en una palabra. Lo detecta al leer lo que supuso el agente y contrastarlo con lo que sabe que es cierto.",
+  "description": "A film about working with an agent, the second of The new skills, in the module Leading data people: when an agent writes the first draft, the skills that grow are a person's: framing the work (the decision, the words, what counts), saying exactly what's wanted, checking what comes back against what you know is true, deciding, and answering for it. A draft is cheap; judgement isn't. On Wednesday 7 April 2027, Ivy Reyes asks the team's agent for a first model of room use; in a minute it drafts one, tidy, tested and sure, that counts a booked hour as a used hour, where Graham Ellis had said used means people in the room; against the sensors, one booked hour in five had nobody in it. She writes room use into the glossary, where Graham approves it as its owner, asks again with the decision, the words and what counts, checks the new draft against one room's week worked out by hand, and Jun reviews her pull request: nobody approves their own work, and never the agent. The World Economic Forum's Future of Jobs Report 2025 names analytical thinking as the core skill employers seek most. It opens with advanced chess: New York in 1997, León in 1998, and the 2005 tournament that two amateurs with three computers won.",
+  "description_es": "Una película sobre trabajar con un agente, la segunda de Las nuevas habilidades, en el módulo Liderar equipos de datos: cuando un agente escribe el primer borrador, las habilidades que crecen son de una persona: plantear el trabajo (la decisión, las palabras, lo que cuenta), decir exactamente qué se quiere, contrastar lo que vuelve con lo que sabes que es cierto, decidir y responder por ello. Un borrador es barato; el criterio, no. El miércoles 7 de abril de 2027, Ivy Reyes le pide al agente del equipo un primer modelo del uso de las aulas; en un minuto hace uno, prolijo, probado y seguro, que cuenta una hora reservada como una hora usada, cuando Graham Ellis había dicho que usada significa gente en el aula; según los sensores, en una de cada cinco horas reservadas no había nadie. Ella escribe uso de aulas en el glosario, donde Graham lo aprueba como su dueño, vuelve a pedirlo con la decisión, las palabras y lo que cuenta, contrasta el nuevo borrador con la semana de un aula calculada a mano, y Jun revisa su pull request: nadie aprueba su propio trabajo, ni nunca el agente. El informe Future of Jobs 2025 del Foro Económico Mundial señala el pensamiento analítico como la habilidad que más buscan los empleadores. Empieza con el ajedrez avanzado: Nueva York en 1997, León en 1998, y el torneo de 2005 que ganaron dos aficionados con tres computadoras.",
+  "card": "An agent drafts Ivy's model in a minute, tidy and sure, and wrong about one word. She frames the work, checks it and decides.",
+  "card_es": "Un agente redacta en un minuto el modelo de Ivy, prolijo y seguro, y equivocado en una palabra. Ella plantea, revisa y decide.",
+  "chapters_es": {
+    "chess": "Dos aficionados, tres computadoras",
+    "draft": "Un borrador en un minuto",
+    "assumed": "Lo que supuso",
+    "frame": "Plantearlo, y luego pedir",
+    "review": "Aprueba otra persona",
+    "grows": "Las habilidades que crecen",
+    "monday": "El lunes"
+  },
+  "past": [
+    "León, 1998: with the machine, not against it",
+    "A year after a computer beat the world chess champion, Kasparov played with a computer at his side. In 2005, two amateurs with three computers beat grandmasters and a supercomputer: the machines calculated, and the people chose what to look at, compared and decided."
+  ],
+  "past_es": [
+    "León, 1998: con la máquina, no contra ella",
+    "Un año después de que una computadora venciera al campeón mundial de ajedrez, Kasparov jugó con una computadora a su lado. En 2005, dos aficionados con tres computadoras vencieron a grandes maestros y a una supercomputadora: las máquinas calculaban, y las personas elegían qué mirar, comparaban y decidían."
+  ],
+  "next_h": "You've seen why the decision stays with a person. Next: skills grow fastest on real work, beside someone who knows, and last when you teach them.",
+  "next_h_es": "Viste por qué la decisión queda en manos de una persona. Después: las habilidades crecen más rápido en el trabajo real, junto a alguien que sabe, y duran cuando las enseñas.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas lecturas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Chess Master and the Computer, by Garry Kasparov",
+        "title_es": "The Chess Master and the Computer, de Garry Kasparov (en inglés)",
+        "line": "His essay of 2010: León in 1998, the 2005 tournament, and the lesson he drew from it. The magazine lets anyone read a few articles a month.",
+        "line_es": "Su ensayo de 2010: León en 1998, el torneo de 2005 y la lección que sacó de él. La revista deja leer gratis algunos artículos al mes.",
+        "href": "https://www.nybooks.com/articles/2010/02/11/the-chess-master-and-the-computer/",
+        "href_es": "https://www.nybooks.com/articles/2010/02/11/the-chess-master-and-the-computer/"
+      },
+      {
+        "title": "The Future of Jobs Report 2025",
+        "title_es": "The Future of Jobs Report 2025, del Foro Económico Mundial (en inglés)",
+        "line": "The World Economic Forum's report: the core skills employers seek most, and the skills rising fastest, are in its third chapter.",
+        "line_es": "El informe del Foro Económico Mundial: las habilidades que más buscan los empleadores, y las que más crecen, están en su tercer capítulo.",
+        "href": "https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf",
+        "href_es": "https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf"
+      },
+      {
+        "title": "Advanced chess",
+        "title_es": "Advanced chess, en Wikipedia (en inglés)",
+        "line": "How people and computers came to play as one team, from León in 1998 to the freestyle tournaments that followed.",
+        "line_es": "Cómo personas y computadoras empezaron a jugar como un solo equipo, desde León en 1998 hasta los torneos libres que siguieron.",
+        "href": "https://en.wikipedia.org/wiki/Advanced_chess",
+        "href_es": "https://en.wikipedia.org/wiki/Advanced_chess"
+      }
+    ],
+    "more": [
+      {
+        "text": "What an agent is: how agents work",
+        "text_es": "Qué es un agente: cómo funcionan los agentes",
+        "href": "https://data.learn-all.org/what-an-agent-is/",
+        "href_es": "https://data.learn-all.org/es/what-an-agent-is/"
+      },
+      {
+        "text": "Agents at work on data: how teams govern them",
+        "text_es": "Agentes trabajando con datos: cómo los gobiernan los equipos",
+        "href": "https://data.learn-all.org/agents-at-work-on-data/",
+        "href_es": "https://data.learn-all.org/es/agents-at-work-on-data/"
+      }
+    ]
+  }
+}

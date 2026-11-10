@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:06.394
+Noviembre de 1970: la costa de Pakistán Oriental, hoy Bangladés.
+
+00:00:07.094 --> 00:00:11.910
+Familias de agricultores y pescadores viven en islas bajas, donde grandes ríos se unen al mar.
+
+00:00:13.010 --> 00:00:17.150
+El día doce, un ciclón toca tierra al anochecer, con la marea alta.
+
+00:00:17.850 --> 00:00:23.899
+Los meteorólogos advierten del peligro y, cuando se acerca, la radio emite una señal de gran peligro.
+
+00:00:24.999 --> 00:00:30.752
+En las islas significa poco: los sobrevivientes contaron después que creían que la señal número uno era la peor.
+
+00:00:31.452 --> 00:00:35.563
+Casi todos saben que viene una tormenta, pero casi nadie busca refugio.
+
+00:00:36.863 --> 00:00:41.984
+Esa noche, una marejada ciclónica, el mar empujado tierra adentro por el viento, barre las islas.
+
+00:00:42.684 --> 00:00:46.399
+Mueren al menos trescientas mil personas, quizá medio millón.
+
+00:00:48.499 --> 00:00:53.770
+Un aviso que la gente no sabe leer, o no sigue, no es un aviso. Algo tiene que cambiar.
+
+00:00:55.470 --> 00:01:04.835
+En 1972, la Sociedad de la Cruz Roja de Bangladés inicia el Programa de Preparación ante Ciclones, junto con el gobierno desde 1973.
+
+00:01:05.535 --> 00:01:09.871
+Voluntarios de las propias aldeas de la costa llevan cada aviso la última milla.
+
+00:01:10.571 --> 00:01:14.511
+Van de casa en casa con megáfonos, y guían a la gente a los refugios.
+
+00:01:15.211 --> 00:01:21.134
+Sus banderas suben con el peligro, una, luego dos, luego tres: una señal que toda la aldea puede leer.
+
+00:01:22.434 --> 00:01:31.278
+En noviembre de 2007, el ciclón Sidr golpea la misma costa, con vientos tan fuertes como los de 1970, aunque con marea baja.
+
+00:01:31.978 --> 00:01:36.721
+Los avisos llevan días saliendo, y la señal más alta ondea desde el día anterior.
+
+00:01:37.421 --> 00:01:42.785
+Más de 40,000 voluntarios los llevan, y un millón y medio de personas están en refugios.
+
+00:01:43.885 --> 00:01:50.162
+Mueren unas 3,400 personas: todavía demasiadas, y cerca de una por cada cien de 1970.
+
+00:01:52.062 --> 00:01:53.656
+Los datos también tienen una última milla.
+
+00:01:54.356 --> 00:02:00.488
+En junio de 2026, el archivo de la noche no llega, y la lista de graduación se construye sin él.
+
+00:02:01.188 --> 00:02:05.627
+Todos los controles pasan. Faltan 23 graduados, y nada lo dice.
+
+00:02:07.127 --> 00:02:11.355
+Esta vez, alguien lo nota a tiempo, y los 23 están en la lista.
+
+00:02:18.855 --> 00:02:27.181
+Cada noche a las dos, el sistema de estudiantes envía su archivo: nombres y resultados del día, y los títulos que aprobaron las juntas.
+
+00:02:28.281 --> 00:02:31.350
+A las tres, la actualización nocturna construye la lista de graduación.
+
+00:02:32.650 --> 00:02:39.365
+El miércoles 17 de junio por la noche, el archivo no llegó: un disco lleno del lado del sistema de estudiantes lo retuvo.
+
+00:02:40.665 --> 00:02:44.788
+A las tres, la lista se construyó con lo que había: el archivo de la noche anterior.
+
+00:02:45.888 --> 00:02:49.455
+689 graduados, y todos los controles en verde.
+
+00:02:50.955 --> 00:02:57.042
+Hasta el control contra las listas de las juntas pasó: llegan en la misma transferencia, así que también tenían un día.
+
+00:02:58.142 --> 00:03:01.691
+Faltaban: 23 graduados que las juntas aprobaron el miércoles.
+
+00:03:03.391 --> 00:03:04.964
+Los datos atrasados parecen completos.
+
+00:03:06.464 --> 00:03:10.049
+Cada control mira lo que hay. Ninguno puede ver lo que no ha llegado.
+
+00:03:12.949 --> 00:03:16.943
+Jueves, 8 de la mañana. La lista debe llegar a la imprenta a las cinco.
+
+00:03:18.043 --> 00:03:24.796
+Sam Okafor, que lleva la plataforma, ve en el monitoreo de Databricks que las tablas del sistema de estudiantes están atrasadas.
+
+00:03:25.496 --> 00:03:31.064
+El control de frescura de dbt dice cuánto: los datos del sistema de estudiantes tienen treinta horas.
+
+00:03:32.364 --> 00:03:38.580
+Había un nivel, un aviso al cabo de un día: puesto por quienes construyen, acordado con nadie, y nunca ejecutado de noche.
+
+00:03:39.280 --> 00:03:43.517
+Un nivel que sus usuarios nunca acordaron es una señal que nadie entiende.
+
+00:03:45.017 --> 00:03:51.782
+Sam llama al equipo del sistema de estudiantes, y a Malia Fonoti, que envía la lista. Malia detiene el envío.
+
+00:03:52.882 --> 00:04:00.079
+A las 11:40 llega el archivo; a las 12:10 la lista se construye de nuevo, con 712 graduados.
+
+00:04:00.779 --> 00:04:05.621
+El equipo de Malia revisa los 23 nombres nuevos, y a las 3:20 la lista sale.
+
+00:04:07.121 --> 00:04:14.909
+El diciembre anterior, seis graduados quedaron fuera igual, y nadie lo vio. Sus diplomas se imprimieron tarde, y se enviaron por correo.
+
+00:04:17.809 --> 00:04:21.761
+El lunes, Malia y Sam se reúnen con Mei Tanaka, que está a cargo de la lista.
+
+00:04:23.261 --> 00:04:28.749
+La plataforma puede ver que una tabla está atrasada. Solo sus usuarios pueden decir cuándo es demasiado tarde.
+
+00:04:30.649 --> 00:04:35.397
+Los diplomas no pueden esperar: necesitan los archivos de esa noche cuando la lista va a la imprenta.
+
+00:04:37.097 --> 00:04:41.924
+Los asientos del Aula Magna sí: se cuentan una semana antes, con una lista de hace unos días.
+
+00:04:43.624 --> 00:04:47.904
+El conteo de Planificación para el gobierno llega después del cierre del año: unas semanas está bien.
+
+00:04:49.604 --> 00:04:54.787
+Una lista, tres relojes. El más estricto fija el nivel: un día como máximo, al enviarla.
+
+00:04:56.487 --> 00:05:01.900
+Un archivo nocturno lo cumple. Para datos más frescos, Caliente, tibio, frío muestra cómo se mueven.
+
+00:05:03.600 --> 00:05:08.960
+Malia lo acuerda, Mei es su responsable, y va junto a las columnas de la lista, en dbt.
+
+00:05:10.660 --> 00:05:15.776
+Reglas que se ejecutan dejó la puntualidad a lápiz, sin controles. Esta es su primera regla.
+
+00:05:18.676 --> 00:05:21.083
+Desde ahora, la lista dice su antigüedad.
+
+00:05:22.383 --> 00:05:26.810
+Cada fila lleva la antigüedad de sus fuentes: cuándo llegaron los archivos con que se construyó.
+
+00:05:28.110 --> 00:05:35.148
+Cada fuente tiene la suya. Aquel jueves habría dicho: sistema de estudiantes, miércoles a las dos; portal, jueves a las dos.
+
+00:05:36.848 --> 00:05:40.385
+Se muestra dondequiera que esté la lista, primero en el archivo de la imprenta.
+
+00:05:41.685 --> 00:05:45.359
+Como las banderas de los voluntarios, es una señal que todos pueden leer.
+
+00:05:46.859 --> 00:05:53.382
+Demasiado bueno para ser verdad etiquetaba una cifra de la noche anterior. Aquí, toda lista dice su antigüedad, también en noches buenas.
+
+00:05:54.882 --> 00:05:57.896
+Los datos que dicen su antigüedad son de fiar, aunque sean viejos.
+
+00:05:59.196 --> 00:06:00.614
+Los que no la dicen, no.
+
+00:06:03.714 --> 00:06:07.026
+Luego Sam revisa la antigüedad donde empieza: en cada fuente.
+
+00:06:08.526 --> 00:06:15.515
+dbt lee cuándo llegó el archivo de cada noche, no la fila más nueva, que puede tener días si ninguna junta se ha reunido.
+
+00:06:17.215 --> 00:06:21.079
+Un nivel en cada una: con más de veinticuatro horas, el control falla.
+
+00:06:22.579 --> 00:06:24.906
+Cada noche, la actualización ejecuta ese control primero.
+
+00:06:26.206 --> 00:06:31.353
+Si falla, Sam y Malia se enteran de inmediato, y la lista se construye igual, diciendo su antigüedad.
+
+00:06:32.853 --> 00:06:36.632
+Ese es el aviso: nada se detiene, y quienes necesitan saberlo, lo saben.
+
+00:06:38.532 --> 00:06:42.037
+El envío a la imprenta también es un trabajo, y ejecuta el mismo control.
+
+00:06:43.537 --> 00:06:49.041
+Solo envía si el control pasa; si no, la lista espera, y a Malia se le dice por qué.
+
+00:06:50.741 --> 00:06:53.011
+Los datos no se detienen. El envío, sí.
+
+00:06:55.911 --> 00:07:02.455
+Los voluntarios no pueden detener una tormenta. Se aseguran de que el aviso llegue a tiempo, en palabras que la gente entiende.
+
+00:07:03.755 --> 00:07:09.968
+Una lista no puede hacer llegar un archivo atrasado. Puede decir su antigüedad, y el envío puede esperar a que esté fresca.
+
+00:07:11.268 --> 00:07:15.092
+Desde junio, ningún graduado ha quedado fuera de una lista por un archivo atrasado.
+
+00:07:16.592 --> 00:07:20.106
+Acuerda cuán frescos deben estar los datos, y di siempre su antigüedad.
+
+00:07:22.206 --> 00:07:28.126
+Apto para su uso termina aquí: un uso, una medida, una referencia y un reloj. Después, La calidad como hábito.

@@ -1,0 +1,424 @@
+# The credential project
+
+The example dbt project that *In the weeds of data crafting* draws from. From *Start from a
+question* on, every snippet the films show on screen is code in this folder, and it runs on
+DuckDB. One exception: the cross-project sketch in `examples/planning/`, which needs dbt Cloud.
+
+It builds the slice of the university's credential model (v3) that answers one question from
+Planning: **how many learners are within 15 credit points of a graduate certificate, by faculty,
+as at census date?** A second consumer, the learner's wallet app, reads the same facts as they
+are now. A third, Finance, arrives later and asks how much tuition recognised credit saves
+learners: its history, one commit per step of the process, is how a consumer is added. That makes
+three consumer contracts on one enterprise contract.
+
+It runs on your machine and in CI, on DuckDB, with no account. The same code runs on
+Databricks, with dbt Cloud or dbt Core. The university, its people and its data are fictional.
+
+## Run it on your machine
+
+With Python 3.11 or later, in a virtual environment (many systems refuse `pip install` into
+their own Python):
+
+```sh
+cd films/analytics-engineering/project
+python -m venv .venv && . .venv/bin/activate
+pip install -r requirements.txt
+dbt build --profiles-dir .
+```
+
+`dbt build` loads the reference data, builds every model and runs every test. It ends green, with
+one warning by design: a short-course enrolment with no email (see LIM-SC-02 on the
+`short_courses` source, and DEC-SC-01 in [the decisions](docs/decisions.md)). The database is `target/credentials.duckdb`.
+
+Then, if you like:
+
+| Command | What it does |
+|---|---|
+| `dbt docs generate --profiles-dir . && dbt docs serve --profiles-dir .` | The docs site, with lineage |
+| `dbt show --select profile_null_keys --profiles-dir .` | One of the evidence queries in `analyses/` |
+| `dbt show --select reconcile_census_report --profiles-dir .` | Planning's number beside the census report's |
+| `python scripts/generate/diagrams.py` | Regenerates each domain's physical diagram (`_<domain>__physical.md`) from `target/manifest.json` |
+| `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
+| `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
+| `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
+| `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor in the open standard, from the dbt models; checks each canonical table's enterprise contract, which data governance writes first, against its model; and validates both against the standards' schemas |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner, and the hours spent checking the graduation list by hand. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/`. The scorecard is the last run; every run also keeps each check's result in `check_results`, night after night, for the week: `docs/every-week.md` |
+| `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
+| `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
+| `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
+| `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, or one for each class, who read a table, the access review, Ontos, agents under the same rules, deleting a person's data for a request, and the registrar's office's morning alert: `docs/databricks-governance.md` |
+| `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
+| `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
+| `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
+
+`core_learner`, `core_award` and `core_credit_towards_award` say which version is current as at
+the day of the build. To repeat a run exactly, fix that day: `--vars '{as_is_date: 2026-09-30}'`.
+
+The census date is a var. `dbt build --vars '{census_date: 2026-08-31}' --profiles-dir .` answers
+Planning's question as at another date; the reconciliation test then fails, because the census
+report has no number for that date.
+
+Source freshness isn't part of `dbt build`. `dbt source freshness --profiles-dir .` checks it, and
+since the sample files don't change, it reports every source as stale (`ERROR STALE`). CI doesn't
+run it. The student system's and the portal's receipts (`nightly_files`) carry the level the graduation list's users agreed, older than 24 hours fails, and a night's job runs that check before the build: `examples/a-late-file/`.
+
+## Run it on Databricks
+
+The sources must be tables first. On DuckDB they're the CSV files in `data/`; on Databricks,
+ingestion lands them in three schemas named after the systems: `student_system`,
+`learning_platform` and `short_courses`. To load the sample files into your workspace:
+
+1. Upload `data/` to a Unity Catalog volume, with the Databricks CLI:
+   `databricks fs cp -r data dbfs:/Volumes/<catalog>/<schema>/<volume>/data`
+2. Run `scripts/setup/load_databricks.sql` in the SQL editor, with two parameters: `catalog`, the
+   catalog the three schemas go in, and `data`, the folder you uploaded
+   (`/Volumes/<catalog>/<schema>/<volume>/data`). It creates the schemas and the seven tables.
+
+Or load them as the platform team does each night: `scripts/setup/loading_pipeline.sql` is a
+Lakeflow pipeline that checks each row has its system key as it's loaded, and keeps out and counts
+those that don't; its header says how to set it up. Then `scripts/setup/monitoring.py` sets up the
+monitors that watch the tables for what no rule names, and tell each table's owner: anomaly
+detection on the three schemas (in Public Preview), a profile of the badges, and an alert on it.
+Their results and the pipeline's counts join the scorecard (`analyses/quality/platform_results.sql`;
+`examples/platform-results/` shows a night's).
+
+The sources are read from the catalog in `DBT_SOURCES_CATALOG`, or the target's catalog if it's
+not set. If ingestion prefixes the schema names (say, `raw_student_system`), set
+`DBT_SOURCES_SCHEMA_PREFIX` to the prefix (`raw_`).
+
+### With dbt Cloud
+
+1. **Connect the repository**, and set the project subdirectory to `films/analytics-engineering/project`.
+2. **Create a Databricks connection**: the workspace host and a SQL warehouse's HTTP path.
+3. **Set up a development environment** with your credentials: a token, the catalog and a schema of your own.
+4. **Build.** In the IDE, run `dbt build`. For production, create a deployment environment, with a job that runs `dbt build`.
+
+dbt Cloud ignores `profiles.yml`: the connection and credentials live in the environment. Set
+`DBT_SOURCES_CATALOG` and `DBT_SOURCES_SCHEMA_PREFIX` in the environment's variables if the sources
+sit elsewhere.
+
+### With dbt Core
+
+```sh
+pip install -r requirements-databricks.txt
+export DATABRICKS_HOST=<workspace>.cloud.databricks.com
+export DATABRICKS_HTTP_PATH=/sql/1.0/warehouses/<id>
+export DATABRICKS_TOKEN=<token>
+export DATABRICKS_CATALOG=<catalog>
+export DATABRICKS_SCHEMA=<your schema>   # optional; dev if not set
+dbt build --target databricks --profiles-dir .
+```
+
+`requirements-databricks.txt` installs dbt-databricks 1.12.8, which brings dbt-core 1.12.5.
+
+### Adding a Databricks job to CI
+
+CI here builds on DuckDB and needs no secrets. To also build on Databricks for each pull request,
+add a job to `.github/workflows/credential-project.yml`: install
+`requirements-databricks.txt`, set the five `DATABRICKS_*` variables from repository secrets (a
+service principal's token, not a person's), set `DATABRICKS_SCHEMA` to a schema for the pull
+request (say, `ci_pr_<number>`), run `dbt build --target databricks`, and drop the schema at the
+end. With dbt Cloud, a CI job does the same, and builds only the changed models and what depends
+on them: `dbt build --select state:modified+ --defer --state <production artifacts>`, where the
+artifacts are the `manifest.json` of the last production run.
+
+CI already parses the project for Databricks, with no secrets and no connection: that catches a
+Databricks-only mistake in the SQL's Jinja, the configs or the profile before it reaches dbt Cloud.
+
+## Layout
+
+Every file has one of four lifecycles (*File lifecycles* in `docs/conventions.md`). Untagged
+files are **permanent**: written by hand, changed in a reviewed pull request. The others are tagged:
+
+- `[generated]`: written by a script in `scripts/generate/`. Never edit it; change its source and
+  rerun the script. CI fails if it's out of date.
+- `[temporary]`: lives only while the work it's about is under way, then is deleted. CI fails on
+  anything done that's still there.
+- `[build output]`: written by dbt, never committed.
+
+```
+project/
+├── dbt_project.yml           vars (census date, the 15-credit-point threshold, the limit of four
+│                             microcredentials), layers, access, contracts, groups, grants
+├── profiles.yml              targets: duckdb (default), databricks
+├── data/<system>/<table>.csv the three sources, every version kept (DuckDB only)
+├── .dbtignore                keeps the conceptual models and decision logs out of dbt's parse
+├── seeds/
+│   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
+│   │                         identity decisions, credit recognition), finance (tuition rates),
+│   │                         graduations (ceremonies), hr (newsletters), shared (key sets [generated] from each source's meta.key_set)
+│   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
+│                             (the census report), finance (Finance's tuition report). No model
+│                             reads them
+├── sources/<system>/         what comes in: each source's YAML (tables, freshness, its key set
+│                             with each system key and its case, known limitations), its doc
+│                             blocks, and its decision log (_<system>__decisions.yml)
+├── models/                   what's built, organised by domain, following TCSI; each domain's
+│   │                         folder holds its models and its data definitions
+│   ├── overview.md           the docs site's front page
+│   ├── _groups.yml           who owns which models
+│   ├── _shared/              the university's map: its domains and key entities, at most 50
+│   │                         (_shared__conceptual.yml; _shared__conceptual.md [generated]); the
+│   │                         project's decision log; the version columns' doc blocks; the time spine
+│   ├── staging/<system>/     one view per source table
+│   ├── intermediate/student/ identity candidates and matches, timelines, the credit rule; unit tests
+│   ├── core/student/         learner, credential, credit towards an award ┐ the enterprise contract:
+│   ├── core/course/          award                                        ┘ public, versioned, enforced;
+│   │                         core_credential v1 [temporary], removed after 31 March 2027
+│   ├── marts/planning/       as at census; the semantic model and metric
+│   ├── marts/wallet/         as it is now
+│   ├── marts/finance/        as at census: the tuition recognised credit saves
+│   ├── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
+│   └── marts/hr/             the tutors' mailing list and its send log, each erased by request (meta.erase_by)
+│                             Each core domain and mart folder also holds:
+│                               _<domain>__conceptual.yml and .md   its conceptual model
+│                               _<domain>__decisions.yml            its decision log
+│                               _<domain>__columns.md               its column doc blocks
+│                               _<domain>__definitions.md           [generated] doc blocks
+│                               _<domain>__physical.md              [generated] physical diagram
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses, HR's mailing tool, casual teaching cost's five readers
+├── governance/               what isn't dbt's, and could live in another tool or repository:
+│   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
+│   ├── 2-owners/             who each owner is, and where their reviews go
+│   ├── 3-architecture-map/   the governance part of Noor's map, one file per element, by layer;
+│   │                         6-views/ [generated]: services and promises, who does what, each role's rights
+│   ├── 4-data-products/      each product: owner, domain, status, outputs, service levels, support
+│   ├── 5-data-contracts/     [generated] each output's contract, in the open contract standard
+│   ├── 6-product-descriptors/ [generated] each product, in the open product standard
+│   └── 7-standards/          the two standards' schemas, that the generated files are checked against
+├── macros/
+│   ├── shared/               conventions every domain uses: keys and hashes, point in time
+│   ├── planning/             Planning's near-award rule and count, written once
+│   ├── governance/           on Databricks: each column's class, each critical column and each table's area as tags, the policy
+│   ├── privacy/              on Databricks: the nightly deletion job's steps, by request
+│   ├── finance/              on Databricks: the row filter by faculty on Finance's claims
+│   └── adapters/             engine workarounds: DuckDB constraints
+├── tests/
+│   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
+│   ├── rules/                business rules that must hold: identity decisions; names, each night, at the source;
+│   │                         the old form's names, held for the registrar's office
+│   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
+│   └── governance/           rules about the project itself: no model reads an expected seed
+├── analyses/
+│   ├── profiling/            evidence about the sources and the core: keys, nulls, orphans, emails,
+│   │                         late changes, credit counted towards several awards
+│   ├── design/               evidence for a modelling choice: fan-out without point in time
+│   ├── validation/           checking the result: reconcile with the census and tuition reports,
+│   │                         as-was and as-is
+│   ├── governance/           on Databricks: who read a table, and the access review
+│   ├── privacy/              on Databricks: whether a request's data is gone, now and from the old files
+│   ├── quality/              on Databricks: the platform's checks for the scorecard, the badges'
+│   │                         alert, the rounds of checking names by hand, the printed name's lineage
+│   └── alerts/               on Databricks: the registrar's office's morning alert, the name
+│                             reports due today
+├── requirements/             [temporary] what's still open while something is built (questions,
+│                             requirements, gaps), by source, domain and consumer. Each item:
+│                             open → in_progress → done → what lasts moves to its home → deleted.
+│                             See requirements/README.md
+├── docs/                     how the work is done: the process, the conventions, the one-page plan,
+│                             every week, the stages; decisions.md [generated], the index of every decision log;
+│                             scorecard.md [generated], the data quality scorecard from the last run
+├── scripts/
+│   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
+│   │                         and products.py: write the [generated] files (products.py also checks the contracts); --check in CI
+│   ├── check/                check_metric.py: the metric against the census report; requirements.py:
+│   │                         only open requirements, with what shows they're done; governance.py:
+│   │                         data governance's rules, and their measures; impact.py: what a pull
+│   │                         request touches, and who to tell; all in CI
+│   ├── tools/                diff_against_main.py: a branch's table against main's, for review
+│   └── setup/                load_databricks.sql: loads the sample sources into Databricks; or
+│                             loading_pipeline.sql, each night, with a check on each row; and
+│                             monitoring.py: the monitors on the platform
+├── examples/                 planning/: Planning's own project, refing the core across projects
+│                             (dbt Cloud only); completions/, counts-as-award/ and award-redefined/:
+│                             pull requests as patches, with what the checks and the sync said;
+│                             platform-results/: a night's checks on the platform, in the scorecard;
+│                             census-by-level/: a job, from its one-page plan to its pull request;
+│                             agents-on-databricks/: the count of active research projects as a
+│                             function, a Genie Agent and an agent's evaluation cases (Databricks only);
+│                             hr-system-interface/: the HR system's data contract, agreed with its owner;
+│                             hot-warm-cold/: a streaming table, a materialized view and an archive,
+│                             data kept hot, warm and cold, with their service levels (Databricks only);
+│                             the-night-the-claims-job-failed/: a job that failed, the platform's
+│                             insight by morning, the fix and the pull request a person approved;
+│                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
+│                             the fortnightly dashboard (Databricks only);
+│                             a-late-file/: the night a file came late, its freshness check on the
+│                             receipts, and the send that waits;
+│                             files-as-data/: supplier invoices read with the platform's functions and
+│                             checked, a signed contract found by its metadata, and the claims app's
+│                             data contract (Databricks only);
+│                             more-readers-than-people/: casual teaching cost's five readers, each as
+│                             itself, and the share outside (Databricks only);
+│                             read-by-an-agent/: an agent's 412, the paper form behind it, and the
+│                             checks Genie Code proposed;
+│                             one-policy-for-many-tables/: the registrar's policies by tag, as code
+│                             (Databricks only)
+├── AGENTS.md                 what an AI agent may and may not do here, and its access
+├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
+│                             example here: GitHub reads it only at a repository's root
+├── memory/                   the team's memory, kept by the platform and second to what's governed:
+│                             who owns it and may read or write it; removed.md, what was deleted, why
+├── skills/                   seven skills for an agent: draft the conceptual model, profile, draft
+│                             a model, reconcile and diff, review metadata, sync the glossary,
+│                             review for governance; and choose-the-skill, which picks one
+├── databricks.yml            the bundle: the project's jobs, deployed the same way to test and to
+│                             production, after a review and Noor's approval (Databricks only)
+├── resources/                a file for each job the bundle deploys: payroll's export, the
+│                             claims job, with the step that sends the hours to payroll, and the
+│                             build, which the release runs in test and production
+└── target/, logs/            [build output] dbt's artifacts and the DuckDB database; dbt clean
+```
+
+## Which film uses which part
+
+| Film | What it shows from here |
+|---|---|
+| *Declare it, then build it* | The names of the sources and of the staging and intermediate models; `learner_key` tested unique and not null |
+| *Start from a question* | The question in Planning's `models/marts/planning/_planning__conceptual.yml`; the slice in each core domain's `_<domain>__conceptual.yml`, with its hand-drawn diagram; the university's map in `models/_shared/`; the decision that a microcredential is a kind of credential; `skills/draft-the-conceptual-model/` for the agent's draft |
+| *What makes it the same one* | The profiling queries in `analyses/`; key sets and `macros/shared/keys.sql` (its header shows the compiled SQL); the staging models; `int_learner_keys`, `int_learner_key_candidates` (one CTE per rule) and `int_learner_keys_matched`; the identity decisions and status map seeds; the unit tests on matching |
+| *One row of what, and when* | `meta.grain`, tested as keys; `analyses/design/fan_out_without_point_in_time.sql`; the version columns; `int_learner_timeline`; the Planning mart (as it was) beside the wallet marts (as it is); `analyses/profiling/profile_late_changes.sql` and `diff_as_was_as_is.sql` |
+| *Promises and proofs* | The decisions on each gap (`docs/decisions.md`), the known limitations on each model and source (`meta.limitations`), and what's still open in `requirements/`; the core YAML (enterprise contract) and the marts YAML (consumer contracts) and `exposures/`; the tests; unit tests on the credit rule; warn and error levels; source freshness |
+| *Built in layers* | The four layers and `docs/conventions.md`; import and logical CTEs; views, tables and the incremental `core_credential`; liquid clustering; the semantic layer, and `macros/planning/near_award.sql`, where the rule and the count are written once |
+| *Who owns what* | `models/_groups.yml`; access and contracts in `dbt_project.yml` (set per folder; a model's YAML holds its grain, columns and tests); what each access level allows, in `docs/conventions.md`; `meta.owner` and `meta.domain`; the domain folders, following TCSI (`docs/conventions.md`, *Domains*); the exposures; the key sets, hashing macro and conventions that every domain shares; for *Across projects*, `examples/planning/` (dbt Cloud only, not run here) |
+| *An agent on the team* | `AGENTS.md`, with the agent's access; `docs/process.md`, the ten steps; `skills/`; the evidence in `analyses/`; the reconciliation test and `scripts/tools/diff_against_main.py`; the CI workflow, and the `state:modified+` command above for CI on changed models |
+| *Written once* | Doc blocks in each domain's folder; each domain's conceptual model generated into its `_<domain>__definitions.md`, the award's definition taken from the business glossary (`source:`, `skills/sync-the-glossary/`), the key sets, written once on each source, into `seeds/reference/shared/key_sets.csv`; each domain's `_<domain>__physical.md` generated from the manifest; `persist_docs`; `core_credential` versions 1 and 2, with a deprecation date, and the wallet's `ref('core_credential', v=2)` |
+| *Scripts became software* | Payroll's export: `mart_finance__casual_pay_paid`, on the claims' core (`core_claim`), with its unit test of the Monday-noon close (approved at 11:59 and at 12:01); `pay_day_for()` on HR's calendar of pay days (`seeds/reference/staff/pay_days.csv`) and the units seed; the bundle, `databricks.yml` and `resources/payroll_export.job.yml`; and, in `examples/scripts-became-software/`, the release workflow and the laptop script it replaced |
+| *A platform that watches itself* | The claims job, `resources/claims.job.yml`, and its second task, `send_hours_to_payroll.py`; the hours to pay, `mart_payroll__hours_to_pay`, with its unit test of the open pay run, its product and the exposure `payroll_system`; the claim in the new form, CL-104287, read by `decimal_hours()` (`macros/hr/decimal_hours.sql`) in `stg_claims_app__claims`, with its unit test of both forms; DEC-CLM-02, the fix, and DEC-CLM-03, the contract first, proposed; and, in `examples/the-night-the-claims-job-failed/`, the failed build, the insight, the patch and the pull request |
+| *More readers than people* | Casual teaching cost's five readers, each an exposure with its owner (`exposures/finance/`): Genie One, Finance's budget pack, the faculties' tutor planning, Finance's pay-day agent and the share outside; the row filter by faculty on `mart_finance__casual_claims` (`macros/finance/faculty_row_filter.sql`); `mart_finance__faculty_totals`, the totals by faculty for the periods Finance has reported (`seeds/reference/finance/reported_periods.csv`); DEC-FIN-06; and, in `examples/more-readers-than-people/`, how each reader reads (Databricks only) |
+
+## What differs between engines
+
+| | DuckDB | Databricks |
+|---|---|---|
+| Sources | The CSV files in `data/`, read with `read_csv` (the `external_location` config, read by dbt-duckdb only) | Ingested tables in `DBT_SOURCES_CATALOG`, or the target's catalog |
+| Hash | `sha256(...)` | `sha2(..., 256)`: the same value |
+| Primary and foreign keys | Left out: DuckDB enforces them, and won't replace a table a foreign key points to | Declared, informational, in Unity Catalog |
+| `not_null` and `check` constraints | Enforced | Enforced |
+| Incremental `core_credential` | `merge` on `credential_key` | `merge` on `credential_key`, liquid clustered by `learner_key` |
+| `persist_docs` | Off | Descriptions pushed to Unity Catalog |
+| Schemas | `dev_staging`, `dev_intermediate`, `dev_core`, `dev_marts`, `dev_reference` | The same suffixes on your target schema |
+| Core tables | One per version: `core_learner_v1`, `core_credential_v2`, ... | The same |
+| Grants | None | On the Planning marts, when the `planning_readers` var names groups |
+| Row filters | None | On Finance's claims, by faculty, when the `faculty_readers` var names groups |
+| Semantic layer | Parsed, validated, and queried with MetricFlow in CI (`scripts/check/check_metric.py`) | Queried through dbt Cloud's Semantic Layer, on plans that include it |
+
+## Engine and dbt workarounds
+
+- **Key constraints on DuckDB.** DuckDB enforces foreign keys, and won't rename or drop a table that another table's foreign key points to, which is how dbt replaces a table on the next build. `macros/adapters/duckdb_constraints.sql` keeps `not_null` and `check` on DuckDB and leaves out the keys; tests check keys on both engines.
+- **`core_credential` version 1 is a table, not a view.** A view can't hold the contract's constraints, and dbt warns. It's built from version 2, so its logic still lives once.
+- **Seeds, and the identity test, are in the `credential_model` group.** A test that refers to a private model must be in that model's group. The singular test sets it in its own `config()`: set in YAML, it was lost on partial parses.
+- **The sources' catalog variable is `DBT_SOURCES_CATALOG`.** dbt Cloud accepts only custom environment variables that start with `DBT_`.
+- **Intermediate models are views, not ephemeral.** Unit tests can then mock their inputs as plain rows, and an agent can query each step.
+- **The CSV files are read as text.** Staging casts every column, so the same SQL works on DuckDB's text columns and Databricks' typed ones.
+- **The semantic layer has two simple metrics.** A ratio metric needs a metric on each side, not a measure; two simple metrics answer the question.
+- **Each version of `core_credential` names its own primary key.** Both tables sit in one schema, and Unity Catalog wants constraint names unique within a schema.
+- **Primary and foreign keys say `warn_unenforced: false`.** They're informational on Databricks on purpose; without it, dbt-databricks warns once per key on every build.
+
+## The data
+
+46 learners, fictional, in four faculties, built to hold the cases the films teach. The
+learner the films follow, Aisha Karimi, arrives three times: `S-20417` in the student system,
+`u-88213` on the learning platform, and `Aisha.K@Mail.example`, with a space before and after, on
+the short-course platform. The
+others include Aisha Rahman, who looks like her; Jordan Lee, whose microcredential was revoked
+without a flag; Priya Nair, whose withdrawal was recorded a week late; and Linh and Minh Nguyen,
+who share an email.
+
+As at census (31 March 2026), 12 learners are within 15 credit points of a graduate certificate:
+Engineering and IT 5, Business 3, Health 2, Arts and Education 2. The census report says the
+same, and `tests/reconciliation/reconcile_planning_with_census_report.sql` checks it on every build. As things
+are now, the answer is 9 (`analyses/validation/diff_as_was_as_is.sql`).
+
+The people behind the roles also come from the student system's archive and three small systems:
+`past_learners` (the student records closed before November 2024), the HR system (staff and their
+contracts), the research system (researchers, projects and who is on them) and the alumni system
+(graduates). Linh Nguyen, who graduated in 2022 and came back to study, is five records in four
+systems: `S-17142` in the archive and `S-20436` in the student system; `E-4417` in HR, which gives
+her a contract each semester to tutor a first-year unit; `R-3082` at the research office; and
+`A-61207` at the alumni office, which knows only her old number. No model reads them yet: the
+person domain's conceptual model (`models/core/person/`) is a draft, and
+`analyses/profiling/profile_keys_held.sql` shows which other system's numbers each record holds.
+
+The graduation list has a slice of its own: 30 graduates and 32 certificates, at the ceremonies of
+December 2025, March, July and December 2026, from the student system's list of graduates
+(`data/student_system/graduations.csv`) and its applications to graduate, on the paper form or in
+the portal (`data/student_system/graduation_applications.csv`), the portal's answers to "Is this
+your name?" (`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart
+from the student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled
+with, award by award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
+don't change. Their names are as the platform received them: no accents before September 2026
+unless the graduate corrected them in the portal, some family names in capitals, one given and
+family name swapped, and family names cut at the student system's 30 characters, such as Beatriz
+Fonseca de Albuquerque Cavalcanti's. Hamid Karimi's double degree is two certificates; Andrés
+Peñaloza (`S-16874`), who graduates in December 2026, was held as Andres Penaloza.
+
+On 12 October 2026 Andrés reported his name in the portal ("This isn't my name"), and two days
+later the registrar's office corrected it in the student system itself, which the list then took.
+Every report, with when it was due, answered and told, is in `mart_graduations__name_reports`; the
+promise of an answer within two working days is tracked there, never failed as a test. João
+Ribeiro's record (`S-16220`), made by the old online form in 2017, is still Joao Ribeiro, and the
+old form's check holds it for the registrar's office (`tests/rules/old_form_names_not_yet_confirmed.sql`).
+
+Since 14 September 2026, each name is put right where it's born (*The hidden factory*): once, in the
+student system, by the registrar's office (DEC-SIS-06), and the nightly file keeps every letter
+(DEC-SIS-07). Each night three checks, owned by Mei Tanaka, look at the student system's graduations
+as staged (`tests/rules/`): a family name exactly 30 characters long, and one in capitals only, each
+hold for the registrar's office, a list to work through (`severity: warn`; on the example rows, which
+keep the names as they were before the office worked through them, two graduates cut at 30 and three
+in capitals); and a night's file of more than 200 names with not one letter outside A to Z stops the
+night's update (`night_file_keeps_every_letter`), so `dbt build` skips the graduation list, which keeps
+the night before's names. The example's nights hold a few names each, so it passes; add
+`--vars '{night_file_names: 0}'` to see it stop. The hours of checking the list by hand, round by
+round, are a seed (`seeds/reference/graduations/hand_check_rounds.csv`) and a table on the scorecard,
+and on Databricks two analyses count the rounds from the query history and the audit log
+(`analyses/quality/rounds_from_the_system_tables.sql`) and follow the printed name back to the
+student system, column by column, in Unity Catalog's lineage (`analyses/quality/printed_name_lineage.sql`).
+
+## A new version, and who it touches
+
+`core_credential` has two versions. The wallet's mart pins version 2 with
+`ref('core_credential', v=2)`; version 1 is deprecated from 31 March 2027. To see who depends on
+the model, through lineage to the exposures:
+
+```sh
+dbt ls --select core_credential+ --resource-type exposure --profiles-dir .
+```
+
+A consumer still on version 1, such as a model that selects
+`credential_key, is_revoked from {{ ref('core_credential', v=1) }}`, gets dbt's warning on every
+parse: version 1 is slated for deprecation, and version 2 is available.
+
+## Its jobs, deployed as a bundle
+
+The project's jobs are files too. `databricks.yml` is a Declarative Automation Bundle (formerly
+Databricks Asset Bundles), and `resources/` holds a file for each job, such as payroll's export,
+which runs every Thursday at 06:00, Sydney time, and the claims job, every Monday at 22:00. Nobody
+deploys them to test or production from a laptop: once a pull request is reviewed and merged, a
+release workflow deploys the same files to test and runs them there, then deploys them to
+production when Noor approves (DEC-PRJ-16).
+`examples/scripts-became-software/` has the workflow, the script the export replaced, and the road
+step by step. To try a change in a copy of your own, its names prefixed and its schedules paused:
+
+```sh
+databricks bundle validate -t dev
+databricks bundle deploy -t dev
+databricks bundle run -t dev payroll_export
+```
+
+## Review and release
+
+Every change reaches production the same way, a person's or an agent's: a pull request; checks on
+what changed, with the impact report; a diff of the data (`scripts/tools/diff_against_main.py`); a
+review for reference by the governance review agent (`skills/review-for-governance/`); the data
+team's review of the code (`CODEOWNERS`); and a release that a second person, a release approver
+the map names, approves (GitHub's teams in `review-and-release/teams.yml`, written by
+`scripts/generate/teams.py` from the map's roles). Owners don't review pull requests: what a word
+means is decided first, in the glossary, and the impact report names who to tell. The release runs
+every night at 23:00, or when a person starts it: it builds `main` in test first, and production
+only once test has passed and a release approver has said yes. It deploys the bundle above, with
+the whole build as a job of its own (`resources/build.job.yml`), signed in to Databricks with no
+secret, as the release's own identity in each environment. `review-and-release/README.md` says what
+each rule stops and where it's set; `examples/class-size/` follows the planning agent's first pull
+request through all of it, as *Every change through review* tells it.

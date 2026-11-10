@@ -1,0 +1,57 @@
+# Decisions about the claims_app source: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: source, name: claims_app, code: CLM}
+
+decisions:
+
+  - id: DEC-CLM-01
+    step: source_reality
+    title: The claims are read where the app writes them
+    text: The project reads the claims app's own table through Unity Catalog, where the app's
+      database is registered as the catalog claims_app. Nothing copies the claims in, by a nightly job or
+      by change capture, so there's no _loaded_at, and freshness reads updated_at, the app's own time of a
+      claim's last change.
+    why: 'Expected: Payroll, Finance and the claims job read the claims as the app wrote them. Found: The
+      app keeps its claims in its own Postgres database on Lakebase, registered in Unity Catalog, with
+      its permissions, lineage and audit; any form kept for analysis is kept by the platform. A copy
+      of ours would add a pipeline to run, a second place to govern, and a delay as it falls behind.'
+    decided_by: Noor, data architect, with HR
+    decided_on: 2026-11-05
+    status: agreed
+    implemented_in: [stg_claims_app__claims]
+    relates_to: [LIM-CLM-01]
+
+  - id: DEC-CLM-02
+    step: operate_and_evolve
+    title: Hours are read in either form the app sends
+    text: Staging reads the claims app's hours as decimal hours in either form they come in, decimal hours
+      as its contract says (1.50) or hours and minutes as tutors say them (1:30), with one macro,
+      decimal_hours(), and a unit test of both forms. Minutes are rounded to the hundredth of an hour. Any
+      other form still fails the build, before payroll reads it.
+    why: 'Expected: Hours in decimal hours, as the claims app''s contract with the platform says. Found: At
+      15:02 on Monday 2 November 2026 a new version of the app, which lets tutors type their hours as they
+      say them, began sending 1:30 where it sent 1.50, with no change to its contract. At 22:03 the claims
+      job failed on the first claim in the new form, CL-104287, and the hours for the pay run of Thursday
+      5 November waited. Genie ZeroOps traced the cause and proposed this fix; Sam reviewed it and opened
+      the pull request, and Noor approved it at 09:05 on Tuesday (examples/the-night-the-claims-job-failed/).'
+    decided_by: Sam, platform team, with Noor, data architect
+    decided_on: 2026-11-03
+    status: agreed
+    implemented_in: [decimal_hours, stg_claims_app__claims]
+    relates_to: [DEC-CLM-03]
+
+  - id: DEC-CLM-03
+    step: operate_and_evolve
+    title: The contract changes first
+    text: A change to what the claims app sends the platform, a field's form, type or meaning, is agreed in
+      its contract first, by HR as the claims' owner, and reaches everyone who reads the claims before the
+      app changes. The contract would then say whether hours may come as 1:30, and DEC-CLM-02 would follow it.
+    why: 'Expected: The claims app''s contract says what each field holds, and everyone who reads the claims
+      works from it. Found: The app''s change of 2 November 2026 was a good one for tutors, but its contract
+      still said decimal hours, so the claims job learned of the change by failing (DEC-CLM-02). The fix
+      mended the night, not its cause. Asked of Ingrid Holm in Sam''s pull request of 3 November 2026.'
+    status: proposed
+    relates_to: [DEC-CLM-02]

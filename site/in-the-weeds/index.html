@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>In the weeds of data crafting · Learning Data</title>
+<meta name="description" content="A technical series for analytics engineers on data modelling with dbt: why a dbt model is a transformation and not the data model, where the model lives, keys and hashing, grain and time, contracts and tests, layers, domains, working with an AI agent responsibly, and one question taken from start to end.">
+<meta property="og:title" content="In the weeds of data crafting · Learning Data"><meta property="og:description" content="A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, in four phases (ask, promise, build, keep), with an AI agent that helps at every step and a person who approves each one."><meta property="og:image" content="https://data.learn-all.org/assets/declare-it-then-build-it-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/in-the-weeds/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/in-the-weeds/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/in-the-weeds/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/declare-it-then-build-it-poster.jpg" alt=""><img src="../assets/start-from-a-question-poster.jpg" alt=""><img src="../assets/what-makes-it-the-same-one-poster.jpg" alt=""><img src="../assets/one-row-of-what-and-when-poster.jpg" alt=""><img src="../assets/promises-and-proofs-poster.jpg" alt=""><img src="../assets/built-in-layers-poster.jpg" alt=""><img src="../assets/who-owns-what-poster.jpg" alt=""><img src="../assets/an-agent-on-the-team-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#analytics-engineering">Analytics engineering</a> › In the weeds of data crafting</p>
+<h1>In the weeds of data crafting</h1>
+<p class="lead">A technical series for analytics engineers: how an agreed data model becomes tables, with dbt, on Databricks. It follows Jun, the university's analytics engineer, from a question to versioned, tested and documented models, in four phases (ask, promise, build, keep), with an AI agent that helps at every step and a person who approves each one.</p>
+</section>
+<nav class="course" aria-label="Course: In the weeds of data crafting"><div class="course-in"><p class="course-t"><small>Series · Analytics engineering</small>In the weeds of data crafting</p><ol class="path" data-store="ld-in-the-weeds" data-labs="9" data-quiz="9" data-series="ld-declare-it-then-build-it ld-start-from-a-question ld-what-makes-it-the-same-one ld-one-row-of-what-and-when ld-promises-and-proofs ld-built-in-layers ld-who-owns-what ld-an-agent-on-the-team ld-written-once ld-end-to-end" data-text='{"watched": "Watched", "films": "{n} of 10 films watched", "labs": "{n} of 9 labs explored", "quiz": "{n} of 9 answered \u00b7 {ok} right"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>The films</b><span>Ten films</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Nine hands-on labs</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>9 real situations</span></a></li>
+</ol></div></nav>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order. It's technical: it shows real code, YAML and Markdown from an example dbt project that runs on dbt Core with DuckDB, in this site's repository, so you can run it yourself. It makes most sense after From words to data.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/declare-it-then-build-it-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 10 · The series and its method</p>
+<h3><a href="declare-it-then-build-it/">Declare it, then build it</a></h3>
+<p>dbt calls every query a model. The data model is the blueprint: declared beside the code, and checked by the tests.</p>
+<p class="meta">5½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-declare-it-then-build-it" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/start-from-a-question-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 2 of 10 · Scope and owners</p>
+<h3><a href="start-from-a-question/">Start from a question</a></h3>
+<p>A model has no edge until a question gives it one. Model only what the question touches, and name who owns each meaning first.</p>
+<p class="meta">5 min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-start-from-a-question" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/what-makes-it-the-same-one-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 3 of 10 · Identity and keys</p>
+<h3><a href="what-makes-it-the-same-one/">What makes it the same one</a></h3>
+<p>One learner, three keys, and a look-alike. Rules match most of them; a person decides the rest, and the decision becomes data and a test.</p>
+<p class="meta">4½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-what-makes-it-the-same-one" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/one-row-of-what-and-when-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 4 of 10 · Grain and time</p>
+<h3><a href="one-row-of-what-and-when/">One row of what, and when</a></h3>
+<p>Twelve on census day, nine today: both right. Say what one row is and which day it describes, before any SQL, and test both.</p>
+<p class="meta">5 min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-one-row-of-what-and-when" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/promises-and-proofs-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 5 of 10 · Contracts and tests</p>
+<h3><a href="promises-and-proofs/">Promises and proofs</a></h3>
+<p>Every gap gets a decision. Promise it in a contract; prove it with a test, written before the code it checks.</p>
+<p class="meta">5½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-promises-and-proofs" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/built-in-layers-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 6 of 10 · Layers and CTEs</p>
+<h3><a href="built-in-layers/">Built in layers</a></h3>
+<p>Four layers turn the tests green. Each layer has one job; each CTE, one step; and the rule is written once.</p>
+<p class="meta">4½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-built-in-layers" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/who-owns-what-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 7 of 10 · Domains and ownership</p>
+<h3><a href="who-owns-what/">Who owns what</a></h3>
+<p>Each fact's meaning has an owner. Owners publish a public, versioned core; consumers build on it, never on each other's marts.</p>
+<p class="meta">5½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-who-owns-what" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/an-agent-on-the-team-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 8 of 10 · Agents and review</p>
+<h3><a href="an-agent-on-the-team/">An agent on the team</a></h3>
+<p>An AI agent drafts in minutes. It follows rules written in the project, shows the query behind every claim, never weakens a test, and people approve.</p>
+<p class="meta">5½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-an-agent-on-the-team" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/written-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 9 of 10 · Documentation and versions</p>
+<h3><a href="written-once/">Written once</a></h3>
+<p>Every copy of a fact is a chance to drift. One home per fact, everything else generated, and a breaking change arrives as a new version with a date.</p>
+<p class="meta">5½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-written-once" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/end-to-end-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 10 of 10 · The whole process</p>
+<h3><a href="end-to-end/">End to end</a></h3>
+<p>One question, ten steps, ten commits. Every file in its place, for as long as it's needed.</p>
+<p class="meta">8½ min · Pause and think · In the weeds of data crafting</p>
+<p class="tc-progress" data-progress="ld-end-to-end" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Take it apart, then make the call</h2><p>Nine hands-on labs for the whole series, one for each film's main idea, then 9 situations from the films. Your progress stays in this browser.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Take it apart: 9 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 9 situations</a></p>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">One thread: the credential, built</h2><p>From words to data ends with version 3 of the credential model approved. This series builds it, from one question asked by planning: how many learners are within 15 credit points of a graduate certificate, as at census date? It needs credentials from three systems, one learner keyed three ways, credit that counts towards awards, and history.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Every film opens in the past</h2></div></div>
+<div class="prose"><table><thead><tr><th>Film</th><th>Opens with</th><th>Still true today</th></tr></thead><tbody>
+<tr><td>Declare it, then build it</td><td>Blueprints, the 1870s</td><td>A plan says exactly what the building will be, and lays no brick.</td></tr>
+<tr><td>Start from a question</td><td>John Snow's cholera map, Soho, 1854</td><td>Show only what the question needs.</td></tr>
+<tr><td>What makes it the same one</td><td>Bertillon's measurements, Paris, the 1880s</td><td>Looking alike isn't being the same.</td></tr>
+<tr><td>One row of what, and when</td><td>The United States census of 1 June 1890</td><td>One card per person, as at one day.</td></tr>
+<tr><td>Promises and proofs</td><td>The hallmark, from 1300</td><td>Tested before it's marked; then trusted without testing again.</td></tr>
+<tr><td>Built in layers</td><td>Escoffier's kitchen brigade, the 1890s</td><td>Each station has one job, and every plate is checked at the pass.</td></tr>
+<tr><td>Who owns what</td><td>The Torrens title, South Australia, 1858</td><td>The register is the title: its owner changes it, and everyone relies on it.</td></tr>
+<tr><td>An agent on the team</td><td>The Nautical Almanac, 1766</td><td>Computed twice, and compared, before anything is printed.</td></tr>
+<tr><td>Written once</td><td>One tuning fork for France, 1859</td><td>Kept in one place, and everything else tuned from it.</td></tr>
+<tr><td>End to end</td><td>York Minster's tracing floor, the 1300s</td><td>The drawings were for the work; the windows are what stayed.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Who builds, who decides</h2><p>Cyan outlines are technical; gold outlines are business.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Builds the model</h3><p>Jun, analytics engineer, the series' guide</p></div>
+<div class="card tech"><h3>Owns the model</h3><p>Noor, data architect</p></div>
+<div class="card biz"><h3>Owns the words</h3><p>Mei, registrar's office</p></div>
+<div class="card biz"><h3>Asks the questions</h3><p>Planning, the learner's wallet app, and Finance</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js"></script>
+<script src="../assets/ambient.js"></script>
+</body>
+</html>

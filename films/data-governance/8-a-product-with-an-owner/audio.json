@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/a-product-with-an-owner/soundtrack.mp3",
+      "size": 5047997,
+      "sha256": "137a383fe453c889a7341c5718ed79925c94fd30003148443e4fe648b1b076b6",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-a-product-with-an-owner-2e7dc6a99ce99958b329/137a383fe453c889a7341c5718ed79925c94fd30003148443e4fe648b1b076b6.mp3"
+    }
+  ]
+}

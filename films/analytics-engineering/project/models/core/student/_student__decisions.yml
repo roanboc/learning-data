@@ -1,0 +1,113 @@
+# Decisions about the student domain: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: domain, name: student, code: STU}
+
+decisions:
+
+  - id: DEC-STU-01
+    step: scope
+    title: A microcredential is a kind of credential
+    text: A microcredential is a kind of credential, not an entity of its own. So is a badge.
+    why: Same identity (the issuer's identifier) and the same lifecycle (issued, maybe revoked). Only the
+      credit points differ.
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-02
+    status: agreed
+
+  - id: DEC-STU-02
+    step: scope
+    title: A certificate of attendance isn't a credential
+    text: A certificate of attendance isn't a credential.
+    why: It says someone was there, not what they can do.
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-02
+    status: agreed
+    relates_to: [DEC-SC-03]
+
+  - id: DEC-STU-03
+    step: source_reality
+    title: The learner's business key is the student ID
+    text: The learner's business key is the student ID, which the registrar's office issues. A learner the
+      student system doesn't know keeps the key of the first system that knew them.
+    why: The student system is the system of record for learners. Short-course customers and platform-only
+      learners still need a key.
+    decided_by: Mei Tanaka and Noor
+    decided_on: 2026-10-05
+    status: agreed
+    relates_to: [DEC-PRJ-01, LIM-STU-02]
+
+  - id: DEC-STU-04
+    step: source_reality
+    title: Keys are matched by rules; a person's decision beats them
+    text: Keys are matched by rules, most trusted first. A person's recorded decision beats every rule,
+      and a decision that two keys are different people stops any rule from matching them.
+    why: An email two people share, or a student ID typed wrong, would merge two learners. Some matches
+      only a person can make.
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-06
+    status: agreed
+    implemented_in: [int_learner_key_candidates, int_learner_keys_matched, learner_identity_decisions]
+    relates_to: [DEC-SIS-01, GAP-LMS-02]
+
+  - id: DEC-STU-05
+    step: scope
+    title: Credit counts from release or issue, every change a version
+    text: Credit counts from the day a result is released or a credential issued, until it's amended or
+      revoked; every change is a new version.
+    why: '"As at census" needs the credit held on that day, not today.'
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-08
+    status: agreed
+    implemented_in: [int_credit_towards_award]
+
+  - id: DEC-STU-06
+    step: scope
+    title: A credential keeps its whole life
+    text: 'A credential keeps its whole life: issued on a date, revoked on a date, read from every version
+      the source kept. A revoked credential stays, marked revoked.'
+    why: '"As at census" needs what counted then, even if it was revoked since; the wallet shows a revoked
+      credential as revoked, not gone.'
+    decided_by: Mei Tanaka, registrar's office
+    decided_on: 2026-10-08
+    status: agreed
+    implemented_in: [int_credentials_unioned, core_credential]
+
+  - id: DEC-STU-07
+    step: operate_and_evolve
+    title: core_credential version 2 replaces is_revoked with status
+    text: core_credential version 2 replaces is_revoked with status (valid, expired or revoked). Version
+      1 stays until 31 March 2027, built from version 2.
+    why: A credential can also expire, and a true/false can't say so. Consumers get time to move; the exposures
+      say who to tell.
+    decided_by: Noor and Mei Tanaka
+    decided_on: 2026-10-13
+    status: agreed
+    informed: [Wallet app team]
+    implemented_in: [core_credential]
+    relates_to: [DEC-PRJ-02, LIM-STU-06]
+
+  - id: DEC-STU-08
+    step: build
+    title: core_credential version 2 is incremental, merged on credential_key
+    text: core_credential version 2 is incremental, merged on credential_key, on both engines.
+    why: One strategy, merge, that both engines support.
+    status: agreed
+    implemented_in: [core_credential]
+    relates_to: [LIM-STU-05]
+
+  - id: DEC-STU-09
+    step: gaps_and_contracts
+    title: One canonical status set, mapped from each system's codes
+    text: One canonical set, mapped in seeds/reference/student/status_map.csv, owned by the registrar's
+      office.
+    why: 'Expected: A status means the same thing everywhere. Found: Three code sets: ENR, LOA, WD, CMP;
+      active, inactive; 1, 0.'
+    decided_by: Mei Tanaka, registrar's office
+    status: agreed
+    sources: [student_system, learning_platform, short_courses]
+    evidence: [analyses/profiling/profile_value_sets.sql]
+    implemented_in: [int_learner_timeline, status_map]
+    was: GAP-STU-01

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/network-storage-and-keys/soundtrack.mp3",
+      "size": 7944820,
+      "sha256": "e27da64a3623b88e370e989dee322c4cd17bef7b7060f4a1e8dd9d4a08dd264b",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-network-storage-and-keys-81b9a395c44f585be0a4/e27da64a3623b88e370e989dee322c4cd17bef7b7060f4a1e8dd9d4a08dd264b.mp3"
+    }
+  ]
+}

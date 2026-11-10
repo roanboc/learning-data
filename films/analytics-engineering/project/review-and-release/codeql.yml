@@ -1,0 +1,44 @@
+# Code scanning with CodeQL, as From a branch to production shows it: on every pull request to main, and on main, it
+# reads the project's Python and its GitHub Actions workflows, and what it finds shows on the pull request as a check,
+# beside the tests. In the project's own repository this file is .github/workflows/codeql.yml; here it's an example, and
+# GitHub runs nothing from it.
+#
+# For the workflows, its query "Unpinned tag for a non-immutable Action or reusable workflow" (actions/unpinned-tag)
+# flags an action named by a tag or a branch, such as databricks/setup-cli@main, when its owner isn't one GitHub trusts
+# (GitHub's own actions, such as actions/checkout, are left out). The release pins every action to a commit all the
+# same, GitHub's own too: a tag of GitHub's can be moved as well. This file pins its own actions the same way, and
+# Dependabot keeps the pins current (dependabot.yml).
+name: CodeQL
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"   # every Monday as well, so new queries read code that hasn't changed
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read            # in a private repository, to read the workflow runs it reports on
+      security-events: write   # to send what it finds to the repository's code scanning
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python, actions]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: github/codeql-action/init@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          languages: ${{ matrix.language }}
+
+      - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+        with:
+          category: /language:${{ matrix.language }}

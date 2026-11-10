@@ -1,0 +1,12 @@
+{
+  "key": "both-at-once",
+  "title": "Both at once",
+  "sub": "From words to data: hybrid databases write and read in one place. They remove the copy, not the model.",
+  "howto": "Blue is writing, green is reading; magenta marks data flowing back to the app.",
+  "src": [
+    "both.js",
+    "scenes.js"
+  ],
+  "poster": ["till", "ritty", 4.7],
+  "say": []
+}

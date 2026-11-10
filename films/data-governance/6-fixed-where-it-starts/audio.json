@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/fixed-where-it-starts/soundtrack.mp3",
+      "size": 5042512,
+      "sha256": "e08f1ee19a0491259f15b28a0ecd8622171746df37ef0999f2984948ac566477",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e08f1ee19a0491259f15b28a0ecd8622171746df37ef0999f2984948ac566477.mp3"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Who does what, end to end, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (request, roles, product), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "request":{q:"Mei escribe la definición decidida una sola vez, en el mapa de Noor. ¿Por qué nadie tiene que cambiar la copia del equipo de datos, los tableros ni el asistente?",
+    opts:[{t:"El mapa la publica en el glosario, y el agente la copia a cada lugar que nombra el registro de quién usa qué, cuando Mei aprueba.",near:true},{t:"El equipo de datos vuelve a escribir cada copia el día en que se decide la definición, así coinciden esa tarde."},{t:"El mapa la publica en el glosario, y cada copia sigue al glosario, en un solo sentido: cada una cambia sola y dice de dónde viene.",ok:true}],
+    why:"Escrita una sola vez, en el mapa, y publicada en el glosario, la definición llega a cada copia por un solo camino, en un solo sentido. Nadie la vuelve a escribir, así que ninguna copia se desvía, y cada una dice de dónde viene. Si mañana cambiara una definición donde trabajas, ¿cuántos lugares habría que cambiar a mano?"},
+  "roles":{q:"El agente ocupa el rol del revisor. ¿Qué puede hacer, y qué no?",
+    opts:[{t:"Puede cambiar el glosario, siempre que el responsable revise cada cambio a la mañana siguiente."},{t:"Puede leer el glosario y quién usa qué, y anotar en el borrador qué falta y qué toca. No puede decidir, ni cambiar el glosario.",ok:true},{t:"Puede leer el glosario y quién usa qué, y decidir por sí mismo los cambios simples, dejando los difíciles al dueño.",near:true}],
+    why:"Sus atribuciones están por escrito en el mapa, así que todos pueden ver qué puede hacer y qué no: lee y escribe su nota, y las personas deciden; aquí, la jefa de registro, como dueña. Quien ocupa un rol es un actor, y los actores van y vienen; el rol y sus pasos se quedan. ¿Qué controles de tu trabajo podría hacer un agente, y qué decisiones deberían quedar siempre en manos de una persona?"},
+  "product":{q:"¿Por qué el glosario enumera lo que cambió cada semana, y cuenta quién lee cada término?",
+    opts:[{t:"Sus usuarios dependen de él, como de un diccionario, así que necesitan ver lo nuevo; y los conteos muestran qué términos no lee nadie, para retirarlos.",ok:true},{t:"Para mostrar qué responsables trabajan más, así el consejo ve dónde hace falta más ayuda."},{t:"Sus usuarios dependen de él, así que necesitan ver lo nuevo; y los conteos muestran qué términos se leen más, para que sus dueños los revisen primero.",near:true}],
+    why:"Gestionado como un producto, el glosario tiene un dueño, usuarios y una promesa. La lista de la semana muestra a todos lo nuevo, como la actualización anual del diccionario, y los conteos muestran lo que ya nadie usa: este año, se retiran nueve términos. ¿Qué hay en las listas compartidas de tu equipo que ya nadie lee?"}
+  }}};

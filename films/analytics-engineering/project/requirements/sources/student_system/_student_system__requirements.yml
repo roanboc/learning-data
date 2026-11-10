@@ -1,0 +1,20 @@
+# What's still open about the student_system source: watched until it's done, then deleted.
+# The schema is in requirements/README.md.
+
+scope: {kind: source, name: student_system, code: SIS}
+
+items:
+
+  - id: GAP-SIS-03
+    type: gap
+    step: gaps_and_contracts
+    title: No conferral record
+    expectation: The student system says when an award was conferred.
+    reality: It has no conferral record. The student's status turns completed.
+    resolution: [fix_at_source]
+    text: A conferral record, requested from the registrar's office.
+    owner: Mei Tanaka, registrar's office
+    status: in_progress
+    done_when: The student system sends a conferral date; int_credentials_unioned reads it, and DEC-SIS-03's
+      rule is retired.
+    relates_to: [DEC-SIS-03]

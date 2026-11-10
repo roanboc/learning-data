@@ -1,0 +1,44 @@
+[
+  {
+    "name": "The hidden factory",
+    "key": "the-hidden-factory-en",
+    "dir": "films/quality-as-a-habit/1-the-hidden-factory/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/the-hidden-factory/film.js",
+    "video": "dist/the-hidden-factory.mp4",
+    "file": "the-hidden-factory.mp4",
+    "captions": [
+      [
+        "films/quality-as-a-habit/1-the-hidden-factory/captions/en.srt",
+        "the-hidden-factory.en.srt"
+      ],
+      [
+        "films/quality-as-a-habit/1-the-hidden-factory/captions/es.srt",
+        "the-hidden-factory.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/quality-as-a-habit/1-the-hidden-factory/source",
+      ":(exclude)films/quality-as-a-habit/1-the-hidden-factory/source/src/i18n/es/captions.js",
+      "films/fit-for-use/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 534,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.3,
+      "status": "Drawn to the rule"
+    }
+  }
+]

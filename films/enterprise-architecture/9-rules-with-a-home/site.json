@@ -1,0 +1,31 @@
+{
+  "kicker": "Objects, owners and rules",
+  "kicker_es": "Objetos, dueños y reglas",
+  "title_es": "Reglas con un hogar",
+  "h1": "Rules with a home: each rule written once, with an owner",
+  "h1_es": "Reglas con un hogar: cada regla escrita una vez, con un responsable",
+  "lead": "A bill goes wrong on Tomás's first day. The rule that should have corrected it lives in a nightly script, and is written four more ways elsewhere. Each rule gets one home on the map, at its step, with an owner and a reason, and tests or a tracking table made from it.",
+  "lead_es": "Una factura sale mal el primer día de Tomás. La regla que debía corregirla vive en un script nocturno, y está escrita de otras cuatro maneras. Cada regla recibe un hogar en el mapa, en su paso, con un responsable y una razón, y pruebas o una tabla de seguimiento hechas a partir de ella.",
+  "description": "A film about where a rule belongs: written once, in the business's words, about the concepts it governs; split at the edge between two domains into a rule on each side, joined by what crosses; given an owner and a reason; attached to the step of a value stream where it applies, whose service level sets what to expect of the data; drawn in ArchiMate 4 as a requirement, influenced by its reason, realised by its step and associated with its owner and data; with tests generated from it, one way, when it's about the data (a dbt test, a data contract's quality rule, a SHACL shape), and a tracking table its owner's team reviews when it's about what the business does; and, written this way, generally an ontology, ready for OWL.",
+  "description_es": "Una película sobre dónde va una regla: escrita una vez, con las palabras del negocio, sobre los conceptos que rige; dividida en el borde entre dos dominios en una regla a cada lado, unidas por lo que cruza; con un responsable y una razón; adjunta al paso del flujo de valor donde se aplica, cuyo nivel de servicio dice qué esperar de los datos; dibujada en ArchiMate 4 como un requisito, influido por su razón, realizado por su paso y asociado a su responsable y sus datos; con pruebas generadas a partir de ella, en un solo sentido, cuando trata de los datos (una prueba dbt, la regla de calidad de un contrato de datos, una forma SHACL), y una tabla de seguimiento que revisa el equipo del responsable cuando trata de lo que hace el negocio; y, escrita así, en general una ontología, lista para OWL.",
+  "card": "A bill never corrected, and one rule written five ways. Each rule written once, with an owner and a reason.",
+  "card_es": "Una factura nunca corregida, y una regla escrita de cinco maneras. Cada regla escrita una vez, con un responsable y una razón.",
+  "chapters_es": {
+    "tartu": "Solo una vez",
+    "bill": "La factura del primer día",
+    "script": "Una regla en el muro",
+    "five": "Cinco lugares, ningún hogar",
+    "split": "Dos reglas, no una",
+    "why": "De dónde viene una regla",
+    "about": "De qué trata una regla",
+    "expect": "Qué espera el proceso",
+    "std": "Una regla en ArchiMate 4",
+    "checks": "Probar los datos, seguir al negocio",
+    "onto": "En general, una ontología",
+    "end": "De vuelta en Tartu"
+  },
+  "next_h": "You've seen where each rule belongs. More films in the series are on the way.",
+  "next_h_es": "Viste dónde va cada regla. Vienen más películas de la serie.",
+  "past": ["A birth in Tartu, Estonia, today", "Each fact has one home and one owner, so it's asked for once."],
+  "past_es": ["Un nacimiento en Tartu, Estonia, hoy", "Cada hecho tiene un solo hogar y un solo responsable, así que se pide una vez."]
+}

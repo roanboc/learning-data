@@ -1,0 +1,23 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models; only a canonical table has an enterprise contract, written by data governance.
+
+name: hours_to_pay
+title: The hours to pay
+owner: HR
+domain: staff
+status: active
+version: 1.0.0
+description:
+  purpose: Each claim approved for the coming pay day, with the hours and pay it gives, for the payroll
+    system to pay on the Thursday.
+  usage: For the payroll system only, which the university buys and doesn't run on the platform. Sent at
+    22:00 on the Monday before each pay day by the claims job (resources/claims.job.yml), only once its
+    tests pass; payroll needs it by noon on the Tuesday. staff_bk is direct personal data, and the rows are
+    people's pay.
+outputs:
+  - {model: mart_payroll__hours_to_pay}
+service_levels:
+  - {property: latency, value: 14, unit: h, description: "Sent at 22:00 on the Monday before each pay day; payroll needs it by noon on the Tuesday."}
+support:
+  - {channel: payroll-data, tool: email, url: "mailto:hr@uni.example", scope: issues}

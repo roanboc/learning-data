@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Day one, in English. Keep the keys in step with think.es.js.
+   The film stops at the end of three chapters (pieces, looking, data), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). A question's "stop" is the lab of the series it opens, on the
+   series' labs page (the page's .player data-labs is "../labs/"); a question without one has no lab link. */
+window.LEARN={lang:"en",
+think:{ui:{toggle:"Pause and think",kicker:"Pause and think",cont:"Continue",skip:"Skip",lab:"Try the idea in a lab",off:"Turn off pauses",right:"Right.",wrong:"Not quite.",start:"Play with pauses to think",answer:"Answer:",watch:"Watch this part"},
+  qs:{
+  "pieces":{stop:"pile",q:"Tomás has an org chart, a list of 140 systems and a process manual. Why doesn't he understand the utility yet?",
+    opts:[{t:"Each is true, but each is a piece cut from a different puzzle.",ok:true},{t:"Each is a piece of one puzzle, but a few of the pieces are missing.",near:true},{t:"Each is out of date, so none of them shows the utility as it is now."}],
+    why:"The org chart shows who reports to whom; the system list, what was bought. None of it says what the utility must be able to do, or why. Think of your first week somewhere new: what were you given, and what did it leave out?"},
+  "looking":{stop:"pile",q:"Where should a map of the organisation start?",
+    opts:[{t:"With what it does, its capabilities: each layer above is worked out from the ones below.",near:true},{t:"With the systems, since they're the easiest to list and everything else runs on them."},{t:"With why it exists, and for whom: each layer below is worked out from the one above.",ok:true}],
+    why:"Start from the bottom, and you can describe every system perfectly and still not know what any of them is for. Most handovers start with the system list: what goes wrong when you start there?"},
+  "data":{stop:"rule",q:"“An estimated meter reading stands only until the next actual reading.” What does the map give this rule?",
+    opts:[{t:"A test that runs every night and flags readings that stand too long."},{t:"A home: the process that creates the data, its owner, and the goal it serves.",ok:true},{t:"A home: the system that stores the reading, and the team that runs it.",near:true}],
+    why:"Every data rule is a claim about the organisation. Without the map, a rule is a guess, and when it's wrong, nobody knows who should fix it. Pick a data rule you know: could you name its process, its owner and its goal?"}
+  }}};

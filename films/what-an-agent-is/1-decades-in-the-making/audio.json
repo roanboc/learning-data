@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/decades-in-the-making/soundtrack.es.mp3",
+      "size": 5399083,
+      "sha256": "e557ec5ee80b5956cce025dec7feecd5a3a1a3ee9306b540d65105097ce247ea",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e557ec5ee80b5956cce025dec7feecd5a3a1a3ee9306b540d65105097ce247ea.mp3"
+    },
+    {
+      "path": "site/assets/decades-in-the-making/soundtrack.mp3",
+      "size": 5399083,
+      "sha256": "dd8ba6fba31fe7ac6dbbb92a1f3ad072224c87cdc9eac1f67dc54b76dc4a3868",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/dd8ba6fba31fe7ac6dbbb92a1f3ad072224c87cdc9eac1f67dc54b76dc4a3868.mp3"
+    }
+  ]
+}

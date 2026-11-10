@@ -1,0 +1,46 @@
+{
+  "key": "saying-no",
+  "title": "Saying no, and what instead",
+  "sub": "Film 3 of Working with people, in Leading data people: when more is asked than a team can do well. Ask what the date is for, put the trade-off where everyone can see it, offer what you can do well, and when, let the people who decide choose, and keep your word.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans (the dates offered and agreed), orange is data (the forecast and the rooms' data), green is something done or kept, and amber a cost or a risk (the weeks that don't fit).",
+  "src": [
+    "sn_aral.js",
+    "sn_uni.js",
+    "sn_scenes.js"
+  ],
+  "poster": [
+    "offer",
+    "october",
+    4.4
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bKazakhstan\\b",
+      "Kazakstan"
+    ],
+    [
+      "\\bSyr Darya\\b",
+      "Seer Darya"
+    ],
+    [
+      "\\bUry\\b",
+      "Yuri"
+    ]
+  ],
+  "story": [
+    "aral"
+  ],
+  "urgent": []
+}

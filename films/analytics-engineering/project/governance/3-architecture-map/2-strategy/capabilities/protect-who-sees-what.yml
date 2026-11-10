@@ -1,0 +1,13 @@
+name: protect who sees what
+kind: capability
+definition: Personal data is classified where it's kept, and seen only by those with a purpose, for a
+  time.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: govern data
+heat: green
+evidence: 'every column of a shared model classified, tagged and masked from its class, one policy for each
+  class (project: governance.py, DEC-PRJ-13, DEC-PRJ-17); access asked for with a purpose and an end
+  date, reviewed each quarter, and a check every morning for a personal column with no class (project:
+  databricks-governance.md sections 8, 17 and 18, morning_check.sql) · 10 Nov 2026'
+status: confirmed

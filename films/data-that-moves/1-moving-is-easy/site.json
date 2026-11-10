@@ -1,0 +1,104 @@
+{
+  "kicker": "Moving data today",
+  "kicker_es": "Mover datos hoy",
+  "title_es": "Mover es fácil, acordar es el trabajo",
+  "h1": "Moving is easy, agreeing is the work: at each interface",
+  "h1_es": "Mover es fácil, acordar es el trabajo: en cada interfaz",
+  "lead": "HR's contracts once reached Finance as a file each teaching period, and Rohan Desai's team spent two days working out what each column meant. Now a connector, a query in place and a mirror move them with little work. What's left is the contract Ingrid Holm and Noor Rahman agree.",
+  "lead_es": "Los contratos de RR. HH. llegaban a Finanzas como un archivo cada periodo lectivo, y el equipo de Rohan Desai tardaba dos días en entender cada columna. Hoy un conector, una consulta en su sitio y un espejo los mueven con poco trabajo. Queda el contrato que acuerdan Ingrid Holm y Noor Rahman.",
+  "description": "A film about moving data between applications today, the first of Data that moves and of Modern data basics: at Albury, from 1883 to 1962, two colonies' railways met on two gauges, and every passenger and every bale of wool changed trains there, until one agreed gauge let them run straight through; at the university, HR's contracts once reached Finance as a file each teaching period, and Rohan Desai's team spent two days working out what each column meant; Linh Nguyen's tutoring contract, T-26188, arrives as an event when HR records it and again in the whole file each teaching period; five ways now move data with little work (a managed connector, a query in place, a mirror into Microsoft Fabric, a share and an API); and what's left for people is the contract at each interface, which Ingrid Holm, who owns HR's data, and Noor Rahman, the data architect, agree in the Open Data Contract Standard: what each field means (CON is continuing, not contract), who answers for it, what a deletion means, and what's personal; Jun Park's tests check every row against it. Light on purpose, it hands over to the official docs.",
+  "description_es": "Una película sobre cómo se mueven hoy los datos entre aplicaciones, la primera de Datos que se mueven y de Lo básico de los datos modernos: en Albury, de 1883 a 1962, los ferrocarriles de dos colonias se encontraban con dos anchos de vía, y cada pasajero y cada fardo de lana cambiaba de tren ahí, hasta que un solo ancho acordado los dejó pasar sin detenerse; en la universidad, los contratos de RR. HH. llegaban a Finanzas como un archivo cada periodo lectivo, y el equipo de Rohan Desai pasaba dos días averiguando qué significaba cada columna; el contrato de tutora de Linh Nguyen, T-26188, llega como un evento cuando RR. HH. lo registra, y otra vez en el archivo completo de cada periodo lectivo; cinco formas mueven hoy los datos con poco trabajo (un conector gestionado, una consulta en su sitio, un espejo en Microsoft Fabric, compartir y una API); y lo que les queda a las personas es el contrato en cada interfaz, que Ingrid Holm, dueña de los datos de RR. HH., y Noor Rahman, la arquitecta de datos, acuerdan en el Open Data Contract Standard: qué significa cada campo (CON es continuo, no contrato), quién responde por él, qué significa un borrado y qué es personal; las pruebas de Jun Park revisan cada fila contra él. Ligera a propósito, deja lo demás a la documentación oficial.",
+  "card": "HR's contracts once took Finance two days to read. Tools move them now; the work left is agreeing what each field means.",
+  "card_es": "Finanzas tardaba dos días en leer los contratos de RR. HH. Hoy los mueven las herramientas; queda acordar qué significa cada campo.",
+  "chapters_es": {
+    "gauge": "Un cambio de ancho de vía",
+    "promise": "Lo que se facilitó",
+    "ways": "Cinco formas de moverlos",
+    "contract": "El trabajo que queda",
+    "agreed": "Un solo ancho"
+  },
+  "past": [
+    "Albury, New South Wales, 1883 to 1962: two gauges at one station",
+    "The trains always ran; what took 79 years was agreeing the gauge. Once it was agreed, freight and people passed straight through."
+  ],
+  "past_es": [
+    "Albury, Nueva Gales del Sur, de 1883 a 1962: dos anchos de vía en una estación",
+    "Los trenes siempre circularon; lo que tomó 79 años fue acordar el ancho. Una vez acordado, la carga y las personas pasaron sin detenerse."
+  ],
+  "next_h": "You've seen five ways to move data with little work, and the contract that's left for people. Next: how fresh each kind of data must be, and where it lives.",
+  "next_h_es": "Viste cinco formas de mover datos con poco trabajo, y el contrato que les queda a las personas. Después: cuán frescos deben estar los datos, y dónde viven.",
+  "repo": {
+    "ways": [
+      "sources/hr_system/_hr_system__sources.yml",
+      "data/hr_system/contracts.csv"
+    ],
+    "contract": [
+      "examples/hr-system-interface/hr_system.yaml",
+      "models/staging/hr_system/_hr_system__models.yml"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "This film is light on purpose: it gives the architectural advice and leaves the depth to the official docs, which stay up to date as the tools change. Checked on 5 November 2026.",
+    "p_es": "Esta película es ligera a propósito: da el consejo de arquitectura y deja lo profundo a la documentación oficial, que se mantiene al día a medida que cambian las herramientas. Revisada el 5 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Managed connectors: Lakeflow Connect",
+        "title_es": "Conectores gestionados: Lakeflow Connect",
+        "line": "How a managed connector brings a system's data in, reads only what changed, and keeps its place.",
+        "line_es": "Cómo un conector gestionado trae los datos de un sistema, lee solo lo que cambió y no pierde su lugar.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/ingestion/lakeflow-connect/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/ingestion/lakeflow-connect/"
+      },
+      {
+        "title": "Queries in place: Lakehouse Federation",
+        "title_es": "Consultas en su sitio: Lakehouse Federation",
+        "line": "Read another system's data where it is, without copying it in, and when to use a connector instead.",
+        "line_es": "Leer los datos de otro sistema donde están, sin copiarlos, y cuándo usar un conector en su lugar.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/query-federation/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/query-federation/"
+      },
+      {
+        "title": "Mirrors: Unity Catalog in Microsoft Fabric",
+        "title_es": "Espejos: Unity Catalog en Microsoft Fabric",
+        "line": "Show the platform's catalog in Fabric, read where its tables live, without copying them out.",
+        "line_es": "Mostrar el catálogo de la plataforma en Fabric, leído donde viven sus tablas, sin copiarlas.",
+        "href": "https://learn.microsoft.com/en-us/fabric/mirroring/azure-databricks",
+        "href_es": "https://learn.microsoft.com/es-es/fabric/mirroring/azure-databricks"
+      },
+      {
+        "title": "Shares: OpenSharing",
+        "title_es": "Compartir: OpenSharing (antes Delta Sharing)",
+        "line": "Give a partner data where it lives, with no copy to keep in step. Formerly Delta Sharing.",
+        "line_es": "Darle a un socio los datos donde viven, sin una copia que mantener al día.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/delta-sharing/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/delta-sharing/"
+      },
+      {
+        "title": "The Open Data Contract Standard",
+        "title_es": "El Open Data Contract Standard (en inglés)",
+        "line": "The standard the HR system's contract is written in: what each field means, who answers for it, and its checks.",
+        "line_es": "El estándar en que está escrito el contrato del sistema de RR. HH.: qué significa cada campo, quién responde por él y sus controles.",
+        "href": "https://bitol-io.github.io/open-data-contract-standard/latest/",
+        "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/"
+      },
+      {
+        "title": "Enterprise Integration Patterns",
+        "title_es": "Enterprise Integration Patterns (en inglés)",
+        "line": "Gregor Hohpe and Bobby Woolf's names for events, messages and batches, and the ways systems meet.",
+        "line_es": "Los nombres de Gregor Hohpe y Bobby Woolf para eventos, mensajes y lotes, y las formas en que se unen los sistemas.",
+        "href": "https://www.enterpriseintegrationpatterns.com/",
+        "href_es": "https://www.enterpriseintegrationpatterns.com/"
+      },
+      {
+        "title": "dbt's data tests",
+        "title_es": "Las pruebas de datos de dbt (en inglés)",
+        "line": "Check every row against what was agreed, as Jun's tests check the HR system's contracts.",
+        "line_es": "Revisar cada fila contra lo acordado, como las pruebas de Jun revisan los contratos del sistema de RR. HH.",
+        "href": "https://docs.getdbt.com/docs/build/data-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/data-tests"
+      }
+    ]
+  }
+}

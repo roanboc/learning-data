@@ -1,0 +1,195 @@
+1
+00:00:01,600 --> 00:00:05,148
+It's 10:05 on a Tuesday, in the middle of admissions season.
+
+2
+00:00:05,848 --> 00:00:10,543
+The planning committee is deciding how many first-year places to offer next year.
+
+3
+00:00:11,243 --> 00:00:16,532
+On the screen, one number: applications for next year, up 38% overnight.
+
+4
+00:00:17,232 --> 00:00:25,580
+It's good news, and nobody questions it. The committee approves six hundred extra places. Rooms are booked, and tutors will be hired.
+
+5
+00:00:26,280 --> 00:00:29,608
+This is one version of Tuesday. Let's go back to Monday.
+
+6
+00:00:37,408 --> 00:00:41,512
+Sam, the data engineer, looks after the platform behind that number.
+
+7
+00:00:42,212 --> 00:00:49,728
+Through Sam's screen, it's a gold painting: applications for next year. On Monday, 8,200 so far.
+
+8
+00:00:50,428 --> 00:00:56,726
+Beside it sits its contract card. One line matters this week: how much the total may change overnight.
+
+9
+00:00:57,926 --> 00:01:06,680
+Leila, who manages the admissions office, helped set it. On a closing date, applications really do jump, by up to about 15%.
+
+10
+00:01:07,880 --> 00:01:13,110
+So above 10%, a test raises a warning: worth a look, but the data goes through.
+
+11
+00:01:14,310 --> 00:01:20,416
+Above 25%, it raises an error: this must not reach a decision, so the build stops.
+
+12
+00:01:21,716 --> 00:01:27,123
+A test on the number itself, not just on each row, with levels the business helped choose.
+
+13
+00:01:30,223 --> 00:01:35,052
+At eleven on Monday night, the admissions system syncs with the application portal.
+
+14
+00:01:35,752 --> 00:01:45,740
+Tonight, the sync times out and restarts. It copies the whole week's applications again, 3,100 of them, and gives every copy a new ID.
+
+15
+00:01:46,840 --> 00:01:54,376
+The admissions system now holds each of those applications twice. The platform copies what the source holds, faithfully.
+
+16
+00:01:55,076 --> 00:02:03,884
+At two, the nightly build begins, and the checks run, one row at a time. Every ID is unique. No field is empty. Every course exists.
+
+17
+00:02:05,184 --> 00:02:14,094
+Then the total reaches its test: 11,340. Up 38% in one night, when the real growth was forty.
+
+18
+00:02:15,394 --> 00:02:17,743
+The needle swings past amber, into red.
+
+19
+00:02:19,243 --> 00:02:23,877
+Every row was valid. Only a test on the total could see that there were too many.
+
+20
+00:02:27,177 --> 00:02:32,073
+What happens next depends on that test. Here are three versions of the same Tuesday.
+
+21
+00:02:32,773 --> 00:02:41,329
+In the first, there's no test. 11,340 reaches the painting, and the committee approves six hundred places.
+
+22
+00:02:42,529 --> 00:02:49,649
+Three weeks later, the copies are found. The places are cut again, the rooms released, and nobody trusts the dashboard.
+
+23
+00:02:50,949 --> 00:02:56,641
+In the second, the test is only a warning. It turns amber, and the number is published anyway.
+
+24
+00:02:57,341 --> 00:03:04,379
+The warning lands in a channel with forty others. Nobody reads it before ten, and the committee makes the same decision.
+
+25
+00:03:05,679 --> 00:03:09,398
+In the third, the test is an error. The build stops before gold.
+
+26
+00:03:10,498 --> 00:03:19,003
+The painting keeps Monday's 8,200, with a note: last good data, as of 2 am on Monday. Checking an unusual change.
+
+27
+00:03:19,703 --> 00:03:24,952
+David, who chairs the committee, moves the decision to Wednesday. A day late, and right.
+
+28
+00:03:26,452 --> 00:03:31,063
+A wrong number gets acted on. A late number, clearly labelled, simply waits.
+
+29
+00:03:31,763 --> 00:03:36,451
+At our university, this test is an error. So this is the Tuesday that happens.
+
+30
+00:03:42,851 --> 00:03:44,807
+So why not make every test an error?
+
+31
+00:03:45,907 --> 00:03:54,576
+Because on a closing date, a jump of 14% is real. Stopping it would hold back good data, and teach people to ignore alarms.
+
+32
+00:03:56,076 --> 00:04:01,667
+So this number has two levels. Amber, for worth a look. Red, for must not reach a decision.
+
+33
+00:04:03,167 --> 00:04:07,004
+A warning only helps if someone reads it, so each one has an owner.
+
+34
+00:04:08,504 --> 00:04:11,145
+Choose the level by what a wrong number would cost.
+
+35
+00:04:12,745 --> 00:04:20,494
+That cost is easy to count once something goes wrong. The value of a right number, on an ordinary day, is much harder to see.
+
+36
+00:04:26,194 --> 00:04:32,639
+At 8:15 on Tuesday, Sam follows the thread upstream, from the painting, through silver, to bronze.
+
+37
+00:04:33,739 --> 00:04:41,136
+In bronze, 3,100 pairs of rows are identical, except for their ID and when they were created.
+
+38
+00:04:42,436 --> 00:04:46,424
+The uniqueness test checked the ID, and every ID was unique.
+
+39
+00:04:47,124 --> 00:04:53,847
+But in the real world, an application is one applicant, for one course, in one intake. That's its business key.
+
+40
+00:04:55,147 --> 00:05:00,812
+Test uniqueness on what makes a thing unique in the real world, not only on the system's ID.
+
+41
+00:05:03,712 --> 00:05:09,727
+Sam messages Rosa, on the admissions system team. Her team finds the restart within the hour.
+
+42
+00:05:10,427 --> 00:05:18,072
+The copies are in the admissions system itself, so that's where they're removed. And the sync is changed, so it's safe to run twice.
+
+43
+00:05:19,272 --> 00:05:27,714
+The platform doesn't patch its copy by hand. It loads the affected week again, from the corrected system, so its copy matches the source.
+
+44
+00:05:29,014 --> 00:05:31,003
+Silver and gold are rebuilt from it.
+
+45
+00:05:31,703 --> 00:05:42,996
+Time travel lays Monday night's total beside today's: 11,340 then, 8,240 now. Forty more than Monday, as it should be.
+
+46
+00:05:44,296 --> 00:05:47,240
+On Wednesday, the committee plans with the right number.
+
+47
+00:05:49,740 --> 00:05:55,403
+The incident leaves a new test behind: one application per applicant, course and intake.
+
+48
+00:05:56,703 --> 00:06:01,486
+Syncs will time out again. When in doubt, keep the last good number, and say so.
+
+49
+00:06:02,186 --> 00:06:04,365
+Stale and labelled beats fresh and wrong.

@@ -1,0 +1,223 @@
+1
+00:00:01,400 --> 00:00:05,052
+Surgical teams have long known the steps that keep patients safe.
+
+2
+00:00:05,752 --> 00:00:12,265
+Check it's the right patient. Give the antibiotic before the first cut. Count every sponge before closing.
+
+3
+00:00:13,565 --> 00:00:18,644
+The steps were written in guidelines, but in a busy operating room, they were often skipped.
+
+4
+00:00:19,744 --> 00:00:24,370
+Patients paid for it: infections, mistakes, and deaths that could have been avoided.
+
+5
+00:00:25,070 --> 00:00:26,458
+Something had to change.
+
+6
+00:00:27,758 --> 00:00:32,767
+In 2008, a study in eight hospitals, in eight countries, tried one change.
+
+7
+00:00:33,867 --> 00:00:39,648
+Three times in every operation, the team paused, and a nurse read a short checklist out loud.
+
+8
+00:00:40,348 --> 00:00:44,405
+Each step was confirmed, and the nurse could hold the team until it was done.
+
+9
+00:00:45,705 --> 00:00:52,181
+Deaths after surgery nearly halved, from 1.5 to 0.8 in every hundred patients.
+
+10
+00:00:53,681 --> 00:00:55,365
+What worked was all of it together:
+
+11
+00:00:55,565 --> 00:01:01,705
+one agreed list, a copy in the room where the work happens, and someone who checks every step, every time.
+
+12
+00:01:09,605 --> 00:01:13,934
+Today, Yusuf Demir starts as the university's data governance lead.
+
+13
+00:01:15,034 --> 00:01:20,888
+He inherits a shelf of thirty-four policies, and a maturity score: 2.1 out of 5.
+
+14
+00:01:22,188 --> 00:01:26,815
+A chart of who's responsible for what, with half its names still to be confirmed.
+
+15
+00:01:28,015 --> 00:01:30,808
+And the minutes of a council that meets once a month.
+
+16
+00:01:31,508 --> 00:01:35,362
+His brief: fix governance before the next submission to the government.
+
+17
+00:01:38,062 --> 00:01:40,376
+The same week, two reports disagree.
+
+18
+00:01:41,076 --> 00:01:46,636
+Planning's census report says 4,812 awards were conferred this year.
+
+19
+00:01:47,736 --> 00:01:52,706
+The draft submission to the government says 4,867.
+
+20
+00:01:53,906 --> 00:01:55,202
+Which number is right?
+
+21
+00:01:58,702 --> 00:02:00,636
+The data team checks both numbers.
+
+22
+00:02:01,636 --> 00:02:04,537
+Both are right, each by its own meaning of award.
+
+23
+00:02:05,637 --> 00:02:10,954
+On Monday, the word changed: microcredentials of at least six credit points now count.
+
+24
+00:02:11,654 --> 00:02:14,557
+One report ran before the change, the other after.
+
+25
+00:02:15,857 --> 00:02:21,432
+But the government counts awards by its own definition, and no one agrees which number matches it.
+
+26
+00:02:22,532 --> 00:02:26,849
+So the data team takes it to Yusuf, in data governance: who decides?
+
+27
+00:02:28,149 --> 00:02:34,050
+Mei owns what award means here. Jun builds what the model says. Planning reports what it's given.
+
+28
+00:02:35,150 --> 00:02:37,203
+And the chart says: to be confirmed.
+
+29
+00:02:38,703 --> 00:02:44,568
+Like an operating room before the checklist: everyone knows their own step, and no one checks them all.
+
+30
+00:02:47,268 --> 00:02:51,307
+Policy 12 says that business terms are defined consistently.
+
+31
+00:02:52,007 --> 00:02:55,675
+It doesn't say who decides, or how a decision reaches the work.
+
+32
+00:02:56,975 --> 00:03:02,835
+That's what governance is for: deciding who decides, and making sure each decision reaches the work.
+
+33
+00:03:04,435 --> 00:03:09,703
+Like the surgical checklist: a rule, a copy where the work happens, and someone who checks.
+
+34
+00:03:10,903 --> 00:03:15,163
+Governance sets the rules and checks they're kept. Management does the work.
+
+35
+00:03:17,863 --> 00:03:24,194
+Yusuf doesn't write a thirty-fifth policy. He asks everyone the same question: what slows you down?
+
+36
+00:03:25,494 --> 00:03:28,493
+For Jun, the rules arrive after the work is built.
+
+37
+00:03:29,693 --> 00:03:32,844
+Mei approves the words, then never sees where they're used.
+
+38
+00:03:34,044 --> 00:03:37,476
+Sam could protect a column in minutes, if anyone said which.
+
+39
+00:03:38,776 --> 00:03:40,882
+Planning doesn't know which number to trust.
+
+40
+00:03:42,082 --> 00:03:46,314
+The people who wrote the binder weren't the problem. They wrote what they were asked for.
+
+41
+00:03:47,614 --> 00:03:53,520
+Governance is people's work. Tools can carry out what people agree, but they can't make them agree.
+
+42
+00:03:57,620 --> 00:04:02,144
+So he opens the binder, with one question for every line: where does it run?
+
+43
+00:04:03,444 --> 00:04:11,013
+Some lines can run in the work itself, as a field no one can leave empty, a check that runs every night, or a label.
+
+44
+00:04:12,613 --> 00:04:17,544
+Some are decisions: someone owns each one, and writes it down where the work can find it.
+
+45
+00:04:19,144 --> 00:04:20,258
+And some can go.
+
+46
+00:04:24,258 --> 00:04:28,920
+Behind every line that stays, there's something worth keeping, and someone to keep it.
+
+47
+00:04:30,220 --> 00:04:33,744
+Rules, each with an owner, that reach Jun before he builds.
+
+48
+00:04:34,444 --> 00:04:39,076
+One glossary every report reads from, so Mei sees where her words are used.
+
+49
+00:04:39,776 --> 00:04:44,588
+A class for each kind of personal data, so Sam knows which columns to protect.
+
+50
+00:04:45,288 --> 00:04:49,587
+And a list of who owns what, so Planning knows who answers for each number.
+
+51
+00:04:50,887 --> 00:04:53,922
+Owners decide. Stewards keep it all up to date.
+
+52
+00:04:55,022 --> 00:04:58,506
+The teams who do the work use it, and governance checks it's kept.
+
+53
+00:05:04,206 --> 00:05:11,380
+Over nine more films, Yusuf follows one symptom at a time to what's worth keeping, and to who decides and acts.
+
+54
+00:05:12,580 --> 00:05:17,191
+Then three draw it all as one model, on the university's architecture map.
+
+55
+00:05:18,291 --> 00:05:21,350
+And six build it, with dbt and Databricks.
+
+56
+00:05:22,650 --> 00:05:25,205
+A policy that doesn't run anywhere is a wish.

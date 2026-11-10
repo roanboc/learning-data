@@ -1,0 +1,248 @@
+# Decisions about the project as a whole: what was decided, why, and who decided.
+# Permanent: a decision is never deleted; a replaced one is marked superseded and relates to
+# what replaced it. The schema is in requirements/README.md, and docs/decisions.md indexes
+# every log. Not parsed by dbt (.dbtignore).
+
+scope: {kind: project, name: project, code: PRJ}
+
+decisions:
+
+  - id: DEC-PRJ-01
+    step: source_reality
+    title: Keys are qualified by their key set
+    text: 'Keys are qualified by where they come from: key sets SIS, LMS and SC. Every hash is kept beside
+      its readable key.'
+    why: Two systems can use the same-looking key for different people. A hash alone can't be read or checked.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-05
+    status: agreed
+    implemented_in: [business_key, hash_key, key_sets]
+
+  - id: DEC-PRJ-02
+    step: operate_and_evolve
+    title: Every core model is versioned
+    text: Every core model is versioned, from version 1, and consumers pin the version they read.
+    why: A breaking change then arrives as a new version beside the old one, with a deprecation date, not
+      as a surprise.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-10
+    status: agreed
+
+  - id: DEC-PRJ-03
+    step: build
+    title: One project, groups per owner, until teams own their domains
+    text: One group owns staging, intermediate and core while one team builds them; Planning and the wallet
+      each own their marts. Split into projects when teams own their domains.
+    why: Groups control who can ref() what within a project. Separate projects add cost that pays off only
+      with separate teams.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-12
+    status: agreed
+    implemented_in: [_groups.yml]
+
+  - id: DEC-PRJ-04
+    step: written_once
+    title: Definitions are written once and generated
+    text: Definitions are written once, in the conceptual model, and generated into doc blocks. The physical
+      diagram is generated from the manifest. Descriptions go to Unity Catalog with persist_docs.
+    why: Four copies of a definition drift apart. One home, and one direction of sync, keeps them the same.
+    decided_by: Jun Park and Noor
+    decided_on: 2026-10-14
+    status: agreed
+
+  - id: DEC-PRJ-05
+    step: build
+    title: Organised by domain, following TCSI
+    text: 'The project is organised by domain, following TCSI: student and course in the core, planning
+      and wallet in the marts. Each domain''s conceptual model, definitions, column descriptions and physical
+      diagram live in its folder; docs/ keeps the process.'
+    why: In a large project, each domain owns its meaning and changes it on its own. Definitions kept beside
+      their models are found and reviewed with them. A public reference model gives the domains names others
+      recognise.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-15
+    status: agreed
+    relates_to: [DEC-PRJ-03]
+
+  - id: DEC-PRJ-06
+    step: scope
+    title: The conceptual model at two levels; sources, models and exposures apart
+    text: 'The conceptual model is written at two levels: a map of the university''s domains and key entities
+      (at most 50, modelled or planned, following TCSI), and each core domain and mart''s own. Sources,
+      models and exposures each get a top-level folder.'
+    why: The map shows where each domain sits and what's still to model, without the detail; the detail
+      stays with its owner. What comes in, what's built and who uses it are different things, and each is
+      easy to find on its own.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-16
+    status: agreed
+    relates_to: [DEC-PRJ-05]
+
+  - id: DEC-PRJ-07
+    step: written_once
+    title: Key sets live on their source
+    text: A key set is an attribute of the source that issues it (meta.key_set), with its keys and the
+      case staging writes each in. The key_sets seed is generated from the sources.
+    why: The key set is a fact about a source, so it lives with the source, and moves with it.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-17
+    status: agreed
+    relates_to: [DEC-PRJ-01, DEC-PRJ-05]
+
+  - id: DEC-PRJ-08
+    step: build
+    title: DuckDB here and in CI; Databricks for the university
+    text: DuckDB runs the project here and in CI; Databricks runs it for the university.
+    why: Anyone can run it with no account, and the same code runs on the university's platform.
+    status: agreed
+
+  - id: DEC-PRJ-09
+    step: build
+    title: Primary and foreign keys declared on Databricks only
+    text: Primary and foreign keys are declared for Databricks and left out on DuckDB. Tests check keys
+      on both.
+    why: Databricks records them as information and doesn't enforce them. DuckDB enforces them, and won't
+      rename or drop a table a foreign key points to, which dbt does to rebuild it.
+    status: agreed
+    implemented_in: [duckdb__get_table_columns_and_constraints]
+
+  - id: DEC-PRJ-10
+    step: written_once
+    title: Requirements are temporary; decisions and limitations are permanent
+    text: What's still open while something is built (a question, a requirement, a gap) is an item in
+      requirements/, saying what will show it's done, and deleted once it is. What lasts goes to its
+      home - a decision in its scope's log, next to what it's about; a known limitation in meta.limitations
+      on the model or source it affects; an answered question in the mart's conceptual model; a met
+      requirement in the test or metadata that enforces it.
+    why: The team's backlog tool already tracks the work; requirements/ shouldn't copy it. Kept only while
+      open, it shows exactly what to watch. What lasts is easier to find, and travels with its domain,
+      when it sits next to what it's about; limitations on the YAML reach the people who read the data.
+    decided_by: Noor, data architect
+    decided_on: 2026-10-17
+    status: agreed
+    relates_to: [DEC-PRJ-05, DEC-PRJ-06]
+
+  - id: DEC-PRJ-11
+    step: written_once
+    title: The business glossary is the source of a definition it holds
+    text: 'Where the university''s business glossary (Unity Catalog Glossary, on Databricks) defines an entity, data governance
+      names the term that applies, and the conceptual model takes its definition, recording the term in
+      source:. The project adds only what the glossary doesn''t hold: keys, identity rules, history. An entity
+      the glossary doesn''t define is defined in the conceptual model, once governance confirms there''s no
+      term for it. A sync compares the two on a schedule; a changed term arrives as a pull request, never
+      as a silent edit.'
+    why: A definition the company already keeps is the home; a second one written in the project would be
+      a fifth copy. A changed definition can change what a model counts and what its descriptions say, so
+      the change is reviewed, with what it touches, before it reaches the build.
+    decided_by: Noor and Mei Tanaka, with data governance
+    decided_on: 2026-10-14
+    status: agreed
+    relates_to: [DEC-PRJ-04]
+    implemented_in: [_course__conceptual.yml, definitions.py, sync-the-glossary]
+
+  - id: DEC-PRJ-12
+    step: operate_and_evolve
+    title: Governance's rules run as a check on every pull request
+    text: 'Four of data governance''s rules run as a check, scripts/check/governance.py, in CI and before every
+      pull request: an owner on every domain, entity and shared model; a glossary term, or governance''s
+      confirmation that there''s none, for every core entity; every column of a public model or mart
+      classified as direct, pseudonymous or none; every test with an owner and a quality dimension. Data
+      governance owns what the rules ask; the data architect owns the check''s code; each owner named in
+      the metadata answers for their own.'
+    why: A policy that lives only in a document isn't followed. Written into the work, it is checked on every
+      change, at the moment someone can still fix it, and it measures itself.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-04, DEC-PRJ-11]
+    implemented_in: [governance.py, builtin.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-13
+    step: operate_and_evolve
+    title: Each column's class becomes a tag on Databricks, and direct personal data is masked
+    text: 'On Databricks, every classified column of a table gets a Unity Catalog tag, personal_data, with
+      its class from the model''s YAML (direct, pseudonymous or none). When the var personal_data_readers
+      names a group, each column of direct personal data also gets a mask: that group sees the value,
+      everyone else sees ***. The identity that runs dbt is in the group. Or, with the var
+      personal_data_policy, one Unity Catalog policy masks every column tagged direct, instead of a mask
+      per column. On DuckDB, neither: it has no tags or masks, as DEC-PRJ-09 leaves keys out there.'
+    why: The class is decided once, where the model is, and checked on every pull request (DEC-PRJ-12).
+      Pushed to the platform from there, the platform protects what the project says is personal, and
+      the two can't drift.
+    decided_by: Yusuf Demir, data governance lead, with Noor, data architect
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-09, DEC-PRJ-12]
+    implemented_in: [personal_data.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-14
+    step: operate_and_evolve
+    title: A new governance rule warns first, then fails from a date set when it's announced
+    text: 'A new rule is announced at the stewards'' meeting, with its how-to (docs/how-to/). It runs as a
+      warning for at least six weeks, each warning naming the day it becomes an error, and fails from the
+      date set when it''s announced. The first: every column of a shared model has a description, an
+      error from 1 December 2026.'
+    why: A rule that stops people the day it lands teaches them to resent it. Warned first, with a page that
+      says what to do and who to ask, people fix their own work before the rule stops anyone.
+    decided_by: Yusuf Demir, data governance lead, with the stewards
+    decided_on: 2026-10-20
+    status: agreed
+    relates_to: [DEC-PRJ-12]
+    implemented_in: [governance.py]
+
+  - id: DEC-PRJ-15
+    step: operate_and_evolve
+    title: Each table's area becomes a tag on Databricks, so the Discover page lays tables out by area
+    text: 'On Databricks, every table other teams read gets a key-only Unity Catalog tag named after its
+      model''s domain (meta.domain): student, course, learning, planning, finance or wallet. Each area is
+      created once on the Discover page as a domain, on a governed tag of its name, and the page lays the
+      tables out by area. The catalog and its schemas stay as dbt builds them, a schema for each layer. On
+      DuckDB, nothing: it has no tags.'
+    why: People look for data by area, not by layer. The domain is decided once, where the model is, and
+      checked on every pull request (DEC-PRJ-12); pushed to the platform from there, the platform's areas
+      and the project's can't drift.
+    decided_by: Noor, data architect, with Sam Okafor, who runs the data platform
+    decided_on: 2026-10-28
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-PRJ-13]
+    implemented_in: [domain_tag.sql, dbt_project.yml]
+
+  - id: DEC-PRJ-16
+    step: review_and_ship
+    title: Every job is code in the project, and reaches production the same way, after two people
+    text: 'The project''s jobs are written as files in a Declarative Automation Bundle (databricks.yml, and
+      a file for each job in resources/), next to the models they run. A change goes on a branch, then a
+      pull request whose checks build and test it; someone other than its author reviews and approves
+      it; once merged, the same files are deployed to test and run there, then to production after Noor
+      approves, under the platform''s service principal, never a person''s account. Nobody deploys from a
+      laptop. The workflow is examples/scripts-became-software/release.yml.'
+    why: Payroll's export ran for years from one person's laptop; when it had to change, nobody else could
+      change it safely. A job kept as code is versioned, tested and reviewed like the models, and the same
+      files deployed the same way every time can't drift between test and production.
+    decided_by: Noor, data architect, with Sam Okafor, who runs the data platform
+    decided_on: 2026-03-04
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-FIN-04]
+    implemented_in: [databricks.yml, payroll_export.job.yml, release.yml]
+
+  - id: DEC-PRJ-17
+    step: operate_and_evolve
+    title: On Databricks, five classes, a faculty tag and each table's level, carried by tag propagation
+    text: 'Amends DEC-PRJ-13. A column''s class is one of five, strictest first: special, direct,
+      pseudonymous, indirect or none, and only the first four are tags on the platform: a column marked
+      none gets no tag, and the build takes an old one off. After the classes, the build tags the column
+      that holds each row''s faculty with the key-only tag faculty (meta.faculty), and last sets the
+      table''s level (meta.level: public, internal, confidential or restricted), never under its two
+      floors. personal_data, faculty and level are governed tags only the identity that runs dbt may
+      assign. Tag propagation carries personal_data and faculty through lineage into every table made
+      from a tagged column, with special as the value where two meet; never level. On DuckDB, nothing:
+      it has no tags.'
+    why: A class set once at the source and carried by the platform protects every copy without anyone
+      tagging it, and can't drift from the owner's file. A none tag would meet a real class in any column
+      made from both, a conflict every time; a level carried by lineage would conflict in every join of a
+      public table and a confidential one, so each table's level stays its owner's call.
+    decided_by: Sam Okafor, who runs the data platform, with Mei Tanaka, registrar's office
+    decided_on: 2026-11-10
+    status: agreed
+    relates_to: [DEC-PRJ-12, DEC-PRJ-13]
+    implemented_in: [personal_data.sql, dbt_project.yml, governance.py]

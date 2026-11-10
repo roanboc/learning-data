@@ -1,0 +1,53 @@
+# The issue form the data team opens for each request the privacy office logs (GitHub's issue
+# forms: in the project's own repository it goes in .github/ISSUE_TEMPLATE/). It names no one: the
+# person's numbers go only into the restricted table privacy.request_keys, under the request's
+# number (docs/databricks-governance.md, "A person's request"). issue.md is one, as it closed.
+name: A person's request
+description: The data team's part of a request the privacy office has logged. Names no one.
+title: "Request 2026-NNN · due DD Mon YYYY"
+labels: ["privacy request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Never write a name, a number, an email or anything else about the person here. Their
+        numbers are in `privacy.request_keys`, under the request's number, and only the privacy
+        office and its two jobs can read it.
+  - type: input
+    id: request
+    attributes:
+      label: Request number
+      description: As the privacy office logged it.
+      placeholder: "2026-117"
+    validations:
+      required: true
+  - type: input
+    id: due
+    attributes:
+      label: Due
+      description: Thirty days from the day the office received it.
+      placeholder: Thursday 24 December 2026
+    validations:
+      required: true
+  - type: checkboxes
+    id: asks
+    attributes:
+      label: What the person asks
+      options:
+        - label: See what's held
+        - label: Correct something
+        - label: Erase
+        - label: Stop a use, such as news
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps
+      description: Tick each one with a link to its proof.
+      value: |
+        - [ ] Find every place (the search's run)
+        - [ ] The copy, by part (what, why, from where, who else, until when)
+        - [ ] Stop and delete what was asked (the tables' history)
+        - [ ] Owners check their parts
+        - [ ] Answer sent
+    validations:
+      required: true

@@ -1,0 +1,102 @@
+// Proof it held, the last film of Only what you may see, the second series of Data protection and privacy. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and dates in words). The few longer stops are in breath.js.
+const NARR={
+"square":{"name":"The square on the vial","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"From the 1970s, health workers carried polio vaccine to clinics and villages all over the world.","say":"From the nineteen-seventies, health workers carried polio vaccine to clinics and villages all over the world."},
+ {"id":"polio","gap":0.8,"text":"Polio can leave a child paralysed for life."},
+ {"id":"drops","gap":0.8,"text":"The vaccine is two drops by mouth, from a small bottle: a vial."},
+ {"id":"cold","gap":0.8,"text":"It had to stay cold the whole way, from the factory to the child."},
+ {"id":"heat","gap":0.8,"text":"But heat spoils it, and leaves no sign."},
+ {"id":"sun","gap":0.8,"text":"A vial left too long in the sun looks just like a good one."},
+ {"id":"threw","gap":0.8,"text":"So health workers threw away vials they couldn't vouch for."},
+ {"id":"child","gap":0.8,"text":"Or a child was given vaccine that no longer worked, and the family thought the child was safe."},
+ {"id":"change","gap":0.8,"text":"Something had to change: they needed to see whether the cold had held."},
+ {"id":"asked","gap":0.8,"text":"In 1979, the World Health Organization asked for a way to show it.","say":"In nineteen seventy-nine, the World Health Organization asked for a way to show it."},
+ {"id":"path","gap":0.8,"text":"PATH, a health non-profit, worked for years with a company on one: the vaccine vial monitor."},
+ {"id":"square","gap":0.8,"text":"It's a square inside a circle, printed on each vial's label."},
+ {"id":"darkens","gap":0.8,"text":"Heat darkens the square, a little at a time, and it never turns light again."},
+ {"id":"lighter","gap":0.8,"text":"Lighter than the circle, the vaccine can be used."},
+ {"id":"darker","gap":0.8,"text":"As dark as the circle, or darker, the vial is thrown away."},
+ {"id":"cents","gap":0.8,"text":"In 1996, the first monitors went onto polio vaccine, for a few cents a vial.","say":"In nineteen ninety-six, the first monitors went onto polio vaccine, for a few cents a vial."},
+ {"id":"moment","gap":0.8,"text":"Now, at the moment of use, a health worker could see which vials were still good."},
+ {"id":"saves","gap":0.8,"text":"UNICEF and the World Health Organization estimate it saves over $14 million a year, in good vaccine no longer thrown away.","say":"UNICEF and the World Health Organization estimate it saves over fourteen million dollars a year, in good vaccine no longer thrown away."},
+ {"id":"protects","gap":0.8,"text":"And a child got vaccine that still protects them."},
+ {"id":"data","gap":0.8,"text":"Protecting data has the same problem."},
+ {"id":"mark","gap":0.8,"text":"A protection that failed looks just like one that held, and a name seen by the wrong person leaves no mark."},
+ {"id":"adds","gap":0.8,"text":"This film adds the monitor to Anil's study: proof, whenever someone asks, that each protection held."},
+ {"id":"show","gap":0.8,"text":"So the university can show any learner who asks who could see their data, and who did."}
+]},
+"promises":{"name":"Four promises","lead":0.8,"tail":1.0,"vo":[
+ {"id":"months","gap":0.8,"text":"Three months ago, in An agreement first, Mei Tanaka signed an agreement for Anil Kurian's study of 2,614 learners.","say":"Three months ago, in An agreement first, Mei Tanaka signed an agreement for Anil Kurian's study of two thousand, six hundred and fourteen learners."},
+ {"id":"built","gap":0.8,"text":"Since then, every protection was built, from classes to copies."},
+ {"id":"today","gap":0.8,"text":"Today, Tuesday 12 January 2027, is the study's first review.","say":"Today, Tuesday the twelfth of January, twenty twenty-seven, is the study's first review."},
+ {"id":"yusuf","gap":0.8,"text":"Yusuf Demir, who keeps the agreements, asks one question of each line: can we prove it held?"},
+ {"id":"who","gap":0.8,"text":"Who: only the study's group may read it."},
+ {"id":"never","gap":0.8,"text":"Never: nothing that names a learner, nothing about their health."},
+ {"id":"where","gap":0.8,"text":"Where: only in the study's own space."},
+ {"id":"ends","gap":0.8,"text":"Ends: 30 June 2027.","say":"Ends: the thirtieth of June, twenty twenty-seven."},
+ {"id":"four","gap":0.8,"text":"Four promises, four proofs, each read from a record, not from anyone's memory."}
+]},
+"review":{"name":"Who could read it","lead":0.8,"tail":1.0,"vo":[
+ {"id":"first","gap":0.8,"text":"First: who could read the study's tables?"},
+ {"id":"grants","gap":0.8,"text":"On the platform, the grants answer it: each made from the contract, to the study's group."},
+ {"id":"hand","gap":0.8,"text":"No grant names a person, and none was made by hand."},
+ {"id":"group","gap":0.8,"text":"So the question is who's in the group, and that lives in the directory, Microsoft Entra ID."},
+ {"id":"every","gap":0.8,"text":"Every three months, its access review asks Mei, who signed the agreement, whether each member still needs it."},
+ {"id":"week","gap":0.8,"text":"A review left unanswered for a week takes the access away."},
+ {"id":"two","gap":0.8,"text":"Two people are in the group: Anil, and Elena Lindgren, a research assistant who joined in November."},
+ {"id":"moved","gap":0.8,"text":"In December, Elena moved to another project."},
+ {"id":"account","gap":0.8,"text":"She still works at the university, so her account works, and nothing took her out."},
+ {"id":"keeps","gap":0.8,"text":"Mei keeps Anil, and removes Elena; when the review closes, the directory takes her out by itself."},
+ {"id":"tells","gap":0.8,"text":"Now Anil tells Yusuf the day anyone leaves the study: the review is the net, not the plan."},
+ {"id":"agent","gap":0.8,"text":"An agent working for the study would be on the list too, answered for by its owner, as AI agents in data work shows."}
+]},
+"gap":{"name":"A class and a policy","lead":0.8,"tail":1.0,"vo":[
+ {"id":"second","gap":0.8,"text":"Second: does every personal column have a class, and every class a policy?"},
+ {"id":"like","gap":0.8,"text":"Like a monitor on every vial, every column needs its class."},
+ {"id":"seven","gap":0.8,"text":"Each morning at seven, a query on the platform looks for two gaps."},
+ {"id":"gap1","gap":0.8,"text":"A column the platform's classification finds personal, with no class from its owner."},
+ {"id":"gap2","gap":0.8,"text":"And a class that has to be hidden, with no policy to hide it."},
+ {"id":"alert","gap":0.8,"text":"If it finds one, an alert goes to Yusuf and Sam."},
+ {"id":"friday","gap":0.8,"text":"On Friday 8 January, it found one.","say":"On Friday the eighth of January, it found one."},
+ {"id":"mobile","gap":0.8,"text":"The exam support team had started keeping each learner's mobile number, to text them their exam arrangements."},
+ {"id":"load","gap":0.8,"text":"The night load brought it into the support table as a new column."},
+ {"id":"project","gap":0.8,"text":"The data project stops a new column with no class, but it doesn't build this table."},
+ {"id":"phone","gap":0.8,"text":"A day later, the platform's classification found it a phone number."},
+ {"id":"mei","gap":0.8,"text":"At half past nine, Mei classed it direct: it names a person by itself."},
+ {"id":"policy","gap":0.8,"text":"The policy for direct masks it from then on, with no new rule written."},
+ {"id":"hours","gap":0.8,"text":"But for thirty-one hours, the column had no class."},
+ {"id":"went","gap":0.8,"text":"Where did it go, and who read it?"}
+]},
+"reads":{"name":"Where it went, and who read it","lead":0.8,"tail":1.0,"vo":[
+ {"id":"lineage","gap":0.8,"text":"Lineage is the platform's record of what each query read and what it made, column by column."},
+ {"id":"nowhere","gap":0.8,"text":"The mobile column went nowhere: no query made anything from it."},
+ {"id":"study","gap":0.8,"text":"And the study's protected columns: the student number reaches it only as the learner code, the date of birth only as the year."},
+ {"id":"never","gap":0.8,"text":"Names, emails and exam support never reach it."},
+ {"id":"audit","gap":0.8,"text":"Then, who read? The audit log keeps who read each table, and when."},
+ {"id":"hours","gap":0.8,"text":"In those thirty-one hours, only the night load read the support table."},
+ {"id":"months","gap":0.8,"text":"And over the three months, the study's tables were read by Anil, and by Elena until 11 December. No one else.","say":"And over the three months, the study's tables were read by Anil, and by Elena until the eleventh of December. No one else."},
+ {"id":"quake","gap":0.8,"text":"After an earthquake in Yogyakarta, in Indonesia, the power was out for days."},
+ {"id":"doses","gap":0.8,"text":"The monitors showed most of the vaccine was still good: 50,000 doses that would have been thrown away.","say":"The monitors showed most of the vaccine was still good: fifty thousand doses that would have been thrown away."},
+ {"id":"proof","gap":0.8,"text":"Proof finds the harm, and it shows where there was none."},
+ {"id":"real","gap":0.8,"text":"The gap was real; the records show no one saw a number they shouldn't."}
+]},
+"ends":{"name":"Until its date","lead":0.8,"tail":1.0,"vo":[
+ {"id":"last","gap":0.8,"text":"Last: the agreement ends on 30 June 2027, and access must end with it.","say":"Last: the agreement ends on the thirtieth of June, twenty twenty-seven, and access must end with it."},
+ {"id":"place","gap":0.8,"text":"Each member's place in the group was given until that date."},
+ {"id":"day","gap":0.8,"text":"On the day, the directory takes them out, and the grants made from the contract end."},
+ {"id":"promise","gap":0.8,"text":"But an ending is a promise too, until it's checked."},
+ {"id":"july","gap":0.8,"text":"On 1 July, Yusuf checks: the group is empty, no grant names the agreement, and the study's space is gone.","say":"On the first of July, Yusuf checks: the group is empty, no grant names the agreement, and the study's space is gone."},
+ {"id":"totals","gap":0.8,"text":"Only the totals stay."},
+ {"id":"register","gap":0.8,"text":"Every proof is kept with the agreement, in Yusuf's register."}
+]},
+"held":{"name":"Proof it held","lead":0.8,"tail":1.0,"vo":[
+ {"id":"vial","gap":0.8,"text":"The monitor on the vial doesn't keep the vaccine cold."},
+ {"id":"cold","gap":0.8,"text":"It shows whether the cold held, at the moment of use."},
+ {"id":"records","gap":0.8,"text":"The study's records don't protect its data either."},
+ {"id":"show","gap":0.3,"text":"They show, whenever someone asks, that the protection held:"},
+ {"id":"list","gap":0.8,"text":"who could read, who did, where each column went, and that it all ended on its date."},
+ {"id":"hope","gap":0.8,"text":"Protection you can't prove is protection you hope for."},
+ {"id":"next","gap":0.8,"text":"Next, Kept for a reason: why data is kept, for how long, and how a person is forgotten."}
+]}
+};

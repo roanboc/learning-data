@@ -1,0 +1,97 @@
+{
+  "kicker": "Running the platform",
+  "kicker_es": "Operar la plataforma",
+  "title_es": "Una plataforma que se vigila sola",
+  "h1": "A platform that watches itself, and a person who decides",
+  "h1_es": "Una plataforma que se vigila sola, y una persona que decide",
+  "lead": "On the night of Monday 2 November, the job that sends casual staff's hours to payroll fails: the claims app now sends 1:30 where it sent 1.50. By morning, the platform has traced the cause, said what it touches and proposed a fix. Sam reviews it, Noor approves it, and pay goes out on Thursday.",
+  "lead_es": "La noche del lunes 2 de noviembre falla la tarea que envía a nómina las horas del personal ocasional: la app ahora envía 1:30 donde enviaba 1.50. Al amanecer, la plataforma ya siguió la causa, dijo qué toca y propuso un arreglo. Sam lo revisa, Noor lo aprueba, y el jueves se paga.",
+  "description": "A film about a data platform that watches its own jobs, pipelines and tables: Genie ZeroOps finds a failure, traces its cause through lineage, says what it touches and proposes a fix, which a person reviews and someone other than its author approves before it reaches production. On Apollo 11, a guidance computer built to watch itself raised the 1202 alarm, and people who knew decided. At the university, the claims job fails on the night of 2 November; by Tuesday morning its fix is approved, and 856 casual staff are paid on Thursday. Light on purpose, with the official docs for the rest.",
+  "description_es": "Una película sobre una plataforma de datos que vigila sus propias tareas, pipelines y tablas: Genie ZeroOps encuentra un fallo, sigue su causa por el linaje, dice qué toca y propone un arreglo, que revisa una persona y aprueba alguien que no lo escribió antes de llegar a producción. En el Apolo 11, una computadora de guiado hecha para vigilarse a sí misma dio la alarma 1202, y decidieron personas que sabían. En la universidad, la tarea de horas falla la noche del 2 de noviembre; el martes por la mañana su arreglo está aprobado, y el jueves cobran 856 personas del personal ocasional. Liviana a propósito, con la documentación oficial para el resto.",
+  "card": "A job that pays casual staff fails one night. The platform finds why and proposes a fix; a person approves it.",
+  "card_es": "Una noche falla la tarea que paga al personal ocasional. La plataforma halla por qué y propone un arreglo; una persona lo aprueba.",
+  "chapters_es": {
+    "alarm": "La alarma 1202",
+    "night": "La noche en que falló la tarea",
+    "watch": "Vigilar de noche",
+    "approve": "Una persona aprueba",
+    "contract": "Primero, el contrato",
+    "close": "No reinventes la rueda"
+  },
+  "past": [
+    "Apollo 11, 1969: the 1202 alarm, and a guidance officer who said go",
+    "The computer watched itself and said what was wrong; people who knew decided. A platform can watch its own jobs the same way, and a person approves each fix."
+  ],
+  "past_es": [
+    "Apolo 11, 1969: la alarma 1202, y un oficial de guiado que dijo adelante",
+    "La computadora se vigiló y dijo qué fallaba; decidieron personas que sabían. Una plataforma puede vigilar sus tareas igual, y una persona aprueba cada arreglo."
+  ],
+  "next_h": "You've seen a platform that watches itself, and a person who approves its fixes. Next: reports on demand.",
+  "next_h_es": "Viste una plataforma que se vigila sola, y una persona que aprueba sus arreglos. Después: reportes a pedido.",
+  "repo": {
+    "night": [
+      "sources/claims_app/_claims_app__sources.yml",
+      "resources/claims.job.yml"
+    ],
+    "watch": [
+      "models/staging/claims_app/stg_claims_app__claims.sql",
+      "examples/the-night-the-claims-job-failed/insight.md"
+    ],
+    "approve": [
+      "macros/hr/decimal_hours.sql",
+      "models/staging/claims_app/_claims_app__models.yml",
+      "examples/the-night-the-claims-job-failed/pull_request.md"
+    ],
+    "contract": [
+      "sources/claims_app/_claims_app__decisions.yml"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film shows the idea once. The docs say what the platform watches today, how to set it up, and how a proposed fix reaches a pull request.",
+    "p_es": "La película muestra la idea una vez. La documentación dice qué vigila hoy la plataforma, cómo configurarla y cómo un arreglo propuesto llega a una solicitud de cambio.",
+    "links": [
+      {
+        "title": "Genie ZeroOps",
+        "title_es": "Genie ZeroOps",
+        "line": "What it watches, its four steps, and its guardrails: it proposes, and changes nothing in production without a person's review.",
+        "line_es": "Qué vigila, sus cuatro pasos y sus límites: propone, y no cambia nada en producción sin la revisión de una persona.",
+        "href": "https://docs.databricks.com/aws/en/zeroops/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/zeroops/"
+      },
+      {
+        "title": "Get started with Genie ZeroOps",
+        "title_es": "Empezar con Genie ZeroOps",
+        "line": "Choose what it watches, work through its insights, and ask it to push a fix to a new branch.",
+        "line_es": "Elige qué vigila, trabaja sus hallazgos, y pídele subir un arreglo a una rama nueva.",
+        "href": "https://docs.databricks.com/aws/en/zeroops/get-started",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/zeroops/get-started"
+      },
+      {
+        "title": "Data lineage in Unity Catalog",
+        "title_es": "Linaje de datos en Unity Catalog",
+        "line": "The lineage it follows from a failure to its cause, and to what the failure touches.",
+        "line_es": "El linaje que sigue de un fallo a su causa, y a lo que el fallo toca.",
+        "href": "https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-lineage",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/data-lineage"
+      },
+      {
+        "title": "Lakeflow Jobs",
+        "title_es": "Trabajos de Lakeflow",
+        "line": "The jobs it watches: tasks, schedules and runs.",
+        "line_es": "Las tareas que vigila: sus pasos, horarios y ejecuciones.",
+        "href": "https://docs.databricks.com/aws/en/jobs/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/jobs/"
+      },
+      {
+        "title": "Unit tests in dbt",
+        "title_es": "Pruebas unitarias en dbt (en inglés)",
+        "line": "A test for the fix: both forms of the hours, read the same.",
+        "line_es": "Una prueba para el arreglo: las dos formas de las horas, leídas igual.",
+        "href": "https://docs.getdbt.com/docs/build/unit-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/unit-tests"
+      }
+    ]
+  }
+}

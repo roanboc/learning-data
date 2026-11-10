@@ -1,0 +1,219 @@
+{
+ "player": "8d022df9b33bf58f",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     6.0
+    ],
+    [
+     22.5,
+     30.25
+    ],
+    [
+     88.25,
+     95.0
+    ],
+    [
+     381.75,
+     389.25
+    ]
+   ]
+  },
+  "place:poster": {
+   "file": "poster.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     5.25,
+     13.25
+    ],
+    [
+     99.0,
+     117.75
+    ],
+    [
+     268.75,
+     276.75
+    ],
+    [
+     388.5,
+     393.5
+    ]
+   ]
+  },
+  "place:big": {
+   "file": "big.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     12.5,
+     23.25
+    ],
+    [
+     60.25,
+     83.0
+    ],
+    [
+     134.5,
+     139.75
+    ],
+    [
+     221.5,
+     269.75
+    ],
+    [
+     283.75,
+     291.0
+    ],
+    [
+     339.75,
+     371.5
+    ]
+   ]
+  },
+  "place:deskGov": {
+   "file": "deskGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     29.5,
+     48.25
+    ],
+    [
+     82.25,
+     89.0
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     47.5,
+     61.0
+    ],
+    [
+     315.25,
+     321.25
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     94.25,
+     100.0
+    ],
+    [
+     144.25,
+     172.25
+    ],
+    [
+     184.0,
+     196.5
+    ],
+    [
+     201.5,
+     222.5
+    ],
+    [
+     392.75,
+     398.0
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     117.0,
+     135.25
+    ],
+    [
+     139.5,
+     145.0
+    ],
+    [
+     172.0,
+     184.75
+    ],
+    [
+     195.75,
+     202.25
+    ],
+    [
+     276.0,
+     284.5
+    ],
+    [
+     290.25,
+     316.0
+    ],
+    [
+     327.5,
+     340.5
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     320.5,
+     322.75
+    ]
+   ]
+  },
+  "gdFacDesk": {
+   "file": "gdFacDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     320.5,
+     322.75
+    ]
+   ]
+  },
+  "place:bigFac": {
+   "file": "bigFac.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     322.0,
+     328.5
+    ]
+   ]
+  },
+  "place:mapClose": {
+   "file": "mapClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     370.75,
+     382.5
+    ]
+   ]
+  }
+ }
+}

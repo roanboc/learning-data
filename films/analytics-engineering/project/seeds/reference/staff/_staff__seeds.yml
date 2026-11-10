@@ -1,0 +1,38 @@
+seeds:
+
+  - name: pay_days
+    description: >
+      One row per pay day, every second Thursday, with the two times before it that payroll works
+      to: noon on the Monday before, when the claims it pays close, and noon on the Tuesday
+      before, when the pay run closes. Where a holiday moves a close, its row says why. Payroll's
+      calendar for the year, owned by HR; changes come through a pull request HR approves. The
+      rule that reads it is written once, in pay_day_for() (macros/payroll/pay_day.sql). Each
+      test names its owner in its own meta: the owners by folder in dbt_project.yml are cited by
+      line, so the folder isn't added there.
+    config:
+      column_types: {pay_day: date, claims_close_at: timestamp, pay_run_closes_at: timestamp, note: string}
+      meta: {owner: HR, domain: staff, purpose: reference}
+    columns:
+      - name: pay_day
+        description: The day the university pays its staff, a Thursday.
+        data_tests:
+          - unique:
+              config: {meta: {owner: HR}}
+          - not_null:
+              config: {meta: {owner: HR}}
+      - name: claims_close_at
+        description: >
+          When the claims this pay day pays close: a claim approved by then is paid that day, and
+          one approved later waits for the next pay day.
+        data_tests:
+          - unique:
+              config: {meta: {owner: HR}}
+          - not_null:
+              config: {meta: {owner: HR}}
+      - name: pay_run_closes_at
+        description: When the pay run closes, the time by which the hours to pay must reach the payroll system.
+        data_tests:
+          - not_null:
+              config: {meta: {owner: HR}}
+      - name: note
+        description: Why a close moved, where one did.

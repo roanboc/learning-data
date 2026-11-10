@@ -1,0 +1,55 @@
+{
+  "key": "an-agreement-first",
+  "title": "An agreement first",
+  "sub": "The opening film of Only what you may see, the second series of Data protection and privacy: two papers come before anyone may use people's data, as at Bletchley Park in the Second World War, where everyone signed before being told anything. Each person's confidentiality agreement, signed before any access and kept current; for each use, a data sharing agreement that says what the data is for, what the use may have and must never have, who, where, what may leave and when it ends, signed by the data's owner; then the access is made from the agreement, and ends with it.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of frosted glass and words in ice white. Cyan is an identity, green allowed, coral denied or closed, violet hidden personal data, and gold only the chip that says a signed paper is genuine. The two papers are glass cards with a folded corner, set down line by line as they're said. Bletchley Park in wartime is painted in the same night light, with its place and year at the top left.",
+  "src": [
+    "af_papers.js",
+    "af_wartime.js",
+    "af_hall.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "agreement",
+    "register",
+    -0.5
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bYusuf\\b",
+      "Yoosoof"
+    ],
+    [
+      "\\bDemir\\b",
+      "Deh-meer"
+    ],
+    [
+      "\\bAnil\\b",
+      "Ah-neel"
+    ],
+    [
+      "\\bKurian\\b",
+      "Koo-ree-an"
+    ]
+  ],
+  "story": [
+    "first"
+  ],
+  "urgent": []
+}

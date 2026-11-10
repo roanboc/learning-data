@@ -1,0 +1,80 @@
+{
+  "draft": true,
+  "kicker": "Services and customers",
+  "kicker_es": "Servicios y clientes",
+  "title_es": "Servicios con clientes",
+  "h1": "Services with customers: know who each is for, then design every layer",
+  "h1_es": "Servicios con clientes: sabe para quién es cada uno y diseña cada capa",
+  "lead": "In May 2027, Helena writes her team's four services on one page, then its suppliers and its customers in four groups, with what hurts and what drives each. She and Noor walk one service down five layers. When the front door opens, 42 of 45 requests land on a service.",
+  "lead_es": "En mayo de 2027, Helena escribe en una página los cuatro servicios de su equipo, sus proveedores y sus clientes en cuatro grupos, con lo que les duele y lo que les mueve. Con Noor recorre un servicio por cinco capas. Al abrirse la puerta de entrada, 42 de 45 solicitudes caen en un servicio.",
+  "description": "A film on running a data team's services as a business, the first of Architecture that keeps up, the third series of Data management: the product owner's side of a data manager's job, borrowed from architecture. Helena Novak, after the data strategy is approved, writes her team's four services on one page in a customer's words (governed data products, the platform for data partners, analysis that answers a decision, advice and training), names its suppliers (payroll, the timetable, the rooms' sensors, HR, digital services) and its customers in four groups (people who decide, data partners, analysts and report readers, staff and students), each with what hurts and what drives them, from the 31 conversations of Listen first; Noor Rahman puts them on her map; the two walk one service down five layers, a picture each: strategy, business, information, application and technology, ArchiMate's layers with TOGAF's data called information; the same walk finds 17 of the old warehouse's 38 reports that no one has opened in a year; and on 7 June, when the front door opens, 42 of 45 requests land on a service, and three show a gap the team fills or hands on. Named once: the service catalogue and the value proposition canvas. It opens in Madurai in 1976, where Dr Govindappa Venkataswamy said what his eleven-bed hospital was for, and who it was for, before he designed anything below.",
+  "description_es": "Una película sobre dirigir los servicios de un equipo de datos como un negocio, la primera de Una arquitectura al día, la tercera serie de Gestión de datos: el lado de dueña de producto del trabajo de una gestora de datos, tomado de la arquitectura. Helena Novak, tras aprobarse la estrategia de datos, escribe en una página los cuatro servicios de su equipo con palabras de cliente (productos de datos gobernados, la plataforma para los referentes de datos, análisis que responde a una decisión, asesoría y formación), nombra a sus proveedores (nómina, el horario, los sensores de las aulas, RR. HH., servicios digitales) y a sus clientes en cuatro grupos (quienes deciden, los referentes de datos, analistas y lectores de informes, personal y estudiantes), cada uno con lo que le duele y lo que le mueve, de las 31 conversaciones de Escuchar primero; Noor Rahman los pone en su mapa; las dos recorren un servicio por cinco capas, una imagen para cada una: estrategia, negocio, información, aplicación y tecnología, las capas de ArchiMate con los datos de TOGAF llamados información; el mismo recorrido encuentra 17 de los 38 informes del almacén antiguo que nadie ha abierto en un año; y el 7 de junio, al abrirse la puerta de entrada, 42 de 45 solicitudes caen en un servicio, y tres muestran un hueco que el equipo llena o pasa a otros. Nombrados una vez: el catálogo de servicios y el lienzo de propuesta de valor. Empieza en Madurai en 1976, donde el Dr. Govindappa Venkataswamy dijo para qué era su hospital de once camas, y para quién, antes de diseñar nada debajo.",
+  "card": "Helena writes her team's services and who each is for, then walks one service down every layer, from strategy to technology.",
+  "card_es": "Helena escribe los servicios de su equipo y para quién es cada uno, y recorre un servicio por cada capa, de la estrategia a la tecnología.",
+  "chapters_es": {
+    "sight": "La vista, para todos",
+    "services": "Cuatro servicios, una página",
+    "customers": "Para quién es cada uno",
+    "layers": "Por cada capa",
+    "door": "Cada solicitud cae en algún sitio",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Madurai, 1976: sight, for everyone",
+    "A retired eye surgeon opened an eleven-bed hospital. He first said what it was for and who it was for, in groups by what they could pay, then designed everything below for them. A data team's services work the same way."
+  ],
+  "past_es": [
+    "Madurai, 1976: la vista, para todos",
+    "Un cirujano oftalmólogo jubilado abrió un hospital de once camas. Primero dijo para qué era y para quién, en grupos según lo que podían pagar, y luego diseñó todo lo de abajo para ellos. Los servicios de un equipo de datos funcionan igual."
+  ],
+  "next_h": "You've seen why every service needs its customers. Next: the architecture in one map, in the team's repository, updated with every change.",
+  "next_h_es": "Viste por qué cada servicio necesita a sus clientes. Después: la arquitectura en un solo mapa, en el repositorio del equipo, al día con cada cambio.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "ArchiMate, the modelling language",
+        "title_es": "ArchiMate, el lenguaje de modelado (en inglés)",
+        "line": "The Open Group's standard for drawing an enterprise's architecture, layer by layer, from strategy to technology.",
+        "line_es": "El estándar de The Open Group para dibujar la arquitectura de una organización, capa por capa, de la estrategia a la tecnología.",
+        "href": "https://www.opengroup.org/archimate-forum/archimate-overview",
+        "href_es": "https://www.opengroup.org/archimate-forum/archimate-overview"
+      },
+      {
+        "title": "Service catalogue",
+        "title_es": "Catálogo de servicios (en inglés)",
+        "line": "A list of the services an organisation offers, each described for the people who use it.",
+        "line_es": "Una lista de los servicios que ofrece una organización, cada uno descrito para quienes lo usan.",
+        "href": "https://en.wikipedia.org/wiki/Service_catalog",
+        "href_es": "https://en.wikipedia.org/wiki/Service_catalog"
+      },
+      {
+        "title": "The value proposition canvas",
+        "title_es": "El lienzo de propuesta de valor (en inglés)",
+        "line": "Strategyzer's page for the canvas: a customer's jobs, pains and gains, beside what you offer them.",
+        "line_es": "La página de Strategyzer sobre el lienzo: las tareas, los problemas y las ganancias de un cliente, junto a lo que le ofreces.",
+        "href": "https://www.strategyzer.com/library/the-value-proposition-canvas",
+        "href_es": "https://www.strategyzer.com/library/the-value-proposition-canvas"
+      },
+      {
+        "title": "Aravind Eye Care System",
+        "title_es": "Aravind Eye Care System (en inglés)",
+        "line": "The hospital's own story: how it began in Madurai in 1976, and how it serves those who can pay and those who can't.",
+        "line_es": "La historia del propio hospital: cómo empezó en Madurai en 1976, y cómo atiende a quienes pueden pagar y a quienes no.",
+        "href": "https://aravind.org/our-story/",
+        "href_es": "https://aravind.org/our-story/"
+      },
+      {
+        "title": "Cataract surgery at Aravind, 1988 to 2008",
+        "title_es": "La cirugía de cataratas en Aravind, de 1988 a 2008 (en inglés)",
+        "line": "A journal article on the hospitals' operations over twenty years, with their numbers and their outcomes.",
+        "line_es": "Un artículo sobre las operaciones de los hospitales en veinte años, con sus cifras y sus resultados.",
+        "href": "https://cehjournal.org/?p=2852",
+        "href_es": "https://cehjournal.org/?p=2852"
+      }
+    ]
+  }
+}

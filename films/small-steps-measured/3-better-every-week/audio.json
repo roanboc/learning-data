@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/better-every-week/soundtrack.mp3",
+      "size": 5652523,
+      "sha256": "63b23b985a5cbcf9826b957344969421e696a91987269953fd27044391518841",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-better-every-week-72e5ac712b0051701ca7/63b23b985a5cbcf9826b957344969421e696a91987269953fd27044391518841.mp3"
+    }
+  ]
+}

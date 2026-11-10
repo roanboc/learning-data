@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/rules-to-decide/soundtrack.mp3",
+      "size": 8503632,
+      "sha256": "7ac9651da458c97fa9335cc4e933c6abdacea5aadf306f3816b8dd8c9fc87555",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-rules-to-decide-a9e1b70abeb816329660/7ac9651da458c97fa9335cc4e933c6abdacea5aadf306f3816b8dd8c9fc87555.mp3"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "From a branch to production",
+    "key": "from-a-branch-to-production-en",
+    "dir": "films/locks-before-the-data/8-from-a-branch-to-production/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/from-a-branch-to-production/film.js",
+    "video": "dist/from-a-branch-to-production.mp4",
+    "file": "from-a-branch-to-production.mp4",
+    "captions": [
+      [
+        "films/locks-before-the-data/8-from-a-branch-to-production/captions/en.srt",
+        "from-a-branch-to-production.en.srt"
+      ],
+      [
+        "films/locks-before-the-data/8-from-a-branch-to-production/captions/es.srt",
+        "from-a-branch-to-production.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/locks-before-the-data/8-from-a-branch-to-production/source",
+      ":(exclude)films/locks-before-the-data/8-from-a-branch-to-production/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared/src/kit.js",
+      "films/what-an-agent-is/shared/src/people.js",
+      "films/what-an-agent-is/shared/tools/edges.py",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ]
+  }
+]

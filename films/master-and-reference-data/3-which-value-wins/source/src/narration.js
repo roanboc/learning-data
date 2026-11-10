@@ -1,0 +1,81 @@
+// Master and reference data · Which value wins. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption. The few longer stops are in breath.js.
+const NARR={
+"clocks":{"name":"Twenty-two clocks","lead":1.6,"tail":1.0,"vo":[
+ {"id":"plymouth","gap":0.8,"text":"Plymouth, December 1831. HMS Beagle is about to sail around the world.","say":"Plymouth, December eighteen thirty-one. HMS Beagle is about to sail around the world."},
+ {"id":"time","gap":0.8,"text":"At sea, the time back home tells a ship how far east or west it has come."},
+ {"id":"drift","gap":0.8,"text":"So it carries clocks. And clocks drift."},
+ {"id":"two","gap":0.8,"text":"With two that disagree, you can't tell which one is wrong."},
+ {"id":"many","gap":0.8,"text":"The Beagle carries twenty-two."},
+ {"id":"rated","gap":0.8,"text":"In port, each one's drift is measured and written down."},
+ {"id":"standards","gap":0.8,"text":"The two thought best are the standards, and the others are checked against them."},
+ {"id":"before","gap":0.8,"text":"Which clock to trust is decided before the clocks disagree."}]},
+"linked":{"name":"Linked, and still different","lead":1.0,"tail":1.0,"vo":[
+ {"id":"today","gap":0.8,"text":"Today, at the university."},
+ {"id":"linked","gap":0.8,"text":"Linh's five records are linked now: Mei's office decided they're one person."},
+ {"id":"needs","gap":0.8,"text":"So the person needs one name, one birth date, and a way to reach her."},
+ {"id":"disagree","gap":0.8,"text":"But her records don't agree."},
+ {"id":"counts","gap":0.8,"text":"Four ways of writing her name. Two birth dates. Two mobile numbers. Four emails."},
+ {"id":"which","gap":0.8,"text":"Which value wins?"}]},
+"hidden":{"name":"One order, hidden in the code","lead":0.8,"tail":1.0,"vo":[
+ {"id":"picks","gap":0.8,"text":"The university's model already picks one."},
+ {"id":"order","gap":0.8,"text":"For the learner, it takes the student system first, then the learning platform, then short courses."},
+ {"id":"every","gap":0.8,"text":"One order, for every field, inside the code, where the people who own the data can't see it."},
+ {"id":"quick","gap":0.8,"text":"For the person, the quick fix is to let the newest value win."},
+ {"id":"resend","gap":0.8,"text":"But HR sends its whole file again every teaching period, so its values always look new."},
+ {"id":"typo","gap":0.8,"text":"Her birth date becomes HR's typo, and her old mobile comes back."},
+ {"id":"transcript","gap":0.8,"text":"Her transcript would print her name as HR typed it."},
+ {"id":"truest","gap":0.8,"text":"Newest isn't truest."}]},
+"names":{"name":"Two names, both hers","lead":1.0,"tail":1.0,"vo":[
+ {"id":"legal","gap":0.8,"text":"Her legal name is Nguyễn Thị Linh: family name first, with its accents, as on her passport."},
+ {"id":"checked","gap":0.8,"text":"The student system checked it when she enrolled."},
+ {"id":"lost","gap":0.8,"text":"Her old record lost the accents, and HR turned it round: Linh Nguyen."},
+ {"id":"chose","gap":0.8,"text":"The name she goes by, Linh, she set herself."},
+ {"id":"both","gap":0.8,"text":"Both are hers, for different things."},
+ {"id":"transcript","gap":0.8,"text":"Her transcript carries her legal name."},
+ {"id":"class","gap":0.8,"text":"Her class lists and her ID card, the one she chose."},
+ {"id":"rule","gap":0.8,"text":"So the person keeps two names, and each needs its own rule."}]},
+"rules":{"name":"A rule for each field","lead":1.0,"tail":1.0,"vo":[
+ {"id":"writes","gap":0.8,"text":"So Jun writes the rules down, field by field, in one place, where the steps that build her record read them."},
+ {"id":"trust","gap":0.8,"text":"Like the Beagle's standards, each field has the source it trusts most."},
+ {"id":"legal","gap":0.8,"text":"Her legal name, from the student system, which checked her passport."},
+ {"id":"preferred","gap":0.8,"text":"Her preferred name, from Linh herself."},
+ {"id":"birth","gap":0.8,"text":"Her birth date, from the student system."},
+ {"id":"waits","gap":0.8,"text":"If another system sends a different one, it waits for Mei."},
+ {"id":"pin","gap":0.8,"text":"HR's still has the typo, so Mei pins the right one, with a reason, until next year."},
+ {"id":"mobile","gap":0.8,"text":"Her mobile: the newest one she confirmed, not the newest one sent."},
+ {"id":"chain","gap":0.8,"text":"Every other field falls back on the same order: the most trusted source, then the newest confirmed value, then the most complete."},
+ {"id":"tools","gap":0.8,"text":"Master data tools let people set rules like these on screens of their own."},
+ {"id":"simplest","gap":0.8,"text":"In the simplest form, they're a file like this one, and the code and the tests are written from it."}]},
+"emails":{"name":"Four emails, each for something","lead":1.0,"tail":1.0,"vo":[
+ {"id":"column","gap":0.8,"text":"An email column holds one email. Linh has four."},
+ {"id":"study","gap":0.8,"text":"Her student email, for her studies. Her staff email, for her tutoring."},
+ {"id":"personal","gap":0.8,"text":"A personal one from 2019, and a newer one from her application.","say":"A personal one from twenty nineteen, and a newer one from her application."},
+ {"id":"none","gap":0.8,"text":"None of them is wrong. Each is for something."},
+ {"id":"kept","gap":0.8,"text":"So each is kept as a contact point: its purpose, its source, and the day she last confirmed it."},
+ {"id":"use","gap":0.8,"text":"HR writes to her staff email. The alumni office, to a personal one."}]},
+"sources":{"name":"Every value, with its source","lead":1.0,"tail":1.0,"vo":[
+ {"id":"says","gap":0.8,"text":"Now each value in Linh's record says where it came from, which rule chose it, and how old it is."},
+ {"id":"lost","gap":0.8,"text":"The values that lost are still there, one click away."},
+ {"id":"why","gap":0.8,"text":"So if anyone asks why her record says 14 March, the answer is right there.","say":"So if anyone asks why her record says the fourteenth of March, the answer is right there."},
+ {"id":"read","gap":0.8,"text":"Her transcript, her class list and the alumni office all read from it."}]},
+"dryrun":{"name":"See it before it changes","lead":1.0,"tail":1.0,"vo":[
+ {"id":"change","gap":0.8,"text":"Rules change too."},
+ {"id":"asks","gap":0.8,"text":"The alumni office asks for a new one: for personal email, the one people confirmed most recently."},
+ {"id":"dry","gap":0.8,"text":"Before it runs, a dry run lists every value it would change."},
+ {"id":"count","gap":0.8,"text":"1,284, Linh's among them.","say":"One thousand two hundred and eighty-four, Linh's among them."},
+ {"id":"approve","gap":0.8,"text":"Mei checks a sample, and the registrar, who owns the data, approves."},
+ {"id":"runs","gap":0.8,"text":"Then it runs, as version two, with its date."}]},
+"elsewhere":{"name":"Elsewhere","lead":1.0,"tail":1.0,"vo":[
+ {"id":"bank","gap":0.8,"text":"A bank knows two names too."},
+ {"id":"statements","gap":0.8,"text":"Statements carry the account holder's legal name."},
+ {"id":"app","gap":0.8,"text":"The app greets them by the one they chose."},
+ {"id":"shop","gap":0.8,"text":"A shop keeps a billing address and a delivery address, each for something."},
+ {"id":"same","gap":0.8,"text":"Different places, the same question: which value, for what, and who says so."}]},
+"home":{"name":"Thirty-three seconds","lead":1.2,"tail":1.0,"vo":[
+ {"id":"home","gap":0.8,"text":"In October 1836, the Beagle came home.","say":"In October eighteen thirty-six, the Beagle came home."},
+ {"id":"out","gap":0.8,"text":"After five years around the world, its clocks were out by just thirty-three seconds."},
+ {"id":"settled","gap":0.8,"text":"Which clock to trust was settled before they disagreed, and checked at every port."},
+ {"id":"same","gap":0.8,"text":"Linh's rules work the same way: written down before her records disagree, and tested every night."},
+ {"id":"declared","gap":0.8,"text":"The rule is declared, not hidden in the code."}]}
+};

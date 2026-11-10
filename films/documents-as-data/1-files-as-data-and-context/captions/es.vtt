@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:09.521
+Washington, 1842. Una pequeña oficina de la Armada de EE. UU. guardaba sus cartas y los viejos cuadernos de bitácora de sus barcos.
+
+00:00:10.821 --> 00:00:17.085
+Una bitácora es el registro diario de un barco: dónde estaba, el viento, el tiempo y la corriente, el propio flujo del mar.
+
+00:00:18.385 --> 00:00:23.761
+Ahí quedaban escritos miles de días en el mar, cada barco a su manera, y nadie volvía a leerlos.
+
+00:00:25.261 --> 00:00:29.918
+Así que los capitanes seguían las rutas que conocían, no los vientos y corrientes que de verdad había.
+
+00:00:31.018 --> 00:00:39.355
+Las travesías duraban semanas de más: más semanas en el mar para las tripulaciones, con poca comida y agua, y la carga y las cartas tarde.
+
+00:00:40.855 --> 00:00:42.243
+Algo tenía que cambiar.
+
+00:00:43.543 --> 00:00:50.535
+Así que la oficina pasó sus viejas bitácoras a tablas: los vientos y corrientes de cada parcela de océano, mes a mes.
+
+00:00:52.035 --> 00:00:59.303
+Con ellas trazó cartas de vientos y corrientes, gratis para todo capitán que llevara su bitácora en un formato fijo y la enviara de vuelta.
+
+00:01:00.803 --> 00:01:10.106
+En 1853, en Bruselas, diez naciones, presididas por el estadístico Adolphe Quetelet, acordaron una bitácora para barcos de toda bandera.
+
+00:01:11.806 --> 00:01:22.823
+Según la oficina, los barcos que usaban las cartas acortaron la travesía media a California, por el cabo de Hornos, de 183 días a 135.
+
+00:01:24.523 --> 00:01:28.485
+Y las naciones empezaron a compartir sus datos del tiempo, como siguen haciéndolo hoy.
+
+00:01:29.985 --> 00:01:34.544
+Los documentos de hoy no son distintos: escritos para personas, cada uno a su manera.
+
+00:01:35.644 --> 00:01:42.130
+Lo escrito para personas se puede leer como datos donde vale la pena, y lo que escribimos, escribirse como datos desde el principio.
+
+00:01:49.630 --> 00:01:57.074
+Hoy, en la universidad, tres tipos de documentos muestran tres respuestas: leerlos, guardarlos o escribirlos como datos.
+
+00:01:58.974 --> 00:02:09.079
+En octubre, Finanzas recibió 3,860 facturas de proveedores, la mayoría en archivos PDF, cada una con el diseño de su proveedor.
+
+00:02:10.379 --> 00:02:17.988
+El equipo de Rohan Desai revisa cada una antes de pagarla: quién la envió, su número, su fecha, su total y cada línea.
+
+00:02:19.088 --> 00:02:25.180
+Durante años las ingresaron a mano, y en septiembre una factura, enviada dos veces, se pagó dos veces.
+
+00:02:26.680 --> 00:02:33.070
+Ahora cada archivo llega a un volumen: un lugar para archivos, gobernado en Unity Catalog como lo son las tablas.
+
+00:02:34.570 --> 00:02:41.330
+Una función, ai_parse_document, lee cada archivo: sus palabras, sus tablas y dónde está cada cosa en la página.
+
+00:02:43.030 --> 00:02:48.595
+Otra, ai_extract, saca los campos que Finanzas nombra, una fila por cada factura.
+
+00:02:50.295 --> 00:02:55.152
+Cada fila guarda la ruta de su archivo, así cualquiera puede abrir la factura de la que vino.
+
+00:02:56.652 --> 00:03:03.622
+Quien lee es un modelo de IA, así que lo que lee se revisa como cualquier otro dato, como muestra la película Promesas y pruebas.
+
+00:03:04.922 --> 00:03:11.181
+El proyecto de datos de Jun Park revisa cada una: ¿se leyó cada campo, y las líneas suman el total?
+
+00:03:12.481 --> 00:03:18.715
+Luego vienen las reglas de Finanzas: ¿ya se envió antes este número, y Finanzas conoce al proveedor?
+
+00:03:20.415 --> 00:03:27.866
+De las 3,860 de octubre, 3,734 pasaron cada revisión.
+
+00:03:28.966 --> 00:03:34.547
+126 fueron a una persona, cada una con su motivo. Nueve se habían enviado dos veces.
+
+00:03:36.047 --> 00:03:42.014
+La función lee, las revisiones clasifican y el equipo de Rohan decide, como sigue aprobando cada pago.
+
+00:03:45.314 --> 00:03:50.368
+Un contrato firmado es distinto: es un documento oficial, que se guarda tal como se firmó.
+
+00:03:51.668 --> 00:04:00.912
+Nadie lo reescribe como tabla. A su lado van sus metadatos: el ID del contrato, su versión, el día en que se firmó y dónde está su archivo.
+
+00:04:02.812 --> 00:04:08.949
+El sistema de RR. HH. escribe esos metadatos al crear el documento, así nadie tiene que volver a leerlo.
+
+00:04:10.449 --> 00:04:21.417
+El contrato de Linh Nguyen de este semestre, T-26188, tiene dos archivos: la oferta que envió RR. HH. el 9 de julio y el que firmó el 14.
+
+00:04:23.117 --> 00:04:29.167
+La oferta terminaba el 13 de noviembre. Antes de que firmara, RR. HH. agregó una semana para calificar.
+
+00:04:30.867 --> 00:04:34.395
+En una carpeta, los dos se parecen. Por sus metadatos, no.
+
+00:04:36.295 --> 00:04:44.880
+Si Linh pregunta cuándo termina su contrato, una persona o un agente encuentra la versión firmada y cita su archivo: el 20 de noviembre.
+
+00:04:46.780 --> 00:04:54.355
+Las películas Ingeniería de contexto y Contexto y memoria, gobernados muestran cómo un documento se vuelve contexto de un agente.
+
+00:04:55.855 --> 00:05:03.889
+Quién puede leer un contrato lo decide Ingrid Holm, en RR. HH. La protección de datos, un módulo propio, enseña el resto.
+
+00:05:07.189 --> 00:05:10.335
+Lo mejor es un documento que nadie tiene que volver a leer.
+
+00:05:11.635 --> 00:05:17.499
+Las solicitudes de pago de horas llegaban como hojas de cálculo por correo, y alguien ingresaba cada una en la nómina.
+
+00:05:18.999 --> 00:05:24.829
+Ahora la app de solicitudes escribe cada una como datos, al hacerse: una fila que cualquier sistema puede leer.
+
+00:05:26.729 --> 00:05:31.945
+Con ella van sus metadatos: quién la hizo, con qué contrato, si está aprobada y cuándo.
+
+00:05:33.645 --> 00:05:40.341
+Lo que significa cada campo está escrito en su contrato: un archivo YAML, en un estándar abierto, guardado con el código de la app.
+
+00:05:42.241 --> 00:05:48.860
+Es otra vez la bitácora de 1853: un solo formato, que todos llevan, así nadie tiene que volver a leerla.
+
+00:05:52.360 --> 00:06:00.058
+Esas bitácoras se guardaron. Más de un siglo después, científicos del clima las volvieron a leer: más de un millón de reportes del tiempo.
+
+00:06:01.558 --> 00:06:05.616
+Guarda el archivo y sus metadatos, y mejores lectores podrán volver a leerlo.
+
+00:06:07.116 --> 00:06:11.953
+Por eso Noor Rahman, la arquitecta de datos, da a cada documento una de tres respuestas.
+
+00:06:13.053 --> 00:06:19.292
+Si lo escribimos nosotros, lo escribimos como datos, en una estructura estándar como JSON o YAML, con sus metadatos.
+
+00:06:20.392 --> 00:06:23.998
+Si es oficial, lo guardamos tal como está, con sus metadatos al lado.
+
+00:06:25.098 --> 00:06:32.748
+Si se escribió para personas, lo leemos con funciones de la plataforma o un scraper, solo si un caso de uso lo pide, y guardamos el archivo.
+
+00:06:34.248 --> 00:06:40.262
+Los documentos de cada organización son distintos, y los estándares ya existen: no reinventes la rueda.
+
+00:06:41.362 --> 00:06:46.008
+Empieza por la documentación oficial. Investiga, adapta, implementa, itera.
+
+00:06:47.708 --> 00:06:54.787
+Así cierra este módulo: mover datos, operar la plataforma, servirlos a personas y agentes, y leer documentos.
+
+00:06:56.087 --> 00:07:03.983
+Cada cosa requería antes un equipo entero. Databricks y dbt ahora hacen mucho; a las personas les queda acordar qué significan los datos.
+
+00:07:05.483 --> 00:07:12.989
+Y con los documentos: léelos donde un caso de uso lo pida, guarda el archivo y sus metadatos, y escribe lo tuyo como datos.

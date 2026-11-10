@@ -1,0 +1,95 @@
+From 0d195daa68c2f80cb8b8f2982101efb23a24c5f5 Mon Sep 17 00:00:00 2001
+From: "Jun Park (scratch)" <jun.park@uni.example>
+Date: Wed, 28 Oct 2026 13:00:46 +0000
+Subject: [PATCH] Exposures: the census report and the registrar's draft
+ submission, which read credentials
+
+---
+ films/analytics-engineering/project/CODEOWNERS     |  1 +
+ .../exposures/planning/_planning__exposures.yml    | 13 +++++++++++++
+ .../exposures/registrar/_registrar__exposures.yml  | 14 ++++++++++++++
+ .../5-data-contracts/core_credential_v2.yaml       |  2 ++
+ .../6-product-descriptors/learner_records.yaml     |  2 ++
+ 5 files changed, 32 insertions(+)
+ create mode 100644 films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
+
+diff --git a/films/analytics-engineering/project/CODEOWNERS b/films/analytics-engineering/project/CODEOWNERS
+index f1e0466c..cd5ea9ff 100644
+--- a/films/analytics-engineering/project/CODEOWNERS
++++ b/films/analytics-engineering/project/CODEOWNERS
+@@ -64,6 +64,7 @@
+ # Who uses it: each consumer
+ /exposures/finance/                                      finance@uni.example
+ /exposures/planning/                                     planning@uni.example
++/exposures/registrar/                                    mei.tanaka@uni.example
+ /exposures/wallet/                                       wallet@uni.example
+ 
+ # Governance's rules (DEC-PRJ-12)
+diff --git a/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml b/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
+index 6da4ffaf..3ab43ef3 100644
+--- a/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
++++ b/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml
+@@ -13,3 +13,16 @@ exposures:
+     depends_on:
+       - ref('mart_planning__near_award')
+       - metric('learners_near_graduate_certificate')
++
++  - name: census_report
++    label: Census report
++    type: analysis
++    maturity: high
++    description: >
++      Planning's census report, published each April: the learners and the awards conferred at
++      each faculty, as at census date. The census dashboard reconciles with it.
++    owner:
++      name: Planning
++      email: planning@uni.example
++    depends_on:
++      - ref('core_credential', v=2)
+diff --git a/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml b/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
+new file mode 100644
+index 00000000..d3bb44cb
+--- /dev/null
++++ b/films/analytics-engineering/project/exposures/registrar/_registrar__exposures.yml
+@@ -0,0 +1,14 @@
++exposures:
++
++  - name: draft_submission
++    label: Draft submission
++    type: analysis
++    maturity: high
++    description: >
++      The registrar's office's draft of the awards the university reports each year: every award
++      conferred, checked by the office before it's submitted.
++    owner:
++      name: Mei Tanaka, registrar's office
++      email: mei.tanaka@uni.example
++    depends_on:
++      - ref('core_credential', v=2)
+diff --git a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+index e0875e89..dfab6d7c 100644
+--- a/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
++++ b/films/analytics-engineering/project/governance/5-data-contracts/core_credential_v2.yaml
+@@ -214,4 +214,6 @@ customProperties:
+   value: core_credential_v2
+ - property: consumers
+   value:
++  - exposure census_report
++  - exposure draft_submission
+   - product learner_wallet
+diff --git a/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml b/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
+index ed562170..9f6ed495 100644
+--- a/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
++++ b/films/analytics-engineering/project/governance/6-product-descriptors/learner_records.yaml
+@@ -50,6 +50,8 @@ support:
+ customProperties:
+ - property: consumers
+   value:
++  - exposure census_report
++  - exposure draft_submission
+   - product learner_wallet
+   - product learners_near_an_award
+   - product tuition_forgone
+-- 
+2.43.0
+

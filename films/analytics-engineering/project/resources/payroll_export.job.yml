@@ -1,0 +1,37 @@
+# Payroll's export, as a job: at 06:00 every Thursday, Sydney time, dbt builds and tests payroll's
+# export and everything it reads (+mart_finance__casual_pay_paid); a failing test stops it before
+# Finance reads a wrong figure. Pay days are every second Thursday: on a Thursday that isn't one, it
+# builds the same figures as the last pay day. Finance reads the table where it's built.
+#
+# Written as a file, reviewed in a pull request, and deployed by the bundle (databricks.yml) the same
+# way to test and to production (DEC-PRJ-16). For years the same export was a script on one person's
+# laptop, run by hand before dawn (examples/scripts-became-software/before/).
+
+resources:
+  jobs:
+    payroll_export:
+      name: Payroll's export
+      description: What casual staff are paid on each pay day, by faculty and unit, for Finance (mart_finance__casual_pay_paid).
+      schedule:
+        quartz_cron_expression: "0 0 6 ? * THU"
+        timezone_id: Australia/Sydney
+      email_notifications:
+        on_failure: [platform@uni.example]
+      tasks:
+        - task_key: build_and_test
+          description: Build and test payroll's export and everything it reads.
+          environment_key: dbt
+          dbt_task:
+            project_directory: ../
+            warehouse_id: ${var.warehouse_id}
+            catalog: ${var.catalog}
+            schema: ${var.schema}
+            # unit tests run before the merge, in CI, as dbt's docs advise; the job tests the data
+            commands:
+              - dbt build --select +mart_finance__casual_pay_paid --exclude-resource-type unit_test
+      environments:
+        - environment_key: dbt
+          spec:
+            client: "2"
+            dependencies:
+              - dbt-databricks==1.12.5

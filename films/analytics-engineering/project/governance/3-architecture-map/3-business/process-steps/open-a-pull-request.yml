@@ -1,0 +1,11 @@
+name: open a pull request
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: planning contributor
+- access (reads): change draft
+- access (reads): test and its result
+- access (writes): pull request
+- realization: change a data product
+- triggering: review the code
+status: confirmed

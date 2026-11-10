@@ -1,0 +1,86 @@
+{
+  "draft": true,
+  "title": "Leading a data team",
+  "title_es": "Liderar un equipo de datos",
+  "planned": 4,
+  "lead": "The third series of Leading data people. Helena Novak leads a data team of eight through a busy year: old reports nobody opens, meetings that decide nothing, alerts nobody acts on, and more requests than people. Four ideas help her lead it, one in each film.",
+  "lead_es": "La tercera serie de Liderar equipos de datos. Helena Novak dirige un equipo de datos de ocho personas en un año cargado: reportes viejos que nadie abre, reuniones que no deciden nada, alertas que nadie atiende y más pedidos que personas. Cuatro ideas la ayudan a dirigirlo, una en cada película.",
+  "description": "Four films, one idea each, taught from its own sources: less, on purpose (keep what people use and stop the rest, together); one small change at a time (improvement is everyone's job); the team comes first (nobody alone, nobody the only one who knows); and a few clear rules that let people decide where the work is.",
+  "description_es": "Cuatro películas, una idea en cada una, enseñada desde sus propias fuentes: menos, a propósito (conservar lo que se usa y dejar el resto, en equipo); un cambio pequeño cada vez (mejorar es trabajo de todos); primero el equipo (nadie solo, nadie el único que sabe); y unas pocas reglas claras que dejan decidir a la gente donde está el trabajo.",
+  "card": "Four ideas to lead by: do less on purpose, improve in small steps, put the team first, and let people decide.",
+  "card_es": "Cuatro ideas para liderar: hacer menos a propósito, mejorar a pasos cortos, poner primero al equipo y dejar decidir.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: a team's year, from busy to better",
+  "thread_h_es": "Un hilo: el año de un equipo, de cargado a mejor",
+  "thread": "In 2027 the data team keeps 38 old reports, spends eight hours a week in meetings and gets about sixty alerts a week. With Helena, the team stops what nobody uses, improves its own work one small change at a time, makes sure nobody is alone or the only one who knows, and agrees a few rules that let the faculties build their own reports.",
+  "thread_es": "En 2027 el equipo de datos mantiene 38 reportes viejos, pasa ocho horas a la semana en reuniones y recibe unas sesenta alertas por semana. Con Helena, el equipo deja lo que nadie usa, mejora su propio trabajo un cambio pequeño cada vez, se asegura de que nadie esté solo ni sea el único que sabe y acuerda unas pocas reglas que dejan a las facultades construir sus propios reportes.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Builds for his faculty",
+      "Anil Kurian, in the Faculty of Health, the first of the faculties' data partners"
+    ],
+    [
+      "tech",
+      "Leads the team",
+      "Helena Novak, the data manager, who gives the time and shows the small wins"
+    ],
+    [
+      "tech",
+      "Draws the map",
+      "Noor Rahman, the data architect"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who keeps the platform and its alerts"
+    ],
+    [
+      "tech",
+      "Builds the models",
+      "Jun Park, the analytics engineer"
+    ],
+    [
+      "tech",
+      "Learns the craft",
+      "Ivy Reyes, a graduate data analyst"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Construye para su facultad",
+      "Anil Kurian, de la Facultad de Salud, el primero de los referentes de datos de las facultades"
+    ],
+    [
+      "tech",
+      "Dirige el equipo",
+      "Helena Novak, la gestora de datos, que da el tiempo y muestra los pequeños logros"
+    ],
+    [
+      "tech",
+      "Dibuja el mapa",
+      "Noor Rahman, la arquitecta de datos"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que cuida la plataforma y sus alertas"
+    ],
+    [
+      "tech",
+      "Construye los modelos",
+      "Jun Park, el ingeniero analítico"
+    ],
+    [
+      "tech",
+      "Aprende el oficio",
+      "Ivy Reyes, analista de datos recién graduada"
+    ]
+  ]
+}

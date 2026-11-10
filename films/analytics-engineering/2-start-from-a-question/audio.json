@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/start-from-a-question/soundtrack.mp3",
+      "size": 4175037,
+      "sha256": "315a74d644ebf7ac618eb311fe83e4f6307891a4e353a5c509745ec577bf0c8a",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/315a74d644ebf7ac618eb311fe83e4f6307891a4e353a5c509745ec577bf0c8a.mp3"
+    }
+  ]
+}

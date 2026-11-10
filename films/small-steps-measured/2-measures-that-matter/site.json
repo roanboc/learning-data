@@ -1,0 +1,88 @@
+{
+  "kicker": "Measuring what people get",
+  "kicker_es": "Medir lo que la gente recibe",
+  "title_es": "Medidas que importan",
+  "h1": "Measures that matter: count what people get, not how busy you are",
+  "h1_es": "Medidas que importan: cuenta lo que la gente recibe, no cuánto trabajas",
+  "lead": "In July 2027, Helena's team is busy, but no one can say whether people get what they need. She puts eight measures on one page, in three groups, each with a baseline, one definition, a reader and a decision. By December, days from ask to first use are 14, not 41.",
+  "lead_es": "En julio de 2027, el equipo de Helena está ocupado, pero nadie sabe si la gente recibe lo que necesita. Ella pone ocho medidas en una página, en tres grupos, cada una con su línea base, una definición, un lector y una decisión. En diciembre, de la solicitud al primer uso hay 14 días, no 41.",
+  "description": "A film on measuring a data team by what people get, the second of Small steps, measured, the fourth series of Data management. In July 2027, Helena Novak puts the team's measures on one page, as her data strategy promised: eight, in three groups, as Kaplan and Norton's balanced scorecard groups its measures, so a gain in one place can't hide a loss in another. Delivery: days from ask to first use (41 working days in February, the baseline), sent back (one piece of finished work in eight, in July) and load (pieces of work open at once, against a limit of six). Data management: products with an owner, and their promise met (58% in March). Value: benefits against each case, decisions informed, people using the products each month, and two questions, twice a year, to the people the team serves. Each measure has a baseline, one definition in the catalog's glossary, a reader and the decision it serves, and shows as a line across the months, never one number lit red or green. On Thursday 12 August, promises met stand at 82%, but nine pieces of work are open against six: the team finishes before it starts, and by mid-September the load is six again. Goodhart's law, named once: every number is counted from the tracker and the platform's own logs, first use is confirmed by the person who asked, and every measure is the team's, never a target for one person. By December: 14 days, half as much sent back, 86% of promises met, 910 people a month, and the old warehouse retired. It opens in New York in 1952, where Dr Virginia Apgar gave every newborn a score of five signs that anyone in the room could take, the same way every time.",
+  "description_es": "Una película sobre medir un equipo de datos por lo que la gente recibe, la segunda de Pasos pequeños, medidos, la cuarta serie de Gestión de datos. En julio de 2027, Helena Novak pone las medidas del equipo en una página, como prometía su estrategia de datos: ocho, en tres grupos, como el cuadro de mando integral de Kaplan y Norton agrupa sus medidas, para que una ganancia en un lugar no oculte una pérdida en otro. Entrega: de la solicitud al primer uso (41 días hábiles en febrero, la línea base), lo devuelto (uno de cada ocho trabajos terminados, en julio) y la carga (trabajos abiertos a la vez, frente a un límite de seis). Gestión de datos: productos con dueño, y su promesa cumplida (58% en marzo). Valor: beneficios frente a cada caso de negocio, decisiones informadas, personas que usan los productos cada mes, y dos preguntas, dos veces al año, a las personas a las que sirve el equipo. Cada medida tiene una línea base, una definición en el glosario del catálogo, un lector y la decisión a la que sirve, y se muestra como una línea a lo largo de los meses, nunca un número en rojo o verde. El jueves 12 de agosto, las promesas cumplidas llegan al 82%, pero hay nueve trabajos abiertos frente a seis: el equipo termina antes de empezar más, y a mediados de septiembre la carga vuelve a seis. La ley de Goodhart, nombrada una vez: cada cifra se cuenta del gestor de incidencias y de los registros de la propia plataforma, el primer uso lo confirma quien lo pidió, y cada medida es del equipo, nunca una meta para una persona. En diciembre: 14 días, la mitad de devoluciones, el 86% de las promesas cumplidas, 910 personas al mes y el almacén antiguo retirado. Empieza en Nueva York en 1952, donde la Dra. Virginia Apgar dio a cada recién nacido una puntuación de cinco signos que cualquiera en la sala podía dar, siempre de la misma manera.",
+  "card": "Helena puts eight measures of what people get on one page, each with a baseline, a definition and the decision it serves.",
+  "card_es": "Helena pone en una página ocho medidas de lo que la gente recibe, cada una con su línea base, una definición y la decisión a la que sirve.",
+  "chapters_es": {
+    "minute": "El primer minuto",
+    "busy": "Ocupado no es mejor",
+    "groups": "Tres grupos, pocas medidas",
+    "baseline": "Una línea base y una decisión",
+    "trend": "La tendencia, no un número",
+    "team": "Del equipo, nunca una meta",
+    "monday": "El lunes"
+  },
+  "past": [
+    "New York, 1952: the first minute",
+    "An anaesthetist gave every newborn a score of five signs, taken one minute after birth, the same way every time. A baby in trouble showed at once, and doctors could compare what they did. A data team's measures work the same way."
+  ],
+  "past_es": [
+    "Nueva York, 1952: el primer minuto",
+    "Una anestesióloga dio a cada recién nacido una puntuación de cinco signos, al minuto de nacer, siempre de la misma manera. Un bebé en apuros se veía de inmediato, y los médicos podían comparar lo que hacían. Las medidas de un equipo de datos funcionan igual."
+  ],
+  "next_h": "You've seen how a few measures show what people get. Next: one small change to how the team works, every week.",
+  "next_h_es": "Viste cómo unas pocas medidas muestran lo que la gente recibe. Después: un pequeño cambio en la forma de trabajar del equipo, cada semana.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Virginia Apgar's proposal, 1953",
+        "title_es": "La propuesta de Virginia Apgar, 1953 (en inglés)",
+        "line": "Her own paper: the five signs, how to score each one, and what scoring over a thousand babies showed.",
+        "line_es": "Su propio artículo: los cinco signos, cómo puntuar cada uno, y lo que mostró puntuar a más de mil bebés.",
+        "href": "https://neonatology.net/history/classic-books/a-proposal-apgar/",
+        "href_es": "https://neonatology.net/history/classic-books/a-proposal-apgar/"
+      },
+      {
+        "title": "A scorecard for newborns",
+        "title_es": "Una puntuación para recién nacidos (en inglés)",
+        "line": "The US National Library of Medicine on why newborns needed the score, how Apgar came to it, and how hospitals took it up.",
+        "line_es": "La Biblioteca Nacional de Medicina de EE. UU. sobre por qué los recién nacidos necesitaban la puntuación, cómo llegó Apgar a ella y cómo la adoptaron los hospitales.",
+        "href": "https://profiles.nlm.nih.gov/spotlight/cp/feature/obstetric",
+        "href_es": "https://profiles.nlm.nih.gov/spotlight/cp/feature/obstetric"
+      },
+      {
+        "title": "The balanced scorecard",
+        "title_es": "El cuadro de mando integral (en inglés)",
+        "line": "An overview of the idea Kaplan and Norton named in 1992: measures in a few groups, read together, each tied to the strategy.",
+        "line_es": "Un resumen de la idea que Kaplan y Norton nombraron en 1992: medidas en pocos grupos, leídas juntas, cada una ligada a la estrategia.",
+        "href": "https://balancedscorecard.org/bsc-basics-overview/",
+        "href_es": "https://balancedscorecard.org/bsc-basics-overview/"
+      },
+      {
+        "title": "Goodhart's law",
+        "title_es": "La ley de Goodhart (en inglés)",
+        "line": "Where the law comes from, Charles Goodhart's 1975 paper on monetary policy, and how it came to be put as it is today.",
+        "line_es": "De dónde viene la ley, un artículo de Charles Goodhart de 1975 sobre política monetaria, y cómo llegó a decirse como hoy.",
+        "href": "https://en.wikipedia.org/wiki/Goodhart%27s_law",
+        "href_es": "https://en.wikipedia.org/wiki/Goodhart%27s_law"
+      },
+      {
+        "title": "Teachers of data",
+        "title_es": "Docentes de datos",
+        "line": "The data governance film where governance is measured from the work every day, from each night's checks and from people, not from a yearly score.",
+        "line_es": "La película de gobierno de datos donde la gobernanza se mide desde el trabajo cada día, con los chequeos de cada noche y con la gente, no con una nota anual.",
+        "href": "https://data.learn-all.org/data-governance/teachers-of-data/",
+        "href_es": "https://data.learn-all.org/es/data-governance/teachers-of-data/"
+      },
+      {
+        "title": "Measure the work, not the people",
+        "title_es": "Mide el trabajo, no a las personas",
+        "line": "The leading data people film where the team reads this page together every second Thursday, and asks what slowed the work, never who.",
+        "line_es": "La película de Liderar equipos de datos donde el equipo lee esta página cada dos jueves y pregunta qué frenó el trabajo, nunca quién.",
+        "href": "https://data.learn-all.org/ownership-and-performance/measure-the-work/",
+        "href_es": "https://data.learn-all.org/es/ownership-and-performance/measure-the-work/"
+      }
+    ]
+  }
+}

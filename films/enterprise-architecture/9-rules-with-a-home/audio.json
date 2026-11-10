@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/rules-with-a-home/soundtrack.mp3",
+      "size": 6786969,
+      "sha256": "d51530f5a814e7f85bbbde1a2612d6dc712b70be4452100f2d4e1fd922ac8cb8",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/d51530f5a814e7f85bbbde1a2612d6dc712b70be4452100f2d4e1fd922ac8cb8.mp3"
+    }
+  ]
+}

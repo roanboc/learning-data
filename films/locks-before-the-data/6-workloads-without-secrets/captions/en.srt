@@ -1,0 +1,307 @@
+1
+00:00:01,600 --> 00:00:04,313
+The Netherlands, in the middle of the 1990s.
+
+2
+00:00:06,213 --> 00:00:10,972
+Cars stand in every street, and every year about one in two hundred of them is stolen.
+
+3
+00:00:12,872 --> 00:00:16,385
+The trouble is in the ignition: the key only turns a switch.
+
+4
+00:00:18,085 --> 00:00:22,703
+A wire behind the steering wheel can close it too, and so can a copy of the key.
+
+5
+00:00:24,603 --> 00:00:31,547
+For the owner, that means a morning with no car: no way to work, a claim to make, and a car that may never come back.
+
+6
+00:00:33,447 --> 00:00:34,887
+Something has to change.
+
+7
+00:00:38,387 --> 00:00:47,548
+In 1995, the European Union decides: from October 1998, every new car sold must have an electronic immobiliser.
+
+8
+00:00:49,448 --> 00:00:51,028
+It's a small chip in the key.
+
+9
+00:00:52,328 --> 00:00:56,315
+When the key turns, the car asks the chip, by radio, for its code.
+
+10
+00:00:58,015 --> 00:01:00,524
+Without the right answer, the engine won't run.
+
+11
+00:01:02,424 --> 00:01:06,334
+A wire starts nothing now, and nor does a key cut to the same shape.
+
+12
+00:01:08,234 --> 00:01:15,723
+In the Netherlands, new cars with one go from about one in five in 1994 to all of them by 1998.
+
+13
+00:01:17,423 --> 00:01:22,182
+And car theft falls by about forty percent, for no more than fifty euros a car.
+
+14
+00:01:23,882 --> 00:01:26,697
+Far fewer owners wake to find their car gone.
+
+15
+00:01:28,597 --> 00:01:34,672
+And for data: a job that proves who it is each time it runs, with nothing anyone could copy.
+
+16
+00:01:36,572 --> 00:01:41,070
+At the university, the nightly job still starts with a copy of a person's key.
+
+17
+00:01:42,570 --> 00:01:48,628
+This film gives it a way in of its own, in Microsoft Entra ID, Azure Databricks and GitHub.
+
+18
+00:01:54,928 --> 00:02:01,008
+Every night at two, a job loads the registrar's records onto the university's data platform.
+
+19
+00:02:02,508 --> 00:02:05,627
+It already has a name of its own: registrar-loader.
+
+20
+00:02:07,127 --> 00:02:14,421
+But it still runs on Jun Park's personal token, made on 14 March 2024, with no end date.
+
+21
+00:02:16,121 --> 00:02:20,650
+To the platform, whoever holds a copy is Jun, with everything Jun may do.
+
+22
+00:02:22,150 --> 00:02:27,679
+And there are copies: in the job's settings, in a notebook in GitHub, and on Jun's laptop.
+
+23
+00:02:29,579 --> 00:02:34,652
+If Jun moved team, the job would stop. If someone found a copy, they'd be Jun.
+
+24
+00:02:36,352 --> 00:02:40,504
+Like a car without an immobiliser, it starts for anyone with a copy.
+
+25
+00:02:42,204 --> 00:02:47,157
+No secret to lose showed the way up: at the top, nobody keeps a secret at all.
+
+26
+00:02:49,057 --> 00:02:58,304
+In Microsoft Entra ID, the university's directory, registrar-loader is a service principal: an identity for a workload, not a person.
+
+27
+00:03:00,004 --> 00:03:01,510
+Sam Okafor owns it.
+
+28
+00:03:02,810 --> 00:03:08,643
+It's the only member of one group, the registrar's owners, which owns the registrar's catalog.
+
+29
+00:03:10,143 --> 00:03:14,060
+Azure Databricks reads both from the directory, as it reads people.
+
+30
+00:03:15,560 --> 00:03:20,533
+So its rights come from a group, never from a person, as Who is it, really? decided.
+
+31
+00:03:22,233 --> 00:03:27,886
+Sam sets the job to run as registrar-loader, and takes Jun's token out of its settings.
+
+32
+00:03:29,786 --> 00:03:35,913
+Now the platform knows which job it is, and gives each run its way in, with nothing anyone keeps.
+
+33
+00:03:37,613 --> 00:03:43,395
+On Tuesday 20 October, at two, the load runs under its own name for the first time.
+
+34
+00:03:45,095 --> 00:03:48,036
+The record says registrar-loader now, not Jun.
+
+35
+00:03:49,536 --> 00:03:51,936
+And if Jun moves team, nothing breaks.
+
+36
+00:03:53,836 --> 00:04:00,471
+The job's code is in GitHub, and until now, Jun deployed each change from his laptop, with his token.
+
+37
+00:04:01,971 --> 00:04:05,684
+Now GitHub Actions deploys it, and keeps no token either.
+
+38
+00:04:07,184 --> 00:04:12,701
+For every run, GitHub signs a short note: this repository, this environment, now.
+
+39
+00:04:14,601 --> 00:04:22,537
+Azure Databricks checks GitHub's signature, and one thing more: does the note say exactly what registrar-loader's policy names?
+
+40
+00:04:24,237 --> 00:04:30,666
+Sam set that policy once: the platform's repository, in its production environment, and nothing else.
+
+41
+00:04:32,366 --> 00:04:37,477
+When they match, the platform gives the run a pass as registrar-loader, good for an hour.
+
+42
+00:04:39,377 --> 00:04:43,960
+Run from anywhere else, the same code gets a note that says where, and no pass.
+
+43
+00:04:45,860 --> 00:04:50,932
+The note is good for minutes, for that one run, and nothing is stored in GitHub to steal.
+
+44
+00:04:52,632 --> 00:04:58,796
+Where a workflow changes Azure itself, Microsoft Entra ID trusts the same note, the same way.
+
+45
+00:05:00,496 --> 00:05:06,633
+Like the car asking its key, the platform asks each run where it comes from, and a copy can't answer.
+
+46
+00:05:08,533 --> 00:05:12,731
+Who may change production, and who approves, is From a branch to production's.
+
+47
+00:05:14,631 --> 00:05:19,543
+On Azure, a resource can have an identity of its own too: a managed identity.
+
+48
+00:05:21,043 --> 00:05:24,602
+Azure looks after its credentials, and nobody ever sees them.
+
+49
+00:05:26,302 --> 00:05:33,149
+Network, storage and keys gives the catalog one: the only identity that may read the registrar's files.
+
+50
+00:05:34,849 --> 00:05:40,134
+And on the platform, people linked their Git folders to GitHub with their own personal tokens.
+
+51
+00:05:41,634 --> 00:05:45,877
+Jun's could reach every repository he can, and it had no end date.
+
+52
+00:05:47,577 --> 00:05:53,663
+Now each link goes through the Databricks GitHub app, installed on the platform's repository alone.
+
+53
+00:05:55,163 --> 00:06:00,131
+It acts for each person with passes that end after eight hours, and renew themselves.
+
+54
+00:06:01,831 --> 00:06:07,424
+When a tool works in GitHub, it gets an app with only what it needs, never a person's token.
+
+55
+00:06:09,324 --> 00:06:14,830
+One door still wants a password: the student system, where the registrar's records come from.
+
+56
+00:06:16,530 --> 00:06:18,262
+It offers no other way in yet.
+
+57
+00:06:19,962 --> 00:06:25,104
+So the password lives in one place: a key vault in Azure, for this job alone.
+
+58
+00:06:26,804 --> 00:06:31,629
+The platform reads it through a secret scope, and only registrar-loader may read it.
+
+59
+00:06:33,529 --> 00:06:38,194
+If a notebook prints it by mistake, the platform shows only the word redacted.
+
+60
+00:06:40,094 --> 00:06:47,701
+Once a month, a small function changes it, at the student system and in the vault, signing in as its own managed identity.
+
+61
+00:06:49,801 --> 00:06:54,360
+And the exception is written down: why, who owns it, and when it's looked at again.
+
+62
+00:06:56,260 --> 00:07:02,203
+On No secret to lose's ladder, it's a lower rung, kept only until the student system can climb.
+
+63
+00:07:04,103 --> 00:07:05,956
+But what about the copies already made?
+
+64
+00:07:07,456 --> 00:07:13,393
+On Tuesday 3 November, Sam turns on GitHub Secret Protection for the repository.
+
+65
+00:07:14,893 --> 00:07:19,567
+Secret scanning reads the whole history, every branch, back to the first commit.
+
+66
+00:07:21,267 --> 00:07:27,180
+It finds Jun's token in a notebook pushed in March 2024, and checks whether it still works.
+
+67
+00:07:28,480 --> 00:07:29,206
+It does.
+
+68
+00:07:30,906 --> 00:07:34,816
+The job hasn't used it for two weeks, so that morning, Jun ends it.
+
+69
+00:07:36,316 --> 00:07:42,492
+The copies in the notebook and on his laptop open nothing now, and Sam closes the alert: revoked.
+
+70
+00:07:44,392 --> 00:07:47,454
+The token stays in the history, but it opens nothing.
+
+71
+00:07:49,354 --> 00:07:53,847
+From now on, push protection stops a push with a secret in it, before it lands.
+
+72
+00:07:55,347 --> 00:07:59,951
+Anyone who pushes past it gives a reason, and the platform team gets an alert.
+
+73
+00:08:01,651 --> 00:08:06,986
+That afternoon, as People and groups showed, personal tokens are switched off on the platform.
+
+74
+00:08:12,086 --> 00:08:19,969
+In the Netherlands of the 1990s, a car that asked its key meant a wire started nothing, and far fewer cars were stolen.
+
+75
+00:08:21,869 --> 00:08:28,639
+At the university, the two o'clock job proves who it is each time it runs, with nothing anyone could copy.
+
+76
+00:08:30,539 --> 00:08:37,556
+One password is left, in one vault, changed by a machine, and a secret pushed into the code is stopped at the door.
+
+77
+00:08:39,656 --> 00:08:42,311
+A workload proves who it is without a password.

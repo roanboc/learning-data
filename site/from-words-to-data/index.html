@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>From words to data · Learning Data</title>
+<meta name="description" content="Seven short films on data modelling: language and meaning, conceptual and logical models, shapes for writing and reading, hybrid databases, semantic layers and ontologies, and keeping it all true with AI.">
+<meta property="og:title" content="From words to data · Learning Data"><meta property="og:description" content="Seven short films on data modelling, from how minds turn the world into words, to how AI can help keep meaning true. They follow one idea, older than any system: the credential, how people prove what they know."><meta property="og:image" content="https://data.learn-all.org/assets/whats-in-a-word-poster.jpg">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/from-words-to-data/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/from-words-to-data/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Site"><a href="../">Start here</a><a href="../topics/" aria-current="true">Topics</a><a href="../journey/">Making of</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="More options"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Language"><a href="./" aria-current="true" lang="en">EN</a><a href="../es/from-words-to-data/" lang="es" hreflang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Dark mode"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Go to learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contact Rodrigo on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../assets/whats-in-a-word-poster.jpg" alt=""><img src="../assets/older-than-the-systems-poster.jpg" alt=""><img src="../assets/built-to-write-built-to-read-poster.jpg" alt=""><img src="../assets/many-ways-to-read-poster.jpg" alt=""><img src="../assets/both-at-once-poster.jpg" alt=""><img src="../assets/meaning-machines-can-read-poster.jpg" alt=""><img src="../assets/keeping-it-true-poster.jpg" alt=""><img src="../assets/whats-in-a-word-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Topics</a> › <a href="../topics/#data-modelling">Data modelling</a> › From words to data</p>
+<h1>From words to data</h1>
+<p class="lead">Seven short films on data modelling, from how minds turn the world into words, to how AI can help keep meaning true. They follow one idea, older than any system: the credential, how people prove what they know.</p>
+</section>
+<nav class="course" aria-label="Course: From words to data"><div class="course-in"><p class="course-t"><small>Series · Data modelling</small>From words to data</p><ol class="path" data-store="ld-from-words-to-data" data-labs="7" data-quiz="7" data-series="ld-whats-in-a-word ld-older-than-the-systems ld-built-to-write-built-to-read ld-many-ways-to-read ld-both-at-once ld-meaning-machines-can-read ld-keeping-it-true" data-text='{"watched": "Watched", "films": "{n} of 7 films watched", "labs": "{n} of 7 labs explored", "quiz": "{n} of 7 answered \u00b7 {ok} right"}'>
+<li><a href="#films" aria-current="step"><span class="n"><b>1</b></span><b>The films</b><span>Seven films</span></a></li>
+<li><a href="labs/"><span class="n"><b>2</b></span><b>Take it apart</b><span>Seven hands-on labs</span></a></li>
+<li><a href="scenarios/"><span class="n"><b>3</b></span><b>Make the call</b><span>7 real situations</span></a></li>
+</ol></div></nav>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">The films</h2><p>Watch them in order: each film stands alone, and each builds on the ones before it. They make most sense after The Inner Life of Data and A Sharper Sketch.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Watched","labs":"{n} of {of} labs","quiz":"{n} of {of} scenarios"}'>
+<article class="topic-card">
+<img src="../assets/whats-in-a-word-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 1 of 7 · Language and meaning</p>
+<h3><a href="whats-in-a-word/">What's in a word</a></h3>
+<p>Four offices, four numbers, one word. Before you can count anything, you have to agree what it is.</p>
+<p class="meta">6 min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-whats-in-a-word" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/older-than-the-systems-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 2 of 7 · Models and systems</p>
+<h3><a href="older-than-the-systems/">Older than the systems</a></h3>
+<p>Clay, wax, paper, a digital key: the materials changed, the idea didn't. Model it once, and hold every system up to that.</p>
+<p class="meta">5½ min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-older-than-the-systems" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/built-to-write-built-to-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 3 of 7 · Shapes for data</p>
+<h3><a href="built-to-write-built-to-read/">Built to write, built to read</a></h3>
+<p>One set of facts, two shapes: one built to write each award, one built to read ten years of them.</p>
+<p class="meta">5 min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-built-to-write-built-to-read" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/many-ways-to-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 4 of 7 · Shapes for reading</p>
+<h3><a href="many-ways-to-read/">Many ways to read</a></h3>
+<p>Star, vault or one wide table? Each shape has a job and a place. Choose per question, not per fashion.</p>
+<p class="meta">4 min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-many-ways-to-read" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/both-at-once-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 5 of 7 · Hybrid databases</p>
+<h3><a href="both-at-once/">Both at once</a></h3>
+<p>One database that writes and reads. It removes the copy, not the model.</p>
+<p class="meta">4 min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-both-at-once" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/meaning-machines-can-read-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 6 of 7 · Meaning and AI</p>
+<h3><a href="meaning-machines-can-read/">Meaning machines can read</a></h3>
+<p>An assistant answers from the meaning it can read. Glossary, taxonomy, ontology and semantic layer stack.</p>
+<p class="meta">5½ min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-meaning-machines-can-read" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../assets/keeping-it-true-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Film 7 of 7 · Keeping meaning current</p>
+<h3><a href="keeping-it-true/">Keeping it true</a></h3>
+<p>Three dashboards, three numbers for one measure. The agent recommends, people approve, and everything is versioned.</p>
+<p class="meta">5 min · Pause and think · From words to data</p>
+<p class="tc-progress" data-progress="ld-keeping-it-true" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="labs-and-scenarios" aria-labelledby="learn-h">
+<div class="mhead"><div><h2 id="learn-h">Take it apart, then make the call</h2><p>Seven hands-on labs for the whole series, one for each film's main idea, then 7 situations from every film. Your progress stays in this browser.</p></div></div>
+<p class="stop-nav"><a class="btn primary" href="labs/">Take it apart: 7 hands-on labs →</a><a class="btn" href="scenarios/">Make the call: 7 situations</a></p>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">One thread: the credential</h2><p>People have always needed to show what they know to someone who wasn't there to see them learn it. The answer has barely changed in centuries: someone trusted makes a claim about someone, in a way that others can check. The university's new microcredentials are its newest form, and each film takes them one step further.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Every film starts in the past</h2></div></div>
+<div class="prose"><table><thead><tr><th>Film</th><th>Opens with</th><th>Still true today</th></tr></thead><tbody>
+<tr><td>What's in a word</td><td>Vervet monkeys' alarm calls</td><td>A signal can stand for a kind of thing.</td></tr>
+<tr><td>Older than the systems</td><td>A guild's masterpiece, a sealed licence to teach</td><td>Someone trusted makes a claim about someone, in a way others can check.</td></tr>
+<tr><td>Built to write, built to read</td><td>Pacioli's journal and ledger, 1494</td><td>One set of facts: a shape for writing, a shape for reading.</td></tr>
+<tr><td>Many ways to read</td><td>A library's card catalogue</td><td>The same thing, reached many ways.</td></tr>
+<tr><td>Both at once</td><td>The cash register, 1879</td><td>Recording and counting in one place.</td></tr>
+<tr><td>Meaning machines can read</td><td>Linnaeus, Wilkins and Nightingale</td><td>Shared definitions let strangers compare. Universal ones fail.</td></tr>
+<tr><td>Keeping it true</td><td>Johnson's dictionary, 1755</td><td>Meaning moves. Someone has to keep up.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Four sides of every word</h2><p>Cyan outlines are technical; gold outlines are business.</p></div></div>
+<div class="four">
+<div class="card biz"><h3>Owns a word</h3><p>Mei, registrar's office: award and student</p></div>
+<div class="card biz"><h3>Brings a new word</h3><p>Tom, short courses: microcredential</p></div>
+<div class="card tech"><h3>Owns the model</h3><p>Noor, data architect, the series' guide</p></div>
+<div class="card biz"><h3>Asks the questions</h3><p>Ana, Head of School, and David, Deputy Vice-Chancellor</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Source on GitHub</a></p><p>The university, people, numbers and records in the films, the labs and the scenarios are fictional. The narration is a synthetic voice. Code: MIT licence. Film, script, captions, images and text: CC BY 4.0. Company logos and trademarks, including the Databricks and dbt logos, are not covered by either licence and belong to their owners; this project is not affiliated with or endorsed by them. See <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">notices</a>.</p></footer>
+<script src="../assets/learn/path.js"></script>
+<script src="../assets/ambient.js"></script>
+</body>
+</html>

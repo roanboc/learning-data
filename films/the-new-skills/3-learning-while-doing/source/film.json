@@ -1,0 +1,31 @@
+{
+  "key": "learning-while-doing",
+  "title": "Learning while doing",
+  "sub": "The last film of The new skills, the first series of Leading data people: learning on the job. Skills grow fastest on the real work, a small step at a time, beside someone who knows; teaching what you learn makes it last, and spreads it; and learning needs time kept for it. A new analyst learns the team's project beside a colleague, teaches the team what she learned, and by June nobody is the only one who can run a job.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the learning time in the calendar), orange is data (the sensors' counts), green is something done or shared (a small change, reviewed; a second name on a job), and amber a risk (a job only one person can run, and Angicos's problem).",
+  "src": [
+    "lw_angicos.js",
+    "lw_uni.js",
+    "lw_scenes.js"
+  ],
+  "poster": [
+    "beside",
+    "pair",
+    2.0
+  ],
+  "say": [
+    ["\\bAngicos\\b", "An zheekoos"],
+    ["\\bRecife\\b", "Reseefee"],
+    ["\\bNatal\\b", "nuh-tal"],
+    ["\\bPaulo Freire\\b", "Powloo Frayree"],
+    ["\\bFreire\\b", "Frayree"],
+    ["\\bReyes\\b", "Rayess"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "circles"
+  ],
+  "urgent": []
+}

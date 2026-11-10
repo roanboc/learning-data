@@ -1,0 +1,42 @@
+[
+  {
+    "name": "How it goes wrong",
+    "key": "how-it-goes-wrong-en",
+    "dir": "films/agents-at-work-on-data/6-how-it-goes-wrong/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/how-it-goes-wrong/film.js",
+    "video": "dist/how-it-goes-wrong.mp4",
+    "file": "how-it-goes-wrong.mp4",
+    "captions": [
+      [
+        "films/agents-at-work-on-data/6-how-it-goes-wrong/captions/en.srt",
+        "how-it-goes-wrong.en.srt"
+      ],
+      [
+        "films/agents-at-work-on-data/6-how-it-goes-wrong/captions/es.srt",
+        "how-it-goes-wrong.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/agents-at-work-on-data/6-how-it-goes-wrong/source",
+      ":(exclude)films/agents-at-work-on-data/6-how-it-goes-wrong/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 372,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

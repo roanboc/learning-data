@@ -1,0 +1,223 @@
+1
+00:00:01,400 --> 00:00:04,020
+El 20 de julio de 1969.
+
+2
+00:00:05,320 --> 00:00:11,381
+Neil Armstrong y Buzz Aldrin bajan a la Luna en su módulo lunar, guiado por su computadora.
+
+3
+00:00:12,881 --> 00:00:16,677
+A los cinco minutos se enciende una luz, con un código: 1202.
+
+4
+00:00:18,377 --> 00:00:20,448
+La computadora tiene más trabajo que tiempo.
+
+5
+00:00:21,148 --> 00:00:23,594
+La tripulación no sabe el código, y pregunta a Houston.
+
+6
+00:00:24,694 --> 00:00:30,980
+Si la computadora se detenía, nada los guiaría; si Houston ordenaba abortar, volverían sin alunizar.
+
+7
+00:00:32,480 --> 00:00:34,647
+Alguien tenía que decidir, en segundos.
+
+8
+00:00:36,547 --> 00:00:40,609
+Sus creadores, en el MIT, la habían hecho para vigilarse a sí misma:
+
+9
+00:00:40,809 --> 00:00:47,080
+con demasiado trabajo, se reinicia, conserva la guía y su trabajo más importante, y deja el resto.
+
+10
+00:00:48,380 --> 00:00:51,224
+Y da la alarma, para que decidan las personas.
+
+11
+00:00:52,324 --> 00:00:58,169
+En Houston, el oficial de guiado, Steve Bales, de veintiséis años, acababa de revisar sus alarmas:
+
+12
+00:00:58,369 --> 00:01:03,191
+1202 significaba seguir, salvo que se repitiera demasiado o el descenso se desviara.
+
+13
+00:01:04,491 --> 00:01:07,709
+Medio minuto después de la alarma, sube la palabra: adelante.
+
+14
+00:01:09,409 --> 00:01:11,801
+Llegan cuatro alarmas más; cada vez, adelante.
+
+15
+00:01:13,101 --> 00:01:14,232
+Y el Eagle aluniza.
+
+16
+00:01:16,532 --> 00:01:21,038
+La computadora se vigiló y dijo qué fallaba, y decidieron personas que sabían.
+
+17
+00:01:22,538 --> 00:01:27,586
+Este noviembre, una noche, falla una tarea que paga al personal ocasional de la universidad.
+
+18
+00:01:28,286 --> 00:01:33,419
+Al amanecer, la plataforma ya encontró la causa y propuso un arreglo, y decide una persona.
+
+19
+00:01:41,219 --> 00:01:46,659
+En la universidad, el personal ocasional, pagado por hora, declara en una app las horas que enseña.
+
+20
+00:01:47,759 --> 00:01:55,555
+El lunes antes de cada día de pago, a las diez de la noche, la tarea de horas arma las horas a pagar y las envía a nómina.
+
+21
+00:01:57,055 --> 00:02:03,666
+El lunes 2 de noviembre, a las 15:02, entra en producción una nueva versión de la app.
+
+22
+00:02:04,766 --> 00:02:11,936
+Ahora los tutores escriben sus horas como las dicen: 1:30 por una hora y media, donde enviaba 1.50.
+
+23
+00:02:13,436 --> 00:02:15,707
+Su contrato aún dice horas decimales.
+
+24
+00:02:17,407 --> 00:02:22,287
+A las 22:03, la tarea falla: no puede leer 1:30 como un número.
+
+25
+00:02:24,187 --> 00:02:28,242
+Nada erróneo llega a nómina: la tarea se detiene, y las horas esperan.
+
+26
+00:02:29,742 --> 00:02:36,106
+Nómina las necesita el martes a mediodía, para pagarle el jueves a 856 personas.
+
+27
+00:02:39,706 --> 00:02:41,316
+Pero la plataforma está vigilando.
+
+28
+00:02:42,616 --> 00:02:48,783
+Sam, que opera la plataforma, tiene a Genie ZeroOps vigilando las tareas y tablas del pago:
+
+29
+00:02:48,983 --> 00:02:52,244
+un agente que trabaja en segundo plano, sin que nadie se lo pida.
+
+30
+00:02:53,344 --> 00:02:56,091
+Encuentra el fallo, a las 22:03.
+
+31
+00:02:57,391 --> 00:03:04,156
+Sigue la causa por el linaje hasta la tabla de la app, donde las horas cambiaron de forma a las 15:02.
+
+32
+00:03:06,056 --> 00:03:12,917
+Dice qué toca el fallo: las horas para el sistema de nómina, la exportación de nómina y el costo de la docencia ocasional.
+
+33
+00:03:14,817 --> 00:03:18,420
+Y propone un arreglo: leer 1:30 como una hora y media.
+
+34
+00:03:19,920 --> 00:03:25,065
+Al amanecer, es un hallazgo en la bandeja de Sam, y nada ha cambiado en producción.
+
+35
+00:03:26,965 --> 00:03:31,715
+Solo puede seguir lo que la plataforma sabe: mantén el linaje, y quién es dueño de qué.
+
+36
+00:03:35,315 --> 00:03:36,914
+Martes, ocho y media.
+
+37
+00:03:38,214 --> 00:03:43,457
+Sam contrasta la causa con las horas declaradas, y le pide al agente subir su arreglo a una rama nueva.
+
+38
+00:03:44,757 --> 00:03:47,734
+Solo lo sube si una persona lo pide, y lo confirma.
+
+39
+00:03:48,834 --> 00:03:53,648
+Sam abre una solicitud de cambio, y corren sus pruebas, como en todo cambio.
+
+40
+00:03:55,148 --> 00:03:59,065
+Luego la aprueba alguien que no la escribió: Noor, a las 9:05.
+
+41
+00:04:00,565 --> 00:04:02,254
+Un agente nunca aprueba.
+
+42
+00:04:03,954 --> 00:04:08,747
+A las 9:20 la tarea corre de nuevo, y nómina tiene las horas antes de las diez.
+
+43
+00:04:10,247 --> 00:04:15,538
+El jueves cobran 856 personas del personal ocasional, Linh Nguyen entre ellas.
+
+44
+00:04:17,438 --> 00:04:20,054
+La plataforma propone; una persona aprueba.
+
+45
+00:04:24,054 --> 00:04:26,369
+El arreglo resolvió la noche, no su causa.
+
+46
+00:04:27,669 --> 00:04:31,750
+El cambio de la app era bueno para los tutores; lo que faltó fue un paso.
+
+47
+00:04:32,850 --> 00:04:41,365
+Así que la solicitud de Sam también le pide a Ingrid Holm, de RR. HH., dueña de esos datos, cambiar primero el contrato.
+
+48
+00:04:43,065 --> 00:04:46,951
+Así, quienes leen las horas lo saben antes de que cambie la app.
+
+49
+00:04:48,651 --> 00:04:51,495
+En el Apolo 11, encontrar la causa llevó una noche:
+
+50
+00:04:51,695 --> 00:04:59,254
+un documento entre dos sistemas decía muy poco, y la electrónica de un radar le quitó a la computadora un 13% de su tiempo.
+
+51
+00:05:00,754 --> 00:05:04,860
+Para las misiones siguientes cambió la lista de verificación, y el software aprendió a comprobarlo.
+
+52
+00:05:08,660 --> 00:05:17,169
+Vigilar sistemas no es nuevo: los ingenieros de confiabilidad lo hacen hace años, con alertas, guardias y revisiones sin culpables.
+
+53
+00:05:18,469 --> 00:05:22,597
+Lo nuevo es que la plataforma hace las primeras horas del trabajo, de noche.
+
+54
+00:05:23,697 --> 00:05:30,034
+Elige qué vigila, mantén el linaje y los dueños que lee, y decide quién revisa y quién aprueba.
+
+55
+00:05:31,734 --> 00:05:34,623
+Ya hay estándares, así que no reinventes la rueda:
+
+56
+00:05:34,823 --> 00:05:39,371
+investiga, adapta, implementa, itera, empezando por la documentación oficial.

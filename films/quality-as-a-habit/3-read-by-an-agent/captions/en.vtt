@@ -1,0 +1,223 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:10.338
+Around the year 2000, people writing for the United Nations, the European Union and NATO used spell checkers.
+
+00:00:11.638 --> 00:00:15.341
+A spell checker marks a word it doesn't know, and offers one it does.
+
+00:00:16.641 --> 00:00:22.451
+Some checkers' word lists had co-operation, with a hyphen, but not cooperation, without one.
+
+00:00:23.951 --> 00:00:32.348
+So when a writer typed cooperation, the checker marked it wrong, and the first word it offered was Cupertino, a city in California.
+
+00:00:33.848 --> 00:00:35.405
+Writers in a hurry took it.
+
+00:00:37.105 --> 00:00:45.886
+A NATO report of 1999 named the Organization for Security and Cupertino in Europe, and readers had to guess what was meant.
+
+00:00:47.586 --> 00:00:52.474
+By 2006, hundreds could be found on these organisations' websites.
+
+00:00:53.974 --> 00:00:58.308
+A confident machine, a gap in what it read, and nobody reading after it.
+
+00:01:00.208 --> 00:01:01.596
+Something had to change.
+
+00:01:03.096 --> 00:01:08.600
+In 2000, the European Commission's English translators wrote about it in their magazine.
+
+00:01:09.300 --> 00:01:15.294
+Among the European Union's writers and translators, the fault got a name: the Cupertino effect.
+
+00:01:16.594 --> 00:01:20.707
+The name was a warning: read what the checker offers before you take it.
+
+00:01:22.407 --> 00:01:27.265
+And the checkers' makers added to their word lists, so cooperation was a word they knew.
+
+00:01:28.565 --> 00:01:36.856
+By 2007, checkers no longer routinely offered Cupertino for cooperation, and readers got the word the writer meant.
+
+00:01:38.756 --> 00:01:47.265
+At the university, in October 2026, an agent read an empty column, and answered 412, with confidence.
+
+00:01:48.765 --> 00:01:57.281
+Once the data said what empty means, it answered 38, and 374 graduates weren't asked again for a name they had given.
+
+00:02:05.581 --> 00:02:08.823
+Thursday 22 October 2026.
+
+00:02:09.923 --> 00:02:13.632
+In three weeks, the list for December's ceremonies goes to the printer.
+
+00:02:14.332 --> 00:02:22.014
+Malia, who runs the ceremonies, asks the graduations team's agent which December graduates haven't confirmed their name.
+
+00:02:22.714 --> 00:02:26.199
+It reads the list, and answers at once: 412.
+
+00:02:27.699 --> 00:02:29.648
+No doubt, and no question back.
+
+00:02:31.148 --> 00:02:36.981
+Malia drafts an email to all 412: please confirm your name before it's printed.
+
+00:02:38.281 --> 00:02:41.311
+Then, before she sends it, she reads the answer again.
+
+00:02:42.811 --> 00:02:45.200
+412 is a fifth of the list.
+
+00:02:46.500 --> 00:02:51.843
+In March, 95 graduates in every 100 answered within the portal's two weeks.
+
+00:02:52.543 --> 00:02:56.058
+A fifth still silent, ten days in, doesn't fit what she knows.
+
+00:02:57.758 --> 00:03:01.941
+So before she writes to anyone, she asks Mei, who answers for the list.
+
+00:03:04.641 --> 00:03:08.868
+The agent had counted the graduates whose confirmation date was empty.
+
+00:03:09.568 --> 00:03:11.910
+Mei knows that empty means two things there.
+
+00:03:13.210 --> 00:03:16.139
+38 graduates haven't confirmed their name yet.
+
+00:03:16.839 --> 00:03:24.715
+374 confirmed it on the paper form, before the portal opened in February, and the paper form has no date in the list.
+
+00:03:26.215 --> 00:03:30.560
+The column's description said only: date the graduate confirmed their name.
+
+00:03:31.860 --> 00:03:34.223
+Nobody had written down what empty means.
+
+00:03:35.923 --> 00:03:40.388
+Mei could have told anyone who asked, but the agent can't walk over to her desk.
+
+00:03:41.088 --> 00:03:44.624
+It reads what's written, and answers as if that were all there is.
+
+00:03:45.924 --> 00:03:48.249
+Its 412 was a Cupertino.
+
+00:03:50.149 --> 00:03:53.523
+So a column's description is part of the data's quality.
+
+00:03:54.223 --> 00:04:01.697
+One international standard for data quality calls this understandability: data its users can read and interpret.
+
+00:04:02.997 --> 00:04:08.333
+Empty meaning two things is a fault in the data, and so is a description that doesn't say so.
+
+00:04:11.033 --> 00:04:13.006
+So the team fixes the data first.
+
+00:04:14.306 --> 00:04:19.655
+Noor, the data architect, finds where the paper form is recorded, in the student system.
+
+00:04:21.155 --> 00:04:28.276
+From it, Jun adds a column that says how each name was confirmed: portal or paper, and empty means not yet.
+
+00:04:29.576 --> 00:04:33.799
+Then he writes the description in Mei's words, for a reader who can't ask.
+
+00:04:35.099 --> 00:04:40.748
+What it means: the day of the graduate's answer in the portal, for that ceremony, once it's accepted.
+
+00:04:42.048 --> 00:04:47.256
+What empty means: not confirmed in the portal; the new column says if it was on paper.
+
+00:04:48.756 --> 00:04:52.192
+And who answers for it: Mei, in the registrar's office.
+
+00:04:53.692 --> 00:04:58.817
+dbt writes it into Unity Catalog on every run, where the agent reads it.
+
+00:05:00.317 --> 00:05:06.266
+So the team wrote down what the agent needed to read, as the checkers' makers added to their word lists.
+
+00:05:07.766 --> 00:05:14.940
+Asked again, the agent answers 38, and shows what it counted: graduates with no confirmation of either kind.
+
+00:05:16.640 --> 00:05:18.522
+Malia writes to the 38.
+
+00:05:20.022 --> 00:05:28.129
+Jun's check from Report, fix, tell had read empty the same way; pointed at the new column, its 76 names become 7.
+
+00:05:31.429 --> 00:05:36.556
+Jun asks his own agent, Genie Code, to read the list and the checks it already runs.
+
+00:05:37.856 --> 00:05:43.445
+It profiles every column, drafts descriptions for the rest, and proposes three new checks.
+
+00:05:44.945 --> 00:05:50.791
+Each draft is a start: it can say what a column's name suggests, not what only its owner knows.
+
+00:05:52.291 --> 00:05:55.197
+So Jun reviews each one, and Mei sets the levels.
+
+00:05:56.697 --> 00:06:01.677
+The first finds a name on the list that isn't the name its graduate gave in the portal.
+
+00:06:02.977 --> 00:06:06.843
+Mei makes it stop the printer's file until a person settles each name.
+
+00:06:08.343 --> 00:06:13.155
+It finds three: names changed since enrolment, still waiting for a document.
+
+00:06:14.655 --> 00:06:19.799
+The second checks that the two confirmation columns agree, and holds for Jun if they don't.
+
+00:06:21.299 --> 00:06:25.020
+The third would fail every night a graduate hadn't confirmed yet.
+
+00:06:26.320 --> 00:06:30.561
+Jun says no: that's about what people do, not whether the data is right.
+
+00:06:32.061 --> 00:06:37.642
+It becomes a count Malia follows each week, and the agent's trusted answer to her question.
+
+00:06:39.142 --> 00:06:41.482
+The agent proposes; people decide.
+
+00:06:45.182 --> 00:06:52.437
+What spared 374 graduates an email they didn't need was Malia reading the answer before she acted.
+
+00:06:54.537 --> 00:07:00.173
+Read an agent's answer as you'd read a new colleague's: what did it count, and does that fit what you know?
+
+00:07:02.273 --> 00:07:08.128
+Ask it to show its working, and when the answer doesn't fit, ask the person who answers for the data.
+
+00:07:10.028 --> 00:07:18.251
+Context engineering showed that what an agent reads decides what it writes, and Context and memory, governed, how to keep that right.
+
+00:07:19.951 --> 00:07:26.753
+This film's step comes first: a column's description is part of the data, and its quality is the data's quality.
+
+00:07:30.053 --> 00:07:33.041
+On Monday, pick the table your agent reads most.
+
+00:07:33.741 --> 00:07:38.809
+For each column, write what it means, what empty means, its unit, and who answers for it.
+
+00:07:40.309 --> 00:07:43.960
+Where empty means two things, fix the data, not only the words.
+
+00:07:45.260 --> 00:07:49.019
+Let agents draft and propose; let people review and decide.
+
+00:07:50.519 --> 00:07:57.020
+The Cupertino's cure had two halves: complete what the machine reads, and read what it offers before you take it.
+
+00:07:58.920 --> 00:08:01.478
+Describe your data for a reader who can't ask.

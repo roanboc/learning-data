@@ -1,0 +1,7 @@
+name: memory
+kind: application service
+definition: 'Reads the team''s memory: what agents learned in earlier sessions, which nobody checks line by line.'
+owner: Sam, platform team
+relationships:
+- serving: draft the change
+status: confirmed

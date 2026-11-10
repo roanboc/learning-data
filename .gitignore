@@ -1,0 +1,9 @@
+__pycache__/
+.cache/
+# Published audio is restored from each film's audio.json. Existing tracked copies stay
+# tracked until media.py untrack has verified their replacements in GitHub Releases.
+site/assets/**/*.mp3
+# film builds: voice lines, frames and videos; the release workflow renders them from the committed source
+films/**/source/build/
+films/**/source/dist/
+films/**/source/models/

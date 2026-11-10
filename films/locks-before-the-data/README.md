@@ -1,0 +1,32 @@
+# Locks before the data
+
+*The first series of the module Data protection and privacy.*
+
+Platform security for data teams. A nightly job loads the registrar's data on Jun Park's personal token, from one workspace open to the internet. Nine films: four on the ideas, with no product named (identity as the boundary; no secret to lose, with the sign-in methods ranked from best to worst; walls, doors and keys; power you switch on, the specialists' admin accounts), then five in Databricks, GitHub and Azure (people and groups, workloads without secrets, network, storage and keys, a reviewed path to production, and audit). *Only what you may see* follows. This folder also holds the plan for the whole module, in the [proposal](proposal.md).
+
+**Status:** set up on 5 November 2026, on assumptions the author will review; the films are being made, one at a time, in order, and appear in the table below as each one is out. On the site, the series will sit under the topic *Data protection and privacy*, between *Data governance* and *AI agents in data work*, at `locks-before-the-data/`, once its opening film is out, and the topic appears with it.
+
+## The films
+
+<!-- films: made by site-tools/build_series.py's readme() -->
+| Film | Topic | Length | Chapters | Pause and think | Script |
+|---|---|---|---|---|---|
+| [Who is it, really?](https://data.learn-all.org/locks-before-the-data/who-is-it-really/) | Identity as the boundary | 8 min | 8 | 3 questions | [script](1-who-is-it-really/script.md) · [source](1-who-is-it-really/source/README.md) |
+| [No secret to lose](https://data.learn-all.org/locks-before-the-data/no-secret-to-lose/) | Signing in without secrets | 9 min | 7 | 3 questions | [script](2-no-secret-to-lose/script.md) · [source](2-no-secret-to-lose/source/README.md) |
+| [Walls, doors and keys](https://data.learn-all.org/locks-before-the-data/walls-doors-and-keys/) | Boundaries, paths and keys | 8½ min | 9 | 3 questions | [script](3-walls-doors-and-keys/script.md) · [source](3-walls-doors-and-keys/source/README.md) |
+| [Power you switch on](https://data.learn-all.org/locks-before-the-data/power-you-switch-on/) | Admin accounts | 8½ min | 8 | 3 questions | [script](4-power-you-switch-on/script.md) · [source](4-power-you-switch-on/source/README.md) |
+| [People and groups](https://data.learn-all.org/locks-before-the-data/people-and-groups/) | Sign-in, groups and admin power | 8 min | 8 | 3 questions | [script](5-people-and-groups/script.md) · [source](5-people-and-groups/source/README.md) |
+| [Workloads without secrets](https://data.learn-all.org/locks-before-the-data/workloads-without-secrets/) | Workload identity | 9 min | 9 | 3 questions | [script](6-workloads-without-secrets/script.md) · [source](6-workloads-without-secrets/source/README.md) |
+| [Network, storage and keys](https://data.learn-all.org/locks-before-the-data/network-storage-and-keys/) | Doors to the data | 9½ min | 9 | 3 questions | [script](7-network-storage-and-keys/script.md) · [source](7-network-storage-and-keys/source/README.md) |
+| [From a branch to production](https://data.learn-all.org/locks-before-the-data/from-a-branch-to-production/) | A reviewed path to production | 9 min | 8 | 3 questions | [script](8-from-a-branch-to-production/script.md) · [source](8-from-a-branch-to-production/source/README.md) |
+| [Who did what](https://data.learn-all.org/locks-before-the-data/who-did-what/) | Seeing who did what | 9 min | 10 | 3 questions | [script](9-who-did-what/script.md) · [source](9-who-did-what/source/README.md) |
+<!-- /films -->
+
+## The look and the sound
+
+- **Night glass, frosted glass with solid colour**, the module's own digital security look, decided by the author on 5 November 2026: a dark hall of frosted panes; cards, chips, bands, pills and ticks in full, clear colour; every word at least 4.5 to 1 against what is behind it and at least 28 px in the 1920-pixel frame, none under the captions. Cyan is an identity, green allowed, coral denied or closed, amber power switched on, violet hidden personal data, in every film. The opening film's thread builds the module's kit in `shared/` here, from the style prototype, with a README saying how a film uses it; the other two series bundle it as it is.
+- **Its own sound in each film.** A lead instrument the site doesn't have, reserved for each film. Music under the opening story, then only now and then, at a chapter's turn or under a moment on screen; nothing loops, trembles or pulses, except an urgent pulse where a story turns to a breach, a leak or a rush.
+
+## How the films are made
+
+Like the site's other series, each film is generated from code, with the engine, components, fonts and voice of *The Inner Life of Data*, *A Sharper Sketch*'s scenes and *From words to data*'s tools, and checked with the governance and agent films' checks (`twice.py`, `steady.py`, `jump.py`, `edges.py`, `legible.py`, `quiet.py` with `held.py`). The ideas films name no product; the tool films show Databricks, GitHub and Azure, named as their docs name them on the day, and never say a feature's release status. A film keeps its own pictures and helpers in its own source. The example project, [`../analytics-engineering/project/`](../analytics-engineering/project/), is where the data story happens. Each film's page links the official docs it points to.

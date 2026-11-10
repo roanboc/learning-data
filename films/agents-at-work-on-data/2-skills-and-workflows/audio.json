@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/skills-and-workflows/soundtrack.mp3",
+      "size": 6389072,
+      "sha256": "373b136da5f81ef780c60f8901e530e4ba2d5836ad46848fda413a5acb0bc0b2",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/373b136da5f81ef780c60f8901e530e4ba2d5836ad46848fda413a5acb0bc0b2.mp3"
+    }
+  ]
+}

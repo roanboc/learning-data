@@ -1,0 +1,11 @@
+name: decide who owns what
+kind: capability
+definition: Every domain, entity, product and model has an owner, who decides what it means in the glossary
+  and is told what each change touches.
+owner: Yusuf Demir, data governance lead
+relationships:
+- composition: govern data
+heat: green
+evidence: 'owners on every domain, entity and shared model, checked on every pull request; the impact
+  check tells them what a change touches (project: governance.py, impact.py) · 10 Nov 2026'
+status: confirmed

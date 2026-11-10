@@ -1,0 +1,145 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.744
+Ámsterdam, hacia 1600.
+
+00:00:04.844 --> 00:00:09.085
+Barcos de toda Europa comercian allí, y los mercaderes se pagan unos a otros en monedas.
+
+00:00:10.185 --> 00:00:17.640
+Circulan entre 800 y 1,000 tipos de moneda, muchas recortadas, limadas en el borde por su plata, o gastadas.
+
+00:00:18.940 --> 00:00:23.834
+Cada pago obliga a pesar monedas, y nadie sabe cuánto vale de verdad una bolsa de ellas.
+
+00:00:24.934 --> 00:00:33.811
+En promedio, allí la moneda vale un 9% menos que la buena: a quien le deben mil florines le pagan en moneda que vale unos novecientos.
+
+00:00:35.311 --> 00:00:39.252
+Los pagos son lentos, discutidos y riesgosos. Algo tenía que cambiar.
+
+00:00:40.952 --> 00:00:47.902
+El 31 de enero de 1609, la ciudad abre un banco de cambio, el Wisselbank, en su ayuntamiento.
+
+00:00:49.202 --> 00:00:56.127
+Los mercaderes traen su moneda una sola vez. El banco la pesa y anota su valor en su libro, en la página del propio mercader.
+
+00:00:57.627 --> 00:01:05.491
+Desde entonces, un pago es una línea que pasa de una página a otra, sin cargar monedas, y el libro muestra lo que tiene cada mercader.
+
+00:01:06.991 --> 00:01:12.116
+Los mercaderes pagan cerca de un 5% más por un florín del libro que por uno en monedas.
+
+00:01:12.816 --> 00:01:16.245
+Por más de un siglo, allí se pagan letras de cambio de toda Europa.
+
+00:01:17.745 --> 00:01:24.945
+Los datos también tienen sus bolsas de monedas: los mismos datos copiados en cada sistema que los necesita, cada copia un poco distinta.
+
+00:01:26.245 --> 00:01:33.805
+En la universidad, las declaraciones de horas iban por correo, y Nómina y Finanzas guardaban cada una su copia, que nunca cuadraba.
+
+00:01:34.905 --> 00:01:39.563
+Ahora cada declaración se escribe una vez, y Nómina y Finanzas leen esa única copia.
+
+00:01:47.663 --> 00:01:52.539
+Jueves 5 de noviembre de 2026: día de pago en la universidad.
+
+00:01:53.639 --> 00:01:59.628
+Linh Nguyen es tutora de HI101 con un contrato ocasional, y cobra las horas que declara.
+
+00:02:00.328 --> 00:02:04.492
+Antes, las declaraciones eran planillas enviadas por correo, que Nómina volvía a tipear.
+
+00:02:05.192 --> 00:02:10.085
+La facultad llevaba su propia cuenta, y Finanzas veía las horas solo después del día de pago.
+
+00:02:11.585 --> 00:02:16.030
+Cuando la universidad creó una app de declaraciones, el diseño de siempre estaba listo:
+
+00:02:16.730 --> 00:02:23.791
+la app en su propia base de datos, un pipeline que copia cada cambio a una plataforma analítica, y reportes sobre la copia.
+
+00:02:25.091 --> 00:02:31.328
+Dos plataformas, un pipeline entre ellas, dos juegos de permisos y una copia siempre un poco atrasada.
+
+00:02:35.228 --> 00:02:39.584
+Noor, la arquitecta de datos, eligió en cambio una copia en una plataforma.
+
+00:02:40.284 --> 00:02:44.785
+La app de declaraciones está hecha sobre Lakebase, la base de datos Postgres de Databricks.
+
+00:02:45.885 --> 00:02:51.210
+Linh escribe cada declaración una vez, como fila, y su coordinación la aprueba en esa misma fila.
+
+00:02:52.510 --> 00:03:00.744
+Postgres atiende a la app. La plataforma guarda las mismas filas en una segunda forma para análisis, y el lakehouse las lee sin frenarla.
+
+00:03:02.244 --> 00:03:08.276
+La lista de Nómina de declaraciones pendientes y el proceso que arma las horas a pagar leen esa copia.
+
+00:03:08.976 --> 00:03:14.147
+También el costo de la docencia ocasional de Finanzas, y los tres leen a través de Unity Catalog.
+
+00:03:15.647 --> 00:03:18.874
+Cada tabla tiene un solo escritor: la app escribe las declaraciones.
+
+00:03:19.574 --> 00:03:27.272
+El lakehouse escribe los contratos del sistema de RR. HH., y una copia va a la app, que valida cada declaración con su contrato.
+
+00:03:28.772 --> 00:03:33.322
+Como en el libro de Ámsterdam, una declaración se escribe una vez, y se lee donde se escribe.
+
+00:03:37.222 --> 00:03:42.569
+Lo que desaparece: el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas.
+
+00:03:43.869 --> 00:03:49.002
+Los servicios de integración que corrían entre plataformas separadas se juntan en una sola.
+
+00:03:50.502 --> 00:03:58.394
+Un catálogo gobierna quién puede leer las declaraciones para análisis, con los mismos permisos, linaje y auditoría que las demás tablas.
+
+00:03:59.694 --> 00:04:05.925
+¿Qué se sigue moviendo? Nómina paga desde un sistema de nómina que la universidad compra, y que no está en la plataforma.
+
+00:04:06.625 --> 00:04:13.006
+Así que en cada nómina, las horas a pagar salen de la plataforma antes del mediodía del martes, bajo un contrato con Nómina.
+
+00:04:14.306 --> 00:04:17.976
+Se mueve una sola cosa, a propósito, en vez de una copia de todo.
+
+00:04:19.476 --> 00:04:23.238
+La noche en que falla llega después, en «Una plataforma que se vigila sola».
+
+00:04:26.738 --> 00:04:28.075
+Entonces, ¿qué conviene elegir?
+
+00:04:28.775 --> 00:04:34.197
+Guarda una sola copia donde puedas, y mueve datos solo cuando quien los lee de verdad los necesita en otro lugar.
+
+00:04:35.497 --> 00:04:39.091
+Decide qué sistema escribe cada tabla, y deja que los demás la lean.
+
+00:04:40.391 --> 00:04:48.327
+Si un sistema comprado guarda su copia, acuerda el contrato en esa interfaz, como mostró «Mover es fácil, acordar es el trabajo».
+
+00:04:49.627 --> 00:04:55.809
+«Las dos cosas a la vez» mostró una base de datos que escribe y lee. Aquí, una sola copia sirve a toda una plataforma.
+
+00:04:57.309 --> 00:05:00.594
+Ya hay estándares para esto, así que no reinventes la rueda.
+
+00:05:01.294 --> 00:05:05.992
+Investiga, adapta, implementa e itera, partiendo de la documentación oficial.
+
+00:05:09.892 --> 00:05:16.521
+En Ámsterdam, un pago pasó a ser una línea movida en un solo libro, y el mismo libro mostraba lo que tenía cada uno.
+
+00:05:18.021 --> 00:05:25.967
+En la universidad, la declaración de Linh es una fila: ella la escribe, su coordinación la aprueba, Nómina la paga y Finanzas la cuenta.
+
+00:05:27.467 --> 00:05:35.254
+Hoy cobran 856 personas con contrato ocasional, desde filas como la suya, y ningún equipo tuvo que copiar una declaración.
+
+00:05:36.954 --> 00:05:38.995
+Guarda una copia, gobernada una vez.

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/tools-are-hands/soundtrack.mp3",
+      "size": 6226694,
+      "sha256": "a7d52c7a5236a1d41a72304c32ccec62c87d4042e14b16ca7486ec201b32e1aa",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/a7d52c7a5236a1d41a72304c32ccec62c87d4042e14b16ca7486ec201b32e1aa.mp3"
+    }
+  ]
+}

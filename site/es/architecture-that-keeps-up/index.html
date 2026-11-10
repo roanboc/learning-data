@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Una arquitectura al día · Learning Data</title>
+<meta name="description" content="Películas cortas sobre el lado de dueña de producto del trabajo de una gestora de datos, tomado de la arquitectura: los servicios del equipo definidos con sus clientes, sus problemas y sus motivaciones, y diseñados en cada capa, de la estrategia a la tecnología; la arquitectura guardada en un repositorio git como única fuente de verdad, revisada como el código y actualizada con cada cambio, de la que sale todo otro documento; y una arquitectura de plataforma preferida con un árbol de decisión para cada proveedor que no puede alcanzarla.">
+<meta property="og:title" content="Una arquitectura al día · Learning Data"><meta property="og:description" content="La tercera serie de Gestión de datos. Helena Novak dirige los servicios del equipo como un negocio, guarda la arquitectura en un solo mapa en un repositorio, al día con cada cambio, y da a cada proveedor de datos un camino, incluso a los que no pueden seguir la forma preferida."><meta property="og:image" content="https://data.learn-all.org/assets/services-with-customers-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/architecture-that-keeps-up/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/architecture-that-keeps-up/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../architecture-that-keeps-up/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/services-with-customers-poster.jpg" alt=""><img src="../../assets/one-map-poster.jpg" alt=""><img src="../../assets/a-path-for-every-provider-poster.jpg" alt=""><img src="../../assets/services-with-customers-poster.jpg" alt=""><img src="../../assets/one-map-poster.jpg" alt=""><img src="../../assets/a-path-for-every-provider-poster.jpg" alt=""><img src="../../assets/services-with-customers-poster.jpg" alt=""><img src="../../assets/one-map-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Temas</a> › <a href="../topics/#data-management">Gestión de datos</a> › Una arquitectura al día</p>
+<h1>Una arquitectura al día</h1>
+<p class="lead">La tercera serie de Gestión de datos. Helena Novak dirige los servicios del equipo como un negocio, guarda la arquitectura en un solo mapa en un repositorio, al día con cada cambio, y da a cada proveedor de datos un camino, incluso a los que no pueden seguir la forma preferida.</p>
+<p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: cada película se apoya en la anterior.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/services-with-customers-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 1 de 3 · Servicios y clientes</p>
+<h3><a href="services-with-customers/">Servicios con clientes</a></h3>
+<p>Helena escribe los servicios de su equipo y para quién es cada uno, y recorre un servicio por cada capa, de la estrategia a la tecnología.</p>
+<p class="meta">7 min · Pausa para pensar · Una arquitectura al día · En inglés</p>
+<p class="tc-progress" data-progress="ld-services-with-customers" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/one-map-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 2 de 3 · Una sola fuente de verdad</p>
+<h3><a href="one-map/">Un solo mapa, en el repositorio</a></h3>
+<p>La imagen objetivo de Helena existe tres veces. El equipo pasa un solo mapa a su repositorio y saca de él cada otra imagen.</p>
+<p class="meta">7½ min · Pausa para pensar · Una arquitectura al día · En inglés</p>
+<p class="tc-progress" data-progress="ld-one-map" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/a-path-for-every-provider-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 3 de 3 · Datos de cada proveedor</p>
+<h3><a href="a-path-for-every-provider/">Un camino para cada proveedor</a></h3>
+<p>El equipo escribe una forma preferida de recibir datos, y un árbol de decisión que da a cada proveedor un camino, para que los datos lleguen ya al negocio.</p>
+<p class="meta">8 min · Pausa para pensar · Una arquitectura al día · En inglés</p>
+<p class="tc-progress" data-progress="ld-a-path-for-every-provider" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">Un hilo: de los servicios del equipo a un camino para cada proveedor</h2><p>Tras aprobarse la estrategia de datos, Helena Novak escribe los cuatro servicios del equipo y para quién es cada uno, y recorre uno por todas las capas. En junio el mapa de la arquitectura pasa al repositorio del equipo, donde cada cambio se revisa y de donde sale todo lo demás. Luego el equipo da a cada proveedor de datos un camino: los sensores de las aulas envían eventos, mientras que el horario, comprado como servicio, nunca dice qué se borró, así que el equipo lo averigua cada noche.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
+<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
+<tr><td>Servicios con clientes</td><td>Madurai, 1976: la vista, para todos</td><td>Un cirujano oftalmólogo jubilado abrió un hospital de once camas. Primero dijo para qué era y para quién, en grupos según lo que podían pagar, y luego diseñó todo lo de abajo para ellos. Los servicios de un equipo de datos funcionan igual.</td></tr>
+<tr><td>Un solo mapa, en el repositorio</td><td>Gran Bretaña, 2001: un mapa, no cuadros</td><td>Ayuntamientos, compañías de agua y servicios de emergencia unían cada uno sus registros a las líneas de los cuadros de mapa de Ordnance Survey, y no podían estar seguros de que dos registros hablaran del mismo lugar. OS MasterMap lo hizo una sola base de datos, cada elemento con su identificador, una versión y una fecha. La arquitectura de un equipo de datos puede hacer lo mismo.</td></tr>
+<tr><td>Un camino para cada proveedor</td><td>Port Newark, 1957: el barco que trajo sus grúas</td><td>Las cajas alzadas enteras con grúa abarataron la carga de un barco, pero pocos puertos tenían grúa. Un barco reformado llevó dos propias, así que cualquier puerto con muelle podía recibir cajas hasta construir la suya. Un proveedor de datos que no puede seguir la forma preferida recibe su propio camino igual.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Lidera el trabajo con datos</h3><p>Helena Novak, la gestora de datos, que dirige los servicios del equipo como un negocio y mantiene la arquitectura al día</p></div>
+<div class="card tech"><h3>Cuida el mapa</h3><p>Noor Rahman, la arquitecta de datos, que revisa cada cambio del mapa con los ingenieros principales del equipo</p></div>
+<div class="card tech"><h3>Lleva la plataforma</h3><p>Sam Okafor, que lleva a la plataforma los datos de cada proveedor por el camino que este puede ofrecer</p></div>
+<div class="card biz"><h3>Decide sobre las aulas</h3><p>Graham Ellis, el director de Instalaciones, cuyos conteos de aulas deben seguir siendo ciertos, envíe lo que envíe cada sistema</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

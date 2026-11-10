@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Rights follow the role",
+    "key": "rights-follow-the-role-en",
+    "dir": "films/from-helper-to-colleague/4-rights-follow-the-role/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/rights-follow-the-role/film.js",
+    "video": "dist/rights-follow-the-role.mp4",
+    "file": "rights-follow-the-role.mp4",
+    "captions": [
+      [
+        "films/from-helper-to-colleague/4-rights-follow-the-role/captions/en.srt",
+        "rights-follow-the-role.en.srt"
+      ],
+      [
+        "films/from-helper-to-colleague/4-rights-follow-the-role/captions/es.srt",
+        "rights-follow-the-role.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-helper-to-colleague/4-rights-follow-the-role/source",
+      ":(exclude)films/from-helper-to-colleague/4-rights-follow-the-role/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 291,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

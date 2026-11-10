@@ -277,7 +277,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({last:wAt(sc,
     {at:c.monday,place:"fsLab",later:true,keys:[[c.monday,960,540,1]],push:0,draw:(x,tt)=>{withA(x,1-ag_in(tt,c.breath+0.1,0.7),()=>{
       const R=fs_stages(x,L.x,L.y,L.w,{short:1,gates:[1,1,1,1,1],passed:[1,1,1,1,0],lit:[0,0,0,ag_in(tt,P.pa+0.6,0.5),ag_io(tt,P.road,P.road+2.4,0.5)]});
       fs_card(x,370,120,440,"Until 2 November","Jun's helper",null,{kickCol:AG.mut,a:ag_in(tt,P.helper-0.3,0.4)*(1-ag_in(tt,P.pa+0.8,0.5)),k:ag_spr(tt,P.helper-0.3)});
-      fs_pillL(x,370,300,"on Jun's sign-in · stages 1 to 3",{a:ag_in(tt,P.helper,0.4)*(1-ag_in(tt,P.pa+0.8,0.5))});
+      fs_pillL(x,370,300,"on Jun's sign-in · stages 1 to 3",{a:ag_in(tt,P.helper,0.4)*(1-ag_in(tt,P.pa-0.5,0.4))});
       fs_agent(x,tt,{name:"planning agent",a:ag_in(tt,P.pa,0.6),glow:ag_io(tt,P.own,P.own+2.2,0.4)});
       fs_tagMove(x,{x:590,y:300},fs_tagAt(x,R.stages[3],0,"Planning's tickets"),clamp((tt-P.pa-0.2)/1.2,0,1),"Planning's tickets",{a:ag_in(tt,P.pa-0.1,0.4)});
       fs_who(x,"clara",tt,{a:ag_in(tt,P.own+0.4,0.6)});fs_pillL(x,500,470,"Clara owns it",{a:ag_in(tt,P.own+0.8,0.4)});

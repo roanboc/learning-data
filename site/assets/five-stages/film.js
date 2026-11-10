@@ -437,7 +437,7 @@ const NARR={
  {"id":"s2","gap":0.8,"text":"Stage two: it acts for you, step by step, on your sign-in, and you approve each action."},
  {"id":"s3","gap":0.3,"text":"Stage three: it acts for you within limits, alone, with drafts only in a sandbox,"},
  {"id":"s3b","gap":0.8,"text":"and you check the result against the checks you set first."},
- {"id":"s4","gap":0.8,"text":"Stage four: a contributor that proposes, under its own identity. Its owner reviews every change."},
+ {"id":"s4","gap":0.8,"text":"Stage four: a contributor that proposes, under its own identity. The data team reviews every change."},
  {"id":"s5","gap":0.3,"text":"Stage five: a contributor with a mandate, written and signed by its owner. In test, it does agreed tasks alone, and reports;"},
  {"id":"s5b","gap":0.8,"text":"in production, it drafts the fix, and another person approves every change."},
  {"id":"gates","gap":0.3,"text":"And before each stage, a gate: what must be true before it moves up."},
@@ -497,7 +497,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"licence/nz": 2.067, "licence/fifteen": 4.367, "licence/alone": 4.131, "licence/crashed": 6.423, "licence/hurt": 2.105, "licence/switch": 5.733, "licence/change": 1.288, "licence/stages87": 5.536, "licence/learner": 5.468, "licence/restricted": 6.597, "licence/passengers": 4.207, "licence/full": 3.774, "licence/last": 3.361, "licence/fell": 6.832, "licence/notall": 5.908, "licence/worked": 7.075, "licence/first": 4.736, "licence/uni": 3.573, "licence/anil": 7.319, "licence/risk": 3.296, "licence/risk2": 4.792, "licence/harm": 4.138, "licence/stage": 6.102, "stages/road": 4.988, "stages/three": 7.049, "stages/s1": 5.17, "stages/s2": 5.075, "stages/s3": 4.851, "stages/s3b": 2.744, "stages/s4": 6.231, "stages/s5": 8.127, "stages/s5b": 4.587, "stages/gates": 3.886, "stages/g1": 3.662, "stages/g2": 2.745, "stages/g3": 3.032, "stages/g4": 2.385, "stages/g5": 2.88, "stages/decide": 1.84, "stages/notswitch": 1.637, "tasks/own": 4.007, "tasks/notone": 3.274, "tasks/word": 5.155, "tasks/question": 7.86, "tasks/fix": 7.535, "tasks/night": 7.266, "tasks/prod": 6.706, "tasks/rerun": 3.538, "tasks/driver": 6.778, "tasks/rule": 5.495, "down/oct": 5.82, "down/other": 6.521, "down/test": 4.26, "down/moved": 4.072, "down/four": 5.486, "down/only": 3.59, "down/back": 2.348, "down/folders": 3.379, "down/limits": 3.865, "down/nights": 2.227, "down/signed": 4.712, "down/keeps": 6.021, "never/under": 2.54, "never/owner": 4.855, "never/second": 5.814, "never/review": 3.968, "never/self": 6.397, "never/levels": 6.212, "never/here": 5.078, "never/law": 5.828, "never/iso": 7.626, "close/nz": 5.415, "close/earned": 7.398, "close/map": 4.184, "close/monday": 7.64, "close/next": 2.424, "close/count": 4.582, "close/takeaway": 2.675};
+const VODUR={"licence/nz": 2.067, "licence/fifteen": 4.367, "licence/alone": 4.131, "licence/crashed": 6.423, "licence/hurt": 2.105, "licence/switch": 5.733, "licence/change": 1.288, "licence/stages87": 5.536, "licence/learner": 5.468, "licence/restricted": 6.597, "licence/passengers": 4.207, "licence/full": 3.774, "licence/last": 3.361, "licence/fell": 6.832, "licence/notall": 5.908, "licence/worked": 7.075, "licence/first": 4.736, "licence/uni": 3.573, "licence/anil": 7.319, "licence/risk": 3.296, "licence/risk2": 4.792, "licence/harm": 4.138, "licence/stage": 6.102, "stages/road": 4.988, "stages/three": 7.049, "stages/s1": 5.17, "stages/s2": 5.075, "stages/s3": 4.851, "stages/s3b": 2.744, "stages/s4": 6.567, "stages/s5": 8.127, "stages/s5b": 4.587, "stages/gates": 3.886, "stages/g1": 3.662, "stages/g2": 2.745, "stages/g3": 3.032, "stages/g4": 2.385, "stages/g5": 2.88, "stages/decide": 1.84, "stages/notswitch": 1.637, "tasks/own": 4.007, "tasks/notone": 3.274, "tasks/word": 5.155, "tasks/question": 7.86, "tasks/fix": 7.535, "tasks/night": 7.266, "tasks/prod": 6.706, "tasks/rerun": 3.538, "tasks/driver": 6.778, "tasks/rule": 5.495, "down/oct": 5.82, "down/other": 6.521, "down/test": 4.26, "down/moved": 4.072, "down/four": 5.486, "down/only": 3.59, "down/back": 2.348, "down/folders": 3.379, "down/limits": 3.865, "down/nights": 2.227, "down/signed": 4.712, "down/keeps": 6.021, "never/under": 2.54, "never/owner": 4.855, "never/second": 5.814, "never/review": 3.968, "never/self": 6.397, "never/levels": 6.212, "never/here": 5.078, "never/law": 5.828, "never/iso": 7.626, "close/nz": 5.415, "close/earned": 7.398, "close/map": 4.184, "close/monday": 7.64, "close/next": 2.424, "close/count": 4.582, "close/takeaway": 2.675};
 
 /* Pauses: the film stops where an idea needs a moment to land, or a picture needs time to be read.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1950,7 +1950,7 @@ function fs_stages(ctx,x,y,w,o){o=o||{};
     FACTS=[["Yours, but it uses none","Drafts in a chat; runs nothing","Accepts or rejects every line"],
       ["Yours, delegated","Runs queries in your session, read only","Approves each action"],
       ["Yours, narrowed","Works alone; drafts only in a sandbox","Checks it against the checks set first"],
-      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it, and reviews every change"],
+      ["Its own, with no secret it can see","Opens a pull request from its own space","The data team reviews every change"],
       ["Its own","In test, agreed tasks alone, then a report","Another person approves production"]],
     BLUE=[38,102,132],GREEN=[50,116,80],OAK={base:[208,188,156],dark:[156,136,106],hi:[242,233,216]};
   const a=o.a==null?1:o.a,k=w/1660,bw=300*k,gap=40*k,rise=86*k,depth=16*k,ch=128,sm=o.short===true?1:clamp(o.short||0,0,1),arr=(v,i,d)=>v==null?d:(v===true?1:(Array.isArray(v)?(v[i]==null?d:v[i]):v));
@@ -2358,7 +2358,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=fs_once(sc,"P",()=>({last:wAt(sc,
     {at:c.monday,place:"fsLab",later:true,keys:[[c.monday,960,540,1]],push:0,draw:(x,tt)=>{withA(x,1-ag_in(tt,c.breath+0.1,0.7),()=>{
       const R=fs_stages(x,L.x,L.y,L.w,{short:1,gates:[1,1,1,1,1],passed:[1,1,1,1,0],lit:[0,0,0,ag_in(tt,P.pa+0.6,0.5),ag_io(tt,P.road,P.road+2.4,0.5)]});
       fs_card(x,370,120,440,"Until 2 November","Jun's helper",null,{kickCol:AG.mut,a:ag_in(tt,P.helper-0.3,0.4)*(1-ag_in(tt,P.pa+0.8,0.5)),k:ag_spr(tt,P.helper-0.3)});
-      fs_pillL(x,370,300,"on Jun's sign-in · stages 1 to 3",{a:ag_in(tt,P.helper,0.4)*(1-ag_in(tt,P.pa+0.8,0.5))});
+      fs_pillL(x,370,300,"on Jun's sign-in · stages 1 to 3",{a:ag_in(tt,P.helper,0.4)*(1-ag_in(tt,P.pa-0.5,0.4))});
       fs_agent(x,tt,{name:"planning agent",a:ag_in(tt,P.pa,0.6),glow:ag_io(tt,P.own,P.own+2.2,0.4)});
       fs_tagMove(x,{x:590,y:300},fs_tagAt(x,R.stages[3],0,"Planning's tickets"),clamp((tt-P.pa-0.2)/1.2,0,1),"Planning's tickets",{a:ag_in(tt,P.pa-0.1,0.4)});
       fs_who(x,"clara",tt,{a:ag_in(tt,P.own+0.4,0.6)});fs_pillL(x,500,470,"Clara owns it",{a:ag_in(tt,P.own+0.8,0.4)});

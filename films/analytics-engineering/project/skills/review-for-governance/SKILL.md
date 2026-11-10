@@ -44,8 +44,8 @@ never weaken a test.
    ```
    It counts what each column holds (emails, person IDs, keys that hold one, hashes) and never
    shows a value. Propose `meta.personal_data` (`direct`, `pseudonymous` or `none`) in the pull
-   request, with the evidence line, for the model's owner to approve. When the name or the counts
-   disagree, say so and ask; when in doubt, propose the stricter class.
+   request, with the evidence line, for the data team's review; the owner is told. When the name or
+   the counts disagree, say so and ask; when in doubt, propose the stricter class.
 5. **A test, or a tracking model, for each stated rule.** Read the rules the change adds or
    touches: `rules:` and `identity:` in the conceptual models, and decisions that say what must be
    true. A rule about the data (a value in a set, a key that matches, a number that adds up) has a
@@ -58,8 +58,8 @@ never weaken a test.
    breaking change is a new version, with a deprecation date for the old one; prefer an additive
    change when there's one.
 7. **Report.** One comment on the pull request: what passed, each finding with its file, what you
-   drafted and the evidence, and who must approve each (the owner of the meaning, the data
-   architect for the model, data governance for terms). Mark what you weren't sure of.
+   drafted and the evidence, and who decides each: data governance where the change and the
+   glossary differ; the owners are told. Mark what you weren't sure of.
 
 ## Don't
 

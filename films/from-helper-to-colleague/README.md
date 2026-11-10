@@ -15,6 +15,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 | [Borrowed rights](https://data.learn-all.org/from-helper-to-colleague/borrowed-rights/) | On a person's sign-in | 8½ min | 7 | 3 questions | [script](2-borrowed-rights/script.md) · [source](2-borrowed-rights/source/README.md) |
 | [A place on the map](https://data.learn-all.org/from-helper-to-colleague/a-place-on-the-map/) | Agents on the map | 9 min | 7 | 3 questions | [script](3-a-place-on-the-map/script.md) · [source](3-a-place-on-the-map/source/README.md) |
 | [Rights follow the role](https://data.learn-all.org/from-helper-to-colleague/rights-follow-the-role/) | Rights from the work | 8 min | 7 | 3 questions | [script](4-rights-follow-the-role/script.md) · [source](4-rights-follow-the-role/source/README.md) |
+| [The map, enforced](https://data.learn-all.org/from-helper-to-colleague/the-map-enforced/) | The map in every tool | 8½ min | 6 | 4 questions | [script](5-the-map-enforced/script.md) · [source](5-the-map-enforced/source/README.md) |
 | [A mandate, written and enforced](https://data.learn-all.org/from-helper-to-colleague/a-written-mandate/) | Autonomy in writing | 9½ min | 6 | 3 questions | [script](7-a-written-mandate/script.md) · [source](7-a-written-mandate/source/README.md) |
 <!-- /films -->
 

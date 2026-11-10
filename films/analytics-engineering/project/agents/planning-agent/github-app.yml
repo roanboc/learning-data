@@ -1,0 +1,21 @@
+# Written by scripts/generate/agents.py from Noor's map and agents/tools.yml.
+# Don't edit it: change the map, then run the script.
+#
+# The planning agent in GitHub: its App, whose commits and pull requests read planning-agent[bot], and the
+# environment its runs use. The App belongs to the university's organization, not to a person.
+
+app:
+  name: planning-agent
+  owner: uni-example
+  repositories: [uni-example/credentials]   # installed on this one repository, and no other
+  permissions:                              # from what its steps write there; every App also reads metadata
+    contents: write                         # change draft, written in: draft the change
+    pull_requests: write                    # pull request, written in: open a pull request
+  events: []                                # it listens to nothing: each run starts it
+  key: in a vault, sign-only                # the token service signs with it; no run sees it
+  token service: https://tokens.uni.example/github  # hands each run a token for this repository and these
+                                            # permissions, which ends after an hour
+branches: agent/planning/*                  # the only ones its repository tool writes; the rules on main stop a push to main
+environment:
+  name: planning-agent                      # its runs' environment, which its federation policy names
+  deployment branches: [main]               # only the workflow as it is on main may use it

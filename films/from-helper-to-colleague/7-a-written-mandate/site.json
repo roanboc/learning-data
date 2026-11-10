@@ -38,6 +38,8 @@
     ],
     "held": [
       "review-and-release/rulesets/workload-agent-folders.json",
+      "agents/workload-agent/workflow.yml",
+      "agents/workload-agent/unity-gateway.yml",
       "scripts/check/mandates.py"
     ],
     "alone": [

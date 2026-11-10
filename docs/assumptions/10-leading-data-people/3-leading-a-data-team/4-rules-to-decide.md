@@ -1,8 +1,8 @@
 # Rules that let people decide: questions and assumptions
 
-*Leading data people* · *Leading a data team*, film 4 · open, PR #260 · [pull request](https://github.com/roanboc/learning-data/pull/260)
+*Leading data people* · *Leading a data team*, film 4 of 4 · merged, PR #260 · [pull request](https://github.com/roanboc/learning-data/pull/260)
 
-On the site once PR #260 merges: https://data.learn-all.org/leading-a-data-team/rules-to-decide/
+[Watch it on the site](https://data.learn-all.org/leading-a-data-team/rules-to-decide/)
 
 The fourth and last film of *Leading a data team*, the third series of *Leading data people*. It was made on 10 November 2026 while Rodrigo was away, on his instruction to work on assumptions and merge with a draft label. Each row gives the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in [`../0-module.md`](../0-module.md). The film's numbers and people are also in the module's shared numbers, so the other films say them the same way.
 

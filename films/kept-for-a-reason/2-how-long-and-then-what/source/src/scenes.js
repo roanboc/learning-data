@@ -41,7 +41,7 @@ scene("flood",(ctx,S,t,sc)=>{
     // the building in section, its floors filling; the Archives beside it filling too; ten drawers, eight dimmed; the lists
     {at:tFloors,place:"hlNight",dis:0.8,push:0.015,draw:(x,tt)=>{
       const fill=[0,1,2,3,4,5].map(i=>ag_in(tt,tFloors+0.4+i*0.32,0.5)),aS=hl_v(tt,tFloors,tMost,0.6);
-      hl_section(x,250,300,560,540,fill,aS);dp_tag(x,250,190,"A war office","grey",{a:aS*ag_in(tt,tFloors+0.3,0.5),size:30});
+      hl_section(x,250,300,560,540,fill,aS);dp_slip(x,250,186,"A war office","grey",{a:aS*ag_in(tt,tFloors+0.3,0.5),ink:true,size:30});
       hl_archGlass(x,1010,330,700,510,ag_in(tt,tYear,2.4),hl_v(tt,tFlood,tMost,0.7));
       dp_card(x,1010,150,700,{title:"Every year: a building's worth"},{a:hl_v(tt,tWorth,tMost,0.6),k:ag_spr(tt,tWorth,0.9)});
       // ten drawers of the year's papers, eight of them dimming: no lasting value
@@ -142,8 +142,8 @@ scene("lives",(ctx,S,t,sc)=>{
     // the platform: full, nothing ever deleted; dimmed while the three lives are shown
     const bA=1-0.82*panesA,yrs=Math.round(lerp(2016,2026,clamp((tt-tLeak+1.5)/2.6,0,1))),coral=ag_in(tt,tLeak,1.2);
     const sh=[0,1,2,3,4,5,6].map(i=>({n:8,warm:i===6,coral:i===0?coral:0}));hl_block(x,sh,{a:bA,behind:"hlHall"});
-    dp_tag(x,1190,hl_shelfAt(1,7)[1]-31,"Pay records · since 2016","grey",{behind:"hlHall",a:hl_v(tt,tPay,tThree-0.6,0.6)*bA,to:hl_shelfAt(1,7),p:ag_in(tt,tPay+0.2,0.6),size:28});
-    dp_tag(x,1190,hl_shelfAt(3,7)[1]-31,"Applications · since 2017","grey",{behind:"hlHall",a:hl_v(tt,tApps,tThree-0.6,0.6)*bA,to:hl_shelfAt(3,7),p:ag_in(tt,tApps+0.2,0.6),size:28});
+    hl_greyTag(x,1190,hl_shelfAt(1,7),"Pay records · since 2016",{behind:"hlHall",a:hl_v(tt,tPay,tThree-0.6,0.6)*bA,p:ag_in(tt,tPay+0.2,0.6)});
+    hl_greyTag(x,1190,hl_shelfAt(3,7),"Applications · since 2017",{behind:"hlHall",a:hl_v(tt,tApps,tThree-0.6,0.6)*bA,p:ag_in(tt,tApps+0.2,0.6)});
     hl_bandAcross(x,HL_BLOCK.x-80,62,HL_BLOCK.w+160,64,"none","Nothing ever deleted",hl_v(tt,tNever,tThree-0.6,0.7));
     // the oldest card: its years counting up, its rim turning coral
     if(tt>tYear){const a=hl_v(tt,tYear+0.6,tPlan-0.3,0.6);dp_slip(x,HL_BLOCK.x-190,HL_BLOCK.y+4,String(yrs),"grey",{a,ink:true});
@@ -185,7 +185,7 @@ scene("schedule",(ctx,S,t,sc)=>{
     const bA=ag_in(tt,tClean-0.4,0.8);if(bA>0){const years=["2016","2017","2018","2019","2020"],sh=years.map((y,i)=>({n:8*(i<3?1-ag_in(tt,tGone+i*0.9,0.7):1),drawer:0}));
       sh.push({n:8*(1-ag_in(tt,tGone+3.0,1.2))});sh.push({n:8,warm:true});hl_block(x,sh,{a:bA,behind:"hlHall"});
       years.forEach((y,i)=>dp_slip(x,HL_BLOCK.x-160,HL_BLOCK.y+i*HL_BLOCK.h/7+14,y,"grey",{a:bA*(i<3?1-0.6*ag_in(tt,tGone+i*0.9+0.6,0.6):1),ink:true,size:28}));
-      dp_tag(x,1200,hl_shelfAt(5,7)[1]-31,"Applications, not hired","grey",{behind:"hlHall",a:bA,to:hl_shelfAt(5,7),p:1,size:28});}}}]);
+      hl_greyTag(x,1200,hl_shelfAt(5,7),"Applications, not hired",{behind:"hlHall",a:bA});}}}]);
 });
 
 /* ---------------------------------------------------------------- 5 · The clock starts at an event */

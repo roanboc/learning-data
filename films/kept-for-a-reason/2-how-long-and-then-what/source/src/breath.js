@@ -11,6 +11,6 @@ const BREATH={
 "lives":{"hold":{"oct":0.4,"look":0.4,"pay":0.6,"never":0.6,"three":0.4,"use":0.4,"archived":0.6,"deleted":0.6,"good":0.6,"year":0.8,"plan":1.0}},
 "schedule":{"hold":{"lists":0.6,"one":0.4,"row":0.8,"owners":0.6,"payrow":0.8,"academic":0.6,"others":0.6,"reason":0.8,"signed":1.0,"went":1.2}},
 "clock":{"hold":{"event":0.6,"contract":0.4,"eight":0.8,"firstc":0.6,"lastc":0.8,"others":0.6,"follows":0.8,"friday":0.6,"nobody":1.0,"as43":1.0}},
-"hold":{"hold":{"stay":0.4,"tutor":0.6,"due":0.6,"show":0.6,"places":0.6,"names":1.0,"skips":1.0,"never":0.8,"lifts":1.0,"as43":1.0}},
+"hold":{"hold":{"stay":0.8,"tutor":0.8,"due":0.8,"show":0.8,"places":1.2,"names":1.0,"skips":1.0,"never":0.8,"lifts":1.0,"as43":1.0}},
 "end":{"hold":{"short":0.6,"long":0.6,"laws":0.8,"outside":0.8,"copy":0.8,"dmd":0.8,"pile":0.8,"few":1.0,"every":1.0},"breathe":5.0}
 };

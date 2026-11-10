@@ -30,6 +30,10 @@ function hl_block(c,shelves,o){o=o||{};const B=HL_BLOCK,a=o.a==null?1:o.a,n=shel
   c.restore();return out;}
 // a shelf's middle on its right edge, for a tag's line
 const hl_shelfAt=(i,n)=>[HL_BLOCK.x+HL_BLOCK.w,HL_BLOCK.y+(i+0.5)*HL_BLOCK.h/n];
+// a grey tag on a shelf: a grey slip with its words in ice white, like the film's other grey slips (grey's own words are too faint
+// over the hall's light), its middle on the shelf's line, and a line of light from its left edge to the shelf (to), drawn on by p
+function hl_greyTag(c,x,to,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const size=o.size||28;c.save();c.globalAlpha*=a;
+  const bb=dp_slip(c,x,to[1]-(size+40)/2,text,"grey",{ink:true,size,behind:o.behind});dp_link(c,[bb.x,to[1]],to,"grey",o.p==null?1:o.p);c.restore();}
 
 /* ---------------------------------------------------------------- frosted cards and panes */
 // a small frosted card standing for a record: its words (one or two lines), its rim; o.warm, o.dim, o.coral (its rim), o.a

@@ -157,7 +157,7 @@ Source: [films/when-things-go-wrong](../films/when-things-go-wrong/) · Portal: 
 
 Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
-No film source yet.
+- [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 
 ### Quality as a habit
 
@@ -358,6 +358,12 @@ No film source yet.
 ### Making the case
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
+
+No film source yet.
+
+### Architecture that keeps up
+
+Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
 No film source yet.
 

@@ -62,7 +62,7 @@ Some of ABAC is in Beta (policies on views, on the whole metastore): check what'
 Ontos, from Databricks Labs, is a business catalogue for Unity Catalog: data products, data contracts,
 glossaries and semantic models, with review workflows. It runs as a Databricks App (its README:
 `databricks bundle deploy`, then `databricks apps deploy`). It follows ODCS v3.1.0, the version of the
-contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
+enterprise contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
 `governance/6-product-descriptors/` does. Load the
 contracts and products from there; the files in this repository stay their home, and the catalogue
 keeps a copy (Noor's map: *data contract* and *data product* in `governance/3-architecture-map/4-information/`).
@@ -240,9 +240,9 @@ The model's YAML names them: a column's `meta.critical_for` lists the uses that 
 (the graduation list's printed name for the certificates and the programme; its ceremony and
 attendance for the seating plan). After the table builds, dbt tags each of those columns with the
 key-only tag `critical_data`, and takes the tag off a column no use needs any more
-(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
-(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
-the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+(`macros/governance/critical_data.sql`). The model's YAML names them (`meta.critical_for`), and its
+`meta.quality` says what each use needs, at the level agreed with the people who use it
+(`docs/conventions.md`, *What each use needs*). Once, on the platform:
 
 1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
    *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can

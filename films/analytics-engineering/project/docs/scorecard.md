@@ -7,17 +7,18 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | Domain | completeness | uniqueness | validity | consistency | accuracy | All |
 |---|---|---|---|---|---|---|
 | `alumni` | 3/3 | 1/1 |  | 1/1 |  | 5/5 |
-| `course` |  | 1/1 | 1/1 | 1/1 |  | 3/3 |
-| `finance` | 1/1 | 4/4 | 2/2 | 1/1 | 1/1 | 9/9 |
+| `course` | 3/3 | 2/2 | 2/2 | 1/1 |  | 8/8 |
+| `finance` | 2/2 | 5/5 | 4/4 | 2/2 | 1/1 | 14/14 |
 | `hr` | 10/10 | 3/3 | 5/5 | 3/3 |  | 21/21 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
 | `registrar` | 14/14 | 6/6 | 10/10 (2 warn) | 5/5 |  | 35/35 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
+| `staff` | 5/5 | 3/3 |  | 1/1 |  | 9/9 |
 | `student` | 26/26 | 19/19 | 8/8 | 19/19 |  | 72/72 |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 70/70 (1 warn) | 48/48 | 36/36 (2 warn) | 40/40 | 2/2 | 196/196 (3 warn) |
+| **All** | 79/79 (1 warn) | 53/53 | 39/39 (2 warn) | 42/42 | 2/2 | 215/215 (3 warn) |
 
 ## Not passed
 

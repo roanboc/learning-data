@@ -57,7 +57,7 @@ const NARR={
 "reader":{"name":"A known reader","lead":0.8,"tail":0.8,"vo":[
  {"id":"adds","gap":0.8,"text":"Anil also adds the faculty's placements plan to the record of who uses what, in the project."},
  {"id":"next","gap":0.8,"text":"So when someone next changes Clara's table, the impact check names the Faculty of Health beside Planning's census dashboard."},
- {"id":"both","gap":0.8,"text":"Both are asked before the change ships."},
+ {"id":"both","gap":0.8,"text":"Both hear about it before the change ships."},
  {"id":"known","gap":0.8,"text":"A reader who's known is a reader who's told."}]},
 "outside":{"name":"Outside the university","lead":0.8,"tail":0.8,"vo":[
  {"id":"same","gap":0.8,"text":"Outside the university, the same rules hold."},

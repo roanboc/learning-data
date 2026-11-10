@@ -6,7 +6,7 @@ Learning artifacts for data: short, visual explanations of how modern data platf
 
 ## The films
 
-The site has nine big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
+The site has ten big topics. Start with the first, the overview; then pick the topic you need, in any order. Each topic holds films and series.
 
 | Topic | Films and series | For |
 |---|---|---|
@@ -19,6 +19,7 @@ The site has nine big topics. Start with the first, the overview; then pick the 
 | Master and reference data | [The same one, everywhere](https://data.learn-all.org/master-and-reference-data/), nine films, coming out one by one: the people and things a business is about, kept once and shared across its systems, and the lists that sort them | Data stewards and architects, and anyone whose data lives in many systems |
 | Data governance | Three series: [Governance principles](https://data.learn-all.org/data-governance/), a prologue and ten films on who decides what, and how each decision reaches the work, as checks, owners and tests rather than policies on a shelf; then [Governance on the map](https://data.learn-all.org/governance-on-the-map/), three films that design governance into the organisation's architecture map; and [Governance you can use](https://data.learn-all.org/governance-in-practice/), six films that make it work with dbt and Databricks | Governance teams and data owners, and anyone asked to make the rules work |
 | AI agents in data work | [What an agent is](https://data.learn-all.org/what-an-agent-is/), ten films with no product: how today's models came about, what they took from the brain, what an agent is, what agents are like to work with, why that means governing them, and what one agent, and many, tell us about ourselves; and [Agents at work on data](https://data.learn-all.org/agents-at-work-on-data/), which puts the agent to work on the census-day count, a film at a time: what it reads, its skills, its tools, its memory, how its work is checked and how it goes wrong, then on Databricks, governed; more series will follow | Everyone who works with data, and will work beside an AI agent |
+| Data management | A data manager's whole job, in four series, as drafts: [A plan in ninety days](https://data.learn-all.org/a-plan-in-ninety-days/) opens it, with *Every area, one job*, on seeing every area of data as one job and planning the first ninety days in three lanes, the first of four films; *Making the case*, *Architecture that keeps up* and *Small steps, measured* follow | Data managers, and anyone who leads data work across an organisation |
 
 Every film has chapters, Pause and think questions and Spanish pages; most have hands-on labs and scenarios too.
 

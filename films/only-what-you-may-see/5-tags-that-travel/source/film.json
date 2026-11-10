@@ -1,0 +1,48 @@
+{
+  "key": "tags-that-travel",
+  "title": "Tags that travel",
+  "sub": "The fifth film of Only what you may see, the second series of Data protection and privacy: a class set once at the source, carried with the data into every table made from it, as the Forest Stewardship Council's chain of custody carries a forest's claim from company to company, from 1993. In Databricks, each class becomes a governed tag: only its values, set only by the registrar's loader. Data classification proposes, and the owner decides; dbt sets each class from the owner's file after every build; tag propagation carries it through lineage, and where two values meet, a value set in advance applies. So a value that says less is made once, at the source, and a table's level stays its owner's call.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may, with cards of near-clear frost and bright rims. Cyan is an identity, green allowed, coral denied or closed, violet personal data, a quieter violet an indirect identifier, grey what needs no protection. Each class is a violet chip, pseudonymous with a small key and indirect a quieter violet; none is a grey chip, and on the platform, where none is no tag, an empty outline. The tools' pages are drawn as their docs show them, with their logos and names. The forest and its chain are painted in the same night light, with their place and years on a tag.",
+  "src": [
+    "tt_forest.js",
+    "tt_hall.js",
+    "tt_pages.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "follows",
+    "arrive",
+    2.4
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bAnil\\b",
+      "Ah-neel"
+    ],
+    [
+      "\\bOkafor\\b",
+      "Oh-kah-for"
+    ]
+  ],
+  "story": [
+    "forest"
+  ],
+  "urgent": [],
+  "logos": true
+}

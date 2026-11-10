@@ -7,7 +7,7 @@ const BREATH={
 "receipt":{"hold":{"linh":0.4,"asked":0.4,"logged":0.6,"night":0.4,"wed":0.6,"history":0.8,"versions":0.6,"ask":0.8,"marks":0.4,"save":0.6,"rewrites":0.6,"seven":0.9,"vacuum":0.8,"dec":0.8,"back":1.0}},
 "source":{"hold":{"alone":0.4,"yes":0.6,"no":0.4,"ingrid":0.6,"follows":0.4,"own":0.8,"restricted":0.4,"code":1.0}},
 "copies":{"hold":{"where":0.4,"shows":0.6,"email":0.2,"number":0.6,"leaves":0.6,"drops":0.6,"contract":1.0,"show":0.6,"apart":0.8,"early":0.8,"use":0.9,"last":1.0,"restored":1.0,"void":1.0}},
-"cold":{"hold":{"stay":0.4,"pay":0.6,"moves":0.4,"own":0.6,"tier":0.6,"gone":0.6,"sorted":0.6,"january":0.8,"steps":0.6,"frozen":1.0}},
+"cold":{"hold":{"stay":0.4,"pay":0.6,"tier":0.6,"gone":0.6,"sorted":0.6,"january":0.8,"steps":0.6}},
 "logs":{"hold":{"type":0.6,"year":0.8,"typed":1.0,"name":1.0,"agents":0.6,"trace":0.8,"masked":1.2,"ticket":0.6,"clone":1.4}},
 "gone":{"hold":{"dec":0.6,"locked":0.6,"pay":0.6,"date":1.0,"kanesh":0.8,"off":0.8},"breathe":5.6}
 };

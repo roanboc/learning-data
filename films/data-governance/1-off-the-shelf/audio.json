@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/off-the-shelf/soundtrack.mp3",
+      "size": 4661803,
+      "sha256": "e5ce085f67c67d79559ff9a3dd97f6da07adbd2cc6fd629f83ca8363266f9bbf",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/e5ce085f67c67d79559ff9a3dd97f6da07adbd2cc6fd629f83ca8363266f9bbf.mp3"
+    }
+  ]
+}

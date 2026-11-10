@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/day-one/soundtrack.mp3",
+      "size": 4308889,
+      "sha256": "8cacf925ae40abc49153b9fe3b06a498029d0a4955875d329fe35c0772094af7",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/8cacf925ae40abc49153b9fe3b06a498029d0a4955875d329fe35c0772094af7.mp3"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+sources:
+  - name: portal
+    description: '{{ doc("source_portal") }}'
+    database: "{{ env_var('DBT_SOURCES_CATALOG', target.database) }}"
+    schema: "{{ env_var('DBT_SOURCES_SCHEMA_PREFIX', '') }}portal"
+    config:
+      # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the ingested table.
+      external_location: "read_csv('data/portal/{name}.csv', header = true, all_varchar = true)"
+      # on DuckDB the column is text; on Databricks the cast does nothing
+      loaded_at_field: "cast(_loaded_at as timestamp)"
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 3, period: day}
+      meta:
+        owner: "Mei Tanaka, registrar's office"
+        key_set:
+          code: SP
+          system: student portal
+          owner: "Mei Tanaka, registrar's office"
+          # The day the project first read this system's keys: the key sets seed lists them in that order.
+          since: 2026-11-05
+          # Each key the system issues, and the case staging writes it in (docs/conventions.md).
+          system_keys:
+            - {key: confirmation_id, case: upper, example: NC-10017}
+          example: SP|NC-10017
+        domain: registrar
+    tables:
+      - name: name_confirmations
+        description: >
+          One row per version of a graduate's answer to "Is this your name?", given while they
+          register for a ceremony: their name as it would be printed, and "This is my name" or
+          "This isn't my name" with the name as they write it. The system key is the
+          confirmation ID.
+        config:
+          meta:
+            system_key: [confirmation_id]
+        columns:
+          - name: confirmation_id
+            description: The ID the portal gives each answer, like NC-10017.
+          - name: student_id
+            description: The student ID of the graduate who answered, as the student system issued it.
+          - name: ceremony_id
+            description: The ceremony the graduate registered for when they answered. An answer counts for that ceremony only.
+          - name: answer
+            description: confirmed, for "This is my name"; corrected, for "This isn't my name", with the name the graduate typed.
+          - name: name_as_printed
+            description: The whole name, in the graduate's own order, as they confirmed or typed it. Every letter is kept, accents too.
+          - name: confirmed_at
+            description: When the graduate answered.
+          - name: checked_on
+            description: >
+              For a correction, the day the registrar's office checked it against the identity
+              document seen at enrolment and accepted it. Empty for a confirmation, and for a
+              correction still waiting for its check.

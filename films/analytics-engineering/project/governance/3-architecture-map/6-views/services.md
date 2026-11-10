@@ -7,11 +7,11 @@
 | Capability | Owner | Heat | Evidence |
 |---|---|---|---|
 | change without surprises | Yusuf Demir, data governance lead | green | impact report on every pull request; versioned contracts (project: impact.py, DEC-PRJ-02) · 20 Oct 2026 |
-| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; CODEOWNERS generated from them (project: governance.py, codeowners.py) · 20 Oct 2026 |
+| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; the impact check tells them what a change touches (project: governance.py, impact.py) · 10 Nov 2026 |
 | define what words mean | Yusuf Demir, data governance lead | amber | one glossary term synced (award); the other core entities have governance's confirmation there's none (project: governance.py, sync-the-glossary) · 20 Oct 2026 |
 | govern data | Yusuf Demir, data governance lead | amber | the seven beneath it · 20 Oct 2026 |
 | keep data fit for use | Yusuf Demir, data governance lead | green | every test has an owner and a dimension; the scorecard is read from the run; emails checked where they're typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026 |
-| protect who sees what | Yusuf Demir, data governance lead | amber | every column of a shared model classified, and tagged and masked on the platform from that class (project: governance.py, DEC-PRJ-13); no access requests with a purpose and an end date yet · 20 Oct 2026 |
+| protect who sees what | Yusuf Demir, data governance lead | green | every column of a shared model classified, tagged and masked from its class, one policy for each class (project: governance.py, DEC-PRJ-13, DEC-PRJ-17); access asked for with a purpose and an end date, reviewed each quarter, and a check every morning for a personal column with no class (project: databricks-governance.md sections 8, 17 and 18, morning_check.sql) · 10 Nov 2026 |
 | provide data products | Yusuf Demir, data governance lead | amber | six products, with descriptors and contracts in the open standards (project: governance/4-data-products/); no catalogue or access requests yet · 20 Oct 2026 |
 | teach | Yusuf Demir, data governance lead | red | nothing yet: no guidance, no community of practice, no onboarding · 20 Oct 2026 |
 
@@ -24,6 +24,22 @@
 **How to ask.** A request in the product catalogue. **Owner:** Yusuf Demir, data governance lead. **Realizes:** protect who sees what.
 
 Its steps aren't on the map yet.
+
+### Change a data product
+
+**Promise.** A change to a data product goes from a ticket to production: drafted with its evidence, reviewed and approved by people other than whoever drafted it, and released by a second person.
+
+**How to ask.** A ticket in the tracker. **Owner:** Yusuf Demir, data governance lead. **Realizes:** provide data products.
+
+| Step | Who does it | Reads | Writes | Then |
+|---|---|---|---|---|
+| raise a ticket | requester |  | ticket | draft the change |
+| draft the change | planning contributor | ticket, role and its steps, business term, business rule, data contract, owner and column class, data product, team memory | change draft | build it in development |
+| build it in development | planning contributor | change draft, data product | test and its result | open a pull request |
+| open a pull request | planning contributor | change draft, test and its result | pull request | review the code |
+| review the code | analytics engineer | pull request, change draft, test and its result | code review | approve the change |
+| approve the change | release approver | pull request, code review | approval | release to production |
+| release to production | release approver | approval, pull request | data product |  |
 
 ### Define or change a term
 

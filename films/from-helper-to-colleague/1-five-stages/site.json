@@ -1,0 +1,46 @@
+{
+  "kicker": "Earned autonomy",
+  "kicker_es": "Autonomía ganada",
+  "title_es": "Cinco etapas, no un interruptor",
+  "h1": "Five stages, not a switch: one kind of task at a time",
+  "h1_es": "Cinco etapas, no un interruptor: un tipo de tarea a la vez",
+  "lead": "Anil's workload agent tells Health's heads of school who teaches in each school, and how many are casual. It isn't at one stage: each kind of task has its own, from only suggesting to working alone in test. After one night in October, one task went down a stage, and earned its way back.",
+  "lead_es": "El agente de carga docente de Anil dice a los directores de Salud quién enseña en cada escuela y cuántos son temporales. No está en una sola etapa: cada tipo de tarea tiene la suya, de solo sugerir a trabajar a solas en pruebas. Tras una noche de octubre, una tarea bajó una etapa y la recuperó.",
+  "description": "A film about how an AI agent earns its autonomy, the first of From helper to colleague: five stages, from a junior assistant that only suggests to a team contributor with a mandate, each changing whose identity the agent uses, how much it may do and what the person does, and each reached through a gate that a person decides it has passed; Anil's workload agent, with its own identity since September, at four stages at once, one for each kind of task, with the same task at stage five in test and at stage four in production; one night in October, working alone in test, it changed a model that wasn't its own, so that one task went down a stage, and earned its way back through the gate again, with its folders written down and held, limits and a plain check, fourteen nights in test without a miss, and a mandate signed on 30 October; and what never changes: a person owns the agent, a second person approves every change to production, agents never approve, and none approves its own change, weakens a check or grants itself rights. It opens in New Zealand in 1987, where the driving licence came in three stages, with the riskiest driving last.",
+  "description_es": "Una película sobre cómo un agente de IA se gana su autonomía, la primera de De ayudante a colega: cinco etapas, de un asistente junior que solo sugiere a un colaborador del equipo con un mandato, cada una cambiando qué identidad usa el agente, cuánto puede hacer y qué hace la persona, y a cada una se llega por una puerta que una persona decide que ha pasado; el agente de carga docente de Anil, con su propia identidad desde septiembre, en cuatro etapas a la vez, una para cada tipo de tarea, con la misma tarea en la etapa cinco en pruebas y en la cuatro en producción; una noche de octubre, trabajando a solas en pruebas, cambió un modelo que no era suyo, así que una tarea bajó una etapa, y volvió a ganársela pasando la puerta otra vez, con sus carpetas escritas y aplicadas, límites y una verificación sencilla, catorce noches en pruebas sin un error y un mandato firmado el 30 de octubre; y lo que nunca cambia: una persona es dueña del agente, una segunda persona aprueba cada cambio en producción, los agentes nunca aprueban, y ninguno aprueba su propio cambio, debilita una verificación ni se da permisos a sí mismo. Empieza en Nueva Zelanda en 1987, donde la licencia de conducir llegó en tres etapas, con lo más riesgoso al final.",
+  "card": "Anil's workload agent is at four stages at once, one per kind of task. After one bad night, one task stepped down, then back up.",
+  "card_es": "El agente de carga docente de Anil está en cuatro etapas a la vez, una por tarea. Tras una mala noche, una bajó y luego volvió.",
+  "chapters_es": {
+    "licence": "Una licencia por etapas",
+    "stages": "Cinco etapas y sus puertas",
+    "tasks": "Un agente, cuatro etapas",
+    "down": "Una etapa abajo, y de vuelta",
+    "never": "Lo que nunca cambia",
+    "close": "Un tipo de tarea a la vez"
+  },
+  "past": [
+    "New Zealand, 1987: a driving licence in three stages",
+    "A licence that came all at once became three stages, each with its own limits, the riskiest driving last. An agent earns its freedom the same way, one kind of task at a time."
+  ],
+  "past_es": [
+    "Nueva Zelanda, 1987: una licencia de conducir en tres etapas",
+    "Una licencia que llegaba de una vez se volvió tres etapas, cada una con sus límites, y lo más riesgoso al final. Un agente se gana su libertad igual, un tipo de tarea a la vez."
+  ],
+  "repo": {
+    "stages": [
+      "docs/stages.md"
+    ],
+    "tasks": [
+      "docs/stages.md"
+    ],
+    "down": [
+      "docs/stages.md"
+    ],
+    "never": [
+      "docs/stages.md",
+      "AGENTS.md"
+    ]
+  },
+  "next_h": "You've seen how an agent earns its freedom, one kind of task at a time. Next: what a helper borrows when it works on your sign-in.",
+  "next_h_es": "Viste cómo un agente se gana su libertad, un tipo de tarea a la vez. Después: lo que toma prestado un ayudante que trabaja con tu acceso."
+}

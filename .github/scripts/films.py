@@ -12,7 +12,8 @@ for a film on its own): a list, one entry per video (The Inner Life of Data has 
   captions             its caption files, [path, name in the release]
   paths                everything the video is built from (git pathspecs): its own source, and the shared code it draws with.
                        A change under any of them means the video needs rendering again
-  legibility           its row in films/legibility-report.md (texts, under_28, under_20, median, status), from
+  legibility           its row in the legibility report's table, printed by build_series.py --legibility (texts, under_28,
+                       under_20, median, status), from
                        site-tools/legibility.py
 The release notes take one line or more per film or series, from release-note.md in its folder (films/<series>/ or
 films/<film>/); "{files}" there becomes the videos of its films, in order, so a new film needs no change to it.
@@ -48,7 +49,13 @@ def files():
 
 def films():
     """The FILMS list: every video, in order."""
-    return [e for f in files() for e in json.loads(f.read_text())]
+    return [e for f in files() for e in entries(f)]
+
+
+def entries(path):
+    """Shared production dependencies are declared once, rather than edited into every film's rows."""
+    return [dict(e, paths=list(dict.fromkeys(e["paths"] + ["site-tools/voice_cache.py"])))
+            for e in json.loads(path.read_text(encoding="utf-8"))]
 
 
 def notes():

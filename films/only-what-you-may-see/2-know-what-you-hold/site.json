@@ -1,0 +1,74 @@
+{
+  "draft": true,
+  "kicker": "Data classification",
+  "kicker_es": "Clasificación de datos",
+  "title_es": "Conoce lo que guardas",
+  "h1": "Know what you hold: a class for every column",
+  "h1_es": "Conoce lo que guardas: una clase para cada columna",
+  "lead": "Anil's agreement lets his study have each learner's course, results, year of birth and a code, and nothing that names a learner or touches their health. But the platform reads columns, and Mei's register asks only whether a column identifies someone. What does each column tell about a person?",
+  "lead_es": "El acuerdo de Anil da a su estudio el curso, los resultados, el año de nacimiento y un código de cada estudiante, y nada que lo nombre ni toque su salud. Pero la plataforma lee columnas, y el registro de Mei solo pregunta si identifica a alguien. ¿Qué dice cada columna sobre una persona?",
+  "description": "A film about naming what data holds before protecting it, the second of Only what you may see: Chile in 2016, where a black octagon on the front of each food packet over a limit, put there by its maker, said which ones to be careful with; a signed agreement in plain words that the platform can't read; five classes for a column, the strictest that applies (special, direct, pseudonymous, indirect, none), and four levels for a table (public, internal, confidential, restricted) with two floors from its columns; exam support, which names no illness but is given for a disability; each column named once, at the source, by its owner; and the class following the column into everything made from it.",
+  "description_es": "Una película sobre nombrar lo que guardan los datos antes de protegerlos, la segunda de Solo lo que puedes ver: Chile en 2016, donde un octágono negro al frente de cada envase sobre un límite, puesto por quien lo fabrica, decía con cuáles tener cuidado; un acuerdo firmado en palabras sencillas que la plataforma no puede leer; cinco clases para una columna, la más estricta que le aplica (especial, directa, seudónima, indirecta, ninguna), y cuatro niveles para una tabla (pública, interna, confidencial, restringida) con dos mínimos que vienen de sus columnas; el apoyo en exámenes, que no nombra ninguna enfermedad pero se da por una discapacidad; cada columna nombrada una vez, en el origen, por su dueño; y la clase que sigue a la columna a todo lo que se hace con ella.",
+  "card": "Five classes for every column and a level for every table, set once at the source by the data's owner.",
+  "card_es": "Cinco clases para cada columna y un nivel para cada tabla, puestos una vez en el origen por su dueño.",
+  "chapters_es": {
+    "high": "Altos en",
+    "plain": "Palabras sencillas",
+    "classes": "Dos clases más",
+    "levels": "Un nivel para cada tabla",
+    "holds": "Lo que guarda",
+    "source": "Nombrada en el origen",
+    "follows": "La clase sigue",
+    "named": "Nombrado primero"
+  },
+  "past": [
+    "Chile, 2016: a black octagon on the front of the pack",
+    "You can't protect what you haven't named."
+  ],
+  "past_es": [
+    "Chile, 2016: un octágono negro al frente del envase",
+    "No puedes proteger lo que no has nombrado."
+  ],
+  "next_h": "You've seen how every column gets its class and every table its level, from the one who knows what they hold, and how the class follows the data. Next: show the least, the ways to hide a value, and what each still lets you do.",
+  "next_h_es": "Viste cómo cada columna recibe su clase y cada tabla su nivel, de quien sabe lo que guardan, y cómo la clase sigue a los datos. Sigue: mostrar lo mínimo, las formas de ocultar un valor y lo que cada una aún permite hacer.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film names no product and no standard. These are the public guides its classes and levels follow, from the bodies that write them.",
+    "p_es": "La película no nombra ningún producto ni ninguna norma. Estas son las guías públicas que siguen sus clases y niveles, de quienes las escriben.",
+    "links": [
+      {
+        "title": "NIST SP 800-188: De-identifying government data sets",
+        "title_es": "NIST SP 800-188: desidentificar conjuntos de datos públicos",
+        "line": "Direct identifiers, and the quasi-identifiers that name no one alone but single a person out together.",
+        "line_es": "Los identificadores directos, y los cuasi-identificadores que no nombran a nadie solos, pero juntos señalan a una persona.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/188/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/188/final"
+      },
+      {
+        "title": "ICO: What is special category data?",
+        "title_es": "ICO: ¿qué son los datos de categoría especial?",
+        "line": "The UK regulator's guide to data that needs more care, such as health or beliefs, including what other data can reveal.",
+        "line_es": "La guía del regulador del Reino Unido sobre los datos que piden más cuidado, como la salud o las creencias, y lo que otros datos pueden revelar.",
+        "href": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data/",
+        "href_es": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data/"
+      },
+      {
+        "title": "NIST Cybersecurity Framework 2.0",
+        "title_es": "Marco de ciberseguridad 2.0 del NIST",
+        "line": "The framework's first function starts with knowing what you hold: an inventory of data and what it is (ID.AM-07).",
+        "line_es": "La primera función del marco empieza por saber lo que guardas: un inventario de los datos y de lo que son (ID.AM-07).",
+        "href": "https://www.nist.gov/cyberframework",
+        "href_es": "https://www.nist.gov/cyberframework"
+      },
+      {
+        "title": "ONS: Disclosure control",
+        "title_es": "ONS: control de divulgación",
+        "line": "How a statistics office publishes totals without pointing to anyone, small counts included.",
+        "line_es": "Cómo una oficina de estadística publica totales sin señalar a nadie, incluidos los conteos pequeños.",
+        "href": "https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol",
+        "href_es": "https://www.ons.gov.uk/methodology/methodologytopicsandstatisticalconcepts/disclosurecontrol"
+      }
+    ]
+  }
+}

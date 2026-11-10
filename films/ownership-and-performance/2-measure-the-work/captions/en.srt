@@ -1,0 +1,279 @@
+1
+00:00:03,000 --> 00:00:08,147
+In 1997, 541 people died on Sweden's roads.
+
+2
+00:00:09,847 --> 00:00:12,549
+Most crashes were put down to a driver's mistake.
+
+3
+00:00:14,049 --> 00:00:17,665
+So the answer was to teach drivers, fine them, and blame them.
+
+4
+00:00:19,365 --> 00:00:23,916
+But people always make mistakes. A tired driver drifts over the middle line.
+
+5
+00:00:25,816 --> 00:00:32,306
+On a fast road, that mistake could kill. For hundreds of families a year, it meant someone who never came home.
+
+6
+00:00:34,206 --> 00:00:35,594
+Something had to change.
+
+7
+00:00:37,494 --> 00:00:46,096
+In October 1997, Sweden's parliament adopted Vision Zero: no one should be killed or seriously injured on the roads.
+
+8
+00:00:47,796 --> 00:00:52,173
+Those who design and run the roads would answer for that, not only drivers.
+
+9
+00:00:53,873 --> 00:00:58,285
+Every fatal crash was studied in depth, to ask how it could have been prevented.
+
+10
+00:00:59,985 --> 00:01:04,290
+Many people died in head-on crashes, on fast roads with two lanes.
+
+11
+00:01:05,990 --> 00:01:10,861
+So from 1998, those roads got a barrier of steel cables down the middle.
+
+12
+00:01:12,561 --> 00:01:16,761
+Roundabouts replaced crossroads, and speeds came down where people walk.
+
+13
+00:01:18,261 --> 00:01:22,096
+On roads given a middle barrier, deaths fell by about three quarters.
+
+14
+00:01:23,596 --> 00:01:27,944
+Across the country, while traffic grew, road deaths fell by more than half.
+
+15
+00:01:29,644 --> 00:01:34,268
+Drivers still had to take care. But a mistake no longer had to cost a life.
+
+16
+00:01:36,168 --> 00:01:41,241
+Sweden stopped asking who to blame, and measured the roads, to find what in them to fix.
+
+17
+00:01:42,941 --> 00:01:49,264
+Data work is the same: when work is slow, the cause is usually in how it flows, not in who did it.
+
+18
+00:01:50,764 --> 00:01:54,032
+Measure the work, read it together, and you find what to fix.
+
+19
+00:02:01,732 --> 00:02:06,310
+At the university, a year from now, Helena Novak is the data manager.
+
+20
+00:02:07,810 --> 00:02:14,603
+Managing and leading are two sides of her one role. It did harm to call one good, and the other old-fashioned.
+
+21
+00:02:16,503 --> 00:02:23,259
+What's hard to see is hard to improve for long. So a leader measures, and there are always dates and plans to keep.
+
+22
+00:02:25,159 --> 00:02:31,643
+That is management, but it has to fit the work: hours or tickets per person say little about thinking work.
+
+23
+00:02:33,343 --> 00:02:39,421
+From July, the team's page of measures, from the data management module, shows how the work flows.
+
+24
+00:02:41,121 --> 00:02:46,486
+Days from a request to its first use: 41 in February, 24 by June.
+
+25
+00:02:48,186 --> 00:02:51,268
+Sent back: how often work comes back for changes.
+
+26
+00:02:52,768 --> 00:02:56,861
+Promises met: how often the team's data products keep their promise.
+
+27
+00:02:58,361 --> 00:03:02,876
+And load: pieces of work open at once, against the team's limit of six.
+
+28
+00:03:04,576 --> 00:03:10,438
+Each measure has a partner that balances it: speed beside sent back, promises beside load.
+
+29
+00:03:13,138 --> 00:03:18,935
+Every second Thursday from 15 July, the team reads the page together, for twenty minutes.
+
+30
+00:03:20,635 --> 00:03:24,986
+Helena asks one question: what slowed the work? Never, who was slow?
+
+31
+00:03:26,886 --> 00:03:32,394
+In Sweden, they asked what in a road let a mistake kill. Helena asks the same of the work.
+
+32
+00:03:34,294 --> 00:03:37,832
+At the first reading, they take June's 24 days apart.
+
+33
+00:03:39,532 --> 00:03:42,645
+Seven of them were spent waiting for access to the data.
+
+34
+00:03:44,545 --> 00:03:50,568
+Access was asked for only when work started, one dataset at a time, up to five days each.
+
+35
+00:03:52,268 --> 00:03:55,963
+Nobody was slow. The wait was in how the work was arranged.
+
+36
+00:03:57,863 --> 00:04:04,905
+From Monday 19 July, access is asked for the day a request is accepted, so it's ready when work starts.
+
+37
+00:04:06,605 --> 00:04:09,860
+By September, that wait is down from seven days to one.
+
+38
+00:04:11,560 --> 00:04:16,531
+A second cause: one piece of work in eight came back, read one way and meant another.
+
+39
+00:04:18,231 --> 00:04:23,709
+Now, before work starts, fifteen minutes with the person who asked agrees what done looks like.
+
+40
+00:04:25,409 --> 00:04:30,699
+By December, the days are down to 14, and sent back has halved, to 6 in 100.
+
+41
+00:04:32,599 --> 00:04:37,235
+Most of the gain came from waits like these, found and removed one at a time.
+
+42
+00:04:39,935 --> 00:04:46,470
+On Thursday 12 August, promises met has reached 82%, up from 58 in March.
+
+43
+00:04:48,170 --> 00:04:50,316
+On its own, a number to celebrate.
+
+44
+00:04:52,016 --> 00:04:56,830
+But load stands at nine pieces of work open at once, against a limit of six.
+
+45
+00:04:58,730 --> 00:05:04,535
+New work had started before old work finished: the team kept its promises by carrying too much.
+
+46
+00:05:06,235 --> 00:05:09,059
+That can't last: tired people make mistakes.
+
+47
+00:05:10,759 --> 00:05:15,960
+So the team finishes before it starts: nothing new begins until something open is done.
+
+48
+00:05:17,460 --> 00:05:20,587
+Two requests get a not now, with a reason and a date.
+
+49
+00:05:22,287 --> 00:05:29,166
+By mid-September, load is back to six, and promises met keeps rising, to 86% in December.
+
+50
+00:05:31,066 --> 00:05:38,120
+Accelerate's research, in 2018, found the best teams fast and stable at once, measured side by side.
+
+51
+00:05:39,820 --> 00:05:47,745
+Each pair keeps the other honest. Speed without sent back can hide rushed work. Promises without load can hide tired people.
+
+52
+00:05:50,445 --> 00:05:57,416
+On Monday 13 September, the director of digital services, Helena's manager, asks for something new.
+
+53
+00:05:58,716 --> 00:06:01,868
+A count of tickets closed by each person, each month.
+
+54
+00:06:03,768 --> 00:06:09,590
+The director wants to know if the team is getting faster, and if anyone needs help: fair questions.
+
+55
+00:06:11,490 --> 00:06:18,182
+In 1975, the economist Charles Goodhart saw that a number pushed to move stops meaning what it did.
+
+56
+00:06:19,882 --> 00:06:25,611
+Marilyn Strathern put it plainly: when a measure becomes a target, it ceases to be a good measure.
+
+57
+00:06:27,711 --> 00:06:35,275
+Count tickets per person, and people split work small, pick easy tickets, and stop helping each other. And mistakes get hidden.
+
+58
+00:06:37,175 --> 00:06:43,377
+The SPACE framework warns the same: a count of activity never shows, alone, how well people work.
+
+59
+00:06:45,077 --> 00:06:52,816
+And W. Edwards Deming estimated that about 94 in 100 problems belong to the system, not to the people in it.
+
+60
+00:06:54,716 --> 00:07:00,858
+So Helena says no to the count, and shows what instead: the team's page, and what its readings changed.
+
+61
+00:07:02,558 --> 00:07:06,118
+How each person grows stays in their own goals, agreed with her.
+
+62
+00:07:07,618 --> 00:07:11,590
+The director takes the page to the quarterly review. No one is ranked.
+
+63
+00:07:14,290 --> 00:07:20,792
+Sweden stopped blaming drivers one by one, measured its roads, and fixed what turned a mistake into a death.
+
+64
+00:07:22,692 --> 00:07:27,777
+Helena's team measured how its work flowed, read it together, and fixed what slowed it.
+
+65
+00:07:29,677 --> 00:07:35,637
+On Monday, measure the flow of the work: days to first use, work sent back, promises met, and load.
+
+66
+00:07:37,137 --> 00:07:39,633
+Pair each measure with one that balances it.
+
+67
+00:07:41,133 --> 00:07:44,670
+Read them together, often, and ask what slowed the work, never who.
+
+68
+00:07:46,170 --> 00:07:51,468
+When someone asks for a number to rank people by, say no, and show the team's flow instead.
+
+69
+00:07:52,968 --> 00:07:59,203
+When someone falls behind, the next film, looks at the harder case: one person's work, and what surrounds it.
+
+70
+00:08:00,903 --> 00:08:04,263
+Measure the work together. Fix the system, not the people.

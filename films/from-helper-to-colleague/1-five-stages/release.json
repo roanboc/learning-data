@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Five stages, not a switch",
+    "key": "five-stages-en",
+    "dir": "films/from-helper-to-colleague/1-five-stages/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/five-stages/film.js",
+    "video": "dist/five-stages.mp4",
+    "file": "five-stages.mp4",
+    "captions": [
+      [
+        "films/from-helper-to-colleague/1-five-stages/captions/en.srt",
+        "five-stages.en.srt"
+      ],
+      [
+        "films/from-helper-to-colleague/1-five-stages/captions/es.srt",
+        "five-stages.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/from-helper-to-colleague/1-five-stages/source",
+      ":(exclude)films/from-helper-to-colleague/1-five-stages/source/src/i18n/es/captions.js",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared",
+      "films/data-governance/shared/tools",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 309,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 30.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

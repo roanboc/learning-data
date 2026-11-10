@@ -2,7 +2,7 @@
 
 *The second series of the module Data management.*
 
-Winning support for data work, and keeping it. The old warehouse costs A$310,000 a year, and 17 of its 38 reports are never opened. Four films: *A case worth funding* (options, costs once and running, benefits with owners, and one clear ask, on one page); *Risks, said out loud* (each risk with an owner, a response and an early sign); *Everyone at the table* (know what each stakeholder needs from data, and tell everyone the same story every month); and *One list, not twenty* (one front door and one list for all the data work, ordered in the open). *A plan in ninety days* comes before it, *Small steps, measured* after. The plan for the module is in [`../a-plan-in-ninety-days/proposal.md`](../a-plan-in-ninety-days/proposal.md); this series' own part is in its [proposal](proposal.md).
+Winning support for data work, and keeping it. The old warehouse costs A$310,000 a year, and 17 of its 38 reports are never opened. Four films: *A case worth funding* (options, costs once and running, benefits with owners, and one clear ask, on one page); *Risks, said out loud* (each risk with an owner, a response and an early sign); *Everyone at the table* (know what each stakeholder needs from data, and tell everyone the same story every month); and *One list, not twenty* (one front door and one list for all the data work, ordered in the open). *A plan in ninety days* comes before it, *Architecture that keeps up* after. The plan for the module is in [`../a-plan-in-ninety-days/proposal.md`](../a-plan-in-ninety-days/proposal.md); this series' own part is in its [proposal](proposal.md).
 
 **Status:** set up on 5 November 2026, on assumptions the author reviews later; the films are being made, one at a time, each marked draft on the site, and appear in the table below as each one is out. On the site, the series sits under the topic *Data management*, after *A plan in ninety days*, at `making-the-case/`, once its opening film is out.
 
@@ -11,6 +11,9 @@ Winning support for data work, and keeping it. The old warehouse costs A$310,000
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [A case worth funding](https://data.learn-all.org/making-the-case/a-case-worth-funding/) | Funding data work | 8 min | 7 | 3 questions | [script](1-a-case-worth-funding/script.md) · [source](1-a-case-worth-funding/source/README.md) |
+| [Risks, said out loud](https://data.learn-all.org/making-the-case/risks-said-out-loud/) | A risk register that lives | 7 min | 6 | 3 questions | [script](2-risks-said-out-loud/script.md) · [source](2-risks-said-out-loud/source/README.md) |
+| [Everyone at the table](https://data.learn-all.org/making-the-case/everyone-at-the-table/) | Every stakeholder, one story | 9½ min | 6 | 3 questions | [script](3-everyone-at-the-table/script.md) · [source](3-everyone-at-the-table/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

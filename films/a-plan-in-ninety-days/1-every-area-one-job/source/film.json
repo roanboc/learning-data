@@ -1,0 +1,29 @@
+{
+  "key": "every-area-one-job",
+  "title": "Every area, one job",
+  "sub": "The opening film of A plan in ninety days, the first series of Data management: a data manager answers for every area of data at once. On her first day, Helena puts 46 open requests on DAMA-DMBOK's wheel, finds who on her team is deep in each area, and by Friday has her first ninety days on one page, in three lanes run side by side: people, strategy and operations.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the rescue's plans and who led each part, Helena's three lanes and their dates), green is something done or a value (a man found alive, a request answered), orange is data (the 46 requests, on the wheel as dots), and amber is risk or waiting (time running out, the oldest request, an area with no one deep in it).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "ea_rescue.js",
+    "ea_uni.js",
+    "ea_scenes.js"
+  ],
+  "poster": [
+    "lanes",
+    "strategy",
+    5.2
+  ],
+  "say": [
+    ["\\bCopiapó\\b", "Kopi-a-poe"],
+    ["\\bSougarret\\b", "Soo-gah-ret"],
+    ["\\bUrzúa\\b", "Oor-soo-ah"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "rescue"
+  ],
+  "urgent": []
+}

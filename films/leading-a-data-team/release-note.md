@@ -1,0 +1,1 @@
+*Leading a data team*, the third series of the module Leading data people, on four ideas to lead a data team by: four films, {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

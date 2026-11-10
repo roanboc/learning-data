@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/design-it-simple/soundtrack.mp3",
+      "size": 7372843,
+      "sha256": "4ba3ead62bf3615be7117919d660e33741338b67a756e4459e1bb218143c814e",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-design-it-simple-c84cf53b1cdc86287528/4ba3ead62bf3615be7117919d660e33741338b67a756e4459e1bb218143c814e.mp3"
+    }
+  ]
+}

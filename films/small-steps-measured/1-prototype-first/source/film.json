@@ -1,0 +1,30 @@
+{
+  "key": "prototype-first",
+  "title": "Prototype first",
+  "sub": "The opening film of Small steps, measured, the last series of Data management: deliver in small steps. Graham asks for a dashboard of room use; the question behind it is whether to build. Ten days after the team starts, a prototype with real, governed data is in front of him; three rounds of a week, each ending with the person who decides; an agent's draft checked by a person; and the rounds stop when the decision is served.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (a round, a review, a definition), green is value or something done (a street people use, a first use, a decision served), orange is data (the bookings and the head counts), amber a risk, a cost or waiting (the building's price, the weeks a request waits, a booked room nobody uses), and violet only the team's agent.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "pf_street.js",
+    "pf_uni.js",
+    "pf_scenes.js"
+  ],
+  "poster": [
+    "rounds",
+    "empty",
+    5.0
+  ],
+  "say": [
+    ["\\bCuritiba\\b", "Koo-ree-chee-bah"],
+    ["\\bRua Quinze de Novembro\\b", "Hoo-ah Keen-zee deh No-vem-bro"],
+    ["\\bJaime Lerner\\b", "Zhy-mee Lair-ner"],
+    ["\\bNovak's\\b", "Noh-vak's"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "street"
+  ],
+  "urgent": [],
+  "logos": true
+}

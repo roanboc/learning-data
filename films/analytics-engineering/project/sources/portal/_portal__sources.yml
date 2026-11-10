@@ -52,3 +52,32 @@ sources:
               For a correction, the day the registrar's office checked it against the identity
               document seen at enrolment and accepted it. Empty for a confirmation, and for a
               correction still waiting for its check.
+          - name: answered_at
+            description: >
+              For a correction, when the registrar's office answered it in the portal: put right
+              once checked, or asked for the document that shows a new name. Empty for a
+              confirmation, and until the office answers.
+          - name: told_at
+            description: >
+              For a correction, when the portal told the graduate the office's answer, on the page
+              and by email. Empty for a confirmation, and until the graduate is told.
+      - name: nightly_files
+        description: >
+          The receipts of the portal's nightly feed: one row for each file it sends, and when it
+          arrived on the platform. The load writes the row as the file lands. A file arrives
+          every night, even one with no answers in it, so its age is the portal's age. The
+          graduation list says its age from it (portal_as_of).
+        config:
+          loaded_at_field: "cast(received_at as timestamp)"
+          # The same level as the student system's receipts, agreed for the certificates on 22 June 2026:
+          # older than 24 hours, the check fails. One level, with no warning (examples/a-late-file/).
+          freshness:
+            warn_after: null
+            error_after: {count: 24, period: hour}
+          meta:
+            system_key: [file_name]
+        columns:
+          - name: file_name
+            description: The file's name, with the day of the answers it brings, like portal_2026-06-17.csv.
+          - name: received_at
+            description: When the file arrived on the platform. The night's files are due at 02:00.

@@ -85,8 +85,14 @@ function ws_note(ctx,x,y,lines,o){o=o||{};const w=o.w||560,h=lines.length*46+76,
   lines.forEach((l,i)=>{const s=typeof l==="string"?l:l[0],c2=typeof l==="string"?"ink":l[1];dp_T(ctx,s,x+28,y+100+i*46,{w:600,size:28,col:c2});});
   if(o.seal>0)dp_seal(ctx,x+w-60,y+h-58,40,o.t||0,o.seal);
   ctx.restore();return bb;}
-// the platform's pass: a sealed card in the identity's cyan, "A pass · registrar-loader", "Good for an hour · nobody keeps it"
-function ws_pass(ctx,x,y,o){o=o||{};return dp_sealed(ctx,x,y,o.w||560,o.label||"A pass · registrar-loader",{sub:o.sub||"Good for an hour · nobody keeps it",col:"cyan",a:o.a,revoked:o.revoked,behind:o.behind});}
+// a pass: what the platform gives one run, or the app one person, for a while, and nobody keeps. As No secret to lose draws a pass, it
+// is clear glass in the identity's cyan, not a secret's sealed violet, with a lock for what it opens, so its words read as every
+// panel's do. ws_passCard(ctx, x, y, w, label, {sub, a, behind}): 120 tall with a line under it, else 96; returns its box
+function ws_passCard(ctx,x,y,w,label,o){o=o||{};const h=o.sub?120:96,a=o.a==null?1:o.a,bb={x,y,w,h};if(a<=0)return bb;ctx.save();ctx.globalAlpha*=a;
+  dp_panel(ctx,x,y,w,h,{col:"cyan",r:18,glowR:28,behind:o.behind});dp_lock(ctx,x+52,y+h/2-4,52,"cyan",0);
+  dp_T(ctx,label,x+100,y+(o.sub?52:58),{w:700,size:30});if(o.sub)dp_T(ctx,o.sub,x+100,y+92,{w:600,size:28,col:"mut"});ctx.restore();return bb;}
+// the platform's pass for a run: "A pass · registrar-loader", "Good for an hour · nobody keeps it"
+function ws_pass(ctx,x,y,o){o=o||{};return ws_passCard(ctx,x,y,o.w||560,o.label||"A pass · registrar-loader",{sub:o.sub||"Good for an hour · nobody keeps it",a:o.a,behind:o.behind});}
 
 /* ---------------------------------------------------------------- lines of code on glass
    ws_code(ctx, x, y, lines, o): a dark strip of glass with lines in the code font, 30 px, 46 apart (each a string, or [string, colour]),

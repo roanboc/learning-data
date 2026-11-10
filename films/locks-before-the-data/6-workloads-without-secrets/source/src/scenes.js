@@ -62,7 +62,7 @@ scene("asks",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
     // the same morning: the European Union's rule
     {at:0,place:"wsDawn",keys:[[0,960,540,1.0]],draw:(x,tt)=>{
       ws_owner(x,tt,{});
-      const a=ag_in(tt,T.eu-0.2,0.5);if(a>0)dp_card(x,90,150,760,{kick:"European Union · 8 November 1995",title:"From 1 October 1998, every new car sold has an electronic immobiliser",sub:"Directive 95/56/EC"},{col:"cyan",a,k:ws_k(tt,T.eu-0.2)});}},
+      const a=ag_in(tt,T.eu-0.2,0.5);if(a>0)dp_card(x,90,236,760,{kick:"European Union · 8 November 1995",title:"From 1 October 1998, every new car sold has an electronic immobiliser",sub:"Directive 95/56/EC"},{col:"cyan",a,k:ws_k(tt,T.eu-0.2),behind:false});}},
     // the new key: a chip in it, which the car asks for its code, by radio, before the engine runs; a wire, or a copy, can't answer
     {at:T.chip-0.7,place:"wsCabin",keys:[[0,1000,560,1.0],[T.wire,1060,620,1.04]],d:3,draw:(x,tt)=>{
       const out=ag_in(tt,T.wire-0.5,0.9),cin=ag_in(tt,T.shape-0.2,0.7),turn=ag_in(tt,T.turns,0.7)*(1-out);
@@ -85,7 +85,7 @@ scene("asks",(ctx,S,t,sc)=>{const c=sc.cues,T=ws_once(sc,"T",()=>({
       ws_car(x,WS_CARS[WS_GAP][0],WS_ROADY,WS_CARS[WS_GAP][1],{lit:0.5,dawn:true,a:back});
       ws_owner(x,tt,{smile:ag_in(tt,T.fewer+0.4,0.6)});
       const ca=ag_in(tt,T.nl-0.2,0.5)*(1-ag_in(tt,T.fewer-0.6,0.6));
-      ws_bars(x,90,140,{a:ca,p1:clamp((tt-T.five+0.3)/0.9,0,1),p2:clamp((tt-T.all+0.2)/1.1,0,1)});
+      ws_bars(x,90,140,{behind:false,a:ca,p1:clamp((tt-T.five+0.3)/0.9,0,1),p2:clamp((tt-T.all+0.2)/1.1,0,1)});
       dp_pill(x,90,650,"Car theft: about 40% lower","green",{a:ca*ag_in(tt,T.forty,0.4)});
       dp_pill(x,90,730,"At most €50 a car","grey",{a:ca*ag_in(tt,T.fifty,0.4)});
       dp_T(x,"van Ours and Vollaard, 2016",90,810,{w:600,size:28,col:"mut",a:ca*ag_in(tt,T.forty+0.6,0.5)});}},
@@ -271,8 +271,8 @@ scene("asked",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
     ws_who(x,"sam",tt,ag_in(tt,T.once-0.5,0.7)*(1-ag_in(tt,T.elsewhere-0.7,0.6)),250,890,0.76,{gaze:[1.6,0.2]});
     // the pass, good for an hour, through the door
     const ps=ag_in(tt,T.gives-0.2,0.5),inn=ag_sine(clamp((tt-T.hour-0.9)/1.3,0,1));
-    ws_pass(x,780+inn*700,730,{a:ps*(1-inn)});
     ws_door(x,ag_io(tt,T.hour+1.4,T.elsewhere-0.3,0.5),"cyan");
+    ws_pass(x,780+inn*700,730,{a:ps*(1-inn)});
     // a note from anywhere else: signed, but no policy names it
     const E=ag_io(tt,T.elsewhere-0.2,T.minutes-0.4,0.5);
     ws_note(x,90,430,WS_ELSE,{w:640,col:"coral",a:E,seal:1,t:tt});
@@ -332,7 +332,7 @@ scene("nokeys",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
       [0,1,2].forEach(i=>{const ry=bx.y-6+58*(i+1)+30;dp_T(x,"Their own GitHub token",bx.x+300,ry,{w:700,size:28,col:"coral",a:B*tokA});
         dp_T(x,"The Databricks GitHub app",bx.x+300,ry,{w:700,size:28,col:"cyan",a:B*ag_in(tt,T.app+0.4,0.5)});});
       dp_pill(x,bx.x,bx.y+260,"Jun's: every repository he can reach, no end date","coral",{a:B*jh});
-      dp_sealed(x,bx.x,bx.y+214,760,"A pass from the app, for each person",{sub:"Ends after eight hours, and renews itself",col:"cyan",a:B*ag_in(tt,T.each-0.2,0.5)});}
+      ws_passCard(x,bx.x,bx.y+214,760,"A pass from the app, for each person",{sub:"Ends after eight hours, and renews itself",a:B*ag_in(tt,T.each-0.2,0.5)});}
     const Ap=ag_in(tt,T.alone-0.6,0.6)*(1-ag_in(tt,T.rule-0.6,0.5));
     if(Ap>0){dp_page(x,1030,140,370,390,{tool:"github",name:"GitHub",title:"Databricks app",a:Ap});
       dp_T(x,"Installed on",1062,350,{w:600,size:28,col:"mut",a:Ap});dp_T(x,"one repository:",1062,392,{w:600,size:28,col:"mut",a:Ap});
@@ -396,7 +396,7 @@ scene("vault",(ctx,S,t,sc)=>{const T=ws_once(sc,"T",()=>({
     // its rung on the ladder: lower, kept only until the student system can climb
     const L=ag_in(tt,T.ladder-0.2,0.7)*lv;
     ws_ladder(x,520,220,760,{a:L,lit:[ag_in(tt,T.until,0.6),0,0,ag_in(tt,T.lower-0.2,0.5),0,0],cols:["cyan","cyan","cyan","violet","cyan","cyan"]});
-    dp_tag(x,520,760,"Kept until the student system can climb","violet",{a:L*ag_in(tt,T.until-0.2,0.5)});}}]);});
+    dp_tag(x,520,760,"Kept until the student system can climb","violet",{a:L*ag_in(tt,T.until-0.2,0.5),behind:false});}}]);});
 
 /* ---------------------------------------------------------------- 8 · Copies in the code
    The two copies still out there; GitHub's settings for the repository, Secret Protection switched on by Sam on Tuesday 3 November;

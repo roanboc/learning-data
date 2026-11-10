@@ -380,6 +380,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 
 ### Making the case
 

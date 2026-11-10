@@ -1,8 +1,8 @@
 # Design it simple: questions and assumptions
 
-*Data management* · *A plan in ninety days*, film 3 · open, PR #258 · [pull request](https://github.com/roanboc/learning-data/pull/258)
+*Data management* · *A plan in ninety days*, film 3 · merged, PR #258 · [pull request](https://github.com/roanboc/learning-data/pull/258)
 
-On the site once PR #258 merges: https://data.learn-all.org/a-plan-in-ninety-days/design-it-simple/
+[Watch it on the site](https://data.learn-all.org/a-plan-in-ninety-days/design-it-simple/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

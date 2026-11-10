@@ -1,0 +1,311 @@
+1
+00:00:01,400 --> 00:00:05,976
+Corea, en la década de 1440: el reino de Joseon, bajo el rey Sejong.
+
+2
+00:00:07,276 --> 00:00:13,869
+Su gente escribía con caracteres chinos: un signo para cada palabra, miles de ellos, hechos para otra lengua.
+
+3
+00:00:14,969 --> 00:00:19,479
+Aprenderlos llevaba años, así que la mayoría no podía escribir lo que quería decir.
+
+4
+00:00:20,579 --> 00:00:24,778
+En un tribunal, las palabras de una persona se escribían en caracteres que no sabía leer.
+
+5
+00:00:25,878 --> 00:00:30,201
+Un carácter equivocado podía castigar a un inocente, y no tenía forma de comprobarlo.
+
+6
+00:00:31,901 --> 00:00:33,289
+Algo tenía que cambiar.
+
+7
+00:00:34,989 --> 00:00:39,376
+El rey Sejong partió de lo que la gente necesitaba: escribir como habla.
+
+8
+00:00:40,476 --> 00:00:47,709
+En 1443 creó 28 letras, las consonantes dibujadas desde la boca y la garganta al hacer cada sonido.
+
+9
+00:00:49,209 --> 00:00:52,719
+Cinco formas básicas, y un trazo más para un sonido más fuerte.
+
+10
+00:00:54,219 --> 00:01:00,793
+Las vocales salen de tres marcas: un punto para el cielo, una línea plana para la tierra, una de pie para una persona.
+
+11
+00:01:02,293 --> 00:01:05,314
+Juntas, una sílaba a la vez, escriben cualquier palabra.
+
+12
+00:01:06,614 --> 00:01:13,073
+Uno de sus propios eruditos, Choe Manri, se opuso: alejaría a la gente del estudio de los caracteres.
+
+13
+00:01:14,173 --> 00:01:21,496
+El rey defendió sus letras, y en 1446 las publicó, con un libro que ocho de sus eruditos escribieron para explicarlas.
+
+14
+00:01:22,796 --> 00:01:28,894
+Sus palabras finales dicen que quien aprende rápido las sabe antes de que acabe la mañana, y cualquiera en diez días.
+
+15
+00:01:30,394 --> 00:01:38,668
+Hoy las llamamos hangul, y las dos Coreas escriben con ellas; en el Sur, unos 98 de cada 100 adultos saben leer y escribir.
+
+16
+00:01:39,968 --> 00:01:45,077
+Con los datos pasa lo mismo: un diseño que se aprende en una mañana es un diseño que se usa.
+
+17
+00:01:46,177 --> 00:01:54,832
+Dentro de un año, en una universidad, hay once formas de pedir datos, tres copias de la lista de personal y 41 días hábiles de espera.
+
+18
+00:01:56,132 --> 00:02:04,762
+Su nueva gestora de datos y el equipo diseñan simple: cinco principios, un equipo pequeño con referentes, seis procedimientos, una puerta.
+
+19
+00:02:05,862 --> 00:02:08,769
+Tan simple que cualquiera allí puede aprenderlo en una mañana.
+
+20
+00:02:15,969 --> 00:02:24,051
+Marzo de 2027. Helena Novak, la gestora de datos de la universidad, tiene la situación actual en la pared, en cinco capas.
+
+21
+00:02:25,151 --> 00:02:30,587
+Luego, en sus noventa días: definir la situación deseada, a la que llegar, para el lunes 5 de abril.
+
+22
+00:02:31,687 --> 00:02:36,977
+Antes de dibujar nada, ella y el equipo escriben las reglas con las que diseñarán: cinco principios.
+
+23
+00:02:38,277 --> 00:02:42,765
+Uno: partir de la decisión. Nada se construye sin una decisión detrás.
+
+24
+00:02:44,065 --> 00:02:49,282
+Dos: una sola copia, gobernada una vez. Nada de copias privadas de lo que todos comparten.
+
+25
+00:02:50,582 --> 00:02:57,486
+Tres: dueños en el negocio, y quienes construyen a su lado. El equipo de datos no decide qué significan los datos de otros.
+
+26
+00:02:58,786 --> 00:03:02,658
+Cuatro: simple antes que ingenioso. Ninguna herramienta nueva donde sirva una suya.
+
+27
+00:03:03,958 --> 00:03:07,553
+Cinco: medir lo que la gente usa, no lo ocupado que está el equipo.
+
+28
+00:03:08,853 --> 00:03:13,409
+Cada uno dice qué descarta: un principio que nada podría incumplir no zanja ninguna elección.
+
+29
+00:03:14,709 --> 00:03:18,674
+El mapa antes de los datos pone a prueba principios como estos, en Qué la mueve.
+
+30
+00:03:19,974 --> 00:03:23,403
+Cualquiera puede contrastar una elección con ellos, sin preguntarle a Helena.
+
+31
+00:03:24,503 --> 00:03:29,193
+¿Una herramienta propia para las facultades? Sirve la plataforma que el equipo ya opera.
+
+32
+00:03:30,493 --> 00:03:36,819
+¿Una copia de la lista de personal para cada facultad? Una lista, gobernada una vez, que lee todo quien tiene permiso.
+
+33
+00:03:38,119 --> 00:03:42,368
+Cinco formas hicieron cada letra; cinco principios pueden dar forma a cada elección.
+
+34
+00:03:45,768 --> 00:03:51,963
+Luego Helena y Noor, la arquitecta de datos, dibujan la situación deseada en el mapa de Noor, en las mismas cinco capas.
+
+35
+00:03:53,263 --> 00:03:59,580
+Estrategia: los mismos cuatro objetivos; entregar datos se vuelve rápido, y los reportes se hacen en un solo lugar.
+
+36
+00:04:01,280 --> 00:04:09,494
+Negocio: las mismas doce decisiones, servidas por un equipo pequeño en el centro, referentes alrededor, seis procedimientos y una puerta.
+
+37
+00:04:10,994 --> 00:04:17,251
+Información: una copia gobernada de cada cosa, con un dueño en el negocio. Una lista de personal, no tres.
+
+38
+00:04:18,751 --> 00:04:27,409
+Aplicación: una plataforma para datos y reportes, su catálogo, y agentes, cada uno con un mandato escrito. El antiguo almacén ya no está.
+
+39
+00:04:28,909 --> 00:04:33,865
+Tecnología: la plataforma, en la nube; los servidores del antiguo almacén, apagados.
+
+40
+00:04:35,365 --> 00:04:38,621
+Cada página tiene su imagen, dibujada con ella, nunca después.
+
+41
+00:04:39,921 --> 00:04:44,209
+Dibujados juntos, cada sistema y cada copia tienen una decisión detrás.
+
+42
+00:04:45,509 --> 00:04:50,836
+Cómo tener una sola copia de las personas y cosas que todos comparten: El mismo, en todas partes.
+
+43
+00:04:51,936 --> 00:04:55,403
+Cómo cada producto cumple su promesa: Un producto con dueño.
+
+44
+00:04:58,603 --> 00:05:02,782
+¿Quién construye qué? Hoy la universidad tiene lo peor de dos diseños.
+
+45
+00:05:04,282 --> 00:05:07,293
+En el centro, una cola: 41 días hábiles.
+
+46
+00:05:08,993 --> 00:05:15,116
+En los bordes, quienes no pueden esperar guardan sus propias copias: tres listas de personal, y cifras que no coinciden.
+
+47
+00:05:16,616 --> 00:05:21,901
+Helena diseña el camino intermedio, como lo describen el data mesh y Piethein Strengholt.
+
+48
+00:05:23,401 --> 00:05:29,801
+Un equipo pequeño en el centro mantiene la plataforma, los estándares, los productos compartidos y los límites, y ayuda.
+
+49
+00:05:31,301 --> 00:05:38,016
+Siete referentes de datos, en cuatro facultades y tres oficinas, construyen los productos de su área con las herramientas del equipo.
+
+50
+00:05:39,516 --> 00:05:43,528
+Cada uno le dedica cerca de un día a la semana, que le da su decano o director.
+
+51
+00:05:45,028 --> 00:05:49,224
+El módulo Liderar equipos de datos cuenta cómo un líder deja decidir a la gente.
+
+52
+00:05:50,524 --> 00:05:57,392
+Envía el borrador a todos con quienes habló. Un director de escuela responde: los referentes le quitan gente a la docencia.
+
+53
+00:05:58,892 --> 00:06:01,360
+Es una preocupación justa, y el diseño la responde.
+
+54
+00:06:02,860 --> 00:06:07,179
+Unas 40 personas ya hacen trabajo con datos parte de su semana, en hojas de cálculo.
+
+55
+00:06:08,479 --> 00:06:14,085
+El día de un referente es ese mismo trabajo, planificado por el decano, con las herramientas y la ayuda del equipo.
+
+56
+00:06:15,585 --> 00:06:20,203
+Un buen diseño igual hay que defenderlo, como el rey defendió sus letras.
+
+57
+00:06:23,803 --> 00:06:30,146
+Cómo fluye el trabajo: seis procedimientos de una página. Pedir, elegir, construir, liberar, arreglar, retirar.
+
+58
+00:06:31,646 --> 00:06:37,831
+Cada página nombra quién pide, quién decide, quién construye y quién revisa, sus pasos, y lo que deja.
+
+59
+00:06:38,931 --> 00:06:43,330
+Y cada una tiene su imagen: los cuatro roles, y cómo pasa el trabajo entre ellos.
+
+60
+00:06:44,830 --> 00:06:48,575
+Todo empieza en una puerta de entrada: un formulario, cinco preguntas.
+
+61
+00:06:49,675 --> 00:06:54,869
+¿Qué decisión? ¿Para cuándo? ¿Quién decide? ¿Qué datos usas ya? ¿Quién más los necesita?
+
+62
+00:06:56,369 --> 00:06:58,903
+Abre el lunes 7 de junio.
+
+63
+00:07:00,003 --> 00:07:06,184
+Detrás están también los servicios de gobernanza, cada uno con su promesa, como en Una capacidad, no un proyecto.
+
+64
+00:07:07,484 --> 00:07:10,490
+Antes de que todos los usen, un referente los prueba.
+
+65
+00:07:11,590 --> 00:07:16,028
+Anil, de la Facultad de Salud, llevaba su propia hoja de cálculo porque no podía esperar.
+
+66
+00:07:17,128 --> 00:07:22,825
+Ahora arma el reporte de Salud de horas de docencia temporal con la página de construir, desde la única lista de personal.
+
+67
+00:07:24,125 --> 00:07:26,281
+El paso cuatro decía: el equipo lo revisa.
+
+68
+00:07:27,581 --> 00:07:31,757
+Su cambio esperó cuatro días hábiles: cada uno creía que otro lo tenía.
+
+69
+00:07:33,057 --> 00:07:39,735
+Así que el paso cuatro ahora nombra a un revisor, por turnos, en dos días hábiles: nunca quien lo construyó.
+
+70
+00:07:41,235 --> 00:07:44,000
+Los prueba un referente y se arreglan antes del resto.
+
+71
+00:07:47,400 --> 00:07:50,417
+Lunes 5 de abril: el hito de definición.
+
+72
+00:07:51,717 --> 00:07:59,823
+La situación deseada en cinco capas, cada una con su imagen; cinco principios; un equipo chico y siete referentes; seis páginas; una puerta.
+
+73
+00:08:01,323 --> 00:08:06,778
+Cada pieza cabe en una página: un diseño lo bastante simple para explicarlo lo es para operarlo.
+
+74
+00:08:08,278 --> 00:08:11,316
+En abril, Anil pasa a ser el primer referente de datos.
+
+75
+00:08:12,616 --> 00:08:19,249
+En 1446, las letras del rey se podían aprender en una mañana, así que la gente las usó, y escribió sus propias palabras.
+
+76
+00:08:20,749 --> 00:08:27,759
+En la universidad, un diseño que cualquiera aprende en una mañana es uno que se usa: para pedir, para construir y para revisar.
+
+77
+00:08:29,059 --> 00:08:32,623
+Luego, las brechas entre hoy y la situación deseada serán una hoja de ruta.
+
+78
+00:08:33,923 --> 00:08:37,464
+Parte de la decisión; diseña las menos piezas que le sirvan.

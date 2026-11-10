@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Hot, warm, cold",
+    "key": "hot-warm-cold-en",
+    "dir": "films/data-that-moves/2-hot-warm-cold/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/hot-warm-cold/film.js",
+    "video": "dist/hot-warm-cold.mp4",
+    "file": "hot-warm-cold.mp4",
+    "captions": [
+      [
+        "films/data-that-moves/2-hot-warm-cold/captions/en.srt",
+        "hot-warm-cold.en.srt"
+      ],
+      [
+        "films/data-that-moves/2-hot-warm-cold/captions/es.srt",
+        "hot-warm-cold.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/data-that-moves/2-hot-warm-cold/source",
+      ":(exclude)films/data-that-moves/2-hot-warm-cold/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 271,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.0,
+      "status": "Drawn to the rule"
+    }
+  }
+]

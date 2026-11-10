@@ -70,6 +70,7 @@ Module: `modern-data-basics` · [metadata](modern-data-basics/module.json)
 Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-that-moves/`
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
+- [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
 
 ### Data as software
 
@@ -314,6 +315,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 
 - [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
+- [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 
 ## Leading data people
 

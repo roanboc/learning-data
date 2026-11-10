@@ -1,0 +1,71 @@
+{
+  "kicker": "Two engines, one copy",
+  "kicker_es": "Dos motores, una copia",
+  "title_es": "Una copia, una plataforma",
+  "h1": "One copy, one platform: a claim written once, read by all",
+  "h1_es": "Una copia, una plataforma: cada declaración, escrita una vez",
+  "lead": "At the university, tutors' claims went round by email, and payroll and Finance each kept a copy that never quite agreed. The new claims app writes each claim once, on Lakebase, and payroll, the claims job and Finance read that same row through Unity Catalog. No pipeline, no second platform.",
+  "lead_es": "En la universidad, las declaraciones de horas iban por correo, y Nómina y Finanzas guardaban sus copias, y nunca cuadraban. La nueva app escribe cada declaración una vez, en Lakebase, y Nómina, el proceso de horas y Finanzas leen esa fila con Unity Catalog. Sin pipeline ni segunda plataforma.",
+  "description": "A film about transactional and analytical work on one copy of the data, governed once. In Amsterdam in 1609, merchants stop weighing bags of clipped coin: the Wisselbank writes each one's coin once, on their own page, and a payment becomes a line moved in one ledger. At the university, the casual claims app is built on Lakebase, the Postgres database in Databricks: each claim is written once, as a row, and Postgres serves the app while the lakehouse reads the same rows in place, for payroll's list, the job that builds the hours to pay and Finance's casual teaching cost, all through Unity Catalog. The pipeline, the second database and the work of keeping two copies in step go; one thing still moves, on purpose, under a contract. Light on purpose, with the official docs for the rest.",
+  "description_es": "Una película sobre el trabajo transaccional y el analítico sobre una sola copia de los datos, gobernada una vez. En Ámsterdam, en 1609, los mercaderes dejan de pesar bolsas de monedas recortadas: el Wisselbank anota una vez la moneda de cada uno, en su propia página, y un pago pasa a ser una línea movida en un solo libro. En la universidad, la app de declaraciones de horas está hecha sobre Lakebase, la base de datos Postgres de Databricks: cada declaración se escribe una vez, como fila, y Postgres atiende a la app mientras el lakehouse lee las mismas filas en su sitio, para la lista de Nómina, el proceso que arma las horas a pagar y el costo de la docencia ocasional de Finanzas, todo a través de Unity Catalog. Desaparecen el pipeline, la segunda base de datos y el trabajo de mantener dos copias sincronizadas; una sola cosa se sigue moviendo, a propósito, bajo un contrato. Liviana a propósito, con la documentación oficial para el resto.",
+  "card": "Payroll and Finance each kept a copy of the claims. Now each claim is written once, and everyone reads that one row.",
+  "card_es": "Nómina y Finanzas guardaban cada una su copia de las declaraciones. Ahora cada una se escribe una vez, y todos leen esa fila.",
+  "chapters_es": {
+    "ledger": "Un solo libro",
+    "usual": "El diseño de siempre",
+    "copy": "Una sola copia",
+    "fewer": "Menos plataformas",
+    "choose": "Qué elegir",
+    "row": "La misma fila"
+  },
+  "past": [
+    "Amsterdam, 1609: the Wisselbank's one ledger",
+    "Merchants stopped carrying coin: a payment became a line moved in one ledger, and the same ledger showed what each one held. One copy of the data can serve everyone the same way."
+  ],
+  "past_es": [
+    "Ámsterdam, 1609: el libro único del Wisselbank",
+    "Los mercaderes dejaron de cargar monedas: un pago pasó a ser una línea movida en un solo libro, que mostraba lo que tenía cada uno. Una sola copia de los datos puede servir a todos igual."
+  ],
+  "next_h": "You've seen one copy serve a whole platform, governed once. Next: data as software, where scripts became software.",
+  "next_h_es": "Viste una sola copia servir a toda una plataforma, gobernada una vez. Después: datos como software, donde los scripts se volvieron software.",
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film shows the idea once. The docs say how one copy of the data serves both transactions and analysis, which system writes each table, and how to set each path up.",
+    "p_es": "La película muestra la idea una vez. La documentación dice cómo una sola copia de los datos sirve a la vez a las transacciones y al análisis, qué sistema escribe cada tabla y cómo configurar cada camino.",
+    "links": [
+      {
+        "title": "LTAP architecture",
+        "title_es": "La arquitectura LTAP (en inglés)",
+        "line": "One copy of the data under one governance, with purpose-built engines for transactions and analysis, and a single writer for each table.",
+        "line_es": "Una sola copia de los datos bajo un solo gobierno, con motores hechos para las transacciones y el análisis, y un solo escritor por tabla.",
+        "href": "https://docs.databricks.com/aws/en/oltp/projects/ltap-overview",
+        "href_es": "https://docs.databricks.com/aws/en/oltp/projects/ltap-overview"
+      },
+      {
+        "title": "Lakebase Postgres",
+        "title_es": "Lakebase Postgres (en inglés)",
+        "line": "The Postgres database in Databricks that the claims app is built on.",
+        "line_es": "La base de datos Postgres de Databricks sobre la que está hecha la app de declaraciones.",
+        "href": "https://docs.databricks.com/aws/en/oltp/projects/",
+        "href_es": "https://docs.databricks.com/aws/en/oltp/projects/"
+      },
+      {
+        "title": "Register a Lakebase database in Unity Catalog",
+        "title_es": "Registrar una base de datos de Lakebase en Unity Catalog (en inglés)",
+        "line": "How the lakehouse reads the app's own rows, with the permissions, lineage and audit of every other table.",
+        "line_es": "Cómo el lakehouse lee las filas de la propia app, con los permisos, el linaje y la auditoría de las demás tablas.",
+        "href": "https://docs.databricks.com/aws/en/oltp/projects/register-uc",
+        "href_es": "https://docs.databricks.com/aws/en/oltp/projects/register-uc"
+      },
+      {
+        "title": "Serve lakehouse data with synced tables",
+        "title_es": "Servir datos del lakehouse con tablas sincronizadas (en inglés)",
+        "line": "How the lakehouse serves a table it writes, such as the contracts, to an app that reads it.",
+        "line_es": "Cómo el lakehouse sirve una tabla que escribe, como los contratos, a una app que la lee.",
+        "href": "https://docs.databricks.com/aws/en/oltp/projects/sync-tables",
+        "href_es": "https://docs.databricks.com/aws/en/oltp/projects/sync-tables"
+      }
+    ]
+  }
+}

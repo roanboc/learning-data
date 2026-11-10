@@ -1,0 +1,551 @@
+{
+ "player": "9f2eae6b0368e03d",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:risk": {
+   "file": "risk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     9.75
+    ],
+    [
+     42.0,
+     47.75
+    ]
+   ]
+  },
+  "place:riskDesk": {
+   "file": "riskDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     9.75
+    ],
+    [
+     42.0,
+     47.75
+    ]
+   ]
+  },
+  "place:spread": {
+   "file": "spread.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     9.0,
+     22.5
+    ]
+   ]
+  },
+  "place:board08": {
+   "file": "board08.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     22.25,
+     26.5
+    ],
+    [
+     34.75,
+     42.75
+    ]
+   ]
+  },
+  "place:city": {
+   "file": "city.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     25.75,
+     35.5
+    ]
+   ]
+  },
+  "place:office70": {
+   "file": "office70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.75,
+     61.0
+    ]
+   ]
+  },
+  "place:desks70": {
+   "file": "desks70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.75,
+     61.0
+    ]
+   ]
+  },
+  "place:admin70": {
+   "file": "admin70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     60.25,
+     64.75
+    ]
+   ]
+  },
+  "place:adminFront70": {
+   "file": "adminFront70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     60.25,
+     64.75
+    ]
+   ]
+  },
+  "place:dict70": {
+   "file": "dict70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     64.0,
+     69.0
+    ]
+   ]
+  },
+  "place:laOut": {
+   "file": "laOut.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     68.25,
+     72.0
+    ]
+   ]
+  },
+  "place:la80": {
+   "file": "la80.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     71.25,
+     79.0
+    ],
+    [
+     85.75,
+     88.5
+    ]
+   ]
+  },
+  "place:la80table": {
+   "file": "la80table.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     71.25,
+     79.0
+    ],
+    [
+     85.75,
+     88.5
+    ]
+   ]
+  },
+  "place:notice80": {
+   "file": "notice80.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     78.25,
+     82.25
+    ]
+   ]
+  },
+  "place:alone70": {
+   "file": "alone70.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     81.5,
+     86.0
+    ]
+   ]
+  },
+  "place:copy80": {
+   "file": "copy80.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     87.75,
+     91.25
+    ]
+   ]
+  },
+  "place:board02": {
+   "file": "board02.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     90.25,
+     98.0
+    ],
+    [
+     100.25,
+     103.75
+    ]
+   ]
+  },
+  "place:board02table": {
+   "file": "board02table.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     90.25,
+     98.0
+    ],
+    [
+     100.25,
+     103.75
+    ]
+   ]
+  },
+  "place:report02": {
+   "file": "report02.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     97.25,
+     101.0
+    ],
+    [
+     103.0,
+     111.25
+    ]
+   ]
+  },
+  "place:shelf09": {
+   "file": "shelf09.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     110.0,
+     120.25
+    ],
+    [
+     148.0,
+     151.75
+    ],
+    [
+     194.0,
+     200.0
+    ]
+   ]
+  },
+  "place:wheelpage": {
+   "file": "wheelpage.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     120.0,
+     148.25
+    ],
+    [
+     281.0,
+     285.25
+    ]
+   ]
+  },
+  "spCoverBig": {
+   "file": "spCoverBig.webp",
+   "w": 2100,
+   "h": 1320,
+   "shows": [
+    [
+     120.0,
+     121.5
+    ],
+    [
+     147.0,
+     148.25
+    ]
+   ]
+  },
+  "place:basel13": {
+   "file": "basel13.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     150.75,
+     155.0
+    ]
+   ]
+  },
+  "place:basel13table": {
+   "file": "basel13table.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     150.75,
+     155.0
+    ]
+   ]
+  },
+  "place:principles13": {
+   "file": "principles13.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     154.25,
+     167.0
+    ]
+   ]
+  },
+  "place:report23": {
+   "file": "report23.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     166.25,
+     190.0
+    ]
+   ]
+  },
+  "place:team17": {
+   "file": "team17.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     189.0,
+     194.75
+    ],
+    [
+     199.25,
+     204.75
+    ]
+   ]
+  },
+  "place:team17table": {
+   "file": "team17table.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     189.0,
+     194.75
+    ],
+    [
+     199.25,
+     204.75
+    ]
+   ]
+  },
+  "place:front18": {
+   "file": "front18.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     204.0,
+     206.75
+    ],
+    [
+     212.5,
+     220.75
+    ]
+   ]
+  },
+  "place:front18desk": {
+   "file": "front18desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     204.0,
+     206.75
+    ],
+    [
+     212.5,
+     220.75
+    ]
+   ]
+  },
+  "place:desk18": {
+   "file": "desk18.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     206.0,
+     213.25
+    ]
+   ]
+  },
+  "place:desk24": {
+   "file": "desk24.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     219.75,
+     225.5
+    ]
+   ]
+  },
+  "place:team24": {
+   "file": "team24.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     224.75,
+     232.75
+    ]
+   ]
+  },
+  "place:team24table": {
+   "file": "team24table.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     224.75,
+     232.75
+    ]
+   ]
+  },
+  "place:shelf24": {
+   "file": "shelf24.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     232.0,
+     239.5
+    ],
+    [
+     246.0,
+     268.25
+    ],
+    [
+     280.0,
+     281.25
+    ]
+   ]
+  },
+  "place:act24": {
+   "file": "act24.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     238.75,
+     246.75
+    ]
+   ]
+  },
+  "place:board26": {
+   "file": "board26.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     267.5,
+     280.75
+    ]
+   ]
+  },
+  "spSketch0": {
+   "file": "spSketch0.webp",
+   "w": 684,
+   "h": 385,
+   "shows": [
+    [
+     271.25,
+     280.75
+    ]
+   ]
+  },
+  "spSketch1": {
+   "file": "spSketch1.webp",
+   "w": 684,
+   "h": 385,
+   "shows": [
+    [
+     272.5,
+     280.75
+    ]
+   ]
+  },
+  "spSketch2": {
+   "file": "spSketch2.webp",
+   "w": 684,
+   "h": 385,
+   "shows": [
+    [
+     274.25,
+     280.75
+    ]
+   ]
+  },
+  "spCoverBig3": {
+   "file": "spCoverBig3.webp",
+   "w": 2100,
+   "h": 1320,
+   "shows": [
+    [
+     281.0,
+     282.75
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     284.5,
+     287.5
+    ]
+   ]
+  },
+  "place:office24": {
+   "file": "office24.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     286.75,
+     298.5
+    ]
+   ]
+  }
+ }
+}

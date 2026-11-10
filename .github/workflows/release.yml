@@ -79,6 +79,7 @@ jobs:
         working-directory: ${{ matrix.dir }}
     env:
       FILM_LANG: ${{ matrix.lang }}
+      LEARNING_DATA_VOICE_CACHE: ${{ github.workspace }}/.cache/voices
     steps:
       - uses: actions/checkout@v7
 
@@ -89,9 +90,12 @@ jobs:
           cache-dependency-path: ${{ matrix.dir }}/requirements.txt
 
       - name: Install the tools
-        run: |
-          pip install -r requirements.txt
-          python -m playwright install --with-deps chromium
+        run: pip install -r requirements.txt
+
+      - name: Restore and verify the browser tools
+        uses: ./.github/actions/check-tools
+        with:
+          browser: 'true'
 
       # Every film uses the first film's voice model, from films/inner-life-of-data/source/models.
       - name: Restore the voice model
@@ -109,9 +113,33 @@ jobs:
             [ -s "models/$f" ] || curl -fsSL --retry 3 -o "models/$f" "$base/$f"
           done
 
+      - name: Restore verified voice lines
+        id: voice-cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .cache/voices
+          key: voice-lines-v1-${{ runner.os }}-${{ matrix.key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: voice-lines-v1-${{ runner.os }}-${{ matrix.key }}-
+
+      - name: Record the restored cache contents
+        id: voice-state
+        env:
+          CACHE_DIGEST: ${{ hashFiles('.cache/voices/**') }}
+        run: echo "digest=$CACHE_DIGEST" >> "$GITHUB_OUTPUT"
+
       # Keeps the committed timings, so the video, the site's player and the captions share one timeline.
       - name: Voice the narration
+        # Per-line keys include text, settings, model bytes and synthesis/tool versions.
+        # Cache storage is scoped by film; old generations cannot masquerade as edited lines.
         run: python tools/tts.py --keep-timings
+
+      - name: Save verified voice lines
+        # Do not upload another archive when every line was already reusable.
+        if: hashFiles('.cache/voices/**') != steps.voice-state.outputs.digest
+        uses: actions/cache/save@v6
+        with:
+          path: .cache/voices
+          key: ${{ steps.voice-cache.outputs.cache-primary-key }}
 
       - name: Build the player
         run: python tools/build.py

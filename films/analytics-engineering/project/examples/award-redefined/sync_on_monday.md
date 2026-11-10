@@ -1,6 +1,6 @@
 # Sync from the glossary: 1 term(s) drifted
 
-Compared on 2026-10-28 with `glossary_on_monday.json`, read from the glossary. Approve: the owner of each meaning; confirm the term: data governance (DEC-PRJ-11).
+Compared on 2026-10-28 with `glossary_on_monday.json`, read from the glossary. The meaning was decided in the glossary. The data team reviews the code; owners are told (DEC-PRJ-11).
 
 ## award: synced from the university's Unity Catalog Glossary, on Databricks, term Award
 

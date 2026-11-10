@@ -1,0 +1,1 @@
+*Data as software*, the second series of the module Modern data basics, on data work kept as software and a platform that watches itself: {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

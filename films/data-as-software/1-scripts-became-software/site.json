@@ -1,0 +1,125 @@
+{
+  "kicker": "Data work as software",
+  "kicker_es": "Datos como software",
+  "title_es": "Los scripts se volvieron software",
+  "h1": "Scripts became software: tested, reviewed, released",
+  "h1_es": "Los scripts se volvieron software: probados y revisados",
+  "lead": "Every second Thursday, Rohan in Finance needs what casual staff are paid. For years a script on one person's laptop told him, until the claims moved in February and nobody could change it safely. Sam and Jun move it into the data project: tested, reviewed by someone else, released the same way.",
+  "lead_es": "Cada dos jueves, Rohan, de Finanzas, necesita lo que se paga al personal eventual. Años se lo dio un script en el portátil de una persona, hasta que en febrero las solicitudes pasaron a una app y nadie pudo cambiarlo sin riesgo. Sam y Jun lo llevan al proyecto: probado, revisado y desplegado igual.",
+  "description": "A film about keeping data work as software, which opens Data as software: payroll's export to Finance, a script on one person's laptop for years, moves into the data project. In Git, beside the models; its rule written once, on HR's calendar of pay days, and tested at its edge first; every change reviewed by someone other than its author, an agent's too; deployed by a Declarative Automation Bundle to test, then to production once the data architect approves, as the platform's own account. None of it is new: data work took it up from software, as bridges took the wind tunnel from wings.",
+  "description_es": "Una película sobre llevar el trabajo con datos como software, que abre Datos como software: la exportación de nómina a Finanzas, un script en el portátil de una persona durante años, pasa al proyecto de datos. En Git, junto a los modelos; su regla escrita una vez, en el calendario de días de pago de RR. HH., y probada antes en su límite; cada cambio revisado por alguien distinto de su autor, también el de un agente; desplegado con un Declarative Automation Bundle a prueba y luego a producción cuando la arquitecta de datos lo aprueba, con la cuenta propia de la plataforma. Nada de esto es nuevo: el trabajo con datos lo tomó del software, como los puentes tomaron el túnel de viento de las alas.",
+  "card": "Payroll's export ran on one person's laptop. Now it's tested, reviewed by someone else and released the same way every time.",
+  "card_es": "La exportación de nómina corría en un portátil. Ahora se prueba, la revisa otra persona y se despliega siempre de la misma forma.",
+  "chapters_es": {
+    "gertie": "Probado primero",
+    "laptop": "Un script en un portátil",
+    "project": "Al proyecto",
+    "review": "Otra persona lo lee",
+    "release": "Igual, cada vez",
+    "choose": "Qué conservar",
+    "stands": "Sigue en pie"
+  },
+  "past": [
+    "Tacoma Narrows, 1940: a bridge never tested in the wind",
+    "Its replacement was tested first, as a model in a wind tunnel, and still stands, as payroll's export is now tested before every change."
+  ],
+  "past_es": [
+    "Tacoma Narrows, 1940: un puente nunca probado con viento",
+    "Su reemplazo se probó primero, como maqueta en un túnel de viento, y sigue en pie, como ahora se prueba la exportación de nómina antes de cada cambio."
+  ],
+  "next_h": "You've seen data work kept as software: in Git, tested, reviewed by someone else and deployed the same way every time. Next: a platform that watches itself, on the night a job fails.",
+  "next_h_es": "Viste el trabajo con datos llevado como software: en Git, probado, revisado por otra persona y desplegado siempre igual. Después: una plataforma que se vigila sola, la noche en que falla un trabajo.",
+  "repo": {
+    "laptop": [
+      "examples/scripts-became-software/before/payroll_export.py",
+      "examples/scripts-became-software/README.md"
+    ],
+    "project": [
+      "models/marts/finance/mart_finance__casual_pay_paid.sql",
+      "macros/payroll/pay_day.sql",
+      "seeds/reference/staff/pay_days.csv",
+      "models/marts/finance/_finance__models.yml"
+    ],
+    "review": [
+      "CODEOWNERS",
+      "examples/scripts-became-software/README.md"
+    ],
+    "release": [
+      "databricks.yml",
+      "resources/payroll_export.job.yml",
+      "examples/scripts-became-software/release.yml"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "The film names the ideas and shows them once. The docs show how, and stay current as the tools change: start there, adapt what fits, and iterate.",
+    "p_es": "La película nombra las ideas y las muestra una vez. La documentación muestra cómo, y se mantiene al día cuando cambian las herramientas: empieza ahí, adapta lo que sirva e itera.",
+    "links": [
+      {
+        "title": "What are Declarative Automation Bundles?",
+        "title_es": "Qué son los Declarative Automation Bundles",
+        "line": "Databricks: a project's jobs, and where each one runs, written as files and deployed the same way to every target. Formerly Databricks Asset Bundles.",
+        "line_es": "Databricks: los trabajos de un proyecto, y dónde corre cada uno, escritos como archivos y desplegados igual en cada destino. Antes, Databricks Asset Bundles.",
+        "href": "https://docs.databricks.com/aws/en/dev-tools/bundles/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/bundles/"
+      },
+      {
+        "title": "Deployment modes",
+        "title_es": "Modos de implementación",
+        "line": "Databricks: how a bundle deploys to development, and to production, where nobody runs it as themselves.",
+        "line_es": "Databricks: cómo un bundle se despliega en desarrollo y en producción, donde nadie lo corre con su propia cuenta.",
+        "href": "https://docs.databricks.com/aws/en/dev-tools/bundles/deployment-modes",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/bundles/deployment-modes"
+      },
+      {
+        "title": "Specify a run identity",
+        "title_es": "Especificar una identidad de ejecución",
+        "line": "Databricks: a job that runs as the platform's own account, never a person's.",
+        "line_es": "Databricks: un trabajo que corre con la cuenta propia de la plataforma, nunca con la de una persona.",
+        "href": "https://docs.databricks.com/aws/en/dev-tools/bundles/run-as",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/bundles/run-as"
+      },
+      {
+        "title": "Use dbt transformations in Lakeflow Jobs",
+        "title_es": "Usar transformaciones de dbt en Lakeflow Jobs",
+        "line": "Databricks: a job with a dbt task that builds and tests the models it reads.",
+        "line_es": "Databricks: un trabajo con una tarea de dbt que construye y prueba los modelos que lee.",
+        "href": "https://docs.databricks.com/aws/en/jobs/how-to/use-dbt-in-workflows",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/jobs/how-to/use-dbt-in-workflows"
+      },
+      {
+        "title": "Unit tests",
+        "title_es": "Pruebas unitarias (en inglés)",
+        "line": "dbt: a model's logic tested on rows you write, such as a rule's edge, before it runs on real data.",
+        "line_es": "dbt: la lógica de un modelo probada con filas que escribes, como el límite de una regla, antes de correr con datos reales.",
+        "href": "https://docs.getdbt.com/docs/build/unit-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/unit-tests"
+      },
+      {
+        "title": "Add data tests to your DAG",
+        "title_es": "Agregar pruebas de datos a tu DAG (en inglés)",
+        "line": "dbt: tests on the data itself, run every time the project builds.",
+        "line_es": "dbt: pruebas sobre los propios datos, que corren cada vez que se construye el proyecto.",
+        "href": "https://docs.getdbt.com/docs/build/data-tests",
+        "href_es": "https://docs.getdbt.com/docs/build/data-tests"
+      },
+      {
+        "title": "About protected branches",
+        "title_es": "Acerca de las ramas protegidas",
+        "line": "GitHub: nothing merges without a review by someone other than its author, and every check green.",
+        "line_es": "GitHub: nada se fusiona sin la revisión de alguien distinto del autor y todas las verificaciones en verde.",
+        "href": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+        "href_es": "https://docs.github.com/es/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches"
+      },
+      {
+        "title": "Managing environments for deployment",
+        "title_es": "Administrar entornos para la implementación",
+        "line": "GitHub: a release that waits for a named person's approval before it reaches production.",
+        "line_es": "GitHub: una publicación que espera la aprobación de una persona antes de llegar a producción.",
+        "href": "https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments",
+        "href_es": "https://docs.github.com/es/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments"
+      }
+    ]
+  }
+}

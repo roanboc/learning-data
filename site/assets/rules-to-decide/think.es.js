@@ -1,0 +1,17 @@
+/* Learning Data: "Pause and think" for Rules that let people decide, in Spanish. Keep the keys in step with think.en.js.
+   The film stops at the end of three chapters (rules, tools, labs), with one question each. think.js shows them,
+   and lists them again under "Think it through" (#think-list). The series has no labs yet, so no question has a "stop",
+   and the page's .player data-labs is empty. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  rules:{q:"La primera lista de Yusuf tenía once reglas. ¿Por qué solo tres llegaron a las facultades?",
+    opts:[{t:"Al principio solo podían aprender tres; las otras ocho vendrían después, una por mes, a medida que se adaptaran.",near:true},{t:"De cada una se preguntaron qué sale mal aquí, ahora, sin ella, y solo tres protegían de un problema que tenían ya.",ok:true},{t:"Helena eligió las tres que más le gustaban y las fijó para los responsables, para que nadie discutiera el resto."}],
+    why:"Cada regla de la lista protegía de algo que había salido mal en algún lugar. Solo tres protegían de algo que saldría mal aquí, ahora: cifras que no cuadran, personas vigiladas y una medida nueva que significa dos cosas. Las otras ocho fueron a un cajón, para salir cuando aparezca un problema real, como pasó con una en noviembre. ¿Cuáles de tus reglas conservarías si te hicieras esa pregunta con cada una?"},
+  tools:{q:"La plantilla de Ivy y Jun muestra las horas reservadas junto a las contadas, con el uso calculado como se acordó. ¿Qué agrega a las reglas?",
+    opts:[{t:"Hace que el camino correcto sea el único: nadie puede cambiar la página, así que todas las facultades muestran las mismas cifras.",near:true},{t:"Reemplaza a las reglas: con la página ahí, nadie necesita saber por qué el uso significa una cosa, ni consultar a Ivy."},{t:"Hace que el camino correcto sea el fácil: quien planifica la copia y parte de cifras que ya significan una sola cosa.",ok:true}],
+    why:"Las reglas dicen lo correcto; las herramientas lo facilitan. La plantilla no bloquea nada: quien planifica la copia, elige las aulas de su facultad y hace sus propias preguntas, partiendo de cifras calculadas como se acordó. Y su recuadro dice quién decide qué, para que nadie tenga que adivinar. ¿Qué haría fácil el camino correcto en tu equipo?"},
+  labs:{q:"Los laboratorios vacíos de Ingeniería nunca habían estado en un reporte de aulas. ¿Por qué fue Lucy quien los encontró?",
+    opts:[{t:"Conocía los laboratorios de su facultad y quién los reserva, y la plantilla le dejó poner sus reservas junto a los conteos.",ok:true},{t:"El equipo de datos agregó los laboratorios al producto ese lunes, y la plantilla mostró a la vez los de todas las facultades.",near:true},{t:"Los sensores de los laboratorios eran nuevos ese semestre, así que los conteos de los lunes vacíos acababan de empezar."}],
+    why:"El conocimiento estaba en Ingeniería: Lucy conocía los laboratorios, quién los reserva y a quién preguntar por las reservas del lunes. La plantilla le dio los conteos y la forma acordada de leerlos, así que pudo preguntar lo que nadie en el centro había pensado preguntar. El equipo incorporó su medida al producto solo después de que ella la encontró. ¿Qué no sabe preguntar tu equipo, que sí saben quienes están más cerca del trabajo?"}
+  }}};

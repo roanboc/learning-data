@@ -1,12 +1,12 @@
 # Walls, doors and keys: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 3 · open, PR #201 · [pull request](https://github.com/roanboc/learning-data/pull/201)
+*Data protection and privacy* · *Locks before the data*, film 3 of 9 · merged, PR #201 · [pull request](https://github.com/roanboc/learning-data/pull/201)
 
-On the site once PR #201 merges: https://data.learn-all.org/locks-before-the-data/walls-doors-and-keys/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/walls-doors-and-keys/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
-Film 3 of *Locks before the data* (the module's film 3). Rodrigo asked on 5 November 2026, 11:53 UTC, for the films to be made on assumptions, with each question and the assumption taken listed for Rodrigo's review. This thread's, newest last.
+*Locks before the data*, film 3 of 9, `films/locks-before-the-data/3-walls-doors-and-keys`. Kept by the film's thread from 5 to 10 November 2026, while Rodrigo was away, on Rodrigo's instruction (5 November 2026, 11:53 UTC) to make the films on assumptions and merge them with a draft label. One line each: the question I would have asked, the assumption made instead, and where it shows, newest last.
 
 | # | Question for Rodrigo | Assumption taken | Where it shows |
 |---|---|---|---|
@@ -29,4 +29,4 @@ Film 3 of *Locks before the data* (the module's film 3). Rodrigo asked on 5 Nove
 | 17 | The end card's line ran into the dim name of the university's network on the same row: move the camera, or let the name go? | The name leaves as the end card comes in (a camera move did nothing there, because the camera never goes past the place's edge). The poster moved from the end card, whose frame caught the mark half-drawn, to the hall with Sam, as Sam walks the attacker's path once more (7:57) | *The walk again*; the poster |
 | 18 | The soundtrack: in Git, or in its own release? | Its own audio release, as main now keeps audio outside Git: `audio.json` points to it, the *Store audio outside Git* workflow publishes it from the film's branch, as *No secret to lose* did, and `media.py verify-remote` checks it before the MP3 leaves Git. The release workflow for the video (`release.yml`) is never run | `audio.json` |
 | 19 | The Spanish page's chapter names: a list, or by chapter? | One Spanish name for each chapter id (`chapters_es`), as the other films do: *No secret to lose* found that a list leaves the Spanish page's chapter buttons in English. *Pocas puertas en la muralla*, *Un mes aparte*, *Si alguien entrara*, *Quién protege qué*, *Pocas puertas*, *Salas aparte*, *Llaves a la vista*, *Copias que nadie puede borrar*, *El recorrido, otra vez* | `site.json` |
-| 20 | The Spanish titles of the films it names | Assumed *¿Quién es, de verdad?* (film 1, not yet on a branch), *Poder que se enciende* (film 4, as *From a branch to production* also writes it), *De una rama a producción* (film 8's own) and *Borrado es borrado* (film 21); its own, *Muros, puertas y llaves*, is the one *From a branch to production* and *Who did what* already use. Each is in the Spanish captions only: the pictures stay in English | Spanish captions |
+| 20 | The Spanish titles of the films it names | As each film's own page gives it, on main or on its branch (10 November 2026): *¿Quién es, en realidad?* (*Who is it, really?*; first written here as *¿Quién es, de verdad?*, corrected before merging), *Poder que se enciende* (*Power you switch on*), *De una rama a producción* (*From a branch to production*) and *Borrado es borrado* (*Deleted means deleted*); its own, *Muros, puertas y llaves*, is the one *From a branch to production* and *Who did what* already use. Each is in the Spanish captions only: the pictures stay in English | Spanish captions |

@@ -272,6 +272,7 @@ Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
 - [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
+- [Walls, doors and keys](../films/locks-before-the-data/3-walls-doors-and-keys/) — `walls-doors-and-keys`
 
 ### Only what you may see
 

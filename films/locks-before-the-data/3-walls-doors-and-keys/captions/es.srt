@@ -1,0 +1,323 @@
+1
+00:00:01,600 --> 00:00:05,304
+Ragusa, en la costa del Adriático, en la década de 1370.
+
+2
+00:00:06,604 --> 00:00:08,811
+Hoy es Dubrovnik, en Croacia.
+
+3
+00:00:09,911 --> 00:00:14,094
+Entonces es una pequeña república de mercaderes, tras altas murallas de piedra.
+
+4
+00:00:15,394 --> 00:00:18,887
+Vive del comercio, y sus barcos navegan todo el Mediterráneo.
+
+5
+00:00:20,187 --> 00:00:24,526
+Marineros, mercaderes y mercancías entran cada día, por unas pocas puertas.
+
+6
+00:00:26,226 --> 00:00:27,981
+Pero un barco puede traer más que mercancías.
+
+7
+00:00:29,481 --> 00:00:35,242
+En 1348 trajeron la peste: una enfermedad que se extendía rápido y mataba en pocos días.
+
+8
+00:00:36,942 --> 00:00:39,943
+Mató a miles en la ciudad, y volvió una y otra vez.
+
+9
+00:00:41,843 --> 00:00:45,107
+En la puerta, nadie podía distinguir a un viajero enfermo de uno sano.
+
+10
+00:00:46,807 --> 00:00:49,317
+Si cierra el puerto, la ciudad pierde su sustento.
+
+11
+00:00:50,617 --> 00:00:55,038
+Si lo deja abierto, la enfermedad entra, hasta cada familia tras las murallas.
+
+12
+00:00:56,738 --> 00:00:58,178
+Algo tiene que cambiar.
+
+13
+00:01:00,678 --> 00:01:08,183
+El 27 de julio de 1377, el Consejo Mayor, los nobles que hacían las leyes de la ciudad, aprobó una nueva.
+
+14
+00:01:09,683 --> 00:01:17,837
+Quien venga de un lugar con peste debe pasar antes un mes aparte: en el islote de Mrkan, o en el pueblo de Cavtat, costa abajo.
+
+15
+00:01:19,537 --> 00:01:21,383
+Solo entonces puede entrar en la ciudad.
+
+16
+00:01:23,283 --> 00:01:27,497
+Nadie de la ciudad puede ir con ellos: quien vaya, se queda también el mes.
+
+17
+00:01:29,197 --> 00:01:32,562
+Más tarde, oficiales de sanidad vigilan cada barco y cada puerta.
+
+18
+00:01:34,062 --> 00:01:36,927
+El puerto sigue abierto, y la ciudad conserva su sustento.
+
+19
+00:01:38,427 --> 00:01:42,971
+Cuando llega la enfermedad, ahora queda en una isla, no suelta por las calles.
+
+20
+00:01:44,671 --> 00:01:47,559
+Ragusa es la primera ciudad conocida que lo hizo ley.
+
+21
+00:01:48,859 --> 00:01:55,508
+Otros puertos la siguieron, y la espera creció a cuarenta días: de ahí viene la palabra cuarentena.
+
+22
+00:01:57,408 --> 00:02:05,225
+Los datos de la universidad tienen el mismo problema: personas y procesos llegan a ellos cada día, y un intruso no debe llegar a todo.
+
+23
+00:02:06,725 --> 00:02:12,952
+Necesitan lo que tenía Ragusa: pocas puertas, cada una con una regla, y un lugar aparte para lo que aún no es de confianza.
+
+24
+00:02:19,652 --> 00:02:23,766
+En la universidad, el proceso nocturno ya no lleva el token de Jun.
+
+25
+00:02:24,866 --> 00:02:32,524
+Pero Sam Okafor, que dirige la plataforma de datos, se pregunta lo que un atacante: si alguien entrara, ¿hasta dónde llegaría?
+
+26
+00:02:34,424 --> 00:02:39,603
+Hoy, la puerta de la plataforma da a internet abierta: cualquiera, desde donde sea, llega a ella.
+
+27
+00:02:41,103 --> 00:02:46,799
+Dentro, un solo espacio de trabajo reúne las pruebas de la gente y los datos reales del proceso nocturno.
+
+28
+00:02:48,299 --> 00:02:55,271
+Desde ahí, los datos de cada área están al alcance: los del registro, aprendizaje, planificación, RR. HH. y finanzas.
+
+29
+00:02:56,971 --> 00:03:02,478
+Un camino va directo a los archivos del almacenamiento, sin pasar por el catálogo que revisa quién puede leer qué.
+
+30
+00:03:03,978 --> 00:03:05,532
+Los datos pueden ir a donde sea.
+
+31
+00:03:06,832 --> 00:03:10,355
+Las copias están junto a los datos, donde cualquier administrador puede borrarlas.
+
+32
+00:03:11,855 --> 00:03:16,656
+Y el proveedor de la nube guarda la llave de los datos, que la universidad no puede retirar.
+
+33
+00:03:18,956 --> 00:03:22,415
+Nadie lo eligió: la plataforma empezó pequeña, y creció.
+
+34
+00:03:24,715 --> 00:03:27,123
+Primero, Sam anota quién protege qué.
+
+35
+00:03:28,223 --> 00:03:33,302
+El proveedor de la nube protege sus edificios, sus máquinas y la red entre ellas.
+
+36
+00:03:34,602 --> 00:03:38,891
+Quienes hacen la plataforma protegen su software, y cómo revisa cada petición.
+
+37
+00:03:40,191 --> 00:03:46,759
+La universidad protege el resto: quién entra, qué puede hacer cada uno, su configuración, sus llaves y sus copias.
+
+38
+00:03:48,259 --> 00:03:54,939
+Diga lo que diga el contrato, proteger los datos le toca a la universidad, y también trazar los muros.
+
+39
+00:03:56,439 --> 00:04:01,937
+Siguen las áreas del mapa de la universidad, cada una con el dueño que anotó Quién decide.
+
+40
+00:04:03,637 --> 00:04:09,993
+Un muro no vuelve de confianza a nadie dentro: cada petición se sigue revisando, como mostró ¿Quién es, en realidad?
+
+41
+00:04:11,493 --> 00:04:17,568
+Pero los muros dejan pocas entradas y salas pequeñas, y así un error, o un intruso, se queda donde empezó.
+
+42
+00:04:19,868 --> 00:04:20,905
+Luego, las puertas.
+
+43
+00:04:22,005 --> 00:04:30,370
+La puerta de la plataforma sale de internet abierta: personas y procesos llegan solo por un camino privado, desde la red de la universidad.
+
+44
+00:04:32,070 --> 00:04:35,185
+La plataforma también llega al almacenamiento por un camino privado.
+
+45
+00:04:36,485 --> 00:04:41,160
+Y la salida se vigila: los datos solo pueden ir a lugares de una lista corta.
+
+46
+00:04:42,860 --> 00:04:48,380
+El almacenamiento guarda archivos, y no sabe quién puede ver cada columna: ni máscaras, ni reglas.
+
+47
+00:04:49,880 --> 00:04:56,511
+Así, el catálogo pasa a ser la única puerta de los archivos: revisa cada petición, y aplica cada regla al pasar.
+
+48
+00:04:58,211 --> 00:05:00,672
+La puerta trasera, directa a los archivos, queda cerrada.
+
+49
+00:05:01,772 --> 00:05:07,809
+Solo una cuenta de administrador, encendida para leer el almacenamiento, la abre, como muestra Poder que se enciende.
+
+50
+00:05:09,509 --> 00:05:13,049
+Como las murallas de Ragusa: pocas puertas, y en cada una, una regla.
+
+51
+00:05:15,349 --> 00:05:19,682
+Después, un espacio de trabajo se vuelve tres: desarrollo, pruebas y producción.
+
+52
+00:05:21,182 --> 00:05:26,488
+En desarrollo, la gente prueba cosas nuevas; en pruebas, un cambio se ensaya tal como correrá.
+
+53
+00:05:27,588 --> 00:05:31,121
+Producción tiene los datos reales, y corre la carga nocturna.
+
+54
+00:05:32,421 --> 00:05:34,245
+Cada uno llega solo a sus propios datos.
+
+55
+00:05:35,545 --> 00:05:40,342
+Desarrollo y pruebas reciben datos inventados o enmascarados, nunca una copia de los de producción.
+
+56
+00:05:41,842 --> 00:05:46,707
+Así, un error en desarrollo se queda ahí, y un intruso ahí no encuentra datos reales.
+
+57
+00:05:48,407 --> 00:05:53,937
+Un cambio avanza en un solo sentido, por un único camino revisado, que construye De una rama a producción.
+
+58
+00:05:55,637 --> 00:06:02,598
+Como el islote frente a Ragusa: lo que aún no es de confianza espera aparte, y entra solo por la puerta, tras la espera.
+
+59
+00:06:04,898 --> 00:06:06,428
+Ahora, las cerraduras en sí.
+
+60
+00:06:07,728 --> 00:06:12,800
+Los datos se guardan cifrados, en disco y en tránsito: ilegibles sin su llave.
+
+61
+00:06:14,300 --> 00:06:16,311
+Así que lo que importa es quién tiene la llave.
+
+62
+00:06:17,811 --> 00:06:20,049
+Hasta ahora, la tenía el proveedor.
+
+63
+00:06:21,749 --> 00:06:26,564
+Ahora es de la universidad, y la guarda su equipo de seguridad en una bóveda propia.
+
+64
+00:06:28,464 --> 00:06:33,741
+La plataforma puede usarla, pero nunca sacarla, y quienes operan la plataforma no pueden borrarla.
+
+65
+00:06:35,641 --> 00:06:41,303
+El equipo de seguridad puede retirarla: entonces nadie puede leer los datos, ni siquiera el proveedor de la nube.
+
+66
+00:06:43,403 --> 00:06:52,410
+Si se pierde esa llave, se pierden los datos: por eso cada uso se registra, y una llave borrada se guarda noventa días que nadie acorta.
+
+67
+00:06:54,310 --> 00:07:02,220
+En Ragusa, durante siglos, las puertas se cerraban cada tarde, y sus llaves iban al rector, el jefe de la república, hasta la mañana.
+
+68
+00:07:03,920 --> 00:07:05,429
+Todos sabían quién las tenía.
+
+69
+00:07:07,729 --> 00:07:08,967
+Por último, las copias.
+
+70
+00:07:10,467 --> 00:07:17,202
+Un atacante que entra suele borrar primero las copias de seguridad, luego bloquea los datos, y pide dinero para liberarlos.
+
+71
+00:07:19,302 --> 00:07:25,146
+Por eso, cada noche, una copia de los datos de producción va a un lugar aparte, con sus propios administradores.
+
+72
+00:07:27,046 --> 00:07:33,174
+Cada copia queda bloqueada treinta días: nadie puede cambiarla ni borrarla antes, ni siquiera un administrador.
+
+73
+00:07:35,274 --> 00:07:42,534
+Y una vez al mes, el equipo de Sam restaura una para probarla: una copia que nadie ha restaurado es una esperanza, no un respaldo.
+
+74
+00:07:44,834 --> 00:07:53,686
+Un bloqueo tan fuerte corta en ambos sentidos: una copia no puede borrarse antes, aunque deba, y Borrado es borrado vuelve sobre eso.
+
+75
+00:07:55,986 --> 00:07:58,143
+Sam recorre otra vez el camino del atacante.
+
+76
+00:07:59,443 --> 00:08:02,202
+Desde internet abierta, no hay puerta que encontrar.
+
+77
+00:08:03,702 --> 00:08:10,240
+Con un acceso robado, solo queda lo que esa persona puede alcanzar, en un espacio de trabajo, pasando las revisiones del catálogo.
+
+78
+00:08:11,740 --> 00:08:17,207
+Ni puerta trasera a los archivos, ni adónde enviarlos, ni llave que llevarse, ni copia que borrar.
+
+79
+00:08:19,307 --> 00:08:25,380
+En 1377, Ragusa siguió abierta al mundo, por pocas puertas, cada una con su regla.
+
+80
+00:08:27,080 --> 00:08:31,323
+Los datos de la universidad siguen abiertos a las personas y procesos que los usan.
+
+81
+00:08:32,623 --> 00:08:34,977
+Pocas puertas, cada una con su cerradura a la vista.

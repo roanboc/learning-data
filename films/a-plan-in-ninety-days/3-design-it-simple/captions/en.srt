@@ -1,0 +1,311 @@
+1
+00:00:01,400 --> 00:00:05,976
+Korea, in the 1440s: the kingdom of Joseon, under King Sejong.
+
+2
+00:00:07,276 --> 00:00:13,869
+Its people wrote in Chinese characters: a sign for each word, thousands of them, made for another language.
+
+3
+00:00:14,969 --> 00:00:19,479
+Learning them took years, so most people couldn't write down what they wanted to say.
+
+4
+00:00:20,579 --> 00:00:24,778
+In a court, a person's words were written down in characters they couldn't read.
+
+5
+00:00:25,878 --> 00:00:30,201
+One wrong character could punish someone innocent, and they had no way to check.
+
+6
+00:00:31,901 --> 00:00:33,289
+Something had to change.
+
+7
+00:00:34,989 --> 00:00:39,376
+King Sejong started from what people needed: to write the way they speak.
+
+8
+00:00:40,476 --> 00:00:47,709
+In 1443 he made 28 letters, the consonants drawn from the mouth and throat as they make each sound.
+
+9
+00:00:49,209 --> 00:00:52,719
+Five basic shapes, and a stroke added for a stronger sound.
+
+10
+00:00:54,219 --> 00:01:00,793
+The vowels come from three marks: a dot for heaven, a flat line for the earth, a standing line for a person.
+
+11
+00:01:02,293 --> 00:01:05,314
+Put together a syllable at a time, they write any word.
+
+12
+00:01:06,614 --> 00:01:13,073
+One of his own scholars, Choe Manri, objected: it would turn people away from learning in characters.
+
+13
+00:01:14,173 --> 00:01:21,496
+The king argued for it, and in 1446 published the letters, with a book eight of his scholars wrote to explain them.
+
+14
+00:01:22,796 --> 00:01:28,894
+Its closing words say a quick learner can know them before the morning is over, and anyone within ten days.
+
+15
+00:01:30,394 --> 00:01:38,668
+Today we call them Hangul, and both Koreas write with them; in the South, about 98 adults in 100 can read and write.
+
+16
+00:01:39,968 --> 00:01:45,077
+Data is the same: a design people can learn in a morning is a design they use.
+
+17
+00:01:46,177 --> 00:01:54,832
+A year from now, at a university, there are eleven ways to ask for data, three copies of the staff list, and 41 working days to wait.
+
+18
+00:01:56,132 --> 00:02:04,762
+Its new data manager and team design the target simply: five principles, a small team with partners, six procedures, one front door.
+
+19
+00:02:05,862 --> 00:02:08,769
+Simple enough that anyone there can learn it in a morning.
+
+20
+00:02:15,969 --> 00:02:24,051
+March 2027. Helena Novak, the university's data manager, has the current state on the wall, in five layers.
+
+21
+00:02:25,151 --> 00:02:30,587
+Next in her ninety days: define the target, the state to reach, by Monday 5 April.
+
+22
+00:02:31,687 --> 00:02:36,977
+Before drawing anything, she and the team write the rules they'll design by: five principles.
+
+23
+00:02:38,277 --> 00:02:42,765
+One: start from the decision. Nothing is built without a decision behind it.
+
+24
+00:02:44,065 --> 00:02:49,282
+Two: one copy, governed once. No private copies of the things everyone shares.
+
+25
+00:02:50,582 --> 00:02:57,486
+Three: owners in the business, builders beside them. The data team doesn't decide what other people's data means.
+
+26
+00:02:58,786 --> 00:03:02,658
+Four: simple before clever. No new tool where one they have will do.
+
+27
+00:03:03,958 --> 00:03:07,553
+Five: measure what people use, not how busy the team is.
+
+28
+00:03:08,853 --> 00:03:13,409
+Each says what it rules out: a principle nothing could fail can't settle a choice.
+
+29
+00:03:14,709 --> 00:03:18,674
+The map before the data tests principles like these, in Why it moves.
+
+30
+00:03:19,974 --> 00:03:23,403
+Anyone can check a choice against them, without asking Helena.
+
+31
+00:03:24,503 --> 00:03:29,193
+A tool of their own for the faculties? The platform the team already runs will do.
+
+32
+00:03:30,493 --> 00:03:36,819
+A copy of the staff list for each faculty? One list, governed once, read by everyone allowed to.
+
+33
+00:03:38,119 --> 00:03:42,368
+Five shapes made every letter; five principles can shape every choice.
+
+34
+00:03:45,768 --> 00:03:51,963
+Then Helena and Noor, the data architect, draw the target on Noor's map, in the same five layers.
+
+35
+00:03:53,263 --> 00:03:59,580
+Strategy: the same four goals; delivering data becomes quick, and reporting happens in one place.
+
+36
+00:04:01,280 --> 00:04:09,494
+Business: the same twelve decisions, served by a small team in the middle, data partners around it, six procedures and one front door.
+
+37
+00:04:10,994 --> 00:04:17,251
+Information: one governed copy of each thing, with an owner in the business. One staff list, not three.
+
+38
+00:04:18,751 --> 00:04:27,409
+Application: one platform for data and reports, its catalog, and agents, each with a written mandate. The old warehouse is gone.
+
+39
+00:04:28,909 --> 00:04:33,865
+Technology: the platform, in the cloud; the old warehouse's servers, switched off.
+
+40
+00:04:35,365 --> 00:04:38,621
+Each page has its picture, drawn with it, never after.
+
+41
+00:04:39,921 --> 00:04:44,209
+Drawn together, every system and every copy has a decision behind it.
+
+42
+00:04:45,509 --> 00:04:50,836
+How to keep one copy of the people and things everyone shares: The same one, everywhere.
+
+43
+00:04:51,936 --> 00:04:55,403
+How each product keeps its promise: A product with an owner.
+
+44
+00:04:58,603 --> 00:05:02,782
+Who builds what? Today the university has the worst of two designs.
+
+45
+00:05:04,282 --> 00:05:07,293
+At the centre, one queue: 41 working days.
+
+46
+00:05:08,993 --> 00:05:15,116
+At the edges, people who can't wait keep their own copies: three staff lists, and numbers that disagree.
+
+47
+00:05:16,616 --> 00:05:21,901
+Helena designs the way between, as data mesh and Piethein Strengholt describe it.
+
+48
+00:05:23,401 --> 00:05:29,801
+A small team in the middle keeps the platform, the standards, the shared products and the guardrails, and it helps.
+
+49
+00:05:31,301 --> 00:05:38,016
+Seven data partners, in four faculties and three offices, build their own area's products with the team's tools.
+
+50
+00:05:39,516 --> 00:05:43,528
+Each spends about a day a week on it, given by their dean or director.
+
+51
+00:05:45,028 --> 00:05:49,224
+The leading data people module tells how a leader lets people decide.
+
+52
+00:05:50,524 --> 00:05:57,392
+She sends the draft to everyone she spoke to. A head of school writes back: partners take people away from teaching.
+
+53
+00:05:58,892 --> 00:06:01,360
+It's a fair worry, and the design answers it.
+
+54
+00:06:02,860 --> 00:06:07,179
+About 40 people already do data work part of their week, in spreadsheets.
+
+55
+00:06:08,479 --> 00:06:14,085
+A partner's day is that same work, planned by the dean, and done with the team's tools and help.
+
+56
+00:06:15,585 --> 00:06:20,203
+A good design still has to be argued for, as the king argued for his letters.
+
+57
+00:06:23,803 --> 00:06:30,146
+How the work flows: six procedures, a page each. Ask, choose, build, release, fix, retire.
+
+58
+00:06:31,646 --> 00:06:37,831
+Each page names who asks, who decides, who builds and who checks, its steps, and what it leaves behind.
+
+59
+00:06:38,931 --> 00:06:43,330
+And each has its picture: the four roles, and how the work passes between them.
+
+60
+00:06:44,830 --> 00:06:48,575
+It all starts at one front door: one form, five questions.
+
+61
+00:06:49,675 --> 00:06:54,869
+What decision? By when? Who decides? What data do you use already? Who else needs it?
+
+62
+00:06:56,369 --> 00:06:58,903
+It opens on Monday 7 June.
+
+63
+00:07:00,003 --> 00:07:06,184
+Behind it are governance's services too, each with its promise, as in A capability, not a project.
+
+64
+00:07:07,484 --> 00:07:10,490
+Before everyone uses them, one partner tries them.
+
+65
+00:07:11,590 --> 00:07:16,028
+Anil, in the Faculty of Health, kept his own spreadsheet because he couldn't wait.
+
+66
+00:07:17,128 --> 00:07:22,825
+Now he builds Health's report of casual teaching hours by the build page, from the one staff list.
+
+67
+00:07:24,125 --> 00:07:26,281
+Step four said: the team checks it.
+
+68
+00:07:27,581 --> 00:07:31,757
+His change waited four working days: everyone thought someone else had it.
+
+69
+00:07:33,057 --> 00:07:39,735
+So step four now names one reviewer, from a rota, within two working days: never the person who built it.
+
+70
+00:07:41,235 --> 00:07:44,000
+Tried by one partner, fixed before everyone.
+
+71
+00:07:47,400 --> 00:07:50,417
+Monday 5 April: the define milestone.
+
+72
+00:07:51,717 --> 00:07:59,823
+The target in five layers, each with its picture; five principles; a small team and seven partners; six pages; one door.
+
+73
+00:08:01,323 --> 00:08:06,778
+Every part fits on a page: a design simple enough to explain is simple enough to run.
+
+74
+00:08:08,278 --> 00:08:11,316
+In April, Anil becomes the first data partner.
+
+75
+00:08:12,616 --> 00:08:19,249
+In 1446, the king's letters could be learned in a morning, so people used them, and wrote their own words.
+
+76
+00:08:20,749 --> 00:08:27,759
+At the university, a design anyone can learn in a morning is one people use: to ask, to build, and to check.
+
+77
+00:08:29,059 --> 00:08:32,623
+Next, the gaps between today and the target become a roadmap.
+
+78
+00:08:33,923 --> 00:08:37,464
+Start from the decision; design the fewest parts that serve it.

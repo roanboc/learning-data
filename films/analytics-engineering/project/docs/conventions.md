@@ -26,8 +26,8 @@ three kinds, and the project's folders follow them:
 
 | Kind | What it is | Here | Folders |
 |---|---|---|---|
-| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
-| Data domain | What the facts mean, following the reference model | `person`, `student`, `course` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
+| Application domain | A system, and the team that runs it | `registrar` (the student system), `learning` (the learning platform and the short-course platform), `hr` (the HR system and the claims app), `research` (the research system), `alumni` (the alumni system) | `sources/<system>/`, `models/staging/<system>/` |
+| Data domain | What the facts mean, following the reference model | `person`, `student`, `course`, `staff` | `models/intermediate/<domain>/`, `models/core/<domain>/` |
 | Business domain | Who decides with the data | `planning`, `wallet`, `finance` | `models/marts/<consumer>/`, `exposures/<consumer>/` |
 
 Staging is split by source system, because one system can feed several data domains.
@@ -38,17 +38,17 @@ and business domains:
 |---|---|---|---|
 | `person` | `models/core/person/` | The person behind every role, the roles they hold, how to reach them, the numbers each system knows them by (a draft: no model yet) | TCSI Student and Staff packets, extended to one person in any role |
 | `student` | `models/intermediate/student/`, `models/core/student/`, `seeds/reference/student/` | Learners, the credentials they hold, the credit they hold towards an award | TCSI Student packet, extended to learners with no award and to microcredentials and badges |
-| `course` | `models/core/course/` | The awards the university offers | TCSI Course packet |
+| `course` | `models/core/course/`, `seeds/reference/course/` | The awards the university offers, and its units, each with its faculty | TCSI Course packet |
+| `staff` | `models/core/staff/`, `seeds/reference/staff/` | Casual staff's claims for the hours they work, and HR's calendar of pay days | TCSI Staff packet, extended to casual staff's claims |
 | `planning` | `models/marts/planning/`, `seeds/expected/planning/` | Planning's marts, as at census | |
 | `wallet` | `models/marts/wallet/` | The wallet app's marts, as they are now | |
-| `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts, as at census, and the tuition rates it publishes | |
+| `finance` | `models/marts/finance/`, `seeds/reference/finance/`, `seeds/expected/finance/` | Finance's marts: tuition forgone, as at census, and payroll's export, by pay day; and the tuition rates it publishes | |
 | shared | `models/_shared/`, `seeds/reference/shared/` | The university's map (domains and key entities), the key sets seed (generated from the sources), the version columns, the time spine | |
 
 The domains follow the reference model, TCSI (Tertiary Collection of Student Information): check it, adopt
 what fits, extend where the business needs more, and record each extension in the domain's conceptual model.
 
-Sources, models and exposures each have their own top-level folder, so what comes in, what's
-built and who uses it are never lost in each other's YAML:
+Sources, models and exposures each have their own top-level folder, so what comes in, what's built and who uses it are never lost in each other's YAML:
 
 | Folder | Holds |
 |---|---|
@@ -209,7 +209,7 @@ to itself, and they meet only on the public core. `examples/planning/` sketches 
 
 ## Keys and hashes
 
-- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform), `HR` (HR system), `RES` (research system), `ALU` (alumni system). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them, in the order the project first read each (`since`).
+- **Key sets.** Every key is qualified by where it comes from: `SIS` (student system), `LMS` (learning platform), `SC` (short-course platform), `HR` (HR system), `RES` (research system), `ALU` (alumni system), `CLM` (claims app). Each key set is written once, on the source that issues it (`meta.key_set` in `sources/<system>/_<system>__sources.yml`); `scripts/generate/definitions.py` generates `seeds/reference/shared/key_sets.csv` from them, in the order the project first read each (`since`).
 - **One case per key.** Staging writes each system key in one case: IDs and codes upper case (`S-20417`, `GCDA`), platform user IDs and emails lower case (`u-88213`). So `s-20417` typed into the platform is the same key as `S-20417`, and a readable key and its hash are one to one.
 - **Readable key.** `business_key('SIS', 'student_id')` gives `SIS|S-20417`; null when any part is missing or blank.
 - **Hash.** `hash_key(['learner_bk'])`: sha-256, as 64 hex characters, of the parts trimmed, upper-cased and joined with `|`, with a sentinel for a missing part. Every key in these sources is case-insensitive. The exact rules are in the macro's comment, `macros/shared/keys.sql`. DuckDB's `sha256` and Databricks' `sha2(..., 256)` give the same value.
@@ -264,7 +264,7 @@ models and the marts.
 | An owner | `owner:` on every domain, entity, kind and relationship; `meta.owner` and `meta.domain` on every public model and mart | The map (`_shared__conceptual.yml`), each domain's conceptual model, the model's YAML |
 | A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
 | Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
-| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
+| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six; for accuracy, `meta.reference`: what it's checked against (*Which reference*) | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
 | Described columns | A `description` | Each column of a public model or mart. A warning until 1 December 2026, then an error |
 
 `python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
@@ -274,11 +274,11 @@ written for the person it stops. A new rule warns first: announced at the stewar
 as a warning with its how-to for at least six weeks, and fails from the date set when it's announced
 (DEC-PRJ-14, `STARTS` in the check).
 
-Owners route reviews too. `CODEOWNERS` is generated from the owners in the metadata
-(`scripts/generate/codeowners.py`, `--check` in CI): a change to a domain's conceptual model asks
-its owners, the data architect and data governance to review it; a change to a seed the business
-owns asks its owner. Every owner the metadata names must be in `governance/2-owners/owners.yml`,
-with where their reviews go, or the script stops.
+Owners don't review pull requests. They decide what their data means in the glossary, before any
+code, and the code is built from there; the impact check tells them what a change touches. The
+data team reviews the code, and data governance only its own files (`CODEOWNERS`, generated by
+`scripts/generate/codeowners.py`, `--check` in CI). Every owner the metadata names must be in
+`governance/2-owners/owners.yml`, so the impact check can reach them, or the script stops.
 
 The tests' owners and dimensions make the scorecard: `scripts/generate/scorecard.py` reads the last
 run and writes `docs/scorecard.md`, every test by the domain of the data it checks and its quality
@@ -321,3 +321,18 @@ measures it, and each critical column as a critical data element (`criticalDataE
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.
+
+### Which reference
+
+A check can say a value is allowed: not empty, the right shape, at most 30 characters. That's
+validity, and the check's rule is all it knows. Only a reference outside the data can say a value
+is true, and measure accuracy: the person the data is about, a document seen once, or a record
+kept apart from the data's source, such as the exam boards' approved lists, which the faculties'
+boards make from their own decisions. A check against a copy of the same source measures
+consistency, not accuracy: the copy shares the source's gaps, and agrees with them. So every
+accuracy test names its reference in `meta.reference`, beside its owner and dimension; a
+reconciliation, row by row, is the generic test `reconciles_with` (`tests/generic/`), whose method,
+`reconciliation`, goes into the contract with the reference (`scripts/generate/products.py`); and
+the scorecard lists each accuracy test with its reference. A column whose values a reference
+confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
+`name_as_printed`, the graduate, on `name_confirmed_on`.

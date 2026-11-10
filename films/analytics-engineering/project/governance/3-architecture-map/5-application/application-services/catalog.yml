@@ -1,0 +1,7 @@
+name: catalog
+kind: application service
+definition: 'Reads what the catalog holds about the data: glossary terms, owners, tags and column classes.'
+owner: Sam, platform team
+relationships:
+- serving: draft the change
+status: confirmed

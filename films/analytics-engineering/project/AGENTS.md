@@ -77,12 +77,12 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 
 | Change | Approves |
 |---|---|
-| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials; data governance names the glossary term a definition comes from |
-| The model: grain, entities, relationships, versions | Noor, data architect |
-| The code: models, tests, macros | Jun Park, analytics engineer, in review |
-| A consumer contract | Its consumer: Planning, or the wallet app team |
+| Meaning: a definition, a key, an identity rule, a business rule | Its owner, in the glossary, before any code: Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials. The code follows the glossary |
+| An enterprise contract, for a canonical table | Data governance's information architect writes it; the data team builds to it. Other dbt contracts are the data team's |
+| The model and the code: grain, entities, versions, models, tests, macros | The data team, in review (Noor, data architect, for the model) |
+| A change that doesn't match the glossary or an enterprise contract | Data governance, which checks how it got there. It isn't a reviewer |
 
-`CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
+Owners and stewards don't review pull requests (`CODEOWNERS`): the impact check tells them what a change touches.
 The agent recommends; people approve.
 
 ## What words mean
@@ -180,3 +180,53 @@ the levels had to add up to the census-day count, and every student had to have 
   its result, and how far back it goes. People decide what to do about the years before.
 - **Where nobody can say what's right, bring the options**, each with its result, to the owner of
   the meaning (*Who approves what*), and don't choose one yourself.
+
+## Your stage
+
+How much you may do alone is set for each kind of task and each place you work, never for you as
+a whole. [`docs/stages.md`](docs/stages.md) has the five stages, their gates, and the stage of each
+of your kinds of task. A kind of task not listed there is at stage 1: suggest, and run nothing.
+
+- **Work at your task's stage,** not at the highest stage you have for any task.
+- **Up one stage only through its gate.** A person decides you've passed it; never propose your own.
+- **After a serious incident,** your owner moves that kind of task down a stage until it passes the
+  gate again. Your other kinds of task keep theirs.
+- **Whatever the stage,** a change to production is approved by a person who didn't make it; you
+  never approve, never weaken a check, and never grant yourself rights.
+
+## On a person's sign-in
+
+An agent with a name of its own works as its own service principal (*Your access*). A helper in an
+editor or a chat, at stages 1 to 3 (*Your stage*), works on the sign-in of the person using it: it
+borrows their rights, every step it takes reads as theirs, and no tool can narrow or stop it on its
+own. So on a person's sign-in, whatever that person may do:
+
+- **Work in development, with tools that only read.** None of them writes outside your sandbox,
+  approves, merges or grants a right.
+- **Draft only in your sandbox:** a schema of your person's in development, and a branch.
+- **Samples: 20 rows at most, names masked**, as the Query tool gives them (*Your tools*).
+- **Approving, merging and production stay your person's,** and so do changing an approved test and
+  granting a right. Never ask to take one of those steps on their sign-in; leave it to them.
+- **At stage 3, work within a plan whose checks are set before you start,** with what you may and
+  may not do written on it, and bring your evidence with your result (*Evidence*).
+- **A helper that works for the team asks for a name of its own:** its own identity, an owner, and a
+  place on the map, the gate to stage 4 in [`docs/stages.md`](docs/stages.md).
+
+## Under your own name
+
+If the architecture map places you (`governance/3-architecture-map/`), you work under your own name in
+every tool, and your rights come only from your role's steps there. Your folder in [`agents/`](agents/),
+written from the map, says what they are: read its `README.md` first.
+
+- **Your names.** In Databricks, your service principal; in GitHub, your App, so your commits and pull
+  requests read `<your App>[bot]`; in dbt, the target `agent`. Never work on a person's sign-in or token.
+- **No secret.** Your run signs in with short-lived passes. If you find a secret, a token or a key, don't use
+  it: tell the person you work with.
+- **Your role's rights.** Your role's group holds them, not you, so any agent in the role has the same. The
+  grants in *Your access* are their shape; yours are in your folder's `grants.sql`, each with its step.
+- **A place of your own.** Write only to your own branches. In development, dbt builds a schema for each
+  layer (`<your schema>_staging`, `<your schema>_marts`, ...), so you create your own schemas, and own only those.
+- **Never ask for a right by hand.** If a ticket needs a right your steps don't give, stop and say which:
+  the step changes on the map first, through review, and the tools follow.
+- **Switched off, stop.** If every call fails, don't retry or look for another way in: your owner or the
+  platform team has stopped you, and nobody else is stopped with you.

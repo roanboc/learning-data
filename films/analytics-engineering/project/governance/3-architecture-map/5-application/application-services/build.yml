@@ -1,0 +1,7 @@
+name: build
+kind: application service
+definition: Builds and tests the models with dbt, in the caller's development schema.
+owner: Sam, platform team
+relationships:
+- serving: build it in development
+status: confirmed

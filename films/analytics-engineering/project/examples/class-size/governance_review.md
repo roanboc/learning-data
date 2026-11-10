@@ -8,8 +8,8 @@ The agent's review of this pull request against data governance's rules, followi
 finding says who decides.
 
 **What I read**: the pull request, its files, and CI's results on it (`checks.txt`: the build of what changed and
-what depends on it, every test, `scripts/check/governance.py`, `scripts/generate/codeowners.py --check` and the
-impact report; `diff.txt`, the data's diff), with `skills/review-for-governance/draft_classes.py`'s counts from
+what depends on it, every test, `scripts/check/governance.py`, `scripts/generate/codeowners.py --check`,
+`scripts/generate/teams.py --check` and the impact report; `diff.txt`, the data's diff), with `skills/review-for-governance/draft_classes.py`'s counts from
 the pull request's build. I can't push, and I have no access to Databricks: the evidence below is counts, never
 values.
 
@@ -53,19 +53,22 @@ request says so. But nothing tells the people who could set one.
   ```
 
   A suggestion: I can't push.
-- **Who decides:** Clara Jensen, as the plan's owner.
+- **Who decides:** data governance, since the change and the glossary differ here: the glossary says each unit's
+  school sets its class size, and these units keep 25.
 
 ---
 
-*Jun Park, analytics engineer, approved the first push, for the code; Mei Tanaka, data owner, for the word it
-copies.*
+*Jun Park, of the data team, approved the first push, for the code; Noor Rahman, data architect, for
+`_planning__conceptual.yml`, which copies the glossary's words.*
 
-*Clara Jensen, Planning, replied:* Yes. A warning, owned by the faculties, so each school sees its units until it
-sets a size. And I approve the change.
+*Yusuf Demir, data governance lead, replied:* Yes. A warning, owned by the faculties, so each school sees its units
+until it sets a size; the glossary stays as it is. The impact report names who to tell: Clara Jensen and the
+faculties.
 
-*The planning agent:* Added, as Clara decided: the warning on `class_size`, owned by the faculties. Pushed to
+*The planning agent:* Added, as data governance decided: the warning on `class_size`, owned by the faculties. Pushed to
 `agent/planning/class-size`: the second push. Every check passes again, with one warning, the 31 units
 (`checks.txt`), and the diff is the same (`diff.txt`).
 
-*The second push dismissed the approvals before it. Approved again, on the second push:* Jun Park, analytics
-engineer, for the code. Clara Jensen, product owner, for the change. Mei Tanaka, data owner, for the word it copies.
+*The second push dismissed the approvals before it. Approved again, on the second push:* Jun Park, of the data
+team, for the code; Noor Rahman, data architect, for `_planning__conceptual.yml`. Owners don't review pull requests:
+Clara Jensen and the faculties were told what it touches.

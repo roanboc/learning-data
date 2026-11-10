@@ -157,10 +157,12 @@ it.
 
 ## For the reviewers, from their roles on the map
 
-- **Jun Park**, analytics engineer, the code: `CODEOWNERS` names you for the model, its tests and the doc block.
-- **Clara Jensen**, product owner: you asked for it, and you own the plan. The rules on `main` ask a product owner
-  to approve a change to Planning's marts.
-- **Mei Tanaka**, data owner, the word it copies: *Class size* in `_planning__conceptual.yml`. The rules on `main`
-  ask a data owner to approve a change to it.
-- **Noor Rahman**, release approver, approves the release to production, after the merge.
+- **Jun Park**, of the data team, the code: `CODEOWNERS` names the data team for the model, its tests and the doc
+  block.
+- **Noor Rahman**, data architect: `CODEOWNERS` names you for `_planning__conceptual.yml`, which copies the
+  glossary's *Class size*. As the release approver, you also approve the change for production, after the merge.
+- **Where this change and the glossary differ**, as for the units above, data governance decides.
+- **Clara Jensen**, Planning, and **the faculties**: told, not asked. Owners don't review pull requests; the impact
+  report names you, since the plan changes, and the classes by faculty that tutor hiring reads. *Class size* is Mei
+  Tanaka's, decided in the glossary first.
 - Any agent's review is for reference only. I approve nothing.

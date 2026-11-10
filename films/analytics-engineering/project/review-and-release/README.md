@@ -1,10 +1,11 @@
 # Review and release
 
 Every change to the project reaches production the same way, whoever makes it, a person or an agent: a pull
-request, checks on what changed, a review for reference, the approval of the people the map names, a merge into
-`main`, a night in test, and a release that a second person approves. Agents propose: they open pull requests from
-their own branches, and an agent may review one, for reference. Only people approve, and only a person's yes
-releases.
+request, checks on what changed, a review for reference, the data team's review of the code, a merge into `main`, a
+night in test, and a release that a second person, a release approver the map names, approves. Agents propose: they
+open pull requests from their own branches, and an agent may review one, for reference. Only people approve, and
+only a person's yes releases. Owners and stewards don't review pull requests: what their data means is decided
+first, in the glossary, and the impact check tells them what a change touches.
 
 The rules live here as files, so a change to them is reviewed like any other. GitHub runs none of them from here:
 this project sits inside a bigger repository, as `CODEOWNERS` does. In the project's own repository, each goes where
@@ -14,8 +15,8 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 |---|---|
 | `rulesets/main.json` | The ruleset on `main`, as GitHub exports one |
 | `test.json`, `production.json` | The environments `test` and `production`, each as the body of GitHub's REST call that sets it |
-| `release.yml` | The release, every night at 23:00 or when a person starts it: it builds `main` in test; only if test passes does it go on to production, where it waits for a release approver, then signs in to Databricks with no secret, deploys the bundle (`../databricks.yml`) and runs the build |
-| `teams.yml` | GitHub's teams that the rules name, written from the roles on the map by `../scripts/generate/codeowners.py`. Don't edit it |
+| `release.yml` | The release, every night at 23:00 or when a person starts it: it builds `main` in test; only if test passes does it go on to production, where it waits for a release approver, then signs in to Databricks with no secret, deploys the bundle (`../databricks.yml`) and runs the build (`../resources/build.job.yml`) |
+| `teams.yml` | GitHub's teams that the rules name, written from the roles on the map by `../scripts/generate/teams.py`. Don't edit it |
 
 `../examples/class-size/` follows one change through all of it: the planning agent's first pull request.
 
@@ -30,9 +31,7 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | The most recent push is approved by someone who didn't push it | A change slipped in after the approval, or approved by whoever pushed it | The ruleset (`require_last_push_approval`) |
 | A new push dismisses the approvals before it | An approval of code that has since changed | The ruleset (`dismiss_stale_reviews_on_push`) |
 | Every conversation is resolved | A question left unanswered | The ruleset (`required_review_thread_resolution`) |
-| A product owner approves a change to Planning's marts | A data product changed without its owner saying yes | The ruleset's required reviewer rule: `product-owners`, on `models/marts/planning/` |
-| A data owner approves a change to what a student, a course or a person means, and to Planning's meanings | A word's meaning changed without its owner | The ruleset's required reviewer rule: `data-owners`, on the four conceptual models |
-| A data governance lead and a data custodian both approve a change to these rules, the release, the bundle, `CODEOWNERS`, `AGENTS.md`, `agents/`, the owners, or who holds a role on the map | A rule loosened, or an approver changed, in the same change that relies on it | The ruleset's required reviewer rule: `data-governance-leads` and `data-custodians`, on those files |
+| A data governance lead and a data custodian both approve a change to these rules, the release, the bundle and its jobs, `CODEOWNERS`, `AGENTS.md`, `agents/`, the owners, or who holds a role on the map | A rule loosened, or an approver changed, in the same change that relies on it | The ruleset's required reviewer rule: `data-governance-leads` and `data-custodians`, on those files |
 | CI's checks pass, on a branch that's up to date with `main` | A change that breaks the build, or only worked on an older `main` | The ruleset (`required_status_checks`, strict), from GitHub Actions only |
 | Merging doesn't release: each night the release builds `main` in test first, and goes on only if test passes | A change in production that fails on the night's data | `release.yml`: its job `production` needs its job `test` |
 | Production waits for a release approver | A change in production that no second person saw | The environment (`production.json`, `reviewers`) |
@@ -40,27 +39,28 @@ this project sits inside a bigger repository, as `CODEOWNERS` does. In the proje
 | Not even an administrator skips the release approver | A release forced through in a hurry | The environment's settings: *Allow administrators to bypass configured protection rules*, cleared |
 | Only `main` deploys, to test and to production | A branch released before its review | Each environment's one deployment branch, `main` |
 | The release signs in to Databricks with no secret, and only from its own environment's job | A secret that leaks, or another job writing to test or production | The federation policy on each of the release's two service principals: this repository's jobs in `test`, or in `production`, and nothing else |
-| Test and production are deployed from `main` only, and their job runs as the release | A deploy from a branch, or a build under someone else's rights | `../databricks.yml` (`mode: production`, `git.branch: main`, `run_as`) |
+| Production is deployed from `main` only, and the build runs as the release | A deploy from a branch, or a build under someone else's rights | `../databricks.yml` (`prod`: `mode: production`, `git.branch: main`; `run_as` its variable `service_principal`, which the release sets to its own identity) |
 | The release builds production; the agents only read it | An agent changing production | Grants on Databricks: the release builds in the production catalog, and the agents' groups only read it (`../AGENTS.md`, *Your access*) |
 
 ## Who approves what
 
 People only, each from their role on the map (`../governance/3-architecture-map/3-business/`). After a pull
-request, every step of *change a data product* is a person's: the analytics engineer reviews the code, the product
-owner approves the change, and the release approver releases it. What a word means stays with its data owner. The
-planning contributor's steps end at the pull request.
+request, every step of *change a data product* is a person's: the analytics engineer reviews the code, and the
+release approver approves the change and releases it. The planning contributor's steps end at the pull request.
+
+Owners and stewards don't review pull requests. What a word means, its owner decides first, in the glossary, and the
+code is built from there; where a change and the glossary differ, data governance decides. The impact check names
+who to tell (`../scripts/check/impact.py`), and each owner it names is told what the change touches.
 
 | A change to | Approved by |
 |---|---|
-| Any file | One of its code owners (`../CODEOWNERS`, written from the owners in the project's metadata): the analytics engineer for the code, Jun Park today |
-| Planning's marts (`models/marts/planning/`) | A product owner, too: Clara Jensen |
-| What a student, a course or a person means (`_student__conceptual.yml`, `_course__conceptual.yml`, `_person__conceptual.yml`), and Planning's meanings (`_planning__conceptual.yml`) | A data owner, too: Mei Tanaka |
-| These rules, the release, the bundle, `CODEOWNERS`, `AGENTS.md`, `agents/`, the owners register, the map's people and roles, and the scripts that write `CODEOWNERS`, the teams and the agents' settings | A data governance lead and a data custodian, too: Yusuf Demir, and the platform team |
-| What runs in production | A release approver who didn't start the release: Noor Rahman, today |
+| Any file | One of its code owners (`../CODEOWNERS`, written by `../scripts/generate/codeowners.py`): the data team for the code |
+| These rules, the release, the bundle and its jobs, `CODEOWNERS`, `AGENTS.md`, `agents/`, the owners register, the map's people and roles, and the scripts that write `CODEOWNERS`, the teams and the agents' settings | A data governance lead and a data custodian, too: Yusuf Demir, and the platform team |
+| What runs in production | A release approver who didn't start the release: Noor Rahman, today. Their yes approves the change for production |
 
-An owner is a person or a team of people. `CODEOWNERS` names people and teams, and the required reviewer rule and
+A reviewer is a person or a team of people. `CODEOWNERS` names people and teams, and the required reviewer rule and
 the environment name teams. A GitHub App can't be in a team, and the map gives these roles only to people:
-`codeowners.py` stops if it gives one to an agent. So no approval these rules ask for can come from an agent, and an
+`teams.py` stops if it gives one to an agent. So no approval these rules ask for can come from an agent, and an
 agent's approval never counts. When Jun opens a pull request, the same rules ask someone else to approve it.
 
 ## The governance review agent, in GitHub
@@ -84,22 +84,20 @@ agent whose role has steps on the map, and the governance reviewer's role has no
 
 The ruleset and the environment name GitHub's teams by id, as GitHub exports them. `teams.yml` is written from the
 map: one team for each role whose people approve, with the people the map assigns to it. So someone who takes over
-a role on the map takes over its team, and its reviews. The ids are this example's; in your organisation, put your
-teams' (`gh api orgs/<org>/teams/<team> --jq .id`) in `TEAM_ROLES`, in `../scripts/generate/codeowners.py`, and in
-the files here: the script stops if a file here names a team it didn't write. A team's approval counts only if the
-team has write access to the repository.
+a role on the map takes over its team, and its approvals. The ids are this example's; in your organisation, put your
+teams' (`gh api orgs/<org>/teams/<team> --jq .id`) in `TEAM_ROLES`, in `../scripts/generate/teams.py`, and in the
+files here: the script stops if a file here names a team it didn't write. A team's approval counts only if the team
+has write access to the repository.
 
 | Team | Its role on the map | Who, today | Id in the files |
 |---|---|---|---|
-| `product-owners` | product owner | Clara Jensen | 7300101 |
-| `data-owners` | data owner | Mei Tanaka | 7300102 |
 | `release-approvers` | release approver | Noor Rahman | 7300103 |
 | `data-governance-leads` | data governance lead | Yusuf Demir | 7300104 |
 | `data-custodians` | data custodian | The platform team, Sam Okafor's | 7300105 |
 
-A team on the map, such as the platform team, means its people: each joins with their own GitHub account. One team
-for each role is enough while each role has one person or team in it; with more product owners, give each data
-product's owners a team of their own, so only Planning's owner approves Planning's marts.
+A team on the map, such as the platform team, means its people: each joins with their own GitHub account. Owners
+have no team: they decide what their data means in the glossary, before any change, and are told what a change
+touches; they don't review pull requests.
 
 ## Merging isn't releasing
 
@@ -124,16 +122,19 @@ approver all the same, and they can't approve it themselves.
    `gh api -X POST repos/<owner>/<repo>/environments/<name>/deployment-branch-policies -f name=main -f type=branch`.
    In `production`'s settings, clear *Allow administrators to bypass configured protection rules*: the REST call
    has no field for it.
-4. **The release.** Copy `release.yml` to `.github/workflows/release.yml`. On each environment, set four variables,
-   none of them secret: `DATABRICKS_HOST` (its workspace), `RELEASE_CLIENT_ID` (the application ID of its service
-   principal), `CATALOG` and `WAREHOUSE_ID`. Each job reads its own environment's. The schedule is in UTC here, as the
-   project's other schedules are; in yours, put your time zone in `timezone:`, an IANA name.
+4. **The release.** Copy `release.yml` to `.github/workflows/release.yml`. On each environment, set two variables,
+   neither of them secret: `DATABRICKS_HOST` (its workspace) and `RELEASE_CLIENT_ID` (the application ID of its
+   service principal). Each job reads its own environment's; the catalog and the warehouse are the bundle's targets'
+   (`../databricks.yml`). The schedule is in UTC here, as the project's other schedules are; in yours, put your time
+   zone in `timezone:`, an IANA name. `../examples/scripts-became-software/release.yml` deploys the same bundle with a
+   token, as the platform's service principal; this one keeps no secret. Keep one of the two.
 5. **On Databricks**, an admin makes two service principals, "release test" and "release", each with a federation
    policy for GitHub Actions: issuer `https://token.actions.githubusercontent.com`, audience the Databricks account's
    ID, and subject `repo:<owner>/<repo>:environment:test` for "release test", `repo:<owner>/<repo>:environment:production`
-   for "release". Each gets what the build needs in its own catalog, and nothing in the other (`USE CATALOG` and
-   `CREATE SCHEMA`, so it owns the schemas the build makes there), and joins `personal_data_readers`, since the
-   identity that runs dbt must be in it (DEC-PRJ-13). No agent's group gets anything but reading.
+   for "release". Each gets what the build needs in its own catalog, the bundle's `test` or `university`, and nothing
+   in the other (`USE CATALOG` and `CREATE SCHEMA`, so it owns the schemas the build makes there), may use the SQL
+   warehouse the bundle looks up, *Data platform*, and joins `personal_data_readers`, since the identity that runs
+   dbt must be in it (DEC-PRJ-13). No agent's group gets anything but reading.
 6. **`CODEOWNERS`** goes in `.github/`, as its header says.
 
 ## What it needs
@@ -150,3 +151,6 @@ approver all the same, and they can't approve it themselves.
   Connect* reference.
 - Databricks documentation: *Declarative Automation Bundles*; *Deployment modes*; *Specify a run identity*;
   *Substitutions and variables*; *dbt task for jobs*; *Enable workload identity federation for GitHub Actions*.
+- The Databricks CLI's source, `bundle/config/mutator/resolve_lookup_variables.go` (read 10 November 2026): a
+  variable that already has a value skips its lookup, so the release's `BUNDLE_VAR_service_principal` wins over the
+  bundle's lookup of the platform's service principal.

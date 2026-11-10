@@ -24,25 +24,9 @@
         "required_reviewers": [
           {
             "file_patterns": [
-              "models/marts/planning/**"
-            ],
-            "minimum_approvals": 1,
-            "reviewer": {"id": 7300101, "type": "Team"}
-          },
-          {
-            "file_patterns": [
-              "models/core/student/_student__conceptual.yml",
-              "models/core/course/_course__conceptual.yml",
-              "models/core/person/_person__conceptual.yml",
-              "models/marts/planning/_planning__conceptual.yml"
-            ],
-            "minimum_approvals": 1,
-            "reviewer": {"id": 7300102, "type": "Team"}
-          },
-          {
-            "file_patterns": [
               "review-and-release/**",
               "databricks.yml",
+              "resources/**",
               "CODEOWNERS",
               "AGENTS.md",
               "agents/**",
@@ -50,6 +34,7 @@
               "governance/3-architecture-map/3-business/actors/**",
               "governance/3-architecture-map/3-business/roles/**",
               "scripts/generate/codeowners.py",
+              "scripts/generate/teams.py",
               "scripts/generate/agents.py"
             ],
             "minimum_approvals": 1,
@@ -59,6 +44,7 @@
             "file_patterns": [
               "review-and-release/**",
               "databricks.yml",
+              "resources/**",
               "CODEOWNERS",
               "AGENTS.md",
               "agents/**",
@@ -66,6 +52,7 @@
               "governance/3-architecture-map/3-business/actors/**",
               "governance/3-architecture-map/3-business/roles/**",
               "scripts/generate/codeowners.py",
+              "scripts/generate/teams.py",
               "scripts/generate/agents.py"
             ],
             "minimum_approvals": 1,

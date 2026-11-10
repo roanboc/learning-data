@@ -30,8 +30,9 @@ the faculties' tutor hiring reads. The faculties' classes still add up to the pl
 $ python scripts/check/governance.py --measures
   Governance's rules are met: every owner, glossary term, column class, test and description is in place.
 
-$ python scripts/generate/codeowners.py --check
-  CODEOWNERS and review-and-release/teams.yml are up to date
+$ python scripts/generate/codeowners.py --check && python scripts/generate/teams.py --check
+  CODEOWNERS is up to date
+  review-and-release/teams.yml is up to date
 
 $ python scripts/check/impact.py --base origin/main --report impact.md
 
@@ -46,8 +47,8 @@ $ python scripts/check/impact.py --base origin/main --report impact.md
 
 ## Meaning
 
-- `models/marts/planning/_planning__conceptual.yml`: `class_size`. Its owners approve; data governance confirms any
-  glossary term (DEC-PRJ-11).
+- `models/marts/planning/_planning__conceptual.yml`: `class_size`. Its meaning comes from the glossary; data
+  governance checks the change where they differ (DEC-PRJ-11).
 
 ## Contracts
 
@@ -70,7 +71,7 @@ $ python scripts/check/impact.py --base origin/main --report impact.md
 
 8 test(s) on it and downstream. `dbt build --select mart_planning__class_plan+ --profiles-dir .` runs them.
 
-## Who to ask
+## Who to tell
 
 Clara Jensen, Planning; The faculties
 
@@ -84,7 +85,7 @@ Both checks passed, on a branch up to date with main. The rules ask for both, fr
 
 == build, on the second push ==
 
-The warning Clara agreed to (governance_review.md): on class_size, owned by the faculties. Everything else is as on
+The warning data governance agreed to (governance_review.md): on class_size, owned by the faculties. Everything else is as on
 the first push.
 
   OK    mart_planning__class_plan             table, in ci_pr_412_marts

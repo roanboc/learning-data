@@ -399,6 +399,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
 
 - [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
+- [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
 
 ### Architecture that keeps up
 

@@ -1,0 +1,79 @@
+{
+  "kicker": "When work falls behind",
+  "kicker_es": "Cuando el trabajo se atrasa",
+  "title_es": "Cuando alguien se queda atrás",
+  "h1": "When someone falls behind: find the cause, clear the way, give it time",
+  "h1_es": "Cuando alguien se queda atrás: busca la causa, despeja y da tiempo",
+  "lead": "In 2027 the university's data team moves its reports onto the platform, and gets faster. Tomás Ortega, who built most of the old reports, speeds up less, and unevenly. Before judging, Helena asks what's in his way, clears it, and reads his gap against the team's own change, over months.",
+  "lead_es": "En 2027 el equipo de datos de la universidad pasa sus informes a la plataforma y gana velocidad. Tomás Ortega, que hizo casi todos los informes antiguos, se acelera menos y de forma desigual. Antes de juzgar, Helena pregunta qué le estorba, lo despeja y mide su brecha contra el cambio del equipo.",
+  "description": "A film about the harder case of growing people, the third of Ownership and performance in the module Leading data people: when one person's work falls behind the team's, look first at what surrounds them; Robert Mager and Peter Pipe's question (could they do it if they had to?), Thomas Gilbert's order (the work's information, tools and rewards before the person) and Amy Edmondson's psychological safety, each named once; Tomás Ortega, the report developer, after the reports move onto the platform in 2027: three causes found with him in his one-to-one (training, fit for the role, and a hard time at home, kept private), each blocker cleared; his gap read against the team's own change (40 days to 35 while the team went 41 to 24), never against a colleague; a plan he writes himself, read monthly; by December the gap closed by about half, and the plan going on into 2028, said honestly. It opens in Fremont, California, where the same workers, in a different system at NUMMI, did some of the best work in the country.",
+  "description_es": "Una película sobre el caso más difícil de hacer crecer a las personas, la tercera de Responsabilidad y desempeño en el módulo Liderar equipos de datos: cuando el trabajo de alguien se queda atrás del equipo, mira primero lo que lo rodea; la pregunta de Robert Mager y Peter Pipe (¿podría hacerlo si tuviera que hacerlo?), el orden de Thomas Gilbert (la información, las herramientas y las recompensas del trabajo antes que la persona) y la seguridad psicológica de Amy Edmondson, nombrados una vez; Tomás Ortega, el desarrollador de informes, después de que los informes pasan a la plataforma en 2027: tres causas encontradas con él en su reunión uno a uno (formación, encaje con el rol y un momento difícil en casa, que queda en privado), cada obstáculo despejado; su brecha medida contra el propio cambio del equipo (de 40 días a 35 mientras el equipo pasaba de 41 a 24), nunca contra un compañero; un plan que escribe él mismo, revisado cada mes; en diciembre la brecha se ha cerrado más o menos a la mitad, y el plan sigue en 2028, dicho con honestidad. Empieza en Fremont, California, donde los mismos trabajadores, en otro sistema, en NUMMI, hicieron uno de los mejores trabajos del país.",
+  "card": "Tomás falls behind the team after the reports move. Helena finds the causes with him, clears the way, and gives it time.",
+  "card_es": "Tomás se queda atrás del equipo tras el cambio. Helena busca las causas con él, despeja el camino y le da tiempo.",
+  "chapters_es": {
+    "nummi": "Las mismas personas, de otra manera",
+    "behind": "Atrás del equipo",
+    "cause": "Buscar la causa",
+    "gap": "Contra el propio cambio del equipo",
+    "time": "Darle tiempo",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Fremont, 1982 to 1986: the same people, another way",
+    "A car plant with one of the worst names in the country closed, and many blamed its workers. Reopened as NUMMI with mostly the same people, small teams and a cord anyone could pull for help, it soon built cars about as good as Toyota's in Japan."
+  ],
+  "past_es": [
+    "Fremont, de 1982 a 1986: las mismas personas, de otra manera",
+    "Una planta de autos con una de las peores famas del país cerró, y muchos culparon a sus trabajadores. Reabierta como NUMMI con casi las mismas personas, equipos pequeños y un cordón del que cualquiera podía tirar para pedir ayuda, pronto hizo autos casi tan buenos como los de Toyota en Japón."
+  ],
+  "next_h": "You've seen the harder case. Next: the everyday one, with goals people help set, feedback about the work, and a next step.",
+  "next_h_es": "Viste el caso más difícil. Después: el de cada día, con objetivos que la persona ayuda a fijar, comentarios sobre el trabajo y un siguiente paso.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "NUMMI, This American Life",
+        "title_es": "NUMMI, This American Life (en inglés)",
+        "line": "The radio story of the Fremont plant: the workers, the managers, the trip to Japan and the cord.",
+        "line_es": "La historia radial de la planta de Fremont: los trabajadores, los gerentes, el viaje a Japón y el cordón.",
+        "href": "https://www.thisamericanlife.org/403/nummi",
+        "href_es": "https://www.thisamericanlife.org/403/nummi"
+      },
+      {
+        "title": "How to change a culture: lessons from NUMMI",
+        "title_es": "Cómo cambiar una cultura: lecciones de NUMMI (en inglés)",
+        "line": "John Shook, who helped start NUMMI, on why changing what people do came before changing what they thought.",
+        "line_es": "John Shook, que ayudó a poner en marcha NUMMI, sobre por qué cambiar lo que la gente hace vino antes que cambiar lo que pensaba.",
+        "href": "https://sloanreview.mit.edu/article/how-to-change-a-culture-lessons-from-nummi/",
+        "href_es": "https://sloanreview.mit.edu/article/how-to-change-a-culture-lessons-from-nummi/"
+      },
+      {
+        "title": "NUMMI",
+        "title_es": "NUMMI",
+        "line": "The plant's history, from General Motors' Fremont Assembly to the joint venture with Toyota.",
+        "line_es": "La historia de la planta, desde la fábrica de General Motors en Fremont hasta la empresa conjunta con Toyota.",
+        "href": "https://en.wikipedia.org/wiki/NUMMI",
+        "href_es": "https://es.wikipedia.org/wiki/NUMMI"
+      },
+      {
+        "title": "Psychological safety",
+        "title_es": "Seguridad psicológica (en inglés)",
+        "line": "Amy Edmondson's idea: people speak up about problems when they believe it's safe to, and a team's leader shapes that belief.",
+        "line_es": "La idea de Amy Edmondson: la gente habla de los problemas cuando cree que es seguro hacerlo, y quien lidera el equipo moldea esa creencia.",
+        "href": "https://en.wikipedia.org/wiki/Psychological_safety",
+        "href_es": "https://en.wikipedia.org/wiki/Psychological_safety"
+      }
+    ],
+    "more": [
+      {
+        "text": "Robert Mager and Peter Pipe, Analyzing Performance Problems (1970), and Thomas Gilbert, Human Competence (1978): the two old books, in libraries and bookshops",
+        "text_es": "Robert Mager y Peter Pipe, Analyzing Performance Problems (1970), y Thomas Gilbert, Human Competence (1978): los dos libros antiguos, en bibliotecas y librerías (en inglés)",
+        "href": "https://en.wikipedia.org/wiki/Thomas_F._Gilbert",
+        "href_es": "https://en.wikipedia.org/wiki/Thomas_F._Gilbert"
+      }
+    ]
+  }
+}

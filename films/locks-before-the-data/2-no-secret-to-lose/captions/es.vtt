@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:04.210
+Londres, 2 de mayo de 1990.
+
+00:00:05.510 --> 00:00:08.302
+En la City, los mercados de dinero aún funcionan con papel.
+
+00:00:09.602 --> 00:00:16.828
+Las letras del Tesoro y los certificados de depósito son promesas de pagar una suma fija en un día fijo: del gobierno, y de los bancos.
+
+00:00:18.328 --> 00:00:24.196
+Cuando un banco le vende uno a otro, un mensajero lo lleva a pie por la City, y vuelve con el pago.
+
+00:00:25.696 --> 00:00:29.855
+Mucho de ese papel es al portador: quien lo tenga puede cobrarlo.
+
+00:00:31.555 --> 00:00:37.426
+Esa mañana, en una calle tranquila cerca del Banco de Inglaterra, un hombre con un cuchillo le quita el maletín a un mensajero.
+
+00:00:39.326 --> 00:00:45.381
+Dentro hay 301 letras y certificados, por 292 millones de libras.
+
+00:00:47.081 --> 00:00:49.894
+Para quien los tenga ahora, valen lo mismo que el efectivo.
+
+00:00:51.194 --> 00:00:55.183
+Si alguien los cobra antes de que se sepa del robo, el dinero se pierde.
+
+00:00:56.483 --> 00:00:59.894
+Y cada mensajero de la City carga con ese riesgo, cada día.
+
+00:01:01.594 --> 00:01:03.034
+Algo tiene que cambiar.
+
+00:01:05.134 --> 00:01:09.408
+El Banco de Inglaterra prepara una respuesta desde 1988.
+
+00:01:10.508 --> 00:01:15.674
+El 1 de octubre de 1990, abre la Central Moneymarkets Office.
+
+00:01:17.174 --> 00:01:20.326
+El papel entra en una bóveda del Banco, y se queda allí.
+
+00:01:22.026 --> 00:01:24.731
+Quién es dueño de cada uno consta en los registros del Banco.
+
+00:01:26.231 --> 00:01:29.718
+Una venta cambia el registro, cuando las dos partes la han aprobado.
+
+00:01:31.618 --> 00:01:34.601
+Desde el primer día, están dentro cuarenta y cuatro bancos y empresas.
+
+00:01:36.101 --> 00:01:43.015
+El Banco dice por qué: para evitar el riesgo y el costo de mover papel por la City, como había mostrado el robo de mayo.
+
+00:01:44.715 --> 00:01:48.754
+El papel guardado en el Banco no sale a la calle, y ningún mensajero lo lleva.
+
+00:01:50.454 --> 00:01:56.718
+Una contraseña, un token o una clave también son papel al portador: ante lo que abren, quien los tenga eres tú.
+
+00:01:58.418 --> 00:02:01.682
+En la universidad, un proceso nocturno todavía lleva uno.
+
+00:02:02.982 --> 00:02:09.225
+Como los registros del Banco, la plataforma puede saber quién es el proceso, para que nadie tenga que llevar ningún secreto.
+
+00:02:16.525 --> 00:02:22.605
+Cada noche a las dos, un proceso carga los datos del registro en la plataforma de datos de la universidad.
+
+00:02:24.305 --> 00:02:30.427
+Sam Okafor, que lleva la plataforma, le ha dado una identidad propia: registrar-loader.
+
+00:02:32.127 --> 00:02:36.056
+Pero todavía entra a la manera antigua, con el token personal de Jun Park.
+
+00:02:37.556 --> 00:02:43.978
+Jun lo creó el 14 de marzo de 2024, para poner en marcha el proceso, y no tiene fecha de fin.
+
+00:02:45.878 --> 00:02:48.894
+Para la plataforma, quien tenga ese token es Jun.
+
+00:02:50.594 --> 00:02:56.214
+Puede leer lo que Jun puede leer, desde cualquier lugar, a cualquier hora, mientras nadie lo note.
+
+00:02:58.314 --> 00:02:59.946
+Y no está en un solo lugar.
+
+00:03:01.046 --> 00:03:06.625
+Sam lo encuentra en la configuración del proceso, en un notebook viejo, y en un archivo en la laptop de Jun.
+
+00:03:08.925 --> 00:03:13.247
+Cada copia funciona tan bien como la primera, y nadie puede decir cuántas hay.
+
+00:03:15.347 --> 00:03:20.946
+Cuando Jun pase a otro equipo, el proceso se detendrá, o seguirá con lo que Jun pueda hacer allí.
+
+00:03:23.046 --> 00:03:29.361
+Nadie hizo nada mal: era la forma más rápida de empezar, y ha funcionado durante más de dos años y medio.
+
+00:03:31.461 --> 00:03:34.995
+Pero cada noche, el proceso lleva papel al portador por las calles.
+
+00:03:38.095 --> 00:03:41.032
+Para entrar, el proceso tiene que probar que es el proceso.
+
+00:03:42.532 --> 00:03:49.039
+Sam ordena las formas de hacerlo, de peor a mejor, con una pregunta: ¿quién guarda un secreto, y por cuánto tiempo?
+
+00:03:51.139 --> 00:03:54.934
+Abajo del todo, el token de una persona, o la contraseña de una cuenta compartida.
+
+00:03:56.834 --> 00:04:00.135
+El proceso actúa como otra persona, con todo lo que ella puede hacer.
+
+00:04:02.235 --> 00:04:04.366
+Un peldaño más arriba, un token propio del proceso.
+
+00:04:06.266 --> 00:04:10.636
+Ahora solo con sus propios permisos, pero aún papel al portador, a menudo sin fecha de fin.
+
+00:04:12.736 --> 00:04:18.591
+Luego, un secreto en una bóveda, que el proceso lee al arrancar, y que una máquina cambia cada mes.
+
+00:04:20.491 --> 00:04:24.001
+Nadie lo escribe, pero mientras es válido, una copia sigue funcionando.
+
+00:04:26.101 --> 00:04:29.353
+Luego, un certificado: una clave que el proceso guarda, y nunca envía.
+
+00:04:31.253 --> 00:04:35.568
+Prueba quién es firmando, así que la clave misma nunca viaja por la red.
+
+00:04:37.668 --> 00:04:41.553
+Pero la clave sigue guardada en algún sitio, y hay que renovarla antes de que venza.
+
+00:04:43.653 --> 00:04:46.283
+Cerca de la cima, una nota del lugar donde corre el proceso.
+
+00:04:48.183 --> 00:04:55.184
+Ese lugar firma una nota breve, este proceso, desde aquí, ahora, y la plataforma, que confía en el firmante, lo deja entrar esa vez.
+
+00:04:57.484 --> 00:05:00.539
+En la cima, una identidad que la plataforma le da al proceso.
+
+00:05:02.439 --> 00:05:08.870
+El proceso corre en las máquinas de la propia plataforma, así que la plataforma sabe qué proceso es, y responde por él.
+
+00:05:10.970 --> 00:05:18.779
+En estos dos peldaños aún hay pases, pero la plataforma crea uno nuevo en cada ejecución, nadie lo ve, y vence antes de una hora.
+
+00:05:21.079 --> 00:05:25.128
+Esa es la meta: nadie crea, guarda, copia ni cambia un secreto.
+
+00:05:29.228 --> 00:05:31.041
+Sam sube el proceso nocturno.
+
+00:05:32.541 --> 00:05:37.732
+En la plataforma, ahora corre como registrar-loader, y la plataforma responde por él.
+
+00:05:39.632 --> 00:05:44.666
+Sus permisos son los del rol de carga, decididos cuando recibió su nombre, antes de entrar por primera vez.
+
+00:05:46.366 --> 00:05:53.437
+Su código llega a la plataforma desde el servicio de compilación, que firma una nota en cada ejecución: tampoco allí se guarda un secreto.
+
+00:05:55.537 --> 00:05:57.185
+Luego Jun anula su token.
+
+00:05:58.885 --> 00:06:03.246
+Las copias en la configuración, el notebook y la laptop ya son papel sin valor.
+
+00:06:05.346 --> 00:06:07.579
+Sam se pregunta qué encontraría un ladrón esta noche.
+
+00:06:09.079 --> 00:06:14.131
+Antes: el token de Jun, todo lo que Jun puede leer, desde cualquier lugar, sin fecha de fin.
+
+00:06:16.231 --> 00:06:21.439
+Ahora: un pase con los permisos de un solo proceso, que nadie guardó, y que vence antes de una hora.
+
+00:06:23.539 --> 00:06:27.538
+Y cuando Jun cambie de equipo, nada se rompe: el proceso nunca fue suyo.
+
+00:06:29.438 --> 00:06:35.293
+Donde un sistema aún no puede subir, como uno que solo acepta una contraseña, la contraseña va a una bóveda.
+
+00:06:36.993 --> 00:06:41.094
+Una máquina la cambia, y la excepción queda por escrito, con su responsable.
+
+00:06:42.994 --> 00:06:44.831
+Cada proceso nuevo empieza en la cima.
+
+00:06:46.931 --> 00:06:50.046
+Las personas también entran, y su escalera es muy parecida.
+
+00:06:51.746 --> 00:06:58.844
+Abajo del todo, una cuenta compartida: nadie sabe quién hizo qué, y nadie puede irse sin cambiarla para todos.
+
+00:07:00.944 --> 00:07:06.178
+Una contraseña sola se puede adivinar, reusar en otros sitios, o escribir en una página falsa.
+
+00:07:08.278 --> 00:07:15.797
+Un código por SMS es mejor, pero un número se puede pasar al teléfono de un ladrón, y el código también se escribe en una página falsa.
+
+00:07:17.897 --> 00:07:24.966
+Una app en tu propio teléfono es más difícil de robar, pero una página falsa convincente aún puede pasar tu código, o lograr tu sí.
+
+00:07:27.066 --> 00:07:30.307
+En la cima, una llave de acceso, o una llave de seguridad que conectas.
+
+00:07:32.207 --> 00:07:34.133
+Es una clave que se queda en tu dispositivo.
+
+00:07:35.833 --> 00:07:41.094
+La desbloqueas con tu cara, tu huella o un PIN, y esos tampoco salen nunca de él.
+
+00:07:42.994 --> 00:07:46.630
+Solo responde al sitio real, así que una página falsa no obtiene nada.
+
+00:07:48.730 --> 00:07:53.063
+Y la plataforma guarda solo la mitad que corresponde, que por sí sola no abre nada.
+
+00:07:54.963 --> 00:07:57.324
+Nada que recordar, y nada que escribir.
+
+00:07:59.024 --> 00:08:07.006
+En la universidad, todos entran una vez, con una llave de acceso: Sam, Jun, y Mei Tanaka, dueña de los datos del registro.
+
+00:08:09.106 --> 00:08:14.853
+Los agentes también suben la escalera de los procesos: cada uno entra como sí mismo, nunca con el token de una persona.
+
+00:08:18.953 --> 00:08:25.023
+En 1990, el papel de la City dejó de viajar, porque el Banco llevaba el registro de quién era dueño de qué.
+
+00:08:26.723 --> 00:08:31.310
+El proceso nocturno dejó de llevar un secreto, porque la plataforma sabe quién es.
+
+00:08:33.010 --> 00:08:38.540
+No hay nada que filtrar, nada que cambiar por calendario, y nada que se rompa cuando alguien se va.
+
+00:08:40.440 --> 00:08:42.948
+El mejor secreto es el que nadie guarda.

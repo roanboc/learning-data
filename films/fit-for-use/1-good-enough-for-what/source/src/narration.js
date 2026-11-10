@@ -57,8 +57,8 @@ const NARR={
  {"id":"owner","gap":0.8,"text":"And Mei owns every level, because she answers for the list."},
  {"id":"films","gap":0.8,"text":"How a check warns or stops, and whom it tells, is set in advance too: Rules that run and Too good to be true show how."}]},
 "written":{"name":"Written beside the data","lead":1.2,"tail":1.0,"vo":[
- {"id":"contract","gap":0.8,"text":"Jun wrote it all down beside the data, in the list's data contract."},
- {"id":"rule","gap":0.8,"text":"Each use is a quality rule, in the open standard's own words: its dimension, its level, who agreed it, and what a failure costs."},
+ {"id":"contract","gap":0.8,"text":"Jun wrote it all down beside the data, in the file that describes the list."},
+ {"id":"rule","gap":0.8,"text":"Each use is a quality rule, written in words: its dimension, its level, who agreed it, and what a failure costs."},
  {"id":"critical","gap":0.8,"text":"The columns each use can't do without are marked as critical data."},
  {"id":"dbt","gap":0.8,"text":"In dbt, every check on the list names its dimension and its owner."},
  {"id":"tag","gap":0.8,"text":"And on Databricks, each critical column carries a governed tag, so whoever finds the table sees what its uses depend on."},

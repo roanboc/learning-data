@@ -92,7 +92,7 @@ Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · 
 
 Source: [films/documents-as-data](../films/documents-as-data/) · Portal: `/documents-as-data/`
 
-No film source yet.
+- [Files as data and as context](../films/documents-as-data/1-files-as-data-and-context/) — `files-as-data-and-context`
 
 ## Analytics engineering
 
@@ -270,6 +270,7 @@ Module: `data-protection` · [metadata](data-protection/module.json)
 Source: [films/locks-before-the-data](../films/locks-before-the-data/) · Portal: `/locks-before-the-data/`
 
 - [Who is it, really?](../films/locks-before-the-data/1-who-is-it-really/) — `who-is-it-really`
+- [No secret to lose](../films/locks-before-the-data/2-no-secret-to-lose/) — `no-secret-to-lose`
 
 ### Only what you may see
 
@@ -361,7 +362,7 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
 
 ## Data management
 

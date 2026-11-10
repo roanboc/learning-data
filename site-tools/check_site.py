@@ -27,8 +27,8 @@ What it checks, page by page (every .html under site/):
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
 - page intros: every film's site.json keeps its topic label (kicker) to 32 characters, its title (h1) to 75 and its intro (lead)
   to 300, in English and Spanish: on a laptop, one line, three lines and four lines at most, as on Day one.
-- release status: no film's voice, captions, page text or Pause and think says a feature is in preview, in beta or generally
-  available, in English or Spanish; it changes, and the film would have to change with it (tools/check.py looks on screen).
+- release status: no film's voice, captions, page text, Pause and think, labs or scenarios says a feature is in preview, in beta
+  or generally available, in English or Spanish; it changes, and the film would have to change with it (tools/check.py looks on screen).
 - Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
   longer than the longest wrong one, and clearly the longest in at most half a pack's questions), right answers spread across the options,
   and each Spanish pack's right answers and near misses in the English places.
@@ -1043,7 +1043,7 @@ def main():
         s["notes"].append("say who, what goes wrong and what is done, in the film's own world; the opening story and the details belong in the film")
     s["notes"].append(f"{len(intros)} films' page text, in English and Spanish")
 
-    s = rep.check("Release status: no film says a feature is in preview, in beta or generally available, in its voice, captions, page or Pause and think")
+    s = rep.check("Release status: no film says a feature is in preview, in beta or generally available, in its voice, captions, page, Pause and think, labs or scenarios")
     says = lambda f, where, t: [f"{f.relative_to(ROOT)}{where}: \"{w}\" in \"{near}\"" for w, near in release_status(plain_words(t))]
     made = lambda f: "/build/" in f.as_posix() or "/dist/" in f.as_posix()
     st_voices = [f for f in sorted(ROOT.glob("films/**/source/src/narration.js")) if not made(f)]
@@ -1059,7 +1059,8 @@ def main():
         for where, t in json_strings(json.loads(f.read_text(encoding="utf-8"))):
             s["fails"] += says(f, f" {where}", t)
     st_packs = sorted(ROOT.glob("site/assets/**/think.*.js"))
-    for f in st_packs:
+    st_learn = sorted(ROOT.glob("site/assets/**/learn.*.js"))  # labs and scenarios: their notes too ("In the film vs in real life")
+    for f in st_packs + st_learn:
         src = f.read_text(encoding="utf-8")
         for a, b in reversed(js_comment_spans(src)):
             src = src[:a] + re.sub(r"[^\n]", " ", src[a:b]) + src[b:]  # blank, keeping its lines
@@ -1068,7 +1069,8 @@ def main():
     if s["fails"]:
         s["notes"].append("say what the feature does, and keep its release status, with its date, in the script's sources: it changes, "
                           "and the film would have to change with it")
-    s["notes"].append(f"{len(st_voices)} films' voices, {len(st_caps)} caption files, {len(st_pages)} films' page text and {len(st_packs)} Pause and think packs")
+    s["notes"].append(f"{len(st_voices)} films' voices, {len(st_caps)} caption files, {len(st_pages)} films' page text, {len(st_packs)} Pause and think packs "
+                      f"and {len(st_learn)} lab and scenario packs")
     s = rep.check("Pause and think: one right answer and one near miss per question, options of like length, right answers spread")
     places, packs = Counter(), 0
     for en_path in sorted(WEB.glob("assets/*/think.en.js")):

@@ -1,0 +1,52 @@
+{
+  "key": "draft-and-decision",
+  "title": "The draft and the decision",
+  "sub": "The second film of The new skills, the first series of Leading data people: working with an agent. Let the agent draft; you frame, check and decide. A new analyst's agent drafts a model of room use in a minute, tidy, tested and wrong about one word, and she catches it by reading what it assumed and checking it against what she knows is true.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: violet is only the agent and its drafts, blue is plans and design (Graham's question, the glossary's word, and the three things Ivy gives the agent), orange is data, green is something done or approved, and amber a risk (the line the agent assumed, and the booked hours nobody came to).",
+  "src": [
+    "dd_marks.js",
+    "dd_chess.js",
+    "dd_uni.js",
+    "dd_scenes.js"
+  ],
+  "poster": [
+    "assumed",
+    "line",
+    2.4
+  ],
+  "say": [
+    [
+      "\\bKasparov\\b",
+      "Kasparoff"
+    ],
+    [
+      "\\bTopalov\\b",
+      "Topaloff"
+    ],
+    [
+      "\\bLeón\\b",
+      "Leh-ohn"
+    ],
+    [
+      "\\btimetabling\\b",
+      "time tabling"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "chess"
+  ],
+  "urgent": [],
+  "logos": true
+}

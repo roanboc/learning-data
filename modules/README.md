@@ -348,6 +348,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
+- [The draft and the decision](../films/the-new-skills/2-draft-and-decision/) — `draft-and-decision`
 
 ### Working with people
 
@@ -367,6 +368,7 @@ No film source yet.
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
 - [Owning the outcome](../films/ownership-and-performance/1-owning-the-outcome/) — `owning-the-outcome`
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 
 ## Data management
 
@@ -378,6 +380,7 @@ Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal
 
 - [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 - [Listen first](../films/a-plan-in-ninety-days/2-listen-first/) — `listen-first`
+- [Design it simple](../films/a-plan-in-ninety-days/3-design-it-simple/) — `design-it-simple`
 - [From gaps to a roadmap](../films/a-plan-in-ninety-days/4-from-gaps-to-a-roadmap/) — `from-gaps-to-a-roadmap`
 
 ### Making the case

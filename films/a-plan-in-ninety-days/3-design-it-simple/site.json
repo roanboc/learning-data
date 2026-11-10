@@ -1,0 +1,63 @@
+{
+  "kicker": "Define the target state",
+  "kicker_es": "Definir la situación deseada",
+  "title_es": "Diseñarlo simple",
+  "h1": "Design it simple: start from the decision, and design the fewest parts",
+  "h1_es": "Diseñarlo simple: parte de la decisión y diseña las menos piezas",
+  "lead": "In March 2027 Helena Novak and her team design the target state: five principles, each with what it rules out; the target in five layers; a small team in the middle with seven data partners around it; six procedures of a page each, tried by one partner first; and one front door.",
+  "lead_es": "En marzo de 2027, Helena Novak y su equipo diseñan la situación deseada: cinco principios, cada uno con lo que descarta; la situación en cinco capas; un equipo pequeño con siete referentes alrededor; seis procedimientos de una página, que un referente prueba primero; y una puerta de entrada.",
+  "description": "A film about designing the target state, the third of A plan in ninety days and of the module Data management: start from the decision, and design the fewest parts that serve it, for the business, the solutions and the data together; principles that can be tested, as Why it moves draws them, data mesh's domain ownership and federated governance (Zhamak Dehghani, 2022) and Piethein Strengholt's Data Management at Scale (2020), named once; in March 2027 Helena Novak, the university's data manager, and the team write five principles, each with what it rules out (start from the decision; one copy, governed once; owners in the business, builders beside them; simple before clever; measure what people use, not how busy the team is), and settle two choices by them, a tool of the faculties' own and a copy of the staff list for each faculty; with Noor, the data architect, she draws the target on Noor's map in the same five layers as the current state, strategy, business, information, application and technology, each a page with its picture: the same four goals and twelve decisions, one governed copy of each thing with an owner in the business, one staff list, not three, and one platform for data and reports, with its catalog and agents that each have a written mandate, the old warehouse gone; in place of today's worst of two designs, one queue of 41 working days at the centre and private copies at the edges, she designs the way between: a small team in the middle that keeps the platform, the standards, the shared products and the guardrails, and helps, and seven data partners in four faculties and three offices, about a day a week each, given by their dean or director; a head of school writes back that partners take people away from teaching, and the design answers it: about 40 people already do data work part of their week, in spreadsheets; six procedures, ask, choose, build, release, fix and retire, each a page with its picture, naming who asks, who decides, who builds and who checks, and one front door, one form with five questions, to open on Monday 7 June; Anil, in the Faculty of Health, tries the build page on Health's report of casual teaching hours, from the one staff list, and his change waits four working days at step four, so step four now names one reviewer from a rota, within two working days, never the person who built it; and on Monday 5 April the define milestone. It builds on Why it moves and Who does it, and where meaning changes, A capability, not a project, A product with an owner and The same one, everywhere. It opens in Korea in the 1440s, where King Sejong made 28 letters anyone could learn in a morning, and argued for them.",
+  "description_es": "Una película sobre el diseño de la situación deseada, la tercera de Un plan en noventa días y del módulo Gestión de datos: parte de la decisión y diseña las menos piezas que le sirvan, para el negocio, las soluciones y los datos a la vez; principios que se pueden poner a prueba, como los dibuja Qué la mueve, la propiedad por dominios y la gobernanza federada del data mesh (Zhamak Dehghani, 2022) y Data Management at Scale de Piethein Strengholt (2020), nombrados una vez; en marzo de 2027, Helena Novak, la gestora de datos de la universidad, y el equipo escriben cinco principios, cada uno con lo que descarta (parte de la decisión; una copia, gobernada una vez; dueños en el negocio, constructores a su lado; simple antes que ingenioso; mide lo que la gente usa, no lo ocupado que está el equipo), y deciden con ellos dos elecciones, una herramienta propia para las facultades y una copia de la lista de personal para cada facultad; con Noor, la arquitecta de datos, dibuja la situación deseada en el mapa de Noor, en las mismas cinco capas que la situación actual, estrategia, negocio, información, aplicación y tecnología, cada una una página con su dibujo: los mismos cuatro objetivos y doce decisiones, una copia gobernada de cada cosa con un dueño en el negocio, una lista de personal, no tres, y una plataforma para datos y reportes, con su catálogo y agentes que tienen cada uno un mandato escrito, sin el antiguo almacén; en lugar del peor de dos diseños de hoy, una cola de 41 días hábiles en el centro y copias propias en los bordes, diseña el camino intermedio: un equipo pequeño en el centro que mantiene la plataforma, los estándares, los productos compartidos y las barreras de protección, y ayuda, y siete referentes de datos en cuatro facultades y tres oficinas, cerca de un día por semana cada uno, que les da su decano o director; un director de escuela responde que los referentes quitan gente a la docencia, y el diseño le contesta: unas 40 personas ya trabajan con datos parte de su semana, en hojas de cálculo; seis procedimientos, pedir, elegir, construir, liberar, arreglar y retirar, cada uno una página con su dibujo, que nombra quién pide, quién decide, quién construye y quién revisa, y una puerta de entrada, un formulario con cinco preguntas, que abre el lunes 7 de junio; Anil, de la Facultad de Salud, prueba la página de construir con el reporte de Salud de horas de docencia temporal, desde la única lista de personal, y su cambio espera cuatro días hábiles en el paso cuatro, así que el paso cuatro ahora nombra a un revisor por turnos, en dos días hábiles, nunca quien lo construyó; y el lunes 5 de abril, el hito de definición. Se apoya en Qué la mueve y Quién lo hace y dónde cambia el significado, Una capacidad, no un proyecto, Un producto con dueño y El mismo, en todas partes. Empieza en Corea en la década de 1440, donde el rey Sejong creó 28 letras que cualquiera podía aprender en una mañana, y las defendió.",
+  "card": "Five principles, a small team with seven partners, six procedures of a page each and one front door, tried by one partner first.",
+  "card_es": "Cinco principios, un equipo pequeño con siete referentes, seis procedimientos de una página y una puerta, probados antes por uno.",
+  "chapters_es": {
+    "letters": "Letras para todos",
+    "rules": "Cinco principios",
+    "target": "La situación deseada, en cinco capas",
+    "team": "Un equipo pequeño en el centro",
+    "pages": "Una página para cada uno",
+    "run": "Lo bastante simple para operarlo"
+  },
+  "past": [
+    "Korea, 1443 to 1446: letters for everyone",
+    "Most people couldn't write in Chinese characters, so in a court their words were set down in signs they couldn't read. King Sejong made 28 letters from a few shapes, argued for them, and in 1446 published them: learned in a morning, so people used them."
+  ],
+  "past_es": [
+    "Corea, de 1443 a 1446: letras para todos",
+    "La mayoría no sabía escribir en caracteres chinos, así que en un tribunal sus palabras quedaban en signos que no sabían leer. El rey Sejong creó 28 letras desde unas pocas formas, las defendió y en 1446 las publicó: se aprendían en una mañana, y la gente las usó."
+  ],
+  "next_h": "You've seen how to design the target. Next: the gaps between today and the target, turned into stages that each work on their own, and a roadmap.",
+  "next_h_es": "Viste cómo diseñar la situación deseada. Después: las brechas entre hoy y la situación deseada, en etapas que funcionan por sí solas, y una hoja de ruta.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Hunminjeongum manuscript",
+        "title_es": "El manuscrito del Hunminjeongum (en inglés)",
+        "line": "UNESCO's Memory of the World page for the book of 1446 that set out the letters, with the scholars' explanations and Jeong In-ji's postface.",
+        "line_es": "La página de Memoria del Mundo de la UNESCO sobre el libro de 1446 que presentó las letras, con las explicaciones de los eruditos y el epílogo de Jeong In-ji.",
+        "href": "https://www.unesco.org/en/memory-world/hunminjeongum-manuscript",
+        "href_es": "https://www.unesco.org/en/memory-world/hunminjeongum-manuscript"
+      },
+      {
+        "title": "Data Mesh Principles and Logical Architecture",
+        "title_es": "Principios y arquitectura lógica del data mesh (en inglés)",
+        "line": "Zhamak Dehghani's article of 2020: domain ownership, data as a product, a self-serve platform and federated governance.",
+        "line_es": "El artículo de Zhamak Dehghani de 2020: la propiedad por dominios, los datos como producto, una plataforma de autoservicio y la gobernanza federada.",
+        "href": "https://martinfowler.com/articles/data-mesh-principles.html",
+        "href_es": "https://martinfowler.com/articles/data-mesh-principles.html"
+      },
+      {
+        "title": "How to Move Beyond a Monolithic Data Lake to a Distributed Data Mesh",
+        "title_es": "Cómo ir más allá de un lago de datos monolítico hacia un data mesh distribuido (en inglés)",
+        "line": "Her first article, of 2019: why one central team becomes a queue, and how areas can own their own data.",
+        "line_es": "Su primer artículo, de 2019: por qué un solo equipo central se vuelve una cola, y cómo cada área puede ser dueña de sus datos.",
+        "href": "https://martinfowler.com/articles/data-monolith-to-mesh.html",
+        "href_es": "https://martinfowler.com/articles/data-monolith-to-mesh.html"
+      }
+    ]
+  }
+}

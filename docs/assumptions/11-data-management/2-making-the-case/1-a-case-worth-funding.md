@@ -1,8 +1,8 @@
 # A case worth funding: questions and assumptions
 
-*Data management* · *Making the case*, film 1 of 4 · open, PR #274 · [pull request](https://github.com/roanboc/learning-data/pull/274)
+*Data management* · *Making the case*, film 1 of 4 · merged, PR #274 · [pull request](https://github.com/roanboc/learning-data/pull/274)
 
-On the site once PR #274 merges: https://data.learn-all.org/making-the-case/a-case-worth-funding/
+[Watch it on the site](https://data.learn-all.org/making-the-case/a-case-worth-funding/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -30,6 +30,6 @@ Film 1 of 4 of *Making the case* (film 5 of *Data management*), made on 10 Novem
 | 18 | Chapter names in Spanish | *La Zanja de Clinton*, *Primero, la decisión*, *Tres opciones*, *Una vez, y cada año*, *Beneficios con dueño*, *Una página, una petición*, *El lunes*. The sixth isn't *Diez minutos…*: `check_site.py` reads "diez minutos" on a page as a film's length and fails it, so the page's Spanish description leaves the ten minutes out too (the captions keep them). Money as on screen (A$310,000). | Captions and page |
 | 19 | Pace in *Once, and every year* | 114 words a minute, under the guide's 120: its sums are said in words, which take longer than their digits. The film runs 7:54 at 120 words a minute, the voice 81% of the time. | Chapter 4 |
 | 20 | The map's camera | Its two push-ins were moved so that every name stays inside the frame and above the captions' band (*New York City* had sunk into the band behind a caption, and *Lake Erie* ran off the left edge), and *Lake Ontario*'s name moved left, clear of the "363 miles" tag. | Chapter 1 |
-| 21 | The README's topics | As the module's film to reach main before any other, this pull request adds the *Data management* row to the README's topics, last, worded so that later films add their series to that one row, and the *Leading data people* row, whose two series on main had none (as *Prototype first*'s pull request words it): twelve topics. | `README.md` |
+| 21 | The README's topics | *Every area, one job* (#253) and *Listen first* (#246) reached main first and made the README's one *Data management* row; this pull request adds *Making the case* to that row, and the *Leading data people* row, which main's README didn't have although three of its series have films there (as *Prototype first*'s pull request words it): twelve topics. | `README.md` |
 | 22 | Render, review page and audio release | Not made in the session (the film merge rule). `media.py index --film a-case-worth-funding-en` wrote `audio.json` for the release `audio-a-case-worth-funding-5a4ef9c8b05b0f2e8f3e`; the MP3 is committed beside it, and *Store audio outside Git* publishes and verifies the release once the change reaches main, so nobody runs it by hand. | The pull request |
 | 23 | Merge order | The series' opening film waits for no other: squash-merged with its own title and message on the latest main once its checks pass. *Risks, said out loud* (#272) follows it. | The pull request |

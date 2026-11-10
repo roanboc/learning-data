@@ -1,0 +1,93 @@
+{
+  "kicker": "Ownership",
+  "kicker_es": "Hacerse cargo",
+  "title_es": "Hacerse cargo del resultado",
+  "h1": "Owning the outcome: own what it's for, not only what you did",
+  "h1_es": "Hacerse cargo del resultado: de para qué sirve, no solo de lo que hiciste",
+  "lead": "From July 2027 Ivy Reyes owns the university's room data. One Monday the refresh runs on time and every check passes, but forty rooms' counts have dropped. She says so first, fixes what's hers, raises what isn't, and nobody is blamed.",
+  "lead_es": "Desde julio de 2027 Ivy Reyes es dueña de los datos de las aulas de la universidad. Un lunes la actualización corre a tiempo y todas las pruebas pasan, pero los conteos de cuarenta aulas bajaron. Ella avisa primero, arregla lo suyo, plantea lo demás, y no se culpa a nadie.",
+  "description": "A film about ownership, the first of Ownership and performance in the module Leading data people: owning a data product means answering for what it's for, not only for the job that runs it: know who uses it and for which decision, notice first, say so first, and fix it or raise it; one named owner, with the authority to match, where nobody is blamed; the data product owner of Zhamak Dehghani's data mesh, RACI's one A, for accountable, and Sidney Dekker's just culture, each named once, and A product with an owner named, not retold; Ivy Reyes, a data analyst, owns Teaching space use from Thursday 1 July 2027, counts per room per hour, never a person, that next year's timetable change will be judged on; on Monday 23 August the refresh runs at seven and every check passes, but since Facilities upgraded the sensors in forty rooms on Tuesday 17 August their counts have dropped to about a quarter; she tells the readers at ten past eight, before the fix; with Sam she finds the cause (four counts an hour where the model was built for one, and a step that kept the first), fixes what's hers (the hour's highest count, reviewed by Jun), raises what isn't (Facilities now tells the data team before a sensor changes), and adds a check that holds the refresh; nobody did anything wrong: what failed was the way the parts fit together. It opens in Kenya, where from 1977 the women of the Green Belt Movement were paid for each tree still alive months later, not for each seedling put in the ground.",
+  "description_es": "Una película sobre hacerse cargo, la primera de Responsabilidad y desempeño en el módulo Liderar equipos de datos: ser dueña de un producto de datos es responder por aquello para lo que sirve, no solo por el proceso que lo corre: saber quién lo usa y para qué decisión, notarlo primero, decirlo primero, y arreglarlo o plantearlo; una sola dueña con nombre, con la autoridad que va con eso, donde nadie es culpado; la dueña del producto de datos de la malla de datos de Zhamak Dehghani, la única A de RACI, quien rinde cuentas, y la cultura justa de Sidney Dekker, nombradas una vez, y Un producto con dueño, nombrada sin repetirla; Ivy Reyes, analista de datos, es dueña de Uso de los espacios docentes desde el jueves 1 de julio de 2027, conteos por aula y por hora, nunca una persona, con los que se juzgará el cambio de horario del próximo año; el lunes 23 de agosto la actualización corre a las siete y todas las pruebas pasan, pero desde que Instalaciones mejoró los sensores de cuarenta aulas el martes 17 de agosto, sus conteos bajaron a cerca de una cuarta parte; ella avisa a los lectores a las ocho y diez, antes de arreglarlo; con Sam encuentra la causa (cuatro conteos por hora donde el modelo se hizo para uno, y un paso que guardaba el primero), arregla lo suyo (el conteo más alto de la hora, revisado por Jun), plantea lo que no lo es (Instalaciones ahora avisa al equipo de datos antes de cambiar un sensor), y agrega una prueba que detiene la actualización; nadie hizo nada mal: lo que falló fue cómo encajaban las partes. Empieza en Kenia, donde desde 1977 a las mujeres del Movimiento Cinturón Verde se les pagaba por cada árbol aún vivo meses después, no por cada plántula sembrada.",
+  "card": "Every check passes, but forty rooms' counts look wrong. Ivy, who owns the data, says so first, fixes what's hers and raises what isn't.",
+  "card_es": "Todas las pruebas pasan, pero los conteos de cuarenta aulas se ven mal. Ivy, dueña de los datos, avisa primero, arregla lo suyo y plantea lo demás.",
+  "chapters_es": {
+    "trees": "Árboles aún en pie",
+    "owns": "Lo que tiene a su cargo",
+    "monday": "Un lunes que parecía bien",
+    "fix": "Arreglarlo, o plantearlo",
+    "blame": "Nadie a quien culpar",
+    "close": "El lunes"
+  },
+  "past": [
+    "Kenya, from 1977: trees still standing",
+    "With the forests cleared, rural women's streams were drying up and their firewood was further away each year. In the Green Belt Movement they grew and planted trees, and were paid for each one still alive months later: they answered for living trees, not for the planting."
+  ],
+  "past_es": [
+    "Kenia, desde 1977: árboles aún en pie",
+    "Con los bosques talados, los arroyos de las mujeres rurales se secaban y la leña quedaba cada año más lejos. En el Movimiento Cinturón Verde criaron y plantaron árboles, y se les pagaba por cada uno aún vivo meses después: respondían por árboles vivos, no por la siembra."
+  ],
+  "next_h": "You've seen what owning an outcome asks of one person. Next: how a team can tell its work is getting better, by measuring the work, not the people.",
+  "next_h_es": "Viste lo que hacerse cargo de un resultado le pide a una persona. Después: cómo un equipo sabe si su trabajo mejora, midiendo el trabajo, no a las personas.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The Green Belt Movement's history",
+        "title_es": "La historia del Movimiento Cinturón Verde (en inglés)",
+        "line": "The movement's own account of how it began in 1977, from what rural women in Kenya needed, and of what it has done since.",
+        "line_es": "El relato del propio movimiento sobre cómo empezó en 1977, a partir de lo que necesitaban las mujeres rurales de Kenia, y lo que ha hecho desde entonces.",
+        "href": "https://www.greenbeltmovement.org/history/",
+        "href_es": "https://www.greenbeltmovement.org/history/"
+      },
+      {
+        "title": "Wangarĩ Maathai",
+        "title_es": "Wangari Maathai",
+        "line": "The biologist who started the Green Belt Movement, and in 2004 the first African woman to win the Nobel Peace Prize.",
+        "line_es": "La bióloga que fundó el Movimiento Cinturón Verde y, en 2004, la primera mujer africana en ganar el Premio Nobel de la Paz.",
+        "href": "https://en.wikipedia.org/wiki/Wangar%C4%A9_Maathai",
+        "href_es": "https://es.wikipedia.org/wiki/Wangari_Maathai"
+      },
+      {
+        "title": "Data mesh principles, by Zhamak Dehghani",
+        "title_es": "Los principios de la malla de datos, de Zhamak Dehghani (en inglés)",
+        "line": "Her four principles, among them ownership by the domain that knows the data, and data as a product, with a data product owner in each domain.",
+        "line_es": "Sus cuatro principios, entre ellos que los datos sean del dominio que los conoce, y los datos como producto, con una dueña o un dueño del producto de datos en cada dominio.",
+        "href": "https://martinfowler.com/articles/data-mesh-principles.html",
+        "href_es": "https://martinfowler.com/articles/data-mesh-principles.html"
+      },
+      {
+        "title": "Just culture",
+        "title_es": "Cultura justa",
+        "line": "When something goes wrong, ask what went wrong, not who caused it: how a just culture differs from both a culture of blame and one of no blame.",
+        "line_es": "Cuando algo sale mal, preguntar qué salió mal, no quién lo causó: en qué se distingue una cultura justa de la que culpa y de la que nunca pide cuentas.",
+        "href": "https://en.wikipedia.org/wiki/Just_culture",
+        "href_es": "https://es.wikipedia.org/wiki/Cultura_justa"
+      },
+      {
+        "title": "RACI, the responsibility assignment matrix",
+        "title_es": "RACI, la matriz de asignación de responsabilidades",
+        "line": "Who does the work, who answers for it, who is asked and who is told, and why many teams keep to one accountable person for each piece of work.",
+        "line_es": "Quién hace el trabajo, quién rinde cuentas, a quién se consulta y a quién se informa, y por qué muchos equipos tienen una sola persona que rinde cuentas por cada trabajo.",
+        "href": "https://en.wikipedia.org/wiki/Responsibility_assignment_matrix",
+        "href_es": "https://es.wikipedia.org/wiki/Matriz_de_asignaci%C3%B3n_de_responsabilidades"
+      }
+    ],
+    "more": [
+      {
+        "text": "Sidney Dekker's page for his book Just Culture, on how to respond when something goes wrong",
+        "text_es": "La página de Sidney Dekker sobre su libro Just Culture, sobre cómo responder cuando algo sale mal (en inglés)",
+        "href": "https://sidneydekker.com/just-culture/",
+        "href_es": "https://sidneydekker.com/just-culture/"
+      },
+      {
+        "text": "The Green Belt Movement, on Wikipedia",
+        "text_es": "El Movimiento Cinturón Verde, en Wikipedia",
+        "href": "https://en.wikipedia.org/wiki/Green_Belt_Movement",
+        "href_es": "https://es.wikipedia.org/wiki/Movimiento_Cintur%C3%B3n_Verde"
+      }
+    ]
+  }
+}

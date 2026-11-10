@@ -1,0 +1,1 @@
+*Ownership and performance*, the last series of the module Leading data people, on owning an outcome, measuring the work together, helping someone who falls behind and growing people, four films: {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

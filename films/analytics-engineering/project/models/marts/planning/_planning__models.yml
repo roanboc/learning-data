@@ -82,7 +82,7 @@ models:
         description: '{{ doc("faculty_code") }}'
         data_type: string
         constraints: [{type: not_null}]
-        config: {meta: {personal_data: none}}
+        config: {meta: {personal_data: none, faculty: true}}
       - name: faculty_name
         description: '{{ doc("faculty_name") }}'
         data_type: string

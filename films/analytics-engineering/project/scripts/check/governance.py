@@ -10,7 +10,7 @@ Five rules, each a line of the university's data governance policy that runs on 
    has no term for it (no_glossary_term:, with who confirmed it and when). Every public model names
    the entity it holds (meta.glossary_term).
 3. **Classified columns.** Every column of a public model or mart says whether it identifies a
-   person: meta.personal_data is direct, pseudonymous or none.
+   person: meta.personal_data is special, direct, pseudonymous, indirect or none (DEC-PRJ-17).
 4. **Tests with an owner and a dimension.** Every test on the data has meta.owner (by folder, in
    dbt_project.yml, or its own) and meta.dimension, one of DAMA's six (tests/generic/builtin.sql).
    Tests in tests/governance/ check the project, not the data, so they need an owner only.
@@ -43,7 +43,7 @@ MANIFEST = ROOT / "target" / "manifest.json"
 MAP = ROOT / "models" / "_shared" / "_shared__conceptual.yml"
 DOMAINS = sorted((ROOT / "models" / "core").glob("*/_*__conceptual.yml"))
 CONSUMERS = sorted((ROOT / "models" / "marts").glob("*/_*__conceptual.yml"))
-CLASSES = {"direct", "pseudonymous", "none"}
+CLASSES = {"special", "direct", "pseudonymous", "indirect", "none"}
 DIMENSIONS = {"completeness", "uniqueness", "validity", "consistency", "accuracy", "timeliness"}
 HOWTO = {"owner": "docs/how-to/add-an-owner.md", "glossary": "docs/how-to/name-the-glossary-term.md",
          "columns": "docs/how-to/classify-a-column.md", "tests": "docs/how-to/give-a-test-an-owner.md",
@@ -148,7 +148,7 @@ def main():
                 else:
                     says = f"meta.personal_data {value!r}" if value else "no meta.personal_data"
                     problems.append(f"columns: {where}: {column['name']} has {says}: say whether it identifies "
-                                    f"a person, with direct, pseudonymous or none ({how('columns')})")
+                                    f"a person, with special, direct, pseudonymous, indirect or none ({how('columns')})")
 
                 # 5. Described columns.
                 counts["described"][1] += 1

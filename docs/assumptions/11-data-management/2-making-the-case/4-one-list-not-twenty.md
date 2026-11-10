@@ -1,8 +1,8 @@
 # One list, not twenty: questions and assumptions
 
-*Data management* · *Making the case*, film 4 · open, PR #265 · [pull request](https://github.com/roanboc/learning-data/pull/265)
+*Data management* · *Making the case*, film 4 of 4 · merged, PR #265 · [pull request](https://github.com/roanboc/learning-data/pull/265)
 
-On the site once PR #265 merges: https://data.learn-all.org/making-the-case/one-list-not-twenty/
+[Watch it on the site](https://data.learn-all.org/making-the-case/one-list-not-twenty/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
@@ -26,7 +26,7 @@ Film 4 of 4 of *Making the case* (film 8 of *Data management*), made on 10 Novem
 | 14 | How are the opening's people and places drawn? | In the module's matte, sunlit language, never a likeness: Larrey in a dark brown coat with a white neckcloth, short hair, no hat, in a limewashed convent room (Speyer's wounded were cared for in a convent); the field seen from above as a plan, the wounded as marks on it, never bodies, and no blood; the flying ambulance drawn as a plate, a light two-wheeled carriage on springs (his own description, from his Italian campaign, 1797). No drums, bugles or marches. | Chapter 1 |
 | 15 | Chapter names in Spanish | *Ambulancias volantes*, *Once maneras de pedir*, *Una sola puerta de entrada*, *Ordenada a la vista*, *Seis a la vez*, *Ahora no, y cuándo*, *El lunes*. | Captions and page |
 | 16 | The score | A gittern (reserved 10 November in `../palettes.md`), its partner its own lowest course plucked with the thumb; B-flat major, G minor for the opening's problem. | `source/tools/score.py` |
-| 17 | Render, review page and audio release | Not made in the session (the film merge rule). The soundtrack follows main's audio rule of 10 November (#243): `media.py index --film one-list-not-twenty-en` writes `audio.json`, the MP3 is committed beside it, and *Store audio outside Git* publishes and verifies its release once the change reaches main, so nobody runs it by hand. | The pull request |
+| 17 | Render, review page and audio release | Not made in the session (the film merge rule). The soundtrack follows main's audio rule of 10 November (#243): `media.py index` writes `audio.json` for the release key `one-list-not-twenty-en`, the MP3 is committed beside it, and *Store audio outside Git* publishes and verifies its release once the change reaches main, so nobody runs it by hand. | The pull request |
 | 18 | Merge order | After *A case worth funding*, *Risks, said out loud* and *Everyone at the table* (films 5 to 7) are on main, as the brief says, rebased on the latest main and squash-merged with its own title and message. None of the three was on main or on a branch when this film was ready (10 November), so its pull request waits for them. | The pull request |
 | 19 | Two lines split in the voice | Two lines ran past the captions' 140 characters, so each became two: "Two inboxes, the tracker..." and "the old warehouse's own form..."; "Larrey heard of the same at Jena, in 1806." and "Soldiers who could walk...". The words are the same. | Chapter 2 |
 | 20 | Jena: "heard of" | Larrey wasn't at Jena (he was with the guard at Gera); he writes "what was reported to me", so the film says "heard of", not "saw". | Chapter 2 |

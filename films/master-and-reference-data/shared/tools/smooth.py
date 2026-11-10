@@ -31,7 +31,8 @@ CANVAS_LIMIT = 0.5    # new canvases a moment, on average: a film that makes one
 SLOW_PAINT = 0.05     # seconds: a kept picture this slow to paint is drawn as a picture by tools/publish.py (its SLOW_PAINT)
 STEP, WIDTH, SLOW_STEP, SLOW_WIDTH = 0.25, 1118, 2.0, 559
 EDGE_EVERY = 4        # every this many moments (once a second), the moment is drawn again with the spare canvases emptied
-EDGE_LIMIT = 0        # pixels that may differ between the two (none: the player's reuse must leave nothing behind)
+EDGE_LIMIT = 40       # pixels that may differ between the two: a line along a person is hundreds (about 2,000 in Where each piece
+                      # lives); a few pixels a shade apart, from rounding (3 in Who does what, end to end), are never seen
 
 # window.__RENDER__ stays false whatever the render page sets, so the film draws as the site's player draws it
 INIT = "Object.defineProperty(window,'__RENDER__',{get:()=>false,set:()=>{},configurable:false});"

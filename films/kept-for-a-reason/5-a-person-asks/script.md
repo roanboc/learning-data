@@ -236,12 +236,12 @@ The example project, `films/analytics-engineering/project/`. Everything this fil
 | The four marts, "only as a code" | `mart_wallet__learners`, `mart_wallet__credentials`, `mart_planning__near_award`, `mart_finance__tuition_forgone`: each holds her as `learner_key`, the sha-256 of `SIS|S-20436` (`macros/shared/keys.sql`), and none holds the number itself (checked on the DuckDB build, 5 November 2026: of the 29 models, 26 hold her, 20 by a number and 6 only by a code, all four marts among them) |
 | The tags on each column | `meta.personal_data` in each model's YAML, set as the tag `personal_data` by `macros/governance/personal_data.sql`; the module's five classes (*Know what you hold*) |
 | The search, by number and by code | New: `analyses/privacy/find_a_person.sql` (Databricks only, like `analyses/governance/`), run by `privacy-finder` for each table and column; and `analyses/privacy/where_a_person_is.sql`, the columns to search: tagged `direct` or `pseudonymous`, in tables downstream of her five systems' tables, from `system.access.table_lineage` and `information_schema.column_tags` |
-| `privacy.request_keys`, restricted | New: its columns (`request`, `system`, `key`) and who may read it, in `docs/databricks-governance.md`, section 12, *A person's request*; it isn't a dbt model (the privacy office's own table) |
+| `privacy.request_keys`, restricted | New: its columns (`request`, `system`, `key`) and who may read it, in `docs/databricks-governance.md`, section 13, *A person's request*, as section 12, *Deleted means deleted*, also says; it isn't a dbt model (the privacy office's own table) |
 | The list's table and its send log, `mart_hr__tutors_mailing_list` and `mart_hr__tutor_news_sent`, and the list's line `where wishes.answer = 'yes'` | *Deleted means deleted*'s, in the project's HR marts, as that film adds them |
 | The audit card | New: `analyses/privacy/who_read_the_keys.sql`, as `analyses/governance/who_read_a_table.sql` does |
 | "Requests and when they're due" | New: `analyses/privacy/requests_due.sql`, the office's tracking query over its log of requests |
 | The ticket | New: `examples/a-person-asks/issue.md` (the issue as the data team filed and closed it) and `examples/a-person-asks/privacy-request.yml` (the issue form that makes it: number, due date, asks, the five steps as a task list, and a warning to name no one) |
-| The steps, in one place | New: `docs/databricks-governance.md`, section 12, *A person's request*, with its sources at the end of the page's list |
+| The steps, in one place | New: `docs/databricks-governance.md`, section 13, *A person's request*, after *Deleted means deleted*'s section 12, with its sources at the end of the page's list |
 
 ## Rigour to check before recording
 

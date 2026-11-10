@@ -367,6 +367,7 @@ Source: [films/working-with-people](../films/working-with-people/) · Portal: `/
 
 Source: [films/leading-a-data-team](../films/leading-a-data-team/) · Portal: `/leading-a-data-team/`
 
+- [Less, on purpose](../films/leading-a-data-team/1-less-on-purpose/) — `less-on-purpose`
 - [Rules that let people decide](../films/leading-a-data-team/4-rules-to-decide/) — `rules-to-decide`
 
 ### Ownership and performance

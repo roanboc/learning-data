@@ -1,0 +1,66 @@
+{
+  "kicker": "Admin accounts",
+  "kicker_es": "Cuentas de administrador",
+  "title_es": "Poder que se enciende",
+  "h1": "Power you switch on: great power, only for a task",
+  "h1_es": "Poder que se enciende: gran poder, solo para una tarea",
+  "lead": "Sam's and Jun's everyday accounts, the ones that open their email, can read every file in the storage, change the admin settings and restore any table, every hour of every day. Whoever takes one of those accounts takes all of it. How do they keep that power off until a task needs it?",
+  "lead_es": "Las cuentas diarias de Sam y Jun, las mismas que abren su correo, pueden leer todo el almacenamiento, cambiar la configuración de administración y restaurar cualquier tabla, a toda hora. Quien se lleve una de esas cuentas se lo lleva todo. ¿Cómo dejan ese poder apagado hasta que una tarea lo pida?",
+  "description": "A film about great power over data, the fourth of Locks before the data: the United States in the 1870s, where robbers took bankers from their homes at night to make them open the vault, and James Sargent's time lock, which kept a vault shut until its hour, even for the right numbers, as it did one Friday night in 1875 in Great Barrington, Massachusetts; the great power a data platform holds, in the storage, the admin settings and a table's history; a second account for each data specialist, never shared and never used for email, its power off until it's switched on for a task, with a reason, a time, someone else's yes, an alert and a record; one morning's switch-on, fourteen minutes long; and who never gets one: business users, analysts and agents.",
+  "description_es": "Una película sobre el gran poder sobre los datos, la cuarta de Cerraduras antes que los datos: Estados Unidos en la década de 1870, donde los ladrones sacaban de noche a los banqueros de su casa para obligarlos a abrir la bóveda, y la cerradura de tiempo de James Sargent, que mantenía cerrada una bóveda hasta su hora, aun con los números correctos, como hizo un viernes por la noche de 1875 en Great Barrington, Massachusetts; el gran poder que guarda una plataforma de datos, en el almacenamiento, la configuración de administración y la historia de una tabla; una segunda cuenta para cada especialista de datos, nunca compartida y nunca usada para el correo, con su poder apagado hasta que se enciende para una tarea, con un motivo, un tiempo, el sí de otra persona, una alerta y una bitácora; el encendido de una mañana, de catorce minutos; y quién nunca recibe una: los usuarios de negocio, los analistas y los agentes.",
+  "card": "A second account for each specialist, its power off until it's switched on for a task, with a reason, a yes and a record.",
+  "card_es": "Una segunda cuenta para cada especialista, con el poder apagado hasta encenderlo para una tarea, con motivo, un sí y bitácora.",
+  "chapters_es": {
+    "taken": "Llevado de noche",
+    "clock": "Una cerradura con reloj",
+    "great": "Gran poder",
+    "second": "Una segunda cuenta",
+    "switched": "Encendido para una tarea",
+    "morning": "Una mañana",
+    "who": "Quién recibe una",
+    "hour": "Solo a su hora"
+  },
+  "past": [
+    "Great Barrington, Massachusetts, 1875: robbers held a banker's family, and a time lock kept the vault shut",
+    "Great power is a separate account, switched on for a task."
+  ],
+  "past_es": [
+    "Great Barrington, Massachusetts, 1875: unos ladrones retuvieron a la familia de un banquero, y una cerradura de tiempo mantuvo cerrada la bóveda",
+    "El gran poder es una cuenta aparte, que se enciende para una tarea."
+  ],
+  "next_h": "You've seen why great power belongs in a separate account, switched on for a task with a reason, a time and someone else's yes. Next: people and groups, where everyone comes from one directory, signs in with a passkey, and admin power is switched on in the tools.",
+  "next_h_es": "Viste por qué el gran poder va en una cuenta aparte, que se enciende para una tarea con un motivo, un tiempo y el sí de otra persona. Sigue: personas y grupos, donde todos vienen de un solo directorio, entran con una llave de acceso, y el poder de administrador se enciende en las herramientas.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film names no product and no standard. These are the public guides its admin accounts follow, read on 10 November 2026.",
+    "p_es": "La película no nombra ningún producto ni ninguna norma. Estas son las guías públicas que siguen sus cuentas de administrador, leídas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "NCSC: Use privileged access management",
+        "title_es": "NCSC: gestión del acceso privilegiado",
+        "line": "The UK's guide to admin power given just in time and just enough: asked for one job, with a reason, approved by someone else, and short-lived.",
+        "line_es": "La guía del Reino Unido sobre el poder de administrador justo a tiempo y justo el necesario: pedido para un trabajo, con un motivo, aprobado por otra persona, y breve.",
+        "href": "https://www.ncsc.gov.uk/collection/secure-system-administration/use-privileged-access-management",
+        "href_es": "https://www.ncsc.gov.uk/collection/secure-system-administration/use-privileged-access-management"
+      },
+      {
+        "title": "CIS Controls: Account management",
+        "title_es": "CIS Controls: gestión de cuentas",
+        "line": "Control 5, whose safeguard 5.4 keeps admin rights in dedicated admin accounts, and everyday work, email and the web in an account without them.",
+        "line_es": "El control 5, cuya salvaguarda 5.4 deja los permisos de administrador en cuentas de administrador dedicadas, y el trabajo diario, el correo y la web en una cuenta sin ellos.",
+        "href": "https://www.cisecurity.org/controls/account-management",
+        "href_es": "https://www.cisecurity.org/controls/account-management"
+      },
+      {
+        "title": "NIST SP 800-53: Security and privacy controls",
+        "title_es": "NIST SP 800-53: controles de seguridad y privacidad",
+        "line": "The catalogue's least privilege control, AC-6: only the access a task needs, everyday accounts for everyday work, and every admin action logged.",
+        "line_es": "El control de mínimo privilegio del catálogo, AC-6: solo el acceso que una tarea necesita, cuentas diarias para el trabajo diario, y cada acción de administración registrada.",
+        "href": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+        "href_es": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+      }
+    ]
+  },
+  "draft": true
+}

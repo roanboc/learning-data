@@ -53,7 +53,7 @@ STEP = 0.75                                              # the mark's notes, one
 
 # ---- the levels, measured by tools/quiet.py as one speaker plays the score: the music's loud moments under -26.5 dB of full scale and
 # its loudest notes under -23, the effects' loud moments under -43 dB (FX scales them)
-HL, VL, FX = 0.050, 0.040, 1.45
+HL, VL, FX = 0.063, 0.050, 1.45
 
 def _ir(sec, lo):
     """a room's ring: noise that dies away over sec, its top rolled off at lo, after 20 ms. Its level is set by what it rings below lo

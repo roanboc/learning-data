@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.retry.outputs.page_url }}
     steps:
       # The live site names the commit it was built from in version.txt (a Pages deployment records the workflow's
       # commit instead, which for a Checks run is main's newest commit, not the one deployed).
@@ -73,9 +73,12 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: site
-      # The site is about 500 MB; GitHub's syncing has taken over the default 10 minutes (01:15 and 03:12 UTC, 10 Nov).
+      # The site is over 500 MB, and GitHub's syncing sometimes takes longer than deploy-pages waits (10 minutes at
+      # most; 01:15, 03:12 and 06:01 UTC, 10 Nov). A deployment that times out is tried once more with the same upload.
       - id: deployment
         if: steps.newer.outputs.go == 'true'
+        continue-on-error: true
         uses: actions/deploy-pages@v5
-        with:
-          timeout: 1800000
+      - id: retry
+        if: steps.newer.outputs.go == 'true' && steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v5

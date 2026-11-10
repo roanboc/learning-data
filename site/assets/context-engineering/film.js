@@ -465,9 +465,9 @@ const NARR={
 "team":{"name":"One context for the team","lead":1.0,"tail":1.0,"vo":[
  {"id":"before","gap":0.8,"text":"Until now, each person on the team wired up their own agent, with notes of their own."},
  {"id":"masters","gap":0.8,"text":"Like the chant books named after their masters, each agent was its owner's: what one was told, no other knew."},
- {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project, reviewed like code, with an owner for every meaning."},
+ {"id":"one","gap":0.8,"text":"Now the team keeps one context, in the project: the data team reviews it like code, and every meaning has an owner."},
  {"id":"same","gap":0.8,"text":"Every agent, and every person, reads the same page."},
- {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, and everyone reads the new one."}
+ {"id":"change","gap":0.8,"text":"When a meaning changes, its owner changes it once, in the glossary, and everyone reads the new one."}
 ]},
 "verse":{"name":"A verse never heard","lead":1.0,"tail":1.0,"vo":[
  {"id":"again","gap":0.8,"text":"Jun asks his agent again."},
@@ -478,7 +478,7 @@ const NARR={
 ]}
 };
 
-const VODUR={"lines/when": 2.914, "lines/school": 5.486, "lines/ear": 3.455, "lines/signs": 6.081, "lines/far": 6.472, "lines/master": 3.112, "lines/books": 7.479, "lines/years": 5.18, "lines/change": 1.34, "lines/lines": 5.543, "lines/colour": 5.811, "lines/page": 5.375, "lines/days": 3.942, "lines/ten": 5.142, "lines/pope": 7.043, "lines/staff": 3.301, "lines/agent": 5.083, "lines/head": 4.026, "lines/put": 3.639, "word/today": 5.75, "word/ask": 4.985, "word/gives": 5.192, "word/reads": 5.457, "word/nothing": 2.263, "word/names": 5.467, "word/count": 5.934, "inbox/query": 4.628, "inbox/asks": 2.368, "inbox/knows": 5.249, "inbox/back": 6.441, "inbox/right": 8.0, "inbox/harm": 3.877, "inbox/email": 6.851, "inbox/inbox": 3.821, "inbox/careless": 3.939, "reads/context": 5.973, "reads/code": 5.014, "reads/meta": 4.997, "reads/skills": 2.899, "reads/tools": 2.548, "reads/missing": 5.95, "reads/engineering": 5.062, "page/glossary": 6.165, "page/copy": 5.44, "page/test": 8.206, "page/contract": 3.825, "page/rule": 6.86, "team/before": 5.145, "team/masters": 6.505, "team/one": 6.051, "team/same": 3.253, "team/change": 4.805, "verse/again": 1.595, "verse/looks": 5.724, "verse/new": 5.319, "verse/boys": 3.527, "verse/once": 3.085};
+const VODUR={"lines/when": 2.914, "lines/school": 5.486, "lines/ear": 3.455, "lines/signs": 6.081, "lines/far": 6.472, "lines/master": 3.112, "lines/books": 7.479, "lines/years": 5.18, "lines/change": 1.34, "lines/lines": 5.543, "lines/colour": 5.811, "lines/page": 5.375, "lines/days": 3.942, "lines/ten": 5.142, "lines/pope": 7.043, "lines/staff": 3.301, "lines/agent": 5.083, "lines/head": 4.026, "lines/put": 3.639, "word/today": 5.75, "word/ask": 4.985, "word/gives": 5.192, "word/reads": 5.457, "word/nothing": 2.263, "word/names": 5.467, "word/count": 5.934, "inbox/query": 4.628, "inbox/asks": 2.368, "inbox/knows": 5.249, "inbox/back": 6.441, "inbox/right": 8.0, "inbox/harm": 3.877, "inbox/email": 6.851, "inbox/inbox": 3.821, "inbox/careless": 3.939, "reads/context": 5.973, "reads/code": 5.014, "reads/meta": 4.997, "reads/skills": 2.899, "reads/tools": 2.548, "reads/missing": 5.95, "reads/engineering": 5.062, "page/glossary": 6.165, "page/copy": 5.44, "page/test": 8.206, "page/contract": 3.825, "page/rule": 6.86, "team/before": 5.145, "team/masters": 6.505, "team/one": 7.211, "team/same": 3.253, "team/change": 5.738, "verse/again": 1.595, "verse/looks": 5.724, "verse/new": 5.319, "verse/boys": 3.527, "verse/once": 3.085};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -2423,7 +2423,7 @@ function ce_note(x,cx,cy,w,o){const a=o.a==null?1:o.a;if(a<=0)return;const lh=44
 // ---- 6 · One context for the team: each agent its owner's, with notes of its own; then one context, reviewed like code, owned ----
 const CE_TEAM=[["jun",360,"Jun's notes","commencing: enrolled this year"],["clara",960,"Clara's notes","commencing: a new student number"],["sam",1560,"Sam's notes","commencing: first year of a degree"]];
 scene("team",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({wired:wAt(sc,"before","wired"),notes:wAt(sc,"before","notes"),chant:wAt(sc,"masters","chant"),
-    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviewed"),owner2:wAt(sc,"one","owner"),
+    owner:wAt(sc,"masters","owner's"),told:wAt(sc,"masters","told"),one:c.one-0.4,keeps:wAt(sc,"one","keeps"),reviewed:wAt(sc,"one","reviews it"),owner2:wAt(sc,"one","owner"),
     every:wAt(sc,"same","agent"),reads:wAt(sc,"same","reads"),change:c.change,changes:wAt(sc,"change","changes"),once:wAt(sc,"change","once"),new_:wAt(sc,"change","new")}));
   ce_shots(ctx,S,t,sc.dur,[
     // until now: each person's own agent, with notes of its own, each a little different, like the chant books named after their masters

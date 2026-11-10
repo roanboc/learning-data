@@ -465,7 +465,7 @@ const NARR={
 "reader":{"name":"A known reader","lead":0.8,"tail":0.8,"vo":[
  {"id":"adds","gap":0.8,"text":"Anil also adds the faculty's placements plan to the record of who uses what, in the project."},
  {"id":"next","gap":0.8,"text":"So when someone next changes Clara's table, the impact check names the Faculty of Health beside Planning's census dashboard."},
- {"id":"both","gap":0.8,"text":"Both are asked before the change ships."},
+ {"id":"both","gap":0.8,"text":"Both hear about it before the change ships."},
  {"id":"known","gap":0.8,"text":"A reader who's known is a reader who's told."}]},
 "outside":{"name":"Outside the university","lead":0.8,"tail":0.8,"vo":[
  {"id":"same","gap":0.8,"text":"Outside the university, the same rules hold."},
@@ -482,7 +482,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"Finding and getting data is part of governance."}]}
 };
 
-const VODUR={"asking/today": 4.549, "asking/cert": 5.344, "asking/count": 4.711, "asking/sept": 4.783, "asking/around": 2.923, "asking/one": 2.251, "asking/two": 6.399, "asking/offered": 5.266, "asking/inbox": 8.118, "asking/change": 1.288, "asking/now": 7.003, "asking/find": 5.247, "asking/morning": 3.786, "asking/yes": 4.467, "asking/agrees": 2.719, "asking/second": 3.768, "asking/deleted": 1.663, "window/ontos": 4.693, "window/shows": 4.838, "window/sold": 3.435, "window/types": 2.968, "window/finds": 5.857, "read/before": 4.504, "read/for": 3.059, "read/counts": 3.872, "read/ready": 1.645, "read/contract": 2.109, "read/two": 3.199, "read/purpose": 2.517, "ask/asks": 1.916, "ask/form": 3.004, "ask/writes": 4.125, "ask/ninety": 1.551, "ask/platform": 3.932, "ask/one": 1.834, "owner/clara": 4.426, "owner/five": 3.365, "owner/afternoon": 1.583, "owner/reason": 6.398, "owner/fewer": 3.145, "owner/record": 4.791, "key/group": 2.722, "key/readers": 6.52, "key/once": 4.322, "key/week": 2.711, "key/date": 4.036, "key/every": 3.057, "reader/adds": 5.717, "reader/next": 7.464, "reader/both": 1.97, "reader/known": 2.398, "outside/same": 2.75, "outside/partner": 6.324, "outside/holds": 4.462, "outside/share": 8.17, "outside/reads": 6.154, "outside/exchange": 7.628, "close/morning": 4.264, "close/offers": 5.754, "close/gone": 5.38, "close/seen": 3.413, "close/last": 2.71};
+const VODUR={"asking/today": 4.549, "asking/cert": 5.344, "asking/count": 4.711, "asking/sept": 4.783, "asking/around": 2.923, "asking/one": 2.251, "asking/two": 6.399, "asking/offered": 5.266, "asking/inbox": 8.118, "asking/change": 1.288, "asking/now": 7.003, "asking/find": 5.247, "asking/morning": 3.786, "asking/yes": 4.467, "asking/agrees": 2.719, "asking/second": 3.768, "asking/deleted": 1.663, "window/ontos": 4.693, "window/shows": 4.838, "window/sold": 3.435, "window/types": 2.968, "window/finds": 5.857, "read/before": 4.504, "read/for": 3.059, "read/counts": 3.872, "read/ready": 1.645, "read/contract": 2.109, "read/two": 3.199, "read/purpose": 2.517, "ask/asks": 1.916, "ask/form": 3.004, "ask/writes": 4.125, "ask/ninety": 1.551, "ask/platform": 3.932, "ask/one": 1.834, "owner/clara": 4.426, "owner/five": 3.365, "owner/afternoon": 1.583, "owner/reason": 6.398, "owner/fewer": 3.145, "owner/record": 4.791, "key/group": 2.722, "key/readers": 6.52, "key/once": 4.322, "key/week": 2.711, "key/date": 4.036, "key/every": 3.057, "reader/adds": 5.717, "reader/next": 7.464, "reader/both": 2.192, "reader/known": 2.398, "outside/same": 2.75, "outside/partner": 6.324, "outside/holds": 4.462, "outside/share": 8.17, "outside/reads": 6.154, "outside/exchange": 7.628, "close/morning": 4.264, "close/offers": 5.754, "close/gone": 5.38, "close/seen": 3.413, "close/last": 2.71};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -3506,10 +3506,10 @@ function gk_exposure(ctx,t,o){o=o||{};const p=clamp(o.p==null?1:o.p,0,1),n=GK_EX
   if(F.rows.length&&o.hand>0.01)wc_hand(ctx,"a new reader, written in the project",1600,F.rows[0]-60,{size:36,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand,0,1)});
   if(o.tag>0.01)gu_filmTag(ctx,120,820,"Change without surprises",clamp(o.tag,0,1));}
 // a change to Clara's table, on its pull request: the impact check's report, as its description shows it; who uses it, the faculty's plan
-// lit (o.who), and who to ask (o.ask)
+// lit (o.who), and who to tell (o.ask)
 const GK_RNR=[{h:1,s:"What this change touches"},{fold:1},{h:2,s:"Contracts"},{li:"`mart_planning__near_award`: **breaking**: removed faculty_code, added faculty. Needs a new",col:GV.redInk},
   {cont:1,s:"version, with a deprecation date for this one",col:GV.redInk},{h:2,s:"Who uses it"},{li:"`census_dashboard`, owned by Planning"},{li:"`health_placements_plan`, owned by Faculty of Health"},
-  {fold:1},{h:2,s:"Who to ask"},{s:"Faculty of Health; Planning"}];
+  {fold:1},{h:2,s:"Who to tell"},{s:"Faculty of Health; Planning"}];
 function gk_impact(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:"Rename faculty_code to faculty",titleSize:40,state:["Open",GV.green],
     sub:"Jun Park wants to merge into main"});gu_box(ctx,150,248,1620,596,null,{seed:1021});
   gk_md(ctx,150,248,1620,GK_RNR.map((it,i)=>Object.assign({},it,{lit:i===7?clamp(o.who||0,0,1):i===10?clamp(o.ask||0,0,1):0,p:i>=5?clamp(o.u==null?1:o.u,0,1):1})));}
@@ -3773,9 +3773,9 @@ scene("reader",(ctx,S,t,sc)=>{const c=sc.cues,P=gk_once(sc,"P",()=>({ad:c.adds,w
     // the record of who uses what: the faculty's plan, a new file in the project
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gk_exposure(x,tt,{u:fin(tt,0.2,0.8),p:clamp((tt-P.ad-0.2)/3.6,0,1),
       lit:[fin(tt,P.ad+3.2,0.6),fin(tt,Math.max(P.wu,P.ad+4.0),0.6)],hand:fin(tt,P.ip,0.8),tag:fin(tt,P.ip+0.6,0.6)})},
-    // the next change to Clara's table: the impact check names the faculty's plan beside the census dashboard, and who to ask
+    // the next change to Clara's table: the impact check names the faculty's plan beside the census dashboard, and who to tell
     {cut:true,at:P.nx,place:"big",keys:[[P.nx,960,540,1]],push:0.02,draw:(x,tt)=>gk_impact(x,tt,{u:clamp((tt-P.nx-0.2)/1.2,0,1),who:fin(tt,P.nm,0.6),ask:fin(tt,P.cd+0.4,0.6)})},
-    // both asked before the change ships: a letter to each
+    // both hear about it before the change ships: a letter to each
     {at:P.bo,place:"campus",keys:[[P.bo,960,540,1]],push:0.02,draw:(x,tt)=>gk_tell(x,tt,{go:clamp((tt-P.bt)/2.2,0,1)})}],sc.dur,1));});
 
 // ---- 8 · Outside the university: a partner far off; its request for Mei's Awards; each award, its credit points and its faculty, no

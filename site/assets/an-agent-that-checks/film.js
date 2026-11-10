@@ -431,7 +431,7 @@ const NARR={
  {"id":"skill","gap":0.8,"text":"So Yusuf and Noor write governance's rules as a checklist: the steps an agent follows on every change."},
  {"id":"file","gap":0.8,"text":"It's one page, in plain words, for anyone to read."},
  {"id":"oneplace","gap":0.8,"text":"The rules no longer live with one person."},
- {"id":"steps1","gap":0.8,"text":"Run the checks. Find the owner. Take each definition from the glossary, or have governance confirm there's none."},
+ {"id":"steps1","gap":0.8,"text":"Start from the glossary: take each definition from it, or have governance confirm there's none. Find the owner. Run the checks."},
  {"id":"steps2","gap":0.8,"text":"Classify every column, with evidence. Check each rule about the data; track the ones about what people do."},
  {"id":"steps3","gap":0.8,"text":"Name what it touches. Then report, once, to the people who decide."},
  {"id":"never","gap":0.8,"text":"And it never approves, edits the glossary, weakens a check, or shows a value from the data."},
@@ -439,7 +439,7 @@ const NARR={
 "review":{"name":"Three findings","lead":1.0,"tail":1.0,"vo":[
  {"id":"reviews","gap":0.8,"text":"The data team's AI agent reviews Anil's change. Two things pass."},
  {"id":"findings","gap":0.8,"text":"Then three findings, each with where it is and the rule, and what the checks couldn't say: a draft, and who decides."},
- {"id":"one","gap":0.8,"text":"One: nobody answers for it, so no owner would be asked to review a change."},
+ {"id":"one","gap":0.8,"text":"One: nobody answers for it, so no owner would be told what a change touches."},
  {"id":"two","gap":0.8,"text":"Two: ten columns don't say whether they identify a person."},
  {"id":"tally","gap":0.8,"text":"It counts, and shows no values: all seven rows of the email column look like an email."},
  {"id":"rule","gap":0.8,"text":"Three, which no check could find: the faculty wrote a rule, only its own awards, and nothing checks it."},
@@ -451,7 +451,8 @@ const NARR={
  {"id":"doubt","gap":0.8,"text":"Maybe not a person at all. But when in doubt, the checklist says, draft the stricter class, and ask."},
  {"id":"confirms","gap":0.8,"text":"Anil confirms: a course, not a person."},
  {"id":"classed","gap":0.8,"text":"So it's classed as identifying no one, with Anil's reason in the review."},
- {"id":"owners","gap":0.8,"text":"Then the owners decide: the faculty, its classes and its rule; Yusuf, the new owner; Jun, how it's built."},
+ {"id":"owners","gap":0.8,"text":"Then the meaning is written first: the faculty puts its classes and its rule in the glossary, and Yusuf names the new owner."},
+ {"id":"teamrev","gap":0.8,"text":"Jun, in the data team, reviews the change against them, and the owners are told what it touches."},
  {"id":"calls","gap":0.8,"text":"The advisers get their list."},
  {"id":"decided","gap":0.8,"text":"The agent decided nothing. It brought each decision to the right person, with the evidence."}]},
 "agent":{"name":"Governed, too","lead":1.0,"tail":1.0,"vo":[
@@ -459,9 +460,9 @@ const NARR={
  {"id":"governed","gap":0.8,"text":"The agent is governed too, by the rules for AI helpers."},
  {"id":"own","gap":0.8,"text":"It has its own identity, reads only what Sam grants it, and writes only in its own workspace."},
  {"id":"samples","gap":0.8,"text":"It works from counts and small samples, never bulk personal data, and only reads the glossary."},
- {"id":"approve","gap":0.8,"text":"And it can't approve: owners sign off, and the agent owns nothing."},
+ {"id":"approve","gap":0.8,"text":"And it can't approve: the data team does, and the agent owns nothing."},
  {"id":"note","gap":0.8,"text":"That's why, on the night we imagined, it only left a note."},
- {"id":"green","gap":0.8,"text":"So the binder's line goes green: it runs, in the agent's access, its checklist, and the owners' approvals."}]},
+ {"id":"green","gap":0.8,"text":"So the binder's line goes green: it runs, in the agent's access, its checklist, and the data team's approval."}]},
 "written":{"name":"Only what's written","lead":1.0,"tail":1.0,"vo":[
  {"id":"plain","gap":0.8,"text":"An agent can only follow what's written down, plainly enough to check."},
  {"id":"care","gap":0.8,"text":"Remember policy 12's last line: “Staff take care to use terms correctly.” No agent can check care.","say":"Remember policy twelve's last line: “Staff take care to use terms correctly.” No agent can check care."},
@@ -470,13 +471,13 @@ const NARR={
  {"id":"trust","gap":0.8,"text":"People trust a review they can read, question and overrule."}]},
 "close":{"name":"That night","lead":1.0,"tail":1.0,"vo":[
  {"id":"made","gap":0.3,"text":"That night, a few years from now, is made of what you've just seen:"},
- {"id":"parts","gap":0.8,"text":"a checklist in plain words, rules for AI helpers, a register of who signs off what, and people who decide."},
+ {"id":"parts","gap":0.8,"text":"a checklist in plain words, rules for AI helpers, a register of who owns what, and people who decide."},
  {"id":"gains","gap":0.8,"text":"What data governance gains: every change checked against the same rules, at any hour, and no one waiting for one person."},
- {"id":"marked","gap":0.8,"text":"Personal data marked before anyone sees it, and each decision made by its owner, with the evidence, written down."},
+ {"id":"marked","gap":0.8,"text":"Personal data marked before anyone sees it, and each decision made by the right person, with the evidence, written down."},
  {"id":"last","gap":0.8,"text":"An agent checks what's written. People decide."}]}
 };
 
-const VODUR={"night/imag": 2.917, "night/adds": 7.82, "night/nothing": 7.252, "night/wrong": 5.158, "night/now": 5.466, "night/three": 5.007, "night/comment": 6.708, "night/eight": 4.513, "night/relief": 3.472, "night/shows": 8.174, "today/back": 3.308, "today/list": 6.985, "today/fail": 2.093, "today/says": 4.446, "today/waits": 3.101, "today/queue": 5.063, "skill/skill": 6.68, "skill/file": 3.056, "skill/oneplace": 2.439, "skill/steps1": 6.694, "skill/steps2": 6.463, "skill/steps3": 3.762, "skill/never": 5.299, "skill/night": 2.953, "review/reviews": 4.497, "review/findings": 6.409, "review/one": 4.201, "review/two": 3.578, "review/tally": 5.444, "review/rule": 5.945, "review/draft": 2.519, "decides/unsure": 2.066, "decides/keys": 3.634, "decides/other": 5.23, "decides/doubt": 5.73, "decides/confirms": 2.569, "decides/classed": 4.343, "decides/owners": 6.54, "decides/calls": 1.46, "decides/decided": 5.302, "agent/binder": 5.054, "agent/governed": 3.575, "agent/own": 5.854, "agent/samples": 5.816, "agent/approve": 3.781, "agent/note": 3.222, "agent/green": 6.455, "written/plain": 3.925, "written/care": 6.357, "written/open": 4.128, "written/change": 6.537, "written/trust": 3.193, "close/made": 3.528, "close/parts": 7.313, "close/gains": 7.368, "close/marked": 6.875, "close/last": 2.691};
+const VODUR={"night/imag": 2.917, "night/adds": 7.82, "night/nothing": 7.252, "night/wrong": 5.158, "night/now": 5.466, "night/three": 5.007, "night/comment": 6.708, "night/eight": 4.513, "night/relief": 3.472, "night/shows": 8.174, "today/back": 3.308, "today/list": 6.985, "today/fail": 2.093, "today/says": 4.446, "today/waits": 3.101, "today/queue": 5.063, "skill/skill": 6.68, "skill/file": 3.056, "skill/oneplace": 2.439, "skill/steps1": 7.26, "skill/steps2": 6.463, "skill/steps3": 3.762, "skill/never": 5.299, "skill/night": 2.953, "review/reviews": 4.497, "review/findings": 6.409, "review/one": 4.395, "review/two": 3.578, "review/tally": 5.444, "review/rule": 5.945, "review/draft": 2.519, "decides/unsure": 2.066, "decides/keys": 3.634, "decides/other": 5.23, "decides/doubt": 5.73, "decides/confirms": 2.569, "decides/classed": 4.343, "decides/owners": 7.046, "decides/teamrev": 5.653, "decides/calls": 1.46, "decides/decided": 5.302, "agent/binder": 5.054, "agent/governed": 3.575, "agent/own": 5.854, "agent/samples": 5.816, "agent/approve": 3.949, "agent/note": 3.222, "agent/green": 6.634, "written/plain": 3.925, "written/care": 6.357, "written/open": 4.128, "written/change": 6.537, "written/trust": 3.193, "close/made": 3.528, "close/parts": 6.837, "close/gains": 7.368, "close/marked": 7.226, "close/last": 2.691};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -486,7 +487,7 @@ const BREATH={
 "today":{"hold":{"list":0.8,"fail":0.8,"says":0.8,"waits":0.8,"queue":0.8}},
 "skill":{"hold":{"skill":0.6,"file":0.8,"oneplace":0.8,"steps1":1.0,"steps2":1.0,"steps3":0.8,"never":0.8,"night":0.8}},
 "review":{"hold":{"reviews":1.0,"findings":1.0,"one":0.8,"two":0.8,"tally":1.0,"rule":0.4,"draft":1.0}},
-"decides":{"hold":{"keys":0.6,"other":0.8,"doubt":0.8,"confirms":0.6,"classed":0.8,"owners":1.2,"calls":0.6,"decided":0.6}},
+"decides":{"hold":{"keys":0.6,"other":0.8,"doubt":0.8,"confirms":0.6,"classed":0.8,"owners":0.4,"teamrev":1.2,"calls":0.6,"decided":0.6}},
 "agent":{"hold":{"binder":0.4,"governed":0.8,"own":0.8,"samples":0.8,"approve":0.8,"note":0.8,"green":0.8}},
 "written":{"hold":{"plain":0.4,"care":0.9,"open":0.5,"change":0.6,"trust":0.6}},
 "close":{"hold":{"parts":1.0,"gains":0.6,"marked":1.0},"breathe":4.6}
@@ -3074,9 +3075,9 @@ function ac_list(ctx,t,o){o=o||{};const [x,y,w,h]=AC_SC,X={award:420,cpR:860,nam
 // the list's sign-off sheet (the series' gv_signoff): sent back, its four lines empty, the question in red under each, and "sent back"
 // stamped in its top margin as Who may see it stamps it (sent, 0 to 1); p, missA and askP as gv_signoff takes them. filled: the four
 // lines from the drafts, and the green stamp (signed, 0 to 1). At (x,y), w wide, turned by rot about its top left
-const AC_SO={title:"Change: the advisers' call list",rows:[["owner",null],["class",null],["who to ask",null],["product",null]],
+const AC_SO={title:"Change: the advisers' call list",rows:[["owner",null],["class",null],["who to tell",null],["product",null]],
   ask:{0:"who answers for this list?",1:"10 columns: does each identify a person?",2:"the faculty isn't in the register",3:"which product is it part of?"},
-  filled:[["owner","Faculty of Health"],["class","all 10 columns"],["who to ask","the faculty's data desk"],["product","Learner progress, Health"]]};
+  filled:[["owner","Faculty of Health"],["class","all 10 columns"],["who to tell","the faculty's data desk"],["product","Learner progress, Health"]]};
 function ac_sheet(ctx,x,y,w,o){o=o||{};const k=w/1000;ctx.save();ctx.translate(x,y);if(o.rot)ctx.rotate(o.rot);let r;
   if(o.filled)r=gv_signoff(ctx,0,0,w,{title:AC_SO.title,rows:AC_SO.filled,p:o.p,split:0.3,stamp:"signed",stampP:o.signed||0});
   else{r=gv_signoff(ctx,0,0,w,{title:AC_SO.title,rows:AC_SO.rows,ask:AC_SO.ask,p:o.p,missA:o.missA,askP:o.askP,split:0.3});
@@ -3188,13 +3189,13 @@ function ac_tray(ctx,full,o){o=o||{};const [t0,t1]=AC_AD.tray,top=AC_AD.top,f=cl
 /* ---------- 3 · Rules an agent can follow: the checklist ---------- */
 // the checklist, as Yusuf and Noor write it: its title and first line, seven steps and four don'ts
 const AC_CKT="How we review a change for governance",AC_CK1="You find, draft and flag. People decide.",
-  AC_STEPS=["Run the checks","An owner","A glossary term, or governance confirms none","A class for every column","Each stated rule: checked, or tracked","What it touches","Report once"],
+  AC_STEPS=["A glossary term, or governance confirms none","An owner","Run the checks","A class for every column","Each stated rule: checked, or tracked","What it touches","Report once"],
   AC_DONTS=["approve a change","edit the glossary","weaken a check","show a value from the data"];
-// a sign in pencil for each step: a small sign-off sheet, a person, a book, a chip, a ticked box, a branch, a speech bubble
+// a sign in pencil for each step: a book (the glossary comes first), a person, a small sign-off sheet, a chip, a ticked box, a branch, a speech bubble
 function ac_stepSign(ctx,i,x,y,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.globalAlpha*=a;ctx.strokeStyle=rgba(WC_PENCIL,0.85);ctx.lineWidth=3;ctx.lineCap="round";ctx.lineJoin="round";ctx.beginPath();
-  if(i===0){ctx.rect(-10,-13,20,26);ctx.moveTo(-5,-5);ctx.lineTo(5,-5);ctx.moveTo(-5,2);ctx.lineTo(5,2);ctx.moveTo(-5,8);ctx.lineTo(1,8);}
+  if(i===2){ctx.rect(-10,-13,20,26);ctx.moveTo(-5,-5);ctx.lineTo(5,-5);ctx.moveTo(-5,2);ctx.lineTo(5,2);ctx.moveTo(-5,8);ctx.lineTo(1,8);}
   else if(i===1){ctx.arc(0,-7,6,0,TAU);ctx.moveTo(-11,12);ctx.quadraticCurveTo(0,-2,11,12);}
-  else if(i===2){ctx.moveTo(0,-8);ctx.lineTo(-14,-11);ctx.lineTo(-14,9);ctx.lineTo(0,12);ctx.lineTo(14,9);ctx.lineTo(14,-11);ctx.lineTo(0,-8);ctx.lineTo(0,12);}
+  else if(i===0){ctx.moveTo(0,-8);ctx.lineTo(-14,-11);ctx.lineTo(-14,9);ctx.lineTo(0,12);ctx.lineTo(14,9);ctx.lineTo(14,-11);ctx.lineTo(0,-8);ctx.lineTo(0,12);}
   else if(i===3){rr(ctx,-15,-8,30,16,8);ctx.moveTo(-7,0);ctx.lineTo(6,0);}
   else if(i===4){ctx.rect(-12,-12,24,24);ctx.moveTo(-6,0);ctx.lineTo(-1,6);ctx.lineTo(8,-6);}
   else if(i===5){ctx.moveTo(-13,0);ctx.lineTo(0,0);ctx.lineTo(12,-10);ctx.moveTo(0,0);ctx.lineTo(12,10);ctx.moveTo(6,-11);ctx.lineTo(12,-10);ctx.lineTo(10,-4);ctx.moveTo(6,11);ctx.lineTo(12,10);ctx.lineTo(10,4);}
@@ -3272,7 +3273,7 @@ const AC_BIGT="Call list · Add the advisers' call list";
 function ac_num(ctx,n,x,y,s){s=s||1;ctx.save();ctx.fillStyle=rgba(AC_CYAN,1);ctx.beginPath();ctx.arc(x,y,21*s,0,TAU);ctx.fill();ctx.restore();
   wc_T(ctx,String(n),x,y+10*s,{w:800,size:28*s,col:[255,255,255],align:"center"});}
 // the three findings: a title, where, our rule, the draft, who decides; the first also says who'd be asked
-const AC_FIND=[{title:"Nobody answers for it",where:["the list: no owner"],red:"who to ask: nobody named",rule:["every table other teams","read has an owner"],draft:"owner: Faculty of Health",who:["data governance"]},
+const AC_FIND=[{title:"Nobody answers for it",where:["the list: no owner"],red:"who to tell: nobody named",rule:["every table other teams","read has an owner"],draft:"owner: Faculty of Health",who:["data governance"]},
   {title:"Ten columns with no class",where:["all 10 columns"],rule:["every column says whether","it identifies a person"],draft:"a class for each",who:["Faculty of Health"]},
   {title:"A rule with no check",where:["the list's description"],rule:["a rule about the data","has a check"],draft:"check: every row's faculty is Health",who:["Faculty of Health, for the rule","Jun, for how it's built"]}];
 const AC_RV={card:[140,124,1640,742],head:184,pass:240,cx:[168,710,1252],cw:512,cy:270,ch:580};
@@ -3285,7 +3286,7 @@ function ac_subCard(q,x,y,w,h,lab,vals,v,o){o=o||{};wc_panel(q,x,y,w,h,{kind:"ca
 function ac_draftPill(q,x,y,w,s,v,lit,seed){wc_panel(q,x,y,w,56,{kind:"pill",dashed:true,role:WC_SIDE.tech,seed:seed||93});if(lit>0.01)gv_tint(q,x+8,y+6,w-16,44,WC_SIDE.tech,0.7*lit);
   if(s&&v>0.01)withA(q,clamp(v,0,1),()=>wc_T(q,s,x+24,y+38,{w:700,size:28,col:WC_DARK}));}
 // one finding's card (i): it comes in (a); its parts as they're named (part: where, our rule, the draft, who decides, 0 to 1); its words
-// as they're said (v: the same four, 0 to 1, and red, the first's who to ask); lit, the draft and who decides; dim fades it back
+// as they're said (v: the same four, 0 to 1, and red, the first's who to tell); lit, the draft and who decides; dim fades it back
 function ac_findCard(q,i,t,o){const F=AC_FIND[i],R=AC_RV,x=R.cx[i],y=R.cy,w=R.cw,a=(o.a||0)*(o.dim==null?1:o.dim);if(a<=0.01)return;const pt=o.part||[1,1,1,1],v=o.v||[0,0,0,0],lit=o.lit||0;
   withA(q,a,()=>{wc_panel(q,x,y,w,R.ch,{kind:"card",seed:90+i});ac_num(q,i+1,x+40,y+40);wc_T(q,F.title,x+72,y+50,{w:800,size:30,col:WC_DARK});
     const ix=x+16,iw=w-32,sub=(k,fn)=>{const p=clamp(pt[k],0,1);if(p<=0.01)return;withA(q,clamp(p*2,0,1),fn);};
@@ -3353,7 +3354,7 @@ function ac_classes(ctx,t,o){o=o||{};const [x,y,w,h]=AC_BIG,ok=o.okAt==null?0:cl
   AC_CLS.forEach(([c,k,ev,ns],i)=>{const ry=326+i*53,ak=c==="award code";
     if(ns){gv_tint(q,180,ry-38,1580,52,WC_SIDE.tech,0.55*un*(1-ok));gv_tint(q,180,ry-38,1580,52,GV.gold,0.6*ok);}
     wc_T(q,c,200,ry,{w:600,size:28,col:WC_DARK});
-    if(ak){withA(q,1-ok,()=>gv_classChip(q,520,ry-10,k));if(ok>0)gv_classChipAt(q,t,o.okAt,520,ry-10,"none");}
+    if(ak){withA(q,1-clamp(ok*2,0,1),()=>gv_classChip(q,520,ry-10,k));if(ok>=0.5)gv_classChipAt(q,t,o.okAt+0.4,520,ry-10,"none");}
     else gv_classChip(q,520,ry-10,k);
     if(ns)ac_notSure(q,520+ac_chipW(q,k)+22,ry,un*(1-ok));
     if(ak){const wy=clamp(o.why==null?ok:o.why,0,1);withA(q,1-wy,()=>wc_T(q,ev,1010,ry,{w:600,size:28,col:WC_INK}));
@@ -3390,16 +3391,17 @@ function ac_smallReply(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen;gv_screen(c
   const a=o.a||0;if(a<=0.01)return;withA(q,a,()=>{wc_panel(q,x+20,y+194,w-40,124,{kind:"card",wash:GV.gold,washA:0.3,seed:81});
     wc_T(q,"Anil Kurian",x+44,y+228,{w:700,size:24,col:WC_MUTED});const L=["It's made from the award:","a course, not a person."],n=Math.round(clamp(o.typed||0,0,1)*(L[0].length+L[1].length));
     wc_T(q,L[0].slice(0,n),x+44,y+262,{w:600,size:24,col:GV.goldInk});if(n>L[0].length)wc_T(q,L[1].slice(0,n-L[0].length),x+44,y+294,{w:600,size:24,col:GV.goldInk});});},{titleSize:26,barH:44});}
-// the owners' approvals, each a gold card that takes its stamp as it's named (a, 0 to 1): the faculty, its classes and its rule; Yusuf,
-// the new owner; Jun, how it's built
-const AC_AP=[["Faculty of Health","its classes and its rule"],["Yusuf Demir","the new owner"],["Jun Park","how it's built"]];
-function ac_approval(ctx,x,y,w,h,i,a){if(a<=0.01)return;const [nm,what]=AC_AP[i];withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.3,seed:70+i});
+// who decided what, each a gold card that takes its stamp as it's named (a, 0 to 1). The meaning first: the faculty writes its classes
+// and its rule in the glossary, Yusuf names the new owner in the register ("written"); then Jun, in the data team, reviews the change
+// against them ("approved"). Owners and stewards never review a change: they decide its meaning, and are told what it touches
+const AC_AP=[["Faculty of Health","glossary: classes and rule","WRITTEN"],["Yusuf Demir","register: the new owner","WRITTEN"],["Jun Park, data team","reviews the change","APPROVED"]];
+function ac_approval(ctx,x,y,w,h,i,a){if(a<=0.01)return;const [nm,what,st]=AC_AP[i];withA(ctx,clamp(a*2,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",wash:GV.gold,washA:0.3,seed:70+i});
   wc_T(ctx,nm,x+30,y+58,{w:800,size:32,col:WC_DARK});wc_T(ctx,what,x+30,y+102,{w:600,size:28,col:WC_INK});});
-  gv_stamp(ctx,x+w-121,y+h/2+6,"APPROVED",clamp(a*2-1,0,1),{size:28,col:GV.goldInk,rot:-0.07});}
-// the sign-off sheet on Yusuf's desk, its four lines filled from the drafts (p, 0 to 1), and beside it the approvals (ap, three); then
+  gv_stamp(ctx,x+w-121,y+h/2+6,st,clamp(a*2-1,0,1),{size:28,col:GV.goldInk,rot:-0.07});}
+// the sign-off sheet on Yusuf's desk, its four lines filled from the drafts (p, 0 to 1), and beside it who decided (ap, three); then
 // the sheet's own stamp, signed (signed, 0 to 1)
 function ac_signed(ctx,t,o){o=o||{};ac_sheet(ctx,130,240,1000,{filled:1,p:o.p==null?1:o.p,signed:o.signed||0});
-  if((o.ap||[]).some(a=>a>0))wc_T(ctx,"Approvals",1190,222,{w:700,size:30,col:WC_MUTED});
+  if((o.ap||[]).some(a=>a>0))wc_T(ctx,"Meaning first, then the review",1190,222,{w:700,size:30,col:WC_MUTED});
   AC_AP.forEach((_,i)=>ac_approval(ctx,1180,250+i*170,640,150,i,(o.ap||[])[i]||0));}
 // who decided what: the agent's three findings, small, across the top (dim fades them back), and the approvals under them, each
 // a gold card; a gold thread runs from each finding to whoever decided it (th, 0 to 1)
@@ -3440,7 +3442,7 @@ function ac_paintDesk26(c){gv_paintDesk(c);const B=AC_OPEN,top=B.y+26,ph=B.h-52,
   ac_marker(c,1250,962,-0.3,GV.green);}
 // policy 26's page: its line, a green stroke behind it as it goes green (hi), and where it runs, in Yusuf's hand, green (hw, three, 0 to 1)
 const AC_P26={x:AC_OPEN.mid+46+64,top:AC_OPEN.y+26,size:38,lh:52,lines:["AI use follows the","organisation's data","policies."],
-  note:["the agent's access","its checklist","owners' approvals"]};
+  note:["the agent's access","its checklist","data team's approval"]};
 function ac_open26(ctx,t,o){o=o||{};const P=AC_P26,x=P.x,top=P.top,n=P.lines.length,u=o.hi||0;
   wc_T(ctx,"Data policies",x,top+64,{w:600,size:28,col:WC_MUTED,deco:1});wc_T(ctx,"Policy 26",x,top+150,{w:800,size:56,col:WC_DARK});
   wc_T(ctx,"AI and automated tools",x,top+200,{w:600,size:32,col:WC_MUTED});
@@ -3473,13 +3475,13 @@ function ac_accessForm(ctx,t,o){o=o||{};const F=AC_AF,r=o.rows||[];
   wc_hand(ctx,"Yes, as the rules for AI helpers say.  Sam Okafor",F.x,F.ans,{size:34,w:700,col:GV.goldInk,p:o.ans||0});}
 // the agent's access request, small, lying on Sam's desk in front of him
 function ac_formOnDesk(ctx,a){if(a<=0.01)return;withA(ctx,a,()=>ac_flatSheet(ctx,1150,GV_PX.top+6,300,false));}
-// who signs off what: a page of the register of owners and stewards; the call list's two lines in fresh ink. own (0 to 1) lights the
+// who owns what: a page of the register of owners and stewards; the call list's two lines in fresh ink. own (0 to 1) lights the
 // names gold; focus keeps one line bright while the rest fade back (dim, 0 to 1), and hi washes it gold (hiA)
 const AC_WHO=[["anything nobody else owns","Jun Park"],[{t:"the call list: what it means",hand:1},{t:"Faculty of Health, with Noor",hand:1}],
-  [{t:"the call list: how it's built",hand:1},{t:"Faculty of Health, with Jun",hand:1}],["the register of owners","data governance, with Noor"],["the review checklist","data governance, with Noor"]],
+  [{t:"the call list: how it's built",hand:1},{t:"the data team, Jun Park",hand:1}],["the register of owners","data governance, with Noor"],["the review checklist","data governance, with Noor"]],
   AC_WX={x:200,y:240,w:1000};
-function ac_whoPage(ctx,t,o){o=o||{};const X=AC_WX,r=gv_register(ctx,X.x,X.y,X.w,{kicker:"Register of owners and stewards",title:"Who signs off what",
-    cols:[["what",0.5],["signs off",0.5]],rows:AC_WHO,hi:o.focus,hiA:o.hiA});
+function ac_whoPage(ctx,t,o){o=o||{};const X=AC_WX,r=gv_register(ctx,X.x,X.y,X.w,{kicker:"Register of owners and stewards",title:"Who owns what",
+    cols:[["what",0.5],["owner",0.5]],rows:AC_WHO,hi:o.focus,hiA:o.hiA});
   const own=clamp(o.own||0,0,1);if(own>0.01)r.rows.forEach((ry,i)=>{if(o.focus!=null&&i!==o.focus)return;gv_tint(ctx,r.cols[1]+6,ry-26,X.x+952-r.cols[1]-6,52,GV.gold,0.75*clamp(own*3-i*0.4,0,1));});
   if(o.dim>0.01){ctx.save();ctx.fillStyle=rgba(GV.paper,0.62*clamp(o.dim,0,1));r.rows.forEach((ry,i)=>{if(i!==o.focus)ctx.fillRect(X.x+40,ry-30,920,60);});ctx.restore();}
   return r;}
@@ -3489,8 +3491,8 @@ function ac_agentCard(ctx,t,x,y,ag,cr){if(ag<=0.01)return;withA(ctx,ag,()=>{ctx.
   wc_panel(ctx,x+104,y+108,220,58,{kind:"pill",wash:WC_MUTED,washA:0.2,seed:87});wc_T(ctx,"approve",x+214,y+148,{w:700,size:30,col:WC_MUTED,align:"center"});
   ac_cross(ctx,x+214,y+137,22,cr||0,WC_INK);ctx.restore();});}
 // the register's page as a picture (kept: the film has read it), at (x,y), w wide, turned by rot about its top left
-function ac_whoPic(ctx,x,y,w,rot){const c=wc_kept("acWhoPic",1060,690,q=>{q.translate(30,30);gv_register(q,0,0,1000,{kicker:"Register of owners and stewards",title:"Who signs off what",
-    cols:[["what",0.5],["signs off",0.5]],rows:AC_WHO});}),k=w/1000;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.drawImage(c,-30*k,-30*k,1060*k,690*k);ctx.restore();}
+function ac_whoPic(ctx,x,y,w,rot){const c=wc_kept("acWhoPic",1060,690,q=>{q.translate(30,30);gv_register(q,0,0,1000,{kicker:"Register of owners and stewards",title:"Who owns what",
+    cols:[["what",0.5],["owner",0.5]],rows:AC_WHO});}),k=w/1000;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.drawImage(c,-30*k,-30*k,1060*k,690*k);ctx.restore();}
 
 /* ---------- 7 · Only what's written ---------- */
 // Yusuf's desk, from above: binder 12, closed, as Off the shelf left it, his two notes sticking out of it as flags; beside it, the
@@ -3549,14 +3551,14 @@ function ac_paintDawn(c){gv_paintCampus(c);ac_clockAt(c,7,58);c.save();c.globalC
   c.save();c.globalCompositeOperation="screen";wc_glowAt(c,1500,240,700,[255,214,170],0.3);c.restore();}
 // what the night is made of, each a picture of the paper that stands for it with its words under it: the checklist, the rules for AI
 // helpers with the agent's star, the register's page, and the approvals in gold (a, four, 0 to 1)
-const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who signs off what","people who decide"],AC_PT={cx:[520,1400],cy:[310,640]};
+const AC_PARTS=["a checklist in plain words","rules for AI helpers","a register of who owns what","people who decide"],AC_PT={cx:[520,1400],cy:[310,640]};
 function ac_parts(ctx,t,a){AC_PARTS.forEach((s_,i)=>{const p=a[i]||0;if(p<=0.01)return;const cx=AC_PT.cx[i%2],cy=AC_PT.cy[i>>1],k=0.9+0.1*spring(p);
   ctx.save();ctx.translate(cx,cy);ctx.scale(k,k);withA(ctx,clamp(p*1.6,0,1),()=>{
     if(i===0)ac_checkCopy(ctx,-190,-150,380,183,-0.015);
     else if(i===1){ctx.save();ctx.rotate(0.02);ctx.drawImage(gv_sheetPaper(150,222),-95,-175);gv_lines(ctx,-56,-128,100,1,0,1);gv_lines(ctx,-56,-96,110,8,20,0.9);ctx.restore();ac_star(ctx,62,-140,1.2,t,1);}
     else if(i===2)ac_whoPic(ctx,-180,-150,340,0);
     else{for(let j=0;j<3;j++){ctx.save();ctx.translate(-70+j*70,-80+j*12);ctx.rotate((j-1)*0.08);wc_panel(ctx,-110,-50,220,100,{kind:"card",wash:GV.gold,washA:0.35,seed:170+j});
-      gv_lines(ctx,-90,-22,120,2,22,0.9);ctx.restore();}gv_stamp(ctx,30,-44,"APPROVED",1,{size:29,col:GV.goldInk,rot:-0.07,a:0.9});}
+      gv_lines(ctx,-90,-22,120,2,22,0.9);ctx.restore();}gv_stamp(ctx,30,-44,"DECIDED",1,{size:29,col:GV.goldInk,rot:-0.07,a:0.9});}
     wc_tag(ctx,0,96,s_,{size:34,wash:i===3?GV.gold:i===1?WC_SIDE.tech:null,washA:0.3,align:"center"});});ctx.restore();});}
 
 const WC_PLACES={screenMorning:ac_paintScreenFacMorning,dusk:ac_paintDusk,night:ac_paintNight,dawn:ac_paintDawn,faculty:gv_paintFaculty,facDusk:ac_paintFacDusk,facMorning:ac_paintFacMorning,
@@ -3675,7 +3677,7 @@ scene("today",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
 scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{bc:w("skill","as a checklist")-0.35,as:w("skill","a checklist"),steps:w("skill","the steps"),chg:sc.ends.skill,pg:c.file-0.4,
       op:c.oneplace-0.4,one:w("oneplace","one person"),st0:c.steps1-0.4,
-      st:[c.steps1,w("steps1","Find"),w("steps1","Take"),c.steps2,w("steps2","Check each"),c.steps3,w("steps3","Then report")],
+      st:[c.steps1,w("steps1","Find"),w("steps1","Run"),c.steps2,w("steps2","Check each"),c.steps3,w("steps3","Then report")],
       dn:[w("never","approves"),w("never","edits"),w("never","weakens"),w("never","shows")],nt:w("night","the night")-0.5};});
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's office: Noor and Yusuf at his board, Anil's sheet and Jun's page pinned up and a fresh page beside them; binder 26 is
@@ -3705,7 +3707,7 @@ scene("skill",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
 scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{big:w("reviews","Two things")-0.3,two:w("reviews","Two things"),thr:c.findings,
       part:[w("findings","where"),w("findings","the rule"),w("findings","a draft"),w("findings","who decides")],what:w("findings","what the checks"),
-      one:c.one,nob:w("one","nobody"),own:w("one","so no owner"),ask:w("one","asked"),t2:c.two,col:w("two","ten columns"),iden:w("two","identify"),
+      one:c.one,nob:w("one","nobody"),own:w("one","so no owner"),ask:w("one","told"),t2:c.two,col:w("two","ten columns"),iden:w("two","identify"),
       ty:c.tally-0.4,counts:w("tally","counts"),look:w("tally","look like"),t3:c.rule-0.4,only:w("rule","only its own"),noth:w("rule","nothing checks"),
       dr:c.draft,rows:w("draft","row's"),hl:sc.ends.draft};});
   const seat=GV_FX.seat,dim=tt=>{const f1=fin(tt,P.one-0.3,0.4),f2=fin(tt,P.t2-0.3,0.4);return[1-0.55*f2,1-0.55*f1+0.55*f2,1-0.55*f1];};
@@ -3729,12 +3731,12 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,
       read:clamp((tt-P.only+0.2)/1.2,0,1),readA:gv_io(tt,P.only-0.3,P.noth+0.6,0.3),draft:fin(tt,P.dr-0.1,0.6),pass:fin(tt,P.rows,0.5),who:clamp((tt-P.hl-0.1)/1.0,0,1)})}]);
   wc_paperOver(ctx,S);});
 
-// ---- 5 · People decide: where the agent wasn't sure it said so; Anil answers; the owners approve; the agent decided nothing ----
+// ---- 5 · People decide: where the agent wasn't sure it said so; Anil answers; the meaning is written first, then the data team reviews; the agent decided nothing ----
 scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{unsure:w("unsure","wasn't sure"),tb:c.keys-0.4,long:w("keys","long codes"),one:w("keys","One stands"),two:w("other","two values"),desc:w("other","description"),
       maybe:c.doubt,but:w("doubt","But when"),ck:w("doubt","the checklist"),draft:w("doubt","draft the"),ask:w("doubt","and ask"),an:c.confirms-0.4,conf:w("confirms","confirms"),
       cl:c.classed-0.4,classed:w("classed","classed"),reason:w("classed","Anil's reason"),ow:c.owners-0.4,fac:w("owners","the faculty"),yusuf:w("owners","Yusuf"),
-      jun:w("owners","Jun"),sig:sc.ends.owners-0.3,calls:c.calls-0.4,nothing:c.decided-0.4,brought:w("decided","brought")};});
+      jun:w("teamrev","Jun"),sig:sc.ends.teamrev-0.3,calls:c.calls-0.4,nothing:c.decided-0.4,brought:w("decided","brought")};});
   const seat=GV_FX.seat,A=AC_AD;
   gv_shots(ctx,S,t,sc.dur,[
     // the review's table of classes: two are marked "not sure"
@@ -3750,7 +3752,7 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       ac_facDesk(x);ac_smallReply(x,tt,{a:fin(tt,P.conf-0.3,0.4),typed:clamp((tt-P.conf)/1.6,0,1)});}},
     // the table again: award code identifies no one, with Anil's reason; name stays direct
     {at:P.cl,place:"screenBig",keys:[[P.cl,960,500,1]],push:0.02,draw:(x,tt)=>ac_classes(x,tt,{unsure:1,okAt:P.classed-0.2,why:clamp((tt-P.reason+0.2)/0.8,0,1)})},
-    // Yusuf's desk: the sign-off sheet, filled from the drafts; the owners approve, each for their part, in gold; then it's signed
+    // Yusuf's desk: the sign-off sheet, filled from the drafts; the faculty and Yusuf write the meaning first, then Jun's data team approves the change, each in gold; then it's signed
     {at:P.ow,place:"paperDesk",keys:[[P.ow,960,540,1]],push:0.02,draw:(x,tt)=>ac_signed(x,tt,{p:clamp((tt-P.ow-0.1)/0.9,0,1),
       ap:[fin(tt,P.fac-0.2,0.9),fin(tt,P.yusuf-0.2,0.9),fin(tt,P.jun-0.2,0.9)],signed:fin(tt,P.sig,0.6)})},
     // the advisers' desk: the list is in the tray, and an adviser lifts the phone
@@ -3765,8 +3767,8 @@ scene("decides",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
 scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s,o)=>wAt(sc,id,s,o);
     return{ag:w("governed","The agent"),gov:w("governed","governed"),pl:sc.ends.governed+0.3,fm:w("own","reads")-0.3,id:w("own","identity"),
       rows:[w("own","reads"),w("own","writes"),w("own","workspace")+0.4,w("samples","counts"),w("samples","never bulk"),w("samples","only reads")],
-      rev:w("samples","glossary")-0.1,ans:w("samples","glossary")+0.2,who:c.approve-0.4,cant:w("approve","can't"),owners:w("approve","owners sign"),owns:w("approve","owns nothing"),
-      nt:c.note-0.4,gr:c.green-0.5,green:w("green","green"),hw:[w("green","agent's access"),w("green","its checklist"),w("green","owners' approvals")]};});
+      rev:w("samples","glossary")-0.1,ans:w("samples","glossary")+0.2,who:c.approve-0.4,cant:w("approve","can't"),owners:w("approve","data team"),owns:w("approve","owns nothing"),
+      nt:c.note-0.4,gr:c.green-0.5,green:w("green","green"),hw:[w("green","agent's access"),w("green","its checklist"),w("green","data team's approval")]};});
   gv_shots(ctx,S,t,sc.dur,[
     // Yusuf's desk, from above: binder 26 open at its line; the rules for AI helpers are laid beside it, and the agent's star comes onto them
     {at:0,place:"desk26",keys:[[0,1050,420,1.45],[P.ag-0.5,960,540,1]],d:1.6,draw:(x,tt)=>{ac_open26(x,tt);
@@ -3778,9 +3780,9 @@ scene("agent",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     // as it's said; reviewed with everyone's; and Sam's answer, in gold
     {at:P.fm,place:"form",keys:[[P.fm,960,520,1.04],[P.rows[3]-0.6,960,560,1.08]],d:1.8,draw:(x,tt)=>ac_accessForm(x,tt,{id:fin(tt,P.id-0.4,0.5),
       rows:P.rows.map(s=>clamp((tt-s+0.1)/0.6,0,1)),rev:fin(tt,P.rev,0.5),ans:clamp((tt-P.ans)/1.2,0,1)})},
-    // who signs off what: the owners; the agent owns nothing, and its approve is crossed
+    // who owns what: the owners; the data team approves, the agent owns nothing, and its approve is crossed
     {at:P.who,place:"paperDesk",keys:[[P.who,960,540,1]],push:0.02,draw:(x,tt)=>{ac_whoPage(x,tt,{own:fin(tt,P.owners-0.2,0.6)});
-      ac_agentCard(x,tt,1260,380,fin(tt,P.cant-0.3,0.5),clamp((tt-P.cant)/0.6,0,1));ac_tagAt(x,tt,P.owns-0.1,null,1540,650,"owners only",{size:34,wash:GV.gold,washA:0.35});}},
+      ac_agentCard(x,tt,1260,380,fin(tt,P.cant-0.3,0.5),clamp((tt-P.cant)/0.6,0,1));ac_tagAt(x,tt,P.owns-0.1,null,1540,650,"people only",{size:34,wash:GV.gold,washA:0.35});}},
     // the night we imagined: the agent's note, and the empty signature line, ringed in pencil
     {at:P.nt,place:"screenNight",keys:[[P.nt,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{q:1,draft:1,ring:clamp((tt-P.nt-0.6)/1.0,0,1)});ac_note(x,tt,{});}},
     // the desk again: the binder's line goes green, and Yusuf writes where it runs
@@ -3807,7 +3809,7 @@ scene("written",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id
       person(x,"anil",380,905,0.8,{pose:"ac_pointUp",t:tt});person(x,"jun",965,905,0.8,{pose:"ac_readUp",flip:true,t:tt,nod:ac_nod(tt,P.rm+0.9)});}},
     // the board, close: anyone can read the steps, and argue with them: Anil's question, in pencil, beside step 4
     {at:P.bc,place:"boardData",keys:[[P.bc,960,500,1.04],[P.bc+0.1,980,500,1.08]],d:3,push:0.02,draw:(x,tt)=>ac_boardCheck(x,tt,{note:clamp((tt-P.argue+0.3)/1.4,0,1)})},
-    // who signs off what: the checklist's line, data governance with Noor; data governance approves a change to it
+    // who owns what: the checklist's line, data governance with Noor; data governance approves a change to it
     {at:P.who,place:"paperDesk",keys:[[P.who,960,540,1]],push:0.02,draw:(x,tt)=>{const r=ac_whoPage(x,tt,{focus:4,dim:fin(tt,P.who+0.4,0.6),hiA:fin(tt,P.dg-0.2,0.6)});
       ac_tagAt(x,tt,P.dg,null,AC_WX.x+700,r.rows[4]+96,"data governance approves",{size:34,wash:GV.gold,washA:0.35});}},
     // the checklist again: the next review follows it, step by step
@@ -3843,9 +3845,9 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,P=ac_once(sc,"P",()=>{const w=(id,s
     // personal data marked before anyone sees it: the date of birth's class, direct, ringed in gold
     {at:P.pd,place:"screenMorning",keys:[[P.pd,960,540,1]],push:0.02,draw:(x,tt)=>{ac_form(x,tt,{clsAt:-99,ok:1});
       ac_tagAt(x,tt,P.pd+0.3,null,1390,AC_F.y0+4*AC_F.dy-11,"personal data marked before anyone sees it",{size:34,wash:GV_CLASS.direct,washA:0.3});}},
-    // each decision by its owner, with the evidence, written down: the sheet, signed, and the register's page
+    // each decision by the right person, with the evidence, written down: the sheet, signed, and the register's page
     {at:P.each,place:"paperDesk",keys:[[P.each,960,540,1]],push:0.02,draw:(x,tt)=>{ac_sheetPic(x,150,262,760,-0.02,true);ac_whoPic(x,990,300,820,0.02);
-      ac_tagAt(x,tt,P.each+0.3,null,960,176,"each decision by its owner, with the evidence, written down",{size:34,wash:GV.gold,washA:0.35});}},
+      ac_tagAt(x,tt,P.each+0.3,null,960,176,"each decision by the right person, with the evidence, written down",{size:34,wash:GV.gold,washA:0.35});}},
     // the same screen in the morning light: the checks passed, the note ticked; people decide; it clears for the end card
     {at:P.last,place:"screenMorning",keys:[[P.last,960,540,1]],push:0.02,draw:(x,tt)=>{
       const cl=fin(tt,P.end-0.6,0.6);gv_halo(x,AC_F.cls-40,AC_F.y0+4*AC_F.dy-58,300,90,GV.gold,0.9*fin(tt,P.dec-0.1,0.6)*(1-cl));

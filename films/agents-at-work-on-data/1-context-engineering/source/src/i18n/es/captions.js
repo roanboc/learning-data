@@ -108,12 +108,12 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Hasta ahora, cada persona del equipo armaba su propio agente, con sus propias notas.",
 "Like the chant books named after their masters, each agent was its owner's: what one was told, no other knew.":
 "Como los libros de canto con el nombre de sus maestros, cada agente era de su dueño: lo que a uno le decían, ningún otro lo sabía.",
-"Now the team keeps one context, in the project, reviewed like code, with an owner for every meaning.":
-"Ahora el equipo mantiene un solo contexto, en el proyecto, revisado como el código, con un dueño para cada significado.",
+"Now the team keeps one context, in the project: the data team reviews it like code, and every meaning has an owner.":
+"Ahora el equipo mantiene un solo contexto, en el proyecto: el equipo de datos lo revisa como código, y cada significado tiene un dueño.",
 "Every agent, and every person, reads the same page.":
 "Cada agente, y cada persona, lee la misma página.",
-"When a meaning changes, its owner changes it once, and everyone reads the new one.":
-"Cuando un significado cambia, su dueño lo cambia una vez, y todos leen el nuevo.",
+"When a meaning changes, its owner changes it once, in the glossary, and everyone reads the new one.":
+"Cuando un significado cambia, su dueño lo cambia una vez, en el glosario, y todos leen el nuevo.",
 "Jun asks his agent again.":
 "Jun le pregunta otra vez a su agente.",
 "This time it looks the word up, counts 6,212, and cites Mei's definition.":

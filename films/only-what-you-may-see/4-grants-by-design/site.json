@@ -1,0 +1,91 @@
+{
+  "draft": true,
+  "kicker": "Access by design",
+  "kicker_es": "Acceso por diseño",
+  "title_es": "Permisos por diseño",
+  "h1": "Grants by design: once, by area and role",
+  "h1_es": "Permisos por diseño: una vez, por área y por rol",
+  "lead": "The registrar's tables got their readers one grant at a time: 163 grants made by hand on 58 tables, a new table waiting six days for its first reader, and nine tables owned by the person who made them. Now they move into a catalog of their own, and Mei Tanaka asks for a plan before a single grant.",
+  "lead_es": "Las tablas del registro recibían a sus lectores permiso por permiso: 163 permisos dados a mano sobre 58 tablas, una tabla nueva que esperaba seis días a su primer lector, y nueve tablas cuyo propietario era la persona que las hizo. Ahora se mudan a un catálogo propio, y Mei Tanaka pide un plan antes de un solo permiso.",
+  "description": "A film about designing who may read what in Unity Catalog, the fourth of Only what you may see: the Galápagos from the late 1960s, where the national park, on the Charles Darwin Research Station's advice, planned the visits once for the whole park, most of it closed, a few sites along marked trails, a guide with every group and the same rules for everyone, so the islands could take in 25,000 visitors in 1982 and 290,404 in 2025 with the sites they walk near pristine; three rights to read a table, and one more to find it; shelves by who reads them, and a grant only to a group and only on a catalog or a shelf, so every new table is read by the right people from its first minute; owners that are groups, not people; catalogs bound to the workspaces they may be read from, read only for a study; and the whole plan kept as code, approved by the data's owner.",
+  "description_es": "Una película sobre diseñar quién puede leer qué en Unity Catalog, la cuarta de Solo lo que puedes ver: las Galápagos desde fines de los años sesenta, donde el parque nacional, aconsejado por la Estación Científica Charles Darwin, planificó las visitas una vez para todo el parque, casi todo cerrado, unos pocos sitios con senderos marcados, un guía con cada grupo y las mismas reglas para todos, así que las islas pudieron recibir 25,000 visitantes en 1982 y 290,404 en 2025 con los sitios que recorren casi intactos; tres derechos para leer una tabla, y uno más para encontrarla; estantes según quién los lee, y un permiso solo para un grupo y solo en un catálogo o un estante, así que cada tabla nueva la leen las personas correctas desde su primer minuto; propietarios que son grupos, no personas; catálogos vinculados a los espacios de trabajo desde donde se pueden leer, solo para lectura en el caso de un estudio; y todo el plan guardado como código, aprobado por la dueña de los datos.",
+  "card": "Three rights to read a table, a shelf for each set of readers, groups as owners, and the plan kept as code.",
+  "card_es": "Tres derechos para leer una tabla, un estante por cada conjunto de lectores, grupos como propietarios, y el plan guardado como código.",
+  "chapters_es": [
+    "El plan para las islas",
+    "Una tabla a la vez",
+    "Tres puertas hacia una tabla",
+    "Estantes según quién los lee",
+    "Una tabla hecha mañana",
+    "Propietarios que no se van",
+    "Desde dónde se puede leer",
+    "Escrito una vez, guardado como código",
+    "De vuelta a las islas"
+  ],
+  "past": [
+    "The Galápagos, from the late 1960s: the visits planned once, for the whole park",
+    "The plan came first, and every visitor since has walked inside it."
+  ],
+  "past_es": [
+    "Las Galápagos, desde fines de los años sesenta: las visitas planificadas una vez, para todo el parque",
+    "El plan vino primero, y cada visitante desde entonces ha caminado dentro de él."
+  ],
+  "next_h": "You've seen the grants designed once, by shelf and by group, so every new table has its readers from its first minute and nobody grants by hand. Next: tags that travel, a class set once at the source and carried by everything made from it.",
+  "next_h_es": "Viste los permisos diseñados una vez, por estante y por grupo, así que cada tabla nueva tiene sus lectores desde su primer minuto y nadie da permisos a mano. Sigue: etiquetas que viajan, una clase puesta una vez en el origen y llevada por todo lo que se hace con ella.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film shows Databricks and GitHub as their docs did on 10 November 2026. These are the pages it follows.",
+    "p_es": "La película muestra Databricks y GitHub como los mostraban sus documentos el 10 de noviembre de 2026. Estas son las páginas que sigue.",
+    "links": [
+      {
+        "title": "Databricks: Unity Catalog privileges",
+        "title_es": "Databricks: privilegios de Unity Catalog",
+        "line": "What each right opens, from USE CATALOG and USE SCHEMA to SELECT, and BROWSE, which lets anyone find a table and ask for it.",
+        "line_es": "Qué abre cada derecho, de USE CATALOG y USE SCHEMA a SELECT, y BROWSE, que deja a cualquiera encontrar una tabla y pedirla.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/manage-privileges/privileges",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/manage-privileges/privileges"
+      },
+      {
+        "title": "Databricks: Unity Catalog best practices",
+        "title_es": "Databricks: buenas prácticas de Unity Catalog",
+        "line": "Grants to groups, catalogs by area and environment, and groups as the owners of what runs in production.",
+        "line_es": "Permisos para grupos, catálogos por área y por entorno, y grupos como propietarios de lo que corre en producción.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/best-practices",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/best-practices"
+      },
+      {
+        "title": "Databricks: manage Unity Catalog object ownership",
+        "title_es": "Databricks: administrar la propiedad de los objetos de Unity Catalog",
+        "line": "What an owner may do, and how to hand a catalog, a schema or a table to a group.",
+        "line_es": "Qué puede hacer un propietario, y cómo pasar un catálogo, un esquema o una tabla a un grupo.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/manage-privileges/ownership",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/manage-privileges/ownership"
+      },
+      {
+        "title": "Databricks: workspace-catalog binding",
+        "title_es": "Databricks: vincular catálogos a espacios de trabajo",
+        "line": "Limiting a catalog to the workspaces it may be read from, and making one of them read only.",
+        "line_es": "Limitar un catálogo a los espacios de trabajo desde donde se puede leer, y dejar uno de ellos solo para lectura.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/catalogs/binding",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/catalogs/binding"
+      },
+      {
+        "title": "Databricks: bundle resources",
+        "title_es": "Databricks: recursos de los paquetes",
+        "line": "A schema written as code, with its grants beside it: each a group and its privileges.",
+        "line_es": "Un esquema escrito como código, con sus permisos al lado: cada uno, un grupo y sus privilegios.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/dev-tools/bundles/resources",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dev-tools/bundles/resources"
+      },
+      {
+        "title": "GitHub: about code owners",
+        "title_es": "GitHub: acerca de los propietarios del código",
+        "line": "How the owner of a file is asked to review every change to it.",
+        "line_es": "Cómo se pide al propietario de un archivo que revise cada cambio en él.",
+        "href": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners",
+        "href_es": "https://docs.github.com/es/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners"
+      }
+    ]
+  }
+}

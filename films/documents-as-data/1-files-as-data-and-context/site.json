@@ -1,0 +1,92 @@
+{
+  "kicker": "Invoices, contracts and claims",
+  "kicker_es": "Facturas, contratos y solicitudes",
+  "title_es": "Archivos como datos y como contexto",
+  "h1": "Files as data and as context: read, keep or write",
+  "h1_es": "Archivos como datos y contexto: leer, guardar o escribir",
+  "lead": "In October, Finance received 3,860 supplier invoices, most of them PDF files, and typed each one in by hand; in September, one was paid twice. HR keeps every signed contract, and tutors claimed hours on spreadsheets. Each kind of document gets its own answer: read it, keep it, or write it as data.",
+  "lead_es": "En octubre, Finanzas recibió 3,860 facturas de proveedores, casi todas en PDF, y las ingresaba a mano; en septiembre pagó una dos veces. RR. HH. guarda cada contrato firmado, y los tutores pedían horas en hojas de cálculo. Cada documento tiene su respuesta: leerlo, guardarlo o escribirlo como datos.",
+  "description": "The single film of Documents as data, the last series of Modern data basics, on documents as data and as context. It opens in Washington in 1842, where a small office of the United States Navy read its ships' old logbooks into wind and current charts, and in Brussels in 1853, where ten nations agreed one log for ships of every flag. Today, at the university, three kinds of documents get three answers. Finance's supplier invoices, 3,860 in October, most of them PDF files in their suppliers' own layouts, land in a Unity Catalog volume; ai_parse_document reads each file and ai_extract takes out the fields Finance names, one row for each invoice, each keeping the path of its file; Jun Park's data project and Finance's own rules check every row, and of 3,860, 3,734 pass, while 126 go to a person, each with its reason. Signed contracts are kept as they were signed, with their metadata beside them, which the HR system writes as it makes them, so a person or an agent finds the signed version of Linh Nguyen's contract and cites its file. And the claims app writes each claim for hours as data, the moment it's made, with what each field means in a data contract, so nobody reads it back. The logs were kept, and read again over a century later.",
+  "description_es": "La única película de Documentos como datos, la última serie de Lo básico de los datos modernos, sobre los documentos como datos y como contexto. Empieza en Washington en 1842, donde una pequeña oficina de la Armada de los Estados Unidos leyó las viejas bitácoras de sus barcos para hacer cartas de vientos y corrientes, y en Bruselas en 1853, donde diez naciones acordaron una bitácora para barcos de todas las banderas. Hoy, en la universidad, tres tipos de documentos tienen tres respuestas. Las facturas de proveedores de Finanzas, 3,860 en octubre, la mayoría en PDF con el formato de cada proveedor, llegan a un volumen de Unity Catalog; ai_parse_document lee cada archivo y ai_extract saca los campos que Finanzas nombra, una fila por factura, cada una con la ruta de su archivo; el proyecto de datos de Jun Park y las reglas de Finanzas revisan cada fila, y de 3,860 pasan 3,734, mientras 126 van a una persona, cada una con su motivo. Los contratos firmados se guardan tal como se firmaron, con sus metadatos al lado, que el sistema de RR. HH. escribe al crearlos, así que una persona o un agente encuentra la versión firmada del contrato de Linh Nguyen y cita su archivo. Y la app de solicitudes escribe cada solicitud de pago de horas como datos, en el momento en que se hace, con lo que significa cada campo en un contrato de datos, así que nadie tiene que volver a leerla. Las bitácoras se guardaron, y se volvieron a leer más de un siglo después.",
+  "card": "Finance reads 3,860 invoices a month into checked data, HR keeps contracts as signed, and the claims app writes data.",
+  "card_es": "Finanzas lee 3,860 facturas al mes como datos revisados, RR. HH. guarda contratos firmados y la app de solicitudes escribe datos.",
+  "chapters_es": {
+    "logs": "De las bitácoras a las cartas",
+    "invoices": "Facturas, leídas como datos",
+    "contracts": "Contratos, guardados como se firmaron",
+    "written": "Escrito como datos",
+    "close": "Guarda el archivo"
+  },
+  "past": [
+    "Washington, 1842, and Brussels, 1853",
+    "Ships' old logbooks were read into wind and current charts, and ten nations agreed one log for every flag, so the next logs needed no reading."
+  ],
+  "past_es": [
+    "Washington, 1842, y Bruselas, 1853",
+    "Las viejas bitácoras de los barcos se leyeron para hacer cartas de vientos y corrientes, y diez naciones acordaron una bitácora para todas las banderas, así que las siguientes no hubo que leerlas."
+  ],
+  "next_h": "You've seen documents read, kept and written as data, and that closes Modern data basics. Which answer does each of your own documents need?",
+  "next_h_es": "Viste documentos leídos, guardados y escritos como datos, y con eso cierra Lo básico de los datos modernos. ¿Qué respuesta necesita cada uno de tus documentos?",
+  "repo": {
+    "invoices": [
+      "examples/files-as-data/read_invoices.sql",
+      "examples/files-as-data/check_invoices.sql"
+    ],
+    "contracts": [
+      "examples/files-as-data/contract_documents.csv",
+      "examples/files-as-data/signed_contract_file.sql",
+      "data/hr_system/contracts.csv"
+    ],
+    "written": [
+      "examples/files-as-data/claims_contract.yaml"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further in the official docs",
+    "h_es": "Más en la documentación oficial",
+    "p": "Every organisation's documents differ, so the film shows the idea once. Start from the docs, then investigate, adapt, implement, iterate.",
+    "p_es": "Los documentos de cada organización son distintos, así que la película muestra la idea una vez. Empieza por la documentación, y luego investiga, adapta, implementa e itera.",
+    "links": [
+      {
+        "title": "ai_parse_document",
+        "title_es": "ai_parse_document (en inglés)",
+        "line": "Databricks: reads a document's words, tables and layout into structured data.",
+        "line_es": "Databricks: lee las palabras, las tablas y la disposición de un documento como datos estructurados.",
+        "href": "https://docs.databricks.com/aws/en/sql/language-manual/functions/ai_parse_document",
+        "href_es": "https://docs.databricks.com/aws/en/sql/language-manual/functions/ai_parse_document"
+      },
+      {
+        "title": "ai_extract",
+        "title_es": "ai_extract (en inglés)",
+        "line": "Databricks: takes out the fields you name, from text or from what ai_parse_document read.",
+        "line_es": "Databricks: saca los campos que nombras, de un texto o de lo que leyó ai_parse_document.",
+        "href": "https://docs.databricks.com/aws/en/sql/language-manual/functions/ai_extract",
+        "href_es": "https://docs.databricks.com/aws/en/sql/language-manual/functions/ai_extract"
+      },
+      {
+        "title": "What are Unity Catalog volumes?",
+        "title_es": "Los volúmenes de Unity Catalog (en inglés)",
+        "line": "Databricks: a place for files of any kind, governed as tables are.",
+        "line_es": "Databricks: un lugar para archivos de cualquier tipo, gobernados como las tablas.",
+        "href": "https://docs.databricks.com/aws/en/volumes/",
+        "href_es": "https://docs.databricks.com/aws/en/volumes/"
+      },
+      {
+        "title": "Intelligent document processing",
+        "title_es": "Procesamiento inteligente de documentos (en inglés)",
+        "line": "Databricks: the whole path, from files to data that agents, apps and reports use.",
+        "line_es": "Databricks: todo el camino, de los archivos a datos que usan agentes, apps e informes.",
+        "href": "https://docs.databricks.com/aws/en/agents/agent-bricks/intelligent-document-processing",
+        "href_es": "https://docs.databricks.com/aws/en/agents/agent-bricks/intelligent-document-processing"
+      },
+      {
+        "title": "Open Data Contract Standard",
+        "title_es": "Open Data Contract Standard (en inglés)",
+        "line": "Bitol, at the Linux Foundation: the open standard the claims app's contract follows.",
+        "line_es": "Bitol, en la Linux Foundation: el estándar abierto que sigue el contrato de la app de solicitudes.",
+        "href": "https://bitol-io.github.io/open-data-contract-standard/latest/",
+        "href_es": "https://bitol-io.github.io/open-data-contract-standard/latest/"
+      }
+    ]
+  }
+}

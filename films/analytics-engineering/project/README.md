@@ -41,13 +41,13 @@ Then, if you like:
 | `python scripts/generate/decisions.py` | Checks every decision log and regenerates their index, `docs/decisions.md` |
 | `python scripts/check/requirements.py` | Checks the open requirements in `requirements/`, and lists them |
 | `python scripts/check/impact.py --base origin/main` | What a branch's change touches: changed and downstream models, contracts (additive or breaking), the meaning, decisions, tests, exposures, and who to ask. CI writes it on every pull request |
-| `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor, and each of its outputs as a contract, in the open standards, from the dbt contracts, and validates them against the standards' schemas |
-| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
+| `python scripts/generate/products.py` | Writes each data product (`governance/4-data-products/<name>.yml`) as a product descriptor in the open standard, from the dbt models; checks each canonical table's enterprise contract, which data governance writes first, against its model; and validates both against the standards' schemas |
+| `python scripts/generate/scorecard.py` | After a build: the data quality scorecard, `docs/scorecard.md`, every test by domain and quality dimension, with what didn't pass and its owner, and the hours spent checking the graduation list by hand. On Databricks, `--platform` adds the platform's checks: `examples/platform-results/` |
 | `python scripts/generate/issues.py` | After a build: one issue per owner with a test that didn't pass, with the date to answer by and what closes it, in `target/issues/` (a dry run: the owners are fictional) |
 | `python scripts/generate/codeowners.py` | Regenerates `CODEOWNERS`: the data team reviews the code, data governance its own files; owners decide meaning in the glossary, not in review |
 | `python scripts/check/governance.py --measures` | Checks data governance's rules (an owner, a glossary term or a confirmed absence, classified columns, tests with an owner and a dimension, described columns), each message with its how-to in `docs/how-to/`, and measures them |
 | `python scripts/check/architecture_map.py` | Checks the governance part of Noor's map (`governance/3-architecture-map/`) and writes its views: governance's services and promises, who does what, and each role's rights from its steps |
-| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, and agents under the same rules: `docs/databricks-governance.md` |
+| `dbt build --target databricks --profiles-dir . --vars '{personal_data_readers: <group>}'` | On Databricks: tags each column with its class and each table with its area, and masks direct personal data for everyone outside the group. One policy by tag instead, who read a table, the access review, Ontos, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md` |
 | `python scripts/generate/definitions.py` | Regenerates each domain's definitions (`_<domain>__definitions.md`) and `seeds/reference/shared/key_sets.csv` from the conceptual models |
 | `pip install dbt-metricflow==0.15.0`, then `DBT_PROFILES_DIR=. mf query --metrics learners_near_graduate_certificate --group-by learner_award__faculty_name` | Planning's answer, from the semantic layer's metric |
 | `dbt clean --profiles-dir .` | Deletes `target/`, the database with it, for a clean start |
@@ -61,7 +61,7 @@ report has no number for that date.
 
 Source freshness isn't part of `dbt build`. `dbt source freshness --profiles-dir .` checks it, and
 since the sample files don't change, it reports every source as stale (`ERROR STALE`). CI doesn't
-run it.
+run it. The student system's and the portal's receipts (`nightly_files`) carry the level the graduation list's users agreed, older than 24 hours fails, and a night's job runs that check before the build: `examples/a-late-file/`.
 
 ## Run it on Databricks
 
@@ -147,7 +147,7 @@ project/
 ├── seeds/
 │   ├── reference/<domain>/   data the business owns, that models join to: student (status map,
 │   │                         identity decisions, credit recognition), finance (tuition rates),
-│   │                         graduations (ceremonies), shared (key sets [generated] from each source's meta.key_set)
+│   │                         graduations (ceremonies), hr (newsletters), shared (key sets [generated] from each source's meta.key_set)
 │   └── expected/<domain>/    numbers published elsewhere, that tests reconcile against: planning
 │                             (the census report), finance (Finance's tuition report). No model
 │                             reads them
@@ -169,14 +169,15 @@ project/
 │   ├── marts/planning/       as at census; the semantic model and metric
 │   ├── marts/wallet/         as it is now
 │   ├── marts/finance/        as at census: the tuition recognised credit saves
-│   └── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
+│   ├── marts/graduations/    the graduation list, a row per certificate; what each use needs (meta.quality)
+│   └── marts/hr/             the tutors' mailing list and its send log, each erased by request (meta.erase_by)
 │                             Each core domain and mart folder also holds:
 │                               _<domain>__conceptual.yml and .md   its conceptual model
 │                               _<domain>__decisions.yml            its decision log
 │                               _<domain>__columns.md               its column doc blocks
 │                               _<domain>__definitions.md           [generated] doc blocks
 │                               _<domain>__physical.md              [generated] physical diagram
-├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses
+├── exposures/<consumer>/     who uses it: the census dashboard, the wallet app, the revenue forecast, a faculty's placements plan, the graduation list's four uses, HR's mailing tool
 ├── governance/               what isn't dbt's, and could live in another tool or repository:
 │   ├── 1-glossary/           every acronym the project can't avoid, and what it stands for
 │   ├── 2-owners/             who each owner is, and where their reviews go
@@ -190,10 +191,11 @@ project/
 │   ├── shared/               conventions every domain uses: keys and hashes, point in time
 │   ├── planning/             Planning's near-award rule and count, written once
 │   ├── governance/           on Databricks: each column's class, each critical column and each table's area as tags, the policy
+│   ├── privacy/              on Databricks: the nightly deletion job's steps, by request
 │   └── adapters/             engine workarounds: DuckDB constraints
 ├── tests/
 │   ├── generic/              custom generic tests, and dbt's four built-in ones, each with its quality dimension
-│   ├── rules/                business rules that must hold: identity decisions
+│   ├── rules/                business rules that must hold: identity decisions; names, each night, at the source
 │   ├── reconciliation/       a mart against an expected seed: the census report, the tuition report
 │   └── governance/           rules about the project itself: no model reads an expected seed
 ├── analyses/
@@ -203,8 +205,9 @@ project/
 │   ├── validation/           checking the result: reconcile with the census and tuition reports,
 │   │                         as-was and as-is
 │   ├── governance/           on Databricks: who read a table, and the access review
-│   └── quality/              on Databricks: the platform's checks for the scorecard, and the
-│                             badges' alert
+│   ├── privacy/              on Databricks: whether a request's data is gone, now and from the old files
+│   └── quality/              on Databricks: the platform's checks for the scorecard, the badges'
+│                             alert, the rounds of checking names by hand, the printed name's lineage
 ├── requirements/             [temporary] what's still open while something is built (questions,
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
@@ -214,7 +217,7 @@ project/
 │                             scorecard.md [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
-│   │                         and products.py: write the [generated] files; --check in CI
+│   │                         and products.py: write the [generated] files (products.py also checks the contracts); --check in CI
 │   ├── check/                check_metric.py: the metric against the census report; requirements.py:
 │   │                         only open requirements, with what shows they're done; governance.py:
 │   │                         data governance's rules, and their measures; impact.py: what a pull
@@ -234,7 +237,14 @@ project/
 │                             hot-warm-cold/: a streaming table, a materialized view and an archive,
 │                             data kept hot, warm and cold, with their service levels (Databricks only);
 │                             the-night-the-claims-job-failed/: a job that failed, the platform's
-│                             insight by morning, the fix and the pull request a person approved
+│                             insight by morning, the fix and the pull request a person approved;
+│                             reports-on-demand/: Finance's Genie Agent for casual teaching cost and
+│                             the fortnightly dashboard (Databricks only);
+│                             a-late-file/: the night a file came late, its freshness check on the
+│                             receipts, and the send that waits;
+│                             files-as-data/: supplier invoices read with the platform's functions and
+│                             checked, a signed contract found by its metadata, and the claims app's
+│                             data contract (Databricks only)
 ├── AGENTS.md                 what an AI agent may and may not do here, and its access
 ├── CODEOWNERS                [generated] who reviews a change: the data team, or data governance. An
 │                             example here: GitHub reads it only at a repository's root
@@ -320,13 +330,30 @@ person domain's conceptual model (`models/core/person/`) is a draft, and
 
 The graduation list has a slice of its own: 23 graduates and 25 certificates, at the ceremonies of
 December 2025, March, July and December 2026, from the student system's list of graduates
-(`data/student_system/graduations.csv`) and the portal's answers to "Is this your name?"
-(`data/portal/name_confirmations.csv`). They're not in the learners table, so the core's counts
+(`data/student_system/graduations.csv`), the portal's answers to "Is this your name?"
+(`data/portal/name_confirmations.csv`) and the exam boards' approved lists, kept apart from the
+student system (`data/exam_boards/approved_awards.csv`), which the list is reconciled with, award by
+award (`awards_match_the_boards`). They're not in the learners table, so the core's counts
 don't change. Their names are as the platform received them: no accents before September 2026
 unless the graduate corrected them in the portal, some family names in capitals, one given and
 family name swapped, and family names cut at the student system's 30 characters, such as Beatriz
 Fonseca de Albuquerque Cavalcanti's. Hamid Karimi's double degree is two certificates; Andrés
 Peñaloza (`S-16874`), who graduates in December 2026, is held as Andres Penaloza.
+
+Since 14 September 2026, each name is put right where it's born (*The hidden factory*): once, in the
+student system, by the registrar's office (DEC-SIS-06), and the nightly file keeps every letter
+(DEC-SIS-07). Each night three checks, owned by Mei Tanaka, look at the student system's graduations
+as staged (`tests/rules/`): a family name exactly 30 characters long, and one in capitals only, each
+hold for the registrar's office, a list to work through (`severity: warn`; on the example rows, which
+keep the names as they were before the office worked through them, two graduates cut at 30 and three
+in capitals); and a night's file of more than 200 names with not one letter outside A to Z stops the
+night's update (`night_file_keeps_every_letter`), so `dbt build` skips the graduation list, which keeps
+the night before's names. The example's nights hold a few names each, so it passes; add
+`--vars '{night_file_names: 0}'` to see it stop. The hours of checking the list by hand, round by
+round, are a seed (`seeds/reference/graduations/hand_check_rounds.csv`) and a table on the scorecard,
+and on Databricks two analyses count the rounds from the query history and the audit log
+(`analyses/quality/rounds_from_the_system_tables.sql`) and follow the printed name back to the
+student system, column by column, in Unity Catalog's lineage (`analyses/quality/printed_name_lineage.sql`).
 
 ## A new version, and who it touches
 

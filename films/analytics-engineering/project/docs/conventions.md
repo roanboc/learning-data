@@ -264,7 +264,7 @@ models and the marts.
 | An owner | `owner:` on every domain, entity, kind and relationship; `meta.owner` and `meta.domain` on every public model and mart | The map (`_shared__conceptual.yml`), each domain's conceptual model, the model's YAML |
 | A glossary term, or a confirmed absence | `source:` with the term data governance named (DEC-PRJ-11), or `no_glossary_term: {confirmed_by, confirmed_on}` once governance confirms there's none; `meta.glossary_term` on every public model | Each core domain's conceptual model, the model's YAML |
 | Classified columns | `meta.personal_data`: `direct`, `pseudonymous` or `none` | Each column of a public model or mart |
-| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
+| Tests with an owner and a dimension | `meta.owner`: the owner of the data it checks; `meta.dimension`: completeness, uniqueness, validity, consistency, accuracy or timeliness, DAMA's six; for accuracy, `meta.reference`: what it's checked against (*Which reference*) | Owners by folder in `dbt_project.yml`, or the test's own `meta` when its data has another owner; dimensions once per kind of test, in `tests/generic/` (dbt's four built-in tests are in `builtin.sql`, running dbt's own SQL), or the test's own `meta` |
 | Described columns | A `description` | Each column of a public model or mart. A warning until 1 December 2026, then an error |
 
 `python scripts/check/governance.py --measures` also prints how much of the project meets each rule.
@@ -292,12 +292,12 @@ implemented in them, the exposures, and the owners to ask. CI writes it into the
 
 Every public model and mart is an output of one data product, in `governance/4-data-products/<name>.yml`: its owner,
 domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
-and support, written by its owner. `scripts/generate/products.py` writes each product in the open
-standards, from that file and the dbt contracts: a product descriptor (`governance/6-product-descriptors/`) and a
-contract for each output (`governance/5-data-contracts/`), with the columns, types, keys, classes, tests and known
-limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
-if they're out of date, don't validate against the standards' schemas, or a shared model is in no
-product.
+and support, written by its owner. `scripts/generate/products.py` writes each product's descriptor in the
+open standard, from that file and the dbt models (`governance/6-product-descriptors/`), with the consumers from
+the lineage. Only canonical tables, the public models, have an enterprise contract (`governance/5-data-contracts/`):
+data governance's information architect writes it first, and the data team builds the model to it. The
+script fails if a model differs from its contract, a canonical table has none, a file doesn't validate
+against its standard's schema, or a shared model is in no product; `--check` in CI, if a descriptor is out of date.
 
 On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
 after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
@@ -305,7 +305,7 @@ class; and when the var `personal_data_readers` names a group, each column of di
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
-read a table, the access review, the product catalogue, and agents under the same rules: `docs/databricks-governance.md`.
+read a table, the access review, the product catalogue, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md`.
 
 ### What each use needs
 
@@ -315,9 +315,42 @@ Each use is an exposure. In the model's YAML, `meta.quality` holds one requireme
 the `level` agreed (`Zero wrong`, `Within 2% at each ceremony`), who it was agreed with
 (`agreed_with`) and what goes wrong when it isn't met (`business_impact`). The model's owner owns
 the levels. A column a use can't do without names that use in `meta.critical_for`: the use's
-critical data. `scripts/generate/products.py` writes each requirement into the contract as a
-quality rule in words (`type: text`), with its use, level and who agreed it, until a check
-measures it, and each critical column as a critical data element (`criticalDataElement: true`).
+critical data. Each requirement stays in the model's YAML, in words, with its use, level and who
+agreed it, until a check measures it; for a canonical table, the information architect writes it
+into the enterprise contract too, as a quality rule and its critical data elements.
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.
+
+A requirement about how old the data may be, timeliness, sits on the column that says its age.
+The graduation list has two, `student_system_as_of` and `portal_as_of`: when the night's files
+it was built from arrived, from each source's receipts (`nightly_files`). Each carries its level
+in its own `meta.quality`, and the product's latency names them as its `element`. The freshness
+check that measures it is on the receipts, at the same level: `error_after` only, with
+`warn_after: null`, because the night's job runs the check first and its failure is the warning
+(`examples/a-late-file/`).
+
+### Which reference
+
+A check can say a value is allowed: not empty, the right shape, at most 30 characters. That's
+validity, and the check's rule is all it knows. Only a reference outside the data can say a value
+is true, and measure accuracy: the person the data is about, a document seen once, or a record
+kept apart from the data's source, such as the exam boards' approved lists, which the faculties'
+boards make from their own decisions. A check against a copy of the same source measures
+consistency, not accuracy: the copy shares the source's gaps, and agrees with them. So every
+accuracy test names its reference in `meta.reference`, beside its owner and dimension; a
+reconciliation, row by row, is the generic test `reconciles_with` (`tests/generic/`), whose method,
+`reconciliation`, sits in its `meta` beside the reference (and in an enterprise contract, too); and
+the scorecard lists each accuracy test with its reference. A column whose values a reference
+confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
+`name_as_printed`, the graduate, on `name_confirmed_on`.
+
+### Erased by request
+
+A mart that holds people's rows by a key the privacy office can name says so in `meta.erase_by`:
+its key set and column (`{key_set: HR, column: staff_id}`). The nightly deletion job deletes a
+request's rows from every model that has it, then purges them and, after 7 days, removes the old
+files (`macros/privacy/erase.sql`); `analyses/privacy/check_a_request_is_gone.sql` shows they're
+gone. A model that only adds rows, such as a send log, can't be built again from the start
+(`full_refresh: false`), or its sources would bring back what the job deleted. HR's tutors' list and
+its send log are the first (`docs/databricks-governance.md`, section 12).

@@ -16,3 +16,39 @@ data_tests:
       isn't there. HR adds the next year's pay days before the last close of this one.
     config:
       meta: {owner: HR, dimension: completeness}
+
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and no longer than its field (DEC-SIS-07). It
+      measures validity: it has no reference but its rule, so it says a name is allowed, never right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  # each night, on stg_student_system__graduations
+  - name: family_name_may_be_cut_short
+    description: >
+      A family name exactly 30 characters long, the length of the student system's field until
+      14 September 2026, may have been cut short. It holds for the registrar's office, a list to
+      work through, one row per graduate; it never stops the night's update (DEC-SIS-06).
+    config:
+      severity: warn
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  - name: family_name_in_capitals_only
+    description: >
+      A family name in capitals only, as the online form took it until 2019. It holds for the
+      registrar's office, a list to work through, one row per graduate; it never stops the night's
+      update (DEC-SIS-06).
+    config:
+      severity: warn
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
+  - name: night_file_keeps_every_letter
+    description: >
+      The night's file, with more than 200 names and not one letter outside A to Z, is losing
+      letters on the way in. It stops: dbt build skips what's built from the student system's
+      graduations, so the graduation list keeps the night before's names (DEC-SIS-07).
+    config:
+      severity: error
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}

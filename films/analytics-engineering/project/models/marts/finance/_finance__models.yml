@@ -207,6 +207,113 @@ models:
         constraints: [{type: not_null}]
         config: {meta: {personal_data: none}}
 
+  - name: mart_finance__casual_claims
+    description: >
+      Finance's fact for casual teaching cost: one row per claim approved for casual staff (pay type
+      CAS), with its faculty, unit and teaching period, whether its duty is teaching (Finance's list,
+      the seed teaching_duties) and Finance's on-cost rate for the year of its teaching period (the
+      seed on_cost_rates). The metric view casual_teaching_cost counts it once, on Databricks
+      (DEC-FIN-05). Read it through the metric view: summed here by hand, casual teaching cost would
+      be defined twice.
+    config:
+      meta:
+        grain: One row per approved claim by casual staff
+        owner: "Rohan Desai, Finance"
+        domain: finance
+        consumer: The metric view casual_teaching_cost
+        limitations:
+          - id: LIM-FIN-04
+            text: >
+              The claims as the claims app holds them now, by the teaching period of the contract
+              they're claimed under: a claim approved after Finance reports a teaching period changes
+              that period's cost. Finance reports a period once its last claims are approved, five
+              weeks after it ends.
+    constraints:
+      - type: primary_key
+        name: pk_mart_finance__casual_claims
+        columns: [claim_key]
+        warn_unenforced: false
+    columns:
+      - name: claim_key
+        description: The claim's hash key, from the claims core (core_claim).
+        data_type: string
+        constraints: [{type: not_null}]
+        data_tests:
+          - unique:
+              config: {meta: {owner: "Rohan Desai, Finance"}}
+        config: {meta: {personal_data: pseudonymous}}
+      - name: faculty_code
+        description: The code of the faculty that teaches the unit, like HLT, from the registrar's list of units.
+        data_type: string
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Rohan Desai, Finance"}}
+        config: {meta: {personal_data: none}}
+      - name: faculty_name
+        description: The name of the faculty that teaches the unit.
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: unit_code
+        description: The unit the hours were worked for, like HI101.
+        data_type: string
+        constraints: [{type: not_null}]
+        config: {meta: {personal_data: none}}
+      - name: unit_name
+        description: The unit's name, from the registrar's list.
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: teaching_period
+        description: >
+          The teaching period the teaching was done in, like 2026-S1: the period of the contract the
+          claim is made under, not the day it was paid.
+        data_type: string
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Rohan Desai, Finance"}}
+        config: {meta: {personal_data: none}}
+      - name: duty
+        description: '{{ doc("claim_duty") }}'
+        data_type: string
+        config: {meta: {personal_data: none}}
+      - name: is_teaching_duty
+        description: >
+          Whether the duty is teaching, from Finance's list (teaching_duties): tutorial, marking and
+          consultation are; training isn't. A duty Finance hasn't decided stops the build.
+        data_type: boolean
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Rohan Desai, Finance"}}
+        config: {meta: {personal_data: none}}
+      - name: amount
+        description: '{{ doc("claim_amount") }}'
+        data_type: decimal(9,2)
+        config: {meta: {personal_data: none}}
+      - name: on_cost_rate
+        description: >
+          Finance's on-cost rate for the year of the teaching period (on_cost_rates): what the
+          university pays on top of the pay, as a share of it. A year without a rate stops the build.
+        data_type: decimal(5,4)
+        data_tests:
+          - not_null:
+              config: {meta: {owner: "Rohan Desai, Finance"}}
+        config: {meta: {personal_data: none}}
+
+  - name: casual_teaching_cost
+    description: >
+      Casual teaching cost, defined once, for every tool that reads it: what the casual teaching in a
+      teaching period costs. The claims approved for casual staff for teaching (tutorial, marking and
+      consultation), plus on-costs, counted by the teaching period the teaching was done in, not the
+      day it was paid; by faculty, unit and teaching period. A Unity Catalog metric view over
+      mart_finance__casual_claims, on Databricks only (DEC-FIN-05). Its rules are inside its measure,
+      so they go with it when it's read in another format. The other two counts that once shared its
+      name have names of their own: casual hours contracted, for planning, and casual pay paid, for
+      each pay day (mart_finance__casual_pay_paid).
+    config:
+      meta:
+        owner: "Rohan Desai, Finance"
+        domain: finance
+        glossary_term: casual_teaching_cost
+
 unit_tests:
 
   - name: recognised_credit_saves_tuition_in_the_enrolled_award_only
@@ -280,3 +387,42 @@ unit_tests:
         pay_day,unit_code,casual_staff_paid,claims_paid,hours_paid
         2026-11-05,HI101,1,1,1.00
         2026-11-19,HI101,1,1,2.00
+
+  - name: casual_teaching_cost_counts_approved_casual_claims_by_their_teaching_period
+    description: >
+      Finance's rules, tested before they run: a claim approved for casual staff is in, with its
+      teaching period's on-cost rate, and its duty marked teaching or not (training isn't). A claim
+      still waiting for its coordinator isn't in, nor one claimed under a fixed-term contract.
+    model: mart_finance__casual_claims
+    given:
+      - input: ref('core_claim', v=1)
+        format: csv
+        rows: |
+          claim_key,claim_bk,staff_bk,contract_bk,unit_code,duty,worked_on,hours,amount,status,approved_at,updated_at,pay_type,teaching_period
+          C1,CLM|CL-1,HR|E-1,HR|T-1,HI101,tutorial,2026-03-03,1.00,175.00,approved,2026-03-06 10:12:00,2026-03-06 10:12:00,CAS,2026-S1
+          C2,CLM|CL-2,HR|E-1,HR|T-1,HI101,training,2026-02-26,2.00,120.00,approved,2026-03-02 09:41:00,2026-03-02 09:41:00,CAS,2026-S1
+          C3,CLM|CL-3,HR|E-2,HR|T-2,HI101,marking,2026-10-27,2.00,180.00,submitted,,2026-10-27 16:00:00,CAS,2026-S2
+          C4,CLM|CL-4,HR|E-3,HR|T-3,HI101,tutorial,2026-03-10,1.00,190.00,approved,2026-03-12 11:00:00,2026-03-12 11:00:00,FT,2026-S1
+      - input: ref('units')
+        format: csv
+        rows: |
+          unit_code,unit_name,faculty_code,faculty_name
+          HI101,Introduction to Health Informatics,HLT,Faculty of Health
+      - input: ref('teaching_duties')
+        format: csv
+        rows: |
+          duty,is_teaching_duty,decided_by,decided_on
+          tutorial,true,Finance,2026-09-15
+          marking,true,Finance,2026-09-15
+          training,false,Finance,2026-09-15
+      - input: ref('on_cost_rates')
+        format: csv
+        rows: |
+          rate_year,on_cost_rate,published_by,published_on
+          2026,0.175,Finance,2025-11-28
+    expect:
+      format: csv
+      rows: |
+        claim_key,teaching_period,duty,is_teaching_duty,amount,on_cost_rate
+        C1,2026-S1,tutorial,true,175.00,0.175
+        C2,2026-S1,training,false,120.00,0.175

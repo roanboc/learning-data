@@ -61,3 +61,26 @@ decisions:
     status: agreed
     implemented_in: [mart_finance__casual_pay_paid, pay_day.sql]
     relates_to: [DEC-PRJ-16, LIM-FIN-02, LIM-FIN-03]
+
+  - id: DEC-FIN-05
+    step: consumer_output
+    title: Casual teaching cost is defined once, as a metric view on the claims approved for teaching, plus on-costs
+    text: Casual teaching cost is what the casual teaching in a teaching period costs. The claims approved
+      for casual staff (pay type CAS) for teaching duties (tutorial, marking and consultation, the seed
+      teaching_duties), plus on-costs at Finance's rate for the year (on_cost_rates), counted by the
+      teaching period of the contract each claim is made under, not the day it was paid; by faculty,
+      unit and teaching period. It is defined once, as the Unity Catalog metric view casual_teaching_cost,
+      over the fact mart_finance__casual_claims, with its rules inside its measure, its display name,
+      synonyms and format. The other two counts that shared its name keep names of their own, casual
+      hours contracted, for planning, and casual pay paid, for each pay day. Accepted as LIM-FIN-04, on
+      the fact.
+    why: In August 2026 three tools gave the Faculty of Health three numbers for casual teaching cost
+      in Semester 1, A$2.46 million, A$1.88 million and A$2.21 million, and nobody could tell which one
+      answered the question. Each was right for its own question. Rohan Desai's definition lived only
+      inside Finance's report, which no other tool could read. Defined once near the data, every tool
+      on the platform gives the same number, and a definition in the open travels to other tools.
+    decided_by: Rohan Desai, Finance, with Jun Park, analytics engineer
+    decided_on: 2026-09-15
+    status: agreed
+    implemented_in: [mart_finance__casual_claims, casual_teaching_cost]
+    relates_to: [DEC-FIN-04, LIM-FIN-04]

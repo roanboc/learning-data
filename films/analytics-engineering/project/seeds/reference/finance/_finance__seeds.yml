@@ -32,3 +32,49 @@ seeds:
         data_tests: [not_null]
       - name: published_on
         description: When Finance published the rate.
+
+  - name: teaching_duties
+    description: >
+      One row per duty the claims app knows: whether Finance counts it as teaching, in casual
+      teaching cost. Tutorials, marking and consultation are teaching; training isn't. Reference
+      data, owned by Rohan Desai, Finance, who decided it on 15 September 2026 (DEC-FIN-05); changes
+      come through a pull request he approves.
+    config:
+      column_types:
+        duty: string
+        is_teaching_duty: boolean
+        decided_by: string
+        decided_on: date
+      meta: {owner: "Rohan Desai, Finance", domain: finance, purpose: reference}
+    columns:
+      - name: duty
+        description: '{{ doc("claim_duty") }}'
+        data_tests: [unique, not_null]
+      - name: is_teaching_duty
+        description: Whether the duty is teaching, and so counts in casual teaching cost.
+        data_tests: [not_null]
+      - name: decided_on
+        description: When Finance decided it.
+
+  - name: on_cost_rates
+    description: >
+      One row per year: Finance's on-cost rate, what the university pays on top of casual pay
+      (superannuation, payroll tax and workers' compensation), as a share of the pay. Casual
+      teaching cost adds it to each claim, at the rate for the year of its teaching period. Reference
+      data, owned by Finance, which publishes the rate for each year before it starts.
+    config:
+      column_types:
+        rate_year: int
+        on_cost_rate: decimal(5,4)
+        published_by: string
+        published_on: date
+      meta: {owner: Finance, domain: finance, purpose: reference}
+    columns:
+      - name: rate_year
+        description: The calendar year the rate applies to.
+        data_tests: [unique, not_null]
+      - name: on_cost_rate
+        description: The on-costs, as a share of casual pay, 0.175 for 17.5 per cent.
+        data_tests: [not_null]
+      - name: published_on
+        description: When Finance published the rate.

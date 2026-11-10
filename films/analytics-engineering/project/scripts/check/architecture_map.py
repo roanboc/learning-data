@@ -293,16 +293,22 @@ def of_kind(elements, kind):
 
 
 def ordered(steps):
-    """The steps in the order they trigger each other, from the one nothing triggers."""
+    """The steps in the order they trigger each other, from the ones nothing triggers: each step after every step
+    that triggers it, so a step two others start (from a ticket, or from a failed night build) comes after both."""
     by_name = {s["name"]: s for s in steps}
-    triggered = {t for s in steps for t in rels(s, "triggering")}
-    out, todo = [], [s for s in steps if s["name"] not in triggered]
-    while todo:
-        step = todo.pop(0)
-        if step in out:
-            continue
-        out.append(step)
-        todo += [by_name[t] for t in rels(step, "triggering") if t in by_name]
+    nexts = {name: [t for t in rels(step, "triggering") if t in by_name] for name, step in by_name.items()}
+    waiting = {name: 0 for name in by_name}
+    for after in nexts.values():
+        for name in after:
+            waiting[name] += 1
+    out, ready = [], [name for name in by_name if not waiting[name]]
+    while ready:
+        name = ready.pop(0)
+        out.append(by_name[name])
+        for t in nexts[name]:
+            waiting[t] -= 1
+            if not waiting[t]:
+                ready.append(t)
     return out + [s for s in steps if s not in out]
 
 

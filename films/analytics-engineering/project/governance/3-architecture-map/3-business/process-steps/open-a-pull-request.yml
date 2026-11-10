@@ -3,6 +3,7 @@ kind: business process
 owner: Yusuf Demir, data governance lead
 relationships:
 - assignment: planning contributor
+- assignment: workload contributor
 - access (reads): change draft
 - access (reads): test and its result
 - access (writes): pull request

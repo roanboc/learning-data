@@ -21,8 +21,6 @@
 /models/core/course/_core_course__models.yml             mei.tanaka@uni.example jun.park@uni.example
 /models/core/person/_person__conceptual.yml              mei.tanaka@uni.example admissions@uni.example hr@uni.example research@uni.example alumni@uni.example noor@uni.example data.governance@uni.example
 /models/core/person/_person__decisions.yml               mei.tanaka@uni.example admissions@uni.example hr@uni.example research@uni.example alumni@uni.example noor@uni.example data.governance@uni.example
-/models/core/staff/_staff__conceptual.yml                hr@uni.example noor@uni.example data.governance@uni.example
-/models/core/staff/_core_staff__models.yml               hr@uni.example jun.park@uni.example
 /models/core/student/_student__conceptual.yml            mei.tanaka@uni.example learning@uni.example noor@uni.example data.governance@uni.example
 /models/core/student/_student__decisions.yml             mei.tanaka@uni.example learning@uni.example noor@uni.example data.governance@uni.example
 /models/core/student/_core_student__models.yml           mei.tanaka@uni.example jun.park@uni.example
@@ -41,7 +39,6 @@
 
 # What comes in: each source's owner
 /sources/alumni_system/                                  alumni@uni.example jun.park@uni.example
-/sources/claims_app/                                     hr@uni.example jun.park@uni.example
 /sources/hr_system/                                      hr@uni.example jun.park@uni.example
 /sources/learning_platform/                              learning@uni.example jun.park@uni.example
 /sources/research_system/                                research@uni.example jun.park@uni.example
@@ -51,20 +48,16 @@
 # Data the business owns: each seed's owner
 /seeds/expected/finance/tuition_report.csv               finance@uni.example
 /seeds/expected/planning/census_report.csv               census@uni.example
-/seeds/reference/course/units.csv                        registrar@uni.example
 /seeds/reference/finance/tuition_rates.csv               finance@uni.example
-/seeds/reference/staff/pay_days.csv                      hr@uni.example
 /seeds/reference/student/status_map.csv                  mei.tanaka@uni.example
 /seeds/reference/student/learner_identity_decisions.csv  mei.tanaka@uni.example
 /seeds/reference/student/credit_recognition.csv          faculties@uni.example
 
 # Data products: each product's owner
 /governance/4-data-products/awards.yml                   mei.tanaka@uni.example
-/governance/4-data-products/claims.yml                   hr@uni.example
 /governance/4-data-products/learner_records.yml          mei.tanaka@uni.example
 /governance/4-data-products/learner_wallet.yml           wallet@uni.example
 /governance/4-data-products/learners_near_an_award.yml   clara.jensen@uni.example
-/governance/4-data-products/payroll_export.yml           hr@uni.example
 /governance/4-data-products/short_course_follow_ups.yml  learning@uni.example
 /governance/4-data-products/tuition_forgone.yml          finance@uni.example
 
@@ -90,3 +83,14 @@
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
+
+# The claims app: its owner, for the claims read where the app writes them
+/sources/claims_app/                                     hr@uni.example jun.park@uni.example
+
+# Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products
+/models/core/staff/_staff__conceptual.yml                hr@uni.example noor@uni.example data.governance@uni.example
+/models/core/staff/_core_staff__models.yml               hr@uni.example jun.park@uni.example
+/seeds/reference/course/units.csv                        registrar@uni.example
+/seeds/reference/staff/pay_days.csv                      hr@uni.example
+/governance/4-data-products/claims.yml                   hr@uni.example
+/governance/4-data-products/payroll_export.yml           hr@uni.example

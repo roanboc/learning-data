@@ -7,7 +7,7 @@
 | Capability | Owner | Heat | Evidence |
 |---|---|---|---|
 | change without surprises | Yusuf Demir, data governance lead | green | impact report on every pull request; versioned contracts (project: impact.py, DEC-PRJ-02) · 20 Oct 2026 |
-| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; CODEOWNERS generated from them (project: governance.py, codeowners.py) · 20 Oct 2026 |
+| decide who owns what | Yusuf Demir, data governance lead | green | owners on every domain, entity and shared model, checked on every pull request; the impact check tells them what a change touches (project: governance.py, impact.py) · 10 Nov 2026 |
 | define what words mean | Yusuf Demir, data governance lead | amber | one glossary term synced (award); the other core entities have governance's confirmation there's none (project: governance.py, sync-the-glossary) · 20 Oct 2026 |
 | govern data | Yusuf Demir, data governance lead | amber | the seven beneath it · 20 Oct 2026 |
 | keep data fit for use | Yusuf Demir, data governance lead | green | every test has an owner and a dimension; the scorecard is read from the run; emails checked where they're typed (project: scorecard.md, DEC-SC-04) · 20 Oct 2026 |

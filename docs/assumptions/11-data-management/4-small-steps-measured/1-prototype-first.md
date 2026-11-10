@@ -28,5 +28,5 @@ The soundtrack ships as the films merged on 10 November ship theirs: the MP3 bes
 
 ## Done on 10 November 2026
 
-- The README's topics table had nine rows while the site showed eleven topics: this film's PR adds *Data protection and privacy* and *Leading data people* as well as *Data management*, and counts twelve. Three other open PRs (*Every area, one job*, *Services with customers*, *Who is it, really?*) add a row each and count ten; whichever merges after this one keeps the count at twelve and only edits its own row.
+- The README's topics table had nine rows while the site showed eleven topics. *Who is it, really?* (#217) merged first, with the *Data protection and privacy* row; this film's PR adds *Leading data people* and *Data management* and counts twelve, the topics the site shows. *Every area, one job* and *Services with customers* each add a *Data management* row and count ten: whichever merges after this one keeps twelve and folds its film into the row.
 - Each idea named once with its reference, and checked on the day: the Agile Manifesto (2001), the Scrum Guide (2020), Databricks' dashboards documentation (last updated 5 November 2026; no release status said or shown).

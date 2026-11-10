@@ -1,6 +1,6 @@
 # Data management: the module's own questions and assumptions
 
-> Copied from the setup thread's notes on 10 November 2026, and kept up to date here since. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
+> Kept by the module's setup thread, "Build the data management module", from 5 November 2026, and brought up to date on 10 November, when all fifteen films had merged. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 
 Rodrigo, 5 November 2026, 11:53 UTC: "Work on the films with assumptions and merge them all. Give me a final checklist with the questions you had for each topic and the assumption and I will later review the entire report and will fix when I see the assumption was incorrect."
 
@@ -8,6 +8,32 @@ So every question we would have asked him is listed here with the assumption mad
 
 - **The module's own** are below, kept by the setup thread ("Build the data management module").
 - **Each film's own** are in its own file beside this one, a folder per series (`<n-series>/<film folder>.md`), written in the film's own pull request: the question, the assumption, and where it shows in the film. `python site-tools/assumptions.py` joins them all into one file, the final checklist.
+
+## The films
+
+All fifteen are on main with the Draft label, merged in each series' order on 10 November 2026. Each film's own questions are in its file, 286 in all, beside the module's own 23 below:
+
+| Series | Film | Pull request | Its questions and assumptions |
+|---|---|---|---|
+| *A plan in ninety days* | 1 of 4, *Every area, one job* | [#253](https://github.com/roanboc/learning-data/pull/253) | [23 rows](1-a-plan-in-ninety-days/1-every-area-one-job.md) |
+| *A plan in ninety days* | 2 of 4, *Listen first* | [#246](https://github.com/roanboc/learning-data/pull/246) | [24 rows](1-a-plan-in-ninety-days/2-listen-first.md) |
+| *A plan in ninety days* | 3 of 4, *Design it simple* | [#258](https://github.com/roanboc/learning-data/pull/258) | [25 rows](1-a-plan-in-ninety-days/3-design-it-simple.md) |
+| *A plan in ninety days* | 4 of 4, *From gaps to a roadmap* | [#275](https://github.com/roanboc/learning-data/pull/275) | [21 rows](1-a-plan-in-ninety-days/4-from-gaps-to-a-roadmap.md) |
+| *Making the case* | 1 of 4, *A case worth funding* | [#274](https://github.com/roanboc/learning-data/pull/274) | [23 rows](2-making-the-case/1-a-case-worth-funding.md) |
+| *Making the case* | 2 of 4, *Risks, said out loud* | [#272](https://github.com/roanboc/learning-data/pull/272) | [24 rows](2-making-the-case/2-risks-said-out-loud.md) |
+| *Making the case* | 3 of 4, *Everyone at the table* | [#279](https://github.com/roanboc/learning-data/pull/279) | [24 rows](2-making-the-case/3-everyone-at-the-table.md) |
+| *Making the case* | 4 of 4, *One list, not twenty* | [#265](https://github.com/roanboc/learning-data/pull/265) | [22 rows](2-making-the-case/4-one-list-not-twenty.md) |
+| *Architecture that keeps up* | 1 of 3, *Services with customers* | [#240](https://github.com/roanboc/learning-data/pull/240) | [15 rows](3-architecture-that-keeps-up/1-services-with-customers.md) |
+| *Architecture that keeps up* | 2 of 3, *One map, in the repo* | [#222](https://github.com/roanboc/learning-data/pull/222) | [11 items](3-architecture-that-keeps-up/2-one-map-in-the-repo.md) |
+| *Architecture that keeps up* | 3 of 3, *A path for every provider* | [#230](https://github.com/roanboc/learning-data/pull/230) | [10 items](3-architecture-that-keeps-up/3-a-path-for-every-provider.md) |
+| *Small steps, measured* | 1 of 4, *Prototype first* | [#266](https://github.com/roanboc/learning-data/pull/266) | [11 rows](4-small-steps-measured/1-prototype-first.md) |
+| *Small steps, measured* | 2 of 4, *Measures that matter* | [#270](https://github.com/roanboc/learning-data/pull/270) | [14 rows](4-small-steps-measured/2-measures-that-matter.md) |
+| *Small steps, measured* | 3 of 4, *Better every week* | [#276](https://github.com/roanboc/learning-data/pull/276) | [19 rows](4-small-steps-measured/3-better-every-week.md) |
+| *Small steps, measured* | 4 of 4, *Strategy is a habit* | [#269](https://github.com/roanboc/learning-data/pull/269) | [20 rows](4-small-steps-measured/4-strategy-is-a-habit.md) |
+
+## Where to start
+
+If you read only a few rows, these shape the most: 3 (your own practice as a data manager, which wasn't asked), 2 (the reference: DAMA-DMBOK as the map, enterprise architecture's discover, define and plan as the spine, lean delivery as the rhythm), 1 (where the module stops, beside *Leading data people* and *Data quality*), 7 (Helena's first year, the story every film follows) and 4 (the four series, with *Architecture that keeps up* placed third). Each film's file also says which opening story it tells and how it was checked.
 
 ## The module
 

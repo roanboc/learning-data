@@ -11,6 +11,7 @@ Keeping data good, and making it better. Every November, two people spend three 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Read by an agent](https://data.learn-all.org/quality-as-a-habit/read-by-an-agent/) | Descriptions and agents | 8 min | 7 | 3 questions | [script](3-read-by-an-agent/script.md) · [source](3-read-by-an-agent/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

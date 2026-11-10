@@ -8,7 +8,7 @@ A mandate is one page that says the one kind of task an agent may do alone, and 
 
 ## On the map
 
-A mandate is a requirement, as Noor's map writes a rule with its home: what must be true, and what holds it. ArchiMate has no element for an agent's mandate, so it's kept here, with the project's governance, and named on the map where it applies: on the agent's assignment to its role, beside its stage for the task it covers (`governance/3-architecture-map/`). The stage says how far the agent may go; the mandate says what, exactly, it may do at stage 5.
+A mandate is a requirement, as Noor's map writes a rule with its home: what must be true, and what holds it. ArchiMate has no element for an agent's mandate, so it's kept here, with the project's governance, and named on the map where it applies: on the agent's assignment to its role, beside its stage for the task it covers: `mandate: 8-mandates/workload-agent.yml` on the workload agent's ([its element](../3-architecture-map/5-application/application-components/workload-agent.yml)). `scripts/check/architecture_map.py` fails if a task at stage 5 has no mandate beside it. The stage says how far the agent may go; the mandate says what, exactly, it may do at stage 5.
 
 ## Signed, approved, read again
 

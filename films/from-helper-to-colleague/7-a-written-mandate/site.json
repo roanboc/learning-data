@@ -33,7 +33,8 @@
     ],
     "page": [
       "governance/8-mandates/README.md",
-      "governance/8-mandates/workload-agent.yml"
+      "governance/8-mandates/workload-agent.yml",
+      "governance/3-architecture-map/5-application/application-components/workload-agent.yml"
     ],
     "held": [
       "review-and-release/rulesets/workload-agent-folders.json",

@@ -2,7 +2,7 @@ sources:
   - name: claims_app
     description: '{{ doc("source_claims_app") }}'
     # On Databricks, the app's own Postgres database on Lakebase, registered in Unity Catalog as
-    # the catalog claims_app, with Postgres's schema public: read in place, nothing copied in
+    # the catalog claims_app, with Postgres's schema public: read there, with no copy of ours
     # (DEC-CLM-01). On DuckDB a CSV file stands in for it.
     database: "{{ env_var('DBT_CLAIMS_APP_CATALOG', 'claims_app') if target.type == 'databricks' else target.database }}"
     schema: "{{ 'public' if target.type == 'databricks' else env_var('DBT_SOURCES_SCHEMA_PREFIX', '') ~ 'claims_app' }}"
@@ -10,7 +10,7 @@ sources:
       # Read by dbt-duckdb only: on DuckDB each table is a CSV file in data/. Databricks reads the app's own table.
       external_location: "read_csv('data/claims_app/{name}.csv', header = true, all_varchar = true)"
       # Nothing is loaded, so freshness reads the app's own time of a claim's last change. With no
-      # copy, nothing can fall behind: a stale updated_at means the app has stopped writing claims.
+      # copy of ours, nothing of ours falls behind: a stale updated_at means the app has stopped writing claims.
       loaded_at_field: "cast(updated_at as timestamp)"
       freshness:
         warn_after: {count: 2, period: day}

@@ -2,7 +2,7 @@
    What only this film draws of the university, in the module's look (look.js, cards.js, map.js, tools.js), each name with the prefix oc_:
    the old way of claiming (a spreadsheet by email, typed again), the usual design (the app on its own database, a pipeline copying each
    change to an analytics platform, reports on the copy), and the design Noor chose: the claims app on Lakebase, the Postgres database in
-   Databricks, one copy of its rows in the lake's open storage, Postgres serving the app and the lakehouse reading the same rows for
+   Databricks, one copy of its rows in the lake's open storage, kept by the platform in two forms, Postgres serving the app and the lakehouse reading the same rows for
    analysis, the readers that read that copy through Unity Catalog, the contracts the lakehouse writes and serves to the app, and the one
    thing that still leaves the platform: the hours to pay, for the payroll system the university buys. Everything is in the map's
    coordinates (1920 x 1080), with words of 28 px or more. A person's pay is never on screen: the claims show hours, never amounts. */
@@ -75,7 +75,7 @@ function oc_usual(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;co
    data is born; inside it, Lakebase (Postgres) and the lakehouse over one copy of the rows, its two tables (the claims, the contracts),
    the three readers of the claims, and Unity Catalog along its foot; outside on the right, the payroll system the university buys.
    oc_one(ctx, t, o) draws them; o.parts (each 0 to 1, coming in): app, plat, lakebase, lakehouse, copy, write (the app's lane to its
-   rows), read (the lakehouse reading in place), readers, uc (Unity Catalog lit on the readers' lanes), hr, contracts (the lakehouse
+   rows), read (the lakehouse reading the rows' second form, for analysis), readers, uc (Unity Catalog lit on the readers' lanes), hr, contracts (the lakehouse
    writing them), serve (served to the app), check (each claim checked against its contract), payroll, tuesday (the hours to pay leaving
    by noon on Tuesday); o.lit: what glows ("claims", "contracts", "lakebase", "lakehouse", "uc", "tuesday", "once"); o.dim (0 to 1) all
    but the hours' lane fade; o.writer (0 to 1 each: claims, contracts) each table's writer named; o.ucText; o.a */
@@ -96,7 +96,7 @@ function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null
   // one copy: the rows in the lake's open storage, two tables, each with one writer
   if(pa("copy")>0){const [x,y,w,h]=O.copy;withA(ctx,pa("copy")*dm,()=>{if(lit("once")>0)glow(ctx,x+w/2,y+h/2,w*0.7,MD.agreed,0.22*lit("once"));
       md_card(ctx,x,y,w,h,{edge:lit("once")>0?mix(MD.flow,MD.agreed,lit("once")):MD.flow,glow:0.7+0.7*lit("once"),r:18,fill:"rgba(8,14,30,0.9)"});
-      md_icon(ctx,"store",x+36,y+40,34,MD.flow);md_label(ctx,x+66,y+50,"One copy",{col:MD.ink});
+      md_icon(ctx,"store",x+36,y+40,34,MD.flow);md_label(ctx,x+66,y+50,"One copy, kept in two forms",{col:MD.ink});
       const [cx,cy,cw]=O.claims,[kx,ky,kw]=O.contracts;
       out.claims=md_table(ctx,cx,cy,cw,{name:"claims",kind:wr.claims>0?"the app writes it":"rows",lit:lit("claims")});
       if(pa("contracts")>0||wr.contracts>0)withA(ctx,Math.max(pa("contracts"),pa("hr")),()=>{out.contracts=md_table(ctx,kx,ky,kw,{name:"contracts",kind:wr.contracts>0?"the lakehouse writes it":"rows",lit:lit("contracts")});});});}
@@ -104,7 +104,7 @@ function oc_one(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return null
   // the app writes its claims through Postgres: a request out, an answer back; and its rows go down into the copy
   if(pa("write")>0){const [ax,ay,aw]=O.app,[lx,ly,lw]=O.lakebase;withA(ctx,dm,()=>{md_way(ctx,"api",[ax+aw,ay+55],[lx,ly+55],t,{u:pa("write")});
       const pts=md_path([[lx+340,ly+110],[lx+340,O.claims[1]]]);md_lane(ctx,pts,MD.flow,0.85,{u:pa("write")});if(pa("write")>=1)md_flow(ctx,pts,t,{every:1.4,dur:0.9});});}
-  // the lakehouse reads the same rows, in place: a dashed lane, a question down and the answer back, nothing kept
+  // the lakehouse reads the same rows, in the second form the platform keeps for analysis: a dashed lane, a question down and the answer back
   if(pa("read")>0){const [lx,ly,lw]=O.lakehouse;withA(ctx,dm,()=>md_way(ctx,"query",[lx+80,ly+110],[C[0]+C[2]-60,C[1]],t,{u:pa("read"),pts:md_path([[lx+80,ly+110],[lx+80,ly+140],[C[0]+C[2]-60,ly+140],[C[0]+C[2]-60,C[1]]])}));}
   // the readers, each reading that copy through Unity Catalog
   if(pa("readers")>0){O.readers.forEach(([x,y,title,sub,icon],i)=>{const k=clamp(pa("readers")*1.6-i*0.3,0,1);if(k<=0)return;const fin=title==="Finance";

@@ -1,0 +1,89 @@
+{
+  "kicker": "Policies by tag",
+  "kicker_es": "Políticas por etiqueta",
+  "title_es": "Una política para muchas tablas",
+  "h1": "One policy for many tables: protected the day they appear",
+  "h1_es": "Una política para muchas tablas: protegidas el día que aparecen",
+  "lead": "The registrar's catalog holds 38 tables with personal data: 140 columns to hide, and new tables keep coming. Masked by hand, each new table shows every name until someone remembers it. How can every table be protected from its first minute, with no mask written for it?",
+  "lead_es": "El catálogo del registro tiene 38 tablas con datos personales: 140 columnas que ocultar, y siguen llegando tablas nuevas. Enmascarada a mano, cada tabla nueva muestra todos los nombres hasta que alguien se acuerda. ¿Cómo proteger cada tabla desde su primer minuto, sin escribirle ninguna máscara?",
+  "description": "A film about policies by tag in Databricks' Unity Catalog: why a mask set table by table leaves every new table open until someone remembers it; one policy for each class on the whole catalog, found by the column's governed tag, and a small function for each way to hide; a row filter that shows the study only its faculty's learners, and why it needs a tagged column; who each policy lets through, the builder included, and why a reader may meet only one mask on a column; a table with no level closed until its owner gives it one; the compute that can read these tables; and the policies kept as code beside the grants, reviewed by the data team, with the data's owner told what each change touches. It opens in North America in the 1970s, when a crew at a crashed truck needed a page for each chemical, until in 1980 one guide for chemicals that behave alike, found by their number, let a new chemical need only a line.",
+  "description_es": "Una película sobre las políticas por etiqueta en Unity Catalog de Databricks: por qué una máscara puesta tabla por tabla deja cada tabla nueva abierta hasta que alguien se acuerda de ella; una política por clase en todo el catálogo, hallada por la etiqueta gobernada de la columna, y una pequeña función para cada forma de ocultar; un filtro de filas que muestra al estudio solo a los estudiantes de su facultad, y por qué necesita una columna etiquetada; a quién deja pasar cada política, también a quien construye las tablas, y por qué quien lee solo puede encontrar una máscara en una columna; una tabla sin nivel, cerrada hasta que su dueña le da uno; el cómputo que puede leer estas tablas; y las políticas guardadas como código junto a los permisos, revisadas por el equipo de datos, con aviso a la dueña de los datos de qué toca cada cambio. Empieza en América del Norte en los años setenta, cuando un equipo ante un camión accidentado necesitaba una página para cada sustancia, hasta que en 1980 una guía para las sustancias que se comportan igual, hallada por su número, hizo que una sustancia nueva solo necesitara una línea.",
+  "card": "One policy for each class, found by its tag: every table protected the day it appears, and the study sees only its faculty.",
+  "card_es": "Una política por clase, hallada por su etiqueta: cada tabla protegida el día que aparece, y el estudio ve solo su facultad.",
+  "chapters_es": {
+    "page": "Una página para cada una",
+    "mask": "Una máscara para cada tabla",
+    "parts": "Una política para cada clase",
+    "ways": "Una función para cada forma",
+    "through": "A quién deja pasar",
+    "appears": "El día que aparece una tabla",
+    "code": "Guardadas como código"
+  },
+  "past": [
+    "North America, 1980: one guide for chemicals that behave alike",
+    "Chemicals that behave alike got one guide, found by their number, and a new chemical needed only a line: so one policy for each class, found by its tag, protects every table the day it appears."
+  ],
+  "past_es": [
+    "América del Norte, 1980: una guía para las sustancias que se comportan igual",
+    "Las sustancias que se comportan igual recibieron una sola guía, hallada por su número, y una sustancia nueva solo necesitaba una línea: así, una política por clase, hallada por su etiqueta, protege cada tabla el día que aparece."
+  ],
+  "next_h": "You've seen one policy protect every table the day it appears. Next: copies that keep the rules, where made-up learners, totals to share and a clean room keep the protection, or a copy isn't made.",
+  "next_h_es": "Viste una política proteger cada tabla el día que aparece. Después: copias que mantienen las reglas, donde estudiantes inventados, totales para compartir y una sala limpia mantienen la protección, o la copia no se hace.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más lejos",
+    "p": "The official pages behind each step the film shows, from Azure Databricks, and the guidebook of its opening story, from Transport Canada.",
+    "p_es": "Las páginas oficiales detrás de cada paso que muestra la película, de Azure Databricks, y la guía de su historia inicial, de Transport Canada.",
+    "links": [
+      {
+        "title": "Azure Databricks: Core concepts for attribute-based access control (ABAC)",
+        "title_es": "Azure Databricks: conceptos básicos para el control de acceso basado en atributos (ABAC)",
+        "line": "Policies found by tags, on a catalog or a shelf, that apply to each table as soon as it is made and tagged.",
+        "line_es": "Políticas que se aplican por etiqueta, en un catálogo o un estante, a cada tabla en cuanto se crea y se etiqueta.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/core-concepts",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/core-concepts"
+      },
+      {
+        "title": "Azure Databricks: Create and manage row filter and column mask policies",
+        "title_es": "Azure Databricks: creación y administración de directivas de filtro de fila y máscara de columna",
+        "line": "A policy's parts: where it sits, whom it covers and lets through, the columns it finds, and the function it runs.",
+        "line_es": "Las partes de una política: dónde está, a quién cubre y a quién deja pasar, qué columnas encuentra y qué función aplica.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/policies",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/policies"
+      },
+      {
+        "title": "Azure Databricks: Common patterns for row filtering and column masking",
+        "title_es": "Azure Databricks: patrones comunes para el filtrado de filas y el enmascaramiento de columnas",
+        "line": "Masks that keep the column's type, masks in part, filters by a tagged column, and a table closed until it is classified.",
+        "line_es": "Máscaras que conservan el tipo de la columna, máscaras en parte, filtros por una columna etiquetada, y una tabla cerrada hasta que se clasifica.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/common-patterns",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/common-patterns"
+      },
+      {
+        "title": "Azure Databricks: Requirements, quotas, and limitations for row filter and column mask policies",
+        "title_es": "Azure Databricks: requisitos, cuotas y limitaciones para las directivas de filtro de fila y máscara de columna",
+        "line": "The governed tags policies use, the compute that can read these tables, and how many policies each place may hold.",
+        "line_es": "Las etiquetas gobernadas que usan las políticas, el cómputo que puede leer estas tablas, y cuántas políticas admite cada lugar.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/abac/requirements",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/data-governance/unity-catalog/abac/requirements"
+      },
+      {
+        "title": "Databricks SQL: CREATE POLICY",
+        "title_es": "Databricks SQL: CREATE POLICY",
+        "line": "The statement the film's policies are written in, clause by clause.",
+        "line_es": "La instrucción en la que están escritas las políticas de la película, cláusula por cláusula.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/sql/language-manual/sql-ref-syntax-ddl-create-policy",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/sql/language-manual/sql-ref-syntax-ddl-create-policy"
+      },
+      {
+        "title": "Transport Canada: Emergency Response Guidebook",
+        "title_es": "Transport Canada: Guía de Respuesta en caso de Emergencia 2024 (PDF)",
+        "line": "The guidebook of the opening story, made by Canada, the United States and Mexico: its guides, its numbers, and how a crew uses it.",
+        "line_es": "La guía de la historia inicial, hecha por Canadá, Estados Unidos y México, en español: sus guías, sus números y cómo la usa un equipo.",
+        "href": "https://tc.canada.ca/en/dangerous-goods/canutec/emergency-response-guidebook",
+        "href_es": "https://tc.canada.ca/sites/default/files/2024-04/2024-guia-de-respuesta-en-caso-de-emergencia.pdf"
+      }
+    ]
+  },
+  "draft": true
+}

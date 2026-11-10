@@ -1,0 +1,1 @@
+*From tables to decisions*, the third series of the module Modern data basics, on serving data to people, agents and systems: answers on demand, dashboards for the questions that come back, and each measure defined once: {files} (English, with English and Spanish captions). Each opening story is real, with its sources in its script.

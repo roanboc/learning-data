@@ -2378,8 +2378,8 @@ scene("reads",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({context:wAt(
 // ---- 5 · On the page: Mei writes it once, in the glossary; the project copies it, with its source; a test; the contract; a rule ----
 const CE_YAML=["- name: commencing_student","  owner: Mei Tanaka, registrar's office","  source:","    term: Commencing student","    synced_on: 2026-11-04"];
 const CE_COL=["is_commencing      boolean","  {{ doc(\"commencing_student\") }}"];
-const CE_CONTRACT=["- name: is_commencing","  logicalType: boolean","  required: true","  description: 'True when the learner was a commencing student in this",
-  "    award on the census date. **Commencing student.** A student who","    started a course at the university for the first time in the year …'"];
+const CE_CONTRACT=["- name: is_commencing","  data_type: boolean","  constraints: [{type: not_null}]","  description: >","    True when the learner was a commencing student in this award",
+  "    on the census date. {{ doc(\"commencing_student\") }}","  meta: {glossary_term: commencing_student}"];
 const CE_RULE=["Before you count by a word, look up what it means: in the business","glossary, and in the conceptual model that copies its term with",
   "source: (decision DEC-PRJ-11). A column's name is a hint, not a meaning.","If the word isn't there, don't guess: ask its owner."];
 // the glossary's definition, word for word (the example project's skills/sync-the-glossary/example_glossary.json)
@@ -2407,9 +2407,9 @@ scene("page",(ctx,S,t,sc)=>{const c=sc.cues,P=ce_once(sc,"P",()=>({writes:wAt(sc
     {cut:true,at:P.test,place:"lab",keys:[[P.test,960,540,1],[P.test+0.1,960,530,1.02]],d:10,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
       const p=ce_pop(tt,P.test+0.2,null);ce_tests(x,360,190,1200,[ag_in(tt,P.new_,0.4),ag_in(tt,P.back,0.4),ag_in(tt,P.second,0.4),ag_in(tt,P.last,0.4)],{k:p.k,a:p.a});
       ag_pill(x,960,700,"4 of 4 pass",{icon:"tick",col:AG.green,a:ag_in(tt,P.last+1.2,0.4)});}},
-    // Planning's contract promises the column, and what it means
+    // Planning's contract, the model's YAML that dbt enforces, promises the column, and what it means
     {cut:true,at:P.contract,place:"lab",keys:[[P.contract,960,540,1],[P.contract+0.1,960,530,1.02]],d:6,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
-      const p=ce_pop(tt,P.contract+0.2,null);ce_code(x,230,220,1460,"governance/5-data-contracts/mart_planning__near_award.yaml",CE_CONTRACT,{path:true,k:p.k,a:p.a,hi:{from:3,to:5,col:AG.blue,a:ag_in(tt,P.says-0.2,0.5)}});}},
+      const p=ce_pop(tt,P.contract+0.2,null);ce_code(x,230,220,1460,"models/marts/planning/_planning__models.yml",CE_CONTRACT,{path:true,k:p.k,a:p.a,hi:{from:3,to:6,col:AG.blue,a:ag_in(tt,P.says-0.2,0.5)}});}},
     // the notes for agents gain a rule
     {cut:true,at:P.rule,place:"lab",keys:[[P.rule,960,540,1],[P.rule+0.1,960,530,1.02]],d:8,push:0.01,draw:(x,tt)=>{ag_roomLight(x,1);
       const p=ce_pop(tt,P.rule+0.2,null);ce_note(x,230,220,1460,{k:p.k,a:p.a,hi:ag_in(tt,P.ask-0.3,0.5)});}}]);

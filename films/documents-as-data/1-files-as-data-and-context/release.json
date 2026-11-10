@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Files as data and as context",
+    "key": "files-as-data-and-context-en",
+    "dir": "films/documents-as-data/1-files-as-data-and-context/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/files-as-data-and-context/film.js",
+    "video": "dist/files-as-data-and-context.mp4",
+    "file": "files-as-data-and-context.mp4",
+    "captions": [
+      [
+        "films/documents-as-data/1-files-as-data-and-context/captions/en.srt",
+        "files-as-data-and-context.en.srt"
+      ],
+      [
+        "films/documents-as-data/1-files-as-data-and-context/captions/es.srt",
+        "files-as-data-and-context.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/documents-as-data/1-files-as-data-and-context/source",
+      ":(exclude)films/documents-as-data/1-files-as-data-and-context/source/src/i18n/es/captions.js",
+      "films/data-that-moves/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 364,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.2,
+      "status": "Drawn to the rule"
+    }
+  }
+]

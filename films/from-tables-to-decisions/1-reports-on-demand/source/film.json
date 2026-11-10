@@ -1,0 +1,51 @@
+{
+  "key": "reports-on-demand",
+  "title": "Reports on demand",
+  "sub": "The first film of From tables to decisions, the third series of Modern data basics: on pay day, Rohan Desai in Finance asks Genie One what casual teaching has cost the Faculty of Health this semester and gets it when he asks, with what it counted and the query it ran; the data team's work moves from a report for each question to good models and their context, built once; and the questions that come back every pay day get one dashboard.",
+  "howto": "The film is drawn in the module's look: the intro's platform map, drawn up close, dark navy with lanes of light, and its people lit for the dark. Light blue is data moving and the platform, gold what people agree on, such as a measure and its owners' rules, green a check that passes, amber a person's turn or a wait, and lilac, always with a lock, personal data. The tools' pages are drawn for the film, each with its product's name and logo.",
+  "src": [
+    "rd_places.js",
+    "rd_tools.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "ask",
+    "answer",
+    6.2
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bDesai\\b",
+      "Deh-sigh"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Nwin"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ]
+  ],
+  "story": [
+    "clock"
+  ],
+  "urgent": [],
+  "logos": true
+}

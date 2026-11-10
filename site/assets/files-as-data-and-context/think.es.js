@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Files as data and as context, en español. Las claves van al paso de think.en.js.
+   La película se detiene al final de tres capítulos (invoices, contracts, written), con una pregunta cada vez. think.js las
+   muestra, y las vuelve a listar en "Piénsalo" (#think-list). La serie no tiene labs, así que ninguna pregunta tiene "stop",
+   y el data-labs del .player de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Mira esta parte"},
+  qs:{
+  "invoices":{q:"Las funciones leen las 3,860 facturas de octubre como filas, y las revisiones las ordenan. ¿Por qué cada fila guarda la ruta de su archivo?",
+    opts:[{t:"Para que la función vuelva a leer cada archivo el mes siguiente y corrija sus filas.",near:true},{t:"Para que quien revisa una fila pueda abrir la factura de la que vino, tal como llegó.",ok:true},{t:"Para que Finanzas pueda borrar cada PDF cuando su fila pase todas las revisiones."}],
+    why:"Lo que lee un modelo se revisa como cualquier otro dato, y una persona decide lo que no pasa. Con la ruta del archivo en cada fila, el equipo de Rohan abre en un momento la factura detrás de cualquier fila, ve lo que el proveedor envió de verdad, y corrige la fila o la revisión. El archivo se guarda: mejores lectores pueden volver a leerlo. ¿Qué filas, donde trabajas, no se pueden rastrear hasta el documento del que vinieron?"},
+  "contracts":{q:"Linh pregunta cuándo termina su contrato. Sus dos archivos, la oferta y el contrato firmado, se parecen. ¿Cómo responde un agente?",
+    opts:[{t:"Responde con la oferta, que RR. HH. envió primero, así que su fecha llegó antes."},{t:"Lee los términos de ambos archivos a una tabla, y responde con la fecha más tardía.",near:true},{t:"Encuentra la versión firmada por los metadatos junto a ella, y cita ese archivo.",ok:true}],
+    why:"Un contrato firmado es oficial: se guarda tal como se firmó, no se reescribe como tabla, y sus metadatos (su ID, su versión, el día en que se firmó y su archivo) se escriben a su lado cuando RR. HH. lo crea. Con esos metadatos, la versión firmada se encuentra al instante, y la respuesta cita su archivo: el 20 de noviembre. Leer ambos y adivinar cuál cuenta es como una respuesta sale mal. ¿Qué documentos oficiales, donde trabajas, no tienen metadatos a su lado?"},
+  "written":{q:"Las solicitudes de pago de horas llegaban como hojas de cálculo por correo. ¿Qué hace que las de la app de solicitudes sean datos desde el inicio?",
+    opts:[{t:"Escribe cada solicitud como una fila, con sus metadatos, y su significado en un contrato.",ok:true},{t:"Guarda cada solicitud como un PDF, y una función la lee como fila cada noche.",near:true},{t:"Envía cada solicitud por correo a la nómina, en una hoja de cálculo igual para cada tutor."}],
+    why:"Lo que escribimos, podemos escribirlo como datos: cada solicitud, una fila que cualquier sistema puede leer en el momento en que se hace, con quién la pidió, con qué contrato, si está aprobada y cuándo, y lo que significa cada campo en un contrato de datos, con un estándar abierto. Nadie tiene que volver a leerla, como la bitácora de 1853 hizo que nadie tuviera que leer las siguientes. Un PDF leído por una función se sigue leyendo. ¿Qué documento escribe tu equipo que otro equipo vuelve a ingresar a mano?"}
+  }}};

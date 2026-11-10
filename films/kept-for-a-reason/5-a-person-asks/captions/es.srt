@@ -1,0 +1,351 @@
+1
+00:00:03,000 --> 00:00:05,574
+Londres, junio de 1676.
+
+2
+00:00:06,874 --> 00:00:10,524
+Francis Jenkes, lencero, forma parte del consejo de la City.
+
+3
+00:00:11,824 --> 00:00:16,420
+En el Guildhall, se pone de pie y pide un nuevo Parlamento, para reparar el comercio de la City.
+
+4
+00:00:17,920 --> 00:00:25,987
+Cuatro días después, el Consejo del Rey lo envía al Gatehouse, una prisión en Westminster, a quedarse ahí hasta que la ley lo libere.
+
+5
+00:00:27,687 --> 00:00:28,823
+No fija ningún día.
+
+6
+00:00:30,523 --> 00:00:34,466
+Le pide al carcelero una copia de la orden de prisión, la orden que lo retiene.
+
+7
+00:00:35,566 --> 00:00:37,597
+El carcelero se la promete, y da largas.
+
+8
+00:00:39,297 --> 00:00:43,929
+Sus amigos ofrecen una fianza, una garantía en dinero, para que espere su juicio en casa.
+
+9
+00:00:45,029 --> 00:00:45,890
+Rechazada.
+
+10
+00:00:47,590 --> 00:00:49,713
+Piden a un juez un habeas corpus.
+
+11
+00:00:50,813 --> 00:00:56,642
+Es latín, "que tengas el cuerpo": una orden de llevar al preso ante un juez, y decir por qué lo retienen.
+
+12
+00:00:58,342 --> 00:01:03,314
+El juez se niega, por una sola razón: los tribunales están de vacaciones de verano.
+
+13
+00:01:05,214 --> 00:01:10,389
+En agosto, Jenkes sigue preso, y escribe sobre su gran pérdida, y el daño a su salud.
+
+14
+00:01:12,089 --> 00:01:16,851
+Sin esa orden, alguien podía pasar meses preso, sin un juez que oyera por qué.
+
+15
+00:01:18,351 --> 00:01:19,739
+Algo tenía que cambiar.
+
+16
+00:01:23,839 --> 00:01:28,124
+En 1679, el Parlamento aprueba la Ley de Habeas Corpus.
+
+17
+00:01:29,824 --> 00:01:37,523
+Entregada la orden, el carcelero tiene tres días para llevar al preso ante un juez, y certificar las causas verdaderas de su prisión.
+
+18
+00:01:39,023 --> 00:01:44,177
+Diez días si la prisión está a más de veinte millas, veinte si está a más de cien.
+
+19
+00:01:45,677 --> 00:01:49,694
+Las vacaciones no son excusa: cualquier juez debe dar la orden.
+
+20
+00:01:51,194 --> 00:01:54,079
+Una copia de la orden, en menos de seis horas.
+
+21
+00:01:55,579 --> 00:01:58,831
+Y el carcelero que da largas le paga al preso cien libras.
+
+22
+00:02:00,131 --> 00:02:03,287
+La segunda vez, doscientas, y pierde su puesto.
+
+23
+00:02:04,987 --> 00:02:11,029
+Así, un preso sabe en horas por qué lo retienen, y está ante un juez en días, no en un verano.
+
+24
+00:02:12,729 --> 00:02:17,234
+Un siglo después, Estados Unidos escribe el habeas corpus en su Constitución.
+
+25
+00:02:18,734 --> 00:02:23,464
+Hoy, una persona también puede preguntarle a una universidad: ¿qué guardas sobre mí, y por qué?
+
+26
+00:02:25,164 --> 00:02:29,482
+En un buzón, una petición espera, y nadie puede mostrar dónde se buscó.
+
+27
+00:02:30,782 --> 00:02:36,088
+Con un plazo, las razones verdaderas y pruebas, se responde a tiempo, y la respuesta es de fiar.
+
+28
+00:02:42,388 --> 00:02:46,233
+El 24 de noviembre, Linh Nguyen le escribe a la universidad.
+
+29
+00:02:47,333 --> 00:02:49,889
+Su contrato de tutora terminó hace cuatro días.
+
+30
+00:02:50,989 --> 00:02:58,443
+Entró con su cuenta de estudiante, en el formulario de la oficina de privacidad, así que la oficina sabe que es ella, y no pide nada más.
+
+31
+00:02:59,943 --> 00:03:04,162
+"Por favor, díganme qué guardan sobre mí, y sáquenme de la lista de correo de tutores."
+
+32
+00:03:05,862 --> 00:03:10,360
+La oficina de privacidad la registra: petición 2026-117.
+
+33
+00:03:11,660 --> 00:03:16,393
+Como el habeas corpus, tiene un plazo: treinta días, así que vence el 24 de diciembre.
+
+34
+00:03:18,093 --> 00:03:21,991
+Ingrid Holm, dueña de los datos de RR. HH., toma esa parte.
+
+35
+00:03:23,291 --> 00:03:26,305
+El equipo de datos recibe un ticket en su repositorio.
+
+36
+00:03:27,405 --> 00:03:31,863
+No nombra a nadie: solo el número de la petición, su fecha límite y los pasos.
+
+37
+00:03:33,363 --> 00:03:39,994
+Sus números van a un solo lugar: una tabla en la plataforma que solo la oficina de privacidad y sus trabajos pueden leer.
+
+38
+00:03:44,094 --> 00:03:48,219
+La oficina de Mei guarda el registro maestro de Linh, P-10482.
+
+39
+00:03:49,519 --> 00:03:52,925
+De sus vínculos salen sus números en cada sistema: seis en total.
+
+40
+00:03:54,825 --> 00:04:00,879
+En el proyecto de datos, dbt lista cada modelo hecho a partir de esos cinco sistemas: más de treinta.
+
+41
+00:04:02,579 --> 00:04:08,584
+En la plataforma, el linaje agrega el resto: la tabla de un notebook, un panel, el trabajo de otro equipo.
+
+42
+00:04:10,284 --> 00:04:16,211
+Y las etiquetas de Conoce lo que guardas señalan cada columna que nombra a una persona, o guarda un código de una.
+
+43
+00:04:17,911 --> 00:04:20,323
+Luego corre un trabajo, con identidad propia.
+
+44
+00:04:21,623 --> 00:04:26,959
+Tabla por tabla, busca en esas columnas sus números, y los códigos hechos con ellos.
+
+45
+00:04:28,659 --> 00:04:33,386
+En los marts de la billetera, la planificación y las finanzas, ella está solo como un código.
+
+46
+00:04:34,686 --> 00:04:37,226
+Una búsqueda solo por sus números los pasaría todos por alto.
+
+47
+00:04:38,926 --> 00:04:43,835
+Y ninguno de sus números se escribe en una consulta, cuyo texto la plataforma guarda un año.
+
+48
+00:04:44,935 --> 00:04:49,339
+En cambio, cada consulta se une a la tabla de claves, por el número de la petición.
+
+49
+00:04:51,039 --> 00:04:58,925
+El linaje solo ve la plataforma: los dueños de la nómina, la app de horas, la herramienta de correo y sus contratos buscan en lo suyo.
+
+50
+00:05:03,025 --> 00:05:05,472
+Lo que Linh recibe no es un montón de tablas.
+
+51
+00:05:06,572 --> 00:05:09,292
+Es una copia de lo que se guarda, escrita para que ella la lea.
+
+52
+00:05:10,592 --> 00:05:15,997
+Para cada parte: qué es, por qué se guarda, de dónde vino, quién más la recibe, y hasta cuándo.
+
+53
+00:05:18,097 --> 00:05:23,820
+Como las causas verdaderas en la respuesta del carcelero, cada razón es simple, de Una razón para guardarlo.
+
+54
+00:05:25,320 --> 00:05:27,740
+Un contrato, para sus contratos y horas.
+
+55
+00:05:28,840 --> 00:05:36,595
+Una ley, para sus registros de pago: siete años después de cada contrato, el último hasta el 20 de noviembre de 2033.
+
+56
+00:05:38,095 --> 00:05:41,463
+Una tarea pública, para sus títulos y resultados, guardados para siempre.
+
+57
+00:05:42,563 --> 00:05:46,235
+Los datos de su proyecto de investigación, mientras lo pidan sus reglas.
+
+58
+00:05:47,535 --> 00:05:51,895
+Todo lo que trata de otras personas queda fuera, como las notas que puso a sus estudiantes.
+
+59
+00:05:53,795 --> 00:06:02,446
+El 3 de diciembre, cada dueño revisa su parte: Ingrid, la de RR. HH.; Mei, los expedientes; la oficina de investigación, su proyecto.
+
+60
+00:06:06,746 --> 00:06:08,565
+Su segundo pedido se hizo primero.
+
+61
+00:06:09,865 --> 00:06:17,363
+En la noche del 25 de noviembre, el trabajo de borrado saca su fila de la tabla de la lista, y de su registro de envíos.
+
+62
+00:06:19,263 --> 00:06:21,542
+La herramienta de correo la quita al sincronizar.
+
+63
+00:06:23,042 --> 00:06:28,949
+Esa mañana, Ingrid pone su no en la persona, en lugar del sí que dio en 2023.
+
+64
+00:06:30,849 --> 00:06:39,269
+La lista se rehace cada semestre con los contratos ocasionales de los últimos dos años, y toma solo a quienes tienen un sí en la persona.
+
+65
+00:06:40,969 --> 00:06:42,829
+Así, la próxima reconstrucción la deja fuera.
+
+66
+00:06:44,529 --> 00:06:53,267
+Las versiones antiguas de la tabla guardan su fila siete días más, y luego se limpian, el 2 de diciembre, como mostró Borrado es borrado.
+
+67
+00:06:55,167 --> 00:07:01,315
+Borrar solo su fila no habría bastado: con su sí todavía ahí, la próxima reconstrucción la habría traído de vuelta.
+
+68
+00:07:06,815 --> 00:07:08,232
+Cada paso deja una prueba.
+
+69
+00:07:09,332 --> 00:07:11,882
+En el ticket, cada casilla se marca con un enlace.
+
+70
+00:07:13,382 --> 00:07:16,868
+La ejecución de la búsqueda muestra quién la hizo: el trabajo mismo.
+
+71
+00:07:18,368 --> 00:07:23,132
+El historial de la tabla de la lista muestra su fila borrada, y las versiones antiguas limpiadas.
+
+72
+00:07:24,832 --> 00:07:29,750
+El registro de auditoría muestra quién leyó la tabla de claves: solo la oficina y sus trabajos.
+
+73
+00:07:31,450 --> 00:07:35,527
+La oficina de privacidad lleva una tabla de cada petición y el día en que vence.
+
+74
+00:07:36,827 --> 00:07:40,515
+Una petición cerca de su fecha aparece ahí, para que la oficina la atienda.
+
+75
+00:07:41,815 --> 00:07:45,159
+Una respuesta atrasada no son datos erróneos: es trabajo pendiente.
+
+76
+00:07:46,859 --> 00:07:53,405
+El 7 de diciembre, la respuesta de Linh está lista, diecisiete días antes, y ella la abre al iniciar sesión.
+
+77
+00:07:55,305 --> 00:08:02,894
+El ticket se cierra. Sus números siguen en la tabla de claves hasta que no quede ninguna copia bloqueada, el 24 de diciembre.
+
+78
+00:08:04,594 --> 00:08:10,426
+En 1679, un carcelero respondía al habeas corpus con el cuerpo, y las causas verdaderas, en días.
+
+79
+00:08:11,926 --> 00:08:15,989
+Aquí, es lo que se guarda, las razones verdaderas, a tiempo, y la prueba de cada paso.
+
+80
+00:08:19,089 --> 00:08:21,174
+Cinco películas, los datos de una persona.
+
+81
+00:08:22,474 --> 00:08:24,485
+Guarda los datos por una razón que puedas decir.
+
+82
+00:08:25,785 --> 00:08:29,190
+Cada registro tiene una fecha de fin, decidida antes de necesitarla.
+
+83
+00:08:30,490 --> 00:08:33,330
+Una persona puede preguntar, y tú debes poder responder.
+
+84
+00:08:34,630 --> 00:08:37,200
+Borrar termina cuando ya no queda la última copia.
+
+85
+00:08:38,500 --> 00:08:41,003
+Y una petición se responde a tiempo, con pruebas.
+
+86
+00:08:42,703 --> 00:08:47,893
+Con Cerraduras antes que los datos y Solo lo que puedes ver, eso es protección de datos y privacidad.
+
+87
+00:08:49,393 --> 00:08:53,075
+Quién puede entrar, qué puede ver cada uno, y cuánto tiempo se queda cada cosa.
+
+88
+00:08:54,775 --> 00:08:59,452
+Después: Agentes de IA en el trabajo con datos, con las mismas reglas.

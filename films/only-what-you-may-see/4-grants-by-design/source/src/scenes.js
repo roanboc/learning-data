@@ -378,7 +378,7 @@ function gd_whereDraw(x,tt,sc,T){const c=id=>sc.cues[id];
 /* ---------------------------------------------------------------- 8. Written once, kept as code */
 scene("code",(ctx,S,t,sc)=>{const c=id=>sc.cues[id];
   const T={files:wAt(sc,"files","two files",-0.2),job:wAt(sc,"files","the job's code",-0.2),lines:c("lines")-0.3,few:wAt(sc,"lines","a few lines",-0.2),
-    team:wAt(sc,"yes","owns",-0.3),yes:wAt(sc,"yes","her yes",-0.2),con:c("contract"),agr:wAt(sc,"contract","agreement's contract",-0.2),names:wAt(sc,"contract","names it",-0.2),
+    team:wAt(sc,"yes","reviews",-0.3),yes:wAt(sc,"yes","change",-0.1),told:wAt(sc,"yes","told",-0.2),con:c("contract"),agr:wAt(sc,"contract","agreement's contract",-0.2),names:wAt(sc,"contract","names it",-0.2),
     pol:wAt(sc,"after","policies",-0.2),first:wAt(sc,"after","go in first",-0.2),grant:wAt(sc,"after","its grant",-0.2),unm:wAt(sc,"after","unmasked",-0.3),
     path:c("path"),test:wAt(sc,"path","test first",-0.2),ok:wAt(sc,"path","says yes",-0.2),
     hand:c("byhand")-0.2,nob:wAt(sc,"byhand","nobody",-0.2),only:wAt(sc,"byhand","only",-0.2),main:wAt(sc,"byhand","one member",-0.2),adm:c("admin")-0.1,sw:wAt(sc,"admin","switched on",-0.2)};
@@ -401,8 +401,8 @@ function gd_codeDraw(x,tt,sc,T){const c=id=>sc.cues[id];
     const ta=1-ag_in(tt,T.lines-0.3,0.3);if(ta>0){x.save();x.globalAlpha*=ta;dp_T(x,"registrar",92,234,{w:700,size:36});
       const hi=ag_in(tt,T.files,0.4),hj=0.45*ag_in(tt,T.job,0.4);gd_tree(x,100,320,GD_TREE.map((r,i)=>r.concat([i===3||i===4?hi:i===5||i===6?hj:0])),{});x.restore();}
     const fa=ag_in(tt,T.lines+0.1,0.4);if(fa>0){x.save();x.globalAlpha*=fa;dp_T(x,"resources/schemas.yml",92,234,{w:500,size:32,f:"mono"});
-      // the files' code owner: the registrar's data owners, Mei Tanaka today
-      const oa=ag_in(tt,T.team,0.4);if(oa>0){x.save();x.globalAlpha*=oa;dp_T(x,"Code owner",92,294,{w:600,size:28,col:"mut"});dp_T(x,"@uni-example/registrar-data-owners",262,294,{w:500,size:28,f:"mono",col:"cyan"});x.restore();}
+      // the files' code owner: the data team, who review the code (owners never review a pull request)
+      const oa=ag_in(tt,T.team,0.4);if(oa>0){x.save();x.globalAlpha*=oa;dp_T(x,"Code owner",92,294,{w:600,size:28,col:"mut"});dp_T(x,"@uni-example/data-team",262,294,{w:500,size:28,f:"mono",col:"cyan"});x.restore();}
       x.fillStyle=rgba(DP.T.mut,0.35);x.fillRect(92,318,836,1.4);
       const sc4=ag_sine(clamp((tt-T.con-0.1)/1.2,0,1))*4*42,h1=ag_io(tt,T.few,T.con,0.4),h2=ag_io(tt,T.agr,T.path,0.4),h3=ag_io(tt,T.grant,T.path,0.4);
       gd_code_lines(x,104,370-sc4,GD_YAML,{lh:42,clip:[330,852],hi:h1>0?{from:2,to:11,a:h1,col:"cyan",w:820}:h2>0?{from:12,to:13+(h3>0.5?2:0),a:h2,col:"amber",w:820}:null});
@@ -410,8 +410,8 @@ function gd_codeDraw(x,tt,sc,T){const c=id=>sc.cues[id];
       // a few lines for each shelf: these are core's readers
       const lk=ag_io(tt,T.few+0.3,T.con,0.4);if(lk>0)dp_link(x,[904,606],[GD_SH.x-4,gd_shelfMid("core")],"cyan",clamp((tt-T.few-0.3)/0.6,0,1),{alpha:lk});}
     x.restore();}
-  // Mei's yes: the files' code owner approves each change to who may see her records
-  const rv=gd_pop(tt,T.team+0.6,T.con-0.4);if(rv.a>0){dp_card(x,1040,236,780,{kick:"Review",title:"Approved by Mei Tanaka",sub:"Code owner of both files"},{a:rv.a,k:rv.k});x.save();x.globalAlpha*=rv.a;dp_tick(x,1764,290,"green",clamp((tt-T.yes-0.1)/0.6,0,1));x.restore();}
+  // the data team reviews each change; Mei, who decides who may see her records, is told what it touches
+  const rv=gd_pop(tt,T.team+0.6,T.con-0.4);if(rv.a>0){gd_card(x,1040,236,780,"Review","Approved by the data team",[["Mei Tanaka is told what it touches",ag_in(tt,T.told,0.4)]],{a:rv.a,k:rv.k});x.save();x.globalAlpha*=rv.a;dp_tick(x,1764,290,"green",clamp((tt-T.yes-0.1)/0.6,0,1));x.restore();}
   // the study's grant, made from its agreement's contract, names it
   const cc=gd_pop(tt,T.agr,T.pol-0.6);if(cc.a>0){dp_card(x,1040,236,780,{kick:"Contract",title:"Data sharing agreement 2026-14",sub:"Until 30 June 2027"},{a:cc.a,k:cc.k,col:"amber"});
     const p=clamp((tt-T.names)/0.7,0,1);if(p>0)dp_link(x,[908,717],[1036,330],"amber",p,{alpha:cc.a});}

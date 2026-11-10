@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.435
+London, 1936.
+
+00:00:04.735 --> 00:00:09.640
+To know the exact time, people rang the telephone exchange, and asked the operator.
+
+00:00:10.940 --> 00:00:13.401
+She read it from the clock on the exchange wall.
+
+00:00:14.701 --> 00:00:16.832
+But it was never quite exact to the second.
+
+00:00:17.932 --> 00:00:21.273
+And the exchange couldn't always answer just when a caller asked.
+
+00:00:22.573 --> 00:00:25.548
+So a clock or a watch set by that answer could be out.
+
+00:00:27.048 --> 00:00:30.452
+And the time is a question everyone asks, again and again.
+
+00:00:31.952 --> 00:00:33.340
+Something had to change.
+
+00:00:35.040 --> 00:00:40.037
+So the Post Office's own engineers built a machine to answer it: the speaking clock.
+
+00:00:41.337 --> 00:00:45.541
+Jane Cain, one of the operators, recorded its words on glass discs.
+
+00:00:46.841 --> 00:00:48.754
+A clock played them at the right moment.
+
+00:00:49.854 --> 00:00:54.020
+And every hour, it was checked against Greenwich, where Britain's time was kept.
+
+00:00:55.320 --> 00:01:02.063
+From 24 July 1936, anyone in London could dial TIM, for time.
+
+00:01:03.563 --> 00:01:08.009
+They heard the time, right to a tenth of a second, at any hour of the day or night.
+
+00:01:09.109 --> 00:01:12.539
+In less than a year, it answered more than 12 million calls.
+
+00:01:14.039 --> 00:01:16.317
+The exact time, on demand, for anyone.
+
+00:01:17.417 --> 00:01:20.196
+And that question no longer needed an operator.
+
+00:01:21.696 --> 00:01:26.909
+At the university, the questions asked every pay day came in a 40-page report.
+
+00:01:28.009 --> 00:01:31.357
+Any other question waited a week, for a report of its own.
+
+00:01:32.657 --> 00:01:35.060
+Now any question is answered when it's asked.
+
+00:01:36.160 --> 00:01:39.338
+And the questions that come back have a dashboard of their own.
+
+00:01:46.838 --> 00:01:51.714
+Thursday, 5 November 2026: pay day at the university.
+
+00:01:52.814 --> 00:01:59.217
+Rohan Desai, in Finance, is setting next year's budget for casual teaching in the Faculty of Health.
+
+00:02:00.317 --> 00:02:07.268
+Casual teaching is done by staff paid for the hours they work, like Linh Nguyen, who tutors health informatics.
+
+00:02:08.368 --> 00:02:13.964
+First he needs one number: what casual teaching has cost Health this semester, so far.
+
+00:02:15.264 --> 00:02:18.601
+That used to take a report from the data team, and a week.
+
+00:02:19.501 --> 00:02:22.078
+Today he asks Genie One, in his own words.
+
+00:02:23.178 --> 00:02:30.188
+Like the time in 1936, the answer comes when he asks: A$1.84 million, so far.
+
+00:02:31.688 --> 00:02:37.425
+With it, Genie says what it counted: the claims approved for casual teaching, plus on-costs.
+
+00:02:38.325 --> 00:02:41.586
+On-costs are what the university pays on top of pay.
+
+00:02:42.486 --> 00:02:45.501
+And it shows the query it ran, so anyone can check it.
+
+00:02:46.801 --> 00:02:49.114
+His next question: and Semester 1?
+
+00:02:50.014 --> 00:02:53.325
+A$2.21 million, with every claim in.
+
+00:02:54.625 --> 00:02:58.827
+By lunch, Health's casual teaching budget is set, from this year's numbers.
+
+00:03:01.927 --> 00:03:08.718
+Genie One answered from a Genie Agent, which Sam and Jun, in the data team, set up for this one subject.
+
+00:03:10.018 --> 00:03:12.307
+Two earlier films show how one is built.
+
+00:03:13.407 --> 00:03:15.095
+Here is what the team put in it.
+
+00:03:16.195 --> 00:03:21.735
+Its data: one measure, casual teaching cost, by faculty, unit and teaching period.
+
+00:03:23.035 --> 00:03:26.962
+Rohan defined it once, in September, as the next film shows.
+
+00:03:28.262 --> 00:03:30.187
+Its rules, in their owners' words.
+
+00:03:31.287 --> 00:03:34.716
+Rohan's: what cost means, and what this semester means.
+
+00:03:36.016 --> 00:03:39.726
+Ingrid's, in HR: totals only, never one person's pay.
+
+00:03:41.026 --> 00:03:43.789
+So it reads the measure, never anyone's claims.
+
+00:03:45.289 --> 00:03:49.927
+Its examples: questions Finance asks, each with the query that answers it.
+
+00:03:51.227 --> 00:03:55.544
+And its tests: questions with known answers, run after every change.
+
+00:03:56.844 --> 00:04:01.561
+Each answer runs as the person asking, so they see only what they may read.
+
+00:04:02.861 --> 00:04:04.772
+So the data team's work has moved.
+
+00:04:06.072 --> 00:04:13.179
+Not a report for each question, but good models and their context, built once, for people and agents to explore.
+
+00:04:14.879 --> 00:04:19.503
+They started small, and Rohan, who knows the subject best, was its first user.
+
+00:04:22.603 --> 00:04:26.131
+Some questions come back every pay day, from the same people.
+
+00:04:27.231 --> 00:04:28.684
+What did the pay run cost?
+
+00:04:29.784 --> 00:04:32.255
+How many casual hours, in each faculty?
+
+00:04:33.355 --> 00:04:35.371
+How many claims still wait for approval?
+
+00:04:36.671 --> 00:04:42.602
+Like the time in 1936, they get a machine of their own: one dashboard, read at a glance.
+
+00:04:44.102 --> 00:04:48.277
+It refreshes after each pay run, and goes to the people who act on it.
+
+00:04:49.577 --> 00:04:55.492
+Today: A$9.6 million, paid to 2,960 people.
+
+00:04:56.792 --> 00:05:00.579
+And 143 claims still waiting, for the next pay run.
+
+00:05:01.879 --> 00:05:06.749
+For a question it doesn't show, its Ask Genie button opens the same Genie Agent.
+
+00:05:08.049 --> 00:05:11.565
+It replaced a 40-page report, emailed every pay day.
+
+00:05:12.665 --> 00:05:15.786
+The three figures people read were on its first page.
+
+00:05:17.086 --> 00:05:18.258
+Now it's retired.
+
+00:05:19.758 --> 00:05:26.589
+A rule of thumb: a question deserves a dashboard when it comes back on a schedule, and someone acts on what it shows.
+
+00:05:28.289 --> 00:05:30.725
+Every other question is asked when it's needed.
+
+00:05:33.825 --> 00:05:40.834
+In 1936, the question everyone asked got a machine of its own, and anyone could ask it, at any hour.
+
+00:05:41.934 --> 00:05:45.829
+At the university, the questions that come back have one dashboard.
+
+00:05:46.729 --> 00:05:52.335
+Every other question is answered when it's asked, from good models and their context, built once.
+
+00:05:53.435 --> 00:05:58.606
+And Health's casual teaching budget was set from this year's numbers, in a morning, not a week.
+
+00:05:59.906 --> 00:06:03.484
+None of these ideas is new; the tools now make them easier.
+
+00:06:04.384 --> 00:06:12.382
+So don't reinvent the wheel: investigate, adapt, implement and iterate, starting from the official docs, linked on this page.
+
+00:06:13.682 --> 00:06:17.367
+Ask for the answer; keep dashboards for the questions that come back.
+
+00:06:19.067 --> 00:06:24.836
+Next: casual teaching cost, defined in the open, so every reader counts it the same way.

@@ -49,33 +49,33 @@ const NARR={
 ]},
 "fresh":{"name":"How fresh, for what","lead":1.0,"tail":1.0,"vo":[
  {"id":"monday","gap":0.8,"text":"On Monday, Malia and Sam meet Mei Tanaka, who owns the list."},
- {"id":"knows","gap":0.8,"text":"The platform can tell when a table is late. Only the people who use it can say when late is too late."},
- {"id":"certs","gap":0.8,"text":"The certificates can't wait: the list must be built from that night's files when it goes to the printer."},
- {"id":"seats","gap":0.8,"text":"Seating the Great Hall can: its count is made a week before, from a list a few days old."},
- {"id":"planning","gap":0.8,"text":"Planning's count of awards for the government comes after the year's end. Weeks are fine."},
- {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, when the list is sent."},
+ {"id":"knows","gap":0.8,"text":"The platform can see that a table is late. Only its users can say when late is too late."},
+ {"id":"certs","gap":0.8,"text":"The certificates can't wait: they need that night's files when the list goes to the printer."},
+ {"id":"seats","gap":0.8,"text":"Seating the Great Hall can: it's counted a week before, from a list a few days old."},
+ {"id":"planning","gap":0.8,"text":"Planning's count for the government comes after the year's end: weeks are fine."},
+ {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, at the send."},
  {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes in the list's contract."},
- {"id":"pencil","gap":1.0,"text":"In Rules that run, the scorecard left timeliness in pencil: no checks yet. This is its first rule."}
+ {"id":"pencil","gap":1.0,"text":"Rules that run left timeliness in pencil, with no checks. This is its first rule."}
 ]},
 "age":{"name":"Say how old it is","lead":1.0,"tail":1.0,"vo":[
  {"id":"says","gap":0.8,"text":"From now on, the list says how old it is."},
  {"id":"row","gap":0.8,"text":"Every row carries its sources' age: when the files it was built from arrived."},
- {"id":"own","gap":0.8,"text":"Each source has its own. That Thursday, the list would have said: student system, Wednesday at two; portal, Thursday at two."},
- {"id":"shown","gap":0.8,"text":"The age is shown wherever the list is, and first of all in the printer's file."},
+ {"id":"own","gap":0.8,"text":"Each source has its own. That Thursday, it would have said: student system, Wednesday at two; portal, Thursday at two."},
+ {"id":"shown","gap":0.8,"text":"It's shown wherever the list is, first of all in the printer's file."},
  {"id":"flags","gap":0.8,"text":"Like the volunteers' flags, it's a signal everyone can read."},
- {"id":"labelled","gap":0.8,"text":"Too good to be true kept a number from the night before, and labelled it. Here, every list says its age, on good nights too."},
+ {"id":"labelled","gap":0.8,"text":"Too good to be true labelled a number from the night before. Here, every list says its age, on good nights too."},
  {"id":"trust","gap":0.8,"text":"Data that says its age can be trusted to be old."},
  {"id":"cant","gap":1.2,"text":"Data that doesn't, can't."}
 ]},
 "stop":{"name":"Warn first, then stop the send","lead":1.0,"tail":1.0,"vo":[
  {"id":"source","gap":0.8,"text":"Then Sam checks the age where it starts: at each source."},
- {"id":"arrived","gap":0.8,"text":"dbt reads it from when each night's file arrived, not from the newest row, which is days old after a night when no board met."},
+ {"id":"arrived","gap":0.8,"text":"dbt reads when each night's file arrived, not the newest row, which can be days old when no board has met."},
  {"id":"level","gap":0.8,"text":"One level on each: older than twenty-four hours, the check fails."},
  {"id":"first","gap":0.8,"text":"Each night, the update runs that check first."},
- {"id":"tells","gap":0.8,"text":"If it fails, Sam and Malia hear at once, and the list is still built, saying how old it is."},
+ {"id":"tells","gap":0.8,"text":"If it fails, Sam and Malia hear at once, and the list is still built, saying its age."},
  {"id":"warn","gap":0.8,"text":"That's the warning: nothing stops, and the people who need to know, know."},
- {"id":"send","gap":0.8,"text":"The send to the printer is a job too, and it runs the same check again."},
- {"id":"waits","gap":0.8,"text":"It sends only if the check passes. If not, the list waits, and Malia is told why."},
+ {"id":"send","gap":0.8,"text":"The send to the printer is a job too, and runs the same check."},
+ {"id":"waits","gap":0.8,"text":"It sends only if the check passes; if not, the list waits, and Malia is told why."},
  {"id":"data","gap":1.0,"text":"The data isn't stopped. The send is."}
 ]},
 "time":{"name":"In time","lead":1.0,"tail":1.2,"vo":[

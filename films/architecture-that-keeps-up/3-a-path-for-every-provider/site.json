@@ -1,0 +1,73 @@
+{
+  "draft": true,
+  "kicker": "Data from every provider",
+  "kicker_es": "Datos de cada proveedor",
+  "title_es": "Un camino para cada proveedor",
+  "h1": "A path for every provider: one preferred way, and a tree for the rest",
+  "h1_es": "Un camino para cada proveedor: una forma preferida y un árbol para el resto",
+  "lead": "In June 2027, Helena and Noor write the team's preferred way to receive data on one page, then a decision tree for providers who can't meet it. A new timetable never says what was deleted, so the team compares its full list each night, and Graham's room counts stay true.",
+  "lead_es": "En junio de 2027, Helena y Noor escriben en una página la forma preferida de recibir datos, y un árbol de decisión para quien no puede cumplirla. Un horario nuevo nunca dice qué se borró, así que el equipo compara su lista completa cada noche, y los conteos de Graham siguen ciertos.",
+  "description": "A film on receiving data from providers that can't meet the preferred way, the third and last of Architecture that keeps up, the third series of Data management. In June 2027 Helena Novak and Noor Rahman write the team's preferred way on one page (a governed product with an owner and a contract, each change sent as an event, and what was deleted said), and Sam Okafor lists the providers who fall short, old and new: payroll's nightly file from a system of 2004, a timetable bought as a service in 2026 that gives its changes but not its deletions, and a faculty's spreadsheet of nine clinical labs. A decision tree gives each the best path open to it. The timetable's cancelled classes stay booked on the platform, so the team fetches its changes every hour and compares its full list every night: by the first week of teaching, 212 deleted bookings are found, and kept off Graham's page. Payroll's comparison stops a file cut short before 2,400 staff are marked as gone; Anil Kurian owns the labs' governed table; each provider is asked for its next step up, in writing. Named once: event-driven integration and change data capture. It opens at Port Newark in 1956 and 1957, where ships that brought their own cranes took the box to ports that had none.",
+  "description_es": "Una película sobre recibir datos de proveedores que no pueden seguir la forma preferida, la tercera y última de Una arquitectura al día, la tercera serie de Gestión de datos. En junio de 2027 Helena Novak y Noor Rahman escriben en una página la forma preferida del equipo (un producto gobernado con un dueño y un contrato, cada cambio enviado como un evento, y dicho lo que se borró), y Sam Okafor enumera los proveedores que no llegan, viejos y nuevos: el archivo nocturno de la nómina, de un sistema de 2004; un horario comprado como servicio en 2026 que da sus cambios pero no sus borrados; y la hoja de cálculo de una facultad con nueve laboratorios clínicos. Un árbol de decisión da a cada uno el mejor camino a su alcance. Las clases canceladas del horario siguen reservadas en la plataforma, así que el equipo trae sus cambios cada hora y compara su lista completa cada noche: en la primera semana de clases se hallan 212 reservas borradas, que quedan fuera de la página de Graham. La comparación de la nómina detiene un archivo cortado antes de que 2400 empleados se den por idos; Anil Kurian es dueño de la tabla gobernada de los laboratorios; y a cada proveedor se le pide por escrito su siguiente paso. Nombrados una vez: la integración por eventos y la captura de cambios de datos. Empieza en Port Newark en 1956 y 1957, donde barcos con grúas propias llevaron la caja a puertos que no tenían.",
+  "card": "The team writes one preferred way for data to arrive, and a decision tree that gives every provider a path, so the data reaches the business now.",
+  "card_es": "El equipo escribe una forma preferida de recibir datos, y un árbol de decisión que da a cada proveedor un camino, para que los datos lleguen ya al negocio.",
+  "chapters_es": {
+    "box": "El barco que trajo sus grúas",
+    "way": "Una forma preferida",
+    "tree": "Un árbol para el resto",
+    "gone": "Lo que el horario nunca dice",
+    "paths": "Cuatro proveedores, cuatro caminos",
+    "value": "El valor primero",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Port Newark, 1957: the ship that brought its own cranes",
+    "Boxes lifted whole by crane cut the cost of loading a ship, but few ports had a crane. A rebuilt ship carried two of its own, so any port with a quay could take boxes until it built one. A data provider that can't meet the preferred way gets its own path the same way."
+  ],
+  "past_es": [
+    "Port Newark, 1957: el barco que trajo sus grúas",
+    "Las cajas alzadas enteras con grúa abarataron la carga de un barco, pero pocos puertos tenían grúa. Un barco reformado llevó dos propias, así que cualquier puerto con muelle podía recibir cajas hasta construir la suya. Un proveedor de datos que no puede seguir la forma preferida recibe su propio camino igual."
+  ],
+  "next_h": "You've seen one preferred way, a path for every provider, and value first. That closes Architecture that keeps up. Next, Small steps, measured: something real in front of people in two weeks.",
+  "next_h_es": "Viste una forma preferida, un camino para cada proveedor y el valor primero. Así termina Una arquitectura al día. Después, Pasos pequeños, medidos: algo real frente a la gente en dos semanas.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Enterprise Integration Patterns",
+        "title_es": "Enterprise Integration Patterns (en inglés)",
+        "line": "Gregor Hohpe and Bobby Woolf's catalogue of ways for systems to exchange messages, events among them.",
+        "line_es": "El catálogo de Gregor Hohpe y Bobby Woolf de formas de intercambiar mensajes entre sistemas, entre ellas los eventos.",
+        "href": "https://www.enterpriseintegrationpatterns.com/",
+        "href_es": "https://www.enterpriseintegrationpatterns.com/"
+      },
+      {
+        "title": "Change data capture",
+        "title_es": "Captura de cambios de datos (en inglés)",
+        "line": "How a system's changes are found and passed on, from timestamps and logs to a comparison of full lists.",
+        "line_es": "Cómo se encuentran y se pasan los cambios de un sistema, de las marcas de tiempo y los registros a comparar listas completas.",
+        "href": "https://en.wikipedia.org/wiki/Change_data_capture",
+        "href_es": "https://en.wikipedia.org/wiki/Change_data_capture"
+      },
+      {
+        "title": "The Ideal X, at Port Houston",
+        "title_es": "El Ideal X, en Port Houston (en inglés)",
+        "line": "The port's own page on the ship that arrived with 58 boxes in April 1956.",
+        "line_es": "La página del propio puerto sobre el barco que llegó con 58 cajas en abril de 1956.",
+        "href": "https://porthouston.com/ideal-x/",
+        "href_es": "https://porthouston.com/ideal-x/"
+      },
+      {
+        "title": "The Evolution of a Box",
+        "title_es": "The Evolution of a Box (en inglés)",
+        "line": "Invention & Technology on how the container came about, with McLean's costs and the Gateway City's cranes.",
+        "line_es": "Invention & Technology sobre cómo nació el contenedor, con los costos de McLean y las grúas del Gateway City.",
+        "href": "https://www.inventionandtech.com/content/evolution-box-1",
+        "href_es": "https://www.inventionandtech.com/content/evolution-box-1"
+      }
+    ]
+  }
+}

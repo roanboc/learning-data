@@ -1,0 +1,71 @@
+{
+  "kicker": "A first ninety days",
+  "kicker_es": "Unos primeros noventa días",
+  "title_es": "Todas las áreas, un trabajo",
+  "h1": "Every area, one job: see it whole, and plan ninety days in three lanes",
+  "h1_es": "Todas las áreas, un trabajo: míralo entero y planea en tres carriles",
+  "lead": "On her first day, in February 2027, Helena Novak finds 46 open requests. She places them on DAMA-DMBOK's wheel of data management, finds who on her team is deep in each area, and by Friday has her first ninety days on one page, in three lanes: people, strategy and operations.",
+  "lead_es": "En su primer día, en febrero de 2027, Helena Novak encuentra 46 solicitudes abiertas. Las pone en la rueda del DAMA-DMBOK, busca quién de su equipo domina cada área y, para el viernes, tiene sus primeros noventa días en una página, en tres carriles: personas, estrategia y operaciones.",
+  "description": "A film on a data manager's whole job, the opening film of A plan in ninety days, the first series of Data management. On Monday 1 February 2027, Helena Novak starts as the university's data manager with 46 open requests in the tracker and the team's inboxes, the oldest from 14 August 2026: a report for Planning, a fix to the staff list, access for a researcher, each with someone waiting. Before choosing where to start, she sorts them on DAMA-DMBOK's wheel, data governance at its centre and ten areas around it: 44 on the wheel (warehousing and business intelligence 10, quality 7, security 5, governance and integration 4 each, three or fewer in each of the rest) and two beside it, an agent for timetable questions and a forecast model, which the site doesn't teach yet. Most requests touch three or four areas, so none is someone else's. Nobody is deep in all eleven areas, so she finds who is: Noor in architecture and modelling, Sam in the platform, storage and integration, Jun in the warehouse and its reports, Yusuf in governance, metadata and quality; and she writes down where no one is. For her first three months she borrows a shape from Michael Watkins's The First 90 Days: three lanes, run side by side. People, all twelve weeks; strategy in three steps (discover by 15 March, define by 5 April, plan by 26 April); and operations, which keeps today's work going: the urgent problems first, two-week sprints from 15 February with the team's procedures as they are, better ways proposed in week six and tested in weeks nine to twelve. On Friday the plan fits on one page, and she shows it to David Mensah, the deputy vice-chancellor, and to her team; everyone waiting hears where their request stands. It opens in the Atacama desert in 2010, where 33 miners trapped 700 metres down came up alive after 69 days, because every part of the rescue had someone who knew it, and every part ran at once.",
+  "description_es": "Una película sobre el trabajo entero de una gestora de datos, la primera de Un plan en noventa días, la primera serie de Gestión de datos. El lunes 1 de febrero de 2027, Helena Novak empieza como gestora de datos de la universidad con 46 solicitudes abiertas en el registro y en los correos del equipo, la más antigua del 14 de agosto de 2026: un informe para Planificación, un arreglo a la lista del personal, acceso para un investigador, y alguien esperando cada una. Antes de elegir por dónde empezar, las ordena en la rueda del DAMA-DMBOK, con el gobierno de datos en el centro y diez áreas alrededor: 44 en la rueda (almacén de datos e inteligencia de negocio 10, calidad 7, seguridad 5, gobierno e integración 4 cada una, tres o menos en cada una de las demás) y dos junto a ella, un agente para preguntas de horarios y un modelo de pronóstico, que el sitio aún no enseña. La mayoría de las solicitudes toca tres o cuatro áreas, así que ninguna es de otro. Nadie domina las once áreas, así que busca quién domina cada una: Noor en arquitectura y modelado, Sam en la plataforma, el almacenamiento y la integración, Jun en el almacén y sus informes, Yusuf en gobierno, metadatos y calidad; y anota dónde no hay nadie. Para sus tres primeros meses toma la forma de Los primeros 90 días, de Michael Watkins: tres carriles, lado a lado. Personas, las doce semanas; estrategia en tres pasos (descubrir hasta el 15 de marzo, definir hasta el 5 de abril, planificar hasta el 26 de abril); y operaciones, que sostiene el trabajo de hoy: primero lo urgente, sprints de dos semanas desde el 15 de febrero con los procedimientos actuales del equipo, mejores formas propuestas en la semana seis y probadas de la semana nueve a la doce. El viernes el plan cabe en una página, y se lo muestra a David Mensah, el vicerrector adjunto, y a su equipo; todos los que esperan saben en qué punto está su solicitud. Empieza en el desierto de Atacama en 2010, donde 33 mineros atrapados a 700 metros subieron vivos tras 69 días, porque cada parte del rescate tuvo a alguien que la conocía, y todas avanzaron a la vez.",
+  "card": "46 requests from every area on her first day. Helena sees them as one job, and plans ninety days in three lanes.",
+  "card_es": "46 solicitudes de todas las áreas en su primer día. Helena las ve como un solo trabajo y planea noventa días en tres carriles.",
+  "chapters_es": {
+    "rescue": "Cada parte, a la vez",
+    "first": "Su primer día",
+    "wheel": "Una rueda",
+    "deep": "Quién domina cada una",
+    "lanes": "Noventa días, tres carriles",
+    "friday": "Una página, mostrada"
+  },
+  "past": [
+    "The Atacama, 2010: every part, at once",
+    "Thirty-three miners were trapped 700 metres down. Each part of the rescue had someone who knew it, from the drills to the doctors to the families, and every part ran at once, until all 33 came up. A data manager's job is shaped the same way."
+  ],
+  "past_es": [
+    "Atacama, 2010: cada parte, a la vez",
+    "Treinta y tres mineros quedaron atrapados a 700 metros. Cada parte del rescate tuvo a alguien que la conocía, de las perforadoras a los médicos y las familias, y todas avanzaron a la vez, hasta que subieron los 33. El trabajo de una gestora de datos tiene la misma forma."
+  ],
+  "next_h": "You've seen the whole job, and a plan in three lanes. Next: what Helena does first, listen, to people and to the systems' own numbers.",
+  "next_h_es": "Viste el trabajo entero y un plan en tres carriles. Después: lo primero que hace Helena, escuchar, a las personas y a las propias cifras de los sistemas.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "DAMA-DMBOK, the data management body of knowledge",
+        "title_es": "DAMA-DMBOK, el cuerpo de conocimiento de la gestión de datos (en inglés)",
+        "line": "DAMA International's map of the job: its wheel of areas, with data governance at the centre.",
+        "line_es": "El mapa del trabajo de DAMA International: su rueda de áreas, con el gobierno de datos en el centro.",
+        "href": "https://www.dama.org/cpages/body-of-knowledge",
+        "href_es": "https://www.dama.org/cpages/body-of-knowledge"
+      },
+      {
+        "title": "The First 90 Days, by Michael Watkins",
+        "title_es": "Los primeros 90 días, de Michael Watkins (en inglés)",
+        "line": "IMD's page on the book: a new leader's first months, from learning fast to securing early wins.",
+        "line_es": "La página de IMD sobre el libro: los primeros meses de quien empieza a liderar, de aprender rápido a lograr victorias pronto.",
+        "href": "https://www.imd.org/research-knowledge/leadership/books/first-90-days/",
+        "href_es": "https://www.imd.org/research-knowledge/leadership/books/first-90-days/"
+      },
+      {
+        "title": "The rescue at San José, step by step (in Spanish)",
+        "title_es": "Los hitos del rescate en San José",
+        "line": "Minería Chilena on the 69 days: the collapse, the probe that found the 33, the three drills and the capsule.",
+        "line_es": "Minería Chilena sobre los 69 días: el derrumbe, la sonda que encontró a los 33, las tres perforadoras y la cápsula.",
+        "href": "https://www.mch.cl/recordando-los-hitos-en-el-rescate-de-san-jose/",
+        "href_es": "https://www.mch.cl/recordando-los-hitos-en-el-rescate-de-san-jose/"
+      },
+      {
+        "title": "The 2010 Copiapó mining accident",
+        "title_es": "El accidente de la mina San José",
+        "line": "The encyclopedia's account of the collapse and the rescue, with its sources.",
+        "line_es": "El relato de la enciclopedia sobre el derrumbe y el rescate, con sus fuentes.",
+        "href": "https://en.wikipedia.org/wiki/2010_Copiap%C3%B3_mining_accident",
+        "href_es": "https://es.wikipedia.org/wiki/Accidente_de_la_mina_San_Jos%C3%A9"
+      }
+    ]
+  }
+}

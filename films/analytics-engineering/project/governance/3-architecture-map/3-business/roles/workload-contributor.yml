@@ -1,0 +1,14 @@
+name: workload contributor
+kind: business role
+definition: Answers heads of school's questions about teaching staff, finds why the night build failed, and
+  proposes fixes to the models as pull requests. Never reviews, approves or releases.
+owner: Yusuf Demir, data governance lead
+rights:
+  may: read the project and the HR system's staff and contracts (names, birth dates and emails masked), change
+    its own workload models and questions on its own branches, build in its own development schema, open a pull
+    request
+  may not: approve, merge, change production, change staging, a test, a seed, a contract or a definition, change
+    another team's models, grant itself rights
+  asks: Anil Kurian for what the heads of school need, HR for what a word about staff means, Noor for the model,
+    Jun Park for the code
+status: confirmed

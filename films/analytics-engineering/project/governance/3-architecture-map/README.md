@@ -44,3 +44,19 @@ python scripts/check/architecture_map.py --check   # check it, and fail if a vie
 ```
 
 It fails if a file isn't named after its element, two elements share a name, an owner can't be reached, a relationship names something that isn't on the map or joins two kinds the wrong way, an artifact has no home or a copy that isn't synced one way from it, or a colour has no evidence. The two views in `6-views/` are generated: don't edit them.
+
+## Agents on the map
+
+An agent is drawn as the map draws any software that works beside people: an application component, here with `agent: 'yes'` (quoted, since YAML reads a bare yes as true), an owner, who must be a person, and an assignment to a role, as a person's actor file is assigned to theirs. ArchiMate has no element for how far an agent may act alone, so its stage for each kind of task is written on its assignment, one line each, from 1 (it suggests) to 5 (a contributor with a mandate):
+
+```yaml
+relationships:
+- assignment: planning contributor
+  stage:
+    Planning's tickets: 4
+    what a word means: 1
+```
+
+A step is a step whoever does it, a person or an agent: Planning's change process, the service *change a data product*, has seven steps, and the role *planning contributor* is assigned only the three that draft a change. People keep the others: the analytics engineer reviews the code, the product owner approves the change and the release approver releases it, so whoever drafts a change never approves or releases it. The map holds three agents: the planning agent, the workload agent and the governance review agent.
+
+The check also fails if an agent has no owner, no assignment to a role, or no stage from 1 to 5 for each kind of task on its assignment, or if a `stage:` sits anywhere but on an agent's assignment. *From helper to colleague*'s *A place on the map* adds them.

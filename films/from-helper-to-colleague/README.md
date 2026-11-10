@@ -13,6 +13,7 @@ How an agent becomes a colleague: designed into the university's enterprise arch
 |---|---|---|---|---|---|
 | [Five stages, not a switch](https://data.learn-all.org/from-helper-to-colleague/five-stages/) | Earned autonomy | 8½ min | 6 | 3 questions | [script](1-five-stages/script.md) · [source](1-five-stages/source/README.md) |
 | [Borrowed rights](https://data.learn-all.org/from-helper-to-colleague/borrowed-rights/) | On a person's sign-in | 8½ min | 7 | 3 questions | [script](2-borrowed-rights/script.md) · [source](2-borrowed-rights/source/README.md) |
+| [A place on the map](https://data.learn-all.org/from-helper-to-colleague/a-place-on-the-map/) | Agents on the map | 9 min | 7 | 3 questions | [script](3-a-place-on-the-map/script.md) · [source](3-a-place-on-the-map/source/README.md) |
 | [A mandate, written and enforced](https://data.learn-all.org/from-helper-to-colleague/a-written-mandate/) | Autonomy in writing | 9½ min | 6 | 3 questions | [script](7-a-written-mandate/script.md) · [source](7-a-written-mandate/source/README.md) |
 <!-- /films -->
 

@@ -1,0 +1,8 @@
+name: raise a ticket
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: requester
+- realization: change a data product
+- triggering: draft the change
+status: confirmed

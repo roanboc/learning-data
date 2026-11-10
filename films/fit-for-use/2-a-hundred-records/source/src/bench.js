@@ -14,7 +14,8 @@
                                      cards greyed from this fraction on)
      hr_margin(ctx, x, y, w, o)      the measure on its scale: a steel pointer at o.v, and the margin either side of it (o.lo to o.hi) in
                                      a paler steel; o.u draws the margin open, o.vu moves the pointer
-     hr_bars(ctx, x, y, w, rows, o)  errors by kind: rows [{k, v, sub}] as steel bars on a card; o.u (0 to 1) grows them in turn; o.max
+     hr_bars(ctx, x, y, w, rows, o)  errors by kind: rows [{k, v, sub}] as steel bars on a card; o.u (0 to 1) grows them in turn; o.max;
+                                     o.grow: the card grows a row at a time as they come in
      hr_certs(ctx, x, y, o)          a small pile of degree certificates, o.n of them fanned */
 // the hundred's 21 imperfect records and what was wrong in each: 26 errors (numbers.md, The hundred-record measure): in names, 8
 // accents lost, 3 cut short, 4 given and family names swapped; 6 awards, 3 ceremonies, 2 conferral dates. Five records have two.
@@ -53,7 +54,7 @@ function hr_tray(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return
     ctx.strokeStyle="rgba(60,40,24,0.6)";ctx.lineWidth=2;rr(ctx,x+w/2-lw/2,y+20,lw,48,4);ctx.stroke();dq_T(ctx,o.label,x+w/2,y+54,{w:700,size:28,align:"center"});}
   ctx.restore();}
 function hr_margin(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const mn=o.min==null?50:o.min,mx=o.max==null?100:o.max,x0=x+DQ_PAD+18,ws=w-2*DQ_PAD-36,
-    X=v=>x0+clamp((v-mn)/(mx-mn),0,1)*ws,sy=y+132,sh=52,ny=sy+sh+40,h=ny+64-y;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+    X=v=>x0+clamp((v-mn)/(mx-mn),0,1)*ws,sy=y+160,sh=52,ny=sy+sh+40,h=ny+64-y;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{on:o.on,edge:"steel"});if(o.label)dq_label(ctx,x+DQ_PAD,y+50,o.label,{col:"steel"});
   ctx.fillStyle="rgba(120,96,64,0.1)";rr(ctx,x0-18,sy,ws+36,sh,8);ctx.fill();ctx.strokeStyle="rgba(110,90,66,0.3)";ctx.lineWidth=1.2;rr(ctx,x0-18,sy,ws+36,sh,8);ctx.stroke();
   const steps=(mx-mn)/5;ctx.fillStyle=rgba(DQ.ink,0.85);for(let i=0;i<=steps*5;i++){const tx=x0+ws*i/(steps*5),big=i%5===0;ctx.fillRect(tx-(big?1.3:0.7),sy+sh-(big?22:11),big?2.6:1.4,big?22:11);}
@@ -66,10 +67,11 @@ function hr_margin(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retu
   ctx.beginPath();ctx.moveTo(px,sy+sh*0.55);ctx.lineTo(px-14,sy-6);ctx.lineTo(px+14,sy-6);ctx.closePath();ctx.fill();ctx.fillRect(px-2,sy-26,4,22);ctx.beginPath();ctx.arc(px,sy-28,6.5,0,TAU);ctx.fill();
   if(o.vText)dq_T(ctx,o.vText,px,sy-48,{w:800,size:32,align:"center",col:"steel",a:sstep(0.85,1,vu)});
   ctx.restore();return{x,y,w,h};}
-function hr_bars(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const rh=58,top=o.label?84:30,h=top+rows.length*rh+18,mx=o.max||Math.max(...rows.map(r=>r.v)),
+function hr_bars(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const rh=58,top=o.label?84:30,
+    nv=o.grow&&o.u?Math.max(1,rows.reduce((s_,_,i)=>s_+ag_sine(clamp(o.u(i)*4,0,1)),0)):rows.length,h=top+nv*rh+18,mx=o.max||Math.max(...rows.map(r=>r.v)),
     lw=o.labW||Math.max(...rows.map(r=>dq_tw(ctx,r.k,{w:600,size:28})))+34,bw=w-DQ_PAD*2-lw-70;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{on:o.on});if(o.label)dq_label(ctx,x+DQ_PAD,y+52,o.label);
-  rows.forEach((r,i)=>{const u=o.u?o.u(i):1;if(u<=0.004)return;const ry=y+top+i*rh,cy=ry+rh/2;ctx.save();ctx.globalAlpha*=clamp(u*2,0,1);
+  rows.forEach((r,i)=>{const u=o.u?o.u(i):1;if(u<=0.004)return;const ry=y+top+i*rh,cy=ry+rh/2;ctx.save();ctx.globalAlpha*=o.grow?clamp((u-0.15)*2.4,0,1):clamp(u*2,0,1);
     dq_T(ctx,r.k,x+DQ_PAD,cy+10,{w:600,size:28,col:r.sub?DQ.soft:DQ.ink});const bl=bw*r.v/mx*ag_eo(u);
     ctx.fillStyle=rgba(DQ.steel,r.sub?0.55:0.9);rr(ctx,x+DQ_PAD+lw,cy-13,Math.max(4,bl),26,4);ctx.fill();
     dq_T(ctx,String(r.v),x+DQ_PAD+lw+bl+14,cy+10,{w:800,size:30,col:"steel"});ctx.restore();});

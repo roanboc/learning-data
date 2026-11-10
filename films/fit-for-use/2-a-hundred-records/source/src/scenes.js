@@ -15,6 +15,7 @@ const HR_ROW={xs:[790,950,1110,1270],y:480,w:150,h:96};       // four cards in a
 const HR_VALS=["65.8","63.4","67.1","64.9"];                  // four of his measurements, typed on his cards
 const HR_YIELD=["2.8","3.4","3.1","2.6"];                     // a handful of results from four plots
 const HR_LIT=[[2,1],[4,1],[3,2],[5,2]];                       // the four plots of a trial
+const HR_DIALS_Y=370;                                         // the three checks' dials, their names and owners well below the film's title
 // the chapter's kicker, in the frame's top left: on the wall in ink, on the granite in chalk; dk 0 to 1 crosses between them
 function hr_kick(ctx,S,a,dk){if(a<=0.004)return;setScreen(ctx,S);dk=clamp(dk||0,0,1);
   if(dk<1)dq_kicker(ctx,"2","A hundred records",{a:a*(1-dk)});if(dk>0)dq_kicker(ctx,"2","A hundred records",{a:a*dk,dark:true});}
@@ -54,16 +55,16 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       hr_gosset(cx,tt);
       dq_nameTag(cx,722,318,HR_GOSSET,{a:ag_in(tt,T.william-0.2,0.5)});
       dq_textCard(cx,1000,410,460,{kick:"The brewery wants",title:"Better barley",sub:"Which kind to grow, and how"},{a:ag_in(tt,T.better-0.3,0.4),k:hr_k(tt,T.better-0.3)});
-      hr_jar(cx,1110,858,1,{tone:"pale",seed:5,a:ag_in(tt,T.which-0.2,0.5)});hr_jar(cx,1300,858,1,{tone:"warm",seed:9,a:ag_in(tt,T.how-0.2,0.5)});}},
+      hr_jar(cx,1560,858,1,{tone:"pale",seed:5,a:ag_in(tt,T.which-0.2,0.5)});hr_jar(cx,1740,858,1,{tone:"warm",seed:9,a:ag_in(tt,T.how-0.2,0.5)});}},
     // a trial: a few plots, a whole season, a handful of results; and what a handful can do
-    {at:T.sowing-1.3,place:"hrField",keys:[[0,960,540,1.0]],push:0.035,draw:(cx,tt)=>{
+    {at:T.sowing-1.3,place:"hrField",keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
       HR_LIT.forEach(([i,j],k)=>hr_plotLit(cx,i,j,ag_in(tt,T.sowing+0.1+k*0.18,0.4)));
-      hr_season(cx,1400,60,clamp((tt-T.season+0.1)/2.4,0,1),{a:ag_in(tt,T.season-0.3,0.4),k:hr_k(tt,T.season-0.3)});
-      dq_chip(cx,960,62,"A handful of results",{align:"center",a:ag_in(tt,T.handful+0.7,0.4)});
+      hr_season(cx,1400,100,clamp((tt-T.season+0.1)/2.4,0,1),{a:ag_in(tt,T.season-0.3,0.4),k:hr_k(tt,T.season-0.3)});
+      dq_chip(cx,960,104,"A handful of results",{align:"center",a:ag_in(tt,T.handful+0.7,0.4)});
       HR_LIT.forEach(([i,j],k)=>{const t0=T.handful-0.1+k*0.2,u=ag_eo(clamp((tt-t0)/0.9,0,1));if(tt<t0)return;const p=hr_inPlot(i,j,0.5,0.5);
-        hr_numCard(cx,lerp(p[0]-75,645+k*160,u),lerp(p[1]-48,112,u),HR_YIELD[k],{a:ag_in(tt,t0,0.25),edge:"steel"});});
-      dq_textCard(cx,70,560,500,{title:"The wrong barley, for a year?"},{icon:"why",a:ag_in(tt,T.wrong-0.2,0.4),k:hr_k(tt,T.wrong-0.2)});
-      dq_textCard(cx,1350,560,500,{title:"Good barley, turned away?"},{icon:"why",a:ag_in(tt,T.turn-0.2,0.4),k:hr_k(tt,T.turn-0.2)});}},
+        hr_numCard(cx,lerp(p[0]-75,645+k*160,u),lerp(p[1]-48,150,u),HR_YIELD[k],{a:ag_in(tt,t0,0.25),edge:"steel"});});
+      dq_textCard(cx,70,560,620,{title:"Wrong barley, for a year?"},{icon:"why",a:ag_in(tt,T.wrong-0.2,0.4),k:hr_k(tt,T.wrong-0.2)});
+      dq_textCard(cx,1230,560,620,{title:"Good barley, turned away?"},{icon:"why",a:ag_in(tt,T.turn-0.2,0.4),k:hr_k(tt,T.turn-0.2)});}},
     // back at his bench: the day's arithmetic and its question; his answer, tried by hand on cards, then published, and what it gave
     {at:c.maths-0.6,place:"hrLab",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
       hr_gosset(cx,tt,{gaze:[4,1]});
@@ -76,7 +77,7 @@ scene("first",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       // 3,000 measurements on 3,000 cards, shuffled, drawn four at a time
       const out=1-ag_in(tt,T.published-0.6,0.5),sA=ag_in(tt,T.hand-0.3,0.5)*out;
       hr_stack(cx,900,862,{a:sA,cut:clamp((tt-T.shuffled+0.1)/0.9,0,1)});
-      dq_chip(cx,1015,662,"3,000 measurements · 3,000 cards",{align:"center",a:ag_in(tt,T.thousand-0.1,0.4)*out});
+      dq_chip(cx,1160,742,"3,000 measurements · 3,000 cards",{a:ag_in(tt,T.thousand-0.1,0.4)*out});
       HR_ROW.xs.forEach((x,k)=>{const t0=T.drawn+0.15+k*0.32,u=ag_eo(clamp((tt-t0)/0.7,0,1));if(tt<t0)return;
         hr_numCard(cx,lerp(940,x,u),lerp(700,HR_ROW.y,u),HR_VALS[k],{a:ag_in(tt,t0,0.2)*out,ruled:true,rot:(1-u)*0.3});});
       dq_chip(cx,1105,418,"750 samples of four",{align:"center",a:ag_in(tt,T.drawn+1.7,0.4)*out});
@@ -146,15 +147,18 @@ function hr_accent(cx,x,y,u,o){o=o||{};const a=o.a==null?1:o.a,F={w:500,size:44,
   cx.restore();return{x,y,w,h};}
 // the whole list as a strip, a line for each graduate, the oldest admitted at the left: o.caps picks out the names in capitals (every
 // one admitted before 2020), o.hundred the hundred most recent at the right end
-function hr_strip(cx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=360,bb={x,y,w,h};if(a<=0.004)return bb;const n=2031,sx=x+DQ_PAD,sw=w-2*DQ_PAD,sy=y+84,sh=150,old=0.3,
-    caps=o.caps||0,hu=o.hundred||0,r=ag_rnd(43);cx.save();cx.globalAlpha*=a;if(o.k!=null)ag_about(cx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+// the whole list, a small cell for each of its 2,031 graduates, oldest admitted first, column by column: the 312 family names in
+// capitals only among the oldest (admitted before 2020) in steel as o.caps comes in, the hundred most recent lit at the end (o.hundred)
+const HR_CAPS=(()=>{const r=ag_rnd(43),m=Math.floor(0.3*2031),idx=[...Array(m).keys()];for(let i=m-1;i>0;i--){const j=Math.floor(r()*(i+1));[idx[i],idx[j]]=[idx[j],idx[i]];}
+  return new Set(idx.slice(0,312));})();
+function hr_strip(cx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,h=360,bb={x,y,w,h};if(a<=0.004)return bb;const n=2031,R=21,C=Math.ceil(n/R),sx=x+DQ_PAD,sw=w-2*DQ_PAD,
+    cw=sw/C,ch=7.4,sy=y+84,sh=R*ch,caps=o.caps||0,hu=o.hundred||0;cx.save();cx.globalAlpha*=a;if(o.k!=null)ag_about(cx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(cx,x,y,w,h,{on:"granite"});dq_label(cx,x+DQ_PAD,y+52,"December's list · 2,031 graduates");
-  cx.fillStyle="rgba(120,104,84,0.08)";cx.fillRect(sx,sy,sw,sh);
-  const p0=sx+sw*(1-100/n);if(hu>0){cx.fillStyle=rgba([196,172,128],0.45*hu);cx.fillRect(p0-3,sy-8,sx+sw-p0+6,sh+16);}
-  for(let i=0;i<n;i++){const u=i/n,lx=sx+u*sw,cp=u<old&&r()<312/(old*n);cx.fillStyle=cp&&caps>0?rgba(mix([120,104,84],DQ.steel,caps),0.5+0.5*caps):"rgba(120,104,84,0.5)";
-    cx.fillRect(lx,sy+(cp&&caps>0?0:12),cp&&caps>0?1.4:0.9,cp&&caps>0?sh:sh-24);}
+  const c0=Math.floor((n-100)/R),p0=sx+c0*cw;if(hu>0){cx.fillStyle=rgba([196,172,128],0.4*hu);rr(cx,p0-4,sy-6,sx+sw-p0+8,sh+12,4);cx.fill();}
+  for(let i=0;i<n;i++){const c=Math.floor(i/R),lx=sx+c*cw,ly=sy+(i%R)*ch,cp=HR_CAPS.has(i)&&caps>0,hd=i>=n-100&&hu>0;
+    cx.fillStyle=cp?rgba(mix([150,136,116],DQ.steel,caps),0.55+0.45*caps):hd?rgba(mix([150,136,116],[110,90,66],hu),0.55+0.3*hu):"rgba(150,136,116,0.5)";cx.fillRect(lx+0.6,ly+0.6,cw-1.4,ch-1.4);}
   // what each end is: before 2020, and the hundred
-  cx.fillStyle="rgba(92,82,72,0.6)";cx.fillRect(sx,sy+sh+14,sw*old,2);cx.fillRect(p0,sy+sh+14,sx+sw-p0,2);
+  const ow=Math.floor(0.3*n/R)*cw;cx.fillStyle="rgba(92,82,72,0.6)";cx.fillRect(sx,sy+sh+14,ow,2);cx.fillRect(p0,sy+sh+14,sx+sw-p0,2);
   dq_T(cx,"Admitted before 2020",sx,sy+sh+52,{w:600,size:28,col:DQ.soft});dq_T(cx,"312 in capitals",sx,sy+sh+90,{w:700,size:28,col:"steel",a:caps});
   dq_T(cx,"The hundred",sx+sw,sy+sh+52,{w:600,size:28,col:DQ.soft,align:"right",a:Math.max(0.4,hu)});cx.restore();return bb;}
 // a label over a dial (the check's name), a dial whose brass is what's allowed and whose needle is what's found (o.read), and a tag under it
@@ -186,25 +190,25 @@ scene("look",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       dq_textCard(cx,1290,404,540,{kick:"For a certificate",title:"Every name exactly right"},{edge:"brass",a:ag_in(tt,T.cert-0.3,0.4),k:hr_k(tt,T.cert-0.3)});
       hr_tray(cx,1080,782,740,{label:"December 2025 · built in full",n:70,a:ag_in(tt,T.dec-0.2,0.5),pull:ag_in(tt,T.hundred,0.6)});}},
     // on the bench, close: one record and the fields a certificate and a ceremony need; a field marked wrong; a record with nothing marked
-    {at:T.fields-0.6,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
+    {at:T.fields-0.6,place:"benchTop",keys:[[0,560,400,1.45],[T.nothing-1.0,960,540,1.0]],d:1.6,push:0,draw:(cx,tt)=>{
       const lit=tt<T.names-0.1?[]:tt<T.award-0.1?[0,1]:tt<T.cer-0.1?[2]:tt<T.date-0.1?[3]:tt<T.mark-0.2?[4]:[],m=tt>T.mark+0.5;
       const r1=dq_record(cx,180,150,700,{head:HR_REC1.head,id:HR_REC1.id,rows:HR_REC1.rows.map((r,i)=>i===1&&m?Object.assign({},r,{mark:"stop"}):r)},
         {on:"granite",lit,a:ag_in(tt,T.fields-0.4,0.5),k:hr_k(tt,T.fields-0.4)});
       dq_chip(cx,180,r1.y+r1.h+52,"Should be Núñez",{col:"brass",on:"granite",a:ag_in(tt,T.mark+0.9,0.4)});
-      const r2=dq_record(cx,1040,150,700,HR_REC2,{on:"granite",a:ag_in(tt,T.nothing-0.4,0.5),k:hr_k(tt,T.nothing-0.4)});
+      const r2=dq_record(cx,1040,150,700,HR_REC2,{on:"granite",a:ag_in(tt,T.nothing,0.5),k:hr_k(tt,T.nothing)});
       if(tt>T.perfect-0.2)dq_tag(cx,r2.x+r2.w-170,r2.y+r2.h+60,"pass",{to:[r2.x+r2.w-170,r2.y+r2.h-4],text:"PERFECT",k:hr_k(tt,T.perfect-0.2),on:"granite"});}},
     // two hours later: the hundred, marked; 79 perfect; 21 with an error, 26 errors, by kind
     {later:true,at:c.later-0.5,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       const kind=kindAt(tt);
       hr_hundred(cx,110,160,{cw:88,ch:54,gap:10,on:"granite",mark:i=>{const d=(i%10)*0.05+Math.floor(i/10)*0.07;return HR_HUNDRED.isBad(i)?"stop":tt>T.n79-0.5+d?"pass":null;},
         lit:i=>kind&&hr_has(i,kind)?1:0});
-      dq_chip(cx,110,108,"2 pm to 4 pm",{icon:"clock",on:"granite",a:ag_in(tt,c.later,0.4)});
+      dq_chip(cx,1150,98,"2 pm to 4 pm",{icon:"clock",on:"granite",a:ag_in(tt,c.later,0.4)});
       const fA=1-ag_in(tt,T.n15-0.5,0.4);
       dq_figure(cx,1200,330,"79","perfect of 100",{col:"steel",dark:true,a:ag_in(tt,T.n79,0.5)*fA});
       dq_figure(cx,1200,600,"21","with an error",{dark:true,a:ag_in(tt,T.n21-0.1,0.5)*fA});
       dq_figure(cx,1560,600,"26","errors in all",{dark:true,a:ag_in(tt,T.n26-0.1,0.5)*fA});
       hr_bars(cx,1150,150,720,[{k:"Names",v:15},{k:"Accents lost",v:8,sub:1},{k:"Cut short",v:3,sub:1},{k:"Given and family swapped",v:4,sub:1},{k:"Awards",v:6},{k:"Ceremonies",v:3},{k:"Conferral dates",v:2}],
-        {label:"26 errors",max:15,on:"granite",a:ag_in(tt,T.n15-0.3,0.5),u:i=>ag_in(tt,[T.n15,T.acc,T.cut,T.swap,T.awards,T.cers,T.dates][i]-0.2,0.6)});}},
+        {label:"26 errors",max:15,on:"granite",grow:true,a:ag_in(tt,T.n15-0.3,0.5),u:i=>ag_in(tt,[T.n15,T.acc,T.cut,T.swap,T.awards,T.cers,T.dates][i]-0.2,0.6)});}},
     // back at the bench, four o'clock: what Thomas Redman calls it, and all it needs
     {at:c.redman-0.5,place:"bench",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       hr_team(cx,tt);
@@ -224,7 +228,7 @@ scene("sure",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
   ag_shots(ctx,S,t,sc.dur,[{at:0,place:"bench",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt)=>{
     hr_team(cx,tt);
     // December's list, all of it: the hundred most recent at its end, then the older cards greyed, the list as it was made years ago
-    hr_tray(cx,560,782,1300,{label:"December 2025 · 2,031 graduates",n:130,a:ag_in(tt,0.4,0.6),pull:ag_in(tt,T.hundred,0.6),
+    hr_tray(cx,560,782,1300,{label:"December 2025 · 2,031 graduates",n:130,a:ag_in(tt,0.4,0.6),pull:ag_in(tt,T.hundred,0.6)*(1-ag_in(tt,c.puzzle-0.6,0.8)),
       grey:tt>T.recent?0.86*ag_sine(clamp((tt-T.recent)/1.6,0,1)):null});
     // Gosset's question again, with his four cards
     const qA=ag_in(tt,T.gq-0.4,0.4)*(1-ag_in(tt,c.margin-0.3,0.4));
@@ -233,7 +237,7 @@ scene("sure",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
     // the measure and how far it can be trusted; one in five wrong; everyone understands it
     const mA=ag_in(tt,c.margin-0.2,0.5)*(1-ag_in(tt,c.puzzle-0.5,0.5));
     hr_margin(cx,1220,160,640,{label:"Perfect in every hundred",v:79,lo:71,hi:87,vText:"79",vu:ag_in(tt,T.like-0.2,1.2),u:ag_in(tt,T.eight-0.3,1.2),a:mA,k:hr_k(tt,c.margin-0.2)});
-    dq_T(cx,"good to about 8 either way",1250,500,{w:600,size:28,col:"steel",a:mA*ag_in(tt,T.eight+0.6,0.5)});
+    dq_T(cx,"good to about 8 either way",1250,524,{w:600,size:28,col:"steel",a:mA*ag_in(tt,T.eight+0.6,0.5)});
     const oA=1-ag_in(tt,T.recent-0.6,0.4);
     for(let k=0;k<5;k++)hr_mini(cx,1250+k*118,560,100,64,{mark:k===2?"stop":null,a:oA*ag_in(tt,T.five-0.3+k*0.1,0.3)});
     dq_T(cx,"about 1 in 5 wrong",1250,676,{w:600,size:28,col:DQ.soft,a:oA*ag_in(tt,T.five+0.5,0.4)});
@@ -243,9 +247,9 @@ scene("sure",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
     const pA=1;
     hr_figCard(cx,1190,170,320,"Printed again","41","about 2 in 100",{edge:"steel",a:pA*ag_in(tt,T.n41-0.3,0.4),k:hr_k(tt,T.n41-0.3),lineA:ag_in(tt,T.two-0.2,0.4)});
     const f2=hr_figCard(cx,1540,170,320,"With an error","21","in 100 · over 400",{edge:"steel",a:pA*ag_in(tt,T.n21-0.3,0.4),k:hr_k(tt,T.n21-0.3),lineA:ag_in(tt,T.n400-0.2,0.4)});
-    if(tt>T.hand-0.3)dq_tag(cx,1830,480,"none",{to:[1780,f2.y+f2.h-4],text:"PUT RIGHT BY HAND",size:28,flip:true,k:hr_k(tt,T.hand-0.3)});
-    dq_T(cx,"nobody counted that work",1846,568,{w:600,size:28,col:DQ.soft,align:"right",a:ag_in(tt,T.nobody-0.2,0.4)});
-    dq_textCard(cx,1400,598,460,{kick:"A later film",title:"The hidden factory"},{dash:false,a:ag_in(tt,T.factory-0.3,0.4),k:hr_k(tt,T.factory-0.3)});}}]);
+    if(tt>T.hand-0.3)dq_tag(cx,1830,450,"none",{to:[1780,f2.y+f2.h-4],text:"PUT RIGHT BY HAND",size:28,flip:true,k:hr_k(tt,T.hand-0.3)});
+    dq_T(cx,"nobody counted that work",1846,536,{w:600,size:28,col:DQ.soft,align:"right",a:ag_in(tt,T.nobody-0.2,0.4)});
+    dq_textCard(cx,1400,566,460,{kick:"A later film",title:"The hidden factory"},{dash:false,a:ag_in(tt,T.factory-0.3,0.4),k:hr_k(tt,T.factory-0.3)});}}]);
   hr_kick(ctx,S,1,0);
 });
 
@@ -262,25 +266,27 @@ scene("profile",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
     since:wAt(sc,"since","since twenty twenty"),row2:wAt(sc,"everyrow","every row"),
     good2:wAt(sc,"said","how good"),prof:wAt(sc,"said","The profile"),look2:wAt(sc,"said","where to look")}));
   // the profile window, its family_name row's longest value, and where the camera goes to read it
-  const P={x:90,y:120,w:1260,h:440},cell=[P.x+24+8+300+210+280+190+95,P.y+68+18+8+60*2+30];
+  const P={x:230,y:120,w:1100,h:500},cell=hr_profileCell(P.x,P.y,1,4);
   ag_shots(ctx,S,t,sc.dur,[
     // the bench: a hundred say how good, not where to look among two thousand; so the platform describes the whole list
     {at:0,place:"bench",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       hr_team(cx,tt);
       hr_tray(cx,560,782,1300,{label:"December 2025 · 2,031 graduates",n:130,pull:1-ag_in(tt,T.two-0.3,0.6),grey:0.86*(1-ag_sine(clamp((tt-T.look)/1.2,0,1))),lit:ag_in(tt,T.whole-0.3,0.6)});
-      dq_chip(cx,1500,660,"Where to look?",{align:"center",icon:"lens",a:ag_in(tt,T.look-0.2,0.4)*(1-ag_in(tt,T.whole-0.4,0.4))});}},
+      const cA=1-ag_in(tt,T.whole-0.4,0.4);
+      dq_chip(cx,1660,676,"How good · 79 of 100",{align:"center",col:"steel",a:ag_in(tt,T.good-0.2,0.4)*cA});
+      dq_chip(cx,1300,676,"Where to look?",{align:"center",icon:"lens",a:ag_in(tt,T.look-0.2,0.4)*cA});}},
     // on the platform: a notebook's quick profile in one click; for one the team keeps, the table's Quality tab, and data profiling
     {at:T.nb-0.5,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       hr_cell(cx,100,150,780,400,{on:"granite",menu:ag_in(tt,T.click-0.2,0.5),a:ag_in(tt,T.nb-0.4,0.5),k:hr_k(tt,T.nb-0.4)});
       hr_catalog(cx,960,110,880,640,{on:"granite",lit:ag_in(tt,T.keeps+0.2,0.5),a:ag_in(tt,T.keeps-0.3,0.5),k:hr_k(tt,T.keeps-0.3)});
       hr_monitor(cx,1000,380,800,300,{on:"granite",lit:ag_in(tt,T.dp+0.1,0.5),type:ag_in(tt,c.profiling-0.4,0.5),a:ag_in(tt,T.dp-0.3,0.4),k:hr_k(tt,T.dp-0.3)});}},
     // the profile: a row for each column, the metrics as they're named, the most frequent; December's list; then what stands out
-    {later:true,at:c.profiling-0.4,place:"benchTop",keys:[[0,960,540,1.0],[c.stand-0.2,cell[0]-120,cell[1]+40,1.22],[T.freq-0.4,1340,420,1.22],[c.metrics-0.9,960,540,1.0]],d:1.8,push:0,draw:(cx,tt)=>{
-      const cols=tt<T.empty-0.2?0:tt<T.diff-0.2?1:tt<T.short-0.2?2:tt<T.long-0.2?3:4;
-      hr_profile(cx,P.x,P.y,P.w,P.h,{on:"granite",cols,lit30:ag_in(tt,T.thirty-0.2,0.5),rowA:i=>ag_in(tt,T.col-0.3+i*0.18,0.35)});
-      hr_frequent(cx,1410,120,430,{on:"granite",a:ag_in(tt,T.most-0.2,0.5),k:hr_k(tt,T.most-0.2),lit:ag_in(tt,T.twice-0.2,0.6)});
+    {later:true,at:c.profiling-0.4,place:"benchTop",keys:[[0,960,540,1.0],[c.stand-0.2,960,450,1.2]],d:1.8,push:0,draw:(cx,tt)=>{
+      const at=[0,T.empty,T.diff,T.short,T.long],colA=j=>ag_in(tt,at[j]-0.2,0.4);
+      hr_profile(cx,P.x,P.y,P.w,P.h,{on:"granite",colA,lit30:ag_in(tt,T.thirty-0.2,0.5),rowA:i=>ag_in(tt,T.col-0.3+i*0.18,0.35),read:ag_in(tt,T.row-0.3,1.6)});
+      hr_frequent(cx,1370,120,320,{on:"granite",a:ag_in(tt,T.most-0.2,0.5),k:hr_k(tt,T.most-0.2),lit:ag_in(tt,T.twice-0.2,0.6)});
       dq_chip(cx,P.x,P.y+P.h+56,"Slice · December 2025 · 2,031 graduates",{icon:"calendar",on:"granite",a:ag_in(tt,T.dec-0.3,0.4)});
-      if(tt>T.field-0.4)dq_tag(cx,cell[0]-60,P.y+P.h+70,"steel",{to:[cell[0],cell[1]+26],text:"THE FIELD'S LENGTH · 30",size:28,k:hr_k(tt,T.field-0.4),on:"granite"});}},
+      if(tt>T.field-0.4)dq_tag(cx,cell[0]-250,P.y+P.h+30,"steel",{to:[cell[0],cell[1]+26],text:"THE FIELD'S LENGTH · 30",size:28,k:hr_k(tt,T.field-0.4),on:"granite"});}},
     // counts of his own, as custom metrics: what each counts on December's list, and an accent that's gone
     {later:true,at:c.metrics-0.5,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       hr_metric(cx,90,120,1270,600,{on:"granite",fill:clamp((tt-T.custom+0.4)/2.4,0,1)});
@@ -294,40 +300,41 @@ scene("profile",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       hr_hundred(cx,140,220,{cw:40,ch:26,gap:6,on:"granite"});
       dq_T(cx,"none in capitals",140,580,{w:700,size:28,dark:true,a:ag_in(tt,c.since+0.3,0.4)});
       dq_T(cx,"all admitted since 2020",140,618,{w:600,size:28,col:DQ.chalkSoft,a:ag_in(tt,T.since-0.2,0.4)});
-      hr_strip(cx,700,190,1100,{a:ag_in(tt,c.everyrow-0.4,0.5),k:hr_k(tt,c.everyrow-0.4),caps:ag_in(tt,T.row2,0.8),hundred:ag_in(tt,T.row2+0.6,0.6)});}},
+      hr_strip(cx,700,190,1100,{a:ag_in(tt,c.since+0.2,0.5),k:hr_k(tt,c.since+0.2),hundred:ag_in(tt,T.since-0.2,0.6),caps:ag_in(tt,T.row2,0.8)});}},
     // what each said
     {later:true,at:c.said-0.5,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
-      dq_textCard(cx,330,300,600,{kick:"The hundred",title:"How good",sub:"79 of 100"},{on:"granite",kickCol:"steel",a:ag_in(tt,T.good2-0.3,0.4),k:hr_k(tt,T.good2-0.3)});
-      dq_textCard(cx,990,300,600,{kick:"The profile",title:"Where to look",sub:"Cut at 30 · in capitals · accents gone"},{on:"granite",kickCol:"steel",a:ag_in(tt,T.prof-0.3,0.4),k:hr_k(tt,T.prof-0.3)});}}]);
+      dq_textCard(cx,330,420,600,{kick:"The hundred",title:"How good",sub:"79 of 100"},{on:"granite",kickCol:"steel",a:ag_in(tt,T.good2-0.3,0.4),k:hr_k(tt,T.good2-0.3)});
+      dq_textCard(cx,990,420,600,{kick:"The profile",title:"Where to look",sub:"Cut at 30 · in capitals · accents gone"},{on:"granite",kickCol:"steel",a:ag_in(tt,T.prof-0.3,0.4),k:hr_k(tt,T.prof-0.3)});}}]);
   hr_kick(ctx,S,1,ag_in(t,T.nb-0.5,0.5));
 });
 
 /* ---------------------------------------------------------------- 5 · Then the checks */
 scene("checks",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
-    write:wAt(sc,"now","write checks"),cut:wAt(sc,"cut","cut short"),caps:wAt(sc,"upper","capitals"),accent:wAt(sc,"none","single accent"),
+    write:wAt(sc,"now","write checks"),shown:wAt(sc,"now","profile showed"),cut:wAt(sc,"cut","cut short"),caps:wAt(sc,"upper","capitals"),accent:wAt(sc,"none","single accent"),
     eight:wAt(sc,"chance","Eight"),chance:wAt(sc,"chance","isn't chance"),owns:wAt(sc,"owner","Mei owns"),malia:wAt(sc,"owner","Malia"),level:wAt(sc,"owner","their level"),
     holds:wAt(sc,"level","holds"),stops:wAt(sc,"level","none stops"),project:wAt(sc,"dbt","the project"),monday:wAt(sc,"dbt","Monday"),night:wAt(sc,"dbt","every night"),
     mon:wAt(sc,"monitor","monitoring"),time:wAt(sc,"monitor","on time"),quality:wAt(sc,"monitor","Quality"),
     nocheck:wAt(sc,"cant","no check"),swapped:wAt(sc,"allowed","swapped"),awards:wAt(sc,"allowed","the awards"),cers:wAt(sc,"allowed","the ceremonies"),dates:wAt(sc,"allowed","the dates"),
     values:wAt(sc,"allowed","allowed values"),wrong:wAt(sc,"allowed","Allowed, and wrong"),outside:wAt(sc,"outside","something outside"),next:wAt(sc,"outside","next film")}));
   // the three checks, as Jun writes them from what the profile showed: each one's name, its scale, what's allowed, what it finds
-  const CH=[{x:620,label:"Family name at 30",max:400,lo:0,hi:10,v:41,read:"41",t:T.cut},{x:900,label:"In capitals only",max:400,lo:0,hi:10,v:312,read:"312",t:T.caps},
-    {x:1180,label:"No accent at all",max:200,lo:10,hi:200,v:0,read:"0",t:T.accent}];
+  const CH=[{x:620,label:"Family name at 30",max:400,lo:0,hi:10,v:41,read:"41",t:c.cut+0.5,found:"41 at 30"},{x:900,label:"In capitals only",max:400,lo:0,hi:10,v:312,read:"312",t:c.upper+0.5,found:"312 in capitals"},
+    {x:1180,label:"No accent at all",max:200,lo:10,hi:200,v:0,read:"0",t:c.none+0.5,found:"No accents"}];
   const jun=(cx,tt)=>dq_person(cx,"jun",260,HR_TY,HR_TS,{t:tt,cut:DQ_BENCH.back,gaze:[3,0]});
   ag_shots(ctx,S,t,sc.dur,[
     // Jun writes the checks; Mei owns them, and with Malia agrees their level: each holds for a person, none stops the list
     {at:0,place:"bench",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       jun(cx,tt);
       for(const [k,x,t0] of [["mei",1480,T.owns],["malia",1770,T.malia]]){const a=ag_in(tt,t0-0.4,0.6);if(a>0){cx.save();cx.globalAlpha*=a;dq_person(cx,k,x,HR_TY,HR_TS,{t:tt,flip:true,cut:DQ_BENCH.back,gaze:[3,0]});cx.restore();}}
-      CH.forEach((q,i)=>{const t0=q.t-0.4;if(tt<t0)return;hr_check(cx,q.x,330,86,{label:q.label,max:q.max,lo:q.lo,hi:q.hi,v:q.v,read:q.read,u:ag_in(tt,t0+0.2,0.6),vu:ag_eo(clamp((tt-t0-0.5)/1.2,0,1)),
+      CH.forEach((q,i)=>dq_chip(cx,q.x,HR_DIALS_Y,q.found,{align:"center",col:"steel",a:ag_in(tt,T.shown-0.2+i*0.2,0.4)*(1-ag_in(tt,q.t-0.6,0.4))}));
+      CH.forEach((q,i)=>{const t0=q.t-0.4;if(tt<t0)return;hr_check(cx,q.x,HR_DIALS_Y,86,{label:q.label,max:q.max,lo:q.lo,hi:q.hi,v:q.v,read:q.read,u:ag_in(tt,t0+0.2,0.6),vu:ag_eo(clamp((tt-t0-0.5)/1.2,0,1)),
         a:ag_in(tt,t0,0.4),k:hr_k(tt,t0),tag:tt>T.holds-0.2+i*0.25?hr_k(tt,T.holds-0.2+i*0.25):0});
-        if(tt>T.owns-0.1)dq_chip(cx,q.x,150,"Mei Tanaka",{align:"center",icon:"person",a:ag_in(tt,T.owns-0.1+i*0.15,0.35)});});
-      dq_chip(cx,1180,170,"8 in the hundred lost theirs",{align:"center",col:"steel",a:ag_in(tt,T.eight-0.2,0.4)*(1-ag_in(tt,T.owns-0.5,0.4))});
+        if(tt>T.owns-0.1)dq_chip(cx,q.x,HR_DIALS_Y-196,"Mei Tanaka",{align:"center",icon:"person",a:ag_in(tt,T.owns-0.1+i*0.15,0.35)});});
+      dq_chip(cx,1290,HR_DIALS_Y,"8 in the hundred lost theirs",{col:"steel",a:ag_in(tt,T.eight-0.2,0.4)*(1-ag_in(tt,T.owns-0.5,0.4))});
       dq_chip(cx,900,640,"None stops the list on its own",{align:"center",a:ag_in(tt,T.stops-0.2,0.4)});}},
     // in the project, with dbt, every night from Monday; the platform's monitoring watches the rest
     {at:T.project-0.4,place:"bench",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
       jun(cx,tt);
-      hr_checksFile(cx,540,100,900,620,{a:ag_in(tt,T.project-0.2,0.5),k:hr_k(tt,T.project-0.2),files:ag_in(tt,T.project,1.0),lines:clamp((tt-T.project-0.6)*5,0,HR_CHECKS_YML.length),lit:tt>T.project+1.8?[4,5]:[]});
+      hr_checksFile(cx,540,100,900,620,{a:ag_in(tt,T.project-0.2,0.5),k:hr_k(tt,T.project-0.2),files:ag_in(tt,T.project,1.0),lines:clamp((tt-T.project-0.6)*5,0,HR_CHECKS_YML.length),lit:tt>T.project+1.8?[3,5]:[]});
       dq_chip(cx,990,764,"Every night · from Monday 9 February",{align:"center",icon:"refresh",a:ag_in(tt,T.monday-0.3,0.4)});
       hr_quality(cx,1480,200,400,280,{a:ag_in(tt,T.mon-0.3,0.5),k:hr_k(tt,T.mon-0.3),rows:ag_in(tt,T.time-0.4,0.8)});
       dq_T(cx,"Quality on the platform",1480,530,{w:600,size:28,col:DQ.soft,a:ag_in(tt,T.quality-0.2,0.4)});}},
@@ -342,11 +349,11 @@ scene("checks",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       dq_chip(cx,1140,r3.y+r3.h+150,"Two awards: Arts, and Laws",{col:"brass",on:"granite",a:ag_in(tt,T.wrong+0.4,0.4)});}},
     // something outside the list to compare with: a reference, the next film
     {later:true,at:c.outside-0.5,place:"benchTop",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
-      const r3=dq_record(cx,230,200,700,{head:HR_REC3.head,id:HR_REC3.id,rows:HR_REC3.rows},{on:"granite",lit:[2]});
-      const b=dq_textCard(cx,1170,250,520,{kick:"Something outside the list",title:"A reference"},{edge:"brass",on:"granite",a:ag_in(tt,T.outside-0.2,0.4),k:hr_k(tt,T.outside-0.2)});
+      const r3=dq_record(cx,230,280,700,{head:HR_REC3.head,id:HR_REC3.id,rows:HR_REC3.rows},{on:"granite",lit:[2]});
+      const b=dq_textCard(cx,1090,330,640,{kick:"Something outside the list",title:"A reference"},{edge:"brass",on:"granite",a:ag_in(tt,T.outside-0.2,0.4),k:hr_k(tt,T.outside-0.2)});
       const u=ag_sine(clamp((tt-T.outside-0.2)/0.9,0,1));if(u>0){cx.save();cx.setLineDash([12,10]);cx.strokeStyle=rgba(DQ_TONE.brass.dark,0.9);cx.lineWidth=3;cx.beginPath();
         const y0=r3.rows[2].cy;cx.moveTo(r3.x+r3.w+14,y0);cx.lineTo(lerp(r3.x+r3.w+14,b.x-14,u),lerp(y0,b.y+b.h/2,u));cx.stroke();cx.restore();}
-      dq_chip(cx,1170,b.y+b.h+60,"Next · Valid isn't true",{on:"granite",a:ag_in(tt,T.next-0.3,0.4)});}}]);
+      dq_chip(cx,1090,b.y+b.h+60,"Next · Valid isn't true",{on:"granite",a:ag_in(tt,T.next-0.3,0.4)});}}]);
   hr_kick(ctx,S,ag_in(t,0.3,0.6),ag_in(t,c.cant-0.6,0.5));
 });
 
@@ -377,6 +384,7 @@ scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=hr_once(sc,"T",()=>({
       CHECKS_CLOSE.forEach((q,i)=>{const t0=T.first-0.4+i*0.2;hr_check(cx,q.x,360,72,{max:q.max,lo:q.lo,hi:q.hi,v:q.v,read:q.read,a:ag_in(tt,t0,0.4),k:hr_k(tt,t0)});
         if(tt>T.errs-0.4+i*0.2)dq_tag(cx,q.x-24,560,"steel",{to:[q.x,436],text:q.read,size:32,icon:false,k:hr_k(tt,T.errs-0.4+i*0.2)});});
       dq_T(cx,"where the errors are",1564,680,{w:700,size:30,align:"center",col:"steel",a:ag_in(tt,T.errs,0.5)});}}]);
+  hr_kick(ctx,S,ag_in(t,c.same-0.3,0.5)*(1-ag_in(t,end-0.6,0.5)),0);
   dq_end(ctx,S,t,end,"A hundred records","Look at a hundred records before you write a single check.","Film 2 of 4","Fit for use");
   const na=ag_in(t,end+1.4,0.6);if(na>0){setScreen(ctx,S);dq_T(ctx,"Next · Valid isn't true",960,800,{w:600,size:30,align:"center",col:DQ.chalkSoft,a:na});}
 });

@@ -6,8 +6,9 @@
    muted sage, never the green of a check that passed, and nothing is brass. Nothing Irish is borrowed: no emblem, no green and
    gold, no harp; the brewery isn't named.
    William Gosset (HR_GOSSET) is drawn as a young chemist of 1899, from the period, not from a photograph: a dark three-piece suit,
-   a high white collar and a dark tie, a short moustache. The props are paper and glass: a dish of barley, his notebook, the cards
-   he drew four at a time, the journal page of 1908.
+   a high white collar and a dark tie, a short moustache. The props are paper and glass: two sample jars of barley ears, the card of
+   the day's arithmetic, the pile of 3,000 cards and the four he drew, the journal page of 1908, the card with his name, and the plan of
+   the eleven pairs of plots.
    Every name starts with hr_ or HR_. */
 
 const HR={wash:[228,222,208],brick:[214,204,186],oakTop:[150,104,64],oakFace:[96,64,38],glassBrown:[120,78,44],glassClear:[206,214,212],
@@ -204,7 +205,10 @@ function hr_journal(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retur
 function hr_nameCard(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=300,h=110,turn=clamp(o.turn||0,0,1),sx=Math.cos(Math.PI*turn);ctx.save();ctx.globalAlpha*=a;
   ctx.translate(x+w/2,y+h/2);ctx.scale(Math.max(0.02,Math.abs(sx)),1);ctx.translate(-x-w/2,-y-h/2);
   if(sx>0){dq_card(ctx,x,y,w,h,{});dq_T(ctx,"W. S. Gosset",x+w/2,y+h/2+12,{w:700,size:36,align:"center"});}
-  else{dq_card(ctx,x,y,w,h,{fill:"rgb(232,224,206)"});ctx.strokeStyle="rgba(110,90,66,0.25)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+30,y+30);ctx.lineTo(x+w-30,y+h-30);ctx.moveTo(x+w-30,y+30);ctx.lineTo(x+30,y+h-30);ctx.stroke();}
+  // face down: a card's back, a fine hatch inside a border, so the name can't be read
+  else{dq_card(ctx,x,y,w,h,{fill:"rgb(232,224,206)"});ctx.strokeStyle="rgba(110,90,66,0.32)";ctx.lineWidth=1.6;rr(ctx,x+12,y+12,w-24,h-24,6);ctx.stroke();
+    ctx.save();rr(ctx,x+12,y+12,w-24,h-24,6);ctx.clip();ctx.strokeStyle="rgba(110,90,66,0.16)";ctx.lineWidth=1.2;ctx.beginPath();
+    for(let d=-h;d<w;d+=14){ctx.moveTo(x+d,y+h);ctx.lineTo(x+d+h,y);ctx.moveTo(x+d,y);ctx.lineTo(x+d+h,y+h);}ctx.stroke();ctx.restore();}
   ctx.restore();}
 function hr_pairs(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=760,h=330;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{});dq_label(ctx,x+DQ_PAD,y+52,"Eleven pairs of trials");

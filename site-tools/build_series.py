@@ -44,7 +44,7 @@ gets their course bar, and each film's page links to its own lab and situations 
 the words must keep; each series draws them with its own engine (site/assets/<dir>/learn.js).
 A film's page can also link to another site that shows its idea, from its site.json's "elsewhere" (elsewhere_section()).
 A series or a film its author hasn't reviewed yet is a draft ("draft": true in its series.json or site.json): its pages say so
-under their title, and its topic card's kicker starts with "Draft" (DRAFT, is_draft() and draft_note() below).
+under their title (DRAFT, is_draft() and draft_note() below).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
 import html, json, math, pathlib, re, sys
@@ -417,7 +417,7 @@ def entry(lg, item_id):
             (T(lg, " and a prologue", " y un prólogo") if any(x["index"] < 0 for x in films_) else "")
         extra = T(lg, "labs and scenarios", "labs y situaciones") if any(x["labs"] for x in films_) or series_learn(S) else T(lg, "Pause and think", "Pausa para pensar")
         return dict(kind="series", href=S["slug"] + "/", title=SN(lg, S), title_lang=None, posters=[f'{x["key"]}-poster.jpg' for x in films_],
-                    card=series[T(lg, "card", "card_es")], kicker=(DRAFT[lg][0] + " · " if series.get("draft") else "") + T(lg, "Series · ", "Serie · ") + many,
+                    card=series[T(lg, "card", "card_es")], kicker=T(lg, "Series · ", "Serie · ") + many,
                     meta=f'{round(sum(x["sec"] for x in films_) / 60)} min · {extra}' + T(lg, "", " · Inglés y español" if any(spanish_audio(x) for x in films_) else " · En inglés"),
                     progress=("series", [x["prefix"] for x in films_]))
     h = HAND[item_id]
@@ -555,7 +555,7 @@ def SN(lg, S):
 
 # A draft is content its author hasn't reviewed yet: a series whose series.json says "draft": true, and each of its films,
 # unless the film's site.json says "draft": false (its author has reviewed it); a film can also be a draft on its own. Its
-# pages say so under their title, and its topic card's kicker starts with the word.
+# pages say so under their title.
 DRAFT = {"en": ("Draft", "The author hasn't reviewed it yet, so some details may change."),
          "es": ("Borrador", "El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.")}
 

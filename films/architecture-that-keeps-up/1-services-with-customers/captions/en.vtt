@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:06.873
+Madurai, in the south of India, in 1976.
+
+00:00:08.773 --> 00:00:15.000
+Dr Govindappa Venkataswamy has just retired as a government eye surgeon, at 58.
+
+00:00:16.500 --> 00:00:19.610
+He opens a hospital of his own, with eleven beds.
+
+00:00:21.310 --> 00:00:29.204
+Around him, millions of people are blind from a cataract: the lens inside the eye turns cloudy, until it lets no light through.
+
+00:00:30.904 --> 00:00:38.238
+A blind farmer can't work his field. A blind grandmother needs a child to lead her, and the child stops going to school.
+
+00:00:40.338 --> 00:00:42.782
+A short operation can give their sight back.
+
+00:00:44.282 --> 00:00:48.612
+But most of them are too poor to pay for it, and live far from any surgeon.
+
+00:00:50.312 --> 00:00:53.854
+Something has to change, at a scale no hospital has tried.
+
+00:00:55.754 --> 00:01:01.309
+He starts by saying what his hospital is for: sight given back, to everyone who needs it.
+
+00:01:03.209 --> 00:01:09.149
+Then who it's for, in groups: those who can pay, those who can pay a little, and those who can pay nothing.
+
+00:01:10.849 --> 00:01:14.060
+Six of the eleven beds are for those who pay nothing.
+
+00:01:15.760 --> 00:01:20.764
+Those who can't come are reached in their villages, at eye camps, and brought in by bus.
+
+00:01:22.464 --> 00:01:29.450
+Then he designs everything below for them: how each operating room flows, who does each step, and what it costs.
+
+00:01:31.350 --> 00:01:37.763
+When bought lenses cost too much, the hospital makes its own, from 1992, for a few dollars each.
+
+00:01:39.463 --> 00:01:47.407
+Today Aravind's hospitals do over four hundred thousand operations a year, more than half of them free or for very little.
+
+00:01:49.307 --> 00:01:57.891
+Those who pay cover those who can't, and the outcomes hold: in 2007, complications in under two operations in a hundred.
+
+00:01:59.791 --> 00:02:03.259
+A data team serves people too, and it can lose sight of who.
+
+00:02:04.759 --> 00:02:10.369
+Say what each service is, and who it's for, and every system below can be designed for someone.
+
+00:02:18.469 --> 00:02:24.875
+These films take the product owner's side of a data manager's job, and borrow from architecture to do it.
+
+00:02:26.775 --> 00:02:33.860
+May 2027, at the university. The data council approved Helena Novak's strategy in April.
+
+00:02:35.560 --> 00:02:40.566
+Now she runs her team's work as a business of its own, with suppliers and customers.
+
+00:02:42.266 --> 00:02:46.382
+First, the services, on one page, in words a customer would use.
+
+00:02:47.882 --> 00:02:51.568
+One: governed data products, each with an owner and a promise.
+
+00:02:53.068 --> 00:02:57.370
+Two: the platform, where data partners in the faculties build their own.
+
+00:02:58.870 --> 00:03:01.244
+Three: analysis that answers a decision.
+
+00:03:02.744 --> 00:03:04.424
+Four: advice and training.
+
+00:03:06.124 --> 00:03:12.911
+A list like this is a service catalogue; governance's own services have one, in A capability, not a project.
+
+00:03:14.611 --> 00:03:22.801
+Then the suppliers: the owners of payroll, the timetable, the rooms' sensors and HR, and digital services, who run the machines.
+
+00:03:25.501 --> 00:03:29.569
+Then the customers, in four groups, each with what hurts and what drives them.
+
+00:03:31.069 --> 00:03:37.029
+Their words come from the 31 conversations Helena held in her first weeks, in Listen first.
+
+00:03:38.729 --> 00:03:46.472
+People who decide, like Graham Ellis in Facilities: two numbers for the same thing; they want answers they can defend, in time.
+
+00:03:48.372 --> 00:03:54.309
+The data partners: weeks of waiting for access; they want to build their faculty's products themselves.
+
+00:03:56.209 --> 00:04:02.834
+Analysts and report readers: they can't tell which table to trust; they want to find it, trust it and use it.
+
+00:04:04.734 --> 00:04:10.347
+And staff and students, whose data it is: who can see it? They want it used fairly, and kept safe.
+
+00:04:12.247 --> 00:04:18.297
+Pains and drivers in a customer's own words: the value proposition canvas asks for the same.
+
+00:04:19.997 --> 00:04:26.475
+Noor Rahman, the data architect, puts the services and their customers on her map, beside everything else.
+
+00:04:29.175 --> 00:04:35.529
+Then Helena and Noor walk one service, governed data products, down every layer, with a picture for each.
+
+00:04:37.029 --> 00:04:41.977
+Five layers: strategy, business, information, application and technology.
+
+00:04:43.477 --> 00:04:50.113
+They're ArchiMate's layers, with TOGAF's data called information; The map before the data draws them in full.
+
+00:04:51.613 --> 00:04:55.819
+Strategy: the capability it serves, deciding from trusted data.
+
+00:04:57.119 --> 00:05:04.116
+Business: the service and its promise, checked by seven each morning, and who builds, reviews and owns each product.
+
+00:05:05.616 --> 00:05:10.567
+Information: what it's about, such as rooms, bookings and the people counted in them.
+
+00:05:11.867 --> 00:05:16.796
+Application: the platform, the catalog, and the project where the products are built.
+
+00:05:18.096 --> 00:05:20.012
+Technology: where it all runs.
+
+00:05:21.312 --> 00:05:24.318
+Each picture names the customer it serves, at the top.
+
+00:05:25.818 --> 00:05:32.544
+In the old warehouse, the same walk finds 17 of 38 reports that no one has opened in a year.
+
+00:05:34.444 --> 00:05:39.268
+A system that serves no customer's need raises one question: why is it there?
+
+00:05:41.968 --> 00:05:45.732
+On Monday 7 June, the team's one front door opens.
+
+00:05:47.432 --> 00:05:52.332
+Of the 45 requests put in order, 42 land on one of the four services.
+
+00:05:54.232 --> 00:05:58.907
+Graham's question about his rooms lands on analysis that answers a decision.
+
+00:06:00.607 --> 00:06:03.415
+Three land on none, and Helena says so openly.
+
+00:06:05.115 --> 00:06:09.567
+Two are for a new booking system, and go to digital services, with a note.
+
+00:06:11.267 --> 00:06:16.866
+One, help with a staff survey, shows a gap the team can fill, and joins advice and training.
+
+00:06:18.566 --> 00:06:24.046
+A request that lands on no service isn't a failure. It shows where the page needs to change.
+
+00:06:26.746 --> 00:06:32.465
+In Madurai, the eleven beds came after one sentence: sight, for everyone who needs it.
+
+00:06:34.165 --> 00:06:40.825
+Helena's team did the same with data: every request now finds its service, and every system its customer.
+
+00:06:42.525 --> 00:06:46.608
+On Monday, write your services on one page, in a customer's words.
+
+00:06:47.708 --> 00:06:52.692
+Name your suppliers and your customers, in groups, with what hurts and what drives each.
+
+00:06:53.792 --> 00:06:57.108
+Walk each service down every layer, with a picture for each.
+
+00:06:58.208 --> 00:07:01.083
+And if a system serves no one, ask why it's there.
+
+00:07:02.583 --> 00:07:06.681
+Know your services and who they're for; then design every layer for them.

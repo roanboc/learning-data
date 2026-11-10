@@ -11,6 +11,7 @@ The product owner's side of a data manager's job, borrowed from architecture. Th
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Services with customers](https://data.learn-all.org/architecture-that-keeps-up/services-with-customers/) | Services and customers | 7 min | 6 | 3 questions | [script](1-services-with-customers/script.md) · [source](1-services-with-customers/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

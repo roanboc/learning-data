@@ -1,0 +1,255 @@
+1
+00:00:03,000 --> 00:00:09,084
+The Aral Sea, between Kazakhstan and Uzbekistan, was once the fourth-largest lake in the world.
+
+2
+00:00:10,784 --> 00:00:18,637
+From the 1960s, its two rivers were turned to grow cotton and rice in the desert, on farms many families depend on.
+
+3
+00:00:20,337 --> 00:00:28,820
+The sea shrank. By 2004 it had lost almost 70 percent of its surface, and its level had fallen almost 20 metres.
+
+4
+00:00:30,720 --> 00:00:37,605
+Around 1990, it split in two: a small sea in the north, in Kazakhstan, and a larger one in the south.
+
+5
+00:00:39,305 --> 00:00:47,714
+Fishing towns like Aralsk were left far from the water. The sea grew salty, the fish died, and tens of thousands of jobs were lost.
+
+6
+00:00:49,414 --> 00:00:55,766
+Storms blew salt and dust off the dry seabed. The drinking water was polluted, and people fell ill.
+
+7
+00:00:57,466 --> 00:01:01,402
+Bringing the whole sea back would have meant taking the rivers back from the farms.
+
+8
+00:01:03,102 --> 00:01:04,490
+Something had to change.
+
+9
+00:01:06,590 --> 00:01:10,667
+Kazakhstan chose to save the part that could be saved: the northern sea.
+
+10
+00:01:12,167 --> 00:01:19,649
+With a World Bank loan, it built the Kok-Aral dam, 13 kilometres long, to keep the Syr Darya's water in the north.
+
+11
+00:01:21,149 --> 00:01:26,610
+It was finished in August 2005, and works upstream let more of the river arrive.
+
+12
+00:01:28,310 --> 00:01:37,164
+The water rose much faster than planned. By 2006, the northern sea stood four metres higher, at the level the dam was built for.
+
+13
+00:01:39,064 --> 00:01:47,939
+By 2007 it was half as salty. The fish came back, and the catch grew forty-fold, from 50 tonnes to about 2,000.
+
+14
+00:01:49,839 --> 00:01:56,039
+Four fish plants opened, and in 2008 its fish were sold abroad for the first time in years.
+
+15
+00:01:57,539 --> 00:02:00,477
+The shore came tens of kilometres back towards Aralsk.
+
+16
+00:02:02,177 --> 00:02:09,041
+The southern sea, which the dam didn't save, went on shrinking. By 2014, its eastern part was dry.
+
+17
+00:02:10,941 --> 00:02:17,492
+It was a no to the whole sea, said plainly, and a yes to the part that could be saved. And that yes was kept.
+
+18
+00:02:19,592 --> 00:02:26,963
+In data work, more is asked than a team can do well. A bare no helps nobody, and neither does a yes nobody can keep.
+
+19
+00:02:28,663 --> 00:02:32,803
+An honest no, with what you can do and when, gets people what they need.
+
+20
+00:02:40,903 --> 00:02:48,664
+At the university, a year from now, Clara Jensen, in Planning, asks for a new student forecast model, by the end of August.
+
+21
+00:02:50,364 --> 00:02:58,800
+In the same weeks, the registrar's office needs the rooms' data for the timetable change the University Council asked for in June.
+
+22
+00:03:00,500 --> 00:03:07,641
+Mei Tanaka and Graham Ellis need it by the end of August, so the faculties can plan next year's classes from October.
+
+23
+00:03:09,341 --> 00:03:15,052
+Both go on the team's one list, ordered in the open, as the data management module shows.
+
+24
+00:03:16,752 --> 00:03:20,402
+And both need Jun and Noor, in the same four weeks of August.
+
+25
+00:03:22,102 --> 00:03:29,912
+A yes to both would mean one of them done badly: a model nobody had time to test, or the rooms' data late for the faculties.
+
+26
+00:03:31,812 --> 00:03:33,896
+A bare no would leave Clara with nothing.
+
+27
+00:03:35,596 --> 00:03:39,681
+So Helena Novak, the data manager, does neither. First, she asks.
+
+28
+00:03:42,381 --> 00:03:47,392
+Roger Fisher and William Ury, in Getting to Yes, tell a position from an interest.
+
+29
+00:03:48,892 --> 00:03:55,120
+A position is what someone asks for. An interest is why they ask: what the date or the scope is for.
+
+30
+00:03:57,020 --> 00:04:03,132
+On Wednesday 14 July, Helena and Noor sit down with Clara, and ask what the date is for.
+
+31
+00:04:04,832 --> 00:04:12,983
+The 2028 budget round closes on Friday 17 September. Planning must put next year's student numbers into it.
+
+32
+00:04:14,883 --> 00:04:22,919
+The new model would take in applications week by week, to warn of a change in demand early, for the admissions round in December.
+
+33
+00:04:24,819 --> 00:04:29,116
+So what does the budget need? The current model, with this year's figures in it.
+
+34
+00:04:31,016 --> 00:04:38,614
+Her position: a new model by August. Her interests: a number to trust in the budget, and earlier warning for admissions.
+
+35
+00:04:40,714 --> 00:04:44,110
+Helena says it back, and Clara nods: that's what it's for.
+
+36
+00:04:46,810 --> 00:04:52,480
+Helena puts both asks on the one list, side by side, where Clara and Mei can both see them.
+
+37
+00:04:54,180 --> 00:04:57,627
+Each with its date, what it's for, and the weeks of work it takes.
+
+38
+00:04:59,327 --> 00:05:05,060
+The rooms' data takes three of August's four weeks. A new model takes six, and time to test it.
+
+39
+00:05:07,160 --> 00:05:09,509
+Refreshing the current model takes one week.
+
+40
+00:05:11,209 --> 00:05:18,535
+The order isn't Helena's to choose. The list is ordered by value, urgency, effort and risk, never by who asks.
+
+41
+00:05:20,235 --> 00:05:26,015
+Fisher and Ury call that fair criteria: what both sides can check, not who pushes harder.
+
+42
+00:05:27,915 --> 00:05:34,567
+Then they look for options that serve both interests: the budget by September, and early warning by December.
+
+43
+00:05:37,267 --> 00:05:43,556
+William Ury calls it a positive no: a yes to what you must protect, then a clear no, then an offer.
+
+44
+00:05:45,456 --> 00:05:51,399
+The Kok-Aral dam was one: a yes to the part that could be saved, and a plain no to the whole sea.
+
+45
+00:05:53,099 --> 00:05:57,044
+Helena's yes is to the timetable change, and to work done well.
+
+46
+00:05:58,544 --> 00:06:01,574
+Her no is to the date: no new model by August.
+
+47
+00:06:03,274 --> 00:06:10,777
+Her offer: the current model, refreshed with this year's figures, by Friday 27 August, in time for the budget.
+
+48
+00:06:12,677 --> 00:06:17,385
+And the new model by Friday 29 October, before the admissions round.
+
+49
+00:06:19,085 --> 00:06:20,843
+Then she asks: would that work?
+
+50
+00:06:22,743 --> 00:06:30,302
+It's Clara's to choose. If she disagreed, the data council would settle it in the open on Tuesday 27 July.
+
+51
+00:06:32,202 --> 00:06:38,221
+Clara agrees. Both dates go on the one list, in writing: not now, with a reason and a date.
+
+52
+00:06:40,921 --> 00:06:48,081
+On Friday 27 August, the refreshed model goes to Planning, and the rooms' data to the registrar's office.
+
+53
+00:06:49,981 --> 00:06:55,510
+On Friday 17 September, the budget round closes, with Planning's numbers in it.
+
+54
+00:06:57,410 --> 00:07:04,811
+On Friday 29 October, the new model is ready, reviewed before anyone reads it, in time for admissions.
+
+55
+00:07:06,711 --> 00:07:12,399
+In November, Clara brings Planning's next request early, with what it's for and when she needs it.
+
+56
+00:07:14,299 --> 00:07:18,804
+A clear no with an offer, kept, built more trust than a yes nobody could keep.
+
+57
+00:07:21,504 --> 00:07:27,407
+At the Aral, the dam didn't promise the whole sea. It saved the part it could, and the water came back.
+
+58
+00:07:29,307 --> 00:07:36,563
+Helena did the same: she asked what the date was for, showed the trade-off, offered what the team could do well, and kept her word.
+
+59
+00:07:38,463 --> 00:07:41,460
+On Monday, when a date can't be met, ask what it's for.
+
+60
+00:07:43,160 --> 00:07:46,010
+Put the trade-off on the list, where everyone can see it.
+
+61
+00:07:47,510 --> 00:07:51,640
+Say no to the date, not the person, and offer what you can do well, and when.
+
+62
+00:07:53,140 --> 00:07:56,857
+Let the people who decide choose, write it down, and keep your word.
+
+63
+00:07:58,357 --> 00:08:03,599
+The next film, Less, on purpose, opens a new series: what a team stops doing, together.
+
+64
+00:08:05,299 --> 00:08:07,996
+Never a bare no: say what you can do, and when.

@@ -3,7 +3,7 @@
    The Spanish page loads this before the film; tools/captions.py (with FILM_LANG=es) writes captions/es.srt and es.vtt from it, and fails if a line has no caption.
    Words as the module's numbers.md has them: el equipo, la gestora de datos, una reunión uno a uno, retroalimentación (or comentarios, where it
    reads better), un objetivo (a person's own), una medida (the team's), hacerse cargo, el Consejo Universitario. In Japan: el maestro, el salón,
-   la clase, el estudio de clases (jugyō kenkyū), una sesión de reflexión. At the university, as film 1 has them: el director de Instalaciones,
+   la clase, el estudio de clases (jugyō kenkyū), una sesión de reflexión. At the university, as Many hats, one picture has them: el director de Instalaciones,
    las aulas, el edificio de aulas, el recorrido de una pregunta, las reservas, Semana Santa; the product is Uso de los espacios docentes, as the
    series' page has it, and the book keeps its name, Radical Candor, as on screen. Tú, as the film speaks to the viewer (pide, da, mira). Dates as Spanish says them (martes
    13 de abril). */

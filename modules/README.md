@@ -339,6 +339,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
 - [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
+- [Learning while doing](../films/the-new-skills/3-learning-while-doing/) — `learning-while-doing`
 
 ### Working with people
 

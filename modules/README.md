@@ -84,7 +84,7 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
-No film source yet.
+- [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
 
 ### Documents as data
 
@@ -336,7 +336,7 @@ Module: `leading-data-people` · [metadata](leading-data-people/module.json)
 
 Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-skills/`
 
-No film source yet.
+- [Many hats, one picture](../films/the-new-skills/1-many-hats/) — `many-hats`
 
 ### Working with people
 

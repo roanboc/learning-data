@@ -1,0 +1,49 @@
+[
+  {
+    "name": "How long, and then what",
+    "key": "how-long-and-then-what-en",
+    "dir": "films/kept-for-a-reason/2-how-long-and-then-what/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/how-long-and-then-what/film.js",
+    "video": "dist/how-long-and-then-what.mp4",
+    "file": "how-long-and-then-what.mp4",
+    "captions": [
+      [
+        "films/kept-for-a-reason/2-how-long-and-then-what/captions/en.srt",
+        "how-long-and-then-what.en.srt"
+      ],
+      [
+        "films/kept-for-a-reason/2-how-long-and-then-what/captions/es.srt",
+        "how-long-and-then-what.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/kept-for-a-reason/2-how-long-and-then-what/source",
+      ":(exclude)films/kept-for-a-reason/2-how-long-and-then-what/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 203,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

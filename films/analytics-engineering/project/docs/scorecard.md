@@ -8,23 +8,25 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 |---|---|---|---|---|---|---|
 | `alumni` | 3/3 | 1/1 |  | 1/1 |  | 5/5 |
 | `course` | 3/3 | 2/2 | 2/2 | 1/1 |  | 8/8 |
-| `finance` | 2/2 | 5/5 | 4/4 | 2/2 | 1/1 | 14/14 |
+| `finance` | 10/10 | 8/8 | 4/4 | 2/2 | 1/1 | 25/25 |
 | `hr` | 16/16 | 7/7 | 6/6 | 4/4 |  | 33/33 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 21/21 | 9/9 | 8/8 | 6/6 |  | 44/44 |
+| `registrar` | 21/21 | 9/9 | 11/11 (2 warn) | 6/6 |  | 47/47 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 25/25 | 18/18 | 8/8 | 18/18 | 4/4 (2 warn) | 73/73 (2 warn) |
+| `student` | 26/26 | 19/19 | 8/8 | 19/19 | 4/4 (2 warn) | 76/76 (2 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 91/91 (1 warn) | 60/60 | 39/39 | 44/44 | 6/6 (2 warn) | 240/240 (3 warn) |
+| **All** | 100/100 (1 warn) | 64/64 | 42/42 (2 warn) | 45/45 | 6/6 (2 warn) | 257/257 (5 warn) |
 
 ## Not passed
 
 | Status | Domain | Dimension | Test | Owner | Rows |
 |---|---|---|---|---|---|
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
+| warn | `registrar` | validity | `family_name_in_capitals_only` | Mei Tanaka, registrar's office | 3 |
+| warn | `registrar` | validity | `family_name_may_be_cut_short` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |
 
@@ -40,3 +42,11 @@ A test measures accuracy only against a reference outside the data, such as a re
 | `student` | `graduation_list_accents_all_gone` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_at_30` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_in_capitals` | **none named** | Mei Tanaka, registrar's office |
+
+## Hand-check hours
+
+The hidden work, counted: the hours the graduations team spent checking the graduation list's names by hand before each round's list went to the printer, from its calendar (`seeds/reference/graduations/hand_check_rounds.csv`). Beside the tests, so everyone can watch them fall as names are put right where they're born.
+
+| Year | Rounds | Names checked by hand | Hours |
+|---|---|---|---|
+| 2025–26 | 3 | 3,807 of 3,807 | 320 |

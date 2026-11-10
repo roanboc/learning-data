@@ -4,6 +4,11 @@
 -- teaching period (the seed on_cost_rates). The metric view casual_teaching_cost counts it, once, on
 -- Databricks: what the casual teaching in a teaching period costs.
 
+-- Who reads which faculty's claims (DEC-FIN-06): on Databricks, when the var faculty_readers names the
+-- groups, a row filter by faculty, set on the table after each build (macros/finance/faculty_row_filter.sql),
+-- so it holds for every reader, through the metric view too.
+{{ config(post_hook="{{ apply_faculty_row_filter() }}") }}
+
 with
 
 claims as (

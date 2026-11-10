@@ -1,0 +1,73 @@
+{
+  "draft": true,
+  "kicker": "How long data is kept",
+  "kicker_es": "Cuánto se guardan los datos",
+  "title_es": "Cuánto tiempo, y luego qué",
+  "h1": "How long, and then what: an end date for every record",
+  "h1_es": "Cuánto tiempo y luego qué: cada registro, su fecha de fin",
+  "lead": "Until October 2026, the university's platform kept every record with no end date: pay records back to 2016, applications from people never hired back to 2017. Ingrid and Mei write one schedule, by kind of record. When Linh's last contract ends, how long is each record kept, and then what?",
+  "lead_es": "Hasta octubre de 2026, la plataforma de la universidad guardaba todo sin fecha de fin: nóminas desde 2016, candidaturas no seleccionadas desde 2017. Ingrid y Mei escriben un calendario por tipo de registro. Cuando termina el último contrato de Linh, ¿cuánto se guarda cada registro, y luego qué?",
+  "description": "A film about how long records are kept, and what happens then: Washington in 1943, where a flood of wartime papers was kept because no one had the job of deciding, until a law let each office write a schedule once, for each kind of record, how long and then what, for papers not yet written too, with papers about a claim kept until it was settled and none destroyed any other way; the three lives of a record, in use, archived and deleted, or for the few, kept for good; one schedule by kind of record, each row decided by the record's owner with its reason, and kept by data governance; the clock that starts at an event, such as the end of each contract, so every record's end date follows by itself; a hold that stops the clock for a claim, an audit or a case, and only for as long as it lasts; and why deleting too soon and keeping too long both break a promise, with the same date on every copy.",
+  "description_es": "Una película sobre cuánto tiempo se guardan los registros, y qué pasa después: Washington en 1943, donde una inundación de papeles de guerra se guardaba porque nadie tenía el encargo de decidir, hasta que una ley dejó que cada oficina escribiera un calendario una sola vez, por tipo de registro, cuánto tiempo y luego qué, también para papeles aún no escritos, con los papeles de una reclamación guardados hasta resolverla y ninguno destruido de otra manera; las tres vidas de un registro, en uso, archivado y borrado, o, para unos pocos, guardado para siempre; un calendario por tipo de registro, cada fila decidida por el dueño del registro con su razón, y llevado por gobierno de datos; el reloj que empieza con un hecho, como el fin de cada contrato, para que la fecha de fin de cada registro salga sola; una retención que detiene el reloj por una reclamación, una auditoría o un juicio, y solo mientras dure; y por qué borrar demasiado pronto y guardar demasiado tiempo rompen una promesa, con la misma fecha en cada copia.",
+  "card": "One schedule, by kind of record: how long each is kept, from which event, and then what; and holds that stop the clock.",
+  "card_es": "Un calendario por tipo de registro: cuánto se guarda cada uno, desde qué hecho y luego qué; y retenciones que paran el reloj.",
+  "chapters_es": {
+    "flood": "Una inundación de papel",
+    "before": "Decidido una vez, antes",
+    "lives": "Tres vidas de un registro",
+    "schedule": "Un calendario, por tipo de registro",
+    "clock": "El reloj empieza con un hecho",
+    "hold": "Una retención detiene el reloj",
+    "end": "Una fecha de fin para cada registro"
+  },
+  "past": [
+    "Washington's records schedules, 1943",
+    "Each office decided once, before its papers piled up, how long each kind was kept, and what then."
+  ],
+  "past_es": [
+    "Los calendarios de conservación de Washington, 1943",
+    "Cada oficina decidió una vez, antes de que se acumularan sus papeles, cuánto se guardaba cada tipo, y luego qué."
+  ],
+  "next_h": "You've seen how each kind of record gets an end date, decided before it's needed, and how a hold stops the clock. Next: what a person can ask about their own data.",
+  "next_h_es": "Viste cómo cada tipo de registro recibe una fecha de fin, decidida antes de necesitarla, y cómo una retención detiene el reloj. Después: qué puede pedir una persona sobre sus propios datos.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "Records managers and privacy laws say it in their own words: decide how long, by kind of record, before it's needed.",
+    "p_es": "Los gestores de documentos y las leyes de privacidad lo dicen con sus palabras: decide cuánto tiempo, por tipo de registro, antes de necesitarlo.",
+    "links": [
+      {
+        "title": "Scheduling records, US National Archives",
+        "title_es": "Scheduling records, Archivos Nacionales de EE. UU. (en inglés)",
+        "line": "How a records schedule is written and approved today, in the archive whose schedules began in 1943.",
+        "line_es": "Cómo se escribe y se aprueba hoy un calendario de conservación, en el archivo cuyos calendarios empezaron en 1943.",
+        "href": "https://www.archives.gov/records-mgmt/scheduling",
+        "href_es": "https://www.archives.gov/records-mgmt/scheduling"
+      },
+      {
+        "title": "General Records Schedules",
+        "title_es": "General Records Schedules (en inglés)",
+        "line": "One schedule for the records every office keeps, such as pay and personnel.",
+        "line_es": "Un calendario para los registros que guarda toda oficina, como las nóminas y el personal.",
+        "href": "https://www.archives.gov/records-mgmt/grs",
+        "href_es": "https://www.archives.gov/records-mgmt/grs"
+      },
+      {
+        "title": "ISO 15489-1:2016, Records management",
+        "title_es": "ISO 15489-1:2016, gestión de documentos (en inglés)",
+        "line": "The international standard: how long each class of record is kept, and what then, decided by rules.",
+        "line_es": "La norma internacional: cuánto se guarda cada clase de registro, y luego qué, decidido por reglas.",
+        "href": "https://www.iso.org/standard/62542.html",
+        "href_es": "https://www.iso.org/standard/62542.html"
+      },
+      {
+        "title": "GDPR, Article 5: storage limitation",
+        "title_es": "RGPD, artículo 5: limitación del plazo de conservación",
+        "line": "Europe's data protection law: personal data kept no longer than its purpose needs.",
+        "line_es": "La ley de protección de datos de Europa: datos personales guardados no más de lo que necesita su fin.",
+        "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+        "href_es": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
+      }
+    ]
+  }
+}

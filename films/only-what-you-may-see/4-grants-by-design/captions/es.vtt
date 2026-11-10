@@ -210,35 +210,35 @@ El plan se escribe una vez, en dos archivos junto al código del proceso en GitH
 00:07:37.600 --> 00:07:40.051
 Cada estante y sus lectores ocupan unas pocas líneas.
 
-00:07:41.551 --> 00:07:47.381
-Esos archivos son del equipo de Mei, así que nada cambia quién ve sus registros sin su sí.
+00:07:41.551 --> 00:07:46.403
+El equipo de datos revisa cada cambio en esos archivos, y a Mei le avisan qué toca.
 
-00:07:49.081 --> 00:07:58.741
+00:07:48.103 --> 00:07:57.763
 El permiso de un estudio sale del contrato de su acuerdo, y lo nombra: 2026-14, hasta el 30 de junio de 2027.
 
-00:08:00.441 --> 00:08:06.428
+00:07:59.463 --> 00:08:05.450
 Primero entran las políticas del estudio, y su permiso después, así que nunca lee la tabla sin máscara.
 
-00:08:08.128 --> 00:08:14.696
+00:08:07.150 --> 00:08:13.718
 Luego, el camino de De una rama a producción: primero pruebas, luego producción, cuando quien aprueba las entregas dice que sí.
 
-00:08:16.396 --> 00:08:22.707
+00:08:15.418 --> 00:08:21.729
 Y nadie puede dar permisos a mano: solo el grupo de propietarios, y su único miembro despliega solo desde main.
 
-00:08:24.207 --> 00:08:28.590
+00:08:23.229 --> 00:08:27.612
 Todo lo demás requiere una cuenta de administrador, encendida, aprobada y registrada.
 
-00:08:32.090 --> 00:08:36.997
+00:08:31.112 --> 00:08:36.019
 En las islas, el plan vino primero, y cada visitante desde entonces ha caminado dentro de él.
 
-00:08:38.697 --> 00:08:41.372
+00:08:37.719 --> 00:08:40.394
 En la universidad, el plan también viene primero.
 
-00:08:42.472 --> 00:08:50.677
+00:08:41.494 --> 00:08:49.699
 La oficina del registro lee sus registros; el estudio, solo lo que permite su acuerdo; los demás pueden encontrar lo que existe, y pedirlo.
 
-00:08:52.377 --> 00:08:56.678
+00:08:51.399 --> 00:08:55.700
 Cada tabla nueva, y cada persona nueva, encaja en el plan desde su primer día.
 
-00:08:58.178 --> 00:09:00.659
+00:08:57.200 --> 00:08:59.681
 Diseña los permisos una vez, por área y por rol.

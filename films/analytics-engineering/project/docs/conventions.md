@@ -292,12 +292,12 @@ implemented in them, the exposures, and the owners to ask. CI writes it into the
 
 Every public model and mart is an output of one data product, in `governance/4-data-products/<name>.yml`: its owner,
 domain, status (draft, active, deprecated or retired), purpose and usage, outputs, service levels
-and support, written by its owner. `scripts/generate/products.py` writes each product in the open
-standards, from that file and the dbt contracts: a product descriptor (`governance/6-product-descriptors/`) and a
-contract for each output (`governance/5-data-contracts/`), with the columns, types, keys, classes, tests and known
-limitations taken from the models' YAML, and the consumers from the lineage. `--check` in CI fails
-if they're out of date, don't validate against the standards' schemas, or a shared model is in no
-product.
+and support, written by its owner. `scripts/generate/products.py` writes each product's descriptor in the
+open standard, from that file and the dbt models (`governance/6-product-descriptors/`), with the consumers from
+the lineage. Only canonical tables, the public models, have an enterprise contract (`governance/5-data-contracts/`):
+data governance's information architect writes it first, and the data team builds the model to it. The
+script fails if a model differs from its contract, a canonical table has none, a file doesn't validate
+against its standard's schema, or a shared model is in no product; `--check` in CI, if a descriptor is out of date.
 
 On Databricks, the class goes to the platform too (DEC-PRJ-13, `macros/governance/personal_data.sql`):
 after each table builds, every classified column gets a Unity Catalog tag, `personal_data`, with its
@@ -315,9 +315,9 @@ Each use is an exposure. In the model's YAML, `meta.quality` holds one requireme
 the `level` agreed (`Zero wrong`, `Within 2% at each ceremony`), who it was agreed with
 (`agreed_with`) and what goes wrong when it isn't met (`business_impact`). The model's owner owns
 the levels. A column a use can't do without names that use in `meta.critical_for`: the use's
-critical data. `scripts/generate/products.py` writes each requirement into the contract as a
-quality rule in words (`type: text`), with its use, level and who agreed it, until a check
-measures it, and each critical column as a critical data element (`criticalDataElement: true`).
+critical data. Each requirement stays in the model's YAML, in words, with its use, level and who
+agreed it, until a check measures it; for a canonical table, the information architect writes it
+into the enterprise contract too, as a quality rule and its critical data elements.
 On Databricks, `macros/governance/critical_data.sql` tags each critical column `critical_data` in
 Unity Catalog, as the model's own post-hook. The graduation list, `mart_graduations__graduation_list`,
 is the first.

@@ -1,0 +1,371 @@
+1
+00:00:02,000 --> 00:00:04,542
+Estados Unidos, en la década de 1870.
+
+2
+00:00:06,242 --> 00:00:10,431
+Un banco guarda su dinero en una bóveda, un cuarto blindado tras una puerta de hierro.
+
+3
+00:00:12,131 --> 00:00:15,658
+La cerradura se abre con una serie de números, marcados en un disco.
+
+4
+00:00:17,358 --> 00:00:19,325
+Solo unos pocos hombres del banco los conocen.
+
+5
+00:00:20,825 --> 00:00:22,995
+Pero los ladrones encontraron cómo rodear el hierro.
+
+6
+00:00:24,495 --> 00:00:27,747
+De noche, van a la casa de un hombre que conoce los números.
+
+7
+00:00:29,447 --> 00:00:33,240
+Retienen a su familia, lo llevan al banco y lo obligan a abrir la bóveda.
+
+8
+00:00:35,140 --> 00:00:39,569
+Ninguna cerradura detiene eso: los números correctos, del hombre correcto, abren la puerta.
+
+9
+00:00:41,469 --> 00:00:45,173
+Así que cada banquero que los conoce, y su familia, está en peligro.
+
+10
+00:00:46,873 --> 00:00:48,313
+Algo tiene que cambiar.
+
+11
+00:00:50,613 --> 00:00:56,303
+En Rochester, Nueva York, un cerrajero, James Sargent, pone relojes dentro de la cerradura de una bóveda.
+
+12
+00:00:57,803 --> 00:01:00,556
+Cada tarde, el banco fija la hora en que podrá abrirse.
+
+13
+00:01:01,856 --> 00:01:05,791
+Hasta esa hora, nadie puede abrirla, ni con los números correctos.
+
+14
+00:01:07,491 --> 00:01:13,012
+En mayo de 1874, se instala la primera en la bóveda de un banco, en Morrison, Illinois.
+
+15
+00:01:14,512 --> 00:01:22,900
+Una noche de viernes de mayo de 1875, en Great Barrington, Massachusetts, ocho ladrones retienen a la familia Deland en su casa,
+
+16
+00:01:23,100 --> 00:01:26,308
+y llevan a Fred Deland, que conoce los números, a su banco.
+
+17
+00:01:27,808 --> 00:01:31,318
+Él gira el disco, pero los cerrojos que sujetan la puerta no se mueven:
+
+18
+00:01:31,518 --> 00:01:34,668
+la nueva cerradura de tiempo, instalada tres días antes, los detiene.
+
+19
+00:01:36,568 --> 00:01:40,538
+Los ladrones toman unos bonos de un escritorio y huyen; la bóveda sigue cerrada.
+
+20
+00:01:42,238 --> 00:01:45,444
+Ahora, sacar a un banquero de su casa de noche no abre nada.
+
+21
+00:01:47,144 --> 00:01:50,876
+La cerradura de Sargent se vende por miles, y pronto los bancos esperan tener una.
+
+22
+00:01:52,376 --> 00:01:55,276
+La plataforma de la universidad tiene el mismo problema.
+
+23
+00:01:56,576 --> 00:02:01,725
+Las cuentas diarias de Sam y de Jun tienen su mayor poder, a toda hora, todos los días.
+
+24
+00:02:03,425 --> 00:02:05,985
+Quien se apodera de una de esas cuentas se lleva todo.
+
+25
+00:02:07,485 --> 00:02:11,206
+Necesita lo que tenía el banco: un gran poder, cerrado hasta que haga falta.
+
+26
+00:02:18,306 --> 00:02:21,080
+Casi todo el trabajo en la plataforma pasa por el catálogo.
+
+27
+00:02:22,380 --> 00:02:27,895
+Revisa cada solicitud, y muestra a cada persona lo que su rol permite, enmascarado donde debe estarlo.
+
+28
+00:02:29,595 --> 00:02:31,190
+Algunos trabajos no pueden pasar por él.
+
+29
+00:02:32,290 --> 00:02:34,849
+El almacenamiento: los archivos bajo cada tabla.
+
+30
+00:02:36,349 --> 00:02:41,694
+Ahí no aplica ninguna máscara ni ningún filtro: cada nombre y cada fecha de nacimiento, a la vista.
+
+31
+00:02:43,394 --> 00:02:46,087
+Muros, puertas y llaves cierran esa puerta trasera.
+
+32
+00:02:47,587 --> 00:02:52,475
+La configuración de administración: lo que permite toda la plataforma, como quién puede entrar, y cómo.
+
+33
+00:02:54,175 --> 00:02:58,692
+Y restaurar una tabla: dejarla como estaba, sobre el trabajo de todos desde entonces.
+
+34
+00:03:00,392 --> 00:03:02,008
+Eso es un gran poder sobre los datos.
+
+35
+00:03:03,508 --> 00:03:10,899
+En el gobierno de datos, el equipo de plataforma es su custodio: mantiene la plataforma en marcha, y no decide qué significan los datos.
+
+36
+00:03:12,399 --> 00:03:16,387
+Hasta ahora, ese poder estaba en las cuentas diarias de Sam y de Jun:
+
+37
+00:03:16,587 --> 00:03:20,126
+las mismas cuentas que abren su correo, y cada enlace que trae.
+
+38
+00:03:21,826 --> 00:03:25,938
+Una parte también había ido a otros, cada vez para una tarea, y nunca había vuelto.
+
+39
+00:03:28,838 --> 00:03:33,839
+Así que cada especialista de datos recibe una segunda cuenta, propia: una cuenta de administrador.
+
+40
+00:03:35,539 --> 00:03:36,825
+La de Jun es solo suya.
+
+41
+00:03:37,925 --> 00:03:41,111
+Nunca se comparte, y nunca se usa para el correo ni la web.
+
+42
+00:03:42,611 --> 00:03:46,001
+Entra solo con una llave de acceso, y solo para una tarea.
+
+43
+00:03:47,501 --> 00:03:53,445
+Su cuenta diaria conserva su trabajo de cada día: escribir código, probarlo, vigilar los procesos.
+
+44
+00:03:55,145 --> 00:03:56,427
+¿Y la cuenta de administrador?
+
+45
+00:03:57,527 --> 00:04:00,112
+Tampoco tiene poder, hasta que se enciende.
+
+46
+00:04:01,812 --> 00:04:03,077
+Eso hace dos cerraduras.
+
+47
+00:04:04,177 --> 00:04:07,714
+Un acceso diario robado no llega a la cuenta de administrador.
+
+48
+00:04:09,414 --> 00:04:14,300
+Y quien roba la cuenta de administrador encuentra su poder apagado, y no puede encenderlo solo.
+
+49
+00:04:18,400 --> 00:04:20,512
+Para encenderlo, Jun dice para qué.
+
+50
+00:04:21,812 --> 00:04:27,782
+Qué poder: solo el que la tarea necesita, para leer el almacenamiento, cambiar la configuración o restaurar una tabla.
+
+51
+00:04:29,682 --> 00:04:32,013
+Un motivo, en palabras que otra persona pueda revisar.
+
+52
+00:04:33,513 --> 00:04:36,695
+Y un tiempo: lo que la tarea necesita, cuatro horas como máximo.
+
+53
+00:04:38,195 --> 00:04:44,561
+Otro especialista aprueba: Sam aprueba el de Jun, Jun el de Sam, y nadie aprueba el suyo.
+
+54
+00:04:46,461 --> 00:04:49,460
+En cuanto se enciende, el equipo de plataforma recibe una alerta.
+
+55
+00:04:51,560 --> 00:04:55,417
+Todo lo que hace la cuenta de administrador queda registrado, con su propio nombre.
+
+56
+00:04:56,917 --> 00:05:02,829
+Cuando se acaba el tiempo, el poder se apaga solo; o Jun lo apaga en cuanto termina.
+
+57
+00:05:04,529 --> 00:05:08,116
+Una cerradura de tiempo se abría a su hora, para quien tuviera los números.
+
+58
+00:05:10,016 --> 00:05:14,277
+Este poder se abre solo para una tarea, y solo cuando otra persona dice que sí.
+
+59
+00:05:15,977 --> 00:05:21,658
+Como los primeros banqueros con cerradura de tiempo, Sam y Jun lo ven lento al principio: también los deja fuera.
+
+60
+00:05:23,358 --> 00:05:24,948
+Cuesta un minuto, y un sí.
+
+61
+00:05:28,448 --> 00:05:30,929
+Una mañana, la carga de las dos se detuvo.
+
+62
+00:05:32,229 --> 00:05:36,684
+Encontró una fila que no pudo leer, en el archivo de anoche de la oficina de registro.
+
+63
+00:05:38,184 --> 00:05:41,477
+Para hallarla, Jun debe abrir ese archivo, en el almacenamiento.
+
+64
+00:05:42,577 --> 00:05:45,391
+Su cuenta diaria no puede: la puerta trasera está cerrada.
+
+65
+00:05:46,891 --> 00:05:51,358
+Así que enciende el poder de su cuenta de administrador para leer el almacenamiento, por una hora.
+
+66
+00:05:52,858 --> 00:05:55,229
+Su motivo: abrir el archivo de anoche.
+
+67
+00:05:56,329 --> 00:05:57,929
+Sam lo lee, y aprueba.
+
+68
+00:05:59,829 --> 00:06:03,612
+La alerta llega al equipo de plataforma, y coincide con la tarea de la mañana.
+
+69
+00:06:05,112 --> 00:06:10,969
+Jun abre el archivo, y va directo a la fila, la número 9,317.
+
+70
+00:06:12,269 --> 00:06:15,980
+Una fecha de nacimiento que no existe: el treinta y uno de febrero.
+
+71
+00:06:17,680 --> 00:06:23,073
+Le dice a la oficina de registro qué expediente corregir, por su número de estudiante, y apaga:
+
+72
+00:06:23,273 --> 00:06:24,883
+catorce minutos de su hora.
+
+73
+00:06:26,983 --> 00:06:32,238
+La bitácora lo guarda todo: quién encendió, por qué, quién dijo que sí, qué se leyó, y cuándo terminó.
+
+74
+00:06:33,938 --> 00:06:35,584
+Esa noche, la carga corre sin errores.
+
+75
+00:06:37,084 --> 00:06:41,784
+Y Jun se pregunta lo que vale preguntar en cada encendido: ¿se podría evitar el próximo?
+
+76
+00:06:43,284 --> 00:06:50,173
+Ahora la carga aparta la fila que no puede leer, en una tabla que el catálogo protege, para que la vea la oficina de registro.
+
+77
+00:06:52,473 --> 00:06:54,023
+¿Quién recibe una cuenta de administrador?
+
+78
+00:06:55,123 --> 00:06:59,689
+Solo los especialistas de datos que mantienen la plataforma en marcha: aquí, Sam y Jun.
+
+79
+00:07:01,189 --> 00:07:05,256
+Nunca los usuarios de negocio, como Mei Tanaka, de la oficina de registro.
+
+80
+00:07:06,556 --> 00:07:09,482
+Nunca los analistas, como Clara Jensen, de Planeación.
+
+81
+00:07:10,782 --> 00:07:15,409
+Su trabajo pasa por el catálogo, que muestra a cada una lo que su rol permite.
+
+82
+00:07:16,909 --> 00:07:21,397
+Si necesitan más, piden acceso al dueño de los datos, no poder.
+
+83
+00:07:23,097 --> 00:07:24,370
+Y nunca un agente.
+
+84
+00:07:25,470 --> 00:07:32,116
+Un agente puede proponer una tarea que necesita poder; una persona decide, y la hace con su propia cuenta de administrador.
+
+85
+00:07:33,816 --> 00:07:37,555
+Agentes de IA en el trabajo con datos muestra cómo reciben sus permisos.
+
+86
+00:07:38,855 --> 00:07:43,859
+Una excepción: dos cuentas de emergencia, guardadas bajo llave para el día en que nada más funcione.
+
+87
+00:07:45,359 --> 00:07:47,107
+Quién hizo qué muestra cómo se vigilan.
+
+88
+00:07:50,807 --> 00:07:56,286
+En Great Barrington, en 1875, los números correctos, del hombre correcto, no bastaron:
+
+89
+00:07:56,486 --> 00:07:58,362
+la bóveda solo se abrió a su hora.
+
+90
+00:08:00,262 --> 00:08:03,181
+En la plataforma, la cuenta correcta tampoco basta.
+
+91
+00:08:04,681 --> 00:08:09,056
+Su poder está apagado, hasta que se enciende para una tarea, y otra persona dice que sí.
+
+92
+00:08:10,756 --> 00:08:15,451
+Quien se apodera de la cuenta diaria de Jun obtiene su trabajo de cada día, y nada más.
+
+93
+00:08:17,151 --> 00:08:20,490
+El gran poder es una cuenta aparte, que se enciende para una tarea.

@@ -33,5 +33,6 @@ support:
 customProperties:
 - property: consumers
   value:
+  - product casual_teaching_cost
   - product hours_to_pay
   - product payroll_export

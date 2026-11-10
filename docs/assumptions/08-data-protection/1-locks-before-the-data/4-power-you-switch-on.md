@@ -1,8 +1,8 @@
 # Power you switch on: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 4 · open, PR #210 · [pull request](https://github.com/roanboc/learning-data/pull/210)
+*Data protection and privacy* · *Locks before the data*, film 4 of 9 · merged, PR #210 · [pull request](https://github.com/roanboc/learning-data/pull/210)
 
-On the site once PR #210 merges: https://data.learn-all.org/locks-before-the-data/power-you-switch-on/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/power-you-switch-on/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

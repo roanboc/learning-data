@@ -8,17 +8,17 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 |---|---|---|---|---|---|---|
 | `alumni` | 3/3 | 1/1 |  | 1/1 |  | 5/5 |
 | `course` | 3/3 | 2/2 | 2/2 | 1/1 |  | 8/8 |
-| `finance` | 2/2 | 5/5 | 4/4 | 2/2 | 1/1 | 14/14 |
+| `finance` | 12/12 | 9/9 | 4/4 | 2/2 | 1/1 | 28/28 |
 | `hr` | 16/16 | 7/7 | 6/6 | 4/4 |  | 33/33 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 21/21 | 9/9 | 11/11 (2 warn) | 6/6 |  | 47/47 (2 warn) |
+| `registrar` | 22/22 | 10/10 | 12/12 (2 warn) | 6/6 |  | 50/50 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 26/26 | 19/19 | 8/8 | 19/19 | 4/4 (2 warn) | 76/76 (2 warn) |
+| `student` | 26/26 | 19/19 | 8/8 | 19/19 | 5/5 (3 warn) | 77/77 (3 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 92/92 (1 warn) | 61/61 | 42/42 (2 warn) | 45/45 | 6/6 (2 warn) | 246/246 (5 warn) |
+| **All** | 103/103 (1 warn) | 66/66 | 43/43 (2 warn) | 45/45 | 7/7 (3 warn) | 264/264 (6 warn) |
 
 ## Not passed
 
@@ -29,6 +29,7 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 | warn | `registrar` | validity | `family_name_may_be_cut_short` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `old_form_names_not_yet_confirmed` | Mei Tanaka, registrar's office | 1 |
 
 ## What each accuracy test checks against
 
@@ -42,6 +43,7 @@ A test measures accuracy only against a reference outside the data, such as a re
 | `student` | `graduation_list_accents_all_gone` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_at_30` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_in_capitals` | **none named** | Mei Tanaka, registrar's office |
+| `student` | `old_form_names_not_yet_confirmed` | the graduate | Mei Tanaka, registrar's office |
 
 ## Hand-check hours
 

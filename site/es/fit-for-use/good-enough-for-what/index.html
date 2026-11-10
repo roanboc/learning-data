@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>¿Lo bastante bueno para qué? · Apto para su uso · Learning Data</title>
-<meta name="description" content="Una película sobre qué es lo bastante bueno para los datos, la primera de Apto para su uso y de Calidad de datos: en Duisburgo, en 1569, Gerardus Mercator publicó una carta del mundo hecha para navegantes, estirada hacia los polos para que todo rumbo fijo sea una línea recta, correcta para navegar e incorrecta para comparar países, pues Groenlandia parece tan grande como África, que es catorce veces mayor; en la universidad, en diciembre de 2025, la lista de graduación acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo (26 con el nombre mal, 9 con el título mal, 6 graduados que faltaban), y el nombre de Andrés Peñaloza está guardado sin sus tildes, correcto para un asiento e incorrecto en un diploma. En enero de 2026, Malia Fonoti, que usa la lista, Mei Tanaka, que responde por ella, y Jun Park, que la construye, preguntan quién la usa, para qué, y qué sale mal, y para quién, cuando está mal: cuatro usos, cada uno con su nivel (el plano de asientos con un 2% de margen en cada ceremonia, los diplomas cero errores, el programa impreso con los mismos nombres que los diplomas, el conteo de títulos para el gobierno exacto), las pocas columnas que le son imprescindibles, sus datos críticos, y las dimensiones en que se apoya, preguntadas como las seis de DAMA; cada nivel acordado con quienes usan la lista y a cargo de Mei. Jun lo escribe junto a los datos: en el contrato de datos de la lista, como reglas de calidad del Open Data Contract Standard; en dbt, donde cada control nombra su dimensión y su responsable; y en Databricks, donde cada columna crítica lleva una etiqueta gobernada. Si la calidad sigue fallando, mira primero el gobierno de datos, y luego las herramientas.">
+<meta name="description" content="Una película sobre qué es lo bastante bueno para los datos, la primera de Apto para su uso y de Calidad de datos: en Duisburgo, en 1569, Gerardus Mercator publicó una carta del mundo hecha para navegantes, estirada hacia los polos para que todo rumbo fijo sea una línea recta, correcta para navegar e incorrecta para comparar países, pues Groenlandia parece tan grande como África, que es catorce veces mayor; en la universidad, en diciembre de 2025, la lista de graduación acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo (26 con el nombre mal, 9 con el título mal, 6 graduados que faltaban), y el nombre de Andrés Peñaloza está guardado sin sus tildes, correcto para un asiento e incorrecto en un diploma. En enero de 2026, Malia Fonoti, que usa la lista, Mei Tanaka, que responde por ella, y Jun Park, que la construye, preguntan quién la usa, para qué, y qué sale mal, y para quién, cuando está mal: cuatro usos, cada uno con su nivel (el plano de asientos con un 2% de margen en cada ceremonia, los diplomas cero errores, el programa impreso con los mismos nombres que los diplomas, el conteo de títulos para el gobierno exacto), las pocas columnas que le son imprescindibles, sus datos críticos, y las dimensiones en que se apoya, preguntadas como las seis de DAMA; cada nivel acordado con quienes usan la lista y a cargo de Mei. Jun lo escribe junto a los datos: en dbt, cada uso como una regla de calidad en el propio archivo de la lista, y cada control con su dimensión y su responsable; y en Databricks, donde cada columna crítica lleva una etiqueta gobernada. Si la calidad sigue fallando, mira primero el gobierno de datos, y luego las herramientas.">
 <meta property="og:title" content="¿Lo bastante bueno para qué? · Apto para su uso · Learning Data"><meta property="og:description" content="La lista de graduación acomodó bien el Aula Magna y aun así 41 diplomas se imprimieron de nuevo. Lo bueno depende del uso."><meta property="og:image" content="https://data.learn-all.org/assets/good-enough-for-what-poster.jpg"><meta property="og:locale" content="es_419">
 <link rel="alternate" hreflang="en" href="https://data.learn-all.org/fit-for-use/good-enough-for-what/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/fit-for-use/good-enough-for-what/">
 <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
@@ -19,6 +19,7 @@
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#data-quality">Calidad de datos</a> › <a href="../">Apto para su uso</a></p>
 <h1>¿Lo bastante bueno para qué? Una lista, cuatro usos</h1>
 <p class="lead">En diciembre de 2025, la lista de graduación pasó todos los controles y acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo. En enero, Malia Fonoti, Mei Tanaka y Jun Park preguntan quién usa la lista, para qué y qué sale mal cuando está mal, y acuerdan un nivel para cada uso.</p>
+<p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
 <section class="module" id="watch" data-store="ld-good-enough-for-what" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
@@ -29,7 +30,7 @@
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/good-enough-for-what.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/fit-for-use/1-good-enough-for-what/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/fit-for-use/1-good-enough-for-what/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste una lista con cuatro usos, cada uno con su nivel. Después: revisar cien de sus registros, uno por uno, antes de escribir un control.</h3>
-<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../">Toda la serie: Apto para su uso</a></div>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../a-hundred-records/">Sigue en la serie: Cien registros</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
@@ -39,7 +40,7 @@
 <li><b>Cuarenta y un diplomas</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/data/student_system/graduations.csv"><code>data/student_system/graduations.csv</code></a></span></li>
 <li><b>Una lista, cuatro usos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/graduations/_graduations__exposures.yml"><code>exposures/graduations/_graduations__exposures.yml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/exposures/planning/_planning__exposures.yml"><code>exposures/planning/_planning__exposures.yml</code></a></span></li>
 <li><b>Lo que necesita cada uso</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/models/marts/graduations/_graduations__models.yml"><code>models/marts/graduations/_graduations__models.yml</code></a></span></li>
-<li><b>Escrito junto a los datos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/governance/5-data-contracts/mart_graduations__graduation_list.yaml"><code>governance/5-data-contracts/mart_graduations__graduation_list.yaml</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/generic/builtin.sql"><code>tests/generic/builtin.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/governance/critical_data.sql"><code>macros/governance/critical_data.sql</code></a></span></li>
+<li><b>Escrito junto a los datos</b><span><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/tests/generic/builtin.sql"><code>tests/generic/builtin.sql</code></a> <a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/macros/governance/critical_data.sql"><code>macros/governance/critical_data.sql</code></a></span></li>
 </ul>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/tree/main/films/analytics-engineering/project">Explora el proyecto entero</a><a href="https://github.com/roanboc/learning-data/blob/main/films/analytics-engineering/project/README.md">Cómo ejecutarlo</a></p>
 </section>
@@ -64,10 +65,22 @@
 <section class="module" id="in-the-series" aria-labelledby="series-h">
 <div class="mhead"><div><h2 id="series-h">En la serie: <a href="../">Apto para su uso</a></h2><p>Película 1 de 4.</p></div></div>
 <div class="topic-grid series-pn" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
-
+<article class="topic-card">
+<img src="../../../assets/a-hundred-records-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente · Película 2 de 4 →</p>
+<h3><a href="../a-hundred-records/">Cien registros</a></h3>
+<p>La lista pasaba todos los controles. Cien registros revisados a mano dijeron qué tan buena era; un perfil completo, dónde mirar.</p>
+<p class="meta">8 min · Pausa para pensar · Apto para su uso · En inglés</p>
+<p class="tc-progress" data-progress="ld-a-hundred-records" hidden></p>
+</div>
+</article>
 </div>
 <ol class="series-list" aria-label="Todas las películas de la serie">
 <li><a href="../good-enough-for-what/" aria-current="page"><span class="n">1</span>¿Lo bastante bueno para qué?</a></li>
+<li><a href="../a-hundred-records/"><span class="n">2</span>Cien registros</a></li>
+<li><a href="../valid-isnt-true/"><span class="n">3</span>Válido no es cierto</a></li>
+<li><a href="../late-is-wrong-too/"><span class="n">4</span>Tarde también es un error</a></li>
 </ol>
 </section>
 </main>

@@ -1,0 +1,298 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.336
+Japan, in 1800.
+
+00:00:04.636 --> 00:00:10.413
+Ino Tadataka, a retired merchant of 55, set out from Edo, today's Tokyo,
+
+00:00:10.613 --> 00:00:14.437
+to map the coast of Ezo, the northern island now called Hokkaido.
+
+00:00:15.737 --> 00:00:21.868
+The maps of the time were drawn largely from estimates: a cape could sit miles from where it really lay.
+
+00:00:23.568 --> 00:00:29.640
+And with Russian ships appearing in the north, the government, the shogunate, wanted a true map of that coast.
+
+00:00:31.140 --> 00:00:37.180
+His teams measured it on foot: each stretch with a rope or a chain, and its direction with a compass.
+
+00:00:38.880 --> 00:00:40.863
+But every stretch adds a small error.
+
+00:00:41.963 --> 00:00:46.439
+The errors pile up, unseen, because each measure looks right on its own.
+
+00:00:48.339 --> 00:00:54.983
+A map made only from its own measures can agree with itself, line after line, and still put a cape miles out.
+
+00:00:57.083 --> 00:01:01.463
+Something had to change: the survey needed a reference its errors couldn't reach.
+
+00:01:03.163 --> 00:01:07.467
+So, by day, they measured the coast; and on clear nights, they measured the stars.
+
+00:01:09.567 --> 00:01:16.118
+A star's height, as it crosses the south, says how far north you stand, and no error in the walk can change it.
+
+00:01:18.218 --> 00:01:21.628
+Where the walk and the stars disagreed, they corrected the walk.
+
+00:01:23.928 --> 00:01:26.049
+His teams walked for seventeen years.
+
+00:01:27.549 --> 00:01:35.432
+In 1821, three years after he died, they finished the map of all Japan, the base of the country's maps for decades.
+
+00:01:37.332 --> 00:01:43.361
+His length for one degree of latitude, north to south, is within a fraction of one per cent of today's.
+
+00:01:45.061 --> 00:01:53.182
+At the university, in February 2026, every name on the graduation list passed the checks that say a name is allowed.
+
+00:01:54.282 --> 00:01:55.704
+Eighty-eight were still wrong.
+
+00:01:57.204 --> 00:01:58.739
+The list needed its stars.
+
+00:02:00.239 --> 00:02:05.226
+The graduates themselves put all 88 right, before a single certificate was printed.
+
+00:02:13.126 --> 00:02:15.010
+February 2026.
+
+00:02:16.110 --> 00:02:20.643
+The list for the March ceremonies holds 1,064 graduates.
+
+00:02:21.943 --> 00:02:25.198
+Every night, Jun's checks ask whether each name is allowed:
+
+00:02:25.398 --> 00:02:29.580
+not empty, nothing but letters, spaces, hyphens and apostrophes,
+
+00:02:29.780 --> 00:02:33.435
+and at most 30 characters, the length of the student system's field.
+
+00:02:34.935 --> 00:02:37.181
+All 1,064 pass.
+
+00:02:38.881 --> 00:02:41.757
+In data quality's words, every name is valid.
+
+00:02:42.857 --> 00:02:44.597
+But valid only means allowed.
+
+00:02:46.097 --> 00:02:49.272
+Zoë Lefèvre's name, without its accents, is allowed.
+
+00:02:50.572 --> 00:02:54.571
+So is a name cut short, or a given name where the family name should be.
+
+00:02:56.271 --> 00:02:59.666
+The team's first checks, from a hundred records, raise two doubts:
+
+00:02:59.866 --> 00:03:04.789
+twelve names exactly 30 characters long, and not one accent on the whole list.
+
+00:03:06.489 --> 00:03:11.112
+But no check can say which of the twelve were cut short, or whose accents are missing.
+
+00:03:12.612 --> 00:03:15.434
+That's a question about the world, not about the data.
+
+00:03:18.334 --> 00:03:19.595
+Ino had the stars.
+
+00:03:20.895 --> 00:03:27.655
+A list needs a reference too: something outside the data that knows the truth, and that the data's errors can't reach.
+
+00:03:29.155 --> 00:03:31.775
+The list has three, from the closest to the truth.
+
+00:03:32.875 --> 00:03:34.961
+The graduate, who knows their own name.
+
+00:03:36.261 --> 00:03:41.358
+The identity document seen at enrolment, checked once by the registrar's office.
+
+00:03:42.658 --> 00:03:49.083
+And a record kept apart: the exam boards' approved lists, which say who completed each award, and when.
+
+00:03:50.783 --> 00:03:54.874
+The closer the reference, the more it can tell you, and the harder it is to reach.
+
+00:03:56.574 --> 00:04:00.920
+A graduate can tell you anything about their name, but you have to ask, and wait.
+
+00:04:02.220 --> 00:04:05.600
+The boards' lists are there every night, and know nothing of spelling.
+
+00:04:07.100 --> 00:04:11.432
+Checking data against a reference measures its accuracy: whether it's true.
+
+00:04:14.332 --> 00:04:16.232
+So the registrar's office asked.
+
+00:04:17.332 --> 00:04:23.549
+From Monday 9 to Friday 20 February, as graduates registered for the March ceremonies,
+
+00:04:23.749 --> 00:04:27.388
+the portal showed each one their name, exactly as it would be printed,
+
+00:04:27.588 --> 00:04:31.021
+and two buttons: “This is my name”, and “This isn't my name”.
+
+00:04:32.521 --> 00:04:38.690
+Zoë Lefèvre saw hers without its accents, pressed “This isn't my name”, and typed it as she writes it.
+
+00:04:40.590 --> 00:04:46.327
+1,013 of the 1,064 answered: 95 per cent.
+
+00:04:47.627 --> 00:04:51.179
+925 confirmed their name as it was.
+
+00:04:52.279 --> 00:04:58.605
+88 corrected it: 51 had lost their accents, 19 had given and family names swapped,
+
+00:04:58.805 --> 00:05:01.525
+11 were cut short, and 7 were misspelt.
+
+00:05:03.025 --> 00:05:04.628
+All 88 had been allowed.
+
+00:05:06.128 --> 00:05:08.757
+A certificate carries a graduate's legal name,
+
+00:05:08.957 --> 00:05:14.871
+so Mei's team checked each correction against the next reference: the document seen at enrolment.
+
+00:05:16.171 --> 00:05:17.337
+84 matched.
+
+00:05:18.437 --> 00:05:23.479
+Four graduates had changed their name since, and each sent the document that shows the new one.
+
+00:05:24.979 --> 00:05:28.669
+The list took each name as its graduate confirmed it, with the date.
+
+00:05:30.169 --> 00:05:34.440
+The 51 who didn't answer were printed as the student system held them.
+
+00:05:35.740 --> 00:05:42.581
+One was among the twelve exactly 30 characters long, and the document settled it: that name really is that long.
+
+00:05:44.281 --> 00:05:45.737
+A check can raise a doubt.
+
+00:05:46.637 --> 00:05:48.312
+Only a reference can settle it.
+
+00:05:51.412 --> 00:05:52.533
+Then the awards.
+
+00:05:53.633 --> 00:05:58.835
+A graduate of a double degree, like Arts and Laws, has two awards, and two certificates.
+
+00:06:00.135 --> 00:06:07.648
+On Monday 23 February, Jun's new check compared the list with the exam boards' approved lists, award by award.
+
+00:06:09.148 --> 00:06:11.690
+The boards had approved 1,101.
+
+00:06:12.790 --> 00:06:15.203
+The list held 1,099.
+
+00:06:16.503 --> 00:06:18.990
+The missing two were Bachelor of Arts awards,
+
+00:06:19.190 --> 00:06:23.834
+for two graduates of Arts and Laws whom the student system held with Laws only.
+
+00:06:25.534 --> 00:06:29.694
+Every row on the list passed its checks: what was wrong was what wasn't there.
+
+00:06:31.394 --> 00:06:35.929
+It was found three days before the list went, and both Arts certificates were printed.
+
+00:06:37.429 --> 00:06:40.007
+Every other award, and every date, agreed.
+
+00:06:41.507 --> 00:06:44.703
+The boards' lists could see the gap because they're kept apart,
+
+00:06:44.903 --> 00:06:48.540
+made from the boards' own decisions, not from the student system.
+
+00:06:49.840 --> 00:06:54.165
+A copy of the student system would have agreed with the list, and both would be wrong:
+
+00:06:54.365 --> 00:06:57.533
+consistent, in data quality's words, not accurate.
+
+00:06:59.233 --> 00:07:03.196
+And like Ino's stars, each reference sees some things and not others.
+
+00:07:04.496 --> 00:07:11.695
+The stars fixed how far north, not how far east: that needed an exact clock his teams could carry, and they had none.
+
+00:07:13.595 --> 00:07:17.634
+The boards' lists can say an award is missing, not how a name is spelled.
+
+00:07:20.534 --> 00:07:23.208
+So every check now says which reference it uses.
+
+00:07:24.308 --> 00:07:31.324
+Beside each check in the project, Jun writes its owner, what it measures, and, for an accuracy check, its reference.
+
+00:07:32.824 --> 00:07:37.185
+The name checks measure validity: they have no reference but the rule itself,
+
+00:07:37.385 --> 00:07:39.994
+so they can say a name is allowed, and no more.
+
+00:07:41.494 --> 00:07:45.484
+The awards check measures accuracy, against the boards' approved lists.
+
+00:07:46.984 --> 00:07:52.432
+For names, the reference is the graduate, and the list keeps the date each name was confirmed.
+
+00:07:53.932 --> 00:07:58.796
+And the test it runs names its method: reconciliation, award by award.
+
+00:08:00.496 --> 00:08:03.612
+And the scorecard counts them apart: allowed, and true.
+
+00:08:05.312 --> 00:08:07.596
+A check is only as true as its reference.
+
+00:08:08.896 --> 00:08:14.233
+Say which one it uses, and whoever reads the result knows what it can tell them, and what it can't.
+
+00:08:17.133 --> 00:08:21.690
+Ino's teams walked the coast by day, and checked it against the stars by night.
+
+00:08:23.190 --> 00:08:25.010
+The walk said how far they had come.
+
+00:08:26.110 --> 00:08:28.589
+The stars said how far north they really were.
+
+00:08:30.489 --> 00:08:34.527
+On Thursday 26 February, the March list went to the printer
+
+00:08:35.227 --> 00:08:40.931
+with 88 names put right by the graduates themselves, and two awards found in the boards' lists.
+
+00:08:42.631 --> 00:08:44.633
+Every name had been allowed all along.
+
+00:08:45.933 --> 00:08:51.144
+Now 1,013 of them had been confirmed by the person they belong to.
+
+00:08:52.844 --> 00:08:54.272
+A check says it's allowed.
+
+00:08:55.372 --> 00:08:57.065
+Only a reference says it's true.

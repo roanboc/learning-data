@@ -83,3 +83,36 @@ models:
         description: When the unit's coordinator approved the claim. Null until then.
       - name: updated_at
         description: When the app last changed the claim, its own time. Nothing is loaded, so there's no loaded_at.
+
+unit_tests:
+
+  - name: hours_are_read_as_said_or_as_decimal_hours
+    description: >
+      Since 15:02 on Monday 2 November 2026 the claims app sends hours in two forms: decimal hours,
+      as its contract says, and hours and minutes, as tutors say them (DEC-CLM-02). Both are read as
+      decimal hours: 1.50 and 1:30 are the same hour and a half, 0:45 is 0.75, and 1:20 is 1.33, to
+      the hundredth of an hour.
+    model: stg_claims_app__claims
+    given:
+      # As SQL, with every column: the source is read in place, so there's no table to take the
+      # columns' types from (on DuckDB, a CSV file read as text).
+      - input: source('claims_app', 'claims')
+        format: sql
+        rows: |
+          select
+              claim_id, 'E-4417' as staff_id, 'T-26188' as contract_id, 'HI101' as unit_code,
+              'consultation' as duty, '2026-11-02' as work_date, hours, '90.00' as amount,
+              'submitted' as status, cast(null as string) as approved_at,
+              '2026-11-02 15:40:00' as updated_at
+          from (values
+              ('CL-1', '1.50'), ('CL-2', '1:30'), ('CL-3', '0:45'), ('CL-4', '1:20'), ('CL-5', '2')
+          ) as claims (claim_id, hours)
+    expect:
+      format: csv
+      rows: |
+        claim_id,hours
+        CL-1,1.50
+        CL-2,1.50
+        CL-3,0.75
+        CL-4,1.33
+        CL-5,2.00

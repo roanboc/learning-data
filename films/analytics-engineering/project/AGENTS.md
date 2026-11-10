@@ -64,7 +64,7 @@ python scripts/generate/definitions.py --check   # the doc blocks match the conc
 python scripts/generate/diagrams.py --check      # the physical diagrams match the YAML
 python scripts/generate/decisions.py --check     # the decision logs are valid and indexed
 python scripts/generate/codeowners.py --check    # CODEOWNERS matches the owners in the metadata
-python scripts/generate/products.py --check      # the products' contracts and descriptors match the models
+python scripts/generate/products.py --check      # the descriptors are up to date; each enterprise contract matches its model
 python scripts/generate/scorecard.py             # the scorecard, from the build above
 python scripts/check/requirements.py             # only open requirements, each saying when it's done
 python scripts/check/governance.py               # an owner, a glossary term, classified columns, owned tests, descriptions
@@ -77,12 +77,12 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 
 | Change | Approves |
 |---|---|
-| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials; data governance names the glossary term a definition comes from |
-| The model: grain, entities, relationships, versions | Noor, data architect |
-| The code: models, tests, macros | Jun Park, analytics engineer, in review |
-| A consumer contract | Its consumer: Planning, or the wallet app team |
+| Meaning: a definition, a key, an identity rule, a business rule | Its owner, in the glossary, before any code: Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials. The code follows the glossary |
+| An enterprise contract, for a canonical table | Data governance's information architect writes it; the data team builds to it. Other dbt contracts are the data team's |
+| The model and the code: grain, entities, versions, models, tests, macros | The data team, in review (Noor, data architect, for the model) |
+| A change that doesn't match the glossary or an enterprise contract | Data governance, which checks how it got there. It isn't a reviewer |
 
-`CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
+Owners and stewards don't review pull requests (`CODEOWNERS`): the impact check tells them what a change touches.
 The agent recommends; people approve.
 
 ## What words mean
@@ -157,7 +157,7 @@ for, and *When nobody knows the answer*, at the end, what its checks can say.
 ## Context and memory are data
 
 What you read shapes what you do. This page, the skills, the models' descriptions, the contracts,
-the glossary's definitions and the data rules each have an owner, who reviews every change to them.
+the glossary's definitions and the data rules each have an owner, who decides them; the data team reviews the code.
 
 - **What's governed comes first.** Read the glossary's definitions and the data rules first, and the
   team's memory second: the platform keeps it, and nobody approves each line ([`memory/`](memory/)).
@@ -211,3 +211,22 @@ own. So on a person's sign-in, whatever that person may do:
   may not do written on it, and bring your evidence with your result (*Evidence*).
 - **A helper that works for the team asks for a name of its own:** its own identity, an owner, and a
   place on the map, the gate to stage 4 in [`docs/stages.md`](docs/stages.md).
+
+## Under your own name
+
+If the architecture map places you (`governance/3-architecture-map/`), you work under your own name in
+every tool, and your rights come only from your role's steps there. Your folder in [`agents/`](agents/),
+written from the map, says what they are: read its `README.md` first.
+
+- **Your names.** In Databricks, your service principal; in GitHub, your App, so your commits and pull
+  requests read `<your App>[bot]`; in dbt, the target `agent`. Never work on a person's sign-in or token.
+- **No secret.** Your run signs in with short-lived passes. If you find a secret, a token or a key, don't use
+  it: tell the person you work with.
+- **Your role's rights.** Your role's group holds them, not you, so any agent in the role has the same. The
+  grants in *Your access* are their shape; yours are in your folder's `grants.sql`, each with its step.
+- **A place of your own.** Write only to your own branches. In development, dbt builds a schema for each
+  layer (`<your schema>_staging`, `<your schema>_marts`, ...), so you create your own schemas, and own only those.
+- **Never ask for a right by hand.** If a ticket needs a right your steps don't give, stop and say which:
+  the step changes on the map first, through review, and the tools follow.
+- **Switched off, stop.** If every call fails, don't retry or look for another way in: your owner or the
+  platform team has stopped you, and nobody else is stopped with you.

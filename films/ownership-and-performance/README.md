@@ -11,6 +11,7 @@ What it means to own an outcome, how a team should measure its work, what to do 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Owning the outcome](https://data.learn-all.org/ownership-and-performance/owning-the-outcome/) | Ownership | 8 min | 6 | 3 questions | [script](1-owning-the-outcome/script.md) · [source](1-owning-the-outcome/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

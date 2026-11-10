@@ -305,7 +305,7 @@ class; and when the var `personal_data_readers` names a group, each column of di
 gets a mask, so only that group sees the value. Nothing repeats the class: change it in the YAML and
 the next build changes the tag. DuckDB has no tags or masks, and leaves both out. How to set it up,
 with one policy by tag instead of a mask per column, each table's area as a tag (DEC-PRJ-15), who
-read a table, the access review, the product catalogue, and agents under the same rules: `docs/databricks-governance.md`.
+read a table, the access review, the product catalogue, agents under the same rules, and deleting a person's data for a request: `docs/databricks-governance.md`.
 
 ### What each use needs
 
@@ -336,3 +336,13 @@ reconciliation, row by row, is the generic test `reconciles_with` (`tests/generi
 the scorecard lists each accuracy test with its reference. A column whose values a reference
 confirms names it too, and the column that keeps the day it confirmed each: the graduation list's
 `name_as_printed`, the graduate, on `name_confirmed_on`.
+
+### Erased by request
+
+A mart that holds people's rows by a key the privacy office can name says so in `meta.erase_by`:
+its key set and column (`{key_set: HR, column: staff_id}`). The nightly deletion job deletes a
+request's rows from every model that has it, then purges them and, after 7 days, removes the old
+files (`macros/privacy/erase.sql`); `analyses/privacy/check_a_request_is_gone.sql` shows they're
+gone. A model that only adds rows, such as a send log, can't be built again from the start
+(`full_refresh: false`), or its sources would bring back what the job deleted. HR's tutors' list and
+its send log are the first (`docs/databricks-governance.md`, section 12).

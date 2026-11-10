@@ -1,7 +1,7 @@
 # A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
-# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
-# for each output, from this file and the dbt contracts: the columns, types, keys, classes, tests
-# and known limitations come from the models' YAML, written once there.
+# owned by its owner. scripts/generate/products.py writes its product descriptor from this file and
+# the dbt models. Its tables are canonical: each has an enterprise contract, written first by data
+# governance's information architect, which the data team builds the model to.
 
 name: learner_records
 title: Learner records

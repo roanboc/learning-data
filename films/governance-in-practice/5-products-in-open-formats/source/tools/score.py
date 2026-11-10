@@ -231,10 +231,10 @@ def air(s, sec=0.8, g=0.012, pan=0.0):
 #    longer had, the top line left on the ninth, a note outside the chord. Anil's report on census day: the chord thins to a hollow
 #    fifth, the ninth above it, and as the report breaks the ninth is left alone. Every catalogue its own format: the fourth, never
 #    coming home, the top line climbing as every promise is typed again. "Something had to change" stops it. Now: the home chord, a
-#    note at a time, as the project's folders are pinned, its files laid out, each standard's tag a step higher; the contract written
-#    from the model, on the fourth, the rising fourth as it's written, and as a change that would break it is stopped, everything lets
-#    go and the lute's low note in the quiet. Jun's column: home, the rising fourth as its contract grows by a line, and the reports that
-#    read it ticked; the ten tables, on the fifth, ticked; whichever catalogue shows them: home, and as the two catalogues read the same
+#    note at a time, as the project's folders are pinned, its files laid out, each standard's tag a step higher; a core table's
+#    contract, written first, on the fourth, the rising fourth as it's written, and as the two drifting apart is stopped, everything lets
+#    go and the lute's low note in the quiet. A new column on credentials: home, the rising fourth as its contract gets the line first,
+#    and the reports that read it ticked; the ten tables, on the fifth, ticked; whichever catalogue shows them: home, and as the two catalogues read the same
 #    file, the synthesiser joins the lute on each; and the title, on the mark
 pw = lambda lid, word, off=0: W('promise', lid, word, off)
 pc = lambda lid, off=0: G('promise', lid, off)
@@ -245,9 +245,9 @@ col, gone = pw('column', 'a column'), pw('column', 'no longer had')
 cen, brk = pc('census', -0.3), pw('census', 'could break')
 fm, chgc, again, chg = pc('format', -0.3), pw('format', 'change the catalogue'), pw('format', 'every promise is typed again'), pc('change')
 now, code, std = pc('now', -0.3), pw('now', 'kept with the code'), pw('now', 'two open standards')
-pd, ct = pw('pair', 'one for the product'), pw('pair', "its table's contract")
-wr, frm, dis, stp = pc('written', -0.3), pw('written', 'written from'), pw('written', "can't disagree"), pw('written', 'a change that would break it')
-jun, grew, nob = pc('jun', -0.3), pw('jun', 'its contract grew'), pw('jun', 'no report broke')
+pd, ct = pw('pair', 'one for the product'), pw('pair', 'each core table')
+wr, frm, dis, stp = pc('written', -0.3), pw('written', 'builds to it'), pw('drift', 'A check stops'), pw('drift', 'drifting apart')
+jun, grew, nob = pc('jun', -0.3), pw('jun', 'got the line first'), pw('jun', 'no report broke')
 tn, prom, chk = pc('ten', -0.3), pw('ten', 'have a promise'), pw('ten', 'checked on every change')
 st, stays, uni = pc('stay', -0.3), pw('stay', 'the promises stay'), pw('stay', "the university's")
 board, title = pc('breath', -0.3), pc('breath', 1.2)
@@ -289,16 +289,16 @@ duo([(code, pd, 69, 0.9), (pd, ct, 72, 0.95), (ct, wr + 0.2, 74, 0.9)], 0.5, att
 pin(code, 0.012, px(320))
 paper(std, 0.012, px(1240), 0.45); paper(std + 0.6, 0.012, px(1240), 0.45)
 tap(pd, 0.007, px(1700)); tap(ct, 0.007, px(1700))
-# the contract written from the model: the fourth, the rising fourth as it's written, the threads drawn; a change that would break it
-# is stopped: everything lets go, and the lute's low note in the quiet
+# a core table's contract, written first: the fourth, the rising fourth as it's written, the model laid down beside it, the threads
+# drawn; the two drifting apart is stopped: everything lets go, and the lute's low note in the quiet
 chord(IV, wr + 0.2, stp + 0.6, 0.55, step=0.12, att=0.4, top=False)
 sline([(wr + 0.3, stp + 0.6, 74, 0.9)], 0.45, att=0.5, rel=0.4)
-written(frm + 0.3)
+written(wr + 0.8); paper(frm + 0.2, 0.012, px(1430), 0.4)
 for k in range(3):
     pencil(dis - 0.4 + 0.47 * k, 0.007, px(960), 0.4)
 tap(stp + 0.1, 0.007, px(960))
 halt(stp + 0.75)
-# Jun's column: home; the rising fourth as its contract grows by a line; its readers ticked, one by one
+# a new column on credentials: home; the rising fourth as its contract gets the line first; its readers ticked, one by one
 chord(I, jun + 0.1, tn + 0.2, 0.55, step=0.2, att=0.6, top=False)
 written(grew + 0.3)
 tap(jun + 0.4, 0.006, px(200))
@@ -345,35 +345,39 @@ pencil(clk, 0.008, px(900), 0.6); tap(clk + 0.5, 0.007, px(880)); marker(clk + 0
 chord(I, clk - 0.2, E('owner') + 0.3, 0.45, step=0.2, att=0.7, rel=0.9, top=False)
 sline([(clk, E('owner') + 0.3, 69, 0.9)], 0.4, att=0.6, rel=0.9)
 
-# 3. The contract, from the model: the sixth at the turn; what the contract promises, in pencil, line by line; a pencil that stops
-#    short; the generated tag; the script writes it, the rising fourth, its two sources laid down, the standard's tag; each line of the
-#    model threaded to its line. Jun's pull request: edited by hand, the products check fails, the low note; made in the model and the
-#    script run, it's written again, the rising fourth, and passes, home to the end
+# 3. A contract written first: the sixth at the turn; what the contract promises, in pencil, line by line; the core tables' contracts
+#    pinned up, and "only the core tables" in pencil; written first by the information architect, its header lit, the rising fourth, the
+#    standard's tag; the model laid down, built to it; each line of the contract threaded to its line. Jun's pull request: the model
+#    drifted from its contract, the products check fails, the low note; data governance's question, in pencil, and the contract first,
+#    a tag; then Clara's own table, its stall and its dbt contract laid down, and home to the end
 cw_ = lambda lid, word, off=0: W('contract', lid, word, off)
 cc_ = lambda lid, off=0: G('contract', lid, off)
 c0 = S0('contract')
 chord(vi, c0 + 0.2, c0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
 for w_ in ('each column', 'its type', 'always there', 'identify a person', 'the tests it must pass'):
     pencil(cw_('each', w_), 0.008, px(700), 0.5)
-nb_ = cc_('nobody')
-tap(nb_ + 1.0, 0.006, px(940)); tap(cw_('nobody', 'types it', 0.3), 0.007, px(1700))
-scr = cw_('script', 'A script writes it')
-tap(scr, 0.007, px(600)); written(scr + 0.4)
-mdl = cw_('script', 'from the model')
-paper(mdl + 0.4, 0.012, px(480), 0.4); paper(mdl + 0.8, 0.010, px(480), 0.4)
-tap(cw_('script', 'Open Data Contract Standard'), 0.006, px(1600))
+co_ = cc_('core')
+pin(co_ + 0.3, 0.010, px(500)); pencil(co_ + 0.7, 0.008, px(800), 0.7)
+ia_ = cw_('architect', 'information architect')
+marker(ia_, 0.007, px(1300), 0.5); written(ia_ + 0.4)
+tap(cw_('architect', 'Open Data Contract Standard'), 0.006, px(1600))
+paper(cw_('builds', 'builds the model to it', 0.3), 0.012, px(480), 0.4)
 sd = cw_('side', 'each line')
-for k in range(5):
+for k in range(4):
     pencil(sd + 0.3 * k, 0.006, px(960), 0.5)
-pr_, fl_, rl_ = cc_('check', -0.3), cw_('check', 'a check fails'), cw_('check', "breaks the standard's rules")
-tap(pr_ + 0.1, 0.008, px(960)); pencil(pr_ + 0.6, 0.008, px(1500), 0.7)
+pr_, fl_ = cc_('check', -0.3), cw_('check', 'a check fails')
+tap(pr_ + 0.1, 0.008, px(960))
 for i in range(5):
     tap(fl_ + 0.1 * i, 0.005, px(400 + 230 * i))
 halt(fl_ + 0.55)
-pencil(rl_ - 0.1, 0.008, px(1400), 0.8)
-written(rl_ + 0.4)
-marker(rl_ + 1.2, 0.007, px(700), 0.5)
-chord(I, rl_ + 0.2, E('contract') + 0.3, 0.45, step=0.15, att=0.6, rel=0.8)
+pencil(cw_('process', 'how the change got there'), 0.008, px(1400), 0.8)
+tap(cw_('process', 'the contract changes first', 0.2), 0.007, px(1500))
+lt_ = cc_('lighter', -0.3)
+paper(lt_ + 0.2, 0.012, px(400), 0.4); paper(lt_ + 0.5, 0.012, px(1330), 0.4)
+pencil(cw_('lighter', 'no enterprise contract'), 0.008, px(400), 0.7)
+ic_ = cw_('lighter', 'in its code')
+marker(ic_, 0.007, px(1330), 0.5)
+chord(I, ic_ + 0.2, E('contract') + 0.3, 0.45, step=0.15, att=0.6, rel=0.8)
 
 # 4. Every shared table, in one product: the fourth at the turn; the data team's thirty-three tables put up; the ten other teams read,
 #    lit; the six products, each of the ten flying to its own. Jun's pull request: a shared table in no product stops it, the low note;
@@ -404,7 +408,7 @@ bw_ = lambda lid, word, off=0: W('break', lid, word, off)
 bc_ = lambda lid, off=0: G('break', lid, off)
 b0 = S0('break')
 chord(vi, b0 + 0.2, b0 + 2.6, 0.5, step=0.2, att=0.6, rel=0.8)
-keys(bw_('follows', 'a model changes'), 5, 0.007, px(400), 0.15)
+keys(bw_('follows', 'change the model'), 5, 0.007, px(400), 0.15)
 knock(bc_('some', 0.1), 0.010, px(1560), 260); strike(bw_('some', 'break the readers', 0.3), 0.010, px(1450), 0.5)
 tap(bc_('rename', -0.2), 0.008, px(960))
 halt(bw_('rename', 'the impact check fails', 0.5))
@@ -478,8 +482,8 @@ marker(ew_('keeps', 'its catalogue reads today'), 0.007, px(900), 0.6); marker(e
 chord(I, ec_('breath', -0.2), E('open') + 0.3, 0.45, step=0.2, att=0.7, rel=0.9)
 
 # 8. A catalogue over the platform: the third at the turn; Sam's screens, and as Ontos fills, it reads the files: the synthesiser joins
-#    the lute; the contract dropped in, and read; the products laid out by domain, each with its team; Clara's product on its way: the
-#    steward's note, and its owner publishes, a stamp; the nightly policy, its lines lit, and governance told, a notice folded; a column
+#    the lute; the contract dropped in, and read; the products laid out by domain, each with its team; Clara's product: no steward's
+#    review, in pencil, and its owner publishes, a stamp; the nightly policy, its lines lit, and governance told, a notice folded; a column
 #    linked to its business term; a Labs project, as it is, lit; and on Noor's map, the files at home, pinned, and the catalogue's copy,
 #    one way, home to the end
 kw_ = lambda lid, word, off=0: W('catalogue', lid, word, off)
@@ -496,8 +500,8 @@ for i in range(3):
     tap(ly + 0.4 * i, 0.006, px(700))
 marker(kw_('imports', 'each with its team'), 0.007, px(1100), 0.5)
 tap(kc_('steward', -0.2), 0.007, px(960))
-pencil(kw_('steward', 'A steward'), 0.008, px(1300), 0.8)
-stamp(kw_('steward', 'published', 0.3), 0.012, px(1500))
+pencil(kw_('steward', "doesn't review"), 0.008, px(500), 0.8)
+stamp(kw_('steward', 'its owner publishes', 0.3), 0.012, px(1500))
 tap(kw_('policy', 'Each night'), 0.007, px(400))
 for w_ in ('an active one', 'with no owner', 'is tagged'):
     marker(kw_('policy', w_), 0.006, px(700), 0.5)

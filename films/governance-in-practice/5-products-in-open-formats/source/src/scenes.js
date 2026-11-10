@@ -7,15 +7,16 @@
 // ---- 1 · A promise in a file: Noor's room, Noor and Clara; the six data products on her board, each with its owner, and Clara's
 // promise; until now, the promise typed into a catalogue while the table changed every week; the column it promised, gone; Anil's report
 // on census day, broken; every promise typed again for a new catalogue; something had to change; now, each promise a file in an open
-// standard; the contract written from the model, and the change that would break it, stopped; Jun's column; the ten tables, checked;
+// standard; a core table's contract, written first by data governance, the model built to it, and the two drifting apart, stopped; a
+// new column on credentials, in its contract first; the ten tables, checked;
 // the promise the university's, whichever catalogue shows it; and the title ----
 scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(sc,"room","Noor and Clara"),des:c.designs-0.3,six:wAt(sc,"designs","six data products"),
     own:wAt(sc,"designs","an owner who keeps it"),cl:c.clara,cnt:wAt(sc,"clara","the count"),rdy:wAt(sc,"clara","ready by seven"),
     ty:c.typed-0.3,hand:wAt(sc,"typed","typed by hand"),wk:wAt(sc,"typed","the tables changed"),col:wAt(sc,"column","a column"),gone:wAt(sc,"column","no longer had"),
     cen:c.census-0.3,brk:wAt(sc,"census","could break"),fm:c.format-0.3,chg:wAt(sc,"format","change the catalogue"),again:wAt(sc,"format","every promise is typed again"),
     stop:c.change,now:c.now-0.3,code:wAt(sc,"now","kept with the code"),std:wAt(sc,"now","two open standards"),pd:wAt(sc,"pair","one for the product"),
-    ct:wAt(sc,"pair","its table's contract"),wr:c.written-0.3,frm:wAt(sc,"written","written from"),dis:wAt(sc,"written","can't disagree"),
-    stp:wAt(sc,"written","a change that would break it"),jun:c.jun-0.3,grew:wAt(sc,"jun","its contract grew"),nob:wAt(sc,"jun","no report broke"),
+    ct:wAt(sc,"pair","each core table"),wr:c.written-0.3,frm:wAt(sc,"written","builds to it"),dis:wAt(sc,"drift","A check stops"),
+    stp:wAt(sc,"drift","drifting apart"),jun:c.jun-0.3,grew:wAt(sc,"jun","got the line first"),bt:wAt(sc,"jun","Jun built it"),nob:wAt(sc,"jun","no report broke"),
     tn:c.ten-0.3,prom:wAt(sc,"ten","have a promise"),chk:wAt(sc,"ten","checked on every change"),st:c.stay-0.3,stays:wAt(sc,"stay","the promises stay"),
     uni:wAt(sc,"stay","the university's"),board:c.breath-0.3,title:c.breath+1.2}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
@@ -36,12 +37,13 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(
     // now: the project's folders, and in them the product's file and its table's contract, each in its open standard
     {at:P.now,place:"desk",keys:[[P.now,960,540,1]],push:0.02,draw:(x,tt)=>gp_nowFiles(x,tt,{tree:fin(tt,P.code-0.2,0.6),d:clamp((tt-P.std)/0.9,0,1),
       c:clamp((tt-P.std-0.6)/0.9,0,1),std:[fin(tt,P.pd,0.5),fin(tt,P.ct,0.5)]})},
-    // the contract, written from the model by the script; each line threaded to its line; a change that would break it: the impact check
-    {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.frm)/1.0,0,1),thr:clamp((tt-P.dis+0.4)/1.4,0,1),
-      ck:clamp((tt-P.stp)/1.4,0,1)})},
-    // Jun's column on credentials: its contract grows by a line, by itself, and every report that reads it still works
+    // a core table's contract, written first by the information architect; the model, built to it; the check between them, each line
+    // threaded to its line; the two drifting apart: the products check
+    {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.wr-0.3)/1.0,0,1),m:clamp((tt-P.frm)/1.0,0,1),
+      thr:clamp((tt-P.dis+0.2)/1.4,0,1),ck:clamp((tt-P.stp)/1.4,0,1)})},
+    // a new column on credentials: its contract gets the line first, Jun builds it, and every report that reads it still works
     {later:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
-      ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.jun+0.3,P.tn-0.4,0.4));}},
+      ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.bt-0.2,P.tn-0.4,0.4));}},
     // the data team's board: the ten tables other teams read, each ticked, checked on every change
     {at:P.tn,place:"board",keys:[[P.tn,960,500,1]],push:0.02,draw:(x,tt)=>gp_ten(x,tt,{u:clamp((tt-P.tn-0.1)/1.6,0,1),tick:clamp((tt-P.prom)/1.6,0,1),ck:fin(tt,P.chk,0.6)})},
     // whichever catalogue shows it: two catalogues reading the same file, the university's
@@ -65,22 +67,26 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({wr:wAt(sc,"f
     // Planning's office: Clara at her desk, her file on her screen; who does what
     {cut:true,at:P.kp,place:"planClose",keys:[[P.kp,960,540,1]],push:0.02,draw:(x,tt)=>gp_planDesk(x,tt,{clara:{expr:"smile"},who:[fin(tt,P.dt,0.9),fin(tt,P.cl,0.9)],own:fin(tt,P.cl,0.6)})}],sc.dur));});
 
-// ---- 3 · The contract, from the model: the contract, what each part promises; nobody types it; the script writes it from the model
-// and the product's file, in the Open Data Contract Standard; each line of the model threaded to its line; and on a pull request, a hand
-// edit fails the check, then passes, up to date and valid ----
+// ---- 3 · A contract written first: a core table's contract, what each part promises; only the core tables have one; data governance's
+// information architect writes it first, in the Open Data Contract Standard, and the data team builds the model to it; each line of the
+// contract threaded to its line in the model; on a pull request, the model drifted from its contract fails the check, and data
+// governance asks how it got there; and Clara's own table, with no enterprise contract: a dbt contract, the data team's ----
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({n:["each column","its type","always there","identify a person","the tests it must pass"].map(w=>wAt(sc,"each",w)),
-    nb:c.nobody,ty:wAt(sc,"nobody","types it"),scr:wAt(sc,"script","A script writes it"),mdl:wAt(sc,"script","from the model"),std:wAt(sc,"script","Open Data Contract Standard"),
-    side:wAt(sc,"side","each line"),pr:c.check-0.3,fail:wAt(sc,"check","a check fails"),rules:wAt(sc,"check","breaks the standard's rules")}));
+    core:c.core,arch:c.architect,ia:wAt(sc,"architect","information architect"),std:wAt(sc,"architect","Open Data Contract Standard"),
+    bld:wAt(sc,"builds","builds the model to it"),side:wAt(sc,"side","each line"),pr:c.check-0.3,fail:wAt(sc,"check","a check fails"),
+    how:wAt(sc,"process","how the change got there"),first:wAt(sc,"process","the contract changes first"),lt:c.lighter-0.3,
+    no:wAt(sc,"lighter","no enterprise contract"),code:wAt(sc,"lighter","in its code"),wait:wAt(sc,"wait","without waiting")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
-    // the contract on the desk, what it promises in pencil beside it; a pencil that stops short; then the model, the product's file and
-    // the script, and each line of the model threaded to its line in the contract
-    {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gp_contractDesk(x,tt,{note:P.n.map(w=>fin(tt,w,0.8)),pen:clamp((tt-P.nb+0.2)/1.4,0,1),
-      warn:fin(tt,P.ty+0.3,0.6),gen:fin(tt,P.ty+0.3,0.6),scr:clamp((tt-P.scr)/1.2,0,1),src:clamp((tt-P.mdl)/1.2,0,1),std:fin(tt,P.std,0.6),
-      thr:[0,1,2,3,4].map(k=>clamp((tt-P.side-0.3*k)/0.9,0,1))})},
-    // Jun's pull request, its contract edited by hand: the products check fails, out of date; made in the model, and the script run, it
-    // passes, up to date and valid against the standards
-    {at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gp_prCheck(x,tt,{hand:fin(tt,P.pr+0.5,0.8),fail:clamp((tt-P.fail)/1.0,0,1),
-      pass:clamp((tt-P.rules+0.2)/1.2,0,1),std:fin(tt,P.rules+1.2,0.6)})}],sc.dur));});
+    // the contract on the desk, what it promises in pencil beside it; the core tables' contracts, the only ones; written first by the
+    // information architect, in the standard; the model built to it, each line of the contract threaded to its line in the model
+    {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gp_contractDesk(x,tt,{note:P.n.map(w=>fin(tt,w,0.8)),core:gv_io(tt,P.core+0.1,P.arch,0.5),
+      ia:fin(tt,P.ia,0.6),std:fin(tt,P.std,0.6),src:clamp((tt-P.bld)/1.2,0,1),thr:[0,1,2,3].map(k=>clamp((tt-P.side-0.3*k)/0.9,0,1))})},
+    // Jun's pull request, which lets award codes be empty while their contract says they're required: the products check fails; data
+    // governance asks how the change got there; the contract comes first
+    {cut:true,at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gp_prCheck(x,tt,{fail:clamp((tt-P.fail)/1.0,0,1),how:fin(tt,P.how,0.8),first:fin(tt,P.first,0.8)})},
+    // Clara's own table: no enterprise contract; a dbt contract in its code, the data team's to change
+    {at:P.lt,place:"desk",keys:[[P.lt,960,540,1]],push:0.02,draw:(x,tt)=>gp_lighter(x,tt,{u:clamp((tt-P.lt-0.1)/0.9,0,1),no:fin(tt,P.no,0.6),code:fin(tt,P.code,0.6),
+      wait:fin(tt,P.wait,0.6)})}],sc.dur));});
 
 // ---- 4 · Every shared table, in one product: the data team's thirty-three tables; the ten other teams read, each into one of the six
 // products; and Jun's completions, in no product, stopped until a product takes it in ----
@@ -94,16 +100,16 @@ scene("shared",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ten:wAt(sc,
     {at:P.same,place:"big",keys:[[P.same,960,540,1]],push:0.02,draw:(x,tt)=>gp_newPR(x,tt,{fail:clamp((tt-P.np)/1.0,0,1),prod:clamp((tt-P.tk)/1.6,0,1),
       pass:clamp((tt-P.tk-1.8)/1.0,0,1),tag:fin(tt,P.same+0.6,0.5)})}],sc.dur));});
 
-// ---- 5 · A change that would break it: the model changes and its contract follows; a rename breaks the census dashboard; the impact
+// ---- 5 · A change that would break it: Clara's table's model changes, and its contract, in its code, with it; a rename breaks the census dashboard; the impact
 // check fails, needs a new version; version 1 stays with a date to go, version 2 beside it; credentials' two versions, the first
 // deprecated; and Jun's column, added, breaking nobody ----
-scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"follows","a model changes"),fol:wAt(sc,"follows","its contract follows"),sm:c.some,
+scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"follows","change the model"),fol:wAt(sc,"follows","its contract changes"),sm:c.some,
     br:wAt(sc,"some","break the readers"),rn:c.rename-0.3,fl:wAt(sc,"rename","the impact check fails"),bk:wAt(sc,"rename","it's breaking"),nv:wAt(sc,"rename","needs a new version"),
     sy:c.stays-0.3,dt:wAt(sc,"stays","a date to go"),nw:wAt(sc,"stays","the new one goes beside it"),tw:c.two-0.3,has:wAt(sc,"two","has two"),
     ret:wAt(sc,"two","retires on"),d31:wAt(sc,"two","thirty-first"),cs:wAt(sc,"two","its contract says"),dep:wAt(sc,"two","deprecated"),out:wAt(sc,"two","on its way out"),
     ad:c.add-0.3,nc:wAt(sc,"add","a new column"),nb:wAt(sc,"add","breaks nobody")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
-    // the model's line renamed, the contract's following by itself; the census dashboard's thread breaks
+    // the model's line renamed, and its contract, in the project's settings, changing with it; the census dashboard's thread breaks
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_renameDesk(x,tt,{ren:clamp((tt-P.ch)/0.8,0,1),fol:clamp((tt-P.fol)/0.8,0,1),rd:fin(tt,P.sm,0.6),
       brk:clamp((tt-P.br)/0.8,0,1)})},
     // the rename's pull request: the impact check fails; breaking, it needs a new version
@@ -146,11 +152,11 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({bf:wAt(sc,"bo
       move:fin(tt,P.mv,0.6)})}],sc.dur));});
 
 // ---- 8 · A catalogue over the platform: Sam's screens, Ontos and Unity Catalog; Ontos imports a contract from its file, and lays the
-// products out by domain, each with its owner team; a steward reviews before it's published; the nightly policy on owners; a column
+// products out by domain, each with its owner team; no steward's review: its owner publishes; the nightly policy on owners; a column
 // linked to its business term; a Labs project, as it is; and the files at home, the catalogue a copy ----
 scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(sc,"ontos","Ontos"),imp:c.imports-0.3,ff:wAt(sc,"imports","from its file"),
-    lay:wAt(sc,"imports","lays the products"),team:wAt(sc,"imports","each with its team"),sw:c.steward-0.3,stw:wAt(sc,"steward","A steward"),
-    rv:wAt(sc,"steward","reviews"),pub:wAt(sc,"steward","published"),po:c.policy-0.3,eve:wAt(sc,"policy","Each night"),act:wAt(sc,"policy","an active one"),
+    lay:wAt(sc,"imports","lays the products"),team:wAt(sc,"imports","each with its team"),sw:c.steward-0.3,stw:wAt(sc,"steward","doesn't review"),
+    pub:wAt(sc,"steward","its owner publishes"),po:c.policy-0.3,eve:wAt(sc,"policy","Each night"),act:wAt(sc,"policy","an active one"),
     no:wAt(sc,"policy","with no owner"),tag:wAt(sc,"policy","is tagged"),told:wAt(sc,"policy","governance is told"),lk:c.link-0.3,lc:wAt(sc,"link","link each column"),
     bt:wAt(sc,"link","the business term"),lb:c.labs-0.3,asis:wAt(sc,"labs","comes as it is"),nfs:wAt(sc,"labs","no formal support"),hm:c.home-0.3,
     fl:wAt(sc,"home","the files"),ah:wAt(sc,"home","at home"),cp:wAt(sc,"home","holds a copy")}));
@@ -162,9 +168,8 @@ scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(s
     {at:P.imp,place:"bigPlat",keys:[[P.imp,960,540,1]],push:0.02,draw:(x,tt)=>gp_import(x,tt,{up:clamp((tt-P.ff+0.3)/0.9,0,1),rev:clamp((tt-P.ff-0.6)/0.9,0,1)})},
     // and lays the products out by domain, each with its owner team
     {later:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
-    // Clara's product on its way to being published: a data steward reviews and approves; its owner publishes
-    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
-      stw:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
+    // Clara's product, published: no steward's review; its owner publishes it, Draft to Active
+    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_owned(x,tt,{no:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
     // the policy every night: an active product with no owner is tagged, and governance is told
     {at:P.po,place:"bigPlat",keys:[[P.po,960,540,1]],push:0.02,draw:(x,tt)=>gp_policy(x,tt,{sch:fin(tt,P.eve,0.6),lit:[0,gv_io(tt,P.act,P.no,0.4),fin(tt,P.no,0.5),0,
       fin(tt,P.tag,0.5),fin(tt,P.told,0.5),0]})},

@@ -1,0 +1,90 @@
+{
+  "kicker": "A request, end to end",
+  "kicker_es": "Una petición, de principio a fin",
+  "title_es": "Una persona pregunta",
+  "h1": "A person asks: an answer on time, with proof",
+  "h1_es": "Una persona pregunta: una respuesta a tiempo, con pruebas",
+  "lead": "Linh asks the university what it holds about her, and to be taken off the tutors' mailing list. The answer is due in 30 days. How does the data team find every place she is, say why each part is kept and until when, and prove each step, with her numbers in no ticket?",
+  "lead_es": "Linh pregunta a la universidad qué guarda sobre ella, y pide que la quiten de la lista de correo de tutores. Hay 30 días para responder. ¿Cómo encuentra el equipo de datos cada lugar donde está, dice por qué se guarda cada parte y hasta cuándo, y prueba cada paso, sin sus números en ningún ticket?",
+  "description": "A film about answering a person's request end to end, on time and with proof: a request logged with its due date; a ticket that names no one, and the person's numbers in one restricted table; every place they are, found through dbt's lineage, the platform's lineage and the classes on each column, by their numbers and by the codes made from them; a copy that says what each part is, why it's held, where it came from, who else gets it and until when; a no kept on the person, so no rebuild brings them back; and proof of each step in the ticket, the table's history and the audit log. The last film of the series and of the module.",
+  "description_es": "Una película sobre cómo responder la petición de una persona de principio a fin, a tiempo y con pruebas: la petición registrada con su fecha límite; un ticket que no nombra a nadie, y los números de la persona en una sola tabla restringida; cada lugar donde está, encontrado por el linaje de dbt, el linaje de la plataforma y las clases de cada columna, por sus números y por los códigos hechos con ellos; una copia que dice qué es cada parte, por qué se guarda, de dónde viene, quién más la recibe y hasta cuándo; un no guardado en la persona, para que ninguna reconstrucción la traiga de vuelta; y pruebas de cada paso en el ticket, el historial de la tabla y el registro de auditoría. La última película de la serie y del módulo.",
+  "card": "Linh's request, end to end: found through lineage and tags, answered with reasons and dates, proved step by step.",
+  "card_es": "La petición de Linh de principio a fin: hallada por linaje y etiquetas, respondida con razones y fechas, y probada paso a paso.",
+  "chapters_es": {
+    "summer": "Preso todo el verano",
+    "days": "Tres días",
+    "clock": "Una petición con reloj",
+    "places": "Cada lugar donde está",
+    "copy": "Lo que guardamos sobre ti",
+    "off": "Fuera, y que siga fuera",
+    "proof": "Pruebas, a tiempo",
+    "reason": "Guardado por una razón"
+  },
+  "past": [
+    "London, 1676 to 1679: held through a summer, then three days",
+    "Francis Jenkes was held through a summer, refused a judge because the courts were on holiday; the Habeas Corpus Act gave a keeper three days to answer, with the true causes: so a person's request gets a clock, the true reasons and proof."
+  ],
+  "past_es": [
+    "Londres, de 1676 a 1679: preso todo un verano, y luego tres días",
+    "Francis Jenkes pasó un verano preso, sin juez porque los tribunales estaban de vacaciones; la Ley de Habeas Corpus dio al carcelero tres días para responder, con las causas verdaderas: por eso la petición de una persona tiene un plazo, las razones verdaderas y pruebas."
+  ],
+  "next_h": "You've seen Linh's request answered on time, with proof, and the module's lessons. Next: AI agents in data work, where agents work under the same rules.",
+  "next_h_es": "Viste la petición de Linh respondida a tiempo, con pruebas, y las lecciones del módulo. Después: Agentes de IA en el trabajo con datos, donde los agentes trabajan con las mismas reglas.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee la guía por tu cuenta",
+    "p": "The film shows Databricks, dbt and GitHub, and names one law, Europe's GDPR, only in its sources. These official pages are where its steps come from.",
+    "p_es": "La película muestra Databricks, dbt y GitHub, y nombra una ley, el RGPD europeo, solo en sus fuentes. Estas páginas oficiales son el origen de sus pasos.",
+    "links": [
+      {
+        "title": "Guidelines on the right of access",
+        "title_es": "Directrices sobre el derecho de acceso",
+        "line": "The European Data Protection Board: how to know it's the person asking, why every system is searched by every identifier, and what the answer must say.",
+        "line_es": "El Comité Europeo de Protección de Datos: cómo saber que es la persona quien pregunta, por qué se busca en cada sistema por cada identificador, y qué debe decir la respuesta.",
+        "href": "https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_en",
+        "href_es": "https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-012022-data-subject-rights-right-access_es"
+      },
+      {
+        "title": "Lineage system tables",
+        "title_es": "Tablas de sistema de linaje (en inglés)",
+        "line": "Databricks: the tables, notebooks, jobs and dashboards built from a table, and why lineage can't capture every read or write.",
+        "line_es": "Databricks: las tablas, notebooks, trabajos y paneles hechos a partir de una tabla, y por qué el linaje no capta toda lectura o escritura.",
+        "href": "https://docs.databricks.com/aws/en/admin/system-tables/lineage",
+        "href_es": "https://docs.databricks.com/aws/en/admin/system-tables/lineage"
+      },
+      {
+        "title": "Prepare your data for GDPR compliance",
+        "title_es": "Prepara tus datos para cumplir el RGPD (en inglés)",
+        "line": "Databricks: a table of requests that drives a scheduled job, and deleting so no old version of a table keeps the data.",
+        "line_es": "Databricks: una tabla de peticiones que mueve un trabajo programado, y borrar sin que ninguna versión antigua de una tabla guarde los datos.",
+        "href": "https://docs.databricks.com/aws/en/ldp/gdpr",
+        "href_es": "https://docs.databricks.com/aws/en/ldp/gdpr"
+      },
+      {
+        "title": "Query history system table",
+        "title_es": "Tabla de sistema del historial de consultas (en inglés)",
+        "line": "Databricks: a query's text is kept, and can hold personal data, which is why a person's numbers are never typed into one.",
+        "line_es": "Databricks: el texto de una consulta se guarda y puede tener datos personales; por eso los números de una persona nunca se escriben en una.",
+        "href": "https://docs.databricks.com/aws/en/admin/system-tables/query-history",
+        "href_es": "https://docs.databricks.com/aws/en/admin/system-tables/query-history"
+      },
+      {
+        "title": "Graph operators",
+        "title_es": "Operadores de grafo (en inglés)",
+        "line": "dbt: select a source and every model built from it, with a plus sign, to list everything a person's data flows into.",
+        "line_es": "dbt: selecciona una fuente y cada modelo hecho a partir de ella, con un signo más, para listar todo adonde llegan los datos de una persona.",
+        "href": "https://docs.getdbt.com/reference/node-selection/graph-operators",
+        "href_es": "https://docs.getdbt.com/reference/node-selection/graph-operators"
+      },
+      {
+        "title": "About task lists",
+        "title_es": "Acerca de las listas de tareas",
+        "line": "GitHub: a checklist in an issue, each step ticked as it's done, with a link to its proof.",
+        "line_es": "GitHub: una lista de comprobación en una incidencia, cada paso marcado al hacerse, con un enlace a su prueba.",
+        "href": "https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/about-tasklists",
+        "href_es": "https://docs.github.com/es/get-started/writing-on-github/working-with-advanced-formatting/about-tasklists"
+      }
+    ]
+  },
+  "draft": true
+}

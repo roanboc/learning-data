@@ -1,0 +1,311 @@
+1
+00:00:01,400 --> 00:00:03,844
+China, about 2,300 years ago.
+
+2
+00:00:05,144 --> 00:00:10,403
+Seven kingdoms are at war, and each keeps armies on its borders, days from the capital.
+
+3
+00:00:12,103 --> 00:00:16,257
+The king can't be at every border, so his orders travel with messengers.
+
+4
+00:00:17,757 --> 00:00:20,447
+The most dangerous is an order to raise troops.
+
+5
+00:00:21,147 --> 00:00:26,885
+If anyone could bring one, a forged letter or a messenger's lie could put an army on the march.
+
+6
+00:00:28,385 --> 00:00:33,173
+Soldiers could die for an order nobody gave, or be turned against the king himself.
+
+7
+00:00:34,473 --> 00:00:37,877
+And the commander at his post sees only the man who brings it.
+
+8
+00:00:39,577 --> 00:00:41,017
+Something has to change.
+
+9
+00:00:44,917 --> 00:00:49,569
+The answer is a tally: a small bronze tiger, cut in two along its back.
+
+10
+00:00:51,269 --> 00:00:55,269
+The king keeps the right half, and the commander takes the left to his post.
+
+11
+00:00:56,769 --> 00:01:02,051
+An order to raise troops comes with the king's half, and counts only if the two halves fit together.
+
+12
+00:01:04,151 --> 00:01:07,335
+So the commander needn't trust the messenger, only the match.
+
+13
+00:01:08,635 --> 00:01:14,075
+One tiger, now in a museum in Xi'an, carries its rule in forty characters of gold.
+
+14
+00:01:15,575 --> 00:01:20,354
+For fifty soldiers or more, the halves must match, and only then may they march.
+
+15
+00:01:22,054 --> 00:01:25,904
+Only a beacon fire, an attack at the border, lets him act without it.
+
+16
+00:01:27,404 --> 00:01:31,851
+The power to send soldiers stays with the king, however far the order travels.
+
+17
+00:01:33,551 --> 00:01:38,916
+A request to a data platform is an order too: read these records, change that table.
+
+18
+00:01:40,216 --> 00:01:46,502
+It should count only when it proves who sent it, so every request starts with one question: who is it, really?
+
+19
+00:01:53,802 --> 00:01:57,344
+Sam Okafor runs the university's data platform.
+
+20
+00:01:58,244 --> 00:02:02,354
+Every night at two, a job loads the registrar's records onto it.
+
+21
+00:02:03,654 --> 00:02:08,923
+It signs in with Jun Park's personal token, so to the platform, the job is Jun.
+
+22
+00:02:10,423 --> 00:02:13,776
+And the platform has one workspace, open to the internet.
+
+23
+00:02:15,276 --> 00:02:20,662
+For years, security meant a wall round the network, and whoever was inside it was trusted.
+
+24
+00:02:22,162 --> 00:02:25,821
+But a stolen password works as well inside the wall as out.
+
+25
+00:02:27,721 --> 00:02:30,776
+So the platform trusts no request for where it comes from.
+
+26
+00:02:32,076 --> 00:02:38,835
+Each one says who it is, and proves it, and is checked against what that identity may do, and what's usual for it.
+
+27
+00:02:40,735 --> 00:02:44,254
+It gets the least it needs, and the next request is checked again.
+
+28
+00:02:45,754 --> 00:02:50,318
+This is zero trust: not trusting no one, but trusting nothing without proof.
+
+29
+00:02:54,218 --> 00:02:56,481
+On the platform, there are three kinds of who.
+
+30
+00:02:57,781 --> 00:03:03,545
+A person: Mei Tanaka in the registrar's office, or Jun, who builds the data project.
+
+31
+00:03:05,045 --> 00:03:10,888
+A workload: a job or a service that runs with no one at the keyboard, like the nightly load.
+
+32
+00:03:12,388 --> 00:03:16,296
+And an agent: an AI assistant doing a task someone gave it.
+
+33
+00:03:17,796 --> 00:03:22,286
+Each gets a name of its own, an identity, and a person who answers for it.
+
+34
+00:03:24,186 --> 00:03:28,032
+A job never borrows a person's name, and neither does an agent.
+
+35
+00:03:29,332 --> 00:03:33,762
+The films of AI agents in data work show how an agent gets its own.
+
+36
+00:03:35,262 --> 00:03:37,800
+Then what each one does shows under its own name.
+
+37
+00:03:41,700 --> 00:03:43,305
+Next: what may each one do?
+
+38
+00:03:44,405 --> 00:03:50,472
+Sam's team once found 41 people who could read the whole learner table, each given it by name.
+
+39
+00:03:52,172 --> 00:03:54,758
+Nine had moved to other jobs, and still could.
+
+40
+00:03:56,658 --> 00:03:59,331
+So rights go to a role, never to a person.
+
+41
+00:04:00,831 --> 00:04:06,646
+The roles are on the university's map: a data owner, an analytics engineer, a data steward.
+
+42
+00:04:08,146 --> 00:04:12,047
+Each role is a group, holding what the role's work needs, and no more.
+
+43
+00:04:13,547 --> 00:04:16,940
+Join the group, and you have its rights; leave it, and they're gone.
+
+44
+00:04:18,840 --> 00:04:22,876
+And who may use the registrar's data is Mei's to say, as its owner.
+
+45
+00:04:26,776 --> 00:04:30,307
+People join, move and leave, and their groups have to follow.
+
+46
+00:04:31,607 --> 00:04:36,919
+The university's directory takes it from HR's records, so nobody has to remember.
+
+47
+00:04:38,219 --> 00:04:41,861
+A joiner gets an account on the first day, and no access yet.
+
+48
+00:04:43,161 --> 00:04:48,160
+First, they sign a confidentiality agreement: six lines, in their own voice.
+
+49
+00:04:50,460 --> 00:04:57,297
+Everyone who works with the data signs it, signs again every year, and stays in a group only while theirs is current.
+
+50
+00:04:58,997 --> 00:05:02,024
+An agent signs nothing: its owner signs for it.
+
+51
+00:05:03,524 --> 00:05:08,237
+A mover leaves the old group as they join the new one, so no right travels with them.
+
+52
+00:05:10,137 --> 00:05:14,527
+A leaver's account is turned off on their last day, and every right goes with it.
+
+53
+00:05:16,427 --> 00:05:22,676
+But the nightly job runs as Jun: when he moves, it stops, or goes on with whatever he may do next.
+
+54
+00:05:26,776 --> 00:05:29,787
+Before Sam builds anything, he thinks like an attacker.
+
+55
+00:05:31,287 --> 00:05:34,608
+Four questions: what are we working on? What can go wrong?
+
+56
+00:05:35,508 --> 00:05:38,599
+What are we going to do about it? And did we do a good enough job?
+
+57
+00:05:40,699 --> 00:05:44,262
+What can go wrong starts with the oldest trick: being someone else.
+
+58
+00:05:46,162 --> 00:05:48,040
+The tallies had that weak spot too.
+
+59
+00:05:49,540 --> 00:05:55,275
+In 257 BC, Qin had Handan, the capital of Zhao, under siege.
+
+60
+00:05:56,975 --> 00:06:01,262
+Wei's king sent an army to help, then, afraid of Qin, told it to wait.
+
+61
+00:06:02,762 --> 00:06:08,569
+Lord Xinling, a prince of Wei, wanted it to march, and had the king's half taken from his rooms.
+
+62
+00:06:10,469 --> 00:06:14,693
+At the camp, Jin Bi, the general, fitted the halves together, and they matched.
+
+63
+00:06:16,993 --> 00:06:21,914
+Still he doubted: would the king send one man in a single chariot to take his army?
+
+64
+00:06:24,014 --> 00:06:29,345
+He was killed, and the army marched: Handan was saved, by an order the king never gave.
+
+65
+00:06:31,645 --> 00:06:36,208
+A match proves someone holds the half, not who they are, or that the king sent them.
+
+66
+00:06:38,308 --> 00:06:45,225
+So the platform keeps Jin Bi's doubt: who is it, from where, on which device, asking for what, and is that usual?
+
+67
+00:06:47,325 --> 00:06:51,751
+And since a proof can be stolen, each identity gets only the least it needs.
+
+68
+00:06:53,651 --> 00:06:58,544
+For the nightly job, what can go wrong is plain: a copy of Jun's token is Jun.
+
+69
+00:07:02,844 --> 00:07:08,300
+So what are we going to do about it? The nightly job gets a name of its own: registrar-loader.
+
+70
+00:07:10,200 --> 00:07:12,173
+Sam owns it, and answers for it.
+
+71
+00:07:13,273 --> 00:07:16,445
+Its rights come from a role written for it: the loader role.
+
+72
+00:07:17,545 --> 00:07:24,063
+It may read the registrar's nightly files and write the registrar's tables, and nothing in any other area.
+
+73
+00:07:25,763 --> 00:07:30,742
+Mei, who owns that data, agrees, before the job ever signs in under its new name.
+
+74
+00:07:32,442 --> 00:07:34,534
+This is where most security work starts.
+
+75
+00:07:35,434 --> 00:07:43,970
+NIST's Cybersecurity Framework puts it first under Protect: every user, service and device known, checked, and given the least it needs.
+
+76
+00:07:45,870 --> 00:07:51,853
+In the Warring States, a bronze tiger let a commander trust an order without trusting the man who brought it.
+
+77
+00:07:53,753 --> 00:07:58,249
+On the platform, every request can say who it is, and get the least it needs.
+
+78
+00:07:59,949 --> 00:08:05,394
+Did we do a good enough job? Not yet: tonight, the job still signs in with Jun's token.

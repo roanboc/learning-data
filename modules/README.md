@@ -70,6 +70,7 @@ Module: `modern-data-basics` · [metadata](modern-data-basics/module.json)
 Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-that-moves/`
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
+- [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
 
 ### Data as software
 
@@ -156,7 +157,7 @@ Source: [films/when-things-go-wrong](../films/when-things-go-wrong/) · Portal: 
 
 Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
-No film source yet.
+- [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
 
 ### Quality as a habit
 
@@ -271,7 +272,7 @@ No film source yet.
 
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
 
-No film source yet.
+- [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
 
 ## AI agents in data work
 
@@ -312,6 +313,10 @@ Source: [films/agents-at-work-on-data](../films/agents-at-work-on-data/) · Port
 
 Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · Portal: `/from-helper-to-colleague/`
 
+- [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
+- [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
+- [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
+- [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 - [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 
 ## Data management
@@ -327,6 +332,12 @@ No film source yet.
 ### Making the case
 
 Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-the-case/`
+
+No film source yet.
+
+### Architecture that keeps up
+
+Source: [films/architecture-that-keeps-up](../films/architecture-that-keeps-up/) · Portal: `/architecture-that-keeps-up/`
 
 No film source yet.
 

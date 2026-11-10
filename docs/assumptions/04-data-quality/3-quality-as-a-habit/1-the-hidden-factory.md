@@ -1,8 +1,8 @@
 # The hidden factory: questions and assumptions
 
-*Data quality* · *Quality as a habit*, film 1 · open, PR #231 · [pull request](https://github.com/roanboc/learning-data/pull/231)
+*Data quality* · *Quality as a habit*, film 1 · merged, PR #231 · [pull request](https://github.com/roanboc/learning-data/pull/231)
 
-On the site once PR #231 merges: https://data.learn-all.org/quality-as-a-habit/the-hidden-factory/
+[Watch it on the site](https://data.learn-all.org/quality-as-a-habit/the-hidden-factory/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

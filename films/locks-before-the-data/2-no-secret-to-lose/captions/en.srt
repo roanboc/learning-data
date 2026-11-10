@@ -91,233 +91,233 @@ Like the Bank's records, the platform can know who the job is, so that nobody ha
 Every night at two, a job loads the registrar's records onto the university's data platform.
 
 24
-00:02:24,305 --> 00:02:30,251
+00:02:24,305 --> 00:02:30,427
 Sam Okafor, who runs the platform, has given it an identity of its own: registrar-loader.
 
 25
-00:02:31,951 --> 00:02:35,880
+00:02:32,127 --> 00:02:36,056
 But it still signs in the old way, with Jun Park's personal token.
 
 26
-00:02:37,380 --> 00:02:43,802
+00:02:37,556 --> 00:02:43,978
 Jun made it on 14 March 2024, to get the job running, and it has no end date.
 
 27
-00:02:45,702 --> 00:02:48,718
+00:02:45,878 --> 00:02:48,894
 To the platform, whoever holds that token is Jun.
 
 28
-00:02:50,418 --> 00:02:56,038
+00:02:50,594 --> 00:02:56,214
 They can read what Jun can read, from anywhere, at any hour, for as long as nobody notices.
 
 29
-00:02:58,138 --> 00:02:59,770
+00:02:58,314 --> 00:02:59,946
 And it isn't in one place.
 
 30
-00:03:00,870 --> 00:03:06,449
+00:03:01,046 --> 00:03:06,625
 Sam finds it in the job's settings, in an old notebook, and in a file on Jun's laptop.
 
 31
-00:03:08,749 --> 00:03:13,071
+00:03:08,925 --> 00:03:13,247
 Every copy works as well as the first, and nobody can say how many there are.
 
 32
-00:03:15,171 --> 00:03:20,770
+00:03:15,347 --> 00:03:20,946
 When Jun moves to another team, the job will stop, or go on with whatever Jun may do there.
 
 33
-00:03:22,870 --> 00:03:29,185
+00:03:23,046 --> 00:03:29,361
 Nobody did anything wrong: it was the quickest way to start, and it has worked for more than two and a half years.
 
 34
-00:03:31,285 --> 00:03:34,819
+00:03:31,461 --> 00:03:34,995
 But every night, the job carries bearer paper through the streets.
 
 35
-00:03:37,919 --> 00:03:40,856
+00:03:38,095 --> 00:03:41,032
 To sign in, the job has to prove it's the job.
 
 36
-00:03:42,356 --> 00:03:48,863
+00:03:42,532 --> 00:03:49,039
 Sam lays out the ways it can, from worst to best, with one question: who holds a secret, and for how long?
 
 37
-00:03:50,963 --> 00:03:54,758
+00:03:51,139 --> 00:03:54,934
 At the bottom, a person's token, or a shared account's password.
 
 38
-00:03:56,658 --> 00:03:59,959
+00:03:56,834 --> 00:04:00,135
 The job runs as someone else, with everything they may do.
 
 39
-00:04:02,059 --> 00:04:04,190
+00:04:02,235 --> 00:04:04,366
 One up, a token of the job's own.
 
 40
-00:04:06,090 --> 00:04:10,460
+00:04:06,266 --> 00:04:10,636
 Only its own rights now, but still bearer paper, often with no end date.
 
 41
-00:04:12,560 --> 00:04:18,415
+00:04:12,736 --> 00:04:18,591
 Then a secret in a vault, which the job reads as it starts, and a machine changes every month.
 
 42
-00:04:20,315 --> 00:04:23,825
+00:04:20,491 --> 00:04:24,001
 Nobody types it, but while it's valid, a copy still works.
 
 43
-00:04:25,925 --> 00:04:29,177
+00:04:26,101 --> 00:04:29,353
 Then a certificate: a key the job keeps, and never sends.
 
 44
-00:04:31,077 --> 00:04:35,392
+00:04:31,253 --> 00:04:35,568
 It proves who it is by signing, so the key itself never crosses the wire.
 
 45
-00:04:37,492 --> 00:04:41,377
+00:04:37,668 --> 00:04:41,553
 But the key is still kept somewhere, and must be renewed before it ends.
 
 46
-00:04:43,477 --> 00:04:46,107
+00:04:43,653 --> 00:04:46,283
 Near the top, a note from where the job runs.
 
 47
-00:04:48,007 --> 00:04:55,008
+00:04:48,183 --> 00:04:55,184
 That place signs a short note, this job, from here, now, and the platform, which trusts the signer, lets it in for that run.
 
 48
-00:04:57,308 --> 00:05:00,363
+00:04:57,484 --> 00:05:00,539
 At the top, an identity the platform gives the job.
 
 49
-00:05:02,263 --> 00:05:08,694
+00:05:02,439 --> 00:05:08,870
 The job runs on the platform's own machines, so the platform knows which job it is, and vouches for it.
 
 50
-00:05:10,794 --> 00:05:18,603
+00:05:10,970 --> 00:05:18,779
 On these two rungs there are still passes, but the platform makes a new one for each run, nobody sees it, and it ends within the hour.
 
 51
-00:05:20,903 --> 00:05:24,952
+00:05:21,079 --> 00:05:25,128
 That's the goal: nobody makes, keeps, copies or changes a secret.
 
 52
-00:05:29,052 --> 00:05:30,865
+00:05:29,228 --> 00:05:31,041
 Sam moves the nightly job up.
 
 53
-00:05:32,365 --> 00:05:37,556
+00:05:32,541 --> 00:05:37,732
 On the platform, it now runs as registrar-loader, and the platform vouches for it.
 
 54
-00:05:39,456 --> 00:05:44,490
+00:05:39,632 --> 00:05:44,666
 Its rights are the loader role's, decided when it got its name, before it ever signed in.
 
 55
-00:05:46,190 --> 00:05:53,261
+00:05:46,366 --> 00:05:53,437
 Its code reaches the platform from the build service, which signs a note for each run, so no secret is stored there either.
 
 56
-00:05:55,361 --> 00:05:57,126
+00:05:55,537 --> 00:05:57,185
 Then Jun ends his token.
 
 57
-00:05:58,826 --> 00:06:03,187
+00:05:58,885 --> 00:06:03,246
 The copies in the settings, the notebook and the laptop are worthless paper now.
 
 58
-00:06:05,287 --> 00:06:07,520
+00:06:05,346 --> 00:06:07,579
 Sam asks what a thief would find tonight.
 
 59
-00:06:09,020 --> 00:06:14,072
+00:06:09,079 --> 00:06:14,131
 Before: Jun's token, everything Jun can read, from anywhere, with no end date.
 
 60
-00:06:16,172 --> 00:06:21,380
+00:06:16,231 --> 00:06:21,439
 Now: a pass with one job's rights, that nobody stored, and that ends within the hour.
 
 61
-00:06:23,480 --> 00:06:27,479
+00:06:23,539 --> 00:06:27,538
 And when Jun moves team, nothing breaks: the job was never his.
 
 62
-00:06:29,379 --> 00:06:35,234
+00:06:29,438 --> 00:06:35,293
 Where a system can't climb yet, such as one that only takes a password, the password goes in a vault.
 
 63
-00:06:36,934 --> 00:06:41,035
+00:06:36,993 --> 00:06:41,094
 A machine changes it, and the exception is written down, with its owner.
 
 64
-00:06:42,935 --> 00:06:44,772
+00:06:42,994 --> 00:06:44,831
 Every new job starts at the top.
 
 65
-00:06:46,872 --> 00:06:49,987
+00:06:46,931 --> 00:06:50,046
 People sign in too, and their ladder is much the same.
 
 66
-00:06:51,687 --> 00:06:58,785
+00:06:51,746 --> 00:06:58,844
 At the bottom, a shared account: nobody can tell who did what, and nobody can leave without changing it for everyone.
 
 67
-00:07:00,885 --> 00:07:06,119
+00:07:00,944 --> 00:07:06,178
 A password alone can be guessed, used again on other sites, or typed into a fake page.
 
 68
-00:07:08,219 --> 00:07:15,738
+00:07:08,278 --> 00:07:15,797
 A code by text message is better, but a phone number can be moved to a thief's phone, and the code typed into a fake page too.
 
 69
-00:07:17,838 --> 00:07:24,907
+00:07:17,897 --> 00:07:24,966
 An app on your own phone is harder to steal, but a convincing fake page can still pass on your code, or get your yes.
 
 70
-00:07:27,007 --> 00:07:30,248
+00:07:27,066 --> 00:07:30,307
 At the top, a passkey, or a security key you plug in.
 
 71
-00:07:32,148 --> 00:07:34,074
+00:07:32,207 --> 00:07:34,133
 It's a key that stays on your device.
 
 72
-00:07:35,774 --> 00:07:41,035
+00:07:35,833 --> 00:07:41,094
 You unlock it with your face, your fingerprint or a PIN, and those never leave it either.
 
 73
-00:07:42,935 --> 00:07:46,571
+00:07:42,994 --> 00:07:46,630
 It answers only the real site, so a fake page gets nothing.
 
 74
-00:07:48,671 --> 00:07:53,004
+00:07:48,730 --> 00:07:53,063
 And the platform keeps only the matching half, which opens nothing on its own.
 
 75
-00:07:54,904 --> 00:07:57,265
+00:07:54,963 --> 00:07:57,324
 Nothing to remember, and nothing to type.
 
 76
-00:07:58,965 --> 00:08:06,947
+00:07:59,024 --> 00:08:07,006
 At the university, everyone signs in once, with a passkey: Sam, Jun, and Mei Tanaka, who owns the registrar's data.
 
 77
-00:08:09,047 --> 00:08:14,794
+00:08:09,106 --> 00:08:14,853
 Agents climb the job's ladder too: each signs in as itself, never on a person's token.
 
 78
-00:08:18,894 --> 00:08:24,964
+00:08:18,953 --> 00:08:25,023
 In 1990, the City's paper stopped travelling, because the Bank kept the record of who owned what.
 
 79
-00:08:26,664 --> 00:08:31,251
+00:08:26,723 --> 00:08:31,310
 The nightly job stopped carrying a secret, because the platform knows who it is.
 
 80
-00:08:32,951 --> 00:08:38,481
+00:08:33,010 --> 00:08:38,540
 There's nothing to leak, nothing to change on a schedule, and nothing that breaks when someone moves on.
 
 81
-00:08:40,381 --> 00:08:42,889
+00:08:40,440 --> 00:08:42,948
 The best secret is the one nobody holds.

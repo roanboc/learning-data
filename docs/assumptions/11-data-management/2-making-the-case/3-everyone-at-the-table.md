@@ -1,8 +1,8 @@
 # Everyone at the table: questions and assumptions
 
-*Data management* · *Making the case*, film 3 of 4 · open, PR #NNN · [pull request](https://github.com/roanboc/learning-data/pull/NNN)
+*Data management* · *Making the case*, film 3 of 4 · open, PR #279 · [pull request](https://github.com/roanboc/learning-data/pull/279)
 
-On the site once PR #NNN merges: https://data.learn-all.org/making-the-case/everyone-at-the-table/
+On the site once PR #279 merges: https://data.learn-all.org/making-the-case/everyone-at-the-table/
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

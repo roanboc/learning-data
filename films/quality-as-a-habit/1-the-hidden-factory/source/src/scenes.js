@@ -380,7 +380,7 @@ scene("bones",(ctx,S,t,sc)=>{const c=sc.cues,P=hf_once(sc,"P",()=>({draws:wAt(sc
    stopped, the list keeping the night before's names, and Sam told; the two levels side by side. */
 const HF_FB_DONE={spine:1,head:1,bones:{people:1,process:1,systems:1,interfaces:1},note:1,cards:{pa:1,pb:1,pr:1,sa:1,sb:1,in:1},line:1};
 const HF_HELD=[{k:"S-19733",v:"Fonseca de Albuquerque Cavalca",mark:"hold"},{k:"S-19655",v:"Venkatasubramanian Gopalakrish",mark:"hold"},{k:"S-17090",v:"NOVAK",mark:"hold"},{k:"S-16702",v:"O'CONNELL",mark:"hold"},{k:"S-17305",v:"MARQUES",mark:"hold"}];
-const HF_DEC=[["Andres Penaloza","Andrés Peñaloza"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Therese Lavoie","Thérèse Lavoie"]];
+const HF_DEC=[["Joaquin Ibanez","Joaquín Ibáñez"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Therese Lavoie","Thérèse Lavoie"]];
 scene("born",(ctx,S,t,sc)=>{const c=sc.cues,P=hf_once(sc,"P",()=>({owner:wAt(sc,"fixed","with its owner"),team:wAt(sc,"night","the student system team"),sam:wAt(sc,"night","Sam"),
     keeps:wAt(sc,"file","keeps every letter"),field:wAt(sc,"file","family name field"),hundred:wAt(sc,"file","a hundred"),
     once:wAt(sc,"mei","made once"),office:wAt(sc,"mei","Mei's office"),nocopy:wAt(sc,"mei","keeps no copy"),confirms:wAt(sc,"old","confirms"),first:wAt(sc,"old","graduating first"),

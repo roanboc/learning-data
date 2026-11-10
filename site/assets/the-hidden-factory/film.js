@@ -2746,7 +2746,7 @@ const HF_YML=[[["  - name: ",DQ.soft],["family_name_may_be_cut_short",null]],[["
    lost their accents on the way in take them back, one by one, each lit in steel as it does (a measure: the count runs with it).
    hf_score(ctx, x, y, o): the graduation list's scorecard: the checks at the source, by year, and the new row, the hand-check hours;
    o.rows (0 to 1: the checks' rows), o.hours (0 to 1: the new row), o.lit (0 to 1: the checks' rows lit), o.a, o.k, o.on. */
-const HF_BACK=[["Andres Penaloza","Andrés Peñaloza"],["Rangi Parata","Rangi Parata"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Daniel Okoro","Daniel Okoro"],["Therese Lavoie","Thérèse Lavoie"]];
+const HF_BACK=[["Joaquin Ibanez","Joaquín Ibáñez"],["Rangi Parata","Rangi Parata"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Daniel Okoro","Daniel Okoro"],["Therese Lavoie","Thérèse Lavoie"]];
 function hf_listBack(ctx,x,y,w,u,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const rh=58,n=HF_BACK.length,h=70+rh*n+22,ch=HF_BACK.map((r,i)=>r[0]!==r[1]?i:-1).filter(i=>i>=0);ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
   dq_card(ctx,x,y,w,h,{on:o.on});dq_T(ctx,"DECEMBER'S LIST",x+DQ_PAD,y+46,{w:800,size:28,ls:3.5,col:DQ.soft});dq_T(ctx,"DEC26",x+w-DQ_PAD,y+46,{w:500,size:28,f:"mono",col:DQ.soft,align:"right"});
@@ -3153,7 +3153,7 @@ scene("bones",(ctx,S,t,sc)=>{const c=sc.cues,P=hf_once(sc,"P",()=>({draws:wAt(sc
    stopped, the list keeping the night before's names, and Sam told; the two levels side by side. */
 const HF_FB_DONE={spine:1,head:1,bones:{people:1,process:1,systems:1,interfaces:1},note:1,cards:{pa:1,pb:1,pr:1,sa:1,sb:1,in:1},line:1};
 const HF_HELD=[{k:"S-19733",v:"Fonseca de Albuquerque Cavalca",mark:"hold"},{k:"S-19655",v:"Venkatasubramanian Gopalakrish",mark:"hold"},{k:"S-17090",v:"NOVAK",mark:"hold"},{k:"S-16702",v:"O'CONNELL",mark:"hold"},{k:"S-17305",v:"MARQUES",mark:"hold"}];
-const HF_DEC=[["Andres Penaloza","Andrés Peñaloza"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Therese Lavoie","Thérèse Lavoie"]];
+const HF_DEC=[["Joaquin Ibanez","Joaquín Ibáñez"],["Zoe Marchand","Zoé Marchand"],["Ana Lucia Brandao","Ana Lúcia Brandão"],["Therese Lavoie","Thérèse Lavoie"]];
 scene("born",(ctx,S,t,sc)=>{const c=sc.cues,P=hf_once(sc,"P",()=>({owner:wAt(sc,"fixed","with its owner"),team:wAt(sc,"night","the student system team"),sam:wAt(sc,"night","Sam"),
     keeps:wAt(sc,"file","keeps every letter"),field:wAt(sc,"file","family name field"),hundred:wAt(sc,"file","a hundred"),
     once:wAt(sc,"mei","made once"),office:wAt(sc,"mei","Mei's office"),nocopy:wAt(sc,"mei","keeps no copy"),confirms:wAt(sc,"old","confirms"),first:wAt(sc,"old","graduating first"),

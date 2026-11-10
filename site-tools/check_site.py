@@ -4,6 +4,7 @@
     python site-tools/check_site.py
 
 It only reads files: no browser and no network (site-tools/smoke.py does the browser checks).
+Declared audio can resolve through per-film audio.json pointers; deployment and browser checks restore and verify its bytes.
 It prints what each check found, and exits with 1 if anything fails.
 
 What it checks, page by page (every .html under site/):
@@ -47,6 +48,7 @@ import subprocess
 import sys
 import tempfile
 import urllib.parse
+from media import available as media_available
 from collections import Counter, defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -377,7 +379,7 @@ def file_of(path):
         f = path + "index.html"
     else:
         f = path
-    if (WEB / f).is_file():
+    if media_available(WEB / f):
         return f, None
     if (WEB / f).is_dir():
         return None, "is a folder: add a trailing /"
@@ -1325,6 +1327,7 @@ def main():
         with tempfile.TemporaryDirectory() as tmp:
             tmp = pathlib.Path(tmp)
             shutil.copytree(ROOT / "site-tools", tmp / "site-tools")
+            shutil.copytree(ROOT / "modules", tmp / "modules")
             mds = [p for d in ["journey", "paths", "es/journey", "es/paths"] for p in WEB.glob(d + "/**/*.md")]
             for md in mds:
                 dst = tmp / "site" / md.relative_to(WEB)

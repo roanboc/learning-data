@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/written-once/soundtrack.mp3",
+      "size": 4662169,
+      "sha256": "15c5d29dca3d4cfaaa00cba21f58e3e36efc555d01f14bb24de4feffaeaf5acd",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/15c5d29dca3d4cfaaa00cba21f58e3e36efc555d01f14bb24de4feffaeaf5acd.mp3"
+    }
+  ]
+}

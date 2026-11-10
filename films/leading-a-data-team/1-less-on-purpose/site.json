@@ -1,0 +1,94 @@
+{
+  "kicker": "Minimalism in a team",
+  "kicker_es": "Minimalismo en un equipo",
+  "title_es": "Menos, a propósito",
+  "h1": "Less, on purpose: keep what people use, and stop the rest together",
+  "h1_es": "Menos, a propósito: conserva lo que se usa y deja el resto en equipo",
+  "lead": "In 2027 the university's data team runs 38 old reports, sits in standing meetings about eight hours a week each and gets about 60 alerts a week, most needing nothing. Helena Novak and the team ask who uses each thing, and for what, then stop the rest together, openly and so it can come back.",
+  "lead_es": "En 2027 el equipo de datos de la universidad mantiene 38 informes antiguos, pasa unas ocho horas semanales en reuniones fijas y recibe unas 60 alertas por semana. Helena Novak y el equipo preguntan quién usa cada cosa, y para qué, y dejan el resto juntos, a la vista y con vuelta atrás.",
+  "description": "A film about minimalism in leading a team, the first of Leading a data team in the module Leading data people: simpler is better, and it doesn't just happen; keep only what does a job, so that what's left is done well. Its roots are named once: kanso in Japanese aesthetics, lean's muda and Dieter Rams's \"less, but better\", beside a 2021 study in Nature that found people mostly add when they set out to improve something. In May 2027 Helena Novak's team puts everything it runs and attends on one wall (38 old reports, 17 unopened in a year; about eight hours of standing meetings a week each; about 60 alerts a week, most needing nothing), asks who uses each thing and for what, and stops the rest together and openly: the 17 reports switched off, not deleted, after writing to their last readers; a week with about three hours of meetings; about 12 alerts a week, each needing someone to act. Nobody's work is called waste. Each person gets about five hours a week back, and one rule keeps it: anything new needs a reader, a reason and an owner. It opens in Britain in 2010, where hundreds of government websites became one, GOV.UK, by doing less.",
+  "description_es": "Una película sobre el minimalismo al dirigir un equipo, la primera de Liderar un equipo de datos en el módulo Liderar equipos de datos: lo simple es mejor, y no ocurre solo; conservar solo lo que cumple una función, para que lo que queda se haga bien. Nombra una vez sus raíces: el kanso de la estética japonesa, la muda de lean y el «menos, pero mejor» de Dieter Rams, junto a un estudio de 2021 en Nature que halló que, cuando la gente se propone mejorar algo, casi siempre le agrega cosas. En mayo de 2027 el equipo de Helena Novak pone en una pared todo lo que mantiene y a lo que asiste (38 informes antiguos, 17 sin abrir en un año; unas ocho horas semanales de reuniones fijas por persona; unas 60 alertas por semana, la mayoría sin nada que hacer), pregunta quién usa cada cosa y para qué, y deja el resto en equipo y a la vista: los 17 informes apagados, sin borrar, tras escribir a sus últimos lectores; una semana con unas tres horas de reuniones; unas 12 alertas por semana, cada una con algo que hacer. Nadie llama desperdicio al trabajo de nadie. Cada persona recupera unas cinco horas semanales, y una regla las protege: todo lo nuevo necesita un lector, una razón y un responsable. Empieza en Gran Bretaña en 2010, donde cientos de sitios del gobierno se volvieron uno, GOV.UK, haciendo menos.",
+  "card": "Helena's team puts everything it runs on one wall, keeps what people use, and stops the rest, together and openly.",
+  "card_es": "El equipo de Helena pone en una pared todo lo que mantiene, conserva lo que se usa y deja el resto, juntos y a la vista.",
+  "chapters_es": {
+    "doless": "Hacer menos",
+    "wall": "Todo en una pared",
+    "use": "Para qué sirve cada cosa",
+    "stop": "Dejarlo, a la vista",
+    "roots": "Menos, pero mejor",
+    "time": "El tiempo que vuelve",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Britain, 2010 to 2012: do less",
+    "The government ran hundreds of websites, with the same advice in different words, for around 560 million pounds a year. A new team kept only what met a real need and wrote it again, and GOV.UK replaced the two main sites with far fewer pages. In tests, people finished more tasks, and faster."
+  ],
+  "past_es": [
+    "Gran Bretaña, de 2010 a 2012: hacer menos",
+    "El gobierno tenía cientos de sitios web, con el mismo consejo en distintas palabras, por unos 560 millones de libras al año. Un equipo nuevo conservó solo lo que cubría una necesidad real y lo reescribió, y GOV.UK reemplazó a los dos sitios principales con muchas menos páginas. En pruebas, la gente completó más tareas, y más rápido."
+  ],
+  "next_h": "You've seen how to do less on purpose. Next: how to improve what you keep, one small change at a time.",
+  "next_h_es": "Viste cómo hacer menos a propósito. Después: cómo mejorar lo que conservas, un cambio pequeño cada vez.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Government design principles",
+        "title_es": "Los principios de diseño del gobierno británico (en inglés)",
+        "line": "The principles GOV.UK's team first published in April 2012: the first, start with what people need; the second, do less.",
+        "line_es": "Los principios que el equipo de GOV.UK publicó en abril de 2012: el primero, empezar por lo que la gente necesita; el segundo, hacer menos.",
+        "href": "https://www.gov.uk/guidance/government-design-principles",
+        "href_es": "https://www.gov.uk/guidance/government-design-principles"
+      },
+      {
+        "title": "Directgov 2010 and beyond, by Martha Lane Fox",
+        "title_es": "Directgov 2010 and beyond, de Martha Lane Fox (en inglés)",
+        "line": "Her report of October 2010: one website for the whole of government, and one team that answers for what people find there.",
+        "line_es": "Su informe de octubre de 2010: un solo sitio para todo el gobierno, y un equipo que responda por lo que la gente encuentra ahí.",
+        "href": "https://www.gov.uk/government/publications/directgov-2010-and-beyond-revolution-not-evolution-a-report-by-martha-lane-fox",
+        "href_es": "https://www.gov.uk/government/publications/directgov-2010-and-beyond-revolution-not-evolution-a-report-by-martha-lane-fox"
+      },
+      {
+        "title": "People systematically overlook subtractive changes",
+        "title_es": "La gente pasa por alto los cambios que quitan (en inglés)",
+        "line": "The 2021 study in Nature: asked to make something better, people mostly add to it. Its summary is free to read.",
+        "line_es": "El estudio de 2021 en Nature: cuando se propone mejorar algo, la gente casi siempre le agrega cosas. Su resumen se lee gratis.",
+        "href": "https://www.nature.com/articles/s41586-021-03380-y",
+        "href_es": "https://www.nature.com/articles/s41586-021-03380-y"
+      },
+      {
+        "title": "Dieter Rams",
+        "title_es": "Dieter Rams",
+        "line": "The designer whose aim was \"less, but better\", and his ten principles of good design.",
+        "line_es": "El diseñador cuyo objetivo era «menos, pero mejor», y sus principios del buen diseño.",
+        "href": "https://en.wikipedia.org/wiki/Dieter_Rams",
+        "href_es": "https://es.wikipedia.org/wiki/Dieter_Rams"
+      },
+      {
+        "title": "Muda, lean's word for waste",
+        "title_es": "Lean, y su palabra muda, desperdicio",
+        "line": "Work that uses time and adds no value, as lean, which grew out of Japan's car factories, sees it.",
+        "line_es": "El trabajo que usa tiempo y no agrega valor, como lo ve lean, que nació en las fábricas de autos de Japón.",
+        "href": "https://en.wikipedia.org/wiki/Muda_(Japanese_term)",
+        "href_es": "https://es.wikipedia.org/wiki/Lean_manufacturing"
+      }
+    ],
+    "more": [
+      {
+        "text": "Kanso, simplicity, among the principles of Japanese aesthetics",
+        "text_es": "Kanso, la simplicidad, entre los principios de la estética japonesa",
+        "href": "https://en.wikipedia.org/wiki/Japanese_aesthetics",
+        "href_es": "https://es.wikipedia.org/wiki/Est%C3%A9tica_japonesa"
+      },
+      {
+        "text": "GOV.UK wins Design of the Year, the Government Digital Service's post of April 2013",
+        "text_es": "GOV.UK gana el Diseño del Año, la nota del Government Digital Service de abril de 2013 (en inglés)",
+        "href": "https://gds.blog.gov.uk/2013/04/17/gov-uk-wins-design-of-the-year-2013/",
+        "href_es": "https://gds.blog.gov.uk/2013/04/17/gov-uk-wins-design-of-the-year-2013/"
+      }
+    ]
+  }
+}

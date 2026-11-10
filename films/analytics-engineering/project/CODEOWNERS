@@ -84,6 +84,9 @@
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
 
+# The claims app: its owner, for the claims read where the app writes them
+/sources/claims_app/                                     hr@uni.example jun.park@uni.example
+
 # The workload agent's mart, its product and its mandate: its owner, and the data architect for the mandate
 /models/marts/workload/_workload__models.yml             anil.kurian@uni.example jun.park@uni.example
 /governance/4-data-products/teaching_workload.yml        anil.kurian@uni.example

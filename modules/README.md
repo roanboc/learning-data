@@ -75,7 +75,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-as-software/`
 
-No film source yet.
+- [A platform that watches itself](../films/data-as-software/2-a-platform-that-watches-itself/) — `a-platform-that-watches-itself`
 
 ### From tables to decisions
 

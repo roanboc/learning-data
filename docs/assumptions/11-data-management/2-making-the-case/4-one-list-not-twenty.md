@@ -1,8 +1,8 @@
 # One list, not twenty: questions and assumptions
 
-*Data management* · *Making the case*, film 4 · open, PR #265 · [pull request](https://github.com/roanboc/learning-data/pull/265)
+*Data management* · *Making the case*, film 4 of 4 · merged, PR #265 · [pull request](https://github.com/roanboc/learning-data/pull/265)
 
-On the site once PR #265 merges: https://data.learn-all.org/making-the-case/one-list-not-twenty/
+[Watch it on the site](https://data.learn-all.org/making-the-case/one-list-not-twenty/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

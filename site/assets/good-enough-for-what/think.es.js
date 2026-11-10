@@ -1,0 +1,17 @@
+/* Learning Data: "Pausa para pensar" de Good enough for what?, en español. Mantén las claves iguales a think.en.js.
+   La película se detiene al final de tres capítulos (reprint, uses, needs), con una pregunta cada vez. think.js las muestra,
+   y las lista otra vez en "Piénsalo" (#think-list). La serie todavía no tiene labs, así que ninguna pregunta tiene "stop",
+   y el .player data-labs de la página está vacío. */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un lab",off:"Desactivar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Ver con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  "reprint":{q:"La lista pasó todos los controles y acomodó bien el Aula Magna, y aun así 41 diplomas se imprimieron de nuevo. ¿Qué muestra eso?",
+    opts:[{t:"La lista era buena: 41 de 2,031 son unos dos de cada cien, una parte pequeña."},{t:"Lo bastante buena para los asientos no lo es para los nombres: le faltan controles.",near:true},{t:"Lo bastante buena para los asientos no lo es para los nombres: depende del uso.",ok:true}],
+    why:"La lista pasó todos sus controles, y ninguno preguntaba qué necesita cada uso. Los asientos necesitan un conteo por ceremonia, y los conteos acertaron con pocos asientos de diferencia. Un diploma necesita el nombre de un graduado, exacto: el registro de Andrés le da bien su asiento e imprime un nombre que no es el suyo. Más controles, escritos antes de preguntar para qué sirve la lista, tampoco lo habrían visto. ¿Cuál de tus tablas se juzga buena o mala para todos sus usos a la vez?"},
+  "uses":{q:"¿Por qué el plano de asientos acepta un conteo con un 2% de margen, y los diplomas, cero errores?",
+    opts:[{t:"Unos asientos de diferencia cuestan unas sillas; un nombre mal, un diploma impreso de nuevo.",ok:true},{t:"Los asientos le importan menos a la universidad, así que sus controles pueden ser más flojos."},{t:"Unos asientos de diferencia cuestan unas sillas; un nombre mal es más fácil de revisar.",near:true}],
+    why:"Malia, Mei y Jun preguntaron quién usa la lista, para qué, y qué sale mal, y para quién, cuando está mal. Un conteo con unos asientos de diferencia significa unos asientos de sobra, o unas sillas más, ese día. Un nombre mal significa un diploma impreso de nuevo, unos 120 dólares con su mensajería, y un graduado que puede cruzar el escenario con una carpeta vacía. Cada nivel sale de lo que cuesta un error para su uso, no de lo fácil que es revisarlo. ¿Qué cuesta un error en tu tabla más usada, y a quién?"},
+  "needs":{q:"El registro de Andrés guarda su nombre sin sus tildes. ¿Qué dimensión falla, y para qué uso?",
+    opts:[{t:"Completo, para su diploma: la lista guarda un nombre, pero no todas sus letras.",near:true},{t:"Exacto, para su diploma: la lista guarda un nombre, pero no el que él tiene de verdad.",ok:true},{t:"Válido, para los asientos: un nombre sin sus tildes rompe la regla para escribir nombres."}],
+    why:"Completo pregunta si cada graduado que cruza el escenario está en la lista, una vez, y Andrés está: un graduado, un asiento. Andres Penaloza también es un nombre válido. Solo que no es el suyo: un diploma necesita el nombre que su graduado tiene de verdad, y eso es exactitud. Cada uso se apoya en sus propias dimensiones, como la carta de Mercator prefirió los ángulos a los tamaños. ¿En qué dimensión se apoya tu uso más importante?"}
+  }}};

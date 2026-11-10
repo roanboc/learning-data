@@ -1,9 +1,13 @@
 name: governance review agent
 kind: application component
+agent: 'yes'
 definition: Software that reviews a pull request against governance's rules (the project's skills/review-for-governance/).
 owner: Yusuf Demir, data governance lead
 relationships:
 - assignment: governance reviewer
+  stage:
+    review a pull request: 1
+    draft what's missing: 1
 rights:
   may: read everything, draft owners, classes, terms' requests and tests, flag
   may not: approve, edit the glossary, weaken a test

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/one-person-many-systems/soundtrack.mp3",
+      "size": 4007906,
+      "sha256": "a908101c21eb5094f17cf1feaafca58e68af7ac61c5456dc0958053b3b4a3236",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/a908101c21eb5094f17cf1feaafca58e68af7ac61c5456dc0958053b3b4a3236.mp3"
+    }
+  ]
+}

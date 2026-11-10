@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [From a branch to production](https://data.learn-all.org/locks-before-the-data/from-a-branch-to-production/) | A reviewed path to production | 9 min | 8 | 3 questions | [script](8-from-a-branch-to-production/script.md) · [source](8-from-a-branch-to-production/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

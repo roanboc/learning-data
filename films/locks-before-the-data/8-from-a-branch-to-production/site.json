@@ -11,16 +11,16 @@
   "description_es": "Una película sobre la única entrada a producción, la octava de Cerraduras antes que los datos: la constitución de Sudáfrica de 1996, escrita por una asamblea elegida frente a 34 principios fijados antes y que nadie podía cambiar, devuelta en nueve puntos por un tribunal que no la escribió, y certificada cuando se corrigieron los nueve; un proceso nocturno cuyo código pasaba directo de main a producción; un conjunto de reglas en main que nadie puede saltarse, y propietarios del código leídos de main, para que ningún cambio elija quién lo revisa; un cambio probado en una copia propia de su autor, devuelto por una línea que escribía filas de estudiantes en un log, y aprobado en su último push; un despliegue que va primero a pruebas, espera a quien aprueba las entregas sin haberlo iniciado, y entra en Databricks solo desde el trabajo que esperó; acciones fijadas a los commits revisados, actualizadas con revisión; y un token que solo lee.",
   "card": "Rules set before the change, a reviewer who didn't write it, and a machine that deploys only after a second yes.",
   "card_es": "Reglas fijadas antes del cambio, alguien que no lo escribió lo revisa, y una máquina despliega solo tras un segundo sí.",
-  "chapters_es": [
-    "Primero los principios",
-    "Devuelto",
-    "Todavía sin control",
-    "Primero las reglas",
-    "Devuelto, corregido, revisado otra vez",
-    "La llave abre una sola puerta",
-    "Código de otros",
-    "En vigor a las dos"
-  ],
+  "chapters_es": {
+    "principles": "Primero los principios",
+    "sent": "Devuelto",
+    "nogate": "Todavía sin control",
+    "rules": "Primero las reglas",
+    "review": "Devuelto, corregido, revisado otra vez",
+    "door": "La llave abre una sola puerta",
+    "supply": "Código de otros",
+    "force": "En vigor a las dos"
+  },
   "past": [
     "South Africa, 1993 to 1997: principles fixed first, and a constitution certified by a court that hadn't written it",
     "Production changes only through a reviewed path."
@@ -64,8 +64,8 @@
       {
         "title": "GitHub: secure use reference",
         "title_es": "GitHub: referencia de uso seguro",
-        "line": "Pinning actions to a full commit, workflow dependency lockfiles, and keeping the workflow's token to the least it needs.",
-        "line_es": "Fijar acciones a un commit completo, los lockfiles de dependencias de flujos, y dejar al token del flujo lo mínimo que necesita.",
+        "line": "Pinning actions to a full commit; workflow dependency lockfiles, which also pin the actions an action calls; and keeping the workflow's token to the least it needs.",
+        "line_es": "Fijar acciones a un commit completo; los lockfiles de dependencias de flujos, que fijan también las acciones que llama una acción; y dejar al token del flujo lo mínimo que necesita.",
         "href": "https://docs.github.com/en/actions/reference/security/secure-use",
         "href_es": "https://docs.github.com/es/actions/reference/security/secure-use"
       },

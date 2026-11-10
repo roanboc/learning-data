@@ -67,12 +67,13 @@ scene("sent",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     fixes:wAt(sc,"weeks","fixes"),amended:wAt(sc,"weeks","amended"),cert:wAt(sc,"certifies","certifies"),
     signs:wAt(sc,"signs","signs"),force:wAt(sc,"signs","comes into force"),
     judges:wAt(sc,"both","judges"),promises:wAt(sc,"both","promises"),counted:wAt(sc,"both","counted")}));
-  // where the text is: at the Assembly, gliding to the bench, back to the Assembly, and to the bench again
-  const AX=430,BX=1430,TY=330,go=(t0,t1)=>ag_sine(clamp((t-t0)/(t1-t0),0,1));
-  const bx=()=>{let x=AX;x=lerp(x,BX,go(P.members+0.6,c.declines-0.6));x=lerp(x,AX,go(c.weeks+0.2,c.weeks+2.6));x=lerp(x,BX,go(P.amended+0.6,c.certifies-0.2));return x;};
+  // where the text is: at the Assembly, gliding to the bench, back to the Assembly, and to the bench again; each glide starts with
+  // the camera's and moves as it does (its ease, over the shot's d), so the camera keeps the text in the frame all the way
+  const AX=430,BX=1430,TY=330,go=t0=>easeCam(clamp((t-t0)/2.4,0,1));
+  const bx=()=>{let x=AX;x=lerp(x,BX,go(P.members+0.6));x=lerp(x,AX,go(c.weeks+0.2));x=lerp(x,BX,go(P.amended+0.6));return x;};
   const marks=()=>{const on=ag_in(t,c.nine+0.2,0.4);return Array.from({length:9},(_,i)=>{const g=clamp((t-(P.fixes+0.3+i*0.42))/0.5,0,1);return on>0?(g>0?g:-on):0;});};
   ag_shots(ctx,S,t,sc.dur,[
-    {at:0,place:"bpChamber",keys:[[0,960,540,1.0],[0.5,640,500,1.18],[P.members+0.6,1120,470,1.18],[c.declines-0.6,1300,470,1.28],[c.weeks+0.2,700,470,1.22],[P.amended+0.6,1240,470,1.24]],d:2.4,draw:(x,t)=>{
+    {at:0,place:"bpChamber",keys:[[0,960,540,1.0],[0.5,640,500,1.18],[P.members+0.6,1300,470,1.28],[c.weeks+0.2,700,470,1.22],[P.amended+0.6,1240,470,1.24]],d:2.4,draw:(x,t)=>{
       bp_seatsLit(x,{blocks:BP_PARTY.map(()=>0.6),all:1-0.4*ag_in(t,P.members+0.4,1.0)+0.4*ag_in(t,c.weeks+0.2,0.8)-0.4*ag_in(t,P.amended+0.6,1.0)});
       bp_benchLit(x,1);bp_tablet(x,680,70,{a:1-ag_in(t,0.3,0.8)});
       const X=bx();bp_book(x,X,TY,{marks:marks(),glow:ag_in(t,P.cert,1.2)*(1-ag_in(t,P.cert+1.4,0.8))});
@@ -163,8 +164,9 @@ scene("review",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
   ag_shots(ctx,S,t,sc.dur,[
     // the hall: Jun at the left; the morning the load stopped on a row it couldn't read; now the job sets such a row aside
     {at:0,place:"bpHall",d:2.2,keys:[[0,960,540,1.0],[c.branch+0.3,800,600,1.2]],draw:(x,t)=>{const dv=ag_in(t,P.dev+0.2,0.6);
-      // (the development room's name is under Jun's page, so it leaves as the page comes in; the tray's name comes once the row is in it)
-      bp_hall(x,t,{rooms:[1-dv,1,1],doorLit:1,track:{a:1},main:1,gates,branch:ag_in(t,P.branchW-0.2,1.6),
+      // (the development and test rooms' names are under Jun's page, so they leave as it comes in; production's leaves as the camera
+      // glides in, before the frame's edge cuts it; the tray's name comes once the row is in it)
+      bp_hall(x,t,{rooms:[1-dv,1-dv,1-ag_in(t,c.branch+0.3,1.0)],doorLit:1,track:{a:1},main:1,gates,branch:ag_in(t,P.branchW-0.2,1.6),
         recs:{a:1,flow:1,lit:1,bad:[3,ag_in(t,P.read-0.2,0.5)],aside:[3,ag_in(t,P.asideW,1.1)]},tray:ag_in(t,P.asideW-0.5,0.5),trayName:ag_in(t,P.asideW+1.0,0.5)});
       bp_left(x,"sam",t,1-ag_in(t,0,0.5));bp_left(x,"jun",t,ag_in(t,0.7,0.6));
       const am=ag_io(t,P.admin-0.4,c.aside+0.2,0.5);if(am>0)dp_card(x,700,110,560,{kick:"Power you switch on",title:"Jun's admin account",sub:"Switched on to read last night's file"},{col:"amber",a:am,k:ag_spr(t,P.admin-0.4,0.6)});
@@ -237,12 +239,14 @@ scene("door",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
     // the hall: the note for one sign-in fits production's lock; one from another branch stops short; the bundle deploys, the job
     // runs as registrar-loader, and people may only look
     {at:c.asks-0.3,place:"bpHall",cut:true,d:2.2,keys:[[c.asks-0.3,1209,570,1.35],[c.deploys-0.3,1209,590,1.35],[P.two-0.4,960,540,1.0]],draw:(x,t)=>{
-      const nu=ag_sine(clamp((t-c.asks-0.2)/2.2,0,1)),inn=ag_in(t,c.deploys-0.4,0.8),ou=ag_sine(clamp((t-P.thisRepo)/1.6,0,1));
-      bp_hall(x,t,Object.assign({},base,{outline:1,runner:{a:1,u:1},priv:0.35,track:{a:1,lit:[0,ag_in(t,P.machineW,1.6),1]},
+      const nu=ag_sine(clamp((t-c.asks-0.2)/2.2,0,1)),inn=ag_in(t,c.deploys-0.4,0.8),ou=ag_sine(clamp((t-P.thisRepo)/1.6,0,1)),pg=ag_io(t,P.prodMode-0.4,P.two-0.4,0.6);
+      // (production's name is under Databricks' page while it shows; main's, off the frame while the camera is close, comes in once
+      // the camera has glided back far enough to show all of it)
+      bp_hall(x,t,Object.assign({},base,{rooms:[1,1,1-pg],main:ag_in(t,P.two+0.3,0.8),outline:1,runner:{a:1,u:1},priv:0.35,track:{a:1,lit:[0,ag_in(t,P.machineW,1.6),1]},
         gates:bp_gates(t,{lit:[0,1,2,3].map(i=>ag_in(t,P.two+i*0.3,0.5))}),lock:{a:1,lit:ag_in(t,P.letsIn,0.6),open:ag_in(t,c.deploys-0.2,0.6)},
         note:{a:1-inn,x:lerp(640,1110,nu),y:524,sub:"Environment production"},
         other:{a:ag_in(t,P.thisRepo-0.2,0.5)*(1-ag_in(t,P.waited+0.4,0.6)),x:lerp(560,1120,ou),y:392,stop:ag_in(t,P.thisRepo+1.7,0.5)}}));
-      const pg=ag_io(t,P.prodMode-0.4,P.two-0.4,0.6);if(pg>0){const b=bp_dbJob(x,1115,225,750,420,{a:pg,where:"production",title:"registrar_nightly_load"});
+      if(pg>0){const b=bp_dbJob(x,1115,225,750,420,{a:pg,where:"production",title:"registrar_nightly_load"});
         dp_field(x,b.x,b.y+10,"Run as","registrar-loader",{mono:true,a:pg});dp_field(x,b.x+380,b.y+10,"Owner","registrar-loader",{mono:true,a:pg});
         const cv=ag_in(t,P.never-0.2,0.6);dp_T(x,"Platform team",b.x,b.y+170,{w:700,size:30,a:pg});dp_pill(x,b.x+250,b.y+170,"Can view",cv>0.5?"green":"grey",{size:28,a:pg});}}}]);
   bp_kickU(ctx,S,t,"The key fits one door",3.4);
@@ -312,7 +316,8 @@ scene("force",(ctx,S,t,sc)=>{const c=sc.cues,P=bp_once(sc,"P",()=>({
       const n2=t>=c.week+0.2,ra=n2?1:1-ag_in(t,c.week-0.3,0.5),fl=n2?ag_in(t,c.week+0.3,2.4):ag_in(t,P.reviewedC-0.3,2.6);
       const sl=ag_in(t,P.setsAside,1.1)-ag_in(t,P.fixesW+0.4,1.1),bad=n2?ag_in(t,P.unread-0.2,0.5)*(1-ag_in(t,P.fixesW+0.8,0.6)):0;
       const two=t<c.week+0.25?{a:ag_io(t,0.4,c.week-0.3,0.5),text:"Wednesday 11 November · 02:00",y:215}:{a:ag_io(t,c.week+0.3,c.office-0.3,0.5),text:"Wednesday 18 November · 02:00",y:215};
-      bp_hall(x,t,{rooms:1,doorLit:1,main:1,track:{a:1,lit:[0,1,1]},gates:bp_gates(t,{lit:[1,1,1,1]}),lock:{a:1,lit:1,open:1},two,
+      // (main's name leaves as the camera glides in past it, and comes back as it glides out; the rooms' names leave under the end card)
+      bp_hall(x,t,{rooms:1-ag_in(t,c.breath,0.6),doorLit:1,main:clamp(1-ag_in(t,c.two+0.4,1.2)+ag_in(t,c.office+0.4,0.8),0,1),track:{a:1,lit:[0,1,1]},gates:bp_gates(t,{lit:[1,1,1,1]}),lock:{a:1,lit:1,open:1},two,
         recs:{a:ra,flow:fl,lit:1,bad:[5,bad],aside:[5,clamp(sl,0,1)]},tray:ag_in(t,P.setsAside-0.5,0.5)*(1-ag_in(t,P.nine+0.6,0.6)),trayName:ag_in(t,P.setsAside+1.0,0.5)*(1-ag_in(t,P.fixesW+0.2,0.4)),
         pulse:{u:t<P.ecr?ag_in(t,P.faster-0.2,1.8):ag_in(t,P.ecr+0.6,3.4),a:ag_io(t,P.faster-0.2,P.faster+1.8,0.3)+ag_io(t,P.ecr+0.6,P.ecr+4.0,0.3)},
         agent:ag_in(t,P.agentW-0.2,0.6)});

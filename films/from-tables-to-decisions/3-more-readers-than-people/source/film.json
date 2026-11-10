@@ -1,0 +1,54 @@
+{
+  "key": "more-readers-than-people",
+  "title": "More readers than people",
+  "sub": "The third and last film of From tables to decisions, in Modern data basics: one definition of casual teaching cost, read where it's defined by every reader, people, Finance's Power BI reports, an app, an agent and a partner outside the university, each as itself, with only what it may see.",
+  "howto": "The film is drawn in the module's look: the dark navy platform map of The Inner Life of Data, drawn up close. Gold is what people agree on, here the measure; light blue is the platform and the ways data moves; green is what works, red what went wrong, amber a person's turn, and lilac, always with a lock, personal data.",
+  "src": [
+    "world.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "signs",
+    "right",
+    5.7
+  ],
+  "say": [
+    [
+      "\\bRohan\\b",
+      "Roe-han"
+    ],
+    [
+      "\\bDesai\\b",
+      "Deh-sigh"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR's\\b",
+      "H R's"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bBI\\b",
+      "B I"
+    ]
+  ],
+  "story": [
+    "signs"
+  ],
+  "urgent": [],
+  "logos": true
+}

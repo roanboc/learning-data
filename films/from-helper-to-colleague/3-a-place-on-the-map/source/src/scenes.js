@@ -225,7 +225,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     ticket:wAt(sc,"process","Each ticket"),cadp:wAt(sc,"process","change a data product"),seven:wAt(sc,"process","seven steps"),prod:wAt(sc,"process","to production"),
     step:wAt(sc,"roles","Each step"),role:wAt(sc,"roles","to a role"),person:wAt(sc,"roles","a person or an agent"),
     newr:wAt(sc,"contrib","One new role"),drafts:wAt(sc,"contrib","drafts the change"),builds:wAt(sc,"contrib","builds it"),opens:wAt(sc,"contrib","opens a pull request"),
-    rest:wAt(sc,"people","People keep the rest"),jun:wAt(sc,"people","Jun reviews"),clara:wAt(sc,"people","Clara approves"),noor:wAt(sc,"people","Noor releases"),
+    rest:wAt(sc,"people","People keep the rest"),clara:wAt(sc,"people","Clara raises"),jun:wAt(sc,"people","Jun reviews"),noor:wAt(sc,"people","Noor approves"),rel:wAt(sc,"people","releases it"),
     so:wAt(sc,"sod","So whoever drafts"),never:wAt(sc,"sod","never approves"),sep:wAt(sc,"sod","separation of duties"),
     then:wAt(sc,"agent","Then Noor"),assigned:wAt(sc,"agent","assigned the planning agent"),that:wAt(sc,"agent","to that role"),owner:wAt(sc,"agent","Clara as its owner"),had:wAt(sc,"agent","it had its place"),
     may:wAt(sc,"may","Its role"),m:[wAt(sc,"may","read the project"),wAt(sc,"may","draft on"),wAt(sc,"build","build in"),wAt(sc,"build","open a pull")],
@@ -236,7 +236,7 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
     same:wAt(sc,"workload","The same day"),wl:wAt(sc,"workload","workload agent"),ident:wAt(sc,"workload","its own identity"),noplace:wAt(sc,"workload","no place on the map"),
     st:wAt(sc,"stages","Its stage"),ass:wAt(sc,"stages","on its assignment"),
     three:wAt(sc,"three","three agents"),role3:wAt(sc,"three","a role"),owner3:wAt(sc,"three","an owner"),third:wAt(sc,"third","The third"),never3:wAt(sc,"third","never approves")}));
-  const who=[T.jun,T.clara,T.noor];
+  const who=[T.clara,T.jun,T.noor],stepWho=[T.clara,0,0,0,T.jun,T.noor,T.rel];
   ag_shots(ctx,S,t,sc.dur,[
     // a week before it started, Noor, the data architect, gives the planning agent a place on the university's map
     {later:true,at:0,place:"cjWall",keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{const gt=cj_gt(sc,tt);
@@ -254,14 +254,14 @@ scene("map",(ctx,S,t,sc)=>{const T=cj_once(sc,"T",()=>({
       ag_roomLight(cx,1);
       // Planning's tickets, under the capability they serve; gone before the steps come in where they lie
       cj_tickets(cx,70,256,{a:ag_in(tt,T.tix-0.2,0.4)*(1-ag_in(tt,T.seven-0.9,0.4)),k:Math.min(1,ag_spr(tt,T.tix-0.2,0.5))});
-      const dim=ag_in(tt,T.may-0.6,0.6),drafting=i=>i>=1&&i<=3,people=i=>i>=4;
+      const dim=ag_in(tt,T.may-0.6,0.6),drafting=i=>i>=1&&i<=3,people=i=>i===0||i>=4;
       cj_process(cx,{spring:true,dim,keep:k=>["r1","s1","s2","s3","agent"].indexOf(k)>=0,
         cap:ag_in(tt,T.cap-0.2,0.5),srv:ag_in(tt,T.cadp-0.3,0.5),srvLine:clamp((tt-T.cadp-0.2)/0.9,0,1),
         step:i=>ag_in(tt,T.seven-0.3+i*0.16,0.4),bracket:clamp((tt-T.prod+0.2)/1.2,0,1),
         role:k=>ag_in(tt,T.role-0.2+k*0.18,0.4),roleLine:k=>clamp((tt-(T.role+0.3+k*0.18))/0.7,0,1),
         who:k=>ag_in(tt,who[k]-0.15,0.4),whoLine:k=>clamp((tt-(who[k]+0.25))/0.6,0,1),
         agent:ag_in(tt,T.assigned-0.1,0.5),agentLine:clamp((tt-T.that)/0.9,0,1),owner:clamp((tt-T.owner+0.1)/1.2,0,1),
-        tint:i=>drafting(i)?[AG.blue,ag_in(tt,[T.drafts,T.builds,T.opens][i-1]-0.15,0.4)]:people(i)?[AG.green,ag_in(tt,who[i-4]-0.15,0.4)]:null,
+        tint:i=>drafting(i)?[AG.blue,ag_in(tt,[T.drafts,T.builds,T.opens][i-1]-0.15,0.4)]:people(i)?[AG.green,ag_in(tt,stepWho[i]-0.15,0.4)]:null,
         divide:clamp((tt-T.so+0.2)/1.0,0,1),
         glow:k=>(k==="r1"&&ag_io(tt,T.newr-0.1,T.rest-0.2,0.4)>0.5)||(drafting(+k.slice(1))&&k[0]==="s"&&ag_io(tt,T.where-0.1,T.same+2,0.4)>0.5)?AG.blue:
           k==="agent"&&ag_io(tt,T.assigned,T.may-0.4,0.4)>0.5?AG.violet:null});

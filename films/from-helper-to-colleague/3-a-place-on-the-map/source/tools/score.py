@@ -267,8 +267,8 @@ trombas((A2, E3), pw('noor', "university's map", -0.2), pw('noor', "university's
 tap(pw('work', 'the capability', -0.2), 0.008, px(300)); paper(pw('work', "Planning's tickets", -0.2), 0.011, px(270))
 P_br = pw('process', 'to production', -0.2)
 trombas((A2, E3, A3), P_br + 0.4, P_br + 3.6, 0.48, [-0.4, 0.0, 0.4])
-for i, (w_, m) in enumerate((('Jun reviews', E3), ('Clara approves', A3), ('Noor releases', E4))):
-    tromba(m, pw('people', w_, -0.15), pw('people', w_, 2.6), 0.5, px(1474 + 258 * (i - 1)))
+for w_, m, x_ in (('Clara raises', A3, 184), ('Jun reviews', E3, 1216), ('Noor approves', E4, 1603)):
+    tromba(m, pw('people', w_, -0.15), pw('people', w_, 2.6), 0.5, px(x_))
 lock(pw('sod', 'never approves', -0.2), 0.010, px(1087))
 mark(pw('agent', 'Then Noor'), pw('agent', 'assigned the planning agent', -0.1), pw('agent', 'Clara as its owner', 0.6), 0.75, px(700), (1, 2, 0), 0.0)
 pencil(pw('agent', 'Clara as its owner', 0.1), 1.0, 0.006, px(1090))

@@ -2247,7 +2247,7 @@ function br_stages(ctx,x,y,w,o){o=o||{};
     FACTS=[["Yours, but it uses none","Drafts in a chat; runs nothing","Accepts or rejects every line"],
       ["Yours, delegated","Runs queries in your session, read only","Approves each action"],
       ["Yours, narrowed","Works alone; drafts only in a sandbox","Checks it against the checks set first"],
-      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it, and reviews every change"],
+      ["Its own, with no secret it can see","Opens a pull request from its own space","Owns it; the data team reviews it"],
       ["Its own","In test, agreed tasks alone, then a report","Another person approves production"]],
     BLUE=[38,102,132],GREEN=[50,116,80],OAK={base:[208,188,156],dark:[156,136,106],hi:[242,233,216]};
   const a=o.a==null?1:o.a,k=w/1660,bw=300*k,gap=40*k,rise=86*k,depth=16*k,ch=128,sm=o.short===true?1:clamp(o.short||0,0,1),arr=(v,i,d)=>v==null?d:(v===true?1:(Array.isArray(v)?(v[i]==null?d:v[i]):v));

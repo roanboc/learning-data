@@ -1,10 +1,11 @@
 # A worked example: Tuesday's change, and what it touches
 
-On Tuesday, Jun Park's first draft counts microcredentials of 6 credit points or more as awards, by
-relabelling them in `int_credentials_unioned`. No column changes, so no contract breaks; but the
-impact check writes into the pull request what the change reaches: five reports and apps, and four
-owners to ask. Mei Tanaka, who owns what an award means, says a change of meaning breaks even when
-the columns don't. So the second draft keeps every credential as it was and adds a column instead,
+The meaning came first: on Monday, Mei Tanaka, who owns what an award means, changed it in the
+glossary (*Meaning on the platform*). On Tuesday, Jun Park's first draft counts microcredentials of
+6 credit points or more as awards, by relabelling them in `int_credentials_unioned`. No column
+changes, so no contract breaks; but the impact check writes into the pull request what the change
+reaches: five reports and apps, and four owners to tell. The data team's review says a change of
+meaning breaks even when the columns don't. So the second draft keeps every credential as it was and adds a column instead,
 `counts_as_award`, to `core_credential` version 2 (not version 1, which is frozen until its
 deprecation date). The check calls it additive, with three owners to tell. A sketch then renames the
 column, and the check fails: a breaking change needs a new version. *Governed in dbt*, the opening film of
@@ -14,7 +15,7 @@ column, and the check fails: a breaking change needs a new version. *Governed in
 |---|---|
 | `report_exposures.patch` | Two exposures for the reports that count awards, which read credentials: Planning's `census_report`, and the registrar's office's `draft_submission`, against commit `00161b92` |
 | `relabel.patch` | The first draft: microcredentials of 6 credit points or more relabelled as awards |
-| `impact_relabel.md` | The impact check's report on it: 5 exposures, 4 owners to ask |
+| `impact_relabel.md` | The impact check's report on it: 5 exposures, 4 owners to tell |
 | `counts_as_award.patch` | The second draft, on top of the first: the relabel goes, and `counts_as_award` comes, reading a var, `min_award_credit_points: 6` |
 | `impact_counts_as_award.md` | The report: "additive: added counts_as_award", 3 exposures, 3 owners |
 | `renamed.patch` | A sketch, on top of the second draft: the column renamed `is_award` |

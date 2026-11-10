@@ -1,7 +1,7 @@
 /* ===== Late is wrong too: the university's things, on the quality bench =====
    This film's own pictures for the bench, in the kit's look (films/fit-for-use/shared, never changed for one film): the bench at night
    under its lamp (lw_night, the same room as the bench by day, so the morning comes in a glide), the student system and its nightly
-   file, the graduation list, the platform's monitoring and dbt's freshness check, the uses and their clocks, the list's contract, the
+   file, the graduation list, the platform's monitoring and dbt's freshness check, the uses and their clocks, the list's rule in dbt, the
    six dimensions as Rules that run left them, the list with its age, the printer's page, and the jobs with their run conditions. Brass
    is the requirement (how fresh a use needs the list), steel blue a measure (how old the data is), the verdicts' colours their
    verdicts; nothing else here uses them. Every top-level name starts with lw_ or LW_. */

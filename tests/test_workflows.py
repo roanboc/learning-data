@@ -72,7 +72,9 @@ class WorkflowTests(unittest.TestCase):
         # The live commit comes from the site itself: a Pages deployment records main's newest commit, not the built one.
         self.assertIn('/version.txt?t=', deploy)
         self.assertIn("git rev-parse HEAD > site/version.txt", deploy)
-        self.assertRegex(deploy, r"if: steps.newer.outputs.go == 'true'\n        uses: actions/deploy-pages@v\d+\n        with:\n          timeout: \d{7,}\n")
+        # deploy-pages waits 10 minutes at most, so a deployment that times out is tried once more.
+        self.assertRegex(deploy, r"id: deployment\n        if: steps.newer.outputs.go == 'true'\n        continue-on-error: true\n        uses: actions/deploy-pages@v\d+\n")
+        self.assertIn("if: steps.newer.outputs.go == 'true' && steps.deployment.outcome == 'failure'\n        uses: actions/deploy-pages@", deploy)
 
 
 if __name__ == "__main__":

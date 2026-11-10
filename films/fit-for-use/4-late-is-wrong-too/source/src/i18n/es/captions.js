@@ -102,8 +102,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Una lista, tres relojes. El más estricto fija el nivel: un día como máximo, al enviarla.",
 "A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves.":
 "Un archivo nocturno lo cumple. Para datos más frescos, Caliente, tibio, frío muestra cómo se mueven.",
-"Malia agrees it, Mei owns it, and it goes in the list's contract.":
-"Malia lo acuerda, Mei es su responsable, y va al contrato de la lista.",
+"Malia agrees it, Mei owns it, and it goes beside the list's columns, in dbt.":
+"Malia lo acuerda, Mei es su responsable, y va junto a las columnas de la lista, en dbt.",
 "Rules that run left timeliness in pencil, with no checks. This is its first rule.":
 "Reglas que se ejecutan dejó la puntualidad a lápiz, sin controles. Esta es su primera regla.",
 "From now on, the list says how old it is.":

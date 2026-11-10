@@ -55,7 +55,7 @@ const NARR={
  {"id":"planning","gap":0.8,"text":"Planning's count for the government comes after the year's end: weeks are fine."},
  {"id":"clocks","gap":0.8,"text":"One list, three clocks. The strictest sets the level: a day old at most, at the send."},
  {"id":"moves","gap":0.8,"text":"A nightly file meets it. For fresher data, Hot, warm, cold shows how it moves."},
- {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes in the list's contract."},
+ {"id":"contract","gap":0.8,"text":"Malia agrees it, Mei owns it, and it goes beside the list's columns, in dbt."},
  {"id":"pencil","gap":1.0,"text":"Rules that run left timeliness in pencil, with no checks. This is its first rule."}
 ]},
 "age":{"name":"Say how old it is","lead":1.0,"tail":1.0,"vo":[

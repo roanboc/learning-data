@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:03.428
+Rome, in the year 97.
+
+00:00:04.728 --> 00:00:10.293
+Nine aqueducts bring the city its water from the hills, most of the way in channels under the ground.
+
+00:00:12.393 --> 00:00:16.317
+In the city, it fills distribution tanks, and pipes carry it on:
+
+00:00:16.517 --> 00:00:23.461
+to public basins and fountains, to baths, and to houses that hold a grant from the emperor, for so much water.
+
+00:00:25.161 --> 00:00:29.844
+That year, the emperor Nerva makes Sextus Julius Frontinus the water commissioner,
+
+00:00:30.044 --> 00:00:34.134
+an office, he writes, that concerns the city's health, and even its safety.
+
+00:00:35.634 --> 00:00:42.999
+Frontinus measures the water where it enters the channels, and finds about ten thousand measures more than the records give out.
+
+00:00:44.899 --> 00:00:46.670
+On the way, it's being drawn off.
+
+00:00:47.970 --> 00:00:51.986
+Water-men, who tend the pipes, divert it for private use, and sell it.
+
+00:00:53.486 --> 00:00:57.191
+Landowners along the way tap the channels to water their gardens.
+
+00:00:58.691 --> 00:01:04.141
+Under the pavements, secret pipes are bored here and there, with branches to the shops along them.
+
+00:01:06.041 --> 00:01:11.815
+So only a little reaches the public basins and fountains, which should run day and night for the people,
+
+00:01:12.015 --> 00:01:13.511
+and some stop altogether.
+
+00:01:15.211 --> 00:01:17.113
+Nobody can say who draws what.
+
+00:01:18.613 --> 00:01:20.053
+Something has to change.
+
+00:01:24.153 --> 00:01:26.380
+Frontinus holds the city to its rules.
+
+00:01:27.480 --> 00:01:29.627
+No one may draw water from the channels.
+
+00:01:31.327 --> 00:01:38.177
+Whoever holds a grant draws it only at a distribution tank, through a bronze nozzle stamped with the size granted,
+
+00:01:38.377 --> 00:01:40.232
+and every grant is in the records.
+
+00:01:41.932 --> 00:01:47.399
+The secret branch pipes come out, and so much lead comes back that he estimates the theft by it.
+
+00:01:49.499 --> 00:01:53.227
+And the gangs who keep the channels, often sent off to private work,
+
+00:01:53.427 --> 00:01:57.920
+now write down the day before what each will do, and the records keep what each did.
+
+00:01:59.620 --> 00:02:04.360
+Frontinus wrote that the supply almost doubled, as though new springs had been found.
+
+00:02:05.860 --> 00:02:09.701
+More basins and fountains ran for the people, the city was cleaner,
+
+00:02:09.901 --> 00:02:14.230
+and those who had drawn water in fear now drew it by grant, free from care.
+
+00:02:16.130 --> 00:02:20.253
+A data platform's files are its water, and its catalog is the tank:
+
+00:02:21.053 --> 00:02:25.195
+the one place to draw, where each grant is checked and every rule applied.
+
+00:02:26.695 --> 00:02:29.833
+Every way to the files around it is a hole in the channel.
+
+00:02:38.333 --> 00:02:46.372
+At the university, the data platform runs on Azure Databricks, in three workspaces now: development, test and production.
+
+00:02:48.072 --> 00:02:54.480
+Production's files, every table's data, sit in an Azure storage account, a container for each area.
+
+00:02:56.180 --> 00:02:59.326
+Unity Catalog is meant to be the only way to them.
+
+00:03:00.626 --> 00:03:05.525
+Sam Okafor, who runs the platform, counts the ways to the files that skip it.
+
+00:03:06.825 --> 00:03:09.827
+Two account keys, each of which opens every file.
+
+00:03:11.327 --> 00:03:19.317
+A link signed with one of them, made in 2024 for a supplier's one-off file, and good until the end of 2027.
+
+00:03:21.017 --> 00:03:26.237
+Six people with a role on the storage, each given for one task, and never taken back.
+
+00:03:27.937 --> 00:03:30.766
+Nine ways in, and not one asks the catalog.
+
+00:03:32.866 --> 00:03:38.327
+In the files, no grant, mask or filter applies: whoever reads them sees every row.
+
+00:03:40.027 --> 00:03:44.961
+And the workspaces and the storage all have a door on the internet, open to any address.
+
+00:03:46.661 --> 00:03:50.818
+Nobody did anything wrong: each was the quickest way to finish a task.
+
+00:03:54.518 --> 00:03:55.848
+First, the doors in.
+
+00:03:56.948 --> 00:04:02.739
+Sam gives each workspace a private endpoint: a door inside the university's own network,
+
+00:04:02.939 --> 00:04:05.530
+so people and jobs come in by a private path.
+
+00:04:07.230 --> 00:04:13.031
+The machines that run the jobs reach Databricks by a private path too, and so does the build service.
+
+00:04:14.731 --> 00:04:21.777
+While every team moves to it, for two weeks, an IP access list lets in only the university's own addresses.
+
+00:04:23.477 --> 00:04:27.213
+Then Sam switches public access off in all three workspaces:
+
+00:04:27.413 --> 00:04:30.141
+the platform has no door on the open internet.
+
+00:04:32.241 --> 00:04:33.351
+Then the ways out.
+
+00:04:34.451 --> 00:04:40.188
+Serverless compute, which Databricks runs for the university, could reach anywhere on the internet:
+
+00:04:40.388 --> 00:04:42.460
+a notebook could send a table anywhere.
+
+00:04:43.960 --> 00:04:50.731
+Production gets a network policy with restricted access: only the catalog's own storage, and a short list.
+
+00:04:52.431 --> 00:04:58.008
+For a week it runs in dry run: it blocks nothing yet, and Sam sees what it would have blocked.
+
+00:04:59.708 --> 00:05:03.295
+Then it's on: data may leave only for places on the list.
+
+00:05:07.195 --> 00:05:08.656
+Now the files themselves.
+
+00:05:09.756 --> 00:05:15.517
+Sam switches the storage's public access off: it's reached only by its own private endpoints.
+
+00:05:17.217 --> 00:05:21.859
+He switches off its account keys, and the storage refuses anything signed with them:
+
+00:05:22.059 --> 00:05:25.269
+the two keys and the supplier's link open nothing now.
+
+00:05:27.369 --> 00:05:33.355
+The six people's roles go; each now gets what they need through the catalog, under their group's grants.
+
+00:05:35.255 --> 00:05:40.458
+One identity keeps a role on the files: the catalog's own, its access connector,
+
+00:05:40.658 --> 00:05:44.253
+an identity Azure gives it, with no secret anyone holds.
+
+00:05:46.153 --> 00:05:53.362
+In Unity Catalog, a storage credential holds it, and an external location for each area points to its container.
+
+00:05:55.062 --> 00:06:01.523
+So every read of the files goes through the catalog, which checks the grant, and applies the masks and filters.
+
+00:06:03.423 --> 00:06:06.923
+Like Rome's tanks, the catalog is the one place to draw.
+
+00:06:10.823 --> 00:06:11.808
+One more wall.
+
+00:06:12.908 --> 00:06:16.054
+By default, every workspace reaches every catalog:
+
+00:06:16.254 --> 00:06:20.778
+a notebook in development, with a grant, could read production's real records.
+
+00:06:22.478 --> 00:06:25.349
+Sam binds each catalog to its own workspace:
+
+00:06:25.549 --> 00:06:31.258
+production's five, registrar, learning, planning, HR and finance, to production alone;
+
+00:06:31.458 --> 00:06:34.231
+test's to test; development's to development.
+
+00:06:36.131 --> 00:06:40.574
+The storage credential and the external locations are bound the same way.
+
+00:06:42.074 --> 00:06:47.202
+Now a grant isn't enough: from a workspace it isn't bound to, a catalog isn't there.
+
+00:06:51.302 --> 00:06:53.913
+The files keep one more door, and it stays shut.
+
+00:06:55.413 --> 00:06:57.494
+Some work needs the files themselves.
+
+00:06:58.594 --> 00:07:04.765
+One morning, the nightly load stops on a row it can't read, and Jun Park must open last night's file.
+
+00:07:06.465 --> 00:07:10.870
+On the storage, one group holds one role: read and list, nothing more.
+
+00:07:12.370 --> 00:07:15.355
+It's for admin accounts only, and no one is in it.
+
+00:07:17.055 --> 00:07:23.685
+Jun switches on his admin account's power to read the storage, for one hour, with a reason, and Sam approves.
+
+00:07:25.785 --> 00:07:30.218
+Jun comes in by the private path, reads that one file, and switches off.
+
+00:07:31.918 --> 00:07:38.204
+The storage's own log keeps every read, under the account that made it, and the platform team gets an alert.
+
+00:07:40.104 --> 00:07:43.436
+Had he forgotten, it would have shut by itself when the hour was up.
+
+00:07:44.936 --> 00:07:49.627
+Like the gangs in Rome, the work is written down before, and recorded as it's done.
+
+00:07:53.527 --> 00:07:54.627
+Last, the keys.
+
+00:07:55.727 --> 00:08:00.973
+The files were always encrypted, with a key the cloud provider kept for the university.
+
+00:08:02.473 --> 00:08:07.715
+Now the key is the university's own, kept by its security team in a vault of its own.
+
+00:08:09.415 --> 00:08:12.064
+The storage may use the key, never take it out.
+
+00:08:13.564 --> 00:08:18.651
+The people who run the platform can't delete it or turn it off, and every use is recorded.
+
+00:08:20.351 --> 00:08:24.634
+The vault makes a new version every year, and the storage picks it up within a day.
+
+00:08:26.534 --> 00:08:30.606
+A deleted key is kept ninety days, and nobody can cut that short.
+
+00:08:32.306 --> 00:08:36.791
+The workspace's notebooks, queries and disks use a key from the same vault.
+
+00:08:38.491 --> 00:08:40.647
+And the security team can take the key back:
+
+00:08:40.847 --> 00:08:44.360
+then nobody can read the files, the cloud provider included.
+
+00:08:48.660 --> 00:08:55.083
+In Rome, water was drawn only at the tank, through a stamped nozzle, and the gangs' work was written down.
+
+00:08:56.783 --> 00:09:00.445
+At the university, the files are reached only through the catalog,
+
+00:09:00.645 --> 00:09:05.319
+behind private doors, with a short list out and a key of the university's own.
+
+00:09:07.019 --> 00:09:10.482
+And the one way around it is switched on for a task, and watched.
+
+00:09:12.382 --> 00:09:16.918
+No path to the data skips the catalog, except the one you switch on and watch.

@@ -89,6 +89,8 @@ function cp_vault(c,o){o=o||{};let g=c.createLinearGradient(0,0,0,H);g.addColorS
 /* ---------------------------------------------------------------- the places */
 // the cave's wall: pale limestone in the lamps' warm light, the frieze painted on it
 AG_PLACES.cpWall=c=>{cp_rock(c,{seed:5,lo:[40,30,24],hi:[214,186,146],lx:980,ly:620,lr:1050});cp_frieze(c,{});cp_vault(c);};
+// what a card's glass shows of the lit wall: the wall, dimmed, so the words on a card over it stand out 4.5 to 1 (behind:"cpWallDim")
+AG_PLACES.cpWallDim=c=>{c.drawImage(dp_place0("cpWall"),0,0);c.fillStyle="rgba(5,12,14,0.4)";c.fillRect(0,0,W,H);};
 // Lascaux II's wall: the same rock, cast in concrete, a cooler grey, with the joins of its shells; the animals are drawn on it live
 AG_PLACES.cpWall2=c=>{cp_rock(c,{seed:5,lo:[34,32,30],hi:[192,180,160],lx:980,ly:620,lr:1050});
   c.save();c.strokeStyle="rgba(30,26,24,0.35)";c.lineWidth=2;for(const x of [470,1180,1700]){c.beginPath();c.moveTo(x,0);c.bezierCurveTo(x+30,300,x-20,640,x+12,H);c.stroke();}

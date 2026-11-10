@@ -45,20 +45,20 @@ scene("cave",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     {at:sWall,place:"cpWall",keys:[[sWall,960,540,1.04]],push:0.035,draw:(x,tt)=>{
       const crowd=ag_in(tt,c.crowd,2),harm=ag_in(tt,tAlgae-0.4,5.2),crust=ag_in(tt,tCrys,2.4),dim=0.6*ag_in(tt,c.lost+0.6,4.5);
       cp_wallLight(x,tt,0.55+0.45*crowd-0.3*ag_in(tt,c.change,2));cp_breath(x,tt,ag_in(tt,c.air,2.2)*(1-0.5*ag_in(tt,c.lost,3)));cp_harm(x,harm,crust);cp_dim(x,dim);
-      dp_tag(x,1250,760,"About 21,000 years ago","cyan",{a:cp_io(tt,t21,c.crowd+0.4)});
-      dp_card(x,1170,70,620,{kick:"By the late 1950s",title:"More than 1,000 visitors a day"},{a:cp_io(tt,c.crowd+0.2,c.algae-0.4),k:ag_spr(tt,c.crowd+0.2,0.7)});
-      for(const [s,tx,ty,t0] of [["Warmth",250,760,tWarm],["Water",560,790,tWater],["Carbon dioxide",840,760,tCO2]])dp_tag(x,tx,ty,s,"grey",{a:cp_io(tt,t0,c.algae+0.6)});
-      dp_card(x,1170,70,620,{kick:"1960",title:"Green algae, white crystals"},{col:"coral",a:cp_io(tt,tAlgae-0.2,c.closed-1),k:ag_spr(tt,tAlgae-0.2,0.7)});}},
+      cp_tag(x,1250,760,"About 21,000 years ago","cyan",{a:cp_io(tt,t21,c.crowd+0.4),dark:0.65});
+      dp_card(x,1170,70,620,{kick:"By the late 1950s",title:"More than 1,000 visitors a day"},{a:cp_io(tt,c.crowd+0.2,c.algae-0.4),k:ag_spr(tt,c.crowd+0.2,0.7),behind:"cpWallDim"});
+      for(const [s,tx,ty,t0] of [["Warmth",250,760,tWarm],["Water",560,790,tWater],["Carbon dioxide",840,760,tCO2]])cp_tag(x,tx,ty,s,"grey",{a:cp_io(tt,t0,c.algae+0.6),dark:0.65});
+      dp_card(x,1170,70,620,{kick:"1960",title:"Green algae, white crystals"},{col:"coral",a:cp_io(tt,tAlgae-0.2,c.closed-1),k:ag_spr(tt,tAlgae-0.2,0.7),behind:"cpWallDim"});}},
     // back on the hill: the door shuts, the visitors stop; then the camera glides along the hill to where Lascaux II is built
     {at:sClose,place:"cpHill",keys:[[sClose,520,580,1.5],[c.copy-0.2,1300,560,1.4]],d:2.6,push:0.02,draw:(x,tt)=>{
       cp_caveLight(x,0.9*(1-0.86*ag_in(tt,tCloses+0.4,1.6)),{});cp_lamps(x,tt,1-ag_in(tt,tCloses-0.9,1.2),0);cp_door(x,ag_in(tt,tCloses,1.3));
       cp_copyShell(x,ag_in(tt,tRebuilt-0.2,3.4));
-      dp_tag(x,1290,380,"Rebuilt in concrete","cyan",{a:cp_io(tt,tRebuilt+1.6,sPaint+1)});}},
+      cp_tag(x,1290,380,"Rebuilt in concrete","cyan",{a:cp_io(tt,tRebuilt+1.6,sPaint+1)});}},
     // Lascaux II's wall: painters copy each animal, stroke by stroke
     {at:sPaint,place:"cpWall2",keys:[[sPaint,960,540,1.04]],push:0.03,draw:(x,tt)=>{cp_wallLight(x,tt,0.8);cp_frieze(x,{p:cp_lin(tt,c.paint+0.2,c.opens+0.6-c.paint)});
-      dp_tag(x,250,780,"Natural pigments","grey",{a:cp_io(tt,tPig,c.opens+0.4)});
+      cp_tag(x,250,780,"Natural pigments","grey",{a:cp_io(tt,tPig,c.opens+0.4),dark:0.65});
       dp_card(x,1170,70,620,{kick:"1983",title:"Lascaux II opens"},{a:cp_io(tt,tL2,sMil+1),k:ag_spr(tt,tL2,0.7)});
-      dp_tag(x,560,780,"True to the cave","cyan",{a:cp_io(tt,tTrue,sMil+1)});dp_tag(x,1000,780,"None of it is the cave","cyan",{a:cp_io(tt,tNone,sMil+1)});}},
+      cp_tag(x,560,780,"True to the cave","cyan",{a:cp_io(tt,tTrue,sMil+1),dark:0.65});cp_tag(x,1000,780,"None of it is the cave","cyan",{a:cp_io(tt,tNone,sMil+1),dark:0.65});}},
     // the hill again: millions go into the copy; the camera glides to the cave, which rests, a few scientists inside now and then
     {at:sMil,place:"cpHill",keys:[[sMil,960,560,1.0],[c.rests-0.3,540,600,1.45]],d:2.4,push:0.015,draw:(x,tt)=>{
       cp_caveLight(x,0.1+0.12*cp_io(tt,tSci,sRec-0.2,0.8),{});cp_door(x,1);cp_copyShell(x,1);cp_caveLight(x,0.9,{copy:true});cp_lamps(x,tt,1,1);
@@ -79,7 +79,7 @@ scene("cave",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
   setScreen(ctx,S);cp_day(ctx,t,"Opening story","Lascaux, France, 1948",0.4,c.crowd-0.6);
   dp_card(ctx,1150,80,690,{kick:"1963",title:"Closed to the public",sub:"André Malraux, minister for culture"},{col:"coral",a:cp_io(t,tCloses+0.2,c.copy-0.6),k:ag_spr(t,tCloses+0.2,0.7),behind:"cpHill"});
   dp_card(ctx,1170,80,640,{kick:"Lascaux II, since 1983",title:"About 10 million visitors"},{a:cp_io(t,c.millions+0.2,c.rests+0.2),k:ag_spr(t,c.millions+0.2,0.7),behind:"cpHill"});
-  dp_tag(ctx,560,790,"A few scientists, about 200 hours a year","cyan",{a:cp_io(t,tHours-0.4,sRec+0.1),behind:"cpHill"});
+  cp_tag(ctx,560,790,"A few scientists, about 200 hours a year","cyan",{a:cp_io(t,tHours-0.4,sRec+0.1),behind:"cpHill"});
   dp_title(ctx,S,t,c.breath,"Copies that keep the rules",null,"FILM 7 OF 8 · ONLY WHAT YOU MAY SEE");});
 
 /* ---------------------------------------------------------------- 2. Where the rules live: in the catalog, not in the records */
@@ -109,15 +109,15 @@ scene("home",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     const sb=cp_record(x,800,456,{name:"studies.health_progress.learners",rows:st.map(r=>({c:r[0],v:r[1],cls:r[2],vc:r[1]==="***"?"violet":"ink"})),w:700,cw:236,
       a:sA,k:ag_spr(tt,c.inside+0.4,0.7)});
     withA(x,sA*ag_in(tt,tKeeps,0.4),()=>dp_tick(x,sb.x+sb.w-36,sb.y+42,"green",cp_lin(tt,tKeeps,0.6)));
-    dp_tag(x,1060,170,"The rules live here: classes and policies","cyan",{a:cp_io(tt,tLive,c.wrote-0.2)});
-    dp_tag(x,90,740,"The records: only their values","grey",{a:cp_io(tt,tNot,c.leave+0.4)});
+    cp_tag(x,1060,170,"The rules live here: classes and policies","cyan",{a:cp_io(tt,tLive,c.wrote-0.2)});
+    cp_tag(x,90,740,"The records: only their values","grey",{a:cp_io(tt,tNot,c.leave+0.4)});
     // a copy that leaves the catalog: pulled out of the record, it slides out of the catalog; there its chips fall away and nothing guards it
     const u=ag_sine(cp_lin(tt,tLeaves-0.4,2.0)),mx=lerp(760,1530,u),fall=ag_in(tt,tLeaves+1.0,0.8),out=ag_in(tt,tLeaves+1.1,0.8);
     const lv=[["S-20412","direct"],["Samuel Osei","direct"]].map(r=>({c:"",v:r[0],cls:r[1],ca:1-fall}));
     withA(x,cp_io(tt,tLeaves-0.4,c.wrote+0.2,0.4),()=>{
       withA(x,1-out,()=>cp_record(x,mx,470,{name:"a copy",rows:lv,w:360,cw:0}));
       withA(x,out,()=>cp_record(x,mx,470,{name:"a copy",rows:lv.map(r=>Object.assign({},r,{ca:0})),w:360,cw:0,col:"coral"}));});
-    dp_tag(x,1530,712,"No class, no policy","coral",{a:cp_io(tt,tNone-0.3,c.wrote+0.2)});
+    cp_tag(x,1530,712,"No class, no policy","coral",{a:cp_io(tt,tNone-0.3,c.wrote+0.2)});
     // An agreement first said where the study may work, and what may leave it
     cp_agree(x,410,280,1100,{kind:"Data sharing agreement 2026-14",sub:"For a study in the Faculty of Health",lw:180,
       lines:[["Where","On the platform, in the study's own space; nothing downloaded"],["May leave","Totals, with any count under 10 hidden"]],
@@ -141,21 +141,21 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     // a clone: refused to anyone the policies cover; made by someone they leave out, every value and no class
     const pa=cp_io(tt,c.clone,c.masked,0.5);if(pa>0){const bx=dp_page(x,90,230,1260,330,{tool:"databricks",name:"Azure Databricks",where:"SQL editor",title:"Clone the learner table",a:pa});
       cp_code(x,bx.x,bx.y+40,["CREATE TABLE dev.core_learner_v1","SHALLOW CLONE registrar.core.core_learner_v1"],{a:pa});
-      withA(x,pa,()=>{dp_cross(x,bx.x+20,bx.y+128,"coral",cp_lin(tt,tRefuses,0.6));dp_T(x,"Refused: its policies cover Jun",bx.x+56,bx.y+138,{w:700,size:28,col:"coral",a:ag_in(tt,tRefuses,0.4)});});}
+      withA(x,pa,()=>{dp_cross(x,bx.x+20,bx.y+128,"coral",cp_lin(tt,tRefuses,0.6));dp_T(x,"Refused: its policies cover Jun",bx.x+56,bx.y+138,{w:700,size:28,col:"ink",a:ag_in(tt,tRefuses,0.4)});});}
     const ea=cp_io(tt,c.exempt,c.masked,0.5);
-    cp_record(x,90,590,{name:"dev.core_learner_v1",rows:CP_SAMUEL.slice(0,3).map(r=>({c:r[0],v:r[1]})),w:760,cw:262,col:"coral",a:ea,k:ag_spr(tt,c.exempt,0.7)});
-    dp_tag(x,890,600,"Cloned by someone left out","coral",{a:ea});
-    dp_tag(x,890,690,"Every real name","coral",{a:ea*ag_in(tt,tReal,0.4)});dp_tag(x,890,780,"No class: no policy matches","coral",{a:ea*ag_in(tt,tNoCls,0.4)});
+    cp_record(x,90,590,{name:"dev.core_learner_v1",rows:CP_SAMUEL.slice(0,3).map(r=>({c:r[0],v:r[1]})),w:760,cw:262,col:"coral",dark:0.3,a:ea,k:ag_spr(tt,c.exempt,0.7)});
+    cp_tag(x,890,600,"Cloned by someone left out","coral",{a:ea});
+    cp_tag(x,890,690,"Every real name","coral",{a:ea*ag_in(tt,tReal,0.4)});cp_tag(x,890,780,"No class: no policy matches","coral",{a:ea*ag_in(tt,tNoCls,0.4)});
     // a masked copy: still about real people, and a column nobody has classed goes through as it is
     const ma=cp_io(tt,c.masked,c.madeup,0.5);
     cp_record(x,90,250,{name:"dev.core_learner_masked",w:900,cw:262,a:ma,k:ag_spr(tt,c.masked,0.7),
       rows:[{c:"student_number",v:"***",vc:"violet",cls:"direct"},{c:"name",v:"***",vc:"violet",cls:"direct"},{c:"date_of_birth",v:"1987",cls:"indirect"},{c:"notes",v:"Extra time: anxiety",vc:"coral"}]});
-    dp_tag(x,1010,300,"Still about real people","grey",{a:ma*ag_in(tt,tPeople,0.4)});
-    dp_tag(x,420,640,"Not classed yet: shown as it is","coral",{a:ma*ag_in(tt,tAsIs,0.4),to:[640,560],p:cp_lin(tt,tAsIs+0.2,0.5)});
+    cp_tag(x,1010,300,"Still about real people","grey",{a:ma*ag_in(tt,tPeople,0.4)});
+    cp_tag(x,420,640,"Not classed yet: shown as it is","coral",{a:ma*ag_in(tt,tAsIs,0.4),to:[640,560],p:cp_lin(tt,tAsIs+0.2,0.5)});
     // made-up learners: true to the real ones, and none of them is anyone
     const da=cp_io(tt,c.madeup,c.script+0.2,0.5);
     cp_record(x,90,250,{name:"dev.core_learner_v1",rows:CP_MADE.map(r=>({c:r[0],v:r[1],cls:r[2]})),w:900,cw:262,col:"green",a:da,k:ag_spr(tt,c.madeup,0.7)});
-    dp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
+    cp_tag(x,90,680,"Made up: none of them is anyone","green",{a:da*ag_in(tt,tNone,0.4)});
     // the script that writes them, in the registrar's bundle
     const ga=cp_io(tt,c.script+0.2,c.unit,0.5);if(ga>0){const bx=dp_page(x,90,230,1260,420,{tool:"github",name:"GitHub",where:"uni-example/data-platform",title:"registrar/tests/made_up_learners.py",a:ga});
       cp_code(x,bx.x,bx.y+44,["learners = make_learners(2614)","columns  = like(\"core_learner_v1\")","classes  = like(\"core_learner_v1\")"],
@@ -170,9 +170,9 @@ scene("madeup",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     const la=cp_io(tt,c.lascaux,sc.dur-1.0,0.5);
     cp_thumb(x,120,250,560,315,"cpWall2",{label:"Lascaux II",a:la,draw:(cx)=>{cp_wallLight(cx,tt,0.8);cp_frieze(cx,{p:1});}});
     cp_record(x,740,250,{name:"dev.core_learner_v1",rows:CP_MADE.slice(1,4).map(r=>({c:r[0],v:r[1],cls:r[2]})),w:640,cw:250,col:"green",a:la});
-    dp_tag(x,740,560,"Not one is real","green",{a:la*ag_in(tt,tReal2,0.4)});
+    cp_tag(x,740,560,"Not one is real","green",{a:la*ag_in(tt,tReal2,0.4)});
     dp_card(x,120,670,900,{kick:"Jun's change",title:"Runs on 2,614 made-up learners"},{col:"green",a:cp_io(tt,c.runs+0.2,sc.dur-1.0),k:ag_spr(tt,c.runs+0.2,0.7)});
-    dp_tag(x,1060,700,"No record leaves production","green",{a:cp_io(tt,tNoRec,sc.dur-1.0)});}}]);
+    cp_tag(x,1060,700,"No record leaves production","green",{a:cp_io(tt,tNoRec,sc.dur-1.0)});}}]);
   setScreen(ctx,S);cp_day(ctx,t,"Monday, 19 October","Made up, for building",0.3,c.jun+0.2);});
 
 /* ---------------------------------------------------------------- 4. Protected before it leaves: a share with the hospital */
@@ -196,15 +196,15 @@ scene("share",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
           dp_T(x,"registrar.core.core_learner_v1",bx.x+170,bx.y+104,{w:500,size:28,f:"mono",col:"coral",a:ta*(1-sw)});dp_cross(x,bx.x+bx.w-24,bx.y+94,"coral",cp_lin(tt,tEvery,0.5)*(1-sw));
           dp_T(x,"registrar.published.left_after_first_year",bx.x+170,bx.y+104,{w:500,size:28,f:"mono",a:sw});dp_tick(x,bx.x+bx.w-24,bx.y+94,"green",cp_lin(tt,tSmall,0.6));}});}
     dp_slip(x,1550,560,"The marketplace","cyan",{ink:true,a:cp_io(tt,tMkt,c.travel+1)});
-    dp_tag(x,500,640,"The policies don't travel with it","coral",{a:cp_io(tt,tTravel,c.every)});
-    dp_tag(x,500,722,"Its owner is left out of them","grey",{a:cp_io(tt,tLeft,c.every)});
-    dp_tag(x,500,804,"Read on the hospital's platform","grey",{a:cp_io(tt,tOwn,c.every)});
-    dp_tag(x,500,640,"Every name, if the learner table went","coral",{a:cp_io(tt,tEvery,c.totals)});
+    cp_tag(x,500,640,"The policies don't travel with it","coral",{a:cp_io(tt,tTravel,c.every)});
+    cp_tag(x,500,722,"Its owner is left out of them","grey",{a:cp_io(tt,tLeft,c.every)});
+    cp_tag(x,500,804,"Read on the hospital's platform","grey",{a:cp_io(tt,tOwn,c.every)});
+    cp_tag(x,500,640,"Every name, if the learner table went","coral",{a:cp_io(tt,tEvery,c.totals)});
     // the totals, Show the least's: small counts hidden, and the one that would give them away
     cp_totals(x,500,624,1020,"Left after first year, by course",[["Nursing","38"],["Midwifery","fewer than 10","violet"],["Public health","21"],["Health sciences","hidden","violet"],["Faculty of Health","80"]],
       {cols:2,a:cp_io(tt,c.totals+0.3,c.ends),k:ag_spr(tt,c.totals+0.3,0.7)});
     dp_slip(x,1550,560,"Show the least","cyan",{ink:true,a:cp_io(tt,tShow,c.ends)});
-    dp_tag(x,500,640,"A share has no end date","grey",{a:cp_io(tt,tNoEnd,tJob-0.3)});
+    cp_tag(x,500,640,"A share has no end date","grey",{a:cp_io(tt,tNoEnd,tJob-0.3)});
     dp_card(x,500,624,1020,{kick:"A job, made from agreement 2026-21",title:"Removes the hospital's access on 30 June 2027"},{a:ag_in(tt,tJob+0.1,0.5),k:ag_spr(tt,tJob+0.1,0.7)});}}]);
   setScreen(ctx,S);cp_day(ctx,t,"Monday, 2 November","Protected before it leaves",0.3,c.hospital+2.2);});
 
@@ -232,10 +232,10 @@ scene("room",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
           cp_code(x,bx.x+26,ny+92,["join the two on student_number","count who passed, by weeks on the wards","hide any count under 10"],
             {w:904,lh:42,hi:tt<tCounts?[0,ag_in(tt,tMatch,0.4)]:tt<c.hides?[1,ag_in(tt,tCounts,0.4)]:[2,ag_in(tt,tUnder,0.4)]});
           dp_pill(x,bx.x+930,ny+44,"Approved, 1 December","green",{align:"right",a:ag_in(tt,tApp,0.5)});});}});}
-    dp_tag(x,500,812,"Columns' names only","cyan",{a:cp_io(tt,tNames,c.view)});
-    dp_tag(x,500,812,"registrar.rooms: a shelf no one reads","grey",{a:cp_io(tt,tShelf,c.code)});
-    dp_tag(x,500,812,"Hides nothing by itself","coral",{a:cp_io(tt,tHides,c.runs)});
-    dp_tag(x,500,812,"Run by the hospital, 3 December","cyan",{a:cp_io(tt,c.runs+0.3,c.lascaux)});
+    cp_tag(x,500,812,"Columns' names only","cyan",{a:cp_io(tt,tNames,c.view)});
+    cp_tag(x,500,812,"registrar.rooms: a shelf no one reads","grey",{a:cp_io(tt,tShelf,c.code)});
+    cp_tag(x,500,812,"Hides nothing by itself","coral",{a:cp_io(tt,tHides,c.runs)});
+    cp_tag(x,500,812,"Run by the hospital, 3 December","cyan",{a:cp_io(tt,c.runs+0.3,c.lascaux)});
     // Jun reads it with Mei; she approves
     const pp=cp_io(tt,c.approve-0.3,c.lascaux-0.2,0.7);cp_figure(x,"jun",345,684,0.79,tt,pp);cp_figure(x,"mei",130,672,0.82,tt,pp);
     // what comes out: one table of totals, to the hospital, kept 30 days
@@ -259,7 +259,7 @@ scene("out",(ctx,S,t,sc)=>{const c=sc.cues,A=(id,w,o)=>wAt(sc,id,w,o);
     cp_person(x,100,240,"Elena Lindgren","Research assistant, Anil's study",{w:680,a:ea,k:ag_spr(tt,c.elena,0.7)});
     dp_card(x,100,440,680,{kick:"Elena asks",title:"To download the study's table",sub:"To clean it in a spreadsheet"},{a:ea*ag_in(tt,c.elena+1.4,0.5),k:ag_spr(tt,c.elena+1.4,0.7)});
     cp_laptop(x,1110,470,"learners.csv",{a:ea*ag_in(tt,tLaptop,0.5),k:ag_spr(tt,tLaptop,0.7)});
-    dp_tag(x,930,560,"Keeps no rules at all","coral",{a:ea*ag_in(tt,tNoRules,0.4)});
+    cp_tag(x,930,560,"Keeps no rules at all","coral",{a:ea*ag_in(tt,tNoRules,0.4)});
     cp_agree(x,100,654,1300,{kind:"Data sharing agreement 2026-14",lw:140,lines:[["Where","On the platform, in the study's own space; nothing downloaded"]],hi:[0,ag_in(tt,tNothing,0.4)],a:ea*ag_in(tt,tNothing-0.3,0.5)});
     // the studies' workspace: every way out switched off
     const sa=cp_io(tt,c.switches+0.2,c.code,0.5);if(sa>0){const bx=dp_page(x,90,210,1140,660,{tool:"databricks",name:"Azure Databricks",where:"Settings › Security",title:"Workspace: studies",a:sa});

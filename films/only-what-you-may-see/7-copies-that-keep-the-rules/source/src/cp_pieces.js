@@ -21,12 +21,13 @@ const CP_GOLD=[236,182,62];
 // a class's chip, gold, its words dark; y is the words' baseline; returns its width
 function cp_chip(ctx,x,y,cls,o){o=o||{};return dp_pill(ctx,x,y,cls,CP_GOLD,{size:28,glow:8,a:o.a,align:o.align});}
 
-/* cp_record(ctx, x, y, {name, rows, w, col, a, k, behind, cw, sub}): rows [{c, v, v2, u, cls, ca, vc, v2c, a}]: the column c (mono), its
+/* cp_record(ctx, x, y, {name, rows, w, col, a, k, behind, cw, sub, nameCol, dark}): rows [{c, v, v2, u, cls, ca, vc, v2c, a}]: the column c (mono), its
    value v, turning into v2 as u goes from 0 to 1, each in its colour (vc, v2c: a meaning's key), and its class cls on a gold chip at ca;
-   name is the table's name, in the mono face; cw where the values start; returns its box */
+   name is the table's name, in the mono face; cw where the values start; dark a film on its glass under the words, as cp_tag's; returns its box */
 function cp_record(ctx,x,y,o){o=o||{};const w=o.w||900,lh=58,rows=o.rows||[],top=o.sub?120:86,h=top+rows.length*lh+18,bb={x,y,w,h},a=o.a==null?1:o.a;
   if(a<=0||o.measure)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   dp_panel(ctx,x,y,w,h,{col:o.col||"cyan",r:20,behind:o.behind,glowR:36});
+  if(o.dark>0){ctx.save();rr(ctx,x+2.2,y+2.2,w-4.4,h-4.4,18);ctx.fillStyle="rgba(4,14,18,"+o.dark+")";ctx.fill();ctx.restore();}
   dp_T(ctx,o.name,x+30,y+54,{w:500,size:28,f:"mono",col:o.nameCol||o.col||"cyan"});
   if(o.sub)dp_T(ctx,o.sub,x+30,y+96,{w:600,size:28,col:"mut"});
   ctx.fillStyle=rgba(DP.T.mut,0.35);ctx.fillRect(x+24,y+top-6,w-48,1.4);
@@ -68,12 +69,23 @@ function cp_hospital(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=320,h=300;if(a
   ctx.restore();
   dp_T(ctx,"Teaching hospital",cx,y+h-30,{w:700,size:30,align:"center"});ctx.restore();return{x,y,w,h};}
 
+/* cp_tag(ctx, x, y, text, col, {size, a, behind, to, p, dark}): the kit's tag (dp_tag, the same size and place), with a dark film on its
+   glass under the words (dark, 0.35 by default; 0.65 over the cave's lit wall), so they stand out at least 4.5 to 1 wherever it sits */
+function cp_tag(ctx,x,y,text,col,o){o=o||{};const size=o.size||30,w=dp_tw(ctx,text,{w:700,size})+44,h=size+32,a=o.a==null?1:o.a,hc=dp_f(col),dk=o.dark==null?0.35:o.dark;if(a<=0)return w;
+  ctx.save();ctx.globalAlpha*=a;dp_panel(ctx,x,y,w,h,{col,r:14,glowR:26,behind:o.behind});
+  if(dk>0){ctx.save();rr(ctx,x+2.2,y+2.2,w-4.4,h-4.4,12);ctx.fillStyle="rgba(4,14,18,"+dk+")";ctx.fill();ctx.restore();}
+  dp_T(ctx,text,x+22,y+h/2+size*0.36,{w:700,size,col});
+  if(o.to){const [lx,ly]=o.to,inY=ly>=y&&ly<=y+h,sy=inY?y+h/2:(ly<y?y:y+h),sx=inY?(lx<x?x:x+w):Math.max(x+24,Math.min(x+w-24,lx)),p=o.p==null?1:o.p;
+    const ex=lerp(sx,lx,p),ey=lerp(sy,ly,p);ctx.save();ctx.strokeStyle=rgba(hc,1);ctx.lineWidth=2.4;ctx.lineCap="round";ctx.shadowColor=rgba(hc,0.8);ctx.shadowBlur=8;
+    ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();if(p>=1){ctx.fillStyle=rgba(mix(hc,[255,255,255],0.35),1);ctx.beginPath();ctx.arc(lx,ly,6,0,TAU);ctx.fill();}ctx.restore();}
+  ctx.restore();return w;}
 /* cp_thumb(ctx, x, y, w, h, place, {view, draw, label, a, col}): a small window on a place; view [x, y, w, h] the part of it shown (the
-   window's shape), draw(ctx) what's drawn over it, in the place's coordinates; label under it */
+   window's shape), draw(ctx) what's drawn over it, in the place's coordinates; label under it. It reads the place with the kit's dp_place0, not ag_place,
+   which would make every pane drawn after it in the frame frost the window's place instead of the shot's */
 function cp_thumb(ctx,x,y,w,h,place,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const v=o.view||[0,0,W,H],col=dp_f(o.col||"cyan");ctx.save();ctx.globalAlpha*=a;
   if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,o.k));
   ctx.save();ctx.shadowColor=rgba(col,0.35);ctx.shadowBlur=34;rr(ctx,x,y,w,h,16);ctx.fillStyle="rgb(6,16,20)";ctx.fill();ctx.restore();
-  ctx.save();rr(ctx,x,y,w,h,16);ctx.clip();ctx.translate(x,y);ctx.scale(w/v[2],h/v[3]);ctx.translate(-v[0],-v[1]);ctx.drawImage(ag_place(place),0,0);if(o.draw)o.draw(ctx);ctx.restore();
+  ctx.save();rr(ctx,x,y,w,h,16);ctx.clip();ctx.translate(x,y);ctx.scale(w/v[2],h/v[3]);ctx.translate(-v[0],-v[1]);ctx.drawImage(dp_place0(place),0,0);if(o.draw)o.draw(ctx);ctx.restore();
   rr(ctx,x+1,y+1,w-2,h-2,16);ctx.strokeStyle=rgba(mix(col,[255,255,255],0.35),0.95);ctx.lineWidth=2.2;ctx.stroke();
   if(o.label)dp_slip(ctx,x+w/2,y+h+18,o.label,o.col||"cyan",{align:"center",ink:true,behind:o.behind});
   ctx.restore();}

@@ -1,0 +1,275 @@
+1
+00:00:01,600 --> 00:00:03,234
+France, 1948.
+
+2
+00:00:04,534 --> 00:00:13,710
+Lascaux, a cave in the south-west, opens to visitors: its walls were painted with horses, bulls and deer about 21,000 years ago.
+
+3
+00:00:15,210 --> 00:00:19,660
+By the late 1950s, more than a thousand people a day come to see them.
+
+4
+00:00:20,960 --> 00:00:26,226
+Every one of them breathes out warmth, water and carbon dioxide into the cave's air.
+
+5
+00:00:27,526 --> 00:00:34,293
+In 1960, with the heat and the lights, green algae spread over the walls, and white crystals form on them.
+
+6
+00:00:35,993 --> 00:00:42,063
+The visits that let people see the paintings are destroying them, and once they're gone, they're gone for everyone.
+
+7
+00:00:43,563 --> 00:00:45,003
+Something has to change.
+
+8
+00:00:46,903 --> 00:00:52,754
+In 1963, the minister for culture, André Malraux, closes the cave to the public.
+
+9
+00:00:54,654 --> 00:01:00,938
+On the same hill, its two best-known galleries are rebuilt in concrete, down to every bump in the rock.
+
+10
+00:01:02,238 --> 00:01:08,291
+And painters copy each painting onto them, with natural pigments, the way the first artists worked.
+
+11
+00:01:09,991 --> 00:01:15,390
+Lascaux II opens in 1983: true to the cave, and none of it is the cave.
+
+12
+00:01:17,490 --> 00:01:20,841
+About ten million people have seen the paintings there since.
+
+13
+00:01:22,141 --> 00:01:27,380
+And the cave rests: only a few scientists go in, for about 200 hours a year.
+
+14
+00:01:29,480 --> 00:01:32,745
+A university's records of its learners are like that cave.
+
+15
+00:01:33,845 --> 00:01:40,327
+Every copy made of them, to build with, to share or to take home, is one more place they can come to harm.
+
+16
+00:01:41,627 --> 00:01:47,518
+So, as at Lascaux, each copy keeps the protection, or isn't made, and the work still gets done.
+
+17
+00:01:54,418 --> 00:01:58,306
+At the university, the learners' records are protected where they're kept.
+
+18
+00:01:59,806 --> 00:02:05,893
+Know what you hold gave each column a class, and Tags that travel made each class a tag on the platform.
+
+19
+00:02:07,593 --> 00:02:13,105
+One policy for many tables hides each class, by its tag, wherever the records are read.
+
+20
+00:02:15,005 --> 00:02:22,491
+So a copy made inside, read through those rules, keeps them: the study's own copy holds only what Anil may see.
+
+21
+00:02:24,591 --> 00:02:29,061
+But the rules live in the catalog, where the records are read, not in the records.
+
+22
+00:02:30,761 --> 00:02:34,856
+A copy that leaves the catalog takes the records, and none of the rules.
+
+23
+00:02:36,956 --> 00:02:41,085
+That's why An agreement first said where the study may work, and what may leave it.
+
+24
+00:02:42,985 --> 00:02:45,157
+This autumn, four copies are asked for.
+
+25
+00:02:48,257 --> 00:02:50,186
+Monday, 19 October.
+
+26
+00:02:51,286 --> 00:02:57,595
+Jun Park, who builds the registrar's models, is changing how the faculty's published totals are counted.
+
+27
+00:02:58,895 --> 00:03:03,978
+He'd like to try it on the real records: a copy of the learner table, in development.
+
+28
+00:03:05,478 --> 00:03:10,769
+Azure Databricks refuses to clone a table its policies cover, for anyone they cover.
+
+29
+00:03:12,269 --> 00:03:19,042
+Cloned by someone they leave out, it would hold every real name, and no column's class, so no policy would match it.
+
+30
+00:03:20,942 --> 00:03:28,472
+A masked copy is possible, but it's still about real people, and a column nobody has classed yet goes through as it is.
+
+31
+00:03:30,172 --> 00:03:34,307
+So development and test get made-up learners, and none of them is anyone.
+
+32
+00:03:35,807 --> 00:03:42,760
+For size, a script writes 2,614 of them, with production's columns and their classes.
+
+33
+00:03:44,060 --> 00:03:53,297
+dbt's unit tests check the counting on rows written for each test: if nine learners leave Midwifery, the count shows as fewer than 10.
+
+34
+00:03:54,997 --> 00:04:01,043
+dbt's clone and sample bring production's rows in, so they're never used on tables about people.
+
+35
+00:04:02,543 --> 00:04:06,100
+Like Lascaux II, they're true to the learners, and not one is real.
+
+36
+00:04:07,800 --> 00:04:13,984
+Jun's change runs on 2,614 of them, and no record leaves production.
+
+37
+00:04:16,484 --> 00:04:18,326
+Monday, 2 November.
+
+38
+00:04:19,426 --> 00:04:27,032
+The teaching hospital where the faculty's learners train asks how many leave after first year, by course, to plan its places.
+
+39
+00:04:28,332 --> 00:04:37,640
+A new purpose needs a new agreement, as An agreement first says: 2026-21, signed by Mei and the hospital's head of education.
+
+40
+00:04:39,340 --> 00:04:45,462
+The hospital is on Databricks too, so OpenSharing can share a table with it, as in The marketplace.
+
+41
+00:04:46,762 --> 00:04:49,823
+But the university's policies don't travel with a share.
+
+42
+00:04:51,123 --> 00:04:58,147
+Whoever shares a table must be left out of its policies, and the hospital reads it on its own platform, where they never run.
+
+43
+00:04:59,647 --> 00:05:03,015
+Share the learner table, and the hospital would see every name.
+
+44
+00:05:04,915 --> 00:05:11,573
+So the share holds one table that already shows no more than may leave: Show the least's totals, small counts hidden.
+
+45
+00:05:13,273 --> 00:05:21,612
+A share has no end date, so a job made from the agreement removes the hospital's access on 30 June 2027.
+
+46
+00:05:24,112 --> 00:05:30,295
+Then the hospital asks a harder question: do learners who spend more weeks on its wards do better that year?
+
+47
+00:05:31,995 --> 00:05:39,784
+The answer needs both sides' rows, the hospital's weeks and the university's results, and neither may hand its rows to the other.
+
+48
+00:05:41,484 --> 00:05:48,273
+So they meet in a clean room, on Azure Databricks, where neither can see the other's rows, only their columns' names.
+
+49
+00:05:49,973 --> 00:05:57,011
+The university adds one view, from a shelf no one reads: each Health learner's student number, course and result.
+
+50
+00:05:58,711 --> 00:06:05,049
+The hospital writes the code that matches the two, and counts, by weeks on the wards, how many learners passed.
+
+51
+00:06:06,549 --> 00:06:13,332
+Nothing runs until the university approves it: Jun reads it with Mei, and on 1 December she approves.
+
+52
+00:06:15,032 --> 00:06:22,826
+The clean room hides nothing by itself: what comes out is what the approved code writes, so the code hides any count under 10.
+
+53
+00:06:24,726 --> 00:06:30,605
+On 3 December, the hospital runs it, and gets one table of totals, kept for 30 days.
+
+54
+00:06:32,305 --> 00:06:37,470
+Twelve weeks or more, 91 in 100 passed; four to seven weeks, 84.
+
+55
+00:06:39,170 --> 00:06:44,315
+Like the scientists at Lascaux: what goes in is approved, and the walls never leave.
+
+56
+00:06:46,815 --> 00:06:48,576
+Tuesday, 10 November.
+
+57
+00:06:49,676 --> 00:06:56,946
+Elena Lindgren, Anil's new research assistant, would like to download the study's table, to clean it in a spreadsheet.
+
+58
+00:06:58,246 --> 00:07:03,407
+But a file on a laptop keeps no rules at all, and the agreement says nothing is downloaded.
+
+59
+00:07:05,107 --> 00:07:10,033
+So in the studies' workspace, from Grants by design, every way out is switched off.
+
+60
+00:07:11,133 --> 00:07:17,026
+Downloading results, exporting notebooks, copying a table, downloading a file: each one is off.
+
+61
+00:07:18,526 --> 00:07:24,624
+The switches are kept as code: turning one back on takes a reviewed change, and the audit log shows it.
+
+62
+00:07:26,124 --> 00:07:33,860
+And what runs there can reach only the catalog's storage and a short list, as Network, storage and keys set up for production.
+
+63
+00:07:35,160 --> 00:07:40,067
+No switch stops a photo of a screen; her confidentiality agreement covers that.
+
+64
+00:07:41,767 --> 00:07:45,997
+So Elena cleans the data where it is, in a notebook in the study's space.
+
+65
+00:07:47,497 --> 00:07:50,673
+As at Lascaux, nobody takes a piece of the wall home.
+
+66
+00:07:53,173 --> 00:07:57,255
+Lascaux's paintings have been seen by millions, and the cave still rests.
+
+67
+00:07:58,955 --> 00:08:01,177
+This autumn, four copies were asked for.
+
+68
+00:08:02,477 --> 00:08:09,907
+Jun got made-up learners, the hospital its totals and one answer from a clean room, and Elena's download was never made.
+
+69
+00:08:11,807 --> 00:08:14,595
+Every copy keeps the protection, or isn't made.

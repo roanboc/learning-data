@@ -1,0 +1,67 @@
+{
+  "key": "design-it-simple",
+  "title": "Design it simple",
+  "sub": "Film 3 of 4 of A plan in ninety days: define, the target state. In Korea in the 1440s, King Sejong made 28 letters anyone could learn in days, from a few shapes and one rule. A year from now, Helena Novak, a university's new data manager, and her team design the target from five principles: a small team in the middle with data partners around it, six procedures of a page each, and one front door.",
+  "howto": "The film is drawn in the module's sunlit plaster. Its colours mean the same in every film of the module: blue is design and plans, green done or value, amber risk, cost or waiting, orange data, and violet only an agent.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "ds_korea.js",
+    "ds_design.js",
+    "ds_scenes.js"
+  ],
+  "poster": [
+    "target",
+    "together",
+    4.0
+  ],
+  "say": [
+    [
+      "\\bJoseon\\b",
+      "Choh-sun"
+    ],
+    [
+      "\\bSejong\\b",
+      "Say-jong"
+    ],
+    [
+      "\\bChoe Manri\\b",
+      "Chuway Mahn-ree"
+    ],
+    [
+      "\\bHangul\\b",
+      "Hahn-gool"
+    ],
+    [
+      "\\bStrengholt\\b",
+      "Strenk-holt"
+    ],
+    [
+      "\\bPiethein\\b",
+      "Peet-hine"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bAnil\\b",
+      "Unnil"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "letters"
+  ],
+  "urgent": []
+}

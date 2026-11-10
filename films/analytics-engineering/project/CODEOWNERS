@@ -83,3 +83,9 @@
 /seeds/reference/graduations/ceremonies.csv              malia.fonoti@uni.example
 /governance/4-data-products/graduation_list.yml          mei.tanaka@uni.example
 /exposures/graduations/                                  malia.fonoti@uni.example
+
+# HR's tutors' newsletters: its owner, its newsletters and the mailing tool
+/models/marts/hr/_hr__models.yml                         hr@uni.example jun.park@uni.example
+/seeds/reference/hr/newsletters.csv                      hr@uni.example
+/governance/4-data-products/tutor_newsletters.yml        hr@uni.example
+/exposures/hr/                                           hr@uni.example

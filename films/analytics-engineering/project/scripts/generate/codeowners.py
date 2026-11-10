@@ -37,7 +37,10 @@ TARGET = ROOT / "CODEOWNERS"
 # place). Add a new folder or file here, with the section's title, when its place would move them.
 LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
          ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
-          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/")}
+          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
+         "HR's tutors' newsletters: its owner, its newsletters and the mailing tool":
+         ("/models/marts/hr/", "/seeds/reference/hr/", "/governance/4-data-products/tutor_newsletters.yml",
+          "/exposures/hr/")}
 
 
 def load(path):

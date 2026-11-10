@@ -1,0 +1,27 @@
+seeds:
+
+  - name: newsletters
+    description: >
+      One row per newsletter HR sends to the tutors' mailing list: news of casual tutoring work,
+      sent once in each teaching period, with the day it went. Reference data, owned by HR; a new
+      newsletter comes through a pull request they approve.
+    config:
+      column_types:
+        newsletter: string
+        teaching_period: string
+        sent_on: date
+      meta: {owner: HR, domain: hr, purpose: reference}
+    columns:
+      - name: newsletter
+        description: The newsletter's name, its teaching period and "news", like 2026-S2 news.
+        data_tests:
+          - unique:
+              config:
+                meta: {owner: HR}
+          - not_null:
+              config:
+                meta: {owner: HR}
+      - name: teaching_period
+        description: The teaching period whose casual tutoring work it's about, like 2026-S2.
+      - name: sent_on
+        description: The day the mailing tool sent it to everyone on the list that day.

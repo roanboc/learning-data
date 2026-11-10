@@ -11,6 +11,7 @@ A data manager's first ninety days. Helena Novak starts as the university's data
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Listen first](https://data.learn-all.org/a-plan-in-ninety-days/listen-first/) | Discovery, before design | 8½ min | 6 | 3 questions | [script](2-listen-first/script.md) · [source](2-listen-first/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

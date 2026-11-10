@@ -20,6 +20,7 @@
     ],
     "paths": [
       "films/a-plan-in-ninety-days/2-listen-first/source",
+      "films/a-plan-in-ninety-days/shared/src/mark.js",
       ":(exclude)films/a-plan-in-ninety-days/2-listen-first/source/src/i18n/es/captions.js",
       "films/the-new-skills/shared",
       "films/what-an-agent-is/shared",
@@ -37,6 +38,13 @@
       "films/inner-life-of-data/source/src/ui3.js",
       "films/inner-life-of-data/source/src/engine3.js",
       "films/inner-life-of-data/source/fonts"
-    ]
+    ],
+    "legibility": {
+      "texts": 311,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.5,
+      "status": "Drawn to the rule"
+    }
   }
 ]

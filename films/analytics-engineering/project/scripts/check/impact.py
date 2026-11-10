@@ -168,7 +168,7 @@ def main():
     if touched:
         lines += ["## Changed", ""] + [f"- `{label(nodes[u])}` ({nodes[u]['resource_type']}): {why}" for u, why in sorted(touched.items())] + [""]
     if meaning:
-        lines += ["## Meaning", ""] + [f"- `{p}`: {', '.join(f'`{n}`' for n in names_)}. Its owners approve; data governance confirms any glossary term (DEC-PRJ-11)." for p, names_ in meaning.items()] + [""]
+        lines += ["## Meaning", ""] + [f"- `{p}`: {', '.join(f'`{n}`' for n in names_)}. Its meaning comes from the glossary; data governance checks the change where they differ (DEC-PRJ-11)." for p, names_ in meaning.items()] + [""]
     if contracts:
         lines += ["## Contracts", ""] + [f"- {c}" for c in contracts] + [""]
     if models:

@@ -3,13 +3,13 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and section 11 on 5 November, and section 12 on 10 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12, 14 and 16 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
-Nothing to set up. After each table builds, every classified column gets a Unity Catalog tag,
-`personal_data`, with its class: `direct`, `pseudonymous` or `none`
-(`macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
+Nothing to set up in the build. After each table builds, every classified column gets the governed tag `personal_data`,
+with its class: `special`, `direct`, `pseudonymous` or `indirect` (`none` is no tag); then the faculty column gets `faculty`,
+and the table its `level` (section 16; `macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
 
 ```bash
 dbt build --target databricks --profiles-dir .
@@ -33,10 +33,10 @@ Unity Catalog's attribute-based access control (ABAC) masks by tag: one policy c
 tagged `personal_data = direct`, in every schema of the catalog, including tables built later. A
 column with its own mask conflicts with a policy on it, so use this or step 2, not both.
 
-1. An account admin makes `personal_data` a **governed tag**, with the allowed values `direct`,
-   `pseudonymous` and `none` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*).
-   Governed, only those three values can be set, and only by someone with `ASSIGN` on the tag:
-   give it to the identity that runs dbt.
+1. An account admin makes `personal_data` a **governed tag**, with the values `special`, `direct`,
+   `pseudonymous` and `indirect` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*;
+   section 16). Governed, only those four values can be set, and only by someone with `ASSIGN` on the
+   tag: give it to the identity that runs dbt.
 2. Build with the policy var, so the build tags and leaves masking to the policy:
 
    ```bash
@@ -62,7 +62,7 @@ Some of ABAC is in Beta (policies on views, on the whole metastore): check what'
 Ontos, from Databricks Labs, is a business catalogue for Unity Catalog: data products, data contracts,
 glossaries and semantic models, with review workflows. It runs as a Databricks App (its README:
 `databricks bundle deploy`, then `databricks apps deploy`). It follows ODCS v3.1.0, the version of the
-contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
+enterprise contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
 `governance/6-product-descriptors/` does. Load the
 contracts and products from there; the files in this repository stay their home, and the catalogue
 keeps a copy (Noor's map: *data contract* and *data product* in `governance/3-architecture-map/4-information/`).
@@ -240,9 +240,9 @@ The model's YAML names them: a column's `meta.critical_for` lists the uses that 
 (the graduation list's printed name for the certificates and the programme; its ceremony and
 attendance for the seating plan). After the table builds, dbt tags each of those columns with the
 key-only tag `critical_data`, and takes the tag off a column no use needs any more
-(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
-(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
-the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+(`macros/governance/critical_data.sql`). The model's YAML names them (`meta.critical_for`), and its
+`meta.quality` says what each use needs, at the level agreed with the people who use it
+(`docs/conventions.md`, *What each use needs*). Once, on the platform:
 
 1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
    *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can
@@ -372,10 +372,105 @@ within 30 days, the university's own rule. Nothing here runs in the build.
    request 2026-117, on 24 December), so a copy restored before then has the request applied again
    before anyone reads it; then they leave.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; and *Query history system table* to the end, for section 13, on 5 November 2026)
+## 14. Reports due today, every morning
+
+When a graduate presses "This isn't my name" in the portal, the registrar's office promises an
+answer within two working days. That's a rule about what people do, not about whether the data is
+right, so it's tracked in a model of its own, `mart_graduations__name_reports`, reviewed every week
+and never failed as a test (`docs/conventions.md`, *Tests*). The office hears what's due from a
+Databricks SQL alert, which runs a query on a schedule and notifies when its result meets a
+condition. Once, on the platform:
+
+1. Compile the alert's query, `analyses/alerts/name_reports_due_today.sql`
+   (`dbt compile --target databricks --select name_reports_due_today --profiles-dir .`), and create
+   an alert with it. An alert keeps its own query: a saved query can't be reused.
+2. The condition: the sum of `reports_due` is greater than 0. Set *Empty result state* to OK, so a
+   morning with nothing due sends nothing.
+3. The schedule: every day at 8:00, in Quartz cron syntax `0 0 8 * * ?`.
+4. The notification: the registrar's office's email destination, with a custom template that
+   includes `{{QUERY_RESULT_TABLE}}`, the list itself (its first 100 rows; only email shows it).
+   The names in it are direct personal data (section 3), so it goes to the office that owns them,
+   and to no one else.
+
+The alert can also be written as code, an `alerts` resource in a bundle, so a change to it is
+reviewed like any other change to the project.
+
+## 15. Who reads which faculty, a row filter
+
+Finance's claims, `mart_finance__casual_claims`, are read by every faculty's planners and by Finance,
+through the metric view `casual_teaching_cost` and every tool that reads it (DEC-FIN-06). A faculty
+may read its own claims only; Finance, every faculty's. The rule is a row filter on the table: a SQL
+function, in Unity Catalog, that sees who is asking, so it holds for every reader, through the
+metric view too, and no reader's code repeats it. Name the groups, and add the identity that runs
+dbt to the one that reads every faculty: the tests, the metric view and the shared totals
+(`mart_finance__faculty_totals`) read the claims as it does.
+
+```bash
+dbt build --target databricks --profiles-dir . --vars '{faculty_readers: {all: all_faculties, HLT: health_planners, EIT: engineering_planners}}'
+```
+
+Before the build, dbt creates `faculty_row_filter` in the target's schema; after the claims table
+builds, it sets the filter on its `faculty_code` (`macros/finance/faculty_row_filter.sql`). A faculty
+the var doesn't name is read by `all_faculties` only. A group says which rows a reader sees; what it
+may read at all is still its grants: Finance's pay-day agent is in `all_faculties`, with `SELECT` on
+the metric view and nothing under it (`examples/more-readers-than-people/`). One table needs the
+rule, so it's the table's own filter; attribute-based policies set the same kind of rule, by tag, on
+many tables at once (section 3 does it for masks).
+
+## 16. Tags that travel
+
+On Databricks, a column's class is one of five, the strictest that applies, as its `meta.personal_data`
+says: `special`, `direct`, `pseudonymous`, `indirect` or `none` (DEC-PRJ-17, amending DEC-PRJ-13). After
+each table builds (section 1), every classified column gets the governed tag `personal_data` with its
+class. A column the YAML marks `none` gets no tag, and the build takes an old one off: a `none` tag would
+meet a real class in any column made from both. Then the column that holds each row's faculty
+(`meta.faculty: true`) gets the key-only tag `faculty`, and last the table gets its `level` (`meta.level`:
+`public`, `internal`, `confidential` or `restricted`; in `dbt_project.yml`, `confidential` for the core
+and the marts and `internal` for `_shared`, unless a model's YAML says another). The build stops on a
+level under its two floors: a table with a column that points to a person (`direct`, `pseudonymous` or
+`indirect`) is never `public`, and one with anything `special` is `restricted`
+(`macros/governance/personal_data.sql`).
+
+Once, on the platform (checked 10 November 2026):
+
+1. An account admin makes three **governed tags** (Catalog Explorer: *Govern*, *Governed Tags*):
+   `personal_data`, with the values `special`, `direct`, `pseudonymous` and `indirect`; `level`, with
+   `public`, `internal`, `confidential` and `restricted`; and `faculty`, with no values. Governed, only
+   those values can be set, and only by someone with `ASSIGN` on the tag: give it to the identity that
+   runs dbt, and to no person. If `personal_data` was made with `none` among its values, set its values
+   again: a `none` tag already on a column stays until the next build takes it off.
+2. Someone with `MANAGE` on the tags turns on **tag propagation** for `personal_data`, with `special` as
+   its default propagation value, and for `faculty`; never for `level`, or a table joined from a public
+   table and a confidential one would be a conflict every time. Each class then follows its column
+   through lineage into the tables and views made from it on serverless compute, usually within
+   minutes, with nobody tagging them. Two values for one tag in one column is a conflict: the column
+   takes the default value. A policy can't see a tag until it has arrived. Propagation is in Beta on
+   10 November 2026: a workspace admin turns it on first, on the *Previews* page.
+3. Look for conflicts. `analyses/governance/classes_against_lineage.sql` lists every column whose class
+   differs from the class of a column it was made from. In this project, the marts'
+   `learner_award_key` is one: it's made from the learner table's `learner_bk` (`direct`), and its YAML
+   says `pseudonymous`, so with propagation on it takes `special`. A value that says less is made once,
+   at the source, by its owner, and every table after takes it.
+
+Tags start on the tables people read. Staging and intermediate are views nobody is granted, and they
+carry no tags, so `learner_key`, made there, arrives in the core with no class to conflict with its own.
+Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
+doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; and the last two, for section 15, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
+- Databricks, *Governed tags* (allowed values, and who may assign them), checked 10 November 2026:
+  https://docs.databricks.com/aws/en/admin/governed-tags/
+- Databricks, *Tag propagation* (through lineage, per tag; a conflict takes the default propagation
+  value; serverless compute; not classic compute, volumes, or pipelines' streaming tables and
+  materialized views; a policy isn't enforced on a derived table until the tag appears), checked
+  10 November 2026: https://docs.databricks.com/aws/en/admin/governed-tags/tag-propagation
+- Databricks, *Data Classification* (a scan that proposes classes for the columns it recognises),
+  checked 10 November 2026: https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-classification
+- Databricks, *Lineage system tables reference* (`system.access.column_lineage`), checked 10 November
+  2026: https://docs.databricks.com/aws/en/admin/system-tables/lineage
 - Databricks, *ABAC tutorial (SQL)*: https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/tutorial-sql
 - Databricks, *Policy evaluation* (manual masks conflict with ABAC masks):
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policy-evaluation
@@ -474,3 +569,12 @@ within 30 days, the university's own rule. Nothing here runs in the build.
 - dbt, *Graph operators* (`source:name+`, a source and everything built from it):
   https://docs.getdbt.com/reference/node-selection/graph-operators
 - GitHub, *Syntax for issue forms*: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-discussions/syntax-for-issue-forms
+- Databricks, *Databricks SQL alerts* (a query on a schedule, and a notice when its result meets a
+  condition; a saved query can't be reused): https://docs.databricks.com/aws/en/sql/user/alerts/
+- Databricks, *Create an alert* (the condition, *Empty result state*, Quartz cron, and the template
+  variables, `QUERY_RESULT_TABLE` among them): https://docs.databricks.com/aws/en/sql/user/alerts/create
+- Databricks, *Declarative Automation Bundles resources* (an alert, `alerts` in a bundle):
+  https://docs.databricks.com/aws/en/dev-tools/bundles/resources
+- Databricks, *Row filters and column masks* (a row filter is a SQL function that sees who is asking,
+  set on a table with `ALTER TABLE ... SET ROW FILTER`): https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks/
+- Databricks, *Unity Catalog metric views*: https://docs.databricks.com/aws/en/uc-semantics/metric-views

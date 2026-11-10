@@ -2,14 +2,14 @@
   "kicker": "Data temperature",
   "kicker_es": "La temperatura de los datos",
   "title_es": "Caliente, tibio, frío",
-  "h1": "Freshness and reading decide where data lives",
-  "h1_es": "La frescura y la lectura deciden dónde viven los datos",
+  "h1": "Freshness decides how data moves; reading, where it lives",
+  "h1_es": "La frescura decide cómo se mueven los datos; la lectura, dónde viven",
   "lead": "Until September, nobody at the university had asked how fresh each kind of data must be. Contract changes came in once a night, and 23 tutors were paid two weeks late; old pay records sat in the costliest storage, never deleted. Now each kind of data has its own temperature.",
   "lead_es": "Hasta septiembre, nadie en la universidad había preguntado cuán frescos debían estar sus datos. Los cambios de contrato llegaban cada noche, y 23 tutores cobraron dos semanas tarde; los registros de pago viejos ocupaban el almacenamiento más caro, sin borrarse. Hoy cada dato tiene su temperatura.",
-  "description": "A film about data temperature: how fresh each kind of data must be, and how often it's read, decide how it moves and where it's kept. In 2015, a gene bank driven from Aleppo by war asked the seed vault on Svalbard for the copies it kept frozen there, the first to do so. At the university, contracts are hot, pushed from the HR system as they change and kept as a streaming table within a minute; each faculty's spending is warm, a materialized view worked out each night; old pay records are cold, moved to the archive tier after a year and deleted at seven. Light on purpose, with the official docs for the rest.",
-  "description_es": "Una película sobre la temperatura de los datos: cuán frescos deben estar y cuán a menudo se leen deciden cómo se mueven y dónde se guardan. En 2015, un banco de germoplasma que la guerra sacó de Alepo pidió a la bóveda de semillas de Svalbard las copias que guardaba congeladas, el primero en hacerlo. En la universidad, los contratos son calientes: el sistema de RR. HH. envía cada cambio y una tabla de streaming lo tiene en un minuto; el gasto de cada facultad es tibio, una vista materializada que se calcula cada noche; los registros de pago viejos son fríos: pasan al nivel de archivo al año y se borran a los siete. Liviana a propósito, con la documentación oficial para el resto.",
-  "card": "Hot, warm or cold: how fresh data must be, and how often it's read, decide how it moves and where it's kept.",
-  "card_es": "Caliente, tibio o frío: cuán frescos deben estar los datos y cuán a menudo se leen deciden cómo se mueven y dónde viven.",
+  "description": "A film about data temperature: how fresh each kind of data must be decides how it moves, and how often it's read decides where it's kept. In 2015, a gene bank driven from Aleppo by war asked the seed vault on Svalbard for the copies it kept frozen there, the first to do so. At the university, contracts are hot, pushed from the HR system as they change and kept as a streaming table within a minute; each faculty's spending is warm, a materialized view worked out each night; old pay records are cold, moved to the archive tier after a year and deleted at seven. Light on purpose, with the official docs for the rest.",
+  "description_es": "Una película sobre la temperatura de los datos: cuán frescos deben estar decide cómo se mueven, y cuán a menudo se leen, dónde se guardan. En 2015, un banco de germoplasma que la guerra sacó de Alepo pidió a la bóveda de semillas de Svalbard las copias que guardaba congeladas, el primero en hacerlo. En la universidad, los contratos son calientes: el sistema de RR. HH. envía cada cambio y una tabla de streaming lo tiene en un minuto; el gasto de cada facultad es tibio, una vista materializada que se calcula cada noche; los registros de pago viejos son fríos: pasan al nivel de archivo al año y se borran a los siete. Liviana a propósito, con la documentación oficial para el resto.",
+  "card": "Hot, warm or cold: how fresh data must be decides how it moves; how often it's read decides where it's kept.",
+  "card_es": "Caliente, tibio o frío: cuán frescos deben estar los datos decide cómo se mueven; cuán a menudo se leen, dónde viven.",
   "chapters_es": {
     "vault": "La bóveda de semillas",
     "two": "Dos preguntas",
@@ -102,8 +102,8 @@
       {
         "title": "Access tiers for blob data",
         "title_es": "Niveles de acceso para los datos de blobs",
-        "line": "The cloud's tiers, from hot to archive: what each costs to keep and to read, and how long it takes to bring back.",
-        "line_es": "Los niveles de la nube, de frecuente a archivo: cuánto cuesta guardar y leer en cada uno, y cuánto tarda en volver.",
+        "line": "The cloud's storage tiers, named by how often data is read, from hot to archive: what each costs to keep and to read, and how long it takes to bring back.",
+        "line_es": "Los niveles de almacenamiento de la nube, según cuánto se leen los datos, de frecuente a archivo: cuánto cuesta guardar y leer en cada uno, y cuánto tarda en volver.",
         "href": "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview",
         "href_es": "https://learn.microsoft.com/es-es/azure/storage/blobs/access-tiers-overview"
       }

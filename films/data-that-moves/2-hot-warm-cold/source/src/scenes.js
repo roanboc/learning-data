@@ -166,7 +166,7 @@ scene("hot",(ctx,S,t,sc)=>{
       hw_tagAt(c,930,380,"within a minute",tt,T.minute+0.2,T.costs,{col:MD.flow,icon:"clock"});
       hw_pillAt(c,960,640,"11 contracts changed · every claim approved by noon",tt,T.noon2,T.costs-0.1,{col:MD.pass,icon:"tick"});
       hw_tagAt(c,808,360,"always running",tt,T.running-0.2,1e9,{col:MD.flow,icon:"refresh"});
-      hw_cardAt(c,480,600,960,{kick:"Hot",title:"Costs the most: something is always running",sub:"keep hot only what's needed within minutes"},tt,T.costs+0.2,1e9,{edge:HW.heat,kickCol:HW.heat});});
+      hw_cardAt(c,480,600,960,{kick:"Hot",title:"The pipeline costs the most: it's always running",sub:"keep hot only what's needed within minutes"},tt,T.costs+0.2,1e9,{edge:HW.heat,kickCol:HW.heat});});
     hw_personAt(c,"ingrid",270,660,0.85,tt,T.ingrid-0.3,T.night-0.4,{gaze:[4,-1]});}}],0.6);
 });
 
@@ -219,7 +219,7 @@ scene("cold",(ctx,S,t,sc)=>{
   const PAY=[96,150,420],payP=[516,205],REC=[700,154,460],TOP=520,LOW=740;
   // the shelves, the years on them, and what sank, was read or went: the same picture before and after the vault
   const shelves=(c,tt)=>{
-    hw_shelf(c,60,TOP+6,1500,"Hot storage","the costliest",{a:ag_in(tt,T.costliest-0.4,0.5)});hw_shelf(c,60,LOW+6,1500,"Archive tier","the cheapest",{cold:true,a:ag_in(tt,T.tier-0.4,0.5)});
+    hw_shelf(c,60,TOP+6,1500,"Hot tier","read often, costliest",{a:ag_in(tt,T.costliest-0.4,0.5)});hw_shelf(c,60,LOW+6,1500,"Archive tier","rarely read, cheapest",{cold:true,a:ag_in(tt,T.tier-0.4,0.5)});
     const sink=HW_YEARS.map((y,i)=>i<10?ag_sine((tt-T.written-0.2-i*0.22)/1.0):0),gone=HW_YEARS.map((y,i)=>i<3?ag_in(tt,T.gone+i*0.3,0.8):0),
       read=HW_YEARS.map((y,i)=>i===10?ag_in(tt,T.rarely-0.2,0.5)*(1-ag_in(tt,T.before,0.5))+hw_io(tt,T.recent,T.archived,0.3,0.4):i===5?hw_io(tt,T.which,T.turn,0.3,0.5):0);
     const lift=ag_sine((tt-T.back-0.2)/1.4)*(1-ag_in(tt,T.turn,0.8));sink[5]=sink[5]*(1-0.35*lift);
@@ -298,10 +298,10 @@ scene("close",(ctx,S,t,sc)=>{
       hw_personAt(c,"linh",360,800,0.95,tt,-1,T.br,{gaze:[4,0]});
       hw_scr(c,S,()=>{hw_when(c,S,"Today · pay day",hw_io(tt,T.today,T.br,0.4,0.6));
         hw_cardAt(c,820,250,900,{kick:"Paid today",title:"2,960 people",sub:"856 of them casual staff, Linh among them"},tt,T.today+0.3,T.take-0.2,{edge:MD.pass});
-        // what the film found: freshness and reading decide how data moves and where it lives
+        // what the film found: freshness decides how data moves; reading decides where it lives
         const k=(tt-T.take)/0.9,a=hw_io(tt,T.take,T.wheel,0.5,0.5);
         if(a>0.004){c.save();c.globalAlpha*=a;ag_about(c,1270,420,lerp(0.85,1,Math.min(1,ag_spr(k,0,0.5))));md_card(c,820,300,900,220,{edge:MD.flow,glow:0.6});
-          md_T(c,"Freshness and reading decide",1270,388,{w:700,size:40,align:"center"});md_T(c,"how data moves and where it lives",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
+          md_T(c,"Freshness decides how data moves;",1270,388,{w:700,size:40,align:"center"});md_T(c,"reading decides where it lives",1270,446,{w:700,size:40,align:"center",col:MD.flow});c.restore();}
         // storage has had tiers for years: no wheel to reinvent
         const wa=hw_io(tt,T.wheel,T.docs,0.5,0.5);if(wa>0.004){md_mark(c,1270,380,80,(tt-T.wheel)/1.6,wa);md_T(c,"storage has had tiers for years",1270,540,{w:700,size:32,align:"center",col:MD.soft,a:wa});}
         // the official docs, then investigate, adapt, implement, iterate
@@ -311,7 +311,7 @@ scene("close",(ctx,S,t,sc)=>{
           let vx=880;["investigate","adapt","implement","iterate"].forEach((v,i)=>{md_T(c,v,vx,480,{w:700,size:32,col:MD.flow,a:ag_in(tt,T.verbs+i*0.35,0.4)});vx+=md_tw(c,v,{w:700,size:32})+56;});c.restore();}
         hw_cardAt(c,820,330,900,{kick:"Next",title:"One copy, one platform",sub:"one copy of the claims, for the app and for Finance"},tt,T.next+0.2,T.br,{edge:MD.flow});});}}
   ],0.6);
-  md_end(ctx,S,t,T.br,"Hot, warm, cold","Freshness and reading decide how data moves and where it lives.","Film 2 of 3","Data that moves");
+  md_end(ctx,S,t,T.br,"Hot, warm, cold","Freshness decides how data moves; reading decides where it lives.","Film 2 of 3","Data that moves");
 });
 
 // chapters that open in the room the one before ends in: the camera glides on, and what the last one shows leaves first

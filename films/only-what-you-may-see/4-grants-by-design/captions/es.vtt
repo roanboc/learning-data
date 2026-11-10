@@ -1,0 +1,244 @@
+WEBVTT
+
+00:00:01.600 --> 00:00:04.288
+Las Galápagos, a fines de los sesenta.
+
+00:00:05.788 --> 00:00:11.920
+Islas volcánicas, a unos mil kilómetros al oeste de Ecuador, cuyos animales no temen a las personas.
+
+00:00:13.420 --> 00:00:15.824
+Ahora los barcos traen visitantes, más cada año.
+
+00:00:17.324 --> 00:00:20.381
+Científicos y guías temen lo que harán tantos pies.
+
+00:00:21.481 --> 00:00:26.537
+Podrían caminar por cualquier parte, a un paso de aves anidando, iguanas y lobos marinos.
+
+00:00:28.037 --> 00:00:33.002
+Los nidos podrían quedar pisoteados y la lava, desgastada, y ya se están llevando el coral.
+
+00:00:34.702 --> 00:00:39.111
+Las aves podrían irse para siempre, y muchos animales de las islas no viven en otro lugar.
+
+00:00:40.611 --> 00:00:43.965
+Algo tiene que cambiar, antes de que los visitantes lleguen por miles.
+
+00:00:45.865 --> 00:00:52.201
+Así que el parque nacional, aconsejado por la Estación Charles Darwin, planifica las visitas una vez, para todo el parque.
+
+00:00:53.701 --> 00:00:56.243
+La mayor parte del parque no recibe visitas.
+
+00:00:57.743 --> 00:01:01.686
+Unos pocos sitios junto a la costa se abren, cada uno con su sendero marcado.
+
+00:01:02.986 --> 00:01:05.021
+Cada grupo camina con un guía capacitado.
+
+00:01:06.321 --> 00:01:12.100
+Y las reglas son las mismas para todos: seguir el sendero; no tocar nada, no alimentar nada, no llevarse nada.
+
+00:01:13.800 --> 00:01:18.761
+Un barco nuevo, un guía nuevo, un visitante nuevo: cada uno encaja en el plan el día que llega.
+
+00:01:20.461 --> 00:01:26.459
+En 1982, veinticinco mil personas visitan las islas, y los sitios que recorren están casi intactos.
+
+00:01:27.959 --> 00:01:33.374
+Los flamencos han vuelto a anidar junto a una laguna visitada, por primera vez en catorce años.
+
+00:01:35.074 --> 00:01:42.564
+En 2025 llegaron 290,404 personas, todavía por los senderos, todavía con un guía.
+
+00:01:44.264 --> 00:01:46.691
+Los datos de una universidad también tienen visitas.
+
+00:01:47.791 --> 00:01:53.110
+Abiertos tabla por tabla, algunos esperan lo que necesitan, y otros alcanzan lo que no deberían.
+
+00:01:54.610 --> 00:01:59.160
+Así que, como en las islas, sus permisos se diseñan una vez, por área y por rol.
+
+00:02:00.460 --> 00:02:04.473
+Cada persona y cada tabla nueva encaja en el plan desde su primer día.
+
+00:02:11.773 --> 00:02:17.129
+En la universidad, la plataforma de datos guarda los registros de cada área en Unity Catalog.
+
+00:02:18.229 --> 00:02:24.149
+En Gobernanza en Unity Catalog, cada tabla estaba en un solo catálogo, y sus lectores eran grupos.
+
+00:02:25.449 --> 00:02:29.454
+Pero cada permiso se daba a mano, sobre una tabla, cuando alguien lo pedía.
+
+00:02:31.154 --> 00:02:35.512
+Cincuenta y ocho tablas, ciento sesenta y tres permisos, cada uno dado por separado.
+
+00:02:37.212 --> 00:02:40.830
+Una tabla nueva esperaba seis días, en promedio, a su primer lector.
+
+00:02:42.730 --> 00:02:48.270
+Y quien hacía una tabla era su propietario: nueve eran de una persona, y dos de esas personas ya se habían ido.
+
+00:02:49.970 --> 00:02:53.226
+Para decir quién podía leer qué, alguien tenía que leer cada permiso.
+
+00:02:55.326 --> 00:03:00.942
+Ahora cada área tiene su propio catálogo, y las tablas del registro se están mudando al suyo.
+
+00:03:02.242 --> 00:03:07.988
+Mei Tanaka es su dueña, por la oficina del registro, y pide un plan antes de un solo permiso.
+
+00:03:11.288 --> 00:03:15.856
+En Unity Catalog, una tabla está en un esquema, y un esquema en un catálogo.
+
+00:03:17.156 --> 00:03:20.826
+Piensa en el catálogo como una sala, y en cada esquema como un estante en ella.
+
+00:03:22.126 --> 00:03:27.506
+Para leer una tabla, un grupo necesita tres derechos: entrar a la sala, al estante y a la tabla.
+
+00:03:29.406 --> 00:03:31.741
+USE CATALOG, USE SCHEMA y SELECT.
+
+00:03:34.041 --> 00:03:37.447
+Como un desembarcadero, un sendero y un sitio: los tres, o ninguno.
+
+00:03:39.547 --> 00:03:42.804
+SELECT en una tabla, sin los dos primeros, no abre nada.
+
+00:03:45.104 --> 00:03:48.477
+Un derecho más deja que todos miren sin leer: BROWSE.
+
+00:03:49.977 --> 00:03:54.651
+Con él, cualquiera puede encontrar una tabla, ver qué guarda y quién es su propietario, y pedirla.
+
+00:03:58.551 --> 00:04:04.057
+Así que el plan parte de quién lee qué, como el plan de las islas partió de por dónde se puede caminar.
+
+00:04:05.357 --> 00:04:09.788
+El catálogo de cada área recibe los mismos estantes, uno por cada conjunto de lectores.
+
+00:04:11.088 --> 00:04:15.490
+Staging e intermediate guardan los pasos de la propia construcción, y nadie los lee.
+
+00:04:16.990 --> 00:04:22.726
+Core guarda los registros del área; reference, las listas que usan; published, totales para todos.
+
+00:04:24.226 --> 00:04:30.165
+Y el catálogo del registro tiene uno más: support, para el apoyo en exámenes que solo unos pocos pueden ver.
+
+00:04:31.865 --> 00:04:35.715
+Luego cada estante recibe a sus lectores: siempre un grupo, nunca una persona.
+
+00:04:37.015 --> 00:04:43.147
+La oficina del registro lee core y reference; los pocos que organizan el apoyo en exámenes leen support.
+
+00:04:44.847 --> 00:04:49.812
+La mesa de ayuda y Planificación leen core, y las políticas deciden qué ve cada una.
+
+00:04:51.512 --> 00:04:57.073
+El equipo de datos construye en desarrollo, con registros inventados, así que aquí no tiene nada propio.
+
+00:04:58.773 --> 00:05:02.412
+Un permiso va en un catálogo o un estante, nunca en una sola tabla.
+
+00:05:03.712 --> 00:05:07.193
+Una tabla que necesita otros lectores va en otro estante.
+
+00:05:10.693 --> 00:05:16.075
+Un permiso en un estante llega a cada tabla que hay en él: las de hoy, y todas las que se hagan después.
+
+00:05:18.175 --> 00:05:23.806
+Cuando llega una nueva versión de la tabla de credenciales, los lectores de core la leen desde su primer minuto.
+
+00:05:25.906 --> 00:05:28.114
+Nadie lo pide, y nadie da permisos.
+
+00:05:30.014 --> 00:05:37.146
+Cuando llega la tabla de apoyo en exámenes, va a su propio estante, y solo quienes organizan ese apoyo pueden leerla.
+
+00:05:39.646 --> 00:05:43.988
+La mesa de ayuda, Planificación y el estudio leen core, así que ninguno la ve nunca.
+
+00:05:46.288 --> 00:05:50.309
+Como un barco nuevo en las islas, sigue el plan desde el día en que llega.
+
+00:05:54.409 --> 00:06:00.923
+Cada catálogo, estante y tabla tiene un propietario, que puede hacer cualquier cosa con él, incluso dejar que cualquiera lo lea.
+
+00:06:02.823 --> 00:06:04.760
+Quien lo hace es su primer propietario.
+
+00:06:06.460 --> 00:06:12.171
+Así que el catálogo del registro, y todo lo que contiene, pasa a un grupo: registrar owners.
+
+00:06:14.071 --> 00:06:20.647
+No hay ninguna persona en él, solo registrar-loader, la identidad que construye las tablas y despliega el plan.
+
+00:06:22.747 --> 00:06:28.132
+Cuando alguien se va, ninguna tabla queda sin propietario, y ninguna persona sola puede abrir una.
+
+00:06:30.232 --> 00:06:35.312
+Mei sigue decidiendo quién puede ver los registros: es su dueña, por la oficina del registro.
+
+00:06:36.612 --> 00:06:41.334
+Dos tipos de dueño: Mei dice quién puede verlos, y el grupo es quien puede cambiarlos.
+
+00:06:45.434 --> 00:06:52.689
+En Red, almacenamiento y llaves, cada catálogo se vinculó a su espacio de trabajo: desde otro, un permiso no basta.
+
+00:06:54.589 --> 00:07:01.385
+El estudio de Anil Kurian trabaja en un espacio de trabajo propio, studies, donde nada se puede descargar ni copiar afuera.
+
+00:07:03.285 --> 00:07:06.780
+El catálogo del registro también se vincula ahí, pero solo para leer.
+
+00:07:08.480 --> 00:07:15.719
+Desde ahí, el estudio lee la tabla de estudiantes según sus permisos, y nunca puede escribir en ella, diga lo que diga un permiso.
+
+00:07:17.819 --> 00:07:24.140
+Lo que produce va a su propio espacio, health progress, hecho para su acuerdo y borrado cuando el acuerdo termina.
+
+00:07:25.840 --> 00:07:28.364
+Mirar sin tocar, como en los senderos de las islas.
+
+00:07:31.864 --> 00:07:36.300
+El plan se escribe una vez, en dos archivos junto al código del proceso en GitHub.
+
+00:07:37.600 --> 00:07:40.051
+Cada estante y sus lectores ocupan unas pocas líneas.
+
+00:07:41.551 --> 00:07:47.381
+Esos archivos son del equipo de Mei, así que nada cambia quién ve sus registros sin su sí.
+
+00:07:49.081 --> 00:07:58.741
+El permiso de un estudio sale del contrato de su acuerdo, y lo nombra: 2026-14, hasta el 30 de junio de 2027.
+
+00:08:00.441 --> 00:08:06.428
+Primero entran las políticas del estudio, y su permiso después, así que nunca lee la tabla sin máscara.
+
+00:08:08.128 --> 00:08:14.696
+Luego, el camino de De una rama a producción: primero pruebas, luego producción, cuando quien aprueba las entregas dice que sí.
+
+00:08:16.396 --> 00:08:22.707
+Y nadie puede dar permisos a mano: solo el grupo de propietarios, y su único miembro despliega solo desde main.
+
+00:08:24.207 --> 00:08:28.590
+Todo lo demás requiere una cuenta de administrador, encendida, aprobada y registrada.
+
+00:08:32.090 --> 00:08:36.997
+En las islas, el plan vino primero, y cada visitante desde entonces ha caminado dentro de él.
+
+00:08:38.697 --> 00:08:41.372
+En la universidad, el plan también viene primero.
+
+00:08:42.472 --> 00:08:50.677
+La oficina del registro lee sus registros; el estudio, solo lo que permite su acuerdo; los demás pueden encontrar lo que existe, y pedirlo.
+
+00:08:52.377 --> 00:08:56.678
+Cada tabla nueva, y cada persona nueva, encaja en el plan desde su primer día.
+
+00:08:58.178 --> 00:09:00.659
+Diseña los permisos una vez, por área y por rol.

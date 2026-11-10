@@ -272,6 +272,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 - [An agreement first](../films/only-what-you-may-see/1-an-agreement-first/) — `an-agreement-first`
 - [Know what you hold](../films/only-what-you-may-see/2-know-what-you-hold/) — `know-what-you-hold`
 - [Show the least](../films/only-what-you-may-see/3-show-the-least/) — `show-the-least`
+- [Grants by design](../films/only-what-you-may-see/4-grants-by-design/) — `grants-by-design`
 
 ### Kept for a reason
 
@@ -324,6 +325,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
 - [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
+- [The map, enforced](../films/from-helper-to-colleague/5-the-map-enforced/) — `the-map-enforced`
 
 ## Leading data people
 

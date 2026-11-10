@@ -109,6 +109,7 @@
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
+| Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

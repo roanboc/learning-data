@@ -354,7 +354,7 @@ No film source yet.
 
 Source: [films/ownership-and-performance](../films/ownership-and-performance/) · Portal: `/ownership-and-performance/`
 
-No film source yet.
+- [Measure the work, not the people](../films/ownership-and-performance/2-measure-the-work/) — `measure-the-work`
 
 ## Data management
 

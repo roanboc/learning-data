@@ -1,0 +1,16 @@
+/* Learning Data: "Pause and think" for Measure the work, not the people, in Spanish (Medir el trabajo, no a las personas). Keep the keys in step with think.en.js.
+   The same three stops (read, pairs, target), the right answer in the same place as in English, and the same words as the captions: una medida,
+   devuelto, promesas cumplidas, la carga, una meta (Goodhart's target), sus propios objetivos (a person's own). */
+window.LEARN={lang:"es",
+think:{ui:{toggle:"Pausa para pensar",kicker:"Pausa para pensar",cont:"Continuar",skip:"Saltar",lab:"Prueba la idea en un laboratorio",off:"Quitar las pausas",right:"Correcto.",wrong:"No del todo.",start:"Reproducir con pausas para pensar",answer:"Respuesta:",watch:"Ver esta parte"},
+  qs:{
+  read:{q:"Los 24 días de junio, desarmados, muestran 7 de espera por acceso a los datos. ¿Qué cambia el equipo?",
+    opts:[{t:"Cuándo se pide el acceso: el día en que se acepta una solicitud, para que esté listo al empezar.",ok:true},{t:"Qué tan rápido pide acceso cada persona, para recordarle a quien más esperó que lo pida antes.",near:true},{t:"Nada aún, porque gobierno de datos promete acceso en cinco días, así que la espera no es del equipo."}],
+    why:"Nadie fue lento: el acceso se pedía solo al empezar el trabajo, un conjunto de datos a la vez, hasta cinco días cada uno. Pedirlo el día en que se acepta una solicitud bajó esa espera de siete días a uno para septiembre. La pregunta de Helena es qué frenó el trabajo, nunca quién. ¿Qué espera en el trabajo de tu equipo viene de cómo se organiza?"},
+  pairs:{q:"El 12 de agosto, las promesas cumplidas llegan al 82%, y la carga está en nueve trabajos frente a un límite de seis. ¿Cómo se lee?",
+    opts:[{t:"Como un logro para celebrar, porque es la medida que más notan quienes usan los productos.",near:true},{t:"Como señal de que el límite puede subir a nueve, porque el equipo claramente da abasto con todo."},{t:"En conjunto: cumplía sus promesas cargando demasiado, así que ahora termina antes de empezar.",ok:true}],
+    why:"Por sí solo, 82% es un número para celebrar. Junto a la carga, muestra que el trabajo nuevo empezaba antes de terminar el anterior, y la gente cansada comete errores. Cada pareja mantiene honesta a la otra: el equipo terminó antes de empezar, dijo ahora no a dos solicitudes, y en diciembre las promesas cumplidas llegaron al 86% con la carga de vuelta en seis. ¿Cuál de tus medidas necesita una pareja?"},
+  target:{q:"Quien dirige los servicios digitales pide un conteo de tickets cerrados por cada persona, cada mes. ¿Qué hace Helena?",
+    opts:[{t:"Envía el conteo con una nota, para que se lea con cuidado y nunca sirva para clasificar a nadie.",near:true},{t:"Dice que no al conteo, y muestra en su lugar la página del equipo y lo que cambiaron sus lecturas.",ok:true},{t:"Acepta, y suma las horas que trabajó cada persona, para que también se vea el esfuerzo."}],
+    why:"Las preguntas detrás eran justas, pero un conteo por persona pronto se vuelve una meta: la gente divide el trabajo en partes, elige tickets fáciles, deja de ayudarse y oculta errores. La mayoría de los problemas son del sistema, no de las personas que están en él. Helena mostró la página del equipo y lo que cambiaron sus lecturas, y el crecimiento de cada persona queda en sus propios objetivos. ¿Qué mostrarías tú en su lugar?"}
+  }}};

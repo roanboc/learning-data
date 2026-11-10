@@ -1,0 +1,627 @@
+{
+ "player": "a1f7ecd39b3f2c35",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "ohHi:court": {
+   "file": "ohHi_court.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     0,
+     7.0
+    ]
+   ]
+  },
+  "ohCourtDesks": {
+   "file": "ohCourtDesks.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     0,
+     7.0
+    ]
+   ]
+  },
+  "place:deskTop": {
+   "file": "deskTop.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     6.25,
+     10.0
+    ],
+    [
+     69.0,
+     73.5
+    ],
+    [
+     318.25,
+     322.0
+    ]
+   ]
+  },
+  "place:annalsOffice": {
+   "file": "annalsOffice.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     9.25,
+     15.0
+    ]
+   ]
+  },
+  "ohOfficeTable": {
+   "file": "ohOfficeTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     9.25,
+     15.0
+    ]
+   ]
+  },
+  "place:print": {
+   "file": "print.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     14.25,
+     17.5
+    ],
+    [
+     54.0,
+     60.0
+    ]
+   ]
+  },
+  "ohPrintBench": {
+   "file": "ohPrintBench.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     14.25,
+     17.5
+    ],
+    [
+     54.0,
+     60.0
+    ]
+   ]
+  },
+  "place:chestRoom": {
+   "file": "chestRoom.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     16.75,
+     19.0
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     18.25,
+     20.5
+    ],
+    [
+     26.75,
+     31.5
+    ],
+    [
+     59.25,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "ohView:capital": {
+   "file": "ohView_capital.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     18.25,
+     20.5
+    ],
+    [
+     26.75,
+     31.5
+    ],
+    [
+     59.5,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "ohView:jeonju": {
+   "file": "ohView_jeonju.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     19.25,
+     20.5
+    ],
+    [
+     26.75,
+     31.5
+    ]
+   ]
+  },
+  "place:sealRoom": {
+   "file": "sealRoom.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     19.75,
+     24.75
+    ],
+    [
+     233.0,
+     237.75
+    ]
+   ]
+  },
+  "place:road": {
+   "file": "road.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     24.0,
+     27.5
+    ]
+   ]
+  },
+  "ohHi:archive": {
+   "file": "ohHi_archive.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     30.75,
+     35.0
+    ],
+    [
+     43.25,
+     46.75
+    ]
+   ]
+  },
+  "place:book": {
+   "file": "book.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     34.25,
+     44.0
+    ]
+   ]
+  },
+  "place:path": {
+   "file": "path.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.5,
+     49.5
+    ]
+   ]
+  },
+  "place:cave": {
+   "file": "cave.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     49.25,
+     51.5
+    ]
+   ]
+  },
+  "place:caveSnow": {
+   "file": "caveSnow.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     50.75,
+     54.75
+    ]
+   ]
+  },
+  "ohView:odae": {
+   "file": "ohView_odae.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     59.75,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "ohView:taebaek": {
+   "file": "ohView_taebaek.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     59.75,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "ohView:myohyang": {
+   "file": "ohView_myohyang.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     60.0,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "ohView:mani": {
+   "file": "ohView_mani.webp",
+   "w": 440,
+   "h": 300,
+   "shows": [
+    [
+     60.25,
+     65.5
+    ],
+    [
+     85.0,
+     94.0
+    ]
+   ]
+  },
+  "place:pathAutumn": {
+   "file": "pathAutumn.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     64.75,
+     68.25
+    ]
+   ]
+  },
+  "place:airing": {
+   "file": "airing.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     68.0,
+     69.75
+    ],
+    [
+     316.0,
+     319.0
+    ]
+   ]
+  },
+  "place:shelf": {
+   "file": "shelf.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     72.75,
+     82.0
+    ],
+    [
+     351.5,
+     354.5
+    ]
+   ]
+  },
+  "place:library": {
+   "file": "library.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     81.25,
+     85.75
+    ],
+    [
+     353.75,
+     358.75
+    ]
+   ]
+  },
+  "ohLibDesk": {
+   "file": "ohLibDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     81.25,
+     85.75
+    ],
+    [
+     353.75,
+     358.75
+    ]
+   ]
+  },
+  "place:faculty": {
+   "file": "faculty.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     107.25,
+     112.0
+    ]
+   ]
+  },
+  "place:facDesk": {
+   "file": "facDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     107.25,
+     112.0
+    ]
+   ]
+  },
+  "place:screenFac": {
+   "file": "screenFac.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     111.75,
+     125.25
+    ],
+    [
+     144.75,
+     151.75
+    ],
+    [
+     336.25,
+     338.75
+    ]
+   ]
+  },
+  "place:data": {
+   "file": "data.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     125.0,
+     130.75
+    ],
+    [
+     136.0,
+     140.0
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     130.0,
+     133.75
+    ],
+    [
+     338.5,
+     342.75
+    ]
+   ]
+  },
+  "ohCal": {
+   "file": "ohCal.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     133.0,
+     136.75
+    ]
+   ]
+  },
+  "place:screenData": {
+   "file": "screenData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     139.25,
+     145.0
+    ]
+   ]
+  },
+  "place:platClose": {
+   "file": "platClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     151.5,
+     154.0
+    ]
+   ]
+  },
+  "place:platDesk": {
+   "file": "platDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     151.5,
+     154.0
+    ]
+   ]
+  },
+  "place:screenPlat": {
+   "file": "screenPlat.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     153.75,
+     158.25
+    ],
+    [
+     285.25,
+     287.5
+    ],
+    [
+     297.5,
+     311.0
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     157.5,
+     162.75
+    ],
+    [
+     310.25,
+     316.75
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     162.0,
+     204.75
+    ]
+   ]
+  },
+  "place:noor": {
+   "file": "noor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     203.75,
+     207.25
+    ]
+   ]
+  },
+  "place:ohMap": {
+   "file": "ohMap.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     206.5,
+     224.5
+    ],
+    [
+     237.0,
+     283.0
+    ],
+    [
+     286.75,
+     298.25
+    ],
+    [
+     329.25,
+     337.0
+    ],
+    [
+     342.0,
+     352.25
+    ],
+    [
+     358.0,
+     364.25
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     282.0,
+     286.0
+    ],
+    [
+     321.25,
+     330.0
+    ],
+    [
+     363.5,
+     375.75
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     282.0,
+     286.0
+    ],
+    [
+     321.25,
+     330.0
+    ],
+    [
+     363.5,
+     375.75
+    ]
+   ]
+  }
+ }
+}

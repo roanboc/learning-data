@@ -6,16 +6,18 @@
    Lesson, Learned in, Confirmed by, Approved by and History; this film adds Check again. A proposed entry waits outside the file with a
    dashed edge and a small pen; "Approved" lands on it in green, "Turned down" in amber. A session is a large pale card with a violet
    edge, SESSION and its date at the right.
-   On the platform the memory is kept in stores (Lakebase, the platform's database): a store is a box with its entries in it.
+   On the platform the memory is kept in stores (Lakebase, the platform's database): a store is a box with its entries in it. Here no
+   one approves a line: the platform's memory step keeps them, so the cards carry no tick; a line an agent flagged has a small amber flag.
      cm_file(ctx, x, y, o)          the card file: (x, y) the middle of the lower ledge's top; o.cards [{text, tick, who, whoA, glow, glowA,
-                                    lift, a, slot, strike, dashed}], o.lock; returns each card's box
+                                    lift, a, slot, strike, dashed, flag}], o.lock, o.mark (Databricks' logo and o.markText after the
+                                    label); returns each card's box
      cm_card(ctx, x, y, card, rot)  one standing card
      cm_index(ctx, x, y, w, h, o)   a flat index strip: o.text, o.tick, o.who, o.glow, o.a (the skills on the platform)
      cm_entry(ctx, x, y, w, e, o)   an entry pulled up: e.lesson, e.rows [[label, words, a, col], ...]; o.kind "proposed"; returns its box
      cm_stamp(ctx, x, y, text, t, t0, o)  a stamp landing at t0: o.col (green: approved; amber: turned down or deleted), o.rot, o.size
      cm_session(ctx, x, y, w, h, o) a session: o.date, o.lines (what was said, as quiet bars or words), o.a
-     cm_store(ctx, x, y, w, h, o)   a store: o.kick, o.title, o.rows (entries, each {text, a, col, dashed}), o.edge, o.lock (read only),
-                                    o.dashed (only proposals), o.a
+     cm_store(ctx, x, y, w, h, o)   a store: o.kick, o.title, o.rows (entries, each {text, a, col, dashed, strike, flag}), o.edge, o.lock
+                                    (read only), o.dashed, o.mark (Databricks' logo at its top right), o.a
      cm_step(ctx, x, y, o)          the platform's daily memory step: a violet card with a clock, "Memory step", "once a day"
      cm_script(ctx, x, y, title, sub, o)  a plain script, no model: a blue card with a gear
      cm_arrow(ctx, p, u, o)         an arrow along a cubic curve p [x0,y0, x1,y1, x2,y2, x3,y3], drawn to u; o.col, o.dash, o.lw, o.a
@@ -56,6 +58,7 @@ function cm_card(ctx,x,y,cd,rot){const W=CM_TC.w,H=CM_TC.h,ga=cd.glowA==null?1:c
     if(cd.strike>0){const tw=ag_tw(ctx,l,{w:700,size:28}),u=clamp(cd.strike*ls.length-k,0,1);if(u>0){ctx.strokeStyle=rgba(AG.amber,0.9);ctx.lineWidth=3;ctx.lineCap="round";
       ctx.beginPath();ctx.moveTo(16,46+k*36-9);ctx.lineTo(16+(tw+4)*u,46+k*36-9);ctx.stroke();}}});
   if(cd.tick>0){ctx.save();ctx.globalAlpha*=clamp(cd.tick,0,1);ag_tick(ctx,W-32,H-28,22,rgba(AG.green,1),4);ctx.restore();}
+  if(cd.flag>0){ctx.save();ctx.globalAlpha*=clamp(cd.flag,0,1);const k=Math.min(1,ag_spr(cd.flag,0,0.5));ag_about(ctx,W-40,H-26,lerp(0.4,1,k));cm_flag(ctx,W-44,H-14,40,rgba(AG.amber,1));ctx.restore();}
   ctx.restore();}
 /* the card file. (x, y): the middle of the lower ledge's top. o.cards [{text, tick, who, whoA, glow, glowA, lift, a, slot, strike,
    dashed, textA}]: a card's slot is its place, in order unless given; lift (px) raises it out, tilting; who, the approver's name, goes under
@@ -67,7 +70,9 @@ function cm_file(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,cards=o.cards||[],pe
   const topY=y-CM_TC.row;
   if(o.label!==false){const lt=o.label||"Team memory",ly=topY-CM_TC.h-30;ag_label(ctx,x0+6,ly,lt,{col:AG.blue,a:o.labelA==null?1:o.labelA});
     if(o.lock>0){const lx=x0+6+ag_tw(ctx,lt.toUpperCase(),{w:700,size:28,ls:4})+40;ctx.save();ctx.globalAlpha*=o.lock;ag_lock(ctx,lx,ly-6,26,rgba(AG.blue,1));
-      ag_T(ctx,o.lockText||"read only",lx+26,ly,{w:600,size:28,col:AG.blue});ctx.restore();}}
+      ag_T(ctx,o.lockText||"read only",lx+26,ly,{w:600,size:28,col:AG.blue});ctx.restore();}
+    if(o.mark>0){const lx=x0+6+ag_tw(ctx,lt.toUpperCase(),{w:700,size:28,ls:4})+30,lw=cm_mark(ctx,"databricks",lx,ly-28,32,o.mark);
+      if(o.markText)ag_T(ctx,o.markText,lx+lw+14,ly,{w:600,size:28,col:AG.mut,a:o.mark});}}
   // the two ledges: oiled oak, a lit top 12 px deep and a front 22 px tall, a soft shadow under each
   for(const ly of [topY,y]){ag_floorShadow(ctx,x+AG.sdx*2,ly+30,W*0.52,16,0.2);
     let g=ctx.createLinearGradient(0,ly,0,ly+12);g.addColorStop(0,rgba(mix(AG_OAK.base,[255,255,255],0.3),1));g.addColorStop(1,rgba(AG_OAK.base,1));ctx.fillStyle=g;ctx.fillRect(x0,ly-4,W,12);
@@ -131,9 +136,11 @@ function cm_store(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;
   cm_cyl(ctx,x+46,y+44,o.dashed?rgba(AG.mut,1):rgba(edge||AG.mut,1));
   ag_T(ctx,(o.kick||"Store").toUpperCase(),x+82,y+56,{w:700,size:28,ls:4,col:o.dashed?AG.mut:(edge||AG.kick)});
   if(o.title)ag_T(ctx,o.title,x+28,y+108,{w:700,size:34});
-  if(o.lock){ag_lock(ctx,x+w-44,y+50,28,rgba(AG.blue,1));if(o.lockText)ag_T(ctx,o.lockText,x+w-70,y+56,{w:600,size:28,col:AG.blue,align:"right"});}
+  if(o.lock){const la=o.lock===true?1:o.lock;ctx.save();ctx.globalAlpha*=la;ag_lock(ctx,x+w-44,y+50,28,rgba(AG.blue,1));if(o.lockText)ag_T(ctx,o.lockText,x+w-70,y+56,{w:600,size:28,col:AG.blue,align:"right"});ctx.restore();}
+  else if(o.mark)cm_mark(ctx,"databricks",x+w-58,y+24,34,o.mark===true?1:o.mark);
   let yy=y+(o.title?136:84);for(const r of (o.rows||[])){const ra=r.a==null?1:r.a;if(ra>0){ctx.save();ctx.globalAlpha*=ra;const dy=r.dy||0;
-      cm_index(ctx,x+24+(r.dx||0),yy+dy,w-48,52,{text:r.text,glow:r.col,tick:r.tick,strike:r.strike});if(r.dashed)cm_dash(ctx,x+24+(r.dx||0),yy+dy,w-48,52,8,AG.mut,1);ctx.restore();}
+      cm_index(ctx,x+24+(r.dx||0),yy+dy,w-48,52,{text:r.text,glow:r.col,glowA:r.colA,tick:r.tick,strike:r.strike});if(r.dashed)cm_dash(ctx,x+24+(r.dx||0),yy+dy,w-48,52,8,AG.mut,1);
+      if(r.flag>0){ctx.save();ctx.globalAlpha*=clamp(r.flag,0,1);cm_flag(ctx,x+w-62+(r.dx||0),yy+dy+44,34,rgba(AG.amber,1));ctx.restore();}ctx.restore();}
     yy+=64;}
   ctx.restore();}
 // a small database: a cylinder, drawn in lines

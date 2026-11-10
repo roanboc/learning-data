@@ -1,0 +1,81 @@
+# The release: how a change merged into main reaches production. In the project's own repository this file is
+# .github/workflows/release.yml; here it's an example, and GitHub runs nothing from it (review-and-release/README.md).
+#
+# It runs every night at 23:00, or when a person starts it. Merging doesn't release: a change merged in the day
+# waits for the night. First the job test, in the environment test (test.json), builds main in the test catalog,
+# signed in to Databricks as the release's test identity. Only if that passes does the job production start, on the
+# same commit, in the environment production (production.json): it waits until a release approver approves it, and
+# whoever started the run can't approve it (Prevent self-review). Only then does it sign in to Databricks, as the
+# release's own service principal, with no secret: workload identity federation, whose policy accepts only a job of
+# this repository in that environment. Each job deploys the bundle (databricks.yml) to its target, test or prod, and
+# runs the build there (resources/build.job.yml), as the release's own identity in that environment. No agent's identity
+# can do either: the agents' groups only read production.
+name: Release
+
+on:
+  schedule:
+    # Every night at 23:00 by the university's clock: UTC in this example, as the project's other schedules are
+    # (scripts/setup/monitoring.py). GitHub reads a schedule in UTC unless it names a time zone, an IANA name.
+    - cron: "0 23 * * *"
+      timezone: "UTC"
+  workflow_dispatch:   # or when a person starts it, after a fix, say: it goes through test and waits all the same
+
+permissions:
+  contents: read
+  id-token: write   # each job's token from GitHub, which Databricks trusts in place of a secret
+
+concurrency:
+  group: release
+  cancel-in-progress: false   # a release runs to its end; the next one waits its turn
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      # None of these is secret. Each is a variable of the job's own environment, set once by the platform team: the
+      # workspace, and the identity's application ID ("release test" here, "release" in production). The bundle's jobs
+      # run as it too: BUNDLE_VAR_service_principal sets the bundle's variable, in place of the platform's service
+      # principal that databricks.yml looks up by name (a variable that has a value skips its lookup). The catalog and
+      # the warehouse are the target's, in databricks.yml.
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
+      BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # The Databricks CLI. Like the checkout above, pinned to a full commit, its version beside it (dependabot.yml)
+      - uses: databricks/setup-cli@9625fdde9ba2607df0087e0d3ec7449198bf2180 # v1.23.0
+
+      - name: Check the bundle
+        run: databricks bundle validate -t test
+
+      - name: Deploy the bundle to test
+        run: databricks bundle deploy -t test
+
+      - name: Run the build in test
+        run: databricks bundle run -t test build
+
+  production:
+    needs: test   # only if the build passed in test
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      DATABRICKS_AUTH_TYPE: github-oidc
+      DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
+      DATABRICKS_CLIENT_ID: ${{ vars.RELEASE_CLIENT_ID }}
+      BUNDLE_VAR_service_principal: ${{ vars.RELEASE_CLIENT_ID }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: databricks/setup-cli@9625fdde9ba2607df0087e0d3ec7449198bf2180 # v1.23.0
+
+      - name: Check the bundle
+        run: databricks bundle validate -t prod
+
+      - name: Deploy the bundle to production
+        run: databricks bundle deploy -t prod
+
+      - name: Run the build in production
+        run: databricks bundle run -t prod build

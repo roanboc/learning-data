@@ -304,7 +304,7 @@ for k, t0 in enumerate([dash + 0.1, fac + 0.1, W('job', 'worth', 'a number'), W(
     knock(t0 + 0.05, 0.012 * (1 - 0.08 * k), (-0.3, 0.3, -0.3, 0.3)[k])
 for k, (w, cx) in enumerate([('Jun', 940), ('Noor', 1150), ('Sam', 1360)]):
     t0 = W('job', 'comes', w, -0.1); paper(t0 + 0.2, 0.012, P(cx), 0.3); knock(t0 + 0.5, 0.012 * (1 - 0.1 * k), P(cx))
-chg = W('job', 'comes', 'any change', -0.1); paper(chg, 0.018, 0.4, 0.6)
+chg = W('job', 'comes', 'the data team', -0.1); paper(chg, 0.018, 0.4, 0.6)
 room, sign = END('job', 'comes', 0.1), G('job', 'code', 0.25)
 turn(EB9, room + 0.3, 7.0, 0.022); pen(sign + 0.3, 1.2, 0.014, -0.1)
 promise(W('job', 'code', 'promise'), 75, 0.03, -0.2); knock(W('job', 'code', 'promise', 0.05), 0.012, -0.2); knock(W('job', 'code', 'not the', 0.05), 0.01, 0.1)

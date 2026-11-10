@@ -17,6 +17,14 @@ data_tests:
     config:
       meta: {owner: HR, dimension: completeness}
 
+  - name: names_are_allowed
+    description: >
+      Every name the student system sends for the graduation list is allowed: not empty, nothing
+      but letters, spaces, hyphens and apostrophes, and at most 30 characters. It measures validity:
+      it has no reference but its rule, so it says a name is allowed, never that it's right.
+    config:
+      meta: {owner: "Mei Tanaka, registrar's office", dimension: validity}
+
   - name: printers_file_has_the_names_graduates_gave
     description: >
       Each name in the printer's file is the name its graduate last gave in the portal for that

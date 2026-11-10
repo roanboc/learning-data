@@ -12,6 +12,8 @@ erDiagram
         string award_name
         date conferred_on
         string ceremony_id
+        timestamp student_system_as_of
+        timestamp portal_as_of
     }
     mart_graduations__graduation_list {
         string graduation_bk PK
@@ -27,6 +29,8 @@ erDiagram
         date ceremony_on
         boolean is_attending
         date added_on
+        timestamp student_system_as_of
+        timestamp portal_as_of
         string name_confirmed_how
     }
     mart_graduations__names_to_confirm {

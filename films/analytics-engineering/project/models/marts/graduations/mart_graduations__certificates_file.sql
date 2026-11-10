@@ -22,7 +22,10 @@ select
     graduation_list.name_as_printed,
     graduation_list.award_name,
     graduation_list.conferred_on,
-    graduation_list.ceremony_id
+    graduation_list.ceremony_id,
+    -- How old the list's data is, for the file's header (Late is wrong too).
+    graduation_list.student_system_as_of,
+    graduation_list.portal_as_of
 from graduation_list
 inner join ceremonies
     on graduation_list.ceremony_id = ceremonies.ceremony_id

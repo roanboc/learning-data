@@ -66,11 +66,28 @@ schema:
     classification: none
     description: The ceremony the graduate is presented at, like DEC26-3, so the certificates arrive sorted
       by ceremony.
+  - name: student_system_as_of
+    logicalType: timestamp
+    physicalType: timestamp
+    required: false
+    classification: none
+    description: When the student system's nightly file the list was built from arrived, from the graduation
+      list. The file's header shows it.
+  - name: portal_as_of
+    logicalType: timestamp
+    physicalType: timestamp
+    required: false
+    classification: none
+    description: When the portal's nightly file the list was built from arrived, from the graduation list.
+      The file's header shows it.
 slaProperties:
 - property: latency
-  value: 1
-  unit: d
-  description: Built every night.
+  value: 24
+  unit: h
+  element: mart_graduations__graduation_list.student_system_as_of, mart_graduations__graduation_list.portal_as_of
+  driver: operational
+  description: Built every night; each source at most 24 hours old when the list goes to the printer,
+    as agreed with Malia Fonoti on 22 June 2026.
 team:
   name: Mei Tanaka, registrar's office
   members:

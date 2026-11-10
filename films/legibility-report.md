@@ -81,14 +81,20 @@
 | Why Unity Catalog and Unity Gateway govern them | 315 | 0% | 0 | 28.3 | Drawn to the rule |
 | Context and memory, governed | 393 | 0% | 0 | 28.2 | Drawn to the rule |
 | Scripts became software | 269 | 0% | 0 | 28.0 | Drawn to the rule |
+| A platform that watches itself | 327 | 0% | 0 | 28.3 | Drawn to the rule |
 | Moving is easy, agreeing is the work | 256 | 0% | 0 | 28.0 | Drawn to the rule |
 | Hot, warm, cold | 271 | 0% | 0 | 28.0 | Drawn to the rule |
 | One copy, one platform | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Good enough for what? | 231 | 0% | 0 | 28.4 | Drawn to the rule |
+| A hundred records | 312 | 0% | 0 | 28.2 | Drawn to the rule |
+| Valid isn't true | 254 | 0% | 0 | 28.6 | Drawn to the rule |
+| Late is wrong too | 286 | 0% | 0 | 28.4 | Drawn to the rule |
 | Five stages, not a switch | 309 | 0% | 0 | 30.0 | Drawn to the rule |
 | Borrowed rights | 329 | 0% | 0 | 30.0 | Drawn to the rule |
 | A place on the map | 314 | 0% | 0 | 29.7 | Drawn to the rule |
 | Rights follow the role | 291 | 0% | 0 | 30.0 | Drawn to the rule |
+| The map, enforced | 353 | 0% | 0 | 28.2 | Drawn to the rule |
+| Reports on demand | 293 | 0% | 0 | 28.0 | Drawn to the rule |
 | Governed in dbt | 658 | 0% | 0 | 28.1 | Drawn to the rule |
 | Governed in Unity Catalog | 572 | 0% | 0 | 28.3 | Drawn to the rule |
 | Meaning on the platform | 592 | 0% | 0 | 28.6 | Drawn to the rule |
@@ -100,9 +106,14 @@
 | Where each piece lives | 327 | 0% | 0 | 30.1 | Drawn to the rule |
 | A reason to keep it | 223 | 0% | 0 | 30.0 | Drawn to the rule |
 | How long, and then what | 203 | 0% | 0 | 28.4 | Drawn to the rule |
+| Forgetting a person | 240 | 0% | 0 | 30.0 | Drawn to the rule |
+| Deleted means deleted | 257 | 0% | 0 | 28.5 | Drawn to the rule |
 | An agreement first | 223 | 0% | 0 | 28.1 | Drawn to the rule |
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
+| Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
+| Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
 | Read by an agent | 334 | 0% | 0 | 28.4 | Drawn to the rule |
+| Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | Decades in the making | 226 | 0% | 0 | 32.6 | Drawn to the rule |
 | Borrowed from the brain | 203 | 0% | 0 | 30.1 | Drawn to the rule |
 | A model, reasoning, hands and a loop | 303 | 0% | 0 | 30.0 | Drawn to the rule |

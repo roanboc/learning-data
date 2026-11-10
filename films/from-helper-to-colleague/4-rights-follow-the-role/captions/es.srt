@@ -203,85 +203,85 @@ Abrir un encargo es de quien lo solicita: de Clara.
 Revisar el código es del ingeniero de analítica: de Jun.
 
 52
-00:05:33,008 --> 00:05:36,400
-Aprobar el cambio es de la dueña del producto: otra vez de Clara.
+00:05:33,008 --> 00:05:36,267
+Aprobar el cambio es de quien aprueba la liberación: de Noor.
 
 53
-00:05:37,500 --> 00:05:41,000
-Liberar a producción es de quien aprueba la liberación: de Noor.
+00:05:37,367 --> 00:05:39,848
+Y liberarlo a producción también es de Noor.
 
 54
-00:05:42,300 --> 00:05:49,098
+00:05:41,148 --> 00:05:47,946
 Y lo que significa una palabra lo decide su dueño, como Mei para las palabras de los estudiantes, antes de que entre al glosario.
 
 55
-00:05:50,598 --> 00:05:56,816
+00:05:49,446 --> 00:05:55,664
 Así que nunca aprueba, nunca libera, nunca cambia lo que significa una palabra y nunca escribe en producción.
 
 56
-00:05:58,516 --> 00:06:03,090
+00:05:57,364 --> 00:06:01,938
 Nadie tuvo que prohibir cada uno: la separación de funciones sale de los pasos.
 
 57
-00:06:04,590 --> 00:06:07,788
+00:06:03,438 --> 00:06:06,636
 Como en la sala: uno ordenaba, otro llenaba y otro daba.
 
 58
-00:06:09,288 --> 00:06:14,861
+00:06:08,136 --> 00:06:13,709
 Y una verificación rechaza el mapa si un paso que solo hacen personas se da a un rol que ocupa un agente.
 
 59
-00:06:18,261 --> 00:06:21,926
+00:06:17,109 --> 00:06:20,774
 El trabajo cambia, y los permisos lo siguen, nunca al revés.
 
 60
-00:06:23,626 --> 00:06:28,750
+00:06:22,474 --> 00:06:27,598
 Digamos que Planificación quiere que el agente también responda sus preguntas, no solo redacte sus cambios.
 
 61
-00:06:30,650 --> 00:06:35,831
+00:06:29,498 --> 00:06:34,679
 Es trabajo nuevo, así que primero es un paso nuevo en el mapa, que dice qué lee, qué escribe y qué llama.
 
 62
-00:06:38,131 --> 00:06:42,326
+00:06:36,979 --> 00:06:41,174
 Noor lo agrega al rol cuando Clara y los dueños de lo que lee están de acuerdo.
 
 63
-00:06:44,226 --> 00:06:47,650
+00:06:43,074 --> 00:06:46,498
 Luego sus permisos lo siguen: líneas nuevas, cada una con el paso nuevo.
 
 64
-00:06:49,750 --> 00:06:52,884
+00:06:48,598 --> 00:06:51,732
 Y las herramientas siguen a los permisos, nunca un permiso dado a mano.
 
 65
-00:06:54,784 --> 00:07:01,795
+00:06:53,632 --> 00:07:00,643
 Hasta entonces, si un encargo necesita más de lo que dan sus pasos, el agente no toma prestado un acceso: se detiene y pregunta.
 
 66
-00:07:03,895 --> 00:07:06,210
+00:07:02,743 --> 00:07:05,058
 Cuando un paso se va, sus permisos se van con él.
 
 67
-00:07:08,110 --> 00:07:12,588
+00:07:06,958 --> 00:07:11,436
 Un permiso dado a mano es una deriva, y la próxima película muestra la verificación que la encuentra.
 
 68
-00:07:16,788 --> 00:07:21,579
+00:07:15,636 --> 00:07:20,427
 En la sala, el cajón de cada paciente tenía las dosis de un día, llenado desde una orden.
 
 69
-00:07:23,079 --> 00:07:27,273
+00:07:21,927 --> 00:07:26,121
 Aquí, el agente de Planificación tiene lo que necesitan sus tres pasos, y nada más.
 
 70
-00:07:28,573 --> 00:07:33,575
+00:07:27,421 --> 00:07:32,423
 Cada permiso suyo tiene un motivo que cualquiera puede leer, y ninguno llega a producción.
 
 71
-00:07:34,875 --> 00:07:36,553
+00:07:33,723 --> 00:07:35,401
 Y los permisos de Jun siguen siendo suyos.
 
 72
-00:07:37,853 --> 00:07:41,116
+00:07:36,701 --> 00:07:39,964
 Los permisos de un agente vienen de su trabajo, no del de una persona.

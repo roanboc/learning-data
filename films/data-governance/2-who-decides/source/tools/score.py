@@ -361,7 +361,7 @@ turn(sgn6 + 1.5, Eb2, [(G3, 2.4), (Ab3, max(0.8, cl6 - sgn6 - 4.2)), (G3, 2.2)])
 rubber(cl6 + 0.0, 0.04, 0.2)
 
 # ======== 7. Asked by name ========
-# The slip clipped on, its three names written in from the register; "kept by Yusuf Demir" written at its foot; a name struck through
+# The slip clipped on, its two names written in from the register; "kept by Yusuf Demir" written at its foot; a name struck through
 # and written again there, and on the slip with it; Jun's request, its slip clipped and filled, sent: it reaches Mei, and the slip
 # calls her by name. Then the line again: the cord, the lamp, the call, and the supervisor coming, the answer; and Mei with the
 # request in her hands, the slip glowing as the lamp did: the call and the answer in E-flat, and the cellos
@@ -370,11 +370,11 @@ chg7, name7, fol7 = W('asked', 'keeps', 'change'), W('asked', 'keeps', 'name'), 
 mei7 = G('asked', 'mei', -0.3); sl7 = mei7 - 1.9; ms7 = W('asked', 'mei', 'Mei')
 like7, work7 = G('asked', 'like', -0.3), W('asked', 'like', 'work', -0.25); t07 = like7 + 0.45
 clip(rt7 + 0.4, 0.018, -0.2)
-for i in range(3):
+for i in range(2):
     pen(fill7 + 0.25 * i, 0.4, 0.011 * (1 if i == 0 else 0.7), -0.2)
 pen(kp7, 0.95, 0.011, 0.3); stroke(chg7 + 0.05, 0.4, 0.012, 0.3); pen(name7, 1.0, 0.011, 0.3); pen(fol7, 0.7, 0.008, -0.2)
 clip(sl7 + 0.45, 0.016, 0.0)
-for i in range(3):
+for i in range(2):
     pen(sl7 + 0.3 + 0.2 * i, 0.3, 0.008, 0.0)
 air(mei7 - 0.7, 0.8, 0.016, 0.0)
 slide(mei7 + 0.1, 0.018, 0.0, 0.8); knock(mei7 + 0.95, 0.022, 0.0, 240)

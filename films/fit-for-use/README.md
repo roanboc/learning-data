@@ -12,6 +12,9 @@ What "good" means for data, and how to measure it. The graduation list says who 
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
 | [Good enough for what?](https://data.learn-all.org/fit-for-use/good-enough-for-what/) | Fitness for use | 7 min | 5 | 3 questions | [script](1-good-enough-for-what/script.md) · [source](1-good-enough-for-what/source/README.md) |
+| [A hundred records](https://data.learn-all.org/fit-for-use/a-hundred-records/) | Measuring quality | 8 min | 6 | 3 questions | [script](2-a-hundred-records/script.md) · [source](2-a-hundred-records/source/README.md) |
+| [Valid isn't true](https://data.learn-all.org/fit-for-use/valid-isnt-true/) | Accuracy and references | 9 min | 7 | 4 questions | [script](3-valid-isnt-true/script.md) · [source](3-valid-isnt-true/source/README.md) |
+| [Late is wrong too](https://data.learn-all.org/fit-for-use/late-is-wrong-too/) | Timeliness | 7½ min | 7 | 3 questions | [script](4-late-is-wrong-too/script.md) · [source](4-late-is-wrong-too/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

@@ -107,13 +107,12 @@ models:
               config:
                 meta: {owner: "Mei Tanaka, registrar's office"}
         config:
-          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme]}
+          meta: {personal_data: direct, critical_for: [certificates, ceremony_programme], reference: the graduate, confirmed_on: name_confirmed_on}
       - name: name_confirmed_on
         description: >
-          Means: the day of the graduate's answer in the portal, for this ceremony, once accepted
-          (a correction, once the registrar's office has checked it). Empty means: not confirmed in
-          the portal; name_confirmed_how says if it was on paper. Owner: Mei Tanaka, registrar's
-          office.
+          Means: the day of the graduate's answer in the portal, for this ceremony, once accepted (a correction,
+          once the registrar's office has checked it). Empty means: not confirmed in the portal; name_confirmed_how
+          says if it was on paper. Owner: Mei Tanaka, registrar's office.
         data_type: date
         config:
           meta: {personal_data: none}
@@ -164,6 +163,54 @@ models:
         data_type: date
         config:
           meta: {personal_data: none}
+      - name: student_system_as_of
+        description: >
+          How old the list's student system data is: when the student system's nightly file it was
+          built from arrived, the newest in that system's receipts. The same on every row, and in
+          the header of the printer's file. After a night when the file doesn't come, it's the
+          night before's, and says so.
+        data_type: timestamp
+        config:
+          meta:
+            personal_data: none
+            # Agreed on 22 June 2026 with the people who use the list, after a late file left 23
+            # graduates off it; the level is the strictest use's, the certificates'. The source's
+            # freshness check holds the same level (sources/student_system/, nightly_files).
+            quality:
+              - name: student_system_at_most_a_day_old_at_the_send
+                use: certificates
+                dimension: timeliness
+                description: >
+                  For the certificates: the student system's data from that night's file when the
+                  list goes to the printer, so every graduate the exam boards approved the day
+                  before is on it.
+                level: At most 24 hours old, at the send
+                agreed_with: "Malia Fonoti, graduations office"
+                business_impact: >
+                  A graduate the boards approved left off the list, and their certificate printed
+                  late and posted.
+      - name: portal_as_of
+        description: >
+          How old the list's names from the portal are: when the portal's nightly file it was built
+          from arrived, the newest in the portal's receipts. The same on every row, and in the
+          header of the printer's file.
+        data_type: timestamp
+        config:
+          meta:
+            personal_data: none
+            # Agreed with the student system's, on 22 June 2026 (sources/portal/, nightly_files).
+            quality:
+              - name: portal_at_most_a_day_old_at_the_send
+                use: certificates
+                dimension: timeliness
+                description: >
+                  For the certificates: the names graduates confirmed in the portal, from that
+                  night's file when the list goes to the printer.
+                level: At most 24 hours old, at the send
+                agreed_with: "Malia Fonoti, graduations office"
+                business_impact: >
+                  A name a graduate corrected printed as it was before, and their certificate
+                  printed again.
       - name: name_confirmed_how
         description: >
           Means: how the graduate confirmed the name to be printed for this ceremony. portal, in the
@@ -181,6 +228,25 @@ models:
         config:
           meta: {personal_data: none}
 
+    data_tests:
+      - reconciles_with:
+          name: awards_match_the_boards
+          description: >
+            Every certificate on the list is an award a faculty's exam board approved, with the day
+            the board approved it as its conferral date, and every award the boards approved is on
+            the list: award by award, against the boards' own register, kept apart from the student
+            system. A copy of the student system couldn't do this: it would share any gap the list
+            has, and agree with it.
+          arguments:
+            to: ref('stg_exam_boards__approved_awards')
+            keys: [student_bk, award_code]
+            compare: [conferred_on]
+            to_where: is_current_version
+          config:
+            meta:
+              owner: "Mei Tanaka, registrar's office"
+              dimension: accuracy
+              reference: the exam boards' approved lists
   - name: mart_graduations__certificates_file
     description: >
       The printer's file: each certificate of a round whose names haven't gone to the printer yet,
@@ -229,6 +295,16 @@ models:
       - name: ceremony_id
         description: The ceremony the graduate is presented at, like DEC26-3, so the certificates arrive sorted by ceremony.
         data_type: string
+        config:
+          meta: {personal_data: none}
+      - name: student_system_as_of
+        description: When the student system's nightly file the list was built from arrived, from the graduation list. The file's header shows it.
+        data_type: timestamp
+        config:
+          meta: {personal_data: none}
+      - name: portal_as_of
+        description: When the portal's nightly file the list was built from arrived, from the graduation list. The file's header shows it.
+        data_type: timestamp
         config:
           meta: {personal_data: none}
 

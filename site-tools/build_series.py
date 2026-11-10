@@ -3,7 +3,7 @@
 
     python site-tools/build_series.py
 
-The site is organised in big topics (TOPICS below), each holding films and series. Twenty-two series are built this way:
+The site is organised in big topics (TOPICS below), each holding films and series. Twenty-six series are built this way:
 From words to data (films/from-words-to-data/, on the site at from-words-to-data/), In the weeds of data crafting
 (films/analytics-engineering/, at in-the-weeds/), The map before the data (films/enterprise-architecture/, at
 enterprise-architecture/), The same one, everywhere (films/master-and-reference-data/, at master-and-reference-data/), and
@@ -19,7 +19,11 @@ documents-as-data/, a series of one film); and the three series of the module Da
 data (films/locks-before-the-data/, at locks-before-the-data/, which holds the module's plan), Only what you may see
 (films/only-what-you-may-see/, at only-what-you-may-see/) and Kept for a reason (films/kept-for-a-reason/, at
 kept-for-a-reason/); and the two series of the module Data quality: Fit for use (films/fit-for-use/, at fit-for-use/, which
-holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/); and the three series of the module Data
+holds the module's plan) and Quality as a habit (films/quality-as-a-habit/, at quality-as-a-habit/); and the four series of the module
+Leading data people: The new skills (films/the-new-skills/, at the-new-skills/, which holds the module's plan and the kit it shares
+with Data management), Working with people (films/working-with-people/, at working-with-people/), Leading a data team
+(films/leading-a-data-team/, at leading-a-data-team/) and Ownership and performance (films/ownership-and-performance/, at
+ownership-and-performance/); and the three series of the module Data
 management: A plan in ninety days (films/a-plan-in-ninety-days/, at a-plan-in-ninety-days/, which holds the module's plan), Making
 the case (films/making-the-case/, at making-the-case/) and Small steps, measured (films/small-steps-measured/, at
 small-steps-measured/). A series with no film on the site yet has no pages, and the topics leave it out until its first
@@ -39,6 +43,8 @@ site/assets/<dir>/learn.en.js): they get their own pages (site/<slug>/labs/ and 
 gets their course bar, and each film's page links to its own lab and situations among them. series_learn() below says what
 the words must keep; each series draws them with its own engine (site/assets/<dir>/learn.js).
 A film's page can also link to another site that shows its idea, from its site.json's "elsewhere" (elsewhere_section()).
+A series or a film its author hasn't reviewed yet is a draft ("draft": true in its series.json or site.json): its pages say so
+under their title (DRAFT, is_draft() and draft_note() below).
 Never edit the generated pages by hand: change the words, and run this again. check_site.py and smoke.py read every series
 through SERIES and films() below, so a new film, or a new series, needs no change to them."""
 import html, json, math, pathlib, re, sys
@@ -83,8 +89,10 @@ def series_link(lg, RE, sid):
 # agent is opens the module AI agents in data work. Data that moves opens the module Modern data basics, whose four series are
 # each the next of the one before; the last, Documents as data, is a series of one film. Locks before the data opens the module
 # Data protection and privacy, whose three series are each the next of the one before. Fit for use opens the module Data quality,
-# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. A plan in ninety days opens the
-# module Data management, whose three series are each the next of the one before; its topic is the site's last.
+# and Quality as a habit follows it; the topic Data quality holds them after When things go wrong. The new skills opens the module
+# Leading data people, whose four series are each the next of the one before; its topic sits just before Data management's. A plan
+# in ninety days opens the module Data management, whose three series are each the next of the one before; its topic is the site's
+# last.
 SERIES = [
     dict(id="from-words-to-data", dir="from-words-to-data", slug="from-words-to-data",
          name={"en": "From words to data", "es": "De las palabras a los datos"},
@@ -167,6 +175,22 @@ SERIES = [
          built="in-the-weeds", next="quality-as-a-habit"),
     dict(id="quality-as-a-habit", dir="quality-as-a-habit", slug="quality-as-a-habit",
          name={"en": "Quality as a habit", "es": "La calidad como hábito"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds"),
+    dict(id="the-new-skills", dir="the-new-skills", slug="the-new-skills",
+         name={"en": "The new skills", "es": "Las nuevas habilidades"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="working-with-people"),
+    dict(id="working-with-people", dir="working-with-people", slug="working-with-people",
+         name={"en": "Working with people", "es": "Trabajar con personas"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="leading-a-data-team"),
+    dict(id="leading-a-data-team", dir="leading-a-data-team", slug="leading-a-data-team",
+         name={"en": "Leading a data team", "es": "Liderar un equipo de datos"},
+         place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
+         built="in-the-weeds", next="ownership-and-performance"),
+    dict(id="ownership-and-performance", dir="ownership-and-performance", slug="ownership-and-performance",
+         name={"en": "Ownership and performance", "es": "Responsabilidad y desempeño"},
          place={"en": "university", "es": "universidad"}, blocks=[], project="analytics-engineering",
          built="in-the-weeds"),
     dict(id="a-plan-in-ninety-days", dir="a-plan-in-ninety-days", slug="a-plan-in-ninety-days",
@@ -529,6 +553,23 @@ def SN(lg, S):
     return S["name"][lg]
 
 
+# A draft is content its author hasn't reviewed yet: a series whose series.json says "draft": true, and each of its films,
+# unless the film's site.json says "draft": false (its author has reviewed it); a film can also be a draft on its own. Its
+# pages say so under their title.
+DRAFT = {"en": ("Draft", "The author hasn't reviewed it yet, so some details may change."),
+         "es": ("Borrador", "El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.")}
+
+
+def is_draft(f):
+    """Whether a film is a draft: its own site.json says so, or else its series' series.json does."""
+    return bool(f["site"].get("draft", series_data(f["series"]).get("draft", False)))
+
+
+def draft_note(lg, on):
+    """The line under a draft's title, on its own pages: nothing for content its author has reviewed."""
+    return f'<p class="note draft"><b>{DRAFT[lg][0]}</b> · {DRAFT[lg][1]}</p>\n' if on else ""
+
+
 def crumbs(lg, R, S, up=None):
     """A series page's breadcrumb: Topics › the series' topic › the series, a link (up, from a page under it) or text (on its own page)."""
     RT = R if lg == "en" else R[3:]
@@ -698,7 +739,7 @@ def film_page(lg, f, films_, series):
              f'<div class="think-foot"><button type="button" class="btn" data-again>{T(lg, "Watch again", "Ver de nuevo")}</button></div></div></template>')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../")}\n'
-            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n</section>\n'
+            f'<h1>{E(s[T(lg, "h1", "h1_es")])}</h1>\n<p class="lead">{E(s[T(lg, "lead", "lead_es")])}</p>\n{draft_note(lg, is_draft(f))}</section>\n'
             + (f'{course(lg, f, 0)}\n' if learn else "") +
             f'<section class="module" id="watch" data-store="{f["prefix"]}" aria-labelledby="watch-h">\n'
             f'<div class="mhead"><div><h2 id="watch-h">{T(lg, "Watch the film", "Mira la película")}</h2><p>{T(lg, "<b>Pause and think</b> is on: the film stops for one question at the end of chapters.", "<b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.")}</p></div></div>\n'
@@ -742,7 +783,7 @@ def learn_page(lg, f, which):
                + series_nav(lg, f, films_, R, "../../"))
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{key}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S, "../../")}\n'
-            f'<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n</section>\n{course(lg, f, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S)}\n'
+            f'<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, is_draft(f))}</section>\n{course(lg, f, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S)}\n'
             f'<script src="{R}assets/{key}/film.js"></script>\n<script src="{R}assets/{key}/learn.{lg}.js"></script>\n<script src="{R}assets/from-words-to-data/learn.js"></script>\n'
             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body
@@ -760,7 +801,7 @@ def series_page(lg, series, films_, S=FW):
     posters = [f'<img src="{R}assets/{x["key"]}-poster.jpg" alt="">' for x in films_] * (8 if len(films_) < 4 else 2)
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="hero cine"><div class="bg mosaic" aria-hidden="true">' + "".join(posters[:8]) + '</div><canvas class="fx" aria-hidden="true"></canvas>\n'
             f'{crumbs(lg, R, S)}\n'
-            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n</section>\n'
+            f'<h1>{SN(lg, S)}</h1>\n<p class="lead">{E(series[T(lg, "lead", "lead_es")])}</p>\n{draft_note(lg, series.get("draft"))}</section>\n'
             + (series_course(lg, S, SL, series, films_, 0) + "\n" if SL else "") + '\n'
             f'<section class="module" id="films" aria-labelledby="films-h">\n<div class="mhead"><div><h2 id="films-h">{T(lg, "The films", "Las películas")}</h2><p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n'
             f'<div class="topic-grid" data-progress-text=\'{PT[lg]}\'>\n' + "\n".join(card(lg, x, "", R) for x in films_) + '\n</div>\n</section>\n\n')
@@ -882,7 +923,7 @@ def series_learn_page(lg, S, series, films_, which):
                f'<section class="module" id="in-the-series" aria-labelledby="series-h">\n<div class="mhead"><div><h2 id="series-h">{T(lg, "The films", "Las películas")}: <a href="../">{SN(lg, S)}</a></h2>'
                f'<p>{E(series[T(lg, "order", "order_es")])}</p></div></div>\n<ol class="series-list" aria-label="{T(lg, "Every film of the series", "Todas las películas de la serie")}">\n{lis}\n</ol>\n</section>\n')
     body = (f'<body>\n{header(lg, path, R)}\n<main>\n<section class="page-head cine"><div class="bg" aria-hidden="true"><img src="{R}assets/{img}-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>\n'
-            f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n</section>\n{series_course(lg, S, SL, series, films_, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S, True, True)}\n'
+            f'{crumbs(lg, R, S, "../")}\n<h1>{E(h1)}</h1>\n<p class="lead">{E(lead)}</p>\n{draft_note(lg, series.get("draft"))}</section>\n{series_course(lg, S, SL, series, films_, 1 if which == "labs" else 2)}\n{mid}</main>\n{foot(lg, S, True, True)}\n'
             f'<script src="{R}assets/{SL["bundle"]}/film.js"></script>\n<script src="{R}assets/{SL["dir"]}/learn.{lg}.js"></script>\n<script src="{R}assets/{SL["dir"]}/learn.js"></script>\n'
             f'<script src="{R}assets/learn/path.js"></script>\n<script src="{R}assets/ambient.js"></script>\n</body>\n</html>\n')
     return h + "</head>\n" + body

@@ -1,0 +1,98 @@
+{
+  "kicker": "Continuous improvement",
+  "kicker_es": "Mejora continua",
+  "title_es": "Pequeño, cada semana",
+  "h1": "Small, every week: one change, measured, then kept",
+  "h1_es": "Pequeño, cada semana: un cambio, medido y mantenido",
+  "lead": "In December 2025, 41 degree certificates were printed again from a wrong list. Instead of one big clean-up, Malia, Mei, Jun and Sam met for fifteen minutes every Thursday, made one small change, measured it and kept it with a check. A year later, it was 3.",
+  "lead_es": "En diciembre de 2025 se imprimieron de nuevo 41 diplomas de una lista equivocada. En lugar de una gran limpieza, Malia, Mei, Jun y Sam se reunieron quince minutos cada jueves, hicieron un cambio pequeño, lo midieron y lo mantuvieron con un control. Un año después, fueron 3.",
+  "description": "A film about improving data's quality a little every week, the fourth of Quality as a habit and the last of Data quality: in Mexico, from 1945, a small team of young Mexican agronomists and Norman Borlaug, working for a programme run by Mexico's government with the Rockefeller Foundation, fought the stem rust that had ruined harvest after harvest by growing two generations of wheat a year, in the Yaqui Valley in winter and the highlands near Mexico City in summer, and keeping the best each round; by 1948 they had four wheats that resisted the rust, by 1956 Mexico grew all the wheat it needed, and by 1963 it was selling wheat abroad; at the university, after 41 degree certificates were printed again in December 2025, Mei asked for something smaller than a big clean-up: fifteen minutes every Thursday at the bench, with Malia, who runs the ceremonies, Jun, who builds the list, and Sam, who runs it every night, and three questions; one turn of plan, do, check, act, from 1 October 2026, cut December's hand checks from 240 hours to 26, with 97 of a hundred records perfect; measure, simplify, standardise, and only then automate; the last step of every change is a check that keeps it, and dbt now keeps every night's results for a dashboard read on Thursdays; and on 9 December 2026 Andrés Peñaloza hears his name read as he says it, and 3 certificates are printed again, not 41.",
+  "description_es": "Una película sobre cómo mejorar la calidad de los datos un poco cada semana, la cuarta de La calidad como hábito y la última de Calidad de datos: en México, desde 1945, un equipo pequeño de jóvenes agrónomos mexicanos y Norman Borlaug, en un programa del gobierno de México con la Fundación Rockefeller, combatió la roya del tallo, que había arruinado cosecha tras cosecha, cultivando dos generaciones de trigo al año, en el valle del Yaqui en invierno y en las tierras altas cerca de la Ciudad de México en verano, y quedándose con los mejores en cada vuelta; en 1948 tenían cuatro trigos que resistían la roya, en 1956 México cultivaba todo el trigo que necesitaba y en 1963 vendía trigo al extranjero; en la universidad, después de que en diciembre de 2025 se imprimieran de nuevo 41 diplomas, Mei pidió algo más pequeño que una gran limpieza: quince minutos cada jueves en la mesa de trabajo, con Malia, que lleva las ceremonias, Jun, que construye la lista, y Sam, que la ejecuta cada noche, y tres preguntas; una vuelta de planificar, hacer, verificar y actuar, desde el 1 de octubre de 2026, bajó la revisión a mano de diciembre de 240 horas a 26, con 97 de cien registros perfectos; medir, simplificar, estandarizar y solo entonces automatizar; el último paso de cada cambio es un control que lo mantiene, y dbt guarda ahora los resultados de cada noche para un panel que se lee los jueves; y el 9 de diciembre de 2026 Andrés Peñaloza oye su nombre leído como él lo dice, y se imprimen de nuevo 3 diplomas, no 41.",
+  "card": "41 certificates printed again became 3: fifteen minutes every Thursday, one small change, measured, then kept with a check.",
+  "card_es": "41 diplomas impresos de nuevo pasaron a 3: quince minutos cada jueves, un cambio pequeño, medido y mantenido con un control.",
+  "chapters_es": {
+    "harvests": "Dos cosechas al año",
+    "thursdays": "Quince minutos, cada jueves",
+    "cycle": "Planificar, hacer, verificar, actuar",
+    "order": "Medir, simplificar, estandarizar, automatizar",
+    "kept": "Mantenido con un control",
+    "table": "En la misma mesa",
+    "stage": "Su nombre, como él lo dice"
+  },
+  "past": [
+    "Mexico, 1945 to 1963: two harvests of wheat a year",
+    "A small team grew two generations of wheat a year, in two fields far apart, and kept the best each round: small steps that halved the time to a new wheat. By 1956 Mexico grew all the wheat it needed."
+  ],
+  "past_es": [
+    "México, de 1945 a 1963: dos cosechas de trigo al año",
+    "Un equipo pequeño cultivó dos generaciones de trigo al año, en dos campos muy lejanos, y se quedó con los mejores en cada vuelta: pasos pequeños que redujeron a la mitad el tiempo para un trigo nuevo. En 1956 México cultivaba todo el trigo que necesitaba."
+  ],
+  "next_h": "That's the module: what good means for each use, measured, checked, fixed where it's born, answered, written down, and better every week. Next: your own list's first small change.",
+  "next_h_es": "Ese es el módulo: qué es bueno para cada uso, medido, verificado, arreglado donde nace, respondido, escrito y mejor cada semana. Después: el primer cambio pequeño de tu propia lista.",
+  "repo": {
+    "thursdays": [
+      "docs/every-week.md"
+    ],
+    "kept": [
+      "dbt_project.yml",
+      "macros/governance/keep_check_results.sql",
+      "analyses/quality/checks_by_night.sql"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The loop behind the film, the dbt and Databricks docs behind its week of checks, and the films on this site it builds on. Checked on 10 November 2026.",
+    "p_es": "El ciclo detrás de la película, la documentación de dbt y Databricks detrás de su semana de controles, y las películas de este sitio en las que se apoya. Revisado el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "The PDSA cycle, from the Deming Institute",
+        "title_es": "El ciclo PDSA, del Deming Institute (en inglés)",
+        "line": "Plan, do, study, act: the loop Walter Shewhart drew and W. Edwards Deming taught, who preferred study to check.",
+        "line_es": "Planificar, hacer, estudiar, actuar: el ciclo que dibujó Walter Shewhart y enseñó W. Edwards Deming, que prefería estudiar a verificar.",
+        "href": "https://deming.org/explore/pdsa/",
+        "href_es": "https://deming.org/explore/pdsa/"
+      },
+      {
+        "title": "dbt's on-run-end",
+        "title_es": "El on-run-end de dbt (en inglés)",
+        "line": "SQL, or a macro, run at the end of every dbt build or test: the last step that keeps each night's results.",
+        "line_es": "SQL, o una macro, que se ejecuta al final de cada dbt build o test: el último paso que guarda los resultados de cada noche.",
+        "href": "https://docs.getdbt.com/reference/project-configs/on-run-start-on-run-end",
+        "href_es": "https://docs.getdbt.com/reference/project-configs/on-run-start-on-run-end"
+      },
+      {
+        "title": "The results an on-run-end can read",
+        "title_es": "Los resultados que puede leer un on-run-end (en inglés)",
+        "line": "One result for each check that ran: its status, how many rows failed, and the check itself, with its owner.",
+        "line_es": "Un resultado por cada control que se ejecutó: su estado, cuántas filas fallaron y el control mismo, con su responsable.",
+        "href": "https://docs.getdbt.com/reference/dbt-jinja-functions/on-run-end-context",
+        "href_es": "https://docs.getdbt.com/reference/dbt-jinja-functions/on-run-end-context"
+      },
+      {
+        "title": "Dashboards on Databricks",
+        "title_es": "Paneles en Databricks",
+        "line": "Build a dashboard over a table, such as the week of checks, and share it with the people who read it on Thursdays.",
+        "line_es": "Crear un panel sobre una tabla, como la semana de controles, y compartirlo con quienes lo leen los jueves.",
+        "href": "https://learn.microsoft.com/en-us/azure/databricks/dashboards/",
+        "href_es": "https://learn.microsoft.com/es-es/azure/databricks/dashboards/"
+      },
+      {
+        "title": "Rules that run",
+        "title_es": "Reglas que se ejecutan",
+        "line": "The film where a quality rule became a check with an owner, and the scorecard this film keeps night after night.",
+        "line_es": "La película donde una regla de calidad se volvió un control con responsable, y el cuadro de mando que esta guarda noche tras noche.",
+        "href": "https://data.learn-all.org/data-governance/rules-that-run/",
+        "href_es": "https://data.learn-all.org/es/data-governance/rules-that-run/"
+      },
+      {
+        "title": "Teachers of data",
+        "title_es": "Docentes de datos",
+        "line": "How people come to care about data at all: the engagement this film's Thursday table takes for granted.",
+        "line_es": "Cómo llegan las personas a interesarse por los datos: el compromiso que la mesa de los jueves da por hecho.",
+        "href": "https://data.learn-all.org/data-governance/teachers-of-data/",
+        "href_es": "https://data.learn-all.org/es/data-governance/teachers-of-data/"
+      }
+    ]
+  }
+}

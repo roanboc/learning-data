@@ -1,0 +1,315 @@
+{
+ "player": "592aab3f32309696",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     11.0
+    ],
+    [
+     76.75,
+     82.0
+    ],
+    [
+     187.25,
+     192.5
+    ],
+    [
+     330.5,
+     337.5
+    ]
+   ]
+  },
+  "place:registrarDesk": {
+   "file": "registrarDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     11.0
+    ],
+    [
+     76.75,
+     82.0
+    ],
+    [
+     187.25,
+     192.5
+    ],
+    [
+     330.5,
+     337.5
+    ]
+   ]
+  },
+  "place:regScreen": {
+   "file": "regScreen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     10.75,
+     20.75
+    ]
+   ]
+  },
+  "place:regRoom": {
+   "file": "regRoom.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     20.0,
+     28.0
+    ],
+    [
+     87.75,
+     94.5
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     27.25,
+     36.0
+    ],
+    [
+     57.0,
+     74.75
+    ],
+    [
+     292.25,
+     299.0
+    ],
+    [
+     355.25,
+     361.0
+    ]
+   ]
+  },
+  "place:deskGov": {
+   "file": "deskGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     35.25,
+     57.75
+    ],
+    [
+     81.25,
+     88.5
+    ],
+    [
+     223.5,
+     232.5
+    ],
+    [
+     343.5,
+     356.0
+    ]
+   ]
+  },
+  "place:dataNight": {
+   "file": "dataNight.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     74.0,
+     77.5
+    ],
+    [
+     154.5,
+     157.5
+    ]
+   ]
+  },
+  "place:board": {
+   "file": "board.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     93.75,
+     99.5
+    ],
+    [
+     360.25,
+     365.5
+    ]
+   ]
+  },
+  "place:bigReg": {
+   "file": "bigReg.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     98.5,
+     114.5
+    ],
+    [
+     180.75,
+     187.5
+    ]
+   ]
+  },
+  "place:mapClose": {
+   "file": "mapClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     114.25,
+     122.25
+    ],
+    [
+     298.0,
+     331.5
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     122.0,
+     125.5
+    ],
+    [
+     260.25,
+     267.5
+    ]
+   ]
+  },
+  "place:bigPlan": {
+   "file": "bigPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     124.75,
+     132.0
+    ],
+    [
+     255.25,
+     261.25
+    ],
+    [
+     267.25,
+     287.25
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     131.0,
+     148.0
+    ],
+    [
+     196.75,
+     224.5
+    ],
+    [
+     231.75,
+     250.0
+    ]
+   ]
+  },
+  "place:big": {
+   "file": "big.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     147.25,
+     155.5
+    ],
+    [
+     192.25,
+     197.0
+    ],
+    [
+     249.75,
+     256.0
+    ],
+    [
+     287.0,
+     293.0
+    ]
+   ]
+  },
+  "place:nightScreen": {
+   "file": "nightScreen.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     156.75,
+     165.5
+    ]
+   ]
+  },
+  "place:bigNight": {
+   "file": "bigNight.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     164.75,
+     181.5
+    ]
+   ]
+  },
+  "gmBook|1340x680": {
+   "file": "gmBook_1340x680.webp",
+   "w": 1440,
+   "h": 780,
+   "shows": [
+    [
+     223.5,
+     232.5
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     337.25,
+     344.25
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     337.25,
+     344.25
+    ]
+   ]
+  }
+ }
+}

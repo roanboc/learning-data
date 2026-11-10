@@ -419,9 +419,10 @@ const NARR={
  {"id":"format","gap":0.8,"text":"And each catalogue kept its promises in its own format: change the catalogue, and every promise is typed again."},
  {"id":"change","gap":0.8,"text":"Something had to change."},
  {"id":"now","gap":0.3,"text":"Now each promise is a file, kept with the code, in two open standards that any tool can read:"},
- {"id":"pair","gap":0.8,"text":"one for the product, and one for its table's contract."},
- {"id":"written","gap":0.8,"text":"The contract is written from the table's own code, so the two can't disagree, and a change that would break it stops."},
- {"id":"jun","gap":0.8,"text":"When Jun added a column to credentials, its contract grew by a line, by itself, and no report broke."},
+ {"id":"pair","gap":0.8,"text":"one for the product, and one for the contract of each core table it's built on."},
+ {"id":"written","gap":0.8,"text":"Data governance's information architect writes that contract first, and the data team builds to it."},
+ {"id":"drift","gap":0.8,"text":"A check stops the two drifting apart."},
+ {"id":"jun","gap":0.8,"text":"When credentials needed a new column, its contract got the line first, Jun built it, and no report broke."},
  {"id":"ten","gap":0.8,"text":"All ten tables other teams read have a promise that's checked on every change."},
  {"id":"stay","gap":0.8,"text":"And whichever catalogue shows them, the promises stay the university's."}]},
 "owner":{"name":"Written by its owner","lead":0.8,"tail":0.8,"vo":[
@@ -430,20 +431,24 @@ const NARR={
  {"id":"names","gap":0.8,"text":"It names her as its owner, the table it offers, and its service levels: built every night, and ready by seven on census day."},
  {"id":"ask","gap":0.8,"text":"And it says where to ask."},
  {"id":"keeps","gap":0.8,"text":"The data team builds the table. Clara keeps the promise."}]},
-"contract":{"name":"The contract, from the model","lead":0.8,"tail":0.8,"vo":[
+"contract":{"name":"A contract written first","lead":0.8,"tail":0.8,"vo":[
  {"id":"is","gap":0.3,"text":"The contract is the promise about the table itself:"},
  {"id":"each","gap":0.8,"text":"each column, its type, whether it's always there, whether it can identify a person, and the tests it must pass."},
- {"id":"nobody","gap":0.8,"text":"Nobody types it."},
- {"id":"script","gap":0.8,"text":"A script writes it from the model, the code that builds the table, and from the product's file, in the Open Data Contract Standard."},
- {"id":"side","gap":0.8,"text":"Side by side, each line of the model has its line in the contract."},
- {"id":"check","gap":0.8,"text":"On every pull request, a check fails if they've drifted apart, or if the contract breaks the standard's rules."}]},
+ {"id":"core","gap":0.8,"text":"Only the core tables have one: the shared tables that every product is built on."},
+ {"id":"architect","gap":0.8,"text":"Data governance's information architect writes it first, in the Open Data Contract Standard."},
+ {"id":"builds","gap":0.8,"text":"The data team builds the model to it."},
+ {"id":"side","gap":0.8,"text":"Side by side, each line of the contract has its line in the model."},
+ {"id":"check","gap":0.8,"text":"On every pull request, a check fails if the model has drifted from its contract, or if the contract breaks the standard's rules."},
+ {"id":"process","gap":0.8,"text":"Then data governance looks at how the change got there: the contract changes first, and the code follows."},
+ {"id":"lighter","gap":0.8,"text":"Clara's own table has no enterprise contract: its promise is in its code, the data team's."},
+ {"id":"wait","gap":0.8,"text":"So it can change without waiting on governance."}]},
 "shared":{"name":"Every shared table, in one product","lead":0.8,"tail":0.8,"vo":[
  {"id":"every","gap":0.8,"text":"Not every table is a product."},
  {"id":"ten","gap":0.8,"text":"Of the data team's thirty-three tables, ten are read by other teams, and each is in exactly one of six products."},
  {"id":"same","gap":0.8,"text":"The same script checks that too."},
  {"id":"new","gap":0.8,"text":"A new table other teams read, in no product, stops its pull request until a product takes it in."}]},
 "break":{"name":"A change that would break it","lead":0.8,"tail":0.8,"vo":[
- {"id":"follows","gap":0.8,"text":"When a model changes, its contract follows, by itself."},
+ {"id":"follows","gap":0.8,"text":"Clara's table keeps its promise in its code: change the model, and its contract changes with it."},
  {"id":"some","gap":0.8,"text":"But some changes break the readers."},
  {"id":"rename","gap":0.8,"text":"Rename a column in Clara's table, and the impact check fails: it's breaking, so it needs a new version."},
  {"id":"stays","gap":0.8,"text":"So the old version stays, with a date to go, and the new one goes beside it."},
@@ -461,7 +466,7 @@ const NARR={
 "catalogue":{"name":"A catalogue over the platform","lead":0.8,"tail":0.8,"vo":[
  {"id":"ontos","gap":0.8,"text":"On the platform, the university's catalogue is Ontos, from Databricks Labs."},
  {"id":"imports","gap":0.8,"text":"It imports each contract from its file, and lays the products out by domain, each with its team."},
- {"id":"steward","gap":0.8,"text":"A steward reviews a product before it's published."},
+ {"id":"steward","gap":0.8,"text":"Governance doesn't review each product before it's published: its owner publishes it, and rules check them all."},
  {"id":"policy","gap":0.8,"text":"Each night, a policy checks every product: an active one with no owner is tagged, and governance is told."},
  {"id":"link","gap":0.8,"text":"And it can link each column to the business term it holds."},
  {"id":"labs","gap":0.8,"text":"But a Labs project comes as it is, with no formal support."},
@@ -473,17 +478,17 @@ const NARR={
  {"id":"last","gap":0.8,"text":"A contract in an open format outlives the tool."}]}
 };
 
-const VODUR={"promise/room": 3.878, "promise/designs": 6.628, "promise/clara": 4.704, "promise/typed": 6.659, "promise/column": 3.734, "promise/census": 6.317, "promise/format": 6.716, "promise/change": 1.288, "promise/now": 5.933, "promise/pair": 2.941, "promise/written": 6.66, "promise/jun": 6.58, "promise/ten": 4.502, "promise/stay": 4.0, "owner/file": 2.921, "owner/for": 2.938, "owner/names": 7.793, "owner/ask": 1.237, "owner/keeps": 3.251, "contract/is": 2.958, "contract/each": 6.644, "contract/nobody": 1.106, "contract/script": 7.456, "contract/side": 3.954, "contract/check": 6.424, "shared/every": 1.744, "shared/ten": 6.911, "shared/same": 1.658, "shared/new": 5.987, "break/follows": 3.401, "break/some": 1.899, "break/rename": 6.237, "break/stays": 4.271, "break/two": 9.403, "break/add": 2.839, "readers/says": 7.665, "readers/built": 4.879, "readers/when": 3.962, "open/both": 5.745, "open/bitol": 5.238, "open/tools": 5.365, "open/keeps": 5.112, "catalogue/ontos": 4.641, "catalogue/imports": 5.722, "catalogue/steward": 2.599, "catalogue/policy": 6.308, "catalogue/link": 3.236, "catalogue/labs": 3.68, "catalogue/home": 4.319, "close/march": 7.862, "close/changed": 3.09, "close/file": 5.92, "close/last": 2.659};
+const VODUR={"promise/room": 3.878, "promise/designs": 6.628, "promise/clara": 4.704, "promise/typed": 6.659, "promise/column": 3.734, "promise/census": 6.317, "promise/format": 6.716, "promise/change": 1.288, "promise/now": 5.933, "promise/pair": 4.276, "promise/written": 5.915, "promise/drift": 2.026, "promise/jun": 6.305, "promise/ten": 4.502, "promise/stay": 4.0, "owner/file": 2.921, "owner/for": 2.938, "owner/names": 7.793, "owner/ask": 1.237, "owner/keeps": 3.251, "contract/is": 2.958, "contract/each": 6.644, "contract/core": 4.64, "contract/architect": 5.817, "contract/builds": 2.117, "contract/side": 3.88, "contract/check": 7.515, "contract/process": 5.893, "contract/lighter": 5.991, "contract/wait": 2.442, "shared/every": 1.744, "shared/ten": 6.911, "shared/same": 1.658, "shared/new": 5.987, "break/follows": 5.781, "break/some": 1.899, "break/rename": 6.237, "break/stays": 4.271, "break/two": 9.403, "break/add": 2.839, "readers/says": 7.665, "readers/built": 4.879, "readers/when": 3.962, "open/both": 5.745, "open/bitol": 5.238, "open/tools": 5.365, "open/keeps": 5.112, "catalogue/ontos": 4.641, "catalogue/imports": 5.722, "catalogue/steward": 6.389, "catalogue/policy": 6.308, "catalogue/link": 3.237, "catalogue/labs": 3.68, "catalogue/home": 4.319, "close/march": 7.862, "close/changed": 3.091, "close/file": 5.92, "close/last": 2.659};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
    Two wordless moments: the fifth card on the data team's board becoming the title, and the end card. The longer holds let a picture
    finish: the catalogue's column with nothing behind it, a faculty's report at census, every promise typed again, the six products, the
-   threads joining the model's lines to the contract's, the ten tables gathered into six products, and the copy going one way. */
+   threads joining the contract's lines to the model's, the ten tables gathered into six products, and the copy going one way. */
 const BREATH={
-"promise":{"hold":{"room":0.6,"designs":1.0,"clara":0.8,"typed":1.0,"column":1.0,"census":1.2,"format":1.0,"change":1.0,"pair":1.0,"written":0.8,"jun":0.8,"ten":0.6,"stay":0.8},"breathe":4.4},
+"promise":{"hold":{"room":0.6,"designs":1.0,"clara":0.8,"typed":1.0,"column":1.0,"census":1.2,"format":1.0,"change":1.0,"pair":1.0,"written":0.4,"drift":0.8,"jun":0.8,"ten":0.6,"stay":0.8},"breathe":4.4},
 "owner":{"hold":{"file":0.8,"for":1.0,"names":1.2,"ask":0.8,"keeps":1.2}},
-"contract":{"hold":{"each":1.4,"nobody":1.0,"script":1.2,"side":1.4,"check":0.7}},
+"contract":{"hold":{"each":1.4,"core":1.0,"architect":0.4,"builds":1.0,"side":1.4,"check":0.7,"process":0.8,"lighter":0.4,"wait":0.8}},
 "shared":{"hold":{"every":0.6,"ten":1.2,"same":0.4,"new":0.8}},
 "break":{"hold":{"follows":0.4,"some":0.4,"rename":0.8,"stays":0.6,"two":0.4,"add":0.4}},
 "readers":{"hold":{"says":1.2,"built":1.0,"when":1.2}},
@@ -1229,7 +1234,11 @@ PEOPLE.jun={name:"Jun Park",role:"Analytics engineer",side:"Technical",does:"pro
    landscapes, soft, so the role colours are the strongest washes on screen. Text is dark ink on paper-light cards.
    Everything costly is painted once and kept: the paper, the pigment's grain, each place's background and each card's paper. Only
    the text and what moves are drawn every frame, so the site's player can draw the film live. Every name here starts with wc_ or WC,
-   because every file of the film shares one script. */
+   because every file of the film shares one script.
+   The site's player draws a lighter watercolour than the video, so it plays smoothly on a laptop or a phone (5 November 2026): it
+   makes the paper and the grain in a worker, off the page's thread; it shows each place as a picture drawn when the film was
+   published (places/ beside film.js) instead of painting it; it keeps only the pictures it is using; and it washes people in fewer
+   layers (people.js). The video, its stills, its poster and the checks draw the full watercolour, as before (window.__RENDER__). */
 
 /* ---------- colours ---------- */
 const WC_PAPER=[251,247,238],WC_PENCIL=[58,54,66],WC_INK=[46,42,56],WC_MUTED=[100,96,112],WC_DARK=[30,26,40],WC_CARD=[253,251,245];
@@ -1258,34 +1267,72 @@ const WCP={skyTop:[116,174,226],sun:[255,224,150],farForest:[124,162,154],far:[1
 function wc_rng(seed){let s=(seed>>>0)||1;return()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function wc_noise(seed){const R=wc_rng(seed),N=new Float32Array(1024);for(let i=0;i<1024;i++)N[i]=R();const g=(ix,iy)=>N[((ix*73856093)^(iy*19349663))&1023];
   return(x,y)=>{const ix=Math.floor(x),iy=Math.floor(y),tx=x-ix,ty=y-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);return lerp(lerp(g(ix,iy),g(ix+1,iy),sx),lerp(g(ix,iy+1),g(ix+1,iy+1),sx),sy);};}
-// the paper's tooth and fibres, near white, to multiply over a whole frame; k is how strongly it shows, and the corners darken a touch
-function wc_paperTex(w,h,seed,k){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+5);
+// the paper's tooth and fibres, near white, to multiply over a whole frame; k is how strongly it shows, and the corners darken a touch.
+// The pixels and the fibres are worked out by wc_paperPx, which the site's player runs in a worker (wc_texWorker)
+function wc_paperPx(w,h,seed,k){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed),R=wc_rng(seed+5);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/2.3,j/2.3)*0.45+n(i/9,j/9)*0.35+n(i/60,j/60)*0.2,t=255-(Math.pow(v,2.4)*46+R()*6)*k,
     e=Math.pow(Math.hypot((i-w/2)/(w*0.62),(j-h*0.48)/(h*0.62)),2.2),vg=1-0.05*clamp(e-0.35,0,1);d[q]=t*vg;d[q+1]=(t-1*k)*(vg-0.003);d[q+2]=(t-3*k)*(vg-0.006);d[q+3]=255;}
-  x.putImageData(im,0,0);x.lineCap="round";
-  for(let i=0;i<w*h/2400;i++){const x0=R()*w,y0=R()*h,a=R()*TAU,l=5+R()*24;x.strokeStyle="rgba(130,118,100,"+((0.04+R()*0.07)*k)+")";x.lineWidth=0.5+R()*0.7;x.beginPath();x.moveTo(x0,y0);
+  const fib=[];for(let i=0;i<w*h/2400;i++){const x0=R()*w,y0=R()*h,a=R()*TAU,l=5+R()*24;fib.push([x0,y0,a,l,(0.04+R()*0.07)*k,0.5+R()*0.7]);}
+  return{d,fib};}
+function wc_paperTex(w,h,seed,k,px){px=px||wc_paperPx(w,h,seed,k);const c=wc_texOf(w,h,px.d),x=c.getContext("2d");x.lineCap="round";
+  for(const [x0,y0,a,l,al,lw] of px.fib){x.strokeStyle="rgba(130,118,100,"+al+")";x.lineWidth=lw;x.beginPath();x.moveTo(x0,y0);
     x.quadraticCurveTo(x0+Math.cos(a+0.5)*l*0.5,y0+Math.sin(a+0.5)*l*0.5,x0+Math.cos(a)*l,y0+Math.sin(a)*l);x.stroke();}
   return c;}
 // pigment that settles in the paper's tooth: white with clustered specks, to multiply into washes
-function wc_granTex(w,h,seed){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+3);
+function wc_granPx(w,h,seed){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed),R=wc_rng(seed+3);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/4,j/4)*0.55+n(i/19,j/19)*0.45,sp=R()<0.05*v?R()*60:0,t=255-v*36-sp;d[q]=t;d[q+1]=t;d[q+2]=t;d[q+3]=255;}
-  x.putImageData(im,0,0);return c;}
+  return d;}
+function wc_granTex(w,h,seed,d){return wc_texOf(w,h,d||wc_granPx(w,h,seed));}
 // soft blotches, as an alpha mask, for washes that dry unevenly
-function wc_blotchTex(w,h,seed,scale,bias){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed);
+function wc_blotchPx(w,h,seed,scale,bias){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/scale,j/scale)*0.6+n(i/(scale/2.7),j/(scale/2.7))*0.3+n(i/(scale/8),j/(scale/8))*0.1;
     d[q]=255;d[q+1]=255;d[q+2]=255;d[q+3]=clamp((v-0.22+bias)*1.7,0,1)*255;}
-  x.putImageData(im,0,0);return c;}
+  return d;}
+function wc_blotchTex(w,h,seed,scale,bias,d){return wc_texOf(w,h,d||wc_blotchPx(w,h,seed,scale,bias));}
+function wc_texOf(w,h,d){const c=mkCanvas(w,h);c.getContext("2d").putImageData(new ImageData(d,w,h),0,0);return c;}
+// for the site's player: the grain and the blotches in one, black, as opaque as they are dark, to lay on a person's paint in one pass
+// (source-atop) where the video multiplies the grain and the blotches in in two, and cuts the paint out again (people.js, wc_wpaint).
+// g is the grain's pixels at w x h, b the blotches' at bw x bh, read between their pixels as the browser stretches them
+function wc_toothPx(g,b,w,h,bw,bh){const d=new Uint8ClampedArray(w*h*4),sx=bw/w,sy=bh/h;
+  for(let j=0;j<h;j++){const fy=Math.min(bh-1,Math.max(0,(j+0.5)*sy-0.5)),y0=Math.floor(fy),y1=Math.min(bh-1,y0+1),ty=fy-y0;
+    for(let i=0;i<w;i++){const q=(j*w+i)*4,fx=Math.min(bw-1,Math.max(0,(i+0.5)*sx-0.5)),x0=Math.floor(fx),x1=Math.min(bw-1,x0+1),tx=fx-x0,
+      m=lerp(lerp(b[(y0*bw+x0)*4+3],b[(y0*bw+x1)*4+3],tx),lerp(b[(y1*bw+x0)*4+3],b[(y1*bw+x1)*4+3],tx),ty)/255;
+      d[q+3]=(1-(1-0.5*(1-g[q]/255))*(1-0.4*m*0.231))*255;}}
+  return d;}
 // what is kept: the textures, each place's background, each card's paper, each white figure, and spare canvases
-const WC={ready:false,bg:{},paint:{},card:{},tint:{},fig:{},buf:{}};
+const WC={ready:false,bg:{},paint:{},nPaint:0,card:{},tint:{},fig:{},buf:{}};
 function wc_prep(){if(WC.ready)return;WC.gran=WC.gran||wc_granTex(W,H,17);WC.paper=WC.paper||wc_paperTex(W,H,23,0.42);WC.blotch=WC.blotch||wc_blotchTex(480,270,31,60,0.05);WC.ready=true;}
-// the same, one texture at a time with a pause between, so a page that is opening stays responsive (4 November 2026)
-async function wc_prepSoft(){const y=()=>new Promise(r=>setTimeout(r,0));if(!WC.ready&&!WC.gran){WC.gran=wc_granTex(W,H,17);await y();}
-  if(!WC.ready&&!WC.paper){WC.paper=wc_paperTex(W,H,23,0.42);await y();}wc_prep();}
-function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=WC.buf[k]=mkCanvas(w,h);if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);
-  x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
+// the textures, made in a worker by the same code (so the same pixels), for the site's player: made on the page, they held it for a
+// second or more as the visitor reached for the film, several on a phone (5 November 2026). Null where a worker can't run
+function wc_texWorker(){try{if(window.__RENDER__||typeof Worker==="undefined"||typeof Blob==="undefined"||!(window.URL&&URL.createObjectURL))return null;
+    const src=["const TAU="+TAU+",clamp="+clamp+",lerp="+lerp+";",wc_rng,wc_noise,wc_paperPx,wc_granPx,wc_blotchPx,wc_toothPx,
+      "onmessage=e=>{const [w,h]=e.data,g=wc_granPx(w,h,17),p=wc_paperPx(w,h,23,0.42),b=wc_blotchPx(480,270,31,60,0.05),a=wc_toothPx(g,b,w,h,480,270);"+
+      "postMessage({g,p,b,a},[g.buffer,p.d.buffer,b.buffer,a.buffer]);};"].join("\n"),u=URL.createObjectURL(new Blob([src],{type:"text/javascript"})),wk=new Worker(u);
+    return new Promise((res,rej)=>{const end=()=>{wk.terminate();URL.revokeObjectURL(u);};wk.onmessage=e=>{end();res(e.data);};wk.onerror=e=>{end();rej(e);};wk.postMessage([W,H]);});}
+  catch(e){return null;}}
+// the same, for the site's player: from the worker, or, where none can run, on the page one texture at a time with a pause between,
+// so a page that is opening stays responsive (4 November 2026)
+async function wc_prepSoft(){const y=()=>new Promise(r=>setTimeout(r,0));if(WC.ready)return;
+  let r=null;const job=WC.job||(WC.job=wc_texWorker());if(job)try{r=await job;}catch(e){r=null;}
+  if(WC.ready)return;
+  if(r){WC.gran=wc_granTex(W,H,17,r.g);await y();WC.paper=wc_paperTex(W,H,23,0.42,r.p);await y();WC.blotch=wc_blotchTex(480,270,31,60,0.05,r.b);WC.tooth=wc_texOf(W,H,r.a);WC.ready=true;return;}
+  const g=wc_granPx(W,H,17);if(!WC.gran)WC.gran=wc_granTex(W,H,17,g);await y();if(!WC.paper)WC.paper=wc_paperTex(W,H,23,0.42);await y();
+  const b=wc_blotchPx(480,270,31,60,0.05);if(!WC.blotch)WC.blotch=wc_blotchTex(480,270,31,60,0.05,b);await y();WC.tooth=wc_texOf(W,H,wc_toothPx(g,b,W,H,480,270));WC.ready=true;}
+/* The site's player keeps what it makes only while it uses it. Kept for good, a film's spare canvases, cards and tints grew past a
+   gigabyte in one viewing (a person's canvases at every size the camera showed them, a card at every size it grew through), and the
+   browser slowed down, then dropped them (5 November 2026). Each kind keeps at most WC_KEEP pixels: what went unused longest goes
+   first, never anything the frame being drawn has used. The video keeps everything, as it did. */
+const WC_KEEP={buf:12e6,card:12e6,tint:4e6,bg:24e6},WC_PX={buf:0,card:0,tint:0,bg:0};let WC_FRAME=0;
+function wc_seen(c){c.__f=WC_FRAME;c.__t=performance.now();return c;}
+function wc_keep(kind,key,c){const M=WC[kind],old=M[key];if(old)WC_PX[kind]-=old.width*old.height;M[key]=wc_seen(c);WC_PX[kind]+=c.width*c.height;
+  if(window.__RENDER__||WC_PX[kind]<=WC_KEEP[kind])return c;const now=performance.now(),ks=Object.keys(M).sort((a,b)=>M[a].__t-M[b].__t);
+  for(const k of ks){if(WC_PX[kind]<=WC_KEEP[kind])break;const e=M[k];if(e===c||e.__f===WC_FRAME||now-e.__t<300)continue;WC_PX[kind]-=e.width*e.height;delete M[k];}
+  return c;}
+function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=wc_keep("buf",k,mkCanvas(w,h));else wc_seen(c);if(c.width!==w||c.height!==h){WC_PX.buf+=w*h-c.width*c.height;c.width=w;c.height=h;}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
 // a texture's alpha, filled with one colour
-function wc_tint(tex,col){const k=col.map(v=>v|0).join(",")+"|"+tex.width;if(WC.tint[k])return WC.tint[k];const c=mkCanvas(tex.width,tex.height),x=c.getContext("2d");
-  x.fillStyle=rgba(col,1);x.fillRect(0,0,c.width,c.height);x.globalCompositeOperation="destination-in";x.drawImage(tex,0,0);return WC.tint[k]=c;}
+function wc_tint(tex,col){const k=col.map(v=>v|0).join(",")+"|"+tex.width;if(WC.tint[k])return wc_seen(WC.tint[k]);const c=mkCanvas(tex.width,tex.height),x=c.getContext("2d");
+  x.fillStyle=rgba(col,1);x.fillRect(0,0,c.width,c.height);x.globalCompositeOperation="destination-in";x.drawImage(tex,0,0);return wc_keep("tint",k,c);}
 
 /* ---------- shapes: lists of points, so each can be painted as a wash ---------- */
 const wc_multi=p=>Array.isArray(p[0][0]);
@@ -1342,7 +1389,9 @@ function wc_ink(ctx,pts,closed,lw,col,a,seed,amp){const p=wc_resample(pts,6);ctx
 function wc_resampleOpen(pts,step){const o=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/step));
   for(let j=0;j<n;j++)o.push([lerp(a[0],b[0],j/n),lerp(a[1],b[1],j/n)]);}o.push(pts[pts.length-1]);return o;}
 function wc_pencil(ctx,pts,p,o){o=o||{};if(p<=0)return;const q=o.closed?pts.concat([pts[0]]):pts,key=q.map(v=>v[0].toFixed(1)+","+v[1].toFixed(1)).join(";")+"|"+(o.seed||5)+"|"+(o.amp==null?1:o.amp);
-  let J=WC.paint[key];if(!J){const r=wc_resampleOpen(q,5),amp=o.amp==null?1.0:o.amp;J=WC.paint[key]=[wc_jitter(r,amp,o.seed||5,0.05),wc_jitter(r,amp,(o.seed||5)+17,0.05)];}
+  let J=WC.paint[key];if(!J){const r=wc_resampleOpen(q,5),amp=o.amp==null?1.0:o.amp;J=WC.paint[key]=[wc_jitter(r,amp,o.seed||5,0.05),wc_jitter(r,amp,(o.seed||5)+17,0.05)];
+    // a line that moves is a new line each frame: the player keeps the last few thousand
+    if(!window.__RENDER__&&++WC.nPaint>4000){for(const k of Object.keys(WC.paint).slice(0,1000))delete WC.paint[k];WC.nPaint-=1000;}}
   const n=Math.max(2,Math.round(J[0].length*clamp(p,0,1)));ctx.save();ctx.lineCap="round";ctx.lineJoin="round";if(o.dash)ctx.setLineDash(o.dash);
   J.forEach((pp,i)=>{ctx.beginPath();ctx.moveTo(pp[0][0],pp[0][1]);for(let k=1;k<n;k++)ctx.lineTo(pp[k][0],pp[k][1]);ctx.lineWidth=(o.lw||2.6)*(i?0.55:1);
     ctx.strokeStyle=rgba(o.col||WC_PENCIL,(o.a==null?0.9:o.a)*(i?0.45:1));ctx.stroke();});ctx.restore();}
@@ -1447,10 +1496,78 @@ function wc_walker(ctx,x,y,h,cloth,depth,o){o=o||{};const k=h/100,P=WCP;
   wc_wash(ctx,[[x+8*k,y-78*k],[x+20*k,y-60*k],[x+15*k,y-56*k],[x+4*k,y-70*k]],cloth,{depth,kind:"arm",lw:1.2});}
 
 /* ---------- what is kept ---------- */
-// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still
-function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return c;wc_prep();c=WC.bg[key]=mkCanvas(w||W,h||H);const x=c.getContext("2d");paint(x);return c;}
+// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still. In the
+// site's player, one the film was published with as a picture (below) is that picture, and is never painted
+function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return wc_seen(c);const pic=wc_pic(key);if(pic)return pic;
+  wc_prep();c=wc_keep("bg",key,mkCanvas(w||W,h||H));paint(c.getContext("2d"));return c;}
+/* ---------- the site's player: each place as a picture ---------- */
+// tools/publish.py draws each place the film paints (WC_PLACES), and anything else it keeps at the frame's size or larger (such as a
+// place painted at twice the size, for close-ups), as a picture, places/<name>.webp beside film.js, and lists them in
+// places/places.json by what wc_kept calls them ("place:" and the place's name), with the player that drew them, their size and when
+// the film shows each ([from, to] in seconds). The site's player shows those pictures instead of painting them: a place took 0.1 to
+// 0.5 s to paint on a fast computer and several times that on a laptop or a phone, and the player painted them while the film
+// played, so the picture froze again and again (5 November 2026). It fetches every picture once, in the order the film shows them,
+// and keeps decoded only those it shows from a moment ago to half a minute ahead, one the frame's size or larger at no more than twice
+// the player's width. One with no picture is painted, as before. The video, the stills, the poster and the checks paint everything.
+const WC_PICS={dir:null,list:null,file:{},pic:{},dec:{},job:{},failed:{},used:{},busy:0,t:0,hold:0,ready:null};
+// a picture decoded smaller than the film keeps it: [its width and height in the film, and how much smaller it is, across and down].
+// Wherever the film draws it at its own size, or a part of it, it is drawn as the film's size: master data film 8 draws the place
+// "screen" at its own size inside another picture, and governance in practice film 1 its faculty desk
+const WC_SMALL=new WeakMap();
+(function(){if(window.__RENDER__||typeof CanvasRenderingContext2D==="undefined")return;const P=CanvasRenderingContext2D.prototype,d=P.drawImage;
+  P.drawImage=function(im){const s=WC_SMALL.get(im);if(!s)return d.apply(this,arguments);const a=arguments;
+    if(a.length===3)return d.call(this,im,a[1],a[2],s[0],s[1]);
+    if(a.length===9)return d.call(this,im,a[1]*s[2],a[2]*s[3],a[3]*s[2],a[4]*s[3],a[5],a[6],a[7],a[8]);
+    return d.apply(this,arguments);};})();
+(function(){try{const s=!window.__RENDER__&&document.currentScript&&document.currentScript.src;if(s)WC_PICS.dir=s.replace(/[?#].*$/,"").replace(/[^/]*$/,"")+"places/";}catch(e){}})();
+// starts loading the pictures, once, on a page with the film; the list of pictures, or null where there are none
+function wc_picsLoad(){return WC_PICS.ready||(WC_PICS.ready=(async()=>{
+  if(!WC_PICS.dir||typeof WC_PLACES==="undefined"||!document.getElementById("film")||typeof fetch!=="function")return null;
+  try{const r=await fetch(WC_PICS.dir+"places.json");if(!r.ok)return null;const m=await r.json(),P=m.places||{};
+    const L=Object.keys(P).filter(k=>P[k].file).map(k=>({k,file:P[k].file,w:P[k].w||W,h:P[k].h||H,shows:P[k].shows||[]}));if(!L.length)return null;
+    WC_PICS.list=L;wc_picsFetch();return L;}catch(e){return null;}})());}
+// how soon the film shows a picture after t (one it showed before t, or never, comes last)
+function wc_picSoon(p,t){let d=1e9;for(const [a,b] of p.shows)if(b>=t)d=Math.min(d,Math.max(0,a-t));return d<1e9?d:1e6+(p.shows.length?p.shows[0][0]:0);}
+function wc_picsFetch(){const L=WC_PICS.list;if(!L)return;const todo=L.filter(p=>!WC_PICS.file[p.k]&&!WC_PICS.job[p.k]&&!WC_PICS.failed[p.k]).sort((a,b)=>wc_picSoon(a,WC_PICS.t)-wc_picSoon(b,WC_PICS.t));
+  while(WC_PICS.busy<3&&todo.length){const p=todo.shift();WC_PICS.busy++;
+    WC_PICS.job[p.k]=fetch(WC_PICS.dir+p.file).then(r=>{if(!r.ok)throw new Error(r.status);return r.blob();}).then(b=>{WC_PICS.file[p.k]=b;},()=>{WC_PICS.failed[p.k]=1;})
+      .then(()=>{WC_PICS.busy--;delete WC_PICS.job[p.k];wc_picsFetch();wc_picsKeep(WC_PICS.t);});}}
+// the width a picture is decoded at: one the frame's size or larger, enough for the camera to move in twice as close at the player's
+// size, never more than its own; a smaller one, whole
+function wc_picNeed(p){if(p.w*p.h<W*H)return p.w;const cv=document.getElementById("film");return Math.min(p.w,cv&&cv.width?Math.ceil(cv.width*2):p.w);}
+// keeps decoded the pictures the film shows from 2 s before t to 30 s after, and lets the others go (their files stay, to decode
+// again); one decoded smaller than the player now needs (it grew, or went full screen) is decoded again, and shown meanwhile
+function wc_picsKeep(t){const L=WC_PICS.list;if(!L)return;const moved=Math.abs(t-WC_PICS.t)>2;WC_PICS.t=t;if(moved)wc_picsFetch();
+  for(const p of L){const near=p.shows.some(([a,b])=>b>=t-2&&a<=t+30),have=WC_PICS.pic[p.k];
+    if(near&&WC_PICS.file[p.k]&&!WC_PICS.dec[p.k]&&(!have||have.width<wc_picNeed(p)*0.9))wc_picDecode(p);
+    else if(!near&&have&&WC_PICS.used[p.k]!==WC_FRAME){if(have.close)have.close();delete WC_PICS.pic[p.k];}}}
+// decoded off the page's thread where the browser can (createImageBitmap); when the film is waiting for it, it draws again
+function wc_picDecode(p){const k=p.k,b=WC_PICS.file[k],w=wc_picNeed(p);
+  const whole=()=>typeof createImageBitmap==="function"?createImageBitmap(b):new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(b);});
+  WC_PICS.dec[k]=(w<p.w&&typeof createImageBitmap==="function"?createImageBitmap(b,{resizeWidth:w,resizeHeight:Math.round(w*p.h/p.w),resizeQuality:"medium"}).catch(whole):whole())
+    .then(pic=>{const old=WC_PICS.pic[k];if(old&&old!==pic&&old.close)old.close();if(pic.width<p.w)WC_SMALL.set(pic,[p.w,p.h,pic.width/p.w,pic.height/p.h]);
+      WC_PICS.pic[k]=pic;if(WC_PICS.hold)window.dispatchEvent(new Event("resize"));},
+      ()=>{if(!WC_PICS.pic[k])WC_PICS.failed[k]=1;}).then(()=>{delete WC_PICS.dec[k];});}
+// a picture, if it's ready; null where it is to be painted
+function wc_pic(k){const p=WC_PICS.pic[k];if(!p)return null;WC_PICS.used[k]=WC_FRAME;return p;}
+// a picture the film shows at t that is still on its way
+function wc_picsMissing(t){const L=WC_PICS.list;if(!L)return false;for(const p of L)if(!WC_PICS.pic[p.k]&&!WC_PICS.failed[p.k]&&p.shows.some(([a,b])=>t>=a-0.3&&t<=b+0.3))return true;return false;}
+// resolves once the pictures the film shows from t to 2 s after are ready, or 8 s have passed
+function wc_picsReady(t){WC_PICS.t=t;wc_picsFetch();const until=performance.now()+8000;
+  return new Promise(res=>{const go=()=>{wc_picsKeep(t);let wait=false;for(const p of WC_PICS.list)if(!WC_PICS.pic[p.k]&&!WC_PICS.failed[p.k]&&p.shows.some(([a,b])=>b>=t-0.3&&a<=t+2))wait=true;
+    if(!wait||performance.now()>until)res();else setTimeout(go,40);};go();});}
+// the player's renderFrame: counts frames (for what is kept), keeps the pictures near this moment decoded, and, while a place this
+// moment shows is still on its way, keeps the frame before on screen (up to 3 s, then the place is painted) rather than paint it now
+function wc_liveFrame(rf){let lw=0,lh=0,since=0;return function(ctx,S,t){WC_FRAME++;const cv=ctx.canvas;if(!cv||cv.id!=="film"||!WC_PICS.list)return rf.apply(this,arguments);
+  wc_picsKeep(t);if(wc_picsMissing(t)&&cv.width===lw&&cv.height===lh){const now=performance.now();since=since||now;if(now-since<3000){WC_PICS.hold=1;return;}}
+  since=0;WC_PICS.hold=0;const r=rf.apply(this,arguments);lw=cv.width;lh=cv.height;return r;};}
 // the paper's tooth, and a soft darkening at the corners, over the whole frame: the last thing every scene draws, in the frame's own space
-function wc_paperOver(ctx,S){setScreen(ctx,S);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation="multiply";ctx.drawImage(WC.paper,0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();}
+// The player keeps the paper at the size of its canvas, so each frame lays it on pixel for pixel: stretched every frame, it cost five
+// times as much (5 November 2026)
+function wc_paperOver(ctx,S){setScreen(ctx,S);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation="multiply";const cw=ctx.canvas.width,ch=ctx.canvas.height;
+  if(window.__RENDER__||(cw===W&&ch===H))ctx.drawImage(WC.paper,0,0,cw,ch);
+  else{let p=WC.paperAt;if(!p||p.width!==cw||p.height!==ch||p.src!==WC.paper){p=WC.paperAt=p||mkCanvas(cw,ch);p.width=cw;p.height=ch;p.src=WC.paper;p.getContext("2d").drawImage(WC.paper,0,0,cw,ch);}ctx.drawImage(p,0,0);}
+  ctx.restore();}
 // the film opens out of the paper, and each chapter's first moment
 function wc_fadeIn(ctx,S,t,d){d=d||1.2;if(t<d){setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1-ease(t/d));ctx.fillRect(0,0,W,H);}}
 // a veil of paper over the scene, for the title and end cards
@@ -1475,8 +1592,10 @@ function wc_panelPaint(x,w,h,o){const r=o.kind==="card"||o.kind==="sheet"?12:o.k
   if(o.dashed){x.save();wc_tr(x,wc_rrPts(2,2,w-4,h-4,r));x.setLineDash([10,9]);x.lineWidth=2.5;x.strokeStyle=rgba(o.role||WC_PENCIL,0.95);x.stroke();x.restore();}
   else wc_ink(x,wc_rrPts(0,0,w,h,Math.min(r,6)),true,o.kind==="tag"||o.kind==="badge"?1.5:2,WC_PENCIL,0.85,o.seed||Math.round(w+h),0.9);}
 const WC_SC=2; // cards are kept at twice the frame's resolution, so they stay sharp when the camera moves in
-function wc_panel(ctx,x,y,w,h,o){o=o||{};w=Math.round(w);h=Math.round(h);const key=[o.kind,w,h,o.role,o.dashed?1:0,o.sw|0,o.sy|0,o.sh|0,o.wash,o.washA,o.fill,o.seed|0].join("|");let c=WC.card[key];
-  if(!c){wc_prep();c=WC.card[key]=mkCanvas((w+16)*WC_SC,(h+16)*WC_SC);const cx=c.getContext("2d");cx.scale(WC_SC,WC_SC);wc_panelPaint(cx,w,h,o);}
+// the site's player keeps a card at the resolution it is drawn at, a step above (a quarter of the memory on a laptop's screen)
+const wc_cardSc=ctx=>{if(window.__RENDER__)return WC_SC;const m=ctx.getTransform(),k=Math.hypot(m.a,m.b)*1.1;return k<=0.75?0.75:k<=1?1:k<=1.5?1.5:WC_SC;};
+function wc_panel(ctx,x,y,w,h,o){o=o||{};w=Math.round(w);h=Math.round(h);const sc=wc_cardSc(ctx),key=[o.kind,w,h,o.role,o.dashed?1:0,o.sw|0,o.sy|0,o.sh|0,o.wash,o.washA,o.fill,o.seed|0].join("|")+(sc===WC_SC?"":"|"+sc);let c=WC.card[key];
+  if(!c){wc_prep();c=wc_keep("card",key,mkCanvas(Math.ceil((w+16)*sc),Math.ceil((h+16)*sc)));const cx=c.getContext("2d");cx.scale(sc,sc);wc_panelPaint(cx,w,h,o);}else wc_seen(c);
   ctx.drawImage(c,x-8,y-8,w+16,h+16);}
 // a label: the paper tag, its text at 28 px or more; y is its middle; returns its width
 function wc_tag(ctx,x,y,s,o){o=o||{};const size=o.size||30,wt=o.w||700,w=Math.round(tw(ctx,s,size,wt,o.f)+40),h=Math.round(size+22),x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
@@ -1611,7 +1730,8 @@ const wc_aura=e=>e[0]>200&&e[1]>200&&e[2]>200?WC_SIDE.none:e===TECH?WC_SIDE.tech
    at the size of the page, often half the video's or less, and painting every person at full video size each frame made the
    watercolour films play at a few frames a second on a laptop (4 November 2026). The video, stills and checks (and any frame at full size) keep K at 1,
    so their pictures are exactly as before; the blur, wash and pencil buffers keep their sizes in the film's own units. */
-function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&&WC.tooth&&ctx.getTransform)return wc_outlinedLive(ctx,draw,x,y,s,edge,box);
+  const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=!window.__RENDER__&&ctx.getTransform?ctx.getTransform():null,K=m?Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))):1,wd=K<1?Math.ceil(w*K):w,hd=K<1?Math.ceil(h*K):h;
   const [c,cx]=pcanvas("p",wd,hd);if(K<1)cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
   if(WC_RAW){ctx.drawImage(c,ox,oy,w,h);return;}
@@ -1627,6 +1747,27 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,
   const [tc,tx]=wc_buf("figT"+wd+"x"+hd,wd,hd);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
   ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy,w,h);ctx.restore();
   ctx.drawImage(fc,ox,oy,w,h);}
+/* The site's player washes people in fewer layers, so a film with several people on screen keeps up on a laptop or a phone (5 November
+   2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
+   wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
+   asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
+  const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
+  // the wash behind: the silhouette in the side's colour, shrunk, then grown again
+  const q=8,sw=Math.max(2,Math.ceil(w/q)),sh=Math.max(2,Math.ceil(h/q)),[ac,ax]=wc_bufAt("lvA",sw,sh);ax.drawImage(c,0,0,wd,hd,0,0,sw,sh);
+  ax.globalCompositeOperation="source-atop";ax.fillStyle=rgba(wc_aura(edge),1);ax.fillRect(0,0,sw,sh);
+  ctx.save();ctx.globalAlpha*=0.3;ctx.globalCompositeOperation="multiply";ctx.imageSmoothingEnabled=true;ctx.drawImage(ac,0,0,sw,sh,ox-10*s-q,oy+6*s-q,w+2*q,h+2*q);ctx.restore();
+  // the grain and the dry, in one pass, at the frame's scale
+  const tw=Math.min(W,wd/k),th=Math.min(H,hd/k);cx.setTransform(1,0,0,1,0,0);cx.globalCompositeOperation="source-atop";cx.drawImage(WC.tooth,0,0,tw,th,0,0,tw*k,th*k);cx.globalCompositeOperation="source-over";
+  // the paint bleeding past the line, then the pencil line, a little off in four directions, under the paint
+  const bw=Math.ceil(w/4),bh=Math.ceil(h/4),[bc,bx]=wc_bufAt("lvB",bw,bh);bx.drawImage(c,0,0,wd,hd,0,0,bw,bh);
+  ctx.save();ctx.globalAlpha*=0.4;ctx.drawImage(bc,0,0,bw,bh,ox+2*s,oy+1*s,w,h);ctx.restore();
+  const [tc,tx]=wc_bufAt("lvT",wd,hd);tx.drawImage(c,0,0,wd,hd,0,0,wd,hd);tx.globalCompositeOperation="source-atop";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
+  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,0,0,wd,hd,ox+dx,oy+dy,w,h);ctx.restore();
+  ctx.drawImage(c,0,0,wd,hd,ox,oy,w,h);}
 // k: the canvas's scale against the film's units (1 at full size), so the grain and the dry keep their size on the figure
 function wc_wpaint(c,w,h,k){k=k||1;const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;
   if(k<1)fx.drawImage(WC.gran,0,0,W*k,H*k);else fx.drawImage(WC.gran,0,0);
@@ -2009,7 +2150,7 @@ function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id==
     if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
     // before a later moment, what the end shows leaves
     const was=GV_JOIN;GV_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{GV_JOIN=was;}};}}
-// a place, painted once by the film's painter (WC_PLACES), and kept
+// a place, painted once by the film's painter (WC_PLACES), and kept (in the site's player, its picture: master data's wc_kept)
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
 /* ---------- rooms ---------- */
@@ -2862,7 +3003,7 @@ function gu_pinAt(i,x,y,w,h){const k=w/1260,[sx,sy]=gv_loopPos(i,x,y,w,h);return
    wall; the platform team's room, close at Sam's desk; and the data team's board. The pictures are the film's own things, drawn with
    the series' pieces (shared/src/tools.js): the six products, as stalls under their awnings, as A product with an owner drew them; a
    catalogue's card, typed by hand; files from the example project, with their line numbers; a pull request's checks, and the impact
-   check's report; the two standards, as books; Ontos's pages, drawn as forms; and the copy that goes one way. Every name starts with
+   check's report; the tags on an enterprise contract, written first, and on the model built to it; the two standards, as books; Ontos's pages, drawn as forms; and the copy that goes one way. Every name starts with
    gp_ or GP_. */
 
 /* ---------- helpers ---------- */
@@ -2916,6 +3057,9 @@ function gp_file(ctx,x,y,w,u,o){if(u<=0.01)return{rows:[],tx:x+GU_F.gut,h:0};u=c
   return gu_file(ctx,x,y+36*(1-easeCam(u)),w,Object.assign({},o,{a:clamp(u*1.6,0,1)*(o.a==null?1:o.a)}));}
 // a small tag on a generated file, "generated", in the technical side's cyan (a, 0 to 1); x its right
 function gp_gen(ctx,x,y,a){if(a<=0.01)return;withA(ctx,clamp(a,0,1),()=>wc_tag(ctx,x,y,"generated",{align:"right",size:28,wash:GU_CYAN,washA:0.22,seed:301}));}
+// a small tag on an enterprise contract, written first by data governance's information architect, in data governance's gold (a, 0
+// to 1); s, its words, when it says more; x its right
+function gp_ent(ctx,x,y,a,s){if(a<=0.01)return;withA(ctx,clamp(a,0,1),()=>wc_tag(ctx,x,y,s||"enterprise contract",{align:"right",size:28,wash:GV.gold,washA:0.3,seed:302}));}
 // a word marked in a line of code on a sheet: a wash behind the part of s that is sub (line's text from tx, its middle cy)
 function gp_mark(ctx,tx,cy,s,sub,a,col){if(a<=0.01)return;const i=s.indexOf(sub);if(i<0)return;gv_tint(ctx,tx+gu_mw(ctx,s.slice(0,i))-6,cy-21,gu_mw(ctx,sub)+12,42,col||GV.gold,0.85*clamp(a,0,1));}
 // a card with a heading on a pin, like the series' head on the data team's board, with its own words
@@ -3025,7 +3169,7 @@ function gp_formats(ctx,t,o){o=o||{};const L=[150,96,790,600],R=[980,96,790,600]
       if(n>0)wc_T(q,v.slice(0,n),vx,i?yy+6:yy,{w:700,size:i?32:30,col:WC_DARK});if(n<v.length&&car==null)car=[vx+tw(q,v.slice(0,n),i?32:30,700),i?yy+6:yy];});
     if(car&&Math.sin(t*9)>-0.3){q.fillStyle=rgba(WC_DARK,0.85);q.fillRect(car[0]+3,car[1]-28,3,34);}
     const cnt="typed again: "+Math.max(1,Math.min(6,Math.ceil(re)))+" of 6";gp_pill(q,R[0]+40,R[1]+R[3]-70,cnt,{size:30,wash:GV.amber,washA:0.35,seed:321});},GP_NEWBAR);}
-// now: the project's folders on a card, the product descriptor and the contract each in its folder (o.tree, o.d, o.c, 0 to 1); each
+// now: the project's folders on a card, the product descriptor and a core table's contract (the awards, which Clara's is built on) each in its folder (o.tree, o.d, o.c, 0 to 1); each
 // file's standard on a tag beside it (o.std[0], o.std[1])
 const GP_TREE=[["models/",0],["governance/",0],["4-data-products/",1],["5-data-contracts/",1],["6-product-descriptors/",1]];
 function gp_treeCard(ctx,x,y,o){o=o||{};const w=520,h=420;wc_panel(ctx,x,y,w,h,{kind:"card",seed:331});gv_pin(ctx,x+w/2,y+16,GV.red,1.1);
@@ -3033,33 +3177,38 @@ function gp_treeCard(ctx,x,y,o){o=o||{};const w=520,h=420;wc_panel(ctx,x,y,w,h,{
   GP_TREE.forEach(([s,ind],i)=>{const yy=y+150+i*54,l=clamp((o.lit||[])[i]||0,0,1),tx=x+40+ind*40;if(l>0.01)gv_tint(ctx,tx-10,yy-34,gu_mw(ctx,s)+20,46,o.litCol&&o.litCol[i]||GV.gold,0.8*l);
     wc_T(ctx,s,tx,yy,{w:500,size:28,f:"mono",col:WC_DARK});});}
 const GP_DESC=[{n:3,s:"apiVersion: v1.0.0"},{n:4,s:"kind: DataProduct"},{fold:1},{n:6,s:"name: Learners near an award"}],
-  GP_CON=[{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:6,s:"name: mart_planning__near_award"},{fold:1},{n:10,s:"dataProduct: learners_near_an_award"}];
+  GP_CON=[{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:6,s:"name: core_award_v1"},{fold:1},{n:10,s:"dataProduct: awards"}];
 function gp_nowFiles(ctx,t,o){o=o||{};gp_rise(ctx,clamp(o.tree==null?1:o.tree,0,1),()=>gp_treeCard(ctx,60,120,{lit:[0,0,0,o.c||0,o.d||0],litCol:[0,0,0,GU_CYAN,GU_CYAN]}));
   const d=gp_file(ctx,620,70,1240,o.d||0,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",lines:GP_DESC});
   if(d.rows.length)withA(ctx,clamp((o.std||[])[0]||0,0,1),()=>wc_tag(ctx,1830,d.rows[1],"Open Data Product Standard",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:341}));
-  const c=gp_file(ctx,620,410,1240,o.c||0,{path:"governance/5-data-contracts/mart_planning__near_award.yaml",lang:"yaml",lines:GP_CON});
+  const c=gp_file(ctx,620,410,1240,o.c||0,{path:"governance/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:GP_CON});
   if(c.rows.length)withA(ctx,clamp((o.std||[])[1]||0,0,1),()=>wc_tag(ctx,1830,c.rows[1],"Open Data Contract Standard",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:342}));}
-// written from the model: the model's lines (left) and the contract's (right), the script between them (o.u, 0 to 1), threads joining
-// matching lines (o.thr, 0 to 1); then a change that would break it: the checks, the impact check red, and what it said (o.ck, 0 to 1)
-const GP_WM=[{n:36,s:"      - name: learner_award_key"},{fold:1},{n:38,s:"        data_type: string"},{n:39,s:"        constraints: [{type: not_null}]"}],
-  GP_WC=[{n:31,s:"  - name: learner_award_key"},{n:32,s:"    logicalType: string"},{fold:1},{n:34,s:"    required: true"}],GP_IMP="breaking change to mart_planning__near_award with no new version";
-function gp_written(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),ck=clamp(o.ck||0,0,1),dm=1-0.55*ck;
-  withA(ctx,dm,()=>{const M=gu_file(ctx,50,60,880,{path:"models/marts/planning/_planning__models.yml",lang:"yaml",lines:GP_WM}),
-      C=gp_file(ctx,990,60,880,u,{path:"…/5-data-contracts/mart_planning__near_award.yaml",lang:"yaml",lines:GP_WC});gp_gen(ctx,1850,30,u);
-    const pw=gp_pill(ctx,703,440,"scripts/generate/products.py",{f:"mono",w:500,size:28,wash:GU_CYAN,washA:0.2,seed:351});
-    gp_arrow(ctx,[490,362],[700,426],10,clamp(u*2,0,1),{col:GU_CYAN,lw:4});gp_arrow(ctx,[703+pw,426],[1430,362],10,clamp(u*2-0.6,0,1),{col:GU_CYAN,lw:4});
-    if(C.rows.length)[[0,0],[2,1],[3,3]].forEach(([a,b],k)=>gp_thread(ctx,[912,M.rows[a]],[1008,C.rows[b]],clamp((o.thr||0)*3-k,0,1),{bend:0,lw:4}));});
-  if(ck<=0.01)return;gp_rise(ctx,ck,()=>{const its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:n==="impact"?(ck>0.5?"fail":"run"):"pass"}));
-    gu_checks(ctx,150,520,1620,{h:300,items:its,t,msg:[{s:GP_IMP,col:GV.redInk,p:clamp(ck*2-1,0,1)}],pop:[0,0,0,0,clamp(ck*2-1,0,1)],summary:true});});}
-// Jun's column on credentials: the contract of core_credential version 2 (governance/5-data-contracts/core_credential_v2.yaml), its new
-// property written in by the script (o.add, 0 to 1); its readers, each still whole (o.read, o.ok); the film it comes from (o.tag)
+// written first: a core table's enterprise contract (left), written by data governance's information architect (o.u, 0 to 1), and the
+// model the data team builds to it (right, o.m); the check between them, threads joining matching lines (o.thr, 0 to 1); then the two
+// drifting apart, stopped: the checks, the products check red, and what it said (o.ck, 0 to 1)
+const GP_WC=[{n:64,s:"  - name: award_code"},{n:65,s:"    logicalType: string"},{fold:1},{n:67,s:"    required: true"}],
+  GP_WM=[{n:52,s:"      - name: award_code"},{fold:1},{n:54,s:"        data_type: string"},{n:55,s:"        constraints: [{type: not_null}]"}],
+  GP_DRIFT=["core_award_v1 differs from its enterprise contract, …/core_award_v1.yaml:","  award_code: required: true in the contract, false in the model"],
+  GP_IMP="breaking change to mart_planning__near_award with no new version";
+function gp_written(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),m=clamp(o.m==null?1:o.m,0,1),ck=clamp(o.ck||0,0,1),dm=1-0.55*ck;
+  withA(ctx,dm,()=>{const C=gp_file(ctx,50,60,880,u,{path:"…/5-data-contracts/core_award_v1.yaml",lang:"yaml",lines:GP_WC});gp_ent(ctx,910,30,u,"written first · information architect");
+      const M=gp_file(ctx,990,60,880,m,{path:"models/core/course/_core_course__models.yml",lang:"yaml",lines:GP_WM});
+    withA(ctx,clamp(m*1.6,0,1),()=>wc_tag(ctx,1850,30,"built to it · the data team",{align:"right",size:28,wash:GU_CYAN,washA:0.22,seed:303}));
+    const th=clamp(o.thr||0,0,1),pw=Math.round(gu_mw(ctx,"scripts/generate/products.py")+44);
+    if(th>0.01){gp_rise(ctx,th,()=>gp_pill(ctx,960-pw/2,440,"scripts/generate/products.py",{f:"mono",w:500,size:28,wash:GU_CYAN,washA:0.2,seed:351}));
+      gp_arrow(ctx,[490,362],[960-pw/2-6,426],10,clamp(th*2,0,1),{col:GU_CYAN,lw:4});gp_arrow(ctx,[1430,362],[960+pw/2+6,426],10,clamp(th*2,0,1),{col:GU_CYAN,lw:4});}
+    if(C.rows.length&&M.rows.length)[[0,0],[1,2],[3,3]].forEach(([a,b],k)=>gp_thread(ctx,[912,C.rows[a]],[1008,M.rows[b]],clamp(th*3-k,0,1),{bend:0,lw:4}));});
+  if(ck<=0.01)return;gp_rise(ctx,ck,()=>{const its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:n==="products"?(ck>0.5?"fail":"run"):"pass"}));
+    gu_checks(ctx,150,520,1620,{h:300,items:its,t,msg:GP_DRIFT.map(s_=>({s:s_,col:GV.redInk,p:clamp(ck*2-1,0,1)})),pop:[0,0,clamp(ck*2-1,0,1),0,0],msgGap:66,summary:true});});}
+// a new column on credentials: the enterprise contract of core_credential version 2 (governance/5-data-contracts/core_credential_v2.yaml),
+// its new property written in first, by data governance's information architect (o.add, 0 to 1), which Jun then builds; its readers, each still whole (o.read, o.ok); the film it comes from (o.tag)
 const GP_CV=[{n:140,s:"  - name: credit_points"},{fold:1},{s:"  - name: counts_as_award",add:1},{s:"    logicalType: boolean",add:1},{s:"    physicalType: boolean",add:1},
   {s:"    required: false",add:1},{s:"    classification: none",add:1},{n:147,s:"  - name: issued_on"}],
   GP_RD=[["census_report","Planning"],["draft_submission","registrar's office"],["wallet_app","Wallet app team"]];
 // The sheet is as long as the contract will be. The five new lines open first (op), the last line moving down to make room for them,
 // then they're typed in (ty), so no line jumps down in a frame
 function gp_junCol(ctx,t,o){o=o||{};const ad=clamp(o.add||0,0,1),op=easeCam(clamp(ad/0.25,0,1)),ty=clamp((ad-0.25)/0.75,0,1),lh=GU_F.lh;
-  const f=gu_file(ctx,90,60,1180,{path:"governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:GP_CV.map(r=>r.add||r.n===147?{s:""}:r)});gp_gen(ctx,1250,30,1);
+  const f=gu_file(ctx,90,60,1180,{path:"governance/5-data-contracts/core_credential_v2.yaml",lang:"yaml",lines:GP_CV.map(r=>r.add||r.n===147?{s:""}:r)});gp_ent(ctx,1250,30,1);
   if(op>0.01)GP_CV.forEach((r,i)=>{if(!r.add)return;const cy=f.rows[i],by=cy+10,p=clamp(ty*6-(i-2),0,1);
     withA(ctx,op,()=>{gv_tint(ctx,104,cy-lh/2+3,1152,lh-6,GV.green,0.5);wc_T(ctx,"+",f.tx-26,by,{w:500,size:28,f:"mono",col:GV.greenInk,align:"right"});});
     if(p>0){const lw=gu_code(ctx,r.s.slice(0,Math.ceil(r.s.length*p)),f.tx,by,{lang:"yaml"});if(p<1){ctx.fillStyle=rgba(WC_DARK,0.8);ctx.fillRect(f.tx+lw+3,by-26,3,32);}}});
@@ -3122,57 +3271,60 @@ function gp_planDesk(x,tt,o){o=o||{};gv_behind(x,"clara",GP_PX.seat[0],GP_PX.top
     gp_thread(x,[fx,sy-6],[tx+w/2,ty+26],clamp(v*1.6,0,1),{bend:10,col:WC_PENCIL});
     gp_rise(x,clamp(v*1.6-0.4,0,1),()=>wc_tag(x,tx,ty,s,{size:30,wash:col,washA:0.4,seed:401+i}));});}
 
-/* ---------- 3 · the contract, from the model ---------- */
-// the contract on the desk (governance/5-data-contracts/mart_planning__near_award.yaml): its header, the column learner_award_key and its
-// quality rule. What each part says, in pencil at its left, on a thread to its line (o.note[k], 0 to 1); a pencil that stops short of it
-// (o.pen), the file's own warning lit (o.warn) and its tag (o.gen); then the model's lines and the product's file (o.src), the script
-// that writes the contract from them (o.scr), its standard on a tag (o.std), and threads joining each line of the model to its line in
-// the contract (o.thr[k])
-const GP_CT=[{n:1,s:"# Generated by … Don't edit it:"},{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:31,s:"  - name: learner_award_key"},
-  {n:32,s:"    logicalType: string"},{n:34,s:"    required: true"},{n:35,s:"    classification: pseudonymous"},{fold:1},{n:40,s:"    quality:"},{fold:1},
-  {n:42,s:"      metric: duplicateValues"},{n:43,s:"      mustBe: 0"},{fold:1},{n:45,s:"      dimension: uniqueness"}],
-  GP_NOTES=[["each column",4],["its type",5],["always there?",6],["can it identify a person?",7],["the tests it must pass",9]],
-  GP_MD=[{n:36,s:"      - name: learner_award_key"},{fold:1},{n:38,s:"        data_type: string"},{n:39,s:"        constraints: [{type: not_null}]"},
-  {n:40,s:"        data_tests: [unique]"},{fold:1},{n:42,s:"          meta: {personal_data: pseudonymous}"}],GP_PAIRS=[[0,4],[2,5],[3,6],[6,7],[4,11]];
-// a pencil, kept, its point at (0,0) and its body along +x
-function gp_pencilC(){return wc_kept("gpPencil",440,48,q=>{q.translate(10,24);wc_part(q,[[0,0],[40,-13],[40,13]],[236,206,160],1,{lw:1.2});
-  wc_part(q,[[0,0],[12,-4],[12,4]],[60,60,64],1,{lw:1});wc_part(q,wc_rect(40,-13,300,26),[236,186,52],1,{lw:1.2});
-  wc_part(q,wc_rect(340,-13,34,26),[190,190,196],1,{lw:1.2});wc_part(q,wc_rect(374,-13,44,26),[226,140,150],1,{lw:1.2});});}
-function gp_pencil(ctx,x,y,rot,a){if(a<=0.01)return;ctx.save();ctx.translate(x,y);ctx.rotate(rot);withA(ctx,a,()=>ctx.drawImage(gp_pencilC(),-10,-24));ctx.restore();}
-function gp_contractDesk(ctx,t,o){o=o||{};const C=gu_file(ctx,990,50,880,{path:"…/5-data-contracts/mart_planning__near_award.yaml",lang:"yaml",
-    lines:GP_CT.map((r,i)=>i===0&&o.warn>0.01?Object.assign({},r,{lit:clamp(o.warn,0,1),litCol:GU_CYAN}):r)});
-  gp_gen(ctx,1850,22,clamp(o.gen||0,0,1));
-  if(o.std>0.01)withA(ctx,clamp(o.std,0,1),()=>wc_tag(ctx,1850,C.rows[1],"Open Data Contract Standard",{align:"right",size:28,wash:GU_CYAN,washA:0.25,seed:342}));
-  const src=clamp(o.src||0,0,1),out=1-clamp(src*2.5,0,1);
-  if(out>0.01)GP_NOTES.forEach(([s,r],k)=>{const v=clamp((o.note||[])[k]||0,0,1)*out;if(v<=0.01)return;const ry=C.rows[r];
-    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});gp_hand(ctx,s,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
-  const pn=clamp(o.pen||0,0,1);if(pn>0.01){const e=easeCam(clamp(pn*1.6,0,1)),x=lerp(-80,940,e)+(pn>0.7?Math.sin(t*16)*3*(1-pn):0);gp_pencil(ctx,x,C.rows[0]+14,-0.18,clamp(pn*4,0,1)*out);}
-  if(src<=0.01)return;const e=easeCam(src),ma=clamp(src*2.2-0.9,0,1),dy=24*(1-e);
-  const M=gu_file(ctx,50,60+dy,880,{path:"models/marts/planning/_planning__models.yml",lang:"yaml",lines:GP_MD,a:ma});
-  const P=gu_file(ctx,50,540+dy,880,{path:"…/4-data-products/learners_near_an_award.yml",lang:"yaml",lines:[{n:8,s:"owner: \"Clara Jensen, Planning\""}],a:clamp(src*2.2-1.1,0,1)});
-  const sc=clamp(o.scr||0,0,1);if(sc>0.01){gp_rise(ctx,sc,()=>gp_pill(ctx,330,792,"scripts/generate/products.py",{f:"mono",w:500,size:28,wash:GU_CYAN,washA:0.2,seed:411}));
-    gp_arrow(ctx,[300,494],[440,766],-10,clamp(sc*2-0.4,0,1),{col:GU_CYAN,lw:4});gp_arrow(ctx,[620,700],[620,766],0,clamp(sc*2-0.6,0,1),{col:GU_CYAN,lw:4});
-    gp_arrow(ctx,[850,800],[982,720],-20,clamp(sc*2-1,0,1),{col:GU_CYAN,lw:4});}
-  if(M.rows.length)GP_PAIRS.forEach(([a,b],k)=>gp_thread(ctx,[912,M.rows[a]],[C.tx-14,C.rows[b]],clamp((o.thr||[])[k]||0,0,1),{bend:0,lw:4}));}
-// on every pull request: Jun's, which changed the contract by hand. Its file (o.files), its checks: the products check fails, out of date
-// (o.fail), and, once the change is made in the model, passes, valid against the standards (o.pass); "valid" and the standards lit (o.std),
-// washes laid over the words, which show through them
-const GP_JUNPR={title:"Describe the census date",sub:"Jun Park wants to merge into main"},
-  GP_OOD=["out of date: run python scripts/generate/products.py","governance/5-data-contracts/mart_planning__near_award.yaml"],
-  GP_OK16=["16 files are up to date and valid: 6 products (product standard v1.0.0),","10 contracts (contract standard v3.1.0)"];
+/* ---------- 3 · a contract written first ---------- */
+// a core table's enterprise contract on the desk (governance/5-data-contracts/core_award_v1.yaml): its header, the column award_type and
+// its quality rule. What each part says, in pencil at its left, on a thread to its line (o.note[k], 0 to 1), going as the core tables'
+// contracts come in on a card at the left (o.core, in then out); the header lit, and its tag: written first, by data governance's
+// information architect (o.ia); its standard on a tag (o.std); then the model the data team builds to it (o.src), and threads joining
+// each line of the contract to its line in the model (o.thr[k])
+const GP_CT=[{n:1,s:"# … written first by data governance's"},{n:2,s:"# information architect. …"},{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},
+  {n:76,s:"  - name: award_type"},{n:77,s:"    logicalType: string"},{n:79,s:"    required: false"},{n:80,s:"    classification: none"},{fold:1},{n:82,s:"    quality:"},{fold:1},
+  {n:84,s:"      metric: invalidValues"},{n:85,s:"      mustBe: 0"},{fold:1},{n:91,s:"      dimension: conformity"}],
+  GP_NOTES=[["each column",5],["its type",6],["always there?",7],["can it identify a person?",8],["the tests it must pass",10]],
+  GP_MD=[{n:61,s:"      - name: award_type"},{fold:1},{n:63,s:"        data_type: string"},{n:64,s:"        data_tests:"},
+  {n:65,s:"          - accepted_values:"},{fold:1},{n:68,s:"        config: {meta: {personal_data: none}}"}],GP_PAIRS=[[5,0],[6,2],[8,6],[12,4]],
+  GP_CORE=["core_award_v1.yaml","core_credential_v1.yaml","core_credential_v2.yaml","core_credit_towards_award_v1.yaml","core_learner_v1.yaml"];
+function gp_contractDesk(ctx,t,o){o=o||{};const ia=clamp(o.ia||0,0,1),C=gu_file(ctx,990,50,880,{path:"…/5-data-contracts/core_award_v1.yaml",lang:"yaml",
+    lines:GP_CT.map((r,i)=>i<2&&ia>0.01?Object.assign({},r,{lit:ia}):r)});
+  gp_ent(ctx,1850,22,ia,"written first · information architect");
+  if(o.std>0.01)withA(ctx,clamp(o.std,0,1),()=>wc_tag(ctx,1850,C.rows[2],"Open Data Contract Standard",{align:"right",size:28,wash:GU_CYAN,washA:0.25,seed:342}));
+  const cr=clamp(o.core||0,0,1),out=1-clamp(Math.max(cr*2.5,ia*2.5),0,1);
+  if(out>0.01)GP_NOTES.forEach(([s_,r],k)=>{const v=clamp((o.note||[])[k]||0,0,1)*out;if(v<=0.01)return;const ry=C.rows[r];
+    gp_arrow(ctx,[938,ry-6],[C.tx-10,ry-6],0,clamp(v*2,0,1),{col:WC_PENCIL,lw:3,a:0.7*out});gp_hand(ctx,s_,920,ry+6,{size:38,w:700,col:WC_PENCIL,align:"right",p:v});});
+  // the core tables' contracts, the only ones there are, on a card pinned at the left
+  if(cr>0.01)gp_rise(ctx,cr,()=>{const x=70,y=130,w=860,h=470;wc_panel(ctx,x,y,w,h,{kind:"card",seed:412});gv_pin(ctx,x+w/2,y+16,GV.red,1.1);
+    wc_T(ctx,"governance/5-data-contracts/",x+40,y+94,{w:500,size:30,f:"mono",col:WC_DARK});
+    GP_CORE.forEach((f,i)=>wc_T(ctx,f,x+80,y+166+i*54,{w:500,size:28,f:"mono",col:WC_INK}));
+    gp_hand(ctx,"only the core tables",x+w-40,y+h-28,{size:38,w:700,col:GV.goldInk,align:"right",p:clamp(cr*1.6-0.4,0,1)});},14);
+  const src=clamp(o.src||0,0,1);if(src<=0.01)return;const e=easeCam(src),ma=clamp(src*2.2-0.9,0,1),dy=24*(1-e);
+  const M=gu_file(ctx,50,120+dy,880,{path:"models/core/course/_core_course__models.yml",lang:"yaml",lines:GP_MD,a:ma});
+  withA(ctx,ma,()=>wc_tag(ctx,910,92+dy,"built to it · the data team",{align:"right",size:28,wash:GU_CYAN,washA:0.22,seed:303}));
+  if(M.rows.length)GP_PAIRS.forEach(([a,b],k)=>gp_thread(ctx,[C.tx-14,C.rows[a]],[912,M.rows[b]],clamp((o.thr||[])[k]||0,0,1),{bend:0,lw:4}));}
+// on every pull request: Jun's, which lets award codes be empty in the model while their contract says they're required. Its file, its
+// checks: the products check fails, the model drifted from its contract (o.fail); then how the change got there is data governance's
+// question (o.how), and the contract comes first (o.first)
+const GP_JUNPR={title:"Let award codes be empty",sub:"Jun Park wants to merge into main"},
+  GP_OK16=["6 products are up to date and valid (product standard v1.0.0),","5 enterprise contracts match their models (contract standard v3.1.0)"];
 function gp_prCheck(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG;gu_page(ctx,x,y,w,h,{bar:"GitHub · pull request",title:GP_JUNPR.title,titleSize:40,state:["Open",GV.green],sub:GP_JUNPR.sub});
-  const fl=clamp(o.fail||0,0,1),ps=clamp(o.pass||0,0,1);gu_box(ctx,150,256,1620,272,"Files changed",{seed:421});
-  wc_T(ctx,"governance/5-data-contracts/mart_planning__near_award.yaml",182,342,{w:500,size:28,f:"mono",col:WC_MUTED});
-  [["    description: 'Planning''s census date: the date the numbers are as at. …'",1],["    description: 'The date the numbers are counted at.'",0]].forEach(([s,del],i)=>{const ry=402+i*46;
-    gv_tint(ctx,166,ry-32,1588,44,del?GV.red:GV.green,0.45);wc_T(ctx,del?"−":"+",226,ry,{w:500,size:28,f:"mono",col:del?GV.redInk:GV.greenInk,align:"right"});gu_code(ctx,s,246,ry,{lang:"yaml"});});
-  gp_hand(ctx,"edited by hand",1740,504,{size:34,w:700,col:WC_PENCIL,align:"right",p:clamp(o.hand==null?1:o.hand,0,1)*(1-clamp(ps*3,0,1))});
-  if(ps>0.34)gp_hand(ctx,"then made in the model, and the script run",1740,504,{size:34,w:700,col:GV.greenInk,align:"right",p:clamp(ps*1.5-0.5,0,1)});
-  const st=k=>k==="products"?(ps>0.5?"pass":fl>0.5?"fail":fl>0.01?"run":"wait"):(fl>0.01||ps>0.01?"pass":"wait"),
-    its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:st(n)}));
-  const msg=ps>0.5?GP_OK16.map(s=>({s,col:GV.greenInk,p:clamp(ps*2-1,0,1)})):GP_OOD.map(s=>({s,col:GV.redInk,p:clamp(fl*2-1,0,1)}));
-  const r=gu_checks(ctx,150,544,1620,{h:314,items:its,t,msg,pop:[0,0,ps>0.5?clamp(ps*2-1,0,1):clamp(fl*2-1,0,1),0,0],msgGap:72,summary:true});
-  const sd=clamp(o.std||0,0,1);if(sd>0.01&&ps>0.5){gp_mark(ctx,182,r.my-10,GP_OK16[0],"valid",sd);gp_mark(ctx,182,r.my-10,GP_OK16[0],"(product standard v1.0.0)",sd);
-    gp_mark(ctx,182,r.my+32,GP_OK16[1],"(contract standard v3.1.0)",sd);}}
+  const fl=clamp(o.fail||0,0,1);gu_box(ctx,150,256,1620,272,"Files changed",{seed:421});
+  wc_T(ctx,"models/core/course/_core_course__models.yml",182,342,{w:500,size:28,f:"mono",col:WC_MUTED});
+  [["      - name: award_code",0,52],["        constraints: [{type: not_null}]",1,55]].forEach(([s_,del,n],i)=>{const ry=402+i*46;
+    if(del){gv_tint(ctx,166,ry-32,1588,44,GV.red,0.45);wc_T(ctx,"−",226,ry,{w:500,size:28,f:"mono",col:GV.redInk,align:"right"});}
+    else wc_T(ctx,String(n),226,ry,{w:500,size:28,f:"mono",col:WC_MUTED,align:"right"});gu_code(ctx,s_,246,ry,{lang:"yaml"});});
+  const st=k=>k==="products"?(fl>0.5?"fail":fl>0.01?"run":"wait"):(fl>0.01?"pass":"wait"),its=["build","governance","products","reviewers","impact"].map(n=>({name:n,st:st(n)}));
+  gu_checks(ctx,150,544,1620,{h:314,items:its,t,msg:GP_DRIFT.map(s_=>({s:s_,col:GV.redInk,p:clamp(fl*2-1,0,1)})),pop:[0,0,clamp(fl*2-1,0,1),0,0],msgGap:72,summary:true});
+  const hw=clamp(o.how||0,0,1),fs=clamp(o.first||0,0,1);
+  if(hw>0.01)gp_hand(ctx,"data governance: how did it get here?",1740,500,{size:34,w:700,col:GV.goldInk,align:"right",p:hw});
+  if(fs>0.01)gp_rise(ctx,fs,()=>wc_tag(ctx,1740,800,"the contract changes first",{align:"right",size:30,wash:GV.gold,washA:0.35,seed:422}),10);}
+// Clara's own table: no enterprise contract. Her product's stall (o.u); in pencil, no enterprise contract (o.no); the project's settings
+// for the marts, a dbt contract the build enforces, lit as its code (o.code), and its tag, the data team's to change (o.wait)
+const GP_MART=[{n:54,s:"    marts:"},{fold:1},{n:57,s:"      +access: protected"},{n:58,s:"      +contract:"},{n:59,s:"        enforced: true"}];
+function gp_lighter(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1);
+  gp_rise(ctx,u,()=>gp_stall(ctx,2,90,200,620,300,{size:40}),16);
+  if(o.no>0.01)gp_hand(ctx,"no enterprise contract",400,600,{size:40,w:700,col:GV.goldInk,align:"center",p:clamp(o.no,0,1)});
+  const F=gp_file(ctx,820,150,1020,clamp(u*1.4-0.3,0,1),{path:"dbt_project.yml",lang:"yaml",lines:GP_MART.map((r,i)=>i>=3?Object.assign({},r,{lit:clamp(o.code||0,0,1),litCol:GU_CYAN}):r)});
+  if(F.rows.length){gp_thread(ctx,[716,350],[F.tx+gu_mw(ctx,"      ")-14,F.rows[3]],clamp((o.code||0)*1.6,0,1),{col:WC_PENCIL,bend:-30,lw:3.5});
+    withA(ctx,clamp(o.wait||0,0,1),()=>wc_tag(ctx,1840,F.rows[4]+90,"a dbt contract · the data team's to change",{align:"right",size:30,wash:GU_CYAN,washA:0.25,seed:423}));}}
 
 /* ---------- 4 · every shared table, in one product ---------- */
 // the data team's thirty-three tables, as small cards on its board, coming in one after another (o.u, 0 to 1); the ten other teams read,
@@ -3196,7 +3348,7 @@ function gp_33(ctx,t,o){o=o||{};const u=clamp(o.u==null?1:o.u,0,1),ten=clamp(o.t
 // by line), and the check passes (o.pass). The film it comes from (o.tag)
 const GP_NEWPR={title:"Completions for Planning",sub:"Jun Park wants to merge into main"},
   GP_NOPROD=["mart_planning__completions is shared but in no product: add it to a","product's outputs in governance/4-data-products/"],
-  GP_OK18=["18 files are up to date and valid: 7 products (product standard v1.0.0),","11 contracts (contract standard v3.1.0)"],
+  GP_OK18=["7 products are up to date and valid (product standard v1.0.0),","5 enterprise contracts match their models (contract standard v3.1.0)"],
   GP_NEWF=[[null,"models/marts/planning/mart_planning__completions.sql",0],[null,"models/marts/planning/_planning__models.yml",0],[null,"governance/4-data-products/completions.yml",1],
     [6,"name: completions",2],[8,"owner: \"Clara Jensen, Planning\"",3],[18,"  - {model: mart_planning__completions}",4]];
 function gp_newPR(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,fl=clamp(o.fail||0,0,1),pr=clamp(o.prod||0,0,1),ps=clamp(o.pass||0,0,1);
@@ -3211,19 +3363,19 @@ function gp_newPR(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,fl=clamp(o.fail||0,0,1
   if(o.tag>0.01)gu_filmTag(ctx,1750,180,"Governed in dbt",clamp(o.tag,0,1),{align:"right"});}
 
 /* ---------- 5 · a change that would break it ---------- */
-// on the desk: the model's line for faculty_code (left) and the contract's (right). The column renamed in the model, faculty_code to
-// faculty (o.ren, 0 to 1); the contract following, by itself (o.fol), a thread from one to the other; the census dashboard, which reads the
-// column (o.rd), its thread breaking (o.brk)
-const GP_RNM=["      - name: faculty_code","        data_type: string"],GP_RNC=["  - name: faculty_code","    logicalType: string"];
+// on the desk: Clara's table's model, its line for faculty_code (left), and the project's settings for the marts (right), a dbt contract
+// the build enforces, the data team's. The column renamed in the model, faculty_code to faculty (o.ren, 0 to 1); the contract changing
+// with it (o.fol), a thread from one to the other; the census dashboard, which reads the column (o.rd), its thread breaking (o.brk)
+const GP_RNM=["      - name: faculty_code","        data_type: string"];
 const gp_renamed=(s,u)=>u<=0?s:u>=1?s.replace("faculty_code","faculty"):u<0.5?s.slice(0,s.length-Math.round(5*u*2)):s.replace("faculty_code","faculty");
 function gp_renameDesk(ctx,t,o){o=o||{};const rn=clamp(o.ren||0,0,1),fo=clamp(o.fol||0,0,1),rd=clamp(o.rd||0,0,1),bk=clamp(o.brk||0,0,1);
   const M=gu_file(ctx,60,200,860,{path:"models/marts/planning/_planning__models.yml",lang:"yaml",lines:[{n:81,s:gp_renamed(GP_RNM[0],rn),lit:clamp(rn*3,0,1)},{fold:1},{n:83,s:GP_RNM[1]}]});
-  const C=gu_file(ctx,1000,200,860,{path:"…/mart_planning__near_award.yaml",lang:"yaml",lines:[{n:103,s:gp_renamed(GP_RNC[0],fo),lit:clamp(fo*3,0,1),litCol:GU_CYAN},{n:104,s:GP_RNC[1]}]});
-  gp_gen(ctx,1850,176,1);
-  const caret=(F,s,u)=>{if(u>0.01&&u<0.99&&Math.sin(t*9)>-0.3){ctx.fillStyle=rgba(WC_DARK,0.85);ctx.fillRect(F.tx+gu_mw(ctx,s)+3,F.rows[0]-16,3,32);}};
-  caret(M,gp_renamed(GP_RNM[0],rn),rn);caret(C,gp_renamed(GP_RNC[0],fo),fo);
-  gp_arrow(ctx,[M.tx+gu_mw(ctx,GP_RNM[0])+30,M.rows[0]],[990,C.rows[0]-6],-40,clamp(fo*1.6,0,1),{col:GU_CYAN,lw:4});
-  if(rd<=0.01)return;const cx=1300,cy=600,cw=520,ch=136,ax=C.tx+gu_mw(ctx,gp_renamed(GP_RNC[0],fo))-60,ay=C.rows[0]+22;
+  const C=gu_file(ctx,1000,200,860,{path:"dbt_project.yml",lang:"yaml",lines:[{n:54,s:"    marts:"},{fold:1},{n:58,s:"      +contract:",lit:fo,litCol:GU_CYAN},{n:59,s:"        enforced: true",lit:fo,litCol:GU_CYAN}]});
+  withA(ctx,1,()=>wc_tag(ctx,1850,176,"a dbt contract · the data team's",{align:"right",size:28,wash:GU_CYAN,washA:0.22,seed:304}));
+  const caret=(F,s_,u)=>{if(u>0.01&&u<0.99&&Math.sin(t*9)>-0.3){ctx.fillStyle=rgba(WC_DARK,0.85);ctx.fillRect(F.tx+gu_mw(ctx,s_)+3,F.rows[0]-16,3,32);}};
+  caret(M,gp_renamed(GP_RNM[0],rn),rn);
+  gp_arrow(ctx,[M.tx+gu_mw(ctx,GP_RNM[0])+30,M.rows[0]],[990,C.rows[2]],-30,clamp(fo*1.6,0,1),{col:GU_CYAN,lw:4});
+  if(rd<=0.01)return;const cx=120,cy=600,cw=520,ch=136,ax=M.tx+gu_mw(ctx,"      - name: ")+40,ay=M.rows[0]+22;
   gp_rise(ctx,rd,()=>{wc_panel(ctx,cx,cy,cw,ch,{kind:"card",wash:bk>0.3?GV.red:null,washA:0.14*bk,seed:451});wc_T(ctx,"census_dashboard",cx+30,cy+58,{w:500,size:28,f:"mono",col:WC_DARK});
     wc_T(ctx,"Planning",cx+30,cy+102,{w:600,size:28,col:WC_MUTED});},12);
   if(bk<0.5)gp_thread(ctx,[cx+cw/2,cy],[ax,ay],clamp(rd*1.6-0.4,0,1)*(1-clamp(bk*2,0,1)),{col:WC_PENCIL,bend:-20,lw:3.5});
@@ -3263,7 +3415,7 @@ function gp_editions(ctx,t,o){o=o||{};const v1=clamp(o.v1==null?1:o.v1,0,1),v2=c
   if(rd>0.01){const x=240,y=730,w=440,h=96;gp_thread(ctx,[x+w/2,y],[x+w/2,596],clamp(rd*1.6,0,1),{col:WC_PENCIL,bend:0,lw:3.5});
     gp_rise(ctx,clamp(rd*1.6-0.4,0,1),()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:463});wc_T(ctx,"census_dashboard",x+30,y+60,{w:500,size:28,f:"mono",col:WC_DARK});},10);}}
 // credentials' two versions: the model's YAML, version 2 and version 1, and version 1's date to go, ringed (o.two, o.date, o.ring); then
-// version 1's contract, written by the script, which says it's deprecated (o.c, o.dep), on its way out (o.out)
+// version 1's enterprise contract, which says it's deprecated (o.c, o.dep), on its way out (o.out)
 const GP_CRV=[{n:233,s:"    versions:"},{n:234,s:"      - v: 2"},{fold:1},{n:240,s:"      - v: 1"},{n:241,s:"        deprecation_date: 2027-03-31"}],
   GP_CR1=[{n:6,s:"name: core_credential_v1"},{n:7,s:"version: 1.0.0"},{n:8,s:"status: deprecated"}];
 function gp_credVers(ctx,t,o){o=o||{};const A=gp_file(ctx,80,60,1100,o.u==null?1:o.u,{path:"models/core/student/_core_student__models.yml",lang:"yaml",
@@ -3271,7 +3423,7 @@ function gp_credVers(ctx,t,o){o=o||{};const A=gp_file(ctx,80,60,1100,o.u==null?1
   if(A.rows.length&&o.ring>0.01){const s=GP_CRV[4].s,i0=s.indexOf("2027"),x0=A.tx+gu_mw(ctx,s.slice(0,i0)),x1=A.tx+gu_mw(ctx,s);
     wc_ring(ctx,(x0+x1)/2,A.rows[4],(x1-x0)/2+30,34,clamp(o.ring,0,1),{col:GV.redInk,lw:4});}
   const c=clamp(o.c||0,0,1),C=gp_file(ctx,760,500,1100,c,{path:"governance/5-data-contracts/core_credential_v1.yaml",lang:"yaml",
-    lines:GP_CR1.map((r,i)=>i===2?Object.assign({},r,{lit:clamp(o.dep||0,0,1),litCol:GV.amber}):r)});gp_gen(ctx,1850,470,c);
+    lines:GP_CR1.map((r,i)=>i===2?Object.assign({},r,{lit:clamp(o.dep||0,0,1),litCol:GV.amber}):r)});gp_ent(ctx,1850,470,c);
   if(C.rows.length&&o.out>0.01)wc_hand(ctx,"on its way out",C.tx+gu_mw(ctx,GP_CR1[2].s)+60,C.rows[2]+12,{size:40,w:700,col:GV.amberInk,p:clamp(o.out,0,1)});}
 
 /* ---------- 6 · who reads it ---------- */
@@ -3279,7 +3431,7 @@ function gp_credVers(ctx,t,o){o=o||{};const A=gp_file(ctx,80,60,1100,o.u==null?1
 // Planning, on a card at its right; and what it's built from (o.built): its input ports, two of Mei's products, each port lit in its
 // product's colour, on threads to the products' stalls
 const GP_RDS=[{n:16,s:"inputPorts:"},{n:17,s:"- name: core_learner_v1",pr:0},{fold:1},{n:20,s:"- name: core_award_v1",pr:1},{fold:1},{n:23,s:"- name: core_credit_towards_award_v1",pr:0},{fold:1},
-  {n:26,s:"outputPorts:"},{n:27,s:"- name: mart_planning__near_award"},{fold:1},{n:45,s:"- property: consumers"},{n:46,s:"  value:"},{n:47,s:"  - exposure census_dashboard"}];
+  {n:26,s:"outputPorts:"},{n:27,s:"- name: mart_planning__near_award"},{fold:1},{n:44,s:"- property: consumers"},{n:45,s:"  value:"},{n:46,s:"  - exposure census_dashboard"}];
 function gp_readers(ctx,t,o){o=o||{};const rd=clamp(o.rd||0,0,1),bl=clamp(o.built||0,0,1);
   const F=gp_file(ctx,60,70,1100,o.u==null?1:o.u,{path:"governance/6-product-descriptors/learners_near_an_award.yaml",lang:"yaml",
     lines:GP_RDS.map((r,i)=>i>=10?Object.assign({},r,{lit:rd}):r.pr!=null?Object.assign({},r,{lit:bl,litCol:GP_SIX[r.pr][2]}):i===0?Object.assign({},r,{lit:bl}):r)});
@@ -3315,7 +3467,7 @@ function gp_meiTells(ctx,t,o){o=o||{};const L=clamp(o.lit||0,0,1),tl=clamp(o.tel
 // (o.who); a newer edition behind each (o.newer); between them, the licence that makes them free to use (o.lic). Under each, a file written
 // in it, its apiVersion on a thread to its book's version (o.files, o.thr)
 const GP_BOOK=[{t:["Open Data","Product Standard"],v:"v1.0.0",nv:"v1.1.0",col:[38,96,132],x:150,f:"…/learners_near_an_award.yaml",k:"DataProduct"},
-  {t:["Open Data","Contract Standard"],v:"v3.1.0",nv:"v3.2.0",col:[30,72,110],x:1070,f:"…/mart_planning__near_award.yaml",k:"DataContract"}],GP_BK={y:120,w:700,h:320};
+  {t:["Open Data","Contract Standard"],v:"v3.1.0",nv:"v3.2.0",col:[30,72,110],x:1070,f:"…/core_award_v1.yaml",k:"DataContract"}],GP_BK={y:120,w:700,h:320};
 function gp_bookC(col){const {w,h}=GP_BK;return wc_kept("gpBook"+col.join(","),w+40,h+40,q=>{q.translate(20,20);q.save();q.filter="blur(8px)";q.fillStyle="rgba(50,40,30,0.25)";q.fillRect(8,14,w,h);q.restore();
   wc_part(q,wc_rect(0,0,w,h),col,1,{lw:1.4});wc_part(q,wc_rect(0,0,40,h),wc_dim(col,0.25),1,{lw:1});q.save();q.strokeStyle="rgba(255,255,255,0.35)";q.lineWidth=2;q.strokeRect(64,22,w-86,h-44);q.restore();});}
 function gp_vtab(ctx,x,y,s,a){if(a<=0.01)return;withA(ctx,a,()=>{const w=Math.round(gu_mw(ctx,s)+36);wc_panel(ctx,x-w,y,w,50,{kind:"pill",wash:[250,246,236],washA:0.95,seed:s.length+500});
@@ -3335,12 +3487,12 @@ function gp_books(ctx,t,o){o=o||{};const {y,w,h}=GP_BK,cream=[250,246,236];
 // then the check, run in a terminal: every file up to date, and valid against its standard (o.chk, o.valid)
 const GP_TL=["a catalogue","a quality tool","a schema editor"];
 function gp_tools(ctx,t,o){o=o||{};const rd=clamp(o.read||0,0,1),ck=clamp(o.chk||0,0,1),dm=1-0.35*ck;
-  withA(ctx,dm,()=>{const F=gu_file(ctx,60,70,860,{path:"…/5-data-contracts/mart_planning__near_award.yaml",lang:"yaml",
-      lines:[{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:6,s:"name: mart_planning__near_award"}]});
+  withA(ctx,dm,()=>{const F=gu_file(ctx,60,70,860,{path:"…/5-data-contracts/core_award_v1.yaml",lang:"yaml",
+      lines:[{n:3,s:"apiVersion: v3.1.0"},{n:4,s:"kind: DataContract"},{fold:1},{n:6,s:"name: core_award_v1"}]});
     GP_TL.forEach((s,i)=>{const v=clamp(rd*3-i,0,1);if(v<=0.01)return;const x=1060,y=50+i*190,w=780,h=160;
-      gp_arrow(ctx,[F.tx+gu_mw(ctx,"name: mart_planning__near_award")+24,F.rows[3]],[x-14,y+h/2],-20+i*30,clamp(v*1.8,0,1),{col:GU_CYAN,lw:4});
-      gp_rise(ctx,clamp(v*1.8-0.5,0,1),()=>gp_win(ctx,x,y,w,h,s,q=>{wc_T(q,"mart_planning__near_award",x+30,y+98,{w:500,size:28,f:"mono",col:WC_DARK});
-        wc_T(q,"17 columns",x+w-30,y+98,{w:700,size:28,col:WC_MUTED,align:"right"});},[96,104,112]),12);});});
+      gp_arrow(ctx,[F.tx+gu_mw(ctx,"name: core_award_v1")+24,F.rows[3]],[x-14,y+h/2],-20+i*30,clamp(v*1.8,0,1),{col:GU_CYAN,lw:4});
+      gp_rise(ctx,clamp(v*1.8-0.5,0,1),()=>gp_win(ctx,x,y,w,h,s,q=>{wc_T(q,"core_award_v1",x+30,y+98,{w:500,size:28,f:"mono",col:WC_DARK});
+        wc_T(q,"11 columns",x+w-30,y+98,{w:700,size:28,col:WC_MUTED,align:"right"});},[96,104,112]),12);});});
   if(ck<=0.01)return;gp_rise(ctx,ck,()=>gp_win(ctx,60,610,1460,250,"Terminal",q=>{wc_T(q,"$ python scripts/generate/products.py --check",96,704,{w:500,size:28,f:"mono",col:WC_DARK});
     const p=clamp(ck*2-0.8,0,1);GP_OK16.forEach((s,i)=>{const n=Math.ceil(s.length*p);if(n<=0)return;const yy=752+i*44;
       if(i===0&&o.valid>0.01&&p>=1)gp_mark(q,96,yy-10,s,"up to date and valid",clamp(o.valid,0,1),GV.green);wc_T(q,s.slice(0,n),96,yy,{w:500,size:28,f:"mono",col:GV.greenInk});});},[60,66,74]),14);}
@@ -3363,20 +3515,20 @@ function gp_kept(ctx,t,o){o=o||{};const dv=clamp(o.dir==null?1:o.dir,0,1);
 function gp_samDesk(x,tt,o){o=o||{};gv_behind(x,"sam",GV_PX.seat[0],GV_PX.top,GV_PX.seat[1],Object.assign({pose:"listen",t:tt,flip:true},o.sam||{}));
   x.drawImage(gv_place("platformDesk"),0,0,W,H);if(o.draw)o.draw(x);}
 function gp_ontosScreens(ctx,t,o){o=o||{};const [[lx,ly,lw,lh],[rx,ry,rw,rh]]=GV_PX.screens,u=clamp(o.u==null?1:o.u,0,1);
-  gv_screen(ctx,lx,ly,lw,lh,"Ontos · Databricks Labs",q=>{[["Data Products","6"],["Data Contracts","10"]].forEach(([k,v],i)=>{const yy=ly+124+i*72,a=clamp(u*2-i*0.6,0,1);if(a<=0.01)return;
+  gv_screen(ctx,lx,ly,lw,lh,"Ontos · Databricks Labs",q=>{[["Data Products","6"],["Data Contracts","5"]].forEach(([k,v],i)=>{const yy=ly+124+i*72,a=clamp(u*2-i*0.6,0,1);if(a<=0.01)return;
     withA(q,a,()=>{wc_T(q,k,lx+36,yy,{w:700,size:30,col:WC_DARK});wc_T(q,v,lx+lw-40,yy,{w:800,size:34,col:WC_DARK,align:"right"});});});},{barH:46,titleSize:28,bar:GP_CATBAR});
   gv_screen(ctx,rx,ry,rw,rh,"Unity Catalog",q=>{["core_learner_v1","core_award_v1","mart_planning__near_award"].forEach((s,i)=>wc_T(q,s,rx+36,ry+116+i*58,{w:500,size:28,f:"mono",col:WC_DARK}));},
     {barH:46,titleSize:28});}
 // Ontos imports a contract from its file: the file uploaded (o.up), then the contract as Ontos read it, its columns and the fields it
 // took from the file (o.rev)
-const GP_IMPF=[["Status","active"],["Domain","planning"],["Data Product","learners_near_an_award"]];
+const GP_IMPF=[["Status","active"],["Domain","course"],["Data Product","awards"]];
 function gp_import(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,up=clamp(o.up||0,0,1),rv=clamp(o.rev||0,0,1);
   gu_page(ctx,x,y,w,h,{bar:"Ontos · Contracts",title:"Import",titleSize:40,tabs:["Upload ODCS YAML file","Review parsed contract"],tab:rv>0.3?1:0});
   wc_panel(ctx,150,300,1620,140,{kind:"card",dashed:true,seed:531});
-  if(up>0.01)gp_rise(ctx,up,()=>{gv_sheet(ctx,190,322,70,94);gv_lines(ctx,204,346,42,4,16,0.9);wc_T(ctx,"mart_planning__near_award.yaml",290,382,{w:500,size:28,f:"mono",col:WC_DARK});
+  if(up>0.01)gp_rise(ctx,up,()=>{gv_sheet(ctx,190,322,70,94);gv_lines(ctx,204,346,42,4,16,0.9);wc_T(ctx,"core_award_v1.yaml",290,382,{w:500,size:28,f:"mono",col:WC_DARK});
     wc_tick(ctx,1720,366,34,GV.greenInk,clamp(up*2-1,0,1),5);},12);
-  if(rv<=0.01)return;gp_rise(ctx,rv,()=>{gu_box(ctx,150,470,1620,380,"mart_planning__near_award",{seed:532});wc_T(ctx,"17 columns",900,518,{w:700,size:28,col:WC_MUTED,align:"right"});
-    ["learner_award_key","census_date","faculty_code","…","is_near_award"].forEach((s_,i)=>wc_T(ctx,s_,190,580+i*54,{w:500,size:28,f:"mono",col:s_==="…"?WC_PENCIL:WC_INK}));
+  if(rv<=0.01)return;gp_rise(ctx,rv,()=>{gu_box(ctx,150,470,1620,380,"core_award_v1",{seed:532});wc_T(ctx,"11 columns",900,518,{w:700,size:28,col:WC_MUTED,align:"right"});
+    ["award_key","award_bk","award_code","…","faculty_name"].forEach((s_,i)=>wc_T(ctx,s_,190,580+i*54,{w:500,size:28,f:"mono",col:s_==="…"?WC_PENCIL:WC_INK}));
     ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(960,500,2,320);
     GP_IMPF.forEach(([k,v],i)=>{const yy=580+i*80,a=clamp(rv*3-0.6-i*0.4,0,1);withA(ctx,a,()=>{wc_T(ctx,k,1000,yy,{w:600,size:28,col:WC_MUTED});
       wc_T(ctx,v,1000,yy+38,{w:500,size:28,f:"mono",col:WC_DARK});});});},14);}
@@ -3390,21 +3542,15 @@ function gp_domains(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,u=clamp(o.u==null?1:
   GP_DOM.forEach(([p,d],i)=>{const v=clamp(u*6-i,0,1);if(v<=0.01)return;const ry=hy+86+i*82;withA(ctx,v,()=>{ctx.save();ctx.fillStyle=rgba(GP_SIX[p][2],0.9);ctx.fillRect(184,ry-34,12,46);ctx.restore();
     wc_T(ctx,GP_SIX[p][0],cx[0],ry,{w:700,size:30,col:WC_DARK});gp_pill(ctx,cx[1]-8,ry-10,d,{size:28,w:600,wash:GV.grey,washA:0.25,seed:540+i});
     const g=clamp(o.team||0,0,1);if(g>0.01)gv_tint(ctx,cx[2]-12,ry-34,tw(ctx,GP_TEAM[i],28,600)+24,46,GV.gold,0.7*g);wc_T(ctx,GP_TEAM[i],cx[2],ry,{w:600,size:28,col:WC_INK});});});}
-// a product's page: its domain and owner team, and where it is on its way to being published, as Ontos's guide sets the steps out
-// (o.step, 0 to 4, moving along); who acts at each: a data steward reviews and approves (o.stw), its owner publishes (o.pub)
-const GP_LIFE=["Draft","Proposed","Under Review","Approved","Active"];
-function gp_lifecycle(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,st=clamp(o.step||0,0,4),cur=Math.round(st),stc=[GV.grey,GV.grey,GV.amber,GV.gold,GV.green][cur];
-  gu_page(ctx,x,y,w,h,{bar:"Ontos · Data Products",title:"Learners near an award",titleSize:40,state:[GP_LIFE[cur],stc]});
+// a product's page: its domain and owner team, and its state, from Draft to Active as its owner publishes it (o.pub); no steward's
+// review in between (o.no), in pencil: governance's rules check every product instead (the next page)
+function gp_owned(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,pb=clamp(o.pub||0,0,1),ttl="Learners near an award";
+  gu_page(ctx,x,y,w,h,{bar:"Ontos · Data Products",title:ttl,titleSize:40,state:["Active",GV.green],stateA:pb});
+  if(pb<0.99){const sx=x+48+tw(ctx,ttl,40,800)+28,sw=Math.round(tw(ctx,"Draft",28,700)+44),ty=y+52+72;
+    withA(ctx,1-pb,()=>{wc_panel(ctx,sx,ty-38,sw,48,{kind:"pill",wash:GV.grey,washA:0.45,seed:45});wc_T(ctx,"Draft",sx+22,ty-4,{w:700,size:28,col:WC_DARK});});}
   [["Domain","planning"],["Owner Team","Clara Jensen, Planning"]].forEach(([k,v],i)=>{const yy=300+i*52;wc_T(ctx,k,170,yy,{w:600,size:28,col:WC_MUTED});wc_T(ctx,v,420,yy,{w:700,size:30,col:WC_DARK});});
-  let px=170;const py=520,xs=[];GP_LIFE.forEach((s,i)=>{const pw=Math.round(tw(ctx,s,30,700)+48),on=clamp(1-Math.abs(st-i)*1.4,0,1),done=st>i+0.5;xs.push([px,pw]);
-    if(on>0.01)gv_halo(ctx,px-14,py-44,pw+28,88,i===4?GV.green:GV.gold,0.9*on);
-    wc_panel(ctx,px,py-30,pw,60,{kind:"pill",wash:done||on>0.5?(i===4?GV.green:i>=2?GV.gold:GV.grey):null,washA:0.3,seed:550+i});wc_T(ctx,s,px+24,py+11,{w:700,size:30,col:WC_DARK});
-    if(i<4)gp_arrow(ctx,[px+pw+10,py],[px+pw+54,py],0,1,{col:WC_PENCIL,lw:3,a:0.7});px+=pw+64;});
-  wc_T(ctx,"…",px-6,py+11,{w:700,size:30,col:WC_PENCIL});
-  const who=(i0,i1,s,v,col)=>{if(v<=0.01)return;const a=xs[i0][0],b=xs[i1][0]+xs[i1][1],m=(a+b)/2;withA(ctx,clamp(v*1.6,0,1),()=>{ctx.save();ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=3;
-    ctx.beginPath();ctx.moveTo(a+8,py+52);ctx.lineTo(a+8,py+66);ctx.lineTo(b-8,py+66);ctx.lineTo(b-8,py+52);ctx.stroke();ctx.restore();});
-    const al=i0===4?"left":"right";wc_hand(ctx,s,al==="left"?a+8:b-8,py+122,{size:36,w:700,col:col,align:al,p:v});};
-  who(2,3,"a Data Steward reviews, and approves",clamp(o.stw||0,0,1),GV.goldInk);who(4,4,"its owner publishes",clamp(o.pub||0,0,1),GV.greenInk);}
+  if(o.no>0.01)gp_hand(ctx,"no steward's review",170,560,{size:40,w:700,col:GV.goldInk,p:clamp(o.no,0,1)});
+  if(pb>0.01)gp_hand(ctx,"its owner publishes",170,680,{size:40,w:700,col:GV.greenInk,p:pb});}
 // a policy that runs every night: Data Product Ownership, as Ontos's guide writes it, with the university's address; its lines lit as
 // they're said (o.lit[k]); its schedule (o.sch)
 const GP_POL=["MATCH (prod:data_product)","WHERE prod.status IN ['active', 'certified']","ASSERT prod.owner != 'unknown' AND LENGTH(prod.owner) > 0",
@@ -3418,19 +3564,19 @@ function gp_policy(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,L=o.lit||[];
   const sc=clamp(o.sch==null?1:o.sch,0,1);if(sc>0.01)withA(ctx,sc,()=>{wc_T(ctx,"Schedule",170,770,{w:700,size:30,col:WC_DARK});
     const pw=gp_pill(ctx,330,760,"Daily",{size:30,wash:GU_CYAN,washA:0.25,seed:562});wc_T(ctx,"02:00",330+pw+24,770,{w:500,size:30,f:"mono",col:WC_DARK});});}
 // a contract's page: its schema, and a column linked to the business term it holds, its authoritative definition (o.link); the term, on a
-// card at the right, as Planning's conceptual model defines it (o.term)
+// card at the right, as the university's glossary defines it (o.term)
 function gp_link(ctx,t,o){o=o||{};const [x,y,w,h]=GU_BIG,lk=clamp(o.link||0,0,1),tm=clamp(o.term||0,0,1),V=GV_MEAN.violet,VI=GV_MEANINK.violet;
-  gu_page(ctx,x,y,w,h,{bar:"Ontos · Contracts",title:"mart_planning__near_award",titleSize:40,tabs:["Schema"],tab:0});
+  gu_page(ctx,x,y,w,h,{bar:"Ontos · Contracts",title:"core_award_v1",titleSize:40,tabs:["Schema"],tab:0});
   gu_box(ctx,150,300,1000,540,null,{seed:571});
-  [["census_date","date"],["faculty_code","string"],["…",""],["is_near_award","boolean"]].forEach(([n,ty],i)=>{const yy=370+i*60;if(i===3&&lk>0.01)gv_tint(ctx,170,yy-34,960,48,V,0.45*lk);
+  [["award_key","string"],["award_bk","string"],["…",""],["faculty_name","string"]].forEach(([n,ty],i)=>{const yy=370+i*60;if(i===0&&lk>0.01)gv_tint(ctx,170,yy-34,960,48,V,0.45*lk);
     wc_T(ctx,n,190,yy,{w:500,size:28,f:"mono",col:n==="…"?WC_PENCIL:WC_DARK});if(ty)wc_T(ctx,ty,1110,yy,{w:600,size:28,col:WC_MUTED,align:"right"});});
   const ly=640;wc_T(ctx,"Authoritative Definition",190,ly,{w:700,size:28,col:WC_MUTED});
-  if(lk>0.01){const k=0.9+0.1*spring(lk);ctx.save();ctx.translate(190,ly+64);ctx.scale(k,k);withA(ctx,clamp(lk*1.6,0,1),()=>gp_pill(ctx,0,0,"learner near an award",{size:30,wash:V,washA:0.4,seed:572}));ctx.restore();}
-  if(tm<=0.01)return;const cx=1190,cy=300,cw=600,ch=380;gp_thread(ctx,[190+tw(ctx,"learner near an award",30,700)+50,ly+64],[cx,cy+ch-70],clamp(tm*1.6,0,1),{col:VI,bend:-20,lw:3.5});
+  if(lk>0.01){const k=0.9+0.1*spring(lk);ctx.save();ctx.translate(190,ly+64);ctx.scale(k,k);withA(ctx,clamp(lk*1.6,0,1),()=>gp_pill(ctx,0,0,"Award",{size:30,wash:V,washA:0.4,seed:572}));ctx.restore();}
+  if(tm<=0.01)return;const cx=1190,cy=300,cw=600,ch=380;gp_thread(ctx,[190+tw(ctx,"Award",30,700)+50,ly+64],[cx,cy+ch-70],clamp(tm*1.6,0,1),{col:VI,bend:-20,lw:3.5});
   gp_rise(ctx,clamp(tm*1.6-0.4,0,1),()=>{wc_panel(ctx,cx,cy,cw,ch,{kind:"card",seed:573});ctx.save();ctx.fillStyle=rgba(V,0.85);ctx.fillRect(cx+8,cy+8,cw-16,14);ctx.restore();
-    // its label and its definition, word for word, as Planning's conceptual model has them (models/marts/planning/_planning__conceptual.yml)
-    wc_T(ctx,"learner near an award",cx+36,cy+92,{w:800,size:34,col:VI});["A learner who, on the census date, was","studying, enrolled in an award, and had","more than none and no more than 15","credit points left to earn towards it."].forEach((s,i)=>
-      wc_T(ctx,s,cx+36,cy+150+i*44,{w:600,size:28,col:WC_INK}));wc_T(ctx,"owner: Planning",cx+36,cy+ch-40,{w:600,size:28,col:WC_MUTED});},14);}
+    // its term and its definition's first sentence, word for word, as the university's glossary has them (the contract's description)
+    wc_T(ctx,"Award",cx+36,cy+92,{w:800,size:34,col:VI});["A qualification the university","confers, such as a graduate","certificate or a master, for a set","number of credit points. …"].forEach((s,i)=>
+      wc_T(ctx,s,cx+36,cy+150+i*44,{w:600,size:28,col:WC_INK}));wc_T(ctx,"owner: Mei Tanaka",cx+36,cy+ch-40,{w:600,size:28,col:WC_MUTED});},14);}
 // what Databricks says of every Labs project, on its Labs page, lit as it's said (o.lit[k])
 const GP_LABS=["Please note that all projects in the https://github.com/databrickslabs account are provided for your",
   "exploration only, and are not formally supported by Databricks with service level agreements (SLAs).","They are provided AS IS and we do not make any guarantees of any kind."],
@@ -3473,7 +3619,7 @@ function gp_dawnScreen(ctx,t,o){o=o||{};const [x,y,w,h]=GV_FX.screen,pl=clamp(o.
 // the promise outlives the catalogue: the catalogue's window, then another's in its place (o.swap), the same card in each; the file it's
 // read from, in the open standard, its owner lit (o.file, o.own, o.std); the window reading the file (o.read); then the window goes, and
 // the file stays (o.go)
-const GP_FR=[{n:3,s:"apiVersion: v1.0.0"},{n:4,s:"kind: DataProduct"},{n:6,s:"name: Learners near an award"},{fold:1},{n:33,s:"team:"},{n:34,s:"  name: Clara Jensen, Planning"}];
+const GP_FR=[{n:3,s:"apiVersion: v1.0.0"},{n:4,s:"kind: DataProduct"},{n:6,s:"name: Learners near an award"},{fold:1},{n:32,s:"team:"},{n:33,s:"  name: Clara Jensen, Planning"}];
 function gp_frames(ctx,t,o){o=o||{};const sw=clamp(o.swap||0,0,1),go=clamp(o.go||0,0,1),wx=580,wy=40,ww=760,wh=330;
   withA(ctx,1-go,()=>{if(sw<0.99)withA(ctx,1-sw,()=>gp_win(ctx,wx,wy,ww,wh,"Catalogue · today",q=>gp_card(q,wx,wy,ww),GP_CATBAR));
     if(sw>0.01)withA(ctx,sw,()=>gp_win(ctx,wx,wy,ww,wh,"Another catalogue",q=>gp_card(q,wx,wy,ww),GP_NEWBAR));});
@@ -3504,15 +3650,16 @@ const WC_PLACES={noor:gv_paintNoor,mapClose:gv_paintMapClose,noorBoard:c=>gv_pai
 // ---- 1 · A promise in a file: Noor's room, Noor and Clara; the six data products on her board, each with its owner, and Clara's
 // promise; until now, the promise typed into a catalogue while the table changed every week; the column it promised, gone; Anil's report
 // on census day, broken; every promise typed again for a new catalogue; something had to change; now, each promise a file in an open
-// standard; the contract written from the model, and the change that would break it, stopped; Jun's column; the ten tables, checked;
+// standard; a core table's contract, written first by data governance, the model built to it, and the two drifting apart, stopped; a
+// new column on credentials, in its contract first; the ten tables, checked;
 // the promise the university's, whichever catalogue shows it; and the title ----
 scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(sc,"room","Noor and Clara"),des:c.designs-0.3,six:wAt(sc,"designs","six data products"),
     own:wAt(sc,"designs","an owner who keeps it"),cl:c.clara,cnt:wAt(sc,"clara","the count"),rdy:wAt(sc,"clara","ready by seven"),
     ty:c.typed-0.3,hand:wAt(sc,"typed","typed by hand"),wk:wAt(sc,"typed","the tables changed"),col:wAt(sc,"column","a column"),gone:wAt(sc,"column","no longer had"),
     cen:c.census-0.3,brk:wAt(sc,"census","could break"),fm:c.format-0.3,chg:wAt(sc,"format","change the catalogue"),again:wAt(sc,"format","every promise is typed again"),
     stop:c.change,now:c.now-0.3,code:wAt(sc,"now","kept with the code"),std:wAt(sc,"now","two open standards"),pd:wAt(sc,"pair","one for the product"),
-    ct:wAt(sc,"pair","its table's contract"),wr:c.written-0.3,frm:wAt(sc,"written","written from"),dis:wAt(sc,"written","can't disagree"),
-    stp:wAt(sc,"written","a change that would break it"),jun:c.jun-0.3,grew:wAt(sc,"jun","its contract grew"),nob:wAt(sc,"jun","no report broke"),
+    ct:wAt(sc,"pair","each core table"),wr:c.written-0.3,frm:wAt(sc,"written","builds to it"),dis:wAt(sc,"drift","A check stops"),
+    stp:wAt(sc,"drift","drifting apart"),jun:c.jun-0.3,grew:wAt(sc,"jun","got the line first"),bt:wAt(sc,"jun","Jun built it"),nob:wAt(sc,"jun","no report broke"),
     tn:c.ten-0.3,prom:wAt(sc,"ten","have a promise"),chk:wAt(sc,"ten","checked on every change"),st:c.stay-0.3,stays:wAt(sc,"stay","the promises stay"),
     uni:wAt(sc,"stay","the university's"),board:c.breath-0.3,title:c.breath+1.2}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
@@ -3533,12 +3680,13 @@ scene("promise",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({cards:wAt(
     // now: the project's folders, and in them the product's file and its table's contract, each in its open standard
     {at:P.now,place:"desk",keys:[[P.now,960,540,1]],push:0.02,draw:(x,tt)=>gp_nowFiles(x,tt,{tree:fin(tt,P.code-0.2,0.6),d:clamp((tt-P.std)/0.9,0,1),
       c:clamp((tt-P.std-0.6)/0.9,0,1),std:[fin(tt,P.pd,0.5),fin(tt,P.ct,0.5)]})},
-    // the contract, written from the model by the script; each line threaded to its line; a change that would break it: the impact check
-    {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.frm)/1.0,0,1),thr:clamp((tt-P.dis+0.4)/1.4,0,1),
-      ck:clamp((tt-P.stp)/1.4,0,1)})},
-    // Jun's column on credentials: its contract grows by a line, by itself, and every report that reads it still works
+    // a core table's contract, written first by the information architect; the model, built to it; the check between them, each line
+    // threaded to its line; the two drifting apart: the products check
+    {at:P.wr,place:"desk",keys:[[P.wr,960,540,1]],push:0.02,draw:(x,tt)=>gp_written(x,tt,{u:clamp((tt-P.wr-0.3)/1.0,0,1),m:clamp((tt-P.frm)/1.0,0,1),
+      thr:clamp((tt-P.dis+0.2)/1.4,0,1),ck:clamp((tt-P.stp)/1.4,0,1)})},
+    // a new column on credentials: its contract gets the line first, Jun builds it, and every report that reads it still works
     {later:true,at:P.jun,place:"desk",keys:[[P.jun,960,540,1]],push:0.02,draw:(x,tt)=>{gp_junCol(x,tt,{add:clamp((tt-P.grew)/1.2,0,1),read:clamp((tt-P.jun-0.4)/1.2,0,1),
-      ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.jun+0.3,P.tn-0.4,0.4));}},
+      ok:clamp((tt-P.nob)/0.9,0,1),tag:fin(tt,P.jun+0.6,0.5)});gu_nameCard(x,90,700,"Jun Park","analytics engineer",gv_io(tt,P.bt-0.2,P.tn-0.4,0.4));}},
     // the data team's board: the ten tables other teams read, each ticked, checked on every change
     {at:P.tn,place:"board",keys:[[P.tn,960,500,1]],push:0.02,draw:(x,tt)=>gp_ten(x,tt,{u:clamp((tt-P.tn-0.1)/1.6,0,1),tick:clamp((tt-P.prom)/1.6,0,1),ck:fin(tt,P.chk,0.6)})},
     // whichever catalogue shows it: two catalogues reading the same file, the university's
@@ -3562,22 +3710,26 @@ scene("owner",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({wr:wAt(sc,"f
     // Planning's office: Clara at her desk, her file on her screen; who does what
     {cut:true,at:P.kp,place:"planClose",keys:[[P.kp,960,540,1]],push:0.02,draw:(x,tt)=>gp_planDesk(x,tt,{clara:{expr:"smile"},who:[fin(tt,P.dt,0.9),fin(tt,P.cl,0.9)],own:fin(tt,P.cl,0.6)})}],sc.dur));});
 
-// ---- 3 · The contract, from the model: the contract, what each part promises; nobody types it; the script writes it from the model
-// and the product's file, in the Open Data Contract Standard; each line of the model threaded to its line; and on a pull request, a hand
-// edit fails the check, then passes, up to date and valid ----
+// ---- 3 · A contract written first: a core table's contract, what each part promises; only the core tables have one; data governance's
+// information architect writes it first, in the Open Data Contract Standard, and the data team builds the model to it; each line of the
+// contract threaded to its line in the model; on a pull request, the model drifted from its contract fails the check, and data
+// governance asks how it got there; and Clara's own table, with no enterprise contract: a dbt contract, the data team's ----
 scene("contract",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({n:["each column","its type","always there","identify a person","the tests it must pass"].map(w=>wAt(sc,"each",w)),
-    nb:c.nobody,ty:wAt(sc,"nobody","types it"),scr:wAt(sc,"script","A script writes it"),mdl:wAt(sc,"script","from the model"),std:wAt(sc,"script","Open Data Contract Standard"),
-    side:wAt(sc,"side","each line"),pr:c.check-0.3,fail:wAt(sc,"check","a check fails"),rules:wAt(sc,"check","breaks the standard's rules")}));
+    core:c.core,arch:c.architect,ia:wAt(sc,"architect","information architect"),std:wAt(sc,"architect","Open Data Contract Standard"),
+    bld:wAt(sc,"builds","builds the model to it"),side:wAt(sc,"side","each line"),pr:c.check-0.3,fail:wAt(sc,"check","a check fails"),
+    how:wAt(sc,"process","how the change got there"),first:wAt(sc,"process","the contract changes first"),lt:c.lighter-0.3,
+    no:wAt(sc,"lighter","no enterprise contract"),code:wAt(sc,"lighter","in its code"),wait:wAt(sc,"wait","without waiting")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
-    // the contract on the desk, what it promises in pencil beside it; a pencil that stops short; then the model, the product's file and
-    // the script, and each line of the model threaded to its line in the contract
-    {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gp_contractDesk(x,tt,{note:P.n.map(w=>fin(tt,w,0.8)),pen:clamp((tt-P.nb+0.2)/1.4,0,1),
-      warn:fin(tt,P.ty+0.3,0.6),gen:fin(tt,P.ty+0.3,0.6),scr:clamp((tt-P.scr)/1.2,0,1),src:clamp((tt-P.mdl)/1.2,0,1),std:fin(tt,P.std,0.6),
-      thr:[0,1,2,3,4].map(k=>clamp((tt-P.side-0.3*k)/0.9,0,1))})},
-    // Jun's pull request, its contract edited by hand: the products check fails, out of date; made in the model, and the script run, it
-    // passes, up to date and valid against the standards
-    {at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gp_prCheck(x,tt,{hand:fin(tt,P.pr+0.5,0.8),fail:clamp((tt-P.fail)/1.0,0,1),
-      pass:clamp((tt-P.rules+0.2)/1.2,0,1),std:fin(tt,P.rules+1.2,0.6)})}],sc.dur));});
+    // the contract on the desk, what it promises in pencil beside it; the core tables' contracts, the only ones; written first by the
+    // information architect, in the standard; the model built to it, each line of the contract threaded to its line in the model
+    {at:0,place:"desk",keys:[[0,960,500,1]],push:0.02,draw:(x,tt)=>gp_contractDesk(x,tt,{note:P.n.map(w=>fin(tt,w,0.8)),core:gv_io(tt,P.core+0.1,P.arch,0.5),
+      ia:fin(tt,P.ia,0.6),std:fin(tt,P.std,0.6),src:clamp((tt-P.bld)/1.2,0,1),thr:[0,1,2,3].map(k=>clamp((tt-P.side-0.3*k)/0.9,0,1))})},
+    // Jun's pull request, which lets award codes be empty while their contract says they're required: the products check fails; data
+    // governance asks how the change got there; the contract comes first
+    {cut:true,at:P.pr,place:"big",keys:[[P.pr,960,540,1]],push:0.02,draw:(x,tt)=>gp_prCheck(x,tt,{fail:clamp((tt-P.fail)/1.0,0,1),how:fin(tt,P.how,0.8),first:fin(tt,P.first,0.8)})},
+    // Clara's own table: no enterprise contract; a dbt contract in its code, the data team's to change
+    {at:P.lt,place:"desk",keys:[[P.lt,960,540,1]],push:0.02,draw:(x,tt)=>gp_lighter(x,tt,{u:clamp((tt-P.lt-0.1)/0.9,0,1),no:fin(tt,P.no,0.6),code:fin(tt,P.code,0.6),
+      wait:fin(tt,P.wait,0.6)})}],sc.dur));});
 
 // ---- 4 · Every shared table, in one product: the data team's thirty-three tables; the ten other teams read, each into one of the six
 // products; and Jun's completions, in no product, stopped until a product takes it in ----
@@ -3591,16 +3743,16 @@ scene("shared",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ten:wAt(sc,
     {at:P.same,place:"big",keys:[[P.same,960,540,1]],push:0.02,draw:(x,tt)=>gp_newPR(x,tt,{fail:clamp((tt-P.np)/1.0,0,1),prod:clamp((tt-P.tk)/1.6,0,1),
       pass:clamp((tt-P.tk-1.8)/1.0,0,1),tag:fin(tt,P.same+0.6,0.5)})}],sc.dur));});
 
-// ---- 5 · A change that would break it: the model changes and its contract follows; a rename breaks the census dashboard; the impact
+// ---- 5 · A change that would break it: Clara's table's model changes, and its contract, in its code, with it; a rename breaks the census dashboard; the impact
 // check fails, needs a new version; version 1 stays with a date to go, version 2 beside it; credentials' two versions, the first
 // deprecated; and Jun's column, added, breaking nobody ----
-scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"follows","a model changes"),fol:wAt(sc,"follows","its contract follows"),sm:c.some,
+scene("break",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({ch:wAt(sc,"follows","change the model"),fol:wAt(sc,"follows","its contract changes"),sm:c.some,
     br:wAt(sc,"some","break the readers"),rn:c.rename-0.3,fl:wAt(sc,"rename","the impact check fails"),bk:wAt(sc,"rename","it's breaking"),nv:wAt(sc,"rename","needs a new version"),
     sy:c.stays-0.3,dt:wAt(sc,"stays","a date to go"),nw:wAt(sc,"stays","the new one goes beside it"),tw:c.two-0.3,has:wAt(sc,"two","has two"),
     ret:wAt(sc,"two","retires on"),d31:wAt(sc,"two","thirty-first"),cs:wAt(sc,"two","its contract says"),dep:wAt(sc,"two","deprecated"),out:wAt(sc,"two","on its way out"),
     ad:c.add-0.3,nc:wAt(sc,"add","a new column"),nb:wAt(sc,"add","breaks nobody")}));
   gv_shots(ctx,S,t,sc.dur,gp_run([
-    // the model's line renamed, the contract's following by itself; the census dashboard's thread breaks
+    // the model's line renamed, and its contract, in the project's settings, changing with it; the census dashboard's thread breaks
     {at:0,place:"desk",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gp_renameDesk(x,tt,{ren:clamp((tt-P.ch)/0.8,0,1),fol:clamp((tt-P.fol)/0.8,0,1),rd:fin(tt,P.sm,0.6),
       brk:clamp((tt-P.br)/0.8,0,1)})},
     // the rename's pull request: the impact check fails; breaking, it needs a new version
@@ -3643,11 +3795,11 @@ scene("open",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({bf:wAt(sc,"bo
       move:fin(tt,P.mv,0.6)})}],sc.dur));});
 
 // ---- 8 · A catalogue over the platform: Sam's screens, Ontos and Unity Catalog; Ontos imports a contract from its file, and lays the
-// products out by domain, each with its owner team; a steward reviews before it's published; the nightly policy on owners; a column
+// products out by domain, each with its owner team; no steward's review: its owner publishes; the nightly policy on owners; a column
 // linked to its business term; a Labs project, as it is; and the files at home, the catalogue a copy ----
 scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(sc,"ontos","Ontos"),imp:c.imports-0.3,ff:wAt(sc,"imports","from its file"),
-    lay:wAt(sc,"imports","lays the products"),team:wAt(sc,"imports","each with its team"),sw:c.steward-0.3,stw:wAt(sc,"steward","A steward"),
-    rv:wAt(sc,"steward","reviews"),pub:wAt(sc,"steward","published"),po:c.policy-0.3,eve:wAt(sc,"policy","Each night"),act:wAt(sc,"policy","an active one"),
+    lay:wAt(sc,"imports","lays the products"),team:wAt(sc,"imports","each with its team"),sw:c.steward-0.3,stw:wAt(sc,"steward","doesn't review"),
+    pub:wAt(sc,"steward","its owner publishes"),po:c.policy-0.3,eve:wAt(sc,"policy","Each night"),act:wAt(sc,"policy","an active one"),
     no:wAt(sc,"policy","with no owner"),tag:wAt(sc,"policy","is tagged"),told:wAt(sc,"policy","governance is told"),lk:c.link-0.3,lc:wAt(sc,"link","link each column"),
     bt:wAt(sc,"link","the business term"),lb:c.labs-0.3,asis:wAt(sc,"labs","comes as it is"),nfs:wAt(sc,"labs","no formal support"),hm:c.home-0.3,
     fl:wAt(sc,"home","the files"),ah:wAt(sc,"home","at home"),cp:wAt(sc,"home","holds a copy")}));
@@ -3659,9 +3811,8 @@ scene("catalogue",(ctx,S,t,sc)=>{const c=sc.cues,P=gp_once(sc,"P",()=>({on:wAt(s
     {at:P.imp,place:"bigPlat",keys:[[P.imp,960,540,1]],push:0.02,draw:(x,tt)=>gp_import(x,tt,{up:clamp((tt-P.ff+0.3)/0.9,0,1),rev:clamp((tt-P.ff-0.6)/0.9,0,1)})},
     // and lays the products out by domain, each with its owner team
     {later:true,at:P.lay-0.2,place:"bigPlat",keys:[[P.lay-0.2,960,540,1]],push:0.02,draw:(x,tt)=>gp_domains(x,tt,{u:clamp((tt-P.lay)/1.4,0,1),team:fin(tt,P.team,0.6)})},
-    // Clara's product on its way to being published: a data steward reviews and approves; its owner publishes
-    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_lifecycle(x,tt,{step:lerp(1,4,easeCam(clamp((tt-P.rv)/(P.pub-P.rv+0.6),0,1))),
-      stw:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
+    // Clara's product, published: no steward's review; its owner publishes it, Draft to Active
+    {later:true,at:P.sw,place:"bigPlat",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>gp_owned(x,tt,{no:fin(tt,P.stw,0.8),pub:fin(tt,P.pub,0.8)})},
     // the policy every night: an active product with no owner is tagged, and governance is told
     {at:P.po,place:"bigPlat",keys:[[P.po,960,540,1]],push:0.02,draw:(x,tt)=>gp_policy(x,tt,{sch:fin(tt,P.eve,0.6),lit:[0,gv_io(tt,P.act,P.no,0.4),fin(tt,P.no,0.5),0,
       fin(tt,P.tag,0.5),fin(tt,P.told,0.5),0]})},
@@ -3785,11 +3936,15 @@ window.addEventListener("DOMContentLoaded",async()=>{
    on a fast machine and several times that on a laptop or phone, and keeps a full-size picture (8 MB) in memory: these films have
    10 to 38 places, against master data's 5 to 8, so painting them all as the page opened froze the page again and again while
    the visitor was only reading it (2 November 2026).
+   Where the film was published with its places drawn as pictures (places/ beside film.js, master data's wash.js), the player paints
+   none: it waits for the pictures of the moment it starts at, and shows each place as its picture. Painted while the film played,
+   they froze it again and again on a laptop, the soundtrack running on (5 November 2026).
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
    of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
    the grain. */
 async function prepAssets(){await fontsReady3();await loadLogos();if(window.__RENDER__)wc_prep();else await wc_prepSoft();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(gv_place);return;}
+  if(await wc_picsLoad()){await wc_picsReady(window.FILM&&FILM.time?FILM.time():0);return;}
   const cv0=document.getElementById("film");if(ks.length&&cv0){await new Promise(r=>setTimeout(r,0));gv_place(ks[0]);}let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
   const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
   // a page without a player (labs, scenarios) paints a place only when it first draws it (the kept picture is made then), never all of
@@ -3802,3 +3957,4 @@ if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySele
     for(let i=0;i<MB;i++){const tt=Math.max(0,t-SHUT*i/(MB-1));mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";renderFrame(mx,1,tt);ax.globalAlpha=1/(i+1);ax.drawImage(M,0,0);}
     ax.globalAlpha=1;ox.setTransform(1,0,0,1,0,0);ox.globalAlpha=1;ox.globalCompositeOperation="source-over";ox.drawImage(A,0,0);
     return out.toDataURL("image/jpeg",q||0.9);};})();}
+if(!window.__RENDER__)renderFrame=wc_liveFrame(renderFrame);

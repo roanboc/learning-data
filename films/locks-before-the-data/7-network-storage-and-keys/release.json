@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Network, storage and keys",
+    "key": "network-storage-and-keys-en",
+    "dir": "films/locks-before-the-data/7-network-storage-and-keys/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/network-storage-and-keys/film.js",
+    "video": "dist/network-storage-and-keys.mp4",
+    "file": "network-storage-and-keys.mp4",
+    "captions": [
+      [
+        "films/locks-before-the-data/7-network-storage-and-keys/captions/en.srt",
+        "network-storage-and-keys.en.srt"
+      ],
+      [
+        "films/locks-before-the-data/7-network-storage-and-keys/captions/es.srt",
+        "network-storage-and-keys.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/locks-before-the-data/7-network-storage-and-keys/source",
+      ":(exclude)films/locks-before-the-data/7-network-storage-and-keys/source/src/i18n/es/captions.js",
+      "films/locks-before-the-data/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/logos.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 343,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.1,
+      "status": "Drawn to the rule"
+    }
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "draft": true,
+  "title": "Fit for use",
+  "title_es": "Apto para su uso",
+  "planned": 4,
+  "lead": "The first series of Data quality. The graduation list says who graduates, at which ceremony, and the name printed on each certificate. It passed every check, and still 41 certificates were printed again. So the team asks what the list is for, and what good enough means for each use.",
+  "lead_es": "La primera serie de Calidad de datos. La lista de graduación dice quién se gradúa, en qué ceremonia y el nombre impreso en cada diploma. Pasó todos los controles, y aun así 41 diplomas se imprimieron de nuevo. Así que el equipo pregunta para qué sirve la lista, y qué es lo bastante bueno para cada uso.",
+  "description": "Short films on what data quality means and how to measure it: quality as fitness for a use, with a level for each use agreed with the people who use the data; a hundred records looked at by hand, and the whole table profiled, before any check is written; accuracy, which only a reference outside the data can show; and timeliness, agreed and always shown. In dbt and Databricks, with the official docs for the rest.",
+  "description_es": "Películas cortas sobre qué significa la calidad de los datos y cómo medirla: la calidad como aptitud para un uso, con un nivel para cada uso acordado con quienes usan los datos; cien registros revisados a mano, y la tabla entera perfilada, antes de escribir un control; la exactitud, que solo una referencia fuera de los datos puede mostrar; y la puntualidad, acordada y siempre a la vista. En dbt y Databricks, con la documentación oficial para el resto.",
+  "card": "A list can pass every check and still be wrong. Ask what it's for, measure it, and check it against the truth and the clock.",
+  "card_es": "Una lista puede pasar todos los controles y seguir mal. Pregunta para qué sirve, mídela y compárala con la verdad y el reloj.",
+  "order": "Watch them in order: each film builds on the one before.",
+  "order_es": "Míralas en orden: cada película se apoya en la anterior.",
+  "thread_h": "One thread: the graduation list, and a name on a certificate",
+  "thread_h_es": "Un hilo: la lista de graduación, y un nombre en un diploma",
+  "thread": "In December 2025, 41 degree certificates had to be printed again: names that lost their accents or were cut short, a double degree printed as one award, graduates missing from the list. Over the next six months, the people who use the list, answer for it and build it write down what it's for and what each use needs, look at a hundred of its records, check its names against the graduates themselves, and agree how fresh it must be.",
+  "thread_es": "En diciembre de 2025 hubo que imprimir de nuevo 41 diplomas: nombres que perdieron sus tildes o quedaron cortados, una doble titulación impresa como un solo título, graduados que faltaban en la lista. En los seis meses siguientes, quienes usan la lista, responden por ella y la construyen escriben para qué sirve y qué necesita cada uso, revisan cien de sus registros, comparan sus nombres con los propios graduados y acuerdan cuán fresca debe estar.",
+  "past_h": "Every film opens somewhere else, at another time",
+  "past_h_es": "Cada película empieza en otro lugar, en otra época",
+  "people_h": "Who's at the table",
+  "people_h_es": "Quiénes están en la mesa",
+  "people": [
+    [
+      "biz",
+      "Uses the list",
+      "Malia Fonoti, the graduations officer, who runs the ceremonies and sends the list to the certificate printer"
+    ],
+    [
+      "biz",
+      "Answers for names and awards",
+      "Mei Tanaka, in the registrar's office, who decides what's right for a name and sets the level each use needs"
+    ],
+    [
+      "biz",
+      "The person the data is about",
+      "Andrés Peñaloza, a graduate of the Master of Data Analytics, whose name the list holds without its accents"
+    ],
+    [
+      "tech",
+      "Builds the list",
+      "Jun Park, who builds the list's models and its checks in the data project"
+    ],
+    [
+      "tech",
+      "Runs the platform",
+      "Sam Okafor, who runs the nightly update and watches how fresh each source is"
+    ]
+  ],
+  "people_es": [
+    [
+      "biz",
+      "Usa la lista",
+      "Malia Fonoti, la responsable de graduaciones, que organiza las ceremonias y envía la lista a la imprenta de diplomas"
+    ],
+    [
+      "biz",
+      "Responde por nombres y títulos",
+      "Mei Tanaka, de la oficina de registro académico, que decide qué es correcto para un nombre y fija el nivel que necesita cada uso"
+    ],
+    [
+      "biz",
+      "La persona de quien hablan los datos",
+      "Andrés Peñaloza, graduado del Máster en Analítica de Datos, cuyo nombre guarda la lista sin sus tildes"
+    ],
+    [
+      "tech",
+      "Construye la lista",
+      "Jun Park, que construye los modelos de la lista y sus controles en el proyecto de datos"
+    ],
+    [
+      "tech",
+      "Lleva la plataforma",
+      "Sam Okafor, que ejecuta la actualización de cada noche y vigila cuán fresca está cada fuente"
+    ]
+  ]
+}

@@ -1,0 +1,71 @@
+{
+ "kicker": "A risk register that lives",
+ "kicker_es": "Un registro de riesgos vivo",
+ "title_es": "Los riesgos, en voz alta",
+ "h1": "Risks, said out loud: one sentence, one owner, one early sign",
+ "h1_es": "Los riesgos, en voz alta: una frase, un dueño, una señal temprana",
+ "lead": "In 2027, Helena's team is moving 21 reports off the old warehouse. The data council says how much risk it will take; the team writes eight risks, each one sentence with an owner and an early sign. A pre-mortem finds one risk's cause, and on 16 June its early sign shows in time.",
+ "lead_es": "En 2027, el equipo de Helena traslada 21 reportes del viejo almacén de datos. El consejo de datos dice cuánto riesgo acepta; el equipo escribe ocho riesgos, cada uno en una frase, con un dueño y una señal temprana. Un pre-mortem halla la causa de uno, y el 16 de junio su señal aparece a tiempo.",
+ "description": "A film on a risk register that lives, the second of Making the case, the second series of Data management. Before the move off the old warehouse, Helena Novak asks the data council its appetite for risk: low for personal data and security, medium for delays, high for new ways to deliver. Her team writes the move's eight risks in a register, each in one sentence (a cause, what could happen, what it would do), with one owner, a likelihood and an impact, a response (avoid, reduce, share or accept), a date to look again and an early sign; the case is approved with them. On the day the move begins, a pre-mortem (imagine the move has failed: why?) gives the vaguest risk, personal data, its cause: old extracts take whole tables, personal fields and all. Its owner, Yusuf Demir, has every extract checked against the protection rules before it moves; two weeks later the check finds an extract with two personal columns no report uses, and it stays behind. The council reads the top three risks every month; a risk is closed when it's gone, and a risk that has happened is an issue. Named once: ISO 31000 and Gary Klein's pre-mortem. It opens in Antarctica in 1911, where Amundsen's expedition marked each food depot across the route with numbered flags a party off course would still cross.",
+ "description_es": "Una película sobre un registro de riesgos vivo, la segunda de Construir el caso, la segunda serie de Gestión de datos. Antes del traslado del viejo almacén de datos, Helena Novak pregunta al consejo de datos su apetito de riesgo: bajo para datos personales y seguridad, medio para retrasos, alto para nuevas formas de entregar. Su equipo escribe los ocho riesgos del traslado en un registro, cada uno en una frase (una causa, lo que podría pasar, lo que causaría), con un solo dueño, una probabilidad y un impacto, una respuesta (evitar, reducir, compartir o aceptar), una fecha para revisarlo y una señal temprana; el caso se aprueba con ellos. El día en que empieza el traslado, un pre-mortem (imagina que el traslado fracasó: ¿por qué?) da su causa al riesgo más vago, los datos personales: los extractos antiguos copian tablas enteras, con sus campos personales. Su dueño, Yusuf Demir, hace revisar cada extracto con las reglas de protección antes de trasladarlo; dos semanas después la revisión halla un extracto con dos columnas personales que ningún reporte usa, y se queda atrás. El consejo lee cada mes los tres riesgos principales; un riesgo se cierra cuando desaparece, y un riesgo que ya ocurrió es un problema. Nombrados una vez: la ISO 31000 y el pre-mortem de Gary Klein. Empieza en la Antártida en 1911, donde la expedición de Amundsen marcó cada depósito de comida a lo ancho de la ruta con banderas numeradas que un grupo desviado aún cruzaría.",
+ "card": "Helena writes each risk of the move in one sentence, with an owner and an early sign, and one sign shows in time.",
+ "card_es": "Helena escribe cada riesgo del traslado en una frase, con un dueño y una señal temprana, y una señal aparece a tiempo.",
+ "chapters_es": {
+  "depots": "Banderas a lo ancho de la ruta",
+  "appetite": "Cuánto riesgo",
+  "sentence": "Una frase, un dueño",
+  "premortem": "Fracasó. ¿Por qué?",
+  "sign": "La señal temprana",
+  "monthly": "Leído cada mes"
+ },
+ "past": [
+  "Antarctica, 1911: flags across the route",
+  "Amundsen's team left food in depots for the way back from the Pole. In fog a depot could be missed, so they marked each one across the route, with numbered flags a party off course would still cross. A risk needs its early sign set the same way."
+ ],
+ "past_es": [
+  "La Antártida, 1911: banderas a lo ancho de la ruta",
+  "El equipo de Amundsen dejó comida en depósitos para volver del Polo. Con niebla, un depósito podía pasarse de largo, así que marcaron cada uno a lo ancho de la ruta, con banderas numeradas que un grupo desviado aún cruzaría. Un riesgo necesita su señal temprana puesta igual."
+ ],
+ "next_h": "You've seen how to name each risk and watch its early sign. Next: everyone at the table, told the same story every month.",
+ "next_h_es": "Viste cómo nombrar cada riesgo y vigilar su señal temprana. Después: todos en la mesa, con la misma historia cada mes.",
+ "elsewhere": {
+  "h": "Go further",
+  "h_es": "Para seguir",
+  "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+  "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+  "links": [
+   {
+    "title": "ISO 31000, risk management",
+    "title_es": "ISO 31000, gestión del riesgo (en inglés)",
+    "line": "ISO's page for the international standard: what it covers, and the words it gives an organisation for its risks.",
+    "line_es": "La página de ISO sobre la norma internacional: qué cubre, y las palabras que da a una organización para sus riesgos.",
+    "href": "https://www.iso.org/iso-31000-risk-management.html",
+    "href_es": "https://www.iso.org/iso-31000-risk-management.html"
+   },
+   {
+    "title": "The pre-mortem method",
+    "title_es": "El método del pre-mortem (en inglés)",
+    "line": "Gary Klein, the psychologist, on how to run one: imagine the project has failed, then say why.",
+    "line_es": "Gary Klein, el psicólogo, sobre cómo hacer uno: imagina que el proyecto fracasó y di por qué.",
+    "href": "https://www.psychologytoday.com/us/blog/seeing-what-others-dont/202101/the-pre-mortem-method",
+    "href_es": "https://www.psychologytoday.com/us/blog/seeing-what-others-dont/202101/the-pre-mortem-method"
+   },
+   {
+    "title": "The Orange Book",
+    "title_es": "The Orange Book (en inglés)",
+    "line": "The UK government's free guide to managing risk, with owners, appetite and how a board reads its risks.",
+    "line_es": "La guía gratuita del gobierno del Reino Unido para gestionar el riesgo, con dueños, apetito y cómo un consejo lee sus riesgos.",
+    "href": "https://www.gov.uk/government/publications/orange-book",
+    "href_es": "https://www.gov.uk/government/publications/orange-book"
+   },
+   {
+    "title": "The South Pole, by Roald Amundsen",
+    "title_es": "The South Pole, de Roald Amundsen (en inglés)",
+    "line": "His own account of the expedition, from 1912, with the depots, the flags and the way home.",
+    "line_es": "Su propio relato de la expedición, de 1912, con los depósitos, las banderas y el regreso.",
+    "href": "https://www.gutenberg.org/ebooks/4229",
+    "href_es": "https://www.gutenberg.org/ebooks/4229"
+   }
+  ]
+ }
+}

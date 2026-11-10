@@ -4,10 +4,17 @@
 
 From the steps on the map: who **does** each step (the role assigned to it), who **answers** for it (the role of the person who owns what it writes) and who's **told** (the roles of the steps that read what it writes). Who's consulted isn't on the map: it's agreed in each step.
 
-| Step | analytics engineer | data governance lead | data owner | data steward | requester |
-|---|---|---|---|---|---|
-| ask for a term |  | answers |  | told | does |
-| draft the definition |  | answers | told | does |  |
-| decide |  | told | does, answers |  |  |
-| publish in the glossary | told | does | answers | told |  |
-| sync to every tool | does |  | answers | told |  |
+| Step | analytics engineer | data architect | data governance lead | data owner | data steward | planning contributor | product owner | release approver | requester |
+|---|---|---|---|---|---|---|---|---|---|
+| ask for a term |  |  | answers |  | told |  |  |  | does |
+| raise a ticket |  |  |  |  |  | told | answers |  | does, answers |
+| draft the definition |  |  | answers | told | does |  |  |  |  |
+| draft the change | told |  |  |  |  | does, told | answers |  | answers |
+| decide |  |  | told | does, answers |  |  |  |  |  |
+| build it in development | told | answers |  |  |  | does, told |  |  |  |
+| publish in the glossary | told |  | does | answers | told | told |  |  |  |
+| open a pull request | told |  |  |  |  | does | answers | told | answers |
+| sync to every tool | does |  |  | answers | told | told |  |  |  |
+| review the code | does, answers |  |  |  |  |  |  | told |  |
+| approve the change |  |  |  |  |  |  | answers | does, told | answers |
+| release to production |  | answers |  |  |  | told |  | does |  |

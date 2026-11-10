@@ -11,6 +11,9 @@ Serving data to people, agents and systems. Rohan Desai, in Finance, asks what c
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Reports on demand](https://data.learn-all.org/from-tables-to-decisions/reports-on-demand/) | Answers on demand | 6½ min | 5 | 3 questions | [script](1-reports-on-demand/script.md) · [source](1-reports-on-demand/source/README.md) |
+| [Defined in the open](https://data.learn-all.org/from-tables-to-decisions/define-it-once/) | Each measure defined once | 7½ min | 7 | 3 questions | [script](2-define-it-once/script.md) · [source](2-define-it-once/source/README.md) |
+| [More readers than people](https://data.learn-all.org/from-tables-to-decisions/more-readers-than-people/) | Serving every reader | 8 min | 6 | 3 questions | [script](3-more-readers-than-people/script.md) · [source](3-more-readers-than-people/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

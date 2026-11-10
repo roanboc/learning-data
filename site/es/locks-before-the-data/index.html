@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cerraduras antes que los datos · Learning Data</title>
+<meta name="description" content="Películas sobre la seguridad de la plataforma para equipos de datos: la identidad como frontera, accesos sin secretos que alguien guarde, muros y llaves, poder de administrador encendido solo para una tarea, grupos del proveedor de identidad, cargas sin secretos, redes privadas y almacenamiento solo a través del catálogo, un camino revisado a producción, y auditoría.">
+<meta property="og:title" content="Cerraduras antes que los datos · Learning Data"><meta property="og:description" content="La primera serie de Protección de datos y privacidad. Un proceso nocturno carga los datos del registro con el token personal de Jun, desde un espacio de trabajo abierto a internet. Cuatro películas muestran las ideas detrás de las cerraduras de una plataforma, sin nombrar productos; cinco las construyen en Databricks, GitHub y Azure."><meta property="og:image" content="https://data.learn-all.org/assets/who-is-it-really-poster.jpg"><meta property="og:locale" content="es_419">
+<link rel="alternate" hreflang="en" href="https://data.learn-all.org/locks-before-the-data/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/locks-before-the-data/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><img src="../../assets/favicon.svg" alt=""><span>Learning Data</span></a><nav aria-label="Sitio"><a href="../">Empieza aquí</a><a href="../topics/" aria-current="true">Temas</a><a href="../journey/">Cómo se hizo</a></nav><button class="more-btn" type="button" popovertarget="top-more" aria-label="Más opciones"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></button><div class="more" id="top-more" popover><span class="lang" role="group" aria-label="Idioma"><a href="../../locks-before-the-data/" lang="en" hreflang="en">EN</a><a href="./" aria-current="true" lang="es">ES</a></span><div class="nav-tools"><button class="theme" type="button" aria-pressed="false" aria-label="Modo oscuro"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button><a class="parent-site" href="https://learn-all.org" aria-label="Ir a learn-all.org"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9"/></svg><span>learn-all.org</span></a><a href="https://www.linkedin.com/in/roanboc" aria-label="Contactar a Rodrigo en LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg></a></div></div><script>(function(){var d=document.documentElement,b=document.currentScript.parentNode.querySelector(".theme"),m=matchMedia("(prefers-color-scheme: dark)");try{var t=localStorage.getItem("theme");if(t=="dark"||t=="light")d.dataset.theme=t}catch(e){}function dark(){return d.dataset.theme?d.dataset.theme=="dark":m.matches}function show(){b.setAttribute("aria-pressed",dark())}show();m.addEventListener("change",show);b.addEventListener("click",function(){d.dataset.theme=dark()?"light":"dark";try{localStorage.setItem("theme",d.dataset.theme)}catch(e){}show()})})()</script></div></header>
+<main>
+<section class="hero cine"><div class="bg mosaic" aria-hidden="true"><img src="../../assets/who-is-it-really-poster.jpg" alt=""><img src="../../assets/no-secret-to-lose-poster.jpg" alt=""><img src="../../assets/walls-doors-and-keys-poster.jpg" alt=""><img src="../../assets/power-you-switch-on-poster.jpg" alt=""><img src="../../assets/people-and-groups-poster.jpg" alt=""><img src="../../assets/workloads-without-secrets-poster.jpg" alt=""><img src="../../assets/network-storage-and-keys-poster.jpg" alt=""><img src="../../assets/who-is-it-really-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
+<p class="eyebrow crumbs"><a href="../topics/">Temas</a> › <a href="../topics/#data-protection">Protección de datos y privacidad</a> › Cerraduras antes que los datos</p>
+<h1>Cerraduras antes que los datos</h1>
+<p class="lead">La primera serie de Protección de datos y privacidad. Un proceso nocturno carga los datos del registro con el token personal de Jun, desde un espacio de trabajo abierto a internet. Cuatro películas muestran las ideas detrás de las cerraduras de una plataforma, sin nombrar productos; cinco las construyen en Databricks, GitHub y Azure.</p>
+</section>
+
+<section class="module" id="films" aria-labelledby="films-h">
+<div class="mhead"><div><h2 id="films-h">Las películas</h2><p>Míralas en orden: primero las ideas, luego las herramientas.</p></div></div>
+<div class="topic-grid" data-progress-text='{"watched":"Vista","labs":"{n} de {of} labs","quiz":"{n} de {of} situaciones"}'>
+<article class="topic-card">
+<img src="../../assets/who-is-it-really-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 1 de 9 · La identidad como frontera</p>
+<h3><a href="who-is-it-really/">¿Quién es, en realidad?</a></h3>
+<p>Por qué toda solicitud a una plataforma prueba quién es, y por qué sus permisos vienen de un rol, nunca de una persona.</p>
+<p class="meta">8 min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-who-is-it-really" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/no-secret-to-lose-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 2 de 9 · Entrar sin secretos</p>
+<h3><a href="no-secret-to-lose/">Ningún secreto que perder</a></h3>
+<p>Las formas en que un proceso o una persona entra, de peor a mejor, según quién guarda un secreto y por cuánto tiempo.</p>
+<p class="meta">9 min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-no-secret-to-lose" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/walls-doors-and-keys-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 3 de 9 · Límites, caminos y llaves</p>
+<h3><a href="walls-doors-and-keys/">Muros, puertas y llaves</a></h3>
+<p>Quién protege qué, muros según las áreas del mapa, caminos privados, salas aparte, llaves propias y copias que nadie puede borrar.</p>
+<p class="meta">8½ min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-walls-doors-and-keys" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/power-you-switch-on-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 4 de 9 · Cuentas de administrador</p>
+<h3><a href="power-you-switch-on/">Poder que se enciende</a></h3>
+<p>Una segunda cuenta para cada especialista, con el poder apagado hasta encenderlo para una tarea, con motivo, un sí y bitácora.</p>
+<p class="meta">8½ min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-power-you-switch-on" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/people-and-groups-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 5 de 9 · Acceso, grupos y poder de admin</p>
+<h3><a href="people-and-groups/">Personas y grupos</a></h3>
+<p>Personas y grupos de un solo directorio, una llave de acceso para cada entrada, y poder de administrador solo para una tarea.</p>
+<p class="meta">8 min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-people-and-groups" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/workloads-without-secrets-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 6 de 9 · Identidad de carga de trabajo</p>
+<h3><a href="workloads-without-secrets/">Cargas sin secretos</a></h3>
+<p>Un proceso que entra como sí mismo: un nombre propio, una nota firmada en cada despliegue y una contraseña en un almacén.</p>
+<p class="meta">9 min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-workloads-without-secrets" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../assets/network-storage-and-keys-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Película 7 de 9 · Puertas a los datos</p>
+<h3><a href="network-storage-and-keys/">Red, almacenamiento y llaves</a></h3>
+<p>Puertas privadas, una lista corta de salida, una identidad en los archivos y un solo rodeo al catálogo, encendido y vigilado.</p>
+<p class="meta">9½ min · Pausa para pensar · Cerraduras antes que los datos · En inglés</p>
+<p class="tc-progress" data-progress="ld-network-storage-and-keys" hidden></p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="module" id="thread" aria-labelledby="thread-h">
+<div class="mhead"><div><h2 id="thread-h">Un hilo: un proceso nocturno, de un token prestado a un nombre propio</h2><p>El proceso que carga cada noche los datos del registro se ejecuta con el token personal de Jun Park, creado en 2024 sin fecha de fin, desde un espacio de trabajo abierto a internet. Película a película, Sam Okafor le da un nombre propio y ningún secreto que alguien guarde, pone el espacio de trabajo tras caminos privados, lleva el gran poder de los especialistas a cuentas de administrador que se encienden para una tarea, deja que producción cambie solo con revisión, y lo vigila todo.</p></div></div>
+</section>
+
+<section class="module" id="past" aria-labelledby="past-h">
+<div class="mhead"><div><h2 id="past-h">Cada película empieza en otro lugar, en otra época</h2></div></div>
+<div class="prose"><table><thead><tr><th>Película</th><th>Empieza con</th><th>Sigue siendo cierto</th></tr></thead><tbody>
+<tr><td>¿Quién es, en realidad?</td><td>China, los Reinos Combatientes: un tigre de bronce en dos mitades, y una orden que solo valía si encajaban</td><td>No confíes en nada sin prueba, y da a cada identidad lo mínimo que necesita.</td></tr>
+<tr><td>Ningún secreto que perder</td><td>Londres, 1990: el maletín de papel al portador de un mensajero, y la bóveda del Banco de Inglaterra</td><td>El mejor secreto es el que nadie guarda.</td></tr>
+<tr><td>Muros, puertas y llaves</td><td>Ragusa, 1377: un puerto comercial abierto en los años de la peste, con un mes aparte antes de sus pocas puertas</td><td>Pocas puertas, cada una con su cerradura a la vista.</td></tr>
+<tr><td>Poder que se enciende</td><td>Great Barrington, Massachusetts, 1875: unos ladrones retuvieron a la familia de un banquero, y una cerradura de tiempo mantuvo cerrada la bóveda</td><td>El gran poder es una cuenta aparte, que se enciende para una tarea.</td></tr>
+<tr><td>Personas y grupos</td><td>Moss, Noruega, años setenta: una cerradura de hotel que abre una tarjeta nueva para cada huésped</td><td>Una llave debería terminar con la estancia.</td></tr>
+<tr><td>Cargas sin secretos</td><td>Países Bajos, años noventa: un auto que le pide un código a su llave antes de arrancar</td><td>Una carga prueba quién es sin una contraseña.</td></tr>
+<tr><td>Red, almacenamiento y llaves</td><td>Roma, en el año 97: agujeros en los canales, y el agua tomada solo en el depósito</td><td>Ningún camino a los datos se salta el catálogo, salvo el que enciendes y vigilas.</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="module" id="four-sides" aria-labelledby="four-sides-h">
+<div class="mhead"><div><h2 id="four-sides-h">Quiénes están en la mesa</h2><p>Los contornos cian son del lado técnico; los dorados, del lado de negocio.</p></div></div>
+<div class="four">
+<div class="card tech"><h3>Lleva la plataforma</h3><p>Sam Okafor, que cuida la plataforma y sus cerraduras, y guía la serie</p></div>
+<div class="card tech"><h3>Construye el proyecto de datos</h3><p>Jun Park, cuyo proceso nocturno corría con su propio token</p></div>
+<div class="card tech"><h3>Dibuja el mapa</h3><p>Noor Rahman, la arquitecta de datos, cuyo mapa fija las áreas que sigue cada muro</p></div>
+<div class="card biz"><h3>Es dueña de los datos del registro</h3><p>Mei Tanaka, que decide quién puede verlos</p></div>
+<div class="card biz"><h3>Lidera la gobernanza de datos</h3><p>Yusuf Demir, que lleva el registro de quién es dueño de qué y los acuerdos firmados</p></div>
+</div>
+</section>
+</main>
+<footer><p class="foot-links"><a href="https://github.com/roanboc/learning-data">Código en GitHub</a></p><p>La universidad, las personas, las cifras y los registros de la película son ficticios. La narración es una voz sintética. Código: licencia MIT. Película, guion, subtítulos, imágenes y textos: CC BY 4.0. Los logos y marcas de empresas, incluidos los de Databricks y dbt, no están cubiertos por ninguna de las dos licencias y pertenecen a sus dueños; este proyecto no está afiliado a ellos ni cuenta con su respaldo. Ver <a href="https://github.com/roanboc/learning-data/blob/main/NOTICE.md">avisos</a> (en inglés).</p></footer>
+<script src="../../assets/learn/path.js"></script>
+<script src="../../assets/ambient.js"></script>
+</body>
+</html>

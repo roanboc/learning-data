@@ -440,13 +440,13 @@ const NARR={
  {"id":"monday","gap":0.8,"text":"On Monday night, award had changed."},
  {"id":"opened","gap":0.8,"text":"So the check proposed the change, in a pull request: the old words and the new, and what the new words touch."},
  {"id":"three","gap":0.8,"text":"Three tables, eight definitions that name award, the code that builds them, and three reports and apps to tell."},
- {"id":"tuesday","gap":0.8,"text":"On Tuesday morning, Mei approved the meaning, and data governance confirmed the term."},
+ {"id":"tuesday","gap":0.8,"text":"On Tuesday morning, the data team reviewed the code, and Mei was told what it touches."},
  {"id":"saw","gap":0.8,"text":"This time, she saw where her words are used."}]},
 "setting":{"name":"A number is a setting","lead":0.8,"tail":0.8,"vo":[
  {"id":"number","gap":0.8,"text":"The new words hold a number: 6 credit points.","say":"The new words hold a number: six credit points."},
  {"id":"kept","gap":0.8,"text":"So it's kept in one place, as a setting: min award credit points, 6.","say":"So it's kept in one place, as a setting: min award credit points, six."},
  {"id":"reads","gap":0.8,"text":"Jun's new column, counts as an award, reads it, and every count of awards reads the column."},
- {"id":"agree","gap":0.8,"text":"If Mei and the faculties ever agree on another number, one line changes, in a reviewed pull request."}]},
+ {"id":"agree","gap":0.8,"text":"If Mei and the faculties ever agree on another number, the glossary changes first, then one line, in a pull request the data team reviews."}]},
 "count":{"name":"Counted once","lead":0.8,"tail":0.8,"vo":[
  {"id":"meaning","gap":0.8,"text":"A count is a meaning too: which credentials count, and in which year."},
  {"id":"once","gap":0.8,"text":"So awards conferred is counted once, as a metric view: a count the platform defines once, for every tool that asks."},
@@ -475,7 +475,7 @@ const NARR={
  {"id":"last","gap":0.8,"text":"One meaning, read by people, reports and agents."}]}
 };
 
-const VODUR={"words/today": 2.044, "words/owns": 5.226, "words/changes": 7.285, "words/slowed": 5.341, "words/five": 6.405, "words/two": 11.852, "words/explain": 3.443, "words/change": 1.288, "words/page": 5.193, "words/setting": 2.715, "words/once": 4.408, "words/night": 5.712, "words/day": 4.953, "words/reach": 3.585, "page/term": 2.956, "page/has": 4.182, "page/lists": 3.186, "page/map": 5.606, "page/read": 1.6, "page/cites": 3.79, "copy/keeps": 7.888, "copy/names": 4.049, "copy/sends": 4.561, "sync/every": 3.946, "sync/monday": 1.932, "sync/opened": 6.068, "sync/three": 6.267, "sync/tuesday": 4.589, "sync/saw": 2.274, "setting/number": 2.638, "setting/kept": 4.245, "setting/reads": 5.836, "setting/agree": 6.451, "count/meaning": 3.78, "count/once": 7.395, "count/what": 4.102, "count/builds": 4.074, "count/reads": 3.651, "count/own": 2.4, "agents/same": 2.427, "agents/asks": 6.053, "agents/answers": 7.152, "agents/prefers": 4.009, "agents/built": 3.787, "agents/one": 3.176, "layers/three": 5.547, "layers/home": 1.109, "layers/words": 3.317, "layers/relate": 3.438, "layers/counts": 4.265, "layers/checked": 3.09, "close/sees": 4.689, "close/decides": 4.648, "close/day": 9.955, "close/last": 3.086};
+const VODUR={"words/today": 2.044, "words/owns": 5.226, "words/changes": 7.285, "words/slowed": 5.341, "words/five": 6.405, "words/two": 11.852, "words/explain": 3.443, "words/change": 1.288, "words/page": 5.193, "words/setting": 2.715, "words/once": 4.408, "words/night": 5.712, "words/day": 4.953, "words/reach": 3.585, "page/term": 2.956, "page/has": 4.182, "page/lists": 3.186, "page/map": 5.606, "page/read": 1.6, "page/cites": 3.79, "copy/keeps": 7.888, "copy/names": 4.049, "copy/sends": 4.561, "sync/every": 3.946, "sync/monday": 1.932, "sync/opened": 6.068, "sync/three": 6.267, "sync/tuesday": 4.897, "sync/saw": 2.274, "setting/number": 2.638, "setting/kept": 4.245, "setting/reads": 5.836, "setting/agree": 8.759, "count/meaning": 3.78, "count/once": 7.395, "count/what": 4.102, "count/builds": 4.074, "count/reads": 3.651, "count/own": 2.4, "agents/same": 2.427, "agents/asks": 6.053, "agents/answers": 7.152, "agents/prefers": 4.009, "agents/built": 3.787, "agents/one": 3.176, "layers/three": 5.547, "layers/home": 1.109, "layers/words": 3.317, "layers/relate": 3.438, "layers/counts": 4.265, "layers/checked": 3.09, "close/sees": 4.689, "close/decides": 4.648, "close/day": 9.955, "close/last": 3.086};
 
 /* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
    hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
@@ -1230,7 +1230,11 @@ PEOPLE.jun={name:"Jun Park",role:"Analytics engineer",side:"Technical",does:"pro
    landscapes, soft, so the role colours are the strongest washes on screen. Text is dark ink on paper-light cards.
    Everything costly is painted once and kept: the paper, the pigment's grain, each place's background and each card's paper. Only
    the text and what moves are drawn every frame, so the site's player can draw the film live. Every name here starts with wc_ or WC,
-   because every file of the film shares one script. */
+   because every file of the film shares one script.
+   The site's player draws a lighter watercolour than the video, so it plays smoothly on a laptop or a phone (5 November 2026): it
+   makes the paper and the grain in a worker, off the page's thread; it shows each place as a picture drawn when the film was
+   published (places/ beside film.js) instead of painting it; it keeps only the pictures it is using; and it washes people in fewer
+   layers (people.js). The video, its stills, its poster and the checks draw the full watercolour, as before (window.__RENDER__). */
 
 /* ---------- colours ---------- */
 const WC_PAPER=[251,247,238],WC_PENCIL=[58,54,66],WC_INK=[46,42,56],WC_MUTED=[100,96,112],WC_DARK=[30,26,40],WC_CARD=[253,251,245];
@@ -1259,34 +1263,72 @@ const WCP={skyTop:[116,174,226],sun:[255,224,150],farForest:[124,162,154],far:[1
 function wc_rng(seed){let s=(seed>>>0)||1;return()=>{s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function wc_noise(seed){const R=wc_rng(seed),N=new Float32Array(1024);for(let i=0;i<1024;i++)N[i]=R();const g=(ix,iy)=>N[((ix*73856093)^(iy*19349663))&1023];
   return(x,y)=>{const ix=Math.floor(x),iy=Math.floor(y),tx=x-ix,ty=y-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);return lerp(lerp(g(ix,iy),g(ix+1,iy),sx),lerp(g(ix,iy+1),g(ix+1,iy+1),sx),sy);};}
-// the paper's tooth and fibres, near white, to multiply over a whole frame; k is how strongly it shows, and the corners darken a touch
-function wc_paperTex(w,h,seed,k){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+5);
+// the paper's tooth and fibres, near white, to multiply over a whole frame; k is how strongly it shows, and the corners darken a touch.
+// The pixels and the fibres are worked out by wc_paperPx, which the site's player runs in a worker (wc_texWorker)
+function wc_paperPx(w,h,seed,k){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed),R=wc_rng(seed+5);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/2.3,j/2.3)*0.45+n(i/9,j/9)*0.35+n(i/60,j/60)*0.2,t=255-(Math.pow(v,2.4)*46+R()*6)*k,
     e=Math.pow(Math.hypot((i-w/2)/(w*0.62),(j-h*0.48)/(h*0.62)),2.2),vg=1-0.05*clamp(e-0.35,0,1);d[q]=t*vg;d[q+1]=(t-1*k)*(vg-0.003);d[q+2]=(t-3*k)*(vg-0.006);d[q+3]=255;}
-  x.putImageData(im,0,0);x.lineCap="round";
-  for(let i=0;i<w*h/2400;i++){const x0=R()*w,y0=R()*h,a=R()*TAU,l=5+R()*24;x.strokeStyle="rgba(130,118,100,"+((0.04+R()*0.07)*k)+")";x.lineWidth=0.5+R()*0.7;x.beginPath();x.moveTo(x0,y0);
+  const fib=[];for(let i=0;i<w*h/2400;i++){const x0=R()*w,y0=R()*h,a=R()*TAU,l=5+R()*24;fib.push([x0,y0,a,l,(0.04+R()*0.07)*k,0.5+R()*0.7]);}
+  return{d,fib};}
+function wc_paperTex(w,h,seed,k,px){px=px||wc_paperPx(w,h,seed,k);const c=wc_texOf(w,h,px.d),x=c.getContext("2d");x.lineCap="round";
+  for(const [x0,y0,a,l,al,lw] of px.fib){x.strokeStyle="rgba(130,118,100,"+al+")";x.lineWidth=lw;x.beginPath();x.moveTo(x0,y0);
     x.quadraticCurveTo(x0+Math.cos(a+0.5)*l*0.5,y0+Math.sin(a+0.5)*l*0.5,x0+Math.cos(a)*l,y0+Math.sin(a)*l);x.stroke();}
   return c;}
 // pigment that settles in the paper's tooth: white with clustered specks, to multiply into washes
-function wc_granTex(w,h,seed){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed),R=wc_rng(seed+3);
+function wc_granPx(w,h,seed){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed),R=wc_rng(seed+3);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/4,j/4)*0.55+n(i/19,j/19)*0.45,sp=R()<0.05*v?R()*60:0,t=255-v*36-sp;d[q]=t;d[q+1]=t;d[q+2]=t;d[q+3]=255;}
-  x.putImageData(im,0,0);return c;}
+  return d;}
+function wc_granTex(w,h,seed,d){return wc_texOf(w,h,d||wc_granPx(w,h,seed));}
 // soft blotches, as an alpha mask, for washes that dry unevenly
-function wc_blotchTex(w,h,seed,scale,bias){const c=mkCanvas(w,h),x=c.getContext("2d"),im=x.createImageData(w,h),d=im.data,n=wc_noise(seed);
+function wc_blotchPx(w,h,seed,scale,bias){const d=new Uint8ClampedArray(w*h*4),n=wc_noise(seed);
   for(let j=0;j<h;j++)for(let i=0;i<w;i++){const q=(j*w+i)*4,v=n(i/scale,j/scale)*0.6+n(i/(scale/2.7),j/(scale/2.7))*0.3+n(i/(scale/8),j/(scale/8))*0.1;
     d[q]=255;d[q+1]=255;d[q+2]=255;d[q+3]=clamp((v-0.22+bias)*1.7,0,1)*255;}
-  x.putImageData(im,0,0);return c;}
+  return d;}
+function wc_blotchTex(w,h,seed,scale,bias,d){return wc_texOf(w,h,d||wc_blotchPx(w,h,seed,scale,bias));}
+function wc_texOf(w,h,d){const c=mkCanvas(w,h);c.getContext("2d").putImageData(new ImageData(d,w,h),0,0);return c;}
+// for the site's player: the grain and the blotches in one, black, as opaque as they are dark, to lay on a person's paint in one pass
+// (source-atop) where the video multiplies the grain and the blotches in in two, and cuts the paint out again (people.js, wc_wpaint).
+// g is the grain's pixels at w x h, b the blotches' at bw x bh, read between their pixels as the browser stretches them
+function wc_toothPx(g,b,w,h,bw,bh){const d=new Uint8ClampedArray(w*h*4),sx=bw/w,sy=bh/h;
+  for(let j=0;j<h;j++){const fy=Math.min(bh-1,Math.max(0,(j+0.5)*sy-0.5)),y0=Math.floor(fy),y1=Math.min(bh-1,y0+1),ty=fy-y0;
+    for(let i=0;i<w;i++){const q=(j*w+i)*4,fx=Math.min(bw-1,Math.max(0,(i+0.5)*sx-0.5)),x0=Math.floor(fx),x1=Math.min(bw-1,x0+1),tx=fx-x0,
+      m=lerp(lerp(b[(y0*bw+x0)*4+3],b[(y0*bw+x1)*4+3],tx),lerp(b[(y1*bw+x0)*4+3],b[(y1*bw+x1)*4+3],tx),ty)/255;
+      d[q+3]=(1-(1-0.5*(1-g[q]/255))*(1-0.4*m*0.231))*255;}}
+  return d;}
 // what is kept: the textures, each place's background, each card's paper, each white figure, and spare canvases
-const WC={ready:false,bg:{},paint:{},card:{},tint:{},fig:{},buf:{}};
+const WC={ready:false,bg:{},paint:{},nPaint:0,card:{},tint:{},fig:{},buf:{}};
 function wc_prep(){if(WC.ready)return;WC.gran=WC.gran||wc_granTex(W,H,17);WC.paper=WC.paper||wc_paperTex(W,H,23,0.42);WC.blotch=WC.blotch||wc_blotchTex(480,270,31,60,0.05);WC.ready=true;}
-// the same, one texture at a time with a pause between, so a page that is opening stays responsive (4 November 2026)
-async function wc_prepSoft(){const y=()=>new Promise(r=>setTimeout(r,0));if(!WC.ready&&!WC.gran){WC.gran=wc_granTex(W,H,17);await y();}
-  if(!WC.ready&&!WC.paper){WC.paper=wc_paperTex(W,H,23,0.42);await y();}wc_prep();}
-function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=WC.buf[k]=mkCanvas(w,h);if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);
-  x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
+// the textures, made in a worker by the same code (so the same pixels), for the site's player: made on the page, they held it for a
+// second or more as the visitor reached for the film, several on a phone (5 November 2026). Null where a worker can't run
+function wc_texWorker(){try{if(window.__RENDER__||typeof Worker==="undefined"||typeof Blob==="undefined"||!(window.URL&&URL.createObjectURL))return null;
+    const src=["const TAU="+TAU+",clamp="+clamp+",lerp="+lerp+";",wc_rng,wc_noise,wc_paperPx,wc_granPx,wc_blotchPx,wc_toothPx,
+      "onmessage=e=>{const [w,h]=e.data,g=wc_granPx(w,h,17),p=wc_paperPx(w,h,23,0.42),b=wc_blotchPx(480,270,31,60,0.05),a=wc_toothPx(g,b,w,h,480,270);"+
+      "postMessage({g,p,b,a},[g.buffer,p.d.buffer,b.buffer,a.buffer]);};"].join("\n"),u=URL.createObjectURL(new Blob([src],{type:"text/javascript"})),wk=new Worker(u);
+    return new Promise((res,rej)=>{const end=()=>{wk.terminate();URL.revokeObjectURL(u);};wk.onmessage=e=>{end();res(e.data);};wk.onerror=e=>{end();rej(e);};wk.postMessage([W,H]);});}
+  catch(e){return null;}}
+// the same, for the site's player: from the worker, or, where none can run, on the page one texture at a time with a pause between,
+// so a page that is opening stays responsive (4 November 2026)
+async function wc_prepSoft(){const y=()=>new Promise(r=>setTimeout(r,0));if(WC.ready)return;
+  let r=null;const job=WC.job||(WC.job=wc_texWorker());if(job)try{r=await job;}catch(e){r=null;}
+  if(WC.ready)return;
+  if(r){WC.gran=wc_granTex(W,H,17,r.g);await y();WC.paper=wc_paperTex(W,H,23,0.42,r.p);await y();WC.blotch=wc_blotchTex(480,270,31,60,0.05,r.b);WC.tooth=wc_texOf(W,H,r.a);WC.ready=true;return;}
+  const g=wc_granPx(W,H,17);if(!WC.gran)WC.gran=wc_granTex(W,H,17,g);await y();if(!WC.paper)WC.paper=wc_paperTex(W,H,23,0.42);await y();
+  const b=wc_blotchPx(480,270,31,60,0.05);if(!WC.blotch)WC.blotch=wc_blotchTex(480,270,31,60,0.05,b);await y();WC.tooth=wc_texOf(W,H,wc_toothPx(g,b,W,H,480,270));WC.ready=true;}
+/* The site's player keeps what it makes only while it uses it. Kept for good, a film's spare canvases, cards and tints grew past a
+   gigabyte in one viewing (a person's canvases at every size the camera showed them, a card at every size it grew through), and the
+   browser slowed down, then dropped them (5 November 2026). Each kind keeps at most WC_KEEP pixels: what went unused longest goes
+   first, never anything the frame being drawn has used. The video keeps everything, as it did. */
+const WC_KEEP={buf:12e6,card:12e6,tint:4e6,bg:24e6},WC_PX={buf:0,card:0,tint:0,bg:0};let WC_FRAME=0;
+function wc_seen(c){c.__f=WC_FRAME;c.__t=performance.now();return c;}
+function wc_keep(kind,key,c){const M=WC[kind],old=M[key];if(old)WC_PX[kind]-=old.width*old.height;M[key]=wc_seen(c);WC_PX[kind]+=c.width*c.height;
+  if(window.__RENDER__||WC_PX[kind]<=WC_KEEP[kind])return c;const now=performance.now(),ks=Object.keys(M).sort((a,b)=>M[a].__t-M[b].__t);
+  for(const k of ks){if(WC_PX[kind]<=WC_KEEP[kind])break;const e=M[k];if(e===c||e.__f===WC_FRAME||now-e.__t<300)continue;WC_PX[kind]-=e.width*e.height;delete M[k];}
+  return c;}
+function wc_buf(k,w,h){let c=WC.buf[k];if(!c)c=wc_keep("buf",k,mkCanvas(w,h));else wc_seen(c);if(c.width!==w||c.height!==h){WC_PX.buf+=w*h-c.width*c.height;c.width=w;c.height=h;}
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
 // a texture's alpha, filled with one colour
-function wc_tint(tex,col){const k=col.map(v=>v|0).join(",")+"|"+tex.width;if(WC.tint[k])return WC.tint[k];const c=mkCanvas(tex.width,tex.height),x=c.getContext("2d");
-  x.fillStyle=rgba(col,1);x.fillRect(0,0,c.width,c.height);x.globalCompositeOperation="destination-in";x.drawImage(tex,0,0);return WC.tint[k]=c;}
+function wc_tint(tex,col){const k=col.map(v=>v|0).join(",")+"|"+tex.width;if(WC.tint[k])return wc_seen(WC.tint[k]);const c=mkCanvas(tex.width,tex.height),x=c.getContext("2d");
+  x.fillStyle=rgba(col,1);x.fillRect(0,0,c.width,c.height);x.globalCompositeOperation="destination-in";x.drawImage(tex,0,0);return wc_keep("tint",k,c);}
 
 /* ---------- shapes: lists of points, so each can be painted as a wash ---------- */
 const wc_multi=p=>Array.isArray(p[0][0]);
@@ -1343,7 +1385,9 @@ function wc_ink(ctx,pts,closed,lw,col,a,seed,amp){const p=wc_resample(pts,6);ctx
 function wc_resampleOpen(pts,step){const o=[];for(let i=0;i<pts.length-1;i++){const a=pts[i],b=pts[i+1],n=Math.max(1,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/step));
   for(let j=0;j<n;j++)o.push([lerp(a[0],b[0],j/n),lerp(a[1],b[1],j/n)]);}o.push(pts[pts.length-1]);return o;}
 function wc_pencil(ctx,pts,p,o){o=o||{};if(p<=0)return;const q=o.closed?pts.concat([pts[0]]):pts,key=q.map(v=>v[0].toFixed(1)+","+v[1].toFixed(1)).join(";")+"|"+(o.seed||5)+"|"+(o.amp==null?1:o.amp);
-  let J=WC.paint[key];if(!J){const r=wc_resampleOpen(q,5),amp=o.amp==null?1.0:o.amp;J=WC.paint[key]=[wc_jitter(r,amp,o.seed||5,0.05),wc_jitter(r,amp,(o.seed||5)+17,0.05)];}
+  let J=WC.paint[key];if(!J){const r=wc_resampleOpen(q,5),amp=o.amp==null?1.0:o.amp;J=WC.paint[key]=[wc_jitter(r,amp,o.seed||5,0.05),wc_jitter(r,amp,(o.seed||5)+17,0.05)];
+    // a line that moves is a new line each frame: the player keeps the last few thousand
+    if(!window.__RENDER__&&++WC.nPaint>4000){for(const k of Object.keys(WC.paint).slice(0,1000))delete WC.paint[k];WC.nPaint-=1000;}}
   const n=Math.max(2,Math.round(J[0].length*clamp(p,0,1)));ctx.save();ctx.lineCap="round";ctx.lineJoin="round";if(o.dash)ctx.setLineDash(o.dash);
   J.forEach((pp,i)=>{ctx.beginPath();ctx.moveTo(pp[0][0],pp[0][1]);for(let k=1;k<n;k++)ctx.lineTo(pp[k][0],pp[k][1]);ctx.lineWidth=(o.lw||2.6)*(i?0.55:1);
     ctx.strokeStyle=rgba(o.col||WC_PENCIL,(o.a==null?0.9:o.a)*(i?0.45:1));ctx.stroke();});ctx.restore();}
@@ -1448,10 +1492,78 @@ function wc_walker(ctx,x,y,h,cloth,depth,o){o=o||{};const k=h/100,P=WCP;
   wc_wash(ctx,[[x+8*k,y-78*k],[x+20*k,y-60*k],[x+15*k,y-56*k],[x+4*k,y-70*k]],cloth,{depth,kind:"arm",lw:1.2});}
 
 /* ---------- what is kept ---------- */
-// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still
-function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return c;wc_prep();c=WC.bg[key]=mkCanvas(w||W,h||H);const x=c.getContext("2d");paint(x);return c;}
+// a picture painted once, by paint(ctx) on a w×h canvas (default the frame), and kept: every background, and anything still. In the
+// site's player, one the film was published with as a picture (below) is that picture, and is never painted
+function wc_kept(key,w,h,paint){let c=WC.bg[key];if(c)return wc_seen(c);const pic=wc_pic(key);if(pic)return pic;
+  wc_prep();c=wc_keep("bg",key,mkCanvas(w||W,h||H));paint(c.getContext("2d"));return c;}
+/* ---------- the site's player: each place as a picture ---------- */
+// tools/publish.py draws each place the film paints (WC_PLACES), and anything else it keeps at the frame's size or larger (such as a
+// place painted at twice the size, for close-ups), as a picture, places/<name>.webp beside film.js, and lists them in
+// places/places.json by what wc_kept calls them ("place:" and the place's name), with the player that drew them, their size and when
+// the film shows each ([from, to] in seconds). The site's player shows those pictures instead of painting them: a place took 0.1 to
+// 0.5 s to paint on a fast computer and several times that on a laptop or a phone, and the player painted them while the film
+// played, so the picture froze again and again (5 November 2026). It fetches every picture once, in the order the film shows them,
+// and keeps decoded only those it shows from a moment ago to half a minute ahead, one the frame's size or larger at no more than twice
+// the player's width. One with no picture is painted, as before. The video, the stills, the poster and the checks paint everything.
+const WC_PICS={dir:null,list:null,file:{},pic:{},dec:{},job:{},failed:{},used:{},busy:0,t:0,hold:0,ready:null};
+// a picture decoded smaller than the film keeps it: [its width and height in the film, and how much smaller it is, across and down].
+// Wherever the film draws it at its own size, or a part of it, it is drawn as the film's size: master data film 8 draws the place
+// "screen" at its own size inside another picture, and governance in practice film 1 its faculty desk
+const WC_SMALL=new WeakMap();
+(function(){if(window.__RENDER__||typeof CanvasRenderingContext2D==="undefined")return;const P=CanvasRenderingContext2D.prototype,d=P.drawImage;
+  P.drawImage=function(im){const s=WC_SMALL.get(im);if(!s)return d.apply(this,arguments);const a=arguments;
+    if(a.length===3)return d.call(this,im,a[1],a[2],s[0],s[1]);
+    if(a.length===9)return d.call(this,im,a[1]*s[2],a[2]*s[3],a[3]*s[2],a[4]*s[3],a[5],a[6],a[7],a[8]);
+    return d.apply(this,arguments);};})();
+(function(){try{const s=!window.__RENDER__&&document.currentScript&&document.currentScript.src;if(s)WC_PICS.dir=s.replace(/[?#].*$/,"").replace(/[^/]*$/,"")+"places/";}catch(e){}})();
+// starts loading the pictures, once, on a page with the film; the list of pictures, or null where there are none
+function wc_picsLoad(){return WC_PICS.ready||(WC_PICS.ready=(async()=>{
+  if(!WC_PICS.dir||typeof WC_PLACES==="undefined"||!document.getElementById("film")||typeof fetch!=="function")return null;
+  try{const r=await fetch(WC_PICS.dir+"places.json");if(!r.ok)return null;const m=await r.json(),P=m.places||{};
+    const L=Object.keys(P).filter(k=>P[k].file).map(k=>({k,file:P[k].file,w:P[k].w||W,h:P[k].h||H,shows:P[k].shows||[]}));if(!L.length)return null;
+    WC_PICS.list=L;wc_picsFetch();return L;}catch(e){return null;}})());}
+// how soon the film shows a picture after t (one it showed before t, or never, comes last)
+function wc_picSoon(p,t){let d=1e9;for(const [a,b] of p.shows)if(b>=t)d=Math.min(d,Math.max(0,a-t));return d<1e9?d:1e6+(p.shows.length?p.shows[0][0]:0);}
+function wc_picsFetch(){const L=WC_PICS.list;if(!L)return;const todo=L.filter(p=>!WC_PICS.file[p.k]&&!WC_PICS.job[p.k]&&!WC_PICS.failed[p.k]).sort((a,b)=>wc_picSoon(a,WC_PICS.t)-wc_picSoon(b,WC_PICS.t));
+  while(WC_PICS.busy<3&&todo.length){const p=todo.shift();WC_PICS.busy++;
+    WC_PICS.job[p.k]=fetch(WC_PICS.dir+p.file).then(r=>{if(!r.ok)throw new Error(r.status);return r.blob();}).then(b=>{WC_PICS.file[p.k]=b;},()=>{WC_PICS.failed[p.k]=1;})
+      .then(()=>{WC_PICS.busy--;delete WC_PICS.job[p.k];wc_picsFetch();wc_picsKeep(WC_PICS.t);});}}
+// the width a picture is decoded at: one the frame's size or larger, enough for the camera to move in twice as close at the player's
+// size, never more than its own; a smaller one, whole
+function wc_picNeed(p){if(p.w*p.h<W*H)return p.w;const cv=document.getElementById("film");return Math.min(p.w,cv&&cv.width?Math.ceil(cv.width*2):p.w);}
+// keeps decoded the pictures the film shows from 2 s before t to 30 s after, and lets the others go (their files stay, to decode
+// again); one decoded smaller than the player now needs (it grew, or went full screen) is decoded again, and shown meanwhile
+function wc_picsKeep(t){const L=WC_PICS.list;if(!L)return;const moved=Math.abs(t-WC_PICS.t)>2;WC_PICS.t=t;if(moved)wc_picsFetch();
+  for(const p of L){const near=p.shows.some(([a,b])=>b>=t-2&&a<=t+30),have=WC_PICS.pic[p.k];
+    if(near&&WC_PICS.file[p.k]&&!WC_PICS.dec[p.k]&&(!have||have.width<wc_picNeed(p)*0.9))wc_picDecode(p);
+    else if(!near&&have&&WC_PICS.used[p.k]!==WC_FRAME){if(have.close)have.close();delete WC_PICS.pic[p.k];}}}
+// decoded off the page's thread where the browser can (createImageBitmap); when the film is waiting for it, it draws again
+function wc_picDecode(p){const k=p.k,b=WC_PICS.file[k],w=wc_picNeed(p);
+  const whole=()=>typeof createImageBitmap==="function"?createImageBitmap(b):new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=URL.createObjectURL(b);});
+  WC_PICS.dec[k]=(w<p.w&&typeof createImageBitmap==="function"?createImageBitmap(b,{resizeWidth:w,resizeHeight:Math.round(w*p.h/p.w),resizeQuality:"medium"}).catch(whole):whole())
+    .then(pic=>{const old=WC_PICS.pic[k];if(old&&old!==pic&&old.close)old.close();if(pic.width<p.w)WC_SMALL.set(pic,[p.w,p.h,pic.width/p.w,pic.height/p.h]);
+      WC_PICS.pic[k]=pic;if(WC_PICS.hold)window.dispatchEvent(new Event("resize"));},
+      ()=>{if(!WC_PICS.pic[k])WC_PICS.failed[k]=1;}).then(()=>{delete WC_PICS.dec[k];});}
+// a picture, if it's ready; null where it is to be painted
+function wc_pic(k){const p=WC_PICS.pic[k];if(!p)return null;WC_PICS.used[k]=WC_FRAME;return p;}
+// a picture the film shows at t that is still on its way
+function wc_picsMissing(t){const L=WC_PICS.list;if(!L)return false;for(const p of L)if(!WC_PICS.pic[p.k]&&!WC_PICS.failed[p.k]&&p.shows.some(([a,b])=>t>=a-0.3&&t<=b+0.3))return true;return false;}
+// resolves once the pictures the film shows from t to 2 s after are ready, or 8 s have passed
+function wc_picsReady(t){WC_PICS.t=t;wc_picsFetch();const until=performance.now()+8000;
+  return new Promise(res=>{const go=()=>{wc_picsKeep(t);let wait=false;for(const p of WC_PICS.list)if(!WC_PICS.pic[p.k]&&!WC_PICS.failed[p.k]&&p.shows.some(([a,b])=>b>=t-0.3&&a<=t+2))wait=true;
+    if(!wait||performance.now()>until)res();else setTimeout(go,40);};go();});}
+// the player's renderFrame: counts frames (for what is kept), keeps the pictures near this moment decoded, and, while a place this
+// moment shows is still on its way, keeps the frame before on screen (up to 3 s, then the place is painted) rather than paint it now
+function wc_liveFrame(rf){let lw=0,lh=0,since=0;return function(ctx,S,t){WC_FRAME++;const cv=ctx.canvas;if(!cv||cv.id!=="film"||!WC_PICS.list)return rf.apply(this,arguments);
+  wc_picsKeep(t);if(wc_picsMissing(t)&&cv.width===lw&&cv.height===lh){const now=performance.now();since=since||now;if(now-since<3000){WC_PICS.hold=1;return;}}
+  since=0;WC_PICS.hold=0;const r=rf.apply(this,arguments);lw=cv.width;lh=cv.height;return r;};}
 // the paper's tooth, and a soft darkening at the corners, over the whole frame: the last thing every scene draws, in the frame's own space
-function wc_paperOver(ctx,S){setScreen(ctx,S);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation="multiply";ctx.drawImage(WC.paper,0,0,ctx.canvas.width,ctx.canvas.height);ctx.restore();}
+// The player keeps the paper at the size of its canvas, so each frame lays it on pixel for pixel: stretched every frame, it cost five
+// times as much (5 November 2026)
+function wc_paperOver(ctx,S){setScreen(ctx,S);ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation="multiply";const cw=ctx.canvas.width,ch=ctx.canvas.height;
+  if(window.__RENDER__||(cw===W&&ch===H))ctx.drawImage(WC.paper,0,0,cw,ch);
+  else{let p=WC.paperAt;if(!p||p.width!==cw||p.height!==ch||p.src!==WC.paper){p=WC.paperAt=p||mkCanvas(cw,ch);p.width=cw;p.height=ch;p.src=WC.paper;p.getContext("2d").drawImage(WC.paper,0,0,cw,ch);}ctx.drawImage(p,0,0);}
+  ctx.restore();}
 // the film opens out of the paper, and each chapter's first moment
 function wc_fadeIn(ctx,S,t,d){d=d||1.2;if(t<d){setScreen(ctx,S);ctx.fillStyle=rgba(WC_PAPER,1-ease(t/d));ctx.fillRect(0,0,W,H);}}
 // a veil of paper over the scene, for the title and end cards
@@ -1476,8 +1588,10 @@ function wc_panelPaint(x,w,h,o){const r=o.kind==="card"||o.kind==="sheet"?12:o.k
   if(o.dashed){x.save();wc_tr(x,wc_rrPts(2,2,w-4,h-4,r));x.setLineDash([10,9]);x.lineWidth=2.5;x.strokeStyle=rgba(o.role||WC_PENCIL,0.95);x.stroke();x.restore();}
   else wc_ink(x,wc_rrPts(0,0,w,h,Math.min(r,6)),true,o.kind==="tag"||o.kind==="badge"?1.5:2,WC_PENCIL,0.85,o.seed||Math.round(w+h),0.9);}
 const WC_SC=2; // cards are kept at twice the frame's resolution, so they stay sharp when the camera moves in
-function wc_panel(ctx,x,y,w,h,o){o=o||{};w=Math.round(w);h=Math.round(h);const key=[o.kind,w,h,o.role,o.dashed?1:0,o.sw|0,o.sy|0,o.sh|0,o.wash,o.washA,o.fill,o.seed|0].join("|");let c=WC.card[key];
-  if(!c){wc_prep();c=WC.card[key]=mkCanvas((w+16)*WC_SC,(h+16)*WC_SC);const cx=c.getContext("2d");cx.scale(WC_SC,WC_SC);wc_panelPaint(cx,w,h,o);}
+// the site's player keeps a card at the resolution it is drawn at, a step above (a quarter of the memory on a laptop's screen)
+const wc_cardSc=ctx=>{if(window.__RENDER__)return WC_SC;const m=ctx.getTransform(),k=Math.hypot(m.a,m.b)*1.1;return k<=0.75?0.75:k<=1?1:k<=1.5?1.5:WC_SC;};
+function wc_panel(ctx,x,y,w,h,o){o=o||{};w=Math.round(w);h=Math.round(h);const sc=wc_cardSc(ctx),key=[o.kind,w,h,o.role,o.dashed?1:0,o.sw|0,o.sy|0,o.sh|0,o.wash,o.washA,o.fill,o.seed|0].join("|")+(sc===WC_SC?"":"|"+sc);let c=WC.card[key];
+  if(!c){wc_prep();c=wc_keep("card",key,mkCanvas(Math.ceil((w+16)*sc),Math.ceil((h+16)*sc)));const cx=c.getContext("2d");cx.scale(sc,sc);wc_panelPaint(cx,w,h,o);}else wc_seen(c);
   ctx.drawImage(c,x-8,y-8,w+16,h+16);}
 // a label: the paper tag, its text at 28 px or more; y is its middle; returns its width
 function wc_tag(ctx,x,y,s,o){o=o||{};const size=o.size||30,wt=o.w||700,w=Math.round(tw(ctx,s,size,wt,o.f)+40),h=Math.round(size+22),x0=o.align==="center"?x-w/2:o.align==="right"?x-w:x;
@@ -1612,7 +1726,8 @@ const wc_aura=e=>e[0]>200&&e[1]>200&&e[2]>200?WC_SIDE.none:e===TECH?WC_SIDE.tech
    at the size of the page, often half the video's or less, and painting every person at full video size each frame made the
    watercolour films play at a few frames a second on a laptop (4 November 2026). The video, stills and checks (and any frame at full size) keep K at 1,
    so their pictures are exactly as before; the blur, wash and pencil buffers keep their sizes in the film's own units. */
-function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+function outlined(ctx,draw,x,y,s,edge,box,glowA){if(!window.__RENDER__&&!WC_RAW&&WC.tooth&&ctx.getTransform)return wc_outlinedLive(ctx,draw,x,y,s,edge,box);
+  const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
   const m=!window.__RENDER__&&ctx.getTransform?ctx.getTransform():null,K=m?Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))):1,wd=K<1?Math.ceil(w*K):w,hd=K<1?Math.ceil(h*K):h;
   const [c,cx]=pcanvas("p",wd,hd);if(K<1)cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
   if(WC_RAW){ctx.drawImage(c,ox,oy,w,h);return;}
@@ -1628,6 +1743,27 @@ function outlined(ctx,draw,x,y,s,edge,box,glowA){const [x0,y0,x1,y1]=box,pad=40,
   const [tc,tx]=wc_buf("figT"+wd+"x"+hd,wd,hd);tx.drawImage(c,0,0);tx.globalCompositeOperation="source-in";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
   ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,ox+dx,oy+dy,w,h);ctx.restore();
   ctx.drawImage(fc,ox,oy,w,h);}
+/* The site's player washes people in fewer layers, so a film with several people on screen keeps up on a laptop or a phone (5 November
+   2026): the paper's grain and the uneven dry are laid on the paint in one pass (WC.tooth, made with the other textures in a worker,
+   wash.js) where the video lays them in two and cuts the paint out again, and the spare canvases are kept and reused at the largest size
+   asked for (wc_bufAt), where the video's are made for each size. The wash behind, the bleed and the pencil line are as in the video. */
+function wc_bufAt(k,w,h){let c=WC.buf[k];if(!c||c.width<w||c.height<h)c=wc_keep("buf",k,mkCanvas(Math.max(Math.ceil(w/64)*64,c?c.width:0),Math.max(Math.ceil(h/64)*64,c?c.height:0)));else wc_seen(c);
+  const x=c.getContext("2d");x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.imageSmoothingEnabled=true;x.clearRect(0,0,w,h);return[c,x];}
+function wc_outlinedLive(ctx,draw,x,y,s,edge,box){const [x0,y0,x1,y1]=box,pad=40,w=Math.ceil((x1-x0)*s+pad*2),h=Math.ceil((y1-y0)*s+pad*2);
+  const m=ctx.getTransform(),K=Math.min(1,Math.max(0.25,Math.hypot(m.a,m.b))),wd=Math.ceil(w*K),hd=Math.ceil(h*K),k=wd/w;
+  const [c,cx]=wc_bufAt("lvF",wd,hd);cx.scale(wd/w,hd/h);cx.translate(pad-x0*s,pad-y0*s);cx.scale(s,s);draw(cx);const ox=x+x0*s-pad,oy=y+y0*s-pad;
+  // the wash behind: the silhouette in the side's colour, shrunk, then grown again
+  const q=8,sw=Math.max(2,Math.ceil(w/q)),sh=Math.max(2,Math.ceil(h/q)),[ac,ax]=wc_bufAt("lvA",sw,sh);ax.drawImage(c,0,0,wd,hd,0,0,sw,sh);
+  ax.globalCompositeOperation="source-atop";ax.fillStyle=rgba(wc_aura(edge),1);ax.fillRect(0,0,sw,sh);
+  ctx.save();ctx.globalAlpha*=0.3;ctx.globalCompositeOperation="multiply";ctx.imageSmoothingEnabled=true;ctx.drawImage(ac,0,0,sw,sh,ox-10*s-q,oy+6*s-q,w+2*q,h+2*q);ctx.restore();
+  // the grain and the dry, in one pass, at the frame's scale
+  const tw=Math.min(W,wd/k),th=Math.min(H,hd/k);cx.setTransform(1,0,0,1,0,0);cx.globalCompositeOperation="source-atop";cx.drawImage(WC.tooth,0,0,tw,th,0,0,tw*k,th*k);cx.globalCompositeOperation="source-over";
+  // the paint bleeding past the line, then the pencil line, a little off in four directions, under the paint
+  const bw=Math.ceil(w/4),bh=Math.ceil(h/4),[bc,bx]=wc_bufAt("lvB",bw,bh);bx.drawImage(c,0,0,wd,hd,0,0,bw,bh);
+  ctx.save();ctx.globalAlpha*=0.4;ctx.drawImage(bc,0,0,bw,bh,ox+2*s,oy+1*s,w,h);ctx.restore();
+  const [tc,tx]=wc_bufAt("lvT",wd,hd);tx.drawImage(c,0,0,wd,hd,0,0,wd,hd);tx.globalCompositeOperation="source-atop";tx.fillStyle=rgba(WC_PENCIL,1);tx.fillRect(0,0,wd,hd);
+  ctx.save();ctx.globalAlpha*=0.8;for(const [dx,dy] of [[1.5*s,0.4*s],[-1.2*s,1.1*s],[0.3*s,-1.4*s],[-0.6*s,-0.9*s]])ctx.drawImage(tc,0,0,wd,hd,ox+dx,oy+dy,w,h);ctx.restore();
+  ctx.drawImage(c,0,0,wd,hd,ox,oy,w,h);}
 // k: the canvas's scale against the film's units (1 at full size), so the grain and the dry keep their size on the figure
 function wc_wpaint(c,w,h,k){k=k||1;const [fc,fx]=wc_buf("figP"+w+"x"+h,w,h);fx.drawImage(c,0,0);fx.globalCompositeOperation="multiply";fx.globalAlpha=0.5;
   if(k<1)fx.drawImage(WC.gran,0,0,W*k,H*k);else fx.drawImage(WC.gran,0,0);
@@ -2010,7 +2146,7 @@ function gv_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id==
     if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
     // before a later moment, what the end shows leaves
     const was=GV_JOIN;GV_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{GV_JOIN=was;}};}}
-// a place, painted once by the film's painter (WC_PLACES), and kept
+// a place, painted once by the film's painter (WC_PLACES), and kept (in the site's player, its picture: master data's wc_kept)
 function gv_place(key){return wc_kept("place:"+key,W,H,WC_PLACES[key]);}
 
 /* ---------- rooms ---------- */
@@ -3203,11 +3339,11 @@ function gm_touches(ctx,o){o=o||{};gm_prHead(ctx,o);GM_TCH.forEach((B,k)=>{const
     withA(ctx,v,()=>{if(Array.isArray(it)){wc_T(ctx,it[0],ix,iy,{w:500,size:28,f:"mono",col:WC_DARK});wc_T(ctx," · "+it[1],ix+gu_mw(ctx,it[0]),iy,{w:600,size:28,col:WC_INK});}
       else wc_T(ctx,it,ix,iy,{w:500,size:28,f:"mono",col:WC_DARK});});});
   if(B.more&&u>0.99)wc_T(ctx,B.more,bx+30,by+100+3*44,{w:600,size:28,col:WC_MUTED});});}
-// Tuesday morning: the rule at the top of the report, and the reviews: Mei approves the meaning, data governance confirms the term
-// (o.mei, o.yus, 0 to 1)
-function gm_reviews(ctx,o){o=o||{};gm_prHead(ctx,{sub:"Tuesday · reviewed by the owner and data governance"});const x=150,w=1620;gu_box(ctx,x,268,w,140,null,{seed:451});
-  gu_md(ctx,"Approve: the owner of each meaning; confirm the term: data governance (DEC-PRJ-11).",x+30,354,{size:30});gu_box(ctx,x,428,w,320,"Reviews",{seed:452});
-  [["Mei Tanaka","registrar's office","approved the meaning",o.mei||0],["Yusuf Demir","data governance","confirmed the term",o.yus||0]].forEach(([n,r,s,v],i)=>{const ry=428+136+i*104;
+// Tuesday morning: the rule at the top of the report, then who reviews and who is told: the data team approves the code, which copies
+// the glossary's words, and Mei, who decided them on Monday, is told what they touch (o.team, o.mei, 0 to 1)
+function gm_reviews(ctx,o){o=o||{};gm_prHead(ctx,{sub:"Tuesday · reviewed by the data team"});const x=150,w=1620;gu_box(ctx,x,268,w,140,null,{seed:451});
+  gu_md(ctx,"The meaning was decided in the glossary. The data team reviews the code; owners are told.",x+30,354,{size:30});gu_box(ctx,x,428,w,320,"Review, and who is told",{seed:452});
+  [["Data team","reviews the code","approved",o.team||0],["Mei Tanaka","registrar's office","told what it touches",o.mei||0]].forEach(([n,r,s,v],i)=>{const ry=428+136+i*104;
     wc_T(ctx,n,x+30,ry,{w:800,size:32,col:WC_DARK});wc_T(ctx,r,x+30+tw(ctx,n,32,800)+20,ry,{w:600,size:28,col:WC_MUTED});v=clamp(v,0,1);
     if(v>0.01){const sx=x+w-30-tw(ctx,s,30,700);gv_tint(ctx,sx-74,ry-40,tw(ctx,s,30,700)+96,56,GV.gold,0.6*v);wc_tick(ctx,sx-40,ry-12,44,GV.goldInk,v,6);
       withA(ctx,clamp(v*2,0,1),()=>wc_T(ctx,s,sx,ry,{w:700,size:30,col:GV.goldInk}));}});}
@@ -3231,14 +3367,15 @@ const GM_CC=[{n:36,s:"select"},{fold:1},{n:44,s:"    credential_name,"},{n:45,s:
   {n:47,s:"        or (… = 'microcredential' and credit_points >= {{ var('min_award_credit_points') }})",add:1},{n:48,s:"        as counts_as_award,",add:1},{n:49,s:"    issued_on,"}];
 function gm_credSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,60,e);
   return gu_file(ctx,94,y,1732,{path:"models/core/student/core_credential_v2.sql",lines:GM_CC.map((L,i)=>i===5?Object.assign({},L,{lit:clamp(o.lit||0,0,1),litCol:GM_V}):i===6?Object.assign({},L,{lit:clamp(o.col||0,0,1),litCol:GM_V}):L)});}
-// if Mei and the faculties ever agree on another number: one line, in a pull request she reviews, drawn in pencil because it's only a
-// maybe (o.a, 0 to 1); o.rev fills its reviewers
+// if Mei and the faculties ever agree on another number: first the glossary's words, then one line, in a pull request the data team
+// reviews, drawn in pencil because it's only a maybe (o.a, 0 to 1); o.ln brings in the line, o.rev fills its reviewer
 function gm_maybe(ctx,o){o=o||{};const a=clamp(o.a||0,0,1);if(a<=0.01)return;const x=1000,y=150,w=780,h=520;
   gm_rise(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",dashed:true,role:WC_PENCIL,seed:471});wc_hand(ctx,"if they ever agree",x+36,y+66,{size:34,w:700,col:WC_PENCIL});
-    wc_T(ctx,"min_award_credit_points: 6 → 8",x+36,y+150,{w:500,size:30,f:"mono",col:WC_DARK});wc_T(ctx,"one line changes, in dbt_project.yml",x+36,y+204,{w:600,size:28,col:WC_INK});
-    ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+30,y+240,w-60,2);ctx.restore();wc_T(ctx,"Reviewers",x+36,y+300,{w:700,size:28,col:WC_MUTED});
-    const r=clamp(o.rev||0,0,1);[["Mei Tanaka","registrar's office"],["the faculties","each faculty's steward"]].forEach(([n,s],i)=>{const v=clamp(r*2-i,0,1);if(v<=0.01)return;
-      withA(ctx,v,()=>{wc_T(ctx,n,x+36,y+356+i*56,{w:800,size:30,col:WC_DARK});wc_T(ctx,s,x+36+tw(ctx,n,30,800)+18,y+356+i*56,{w:600,size:28,col:WC_MUTED});});});
+    wc_T(ctx,"1 · the glossary: at least 8",x+36,y+132,{w:600,size:28,col:WC_INK});const ln=o.ln==null?1:clamp(o.ln,0,1);
+    withA(ctx,ln,()=>{wc_T(ctx,"2 · in dbt_project.yml, one line:",x+36,y+182,{w:600,size:28,col:WC_INK});wc_T(ctx,"min_award_credit_points: 6 → 8",x+36,y+228,{w:500,size:30,f:"mono",col:WC_DARK});});
+    ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+30,y+256,w-60,2);ctx.restore();wc_T(ctx,"Reviewers",x+36,y+310,{w:700,size:28,col:WC_MUTED});
+    const r=clamp(o.rev||0,0,1);[["Data team","reviews the code"]].forEach(([n,s],i)=>{const v=clamp(r*2-i,0,1);if(v<=0.01)return;
+      withA(ctx,v,()=>{wc_T(ctx,n,x+36,y+364+i*56,{w:800,size:30,col:WC_DARK});wc_T(ctx,s,x+36+tw(ctx,n,30,800)+18,y+364+i*56,{w:600,size:28,col:WC_MUTED});});});
     if(r>0.99)withA(ctx,clamp(o.req||0,0,1),()=>{const s="review requested",pw=Math.round(tw(ctx,s,28,700)+44);wc_panel(ctx,x+w-36-pw,y+440,pw,48,{kind:"pill",wash:GV.amber,washA:0.4,seed:472});
       wc_T(ctx,s,x+w-36-pw+22,y+474,{w:700,size:28,col:WC_DARK});});});}
 
@@ -3260,14 +3397,14 @@ const GM_MV=[{n:6,s:"{{ config("},{n:7,s:"    materialized='metric_view',"},{n:8
 const GM_MVL={1:0,6:1,7:2,9:3,10:3,12:4,13:4};
 function gm_mvSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,46,e),L=o.lit||[];
   return gu_file(ctx,110,y,1000,{path:"models/core/course/awards_conferred.sql",lang:"yaml",lh:44,lines:GM_MV.map((r,i)=>GM_MVL[i]==null?r:Object.assign({},r,{lit:clamp(L[GM_MVL[i]]||0,0,1),litCol:GM_MVL[i]===4?GM_V:GV.gold}))});}
-// its pull request, small, beside it: who wants to merge it, the build that tested it, and its owner's approval (o.ok, 0 to 1)
+// its pull request, small, beside it: who wants to merge it, the build that tested it, and the data team's approval (o.ok, 0 to 1)
 function gm_mvPR(ctx,t,o){o=o||{};const a=clamp(o.a||0,0,1);if(a<=0.01)return;const x=1180,y=150,w=640,h=520;gm_rise(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});
   wc_T(ctx,"pull request",x+32,y+54,{w:600,size:28,col:WC_MUTED});["Course: awards conferred,","counted once, as a metric","view on Databricks"].forEach((l,i)=>wc_T(ctx,l,x+32,y+108+i*42,{w:800,size:32,col:WC_DARK}));
   wc_T(ctx,"Jun Park wants to merge into main",x+32,y+258,{w:600,size:28,col:WC_INK});ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+28,y+292,w-56,2);ctx.restore();
   const ck=clamp(o.ck||0,0,1);gu_light(ctx,x+50,y+352,ck>0.99?"pass":ck>0.01?"run":"wait",t);wc_T(ctx,"dbt build",x+80,y+362,{w:500,size:28,f:"mono",col:WC_DARK});
   wc_T(ctx,ck>0.99?"passed":"tests and builds it",x+80+gu_mw(ctx,"dbt build")+20,y+362,{w:600,size:28,col:ck>0.99?GV.greenInk:WC_MUTED});
-  const ok=clamp(o.ok||0,0,1);if(ok>0.01){wc_tick(ctx,x+50,y+432,44,GV.goldInk,ok,6);withA(ctx,clamp(ok*2,0,1),()=>{wc_T(ctx,"Mei Tanaka",x+80,y+444,{w:800,size:30,col:WC_DARK});
-    wc_T(ctx,"approved",x+80+tw(ctx,"Mei Tanaka",30,800)+16,y+444,{w:700,size:28,col:GV.goldInk});});}});}
+  const ok=clamp(o.ok||0,0,1);if(ok>0.01){wc_tick(ctx,x+50,y+432,44,GV.goldInk,ok,6);withA(ctx,clamp(ok*2,0,1),()=>{wc_T(ctx,"Data team",x+80,y+444,{w:800,size:30,col:WC_DARK});
+    wc_T(ctx,"approved",x+80+tw(ctx,"Data team",30,800)+16,y+444,{w:700,size:28,col:GV.goldInk});});}});}
 // the metric view's page in the catalog: its owner, and its lineage: core_credential version 2 upstream, and the reports that read it
 // downstream (o.r[i], 0 to 1); o.own lights its owner
 const GM_LN=[["core_credential_v2","table",180,520],["awards_conferred","metric view",730,520],["draft submission","report · Mei Tanaka",1290,410],["census report","report · Planning",1290,630]];
@@ -3475,11 +3612,11 @@ scene("copy",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({own:wAt(sc,"k
     {at:P.sd,place:"big",keys:[[P.sd,960,540,1]],push:0.02,draw:(x,tt)=>gm_comment(x,tt,{ar:clamp((tt-P.build)/0.9,0,1),c:clamp((tt-P.desc)/1.0,0,1),back:clamp((tt-P.back+0.2)/1.0,0,1)})}],sc.dur));});
 
 // ---- 4 · The nightly sync: the data team's room at night; the check comparing the copy with the glossary, and Monday's change found;
-// the pull request it opens, with the old words and the new and what they touch; Tuesday's reviews; Mei seeing where her words are used ----
+// the pull request it opens, with the old words and the new and what they touch; Tuesday's review by the data team, and Mei told; Mei seeing where her words are used ----
 scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"every","each copy")-0.3,chg:wAt(sc,"monday","had changed"),
     op:c.opened-0.3,on:wAt(sc,"opened","the old words"),wt:wAt(sc,"opened","what the new words touch"),
     th:c.three-0.3,t1:wAt(sc,"three","Three tables"),t2:wAt(sc,"three","eight definitions"),t3:wAt(sc,"three","the code"),t4:wAt(sc,"three","three reports"),
-    tu:c.tuesday-0.3,ap:wAt(sc,"tuesday","Mei approved"),cf:wAt(sc,"tuesday","data governance confirmed"),sw:c.saw-0.3,used:wAt(sc,"saw","where her words are used")}));
+    tu:c.tuesday-0.3,ap:wAt(sc,"tuesday","the data team reviewed"),cf:wAt(sc,"tuesday","Mei was told"),sw:c.saw-0.3,used:wAt(sc,"saw","where her words are used")}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
     // every night, in the data team's room: nobody there, the screens lit
     {at:0,place:"dataNight",keys:[[0,1100,520,1.1],[0.1,1200,520,1.2]],d:3,draw:(x,tt)=>gm_nightMon(x,0)},
@@ -3490,8 +3627,8 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
     // what the new words touch, opened: a box each, filled and lit as it's said
     {at:P.th,place:"bigNight",keys:[[P.th,960,540,1]],push:0.02,draw:(x,tt)=>gm_touches(x,{u:[P.t1,P.t2,P.t3,P.t4].map(w=>clamp((tt-w)/0.9,0,1)),
       lit:[gv_io(tt,P.t1,P.t2,0.4),gv_io(tt,P.t2,P.t3,0.4),gv_io(tt,P.t3,P.t4,0.4),gv_io(tt,P.t4,P.tu,0.4)]})},
-    // Tuesday morning: Mei approves the meaning, and data governance confirms the term
-    {at:P.tu,place:"bigReg",keys:[[P.tu,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reviews(x,{mei:clamp((tt-P.ap)/0.8,0,1),yus:clamp((tt-P.cf)/0.8,0,1)});
+    // Tuesday morning: the data team approves the code, and Mei is told what it touches
+    {at:P.tu,place:"bigReg",keys:[[P.tu,960,540,1]],push:0.02,draw:(x,tt)=>{gm_reviews(x,{team:clamp((tt-P.ap)/0.8,0,1),mei:clamp((tt-P.cf)/0.8,0,1)});
       gu_filmTag(x,1770,170,"Who does what, end to end",fin(tt,P.tu+0.6,0.5),{align:"right"});}},
     // the registrar's office: Mei at her desk, and a thread from her screen to each place her words are used
     {cut:true,at:P.sw,place:"registrar",keys:[[P.sw,960,540,1]],push:0.02,draw:(x,tt)=>{gm_regDesk(x,tt,{mei:{expr:"smile"},bar:"GitHub · pull request",draw:gm_prSmall});
@@ -3500,11 +3637,12 @@ scene("sync",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({cmp:wAt(sc,"e
   wc_year(ctx,56,72,"Tuesday morning",gv_io(t,P.sw+0.3,sc.dur,0.4));});
 
 // ---- 5 · A number is a setting: the 6 credit points in the new words; kept once, in dbt_project.yml; Jun's column reading it, and every
-// count of awards reading the column; if Mei and the faculties ever agree on another number, one line, in a reviewed pull request ----
+// count of awards reading the column; if Mei and the faculties ever agree on another number, the glossary first, then one line, in a pull
+// request the data team reviews ----
 scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc,"number","six credit points"),vars:sc.ends.number+0.3,
     kp:c.kept-0.3,set:wAt(sc,"kept","as a setting"),min:wAt(sc,"kept","min award credit points"),
     rd:c.reads-0.3,jun:wAt(sc,"reads","Jun's new column"),it:wAt(sc,"reads","reads it"),every:wAt(sc,"reads","every count of awards"),
-    ag:c.agree-0.3,another:wAt(sc,"agree","another number"),line:wAt(sc,"agree","one line changes"),rev:wAt(sc,"agree","a reviewed pull request"),turn:sc.ends.agree+0.2}));
+    ag:c.agree-0.3,another:wAt(sc,"agree","another number"),gl:wAt(sc,"agree","the glossary changes first"),line:wAt(sc,"agree","then one line"),rev:wAt(sc,"agree","the data team reviews"),turn:sc.ends.agree+0.2}));
   gv_shots(ctx,S,t,sc.dur,gm_run([
     // the sync's report again, on Jun's screen by day: the number in the new words, and its line on vars: a number may belong in one
     {at:0,place:"big",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_varsReport(x,{six:fin(tt,P.six,0.5),vars:fin(tt,P.vars,0.6)})},
@@ -3518,11 +3656,11 @@ scene("setting",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({six:wAt(sc
       if(f.rows.length>6){gm_thread(x,[vx,634],[vx,f.rows[5]+20],clamp((tt-P.it)/0.9,0,1),{bend:0});
         gm_thread(x,[f.tx+gu_mw(x,"        as counts_as_award,")+16,f.rows[6]],[560,690],clamp((tt-P.every)/0.9,0,1),{bend:-20});}
       gu_tagAt(x,tt,P.every+0.5,null,560,720,"every count of awards",{size:30});gu_filmTag(x,1830,640,"Governed in dbt",fin(tt,P.rd+0.6,0.5),{align:"right"});}},
-    // if Mei and the faculties ever agree on another number: the setting's dial, a pencil needle where it could go; one line, in a pull
-    // request they review; then, without words, the needle turns to it and back
+    // if Mei and the faculties ever agree on another number: the setting's dial, a pencil needle where it could go; the glossary first,
+    // then one line, in a pull request the data team reviews; then, without words, the needle turns to it and back
     {at:P.ag,place:"desk",keys:[[P.ag,960,500,1]],push:0.02,draw:(x,tt)=>{const b=Math.sin(Math.PI*easeCam(clamp((tt-P.turn)/2.4,0,1)));
       gm_dial(x,560,470,170,6+2*b,{label:"min_award_credit_points",mono:true,ghost:8,ga:fin(tt,P.another,0.6)*(1-b)});
-      gm_maybe(x,{a:fin(tt,P.line-0.2,0.6),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}],sc.dur));});
+      gm_maybe(x,{a:fin(tt,P.gl-0.2,0.6),ln:fin(tt,P.line,0.5),rev:clamp((tt-P.rev)/1.0,0,1),req:fin(tt,P.rev+1.0,0.5)});}}],sc.dur));});
 
 // ---- 6 · Counted once: a count is a meaning too, a ledger with its rule; awards conferred, a metric view the project builds; its pull
 // request, tested and reviewed; the two reports that read it; and Planning's report giving up its own count ----
@@ -3536,7 +3674,7 @@ scene("count",(ctx,S,t,sc)=>{const c=sc.cues,P=gm_once(sc,"P",()=>({which:wAt(sc
     // gives way to the metric view's sheet
     {at:0,place:"deskGov",keys:[[0,960,540,1]],push:0.02,draw:(x,tt)=>gm_ledger(x,{r1:clamp((tt-P.which)/1.2,0,1),r2:clamp((tt-P.yr)/1.2,0,1),yr:clamp((tt-P.once+0.5)/0.9,0,1)})},
     // the metric view, as the project builds it: what it counts, lit as it's said; beside it, its pull request, tested and approved by
-    // its owner
+    // the data team
     {at:P.mv,place:"desk",keys:[[P.mv,960,500,1]],push:0.02,draw:(x,tt)=>{gm_mvSheet(x,{u:clamp((tt-P.mv)/0.9,0,1),
         lit:[gv_io(tt,P.mv+0.4,P.counts,0.4),fin(tt,P.cred,0.5),fin(tt,P.aw,0.5),fin(tt,P.by,0.5),fin(tt,P.counts,0.5)]});
       gm_mvPR(x,tt,{a:fin(tt,P.bd,0.6),ck:clamp((tt-P.bd-0.4)/1.6,0,1),ok:clamp((tt-P.rv)/0.8,0,1)});}},
@@ -3691,11 +3829,15 @@ window.addEventListener("DOMContentLoaded",async()=>{
    on a fast machine and several times that on a laptop or phone, and keeps a full-size picture (8 MB) in memory: these films have
    10 to 38 places, against master data's 5 to 8, so painting them all as the page opened froze the page again and again while
    the visitor was only reading it (2 November 2026).
+   Where the film was published with its places drawn as pictures (places/ beside film.js, master data's wash.js), the player paints
+   none: it waits for the pictures of the moment it starts at, and shows each place as its picture. Painted while the film played,
+   they froze it again and again on a laptop, the soundtrack running on (5 November 2026).
    Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
    of a frame (a 126-degree shutter), so movement reads as filmed. No glow: it would wash out the paper. No film grain: the paper is
    the grain. */
 async function prepAssets(){await fontsReady3();await loadLogos();if(window.__RENDER__)wc_prep();else await wc_prepSoft();const ks=typeof WC_PLACES!=="undefined"?Object.keys(WC_PLACES):[];
   if(window.__RENDER__){ks.forEach(gv_place);return;}
+  if(await wc_picsLoad()){await wc_picsReady(window.FILM&&FILM.time?FILM.time():0);return;}
   const cv0=document.getElementById("film");if(ks.length&&cv0){await new Promise(r=>setTimeout(r,0));gv_place(ks[0]);}let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
   const next=()=>{if(i>=ks.length)return;gv_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
   // a page without a player (labs, scenarios) paints a place only when it first draws it (the kept picture is made then), never all of
@@ -3708,3 +3850,4 @@ if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySele
     for(let i=0;i<MB;i++){const tt=Math.max(0,t-SHUT*i/(MB-1));mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";renderFrame(mx,1,tt);ax.globalAlpha=1/(i+1);ax.drawImage(M,0,0);}
     ax.globalAlpha=1;ox.setTransform(1,0,0,1,0,0);ox.globalAlpha=1;ox.globalCompositeOperation="source-over";ox.drawImage(A,0,0);
     return out.toDataURL("image/jpeg",q||0.9);};})();}
+if(!window.__RENDER__)renderFrame=wc_liveFrame(renderFrame);

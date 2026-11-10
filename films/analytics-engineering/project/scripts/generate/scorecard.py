@@ -3,7 +3,8 @@ checks and its quality dimension, with what failed and who owns it.
 
 The scorecard isn't a survey or an opinion: each cell counts the tests that ran, from
 target/run_results.json, and each test's owner and dimension come from its meta (the governance
-check makes sure every test has both). A test that warns passed, but over a limit its owner
+check makes sure every test has both). Each accuracy test's reference, what it's checked against,
+comes from its meta too, and is listed under the table. A test that warns passed, but over a limit its owner
 agreed to watch; a test that fails, or errors, stops the build, and its owner is named below the
 table. A test that didn't run, because an earlier one failed and dbt skipped what's downstream,
 counts as not run, never as failed. Tests in tests/governance/ check the project, not the data, and aren't scored.
@@ -12,6 +13,10 @@ On Databricks, the platform checks the tables too, and its results join the test
 the loading pipeline's expectations and the monitors, from analyses/quality/platform_results.sql,
 saved as CSV. Each check is given its table's owner and domain from the source the project reads it
 as, and goes in a table of its own, under the tests', with what didn't pass under both.
+
+Under them, the hidden work, counted: the hours each year's rounds of checking the graduation list
+by hand took, from the graduations team's calendar (seeds/reference/graduations/hand_check_rounds.csv),
+so everyone can watch them fall as names are put right where they're born (The hidden factory).
 
     dbt build --profiles-dir .
     python scripts/generate/scorecard.py           # write docs/scorecard.md from the last run
@@ -31,6 +36,7 @@ MANIFEST = ROOT / "target" / "manifest.json"
 RESULTS = ROOT / "target" / "run_results.json"
 TARGET = ROOT / "docs" / "scorecard.md"
 DIMENSIONS = ["completeness", "uniqueness", "validity", "consistency", "accuracy", "timeliness"]
+ROUNDS = ROOT / "seeds" / "reference" / "graduations" / "hand_check_rounds.csv"
 
 
 def domain_of(test, nodes):
@@ -77,6 +83,21 @@ def platform_results(path, manifest):
     return checks
 
 
+def hand_check_hours():
+    """Each year's rounds of checking the graduation list by hand: how many, the names checked of the
+    names on the lists, and the hours. A year runs from August, as the ceremonies' rounds do."""
+    years = defaultdict(lambda: defaultdict(int))
+    with open(ROUNDS, newline="") as f:
+        for row in csv.DictReader(f):
+            year, month = int(row["sent_on"][:4]), int(row["sent_on"][5:7])
+            start = year if month >= 8 else year - 1
+            label = f"{start}–{(start + 1) % 100:02d}"
+            years[label]["rounds"] += 1
+            for key in ("names_on_list", "names_checked", "hours"):
+                years[label][key] += int(row[key])
+    return years
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--check", action="store_true", help="fail if docs/scorecard.md is out of date")
@@ -92,7 +113,7 @@ def main():
 
     table = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     totals = defaultdict(lambda: defaultdict(int))
-    problems, skipped = [], defaultdict(int)
+    problems, skipped, references = [], defaultdict(int), []
     for unique_id, test in sorted(manifest["nodes"].items()):
         if test["resource_type"] != "test" or test["original_file_path"].startswith("tests/governance/"):
             continue
@@ -108,6 +129,8 @@ def main():
         for counts in (table[domain][dimension], totals[dimension], table[domain]["all"], totals["all"]):
             counts[status] += 1
             counts["total"] += 1
+        if dimension == "accuracy":
+            references.append((domain, test["name"], meta.get("reference"), meta.get("owner", "no owner")))
         if status == "skipped":
             skipped[domain] += 1
         elif status != "pass":
@@ -123,7 +146,8 @@ def main():
     lines = ["# Data quality scorecard", "", made, "",
              "Every test that ran, by the domain of the data it checks and its quality dimension: how many "
              "passed, of how many. A warning passed, over a limit its owner agreed to watch; a failure stops "
-             "the build, and the tests on what's built from it don't run. Each test's owner and dimension are in its `meta` (docs/conventions.md, *Governance*).", "",
+             "the build, and the tests on what's built from it don't run. Validity says a value is allowed, by its rule; "
+             "accuracy says it's true, against a reference outside the data, named below. Each test's owner and dimension are in its `meta` (docs/conventions.md, *Governance*).", "",
              "| Domain | " + " | ".join(used) + " | All |",
              "|---|" + "---|" * (len(used) + 1)]
     for domain in sorted(table):
@@ -164,6 +188,27 @@ def main():
                          f"an earlier test failed: {stopped or 'see the run'} |")
     else:
         lines.append("Every test and check passed." if args.platform else "Every test passed.")
+    # Accuracy is measured against something outside the data: say what, so a reader knows what a pass can tell them.
+    if references:
+        lines += ["", "## What each accuracy test checks against", "",
+                  "A test measures accuracy only against a reference outside the data, such as a record kept apart "
+                  "from the data's source; against a copy of the same source, it measures consistency. Each names its "
+                  "reference in its `meta` (docs/conventions.md, *Which reference*).", "",
+                  "| Domain | Test | Reference | Owner |", "|---|---|---|---|"]
+        for domain, name, reference, owner in sorted(references):
+            lines.append(f"| `{domain}` | `{name}` | {reference or '**none named**'} | {owner} |")
+    # The hidden work, counted, beside the tests: the hours spent checking the graduation list by hand.
+    years = hand_check_hours()
+    if years:
+        lines += ["", "## Hand-check hours", "",
+                  "The hidden work, counted: the hours the graduations team spent checking the graduation list's "
+                  "names by hand before each round's list went to the printer, from its calendar "
+                  "(`seeds/reference/graduations/hand_check_rounds.csv`). Beside the tests, so everyone can watch "
+                  "them fall as names are put right where they're born.", "",
+                  "| Year | Rounds | Names checked by hand | Hours |", "|---|---|---|---|"]
+        for label, year in sorted(years.items()):
+            lines.append(f"| {label} | {year['rounds']} | {year['names_checked']:,} of {year['names_on_list']:,} | "
+                         f"{year['hours']:,} |")
     text = "\n".join(lines) + "\n"
 
     if args.check:

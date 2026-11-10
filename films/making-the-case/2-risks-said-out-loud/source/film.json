@@ -1,0 +1,28 @@
+{
+  "key": "risks-said-out-loud",
+  "title": "Risks, said out loud",
+  "sub": "The second film of Making the case, the second series of Data management: a risk register that lives. Helena asks the data council how much risk it will take, writes each risk of the move off the old warehouse in one sentence, with an owner, a response and an early sign, runs a pre-mortem with her team, and sees one early sign show in time.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall, and the opening's ice in the same matte language. Its colours mean the same in every film: amber is risk (the register, each risk, its early sign), blue is plans and design (the move's plan, the council's page), green is value or something done (a risk closed, a report rebuilt), and orange is data (the staff list and its columns).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "rso_ice.js",
+    "rso_uni.js",
+    "rso_scenes.js"
+  ],
+  "poster": [
+    "depots",
+    "flags",
+    4.2
+  ],
+  "say": [
+    ["\\bHR's\\b", "H R's"],
+    ["\\bHR\\b", "H R"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "depots"
+  ],
+  "urgent": []
+}

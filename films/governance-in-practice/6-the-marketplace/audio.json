@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/the-marketplace/soundtrack.mp3",
+      "size": 5316797,
+      "sha256": "0fcc7ddf7f1af99975ed1a3448868990153aa35ac69a7567b6395e83072db134",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-the-marketplace-02f912f318efc8f9bf07/0fcc7ddf7f1af99975ed1a3448868990153aa35ac69a7567b6395e83072db134.mp3"
+    }
+  ]
+}

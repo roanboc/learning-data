@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/moving-is-easy/soundtrack.mp3",
+      "size": 5886946,
+      "sha256": "3aee415f8a0d1f6a4e39cc7799c599be0891fc578d234887f6310e4233918952",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/3aee415f8a0d1f6a4e39cc7799c599be0891fc578d234887f6310e4233918952.mp3"
+    }
+  ]
+}

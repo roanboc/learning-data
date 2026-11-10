@@ -1,0 +1,220 @@
+{
+ "player": "e17c6d853d866e1b",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "place:parish": {
+   "file": "parish.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     35.75
+    ]
+   ]
+  },
+  "place:campus": {
+   "file": "campus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     34.75,
+     98.0
+    ],
+    [
+     331.75,
+     355.25
+    ]
+   ]
+  },
+  "place:plain": {
+   "file": "plain.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     97.0,
+     126.75
+    ],
+    [
+     150.75,
+     194.75
+    ],
+    [
+     244.5,
+     332.75
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     125.75,
+     152.0
+    ],
+    [
+     193.75,
+     224.0
+    ]
+   ]
+  },
+  "map": {
+   "file": "map.webp",
+   "w": 2600,
+   "h": 1520,
+   "shows": [
+    [
+     130.25,
+     152.0
+    ]
+   ]
+  },
+  "place:plainB": {
+   "file": "plainB.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     222.75,
+     245.5
+    ]
+   ]
+  },
+  "wedge0": {
+   "file": "wedge0.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     245.5,
+     269.0
+    ]
+   ]
+  },
+  "wedge1": {
+   "file": "wedge1.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     245.5,
+     269.0
+    ]
+   ]
+  },
+  "hub": {
+   "file": "hub.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     245.5,
+     269.0
+    ]
+   ]
+  },
+  "wedge2": {
+   "file": "wedge2.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     245.75,
+     269.0
+    ]
+   ]
+  },
+  "wedge3": {
+   "file": "wedge3.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     245.75,
+     249.25
+    ]
+   ]
+  },
+  "wedge4": {
+   "file": "wedge4.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.0,
+     269.0
+    ]
+   ]
+  },
+  "wedge5": {
+   "file": "wedge5.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.0,
+     269.0
+    ]
+   ]
+  },
+  "wedge6": {
+   "file": "wedge6.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.0,
+     269.0
+    ]
+   ]
+  },
+  "wedge7": {
+   "file": "wedge7.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.25,
+     269.0
+    ]
+   ]
+  },
+  "wedge8": {
+   "file": "wedge8.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.25,
+     269.0
+    ]
+   ]
+  },
+  "wedge9": {
+   "file": "wedge9.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     246.25,
+     269.0
+    ]
+   ]
+  },
+  "wedge3L": {
+   "file": "wedge3L.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     248.5,
+     269.0
+    ]
+   ]
+  }
+ }
+}

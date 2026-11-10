@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/an-agent-that-checks/soundtrack.mp3",
+      "size": 5431266,
+      "sha256": "ab31d46094bcdaa0a969956d7619989c68125730974f6ace0c70894b07ea4500",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/ab31d46094bcdaa0a969956d7619989c68125730974f6ace0c70894b07ea4500.mp3"
+    }
+  ]
+}

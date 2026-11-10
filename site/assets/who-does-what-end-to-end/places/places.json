@@ -1,0 +1,507 @@
+{
+ "player": "3d52757194e2874c",
+ "note": "Drawn by tools/publish.py: each place of the film, and anything else it keeps at the frame's size or larger or that is slow to paint, as a picture, by what wc_kept calls it, with its size and when the film shows it ([from, to] in seconds). The site's player shows these instead of painting them.",
+ "places": {
+  "eeHi:acad": {
+   "file": "eeHi_acad.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     0,
+     26.25
+    ],
+    [
+     227.0,
+     230.0
+    ]
+   ]
+  },
+  "eeAcadTableN": {
+   "file": "eeAcadTableN.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     26.25
+    ],
+    [
+     227.0,
+     230.0
+    ]
+   ]
+  },
+  "eeNightVeil": {
+   "file": "eeNightVeil.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     0,
+     26.25
+    ],
+    [
+     227.0,
+     230.0
+    ]
+   ]
+  },
+  "eeHi:school": {
+   "file": "eeHi_school.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     25.5,
+     32.75
+    ]
+   ]
+  },
+  "eeSchoolDesk": {
+   "file": "eeSchoolDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     25.5,
+     32.75
+    ]
+   ]
+  },
+  "place:hall": {
+   "file": "hall.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     34.0,
+     37.25
+    ]
+   ]
+  },
+  "place:lib": {
+   "file": "lib.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     36.5,
+     47.5
+    ]
+   ]
+  },
+  "eeLibDesk": {
+   "file": "eeLibDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     36.5,
+     47.5
+    ],
+    [
+     363.25,
+     368.25
+    ]
+   ]
+  },
+  "place:mex": {
+   "file": "mex.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.75,
+     52.5
+    ]
+   ]
+  },
+  "eeMexTable": {
+   "file": "eeMexTable.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     46.75,
+     52.5
+    ]
+   ]
+  },
+  "eeHi:acadDay": {
+   "file": "eeHi_acadDay.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     52.25,
+     56.75
+    ],
+    [
+     63.75,
+     70.0
+    ],
+    [
+     229.25,
+     234.25
+    ]
+   ]
+  },
+  "eeAcadTableD": {
+   "file": "eeAcadTableD.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     52.25,
+     56.75
+    ],
+    [
+     63.75,
+     70.0
+    ],
+    [
+     229.25,
+     234.25
+    ]
+   ]
+  },
+  "place:bus": {
+   "file": "bus.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     75.5,
+     81.0
+    ],
+    [
+     340.0,
+     343.0
+    ]
+   ]
+  },
+  "place:floor": {
+   "file": "floor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     86.25,
+     102.5
+    ],
+    [
+     342.25,
+     347.75
+    ]
+   ]
+  },
+  "floorGlass": {
+   "file": "floorGlass.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     86.25,
+     102.5
+    ],
+    [
+     146.5,
+     154.0
+    ],
+    [
+     187.0,
+     193.25
+    ],
+    [
+     342.25,
+     347.75
+    ]
+   ]
+  },
+  "place:planning": {
+   "file": "planning.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     102.25,
+     109.25
+    ],
+    [
+     367.5,
+     370.75
+    ]
+   ]
+  },
+  "place:desk": {
+   "file": "desk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     108.5,
+     137.5
+    ],
+    [
+     141.5,
+     147.5
+    ],
+    [
+     334.0,
+     339.0
+    ],
+    [
+     356.5,
+     364.0
+    ]
+   ]
+  },
+  "place:boardPlan": {
+   "file": "boardPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     136.75,
+     142.25
+    ]
+   ]
+  },
+  "eeHi:floor": {
+   "file": "eeHi_floor.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     146.5,
+     154.0
+    ],
+    [
+     187.0,
+     193.25
+    ]
+   ]
+  },
+  "place:regClose": {
+   "file": "regClose.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     153.75,
+     155.75
+    ],
+    [
+     301.5,
+     305.0
+    ]
+   ]
+  },
+  "place:regDesk": {
+   "file": "regDesk.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     153.75,
+     155.75
+    ],
+    [
+     301.5,
+     305.0
+    ]
+   ]
+  },
+  "place:screenReg": {
+   "file": "screenReg.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     155.5,
+     159.75
+    ]
+   ]
+  },
+  "place:screenData": {
+   "file": "screenData.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     159.0,
+     168.0
+    ]
+   ]
+  },
+  "place:registrar": {
+   "file": "registrar.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     167.75,
+     172.25
+    ]
+   ]
+  },
+  "place:noor": {
+   "file": "noor.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     171.5,
+     174.0
+    ],
+    [
+     266.5,
+     269.25
+    ]
+   ]
+  },
+  "place:eeMap": {
+   "file": "eeMap.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     173.75,
+     187.75
+    ],
+    [
+     370.5,
+     384.75
+    ]
+   ]
+  },
+  "eeHi:eeMap": {
+   "file": "eeHi_eeMap.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     193.0,
+     227.75
+    ],
+    [
+     234.0,
+     266.75
+    ],
+    [
+     287.0,
+     289.75
+    ]
+   ]
+  },
+  "place:office": {
+   "file": "office.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     269.0,
+     274.5
+    ]
+   ]
+  },
+  "place:boardGov": {
+   "file": "boardGov.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     273.75,
+     279.0
+    ],
+    [
+     308.25,
+     328.5
+    ]
+   ]
+  },
+  "place:chartWall": {
+   "file": "chartWall.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     278.25,
+     287.25
+    ],
+    [
+     289.5,
+     295.25
+    ]
+   ]
+  },
+  "place:officeNow": {
+   "file": "officeNow.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     294.5,
+     298.25
+    ],
+    [
+     304.0,
+     308.5
+    ],
+    [
+     338.25,
+     340.75
+    ]
+   ]
+  },
+  "place:meiCal": {
+   "file": "meiCal.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     297.5,
+     302.25
+    ]
+   ]
+  },
+  "place:screenPlan": {
+   "file": "screenPlan.webp",
+   "w": 1920,
+   "h": 1080,
+   "shows": [
+    [
+     327.75,
+     331.0
+    ],
+    [
+     346.75,
+     357.25
+    ]
+   ]
+  },
+  "eeHi:chartWall": {
+   "file": "eeHi_chartWall.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     330.75,
+     334.25
+    ]
+   ]
+  },
+  "eeHi:lib": {
+   "file": "eeHi_lib.webp",
+   "w": 3840,
+   "h": 2160,
+   "shows": [
+    [
+     363.25,
+     368.25
+    ]
+   ]
+  }
+ }
+}

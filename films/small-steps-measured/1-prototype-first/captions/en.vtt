@@ -1,0 +1,202 @@
+WEBVTT
+
+00:00:03.000 --> 00:00:09.805
+Curitiba, in the south of Brazil. Friday the 19th of May, 1972, six in the evening.
+
+00:00:11.505 --> 00:00:18.723
+City crews arrive by truck in the old centre's main street, Rua XV de Novembro, and close it to cars.
+
+00:00:20.623 --> 00:00:25.609
+For years, cars and buses had filled it, and people on foot were squeezed to its edges.
+
+00:00:27.309 --> 00:00:32.292
+One plan was to widen the streets, knocking down buildings from the turn of the century.
+
+00:00:33.992 --> 00:00:39.464
+The young mayor, Jaime Lerner, an architect, wanted the street given back to people on foot.
+
+00:00:40.964 --> 00:00:47.459
+The shopkeepers feared the opposite: without cars, their customers would stay away, and their sales would fall.
+
+00:00:49.359 --> 00:00:54.267
+Something had to change, but no plan on paper could show them what the street would be like.
+
+00:00:56.167 --> 00:00:58.730
+So the mayor's team built the real thing, fast.
+
+00:01:00.230 --> 00:01:05.436
+On Saturday morning, grey and damp, the street was handed to the people, without ceremony.
+
+00:01:07.136 --> 00:01:12.515
+Over the weekend, crews took up the road, laid stones, and put in streetlights and kiosks.
+
+00:01:13.815 --> 00:01:16.096
+They planted tens of thousands of flowers.
+
+00:01:17.996 --> 00:01:21.048
+The next weekend, drivers came to take the street back.
+
+00:01:22.348 --> 00:01:26.432
+They found long strips of paper on it, and dozens of children painting.
+
+00:01:28.532 --> 00:01:32.804
+Within days, the shopkeepers told the newspapers their sales were up a little.
+
+00:01:34.104 --> 00:01:36.159
+Soon they were asking for more of the street.
+
+00:01:37.859 --> 00:01:42.539
+Other streets followed, and fifty years on, it is still a street for people on foot.
+
+00:01:44.439 --> 00:01:50.404
+The city didn't win the argument on paper. It put the real thing in front of the people who had to decide.
+
+00:01:52.104 --> 00:01:54.236
+A data team can work the same way.
+
+00:01:55.336 --> 00:02:01.009
+Put something real in front of the person who decides, learn from what they do with it, and do it again.
+
+00:02:09.909 --> 00:02:16.492
+February 2027. Graham Ellis, the university's new director of Facilities, has a request.
+
+00:02:17.792 --> 00:02:21.820
+Could Helena Novak's team make him a dashboard of room use, by Easter?
+
+00:02:23.520 --> 00:02:29.359
+The question behind it is bigger: whether to ask the University Council for a new teaching building.
+
+00:02:30.859 --> 00:02:33.835
+It would cost about A$140 million.
+
+00:02:35.735 --> 00:02:42.403
+Then the request waits, as every request did: on average, 41 working days from asking to first use.
+
+00:02:44.303 --> 00:02:50.644
+On Tuesday the 30th of March, the team takes it up the new way, as Helena's ninety-day plan set out.
+
+00:02:52.344 --> 00:02:57.345
+Ivy Reyes, the team's new analyst, has already drawn its whole route on one page.
+
+00:02:58.645 --> 00:03:03.445
+All 186 rooms are on it, the 14 named two ways included.
+
+00:03:05.145 --> 00:03:11.489
+So the prototype starts from real data: thirteen weeks of bookings, and head counts from the rooms' sensors.
+
+00:03:13.189 --> 00:03:17.351
+Governed from the first day: counts per room, per hour, never a person.
+
+00:03:21.251 --> 00:03:28.769
+In 2001, the Agile Manifesto put it plainly: working software over comprehensive documentation.
+
+00:03:30.669 --> 00:03:36.081
+The first round asks one thing: when are the rooms booked, and when are they used, hour by hour?
+
+00:03:37.781 --> 00:03:42.873
+On Wednesday the 7th of April, the team's agent drafts a first model, in a minute.
+
+00:03:44.173 --> 00:03:46.261
+It counts booked hours as used ones.
+
+00:03:47.961 --> 00:03:54.281
+Ivy catches it herself: she reads the agent's notes to the end, and checks the draft against the sensors.
+
+00:03:55.981 --> 00:04:02.004
+Room use, as Graham means it, goes into the glossary: people in the room. The model is built from it.
+
+00:04:03.504 --> 00:04:06.324
+Then Jun reviews Ivy's change, the same day.
+
+00:04:07.824 --> 00:04:13.674
+Fast isn't careless. The agent proposes, people check, and no one approves their own work.
+
+00:04:15.574 --> 00:04:20.688
+On Friday the 9th of April, ten days after the start, Graham sees the prototype.
+
+00:04:21.988 --> 00:04:25.130
+A heat map of the week, on a dashboard in Databricks.
+
+00:04:27.230 --> 00:04:32.288
+Helena asks him one question, and will ask it every round: what would change your mind?
+
+00:04:34.188 --> 00:04:39.514
+His answer: if the rooms are full all week, he'll ask for the building. If they aren't, he won't.
+
+00:04:43.414 --> 00:04:49.854
+The work runs in rounds of a week, each ending on a Friday, with the person who decides and the real thing.
+
+00:04:51.554 --> 00:04:56.444
+Scrum calls it a sprint review. Here, it's half an hour with Graham, at one screen.
+
+00:04:58.144 --> 00:05:05.111
+On Wednesday the 14th of April, Graham uses it himself, with his team: eleven working days from the start.
+
+00:05:06.811 --> 00:05:11.231
+It had waited about seven weeks before anyone began, like every request.
+
+00:05:12.531 --> 00:05:15.942
+Then the new way took eleven working days, against forty-one.
+
+00:05:17.842 --> 00:05:22.518
+As in Curitiba, the talk changes once people can use the real thing.
+
+00:05:24.418 --> 00:05:26.400
+And the real thing surprises everyone.
+
+00:05:27.500 --> 00:05:33.975
+Rooms are booked 38% of the week, but 93% from ten to two, Tuesday to Thursday.
+
+00:05:36.075 --> 00:05:41.875
+In one booked hour in five, nobody comes. When people do come, about half the seats are filled.
+
+00:05:43.775 --> 00:05:49.532
+Everyone was right about what they saw. The average hid both the crowded peak and the empty rooms.
+
+00:05:51.432 --> 00:05:58.545
+At the second review, his answer moves: show me it works in 2030, when Planning expects 6% more students.
+
+00:06:02.245 --> 00:06:08.834
+Friday the 23rd of April, the third round. The answer is plain: the rooms are short only at the peak.
+
+00:06:10.734 --> 00:06:16.039
+Move about one peak class in six to other hours, and release the bookings nobody uses.
+
+00:06:17.339 --> 00:06:20.686
+That meets the forecast to 2030 without a new building.
+
+00:06:22.586 --> 00:06:26.862
+The decision is served, so the rounds stop. A fourth would only polish it.
+
+00:06:28.762 --> 00:06:33.659
+What the prototype taught stays in the product: the definition, and the reviewed model.
+
+00:06:35.159 --> 00:06:39.495
+And the dashboard becomes a product of its own, which Ivy owns from July.
+
+00:06:41.195 --> 00:06:44.838
+In June, Graham takes one page to the University Council.
+
+00:06:46.138 --> 00:06:50.443
+It puts the building off for two years, and asks for the timetable to change.
+
+00:06:54.343 --> 00:06:59.429
+In Curitiba, a street built in a weekend settled what plans on paper couldn't.
+
+00:07:01.129 --> 00:07:07.554
+Helena's team did it in three weeks: real data in front of the person who decides, a round at a time.
+
+00:07:09.254 --> 00:07:14.031
+On Monday, put something real in front of the person who decides, within two weeks.
+
+00:07:15.131 --> 00:07:17.746
+Use real data from the start, and govern it.
+
+00:07:18.846 --> 00:07:21.449
+Ask, every round: what would change your mind?
+
+00:07:22.549 --> 00:07:28.582
+Keep the rounds short and fixed, stop when the decision is served, and keep what you learned in the product.
+
+00:07:30.082 --> 00:07:33.653
+Something real in front of them in two weeks; learn; repeat.

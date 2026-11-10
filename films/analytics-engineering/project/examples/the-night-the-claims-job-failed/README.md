@@ -25,7 +25,7 @@ approves.
 
 The fix mended the night, not its cause. So Sam's pull request also asks Ingrid Holm, in HR, who owns
 the claims' data, to change the contract first next time: DEC-CLM-03, proposed, for her to decide.
-*A platform that watches itself*, the second film of *Data as software*, follows it.
+The film *A platform that watches itself*, in the series *Data as software*, follows it.
 
 | File | What it is |
 |---|---|
@@ -61,6 +61,7 @@ reviews, someone other than the author approves, and nothing reaches production 
 On DuckDB, with no account, from the project's folder:
 
 ```sh
+dbt build --profiles-dir .   # once, the whole project, so every test finds the tables it reads
 # the claims job's first task, as it ran again on Tuesday, with the fix
 dbt build --profiles-dir . --select +mart_payroll__hours_to_pay --vars '{as_is_date: "2026-11-03"}'
 dbt show --profiles-dir . --select mart_payroll__hours_to_pay --vars '{as_is_date: "2026-11-03"}'

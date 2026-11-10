@@ -1,6 +1,6 @@
 Running with dbt=1.12.5
 Registered adapter: duckdb=1.11.0
-Found 37 models, 17 analyses, 195 data tests, 9 seeds, 1 operation, 15 sources, 6 exposures, 2 metrics, 527 macros, 4 groups, 1 semantic model, 9 unit tests
+Found 40 models, 17 analyses, 213 data tests, 10 seeds, 1 operation, 17 sources, 10 exposures, 2 metrics, 527 macros, 5 groups, 1 semantic model, 8 unit tests
 
 Concurrency: 4 threads (target='duckdb')
 

@@ -1,0 +1,103 @@
+// Rules that let people decide, the fourth film of Leading a data team, the third series of Leading data people. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (years and dates in words). The few longer stops are in breath.js.
+const NARR={
+"subak":{"name":"Water, shared","lead":3.0,"tail":1.0,"vo":[
+ {"id":"when","gap":0.8,"text":"Bali, Indonesia, in the 1970s.","say":"Bali, Indonesia, in the nineteen seventies."},
+ {"id":"years","gap":0.8,"text":"For over a thousand years, rice farmers here have shared the water that runs down from the mountains."},
+ {"id":"subak","gap":0.8,"text":"Farmers who take water from one canal form a subak: a group that decides, together, how to share it."},
+ {"id":"temple","gap":0.8,"text":"Groups along a river meet at a water temple, and agree a calendar: who plants first, and who follows."},
+ {"id":"turns","gap":0.8,"text":"Planting in turns shares the water, so the fields downstream don't run dry."},
+ {"id":"rest","gap":0.8,"text":"And fields harvested together lie empty together, so the pests that live on rice go hungry."},
+ {"id":"push","gap":0.8,"text":"Then the country set out to grow more rice, fast."},
+ {"id":"told","gap":0.8,"text":"Farmers were told to plant new, quick-growing rice as often as they could, whatever the temples' calendar said."},
+ {"id":"fed","gap":0.8,"text":"The planners wanted the country fed, and the new rice gave more grain."},
+ {"id":"clock","gap":0.8,"text":"But with every field on its own clock, the pests always found rice next door."},
+ {"id":"hopper","gap":0.8,"text":"A tiny insect, the brown planthopper, destroyed about two million tons of rice across Indonesia in 1977.","say":"A tiny insect, the brown planthopper, destroyed about two million tons of rice across Indonesia in nineteen seventy-seven."},
+ {"id":"dry","gap":0.8,"text":"In the dry season, farms downstream waited for water that didn't come."},
+ {"id":"harm","gap":0.8,"text":"For a farming family, a lost harvest meant a season's food and income gone."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"model","gap":0.8,"text":"In the 1980s, the anthropologist Stephen Lansing and the ecologist James Kremer built a computer model of two rivers and their 172 subaks.","say":"In the nineteen eighties, the anthropologist Stephen Lansing and the ecologist James Kremer built a computer model of two rivers and their one hundred and seventy-two subaks."},
+ {"id":"showed","gap":0.8,"text":"It showed that the temples' calendar gave the biggest harvests, balancing hungry pests against shared water."},
+ {"id":"bank","gap":0.8,"text":"In 1988 they took it to the bank that had paid for new irrigation works, and the bank agreed.","say":"In nineteen eighty-eight they took it to the bank that had paid for new irrigation works, and the bank agreed."},
+ {"id":"back","gap":0.8,"text":"Officials let the temples set the planting again, and farmers were no longer told to plant as fast as they could."},
+ {"id":"pests","gap":0.8,"text":"The pests came under control, and farmers sprayed less."},
+ {"id":"report","gap":0.8,"text":"The bank's final report said no project it had reviewed ran itself as well as Bali's."},
+ {"id":"unesco","gap":0.8,"text":"And in 2012, UNESCO listed the subak landscape as World Heritage.","say":"And in twenty twelve, UNESCO listed the subak landscape as World Heritage."},
+ {"id":"data","gap":0.8,"text":"A data team can make the planners' mistake: every decision taken in one place, far from the work."},
+ {"id":"film","gap":0.8,"text":"This film follows a team that gives the decisions back, and finds what no central plan had looked for."}
+]},
+"door":{"name":"Every question, one door","lead":1.0,"tail":1.0,"vo":[
+ {"id":"univ","gap":0.8,"text":"A university, a year from now, in September 2027.","say":"A university, a year from now, in September twenty twenty-seven."},
+ {"id":"council","gap":0.8,"text":"In June, the University Council asked for a new timetable from February, with fewer classes at peak hours, and put off a new building."},
+ {"id":"officers","gap":0.8,"text":"Each of the four faculties has a timetable officer who plans its classes."},
+ {"id":"product","gap":0.8,"text":"To plan, they need to know which rooms are used, and when. That's in one data product: Teaching space use."},
+ {"id":"only","gap":0.8,"text":"But only the data team worked with it, so every room question came to them."},
+ {"id":"asked","gap":0.8,"text":"From July to September, the faculties asked for 27 room reports.","say":"From July to September, the faculties asked for twenty-seven room reports."},
+ {"id":"wait","gap":0.8,"text":"Each took about a day and a half to make, and waited about two weeks in the list."},
+ {"id":"helena","gap":0.8,"text":"Helena Novak, the data manager, saw more: when two faculties asked at once, she chose whose rooms came first."},
+ {"id":"centre","gap":0.8,"text":"Every room decision in the university now passed through one small team, and through her."},
+ {"id":"knew","gap":0.8,"text":"The people who knew the courses were waiting for the people who knew the data."},
+ {"id":"decide","gap":0.8,"text":"So she decided to stop deciding: the faculties would read the data themselves."}
+]},
+"rules":{"name":"Three rules, each with its reason","lead":1.0,"tail":1.0,"vo":[
+ {"id":"yusuf","gap":0.8,"text":"Yusuf Demir, who leads data governance, drafted the rules for letting the faculties in."},
+ {"id":"eleven","gap":0.8,"text":"His first list had eleven, each guarding against something that had gone wrong somewhere."},
+ {"id":"ask","gap":0.8,"text":"Of each, they asked: what goes wrong here, now, without it?"},
+ {"id":"three","gap":0.8,"text":"Three were needed now."},
+ {"id":"r1","gap":0.8,"text":"One: room use means one thing for everyone, the share of hours in which someone was counted, so the faculties' numbers add up."},
+ {"id":"r2","gap":0.8,"text":"Two: the product's promise holds: counts per room per hour, never a person, so nobody is watched."},
+ {"id":"r3","gap":0.8,"text":"Three: before you publish a new measure from it, ask its owner, Ivy, so each new number means one thing, written down first."},
+ {"id":"drawer","gap":0.8,"text":"The other eight went in a drawer, to come out only when a real problem showed."},
+ {"id":"ostrom","gap":0.8,"text":"The political economist Elinor Ostrom studied fishing grounds, forests and irrigation that people had shared for centuries."},
+ {"id":"lasted","gap":0.8,"text":"The ones that lasted had a few clear rules, fitted to the place, made and changed by the people who live by them."},
+ {"id":"with","gap":0.8,"text":"Helena agreed the three with the four officers, not for them, and any of them can ask to change one."}
+]},
+"tools":{"name":"The right way, the easy way","lead":1.0,"tail":1.0,"vo":[
+ {"id":"easy","gap":0.8,"text":"Rules say what's right. Tools make it easy."},
+ {"id":"template","gap":0.8,"text":"Ivy and Jun made a template: a page on the platform with booked hours beside counted ones, and room use worked out the agreed way."},
+ {"id":"copy","gap":0.8,"text":"An officer copies it, picks their faculty's rooms, and asks their own questions: an afternoon, not two weeks."},
+ {"id":"anil","gap":0.8,"text":"Anil, Health's data partner, sat with its officer for her first hour."},
+ {"id":"who","gap":0.8,"text":"Beside the numbers, one box says who decides what."},
+ {"id":"whos","gap":0.8,"text":"The faculties decide their classes, and Ivy decides what the numbers mean."},
+ {"id":"keeps","gap":0.8,"text":"The team keeps the platform, and the registrar's office keeps the timetable."},
+ {"id":"mesh","gap":0.8,"text":"Data mesh and the book Team Topologies agree: decisions with the people who know the work, on a platform that makes the hard parts easy."},
+ {"id":"start","gap":0.8,"text":"On Monday 4 October, the officers started, and the team stopped making room reports by hand.","say":"On Monday the fourth of October, the officers started, and the team stopped making room reports by hand."}
+]},
+"labs":{"name":"Labs on a Monday","lead":1.0,"tail":1.0,"vo":[
+ {"id":"lucy","gap":0.8,"text":"Lucy Tran, Engineering's timetable officer, opened the template that Monday."},
+ {"id":"labs","gap":0.8,"text":"Engineering books its own teaching labs, so they had never been in the university's room reports."},
+ {"id":"side","gap":0.8,"text":"The labs have sensors too, so Lucy put her faculty's lab bookings beside their counts."},
+ {"id":"empty","gap":0.8,"text":"Every Monday morning, nine of Engineering's twelve labs were booked, and the sensors counted nobody in them."},
+ {"id":"nobody","gap":0.8,"text":"Nobody had asked: no report had ever put the two side by side."},
+ {"id":"why","gap":0.8,"text":"Lucy knew who to ask: two first-year courses had moved their lab classes to Thursdays, and their Monday bookings had rolled over every year."},
+ {"id":"rule3","gap":0.8,"text":"Lab use was a new measure, so before she shared it, Lucy asked Ivy."},
+ {"id":"gloss","gap":0.8,"text":"Ivy wrote it in the glossary the same way as room use, and the team built it into the product, for every faculty."},
+ {"id":"freed","gap":0.8,"text":"Engineering released the nine Monday mornings, and put its request for two new labs on hold."},
+ {"id":"then","gap":0.8,"text":"Then something nobody planned happened."},
+ {"id":"spread","gap":0.8,"text":"Within three weeks, Health had copied Lucy's page for its clinical skills rooms, and Arts for its studios."},
+ {"id":"nobodysent","gap":0.8,"text":"One faculty's question had become three, and nobody had sent an instruction."},
+ {"id":"model","gap":0.8,"text":"Lansing and Kremer saw the same in their model. Each year, every subak looked at its four nearest neighbours, and copied the best harvest."},
+ {"id":"emerge","gap":0.8,"text":"Within about eight years, groups planting together appeared, much like the real temple networks, and harvests rose."},
+ {"id":"drawn","gap":0.8,"text":"Nobody had drawn them."}
+]},
+"watch":{"name":"Watch what emerges","lead":1.0,"tail":1.0,"vo":[
+ {"id":"plans","gap":0.8,"text":"By Friday 26 November, all four faculties had sent the registrar's office their plans for February.","say":"By Friday the twenty-sixth of November, all four faculties had sent the registrar's office their plans for February."},
+ {"id":"moved","gap":0.8,"text":"Together, they moved one peak class in six, as the University Council had asked."},
+ {"id":"none","gap":0.8,"text":"In October and November the team made no room reports by hand, and the time went back to the roadmap."},
+ {"id":"role","gap":0.8,"text":"Helena's job changed too: less deciding, more watching what emerged, and asking what it taught."},
+ {"id":"problem","gap":0.8,"text":"One real problem did show: Health sent its heads of school a copy of its page from three weeks before, and two planned from old numbers."},
+ {"id":"rule4","gap":0.8,"text":"So one rule came out of the drawer, with its reason: share the live page, not a copy, because copies go stale."},
+ {"id":"date","gap":0.8,"text":"And the template now shows the date of its data in the corner."},
+ {"id":"four","gap":0.8,"text":"Four rules, each with its reason, and still room to decide."}
+]},
+"monday":{"name":"On Monday","lead":1.0,"tail":1.0,"vo":[
+ {"id":"bali","gap":0.8,"text":"In Bali, nobody planned every field. Each subak decided its own work, a shared calendar timed it together, and the harvests held."},
+ {"id":"uni","gap":0.8,"text":"At the university, four officers planned their own rooms, a few rules kept the numbers true, and what nobody had looked for came to light."},
+ {"id":"m1","gap":0.8,"text":"On Monday, write few rules, each with its reason."},
+ {"id":"m2","gap":0.8,"text":"Make the right way the easy way."},
+ {"id":"m3","gap":0.8,"text":"Say who decides what."},
+ {"id":"m4","gap":0.8,"text":"Watch what emerges, and learn from it."},
+ {"id":"m5","gap":0.8,"text":"And add a rule only when a real problem shows."},
+ {"id":"last","gap":0.8,"text":"A few clear rules, good tools, and trust."}
+]}
+};

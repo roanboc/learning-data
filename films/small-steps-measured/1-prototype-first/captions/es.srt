@@ -1,0 +1,267 @@
+1
+00:00:03,000 --> 00:00:09,805
+Curitiba, en el sur de Brasil. Viernes 19 de mayo de 1972, seis de la tarde.
+
+2
+00:00:11,505 --> 00:00:18,723
+Cuadrillas municipales llegan en camión a la calle principal del centro viejo, la Rua XV de Novembro, y la cierran a los autos.
+
+3
+00:00:20,623 --> 00:00:25,609
+Durante años, autos y autobuses la habían llenado, y la gente a pie quedaba apretada contra los bordes.
+
+4
+00:00:27,309 --> 00:00:32,292
+Un plan era ensanchar las calles, derribando edificios de principios de siglo.
+
+5
+00:00:33,992 --> 00:00:39,464
+El joven alcalde, Jaime Lerner, un arquitecto, quería devolverle la calle a la gente a pie.
+
+6
+00:00:40,964 --> 00:00:47,459
+Los comerciantes temían lo contrario: sin autos, sus clientes dejarían de venir y sus ventas caerían.
+
+7
+00:00:49,359 --> 00:00:54,267
+Algo tenía que cambiar, pero ningún plan en papel podía mostrarles cómo sería la calle.
+
+8
+00:00:56,167 --> 00:00:58,730
+Así que el equipo del alcalde construyó la calle de verdad, y rápido.
+
+9
+00:01:00,230 --> 00:01:05,436
+El sábado por la mañana, gris y húmedo, la calle se entregó a la gente, sin ceremonia.
+
+10
+00:01:07,136 --> 00:01:12,515
+Durante el fin de semana, las cuadrillas levantaron la calzada y pusieron adoquines, faroles y quioscos.
+
+11
+00:01:13,815 --> 00:01:16,096
+Plantaron decenas de miles de flores.
+
+12
+00:01:17,996 --> 00:01:21,048
+El fin de semana siguiente, llegaron conductores a recuperar la calle.
+
+13
+00:01:22,348 --> 00:01:26,432
+Encontraron largas tiras de papel en ella y decenas de niños pintando.
+
+14
+00:01:28,532 --> 00:01:32,804
+En pocos días, los comerciantes dijeron a los periódicos que sus ventas habían subido un poco.
+
+15
+00:01:34,104 --> 00:01:36,159
+Pronto pedían más calle para la gente a pie.
+
+16
+00:01:37,859 --> 00:01:42,539
+Otras calles siguieron, y cincuenta años después sigue siendo una calle para la gente a pie.
+
+17
+00:01:44,439 --> 00:01:50,404
+La ciudad no ganó la discusión en papel. Puso la calle de verdad frente a quienes tenían que decidir.
+
+18
+00:01:52,104 --> 00:01:54,236
+Un equipo de datos puede trabajar igual.
+
+19
+00:01:55,336 --> 00:02:01,009
+Pon algo real frente a quien decide, aprende de lo que hace con ello, y vuelve a hacerlo.
+
+20
+00:02:09,909 --> 00:02:16,492
+Febrero de 2027. Graham Ellis, el nuevo director de Instalaciones de la universidad, tiene una solicitud.
+
+21
+00:02:17,792 --> 00:02:21,820
+¿Podría el equipo de Helena Novak hacerle un tablero del uso de las aulas para Semana Santa?
+
+22
+00:02:23,520 --> 00:02:29,359
+La pregunta de fondo es mayor: si pedir al Consejo Universitario un nuevo edificio de aulas.
+
+23
+00:02:30,859 --> 00:02:33,835
+Costaría unos A$140 millones.
+
+24
+00:02:35,735 --> 00:02:42,403
+Luego la solicitud espera, como todas: en promedio, 41 días hábiles de la solicitud al primer uso.
+
+25
+00:02:44,303 --> 00:02:50,644
+El martes 30 de marzo, el equipo la toma de la nueva manera, como lo fijó el plan de noventa días de Helena.
+
+26
+00:02:52,344 --> 00:02:57,345
+Ivy Reyes, la nueva analista del equipo, ya dibujó todo su recorrido en una página.
+
+27
+00:02:58,645 --> 00:03:03,445
+Están las 186 aulas, incluidas las 14 que tenían dos nombres.
+
+28
+00:03:05,145 --> 00:03:11,489
+Así que el prototipo parte de datos reales: trece semanas de reservas y conteos de personas de los sensores de las aulas.
+
+29
+00:03:13,189 --> 00:03:17,351
+Gobernados desde el primer día: conteos por aula y por hora, nunca una persona.
+
+30
+00:03:21,251 --> 00:03:28,769
+En 2001, el Manifiesto Ágil lo dijo claro: software funcionando sobre documentación extensiva.
+
+31
+00:03:30,669 --> 00:03:36,081
+La primera ronda pregunta una sola cosa: ¿cuándo se reservan las aulas y cuándo se usan, hora por hora?
+
+32
+00:03:37,781 --> 00:03:42,873
+El miércoles 7 de abril, el agente del equipo redacta un primer modelo en un minuto.
+
+33
+00:03:44,173 --> 00:03:46,261
+Cuenta las horas reservadas como horas usadas.
+
+34
+00:03:47,961 --> 00:03:54,281
+Ivy lo detecta ella misma: lee las notas del agente hasta el final y contrasta el borrador con los sensores.
+
+35
+00:03:55,981 --> 00:04:02,004
+El uso de aulas, tal como lo entiende Graham, entra al glosario: personas en el aula. El modelo se construye a partir de él.
+
+36
+00:04:03,504 --> 00:04:06,324
+Luego Jun revisa el cambio de Ivy, el mismo día.
+
+37
+00:04:07,824 --> 00:04:13,674
+Rápido no es descuidado. El agente propone, las personas revisan y nadie aprueba su propio trabajo.
+
+38
+00:04:15,574 --> 00:04:20,688
+El viernes 9 de abril, diez días después del inicio, Graham ve el prototipo.
+
+39
+00:04:21,988 --> 00:04:25,130
+Un mapa de calor de la semana, en un tablero de Databricks.
+
+40
+00:04:27,230 --> 00:04:32,288
+Helena le hace una pregunta, y se la hará en cada ronda: ¿qué le haría cambiar de opinión?
+
+41
+00:04:34,188 --> 00:04:39,514
+Su respuesta: si las aulas están llenas toda la semana, pedirá el edificio. Si no lo están, no.
+
+42
+00:04:43,414 --> 00:04:49,854
+El trabajo avanza en rondas de una semana; cada una termina un viernes, con quien decide y lo real delante.
+
+43
+00:04:51,554 --> 00:04:56,444
+Scrum lo llama revisión del sprint. Aquí es media hora con Graham, frente a una pantalla.
+
+44
+00:04:58,144 --> 00:05:05,111
+El miércoles 14 de abril, Graham lo usa él mismo, con su equipo: once días hábiles desde el inicio.
+
+45
+00:05:06,811 --> 00:05:11,231
+Había esperado unas siete semanas antes de que alguien empezara, como toda solicitud.
+
+46
+00:05:12,531 --> 00:05:15,942
+Después, la nueva manera tomó once días hábiles, contra cuarenta y uno.
+
+47
+00:05:17,842 --> 00:05:22,518
+Como en Curitiba, la conversación cambia cuando la gente puede usar algo real.
+
+48
+00:05:24,418 --> 00:05:26,400
+Y lo real sorprende a todos.
+
+49
+00:05:27,500 --> 00:05:33,975
+Las aulas están reservadas el 38% de la semana, pero el 93% de diez a dos, de martes a jueves.
+
+50
+00:05:36,075 --> 00:05:41,875
+En una de cada cinco horas reservadas no llega nadie. Cuando sí llegan, se ocupa cerca de la mitad de los asientos.
+
+51
+00:05:43,775 --> 00:05:49,532
+Todos tenían razón sobre lo que veían. El promedio ocultaba tanto el pico lleno como las aulas vacías.
+
+52
+00:05:51,432 --> 00:05:58,545
+En la segunda revisión, su respuesta cambia: muéstrenme que funciona en 2030, cuando Planificación espera 6% más de estudiantes.
+
+53
+00:06:02,245 --> 00:06:08,834
+Viernes 23 de abril, la tercera ronda. La respuesta es clara: faltan aulas solo en el pico.
+
+54
+00:06:10,734 --> 00:06:16,039
+Mover cerca de una de cada seis clases del pico a otras horas, y liberar las reservas que nadie usa.
+
+55
+00:06:17,339 --> 00:06:20,686
+Eso cubre la proyección hasta 2030 sin un edificio nuevo.
+
+56
+00:06:22,586 --> 00:06:26,862
+La decisión ya tiene lo que necesita, así que las rondas paran. Una cuarta solo la puliría.
+
+57
+00:06:28,762 --> 00:06:33,659
+Lo que enseñó el prototipo se queda en el producto: la definición y el modelo revisado.
+
+58
+00:06:35,159 --> 00:06:39,495
+Y el tablero se vuelve un producto propio, del que Ivy es dueña desde julio.
+
+59
+00:06:41,195 --> 00:06:44,838
+En junio, Graham lleva una página al Consejo Universitario.
+
+60
+00:06:46,138 --> 00:06:50,443
+Posterga el edificio dos años y pide que cambien los horarios.
+
+61
+00:06:54,343 --> 00:06:59,429
+En Curitiba, una calle hecha en un fin de semana resolvió lo que los planes en papel no pudieron.
+
+62
+00:07:01,129 --> 00:07:07,554
+El equipo de Helena lo hizo en tres semanas: datos reales frente a quien decide, una ronda a la vez.
+
+63
+00:07:09,254 --> 00:07:14,031
+El lunes, pon algo real frente a quien decide, en menos de dos semanas.
+
+64
+00:07:15,131 --> 00:07:17,746
+Usa datos reales desde el inicio, y gobiérnalos.
+
+65
+00:07:18,846 --> 00:07:21,449
+Pregunta en cada ronda: ¿qué le haría cambiar de opinión?
+
+66
+00:07:22,549 --> 00:07:28,582
+Haz rondas cortas y fijas, para cuando la decisión tenga lo que necesita, y deja lo aprendido en el producto.
+
+67
+00:07:30,082 --> 00:07:33,653
+Algo real frente a ellos en dos semanas; aprende; repite.

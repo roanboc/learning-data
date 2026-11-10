@@ -123,10 +123,13 @@
 | Know what you hold | 301 | 0% | 0 | 28.2 | Drawn to the rule |
 | Show the least | 332 | 0% | 0 | 28.3 | Drawn to the rule |
 | Grants by design | 265 | 0% | 0 | 28.0 | Drawn to the rule |
+| Tags that travel | 304 | 0% | 0 | 28.2 | Drawn to the rule |
 | Owning the outcome | 231 | 0% | 0 | 28.4 | Drawn to the rule |
 | Measure the work, not the people | 189 | 0% | 0 | 28.3 | Drawn to the rule |
+| When someone falls behind | 211 | 0% | 0 | 28.3 | Drawn to the rule |
 | The hidden factory | 534 | 0% | 0 | 28.3 | Drawn to the rule |
 | Report, fix, tell | 293 | 0% | 0 | 28.8 | Drawn to the rule |
+| Prototype first | 295 | 0% | 0 | 28.2 | Drawn to the rule |
 | Many hats, one picture | 262 | 0% | 0 | 28.6 | Drawn to the rule |
 | The draft and the decision | 244 | 0% | 0 | 28.5 | Drawn to the rule |
 | Learning while doing | 291 | 0% | 0 | 28.6 | Drawn to the rule |

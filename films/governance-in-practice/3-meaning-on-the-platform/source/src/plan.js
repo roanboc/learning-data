@@ -345,11 +345,11 @@ function gm_touches(ctx,o){o=o||{};gm_prHead(ctx,o);GM_TCH.forEach((B,k)=>{const
     withA(ctx,v,()=>{if(Array.isArray(it)){wc_T(ctx,it[0],ix,iy,{w:500,size:28,f:"mono",col:WC_DARK});wc_T(ctx," · "+it[1],ix+gu_mw(ctx,it[0]),iy,{w:600,size:28,col:WC_INK});}
       else wc_T(ctx,it,ix,iy,{w:500,size:28,f:"mono",col:WC_DARK});});});
   if(B.more&&u>0.99)wc_T(ctx,B.more,bx+30,by+100+3*44,{w:600,size:28,col:WC_MUTED});});}
-// Tuesday morning: the rule at the top of the report, and the reviews: Mei approves the meaning, data governance confirms the term
-// (o.mei, o.yus, 0 to 1)
-function gm_reviews(ctx,o){o=o||{};gm_prHead(ctx,{sub:"Tuesday · reviewed by the owner and data governance"});const x=150,w=1620;gu_box(ctx,x,268,w,140,null,{seed:451});
-  gu_md(ctx,"Approve: the owner of each meaning; confirm the term: data governance (DEC-PRJ-11).",x+30,354,{size:30});gu_box(ctx,x,428,w,320,"Reviews",{seed:452});
-  [["Mei Tanaka","registrar's office","approved the meaning",o.mei||0],["Yusuf Demir","data governance","confirmed the term",o.yus||0]].forEach(([n,r,s,v],i)=>{const ry=428+136+i*104;
+// Tuesday morning: the rule at the top of the report, then who reviews and who is told: the data team approves the code, which copies
+// the glossary's words, and Mei, who decided them on Monday, is told what they touch (o.team, o.mei, 0 to 1)
+function gm_reviews(ctx,o){o=o||{};gm_prHead(ctx,{sub:"Tuesday · reviewed by the data team"});const x=150,w=1620;gu_box(ctx,x,268,w,140,null,{seed:451});
+  gu_md(ctx,"The meaning was decided in the glossary. The data team reviews the code; owners are told.",x+30,354,{size:30});gu_box(ctx,x,428,w,320,"Review, and who is told",{seed:452});
+  [["Data team","reviews the code","approved",o.team||0],["Mei Tanaka","registrar's office","told what it touches",o.mei||0]].forEach(([n,r,s,v],i)=>{const ry=428+136+i*104;
     wc_T(ctx,n,x+30,ry,{w:800,size:32,col:WC_DARK});wc_T(ctx,r,x+30+tw(ctx,n,32,800)+20,ry,{w:600,size:28,col:WC_MUTED});v=clamp(v,0,1);
     if(v>0.01){const sx=x+w-30-tw(ctx,s,30,700);gv_tint(ctx,sx-74,ry-40,tw(ctx,s,30,700)+96,56,GV.gold,0.6*v);wc_tick(ctx,sx-40,ry-12,44,GV.goldInk,v,6);
       withA(ctx,clamp(v*2,0,1),()=>wc_T(ctx,s,sx,ry,{w:700,size:30,col:GV.goldInk}));}});}
@@ -373,14 +373,15 @@ const GM_CC=[{n:36,s:"select"},{fold:1},{n:44,s:"    credential_name,"},{n:45,s:
   {n:47,s:"        or (… = 'microcredential' and credit_points >= {{ var('min_award_credit_points') }})",add:1},{n:48,s:"        as counts_as_award,",add:1},{n:49,s:"    issued_on,"}];
 function gm_credSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,60,e);
   return gu_file(ctx,94,y,1732,{path:"models/core/student/core_credential_v2.sql",lines:GM_CC.map((L,i)=>i===5?Object.assign({},L,{lit:clamp(o.lit||0,0,1),litCol:GM_V}):i===6?Object.assign({},L,{lit:clamp(o.col||0,0,1),litCol:GM_V}):L)});}
-// if Mei and the faculties ever agree on another number: one line, in a pull request she reviews, drawn in pencil because it's only a
-// maybe (o.a, 0 to 1); o.rev fills its reviewers
+// if Mei and the faculties ever agree on another number: first the glossary's words, then one line, in a pull request the data team
+// reviews, drawn in pencil because it's only a maybe (o.a, 0 to 1); o.ln brings in the line, o.rev fills its reviewer
 function gm_maybe(ctx,o){o=o||{};const a=clamp(o.a||0,0,1);if(a<=0.01)return;const x=1000,y=150,w=780,h=520;
   gm_rise(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",dashed:true,role:WC_PENCIL,seed:471});wc_hand(ctx,"if they ever agree",x+36,y+66,{size:34,w:700,col:WC_PENCIL});
-    wc_T(ctx,"min_award_credit_points: 6 → 8",x+36,y+150,{w:500,size:30,f:"mono",col:WC_DARK});wc_T(ctx,"one line changes, in dbt_project.yml",x+36,y+204,{w:600,size:28,col:WC_INK});
-    ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+30,y+240,w-60,2);ctx.restore();wc_T(ctx,"Reviewers",x+36,y+300,{w:700,size:28,col:WC_MUTED});
-    const r=clamp(o.rev||0,0,1);[["Mei Tanaka","registrar's office"],["the faculties","each faculty's steward"]].forEach(([n,s],i)=>{const v=clamp(r*2-i,0,1);if(v<=0.01)return;
-      withA(ctx,v,()=>{wc_T(ctx,n,x+36,y+356+i*56,{w:800,size:30,col:WC_DARK});wc_T(ctx,s,x+36+tw(ctx,n,30,800)+18,y+356+i*56,{w:600,size:28,col:WC_MUTED});});});
+    wc_T(ctx,"1 · the glossary: at least 8",x+36,y+132,{w:600,size:28,col:WC_INK});const ln=o.ln==null?1:clamp(o.ln,0,1);
+    withA(ctx,ln,()=>{wc_T(ctx,"2 · in dbt_project.yml, one line:",x+36,y+182,{w:600,size:28,col:WC_INK});wc_T(ctx,"min_award_credit_points: 6 → 8",x+36,y+228,{w:500,size:30,f:"mono",col:WC_DARK});});
+    ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+30,y+256,w-60,2);ctx.restore();wc_T(ctx,"Reviewers",x+36,y+310,{w:700,size:28,col:WC_MUTED});
+    const r=clamp(o.rev||0,0,1);[["Data team","reviews the code"]].forEach(([n,s],i)=>{const v=clamp(r*2-i,0,1);if(v<=0.01)return;
+      withA(ctx,v,()=>{wc_T(ctx,n,x+36,y+364+i*56,{w:800,size:30,col:WC_DARK});wc_T(ctx,s,x+36+tw(ctx,n,30,800)+18,y+364+i*56,{w:600,size:28,col:WC_MUTED});});});
     if(r>0.99)withA(ctx,clamp(o.req||0,0,1),()=>{const s="review requested",pw=Math.round(tw(ctx,s,28,700)+44);wc_panel(ctx,x+w-36-pw,y+440,pw,48,{kind:"pill",wash:GV.amber,washA:0.4,seed:472});
       wc_T(ctx,s,x+w-36-pw+22,y+474,{w:700,size:28,col:WC_DARK});});});}
 
@@ -402,14 +403,14 @@ const GM_MV=[{n:6,s:"{{ config("},{n:7,s:"    materialized='metric_view',"},{n:8
 const GM_MVL={1:0,6:1,7:2,9:3,10:3,12:4,13:4};
 function gm_mvSheet(ctx,o){o=o||{};const e=easeCam(clamp(o.u==null?1:o.u,0,1)),y=lerp(H+40,46,e),L=o.lit||[];
   return gu_file(ctx,110,y,1000,{path:"models/core/course/awards_conferred.sql",lang:"yaml",lh:44,lines:GM_MV.map((r,i)=>GM_MVL[i]==null?r:Object.assign({},r,{lit:clamp(L[GM_MVL[i]]||0,0,1),litCol:GM_MVL[i]===4?GM_V:GV.gold}))});}
-// its pull request, small, beside it: who wants to merge it, the build that tested it, and its owner's approval (o.ok, 0 to 1)
+// its pull request, small, beside it: who wants to merge it, the build that tested it, and the data team's approval (o.ok, 0 to 1)
 function gm_mvPR(ctx,t,o){o=o||{};const a=clamp(o.a||0,0,1);if(a<=0.01)return;const x=1180,y=150,w=640,h=520;gm_rise(ctx,a,()=>{wc_panel(ctx,x,y,w,h,{kind:"card",seed:481});
   wc_T(ctx,"pull request",x+32,y+54,{w:600,size:28,col:WC_MUTED});["Course: awards conferred,","counted once, as a metric","view on Databricks"].forEach((l,i)=>wc_T(ctx,l,x+32,y+108+i*42,{w:800,size:32,col:WC_DARK}));
   wc_T(ctx,"Jun Park wants to merge into main",x+32,y+258,{w:600,size:28,col:WC_INK});ctx.save();ctx.fillStyle=rgba(WC_PENCIL,0.3);ctx.fillRect(x+28,y+292,w-56,2);ctx.restore();
   const ck=clamp(o.ck||0,0,1);gu_light(ctx,x+50,y+352,ck>0.99?"pass":ck>0.01?"run":"wait",t);wc_T(ctx,"dbt build",x+80,y+362,{w:500,size:28,f:"mono",col:WC_DARK});
   wc_T(ctx,ck>0.99?"passed":"tests and builds it",x+80+gu_mw(ctx,"dbt build")+20,y+362,{w:600,size:28,col:ck>0.99?GV.greenInk:WC_MUTED});
-  const ok=clamp(o.ok||0,0,1);if(ok>0.01){wc_tick(ctx,x+50,y+432,44,GV.goldInk,ok,6);withA(ctx,clamp(ok*2,0,1),()=>{wc_T(ctx,"Mei Tanaka",x+80,y+444,{w:800,size:30,col:WC_DARK});
-    wc_T(ctx,"approved",x+80+tw(ctx,"Mei Tanaka",30,800)+16,y+444,{w:700,size:28,col:GV.goldInk});});}});}
+  const ok=clamp(o.ok||0,0,1);if(ok>0.01){wc_tick(ctx,x+50,y+432,44,GV.goldInk,ok,6);withA(ctx,clamp(ok*2,0,1),()=>{wc_T(ctx,"Data team",x+80,y+444,{w:800,size:30,col:WC_DARK});
+    wc_T(ctx,"approved",x+80+tw(ctx,"Data team",30,800)+16,y+444,{w:700,size:28,col:GV.goldInk});});}});}
 // the metric view's page in the catalog: its owner, and its lineage: core_credential version 2 upstream, and the reports that read it
 // downstream (o.r[i], 0 to 1); o.own lights its owner
 const GM_LN=[["core_credential_v2","table",180,520],["awards_conferred","metric view",730,520],["draft submission","report · Mei Tanaka",1290,410],["census report","report · Planning",1290,630]];

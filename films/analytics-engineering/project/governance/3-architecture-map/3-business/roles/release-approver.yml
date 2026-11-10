@@ -1,0 +1,5 @@
+name: release approver
+kind: business role
+definition: Approves a change for production and releases it, never one they drafted.
+owner: Yusuf Demir, data governance lead
+status: confirmed

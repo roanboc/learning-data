@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/show-the-least/soundtrack.mp3",
+      "size": 6242420,
+      "sha256": "27cc6446a5318c5a921b842e02a3837b7b101938d883db945000f15e27b567c9",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-show-the-least-a9bacf29bd8d68bf01df/27cc6446a5318c5a921b842e02a3837b7b101938d883db945000f15e27b567c9.mp3"
+    }
+  ]
+}

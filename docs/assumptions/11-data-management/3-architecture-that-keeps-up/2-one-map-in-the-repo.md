@@ -1,8 +1,8 @@
 # One map, in the repo: questions and assumptions
 
-*Data management* · *Architecture that keeps up*, film 2 · open, PR #222 · [pull request](https://github.com/roanboc/learning-data/pull/222)
+*Data management* · *Architecture that keeps up*, film 2 · merged, PR #222 · [pull request](https://github.com/roanboc/learning-data/pull/222)
 
-On the site once PR #222 merges: https://data.learn-all.org/architecture-that-keeps-up/one-map/
+[Watch it on the site](https://data.learn-all.org/architecture-that-keeps-up/one-map/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

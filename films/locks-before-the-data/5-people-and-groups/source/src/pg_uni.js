@@ -138,6 +138,6 @@ function pg_rule(ctx,a,lit,n){const b=dp_page(ctx,PG_DIR.x,PG_DIR.y,PG_DIR.w,PG_
 const PG_ADMINS=["admin_account_settings","admin_production_settings","admin_test_settings","admin_development_settings","admin_storage_readers","admin_table_restorers"];
 function pg_slots(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(!(a>0.004))return null;const D=PG_DIR,b=dp_page(ctx,D.x,D.y,D.w,D.h,{tool:"entra",name:"Microsoft Entra ID",where:"Groups",a});
   ctx.save();ctx.globalAlpha*=a;PG_ADMINS.forEach((g,i)=>{const u=clamp((o.n==null?6:o.n)-i,0,1);if(u<=0)return;const on=o.on?clamp(o.on[i]||0,0,1):0;
-    pg_slot(ctx,b.x,b.y+i*78,g,{w:b.w,on,count:on>0.5?"1 member":"0 members",a:ag_sine(u)});});ctx.restore();return b;}
+    pg_slot(ctx,b.x,b.y+i*78,g,{w:b.w,on,count:"0 members",countOn:"1 member",a:ag_sine(u)});});ctx.restore();return b;}
 // the right end of admin group i's slot, where an eligible account's dotted line reaches it
 function pg_slotEnd(i){return[PG_DIR.x+PG_DIR.w-32,PG_DIR.y+104+i*78+35];}

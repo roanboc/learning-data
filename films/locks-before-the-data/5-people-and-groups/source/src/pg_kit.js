@@ -75,7 +75,7 @@ function pg_reader(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)retu
   ctx.save();rr(ctx,fx,fy,fw,fh,18*k);ctx.fillStyle="rgba(4,14,18,0.55)";ctx.fill();ctx.strokeStyle=rgba(DP.ice,0.8);ctx.lineWidth=2.4;ctx.stroke();ctx.restore();
   // the door's line through the lock: the corridor to its left, the room to its right
   ctx.save();ctx.strokeStyle=rgba(DP.ice,0.35);ctx.lineWidth=2;ctx.setLineDash([10*k,10*k]);ctx.beginPath();ctx.moveTo(x+w*0.5,y+40*k);ctx.lineTo(x+w*0.5,y+h-36*k);ctx.stroke();ctx.restore();
-  if(!o.mini){dp_T(ctx,"Corridor",x+40*k,y+70*k,{w:700,size:28,col:"mut"});dp_T(ctx,"Room",x+w-40*k,y+70*k,{w:700,size:28,col:"mut",align:"right"});}
+  if(!o.mini){dp_T(ctx,"Corridor",x+40*k,y+70*k,{w:700,size:28});dp_T(ctx,"Room",x+w-40*k,y+70*k,{w:700,size:28,align:"right"});}
   const cw=300*k,chh=cw*0.62,cy0=fy+(fh-chh)/2,seed=o.seed||5,gs=o.gSeed==null?seed:o.gSeed;
   // where each card is: the pattern card from the right edge into the frame, the guest's card from the left edge
   const pin=ag_sine(o.pattern||0),pout=ag_sine(o.pOut||0),gin=ag_sine(o.guest||0),gout=ag_sine(o.gOut||0);
@@ -117,15 +117,16 @@ function pg_admin(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)re
   dp_T(ctx,name,x+24,y+102,{w:700,size:32});pg_seckey(ctx,x+w-62,y+98,0.62,{touch:o.touch});
   ctx.restore();return{x,y,w,h};}
 // an admin group: a slot of glass with an amber edge, its name as the directory writes it, and how many are in it; when someone is
-// switched on (on, 0 to 1) it fills with solid amber and dark words. 640 x 70 by default; returns its box
+// switched on (on, 0 to 1) it fills with solid amber and dark words, the light words fading out as the dark ones fade in, so no word
+// sits half-lit on half the amber (count: how many are in it, countOn: when switched on). 640 x 70 by default; returns its box
 function pg_slot(ctx,x,y,name,o){o=o||{};const a=o.a==null?1:o.a,w=o.w||640,h=70;if(a<=0.004)return{x,y,w,h};const on=clamp(o.on||0,0,1),A=DP.F.amber;
   ctx.save();ctx.globalAlpha*=a;
   ctx.save();ctx.shadowColor=rgba(A,0.25+0.55*on);ctx.shadowBlur=18+26*on;rr(ctx,x,y,w,h,35);ctx.fillStyle="rgba(6,20,26,0.75)";ctx.fill();ctx.restore();
   ctx.save();rr(ctx,x,y,w,h,35);ctx.clip();dp_behind(ctx,o.behind);ctx.fillStyle="rgba(6,20,26,0.35)";ctx.fillRect(x,y,w,h);
   if(on>0){ctx.globalAlpha*=on;const g=ctx.createLinearGradient(0,y,0,y+h);g.addColorStop(0,rgba(mix(A,[255,255,255],0.14),1));g.addColorStop(1,rgba(A,1));ctx.fillStyle=g;ctx.fillRect(x,y,w,h);}
   ctx.restore();rr(ctx,x+1,y+1,w-2,h-2,34);ctx.strokeStyle=rgba(mix(A,[255,255,255],0.3),0.95);ctx.lineWidth=2.4;ctx.stroke();
-  const ink=on>0.5?DP.on:DP.T.ink;dp_T(ctx,name,x+30,y+45,{w:500,size:28,f:"mono",col:ink});
-  if(o.count)dp_T(ctx,o.count,x+w-30,y+45,{w:700,size:28,col:on>0.5?DP.on:"mut",align:"right"});
+  for(const [lit,al] of [[0,1-on],[1,on]])if(al>0.004)withA(ctx,al,()=>{dp_T(ctx,name,x+30,y+45,{w:500,size:28,f:"mono",col:lit?DP.on:DP.T.ink});
+    const n=lit&&o.countOn!=null?o.countOn:o.count;if(n)dp_T(ctx,n,x+w-30,y+45,{w:700,size:28,col:lit?DP.on:"mut",align:"right"});});
   ctx.restore();return{x,y,w,h};}
 // a security key on its ring: a small black key with a gold contact and a touch disc; x, y its middle; s its size (about 120 long at 1)
 function pg_seckey(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(o.rot||0);ctx.scale(s,s);

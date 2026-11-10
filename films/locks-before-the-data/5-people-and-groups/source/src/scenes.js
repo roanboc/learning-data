@@ -36,7 +36,7 @@ scene("keys",(ctx,S,t,sc)=>{const C=sc.cues;
       pg_key(ctx,PG_KEYST[0],PG_KEYST[1],0.62,{rot:-0.15,num:"312",rim:"coral",rimA:ka,deco:1});
       dp_pill(ctx,1150,640,"Still opens Room 312","coral",{a:ka});}},
     // anyone who found it, or kept it: the key in Room 312's lock, and the light under the door dims as the next guest sleeps
-    {at:tAnyone-0.4,place:"pgCorridor",keys:[[0,960,540,1.0],[tAnyone+0.2,990,520,1.6]],d:4.4,push:0.015,draw(ctx,t){
+    {cut:true,at:tAnyone-0.4,place:"pgCorridor",keys:[[0,960,540,1.0],[tAnyone+0.2,990,520,1.6]],d:4.4,push:0.015,draw(ctx,t){
       pg_doorLight(ctx,ag_in(t,tSlept,1.8));pg_plate(ctx);pg_escutcheon(ctx,lx,ly,0.42);
       const ka=ag_in(t,tLet-0.2,0.7);pg_keyInLock(ctx,lx,ly,0.42,{a:ka,rim:"coral",rimA:0.9*ka,deco:1});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);});
@@ -85,7 +85,8 @@ scene("card",(ctx,S,t,sc)=>{const C=sc.cues;
       dp_tag(ctx,560,420,"Power that outlived the task","coral",{a:ag_in(t,tTask-0.1,0.5)*ta,to:toDoor,p:ag_in(t,tTask+0.2,0.6)});
       dp_tag(ctx,560,540,"A token with no end date","coral",{a:ag_in(t,tToken+0.1,0.5)*ta,to:toDoor,p:ag_in(t,tToken+0.4,0.6)});
       // the answer, built from three earlier films, in the two tools
-      ["Who is it, really?","No secret to lose","Power you switch on"].forEach((s,i)=>dp_tag(ctx,560,300+i*120,s,"grey",{a:ag_in(t,tThree-0.2+0.3*i,0.5)}));
+      // they leave before the title card comes in, so no word shows under its own
+      ["Who is it, really?","No secret to lose","Power you switch on"].forEach((s,i)=>dp_tag(ctx,560,300+i*120,s,"grey",{a:ag_in(t,tThree-0.2+0.3*i,0.5)*(1-ag_in(t,C.breath-0.5,0.6))}));
       pg_toolSlip(ctx,120,420,"entra","Microsoft Entra ID",ag_in(t,tEntra-0.1,0.5),{k:ag_spr(t,tEntra-0.1,0.6)});pg_platName(ctx,ag_in(t,tAzure-0.1,0.5));}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
   dp_title(ctx,S,t,C.breath,"People and groups","Keys that end with the stay",PG_LINE);});
@@ -111,7 +112,7 @@ scene("before",(ctx,S,t,sc)=>{const C=sc.cues;
     // its tables give their rights to groups from the directory
     if(aA>0){const b=dp_page(ctx,940,150,900,480,{tool:"databricks",name:"Azure Databricks",where:"Catalog · registrar",title:"Permissions",a:aA});
       dp_rows(ctx,b.x,b.y,[{t:"Group",w:470},{t:"Privilege",w:170},{t:"On",w:196}],[["registrar_office","core"],["registrar_exam_support","support"],["planning_learner_readers","core"]].map(r=>[{mono:true,t:r[0]},"SELECT",{mono:true,t:r[1]}]),{a:aA});
-      dp_slip(ctx,940,650,"Governed in Unity Catalog","grey",{a:aA*ag_in(t,tGov-0.2,0.5)});}
+      dp_slip(ctx,940,650,"Governed in Unity Catalog","grey",{a:aA*ag_in(t,tGov-0.2,0.5),ink:true});}
     // who could come in at all: people, added one by one; nineteen of them have moved on
     if(aB>0){const b=dp_page(ctx,940,130,900,720,{tool:"databricks",name:"Azure Databricks",where:"Settings · Identity and access",title:"Users",a:aB}),mv=ag_in(t,tMoved+0.3,0.6);
       dp_pill(ctx,b.x+b.w,270,"214 people · added by hand","cyan",{align:"right",a:aB*ag_in(t,t214-0.1,0.5)});
@@ -122,7 +123,7 @@ scene("before",(ctx,S,t,sc)=>{const C=sc.cues;
     // groups made inside the workspace, which the directory knew nothing of
     if(aC>0){const b=dp_page(ctx,940,130,900,520,{tool:"databricks",name:"Azure Databricks",where:"Settings · Identity and access",title:"Groups",a:aC});
       dp_rows(ctx,b.x,b.y,[{t:"Group",w:380},{t:"Made in",w:456}],["analysts","etl_users","report_builders","temp_access"].map(g=>[{mono:true,t:g},{pill:"This workspace",col:"coral"}]),{a:aC});
-      dp_slip(ctx,940,676,"Unknown to the directory","coral",{a:aC*ag_in(t,tKnew-0.1,0.5)});}
+      dp_slip(ctx,940,676,"Unknown to the directory","coral",{a:aC*ag_in(t,tKnew-0.1,0.5),ink:true});}
     // eleven admins on their everyday accounts; a fake page that catches one sign-in catches an admin
     if(aD>0){const b=dp_page(ctx,1240,130,620,600,{tool:"databricks",name:"Azure Databricks",where:"Groups",a:aD});
       withA(ctx,aD,()=>{dp_T(ctx,"admins",b.x,b.y+30,{w:500,size:36,f:"mono"});dp_T(ctx,"11 members",b.x+b.w,b.y+30,{w:600,size:28,col:"mut",align:"right"});
@@ -176,7 +177,7 @@ scene("directory",(ctx,S,t,sc)=>{const C=sc.cues;
     if(aGone>0){const b=dp_page(ctx,980,150,880,470,{tool:"databricks",name:"Azure Databricks",where:"production · Groups",title:"Made in the workspace",a:aGone});
       ["analysts","etl_users","report_builders","temp_access"].forEach((g,i)=>{const f=ag_in(t,tGone+0.6+0.45*i,0.5);if(f>=1)return;
         dp_T(ctx,g,b.x,b.y+34+i*62-24*f,{w:500,size:30,f:"mono",col:"coral",a:aGone*(1-f)});});
-      dp_slip(ctx,980,650,"Their people: in the directory's groups","green",{a:aGone*ag_in(t,tTheir-0.1,0.5)});}
+      dp_slip(ctx,b.x,b.y+20,"Their people: in the directory's groups","green",{a:aGone*ag_in(t,tTheir-0.1,0.5),ink:true});}
     // a group from the directory: changed in one place only
     if(aOne>0){const b=dp_page(ctx,980,150,880,330,{tool:"databricks",name:"Azure Databricks",where:"Account console · Groups",a:aOne});
       withA(ctx,aOne,()=>{dp_T(ctx,"registrar_office",b.x,b.y+40,{w:500,size:36,f:"mono"});dp_lock(ctx,b.x+18,b.y+102,34,"cyan",0);
@@ -239,9 +240,9 @@ scene("power",(ctx,S,t,sc)=>{const C=sc.cues;
     // the hall: the directory's admin groups, no one in them; every admin role belongs to one of them
     {at:0,later:true,place:"pgHall",keys:[[0,960,540,1.0]],push:0.015,draw(ctx,t){
       pg_slots(ctx,{n:(t-(C.groups+0.2))/0.25});
-      pg_roleCard(ctx,980,180,860,"databricks","Account console","Account admin","admin_account_settings",{a:rA*ag_in(t,tAcct-0.1,0.5),k:ag_spr(t,tAcct-0.1,0.6)});
-      pg_roleCard(ctx,980,350,860,"databricks","production · Permissions","Admin","admin_production_settings",{a:rA*ag_in(t,tWs-0.1,0.5),k:ag_spr(t,tWs-0.1,0.6)});
-      pg_roleCard(ctx,980,520,860,"azure","Azure · role assignments","Contributor","admin_production_settings",{a:rA*ag_in(t,tAz-0.1,0.5),k:ag_spr(t,tAz-0.1,0.6)});
+      pg_roleCard(ctx,980,110,860,"databricks","Account console","Account admin","admin_account_settings",{a:rA*ag_in(t,tAcct-0.1,0.5),k:ag_spr(t,tAcct-0.1,0.6)});
+      pg_roleCard(ctx,980,270,860,"databricks","production · Permissions","Admin","admin_production_settings",{a:rA*ag_in(t,tWs-0.1,0.5),k:ag_spr(t,tWs-0.1,0.6)});
+      pg_roleCard(ctx,980,430,860,"azure","Azure · role assignments","Contributor","admin_production_settings",{a:rA*ag_in(t,tAz-0.1,0.5),k:ag_spr(t,tAz-0.1,0.6)});
       const eA=rA*ag_in(t,tAz+1.0,0.6);const eb=dp_slip(ctx,90,800,"Emergency accounts: two, kept in safes","grey",{a:eA});dp_tag(ctx,eb.x+eb.w+20,804,"Who did what","grey",{a:eA});
       // the only two who can switch one on, each from a second account, signed in only with a security key
       pg_who(ctx,1500,225,"Sam Okafor",{a:sA});pg_who(ctx,1500,465,"Jun Park",{a:jA});
@@ -250,7 +251,7 @@ scene("power",(ctx,S,t,sc)=>{const C=sc.cues;
       // the switch: privileged identity management; the two accounts are eligible for each group, never in one
       pg_toolSlip(ctx,980,96,"pim","Privileged Identity Management",ag_in(t,tPimName-0.2,0.5),{k:ag_spr(t,tPimName-0.2,0.6)});
       if(fan>0)for(const by of [265,505])for(let i=0;i<6;i++)pg_dots(ctx,[976,by],pg_slotEnd(i),"amber",fan,0.7);
-      dp_tag(ctx,940,620,"Eligible, never in them","grey",{a:ag_in(t,tNever-0.1,0.5)});}},
+      dp_tag(ctx,90,800,"Eligible, never in them","grey",{a:ag_in(t,tNever-0.1,0.5)});}},
     // the data team's room, 19 October: the token report, which only an account admin can read; Sam switches on for an hour, says why; Jun approves
     {at:tReport-0.4,place:"pgTeam",keys:[[0,960,540,1.0]],push:0.015,draw(ctx,t){
       dp_person(ctx,"sam",330,600,1.0,{t,cut:PG_DESK,gaze:[3,1],nod:0.03});
@@ -266,7 +267,7 @@ scene("power",(ctx,S,t,sc)=>{const C=sc.cues;
       pg_who(ctx,940,740,"Jun Park",{col:"green",sub:"Approved",subCol:"green",a:ag_in(t,tAppr-0.1,0.4),k:ag_spr(t,tAppr-0.1,0.5)});}},
     // the hall again: within seconds the admin account is in the group; an alert to the platform team; Databricks reads its groups
     // as it signs in; then it signs out, and when the hour is up the directory takes it out of the group
-    {at:tSec-0.4,place:"pgHall",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
+    {cut:true,at:tSec-0.4,place:"pgHall",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){
       const inU=u3(t,tIn-0.7,0.7),outU=u3(t,tTakes,0.8),on=ag_in(t,tIn,0.4)*(1-ag_in(t,tTakes+0.6,0.4)),pE=[898,675],sE=pg_slotEnd(0),pillA=1-ag_in(t,tLike-0.3,0.5);
       pg_slots(ctx,{on:[on]});pg_dots(ctx,pE,sE,"amber",1,0.7);
       for(const [g,from,to] of [[inU,pE,sE],[outU,sE,pE]])if(g>0&&g<1){const q=ag_sine(g),x=lerp(from[0],to[0],q),y=lerp(from[1],to[1],q);
@@ -324,7 +325,7 @@ scene("tokens",(ctx,S,t,sc)=>{const C=sc.cues;
       pg_signin(ctx,920,500,760,{a:sA,k:ag_spr(t,tThrough-0.2,0.6),face:u3(t,tSame-0.1,0.9),tick:ok,signed:ag_in(t,tSame+0.9,0.4)});
       dp_pill(ctx,1880,500,"Signed in","green",{align:"right",a:ag_in(t,tSame+1.1,0.4)});
       // the CLI's own short passes, an hour each, kept in the computer's secure store
-      const pv=u3(t,tStore-0.2,1.0),pa=ag_in(t,tShort-0.1,0.5)*(1-ag_in(pv,0.7,0.3));
+      const pv=u3(t,tStore-0.2,1.0),pa=ag_in(t,tShort-0.1,0.5)*(1-ag_in(pv,0.35,0.3));
       dp_sealed(ctx,920,lerp(500,700,ag_sine(pv)),560,"A pass from the CLI",{sub:"Ends after 1 hour",a:pa});
       pg_store(ctx,920,720,760,{a:ag_in(t,tStore-0.6,0.5)});
       dp_pill(ctx,1880,690,"Nothing to copy or paste","green",{align:"right",a:ag_in(t,tCopy-0.1,0.5)});}},
@@ -354,10 +355,11 @@ scene("close",(ctx,S,t,sc)=>{const C=sc.cues;
       pg_tag(ctx,S,"A hotel · 1970s",ag_io(t,0.6,tUni-1.0,0.6));
       const la=ag_in(t,tLost-0.1,0.6);pg_punch(ctx,560,740,190,{seed:5,rot:0.22,rim:"coral",rimA:la,a:la});}},
     // the university's hall: what now ends with the stay, by the platform's door, where the film's first tags were coral
-    {at:tUni-0.4,place:"pgHall",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){pg_platName(ctx,1);
-      dp_tag(ctx,560,300,"A place that ends with the job","green",{a:ag_in(t,tJob-0.1,0.5),to:toDoor,p:ag_in(t,tJob+0.2,0.6)});
-      dp_tag(ctx,560,420,"Power that ends with the task","green",{a:ag_in(t,tTask-0.1,0.5),to:toDoor,p:ag_in(t,tTask+0.2,0.6)});
-      dp_tag(ctx,560,540,"No token left to outlive anyone","green",{a:ag_in(t,tToken+0.1,0.5),to:toDoor,p:ag_in(t,tToken+0.4,0.6)});}}];
+    // the three leave as the end card comes in, so its words show over the hall alone
+    {at:tUni-0.4,place:"pgHall",keys:[[0,960,540,1.0]],push:0.02,draw(ctx,t){pg_platName(ctx,1);const ea=1-ag_in(t,tTake-0.5,0.6);
+      dp_tag(ctx,560,300,"A place that ends with the job","green",{a:ag_in(t,tJob-0.1,0.5)*ea,to:toDoor,p:ag_in(t,tJob+0.2,0.6)});
+      dp_tag(ctx,560,420,"Power that ends with the task","green",{a:ag_in(t,tTask-0.1,0.5)*ea,to:toDoor,p:ag_in(t,tTask+0.2,0.6)});
+      dp_tag(ctx,560,540,"No token left to outlive anyone","green",{a:ag_in(t,tToken+0.1,0.5)*ea,to:toDoor,p:ag_in(t,tToken+0.4,0.6)});}}];
   ag_shots(ctx,S,t,sc.dur,shots,0.6);
   pg_end(ctx,S,t,tTake-0.3,"People and groups","People sign in once, with no password to steal;","power is borrowed, not kept.","Film 5 of 9 · Locks before the data · Learning Data");});
 

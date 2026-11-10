@@ -1,0 +1,39 @@
+{
+  "key": "measures-that-matter",
+  "title": "Measures that matter",
+  "sub": "The second film of Small steps, measured, the fourth series of Data management: measure the data team by what people get, not by how busy it is. Helena puts eight measures on one page in three groups, delivery, data management and value, each with a baseline, one definition in the glossary, a reader and the decision it serves, a quality measure beside every speed measure, shown as a trend, and every one the team's, never a target for one person.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall, and the delivery room of 1952 in the same light. Its colours mean the same in every film: blue is plans and design (the page's design, each measure's one definition), orange is data (each measure's line across the months), green is value or something done (fewer babies lost, a decision informed, a saving on its way), and amber is risk, cost or waiting (work sent back, too much open at once). No number is lit red or green on its own: each measure is a line, with its baseline beneath it.",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "mm_1952.js",
+    "mm_page.js",
+    "mm_scenes.js"
+  ],
+  "poster": [
+    "groups",
+    "eight",
+    1.2
+  ],
+  "say": [
+    [
+      "\\bNovak's\\b",
+      "Noh-vak's"
+    ],
+    [
+      "\\bNovak\\b",
+      "Noh-vak"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "minute"
+  ],
+  "urgent": []
+}

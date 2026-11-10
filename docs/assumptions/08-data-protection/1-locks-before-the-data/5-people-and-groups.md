@@ -1,8 +1,8 @@
 # People and groups: questions and assumptions
 
-*Data protection and privacy* · *Locks before the data*, film 5 · open, PR #197 · [pull request](https://github.com/roanboc/learning-data/pull/197)
+*Data protection and privacy* · *Locks before the data*, film 5 of 9 · merged, PR #197 · [pull request](https://github.com/roanboc/learning-data/pull/197)
 
-On the site once PR #197 merges: https://data.learn-all.org/locks-before-the-data/people-and-groups/
+[Watch it on the site](https://data.learn-all.org/locks-before-the-data/people-and-groups/)
 
 > Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
 

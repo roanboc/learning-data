@@ -64,6 +64,8 @@ Generate or copy the MP3 to its usual site path, then run `python site-tools/med
 
 Publish from the machine holding the new MP3s before merging their pointers. The manual workflow is useful when source MP3s are still present in its checkout (the initial migration); future ignored audio must be uploaded from the author's machine. Keep audio releases for as long as any manifest references them.
 
+To publish every release that is missing at once, run `python site-tools/media.py publish` with no film or tag, or run the *Store audio outside Git* workflow with its tag left blank. It creates each missing release, skips assets already uploaded, and then downloads and verifies every pointer's copy, so it takes a few minutes. The workflow can only upload MP3s that are in the repository.
+
 If GitHub CLI is not signed in, use the browser profile that already has access. Take the content-based tag printed by `index` (replace `TAG` below), and stage just its assets:
 
 ```

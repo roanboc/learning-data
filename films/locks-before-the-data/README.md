@@ -11,6 +11,7 @@ Platform security for data teams. A nightly job loads the registrar's data on Ju
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [People and groups](https://data.learn-all.org/locks-before-the-data/people-and-groups/) | Sign-in, groups and admin power | 8 min | 8 | 3 questions | [script](5-people-and-groups/script.md) · [source](5-people-and-groups/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

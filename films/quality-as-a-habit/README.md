@@ -11,6 +11,7 @@ Keeping data good, and making it better. Every November, two people spend three 
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [The hidden factory](https://data.learn-all.org/quality-as-a-habit/the-hidden-factory/) | Hidden work and root causes | 10 min | 8 | 4 questions | [script](1-the-hidden-factory/script.md) · [source](1-the-hidden-factory/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound

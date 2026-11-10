@@ -144,16 +144,22 @@ def check_map(path, page, problems):
         problems.append(f"{where}: its owner is {page.get('owner')}, and the map's {page['agent']} is {element.get('owner')}'s")
     if page.get("status") != "in force":
         return None
-    named = [rel for rel in element.get("relationships") or [] if isinstance(rel, dict) and rel.get("mandate")]
-    if not any(Path(str(rel["mandate"])).name == path.name for rel in named):
+    mine = path.relative_to(ROOT / "governance").as_posix()
+    naming = [rel for rel in element.get("relationships") or [] if isinstance(rel, dict) and mine in names(rel.get("mandate"))]
+    if not naming:
         problems.append(f"{element_path.relative_to(ROOT).as_posix()}: the {page['agent']}'s assignment doesn't name its "
-                        f"mandate: add mandate: {path.relative_to(ROOT / 'governance').as_posix()}, beside its stage")
-    for rel in named:
+                        f"mandate: add mandate: {mine}, beside its stage")
+    for rel in naming:
         stage = (rel.get("stage") or {}).get(page.get("task"))
-        if Path(str(rel["mandate"])).name == path.name and stage != 5:
+        if stage != 5:
             problems.append(f"{element_path.relative_to(ROOT).as_posix()}: the mandate is for {page.get('task')!r}, "
                             f"which the map puts at stage {stage}: a mandate is stage 5's gate")
     return None
+
+
+def names(mandate):
+    """An assignment's mandate: one page, or a list of them, each named from governance/."""
+    return [] if mandate is None else [str(m) for m in mandate] if isinstance(mandate, list) else [str(mandate)]
 
 
 def check_ruleset(path, page, problems, apps):

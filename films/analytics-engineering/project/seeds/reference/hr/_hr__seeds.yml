@@ -3,8 +3,8 @@ seeds:
   - name: newsletters
     description: >
       One row per newsletter HR sends to the tutors' mailing list: news of casual tutoring work,
-      sent once in each teaching period, with the day it went. Reference data, owned by HR; a new
-      newsletter comes through a pull request they approve.
+      sent once in each teaching period, with the day it went. Reference data, owned by HR, who
+      decide each newsletter; the data team adds it.
     config:
       column_types:
         newsletter: string

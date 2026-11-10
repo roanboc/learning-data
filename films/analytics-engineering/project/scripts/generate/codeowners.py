@@ -1,20 +1,20 @@
-"""Writes CODEOWNERS from the owners in the metadata, so a change to what an owner decides asks that
-owner to review it, without anyone remembering to.
+"""Writes CODEOWNERS: who reviews a pull request. The data team reviews the code; data governance
+reviews only its own files. Owners and stewards don't review pull requests: they decide what their
+data means in the glossary (or, for an enterprise contract, data governance's information architect
+writes it), before any code, and the code is built from there. The impact check tells them what a
+change touches (scripts/check/impact.py).
 
-    the code, everywhere                    the analytics engineer
-    the university's map, the conventions   the data architect (and data governance)
-    governance/: owners, map, products      data governance and the data architect
-    a domain's conceptual model and log     the owners of its entities and kinds, the data
-                                            architect, and data governance, which names the terms
-    a core or mart model's YAML             the owners in its models' meta.owner, and the engineer
-    a source's folder                       the source's owner, and the engineer
-    a seed the business owns                the seed's owner
-    a consumer's exposures                  the consumer
+    the code, everywhere                    the data team
+    the university's map, the conventions   the data architect, in the data team
+    a domain's conceptual model and log     the data architect: they copy the glossary's terms,
+                                            which are decided in the glossary, not here
+    governance/: the owner register, the    data governance: these stand in for its own tools
+    map, products, contracts, standards     (the directory, the architecture tool, the catalogue)
     governance's check and its tests        data governance and the data architect (DEC-PRJ-12)
     the team's memory, memory/              data governance, which owns the memory as a whole
 
-Owners are named as people know them; governance/2-owners/owners.yml says where each one's
-review request goes. An owner that isn't there stops the script: every owner must be reachable.
+Every owner the metadata names must still be in governance/2-owners/owners.yml, so the impact
+check can reach them: an owner that isn't there stops the script.
 
 GitHub reads CODEOWNERS only at a repository's root, in .github/ or in docs/. If this project is a
 repository of its own, the file goes in .github/; here, inside the learning-data repository, it is
@@ -32,22 +32,6 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 REGISTER = ROOT / "governance" / "2-owners" / "owners.yml"
 TARGET = ROOT / "CODEOWNERS"
-# Paths added after films cited CODEOWNERS by line: each goes in a section of its own at the end,
-# not in its section's place, so the cited lines keep their numbers (AGENTS.md, Keep cited lines in
-# place). Add a new folder or file here, with the section's title, when its place would move them.
-LATER = {"The graduation list: its owner, its sources, its ceremonies and the people who use it":
-         ("/models/marts/graduations/", "/sources/portal/", "/seeds/reference/graduations/",
-          "/governance/4-data-products/graduation_list.yml", "/exposures/graduations/"),
-         "The claims app: its owner, for the claims read where the app writes them":
-         ("/sources/claims_app/",),
-         "Payroll's export to Finance: the staff domain, the units and pay days it reads, and its products":
-         ("/models/core/staff/", "/seeds/reference/course/units.csv", "/seeds/reference/staff/",
-          "/governance/4-data-products/claims.yml", "/governance/4-data-products/payroll_export.yml"),
-         "The hours to pay: the claims job's mart, its product and the payroll system that reads it":
-         ("/models/marts/payroll/", "/governance/4-data-products/hours_to_pay.yml", "/exposures/payroll/"),
-         "HR's tutors' newsletters: its owner, its newsletters and the mailing tool":
-         ("/models/marts/hr/", "/seeds/reference/hr/", "/governance/4-data-products/tutor_newsletters.yml",
-          "/exposures/hr/")}
 
 
 def load(path):
@@ -89,64 +73,39 @@ def main():
                 unknown.add(name)
         return list(dict.fromkeys(found))
 
-    # The map's domain owners must be reachable too, though the map itself is the data architect's.
+    # Every owner the metadata names must be reachable, so the impact check can tell them what a change touches.
     reach(*(domain.get("owner") for domain in load(ROOT / "models" / "_shared" / "_shared__conceptual.yml")["domains"]))
-    rules = [("*", [reviewers["code"]], "The code, everywhere: the analytics engineer"),
-             ("/models/_shared/", [reviewers["model"]], "The university's map and its decisions"),
-             ("/governance/", [reviewers["governance"], reviewers["model"]], "Governance's definitions, that could live in another tool: the owners, the architecture map, the standards"),
-             ("/docs/conventions.md", [reviewers["model"], reviewers["governance"]], None)]
-
     for kind in ("core", "marts"):
-        rules.append((None, None, f"Meaning and contracts: {'core domains' if kind == 'core' else 'consumers'}"))
         for folder in sorted(p for p in (ROOT / "models" / kind).iterdir() if p.is_dir()):
-            name = folder.name
-            path = f"/models/{kind}/{name}/"
-            conceptual = folder / f"_{name}__conceptual.yml"
-            meaning = conceptual_owners(load(conceptual)) if conceptual.exists() else []
-            # A core domain's terms are named by data governance (DEC-PRJ-11).
-            extra = [reviewers["governance"]] if kind == "core" else []
-            for log in (conceptual, folder / f"_{name}__decisions.yml"):
-                if log.exists():
-                    rules.append((path + log.name, reach(*meaning) + [reviewers["model"]] + extra, None))
-            for spec in sorted(folder.glob("_*__models.yml")):
-                owners = [meta(model).get("owner") for model in load(spec).get("models", [])]
-                rules.append((path + spec.name, reach(*owners) + [reviewers["code"]], None))
+            conceptual = folder / f"_{folder.name}__conceptual.yml"
+            reach(*(conceptual_owners(load(conceptual)) if conceptual.exists() else []))
+            for spec in folder.glob("_*__models.yml"):
+                reach(*(meta(model).get("owner") for model in load(spec).get("models", [])))
+    for spec in (ROOT / "sources").glob("*/_*__sources.yml"):
+        reach(*(meta(source).get("owner") for source in load(spec).get("sources", [])))
+    for spec in (ROOT / "seeds").glob("*/*/_*__seeds.yml"):
+        reach(*(meta(seed).get("owner") for seed in load(spec).get("seeds", [])))
+    for spec in (ROOT / "governance" / "4-data-products").glob("*.yml"):
+        reach(load(spec).get("owner"))
 
-    rules.append((None, None, "What comes in: each source's owner"))
-    for spec in sorted((ROOT / "sources").glob("*/_*__sources.yml")):
-        owners = [meta(source).get("owner") for source in load(spec).get("sources", [])]
-        rules.append((f"/sources/{spec.parent.name}/", reach(*owners) + [reviewers["code"]], None))
-
-    rules.append((None, None, "Data the business owns: each seed's owner"))
-    for spec in sorted((ROOT / "seeds").glob("*/*/_*__seeds.yml")):
-        for seed in load(spec).get("seeds", []):
-            csv = spec.parent / f"{seed['name']}.csv"
-            if seed["name"] != "key_sets":  # generated from the sources
-                rules.append(("/" + csv.relative_to(ROOT).as_posix(), reach(meta(seed).get("owner")), None))
-
-    rules.append((None, None, "Data products: each product's owner"))
-    for spec in sorted((ROOT / "governance" / "4-data-products").glob("*.yml")):
-        product = load(spec)
-        rules.append((f"/governance/4-data-products/{spec.name}", reach(product.get("owner")), None))
-
-    rules.append((None, None, "Who uses it: each consumer"))
-    for spec in sorted((ROOT / "exposures").glob("*/_*__exposures.yml")):
-        owners = [exposure["owner"].get("email") for exposure in load(spec).get("exposures", [])]
-        rules.append((f"/exposures/{spec.parent.name}/", list(dict.fromkeys(owners)), None))
+    rules = [("*", [reviewers["code"]], "The code, everywhere: the data team. Owners and stewards don't review pull requests: they decide\n"
+              "# what their data means in the glossary, before any code, and the impact check tells them what a change touches"),
+             ("/models/_shared/", [reviewers["model"]], "The university's map and its decisions, and each domain's conceptual model and log: the data architect"),
+             ("/models/core/*/_*__conceptual.yml", [reviewers["model"]], None),
+             ("/models/core/*/_*__decisions.yml", [reviewers["model"]], None),
+             ("/models/marts/*/_*__conceptual.yml", [reviewers["model"]], None),
+             ("/models/marts/*/_*__decisions.yml", [reviewers["model"]], None),
+             ("/docs/conventions.md", [reviewers["model"], reviewers["code"]], None),
+             ("/governance/", [reviewers["governance"], reviewers["model"]],
+              "Governance's own files, that stand in for its tools: the owner register, the map, products, contracts, standards")]
 
     rules.append((None, None, "Governance's rules (DEC-PRJ-12)"))
     for path in ("/scripts/check/governance.py", "/tests/governance/", "/scripts/generate/codeowners.py", "/docs/how-to/",
                  "/skills/review-for-governance/"):
         rules.append((path, [reviewers["governance"], reviewers["model"]], None))
 
-    # Last, so the lines above keep their numbers.
     rules.append((None, None, "The team's memory: data governance, which owns it as a whole"))
     rules.append(("/memory/", [reviewers["governance"]], None))
-
-    # Then what came after the films cited the lines above, each section in the order it came.
-    for title, prefixes in LATER.items():
-        later = [rule for rule in rules if rule[0] and rule[0].startswith(prefixes)]
-        rules = [rule for rule in rules if rule not in later] + [(None, None, title)] + later
 
     if unknown:
         raise SystemExit(f"{REGISTER.relative_to(ROOT)} doesn't say how to reach: {', '.join(sorted(unknown))}. "
@@ -155,7 +114,7 @@ def main():
     width = max(len(path) for path, _, _ in rules if path)
     lines = ["# Generated by scripts/generate/codeowners.py from the owners in the project's metadata and",
              "# governance/2-owners/owners.yml. Don't edit it: change the metadata, then run the script.",
-             "# The last pattern that matches a file decides who reviews it.",
+             "# The last pattern that matches a file decides who reviews it: the data team, or data governance for its own files.",
              "#",
              "# GitHub reads this file only at a repository's root, in .github/ or in docs/. Here, inside the",
              "# learning-data repository, it is an example; in the project's own repository it goes in .github/."]

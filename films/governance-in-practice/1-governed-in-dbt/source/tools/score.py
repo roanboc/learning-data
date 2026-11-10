@@ -217,7 +217,7 @@ def air(s, sec=0.8, g=0.012, pan=0.0):
 #    first violin climbs and comes back; the pull request on the fourth; Jun's line on the sixth, darker; the rule card's owner
 #    underlined; the minutes, the same note four times; nobody answers, a hollow fifth; census day, Anil's path a line going up
 #    three notes and back to where it began, each card pinned; "Something had to change" stops it. Then the rules in the project,
-#    on the home chord: the checks run, governance turns red, two lines typed, and it turns green; Planning asked by itself; four
+#    on the home chord: the checks run, governance turns red, two lines typed, and it turns green; the data team asked by itself; four
 #    months of minutes into one pile beside a check that takes a minute; Jun's words change; and the title on the mark
 rw = lambda lid, word, off=0: W('rules', lid, word, off)
 rc = lambda lid, off=0: G('rules', lid, off)
@@ -229,7 +229,7 @@ path = [rw('census', 'from Jun'), rw('census', 'to Noor'), rw('census', 'to Plan
 change, live, runs = rc('change'), rc('live', -0.4), rw('live', 'a check runs')
 noOwner, how = rw('answers', 'no owner'), rw('answers', 'how to add one')
 adds, two, turns = rc('adds'), rw('adds', 'two lines'), rw('adds', 'turns green')
-itself, plan = rc('itself'), rw('itself', 'Planning')
+itself, plan = rc('itself'), rw('itself', 'the data team')
 mnt, four, check = rc('minute', -0.4), rw('minute', 'four months'), rw('minute', 'a check that takes')
 first, arrive, board, title = rc('first', -0.4), rw('first', 'arrive first'), rc('breath', -0.3), rc('breath', 1.2)
 # today: the home chord, B-flat, the players coming in one by one; as the loop goes round, the first violin climbs and comes back
@@ -275,7 +275,7 @@ chord({'vc': 39, 'va': 55, 'vn2': 63, 'vn1': 67}, adds - 0.2, turns, 0.6, step=0
 green(turns)
 chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, turns, mnt + 0.2, 0.65, step=0.06, att=0.3)
 tap(itself, 0.010, 0.0)  # Draft becomes Open
-asked(plan)  # Planning, asked by itself
+asked(plan)  # the data team, asked by itself
 # four months of minutes slid into one small pile, beside a check that takes a minute: the fourth, then home
 chord({'vc': 39, 'va': 58, 'vn2': 63, 'vn1': 67}, mnt + 0.2, check + 0.2, 0.6, step=0.1, att=0.5)
 slide(four + 0.1, 0.014, px(900), 0.9)
@@ -354,9 +354,14 @@ chord({'vc': 39, 'va': 55, 'vn2': 58, 'vn1': 63}, dt - 0.1, dt + 2.6, 0.5, step=
 ex = kc('exposures', -0.4)
 for i in range(3):
     paper(ex + 0.1 + 0.35 * i, 0.016 * 0.9 ** i, px([450, 960, 1450][i]), 0.35)
+# the enterprise contract pinned, then the dbt contract beside it; the check between them, a tap as it passes, then red where they differ
+pin(kw('canonical', 'an enterprise contract') - 0.05, 0.016, px(530))
+pin(kw('architect', 'the data team') - 0.05, 0.016, px(1390))
+tap(kw('differ', 'compares the two') + 0.8, 0.007, px(1300))
+red(kw('differ', 'data governance') + 0.05)
 
 # 5. What this change touches: the report written into the pull request; Tuesday's draft, its files; the report again, five who use
-#    it and four owners to ask, and Mei's stamp, "breaks"; the column instead, typed; additive, green; a rename, and the impact
+#    it and four owners to tell, and the data team's stamp, "breaks"; the column instead, typed; additive, green; a rename, and the impact
 #    check fails, red
 iw = lambda lid, word, off=0: W('impact', lid, word, off)
 ic = lambda lid, off=0: G('impact', lid, off)
@@ -364,6 +369,8 @@ i0 = S0('impact')
 chord({'vc': 38, 'va': 57, 'vn2': 62, 'vn1': 65}, i0 + 0.2, i0 + 2.4, 0.5, step=0.15, att=0.6, rel=0.8)
 tch = ic('touches')
 keys(tch + 0.3, 7, 0.009, 0.0, 0.15)
+mon = ic('monday', -0.3)
+page(mon + 0.1, 0.014, 0.0); marker(iw('monday', 'what award means'), 0.010, px(900), 0.6)
 tue = ic('tuesday', -0.3)
 page(tue + 0.1, 0.014, 0.0); marker(iw('tuesday', 'or more as awards'), 0.010, px(900), 0.6)
 rp, wrote, five, fo = ic('report', -0.4), iw('report', 'wrote it'), iw('report', 'five reports'), iw('report', 'four owners')
@@ -382,15 +389,15 @@ fl = iw('renamed', 'would fail')
 red(fl + 0.05)
 chord({'vc': 43, 'va': 50, 'vn2': 58}, fl + 1.4, E('impact') + 0.3, 0.45, step=0.2, att=0.8, rel=0.8)
 
-# 6. Reviews go to the owners: the review pin glows, at the turn; the reviewers file written by its script, three of its lines
-#    joined to their people; GitHub asks them, the falling third; the file behind, red, then caught up, green; a decision as a file
+# 6. Who reviews what: the review pin glows, at the turn; the reviewers file written by its script, two of its lines
+#    joined to their cards; GitHub asks them, the falling third; the file behind, red, then caught up, green; a decision as a file
 ow_ = lambda lid, word, off=0: W('owners', lid, word, off)
 oc = lambda lid, off=0: G('owners', lid, off)
 o0 = S0('owners')
 chord({'vc': 46, 'va': 53, 'vn2': 58, 'vn1': 62}, o0 + 0.2, o0 + 2.6, 0.5, step=0.15, att=0.6, rel=0.8)
 co, wr_ = oc('script', -0.4), ow_('script', 'writes')
 paper(co + 0.1, 0.014, px(700), 0.35); keys(wr_, 6, 0.008, px(700), 0.12)
-for t, x_ in ((ow_('script', "the registrar's office"), 1400), (ow_('script', 'Planning'), 1450), (ow_('script', 'Clara'), 1500)):
+for t, x_ in ((ow_('script', 'the data team'), 700), (ow_('script', 'data governance'), 1300)):
     knock(t + 0.4, 0.012, px(x_), 280)
 gh, fails, behind = ow_('asks', 'asks them'), ow_('asks', 'a check fails'), ow_('asks', 'falls behind')
 asked(gh + 0.1, 0.65)
@@ -426,7 +433,7 @@ green(clf + 1.4, 0.8)
 chord({'vc': 46, 'va': 53, 'vn2': 62}, clf + 2.0, E('teach') + 0.3, 0.45, step=0.2, att=0.8, rel=0.8)
 
 # 8. An agent on every pull request: the skill's sheet, its steps lit; the agent's comment and its three findings; what it drafted,
-#    row by row, and who decides each; its comment with no tick, and each person's yes, on the home chord: people decide
+#    row by row, and who decides each; its comment with no tick, and the data team's yes, on the home chord: people decide
 gw = lambda lid, word, off=0: W('agent', lid, word, off)
 gc = lambda lid, off=0: G('agent', lid, off)
 g0 = S0('agent')
@@ -443,13 +450,12 @@ for k in range(3):
     tap(dS + 0.1 + 0.35 * k, 0.007, px(900))
 for k in range(3):
     marker(gw('drafted', 'who decides') + 0.25 * k, 0.006, px(1400), 0.3)
-nv, ppl = gc('never', -0.4), gw('never', 'People decide')
+nv, ppl, appr = gc('never', -0.4), gw('never', 'People decide'), gw('never', 'the data team approves')
 tap(nv + 0.1, 0.008, 0.0)
-for k in range(3):
-    knock(ppl + 0.1 + 0.35 * k + 0.5, 0.012, px(1500), 280)
+knock(appr + 0.6, 0.012, px(1500), 280)
 chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, ppl, E('agent') + 0.4, 0.55, step=0.15, att=0.6, rel=0.9)
 
-# 9. Carried with the code: Planning's yes, and the pull request merged (since 4 November 2026 without the home chord, nine seconds
+# 9. Carried with the code: the data team's yes, and the pull request merged (since 4 November 2026 without the home chord, nine seconds
 #    after People decide's); Noor's map, the project the home of five
 #    things, and their copies flowing one way, each drift check green; Jun's old line struck through, and his new words; the
 #    poster's pins, each giving way to its line in the project, a note each, up the scale; the next film's card lifts; and the end
@@ -457,7 +463,7 @@ chord({'vc': 46, 'va': 53, 'vn2': 62, 'vn1': 65}, ppl, E('agent') + 0.4, 0.55, s
 cw = lambda lid, word, off=0: W('close', lid, word, off)
 cc = lambda lid, off=0: G('close', lid, off)
 c0 = S0('close')
-yes = cw('goes', "Planning's yes")
+yes = cw('goes', "the data team's yes")
 knock(yes + 0.05, 0.012, px(1600), 300)
 tap(yes + 0.7, 0.010, px(700))  # Open becomes Merged
 hm = [cw('home', w_) for w_ in ('owners', 'classes', 'contracts', 'tests', 'decisions')]

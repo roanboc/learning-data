@@ -87,6 +87,7 @@ Source: [films/data-as-software](../films/data-as-software/) · Portal: `/data-a
 Source: [films/from-tables-to-decisions](../films/from-tables-to-decisions/) · Portal: `/from-tables-to-decisions/`
 
 - [Reports on demand](../films/from-tables-to-decisions/1-reports-on-demand/) — `reports-on-demand`
+- [Defined in the open](../films/from-tables-to-decisions/2-define-it-once/) — `define-it-once`
 
 ### Documents as data
 
@@ -351,7 +352,7 @@ Source: [films/the-new-skills](../films/the-new-skills/) · Portal: `/the-new-sk
 
 Source: [films/working-with-people](../films/working-with-people/) · Portal: `/working-with-people/`
 
-No film source yet.
+- [The question behind the request](../films/working-with-people/1-the-question-behind/) — `the-question-behind`
 
 ### Leading a data team
 
@@ -373,7 +374,7 @@ Module: `data-management` · [metadata](data-management/module.json)
 
 Source: [films/a-plan-in-ninety-days](../films/a-plan-in-ninety-days/) · Portal: `/a-plan-in-ninety-days/`
 
-No film source yet.
+- [Every area, one job](../films/a-plan-in-ninety-days/1-every-area-one-job/) — `every-area-one-job`
 
 ### Making the case
 

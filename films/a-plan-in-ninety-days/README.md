@@ -11,11 +11,15 @@ A data manager's first ninety days. Helena Novak starts as the university's data
 <!-- films: made by site-tools/build_series.py's readme() -->
 | Film | Topic | Length | Chapters | Pause and think | Script |
 |---|---|---|---|---|---|
+| [Every area, one job](https://data.learn-all.org/a-plan-in-ninety-days/every-area-one-job/) | A first ninety days | 8½ min | 6 | 3 questions | [script](1-every-area-one-job/script.md) · [source](1-every-area-one-job/source/README.md) |
+| [Listen first](https://data.learn-all.org/a-plan-in-ninety-days/listen-first/) | Discovery, before design | 8½ min | 6 | 3 questions | [script](2-listen-first/script.md) · [source](2-listen-first/source/README.md) |
+| [Design it simple](https://data.learn-all.org/a-plan-in-ninety-days/design-it-simple/) | Define the target state | 9 min | 6 | 3 questions | [script](3-design-it-simple/script.md) · [source](3-design-it-simple/source/README.md) |
 <!-- /films -->
 
 ## The look and the sound
 
 - **One look with the leading data people module**, assumed on 5 November 2026 for the author to review (the module's *Decided* table, in [proposal.md](proposal.md)). That module's kit, `films/the-new-skills/shared/`, draws both modules' films; every film here bundles it as it is.
+- **One mark for the module**, on every film's title and end: five layers drawing themselves, and a dot above them for the people they serve. Every film of the module, in each of its four series, draws it from [`shared/src/mark.js`](shared/src/mark.js).
 - **Its own sound in each film.** A lead instrument the site doesn't have, reserved for each film. Music under the opening story, then only now and then; nothing loops, trembles or pulses, except an urgent pulse where a story turns to an error or a rush.
 
 ## How the films are made

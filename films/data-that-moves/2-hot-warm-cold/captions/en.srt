@@ -1,0 +1,259 @@
+1
+00:00:01,600 --> 00:00:09,281
+February 2008. Deep in a frozen mountain on Svalbard, Norway's Arctic islands, a vault opens.
+
+2
+00:00:10,581 --> 00:00:15,483
+At minus eighteen degrees, it keeps copies of seeds from gene banks around the world.
+
+3
+00:00:16,583 --> 00:00:23,891
+Gene banks keep the seeds of crops and their wild relatives, so breeders can grow crops that stand drought and disease.
+
+4
+00:00:24,591 --> 00:00:35,343
+Near Aleppo, in Syria, a gene bank keeps 141,052 samples of wheat, barley, lentils and chickpeas, from the world's dry lands.
+
+5
+00:00:36,643 --> 00:00:40,726
+From 2008, it sends copies of most of them to the vault.
+
+6
+00:00:42,026 --> 00:00:48,404
+But a gene bank can be lost, to war, flood or a power cut, and a variety lost is lost for good.
+
+7
+00:00:49,104 --> 00:00:56,691
+In 2012, war came close to Aleppo. Most of the bank's keepers had to leave, and it could no longer send seeds out.
+
+8
+00:00:57,991 --> 00:01:03,637
+Breeders could no longer get the seeds they relied on, and every variety in the bank was at risk.
+
+9
+00:01:04,937 --> 00:01:06,325
+Something had to change.
+
+10
+00:01:08,025 --> 00:01:13,772
+In 2015, the keepers did what no one had done before: they asked the vault for their copies.
+
+11
+00:01:14,472 --> 00:01:21,855
+38,073 samples came out of the mountain, and that November they were sown in Lebanon and Morocco.
+
+12
+00:01:23,355 --> 00:01:26,983
+By 2020, nothing was left of the collection in Aleppo.
+
+13
+00:01:27,683 --> 00:01:35,105
+Yet no more than 1,657 of its samples were lost, and breeders can order its seeds again.
+
+14
+00:01:36,605 --> 00:01:42,583
+Seeds in use, kept close and ready; their copies, frozen far away, until the day they're needed.
+
+15
+00:01:44,283 --> 00:01:45,983
+Data has a temperature too.
+
+16
+00:01:47,283 --> 00:01:54,431
+Until September, no one at the university had asked how fresh each kind of data must be, or how often it's read.
+
+17
+00:01:55,131 --> 00:02:01,504
+Some came too slowly, and 23 tutors were paid two weeks late; some cost far more than it needed to.
+
+18
+00:02:02,604 --> 00:02:07,758
+Now each kind has its own temperature, and no tutor has waited for a contract since.
+
+19
+00:02:15,458 --> 00:02:20,494
+In September, Noor, the data architect, asked each data owner two questions.
+
+20
+00:02:21,594 --> 00:02:24,428
+How fresh must it be? And how often is it read?
+
+21
+00:02:26,128 --> 00:02:32,403
+The first decides how it moves: as it changes, or on a schedule. The second decides where it's kept.
+
+22
+00:02:33,903 --> 00:02:40,190
+Needed within seconds or minutes, and read all the time: hot. Keep it small, and close to where it's used.
+
+23
+00:02:41,690 --> 00:02:46,536
+Fresh to the hour or the day, and read often: warm. Work it out on a schedule.
+
+24
+00:02:48,036 --> 00:02:52,890
+Rarely read, but kept: cold. Keep it cheap, until the date it may be deleted.
+
+25
+00:02:54,390 --> 00:02:59,201
+Each answer goes into the data's contract: how fresh, and how long it's kept.
+
+26
+00:03:02,701 --> 00:03:09,395
+Casual staff claim their hours in the claims app, and claims approved by noon on Monday are paid on Thursday.
+
+27
+00:03:10,695 --> 00:03:15,748
+The app checks each claim against the tutor's contract, which comes from the HR system.
+
+28
+00:03:16,848 --> 00:03:22,822
+Contracts change at short notice, and Ingrid's team in HR often records one on a Monday morning.
+
+29
+00:03:24,122 --> 00:03:29,792
+Until September, the platform took in those changes once a night, so the app saw them on Tuesday.
+
+30
+00:03:31,092 --> 00:03:36,201
+Too late for noon: that's how 23 tutors came to wait two more weeks for their pay.
+
+31
+00:03:37,701 --> 00:03:42,965
+Now the HR system pushes each change as it's made, through Zerobus Ingest.
+
+32
+00:03:44,465 --> 00:03:50,924
+A pipeline takes in each change as it arrives, and keeps a streaming table of every contract as it stands.
+
+33
+00:03:52,424 --> 00:03:54,435
+The app sees each change within a minute.
+
+34
+00:03:55,935 --> 00:04:02,131
+This Monday, eleven contracts changed in the morning, and every claim against them was approved by noon.
+
+35
+00:04:03,631 --> 00:04:10,582
+Fresh to the minute costs the most, because the pipeline is always running: keep hot only what's needed within minutes.
+
+36
+00:04:14,082 --> 00:04:21,743
+Each morning, Rohan, in Finance, and the faculties' managers check what each faculty has spent this year against its budget.
+
+37
+00:04:23,043 --> 00:04:30,189
+Until September, every look read the finance system's ledger in place: slow, and a load on it while Finance worked.
+
+38
+00:04:31,689 --> 00:04:38,562
+Yesterday's figures are fresh enough, so now it's a materialized view, worked out each night at two and ready to read.
+
+39
+00:04:40,062 --> 00:04:44,775
+It's a dbt model Jun wrote, with its schedule, tested like any other.
+
+40
+00:04:45,875 --> 00:04:49,012
+It keeps only the answer, never a copy of the ledger.
+
+41
+00:04:50,312 --> 00:04:57,100
+Most of the university's data is warm, and should stay so: few questions need the minute, and hot costs more.
+
+42
+00:05:00,400 --> 00:05:06,845
+Every pay day, payroll sends the platform a record of each pay, with the hours each casual tutor worked.
+
+43
+00:05:07,945 --> 00:05:14,622
+Australian law asks employers to keep pay records for seven years, and after the first, they're rarely read.
+
+44
+00:05:15,722 --> 00:05:24,139
+Until September, every record sat in the costliest storage, and none was ever deleted: a cost, and a risk to everyone in them.
+
+45
+00:05:25,439 --> 00:05:33,409
+The cloud's storage has tiers named by how often data is read: hot for what's read often, archive for what almost never is.
+
+46
+00:05:34,909 --> 00:05:40,339
+Now, a year after it's written, each file moves to the cloud's archive tier, its cheapest.
+
+47
+00:05:42,039 --> 00:05:45,720
+Like the copies on Svalbard, they sleep until someone needs them.
+
+48
+00:05:47,420 --> 00:05:55,121
+The table is told, so queries for recent pay still run, and one that needs an archived year says which files to bring back.
+
+49
+00:05:56,621 --> 00:05:59,951
+Bringing them back takes hours, which is fine for an audit.
+
+50
+00:06:01,051 --> 00:06:07,610
+When a year's records turn seven, they're deleted, on a date set in advance, and their files removed for good.
+
+51
+00:06:09,110 --> 00:06:13,314
+In October, the oldest records, more than seven years old, were deleted.
+
+52
+00:06:14,614 --> 00:06:17,955
+How to delete well is for the films on data protection.
+
+53
+00:06:21,455 --> 00:06:24,175
+One piece of data can cool as it ages.
+
+54
+00:06:25,675 --> 00:06:29,586
+On Monday morning, Linh's claim for last week's tutorials was hot.
+
+55
+00:06:30,886 --> 00:06:36,744
+Payroll's list of claims still waiting read it in place, in the app, until her coordinator approved it.
+
+56
+00:06:38,444 --> 00:06:42,922
+Paid today, it turns warm: part of what Health has spent, worked out each night.
+
+57
+00:06:44,622 --> 00:06:51,104
+A year from now, it turns cold: her hours, in her pay record in the archive, until the seven years are up.
+
+58
+00:06:52,804 --> 00:06:56,368
+At each step, where it lives and how it moves follow how it's used.
+
+59
+00:07:00,068 --> 00:07:06,655
+On Svalbard, the vault stays cold and still. In Lebanon and Morocco, the bank sends out its seeds again.
+
+60
+00:07:08,155 --> 00:07:16,769
+At the university, data is kept the same way: contracts within a minute, spending each night, old pay records cheaply until they're deleted.
+
+61
+00:07:18,069 --> 00:07:26,060
+Today, 2,960 people are paid, 856 of them casual staff, Linh among them.
+
+62
+00:07:27,560 --> 00:07:31,593
+Freshness decides how data moves; reading decides where it lives.
+
+63
+00:07:33,293 --> 00:07:37,077
+Storage has had tiers for years: there's no wheel to reinvent.
+
+64
+00:07:38,177 --> 00:07:42,784
+Start from the official docs, then investigate, adapt, implement, iterate.
+
+65
+00:07:44,084 --> 00:07:47,767
+Next: one copy of the claims, for the app and for Finance.

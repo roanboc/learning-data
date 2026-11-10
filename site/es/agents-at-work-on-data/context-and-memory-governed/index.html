@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Contexto y memoria, gobernados · Agentes trabajando con datos · Learning Data</title>
-<meta name="description" content="Una película sobre el orden en que los agentes de IA leen lo que reciben, la última de Agentes trabajando con datos: el contexto que lee un agente, su código, sus metadatos, sus habilidades y sus herramientas, y su memoria, la sesión en la que está y lo que el equipo guarda de las sesiones; cinco preguntas para cada uno, quién es su dueño, quién puede leerlo y cambiarlo, quién revisa un cambio, cuánto tiempo se guarda y cómo se borra de todos los lugares donde se guarda, que el contexto del equipo responde por completo y la memoria, sin revisión de cada línea, solo en parte; el contexto guardado en GitHub y revisado como código, cada archivo con un dueño, cada cambio un pull request que revisa su dueño, con la aprobación de una segunda persona para producción, las definiciones del glosario copiadas con su origen, y publicado luego en Databricks donde lo leen los agentes, como comentarios de dbt en Unity Catalog y como habilidades en Unity Gateway; la memoria guardada por la plataforma, en Lakebase, con un paso diario que guarda cientos de líneas por semana sin que nadie apruebe cada una, más de las que nadie podría revisar a mano; así que los agentes leen primero las definiciones del glosario y las reglas de datos, y después la memoria, y cuando una línea no coincide con una definición siguen la definición y marcan la línea para el dueño de la memoria, que la borra si está mal; las sesiones guardadas treinta días, y cada cosa borrada donde se guarda, porque borrar una sesión no borra la memoria que se guardó de ella; y las nueve lecciones de la serie. Empieza hoy en la universidad, donde Lucía Ortega, nueva en Planificación, pregunta a su agente qué unidades se dictan el próximo semestre, para que la biblioteca compre sus libros electrónicos, y una línea de la memoria del equipo, guardada en julio para reservar salas, perdió las tres palabras que la hacían correcta.">
+<meta name="description" content="Una película sobre el orden en que los agentes de IA leen lo que reciben, la última de Agentes trabajando con datos: el contexto que lee un agente, su código, sus metadatos, sus habilidades y sus herramientas, y su memoria, la sesión en la que está y lo que el equipo guarda de las sesiones; cinco preguntas para cada uno, quién es su dueño, quién puede leerlo y cambiarlo, quién revisa un cambio, cuánto tiempo se guarda y cómo se borra de todos los lugares donde se guarda, que el contexto del equipo responde por completo y la memoria, sin revisión de cada línea, solo en parte; el contexto guardado en GitHub y revisado como código, cada archivo con sus revisores, cada cambio un pull request que revisa el equipo de datos, con la aprobación de una segunda persona para producción, las definiciones del glosario copiadas con su origen, y publicado luego en Databricks donde lo leen los agentes, como comentarios de dbt en Unity Catalog y como habilidades en Unity Gateway; la memoria guardada por la plataforma, en Lakebase, con un paso diario que guarda cientos de líneas por semana sin que nadie apruebe cada una, más de las que nadie podría revisar a mano; así que los agentes leen primero las definiciones del glosario y las reglas de datos, y después la memoria, y cuando una línea no coincide con una definición siguen la definición y marcan la línea para el dueño de la memoria, que la borra si está mal; las sesiones guardadas treinta días, y cada cosa borrada donde se guarda, porque borrar una sesión no borra la memoria que se guardó de ella; y las nueve lecciones de la serie. Empieza hoy en la universidad, donde Lucía Ortega, nueva en Planificación, pregunta a su agente qué unidades se dictan el próximo semestre, para que la biblioteca compre sus libros electrónicos, y una línea de la memoria del equipo, guardada en julio para reservar salas, perdió las tres palabras que la hacían correcta.">
 <meta property="og:title" content="Contexto y memoria, gobernados · Agentes trabajando con datos · Learning Data"><meta property="og:description" content="Una línea de la memoria perdió tres palabras, y el agente de Lucía dejó fuera 94 unidades. Ahora gana la definición del glosario."><meta property="og:image" content="https://data.learn-all.org/assets/context-and-memory-governed-poster.jpg"><meta property="og:locale" content="es_419">
 <link rel="alternate" hreflang="en" href="https://data.learn-all.org/agents-at-work-on-data/context-and-memory-governed/"><link rel="alternate" hreflang="es" href="https://data.learn-all.org/es/agents-at-work-on-data/context-and-memory-governed/">
 <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
@@ -18,7 +18,8 @@
 <section class="hero cine"><div class="bg" aria-hidden="true"><img src="../../../assets/context-and-memory-governed-poster.jpg" alt=""></div><canvas class="fx" aria-hidden="true"></canvas>
 <p class="eyebrow crumbs"><a href="../../topics/">Temas</a> › <a href="../../topics/#ai-agents">Agentes de IA en el trabajo con datos</a> › <a href="../">Agentes trabajando con datos</a></p>
 <h1>Contexto y memoria: primero, lo que se gobierna</h1>
-<p class="lead">Lucía, nueva en Planificación, pregunta a su agente qué unidades se dictan el próximo semestre, para comprar sus libros electrónicos. Lista 1,142 y deja fuera 94 en línea: una línea de la memoria perdió tres palabras. Ahora los agentes leen primero el glosario y las reglas de datos, y luego la memoria.</p>
+<p class="lead">Lucía, nueva en Planificación, pide a su agente las unidades que se dictan el próximo semestre, para sus libros electrónicos. Lista 1,142 y deja fuera 94 en línea: una línea de la memoria perdió tres palabras. Ahora los agentes leen primero el glosario y las reglas de datos, luego la memoria.</p>
+<p class="note draft"><b>Borrador</b> · El autor aún no lo ha revisado, así que algunos detalles pueden cambiar.</p>
 </section>
 <section class="module" id="watch" data-store="ld-context-and-memory-governed" aria-labelledby="watch-h">
 <div class="mhead"><div><h2 id="watch-h">Mira la película</h2><p><b>Pausa para pensar</b> está activada: la película se detiene con una pregunta al final de los capítulos.</p></div></div>
@@ -29,7 +30,7 @@
 <div class="chapters" id="chapters" aria-label="Capítulos"></div>
 <p class="film-links"><a href="https://github.com/roanboc/learning-data/releases/latest/download/context-and-memory-governed.mp4">Descargar el video (en inglés)</a><a href="https://github.com/roanboc/learning-data/tree/main/films/agents-at-work-on-data/9-context-and-memory-governed/captions">Archivos de subtítulos</a><a href="https://github.com/roanboc/learning-data/blob/main/films/agents-at-work-on-data/9-context-and-memory-governed/script.md" hreflang="en">Leer el guion (en inglés)</a></p>
 <template id="next-panel"><div class="think-card"><p class="think-k">¿Y ahora?</p><h3>Viste lo que los agentes deben acertar gobernado primero, con la memoria después, y las nueve lecciones de la serie. Después: de ayudante a colega, un agente con un rol propio.</h3>
-<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../">Toda la serie: Agentes trabajando con datos</a></div>
+<div class="next-opts"><a class="btn primary" href="#think-it-through">Piénsalo: 3 preguntas</a><a class="btn" href="../../from-helper-to-colleague/">Siguiente serie: De ayudante a colega</a></div>
 <div class="think-foot"><button type="button" class="btn" data-again>Ver de nuevo</button></div></div></template>
 </section>
 
@@ -49,6 +50,16 @@
 <p>El agente de Anil leía con su clave. Ahora tiene un nombre propio, solo los permisos que necesita y un modelo permitido.</p>
 <p class="meta">8½ min · Pausa para pensar · Agentes trabajando con datos · En inglés</p>
 <p class="tc-progress" data-progress="ld-unity-catalog-and-ai-gateway" hidden></p>
+</div>
+</article>
+<article class="topic-card">
+<img src="../../../assets/five-stages-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+<div class="tc-body">
+<p class="kicker">Siguiente serie · De ayudante a colega →</p>
+<h3><a href="../../from-helper-to-colleague/five-stages/">Cinco etapas, no un interruptor</a></h3>
+<p>El agente de carga docente de Anil está en cuatro etapas a la vez, una por tarea. Tras una mala noche, una bajó y luego volvió.</p>
+<p class="meta">8½ min · Pausa para pensar · De ayudante a colega · En inglés</p>
+<p class="tc-progress" data-progress="ld-five-stages" hidden></p>
 </div>
 </article>
 </div>

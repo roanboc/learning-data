@@ -1,0 +1,73 @@
+{
+  "draft": true,
+  "kicker": "Purpose and consent",
+  "kicker_es": "Propósito y consentimiento",
+  "title_es": "Una razón para guardarlo",
+  "h1": "A reason to keep it: each piece, a reason you can say",
+  "h1_es": "Una razón para guardarlo: cada dato, con una razón clara",
+  "lead": "Linh's tutoring contract ends on 20 November. HR holds her contracts, hours, bank details, a yes to its news, even a photo. Ingrid, who owns HR's data, asks of each piece what it's for, and which reason allows it. What has none goes, the form asks less, and a new use gets a check first.",
+  "lead_es": "El contrato de tutora de Linh acaba el 20 de noviembre. RR. HH. guarda sus contratos, horas, datos bancarios, un sí a sus noticias y una foto. Ingrid, dueña de esos datos, pregunta para qué es cada uno y qué lo permite. Lo que no tiene razón se va, el formulario pide menos y un uso nuevo se revisa.",
+  "description": "A film about why each piece of personal data needs a reason you can say, the first of Kept for a reason: Oregon in 1986, where public clinics tested people for HIV under their names, kept private, and many of those most at risk stayed away, afraid a result with their name on it would get out, until health officials let people choose a number, which did all the test needed, and the gay and bisexual men tested rose from 42 a month to 108; at the university, Ingrid Holm, who owns HR's data, asks of each of the ten pieces HR holds about Linh Nguyen, a tutor whose contract ends on 20 November 2026, what it is really for; a purpose says what a piece is for, and the law also asks what allows it: Europe's GDPR names six reasons (she agreed, a contract, a law, a public task, someone's life, a fair interest), and agreeing is only one of them; her marital status and a photo have no reason, so the new form drops them and asks for date of birth and bank details only after the offer, and HR deletes the ones it holds; a yes is a reason only where a no is a real choice, so the new form says plainly what HR holds, why and for how long, and asks one real question; and before a new use, Planning's request for the tutors' records, a short privacy check settles on hours by unit and teaching period, small units counted together, with no names. An ideas film: it names no product or tool.",
+  "description_es": "Una película sobre por qué cada dato personal necesita una razón que se pueda decir, la primera de Guardado por una razón: Oregón en 1986, donde las clínicas públicas hacían la prueba del VIH con el nombre de cada persona, guardado en privado, y muchos de los que corrían más riesgo no iban, por miedo a que un resultado con su nombre se filtrara, hasta que las autoridades de salud dejaron elegir un número, que hacía todo lo que la prueba necesitaba, y los hombres gays y bisexuales que se hicieron la prueba pasaron de 42 al mes a 108; en la universidad, Ingrid Holm, dueña de los datos de RR. HH., pregunta por cada uno de los diez datos que RR. HH. guarda sobre Linh Nguyen, una tutora cuyo contrato termina el 20 de noviembre de 2026, para qué es de verdad; un propósito dice para qué es un dato, y la ley también pregunta qué lo permite: el RGPD (GDPR) de Europa nombra seis razones (ella aceptó, un contrato, una ley, una misión pública, la vida de alguien, un interés legítimo), y aceptar es solo una de ellas; su estado civil y una foto no tienen razón, así que el nuevo formulario los quita y pide la fecha de nacimiento y los datos bancarios solo después de la oferta, y RR. HH. borra los que ya tiene; un sí es una razón solo donde un no es una opción real, así que el nuevo formulario dice con claridad qué guarda RR. HH., por qué y por cuánto tiempo, y hace una pregunta real; y antes de un uso nuevo, el pedido de Planificación de los registros de los tutores, una breve revisión de privacidad acuerda horas por asignatura y periodo lectivo, con las asignaturas pequeñas contadas juntas y sin nombres. Una película de ideas: no nombra ningún producto ni herramienta.",
+  "card": "Every piece of personal data needs a reason you can say. Ask only for what that reason needs, and check before a new use.",
+  "card_es": "Cada dato personal necesita una razón que se pueda decir. Pide solo lo que esa razón necesita, y revisa antes de un uso nuevo.",
+  "chapters_es": {
+    "number": "Con un número",
+    "whatfor": "¿Para qué es?",
+    "six": "Seis razones",
+    "little": "Lo mínimo necesario",
+    "yes": "Un sí de verdad",
+    "newuse": "Antes de un uso nuevo",
+    "reason": "Una razón que puedas decir"
+  },
+  "past": [
+    "Oregon, 1986: an HIV test under a number",
+    "A private list was still a list of names. A number did all the test needed, and more people came to be tested."
+  ],
+  "past_es": [
+    "Oregón, 1986: la prueba del VIH con un número",
+    "Una lista privada seguía siendo una lista de nombres. Un número hacía todo lo que la prueba necesitaba, y más personas fueron a hacérsela."
+  ],
+  "next_h": "You've seen a reason for every piece, asking only for what it needs, a yes that means it, and a check before a new use. Next: how long each kind of record is kept, and then what.",
+  "next_h_es": "Viste una razón para cada dato, pedir solo lo que necesita, un sí de verdad y una revisión antes de un uso nuevo. Después: cuánto se guarda cada tipo de registro, y luego qué.",
+  "elsewhere": {
+    "h": "Read the guidance yourself",
+    "h_es": "Lee las guías por tu cuenta",
+    "p": "The film names one law, Europe's GDPR, as the best known, and teaches the principles most privacy laws share. These are the texts its ideas come from. Checked on 10 November 2026.",
+    "p_es": "La película nombra una ley, el RGPD (GDPR) de Europa, como la más conocida, y enseña los principios que comparten la mayoría de las leyes de privacidad. Estos son los textos de donde vienen sus ideas. Revisados el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "GDPR, Articles 5 and 6: a purpose, as little as needed, six reasons",
+        "title_es": "RGPD (GDPR), artículos 5 y 6: propósito, lo mínimo necesario, seis razones",
+        "line": "Europe's data protection law: a purpose said at the start, only what it needs, and the six lawful reasons.",
+        "line_es": "La ley de protección de datos de Europa: un propósito dicho desde el inicio, solo lo que necesita, y las seis bases legales.",
+        "href": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+        "href_es": "https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679"
+      },
+      {
+        "title": "Guidelines 05/2020 on consent, European Data Protection Board",
+        "title_es": "Directrices 05/2020 sobre el consentimiento, Comité Europeo de Protección de Datos",
+        "line": "When a yes is freely given, and why it rarely is between an employer and the people it employs.",
+        "line_es": "Cuándo un sí es libre, y por qué rara vez lo es entre un empleador y las personas que emplea.",
+        "href": "https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_en",
+        "href_es": "https://www.edpb.europa.eu/documents/guideline/guidelines-052020-on-consent-under-regulation-2016679_es"
+      },
+      {
+        "title": "The OECD Privacy Guidelines",
+        "title_es": "Las directrices de privacidad de la OCDE (en inglés)",
+        "line": "The oldest shared source of the principles: collect only what's needed, say what it's for, and keep to it.",
+        "line_es": "La fuente común más antigua de los principios: reunir solo lo necesario, decir para qué es y cumplirlo.",
+        "href": "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0188",
+        "href_es": "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0188"
+      },
+      {
+        "title": "The Oregon trial, The Lancet, 1988",
+        "title_es": "El ensayo de Oregón, The Lancet, 1988 (en inglés)",
+        "line": "The study the opening tells: HIV testing under a number against testing under a name, and who came.",
+        "line_es": "El estudio que cuenta el inicio: la prueba del VIH con un número frente a la prueba con el nombre, y quiénes fueron.",
+        "href": "https://pubmed.ncbi.nlm.nih.gov/2899784/",
+        "href_es": "https://pubmed.ncbi.nlm.nih.gov/2899784/"
+      }
+    ]
+  }
+}

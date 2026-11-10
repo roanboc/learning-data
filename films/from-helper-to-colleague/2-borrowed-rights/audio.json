@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/borrowed-rights/soundtrack.mp3",
+      "size": 7354192,
+      "sha256": "da9128c2eff190e2e78976f31f58e5d0e253f8732bee955887a2f6227d1a3ac9",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-borrowed-rights-147da30c4ee0a1b826f3/da9128c2eff190e2e78976f31f58e5d0e253f8732bee955887a2f6227d1a3ac9.mp3"
+    }
+  ]
+}

@@ -238,8 +238,8 @@ function ap_answer(c,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;c.sav
   ["Contracts and hours · contract","Pay records · law","Degrees and results · public task"].forEach((s,i)=>dp_T(c,s,x+32,y+170+i*40,{w:600,size:28}));c.restore();}
 
 /* ---------------------------------------------------------------- the series and the module */
-const AP_FILMS=[["A reason to keep it","Keep data for a reason you can say"],["How long, and then what","An end date, decided before it's needed"],["Forgetting a person","A person can ask; you must be able to answer"],
-  ["Deleted means deleted","Deleting is done when the last copy is gone"],["A person asks","On time, with proof"]];
+const AP_FILMS=[["A reason to keep it","Keep data for a reason you can say"],["How long, and then what","Every record has an end date, decided before it's needed"],["Forgetting a person","A person can ask. You must be able to answer"],
+  ["Deleted means deleted","Deleting is done when the last copy is gone"],["A person asks","A request answered on time, with proof"]];  // each film's end card, word for word
 function ap_films(c,o){o=o||{};AP_FILMS.forEach(([t,l],i)=>{const x=150,y=120+i*140,w=1620,q=o.each?o.each(i):1;if(q<=0)return;const lw=o.line?o.line(i):1,me=i===4;c.save();c.globalAlpha*=q;
   dp_panel(c,x,y,w,118,{col:me?"cyan":"grey",r:20,glowR:me?40:24});dp_T(c,"FILM "+(i+1)+" OF 5",x+32,y+48,{w:800,size:28,ls:4,col:me?"cyan":"mut"});dp_T(c,t,x+32,y+94,{w:700,size:34});
   if(lw>0){const n=Math.round(lw*l.length);dp_T(c,l.slice(0,n),x+720,y+74,{w:600,size:30});}

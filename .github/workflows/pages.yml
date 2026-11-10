@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url || steps.retry.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       # The live site names the commit it was built from in version.txt (a Pages deployment records the workflow's
       # commit instead, which for a Checks run is main's newest commit, not the one deployed).
@@ -69,16 +69,35 @@ jobs:
         run: git rev-parse HEAD > site/version.txt
       - if: steps.newer.outputs.go == 'true'
         uses: actions/configure-pages@v6
-      - if: steps.newer.outputs.go == 'true'
+      - id: upload
+        if: steps.newer.outputs.go == 'true'
         uses: actions/upload-pages-artifact@v5
         with:
           path: site
-      # The site is over 500 MB, and GitHub's syncing sometimes takes longer than deploy-pages waits (10 minutes at
-      # most; 01:15, 03:12 and 06:01 UTC, 10 Nov). A deployment that times out is tried once more with the same upload.
+      # deploy-pages gives up after 10 minutes at most and cancels the deployment, and GitHub's syncing of the 560 MB
+      # site has taken longer since 06:00 UTC on 10 Nov (four deployments in a row; one reached finished_file_sync
+      # after 7 minutes). This makes the same request deploy-pages makes and waits up to 40 minutes.
       - id: deployment
         if: steps.newer.outputs.go == 'true'
-        continue-on-error: true
-        uses: actions/deploy-pages@v5
-      - id: retry
-        if: steps.newer.outputs.go == 'true' && steps.deployment.outcome == 'failure'
-        uses: actions/deploy-pages@v5
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.upload.outputs.artifact_id }}
+          BUILD: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          oidc=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r .value)
+          created=$(jq -n --arg a "$ARTIFACT_ID" --arg v "$BUILD" --arg o "$oidc" \
+              '{artifact_id: ($a|tonumber), pages_build_version: $v, oidc_token: $o}' |
+            gh api -X POST "repos/$GITHUB_REPOSITORY/pages/deployments" --input -)
+          id=$(jq -r .id <<<"$created")
+          echo "page_url=$(jq -r .page_url <<<"$created")" >> "$GITHUB_OUTPUT"
+          echo "Deployment $id for $BUILD"
+          for i in $(seq 1 160); do
+            sleep 15
+            state=$(gh api "repos/$GITHUB_REPOSITORY/pages/deployments/$id" --jq .status || echo unknown)
+            echo "$(date -u +%H:%M:%S) $state"
+            case "$state" in
+              succeed) exit 0 ;;
+              deployment_failed|deployment_content_failed|deployment_cancelled|deployment_lost|deployment_attempt_error) exit 1 ;;
+            esac
+          done
+          echo "Still not live after 40 minutes"; exit 1

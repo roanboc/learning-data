@@ -43,7 +43,8 @@ const NARR={
  {"id":"slip","gap":0.8,"text":"Next, every change request gets a routing slip, filled in from the register."},
  {"id":"keeps","gap":0.8,"text":"Yusuf keeps the register: change a name there, and every slip follows."},
  {"id":"jun","gap":0.8,"text":"Jun's next change request maps award to the government's definition."},
- {"id":"mei","gap":0.8,"text":"Its slip sends it to Mei, by name, then to Noor and Yusuf. Nobody had to remember to."},
+ {"id":"mei","gap":0.8,"text":"Its slip sends it first to Mei, by name, to settle what award means, in the glossary."},
+ {"id":"code","gap":0.8,"text":"Then Noor's team builds it, and reviews the code. Owners are told, not asked to review."},
  {"id":"like","gap":0.8,"text":"Like the cord on the line: the work calls the person who decides, at the moment it matters."}]},
 "logged":{"name":"Where the work is","lead":1.0,"tail":1.0,"vo":[
  {"id":"written","gap":0.8,"text":"When Mei decides, her decision is written down where the work is: what, who, when and why."},
@@ -57,7 +58,7 @@ const NARR={
  {"id":"someone","gap":0.8,"text":"And she has someone to ask: Yusuf, or the council, when owners disagree."},
  {"id":"name","gap":0.8,"text":"A role without time is a name in a spreadsheet."}]},
 "which":{"name":"Which award?","lead":1.0,"tail":1.0,"vo":[
- {"id":"line","gap":0.8,"text":"On the line, the cord brought someone who could decide. Here, every change asks its owner."},
+ {"id":"line","gap":0.8,"text":"On the line, the cord brought someone who could decide. Here, every change of meaning asks its owner."},
  {"id":"real","gap":0.8,"text":"A decision right is real when the work asks for it."},
  {"id":"opens","gap":0.8,"text":"Then Mei opens Jun's change request, and asks a question nobody expected."},
  {"id":"five","gap":0.8,"text":"Which award does she own? She has found it defined in five places, and they don't agree."}]}

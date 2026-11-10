@@ -12,7 +12,7 @@ and says how; he adds two lines, and every check passes. *Governance you can use
 | `as_opened.patch` | The pull request as Jun opened it, against commit `00161b92`: the mart, its YAML, the product, and the files the scripts wrote |
 | `checks_as_opened.txt` | What the checks said: the governance check's one problem, and the impact check's "Nobody named" |
 | `owner_added.patch` | The two lines, on top of `as_opened.patch`: `owner: Planning` and `domain: planning` |
-| `checks_with_owner.txt` | What the checks said then: every rule met, and Planning to ask |
+| `checks_with_owner.txt` | What the checks said then: every rule met, and Planning to tell |
 
 The mart is only in these patches, not in the project's models: in the models, it would change the
 governance measures other films show.

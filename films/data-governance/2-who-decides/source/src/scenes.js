@@ -284,13 +284,14 @@ scene("required",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({own:wAt(s
     {at:P.min,place:"deskTop",keys:[[P.min,960,540,1],[P.min+0.2,1050,590,1.1]],d:3.2,push:0.01,draw:(x,tt)=>wd_minutes(x,tt,1,fin(tt,P.cl-0.05,0.5))}]);
   wc_paperOver(ctx,S);});
 
-// ---- 7 · Asked by name: every change request gets a routing slip from the register; Jun's goes to Mei, by name ----
+// ---- 7 · Asked by name: every change request gets a routing slip from the register; Jun's goes to Mei first, for the meaning, then
+// to Noor's team, who build it and review the code. Owners are told, never asked to review ----
 POSE.wd_meiDown=Object.assign({},POSE.stand,{gaze:[-0.4,1],look:1,tilt:0.09,turn:-0.2});
 POSE.wd_meiUp=Object.assign({},POSE.stand,{gaze:[1,-0.3],look:0,tilt:-0.03,turn:0.4});
 POSE.wd_meiRead=Object.assign({},POSE.hold,{L:[0.14,-1.9],R:[0.7,2.75],gaze:[0.8,-0.15],look:0,tilt:-0.04,turn:0.25});
 // the two requests: one for admissions, whose slip changes when the register does; Jun's, on award
-const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admissions report"],area:"admissions",slip:["Admissions office","Noor Rahman","Yusuf Demir"]};
-const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman","Yusuf Demir"]};
+const WD_ADREQ={from:"Jun Park, data team",title:["Add offer dates to","the admissions report"],area:"admissions",slip:["Admissions office","Noor Rahman"]};
+const WD_AWREQ={from:"Jun Park, data team",title:["Map award to the","government's definition"],area:"course",slip:["Mei Tanaka","Noor Rahman"]};
 // Mei at her desk, holding Jun's request up beside her face to read it (am: its slip lit like a lamp, 0 to 1); her screen shows her own
 // work. The slip's light falls round it, drawn over the picture where her hand holds the request
 function wd_meiHolds(x,tt,am,o){const [sx,s]=GV_RX.seat,q=Object.assign({pose:"wd_meiRead",t:tt,carry:wd_heldReq(am),wide:true},o||{});gv_behind(x,"mei",sx,GV_RX.top,s,q);
@@ -305,7 +306,7 @@ function wd_callAt(x,tt,t0,i,off){const N=WD_LN,wx=wd_stX(i),up=gv_io(tt,t0-0.4,
 const WD_RQAT=[140,250];
 scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"slip","routing"),fill:wAt(sc,"slip","filled"),reg:wAt(sc,"slip","register"),
     keeps:c.keeps-0.3,kp:wAt(sc,"keeps","keeps"),chg:wAt(sc,"keeps","change"),name:wAt(sc,"keeps","name"),fol:wAt(sc,"keeps","follows"),
-    jun:c.jun-0.3,aw:wAt(sc,"jun","award"),mei:c.mei-0.3,ms:["Mei","Noor","Yusuf"].map(k=>wAt(sc,"mei",k)),nob:wAt(sc,"mei","Nobody"),like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
+    jun:c.jun-0.3,aw:wAt(sc,"jun","award"),mei:c.mei-0.3,ms:[wAt(sc,"mei","Mei"),wAt(sc,"code","Noor")],nob:wAt(sc,"code","told"),like:c.like-0.3,work:wAt(sc,"like","work")-0.25}));
   // Yusuf's desk: the binder open at the register, the admissions request on the left-hand page; its slip clips on, and its first line
   // comes from the register: the admissions steward's cell and the slip's line lit gold together. The register's keeper is written at
   // its foot; the steward's name in it changes, and the slip's line with it, in a gold flash
@@ -321,7 +322,8 @@ scene("asked",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({rt:wAt(sc,"s
     // register, and it goes, up and out of the frame, to Mei
     {cut:true,at:P.jun,place:"junTop",keys:[[P.jun,960,520,1.04],[P.jun+0.2,960,525,1.08]],d:2.6,push:0.004,draw:(x,tt)=>{const go=easeCam(fin(tt,P.mei-0.7,0.8)),sl=P.mei-1.9;
       wd_req(x,610,250-1000*go,1,Object.assign({award:fin(tt,P.aw-0.1,0.6),slipP:fin(tt,sl,0.6),names:i=>fin(tt,sl+0.3+0.2*i,0.4)},WD_AWREQ));}},
-    // Mei's desk from above: his request comes to her, its slip naming her first, then Noor and Yusuf, each lit as the voice says it
+    // Mei's desk from above: his request comes to her, its slip naming her first, for the meaning, then Noor, whose team builds and reviews
+    // the code, each lit as the voice says it
     {cut:true,at:P.mei,place:"meiTop",keys:[[P.mei,960,520,1.08],[P.nob,960,530,1.12]],d:2.2,push:0.004,draw:(x,tt)=>{wd_logBook(x);wd_decBook(x);
       const u=easeCam(fin(tt,P.mei+0.1,0.9));wd_req(x,610,200+900*(1-u),1,Object.assign({lit:i=>gv_io(tt,P.ms[i]-0.1,P.ms[i]+0.9,0.3)},WD_AWREQ));}},
     // like the cord on the line: a hand pulls it, the lamp lights, the supervisor comes
@@ -391,7 +393,7 @@ scene("time",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({q:[1.1,2.4,3.
       wd_dkCard(x,WD_DK.time,"Mei's time",["2 h a week"],fin(tt,P.desk+0.2,0.6),{seed:190,dy:-720*easeCam(out),rot:-0.12*out});}}]);
   wc_paperOver(ctx,S);});
 
-// ---- 10 · Which award? Every change asks its owner; Mei reads Jun's, and finds award defined in five places ----
+// ---- 10 · Which award? Every change of meaning asks its owner; Mei reads Jun's, and finds award defined in five places ----
 // a face between calm and worried (u, 0 to 1)
 const wd_worry=u=>{const a=EXPR.calm,b=EXPR.worried,E={};new Set([...Object.keys(a),...Object.keys(b)]).forEach(k=>E[k]=lerp(a[k]||0,b[k]||0,u));return E;};
 scene("which",(ctx,S,t,sc)=>{const c=sc.cues,P=wd_once(sc,"P",()=>({cord:wAt(sc,"line","cord"),here:wAt(sc,"line","Here")-0.35,own:wAt(sc,"line","owner"),

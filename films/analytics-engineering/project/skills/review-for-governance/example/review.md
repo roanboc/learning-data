@@ -20,7 +20,7 @@ counts from the built mart, never its values.
 `models/marts/health/_health__models.yml`, line 8: the mart's `meta` has no `owner` and no `domain`
 (`governance.py`). The conceptual model names the Faculty of Health as the owner of *learner progress*
 (`_health__conceptual.yml`, line 26), but `models/_shared/_shared__owners.yml` doesn't say how to reach the
-faculty (`codeowners.py`), so no owner is asked to review a change to it: the impact report says "Who to ask:
+faculty (`codeowners.py`), so nobody would be told what a change to it touches: the impact report says "Who to tell:
 Nobody named". And the mart is in no product (`products.py`).
 
 - **The rule:** every model other teams read has an owner (the governance check, rule 1), and every mart is part
@@ -61,7 +61,7 @@ mart has no tests.
 
 ### The impact report
 
-A new mart and its contract; 0 downstream models, 0 tests, 0 exposures. Who to ask: nobody named, until
+A new mart and its contract; 0 downstream models, 0 tests, 0 exposures. Who to tell: nobody named, until
 finding 1 is settled.
 
 ---

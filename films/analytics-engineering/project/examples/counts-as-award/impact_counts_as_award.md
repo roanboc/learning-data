@@ -32,6 +32,6 @@
 
 15 test(s) on it and downstream. `dbt build --select core_credential+ --profiles-dir .` runs them.
 
-## Who to ask
+## Who to tell
 
 Mei Tanaka, registrar's office; Planning; Wallet app team

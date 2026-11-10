@@ -77,12 +77,12 @@ Say in the pull request what you changed, why, what you checked, and the evidenc
 
 | Change | Approves |
 |---|---|
-| Meaning: a definition, a key, an identity rule, a business rule | Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials; data governance names the glossary term a definition comes from |
-| The model: grain, entities, relationships, versions | Noor, data architect |
-| The code: models, tests, macros | Jun Park, analytics engineer, in review |
-| A consumer contract | Its consumer: Planning, or the wallet app team |
+| Meaning: a definition, a key, an identity rule, a business rule | Its owner, in the glossary, before any code: Mei Tanaka, registrar's office, for learners, awards and credentials; the learning team for microcredentials. The code follows the glossary |
+| An enterprise contract, for a canonical table | Data governance's information architect writes it; the data team builds to it. Other dbt contracts are the data team's |
+| The model and the code: grain, entities, versions, models, tests, macros | The data team, in review (Noor, data architect, for the model) |
+| A change that doesn't match the glossary or an enterprise contract | Data governance, which checks how it got there. It isn't a reviewer |
 
-`CODEOWNERS`, generated from the owners in the metadata, asks each of them to review what they own.
+Owners and stewards don't review pull requests (`CODEOWNERS`): the impact check tells them what a change touches.
 The agent recommends; people approve.
 
 ## What words mean

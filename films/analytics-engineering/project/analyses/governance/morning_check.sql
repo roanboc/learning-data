@@ -3,7 +3,7 @@
 -- project's YAML classes none, which has no tag: section 16); and a column whose class has to be
 -- hidden, with no column mask policy over it whose tags name that class. It reads names and classes
 -- only: classification's results also keep sample values, never selected here. Databricks only,
--- like the policy (docs/databricks-governance.md, section 17). A Databricks SQL alert runs it each
+-- like the policy (docs/databricks-governance.md, section 18). A Databricks SQL alert runs it each
 -- morning at seven, and emails data governance and the platform team when it returns a row. Here:
 -- the project's core and marts schemas, and the class direct, which section 3's policy hides. A
 -- platform with more catalogs and classes names them (null: every schema of that catalog):

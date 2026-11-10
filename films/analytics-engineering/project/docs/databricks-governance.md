@@ -3,7 +3,7 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12, 14, 16 and 17 on 10 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12, 14, 16, 17 and 18 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
@@ -457,31 +457,68 @@ carry no tags, so `learner_key`, made there, arrives in the core with no class t
 Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
 doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
 
-## 17. Proof it held
+## 17. One policy for each class
+
+Section 3 writes one policy, for `direct`. The registrar's catalog, which the platform team keeps in its
+own bundle, outside this project, takes it further: one policy for each class that's hidden, on the
+whole catalog, so a table made tomorrow is protected the day it appears, with no mask written for it.
+Its files, as the film *One policy for many tables* shows them, are in
+`examples/one-policy-for-many-tables/`, with the rules in its README.
+
+1. **Governed tags.** Each column's class is `personal_data` (`special`, `direct`, `pseudonymous` or
+   `indirect`; a column with no personal data has no tag); each table has a `level`, set last, after
+   its columns' classes, and never on a catalog or a schema, which every table under it would inherit;
+   and the column that holds each learner's faculty has the key-only tag `faculty`.
+2. **A function for each way,** in the catalog's `policies` schema: words become `***` and anything
+   else is left empty (one function for every type, through `VARIANT`, since a mask gives back its
+   column's type or the query fails); part of a value, for the help desk; a date becomes the first of
+   January of its year; a yes or a no for each row's faculty; and no rows at all.
+3. **A policy for each class,** on the catalog, each to `account users` except the groups the data owner
+   lets through, and the builder's group on every list, or what it builds keeps the stars. Each reader
+   gets one mask for each column: two different ones stop the query with an error, so the help desk is
+   let through the policy that masks names whole and given the one that masks them in part.
+4. **A row filter on one schema:** the study sees only rows whose column tagged `faculty` holds `HLT`.
+   A table with no such column isn't filtered at all, so a check after the policies fails the job if a
+   table with learners in it has none.
+5. **A table with no level is closed** to all but its builder, by a row filter that returns no rows,
+   until its owner levels it. A policy hides only what has a tag: a column no one has classed shows as
+   it is, until its owner classes it, so look for such columns every day.
+6. **Kept as code.** Bundles have no resource for a policy, so a job in the registrar's bundle runs the
+   files with a SQL task, as the identity that deploys it, once the data team reviews the pull request;
+   the data owner is told what it touches. The policies go in before the grant that lets a reader in.
+
+`SHOW EFFECTIVE POLICIES ON TABLE <catalog>.<schema>.<table>` lists every policy that applies to a
+table, with those on its schema and catalog. Don't also run section 3's policy on a catalog with these:
+two masks on one column for one reader stop the query. Policies need serverless compute, or standard or
+dedicated compute on Databricks Runtime 16.4 or above (dedicated with fine-grained access control
+filtering on); older compute can't read the tables at all.
+
+## 18. Proof it held
 
 A protection is a promise until a record shows it held. The university proves each one from the
 platform's and the directory's own records, not from anyone's memory, and keeps each proof with the
 agreement it answers to. Nothing here runs in the build.
 
-1. **Every morning, two gaps.** `analyses/governance/morning_check.sql` looks, on the tables people
-   read, for a column the platform's data classification finds personal with no class (no
-   `personal_data` tag, and not one the project's YAML classes `none`, which has no tag: section 16),
-   and for a column whose class has to be hidden with no column mask policy over it that names the
-   class. Make what it compiles to a Databricks SQL alert, as section 14 does: the condition, the sum
-   of `found` is greater than 0, with *Empty result state* set to OK, so a morning with no gap sends
-   nothing; the schedule, every day at 7:00 (`0 0 7 * * ?`); the notification, an email to data
-   governance and the platform team.
+1. **Every morning, two gaps.** `analyses/governance/morning_check.sql` is the daily look section 17
+   asks for. It looks, on the tables people read, for a column the platform's data classification
+   finds personal with no class (no `personal_data` tag, and not one the project's YAML classes
+   `none`, which has no tag: section 16), and for a column whose class has to be hidden with no column
+   mask policy over it that names the class. Make what it compiles to a Databricks SQL alert, as
+   section 14 does: the condition, the sum of `found` is greater than 0, with *Empty result state* set
+   to OK, so a morning with no gap sends nothing; the schedule, every day at 7:00 (`0 0 7 * * ?`); the
+   notification, an email to data governance and the platform team.
 
    ```bash
    dbt compile --target databricks --profiles-dir . --select morning_check
    ```
 
-   By default it reads the project's `core` and `marts` schemas, for the class `direct`, which
-   section 3's policy hides; the vars `morning_check_shelves` and `classes_to_hide` name others. Raw
-   tables and the build's views carry no class (section 1 tags tables), so they're left out. A table
-   loaded straight from a source system, outside the project, gets its classes from its owner's own
-   task, and a new column that task doesn't name arrives with no class: classification scans a new
-   column within about a day, and the next morning's check finds it.
+   By default it reads the project's `core` and `marts` schemas, for the class `direct`, which section
+   3's policy hides; the vars `morning_check_shelves` and `classes_to_hide` name others, such as a
+   catalog with section 17's policies and every class they hide. Raw tables and the build's views
+   carry no class (section 1 tags tables), so they're left out. A table loaded straight from a source
+   system, outside the project, gets its classes from its owner's own task, and a new column that task
+   doesn't name arrives with no class: classification scans a new column within about a day, and the
+   next morning's check finds it.
 
    Classification's results, `system.data_classification.results`, keep up to five sample values of
    what they found, and at first only an account admin can read them. The check never selects the
@@ -518,7 +555,7 @@ agreement it answers to. Nothing here runs in the build.
    the agreement it answers to: the review's results, each alert and what was done about it, who read,
    where each column went, and the check at the end.
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; *Row filters and column masks* and *Unity Catalog metric views*, for section 15, on 5 November 2026; and Azure Databricks' *Data classification* to the end, for section 17, on 5 and again on 10 November 2026)
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; *Row filters and column masks* and *Unity Catalog metric views*, for section 15, on 5 November 2026; *Core concepts for attribute-based access control* to *SQL task for jobs*, for section 17, on 10 November 2026; and Azure Databricks' *Data classification* to the end, for section 18, on 5 and again on 10 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
@@ -639,8 +676,31 @@ agreement it answers to. Nothing here runs in the build.
 - Databricks, *Row filters and column masks* (a row filter is a SQL function that sees who is asking,
   set on a table with `ALTER TABLE ... SET ROW FILTER`): https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks/
 - Databricks, *Unity Catalog metric views*: https://docs.databricks.com/aws/en/uc-semantics/metric-views
+- Databricks, *Core concepts for attribute-based access control (ABAC)* ("Policies act like future
+  grants"; a policy on a catalog covers every table in it; a table with no matching column isn't
+  covered): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/core-concepts
+- Databricks, *Create and manage row filter and column mask policies* (exempt principals see the full,
+  unmodified data): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
+- Databricks, *Row filter and column mask policy evaluation and runtime behavior* (one distinct mask per
+  column for each user, one row filter per table, or an error):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policy-evaluation
+- Databricks, *Requirements, quotas, and limitations for row filter and column mask policies* (governed
+  tags only; the compute; 100 policies per catalog, 20 principals per policy):
+  https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/requirements
+- Databricks, *Common patterns for row filtering and column masking* (a `VARIANT` mask for many types,
+  a table closed until it's classified, partial reveal without regular expressions, a row filter given
+  a constant): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/common-patterns
+- Databricks, *Performance considerations for row filter and column mask policies* (simple,
+  deterministic functions): https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/performance
+- Databricks, *CREATE POLICY*: https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-create-policy
+- Databricks, *SHOW POLICIES* (`EFFECTIVE` adds the policies inherited from the schema and catalog):
+  https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-aux-show-policies
+- Databricks, *TABLE_TAGS* (the tags on each table):
+  https://docs.databricks.com/aws/en/sql/language-manual/information-schema/table_tags
+- Databricks, *SQL task for jobs* (a file of several statements, on a serverless or pro SQL warehouse):
+  https://docs.databricks.com/aws/en/jobs/sql
 - Azure Databricks, *Data classification* (no status label for it; scanning views and excluding
-  detections are in Beta, and section 16 uses neither; new columns are typically scanned within
+  detections are in Beta, and section 18 uses neither; new columns are typically scanned within
   24 hours): https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/data-classification
 - Azure Databricks, *Data classification system table reference* (its sample values; confidence
   `HIGH` or `LOW`): https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/data-classification

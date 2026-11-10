@@ -1,0 +1,255 @@
+1
+00:00:03,000 --> 00:00:09,084
+El mar de Aral, entre Kazajistán y Uzbekistán, fue alguna vez el cuarto lago más grande del mundo.
+
+2
+00:00:10,784 --> 00:00:18,637
+Desde los años sesenta, sus dos ríos se desviaron para regar algodón y arroz en el desierto, en campos de los que viven muchas familias.
+
+3
+00:00:20,337 --> 00:00:28,820
+El mar se encogió. Para 2004 había perdido casi el 70% de su superficie, y su nivel había bajado casi 20 metros.
+
+4
+00:00:30,720 --> 00:00:37,605
+Hacia 1990 se partió en dos: un mar pequeño al norte, en Kazajistán, y uno más grande al sur.
+
+5
+00:00:39,305 --> 00:00:47,714
+Pueblos pesqueros como Aralsk quedaron lejos del agua. El mar se salinizó, los peces murieron y se perdieron decenas de miles de empleos.
+
+6
+00:00:49,414 --> 00:00:55,766
+Las tormentas levantaban sal y polvo del fondo seco. El agua potable se contaminó, y la gente se enfermó.
+
+7
+00:00:57,466 --> 00:01:01,402
+Recuperar todo el mar habría significado quitarles los ríos a los campos.
+
+8
+00:01:03,102 --> 00:01:04,490
+Algo tenía que cambiar.
+
+9
+00:01:06,590 --> 00:01:10,667
+Kazajistán decidió salvar la parte que se podía salvar: el mar del norte.
+
+10
+00:01:12,167 --> 00:01:19,649
+Con un préstamo del Banco Mundial, construyó la presa de Kok-Aral, de 13 kilómetros, para retener en el norte el agua del Sir Daria.
+
+11
+00:01:21,149 --> 00:01:26,610
+Se terminó en agosto de 2005, y unas obras río arriba dejaron llegar más agua del río.
+
+12
+00:01:28,310 --> 00:01:37,164
+El agua subió mucho más rápido de lo previsto. Para 2006 el mar del norte había subido cuatro metros, al nivel para el que se hizo la presa.
+
+13
+00:01:39,064 --> 00:01:47,939
+Para 2007 era la mitad de salado. Los peces volvieron, y la pesca se multiplicó por cuarenta, de 50 toneladas a unas 2000.
+
+14
+00:01:49,839 --> 00:01:56,039
+Abrieron cuatro plantas de pescado, y en 2008 su pescado se vendió en el extranjero por primera vez en años.
+
+15
+00:01:57,539 --> 00:02:00,477
+La orilla volvió decenas de kilómetros hacia Aralsk.
+
+16
+00:02:02,177 --> 00:02:09,041
+El mar del sur, que la presa no salvó, siguió encogiéndose. Para 2014, su parte oriental estaba seca.
+
+17
+00:02:10,941 --> 00:02:17,492
+Fue un no a todo el mar, dicho con claridad, y un sí a la parte que se podía salvar. Y ese sí se cumplió.
+
+18
+00:02:19,592 --> 00:02:26,963
+En el trabajo con datos se pide más de lo que un equipo puede hacer bien. Un no a secas no ayuda a nadie, ni un sí que nadie puede cumplir.
+
+19
+00:02:28,663 --> 00:02:32,803
+Un no honesto, con lo que sí puedes hacer y cuándo, le da a la gente lo que necesita.
+
+20
+00:02:40,903 --> 00:02:48,664
+En la universidad, dentro de un año, Clara Jensen, de Planificación, pide un nuevo modelo de pronóstico de estudiantes para fines de agosto.
+
+21
+00:02:50,364 --> 00:02:58,800
+A la vez, la oficina de registro necesita los datos de las aulas para el cambio de horario que el Consejo Universitario pidió en junio.
+
+22
+00:03:00,500 --> 00:03:07,641
+Mei Tanaka y Graham Ellis los necesitan para fines de agosto, para que las facultades planifiquen las clases del próximo año desde octubre.
+
+23
+00:03:09,341 --> 00:03:15,052
+Ambos van a la única lista del equipo, ordenada a la vista de todos, como muestra el módulo Gestión de datos.
+
+24
+00:03:16,752 --> 00:03:20,402
+Y ambos necesitan a Jun y a Noor, en las mismas cuatro semanas de agosto.
+
+25
+00:03:22,102 --> 00:03:29,912
+Decir sí a los dos sería hacer mal uno: un modelo que nadie tuvo tiempo de probar, o los datos de las aulas tarde para las facultades.
+
+26
+00:03:31,812 --> 00:03:33,896
+Un no a secas dejaría a Clara sin nada.
+
+27
+00:03:35,596 --> 00:03:39,681
+Por eso Helena Novak, la gestora de datos, no elige ninguna. Primero, pregunta.
+
+28
+00:03:42,381 --> 00:03:47,392
+Roger Fisher y William Ury, en Obtenga el sí, distinguen una posición de un interés.
+
+29
+00:03:48,892 --> 00:03:55,120
+Una posición es lo que alguien pide. Un interés es por qué lo pide: para qué es la fecha o el alcance.
+
+30
+00:03:57,020 --> 00:04:03,132
+El miércoles 14 de julio, Helena y Noor se sientan con Clara, y le preguntan para qué es la fecha.
+
+31
+00:04:04,832 --> 00:04:12,983
+El presupuesto de 2028 cierra el viernes 17 de septiembre. Planificación debe incluir las cifras de estudiantes del año próximo.
+
+32
+00:04:14,883 --> 00:04:22,919
+El modelo nuevo leería cada semana las solicitudes de ingreso para anticipar un cambio en la demanda, para las admisiones de diciembre.
+
+33
+00:04:24,819 --> 00:04:29,116
+Entonces, ¿qué necesita el presupuesto? El modelo actual, con las cifras de este año.
+
+34
+00:04:31,016 --> 00:04:38,614
+Su posición: un modelo nuevo para agosto. Sus intereses: una cifra confiable en el presupuesto, y un aviso más temprano para las admisiones.
+
+35
+00:04:40,714 --> 00:04:44,110
+Helena se lo repite con sus palabras, y Clara asiente: para eso es.
+
+36
+00:04:46,810 --> 00:04:52,480
+Helena pone los dos pedidos en la única lista, uno al lado del otro, donde Clara y Mei pueden verlos.
+
+37
+00:04:54,180 --> 00:04:57,627
+Cada uno con su fecha, para qué es, y las semanas de trabajo que lleva.
+
+38
+00:04:59,327 --> 00:05:05,060
+Los datos de las aulas toman tres de las cuatro semanas de agosto. Un modelo nuevo, seis, y tiempo para probarlo.
+
+39
+00:05:07,160 --> 00:05:09,509
+Poner al día el modelo actual lleva una semana.
+
+40
+00:05:11,209 --> 00:05:18,535
+El orden no lo elige Helena. La lista se ordena por valor, urgencia, esfuerzo y riesgo, nunca por quién pide.
+
+41
+00:05:20,235 --> 00:05:26,015
+Fisher y Ury lo llaman criterios justos: lo que ambas partes pueden comprobar, no quién presiona más.
+
+42
+00:05:27,915 --> 00:05:34,567
+Luego buscan opciones que sirvan a los dos intereses: el presupuesto para septiembre, y el aviso temprano para diciembre.
+
+43
+00:05:37,267 --> 00:05:43,556
+William Ury lo llama un no positivo: un sí a lo que debes proteger, luego un no claro, y luego una propuesta.
+
+44
+00:05:45,456 --> 00:05:51,399
+La presa de Kok-Aral fue uno: un sí a la parte que se podía salvar, y un no claro a todo el mar.
+
+45
+00:05:53,099 --> 00:05:57,044
+El sí de Helena es al cambio de horario, y al trabajo bien hecho.
+
+46
+00:05:58,544 --> 00:06:01,574
+Su no es a la fecha: no habrá modelo nuevo para agosto.
+
+47
+00:06:03,274 --> 00:06:10,777
+Su propuesta: el modelo actual, al día con las cifras de este año, para el viernes 27 de agosto, a tiempo para el presupuesto.
+
+48
+00:06:12,677 --> 00:06:17,385
+Y el modelo nuevo para el viernes 29 de octubre, antes de las admisiones.
+
+49
+00:06:19,085 --> 00:06:20,843
+Luego pregunta: ¿eso te serviría?
+
+50
+00:06:22,743 --> 00:06:30,302
+La decisión es de Clara. Si no estuviera de acuerdo, el consejo de datos lo resolvería abiertamente el martes 27 de julio.
+
+51
+00:06:32,202 --> 00:06:38,221
+Clara acepta. Las dos fechas van a la única lista, por escrito: ahora no, con una razón y una fecha.
+
+52
+00:06:40,921 --> 00:06:48,081
+El viernes 27 de agosto, el modelo al día llega a Planificación, y los datos de las aulas a la oficina de registro.
+
+53
+00:06:49,981 --> 00:06:55,510
+El viernes 17 de septiembre cierra el presupuesto, con las cifras de Planificación en él.
+
+54
+00:06:57,410 --> 00:07:04,811
+El viernes 29 de octubre, el modelo nuevo está listo, revisado antes de que alguien lo lea, a tiempo para las admisiones.
+
+55
+00:07:06,711 --> 00:07:12,399
+En noviembre, Clara trae con tiempo la siguiente solicitud de Planificación, con para qué es y cuándo la necesita.
+
+56
+00:07:14,299 --> 00:07:18,804
+Un no claro con una propuesta, cumplida, generó más confianza que un sí que nadie podía cumplir.
+
+57
+00:07:21,504 --> 00:07:27,407
+En el Aral, la presa no prometió todo el mar. Salvó la parte que pudo, y el agua volvió.
+
+58
+00:07:29,307 --> 00:07:36,563
+Helena hizo lo mismo: preguntó para qué era la fecha, mostró la disyuntiva, ofreció lo que el equipo podía hacer bien, y cumplió su palabra.
+
+59
+00:07:38,463 --> 00:07:41,460
+El lunes, cuando una fecha no se pueda cumplir, pregunta para qué es.
+
+60
+00:07:43,160 --> 00:07:46,010
+Pon la disyuntiva en la lista, donde todos puedan verla.
+
+61
+00:07:47,510 --> 00:07:51,640
+Di que no a la fecha, no a la persona, y ofrece lo que puedes hacer bien, y cuándo.
+
+62
+00:07:53,140 --> 00:07:56,857
+Deja que elijan quienes deciden, ponlo por escrito, y cumple tu palabra.
+
+63
+00:07:58,357 --> 00:08:03,599
+La próxima película, Menos, a propósito, abre una nueva serie: lo que un equipo deja de hacer, entre todos.
+
+64
+00:08:05,299 --> 00:08:07,996
+Nunca un no a secas: di lo que sí puedes hacer, y cuándo.

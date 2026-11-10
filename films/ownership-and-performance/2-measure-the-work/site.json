@@ -1,0 +1,86 @@
+{
+  "kicker": "Measures for learning",
+  "kicker_es": "Medidas para aprender",
+  "title_es": "Mide el trabajo, no a las personas",
+  "h1": "Measure the work, not the people: read it together, fix the system",
+  "h1_es": "Mide el trabajo, no a las personas: léelo en equipo, arregla el sistema",
+  "lead": "In 2027 the university's data team reads its measures together every second Thursday, and Helena asks what slowed the work, never who. Waits in how the work was arranged are found and removed, each measure is read beside one that balances it, and asked to count each person's tickets, she says no.",
+  "lead_es": "En 2027 el equipo de datos de la universidad lee sus medidas cada dos jueves, y Helena pregunta qué frenó el trabajo, nunca quién. Encuentran y quitan esperas en cómo se organizaba el trabajo, leen cada medida junto a otra que la equilibra y, cuando le piden contar tickets por persona, dice que no.",
+  "description": "A film about measuring the work, not the people, the second of Ownership and performance in the module Leading data people: managing and leading are two sides of one role, and a leader measures, fitted to thinking work; the team's page of measures from the data management module, four of them in two pairs (days from a request to first use beside work sent back for changes, promises met beside load), read together every second Thursday from 15 July 2027 with one question, what slowed the work, never who; June's 24 days taken apart, 7 of them waiting for access, asked for on the day a request is accepted from 19 July and down to one day by September; one piece of work in eight sent back, halved by fifteen minutes with the person who asked before work starts; promises met at 82% in August beside a load of nine against a limit of six, read together, so the team finishes before it starts; and a fair request to count each person's tickets, answered no, with the team's page instead. Charles Goodhart and Marilyn Strathern, W. Edwards Deming, Accelerate and the SPACE framework, each named once. It opens in Sweden, where Vision Zero stopped blaming drivers and measured the roads, to find what in them to fix.",
+  "description_es": "Una película sobre medir el trabajo, no a las personas, la segunda de Responsabilidad y desempeño en el módulo Liderar equipos de datos: gestionar y liderar son dos caras de un mismo rol, y quien lidera mide, de un modo que se ajuste al trabajo de pensar; la página de medidas del equipo, del módulo de gestión de datos, con cuatro medidas en dos parejas (días desde una solicitud hasta el primer uso junto al trabajo devuelto para cambios, promesas cumplidas junto a la carga), leídas en equipo cada dos jueves desde el 15 de julio de 2027 con una sola pregunta, qué frenó el trabajo, nunca quién; los 24 días de junio desarmados, 7 de ellos esperando acceso, que desde el 19 de julio se pide el día en que se acepta una solicitud y en septiembre tarda un día; uno de cada ocho trabajos devuelto, la mitad menos con quince minutos con quien lo pidió antes de empezar; promesas cumplidas al 82% en agosto junto a una carga de nueve frente a un límite de seis, leídas juntas, así que el equipo termina antes de empezar; y un pedido justo de contar los tickets de cada persona, respondido con un no y con la página del equipo. Charles Goodhart y Marilyn Strathern, W. Edwards Deming, Accelerate y el marco SPACE, nombrados una vez. Empieza en Suecia, donde Visión Cero dejó de culpar a los conductores y midió las carreteras para encontrar qué arreglar en ellas.",
+  "card": "Helena's team reads its measures together, asks what slowed the work, never who, and fixes the system, not the people.",
+  "card_es": "El equipo de Helena lee sus medidas en conjunto, pregunta qué frenó el trabajo, nunca quién, y arregla el sistema.",
+  "chapters_es": {
+    "vision": "Las carreteras, no los conductores",
+    "manage": "Gestión, para este trabajo",
+    "read": "Leerlo en equipo",
+    "pairs": "Cada medida tiene su pareja",
+    "target": "No es una meta",
+    "monday": "El lunes"
+  },
+  "past": [
+    "Sweden, 1997 to 2024: roads, not drivers",
+    "Most crashes were put down to drivers' mistakes. In 1997 Sweden's parliament adopted Vision Zero, and those who design and run the roads answered too: every fatal crash was studied, and cable barriers, roundabouts and lower speeds followed. Road deaths fell by more than half while traffic grew."
+  ],
+  "past_es": [
+    "Suecia, de 1997 a 2024: las carreteras, no los conductores",
+    "La mayoría de los choques se atribuía a errores de los conductores. En 1997 el parlamento sueco adoptó Visión Cero, y quienes diseñan y gestionan las carreteras también respondieron: se estudió cada choque mortal, y llegaron barreras de cables, rotondas y menos velocidad. Las muertes bajaron más de la mitad mientras el tráfico crecía."
+  ],
+  "next_h": "You've seen the team's measures. Next: the harder case, when one person's work falls behind, and what surrounds it.",
+  "next_h_es": "Viste las medidas del equipo. Después: el caso más difícil, cuando el trabajo de una persona se queda atrás, y lo que lo rodea.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Vision Zero",
+        "title_es": "Visión Cero",
+        "line": "Sweden's road safety policy of 1997: no one killed or seriously injured, with those who design the roads answerable too.",
+        "line_es": "La política sueca de seguridad vial de 1997: nadie muerto ni gravemente herido, y quienes diseñan las carreteras también responden.",
+        "href": "https://en.wikipedia.org/wiki/Vision_Zero",
+        "href_es": "https://es.wikipedia.org/wiki/Visi%C3%B3n_Cero"
+      },
+      {
+        "title": "Goodhart's law",
+        "title_es": "Ley de Goodhart",
+        "line": "When a measure becomes a target, it ceases to be a good measure: Goodhart's observation, in Marilyn Strathern's words.",
+        "line_es": "Cuando una medida se convierte en meta, deja de ser una buena medida: la observación de Goodhart, con las palabras de Marilyn Strathern.",
+        "href": "https://en.wikipedia.org/wiki/Goodhart%27s_law",
+        "href_es": "https://es.wikipedia.org/wiki/Ley_de_Goodhart"
+      },
+      {
+        "title": "The SPACE of developer productivity",
+        "title_es": "The SPACE of developer productivity (en inglés)",
+        "line": "Why no single count of activity shows how well people work, and how to measure several things side by side.",
+        "line_es": "Por qué ningún conteo de actividad muestra por sí solo qué tan bien trabaja la gente, y cómo medir varias cosas lado a lado.",
+        "href": "https://queue.acm.org/detail.cfm?id=3454124",
+        "href_es": "https://queue.acm.org/detail.cfm?id=3454124"
+      },
+      {
+        "title": "DORA",
+        "title_es": "DORA (en inglés)",
+        "line": "The research program behind Accelerate: the best teams are fast and stable at once, measured side by side.",
+        "line_es": "El programa de investigación detrás de Accelerate: los mejores equipos son rápidos y estables a la vez, medidos lado a lado.",
+        "href": "https://dora.dev/",
+        "href_es": "https://dora.dev/"
+      }
+    ],
+    "more": [
+      {
+        "text": "W. Edwards Deming, Out of the Crisis (1986): most problems belong to the system, not to the people in it",
+        "text_es": "W. Edwards Deming, Out of the Crisis (1986): la mayoría de los problemas son del sistema, no de las personas que están en él (en inglés)",
+        "href": "https://en.wikipedia.org/wiki/W._Edwards_Deming",
+        "href_es": "https://es.wikipedia.org/wiki/William_Edwards_Deming"
+      },
+      {
+        "text": "Trafikverket's Vision Zero Academy: how Sweden's transport administration works on Vision Zero today",
+        "text_es": "Vision Zero Academy de Trafikverket: cómo trabaja hoy en Visión Cero la administración sueca de transporte (en inglés)",
+        "href": "https://www.trafikverket.se/en/startpage/operations/Operations-road/vision-zero-academy/",
+        "href_es": "https://www.trafikverket.se/en/startpage/operations/Operations-road/vision-zero-academy/"
+      }
+    ]
+  },
+  "draft": true
+}

@@ -1,0 +1,2701 @@
+"use strict";
+const W=1920,H=1080,TAU=Math.PI*2;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp=(a,b,t)=>a+(b-a)*t;
+const sstep=(a,b,x)=>{const t=clamp((x-a)/(b-a),0,1);return t*t*(3-2*t);};
+const ease=t=>{t=clamp(t,0,1);return t<0.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;};
+const hash=(n,s)=>{const x=Math.sin(n*127.1+(s||0)*311.7)*43758.5453123;return x-Math.floor(x);};
+const rgba=(c,a)=>"rgba("+(c[0]|0)+","+(c[1]|0)+","+(c[2]|0)+","+a+")";
+const mix=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
+const P=(x,y)=>({x,y});
+function bez(p0,p1,p2,p3,n){const o=[];for(let i=0;i<=n;i++){const t=i/n,m=1-t;o.push(P(m*m*m*p0.x+3*m*m*t*p1.x+3*m*t*t*p2.x+t*t*t*p3.x,m*m*m*p0.y+3*m*m*t*p1.y+3*m*t*t*p2.y+t*t*t*p3.y));}return o;}
+function seg(a,b,n){const o=[];for(let i=0;i<=n;i++){const t=i/n;o.push(P(lerp(a.x,b.x,t),lerp(a.y,b.y,t)));}return o;}
+function join(){const o=[];for(let i=0;i<arguments.length;i++){const s=arguments[i];for(let j=(i?1:0);j<s.length;j++)o.push(s[j]);}return o;}
+function mk(pts){const L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y));return{pts,L,total:L[L.length-1]};}
+function at(p,u){const d=clamp(u,0,1)*p.total,L=p.L;let lo=0,hi=L.length-1;while(hi-lo>1){const m=(lo+hi)>>1;if(L[m]<d)lo=m;else hi=m;}const a=p.pts[lo],b=p.pts[hi],f=clamp((d-L[lo])/((L[hi]-L[lo])||1),0,1);return{x:lerp(a.x,b.x,f),y:lerp(a.y,b.y,f),a:Math.atan2(b.y-a.y,b.x-a.x)};}
+function poly(ctx,pts){ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(let i=1;i<pts.length;i++)ctx.lineTo(pts[i].x,pts[i].y);}
+function rr(ctx,x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function spawn(t,every,dur,off,fn){const tt=t-off,a=Math.floor((tt-dur)/every)+1,b=Math.floor(tt/every);for(let i=a;i<=b;i++){const u=(tt-i*every)/dur;if(u>=0&&u<=1)fn(u,i);}}
+function mkCanvas(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c;}
+
+/* ---------- palette ---------- */
+const C={ink:[238,245,255],soft:[200,215,235],err:[255,62,62],white:[255,255,255],
+  raw:[[255,176,64],[120,232,140],[86,178,255],[186,128,255],[255,150,200],[90,220,255],[255,226,120]],
+  dom:{students:[77,163,255],teaching:[176,123,255],research:[47,211,192],finance:[255,138,92]},
+  star:[255,228,170],mcp:[120,235,170],hot:[90,220,255],warm:[255,176,64]};
+const MET={bronze:[[232,170,114],[122,74,40]],silver:[[226,233,242],[96,105,118]],gold:[[252,218,124],[156,110,28]],steel:[[178,188,202],[50,56,66]],dark:[[74,84,98],[18,22,28]],wood:[[140,92,56],[58,34,18]]};
+const FT={sans:"Manrope,'Segoe UI',system-ui,sans-serif",serif:"'Source Serif 4',Georgia,serif",mono:"'IBM Plex Mono',Menlo,Consolas,monospace"};
+const font=(w,s,f)=>w+" "+s+"px "+FT[f||"sans"];
+
+/* ---------- glow sprites ---------- */
+const SPR=new Map();
+function sprite(c){const k=(c[0]|0)+","+(c[1]|0)+","+(c[2]|0);let s=SPR.get(k);if(s)return s;s=mkCanvas(64,64);const x=s.getContext("2d");const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(0.2,rgba(c,0.9));g.addColorStop(0.5,rgba(c,0.28));g.addColorStop(1,rgba(c,0));x.fillStyle=g;x.fillRect(0,0,64,64);SPR.set(k,s);return s;}
+function glow(ctx,x,y,r,c,a){if(a<=0.004||r<=0)return;const op=ctx.globalCompositeOperation,ga=ctx.globalAlpha;ctx.globalCompositeOperation="lighter";ctx.globalAlpha=Math.min(1,a)*ga;ctx.drawImage(sprite(c),x-r,y-r,2*r,2*r);ctx.globalAlpha=ga;ctx.globalCompositeOperation=op;}
+function metal(ctx,x0,y0,x1,y1,m){const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,rgba(m[0],1));g.addColorStop(0.5,rgba(mix(m[0],m[1],0.55),1));g.addColorStop(1,rgba(m[1],1));return g;}
+function beam(ctx,pts,c,widths){ctx.save();ctx.globalCompositeOperation="lighter";ctx.lineCap="round";ctx.lineJoin="round";(widths||[[26,0.05],[11,0.14],[4,0.45],[1.6,0.95]]).forEach(([w,a])=>{poly(ctx,pts);ctx.strokeStyle=rgba(c,a);ctx.lineWidth=w;ctx.stroke();});ctx.restore();}
+
+/* ---------- camera ---------- */
+// camera moves use a sine ease: their fastest moment is about half as fast as with ease(), so the camera glides instead of darting
+const easeCam=t=>0.5-0.5*Math.cos(Math.PI*clamp(t,0,1));
+function camAt(keys,t){if(t<=keys[0][0])return{x:keys[0][1],y:keys[0][2],z:keys[0][3]};for(let i=1;i<keys.length;i++){if(t<=keys[i][0]){const a=keys[i-1],b=keys[i];const f=easeCam((t-a[0])/(b[0]-a[0]));return{x:lerp(a[1],b[1],f),y:lerp(a[2],b[2],f),z:Math.exp(lerp(Math.log(a[3]),Math.log(b[3]),f))};}}const k=keys[keys.length-1];return{x:k[1],y:k[2],z:k[3]};}
+function setCam(ctx,S,cam){ctx.setTransform(S*cam.z,0,0,S*cam.z,S*(W/2-cam.x*cam.z),S*(H/2-cam.y*cam.z));}
+function setScreen(ctx,S){ctx.setTransform(S,0,0,S,0,0);}
+function toScreen(cam,x,y){return P(W/2+(x-cam.x)*cam.z,H/2+(y-cam.y)*cam.z);}
+
+/* ---------- text & labels ---------- */
+function txt(ctx,s,x,y,o){o=o||{};ctx.font=font(o.w||600,o.size||28,o.f);ctx.textAlign=o.align||"left";ctx.textBaseline=o.base||"alphabetic";ctx.fillStyle=o.color||rgba(C.ink,o.a==null?0.96:o.a);ctx.fillText(s,x,y);}
+function label(ctx,S,cam,wx,wy,title,sub,o){ // screen-space label anchored to a world point
+  o=o||{};const a=o.a==null?1:o.a;if(a<=0.01)return;const p=toScreen(cam,wx,wy);setScreen(ctx,S);
+  ctx.save();ctx.globalAlpha=a;const al=o.align||"left",ts=o.size||34,ss=o.ssize||23;
+  ctx.font=font(700,ts);const tw=ctx.measureText(title).width;ctx.font=font(500,ss);const sw=sub?ctx.measureText(sub).width:0;
+  const w=Math.max(tw,sw)+36,h=sub?ts+ss+30:ts+22;let x=al==="center"?p.x-w/2:(al==="right"?p.x-w:p.x);const y=p.y-h/2;
+  rr(ctx,x,y,w,h,12);ctx.fillStyle="rgba(4,9,18,0.72)";ctx.fill();ctx.strokeStyle=rgba(o.col||C.soft,0.35);ctx.lineWidth=1.5;ctx.stroke();
+  if(o.col){ctx.fillStyle=rgba(o.col,1);ctx.fillRect(x+10,y+12,5,h-24);}
+  const tx=x+(o.col?26:18);txt(ctx,title,tx,y+ts+8,{w:700,size:ts});if(sub)txt(ctx,sub,tx,y+ts+ss+16,{w:500,size:ss,color:rgba(C.soft,0.85)});
+  ctx.restore();
+}
+
+/* ---------- master picture and packets ---------- */
+const PICW=1200,PICH=800,TCELL=200,TPAD=14,TCAN=TCELL+TPAD*2;
+function paintCampus(x,w,h){
+  let g=x.createLinearGradient(0,0,0,h*0.72);g.addColorStop(0,"#2c4a7c");g.addColorStop(0.45,"#7282b2");g.addColorStop(0.78,"#e8a07a");g.addColorStop(1,"#f7d2a0");x.fillStyle=g;x.fillRect(0,0,w,h);
+  g=x.createRadialGradient(w*0.8,h*0.3,0,w*0.8,h*0.3,h*0.3);g.addColorStop(0,"rgba(255,240,200,0.95)");g.addColorStop(0.3,"rgba(255,215,160,0.45)");g.addColorStop(1,"rgba(255,200,150,0)");x.fillStyle=g;x.fillRect(0,0,w,h);
+  x.fillStyle="#fff3d6";x.beginPath();x.arc(w*0.8,h*0.3,h*0.055,0,TAU);x.fill();
+  x.fillStyle="#7b6f93";x.beginPath();x.moveTo(0,h*0.64);for(let i=0;i<=24;i++)x.lineTo(w*i/24,h*(0.6-0.04*Math.sin(i*0.8)-0.02*Math.sin(i*2.1)));x.lineTo(w,h);x.lineTo(0,h);x.fill();
+  g=x.createLinearGradient(0,h*0.7,0,h);g.addColorStop(0,"#6c9a5e");g.addColorStop(1,"#3a653b");x.fillStyle=g;x.fillRect(0,h*0.7,w,h*0.3);
+  x.fillStyle="#e6d2b0";x.beginPath();x.moveTo(w*0.3,h);x.bezierCurveTo(w*0.42,h*0.87,w*0.5,h*0.8,w*0.54,h*0.72);x.lineTo(w*0.59,h*0.72);x.bezierCurveTo(w*0.6,h*0.82,w*0.63,h*0.9,w*0.74,h);x.closePath();x.fill();
+  const hx=w*0.06,hy=h*0.34,hw=w*0.34,hh=h*0.38;
+  x.fillStyle="#d9b98f";x.fillRect(hx,hy,hw,hh);x.fillStyle="rgba(0,0,0,0.12)";x.fillRect(hx+hw*0.7,hy,hw*0.3,hh);
+  x.fillStyle="#a97f55";x.beginPath();x.moveTo(hx-w*0.016,hy);x.lineTo(hx+hw/2,hy-h*0.15);x.lineTo(hx+hw+w*0.016,hy);x.closePath();x.fill();
+  x.fillStyle="#f4ead8";x.beginPath();x.arc(hx+hw/2,hy-h*0.065,h*0.036,0,TAU);x.fill();x.strokeStyle="#4a3828";x.lineWidth=4;x.stroke();
+  x.beginPath();x.moveTo(hx+hw/2,hy-h*0.065);x.lineTo(hx+hw/2,hy-h*0.09);x.moveTo(hx+hw/2,hy-h*0.065);x.lineTo(hx+hw/2+h*0.02,hy-h*0.058);x.stroke();
+  for(let r=0;r<2;r++)for(let c=0;c<4;c++){const wx=hx+hw*0.08+c*hw*0.235,wy=hy+hh*0.12+r*hh*0.32;x.fillStyle=(r*4+c)%3===0?"#ffd98a":"#4d5b7a";x.fillRect(wx,wy,hw*0.13,hh*0.19);x.strokeStyle="#4a3828";x.lineWidth=3;x.strokeRect(wx,wy,hw*0.13,hh*0.19);}
+  x.fillStyle="#6b4a2f";x.fillRect(hx+hw*0.43,hy+hh*0.68,hw*0.14,hh*0.32);
+  const lx=w*0.57,ly=h*0.45,lw=w*0.37,lh=h*0.27;
+  x.fillStyle="#b9c3d6";x.fillRect(lx,ly,lw,lh);x.fillStyle="#98a4bc";x.beginPath();x.moveTo(lx-w*0.012,ly);x.lineTo(lx+lw/2,ly-h*0.085);x.lineTo(lx+lw+w*0.012,ly);x.closePath();x.fill();
+  x.fillStyle="#eef2f8";for(let i=0;i<6;i++)x.fillRect(lx+lw*0.06+i*lw*0.16,ly+lh*0.12,lw*0.05,lh*0.84);
+  x.fillStyle="#6d7a95";x.fillRect(lx,ly+lh*0.94,lw,lh*0.06);
+  x.fillStyle="#5b3f2a";x.fillRect(w*0.465,h*0.52,w*0.014,h*0.2);
+  x.fillStyle="#3f7a45";x.beginPath();x.arc(w*0.472,h*0.5,h*0.095,0,TAU);x.fill();x.fillStyle="#58975a";x.beginPath();x.arc(w*0.455,h*0.465,h*0.058,0,TAU);x.fill();
+  [[0.43,0.87,1],[0.5,0.83,0.9],[0.63,0.9,1.05],[0.67,0.81,0.8],[0.2,0.86,0.95]].forEach(([px,py,s])=>{x.fillStyle="#2b2a3a";x.beginPath();x.arc(w*px,h*(py-0.075*s),h*0.018*s,0,TAU);x.fill();rr(x,w*px-h*0.017*s,h*(py-0.053*s),h*0.034*s,h*0.062*s,h*0.012*s);x.fill();});
+  x.strokeStyle="#2b2f45";x.lineWidth=4;x.lineCap="round";[[0.3,0.14],[0.36,0.1],[0.41,0.16]].forEach(([bx,by])=>{x.beginPath();x.moveTo(w*bx-14,h*by);x.quadraticCurveTo(w*bx-7,h*by-8,w*bx,h*by);x.quadraticCurveTo(w*bx+7,h*by-8,w*bx+14,h*by);x.stroke();});
+}
+const MASTERS={};
+function master(k){k=k||1;if(!MASTERS[k]){const c=mkCanvas(PICW*k,PICH*k);paintCampus(c.getContext("2d"),PICW*k,PICH*k);MASTERS[k]=c;}return MASTERS[k];}
+const STAMPS=["9:02 am","23:02Z","10/02 09:02","2026-02-10T23:02","Tue 9.02","09:02 AEST","1739228520"];
+const TB=new Map();
+function tornPath(x,cell,amp){const n=9,pts=[];const e=[[TPAD,TPAD],[TPAD+TCELL,TPAD],[TPAD+TCELL,TPAD+TCELL],[TPAD,TPAD+TCELL]];for(let s=0;s<4;s++){const a=e[s],b=e[(s+1)%4];for(let i=0;i<n;i++){const f=i/n;const j=(hash(cell*17+s*11+i,3)-0.5)*amp;const nx=b[1]-a[1],ny=a[0]-b[0],l=Math.hypot(nx,ny)||1;pts.push([lerp(a[0],b[0],f)+nx/l*j,lerp(a[1],b[1],f)+ny/l*j]);}}x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.closePath();}
+function tileBmp(cell,qi,ci,err,k){
+  k=k||1;const key=cell+"|"+qi+"|"+ci+"|"+(err?1:0)+"|"+k;let b=TB.get(key);if(b)return b;
+  b=mkCanvas(TCAN*k,TCAN*k);const x=b.getContext("2d");x.scale(k,k);const m=master(k);const cx=(cell%6)*TCELL,cy=((cell/6)|0)*TCELL;
+  const raw=qi===0,mid=qi===1,cast=ci>=0?C.raw[ci%C.raw.length]:C.white;
+  x.save();
+  if(raw)tornPath(x,cell,16);else{x.beginPath();x.rect(TPAD,TPAD,TCELL,TCELL);}
+  x.fillStyle="#0c1422";x.fill();x.clip();
+  x.filter=raw?"blur("+(3.2*k)+"px) saturate(0.5) contrast(0.85) brightness(0.95)":(mid?"blur("+k+"px) saturate(0.85)":"none");
+  x.drawImage(m,cx*k,cy*k,TCELL*k,TCELL*k,TPAD,TPAD,TCELL,TCELL);x.filter="none";
+  if(raw||mid){x.globalCompositeOperation="color";x.fillStyle=rgba(cast,raw?0.55:0.18);x.fillRect(0,0,TCAN,TCAN);x.globalCompositeOperation="source-over";
+    const n=raw?1400:300;for(let i=0;i<n;i++){const px=TPAD+hash(i,cell*7+qi)*TCELL,py=TPAD+hash(i+911,cell*5+qi)*TCELL;x.fillStyle=hash(i,cell+33)>0.5?"rgba(255,255,255,0.35)":"rgba(0,0,0,0.35)";x.fillRect(px,py,2,2);}}
+  if(raw&&hash(cell,ci+4)>0.35){x.globalCompositeOperation="destination-out";x.beginPath();const k=(hash(cell,ci+9)*4)|0,co=[[TPAD,TPAD],[TPAD+TCELL,TPAD],[TPAD+TCELL,TPAD+TCELL],[TPAD,TPAD+TCELL]][k];x.moveTo(co[0],co[1]);x.lineTo(co[0]+(k===1||k===2?-1:1)*TCELL*0.42,co[1]);x.lineTo(co[0],co[1]+(k>=2?-1:1)*TCELL*0.34);x.closePath();x.fill();x.globalCompositeOperation="source-over";}
+  x.restore();
+  const st=raw?STAMPS[(cell+ci+7)%STAMPS.length]:"23:02 UTC";
+  x.font=font(500,17,"mono");const sw=x.measureText(st).width;rr(x,TPAD+8,TPAD+TCELL-34,sw+16,26,5);x.fillStyle="rgba(6,10,18,0.82)";x.fill();x.fillStyle=raw?rgba(cast,1):"rgba(235,244,255,0.95)";x.textBaseline="middle";x.fillText(st,TPAD+16,TPAD+TCELL-21);
+  if(err){x.strokeStyle="rgba(255,64,64,0.95)";x.lineWidth=7;x.lineCap="round";x.beginPath();x.moveTo(TPAD+34,TPAD+30);x.lineTo(TPAD+TCELL-34,TPAD+TCELL-50);x.moveTo(TPAD+TCELL-34,TPAD+30);x.lineTo(TPAD+34,TPAD+TCELL-50);x.stroke();}
+  x.lineWidth=raw?3:2.5;x.strokeStyle=err?"rgba(255,70,70,0.95)":(raw?rgba(cast,0.9):"rgba(240,246,255,0.9)");
+  if(raw)tornPath(x,cell,16);else{x.beginPath();x.rect(TPAD,TPAD,TCELL,TCELL);}x.stroke();
+  TB.set(key,b);return b;
+}
+/* packet: a print of light. sp={cell,q,ci,err}; size in world units; z = camera zoom for level of detail */
+function packet(ctx,z,x,y,size,rot,sp,al){
+  al=al==null?1:al;if(al<=0.01)return;const scr=size*z;
+  const col=sp.err?C.err:(sp.q<0.55&&sp.ci>=0?C.raw[sp.ci%C.raw.length]:(sp.col||C.white));
+  const dot=1-sstep(15,26,scr),card=sstep(12,24,scr);
+  if(dot>0.01)glow(ctx,x,y,size*1.15,col,0.95*al*dot);
+  if(card>0.01){glow(ctx,x,y,size*1.3,col,0.26*al*card);
+    const qf=clamp(sp.q,0,1)*2,i0=Math.min(1,Math.floor(qf)),f=qf-i0,s=size*TCAN/TCELL;
+    ctx.save();ctx.translate(x,y);ctx.rotate(rot);const ga=ctx.globalAlpha;
+    const k=sp.hi?2:1;
+    ctx.globalAlpha=ga*al*card*(1-f);ctx.drawImage(tileBmp(sp.cell,i0,sp.ci,sp.err,k),-s/2,-s/2,s,s);
+    if(f>0.01){ctx.globalAlpha=ga*al*card*f;ctx.drawImage(tileBmp(sp.cell,i0+1,sp.ci,sp.err,k),-s/2,-s/2,s,s);}
+    ctx.globalAlpha=ga;ctx.restore();}
+}
+function spec(k,salt){return{cell:(hash(k,salt+1)*24)|0,ci:(hash(k,salt+2)*7)|0,err:false,q:0};}
+
+/* ---------- paintings (gold) ---------- */
+const PW=960,PH=640;const PAINT={};
+function painting(kind){if(PAINT[kind])return PAINT[kind];const c=mkCanvas(PW,PH),x=c.getContext("2d");({realism:paintRealism,modern:paintModern,renaissance:paintRenaissance,impression:paintImpression})[kind](x,PW,PH);PAINT[kind]=c;return c;}
+function paintRealism(x,w,h){
+  let g=x.createRadialGradient(w*0.3,h*0.18,20,w*0.4,h*0.4,w*0.95);g.addColorStop(0,"#6a5640");g.addColorStop(0.6,"#2d2218");g.addColorStop(1,"#120d09");x.fillStyle=g;x.fillRect(0,0,w,h);
+  g=x.createLinearGradient(0,h*0.56,0,h);g.addColorStop(0,"#7a4c2a");g.addColorStop(1,"#341d0e");x.fillStyle=g;x.fillRect(0,h*0.56,w,h*0.44);
+  x.strokeStyle="rgba(28,14,5,0.28)";x.lineWidth=2;for(let i=0;i<16;i++){const y=h*0.58+i*h*0.027;x.beginPath();x.moveTo(0,y);for(let k=0;k<=16;k++)x.lineTo(w*k/16,y+Math.sin(k*0.8+i*1.3)*4);x.stroke();}
+  x.fillStyle="rgba(0,0,0,0.35)";x.beginPath();x.ellipse(w*0.36,h*0.9,w*0.3,h*0.05,0,0,TAU);x.fill();
+  const L=[[w*0.12,h*0.9],[w*0.19,h*0.62],[w*0.48,h*0.6],[w*0.5,h*0.88]],R=[[w*0.5,h*0.88],[w*0.48,h*0.6],[w*0.77,h*0.63],[w*0.85,h*0.9]];
+  [L,R].forEach((q,i)=>{x.beginPath();q.forEach((p,j)=>j?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.closePath();g=x.createLinearGradient(q[0][0],0,q[2][0],0);g.addColorStop(0,i?"#efe3c8":"#d9c9a8");g.addColorStop(1,i?"#d8c7a3":"#f3e9d2");x.fillStyle=g;x.fill();x.strokeStyle="rgba(80,60,30,0.5)";x.lineWidth=1.5;x.stroke();
+    x.save();x.clip();x.strokeStyle="rgba(90,110,150,0.35)";x.lineWidth=1.2;for(let r=1;r<13;r++){const f=r/13;x.beginPath();x.moveTo(lerp(q[1][0],q[0][0],f),lerp(q[1][1],q[0][1],f));x.lineTo(lerp(q[2][0],q[3][0],f),lerp(q[2][1],q[3][1],f));x.stroke();}
+    x.fillStyle="rgba(40,40,60,0.7)";x.font="15px "+FT.mono;for(let r=1;r<12;r++){const f=r/13+0.035,a=lerp(q[1][0],q[0][0],f),b=lerp(q[1][1],q[0][1],f);x.fillText((1200+((hash(r,i+5)*8800)|0))+"",a+22+(i?10:0),b-3);x.fillText(((hash(r,i+7)*90)|0)+"."+((hash(r,i+8)*9)|0),a+122,b-3);}x.restore();});
+  g=x.createLinearGradient(w*0.48,0,w*0.5,0);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,0.3)");x.fillStyle=g;x.fillRect(w*0.46,h*0.6,w*0.04,h*0.29);
+  [[w*0.82,h*0.74,9],[w*0.9,h*0.8,6],[w*0.74,h*0.84,4]].forEach(([cx,cy,n])=>{for(let i=0;i<n;i++){const y=cy-i*9;g=x.createLinearGradient(cx-34,0,cx+34,0);g.addColorStop(0,"#8a6417");g.addColorStop(0.45,"#f7d36b");g.addColorStop(1,"#9c7420");x.fillStyle=g;x.beginPath();x.ellipse(cx,y,34,11,0,0,TAU);x.fill();x.strokeStyle="rgba(90,60,10,0.8)";x.lineWidth=1;x.stroke();}x.fillStyle="#f9e39a";x.beginPath();x.ellipse(cx,cy-(n-1)*9-2,26,7,0,0,TAU);x.fill();});
+  x.save();x.translate(w*0.58,h*0.7);x.rotate(-0.5);g=x.createLinearGradient(0,-6,0,6);g.addColorStop(0,"#222");g.addColorStop(0.5,"#555");g.addColorStop(1,"#111");x.fillStyle=g;rr(x,-150,-6,280,12,6);x.fill();x.fillStyle="#d9b35a";x.beginPath();x.moveTo(130,-6);x.lineTo(160,0);x.lineTo(130,6);x.fill();x.restore();
+  g=x.createRadialGradient(w*0.28,h*0.12,10,w*0.3,h*0.2,w*0.55);g.addColorStop(0,"rgba(255,230,170,0.35)");g.addColorStop(1,"rgba(255,230,170,0)");x.fillStyle=g;x.fillRect(0,0,w,h);
+  g=x.createRadialGradient(w/2,h/2,h*0.3,w/2,h/2,w*0.7);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(0,0,0,0.55)");x.fillStyle=g;x.fillRect(0,0,w,h);
+}
+function paintModern(x,w,h){
+  x.fillStyle="#f0ebe0";x.fillRect(0,0,w,h);
+  x.fillStyle="#1f9e8e";x.beginPath();x.arc(w*0.33,h*0.46,h*0.3,0,TAU);x.fill();
+  x.fillStyle="#e8b43a";x.fillRect(w*0.58,h*0.12,w*0.2,h*0.3);
+  x.fillStyle="#d4462e";x.fillRect(w*0.66,h*0.56,w*0.24,h*0.22);
+  x.fillStyle="#1d3f8f";x.beginPath();x.arc(w*0.78,h*0.36,h*0.07,0,TAU);x.fill();
+  x.strokeStyle="#161616";x.lineWidth=9;x.beginPath();x.moveTo(w*0.06,h*0.8);x.lineTo(w*0.94,h*0.22);x.stroke();
+  x.lineWidth=5;x.beginPath();x.moveTo(w*0.5,h*0.05);x.lineTo(w*0.5,h*0.95);x.stroke();
+  x.lineWidth=4;x.beginPath();x.arc(w*0.33,h*0.46,h*0.4,Math.PI*1.1,Math.PI*1.9);x.stroke();
+  const N=[[0.14,0.2],[0.22,0.78],[0.44,0.22],[0.58,0.66],[0.86,0.9],[0.92,0.5]];x.lineWidth=3;
+  [[0,2],[2,3],[1,3],[3,4],[3,5]].forEach(([a,b])=>{x.beginPath();x.moveTo(w*N[a][0],h*N[a][1]);x.lineTo(w*N[b][0],h*N[b][1]);x.stroke();});
+  N.forEach((n,i)=>{x.fillStyle=i%2?"#161616":"#f0ebe0";x.beginPath();x.arc(w*n[0],h*n[1],h*0.035,0,TAU);x.fill();x.lineWidth=5;x.stroke();});
+  x.fillStyle="rgba(22,22,22,0.9)";x.fillRect(w*0.08,h*0.08,w*0.1,h*0.04);
+}
+function paintRenaissance(x,w,h){
+  const vx=w*0.5,vy=h*0.42;
+  let g=x.createLinearGradient(0,0,0,h*0.5);g.addColorStop(0,"#6d8fb0");g.addColorStop(1,"#e9d6ac");x.fillStyle=g;x.fillRect(0,0,w,h);
+  x.fillStyle="rgba(255,250,235,0.55)";[[0.3,0.12,0.12],[0.7,0.09,0.1],[0.52,0.18,0.08]].forEach(([cx,cy,r])=>{x.beginPath();x.ellipse(w*cx,h*cy,w*r,h*r*0.35,0,0,TAU);x.fill();});
+  g=x.createLinearGradient(0,vy,0,h);g.addColorStop(0,"#b99467");g.addColorStop(1,"#7a5634");x.fillStyle=g;x.fillRect(0,vy,w,h-vy);
+  x.strokeStyle="rgba(60,38,20,0.45)";x.lineWidth=2;for(let i=-10;i<=10;i++){x.beginPath();x.moveTo(vx,vy);x.lineTo(vx+i*w*0.12,h);x.stroke();}
+  for(let k=1;k<9;k++){const f=Math.pow(k/9,1.8),y=vy+(h-vy)*f;x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke();}
+  for(let s=-1;s<=1;s+=2){for(let k=0;k<5;k++){const f=1-k*0.2,cx=vx+s*w*0.46*f,top=lerp(vy,h*0.1,f),bot=lerp(vy,h*0.92,f),cw=w*0.035*f;
+    g=x.createLinearGradient(cx-cw,0,cx+cw,0);g.addColorStop(0,"#d9c29a");g.addColorStop(1,"#9c7f59");x.fillStyle=g;x.fillRect(cx-cw,top,cw*2,bot-top);
+    if(k<4){const nx=vx+s*w*0.46*(f-0.2),ntop=lerp(vy,h*0.1,f-0.2);x.strokeStyle="#8c6d48";x.lineWidth=5*f;x.beginPath();x.moveTo(cx,top);x.quadraticCurveTo((cx+nx)/2,top-h*0.1*f,nx,ntop);x.stroke();}}}
+  g=x.createLinearGradient(vx-w*0.08,0,vx+w*0.08,0);g.addColorStop(0,"#c7ab80");g.addColorStop(1,"#a48660");x.fillStyle=g;x.fillRect(vx-w*0.08,vy-h*0.2,w*0.16,h*0.2);x.fillStyle="#5c4028";x.beginPath();x.moveTo(vx-w*0.03,vy);x.lineTo(vx-w*0.03,vy-h*0.1);x.arc(vx,vy-h*0.1,w*0.03,Math.PI,0);x.lineTo(vx+w*0.03,vy);x.fill();
+  const robes=["#8c2f2a","#2f4d7c","#b5872e","#4c6b3a","#6a3f6e"];
+  for(let r=0;r<3;r++)for(let i=0;i<7;i++){const f=0.45+r*0.2,y=lerp(vy,h*0.95,f),x0=lerp(vx,w*(0.1+i*0.133),f),s=f*1.1;if(Math.abs(i-3)<1&&r===2)continue;
+    x.fillStyle=robes[(i+r*2)%5];x.beginPath();x.moveTo(x0-18*s,y);x.quadraticCurveTo(x0-14*s,y-55*s,x0,y-62*s);x.quadraticCurveTo(x0+14*s,y-55*s,x0+18*s,y);x.fill();x.fillStyle="#e2b98f";x.beginPath();x.arc(x0,y-70*s,9*s,0,TAU);x.fill();}
+  const fx=vx,fy=h*0.96;x.fillStyle="#9c2f24";x.beginPath();x.moveTo(fx-30,fy);x.quadraticCurveTo(fx-24,fy-110,fx,fy-122);x.quadraticCurveTo(fx+24,fy-110,fx+30,fy);x.fill();x.fillStyle="#e2b98f";x.beginPath();x.arc(fx,fy-136,15,0,TAU);x.fill();
+  x.fillStyle="#f3e6c4";rr(x,fx+14,fy-104,64,40,6);x.fill();x.strokeStyle="#7a5a30";x.lineWidth=2;x.stroke();x.strokeStyle="rgba(90,60,30,0.7)";for(let k=0;k<4;k++){x.beginPath();x.moveTo(fx+22,fy-94+k*8);x.lineTo(fx+70,fy-94+k*8);x.stroke();}
+  x.globalCompositeOperation="multiply";x.fillStyle="rgba(214,170,110,0.35)";x.fillRect(0,0,w,h);x.globalCompositeOperation="source-over";
+  x.strokeStyle="rgba(50,30,15,0.18)";x.lineWidth=1;for(let i=0;i<260;i++){let px=hash(i,51)*w,py=hash(i,52)*h;x.beginPath();x.moveTo(px,py);for(let k=0;k<4;k++){px+=(hash(i*5+k,53)-0.5)*40;py+=(hash(i*5+k,54)-0.5)*40;x.lineTo(px,py);}x.stroke();}
+  g=x.createRadialGradient(w/2,h/2,h*0.35,w/2,h/2,w*0.72);g.addColorStop(0,"rgba(0,0,0,0)");g.addColorStop(1,"rgba(40,20,5,0.55)");x.fillStyle=g;x.fillRect(0,0,w,h);
+}
+function dabs(x,n,seed,area,cols,len,wid,al){for(let i=0;i<n;i++){const px=area[0]+hash(i,seed)*area[2],py=area[1]+hash(i,seed+1)*area[3];x.save();x.translate(px,py);x.rotate((hash(i,seed+2)-0.5)*0.9);x.fillStyle=cols[(hash(i,seed+3)*cols.length)|0];x.globalAlpha=al;rr(x,-len/2,-wid/2,len*(0.6+hash(i,seed+4)*0.8),wid,wid/2);x.fill();x.restore();}x.globalAlpha=1;}
+function paintImpression(x,w,h){
+  let g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,"#3b3f78");g.addColorStop(0.45,"#c67a8a");g.addColorStop(0.62,"#f2a868");g.addColorStop(1,"#3e4d5e");x.fillStyle=g;x.fillRect(0,0,w,h);
+  dabs(x,900,11,[0,0,w,h*0.62],["#5a5a9c","#8b6fb0","#d98c9a","#f0a870","#f6c98a","#4e5f9e"],34,10,0.55);
+  dabs(x,500,21,[0,h*0.4,w,h*0.3],["#2c2f52","#3d3a66","#4a3f6e","#2a2a45"],30,12,0.75);
+  for(let b=0;b<4;b++){const bx=w*(0.06+b*0.24),bw=w*0.19,top=h*(0.36+hash(b,3)*0.1);x.fillStyle="rgba(40,36,70,0.85)";x.fillRect(bx,top,bw,h*0.72-top);}
+  dabs(x,650,31,[0,h*0.62,w,h*0.38],["#2f4b3a","#3e6b4a","#5d8b5a","#6a5a8a","#c9855f"],30,10,0.6);
+  x.fillStyle="rgba(250,200,120,0.25)";for(let i=0;i<220;i++){const px=hash(i,61)*w,py=h*0.74+hash(i,62)*h*0.26;rr(x,px,py,20,5,2.5);x.fill();}
+}
+function impressionLive(ctx,x,y,w,h,t){for(let b=0;b<4;b++)for(let r=0;r<4;r++)for(let c=0;c<4;c++){const k=b*16+r*4+c;const on=Math.sin(t*(0.7+hash(k,5))+hash(k,6)*9)>-0.2;if(!on)continue;const bx=x+w*(0.06+b*0.24)+w*0.19*(0.12+c*0.21),top=h*(0.36+hash(b,3)*0.1),by=y+top+(h*0.72-top)*(0.12+r*0.2);ctx.fillStyle=hash(k,7)>0.5?"rgba(255,214,120,0.95)":"rgba(255,190,110,0.85)";rr(ctx,bx,by,w*0.024,h*0.034,3);ctx.fill();}}
+const FRAME={realism:{c:MET.wood,b:30},modern:{c:[[30,30,30],[10,10,10]],b:10},renaissance:{c:MET.gold,b:40},impression:{c:[[236,230,214],[176,166,146]],b:24}};
+function framed(ctx,kind,x,y,w,h,dom,t){
+  const f=FRAME[kind],b=f.b*(w/560);
+  ctx.save();ctx.fillStyle="rgba(0,0,0,0.45)";rr(ctx,x-b+10,y-b+14,w+2*b,h+2*b,6);ctx.fill();
+  ctx.fillStyle=metal(ctx,x-b,y-b,x+w+b,y+h+b,f.c);rr(ctx,x-b,y-b,w+2*b,h+2*b,4);ctx.fill();
+  if(kind==="renaissance"){ctx.strokeStyle="rgba(120,80,20,0.6)";ctx.lineWidth=Math.max(1,b*0.12);for(let i=1;i<4;i++){rr(ctx,x-b+b*i/4,y-b+b*i/4,w+2*b-b*i/2,h+2*b-b*i/2,3);ctx.stroke();}}
+  if(kind==="modern"){ctx.fillStyle="#f7f4ee";ctx.fillRect(x-b*0.4,y-b*0.4,w+b*0.8,h+b*0.8);}
+  ctx.drawImage(painting(kind),x,y,w,h);
+  if(kind==="impression")impressionLive(ctx,x,y,w,h,t);
+  ctx.strokeStyle=rgba(dom,0.95);ctx.lineWidth=Math.max(2,b*0.16);ctx.strokeRect(x-ctx.lineWidth/2,y-ctx.lineWidth/2,w+ctx.lineWidth,h+ctx.lineWidth);
+  ctx.restore();
+}
+function museumCard(ctx,x,y,w,title,style,aud,dom,a){if(a<=0.01)return;ctx.save();ctx.globalAlpha=a;const h=w*0.48;ctx.fillStyle="rgba(0,0,0,0.35)";ctx.fillRect(x+4,y+5,w,h);ctx.fillStyle="#f4f1ea";ctx.fillRect(x,y,w,h);ctx.fillStyle=rgba(dom,1);ctx.fillRect(x,y,w*0.03,h);
+  ctx.textAlign="left";ctx.textBaseline="alphabetic";ctx.fillStyle="#1d1d22";ctx.font=font(600,w*0.1,"serif");ctx.fillText(title,x+w*0.08,y+h*0.32);ctx.font="italic 400 "+(w*0.075)+"px "+FT.serif;ctx.fillStyle="#44444c";ctx.fillText(style,x+w*0.08,y+h*0.6);ctx.font=font(600,w*0.072);ctx.fillStyle="#5b5b66";ctx.fillText(aud,x+w*0.08,y+h*0.86);ctx.restore();}
+
+/* ---------- backgrounds ---------- */
+function labBg(ctx,t,warm){
+  const g=ctx.createRadialGradient(W*0.45,H*0.4,40,W*0.5,H*0.5,W*0.75);g.addColorStop(0,warm?"#1f1a2c":"#0e1d38");g.addColorStop(0.6,warm?"#0f0c16":"#07101f");g.addColorStop(1,"#02050b");ctx.fillStyle=g;ctx.fillRect(-4000,-4000,12000,12000);
+}
+function dust(ctx,t,x0,y0,w,h,n,seed){ctx.save();ctx.globalCompositeOperation="lighter";for(let i=0;i<n;i++){const sp=4+hash(i,seed+2)*10,x=x0+((hash(i,seed+1)*w+t*sp)%w+w)%w,y=y0+hash(i,seed+3)*h+Math.sin(t*0.5+i)*8;ctx.fillStyle="rgba(205,222,255,"+(0.05+0.18*hash(i,seed+5))+")";ctx.beginPath();ctx.arc(x,y,0.9+hash(i,seed+4)*1.8,0,TAU);ctx.fill();}ctx.restore();}
+
+/* ---------- devices ---------- */
+function phone(ctx,x,y,s,o){o=o||{};
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  rr(ctx,-62,-120,124,240,22);ctx.fillStyle="#0c131f";ctx.fill();ctx.strokeStyle="rgba(205,225,255,0.6)";ctx.lineWidth=2.5;ctx.stroke();
+  rr(ctx,-54,-104,108,210,12);ctx.fillStyle="#132640";ctx.fill();
+  ctx.beginPath();ctx.arc(0,-112,3.5,0,TAU);ctx.fillStyle="#6c7a90";ctx.fill();
+  ctx.textAlign="center";ctx.textBaseline="middle";
+  const scr=o.screen||"enrol";
+  if(scr==="enrol"){ctx.fillStyle="rgba(230,240,255,0.95)";ctx.font=font(700,13);ctx.fillText("Data Science 101",0,-70);ctx.font=font(500,10.5);ctx.fillStyle="rgba(200,215,235,0.8)";ctx.fillText("Tue 9:00, room B204",0,-52);
+    ctx.fillStyle="rgba(200,215,235,0.25)";for(let i=0;i<3;i++){rr(ctx,-38,-30+i*14,76-i*14,6,3);ctx.fill();}
+    rr(ctx,-36,40,72,30,15);ctx.fillStyle=o.press?"rgba(120,200,255,0.95)":"rgba(80,160,255,0.85)";ctx.fill();ctx.fillStyle="#fff";ctx.font=font(700,13);ctx.fillText("Enrol",0,55);}
+  else if(scr==="confirm"){ctx.fillStyle="rgba(120,230,160,0.95)";ctx.beginPath();ctx.arc(0,-30,22,0,TAU);ctx.fill();ctx.strokeStyle="#0c131f";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-10,-30);ctx.lineTo(-3,-22);ctx.lineTo(11,-38);ctx.stroke();ctx.fillStyle="rgba(230,240,255,0.95)";ctx.font=font(700,13);ctx.fillText("Enrolment",0,12);ctx.fillText("confirmed",0,30);}
+  else if(scr==="seat"){ctx.fillStyle="rgba(230,240,255,0.95)";ctx.font=font(700,12.5);ctx.fillText("Seat free?",0,-62);ctx.font=font(500,10.5);ctx.fillStyle="rgba(200,215,235,0.85)";ctx.fillText("Tue 9 am, DS101",0,-44);if(o.ans>0){ctx.globalAlpha=o.ans;rr(ctx,-40,-10,80,56,10);ctx.fillStyle="rgba(120,230,160,0.2)";ctx.fill();ctx.fillStyle="rgba(150,240,180,1)";ctx.font=font(800,26);ctx.fillText("1",0,12);ctx.font=font(600,10.5);ctx.fillText("seat left",0,34);ctx.globalAlpha=1;}}
+  ctx.restore();
+  if(o.flash>0)glow(ctx,x,y-112*s,90*s*o.flash+10,C.white,o.flash);
+}
+function laptop(ctx,x,y,s,flash){ctx.save();ctx.translate(x,y);ctx.scale(s,s);rr(ctx,-92,-72,184,116,8);ctx.fillStyle="#0c131f";ctx.fill();ctx.strokeStyle="rgba(205,225,255,0.55)";ctx.lineWidth=2.5;ctx.stroke();rr(ctx,-84,-64,168,100,4);ctx.fillStyle=flash>0?rgba(mix([19,38,64],[120,170,230],flash),1):"#132640";ctx.fill();
+  ctx.fillStyle="rgba(200,215,235,0.35)";for(let i=0;i<4;i++){rr(ctx,-70,-50+i*18,120-i*18,7,3.5);ctx.fill();}
+  ctx.beginPath();ctx.moveTo(-110,44);ctx.lineTo(110,44);ctx.lineTo(124,58);ctx.lineTo(-124,58);ctx.closePath();ctx.fillStyle=metal(ctx,0,44,0,58,MET.steel);ctx.fill();ctx.restore();if(flash>0)glow(ctx,x,y-10*s,120*s*flash,C.white,0.5*flash);}
+function archive(ctx,x,y,w,h,m,fillAmt,seed){ /* a plan chest: wide flat drawers of prints */
+  ctx.save();ctx.fillStyle="rgba(0,0,0,0.4)";rr(ctx,x+10,y+14,w,h,12);ctx.fill();
+  rr(ctx,x,y,w,h,12);ctx.fillStyle="#0c121e";ctx.fill();ctx.lineWidth=6;ctx.strokeStyle=metal(ctx,x,y,x+w,y+h,m);ctx.stroke();
+  const n=Math.max(3,Math.round(h/92)),pad=14,dh=(h-pad*2)/n;
+  for(let r=0;r<n;r++){const dy=y+pad+r*dh,open=r===0?Math.min(22,dh*0.3):(r===2?Math.min(12,dh*0.16):0);
+    if(open>0){const layers=Math.floor(open/3.2);for(let k=0;k<layers;k++){const c=mix(C.raw[(k+r+(seed||0))%7],[235,235,235],0.35);ctx.fillStyle=rgba(c,0.95);ctx.fillRect(x+pad+14+(hash(k,(seed||1)+r)*10),dy+k*3.2,w-2*pad-34,2.2);}}
+    rr(ctx,x+pad,dy+open,w-2*pad,dh-9,6);ctx.fillStyle="#141d2e";ctx.fill();ctx.strokeStyle=rgba(m[0],0.6);ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle=metal(ctx,x+w/2-50,0,x+w/2+50,0,m);rr(ctx,x+w/2-48,dy+open+dh*0.5-8,96,10,5);ctx.fill();
+    ctx.fillStyle="rgba(232,238,246,0.85)";ctx.fillRect(x+pad+18,dy+open+dh*0.5-14,58,24);ctx.fillStyle="rgba(60,70,90,0.8)";ctx.fillRect(x+pad+24,dy+open+dh*0.5-8,40,3);ctx.fillRect(x+pad+24,dy+open+dh*0.5-1,28,3);}
+  ctx.restore();
+}
+function printer(ctx,x,y,s,feed,sp,z){
+  ctx.save();ctx.translate(x,y);ctx.scale(s,s);
+  ctx.fillStyle=metal(ctx,-70,-40,70,40,MET.steel);rr(ctx,-70,-36,140,72,12);ctx.fill();
+  ctx.fillStyle="#0b0f16";rr(ctx,-50,-44,100,12,4);ctx.fill();ctx.fillRect(-52,28,104,6);
+  ctx.beginPath();ctx.arc(52,-16,5,0,TAU);ctx.fillStyle=feed>=0&&feed<=1?"rgba(120,240,160,1)":"rgba(80,110,90,1)";ctx.fill();
+  ctx.restore();
+  if(feed>=0&&feed<=1&&sp){packet(ctx,z||1,x,y+34*s+feed*56*s,52*s,0,sp,1-sstep(0.85,1,feed));}
+}
+function scanner(ctx,x,y,w,t,active,c){
+  ctx.save();ctx.fillStyle=metal(ctx,x-w/2,y-14,x+w/2,y+14,MET.steel);rr(ctx,x-w/2,y-16,w,32,8);ctx.fill();
+  ctx.fillStyle="rgba(150,210,255,0.25)";rr(ctx,x-w/2+8,y-9,w-16,18,4);ctx.fill();
+  if(active){const bx=x-w/2+12+((Math.sin(t*5)+1)/2)*(w-24);ctx.globalCompositeOperation="lighter";ctx.fillStyle=rgba(c||C.hot,0.95);ctx.fillRect(bx-3,y-10,6,20);ctx.restore();glow(ctx,bx,y,40,c||C.hot,0.6);return;}
+  ctx.restore();
+}
+function lensShape(ctx,x,y0,y1,th,m){const cy=(y0+y1)/2;ctx.beginPath();ctx.moveTo(x,y0);ctx.quadraticCurveTo(x+th,cy,x,y1);ctx.quadraticCurveTo(x-th,cy,x,y0);ctx.closePath();ctx.fillStyle="rgba(200,225,255,0.14)";ctx.fill();ctx.strokeStyle="rgba(222,236,255,0.75)";ctx.lineWidth=2;ctx.stroke();ctx.fillStyle=metal(ctx,x-14,0,x+14,0,m);rr(ctx,x-14,y0-14,28,14,3);ctx.fill();rr(ctx,x-14,y1,28,14,3);ctx.fill();}
+function post(ctx,x,y0,y1,m){ctx.fillStyle=metal(ctx,x-8,0,x+8,0,MET.steel);ctx.fillRect(x-7,y0,14,y1-y0-26);ctx.fillStyle=metal(ctx,x-24,0,x+24,0,m);rr(ctx,x-24,y1-26,48,26,5);ctx.fill();}
+function rail(ctx,x0,x1,y){ctx.fillStyle=metal(ctx,0,y,0,y+28,MET.dark);ctx.fillRect(x0,y,x1-x0,28);ctx.fillStyle="rgba(255,255,255,0.2)";ctx.fillRect(x0,y,x1-x0,1.5);ctx.fillStyle="#04060a";for(let x=x0+20;x<x1;x+=44){ctx.beginPath();ctx.arc(x,y+14,3.4,0,TAU);ctx.fill();}}
+function plate(ctx,x,y,s){ctx.font=font(500,17,"mono");const w=ctx.measureText(s).width+18;rr(ctx,x-w/2,y,w,24,4);ctx.fillStyle="#0a0d12";ctx.fill();ctx.strokeStyle="rgba(200,215,235,0.35)";ctx.lineWidth=1;ctx.stroke();ctx.fillStyle="rgba(216,228,244,0.9)";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(s,x,y+12.5);}
+function bell(ctx,x,y,s,ring){ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(ring*30)*0.25*ring);ctx.scale(s,s);ctx.fillStyle=metal(ctx,-40,-50,40,40,MET.gold);ctx.beginPath();ctx.moveTo(-8,-52);ctx.quadraticCurveTo(-34,-44,-34,0);ctx.lineTo(-44,22);ctx.lineTo(44,22);ctx.lineTo(34,0);ctx.quadraticCurveTo(34,-44,8,-52);ctx.closePath();ctx.fill();ctx.beginPath();ctx.arc(0,28,8,0,TAU);ctx.fill();ctx.fillRect(-4,-62,8,12);ctx.restore();
+  if(ring>0){ctx.save();ctx.globalCompositeOperation="lighter";for(let k=0;k<3;k++){const r=(ring*1.6+k*0.33)%1;ctx.beginPath();ctx.arc(x,y,s*(60+r*120),-Math.PI*0.35,Math.PI*0.35);ctx.strokeStyle=rgba(C.star,0.6*(1-r));ctx.lineWidth=4;ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*(60+r*120),Math.PI*0.65,Math.PI*1.35);ctx.stroke();}ctx.restore();}}
+function projector(ctx,x,y,s,flip){ctx.save();ctx.translate(x,y);ctx.scale(flip?-s:s,s);ctx.fillStyle=metal(ctx,-60,-30,60,30,MET.steel);rr(ctx,-60,-30,110,60,12);ctx.fill();ctx.fillStyle="#0b0f16";ctx.beginPath();ctx.arc(52,0,20,0,TAU);ctx.fill();ctx.strokeStyle="rgba(220,235,255,0.8)";ctx.lineWidth=3;ctx.stroke();ctx.fillStyle="rgba(10,14,22,1)";ctx.beginPath();ctx.arc(-30,-30,14,Math.PI,0);ctx.arc(10,-30,14,Math.PI,0);ctx.fill();ctx.restore();}
+function copier(ctx,x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fillStyle=metal(ctx,-80,-60,80,60,MET.steel);rr(ctx,-80,-50,160,100,12);ctx.fill();ctx.fillStyle="#0b0f16";rr(ctx,-70,-62,140,14,4);ctx.fill();ctx.fillStyle="rgba(120,200,255,0.5)";rr(ctx,-60,-40,50,24,4);ctx.fill();ctx.fillStyle="#0b0f16";ctx.fillRect(80,0,30,6);ctx.restore();}
+function lantern(ctx,x,y,s,t){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.strokeStyle=metal(ctx,-16,0,16,0,MET.steel);ctx.lineWidth=4;ctx.beginPath();ctx.arc(0,-62,13,Math.PI,0);ctx.stroke();ctx.fillStyle=metal(ctx,-24,0,24,0,MET.steel);ctx.beginPath();ctx.moveTo(-24,-42);ctx.lineTo(24,-42);ctx.lineTo(16,-56);ctx.lineTo(-16,-56);ctx.closePath();ctx.fill();rr(ctx,-30,-42,60,82,14);ctx.fillStyle="rgba(255,236,190,0.14)";ctx.fill();ctx.strokeStyle="rgba(255,240,210,0.8)";ctx.lineWidth=2;ctx.stroke();ctx.fillStyle=metal(ctx,-32,0,32,0,MET.steel);rr(ctx,-32,40,64,12,4);ctx.fill();ctx.restore();glow(ctx,x,y,(64+Math.sin(t*2.2)*6)*s,[255,226,160],0.6);glow(ctx,x,y,18*s,C.white,0.95);}
+function screenBox(ctx,x,y,w,h,m){ctx.fillStyle="rgba(0,0,0,0.35)";rr(ctx,x+8,y+10,w,h,10);ctx.fill();ctx.fillStyle=metal(ctx,x,y,x+w,y+h,m||MET.steel);rr(ctx,x-8,y-8,w+16,h+16,12);ctx.fill();ctx.fillStyle="#070b12";ctx.fillRect(x,y,w,h);}
+function starMap(ctx,pts,links,t,grow,a){ctx.save();ctx.globalAlpha=a;ctx.globalCompositeOperation="lighter";links.forEach(([i,j],k)=>{const g=clamp(grow*links.length-k,0,1);if(g<=0)return;const A=pts[i],B=pts[j];ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(lerp(A.x,B.x,g),lerp(A.y,B.y,g));ctx.strokeStyle=rgba(C.star,0.45);ctx.lineWidth=2.2;ctx.stroke();});ctx.restore();
+  pts.forEach((p,i)=>{const g=clamp(grow*pts.length-i,0,1);if(g<=0)return;glow(ctx,p.x,p.y,(20+5*Math.sin(t*2.5+i*1.7))*g,C.star,0.9*a);glow(ctx,p.x,p.y,5*g,C.white,a);});}
+
+/* The Databricks and dbt logos embedded below are trademarks of their respective owners.
+   They are NOT covered by this repository's licences (MIT or CC BY 4.0) and are used only to identify those products. */
+const LOGO_SRC={databricks:"data:image/png;base64,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",dbt:"data:image/png;base64,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"};
+
+/* ===== Modern data basics: the tools' marks this module adds to The Inner Life of Data's (logos.js there: Databricks and dbt) =====
+   Microsoft Fabric's and Power BI's product icons and Fabric's icon for a mirrored catalog, the official SVG files, unaltered, from
+   Microsoft's own collection of Fabric icons (the npm package @fabric-msft/svg-icons 12.0.0, which Microsoft's page "Microsoft Fabric
+   product, workload, and item icons" points to; files fabric_48_color.svg, power_bi_48_color.svg and mirrored_catalog_48_item.svg).
+   Microsoft permits their use in architectural diagrams, training materials and documentation; they are trademarks of Microsoft,
+   NOT covered by this repository's licences (MIT or CC BY 4.0), and used only to identify those products (NOTICE.md).
+   Bundled only for a film whose film.json says "logos": true, after The Inner Life of Data's logos.js, so loadLogos() loads them too:
+   logo(ctx, "fabric", x, y, h), logo(ctx, "powerbi", ...), logo(ctx, "fabricMirror", ...). Never crop, flip, rotate or recolour them. */
+Object.assign(LOGO_SRC,{fabric:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBmaWxsPSJ1cmwoI2k3ZmExYzEtYSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0ibTUuNjQgMzEuNi0uNTg2IDIuMTQ0Yy0uMjE4LjY4NS0uNTI0IDEuNjkzLS42ODkgMi41OWE1LjYzIDUuNjMgMCAwIDAgNC42MzggNy41ODhjLjc5Mi4xMTQgMS42ODguMTA4IDIuNjkyLS4wNGw0LjYxMy0uNjM2YTIuOTIgMi45MiAwIDAgMCAyLjQyMS0yLjEyN2wzLjE3NS0xMS42NjJMNS42NCAzMS41OTlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSJ1cmwoI2k3ZmExYzEtYikiIGQ9Ik0xMC4xNCAzMi4xNTJjLTQuODYzLjc1My01Ljg2MSA0LjQyMy01Ljg2MSA0LjQyM2w0LjY1Ni0xNy4xMSAyNC4zMzMtMy4yOTItMy4zMTggMTIuMDUyYTEuNzEgMS43MSAwIDAgMS0xLjM4OCAxLjI0NGwtLjEzNi4wMjItMTguNDIzIDIuNjg0eiIvPjxwYXRoIGZpbGw9InVybCgjaTdmYTFjMS1jKSIgZmlsbC1vcGFjaXR5PSIuOCIgZD0iTTEwLjE0IDMyLjE1MmMtNC44NjMuNzUzLTUuODYxIDQuNDIzLTUuODYxIDQuNDIzbDQuNjU2LTE3LjExIDI0LjMzMy0zLjI5Mi0zLjMxOCAxMi4wNTJhMS43MSAxLjcxIDAgMCAxLTEuMzg4IDEuMjQ0bC0uMTM2LjAyMi0xOC40MjMgMi42ODR6Ii8+PHBhdGggZmlsbD0idXJsKCNpN2ZhMWMxLWQpIiBkPSJtMTIuODk5IDIxLjIzNSAyNi45MzgtMy45OGExLjYgMS42IDAgMCAwIDEuMzIzLTEuMTdsMi43OC0xMC4wNmExLjU5NSAxLjU5NSAwIDAgMC0xLjc0LTIuMDEyTDE2LjQ5OCA3LjgxYTcuMTkgNy4xOSAwIDAgMC01Ljc3NyA1LjE5M0w3LjAxMyAyNi40MzhjLjc0NC0yLjcxNyAxLjIwMi00LjM1NSA1Ljg4Ni01LjIwMyIvPjxwYXRoIGZpbGw9InVybCgjaTdmYTFjMS1lKSIgZD0ibTEyLjg5OSAyMS4yMzUgMjYuOTM4LTMuOThhMS42IDEuNiAwIDAgMCAxLjMyMy0xLjE3bDIuNzgtMTAuMDZhMS41OTUgMS41OTUgMCAwIDAtMS43NC0yLjAxMkwxNi40OTggNy44MWE3LjE5IDcuMTkgMCAwIDAtNS43NzcgNS4xOTNMNy4wMTMgMjYuNDM4Yy43NDQtMi43MTcgMS4yMDItNC4zNTUgNS44ODYtNS4yMDMiLz48cGF0aCBmaWxsPSJ1cmwoI2k3ZmExYzEtZikiIGZpbGwtb3BhY2l0eT0iLjQiIGQ9Im0xMi44OTkgMjEuMjM1IDI2LjkzOC0zLjk4YTEuNiAxLjYgMCAwIDAgMS4zMjMtMS4xN2wyLjc4LTEwLjA2YTEuNTk1IDEuNTk1IDAgMCAwLTEuNzQtMi4wMTJMMTYuNDk4IDcuODFhNy4xOSA3LjE5IDAgMCAwLTUuNzc3IDUuMTkzTDcuMDEzIDI2LjQzOGMuNzQ0LTIuNzE3IDEuMjAyLTQuMzU1IDUuODg2LTUuMjAzIi8+PHBhdGggZmlsbD0idXJsKCNpN2ZhMWMxLWcpIiBkPSJNMTIuODk5IDIxLjIzNmMtMy45MDEuNzA2LTQuODcgMS45NjItNS41MTQgMy45MzJMNC4yNzkgMzYuNTc3cy45OTItMy42MzMgNS43OTYtNC40MWwxOC4zNTItMi42NzMuMTM2LS4wMjJhMS43MSAxLjcxIDAgMCAwIDEuMzg4LTEuMjQ0bDIuNzMtOS45MTV6Ii8+PHBhdGggZmlsbD0idXJsKCNpN2ZhMWMxLWgpIiBmaWxsLW9wYWNpdHk9Ii4yIiBkPSJNMTIuODk5IDIxLjIzNmMtMy45MDEuNzA2LTQuODcgMS45NjItNS41MTQgMy45MzJMNC4yNzkgMzYuNTc3cy45OTItMy42MzMgNS43OTYtNC40MWwxOC4zNTItMi42NzMuMTM2LS4wMjJhMS43MSAxLjcxIDAgMCAwIDEuMzg4LTEuMjQ0bDIuNzMtOS45MTV6Ii8+PHBhdGggZmlsbD0idXJsKCNpN2ZhMWMxLWkpIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xMC4wNzUgMzIuMTY3Yy00LjA2LjY1Ny01LjM5MiAzLjM0NS01LjcxIDQuMTY0YTUuNjMgNS42MyAwIDAgMCA0LjYzOCA3LjU5Yy43OTIuMTE0IDEuNjg4LjEwOCAyLjY5Mi0uMDM5bDQuNjEzLS42MzdhMi45MiAyLjkyIDAgMCAwIDIuNDIxLTIuMTI3bDIuODk0LTEwLjYzMy0xMS41NDcgMS42ODN6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9Imk3ZmExYzEtYSIgeDE9IjEyLjk1MyIgeDI9IjEyLjk1MyIgeTE9IjQ0LjAwMSIgeTI9IjI5LjQ1NyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iLjA1NiIgc3RvcC1jb2xvcj0iIzJBQUM5NCIvPjxzdG9wIG9mZnNldD0iLjE1NSIgc3RvcC1jb2xvcj0iIzIzOUM4NyIvPjxzdG9wIG9mZnNldD0iLjM3MiIgc3RvcC1jb2xvcj0iIzE3N0U3MSIvPjxzdG9wIG9mZnNldD0iLjU4OCIgc3RvcC1jb2xvcj0iIzBFNjk2MSIvPjxzdG9wIG9mZnNldD0iLjc5OSIgc3RvcC1jb2xvcj0iIzA5NUQ1NyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA4NTk1NCIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJpN2ZhMWMxLWIiIHgxPSIzMS4zMzEiIHgyPSIxNy4yODYiIHkxPSIzMy40NDgiIHkyPSIxOC4xNzMiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4wNDIiIHN0b3AtY29sb3I9IiNBQkU4OEUiLz48c3RvcCBvZmZzZXQ9Ii41NDkiIHN0b3AtY29sb3I9IiMyQUFBOTIiLz48c3RvcCBvZmZzZXQ9Ii45MDYiIHN0b3AtY29sb3I9IiMxMTc4NjUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTdmYTFjMS1jIiB4MT0iLTMuMTgyIiB4Mj0iMTAuMTgzIiB5MT0iMzIuNzA2IiB5Mj0iMjguMTQ4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iIzZBRDZGOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzZBRDZGOSIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9Imk3ZmExYzEtZCIgeDE9IjcuMDEzIiB4Mj0iNDIuNTg5IiB5MT0iMTUuMjE5IiB5Mj0iMTUuMjE5IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIuMDQzIiBzdG9wLWNvbG9yPSIjMjVGRkQ0Ii8+PHN0b3Agb2Zmc2V0PSIuODc0IiBzdG9wLWNvbG9yPSIjNTVEREI5Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9Imk3ZmExYzEtZSIgeDE9IjcuMDEzIiB4Mj0iMzkuMDYiIHkxPSIxMC4yNDciIHkyPSIyNS4xMjgiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjNkFENkY5Ii8+PHN0b3Agb2Zmc2V0PSIuMjMiIHN0b3AtY29sb3I9IiM2MEU5RDAiLz48c3RvcCBvZmZzZXQ9Ii42NTEiIHN0b3AtY29sb3I9IiM2REU5QkIiLz48c3RvcCBvZmZzZXQ9Ii45OTQiIHN0b3AtY29sb3I9IiNBQkU4OEUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTdmYTFjMS1mIiB4MT0iOS45NzgiIHgyPSIyNy40MDQiIHkxPSIxMy4wMzEiIHkyPSIxNi44ODUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii40NTkiIHN0b3AtY29sb3I9IiNmZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJpN2ZhMWMxLWciIHgxPSIxNS43NTYiIHgyPSIxNi4xNjgiIHkxPSIyNy45NiIgeTI9IjE1Ljc0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIuMjA1IiBzdG9wLWNvbG9yPSIjMDYzRDNCIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii41ODYiIHN0b3AtY29sb3I9IiMwNjNEM0IiIHN0b3Atb3BhY2l0eT0iLjIzNyIvPjxzdG9wIG9mZnNldD0iLjg3MiIgc3RvcC1jb2xvcj0iIzA2M0QzQiIgc3RvcC1vcGFjaXR5PSIuNzUiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTdmYTFjMS1oIiB4MT0iMi44MSIgeDI9IjE3LjcwMSIgeTE9IjI2Ljc0NCIgeTI9IjI5LjU0NSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjxzdG9wIG9mZnNldD0iLjQ1OSIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9Imk3ZmExYzEtaSIgeDE9IjEzLjU2NyIgeDI9IjEwLjY2MiIgeTE9IjM5Ljk3IiB5Mj0iMjUuNzY0IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIuMDY0IiBzdG9wLWNvbG9yPSIjMDYzRDNCIiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9Ii4xNyIgc3RvcC1jb2xvcj0iIzA2M0QzQiIgc3RvcC1vcGFjaXR5PSIuMTM1Ii8+PHN0b3Agb2Zmc2V0PSIuNTYyIiBzdG9wLWNvbG9yPSIjMDYzRDNCIiBzdG9wLW9wYWNpdHk9Ii41OTkiLz48c3RvcCBvZmZzZXQ9Ii44NSIgc3RvcC1jb2xvcj0iIzA2M0QzQiIgc3RvcC1vcGFjaXR5PSIuOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA2M0QzQiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==",powerbi:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSI+PG1hc2sgaWQ9Imk1ZTUxMTEtbWFzazBfNTYwMTdfNDA4NjIiIHdpZHRoPSIzMCIgaGVpZ2h0PSI0MCIgeD0iOSIgeT0iNCIgbWFza1VuaXRzPSJ1c2VyU3BhY2VPblVzZSIgc3R5bGU9Im1hc2stdHlwZTphbHBoYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI1LjY2NyA1LjY2N2MwLS45Mi43NDYtMS42NjcgMS42NjYtMS42NjdoMTBDMzguMjUzIDQgMzkgNC43NDYgMzkgNS42Njd2MzYuNjY1YzAgLjkyLS43NDYgMS42NjctMS42NjcgMS42NjdIMTAuNjY3Yy0uOTIgMC0xLjY2Ny0uNzQ2LTEuNjY3LTEuNjY3VjI1LjY2NmMwLS45Mi43NDctMS42NjYgMS42NjctMS42NjZoNi42Njd2LTguMzM0YzAtLjkyLjc0Ni0xLjY2NiAxLjY2Ni0xLjY2Nmg2LjY2N3oiLz48L21hc2s+PGcgbWFzaz0idXJsKCNpNWU1MTExLW1hc2swXzU2MDE3XzQwODYyKSI+PHBhdGggZmlsbD0idXJsKCNpNWU1MTExLXBhaW50MF9saW5lYXJfNTYwMTdfNDA4NjIpIiBkPSJNMzkgNHYzOS45OTlIMjUuNjY3VjR6Ii8+PGcgZmlsdGVyPSJ1cmwoI2k1ZTUxMTEtZmlsdGVyMF9kZF81NjAxN180MDg2MikiPjxwYXRoIGZpbGw9InVybCgjaTVlNTExMS1wYWludDFfbGluZWFyXzU2MDE3XzQwODYyKSIgZD0iTTMwLjY2NyAxNS42NjZWNDRIMTcuMzM0di0zMEgyOWMuOTIgMCAxLjY2Ny43NDcgMS42NjcgMS42NjciLz48L2c+PHBhdGggZmlsbD0idXJsKCNpNWU1MTExLXBhaW50Ml9saW5lYXJfNTYwMTdfNDA4NjIpIiBkPSJNOSAyNHYxOS45OTloMTMuMzM0VjI1LjY2NmMwLS45Mi0uNzQ3LTEuNjY2LTEuNjY3LTEuNjY2eiIvPjwvZz48ZGVmcz48ZmlsdGVyIGlkPSJpNWU1MTExLWZpbHRlcjBfZGRfNTYwMTdfNDA4NjIiIHdpZHRoPSIxOS45OTkiIGhlaWdodD0iMzYuNjY2IiB4PSIxNC4wMDEiIHk9IjExLjUiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgcmVzdWx0PSJoYXJkQWxwaGEiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiLz48ZmVPZmZzZXQgZHk9Ii4xNTgiLz48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIuMTU4Ii8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjIgMCIvPjxmZUJsZW5kIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd181NjAxN180MDg2MiIvPjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgcmVzdWx0PSJoYXJkQWxwaGEiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiLz48ZmVPZmZzZXQgZHk9Ii44MzMiLz48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxLjY2NyIvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMC4xOCAwIi8+PGZlQmxlbmQgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfNTYwMTdfNDA4NjIiIHJlc3VsdD0iZWZmZWN0Ml9kcm9wU2hhZG93XzU2MDE3XzQwODYyIi8+PGZlQmxlbmQgaW49IlNvdXJjZUdyYXBoaWMiIGluMj0iZWZmZWN0Ml9kcm9wU2hhZG93XzU2MDE3XzQwODYyIiByZXN1bHQ9InNoYXBlIi8+PC9maWx0ZXI+PGxpbmVhckdyYWRpZW50IGlkPSJpNWU1MTExLXBhaW50MF9saW5lYXJfNTYwMTdfNDA4NjIiIHgxPSIyMy40NDUiIHgyPSI0MS4wMjciIHkxPSI0IiB5Mj0iNDEuMjY4IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0U2QUQxMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0M4N0UwRSIvPjwvbGluZWFyR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJpNWU1MTExLXBhaW50MV9saW5lYXJfNTYwMTdfNDA4NjIiIHgxPSIxNy4zMzMiIHgyPSIzMi4xMTkiIHkxPSIxNCIgeTI9IjQyLjY3NyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGNkQ3NTEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNFNkFEMTAiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTVlNTExMS1wYWludDJfbGluZWFyXzU2MDE3XzQwODYyIiB4MT0iOC45OTkiIHgyPSIxNy4xNyIgeTE9IjI0IiB5Mj0iNDMuMzY1IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0Y5RTU4OSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0Y2RDc1MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==",fabricMirror:"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0idXJsKCNpNmEwYjQyLXBhaW50MF9saW5lYXJfNjc2NjFfMTAzKSIgZD0iTTUgMTBhNSA1IDAgMCAxIDUtNWgyOGE1IDUgMCAwIDEgNSA1djI4YTUgNSAwIDAgMS01IDVIMTBhNSA1IDAgMCAxLTUtNXoiLz48cGF0aCBmaWxsPSJ1cmwoI2k2YTBiNDItcGFpbnQxX3JhZGlhbF82NzY2MV8xMDMpIiBmaWxsLW9wYWNpdHk9Ii4yIiBkPSJNNSAxMGE1IDUgMCAwIDEgNS01aDI4YTUgNSAwIDAgMSA1IDV2MjhhNSA1IDAgMCAxLTUgNUgxMGE1IDUgMCAwIDEtNS01eiIvPjxwYXRoIGZpbGw9InVybCgjaTZhMGI0Mi1wYWludDJfbGluZWFyXzY3NjYxXzEwMykiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTM4IDZIMTBhNCA0IDAgMCAwLTQgNHYyOGE0IDQgMCAwIDAgNCA0aDI4YTQgNCAwIDAgMCA0LTRWMTBhNCA0IDAgMCAwLTQtNE0xMCA1YTUgNSAwIDAgMC01IDV2MjhhNSA1IDAgMCAwIDUgNWgyOGE1IDUgMCAwIDAgNS01VjEwYTUgNSAwIDAgMC01LTV6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSJ1cmwoI2k2YTBiNDItcGFpbnQzX2xpbmVhcl82NzY2MV8xMDMpIiBkPSJNMTguNSAxNGEyLjUgMi41IDAgMCAwLTIuNSAyLjV2MTVhMi41IDIuNSAwIDAgMCAyLjUgMi41aDEyLjc4MWEuNzUuNzUgMCAxIDAgMC0xLjVIMTguNWExIDEgMCAwIDEtMS0xbDEzLjc4MS4wMzFjLjQxNSAwIC43MTktLjMzNS43MTktLjc1di0xNC4yNWMwLTEuMzgtMS4wODgtMi41LTIuNDY5LTIuNXptMS41IDNoOGExIDEgMCAwIDEgMSAxdjFhMSAxIDAgMCAxLTEgMWgtOGExIDEgMCAwIDEtMS0xdi0xYTEgMSAwIDAgMSAxLTEiLz48cGF0aCBmaWxsPSJ1cmwoI2k2YTBiNDItcGFpbnQ0X2xpbmVhcl82NzY2MV8xMDMpIiBkPSJNMzggMzUuNzYxYS44NS44NSAwIDAgMC0xLjQwMy0uNjQ1bC00LjY1NCAzLjk4OWEuODUuODUgMCAwIDAtLjA4NiAxLjIwNWw0LjY1NCA1LjMxOGMuNTE2LjU5MSAxLjQ5LjIyNSAxLjQ5LS41NnoiLz48cGF0aCBmaWxsPSJ1cmwoI2k2YTBiNDItcGFpbnQ1X2xpbmVhcl82NzY2MV8xMDMpIiBkPSJNMzkgMzUuNzYxYS44NS44NSAwIDAgMSAxLjQwMy0uNjQ1bDQuNjU0IDMuOTg5YS44NS44NSAwIDAgMSAuMDg2IDEuMjA1bC00LjY1NCA1LjMxOGMtLjUxNi41OTEtMS40OS4yMjUtMS40OS0uNTZ6Ii8+PHBhdGggZmlsbD0iI0Y1RjVGNSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJtMzUuOTQ2IDM0LjM1Ni00LjY1MyAzLjk5YTEuODUgMS44NSAwIDAgMC0uMTg5IDIuNjIybDQuNjU0IDUuMzE5Yy43ODMuODk0IDIuMDQ2Ljc4MSAyLjc0Mi4wNTQuNjk2LjcyNyAxLjk2Ljg0IDIuNzQyLS4wNTRsNC42NTQtNS4zMTlhMS44NSAxLjg1IDAgMCAwLS4xODgtMi42MjNsLTQuNjU0LTMuOTg5Yy0uODEtLjY5NC0xLjkyLS41My0yLjU1NC4xMzUtLjYzNC0uNjY2LTEuNzQzLS44My0yLjU1NC0uMTM1bS00LjAwMyA0Ljc0OSA0LjY1NC0zLjk5YS44NS44NSAwIDAgMSAxLjQwMy42NDZ2OS4zMzNjLS4wMjEuNzY3LS45NzggMS4xMTgtMS40OS41MzRsLTQuNjUzLTUuMzE4YS44NS44NSAwIDAgMSAuMDg2LTEuMjA1bTguNDYtMy45OWEuODUuODUgMCAwIDAtMS40MDMuNjQ2djkuMzMzYy4wMjEuNzY3Ljk3OCAxLjExOCAxLjQ5LjUzNGw0LjY1My01LjMxOGEuODUuODUgMCAwIDAtLjA4Ni0xLjIwNXoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iaTZhMGI0Mi1wYWludDBfbGluZWFyXzY3NjYxXzEwMyIgeDE9IjE1LjU1NiIgeDI9IjIwLjM2MiIgeTE9IjUiIHkyPSI0My40NTUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjRUJFQkVCIi8+PC9saW5lYXJHcmFkaWVudD48cmFkaWFsR3JhZGllbnQgaWQ9Imk2YTBiNDItcGFpbnQxX3JhZGlhbF82NzY2MV8xMDMiIGN4PSIwIiBjeT0iMCIgcj0iMSIgZ3JhZGllbnRUcmFuc2Zvcm09Im1hdHJpeCgyMC4wNTU2IDMwLjA4MzMgLTMwLjA4MzMgMTEuMjgxMiAxNy4xMzkgMTQuODk2KSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iLjE3NyIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI0I4QjhCOCIvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IGlkPSJpNmEwYjQyLXBhaW50Ml9saW5lYXJfNjc2NjFfMTAzIiB4MT0iMTcuMjcxIiB4Mj0iMjIuMzg3IiB5MT0iNSIgeTI9IjQzLjM3MyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNCQkIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM4ODgiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTZhMGI0Mi1wYWludDNfbGluZWFyXzY3NjYxXzEwMyIgeDE9IjE2IiB4Mj0iMzUuNTIiIHkxPSIxNCIgeTI9IjI5LjY0NyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiMwMDhFRTYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDYwOTQiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTZhMGI0Mi1wYWludDRfbGluZWFyXzY3NjYxXzEwMyIgeDE9IjMxLjY0NiIgeDI9IjQyLjM5OCIgeTE9IjM0LjkwOSIgeTI9IjQ4LjI5NCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiMwMDhFRTYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDYwOTQiLz48L2xpbmVhckdyYWRpZW50PjxsaW5lYXJHcmFkaWVudCBpZD0iaTZhMGI0Mi1wYWludDVfbGluZWFyXzY3NjYxXzEwMyIgeDE9IjMxLjY0NiIgeDI9IjQyLjM5OCIgeTE9IjM0LjkwOSIgeTI9IjQ4LjI5NCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiMwMDhFRTYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwMDYwOTQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L3N2Zz4="});
+
+/* GitHub's marks, from GitHub's official logo pack (GitHub_Logos.zip, linked from the page "Logo" on brand.github.com, read 5 November
+   2026; files GitHub_Invertocat_White.svg and GitHub_Lockup_White.svg), unaltered: the white versions, for the module's dark glass, as
+   GitHub's guidelines ask (the logo in white or black, high contrast, no effects, never recoloured, stretched or rearranged). GITHUB, the
+   GITHUB logo design and the INVERTOCAT logo design are trademarks of GitHub, Inc.: used only to identify GitHub where a film shows work
+   kept in it, less prominently than the film's own words, never as a film's own mark or to suggest GitHub made or endorses the films,
+   and NOT covered by this repository's licences (NOTICE.md). Bundled, like the marks above, only for a film whose film.json says
+   "logos": true: logo(ctx, "github", x, y, h), the Invertocat; logo(ctx, "githubLockup", x, y, h), the Invertocat with GitHub's
+   wordmark. Never crop, flip, rotate or recolour them. */
+Object.assign(LOGO_SRC,{github:"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTgiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5OCA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzczMF8yNzEzNikiPgo8cGF0aCBkPSJNNDEuNDM5NSA2OS4zODQ4QzI4LjgwNjYgNjcuODUzNSAxOS45MDYyIDU4Ljc2MTcgMTkuOTA2MiA0Ni45OTAyQzE5LjkwNjIgNDIuMjA1MSAyMS42Mjg5IDM3LjAzNzEgMjQuNSAzMy41OTE4QzIzLjI1NTkgMzAuNDMzNiAyMy40NDczIDIzLjczNDQgMjQuODgyOCAyMC45NTlDMjguNzEwOSAyMC40ODA1IDMzLjg3ODkgMjIuNDkwMiAzNi45NDE0IDI1LjI2NTZDNDAuNTc4MSAyNC4xMTcyIDQ0LjQwNjIgMjMuNTQzIDQ5LjA5NTcgMjMuNTQzQzUzLjc4NTIgMjMuNTQzIDU3LjYxMzMgMjQuMTE3MiA2MS4wNTg2IDI1LjE2OTlDNjQuMDI1NCAyMi40OTAyIDY5LjI4OTEgMjAuNDgwNSA3My4xMTcyIDIwLjk1OUM3NC40NTcgMjMuNTQzIDc0LjY0ODQgMzAuMjQyMiA3My40MDQzIDMzLjQ5NjFDNzYuNDY2OCAzNy4xMzI4IDc4LjA5MzcgNDIuMDEzNyA3OC4wOTM3IDQ2Ljk5MDJDNzguMDkzNyA1OC43NjE3IDY5LjE5MzQgNjcuNjYyMSA1Ni4zNjkxIDY5LjI4OTFDNTkuNjIzIDcxLjM5NDUgNjEuODI0MiA3NS45ODgzIDYxLjgyNDIgODEuMjUyTDYxLjgyNDIgOTEuMjA1MUM2MS44MjQyIDk0LjA3NjIgNjQuMjE2OCA5NS43MDMxIDY3LjA4NzkgOTQuNTU0N0M4NC40MTAyIDg3Ljk1MTIgOTggNzAuNjI4OSA5OCA0OS4xOTE0Qzk4IDIyLjEwNzQgNzUuOTg4MyA2LjY5NTM5ZS0wNyA0OC45MDQzIDQuMzA5ZS0wN0MyMS44MjAzIDEuOTIyNjFlLTA3IC0xLjk0NzllLTA3IDIyLjEwNzQgLTQuMzM0M2UtMDcgNDkuMTkxNEMtNi4yMDYzMWUtMDcgNzAuNDM3NSAxMy40OTQxIDg4LjA0NjkgMzEuNjc3NyA5NC42NTA0QzM0LjI2MTcgOTUuNjA3NCAzNi43NSA5My44ODQ4IDM2Ljc1IDkxLjMwMDhMMzYuNzUgODMuNjQ0NUMzNS40MTAyIDg0LjIxODggMzMuNjg3NSA4NC42MDE2IDMyLjE1NjIgODQuNjAxNkMyNS44Mzk4IDg0LjYwMTYgMjIuMTA3NCA4MS4xNTYzIDE5LjQyNzcgNzQuNzQ0MUMxOC4zNzUgNzIuMTYwMiAxNy4yMjY2IDcwLjYyODkgMTUuMDI1NCA3MC4zNDE4QzEzLjg3NyA3MC4yNDYxIDEzLjQ5NDEgNjkuNzY3NiAxMy40OTQxIDY5LjE5MzRDMTMuNDk0MSA2OC4wNDQ5IDE1LjQwODIgNjcuMTgzNiAxNy4zMjIzIDY3LjE4MzZDMjAuMDk3NyA2Ny4xODM2IDIyLjQ5MDIgNjguOTA2MyAyNC45Nzg1IDcyLjQ0NzNDMjYuODkyNiA3NS4yMjI3IDI4LjkwMjMgNzYuNDY2OCAzMS4yOTQ5IDc2LjQ2NjhDMzMuNjg3NSA3Ni40NjY4IDM1LjIxODcgNzUuNjA1NSAzNy40MTk5IDczLjQwNDNDMzkuMDQ2OSA3MS43NzczIDQwLjI5MSA3MC4zNDE4IDQxLjQzOTUgNjkuMzg0OFoiIGZpbGw9IndoaXRlIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNzMwXzI3MTM2Ij4KPHJlY3Qgd2lkdGg9Ijk4IiBoZWlnaHQ9Ijk2IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPgo=",githubLockup:"data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDE2IiBoZWlnaHQ9Ijk1IiB2aWV3Qm94PSIwIDAgNDE2IDk1IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDBfNzMxXzI3MTczKSI+CjxwYXRoIGQ9Ik00MS42Mzk0IDY5LjM4NDhDMjkuMDA2NiA2Ny44NTM1IDIwLjEwNjIgNTguNzYxNyAyMC4xMDYyIDQ2Ljk5MDJDMjAuMTA2MiA0Mi4yMDUxIDIxLjgyODkgMzcuMDM3MSAyNC43IDMzLjU5MThDMjMuNDU1OCAzMC40MzM2IDIzLjY0NzIgMjMuNzM0NCAyNS4wODI4IDIwLjk1OUMyOC45MTA5IDIwLjQ4MDUgMzQuMDc4OSAyMi40OTAyIDM3LjE0MTQgMjUuMjY1NkM0MC43NzgxIDI0LjExNzIgNDQuNjA2MiAyMy41NDMgNDkuMjk1NyAyMy41NDNDNTMuOTg1MSAyMy41NDMgNTcuODEzMiAyNC4xMTcyIDYxLjI1ODUgMjUuMTY5OUM2NC4yMjUzIDIyLjQ5MDIgNjkuNDg5IDIwLjQ4MDUgNzMuMzE3MSAyMC45NTlDNzQuNjU3IDIzLjU0MyA3NC44NDg0IDMwLjI0MjIgNzMuNjA0MiAzMy40OTYxQzc2LjY2NjcgMzcuMTMyOCA3OC4yOTM3IDQyLjAxMzcgNzguMjkzNyA0Ni45OTAyQzc4LjI5MzcgNTguNzYxNyA2OS4zOTMzIDY3LjY2MjEgNTYuNTY5MSA2OS4yODkxQzU5LjgyMyA3MS4zOTQ1IDYyLjAyNDIgNzUuOTg4MyA2Mi4wMjQyIDgxLjI1Mkw2Mi4wMjQyIDkxLjIwNTFDNjIuMDI0MiA5NC4wNzYyIDY0LjQxNjcgOTUuNzAzMSA2Ny4yODc4IDk0LjU1NDdDODQuNjEwMSA4Ny45NTEyIDk4LjIgNzAuNjI4OSA5OC4yIDQ5LjE5MTRDOTguMiAyMi4xMDc0IDc2LjE4ODIgNi42OTUzOWUtMDcgNDkuMTA0MiA0LjMwOWUtMDdDMjIuMDIwMyAxLjkyMjYxZS0wNyAwLjE5OTk1MSAyMi4xMDc0IDAuMTk5OTUxIDQ5LjE5MTRDMC4xOTk5NTEgNzAuNDM3NSAxMy42OTQxIDg4LjA0NjkgMzEuODc3NyA5NC42NTA0QzM0LjQ2MTcgOTUuNjA3NCAzNi45NSA5My44ODQ4IDM2Ljk1IDkxLjMwMDhMMzYuOTUgODMuNjQ0NUMzNS42MTAxIDg0LjIxODggMzMuODg3NSA4NC42MDE2IDMyLjM1NjIgODQuNjAxNkMyNi4wMzk4IDg0LjYwMTYgMjIuMzA3NCA4MS4xNTYzIDE5LjYyNzcgNzQuNzQ0MUMxOC41NzUgNzIuMTYwMiAxNy40MjY1IDcwLjYyODkgMTUuMjI1MyA3MC4zNDE4QzE0LjA3NjkgNzAuMjQ2MSAxMy42OTQxIDY5Ljc2NzYgMTMuNjk0MSA2OS4xOTM0QzEzLjY5NDEgNjguMDQ0OSAxNS42MDgyIDY3LjE4MzYgMTcuNTIyMiA2Ny4xODM2QzIwLjI5NzYgNjcuMTgzNiAyMi42OTAyIDY4LjkwNjMgMjUuMTc4NSA3Mi40NDczQzI3LjA5MjUgNzUuMjIyNyAyOS4xMDIzIDc2LjQ2NjggMzEuNDk0OSA3Ni40NjY4QzMzLjg4NzUgNzYuNDY2OCAzNS40MTg3IDc1LjYwNTUgMzcuNjE5OSA3My40MDQzQzM5LjI0NjggNzEuNzc3MyA0MC40OTEgNzAuMzQxOCA0MS42Mzk0IDY5LjM4NDhaIiBmaWxsPSJ3aGl0ZSIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcDFfNzMxXzI3MTczKSI+CjxwYXRoIGQ9Ik0xODguOTM3IDgzLjAwNDVMMTg4LjkzNyAzMy4yODI3TDIwMi45MTUgMzMuMjgyN0wyMDIuOTE1IDgzLjAwNDVMMTg4LjkzNyA4My4wMDQ1Wk0yMzAuMDE2IDgzLjAwNDVDMjIwLjcyNyA4My4wMDQ1IDIxNy4wOTkgNzkuMDIzMiAyMTcuMDk5IDcwLjYxODNMMjE3LjA5OSA0NC45NjExTDIwOC4yNTIgNDQuOTYxMUwyMDguMjUyIDMzLjI4MjdMMjE3LjA5OSAzMy4yODI3TDIxNy4wOTkgMjMuMzczN0wyMzEuMDc4IDIwLjEwMDJMMjMxLjA3OCAzMy4yODI3TDI0MS40MjkgMzMuMjgyN0wyNDEuNDI5IDQ0Ljk2MTFMMjMxLjA3OCA0NC45NjExTDIzMS4wNzggNjcuNTIxN0MyMzEuMDc4IDcwLjI2NDQgMjMyLjMxNyA3MS4zMjYxIDIzNS4wNTkgNzEuMzI2MUwyNDEuNDI5IDcxLjMyNjFMMjQxLjQyOSA4My4wMDQ1TDIzMC4wMTYgODMuMDA0NVpNMzI3LjQ3IDgzLjg4OTJDMzE2LjU4OCA4My44ODkyIDMxMC42NiA3Ny44NzMxIDMxMC42NiA2Ni45MDI0TDMxMC42NiAzMy4yODI3TDMyNC43MjggMzMuMjgyN0wzMjQuNzI4IDYzLjE4NjZDMzI0LjcyOCA2OS4yOTEyIDMyNy40NyA3Mi42NTMyIDMzMi42OSA3Mi42NTMyQzMzOC43MDYgNzIuNjUzMiAzNDMuMzA3IDY3LjA3OTQgMzQzLjMwNyA1OS40NzA3TDM0My4zMDcgMzMuMjgyN0wzNTcuMzc0IDMzLjI4MjdMMzU3LjM3NCA4My4wMDQ1TDM0My4zMDcgODMuMDA0NUwzNDMuMzA3IDc0LjU5OTZDMzQwLjY1MyA3OS45OTY0IDMzNC4yODMgODMuODg5MiAzMjcuNDcgODMuODg5MlpNMzk0LjYxMyA4My44ODkyQzM4Ny44MzIgODMuODg5MiAzODEuNjM5IDc5Ljk5NjQgMzc4LjY4NyA3NC40MjI2TDM3OC42ODcgODMuMDA0NUwzNjQuNzA5IDgzLjAwNDVMMzY0LjcwOSAxMy42NDE3TDM3OC43NzYgMTMuNjQxN0wzNzguNzc2IDQyLjM5NTRDMzgxLjYzOSAzNi4zNzkyIDM4OC4wOTggMzIuMTMyNSAzOTQuNjEzIDMyLjEzMjVDNDA4LjE4MSAzMi4xMzI1IDQxNS4zNDggNDEuNTEwNyA0MTQuODczIDU4LjA1NTFDNDE1LjM0OCA3NC40MjI2IDQwNy45MTYgODMuODg5MiAzOTQuNjEzIDgzLjg4OTJaTTM4OS42NTggNzIuMTIyM0MzOTYuOTQ1IDcyLjEyMjMgNDAwLjkyNiA2Ni43MjU1IDQwMC40NTIgNTguMDU1MUM0MDAuOTI2IDQ5LjI5NjMgMzk2Ljk0NSA0My44OTk0IDM4OS42NTggNDMuODk5NEMzODMuODUxIDQzLjg5OTQgMzc5LjI1MSA0OS41NjE3IDM3OC43NzYgNTcuMzQ3M0wzNzguNzc2IDU4LjE0MzZDMzc5LjI1MSA2Ni4xOTQ2IDM4My44NTEgNzIuMTIyMyAzODkuNjU4IDcyLjEyMjNaTTI4OC43MzQgMTMuNjQxN0wyODguNzM0IDQxLjc3NjFMMjYyLjM2OSA0MS43NzYxTDI2Mi4zNjkgMTMuNjQxN0wyNDcuMzI5IDEzLjY0MTdMMjQ3LjMyOSA4My4wMDQ1TDI2Mi4zNjkgODMuMDA0NUwyNjIuMzY5IDU1LjIyNEwyODguNzM0IDU1LjIyNEwyODguNzM0IDgzLjAwNDVMMzAzLjc3NSA4My4wMDQ1TDMwMy43NzUgMTMuNjQxN0wyODguNzM0IDEzLjY0MTdaTTE1MC42MjggODQuMzMxNkMxMzAuMTAyIDg0LjMzMTYgMTE3LjE4NSA3MC4yNjQ0IDExNy4xODUgNDguMjM0NkMxMTcuMTg1IDI2LjIwNDggMTMwLjM2OCAxMi4zMTQ2IDE1MS4yNDcgMTIuMzE0NkMxNjguMjM0IDEyLjMxNDYgMTc4LjQ5NyAxOS41NjkzIDE4MS43NyAzMS43Nzg2TDE2Ni41NTMgMzUuNDA2QzE2NC42OTUgMjguNzcwNSAxNTkuMzg3IDI1LjE0MzEgMTUxLjI0NyAyNS4xNDMxQzEzOS4xMjYgMjUuMTQzMSAxMzIuNTc5IDMzLjEwNTcgMTMyLjU3OSA0OC4yMzQ2QzEzMi41NzkgNjMuMzYzNSAxMzguOTQ5IDcxLjUwMyAxNTAuODkzIDcxLjUwM0MxNjEuODY0IDcxLjUwMyAxNjguNDExIDY0Ljc3OTEgMTY4LjQxMSA1My4zNjZMMTY4LjQxMSA1MC43MTE5TDE3Mi4zMDQgNTYuMTA4N0wxNDkuNjU1IDU2LjEwODdMMTQ5LjY1NSA0My4zNjg2TDE4My42MjggNDMuMzY4NkwxODMuNjI4IDUxLjQxOTZDMTgzLjYyOCA3Mi41NjQ3IDE3MS4zMzEgODQuMzMxNiAxNTAuNjI4IDg0LjMzMTZaTTE5NS45MjYgMjguNTkzNkMyMDAuNjE1IDI4LjU5MzYgMjA0LjI0MyAyNC45NjYyIDIwNC4yNDMgMjAuMjc3MUMyMDQuMjQzIDE1LjU4ODEgMjAwLjYxNSAxMS45NjA3IDE5NS45MjYgMTEuOTYwN0MxOTEuMjM3IDExLjk2MDcgMTg3LjYxIDE1LjU4ODEgMTg3LjYxIDIwLjI3NzFDMTg3LjYxIDI0Ljk2NjIgMTkxLjIzNyAyOC41OTM2IDE5NS45MjYgMjguNTkzNloiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8ZGVmcz4KPGNsaXBQYXRoIGlkPSJjbGlwMF83MzFfMjcxNzMiPgo8cmVjdCB3aWR0aD0iNDE2IiBoZWlnaHQ9Ijk1IiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8Y2xpcFBhdGggaWQ9ImNsaXAxXzczMV8yNzE3MyI+CjxyZWN0IHdpZHRoPSIyOTguMDY4IiBoZWlnaHQ9Ijc1Ljk0MDgiIGZpbGw9IndoaXRlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTcuMTg1IDkuNDkyNTgpIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg=="});
+
+/* ===== Style v2: one modern, futuristic design language ===== */
+const APP={sis:{n:"Student system",s:"SIS",c:[255,176,64]},lms:{n:"Learning platform",s:"LMS",c:[126,224,140]},hr:{n:"HR and payroll",s:"HR",c:[255,150,200]},fin:{n:"Finance system",s:"FIN",c:[255,226,122]}};
+const DOM={students:{n:"Students",c:[77,163,255]},teaching:{n:"Teaching",c:[176,123,255]},research:{n:"Research",c:[47,211,192]},finance:{n:"Finance",c:[255,138,92]}};
+const LAYER={bronze:[232,162,107],silver:[214,228,255],gold:[255,209,102]};
+const INK=[236,243,255],SOFT=[160,178,205],CYAN=[120,200,255],DBT=[255,105,75],DBX=[255,54,33],BAD=[255,90,80],GOOD=[120,240,170];
+function bg2(ctx){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#070b17");g.addColorStop(1,"#03050b");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="rgba(120,160,230,0.045)";ctx.lineWidth=1;for(let x=0;x<=W;x+=48){ctx.beginPath();ctx.moveTo(x+0.5,0);ctx.lineTo(x+0.5,H);ctx.stroke();}for(let y=0;y<=H;y+=48){ctx.beginPath();ctx.moveTo(0,y+0.5);ctx.lineTo(W,y+0.5);ctx.stroke();}
+  const v=ctx.createRadialGradient(W/2,H/2,H*0.3,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.62)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+function glass(ctx,x,y,w,h,r,edge,o){o=o||{};ctx.save();
+  if(edge&&o.glow!==0){ctx.shadowColor=rgba(edge,o.ga||0.5);ctx.shadowBlur=o.glow||22;}
+  rr(ctx,x,y,w,h,r);ctx.fillStyle=o.fill||"rgba(16,26,50,0.66)";ctx.fill();ctx.shadowBlur=0;
+  const g=ctx.createLinearGradient(x,y,x,y+h);g.addColorStop(0,"rgba(255,255,255,0.075)");g.addColorStop(0.45,"rgba(255,255,255,0.015)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;rr(ctx,x,y,w,h,r);ctx.fill();
+  ctx.lineWidth=o.lw||1.6;ctx.strokeStyle=edge?rgba(edge,o.ea==null?0.9:o.ea):"rgba(170,200,245,0.32)";rr(ctx,x,y,w,h,r);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.16)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+r,y+1.5);ctx.lineTo(x+w-r,y+1.5);ctx.stroke();ctx.restore();}
+function led(ctx,x,y,w,h,c,a){ctx.save();ctx.shadowColor=rgba(c,0.95);ctx.shadowBlur=16;ctx.fillStyle=rgba(c,a==null?1:a);rr(ctx,x,y,w,h,Math.min(w,h)/2);ctx.fill();ctx.restore();}
+function T(ctx,s,x,y,o){o=o||{};ctx.save();ctx.font=font(o.w||600,o.size||24,o.f);ctx.textAlign=o.align||"left";ctx.textBaseline=o.base||"alphabetic";ctx.fillStyle=o.color||rgba(INK,o.a==null?0.95:o.a);ctx.fillText(s,x,y);ctx.restore();}
+function tw(ctx,s,size,w,f){ctx.save();ctx.font=font(w||600,size,f);const m=ctx.measureText(s).width;ctx.restore();return m;}
+function lane(ctx,pts,c,a){beam(ctx,pts,c,[[18,0.05*(a||1)],[7,0.14*(a||1)],[2.4,0.55*(a||1)],[1.2,0.9*(a||1)]]);}
+/* logos: the official files, drawn unaltered */
+const LOGO={};
+function loadLogos(){return Promise.all(Object.keys(LOGO_SRC).map(k=>new Promise(res=>{const im=new Image();im.onload=()=>{LOGO[k]=im;res();};im.onerror=()=>res();im.src=LOGO_SRC[k];})));}
+function logo(ctx,k,x,y,h){const im=LOGO[k];if(!im)return 0;const w=h*im.width/im.height;ctx.drawImage(im,x,y,w,h);return w;}
+function chip(ctx,x,y,k,title,sub,o){o=o||{};const ts=o.ts||22,ss=o.ss||17,lh=o.lh||(sub?34:28),pad=14;
+  const w=pad+(k?lh+12:0)+Math.max(tw(ctx,title,ts,700),sub?tw(ctx,sub,ss,500):0)+pad+2,h=sub?64:46;
+  const X=o.align==="center"?x-w/2:(o.align==="right"?x-w:x),Y=y-h/2;
+  glass(ctx,X,Y,w,h,12,o.edge||null,{fill:"rgba(7,12,24,0.9)",glow:o.edge?14:0,ea:0.6});
+  let tx=X+pad;if(k){const lw=logo(ctx,k,X+pad,Y+(h-lh)/2,lh);tx+=Math.max(lw,lh*0.9)+12;}
+  if(sub){T(ctx,title,tx,Y+28,{w:700,size:ts});T(ctx,sub,tx,Y+51,{w:500,size:ss,color:rgba(SOFT,0.95)});}else T(ctx,title,tx,Y+h/2+8,{w:700,size:ts});
+  return{x:X,y:Y,w,h};}
+function tag(ctx,x,y,s,c,o){o=o||{};const ts=o.size||20,w=tw(ctx,s,ts,700)+26,h=ts+16;const X=o.align==="center"?x-w/2:x;glass(ctx,X,y-h/2,w,h,h/2,c,{fill:"rgba(7,12,24,0.88)",glow:10,ea:0.8});T(ctx,s,X+13,y+ts*0.36,{w:700,size:ts,color:rgba(c,1)});}
+function header(ctx,n,title,sub){T(ctx,"STYLE FRAME "+n,64,76,{w:800,size:18,color:rgba(CYAN,0.9)});T(ctx,title,64,118,{w:800,size:40});if(sub)T(ctx,sub,64,154,{w:500,size:22,color:rgba(SOFT,0.95)});}
+function caption(ctx,s){ctx.save();ctx.font=font(600,40);const w=ctx.measureText(s).width+60,h=80,x=W/2-w/2,y=H-54-h;ctx.fillStyle="rgba(0,0,0,0.66)";rr(ctx,x,y,w,h,14);ctx.fill();ctx.restore();T(ctx,s,W/2,y+54,{size:40,w:600,align:"center",color:"#fff"});}
+/* the picture of the world: a modern campus at first light */
+function paintCampus2(x,w,h){
+  let g=x.createLinearGradient(0,0,0,h*0.75);g.addColorStop(0,"#0c1433");g.addColorStop(0.42,"#33296b");g.addColorStop(0.62,"#b04a7d");g.addColorStop(0.78,"#ff8f5e");g.addColorStop(0.9,"#ffc98f");x.fillStyle=g;x.fillRect(0,0,w,h);
+  for(let i=0;i<70;i++){x.fillStyle="rgba(255,255,255,"+(0.2+0.5*hash(i,2))+")";x.fillRect(hash(i,3)*w,hash(i,4)*h*0.35,w/600,w/600);}
+  g=x.createRadialGradient(w*0.7,h*0.63,0,w*0.7,h*0.63,h*0.38);g.addColorStop(0,"rgba(255,236,200,0.95)");g.addColorStop(0.2,"rgba(255,190,140,0.5)");g.addColorStop(1,"rgba(255,150,120,0)");x.fillStyle=g;x.fillRect(0,0,w,h);
+  x.fillStyle="#fff0d8";x.beginPath();x.arc(w*0.7,h*0.63,h*0.07,0,TAU);x.fill();
+  x.fillStyle="rgba(58,40,96,0.9)";for(let i=0;i<22;i++){const bw=w*(0.03+hash(i,5)*0.04),bx=i*w/21-bw/2,bh=h*(0.06+hash(i,6)*0.14);x.fillRect(bx,h*0.7-bh,bw,bh+2);}
+  g=x.createLinearGradient(0,h*0.7,0,h);g.addColorStop(0,"#241c45");g.addColorStop(1,"#0d0c1f");x.fillStyle=g;x.fillRect(0,h*0.7,w,h*0.3);
+  x.strokeStyle="rgba(255,205,150,0.6)";x.lineWidth=h*0.006;x.beginPath();x.moveTo(w*0.25,h);x.bezierCurveTo(w*0.4,h*0.86,w*0.55,h*0.82,w*0.62,h*0.74);x.stroke();x.beginPath();x.moveTo(w*0.8,h);x.bezierCurveTo(w*0.7,h*0.88,w*0.66,h*0.8,w*0.63,h*0.74);x.stroke();
+  const tx=w*0.07,tw2=w*0.18,ty=h*0.16,tb=h*0.8;g=x.createLinearGradient(tx,0,tx+tw2,0);g.addColorStop(0,"#1b2d5c");g.addColorStop(1,"#0f1838");x.fillStyle=g;x.fillRect(tx,ty,tw2,tb-ty);
+  x.fillStyle="#22386f";x.beginPath();x.moveTo(tx,ty);x.lineTo(tx+tw2,ty-h*0.05);x.lineTo(tx+tw2,ty);x.closePath();x.fill();
+  for(let r=0;r<16;r++)for(let c=0;c<5;c++){const on=hash(r*5+c,7)>0.55;x.fillStyle=on?(hash(r*5+c,8)>0.5?"#ffd98a":"#8fd3ff"):"rgba(120,150,210,0.18)";x.fillRect(tx+tw2*(0.08+c*0.18),ty+h*0.02+r*h*0.037,tw2*0.12,h*0.022);}
+  g=x.createLinearGradient(tx,ty,tx+tw2,tb);g.addColorStop(0,"rgba(255,255,255,0.12)");g.addColorStop(0.5,"rgba(255,255,255,0)");x.fillStyle=g;x.fillRect(tx,ty,tw2,tb-ty);
+  const hx=w*0.3,hw=w*0.32,hy=h*0.48,hb=h*0.8;x.fillStyle="#1e2b57";x.fillRect(hx,hy,hw,hb-hy);
+  x.fillStyle="#3653a0";x.beginPath();x.moveTo(hx-w*0.01,hy);x.quadraticCurveTo(hx+hw/2,hy-h*0.14,hx+hw+w*0.01,hy);x.closePath();x.fill();
+  g=x.createLinearGradient(0,hy,0,hb);g.addColorStop(0,"rgba(120,190,255,0.45)");g.addColorStop(1,"rgba(120,190,255,0.12)");x.fillStyle=g;x.fillRect(hx+hw*0.06,hy+h*0.03,hw*0.88,hb-hy-h*0.05);
+  x.strokeStyle="rgba(200,230,255,0.35)";x.lineWidth=w/600;for(let i=1;i<10;i++){x.beginPath();x.moveTo(hx+hw*0.06+i*hw*0.088,hy+h*0.03);x.lineTo(hx+hw*0.06+i*hw*0.088,hb-h*0.02);x.stroke();}
+  for(let i=0;i<3;i++){x.fillStyle="rgba(255,214,140,0.5)";x.fillRect(hx+hw*0.06,hy+h*(0.07+i*0.07),hw*0.88,h*0.012);}
+  g=x.createRadialGradient(hx+hw/2,hb,0,hx+hw/2,hb,h*0.12);g.addColorStop(0,"rgba(255,220,160,0.8)");g.addColorStop(1,"rgba(255,220,160,0)");x.fillStyle=g;x.fillRect(hx,hb-h*0.12,hw,h*0.14);
+  x.strokeStyle="#6f86c8";x.lineWidth=h*0.012;x.beginPath();x.moveTo(tx+tw2,h*0.56);x.quadraticCurveTo((tx+tw2+hx)/2,h*0.52,hx,h*0.56);x.stroke();
+  const gx=w*0.66,gw=w*0.3,gy=h*0.6,gb=h*0.8;x.fillStyle="#1a2448";x.fillRect(gx,gy,gw,gb-gy);x.fillStyle="#46b183";x.fillRect(gx-w*0.005,gy-h*0.018,gw+w*0.01,h*0.022);
+  for(let i=0;i<12;i++){x.fillStyle="#5fd49b";x.beginPath();x.arc(gx+gw*(0.04+i*0.083),gy-h*0.018,h*0.012,Math.PI,0);x.fill();}
+  for(let r=0;r<2;r++){x.fillStyle="rgba(255,207,122,0.75)";x.fillRect(gx+gw*0.04,gy+h*(0.045+r*0.065),gw*0.92,h*0.025);}
+  [[0.27,0.8,1],[0.64,0.8,0.9],[0.97,0.8,1.1],[0.03,0.82,0.8]].forEach(([px,py,s2])=>{x.fillStyle="#3b2a3a";x.fillRect(w*px-w/600,h*(py-0.05*s2),w/300,h*0.05*s2);g=x.createLinearGradient(0,h*(py-0.14*s2),0,h*(py-0.04*s2));g.addColorStop(0,"#3fbf8c");g.addColorStop(1,"#1d6b52");x.fillStyle=g;x.beginPath();x.ellipse(w*px,h*(py-0.09*s2),h*0.04*s2,h*0.055*s2,0,0,TAU);x.fill();});
+  [[0.44,0.9],[0.47,0.88],[0.58,0.93],[0.73,0.9],[0.35,0.95]].forEach(([px,py],i)=>{x.fillStyle="#0a0a18";x.beginPath();x.arc(w*px,h*(py-0.055),h*0.012,0,TAU);x.fill();rr(x,w*px-h*0.011,h*(py-0.04),h*0.022,h*0.045,h*0.008);x.fill();x.fillStyle=["#ffb040","#4da3ff","#ff8ac8","#2fd3c0","#b07bff"][i];x.fillRect(w*px+h*0.006,h*(py-0.036),h*0.008,h*0.02);});
+}
+const M2={};function master2(k){k=k||1;if(!M2[k]){const c=mkCanvas(PICW*k,PICH*k);paintCampus2(c.getContext("2d"),PICW*k,PICH*k);M2[k]=c;}return M2[k];}
+/* digital data tiles: raw = glitched, tinted by its source system; clean = crisp, one clock */
+const STAMPS2=["9:02 am","23:02Z","10/02 09:02","2026-02-10T23:02","09:02 AEST","1739228520"];
+const TB2=new Map();
+function tile2(cell,q,app,err,k){k=k||1;const key=[cell,q,app,err?1:0,k].join("|");let b=TB2.get(key);if(b)return b;
+  const S2=TCELL*k,P2=TPAD*k,N=S2+2*P2;b=mkCanvas(N,N);const x=b.getContext("2d");const M=master2(k);const sx=(cell%6)*TCELL*k,sy=((cell/6)|0)*TCELL*k;const col=(APP[app]||{c:[255,255,255]}).c;
+  const tmp=mkCanvas(S2,S2),tx=tmp.getContext("2d");tx.drawImage(M,sx,sy,S2,S2,0,0,S2,S2);
+  if(q<2){const id=tx.getImageData(0,0,S2,S2),d=id.data,o=new Uint8ClampedArray(d);const sh=(q===0?5:2)*k,tint=q===0?0.42:0.14;
+    for(let yy=0;yy<S2;yy++){const bi=Math.floor(yy/(9*k)),band=q===0&&hash(bi,cell+3)>0.8?Math.floor((hash(bi,cell+5)-0.5)*26*k):0;
+      for(let xx=0;xx<S2;xx++){const i=(yy*S2+xx)*4;const xr=clamp(xx-sh+band,0,S2-1),xg=clamp(xx+band,0,S2-1),xb=clamp(xx+sh+band,0,S2-1);let r=o[(yy*S2+xr)*4],g=o[(yy*S2+xg)*4+1],bl=o[(yy*S2+xb)*4+2];const l=0.3*r+0.59*g+0.11*bl;
+        r=lerp(r,l*col[0]/200,tint);g=lerp(g,l*col[1]/200,tint);bl=lerp(bl,l*col[2]/200,tint);if(q===0&&yy%(3*k)===0){r*=0.78;g*=0.78;bl*=0.78;}d[i]=r;d[i+1]=g;d[i+2]=bl;d[i+3]=255;}}
+    if(q===0){for(let n=0;n<7;n++){const bw=((12+hash(n,cell+7)*34)*k)|0,bh=((5+hash(n,cell+8)*14)*k)|0,bx=(hash(n,cell+9)*(S2-bw))|0,by=(hash(n,cell+10)*(S2-bh))|0,dx=((hash(n,cell+11)-0.5)*44*k)|0;
+        for(let yy=by;yy<by+bh;yy++)for(let xx=bx;xx<bx+bw;xx++){const si=(yy*S2+clamp(xx-dx,0,S2-1))*4,di=(yy*S2+xx)*4;d[di]=o[si]*0.85+col[0]*0.15;d[di+1]=o[si+1]*0.85+col[1]*0.15;d[di+2]=o[si+2]*0.85+col[2]*0.15;}}
+      if(hash(cell,(app||"x").length)>0.25){const mw=((40+hash(cell,21)*50)*k)|0,mh=((26+hash(cell,22)*40)*k)|0,mx=(hash(cell,23)*(S2-mw))|0,my=(hash(cell,24)*(S2-mh))|0;for(let yy=my;yy<my+mh;yy++)for(let xx=mx;xx<mx+mw;xx++)d[(yy*S2+xx)*4+3]=((xx+yy)>>2)%2?40:0;}}
+    tx.putImageData(id,0,0);}
+  x.save();rr(x,P2,P2,S2,S2,8*k);x.clip();x.fillStyle="rgba(8,14,28,0.92)";x.fillRect(P2,P2,S2,S2);x.drawImage(tmp,P2,P2);x.fillStyle="rgba(255,255,255,0.035)";for(let yy=0;yy<S2;yy+=4*k)x.fillRect(P2,P2+yy,S2,k);
+  if(err){x.fillStyle="rgba(255,50,60,0.26)";x.fillRect(P2,P2,S2,S2);for(let n=0;n<6;n++){x.fillStyle="rgba(255,60,70,0.75)";x.fillRect(P2,P2+hash(n,cell+31)*S2,S2,(2+hash(n,cell+32)*5)*k);}}
+  x.restore();const bc=err?BAD:(q===2?[235,245,255]:col);x.strokeStyle=rgba(bc,q===2?0.95:0.85);x.lineWidth=2*k;if(q===0)x.setLineDash([12*k,6*k]);rr(x,P2,P2,S2,S2,8*k);x.stroke();x.setLineDash([]);
+  x.lineWidth=3*k;x.strokeStyle=rgba(bc,1);const cl=16*k,o4=5*k;[[P2,P2,1,1],[P2+S2,P2,-1,1],[P2,P2+S2,1,-1],[P2+S2,P2+S2,-1,-1]].forEach(([cx,cy,dx,dy])=>{x.beginPath();x.moveTo(cx-dx*o4,cy+dy*cl);x.lineTo(cx-dx*o4,cy-dy*o4);x.lineTo(cx+dx*cl,cy-dy*o4);x.stroke();});
+  const st=q===2?"23:02 UTC":STAMPS2[(cell+(app||"").length)%STAMPS2.length];x.font=font(500,15*k,"mono");const sw=x.measureText(st).width;rr(x,P2+8*k,P2+S2-32*k,sw+16*k,24*k,6*k);x.fillStyle="rgba(4,8,16,0.85)";x.fill();x.fillStyle=q===2?"rgba(235,244,255,0.95)":rgba(col,1);x.textBaseline="middle";x.fillText(st,P2+16*k,P2+S2-20*k);
+  if(app&&q<2){x.font=font(800,14*k);const aw=x.measureText(APP[app].s).width;rr(x,P2+8*k,P2+8*k,aw+14*k,22*k,6*k);x.fillStyle=rgba(col,0.92);x.fill();x.fillStyle="#0a0f1c";x.fillText(APP[app].s,P2+15*k,P2+19*k);}
+  if(err){x.font=font(800,14*k);rr(x,P2+S2-52*k,P2+8*k,44*k,22*k,6*k);x.fillStyle=rgba(BAD,0.95);x.fill();x.fillStyle="#fff";x.fillText("ERR",P2+S2-45*k,P2+19*k);}
+  TB2.set(key,b);return b;}
+function dtile(ctx,x,y,size,rot,sp,al){al=al==null?1:al;if(al<=0.01)return;const col=sp.err?BAD:(sp.q<1.5&&sp.app?APP[sp.app].c:[225,238,255]);glow(ctx,x,y,size*1.25,col,0.22*al);
+  const b=tile2(sp.cell,Math.round(sp.q),sp.app,sp.err,sp.hi?2:1),s=size*TCAN/TCELL;ctx.save();ctx.translate(x,y);ctx.rotate(rot||0);ctx.globalAlpha*=al;ctx.drawImage(b,-s/2,-s/2,s,s);ctx.restore();}
+/* devices and places */
+function phone2(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);glass(ctx,-60,-118,120,236,22,[170,205,255],{fill:"rgba(10,18,36,0.9)",glow:18,ea:0.7});
+  rr(ctx,-50,-100,100,196,12);ctx.fillStyle="rgba(40,70,130,0.35)";ctx.fill();ctx.beginPath();ctx.arc(0,-108,3.5,0,TAU);ctx.fillStyle="rgba(200,220,255,0.8)";ctx.fill();
+  T(ctx,"Data Science 101",0,-62,{w:800,size:12.5,align:"center"});T(ctx,"Tue 9:00 · B204",0,-44,{w:500,size:10.5,align:"center",color:rgba(SOFT,0.95)});
+  ctx.fillStyle="rgba(160,190,240,0.22)";for(let i=0;i<3;i++){rr(ctx,-36,-24+i*14,72-i*14,6,3);ctx.fill();}
+  rr(ctx,-34,40,68,28,14);ctx.fillStyle=o.press?"rgba(120,200,255,1)":"rgba(77,163,255,0.9)";ctx.fill();T(ctx,"Enrol",0,59,{w:800,size:12.5,align:"center",color:"#fff"});ctx.restore();
+  if(o.ripple){ctx.save();ctx.strokeStyle="rgba(255,255,255,0.55)";ctx.lineWidth=2;for(let i=0;i<2;i++){ctx.beginPath();ctx.arc(x,y+54*s,(22+i*20)*s,0,TAU);ctx.stroke();}ctx.restore();}}
+function dbGlyph(ctx,cx,cy,c,s){s=s||1;ctx.save();ctx.strokeStyle=rgba(c,0.95);ctx.lineWidth=2.2;for(let i=0;i<3;i++){ctx.beginPath();ctx.ellipse(cx,cy-16*s+i*14*s,20*s,6*s,0,0,TAU);ctx.stroke();}ctx.beginPath();ctx.moveTo(cx-20*s,cy-16*s);ctx.lineTo(cx-20*s,cy+12*s);ctx.moveTo(cx+20*s,cy-16*s);ctx.lineTo(cx+20*s,cy+12*s);ctx.stroke();ctx.restore();}
+function appCard(ctx,x,y,w,h,a,o){o=o||{};const c=APP[a].c;glass(ctx,x,y,w,h,16,c,{glow:18,ea:0.55});led(ctx,x+12,y+16,5,h-32,c);
+  T(ctx,APP[a].n,x+32,y+42,{w:700,size:o.ts||24});T(ctx,o.sub||"system of record",x+32,y+68,{w:500,size:17,color:rgba(SOFT,0.95)});dbGlyph(ctx,x+w-44,y+h/2+2,c,0.9);
+  const n=o.n==null?8:o.n;for(let i=0;i<n;i++){ctx.fillStyle=rgba(c,0.25+0.65*hash(i,a.length+2));rr(ctx,x+32+i*18,y+h-30,12,12,3);ctx.fill();}}
+function vault(ctx,x,y,w,h,edge,cellCol,title,sub){glass(ctx,x,y,w,h,20,edge,{glow:34,ga:0.45});led(ctx,x+24,y+14,w-48,3,edge);
+  const cs=16,gap=7,cols=Math.floor((w-44)/(cs+gap)),rows=Math.floor((h-150)/(cs+gap)),ox=x+(w-(cols*(cs+gap)-gap))/2,oy=y+118;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){const col=cellCol(r,c);const X=ox+c*(cs+gap),Y=oy+r*(cs+gap);if(!col){ctx.strokeStyle="rgba(150,180,230,0.12)";ctx.lineWidth=1;rr(ctx,X,Y,cs,cs,4);ctx.stroke();continue;}ctx.fillStyle=rgba(col,0.35+0.6*hash(r*37+c,9));rr(ctx,X,Y,cs,cs,4);ctx.fill();}
+  if(title)chip(ctx,x+w/2,y+62,"databricks",title,sub,{align:"center",edge:edge});}
+function hub(ctx,cx,cy,r,t){ctx.save();ctx.shadowColor=rgba(CYAN,0.6);ctx.shadowBlur=26;ctx.beginPath();for(let i=0;i<6;i++){const a=i*TAU/6+Math.PI/6;const px=cx+r*Math.cos(a),py=cy+r*Math.sin(a);i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.closePath();ctx.fillStyle="rgba(14,26,52,0.78)";ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=rgba(CYAN,0.9);ctx.lineWidth=2;ctx.stroke();ctx.restore();
+  for(let i=0;i<14;i++){const a=i*TAU/14+t*0.3,px=cx+r*0.66*Math.cos(a),py=cy+r*0.66*Math.sin(a);ctx.save();ctx.translate(px,py);ctx.rotate(a);const on=hash(i,3)>0.35;ctx.fillStyle=on?rgba(i%3?APP.sis.c:APP.lms.c,0.85):"rgba(150,180,230,0.15)";rr(ctx,-7,-5,14,10,3);ctx.fill();ctx.restore();}
+  ctx.save();ctx.strokeStyle=rgba(INK,0.95);ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(cx-24,cy-10);ctx.lineTo(cx+20,cy-10);ctx.moveTo(cx+10,cy-20);ctx.lineTo(cx+22,cy-10);ctx.lineTo(cx+10,cy);ctx.moveTo(cx+24,cy+12);ctx.lineTo(cx-20,cy+12);ctx.moveTo(cx-10,cy+2);ctx.lineTo(cx-22,cy+12);ctx.lineTo(cx-10,cy+22);ctx.stroke();ctx.restore();}
+function gate(ctx,cx,cy,h,edge,kind){ctx.save();ctx.fillStyle=rgba(edge,0.06);ctx.beginPath();ctx.ellipse(cx,cy,28,h/2,0,0,TAU);ctx.fill();ctx.shadowColor=rgba(edge,0.9);ctx.shadowBlur=22;ctx.strokeStyle=rgba(edge,0.95);ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(cx,cy,28,h/2,0,0,TAU);ctx.stroke();ctx.shadowBlur=0;
+  ctx.strokeStyle=rgba(edge,0.55);ctx.lineWidth=1.5;if(kind==="tests"){for(let i=-4;i<=4;i++){const yy=cy+i*h*0.09,xx=28*Math.sqrt(Math.max(0,1-Math.pow((yy-cy)/(h/2),2)));ctx.beginPath();ctx.moveTo(cx-xx,yy);ctx.lineTo(cx+xx,yy);ctx.stroke();}}
+  else if(kind==="lens"){ctx.beginPath();ctx.moveTo(cx,cy-h/2);ctx.quadraticCurveTo(cx+22,cy,cx,cy+h/2);ctx.quadraticCurveTo(cx-22,cy,cx,cy-h/2);ctx.stroke();}
+  else if(kind==="join"){ctx.beginPath();ctx.moveTo(cx-20,cy-h*0.3);ctx.lineTo(cx,cy);ctx.lineTo(cx-20,cy+h*0.3);ctx.moveTo(cx,cy);ctx.lineTo(cx+22,cy);ctx.stroke();}
+  else{ctx.beginPath();ctx.arc(cx-6,cy,12,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(cx+6,cy,12,0,TAU);ctx.stroke();}ctx.restore();}
+/* the sketch: the conceptual model */
+function sketch(ctx,ox,oy,w,h,wrong,a){a=a==null?1:a;const col=wrong?[255,140,90]:[150,225,255];ctx.save();ctx.globalAlpha*=a;
+  const E=wrong?{Student:[0.2,0.25],Course:[0.62,0.22],Enrolment:[0.62,0.72],Class:[0.2,0.76]}:{Student:[0.18,0.24],Enrolment:[0.52,0.24],Class:[0.84,0.24],Term:[0.84,0.74],Course:[0.18,0.74]};
+  const R=wrong?[["Student","Course","1","1"],["Course","Enrolment","1","*"]]:[["Student","Enrolment","1","*"],["Enrolment","Class","*","1"],["Class","Term","*","1"],["Student","Course","*","1"]];
+  const sc=Math.min(1,w/800),bw=210*sc,bh=58*sc,P0=n=>[ox+E[n][0]*w,oy+E[n][1]*h];
+  ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;
+  R.forEach(([A,B,ca,cb])=>{const[a1,a2]=P0(A),[b1,b2]=P0(B);const dx=b1-a1,dy=b2-a2,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;const ex=Math.abs(ux)>Math.abs(uy)?bw/2:bh/2/Math.max(0.3,Math.abs(uy))*Math.abs(uy);
+    const sA=[a1+ux*(Math.abs(ux)>0.5?bw/2:bh/2),a2+uy*(Math.abs(ux)>0.5?bw/2:bh/2)],sB=[b1-ux*(Math.abs(ux)>0.5?bw/2:bh/2),b2-uy*(Math.abs(ux)>0.5?bw/2:bh/2)];
+    ctx.beginPath();ctx.moveTo(sA[0],sA[1]);ctx.lineTo(sB[0],sB[1]);ctx.stroke();
+    const foot=(p,sx,sy)=>{const nx=-sy,ny=sx,q=[p[0]-sx*20*sc,p[1]-sy*20*sc];ctx.beginPath();ctx.moveTo(p[0]+nx*13*sc,p[1]+ny*13*sc);ctx.lineTo(q[0],q[1]);ctx.lineTo(p[0]-nx*13*sc,p[1]-ny*13*sc);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();};
+    const bar=(p,sx,sy)=>{const nx=-sy,ny=sx;ctx.beginPath();ctx.moveTo(p[0]-sx*14*sc+nx*11*sc,p[1]-sy*14*sc+ny*11*sc);ctx.lineTo(p[0]-sx*14*sc-nx*11*sc,p[1]-sy*14*sc-ny*11*sc);ctx.stroke();};
+    (cb==="*"?foot:bar)(sB,ux,uy);(ca==="*"?foot:bar)(sA,-ux,-uy);});
+  ctx.shadowBlur=0;Object.keys(E).forEach(n=>{const[x,y]=P0(n);ctx.fillStyle="rgba(8,14,30,0.9)";rr(ctx,x-bw/2,y-bh/2,bw,bh,10);ctx.fill();ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=14;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;rr(ctx,x-bw/2,y-bh/2,bw,bh,10);ctx.stroke();ctx.shadowBlur=0;T(ctx,n,x,y+8*sc,{w:700,size:Math.max(14,24*sc),align:"center",color:rgba(col,1)});});
+  if(!wrong){T(ctx,"census date",P0("Term")[0],P0("Term")[1]+bh/2+24*sc,{w:600,size:Math.max(12,18*sc),align:"center",color:rgba(col,0.85)});}ctx.restore();}
+/* gold: modern renderings of each style, in floating glass frames with domain LEDs */
+function paintRealism2(x,w,h){x.drawImage(master2(1),0,0,w,h);const pts=[[0.16,0.36,"Tower L9 · 118 of 120 seats",1],[0.46,0.6,"Learning hub · 1,240 people",1],[0.8,0.68,"Labs · 3 booked",-1]];
+  pts.forEach(([px,py,s,d])=>{const X=px*w,Y=py*h,LX=X+d*70,LY=Y-70;x.strokeStyle="rgba(255,255,255,0.9)";x.lineWidth=2;x.beginPath();x.arc(X,Y,7,0,TAU);x.stroke();x.beginPath();x.moveTo(X+d*5,Y-5);x.lineTo(LX,LY);x.stroke();x.font=font(700,20);const tw3=x.measureText(s).width;const bx=d>0?LX:LX-tw3-20;rr(x,bx,LY-18,tw3+20,32,6);x.fillStyle="rgba(6,10,22,0.8)";x.fill();x.fillStyle="#fff";x.fillText(s,bx+10,LY+5);});}
+function paintModern2(x,w,h){x.fillStyle="#0b1126";x.fillRect(0,0,w,h);let g=x.createRadialGradient(w*0.34,h*0.5,0,w*0.34,h*0.5,h*0.36);g.addColorStop(0,"#6ae6d4");g.addColorStop(1,"#178a80");x.fillStyle=g;x.beginPath();x.arc(w*0.34,h*0.5,h*0.34,0,TAU);x.fill();
+  x.fillStyle="#f2f5fb";x.fillRect(w*0.62,h*0.16,w*0.09,h*0.66);x.fillStyle="#ff8a5c";x.fillRect(w*0.76,h*0.54,w*0.15,h*0.28);
+  x.fillStyle="#08202a";x.font=font(800,h*0.17);x.textAlign="center";x.fillText("94%",w*0.34,h*0.56);x.textAlign="left";}
+function paintRules2(x,w,h){x.fillStyle="#08122a";x.fillRect(0,0,w,h);const vx=w/2,vy=h*0.42;x.strokeStyle="rgba(120,190,255,0.25)";x.lineWidth=1.2;for(let i=0;i<=16;i++){x.beginPath();x.moveTo(vx,vy);x.lineTo(i*w/16,h);x.stroke();}for(let k=1;k<10;k++){const f=Math.pow(k/10,1.7),y=vy+(h-vy)*f;x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke();}
+  x.strokeStyle="rgba(255,209,102,0.95)";x.lineWidth=2.5;for(let s=-1;s<=1;s+=2)for(let k=0;k<5;k++){const f=1-k*0.18,cx=vx+s*w*0.44*f,top=lerp(vy,h*0.14,f),bot=lerp(vy,h*0.95,f);x.beginPath();x.moveTo(cx,bot);x.lineTo(cx,top);x.stroke();if(k<4){const nf=f-0.18,nx=vx+s*w*0.44*nf,nt=lerp(vy,h*0.14,nf);x.beginPath();x.moveTo(cx,top);x.quadraticCurveTo((cx+nx)/2,top-h*0.1*f,nx,nt);x.stroke();}}
+  x.strokeStyle="rgba(255,209,102,0.4)";x.setLineDash([6,8]);x.beginPath();x.moveTo(vx,0);x.lineTo(vx,h);x.stroke();x.beginPath();x.arc(vx,vy,h*0.3,0,TAU);x.stroke();x.setLineDash([]);
+  for(let r=0;r<3;r++)for(let i=0;i<7;i++){const f=0.45+r*0.22,y=lerp(vy,h*0.96,f),xx=lerp(vx,w*(0.1+i*0.133),f),s=f;x.strokeStyle="rgba(150,220,255,0.95)";x.lineWidth=2;rr(x,xx-9*s,y-46*s,18*s,40*s,9*s);x.stroke();x.beginPath();x.arc(xx,y-56*s,8*s,0,TAU);x.stroke();}
+  x.fillStyle="rgba(255,209,102,0.95)";x.font=font(500,h*0.045,"mono");x.textAlign="center";x.fillText("CENSUS DATE COUNT  1,204",vx,h*0.08);x.textAlign="left";}
+function paintLive2(x,w,h){x.fillStyle="#0a0f22";x.fillRect(0,0,w,h);const M=master2(1),md=M.getContext("2d").getImageData(0,0,PICW,PICH).data;
+  for(let i=0;i<6000;i++){const px=hash(i,71)*w,py=hash(i,72)*h,sx=Math.floor(px/w*PICW),sy=Math.floor(py/h*PICH),j=(sy*PICW+sx)*4;x.save();x.translate(px,py);x.rotate((hash(i,73)-0.5)*0.9);x.fillStyle="rgba("+md[j]+","+md[j+1]+","+md[j+2]+",0.8)";rr(x,-8,-2.2,16,4.4,2.2);x.fill();x.restore();}
+  x.fillStyle="rgba(255,70,80,0.95)";rr(x,24,24,92,36,18);x.fill();x.fillStyle="#fff";x.font=font(800,19);x.fillText("LIVE",48,49);}
+const PT2={};function painting2(k){if(!PT2[k]){const c=mkCanvas(PW,PH);({realism:paintRealism2,modern:paintModern2,rules:paintRules2,live:paintLive2})[k](c.getContext("2d"),PW,PH);PT2[k]=c;}return PT2[k];}
+function ledFrame(ctx,x,y,w,h,c,img,o){o=o||{};const p=o.pad==null?Math.max(4,w*0.03):o.pad;ctx.save();ctx.shadowColor=rgba(c,0.85);ctx.shadowBlur=o.glow||26;ctx.strokeStyle=rgba(c,1);ctx.lineWidth=o.lw||3;rr(ctx,x-p,y-p,w+2*p,h+2*p,Math.max(3,p*0.8));ctx.stroke();ctx.restore();
+  ctx.fillStyle="rgba(10,16,30,0.6)";rr(ctx,x-p,y-p,w+2*p,h+2*p,Math.max(3,p*0.8));ctx.fill();ctx.drawImage(img,o.sx||0,o.sy||0,o.sw||img.width,o.sh||img.height,x,y,w,h);
+  const g=ctx.createLinearGradient(x,y,x+w,y+h);g.addColorStop(0,"rgba(255,255,255,0.11)");g.addColorStop(0.35,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(x,y,w,h);}
+function plaque(ctx,x,y,w,rows,c){const h=20+rows.length*52;glass(ctx,x,y,w,h,14,c,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.9)"});
+  rows.forEach((r,i)=>{const yy=y+16+i*52;let tx=x+18;if(r[2]){const lw=logo(ctx,r[2],tx,yy+8,28);tx+=Math.max(lw,26)+10;}T(ctx,r[0],tx,yy+16,{size:15,w:700,color:rgba(SOFT,0.95)});T(ctx,r[1],tx,yy+40,{size:21,w:700});});return h;}
+
+// Files as data and as context, the single film of Documents as data, the last series of Modern data basics. One line per id; the film re-times itself to the voice.
+// "gap": the beat after each line. "say": how the voice reads a line, when it differs from the caption (numbers and function names in words). The few longer stops are in breath.js.
+const NARR={
+"logs":{"name":"Logbooks into charts","lead":1.6,"tail":1.0,"vo":[
+ {"id":"place","gap":0.8,"text":"Washington, 1842. A small office of the United States Navy kept its charts, and its ships' old logbooks.","say":"Washington, eighteen forty-two. A small office of the United States Navy kept its charts, and its ships' old logbooks."},
+ {"id":"logbook","gap":0.8,"text":"A logbook is a ship's daily record: where it was, the wind, the weather, and the current, the sea's own flow."},
+ {"id":"unread","gap":0.8,"text":"Thousands of days at sea were written there, each ship in its own way, and nobody read them again."},
+ {"id":"habit","gap":0.8,"text":"So captains sailed the routes they knew, not the winds and currents that were really there."},
+ {"id":"weeks","gap":0.8,"text":"Passages took weeks longer than they had to: more weeks at sea for the crews, with food and water running low, and cargo and letters late."},
+ {"id":"change","gap":0.8,"text":"Something had to change."},
+ {"id":"read","gap":0.8,"text":"So the office read its old logs into tables: the winds and currents of each patch of ocean, month by month."},
+ {"id":"charts","gap":0.8,"text":"From them, it drew wind and current charts, free to any captain who would keep a log in one set form, and send it back."},
+ {"id":"brussels","gap":0.8,"text":"In 1853, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag.","say":"In eighteen fifty-three, at Brussels, ten nations, with the statistician Adolphe Quetelet in the chair, agreed one log for ships of every flag."},
+ {"id":"saved","gap":0.8,"text":"By the office's own count, ships sailing by the charts cut the average passage to California, round Cape Horn, from 183 days to 135.","say":"By the office's own count, ships sailing by the charts cut the average passage to California, round Cape Horn, from a hundred and eighty-three days to a hundred and thirty-five."},
+ {"id":"shared","gap":0.8,"text":"And nations began to share their weather data, as they still do today."},
+ {"id":"same","gap":0.8,"text":"Documents today are no different: written for people, each in its own way."},
+ {"id":"answer","gap":0.8,"text":"What's written for people can be read into data where it's worth it, and what we write can be written as data from the start."}]},
+"invoices":{"name":"Invoices, read into data","lead":1.0,"tail":1.0,"vo":[
+ {"id":"three","gap":0.8,"text":"Today, at the university, three kinds of documents show three answers: read them, keep them, or write them as data."},
+ {"id":"october","gap":0.8,"text":"In October, Finance received 3,860 supplier invoices, most of them PDF files, each in its supplier's own layout.","say":"In October, Finance received three thousand, eight hundred and sixty supplier invoices, most of them P D F files, each in its supplier's own layout."},
+ {"id":"check","gap":0.8,"text":"Rohan Desai's team checks every one before it's paid: who sent it, its number, its date, its total, and each line."},
+ {"id":"typed","gap":0.8,"text":"For years, they typed them in by hand, and in September, one invoice, sent twice, was paid twice."},
+ {"id":"volume","gap":0.8,"text":"Now every file lands in a volume: a place for files, governed in Unity Catalog as tables are."},
+ {"id":"parse","gap":0.8,"text":"A function, ai_parse_document, reads each file: its words, its tables, and where each sits on the page.","say":"A function, A I parse document, reads each file: its words, its tables, and where each sits on the page."},
+ {"id":"extract","gap":0.8,"text":"Another, ai_extract, takes out the fields Finance names, one row for each invoice.","say":"Another, A I extract, takes out the fields Finance names, one row for each invoice."},
+ {"id":"path","gap":0.8,"text":"Each row keeps the path of its file, so anyone can open the invoice it came from."},
+ {"id":"model","gap":0.8,"text":"An AI model does the reading, so what it reads is checked like any other data, as the film Promises and proofs shows."},
+ {"id":"checks","gap":0.8,"text":"Jun Park's data project checks each one: is every field read, and do the lines add up to the total?"},
+ {"id":"rules","gap":0.8,"text":"Then come Finance's own rules: has this number been sent before, and does Finance know the supplier?"},
+ {"id":"passed","gap":0.8,"text":"Of October's 3,860, 3,734 passed every check.","say":"Of October's three thousand, eight hundred and sixty, three thousand, seven hundred and thirty-four passed every check."},
+ {"id":"person","gap":0.8,"text":"126 went to a person, each with its reason. Nine had been sent twice.","say":"A hundred and twenty-six went to a person, each with its reason. Nine had been sent twice."},
+ {"id":"decides","gap":0.8,"text":"The function reads, the checks sort, and Rohan's team decides, as it still approves every payment."}]},
+"contracts":{"name":"Contracts, kept as signed","lead":1.0,"tail":1.0,"vo":[
+ {"id":"official","gap":0.8,"text":"A signed contract is different: it's an official document, kept just as it was signed."},
+ {"id":"beside","gap":0.8,"text":"Nobody rewrites it as a table. Beside it goes its metadata: the contract's ID, its version, the day it was signed, and where its file is."},
+ {"id":"writes","gap":0.8,"text":"The HR system writes that metadata as it makes the document, so nobody has to read it back."},
+ {"id":"linh","gap":0.8,"text":"Linh Nguyen's contract for this semester, T-26188, has two files: the offer HR sent on 9 July, and the contract she signed on 14 July.","say":"Linh Nguyen's contract for this semester, T two six one eight eight, has two files: the offer HR sent on the ninth of July, and the contract she signed on the fourteenth."},
+ {"id":"week","gap":0.8,"text":"The offer ended on the 13th of November. Before she signed, HR added a week for marking.","say":"The offer ended on the thirteenth of November. Before she signed, HR added a week for marking."},
+ {"id":"alike","gap":0.8,"text":"In a folder, the two look alike. By their metadata, they don't."},
+ {"id":"ends","gap":0.8,"text":"So if Linh asks when her contract ends, a person or an agent finds the signed version, and cites its file: the 20th of November.","say":"So if Linh asks when her contract ends, a person or an agent finds the signed version, and cites its file: the twentieth of November."},
+ {"id":"context","gap":0.8,"text":"The films Context engineering, and Context and memory, governed, show how a document becomes an agent's context."},
+ {"id":"who","gap":0.8,"text":"Who may read a contract is Ingrid Holm's to decide, in HR. Data protection, a module of its own, teaches the rest."}]},
+"written":{"name":"Written as data","lead":1.0,"tail":1.0,"vo":[
+ {"id":"best","gap":0.8,"text":"Best of all is a document nobody has to read back."},
+ {"id":"before","gap":0.8,"text":"Claims for hours worked used to come as spreadsheets by email, and someone typed each one into payroll."},
+ {"id":"json","gap":0.8,"text":"Now the claims app writes each claim as data, the moment it's made: a row any system can read."},
+ {"id":"meta","gap":0.8,"text":"With it goes its metadata: who claimed, on which contract, whether it's approved, and when."},
+ {"id":"yaml","gap":0.8,"text":"What each field means is written in its contract: a YAML file, in an open standard, kept with the app's code."},
+ {"id":"log","gap":0.8,"text":"It's the log of 1853 again: one form, kept by everyone, so nobody has to read it back.","say":"It's the log of eighteen fifty-three again: one form, kept by everyone, so nobody has to read it back."}]},
+"close":{"name":"Keep the file","lead":1.0,"tail":1.0,"vo":[
+ {"id":"kept","gap":0.8,"text":"Those logs were kept. More than a century later, climate scientists read them again, into over a million weather reports."},
+ {"id":"again","gap":0.8,"text":"Keep the file and its metadata, and better readers can read it again."},
+ {"id":"rule","gap":0.8,"text":"So Noor Rahman, the data architect, gives every document one of three answers."},
+ {"id":"write","gap":0.8,"text":"If we write it, we write it as data, in a standard structure such as JSON or YAML, with its metadata.","say":"If we write it, we write it as data, in a standard structure such as Jason or YAML, with its metadata."},
+ {"id":"official","gap":0.8,"text":"If it's official, we keep it as it is, its metadata beside it."},
+ {"id":"read","gap":0.8,"text":"If it's written for people, we read it, with the platform's functions or a scraper, only where a use case needs it, and keep the file."},
+ {"id":"docs","gap":0.8,"text":"Every organisation's documents differ, and the standards are there already: don't reinvent the wheel."},
+ {"id":"iterate","gap":0.8,"text":"Start from the official docs. Investigate, adapt, implement, iterate."},
+ {"id":"module","gap":0.8,"text":"That closes this module: moving data, running the platform, serving it to people and agents, and reading documents."},
+ {"id":"team","gap":0.8,"text":"Each once took a whole team. Databricks and dbt now do much of it; what's left for people is agreeing what the data means."},
+ {"id":"data","gap":0.8,"text":"And for documents: read them where a use case needs it, keep the file and its metadata, and write what's yours as data."}]}
+};
+
+const VODUR={"logs/place": 7.821, "logs/logbook": 6.164, "logs/unread": 5.276, "logs/habit": 4.557, "logs/weeks": 8.237, "logs/change": 1.288, "logs/read": 6.892, "logs/charts": 7.168, "logs/brussels": 9.203, "logs/saved": 10.917, "logs/shared": 3.862, "logs/same": 4.459, "logs/answer": 6.386, "invoices/three": 7.344, "invoices/october": 10.005, "invoices/check": 7.509, "invoices/typed": 5.992, "invoices/volume": 6.29, "invoices/parse": 6.66, "invoices/extract": 5.465, "invoices/path": 4.757, "invoices/model": 6.87, "invoices/checks": 6.159, "invoices/rules": 6.134, "invoices/passed": 7.351, "invoices/person": 5.481, "invoices/decides": 5.867, "contracts/official": 4.954, "contracts/beside": 9.144, "contracts/writes": 6.037, "contracts/linh": 10.868, "contracts/week": 5.95, "contracts/alike": 3.428, "contracts/ends": 8.485, "contracts/context": 7.475, "contracts/who": 7.934, "written/best": 3.046, "written/before": 5.764, "written/json": 5.73, "written/meta": 5.116, "written/yaml": 6.596, "written/log": 6.519, "close/kept": 7.598, "close/again": 3.958, "close/rule": 4.737, "close/write": 6.139, "close/official": 3.506, "close/read": 7.55, "close/docs": 5.914, "close/iterate": 4.546, "close/module": 6.979, "close/team": 7.796, "close/data": 7.406};
+
+/* Pauses, used sparingly: the film flows, and stops only where an idea needs a moment to land.
+   hold: extra seconds after a line, while the picture keeps moving. breathe: a wordless end to a chapter, whose picture starts at the chapter's "breath" cue.
+   Two wordless moments: the title card after the opening, and the end card. */
+const BREATH={
+"logs":{"hold":{"place":0.6,"logbook":0.6,"unread":0.8,"habit":0.4,"weeks":0.8,"change":0.6,"read":0.8,"charts":0.8,"brussels":1.0,"saved":1.0,"shared":0.8,"same":0.4,"answer":0.4},"breathe":4.4},
+"invoices":{"hold":{"three":1.2,"october":0.6,"check":0.4,"typed":0.8,"volume":0.8,"parse":1.0,"extract":1.0,"path":0.8,"model":0.6,"checks":0.6,"rules":1.0,"passed":0.4,"person":0.8,"decides":0.6}},
+"contracts":{"hold":{"official":0.6,"beside":1.2,"writes":0.8,"linh":1.0,"week":1.0,"alike":1.2,"ends":1.2,"context":0.8,"who":0.6}},
+"written":{"hold":{"best":0.6,"before":0.8,"json":1.2,"meta":1.0,"yaml":1.2,"log":0.8}},
+"close":{"hold":{"kept":0.8,"again":0.8,"rule":0.4,"write":0.4,"official":0.4,"read":0.8,"docs":0.4,"iterate":1.0,"module":0.6,"team":0.8,"data":0.4},"breathe":4.6}
+};
+
+/* ===== Shared components for the v4 film ===== */
+function withA(ctx,a,fn){if(a<=0.002)return;ctx.save();ctx.globalAlpha*=Math.min(1,a);fn();ctx.restore();}
+const fin=(t,a,d)=>sstep(a,a+(d||0.6),t);
+function flowTiles(ctx,t,pts,every,dur,off,spFn,size,al){const L=mk(pts);spawn(t,every,dur,off,(u,k)=>{const q=at(L,u);dtile(ctx,q.x,q.y,size,(hash(k,3)-0.5)*0.4,spFn(k),(al==null?1:al)*sstep(0,0.08,u)*(1-sstep(0.9,1,u)));});}
+function phone3(ctx,x,y,s,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.scale(s,s);glass(ctx,-60,-118,120,236,22,[170,205,255],{fill:"rgba(10,18,36,0.94)",glow:18,ea:0.7});
+  rr(ctx,-50,-100,100,196,12);ctx.fillStyle="rgba(40,70,130,0.35)";ctx.fill();ctx.beginPath();ctx.arc(0,-108,3.5,0,TAU);ctx.fillStyle="rgba(200,220,255,0.8)";ctx.fill();
+  const scr=o.screen||"enrol";
+  if(scr==="enrol"){T(ctx,"Data Science 101",0,-62,{w:800,size:12.5,align:"center"});T(ctx,"Tue 9:00 · B204",0,-44,{w:500,size:10.5,align:"center",color:rgba(SOFT,0.95)});ctx.fillStyle="rgba(160,190,240,0.22)";for(let i=0;i<3;i++){rr(ctx,-36,-24+i*14,72-i*14,6,3);ctx.fill();}
+    rr(ctx,-34,40,68,28,14);ctx.fillStyle=o.press?"rgba(140,210,255,1)":"rgba(77,163,255,0.92)";ctx.fill();T(ctx,"Enrol",0,59,{w:800,size:12.5,align:"center",color:"#fff"});}
+  else if(scr==="seat"){T(ctx,"Seat free?",0,-62,{w:800,size:13,align:"center"});T(ctx,"Tue 9 am · DS101",0,-44,{w:500,size:10.5,align:"center",color:rgba(SOFT,0.95)});if(o.ans>0){ctx.globalAlpha*=o.ans;rr(ctx,-38,-18,76,64,10);ctx.fillStyle="rgba(120,240,170,0.16)";ctx.fill();T(ctx,"1",0,16,{w:800,size:28,align:"center",color:rgba(GOOD,1)});T(ctx,"seat left",0,36,{w:600,size:10.5,align:"center",color:rgba(GOOD,1)});}}
+  else if(scr==="confirm"){ctx.fillStyle=rgba(GOOD,0.95);ctx.beginPath();ctx.arc(0,-26,22,0,TAU);ctx.fill();ctx.strokeStyle="#0a1020";ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-10,-26);ctx.lineTo(-3,-18);ctx.lineTo(11,-34);ctx.stroke();T(ctx,"Enrolment",0,16,{w:800,size:13,align:"center"});T(ctx,"confirmed",0,33,{w:800,size:13,align:"center"});}
+  ctx.restore();}
+function screen2(ctx,x,y,w,h,edge){glass(ctx,x,y,w,h,14,edge||[170,205,255],{glow:16,ea:0.6,fill:"rgba(8,14,28,0.92)"});}
+function bars(ctx,x,y,w,h,t,c,n){n=n||6;for(let i=0;i<n;i++){const v=0.3+0.7*Math.abs(Math.sin(i*1.9+t*0.6));const bw=w/n*0.62;ctx.fillStyle=rgba(mix(c,[255,255,255],i/n*0.3),0.9);rr(ctx,x+i*w/n+(w/n-bw)/2,y+h*(1-v),bw,h*v,4);ctx.fill();}}
+function bellGlyph(ctx,x,y,s,ring){ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(ring*28)*0.22*ring);ctx.scale(s,s);ctx.strokeStyle=rgba(LAYER.gold,1);ctx.lineWidth=3;ctx.shadowColor=rgba(LAYER.gold,0.9);ctx.shadowBlur=14;ctx.beginPath();ctx.moveTo(-6,-30);ctx.quadraticCurveTo(-22,-26,-22,0);ctx.lineTo(-28,14);ctx.lineTo(28,14);ctx.lineTo(22,0);ctx.quadraticCurveTo(22,-26,6,-30);ctx.closePath();ctx.stroke();ctx.beginPath();ctx.arc(0,20,5,0,TAU);ctx.stroke();ctx.restore();
+  if(ring>0){ctx.save();for(let k=0;k<3;k++){const r=(ring*1.5+k*0.33)%1;ctx.strokeStyle=rgba(LAYER.gold,0.55*(1-r));ctx.lineWidth=3;ctx.beginPath();ctx.arc(x,y,s*(40+r*90),-0.6,0.6);ctx.stroke();ctx.beginPath();ctx.arc(x,y,s*(40+r*90),Math.PI-0.6,Math.PI+0.6);ctx.stroke();}ctx.restore();}}
+function projector2(ctx,x,y,s,flip){ctx.save();ctx.translate(x,y);ctx.scale(flip?-s:s,s);glass(ctx,-56,-32,100,64,16,[255,228,170],{glow:18,ea:0.8});ctx.beginPath();ctx.arc(46,0,18,0,TAU);ctx.fillStyle="rgba(10,14,24,1)";ctx.fill();ctx.strokeStyle=rgba(LAYER.gold,1);ctx.lineWidth=3;ctx.stroke();ctx.restore();glow(ctx,x+(flip?-46:46)*s,y,40*s,[255,236,190],0.7);}
+function cone(ctx,x0,y0,x1,y1,x2,y2,c,a){ctx.save();ctx.globalCompositeOperation="lighter";const g=ctx.createLinearGradient(x0,y0,(x1+x2)/2,(y1+y2)/2);g.addColorStop(0,rgba(c,0.28*a));g.addColorStop(1,rgba(c,0.08*a));ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.lineTo(x2,y2);ctx.closePath();ctx.fill();ctx.restore();}
+function orb(ctx,x,y,r,t){glow(ctx,x,y,r*3.2+Math.sin(t*2)*6,[255,226,160],0.55);ctx.save();const g=ctx.createRadialGradient(x-r*0.3,y-r*0.3,r*0.1,x,y,r);g.addColorStop(0,"rgba(255,250,235,1)");g.addColorStop(0.5,"rgba(255,214,140,0.9)");g.addColorStop(1,"rgba(255,170,90,0.3)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.strokeStyle="rgba(255,236,190,0.6)";ctx.lineWidth=2;for(let k=0;k<2;k++){ctx.beginPath();ctx.ellipse(x,y,r*1.6,r*0.45,t*0.4+k*1.2,0,TAU);ctx.stroke();}ctx.restore();}
+function sysCard(ctx,x,y,w,h,title,sub,c,icon){glass(ctx,x,y,w,h,16,c,{glow:16,ea:0.6});led(ctx,x+12,y+16,5,h-32,c);T(ctx,title,x+32,y+(sub?h/2-4:h/2+8),{w:700,size:22});if(sub)T(ctx,sub,x+32,y+h/2+22,{w:500,size:16,color:rgba(SOFT,0.95)});if(icon)icon(ctx,x+w-44,y+h/2);}
+const ICON={
+ lms:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;rr(ctx,x-20,y-14,40,26,4);ctx.stroke();ctx.beginPath();ctx.moveTo(x-10,y+18);ctx.lineTo(x+10,y+18);ctx.stroke();ctx.restore();},
+ lib:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x,y-12);ctx.quadraticCurveTo(x-12,y-18,x-22,y-12);ctx.lineTo(x-22,y+14);ctx.quadraticCurveTo(x-12,y+8,x,y+14);ctx.quadraticCurveTo(x+12,y+8,x+22,y+14);ctx.lineTo(x+22,y-12);ctx.quadraticCurveTo(x+12,y-18,x,y-12);ctx.lineTo(x,y+14);ctx.stroke();ctx.restore();},
+ old:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;rr(ctx,x-22,y-18,44,30,4);ctx.stroke();ctx.fillStyle=rgba(GOOD,0.9);ctx.font=font(500,11,"mono");ctx.fillText("C:\\>_",x-17,y+1);ctx.restore();},
+ doc:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;rr(ctx,x-16,y-20,32,40,4);ctx.stroke();for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(x-9,y-8+i*9);ctx.lineTo(x+9,y-8+i*9);ctx.stroke();}ctx.restore();},
+ uni:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;ctx.beginPath();ctx.moveTo(x-22,y-6);ctx.lineTo(x,y-20);ctx.lineTo(x+22,y-6);ctx.closePath();ctx.stroke();for(let i=0;i<4;i++){ctx.beginPath();ctx.moveTo(x-15+i*10,y-4);ctx.lineTo(x-15+i*10,y+14);ctx.stroke();}ctx.beginPath();ctx.moveTo(x-24,y+16);ctx.lineTo(x+24,y+16);ctx.stroke();ctx.restore();},
+ flow:(ctx,x,y)=>{ctx.save();ctx.strokeStyle=rgba(INK,0.9);ctx.lineWidth=2.5;[-18,0,18].forEach(dx=>ctx.strokeRect(x+dx-7,y-7,14,14));ctx.beginPath();ctx.moveTo(x-11,y);ctx.lineTo(x-7,y);ctx.moveTo(x+7,y);ctx.lineTo(x+11,y);ctx.stroke();ctx.restore();},
+ books:(ctx,x,y)=>{ctx.save();["#e08a5a","#5b8fe0","#e0c05a","#6fc28a"].forEach((c,i)=>{ctx.fillStyle=c;ctx.fillRect(x-20+i*10,y-16+(i%2)*4,8,32-(i%2)*4);});ctx.restore();},
+ hand:(ctx,x,y)=>{ctx.save();ctx.fillStyle="#6a8ee8";rr(ctx,x-18,y-16,36,32,4);ctx.fill();ctx.fillStyle="#f4f1ea";ctx.fillRect(x-14,y+6,28,5);ctx.restore();}};
+/* animated sketch: o.ent = entities shown (count, fractional), o.rel = relationships drawn (0..1) */
+function sketchA(ctx,ox,oy,w,h,wrong,a,o){o=o||{};const ent=o.ent==null?99:o.ent,rel=o.rel==null?1:o.rel;const col=wrong?[255,140,90]:[150,225,255];ctx.save();ctx.globalAlpha*=a;
+  const E=wrong?{Student:[0.2,0.25],Course:[0.62,0.22],Enrolment:[0.62,0.72],Class:[0.2,0.76]}:{Student:[0.18,0.24],Class:[0.84,0.24],Enrolment:[0.51,0.24],Term:[0.84,0.76],Course:[0.18,0.76]};
+  const R=wrong?[["Student","Course","1","1"],["Course","Enrolment","1","*"]]:[["Student","Enrolment","1","*"],["Enrolment","Class","*","1"],["Class","Term","*","1"],["Student","Course","*","1"]];
+  const sc=Math.min(1.4,w/800),bw=210*sc,bh=58*sc,P0=n=>[ox+E[n][0]*w,oy+E[n][1]*h];
+  ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4*Math.max(1,sc*0.8);
+  R.forEach(([A,B,ca,cb],ri)=>{const f=clamp(rel*R.length-ri,0,1);if(f<=0)return;const[a1,a2]=P0(A),[b1,b2]=P0(B);const dx=b1-a1,dy=b2-a2,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,off=v=>Math.abs(ux)>0.5?bw/2:bh/2;
+    const sA=[a1+ux*off(),a2+uy*off()],sB=[b1-ux*off(),b2-uy*off()];ctx.beginPath();ctx.moveTo(sA[0],sA[1]);ctx.lineTo(lerp(sA[0],sB[0],f),lerp(sA[1],sB[1],f));ctx.stroke();if(f<1)return;
+    const foot=(p,sx,sy)=>{const nx=-sy,ny=sx,q=[p[0]-sx*20*sc,p[1]-sy*20*sc];ctx.beginPath();ctx.moveTo(p[0]+nx*13*sc,p[1]+ny*13*sc);ctx.lineTo(q[0],q[1]);ctx.lineTo(p[0]-nx*13*sc,p[1]-ny*13*sc);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();};
+    const bar=(p,sx,sy)=>{const nx=-sy,ny=sx;ctx.beginPath();ctx.moveTo(p[0]-sx*14*sc+nx*11*sc,p[1]-sy*14*sc+ny*11*sc);ctx.lineTo(p[0]-sx*14*sc-nx*11*sc,p[1]-sy*14*sc-ny*11*sc);ctx.stroke();};
+    (cb==="*"?foot:bar)(sB,ux,uy);(ca==="*"?foot:bar)(sA,-ux,-uy);});
+  ctx.shadowBlur=0;Object.keys(E).forEach((n,i)=>{const f=clamp(ent-i,0,1);if(f<=0)return;const[x,y]=P0(n);ctx.save();ctx.globalAlpha*=f;ctx.fillStyle="rgba(8,14,30,0.92)";rr(ctx,x-bw/2,y-bh/2,bw,bh,10*sc);ctx.fill();ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=14;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;rr(ctx,x-bw/2,y-bh/2,bw,bh,10*sc);ctx.stroke();ctx.shadowBlur=0;T(ctx,n,x,y+9*sc,{w:700,size:Math.max(14,24*sc),align:"center",color:rgba(col,1)});ctx.restore();});
+  if(!wrong&&ent>4.5)T(ctx,"census date",P0("Term")[0],P0("Term")[1]+bh/2+26*sc,{w:600,size:Math.max(12,18*sc),align:"center",color:rgba(col,0.85)});ctx.restore();}
+function pictureCells(ctx,x,y,w,h,fillFn,k){const cw=w/6,ch=h/4,M=master2(k||1),s=TCELL*(k||1);for(let c=0;c<24;c++){const f=fillFn(c);if(f<=0)continue;ctx.save();ctx.globalAlpha*=f;ctx.drawImage(M,(c%6)*s,((c/6)|0)*s,s,s,x+(c%6)*cw,y+((c/6)|0)*ch,cw+0.5,ch+0.5);ctx.restore();}}
+
+function magnifier(ctx,cx,cy,r,sp,tx,ty,label,col){ctx.save();ctx.strokeStyle=rgba(col,0.6);ctx.lineWidth=1.5;ctx.setLineDash([5,6]);ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(cx+(tx-cx)*r/Math.hypot(tx-cx,ty-cy),cy+(ty-cy)*r/Math.hypot(tx-cx,ty-cy));ctx.stroke();ctx.setLineDash([]);
+  ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.fillStyle="rgba(6,10,20,0.92)";ctx.fill();ctx.save();ctx.clip();dtile(ctx,cx,cy,r*1.25,-0.06,sp,1);ctx.restore();ctx.shadowColor=rgba(col,0.9);ctx.shadowBlur=20;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,r,0,TAU);ctx.stroke();ctx.restore();
+  if(label)tag(ctx,cx,cy+r+28,label,col,{align:"center",size:18});}
+/* ===== Data product variety: different, named products per domain ===== */
+const PVW=480,PVH=320,PVC={};
+function pvBg(x,w,h){const g=x.createLinearGradient(0,0,0,h);g.addColorStop(0,"#0f1733");g.addColorStop(1,"#070b18");x.fillStyle=g;x.fillRect(0,0,w,h);}
+const PVF={
+ donut(x,w,h,c){pvBg(x,w,h);const cx=w*0.34,cy=h*0.52,r=h*0.3;x.lineWidth=h*0.1;x.strokeStyle="rgba(255,255,255,0.1)";x.beginPath();x.arc(cx,cy,r,0,TAU);x.stroke();x.strokeStyle=rgba(c,1);x.beginPath();x.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+TAU*0.72);x.stroke();x.fillStyle="#fff";x.font=font(800,h*0.15);x.textAlign="center";x.fillText("72%",cx,cy+h*0.05);x.textAlign="left";for(let i=0;i<3;i++){x.fillStyle=rgba(mix(c,[255,255,255],i*0.3),0.9);rr(x,w*0.64,h*(0.3+i*0.16),w*0.28*(1-i*0.25),h*0.07,4);x.fill();}},
+ bars(x,w,h,c){pvBg(x,w,h);for(let i=0;i<8;i++){const v=0.3+0.65*Math.abs(Math.sin(i*1.3+c[0]*0.01)),g=x.createLinearGradient(0,h*0.86-h*0.7*v,0,h*0.86);g.addColorStop(0,rgba(mix(c,[255,255,255],0.35),1));g.addColorStop(1,rgba(c,0.45));x.fillStyle=g;rr(x,w*0.08+i*w*0.108,h*0.86-h*0.7*v,w*0.07,h*0.7*v,4);x.fill();}x.fillStyle="rgba(255,255,255,0.3)";x.fillRect(w*0.06,h*0.87,w*0.88,2);},
+ line(x,w,h,c){pvBg(x,w,h);x.strokeStyle="rgba(255,255,255,0.07)";x.lineWidth=1;for(let i=1;i<5;i++){x.beginPath();x.moveTo(0,h*i/5);x.lineTo(w,h*i/5);x.stroke();}const pts=[];for(let i=0;i<=24;i++)pts.push([w*0.05+i*w*0.9/24,h*(0.72-0.36*(i/24)-0.1*Math.sin(i*0.8+c[1]*0.02))]);x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.lineTo(w*0.95,h*0.95);x.lineTo(w*0.05,h*0.95);x.closePath();const g=x.createLinearGradient(0,h*0.2,0,h);g.addColorStop(0,rgba(c,0.45));g.addColorStop(1,rgba(c,0));x.fillStyle=g;x.fill();x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]));x.strokeStyle=rgba(mix(c,[255,255,255],0.3),1);x.lineWidth=4;x.stroke();},
+ kpi(x,w,h,c,n){pvBg(x,w,h);x.fillStyle="#fff";x.font=font(800,h*0.28);x.fillText(n||"1,204",w*0.08,h*0.5);x.fillStyle=rgba(c,1);x.font=font(700,h*0.085);x.fillText("▲ 4.2% on last year",w*0.08,h*0.66);x.strokeStyle=rgba(c,1);x.lineWidth=3;x.beginPath();for(let i=0;i<=18;i++){const px=w*0.08+i*w*0.047,py=h*(0.88-0.08*Math.sin(i*0.9)-i*0.006);i?x.lineTo(px,py):x.moveTo(px,py);}x.stroke();},
+ seats(x,w,h,c){x.fillStyle="#08122a";x.fillRect(0,0,w,h);x.strokeStyle="rgba(120,190,255,0.18)";x.lineWidth=1;for(let i=0;i<=12;i++){x.beginPath();x.moveTo(i*w/12,0);x.lineTo(i*w/12,h);x.stroke();}for(let r=0;r<6;r++)for(let k=0;k<12;k++){const on=hash(r*12+k,7)>0.28;x.strokeStyle=on?rgba(c,1):"rgba(255,209,102,0.55)";x.lineWidth=2;rr(x,w*0.06+k*w*0.074,h*0.2+r*h*0.12,w*0.05,h*0.08,4);x.stroke();if(on){x.fillStyle=rgba(c,0.35);x.fill();}}x.fillStyle="rgba(255,209,102,0.95)";x.font=font(500,h*0.06,"mono");x.fillText("COUNT ON CENSUS DATE",w*0.06,h*0.12);},
+ timeline(x,w,h,c){x.fillStyle="#08122a";x.fillRect(0,0,w,h);x.strokeStyle="rgba(150,200,255,0.5)";x.lineWidth=2;x.beginPath();x.moveTo(w*0.06,h*0.55);x.lineTo(w*0.94,h*0.55);x.stroke();for(let i=0;i<=13;i++){const px=w*0.06+i*w*0.88/13;x.beginPath();x.moveTo(px,h*0.5);x.lineTo(px,h*0.6);x.stroke();x.fillStyle=rgba(c,0.25+0.6*hash(i,5));rr(x,px-w*0.02,h*0.64,w*0.04,h*0.2*(0.3+hash(i,6)),3);x.fill();}const cx=w*0.06+4*w*0.88/13;x.strokeStyle="rgba(255,209,102,1)";x.lineWidth=3;x.beginPath();x.moveTo(cx,h*0.18);x.lineTo(cx,h*0.9);x.stroke();x.fillStyle="rgba(255,209,102,1)";x.font=font(700,h*0.07);x.fillText("census date",cx+8,h*0.24);},
+ floor(x,w,h,c){pvBg(x,w,h);x.strokeStyle="rgba(170,200,245,0.5)";x.lineWidth=2;x.strokeRect(w*0.06,h*0.1,w*0.88,h*0.8);for(let r=0;r<3;r++)for(let k=0;k<5;k++){const on=hash(r*5+k,11)>0.4,X=w*0.08+k*w*0.172,Y=h*0.13+r*h*0.25;x.strokeStyle="rgba(170,200,245,0.4)";x.strokeRect(X,Y,w*0.16,h*0.22);if(on){x.fillStyle=rgba(c,0.55);x.fillRect(X+3,Y+3,w*0.16-6,h*0.22-6);}}},
+ table(x,w,h,c){pvBg(x,w,h);x.fillStyle=rgba(c,0.85);x.fillRect(w*0.04,h*0.08,w*0.92,h*0.09);x.font=font(500,h*0.045,"mono");for(let r=0;r<9;r++){x.fillStyle=r%2?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.08)";x.fillRect(w*0.04,h*(0.19+r*0.085),w*0.92,h*0.085);for(let k=0;k<5;k++){x.fillStyle="rgba(230,238,250,0.85)";x.fillText(String((hash(r*5+k,9)*98000)|0),w*(0.06+k*0.18),h*(0.25+r*0.085));}}},
+ network(x,w,h,c){pvBg(x,w,h);const N=[];for(let i=0;i<14;i++)N.push([w*(0.1+0.8*hash(i,21)),h*(0.12+0.76*hash(i,22))]);x.lineWidth=1.5;for(let i=0;i<14;i++)for(let j=i+1;j<14;j++){if(hash(i*14+j,23)>0.8){x.strokeStyle=rgba(c,0.45);x.beginPath();x.moveTo(N[i][0],N[i][1]);x.lineTo(N[j][0],N[j][1]);x.stroke();}}N.forEach((p,i)=>{x.fillStyle=i%4?rgba(c,1):"#fff";x.beginPath();x.arc(p[0],p[1],h*(0.02+0.03*hash(i,24)),0,TAU);x.fill();});},
+ heat(x,w,h,c){pvBg(x,w,h);for(let r=0;r<5;r++)for(let k=0;k<13;k++){const v=0.15+0.85*Math.abs(Math.sin(r*1.3+k*0.7));x.fillStyle=rgba(mix([30,40,70],c,v),1);rr(x,w*0.05+k*w*0.07,h*0.14+r*h*0.15,w*0.062,h*0.13,3);x.fill();}},
+ funnel(x,w,h,c){pvBg(x,w,h);const lb=["Applications","Offers","Enrolled","On census date"];for(let i=0;i<4;i++){const a=w*(0.86-i*0.17),b=w*(0.86-(i+1)*0.17),y=h*(0.08+i*0.22);x.fillStyle=rgba(mix(c,[255,255,255],i*0.15),0.9-i*0.1);x.beginPath();x.moveTo(w/2-a/2,y);x.lineTo(w/2+a/2,y);x.lineTo(w/2+b/2,y+h*0.19);x.lineTo(w/2-b/2,y+h*0.19);x.closePath();x.fill();x.fillStyle="#0a0f1c";x.font=font(700,h*0.06);x.textAlign="center";x.fillText(lb[i],w/2,y+h*0.12);x.textAlign="left";}},
+ scatter(x,w,h,c){pvBg(x,w,h);x.strokeStyle="rgba(255,255,255,0.3)";x.lineWidth=2;x.beginPath();x.moveTo(w*0.08,h*0.08);x.lineTo(w*0.08,h*0.9);x.lineTo(w*0.94,h*0.9);x.stroke();for(let i=0;i<24;i++){const px=w*(0.12+0.8*hash(i,31)),py=h*(0.85-0.7*((px/w-0.12)/0.8)*(0.6+0.4*hash(i,32)));x.fillStyle=rgba(c,0.8);x.beginPath();x.arc(px,py,h*(0.015+0.025*hash(i,33)),0,TAU);x.fill();}x.strokeStyle="rgba(255,209,102,0.9)";x.setLineDash([8,6]);x.beginPath();x.moveTo(w*0.1,h*0.85);x.lineTo(w*0.92,h*0.25);x.stroke();x.setLineDash([]);},
+ area(x,w,h,c){pvBg(x,w,h);for(let L=2;L>=0;L--){x.beginPath();x.moveTo(w*0.05,h*0.92);for(let i=0;i<=20;i++){x.lineTo(w*0.05+i*w*0.9/20,h*(0.92-(0.2+L*0.18)-0.08*Math.sin(i*0.6+L)));}x.lineTo(w*0.95,h*0.92);x.closePath();x.fillStyle=rgba(mix(c,[255,255,255],L*0.22),0.75);x.fill();}},
+ gauge(x,w,h,c){pvBg(x,w,h);const cx=w/2,cy=h*0.8,r=h*0.55;x.lineWidth=h*0.09;x.strokeStyle="rgba(255,255,255,0.1)";x.beginPath();x.arc(cx,cy,r,Math.PI,TAU);x.stroke();x.strokeStyle=rgba(c,1);x.beginPath();x.arc(cx,cy,r,Math.PI,Math.PI*1.81);x.stroke();const a=Math.PI*1.81;x.strokeStyle="#fff";x.lineWidth=4;x.beginPath();x.moveTo(cx,cy);x.lineTo(cx+Math.cos(a)*r*0.8,cy+Math.sin(a)*r*0.8);x.stroke();x.fillStyle="#fff";x.font=font(800,h*0.14);x.textAlign="center";x.fillText("81%",cx,cy-h*0.08);x.textAlign="left";},
+ live(x,w,h,c){x.drawImage(painting2("live"),0,0,w,h);}};
+const DVAR={teaching:[["floor","Rooms in use now"],["heat","Weekly teaching load"],["bars","Class sizes"],["timeline","Term calendar"],["gauge","Room utilisation"],["line","Attendance trend"]],
+ students:[["funnel","Admissions funnel"],["seats","Census count"],["donut","Retention"],["table","Enrolment detail"],["line","Applications trend"],["kpi","Headcount","32,410"]],
+ research:[["network","Collaborations"],["scatter","Grants and outputs"],["kpi","Research income","$48M"],["area","Income by source"],["live","Lab activity now"],["bars","Publications"]],
+ finance:[["table","Ledger detail"],["area","Spend by area"],["line","Cash trend"],["kpi","Budget","$3.2M"],["donut","Cost recovery"],["gauge","Forecast accuracy"]]};
+function pv(d,i){const key=d+"|"+i;if(PVC[key])return PVC[key];const cv=mkCanvas(PVW,PVH),v=DVAR[d][i];PVF[v[0]](cv.getContext("2d"),PVW,PVH,DOM[d].c,v[2]);PVC[key]=cv;return cv;}
+const pvTitle=(d,i)=>DVAR[d][i][1];
+/* ===== The organisational brain (Genie Ontology) and live updates ===== */
+const BRAIN=(()=>{const inside=(x,y)=>((x/380)**2+((y+10)/215)**2<=1&&y<140)||(((x-215)/115)**2+((y-150)/72)**2<=1);const N=[];let k=0;while(N.length<150&&k<6000){const x=(hash(k,101)-0.5)*780,y=(hash(k,102)-0.5)*470;if(inside(x,y)&&N.every(p=>Math.hypot(p[0]-x,p[1]-y)>33))N.push([x,y]);k++;}
+  const E=[];N.forEach((p,i)=>{const d=N.map((q,j)=>[Math.hypot(q[0]-p[0],q[1]-p[1]),j]).filter(a=>a[1]!==i).sort((a,b)=>a[0]-b[0]);for(let m=0;m<3;m++){const j=d[m][1];if(!E.some(e=>e[0]===j&&e[1]===i))E.push([i,j]);}});
+  return{N,E,HUBS:[["Student",-230,-70],["Enrolment",-20,-120],["Class",190,-60],["Term",200,70],["Course",-210,80]]};})();
+function brainNet(ctx,cx,cy,s,t,act,o){o=o||{};const B=BRAIN,col=[160,215,255],H=B.HUBS;ctx.save();ctx.translate(cx,cy);ctx.scale(s,s);
+  ctx.save();ctx.beginPath();ctx.ellipse(0,-10,388,222,0,0,TAU);ctx.moveTo(333,150);ctx.ellipse(215,150,118,74,0,0,TAU);const g=ctx.createRadialGradient(-60,-60,40,0,0,430);g.addColorStop(0,"rgba(90,140,255,0.17)");g.addColorStop(1,"rgba(40,60,140,0.03)");ctx.fillStyle=g;ctx.fill();ctx.shadowColor=rgba(col,0.55);ctx.shadowBlur=28;ctx.strokeStyle=rgba(col,0.45);ctx.lineWidth=3;ctx.stroke();ctx.restore();
+  ctx.save();ctx.beginPath();ctx.ellipse(0,-10,380,214,0,0,TAU);ctx.clip();ctx.strokeStyle=rgba(col,0.1);ctx.lineWidth=3;for(let i=0;i<8;i++){ctx.beginPath();for(let x=-400;x<=400;x+=16){const y=-190+i*50+Math.sin(x*0.022+i*1.7)*15;x===-400?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();}ctx.restore();
+  ctx.lineWidth=1.3;B.E.forEach(([i,j],k)=>{const p=B.N[i],q=B.N[j];ctx.strokeStyle=rgba(col,0.1+0.25*act*hash(k,5));ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();});
+  [[0,1],[1,2],[2,3],[0,4]].forEach(([a,b])=>{ctx.strokeStyle=rgba(LAYER.gold,0.35+0.5*act);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(H[a][1],H[a][2]);ctx.lineTo(H[b][1],H[b][2]);ctx.stroke();});
+  const rate=0.5+1.8*act,per=2.6-1.4*act;B.E.forEach(([i,j],k)=>{const ph=(t*rate*0.45+hash(k,7)*7)%per;if(ph>1)return;const p=B.N[i],q=B.N[j],u=hash(k,8)>0.5?ph:1-ph;glow(ctx,lerp(p[0],q[0],u),lerp(p[1],q[1],u),9,hash(k,9)>0.72?LAYER.gold:(hash(k,10)>0.5?C.mcp:[150,210,255]),0.9);});
+  B.N.forEach((p,i)=>{const f=0.5+0.5*Math.sin(t*(1.2+hash(i,11))+i);ctx.fillStyle=rgba(col,0.35+0.5*f*(0.4+0.6*act));ctx.beginPath();ctx.arc(p[0],p[1],3.2,0,TAU);ctx.fill();});
+  H.forEach(h=>{glow(ctx,h[1],h[2],34+8*Math.sin(t*2+h[1]),LAYER.gold,0.55+0.4*act);ctx.fillStyle=rgba(LAYER.gold,1);ctx.beginPath();ctx.arc(h[1],h[2],7,0,TAU);ctx.fill();});ctx.restore();
+  if(o.labels!==false)H.forEach(h=>tag(ctx,cx+h[1]*s,cy+h[2]*s-24,h[0],LAYER.gold,{align:"center",size:15}));}
+const brainHub=(cx,cy,s,i)=>P(cx+BRAIN.HUBS[i][1]*s,cy+BRAIN.HUBS[i][2]*s);
+function liveOverlay(ctx,x,y,w,h,t){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();const R=[[0.08,0.24,0.18,0.78],[0.32,0.6,0.52,0.76],[0.68,0.94,0.63,0.78]];
+  for(let i=0;i<48;i++){const b=R[i%3],px=x+w*lerp(b[0],b[1],hash(i,61)),py=y+h*lerp(b[2],b[3],hash(i,62)),on=Math.sin(t*(0.8+hash(i,63)*1.8)+hash(i,64)*9)>0.15;ctx.fillStyle=hash(i,65)>0.5?"rgba(255,220,140,"+(on?0.95:0.12)+")":"rgba(140,210,255,"+(on?0.95:0.12)+")";rr(ctx,px,py,Math.max(2,w*0.02),Math.max(1.5,h*0.013),1.5);ctx.fill();if(on)glow(ctx,px,py,w*0.028,[255,220,160],0.3);}
+  const sx=x+((t*0.22)%1)*w,g=ctx.createLinearGradient(sx-w*0.08,0,sx+w*0.08,0);g.addColorStop(0,"rgba(255,255,255,0)");g.addColorStop(0.5,"rgba(255,255,255,0.1)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;ctx.fillRect(sx-w*0.08,y,w*0.16,h);
+  const pr=(t*1.2)%1;ctx.strokeStyle="rgba(255,80,90,"+(0.9*(1-pr))+")";ctx.lineWidth=Math.max(1.2,w*0.004);ctx.beginPath();ctx.arc(x+w*0.073,y+h*0.066,w*0.012+pr*w*0.035,0,TAU);ctx.stroke();ctx.restore();}
+function pvLive(ctx,d,i,x,y,w,h,t){const v=DVAR[d][i][0];if(v==="live"){liveOverlay(ctx,x,y,w,h,t);return;}if(v!=="floor")return;ctx.save();
+  for(let r=0;r<3;r++)for(let k=0;k<5;k++){const n=r*5+k,X=x+w*(0.08+k*0.172)+1,Y=y+h*(0.13+r*0.25)+1,on=Math.sin(t*(0.5+hash(n,71))+hash(n,72)*9)>0;ctx.fillStyle="#0d1430";ctx.fillRect(X,Y,w*0.16-2,h*0.22-2);if(on){ctx.fillStyle=rgba(DOM[d].c,0.6);ctx.fillRect(X+1,Y+1,w*0.16-4,h*0.22-4);}}
+  const pr=(t*1.2)%1;ctx.fillStyle="rgba(255,70,80,0.95)";ctx.beginPath();ctx.arc(x+w*0.05,y+h*0.06,Math.max(2,w*0.012),0,TAU);ctx.fill();ctx.strokeStyle="rgba(255,80,90,"+(0.9*(1-pr))+")";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(x+w*0.05,y+h*0.06,Math.max(2,w*0.012)+pr*w*0.03,0,TAU);ctx.stroke();ctx.restore();}
+
+/* ===== A Sharper Sketch: components =====
+   Everything here draws with the first film's primitives (glass, T, tag, chip, glow, dtile, orb) so the two films look like one world. */
+const SCENES=[];const cue=(sc,id)=>sc.cues[id];
+function scene(id,draw){const n=NARR[id];SCENES.push({id,name:n.name,lead:n.lead,tail:n.tail,vo:n.vo,draw});}
+function clearTo(ctx,S){setScreen(ctx,S);ctx.fillStyle="#03050b";ctx.fillRect(0,0,W,H);}
+function bgW(ctx,S,cam){setScreen(ctx,S);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#070b17");g.addColorStop(1,"#03050b");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+  setCam(ctx,S,cam);const x0=cam.x-W/2/cam.z,x1=cam.x+W/2/cam.z,y0=cam.y-H/2/cam.z,y1=cam.y+H/2/cam.z;ctx.strokeStyle="rgba(120,160,230,0.045)";ctx.lineWidth=1/cam.z;
+  for(let x=Math.floor(x0/48)*48;x<=x1;x+=48){ctx.beginPath();ctx.moveTo(x,y0);ctx.lineTo(x,y1);ctx.stroke();}for(let y=Math.floor(y0/48)*48;y<=y1;y+=48){ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();}}
+function vign(ctx,S){setScreen(ctx,S);const v=ctx.createRadialGradient(W/2,H/2,H*0.3,W/2,H/2,W*0.75);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.55)");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+const CAM0={x:960,y:540,z:1};
+
+// the sketch's ink is the first film's; the reference model is drawn in a warm ink on tracing paper
+const SK=[150,225,255],REF=[255,214,160],ADOPT=[90,170,255],EXT=[255,176,64];
+const lerpP=(a,b,u)=>[lerp(a[0],b[0],u),lerp(a[1],b[1],u)];
+
+/* the sketch at each version: positions of the box centres (the board is 1920 × 1080) */
+const V1={Student:[576,413],Enrolment:[972,413],Class:[1368,413],Term:[1368,657],Course:[576,657]};
+const V1R=[["Student","Enrolment","1","*"],["Enrolment","Class","*","1"],["Class","Term","*","1"],["Student","Course","*","1"]];
+const L2={Student:[330,510],Enrolment:[760,510],Offering:[1200,510],Unit:[1620,510],Class:[1200,730],Term:[1620,730],Course:[330,290]};
+const L3={Student:[330,290],Admission:[760,290],Course:[1200,290],Enrolment:[760,510],Offering:[1200,510],Unit:[1620,510],Status:[760,730],Class:[1200,730],Term:[1620,730]};
+const L3R=[["Student","Admission","1","*"],["Admission","Course","*","1"],["Admission","Enrolment","1","*"],["Enrolment","Offering","*","1"],["Offering","Unit","*","1"],["Offering","Class","1","*"],["Offering","Term","*","1"],["Enrolment","Status","1","*"]];
+const NAME={Student:"Student",Admission:"Course admission",Course:"Course",Enrolment:"Unit enrolment",Offering:"Unit offering",Unit:"Unit",Status:"Status change",Class:"Class",Term:"Teaching period"};
+// blue pins: adopted from the reference; amber pins: our extensions
+const PINS={Student:"adopt",Admission:"adopt",Course:"adopt",Enrolment:"adopt",Unit:"adopt",Offering:"extend",Class:"extend",Status:"extend",Term:"extend"};
+
+/* one entity: a glass box with its name, an optional line under it, an optional list of attributes, and an optional pin */
+function entBox(ctx,e){const s=e.s||1,ts=24*s,sub=e.sub,at=e.attrs||[];
+  let w=Math.max(200*s,tw(ctx,e.name,ts,700)+52*s);if(sub)w=Math.max(w,tw(ctx,sub,16*s,600)+44*s);at.forEach(r=>{w=Math.max(w,tw(ctx,r[0],17*s,500,"mono")+84*s);});
+  const h=(sub?80:58)*s+(at.length?at.length*30*s+14*s:0);return{x:e.x,y:e.y,w,h};}
+function ent(ctx,e){const a=e.a==null?1:e.a;if(a<=0.01)return;const s=e.s||1,col=e.col||SK,b=entBox(ctx,e),x=b.x-b.w/2,y=b.y-b.h/2,hi=e.hi||0;
+  ctx.save();ctx.globalAlpha*=a;
+  if(hi>0)glow(ctx,b.x,b.y,Math.max(b.w,b.h)*0.9,e.hiCol||col,0.35*hi);
+  ctx.fillStyle=e.fill||"rgba(8,14,30,0.94)";rr(ctx,x,y,b.w,b.h,10*s);ctx.fill();
+  ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=12+10*hi;ctx.strokeStyle=rgba(e.edge||col,0.95);ctx.lineWidth=(2.2+1.2*hi)*s;if(e.dash)ctx.setLineDash([9*s,7*s]);rr(ctx,x,y,b.w,b.h,10*s);ctx.stroke();ctx.setLineDash([]);ctx.shadowBlur=0;
+  const ny=e.sub?y+34*s:y+37*s;T(ctx,e.name,b.x,ny,{w:700,size:24*s,align:"center",color:rgba(col,1)});
+  if(e.sub)withA(ctx,e.subA==null?1:e.subA,()=>T(ctx,e.sub,b.x,y+62*s,{w:600,size:16*s,align:"center",color:rgba(e.subCol||SOFT,1)}));
+  if(e.attrs&&e.attrs.length){const y0=y+(e.sub?80:58)*s;ctx.strokeStyle=rgba(col,0.35);ctx.lineWidth=1.2*s;ctx.beginPath();ctx.moveTo(x+12*s,y0);ctx.lineTo(x+b.w-12*s,y0);ctx.stroke();
+    e.attrs.forEach((r,i)=>withA(ctx,e.attrA==null?1:clamp(e.attrA*e.attrs.length-i,0,1),()=>{const yy=y0+28*s+i*30*s;
+      if(r[1]==="id"){ctx.fillStyle=rgba(REF,1);ctx.beginPath();ctx.arc(x+24*s,yy-6*s,5*s,0,TAU);ctx.fill();}
+      T(ctx,r[0],x+40*s,yy,{f:"mono",w:500,size:17*s,color:r[1]==="id"?rgba(REF,1):rgba(INK,0.9)});}));}
+  if(e.pin&&(e.pinA==null||e.pinA>0))withA(ctx,e.pinA==null?1:e.pinA,()=>{const pc=e.pin==="adopt"?ADOPT:EXT,px=x+b.w-4*s,py=y+4*s,pr=(9+4*(e.pinP||0))*s;glow(ctx,px,py,34*s,pc,0.5+0.5*(e.pinP||0));
+    ctx.fillStyle=rgba(pc,1);ctx.beginPath();ctx.arc(px,py,pr,0,TAU);ctx.fill();ctx.fillStyle="rgba(255,255,255,0.85)";ctx.beginPath();ctx.arc(px-pr*0.3,py-pr*0.3,pr*0.32,0,TAU);ctx.fill();});
+  ctx.restore();return b;}
+
+/* one relationship: a line between two boxes, with a bar (one) or a crow's foot (many) at each end */
+function relLine(ctx,A,B,ca,cb,o){o=o||{};const f=o.f==null?1:o.f,a=o.a==null?1:o.a,s=o.s||1,col=o.col||SK;if(f<=0||a<=0.01)return;
+  const dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy);if(L<1)return;const ux=dx/L,uy=dy/L;
+  const cut=(b)=>Math.min(Math.abs(ux)>1e-6?b.w/2/Math.abs(ux):1e9,Math.abs(uy)>1e-6?b.h/2/Math.abs(uy):1e9);
+  const sA=[A.x+ux*cut(A),A.y+uy*cut(A)],sB=[B.x-ux*cut(B),B.y-uy*cut(B)];
+  ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=10;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=(o.lw||2.4)*s;if(o.dash)ctx.setLineDash([9*s,7*s]);
+  ctx.beginPath();ctx.moveTo(sA[0],sA[1]);ctx.lineTo(lerp(sA[0],sB[0],f),lerp(sA[1],sB[1],f));ctx.stroke();ctx.setLineDash([]);
+  if(f>=1){const foot=(p,sx,sy)=>{const nx=-sy,ny=sx,q=[p[0]-sx*20*s,p[1]-sy*20*s];ctx.beginPath();ctx.moveTo(p[0]+nx*13*s,p[1]+ny*13*s);ctx.lineTo(q[0],q[1]);ctx.lineTo(p[0]-nx*13*s,p[1]-ny*13*s);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);ctx.stroke();};
+    const bar=(p,sx,sy)=>{const nx=-sy,ny=sx;ctx.beginPath();ctx.moveTo(p[0]-sx*14*s+nx*11*s,p[1]-sy*14*s+ny*11*s);ctx.lineTo(p[0]-sx*14*s-nx*11*s,p[1]-sy*14*s-ny*11*s);ctx.stroke();};
+    (cb==="*"?foot:bar)(sB,ux,uy);(ca==="*"?foot:bar)(sA,-ux,-uy);
+    if(o.words){ctx.shadowBlur=0;const wd=c=>c==="*"?"many":"one",off=(p,sx,sy)=>[p[0]-sx*44*s-sy*22*s,p[1]-sy*44*s+sx*22*s+6*s];
+      const pa=off(sA,-ux,-uy),pb=off(sB,ux,uy);withA(ctx,o.words,()=>{T(ctx,wd(ca),pa[0],pa[1],{f:"mono",w:500,size:15*s,align:"center",color:rgba(REF,1)});T(ctx,wd(cb),pb[0],pb[1],{f:"mono",w:500,size:15*s,align:"center",color:rgba(REF,1)});});}}
+  if(o.bad)glow(ctx,(sA[0]+sB[0])/2,(sA[1]+sB[1])/2,90,BAD,0.5*o.bad);
+  ctx.restore();}
+
+/* a whole diagram: E maps a key to {x,y,name,...}, R lists [from,to,one-or-many,one-or-many,{options}] */
+function diagram(ctx,E,R){const B={};Object.keys(E).forEach(k=>{if(E[k])B[k]=entBox(ctx,E[k]);});
+  R.forEach(r=>{const o=r[4]||{};if(B[r[0]]&&B[r[1]])relLine(ctx,B[r[0]],B[r[1]],r[2],r[3],Object.assign({},o,{a:(o.a==null?1:o.a)*Math.min(E[r[0]].a==null?1:E[r[0]].a,E[r[1]].a==null?1:E[r[1]].a),s:o.s||E[r[0]].s}));});
+  Object.keys(E).forEach(k=>{if(E[k])ent(ctx,E[k]);});return B;}
+function board(ctx,a,label){withA(ctx,a,()=>{glass(ctx,110,170,1700,720,22,SK,{glow:18,ea:0.35,fill:"rgba(10,18,36,0.5)"});if(label)tag(ctx,150,170,label,SK,{size:18});});}
+
+/* the reference model, TCSI, on a sheet of tracing paper that slides over the sketch */
+const REFE={Student:[330,300,"Student"],Admission:[760,300,"Course admission"],Course:[1200,300,"Course"],Enrolment:[760,560,"Unit enrolment","census date · status"],Unit:[1200,560,"Unit of study"]};
+const REFR=[["Student","Admission","1","*"],["Admission","Course","*","1"],["Admission","Enrolment","1","*"],["Enrolment","Unit","*","1"]];
+function paper(ctx,a,dx,t,hi,o){if(a<=0.01)return;o=o||{};hi=hi||{};const x=110+dx,y=160+(o.dy||0);
+  ctx.save();ctx.globalAlpha*=a;ctx.fillStyle="rgba(3,5,11,0.55)";ctx.fillRect(-400,-400,W+800,H+800);ctx.restore();
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate((o.rot||-0.006));
+  const pw=1700,ph=730;ctx.shadowColor="rgba(0,0,0,0.6)";ctx.shadowBlur=30;ctx.fillStyle="rgba(58,48,36,0.72)";ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(pw,0);ctx.lineTo(pw,ph-60);ctx.lineTo(pw-60,ph);ctx.lineTo(0,ph);ctx.closePath();ctx.fill();ctx.shadowBlur=0;
+  ctx.fillStyle="rgba(255,236,200,0.16)";ctx.beginPath();ctx.moveTo(pw,ph-60);ctx.lineTo(pw-60,ph-60);ctx.lineTo(pw-60,ph);ctx.closePath();ctx.fill();
+  ctx.strokeStyle="rgba(255,226,180,0.07)";ctx.lineWidth=1;for(let yy=36;yy<ph;yy+=36){ctx.beginPath();ctx.moveTo(20,yy);ctx.lineTo(pw-20,yy);ctx.stroke();}
+  ctx.strokeStyle=rgba(REF,0.5);ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(pw,0);ctx.lineTo(pw,ph-60);ctx.lineTo(pw-60,ph);ctx.lineTo(0,ph);ctx.closePath();ctx.stroke();
+  T(ctx,"REFERENCE MODEL",36,50,{w:800,size:18,color:rgba(REF,0.9)});T(ctx,"TCSI · Tertiary Collection of Student Information",36,80,{w:600,size:18,color:rgba(REF,0.7)});
+  ctx.translate(-110,-160);const E={};Object.keys(REFE).forEach(k=>{const r=REFE[k];E[k]={x:r[0],y:r[1],name:r[2],sub:r[3],col:REF,dash:true,fill:"rgba(40,32,24,0.9)",hi:hi[k]||0,subCol:REF};});
+  diagram(ctx,E,REFR.map(r=>r.concat([{col:REF,dash:true}])));if(o.extra)o.extra(ctx);ctx.restore();}
+
+/* the comparison in the corner: Genie's number against the certified census report */
+function hud(ctx,S,a,v,t0,t){if(a<=0.01)return;setScreen(ctx,S);const ok=Math.round(v)===118;withA(ctx,a,()=>{const x=1470,y=34,w=410,h=112;glass(ctx,x,y,w,h,16,ok?GOOD:CYAN,{glow:14,ea:0.6,fill:"rgba(7,12,24,0.92)"});
+  T(ctx,"Genie",x+24,y+44,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,""+Math.round(v),x+24,y+92,{w:800,size:42,color:rgba(ok?GOOD:CYAN,1)});
+  T(ctx,"Census report",x+200,y+44,{w:700,size:20,color:rgba(SOFT,1)});T(ctx,"118",x+200,y+92,{w:800,size:42,color:rgba(LAYER.gold,1)});
+  const gap=Math.round(v)-118;T(ctx,ok?"match":"gap "+gap,x+w-20,y+92,{w:700,size:18,align:"right",color:rgba(ok?GOOD:BAD,1)});
+  if(t0!=null&&t>t0&&t<t0+1.4)glow(ctx,x+60,y+80,90,ok?GOOD:CYAN,0.5*(1-(t-t0)/1.4));});}
+// the number counts down from a to b between t0 and t0+1
+const countTo=(t,t0,a,b)=>lerp(a,b,ease(clamp((t-t0)/1.0,0,1)));
+
+/* a speech bubble, with its text wrapped */
+function bubble(ctx,x,y,w,s,col,o){o=o||{};const sz=o.size||28;ctx.save();ctx.font=font(700,sz);const words=s.split(" "),lines=[];let cur="";words.forEach(wd=>{const tr=cur?cur+" "+wd:wd;if(ctx.measureText(tr).width>w-56&&cur){lines.push(cur);cur=wd;}else cur=tr;});if(cur)lines.push(cur);ctx.restore();
+  const h=lines.length*sz*1.35+40;glass(ctx,x,y,w,h,18,col,{glow:16,ea:0.7,fill:"rgba(7,12,24,0.92)"});
+  ctx.fillStyle="rgba(7,12,24,0.92)";ctx.strokeStyle=rgba(col,0.7);ctx.lineWidth=1.6;ctx.beginPath();const tx=o.tail==="right"?x+w-60:x+50;ctx.moveTo(tx,y+h-1);ctx.lineTo(tx+(o.tail==="right"?22:-8),y+h+26);ctx.lineTo(tx+30,y+h-1);ctx.fill();ctx.stroke();
+  lines.forEach((l,i)=>T(ctx,l,x+28,y+20+sz*1.05+i*sz*1.35,{w:700,size:sz,color:o.color||rgba(INK,1)}));return h;}
+
+/* a number card: a title, a big number and a line under it */
+function numCard(ctx,x,y,w,title,num,sub,col,o){o=o||{};glass(ctx,x,y,w,200,18,col,{glow:18,ea:0.7,fill:"rgba(7,12,24,0.92)"});T(ctx,title,x+28,y+46,{w:700,size:24,color:rgba(SOFT,1)});T(ctx,num,x+28,y+140,{w:800,size:88,color:rgba(col,1)});if(sub)T(ctx,sub,x+28,y+180,{w:600,size:18,color:rgba(SOFT,0.95)});
+  if(o.badge)tag(ctx,x+w-28-(tw(ctx,o.badge,16,700)+26),y+40,o.badge,o.badgeCol||GOOD,{size:16});}
+
+/* the version stamp in the sketch's corner */
+function stamp(ctx,x,y,s,col,a,flick){withA(ctx,a*(flick?0.55+0.45*Math.abs(Math.sin(flick*9)):1),()=>{const w=tw(ctx,s,20,500,"mono")+34;glass(ctx,x-w,y-20,w,40,10,col,{glow:12,ea:0.8,fill:"rgba(7,12,24,0.92)"});T(ctx,s,x-w/2,y+7,{f:"mono",w:500,size:20,align:"center",color:rgba(col,1)});});}
+
+/* a small table of rows, for the physical model */
+function table(ctx,x,y,name,cols,rows,o){o=o||{};const cw=o.cw||cols.map(c=>Math.max(tw(ctx,c,16,500,"mono"),...rows.map(r=>tw(ctx,r[cols.indexOf(c)],16,500,"mono")))+30),w=cw.reduce((a,b)=>a+b,0),rh=40,h=46+rh*(rows.length+1);
+  glass(ctx,x,y,w,h,12,o.col||SK,{glow:14,ea:0.7,fill:"rgba(7,12,24,0.94)"});T(ctx,name,x+16,y+31,{f:"mono",w:500,size:18,color:rgba(o.col||SK,1)});
+  let cx=x;cols.forEach((c,i)=>{T(ctx,c,cx+15,y+46+27,{f:"mono",w:500,size:16,color:rgba(REF,1)});rows.forEach((r,j)=>withA(ctx,o.rowA?o.rowA(j):1,()=>T(ctx,r[i],cx+15,y+46+rh*(j+1)+27,{f:"mono",w:500,size:16,color:rgba(INK,0.9)})));cx+=cw[i];});
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1;for(let j=0;j<=rows.length+1;j++){ctx.beginPath();ctx.moveTo(x,y+46+rh*j);ctx.lineTo(x+w,y+46+rh*j);ctx.stroke();}
+  return{w,h};}
+
+/* a strip of film: one frame per change of status, each with its date */
+function filmStrip(ctx,x,y,frames,a,snap,t){withA(ctx,a,()=>{const fw=176,fh=92,w=frames.length*fw+24;ctx.fillStyle="rgba(14,18,28,0.95)";rr(ctx,x,y,w,fh+40,8);ctx.fill();ctx.strokeStyle="rgba(170,200,245,0.3)";ctx.lineWidth=1.4;rr(ctx,x,y,w,fh+40,8);ctx.stroke();
+  for(let k=0;k<w/22-1;k++){ctx.fillStyle="rgba(200,215,240,0.18)";rr(ctx,x+12+k*22,y+6,11,8,2);ctx.fill();rr(ctx,x+12+k*22,y+fh+26,11,8,2);ctx.fill();}
+  frames.forEach((f,i)=>withA(ctx,f.a==null?1:f.a,()=>{const fx=x+12+i*fw,fy=y+20,c=f.col||SK;ctx.fillStyle="rgba(8,14,30,0.95)";rr(ctx,fx+4,fy,fw-8,fh,6);ctx.fill();ctx.strokeStyle=rgba(c,f.hi?1:0.6);ctx.lineWidth=f.hi?2.6:1.4;rr(ctx,fx+4,fy,fw-8,fh,6);ctx.stroke();
+    if(f.hi)glow(ctx,fx+fw/2,fy+fh/2,90,c,0.35*f.hi);T(ctx,f.s,fx+fw/2,fy+40,{w:700,size:20,align:"center",color:rgba(c,1)});T(ctx,f.d,fx+fw/2,fy+70,{f:"mono",w:500,size:16,align:"center",color:rgba(SOFT,1)});}));});}
+
+/* a small calendar card with one marked date */
+function calCard(ctx,x,y,title,date,col,a,hi){withA(ctx,a,()=>{glass(ctx,x,y,300,112,14,col,{glow:12+14*(hi||0),ea:0.7,fill:"rgba(7,12,24,0.94)"});ctx.fillStyle=rgba(col,0.9);rr(ctx,x,y,300,30,14);ctx.fill();ctx.fillStyle="rgba(7,12,24,0.94)";ctx.fillRect(x,y+22,300,10);
+  T(ctx,title,x+150,y+22,{w:800,size:16,align:"center",color:"#0a1020"});T(ctx,date,x+150,y+80,{w:800,size:28,align:"center",color:rgba(col,1)});T(ctx,"census date",x+150,y+104,{w:600,size:14,align:"center",color:rgba(SOFT,1)});});}
+
+/* ===== What an agent is: the module's kit =====
+   The films of the agentic data engineering module (What an agent is, and the series after it) share one look, chosen by the
+   author on 3 November 2026: the white lab made Nordic. A pale grey marble wall over a pale oak floor, daylight from a window on the
+   right, matte off-white cards with soft shadows; the agent a matte ceramic sphere with a violet band of light, its loop a bent oak
+   ring with small graphite arrows, its hands pale robot arms with oak joints. Not watercolour, and no film grain. Ported from the
+   style prototype's style X.
+   The module's files, bundled in this order after The Inner Life of Data's engine and helpers (core.js, style2.js, ui3.js) and
+   A Sharper Sketch's scene() (sketch3.js):
+     kit.js    the palette and what each colour means, text, timing, the camera, pictures painted once, and matte shapes
+     room.js   the room: marble, oak, skirting and window light, painted once as the places "lab" and "labNight"; a desk, a screen,
+               a floor lamp and a framed picture
+     people.js the people, with an adult's proportions, three-quarter view, either way round
+     agent.js  the agent: the sphere, the oak ring and its steps, the hands, the tools, data coming back, the verdicts
+     cards.js  cards, pills, tags, icons, the kicker, and the title and end cards
+     finish.js what a film needs before it starts, and the video's motion blur
+   Every top-level name starts with ag_ or AG_, except wAt, which keeps the name the cue check (cues.py) reads. A film's own
+   helpers go in its own source with a prefix of its own; never change these files for one film.
+   Sizes are in the 1920 x 1080 frame. Every word is at least 28 px as seen, and nothing but the captions goes below y 890. */
+
+/* ---------------------------------------------------------------- colours, and what each means in every film of the module */
+const AG={
+  ink:[35,39,45],      // words
+  mut:[86,92,100],     // quieter words
+  blue:[38,102,132],   // tools and structure
+  violet:[88,78,196],  // the model thinking
+  orange:[186,94,54],  // data coming back
+  green:[50,116,80],   // a check passes
+  amber:[156,100,18],  // a check fails, or a loop
+  shadow:[46,40,32],   // the warm shadow everything casts in this room
+  white:[255,255,255],
+  card:{shadow:"rgba(46,38,28,0.2)",base:"#EEECE7",top:"#F3F1ED",bot:"#E6E3DD",edge:"rgba(60,50,40,0.12)",hi:"rgba(255,255,255,0.75)"},
+  sphere:["#F7F5F1","#E5E1DA","#C3BDB2","#A49E93"],sphereShadow:"rgba(46,38,28,0.26)",seam:"rgba(96,86,74,0.28)",
+  visor:"#2B2B32",visorLight:[178,170,255],label:[88,82,74],arrow:"#57524C",
+  tube:{shadow:"rgba(46,38,28,0.13)",edge:"#BAB3A7",fill:"#ECE9E3",hi:"rgba(255,253,248,0.95)"},
+  joint:"#CDB896",jointRim:"#9C8669",grip:"#36373C",hub:"#E4E0D9",hubEdge:"#B5AEA2",
+  wallGlow:[120,108,214],kick:[80,86,94],
+  sdx:-7               // shadows fall a little to the left: the window is on the right
+};
+const AG_OAK={base:[208,188,156],dark:[156,136,106],hi:[242,233,216]};   // the ring, the joints, the floor's wood: oiled oak
+const AG_MEANS={tools:AG.blue,model:AG.violet,data:AG.orange,pass:AG.green,warn:AG.amber};
+
+/* ---------------------------------------------------------------- text
+   ag_T draws with The Inner Life of Data's T (so the legibility check sees it, and {deco:1} marks decoration), in this room's ink
+   unless o.col (a colour) or o.color (a CSS colour) says otherwise; o.ls spaces the letters, in px. Size defaults to 28. */
+function ag_T(ctx,s,x,y,o){o=o||{};const a=o.a==null?1:o.a,col=o.color||rgba(o.col||AG.ink,a),ls=o.ls||0,q=Object.assign({},o,{color:col,size:o.size||28});
+  if(!ls){T(ctx,s,x,y,q);return;}
+  // canvas spaces the letters after each one, the last too: move centred and right-aligned words back by that last space
+  const dx=o.align==="center"?ls/2:(o.align==="right"||o.align==="end")?ls:0;ctx.save();ctx.letterSpacing=ls+"px";T(ctx,s,x+dx,y,q);ctx.restore();}
+function ag_tw(ctx,s,o){o=o||{};ctx.save();ctx.font=font(o.w||600,o.size||28,o.f);const ls=o.ls||0;if(ls)ctx.letterSpacing=ls+"px";const w=ctx.measureText(s).width-(ls&&s.length?ls:0);ctx.restore();return w;}
+// words into lines no wider than maxW
+function ag_wrap(ctx,s,maxW,o){const ws=String(s).split(" "),out=[];let cur="";for(const w of ws){const tr=cur?cur+" "+w:w;if(ag_tw(ctx,tr,o)>maxW&&cur){out.push(cur);cur=w;}else cur=tr;}if(cur)out.push(cur);return out;}
+// several lines, lh apart, the first's baseline at y; returns the last baseline
+function ag_lines(ctx,lines,x,y,lh,o){lines.forEach((l,i)=>ag_T(ctx,l,x,y+i*lh,o));return y+(lines.length-1)*lh;}
+
+/* ---------------------------------------------------------------- timing
+   Times inside a chapter come from its cues (when each line starts) and from the words of its lines, so the pictures stay with the
+   voice if it's recorded again. wAt(sc,"line","word",off): when that word is said (cues.py checks every one is there, whole). */
+function wAt(sc,id,word,off){const ln=sc.vo.find(v=>v.id===id);if(!ln)return 0;const s=ln.say||ln.text,i=s.indexOf(word),d=sc.ends[id]-sc.cues[id];
+  return sc.cues[id]+(i<0?0:d*i/s.length)+(off||0);}
+const ag_in=(t,a,d)=>sstep(a,a+(d||0.6),t);                         // 0 before a, 1 from a+d, smoothly
+const ag_io=(t,t0,t1,d)=>ag_in(t,t0,d||0.4)*(1-ag_in(t,t1,d||0.4));  // in at t0, out at t1
+const ag_sine=u=>0.5-0.5*Math.cos(Math.PI*clamp(u,0,1));            // draw-ons and camera moves: sine ease
+const ag_eo=u=>{u=clamp(u,0,1);return 1-Math.pow(1-u,3);};          // ease out
+// spring and settle: 0 before a, overshoots a little, settles at 1 after about 1.8 d
+function ag_spr(t,a,d){d=d||0.9;const u=(t-a)/d;if(u<=0)return 0;if(u>=1.8)return 1;return 1-Math.exp(-5*u)*Math.cos(7.2*u);}
+// a value that follows keys [[t, v], ...], eased between them (sine), held before the first and after the last
+function ag_keys(t,keys,e){e=e||ag_sine;if(t<=keys[0][0])return keys[0][1];for(let i=1;i<keys.length;i++)if(t<=keys[i][0]){const a=keys[i-1],b=keys[i];return lerp(a[1],b[1],e((t-a[0])/((b[0]-a[0])||1)));}return keys[keys.length-1][1];}
+// a seeded random number generator: the same seed, the same numbers, in every render
+function ag_rnd(seed){let s=(seed>>>0)||1;return()=>{s^=s<<13;s>>>=0;s^=s>>17;s^=s<<5;s>>>=0;return s/4294967296;};}
+
+/* ---------------------------------------------------------------- the camera
+   ag_cam is where the camera is at t, from keys [[t, x, y, zoom], ...]: it glides (sine ease) over d seconds from each key's time, at
+   least 1.4 s; push closes in a little more; the view never leaves the frame. ag_focus looks through it. ag_shot draws one shot {at,
+   place, keys, draw, push, d}: its place under the camera, then draw(ctx, t, cam) on top in the place's coordinates, closing in slowly
+   (push, 2.5% by default) until the next shot. ag_shots cuts a chapter into shots; it returns the shot.
+   In one room the camera never jumps. A cut between two framings of one place makes the whole picture jump a little in, out or aside
+   (the slow push of the shot before snaps back, or the framing changes by a few percent), and what only the shot before showed
+   vanishes in that frame: the author saw it as a jump in the zoom that broke the film's flow (4 November 2026). So a shot in the same
+   room as the one before (the same place, or two places AG_ROOMS makes one room, such as the lab by day and by night; a shot that draws
+   its own scene, with no place, names it in room, as film 1.2's cockpit does) starts where that
+   one's camera is and glides from there to its own framing, over its d; and while it comes in (over dis seconds, or the shot's own
+   dis) the shot before is drawn through that same camera, so what both show stays where it is and only what changed fades: so what
+   both draw must be drawn the same, and a person who moves goes there over a few frames, not at the change. A later moment in the same
+   room, with people elsewhere (December after the summer), is marked later:true: what the shot before shows leaves over its last dis
+   seconds, the bare room shows for an instant (its place, and what AG_BARE draws in it, such as the lab's light), and the later moment's
+   people and things come in over its first dis, while the camera glides on. A cut there makes all of them vanish in one frame, and
+   people who stay a few steps away jump: the author saw that as a jump too. Only a change that moves the picture AG_NEWSHOT px or more at its corners is a new shot, which may cut. Between rooms a shot dissolves
+   in, or comes in on a cut (cut:true) when the two show the same people or words: a dissolve between two framings lays them over each
+   other, a little apart, and for half a second everything in them shows twice, like a ghost. */
+const AG_NEWSHOT=300,AG_ROOMS={},AG_BARE={};let AG_JOIN=null,AG_PROBE=null;
+const ag_room=p=>p&&(AG_ROOMS[p]||p),ag_roomOf=sh=>sh&&ag_room(sh.room||sh.place);
+function ag_cam(t,keys,d,push){d=Math.max(1.4,d||1.6);let x=keys[0][1],y=keys[0][2],z=keys[0][3];
+  for(let i=1;i<keys.length;i++){const u=easeCam(clamp((t-keys[i][0])/d,0,1));if(u<=0)break;x=lerp(x,keys[i][1],u);y=lerp(y,keys[i][2],u);z=lerp(z,keys[i][3],u);}
+  z=Math.max(1,z*(1+(push||0)));return{x:clamp(x,960/z,W-960/z),y:clamp(y,540/z,H-540/z),z};}
+function ag_focus(ctx,t,keys,d,push){const c=ag_cam(t,keys,d,push);ctx.translate(960,540);ctx.scale(c.z,c.z);ctx.translate(-c.x,-c.y);return c;}
+// a shot's own camera at t: its keys, closed in by its push until till (when the next shot starts)
+function ag_camOf(sh,t,till){const len=Math.max(1.5,till-sh.at),push=(sh.push==null?0.025:sh.push)*easeCam(clamp((t-sh.at)/len,0,1));
+  return ag_cam(t,sh.keys||[[0,960,540,1]],sh.d,push);}
+// how far the picture moves at its corners (or its middle), in px of the 1920 x 1080 frame, from camera a to camera b
+function ag_camMove(a,b){let m=0;for(const [sx,sy] of [[0,0],[W,0],[0,H],[W,H],[960,540]]){const wx=(sx-960)/a.z+a.x,wy=(sy-540)/a.z+a.y;
+  m=Math.max(m,Math.hypot((wx-b.x)*b.z+960-sx,(wy-b.y)*b.z+540-sy));}return m;}
+// part u of the way from camera a to camera b, the view kept inside the frame
+function ag_camMix(a,b,u){const z=lerp(a.z,b.z,u);return{x:clamp(lerp(a.x,b.x,u),960/z,W-960/z),y:clamp(lerp(a.y,b.y,u),540/z,H-540/z),z};}
+// one shot, through its own camera, or through cam when it shares one with the shot it dissolves with
+function ag_shot(ctx,S,t,sh,till,cam){setScreen(ctx,S);ctx.save();cam=cam||ag_camOf(sh,t,till);cam=ag_focus(ctx,t,[[0,cam.x,cam.y,cam.z]],1.4,0);
+  if(sh.place)ctx.drawImage(ag_place(sh.place),0,0,W,H);if(sh.draw)sh.draw(ctx,t,cam);ctx.restore();setScreen(ctx,S);}
+// a shot laid over what is drawn, at opacity a
+function ag_shotA(ctx,S,t,sh,till,cam,a){if(!(a>0))return;const [bc,bx]=ag_buf("cut",ctx.canvas.width,ctx.canvas.height);ag_shot(bx,S,t,sh,till,cam);
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=clamp(a,0,1);ctx.drawImage(bc,0,0);ctx.restore();setScreen(ctx,S);}
+// the bare room under a camera: the place, and what AG_BARE draws in it (a light that every shot of it draws)
+function ag_bare(ctx,S,t,place,cam){ag_shot(ctx,S,t,{place,draw:AG_BARE[place]||null},t+1,cam);}
+function ag_shots(ctx,S,t,end,shots,dis){const join=AG_JOIN;AG_JOIN=null;dis=dis==null?0.5:dis;const n=shots.length,till=k=>k+1<n?shots[k+1].at:end,G=[];
+  // where shot k's camera is at tt: its own, or, while it glides in, on its way there from where the camera was
+  const camAt=(k,tt)=>{const own=ag_camOf(shots[k],tt,till(k)),g=G[k];return g&&tt<shots[k].at+g.d?ag_camMix(g.from,own,easeCam((tt-shots[k].at)/g.d)):own;};
+  for(let k=0;k<n;k++){const sh=shots[k],pv=k?{cam:camAt(k-1,sh.at),place:ag_roomOf(shots[k-1])}:join&&join.from;
+    G[k]=pv&&ag_roomOf(sh)&&ag_room(pv.place)===ag_roomOf(sh)&&ag_camMove(pv.cam,ag_camOf(sh,sh.at,till(k)))<AG_NEWSHOT?{from:pv.cam,d:Math.max(1.4,sh.d||1.6)}:null;}
+  // a later moment in the same room (later:true), both shots on a place: each half of the pass through the bare room lasts dis seconds
+  const dipOf=k=>{const sh=shots[k];return sh&&sh.later&&G[k]&&sh.place&&(k===0||shots[k-1].place)?(sh.dis!=null?sh.dis:dis):0;};
+  let i=0;for(let k=1;k<n;k++)if(t>=shots[k].at)i=k;const cam=camAt(i,t);
+  // a chapter whose first shot glides on from the last one's camera: the last one's end is drawn through it, under the engine's
+  // crossfade; when the first shot is a later moment, what the last one shows leaves over dip seconds, and then the new one's comes in
+  const glides=i===0&&!!G[0],dip=dipOf(0);
+  if(join)join.out={t,cam,place:ag_roomOf(shots[i]),glides,dip};
+  if(AG_PROBE){Object.assign(AG_PROBE,{cam,place:ag_roomOf(shots[i]),glides,dip});return i;}
+  if(join&&join.cam){const sh=shots[i];                                             // a chapter's end, through the next chapter's camera
+    if(join.leave==null||!sh.place)ag_shot(ctx,S,t,sh,till(i),join.cam);else{ag_bare(ctx,S,t,sh.place,join.cam);ag_shotA(ctx,S,t,sh,till(i),join.cam,join.leave);}
+    return i;}
+  // before a later moment, what this shot shows leaves; in one, what it shows comes in once the shot before has left (a chapter's first
+  // shot: once the last chapter's end has left)
+  const hn=dipOf(i+1),hi=dipOf(i),s0=i>0?shots[i].at:hi;let a=1;
+  if(hn&&t>shots[i+1].at-hn)a=1-ease(clamp((t-shots[i+1].at+hn)/hn,0,1));
+  if(hi&&t<s0+hi)a=Math.min(a,ease(clamp((t-s0)/hi,0,1)));
+  if(a<1){ag_bare(ctx,S,t,hi&&i>0&&t<s0+hi?shots[i-1].place:shots[i].place,cam);ag_shotA(ctx,S,t,shots[i],till(i),cam,a);return i;}
+  const di=i>0&&shots[i].dis!=null?shots[i].dis:dis,u=i>0&&!hi&&(G[i]||!shots[i].cut)?clamp((t-shots[i].at)/di,0,1):1;
+  if(u<1){ag_shot(ctx,S,t,shots[i-1],shots[i].at,G[i]?cam:camAt(i-1,t));ag_shotA(ctx,S,t,shots[i],till(i),cam,ease(u));}
+  else ag_shot(ctx,S,t,shots[i],till(i),cam);return i;}
+// a chapter's draw, run only to find where its camera is at t and in which place, without drawing ({cam, place, glides}, or null)
+function ag_probe(sc,t){const c=ag_buf("probe",2,2)[1],was=AG_PROBE,j=AG_JOIN;AG_PROBE={};try{sc.draw(c,0.001,t,sc);return AG_PROBE.cam?AG_PROBE:null;}
+  catch(e){return null;}finally{AG_PROBE=was;AG_JOIN=j;}}
+// chapters that open on what the one before ends on, by id; a film calls it after its last scene(). The engine lays the end of each
+// chapter over the next one's first 0.8 s. When the next one opens in the same room, a little way from where the last one's camera is,
+// its camera glides on from there, and the end of the last one is drawn through that same camera, so only what changed fades; else, for
+// those 0.8 s, the chapter before draws the next one's opening, and it's a cut
+function ag_cutInto(ids){for(const id of ids){const i=SCENES.findIndex(s=>s.id===id);if(i<1)throw new Error("ag_cutInto: "+id+" isn't a chapter after the first");
+  const pv=SCENES[i-1],nx=SCENES[i],dp=pv.draw,dn=nx.draw;
+  // where the chapter before leaves the camera, and in which place, found once
+  const endOf=()=>pv.agEnd!==undefined?pv.agEnd:(pv.agEnd=ag_probe(pv,pv.dur-1e-4));
+  nx.draw=function(ctx,S,t,s){const was=AG_JOIN,e=endOf(),J=Object.assign({},was,{from:e&&{cam:e.cam,place:e.place}});AG_JOIN=J;
+    try{return dn.apply(this,arguments);}finally{AG_JOIN=was;if(J.out&&!J.cam)nx.agLast=J.out;}};
+  pv.draw=function(ctx,S,t,s){if(t<s.dur)return dp.apply(this,arguments);const lt=t-s.dur;
+    // the next chapter's camera at lt: as the engine has just drawn it (it draws that chapter first), or found again
+    const q=nx.agLast&&Math.abs(nx.agLast.t-lt)<1e-6?nx.agLast:ag_probe(nx,lt);
+    if(!q||!q.glides)return nx.draw(ctx,S,lt,nx);
+    // before a later moment, what the end shows leaves
+    const was=AG_JOIN;AG_JOIN=Object.assign({},was,{cam:q.cam,leave:q.dip?1-ease(clamp(lt/q.dip,0,1)):null});try{return dp.apply(this,arguments);}finally{AG_JOIN=was;}};}}
+
+/* ---------------------------------------------------------------- pictures painted once
+   AG_PLACES lists the places a film paints: key -> painter(ctx), which paints the whole 1920 x 1080 frame. room.js adds "lab"; a
+   film adds its own in its own source. Each is painted once, the first time it's drawn, and kept: the video and the checks paint
+   them all before they start, the site's player the first at once and the others after Play (finish.js). Paint a place in well
+   under two seconds (check.py times it): work at a lower resolution and scale up what is soft anyway, such as the marble. */
+const AG_PLACES={},AG_KEPT={},AG_BUFS={};
+function ag_kept(key,w,h,paint){let c=AG_KEPT[key];if(c)return c;c=AG_KEPT[key]=mkCanvas(w,h);paint(c.getContext("2d"),w,h);return c;}
+function ag_place(key){const p=AG_PLACES[key];if(!p)throw new Error("no place "+key+" in AG_PLACES");return ag_kept("place:"+key,W,H,p);}
+// a scratch canvas, cleared, for a dissolve or a layer
+function ag_buf(k,w,h){let c=AG_BUFS[k];if(!c)c=AG_BUFS[k]=mkCanvas(w,h);if(c.width!==w||c.height!==h){c.width=w;c.height=h;}const x=c.getContext("2d");
+  x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation="source-over";x.filter="none";x.clearRect(0,0,w,h);return[c,x];}
+
+/* ---------------------------------------------------------------- matte shapes
+   Everything solid in these films is matte: a fill, a soft highlight where the window's light falls, and a soft inner shadow on the
+   side away from it. A shape is a function that adds its path to the context: (c) => { c.moveTo(...); ... }. */
+function ag_shape(c,fn){c.beginPath();fn(c);}
+// an inner shadow that works in every browser: fill the area round the shape, outside it, and let its blurred shadow fall inside.
+// Only the area near the shape casts it (its bounds, found by tracing the shape, and a margin wider than the blur): the same picture
+// as filling the whole canvas, but a blurred fill costs its area, and a place of forty shapes painted in 18 s that way, 0.05 s this.
+function ag_inner(c,fn,color,blur,dx,dy){const b=ag_bounds(fn),m=blur*2+Math.abs(dx)+Math.abs(dy)+8;c.save();ag_shape(c,fn);c.clip();
+  c.shadowColor=color;c.shadowBlur=blur;c.shadowOffsetX=dx;c.shadowOffsetY=dy;c.beginPath();
+  if(b)c.rect(b[0]-m,b[1]-m,b[2]-b[0]+2*m,b[3]-b[1]+2*m);else c.rect(-4000,-4000,12000,12000);fn(c);c.fillStyle="#000";c.fill("evenodd");c.restore();}
+// a shape's bounds [x0, y0, x1, y1], from its points and control points (so never too small); null if it calls anything else
+function ag_bounds(fn){let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9,bad=false;const P=(x,y)=>{if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;},
+    K={moveTo:P,lineTo:P,closePath:()=>{},bezierCurveTo:(a,b,c,d,e,f)=>{P(a,b);P(c,d);P(e,f);},quadraticCurveTo:(a,b,c,d)=>{P(a,b);P(c,d);},
+      arc:(x,y,r)=>{P(x-r,y-r);P(x+r,y+r);},arcTo:(a,b,c,d)=>{P(a,b);P(c,d);},ellipse:(x,y,rx,ry)=>{const r=Math.max(rx,ry);P(x-r,y-r);P(x+r,y+r);},
+      rect:(x,y,w,h)=>{P(x,y);P(x+w,y+h);},roundRect:(x,y,w,h)=>{P(x,y);P(x+w,y+h);}};
+  try{fn(new Proxy({},{get:(o,k)=>K[k]||(()=>{bad=true;})}));}catch(e){bad=true;}return bad||x1<x0?null:[x0,y0,x1,y1];}
+// a matte fill: base colour, a soft highlight of radius rad at (lx, ly), and an inner shadow (blur, falling down and left)
+function ag_soft(c,fn,base,hi,lx,ly,rad,shade,blur,a){ag_shape(c,fn);c.fillStyle=rgba(base,1);c.fill();
+  c.save();ag_shape(c,fn);c.clip();const g=c.createRadialGradient(lx,ly,0,lx,ly,rad);g.addColorStop(0,rgba(hi,a==null?0.7:a));g.addColorStop(1,rgba(hi,0));
+  c.fillStyle=g;c.fillRect(lx-rad,ly-rad,rad*2,rad*2);c.restore();if(shade)ag_inner(c,fn,shade,blur||22,-6,4);}
+// soft folds or creases inside a shape: [[from], [control], [to]] curves, a dark line with a light one just above it
+function ag_folds(c,fn,list,dark,light){c.save();ag_shape(c,fn);c.clip();c.lineCap="round";for(const f of list){
+  c.strokeStyle=dark;c.lineWidth=3;c.beginPath();c.moveTo(f[0][0],f[0][1]);c.quadraticCurveTo(f[1][0],f[1][1],f[2][0],f[2][1]);c.stroke();
+  if(light){c.strokeStyle=light;c.lineWidth=2;c.beginPath();c.moveTo(f[0][0]+2,f[0][1]-3);c.quadraticCurveTo(f[1][0]+2,f[1][1]-3,f[2][0]+2,f[2][1]-3);c.stroke();}}c.restore();}
+// a soft shadow on the floor or a table: an ellipse of the room's warm shadow, darkest in the middle
+function ag_floorShadow(ctx,x,y,rx,ry,a){if(a<=0)return;const g=ctx.createRadialGradient(0,0,0,0,0,1);g.addColorStop(0,rgba(AG.shadow,a));g.addColorStop(1,rgba(AG.shadow,0));
+  ctx.save();ctx.translate(x,y);ctx.scale(rx,ry);ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,1,0,TAU);ctx.fill();ctx.restore();}
+// a rounded rectangle as part of a shape (rr() begins a new path, so it can't be one of several in a shape)
+function ag_rect(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+// a line along a cubic (p0, p1, p2, p3) that tapers from w0 wide to w1, with round ends: one shape, filled once, so it is never darker
+// where its ends overlap it, as a stroke drawn in parts would be
+function ag_taper(c,p0,p1,p2,p3,w0,w1,col){const n=24,L=[],R=[],at=t=>{const u=1-t;return[u*u*u*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t*t*t*p3[0],u*u*u*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t*t*t*p3[1],
+    3*u*u*(p1[0]-p0[0])+6*u*t*(p2[0]-p1[0])+3*t*t*(p3[0]-p2[0]),3*u*u*(p1[1]-p0[1])+6*u*t*(p2[1]-p1[1])+3*t*t*(p3[1]-p2[1])];};
+  for(let i=0;i<=n;i++){const [x,y,dx,dy]=at(i/n),d=Math.hypot(dx,dy)||1,h=lerp(w0,w1,i/n)/2;L.push([x-dy/d*h,y+dx/d*h]);R.push([x+dy/d*h,y-dx/d*h]);}
+  const s=at(0),e=at(1),as=Math.atan2(s[3],s[2]),ae=Math.atan2(e[3],e[2]);c.fillStyle=col;c.beginPath();c.moveTo(L[0][0],L[0][1]);for(const q of L)c.lineTo(q[0],q[1]);
+  c.arc(p3[0],p3[1],w1/2,ae+Math.PI/2,ae-Math.PI/2,true);for(let i=n;i>=0;i--)c.lineTo(R[i][0],R[i][1]);c.arc(p0[0],p0[1],w0/2,as-Math.PI/2,as+Math.PI/2,true);c.closePath();c.fill();}
+// scale about a point
+function ag_about(ctx,x,y,k){ctx.translate(x,y);ctx.scale(k,k);ctx.translate(-x,-y);}
+// a cubic curve as eight numbers [x0,y0, x1,y1, x2,y2, x3,y3]: its point at u, and its path from u0 to u1
+function ag_bz(p,u){const m=1-u;return[m*m*m*p[0]+3*m*m*u*p[2]+3*m*u*u*p[4]+u*u*u*p[6],m*m*m*p[1]+3*m*m*u*p[3]+3*m*u*u*p[5]+u*u*u*p[7]];}
+function ag_bzPath(ctx,p,u0,u1,n){n=n||40;ctx.beginPath();for(let k=0;k<=n;k++){const q=ag_bz(p,lerp(u0,u1,k/n));k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]);}}
+
+/* ===== What an agent is: the people =====
+   Half-figures, seen from the waist or the chest up, in three-quarter view, matte and softly lit from the window on the right, with
+   an adult's proportions (the author, 3 November 2026: "Keep the bodies with good proportions"):
+     - the head 225 px from crown to chin at s = 1; the eyes halfway down it; hairline, brows, the tip of the nose and the chin split
+       the face into thirds; the ear runs from the brow to the nose;
+     - short hair that follows the skull, never a tall quiff or an oversized head;
+     - a real jaw over a neck about half as wide as the head is tall, ending inside the collar;
+     - the shoulders a third of a head below the chin, and with the arms about two heads across;
+     - a chest that narrows to the waist, arms that hang from the shoulders, soft folds, and a soft shadow where the arm meets the body.
+   The shapes are drawn once in figure space (the style prototype's Jun, x 40 to 500, y 270 to 1100, the head from y 300 to 526,
+   facing right, his right shoulder nearer us) and painted once per person into kept pictures; the eyes, the mouth and any arm that
+   moves are drawn live.
+
+   ag_person(ctx, who, x, y, s, o) draws a person: who is a name in AG_CAST or a spec like those below; (x, y) is where the neck
+   meets the shoulders, s the size (1: a head 225 px tall); o:
+     t       the chapter's time, for breathing and blinking (each person breathes at their own pace)
+     flip    true to face left (people face right by default)
+     pose    "hang" (arms down, the default), "hold" (the near hand in front of the chest, holding o.hold), or {near: [upper arm,
+             forearm, hand], far: ...} for a hand on a wheel, a switch or a dial, angles in degrees from straight down, positive towards
+             the way the person faces; pose2 and mix blend into a second pose. No gestures: any other name stops a render or a check
+     hold    (ctx, hands) => draws what the near hand holds, in figure space, over the near hand (holdBack: under it); hands.near and
+             hands.far are the wrists (far is null while the far arm hangs), hands.nearElbow the near elbow
+     front   the same as hold, but drawn over the head as well: a thing held up before the face, such as a card hiding the mouth
+     nod     a nod, in radians (the head turns about the top of the neck); gaze [dx, dy] moves the eyes a little; blink 0 to 1
+     talk    0 to 1, the mouth opens; smile 0 to 1
+     cut     a height in the frame: the body is hidden below it (draw a desk first and cut at its back edge: the desk hides the
+             hanging arms)
+     covered true when something drawn over the person hides their waist. People end flat under the waist (figure y 1100, 504 s
+             below the neck), so keep y + 504 s at least 1080 or cover it: a render or a check stops with an error where it shows
+   People of other times: who.top.kind can be "robe" (a crossed collar), "tunic" or "apron" (over a shirt), and who.hat.paint(c, P)
+   or who.top.paint(c, P) paints anything else in figure space, over the body or the head. who.hair.style: "side", "cropped",
+   "coily", "bob", "bun", "long", "shaved". */
+
+/* ---------------------------------------------------------------- figure space: the prototype's Jun, an adult's proportions */
+const AG_F={
+  // the head turned three-quarters to the right: the far side's outline runs from the forehead past the far brow and cheekbone, round the
+  // tip of the nose (the only feature that passes the cheek) and down the cheek to the chin; the jaw runs back from the chin to below the
+  // ear, which sits well behind the near eye. The eyes, the nose, the mouth and the ear inside it are drawn at the same turn (AG_FACE)
+  head(c){c.moveTo(300,300);c.bezierCurveTo(340,298,372,318,382,350);c.bezierCurveTo(387,366,390,382,390,396);
+    c.bezierCurveTo(390,404,387,410,386,415);c.bezierCurveTo(386,424,390,432,391,440);c.bezierCurveTo(394,446,397,451,397,455);
+    c.bezierCurveTo(397,460,393,463,388,464);c.bezierCurveTo(386,470,386,478,385,486);c.bezierCurveTo(384,498,381,508,377,516);
+    c.bezierCurveTo(373,526,364,531,352,531);c.bezierCurveTo(330,531,302,520,284,506);c.bezierCurveTo(274,498,268,492,264,484);
+    c.bezierCurveTo(258,474,248,464,236,458);c.bezierCurveTo(220,448,208,420,208,388);c.bezierCurveTo(208,352,226,320,256,306);
+    c.bezierCurveTo(270,301,284,300,300,300);c.closePath();},
+  ear(c){c.moveTo(266,404);c.bezierCurveTo(254,393,241,396,238,412);c.bezierCurveTo(235,428,239,446,247,456);c.bezierCurveTo(254,463,263,462,266,452);c.bezierCurveTo(269,438,269,420,266,404);c.closePath();},
+  earIn(c){c.moveTo(259,414);c.bezierCurveTo(249,410,245,422,247,434);c.bezierCurveTo(249,444,254,448,260,444);},
+  // the neck: its top tucked up under the skull with a rounded nape, so a head that nods never shows the neck's top edge
+  neck(c){c.moveTo(286,430);c.bezierCurveTo(258,432,236,446,233,468);c.bezierCurveTo(235,500,236,530,234,566);c.bezierCurveTo(254,602,308,620,358,607);c.bezierCurveTo(350,580,343,552,336,524);c.lineTo(300,470);c.closePath();},
+  torso(c){c.moveTo(232,562);c.bezierCurveTo(200,572,166,584,140,598);c.bezierCurveTo(104,616,88,650,92,700);c.lineTo(120,1100);c.lineTo(414,1100);
+    c.bezierCurveTo(412,1010,414,940,418,870);c.bezierCurveTo(422,800,430,740,430,700);c.bezierCurveTo(430,668,420,642,404,628);
+    c.bezierCurveTo(392,618,378,608,362,603);c.closePath();},
+  farArm(c){c.moveTo(372,606);c.bezierCurveTo(404,612,434,626,450,652);c.bezierCurveTo(466,678,472,724,472,780);c.bezierCurveTo(472,850,468,920,464,960);
+    c.bezierCurveTo(460,1000,456,1050,452,1100);c.lineTo(404,1100);c.lineTo(404,640);c.closePath();},
+  arm(c){c.moveTo(152,600);c.bezierCurveTo(116,604,84,626,72,664);c.bezierCurveTo(64,700,64,770,70,830);c.bezierCurveTo(74,876,80,910,90,936);
+    c.bezierCurveTo(108,980,138,1036,170,1100);c.lineTo(274,1100);c.bezierCurveTo(250,1046,224,1004,208,966);c.bezierCurveTo(196,936,190,890,188,830);
+    c.bezierCurveTo(186,780,190,730,196,700);c.bezierCurveTo(198,664,186,624,168,606);c.closePath();},
+  collar(c){c.moveTo(232,560);c.bezierCurveTo(252,596,308,614,360,601);c.lineTo(364,615);c.bezierCurveTo(306,630,244,614,222,576);c.closePath();},
+  // the torso without its near shoulder: where a raised near arm leaves the side of the body
+  side(c){c.moveTo(150,640);c.bezierCurveTo(120,660,104,690,104,730);c.lineTo(124,1100);c.lineTo(200,1100);c.lineTo(200,640);c.closePath();}
+};
+const AG_FIG={anchor:[296,596],box:[30,262,500,1108],piv:[282,480],res:1.5,
+  shoulder:{near:[134,660],far:[428,660]},L1:282,L2:262,w:[122,96,74]};   // arm joints, the upper arm's and forearm's lengths, widths at shoulder, elbow, wrist
+// the face, turned three-quarters like the head (AG_F.head), in figure space: the near eye, wide, and the far eye, narrower and close to
+// the far cheek (x, y, half-width, half-height); the mouth's near corner, middle and far corner, the middle off to the far side as the
+// face turns; the ear's middle and the lobe. Films that draw near the face (a sound leaving the mouth, a coil behind the ear) take
+// their places from here
+const AG_FACE={eyeN:[334,418,4.8,5.6],eyeF:[377,417,3.1,5],mouth:[[350,483],[367,487],[380,481]],mid:[367,484],ear:[252,430],lobe:[253,470]};
+// hair, the shapes; each adds its path, the caller fills
+const AG_HAIR={
+  side(c){c.moveTo(391,352);c.bezierCurveTo(395,326,382,300,352,290);c.bezierCurveTo(320,280,270,282,244,298);
+    c.bezierCurveTo(216,314,203,346,204,382);c.bezierCurveTo(205,414,210,440,218,456);c.bezierCurveTo(224,464,234,464,240,456);
+    c.bezierCurveTo(244,444,244,428,247,412);c.bezierCurveTo(252,398,266,394,274,404);c.lineTo(276,429);c.lineTo(283,429);
+    c.bezierCurveTo(283,404,290,384,302,368);c.bezierCurveTo(327,350,352,342,372,342);c.bezierCurveTo(381,342,387,346,391,352);c.closePath();},
+  cropped(c){c.moveTo(386,350);c.bezierCurveTo(386,326,372,304,346,296);c.bezierCurveTo(316,288,272,290,248,304);
+    c.bezierCurveTo(222,320,210,350,211,384);c.bezierCurveTo(212,414,216,438,222,452);c.bezierCurveTo(228,460,236,460,240,452);
+    c.bezierCurveTo(244,440,244,426,247,414);c.bezierCurveTo(252,402,264,398,272,406);c.lineTo(275,426);c.lineTo(281,426);
+    c.bezierCurveTo(281,404,290,386,302,372);c.bezierCurveTo(326,356,352,350,372,350);c.bezierCurveTo(379,350,383,350,386,350);c.closePath();},
+  coily(c){const pts=[[388,352],[392,326],[378,302],[356,290],[328,282],[296,280],[266,284],[240,296],[220,316],[208,342],[203,372],[206,402],[214,430],[226,452]];
+    c.moveTo(pts[0][0],pts[0][1]);for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i],mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,nx=-(b[1]-a[1]),ny=b[0]-a[0],l=Math.hypot(nx,ny)||1;
+      c.quadraticCurveTo(mx-nx/l*7,my-ny/l*7,b[0],b[1]);}
+    c.bezierCurveTo(230,462,238,462,242,452);c.bezierCurveTo(246,440,244,426,247,414);c.bezierCurveTo(252,400,264,396,272,404);c.lineTo(276,428);c.lineTo(283,428);
+    c.bezierCurveTo(283,404,292,384,304,370);c.bezierCurveTo(328,354,354,348,374,349);c.closePath();},
+  bob(c){c.moveTo(392,354);c.bezierCurveTo(396,326,382,298,350,288);c.bezierCurveTo(316,278,266,282,240,298);
+    c.bezierCurveTo(210,318,198,352,200,392);c.bezierCurveTo(202,438,214,478,232,506);c.bezierCurveTo(250,528,286,532,310,518);
+    c.bezierCurveTo(300,500,294,470,296,440);c.bezierCurveTo(298,404,306,378,320,362);c.bezierCurveTo(336,348,358,346,378,348);c.bezierCurveTo(385,349,389,351,392,354);c.closePath();},
+  bun(c){AG_HAIR.cropped(c);},
+  knot(c){c.arc(222,318,38,0,TAU);},
+  long(c){AG_HAIR.bob(c);},
+  longBack(c){c.moveTo(212,350);c.bezierCurveTo(192,420,190,500,196,560);c.bezierCurveTo(200,600,190,640,172,676);c.bezierCurveTo(220,700,286,690,330,652);
+    c.bezierCurveTo(320,600,300,540,290,500);c.lineTo(250,420);c.closePath();},
+  shaved(c){}
+};
+const AG_STRANDS={side:[[[262,301],[312,286],[374,306]],[[250,318],[306,302],[386,332]],[[300,296],[352,300],[390,340]],[[226,352],[214,396],[232,448]],[[296,372],[278,352],[244,344]]],
+  cropped:[[[260,306],[310,294],[370,310]],[[230,350],[220,396],[236,442]]],
+  coily:[],bob:[[[262,300],[312,286],[376,310]],[[236,330],[214,400],[236,490]],[[300,300],[350,302],[388,344]],[[300,380],[296,440],[300,506]]],
+  bun:[[[260,306],[310,294],[370,310]],[[236,340],[226,390],[236,440]]],long:null,shaved:[]};
+AG_STRANDS.long=AG_STRANDS.bob;
+// folds in the clothes: the chest by the near arm, across the front, the far side; and the near elbow
+const AG_FOLDS=[[[200,708],[222,722],[238,752]],[[250,884],[290,872],[332,886]],[[316,980],[350,970],[386,982]]],AG_ARMFOLDS=[[[164,950],[186,960],[206,972]]];
+
+/* ---------------------------------------------------------------- the cast: the university's data team and the people it works with
+   As in the governance films (same names, skin, hair, glasses), redrawn in this module's look; clothes keep clear of the colours
+   that mean something here (a strong blue, violet, orange, green or amber), so a sweater never reads as a check that passed. */
+const AG_CAST={
+  jun:  {name:"Jun Park",role:"Analytics engineer",skin:[226,186,150],hair:{style:"side",c:[24,22,26]},glasses:[40,44,54],top:{kind:"sweater",c:[62,120,112]},breath:0.29},
+  yusuf:{name:"Yusuf Demir",role:"Data governance lead",skin:[204,160,124],hair:{style:"side",c:[38,30,28]},beard:[44,34,30],top:{kind:"blazer",c:[150,92,72],inner:[236,232,222]},breath:0.25},
+  mei:  {name:"Mei Tanaka",role:"Registrar's office",skin:[232,194,164],hair:{style:"bun",c:[26,24,30]},earrings:[226,196,140],top:{kind:"cardigan",c:[116,134,118],inner:[236,236,230]},breath:0.31},
+  noor: {name:"Noor Rahman",role:"Data architect",skin:[176,124,92],hair:{style:"long",c:[24,20,22]},earrings:[208,214,226],top:{kind:"blazer",c:[66,86,100],inner:[226,232,240]},breath:0.27},
+  sam:  {name:"Sam Okafor",role:"Data platform",skin:[112,72,50],hair:{style:"coily",c:[30,24,22]},glasses:[28,30,38],top:{kind:"overshirt",c:[78,98,110],inner:[212,220,232]},lanyard:true,breath:0.24},
+  anil: {name:"Anil Kurian",role:"Faculty of Health",skin:[156,106,78],hair:{style:"cropped",c:[30,26,26]},top:{kind:"cardigan",c:[124,84,98],inner:[232,234,238]},breath:0.28},
+  clara:{name:"Clara Jensen",role:"Planning",skin:[238,204,180],hair:{style:"bob",c:[150,108,66],streak:[200,164,116]},earrings:[226,196,140],top:{kind:"sweater",c:[196,168,128]},breath:0.3},
+  david:{name:"Prof. David Mensah",role:"Deputy Vice-Chancellor",skin:[78,50,36],hair:{style:"cropped",c:[190,190,192]},beard:[196,196,198],top:{kind:"suit",c:[46,54,74],inner:[234,238,244],tie:[96,62,70]},breath:0.23}
+};
+
+/* ---------------------------------------------------------------- painting a person once */
+const AG_PEOPLE={};   // kept pictures, by person
+const ag_dk=(c,k)=>mix(c,[0,0,0],k),ag_lt=(c,k)=>mix(c,[255,255,255],k);
+function ag_spec(who){return typeof who==="string"?AG_CAST[who]:who;}
+function ag_colours(P){const sk=P.skin,sw=P.top.c;return{
+  skinBase:mix(sk,ag_dk(sk,0.35),0.3),skinHi:mix(sk,[255,240,228],0.42),skinShade:rgba(mix(sk,[40,14,6],0.62),0.42),skin:sk,
+  topBase:ag_dk(sw,0.08),topHi:ag_lt(sw,0.4),topShade:rgba(ag_dk(sw,0.75),0.4),top:sw,
+  hair:P.hair.c,hairHi:mix(P.hair.c,[150,156,180],0.45),
+  brow:rgba(ag_dk(P.hair.c.map((v,i)=>Math.min(v,P.skin[i])),0.3),0.95),lid:rgba(mix(sk,[30,14,10],0.65),0.6),line:rgba(mix(sk,[70,24,14],0.55),0.85),
+  lip:rgba(mix(sk,[150,60,60],0.5),0.9)};}
+// one picture of figure space at the person's resolution: paint(c) draws in figure space
+function ag_layer(paint,box){const R=AG_FIG.res,b=box||AG_FIG.box,cv=mkCanvas(Math.ceil((b[2]-b[0])*R),Math.ceil((b[3]-b[1])*R)),c=cv.getContext("2d");
+  c.scale(R,R);c.translate(-b[0],-b[1]);paint(c);return{cv,box:b};}
+function ag_drawLayer(ctx,L){const b=L.box;ctx.drawImage(L.cv,b[0],b[1],b[2]-b[0],b[3]-b[1]);}
+// the clothes' details: openings, collars, lapels, buttons, a lanyard, and the clothes of other times
+function ag_neckline(c,P,C){const k=P.top.kind,inner=P.top.inner||[236,234,228];
+  const V=(bot,wide)=>{c.moveTo(236,566);c.bezierCurveTo(262,640,292,740,bot[0],bot[1]);c.bezierCurveTo(336,740,350,660,358+wide,606);c.bezierCurveTo(320,622,268,612,236,566);c.closePath();};
+  if(k==="sweater"){ag_soft(c,AG_F.collar,ag_lt(P.top.c,0.14),ag_lt(P.top.c,0.3),330,600,80,rgba(ag_dk(P.top.c,0.7),0.35),8);return;}
+  if(k==="cardigan"||k==="blazer"||k==="suit"||k==="overshirt"){const bot=k==="cardigan"?[318,846]:k==="overshirt"?[312,1100]:[326,880];
+    // the shirt or tee inside the opening, its own neckline, then the opening's edges
+    c.save();ag_shape(c,AG_F.torso);c.clip();ag_soft(c,cc=>V(bot,0),inner,ag_lt(inner,0.5),330,690,160,rgba(ag_dk(inner,0.6),0.3),14);
+    if(k==="blazer"||k==="suit"){ag_soft(c,cc=>{cc.moveTo(238,566);cc.lineTo(270,650);cc.lineTo(298,612);cc.closePath();cc.moveTo(356,604);cc.lineTo(344,654);cc.lineTo(320,614);cc.closePath();},
+        ag_lt(inner,0.2),[255,255,255],300,600,80,rgba(ag_dk(inner,0.6),0.35),6);
+      if(P.top.tie){ag_soft(c,cc=>{cc.moveTo(302,616);cc.lineTo(322,614);cc.lineTo(330,640);cc.lineTo(338,800);cc.lineTo(318,834);cc.lineTo(302,800);cc.lineTo(306,642);cc.closePath();},P.top.tie,ag_lt(P.top.tie,0.3),326,680,90,rgba(ag_dk(P.top.tie,0.7),0.4),8);}
+      // the lapels: a soft fold back on each side of the opening, the near one wider
+      const lap=(cc)=>{cc.moveTo(236,566);cc.bezierCurveTo(250,610,262,650,266,690);cc.lineTo(236,700);cc.bezierCurveTo(258,760,286,820,326,880);cc.bezierCurveTo(288,760,262,660,236,566);cc.closePath();
+        cc.moveTo(358,606);cc.bezierCurveTo(356,640,352,664,350,690);cc.lineTo(372,700);cc.bezierCurveTo(362,780,346,840,326,880);cc.bezierCurveTo(342,780,352,690,358,606);cc.closePath();};
+      ag_soft(c,lap,ag_lt(P.top.c,0.06),ag_lt(P.top.c,0.3),340,700,140,rgba(ag_dk(P.top.c,0.7),0.4),8);}
+    else{ag_soft(c,cc=>{cc.moveTo(250,580);cc.bezierCurveTo(280,604,326,612,352,604);cc.lineTo(354,614);cc.bezierCurveTo(320,626,272,620,246,592);cc.closePath();},ag_dk(inner,0.06),ag_lt(inner,0.4),320,600,60,null);
+      c.strokeStyle=rgba(ag_dk(P.top.c,0.35),0.6);c.lineWidth=3;c.beginPath();V(bot,0);c.stroke();
+      if(k==="cardigan"){for(const u of [0.42,0.62,0.82]){const y=lerp(640,846,u),x=lerp(270,318,u)+4;c.fillStyle=rgba(ag_lt(P.top.c,0.3),1);c.beginPath();c.arc(x+20,y,5.5,0,TAU);c.fill();c.strokeStyle=rgba(ag_dk(P.top.c,0.5),0.6);c.lineWidth=1.4;c.stroke();}}}
+    c.restore();return;}
+  if(k==="shirt"){c.save();ag_shape(c,AG_F.torso);c.clip();c.strokeStyle=rgba(ag_dk(P.top.c,0.3),0.5);c.lineWidth=2.4;c.beginPath();c.moveTo(316,616);c.bezierCurveTo(318,760,322,900,326,1100);c.stroke();
+    for(const y of [700,800,900,1000]){c.fillStyle=rgba(ag_lt(P.top.c,0.5),1);c.beginPath();c.arc(320+(y-616)/484*8,y,4.5,0,TAU);c.fill();}c.restore();
+    ag_soft(c,cc=>{cc.moveTo(236,562);cc.lineTo(276,644);cc.lineTo(304,612);cc.bezierCurveTo(280,606,252,590,236,562);cc.closePath();cc.moveTo(358,602);cc.lineTo(344,656);cc.lineTo(318,614);cc.bezierCurveTo(334,612,348,608,358,602);cc.closePath();},
+      ag_lt(P.top.c,0.1),ag_lt(P.top.c,0.45),300,600,80,rgba(ag_dk(P.top.c,0.6),0.35),6);return;}
+  if(k==="robe"){const band=P.top.band||ag_dk(P.top.c,0.35),inner2=P.top.inner||[232,226,212];
+    c.save();ag_shape(c,AG_F.torso);c.clip();
+    // the crossed collar: the inner robe's edge at the neck, then the outer's wide band from the far side of the neck down under the near arm
+    ag_soft(c,cc=>{cc.moveTo(236,566);cc.bezierCurveTo(270,600,320,616,358,604);cc.lineTo(350,640);cc.bezierCurveTo(300,650,262,628,236,598);cc.closePath();},inner2,ag_lt(inner2,0.5),320,610,70,null);
+    ag_soft(c,cc=>{cc.moveTo(362,600);cc.bezierCurveTo(330,690,240,800,120,880);cc.lineTo(120,940);cc.bezierCurveTo(250,850,350,740,396,624);cc.closePath();},band,ag_lt(band,0.3),330,700,160,rgba(ag_dk(band,0.7),0.4),8);
+    c.restore();return;}
+  if(k==="tunic"){ag_soft(c,AG_F.collar,ag_dk(P.top.c,0.1),ag_lt(P.top.c,0.25),330,600,80,rgba(ag_dk(P.top.c,0.7),0.35),8);
+    c.strokeStyle=rgba(ag_dk(P.top.c,0.45),0.7);c.lineWidth=2.6;c.beginPath();c.moveTo(304,620);c.lineTo(308,690);c.stroke();
+    if(P.top.belt){c.save();ag_shape(c,AG_F.torso);c.clip();ag_soft(c,cc=>{cc.rect(80,986,360,34);},P.top.belt,ag_lt(P.top.belt,0.3),330,996,120,null);c.restore();}return;}
+  if(k==="apron"){const ap=P.top.apron||[150,120,90];ag_soft(c,AG_F.collar,ag_dk(P.top.c,0.06),ag_lt(P.top.c,0.3),330,600,80,rgba(ag_dk(P.top.c,0.6),0.3),8);
+    c.save();ag_shape(c,AG_F.torso);c.clip();
+    c.strokeStyle=rgba(ag_dk(ap,0.15),1);c.lineWidth=12;c.lineCap="round";c.beginPath();c.moveTo(246,590);c.bezierCurveTo(254,640,262,690,270,724);c.moveTo(356,612);c.bezierCurveTo(360,650,364,690,366,724);c.stroke();
+    ag_soft(c,cc=>{cc.moveTo(256,720);cc.lineTo(380,716);cc.bezierCurveTo(386,820,392,940,404,1100);cc.lineTo(196,1100);cc.bezierCurveTo(216,960,240,840,256,720);cc.closePath();},ap,ag_lt(ap,0.3),350,800,240,rgba(ag_dk(ap,0.7),0.4),16);
+    c.restore();return;}}
+function ag_lanyard(c){c.save();ag_shape(c,AG_F.torso);c.clip();c.strokeStyle=rgba(AG.blue,0.85);c.lineWidth=7;c.lineCap="round";
+  c.beginPath();c.moveTo(246,586);c.bezierCurveTo(262,680,290,760,304,806);c.moveTo(352,612);c.bezierCurveTo(342,690,326,760,314,806);c.stroke();
+  ag_soft(c,cc=>ag_rect(cc,280,800,56,74,7),[244,243,240],[255,255,255],300,810,60,"rgba(46,38,28,0.3)",6);c.fillStyle=rgba(AG.blue,0.85);c.fillRect(286,808,44,10);c.restore();}
+// the ear, in three-quarter view: its outer rim and the fold inside
+function ag_ear(c,P,C){ag_soft(c,AG_F.ear,mix(P.skin,ag_dk(P.skin,0.4),0.2),P.skin,246,424,30,C.skinShade,10);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.6);c.lineWidth=2;ag_shape(c,AG_F.earIn);c.stroke();}
+// the head: skin, hair, the ear, then the face's fixed lines; eyes and mouth come live
+function ag_paintHead(c,P,C){const st=P.hair.style;
+  ag_soft(c,AG_F.head,C.skinBase,C.skinHi,362,400,170,C.skinShade,26);
+  c.save();ag_shape(c,AG_F.head);c.clip();let g=c.createRadialGradient(340,458,0,340,458,30);g.addColorStop(0,rgba(mix(P.skin,[230,110,100],0.5),0.24));g.addColorStop(1,rgba([230,120,110],0));
+  c.fillStyle=g;c.fillRect(296,416,100,90);
+  c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.4),0.2);c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(274,490);c.quadraticCurveTo(296,510,322,519);c.stroke();c.restore();
+  if(P.beard){const bd=P.beard;c.save();ag_shape(c,AG_F.head);c.clip();
+    const beard=cc=>{cc.moveTo(274,426);cc.bezierCurveTo(270,454,258,480,262,496);cc.bezierCurveTo(272,522,330,540,360,538);cc.bezierCurveTo(378,536,392,520,392,500);
+      cc.bezierCurveTo(386,494,376,491,366,493);cc.bezierCurveTo(356,495,346,490,347,483);cc.bezierCurveTo(354,475,372,471,392,471);cc.lineTo(398,463);
+      cc.bezierCurveTo(382,460,364,462,350,468);cc.bezierCurveTo(338,474,326,466,320,452);cc.bezierCurveTo(314,440,300,430,288,424);cc.closePath();};
+    ag_soft(c,beard,bd,mix(bd,[150,150,160],0.4),360,500,60,"rgba(0,0,0,0.35)",8);c.restore();}
+  if(st==="bun")ag_soft(c,AG_HAIR.knot,P.hair.c,C.hairHi,214,300,50,"rgba(0,0,0,0.5)",12);
+  if(st!=="shaved"){const hf=AG_HAIR[st]||AG_HAIR.side;ag_soft(c,hf,P.hair.c,C.hairHi,336,300,110,"rgba(0,0,0,0.5)",18);
+    c.save();ag_shape(c,hf);c.clip();c.strokeStyle=rgba(ag_lt(P.hair.c,0.55),0.16);c.lineWidth=1.8;c.lineCap="round";
+    for(const s of (AG_STRANDS[st]||[])){c.beginPath();c.moveTo(s[0][0],s[0][1]);c.quadraticCurveTo(s[1][0],s[1][1],s[2][0],s[2][1]);c.stroke();}
+    if(st==="coily"){const R=ag_rnd(41);c.fillStyle=rgba(ag_lt(P.hair.c,0.35),0.22);for(let i=0;i<260;i++){const x=200+R()*200,y=276+R()*190;c.beginPath();c.arc(x,y,1.6+R()*2.2,0,TAU);c.fill();}}
+    // close-cropped hair: short strokes, and the skin showing faintly through at the edges
+    if(st==="cropped"){const R=ag_rnd(43);c.lineWidth=1.6;for(let i=0;i<520;i++){const x=200+R()*196,y=280+R()*180,a=-0.9+R()*0.5;c.strokeStyle=rgba(i%3?ag_dk(P.hair.c,0.3):ag_lt(P.hair.c,0.4),0.28);
+        c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.cos(a)*5,y+Math.sin(a)*5);c.stroke();}
+      ag_inner(c,hf,rgba(P.skin,0.55),14,0,0);}
+    if(st==="bob"){c.strokeStyle=rgba(ag_dk(P.hair.c,0.4),0.3);c.lineWidth=2.4;c.beginPath();c.moveTo(318,300);c.quadraticCurveTo(306,330,300,362);c.moveTo(250,330);c.quadraticCurveTo(222,420,250,512);c.stroke();}
+    if(P.hair.streak){c.strokeStyle=rgba(P.hair.streak,0.5);c.lineWidth=5;c.beginPath();c.moveTo(270,296);c.quadraticCurveTo(320,288,378,316);c.stroke();}
+    c.strokeStyle=rgba(mix(P.skin,[210,170,150],0.5),0.45);c.lineWidth=2.2;if(st==="side"){c.beginPath();c.moveTo(262,301);c.quadraticCurveTo(300,289,344,295);c.stroke();}c.restore();}
+  else{c.save();ag_shape(c,AG_F.head);c.clip();const g2=c.createLinearGradient(0,296,0,380);g2.addColorStop(0,rgba(ag_dk(P.skin,0.25),0.25));g2.addColorStop(1,rgba(ag_dk(P.skin,0.25),0));c.fillStyle=g2;c.fillRect(200,290,200,100);c.restore();}
+  // the ear, over the hair, except where the hair falls over it
+  if(st!=="bob"&&st!=="long"){ag_ear(c,P,C);if(P.earrings){const L=AG_FACE.lobe;ag_soft(c,cc=>cc.arc(L[0],L[1],6,0,TAU),P.earrings,[255,255,255],L[0]-2,L[1]-3,6,null);}}
+  // brows, lids, the nose, the glasses
+  // the brows: the near one long, the far one short, foreshortened as it turns away
+  c.lineCap="round";c.strokeStyle=C.brow;c.lineWidth=5;c.beginPath();c.moveTo(311,402);c.quadraticCurveTo(331,390,355,395);c.stroke();
+  c.lineWidth=4;c.beginPath();c.moveTo(367,397);c.quadraticCurveTo(377,392,387,398);c.stroke();
+  c.strokeStyle=C.lid;c.lineWidth=2.4;c.beginPath();c.moveTo(322,414);c.quadraticCurveTo(333,407,345,412);c.stroke();
+  c.beginPath();c.moveTo(372,412);c.quadraticCurveTo(377,408,383,411);c.stroke();
+  // the nose: its tip on the outline, and inside only one small curve for the near nostril's wing, open towards the tip and fuller as it
+  // turns under, with no shade on it (the author chose this of four drafts: a second curve inside the tip, as there was, read as a squiggle)
+  ag_taper(c,[377,455],[370,455],[368,464],[376,465],1,2.3,C.line);
+  // glasses: the near lens over the near eye, the far lens narrower, its outer rim just past the cheek, the arm back to the ear
+  if(P.glasses){c.strokeStyle=rgba(P.glasses,0.95);c.lineWidth=3.4;rr(c,311,401,45,32,10);c.stroke();rr(c,366,401,22,30,8);c.stroke();
+    c.beginPath();c.moveTo(356,415);c.quadraticCurveTo(361,411,366,414);c.stroke();c.beginPath();c.moveTo(311,413);c.lineTo(268,409);c.stroke();
+    c.strokeStyle="rgba(255,255,255,0.85)";c.lineWidth=2;c.beginPath();c.moveTo(345,406);c.lineTo(352,411);c.stroke();}
+  if(P.hat&&P.hat.paint)P.hat.paint(c,P);}
+// the body: the far arm if it hangs, the torso and its clothes, the near arm if it hangs, the neck; arms that move are drawn live.
+// near, far: true when that arm hangs (and is painted here)
+function ag_paintBody(c,P,C,near,far){const sw=P.top.c;
+  if(P.hair.style==="long")ag_soft(c,AG_HAIR.longBack,ag_dk(P.hair.c,0.1),C.hairHi,250,500,160,"rgba(0,0,0,0.45)",16);
+  if(far)ag_soft(c,AG_F.farArm,ag_dk(sw,0.18),ag_lt(sw,0.28),474,700,140,rgba(ag_dk(sw,0.8),0.42),24);
+  ag_soft(c,AG_F.torso,C.topBase,C.topHi,400,690,300,C.topShade,30);
+  if(near){c.save();ag_shape(c,AG_F.torso);c.clip();c.shadowColor=rgba(ag_dk(sw,0.85),0.35);c.shadowBlur=18;c.shadowOffsetX=10000+10;c.translate(-10000,0);ag_shape(c,AG_F.arm);c.fill();c.restore();}
+  ag_folds(c,AG_F.torso,AG_FOLDS,rgba(ag_dk(sw,0.7),0.2),"rgba(255,255,255,0.16)");
+  ag_neckline(c,P,C);if(P.top.paint)P.top.paint(c,P);
+  if(near){ag_soft(c,AG_F.arm,ag_dk(sw,0.2),ag_lt(sw,0.25),150,660,170,rgba(ag_dk(sw,0.8),0.4),26);
+    ag_folds(c,AG_F.arm,AG_ARMFOLDS,rgba(ag_dk(sw,0.75),0.2),"rgba(255,255,255,0.1)");
+    c.save();ag_shape(c,AG_F.arm);c.clip();const eg=c.createRadialGradient(196,966,0,196,966,46);eg.addColorStop(0,rgba(ag_dk(sw,0.8),0.22));eg.addColorStop(1,rgba(ag_dk(sw,0.8),0));c.fillStyle=eg;c.fillRect(140,910,120,120);c.restore();}
+  if(P.lanyard)ag_lanyard(c);
+  ag_soft(c,AG_F.neck,mix(P.skin,ag_dk(P.skin,0.4),0.22),P.skin,330,548,110,C.skinShade,18);
+  c.save();ag_shape(c,AG_F.neck);c.clip();const ng=c.createLinearGradient(0,512,0,572);ng.addColorStop(0,rgba(mix(P.skin,[60,20,10],0.6),0.5));ng.addColorStop(1,rgba(mix(P.skin,[60,20,10],0.6),0));
+  c.fillStyle=ng;c.fillRect(226,420,150,160);c.strokeStyle=rgba(mix(P.skin,[90,40,30],0.5),0.16);c.lineWidth=2.2;c.lineCap="round";c.beginPath();c.moveTo(286,512);c.quadraticCurveTo(302,548,318,582);c.stroke();c.restore();
+  // the collar closes over the neck: the neckline again, only its band
+  if(P.top.kind==="sweater")ag_soft(c,AG_F.collar,ag_lt(sw,0.14),ag_lt(sw,0.3),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
+  else if(P.top.kind==="tunic"||P.top.kind==="apron")ag_soft(c,AG_F.collar,ag_dk(sw,P.top.kind==="tunic"?0.1:0.06),ag_lt(sw,0.25),330,600,80,rgba(ag_dk(sw,0.7),0.35),8);
+  else ag_neckline(c,P,C);}
+// a person's kept pictures: the head; the body with both arms down, with only the far arm down, and with neither
+function ag_fig(who){const P=ag_spec(who),k=P.key||P.name;let F=AG_PEOPLE[k];if(F)return F;const C=ag_colours(P);
+  F=AG_PEOPLE[k]={P,C,head:ag_layer(c=>ag_paintHead(c,P,C),[160,250,440,560]),bodies:{}};return F;}
+function ag_figBody(F,near,far){const k=(near?1:0)+(far?2:0);return F.bodies[k]||(F.bodies[k]=ag_layer(c=>ag_paintBody(c,F.P,F.C,near,far)));}
+
+/* ---------------------------------------------------------------- arms that move
+   An arm is [upper arm, forearm, hand]: the upper arm's and the forearm's angles in degrees from straight down, positive towards the
+   way the person faces, and the hand: "rest", "hold", "point" or "open". Seen in three-quarter view, an arm reaching the way the
+   person faces also reaches towards us, so its reach across the frame is drawn shorter (AG_FIG.fore).
+   People keep their arms down, painted with the body. A live arm is only for a hand on something the story needs: a thing held
+   ("hold", with o.hold drawing it), a wheel, a switch, a dial. Pointing, an open hand while talking, a hand at the chin and forearms on
+   a desk read as wrong, so the films don't use them: at a desk, the desk hides the hanging arms (o.cut). AG_HANG is the painted arm's
+   own angles, so a hand that rises from it starts where the arm was. */
+const AG_POSES={
+  hold:   {near:[10,128,"hold"]}
+};
+const AG_HANG={near:[4,34,"rest"],far:[0,6,"rest"]};
+AG_FIG.fore=0.72;
+const ag_rad=d=>d*Math.PI/180;
+// a pose by its name: in a render or a check, a name that isn't in AG_POSES (a gesture the films no longer draw) stops the film with an
+// error that says so; the player on the site draws the arms down instead
+function ag_namedPose(p){const q=AG_POSES[p];if(!q&&window.__RENDER__)throw new Error('pose "'+p+'" is a gesture these films no longer draw: keep the arms down, or give a hand something to hold (people.js, AG_POSES)');return q;}
+function ag_poseOf(o){const get=p=>p==="hang"?{near:AG_HANG.near}:typeof p==="string"?ag_namedPose(p):p;const a=get(o.pose);if(!a)return null;const b=o.pose2?get(o.pose2):null,m=clamp(o.mix||0,0,1);
+  if(!b||m<=0)return a;if(m>=1)return b;
+  const bl=(k)=>{const x=a[k]||AG_HANG[k],y=b[k]||AG_HANG[k];return[lerp(x[0],y[0],m),lerp(x[1],y[1],m),m<0.5?x[2]:y[2]];};
+  return{near:bl("near"),far:(a.far||b.far)?bl("far"):null};}
+// where an arm's joints are: the shoulder J, the elbow, the wrist
+function ag_joints(J,spec){const f=AG_FIG.fore,a1=ag_rad(spec[0]),a2=ag_rad(spec[1]),E=[J[0]+Math.sin(a1)*AG_FIG.L1*f,J[1]+Math.cos(a1)*AG_FIG.L1],
+  Wr=[E[0]+Math.sin(a2)*AG_FIG.L2*f,E[1]+Math.cos(a2)*AG_FIG.L2];return{J,E,Wr};}
+// a tapered capsule from A (width wa) to B (width wb), as part of a shape
+function ag_capsule(c,A,B,wa,wb){const dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,nx=-uy,ny=ux,ra=wa/2,rb=wb/2,an=Math.atan2(uy,ux);
+  c.moveTo(A[0]+nx*ra,A[1]+ny*ra);c.lineTo(B[0]+nx*rb,B[1]+ny*rb);c.arc(B[0],B[1],rb,an+Math.PI/2,an-Math.PI/2,true);c.lineTo(A[0]-nx*ra,A[1]-ny*ra);c.arc(A[0],A[1],ra,an-Math.PI/2,an-3*Math.PI/2,true);c.closePath();}
+// an arm's outline: the upper arm and the forearm, tapering from the shoulder to the wrist, with a rounded elbow
+function ag_armPath(J,E,Wr,w){const d1=[E[0]-J[0],E[1]-J[1]],d2=[Wr[0]-E[0],Wr[1]-E[1]],l1=Math.hypot(d1[0],d1[1])||1,l2=Math.hypot(d2[0],d2[1])||1;
+  const u1=[d1[0]/l1,d1[1]/l1],u2=[d2[0]/l2,d2[1]/l2],turn=Math.atan2(u1[0]*u2[1]-u1[1]*u2[0],u1[0]*u2[0]+u1[1]*u2[1]),
+    r=w[1]*0.56,k=Math.min(Math.abs(Math.tan(turn/2))*r,l1*0.45,l2*0.45);
+  // the centre line: along the upper arm, round the elbow, along the forearm, with each point's width
+  const pts=[],add=(x,y,wd)=>pts.push([x,y,wd]),n1=10,n2=10,na=8;
+  for(let i=0;i<=n1;i++){const u=i/n1,d=u*(l1-k);add(J[0]+u1[0]*d,J[1]+u1[1]*d,lerp(w[0],w[1],u*0.94));}
+  const A=[E[0]-u1[0]*k,E[1]-u1[1]*k],B=[E[0]+u2[0]*k,E[1]+u2[1]*k];
+  for(let i=1;i<na;i++){const u=i/na,m=1-u,q=[m*m*A[0]+2*m*u*E[0]+u*u*B[0],m*m*A[1]+2*m*u*E[1]+u*u*B[1]];add(q[0],q[1],w[1]);}
+  for(let i=0;i<=n2;i++){const u=i/n2,d=k+u*(l2-k);const bulge=Math.sin(Math.min(1,u*2.2)*Math.PI)*0.05;add(E[0]+u2[0]*d,E[1]+u2[1]*d,lerp(w[1],w[2],u)*(1+bulge));}
+  // each side, offset from the centre line; on the inside of the bend a point that would fold back over the last is left out
+  const L=[],R=[],keep=(S,x,y,tx,ty)=>{const l=S[S.length-1];if(!l||(x-l[0])*tx+(y-l[1])*ty>0.5)S.push([x,y]);};
+  for(let i=0;i<pts.length;i++){const p=pts[i],q=pts[Math.min(pts.length-1,i+1)],o=pts[Math.max(0,i-1)],dx=q[0]-o[0],dy=q[1]-o[1],dl=Math.hypot(dx,dy)||1,tx=dx/dl,ty=dy/dl,nx=-ty,ny=tx;
+    keep(L,p[0]+nx*p[2]/2,p[1]+ny*p[2]/2,tx,ty);keep(R,p[0]-nx*p[2]/2,p[1]-ny*p[2]/2,tx,ty);}
+  return c=>{const e=pts[pts.length-1],an=Math.atan2(u2[1],u2[0]),s0=pts[0],a0=Math.atan2(u1[1],u1[0]);c.moveTo(L[0][0],L[0][1]);
+    for(let i=1;i<L.length;i++){const m=[(L[i-1][0]+L[i][0])/2,(L[i-1][1]+L[i][1])/2];c.quadraticCurveTo(L[i-1][0],L[i-1][1],m[0],m[1]);}c.lineTo(L[L.length-1][0],L[L.length-1][1]);
+    c.arc(e[0],e[1],e[2]/2,an+Math.PI/2,an-Math.PI/2,true);
+    for(let i=R.length-2;i>=0;i--){const m=[(R[i+1][0]+R[i][0])/2,(R[i+1][1]+R[i][1])/2];c.quadraticCurveTo(R[i+1][0],R[i+1][1],m[0],m[1]);}c.lineTo(R[0][0],R[0][1]);
+    c.arc(s0[0],s0[1],s0[2]/2,a0-Math.PI/2,a0-3*Math.PI/2,true);c.closePath();};}
+// a hand at the wrist, pointing along a (radians), in figure space: "rest", "hold", "point" or "open"; up: the thumb's side
+function ag_hand(c,Wr,a,kind,P,C,up){c.save();c.translate(Wr[0],Wr[1]);c.rotate(a);if(up<0)c.scale(1,-1);
+  const sk=P.skin,path=cc=>{if(kind==="open"){cc.moveTo(-4,-28);cc.bezierCurveTo(40,-36,108,-32,150,-16);cc.bezierCurveTo(162,-10,162,4,150,8);cc.bezierCurveTo(108,20,50,30,-4,28);cc.closePath();}
+      else if(kind==="point"){cc.moveTo(-4,-28);cc.bezierCurveTo(30,-34,68,-32,92,-22);cc.lineTo(150,-18);cc.bezierCurveTo(162,-17,162,-4,150,-3);cc.lineTo(100,-1);cc.bezierCurveTo(108,10,104,24,90,28);cc.bezierCurveTo(58,34,24,32,-4,28);cc.closePath();}
+      else{cc.moveTo(-4,-28);cc.bezierCurveTo(34,-36,76,-34,98,-20);cc.bezierCurveTo(116,-8,116,16,98,26);cc.bezierCurveTo(66,36,24,34,-4,28);cc.closePath();}};
+  const thumb=cc=>{if(kind==="open"){cc.moveTo(18,-26);cc.bezierCurveTo(38,-56,66,-66,82,-60);cc.bezierCurveTo(90,-54,80,-44,62,-36);cc.bezierCurveTo(48,-30,38,-28,28,-24);cc.closePath();}
+      else{cc.moveTo(20,-26);cc.bezierCurveTo(44,-44,72,-46,90,-36);cc.bezierCurveTo(98,-30,92,-20,78,-19);cc.bezierCurveTo(60,-18,42,-20,28,-20);cc.closePath();}};
+  ag_soft(c,path,mix(sk,ag_dk(sk,0.4),0.12),mix(sk,[255,240,228],0.4),70,-22,90,C.skinShade,10);ag_soft(c,thumb,mix(sk,ag_dk(sk,0.4),0.08),mix(sk,[255,240,228],0.45),66,-44,46,C.skinShade,6);
+  if(kind==="rest"||kind==="hold"){c.strokeStyle=rgba(mix(sk,[70,24,14],0.5),0.32);c.lineWidth=2;c.lineCap="round";for(const y of [-6,6,17]){c.beginPath();c.moveTo(84,y);c.quadraticCurveTo(98,y+2,106,y+6);c.stroke();}}
+  c.restore();}
+// one arm, matte like the clothes: the sleeve, a crease inside the elbow, the cuff, the hand; returns its joints
+function ag_arm(c,P,C,J,spec,back){const j=ag_joints(J,spec),w=AG_FIG.w,col=back?ag_dk(P.top.c,0.14):P.top.c,
+    hx=lerp(j.J[0],j.E[0],0.3)+30,hy=lerp(j.J[1],j.E[1],0.3)-20,ah=Math.atan2(j.Wr[1]-j.E[1],j.Wr[0]-j.E[0]),u=[Math.cos(ah),Math.sin(ah)],
+    a1=Math.atan2(j.E[1]-j.J[1],j.E[0]-j.J[0]),turn=Math.abs(Math.atan2(Math.sin(ah-a1),Math.cos(ah-a1)));
+  // a gentle bend is one outline; a sharp one (the forearm folding back) is the upper arm, then the forearm over it
+  let fn;if(turn<1.25){fn=ag_armPath(j.J,j.E,j.Wr,w);ag_soft(c,fn,ag_dk(col,0.16),ag_lt(col,0.28),hx,hy,240,rgba(ag_dk(col,0.8),0.42),20);}
+  else{ag_soft(c,cc=>ag_capsule(cc,j.J,j.E,w[0],w[1]),ag_dk(col,0.16),ag_lt(col,0.28),hx,hy,240,rgba(ag_dk(col,0.8),0.42),20);
+    fn=cc=>ag_capsule(cc,j.E,j.Wr,w[1]*0.96,w[2]);ag_soft(c,fn,ag_dk(col,0.1),ag_lt(col,0.3),j.E[0]+u[0]*80+20,j.E[1]+u[1]*80-20,200,rgba(ag_dk(col,0.8),0.42),18);}
+  c.save();ag_shape(c,fn);c.clip();c.strokeStyle=rgba(ag_dk(col,0.75),0.22);c.lineWidth=3;c.lineCap="round";const m=[j.E[0]+u[0]*60,j.E[1]+u[1]*60];
+  c.beginPath();c.moveTo(j.E[0]-u[1]*18,j.E[1]+u[0]*18);c.quadraticCurveTo(j.E[0]+u[0]*20,j.E[1]+u[1]*20,m[0]+u[1]*10,m[1]-u[0]*10);c.stroke();c.restore();
+  // the hand: the thumb on the side away from the body (up when the forearm points forward, towards us when it rises)
+  ag_hand(c,[j.Wr[0]+u[0]*6,j.Wr[1]+u[1]*6],ah+(spec[2]==="open"?-0.3:0),spec[2]||"rest",P,C,u[0]>=0?1:-1);
+  c.save();c.translate(j.Wr[0],j.Wr[1]);c.rotate(ah);c.fillStyle=rgba(ag_dk(col,0.12),1);rr(c,-16,-w[2]/2-3,20,w[2]+6,8);c.fill();c.restore();
+  return j;}
+
+/* ---------------------------------------------------------------- drawing a person */
+function ag_person(ctx,who,x,y,s,o){o=o||{};const F=ag_fig(who),P=F.P,C=F.C,t=o.t||0,pose=o.pose&&(o.pose!=="hang"||(o.pose2&&o.mix>0))?ag_poseOf(o):null,A=AG_FIG.anchor,ph=TAU/(P.breath?1/P.breath:3.6);
+  const br=Math.sin(t*ph)*2.2,blink=o.blink!=null?o.blink:ag_blinkAt(t,P),g=o.gaze||[2,0];
+  if(window.__RENDER__&&o.cut==null&&!o.covered)ag_bottomShows(ctx,ctx.getTransform().translate(x,y).scale(o.flip?-s:s,s).translate(-A[0],-A[1]),who);
+  ctx.save();ctx.translate(x,y);ctx.scale(o.flip?-s:s,s);ctx.translate(-A[0],-A[1]);
+  ctx.save();ctx.translate(0,br);
+  let hands=null;
+  // o.cut: a height in the frame below which the body and hanging arms are hidden (behind a desk drawn first); moving arms still show
+  const body=(L)=>{if(o.cut==null)return ag_drawLayer(ctx,L);ctx.save();ctx.beginPath();ctx.rect(-4000,-4000,9000,4000+A[1]+(o.cut-y)/s-br);ctx.clip();ag_drawLayer(ctx,L);ctx.restore();};
+  if(!pose)body(ag_figBody(F,true,true));
+  else{const J=AG_FIG.shoulder,farMoves=!!pose.far;const fr=farMoves?ag_arm(ctx,P,C,J.far,pose.far,true):null;
+    body(ag_figBody(F,false,!farMoves));
+    const nj=ag_joints(J.near,pose.near||AG_HANG.near);hands={near:nj.Wr,far:fr?fr.Wr:null,nearElbow:nj.E};
+    if(o.holdBack)o.holdBack(ctx,hands);ag_arm(ctx,P,C,J.near,pose.near||AG_HANG.near,false);if(o.hold)o.hold(ctx,hands);}
+  ctx.restore();
+  // the head: breathing a little less than the body, nodding about the top of the neck
+  ctx.save();ctx.translate(AG_FIG.piv[0],AG_FIG.piv[1]+br*0.7);ctx.rotate(o.nod||0);ctx.translate(-AG_FIG.piv[0],-AG_FIG.piv[1]);
+  ag_drawLayer(ctx,F.head);
+  ag_face(ctx,P,C,blink,g,o.talk,o.smile==null?0.3:o.smile);
+  ctx.restore();
+  // o.front: a thing the near hand holds up before the face, over the head (drawn with hold, it would sit behind the face)
+  if(o.front&&hands){ctx.save();ctx.translate(0,br);o.front(ctx,hands);ctx.restore();}
+  ctx.restore();return hands;}
+// the face's live parts, in figure space: the eyes (blink 0 to 1, gaze [dx, dy]) and the mouth (talk 0 to 1, smile 0 to 1)
+function ag_face(ctx,P,C,blink,g,talk,smile){const F=AG_FACE,by=Math.max(0.12,1-(blink||0));g=g||[2,0];ctx.fillStyle="#1a1416";
+  ctx.save();ctx.translate(F.eyeN[0]+g[0],F.eyeN[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeN[2],F.eyeN[3],0,0,TAU);ctx.fill();ctx.restore();
+  ctx.save();ctx.translate(F.eyeF[0]+g[0]*0.7,F.eyeF[1]+g[1]);ctx.scale(1,by);ctx.beginPath();ctx.ellipse(0,0,F.eyeF[2],F.eyeF[3],0,0,TAU);ctx.fill();ctx.restore();
+  const tk=clamp(talk||0,0,1),sm=clamp(smile||0,0,1),[a,m,b]=F.mouth;
+  if(tk>0.04){ctx.fillStyle=rgba(mix(P.skin,[60,20,24],0.7),0.9);ctx.beginPath();ctx.moveTo(a[0]+1,a[1]-1);ctx.quadraticCurveTo(m[0],m[1]-1-sm*3,b[0],b[1]-1);ctx.quadraticCurveTo(m[0]+2,m[1]+1+tk*10,a[0]+1,a[1]-1);ctx.fill();}
+  else{ctx.strokeStyle=C.line;ctx.lineWidth=3;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(a[0],a[1]-sm*1.5);ctx.quadraticCurveTo(m[0],m[1]+sm*3,b[0],b[1]-sm*1.5);ctx.stroke();}}
+// a person fading in or out is drawn whole first, then laid on the picture at that opacity. Drawn straight at a part opacity, the
+// parts that make them (the far arm, the body, the near arm, the head) each fade on their own, so the body shows through the arm in
+// front of it and the arm behind shows through the body, like a ghost. Only the part of the frame they're drawn in is used (AG_FADE,
+// the size of the canvas, kept); what they hold is drawn with them
+let AG_FADE=null;
+const ag_personWhole=ag_person;
+ag_person=function(ctx,who,x,y,s,o){const a=ctx.globalAlpha;if(a>=0.995||a<0.004||ctx.globalCompositeOperation!=="source-over")return ag_personWhole.apply(this,arguments);
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o&&o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-900,-500],[1500,-500],[-900,1300],[1500,1300]]){const X=M.a*fx+M.c*fy+M.e,Y=M.b*fx+M.d*fy+M.f;
+    L=Math.min(L,X);R=Math.max(R,X);T0=Math.min(T0,Y);B=Math.max(B,Y);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return ag_personWhole.apply(this,arguments);
+  if(!AG_FADE||AG_FADE.width!==cw||AG_FADE.height!==ch)AG_FADE=mkCanvas(cw,ch);const bx=AG_FADE.getContext("2d");
+  bx.setTransform(1,0,0,1,0,0);bx.globalAlpha=1;bx.globalCompositeOperation="source-over";bx.clearRect(L,T0,R-L,B-T0);
+  bx.save();bx.beginPath();bx.rect(L,T0,R-L,B-T0);bx.clip();bx.setTransform(m);let hands;try{hands=ag_personWhole.call(this,bx,who,x,y,s,o);}finally{bx.restore();}
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(AG_FADE,L,T0,R-L,B-T0,L,T0,R-L,B-T0);ctx.restore();return hands;};
+// people end flat at figure y 1100, under the waist: in a render or a check, a person whose flat bottom shows inside the picture
+// stops the film with an error that says so (move them down or make them bigger, draw a desk or a card over them and say o.cut or
+// o.covered); the player on the site never stops for it
+function ag_bottomShows(ctx,m,who){const c=ctx.canvas,ys=[30,500].map(fx=>m.b*fx+m.d*1103+m.f),xs=[30,500].map(fx=>m.a*fx+m.c*1103+m.e);
+  if(Math.max(...ys)<c.height-0.5&&Math.max(...xs)>0&&Math.min(...xs)<c.width)
+    throw new Error("a person ("+(typeof who==="string"?who:who.name||"?")+") ends at y "+Math.round(Math.max(...ys)/c.height*1080)+" of 1080, inside the picture: put them lower or bigger (y + 504 s at least 1080), or cover their waist and say o.cut or o.covered");}
+// blinks at the person's own moments, every three to six seconds, each about a seventh of a second
+function ag_blinkAt(t,P){const seed=(P.name||"x").length*7.3;const k=Math.floor(t/4.3+seed),ph=t-((k-seed)*4.3+1.6+2.2*hash(k,seed));return ph>0&&ph<0.14?Math.sin(ph/0.14*Math.PI):0;}
+// a talking mouth for a line: open and close with the voice, from the line's cue to its end (sc.cues, sc.ends)
+function ag_talk(sc,id,t){const a=sc.cues[id],b=sc.ends[id];if(t<a||t>b)return 0;return (0.35+0.35*Math.sin(t*17.1)+0.3*Math.sin(t*9.7+1))*sstep(a,a+0.1,t)*(1-sstep(b-0.1,b,t));}
+
+/* ===== What an agent is: the agent =====
+   The model is a matte ceramic sphere with a band of violet light that glows while it thinks; the loop is a bent oak ring with small
+   graphite arrows, its steps (Plan, Act, Check) matte pills on the ring; the hands are pale robot arms with oak joints and graphite
+   grippers, reaching into tools: matte cards that take a blue edge when touched, with a lock when they only read. Data coming back is
+   small orange pellets along an arm; a check that passes is a green pill, one that fails or sends the agent round again an amber one.
+     ag_model(ctx, x, y, r, o)      the sphere: o.core 0 to 1 (how lit the band is), o.think 0 to 1 (the light runs faster), o.t,
+                                    o.label (words under the band, at least 28 px, or below the sphere when it's small), o.a;
+                                    o.only "light" draws the band's light alone, glowing, to draw again over a night pass
+     ag_modelLight(ctx, x, y, r, a) the violet light the sphere throws on the wall behind it, and its soft shadow on the floor (o.floor)
+     ag_ring(ctx, x, y, R, o)       o.p 0 to 1 drawn, from o.from degrees (-120: top left); o.arrows, degrees; o.pulse {deg, a}
+     ag_step(ctx, x, y, label, o)   a step on the ring: o.on (its colour while lit), o.a, o.k (scale); returns its box
+     ag_loop(ctx, x, y, o)          the model in its ring with its steps: o.R (180), o.r (88), o.steps [[label, degrees], ...] (Plan,
+                                    Act, Check), o.p, o.core, o.think, o.lit (the lit step's index), o.col (its colour), o.pulse, o.a, o.t
+     ag_reach(ctx, p, u, o)         a hand along the curve p ([x0,y0, x1,y1, x2,y2, x3,y3]) out to u (0 to 1): o.data 0 to 1 sends
+                                    pellets back along it, o.grip 0 to 1 closes the gripper (it closes by itself near the end)
+     ag_tool(ctx, x, y, w, h, name, o) a tool: o.sub ("read only"), o.icon ("lock", "draft" or null), o.touch 0 to 1, o.a, o.col
+     ag_pellet(ctx, x, y, a)        one pellet of data
+     ag_verdict(ctx, x, y, text, kind, a) centred on (x, y): kind "pass" (green, a tick), "loop" (amber, round again), "fail" (amber, a warning)
+     ag_badge(ctx, x, y, text, o)   a badge on a blue lanyard hanging from (x, y), as a person's would (who the agent is, or is
+                                    taken for): o.t sways it a little, o.drop (90) how far below the hook it hangs, o.a */
+
+function ag_model(ctx,x,y,r,o){o=o||{};const t=o.t||0,core=o.core==null?1:o.core,think=o.think||0,sp=AG.sphere,a=o.a==null?1:o.a;if(a<=0)return;
+  if(o.only==="light")return ag_bandLight(ctx,x,y,r,t,core,think,a);
+  ctx.save();ctx.globalAlpha*=a;
+  let g=ctx.createRadialGradient(x+r*0.34,y-r*0.43,r*0.07,x,y,r*1.05);g.addColorStop(0,sp[0]);g.addColorStop(0.55,sp[1]);g.addColorStop(0.85,sp[2]);g.addColorStop(1,sp[3]);
+  ctx.save();ctx.shadowColor=AG.sphereShadow;ctx.shadowBlur=r*0.45;ctx.shadowOffsetX=AG.sdx*r/88;ctx.shadowOffsetY=r*0.27;ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill();ctx.restore();
+  ctx.save();ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.clip();
+  ctx.strokeStyle=AG.seam;ctx.lineWidth=Math.max(1,r/58);ctx.beginPath();ctx.ellipse(x,y+r*0.09,r,r*0.28,0,0,Math.PI);ctx.stroke();
+  const bw=r*1.3,bh=r*0.32,by=y-r*0.11;rr(ctx,x-bw/2,by-bh/2,bw,bh,bh/2);ctx.fillStyle=AG.visor;ctx.fill();
+  // the band's light: a soft bright patch that sweeps along it, faster while the model thinks
+  const gl=Math.min(1,0.4+0.6*core+0.3*think),sc=0.5+0.5*Math.sin(t*(1.8+5*think)*TAU/4);
+  g=ctx.createLinearGradient(x-bw/2,0,x+bw/2,0);g.addColorStop(0,rgba(AG.violet,0));g.addColorStop(clamp(sc-0.25,0.001,0.997),rgba(AG.violet,0));
+  g.addColorStop(clamp(sc,0.002,0.998),rgba(AG.visorLight,gl));g.addColorStop(clamp(sc+0.25,0.003,0.999),rgba(AG.violet,0));g.addColorStop(1,rgba(AG.violet,0));
+  const ih=bh-r*0.11;rr(ctx,x-bw/2+r*0.045,by-ih/2,bw-r*0.09,ih,ih/2);ctx.fillStyle=g;ctx.fill();
+  ctx.restore();
+  if(o.label){const big=r>=80;ag_T(ctx,o.label,x,big?y+r*0.6:y+r+44,{w:700,size:28,align:"center",col:AG.label});}
+  ctx.restore();}
+// the band's light alone, glowing: over a night pass (ag_roomLight(ctx, a, {night: true})), so the model's light shines in the dark
+function ag_bandLight(ctx,x,y,r,t,core,think,a){const bw=r*1.3,bh=r*0.32,by=y-r*0.11,ih=bh-r*0.11,sc=0.5+0.5*Math.sin(t*(1.8+5*think)*TAU/4),gl=Math.min(1,0.4+0.6*core+0.3*think);
+  ctx.save();ctx.globalAlpha*=a;ctx.globalCompositeOperation="lighter";ctx.shadowColor=rgba(AG.violet,0.9);ctx.shadowBlur=r*0.5;
+  const g=ctx.createLinearGradient(x-bw/2,0,x+bw/2,0);g.addColorStop(0,rgba(AG.violet,0.25*gl));g.addColorStop(clamp(sc,0.002,0.998),rgba(AG.visorLight,0.9*gl));g.addColorStop(1,rgba(AG.violet,0.25*gl));
+  rr(ctx,x-bw/2+r*0.045,by-ih/2,bw-r*0.09,ih,ih/2);ctx.fillStyle=g;ctx.fill();ctx.restore();}
+function ag_modelLight(ctx,x,y,r,a,floorY){a=a==null?1:a;if(a<=0)return;const g=ctx.createRadialGradient(x,y,r*0.45,x,y,r*6.4);g.addColorStop(0,rgba(AG.wallGlow,0.1*a));g.addColorStop(1,rgba(AG.wallGlow,0));
+  ctx.fillStyle=g;ctx.fillRect(x-r*6.4,y-r*6.4,r*12.8,r*12.8);if(floorY)ag_floorShadow(ctx,x,floorY,r*1.9,r*0.3,0.24*a+0.08);}
+
+function ag_ring(ctx,x,y,R,o){o=o||{};const p=o.p==null?1:o.p;if(p<=0)return;const a0=(o.from==null?-120:o.from)*Math.PI/180,a1=a0+p*TAU,k=R/180;
+  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;ctx.lineCap="round";
+  // a bent-oak ring: a soft shadow on the wall, the wood, its lit top edge
+  ctx.strokeStyle=rgba(AG.shadow,0.14);ctx.lineWidth=14*k;ctx.save();ctx.translate(AG.sdx*k,10*k);ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();ctx.restore();
+  ctx.strokeStyle=rgba(AG_OAK.dark,1);ctx.lineWidth=13*k;ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();
+  ctx.strokeStyle=rgba(AG_OAK.base,1);ctx.lineWidth=10*k;ctx.beginPath();ctx.arc(x,y,R,a0,a1);ctx.stroke();
+  ctx.strokeStyle=rgba(AG_OAK.hi,0.9);ctx.lineWidth=2.2*k;ctx.beginPath();ctx.arc(x,y,R-3*k,a0,a1);ctx.stroke();
+  ctx.strokeStyle=rgba(AG_OAK.dark,0.35);ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,R+1.5*k,a0,a1);ctx.stroke();
+  for(const d of (o.arrows||[-60,60,180])){const da=(d*Math.PI/180-a0+TAU*4)%TAU;if(da/TAU>p)continue;const a=d*Math.PI/180,px=x+Math.cos(a)*R,py=y+Math.sin(a)*R,tx=-Math.sin(a),ty=Math.cos(a);
+    const q=[16*k,9*k,12*k];ctx.save();ctx.shadowColor=rgba(AG.shadow,0.32);ctx.shadowBlur=6*k;ctx.shadowOffsetX=AG.sdx*0.4*k;ctx.shadowOffsetY=3*k;ctx.fillStyle=AG.arrow;
+    ctx.beginPath();ctx.moveTo(px+tx*q[0],py+ty*q[0]);ctx.lineTo(px-tx*q[1]+Math.cos(a)*q[2],py-ty*q[1]+Math.sin(a)*q[2]);ctx.lineTo(px-tx*q[1]-Math.cos(a)*q[2],py-ty*q[1]-Math.sin(a)*q[2]);ctx.closePath();ctx.fill();ctx.restore();}
+  // where the agent is in its loop: a violet light travelling along the ring
+  if(o.pulse&&o.pulse.a>0){const a=o.pulse.deg*Math.PI/180,px=x+Math.cos(a)*R,py=y+Math.sin(a)*R;
+    ctx.strokeStyle=rgba(AG.violet,0.45*o.pulse.a);ctx.lineWidth=8*k;ctx.beginPath();ctx.arc(x,y,R,a-0.55,a);ctx.stroke();
+    ctx.shadowColor=rgba(AG.violet,0.7);ctx.shadowBlur=18*k;ctx.fillStyle=rgba(AG.violet,o.pulse.a);ctx.beginPath();ctx.arc(px,py,11*k,0,TAU);ctx.fill();ctx.shadowBlur=0;
+    ctx.fillStyle="rgba(255,255,255,"+o.pulse.a+")";ctx.beginPath();ctx.arc(px-3*k,py-3*k,3.5*k,0,TAU);ctx.fill();}
+  ctx.restore();}
+
+function ag_step(ctx,x,y,label,o){o=o||{};const w=ag_tw(ctx,label,{w:700,size:30})+54,h=52,b={x:x-w/2,y:y-h/2,w,h,cx:x,cy:y};const a=o.a==null?1:o.a;if(a<=0)return b;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.4,1,o.k));
+  ag_box(ctx,b.x,b.y,w,h,h/2,{edge:o.on||null,glow:o.on||null});ag_T(ctx,label,x,y+10,{w:700,size:30,align:"center",col:o.on||AG.ink});ctx.restore();return b;}
+
+const AG_LOOP={R:180,r:88,steps:[["Plan",-120],["Act",0],["Check",120]]};
+function ag_loop(ctx,x,y,o){o=o||{};const R=o.R||AG_LOOP.R,r=o.r||AG_LOOP.r,steps=o.steps||AG_LOOP.steps,a=o.a==null?1:o.a,t=o.t||0;if(a<=0)return[];
+  ctx.save();ctx.globalAlpha*=a;
+  ag_modelLight(ctx,x,y,r,o.core==null?1:o.core,o.floor);
+  ag_ring(ctx,x,y,R,{p:o.p==null?1:o.p,from:steps[0][1],pulse:o.pulse});
+  ag_model(ctx,x,y,r,{t,core:o.core,think:o.think,label:o.label===undefined?"Model":o.label});
+  const boxes=steps.map((s,i)=>{const d=s[1]*Math.PI/180,sa=o.stepA?o.stepA[i]:1;return ag_step(ctx,x+Math.cos(d)*R,y+Math.sin(d)*R,s[0],{on:o.lit===i?(o.col||AG.violet):null,a:sa,k:o.stepK?o.stepK[i]:null});});
+  ctx.restore();return boxes;}
+
+function ag_pellet(ctx,x,y,a){a=a==null?1:a;if(a<=0)return;ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(AG.orange,0.6);ctx.shadowBlur=10;ctx.fillStyle=rgba(AG.orange,1);rr(ctx,x-8,y-5,16,10,5);ctx.fill();ctx.restore();}
+function ag_reach(ctx,p,u,o){o=o||{};if(u<=0.002)return;const k=o.k||1;
+  ctx.save();if(o.a!=null)ctx.globalAlpha*=o.a;ctx.lineCap="round";ctx.lineJoin="round";
+  // a matte tube with a soft shadow on the wall, a highlight along its top, two oak joints and a graphite gripper
+  ctx.strokeStyle=AG.tube.shadow;ctx.lineWidth=20*k;ctx.save();ctx.translate(AG.sdx*k,14*k);ag_bzPath(ctx,p,0,u);ctx.stroke();ctx.restore();
+  ctx.strokeStyle=AG.tube.edge;ctx.lineWidth=18*k;ag_bzPath(ctx,p,0,u);ctx.stroke();
+  ctx.strokeStyle=AG.tube.fill;ctx.lineWidth=13*k;ag_bzPath(ctx,p,0,u);ctx.stroke();
+  ctx.strokeStyle=AG.tube.hi;ctx.lineWidth=4*k;ctx.save();ctx.translate(0,-3.5*k);ag_bzPath(ctx,p,0,u);ctx.stroke();ctx.restore();
+  for(const j of [0.36,0.7]){if(u<j)continue;const q=ag_bz(p,j);ctx.fillStyle=AG.jointRim;ctx.beginPath();ctx.arc(q[0],q[1],11.5*k,0,TAU);ctx.fill();
+    const jg=ctx.createRadialGradient(q[0]-3*k,q[1]-4*k,1,q[0],q[1],11*k);jg.addColorStop(0,rgba(AG_OAK.hi,1));jg.addColorStop(1,AG.joint);ctx.fillStyle=jg;ctx.beginPath();ctx.arc(q[0],q[1],10*k,0,TAU);ctx.fill();
+    ctx.fillStyle=rgba(AG.violet,0.9);ctx.beginPath();ctx.arc(q[0],q[1],4*k,0,TAU);ctx.fill();}
+  const q=ag_bz(p,u),q0=ag_bz(p,Math.max(0,u-0.02)),ang=Math.atan2(q[1]-q0[1],q[0]-q0[0]),open=lerp(0.62,0.1,Math.max(ag_ss(0.86,1,u),o.grip||0));
+  ctx.save();ctx.translate(q[0],q[1]);ctx.rotate(ang);ctx.scale(k,k);ctx.fillStyle=AG.grip;for(const s of [-1,1]){ctx.save();ctx.rotate(s*open);rr(ctx,-2,-4.5,26,9,4.5);ctx.fill();ctx.restore();}
+  ctx.fillStyle=AG.hub;ctx.beginPath();ctx.arc(0,0,9.5,0,TAU);ctx.fill();ctx.strokeStyle=AG.hubEdge;ctx.lineWidth=1.5;ctx.stroke();ctx.restore();
+  const d=o.data||0;if(d>0&&d<1){for(let i=0;i<3;i++){const v=1-clamp(d*1.4-i*0.2,0,1);if(v>=1||v<=0)continue;const r=ag_bz(p,v*u);ag_pellet(ctx,r[0],r[1]);}}
+  ctx.restore();}
+
+function ag_tool(ctx,x,y,w,h,name,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const on=o.touch||0,col=o.col||AG.blue,sub=o.sub===undefined?"read only":o.sub,icon=o.icon===undefined?"lock":o.icon;
+  ag_box(ctx,x,y,w,h,20,{a,edge:on>0.1?col:null,edgeA:0.9*on,glow:on>0.1?col:null,glowA:on});
+  ctx.save();ctx.globalAlpha*=a;ag_T(ctx,name,x+30,y+(sub?50:h/2+11),{w:700,size:32});
+  if(sub){const ix=x+42,iy=y+88;if(icon==="lock")ag_lock(ctx,ix,iy,28,rgba(col,1));else if(icon==="draft")ag_pen(ctx,ix,iy,28,rgba(col,1));
+    ag_T(ctx,sub,icon?x+66:x+30,y+96,{w:500,size:28,col:AG.mut});}
+  ctx.restore();}
+
+function ag_verdict(ctx,x,y,text,kind,a){if(a<=0)return;const col=kind==="pass"?AG.green:AG.amber,w=ag_tw(ctx,text,{w:700,size:30})+96,h=58,bx=x-w/2,by=y-h/2;
+  ag_box(ctx,bx,by,w,h,29,{a,edge:col});ctx.save();ctx.globalAlpha*=a;
+  if(kind==="pass")ag_tick(ctx,bx+40,y,24,rgba(col,1),4);else if(kind==="loop")ag_loopIcon(ctx,bx+40,y,28,rgba(col,1),3.5);else ag_warn(ctx,bx+40,y,30,rgba(col,1));
+  ag_T(ctx,text,bx+68,y+11,{w:700,size:30,col});ctx.restore();}
+function ag_badge(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0)return;const drop=o.drop||90,sw=Math.sin((o.t||0)*1.3)*0.025,w=ag_tw(ctx,text,{w:700,size:28})+48,h=58;
+  ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.rotate(sw);
+  ctx.strokeStyle=rgba(AG.blue,0.9);ctx.lineWidth=5;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(-26,0);ctx.lineTo(-8,drop-10);ctx.moveTo(26,0);ctx.lineTo(8,drop-10);ctx.stroke();
+  ctx.fillStyle="#9AA0A8";ctx.fillRect(-9,drop-14,18,14);
+  ag_box(ctx,-w/2,drop,w,h,10,{});ctx.fillStyle=rgba(AG.blue,0.85);ctx.fillRect(-w/2+10,drop+4,w-20,5);
+  ag_T(ctx,text,0,drop+h/2+15,{w:700,size:28,align:"center"});ctx.restore();}
+
+/* ===== Modern data basics: the module's look =====
+   The films of Modern data basics (Data that moves, Data as software, From tables to decisions, Documents as data) share one
+   look, assumed on 5 November 2026 for the author to review (films/data-that-moves/decided.md): the intro's platform map, drawn
+   up close. The dark navy map of The Inner Life of Data, its systems, lanes of light, layers and readers, drawn near enough to work
+   in, with people drawn to the agent films' rules (people.js there) and lit for the dark. Glass panels with a coloured edge only
+   where the colour means something; words in white or a soft blue-grey; solid pills with dark words where a verdict must read at once.
+   No film grain, no watercolour.
+   The module's files, bundled in this order after The Inner Life of Data's helpers (core.js, style2.js, ui3.js, and its logos.js
+   with this module's for a film that names its tools), A Sharper Sketch's scene() (sketch3.js) and the agent films' kit, people
+   and agent (films/what-an-agent-is/shared/src/kit.js, people.js, agent.js: the camera, the shots, pictures painted once, the people):
+     look.js   the palette and what each colour means, words, the places, lanes of light and what moves along them, and icons
+     people.js the cast and md_person, the agent films' people lit for the dark
+     cards.js  glass cards, pills, tags, the kicker, the module's mark, and the title and end cards
+     map.js    the platform map's parts drawn near: a system, the platform, a layer, a table, a reader, the ways data moves,
+               and the whole map at once
+     tools.js  the tools' pages, each with a small bar naming the product and its logo, and what goes in them: rows, a catalog's tree
+   Every top-level name starts with md_ or MD_. A film's own pictures and helpers go in its own source with a prefix of its own;
+   never change these files for one film.
+   Sizes are in the 1920 x 1080 frame. Every word is at least 28 px as seen, and nothing but the captions goes below y 890. */
+
+/* ---------------------------------------------------------------- colours, and what each means in every film of the module */
+const MD={
+  ink:[236,243,255],       // words
+  soft:[166,184,210],      // quieter words, at 8:1 or more on the navy
+  dim:[112,128,156],       // lines and frames that only hold things together
+  navy:[6,11,24],          // the night itself; dark words on a solid pill
+  flow:[120,200,255],      // data moving, and the platform's structure: lanes, connectors, mirrors, the catalog
+  agreed:[255,209,102],    // what people agree on: a contract at an interface, a definition, a measure
+  pass:[120,240,170],      // a check passes, it works, it arrived
+  fail:[255,96,86],        // an error, a failure, something broken
+  wait:[255,184,77],       // waiting for a person: a review, an approval, a question
+  personal:[204,166,255],  // personal data, which stays where it may be read (always with a lock)
+  dbx:[255,54,33],         // Databricks' own bar, as the intro's map draws it
+  dbt:[255,105,75],        // dbt's own card
+  // the university's systems and its business domains keep the colours the intro's map gives them
+  sys:{hr:[255,150,200],fin:[255,226,122],sis:[255,176,64],lms:[126,224,140]},
+  dom:{finance:[255,138,92],teaching:[176,123,255],students:[77,163,255],research:[47,211,192]},
+  layer:{bronze:[232,162,107],silver:[214,228,255],gold:[255,209,102]}
+};
+const MD_MEANS={flow:MD.flow,agreed:MD.agreed,pass:MD.pass,fail:MD.fail,wait:MD.wait,personal:MD.personal};
+
+/* ---------------------------------------------------------------- words
+   md_T draws with The Inner Life of Data's T (so the legibility check measures it; {deco:1} marks decoration on purpose), in white
+   unless o.col (a colour) or o.color (a CSS colour) says otherwise; o.ls spaces the letters, in px; o.f "mono" for code. Size 28 by
+   default. md_tw and md_wrap measure and wrap as the agent films' ag_tw and ag_wrap do. */
+function md_T(ctx,s,x,y,o){o=o||{};const a=o.a==null?1:o.a,col=o.color||rgba(o.col||MD.ink,a),ls=o.ls||0,q=Object.assign({},o,{color:col,size:o.size||28});
+  if(!ls){T(ctx,s,x,y,q);return;}
+  const dx=o.align==="center"?ls/2:(o.align==="right"||o.align==="end")?ls:0;ctx.save();ctx.letterSpacing=ls+"px";T(ctx,s,x+dx,y,q);ctx.restore();}
+const md_tw=(ctx,s,o)=>ag_tw(ctx,s,o),md_wrap=(ctx,s,maxW,o)=>ag_wrap(ctx,s,maxW,o);
+// a heading on the map: capitals, letter-spaced, soft unless o.col
+function md_label(ctx,x,y,text,o){o=o||{};md_T(ctx,String(text).toUpperCase(),x,y,{w:800,size:o.size||28,ls:o.ls==null?4:o.ls,align:o.align||"left",col:o.col||MD.soft,a:o.a});}
+
+/* ---------------------------------------------------------------- the places
+   "map" is the night the map lives in: the navy of The Inner Life of Data, its faint grid every 48 px, and a vignette; "night" is the
+   same without the grid, for title and end cards and for a film's own scenes. Each is painted once (AG_PLACES; check.py times it).
+   The map's parts are drawn live over it, in the place's coordinates, so they stay sharp however close the camera comes. */
+function md_paintNight(c,o){o=o||{};const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,"#0a1022");g.addColorStop(0.55,"#060a17");g.addColorStop(1,"#03050b");c.fillStyle=g;c.fillRect(0,0,W,H);
+  // the light the glass panels throw on the night: two broad, faint pools
+  for(const [x,y,r,col,a] of [[560,420,760,MD.flow,0.05],[1500,560,700,[150,120,255],0.035]]){const q=c.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,rgba(col,a));q.addColorStop(1,rgba(col,0));c.fillStyle=q;c.fillRect(0,0,W,H);}
+  if(o.grid){c.strokeStyle="rgba(120,160,230,0.05)";c.lineWidth=1;for(let x=0;x<=W;x+=48){c.beginPath();c.moveTo(x+0.5,0);c.lineTo(x+0.5,H);c.stroke();}for(let y=0;y<=H;y+=48){c.beginPath();c.moveTo(0,y+0.5);c.lineTo(W,y+0.5);c.stroke();}}
+  const v=c.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,W*0.74);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.55)");c.fillStyle=v;c.fillRect(0,0,W,H);}
+AG_PLACES.map=c=>md_paintNight(c,{grid:true});
+AG_PLACES.night=c=>md_paintNight(c,{grid:false});
+// a vignette in the frame itself, over a shot (it stays put while the camera moves); a film calls it after ag_shots
+function md_vign(ctx,S,a){setScreen(ctx,S);const v=ctx.createRadialGradient(W/2,H/2,H*0.36,W/2,H/2,W*0.72);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,"+(0.42*(a==null?1:a))+")");ctx.fillStyle=v;ctx.fillRect(0,0,W,H);}
+
+/* ---------------------------------------------------------------- lanes of light, and what moves along them
+   md_curve(a, b, o) is a smooth path from point a to point b, leaving and arriving level (o.bend 0 to 1, how far the turn reaches),
+   as the points md_lane and md_flow follow; md_path(points) joins straight runs. md_lane(ctx, pts, col, a, o) draws the lane, o.u
+   (0 to 1) only as far as that, o.dash for a lane that only points the way (a query in place, a mirror's shortcut: nothing is
+   copied along it). md_flow(ctx, pts, t, o) sends data along it: o.kind "events" (one small packet after another, each change as
+   it's made), "batch" (a stack of rows now and then: a whole file), "stream" (a steady run), o.col, o.every, o.dur, o.a, o.back
+   (from the end to the start). */
+function md_curve(a,b,o){o=o||{};const k=o.bend==null?0.5:o.bend,dx=(b[0]-a[0])*k,n=o.n||36;return bez(P(a[0],a[1]),P(a[0]+dx,a[1]),P(b[0]-dx,b[1]),P(b[0],b[1]),n).map(p=>[p.x,p.y]);}
+function md_path(pts){const out=[];for(let i=0;i<pts.length;i++){if(i===0){out.push(pts[0]);continue;}const a=pts[i-1],b=pts[i];for(let k=1;k<=12;k++)out.push([lerp(a[0],b[0],k/12),lerp(a[1],b[1],k/12)]);}return out;}
+function md_cut(pts,u){if(u>=1)return pts;const p=mk(pts.map(q=>P(q[0],q[1]))),out=[];for(let i=0;i<=40;i++){const q=at(p,u*i/40);out.push([q.x,q.y]);}return out;}
+function md_lane(ctx,pts,col,a,o){o=o||{};a=a==null?1:a;if(a<=0.004||pts.length<2)return;const u=o.u==null?1:clamp(o.u,0,1);if(u<=0)return;const q=md_cut(pts,u).map(p=>P(p[0],p[1]));
+  if(o.dash){ctx.save();ctx.globalCompositeOperation="lighter";ctx.lineCap="round";ctx.setLineDash(o.dash===true?[10,14]:o.dash);ctx.lineDashOffset=-(o.t||0)*(o.speed||24);
+    for(const [w,al] of [[8,0.08],[3,0.4],[1.6,0.9]]){poly(ctx,q);ctx.strokeStyle=rgba(col,al*a);ctx.lineWidth=w;ctx.stroke();}ctx.restore();return;}
+  lane(ctx,q,col,a);}
+function md_flow(ctx,pts,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004||pts.length<2)return;const col=o.col||MD.flow,kind=o.kind||"events",p=mk((o.back?pts.slice().reverse():pts).map(q=>P(q[0],q[1])));
+  const every=o.every||(kind==="batch"?3.2:kind==="stream"?0.18:0.9),dur=o.dur||(kind==="batch"?2.4:1.6),k=o.size||1;
+  spawn(t,every,dur,o.off||0,(u,i)=>{const q=at(p,ease(u)),f=sstep(0,0.12,u)*(1-sstep(0.88,1,u))*a;if(f<=0.004)return;
+    if(kind==="batch"){glow(ctx,q.x,q.y,46*k,col,0.5*f);ctx.save();ctx.globalAlpha*=f;ctx.translate(q.x,q.y);for(let s=2;s>=0;s--){rr(ctx,-22*k+s*5*k,-16*k-s*5*k,44*k,32*k,5*k);ctx.fillStyle=rgba(mix(col,MD.navy,0.55),0.95);ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2;ctx.stroke();
+        ctx.fillStyle=rgba(col,0.7);for(let r=0;r<3;r++)ctx.fillRect(-16*k+s*5*k,-10*k-s*5*k+r*8*k,30*k,3*k);}ctx.restore();}
+    else if(kind==="stream"){glow(ctx,q.x,q.y,14*k,col,0.9*f);}
+    else{glow(ctx,q.x,q.y,26*k,col,0.55*f);ctx.save();ctx.globalAlpha*=f;rr(ctx,q.x-9*k,q.y-9*k,18*k,18*k,4*k);ctx.fillStyle=rgba(mix(col,[255,255,255],0.5),1);ctx.fill();ctx.restore();}});}
+
+/* ---------------------------------------------------------------- icons
+   md_icon(ctx, kind, x, y, s, col, o) draws an icon centred on (x, y), s px across, in a colour ([r, g, b]), with lines that keep
+   their weight at any size. Kinds: "connector" (a plug: a managed connector brings data in), "query" (a lens: a query in place
+   reads it where it lives), "mirror" (a shape and its dashed reflection: the catalog shown in another tool, nothing copied), "share"
+   (two linked nodes: shared with a partner where it lives), "api" (braces: served on request), "event" (a spark: one change),
+   "batch" (stacked sheets: a whole file), "stream" (waves), "table", "view", "volume" (a folder), "store" (a database), "contract"
+   (a page with a seal), "lock", "key", "tick", "cross", "warn", "clock", "refresh", "person", "eye", "doc". */
+function md_icon(ctx,kind,x,y,s,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const c=rgba(col,1),u=s/48;ctx.save();ctx.globalAlpha*=a;ctx.translate(x,y);ctx.scale(u,u);
+  ctx.strokeStyle=c;ctx.fillStyle=c;ctx.lineWidth=o.lw||3.6;ctx.lineCap="round";ctx.lineJoin="round";const L=(pts)=>{ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.stroke();};
+  switch(kind){
+    case"connector":rr(ctx,-14,-10,22,20,5);ctx.stroke();L([[-14,0],[-22,0]]);L([[8,-5],[18,-5]]);L([[8,5],[18,5]]);break;
+    case"query":ctx.beginPath();ctx.arc(-4,-4,13,0,TAU);ctx.stroke();L([[6,6],[18,18]]);break;
+    // the mirror: a table, and beyond a line the same table again in dashes, its picture and not a copy
+    case"mirror":L([[0,-21],[0,21]]);rr(ctx,-22,-12,16,24,3);ctx.stroke();L([[-22,-2],[-6,-2]]);ctx.save();ctx.setLineDash([3.5,4]);rr(ctx,6,-12,16,24,3);ctx.stroke();L([[6,-2],[22,-2]]);ctx.restore();break;
+    case"share":ctx.beginPath();ctx.arc(-12,0,7,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(12,-12,7,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(12,12,7,0,TAU);ctx.stroke();L([[-6,-3],[6,-9]]);L([[-6,3],[6,9]]);break;
+    case"api":ctx.lineWidth=(o.lw||3.6);L([[-8,-18],[-14,-18],[-16,-14],[-16,-4],[-20,0],[-16,4],[-16,14],[-14,18],[-8,18]]);L([[8,-18],[14,-18],[16,-14],[16,-4],[20,0],[16,4],[16,14],[14,18],[8,18]]);break;
+    case"event":ctx.beginPath();ctx.moveTo(4,-20);ctx.lineTo(-10,3);ctx.lineTo(1,3);ctx.lineTo(-4,20);ctx.lineTo(11,-4);ctx.lineTo(0,-4);ctx.closePath();ctx.fill();break;
+    case"batch":for(let i=2;i>=0;i--){rr(ctx,-14+i*4,-12-i*4,24,30,3);ctx.save();ctx.fillStyle="rgba(6,11,24,1)";ctx.fill();ctx.restore();ctx.stroke();}L([[-6,-2],[6,-2]]);L([[-6,6],[6,6]]);break;
+    case"stream":for(const dy of[-10,0,10]){ctx.beginPath();ctx.moveTo(-20,dy);ctx.bezierCurveTo(-10,dy-7,-4,dy+7,6,dy);ctx.bezierCurveTo(12,dy-4,16,dy-4,20,dy);ctx.stroke();}break;
+    case"table":rr(ctx,-18,-15,36,30,4);ctx.stroke();L([[-18,-5],[18,-5]]);L([[-18,5],[18,5]]);L([[-4,-15],[-4,15]]);break;
+    case"view":ctx.beginPath();ctx.moveTo(-20,0);ctx.quadraticCurveTo(0,-18,20,0);ctx.quadraticCurveTo(0,18,-20,0);ctx.closePath();ctx.stroke();ctx.beginPath();ctx.arc(0,0,6,0,TAU);ctx.fill();break;
+    case"eye":md_icon(ctx,"view",0,0,48,col,{lw:o.lw});break;
+    case"volume":ctx.beginPath();ctx.moveTo(-20,-12);ctx.lineTo(-6,-12);ctx.lineTo(-2,-7);ctx.lineTo(20,-7);ctx.lineTo(20,15);ctx.lineTo(-20,15);ctx.closePath();ctx.stroke();break;
+    case"store":for(const dy of[-12,0,12]){ctx.beginPath();ctx.ellipse(0,dy-2,17,5,0,0,TAU);ctx.stroke();}L([[-17,-14],[-17,10]]);L([[17,-14],[17,10]]);break;
+    case"contract":ctx.beginPath();ctx.moveTo(-15,-20);ctx.lineTo(8,-20);ctx.lineTo(15,-13);ctx.lineTo(15,20);ctx.lineTo(-15,20);ctx.closePath();ctx.stroke();L([[-8,-9],[7,-9]]);L([[-8,-1],[7,-1]]);ctx.beginPath();ctx.arc(5,11,6,0,TAU);ctx.fill();break;
+    case"doc":ctx.beginPath();ctx.moveTo(-14,-20);ctx.lineTo(7,-20);ctx.lineTo(14,-13);ctx.lineTo(14,20);ctx.lineTo(-14,20);ctx.closePath();ctx.stroke();L([[-7,-8],[7,-8]]);L([[-7,0],[7,0]]);L([[-7,8],[4,8]]);break;
+    case"lock":ctx.beginPath();ctx.arc(0,-7,10,Math.PI,0);ctx.stroke();rr(ctx,-15,-6,30,24,5);ctx.fill();ctx.save();ctx.fillStyle="rgba(6,11,24,1)";ctx.beginPath();ctx.arc(0,4,3.5,0,TAU);ctx.fill();ctx.restore();break;
+    case"key":ctx.beginPath();ctx.arc(-9,0,9,0,TAU);ctx.stroke();L([[0,0],[20,0]]);L([[14,0],[14,8]]);L([[20,0],[20,6]]);break;
+    case"tick":ctx.lineWidth=(o.lw||4.6);L([[-14,1],[-4,11],[15,-11]]);break;
+    case"cross":ctx.lineWidth=(o.lw||4.6);L([[-12,-12],[12,12]]);L([[12,-12],[-12,12]]);break;
+    case"warn":ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(20,16);ctx.lineTo(-20,16);ctx.closePath();ctx.stroke();L([[0,-6],[0,5]]);ctx.beginPath();ctx.arc(0,11,2.4,0,TAU);ctx.fill();break;
+    case"clock":ctx.beginPath();ctx.arc(0,0,18,0,TAU);ctx.stroke();L([[0,-10],[0,0],[8,6]]);break;
+    case"refresh":ctx.beginPath();ctx.arc(0,0,15,-0.6,Math.PI*1.45);ctx.stroke();ctx.beginPath();ctx.moveTo(15,-16);ctx.lineTo(14,-4);ctx.lineTo(3,-8);ctx.closePath();ctx.fill();break;
+    case"person":ctx.beginPath();ctx.arc(0,-9,8,0,TAU);ctx.stroke();ctx.beginPath();ctx.moveTo(-15,18);ctx.quadraticCurveTo(-14,3,0,3);ctx.quadraticCurveTo(14,3,15,18);ctx.stroke();break;
+  }
+  ctx.restore();}
+
+/* ===== Modern data basics: the people, lit for the dark =====
+   The people are the agent films' (films/what-an-agent-is/shared/src/people.js, bundled as it is): an adult's proportions, one
+   three-quarter head (AG_FACE), arms down, a hand only on the thing the story is about (pose "hold"). Here they stand in the night
+   of the map, so each is drawn whole, then lit: the side away from the light sinks into the navy, a warm light falls on the face
+   from the glass in front of them, and a cool rim of light from the map behind them traces their back and the top of their head.
+   Skin keeps its own colour where the light falls.
+
+   md_person(ctx, who, x, y, s, o) draws a person as ag_person does (the same who, x, y, s and o: t, flip, pose, hold, front, nod,
+   gaze, talk, smile, cut, covered), and returns the hands as it does. who is a name in MD_CAST (this module's people) or in the agent
+   films' cast ("noor", "sam", "jun", "mei", "yusuf", "clara", "anil", "david"), or a spec of someone else (see people.js there). o.light:
+     key     where the warm light comes from, in figure space (facing right: [560, 360], in front of the face and a little above)
+     reach   how far it reaches, in figure units (780)
+     shade   how far the side away from it sinks into the night, 0 to 1 (0.62)
+     ground  how far the body sinks into the night below the chest, 0 to 1 (0.4)
+     warm    how warm the light on the face is, 0 to 1 (0.14)
+     rim     the rim's colour (the map's light, MD.flow), rimA its strength (0.7), rimW its width in figure units (7)
+   A person fading in or out is drawn whole first and laid on the picture at that opacity, so they never show through themselves.
+   md_nameTag(ctx, x, y, who, o) writes a person's name and role under or beside them: o.align, o.role (the line under the name),
+   o.col (the colour of their side, for the small bar), o.a. */
+
+/* ---------------------------------------------------------------- the cast this module adds
+   As the module's shared numbers set them (/mnt/project-files/modern-data-basics/numbers.md, confirmed by the opening film): Ingrid
+   Holm in HR, who owns the HR system's data, in the plum of HR's side; Rohan Desai, Finance's management accountant, in the warm brown
+   of Finance's; and Linh Nguyen, the casual tutor the data is about, who wears no colour of a side. Noor Rahman, Sam Okafor and Jun
+   Park are the agent films' (AG_CAST). Say rules for the voice are in numbers.md. */
+const MD_CAST={
+  ingrid:{name:"Ingrid Holm",role:"HR",skin:[236,204,182],hair:{style:"bun",c:[196,176,140]},glasses:[70,62,58],top:{kind:"blazer",c:[98,74,104],inner:[238,234,228]},breath:0.28},
+  rohan:{name:"Rohan Desai",role:"Finance",skin:[182,132,98],hair:{style:"side",c:[30,26,26]},glasses:[52,40,34],top:{kind:"blazer",c:[124,104,82],inner:[234,236,240]},breath:0.26},
+  linh:{name:"Linh Nguyen",role:"Casual tutor, HI101",skin:[232,196,166],hair:{style:"bob",c:[24,22,26]},earrings:[214,218,226],top:{kind:"cardigan",c:[132,136,142],inner:[236,234,230]},breath:0.3}
+};
+const md_who=who=>typeof who==="string"&&MD_CAST[who]?MD_CAST[who]:who;
+const MD_ROLE={noor:"Data architect",sam:"Data platform",jun:"Data project"};
+
+/* ---------------------------------------------------------------- a person in the night */
+function md_person(ctx,who,x,y,s,o){o=o||{};const a=ctx.globalAlpha;if(a<0.004)return null;const W0=md_who(who),L0=Object.assign({key:[560,360],reach:780,shade:0.62,ground:0.4,warm:0.14,rim:MD.flow,rimA:0.7,rimW:7},o.light||{});
+  const A=AG_FIG.anchor,m=ctx.getTransform(),M=m.translate(x,y).scale(o.flip?-s:s,s).translate(-A[0],-A[1]),cw=ctx.canvas.width,ch=ctx.canvas.height;
+  const pt=(fx,fy)=>[M.a*fx+M.c*fy+M.e,M.b*fx+M.d*fy+M.f],k=Math.hypot(M.a,M.b);
+  // the part of the canvas the person (and what the near hand may hold) can reach
+  let L=1e9,R=-1e9,T0=1e9,B=-1e9;for(const [fx,fy] of [[-260,120],[820,120],[-260,1160],[820,1160]]){const q=pt(fx,fy);L=Math.min(L,q[0]);R=Math.max(R,q[0]);T0=Math.min(T0,q[1]);B=Math.max(B,q[1]);}
+  L=Math.max(0,Math.floor(L));T0=Math.max(0,Math.floor(T0));R=Math.min(cw,Math.ceil(R));B=Math.min(ch,Math.ceil(B));if(R<=L||B<=T0)return null;const w=R-L,h=B-T0;
+  // the person, whole, on a canvas of their own
+  const [pc,px]=ag_buf("mdPerson",cw,ch);px.setTransform(m);let hands;try{hands=ag_person(px,W0,x,y,s,Object.assign({},o,{light:undefined}));}finally{px.setTransform(1,0,0,1,0,0);px.globalAlpha=1;}
+  // the light: the far side sinks into the navy, the near side keeps its colour, and the face takes a little warmth
+  const K=pt(L0.key[0],L0.key[1]),rad=L0.reach*k;px.globalCompositeOperation="source-atop";
+  let g=px.createRadialGradient(K[0],K[1],0,K[0],K[1],rad);g.addColorStop(0,rgba(MD.navy,0.04));g.addColorStop(0.45,rgba(MD.navy,L0.shade*0.55));g.addColorStop(1,rgba(MD.navy,L0.shade));px.fillStyle=g;px.fillRect(L,T0,w,h);
+  // and the body sinks into the night below the chest, so a person rises out of the dark
+  if(L0.ground>0){const c0=pt(300,700),c1=pt(300,1100);g=px.createLinearGradient(c0[0],c0[1],c1[0],c1[1]);g.addColorStop(0,rgba(MD.navy,0));g.addColorStop(1,rgba(MD.navy,L0.ground));px.fillStyle=g;px.fillRect(L,T0,w,h);}
+  if(L0.warm>0){g=px.createRadialGradient(K[0],K[1],0,K[0],K[1],rad*0.55);g.addColorStop(0,rgba([255,214,172],L0.warm));g.addColorStop(1,rgba([255,214,172],0));px.fillStyle=g;px.fillRect(L,T0,w,h);}
+  px.globalCompositeOperation="source-over";
+  ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=a;ctx.drawImage(pc,L,T0,w,h,L,T0,w,h);
+  // the rim: the silhouette less itself moved towards the light, so only the edge away from it (and the top of the head) is left
+  if(L0.rimA>0){const rw=Math.max(1.5,L0.rimW*k),dir=o.flip?-1:1,[rc,rx]=ag_buf("mdRim",cw,ch);rx.drawImage(pc,L,T0,w,h,L,T0,w,h);
+    rx.globalCompositeOperation="destination-out";rx.drawImage(pc,L,T0,w,h,L+dir*rw,T0+rw*0.45,w,h);
+    rx.globalCompositeOperation="source-in";const fg=rx.createLinearGradient(0,T0,0,B);fg.addColorStop(0,rgba(L0.rim,1));fg.addColorStop(0.5,rgba(L0.rim,0.7));fg.addColorStop(1,rgba(L0.rim,0.05));rx.fillStyle=fg;rx.fillRect(L,T0,w,h);
+    rx.globalCompositeOperation="source-over";ctx.globalCompositeOperation="lighter";ctx.globalAlpha=a*L0.rimA;ctx.drawImage(rc,L,T0,w,h,L,T0,w,h);
+    // and its glow: the same edge, made small and laid on again larger, so it spreads softly
+    const sw=Math.max(2,Math.ceil(w/6)),sh=Math.max(2,Math.ceil(h/6)),[sc,sx]=ag_buf("mdRimSoft",sw,sh);sx.drawImage(rc,L,T0,w,h,0,0,sw,sh);
+    ctx.globalAlpha=a*L0.rimA*0.55;ctx.drawImage(sc,0,0,sw,sh,L,T0,w,h);}
+  ctx.restore();return hands;}
+
+// a person's name and the line under it (their role), and a small bar in the colour of their side
+function md_nameTag(ctx,x,y,who,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const P_=typeof who==="string"?(MD_CAST[who]||AG_CAST[who]):who,
+    name=o.name||(P_&&P_.name)||String(who),role=o.role!=null?o.role:(typeof who==="string"&&MD_ROLE[who])||(P_&&P_.role)||"",al=o.align||"left";
+  ctx.save();ctx.globalAlpha*=a;const nw=md_tw(ctx,name,{w:800,size:32}),rw2=role?md_tw(ctx,role,{w:600,size:28}):0,ww=Math.max(nw,rw2),x0=al==="center"?x-ww/2:al==="right"?x-ww:x;
+  if(o.col){ctx.save();ctx.shadowColor=rgba(o.col,0.9);ctx.shadowBlur=12;ctx.fillStyle=rgba(o.col,1);rr(ctx,x0-22,y-28,6,role?70:34,3);ctx.fill();ctx.restore();}
+  md_T(ctx,name,x0,y,{w:800,size:32});if(role)md_T(ctx,role,x0,y+38,{w:600,size:28,col:MD.soft});ctx.restore();}
+
+/* ===== Modern data basics: glass cards, pills, tags, the kicker, the mark, and the title and end cards =====
+   Cards are panes of dark glass, as the intro's map draws them: nearly opaque, so words on them read at 8:1 or more; a faint light
+   along the top edge; an edge in a colour only when the colour means something (look.js, MD: flow, agreed, pass, fail, wait,
+   personal, a system's or a domain's colour), with a soft glow of it. Words on cards: a kicker in capitals, 28 px, letter-spaced, in
+   the edge's colour; a title, 36 px; a line under it, 28 px, soft.
+     md_card(ctx, x, y, w, h, o)       a pane: o.edge (a colour), o.glow (its strength, 0 to 1), o.r (corner), o.a, o.dash (an outline only,
+                                       dashed: something that is shown but not copied), o.fill (a CSS colour)
+     md_textCard(ctx, x, y, w, words, o) words {kick, title, sub}: a card that fits them; o.edge, o.kickCol, o.icon (an md_icon kind, at
+                                       the top right, in the edge's colour), o.mono (the title in IBM Plex Mono), o.a, o.k (springs from
+                                       its centre, 0 to 1), o.measure (only measure); returns {x, y, w, h}
+     md_pill(ctx, x, y, text, o)       a solid pill centred on (x, y), dark words on its colour: o.col (MD.pass by default), o.icon
+                                       ("tick", "cross", "warn", "lock", "clock", any md_icon kind), o.size (30), o.a, o.k
+     md_tag(ctx, x, y, text, o)        an outlined tag, words in its colour: o.col, o.icon, o.align ("left" or "center"), o.size (28), o.a
+     md_kicker(ctx, num, title, o)     the film's number and title at the top left
+     md_mark(ctx, cx, cy, r, p, a)     the module's mark: a wheel of light drawing itself, its hub gold (the wheel was invented before)
+     md_veil(ctx, S, a)                the night laid over the frame, for the title and end cards
+     md_title(ctx, S, t, t0, title, sub, line)          the title card from t0
+     md_end(ctx, S, t, t0, title, line, n, series)     the end card from t0: the film's line, the mark, the title, "Film 1 of 3 · Data that moves" */
+
+function md_card(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const r=o.r==null?18:o.r,e=o.edge||null;ctx.save();ctx.globalAlpha*=a;
+  if(o.dash){ctx.lineWidth=o.lw||2.4;ctx.setLineDash(o.dash===true?[12,10]:o.dash);ctx.strokeStyle=rgba(e||MD.dim,0.95);rr(ctx,x,y,w,h,r);ctx.fillStyle="rgba(8,14,30,0.42)";ctx.fill();ctx.stroke();ctx.restore();return;}
+  if(e){ctx.shadowColor=rgba(e,0.5*(o.glow==null?1:o.glow));ctx.shadowBlur=26;}
+  rr(ctx,x,y,w,h,r);ctx.fillStyle=o.fill||"rgba(11,19,38,0.94)";ctx.fill();ctx.shadowBlur=0;ctx.shadowColor="transparent";
+  const g=ctx.createLinearGradient(x,y,x,y+h);g.addColorStop(0,"rgba(255,255,255,0.07)");g.addColorStop(0.4,"rgba(255,255,255,0.012)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.fillStyle=g;rr(ctx,x,y,w,h,r);ctx.fill();
+  ctx.lineWidth=o.lw||(e?2.2:1.4);ctx.strokeStyle=e?rgba(e,o.edgeA==null?0.9:o.edgeA):"rgba(170,200,245,0.3)";rr(ctx,x,y,w,h,r);ctx.stroke();
+  ctx.strokeStyle="rgba(255,255,255,0.14)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+r,y+1.5);ctx.lineTo(x+w-r,y+1.5);ctx.stroke();ctx.restore();}
+const MD_PAD=28;
+function md_textCard(ctx,x,y,w,words,o){o=o||{};const inner=w-MD_PAD*2-(o.icon?52:0),tf={w:700,size:36,f:o.mono?"mono":undefined},tl=words.title?md_wrap(ctx,words.title,inner,tf):[],sl=words.sub?md_wrap(ctx,words.sub,w-MD_PAD*2,{w:500,size:28}):[];
+  const h=MD_PAD+(words.kick?40:0)+tl.length*46+sl.length*38+MD_PAD-(words.kick?0:6)+(tl.length||sl.length?0:-10),bb={x,y,w,h};if(o.measure)return bb;
+  const a=o.a==null?1:o.a;if(a<=0.004)return bb;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  md_card(ctx,x,y,w,h,{edge:o.edge,glow:o.glow,dash:o.dash});const kc=o.kickCol||o.edge||MD.soft;let yy=y+MD_PAD+24;
+  if(words.kick){md_T(ctx,String(words.kick).toUpperCase(),x+MD_PAD,yy,{w:800,size:28,ls:4,col:kc});yy+=18;}else yy-=24;
+  for(const l of tl){yy+=46;md_T(ctx,l,x+MD_PAD,yy,Object.assign({col:MD.ink},tf));}
+  for(const l of sl){yy+=38;md_T(ctx,l,x+MD_PAD,yy,{w:500,size:28,col:MD.soft});}
+  if(o.icon)md_icon(ctx,o.icon,x+w-MD_PAD-18,y+MD_PAD+18,40,o.edge||MD.ink);
+  ctx.restore();return bb;}
+function md_pill(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a,size=o.size||30,col=o.col||MD.pass,icon=o.icon,w=md_tw(ctx,text,{w:800,size})+(icon?100:60),h=size+30,bx=x-w/2,by=y-h/2;
+  if(a<=0.004)return{x:bx,y:by,w,h};ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x,y,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  ctx.shadowColor=rgba(col,0.55);ctx.shadowBlur=22;rr(ctx,bx,by,w,h,h/2);ctx.fillStyle=rgba(col,1);ctx.fill();ctx.shadowBlur=0;
+  const g=ctx.createLinearGradient(0,by,0,by+h);g.addColorStop(0,"rgba(255,255,255,0.28)");g.addColorStop(0.5,"rgba(255,255,255,0)");ctx.fillStyle=g;rr(ctx,bx,by,w,h,h/2);ctx.fill();
+  if(icon)md_icon(ctx,icon,bx+44,y,32,MD.navy);md_T(ctx,text,icon?bx+72:x,y+size*0.36,{w:800,size,align:icon?"left":"center",col:MD.navy});ctx.restore();return{x:bx,y:by,w,h};}
+function md_tag(ctx,x,y,text,o){o=o||{};const a=o.a==null?1:o.a,size=o.size||28,col=o.col||MD.flow,icon=o.icon,w=md_tw(ctx,text,{w:700,size})+(icon?88:44),h=size+24,bx=o.align==="center"?x-w/2:x,by=y-h/2;
+  if(a<=0.004)return{x:bx,y:by,w,h};ctx.save();ctx.globalAlpha*=a;md_card(ctx,bx,by,w,h,{edge:col,r:h/2,glow:0.6,fill:"rgba(7,12,26,0.94)"});
+  if(icon)md_icon(ctx,icon,bx+36,y,30,col);md_T(ctx,text,bx+(icon?62:22),y+size*0.36,{w:700,size,col});ctx.restore();return{x:bx,y:by,w,h};}
+
+/* ---------------------------------------------------------------- the kicker, the mark, the title and end cards */
+function md_kicker(ctx,num,title,o){o=o||{};const x=o.x||96,y=o.y||100,a=o.a==null?1:o.a;if(a<=0.004)return;
+  md_T(ctx,num,x,y,{w:500,size:28,f:"mono",col:MD.flow,a});md_T(ctx,String(title).toUpperCase(),x+md_tw(ctx,num,{w:500,size:28,f:"mono"})+24,y,{w:800,size:28,ls:3.5,col:MD.soft,a});}
+// the module's mark: a wheel, its rim drawing itself in the map's light, six spokes after it, and a gold hub
+function md_mark(ctx,cx,cy,r,p,a){if(a<=0.01)return;p=clamp(p,0,1);ctx.save();ctx.globalAlpha*=a;const rim=ag_sine(p/0.7),sp=clamp((p-0.45)/0.45,0,1);
+  ctx.lineCap="round";ctx.shadowColor=rgba(MD.flow,0.9);ctx.shadowBlur=r*0.3;ctx.strokeStyle=rgba(MD.flow,1);ctx.lineWidth=Math.max(2,r*0.09);
+  ctx.beginPath();ctx.arc(cx,cy,r,-Math.PI/2,-Math.PI/2+TAU*rim);ctx.stroke();
+  ctx.lineWidth=Math.max(1.5,r*0.05);for(let i=0;i<6;i++){const f=clamp(sp*6-i,0,1);if(f<=0)continue;const an=-Math.PI/2+i*TAU/6;ctx.beginPath();ctx.moveTo(cx+Math.cos(an)*r*0.2,cy+Math.sin(an)*r*0.2);ctx.lineTo(cx+Math.cos(an)*r*lerp(0.2,0.92,f),cy+Math.sin(an)*r*lerp(0.2,0.92,f));ctx.stroke();}
+  const hub=ag_sine((p-0.3)/0.5);if(hub>0){ctx.shadowColor=rgba(MD.agreed,0.9);ctx.fillStyle=rgba(MD.agreed,hub);ctx.beginPath();ctx.arc(cx,cy,r*0.17,0,TAU);ctx.fill();}ctx.restore();}
+function md_veil(ctx,S,a){if(a<=0)return;setScreen(ctx,S);ctx.fillStyle="rgba(4,8,18,"+clamp(a,0,1)+")";ctx.fillRect(0,0,W,H);}
+function md_title(ctx,S,t,t0,title,sub,line){const oA=ag_in(t,t0,0.8),tA=ag_in(t,t0+0.5,0.8);if(oA<=0)return;md_veil(ctx,S,oA*0.9);setScreen(ctx,S);
+  withA(ctx,tA,()=>{md_mark(ctx,960,320,64,(t-t0-0.4)/1.8,1);md_T(ctx,title,960,520,{w:800,size:84,align:"center"});
+    if(sub)md_T(ctx,sub,960,598,{w:600,size:36,align:"center",col:MD.soft});withA(ctx,ag_in(t,t0+1.2,0.8),()=>md_T(ctx,line,960,700,{w:800,size:28,ls:3.5,align:"center",col:MD.flow}));});}
+// n: "Film 1 of 3"; series: the series' name
+function md_end(ctx,S,t,t0,title,line,n,series){const oA=ag_in(t,t0,1.0),tA=ag_in(t,t0+0.6,0.9);if(oA<=0)return;md_veil(ctx,S,oA*0.92);setScreen(ctx,S);
+  withA(ctx,tA,()=>{if(line)md_T(ctx,line,960,350,{w:700,size:48,align:"center"});md_mark(ctx,960,496,56,(t-t0-0.7)/1.6,1);md_T(ctx,title,960,650,{w:800,size:44,align:"center"});
+    md_T(ctx,(n?n+" · ":"")+(series||"Modern data basics")+" · Learning Data",960,708,{w:600,size:28,align:"center",col:MD.soft});});}
+
+/* ===== Modern data basics: the platform map's parts, drawn near =====
+   The intro's map (The Inner Life of Data, chapter "The layers together") shows the university's systems on the left, the platform's
+   layers in the middle with Databricks under them, and who reads the result on the right. This module works inside that map, so its
+   parts are drawn here at the size a film needs, with words of 28 px or more as seen, in the colours the intro gives them.
+     md_system(ctx, x, y, w, key, o)  an application, a system of record: key in MD_SYS ("hr", "fin", "sis", "lms") or {n, s, c};
+                                      o.sub (the line under its name), o.h (110), o.lit (0 to 1, it glows), o.a; returns its box and
+                                      its port, where a lane leaves it ({x, y, w, h, port: [x, y]})
+     md_platform(ctx, x, y, w, h, o)  the platform: a large pane with Databricks' mark and name at the top left (o.logos false: the
+                                      name only), o.title ("Databricks"), o.sub, o.uc (true: the Unity Catalog bar along its foot,
+                                      "Unity Catalog · one place to find and govern it all" or o.ucText), o.lit, o.a; returns its inside
+     md_layer(ctx, x, y, w, h, key, o) a layer of the medallion, as the intro's vaults: key "bronze", "silver" or "gold", o.sub (what it
+                                      does: "keeps what arrived"), o.lit, o.a, o.cells (false: no cells)
+     md_table(ctx, x, y, w, o)        a table, or something like one: o.name (in IBM Plex Mono), o.kind ("table", "streaming table",
+                                      "materialized view", "view", "foreign table", "metric view", "volume", or your own words), o.icon
+                                      (an md_icon kind; by default the kind's), o.col (its colour: MD.flow), o.ghost (true: drawn dashed,
+                                      for what is shown here but lives elsewhere: a foreign table read in place, a mirrored one), o.lit,
+                                      o.a, o.k; returns its box and ports {x, y, w, h, l: [x, y], r: [x, y]}
+     md_store(ctx, x, y, s, col, o)   a store of data, drawn as the intro's database glyph, s px tall
+     md_reader(ctx, x, y, w, o)       who reads it: o.title, o.sub, o.logo (a logo's key: "fabric", "powerbi", "databricks", "dbt"),
+                                      o.icon (an md_icon kind when there is no logo), o.col, o.lit, o.a; returns its box and its port (left)
+     md_way(ctx, kind, a, b, t, o)    one of the ways data moves, from point a to point b: "connector" (a managed connector: a lane
+                                      that brings copies in, with its packets), "events" (each change as it's made), "batch" (a whole
+                                      file now and then), "query" (a query in place, federation: a dashed lane, a question out and the
+                                      answer back, nothing kept), "mirror" (the catalog shown in another tool: a dashed lane, nothing
+                                      copied), "share" (shared with a partner where it lives: a dashed lane), "api" (served on request: a
+                                      request out, an answer back); o.col, o.u (how far it's drawn, 0 to 1), o.icon (true: its icon in
+                                      the middle, with o.label under it), o.a, o.bend
+     md_map(ctx, t, o)                the whole map at once, at the frame's size (z 1): the systems, the platform with its three
+                                      layers, and its readers, with the lanes between them; o.a, o.lit (a part's key: "hr", "fin",
+                                      "bronze", "fabric", ... it glows), o.dim (keys drawn faint), o.flow (false: no packets), o.parts
+                                      (the keys to draw; all by default). MD_MAP holds where each part is, for a film that draws its
+                                      own over it or sends the camera there */
+
+const MD_SYS={hr:{n:"HR system",s:"Staff and contracts",c:MD.sys.hr},fin:{n:"Finance system",s:"The general ledger",c:MD.sys.fin},
+  sis:{n:"Student system",s:"Students' records",c:MD.sys.sis},lms:{n:"Learning platform",s:"Classes and work",c:MD.sys.lms}};
+function md_system(ctx,x,y,w,key,o){o=o||{};const S_=typeof key==="string"?MD_SYS[key]:key,c=S_.c,h=o.h||110,a=o.a==null?1:o.a,lit=o.lit||0,box={x,y,w,h,port:[x+w,y+h/2]};if(a<=0.004)return box;
+  ctx.save();ctx.globalAlpha*=a;if(lit>0)glow(ctx,x+w/2,y+h/2,w*0.75,c,0.35*lit);md_card(ctx,x,y,w,h,{edge:c,glow:0.6+0.8*lit,edgeA:0.6+0.4*lit});led(ctx,x+14,y+18,6,h-36,c);
+  md_T(ctx,S_.n,x+40,y+(o.sub===false?h/2+11:h/2-6),{w:800,size:32});if(o.sub!==false)md_T(ctx,o.sub||S_.s,x+40,y+h/2+32,{w:500,size:28,col:MD.soft});
+  md_icon(ctx,"store",x+w-46,y+h/2,40,c);ctx.restore();return box;}
+function md_platform(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,lit=o.lit||0,inner={x:x+24,y:y+96,w:w-48,h:h-96-(o.uc?110:24)};if(a<=0.004)return inner;ctx.save();ctx.globalAlpha*=a;
+  md_card(ctx,x,y,w,h,{edge:MD.dbx,glow:0.5+0.8*lit,edgeA:0.55+0.35*lit,r:24,fill:"rgba(9,15,31,0.9)"});let tx=x+30;
+  if(o.logos!==false&&typeof LOGO!=="undefined"&&LOGO.databricks){tx+=logo(ctx,"databricks",x+28,y+26,44)+16;}
+  md_T(ctx,o.title||"Databricks",tx,y+62,{w:800,size:36});if(o.sub)md_T(ctx,o.sub,tx+md_tw(ctx,o.title||"Databricks",{w:800,size:36})+22,y+62,{w:500,size:28,col:MD.soft});
+  if(o.uc){const by=y+h-96;md_card(ctx,x+24,by,w-48,72,{edge:MD.flow,glow:0.5,r:14,fill:"rgba(7,12,26,0.95)"});md_icon(ctx,"table",x+66,by+36,36,MD.flow);
+    md_T(ctx,o.ucText||"Unity Catalog · one place to find and govern it all",x+100,by+46,{w:700,size:28});}
+  ctx.restore();return inner;}
+function md_layer(ctx,x,y,w,h,key,o){o=o||{};const a=o.a==null?1:o.a,c=MD.layer[key]||key,lit=o.lit||0;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;
+  if(lit>0)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.7,c,0.3*lit);md_card(ctx,x,y,w,h,{edge:c,glow:0.6+0.8*lit,r:20});led(ctx,x+24,y+14,w-48,4,c);
+  const nm=o.name||key[0].toUpperCase()+key.slice(1);md_T(ctx,nm,x+w/2,y+66,{w:800,size:32,align:"center"});
+  if(o.cells!==false){const cs=18,gap=8,top=y+96,bot=y+h-(o.sub?36+34*md_wrap(ctx,o.sub,w-28,{w:600,size:28}).length:24),cols=Math.max(1,Math.floor((w-48)/(cs+gap))),rows=Math.max(0,Math.floor((bot-top)/(cs+gap))),ox=x+(w-(cols*(cs+gap)-gap))/2;
+    for(let r=0;r<rows;r++)for(let q=0;q<cols;q++){const v=hash(r*37+q,key.length*3+1);ctx.fillStyle=v>0.78?"rgba(150,180,230,0.10)":rgba(c,0.22+0.5*v);rr(ctx,ox+q*(cs+gap),top+r*(cs+gap),cs,cs,4);ctx.fill();}}
+  // what the layer does, under its cells, in as many lines as its width needs
+  if(o.sub){const ls=md_wrap(ctx,o.sub,w-28,{w:600,size:28});ls.forEach((l,i)=>md_T(ctx,l,x+w/2,y+h-26-(ls.length-1-i)*34,{w:600,size:28,align:"center",col:MD.soft}));}ctx.restore();}
+const MD_KIND_ICON={"table":"table","streaming table":"stream","materialized view":"refresh","view":"view","foreign table":"query","metric view":"agreed","volume":"volume","mirrored table":"mirror"};
+function md_table(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,col=o.col||MD.flow,h=o.kind?104:72,lit=o.lit||0,box={x,y,w,h,l:[x,y+h/2],r:[x+w,y+h/2]};if(a<=0.004)return box;
+  ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));if(lit>0)glow(ctx,x+w/2,y+h/2,w*0.6,col,0.3*lit);
+  md_card(ctx,x,y,w,h,{edge:col,glow:0.5+0.8*lit,dash:o.ghost?[10,9]:false,r:14});const ic=o.icon||MD_KIND_ICON[o.kind]||"table";
+  if(ic==="agreed")md_icon(ctx,"contract",x+38,y+h/2,36,col);else md_icon(ctx,ic,x+38,y+h/2,36,col);
+  md_T(ctx,o.name||"",x+72,y+(o.kind?46:h/2+10),{w:500,size:28,f:"mono"});if(o.kind)md_T(ctx,o.kind,x+72,y+84,{w:600,size:28,col:o.ghost?col:MD.soft});ctx.restore();return box;}
+function md_store(ctx,x,y,s,col,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=s*0.25;md_icon(ctx,"store",x,y,s*1.2,col,{lw:3.2});ctx.restore();}
+function md_reader(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,col=o.col||MD.ink,h=o.h||(o.sub?110:84),lit=o.lit||0,box={x,y,w,h,port:[x,y+h/2]};if(a<=0.004)return box;ctx.save();ctx.globalAlpha*=a;
+  if(lit>0)glow(ctx,x+w/2,y+h/2,w*0.7,col,0.3*lit);md_card(ctx,x,y,w,h,{edge:o.col||null,glow:0.5+0.8*lit});let tx=x+26;
+  if(o.logo&&typeof LOGO!=="undefined"&&LOGO[o.logo]){tx+=logo(ctx,o.logo,x+24,y+h/2-24,48)+18;}else if(o.icon){md_icon(ctx,o.icon,x+48,y+h/2,40,col);tx=x+88;}
+  md_T(ctx,o.title||"",tx,y+(o.sub?h/2-6:h/2+11),{w:800,size:32});if(o.sub)md_T(ctx,o.sub,tx,y+h/2+32,{w:500,size:28,col:MD.soft});ctx.restore();return box;}
+
+/* ---------------------------------------------------------------- the ways data moves */
+const MD_WAY={connector:{icon:"connector",flow:"events",dash:false},events:{icon:"event",flow:"events",dash:false},batch:{icon:"batch",flow:"batch",dash:false},
+  stream:{icon:"stream",flow:"stream",dash:false},query:{icon:"query",flow:null,dash:true},mirror:{icon:"mirror",flow:null,dash:true},share:{icon:"share",flow:null,dash:true},api:{icon:"api",flow:null,dash:false}};
+function md_way(ctx,kind,a,b,t,o){o=o||{};const al=o.a==null?1:o.a;if(al<=0.004)return;const K=MD_WAY[kind]||MD_WAY.connector,col=o.col||MD.flow,pts=o.pts||md_curve(a,b,{bend:o.bend}),u=o.u==null?1:o.u;
+  md_lane(ctx,pts,col,al*(K.dash?0.9:0.85),{u,dash:K.dash,t});
+  if(u>=1&&o.flow!==false){if(K.flow)md_flow(ctx,pts,t,{kind:K.flow,col,a:al,every:o.every});
+    // a query in place and a request: a question goes out and the answer comes back along the same lane; nothing stays
+    else if(kind==="query"||kind==="api"){const p=mk(pts.map(q=>P(q[0],q[1])));spawn(t,3.2,2.6,0,(v)=>{const go=v<0.5,q=at(p,go?ease(v*2):1-ease((v-0.5)*2)),f=sstep(0,0.08,v)*(1-sstep(0.92,1,v))*al;
+        glow(ctx,q.x,q.y,go?18:30,go?MD.ink:col,0.8*f);if(!go){ctx.save();ctx.globalAlpha*=f;rr(ctx,q.x-12,q.y-9,24,18,4);ctx.fillStyle=rgba(mix(col,[255,255,255],0.4),1);ctx.fill();ctx.restore();}});}}
+  if(o.icon){const q=at(mk(pts.map(p=>P(p[0],p[1]))),0.5),ia=o.iconA==null?1:o.iconA;ctx.save();ctx.globalAlpha*=al*ia;
+    ctx.beginPath();ctx.arc(q.x,q.y,34,0,TAU);ctx.fillStyle="rgba(7,12,26,0.96)";ctx.shadowColor=rgba(col,0.7);ctx.shadowBlur=18;ctx.fill();ctx.shadowBlur=0;ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;ctx.stroke();
+    md_icon(ctx,K.icon,q.x,q.y,38,col);if(o.label)md_T(ctx,o.label,q.x,q.y+(o.labelBelow==null?78:o.labelBelow),{w:700,size:28,align:"center",col});ctx.restore();}}
+
+/* ---------------------------------------------------------------- the whole map */
+const MD_MAP={
+  heads:{sys:[70,176,"Where data is born"],plat:[560,176,"The platform"],read:[1440,176,"Who reads it"]},
+  hr:[70,214,410],fin:[70,364,410],sis:[70,514,410],lms:[70,664,410],
+  platform:[560,214,820,600],bronze:[594,330,236,300],silver:[852,330,236,300],gold:[1110,330,236,300],
+  fabric:[1440,214,420,"Microsoft Fabric","Power BI, Finance","fabric"],genie:[1440,364,420,"Genie","Questions in plain words","databricks"],
+  dash:[1440,514,420,"Dashboards","For every pay day","databricks"],apps:[1440,664,420,"Apps and agents","The claims app, others","databricks"]
+};
+function md_map(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const M_=MD_MAP,has=k=>!o.parts||o.parts.includes(k),dim=k=>o.dim&&o.dim.includes(k)?0.3:1,lit=k=>o.lit===k||(Array.isArray(o.lit)&&o.lit.includes(k))?1:0;
+  ctx.save();ctx.globalAlpha*=a;
+  for(const [k,[x,y,s]] of Object.entries(M_.heads))if(has("heads"))md_label(ctx,x,y,s,{});
+  const ports={};for(const k of["hr","fin","sis","lms"])if(has(k)){const [x,y,w]=M_[k];withA(ctx,dim(k),()=>{ports[k]=md_system(ctx,x,y,w,k,{lit:lit(k)}).port;});}
+  if(has("platform")){const [x,y,w,h]=M_.platform;withA(ctx,dim("platform"),()=>md_platform(ctx,x,y,w,h,{uc:true,lit:lit("platform")}));}
+  const L=[["bronze","keeps what arrived"],["silver","makes it consistent"],["gold","makes it useful"]];
+  for(const [k,sub] of L)if(has(k)){const [x,y,w,h]=M_[k];withA(ctx,dim(k),()=>md_layer(ctx,x,y,w,h,k,{sub,lit:lit(k)}));}
+  // lanes: each system into bronze, bronze to silver to gold, gold out to each reader
+  const B=M_.bronze,G=M_.gold,flow=o.flow!==false;
+  for(const k of["hr","fin","sis","lms"])if(ports[k]&&has("bronze")){const c=MD.sys[k];withA(ctx,dim(k),()=>{const pts=md_curve(ports[k],[B[0],B[1]+B[3]/2],{bend:0.55});md_lane(ctx,pts,c,0.8);if(flow)md_flow(ctx,pts,t,{col:c,off:k.length*0.3,every:1.3});});}
+  if(has("silver")&&has("bronze")){const pts=[[B[0]+B[2],B[1]+B[3]/2],[M_.silver[0],B[1]+B[3]/2]];md_lane(ctx,pts,MD.flow,0.8);if(flow)md_flow(ctx,pts,t,{off:0.2,dur:0.6,every:0.9});}
+  if(has("gold")&&has("silver")){const S_=M_.silver,pts=[[S_[0]+S_[2],B[1]+B[3]/2],[G[0],B[1]+B[3]/2]];md_lane(ctx,pts,MD.flow,0.8);if(flow)md_flow(ctx,pts,t,{off:0.5,dur:0.6,every:0.9});}
+  for(const k of["fabric","genie","dash","apps"])if(has(k)){const [x,y,w,title,sub,lg]=M_[k];withA(ctx,dim(k),()=>{const r=md_reader(ctx,x,y,w,{title,sub,logo:lg,col:k==="fabric"?MD.dom.finance:null,lit:lit(k)});
+      // Fabric reads through a mirror: the catalog is shown there and the data read where it lives, so its lane is dashed and carries nothing
+      if(has("gold")){const pts=md_curve([G[0]+G[2],G[1]+G[3]/2],r.port,{bend:0.6}),mir=k==="fabric";md_lane(ctx,pts,MD.layer.gold,0.75,{dash:mir,t});if(flow&&!mir)md_flow(ctx,pts,t,{col:MD.layer.gold,off:k.length*0.25,every:1.6});}});}
+  ctx.restore();}
+
+/* ===== Modern data basics: the tools' pages =====
+   Tools look like their pages, drawn for the film at the level of architecture, never a click-by-click tour: a window of dark glass
+   with a small bar along its top naming the product, with its official logo where the film's film.json says "logos": true (The
+   Inner Life of Data's Databricks and dbt marks, this module's Microsoft Fabric, Power BI and mirrored catalog marks, logos.js), and
+   no release status anywhere on it. What the page shows is drawn by the film in the window's body, often with the rows and the tree
+   below. Every word is at least 28 px as seen: a page drawn small is a picture, and its words are marked as decoration ({deco: 1}).
+     md_window(ctx, x, y, w, h, o)    a tool's page: o.logo (a logo's key), o.product ("Databricks"), o.title (what the page is, at the
+                                      right of the bar: "Catalog"), o.edge (a colour that means something), o.lit, o.a, o.k;
+                                      o.draw(ctx, body) draws in the body {x, y, w, h}; returns the body
+     md_rows(ctx, x, y, cols, rows, o) a table of words: cols [{h: "FIELD", w: 300, f: "mono"}, ...] (each column's heading, width and
+                                      font), rows [[cell, ...], ...], a cell a string or {s, col, icon, f}; o.rh (row height, 54), o.lit
+                                      (a row's index, or several: they glow), o.rowA (row, i) => its opacity (rows coming in one by one),
+                                      o.a; returns the height drawn
+     md_tree(ctx, x, y, items, o)     a catalog's tree: items [{name, kind ("catalog", "schema", "table", "view", "volume", "metric view",
+                                      "streaming table", "materialized view", "foreign table", "mirrored table"), depth, col, a}], o.rh (52),
+                                      o.indent (40), o.a; returns the height drawn */
+
+function md_window(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a,bar=68,body={x:x+20,y:y+bar+16,w:w-40,h:h-bar-36};if(a<=0.004)return body;ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));if(o.lit)glow(ctx,x+w/2,y+h/2,Math.max(w,h)*0.6,o.edge||MD.flow,0.25*o.lit);
+  md_card(ctx,x,y,w,h,{edge:o.edge||[150,175,215],glow:o.edge?0.7:0.25,edgeA:o.edge?0.85:0.45,r:18,fill:"rgba(10,17,35,0.96)"});
+  ctx.save();rr(ctx,x+1,y+1,w-2,bar,17);ctx.clip();ctx.fillStyle="rgba(255,255,255,0.045)";ctx.fillRect(x,y,w,bar);ctx.restore();
+  ctx.strokeStyle="rgba(170,200,245,0.18)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+12,y+bar);ctx.lineTo(x+w-12,y+bar);ctx.stroke();
+  let tx=x+24;if(o.logo&&typeof LOGO!=="undefined"&&LOGO[o.logo])tx+=logo(ctx,o.logo,x+22,y+bar/2-19,38)+14;
+  if(o.product)md_T(ctx,o.product,tx,y+bar/2+10,{w:800,size:28});if(o.title)md_T(ctx,o.title,x+w-24,y+bar/2+10,{w:600,size:28,align:"right",col:MD.soft});
+  if(o.draw){ctx.save();rr(ctx,x+2,y+bar+1,w-4,h-bar-3,16);ctx.clip();o.draw(ctx,body);ctx.restore();}
+  ctx.restore();return body;}
+function md_rows(ctx,x,y,cols,rows,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||54,lits=o.lit==null?[]:[].concat(o.lit),W_=cols.reduce((s,c)=>s+c.w,0);if(a<=0.004)return rh*(rows.length+1);ctx.save();ctx.globalAlpha*=a;
+  let cx=x;for(const c of cols){if(c.h)md_T(ctx,String(c.h).toUpperCase(),cx+14,y+36,{w:800,size:28,ls:3,col:MD.soft});cx+=c.w;}
+  ctx.strokeStyle="rgba(170,200,245,0.22)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x,y+rh);ctx.lineTo(x+W_,y+rh);ctx.stroke();
+  rows.forEach((r,i)=>{const ra=o.rowA?o.rowA(r,i):1;if(ra<=0.004)return;const ry=y+rh*(i+1);ctx.save();ctx.globalAlpha*=ra;
+    if(lits.includes(i)){const lc=o.litCol||MD.flow;ctx.fillStyle=rgba(lc,0.13);rr(ctx,x-6,ry+5,W_+12,rh-8,10);ctx.fill();ctx.strokeStyle=rgba(lc,0.8);ctx.lineWidth=1.8;rr(ctx,x-6,ry+5,W_+12,rh-8,10);ctx.stroke();}
+    let xx=x;r.forEach((cell,j)=>{const c=cols[j]||{w:200},q=typeof cell==="object"&&cell?cell:{s:String(cell==null?"":cell)},f=q.f||c.f;let tx=xx+14;
+      if(q.icon){md_icon(ctx,q.icon,tx+16,ry+rh/2,30,q.col||MD.ink);tx+=42;}
+      md_T(ctx,q.s,tx,ry+rh/2+10,{w:f==="mono"?500:600,size:28,f,col:q.col||MD.ink});xx+=c.w;});
+    ctx.restore();});
+  ctx.restore();return rh*(rows.length+1);}
+const MD_TREE_ICON={catalog:"store",schema:"volume",table:"table",view:"view",volume:"volume","metric view":"contract","streaming table":"stream","materialized view":"refresh","foreign table":"query","mirrored table":"mirror"};
+function md_tree(ctx,x,y,items,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||52,ind=o.indent||40;if(a<=0.004)return rh*items.length;ctx.save();ctx.globalAlpha*=a;
+  items.forEach((it,i)=>{const ia=it.a==null?1:it.a;if(ia<=0.004)return;const yy=y+i*rh,xx=x+(it.depth||0)*ind,col=it.col||MD.ink;ctx.save();ctx.globalAlpha*=ia;
+    if(it.depth){ctx.strokeStyle="rgba(170,200,245,0.25)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(xx-ind+16,yy-rh/2+10);ctx.lineTo(xx-ind+16,yy+rh/2-4);ctx.lineTo(xx-6,yy+rh/2-4);ctx.stroke();}
+    md_icon(ctx,MD_TREE_ICON[it.kind]||"table",xx+16,yy+rh/2-4,30,it.col||MD.flow);md_T(ctx,it.name,xx+42,yy+rh/2+6,{w:it.kind==="catalog"||it.kind==="schema"?700:500,size:28,f:it.kind==="catalog"||it.kind==="schema"?undefined:"mono",col});
+    ctx.restore();});
+  ctx.restore();return rh*items.length;}
+
+/* ===== Files as data and as context: the film's own world, 1842 to 1855 =====
+   The film draws with the module's look (films/data-that-moves/shared/README.md); these are its own pictures, each name starting
+   with fd_ or FD_. This file holds the opening's world: the chart of the oceans, the places painted once, the logbooks and the log of
+   1853, and the people of that time. fd_docs.js holds the documents of today.
+     the chart       the land from Natural Earth's 1:110m land (public domain, naturalearthdata.com; NOTICE.md), simplified to about a
+                     third of a degree and kept here in tenths of a degree; fd_xy projects them, plate carrée, into the place's 1920 x
+                     1080 (7 px a degree), so the camera can come close and they stay sharp: fd_land, the winds (fd_winds), the currents
+                     (fd_currents), the routes (fd_route), a ship (fd_ship), the five-degree squares (fd_squares), a port (fd_port)
+     the places      the Navy's office in Washington (fdOffice), the hall in Brussels (fdHall) and the night sea (fdSea), each painted once
+     paper           a page (fd_paper), a logbook's page in three hands (fd_logPage), a logbook shut (fd_book), and the log agreed at
+                     Brussels in 1853 (fd_form53)
+     the people      a captain and Adolphe Quetelet (FD_P), dressed for the 1850s: a dark coat, a white shirt and a black stock
+   The routes are a picture of the idea, not a ship's track: the habit's road far to the east and through the calms, and the charts'
+   more direct one. Every word is at least 28 px as seen, or marked as decoration ({deco:1}); none but the captions below y 890. */
+
+const FD={paper:[232,222,198],paperHi:[247,241,226],paperDk:[186,168,136],ink:[56,44,34],inkSoft:[112,94,74],
+  land:[24,33,50],landHi:[36,48,70],coast:[128,164,214],grat:[120,160,230],wind:[170,208,242],habit:[206,214,230],
+  lamp:[255,196,124],wood:[44,30,22],woodHi:[96,66,44],gilt:[214,178,110]};
+const FD_PRJ={lon0:-130,lat1:62,k:7,x0:60,y0:20};
+const fd_xy=(lon,lat)=>[FD_PRJ.x0+(lon-FD_PRJ.lon0)*FD_PRJ.k,FD_PRJ.y0+(FD_PRJ.lat1-lat)*FD_PRJ.k];
+const fd_ll=(x,y)=>[(x-FD_PRJ.x0)/FD_PRJ.k+FD_PRJ.lon0,FD_PRJ.lat1-(y-FD_PRJ.y0)/FD_PRJ.k];
+// a camera on the chart, looking at (lon, lat) at zoom z: [x, y, z] for a shot's keys
+const fd_on=(lon,lat,z)=>{const p=fd_xy(lon,lat);return[p[0],p[1],z];};
+// words drawn in the chart's coordinates, sized so they read at size px as seen through the camera
+function fd_say(ctx,cam,s,x,y,o){o=o||{};const z=cam&&cam.z||1;md_T(ctx,s,x,y,Object.assign({},o,{size:(o.size||30)/z,ls:o.ls?o.ls/z:0}));}
+// screen space inside a shot: what's drawn here stays put while the camera moves
+function fd_scr(ctx,S,fn){ctx.save();setScreen(ctx,S);try{fn();}finally{ctx.restore();}}
+// a value that comes in at a and leaves at b, over d
+const fd_io=(t,a,b,d)=>ag_io(t,a,b,d||0.5);
+
+// the land: Natural Earth's 1:110m land (public domain), each ring simplified to about a third of a degree, in tenths of a degree:
+// the first point, then each step from the one before, longitude then latitude
+const FD_LAND=[[-1212,-735,25,0,-15,-6,-14,1,-10,3,2,4,12,-2],[-1256,-735,16,-4,-33,4,17,0],[-990,-719,22,-1,6,-5,-46,0,-15,6,33,0],[-685,-710,-3,-12,-23,-3,-13,0,5,4,-31,0,0,4,11,4,18,1,4,17,14,6,18,-21],[-586,-642,-34,-6,-6,-7,5,-7,-16,-3,-20,-15,25,-12,17,-19,8,-21,-7,-9,-30,-12,-62,-13,-66,-1,35,-12,-43,-1,495,0,-74,0,184,29,18,6,3,4,-11,2,4,4,38,11,20,11,29,-4,5,8,26,-6,36,3,5,-4,79,17,18,-1,13,-8,26,8,17,-4,42,5,22,-2,11,-6,45,2,49,8,19,12,47,-13,34,12,54,9,71,19,19,-2,23,-13,27,-7,27,6,48,-5,8,-13,-1,-5,-18,-6,1,-4,12,0,-12,-12,20,-4,11,2,29,22,37,4,15,12,37,11,40,0,12,10,17,-10,100,0,31,16,34,-13,40,2,34,8,38,-10,24,-4,34,8,56,-3,41,4,19,2,3,9,15,-15,9,-2,80,1,11,-10,22,-5,37,-5,18,3,49,-10,24,-10,68,-4,28,-7,-1,-4,-18,-16,-32,-7,-19,-11,-7,-12,8,-11,27,-2,-72,0,202,0,-3600,0,371,0,-152,0,-3,11,14,-4,57,-1,52,9,-4,8,3,3,19,-1,91,12,141,-2,72,8,16,-10,10,3,37,-8,70,-1,5,4,-12,7,-12,1,-12,15,46,-3,28,-7,62,3,9,7,8,-4,69,-9,12,8,54,-8,75,14,1,9,-12,19,11,16,-3,8,47,27,52,13,6,-2,-14,-7],[-678,-539,28,-8,-5,-5,-15,3,-11,-7,-29,5,-23,11,-14,12,36,-13,8,12,10,4,7,-1,8,-13],[-585,-511,7,-4,-2,-4,-14,-3,-5,3,-8,-4,-5,4,27,8],[703,-497,-16,-1,2,12,16,-5,-2,-6],[1454,-408,10,-3,19,2,1,-12,-5,-11,-3,3,-7,-7,-9,1,-13,23,0,5,7,-1],[1730,-409,2,-4,8,4,2,-4,-15,-21,4,-5,-16,-3,-9,-17,-13,-7,-9,0,-17,4,3,11,35,21,16,20,7,5,2,-4],[1746,-362,7,-10,1,7,6,-11,8,-3,17,2,-5,-15,-8,1,-12,-22,-9,-1,-4,1,5,8,-3,6,-11,4,8,7,1,14,-21,29,17,-8,3,-9],[1671,-222,-4,-2,-12,7,-15,16,31,-21],[1784,-173,2,-9,-12,0,3,8,7,1],[1794,-168,-7,-2,-1,4,8,2,6,3,0,-5,-6,-2],[1671,-149,2,-8,-5,0,-2,11,5,-3],[501,-136,3,-21,-7,0,1,-12,-27,-80,-17,-7,-14,6,-7,22,1,15,10,12,-4,27,4,12,19,4,14,12,2,9,4,-1,9,18,9,-16],[1436,-138,3,-7,7,3,8,-8,10,-40,24,-14,9,-19,10,-1,2,-11,20,-18,2,-8,5,-20,-7,-35,-12,-14,-14,-27,-3,-17,-6,-4,-11,0,-20,-12,-14,6,1,5,-14,-9,-30,8,-10,19,-15,5,1,12,-5,-7,-9,-2,11,17,-1,7,-18,-20,-8,4,-9,19,-30,11,-52,-7,-19,-8,-5,-9,-38,-1,-19,-11,-14,1,-16,8,0,6,7,3,1,11,-12,37,-13,24,5,-4,-4,9,8,-7,-8,19,7,26,1,-7,4,7,21,11,42,10,13,15,1,9,7,9,4,-9,5,2,-4,5,3,5,5,-2,1,7,13,14,14,4,13,-11,12,-1,-2,6,12,19,20,4,0,5,-8,3,6,2,29,-11,12,3,5,-5,-10,-9,-5,-17,47,-27,7,3,8,24,-2,13,6,27,4,3,3,-5,8,-26],[1621,-105,3,-3,-7,0,-4,6,8,-3],[1207,-102,-17,6,9,2,8,-8],[1609,-99,-11,1,-1,6,12,-7],[1244,-101,-9,-1,5,9,19,9,14,0,-22,-10,-7,-7],[1179,-81,12,-6,-18,-3,-6,0,4,5,8,4],[1229,-81,-1,-5,-15,-3,-14,1,0,4,30,3],[1086,-68,19,-1,3,4,49,-19,-11,-4,-40,7,-52,12,7,10,12,-1,13,-8],[1347,-62,-5,-7,1,11,2,4,2,-8],[1559,-68,-7,3,-5,15,12,-18],[1520,-55,-23,-8,-14,6,15,2,2,5,2,-5,6,0,8,7,-1,6,6,1,-1,-14],[1272,-35,-3,-3,-9,6,12,-3],[1305,-31,3,-8,-22,5,-7,0,2,6,24,-3],[1531,-45,-3,-3,-4,10,-17,11,2,2,13,-7,9,-13],[1341,-12,3,-16,11,-6,8,11,20,6,63,-22,14,-16,16,-6,3,-5,-9,-1,2,-7,15,-17,6,0,0,-4,15,-8,-8,-4,-21,6,-19,20,-13,5,-14,-6,1,-8,-8,-3,-16,2,-9,8,-10,2,-15,-3,11,11,-8,19,-42,19,-7,-6,-2,8,-8,5,17,6,-15,0,-17,13,19,5,17,-8],[1252,14,-8,-10,-7,-2,-35,0,-2,-7,9,-9,24,8,0,-5,-5,2,-13,-10,17,-34,-6,-3,-4,3,5,8,-12,-1,1,4,-7,6,1,10,-7,-3,1,-26,-10,1,1,19,-7,7,12,34,9,7,20,-4,23,5],[1287,11,-1,-8,-5,1,-1,-7,4,-5,-7,5,-1,21,3,4,8,-11],[1058,-59,-11,0,-21,17,-33,44,-7,16,-32,32,-1,5,22,-3,31,-31,11,0,21,-20,-4,-8,10,-4,5,-12,12,-8,-3,-28],[1179,18,11,-9,-12,-1,-3,-16,-9,-7,-5,-25,-1,3,-11,-4,-4,6,-12,4,-12,-4,-4,5,-15,1,-1,13,-10,11,-1,9,7,16,7,-3,8,2,2,8,16,4,37,38,25,-15,-19,-22,7,-9,-1,-5],[1264,84,1,-12,-3,-9,-4,10,-4,-5,0,-12,-12,6,0,12,-6,4,-8,-3,-7,-6,2,11,32,10,-1,8,8,-5,2,-9],[812,62,-9,-2,-4,8,-2,14,4,16,7,-5,10,-18,-6,-13],[-609,101,-11,0,3,7,8,1,0,-8],[1240,103,-10,-13,-6,7,4,6,1,6,6,0,-2,-6,8,9,-1,-9],[1185,93,-13,-9,18,20,5,10,2,-8,-12,-13],[1219,119,12,-3,-5,-9,-6,-3,-1,15],[1255,122,3,-12,-8,3,3,-9,-5,-3,-3,8,-2,6,6,-1,0,4,-6,8,12,-4],[1215,131,-2,-9,-10,13,12,-4],[1213,185,9,0,3,-14,-8,-12,0,-16,23,-5,1,-13,-8,5,-4,6,-2,-4,-7,6,-14,1,4,6,-3,3,-1,-4,-5,6,-2,14,4,-4,4,25,6,0],[-656,182,-16,-3,0,5,16,-2],[-769,179,-14,3,5,3,14,-3,2,-3,-7,0],[-726,199,26,-3,17,-10,-4,-4,-23,1,-4,-7,-10,6,-21,1,1,4,21,0,-5,8,-6,1,8,3],[1103,187,-8,-5,-8,3,-1,9,16,7,8,-4,-7,-10],[-1555,191,-4,0,0,12,11,-8,-7,-4],[-797,228,14,-3,26,-18,15,-4,-36,-4,7,5,-22,12,-25,6,-4,2,4,2,-32,-7,27,13,26,-4],[-775,238,-9,8,2,6,7,-14],[1212,228,-5,-8,-5,8,-1,8,6,9,8,8,5,-3,-8,-22],[-778,266,-11,-2,4,5,7,-3],[-770,266,-2,-7,-1,6,-5,5,8,-4],[1346,341,-4,-9,-4,3,-8,-8,-6,3,5,11,17,0],[346,357,-16,-11,-7,5,23,6],[237,357,26,-4,-16,-4,-12,4,2,4],[155,382,-4,-16,-13,5,-14,5,2,5,29,1],[92,412,6,-7,-1,-13,-13,0,-2,18,10,2],[1410,371,-7,-20,-31,-5,-14,-11,-7,3,0,8,-41,-7,10,-8,-7,-16,-6,-5,-5,4,2,9,-10,10,32,21,31,1,10,18,7,-5,20,14,9,30,11,2,5,-14,0,-8,-9,-10,0,-11],[96,422,-4,-8,-7,9,9,7,2,-8],[1439,442,7,-2,7,4,2,-11,-14,-3,-9,-10,-16,7,-5,-11,-11,0,-2,10,5,7,11,1,6,22,19,-14],[-637,466,17,-2,-9,-4,-12,4,-3,3,4,3,3,-4],[-618,491,-18,3,-6,6,24,-9],[-1235,485,-22,3,-24,12,-3,8,26,-5,23,-18],[-561,507,-7,-9,7,4,6,-3,-3,-3,23,-4,-3,-7,7,2,5,-12,-5,-8,-11,1,0,10,-12,-9,-6,0,7,5,-10,2,-30,0,5,7,-4,2,18,22,15,9,5,0,-7,-9],[-1327,540,10,1,-3,-11,8,-8,-4,0,-15,12,-1,8,5,-2],[1436,507,11,-17,-15,3,-6,-14,9,-11,0,-7,-8,6,-6,-7,0,36,1,14,-6,9,1,14,9,5,-4,4,5,2,9,-37],[-68,523,-18,-6,-14,1,8,11,-5,10,21,12,19,-5,-11,-23],[127,556,-6,-8,-12,10,15,3,3,-5],[-1530,571,-15,-1,-2,5,9,3,17,-2,-9,-5],[-30,586,-11,-10,21,1,-11,-17,10,-1,10,-13,7,-1,9,-16,12,-2,-6,-9,3,-5,-8,-5,-64,-6,24,12,-19,6,11,3,-6,5,2,7,15,-1,2,6,-7,6,-12,2,-2,10,-6,-5,-5,15,11,18,20,0],[-1656,599,-19,3,18,1,1,-4],[-793,622,-4,-6,-6,5,10,1],[-819,627,-12,-5,-9,3,7,4,14,-2],[-1717,638,30,-5,-8,-3,-21,3,-1,5],[-852,657,2,-5,49,-15,-24,0,-6,4,-24,-10,-4,5,-13,-1,8,5,5,17,7,0],[-145,665,-2,-7,11,-7,-13,-7,-38,-9,-41,5,10,4,-22,5,18,2,-21,5,6,7,16,1,15,-7,15,6,13,-3,16,5,17,0],[-759,671,-11,0,-2,5,4,5,9,2,8,-3,0,-4,-8,-5],[-1750,666,7,-3,-3,8,27,-2,20,-9,-26,-6,-1,-9,-4,-2,-30,6,-2,5,-22,0,-5,3,2,4,-12,-2,5,-5,-6,-4,0,40,51,-18,-1,-6],[-956,691,-7,-3,-21,2,-14,4,9,3,7,4,26,-10],[1800,708,-13,3,13,4,0,-7],[-1787,709,-13,-1,0,7,10,1,14,-3,-11,-4],[-905,695,-1,-10,14,8,12,-7,-3,-7,9,-7,18,16,1,11,29,-2,13,-5,1,-5,-8,-6,7,-5,-1,-5,-19,-7,-25,2,-15,-18,-12,-7,-14,-1,-8,-4,-1,-6,-11,-2,-13,-8,-10,-11,-5,-20,15,-1,9,-17,14,2,59,-20,27,-2,2,-18,7,-11,15,-10,8,3,5,11,-5,15,-7,6,16,4,17,14,-8,16,-12,7,12,11,-8,24,43,1,24,-13,18,0,3,-21,17,-8,14,6,16,15,32,-33,-4,-7,45,-17,4,-8,11,-5,1,-12,-43,-19,-64,0,-47,-34,24,15,36,9,9,-5,-9,-6,6,-19,13,-5,17,2,10,11,1,-7,6,-4,-56,-24,-7,1,-1,9,18,8,-27,-2,1,-3,-31,-11,-6,-7,-1,-7,8,-7,-37,-7,18,0,-21,-1,-9,-19,-6,6,4,-11,-8,-12,2,7,-6,13,0,-11,-7,1,7,-3,6,-23,-34,-21,-22,-21,0,-14,12,-31,-3,-17,-8,0,-5,7,-12,20,0,12,-12,10,-10,-5,-13,8,-28,-1,-4,-1,4,-9,-10,-2,-14,6,-22,0,-28,-14,-8,-9,3,-15,-8,-35,16,-31,19,-12,24,6,12,6,5,17,32,5,3,-7,-10,-25,-5,2,-1,-20,-5,-6,39,1,16,-7,2,-10,-6,-32,16,-21,8,-2,18,8,28,-10,11,8,2,12,6,5,15,1,16,12,7,-3,-8,-7,2,-23,7,8,-4,11,12,4,3,8,17,-16,20,0,13,-5,6,5,24,1,-8,-3,3,-5,16,-5,1,-8,16,-6,6,-12,14,-8,31,-2,27,-16,8,-23,5,-2,1,-7,-8,-8,3,-3,18,-1,0,-10,8,6,29,-10,5,-5,-2,-6,12,3,34,-5,28,-19,16,-3,9,-22,-4,-17,-36,-41,-6,-48,-16,-40,-11,-11,-26,-4,-30,-15,-9,-10,-4,-28,-49,-57,-11,-6,-13,1,-22,10,-1,-5,13,-9,-2,-7,7,-4,-1,-5,-9,-13,-15,-5,-31,-1,2,-19,-6,-3,-24,-1,1,-10,7,-3,5,4,3,-6,-17,-9,-4,-15,-17,-6,-3,-7,20,-9,-4,-9,-12,-6,-6,-12,-13,-8,9,-16,-13,0,-13,-6,-2,-9,-4,-1,-35,16,-4,7,3,6,-5,6,-1,17,4,10,11,8,-15,3,9,8,3,17,12,-4,5,21,-7,3,-3,-13,-6,2,11,39,-4,21,4,1,18,47,-1,35,6,13,7,78,-2,15,-11,9,-45,28,-38,74,-14,11,3,4,-5,10,16,20,-2,5,-4,-5,-6,5,1,11,8,19,12,6,5,12,13,12,-4,3,0,26,-7,8,0,8,-14,6,-9,-8,5,-6,-9,-3,-2,6,-24,6,-1,7,-14,10,-1,-5,-6,3,0,12,-20,18,2,4,-37,6,-35,23,-19,-5,-69,26,-20,16,-2,5,4,10,-7,14,-33,28,0,8,-29,26,-9,22,-8,4,-9,2,1,-16,31,-35,9,-24,13,-9,-6,-6,-22,19,-1,13,-28,17,5,0,4,9,-13,10,-18,34,-12,10,-21,6,-38,57,-1,25,6,27,-8,27,16,-2,5,-9,-2,19,-46,18,-6,9,1,6,-12,5,-2,8,-27,19,-2,9,-13,8,-6,9,-25,1,-33,13,-72,14,-11,-2,2,-7,-37,-8,3,15,11,3,-3,3,-34,-19,7,-5,-9,-8,-21,-7,-21,-14,-64,-16,71,32,7,13,-21,-5,-13,7,-16,-4,1,9,-6,4,-13,-2,-15,7,-1,6,-7,4,15,16,15,0,23,7,-7,6,7,4,-42,-4,-14,3,-17,10,36,9,8,0,-1,-5,21,0,-51,23,6,5,30,5,13,9,53,11,23,-7,107,-5,71,-13,21,7,15,-1,31,7,7,-4,10,7,23,-10,14,7,1,-8,28,4,63,-9,13,-5,-14,-5,54,1,10,-6,11,5,-10,4,6,4,20,1,19,-8,28,-4,31,2,-2,6,9,2,16,-4,0,-9,6,8,8,0,5,10,-23,10,1,11,12,7,23,-6,14,-11,-9,-5,19,-2],[-1142,731,-5,-4,23,3,13,-5,12,5,17,-13,5,4,-7,10,30,-4,9,-17,35,-10,-1,-4,-16,-1,6,-4,-3,-3,-47,3,-62,-6,-6,5,-22,2,-12,8,49,4,-55,1,-5,4,23,4,-33,3,15,11,27,6,10,-2],[-1045,734,-9,-6,-15,7,3,1,21,-2],[-763,731,-35,-3,-11,5,5,5,41,-7],[-866,732,8,-7,9,8,26,5,17,-11,-1,-6,29,6,36,-9,1,-5,19,3,43,-15,9,-9,-18,-5,39,-9,15,-9,15,0,-3,-7,-17,-12,-28,14,-13,-1,-1,-6,28,-13,6,-10,-3,-7,-38,10,26,-18,-48,10,-12,5,3,3,-29,10,-29,-5,-9,4,7,7,39,2,-3,3,16,15,-2,4,-40,12,7,2,-28,11,-23,-5,-74,7,-8,4,10,4,-14,0,-3,10,18,13,26,3,-8,-6],[-1004,738,33,-3,-10,-5,16,-4,-2,-9,-17,-4,-41,12,0,3,21,-1,-11,7,11,4],[1436,732,-36,1,8,5,13,1,15,-7],[-932,728,-11,-8,-11,1,-6,8,5,10,50,0,-27,-11],[-1205,714,-26,-5,-28,10,20,18,-10,6,34,1,39,-2,21,-7,-37,-10,-13,-7,0,-4],[1507,751,-11,-4,-35,5,3,3,43,-4],[-936,750,-20,-3,-12,2,5,5,14,2,13,-6],[1451,756,-8,-8,-53,-2,-20,7,5,6,13,2,63,-5],[-985,767,8,-4,-5,-13,-27,1,0,5,-16,0,-1,7,41,4],[-1082,762,4,-4,19,2,2,-5,-6,-5,-74,-6,-2,3,21,5,-45,-2,-14,2,23,13,63,-10,-14,9,9,4,11,-1,3,-5],[575,707,-38,1,-3,4,-18,3,-1,5,29,16,-9,1,24,9,-3,5,56,12,70,6,7,-4,-104,-22,-31,-19,2,-9,19,-8],[-947,771,31,-3,9,-4,-3,-3,18,-5,81,1,10,-4,3,-4,-7,-2,-77,-3,-42,4,-5,11,-10,4,-32,5,4,4,20,-1],[-1162,776,-1,-7,-8,-4,-44,-6,-14,2,38,14,29,1],[1070,770,2,-5,39,2,30,-9,-2,-5,-45,-11,36,-2,5,-7,21,5,76,-8,1,7,37,-1,16,-6,5,-6,-6,-4,28,-12,10,10,16,-4,60,1,-8,9,14,4,90,-6,35,-14,60,1,8,-4,-1,-8,12,-3,69,2,18,-9,12,3,-8,7,5,4,81,-7,14,-4,0,-40,-26,-4,21,-20,-58,-9,-34,-18,-14,7,-26,-8,-5,4,-9,-5,-14,2,-15,-17,1,-4,11,-2,-1,-14,-10,-1,-4,-8,4,-4,-17,-6,-4,-11,-15,-2,-3,-11,-14,-9,-14,44,5,14,9,10,16,3,53,30,8,15,-12,-1,-6,-9,-26,-11,-8,13,-26,-4,-25,-16,8,-7,-37,-3,0,7,-15,2,-13,-5,-63,-2,-71,-43,16,-1,15,-8,6,5,11,-1,14,-11,1,-9,-8,-10,-5,-28,-19,-21,-33,-29,-14,-6,-12,5,-23,-14,-3,-10,-22,-11,-1,-6,9,-6,12,-18,-4,-17,-26,-7,-4,23,8,2,-7,8,-15,4,6,15,-10,3,-32,-10,11,15,-6,5,-26,-16,-10,-1,-5,-5,14,-8,0,-5,8,-2,11,7,16,-4,1,-6,-14,-2,-19,-18,10,-5,17,-27,0,-8,-6,-2,8,-9,-4,-16,-6,-1,-24,-36,-28,-17,-17,-6,-4,3,-30,-11,-4,-11,-5,0,0,11,-14,3,-26,-19,-2,-7,32,-38,4,-19,-1,-17,-40,-31,-4,6,3,7,-16,7,-9,16,-18,4,2,8,-9,0,-9,-42,7,0,6,-18,25,-19,12,-42,-7,-1,-21,16,-13,37,-16,19,-2,-6,5,36,-16,55,-18,-12,-12,3,1,22,-6,15,-13,10,-10,21,-9,0,-2,-10,-13,3,-1,-4,-19,-2,0,-8,-5,-5,-14,-7,-29,-25,0,-4,-19,-7,-4,-55,-6,-1,-4,-8,3,-3,-9,-3,-8,-9,-9,9,-31,71,-9,54,-21,-5,-13,12,4,4,-3,3,-19,11,-10,15,-49,-3,-41,6,-4,13,-5,1,-18,-6,-32,14,-14,22,-21,-1,8,-23,14,-10,6,-19,2,12,6,-2,-2,-12,4,-6,22,1,24,23,4,-22,19,-6,11,-13,-13,-19,-7,-2,-1,-13,-24,-13,0,-4,-29,-8,-2,-8,-35,-16,-31,-7,-6,-6,-15,-1,-9,26,0,16,-17,27,-18,18,-6,24,-10,6,-24,38,-5,0,3,14,-10,-19,-15,23,17,-38,16,-22,-2,-8,14,-11,6,-34,9,-6,9,-21,40,-35,-6,-7,19,-13,65,16,-5,-28,-20,-39,-20,-24,-63,-55,-16,-33,7,-9,-2,-17,13,-23,3,-39,-13,-20,-21,-9,-26,-22,-1,-7,9,-16,-1,-20,-29,-16,3,-5,-7,-26,-40,-40,-24,-11,-32,0,-25,-9,-17,7,-5,15,3,9,-30,46,-13,54,-21,36,-2,14,9,32,11,15,1,13,-8,15,3,6,-13,36,-31,39,10,42,-4,6,-9,11,-26,-5,-16,20,-24,-2,-39,-14,-26,5,-29,-9,-15,5,-34,25,-24,36,-18,13,-1,14,-9,11,11,14,4,20,-9,38,19,26,7,18,18,17,9,1,21,18,-2,13,5,14,24,15,10,17,37,-6,37,14,69,3,11,5,7,-2,0,-5,9,2,-5,-5,3,-7,-1,-9,-7,-5,2,-5,49,-15,5,-9,34,-11,10,7,0,12,14,6,74,-19,21,7,10,-7,2,4,16,-3,8,5,14,31,1,12,-3,5,4,4,-15,1,-7,-6,-15,-1,-8,5,-20,-5,-21,6,-13,15,5,8,-6,5,11,9,15,1,4,7,19,-1,24,9,17,0,31,-11,21,1,13,10,-2,6,-48,26,15,10,-5,4,14,7,-41,-10,0,-6,15,-2,-2,-4,-24,-7,-6,2,2,4,-10,3,11,6,-3,2,-26,5,-11,-16,-8,-1,-11,-23,11,-15,-12,-1,-12,-8,-3,6,-12,1,-12,-2,7,-6,-5,-1,-13,3,8,-11,-4,-2,10,-8,0,-5,-9,2,3,-5,-6,-1,4,-9,-7,0,-8,4,-6,15,-17,20,1,14,-35,18,-11,16,-6,1,-3,-4,-1,8,-8,1,-8,-3,3,-13,25,-21,8,0,0,-5,26,-13,-2,-4,-14,6,-5,-6,8,-4,-1,-5,-10,-9,-4,-1,4,11,-7,10,-33,17,-16,12,-3,10,-13,5,-24,-13,-19,3,-15,-3,-1,-12,-22,-9,-11,-17,4,-6,-22,-20,-23,0,-10,-8,-11,10,-24,0,1,14,-7,4,7,21,-6,22,14,7,61,-3,5,6,2,20,-18,16,-15,4,-1,7,30,-1,-3,12,9,-5,23,8,3,8,22,7,9,15,34,4,7,5,-7,15,4,16,21,6,-3,-8,6,-4,-12,-10,2,-9,11,-2,-1,-4,16,5,16,-7,35,11,21,-5,16,8,-2,16,5,6,9,4,8,-8,8,0,3,14,-10,2,-1,6,47,3,11,5,-10,5,-52,-7,-16,9,2,10,-4,9,4,6,39,19,-1,4,-14,5,-17,-3,-10,-7,2,-6,-36,-17,-7,-14,17,-12,-9,-11,-11,-3,-9,-26,-12,1,-6,-8,-12,0,-25,41,-20,-12,-14,-2,-13,5,-7,34,55,25,43,33,44,20,38,4,15,8,37,2,31,-7,-13,-3,11,-6,10,3,82,-20,8,-4,0,-7,-11,-5,-16,-3,-52,6,16,-7,1,-15,21,-6,1,5,-6,5,7,3,24,-6,8,3,-6,7,23,10,18,-4,6,7,-8,6,5,6,-7,6,28,-3,5,-6,-12,-1,0,-6,7,-3,16,2,2,6,56,14,8,-1,-10,-6,53,7,11,-6,12,6,-11,6,6,4,29,-4,50,-14,7,5,-11,8,-12,1,4,4,-6,11,18,9,7,9,34,0,2,-6,-10,-8,10,-10,-2,-14,11,-6,-24,-21,11,-1,27,16,-6,5,4,7,-11,1,-2,5,8,10,-13,8,18,7,-2,7,10,-5,-4,-10,11,-1,-5,7,17,4,21,0,18,-5,-9,8,-1,10,63,3,-8,6,12,6,60,9,35,-1,41,5,12,9,24,4,17,-3,-14,-3,23,-1],[-1102,777,-19,-3,-14,3,8,4,28,-1,-3,-3],[247,779,-22,-5,-18,3,7,2,-6,4,21,2,18,-6],[-958,781,-23,0,-5,8,30,-5,-2,-3],[-1001,783,4,-4,-16,1,-39,4,10,3,-12,2,-1,4,20,-1,34,-9],[1051,783,-57,-4,27,14,33,-6,-3,-4],[183,797,32,-7,-25,-4,-19,-18,-33,6,9,3,-15,3,-28,17,66,4,13,-4],[254,804,20,-3,-15,-6,-74,4,-11,4,31,3,49,-2],[511,805,-35,-5,-11,2,6,4,-23,0,37,-1,15,4,11,-4],[999,789,-49,1,-38,13,47,10,43,-15,-3,-9],[-870,797,12,-4,-32,-10,-18,-1,-32,6,9,6,-30,3,-6,5,24,8,-4,2,23,1,46,-10,8,-6],[-685,831,48,-2,18,-5,-58,-9,22,0,-57,-17,-57,-5,14,-1,-7,-2,8,-5,-44,-13,19,-4,-27,-6,-89,3,-1,5,18,2,-5,7,33,-4,-30,9,29,9,-18,10,51,2,-58,0,-40,14,61,8,23,-4,8,6,31,2,108,0],[-271,835,63,-8,-106,-7,85,1,8,-4,-11,-5,74,7,30,-2,6,-4,-78,-11,23,-1,-20,-13,0,-12,12,-6,-32,-4,19,-5,2,-9,-11,0,13,-9,-22,-1,12,-4,-4,-3,-28,-2,13,-7,0,-4,-25,1,27,-8,3,-8,-17,-2,-20,9,3,-6,-12,-6,41,-1,-54,-16,-41,-4,-24,-14,-56,-12,-9,-7,-5,-13,-16,-8,4,-8,-10,-18,-14,-1,-15,9,-20,0,-9,5,-24,22,-7,16,-14,9,4,7,-7,4,10,12,15,3,6,12,-26,-6,-12,3,3,12,30,-2,-26,9,-18,2,11,9,-26,21,-13,4,0,4,-27,6,-72,0,-29,9,46,4,-42,2,-23,4,1,4,75,10,4,4,-27,3,58,12,-5,5,24,2,73,-1,26,5,59,-7,-24,5,1,4,34,6,163,3]];
+
+/* ---------------------------------------------------------------- the chart */
+// the land, unpacked once into the place's coordinates: each ring a flat list of points
+let FD_RINGS=null;
+function fd_rings(){if(FD_RINGS)return FD_RINGS;FD_RINGS=FD_LAND.map(r=>{const out=[];let lo=0,la=0;for(let i=0;i<r.length;i+=2){lo+=r[i];la+=r[i+1];const p=fd_xy(lo/10,la/10);out.push(p[0],p[1]);}return out;});return FD_RINGS;}
+function fd_ringPath(ctx,r){ctx.moveTo(r[0],r[1]);for(let i=2;i<r.length;i+=2)ctx.lineTo(r[i],r[i+1]);ctx.closePath();}
+// the land, its coast lit faintly in the map's light, and the lines of latitude and longitude every ten degrees: o.a, o.grat (0 to 1),
+// o.coast (0 to 1, how lit the coast is), o.cam (for the lines' width)
+function fd_land(ctx,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const z=o.cam&&o.cam.z||1,R=fd_rings();ctx.save();ctx.globalAlpha*=a;
+  const ga=o.grat==null?1:o.grat;if(ga>0){ctx.strokeStyle=rgba(FD.grat,0.075*ga);ctx.lineWidth=1.2/z;ctx.beginPath();
+    for(let lo=-180;lo<=180;lo+=10){const p=fd_xy(lo,85),q=fd_xy(lo,-85);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);}
+    for(let la=-80;la<=80;la+=10){const p=fd_xy(-200,la),q=fd_xy(200,la);ctx.moveTo(p[0],p[1]);ctx.lineTo(q[0],q[1]);}ctx.stroke();
+    // the equator a little brighter
+    ctx.strokeStyle=rgba(FD.grat,0.14*ga);ctx.beginPath();const e0=fd_xy(-200,0),e1=fd_xy(200,0);ctx.moveTo(e0[0],e0[1]);ctx.lineTo(e1[0],e1[1]);ctx.stroke();}
+  ctx.beginPath();for(const r of R)fd_ringPath(ctx,r);const g=ctx.createLinearGradient(0,0,0,1080);g.addColorStop(0,rgba(FD.landHi,1));g.addColorStop(1,rgba(FD.land,1));ctx.fillStyle=g;ctx.fill();
+  const cl=o.coast==null?1:o.coast;ctx.lineJoin="round";ctx.strokeStyle=rgba(FD.coast,0.16*cl);ctx.lineWidth=5/z;ctx.stroke();ctx.strokeStyle=rgba(FD.coast,0.62*cl);ctx.lineWidth=1.4/z;ctx.stroke();
+  ctx.restore();}
+// the sea or the land at a point of the place, from a small picture of the land made once
+let FD_MASK=null;
+function fd_isSea(x,y){if(!FD_MASK){const w=480,h=270,c=mkCanvas(w,h),q=c.getContext("2d");q.scale(w/1920,h/1080);q.fillStyle="#fff";q.beginPath();for(const r of fd_rings())fd_ringPath(q,r);q.fill();
+    FD_MASK={w,h,d:q.getImageData(0,0,w,h).data};}
+  const i=Math.floor(x/4),j=Math.floor(y/4);if(i<0||j<0||i>=FD_MASK.w||j>=FD_MASK.h)return true;return FD_MASK.d[(j*FD_MASK.w+i)*4+3]<60;}
+// the winds as the charts showed them, by belt: where the wind blows to (east, north) and how strongly. The belts move north in the
+// northern summer (m, the month, 0 for January); the trades, the calms near the equator, the westerlies
+function fd_wind(lon,lat,m){const sh=m==null?0:5*Math.sin((m-3)/12*TAU),l=lat-sh;
+  if(l>36)return[0.9,0.38,1.0];if(l>30)return[0.3,-0.2,0.3];if(l>8)return[-0.86,-0.48,0.9];if(l>1)return[0.15,0.1,0.12];
+  if(l>-28)return[-0.72,0.66,0.9];if(l>-36)return[0.4,0.1,0.35];return[0.98,0.12,1.2];}
+// the wind's particles over the sea: o.a, o.month, o.box [lon0, lat0, lon1, lat1] (where they blow), o.n, o.calm (0 to 1: the calms glow)
+let FD_PARTS=null;
+function fd_winds(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const z=o.cam&&o.cam.z||1;
+  if(!FD_PARTS){const r=ag_rnd(1842),out=[];let k=0;while(out.length<1100&&k<20000){k++;const lon=lerp(-135,40,r()),lat=lerp(-64,64,r()),p=fd_xy(lon,lat);if(fd_isSea(p[0],p[1]))out.push({lon,lat,x:p[0],y:p[1],ph:r(),life:lerp(2.2,3.6,r())});}FD_PARTS=out;}
+  const b=o.box||[-135,-64,40,64],m=o.month==null?6:o.month;ctx.save();ctx.lineCap="round";
+  for(const p of FD_PARTS){if(p.lon<b[0]||p.lon>b[2]||p.lat<b[1]||p.lat>b[3])continue;const w=fd_wind(p.lon,p.lat,m),u=((t/p.life+p.ph)%1+1)%1,f=Math.sin(Math.PI*u)*a*Math.min(1,w[2]+0.15);
+    if(f<0.02)continue;const L=26*w[2],x=p.x+w[0]*L*u,y=p.y-w[1]*L*u;if(!fd_isSea(x,y))continue;
+    ctx.strokeStyle=rgba(FD.wind,0.55*f);ctx.lineWidth=2.1/Math.sqrt(z);ctx.beginPath();ctx.moveTo(x-w[0]*10*w[2],y+w[1]*10*w[2]);ctx.lineTo(x,y);ctx.stroke();}
+  // the calms near the equator: a pale band where the trades die away and ships lie still
+  const ca=o.calm||0;if(ca>0){const sh=5*Math.sin((m-3)/12*TAU),y0=fd_xy(0,8+sh)[1],y1=fd_xy(0,1+sh)[1],x0=fd_xy(-52,0)[0],x1=fd_xy(-12,0)[0],cy=(y0+y1)/2;
+    // a soft band, fading at its ends: the same light laid in short strips, each as strong as it is far from the ends
+    for(let i=0;i<24;i++){const u=(i+0.5)/24,f=Math.sin(Math.PI*u),xa=lerp(x0,x1,i/24),xb=lerp(x0,x1,(i+1)/24),g=ctx.createLinearGradient(0,y0,0,y1);
+      g.addColorStop(0,rgba(FD.wind,0));g.addColorStop(0.5,rgba(FD.wind,0.13*ca*f));g.addColorStop(1,rgba(FD.wind,0));ctx.fillStyle=g;ctx.fillRect(xa,y0,xb-xa+0.5,y1-y0);}}
+  ctx.restore();}
+// the currents, as lanes of the map's light with a steady run along them: o.a, o.only (names)
+const FD_CURRENTS={gulf:[[-80,25],[-79.5,30],[-76,34.5],[-70,38],[-60,40.5],[-48,42],[-38,45],[-25,49],[-12,52]],
+  canary:[[-12,40],[-15,32],[-18,25],[-22,18],[-28,14]],northEq:[[-28,13],[-40,14.5],[-55,16],[-66,18]],
+  southEq:[[2,-2],[-14,-3],[-28,-5],[-35,-8]],brazil:[[-35.5,-10],[-38.5,-18],[-44,-25],[-50,-33]],
+  humboldt:[[-75,-45],[-75,-35],[-73,-25],[-79,-12],[-86,-4]]};
+function fd_spline(ll,n){const P_=ll.map(q=>fd_xy(q[0],q[1])),out=[];n=n||10;for(let i=0;i<P_.length-1;i++){const p0=P_[Math.max(0,i-1)],p1=P_[i],p2=P_[i+1],p3=P_[Math.min(P_.length-1,i+2)];
+    for(let k=0;k<n;k++){const u=k/n,u2=u*u,u3=u2*u;out.push([0.5*((2*p1[0])+(-p0[0]+p2[0])*u+(2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*u2+(-p0[0]+3*p1[0]-3*p2[0]+p3[0])*u3),
+      0.5*((2*p1[1])+(-p0[1]+p2[1])*u+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*u2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*u3)]);}}out.push(P_[P_.length-1]);return out;}
+const FD_CPTS={};
+function fd_currents(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;for(const k of Object.keys(FD_CURRENTS)){if(o.only&&!o.only.includes(k))continue;const pts=FD_CPTS[k]||(FD_CPTS[k]=fd_spline(FD_CURRENTS[k],8));
+    md_lane(ctx,pts,MD.flow,0.55*a);md_flow(ctx,pts,t,{kind:"stream",col:MD.flow,a:0.7*a,every:0.35,dur:2.6,off:k.length*0.13});}}
+// the routes from New York to San Francisco, round Cape Horn: the habit's and the charts'
+const FD_PORT={ny:[-74,40.6,"New York"],sf:[-122.5,37.8,"San Francisco"],horn:[-67.3,-56,"Cape Horn"],wash:[-77,38.9,"Washington"],
+  brussels:[4.35,50.85,"Brussels"],london:[-0.1,51.5,"London"],lisbon:[-9.1,38.7,"Lisbon"],hamburg:[10,53.5,"Hamburg"],
+  copen:[12.6,55.7,"Copenhagen"],rio:[-43.2,-22.9,"Rio de Janeiro"],brest:[-4.5,48.4,"Brest"]};
+const FD_ROUTE={
+  habit:[[-74,40.6],[-62,38],[-45,34],[-31,26.5],[-23,18],[-20.5,10],[-21.5,4],[-24.5,-1],[-30,-8],[-36,-16],[-42,-26],[-50,-36],[-58,-46],[-63,-53],[-66.5,-57],[-71,-57.8],[-75,-55.5],
+    [-78,-50],[-77,-40],[-76.5,-30],[-81,-17],[-89,-3],[-101,9],[-113,20],[-120.5,30],[-122.5,37.8]],
+  charted:[[-74,40.6],[-66,34],[-55,25],[-44,15],[-36,6],[-31.5,0],[-32,-7],[-36,-15],[-42,-25],[-50,-36],[-58,-46],[-63,-53],[-66.5,-57],[-71,-57.8],[-76,-55.5],
+    [-83,-50],[-93,-38],[-104,-24],[-113,-8],[-120,6],[-128,20],[-130,30],[-125.5,36],[-122.5,37.8]]};
+const FD_RPTS={};
+const fd_routePts=k=>FD_RPTS[k]||(FD_RPTS[k]=fd_spline(FD_ROUTE[k],8));
+// a route drawn as far as u (0 to 1): o.col, o.a, o.dash (the habit's road is dashed: the way people went, not where the wind was)
+function fd_route(ctx,k,u,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004||u<=0)return;md_lane(ctx,fd_routePts(k),o.col||FD.habit,a*(o.dim||0.85),{u,dash:o.dash?[10,12]:false,t:o.t||0});}
+// where a ship is, u (0 to 1) of the way along a route, and which way it heads
+function fd_along(k,u){const p=mk(fd_routePts(k).map(q=>P(q[0],q[1]))),q=at(p,clamp(u,0,1)),q2=at(p,clamp(u+0.004,0,1));return{x:q.x,y:q.y,dx:q2.x-q.x,dy:q2.y-q.y};}
+// a sailing ship, seen from the side, its sails pale in the night: s its height, flip true to sail left; o.a, o.col (its glow)
+function fd_ship(ctx,x,y,s,flip,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;glow(ctx,x,y-s*0.3,s*1.5,o.col||FD.habit,0.35);ctx.translate(x,y);ctx.scale((flip?-1:1)*s/40,s/40);
+  ctx.fillStyle=rgba(FD.wood,1);ctx.strokeStyle=rgba(FD.paperHi,0.9);ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(-24,-2);ctx.lineTo(24,-2);ctx.lineTo(18,8);ctx.lineTo(-19,8);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.strokeStyle=rgba(FD.paperHi,0.8);ctx.lineWidth=1.6;for(const mx of[-11,1,12]){ctx.beginPath();ctx.moveTo(mx,-2);ctx.lineTo(mx,-36+(mx===1?-2:0));ctx.stroke();}
+  ctx.fillStyle=rgba(FD.paperHi,0.95);for(const [mx,h] of[[-11,26],[1,30],[12,24]]){for(let k=0;k<3;k++){const y0=-h-2+k*(h/3.2),w=9-k*0.8;ctx.beginPath();ctx.moveTo(mx-w,y0+1);ctx.quadraticCurveTo(mx,y0-2,mx+w,y0+1);ctx.lineTo(mx+w-1,y0+h/3.6);ctx.quadraticCurveTo(mx,y0+h/3.6+3,mx-w+1,y0+h/3.6);ctx.closePath();ctx.fill();}}
+  ctx.beginPath();ctx.moveTo(24,-2);ctx.lineTo(36,-14);ctx.lineTo(23,-22);ctx.closePath();ctx.fill();ctx.restore();}
+// a port: a point of light and its name, read at 30 px as seen; o.side "left" or "right", o.dy, o.a
+function fd_port(ctx,cam,k,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const P_=FD_PORT[k],p=fd_xy(P_[0],P_[1]),z=cam&&cam.z||1;ctx.save();ctx.globalAlpha*=a;
+  glow(ctx,p[0],p[1],16/z,MD.ink,0.9);ctx.fillStyle=rgba(MD.ink,1);ctx.beginPath();ctx.arc(p[0],p[1],4.2/z,0,TAU);ctx.fill();
+  const left=o.side==="left";fd_say(ctx,cam,o.name||P_[2],p[0]+(left?-16:16)/z,p[1]+((o.dy||0)+10)/z,{w:700,size:o.size||30,align:left?"right":"left",col:o.col||MD.ink});ctx.restore();return p;}
+// the five-degree squares the office read the logs into, over the North Atlantic: o.u (0 to 1, how many are lit, in a sweep from the
+// west), o.month (0 to 11: the arrows turn with the season), o.a, o.cam. Each lit square shows where its wind blows most days
+function fd_squares(ctx,t,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const z=o.cam&&o.cam.z||1,u=o.u==null?1:o.u,m=o.month==null?5:o.month;ctx.save();ctx.globalAlpha*=a;
+  for(let lo=-80;lo<-5;lo+=5)for(let la=0;la<50;la+=5){const c=fd_xy(lo+2.5,la+2.5);if(!fd_isSea(c[0],c[1]))continue;const p0=fd_xy(lo,la+5),k=clamp((u*1.3-(lo+80)/75*0.9-((la)/50)*0.25)*3,0,1);if(k<=0)continue;
+    ctx.save();ctx.globalAlpha*=ag_eo(k);ctx.fillStyle=rgba(MD.flow,0.07);ctx.fillRect(p0[0]+1/z,p0[1]+1/z,35-2/z,35-2/z);ctx.strokeStyle=rgba(MD.flow,0.42);ctx.lineWidth=1.2/z;ctx.strokeRect(p0[0]+1/z,p0[1]+1/z,35-2/z,35-2/z);
+    const w=fd_wind(lo+2.5,la+2.5,m),L=12*Math.min(1,w[2]+0.2);if(w[2]<0.2){ctx.strokeStyle=rgba(MD.flow,0.9);ctx.lineWidth=1.8/z;ctx.beginPath();ctx.arc(c[0],c[1],4,0,TAU);ctx.stroke();}
+    else{const dx=w[0]*L,dy=-w[1]*L;ctx.strokeStyle=rgba(MD.flow,0.95);ctx.lineWidth=2.2/z;ctx.lineCap="round";ctx.beginPath();ctx.moveTo(c[0]-dx,c[1]-dy);ctx.lineTo(c[0]+dx,c[1]+dy);ctx.stroke();
+      const an=Math.atan2(dy,dx);ctx.beginPath();ctx.moveTo(c[0]+dx,c[1]+dy);ctx.lineTo(c[0]+dx-6*Math.cos(an-0.5),c[1]+dy-6*Math.sin(an-0.5));ctx.moveTo(c[0]+dx,c[1]+dy);ctx.lineTo(c[0]+dx-6*Math.cos(an+0.5),c[1]+dy-6*Math.sin(an+0.5));ctx.stroke();}
+    ctx.restore();}
+  ctx.restore();}
+// the weather reports read again, over a century later: points of light where ships kept their logs, more where more sailed. o.u (0 to 1:
+// how many are lit), o.a. Each point stands for many reports
+let FD_DOTS=null;
+function fd_reports(ctx,t,o){o=o||{};const a=o.a==null?1:o.a,u=o.u==null?1:o.u;if(a<=0.004||u<=0)return;
+  if(!FD_DOTS){const r=ag_rnd(1853),out=[],lanes=[fd_routePts("habit"),fd_routePts("charted"),FD_CPTS.gulf||fd_spline(FD_CURRENTS.gulf,8)];
+    // most along the ships' roads, the rest scattered over every sea
+    for(let i=0;i<2600;i++){let x,y;if(r()<0.55){const L=lanes[Math.floor(r()*lanes.length)],q=L[Math.floor(r()*L.length)];x=q[0]+(r()-0.5)*90;y=q[1]+(r()-0.5)*70;}
+      else{const p=fd_xy(lerp(-135,135,r()),lerp(-60,62,r()));x=p[0];y=p[1];}if(fd_isSea(x,y))out.push([x,y,r()]);}FD_DOTS=out;}
+  ctx.save();const ga=ctx.globalAlpha;ctx.fillStyle=rgba(MD.flow,0.75);const z=o.cam&&o.cam.z||1,rr0=1.7/Math.sqrt(z);
+  for(const d of FD_DOTS){if(d[2]>u)continue;ctx.globalAlpha=ga*a*(0.35+0.65*clamp((u-d[2])*8,0,1));ctx.fillRect(d[0]-rr0,d[1]-rr0,rr0*2,rr0*2);}ctx.restore();}
+
+/* ---------------------------------------------------------------- the places, each painted once */
+// the night sea the chart is drawn over: the module's navy, a little bluer, with no grid (the chart has its own lines)
+AG_PLACES.fdSea=c=>{let g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,"#0a1430");g.addColorStop(0.55,"#071026");g.addColorStop(1,"#040812");c.fillStyle=g;c.fillRect(0,0,1920,1080);
+  for(const [x,y,r,a] of [[700,420,900,0.06],[1500,700,700,0.04]]){const q=c.createRadialGradient(x,y,0,x,y,r);q.addColorStop(0,rgba(MD.flow,a));q.addColorStop(1,rgba(MD.flow,0));c.fillStyle=q;c.fillRect(0,0,1920,1080);}};
+// a row of logbooks on a shelf, from x0 to x1 standing on y, lit from the right (lx) as the lamp lights them; seed for their sizes
+function fd_paintBooks(c,x0,x1,y,hMax,seed,lx){const r=ag_rnd(seed),cols=[[92,52,36],[70,44,34],[108,74,46],[60,48,40],[86,40,34],[58,62,52],[98,82,58],[74,58,44]];let x=x0;
+  while(x<x1-14){if(r()<0.07){// a few lie flat, in a short stack
+      const n=2+Math.floor(r()*3),w=Math.min(x1-x,70+r()*40);for(let k=0;k<n;k++){const col=cols[Math.floor(r()*cols.length)],f=0.42+0.5*clamp((x-x0+lx)/1400,0,1),cc=mix([10,8,8],col,f);
+        c.fillStyle=rgba(cc,1);c.fillRect(x,y-(k+1)*15,w-k*4,14);c.fillStyle=rgba(mix(cc,FD.gilt,0.35),0.6);c.fillRect(x,y-(k+1)*15+6,w-k*4,2);}x+=w+4;continue;}
+    const w=16+r()*16,h=hMax*(0.74+0.26*r()),col=cols[Math.floor(r()*cols.length)],f=0.4+0.55*clamp((x-x0+lx)/1400,0,1),cc=mix([10,8,8],col,f);
+    const g=c.createLinearGradient(x,0,x+w,0);g.addColorStop(0,rgba(mix(cc,[0,0,0],0.35),1));g.addColorStop(0.55,rgba(cc,1));g.addColorStop(1,rgba(mix(cc,[0,0,0],0.25),1));c.fillStyle=g;c.fillRect(x,y-h,w,h);
+    c.fillStyle=rgba(mix(cc,FD.gilt,0.45),0.75);c.fillRect(x+2,y-h+10,w-4,2.5);c.fillRect(x+2,y-12,w-4,2.5);if(r()<0.5){c.fillStyle=rgba(mix(cc,FD.paper,0.35),0.7);c.fillRect(x+3,y-h+h*0.3,w-6,h*0.16);}
+    x+=w+(r()<0.15?3:1);}}
+// the Navy's office in Washington, 1842: shelves of old logbooks on the left, a chart on the wall, a desk with a lamp. Night, lamp-lit
+function fd_paintOffice(c){let g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,"#0c1220");g.addColorStop(0.7,"#0a0e19");g.addColorStop(1,"#050608");c.fillStyle=g;c.fillRect(0,0,1920,1080);
+  // the panelled wall
+  c.strokeStyle="rgba(170,180,210,0.05)";c.lineWidth=2;for(let x=840;x<1920;x+=230){c.strokeRect(x+16,640,198,210);c.strokeRect(x+16,70,198,500);}
+  c.fillStyle="rgba(140,100,64,0.16)";c.fillRect(800,606,1120,12);
+  // the floor
+  g=c.createLinearGradient(0,872,0,1080);g.addColorStop(0,"#0b0907");g.addColorStop(1,"#040303");c.fillStyle=g;c.fillRect(0,872,1920,208);
+  c.strokeStyle="rgba(120,90,60,0.07)";c.lineWidth=2;for(let k=-12;k<26;k++){c.beginPath();c.moveTo(960+k*90,1080);c.lineTo(960+k*40,872);c.stroke();}
+  // the bookcase and its six shelves of logbooks
+  const bx=60,by=80,bw=720,bh=800;c.fillStyle=rgba(FD.wood,1);c.fillRect(bx,by,bw,bh);c.fillStyle="#0a0705";c.fillRect(bx+22,by+22,bw-44,bh-30);
+  for(let k=0;k<6;k++){const y=by+22+(k+1)*((bh-30)/6);fd_paintBooks(c,bx+26,bx+bw-26,y-12,104,42+k*7,bx+400);c.fillStyle=rgba(FD.woodHi,0.85);c.fillRect(bx+22,y-12,bw-44,12);c.fillStyle="rgba(0,0,0,0.5)";c.fillRect(bx+22,y,bw-44,3);}
+  g=c.createLinearGradient(bx,0,bx+bw,0);g.addColorStop(0,"rgba(0,0,0,0.55)");g.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=g;c.fillRect(bx,by,bw,bh);
+  c.fillStyle=rgba(FD.woodHi,0.5);c.fillRect(bx,by,bw,10);c.fillRect(bx+bw-14,by,14,bh);
+  // the chart on the wall, in its frame: the North Atlantic, its coasts in sepia
+  const fx=900,fy=110,fw=660,fh=440;c.fillStyle=rgba(FD.wood,1);c.fillRect(fx-16,fy-16,fw+32,fh+32);c.fillStyle=rgba(mix(FD.paperDk,[0,0,0],0.35),1);c.fillRect(fx,fy,fw,fh);
+  c.save();c.beginPath();c.rect(fx,fy,fw,fh);c.clip();const k=fw/115,mx=lo=>fx+(lo+100)*k,my=la=>fy+(64-la)*k;
+  c.fillStyle=rgba(mix(FD.paperDk,[60,40,20],0.55),1);c.strokeStyle=rgba([70,50,32],0.9);c.lineWidth=1.6;c.beginPath();
+  for(const r of FD_LAND){let lo=0,la=0;for(let i=0;i<r.length;i+=2){lo+=r[i];la+=r[i+1];const X=mx(lo/10),Y=my(la/10);i?c.lineTo(X,Y):c.moveTo(X,Y);}c.closePath();}c.fill();c.stroke();
+  c.strokeStyle="rgba(70,50,32,0.35)";c.lineWidth=1;for(let lo=-100;lo<=15;lo+=10){c.beginPath();c.moveTo(mx(lo),fy);c.lineTo(mx(lo),fy+fh);c.stroke();}for(let la=0;la<=64;la+=10){c.beginPath();c.moveTo(fx,my(la));c.lineTo(fx+fw,my(la));c.stroke();}
+  // a compass rose's lines across the sea
+  const ox=mx(-42),oy=my(30);c.strokeStyle="rgba(70,50,32,0.4)";for(let i=0;i<16;i++){const an=i*TAU/16;c.beginPath();c.moveTo(ox,oy);c.lineTo(ox+Math.cos(an)*900,oy+Math.sin(an)*900);c.stroke();}
+  c.restore();g=c.createLinearGradient(fx,0,fx+fw,0);g.addColorStop(0,"rgba(0,0,0,0.35)");g.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=g;c.fillRect(fx,fy,fw,fh);
+  // the desk, its top lit by the lamp
+  c.fillStyle="#1d140e";c.beginPath();c.moveTo(760,770);c.lineTo(1740,770);c.lineTo(1890,900);c.lineTo(620,900);c.closePath();c.fill();
+  g=c.createRadialGradient(1500,790,10,1500,790,700);g.addColorStop(0,"rgba(140,98,62,0.85)");g.addColorStop(1,"rgba(60,40,26,0)");c.fillStyle=g;c.beginPath();c.moveTo(760,770);c.lineTo(1740,770);c.lineTo(1890,900);c.lineTo(620,900);c.closePath();c.fill();
+  c.fillStyle="#120c08";c.fillRect(620,900,1270,180);c.fillStyle="rgba(150,110,70,0.25)";c.fillRect(620,900,1270,4);
+  // papers and a shut logbook on the desk, an inkwell and its pen
+  c.fillStyle="rgba(200,184,150,0.5)";c.beginPath();c.moveTo(1040,800);c.lineTo(1240,792);c.lineTo(1262,850);c.lineTo(1050,860);c.closePath();c.fill();
+  c.fillStyle="#3a2418";c.fillRect(1290,812,170,40);c.fillStyle="rgba(214,178,110,0.5)";c.fillRect(1290,822,170,3);
+  c.fillStyle="#0e0c0c";c.beginPath();c.ellipse(1630,846,26,10,0,0,TAU);c.fill();c.fillRect(1606,820,48,26);c.strokeStyle="rgba(230,220,200,0.55)";c.lineWidth=2.4;c.beginPath();c.moveTo(1640,826);c.lineTo(1700,740);c.stroke();
+  // the lamp: a brass foot and a glass chimney, its flame
+  c.fillStyle="#6e5530";c.beginPath();c.ellipse(1500,800,46,12,0,0,TAU);c.fill();c.fillRect(1490,700,20,100);c.beginPath();c.ellipse(1500,700,40,26,0,0,TAU);c.fill();
+  g=c.createLinearGradient(1474,560,1526,560);g.addColorStop(0,"rgba(255,230,190,0.25)");g.addColorStop(0.5,"rgba(255,240,210,0.55)");g.addColorStop(1,"rgba(255,230,190,0.2)");c.fillStyle=g;c.beginPath();c.moveTo(1484,690);c.bezierCurveTo(1460,650,1474,610,1486,580);c.lineTo(1514,580);c.bezierCurveTo(1526,610,1540,650,1516,690);c.closePath();c.fill();
+  c.fillStyle="rgba(255,214,140,1)";c.beginPath();c.ellipse(1500,650,7,16,0,0,TAU);c.fill();
+  // the lamp's light on the room
+  c.globalCompositeOperation="lighter";g=c.createRadialGradient(1500,640,10,1500,640,1150);g.addColorStop(0,"rgba(255,200,130,0.42)");g.addColorStop(0.12,"rgba(255,180,110,0.16)");g.addColorStop(0.5,"rgba(255,160,90,0.05)");g.addColorStop(1,"rgba(255,150,80,0)");c.fillStyle=g;c.fillRect(0,0,1920,1080);c.globalCompositeOperation="source-over";
+  const v=c.createRadialGradient(1100,540,300,1100,540,1250);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.6)");c.fillStyle=v;c.fillRect(0,0,1920,1080);}
+AG_PLACES.fdOffice=c=>fd_paintOffice(c);
+// the hall in Brussels, 1853: tall windows on the night, a lamp above, and the long table the delegates sat at
+function fd_paintHall(c){let g=c.createLinearGradient(0,0,0,1080);g.addColorStop(0,"#0d1322");g.addColorStop(0.7,"#0a0f1c");g.addColorStop(1,"#050609");c.fillStyle=g;c.fillRect(0,0,1920,1080);
+  for(const x of [120,1620]){const w=210;g=c.createLinearGradient(0,90,0,700);g.addColorStop(0,"rgba(60,90,150,0.42)");g.addColorStop(1,"rgba(30,50,90,0.25)");c.fillStyle=g;rr(c,x,90,w,640,w/2);c.fill();
+    c.strokeStyle="rgba(150,120,80,0.35)";c.lineWidth=8;rr(c,x,90,w,640,w/2);c.stroke();c.lineWidth=4;c.beginPath();c.moveTo(x+w/2,90);c.lineTo(x+w/2,730);for(let y=300;y<730;y+=140){c.moveTo(x,y);c.lineTo(x+w,y);}c.stroke();
+    c.fillStyle="rgba(70,26,30,0.85)";c.fillRect(x-60,60,56,720);c.fillRect(x+w+4,60,56,720);}
+  c.strokeStyle="rgba(170,180,210,0.05)";c.lineWidth=2;for(let x=420;x<1560;x+=190)c.strokeRect(x+12,560,166,200);
+  c.fillStyle="rgba(150,110,64,0.16)";c.fillRect(380,530,1180,10);
+  // the long table, its green cloth, and papers on it
+  c.fillStyle="#13221a";c.beginPath();c.moveTo(150,780);c.lineTo(1770,780);c.lineTo(1920,930);c.lineTo(0,930);c.closePath();c.fill();
+  g=c.createRadialGradient(960,760,20,960,800,1000);g.addColorStop(0,"rgba(70,110,80,0.6)");g.addColorStop(1,"rgba(30,50,40,0)");c.fillStyle=g;c.beginPath();c.moveTo(150,780);c.lineTo(1770,780);c.lineTo(1920,930);c.lineTo(0,930);c.closePath();c.fill();
+  c.fillStyle="#0e0a07";c.fillRect(0,930,1920,150);c.fillStyle="rgba(150,110,70,0.3)";c.fillRect(0,930,1920,4);
+  const r=ag_rnd(1853);for(let i=0;i<12;i++){const x=220+i*130+r()*40,y=800+r()*80;c.save();c.translate(x,y);c.rotate((r()-0.5)*0.3);c.fillStyle="rgba(214,200,170,0.55)";c.fillRect(-36,-12,72,24);c.restore();}
+  // the lamp's light from above
+  c.globalCompositeOperation="lighter";g=c.createRadialGradient(960,120,10,960,300,1100);g.addColorStop(0,"rgba(255,200,130,0.38)");g.addColorStop(0.25,"rgba(255,180,110,0.12)");g.addColorStop(1,"rgba(255,160,90,0)");c.fillStyle=g;c.fillRect(0,0,1920,1080);c.globalCompositeOperation="source-over";
+  c.fillStyle="rgba(255,214,150,0.9)";for(let i=0;i<5;i++){c.beginPath();c.arc(860+i*50,70+(i%2)*10,5,0,TAU);c.fill();}
+  const v=c.createRadialGradient(960,500,300,960,540,1200);v.addColorStop(0,"rgba(0,0,0,0)");v.addColorStop(1,"rgba(0,0,0,0.6)");c.fillStyle=v;c.fillRect(0,0,1920,1080);}
+AG_PLACES.fdHall=c=>fd_paintHall(c);
+
+/* ---------------------------------------------------------------- paper */
+// a sheet of paper, lit softly, with a shadow under it: o.col (its colour), o.a, o.r, o.rot (radians, about its middle)
+function fd_paper(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const r=o.r==null?6:o.r,col=o.col||FD.paper;ctx.save();ctx.globalAlpha*=a;
+  if(o.rot){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot);ctx.translate(-x-w/2,-y-h/2);}
+  ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=34;ctx.shadowOffsetY=14;rr(ctx,x,y,w,h,r);ctx.fillStyle=rgba(col,1);ctx.fill();ctx.shadowColor="transparent";ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+  const g=ctx.createRadialGradient(x+w*0.35,y+h*0.3,0,x+w*0.5,y+h*0.5,Math.max(w,h)*0.85);g.addColorStop(0,"rgba(255,252,240,0.32)");g.addColorStop(1,o.white?"rgba(150,160,180,0.18)":"rgba(120,92,56,0.26)");ctx.fillStyle=g;rr(ctx,x,y,w,h,r);ctx.fill();ctx.restore();}
+// words in a hand of the time: the module's face, leaning, in ink. Under 28 px as seen it is decoration (o.deco)
+function fd_hand(ctx,s,x,y,o){o=o||{};ctx.save();ctx.translate(x,y);ctx.transform(1,0,-0.2,1,0,0);T(ctx,s,0,0,{w:o.w||600,size:o.size||30,color:rgba(o.col||FD.ink,o.a==null?0.92:o.a),align:o.align||"left",deco:o.deco?1:0});ctx.restore();}
+// a logbook's page, as one ship kept it (kind 0: in columns; 1: in sentences; 2: in its own short hand), at (x, y), w wide, its height
+// from its width; o.heads and o.rows (each 0 to 1, in order) bring its headings and its lines in; o.a; o.dim (0 to 1: it greys, unread)
+const FD_LOGS=[
+  {title:"Logbook · June 1841",heads:["Where it was","Wind","Weather","Current"],cols:[0,0.31,0.53,0.74],
+    rows:[["38°N 64°W","SW, fresh","Fair","NE, 1 knot"],["36°N 58°W","W, strong","Squalls","E, 2 knots"],["33°N 52°W","NW, light","Clear","E, 1 knot"]]},
+  {title:"Journal · 3rd June",lines:["Fresh breeze from the N.E. and","cloudy. Current setting to the","eastward, about one knot. At","noon, Lat. 36 N, Long. 58 W."]},
+  {title:"Remarks",heads:["Lat.","Long.","Wd.","Wr.","Cur."],cols:[0,0.2,0.4,0.62,0.8],rows:[["36.2","58.1","WSW 6","b.c.","E 1½"],["35.9","56.4","W 7","q.","E 2"],["35.1","54.0","NW 4","b.","E 1"]]}];
+function fd_logPage(ctx,x,y,w,kind,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const k=w/1000,h=600*k,L=FD_LOGS[kind],sc=o.scale||1,deco=30*k*sc<28;
+  ctx.save();ctx.globalAlpha*=a;fd_paper(ctx,x,y,w,h,{rot:o.rot||0,col:mix(FD.paper,[150,140,120],0.35*(o.dim||0))});
+  if(o.rot){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot);ctx.translate(-x-w/2,-y-h/2);}
+  const ink=mix(FD.ink,FD.inkSoft,0.6*(o.dim||0)),mx=x+60*k,hd=o.heads||[1,1,1,1,1],rw=o.rows||[1,1,1,1];
+  ctx.strokeStyle=rgba(FD.inkSoft,0.25);ctx.lineWidth=1.4*k;for(let i=0;i<7;i++){const yy=y+(150+i*66)*k;ctx.beginPath();ctx.moveTo(x+40*k,yy);ctx.lineTo(x+w-40*k,yy);ctx.stroke();}
+  ctx.strokeStyle=rgba([150,60,50],0.35);ctx.beginPath();ctx.moveTo(x+44*k,y+20*k);ctx.lineTo(x+44*k,y+h-20*k);ctx.stroke();
+  fd_hand(ctx,L.title,mx,y+92*k,{size:34*k,w:700,col:ink,deco});
+  if(L.heads){L.heads.forEach((s,i)=>{const ha=hd[i]==null?1:hd[i];if(ha<=0)return;fd_hand(ctx,s,mx+L.cols[i]*(w-120*k),y+176*k,{size:30*k,w:800,col:ink,a:0.95*ha,deco});});
+    ctx.strokeStyle=rgba(FD.ink,0.5);ctx.lineWidth=2*k;ctx.beginPath();ctx.moveTo(x+40*k,y+196*k);ctx.lineTo(x+w-40*k,y+196*k);ctx.stroke();
+    L.rows.forEach((r,j)=>{const ra=rw[j]==null?1:rw[j];if(ra<=0)return;r.forEach((s,i)=>{const ha=hd[i]==null?1:hd[i];if(ha<=0)return;fd_hand(ctx,s,mx+L.cols[i]*(w-120*k),y+(262+j*66)*k,{size:30*k,col:ink,a:0.9*ra*ha,deco});});});}
+  else L.lines.forEach((s,j)=>{const ra=rw[j]==null?1:rw[j];if(ra<=0)return;fd_hand(ctx,s,mx,y+(196+j*66)*k,{size:30*k,col:ink,a:0.9*ra,deco});});
+  ctx.restore();return{x,y,w,h};}
+// a logbook, shut, in its leather: o.col, o.a
+function fd_book(ctx,x,y,w,h,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const col=o.col||[96,58,38];ctx.save();ctx.globalAlpha*=a;
+  ctx.shadowColor="rgba(0,0,0,0.5)";ctx.shadowBlur=18;ctx.shadowOffsetY=8;rr(ctx,x,y,w,h,5);ctx.fillStyle=rgba(col,1);ctx.fill();ctx.shadowColor="transparent";
+  ctx.fillStyle=rgba(FD.paper,0.9);ctx.fillRect(x+w-7,y+5,5,h-10);ctx.fillStyle=rgba(mix(col,FD.gilt,0.5),0.8);ctx.fillRect(x+10,y+12,w-24,3);ctx.fillRect(x+10,y+h-15,w-24,3);
+  rr(ctx,x+w*0.28,y+h*0.32,w*0.4,h*0.22,3);ctx.fillStyle=rgba(mix(col,FD.paper,0.4),0.8);ctx.fill();ctx.restore();}
+// the log agreed at Brussels in 1853, as a card in the colour of what people agree on: o.a, o.k (springs in), o.kick
+function fd_form53(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return{x,y,w,h:360};const h=360;ctx.save();ctx.globalAlpha*=a;if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.6,1,ag_spr(o.k,0,0.5)));
+  md_card(ctx,x,y,w,h,{edge:MD.agreed,glow:0.8});md_icon(ctx,"contract",x+w-56,y+52,40,MD.agreed);
+  md_T(ctx,(o.kick||"Agreed at Brussels, 1853").toUpperCase(),x+28,y+52,{w:800,size:28,ls:4,col:MD.agreed});
+  md_T(ctx,"One log for ships of every flag",x+28,y+104,{w:700,size:36});
+  const rows=[["Once a day","Position, current, barometer, air and sea"],["Three times a day","The wind: its force and direction"]];
+  rows.forEach((r,i)=>{const yy=y+180+i*96;ctx.strokeStyle="rgba(255,209,102,0.25)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x+28,yy-44);ctx.lineTo(x+w-28,yy-44);ctx.stroke();
+    md_T(ctx,r[0],x+28,yy,{w:800,size:28,col:MD.agreed});md_T(ctx,r[1],x+28,yy+36,{w:500,size:28,col:MD.ink});});
+  ctx.restore();return{x,y,w,h};}
+
+/* ---------------------------------------------------------------- the people of 1842 to 1853 */
+// a dark coat's brass buttons (a captain's), in figure space, outside the shirt's opening
+function fd_buttons(c){for(const [x,y] of [[374,652],[378,716],[376,780],[370,844]])ag_soft(c,cc=>cc.arc(x,y,7,0,TAU),FD.gilt,[255,240,200],x-2,y-3,8,null);}
+// a black stock at the throat, tied in a small bow: drawn over the person (o.front), in figure space, as the 1850s wore it
+function fd_stock(c){ag_soft(c,cc=>{cc.moveTo(276,590);cc.bezierCurveTo(300,606,330,608,352,600);cc.lineTo(350,624);cc.bezierCurveTo(326,634,296,630,280,616);cc.closePath();},[22,20,24],[90,90,104],320,600,60,null);
+  ag_soft(c,cc=>{cc.moveTo(316,616);cc.lineTo(292,604);cc.lineTo(296,638);cc.closePath();cc.moveTo(318,616);cc.lineTo(344,606);cc.lineTo(340,640);cc.closePath();},[26,24,28],[110,110,124],318,612,40,null);
+  ag_soft(c,cc=>cc.ellipse(317,618,8,9,0,0,TAU),[16,16,18],[90,90,100],316,614,10,null);}
+const FD_P={
+  captain:{name:"A captain",skin:[222,182,150],hair:{style:"side",c:[96,72,54]},beard:[104,80,60],top:{kind:"suit",c:[30,36,58],inner:[234,230,218],paint:fd_buttons},breath:0.27},
+  quetelet:{name:"Adolphe Quetelet",skin:[232,198,172],hair:{style:"side",c:[178,172,164]},top:{kind:"suit",c:[34,32,40],inner:[236,232,220]},breath:0.24}};
+// a person of that time, holding the paper the story is about (o.paper(ctx, x, y) draws it in figure space, above the near hand)
+// held at its upper left corner, under the hand, below the stock, so the hand shows on its edge
+function fd_period(ctx,who,x,y,s,o){o=o||{};return md_person(ctx,FD_P[who],x,y,s,Object.assign({pose:"hold",holdBack:(c,h)=>{if(o.paper)o.paper(c,h.near[0]-26,h.near[1]-58);},front:c=>fd_stock(c)},o));}
+// a small sheet held up: the log form, its edge in gold, lines on it (decoration: the card beside it says what it is)
+function fd_heldForm(c,x,y,o){o=o||{};const w=170,h=220;c.save();c.translate(x,y);c.rotate(-0.06);
+  c.fillStyle=rgba(FD.paperHi,1);c.shadowColor="rgba(0,0,0,0.4)";c.shadowBlur=14;c.fillRect(0,0,w,h);c.shadowColor="transparent";c.strokeStyle=rgba(MD.agreed,o.gold==null?0.9:o.gold);c.lineWidth=5;c.strokeRect(2,2,w-4,h-4);
+  c.strokeStyle=rgba(FD.inkSoft,0.6);c.lineWidth=2;for(let i=0;i<7;i++){c.beginPath();c.moveTo(16,34+i*25);c.lineTo(w-16,34+i*25);c.stroke();}for(const xx of[56,96,130]){c.beginPath();c.moveTo(xx,26);c.lineTo(xx,h-18);c.stroke();}c.restore();}
+
+/* ===== Files as data and as context: the documents of today =====
+   Pages are pictures: what they say is drawn small, as decoration ({deco:1}), and what matters on them is said on a card beside them,
+   at 28 px or more. A page's parts are returned in its own coordinates, so a scene can point at them, box them or send them on.
+     fd_invoice(ctx, x, y, w, v, o)   a supplier's invoice, in its own layout (v 0 to 3); o.hl {supplier, number, date, total, lines}
+                                      (each 0 to 1) rings what Finance checks; o.parse (0 to 1) boxes what ai_parse_document finds
+     fd_pdf(ctx, x, y, s, o)          a file, s px tall, its name under it (o.name, in mono), o.col (its edge), o.a
+     fd_contract(ctx, x, y, w, o)     a contract's page: o.kind "offer" or "signed", o.ends (the end date it gives), o.sign (0 to 1)
+     fd_sheet(ctx, x, y, w, v, o)     a spreadsheet of claims, as a tutor made it, each its own way
+     fd_kv(ctx, x, y, w, rows, o)     a card of fields and values, in mono: o.kick, o.edge, o.rowA(i), o.lit (a row's index)
+     fd_code(ctx, x, y, w, lines, o)  a file of code or YAML, its lines in mono: o.kick, o.edge, o.lineA(i)
+     fd_suppliers                     the four suppliers and their invoices, invented
+   Colours keep the module's meanings: the map's light for data and structure, gold for what people agree, green for a check that
+   passes, amber for a person's turn, red for an error, lilac with a lock for personal data. */
+
+const FD_INV=[
+  {supplier:"Larkspur Catering",number:"LC-20931",date:"28 Oct 2026",iso:"2026-10-28",total:"1,284.00",lines:[["Open day catering","1,050.00"],["Coffee cart","117.27"],["GST","116.73"]],head:[176,88,74]},
+  {supplier:"Northfield Lab Supply",number:"NLS-118402",date:"27 Oct 2026",iso:"2026-10-27",total:"3,910.50",lines:[["Pipette tips, 40 boxes","2,180.00"],["Nitrile gloves, 60 boxes","1,375.00"],["GST","355.50"]],head:[52,96,140]},
+  {supplier:"Tidewater Print",number:"TP-7716",date:"27 Oct 2026",iso:"2026-10-27",total:"642.40",lines:[["Posters, A2, 120","484.00"],["Banners, 2","100.00"],["GST","58.40"]],head:[40,120,110]},
+  {supplier:"Corella Cleaning",number:"CC-0459",date:"31 Oct 2026",iso:"2026-10-31",total:"2,816.00",lines:[["Windows, Building C","1,960.00"],["Carpets, Library","600.00"],["GST","256.00"]],head:[110,96,150]}];
+const fd_tiny=(ctx,s,x,y,size,o)=>{o=o||{};T(ctx,s,x,y,{w:o.w||600,size,color:rgba(o.col||[60,66,80],o.a==null?0.95:o.a),align:o.align||"left",f:o.f,deco:1});};
+// a ring of the map's light round a part of a page, with an inner glow: col, a
+function fd_ring(ctx,r,col,a,pad){if(a<=0.004)return;pad=pad==null?6:pad;ctx.save();ctx.globalAlpha*=a;ctx.shadowColor=rgba(col,0.8);ctx.shadowBlur=14;ctx.strokeStyle=rgba(col,1);ctx.lineWidth=3;
+  rr(ctx,r.x-pad,r.y-pad,r.w+pad*2,r.h+pad*2,8);ctx.stroke();ctx.shadowBlur=0;ctx.fillStyle=rgba(col,0.08);rr(ctx,r.x-pad,r.y-pad,r.w+pad*2,r.h+pad*2,8);ctx.fill();ctx.restore();}
+// an invoice: its parts in four layouts (the supplier's block, the invoice's number and date, who it's to, the lines, the total)
+function fd_invoice(ctx,x,y,w,v,o){o=o||{};const I=FD_INV[v%4],k=w/600,h=780*k,a=o.a==null?1:o.a,L=v%4;const R={};if(a<=0.004)return{x,y,w,h,R};
+  ctx.save();ctx.globalAlpha*=a;if(o.rot){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot);ctx.translate(-x-w/2,-y-h/2);}
+  fd_paper(ctx,x,y,w,h,{col:[242,243,246],white:true,r:4});const X=u=>x+u*k,Y=u=>y+u*k,box=(nm,u,v_,uw,vh)=>R[nm]={x:X(u),y:Y(v_),w:uw*k,h:vh*k};
+  const hc=I.head,dark=[40,46,60];
+  // the supplier's block: a mark and a name, where each layout puts it
+  if(L===0){ctx.fillStyle=rgba(hc,1);ctx.beginPath();ctx.arc(X(76),Y(82),28*k,0,TAU);ctx.fill();fd_tiny(ctx,I.supplier,X(118),Y(92),30*k,{w:800,col:dark});box("supplier",40,46,380,74);
+    fd_tiny(ctx,"TAX INVOICE",X(560),Y(150),24*k,{w:800,col:hc,align:"right"});fd_tiny(ctx,"Invoice "+I.number,X(560),Y(186),20*k,{align:"right",f:"mono"});box("number",330,166,236,30);
+    fd_tiny(ctx,I.date,X(560),Y(218),20*k,{align:"right"});box("date",400,198,166,30);}
+  else if(L===1){ctx.fillStyle=rgba(hc,1);ctx.fillRect(x,y,w,110*k);fd_tiny(ctx,I.supplier,X(40),Y(70),32*k,{w:800,col:[255,255,255]});box("supplier",30,30,420,60);
+    fd_tiny(ctx,"Invoice",X(40),Y(170),24*k,{w:800,col:dark});fd_tiny(ctx,"No. "+I.number,X(40),Y(206),20*k,{f:"mono"});box("number",34,186,240,30);fd_tiny(ctx,"Issued "+I.date,X(330),Y(206),20*k);box("date",324,186,220,30);}
+  else if(L===2){fd_tiny(ctx,"INVOICE",X(40),Y(92),40*k,{w:800,col:hc});fd_tiny(ctx,I.supplier,X(560),Y(70),26*k,{w:800,col:dark,align:"right"});fd_tiny(ctx,"Printers since 1998",X(560),Y(100),18*k,{align:"right"});box("supplier",300,40,266,70);
+    ctx.fillStyle=rgba(hc,0.12);ctx.fillRect(X(40),Y(130),520*k,64*k);fd_tiny(ctx,"Number",X(56),Y(156),16*k);fd_tiny(ctx,I.number,X(56),Y(182),20*k,{f:"mono",w:500});box("number",48,136,160,54);
+    fd_tiny(ctx,"Date",X(300),Y(156),16*k);fd_tiny(ctx,I.date,X(300),Y(182),20*k);box("date",292,136,170,54);}
+  else{fd_tiny(ctx,I.supplier,X(300),Y(80),30*k,{w:800,col:hc,align:"center"});ctx.strokeStyle=rgba(hc,0.8);ctx.lineWidth=3*k;ctx.beginPath();ctx.moveTo(X(60),Y(104));ctx.lineTo(X(540),Y(104));ctx.stroke();box("supplier",90,44,420,70);
+    fd_tiny(ctx,I.date,X(40),Y(150),20*k);box("date",34,130,170,30);fd_tiny(ctx,"Tax invoice "+I.number,X(560),Y(150),20*k,{align:"right",f:"mono"});box("number",320,130,246,30);}
+  // who it's to
+  const ty=L===1?250:L===2?236:L===0?262:200;fd_tiny(ctx,"To: Finance, accounts payable",X(40),Y(ty),18*k);fd_tiny(ctx,"The university",X(40),Y(ty+26),18*k);
+  // the lines
+  const ly=ty+80;ctx.fillStyle=rgba(L===1?hc:dark,L===1?0.9:0.08);ctx.fillRect(X(40),Y(ly-28),520*k,38*k);fd_tiny(ctx,"Description",X(56),Y(ly-2),17*k,{w:800,col:L===1?[255,255,255]:dark});fd_tiny(ctx,"Amount",X(544),Y(ly-2),17*k,{w:800,col:L===1?[255,255,255]:dark,align:"right"});
+  I.lines.forEach((ln,i)=>{const yy=Y(ly+46+i*44);fd_tiny(ctx,ln[0],X(56),yy,19*k);fd_tiny(ctx,ln[1],X(544),yy,19*k,{align:"right",f:"mono",w:500});
+    ctx.strokeStyle="rgba(120,130,150,0.3)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(X(40),yy+16*k);ctx.lineTo(X(560),yy+16*k);ctx.stroke();});box("lines",40,ly-30,520,44*3+60);
+  // the total
+  const tyy=ly+46+3*44+30;ctx.fillStyle=rgba(hc,L===3?0.16:0.1);ctx.fillRect(X(330),Y(tyy-30),230*k,52*k);fd_tiny(ctx,"Total A$",X(344),Y(tyy+4),20*k,{w:800,col:dark});fd_tiny(ctx,I.total,X(548),Y(tyy+4),22*k,{w:800,f:"mono",align:"right",col:dark});box("total",330,tyy-30,230,52);
+  // the footer
+  fd_tiny(ctx,"Payment terms: 30 days",X(40),Y(740),16*k);ctx.fillStyle=rgba(hc,0.5);ctx.fillRect(x,y+h-10*k,w,10*k);
+  // what Finance checks, ringed
+  if(o.hl)for(const nm of ["supplier","number","date","total","lines"]){const q=o.hl[nm]||0;if(q>0&&R[nm])fd_ring(ctx,R[nm],o.hlCol||MD.flow,q);}
+  // what the function finds: a box round each part of the page, in the map's light, the table's in its own
+  if(o.parse>0){const p=o.parse;const parts=["supplier","number","date","lines","total"];parts.forEach((nm,i)=>{const q=clamp(p*6-i,0,1);if(q>0&&R[nm]){ctx.save();ctx.globalAlpha*=q;ctx.setLineDash([8,6]);ctx.strokeStyle=rgba(MD.flow,0.95);ctx.lineWidth=2.4;
+      rr(ctx,R[nm].x-4,R[nm].y-4,R[nm].w+8,R[nm].h+8,6);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=rgba(MD.flow,0.07);ctx.fill();ctx.restore();}});}
+  ctx.restore();return{x,y,w,h,R};}
+// a file: a page with a folded corner, a band naming its kind, and its name under it in mono (28 px, or decoration when smaller)
+function fd_pdf(ctx,x,y,s,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const w=s*0.78,col=o.col||MD.soft;ctx.save();ctx.globalAlpha*=a;
+  ctx.shadowColor=rgba(o.col||[0,0,0],o.col?0.5:0.4);ctx.shadowBlur=o.col?18:10;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w-s*0.22,y);ctx.lineTo(x+w,y+s*0.22);ctx.lineTo(x+w,y+s);ctx.lineTo(x,y+s);ctx.closePath();ctx.fillStyle="rgba(236,240,248,0.97)";ctx.fill();ctx.shadowBlur=0;ctx.shadowColor="transparent";
+  ctx.strokeStyle=rgba(col,0.9);ctx.lineWidth=2;ctx.stroke();ctx.fillStyle="rgba(170,180,200,0.6)";ctx.beginPath();ctx.moveTo(x+w-s*0.22,y);ctx.lineTo(x+w-s*0.22,y+s*0.22);ctx.lineTo(x+w,y+s*0.22);ctx.closePath();ctx.fill();
+  ctx.fillStyle=rgba([90,100,124],1);rr(ctx,x+w*0.12,y+s*0.56,w*0.76,s*0.2,3);ctx.fill();T(ctx,o.kind||"PDF",x+w/2,y+s*0.71,{w:800,size:s*0.15,color:"rgba(255,255,255,0.95)",align:"center",deco:1});
+  ctx.strokeStyle="rgba(120,130,150,0.55)";ctx.lineWidth=1.5;for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(x+w*0.14,y+s*(0.2+i*0.1));ctx.lineTo(x+w*(i===2?0.6:0.72),y+s*(0.2+i*0.1));ctx.stroke();}
+  if(o.name){const sz=o.size||28;md_T(ctx,o.name,x+w/2,y+s+sz+12,{w:500,size:sz,f:"mono",align:"center",col:o.nameCol||MD.ink,deco:sz<28?1:0});}
+  ctx.restore();}
+// a contract's page: the university's letterhead, its terms in lines, the end date, and for the signed one, two signatures and a seal
+function fd_contract(ctx,x,y,w,o){o=o||{};const a=o.a==null?1:o.a,k=w/600,h=780*k;if(a<=0.004)return{x,y,w,h};const signed=o.kind!=="offer";ctx.save();ctx.globalAlpha*=a;
+  if(o.rot){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot);ctx.translate(-x-w/2,-y-h/2);}
+  fd_paper(ctx,x,y,w,h,{col:[243,243,240],white:true,r:4});const X=u=>x+u*k,Y=u=>y+u*k,dark=[40,46,60];
+  ctx.fillStyle=rgba(MD.sys.hr,0.85);ctx.fillRect(x,y,w,12*k);fd_tiny(ctx,"The university · Human Resources",X(40),Y(64),20*k,{w:800,col:dark});
+  fd_tiny(ctx,signed?"Casual academic contract":"Offer of a casual academic contract",X(40),Y(122),28*k,{w:800,col:dark});fd_tiny(ctx,"Contract T-26188"+(signed?" · version 2":" · version 1"),X(40),Y(158),20*k,{f:"mono"});
+  fd_tiny(ctx,"Linh Nguyen · Tutor, HI101",X(40),Y(204),20*k);
+  ctx.strokeStyle="rgba(120,130,150,0.45)";ctx.lineWidth=2*k;for(let i=0;i<7;i++){const yy=Y(250+i*36);ctx.beginPath();ctx.moveTo(X(40),yy);ctx.lineTo(X(i%3===2?420:560),yy);ctx.stroke();}
+  fd_tiny(ctx,"Starts 20 July 2026",X(40),Y(536),20*k,{w:700});fd_tiny(ctx,"Ends "+(o.ends||(signed?"20 November 2026":"13 November 2026")),X(40),Y(568),20*k,{w:700});
+  if(o.endsHl>0)fd_ring(ctx,{x:X(34),y:Y(548),w:300*k,h:30*k},o.endsCol||MD.flow,o.endsHl,4);
+  const sg=o.sign==null?(signed?1:0):o.sign;ctx.strokeStyle="rgba(120,130,150,0.6)";ctx.lineWidth=1.5*k;for(const sx of[40,330]){ctx.beginPath();ctx.moveTo(X(sx),Y(690));ctx.lineTo(X(sx+230),Y(690));ctx.stroke();}
+  fd_tiny(ctx,"For the university",X(40),Y(716),16*k);fd_tiny(ctx,"Accepted",X(330),Y(716),16*k);
+  if(sg>0){ctx.save();ctx.strokeStyle=rgba([30,44,96],0.9);ctx.lineWidth=2.6*k;ctx.lineCap="round";const sig=(sx,u)=>{const n=40;ctx.beginPath();for(let i=0;i<=n*u;i++){const q=i/n,px=X(sx+q*200),py=Y(676-Math.sin(q*TAU*2.2+sx)*12-q*8+Math.sin(q*31)*3);i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();};
+    sig(50,clamp(sg*2,0,1));sig(340,clamp(sg*2-1,0,1));ctx.restore();}
+  if(signed&&sg>0.98){ctx.save();ctx.globalAlpha*=0.85;ctx.strokeStyle=rgba(MD.sys.hr,0.9);ctx.lineWidth=3*k;ctx.beginPath();ctx.arc(X(500),Y(600),40*k,0,TAU);ctx.stroke();ctx.beginPath();ctx.arc(X(500),Y(600),30*k,0,TAU);ctx.stroke();ctx.restore();}
+  ctx.restore();return{x,y,w,h};}
+// a tutor's spreadsheet of hours, each its own way: a grid, a header in its own colour, a few cells filled
+function fd_sheet(ctx,x,y,w,v,o){o=o||{};const a=o.a==null?1:o.a,h=w*0.72;if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;if(o.rot){ctx.translate(x+w/2,y+h/2);ctx.rotate(o.rot);ctx.translate(-x-w/2,-y-h/2);}
+  const hc=[[60,140,90],[200,140,60],[90,110,190]][v%3];fd_paper(ctx,x,y,w,h,{col:[244,245,247],white:true,r:4});const cols=[5,4,6][v%3],rows=[7,6,8][v%3],cw=(w-24)/cols,rh=(h-24)/rows;
+  ctx.fillStyle=rgba(hc,0.85);ctx.fillRect(x+12,y+12,w-24,rh);ctx.strokeStyle="rgba(130,140,160,0.45)";ctx.lineWidth=1;
+  for(let i=0;i<=cols;i++){ctx.beginPath();ctx.moveTo(x+12+i*cw,y+12);ctx.lineTo(x+12+i*cw,y+h-12);ctx.stroke();}for(let j=0;j<=rows;j++){ctx.beginPath();ctx.moveTo(x+12,y+12+j*rh);ctx.lineTo(x+w-12,y+12+j*rh);ctx.stroke();}
+  const r=ag_rnd(77+v);ctx.fillStyle="rgba(60,70,90,0.55)";for(let j=1;j<rows;j++)for(let i=0;i<cols;i++)if(r()<0.7)ctx.fillRect(x+18+i*cw,y+12+j*rh+rh*0.4,cw*(0.3+0.5*r()),rh*0.22);
+  ctx.restore();return{x,y,w,h};}
+// an envelope, for what came by email
+function fd_envelope(ctx,x,y,s,col,a){if(a<=0.004)return;ctx.save();ctx.globalAlpha*=a;rr(ctx,x-s/2,y-s*0.32,s,s*0.64,4);ctx.fillStyle="rgba(10,17,35,0.95)";ctx.fill();ctx.strokeStyle=rgba(col,0.95);ctx.lineWidth=2.4;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(x-s/2+3,y-s*0.3);ctx.lineTo(x,y+s*0.05);ctx.lineTo(x+s/2-3,y-s*0.3);ctx.stroke();ctx.restore();}
+// a card of fields and their values, in mono: the field soft, its value white. rows [[field, value, colour?], ...]; o.kick, o.edge,
+// o.icon, o.rowA(i), o.lit (a row's index: it glows), o.litCol, o.fw (the fields' column), o.a, o.k; returns its box
+function fd_kv(ctx,x,y,w,rows,o){o=o||{};const a=o.a==null?1:o.a,rh=o.rh||52,top=o.kick?78:30,h=top+rows.length*rh+18,fw=o.fw||260;if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));md_card(ctx,x,y,w,h,{edge:o.edge,glow:o.edge?0.7:0.3});
+  if(o.kick)md_T(ctx,String(o.kick).toUpperCase(),x+28,y+52,{w:800,size:28,ls:4,col:o.kickCol||o.edge||MD.soft});if(o.icon)md_icon(ctx,o.icon,x+w-48,y+44,38,o.edge||MD.ink);
+  rows.forEach((r,i)=>{const ra=o.rowA?o.rowA(i):1;if(ra<=0.004)return;const yy=y+top+i*rh;ctx.save();ctx.globalAlpha*=ra;
+    if(o.lit===i||(Array.isArray(o.lit)&&o.lit.includes(i))){const lc=o.litCol||MD.flow;ctx.fillStyle=rgba(lc,0.13);rr(ctx,x+14,yy+4,w-28,rh-6,10);ctx.fill();ctx.strokeStyle=rgba(lc,0.85);ctx.lineWidth=1.8;rr(ctx,x+14,yy+4,w-28,rh-6,10);ctx.stroke();}
+    md_T(ctx,r[0],x+28,yy+rh/2+10,{w:500,size:28,f:"mono",col:MD.soft});md_T(ctx,r[1],x+28+fw,yy+rh/2+10,{w:500,size:28,f:"mono",col:r[2]||MD.ink});ctx.restore();});
+  ctx.restore();return{x,y,w,h};}
+// a file of code or YAML: o.kick (its name), o.edge, o.lineA(i), o.a, o.k; each line [text, colour?], indents kept
+function fd_code(ctx,x,y,w,lines,o){o=o||{};const a=o.a==null?1:o.a,lh=40,top=o.kick?80:32,h=top+lines.length*lh+22;if(a<=0.004)return{x,y,w,h};ctx.save();ctx.globalAlpha*=a;
+  if(o.k!=null)ag_about(ctx,x+w/2,y+h/2,lerp(0.7,1,ag_spr(o.k,0,0.5)));md_card(ctx,x,y,w,h,{edge:o.edge,glow:o.edge?0.8:0.3,fill:"rgba(8,13,28,0.96)"});
+  if(o.kick)md_T(ctx,o.kick,x+28,y+52,{w:500,size:28,f:"mono",col:o.kickCol||o.edge||MD.soft});if(o.icon)md_icon(ctx,o.icon,x+w-48,y+44,38,o.edge||MD.ink);
+  lines.forEach((l,i)=>{const la=o.lineA?o.lineA(i):1;if(la<=0.004)return;const s=typeof l==="string"?l:l[0],c=typeof l==="string"?null:l[1],m=/^(\s*-?\s*)([\w.]+:)?(.*)$/.exec(s),yy=y+top+i*lh+28;
+    ctx.save();ctx.globalAlpha*=la;let xx=x+28;const lead=m[1]||"",key=m[2]||"",rest=m[3]||"";if(lead){md_T(ctx,lead,xx,yy,{w:500,size:28,f:"mono",col:MD.dim});xx+=md_tw(ctx,lead,{w:500,size:28,f:"mono"});}
+    if(key){md_T(ctx,key,xx,yy,{w:500,size:28,f:"mono",col:c||MD.flow});xx+=md_tw(ctx,key,{w:500,size:28,f:"mono"});}
+    if(rest)md_T(ctx,rest,xx,yy,{w:500,size:28,f:"mono",col:c&&!key?c:MD.ink});ctx.restore();});
+  ctx.restore();return{x,y,w,h};}
+// the extracted rows: the fields Finance names, one row for each invoice, and the path of its file; o.rowA(i), o.pathA, o.cols (how many
+// of the four columns show), o.lit, o.a. Its own table, as the field names are code and keep their case
+const FD_FIELDS=[["supplier_name",410],["invoice_number",290],["invoice_date",250],["total",160]];
+function fd_rowsTable(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a;if(a<=0.004)return;const rh=58,nc=o.cols==null?4:o.cols;ctx.save();ctx.globalAlpha*=a;
+  let cx=x;FD_FIELDS.forEach((f,i)=>{if(i>=nc)return;md_T(ctx,f[0],cx+14,y+36,{w:500,size:28,f:"mono",col:MD.soft});cx+=f[1];});const W_=FD_FIELDS.reduce((s,f)=>s+f[1],0);
+  ctx.strokeStyle="rgba(170,200,245,0.25)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(x,y+54);ctx.lineTo(x+W_,y+54);ctx.stroke();
+  for(let i=0;i<3;i++){const ra=o.rowA?o.rowA(i):1;if(ra<=0.004)continue;const I=FD_INV[i],ry=y+54+i*rh;ctx.save();ctx.globalAlpha*=ra;
+    if(o.lit===i){ctx.fillStyle=rgba(MD.flow,0.12);rr(ctx,x-6,ry+5,W_+12,rh-8,10);ctx.fill();ctx.strokeStyle=rgba(MD.flow,0.8);ctx.lineWidth=1.8;rr(ctx,x-6,ry+5,W_+12,rh-8,10);ctx.stroke();}
+    const cells=[I.supplier,I.number,I.iso,I.total.replace(",","")];let xx=x;cells.forEach((c,j)=>{if(j<nc){const cA=o.cellA?o.cellA(i,j):1;if(cA>0)md_T(ctx,c,xx+14,ry+rh/2+10,{w:500,size:28,f:"mono",col:MD.ink,a:cA});}xx+=FD_FIELDS[j][1];});ctx.restore();}
+  ctx.restore();}
+
+/* ===== Files as data and as context: the scenes =====
+   Five chapters, each timed to its narration: wAt(sc, "line", "word") is the moment a word is said. The opening moves between three
+   rooms of the 1840s and 1850s (the Navy's office, the chart of the oceans, the hall in Brussels), each painted once, and comes to the
+   university's night map for its last lines and the title card. The four chapters after it each stay in one room, the map, where the
+   camera holds and only what changes fades; the chapters open on the one before (ag_cutInto), and the last goes back to the chart,
+   then to the map for its end. Words over the chart are drawn in the frame itself (fd_scr), so they stay put while the camera moves. */
+
+const fd_once=(sc,k,fn)=>sc[k]||(sc[k]=fn());
+const fd_k=(tt,t0)=>clamp(tt-t0,0,1);
+// the film's name at the top left, and the chapter's case under it
+function fd_top(ctx,a){md_label(ctx,96,100,"Files as data and as context",{col:MD.soft,a});}
+function fd_case(ctx,text,a,col){md_tag(ctx,96,166,text,{col:col||MD.soft,a});}
+// a person, faded as one picture
+function fd_who(ctx,who,x,y,s,a,o){if(a<=0.004)return null;let h=null;withA(ctx,a,()=>{h=md_person(ctx,who,x,y,s,o);});return h;}
+// a lane of the map's light from a to b, drawn as far as u, with what moves along it
+function fd_link(ctx,a,b,u,t,o){o=o||{};if(u<=0)return;const pts=o.pts||md_curve(a,b,{bend:o.bend==null?0.5:o.bend});md_lane(ctx,pts,o.col||MD.flow,o.a==null?0.85:o.a,{u,dash:o.dash,t});
+  if(u>=1&&o.flow!==false)md_flow(ctx,pts,t,{kind:o.kind||"events",col:o.col||MD.flow,a:o.a==null?1:o.a,every:o.every||1.1,off:o.off||0});}
+// numbers counted up: from 0 to n over d seconds from t0, written with thousands separators
+const fd_count=(tt,t0,d,n)=>Math.round(n*ag_eo((tt-t0)/d)).toLocaleString("en-US");
+
+/* ---------------------------------------------------------------- 1 · Logbooks into charts */
+// the three logbooks, small, side by side: where each sits, then its kind
+const FD_THREE=[[110,250,520,0,-0.02],[700,226,520,1,0.015],[1290,256,520,2,-0.01]];
+const FD_WAYS=["In columns","In sentences","In its own short hand"];
+scene("logs",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
+    wash:wAt(sc,"place","Washington"),navy:wAt(sc,"place","United States Navy"),charts:wAt(sc,"place","charts"),logbooks:wAt(sc,"place","logbooks"),
+    record:wAt(sc,"logbook","daily record"),where:wAt(sc,"logbook","where it was"),wind:wAt(sc,"logbook","the wind"),weather:wAt(sc,"logbook","the weather"),current:wAt(sc,"logbook","the current"),flow:wAt(sc,"logbook","the sea's own flow"),
+    thousands:wAt(sc,"unread","Thousands"),ownWay:wAt(sc,"unread","in its own way"),nobody:wAt(sc,"unread","nobody"),
+    routes:wAt(sc,"habit","routes they knew"),winds:wAt(sc,"habit","winds and currents"),there:wAt(sc,"habit","really there"),
+    weeks:wAt(sc,"weeks","weeks longer"),crews:wAt(sc,"weeks","the crews"),food:wAt(sc,"weeks","food and water"),cargo:wAt(sc,"weeks","cargo"),
+    read:wAt(sc,"read","read its old logs"),tables:wAt(sc,"read","tables"),patch:wAt(sc,"read","each patch"),month:wAt(sc,"read","month by month"),
+    drew:wAt(sc,"charts","drew"),free:wAt(sc,"charts","free"),captain:wAt(sc,"charts","any captain"),oneForm:wAt(sc,"charts","one set form"),back:wAt(sc,"charts","send it back"),
+    y1853:wAt(sc,"brussels","eighteen fifty-three"),brussels:wAt(sc,"brussels","Brussels"),ten:wAt(sc,"brussels","ten nations"),quetelet:wAt(sc,"brussels","Adolphe Quetelet"),agreed:wAt(sc,"brussels","agreed one log"),flag:wAt(sc,"brussels","every flag"),
+    count:wAt(sc,"saved","own count"),california:wAt(sc,"saved","California"),horn:wAt(sc,"saved","Cape Horn"),d183:wAt(sc,"saved","a hundred and eighty-three"),d135:wAt(sc,"saved","a hundred and thirty-five"),
+    share:wAt(sc,"shared","share their weather data"),today:wAt(sc,"shared","still do today"),
+    docs:wAt(sc,"same","Documents today"),people:wAt(sc,"same","written for people"),own2:wAt(sc,"same","in its own way"),
+    readInto:wAt(sc,"answer","read into data"),worth:wAt(sc,"answer","worth it"),write:wAt(sc,"answer","what we write"),start:wAt(sc,"answer","from the start")}));
+  const sea0=T.routes-1.1,hall0=T.y1853-0.9,sea1=T.count-0.9,map0=T.docs-0.9;
+  // the race: the charts' ship arrives as 135 is said, the habit's 183/135 of the way later
+  const r0=T.california-0.4,rD=(T.d135-r0)*183/135;
+  ag_shots(ctx,S,t,sc.dur,[
+    // the office in Washington: its shelves of logbooks, its chart on the wall; a logbook opens, then three, each kept its own way
+    {at:0,place:"fdOffice",keys:[[0,960,560,1.0],[T.record-1.4,1010,570,1.05]],d:4.2,push:0.02,draw:(cx,tt)=>{
+      glow(cx,420,470,560,FD.lamp,0.22*ag_io(tt,T.logbooks-0.1,T.record-0.3,0.6));glow(cx,1230,330,460,MD.flow,0.2*ag_io(tt,T.charts-0.1,T.logbooks+0.4,0.5));
+      fd_scr(cx,S,()=>{const lA=ag_io(tt,0.5,T.record-0.6,0.7);md_label(cx,96,118,"Washington, 1842",{col:MD.soft,a:lA});md_T(cx,"The Navy's Depot of Charts and Instruments",96,166,{w:700,size:36,a:lA*ag_in(tt,T.navy-0.3,0.7)});
+        // one logbook, open, close up; then it steps back beside two others
+        const pA=ag_in(tt,T.record-0.7,0.6)*(1-ag_in(tt,sea0-1.0,0.6));if(pA<=0)return;cx.fillStyle="rgba(4,8,18,"+(0.5*pA)+")";cx.fillRect(0,0,1920,1080);
+        const m=ag_sine((tt-T.thousands+0.3)/1.1),dim=ag_in(tt,T.nobody,1.2),sink=24*ag_sine((tt-T.nobody)/1.8);
+        fd_logPage(cx,lerp(460,FD_THREE[0][0],m),lerp(170,FD_THREE[0][1],m)+sink,lerp(1000,520,m),0,{a:pA,rot:lerp(0,FD_THREE[0][4],m),dim,k:fd_k(tt,T.record-0.7),
+          heads:[ag_in(tt,T.where-0.15,0.4),ag_in(tt,T.wind-0.15,0.4),ag_in(tt,T.weather-0.15,0.4),ag_in(tt,T.current-0.15,0.4)]});
+        if(m<0.05){const fr=ag_io(tt,T.flow-0.1,T.thousands-0.4,0.4);if(fr>0)fd_ring(cx,{x:460+60+0.74*880-6,y:170+142,w:170,h:46},MD.flow,fr*pA,6);}
+        for(let i=1;i<3;i++){const [x,y,w,kind,rot]=FD_THREE[i],q=ag_in(tt,T.thousands+0.15+i*0.3,0.6);if(q<=0)continue;fd_logPage(cx,x+(1-ag_eo(q))*260,y+sink,w,kind,{a:q*pA,rot,dim});}
+        FD_WAYS.forEach((s,i)=>{const [x,y,w]=FD_THREE[i],q=ag_io(tt,T.ownWay+i*0.35,T.nobody-0.1,0.4)*pA;md_T(cx,s,x+w/2,y+w*0.6+56,{w:700,size:30,align:"center",col:MD.soft,a:q});});
+        if(dim>0)md_T(cx,"Kept, and never read again",960,840,{w:700,size:32,align:"center",col:MD.soft,a:dim*pA*ag_in(tt,T.nobody+0.4,0.6)});});}},
+    // the oceans: the habit's road against the winds and currents that were there; the weeks it cost; the logs read into five-degree
+    // squares, month by month; the charts drawn from them, free to any captain who keeps the one log and sends it back
+    {at:sea0,place:"fdSea",dis:0.9,keys:[[0,800,525,1.2],[T.read-0.6,676,284,1.9],[T.drew-0.2,690,372,1.45]],d:2.4,push:0.015,draw:(cx,tt,cam)=>{
+      const habA=1-0.6*ag_in(tt,c.change,1.0)-0.4*ag_in(tt,T.read-0.5,1.0),wA=0.45+0.55*ag_in(tt,T.winds-0.2,1.0),cA=ag_in(tt,T.winds+0.3,1.2)*(1-0.5*ag_in(tt,T.read-0.4,0.8))+0.5*ag_in(tt,T.drew,1.2);
+      const month=5+clamp(Math.floor((tt-T.month)/0.55),0,5);
+      fd_land(cx,{cam});fd_winds(cx,tt,{cam,a:wA*(1-0.6*ag_io(tt,T.read,T.drew,0.8)),calm:ag_io(tt,T.weeks,T.read,0.8),month:tt>T.month?month:5});fd_currents(cx,tt,{a:cA});
+      fd_route(cx,"habit",ag_sine((tt-T.routes)/2.6),{a:habA,dash:true,t:tt});
+      // the ship on the habit's road: it sails slowly, then lies in the calms for weeks
+      const sp=clamp((tt-T.routes-0.4)/9,0,1),su=0.28*ag_eo(sp)+0.06*ag_sine((tt-T.weeks)/6),shA=ag_in(tt,T.routes+0.2,0.6)*(1-ag_in(tt,T.read-0.6,0.6));
+      if(shA>0){const q=fd_along("habit",su);fd_ship(cx,q.x,q.y-4/cam.z,34/cam.z,q.dx<0,{a:shA});}
+      for(const [k,side] of [["ny","left"],["sf","right"],["horn","left"]])fd_port(cx,cam,k,{side,a:ag_in(tt,T.routes,0.6)*(1-ag_in(tt,T.read-0.6,0.6))});
+      fd_squares(cx,tt,{cam,a:ag_io(tt,T.tables-0.3,T.drew+0.2,0.6),u:ag_sine((tt-T.tables+0.2)/3.2),month:tt>T.month?month:5});
+      fd_scr(cx,S,()=>{
+        // what the weeks cost, and who paid
+        [["More weeks at sea","clock",T.crews],["Food and water running low","warn",T.food],["Cargo and letters late","doc",T.cargo]].forEach(([s,ic,at_],i)=>md_tag(cx,1290,300+i*92,s,{col:MD.ink,icon:ic,a:ag_io(tt,at_-0.25,c.change-0.1,0.4)}));
+        // the logs, read into the squares
+        const lp=ag_io(tt,T.read-0.3,T.tables+0.8,0.4);for(let i=0;i<3;i++){const fly=ag_sine((tt-T.tables+0.3-i*0.12)/0.9);if(lp<=0)break;
+          fd_logPage(cx,lerp(110+i*30,700,fly),lerp(170+i*40,330,fly),lerp(300,60,fly),i,{a:lp*(1-fly),rot:(i-1)*0.04});}
+        const tA=ag_io(tt,T.patch-0.2,T.drew,0.5);if(tA>0){const mn=["June","July","August","September","October","November"][month-5]||"June",mm=tt>T.month?mn:"June";
+          md_card(cx,1010,560,830,286,{edge:MD.flow,a:tA,glow:0.6});md_T(cx,"EACH PATCH OF OCEAN, MONTH BY MONTH",1038,610,{w:800,size:28,ls:4,col:MD.flow,a:tA});
+          withA(cx,tA,()=>md_rows(cx,1032,630,[{h:"Patch",w:250},{h:"Month",w:200},{h:"Wind",w:150},{h:"Current",w:200}],
+            [["35°N 70°W",mm,"SW","NE, 2 knots"],["25°N 50°W",mm,"NE","W, ½ knot"],["5°N 30°W",mm,"Calm","E, 1 knot"]],{rh:50}));}
+        // the charts, free, for the one log sent back
+        const chA=ag_in(tt,T.drew-0.1,0.6);md_tag(cx,96,120,"Wind and current chart",{col:MD.flow,icon:"doc",a:chA});
+        const cpA=ag_in(tt,T.free-0.6,0.8);if(cpA>0)withA(cx,cpA,()=>fd_period(cx,"captain",330,590,1.0,{t:tt,gaze:[3,0],light:{warm:0.2},paper:(c2,x,y)=>fd_heldForm(c2,x,y,{gold:ag_in(tt,T.oneForm,0.6)})}));
+        if(cpA>0)withA(cx,cpA,()=>{md_nameTag(cx,96,246,{name:"A captain"},{role:"Who keeps the log",col:MD.agreed});});
+        md_tag(cx,560,330,"The charts, free",{col:MD.agreed,icon:"doc",a:ag_in(tt,T.free-0.1,0.5)});
+        md_tag(cx,560,420,"The log, in one set form, sent back",{col:MD.agreed,icon:"contract",a:ag_in(tt,T.oneForm-0.1,0.5)});
+        const bk=ag_sine((tt-T.back)/1.4);if(bk>0&&bk<1){const p=at(mk(md_curve([520,560],[260,140],{bend:0.4}).map(q=>P(q[0],q[1]))),bk);md_icon(cx,"contract",p.x,p.y,44,MD.agreed,{a:Math.sin(Math.PI*bk)});}});}},
+    // Brussels, 1853: ten nations, Quetelet in the chair, and the one log they agreed
+    {at:hall0,place:"fdHall",dis:0.9,keys:[[0,960,540,1.0]],push:0.025,draw:(cx,tt)=>{
+      md_label(cx,96,118,"Brussels, 1853",{col:MD.soft,a:ag_in(tt,T.brussels-0.3,0.6)});
+      md_person(cx,FD_P.quetelet,600,470,0.9,{t:tt,cut:792,gaze:[3,0],pose:"hold",holdBack:(c2,h)=>fd_heldForm(c2,h.near[0]-26,h.near[1]-58,{gold:ag_in(tt,T.agreed,0.8)}),front:c2=>fd_stock(c2)});
+      md_nameTag(cx,730,262,{name:"Adolphe Quetelet"},{role:"Statistician, in the chair",col:MD.agreed,a:ag_in(tt,T.quetelet-0.2,0.6)});
+      const nA=ag_in(tt,T.ten-0.3,0.6);if(nA>0){md_card(cx,1100,150,720,322,{a:nA});md_T(cx,"TEN NATIONS",1128,200,{w:800,size:28,ls:4,col:MD.soft,a:nA});
+        const N=["Belgium","Denmark","France","Great Britain","The Netherlands","Norway","Portugal","Russia","Sweden","The United States"];
+        N.forEach((s,i)=>md_T(cx,s,1128+(i>4?340:0),250+(i%5)*46,{w:600,size:28,a:nA*ag_in(tt,T.ten-0.1+i*0.08,0.3)}));}
+      fd_form53(cx,1060,500,760,{a:ag_in(tt,T.agreed-0.3,0.5),k:fd_k(tt,T.agreed-0.3)});}},
+    // the charts' count: two roads to California round Cape Horn, then the data the nations began to share
+    {at:sea1,place:"fdSea",dis:0.9,keys:[[0,835,530,1.15],[T.share-0.7,760,337,1.6]],d:2.4,push:0.015,draw:(cx,tt,cam)=>{
+      const rA=1-ag_in(tt,T.share-0.6,0.8);fd_land(cx,{cam});fd_winds(cx,tt,{cam,a:0.5});fd_currents(cx,tt,{a:0.35*rA});
+      const dd=tt-r0,uH=clamp(dd/rD,0,1),uC=clamp(dd/(rD*135/183),0,1);
+      fd_route(cx,"habit",ag_in(tt,sea1+0.3,1.4),{a:0.75*rA,dash:true,t:tt});fd_route(cx,"charted",ag_in(tt,T.count,1.4),{a:rA,col:MD.pass});
+      if(dd>0&&rA>0){const h=fd_along("habit",uH),g=fd_along("charted",uC);fd_ship(cx,h.x,h.y-4/cam.z,30/cam.z,h.dx<0,{a:rA});fd_ship(cx,g.x,g.y-4/cam.z,30/cam.z,g.dx<0,{a:rA,col:MD.pass});}
+      for(const [k,side] of [["ny","left"],["sf","right"],["horn","left"]])fd_port(cx,cam,k,{side,a:ag_in(tt,sea1+0.4,0.6)*rA});
+      // the ports that began to share, and the lanes between them
+      const pA=ag_in(tt,T.share-0.2,0.8);if(pA>0){const L=[["wash","london"],["ny","lisbon"],["wash","brussels"],["brest","rio"],["lisbon","rio"],["ny","hamburg"],["london","copen"]];
+        L.forEach(([a_,b_],i)=>{const A=fd_xy(FD_PORT[a_][0],FD_PORT[a_][1]),B=fd_xy(FD_PORT[b_][0],FD_PORT[b_][1]),u=ag_sine((tt-T.share-i*0.15)/1.2);fd_link(cx,A,B,u,tt,{a:0.8*pA,bend:0.35,off:i*0.37,every:1.6});});
+        for(const [k,side,dy] of [["wash","left",14],["ny","left",-26],["brussels","right",0],["london","left",-22],["lisbon","left",8],["hamburg","right",-14],["copen","right",-30],["brest","left",24],["rio","left",0]])fd_port(cx,cam,k,{side,dy,a:pA,size:28});}
+      fd_scr(cx,S,()=>{const cA=ag_in(tt,T.count-0.3,0.6)*rA;if(cA>0){md_card(cx,1190,220,620,262,{edge:MD.pass,a:cA,glow:0.5});
+          md_T(cx,"THE OFFICE'S OWN COUNT",1218,272,{w:800,size:28,ls:4,col:MD.pass,a:cA});md_T(cx,"New York to California,",1218,322,{w:600,size:28,col:MD.soft,a:cA});md_T(cx,"round Cape Horn",1218,358,{w:600,size:28,col:MD.soft,a:cA});
+          md_T(cx,"183",1218,436,{w:800,size:48,col:FD.habit,a:cA*ag_in(tt,T.d183-0.1,0.4)});
+          const ar=ag_in(tt,T.d135-0.5,0.4);if(ar>0){md_T(cx,"→",1326,436,{w:800,size:48,col:MD.soft,a:cA*ar});md_T(cx,"135 days",1400,436,{w:800,size:48,col:MD.pass,a:cA*ag_in(tt,T.d135-0.1,0.4)});}}
+        md_tag(cx,1360,800,"Still shared today",{col:MD.flow,icon:"share",a:ag_in(tt,T.today-0.2,0.5)});});}},
+    // today: documents written for people, each its own way; read into data where it's worth it, or written as data from the start
+    {at:map0,place:"map",dis:0.9,keys:[[0,960,540,1.0]],push:0.015,draw:(cx,tt)=>{
+      const D=[[250,150,340,"invoice","An invoice"],[790,130,340,"contract","A contract"],[1310,200,400,"sheet","A claim for hours"]];
+      D.forEach(([x,y,w,kind,lab],i)=>{const q=ag_in(tt,T.docs-0.4+i*0.35,0.6);if(q<=0)return;const rot=[-0.02,0.012,-0.015][i]*ag_in(tt,T.own2,0.8);
+        if(kind==="invoice")fd_invoice(cx,x,y+(1-ag_eo(q))*30,w,0,{a:q,rot});else if(kind==="contract")fd_contract(cx,x,y+(1-ag_eo(q))*30,w,{a:q,rot,kind:"signed"});else fd_sheet(cx,x,y+(1-ag_eo(q))*30,w,0,{a:q,rot});
+        md_T(cx,lab,x+w/2,620,{w:700,size:30,align:"center",col:MD.soft,a:q*ag_in(tt,T.people-0.3,0.5)});});
+      fd_link(cx,[420,640],[420,690],ag_sine((tt-T.readInto+0.1)/0.7),tt,{col:MD.flow,pts:[[420,640],[420,700]],flow:false});
+      md_table(cx,190,700,460,{name:"invoices",kind:"read into data",a:ag_in(tt,T.readInto,0.5),k:fd_k(tt,T.readInto)});
+      md_tag(cx,700,752,"Where it's worth it",{col:MD.flow,a:ag_in(tt,T.worth-0.2,0.5)});
+      fd_link(cx,[1510,520],[1510,690],ag_sine((tt-T.write+0.1)/0.7),tt,{col:MD.agreed,pts:[[1510,520],[1510,700]],flow:false});
+      md_table(cx,1280,700,460,{name:"claims",kind:"written as data",col:MD.agreed,a:ag_in(tt,T.write,0.5),k:fd_k(tt,T.write)});
+      md_tag(cx,1000,840,"From the start",{col:MD.agreed,a:ag_in(tt,T.start-0.2,0.5)});}}
+  ],0.9);
+  md_title(ctx,S,t,c.breath,"Files as data and as context","Read them, keep them, or write them as data","Documents as data · Modern data basics");});
+
+/* ---------------------------------------------------------------- 2 · Invoices, read into data */
+const FD_PATH="/Volumes/finance/supplier_invoices/incoming/LC-20931.pdf";
+scene("invoices",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
+    readThem:wAt(sc,"three","read them"),keepThem:wAt(sc,"three","keep them"),writeThem:wAt(sc,"three","write them as data"),
+    n3860:wAt(sc,"october","three thousand"),pdf:wAt(sc,"october","P D F files"),layout:wAt(sc,"october","own layout"),
+    team:wAt(sc,"check","team checks"),paid:wAt(sc,"check","before it's paid"),who:wAt(sc,"check","who sent it"),num:wAt(sc,"check","its number"),date:wAt(sc,"check","its date"),tot:wAt(sc,"check","its total"),line:wAt(sc,"check","each line"),
+    hand:wAt(sc,"typed","typed them in by hand"),sept:wAt(sc,"typed","September"),twice:wAt(sc,"typed","sent twice"),paidTwice:wAt(sc,"typed","paid twice"),
+    lands:wAt(sc,"volume","lands in a volume"),place:wAt(sc,"volume","a place for files"),gov:wAt(sc,"volume","governed in Unity Catalog"),asTables:wAt(sc,"volume","as tables are"),
+    parse:wAt(sc,"parse","A I parse document"),reads:wAt(sc,"parse","reads each file"),words:wAt(sc,"parse","its words"),tables:wAt(sc,"parse","its tables"),sits:wAt(sc,"parse","where each sits"),
+    extract:wAt(sc,"extract","A I extract"),fields:wAt(sc,"extract","the fields Finance names"),row:wAt(sc,"extract","one row for each invoice"),
+    path:wAt(sc,"path","the path of its file"),open:wAt(sc,"path","open the invoice"),
+    model:wAt(sc,"model","An AI model"),checked:wAt(sc,"model","checked like any other data"),film:wAt(sc,"model","Promises and proofs"),
+    jun:wAt(sc,"checks","Jun Park's"),every:wAt(sc,"checks","every field read"),add:wAt(sc,"checks","add up to the total"),
+    rules:wAt(sc,"rules","Finance's own rules"),before:wAt(sc,"rules","sent before"),know:wAt(sc,"rules","know the supplier"),
+    n3734:wAt(sc,"passed","seven hundred and thirty-four"),passed:wAt(sc,"passed","passed every check"),
+    person:wAt(sc,"person","went to a person"),reason:wAt(sc,"person","each with its reason"),nine:wAt(sc,"person","Nine"),
+    fn:wAt(sc,"decides","The function reads"),sort:wAt(sc,"decides","the checks sort"),decides:wAt(sc,"decides","Rohan's team decides"),approves:wAt(sc,"decides","approves every payment")}));
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
+    fd_top(cx,1);
+    // three kinds of documents, three answers
+    const thA=1-ag_in(tt,c.october-0.9,0.6);
+    [[150,"Supplier invoices","Read them","doc",MD.flow,T.readThem],[730,"Signed contracts","Keep them","contract",null,T.keepThem],[1310,"Claims for hours","Write them as data","table",MD.agreed,T.writeThem]].forEach(([x,k,ti,ic,ed,at_])=>{
+      md_textCard(cx,x,330,460,{kick:k,title:ti},{icon:ic,edge:ed,a:ag_in(tt,at_-0.3,0.5)*thA,k:fd_k(tt,at_-0.3)});});
+    fd_case(cx,"Supplier invoices · read them",ag_in(tt,c.october-0.6,0.6),MD.flow);
+    // October's invoices, each in its supplier's layout
+    const ocA=ag_io(tt,c.october-0.3,c.check-1.3,0.5);if(ocA>0){md_system(cx,96,420,440,"fin",{sub:"Receives the invoices",a:ocA});
+      md_T(cx,"OCTOBER 2026",1200,240,{w:800,size:28,ls:4,col:MD.soft,a:ocA});md_T(cx,fd_count(tt,T.n3860-0.2,1.6,3860),1200,330,{w:800,size:84,a:ocA*ag_in(tt,T.n3860-0.3,0.4)});
+      md_T(cx,"supplier invoices",1200,376,{w:600,size:30,col:MD.soft,a:ocA*ag_in(tt,T.n3860,0.5)});
+      for(let i=0;i<4;i++){const q=ag_in(tt,T.pdf-0.4+i*0.25,0.5);if(q<=0)continue;fd_invoice(cx,640+i*300+(1-ag_eo(q))*60,440+(i%2)*26,260,i,{a:q*ocA,rot:[-0.03,0.02,-0.012,0.028][i]*ag_in(tt,T.layout,0.6)});}}
+    // Rohan's team checks every one: the five things, read off the page
+    const ckA=ag_io(tt,c.check-0.7,c.volume-0.9,0.6),wv=ag_io(tt,T.sept-0.4,c.volume-0.9,0.5);
+    fd_who(cx,"rohan",300,590,0.98,ckA,{t:tt,gaze:[3,0]});md_nameTag(cx,420,400,"rohan",{role:"Finance",col:MD.dom.finance,a:ckA});
+    if(ckA>0){const H={supplier:ag_in(tt,T.who-0.1,0.4),number:ag_in(tt,T.num-0.1,0.4),date:ag_in(tt,T.date-0.1,0.4),total:ag_in(tt,T.tot-0.1,0.4),lines:ag_in(tt,T.line-0.1,0.4)};
+      fd_invoice(cx,640,190,460,0,{a:ckA,hl:H});
+      const rA=ckA*(1-wv),V=[["Who sent it","Larkspur Catering"],["Number","LC-20931"],["Date","28 Oct 2026"],["Total","A$1,284.00"],["Lines","3"]],at_=[T.who,T.num,T.date,T.tot,T.line];
+      // typed in by hand: the values go again, letter by letter
+      const ty=k=>{const s=V[k][1],u=clamp((tt-T.hand-0.1-k*0.42)/0.4,0,1);return tt<T.hand-0.1?s:s.slice(0,Math.round(s.length*u))+(u<1&&u>0?"|":"");};
+      if(rA>0){md_card(cx,1170,190,660,350,{a:rA});withA(cx,rA,()=>md_rows(cx,1190,200,[{h:"Finance checks",w:260},{h:"",w:360}],V.map((r,k)=>[r[0],{s:ty(k),f:k===1||k===3?"mono":undefined}]),{rh:56,rowA:(r,k)=>ag_in(tt,at_[k]-0.1,0.4)}));
+        md_tag(cx,1190,600,"Typed in by hand",{col:MD.ink,icon:"person",a:rA*ag_in(tt,T.hand-0.2,0.5)});}
+      // and in September, one invoice sent twice was paid twice
+      if(wv>0){for(let i=0;i<2;i++){const q=ag_in(tt,T.twice-0.4+i*0.4,0.5)*wv;fd_invoice(cx,1190+i*330,210+i*20,290,2,{a:q,rot:i?0.03:-0.02});
+          const st=ag_in(tt,T.paidTwice-0.2+i*0.25,0.3)*wv;if(st>0){cx.save();cx.globalAlpha*=st;cx.translate(1335+i*330,470+i*20);cx.rotate(-0.2);cx.strokeStyle=rgba(MD.fail,0.95);cx.lineWidth=4;rr(cx,-70,-26,140,52,8);cx.stroke();
+            md_T(cx,"PAID",0,12,{w:800,size:32,ls:4,align:"center",col:MD.fail});cx.restore();}}
+        md_T(cx,"September 2026",1190,180,{w:700,size:28,col:MD.soft,a:wv*ag_in(tt,T.sept-0.3,0.5)});md_pill(cx,1520,700,"Paid twice",{col:MD.fail,icon:"cross",a:wv*ag_in(tt,T.paidTwice,0.4),k:fd_k(tt,T.paidTwice)});}}
+    // the volume: every file lands there, governed in Unity Catalog as tables are
+    const voA=ag_io(tt,c.volume-0.6,c.parse-0.6,0.6);if(voA>0){md_window(cx,120,240,940,560,{logo:"databricks",product:"Databricks",title:"Catalog",a:voA,draw:(c2,b)=>{
+        md_tree(c2,b.x+20,b.y+16,[{name:"finance",kind:"catalog",depth:0},{name:"supplier_invoices",kind:"schema",depth:1},{name:"incoming",kind:"volume",depth:2,col:MD.flow}],{rh:58});
+        ["LC-20931.pdf","NLS-118402.pdf","TP-7716.pdf","CC-0459.pdf"].forEach((f,i)=>{const q=ag_in(tt,T.lands-0.2+i*0.35,0.5);if(q<=0)return;const yy=b.y+16+(3+i)*58,xx=b.x+20+3*40+(1-ag_eo(q))*-80;
+          c2.save();c2.globalAlpha*=q;md_icon(c2,"doc",xx+16,yy+25,30,MD.ink);md_T(c2,f,xx+42,yy+35,{w:500,size:28,f:"mono"});c2.restore();});}});
+      md_textCard(cx,1140,280,660,{kick:"A volume",title:"A place for files"},{icon:"volume",edge:MD.flow,a:voA*ag_in(tt,T.place-0.3,0.5),k:fd_k(tt,T.place-0.3)});
+      md_textCard(cx,1140,470,660,{kick:"Unity Catalog",title:"Governed as tables are"},{icon:"lock",edge:MD.flow,a:voA*ag_in(tt,T.gov-0.3,0.5),k:fd_k(tt,T.gov-0.3)});}
+    // the functions read it: the page's parts, then the fields Finance names, one row for each invoice, each with its file's path
+    const fnA=ag_io(tt,c.parse-0.5,c.checks-0.7,0.6),pgA=fnA*(1-ag_in(tt,c.model-0.4,0.6));
+    if(pgA>0){const inv=fd_invoice(cx,110,200,400,0,{a:pgA,parse:ag_in(tt,T.reads,1.6),hl:{total:0}}),R=inv.R;
+      // a page too faint to draw has no parts to point at (fd_invoice returns no boxes), and its tags are as faint
+      if(R.supplier){const tagA=pgA*(1-ag_in(tt,c.extract-0.3,0.5));md_tag(cx,R.supplier.x+R.supplier.w+20,R.supplier.y+R.supplier.h/2,"Words",{col:MD.flow,a:tagA*ag_in(tt,T.words-0.1,0.4)});
+      md_tag(cx,R.lines.x+R.lines.w+20,R.lines.y+R.lines.h/2,"A table",{col:MD.flow,a:tagA*ag_in(tt,T.tables-0.1,0.4)});
+      md_tag(cx,R.total.x+R.total.w+20,R.total.y+R.total.h/2,"Where it sits: page 1",{col:MD.flow,a:tagA*ag_in(tt,T.sits-0.1,0.4)});
+      // the fields leave the page for their row
+      const fl=ag_sine((tt-T.fields)/1.0);if(fl>0&&fl<1)["supplier","number","date","total"].forEach((nm,j)=>{const a_=[R[nm].x+R[nm].w/2,R[nm].y+R[nm].h/2],b_=[660+[195,545,815,1020][j],530],p=at(mk(md_curve(a_,b_,{bend:0.5}).map(q=>P(q[0],q[1]))),fl);
+        glow(cx,p.x,p.y,26,MD.flow,0.7*Math.sin(Math.PI*fl));});
+      // the path, followed back to the file
+      const op=ag_io(tt,T.open-0.2,c.model-0.4,0.4);if(op>0)fd_link(cx,[600,770],[510,460],1,tt,{a:op,dash:true,flow:false,bend:0.3});}}
+    if(fnA>0){md_textCard(cx,620,180,560,{kick:"A function",title:"ai_parse_document",sub:"Reads each file"},{mono:true,icon:"doc",edge:MD.flow,a:fnA*ag_in(tt,T.parse-0.3,0.5),k:fd_k(tt,T.parse-0.3)});
+      md_textCard(cx,1240,180,580,{kick:"Another",title:"ai_extract",sub:"Takes out the fields"},{mono:true,icon:"table",edge:MD.flow,a:fnA*ag_in(tt,T.extract-0.3,0.5),k:fd_k(tt,T.extract-0.3)});
+      const tbA=fnA*ag_in(tt,T.fields-0.2,0.5);if(tbA>0){md_card(cx,620,430,1200,250,{a:tbA});fd_rowsTable(cx,650,446,{a:tbA,rowA:i=>ag_in(tt,(i?T.row+0.1:T.fields+0.7)+i*0.3,0.4),lit:tt>T.path-0.2&&tt<c.checks?0:-1});}
+      fd_kv(cx,620,710,1200,[["file_path",FD_PATH]],{fw:200,a:fnA*ag_in(tt,T.path-0.3,0.5),edge:MD.flow,rh:56});}
+    // the reading is a model's, so it's checked like any other data
+    const moA=ag_io(tt,c.model-0.3,c.checks-0.7,0.6);if(moA>0){withA(cx,moA,()=>ag_model(cx,310,400,96,{t:tt,think:0.4+0.4*ag_io(tt,T.model,T.checked,0.5),label:"AI model"}));
+      md_tag(cx,310,600,"Checked like any other data",{align:"center",col:MD.pass,icon:"tick",a:moA*ag_in(tt,T.checked-0.2,0.5)});
+      md_textCard(cx,96,680,430,{kick:"The film",title:"Promises and proofs"},{icon:"doc",a:moA*ag_in(tt,T.film-0.3,0.5),k:fd_k(tt,T.film-0.3)});}
+    // Jun's data project checks each one; then Finance's own rules
+    const jA=ag_io(tt,c.checks-0.6,c.passed-0.8,0.6);fd_who(cx,"jun",300,590,0.98,jA,{t:tt,gaze:[3,0]});md_nameTag(cx,420,400,"jun",{col:MD.flow,a:jA});
+    if(jA>0){md_card(cx,620,180,580,236,{edge:MD.pass,a:jA*ag_in(tt,T.jun-0.2,0.5),glow:0.5});md_T(cx,"DATA TESTS",648,232,{w:800,size:28,ls:4,col:MD.pass,a:jA*ag_in(tt,T.jun-0.2,0.5)});
+      [["Every field read",T.every],["The lines add up to the total",T.add]].forEach(([s,at_],i)=>{const q=jA*ag_in(tt,at_-0.1,0.4);md_icon(cx,"tick",668,292+i*70,32,MD.pass,{a:q});md_T(cx,s,700,302+i*70,{w:600,size:30,a:q});});
+      md_card(cx,1240,180,580,236,{edge:MD.agreed,a:jA*ag_in(tt,T.rules-0.2,0.5),glow:0.5});md_T(cx,"FINANCE'S RULES",1268,232,{w:800,size:28,ls:4,col:MD.agreed,a:jA*ag_in(tt,T.rules-0.2,0.5)});
+      [["Number sent before?",T.before],["Supplier known?",T.know]].forEach(([s,at_],i)=>{const q=jA*ag_in(tt,at_-0.1,0.4);md_icon(cx,"warn",1288,292+i*70,32,MD.agreed,{a:q});md_T(cx,s,1320,302+i*70,{w:600,size:30,a:q});});}
+    // what passed, and what went to a person, each with its reason
+    const sA=ag_io(tt,c.passed-0.6,c.decides-0.8,0.6);if(sA>0){const x0=640,w0=1180,fr=3734/3860,bar=ag_sine((tt-T.n3734+0.3)/1.2);
+      md_T(cx,"OCTOBER'S 3,860 INVOICES",x0,236,{w:800,size:28,ls:4,col:MD.soft,a:sA});
+      cx.save();cx.globalAlpha*=sA;rr(cx,x0,270,w0,40,20);cx.fillStyle="rgba(170,200,245,0.12)";cx.fill();if(bar>0){rr(cx,x0,270,w0*fr*bar,40,20);cx.fillStyle=rgba(MD.pass,0.9);cx.fill();}
+        const pb=ag_in(tt,T.person-0.2,0.6);if(pb>0){rr(cx,x0+w0*fr+4,270,w0*(1-fr)-4,40,12);cx.fillStyle=rgba(MD.wait,0.95*pb);cx.fill();}cx.restore();
+      md_T(cx,"3,734",x0,400,{w:800,size:64,col:MD.pass,a:sA*ag_in(tt,T.n3734-0.2,0.5)});md_T(cx,"passed every check",x0+200,400,{w:600,size:30,col:MD.soft,a:sA*ag_in(tt,T.passed-0.2,0.5)});
+      const pA=sA*ag_in(tt,T.person-0.2,0.5);md_T(cx,"126",1340,400,{w:800,size:64,col:MD.wait,a:pA});md_T(cx,"to a person",1480,400,{w:600,size:30,col:MD.soft,a:pA});
+      const rs=[["A field the function couldn't read","72"],["A supplier Finance doesn't know yet","31"],["Lines that don't add up to the total","14"],["Sent before: the same supplier and number","9"]];
+      const lA=sA*ag_in(tt,T.reason-0.2,0.5);if(lA>0){md_card(cx,x0,450,w0,300,{edge:MD.wait,a:lA,glow:0.4});
+        withA(cx,lA,()=>md_rows(cx,x0+20,456,[{h:"The first reason",w:960},{h:"",w:180}],rs.map(r=>[r[0],{s:r[1],f:"mono"}]),{rh:58,lit:tt>T.nine-0.2?3:-1,litCol:MD.wait,rowA:(r,i)=>ag_in(tt,T.reason+i*0.2,0.4)}));}}
+    // the function reads, the checks sort, Rohan's team decides
+    const dA=ag_in(tt,c.decides-0.6,0.6);fd_who(cx,"rohan",300,590,0.98,dA,{t:tt,gaze:[3,0]});md_nameTag(cx,420,400,"rohan",{role:"Finance",col:MD.dom.finance,a:dA});
+    if(dA>0){[["The function reads","doc",MD.flow,T.fn],["The checks sort","tick",MD.pass,T.sort],["Rohan's team decides","person",MD.wait,T.decides]].forEach(([s,ic,col,at_],i)=>{
+        md_textCard(cx,640+i*410,300,370,{title:s},{icon:ic,edge:col,a:dA*ag_in(tt,at_-0.2,0.5),k:fd_k(tt,at_-0.2)});
+        if(i)fd_link(cx,[640+i*410-40,352],[640+i*410,352],ag_in(tt,at_-0.3,0.4),tt,{col,flow:false});});
+      md_pill(cx,1230,600,"Every payment approved by a person",{col:MD.wait,icon:"person",a:dA*ag_in(tt,T.approves-0.2,0.5),k:fd_k(tt,T.approves-0.2)});}
+    }}],0.6);});
+
+/* ---------------------------------------------------------------- 3 · Contracts, kept as signed */
+const FD_CDIR="/Volumes/hr/contracts/files/";
+// Linh's contract as two files, and what the HR system wrote of each as it made it: its version, its kind, the day it was signed
+const FD_CFILES=[["T-26188_v1.pdf","1","offer","null"],["T-26188_v2.pdf","2","signed","2026-07-14"]];
+// the folder: its path, its two files, and once o.meta comes in, each file's metadata beside it, in mono, as code keeps its case.
+// o.a, o.rowsA (its files come in), o.meta (0 to 1), o.lit and o.litA (a row glows, in o.litCol), o.dim and o.dimA (a row greys); returns where its rows are
+function fd_folder(ctx,x,y,o){o=o||{};const a=o.a==null?1:o.a,w=800,h=270,rows=[y+150,y+216];if(a<=0.004)return{x,y,w,h,rows};ctx.save();ctx.globalAlpha*=a;
+  md_card(ctx,x,y,w,h,{glow:0.4});md_T(ctx,FD_CDIR,x+28,y+52,{w:500,size:28,f:"mono",col:MD.soft});md_icon(ctx,"volume",x+w-48,y+44,38,MD.flow);
+  const m=o.meta||0,cols=[330,470,592];
+  if(m>0)["version","kind","signed_on"].forEach((s,j)=>md_T(ctx,s,x+cols[j],y+108,{w:500,size:28,f:"mono",col:MD.soft,a:m}));
+  FD_CFILES.forEach((r,i)=>{const yy=rows[i];ctx.save();ctx.globalAlpha*=o.rowsA==null?1:o.rowsA;if(o.dim===i)ctx.globalAlpha*=1-0.6*(o.dimA==null?1:o.dimA);
+    if(o.lit===i&&o.litA>0){const lc=o.litCol||MD.agreed;ctx.save();ctx.globalAlpha*=o.litA;ctx.fillStyle=rgba(lc,0.13);rr(ctx,x+14,yy-30,w-28,60,10);ctx.fill();
+      ctx.strokeStyle=rgba(lc,0.85);ctx.lineWidth=1.8;rr(ctx,x+14,yy-30,w-28,60,10);ctx.stroke();ctx.restore();}
+    md_icon(ctx,"doc",x+46,yy,32,MD.ink);md_T(ctx,r[0],x+72,yy+10,{w:500,size:28,f:"mono"});
+    if(m>0)[r[1],r[2],r[3]].forEach((s,j)=>md_T(ctx,s,x+cols[j],yy+10,{w:500,size:28,f:"mono",col:s==="null"?MD.dim:MD.ink,a:m}));ctx.restore();});
+  ctx.restore();return{x,y,w,h,rows};}
+scene("contracts",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
+    official:wAt(sc,"official","official document"),kept:wAt(sc,"official","kept just as it was signed"),
+    rewrites:wAt(sc,"beside","rewrites"),table:wAt(sc,"beside","as a table"),meta:wAt(sc,"beside","its metadata"),id:wAt(sc,"beside","the contract's ID"),version:wAt(sc,"beside","its version"),day:wAt(sc,"beside","the day it was signed"),file:wAt(sc,"beside","where its file is"),
+    hr:wAt(sc,"writes","The HR system"),writes:wAt(sc,"writes","writes that metadata"),makes:wAt(sc,"writes","as it makes the document"),nobody:wAt(sc,"writes","nobody has to read it back"),
+    num:wAt(sc,"linh","T two six one eight eight"),two:wAt(sc,"linh","two files"),offer:wAt(sc,"linh","the offer"),jul9:wAt(sc,"linh","ninth of July"),signed:wAt(sc,"linh","she signed"),jul14:wAt(sc,"linh","fourteenth"),
+    nov13:wAt(sc,"week","thirteenth of November"),added:wAt(sc,"week","added a week"),marking:wAt(sc,"week","for marking"),
+    alike:wAt(sc,"alike","look alike"),byMeta:wAt(sc,"alike","By their metadata"),
+    asks:wAt(sc,"ends","Linh asks"),finder:wAt(sc,"ends","a person or an agent"),finds:wAt(sc,"ends","finds the signed version"),cites:wAt(sc,"ends","cites its file"),nov20:wAt(sc,"ends","the twentieth of November"),
+    ce:wAt(sc,"context","Context engineering"),cm:wAt(sc,"context","Context and memory"),agentCtx:wAt(sc,"context","an agent's context"),
+    ingrid:wAt(sc,"who","Ingrid Holm's"),dp:wAt(sc,"who","Data protection")}));
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
+    fd_top(cx,1);fd_case(cx,"Signed contracts · keep them",ag_in(tt,0.2,0.6),MD.ink);
+    // the signed contract, kept as it was signed: no table of its terms, but its metadata beside it, which the HR system writes as it makes it
+    const p1=1-ag_in(tt,c.linh-1.0,0.6);
+    if(p1>0){const px=lerp(770,150,ag_sine((tt-c.beside+1.1)/1.3));fd_contract(cx,px,230,380,{a:ag_in(tt,c.official-0.6,0.6)*p1,kind:"signed",sign:ag_sine((tt-T.official+0.2)/1.6)});
+      md_tag(cx,px,786,"Kept as it was signed",{col:MD.agreed,icon:"contract",a:p1*ag_in(tt,T.kept-0.2,0.5)});
+      const gh=ag_io(tt,T.rewrites-0.3,T.meta-0.5,0.4)*p1;if(gh>0){md_table(cx,640,330,560,{name:"contract_terms",kind:"its terms, as a table",ghost:true,col:MD.soft,a:gh});
+        const cr=ag_in(tt,T.table-0.1,0.35);if(cr>0){cx.save();cx.globalAlpha*=gh;cx.strokeStyle=rgba(MD.fail,0.95);cx.lineWidth=5;cx.lineCap="round";cx.beginPath();cx.moveTo(656,348);cx.lineTo(lerp(656,1184,ag_eo(cr)),lerp(348,416,ag_eo(cr)));cx.stroke();cx.restore();}}
+      const at_=[T.id,T.version,T.day,T.file],mA=ag_in(tt,T.meta-0.3,0.5)*p1,lit=at_.findIndex((q,i)=>tt>=q-0.15&&tt<(i<3?at_[i+1]-0.15:q+1.6));
+      fd_link(cx,[530,420],[640,420],ag_sine((tt-T.meta+0.1)/0.6),tt,{pts:[[530,420],[640,420]],dash:true,flow:false,a:0.8*p1});
+      fd_kv(cx,640,260,980,[["contract_id","T-26188"],["version","2"],["signed_on","2026-07-14"],["file_path",FD_CDIR+"T-26188_v2.pdf"]],
+        {kick:"Its metadata",edge:MD.flow,fw:210,rh:56,a:mA,k:fd_k(tt,T.meta-0.3),lit,rowA:i=>ag_in(tt,at_[i]-0.2,0.4)});
+      const hA=ag_in(tt,T.hr-0.2,0.5)*p1;md_system(cx,640,680,460,"hr",{a:hA,lit:ag_io(tt,T.writes-0.2,T.nobody,0.5)});
+      fd_link(cx,[640,735],[530,690],ag_sine((tt-T.makes+0.2)/0.8),tt,{pts:[[640,735],[586,735],[530,690]],col:MD.sys.hr,a:0.85*hA,every:1.3});
+      fd_link(cx,[1000,680],[1000,580],ag_sine((tt-T.writes)/0.7),tt,{pts:[[1000,680],[1000,580]],col:MD.flow,a:0.85*hA,every:1.1});
+      md_tag(cx,1140,735,"Nobody has to read it back",{col:MD.pass,icon:"tick",a:p1*ag_in(tt,T.nobody-0.2,0.5)});}
+    // Linh's contract this semester, as two files: the offer, and the contract she signed a week longer
+    const LA=ag_in(tt,c.linh-0.5,0.7);fd_who(cx,"linh",300,590,0.98,LA,{t:tt,gaze:[3,0]});md_nameTag(cx,420,400,"linh",{a:LA});
+    const out=1-ag_in(tt,c.who-1.0,0.6),fnd=ag_in(tt,T.finds-0.2,0.5);
+    fd_folder(cx,1000,220,{a:ag_in(tt,T.alike-0.6,0.5)*out,rowsA:ag_in(tt,T.alike+0.2,0.4),meta:ag_in(tt,T.byMeta-0.2,0.6),lit:1,litA:fnd,litCol:MD.agreed,dim:0,dimA:fnd});
+    const fly=ag_sine((tt-T.alike+0.5)/1.1),pgA=ag_in(tt,c.linh-0.2,0.6)*(1-ag_in(tt,T.alike+0.3,0.4)),capA=pgA*(1-ag_in(tt,T.alike-0.7,0.4));
+    [[760,"offer"],[1180,"signed"]].forEach(([x0,kind],i)=>{const q=pgA*ag_in(tt,T.two-0.3+i*0.3,0.5);if(q<=0)return;
+      fd_contract(cx,lerp(x0,1034,fly),lerp(250,[350,416][i],fly),lerp(320,24,fly),{a:q,kind,endsCol:i?MD.agreed:MD.flow,
+        endsHl:i?ag_io(tt,T.added-0.2,T.alike-0.7,0.4):ag_io(tt,T.nov13-0.2,T.alike-0.7,0.4)});});
+    md_T(cx,"Contract T-26188",760,226,{w:700,size:30,col:MD.soft,a:capA*ag_in(tt,T.num-0.2,0.5)});
+    md_T(cx,"The offer · sent 9 July",920,712,{w:600,size:30,align:"center",col:MD.soft,a:capA*ag_in(tt,T.jul9-0.2,0.5)});
+    md_T(cx,"Signed · 14 July",1340,712,{w:600,size:30,align:"center",col:MD.soft,a:capA*ag_in(tt,T.jul14-0.2,0.5)});
+    md_T(cx,"Ends 13 November",920,756,{w:700,size:30,align:"center",a:capA*ag_in(tt,T.nov13-0.2,0.5)});
+    md_T(cx,"Ends 20 November",1340,756,{w:700,size:30,align:"center",col:MD.agreed,a:capA*ag_in(tt,T.added-0.2,0.5)});
+    md_tag(cx,1130,836,"A week added for marking",{align:"center",col:MD.agreed,icon:"clock",a:capA*ag_in(tt,T.marking-0.3,0.5)});
+    // in a folder the two look alike; by their metadata they don't. A person or an agent finds the signed one, and cites its file
+    const eA=ag_in(tt,c.ends-0.4,0.5)*(1-ag_in(tt,c.context-0.6,0.5)),qA=eA*ag_in(tt,T.asks-0.3,0.5);
+    md_textCard(cx,560,560,400,{kick:"Linh asks",title:"When does my contract end?"},{edge:MD.wait,a:qA,k:fd_k(tt,T.asks-0.3)});
+    const fA=ag_in(tt,T.finder-0.3,0.5)*out,pA=fA*(1-ag_in(tt,c.context-0.6,0.5));
+    md_icon(cx,"person",1080,650,64,MD.ink,{a:pA});withA(cx,fA,()=>ag_model(cx,1186,650,44,{t:tt,think:0.3+0.5*ag_io(tt,T.finds-0.3,T.nov20,0.5)}));
+    md_T(cx,"A person or an agent",1134,744,{w:600,size:28,align:"center",col:MD.soft,a:pA});
+    fd_link(cx,[960,652],[1042,650],ag_sine((tt-T.finder)/0.5),tt,{pts:[[960,652],[1042,650]],col:MD.wait,a:0.85*qA,flow:false});
+    fd_link(cx,[1186,604],[1186,490],ag_sine((tt-T.finds+0.1)/0.6),tt,{pts:[[1186,604],[1186,490]],col:MD.agreed,a:0.9*eA,every:0.9});
+    const aA=eA*ag_in(tt,T.cites-0.2,0.5);
+    fd_link(cx,[1232,652],[1320,672],ag_sine((tt-T.cites)/0.6),tt,{pts:[[1232,652],[1320,672]],col:MD.agreed,a:0.9*aA,flow:false});
+    if(aA>0){cx.save();cx.globalAlpha*=aA;ag_about(cx,1570,673,lerp(0.7,1,ag_spr(fd_k(tt,T.cites-0.2),0,0.5)));md_card(cx,1320,580,500,186,{edge:MD.agreed,glow:0.7});
+      md_T(cx,"CITED FROM ITS FILE",1348,632,{w:800,size:28,ls:4,col:MD.agreed});md_T(cx,"Ends 20 November 2026",1348,686,{w:700,size:36,a:ag_in(tt,T.nov20-0.2,0.5)});
+      md_icon(cx,"doc",1362,728,30,MD.soft);md_T(cx,"T-26188_v2.pdf",1388,738,{w:500,size:28,f:"mono",col:MD.soft});cx.restore();}
+    // the films that show how a document becomes an agent's context
+    const cA=ag_in(tt,c.context-0.3,0.5)*out;
+    md_textCard(cx,560,560,480,{kick:"The film",title:"Context engineering"},{icon:"doc",a:cA*ag_in(tt,T.ce-0.3,0.5),k:fd_k(tt,T.ce-0.3)});
+    md_textCard(cx,1320,560,500,{kick:"The film",title:"Context and memory, governed"},{icon:"doc",a:cA*ag_in(tt,T.cm-0.3,0.5),k:fd_k(tt,T.cm-0.3)});
+    fd_link(cx,[1186,490],[1186,604],1,tt,{pts:[[1186,490],[1186,604]],col:MD.flow,a:cA*ag_in(tt,T.agentCtx-0.4,0.5),every:0.8});
+    md_T(cx,"An agent's context",1186,744,{w:600,size:28,align:"center",col:MD.flow,a:cA*ag_in(tt,T.agentCtx-0.3,0.5)});
+    // who may read it is HR's to decide
+    const wA=ag_in(tt,c.who-0.6,0.7);fd_who(cx,"ingrid",1620,590,0.98,wA,{t:tt,gaze:[-3,0],flip:true});md_nameTag(cx,1500,400,"ingrid",{align:"right",col:MD.sys.hr,a:wA});
+    md_textCard(cx,690,230,600,{kick:"Who may read a contract",title:"Ingrid Holm decides, in HR"},{edge:MD.personal,icon:"lock",a:wA*ag_in(tt,c.who,0.5),k:fd_k(tt,c.who)});
+    md_tag(cx,990,520,"Data protection · a module of its own",{align:"center",col:MD.personal,icon:"lock",a:wA*ag_in(tt,T.dp-0.2,0.5)});
+    }}],0.6);});
+
+/* ---------------------------------------------------------------- 4 · Written as data */
+// Linh's claim for her tutorial of 20 October, as the claims app wrote it (the example project's row; never its amount, a person's pay),
+// and what it wrote with it
+const FD_CLAIM=[["claim_id","CL-103807"],["unit_code","HI101"],["duty","tutorial"],["work_date","2026-10-20"],["hours","1.00"]];
+const FD_CLAIM_META=[["staff_id","E-4417"],["contract_id","T-26188"],["status","approved"],["approved_at","2026-10-23 14:02"]];
+// what each field means, in the claims app's data contract: the Open Data Contract Standard, cut to the field the film follows
+const FD_YAML=["apiVersion: v3.1.0","kind: DataContract","id: claims","version: 1.0.0","status: active","schema:","- name: claims","  properties:","  - name: hours","    logicalType: number","    description: Hours worked, in decimal hours"];
+scene("written",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
+    best:wAt(sc,"best","nobody has to read back"),
+    sheets:wAt(sc,"before","spreadsheets by email"),email:wAt(sc,"before","by email"),typed:wAt(sc,"before","someone typed"),payroll:wAt(sc,"before","into payroll"),
+    app:wAt(sc,"json","the claims app"),made:wAt(sc,"json","the moment it's made"),row:wAt(sc,"json","a row any system can read"),
+    who:wAt(sc,"meta","who claimed"),contract:wAt(sc,"meta","on which contract"),approved:wAt(sc,"meta","whether it's approved"),when:wAt(sc,"meta","and when"),
+    means:wAt(sc,"yaml","What each field means"),its:wAt(sc,"yaml","its contract"),yaml:wAt(sc,"yaml","a YAML file"),open:wAt(sc,"yaml","an open standard"),code:wAt(sc,"yaml","the app's code"),
+    log:wAt(sc,"log","the log of eighteen fifty-three"),one:wAt(sc,"log","one form"),everyone:wAt(sc,"log","kept by everyone"),nobody:wAt(sc,"log","nobody has to read it back")}));
+  ag_shots(ctx,S,t,sc.dur,[{at:0,place:"map",keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
+    fd_top(cx,1);fd_case(cx,"Claims for hours · write them as data",ag_in(tt,0.2,0.6),MD.agreed);
+    // the three answers again: this is the third, the best
+    const bA=ag_in(tt,0.4,0.6)*(1-ag_in(tt,c.before-0.6,0.5));
+    [[150,"Supplier invoices","Read them","doc",MD.flow],[730,"Signed contracts","Keep them","contract",null]].forEach(([x,k,ti,ic,ed])=>md_textCard(cx,x,330,460,{kick:k,title:ti},{icon:ic,edge:ed,a:bA*0.35}));
+    md_textCard(cx,1310,330,460,{kick:"Claims for hours",title:"Write them as data",sub:"Nobody has to read them back"},{icon:"table",edge:MD.agreed,glow:1.2,a:bA,k:fd_k(tt,0.4)});
+    // before: spreadsheets by email, each one typed into payroll by hand
+    const fA=ag_in(tt,c.before-0.4,0.5)*(1-ag_in(tt,c.json-0.7,0.5));
+    if(fA>0){md_label(cx,96,250,"Until February 2026",{a:fA});
+      for(let i=0;i<3;i++)fd_sheet(cx,110+i*60,300+i*70,300,i,{a:fA*ag_in(tt,c.before+0.2+i*0.3,0.5),rot:[-0.04,0.03,-0.02][i]});
+      const pay=md_system(cx,1360,420,420,{n:"Payroll",s:"Pays casual staff",c:MD.sys.hr},{a:fA*ag_in(tt,T.payroll-0.3,0.5)});
+      fd_link(cx,[560,500],[900,470],ag_sine((tt-T.email+0.3)/0.8),tt,{bend:0.2,col:MD.soft,a:0.7*fA,flow:false});
+      for(let i=0;i<3;i++){const u=((tt-T.email-0.4)/1.6+i/3)%1;if(tt<T.email+0.4)break;const p=at(mk(md_curve([560,500],[900,470],{bend:0.2}).map(q=>P(q[0],q[1]))),u);fd_envelope(cx,p.x,p.y,46,MD.soft,fA*Math.sin(Math.PI*u));}
+      md_icon(cx,"person",960,462,72,MD.ink,{a:fA*ag_in(tt,T.typed-0.3,0.5)});
+      md_tag(cx,960,560,"Typed in by hand",{align:"center",col:MD.ink,icon:"clock",a:fA*ag_in(tt,T.typed,0.5)});
+      fd_link(cx,[1010,466],[1360,475],ag_sine((tt-T.payroll+0.2)/0.8),tt,{bend:0.15,col:MD.sys.hr,a:0.8*fA,every:1.4});}
+    // now the claims app writes each claim as data, as it's made: a row any system can read, and its metadata with it
+    const slide=ag_sine((tt-c.yaml+0.5)/1.1),kx=lerp(660,96,slide),appA=ag_in(tt,c.json-0.4,0.5)*(1-ag_in(tt,c.yaml-1.1,0.5)),dA=1-ag_in(tt,c.log-1.0,0.5);
+    md_system(cx,120,330,440,{n:"Claims app",s:"Built on Lakebase",c:MD.flow},{a:appA,lit:ag_io(tt,T.made-0.3,T.row,0.5)});
+    fd_link(cx,[560,385],[660,385],ag_sine((tt-T.made+0.3)/0.5),tt,{pts:[[560,385],[660,385]],col:MD.flow,a:0.9*appA,every:0.9});
+    fd_link(cx,[560,420],[660,700],ag_sine((tt-T.who+0.3)/0.6),tt,{pts:[[560,420],[610,420],[610,700],[660,700]],col:MD.flow,a:0.9*appA,every:1.1});
+    fd_kv(cx,kx,220,560,FD_CLAIM,{kick:"One claim, as data",rh:46,fw:220,a:dA*ag_in(tt,T.made-0.5,0.5),k:fd_k(tt,T.made-0.5),rowA:i=>ag_in(tt,T.made-0.2+i*0.12,0.4),lit:tt>T.means-0.3&&tt<c.log-1?4:-1,litCol:MD.agreed});
+    const rdA=ag_io(tt,T.row-0.3,c.yaml-1.1,0.5);
+    [["Payroll",MD.sys.hr,"store"],["Finance",MD.sys.fin,"store"],["Reports",MD.flow,"view"]].forEach(([s,col,ic],i)=>{const q=rdA*ag_in(tt,T.row-0.3+i*0.25,0.5);
+      md_reader(cx,1340,240+i*112,440,{title:s,icon:ic,col,a:q});fd_link(cx,[1220,388],[1340,282+i*112],q>0?1:0,tt,{bend:0.3,col:MD.flow,a:0.85*q,every:1.2,off:i*0.3});});
+    fd_kv(cx,kx,572,560,FD_CLAIM_META,{kick:"Its metadata",edge:MD.flow,rh:46,fw:220,a:dA*ag_in(tt,T.who-0.3,0.5),k:fd_k(tt,T.who-0.3),
+      rowA:i=>ag_in(tt,[T.who,T.contract,T.approved,T.when][i]-0.2,0.4)});
+    // what each field means is in its contract: a YAML file, in an open standard, kept with the app's code
+    const yA=ag_in(tt,c.yaml+0.5,0.5);
+    fd_code(cx,820,220,860,FD_YAML,{kick:"claims.yaml",edge:MD.agreed,icon:"contract",a:yA,k:fd_k(tt,c.yaml+0.5),lineA:i=>ag_in(tt,T.its-0.2+i*0.09,0.3)});
+    fd_link(cx,[kx+560,505],[820,638],ag_sine((tt-T.means-0.6)/0.8)*dA,tt,{bend:0.25,col:MD.agreed,dash:true,flow:false,a:0.85*yA});
+    const tgA=1-ag_in(tt,c.log-1.0,0.5);
+    md_tag(cx,820,800,"Open Data Contract Standard",{col:MD.agreed,icon:"contract",a:tgA*ag_in(tt,T.open-0.2,0.5)});
+    md_tag(cx,1350,800,"Kept with the app's code",{col:MD.ink,icon:"doc",a:tgA*ag_in(tt,T.code-0.2,0.5)});
+    // it's the log of 1853 again: one form, kept by everyone
+    const gA=ag_in(tt,T.log-0.4,0.5);fd_form53(cx,96,260,680,{a:gA,k:fd_k(tt,T.log-0.4)});
+    fd_link(cx,[776,440],[820,440],ag_sine((tt-T.one+0.2)/0.6),tt,{pts:[[776,440],[820,440]],col:MD.agreed,a:0.9*gA,flow:false});
+    md_tag(cx,436,690,"One form, kept by everyone",{align:"center",col:MD.agreed,icon:"contract",a:gA*ag_in(tt,T.everyone-0.3,0.5)});
+    md_tag(cx,436,770,"Nobody has to read it back",{align:"center",col:MD.pass,icon:"tick",a:gA*ag_in(tt,T.nobody-0.3,0.5)});
+    }}],0.6);});
+
+/* ---------------------------------------------------------------- 5 · Keep the file */
+const FD_THREEWAYS=[["If we write it","Write it as data","In a standard structure, such as JSON or YAML, with its metadata","table",MD.agreed],
+  ["If it's official","Keep it as it is","Its metadata beside it","contract",null],
+  ["If it's written for people","Read it, where a use case needs it","With the platform's functions or a scraper, and keep the file","doc",MD.flow]];
+const FD_SERIES=[["Data that moves","Moving data"],["Data as software","Running the platform"],["From tables to decisions","Serving it to people and agents"],["Documents as data","Reading documents"]];
+scene("close",(ctx,S,t,sc)=>{const c=sc.cues,T=fd_once(sc,"T",()=>({
+    kept:wAt(sc,"kept","were kept"),century:wAt(sc,"kept","More than a century later"),sci:wAt(sc,"kept","climate scientists"),again:wAt(sc,"kept","read them again"),million:wAt(sc,"kept","a million weather reports"),
+    keep:wAt(sc,"again","Keep the file"),better:wAt(sc,"again","better readers"),
+    noor:wAt(sc,"rule","Noor Rahman"),three:wAt(sc,"rule","one of three answers"),
+    ifw:wAt(sc,"write","If we write it"),ifo:wAt(sc,"official","If it's official"),ifr:wAt(sc,"read","If it's written for people"),
+    differ:wAt(sc,"docs","documents differ"),standards:wAt(sc,"docs","the standards"),wheel:wAt(sc,"docs","reinvent the wheel"),
+    offDocs:wAt(sc,"iterate","the official docs"),inv:wAt(sc,"iterate","Investigate"),adapt:wAt(sc,"iterate","adapt"),impl:wAt(sc,"iterate","implement"),iter:wAt(sc,"iterate","iterate"),
+    moving:wAt(sc,"module","moving data"),running:wAt(sc,"module","running the platform"),serving:wAt(sc,"module","serving it"),reading:wAt(sc,"module","reading documents"),
+    whole:wAt(sc,"team","a whole team"),dbx:wAt(sc,"team","Databricks and dbt"),left:wAt(sc,"team","what's left for people"),agree:wAt(sc,"team","agreeing what the data means"),
+    readThem:wAt(sc,"data","read them"),keepIt:wAt(sc,"data","keep the file"),writeYours:wAt(sc,"data","write what's yours")}));
+  const map0=T.noor-1.4;
+  ag_shots(ctx,S,t,sc.dur,[
+    // the logs were kept, and read again over a century later, into over a million weather reports
+    {at:0,place:"fdSea",keys:[[0,960,540,1.0]],push:0.02,draw:(cx,tt,cam)=>{
+      fd_land(cx,{cam});fd_winds(cx,tt,{cam,a:0.3});fd_currents(cx,tt,{a:0.25});
+      fd_reports(cx,tt,{u:ag_sine((tt-T.again+0.4)/(T.million-T.again+1.6)),a:ag_in(tt,T.sci-0.4,0.8)});
+      fd_scr(cx,S,()=>{const kA=ag_in(tt,c.kept-0.4,0.7);
+        [[96,58,38],[70,44,34],[108,74,46],[60,48,40],[86,40,34]].forEach((col,i)=>fd_book(cx,110+i*64,640+[10,0,16,4,12][i],56,[190,200,174,196,182][i],{col,a:kA*ag_in(tt,c.kept-0.4+i*0.12,0.5)}));
+        md_T(cx,"The logs, kept",270,606,{w:600,size:30,align:"center",col:MD.soft,a:kA*ag_in(tt,T.kept-0.2,0.5)});
+        md_textCard(cx,1180,600,640,{kick:"Over a century later",title:"Over a million weather reports",sub:"Read again by climate scientists"},
+          {edge:MD.flow,icon:"refresh",a:ag_in(tt,T.million-0.4,0.5),k:fd_k(tt,T.million-0.4)});
+        md_pill(cx,960,140,"Keep the file and its metadata",{col:MD.flow,icon:"doc",a:ag_in(tt,T.keep-0.2,0.5),k:fd_k(tt,T.keep-0.2)});});}},
+    // Noor's rule: every document gets one of three answers; start from the standards, and the official docs
+    {at:map0,place:"map",dis:0.9,keys:[[0,960,540,1.0]],push:0.012,draw:(cx,tt)=>{
+      fd_top(cx,1);const nA=ag_in(tt,map0+0.3,0.7);
+      fd_who(cx,"noor",300,590,0.98,nA,{t:tt,gaze:[3,0]});md_nameTag(cx,420,400,"noor",{col:MD.flow,a:nA});
+      const rA=1-ag_in(tt,c.docs-0.6,0.5);
+      fd_case(cx,"Every document · one of three answers",ag_in(tt,T.three-0.3,0.6)*rA,MD.ink);
+      FD_THREEWAYS.forEach(([k,ti,sub,ic,ed],i)=>md_textCard(cx,760,250+i*200,1060,{kick:k,title:ti,sub},{icon:ic,edge:ed,a:rA*ag_in(tt,[T.ifw,T.ifo,T.ifr][i]-0.3,0.5),k:fd_k(tt,[T.ifw,T.ifo,T.ifr][i]-0.3)}));
+      // every organisation's documents differ, and the standards are there already: don't reinvent the wheel
+      const dA=ag_in(tt,c.docs-0.3,0.5)*(1-ag_in(tt,c.iterate-0.6,0.5));
+      if(dA>0){fd_invoice(cx,800,262,240,2,{a:dA*ag_in(tt,T.differ-0.5,0.5),rot:-0.06});fd_contract(cx,910,246,240,{a:dA*ag_in(tt,T.differ-0.3,0.5),rot:0.02,kind:"offer"});
+        fd_sheet(cx,1000,340,300,2,{a:dA*ag_in(tt,T.differ-0.1,0.5),rot:0.07});
+        let x=800;[["PDF","doc"],["JSON","table"],["YAML","contract"],["Open Data Contract Standard","contract"]].forEach(([s,ic],i)=>{const r=i<3?660:740;if(i===3)x=800;
+          const b=md_tag(cx,x,r,s,{col:MD.agreed,icon:ic,a:dA*ag_in(tt,T.standards-0.2+i*0.15,0.4)});x+=b.w+20;});}
+      const wh=ag_in(tt,T.wheel-0.6,0.5)*(1-ag_in(tt,c.module-0.7,0.5)),cy_=lerp(450,470,ag_sine((tt-c.iterate+0.6)/1.0));
+      if(wh>0){md_mark(cx,1560,cy_,100,(tt-T.wheel+0.6)/1.4,wh);md_T(cx,"Don't reinvent the wheel",1560,cy_+160,{w:700,size:30,align:"center",a:wh*(1-ag_in(tt,c.iterate-0.6,0.5))});}
+      // start from the official docs: investigate, adapt, implement, iterate
+      const iA=ag_in(tt,c.iterate-0.4,0.5)*(1-ag_in(tt,c.module-0.7,0.5));
+      if(iA>0){md_textCard(cx,760,400,460,{kick:"Start from",title:"The official docs"},{icon:"doc",edge:MD.flow,a:iA*ag_in(tt,T.offDocs-0.3,0.5),k:fd_k(tt,T.offDocs-0.3)});
+        const R=190,ring=[];for(let i=0;i<=64;i++){const an=-Math.PI/2+i/64*TAU;ring.push([1560+Math.cos(an)*R,470+Math.sin(an)*R]);}
+        const ru=ag_sine((tt-T.inv+0.2)/2.4);md_lane(cx,ring,MD.flow,0.8*iA,{u:ru,t:tt});if(ru>=1)md_flow(cx,ring,tt,{kind:"events",col:MD.flow,a:iA,every:0.9});
+        fd_link(cx,[1220,470],[1296,470],ag_sine((tt-T.offDocs)/0.7),tt,{pts:[[1220,470],[1296,470]],col:MD.flow,a:0.85*iA,flow:false});
+        [["Investigate",1560,280,T.inv],["Adapt",1750,470,T.adapt],["Implement",1560,660,T.impl],["Iterate",1370,470,T.iter]].forEach(([s,x,y,at_])=>
+          md_tag(cx,x,y,s,{align:"center",col:MD.flow,a:iA*ag_in(tt,at_-0.2,0.4)}));}
+      // the module: four series, each once a whole team's work; the tools do much of it, and people agree what the data means
+      const mA=ag_in(tt,c.module-0.4,0.5)*(1-ag_in(tt,c.data-0.7,0.5));
+      fd_case(cx,"Modern data basics",mA*ag_in(tt,c.module-0.2,0.5),MD.ink);
+      FD_SERIES.forEach(([ti,sub],i)=>{const x=660+(i%2)*600,y=220+Math.floor(i/2)*200,at_=[T.moving,T.running,T.serving,T.reading][i],q=mA*ag_in(tt,at_-0.3,0.5);
+        md_textCard(cx,x,y,560,{title:ti,sub},{edge:i===3?MD.agreed:MD.flow,a:q,k:fd_k(tt,at_-0.3)});
+        const many=1-ag_in(tt,T.dbx,0.6);for(let j=0;j<5;j++){const pa=q*ag_in(tt,T.whole-0.3+j*0.08,0.4)*(j===2?1:many);if(pa>0)md_icon(cx,"person",x+280+(j-2)*56,y+176,36,j===2?mix(MD.ink,MD.agreed,ag_in(tt,T.agree-0.3,0.6)):MD.soft,{a:pa});}});
+      md_reader(cx,660,650,560,{title:"Databricks",logo:"databricks",a:mA*ag_in(tt,T.dbx-0.3,0.5)});md_reader(cx,1260,650,560,{title:"dbt",logo:"dbt",a:mA*ag_in(tt,T.dbx+0.1,0.5)});
+      md_pill(cx,1240,800,"Agreeing what the data means",{col:MD.agreed,icon:"person",a:mA*ag_in(tt,T.agree-0.3,0.5),k:fd_k(tt,T.agree-0.3)});
+      // and for documents: read them, keep the file, write what's yours
+      const eA=ag_in(tt,c.data-0.4,0.5)*(1-ag_in(tt,c.breath-0.2,0.8));fd_case(cx,"For documents",ag_in(tt,c.data-0.1,0.5),MD.ink);
+      [["Read them","Where a use case needs it","doc",MD.flow,T.readThem],["Keep the file","And its metadata","contract",null,T.keepIt],["Write what's yours","As data","table",MD.agreed,T.writeYours]].forEach(([ti,sub,ic,ed,at_],i)=>
+        md_textCard(cx,760,260+i*180,1060,{title:ti,sub},{icon:ic,edge:ed,a:eA*ag_in(tt,at_-0.3,0.5),k:fd_k(tt,at_-0.3)}));}}
+  ],0.9);
+  md_end(ctx,S,t,c.breath,"Files as data and as context","Read it, keep it, or write it as data","Documents as data","Modern data basics");});
+
+ag_cutInto(["invoices","contracts","written"]);
+
+/* ===== v4 engine: narration-timed timeline, crossfades, captions, player with sound ===== */
+const GAP=0.3,SGAP=0.7,XF=0.8,UI=Object.assign({play:"Play",pause:"Pause",load:"Loading…",fs:"Full screen",fsExit:"Exit full screen"},typeof L10N!=="undefined"&&L10N.ui||{});
+// the voice breathes between sentences: SGAP after a line that ends a sentence, GAP where the sentence runs on into the next line, and GAP after a chapter's last line (its tail follows)
+const gapAfter=(ch,last)=>ch.gap!=null?ch.gap:(!last&&/[.?!…]["'”’»)]*$/.test(ch.text.trim())?SGAP:GAP);
+// a page can caption the film in another language over the same picture and voice: CAPTIONS maps each English line to its caption (src/i18n/<lang>/captions.js), loaded before the film
+const capText=s=>typeof CAPTIONS!=="undefined"&&CAPTIONS[s]||s;
+// BREATH (breath.js) adds room to think: a hold after a line, a pause before one, and a wordless end to each chapter from the "breath" cue
+function buildTimeline(){let g=0;const caps=[],BR=typeof BREATH!=="undefined"?BREATH:{};
+  SCENES.forEach(sc=>{const b=BR[sc.id]||{},hold=b.hold||{},pz=b.pause||{};sc.start=g;sc.cues={};sc.ends={};sc.pauses={};let t=sc.lead||0.6;
+    sc.vo.forEach((ch,i)=>{const p=(ch.pause||0)+(pz[ch.id]||0);if(p){t+=p;sc.pauses[ch.id]=p;}const d=(typeof VODUR!=="undefined"&&VODUR[sc.id+"/"+ch.id])||Math.max(1.3,ch.text.split(/\s+/).length/2.7);sc.cues[ch.id]=t;sc.ends[ch.id]=t+d;caps.push({s:g+t,e:g+t+d,text:capText(ch.text),sid:sc.id,id:ch.id});t+=d+gapAfter(ch,i===sc.vo.length-1)+(hold[ch.id]||0);});
+    sc.voEnd=t;sc.breathe=b.breathe||0;sc.cues.breath=t+(sc.tail||1.2);sc.dur=sc.cues.breath+sc.breathe;g+=sc.dur;});return{total:g,caps};}
+const TL=buildTimeline();let CAPS_ON=true,OFF=null;
+function sceneIndex(t){for(let i=SCENES.length-1;i>=0;i--)if(t>=SCENES[i].start)return i;return 0;}
+function wrapLines(ctx,s,maxW){const words=s.split(" "),lines=[];let cur="";words.forEach(w=>{const tr=cur?cur+" "+w:w;if(ctx.measureText(tr).width>maxW&&cur){lines.push(cur);cur=w;}else cur=tr;});if(cur)lines.push(cur);
+  if(lines.length===2){const all=s.split(" ");let best=null;for(let k=1;k<all.length;k++){const a=all.slice(0,k).join(" "),b=all.slice(k).join(" ");const wa=ctx.measureText(a).width,wb=ctx.measureText(b).width;if(wa<=maxW&&wb<=maxW){const d=Math.abs(wa-wb);if(!best||d<best[0])best=[d,a,b];}}if(best)return[best[1],best[2]];}return lines;}
+// captions grow as the player shrinks: 40 px in the 1920-pixel frame is 8 px on a phone held upright, so on a small screen they're
+// scaled up to stay about 15 px on screen, and wrap to fit. The video carries no captions on its picture, so it's unchanged.
+function drawCaption(ctx,S,t){if(!CAPS_ON)return;let c=null;for(const k of TL.caps){if(t>=k.s-0.06&&t<k.e+0.15){c=k;break;}}if(!c)return;const a=sstep(c.s-0.06,c.s+0.1,t)*(1-sstep(c.e,c.e+0.15,t));if(a<=0)return;
+  let css=W;try{const r=ctx.canvas.getBoundingClientRect&&ctx.canvas.getBoundingClientRect();if(r&&r.width>0)css=r.width;}catch(e){}
+  const k=clamp(15*W/css/40,1,2.4),sz=Math.round(40*k),lh=Math.round(54*k),maxW=k>1.2?1760:1480;
+  setScreen(ctx,S);ctx.font=font(600,sz);const lines=wrapLines(ctx,c.text,maxW),h=lines.length*lh+26;let w=0;lines.forEach(l=>{w=Math.max(w,ctx.measureText(l).width);});w+=60;const x=W/2-w/2,y=H-(k>1.2?24:54)-h;
+  ctx.save();ctx.globalAlpha=a;ctx.fillStyle=k>1.2?"rgba(0,0,0,0.7)":"rgba(0,0,0,0.66)";rr(ctx,x,y,w,h,14);ctx.fill();lines.forEach((l,i)=>T(ctx,l,W/2,y+13+lh*(i+0.77),{size:sz,w:600,align:"center",color:"#ffffff"}));ctx.restore();}
+function renderFrame(ctx,S,t){t=clamp(t,0,TL.total-0.001);const i=sceneIndex(t),sc=SCENES[i],lt=t-sc.start;ctx.save();sc.draw(ctx,S,lt,sc);ctx.restore();
+  if(i>0&&lt<XF){const pv=SCENES[i-1],cv=ctx.canvas;if(!OFF||OFF.width!==cv.width||OFF.height!==cv.height)OFF=mkCanvas(cv.width,cv.height);const o=OFF.getContext("2d");o.save();pv.draw(o,S,pv.dur+lt,pv);o.restore();ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1-ease(lt/XF);ctx.drawImage(OFF,0,0);ctx.restore();}
+  ctx.save();drawCaption(ctx,S,t);ctx.restore();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";}
+function fmt(s){s=Math.max(0,s);const m=Math.floor(s/60),x=Math.floor(s%60);return m+":"+(x<10?"0":"")+x;}
+async function fontsReady3(){try{await Promise.all(["600 40px Manrope","700 22px Manrope","800 34px Manrope","500 18px Manrope","500 15px 'IBM Plex Mono'"].map(f=>document.fonts.load(f)));await document.fonts.ready;}catch(e){}}
+async function prepAssets(){await fontsReady3();await loadLogos();master2(1);master2(2);["realism","modern","rules","live"].forEach(painting2);}
+// the video carries no captions on the picture: they ship beside it as .srt files, one per language, so one video serves every language
+if(window.__RENDER__){CAPS_ON=false;const cv=mkCanvas(W,H),ctx=cv.getContext("2d");document.body.appendChild(cv);
+  window.renderAt=function(t,q){renderFrame(ctx,1,t);return cv.toDataURL("image/jpeg",q||0.9);};
+  window.filmInfo=function(){return{total:TL.total,scenes:SCENES.map(s=>({id:s.id,name:s.name,start:s.start,dur:s.dur,cues:s.cues,pauses:s.pauses,breathe:s.breathe})),caps:TL.caps};};
+  prepAssets().then(()=>{window.__READY__=true;});}
+else{
+/* the player; window.FILM lets the rest of a page wait for the film's assets, and seek or play it */
+let readyRes;const FILM=window.FILM={ready:new Promise(r=>{readyRes=r;}),sceneStart:id=>{const s=SCENES.find(s=>s.id===id);return s?s.start:0;}};
+window.addEventListener("DOMContentLoaded",async()=>{
+  const cv=document.getElementById("film");if(!cv){await prepAssets();readyRes();return;}
+  const ctx=cv.getContext("2d"),play=document.getElementById("play"),scrub=document.getElementById("scrub"),time=document.getElementById("time"),cc=document.getElementById("cc"),chap=document.getElementById("chapters"),au=document.getElementById("snd"),box=cv.closest(".player");
+  let t=0,playing=false,last=0,dirty=true,inView=true,keysOn=true,waiting=false,stopAt=null,ready=false,prepP=null,q=1,avg=16,nf=0,good=0;scrub.max=TL.total.toFixed(2);const hasAu=au&&au.getAttribute("src");
+  function size(){const r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);const w=Math.round(Math.min(1920,r.width*d)*q);if(w>0&&cv.width!==w){cv.width=w;cv.height=Math.round(w*9/16);}}
+  SCENES.forEach(s=>{const b=document.createElement("button"),tc=document.createElement("span");tc.className="tc";tc.textContent=fmt(s.start);b.append(tc,document.createTextNode(s.name));b.onclick=()=>{seek(s.start+0.01);};chap.appendChild(b);});
+  /* the film's pictures (paper, stone, wood, places) are made only when the visitor is about to watch: the poster covers the film until
+     then, and making them as the page opened held the page for up to a second on a fast machine and several on a phone (4 November 2026).
+     A pointer or a finger over the player, focus on it, Play, a chapter, the bar or full screen starts it; Play shows "Loading…" meanwhile. */
+  function prep(){return prepP||(prepP=(async()=>{await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,0)));await prepAssets();ready=true;readyRes();
+    if(playing&&hasAu){au.pause();au.muted=false;try{au.currentTime=t;}catch(e){}au.play().catch(()=>{});}last=performance.now();dirty=true;label();})());}
+  function seek(x){prep();stopAt=null;t=clamp(x,0,TL.total);if(hasAu){try{au.currentTime=t;}catch(e){}}dirty=true;box.classList.add("started");}
+  function label(){play.textContent=playing?(waiting||!ready?UI.load:UI.pause):UI.play;}
+  function draw(){size();renderFrame(ctx,cv.width/W,t);scrub.value=t.toFixed(2);time.textContent=fmt(t)+" / "+fmt(TL.total);const i=sceneIndex(t);[...chap.children].forEach((b,k)=>b.classList.toggle("on",k===i));}
+  // draws only while playing or after a change, and only while the player is on screen
+  // FILM.onChapterEnd(id) can hold the film on the last frame of a chapter, for "pause and think": return true to pause there
+  /* while playing, a film that can't keep up on this device (frames more than 40 ms apart on average) is drawn at a lower resolution,
+     down to half; when frames come quickly for a long while, it goes back up */
+  function pace(dt){dt=Math.min(dt,250);avg=avg*0.9+dt*0.1;if(++nf<30)return;nf=0;
+    if(avg>40&&q>0.5){q=Math.max(0.5,q*0.8);good=0;dirty=true;}else if(avg<20&&q<1&&++good>=10){q=Math.min(1,q/0.8);good=0;dirty=true;}}
+  function loop(ts){if(playing&&ready){pace(ts-last);const i0=sceneIndex(t);if(hasAu&&!au.paused)t=au.currentTime;else{const dt=Math.min(0.1,(ts-last)/1000);t+=dt;}
+    if(FILM.onChapterEnd&&sceneIndex(t)>i0){const s=SCENES[i0];if(FILM.onChapterEnd(s.id)===true){t=s.start+s.dur-0.03;playing=false;label();if(hasAu){au.pause();try{au.currentTime=t;}catch(e){}}}}
+    if(t>=TL.total-0.02){t=TL.total;playing=false;label();if(hasAu)au.pause();}if(stopAt!=null&&t>=stopAt){t=stopAt;stopAt=null;playing=false;label();if(hasAu)au.pause();}dirty=true;}last=ts;if(dirty&&inView&&ready){draw();dirty=false;}requestAnimationFrame(loop);}
+  function toggle(){prep();box.classList.add("started");if(t>=TL.total-0.05)seek(0);playing=!playing;label();
+    // before the pictures are ready, the soundtrack starts muted inside the click, so a browser that only lets sound start from a click lets it start later
+    if(hasAu){if(playing){if(!ready)au.muted=true;au.currentTime=t;au.play().catch(()=>{});}else au.pause();}dirty=true;}
+  play.onclick=toggle;box.querySelectorAll("[data-play]").forEach(b=>{b.onclick=()=>{if(!playing)toggle();};});
+  if(hasAu){au.addEventListener("waiting",()=>{waiting=true;label();});au.addEventListener("playing",()=>{waiting=false;label();});}
+  scrub.oninput=()=>seek(parseFloat(scrub.value));
+  // full screen covers the player (film and controls); browsers that only allow it for <video>, such as Safari on iPhone, hide the button
+  const fsb=document.getElementById("fs"),fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement,fsReq=box.requestFullscreen||box.webkitRequestFullscreen;
+  function fsToggle(){prep();if(fsEl())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else{const r=fsReq.call(box);if(r&&r.catch)r.catch(()=>{});}}
+  if(fsb){if(!fsReq)fsb.hidden=true;else{fsb.onclick=fsToggle;cv.ondblclick=fsToggle;["fullscreenchange","webkitfullscreenchange"].forEach(ev=>document.addEventListener(ev,()=>{fsb.textContent=fsEl()?UI.fsExit:UI.fs;dirty=true;}));}}
+  cc.onclick=()=>{CAPS_ON=!CAPS_ON;cc.classList.toggle("on",CAPS_ON);cc.setAttribute("aria-pressed",CAPS_ON);dirty=true;};
+  if("IntersectionObserver" in window)new IntersectionObserver(es=>{const e=es[es.length-1];inView=e.isIntersecting;keysOn=e.intersectionRatio>=0.55;if(inView)dirty=true;},{threshold:[0,0.55]}).observe(box);
+  // keys work while most of the player is on screen and no other control has focus
+  window.addEventListener("keydown",e=>{if(!keysOn&&!fsEl())return;const tg=e.target,own=box.contains(tg);if(!own&&tg.closest&&tg.closest("a,button,input,select,textarea,[contenteditable],[role=button],[role=radio],[role=option],[tabindex]"))return;
+    if(e.code==="Space"&&tg.tagName!=="BUTTON"&&tg.tagName!=="INPUT"){e.preventDefault();toggle();}else if(e.code==="KeyF"&&fsReq&&!e.ctrlKey&&!e.metaKey&&!e.altKey)fsToggle();});
+  window.addEventListener("resize",()=>{dirty=true;});
+  ["pointerenter","touchstart","focusin"].forEach(ev=>box.addEventListener(ev,prep,{once:true,passive:true}));
+  Object.assign(FILM,{prepare:prep,seek,time:()=>t,playing:()=>playing,play:()=>{if(!playing)toggle();},pause:()=>{if(playing)toggle();},playScene:(id,once)=>{const s=SCENES.find(x=>x.id===id);seek(FILM.sceneStart(id)+0.01);if(once&&s)stopAt=s.start+s.dur-0.05;if(!playing)toggle();}});
+  const hm=location.hash.match(/t=([0-9:.]+)/);if(hm){const p=hm[1].split(":").map(Number);seek(p.length>1?p[0]*60+p[1]:p[0]);}requestAnimationFrame(loop);});}
+
+/* ===== What an agent is: what a film needs before it starts, and the video's finishing pass =====
+   Loaded after the engine, so its prepAssets is the one the engine calls: the fonts, the tools' logos if a film carries them (later
+   series of the module may), then each place the film paints (AG_PLACES: the room, room.js's "lab", and the film's own). The rendered
+   video and the checks paint every place before they start. The site's player paints the first place at once and the others only
+   once the visitor starts the film (Play, a chapter or the bar), one by one while the page is idle: a place takes a few tenths of a
+   second on a fast machine and several times that on a phone, and keeps a full-size picture in memory, so painting them all as the
+   page opens would hold it up while the visitor is only reading it (the governance films' lesson, 2 November 2026).
+   Then, for the video only (tools/render.py calls renderAt), motion blur: each video frame is the average of MB moments across a third
+   of a frame (a 126-degree shutter), so movement reads as filmed. No glow and no film grain. */
+async function prepAssets(){await fontsReady3();if(typeof LOGO_SRC!=="undefined")await loadLogos();const ks=Object.keys(AG_PLACES);
+  if(window.__RENDER__){ks.forEach(ag_place);return;}
+  if(ks.length&&document.getElementById("film"))ag_place(ks[0]);let i=1;const idle=f=>window.requestIdleCallback?requestIdleCallback(f,{timeout:1000}):setTimeout(f,60);
+  const next=()=>{if(i>=ks.length)return;ag_place(ks[i++]);idle(next);},go=()=>setTimeout(()=>idle(next),200);
+  // a page without a player (labs, scenarios) paints a place only when it first draws it (the kept picture is made then), never all of
+  // them ahead: painting every place as a labs page opened held it for seconds (4 November 2026)
+  const cv=document.getElementById("film"),box=cv&&cv.closest(".player");if(!box)return;if(box.classList.contains("started")){go();return;}
+  const mo=new MutationObserver(()=>{if(box.classList.contains("started")){mo.disconnect();go();}});mo.observe(box,{attributes:true,attributeFilter:["class"]});}
+if(window.__RENDER__){(function(){const MB=8,SHUT=0.35/30,out=document.querySelector("canvas"),ox=out.getContext("2d"),
+    M=mkCanvas(W,H),mx=M.getContext("2d"),A=mkCanvas(W,H),ax=A.getContext("2d");
+  window.renderAt=function(t,q){
+    for(let i=0;i<MB;i++){const tt=Math.max(0,t-SHUT*i/(MB-1));mx.setTransform(1,0,0,1,0,0);mx.globalAlpha=1;mx.globalCompositeOperation="source-over";renderFrame(mx,1,tt);ax.globalAlpha=1/(i+1);ax.drawImage(M,0,0);}
+    ax.globalAlpha=1;ox.setTransform(1,0,0,1,0,0);ox.globalAlpha=1;ox.globalCompositeOperation="source-over";ox.drawImage(A,0,0);
+    return out.toDataURL("image/jpeg",q||0.9);};})();}

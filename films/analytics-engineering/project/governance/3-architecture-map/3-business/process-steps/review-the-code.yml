@@ -1,0 +1,8 @@
+name: review the code
+kind: business process
+owner: Yusuf Demir, data governance lead
+relationships:
+- assignment: analytics engineer
+- realization: change a data product
+- triggering: approve the change
+status: confirmed

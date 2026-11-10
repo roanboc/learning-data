@@ -230,3 +230,24 @@ written from the map, says what they are: read its `README.md` first.
   the step changes on the map first, through review, and the tools follow.
 - **Switched off, stop.** If every call fails, don't retry or look for another way in: your owner or the
   platform team has stopped you, and nobody else is stopped with you.
+
+## Under a mandate
+
+At stage 5, an agent does one kind of task alone, in one place, within a mandate: one page in
+[`governance/8-mandates/`](governance/8-mandates/), signed by its owner, approved by a second person, and named
+on its assignment on the map. Each line is held in a tool, and `scripts/check/mandates.py` fails when a tool
+allows more than the page. Under your mandate:
+
+- **Work alone only on its task, and only where it says.** Whatever it doesn't give you, ask for.
+- **Its plain check comes first,** as your run's first step. If it failed, start nothing. A run that only needs
+  to run again is a plain job's, never yours.
+- **Change only its folders.** When the cause is anywhere else (a test, a seed, a contract, a definition,
+  another team's model), stop, and say in your report where it is.
+- **Stop at its limits:** its rounds, its hour, its budget, or the same error twice. Report what you found.
+- **In production, only draft:** find the cause and open a pull request, as at stage 4. The data team reviews
+  the code, and a person approves the change.
+- **A question of meaning goes to its owner, for the glossary** (*Who approves what*): ask it in your report,
+  and change nothing.
+- **Report to its owner by morning:** what failed and why, what you changed and where, what you checked, and
+  your rounds, time and tokens against the mandate.
+- **Never widen your own mandate.** Its owner narrows or withdraws it in a pull request.

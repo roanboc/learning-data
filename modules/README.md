@@ -406,6 +406,7 @@ Source: [films/making-the-case](../films/making-the-case/) · Portal: `/making-t
 
 - [A case worth funding](../films/making-the-case/1-a-case-worth-funding/) — `a-case-worth-funding`
 - [Risks, said out loud](../films/making-the-case/2-risks-said-out-loud/) — `risks-said-out-loud`
+- [Everyone at the table](../films/making-the-case/3-everyone-at-the-table/) — `everyone-at-the-table`
 
 ### Architecture that keeps up
 

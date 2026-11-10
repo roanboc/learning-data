@@ -160,6 +160,7 @@ Source: [films/when-things-go-wrong](../films/when-things-go-wrong/) · Portal: 
 Source: [films/fit-for-use](../films/fit-for-use/) · Portal: `/fit-for-use/`
 
 - [Good enough for what?](../films/fit-for-use/1-good-enough-for-what/) — `good-enough-for-what`
+- [A hundred records](../films/fit-for-use/2-a-hundred-records/) — `a-hundred-records`
 
 ### Quality as a habit
 
@@ -278,6 +279,7 @@ Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept
 
 - [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
 - [How long, and then what](../films/kept-for-a-reason/2-how-long-and-then-what/) — `how-long-and-then-what`
+- [Forgetting a person](../films/kept-for-a-reason/3-forgetting-a-person/) — `forgetting-a-person`
 - [Deleted means deleted](../films/kept-for-a-reason/4-deleted-means-deleted/) — `deleted-means-deleted`
 
 ## AI agents in data work

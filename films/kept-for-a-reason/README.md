@@ -13,6 +13,7 @@ Privacy and the life of data. Linh Nguyen's tutoring contract ends, and she asks
 |---|---|---|---|---|---|
 | [A reason to keep it](https://data.learn-all.org/kept-for-a-reason/a-reason-to-keep-it/) | Purpose and consent | 8 min | 7 | 3 questions | [script](1-a-reason-to-keep-it/script.md) · [source](1-a-reason-to-keep-it/source/README.md) |
 | [How long, and then what](https://data.learn-all.org/kept-for-a-reason/how-long-and-then-what/) | How long data is kept | 8 min | 7 | 3 questions | [script](2-how-long-and-then-what/script.md) · [source](2-how-long-and-then-what/source/README.md) |
+| [Forgetting a person](https://data.learn-all.org/kept-for-a-reason/forgetting-a-person/) | Rights over your data | 9 min | 8 | 4 questions | [script](3-forgetting-a-person/script.md) · [source](3-forgetting-a-person/source/README.md) |
 | [Deleted means deleted](https://data.learn-all.org/kept-for-a-reason/deleted-means-deleted/) | Deleting every copy | 8½ min | 8 | 4 questions | [script](4-deleted-means-deleted/script.md) · [source](4-deleted-means-deleted/source/README.md) |
 <!-- /films -->
 

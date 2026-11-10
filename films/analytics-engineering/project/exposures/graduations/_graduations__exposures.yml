@@ -27,7 +27,7 @@ exposures:
       name: "Malia Fonoti, graduations office"
       email: malia.fonoti@uni.example
     depends_on:
-      - ref('mart_graduations__graduation_list')
+      - ref('mart_graduations__certificates_file')
 
   - name: ceremony_programme
     label: The printed programme
@@ -41,3 +41,33 @@ exposures:
       email: malia.fonoti@uni.example
     depends_on:
       - ref('mart_graduations__graduation_list')
+
+  - name: names_to_confirm_each_week
+    label: Names still to confirm
+    type: analysis
+    maturity: medium
+    description: >
+      The count the graduations office follows each week before a round's names go to the
+      printer: the graduates who haven't confirmed their name, in the portal or on paper, by
+      ceremony. Malia writes to each one.
+    owner:
+      name: "Malia Fonoti, graduations office"
+      email: malia.fonoti@uni.example
+    depends_on:
+      - ref('mart_graduations__names_to_confirm')
+
+  - name: graduations_agent
+    label: The graduations team's agent
+    type: application
+    maturity: medium
+    description: >
+      The graduations team's Genie Agent, which answers questions about the graduation list from
+      the list and the follow-up, reading their descriptions in Unity Catalog, where dbt writes
+      them on every run. Its trusted answer to "which graduates haven't confirmed their name?" is
+      the follow-up's count (examples/read-by-an-agent/).
+    owner:
+      name: "Malia Fonoti, graduations office"
+      email: malia.fonoti@uni.example
+    depends_on:
+      - ref('mart_graduations__graduation_list')
+      - ref('mart_graduations__names_to_confirm')

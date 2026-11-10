@@ -24,6 +24,12 @@ outputPorts:
   type: table
   version: 1.0.0
   contractId: e78a5055-4868-5b10-b508-129e38ab9b42
+- name: mart_graduations__certificates_file
+  description: 'The printer''s file: each certificate of a round whose names haven''t gone to the printer
+    yet, with what the certificate prints, from the graduation list.'
+  type: table
+  version: 1.0.0
+  contractId: a18576fa-cd78-5800-905d-ad6397622de4
 team:
   name: Mei Tanaka, registrar's office
   members:
@@ -41,4 +47,6 @@ customProperties:
   - exposure awards_return
   - exposure ceremony_programme
   - exposure certificates
+  - exposure graduations_agent
   - exposure seating_plan
+  - product names_to_confirm

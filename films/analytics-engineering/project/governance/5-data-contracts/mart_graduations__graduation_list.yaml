@@ -85,9 +85,9 @@ schema:
     physicalType: date
     required: false
     classification: none
-    description: The day the graduate confirmed their name, or corrected it, in the portal for this ceremony;
-      a correction counts once the registrar's office has checked it. Empty when they haven't confirmed
-      it through the portal.
+    description: 'Means: the day of the graduate''s answer in the portal, for this ceremony, once accepted
+      (a correction, once the registrar''s office has checked it). Empty means: not confirmed in the portal;
+      name_confirmed_how says if it was on paper. Owner: Mei Tanaka, registrar''s office.'
   - name: award_code
     logicalType: string
     physicalType: string
@@ -150,6 +150,26 @@ schema:
     required: false
     classification: none
     description: The day the certificate's row first joined the list, the night after its award was approved.
+  - name: name_confirmed_how
+    logicalType: string
+    physicalType: string
+    required: false
+    classification: none
+    description: 'Means: how the graduate confirmed the name to be printed for this ceremony. portal,
+      in the portal, even after a paper form (name_confirmed_on is the day); paper, on the paper graduation
+      form only, used until the portal opened in February 2026, which kept no date. Empty means: not confirmed
+      yet, in the portal or on paper. Owner: Mei Tanaka, registrar''s office.'
+    quality:
+    - id: accepted_values_mart_graduations__graduation_list_name_confirmed_how__portal__paper
+      metric: invalidValues
+      mustBe: 0
+      unit: rows
+      arguments:
+        validValues:
+        - portal
+        - paper
+      dimension: conformity
+      severity: error
   quality:
   - name: seating_plan_count_per_ceremony
     type: text
@@ -234,5 +254,6 @@ customProperties:
   value:
   - exposure awards_return
   - exposure ceremony_programme
-  - exposure certificates
+  - exposure graduations_agent
   - exposure seating_plan
+  - product names_to_confirm

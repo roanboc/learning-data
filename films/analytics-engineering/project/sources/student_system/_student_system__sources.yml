@@ -106,3 +106,26 @@ sources:
             description: The ceremony the graduate is presented at, like DEC26-3 (seeds/reference/graduations/ceremonies.csv).
           - name: attendance_code
             description: ATT when the graduate crosses the stage; ABS when the award is conferred in absentia and the certificate posted.
+      - name: graduation_applications
+        description: >
+          The student system's applications to graduate: one row per version of a graduate's
+          application to be presented at a ceremony. Until the portal opened in February 2026, a
+          graduate applied on the paper graduation form, which asked them to confirm the name to be
+          printed and kept no date for it; since then they apply in the portal, and confirm their
+          name there (the portal's name_confirmations). The system key is the student ID and the
+          ceremony.
+        config:
+          meta:
+            system_key: [student_id, ceremony_id]
+        columns:
+          - name: student_id
+            description: The student ID of the graduate who applied, like S-17790.
+          - name: ceremony_id
+            description: The ceremony the graduate applied to be presented at, like DEC26-1.
+          - name: application_form
+            description: >
+              paper, the paper graduation form, on which the graduate confirmed the name to be
+              printed; portal, an application in the portal, where the graduate confirms their name
+              separately.
+          - name: received_on
+            description: The day the registrar's office received the application.

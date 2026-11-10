@@ -1,0 +1,21 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: names_to_confirm
+title: Names still to confirm
+owner: "Malia Fonoti, graduations office"
+domain: student
+status: active
+version: 1.0.0
+description:
+  purpose: The graduates of a round whose names haven't gone to the printer yet who haven't
+    confirmed their name, in the portal or on the paper form, and the days left.
+  usage: For the graduations office's weekly count and its emails, and the graduations team's agent's
+    answer to which graduates haven't confirmed their name. It names graduates by student ID only.
+outputs:
+  - {model: mart_graduations__names_to_confirm}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+support:
+  - {channel: graduations, tool: email, url: "mailto:graduations@uni.example", scope: issues}

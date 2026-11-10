@@ -16,6 +16,7 @@ description:
     it needs, is a quality rule in the contract.
 outputs:
   - {model: mart_graduations__graduation_list}
+  - {model: mart_graduations__certificates_file}
 service_levels:
   - {property: latency, value: 1, unit: d, description: Built every night.}
 support:

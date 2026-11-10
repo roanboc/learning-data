@@ -1,0 +1,80 @@
+{
+  "kicker": "Descriptions and agents",
+  "kicker_es": "Descripciones y agentes",
+  "title_es": "Leído por un agente",
+  "h1": "The agent answered 412, and empty meant two things",
+  "h1_es": "El agente respondió 412, y vacío significaba dos cosas",
+  "lead": "In October 2026, Malia asked the graduations team's agent which December graduates hadn't confirmed their name, and it answered 412 at once. An empty date meant two things: 38 hadn't confirmed yet, and 374 had confirmed on the paper form. Nothing written said so, and the agent can't ask.",
+  "lead_es": "En octubre de 2026, Malia preguntó al agente de graduaciones qué graduados de diciembre no habían confirmado su nombre, y respondió 412 al instante. Una fecha vacía significaba dos cosas: 38 aún no lo habían confirmado y 374 lo hicieron en papel. Nada escrito lo decía y el agente no puede preguntar.",
+  "description": "A film about data an agent can read, the third of Quality as a habit: around 2000, spell checkers whose word lists had co-operation but not cooperation offered Cupertino, writers in a hurry took it, and a NATO report of 1999 named the Organization for Security and Cupertino in Europe, until the European Union's translators named the fault and the checkers' makers completed their word lists; at the university, on 22 October 2026, the graduations team's agent counted the empty confirmation dates and answered 412, when 38 graduates hadn't confirmed their name and 374 had confirmed it on the paper form, which kept no date; the team fixed the data first, with a column that says how each name was confirmed, then the words, in Mei's: what each column means, what empty means and who answers for it; Genie Code's three proposed checks, reviewed by Jun with levels set by Mei, one of them a weekly count for Malia instead; and reading an agent's answer before you act on it.",
+  "description_es": "Una película sobre datos que un agente puede leer, la tercera de La calidad como hábito: hacia el año 2000, correctores ortográficos cuyas listas de palabras tenían co-operation pero no cooperation ofrecían Cupertino, los redactores con prisa lo aceptaban, y un informe de la OTAN de 1999 nombró la Organization for Security and Cupertino in Europe, hasta que los traductores de la Unión Europea le pusieron nombre al fallo y los fabricantes de los correctores completaron sus listas; en la universidad, el 22 de octubre de 2026, el agente del equipo de graduaciones contó las fechas de confirmación vacías y respondió 412, cuando 38 graduados no habían confirmado su nombre y 374 lo habían confirmado en el formulario en papel, que no guardaba fecha; el equipo arregló primero los datos, con una columna que dice cómo se confirmó cada nombre, y después las palabras, las de Mei: qué significa cada columna, qué significa vacío y quién responde por ella; los tres controles que propuso Genie Code, revisados por Jun y con los niveles que fijó Mei, uno de ellos convertido en un conteo semanal para Malia; y leer la respuesta de un agente antes de actuar.",
+  "card": "An agent reads only what's written. Say what each column means and what empty means, and read its answer before you act.",
+  "card_es": "Un agente solo lee lo que está escrito. Di qué significa cada columna y qué significa vacío, y lee su respuesta antes de actuar.",
+  "chapters_es": {
+    "cupertino": "Un Cupertino",
+    "answer": "412, con seguridad",
+    "empty": "Vacío significaba dos cosas",
+    "written": "Qué significa vacío, por escrito",
+    "proposes": "El agente propone, las personas deciden",
+    "before": "Léelo antes de actuar",
+    "monday": "Para un lector que no puede preguntar"
+  },
+  "past": [
+    "Around 2000: a spell checker's Cupertino",
+    "Spell checkers offered Cupertino for cooperation, and writers in a hurry took it, until the checkers' makers completed their word lists: by 2007, readers got the word the writer meant."
+  ],
+  "past_es": [
+    "Hacia el año 2000: el Cupertino de un corrector ortográfico",
+    "Los correctores ortográficos ofrecían Cupertino por cooperation, y los redactores con prisa lo aceptaban, hasta que sus fabricantes completaron sus listas de palabras: en 2007, los lectores recibían la palabra que el redactor quería decir."
+  ],
+  "next_h": "You've seen why an agent needs what empty means written down. Next: one small change every week, measured and kept.",
+  "next_h_es": "Viste por qué un agente necesita que esté escrito qué significa vacío. Después: un cambio pequeño cada semana, medido y mantenido.",
+  "repo": {
+    "written": [
+      "data/student_system/graduation_applications.csv",
+      "models/marts/graduations/mart_graduations__graduation_list.sql",
+      "models/marts/graduations/_graduations__models.yml"
+    ],
+    "proposes": [
+      "tests/rules/printers_file_has_the_names_graduates_gave.sql",
+      "tests/rules/name_confirmation_columns_agree.sql",
+      "models/marts/graduations/mart_graduations__names_to_confirm.sql",
+      "examples/read-by-an-agent/genie_code_review.md"
+    ],
+    "before": [
+      "examples/read-by-an-agent/graduations_agent.md"
+    ]
+  },
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para ir más allá",
+    "p": "The standard and the docs behind the film's words, descriptions and agents.",
+    "p_es": "La norma y la documentación detrás de las palabras, las descripciones y los agentes de la película.",
+    "links": [
+      {
+        "title": "The data quality model, ISO/IEC 25012",
+        "title_es": "El modelo de calidad de datos, ISO/IEC 25012",
+        "line": "Fifteen characteristics of data quality, understandability among them: data its users can read and interpret.",
+        "line_es": "Quince características de la calidad de datos, entre ellas la comprensibilidad: datos que sus usuarios pueden leer e interpretar.",
+        "href": "https://iso25000.com/index.php/en/iso-25000-standards/iso-25012",
+        "href_es": "https://iso25000.com/index.php/normas-iso-25000/iso-25012"
+      },
+      {
+        "title": "Descriptions in Unity Catalog, from dbt",
+        "title_es": "Descripciones en Unity Catalog, desde dbt (en inglés)",
+        "line": "persist_docs: dbt writes each model's and each column's description into the platform on every run.",
+        "line_es": "persist_docs: dbt escribe la descripción de cada modelo y de cada columna en la plataforma en cada ejecución.",
+        "href": "https://docs.getdbt.com/reference/resource-configs/persist_docs",
+        "href_es": "https://docs.getdbt.com/reference/resource-configs/persist_docs"
+      },
+      {
+        "title": "Curate an effective Genie Agent",
+        "title_es": "Preparar un Genie Agent eficaz (en inglés)",
+        "line": "Like a new team member, an agent relies on clear table and column descriptions, example queries and benchmarks.",
+        "line_es": "Como un miembro nuevo del equipo, un agente depende de descripciones claras de tablas y columnas, consultas de ejemplo y pruebas.",
+        "href": "https://docs.databricks.com/aws/en/genie-agents/best-practices",
+        "href_es": "https://docs.databricks.com/aws/en/genie-agents/best-practices"
+      }
+    ]
+  }
+}

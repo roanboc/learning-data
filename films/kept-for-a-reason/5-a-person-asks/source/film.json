@@ -1,0 +1,57 @@
+{
+  "key": "a-person-asks",
+  "title": "A person asks",
+  "sub": "Film 5 of 5 of Kept for a reason, the third and last series of Data protection and privacy: Linh's request answered end to end, as the Habeas Corpus Act of 1679 made a keeper answer for a prisoner, on time, with the true causes and proof. A request logged with its clock; a ticket that names no one, and her numbers in one restricted table; every place she is, found through dbt's lineage, the platform's lineage and the classes on each column, by her numbers and by the codes made from them; a copy that says why each part is kept and until when; her no kept on the person; and proof of each step in the ticket, the table's history and the audit log. It closes the series and the module, and hands on to AI agents in data work.",
+  "howto": "The film is drawn in the module's look, Night glass: a dark hall of frosted panes, frosted where what's behind may not be read and clear where it may. Cyan is an identity (who or what it is), green allowed or done, coral denied or closed, violet hidden personal data, and gold only the chip that says a badge is genuine. A request's clock is a ring of thirty marks, one for each day. London in 1676 and Westminster in 1679 are painted in the same night light, with their place and year on a tag.",
+  "src": [
+    "ap_people.js",
+    "ap_past.js",
+    "ap_hall.js",
+    "scenes.js"
+  ],
+  "poster": [
+    "proof",
+    "here",
+    3.6
+  ],
+  "say": [
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ],
+    [
+      "\\bHR\\b",
+      "H R"
+    ],
+    [
+      "\\bMei\\b",
+      "May"
+    ],
+    [
+      "\\bNguyen\\b",
+      "Win"
+    ],
+    [
+      "\\bLinh's\\b",
+      "Lin's"
+    ],
+    [
+      "\\bLinh\\b",
+      "Lin"
+    ],
+    [
+      "\\bJenkes\\b",
+      "Jenks"
+    ]
+  ],
+  "story": [
+    "summer",
+    "days"
+  ],
+  "urgent": [],
+  "logos": true
+}

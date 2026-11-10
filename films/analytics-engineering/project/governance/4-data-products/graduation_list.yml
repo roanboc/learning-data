@@ -1,0 +1,22 @@
+# A data product: what it's for, who answers for it, what it promises and to whom. Written by hand,
+# owned by its owner. scripts/generate/products.py writes its product descriptor and a data contract
+# for each output, from this file and the dbt contracts.
+
+name: graduation_list
+title: Graduation list
+owner: "Mei Tanaka, registrar's office"
+domain: student
+status: active
+version: 1.0.0
+description:
+  purpose: Who graduates, at which ceremony, with which award, and their name as it will be printed
+    on the degree certificate, for every ceremony in the Great Hall.
+  usage: For the graduations office, to seat the hall, print the programme and send the certificates
+    to the printer, and for Planning's count of awards for the government. Each use, and the level
+    it needs, is a quality rule in the contract.
+outputs:
+  - {model: mart_graduations__graduation_list}
+service_levels:
+  - {property: latency, value: 1, unit: d, description: Built every night.}
+support:
+  - {channel: graduations, tool: email, url: "mailto:graduations@uni.example", scope: issues}

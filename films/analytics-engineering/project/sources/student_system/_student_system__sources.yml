@@ -71,3 +71,38 @@ sources:
             description: The student ID the registrar's office issued, like S-17142. A student ID is never given to anyone else.
           - name: effective_date
             description: '{{ doc("effective_date") }}'
+      - name: graduations
+        description: >
+          The student system's list of graduates: one row per version of a graduate's award, with
+          the ceremony they're presented at and the names the student system holds for them. A row
+          joins the list the night after the faculty's exam board approves the award. The system
+          key is the student ID and the award code.
+        config:
+          meta:
+            system_key: [student_id, award_code]
+            limitations:
+              - id: LIM-SIS-02
+                text: >
+                  A slice: a few graduates of each round of ceremonies, not all of them, and not in
+                  the learners table, the core's slice of 2025 and 2026. Names arrive as the student
+                  system's nightly file sends them: until September 2026 that file lost every
+                  accent, so é arrived as e.
+              - id: LIM-SIS-03
+                text: >
+                  The conferral date is the one the faculty's exam board approved, typed in from
+                  the board's list. Only graduates on this list have one: the student system's own
+                  records still don't say when an award was conferred (GAP-SIS-03), so the core
+                  still dates an award by DEC-SIS-03.
+        columns:
+          - name: student_id
+            description: The student ID the registrar's office issued, like S-16874.
+          - name: family_name
+            description: >
+              The family name the student system holds: its field takes 30 characters, so a longer
+              name was cut when it was typed in.
+          - name: conferral_date
+            description: The date the faculty's exam board approved the award, printed on the certificate.
+          - name: ceremony_id
+            description: The ceremony the graduate is presented at, like DEC26-3 (seeds/reference/graduations/ceremonies.csv).
+          - name: attendance_code
+            description: ATT when the graduate crosses the stage; ABS when the award is conferred in absentia and the certificate posted.

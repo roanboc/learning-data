@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/one-person-many-roles/soundtrack.mp3",
+      "size": 4987654,
+      "sha256": "0ed700c1872a6613fc470bed39cc5ac2fa622f72c3c7f2258feb5f4e9c0111cc",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-v1/0ed700c1872a6613fc470bed39cc5ac2fa622f72c3c7f2258feb5f4e9c0111cc.mp3"
+    }
+  ]
+}

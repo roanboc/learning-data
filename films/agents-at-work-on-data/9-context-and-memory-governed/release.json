@@ -31,6 +31,7 @@
       "films/data-governance/shared/tools/quiet.py",
       "films/data-governance/shared/tools/held.py",
       "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/logos.js",
       "films/inner-life-of-data/source/src/core.js",
       "films/inner-life-of-data/source/src/style2.js",
       "films/inner-life-of-data/source/src/ui3.js",
@@ -38,10 +39,10 @@
       "films/inner-life-of-data/source/fonts"
     ],
     "legibility": {
-      "texts": 408,
+      "texts": 393,
       "under_28": "0%",
       "under_20": 0,
-      "median": 28.1,
+      "median": 28.2,
       "status": "Drawn to the rule"
     }
   }

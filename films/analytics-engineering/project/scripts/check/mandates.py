@@ -225,6 +225,11 @@ def grants(text):
     return found
 
 
+def starts_agent(step):
+    """The step that starts the agent: the runner's own command, not the step that installs it."""
+    return bool(re.search(r"(?m)^\s*agent-runner\s+--", str(step.get("run", ""))))
+
+
 def check_tools(path, page, problems, tools):
     """Its settings in each tool, written from the map, against the page."""
     where = path.relative_to(ROOT).as_posix()
@@ -248,7 +253,7 @@ def check_tools(path, page, problems, tools):
 
     workflow = yaml.safe_load((folder / "workflow.yml").read_text()) if (folder / "workflow.yml").exists() else {}
     jobs = workflow.get("jobs") or {}
-    run = next((job for job in jobs.values() if any("agent-runner" in str(s.get("run", "")) for s in job.get("steps") or [])), None)
+    run = next((job for job in jobs.values() if any(starts_agent(s) for s in job.get("steps") or [])), None)
     if run is None:
         problems.append(f"{there}/workflow.yml: no job runs the agent, so nothing counts its rounds or times its run")
         return
@@ -256,7 +261,7 @@ def check_tools(path, page, problems, tools):
     if not isinstance(minutes, int) or minutes > limits.get("minutes", 0):
         problems.append(f"{there}/workflow.yml: its run's timeout is {minutes!r} minutes; the page gives it {limits.get('minutes')}")
     steps = run.get("steps") or []
-    at = next(i for i, s in enumerate(steps) if "agent-runner" in str(s.get("run", "")))
+    at = next(i for i, s in enumerate(steps) if starts_agent(s))
     rounds = re.search(r"--max-rounds\s+(\d+)", str(steps[at].get("run", "")))
     if not rounds or int(rounds.group(1)) > limits.get("rounds", 0):
         problems.append(f"{there}/workflow.yml: the runner stops after {rounds.group(1) if rounds else 'no limit of'} rounds; "

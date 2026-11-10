@@ -71,6 +71,7 @@ Source: [films/data-that-moves](../films/data-that-moves/) · Portal: `/data-tha
 
 - [Moving is easy, agreeing is the work](../films/data-that-moves/1-moving-is-easy/) — `moving-is-easy`
 - [Hot, warm, cold](../films/data-that-moves/2-hot-warm-cold/) — `hot-warm-cold`
+- [One copy, one platform](../films/data-that-moves/3-one-copy-one-platform/) — `one-copy-one-platform`
 
 ### Data as software
 
@@ -272,7 +273,7 @@ Source: [films/only-what-you-may-see](../films/only-what-you-may-see/) · Portal
 
 Source: [films/kept-for-a-reason](../films/kept-for-a-reason/) · Portal: `/kept-for-a-reason/`
 
-No film source yet.
+- [A reason to keep it](../films/kept-for-a-reason/1-a-reason-to-keep-it/) — `a-reason-to-keep-it`
 
 ## AI agents in data work
 
@@ -316,6 +317,7 @@ Source: [films/from-helper-to-colleague](../films/from-helper-to-colleague/) · 
 - [Five stages, not a switch](../films/from-helper-to-colleague/1-five-stages/) — `five-stages`
 - [Borrowed rights](../films/from-helper-to-colleague/2-borrowed-rights/) — `borrowed-rights`
 - [A place on the map](../films/from-helper-to-colleague/3-a-place-on-the-map/) — `a-place-on-the-map`
+- [Rights follow the role](../films/from-helper-to-colleague/4-rights-follow-the-role/) — `rights-follow-the-role`
 
 ## Data management
 

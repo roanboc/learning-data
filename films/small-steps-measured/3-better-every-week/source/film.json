@@ -1,0 +1,27 @@
+{
+  "key": "better-every-week",
+  "title": "Better every week",
+  "sub": "The third film of Small steps, measured, the fourth series of Data management: improve the team's own way of working, a little every week. From September 2027, Helena keeps half an hour every Friday: one measure, one small change, tried for a week, then kept or dropped out loud, and each kept change written into the procedure it changed.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the pocket card's method, the Friday half-hour, the procedures' pages), green is value or something done (a change kept, the better way, what got better), amber is waiting or a cost (the long way, the six days, the minutes a change costs), and orange is data (the measures).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "bw_past.js",
+    "bw_uni.js",
+    "bw_scenes.js"
+  ],
+  "poster": [
+    "written",
+    "lasts",
+    4.5
+  ],
+  "say": [
+    ["\\bNovak's\\b", "Noh-vak's"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bNoor\\b", "Nuur"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "card"
+  ],
+  "urgent": []
+}

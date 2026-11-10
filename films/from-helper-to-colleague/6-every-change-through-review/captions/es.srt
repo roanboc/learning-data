@@ -1,0 +1,231 @@
+1
+00:00:01,600 --> 00:00:07,283
+Hoy, en la universidad. El martes, el agente de Planificación abrió su primer pull request.
+
+2
+00:00:08,583 --> 00:00:13,739
+Un pull request es un cambio que se propone para que las personas lo lean, y lo acepten o no.
+
+3
+00:00:15,239 --> 00:00:20,765
+Este cambia el plan de clases de Planificación del próximo semestre: cuántas clases abre cada asignatura.
+
+4
+00:00:22,065 --> 00:00:24,246
+Las facultades contratan tutores según él.
+
+5
+00:00:25,546 --> 00:00:31,676
+Hasta ahora, cada asignatura tenía clases de 25 estudiantes. Pero en un laboratorio caben 16.
+
+6
+00:00:33,376 --> 00:00:35,619
+Y cada facultad planifica con ese número.
+
+7
+00:00:36,719 --> 00:00:44,800
+Un cambio que borrara una asignatura, o duplicara sus clases, dejaría estudiantes sin clase, o pagaría tutores por clases que nunca se dan.
+
+8
+00:00:46,300 --> 00:00:51,105
+Y un agente que pudiera aprobar su propio cambio podría ponerlo ahí antes de que nadie lo mirara.
+
+9
+00:00:52,405 --> 00:00:54,973
+Eso tenía que cambiar antes de que el agente empezara.
+
+10
+00:00:56,873 --> 00:01:03,108
+Ahora todo cambio, de un agente o de una persona, pasa por revisión, y las reglas están fijadas en las herramientas.
+
+11
+00:01:04,208 --> 00:01:10,539
+El agente entrega su evidencia. Las verificaciones construyen lo que cambió, y un diff muestra los datos antes y después.
+
+12
+00:01:11,839 --> 00:01:19,904
+Otro agente lo revisa, como referencia. Las personas lo aprueban, cada una en su rol del mapa, y una segunda persona lo libera a producción.
+
+13
+00:01:21,404 --> 00:01:28,223
+Así, Jun y Noor vieron exactamente qué cambiaría: más clases en 161 asignaturas, y nada más.
+
+14
+00:01:29,523 --> 00:01:36,005
+Las facultades pueden contratar a tiempo tutores para 263 clases más, con lugar para cada estudiante.
+
+15
+00:01:37,505 --> 00:01:44,677
+Y para los datos: un agente propone, una persona libera, y nada llega a producción sin que una persona lo haya visto.
+
+16
+00:01:52,177 --> 00:01:58,420
+El lunes, su primer día, Clara pidió el cambio: las clases de cada asignatura según su propio tamaño de clase.
+
+17
+00:02:00,120 --> 00:02:07,228
+El agente leyó primero el glosario. El tamaño de clase es el máximo de estudiantes de una clase, fijado por la escuela de la asignatura.
+
+18
+00:02:08,928 --> 00:02:14,126
+Trabajó en su propia rama, en su propio esquema de desarrollo. Producción, solo puede leerla.
+
+19
+00:02:15,826 --> 00:02:20,657
+Para los encargos de Planificación, el mapa lo pone en la etapa cuatro: un colaborador que propone.
+
+20
+00:02:22,157 --> 00:02:29,116
+Antes del cambio, escribió dos pruebas: cada estudiante tiene lugar en una clase, y no se planifica ninguna clase que no haga falta.
+
+21
+00:02:30,816 --> 00:02:36,284
+Su pull request dice qué cambió y por qué, y copia las palabras del glosario con su fuente.
+
+22
+00:02:37,584 --> 00:02:40,822
+Muestra su evidencia: las clases, antes y después.
+
+23
+00:02:42,522 --> 00:02:48,398
+Y dice de qué no estaba seguro: 31 asignaturas no tienen tamaño de clase, así que las dejó en 25.
+
+24
+00:02:52,298 --> 00:02:58,738
+Las verificaciones no reconstruyen todo el proyecto: dbt construye lo que cambió, y todo lo que depende de ello.
+
+25
+00:03:00,438 --> 00:03:07,219
+Aquí, eso es el plan de clases y, tras él, las clases por facultad, que lee la contratación. Todas las pruebas pasan.
+
+26
+00:03:08,919 --> 00:03:15,489
+El informe de impacto: se agrega una columna, así que nada de lo que lee la tabla se rompe. Y nombra a quién avisar.
+
+27
+00:03:16,989 --> 00:03:24,583
+Luego el diff: la misma tabla, desde la rama del agente y desde main, de la que sale producción, comparada asignatura por asignatura.
+
+28
+00:03:26,483 --> 00:03:36,666
+Ninguna asignatura está en una sola. Una columna es nueva. Y las clases cambiaron en 161 asignaturas, todas hacia arriba: 263 más.
+
+29
+00:03:38,566 --> 00:03:42,651
+Así, quien revisa ve lo que el cambio hace a los datos, no solo al código.
+
+30
+00:03:46,351 --> 00:03:53,060
+Luego, un segundo agente lee el pull request: el agente de revisión de gobernanza, de Yusuf, con un nombre propio.
+
+31
+00:03:54,760 --> 00:04:02,169
+Verifica las reglas de gobernanza: un dueño, palabras del glosario con su fuente, una prueba por regla, el impacto nombrado.
+
+32
+00:04:03,669 --> 00:04:10,240
+Una cosa no tiene verificación: las 31 asignaturas sin tamaño de clase quedan en 25, y nadie se entera.
+
+33
+00:04:11,540 --> 00:04:18,819
+Cada escuela debería fijarlo, así que sugiere un aviso cada noche que las liste para las facultades, no una verificación que falle.
+
+34
+00:04:20,519 --> 00:04:27,585
+Dice quién decide: gobernanza de datos, donde un cambio y el glosario difieren. Y publica su revisión como un comentario.
+
+35
+00:04:28,885 --> 00:04:33,291
+Nunca aprueba, y nunca bloquea: su revisión es solo una referencia.
+
+36
+00:04:34,991 --> 00:04:40,030
+Yusuf decide: sí. El agente de Planificación agrega el aviso, en un segundo push.
+
+37
+00:04:41,730 --> 00:04:47,076
+Dos agentes trabajaron juntos solo a través del pull request, y una persona decidió entre ellos.
+
+38
+00:04:50,976 --> 00:04:55,734
+Quién aprueba está en el mapa. Después de un pull request, cada paso es de una persona.
+
+39
+00:04:57,234 --> 00:05:03,195
+El ingeniero de analítica revisa el código. El aprobador de liberación aprueba el cambio, y lo libera.
+
+40
+00:05:04,895 --> 00:05:10,854
+Los dueños no revisan pull requests. Lo que significa una palabra lo decide primero su dueño, en el glosario.
+
+41
+00:05:12,354 --> 00:05:17,409
+Los pasos del colaborador de Planificación terminan en el pull request. El agente no tiene ninguno de estos.
+
+42
+00:05:19,109 --> 00:05:25,811
+En GitHub, los equipos que aprueban se escriben a partir de esos roles. Cuando alguien asume un rol, las aprobaciones lo siguen.
+
+43
+00:05:27,511 --> 00:05:32,962
+Y las reglas de main valen para todos: nadie puede saltárselas, ni siquiera un administrador.
+
+44
+00:05:34,262 --> 00:05:40,492
+Quien revisa es una persona, o un equipo de personas. Un agente no puede serlo, así que su aprobación nunca cuenta.
+
+45
+00:05:42,192 --> 00:05:48,476
+Nadie puede aprobar su propio pull request, y el último push debe aprobarlo alguien que no lo hizo.
+
+46
+00:05:50,176 --> 00:05:56,704
+Así que, tras el segundo push, Jun aprueba el código otra vez, y a Clara y a las facultades se les avisa qué toca.
+
+47
+00:06:00,604 --> 00:06:08,322
+Con el código aprobado, el cambio entra en main. Jun lo fusiona; los agentes no fusionan. Y fusionar no es liberar.
+
+48
+00:06:10,022 --> 00:06:15,692
+Esa noche, la liberación compila main en pruebas. Solo si pasa en pruebas, sigue a producción.
+
+49
+00:06:17,392 --> 00:06:22,677
+Ahí espera, en un entorno llamado production, hasta que un aprobador de liberación dice que sí.
+
+50
+00:06:24,377 --> 00:06:30,722
+El miércoles por la mañana, Noor aprueba el cambio. Quien inicia una liberación no puede aprobarla, aunque sea aprobador.
+
+51
+00:06:32,622 --> 00:06:38,901
+Solo entonces la liberación puede entrar en Databricks, como su propia entidad de servicio, sin ningún secreto que robar.
+
+52
+00:06:40,601 --> 00:06:44,561
+Despliega el proyecto como un bundle, y ejecuta la compilación en producción.
+
+53
+00:06:46,461 --> 00:06:54,028
+La identidad propia del agente de Planificación solo lee producción. Escribir ahí es tarea de la liberación, tras el sí de una persona.
+
+54
+00:06:57,928 --> 00:07:07,567
+Desde el miércoles, las facultades tienen su plan: 263 clases más, lugar para cada estudiante, y la lista de las 31 asignaturas por definir.
+
+55
+00:07:09,267 --> 00:07:14,648
+Todo cambio sigue el mismo camino: evidencia, verificaciones, un diff, y una revisión como referencia.
+
+56
+00:07:15,748 --> 00:07:19,575
+Luego, la aprobación de los roles del mapa, y la liberación de una segunda persona.
+
+57
+00:07:21,475 --> 00:07:23,244
+Para agentes, como para personas.
+
+58
+00:07:24,544 --> 00:07:27,245
+Un agente propone. Una persona libera.

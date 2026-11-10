@@ -79,8 +79,8 @@ window.CAPTIONS=Object.assign(window.CAPTIONS||{},{
 "Yusuf le muestra quién depende de ella: el tablero de estudiantes cerca de un título, y cada facultad que planifica con él.",
 "What it's worth to them: a number on time, from someone they can ask.":
 "Lo que vale para ellos: una cifra a tiempo, de alguien a quien pueden preguntar.",
-"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, and any change to it needs her yes.":
-"Y lo que viene con ello: Jun la sigue construyendo, Noor la diseña, Sam la opera, y cualquier cambio en ella necesita su sí.",
+"And what comes with it: Jun still builds it, Noor designs it, Sam runs it, the data team reviews changes, and she's told what they touch.":
+"Con ello: Jun la sigue construyendo, Noor la diseña, Sam la opera, el equipo de datos revisa los cambios, y a ella le avisan qué tocan.",
 "She answers for the promise, not the code.":
 "Ella responde por la promesa, no por el código.",
 "Not every table is a product.":

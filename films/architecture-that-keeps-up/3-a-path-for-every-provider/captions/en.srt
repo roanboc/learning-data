@@ -1,0 +1,271 @@
+1
+00:00:03,000 --> 00:00:06,355
+Port Newark, New Jersey, in April 1956.
+
+2
+00:00:08,255 --> 00:00:15,989
+A trucking man, Malcom McLean, sends an old tanker, the Ideal X, to Houston with 58 metal boxes on its deck.
+
+3
+00:00:17,689 --> 00:00:23,666
+Each box is lifted on and off whole, by crane, instead of sack by sack and crate by crate.
+
+4
+00:00:25,366 --> 00:00:32,330
+By McLean's own figures, loading costs under 16 cents a ton, against $5.83 by hand.
+
+5
+00:00:34,430 --> 00:00:38,555
+But a box needs a crane strong enough to lift it, at both ends of the trip.
+
+6
+00:00:40,255 --> 00:00:45,057
+Few ports have one, and building one takes years, and money most of them don't have.
+
+7
+00:00:46,557 --> 00:00:54,201
+For those ports, the box changes nothing: ships still sit at the quay for days, unloaded by hand, and their goods cost more.
+
+8
+00:00:56,101 --> 00:01:00,069
+Something has to change, or the box will stop wherever the cranes do.
+
+9
+00:01:01,969 --> 00:01:09,473
+In October 1957, McLean's company sends out a rebuilt ship, the Gateway City, with two cranes of its own.
+
+10
+00:01:11,173 --> 00:01:14,597
+They run on rails along its deck, and reach out over the quay.
+
+11
+00:01:16,497 --> 00:01:19,805
+Now a port with a quay can take boxes, crane or not.
+
+12
+00:01:21,705 --> 00:01:27,122
+Over the years, ports build cranes of their own, and the ships' cranes are no longer needed there.
+
+13
+00:01:28,822 --> 00:01:32,185
+Ships with their own cranes still call at ports that have none.
+
+14
+00:01:33,885 --> 00:01:40,409
+The box's savings reached each port before it could meet the standard, and each port joined the standard when it could.
+
+15
+00:01:42,309 --> 00:01:46,371
+Data has its standard ways too, and providers who can't meet them yet.
+
+16
+00:01:47,871 --> 00:01:53,430
+A path for each of them lets their data arrive now, not after every one of them catches up.
+
+17
+00:02:01,530 --> 00:02:08,521
+These films borrow from architecture to run a data team's services. This one is about the data coming in.
+
+18
+00:02:10,221 --> 00:02:14,058
+June 2027, at a university, a year from now.
+
+19
+00:02:15,758 --> 00:02:24,287
+Helena Novak, the data manager, and Noor Rahman, the data architect, write the team's preferred way to receive data, on one page.
+
+20
+00:02:25,987 --> 00:02:30,864
+The source publishes its data as a governed product, with an owner and a contract.
+
+21
+00:02:32,564 --> 00:02:35,829
+It sends each change as an event, the moment it happens.
+
+22
+00:02:37,529 --> 00:02:41,339
+And it says what was deleted, so a deletion reaches every copy.
+
+23
+00:02:43,039 --> 00:02:50,419
+Contracts and deletions have films of their own: Moving is easy, agreeing is the work, and Deleted means deleted.
+
+24
+00:02:52,319 --> 00:02:58,039
+Sam Okafor, who runs the data platform, lists the systems the team takes data from.
+
+25
+00:02:59,539 --> 00:03:01,394
+The rooms' sensors can do all of it.
+
+26
+00:03:02,894 --> 00:03:07,235
+Payroll, on a system from 2004, sends one file a night.
+
+27
+00:03:08,735 --> 00:03:15,832
+The new timetable, bought as a service in 2026, can give its changes, but can't say what was deleted.
+
+28
+00:03:17,332 --> 00:03:21,332
+And the Faculty of Health books its nine clinical labs in a spreadsheet.
+
+29
+00:03:23,032 --> 00:03:26,714
+Old systems fall short of the preferred way, and so do new ones.
+
+30
+00:03:29,414 --> 00:03:34,547
+So the page gets a second half: a decision tree, for the providers who can't meet it.
+
+31
+00:03:36,247 --> 00:03:40,051
+First: can it send each change as an event? Then use the events.
+
+32
+00:03:41,951 --> 00:03:46,564
+If not, can it give its changes since a given time? Then fetch them every hour.
+
+33
+00:03:48,464 --> 00:03:55,906
+Can it say what was deleted? If not, compare its full list with ours every night. What's gone from its list was deleted.
+
+34
+00:03:58,006 --> 00:04:02,288
+Only a file? Take the whole file each night, and compare it the same way.
+
+35
+00:04:04,188 --> 00:04:08,694
+A spreadsheet? A data partner moves it into a governed table, with an owner.
+
+36
+00:04:10,594 --> 00:04:15,437
+The first paths have names: event-driven integration, and change data capture.
+
+37
+00:04:17,137 --> 00:04:22,378
+Every branch ends in a recommendation, and every path still keeps a contract with an owner.
+
+38
+00:04:24,078 --> 00:04:29,017
+The tree is kept as text in the team's repository, and its picture is drawn from it.
+
+39
+00:04:31,717 --> 00:04:35,231
+Monday 14 June: Sam tests the new timetable.
+
+40
+00:04:36,731 --> 00:04:42,587
+Mei Tanaka, in the registrar's office, cancels a class. The hourly changes never mention it.
+
+41
+00:04:44,487 --> 00:04:46,752
+So on the platform, the class stays booked.
+
+42
+00:04:48,452 --> 00:04:56,584
+Graham Ellis, the Director of Facilities, would see a booked room with nobody in it: a room that looks wasted, when it was free all along.
+
+43
+00:04:58,484 --> 00:05:04,147
+The vendor can add deletions to its changes, but not before its renewal, in 2028.
+
+44
+00:05:05,847 --> 00:05:11,263
+The tree has the answer: the changes every hour, and the full list of bookings every night.
+
+45
+00:05:12,963 --> 00:05:17,805
+Each night, a booking on the platform that's missing from the full list is marked deleted.
+
+46
+00:05:19,705 --> 00:05:23,323
+The new timetable goes live on Monday 19 July.
+
+47
+00:05:24,823 --> 00:05:34,546
+By Friday 30 July, the first week of teaching, the nightly comparison has found 212 deleted bookings the changes never mentioned.
+
+48
+00:05:36,446 --> 00:05:41,835
+212 hours that would have looked booked and empty on Graham's page stay off it.
+
+49
+00:05:44,535 --> 00:05:49,246
+The rooms' sensors take the preferred way: each hour's count arrives as an event.
+
+50
+00:05:50,946 --> 00:05:56,417
+Payroll's file is taken whole each night and compared, for Finance's casual staff costs.
+
+51
+00:05:58,117 --> 00:06:00,097
+A weaker path is checked more often.
+
+52
+00:06:01,597 --> 00:06:07,211
+If a night's file is much smaller than the night before, the comparison stops, and asks a person.
+
+53
+00:06:08,911 --> 00:06:17,945
+On Tuesday 24 August, payroll's file arrives cut short, and the check stops it before 2,400 staff are marked as gone.
+
+54
+00:06:20,045 --> 00:06:27,220
+Anil Kurian, the Faculty of Health's data partner, moves the labs' spreadsheet into a governed table, and owns it.
+
+55
+00:06:29,120 --> 00:06:32,723
+And each provider is asked for its next step up, in writing.
+
+56
+00:06:34,223 --> 00:06:44,083
+The timetable: its deletions, in the 2028 renewal. Payroll: a file of its changes, at its next upgrade. The labs: into the timetable.
+
+57
+00:06:46,783 --> 00:06:50,854
+The team lifts its providers towards the preferred way, a step at a time.
+
+58
+00:06:52,354 --> 00:06:55,505
+But it never holds the data back, waiting for the ideal.
+
+59
+00:06:57,405 --> 00:07:05,477
+On Thursday 30 September, Graham's page shows every teaching room and every lab, from four sources, by four paths.
+
+60
+00:07:07,377 --> 00:07:10,802
+Graham doesn't see the paths. He sees counts he can trust.
+
+61
+00:07:12,702 --> 00:07:18,608
+And Helena's page is still one page: the preferred way, the tree, and each provider's next step.
+
+62
+00:07:21,308 --> 00:07:27,879
+The Gateway City took its own cranes to ports that had none, and the box reached them years before their cranes did.
+
+63
+00:07:29,779 --> 00:07:35,937
+Helena's team did the same: a path for every provider, and Graham's counts true from the first week.
+
+64
+00:07:37,837 --> 00:07:40,713
+On Monday, write your preferred way on one page.
+
+65
+00:07:42,213 --> 00:07:46,945
+Draw the tree for the providers who can't meet it, each branch with its recommendation.
+
+66
+00:07:48,445 --> 00:07:52,857
+Ask each provider for its next step up, in its contract or its renewal.
+
+67
+00:07:54,357 --> 00:07:57,690
+Check the weaker paths more often, and don't hold value back.
+
+68
+00:07:59,390 --> 00:08:03,217
+One preferred way, a path for every provider, and value first.

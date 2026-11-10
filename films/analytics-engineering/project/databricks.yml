@@ -1,0 +1,67 @@
+# The project's jobs, as a Declarative Automation Bundle (formerly Databricks Asset Bundles): each job
+# written as a file in resources/, next to the models it runs, and deployed the same way to each
+# target (DEC-PRJ-16). Databricks only: the project's checks run on DuckDB, and nothing here runs in
+# this repository's CI. The workflow that deploys it is examples/scripts-became-software/release.yml.
+#
+#   databricks bundle validate -t test
+#   databricks bundle deploy -t dev                     # your own copy: names prefixed, schedules paused
+#   databricks bundle deploy -t test                    # by the release workflow, after a merge
+#   databricks bundle run -t test payroll_export
+#   databricks bundle deploy -t prod                    # by the release workflow, once Noor approves
+#
+# Nobody deploys to test or production from a laptop: the release workflow does, as the platform's
+# service principal.
+
+bundle:
+  name: data_project
+
+include:
+  - resources/*.yml
+
+variables:
+  warehouse_id:
+    description: The SQL warehouse that runs the SQL dbt generates, found by its name.
+    lookup:
+      warehouse: Data platform
+  catalog:
+    description: The Unity Catalog catalog the project builds into.
+  schema:
+    description: The schema dbt builds into, before each layer's suffix (prod gives prod_marts).
+  service_principal:
+    description: The platform's service principal, found by its name; test and production run as it.
+    lookup:
+      service_principal: data-platform
+
+targets:
+
+  # Each person's own copy, for trying a change: the bundle prefixes every name with theirs and
+  # pauses every schedule.
+  dev:
+    mode: development
+    default: true
+    variables:
+      catalog: dev
+      schema: ${workspace.current_user.short_name}
+
+  # The same files, deployed after a merge and run on test's data first.
+  test:
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    run_as:
+      service_principal_name: ${var.service_principal}
+    variables:
+      catalog: test
+      schema: test
+
+  # Production: only from main, only once Noor approves, as the service principal, never a person.
+  prod:
+    mode: production
+    git:
+      branch: main
+    workspace:
+      root_path: /Workspace/Shared/.bundle/${bundle.name}/${bundle.target}
+    run_as:
+      service_principal_name: ${var.service_principal}
+    variables:
+      catalog: university
+      schema: prod

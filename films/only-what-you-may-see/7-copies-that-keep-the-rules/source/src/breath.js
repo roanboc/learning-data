@@ -8,5 +8,5 @@ const BREATH={
 "share":{"hold":{"day":0.4,"hospital":0.6,"agreement":1.0,"opensharing":0.6,"travel":0.6,"why":0.8,"every":1.2,"totals":1.0}},
 "room":{"hold":{"harder":1.0,"both":1.0,"cleanroom":1.0,"view":1.0,"code":0.8,"approve":1.0,"hides":1.2,"runs":1.0,"answer":1.0}},
 "out":{"hold":{"day":0.4,"elena":0.6,"file":1.0,"switches":0.4,"ways":0.8,"code":0.8,"network":0.6,"photo":1.0,"clean":0.8}},
-"kept":{"hold":{"seen":1.0,"four":0.6,"each":1.2},"breathe":4.6}
+"kept":{"hold":{"seen":1.0,"four":0.6,"each":1.2},"breathe":6.0}
 };

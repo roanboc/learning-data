@@ -3,13 +3,13 @@
 Optional. Everything here runs only on the `databricks` target; DuckDB stays the default and needs
 none of it. The project decides each column's class once, in the model's YAML (`meta.personal_data`),
 and the platform protects what the project says is personal (DEC-PRJ-13). Product names and their
-status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, and section 10 again and section 11 on 5 November: check them again on the day.
+status were checked on 20 October 2026, sections 5 to 7 on 28 October, section 8 on 29 October, sections 9 and 10 on 4 November, section 10 again and sections 11, 13 and 15 on 5 November, and sections 12, 14 and 16 on 10 November: check them again on the day.
 
 ## 1. Tags, every build
 
-Nothing to set up. After each table builds, every classified column gets a Unity Catalog tag,
-`personal_data`, with its class: `direct`, `pseudonymous` or `none`
-(`macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
+Nothing to set up in the build. After each table builds, every classified column gets the governed tag `personal_data`,
+with its class: `special`, `direct`, `pseudonymous` or `indirect` (`none` is no tag); then the faculty column gets `faculty`,
+and the table its `level` (section 16; `macros/governance/personal_data.sql`). Change the class in the YAML and the next build changes the tag.
 
 ```bash
 dbt build --target databricks --profiles-dir .
@@ -33,10 +33,10 @@ Unity Catalog's attribute-based access control (ABAC) masks by tag: one policy c
 tagged `personal_data = direct`, in every schema of the catalog, including tables built later. A
 column with its own mask conflicts with a policy on it, so use this or step 2, not both.
 
-1. An account admin makes `personal_data` a **governed tag**, with the allowed values `direct`,
-   `pseudonymous` and `none` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*).
-   Governed, only those three values can be set, and only by someone with `ASSIGN` on the tag:
-   give it to the identity that runs dbt.
+1. An account admin makes `personal_data` a **governed tag**, with the values `special`, `direct`,
+   `pseudonymous` and `indirect` (Catalog Explorer: *Govern*, *Governed Tags*, *Create governed tag*;
+   section 16). Governed, only those four values can be set, and only by someone with `ASSIGN` on the
+   tag: give it to the identity that runs dbt.
 2. Build with the policy var, so the build tags and leaves masking to the policy:
 
    ```bash
@@ -62,7 +62,7 @@ Some of ABAC is in Beta (policies on views, on the whole metastore): check what'
 Ontos, from Databricks Labs, is a business catalogue for Unity Catalog: data products, data contracts,
 glossaries and semantic models, with review workflows. It runs as a Databricks App (its README:
 `databricks bundle deploy`, then `databricks apps deploy`). It follows ODCS v3.1.0, the version of the
-contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
+enterprise contracts in `governance/5-data-contracts/`, and the Open Data Product Standard, as
 `governance/6-product-descriptors/` does. Load the
 contracts and products from there; the files in this repository stay their home, and the catalogue
 keeps a copy (Noor's map: *data contract* and *data product* in `governance/3-architecture-map/4-information/`).
@@ -240,9 +240,9 @@ The model's YAML names them: a column's `meta.critical_for` lists the uses that 
 (the graduation list's printed name for the certificates and the programme; its ceremony and
 attendance for the seating plan). After the table builds, dbt tags each of those columns with the
 key-only tag `critical_data`, and takes the tag off a column no use needs any more
-(`macros/governance/critical_data.sql`). The same columns are the contract's critical data elements
-(`criticalDataElement`), and its quality section says what each use needs, at the level agreed with
-the people who use it (`docs/conventions.md`, *What each use needs*). Once, on the platform:
+(`macros/governance/critical_data.sql`). The model's YAML names them (`meta.critical_for`), and its
+`meta.quality` says what each use needs, at the level agreed with the people who use it
+(`docs/conventions.md`, *What each use needs*). Once, on the platform:
 
 1. An account admin makes `critical_data` a governed tag, with no values (Catalog Explorer:
    *Govern*, *Governed Tags*, *Create governed tag*). Governed, only those with `ASSIGN` on it can
@@ -259,10 +259,218 @@ from information_schema.column_tags
 where tag_name = 'critical_data'
 ```
 
-## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, and the last two, on 5 November 2026)
+## 12. Deleted means deleted
+
+When the privacy office approves a request to erase someone's data, the data team deletes it where
+it starts, then from every copy, each on its date, and can show when the last one went. HR's
+tutors' newsletters show how: the list, `mart_hr__tutors_mailing_list`, and its send log,
+`mart_hr__tutor_news_sent`. Nothing here runs in the build.
+
+1. **Where it starts.** HR builds the list again at the start of each teaching period, from HR's
+   records: each casual tutor whose answer about news of tutoring work is yes
+   (`stg_hr_system__wishes`). A row deleted only from the list would come back at the next build,
+   so the person's no goes on their record in HR's system, put there by the owner of HR's records,
+   and each table made from it follows. The rest of the record stays: HR keeps pay records by law.
+2. **What only adds rows gets its own delete.** The send log is incremental: each build adds the
+   newsletters sent since the last, so rebuilding the list never touches it. It can't be built
+   again from the start (`full_refresh: false`), or HR's records would bring back everyone the
+   deletes removed.
+3. **One job, by request.** `privacy-deleter`, the nightly deletion job, a service principal owned
+   by Sam Okafor, who runs the data platform, runs at 01:00, before the 02:00 load, for each request
+   the office has approved:
+
+   ```bash
+   dbt run-operation erase_a_request --args '{request: "2026-117"}' --target databricks --profiles-dir .
+   dbt run-operation clean_up_old_files --target databricks --profiles-dir .
+   ```
+
+   Each model whose meta names `erase_by`, with its key set and column, loses the rows whose key is
+   one of the request's (`macros/privacy/erase.sql`). The keys are read from the restricted table
+   `privacy.request_keys` (`request`, `system`, `key`), which only the privacy office's group and
+   its jobs may read. So the job's code and every statement name the request, never the person:
+   `system.query.history` keeps each statement's text for a year, and nobody can edit it.
+4. **A delete, a purge, then VACUUM.** A delete makes a new version of the table, and its history
+   (`DESCRIBE HISTORY`) records it, like a receipt; time travel still reads the versions before it.
+   Both tables have deletion vectors on (`delta.enableDeletionVectors`), so a delete only marks the
+   rows, in files that still hold them: the job then rewrites those files without them
+   (`REORG TABLE ... APPLY (PURGE)`). The old files are kept 7 days
+   (`delta.deletedFileRetentionDuration`, the default), so a mistake can be undone. `VACUUM`, the
+   job's last step each night, removes them on the seventh night after the delete, and with them
+   every version that still held the rows.
+5. **The proof.** `analyses/privacy/check_a_request_is_gone.sql` counts the request's rows in each
+   of those tables, now and as the table was before the delete:
+
+   ```bash
+   dbt compile --target databricks --profiles-dir . --select check_a_request_is_gone \
+       --vars '{request: "2026-117", before: "2026-11-24"}'
+   ```
+
+   The first count is 0 the morning after the job. The second finds the rows for 7 days, then
+   fails with an error, because the old files are gone.
+6. **Every copy.** Lineage shows each table built from HR's records, and each column's
+   `personal_data` tag what it holds (section 1). A copy outside the platform is an exposure: the
+   mailing tool copies the list each night at 04:00 and drops whoever has left it, and its contract
+   says its own backups lose them within 30 days (`exposures/hr/`); HR, the copy's owner, checks
+   that. Each night's locked copy of production, kept 30 days in a place apart, can't be deleted
+   early, even by an admin (on Azure, for example, immutable storage with a locked time-based
+   retention policy): a person's rows stay in the copies made before the delete, out of use, until
+   each is removed. A restored copy is read by no one until the job has run every answered request
+   against it again, so a request's keys stay in `privacy.request_keys` until the last locked copy
+   that can hold its rows is gone (for request 2026-117, on 24 December).
+7. **Cold, until its day.** Payroll's pay records (`examples/hot-warm-cold/pay_records_archive.sql`)
+   are kept 7 years after each contract ends, and once a contract has ended, only HR's records team
+   reads its records. A year after they're written, their files move to Azure Storage's archive
+   tier, where a file can't be read, changed or deleted until it's brought back, which takes hours.
+   So the files are grouped by the year each contract ended: each January, a clean-up job brings
+   back the year whose seven years have passed (`SHOW ARCHIVED FILES` lists its files), deletes it
+   whole, unless a hold keeps part of it, then purges and vacuums.
+8. **Out of the logs.** Deletes, checks and searches name the request, never the person. An agent's
+   trace records each prompt and answer, and the gateway's inference tables keep each request and
+   response: email addresses are masked before a trace is saved (MLflow's masking), and traces and
+   the inference tables' rows are deleted after 30 days, the university's rule. A ticket names no
+   one: an issue keeps its edits, and every commit is copied to every clone.
+
+## 13. A person's request
+
+How the data team does its part of a request the privacy office has logged: a person asks what the
+university holds about them, to correct or erase something, or to stop a use. The office answers
+within 30 days, the university's own rule. Nothing here runs in the build.
+
+1. **The ticket names no one.** The office logs the request with its number and the day it's due,
+   and the data team opens an issue from `examples/a-person-asks/privacy-request.yml`: the number,
+   the due date and the steps, as a task list. The person's numbers go only into the restricted
+   table `privacy.request_keys` (`request`, `system`, `key`; `system` is the key set, as
+   `macros/shared/keys.sql` writes it), which the office's group and two service principals may
+   read: `privacy-finder`, which searches, and `privacy-deleter`, the nightly deletion job of
+   section 12. Never into an issue, a chat or a query's text: `system.query.history` keeps each
+   query's text for a year, readable by account admins and the `databricks_pii_access` group.
+2. **Where to look.** Every model built from the systems the numbers come from, from the project:
+
+   ```bash
+   dbt ls --resource-type model --profiles-dir . --select \
+       source:hr_system+ source:student_system+ source:alumni_system+ \
+       source:research_system+ source:learning_platform+
+   ```
+
+   And, on the platform, everything built from those systems' tables, by notebooks, jobs and
+   dashboards too, with its columns classed `direct` or `pseudonymous`:
+   `analyses/privacy/where_a_person_is.sql`. Lineage records only what it can infer, and only on
+   the platform: systems outside it are searched by their owners.
+3. **Look, by number and by code.** For each column, `analyses/privacy/find_a_person.sql` counts the
+   rows that hold one of the numbers as the system writes it, as the project's key, or as the code
+   made from it (`hash_key`, the sha-256 of the key in upper case). The wallet, planning and finance
+   marts hold a learner only as that code. `privacy-finder` has to see real values to match them,
+   so the masks' policy (section 3) lists it among the identities it doesn't mask; it reads, and
+   never deletes.
+4. **Prove it.** Each step of the issue is ticked with a link: the search's run, the table's history
+   (`DESCRIBE HISTORY`) for a delete, the reads of the keys table from the audit log
+   (`analyses/privacy/who_read_the_keys.sql`), each owner's check, the answer. The office tracks
+   every request's due date with `analyses/privacy/requests_due.sql`: a request near its date is
+   work still to do, not a failing test.
+5. **Close it.** When the answer is sent, the issue closes. The request's rows stay in
+   `privacy.request_keys` until the last locked copy that can hold the person's rows is gone (for
+   request 2026-117, on 24 December), so a copy restored before then has the request applied again
+   before anyone reads it; then they leave.
+
+## 14. Reports due today, every morning
+
+When a graduate presses "This isn't my name" in the portal, the registrar's office promises an
+answer within two working days. That's a rule about what people do, not about whether the data is
+right, so it's tracked in a model of its own, `mart_graduations__name_reports`, reviewed every week
+and never failed as a test (`docs/conventions.md`, *Tests*). The office hears what's due from a
+Databricks SQL alert, which runs a query on a schedule and notifies when its result meets a
+condition. Once, on the platform:
+
+1. Compile the alert's query, `analyses/alerts/name_reports_due_today.sql`
+   (`dbt compile --target databricks --select name_reports_due_today --profiles-dir .`), and create
+   an alert with it. An alert keeps its own query: a saved query can't be reused.
+2. The condition: the sum of `reports_due` is greater than 0. Set *Empty result state* to OK, so a
+   morning with nothing due sends nothing.
+3. The schedule: every day at 8:00, in Quartz cron syntax `0 0 8 * * ?`.
+4. The notification: the registrar's office's email destination, with a custom template that
+   includes `{{QUERY_RESULT_TABLE}}`, the list itself (its first 100 rows; only email shows it).
+   The names in it are direct personal data (section 3), so it goes to the office that owns them,
+   and to no one else.
+
+The alert can also be written as code, an `alerts` resource in a bundle, so a change to it is
+reviewed like any other change to the project.
+
+## 15. Who reads which faculty, a row filter
+
+Finance's claims, `mart_finance__casual_claims`, are read by every faculty's planners and by Finance,
+through the metric view `casual_teaching_cost` and every tool that reads it (DEC-FIN-06). A faculty
+may read its own claims only; Finance, every faculty's. The rule is a row filter on the table: a SQL
+function, in Unity Catalog, that sees who is asking, so it holds for every reader, through the
+metric view too, and no reader's code repeats it. Name the groups, and add the identity that runs
+dbt to the one that reads every faculty: the tests, the metric view and the shared totals
+(`mart_finance__faculty_totals`) read the claims as it does.
+
+```bash
+dbt build --target databricks --profiles-dir . --vars '{faculty_readers: {all: all_faculties, HLT: health_planners, EIT: engineering_planners}}'
+```
+
+Before the build, dbt creates `faculty_row_filter` in the target's schema; after the claims table
+builds, it sets the filter on its `faculty_code` (`macros/finance/faculty_row_filter.sql`). A faculty
+the var doesn't name is read by `all_faculties` only. A group says which rows a reader sees; what it
+may read at all is still its grants: Finance's pay-day agent is in `all_faculties`, with `SELECT` on
+the metric view and nothing under it (`examples/more-readers-than-people/`). One table needs the
+rule, so it's the table's own filter; attribute-based policies set the same kind of rule, by tag, on
+many tables at once (section 3 does it for masks).
+
+## 16. Tags that travel
+
+On Databricks, a column's class is one of five, the strictest that applies, as its `meta.personal_data`
+says: `special`, `direct`, `pseudonymous`, `indirect` or `none` (DEC-PRJ-17, amending DEC-PRJ-13). After
+each table builds (section 1), every classified column gets the governed tag `personal_data` with its
+class. A column the YAML marks `none` gets no tag, and the build takes an old one off: a `none` tag would
+meet a real class in any column made from both. Then the column that holds each row's faculty
+(`meta.faculty: true`) gets the key-only tag `faculty`, and last the table gets its `level` (`meta.level`:
+`public`, `internal`, `confidential` or `restricted`; in `dbt_project.yml`, `confidential` for the core
+and the marts and `internal` for `_shared`, unless a model's YAML says another). The build stops on a
+level under its two floors: a table with a column that points to a person (`direct`, `pseudonymous` or
+`indirect`) is never `public`, and one with anything `special` is `restricted`
+(`macros/governance/personal_data.sql`).
+
+Once, on the platform (checked 10 November 2026):
+
+1. An account admin makes three **governed tags** (Catalog Explorer: *Govern*, *Governed Tags*):
+   `personal_data`, with the values `special`, `direct`, `pseudonymous` and `indirect`; `level`, with
+   `public`, `internal`, `confidential` and `restricted`; and `faculty`, with no values. Governed, only
+   those values can be set, and only by someone with `ASSIGN` on the tag: give it to the identity that
+   runs dbt, and to no person. If `personal_data` was made with `none` among its values, set its values
+   again: a `none` tag already on a column stays until the next build takes it off.
+2. Someone with `MANAGE` on the tags turns on **tag propagation** for `personal_data`, with `special` as
+   its default propagation value, and for `faculty`; never for `level`, or a table joined from a public
+   table and a confidential one would be a conflict every time. Each class then follows its column
+   through lineage into the tables and views made from it on serverless compute, usually within
+   minutes, with nobody tagging them. Two values for one tag in one column is a conflict: the column
+   takes the default value. A policy can't see a tag until it has arrived. Propagation is in Beta on
+   10 November 2026: a workspace admin turns it on first, on the *Previews* page.
+3. Look for conflicts. `analyses/governance/classes_against_lineage.sql` lists every column whose class
+   differs from the class of a column it was made from. In this project, the marts'
+   `learner_award_key` is one: it's made from the learner table's `learner_bk` (`direct`), and its YAML
+   says `pseudonymous`, so with propagation on it takes `special`. A value that says less is made once,
+   at the source, by its owner, and every table after takes it.
+
+Tags start on the tables people read. Staging and intermediate are views nobody is granted, and they
+carry no tags, so `learner_key`, made there, arrives in the core with no class to conflict with its own.
+Propagation doesn't follow data out of the platform (a file downloaded, a copy in another tool), and
+doesn't reach what classic compute makes, or a pipeline's streaming tables and materialized views.
+
+## Sources (checked 20 October 2026; *SET TAG* to *TABLE_PRIVILEGES* on 28 October 2026; *Configure access request destinations* to Ontos's workflows on 29 October 2026; *Unity Gateway release notes* to the end on 4 November 2026, *Skills support in Unity Gateway* to the end again, the last two, on 5 November 2026; *Prepare your data for GDPR compliance* to *Removing sensitive data from a repository*, for section 12, on 10 November 2026; *Query history system table* to *Syntax for issue forms*, for section 13, on 5 November 2026; *Databricks SQL alerts* to *Declarative Automation Bundles resources*, for section 14, on 10 November 2026; and the last two, for section 15, on 5 November 2026)
 
 - Databricks, *Create and manage attribute-based access control (ABAC) policies*:
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policies
+- Databricks, *Governed tags* (allowed values, and who may assign them), checked 10 November 2026:
+  https://docs.databricks.com/aws/en/admin/governed-tags/
+- Databricks, *Tag propagation* (through lineage, per tag; a conflict takes the default propagation
+  value; serverless compute; not classic compute, volumes, or pipelines' streaming tables and
+  materialized views; a policy isn't enforced on a derived table until the tag appears), checked
+  10 November 2026: https://docs.databricks.com/aws/en/admin/governed-tags/tag-propagation
+- Databricks, *Data Classification* (a scan that proposes classes for the columns it recognises),
+  checked 10 November 2026: https://docs.databricks.com/aws/en/data-governance/unity-catalog/data-classification
+- Databricks, *Lineage system tables reference* (`system.access.column_lineage`), checked 10 November
+  2026: https://docs.databricks.com/aws/en/admin/system-tables/lineage
 - Databricks, *ABAC tutorial (SQL)*: https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/tutorial-sql
 - Databricks, *Policy evaluation* (manual masks conflict with ABAC masks):
   https://docs.databricks.com/aws/en/data-governance/unity-catalog/abac/policy-evaluation
@@ -322,3 +530,51 @@ where tag_name = 'critical_data'
   there fails; Databricks Runtime 16.1 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-ddl-set-tag
 - Databricks, *COLUMN_TAGS* (the tags on each column, by catalog, schema and table):
   https://docs.databricks.com/aws/en/sql/language-manual/information-schema/column_tags
+- Azure Databricks, *Prepare your data for GDPR compliance* (delete where the data starts, from a
+  scheduled job driven by a table of requests, then upstream and downstream):
+  https://learn.microsoft.com/en-us/azure/databricks/security/privacy/gdpr-delta
+- Azure Databricks, *Deletion vectors in Databricks* (a delete marks rows; a purge rewrites the files):
+  https://learn.microsoft.com/en-us/azure/databricks/delta/deletion-vectors
+- Azure Databricks, *REORG TABLE* (`APPLY (PURGE)` rewrites the files that hold deleted rows):
+  https://learn.microsoft.com/en-us/azure/databricks/sql/language-manual/delta-reorg-table
+- Azure Databricks, *Remove unused data files with vacuum* (7 days by default; at least 7 strongly
+  recommended): https://learn.microsoft.com/en-us/azure/databricks/delta/vacuum
+- Azure Databricks, *Work with table history* (time travel needs a version's log and data files;
+  `deletedFileRetentionDuration`): https://learn.microsoft.com/en-us/azure/databricks/delta/history
+- Azure Databricks, *Archival support in Azure Databricks* (Public Preview; a delete that touches an
+  archived file fails): https://learn.microsoft.com/en-us/azure/databricks/optimizations/archive-delta
+- Azure Storage, *Access tiers for blob data* (the archive tier is offline; bringing a file back can
+  take up to 15 hours): https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview
+- Azure Storage, *Immutable storage for blob data* (under a time-based retention policy, a file can be
+  read, not changed or deleted): https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-storage-overview
+- Azure Databricks, *Query history system table reference* (each statement's text):
+  https://learn.microsoft.com/en-us/azure/databricks/admin/system-tables/query-history
+- Azure Databricks, *Log requests and responses to inference tables* (each request and response, in a
+  Delta table): https://learn.microsoft.com/en-us/azure/databricks/ai-gateway/inference-tables
+- MLflow, *Redacting sensitive data from traces* (masked in the application, before a trace is saved):
+  https://mlflow.org/docs/latest/genai/tracing/observe-with-traces/masking/
+- dbt, *full_refresh* (false: never built again from the start, whatever the flag):
+  https://docs.getdbt.com/reference/resource-configs/full_refresh
+- dbt, *Incremental models*: https://docs.getdbt.com/docs/build/incremental-models
+- GitHub, *Removing sensitive data from a repository* (clones and forks keep their copies):
+  https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+- Databricks, *Query history system table* (a query's text is kept, readable only by account admins and
+  the `databricks_pii_access` group, since it can hold personal data): https://docs.databricks.com/aws/en/admin/system-tables/query-history
+- Databricks, *Prepare your data for GDPR compliance* (a table of requests that drives a scheduled job):
+  https://docs.databricks.com/aws/en/ldp/gdpr
+- Databricks, *Common table expression (CTE)* (a recursive query needs Databricks SQL or Databricks
+  Runtime 17.0 and above): https://docs.databricks.com/aws/en/sql/language-manual/sql-ref-syntax-qry-select-cte
+- Databricks, *DESCRIBE HISTORY* (each version of a table, its operation and who made it):
+  https://docs.databricks.com/aws/en/sql/language-manual/delta-describe-history
+- dbt, *Graph operators* (`source:name+`, a source and everything built from it):
+  https://docs.getdbt.com/reference/node-selection/graph-operators
+- GitHub, *Syntax for issue forms*: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-discussions/syntax-for-issue-forms
+- Databricks, *Databricks SQL alerts* (a query on a schedule, and a notice when its result meets a
+  condition; a saved query can't be reused): https://docs.databricks.com/aws/en/sql/user/alerts/
+- Databricks, *Create an alert* (the condition, *Empty result state*, Quartz cron, and the template
+  variables, `QUERY_RESULT_TABLE` among them): https://docs.databricks.com/aws/en/sql/user/alerts/create
+- Databricks, *Declarative Automation Bundles resources* (an alert, `alerts` in a bundle):
+  https://docs.databricks.com/aws/en/dev-tools/bundles/resources
+- Databricks, *Row filters and column masks* (a row filter is a SQL function that sees who is asking,
+  set on a table with `ALTER TABLE ... SET ROW FILTER`): https://docs.databricks.com/aws/en/data-governance/unity-catalog/filters-and-masks/
+- Databricks, *Unity Catalog metric views*: https://docs.databricks.com/aws/en/uc-semantics/metric-views

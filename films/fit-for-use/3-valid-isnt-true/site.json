@@ -38,7 +38,6 @@
     "which": [
       "tests/rules/names_are_allowed.sql",
       "models/marts/graduations/_graduations__models.yml",
-      "governance/5-data-contracts/mart_graduations__graduation_list.yaml",
       "docs/scorecard.md"
     ]
   },

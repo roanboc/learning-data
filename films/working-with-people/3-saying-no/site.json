@@ -1,0 +1,94 @@
+{
+  "kicker": "When too much is asked",
+  "kicker_es": "Cuando se pide demasiado",
+  "title_es": "Decir que no, y qué ofrecer a cambio",
+  "h1": "Saying no, and what instead: say what you can do, and when",
+  "h1_es": "Decir que no, y qué ofrecer a cambio: di lo que sí puedes hacer, y cuándo",
+  "lead": "In July 2027 Planning asks the university's data team for a new forecast model by the end of August, in the same weeks the timetable change needs Jun and Noor. Helena asks what the date is for, puts both asks on the one list, and offers what the team can do well, and when.",
+  "lead_es": "En julio de 2027, Planificación pide al equipo un nuevo modelo de pronóstico para fines de agosto, las mismas semanas en que el cambio de horario necesita a Jun y a Noor. Helena pregunta para qué es la fecha, pone ambos pedidos en la única lista y ofrece lo que el equipo puede hacer bien, y cuándo.",
+  "description": "A film about saying no, the third of Working with people in the module Leading data people: when more is asked than a team can do well, a bare no helps nobody, and neither does a yes nobody can keep; Roger Fisher and William Ury's Getting to Yes (a position and the interest behind it, options for both interests, fair criteria) and Ury's The Power of a Positive No (a yes to what you must protect, a clear no, then an offer), each named once; on Monday 12 July 2027 Clara Jensen, in Planning, asks for a new student forecast model by the end of August, in the same weeks the registrar's office needs the rooms' data for the timetable change, and both need Jun and Noor; Helena Novak, the data manager, asks first: on Wednesday 14 July she and Noor find with Clara what the date is for (next year's numbers for the 2028 budget round, which closes on Friday 17 September, and earlier warning for admissions); both asks go on the team's one list, side by side, with their dates, what they're for and their weeks, ordered by value, urgency, effort and risk, never by who asks; her positive no: yes to the timetable change and to work done well, no new model by August, the current model refreshed by Friday 27 August and the new one by Friday 29 October; it's Clara's to choose, both dates go on the list in writing, each is kept, and in November Clara brings Planning's next request early. It opens at the Aral Sea, where Kazakhstan's Kok-Aral dam saved the northern sea in 2005: a plain no to the whole sea, and a yes to the part that could be saved.",
+  "description_es": "Una película sobre decir que no, la tercera de Trabajar con personas en el módulo Liderar equipos de datos: cuando se pide más de lo que un equipo puede hacer bien, un no a secas no ayuda a nadie, y tampoco un sí que nadie puede cumplir; Obtenga el sí, de Roger Fisher y William Ury (una posición y el interés detrás de ella, opciones para ambos intereses, criterios justos), y El poder de un no positivo, de Ury (un sí a lo que debes proteger, un no claro y luego una propuesta), nombrados una vez; el lunes 12 de julio de 2027, Clara Jensen, de Planificación, pide un nuevo modelo de pronóstico de estudiantes para fines de agosto, las mismas semanas en que la oficina de registro necesita los datos de las aulas para el cambio de horario, y los dos necesitan a Jun y a Noor; Helena Novak, la gestora de datos, primero pregunta: el miércoles 14 de julio, ella y Noor averiguan con Clara para qué es la fecha (las cifras del próximo año para el presupuesto de 2028, que cierra el viernes 17 de septiembre, y un aviso más temprano para las admisiones); los dos pedidos van a la única lista del equipo, lado a lado, con sus fechas, para qué son y sus semanas, ordenados por valor, urgencia, esfuerzo y riesgo, nunca por quién pide; su no positivo: sí al cambio de horario y al trabajo bien hecho, no al modelo nuevo para agosto, el modelo actual al día para el viernes 27 de agosto y el nuevo para el viernes 29 de octubre; Clara elige, las dos fechas quedan por escrito en la lista, cada una se cumple, y en noviembre Clara trae temprano el siguiente pedido de Planificación. Empieza en el mar de Aral, donde la presa de Kok-Aral, de Kazajistán, salvó el mar del norte en 2005: un no claro a todo el mar, y un sí a la parte que se podía salvar.",
+  "card": "Two asks need the same weeks. Helena asks what the date is for, shows the trade-off, and offers what the team can do, and when.",
+  "card_es": "Dos pedidos necesitan las mismas semanas. Helena pregunta para qué es la fecha, muestra la disyuntiva y ofrece qué puede hacer, y cuándo.",
+  "chapters_es": {
+    "aral": "Salvar lo que se puede salvar",
+    "asks": "Dos pedidos, las mismas semanas",
+    "date": "¿Para qué es la fecha?",
+    "open": "La disyuntiva, a la vista de todos",
+    "offer": "Un no, y qué ofrecer a cambio",
+    "kept": "Cumplido, a tiempo",
+    "monday": "El lunes"
+  },
+  "past": [
+    "The Aral Sea, 1960 to 2008: save the part that can be saved",
+    "Its two rivers were turned to grow cotton and rice in the desert, and the sea shrank and split in two. Bringing it all back would have meant taking the water from the farms. Kazakhstan saved the northern part with a dam, and its water, its fish and its fishing came back."
+  ],
+  "past_es": [
+    "El mar de Aral, de 1960 a 2008: salvar la parte que se puede salvar",
+    "Sus dos ríos se desviaron para regar algodón y arroz en el desierto, y el mar se encogió y se partió en dos. Recuperarlo entero habría significado quitarles el agua a los campos. Kazajistán salvó la parte norte con una presa, y volvieron el agua, los peces y la pesca."
+  ],
+  "next_h": "You've seen a no that offers what the team can do, and when. Next, a new series: what a team stops doing, together.",
+  "next_h_es": "Viste un no que ofrece lo que el equipo sí puede hacer, y cuándo. Después, una nueva serie: lo que un equipo deja de hacer, entre todos.",
+  "elsewhere": {
+    "h": "Go further",
+    "h_es": "Para seguir",
+    "p": "The film names each idea once. These pages go further, and are free to read. Checked on 10 November 2026.",
+    "p_es": "La película nombra cada idea una vez. Estas páginas van más allá y se leen gratis. Revisadas el 10 de noviembre de 2026.",
+    "links": [
+      {
+        "title": "Getting to Yes, by Roger Fisher and William Ury",
+        "title_es": "Obtenga el sí, de Roger Fisher y William Ury (en inglés)",
+        "line": "The book's method in brief: separate the people from the problem, focus on interests rather than positions, invent options for mutual gain, and insist on criteria both sides can check.",
+        "line_es": "El método del libro en breve: separar a las personas del problema, centrarse en los intereses y no en las posiciones, inventar opciones de beneficio mutuo e insistir en criterios que ambas partes puedan comprobar.",
+        "href": "https://en.wikipedia.org/wiki/Getting_to_Yes",
+        "href_es": "https://en.wikipedia.org/wiki/Getting_to_Yes"
+      },
+      {
+        "title": "The Power of a Positive No, by William Ury",
+        "title_es": "El poder de un no positivo, de William Ury (en inglés)",
+        "line": "The author's page for the book: a yes to what you must protect, a clear and respectful no, and then a proposal the other person can say yes to.",
+        "line_es": "La página del autor sobre el libro: un sí a lo que debes proteger, un no claro y respetuoso, y luego una propuesta a la que la otra persona pueda decir que sí.",
+        "href": "https://www.williamury.com/the-power-of-a-positive-no/",
+        "href_es": "https://www.williamury.com/the-power-of-a-positive-no/"
+      },
+      {
+        "title": "Saving the northern Aral Sea, World Bank, 2008",
+        "title_es": "Salvar el norte del mar de Aral, Banco Mundial, 2008 (en inglés)",
+        "line": "The World Bank's account of the Kok-Aral dam and the works upstream, with the water's level, its salt, the fish and the towns in numbers.",
+        "line_es": "El relato del Banco Mundial sobre la presa de Kok-Aral y las obras río arriba, con el nivel del agua, su sal, los peces y los pueblos en cifras.",
+        "href": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/888771468089960580",
+        "href_es": "https://documents.worldbank.org/en/publication/documents-reports/documentdetail/888771468089960580"
+      },
+      {
+        "title": "World of Change: Shrinking Aral Sea, NASA",
+        "title_es": "El mar de Aral que se encoge, NASA (en inglés)",
+        "line": "Satellite pictures of the sea year by year since 2000: the southern sea drying, and the northern sea held behind its dam.",
+        "line_es": "Imágenes de satélite del mar, año a año desde 2000: el mar del sur secándose y el del norte retenido tras su presa.",
+        "href": "https://science.nasa.gov/earth/earth-observatory/world-of-change/aral-sea/",
+        "href_es": "https://science.nasa.gov/earth/earth-observatory/world-of-change/aral-sea/"
+      },
+      {
+        "title": "Aral Sea",
+        "title_es": "Mar de Aral",
+        "line": "The sea's history, from the rivers turned to irrigation to the Kok-Aral dam, and what happened to the towns around it.",
+        "line_es": "La historia del mar, desde los ríos desviados para el riego hasta la presa de Kok-Aral, y lo que pasó con los pueblos de su orilla.",
+        "href": "https://en.wikipedia.org/wiki/Aral_Sea",
+        "href_es": "https://es.wikipedia.org/wiki/Mar_de_Aral"
+      }
+    ],
+    "more": [
+      {
+        "text": "The project's page at the World Bank, with its documents and results (in English)",
+        "text_es": "La página del proyecto en el Banco Mundial, con sus documentos y resultados (en inglés)",
+        "href": "https://projects.worldbank.org/en/projects-operations/project-detail/P046045",
+        "href_es": "https://projects.worldbank.org/en/projects-operations/project-detail/P046045"
+      },
+      {
+        "text": "The Kok-Aral dam",
+        "text_es": "La presa de Kok-Aral (en inglés)",
+        "href": "https://en.wikipedia.org/wiki/Dike_Kokaral",
+        "href_es": "https://en.wikipedia.org/wiki/Dike_Kokaral"
+      }
+    ]
+  }
+}

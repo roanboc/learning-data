@@ -8,25 +8,28 @@ Every test that ran, by the domain of the data it checks and its quality dimensi
 |---|---|---|---|---|---|---|
 | `alumni` | 3/3 | 1/1 |  | 1/1 |  | 5/5 |
 | `course` | 3/3 | 2/2 | 2/2 | 1/1 |  | 8/8 |
-| `finance` | 2/2 | 5/5 | 4/4 | 2/2 | 1/1 | 14/14 |
-| `hr` | 10/10 | 3/3 | 5/5 | 3/3 |  | 21/21 |
+| `finance` | 12/12 | 9/9 | 4/4 | 2/2 | 1/1 | 28/28 |
+| `hr` | 16/16 | 7/7 | 6/6 | 4/4 |  | 33/33 |
 | `learning` | 7/7 (1 warn) | 5/5 | 7/7 | 3/3 |  | 22/22 (1 warn) |
 | `planning` |  | 3/3 | 1/1 | 1/1 | 1/1 | 6/6 |
-| `registrar` | 17/17 | 7/7 | 8/8 | 6/6 |  | 38/38 |
+| `registrar` | 24/24 | 11/11 | 13/13 (2 warn) | 7/7 |  | 55/55 (2 warn) |
 | `research` | 8/8 | 3/3 | 1/1 | 5/5 |  | 17/17 |
 | `shared` | 1/1 | 1/1 |  |  |  | 2/2 |
 | `staff` | 5/5 | 4/4 | 1/1 | 2/2 |  | 12/12 |
-| `student` | 25/25 | 18/18 | 8/8 | 18/18 | 4/4 (2 warn) | 73/73 (2 warn) |
+| `student` | 26/26 | 21/21 | 9/9 | 20/20 | 6/6 (3 warn) | 82/82 (3 warn) |
 | `wallet` |  | 2/2 | 1/1 | 1/1 |  | 4/4 |
-| **All** | 81/81 (1 warn) | 54/54 | 38/38 | 43/43 | 6/6 (2 warn) | 222/222 (3 warn) |
+| **All** | 105/105 (1 warn) | 69/69 | 45/45 (2 warn) | 47/47 | 8/8 (3 warn) | 274/274 (6 warn) |
 
 ## Not passed
 
 | Status | Domain | Dimension | Test | Owner | Rows |
 |---|---|---|---|---|---|
 | warn | `learning` | completeness | `not_null_stg_short_courses__enrolments_customer_bk` | Learning team | 1 |
+| warn | `registrar` | validity | `family_name_in_capitals_only` | Mei Tanaka, registrar's office | 3 |
+| warn | `registrar` | validity | `family_name_may_be_cut_short` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_at_30` | Mei Tanaka, registrar's office | 2 |
 | warn | `student` | accuracy | `graduation_list_family_name_in_capitals` | Mei Tanaka, registrar's office | 2 |
+| warn | `student` | accuracy | `old_form_names_not_yet_confirmed` | Mei Tanaka, registrar's office | 1 |
 
 ## What each accuracy test checks against
 
@@ -40,3 +43,13 @@ A test measures accuracy only against a reference outside the data, such as a re
 | `student` | `graduation_list_accents_all_gone` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_at_30` | **none named** | Mei Tanaka, registrar's office |
 | `student` | `graduation_list_family_name_in_capitals` | **none named** | Mei Tanaka, registrar's office |
+| `student` | `old_form_names_not_yet_confirmed` | the graduate | Mei Tanaka, registrar's office |
+| `student` | `printers_file_has_the_names_graduates_gave` | The graduate, through their last answer in the portal | Mei Tanaka, registrar's office |
+
+## Hand-check hours
+
+The hidden work, counted: the hours the graduations team spent checking the graduation list's names by hand before each round's list went to the printer, from its calendar (`seeds/reference/graduations/hand_check_rounds.csv`). Beside the tests, so everyone can watch them fall as names are put right where they're born.
+
+| Year | Rounds | Names checked by hand | Hours |
+|---|---|---|---|
+| 2025–26 | 3 | 3,807 of 3,807 | 320 |

@@ -25,6 +25,8 @@ What it checks, page by page (every .html under site/):
 - the journey pages are what site-tools/build_pages.py makes from their Markdown.
 - opening stories: a film that opens on one (a "past" row in its site.json) quotes the line that says each beat, scenario,
   problem, solution, benefits and back to the story, in its script's Opening story table, in its narration's own words.
+- page intros: every film's site.json keeps its topic label (kicker) to 32 characters, its title (h1) to 75 and its intro (lead)
+  to 300, in English and Spanish: on a laptop, one line, three lines and four lines at most, as on Day one.
 - release status: no film's voice, captions, page text or Pause and think says a feature is in preview, in beta or generally
   available, in English or Spanish; it changes, and the film would have to change with it (tools/check.py looks on screen).
 - Pause and think: every pack's questions have one right answer and one near miss, options of like length (the right one at most a quarter
@@ -56,6 +58,9 @@ WEB = ROOT / "site"
 SITE = "https://data.learn-all.org/"
 REPO = "https://github.com/roanboc/learning-data"
 RELEASES = sorted(ROOT.glob("films/**/release.json"))  # each film's videos, as the release workflow publishes them
+# a film page's hero, in characters (Rodrigo, 10 November 2026): on a laptop the intro (lead) takes four lines at most, the title
+# (h1) three, and the topic label (kicker) one; Day one is the model, with a title of two lines and an intro of four
+INTRO_MOST = {"kicker": 32, "h1": 75, "lead": 300}
 
 # ---------------------------------------------------------------- the site's rules, in one place
 # pages with a real twin in the other language (§3.2); everything else has no hreflang
@@ -995,7 +1000,7 @@ def main():
             t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\"")
         if p.suffix == ".html":
             lg = "es" if rel.startswith("es/") else "en"
-            for m in re.finditer(r"\d½", src):
+            for m in re.finditer(r"\d+½", src):  # the whole number, so a film of 10½ min reads as 10½, not 0½
                 if m.group(0) not in HALVES[lg] and not (mk and m.group(0) == "4½"):
                     t["fails"].append(f"site/{rel}:{src.count(chr(10), 0, m.start()) + 1}: \"{m.group(0)}\" (this language's films are {' and '.join(sorted(HALVES[lg]))} min)")
     if allowed:
@@ -1005,6 +1010,10 @@ def main():
     docs = 0
     for md in sorted(ROOT.rglob("*.md")):
         if any(part in ("build", "dist", "models", "node_modules", ".git") for part in md.relative_to(ROOT).parts):
+            continue
+        # The films' questions and assumptions are the author's review notes, copied from each film's
+        # thread, and name films by their number in a series; nothing in them reaches the site.
+        if md.relative_to(ROOT).parts[:2] == ("docs", "assumptions"):
             continue
         docs += 1
         for i, line in enumerate(md.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
@@ -1021,6 +1030,18 @@ def main():
         films += 1
         s["fails"] += opening_beats(film)
     s["notes"].append(f"{films} films; the {sum(len(v) for v in BEATS_BEFORE.values())} made before the rule (28 October 2026) are left as they are")
+
+    s = rep.check("Page intros: each film's topic label, title and intro short, as on Day one (an intro of four lines at most)")
+    intros = sorted(ROOT.glob("films/**/site.json"))
+    for f in intros:
+        page = json.loads(f.read_text(encoding="utf-8"))
+        for key, most in INTRO_MOST.items():
+            for k in (key, key + "_es"):
+                if len(page.get(k) or "") > most:
+                    s["fails"].append(f"{f.relative_to(ROOT)} {k}: {len(page[k])} characters, at most {most}: \"{page[k][:60]}...\"")
+    if s["fails"]:
+        s["notes"].append("say who, what goes wrong and what is done, in the film's own world; the opening story and the details belong in the film")
+    s["notes"].append(f"{len(intros)} films' page text, in English and Spanish")
 
     s = rep.check("Release status: no film says a feature is in preview, in beta or generally available, in its voice, captions, page or Pause and think")
     says = lambda f, where, t: [f"{f.relative_to(ROOT)}{where}: \"{w}\" in \"{near}\"" for w, near in release_status(plain_words(t))]

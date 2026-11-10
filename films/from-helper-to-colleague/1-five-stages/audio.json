@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/five-stages/soundtrack.mp3",
+      "size": 7301529,
+      "sha256": "7c85ce0488be9c0bfb32a3fde3fe9f4f1b796832c5949962903ae332be784383",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-five-stages-6b25e44112a2c8a29030/7c85ce0488be9c0bfb32a3fde3fe9f4f1b796832c5949962903ae332be784383.mp3"
+    }
+  ]
+}

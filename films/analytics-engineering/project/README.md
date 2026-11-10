@@ -209,9 +209,9 @@ project/
 │                             requirements, gaps), by source, domain and consumer. Each item:
 │                             open → in_progress → done → what lasts moves to its home → deleted.
 │                             See requirements/README.md
-├── docs/                     how the work is done: the process, the conventions, the one-page plan;
-│                             decisions.md [generated], the index of every decision log; scorecard.md
-│                             [generated], the data quality scorecard from the last run
+├── docs/                     how the work is done: the process, the conventions, the one-page plan,
+│                             the stages; decisions.md [generated], the index of every decision log;
+│                             scorecard.md [generated], the data quality scorecard from the last run
 ├── scripts/
 │   ├── generate/             definitions.py, diagrams.py, decisions.py, codeowners.py, scorecard.py
 │   │                         and products.py: write the [generated] files; --check in CI

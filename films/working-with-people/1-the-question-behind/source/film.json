@@ -1,0 +1,46 @@
+{
+  "key": "the-question-behind",
+  "title": "The question behind the request",
+  "sub": "The opening film of Working with people, the second series of Leading data people: listening for the decision behind a request. Graham asks for a dashboard of room use by Easter; in half an hour, Helena and Noor find the decision behind it, say back what they heard, and agree the question with him in writing, beside his words.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the committee's target, and the question agreed with Graham), orange is data (the bookings and the sensors' head counts), green is something done or agreed, and amber a risk or a wait (the tower's danger, and the request waiting its turn).",
+  "src": [
+    "qb_pisa.js",
+    "qb_uni.js",
+    "qb_scenes.js"
+  ],
+  "poster": [
+    "agree",
+    "words",
+    2.0
+  ],
+  "say": [
+    [
+      "\\bSchein\\b",
+      "Shine"
+    ],
+    [
+      "\\bPavia\\b",
+      "Pa-veeah"
+    ],
+    [
+      "\\bReyes\\b",
+      "Rayess"
+    ],
+    [
+      "\\bJun\\b",
+      "Joon"
+    ],
+    [
+      "\\bNoor\\b",
+      "Nuur"
+    ],
+    [
+      "\\bA I\\b",
+      "AI"
+    ]
+  ],
+  "story": [
+    "tower"
+  ],
+  "urgent": []
+}

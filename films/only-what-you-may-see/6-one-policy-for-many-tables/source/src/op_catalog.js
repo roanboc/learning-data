@@ -91,8 +91,8 @@ function op_table(ctx,x,y,spec,o){o=o||{};const w=o.w||960,n=spec.rows.length,h=
     if(L>0){ctx.save();ctx.globalAlpha*=L;ctx.fillStyle=rgba(DP.F.cyan,0.14);rr(ctx,x+14,ry-36,w-28,50,10);ctx.fill();ctx.restore();}
     dp_T(ctx,r.col,c1,ry,{w:500,size:28,f:"mono",col:"mut"});
     const v=o.vals&&o.vals[r.col]!=null?o.vals[r.col]:r.val;
-    if(v!=null){if(M>0){const vw=Math.min(c3-c2-30,dp_tw(ctx,r.val,{w:600,size:28})+28);ctx.save();ctx.globalAlpha*=1-M;dp_T(ctx,r.val,c2,ry,{w:600,size:28});ctx.restore();
-        ctx.save();ctx.globalAlpha*=M;dp_frost(ctx,c2-14,ry-34,vw,46,null,{col:"violet",r:10,behind:o.behind});dp_T(ctx,o.maskVal&&o.maskVal[r.col]||"***",c2,ry,{w:700,size:28});ctx.restore();}
+    if(v!=null){if(M>0){const vw=Math.min(c3-c2-30,dp_tw(ctx,r.val,{w:600,size:28})+28);const M1=clamp(1-2*M,0,1),M2=clamp(2*M-1,0,1);if(M1>0){ctx.save();ctx.globalAlpha*=M1;dp_T(ctx,r.val,c2,ry,{w:600,size:28});ctx.restore();}
+        ctx.save();ctx.globalAlpha*=M;dp_frost(ctx,c2-14,ry-34,vw,46,null,{col:"violet",r:10,behind:o.behind});ctx.globalAlpha*=M2/Math.max(M,1e-6);if(M2>0)dp_T(ctx,o.maskVal&&o.maskVal[r.col]||"***",c2,ry,{w:700,size:28});ctx.restore();}
       else dp_T(ctx,v,c2,ry,{w:600,size:28,f:r.mono?"mono":undefined});}
     if(r.cls&&ch>0){ctx.save();ctx.globalAlpha*=clamp(ch,0,1);ag_about(ctx,c3+60,ry-10,lerp(1.5,1,ag_eo(clamp(ch,0,1))));op_class(ctx,c3,ry,r.cls);ctx.restore();}
     if(r.tag&&ch>0){ctx.save();ctx.globalAlpha*=clamp(ch,0,1);op_chip(ctx,c3,ry-36,r.tag,"grey",{ink:"ink"});ctx.restore();}
@@ -163,7 +163,7 @@ function op_rowsCard(ctx,x,y,w,title,cols,rows,o){o=o||{};const a=o.a==null?1:o.
   if(o.tagAt!=null&&o.tag>0){const tx=x+28+cw.slice(0,o.tagAt).reduce((s,v)=>s+v,0)+dp_tw(ctx,cols[o.tagAt],{w:500,size:28,f:"mono"})+14;ctx.save();ctx.globalAlpha*=clamp(o.tag,0,1);
     ag_about(ctx,tx+70,y+89,lerp(1.4,1,ag_eo(clamp(o.tag,0,1))));op_chip(ctx,tx,y+64,"faculty","grey",{ink:"ink"});ctx.restore();}
   ctx.fillStyle=rgba(DP.T.mut,0.35);ctx.fillRect(x+20,y+114,w-40,1.4);
-  let yy=y+126;rows.forEach((r,i)=>{const f=ag_sine(clamp(o.fold&&o.fold[i]||0,0,1)),rh=lh*(1-f);if(rh<1)return;ctx.save();ctx.beginPath();ctx.rect(x,yy,w,rh);ctx.clip();ctx.globalAlpha*=1-f;
+  let yy=y+126;rows.forEach((r,i)=>{const f=ag_sine(clamp(o.fold&&o.fold[i]||0,0,1)),rh=lh*(1-f);if(rh<1)return;ctx.save();ctx.beginPath();ctx.rect(x,yy,w,rh);ctx.clip();ctx.globalAlpha*=clamp(1-2*f,0,1);
     const wa=o.wash&&o.wash[i];if(wa&&wa[1]>0){ctx.save();ctx.globalAlpha*=clamp(wa[1],0,1);ctx.fillStyle=rgba(dp_f(wa[0]),0.18);rr(ctx,x+12,yy+2,w-24,lh-4,10);ctx.fill();ctx.restore();}
     let cx2=x+28;r.forEach((v,j)=>{const mo=o.mono&&o.mono[j]||(j===0&&o.monoFirst);dp_T(ctx,v,cx2,yy+36,{w:mo?500:600,size:28,f:mo?"mono":undefined,col:o.colOf?o.colOf(j,v,i):"ink"});cx2+=cw[j]||220;});ctx.restore();yy+=rh;});
   ctx.restore();return{x,y,w,h};}

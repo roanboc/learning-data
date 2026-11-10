@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "site/assets/one-map/soundtrack.mp3",
+      "size": 6354329,
+      "sha256": "6cab24f1ed8134423c8ff92cc8d29ab3f643ad98587242b1da133d992876573d",
+      "url": "https://github.com/roanboc/learning-data/releases/download/audio-one-map-30d938f9b456061a8dbb/6cab24f1ed8134423c8ff92cc8d29ab3f643ad98587242b1da133d992876573d.mp3"
+    }
+  ]
+}

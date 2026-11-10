@@ -1,0 +1,49 @@
+[
+  {
+    "name": "One small change at a time",
+    "key": "one-small-change-en",
+    "dir": "films/leading-a-data-team/2-one-small-change/source",
+    "lang": "en",
+    "player": "dist/film.js",
+    "site_player": "site/assets/one-small-change/film.js",
+    "video": "dist/one-small-change.mp4",
+    "file": "one-small-change.mp4",
+    "captions": [
+      [
+        "films/leading-a-data-team/2-one-small-change/captions/en.srt",
+        "one-small-change.en.srt"
+      ],
+      [
+        "films/leading-a-data-team/2-one-small-change/captions/es.srt",
+        "one-small-change.es.srt"
+      ]
+    ],
+    "paths": [
+      "films/leading-a-data-team/2-one-small-change/source",
+      ":(exclude)films/leading-a-data-team/2-one-small-change/source/src/i18n/es/captions.js",
+      "films/the-new-skills/shared",
+      "films/what-an-agent-is/shared",
+      "films/from-words-to-data/shared/tools",
+      "films/data-governance/shared/tools/names.py",
+      "films/data-governance/shared/tools/cues.py",
+      "films/data-governance/shared/tools/twice.py",
+      "films/data-governance/shared/tools/steady.py",
+      "films/data-governance/shared/tools/jump.py",
+      "films/data-governance/shared/tools/quiet.py",
+      "films/data-governance/shared/tools/held.py",
+      "films/a-sharper-sketch/source/src/sketch3.js",
+      "films/inner-life-of-data/source/src/core.js",
+      "films/inner-life-of-data/source/src/style2.js",
+      "films/inner-life-of-data/source/src/ui3.js",
+      "films/inner-life-of-data/source/src/engine3.js",
+      "films/inner-life-of-data/source/fonts"
+    ],
+    "legibility": {
+      "texts": 253,
+      "under_28": "0%",
+      "under_20": 0,
+      "median": 28.4,
+      "status": "Drawn to the rule"
+    }
+  }
+]

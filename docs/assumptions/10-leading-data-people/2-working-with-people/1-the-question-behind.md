@@ -1,12 +1,12 @@
 # The question behind the request: questions and assumptions
 
-*Leading data people* · *Working with people*, film 1 · open, PR #262 · [pull request](https://github.com/roanboc/learning-data/pull/262)
+*Leading data people* · *Working with people*, film 1 of 3 · merged, PR #262 · [pull request](https://github.com/roanboc/learning-data/pull/262)
 
-On the site once PR #262 merges: https://data.learn-all.org/working-with-people/the-question-behind/
+[Watch it on the site](https://data.learn-all.org/working-with-people/the-question-behind/)
 
-> Copied from the film thread's notes on 10 November 2026. Paths such as `../briefs.md` point to the thread's working folder, not to this repository.
+> From the film thread's notes, 10 November 2026. The module's briefs, palettes and numbers are in its working folder, outside this repository.
 
-Film 1 of *Working with people*, the module *Leading data people* (film 4 in the module's numbering). Made from 5 to 10 November 2026 while Rodrigo was away, on his instruction to work on assumptions and merge with a draft label. Each line: the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in `../assumptions.md`.
+The first of three films of *Working with people*, in the module *Leading data people* (film 4 in the module's numbering). Made from 5 to 10 November 2026 while the author was away, on the author's instruction to work on assumptions and merge with a draft label. Each line: the question I would have asked, the assumption I made instead, and where it shows. The module's own questions are in [0-module.md](../0-module.md).
 
 | # | Question | Assumption | Where it shows |
 |---|---|---|---|
@@ -18,9 +18,9 @@ Film 1 of *Working with people*, the module *Leading data people* (film 4 in the
 | 6 | How to show the committee? | Three members at a table in a room of 1990, dressed for their time, never likenesses; "appointed by Italy's government" (the Prime Minister appointed it in May 1990, the film's "that spring"). | Chapter 1 |
 | 7 | Say the lean in degrees? | Drawn, not said: about 5.5 degrees before the work and half a degree less after it; the voice says the overhang ("about four and a half metres", measured in 1993) and the half degree. | Chapter 1 |
 | 8 | Does the film come back to the opening along the way, as AGENTS.md asks? | Yes, added on 10 November in chapter 4: "In Pisa, saving meant half a degree, not a straight tower. Here, use means people in the room, not bookings.", with two blue sheets. Chapter 4 grows by 8 s, and the film runs 8:20. | Chapter 4 |
-| 9 | The alto trombone's partner? | A second alto trombone in a cup mute, softer and hollow: the open one asks, the muted one answers and says it back. Every other colour the site lacks belongs to another culture or sounds like one it has (the module's list). Recorded in `../palettes.md`. Nothing Italian for Pisa. | The whole score |
+| 9 | The alto trombone's partner? | A second alto trombone in a cup mute, softer and hollow: the open one asks, the muted one answers and says it back. Every other colour the site lacks belongs to another culture or sounds like one it has (the module's list). Recorded in the module's palette list. Nothing Italian for Pisa. | The whole score |
 | 10 | Is Graham's paper date known in February? | Yes: "His paper is due on 1 June" is his own deadline, given in the meeting, the date of the paper film 5 tells; so Easter "was a guess at a safe date". | Chapter 3 |
-| 11 | What does Graham already trust? | What he has seen on his walks: empty corridors on Monday mornings and Friday afternoons (Facilities' view in `../numbers.md`). | Chapter 3 |
+| 11 | What does Graham already trust? | What he has seen on his walks: empty corridors on Monday mornings and Friday afternoons (Facilities' view in the module's numbers). | Chapter 3 |
 | 12 | Which word does Graham correct when Helena says it back? | "Used": by it he means people in the room; a booking isn't use. It's the film's own moment for saying back, and it decides the data (the bookings beside each room's head counts). | Chapter 4 |
 | 13 | Who writes the page, and does Graham confirm it? | Noor writes it with him (the brief: "they write the question on one page with him"); his words stay at the top. He replies the same afternoon by email, "Yes, that's it." Helena leaves the room for that later moment, so the two at the table are the two writing. | Chapter 4 |
 | 14 | How to tell the wait until 30 March? | One line, "the request waits its turn, like every other", and the date; the data management module's film that tells the new way isn't named. | Chapter 5 |
@@ -32,6 +32,6 @@ Film 1 of *Working with people*, the module *Leading data people* (film 4 in the
 | 20 | Which Pause and think questions? | After *Half an hour, mostly listening* (what to find out first), *Say it back, write it down* (why "used" mattered) and *What the question gave* (how the agreed question helped), right answers in three different places, one near miss each. | The film's page |
 | 21 | Which links under *Go further*? | Wikipedia's *Edgar Schein* (English only), *Active listening* and *Five whys* (in Spanish too), *Leaning Tower of Pisa* (in Spanish too), and the engineers' open paper (English). Rogers and Farson's essay isn't linked: the copies online aren't clearly licensed. All checked on 10 November 2026. | The film's page |
 | 22 | The poster? | Graham's page, his words picked out beside the question, 2 s into "His own words stay at the top". | The film's card and page |
-| 23 | How to publish the soundtrack? | As the films merged on 10 November: the MP3 committed beside the player with `git add -f`, and `audio.json` from `media.py index`; the *Store audio outside Git* workflow publishes it when the film reaches main, so there is nothing for you to run. | `films/working-with-people/1-the-question-behind/audio.json` |
-| 24 | Ask you for the reference framework and your practice first, render it and share a review page, as AGENTS.md says? | No: your rules for these films (no questions that hold a film up, no renders or review pages in sessions) come first. The reference and the practice are the module's plan's (Schein, Rogers and Farson, the five whys with care), recorded in the script. | The script, *The reference, and practice* |
+| 23 | How to publish the soundtrack? | As the films merged on 10 November: the MP3 committed beside the player with `git add -f`, and `audio.json` from `media.py index`; the *Store audio outside Git* workflow publishes it when the film reaches main, so there is nothing for the author to run. | `films/working-with-people/1-the-question-behind/audio.json` |
+| 24 | Ask the author for the reference framework and practice first, render it and share a review page, as AGENTS.md says? | No: the author's rules for these films (no questions that hold a film up, no renders or review pages in sessions) come first. The reference and the practice are the module's plan's (Schein, Rogers and Farson, the five whys with care), recorded in the script. | The script, *The reference, and practice* |
 | 25 | Who brings the series onto the site? | This film, the series' first: its page, the series' page, and the series' `release-note.md`. | The site, once merged |

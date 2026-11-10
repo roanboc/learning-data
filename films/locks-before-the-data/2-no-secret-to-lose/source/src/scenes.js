@@ -98,7 +98,7 @@ scene("bank",(ctx,S,t,sc)=>{const C=sc.cues,
       ns_vaultDoor(c,clamp((tt-tStays)/1.8,0,1));
       ns_scr(c,S,()=>dp_slip(c,960,64,"The paper stays at the Bank",NS_ICE,{align:"center",ink:true,a:ns_on(tt,tStays+1.4,C.records-1.0,0.5,0.5)}));}},
     {at:C.records-0.3,place:"nsOffice",dis:0.8,keys:[[0,1020,470,1.08]],push:0.02,draw:(c,tt)=>{
-      ns_screen(c,tt,{rows:tKept,sale:tSale,both:tBoth});
+      ns_screen(c,tt,{rows:tKept,sale:tSale,both:tBoth,done:tBoth+4.4});
       ns_scr(c,S,()=>{ns_card(c,1552,186,340,{title:"44 firms",sub:"from the first day"},tt,tFirst,tWhy-0.4);
         ns_card(c,420,596,1080,{kick:"The Bank of England, 1990",title:"“…avoiding the risks and expense of moving paper physically around the City.”"},tt,tWhy+0.3,C.streets-1.0,{col:NS_ICE});});}},
     {at:C.streets-0.3,place:"nsStreet",dis:0.8,keys:[[0,960,540,1.0]],push:0.02,draw:(c,tt)=>{
@@ -125,8 +125,12 @@ function ns_screen(ctx,t,o){const X=NS_SCREEN.x+60,Y=NS_SCREEN.y+70,ink=NS_PHOSP
   NS_ROWS.forEach(([p,own],i)=>{const a=ag_in(t,o.rows+i*0.3,0.25);if(a<=0)return;const y=Y+70+i*52;dp_T(ctx,p,X,y,Object.assign({},f,{a}));
     const nw=i<2&&sold>0;dp_T(ctx,nw&&sold>=1?"MEMBER B":own,X+560,y,Object.assign({},f,{a:a*(nw&&sold<1?1-sold:1)}));if(nw&&sold<1)dp_T(ctx,"MEMBER B",X+560,y,Object.assign({},f,{a:a*sold}));
     if(i<2){const h=ns_on(t,o.both+2.0,o.both+4.2,0.3,0.8);if(h>0){ctx.save();ctx.globalAlpha*=h*0.35;ctx.fillStyle=rgba(ink,1);rr(ctx,X+548,y-30,190,40,6);ctx.fill();ctx.restore();}}});
-  const s=ag_in(t,o.sale,0.3);if(s<=0)return;const y0=Y+300;dp_T(ctx,"SALE  50 BILLS  MEMBER A TO MEMBER B",X,y0,Object.assign({},f,{a:s}));
-  [["ACCEPTED BY A",o.both],["ACCEPTED BY B",o.both+0.8]].forEach(([w,tk],i)=>{const a=ag_in(t,tk,0.25);if(a<=0)return;const y=y0+56+i*50;dp_tick(ctx,X+18,y-10,"green",clamp((t-tk)/0.5,0,1));dp_T(ctx,w,X+56,y,Object.assign({},f,{a}));});}
+  // the sale and both acceptances clear once the owners have changed (o.done), so the screen holds the record alone before the
+  // Bank's own words are laid over its lower half: nothing shows through the card as it comes in
+  const s=ag_in(t,o.sale,0.3)*(o.done==null?1:1-ag_in(t,o.done,0.6));if(s<=0)return;ctx.save();ctx.globalAlpha*=s;const y0=Y+300;
+  dp_T(ctx,"SALE  50 BILLS  MEMBER A TO MEMBER B",X,y0,f);
+  [["ACCEPTED BY A",o.both],["ACCEPTED BY B",o.both+0.8]].forEach(([w,tk],i)=>{const a=ag_in(t,tk,0.25);if(a<=0)return;const y=y0+56+i*50;dp_tick(ctx,X+18,y-10,"green",clamp((t-tk)/0.5,0,1));dp_T(ctx,w,X+56,y,Object.assign({},f,{a}));});
+  ctx.restore();}
 
 /* ---------------------------------------------------------------- 3 · Jun's token */
 scene("token",(ctx,S,t,sc)=>{const C=sc.cues,

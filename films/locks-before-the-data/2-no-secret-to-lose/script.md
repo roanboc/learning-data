@@ -212,14 +212,14 @@ This film's rows are in `decided.md`; `site-tools/build_series.py` puts them in 
 
 ## Pacing
 
-Measured with `tools/pace.py` on 5 November 2026, with the voice recorded: 8:49.6 in all, 1,157 words, 131 words a minute, the voice 67% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter.
+Measured with `tools/pace.py` on 10 November 2026, with the voice recorded again (two lines had kept the recording of earlier words): 8:49.6 in all, 1,157 words, 131 words a minute, the voice 67% of the time; no sentence with under 0.5 s after it, and no stop of 2.5 s or more inside a chapter.
 
 | Chapter | Length | Words a minute | Voice |
 |---|---|---|---|
 | Bearer paper | 64.3 s | 132 | 70% |
 | Kept in the Bank's records | 71.4 s | 129 | 66% |
-| Jun's token | 81.4 s | 133 | 70% |
+| Jun's token | 81.6 s | 133 | 70% |
 | Who holds a secret? | 111.1 s | 134 | 66% |
-| Up the ladder | 77.8 s | 130 | 67% |
+| Up the ladder | 77.7 s | 130 | 67% |
 | A ladder for people | 92.0 s | 135 | 69% |
 | Nothing to carry | 31.5 s | 109 | 58% |

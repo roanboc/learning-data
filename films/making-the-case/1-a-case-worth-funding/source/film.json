@@ -1,0 +1,30 @@
+{
+  "key": "a-case-worth-funding",
+  "title": "A case worth funding",
+  "sub": "The opening film of Making the case, the second series of Data management: a business case for data work. Helena, with Rohan from Finance, asks the data council to retire the old warehouse: three options, one of them carrying on as now; costs once and every year; benefits with an owner and a date; paid back in about 17 months; and one clear ask, on one page, decided that day.",
+  "howto": "The film is drawn in the module's sunlit plaster: the team's rooms in daylight, with sheets pinned to the wall. Its colours mean the same in every film: blue is plans and design (the canal's route before it's dug, the case and its recommended option), green is value or something done (the canal open, the saving, the council's yes), amber a cost or a risk (a hundred dollars a ton, the licence, the reports nobody opens), and orange is data (the warehouse's logs and the platform's cost records).",
+  "src": [
+    "../../../../a-plan-in-ninety-days/shared/src/mark.js",
+    "cwf_canal.js",
+    "cwf_uni.js",
+    "cwf_scenes.js"
+  ],
+  "poster": [
+    "ask",
+    "yes",
+    1.2
+  ],
+  "say": [
+    ["\\bHaudenosaunee\\b", "Hoe-deh-no-show-nee"],
+    ["\\bRohan\\b", "Roe-han"],
+    ["\\bDesai\\b", "Deh-sigh"],
+    ["\\bNovak\\b", "Noh-vak"],
+    ["\\bHR\\b", "H R"],
+    ["\\bJun\\b", "Joon"],
+    ["\\bA I\\b", "AI"]
+  ],
+  "story": [
+    "ditch"
+  ],
+  "urgent": []
+}
